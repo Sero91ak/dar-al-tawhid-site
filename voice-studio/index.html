@@ -402,7 +402,7 @@ input,select{
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark" aria-hidden="true"><img src="/watermark-my-logo-full.png" alt=""></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.4.0 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.5.0 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="installBtn" class="btn quiet install-btn">App installieren</button>
@@ -414,7 +414,7 @@ input,select{
 <main class="panel editor-panel">
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.4.0</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.5.0</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
 
   <div class="textbox-wrap">
@@ -491,6 +491,7 @@ input,select{
       <div class="qa-item"><span>Arabische Master-Referenz</span><b id="qaArabicRef" class="warn">Fallback</b></div>
       <div class="qa-item"><span>LOCKED-Begriffe</span><b id="qaLocked" class="warn">–</b></div>
       <div class="qa-item"><span>Technische Audio-QA</span><b id="qaTechnical" class="warn">wartet</b></div>
+      <div class="qa-item"><span>Long-Form Beschleunigung</span><b id="qaSpeed" class="warn">bereit</b></div>
       <div class="qa-item"><span>Satzfluss / Kontinuität</span><b id="qaContinuity" class="warn">wartet</b></div>
       <div class="qa-item"><span>Kern-Aussprache-Lock</span><b id="qaCoreLock" class="warn">prüfen</b></div>
       <div class="qa-item"><span>Lobpreisungen</span><b id="qaHonorific" class="warn">Pflicht prüfen</b></div>
@@ -540,7 +541,7 @@ input,select{
   <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
 </aside>
 </div>
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.4.0 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.5.0 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
 </div>
 </div>
 
@@ -866,7 +867,13 @@ function updateEngineUI(data){
   if(modelError&&data?.last_error){
     $("#engineHelp").textContent="Modellfehler: "+data.last_error;
   }else if(modelReady){
-    $("#engineHelp").textContent="Eigene Stimme aktiv · "+(data.provider||"Chatterbox V3")+" · "+String(data.model_device||"").toUpperCase()+" · renderbereit";
+    const perf=data?.performance_engine||"";
+    $("#engineHelp").textContent="Eigene Stimme aktiv · "+(data.provider||"Chatterbox V3")+" · "+String(data.model_device||"").toUpperCase()+" · "+(perf?"Long-Form Cache aktiv":"renderbereit");
+    if($("#qaSpeed")){
+      const cache=data?.render_cache||{};
+      $("#qaSpeed").textContent="aktiv · Cache "+Number(cache.hits||0)+" Treffer";
+      $("#qaSpeed").className="good";
+    }
   }else if(loading){
     $("#engineHelp").textContent="Chatterbox V3 wird geladen. Beim ersten Start kann das einige Minuten dauern.";
   }else{
@@ -1042,6 +1049,14 @@ async function generate(){
         ?(pending.length+" warten auf Bestätigung")
         :(confirmedLocks.length?confirmedLocks.length+" dauerhaft gesperrt":"keine");
       $("#qaCoreLock").className=pending.length?"warn":"good";
+    }
+    if($("#qaSpeed")){
+      const perf=qa?.performance||{};
+      const sec=Number(perf.render_seconds||0);
+      const hits=Number(perf.segment_cache_hits||0);
+      const misses=Number(perf.segment_cache_misses||0);
+      $("#qaSpeed").textContent=(sec?sec.toFixed(1)+" s · ":"")+(hits+" Cache / "+misses+" neu");
+      $("#qaSpeed").className="good";
     }
     setMessage("Audio fertig. Satzfluss und technische QA sind geprüft; bitte jetzt besonders die Kernbegriffe anhören und erst dann bestätigen.","good");
     $("#player").play().catch(()=>{});
