@@ -1,7 +1,8 @@
-const CACHE="dar-voice-studio-v11";
+const CACHE="dar-voice-studio-v12";
 const SHELL=[
   "/voice-studio/",
   "/voice-studio/index.html",
+  "/voice-studio/content-studio.js",
   "/voice-studio/manifest.webmanifest",
   "/voice-studio/version.json",
   "/data/pronunciation/pronunciation-rules.json",
@@ -37,6 +38,7 @@ self.addEventListener("fetch",event=>{
   const fresh =
     url.pathname==="/voice-studio/" ||
     url.pathname==="/voice-studio/index.html" ||
+    url.pathname==="/voice-studio/content-studio.js" ||
     url.pathname==="/voice-studio/version.json" ||
     url.pathname==="/voice-studio/service-worker.js" ||
     url.pathname==="/voice-studio/install-mac.command" ||
