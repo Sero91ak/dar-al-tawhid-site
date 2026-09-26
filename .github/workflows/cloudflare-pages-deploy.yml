@@ -25,6 +25,11 @@ on:
       - _headers
       - _redirects
       - test/kids/**
+      - test/index.html
+      - test/version.json
+      - test/assets/**
+      - test/service-worker.js
+      - test/manifest.json
       - .assetsignore
       - package.json
       - scripts/cf-pages-build.js
