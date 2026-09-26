@@ -19,6 +19,7 @@ let productionPhase="draft";
 let productionError="";
 let quizDraft=[];
 let gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
+let inventoryState={legacy:[],staging:[],live:[]};
 let busy=false;
 
 function q(id){return document.getElementById(id)}
@@ -99,6 +100,17 @@ function injectStyles(){
   .cs-question{padding:12px;border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(0,0,0,.12);margin:8px 0}
   .cs-question-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.cs-question-head b{font-size:11px}.cs-question-head button{border:0;background:transparent;color:#df8686;cursor:pointer;font-size:11px}
   .cs-answer-grid,.cs-inline-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.cs-add{width:100%;margin-top:8px}
+  .cs-inventory-toolbar{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center;margin-bottom:8px}
+  .cs-inventory-toolbar input{min-width:0;border:1px solid var(--line);background:rgba(1,14,19,.62);color:#e9eeee;border-radius:9px;padding:9px 10px}
+  .cs-inventory-toolbar .btn{min-width:40px;min-height:38px}
+  .cs-inventory-summary{font-size:9px;color:#809397;line-height:1.45;margin:0 0 8px}
+  .cs-inventory{display:grid;gap:7px;max-height:360px;overflow:auto;padding-right:2px}
+  .cs-inventory-item{border:1px solid var(--line);border-radius:11px;padding:9px;background:rgba(255,255,255,.025);color:#e8eeee}
+  .cs-inventory-item b{display:block;font-size:11px;line-height:1.28}
+  .cs-inventory-meta{display:block;margin-top:5px;font-size:9px;color:#7f9499;line-height:1.35}
+  .cs-inventory-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+  .cs-chip{font-size:8px;font-weight:900;padding:3px 6px;border-radius:999px;border:1px solid rgba(255,255,255,.09);color:#b8c7ca}
+  .cs-chip.legacy{color:#e8d08c;border-color:rgba(232,208,140,.26)}.cs-chip.test{color:#9ecceb;border-color:rgba(112,175,220,.28)}.cs-chip.live{color:#a8ddc5;border-color:rgba(112,205,160,.28)}.cs-chip.internal{color:#e3b0df;border-color:rgba(195,125,190,.25)}
   @media(max-width:900px){.cs-grid{grid-template-columns:1fr 1fr}.cs-field.span4{grid-column:1/-1}}
   @media(max-width:600px){.cs-grid{grid-template-columns:1fr}.cs-field.span2,.cs-field.span4{grid-column:1}.cs-actions{grid-template-columns:1fr}}
   `;
@@ -165,8 +177,13 @@ function publishHtml(){
     <div id="csMessage" class="cs-message"></div>
   </section>
   <section id="csLibrarySection" class="side-section">
-    <div class="side-title">Studio-Bibliothek</div>
-    <div id="csLibrary" class="cs-library"><div class="notice">Staging-Inhalte werden geladen …</div></div>
+    <div class="side-title">Inhalte & Veröffentlichung</div>
+    <div class="cs-inventory-toolbar">
+      <input id="csInventorySearch" type="search" placeholder="Titel, Prophet, Bereich …">
+      <button id="csInventoryRefresh" class="btn quiet" type="button" title="Neu laden">↻</button>
+    </div>
+    <div id="csInventorySummary" class="cs-inventory-summary">Bestand wird geladen …</div>
+    <div id="csLibrary" class="cs-inventory"><div class="notice">Bestand · Staging · Live werden geladen …</div></div>
   </section>`;
 }
 function mount(){
@@ -213,6 +230,8 @@ function bind(){
   q("csPublishTest")?.addEventListener("click",publishTest);
   q("csPublishLive")?.addEventListener("click",publishLive);
   q("csSaveConnection")?.addEventListener("click",saveConnection);
+  q("csInventorySearch")?.addEventListener("input",renderInventory);
+  q("csInventoryRefresh")?.addEventListener("click",()=>loadLibrary(true));
   document.addEventListener("click",e=>{
     const item=e.target.closest?.("[data-cs-item]");
     if(item)loadRemoteItem(item.dataset.csItem);
@@ -497,14 +516,91 @@ async function publishLive(){
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
   finally{busy=false;renderStatus();refreshQa()}
 }
-async function loadLibrary(){
-  const box=q("csLibrary");if(!box||!workerSecret()){if(box)box.innerHTML='<div class="notice">Admin-Verbindung herstellen, um Staging-Inhalte zu laden.</div>';return}
-  try{
-    const d=await adminApi("/api/admin/kids-content?staging=1",{method:"GET"});
-    const items=(d.index?.items||[]).filter(x=>studioKind==="ios"?x.appTarget==="ios":x.kind===effectiveKind()&&x.appTarget!=="ios").slice(0,30);
-    box.innerHTML=items.length?items.map(x=>`<button class="cs-item" data-cs-item="${escapeHtml(x.id)}"><b>${escapeHtml(x.title||x.id)}</b><small>${escapeHtml(x.status)} · r${Number(x.revision||1)} · ${Number(x.ageMin)}–${Number(x.ageMax)} J.</small></button>`).join(""):'<div class="notice">Noch keine Inhalte in diesem Bereich.</div>';
-  }catch(e){box.innerHTML='<div class="notice">Staging-Bibliothek nicht erreichbar: '+escapeHtml(e.message||String(e))+'</div>'}
+
+function inventoryKey(item){
+  const title=String(item?.title||item?.id||"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+  return title.replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||String(item?.id||"");
 }
+function inventoryKindLabel(kind){
+  return kind==="quiz"?"Quiz":kind==="game"?"Spiel":kind==="lesson"?"iOS-Inhalt":"Geschichte";
+}
+async function fetchLegacyKidsInventory(){
+  const urls=[];
+  try{
+    if(location.hostname==="dar-al-tawhid.de"||location.hostname.endsWith(".dar-al-tawhid.de"))urls.push("/test/kids/data/stories-authentic.json?cb="+Date.now());
+  }catch{}
+  urls.push("https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/test/kids/data/stories-authentic.json?cb="+Date.now());
+  let lastError=null;
+  for(const url of urls){
+    try{
+      const r=await fetch(url,{cache:"no-store",mode:"cors"});
+      if(!r.ok)throw Error("HTTP "+r.status);
+      const d=await r.json();
+      return Array.isArray(d?.items)?d.items.filter(x=>x?.verification==="approved"):[];
+    }catch(e){lastError=e}
+  }
+  throw lastError||Error("Bestehender Kids-Bestand nicht erreichbar");
+}
+function mergedInventory(){
+  const map=new Map();
+  const add=(item,source)=>{
+    if(!item)return;
+    const key=inventoryKey(item);
+    const row=map.get(key)||{key,title:item.title||item.id,legacy:null,staging:null,live:null};
+    row[source]=item;
+    if(item.title)row.title=item.title;
+    map.set(key,row);
+  };
+  inventoryState.legacy.forEach(x=>add(x,"legacy"));
+  inventoryState.staging.forEach(x=>add(x,"staging"));
+  inventoryState.live.forEach(x=>add(x,"live"));
+  return [...map.values()].sort((a,b)=>String(a.title).localeCompare(String(b.title),"de"));
+}
+function renderInventory(){
+  const box=q("csLibrary"),summary=q("csInventorySummary");if(!box)return;
+  const term=String(q("csInventorySearch")?.value||"").trim().toLowerCase();
+  const all=mergedInventory();
+  const rows=all.filter(row=>{
+    if(!term)return true;
+    const item=row.staging||row.live||row.legacy||{};
+    return [row.title,item.prophetId,item.category,item.kind,item.topic].join(" ").toLowerCase().includes(term);
+  });
+  if(summary)summary.textContent="Bestand "+inventoryState.legacy.length+" · Studio intern/Test "+inventoryState.staging.length+" · Studio live "+inventoryState.live.length+" · zusammen "+all.length;
+  if(!rows.length){box.innerHTML='<div class="notice">Keine passenden Inhalte gefunden.</div>';return}
+  box.innerHTML=rows.map(row=>{
+    const active=row.staging||row.live||row.legacy||{};
+    const chips=[];
+    if(row.legacy)chips.push('<span class="cs-chip legacy">BESTAND</span><span class="cs-chip test">TEST-KIDS</span>');
+    if(row.staging)chips.push('<span class="cs-chip '+(row.staging.status==="published"?"test":"internal")+'">'+(row.staging.status==="published"?"STUDIO TEST":"INTERN")+'</span>');
+    if(row.live)chips.push('<span class="cs-chip live">LIVE</span>');
+    const textOk=!!String(active.text||"").trim();
+    const audioOk=!!String((row.staging||row.live)?.audio?.url||"").trim();
+    const coverOk=!!String((row.staging||row.live)?.cover?.url||"").trim();
+    const age=(Number(active.ageMin)||4)+"–"+(Number(active.ageMax)||10)+" J.";
+    return '<div class="cs-inventory-item"><b>'+escapeHtml(row.title||active.id)+'</b><span class="cs-inventory-meta">'+escapeHtml(inventoryKindLabel(active.kind||"story"))+' · '+escapeHtml(age)+' · Text '+(textOk?"✓":"–")+' · Audio '+(audioOk?"✓":"–")+' · Cover '+(coverOk?"✓":"–")+'</span><span class="cs-inventory-chips">'+chips.join("")+'</span></div>';
+  }).join("");
+}
+async function loadLibrary(force=false){
+  const box=q("csLibrary");if(!box)return;
+  if(force)box.innerHTML='<div class="notice">Bestand wird neu geladen …</div>';
+  const jobs=[fetchLegacyKidsInventory()];
+  if(workerSecret()){
+    jobs.push(adminApi("/api/admin/kids-content?staging=1",{method:"GET"}));
+    jobs.push(adminApi("/api/admin/kids-content?staging=0",{method:"GET"}));
+  }else{
+    jobs.push(Promise.resolve({index:{items:[]}}));
+    jobs.push(Promise.resolve({index:{items:[]}}));
+  }
+  const [legacy,staging,live]=await Promise.allSettled(jobs);
+  inventoryState={
+    legacy:legacy.status==="fulfilled"?legacy.value:[],
+    staging:staging.status==="fulfilled"?(staging.value.index?.items||[]):[],
+    live:live.status==="fulfilled"?(live.value.index?.items||[]):[]
+  };
+  renderInventory();
+  if(legacy.status==="rejected"&&!workerSecret())setStudioMessage("Kids-Bestand konnte nicht geladen werden. Admin-Verbindung ist ebenfalls nicht gesetzt.","warn");
+}
+
 async function loadRemoteItem(id){
   try{
     const d=await adminApi("/api/admin/kids-content?staging=1",{method:"GET"});
