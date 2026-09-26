@@ -123,6 +123,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tab-restore-3d-plop-2026-09-26",
+      "approvedBy": "user-explicit-keine-aenderung-3d-plop-weg",
+      "reason": "Nutzer sieht keine Aenderung, leichter 3D-Plop ist weg. Plop nur am Icon, Oval bleibt im eigenen Tab.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tab-oval-overlap-hotfix-2026-09-26",
       "approvedBy": "user-explicit-extremer-fehler-oval-ueberlappt-content-scheint-durch",
       "reason": "Nutzer-Screenshot: Quiz-Oval ueberlappt Start, Quiz-Text scheint durch die Tableiste. 96px-Overlay und overflow:visible zuruecknehmen.",
