@@ -123,6 +123,202 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tab-soft-plop-wider-oval-2026-09-26",
+      "approvedBy": "user-explicit-plop-zu-hoch-oval-breiter-wie-kids-funktionen-behalten",
+      "reason": "Nutzer: 3D-Icons springen zu hoch; Oval ums Bild breiter wie Kids. Funktionen/Schnellzugriff unveraendert, butterweich.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-tab-kids-animation-exact-2026-09-26",
+      "approvedBy": "user-explicit-kids-animationsfunktion-1zu1-tab-schnellzugriff-unverändert",
+      "reason": "Nutzer: Kids-Animationsfunktion exakt uebernehmen. Tab-Funktion und Schnellzugriffe unveraendert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-tab-kids-click-2026-09-26",
+      "approvedBy": "user-explicit-lupe-raus-kids-klick-schnellzugriff-behalten",
+      "reason": "Nutzer: Lupen/Drag-Effekt komplett raus, normale smooth Klick-Funktion 1:1 wie Test Kids. Schnellzugriffe der Tableiste nicht beschaedigen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-tab-progress-engine-2026-09-26",
+      "approvedBy": "user-explicit-interactive-progress-engine-design-freeze",
+      "reason": "Nutzer: eine progress-Engine fuer Tap/Press-Drag/Content-Swipe/Spring ohne Design-Aenderung der 3D-Tabs. Kids unveraendert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-tab-live-loupe-whatsapp-2026-09-26",
+      "approvedBy": "user-explicit-live-lupe-halten-gleit-whatsapp-ios",
+      "reason": "Nutzer: Gleiten muss Live-Lupe sein, halten vergroessert butterweich, rechts/links ohne Ruckler wie WhatsApp/iOS. Kids unveraendert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-tab-loupe-scrub-2026-09-26",
+      "approvedBy": "user-explicit-tableiste-lupe-halten-gleit-kein-ruckler",
+      "reason": "Nutzer: Tab-Leiste ruckelt; Halten und nach links/rechts gleiten wie Lupe bei Apple/WhatsApp. Sensibel, Test+iOS+Web. Kids unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-tab-plop-smooth-2026-09-26",
+      "approvedBy": "user-explicit-tableiste-butterweich-plopp-wie-kids-apple-live",
+      "reason": "Nutzer: Tab-Leiste kalt/springt, bleibt leicht am alten Tab. Butterweich mit leichtem Plopp wie Kids/Apple, Test+iOS+Web. Kids unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-tab-same-size-landscape-portrait-2026-09-26",
+      "approvedBy": "user-explicit-querformat-gleiche-groesse-wie-hochformat-ueberall-live",
+      "reason": "Nutzer: Querformat muss dieselbe Tab-Leisten-Breite wie Hochformat haben; aktuell wird sie im Querformat groß. Überall live außer Kids.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-tab-retract-px-animation-2026-09-26",
+      "approvedBy": "user-explicit-test-sanftes-zurueckziehen-wiederherstellen-live-ios",
+      "reason": "Nutzer: Test-App hat das sanfte Zurückziehen verloren; iOS/Web haben es nie bekommen. Pixel-Animation 94%→56% beim Querlegen und zurück, Test+iOS+Web. Kids unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css",
+        "assets/dar-landscape-kids-shell.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-landscape-tab-retract-smooth-2026-09-26",
+      "approvedBy": "user-explicit-test-tab-zieht-sich-querformat-sanft-live-ios",
+      "reason": "Nutzer: Test-App zieht Tab-Leiste beim Querlegen butterweich zurück. Native iOS und Web-Apps bleiben nach letztem Größen-Fix groß stehen. Funktion 1:1 übernehmen. Kids unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css",
+        "assets/dar-landscape-kids-shell.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-live-ios-inherit-test-landscape-size-2026-09-26",
+      "approvedBy": "user-explicit-test-groesse-sofort-live-ios-web",
+      "reason": "Nutzer: Test-App Querformat/Größe korrekt; native iOS und Web-Apps haben es nicht übernommen. Sofort live pushen. Kids unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js",
+        "assets/dar-landscape-kids-shell.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-landscape-kids-centered-2026-09-26",
+      "approvedBy": "user-explicit-querformat-wie-kids-zentriert-sofort-live",
+      "reason": "Nutzer: Querformat Phone/Tablet in Test/iOS/Web zu eng, Schrift verschwindet. Baustil wie Kids (zentriert, lesbar) sofort live. Kids-App unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/adaptive-layout.js",
+        "assets/adaptive-layout.css",
+        "assets/fold-split.js",
+        "assets/fold-split.css",
+        "assets/dar-landscape-kids-shell.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-kids-oval-press-and-kids-update-isolate-2026-09-26",
       "approvedBy": "user-explicit-kids-oval-tipp-sichtbar-kids-autonom-kein-fremd-update",
       "reason": "Nutzer: Oval muss beim Tippen sichtbar und deckungsgleich mit der Touchfläche sein (wie Kids-Bild). Kids-App zeigt fälschlich Aktualisierung bei Dar-Test/iOS-Änderungen und muss autonom bleiben.",
@@ -5970,8 +6166,7 @@
         "test/kids/start.html",
         "test/kids/shell.html",
         "test/kids/index.html",
-        "test/kids/version.json",
-        "cloudflare/kids-content-admin.js"
+        "test/kids/version.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     }

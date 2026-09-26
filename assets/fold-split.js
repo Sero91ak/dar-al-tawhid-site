@@ -8,8 +8,8 @@
 (function (global) {
   "use strict";
 
-  var DUAL_MIN = 700;
-  var DUAL_PORTRAIT_MIN = 840;
+  var DUAL_MIN = 1400;
+  var DUAL_PORTRAIT_MIN = 1400;
   var RAIL_MIN = 320;
   var RAIL_MAX = 380;
 
@@ -50,6 +50,7 @@
     var w = Number(width) || 0;
     var h = Number(height) || 0;
     if (w < DUAL_MIN) return false;
+    if (h < 700) return false;
     if (w >= h) return true;
     if (w >= DUAL_PORTRAIT_MIN) return true;
     return false;

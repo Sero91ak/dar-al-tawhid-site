@@ -971,6 +971,7 @@ def get_status():
     out["reference_prepares_total"]=MODEL_REFERENCE_PREPARES
     out["reference_cache_hits_total"]=MODEL_REFERENCE_CACHE_HITS
     out["render_cache"]=dict(RENDER_CACHE_STATS)
+    out["long_form_guard"]={"deMaxChars":150,"arMaxChars":96,"maxNewTokens":620}
     out["production_backend"]=ACTIVE_BACKEND
     if ACTIVE_BACKEND=="mlx" and out.get("model_state")=="ready":
         out["model_device"]="mlx-metal"
@@ -1445,6 +1446,7 @@ def load_model(force_device=None):
                 except Exception:
                     pass
 
+            install_t3_generation_guard(model)
             MODEL=model
             MODEL_DEVICE=target
             MODEL_ACTIVE_REFERENCE=None
@@ -1489,7 +1491,7 @@ def warm_model():
     except Exception:
         pass
 
-def split_chunks(text:str,max_chars:int=280):
+def split_chunks(text:str,max_chars:int=150):
     text=re.sub(r"\s+"," ",text).strip()
     if len(text)<=max_chars:
         return [text] if text else []
@@ -1826,6 +1828,27 @@ def render_with_model(model,text:str,language_id:str,mode:str="narration"):
     return wav
 
 render_with_model._last_backend_meta={}
+
+def install_t3_generation_guard(model):
+    """Begrenzt die maximale autoregressive Sprach-Token-Länge pro Segment.
+
+    Chatterbox Multilingual ruft t3.inference intern standardmäßig mit
+    max_new_tokens=1000 auf. Für unsere kleineren Long-Form-Segmente reicht ein
+    deutlich kleineres Limit und verhindert minutenlange Entgleisungen.
+    """
+    t3=getattr(model,"t3",None)
+    if t3 is None or getattr(t3,"_dar_guard_installed",False):
+        return
+    original=t3.inference
+
+    def guarded_inference(*args,**kwargs):
+        requested=int(kwargs.get("max_new_tokens",1000) or 1000)
+        # 620 lässt genug Reserve für unsere <=150-Zeichen-DE / <=96-Zeichen-AR-Segmente.
+        kwargs["max_new_tokens"]=min(requested,620)
+        return original(*args,**kwargs)
+
+    t3.inference=guarded_inference
+    t3._dar_guard_installed=True
 
 def normalize_segment_shape(wav):
     w=wav.detach().float().cpu()
@@ -2378,7 +2401,9 @@ def generate(text:str,prepared:str="",style:str="auto"):
                             render_salt=int(render_id[:8],16)
                             key_salt=sum((i+1)*ord(ch) for i,ch in enumerate(audio_lock_key))
                             core_seed=2026+((render_salt+key_salt*131)%900000)
+                        segment_started=time.perf_counter()
                         wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
+                        metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
                     except Exception as first_error:
                         if getattr(model,"_dar_backend","torch")=="mlx" and "generation_timeout" in str(first_error):
                             # Nach einem echten stuck inference wurde der MLX-Prozess bereits
@@ -2389,7 +2414,9 @@ def generate(text:str,prepared:str="",style:str="auto"):
                             print("[DĀR Voice] MLX segment failed, retry PyTorch/MPS:",first_error,flush=True)
                             set_status(message=f"{lang_label} · MLX-Fallback auf PyTorch/MPS …")
                             model=load_model()
+                            segment_started=time.perf_counter()
                             wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
+                            metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
                         elif MODEL_DEVICE=="mps":
                             print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
                             set_status(message=f"{lang_label} · MPS-Fallback auf CPU …")
@@ -2414,6 +2441,11 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 **metrics
             }
             outputs[original_idx]=(wav.detach().float().cpu(),lang,chunk,mode,metrics)
+            completed_pct=8+int((processed_pos/max(1,total))*78)
+            set_status(
+                progress=completed_pct,
+                message=f"{lang_label} · {mode} · Abschnitt {idx}/{total} fertig"
+            )
 
         outputs=[x for x in outputs if x is not None]
         qa_segments=[x for x in qa_segments if x is not None]
