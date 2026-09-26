@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import difflib, gc, hashlib, json, os, re, shutil, subprocess, threading, time, traceback, unicodedata, urllib.request, uuid
+import concurrent.futures, difflib, gc, hashlib, importlib.util, json, os, platform, re, shutil, subprocess, threading, time, traceback, unicodedata, urllib.request, uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
@@ -201,6 +201,15 @@ MODEL_CONDITIONAL_CACHE={}
 AUDIO_WAV_CACHE={}
 RENDER_CACHE_STATS={"hits":0,"misses":0,"writes":0}
 RENDER_CACHE_MAX_BYTES=2*1024*1024*1024
+
+# Apple-Silicon Production Backend.
+MLX_MODEL=None
+MLX_MODEL_ERROR=""
+MLX_CONDITIONALS={}
+MLX_WORKER=concurrent.futures.ThreadPoolExecutor(max_workers=1,thread_name_prefix="dar-mlx")
+MLX_MODEL_ID=os.environ.get("DAR_VOICE_MLX_MODEL","mlx-community/chatterbox-multilingual-v3")
+MLX_ENABLED=os.environ.get("DAR_VOICE_DISABLE_MLX","0")!="1" and platform.machine().lower()=="arm64"
+ACTIVE_BACKEND="mlx" if MLX_ENABLED and importlib.util.find_spec("mlx_audio") is not None else "torch"
 
 # Persistente Kern-Aussprache-Locks haben einen eigenen Zustand.
 # Diese Initialisierung muss VOR jedem /health- oder /status-Aufruf existieren.
@@ -635,6 +644,10 @@ def get_status():
     out["reference_prepares_total"]=MODEL_REFERENCE_PREPARES
     out["reference_cache_hits_total"]=MODEL_REFERENCE_CACHE_HITS
     out["render_cache"]=dict(RENDER_CACHE_STATS)
+    out["production_backend"]=ACTIVE_BACKEND
+    out["mlx_enabled"]=bool(MLX_ENABLED)
+    out["mlx_model"]=MLX_MODEL_ID if MLX_ENABLED else None
+    out["mlx_error"]=MLX_MODEL_ERROR
     return out
 
 def source_has_honorific(text:str,pos:int,required_key:str=""):
@@ -723,6 +736,121 @@ def choose_device():
     import torch
     return "mps" if torch.backends.mps.is_available() else "cpu"
 
+class GenerationTokenLimitReached(RuntimeError):
+    pass
+
+class MLXModelAdapter:
+    _dar_backend="mlx"
+    def __init__(self,model):
+        self.model=model
+        self.sr=int(getattr(model,"sample_rate",24000))
+
+def mlx_token_budget(text:str,language_id:str):
+    value=str(text or "").strip()
+    chars=len(re.sub(r"\s+","",value))
+    words=max(1,len(re.findall(r"\S+",value)))
+    # Genug Reserve für langsame, natürliche Sprache; weit unter dem upstream 1000-token
+    # runaway ceiling. 25 speech tokens ≈ 1 s Audio bei Chatterbox.
+    budget=int(105 + chars*2.0 + words*2.2)
+    if language_id=="ar":
+        return max(170,min(420,budget))
+    return max(190,min(480,budget))
+
+def _load_mlx_model_worker():
+    global MLX_MODEL,MLX_MODEL_ERROR
+    if MLX_MODEL is not None:
+        return MLX_MODEL
+    try:
+        from mlx_audio.tts.utils import load_model as mlx_load_model
+        MLX_MODEL=mlx_load_model(MLX_MODEL_ID)
+        MLX_MODEL_ERROR=""
+        return MLX_MODEL
+    except Exception as e:
+        MLX_MODEL_ERROR=f"{type(e).__name__}: {e}"
+        raise
+
+def load_mlx_model():
+    global ACTIVE_BACKEND
+    if not MLX_ENABLED or importlib.util.find_spec("mlx_audio") is None:
+        raise RuntimeError("MLX Audio ist auf diesem System nicht verfügbar.")
+    set_status(model_state="loading",model_device="mlx-metal",message="Chatterbox V3 · MLX wird geladen …",last_error="")
+    try:
+        model=MLX_WORKER.submit(_load_mlx_model_worker).result()
+        adapter=MLXModelAdapter(model)
+        ACTIVE_BACKEND="mlx"
+        set_status(
+            model_state="ready",model_device="mlx-metal",model_loaded_at=time.time(),
+            message="Chatterbox V3 · MLX auf Apple Silicon bereit",last_error=""
+        )
+        return adapter
+    except Exception as e:
+        set_status(last_error=f"MLX: {type(e).__name__}: {e}")
+        raise
+
+def load_production_model():
+    global ACTIVE_BACKEND
+    if MLX_ENABLED and importlib.util.find_spec("mlx_audio") is not None and not MLX_MODEL_ERROR:
+        try:
+            return load_mlx_model()
+        except Exception as e:
+            print("[DĀR Voice] MLX fallback auf PyTorch/MPS:",e,flush=True)
+    ACTIVE_BACKEND="torch"
+    return load_model()
+
+def _mlx_generate_worker(adapter,ref_path:str,text:str,language_id:str,mode:str,max_tokens:int):
+    import numpy as np, torch
+    model=adapter.model
+    p=prosody_settings(mode,language_id,text)
+    ref_sig=file_signature(Path(ref_path))
+    conds=MLX_CONDITIONALS.get(ref_sig)
+    if conds is None:
+        # String-Pfad wird vom MLX-Chatterbox-Port selbst auf 24 kHz geladen.
+        conds=model.prepare_conditionals(ref_path,int(getattr(model,"sample_rate",24000)),p["exaggeration"])
+        MLX_CONDITIONALS[ref_sig]=conds
+
+    result=None
+    for item in model.generate(
+        text=text,
+        conds=conds,
+        exaggeration=p["exaggeration"],
+        cfg_weight=p["cfg_weight"],
+        temperature=p["temperature"],
+        repetition_penalty=1.2,
+        min_p=0.05,
+        top_p=1.0,
+        max_new_tokens=int(max_tokens),
+        lang_code=language_id,
+        verbose=False,
+    ):
+        result=item
+    if result is None:
+        raise RuntimeError("MLX hat kein Audio geliefert.")
+
+    token_count=int(getattr(result,"token_count",0) or 0)
+    if token_count>=int(max_tokens)-3:
+        raise GenerationTokenLimitReached(
+            f"MLX token ceiling reached ({token_count}/{max_tokens})"
+        )
+
+    arr=np.asarray(result.audio,dtype=np.float32)
+    if arr.ndim>1:
+        arr=arr.reshape(-1)
+    wav=torch.from_numpy(arr.copy()).view(1,-1)
+    return wav,{
+        "mlx_token_count":token_count,
+        "mlx_max_tokens":int(max_tokens),
+        "mlx_processing_seconds":round(float(getattr(result,"processing_time_seconds",0.0) or 0.0),3),
+        "mlx_rtf":round(float(getattr(result,"real_time_factor",0.0) or 0.0),4),
+    }
+
+def render_with_mlx(model,text:str,language_id:str,mode:str):
+    ref=reference_for_language(language_id)
+    budget=mlx_token_budget(text,language_id)
+    wav,meta=MLX_WORKER.submit(
+        _mlx_generate_worker,model,str(ref),text,language_id,mode,budget
+    ).result()
+    return wav,meta
+
 def load_model(force_device=None):
     global MODEL, MODEL_DEVICE, MODEL_ACTIVE_REFERENCE, MODEL_CONDITIONAL_CACHE, AUDIO_WAV_CACHE
     target=force_device or choose_device()
@@ -789,13 +917,25 @@ def load_model(force_device=None):
 
 def warm_model():
     try:
-        model=load_model()
-        # Produktions-Warmup: beide tatsächlich vorhandenen Referenzen einmal konditionieren.
-        prepare_reference_if_needed(model,"de",prosody_settings("narration","de","Warmup")["exaggeration"])
-        if REF_AR.exists() and file_signature(REF_AR)!=file_signature(REF_DE):
-            prepare_reference_if_needed(model,"ar",prosody_settings("narration","ar","تجربة")["exaggeration"])
-        # Deutsch als häufigsten Startzustand aktiv lassen.
-        prepare_reference_if_needed(model,"de",prosody_settings("narration","de","Warmup")["exaggeration"])
+        model=load_production_model()
+        if getattr(model,"_dar_backend","torch")=="mlx":
+            # Konditionierung beider Referenzen im dedizierten MLX-Worker vorwärmen,
+            # ohne einen langen TTS-Render zu starten.
+            def _warm():
+                base=model.model
+                for lang,probe in (("de","Warmup"),("ar","تجربة")):
+                    ref=reference_for_language(lang)
+                    sig=file_signature(ref)
+                    if sig in MLX_CONDITIONALS:
+                        continue
+                    p=prosody_settings("narration",lang,probe)
+                    MLX_CONDITIONALS[sig]=base.prepare_conditionals(str(ref),int(getattr(base,"sample_rate",24000)),p["exaggeration"])
+            MLX_WORKER.submit(_warm).result()
+        else:
+            prepare_reference_if_needed(model,"de",prosody_settings("narration","de","Warmup")["exaggeration"])
+            if REF_AR.exists() and file_signature(REF_AR)!=file_signature(REF_DE):
+                prepare_reference_if_needed(model,"ar",prosody_settings("narration","ar","تجربة")["exaggeration"])
+            prepare_reference_if_needed(model,"de",prosody_settings("narration","de","Warmup")["exaggeration"])
         cleanup_render_cache()
     except Exception:
         pass
@@ -886,7 +1026,7 @@ def build_render_plan(text:str):
             plan.append(("ar",value.strip()))
             continue
         for lang,segment in split_language_segments(value):
-            max_chars=180 if lang=="ar" else 280
+            max_chars=90 if lang=="ar" else 140
             for chunk in split_chunks(segment,max_chars=max_chars):
                 if chunk.strip():
                     plan.append((lang,chunk.strip()))
@@ -1081,6 +1221,13 @@ def prepare_reference_if_needed(model,language_id:str,exaggeration:float):
 
 def render_with_model(model,text:str,language_id:str,mode:str="narration"):
     import torch
+    if getattr(model,"_dar_backend","torch")=="mlx":
+        wav,meta=render_with_mlx(model,text,language_id,mode)
+        # Metadata wird am Tensor für diese eine Pipeline-Stufe separat zurückgegeben
+        # über Thread-local-like module state vermieden; QA ergänzt Backenddaten später.
+        render_with_model._last_backend_meta=meta
+        return wav
+
     p=prosody_settings(mode,language_id,text)
     ref=reference_for_language(language_id)
     kwargs=dict(
@@ -1089,17 +1236,15 @@ def render_with_model(model,text:str,language_id:str,mode:str="narration"):
         cfg_weight=p["cfg_weight"],
         temperature=p["temperature"]
     )
-
-    # Neue schnelle Route: Conditionals einmal vorbereiten und danach ohne
-    # audio_prompt_path wiederverwenden. Fallback bleibt kompatibel mit älteren Builds.
-    prepared=prepare_reference_if_needed(model,language_id,p["exaggeration"])
-    if not hasattr(model,"prepare_conditionals"):
+    prepare_reference_if_needed(model,language_id,p["exaggeration"])
+    if not hasattr(model,"prepare_conditionals") or getattr(model,"conds",None) is None:
         kwargs["audio_prompt_path"]=str(ref)
-    elif getattr(model,"conds",None) is None:
-        kwargs["audio_prompt_path"]=str(ref)
-
     with torch.inference_mode():
-        return model.generate(text,**kwargs)
+        wav=model.generate(text,**kwargs)
+    render_with_model._last_backend_meta={}
+    return wav
+
+render_with_model._last_backend_meta={}
 
 def normalize_segment_shape(wav):
     w=wav.detach().float().cpu()
@@ -1294,8 +1439,14 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
 
     for attempt in range(attempts):
         torch.manual_seed(seed_base+attempt*seed_offset)
-        wav=render_with_model(model,text,language_id,mode)
+        try:
+            wav=render_with_model(model,text,language_id,mode)
+        except GenerationTokenLimitReached as e:
+            print(f"[DĀR Voice] bounded generation rescue: {e}",flush=True)
+            last=(None,{"issues":["generation_token_limit"],"attempt":attempt+1,"critical":bool(critical),"rescued":False})
+            break
         metrics=audio_quality_metrics(wav,int(model.sr),text,language_id,mode)
+        metrics.update(getattr(render_with_model,"_last_backend_meta",{}) or {})
         metrics["attempt"]=attempt+1
         metrics["critical"]=bool(critical)
         metrics["rescued"]=False
@@ -1306,7 +1457,7 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
 
     rescue_allowed={
         "unexpected_internal_hold","excessive_internal_pause","suspicious_sustained_hold",
-        "short_arabic_too_long","segment_too_long","speech_rate_too_slow"
+        "short_arabic_too_long","segment_too_long","speech_rate_too_slow","generation_token_limit"
     }
     last_issues=set(last[1]["issues"]) if last else set()
     if bool(QA_CONFIG.get("rescueLongSegments",True)) and not critical and last_issues and last_issues.issubset(rescue_allowed):
@@ -1316,8 +1467,13 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
             rescue_metrics=[]
             for part_idx,part in enumerate(parts):
                 torch.manual_seed(seed_base+(attempts+part_idx)*seed_offset)
-                sub=render_with_model(model,part,language_id,mode)
+                try:
+                    sub=render_with_model(model,part,language_id,mode)
+                except GenerationTokenLimitReached:
+                    rescued=[]
+                    break
                 subm=audio_quality_metrics(sub,int(model.sr),part,language_id,mode)
+                subm.update(getattr(render_with_model,"_last_backend_meta",{}) or {})
                 if subm["issues"]:
                     rescued=[]
                     break
@@ -1525,7 +1681,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
     )
 
     try:
-        model=load_model()
+        model=load_production_model()
         outputs=[None]*len(plan)
         qa_segments=[None]*len(plan)
         total=len(plan)
@@ -1586,7 +1742,12 @@ def generate(text:str,prepared:str="",style:str="auto"):
                             core_seed=2026+((render_salt+key_salt*131)%900000)
                         wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
                     except Exception as first_error:
-                        if MODEL_DEVICE=="mps":
+                        if getattr(model,"_dar_backend","torch")=="mlx":
+                            print("[DĀR Voice] MLX segment failed, retry PyTorch/MPS:",first_error,flush=True)
+                            set_status(message=f"{lang_label} · MLX-Fallback auf PyTorch/MPS …")
+                            model=load_model()
+                            wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
+                        elif MODEL_DEVICE=="mps":
                             print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
                             set_status(message=f"{lang_label} · MPS-Fallback auf CPU …")
                             model=load_model(force_device="cpu")
@@ -1642,7 +1803,8 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 "reference_cache_hits_total":MODEL_REFERENCE_CACHE_HITS,
                 "segment_cache_hits":sum(1 for x in qa_segments if x.get("segment_cache")=="hit"),
                 "segment_cache_misses":sum(1 for x in qa_segments if x.get("segment_cache")=="miss"),
-                "execution_strategy":"persistent-conditionals+segment-cache-v2",
+                "execution_strategy":"mlx-bounded-long-form-v1" if getattr(model,"_dar_backend","torch")=="mlx" else "persistent-conditionals+segment-cache-v2",
+                "backend":"mlx" if getattr(model,"_dar_backend","torch")=="mlx" else "torch",
             },
         }
         set_status(last_qa=qa_summary)
