@@ -63,13 +63,28 @@ def load_json_file(path:Path,default):
             return json.loads(path.read_text(encoding="utf-8"))
     except Exception as e:
         print("[DĀR Voice] JSON load warning",path,e,flush=True)
+        # Ein beschädigter, reproduzierbarer Online-Cache wird automatisch
+        # quarantänisiert. Persönliche User-Overrides werden niemals gelöscht.
+        try:
+            if path==ONLINE_LIBRARY_CACHE and path.exists():
+                stamp=time.strftime("%Y%m%d-%H%M%S")
+                bad=path.with_name(path.stem+".corrupt-"+stamp+path.suffix)
+                os.replace(path,bad)
+                print("[DĀR Voice] defekten Online-Cache verschoben nach",bad,flush=True)
+        except Exception as move_error:
+            print("[DĀR Voice] cache quarantine warning",move_error,flush=True)
     return default
 
 def atomic_write_json(path:Path,data):
     path.parent.mkdir(parents=True,exist_ok=True)
-    tmp=path.with_suffix(path.suffix+".tmp")
-    tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
-    os.replace(tmp,path)
+    # Prozess-eigene Tempdatei verhindert Cache-Kollisionen bei parallelen Starts.
+    tmp=path.with_name(path.name+f".tmp.{os.getpid()}.{uuid.uuid4().hex[:8]}")
+    try:
+        tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+        os.replace(tmp,path)
+    finally:
+        try: tmp.unlink(missing_ok=True)
+        except Exception: pass
 
 def normalize_lookup(value:str):
     text=unicodedata.normalize("NFKD",str(value or "").casefold())
@@ -1721,25 +1736,90 @@ def existing_engine_health(timeout:float=0.6):
     except Exception:
         return False
 
+def port_listener_pids(port:int):
+    commands=[
+        ["/usr/sbin/lsof","-nP",f"-iTCP:{int(port)}","-sTCP:LISTEN","-t"],
+        ["lsof","-nP",f"-iTCP:{int(port)}","-sTCP:LISTEN","-t"],
+    ]
+    for cmd in commands:
+        try:
+            out=subprocess.check_output(cmd,stderr=subprocess.DEVNULL,text=True,timeout=2)
+            return sorted({int(x) for x in out.split() if x.strip().isdigit()})
+        except Exception:
+            continue
+    return []
+
+def process_command(pid:int):
+    try:
+        return subprocess.check_output(
+            ["/bin/ps","-p",str(int(pid)),"-o","command="],
+            stderr=subprocess.DEVNULL,text=True,timeout=2
+        ).strip()
+    except Exception:
+        return ""
+
+def is_our_engine_process(pid:int):
+    cmd=process_command(pid)
+    if not cmd:
+        return False
+    engine=str((APP_HOME/"local-engine.py").resolve())
+    return engine in cmd or ("DAR-Voice-Studio/local-engine.py" in cmd and "python" in cmd.lower())
+
+def stop_stale_own_listener():
+    own=[pid for pid in port_listener_pids(PORT) if pid!=os.getpid() and is_our_engine_process(pid)]
+    if not own:
+        return False
+    print("[DĀR Voice] stale eigene Engine auf Port 8787:",own,flush=True)
+    for pid in own:
+        try: os.kill(pid,15)
+        except Exception: pass
+    deadline=time.time()+3.0
+    while time.time()<deadline:
+        alive=[pid for pid in own if process_command(pid)]
+        if not alive:
+            break
+        time.sleep(0.15)
+    for pid in own:
+        if process_command(pid):
+            try: os.kill(pid,9)
+            except Exception: pass
+    time.sleep(0.35)
+    return True
+
 def serve_single_instance():
     print(f"DĀR Voice Engine http://{HOST}:{PORT}",flush=True)
     print("Referenz:",REF,flush=True)
 
     # ZUERST den Port binden. Erst danach Modell/Online-Sync starten.
     # Dadurch kann ein zweiter Starter niemals parallel ein zweites Chatterbox-Modell laden.
-    try:
-        server=VoiceHTTPServer((HOST,PORT),H)
-    except OSError as e:
-        if getattr(e,"errno",None) in (48,98):
-            # macOS 48 / Linux 98 = address already in use.
-            # Wenn dort bereits unsere gesunde Engine antwortet, ist das KEIN Fehler.
-            for _ in range(16):
+    server=None
+    last_error=None
+    for attempt in range(3):
+        try:
+            server=VoiceHTTPServer((HOST,PORT),H)
+            break
+        except OSError as e:
+            last_error=e
+            if getattr(e,"errno",None) not in (48,98):
+                raise
+
+            # Eine bereits gesunde Serhat-Engine ist ein erfolgreicher Zustand.
+            for _ in range(12):
                 if existing_engine_health():
                     print("[DĀR Voice] Engine läuft bereits auf Port 8787 – Doppelstart wird sauber beendet.",flush=True)
                     return 0
-                time.sleep(0.25)
-            print("[DĀR Voice] Port 8787 ist belegt, aber keine gültige Serhat-Engine antwortet.",flush=True)
-        raise
+                time.sleep(0.2)
+
+            # Nur einen eindeutig eigenen alten Engine-Prozess beenden.
+            if stop_stale_own_listener():
+                continue
+
+            listeners=port_listener_pids(PORT)
+            print("[DĀR Voice] Port 8787 ist fremd/nicht reagierend belegt:",listeners,flush=True)
+            break
+
+    if server is None:
+        raise last_error if last_error is not None else OSError("Port 8787 konnte nicht gebunden werden.")
 
     with server:
         # Modell und Online-Wortschatz erst nach erfolgreichem exklusivem Bind vorladen.
