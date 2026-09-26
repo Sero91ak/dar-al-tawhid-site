@@ -53,6 +53,21 @@ import {
   buildPublicStoriesResponse
 } from "./stories-admin.js";
 import {
+  readKidsContentIndex,
+  saveKidsContentEntry,
+  publishKidsContentEntry,
+  updateKidsContentPushState,
+  buildPublicKidsContentResponse,
+  buildKidsContentId,
+  KIDS_CONTENT_META
+} from "./kids-content-admin.js";
+import {
+  persistKidsContentMedia,
+  promoteKidsContentMedia,
+  KIDS_CONTENT_MEDIA_LIMITS
+} from "./kids-content-media.js";
+import { sendKidsContentPush, kidsPushPreview } from "./kids-content-push.js";
+import {
   readFeedIndex,
   saveFeedEntry,
   deleteFeedEntry,
@@ -386,6 +401,131 @@ export default {
           return json({ ok: false, success: false, error: result.error || "Kurzlink konnte nicht erstellt werden. Bitte Quelle prüfen." }, cors, 400);
         }
         return json(result, cors);
+      }
+
+      if (url.pathname === "/api/kids/content" && request.method === "GET") {
+        const staging = String(url.searchParams.get("staging") || "") === "1";
+        const kind = String(url.searchParams.get("kind") || "").trim();
+        const age = Number(url.searchParams.get("age") || 0);
+        const appTarget = String(url.searchParams.get("appTarget") || "kids").trim() || "kids";
+        const { index, path } = await readKidsContentIndex(env, { staging }, { githubGet, base64ToUtf8 });
+        return json({
+          ...buildPublicKidsContentResponse(index, { kind, age, appTarget }),
+          path,
+          staging
+        }, cors, 200);
+      }
+
+      if (url.pathname === "/api/admin/kids-content" && request.method === "GET") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const staging = String(url.searchParams.get("staging") || "1") !== "0";
+        const { index, sha, path } = await readKidsContentIndex(env, { staging }, { githubGet, base64ToUtf8 });
+        return json({
+          ok: true,
+          index,
+          sha,
+          path,
+          staging,
+          count: (index.items || []).length,
+          meta: KIDS_CONTENT_META,
+          mediaLimits: KIDS_CONTENT_MEDIA_LIMITS
+        }, cors);
+      }
+
+      if (url.pathname === "/api/admin/kids-content/id" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        return json({
+          ok: true,
+          id: buildKidsContentId(String(input?.kind || "story"), String(input?.title || ""))
+        }, cors);
+      }
+
+      if (url.pathname === "/api/admin/kids-content/save" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        try {
+          const result = await saveKidsContentEntry(env, { ...input, staging: input?.staging !== false }, helpers);
+          return json(result, cors);
+        } catch (error) {
+          return json({ ok: false, error: error?.message || String(error) }, cors, error?.status || 400);
+        }
+      }
+
+      if (url.pathname === "/api/admin/kids-content/media" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        try {
+          return json(await persistKidsContentMedia(env, input, helpers), cors);
+        } catch (error) {
+          return json({ ok: false, error: error?.message || String(error) }, cors, error?.status || 400);
+        }
+      }
+
+      if (url.pathname === "/api/admin/kids-content/push-preview" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const { index } = await readKidsContentIndex(env, { staging: input?.staging !== false }, { githubGet, base64ToUtf8 });
+        const item = (index.items || []).find((x) => x.id === String(input?.id || ""));
+        if (!item) return json({ ok: false, error: "Content-Paket nicht gefunden" }, cors, 404);
+        return json({ ok: true, preview: kidsPushPreview(env, item) }, cors);
+      }
+
+      if (url.pathname === "/api/admin/kids-content/publish" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        try {
+          const live = Boolean(input?.live);
+          let publishInput = { ...input, live };
+
+          if (live) {
+            const source = await readKidsContentIndex(env, { staging: true }, helpers);
+            const draft = (source.index.items || []).find((x) => x.id === String(input?.id || ""));
+            if (!draft) return json({ ok: false, error: "Staging-Paket nicht gefunden" }, cors, 404);
+            const promoted = await promoteKidsContentMedia(env, draft, helpers);
+            publishInput = { ...publishInput, cover: promoted.cover, audio: promoted.audio };
+          }
+
+          const result = await publishKidsContentEntry(env, publishInput, helpers);
+          if (!live) {
+            return json({
+              ...result,
+              push: { sent: false, skipped: true, reason: "Staging-Publish sendet niemals Besucher-Push" }
+            }, cors);
+          }
+
+          if (input?.triggerDeploy !== false && result?.commitSha) {
+            ctx.waitUntil(triggerSiteDeployWorkflow(env, `kids-content-live:${result?.item?.id || input?.id || "publish"}`));
+          }
+
+          let pushResult = { sent: false, skipped: true, reason: "Push deaktiviert" };
+          if (result?.pushRequired && input?.sendPush !== false) {
+            pushResult = await sendKidsContentPush(env, result.item);
+            await updateKidsContentPushState(env, {
+              id: result.item.id,
+              status: pushResult.sent ? "sent" : (pushResult.skipped ? "skipped" : "failed"),
+              sentAt: pushResult.sent ? (new Date().toISOString()) : null,
+              notificationId: pushResult.notificationId || ""
+            }, helpers);
+          }
+
+          return json({
+            ...result,
+            push: pushResult,
+            deploy: { triggered: input?.triggerDeploy !== false && Boolean(result?.commitSha) }
+          }, cors);
+        } catch (error) {
+          return json({ ok: false, error: error?.message || String(error) }, cors, error?.status || 400);
+        }
       }
 
       if (url.pathname === "/api/admin/stories" && request.method === "GET") {
