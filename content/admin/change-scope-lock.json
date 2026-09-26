@@ -123,6 +123,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tab-oval-92-update-banner-2026-09-26",
+      "approvedBy": "user-explicit-kids-oval-breit-ruckler-aktualisierung-bug",
+      "reason": "Nutzer: Oval so breit wie Kids; Tab-Ruckler fixen; haengendes Aktualisieren-Banner. Funktionen/Schnellzugriff unveraendert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tab-soft-plop-wider-oval-2026-09-26",
       "approvedBy": "user-explicit-plop-zu-hoch-oval-breiter-wie-kids-funktionen-behalten",
       "reason": "Nutzer: 3D-Icons springen zu hoch; Oval ums Bild breiter wie Kids. Funktionen/Schnellzugriff unveraendert, butterweich.",
