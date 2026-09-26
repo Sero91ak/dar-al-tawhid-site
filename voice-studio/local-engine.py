@@ -48,6 +48,8 @@ LEARNING_HOME=VOICE_HOME/"PronunciationLearning"
 LEARNING_PENDING_DIR=LEARNING_HOME/"pending"
 USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
 ONLINE_LIBRARY_CACHE=LEARNING_HOME/"online-library.json"
+MASTER_LIBRARY_CACHE=LEARNING_HOME/"islamic-master-library.json"
+MASTER_LIBRARY_SEED=APP_HOME/"islamic-master-library.json"
 LEARNING_LOG=LEARNING_HOME/"learning-log.jsonl"
 RENDER_CACHE_DIR=VOICE_HOME/"RenderCache"/"v3"
 LEARNING_HOME.mkdir(parents=True,exist_ok=True)
@@ -56,6 +58,10 @@ RENDER_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_URL=os.environ.get(
     "DAR_VOICE_ONLINE_LIBRARY_URL",
     "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/data/pronunciation/pronunciation-rules.json"
+)
+MASTER_LIBRARY_URL=os.environ.get(
+    "DAR_VOICE_MASTER_LIBRARY_URL",
+    "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/data/pronunciation/islamic-master-library.json"
 )
 LEARNING_LOCK=threading.Lock()
 LEARNING_PREVIEWS={}
@@ -122,12 +128,34 @@ def validate_online_library(data):
         raise ValueError("Online-Wortschatz enthält zu wenige gültige arabische Sprechformen.")
     return good
 
+def validate_master_library(data):
+    entries=list((data or {}).get("entries") or [])
+    good=[]
+    for raw in entries:
+        e=dict(raw or {})
+        canonical=str(e.get("canonical","")).strip()
+        tts=str(e.get("tts_text") or e.get("arabic") or "").strip()
+        if not canonical or not tts or not re.search(r"[\u0600-\u06ff]",tts):
+            continue
+        e["canonical"]=canonical
+        e["tts_text"]=tts
+        e["tts_language"]="ar"
+        e["aliases"]=list(dict.fromkeys(
+            [canonical]+[str(x).strip() for x in (e.get("aliases") or []) if str(x).strip()]
+        ))
+        e["status"]=str(e.get("status") or "suggestion")
+        e["autoUse"]=bool(e.get("autoUse")) and e["status"]=="verified"
+        good.append(e)
+    return good
+
 BASE_LIB=json.load(PRON.open(encoding="utf-8"))
 VOICE_PROFILE=json.load(PROFILE.open(encoding="utf-8"))
 BASE_RULES=list(BASE_LIB.get("rules",[]))
 USER_OVERRIDE_DATA=load_json_file(USER_OVERRIDES_FILE,{"schemaVersion":1,"rules":[]})
 ONLINE_LIB=load_json_file(ONLINE_LIBRARY_CACHE,{"schemaVersion":1,"rules":[],"syncedAt":None})
 ONLINE_RULES=list((ONLINE_LIB or {}).get("rules") or [])
+INSTALLED_MASTER_LIB=load_json_file(MASTER_LIBRARY_SEED,{"schemaVersion":1,"entries":[],"sources":{}})
+ONLINE_MASTER_LIB=load_json_file(MASTER_LIBRARY_CACHE,{"schemaVersion":1,"entries":[],"sources":{},"syncedAt":None})
 HONORIFIC_KEYS={"salawat_prophet","radiyallahu_anhu","radiyallahu_anha","radiyallahu_anhuma","radiyallahu_anhum"}
 
 PROSODY_MODES=(VOICE_PROFILE.get("prosody") or {}).get("modes",{})
@@ -144,19 +172,149 @@ AUDIO_LOCK_FORMS=[]
 HONORIFIC_TTS_BY_KEY={}
 HONORIFIC_RULE_BY_KEY={}
 HONORIFIC_SOURCE_FORMS={}
+MASTER_ENTRIES=[]
+MASTER_RULES=[]
+MASTER_ALIAS_INDEX={}
+
+def _rule_person_metadata(rule):
+    honorific=str(rule.get("required_honorific_key",""))
+    if honorific=="radiyallahu_anhu":
+        return "sahabi","sahabi","male"
+    if honorific=="radiyallahu_anha":
+        return "sahabiyyah","sahabiyyah","female"
+    if honorific=="salawat_prophet":
+        return "prophet","prophet","male"
+    category=str(rule.get("category") or "islamic_term")
+    low=normalize_lookup(category)
+    person_type="term"
+    gender=""
+    if "sahab" in low:
+        person_type="sahabi"
+    elif "tabi" in low:
+        person_type="tabii"
+    elif "imam" in low or "scholar" in low or "gelehrt" in low:
+        person_type="scholar"
+    return category,person_type,gender
+
+def derive_master_entries_from_rules(rules):
+    grouped={}
+    for r in rules:
+        canonical=str(r.get("canonical") or r.get("string_to_replace") or "").strip()
+        tts=str(r.get("tts_text") or "").strip()
+        needle=str(r.get("string_to_replace") or "").strip()
+        if not canonical or not needle or not tts or not re.search(r"[\u0600-\u06ff]",tts):
+            continue
+        key=(normalize_lookup(canonical),tts)
+        category,person_type,gender=_rule_person_metadata(r)
+        item=grouped.setdefault(key,{
+            "id":"installed_"+hashlib.sha1((canonical+"|"+tts).encode("utf-8")).hexdigest()[:14],
+            "canonical":canonical,
+            "arabic":tts,
+            "transliteration":canonical,
+            "aliases":[],
+            "category":category,
+            "personType":person_type,
+            "gender":gender,
+            "tts_text":tts,
+            "tts_language":"ar",
+            "required_honorific_key":str(r.get("required_honorific_key","")),
+            "voice_lock":str(r.get("voice_lock","")),
+            "qaStatus":"installed-curated",
+            "status":"verified",
+            "autoUse":True,
+            "sourceIds":["installed_user_curated_rules"],
+            "origin":"installed-rules",
+        })
+        if needle not in item["aliases"]:
+            item["aliases"].append(needle)
+        alias=str(r.get("alias") or "").strip()
+        if alias and alias not in item["aliases"]:
+            item["aliases"].append(alias)
+    return list(grouped.values())
+
+def build_master_library():
+    derived=derive_master_entries_from_rules(
+        list((USER_OVERRIDE_DATA or {}).get("rules") or [])+BASE_RULES
+    )
+    installed=validate_master_library(INSTALLED_MASTER_LIB)
+    online=validate_master_library(ONLINE_MASTER_LIB)
+    merged={}
+    # Höchste Priorität zuerst: lokale/bestätigte Regeln > installierter Seed > Online-Seed.
+    for source,entries in (("installed-rules",derived),("installed-seed",installed),("online-master",online)):
+        for e in entries:
+            key=normalize_lookup(e.get("canonical",""))
+            if not key:
+                continue
+            if key not in merged:
+                item=dict(e)
+                item["origin"]=item.get("origin") or source
+                merged[key]=item
+            else:
+                item=merged[key]
+                aliases=list(item.get("aliases") or [])
+                for alias in e.get("aliases") or []:
+                    if alias not in aliases:
+                        aliases.append(alias)
+                item["aliases"]=aliases
+    return list(merged.values())
+
+def master_rules_from_entries(entries,blocked_needles):
+    out=[]
+    seen=set(normalize_lookup(x) for x in blocked_needles if x)
+    for e in entries:
+        if not bool(e.get("autoUse")) or str(e.get("status"))!="verified":
+            continue
+        tts=str(e.get("tts_text") or e.get("arabic") or "").strip()
+        forms=list(dict.fromkeys([str(e.get("canonical","")).strip()]+list(e.get("aliases") or [])))
+        for form in forms:
+            form=str(form or "").strip()
+            norm=normalize_lookup(form)
+            if not form or not norm or norm in seen:
+                continue
+            seen.add(norm)
+            out.append({
+                "category":str(e.get("category") or "MASTER LIBRARY"),
+                "canonical":str(e.get("canonical") or form),
+                "string_to_replace":form,
+                "alias":str(e.get("transliteration") or e.get("canonical") or form),
+                "tts_text":tts,
+                "tts_language":"ar",
+                "tts_strategy":"verified-islamic-master-library-v1",
+                "voice_lock":"REVIEW",
+                "qa_tier":"high",
+                "required_honorific_key":str(e.get("required_honorific_key") or ""),
+                "master_library_origin":str(e.get("origin") or ""),
+                "master_library_source_ids":list(e.get("sourceIds") or []),
+            })
+    return out
 
 def rebuild_runtime_rules():
     global LIB,RULES,MASTER_TTS,AUDIO_LOCK_BY_TTS,AUDIO_LOCK_LABELS,AUDIO_LOCK_FORMS
     global HONORIFIC_TTS_BY_KEY,HONORIFIC_RULE_BY_KEY,HONORIFIC_SOURCE_FORMS
+    global MASTER_ENTRIES,MASTER_RULES,MASTER_ALIAS_INDEX
     user_rules=list((USER_OVERRIDE_DATA or {}).get("rules") or [])
-    # User-bestätigte Regeln stehen zuerst und überschreiben bei gleicher Schreibweise die Basisbibliothek.
-    RULES=sorted(user_rules+BASE_RULES,key=lambda r:len(str(r.get("string_to_replace",""))),reverse=True)
+    MASTER_ENTRIES=build_master_library()
+    blocked=[str(r.get("string_to_replace","")) for r in user_rules+BASE_RULES]
+    MASTER_RULES=master_rules_from_entries(MASTER_ENTRIES,blocked)
+    # User-bestätigte Regeln stehen zuerst; installierte Regeln schlagen jeden Online-/Seed-Eintrag.
+    RULES=sorted(user_rules+BASE_RULES+MASTER_RULES,key=lambda r:len(str(r.get("string_to_replace",""))),reverse=True)
+    MASTER_ALIAS_INDEX={}
+    for e in MASTER_ENTRIES:
+        for form in [e.get("canonical",""),*(e.get("aliases") or [])]:
+            norm=normalize_lookup(form)
+            if norm and norm not in MASTER_ALIAS_INDEX:
+                MASTER_ALIAS_INDEX[norm]=e
     LIB=dict(BASE_LIB)
     LIB["rules"]=RULES
     counts=dict(BASE_LIB.get("counts") or {})
     counts["rules"]=len(RULES)
     counts["userLearnedRules"]=len(user_rules)
     counts["onlineSearchRules"]=len(ONLINE_RULES)
+    counts["masterEntries"]=len(MASTER_ENTRIES)
+    counts["masterAutoRules"]=len(MASTER_RULES)
+    counts["masterSahaba"]=sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabi")
+    counts["masterSahabiyyat"]=sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabiyyah")
+    counts["masterProphets"]=sum(1 for e in MASTER_ENTRIES if e.get("personType")=="prophet")
     LIB["counts"]=counts
     MASTER_TTS={str(r.get("tts_text","")) for r in RULES if r.get("voice_lock")=="MASTER" and r.get("tts_text")}
     AUDIO_LOCK_BY_TTS={}
@@ -379,8 +537,9 @@ def combined_search_rules():
     seen=set();out=[]
     sources=[
         ("gelernt",list((USER_OVERRIDE_DATA or {}).get("rules") or [])),
-        ("online",ONLINE_RULES),
         ("installiert",BASE_RULES),
+        ("master",MASTER_RULES),
+        ("online",ONLINE_RULES),
     ]
     for source,rules in sources:
         for r in rules:
@@ -410,7 +569,8 @@ def pronunciation_search(query:str,limit:int=10):
         elif any(q in v or v in q for v in norm if min(len(q),len(v))>=4): score=max(score,0.92)
         if score<0.48:
             continue
-        scored.append((score,0 if source=="gelernt" else 1 if source=="online" else 2,source,r))
+        priority={"gelernt":0,"installiert":1,"master":2,"online":3}.get(source,4)
+        scored.append((score,priority,source,r))
     scored.sort(key=lambda x:(-x[0],x[1],-len(str(x[3].get("string_to_replace","")))))
     out=[];seen=set()
     for score,_,source,r in scored:
@@ -433,31 +593,47 @@ def pronunciation_search(query:str,limit:int=10):
         if len(out)>=max(1,min(25,int(limit))): break
     return out
 
+def _download_json(url:str,timeout:int=15):
+    req=urllib.request.Request(url,headers={"User-Agent":"DARVoiceStudio/2.7"})
+    with urllib.request.urlopen(req,timeout=timeout) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
 def sync_online_pronunciation_library():
-    global ONLINE_LIB,ONLINE_RULES
-    req=urllib.request.Request(ONLINE_LIBRARY_URL,headers={"User-Agent":"DARVoiceStudio/2.3"})
-    with urllib.request.urlopen(req,timeout=15) as resp:
-        raw=resp.read()
-    data=json.loads(raw.decode("utf-8"))
+    global ONLINE_LIB,ONLINE_RULES,ONLINE_MASTER_LIB
+    data=_download_json(ONLINE_LIBRARY_URL,15)
     rules=validate_online_library(data)
+    master_data=_download_json(MASTER_LIBRARY_URL,15)
+    master_entries=validate_master_library(master_data)
+    if len(master_entries)<25:
+        raise ValueError("Islamische Master-Bibliothek ist unvollständig.")
+
+    synced=time.strftime("%Y-%m-%dT%H:%M:%S%z")
     cached={
         "schemaVersion":1,
-        "syncedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "syncedAt":synced,
         "source":ONLINE_LIBRARY_URL,
         "rules":rules,
     }
+    master_cached=dict(master_data)
+    master_cached["schemaVersion"]=max(1,int(master_cached.get("schemaVersion",1) or 1))
+    master_cached["syncedAt"]=synced
+    master_cached["source"]=MASTER_LIBRARY_URL
+    master_cached["entries"]=master_entries
+
     atomic_write_json(ONLINE_LIBRARY_CACHE,cached)
+    atomic_write_json(MASTER_LIBRARY_CACHE,master_cached)
     ONLINE_LIB=cached
     ONLINE_RULES=rules
+    ONLINE_MASTER_LIB=master_cached
     rebuild_runtime_rules()
-    append_learning_log("online_sync",rules=len(rules))
-    return {"rules":len(rules),"syncedAt":cached["syncedAt"]}
+    append_learning_log("online_sync",rules=len(rules),masterEntries=len(master_entries))
+    return {"rules":len(rules),"masterEntries":len(master_entries),"syncedAt":synced}
 
 def find_learning_rule(term:str,tts_text:str="",canonical:str=""):
     tts_text=str(tts_text or "").strip()
     canonical=str(canonical or "").strip()
     term=str(term or "").strip()
-    pools=[list((USER_OVERRIDE_DATA or {}).get("rules") or []),ONLINE_RULES,BASE_RULES]
+    pools=[list((USER_OVERRIDE_DATA or {}).get("rules") or []),BASE_RULES,MASTER_RULES,ONLINE_RULES]
     if tts_text:
         for rules in pools:
             for r in rules:
@@ -569,15 +745,119 @@ def learning_state():
         "onlineRules":len(ONLINE_RULES),
         "onlineSyncedAt":(ONLINE_LIB or {}).get("syncedAt"),
         "onlineUrl":ONLINE_LIBRARY_URL,
+        "masterUrl":MASTER_LIBRARY_URL,
+        "masterEntries":len(MASTER_ENTRIES),
+        "masterAutoRules":len(MASTER_RULES),
+        "masterSahaba":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabi"),
+        "masterSahabiyyat":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabiyyah"),
+        "masterProphets":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="prophet"),
         "autoSyncHours":24,
         "learnedTerms":[str(r.get("string_to_replace","")) for r in user_rules[:50]],
     }
 
+ISLAMIC_DISTINCTIVE_RE=re.compile(r"[ʿʾāīūḥṣḍṭẓḏṯšǧġḫĀĪŪḤṢḌṬẒḎṮŠǦĠḪ]|[\u0600-\u06ff]")
+ISLAMIC_NAME_PART_RE=re.compile(
+    r"^(?:abū|abu|umm|ibn|bin|bint|ʿabd|abd|al-|aš-|ash-|ath-|at-|ar-|as-|az-|ad-)",
+    re.I
+)
+
+def master_suggestions(query:str,limit:int=5):
+    q=normalize_lookup(query)
+    if not q:
+        return []
+    scored=[]
+    for e in MASTER_ENTRIES:
+        forms=[str(e.get("canonical",""))]+[str(x) for x in (e.get("aliases") or [])]
+        norms=[normalize_lookup(x) for x in forms if x]
+        if not norms:
+            continue
+        score=max(difflib.SequenceMatcher(None,q,n).ratio() for n in norms)
+        if any(n==q for n in norms):
+            score=1.0
+        elif any(q in n or n in q for n in norms if min(len(q),len(n))>=4):
+            score=max(score,0.92)
+        if score>=0.48:
+            scored.append((score,e))
+    scored.sort(key=lambda x:-x[0])
+    out=[];seen=set()
+    for score,e in scored:
+        key=normalize_lookup(e.get("canonical",""))
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append({
+            "score":round(float(score),3),
+            "canonical":str(e.get("canonical","")),
+            "arabic":str(e.get("tts_text") or e.get("arabic") or ""),
+            "category":str(e.get("category") or ""),
+            "personType":str(e.get("personType") or ""),
+            "gender":str(e.get("gender") or ""),
+            "requiredHonorificKey":str(e.get("required_honorific_key") or ""),
+            "origin":str(e.get("origin") or ""),
+            "sourceIds":list(e.get("sourceIds") or []),
+        })
+        if len(out)>=max(1,min(10,int(limit))):
+            break
+    return out
+
+def detect_unresolved_islamic_terms(text:str,limit:int=12):
+    tokens=re.findall(r"[^\s,.;:!?؟،؛()\[\]{}«»\"“”„]+",str(text or ""))
+    if not tokens:
+        return []
+    out=[];seen=set()
+    i=0
+    while i<len(tokens):
+        token=tokens[i]
+        distinctive=bool(ISLAMIC_DISTINCTIVE_RE.search(token) or ISLAMIC_NAME_PART_RE.search(token))
+        if not distinctive:
+            i+=1
+            continue
+        end=min(len(tokens),i+5)
+        candidates=[]
+        for j in range(i+1,end+1):
+            phrase=" ".join(tokens[i:j]).strip()
+            if phrase:
+                candidates.append(phrase)
+        chosen=None
+        for phrase in reversed(candidates):
+            norm=normalize_lookup(phrase)
+            if norm in MASTER_ALIAS_INDEX:
+                chosen=None
+                break
+            # Wenn ein längerer Kandidat nur normale Folgewörter enthält, lieber
+            # den kürzesten markanten Namen/Begriff melden.
+            suggestions=master_suggestions(phrase,3)
+            if suggestions and suggestions[0]["score"]>=0.78:
+                chosen=(phrase,suggestions)
+                break
+        if chosen is None:
+            norm=normalize_lookup(token)
+            if norm not in MASTER_ALIAS_INDEX:
+                chosen=(token,master_suggestions(token,3))
+        if chosen:
+            phrase,suggestions=chosen
+            norm=normalize_lookup(phrase)
+            if norm and norm not in seen:
+                seen.add(norm)
+                out.append({
+                    "term":phrase,
+                    "normalized":norm,
+                    "reason":"unknown-islamic-shaped-token",
+                    "suggestions":suggestions,
+                })
+                if len(out)>=max(1,min(25,int(limit))):
+                    break
+        i+=1
+    return out
+
 def online_sync_is_stale(max_age_hours:int=24):
     try:
-        if not ONLINE_LIBRARY_CACHE.exists():
+        if not ONLINE_LIBRARY_CACHE.exists() or not MASTER_LIBRARY_CACHE.exists():
             return True
-        age=time.time()-ONLINE_LIBRARY_CACHE.stat().st_mtime
+        age=min(
+            time.time()-ONLINE_LIBRARY_CACHE.stat().st_mtime,
+            time.time()-MASTER_LIBRARY_CACHE.stat().st_mtime,
+        )
         return age>max(1,int(max_age_hours))*3600
     except Exception:
         return True
