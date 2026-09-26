@@ -2254,9 +2254,9 @@ button,input,select{font:inherit}
 }
 
 </style>
-<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=251">
+<link rel="stylesheet" href="/desktop-preview/desktop-overhaul.css?v=260">
 </head>
-<body>
+<body class="desktop-overhaul-v18">
 <header class="site-header">
  <div class="header-inner">
   <a class="brand desktop-link" href="/?page=start" data-page="start">
@@ -2287,31 +2287,31 @@ button,input,select{font:inherit}
  </div>
 </section>
 
-<section class="top-tools-cluster" aria-label="Qurʾān-Player und Gebetszeiten">
+<section class="top-tools-cluster top-tools-v26" aria-label="Qurʾān-Player und Gebetszeiten">
  <div class="top-tool-card top-tool-player">
-  <div class="player-wrap">
-   <section id="quranAudioPlayer" class="quran-player qa-player-v20" aria-label="Qurʾān-Player">
-    <div class="player-main-row">
-     <button id="qaPrev" class="player-prev" type="button" aria-label="Vorherige Āyah">‹</button>
-     <button id="qaPlay" class="player-play" type="button" aria-label="Wiedergabe">▶</button>
-     <div class="player-now">
-      <div class="player-kicker">Qurʾān hören</div>
-      <div id="qaTitle" class="player-title">al-Fātiḥah · Āyah 1</div>
-      <div class="player-progress"><i id="qaProgress"></i></div>
+  <div class="qa26-wrap">
+   <section id="quranAudioPlayer" class="qa26-player" aria-label="Qurʾān-Player">
+    <div class="qa26-main">
+     <button id="qaPrev" class="qa26-nav qa26-prev" type="button" aria-label="Vorherige Āyah">‹</button>
+     <button id="qaPlay" class="qa26-play" type="button" aria-label="Wiedergabe">▶</button>
+     <div class="qa26-now">
+      <div class="qa26-kicker">Qurʾān hören</div>
+      <div id="qaTitle" class="qa26-title">al-Fātiḥah · Āyah 1</div>
+      <div class="qa26-progress"><i id="qaProgress"></i></div>
      </div>
-     <button id="qaNext" class="player-step" type="button" aria-label="Nächste Āyah">›</button>
+     <button id="qaNext" class="qa26-nav qa26-next" type="button" aria-label="Nächste Āyah">›</button>
     </div>
-    <div class="player-controls-row" aria-label="Qurʾān-Auswahl">
-     <div class="player-field player-surah"><label for="qaSurah">Sūrah</label><select id="qaSurah" aria-label="Sūrah auswählen"></select></div>
-     <div class="player-field player-ayah"><label for="qaAyah">Āyah</label><select id="qaAyah" aria-label="Āyah auswählen"></select></div>
-     <div class="player-field player-reciter reciter"><label for="qaReciter">Rezitator</label><select id="qaReciter" aria-label="Rezitator auswählen"></select></div>
+    <div class="qa26-controls" aria-label="Qurʾān-Auswahl">
+     <label class="qa26-field qa26-surah" for="qaSurah"><span>Sūrah</span><select id="qaSurah" aria-label="Sūrah auswählen"></select></label>
+     <label class="qa26-field qa26-ayah" for="qaAyah"><span>Āyah</span><select id="qaAyah" aria-label="Āyah auswählen"></select></label>
+     <label class="qa26-field qa26-reciter" for="qaReciter"><span>Rezitator</span><select id="qaReciter" aria-label="Rezitator auswählen"></select></label>
     </div>
    </section>
    <audio id="qaAudio" preload="metadata"></audio>
   </div>
  </div>
  <div class="top-tool-card top-tool-prayer">
-  <section id="prayerRiver" class="prayer-river prayer-dock-river" aria-label="Gebetszeiten">
+  <section id="prayerRiver" class="prayer-river prayer-dock-river prayer26" aria-label="Gebetszeiten">
    <div class="prayer-inner">
     <div class="prayer-current"><div class="prayer-label">Aktuelle Gebetszeit</div><b id="prCurrent">—</b><small id="prLocation">Standort noch nicht gewählt</small></div>
     <div class="prayer-next"><div class="prayer-label">Nächstes Gebet</div><b id="prNext">—</b><small id="prNextTime">—</small></div>
