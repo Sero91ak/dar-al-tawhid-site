@@ -22564,8 +22564,8 @@ function navigateToTabRootReplace(view,value=""){const from=readRoute();const to
 function rememberIlmReturnRoute(route=currentRoute,scroll=window.scrollY||0){try{if(route&&route.view&&route.view!=="ilm")sessionStorage.setItem("darIlmReturnRouteV1",JSON.stringify({route,scroll:Number(scroll)||0,at:Date.now()}))}catch(e){}}
 function getIlmReturnRoute(){try{const saved=JSON.parse(sessionStorage.getItem("darIlmReturnRouteV1")||"null");if(saved&&saved.route&&saved.route.view&&saved.route.view!=="ilm")return saved}catch(e){}return {route:{view:"home",value:""},scroll:0}}
 function exitIlmChat(){const saved=getIlmReturnRoute();const target=saved.route||{view:"home",value:""};const y=Number(saved.scroll)||0;window.__restoreScrollY=y;navigate(target.view,target.value||"",{skipPush:true,noAnim:true});requestAnimationFrame(()=>requestAnimationFrame(()=>{try{window.DARScrollManager?.stableScrollTo?.(y,{force:true})}catch(e){window.scrollTo({top:y,behavior:"auto"})}}))}
-function navigateBottomNavTab(tab,swipeDir){if(!tab)return;closeTransientNavOverlays();if(tab==="home"){if(isExactBottomTabRoot("home")){scrollTabRootToTop("home");return}if(bottomNavTabForRoute(currentRoute)==="home"&&currentRoute.view!=="home"){clearQuranReturnState();clearNavStack();window.__restoreScrollY=0;navigateToTabRootReplace("home","");return}hardGoHome();return}const root=bottomTabRootRoute(tab);if(!root)return;if(tab==="quran"&&typeof resetQuranOverviewToStart==="function")resetQuranOverviewToStart();if(bottomNavTabForRoute(currentRoute)===tab){if(tab==="quran"){navigateToTabRootReplace(root.view,root.value);return}if(isExactBottomTabRoot(tab)){scrollTabRootToTop(tab);return}navigateToTabRootReplace(root.view,root.value);return}const performanceMode=document.documentElement.classList.contains("dar-ios-native-app");if(!performanceMode){if(!swipeDir){const curIdx=bottomNavTabIndex(bottomNavTabForRoute(currentRoute));const nextIdx=bottomNavTabIndex(tab);if(nextIdx>curIdx)swipeDir="left";else if(nextIdx<curIdx)swipeDir="right"}if(swipeDir)window.__tabSwipeDir=swipeDir}else window.__tabSwipeDir=null;saveNavScroll(currentRoute);if(tab==="ilm")rememberIlmReturnRoute(currentRoute,window.scrollY||0);window.__restoreScrollY=getNavScroll(root);clearNavStack();navigate(root.view,root.value||"",{skipPush:true,noAnim:true})}
-function updateBottomNav(route){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const tab=btn.getAttribute("data-bottom-nav");const active=tab===bottomNavTabForRoute(route);btn.classList.toggle("active",active);if(active)btn.setAttribute("aria-current","page");else btn.removeAttribute("aria-current")});updateBottomNavPill();try{if(window.DarTabEngine)DarTabEngine.syncFromRoute(route);else{const activeBtn=document.querySelector("[data-bottom-nav].active");if(activeBtn)moveTabPlopPill(activeBtn)}}catch(e){}try{syncQuickAccessRail()}catch(e){}}
+function navigateBottomNavTab(tab,swipeDir){if(!tab)return;closeTransientNavOverlays();if(tab==="home"){if(isExactBottomTabRoot("home")){scrollTabRootToTop("home");return}if(bottomNavTabForRoute(currentRoute)==="home"&&currentRoute.view!=="home"){clearQuranReturnState();clearNavStack();window.__restoreScrollY=0;navigateToTabRootReplace("home","");return}hardGoHome();return}const root=bottomTabRootRoute(tab);if(!root)return;if(tab==="quran"&&typeof resetQuranOverviewToStart==="function")resetQuranOverviewToStart();if(bottomNavTabForRoute(currentRoute)===tab){if(tab==="quran"){navigateToTabRootReplace(root.view,root.value);return}if(isExactBottomTabRoot(tab)){scrollTabRootToTop(tab);return}navigateToTabRootReplace(root.view,root.value);return}window.__tabSwipeDir=null;saveNavScroll(currentRoute);if(tab==="ilm")rememberIlmReturnRoute(currentRoute,window.scrollY||0);window.__restoreScrollY=getNavScroll(root);clearNavStack();navigate(root.view,root.value||"",{skipPush:true,noAnim:true})}
+function updateBottomNav(route){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{const tab=btn.getAttribute("data-bottom-nav");const active=tab===bottomNavTabForRoute(route);btn.classList.toggle("active",active);if(active)btn.setAttribute("aria-current","page");else btn.removeAttribute("aria-current")});updateBottomNavPill();try{syncQuickAccessRail()}catch(e){}}
 let postNavLastY=0;
 function updatePostNavVisibility(){
   const nav=$("bottomNav");
@@ -22582,9 +22582,9 @@ function updatePostNavVisibility(){
   postNavLastY=y;
 }
 function updateBottomNavPill(){const metrics=bottomNavMetrics();const active=document.querySelector("[data-bottom-nav].active");if(!metrics.length||!active)return;const tab=active.getAttribute("data-bottom-nav");const m=metrics.find(x=>x.tab===tab);if(m)setBottomNavPill(m.left,m.width,false)}
-function ensureTabPlopPill(){const nav=$("bottomNav");if(!nav)return null;let pill=nav.querySelector(".dar-tab-plop-pill");if(!pill){pill=document.createElement("span");pill.className="dar-tab-plop-pill";pill.setAttribute("aria-hidden","true");nav.insertBefore(pill,nav.firstChild)}const lens=nav.querySelector(".dar-tab-loupe-lens");if(lens)lens.remove();return pill}
-function moveTabPlopPill(btn){try{if(window.DarTabEngine)DarTabEngine.syncPill()}catch(e){}}
-function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";const tab=btn.getAttribute("data-bottom-nav");if(tab==="more"){btn.classList.add("bottom-nav-more");bindNavLongPressTrigger(btn,"more")}else if(tab==="quran"){btn.classList.add("bottom-nav-quran");bindNavLongPressTrigger(btn,"quran")}btn.addEventListener("click",ev=>{if(window.__darTabLoupeHandled&&Date.now()-window.__darTabLoupeHandled<700){ev.preventDefault();ev.stopPropagation();return}if(tab==="more"||tab==="quran")return;const t=btn.getAttribute("data-bottom-nav");if(t)navigateBottomNavTab(t)})})}
+function ensureTabPlopPill(){const nav=$("bottomNav");if(!nav)return null;nav.querySelectorAll(".dar-tab-plop-pill,.dar-tab-loupe-lens").forEach(el=>el.remove());const peek=document.getElementById("darTabPeek");if(peek)peek.remove();document.documentElement.classList.remove("dar-tab-engine","dar-tab-engine-live");nav.classList.remove("is-tab-loupe","is-tab-loupe-settle","is-pill-dragging");nav.removeAttribute("data-tab-engine");const view=$("appView");if(view){view.style.transform="";view.style.transition="";view.style.opacity="";view.classList.remove("is-tab-swiping","tab-swipe-left","tab-swipe-right")}return null}
+function moveTabPlopPill(){}
+function bindBottomNav(){document.querySelectorAll("[data-bottom-nav]").forEach(btn=>{if(btn.dataset.bottomNavBound==="1")return;btn.dataset.bottomNavBound="1";const tab=btn.getAttribute("data-bottom-nav");if(tab==="more"){btn.classList.add("bottom-nav-more");bindNavLongPressTrigger(btn,"more")}else if(tab==="quran"){btn.classList.add("bottom-nav-quran");bindNavLongPressTrigger(btn,"quran")}btn.addEventListener("click",ev=>{if(tab==="more"||tab==="quran")return;const t=btn.getAttribute("data-bottom-nav");if(t)navigateBottomNavTab(t)})})}
 const navigateToPage=navigate;
 function renderPage(pageId,params={}){return navigate(pageId,params.value||"",params)}
 const saveScrollPosition=saveNavScroll;
@@ -22593,284 +22593,8 @@ const setActiveTab=updateBottomNav;
 function initAndroidTapCleanup(){const sel="button,a,[role=button]";document.addEventListener("pointerup",e=>{const target=e.target&&e.target.closest?e.target.closest("input,textarea,select,[contenteditable='true']"):null;if(target)return;const el=e.target&&e.target.closest?e.target.closest(sel):null;if(el&&typeof el.blur==="function"){try{el.blur()}catch(err){}}},true)}
 function bindFastAction(el,fn){if(!el||el.dataset.fastActionBound==="1")return;el.dataset.fastActionBound="1";let lastTouch=0;const run=(ev,fromPointer)=>{if(fromPointer&&ev.pointerType==="mouse")return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}fn(ev)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
 function bindNavActivation(el){if(!el||el.dataset.navActionBound==="1")return;el.dataset.navActionBound="1";let lastTouch=0;let swipeStart=null;const swipeGuard=el.classList.contains("home-v380-lib-card")||el.classList.contains("home-discover-pdf-card");const swipePdf=el.classList.contains("home-discover-pdf-card");if(swipeGuard){el.addEventListener("pointerdown",ev=>{swipeStart={x:ev.clientX,y:ev.clientY};el.dataset.navSwipeCancel="0"},{passive:true});el.addEventListener("pointermove",ev=>{if(!swipeStart)return;const dx=ev.clientX-swipeStart.x,dy=ev.clientY-swipeStart.y;if(swipePdf){if(Math.abs(dx)>10&&Math.abs(dx)>=Math.abs(dy))el.dataset.navSwipeCancel="1"}else if(Math.hypot(dx,dy)>12)el.dataset.navSwipeCancel="1"},{passive:true});el.addEventListener("pointercancel",()=>{swipeStart=null;el.dataset.navSwipeCancel="1"},{passive:true});el.addEventListener("pointerup",()=>{swipeStart=null},{passive:true})}const run=(ev,fromPointer)=>{if(swipeGuard&&el.dataset.navSwipeCancel==="1"){el.dataset.navSwipeCancel="0";swipeStart=null;if(ev.cancelable)ev.preventDefault();ev.stopPropagation();return}if(fromPointer&&ev.pointerType==="mouse")return;if(isEditableTarget(ev.target))return;if(ev.target.closest("[data-daily-push]"))return;if(el.disabled||el.hasAttribute("disabled"))return;if(ev.type==="click"&&Date.now()-lastTouch<520){ev.preventDefault();ev.stopPropagation();return}if(fromPointer)lastTouch=Date.now();const view=el.getAttribute("data-nav");const value=el.getAttribute("data-value")||"";if(!view)return;if(view==="appstore"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}openAppStore(value);return}if(view==="wasiyyah"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}location.href="/test/wasiyyah/";return}if(view==="widgets"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}navigate("more");return}if(view==="qibla"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}openQiblaQuickSheet();return}if(view==="hadith"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value);return}if(view==="quiz"){if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}const base=location.pathname.indexOf("/test/")===0?"/test/":"/";const slug=value?`#${view}/${encodeURIComponent(value)}`:`#${view}`;location.href=`${base}${slug}`;return}if(ev.cancelable)ev.preventDefault();ev.stopPropagation();try{el.blur&&el.blur()}catch(e){}window.__smoothNav=true;navigate(view,value)};el.addEventListener("pointerup",ev=>run(ev,true),{passive:false});el.addEventListener("click",ev=>run(ev,false))}
-function initBottomNavSwipe(){try{window.DarTabEngine.mount()}catch(e){}}
-function initBottomNavContentSwipe(){try{window.DarTabEngine.mount()}catch(e){}}
-window.DarTabEngine=(function(){
-  const reduce=()=>window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let bar=null,view=null,peek=null,pill=null;
-  let n=5,slotW=0,padL=8,viewW=0,barLeft=0,viewTop=0,viewH=0;
-  let position=0,committed=0,selected=0;
-  let dragging=false,source="",mode="",pointerId=null,axisLock="";
-  let velocity=0,lastX=0,lastT=0,startX=0,startY=0,startTab="",tapIndex=0;
-  let vx=0,raf=0,springing=false,lastHaptic=-1,captured=false;
-  const cache={};
-  function tabs(){return bar?[...bar.querySelectorAll("[data-bottom-nav]")]:[]}
-  function names(){return tabs().map(t=>t.getAttribute("data-bottom-nav"))}
-  function measure(){
-    if(!bar)return;
-    const els=tabs();
-    n=Math.max(1,els.length);
-    const br=bar.getBoundingClientRect();
-    barLeft=br.left;
-    if(els[0]){
-      const a=els[0].getBoundingClientRect();
-      padL=a.left-br.left;
-      slotW=a.width;
-    }else{
-      padL=8;slotW=Math.max(1,(br.width-16)/n);
-    }
-    if(view){
-      const vr=view.getBoundingClientRect();
-      viewW=vr.width||window.innerWidth||1;
-      viewTop=vr.top;
-      viewH=vr.height||window.innerHeight||1;
-    }else viewW=window.innerWidth||1;
-    bar.style.setProperty("--count",String(n));
-    if(pill) pill.style.width=Math.round(slotW)+"px";
-  }
-  function haptic(i){
-    if(i===lastHaptic)return;
-    lastHaptic=i;
-    try{if(typeof triggerLightHapticFeedback==="function")triggerLightHapticFeedback();else if(navigator.vibrate)navigator.vibrate(8)}catch(e){}
-  }
-  function paintPeek(on){
-    if(!peek)return;
-    if(!on){peek.hidden=true;peek.style.transform="";return}
-    peek.style.top=viewTop+"px";
-    peek.style.height=viewH+"px";
-    peek.style.width=viewW+"px";
-  }
-  function apply(p){
-    if(!bar)return;
-    const max=n-1;
-    let vis=p;
-    if(vis<0)vis=vis*0.18;
-    else if(vis>max)vis=max+(vis-max)*0.18;
-    bar.style.setProperty("--tab-progress",vis.toFixed(4));
-    if(pill) pill.style.transform="translate3d("+(padL+vis*slotW).toFixed(2)+"px,0,0)";
-    const els=tabs();
-    const live=dragging||springing;
-    const pressI=(dragging&&source==="bar")?tapIndex:-1;
-    els.forEach((el,i)=>{
-      const d=Math.abs(vis-i);
-      let s=1;
-      if(live&&d<1)s=1+0.04*(1-d);
-      if(i===pressI&&mode!=="")s=Math.max(s,1.045);
-      el.style.transform=s===1?"":"translate3d(0,0,0) scale("+s.toFixed(3)+")";
-      const on=Math.round(Math.max(0,Math.min(max,vis)))===i;
-      if(on){if(!el.classList.contains("active"))el.classList.add("active");el.setAttribute("aria-current","page")}
-      else{el.classList.remove("active");el.removeAttribute("aria-current")}
-    });
-    const delta=vis-committed;
-    const swipe=isSwipeable()&&Math.abs(delta)>=0.02&&live;
-    if(view){
-      if(live) document.documentElement.classList.add("dar-tab-engine-live");
-      else document.documentElement.classList.remove("dar-tab-engine-live");
-      view.style.transform=Math.abs(delta)<0.001?"":"translate3d("+((-delta*viewW).toFixed(2))+"px,0,0)";
-    }
-    if(peek){
-      if(!swipe){paintPeek(false);return}
-      const ni=delta>0?Math.min(max,committed+1):Math.max(0,committed-1);
-      fillPeek(ni);
-      const sign=delta>0?1:-1;
-      peek.hidden=false;
-      paintPeek(true);
-      peek.style.transform="translate3d("+((sign-delta)*viewW).toFixed(2)+"px,0,0)";
-    }
-  }
-  function isSwipeable(){
-    try{return typeof isBottomNavSwipeableRoute==="function"?isBottomNavSwipeableRoute(currentRoute):true}catch(e){return true}
-  }
-  function fillPeek(i){
-    const tab=names()[i];
-    if(!tab||peek.dataset.tab===tab)return;
-    const html=cache[tab];
-    peek.dataset.tab=tab||"";
-    if(!html){peek.innerHTML="";return}
-    peek.innerHTML=html;
-    peek.querySelectorAll("[id]").forEach(el=>el.removeAttribute("id"));
-    peek.querySelectorAll("script").forEach(el=>el.remove());
-  }
-  function remember(){
-    if(!view||dragging)return;
-    const tab=typeof bottomNavTabForRoute==="function"?bottomNavTabForRoute(currentRoute):"";
-    if(!tab)return;
-    try{cache[tab]=view.innerHTML}catch(e){}
-  }
-  function loop(){
-    raf=0;
-    if(dragging){
-      apply(position);
-      raf=requestAnimationFrame(loop);
-      return;
-    }
-    const target=selected;
-    if(reduce()){
-      position=target;vx=0;springing=false;apply(position);commit(target);return;
-    }
-    const force=(target-position)*0.18;
-    vx=(vx+force)*0.76;
-    position+=vx;
-    apply(position);
-    if(Math.abs(target-position)<0.002&&Math.abs(vx)<0.002){
-      position=target;vx=0;springing=false;apply(target);commit(target);return;
-    }
-    springing=true;
-    raf=requestAnimationFrame(loop);
-  }
-  function startLoop(){if(!raf)raf=requestAnimationFrame(loop)}
-  function commit(i){
-    const tab=names()[i];
-    if(!tab)return;
-    committed=i;selected=i;position=i;
-    lastHaptic=i;
-    if(view)view.style.transform="";
-    paintPeek(false);
-    tabs().forEach(el=>{el.style.transform=""});
-    document.documentElement.classList.remove("dar-tab-engine-live");
-    if(bar)bar.classList.remove("is-tab-loupe");
-    const cur=typeof bottomNavTabForRoute==="function"?bottomNavTabForRoute(currentRoute):"";
-    if(cur===tab){remember();return}
-    window.__darTabLoupeHandled=Date.now();
-    window.__darTabEngineCommit=Date.now();
-    try{navigateBottomNavTab(tab)}catch(e){}
-  }
-  function springTo(i,tabVel){
-    selected=Math.max(0,Math.min(n-1,i));
-    vx=typeof tabVel==="number"?tabVel:0;
-    springing=true;
-    startLoop();
-  }
-  function posFromX(clientX){
-    const local=clientX-barLeft-padL;
-    return local/Math.max(1,slotW)-0.5;
-  }
-  function clampPos(p){
-    return Math.max(-0.12,Math.min(n-1.12,p));
-  }
-  function releaseCapture(){
-    if(!captured||!bar||pointerId==null)return;
-    try{if(bar.hasPointerCapture(pointerId))bar.releasePointerCapture(pointerId)}catch(e){}
-    captured=false;
-  }
-  function onBarDown(e){
-    if(e.pointerType==="mouse"&&e.button!==0)return;
-    measure();
-    dragging=true;source="bar";mode="pending";pointerId=e.pointerId;axisLock="x";captured=false;
-    startX=e.clientX;startY=e.clientY;lastX=e.clientX;lastT=performance.now();velocity=0;
-    const btn=e.target&&e.target.closest&&e.target.closest("[data-bottom-nav]");
-    startTab=btn?btn.getAttribute("data-bottom-nav"):"";
-    const raw=posFromX(e.clientX);
-    tapIndex=btn?Math.max(0,names().indexOf(startTab)):Math.round(Math.max(0,Math.min(n-1,raw)));
-    if(tapIndex<0)tapIndex=Math.round(Math.max(0,Math.min(n-1,raw)));
-    position=committed;
-    window.__darTabLoupeHandled=Date.now();
-    if(bar)bar.classList.add("is-tab-loupe");
-    startLoop();
-  }
-  function onMove(e){
-    if(!dragging||e.pointerId!==pointerId)return;
-    const now=performance.now();
-    const dt=Math.max(now-lastT,1);
-    if(source==="content"&&!axisLock){
-      const dx=e.clientX-startX,dy=e.clientY-startY;
-      if(Math.abs(dx)<10&&Math.abs(dy)<10)return;
-      axisLock=Math.abs(dx)>Math.abs(dy)?"x":"y";
-      if(axisLock==="y"){dragging=false;pointerId=null;apply(committed);return}
-    }
-    if(source==="bar"&&mode==="pending"){
-      if(Math.hypot(e.clientX-startX,e.clientY-startY)<8)return;
-      mode="drag";
-      try{bar.setPointerCapture(e.pointerId);captured=true}catch(err){}
-    }
-    if(source==="content"&&axisLock!=="x")return;
-    if(e.cancelable)e.preventDefault();
-    velocity=(e.clientX-lastX)/dt;
-    lastX=e.clientX;lastT=now;
-    if(source==="bar") position=clampPos(posFromX(e.clientX));
-    else position=clampPos(committed-(e.clientX-startX)/Math.max(1,viewW));
-    const idx=Math.round(Math.max(0,Math.min(n-1,position)));
-    if(idx!==selected){selected=idx;haptic(idx)}
-  }
-  function onUp(e){
-    if(!dragging||(pointerId!=null&&e.pointerId!==pointerId))return;
-    const moved=Math.hypot(e.clientX-startX,e.clientY-startY)>8;
-    const wasPending=mode==="pending";
-    const src=source;
-    releaseCapture();
-    dragging=false;pointerId=null;axisLock="";mode="";
-    const special=!moved&&(startTab==="more"||startTab==="quran")&&src==="bar";
-    if(special){
-      springing=false;vx=0;position=committed;selected=committed;apply(committed);
-      if(bar)bar.classList.remove("is-tab-loupe");
-      document.documentElement.classList.remove("dar-tab-engine-live");
-      return;
-    }
-    let target,tabVel=0;
-    if(src==="content"&&!moved){
-      target=committed;
-    }else if(wasPending){
-      target=tapIndex;
-    }else if(src==="bar"){
-      tabVel=velocity*16/Math.max(1,slotW);
-      target=Math.round(position+velocity*180/Math.max(1,slotW));
-    }else{
-      tabVel=-velocity*16/Math.max(1,viewW);
-      target=Math.round(position-velocity*220/Math.max(1,viewW));
-    }
-    target=Math.max(0,Math.min(n-1,target));
-    selected=target;
-    springTo(target,tabVel);
-  }
-  function onContentDown(e){
-    if(!isSwipeable())return;
-    if(e.pointerType==="mouse"&&e.button!==0)return;
-    if(e.target&&e.target.closest&&e.target.closest("#bottomNav,input,textarea,select,a,button,[contenteditable='true']"))return;
-    measure();
-    remember();
-    dragging=true;source="content";mode="drag";pointerId=e.pointerId;axisLock="";
-    startX=e.clientX;startY=e.clientY;lastX=e.clientX;lastT=performance.now();velocity=0;
-    startLoop();
-  }
-  function mount(){
-    bar=$("bottomNav");view=$("appView");
-    if(!bar||bar.dataset.tabEngine==="1")return;
-    bar.dataset.tabEngine="1";
-    document.documentElement.classList.add("dar-tab-engine");
-    pill=ensureTabPlopPill();
-    if(view&&!document.getElementById("darTabPeek")){
-      peek=document.createElement("div");
-      peek.id="darTabPeek";
-      peek.hidden=true;
-      peek.setAttribute("aria-hidden","true");
-      view.insertAdjacentElement("afterend",peek);
-    }else peek=document.getElementById("darTabPeek");
-    measure();
-    const cur=typeof bottomNavTabForRoute==="function"?bottomNavTabForRoute(currentRoute):"home";
-    const i=Math.max(0,names().indexOf(cur));
-    position=committed=selected=i<0?0:i;
-    apply(position);
-    remember();
-    bar.addEventListener("pointerdown",onBarDown,{passive:true});
-    window.addEventListener("pointermove",onMove,{passive:false});
-    window.addEventListener("pointerup",onUp,{passive:true});
-    window.addEventListener("pointercancel",onUp,{passive:true});
-    if(view) view.addEventListener("pointerdown",onContentDown,{passive:true});
-    window.addEventListener("resize",()=>{measure();if(!dragging)apply(position)},{passive:true});
-  }
-  function syncFromRoute(route){
-    if(dragging||springing)return;
-    remember();
-    const tab=typeof bottomNavTabForRoute==="function"?bottomNavTabForRoute(route||currentRoute):"";
-    const i=names().indexOf(tab);
-    if(i<0)return;
-    committed=selected=position=i;
-    measure();
-    apply(i);
-  }
-  function syncPill(){if(!dragging&&!springing){measure();apply(position)}}
-  return {mount,syncFromRoute,syncPill,remember};
-})();
+function initBottomNavSwipe(){try{ensureTabPlopPill()}catch(e){}const nav=$("bottomNav");if(!nav||nav.dataset.kidsPopBound==="1")return;nav.dataset.kidsPopBound="1";nav.addEventListener("pointerdown",ev=>{const btn=ev.target&&ev.target.closest&&ev.target.closest("[data-bottom-nav]");if(!btn)return;if(ev.pointerType==="mouse"&&ev.button!==0)return;btn.classList.remove("kid-pop");void btn.offsetWidth;btn.classList.add("kid-pop")},true)}
+function initBottomNavContentSwipe(){try{ensureTabPlopPill()}catch(e){}try{resetTabSwipePreview()}catch(e){}}
 function setHeader(title,desc,eyebrow="DĀR AL TAWḤĪD",headClass=""){const isHome=title==="Startseite";const hijriFrame=isHome?`<button id="homeHijriDayBtn" class="home-hijri-dayframe dar-click-glow" type="button" data-hijri-today data-nav="calendar" aria-label="Kalender öffnen"><span class="home-hijri-ico" aria-hidden="true">📅</span><span data-hijri-date-text>—</span></button>`:"";const homeRow=isHome?`<div class="view-head-home-row view-head-home-row--v380 view-head-home-row--v475"><div class="view-head-home-leading"><h2 class="home-start-title">${esc(title)}</h2>${renderHomeRefreshButton()}</div><div class="view-head-home-hijri-end">${hijriFrame}</div><span id="homeRefreshLive" class="home-refresh-live-header" aria-live="polite"></span></div><div class="home-start-rule" aria-hidden="true"></div><div class="view-head-home-chips" data-home-header-chips><span class="home-account-slot" data-home-account-slot></span></div>`:`<h2>${esc(title)}</h2>`;const eyebrowHtml=isHome||!eyebrow?"":`<div class="eyebrow">${esc(eyebrow)}</div>`;return`<div class="view-head${headClass?` ${headClass}`:""}${isHome?" view-head-home view-head-home--v380":""}">${eyebrowHtml}${homeRow}${desc?`<div class="view-desc">${esc(desc)}</div>`:""}</div>`}
 function findQuote(post){const lines=stripMd(post.statement).split(/\n+/).map(x=>x.trim()).filter(Boolean);return lines.find(x=>x.includes("„"))||lines[0]||""}
 function postCard(post){const cat=normalizePostCategory(post.category||"");const meta=[cat,post.scholar].filter(Boolean);return`<article class="post-row dua-row" data-nav="post" data-value="${esc(post.id)}"><div class="post-row__icon dua-row__icon" aria-hidden="true"><span class="emoji-emblem">${postItemGlyph(post)}</span></div><div class="post-row__body dua-row__body"><h3>${esc(post.title)}</h3><p class="post-row__sub dua-row__sub">${esc(findQuote(post))}</p>${meta.length?`<div class="post-row__meta dua-row__meta">${meta.map(m=>`<span>${esc(m)}</span>`).join("")}</div>`:""}</div></article>`}
@@ -35506,51 +35230,23 @@ html.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn::before{
 }
 </style>
 
-<style id="dar-tab-engine-v1038">
-html.dar-tab-engine #bottomNav.bottom-nav{overflow:visible!important;touch-action:manipulation;isolation:isolate}
-html.dar-tab-engine #bottomNav.is-tab-loupe{touch-action:none}
-html.dar-tab-engine #bottomNav.bottom-nav .dar-tab-plop-pill{
-  position:absolute;top:6px;bottom:6px;left:0;z-index:1;pointer-events:none;
-  width:64px;border-radius:999px;
-  background:linear-gradient(145deg,rgba(226,189,114,.26),rgba(115,201,193,.12));
-  box-shadow:inset 0 1px rgba(255,255,255,.12);
-  transform:translate3d(0,0,0);
-  will-change:transform;
-  transition:none;
+<style id="dar-tab-kids-pop-v1039">
+html #bottomNav .dar-tab-plop-pill,
+html #bottomNav .dar-tab-loupe-lens,
+#darTabPeek{display:none!important}
+html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{
+  animation:darKidTabLift .32s cubic-bezier(.2,.8,.2,1);
 }
-html.dar-tab-engine #bottomNav.bottom-nav .dar-tab-loupe-lens{display:none!important}
-html.dar-tab-engine #bottomNav.bottom-nav .bottom-nav-btn,
-html.dar-tab-engine.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn{
-  position:relative;z-index:2;
-  background:transparent!important;
-  transform-origin:50% 78%;
-  transition:none;
-}
-html.dar-tab-engine #bottomNav.bottom-nav .bottom-nav-btn.active,
-html.dar-tab-engine #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
-html.dar-tab-engine #bottomNav.bottom-nav .bottom-nav-btn:active,
-html.dar-tab-engine.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.active,
-html.dar-tab-engine.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
-html.dar-tab-engine.dar-ios-native-app #bottomNav.bottom-nav .bottom-nav-btn:active{
-  background:transparent!important;box-shadow:none!important;
-}
-html.dar-tab-engine #bottomNav .bottom-nav-btn .nav-icon,
-html.dar-tab-engine #bottomNav .bottom-nav-btn img.dar3d-icon{
-  position:relative;z-index:3;
-  mix-blend-mode:normal;
-}
-html.dar-tab-engine-live,html.dar-tab-engine-live body{overflow-x:hidden}
-html.dar-tab-engine #appView.view{will-change:auto}
-html.dar-tab-engine-live #appView.view{will-change:transform;touch-action:pan-y}
-html.dar-tab-engine #darTabPeek{
-  position:fixed;left:0;right:0;top:0;z-index:4;
-  overflow:hidden;pointer-events:none;background:transparent;
-  will-change:transform;
+@keyframes darKidTabLift{
+  0%{transform:none}
+  40%{transform:translateY(-4px) scale(1.05)}
+  100%{transform:none}
 }
 @media (prefers-reduced-motion:reduce){
-  html.dar-tab-engine #bottomNav .dar-tab-plop-pill{transition:none!important}
+  html #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{animation:none}
 }
 </style>
+
 
 
 </html>

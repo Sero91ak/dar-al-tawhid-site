@@ -123,6 +123,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tab-kids-click-2026-09-26",
+      "approvedBy": "user-explicit-lupe-raus-kids-klick-schnellzugriff-behalten",
+      "reason": "Nutzer: Lupen/Drag-Effekt komplett raus, normale smooth Klick-Funktion 1:1 wie Test Kids. Schnellzugriffe der Tableiste nicht beschaedigen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tab-progress-engine-2026-09-26",
       "approvedBy": "user-explicit-interactive-progress-engine-design-freeze",
       "reason": "Nutzer: eine progress-Engine fuer Tap/Press-Drag/Content-Swipe/Spring ohne Design-Aenderung der 3D-Tabs. Kids unveraendert.",
