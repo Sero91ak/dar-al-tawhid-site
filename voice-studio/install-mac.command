@@ -63,8 +63,8 @@ resolve_release_ref() {
     -H "User-Agent: DAR-Voice-Studio-Installer" \
     "$RELEASE_MANIFEST_URL" -o "$manifest"
   PIN="$(/usr/bin/plutil -extract releaseRef raw -o - "$manifest" 2>/dev/null || true)"
-  if [ -z "$PIN" ]; then
-    echo "FEHLER: Validierte Release-Referenz fehlt."
+  if [[ ! "$PIN" =~ ^[0-9a-fA-F]{40}$ ]]; then
+    echo "FEHLER: Ungültige oder fehlende validierte Release-Referenz."
     exit 1
   fi
   echo "Installiere validierten Voice-Studio-Release: $PIN"
