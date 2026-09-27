@@ -2446,6 +2446,22 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div class="kids-wordmark">
           <span class="wm-dar">DĀR AL TAWḤĪD</span>
+          <div class="wm-dar-wrap">
+            <svg class="wm-dar-svg" viewBox="0 0 560 108" aria-hidden="true">
+              <defs>
+                <linearGradient id="wmGoldFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#fff8e0"></stop>
+                  <stop offset=".42" stop-color="#f4d48a"></stop>
+                  <stop offset="1" stop-color="#c8923e"></stop>
+                </linearGradient>
+              </defs>
+              <path id="wmArc" d="M18 86 C 150 10, 410 10, 542 86" fill="none"></path>
+              <text fill="url(#wmGoldFill)" stroke="rgba(255,255,255,.62)" stroke-width="2.4" paint-order="stroke fill" font-size="46" font-family="Fredoka, system-ui, sans-serif" font-weight="700" letter-spacing="1.8">
+                <textPath href="#wmArc" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath>
+              </text>
+            </svg>
+            <span class="wm-dar-fx" aria-hidden="true"></span>
+          </div>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
         </div>
         <div class="cloud"></div>
@@ -2913,7 +2929,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab49";
+const KIDS_BUILD_ID="kids-shell-v12-tab50";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6379,35 +6395,52 @@ fetchCatalog();
   padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;
 }
 </style>
-<style id="kids-wordmark-solid-center-v1">
-.wm-dar-svg,.kids-sky,.sky-rays,.sky-stars,.sky-rain,.dev-ribbon{
-  display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;
-}
-#view-today .hero::after,
-.hero::after{
-  background:linear-gradient(180deg,transparent 0 62%,rgba(8,28,42,.5) 100%)!important;
-  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important;
-}
-#view-today .hero::before,.hero::before{
-  filter:none!important;-webkit-filter:none!important;
-}
+<style id="kids-wordmark-sky-curve-v33">
 #view-today .kids-wordmark,.kids-wordmark{
-  position:absolute!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important;
-  transform:translate(-50%,-50%)!important;margin:0!important;width:min(94%,520px)!important;
-  z-index:7!important;filter:none!important;text-align:center!important;pointer-events:none!important;
-  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;
+  position:absolute!important;
+  left:50%!important;top:max(6px, env(safe-area-inset-top, 0px))!important;
+  right:auto!important;bottom:auto!important;
+  transform:translateX(-50%)!important;
+  margin:0!important;width:min(96vw,680px)!important;
+  z-index:7!important;text-align:center!important;pointer-events:none!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;gap:0!important;
 }
-#view-today .wm-dar,.wm-dar{
-  display:block!important;margin:0 auto 2px!important;color:#fff8e0!important;
-  font-family:"Fredoka",system-ui,sans-serif!important;font-weight:800!important;
-  font-size:clamp(20px,5.6vw,28px)!important;letter-spacing:.12em!important;line-height:1.2!important;
-  text-align:center!important;text-transform:uppercase!important;
-  text-shadow:0 2px 0 rgba(0,0,0,.35),0 6px 16px rgba(0,0,0,.55)!important;
-  filter:none!important;animation:none!important;
+#view-today .wm-dar,.wm-dar{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+#view-today .wm-dar-wrap{
+  position:relative;width:100%;overflow:visible;
+}
+#view-today .wm-dar-svg,.wm-dar-svg{
+  display:block!important;opacity:1!important;visibility:visible!important;
+  width:100%!important;height:clamp(88px,26vw,136px)!important;
+  overflow:visible!important;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.42)) drop-shadow(0 12px 22px rgba(8,24,36,.38));
+  animation:darFloat 4.2s ease-in-out infinite;
+}
+@keyframes darFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-7px) scale(1.02)}
+}
+#view-today .wm-dar-fx{
+  position:absolute;inset:-12% -8%;pointer-events:none;border-radius:40%;
+  background:linear-gradient(115deg,transparent 28%,rgba(255,255,255,.78) 50%,transparent 72%);
+  background-size:220% 100%;
+  mix-blend-mode:soft-light;
+  animation:darShine 3.5s ease-in-out infinite;
+}
+@keyframes darShine{
+  0%{background-position:-90% 0;opacity:.2}
+  45%{opacity:1}
+  100%{background-position:190% 0;opacity:.15}
 }
 #view-today .wm-kids,.wm-kids{
-  display:flex!important;justify-content:center!important;align-items:center!important;
-  margin:0 auto!important;filter:none!important;
+  display:flex!important;justify-content:center!important;align-items:flex-end!important;
+  margin:-8px auto 0!important;font-size:clamp(34px,10.8vw,56px)!important;
+}
+#view-today .hero::before,.hero::before{
+  background-position:center 54%!important;
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .wm-dar-svg,#view-today .wm-dar-fx,#view-today .wm-kids span{animation:none!important}
 }
 </style>
 
