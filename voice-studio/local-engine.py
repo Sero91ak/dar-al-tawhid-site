@@ -1921,9 +1921,26 @@ def detect_prosody_mode(text:str):
             return mode
 
     word_count=len(re.findall(r"\S+",value))
-    # Ein normaler Satz mit Relativ-/Infinitivkomma und "und" ist keine Liste.
-    # Der frühere Shortcut erzeugte unnötig abgehackte Listen-Prosodie.
-    if value.count(",")>=3 or value.count(";")>=2 or ":" in value:
+    # Fließender Erzähltext darf niemals allein wegen Kommas oder eines Doppelpunkts
+    # in Listen-Prosodie kippen. Genau das zerlegte Kinder-Geschichten hörbar in
+    # einzelne Ansagen. Auto-"list" ist deshalb bewusst konservativ und greift nur
+    # bei echter Listenstruktur oder einer kompakten Aufzählung nach Doppelpunkt.
+    lines=[line.strip() for line in re.split(r"[\r\n]+",value) if line.strip()]
+    structured_list=sum(
+        1 for line in lines
+        if re.match(r"^(?:[-•–—]|\d+[.)])\s+\S",line)
+    )>=2
+    semicolon_list=(value.count(";")>=2 and word_count<=60)
+    colon_enum=False
+    if ":" in value:
+        tail=value.split(":",1)[1].strip()
+        tail_words=len(re.findall(r"\S+",tail))
+        colon_enum=(
+            tail.count(",")>=2
+            and tail_words<=32
+            and len(re.findall(r"[.!?؟…]",tail.rstrip(".!?؟…"))) == 0
+        )
+    if structured_list or semicolon_list or colon_enum:
         return "list"
 
     teaching=CONTEXT_CONFIG.get("teaching") or ["bedeutet","lernen wir","erklärt","grundlage","pflicht","wir beten","wir finden","liest","bereiten wir uns","folgen"]
