@@ -255,6 +255,34 @@ async function approveCurrent(){
     busy=false;
   }
 }
+async function installArabicReferenceFile(file){
+  if(busy||!file)return;
+  if(Number(file.size||0)>32*1024*1024){setMsg("Arabische Master-Aufnahme ist größer als 32 MB.","bad");return}
+  busy=true;
+  const btn=q("alphabetPackReferenceBtn"),old=btn?.textContent;
+  if(btn){btn.disabled=true;btn.textContent="Master wird geprüft …"}
+  try{
+    const dataUrl=await blobToDataUrl(file);
+    const r=await localRequest("/arabic-reference",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({filename:String(file.name||"Serhat_AR_MASTER"),dataUrl})
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||d?.ok===false)throw Error(d?.error||("HTTP "+r.status));
+    const ready=await refreshArabicReferenceState({quiet:true});
+    if(!ready)throw Error("Die Datei wurde verarbeitet, aber nicht als eigene arabische Master-Referenz erkannt.");
+    currentRenderReferenceReady=false;
+    const sec=Number(d?.durationSeconds||0);
+    setMsg("Arabische Master-Referenz bereit"+(sec?" · "+sec.toFixed(1)+" s":"")+". Jetzt kann der erste Alif-Bāʾ-Clip streng erzeugt werden.","good");
+  }catch(e){
+    setMsg(e?.message||String(e),"bad");
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent=old||"Arabische Master-Aufnahme laden"}
+    busy=false;
+  }
+}
+
 async function retryCurrent(){
   if(busy||!current)return;
   currentRenderReferenceReady=false;
@@ -269,6 +297,12 @@ async function retryCurrent(){
 q("alphabetPackNextBtn")?.addEventListener("click",startNext);
 q("alphabetPackApproveBtn")?.addEventListener("click",approveCurrent);
 q("alphabetPackRetryBtn")?.addEventListener("click",retryCurrent);
+q("alphabetPackReferenceBtn")?.addEventListener("click",()=>q("alphabetPackReferenceFile")?.click());
+q("alphabetPackReferenceFile")?.addEventListener("change",function(){
+  const file=this.files&&this.files[0];
+  this.value="";
+  if(file)installArabicReferenceFile(file);
+});
 Promise.all([loadManifest(),refreshArabicReferenceState({quiet:true})]).then(()=>{
   current=nextPending();
   renderCurrent();
