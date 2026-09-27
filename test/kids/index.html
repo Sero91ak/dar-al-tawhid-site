@@ -1375,7 +1375,7 @@ html,body{
 html::-webkit-scrollbar,body::-webkit-scrollbar,
 .shell::-webkit-scrollbar,.modal-shell::-webkit-scrollbar,.ayah-stage::-webkit-scrollbar,
 .dua-stage::-webkit-scrollbar,.knowledge-stage::-webkit-scrollbar,.quiz-stage::-webkit-scrollbar,
-.picker-panel::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
+.picker-panel::-webkit-scrollbar,.ab-body::-webkit-scrollbar,.ab-stage::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
 body{position:fixed!important;inset:0!important;touch-action:manipulation}
 .app{height:100dvh!important;min-height:100dvh!important;overflow:hidden!important}
 .shell{
@@ -2277,59 +2277,73 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 #view-quran .quran-hero{min-height:168px!important;border:0!important;border-radius:26px!important}
 
 
-/* KIDS_ARABIC_ALPHABET_V2 — eigene Vollseite wie Quiz / Qurʾān */
-#alphabetModal .modal-shell{display:flex;flex-direction:column;min-height:0}
+
+/* KIDS_NO_VISIBLE_SCROLLBAR_V1 */
+.app,.app *,.modal,.modal *{
+  scrollbar-width:none!important;-ms-overflow-style:none!important
+}
+.app *::-webkit-scrollbar,.modal *::-webkit-scrollbar,.ab-body::-webkit-scrollbar{
+  display:none!important;width:0!important;height:0!important
+}
+
+/* KIDS_ARABIC_ALPHABET_V3 — ein Schritt, eine Fläche, altersgerecht */
+#alphabetModal .modal-shell{display:flex;flex-direction:column;min-height:0;overflow:hidden!important}
 #alphabetModal .ab-body{
-  flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;
-  padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))
+  flex:1 1 auto;min-height:0;overflow:hidden!important;display:flex;flex-direction:column
 }
+#alphabetModal .ab-stage{
+  flex:1 1 auto;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden!important;padding:4px 4px 8px
+}
+#alphabetModal .ab-pane{display:none;width:100%;text-align:center}
+#alphabetModal .ab-pane.on{display:block}
 #alphabetModal .ab-pic{
-  width:100%;height:min(38vh,280px);border-radius:24px;object-fit:cover;display:block;background:#071522
+  width:100%;max-height:min(34vh,240px);height:min(34vh,240px);border-radius:26px;object-fit:cover;background:#071522
 }
-.app[data-age="4–5"] #alphabetModal .ab-pic{height:min(42vh,300px)}
+.app[data-age="4–5"] #alphabetModal .ab-pic{max-height:min(40vh,280px);height:min(40vh,280px)}
+.app[data-age="9–10"] #alphabetModal .ab-pic{max-height:min(24vh,180px);height:min(24vh,180px)}
 #alphabetModal .ab-letter{
-  font-family:"Noto Naskh Arabic","Amiri",serif;font-size:clamp(72px,22vw,108px);
-  line-height:1.05;margin:8px 0 0;color:#fff8e6;text-align:center
+  font-family:"Noto Naskh Arabic","Amiri",serif;font-size:clamp(64px,20vw,96px);
+  line-height:1;margin:10px 0 0;color:#fff8e6
 }
-#alphabetModal .ab-name{text-align:center;margin:4px 0 0;font-size:15px;font-weight:800;color:#e2bd72}
-#alphabetModal .ab-laut{text-align:center;margin:2px 0 0;font-size:13px;color:rgba(255,255,255,.78)}
-#alphabetModal .ab-word{
-  margin:12px 0 0;text-align:center;font-size:16px;font-weight:700
+.app[data-age="4–5"] #alphabetModal .ab-letter{font-size:clamp(84px,26vw,120px)}
+#alphabetModal .ab-name{margin:6px 0 0;font-size:18px;font-weight:800;color:#e2bd72;font-family:Fredoka,system-ui,sans-serif}
+.app[data-age="4–5"] #alphabetModal .ab-name{font-size:22px}
+#alphabetModal .ab-hint{margin:8px 16px 0;font-size:15px;line-height:1.4;color:rgba(255,255,255,.88);font-family:Fredoka,system-ui,sans-serif}
+.app[data-age="4–5"] #alphabetModal .ab-hint{font-size:18px}
+#alphabetModal .ab-word-de{margin:8px 0 0;font-size:22px;font-weight:800;font-family:Fredoka,system-ui,sans-serif}
+.app[data-age="4–5"] #alphabetModal .ab-word-de{font-size:28px}
+#alphabetModal .ab-word-ar{
+  font-family:"Noto Naskh Arabic","Amiri",serif;font-size:clamp(36px,10vw,52px);margin:6px 0 0;color:#fff8e6
 }
-#alphabetModal .ab-word b{
-  display:block;font-family:"Noto Naskh Arabic","Amiri",serif;font-size:clamp(28px,8vw,40px);margin-top:4px
-}
-#alphabetModal .ab-explain{margin:12px 8px 0;font-size:14px;line-height:1.5;color:rgba(255,255,255,.9);text-align:center}
-.app[data-age="4–5"] #alphabetModal .ab-explain{font-size:16px}
-#alphabetModal .ab-harakat{display:flex;gap:8px;margin:14px 0 0;justify-content:center;flex-wrap:wrap}
+#alphabetModal .ab-harakat{display:flex;gap:10px;margin:16px 0 0;justify-content:center;flex-wrap:wrap}
 #alphabetModal .ab-h{
-  min-height:64px;min-width:72px;padding:6px 10px;border:0;border-radius:18px;cursor:pointer;
-  background:rgba(226,189,114,.14);color:#fff3cf;display:grid;place-items:center;gap:2px
+  min-height:78px;min-width:86px;padding:8px 12px;border:0;border-radius:22px;cursor:pointer;
+  background:rgba(226,189,114,.16);color:#fff3cf;display:grid;place-items:center;gap:4px
 }
-#alphabetModal .ab-h b{font-family:"Noto Naskh Arabic",serif;font-size:26px;font-weight:700;display:block}
-#alphabetModal .ab-h small{font-size:11px;color:rgba(255,255,255,.75);font-weight:800}
-.app[data-age="4–5"] #alphabetModal .ab-h:nth-child(n+2){display:none}
+.app[data-age="4–5"] #alphabetModal .ab-h{min-height:96px;min-width:120px;border-radius:26px}
+#alphabetModal .ab-h b{font-family:"Noto Naskh Arabic",serif;font-size:32px;font-weight:700;display:block}
+.app[data-age="4–5"] #alphabetModal .ab-h b{font-size:40px}
+#alphabetModal .ab-h small{font-size:13px;color:rgba(255,255,255,.8);font-weight:800;font-family:Fredoka,system-ui,sans-serif}
 #alphabetModal .ab-forms{display:flex;gap:8px;margin:12px 0 0;flex-wrap:wrap;justify-content:center}
-#alphabetModal .ab-forms span{background:rgba(255,255,255,.06);border-radius:14px;padding:8px 10px;font-size:11px;color:rgba(255,255,255,.8);text-align:center}
-#alphabetModal .ab-forms b{display:block;font-family:"Noto Naskh Arabic",serif;font-size:22px;color:#fff;font-weight:700}
-.app[data-age="4–5"] #alphabetModal .ab-forms{display:none}
-#alphabetModal .ab-nav{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:8px;margin:14px 0 8px}
+#alphabetModal .ab-forms span{background:rgba(255,255,255,.06);border-radius:16px;padding:10px 12px;font-size:12px;color:rgba(255,255,255,.8)}
+#alphabetModal .ab-forms b{display:block;font-family:"Noto Naskh Arabic",serif;font-size:24px;color:#fff;font-weight:700}
+#alphabetModal .ab-nav{
+  flex:none;display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:8px;
+  padding:8px 0 calc(10px + env(safe-area-inset-bottom,0px))
+}
 #alphabetModal .ab-nav button{
-  min-height:52px;border:0;border-radius:16px;background:rgba(255,255,255,.07);color:#fff;font-weight:800;font-size:13px;cursor:pointer
+  min-height:52px;border:0;border-radius:18px;background:rgba(255,255,255,.08);color:#fff;font-weight:800;font-size:14px;cursor:pointer;font-family:Fredoka,system-ui,sans-serif
 }
+.app[data-age="4–5"] #alphabetModal .ab-nav button{min-height:60px;font-size:16px}
 #alphabetModal .ab-play{background:#e2bd72;color:#102030}
-#alphabetModal .ab-count{text-align:center;font-size:12px;color:var(--soft)}
-#alphabetModal .ab-strip{
-  display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0 6px
-}
-#alphabetModal .ab-chip{
-  width:42px;height:42px;border:0;border-radius:13px;cursor:pointer;
-  background:rgba(255,255,255,.06);color:#f7e3b4;font-size:20px;font-weight:700;
-  font-family:"Noto Naskh Arabic","Amiri",serif
-}
-#alphabetModal .ab-chip.on{background:#e2bd72;color:#102030}
-#alphabetModal .lesson-steps{margin:8px 0 10px}
-.app[data-age="4–5"] #alphabetModal #abStep3{display:none}
+#alphabetModal .ab-dots{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;padding:4px 0 2px}
+.app[data-age="4–5"] #alphabetModal .ab-dots{display:none}
+#alphabetModal .ab-dot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.18);cursor:pointer}
+#alphabetModal .ab-dot.on{background:#e2bd72;transform:scale(1.25)}
+#alphabetModal .lesson-steps{margin:2px 0 8px;flex:none}
+.app[data-age="4–5"] #alphabetModal .lesson-steps{gap:6px}
+.app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
@@ -2830,28 +2844,45 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
       </div>
       <div class="ab-body">
         <div class="lesson-steps">
-          <div class="lesson-step active" id="abStep1">1 · SEHEN</div>
-          <div class="lesson-step" id="abStep2">2 · LAUT</div>
-          <div class="lesson-step" id="abStep3">3 · FORM</div>
+          <div class="lesson-step" id="abStepSee">Sehen</div>
+          <div class="lesson-step" id="abStepSound">Laut</div>
+          <div class="lesson-step" id="abStepWord">Wort</div>
+          <div class="lesson-step" id="abStepForm">Form</div>
         </div>
-        <img class="ab-pic" id="abPic" alt="" width="640" height="640">
-        <p class="ab-letter" id="abLetter" lang="ar" dir="rtl"></p>
-        <p class="ab-name" id="abName"></p>
-        <p class="ab-laut" id="abLaut"></p>
-        <p class="ab-word" id="abWord"></p>
-        <p class="ab-explain" id="abExplain"></p>
-        <div class="ab-harakat" id="abHarakat"></div>
-        <div class="ab-forms" id="abForms"></div>
+        <div class="ab-dots" id="abDots"></div>
+        <div class="ab-stage">
+          <div class="ab-pane" id="abPaneSee" data-pane="see">
+            <img class="ab-pic" id="abPicSee" alt="">
+            <p class="ab-letter" id="abLetterSee" lang="ar" dir="rtl"></p>
+            <p class="ab-name" id="abNameSee"></p>
+            <p class="ab-hint" id="abHintSee"></p>
+          </div>
+          <div class="ab-pane" id="abPaneSound" data-pane="sound">
+            <p class="ab-letter" id="abLetterSound" lang="ar" dir="rtl"></p>
+            <p class="ab-hint" id="abHintSound"></p>
+            <div class="ab-harakat" id="abHarakat"></div>
+          </div>
+          <div class="ab-pane" id="abPaneWord" data-pane="word">
+            <img class="ab-pic" id="abPicWord" alt="">
+            <p class="ab-word-de" id="abWordDe"></p>
+            <p class="ab-word-ar" id="abWordAr" lang="ar" dir="rtl"></p>
+            <p class="ab-hint" id="abHintWord"></p>
+          </div>
+          <div class="ab-pane" id="abPaneForm" data-pane="form">
+            <p class="ab-letter" id="abLetterForm" lang="ar" dir="rtl"></p>
+            <p class="ab-hint" id="abHintForm"></p>
+            <div class="ab-forms" id="abForms"></div>
+          </div>
+        </div>
         <div class="ab-nav">
           <button type="button" id="abPrev">Zurück</button>
-          <button type="button" class="ab-play" id="abPlay">Vorlesen</button>
+          <button type="button" class="ab-play" id="abPlay">Hören</button>
           <button type="button" id="abNext">Weiter</button>
         </div>
-        <div class="ab-count" id="abCount"></div>
-        <div class="ab-strip" id="abStrip" role="list"></div>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <audio id="quranAudio" preload="none" playsinline></audio>
@@ -4460,69 +4491,96 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
 
 
 
+
 (function(){
   "use strict";
   var letters=[];
   var idx=0;
+  var step=0;
   var KEY="kids.alphabet.idx";
   function ageKey(){
     try{return localStorage.getItem("kids.age")||"6–8"}catch(e){return "6–8"}
   }
-  function ageLabel(){
-    var a=ageKey();
-    if(a==="4–5")return "4–5 · großes Bild, ein Laut";
-    if(a==="9–10")return "9–10 · Ḥarakāt und Wortformen";
-    return "6–8 · Ḥarakāt und Lautschrift";
+  function stepsForAge(a){
+    if(a==="4–5")return ["see","word"];
+    if(a==="9–10")return ["see","sound","word","form"];
+    return ["see","sound","word"];
+  }
+  function stepLabels(a){
+    if(a==="4–5")return {see:"Bild",word:"Wort"};
+    if(a==="9–10")return {see:"Sehen",sound:"Laut",word:"Wort",form:"Form"};
+    return {see:"Sehen",sound:"Laut",word:"Wort"};
+  }
+  function kidLaut(s){
+    return String(s||"")
+      .replace(/ṯ/g,"th").replace(/ḏ/g,"dh").replace(/ṣ/g,"s")
+      .replace(/ḍ/g,"d").replace(/ṭ/g,"t").replace(/ẓ/g,"z")
+      .replace(/ʿ/g,"").replace(/ḥ/g,"h").replace(/ā/g,"aa");
   }
   function kidsAlphabetSpeak(text){
     if(typeof quizSpeak==="function")quizSpeak(text);
   }
   function render(){
     if(!letters.length)return;
-    var item=letters[idx]||letters[0];
     var a=ageKey();
-    var pic=document.getElementById("abPic");
-    var letter=document.getElementById("abLetter");
-    var name=document.getElementById("abName");
-    var laut=document.getElementById("abLaut");
-    var word=document.getElementById("abWord");
-    var expl=document.getElementById("abExplain");
-    var har=document.getElementById("abHarakat");
-    var forms=document.getElementById("abForms");
-    var count=document.getElementById("abCount");
-    var strip=document.getElementById("abStrip");
+    var plan=stepsForAge(a);
+    if(step>=plan.length)step=0;
+    var pane=plan[step];
+    var item=letters[idx]||letters[0];
     var lab=document.getElementById("abAgeLabel");
-    var s1=document.getElementById("abStep1");
-    var s2=document.getElementById("abStep2");
-    var s3=document.getElementById("abStep3");
-    if(lab)lab.textContent=ageLabel();
-    if(s1)s1.classList.add("active");
-    if(s2)s2.classList.add("active");
-    if(s3)s3.classList.toggle("active",a!=="4–5");
-    if(pic){
-      pic.src="/test/kids/assets/alphabet/alpha-"+item.id+".png";
-      pic.alt=(item.wordDe||"")+" · "+(item.wordAr||"");
-    }
-    if(letter)letter.textContent=item.ar||"";
-    if(name)name.textContent=(item.nameDe||"")+" · "+(item.nameAr||"");
-    if(laut)laut.textContent="Lautname: "+(item.lautName||item.nameDe||"");
-    if(word){
-      word.innerHTML=(item.wordDe||"")+" · "+(item.wordLaut||"")+'<b lang="ar" dir="rtl">'+(item.wordAr||"")+"</b>";
-    }
-    if(expl)expl.textContent=(item.ages&&item.ages[a])||"";
+    if(lab)lab.textContent=(idx+1)+" / "+letters.length+" · "+(a==="4–5"?"klein":(a==="9–10"?"groß":"mittel"));
+    var labels=stepLabels(a);
+    ["See","Sound","Word","Form"].forEach(function(id){
+      var el=document.getElementById("abStep"+id);
+      var key=id.toLowerCase();
+      if(!el)return;
+      var onPlan=plan.indexOf(key)>=0;
+      el.style.display=onPlan?"":"none";
+      el.textContent=labels[key]||el.textContent;
+      el.classList.toggle("active",onPlan&&plan[step]===key);
+      el.classList.toggle("done",onPlan&&plan.indexOf(key)<step);
+    });
+    document.querySelectorAll("#alphabetModal .ab-pane").forEach(function(p){
+      p.classList.toggle("on",p.getAttribute("data-pane")===pane);
+    });
+    var src="/test/kids/assets/alphabet/alpha-"+item.id+".png";
+    var picSee=document.getElementById("abPicSee");
+    var picWord=document.getElementById("abPicWord");
+    if(picSee){picSee.src=src;picSee.alt=item.wordDe||""}
+    if(picWord){picWord.src=src;picWord.alt=item.wordDe||""}
+    var L=item.ar||"";
+    ["abLetterSee","abLetterSound","abLetterForm"].forEach(function(id){
+      var el=document.getElementById(id); if(el)el.textContent=L;
+    });
+    var nameSee=document.getElementById("abNameSee");
+    if(nameSee)nameSee.textContent=item.nameDe||"";
+    var hintSee=document.getElementById("abHintSee");
+    if(hintSee)hintSee.textContent=a==="4–5"?("Das ist "+(item.nameDe||"")+"."):(item.nameAr+" · "+(item.nameDe||""));
+    var hintSound=document.getElementById("abHintSound");
+    if(hintSound)hintSound.textContent=a==="4–5"?"Tippe auf den Laut.":"Fatḥa a · Kasra i · Ḍamma u";
+    var har=document.getElementById("abHarakat");
     if(har){
       har.innerHTML="";
-      (item.harakat||[]).forEach(function(h){
+      var list=item.harakat||[];
+      if(a==="4–5")list=list.slice(0,1);
+      list.forEach(function(h){
         var b=document.createElement("button");
         b.type="button";
         b.className="ab-h";
-        b.innerHTML="<b lang=\"ar\" dir=\"rtl\">"+(h.ar||"")+"</b><small>"+(h.laut||"")+"</small>";
-        b.addEventListener("click",function(){
-          kidsAlphabetSpeak((h.speak||h.laut||"")+". ");
-        });
+        b.innerHTML="<b lang=\"ar\" dir=\"rtl\">"+(h.ar||"")+"</b><small>"+kidLaut(h.laut||h.speak||"")+"</small>";
+        b.addEventListener("click",function(){kidsAlphabetSpeak((h.speak||h.laut||"")+". ")});
         har.appendChild(b);
       });
     }
+    var wd=document.getElementById("abWordDe");
+    var wa=document.getElementById("abWordAr");
+    var hw=document.getElementById("abHintWord");
+    if(wd)wd.textContent=item.wordDe||"";
+    if(wa)wa.textContent=item.wordAr||"";
+    if(hw)hw.textContent=a==="4–5"?"":("Laut: "+kidLaut(item.wordLaut||""));
+    var hf=document.getElementById("abHintForm");
+    if(hf)hf.textContent=item.connect==="left-none"?"Verbindet nicht nach links.":"Verbindet nach beiden Seiten.";
+    var forms=document.getElementById("abForms");
     if(forms){
       forms.innerHTML="";
       var f=item.forms||{};
@@ -4532,57 +4590,65 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
         forms.appendChild(s);
       });
     }
-    if(count)count.textContent=(idx+1)+" von "+letters.length+" Buchstaben";
-    if(strip){
-      strip.querySelectorAll(".ab-chip").forEach(function(c,i){c.classList.toggle("on",i===idx)});
+    var dots=document.getElementById("abDots");
+    if(dots){
+      if(!dots.childNodes.length){
+        letters.forEach(function(it,i){
+          var d=document.createElement("button");
+          d.type="button";
+          d.className="ab-dot";
+          d.setAttribute("aria-label",it.nameDe||"");
+          d.addEventListener("click",function(){idx=i;step=0;render();});
+          dots.appendChild(d);
+        });
+      }
+      dots.querySelectorAll(".ab-dot").forEach(function(d,i){d.classList.toggle("on",i===idx)});
     }
+    var next=document.getElementById("abNext");
+    if(next)next.textContent=step>=plan.length-1?"Nächster":"Weiter";
     try{localStorage.setItem(KEY,String(idx))}catch(e){}
   }
-  function go(n){
+  function goStep(dir){
     if(!letters.length)return;
-    idx=(n+letters.length)%letters.length;
+    var plan=stepsForAge(ageKey());
+    step+=dir;
+    if(step>=plan.length){step=0;idx=(idx+1)%letters.length}
+    if(step<0){idx=(idx-1+letters.length)%letters.length;step=stepsForAge(ageKey()).length-1}
     render();
   }
-  function buildStrip(){
-    var strip=document.getElementById("abStrip");
-    if(!strip)return;
-    strip.innerHTML="";
-    letters.forEach(function(item,i){
-      var b=document.createElement("button");
-      b.type="button";
-      b.className="ab-chip"+(i===idx?" on":"");
-      b.textContent=item.ar;
-      b.setAttribute("aria-label",(item.nameDe||"")+" "+(item.lautName||""));
-      b.addEventListener("click",function(){idx=i;render();});
-      strip.appendChild(b);
-    });
+  function speakNow(){
+    var item=letters[idx]; if(!item)return;
+    var a=ageKey();
+    var pane=stepsForAge(a)[step];
+    if(pane==="see")kidsAlphabetSpeak((item.speakName||item.nameDe)+". Das ist "+(item.nameDe||"")+".");
+    else if(pane==="sound"){
+      var h=(item.harakat&&item.harakat[0])||{};
+      kidsAlphabetSpeak(a==="4–5"?(h.speak||""): (item.harakat||[]).map(function(x){return x.speak}).join(". "));
+    }else if(pane==="word")kidsAlphabetSpeak((item.wordSpeak||item.wordDe)+". ");
+    else kidsAlphabetSpeak(item.connect==="left-none"?"Verbindet nicht nach links.":"Verbindet nach beiden Seiten.");
   }
   function openAlphabet(){
+    step=0;
     var m=document.getElementById("alphabetModal");
     if(m)m.classList.add("open");
     render();
   }
-  window.kidsAlphabetOnAge=function(){render();};
+  window.kidsAlphabetOnAge=function(){step=0;render();};
   window.openAlphabet=openAlphabet;
-  fetch("/test/kids/data/alphabet-kids.json?v=2",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(data){
+  fetch("/test/kids/data/alphabet-kids.json?v=3",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(data){
     letters=(data&&data.letters)||[];
     try{idx=Math.max(0,Math.min(letters.length-1,Number(localStorage.getItem(KEY)||"0")))}catch(e){idx=0}
-    buildStrip();
+    var dots=document.getElementById("abDots");
+    if(dots)dots.innerHTML="";
     render();
   }).catch(function(){});
   var prev=document.getElementById("abPrev");
   var next=document.getElementById("abNext");
   var play=document.getElementById("abPlay");
   var openBtn=document.getElementById("openAlphabetButton");
-  if(prev)prev.addEventListener("click",function(){go(idx-1)});
-  if(next)next.addEventListener("click",function(){go(idx+1)});
-  if(play)play.addEventListener("click",function(){
-    var item=letters[idx];
-    if(!item)return;
-    var a=ageKey();
-    var hs=(item.harakat||[]).map(function(h){return h.speak||h.laut}).join(", ");
-    kidsAlphabetSpeak((item.speakName||item.nameDe)+". "+((item.ages&&item.ages[a])||"")+" Wort: "+(item.wordSpeak||item.wordDe)+". Laute: "+hs+".");
-  });
+  if(prev)prev.addEventListener("click",function(){goStep(-1)});
+  if(next)next.addEventListener("click",function(){goStep(1)});
+  if(play)play.addEventListener("click",speakNow);
   if(openBtn)openBtn.addEventListener("click",openAlphabet);
 })();
 
