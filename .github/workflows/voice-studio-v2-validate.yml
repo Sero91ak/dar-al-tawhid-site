@@ -64,7 +64,7 @@ jobs:
               'BUNDLE_EXECUTABLE="DARVoiceStudioNative"',
               'PlistBuddy -c "Set :CFBundleExecutable $BUNDLE_EXECUTABLE"',
               'killall Dock',
-              "2.9.4",
+              "2.9.5",
           ]
           missing=[x for x in required if x not in installer]
           if missing:
@@ -110,16 +110,23 @@ jobs:
               "nohup /bin/bash",
               "update.log",
               "bash -n",
+              "run-update.command",
+              "UPDATE-FEHLER",
+              "Voice Studio wurde nicht ersetzt",
           ]
           installer_required=[
               'REPO_API="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site"',
               'download_repo_file()',
               'application/vnd.github.raw+json',
               'DAR-Voice-Studio-Installer',
+              'RELEASE_MANIFEST_URL=',
+              'plutil -extract releaseRef raw',
+              'Kein validierter releaseRef',
+              'pkill -TERM -x DARVoiceStudioNative',
               'download_repo_file "voice-studio/update-mac.command"',
               'download_repo_file "voice-studio/alphabet-audio-studio.js"',
               "chmod +x \"$TARGET/update-mac.command\"",
-              "CFBundleShortVersionString</key><string>2.9.4",
+              "CFBundleShortVersionString</key><string>2.9.5",
           ]
           html_required=[
               'id="updateBtn"',
@@ -137,8 +144,11 @@ jobs:
               'DAR-Voice-Studio-Updater',
               "checkForUpdates",
               "installAvailableUpdate",
+              "openUpdateLog",
+              "update.log",
+              "Update-Protokoll öffnen",
               "update-mac.command",
-              'DĀRVoiceStudioMac/2.9.4',
+              'DĀRVoiceStudioMac/2.9.5',
           ]
 
           groups=[
@@ -160,6 +170,10 @@ jobs:
                   raise SystemExit(label+" still depends on failing raw.githubusercontent.com transport")
           if "api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main" not in html:
               raise SystemExit("UI bootstrap command must use GitHub Contents API")
+          if 'PIN="' in installer and 'PIN=""' not in installer:
+              raise SystemExit("Installer must not hard-code a stale release PIN")
+          if 'releaseRef' not in installer:
+              raise SystemExit("Installer must resolve a validated releaseRef from version.json")
           print("In-app updater package OK")
           PY
 
@@ -296,7 +310,7 @@ jobs:
                   'id="alphabetAudioSection"',
                   'id="alphabetPackNextBtn"',
                   'id="alphabetPackApproveBtn"',
-                  'alphabet-audio-studio.js?v=294',
+                  'alphabet-audio-studio.js?v=295',
               ]),
               ("studio",studio,[
                   '/api/admin/kids-alphabet-audio',
@@ -312,7 +326,7 @@ jobs:
               ("installer",installer,[
                   'download_repo_file "voice-studio/alphabet-audio-studio.js"',
                   'alphabet-audio-studio.js',
-                  'CFBundleShortVersionString</key><string>2.9.4',
+                  'CFBundleShortVersionString</key><string>2.9.5',
               ]),
               ("engine",engine,[
                   '/studio/alphabet-audio-studio.js',
@@ -464,8 +478,8 @@ jobs:
               'x-webkit-airplay="deny"',
               'darAudioOutput',
               'disableRemotePlayback',
-              'voice-studio-icon.png?v=294',
-              'VOICE STUDIO 2.9.4',
+              'voice-studio-icon.png?v=295',
+              'VOICE STUDIO 2.9.5',
           ]
           missing=[x for x in required if x not in html]
           if missing:
@@ -507,7 +521,7 @@ jobs:
               "VoiceStudioIcon",
               "updateLoadingProgress",
               "status: \"Bereit\"",
-              "DĀRVoiceStudioMac/2.9.4",
+              "DĀRVoiceStudioMac/2.9.5",
               "NSMenu(title: \"Produktion\")",
               "newContent",
               "focusText",
