@@ -1110,3 +1110,31 @@ html[data-theme="bordeaux"] #darQuranPlayer{
   color:var(--text,#F1E6C8)!important;
   background:var(--bg,#22201E)!important;
 }
+.dqp-dl-hint{
+  margin:0 14px 10px;
+  color:var(--dqp-text-2,#BEB7AE);
+  font-size:12px;
+  line-height:1.4;
+}
+.dqp-opt-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px;
+  align-items:stretch;
+  padding:0 10px 8px;
+}
+.dqp-opt-row .dqp-opt{margin:0;min-width:0}
+.dqp-dl{
+  min-width:108px;
+  padding:0 12px;
+  border:1px solid rgba(238,211,174,.28);
+  border-radius:14px;
+  background:rgba(238,211,174,.12);
+  color:var(--dqp-gold,#EED3AE);
+  font-size:11px;
+  font-weight:800;
+}
+.dqp-dl.is-done{
+  opacity:.72;
+}
+.dqp-opt-seed{margin:0 10px 10px}

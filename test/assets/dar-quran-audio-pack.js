@@ -194,6 +194,35 @@
       ayahs.forEach(function (n) { enqueue(r.edition, n, r.edition === "ar.alafasy"); });
     });
   }
+  function haveCount(edition) {
+    var n = 0;
+    var prefix = String(edition || "") + ":";
+    Object.keys(localSrc).forEach(function (k) {
+      if (k.indexOf(prefix) === 0) n += 1;
+    });
+    return n;
+  }
+  function reciterProgress(edition) {
+    var have = haveCount(edition);
+    var queuedFor = 0;
+    queue.forEach(function (job) {
+      if (job.edition === edition) queuedFor += 1;
+    });
+    var downloading = queuedFor > 0 || status.reciter === edition;
+    return {
+      have: have,
+      total: AYAH_TOTAL,
+      queued: queuedFor,
+      downloading: downloading,
+      complete: have >= AYAH_TOTAL - 5
+    };
+  }
+  function downloadLabel(edition) {
+    var p = reciterProgress(edition);
+    if (p.complete) return "Gespeichert";
+    if (p.downloading || p.have > 0) return "Lädt " + p.have + "/" + p.total;
+    return "Download";
+  }
   function downloadReciter(edition) {
     if (!edition) return;
     status.reciter = edition;
@@ -223,12 +252,14 @@
     prefetchSurah: prefetchSurah,
     downloadReciter: downloadReciter,
     startSeed: startSeed,
+    haveCount: haveCount,
+    reciterProgress: reciterProgress,
+    downloadLabel: downloadLabel,
     reciters: function () { return reciters.slice(); },
     status: function () { return { have: status.have, queued: queue.length, seed: status.seed, reciter: status.reciter }; }
   };
   (async function boot() {
     await hydrate();
     await loadCatalog();
-    startSeed();
   })();
 })();
