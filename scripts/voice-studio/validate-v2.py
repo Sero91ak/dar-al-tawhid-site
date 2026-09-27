@@ -228,6 +228,9 @@ def main():
     if not bool(qa.get("fullSentenceContinuityStillAuthoritative")): fail("full-sentence continuity authority missing")
     if not bool(qa.get("lexicalBridgeRegression")): fail("lexical bridge regression QA missing")
     if not bool(qa.get("noGapBeforeKnownArabicTerm")): fail("known Arabic term no-gap QA missing")
+    if not bool(qa.get("automaticBoundaryRegression")): fail("automatic boundary regression QA missing")
+    if not bool(qa.get("noPerWordPatchDependency")): fail("structural boundary QA policy missing")
+    if not bool(qa.get("unpunctuatedBoundaryMustBeGapless")): fail("gapless unpunctuated boundary QA missing")
     for flag in ("moderatePauseAutoRepair","qaCleanCacheOnly","knownSentenceReuse","backendIndependentVerifiedCache"):
         if not bool(qa.get(flag)): fail("fast reuse/pause-repair QA missing: "+flag)
     if int(qa.get("autoRepairPauseWithoutPunctuationMs",999))>180:
@@ -264,6 +267,12 @@ def main():
     if int(continuity.get("lexicalBridgeTrimSafetyMs",99))>3: fail("lexical bridge trim safety too large")
     if int(continuity.get("lexicalBridgeCrossfadeMs",0))<100: fail("lexical bridge crossfade too short")
     if float(continuity.get("lexicalBridgeMaxFraction",0))<0.42: fail("lexical bridge overlap fraction too small")
+    if not bool(continuity.get("automaticBoundaryClassification")): fail("automatic boundary classifier missing")
+    if not bool(continuity.get("structuralNotWordSpecific")): fail("boundary logic must be structural, not per-word")
+    if not bool(continuity.get("automaticTightJoin")): fail("automatic tight join missing")
+    if not bool(continuity.get("noGapOnUnpunctuatedBoundary")): fail("unpunctuated boundary no-gap policy missing")
+    if int(continuity.get("automaticTightJoinCrossfadeMs",0))<55: fail("automatic tight join too weak")
+    if int(continuity.get("strongLexicalBridgeCrossfadeMs",0))<95: fail("strong lexical bridge too weak")
 
     renderer=prof.get("productionRenderer") or {}
     if renderer.get("framework")!="mlx-audio": fail("MLX production renderer policy missing")
@@ -272,7 +281,7 @@ def main():
     if int(renderer.get("arabicChunkMaxChars",0))>90: fail("Arabic chunk ceiling too high")
     if int(renderer.get("germanMaxNewTokens",0))>360: fail("German token ceiling too high")
     if int(renderer.get("arabicMaxNewTokens",0))>300: fail("Arabic token ceiling too high")
-    for flag in ("voiceCloning","boundedGeneration","tokenCeilingRescue","preservePronunciationRules","preserveConfirmedAudioLocks","preserveHonorificPolicy","preserveTechnicalQa","preserveAntiStutterQa","preserveAntiHoldQa","phraseAwareChunking","renderInOriginalTextOrder","generalBoundaryFlowBridge","noHardWordBoundaryChunking","lazyModelLoad","skipModelWhenAllSegmentsKnown","verifiedSentenceFastReuse","backendIndependentVerifiedCache","autoRepairModeratePause","lexicalBridgeEnabled","functionWordArabicBinding"):
+    for flag in ("voiceCloning","boundedGeneration","tokenCeilingRescue","preservePronunciationRules","preserveConfirmedAudioLocks","preserveHonorificPolicy","preserveTechnicalQa","preserveAntiStutterQa","preserveAntiHoldQa","phraseAwareChunking","renderInOriginalTextOrder","generalBoundaryFlowBridge","noHardWordBoundaryChunking","lazyModelLoad","skipModelWhenAllSegmentsKnown","verifiedSentenceFastReuse","backendIndependentVerifiedCache","autoRepairModeratePause","lexicalBridgeEnabled","functionWordArabicBinding","automaticBoundaryClassification","structuralNotWordSpecific","automaticTightJoin","noGapOnUnpunctuatedBoundary"):
         if not renderer.get(flag): fail("production renderer policy missing: "+flag)
     if renderer.get("flowArchitecture")!="continuous-sentence-flow-v2":
         fail("continuous sentence-flow architecture identity missing")
@@ -350,9 +359,9 @@ def main():
     except SyntaxError as e:
         fail(f"engine syntax error: {e}")
     functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
-    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","derive_master_entries_from_rules","build_master_library","master_rules_from_entries","master_suggestions","detect_unresolved_islamic_terms","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale","file_signature","render_cache_key","load_render_cache","save_render_cache","cleanup_render_cache","reference_for_language","prepare_reference_if_needed","generation_token_budget","generation_timeout_seconds","_mlx_process_main","_start_mlx_process","_stop_mlx_process","load_mlx_model","load_production_model","render_with_mlx","is_inline_arabic_micro_term","repair_internal_pause","legacy_render_cache_keys","is_german_link_fragment"}:
+    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","derive_master_entries_from_rules","build_master_library","master_rules_from_entries","master_suggestions","detect_unresolved_islamic_terms","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale","file_signature","render_cache_key","load_render_cache","save_render_cache","cleanup_render_cache","reference_for_language","prepare_reference_if_needed","generation_token_budget","generation_timeout_seconds","_mlx_process_main","_start_mlx_process","_stop_mlx_process","load_mlx_model","load_production_model","render_with_mlx","is_inline_arabic_micro_term","repair_internal_pause","legacy_render_cache_keys","flow_boundary_strength"}:
         if required not in functions: fail(f"engine missing production function: {required}")
-    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","MASTER_LIBRARY_CACHE","MASTER_LIBRARY_URL","islamic-master-library.json","unresolvedIslamicTerms","librarySuggestions","Ungeprüfte islamische Namen/Begriffe erkannt","user_rules+BASE_RULES+MASTER_RULES","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","continuous-sentence-flow-v2","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend","unnatural_final_internal_pause","execution_order=list(range(total))","Flow-aware Chunking","inline_arabic_internal_hold","inlineArabicRenderAttempts","inlineArabicSilenceThresholdRelative","cache-only-fast-path","Stimm-Modell wird nicht geladen","cache_reused_without_resynthesis","pause auto-repair","lexicalBridgeCrossfadeMs","lexical_boundary","GERMAN_LINK_WORDS"}:
+    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","MASTER_LIBRARY_CACHE","MASTER_LIBRARY_URL","islamic-master-library.json","unresolvedIslamicTerms","librarySuggestions","Ungeprüfte islamische Namen/Begriffe erkannt","user_rules+BASE_RULES+MASTER_RULES","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","continuous-sentence-flow-v2","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend","unnatural_final_internal_pause","execution_order=list(range(total))","Flow-aware Chunking","inline_arabic_internal_hold","inlineArabicRenderAttempts","inlineArabicSilenceThresholdRelative","cache-only-fast-path","Stimm-Modell wird nicht geladen","cache_reused_without_resynthesis","pause auto-repair","automaticTightJoinCrossfadeMs","strong_lexical_boundary","boundary_strength","flow_boundary_strength"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
     split_src=ast.get_source_segment(engine_source,next((n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=="split_chunks"),None)) or ""
     if "Konjunktion" not in split_src or "Jeder Satz bleibt eine eigene QA-/Retry-Einheit" not in split_src:
@@ -368,12 +377,11 @@ def main():
     repair_src=ast.get_source_segment(engine_source,next((n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=="repair_internal_pause"),None)) or ""
     if "pause_runs_repaired" not in repair_src or "autoRepairPauseMaxMs" not in repair_src:
         fail("moderate pause auto-repair implementation missing")
-    link_src=ast.get_source_segment(engine_source,next((n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=="is_german_link_fragment"),None)) or ""
-    if "GERMAN_LINK_WORDS" not in link_src:
-        fail("German lexical-link helper missing")
-    for probe in ("der","für","mit"):
-        if probe not in engine_source:
-            fail("expected German link word missing: "+probe)
+    boundary_src=ast.get_source_segment(engine_source,next((n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=="flow_boundary_strength"),None)) or ""
+    if "return 1" not in boundary_src or "return 2" not in boundary_src:
+        fail("automatic structural boundary classifier missing")
+    if "GERMAN_LINK_WORDS" in engine_source or "is_german_link_fragment" in engine_source:
+        fail("per-word lexical patching must not remain in the engine")
     function_nodes={n.name:n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
     save_src=ast.get_source_segment(engine_source,function_nodes.get("save_wav")) or ""
     load_src=ast.get_source_segment(engine_source,function_nodes.get("load_locked_wav")) or ""
