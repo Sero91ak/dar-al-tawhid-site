@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import concurrent.futures, difflib, gc, hashlib, importlib.util, json, os, platform, re, shutil, subprocess, threading, time, traceback, unicodedata, urllib.request, uuid
+import concurrent.futures, difflib, gc, hashlib, importlib.util, json, os, platform, re, shutil, subprocess, sys, threading, time, traceback, unicodedata, urllib.request, uuid
 import multiprocessing as mp
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
-from speech_flow import prepare_flow_text
+try:
+    from speech_flow import prepare_flow_text
+except ModuleNotFoundError:
+    sys.path.insert(0,str(Path(__file__).resolve().parent))
+    from speech_flow import prepare_flow_text
 
 # Apple-Silicon: unsupported MPS ops dürfen auf CPU zurückfallen statt den Render abzubrechen.
 os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
