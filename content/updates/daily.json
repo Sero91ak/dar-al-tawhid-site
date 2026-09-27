@@ -16,5 +16,23 @@
     "title": "Bitte um Barmherzigkeit und einen rechten Weg",
     "snippet": "Unser Herr, schenke uns Barmherzigkeit von Dir und bereite uns in unserer Angelegenheit einen rechten Weg.",
     "category": "Barmherzigkeit & Rechtleitung"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 466,
+      "remaining": 434
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 66,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
