@@ -1,5 +1,5 @@
 {
-  "version": "2.9.12",
+  "version": "2.9.13",
   "updatedAt": "2026-09-28T00:55:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
@@ -512,12 +512,19 @@
   "alphabetAudio": {
     "enabled": true,
     "slots": 140,
-    "policy": "human-approved-only",
+    "policy": "external-canonical-human-approved",
     "manifest": "/test/kids/data/alphabet-audio.json",
     "systemArabicTtsFallback": false,
     "exactSlotTextValidation": true,
-    "repositoryAssetValidation": true,
-    "sha256Required": true
+    "repositoryAssetValidation": false,
+    "sha256Required": false,
+    "canonicalVoiceId": "eiarabe-alif-2026",
+    "canonicalVoiceProvider": "Wikimedia Commons / Escuela Internacional de Árabe",
+    "canonicalVoiceSpeaker": "Eiarabe",
+    "externalCandidateApprovalRequired": true,
+    "fullListenRequired": true,
+    "mixedSpeakersForbidden": true,
+    "voiceCloningFallback": false
   },
   "downloadTransport": "github-contents-api-raw-media-type",
   "rawGithubFallbackDisabled": true,
@@ -546,5 +553,6 @@
     "launchServicesRefresh": true,
     "staleWebIconCacheEvicted": true
   },
-  "alphabetAudioStrictArabicReference": true
+  "alphabetAudioStrictArabicReference": true,
+  "alphabetAudioReferenceMode": "external-eiarabe-canonical"
 }
