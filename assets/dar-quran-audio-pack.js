@@ -37,6 +37,7 @@
   var MAX_INFLIGHT = 3;
   var queue = [];
   var seeded = false;
+  var cancelled = Object.create(null);
   var status = { have: 0, queued: 0, seed: false, reciter: "" };
 
   function key(edition, ayah) {
@@ -127,6 +128,7 @@
   }
   function enqueue(edition, ayah, urgent) {
     var k = key(edition, ayah);
+    if (cancelled[edition]) return;
     if (localSrc[k] || pending[k]) return;
     pending[k] = true;
     if (urgent) queue.unshift({ edition: edition, ayah: ayah });
@@ -136,11 +138,19 @@
   }
   async function fetchOne(edition, ayah) {
     var k = key(edition, ayah);
+    if (cancelled[edition]) {
+      pending[k] = false;
+      return;
+    }
     try {
       var res = await fetch(proxyUrl(edition, ayah), { credentials: "same-origin" });
       if (!res || !res.ok) throw new Error("proxy");
       var blob = await res.blob();
       if (!blob || blob.size < 800) throw new Error("empty");
+      if (cancelled[edition]) {
+        pending[k] = false;
+        return;
+      }
       rememberBlob(edition, ayah, blob);
       try {
         var db = await openDb();
@@ -225,8 +235,58 @@
   }
   function downloadReciter(edition) {
     if (!edition) return;
+    cancelled[edition] = false;
     status.reciter = edition;
     for (var n = 1; n <= AYAH_TOTAL; n++) enqueue(edition, n, false);
+  }
+  function cancelEdition(edition) {
+    var ed = String(edition || "");
+    if (!ed) return;
+    cancelled[ed] = true;
+    queue = queue.filter(function (job) { return job.edition !== ed; });
+    Object.keys(pending).forEach(function (k) {
+      if (k.indexOf(ed + ":") === 0) delete pending[k];
+    });
+    if (status.reciter === ed) status.reciter = "";
+    status.queued = queue.length;
+  }
+  async function removeReciter(edition) {
+    var ed = String(edition || "");
+    if (!ed) return;
+    cancelEdition(ed);
+    var prefix = ed + ":";
+    Object.keys(localSrc).forEach(function (k) {
+      if (k.indexOf(prefix) === 0) {
+        try { URL.revokeObjectURL(localSrc[k]); } catch (eRev) {}
+        delete localSrc[k];
+      }
+    });
+    status.have = Object.keys(localSrc).length;
+    try {
+      var db = await openDb();
+      var store = db.transaction(STORE, "readwrite").objectStore(STORE);
+      await new Promise(function (done) {
+        var req = store.openCursor();
+        req.onsuccess = function () {
+          var cur = req.result;
+          if (!cur) { done(); return; }
+          if (String(cur.key).indexOf(prefix) === 0) cur.delete();
+          cur.continue();
+        };
+        req.onerror = function () { done(); };
+      });
+    } catch (eIdb) {}
+    try {
+      if ("caches" in window) {
+        var cache = await caches.open(CACHE_NAME);
+        var reqs = await cache.keys();
+        var needle = "/quran-audio/" + encodeURIComponent(ed) + "/";
+        await Promise.all(reqs.map(function (req) {
+          var u = req.url || "";
+          return u.indexOf(needle) !== -1 ? cache.delete(req) : Promise.resolve();
+        }));
+      }
+    } catch (eCacheDel) {}
   }
   async function loadCatalog() {
     try {
@@ -251,6 +311,8 @@
     ensure: ensure,
     prefetchSurah: prefetchSurah,
     downloadReciter: downloadReciter,
+    cancelEdition: cancelEdition,
+    removeReciter: removeReciter,
     startSeed: startSeed,
     haveCount: haveCount,
     reciterProgress: reciterProgress,
