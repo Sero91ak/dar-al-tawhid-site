@@ -308,7 +308,8 @@ html.is-quran-player-route #darQuranPlayer .dqp-play,
   border:1px solid rgba(238,211,174,.5)!important;
   color:#EED3AE!important;
 }
-#darQuranPlayer .dqp-play svg{width:26px;height:26px}
+#darQuranPlayer .dqp-play svg{display:none}
+#darQuranPlayer .dqp-play .dar-ui-icon{width:28px;height:28px;display:block}
 #darQuranPlayer .dqp-play:active{transform:scale(.94)!important}
 
 .dqp-volume{

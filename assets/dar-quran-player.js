@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 955;
+    var PLAYER_BUILD = 956;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -1095,6 +1095,8 @@
     });
   }
   function icon(name) {
+    if (name === "play") return '<img class="dar-ui-icon" src="/assets/ui-icons/dar-icon-play-3d.png" alt="" aria-hidden="true" draggable="false">';
+    if (name === "pause") return '<img class="dar-ui-icon" src="/assets/ui-icons/dar-icon-pause-3d.png" alt="" aria-hidden="true" draggable="false">';
     var p = {
       grab: "",
       more: '<circle cx="12" cy="6" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="18" r="1.6" fill="currentColor"/>',
@@ -2453,7 +2455,7 @@
   function miniMarkup() {
     return (
       '<div class="dqp-top-main">' +
-        '<span class="dqp-top-mark" aria-hidden="true">📖</span>' +
+        '<span class="dqp-top-mark" aria-hidden="true"><img class="dar-ui-icon" src="/assets/ui-icons/dar-icon-quran-3d.png" alt="" draggable="false"></span>' +
         '<button type="button" data-dqp-mini="open" class="dqp-top-open">' +
           '<span class="dqp-top-text"><b></b><span></span></span>' +
         "</button>" +
