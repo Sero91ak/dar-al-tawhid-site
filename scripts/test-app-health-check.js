@@ -77,6 +77,24 @@ const worker = read("cloudflare/test-app-worker.js");
 if (!worker.includes("Response.redirect")) fail("test-app-worker.js: Root-Redirect fehlt");
 else ok("test-app-worker.js: Root-Redirect vorhanden");
 
+const testWrangler = read("wrangler.test.toml");
+if (!testWrangler.includes('[ai]') || !testWrangler.includes('binding = "AI"')) {
+  fail("wrangler.test.toml: Workers-AI-Binding für Kids-Rezitationsprüfung fehlt");
+} else {
+  ok("wrangler.test.toml: Workers-AI-Binding vorhanden");
+}
+for (const marker of [
+  '"/test/kids/api/recitation/grade"',
+  '@cf/openai/whisper-large-v3-turbo',
+  'gradeKidsRecitation',
+  'pronunciationReference: false'
+]) {
+  if (!worker.includes(marker)) fail(`test-app-worker.js: Kids-Rezitationsmarker fehlt: ${marker}`);
+}
+if (worker.includes('"/test/kids/api/recitation/grade"') && worker.includes("@cf/openai/whisper-large-v3-turbo")) {
+  ok("test-app-worker.js: Kids-Rezitationsendpoint vorhanden");
+}
+
 if (failed) {
   console.error(`\n${failed} Test-App-Check(s) fehlgeschlagen – Deploy stoppen.`);
   process.exit(1);
