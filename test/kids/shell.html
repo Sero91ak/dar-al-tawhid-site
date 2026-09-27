@@ -2435,7 +2435,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.48</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.49</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2913,7 +2913,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab48";
+const KIDS_BUILD_ID="kids-shell-v12-tab49";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -4975,7 +4975,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   function playVerifiedSlot(item,kind,key,onDone){
     var slot=audioSlot(item.id,kind,key);
     if(!slot){
-      setAudioStatus("Referenzaufnahme noch nicht freigegeben.","warn");
+      setAudioStatus("Noch keine Aufnahme mit derselben Alif-Stimme freigegeben.","warn");
       setAudioCredit(null);
       return false;
     }
@@ -4992,7 +4992,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     audio.onended=function(){
       recordAudioEvidence(ageKey(),item.id,kind,key||"");
       alphabetAudioEl=null;
-      setAudioStatus(slot.sourceType==="external-human-pronunciation"?"Geprüfte menschliche arabische Referenz.":"Geprüfte Referenzaufnahme.","ok");
+      setAudioStatus(slot.sourceType==="external-human-pronunciation"?"Einheitliche Alif-Referenzstimme.":"Geprüfte Referenzaufnahme.","ok");
       if(typeof onDone==="function")onDone();
       updateHeader(item,ageKey());
     };
@@ -5304,7 +5304,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     else if(audioReady)setAudioStatus("Geprüfte Referenzaufnahme verfügbar.","ok");
     else if(pane==="sound")setAudioStatus("Ḥarakāt-Aufnahmen noch nicht vollständig freigegeben.","warn");
     else if(pane==="word")setAudioStatus("Wortaufnahme noch nicht freigegeben.","warn");
-    else setAudioStatus("Referenzaufnahme noch nicht freigegeben.","warn");
+    else setAudioStatus("Noch keine Aufnahme mit derselben Alif-Stimme freigegeben.","warn");
     try{localStorage.setItem(KEY,String(idx))}catch(e){}
   }
   function goStep(dir){
@@ -5440,7 +5440,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   window.openAlphabet=openAlphabet;
   Promise.all([
     fetch("/test/kids/data/alphabet-kids.json?v=8",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
-    fetch("/test/kids/data/alphabet-audio.json?v=4",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
+    fetch("/test/kids/data/alphabet-audio.json?v=5",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
   ]).then(function(result){
     var data=result[0],audioData=result[1];
     letters=(data&&data.letters)||[];
