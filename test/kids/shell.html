@@ -2351,6 +2351,8 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 #alphabetModal .ab-practice-choice.correct{background:rgba(82,196,132,.18);border-color:rgba(82,196,132,.58)}
 #alphabetModal .ab-practice-choice.wrong{background:rgba(220,92,92,.14);border-color:rgba(220,92,92,.48)}
 #alphabetModal .ab-practice-feedback{min-height:28px;margin:14px 0 0;font:800 15px/1.35 Fredoka,system-ui,sans-serif;color:rgba(255,255,255,.9)}
+#alphabetModal .ab-complete-mark{width:94px;height:94px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:rgba(82,196,132,.16);border:1px solid rgba(82,196,132,.42);font:900 48px/1 Fredoka,system-ui,sans-serif;color:#d5ffe5}
+#alphabetModal .ab-nav button:disabled{opacity:.42;cursor:not-allowed}
 #alphabetModal .lesson-steps{margin:2px 0 8px;flex:none;grid-template-columns:repeat(5,minmax(0,1fr))}
 .app[data-age="4–5"] #alphabetModal .lesson-steps{gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
@@ -2888,6 +2890,11 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
             <p class="ab-practice-title" id="abPracticePrompt"></p>
             <div class="ab-practice-choices" id="abPracticeChoices"></div>
             <p class="ab-practice-feedback" id="abPracticeFeedback" aria-live="polite"></p>
+          </div>
+          <div class="ab-pane" id="abPaneComplete" data-pane="complete">
+            <div class="ab-complete-mark" aria-hidden="true">✓</div>
+            <p class="ab-practice-title" id="abCompleteTitle">Runde geschafft</p>
+            <p class="ab-hint" id="abCompleteText"></p>
           </div>
         </div>
         <div class="ab-nav">
@@ -4514,7 +4521,9 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   var idx=0;
   var step=0;
   var practicePassed=false;
+  var practiceMistakes=0;
   var practiceToken="";
+  var completeMode=false;
   var KEY="kids.alphabet.idx";
   var MASTER_KEY="kids.alphabet.mastered.";
 
@@ -4557,17 +4566,22 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
       voices.find(function(v){return String(v.lang||"").toLowerCase().indexOf(base)===0})||null;
   }
   function speakSequence(parts){
-    if(!speech||typeof SpeechSynthesisUtterance==="undefined")return;
+    if(!speech||typeof SpeechSynthesisUtterance==="undefined")return false;
     try{speech.cancel()}catch(e){}
+    var voices=typeof speech.getVoices==="function"?(speech.getVoices()||[]):[];
+    var spoken=0;
     (parts||[]).filter(function(p){return p&&String(p.text||"").trim()}).forEach(function(p){
+      var lang=p.lang||"de-DE";
+      var v=voiceFor(lang);
+      if(/^ar/i.test(lang)&&voices.length&&!v)return;
       var u=new SpeechSynthesisUtterance(String(p.text||"").trim());
-      u.lang=p.lang||"de-DE";
-      var v=voiceFor(u.lang);
+      u.lang=lang;
       if(v)u.voice=v;
       if(/^ar/i.test(u.lang)){u.rate=.68;u.pitch=.96}
       else{u.rate=ageKey()==="4–5"?.80:.88;u.pitch=.96}
-      speech.speak(u);
+      speech.speak(u);spoken+=1;
     });
+    return spoken>0;
   }
   function speakArabic(text){speakSequence([{text:text,lang:"ar-SA"}])}
   function speakGerman(text){speakSequence([{text:text,lang:"de-DE"}])}
@@ -4575,7 +4589,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     var lab=document.getElementById("abAgeLabel");
     if(!lab)return;
     var count=mastered(a).length;
-    lab.textContent="Buchstabe "+(idx+1)+" / "+letters.length+" · "+count+" gelernt · "+a+" Jahre";
+    lab.textContent="Buchstabe "+(idx+1)+" / "+letters.length+" · "+count+" geübt · "+a+" Jahre";
   }
   var similar={
     alif:["lam","dal"],ba:["ta","tha","nun","ya"],ta:["ba","tha","nun"],tha:["ta","ba","shin"],
@@ -4605,7 +4619,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     var feedback=document.getElementById("abPracticeFeedback");
     if(!prompt||!box||!feedback)return;
     var token=a+"|"+item.id;
-    if(token!==practiceToken){practiceToken=token;practicePassed=false}
+    if(token!==practiceToken){practiceToken=token;practicePassed=false;practiceMistakes=0}
     prompt.textContent=a==="4–5"?"Wo ist "+item.nameDe+"?":"Finde den Buchstaben "+item.nameDe+".";
     feedback.textContent="";
     box.innerHTML="";
@@ -4630,6 +4644,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
           var next=document.getElementById("abNext");
           if(next)next.textContent=idx===letters.length-1?"Fertig":"Nächster";
         }else{
+          practiceMistakes+=1;
           b.classList.add("wrong");
           feedback.textContent="Noch einmal – schau genau auf Form und Punkte.";
           speakGerman("Noch einmal.");
@@ -4642,6 +4657,30 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     if(!letters.length)return;
     var a=ageKey();
     var plan=stepsForAge(a);
+    if(completeMode){
+      document.querySelectorAll("#alphabetModal .ab-pane").forEach(function(p){
+        p.classList.toggle("on",p.getAttribute("data-pane")==="complete");
+      });
+      document.querySelectorAll("#alphabetModal .lesson-step").forEach(function(el){
+        el.classList.remove("active");el.classList.add("done");
+      });
+      var count=mastered(a).length;
+      var lab=document.getElementById("abAgeLabel");
+      if(lab)lab.textContent="Runde abgeschlossen · "+count+" / "+letters.length+" geübt · "+a+" Jahre";
+      var title=document.getElementById("abCompleteTitle");
+      if(title)title.textContent=count===letters.length?"Runde geschafft":"Ende erreicht";
+      var txt=document.getElementById("abCompleteText");
+      if(txt)txt.textContent=count===letters.length?
+        "Alle 28 Buchstaben wurden in dieser Altersstufe mindestens einmal richtig erkannt.":
+        count+" von "+letters.length+" Buchstaben wurden bisher richtig erkannt. Die übrigen Buchstaben sind noch offen.";
+      var prevDone=document.getElementById("abPrev");
+      var playDone=document.getElementById("abPlay");
+      var nextDone=document.getElementById("abNext");
+      if(prevDone){prevDone.disabled=false;prevDone.textContent="Zurück"}
+      if(playDone){playDone.disabled=true;playDone.textContent="Hören"}
+      if(nextDone){nextDone.disabled=false;nextDone.textContent="Von vorne"}
+      return;
+    }
     if(step>=plan.length)step=0;
     var pane=plan[step];
     var item=letters[idx]||letters[0];
@@ -4738,26 +4777,68 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
 
     var next=document.getElementById("abNext");
     if(next){
-      if(pane==="practice"&&practicePassed)next.textContent=idx===letters.length-1?"Fertig":"Nächster";
-      else next.textContent=step>=plan.length-1?(idx===letters.length-1?"Fertig":"Nächster"):"Weiter";
+      next.disabled=pane==="practice"&&!practicePassed;
+      if(pane==="practice"&&!practicePassed)next.textContent="Erst richtig wählen";
+      else if(pane==="practice"&&practicePassed)next.textContent=idx===letters.length-1?"Fertig":"Nächster";
+      else next.textContent="Weiter";
     }
+    var prevBtn=document.getElementById("abPrev");
+    var playBtn=document.getElementById("abPlay");
+    if(prevBtn){prevBtn.disabled=idx===0&&step===0;prevBtn.textContent="Zurück"}
+    if(playBtn){playBtn.disabled=false;playBtn.textContent="Hören"}
     try{localStorage.setItem(KEY,String(idx))}catch(e){}
   }
   function goStep(dir){
     if(!letters.length)return;
-    var plan=stepsForAge(ageKey());
+    var a=ageKey();
+    var plan=stepsForAge(a);
+
+    if(completeMode){
+      if(dir<0){
+        completeMode=false;
+        idx=letters.length-1;
+        step=plan.length-1;
+        practiceToken=a+"|"+(letters[idx]&&letters[idx].id||"");
+        practicePassed=true;
+      }else{
+        completeMode=false;
+        idx=0;
+        step=0;
+        practiceToken="";
+        practicePassed=false;
+        practiceMistakes=0;
+      }
+      render();
+      return;
+    }
+
+    var pane=plan[step];
+    if(dir<0&&idx===0&&step===0)return;
+    if(dir>0&&pane==="practice"&&!practicePassed){
+      var feedback=document.getElementById("abPracticeFeedback");
+      if(feedback)feedback.textContent="Wähle zuerst den richtigen Buchstaben.";
+      return;
+    }
+    if(dir>0&&pane==="practice"&&practicePassed&&idx===letters.length-1){
+      completeMode=true;
+      render();
+      return;
+    }
+
     step+=dir;
     if(step>=plan.length){
       step=0;
-      idx=(idx+1)%letters.length;
+      idx=Math.min(idx+1,letters.length-1);
       practiceToken="";
       practicePassed=false;
+      practiceMistakes=0;
     }
     if(step<0){
-      idx=(idx-1+letters.length)%letters.length;
+      idx=Math.max(0,idx-1);
       step=stepsForAge(ageKey()).length-1;
       practiceToken="";
       practicePassed=false;
+      practiceMistakes=0;
     }
     render();
   }
@@ -4766,7 +4847,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     var a=ageKey();
     var pane=stepsForAge(a)[step];
     if(pane==="see"){
-      speakSequence([{text:item.nameAr||item.ar,lang:"ar-SA"},{text:"Das ist "+(item.nameDe||"")+".",lang:"de-DE"}]);
+      speakSequence([{text:item.nameAr||item.ar,lang:"ar-SA"}]);
     }else if(pane==="sound"){
       var list=item.harakat||[];
       if(a==="4–5")list=list.slice(0,1);
@@ -4785,13 +4866,15 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     step=0;
     practiceToken="";
     practicePassed=false;
+    practiceMistakes=0;
+    completeMode=false;
     var m=document.getElementById("alphabetModal");
     if(m)m.classList.add("open");
     render();
   }
-  window.kidsAlphabetOnAge=function(){step=0;practiceToken="";practicePassed=false;render()};
+  window.kidsAlphabetOnAge=function(){step=0;practiceToken="";practicePassed=false;practiceMistakes=0;completeMode=false;render()};
   window.openAlphabet=openAlphabet;
-  fetch("/test/kids/data/alphabet-kids.json?v=4",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(data){
+  fetch("/test/kids/data/alphabet-kids.json?v=5",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(data){
     letters=(data&&data.letters)||[];
     try{idx=Math.max(0,Math.min(letters.length-1,Number(localStorage.getItem(KEY)||"0")))}catch(e){idx=0}
     var dots=document.getElementById("abDots");
