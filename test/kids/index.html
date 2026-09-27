@@ -2435,7 +2435,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.47</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.48</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2913,7 +2913,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab47";
+const KIDS_BUILD_ID="kids-shell-v12-tab48";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -5440,7 +5440,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   window.openAlphabet=openAlphabet;
   Promise.all([
     fetch("/test/kids/data/alphabet-kids.json?v=8",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
-    fetch("/test/kids/data/alphabet-audio.json?v=3",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
+    fetch("/test/kids/data/alphabet-audio.json?v=4",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
   ]).then(function(result){
     var data=result[0],audioData=result[1];
     letters=(data&&data.letters)||[];
