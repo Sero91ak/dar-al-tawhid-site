@@ -1,10 +1,10 @@
 {
-  "version": "2.9.5",
-  "updatedAt": "2026-09-27T20:32:00+02:00",
+  "version": "2.9.6",
+  "updatedAt": "2026-09-27T21:12:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v17",
+  "cache": "dar-voice-studio-v18",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -252,7 +252,10 @@
     "releaseRefPinnedToGreenCommit": true,
     "staleInstallerPinPrevented": true,
     "detachedUpdaterRunner": true,
-    "updateFailureLogValidation": true
+    "updateFailureLogValidation": true,
+    "appIconPlaceholderRegressionGuard": true,
+    "appIconHeaderPresenceValidation": true,
+    "appIconPwaCacheRefresh": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -506,12 +509,22 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "2b3915b00cb1f5f04779419af5242501880e0830",
+  "releaseRef": "a905eb6420ee577df6bb2858e462a1a481a94b0a",
   "releaseChannel": "stable",
   "updateRepair": true,
   "updateRepairReason": "remove stale hard-coded installer PIN; resolve immutable validated releaseRef from manifest",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
-  "updateValidatedReleaseOnly": true
+  "updateValidatedReleaseOnly": true,
+  "appIconRepair": {
+    "cause": "repository contained the wrong placeholder icon asset",
+    "replacedWith": "approved microphone-headphone Voice Studio logo",
+    "sourcePixels": "256x256",
+    "headerVisible": true,
+    "macBundleIcns": true,
+    "runtimeDockIcon": true,
+    "launchServicesRefresh": true,
+    "staleWebIconCacheEvicted": true
+  }
 }
