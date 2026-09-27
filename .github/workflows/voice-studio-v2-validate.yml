@@ -409,6 +409,9 @@ jobs:
                   'lastMistakeAt',
                   'if(entry.stage==="secure")return 30;',
                   'Keine Wiederholung fällig',
+                  'QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v2."',
+                  'function quizPriority(id,now)',
+                  'recordQuizAttempt(q.id,!quizQuestionHadError)',
                   'Referenzaufnahme noch nicht freigegeben',
               ]),
               ("manifest",manifest,[
@@ -427,6 +430,8 @@ jobs:
               errors.append("kids system Arabic TTS fallback remains: "+", ".join(forbidden))
           if 'if(e.stage==="secure")continue;' in kids:
               errors.append("secure alphabet items are still skipped forever instead of becoming due again")
+          if 'Math.min(5,quizMastery(id)+1)' in kids:
+              errors.append("legacy one-shot quiz mastery increment returned")
           if 'if(!playerFullyHeard())' not in studio:
               errors.append("human full-listen gate missing")
           if errors:
