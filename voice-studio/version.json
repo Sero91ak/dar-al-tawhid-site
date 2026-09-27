@@ -322,8 +322,8 @@
     "completedSegmentProgress": true,
     "narrativePunctuationStaysNarrative": true,
     "narrativeColonNeverForcesList": true,
-    "contextCarrierBridgeEnabled": false,
-    "deArabicFlowStrategy": "stable normal segments + tight crossfade"
+    "contextCarrierBridgeEnabled": true,
+    "deArabicFlowStrategy": "contextual bridge + tight crossfade"
   },
   "contentStudio": {
     "enabled": true,
@@ -526,10 +526,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "d39e3333e463d36f23590f61d8301c38470a194d",
+  "releaseRef": "665b31294b899be1044c6e18f9132eb45fdd4dc9",
   "releaseChannel": "validated-main",
   "updateRepair": true,
-  "updateRepairReason": "sentence-flow rollback: disable context carrier bridge and restore stable tight joins at DE-Arabic boundaries",
+  "updateRepairReason": "2.9.10 flow hotfix: restore contextual DE-Arabic coarticulation now that narrative list-mode bug is fixed",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
