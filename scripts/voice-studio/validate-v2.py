@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import ast, json, re, sys, shutil, subprocess
+import ast, importlib.util, json, re, sys, shutil, subprocess
 from pathlib import Path
 
 ARABIC_RE=re.compile(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff]")
@@ -220,13 +220,17 @@ def main():
     if not bool(qa.get("continuousSentenceFlowRegression")): fail("continuous sentence-flow regression QA missing")
     if not bool(qa.get("originalTextOrderRegression")): fail("original text-order regression QA missing")
     if not bool(qa.get("generalBoundaryTrimRegression")): fail("general boundary-trim regression QA missing")
+    if not bool(qa.get("strictSentencePreflightRegression")): fail("strict sentence-preflight QA missing")
+    if not bool(qa.get("zeroPauseInfinitiveRegression")): fail("zero-pause infinitive QA missing")
+    if not bool(qa.get("renderPlanBoundaryRegression")): fail("render-plan boundary QA missing")
+    if not bool(qa.get("visibleTextIntegrityRegression")): fail("visible-text integrity QA missing")
     punctuation_limits=qa.get("maxInternalSilenceMsWithPunctuationByMode") or {}
     for mode_name in ("narration","kids_story","kids_lesson","teaching","gentle","serious","question","list","dua"):
         if int(punctuation_limits.get(mode_name,9999))>900:
             fail("punctuation silence limit too loose for "+mode_name)
-    if int(qa.get("maxInternalSilenceMsWithoutPunctuation",9999))>550:
+    if int(qa.get("maxInternalSilenceMsWithoutPunctuation",9999))>420:
         fail("non-punctuation silence limit too loose")
-    if int(qa.get("finalMaxInternalSilenceMs",9999))>700:
+    if int(qa.get("finalMaxInternalSilenceMs",9999))>560:
         fail("final continuity silence guard too loose")
     continuity=prof.get("continuity") or {}
     if not bool(continuity.get("inlineArabicMicroTermBridge")): fail("inline Arabic micro-term bridge missing")
@@ -248,8 +252,10 @@ def main():
     if int(renderer.get("arabicMaxNewTokens",0))>300: fail("Arabic token ceiling too high")
     for flag in ("voiceCloning","boundedGeneration","tokenCeilingRescue","preservePronunciationRules","preserveConfirmedAudioLocks","preserveHonorificPolicy","preserveTechnicalQa","preserveAntiStutterQa","preserveAntiHoldQa","phraseAwareChunking","renderInOriginalTextOrder","generalBoundaryFlowBridge","noHardWordBoundaryChunking"):
         if not renderer.get(flag): fail("production renderer policy missing: "+flag)
-    if renderer.get("flowArchitecture")!="continuous-sentence-flow-v1":
+    if renderer.get("flowArchitecture")!="continuous-sentence-flow-v2":
         fail("continuous sentence-flow architecture identity missing")
+    for flag in ("strictSentencePreflight","grammarAwarePunctuation"):
+        if not renderer.get(flag): fail("strict flow renderer policy missing: "+flag)
 
     learning=prof.get("pronunciationLearning") or {}
     required_learning_flags=(
@@ -291,6 +297,32 @@ def main():
             fail(f"honorific regression {cid}: expected {count} x {fragment}, got {speech}")
 
     engine_source=Path(engine_path).read_text(encoding="utf-8")
+    engine_dir=Path(engine_path).resolve().parent
+    flow_path=engine_dir/"speech_flow.py"
+    if not flow_path.exists():
+        fail("speech_flow.py missing next to local-engine.py")
+    spec=importlib.util.spec_from_file_location("dar_voice_speech_flow_validation",flow_path)
+    flow=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(flow)
+
+    source="Wir bitten Ihn darum, sie anzunehmen."
+    spoken,decisions=flow.normalize_synthesis_punctuation(source)
+    if spoken!="Wir bitten Ihn darum sie anzunehmen.":
+        fail("zero-pause infinitive regression failed: "+spoken)
+    if len(decisions)!=1 or decisions[0].get("reason")!="pronominaladverb_infinitive":
+        fail("grammar-aware comma classification regression failed")
+    if source!="Wir bitten Ihn darum, sie anzunehmen.":
+        fail("visible source text was mutated by speech-flow preflight")
+    report=flow.validate_render_plan(source,spoken,[("de",spoken)])
+    if not report.get("passed") or int(report.get("segments",0))!=1:
+        fail("strict sentence preflight regression failed")
+
+    mixed="Eine gute Tat tun wir für Allāh, und wir bitten Ihn darum, sie anzunehmen."
+    mixed_spoken,mixed_decisions=flow.normalize_synthesis_punctuation(mixed)
+    if "darum, sie anzunehmen" in mixed_spoken or "darum sie anzunehmen" not in mixed_spoken:
+        fail("mixed sentence zero-pause regression failed")
+    if len(mixed_decisions)!=1:
+        fail("mixed sentence punctuation classification changed unexpectedly")
     try:
         tree=ast.parse(engine_source)
     except SyntaxError as e:
@@ -298,7 +330,7 @@ def main():
     functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
     for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","derive_master_entries_from_rules","build_master_library","master_rules_from_entries","master_suggestions","detect_unresolved_islamic_terms","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale","file_signature","render_cache_key","load_render_cache","save_render_cache","cleanup_render_cache","reference_for_language","prepare_reference_if_needed","generation_token_budget","generation_timeout_seconds","_mlx_process_main","_start_mlx_process","_stop_mlx_process","load_mlx_model","load_production_model","render_with_mlx","is_inline_arabic_micro_term"}:
         if required not in functions: fail(f"engine missing production function: {required}")
-    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","MASTER_LIBRARY_CACHE","MASTER_LIBRARY_URL","islamic-master-library.json","unresolvedIslamicTerms","librarySuggestions","Ungeprüfte islamische Namen/Begriffe erkannt","user_rules+BASE_RULES+MASTER_RULES","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","continuous-sentence-flow-v1","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend","unnatural_final_internal_pause","execution_order=list(range(total))","Flow-aware Chunking"}:
+    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","MASTER_LIBRARY_CACHE","MASTER_LIBRARY_URL","islamic-master-library.json","unresolvedIslamicTerms","librarySuggestions","Ungeprüfte islamische Namen/Begriffe erkannt","user_rules+BASE_RULES+MASTER_RULES","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","continuous-sentence-flow-v2","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend","unnatural_final_internal_pause","execution_order=list(range(total))","Flow-aware Chunking"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
     split_src=ast.get_source_segment(engine_source,next((n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=="split_chunks"),None)) or ""
     if "Konjunktion" not in split_src or "Satzenden" not in split_src:
