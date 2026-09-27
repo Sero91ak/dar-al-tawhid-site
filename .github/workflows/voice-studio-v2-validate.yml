@@ -122,6 +122,845 @@ jobs:
               'RELEASE_MANIFEST_URL=',
               'plutil -extract releaseRef raw',
               '^[0-9a-fA-F]{40}
+              'pkill -TERM -x DARVoiceStudioNative',
+              'download_repo_file "voice-studio/update-mac.command"',
+              'download_repo_file "voice-studio/alphabet-audio-studio.js"',
+              "chmod +x \"$TARGET/update-mac.command\"",
+              "CFBundleShortVersionString</key><string>2.9.5",
+          ]
+          html_required=[
+              'id="updateBtn"',
+              'id="appUpdateState"',
+              'darUpdater',
+              'darUpdateStateChanged',
+              'requestNativeUpdate',
+              'Update wird installiert',
+          ]
+          swift_required=[
+              'name: "darUpdater"',
+              "updateManifestURL",
+              "api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/version.json?ref=main",
+              'application/vnd.github.raw+json',
+              'DAR-Voice-Studio-Updater',
+              "checkForUpdates",
+              "installAvailableUpdate",
+              "openUpdateLog",
+              "update.log",
+              "Update-Protokoll öffnen",
+              "update-mac.command",
+              'DĀRVoiceStudioMac/2.9.5',
+          ]
+
+          groups=[
+              ("helper",helper,helper_required),
+              ("installer",installer,installer_required),
+              ("html",html,html_required),
+              ("swift",swift,swift_required),
+          ]
+          errors=[]
+          for label,source,required in groups:
+              missing=[x for x in required if x not in source]
+              if missing:
+                  errors.append(label+": "+", ".join(missing))
+          if errors:
+              raise SystemExit("In-app updater validation failed: "+" | ".join(errors))
+
+          for label,source in [("helper",helper),("installer",installer),("html",html),("swift",swift)]:
+              if "raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site" in source:
+                  raise SystemExit(label+" still depends on failing raw.githubusercontent.com transport")
+          if "api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main" not in html:
+              raise SystemExit("UI bootstrap command must use GitHub Contents API")
+          if 'PIN="' in installer and 'PIN=""' not in installer:
+              raise SystemExit("Installer must not hard-code a stale release PIN")
+          if 'releaseRef' not in installer:
+              raise SystemExit("Installer must resolve a validated releaseRef from version.json")
+          print("In-app updater package OK")
+          PY
+
+      - name: Validate secure iPad companion mode
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          swift=Path("voice-studio/VoiceStudioApp.swift").read_text(encoding="utf-8")
+
+          engine_required=[
+              'NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE"',
+              'PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN"',
+              'HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"',
+              'DARVOICE_PAIR=',
+              'remote_authorized',
+              'accept_pairing_url',
+              'hmac.compare_digest',
+              '"pairing_required":True',
+              '"companion_mode":bool(NETWORK_MODE and PAIR_TOKEN)',
+              '"start_url":"/studio/?pair="+PAIR_TOKEN',
+              'http://127.0.0.1:{PORT}/health',
+          ]
+          installer_required=[
+              'PAIR_TOKEN_FILE="$TARGET/ipad-pairing-token.txt"',
+              'uuidgen',
+              'DAR_VOICE_NETWORK_MODE</key><string>1',
+              'DAR_VOICE_PAIR_TOKEN</key><string>$PAIR_TOKEN',
+              'DAR_VOICE_NETWORK_MODE=1',
+              'DAR_VOICE_PAIR_TOKEN="$PAIR_TOKEN"',
+          ]
+          html_required=[
+              'const IS_ENGINE_ORIGIN=',
+              'const IS_COMPANION=',
+              'id="companionBtn"',
+              'id="companionPill"',
+              'darCompanion',
+              'Companion-Modus',
+              'Zum Home-Bildschirm',
+              '@media(min-width:800px) and (max-width:1180px)',
+          ]
+          swift_required=[
+              'name: "darCompanion"',
+              'ipad-pairing-token.txt',
+              'localIPv4Address',
+              'companionPairingURL',
+              'showCompanionPairing',
+              'CIQRCodeGenerator',
+              'Link kopieren',
+              'DAR_VOICE_NETWORK_MODE',
+              'DAR_VOICE_PAIR_TOKEN',
+          ]
+
+          groups=[
+              ("engine",engine,engine_required),
+              ("installer",installer,installer_required),
+              ("html",html,html_required),
+              ("swift",swift,swift_required),
+          ]
+          errors=[]
+          for label,source,required in groups:
+              missing=[x for x in required if x not in source]
+              if missing:
+                  errors.append(label+": "+", ".join(missing))
+          if errors:
+              raise SystemExit("Companion validation failed: "+" | ".join(errors))
+
+          # /health may report only whether companion mode is enabled.
+          # It must never serialize or return the actual secret value.
+          health_segment=engine[engine.index('if p=="/health"'):engine.index('elif p=="/status"')]
+          forbidden=[
+              '"pair_token":PAIR_TOKEN',
+              '"pairToken":PAIR_TOKEN',
+              '"token":PAIR_TOKEN',
+              '"pair":PAIR_TOKEN',
+          ]
+          leaked=[x for x in forbidden if x in health_segment]
+          if leaked:
+              raise SystemExit("PAIR_TOKEN value must never be exposed by /health: "+", ".join(leaked))
+          if '"companion_mode":bool(NETWORK_MODE and PAIR_TOKEN)' not in health_segment:
+              raise SystemExit("/health should expose only the companion-mode boolean")
+          print("Secure iPad/iPhone companion mode OK")
+          PY
+
+      - name: Validate zero-detour Content Studio workflow
+        run: |
+          node --check voice-studio/content-studio.js
+          node --check voice-studio/alphabet-audio-studio.js
+          python - <<'PY'
+          from pathlib import Path
+          src=Path("voice-studio/content-studio.js").read_text(encoding="utf-8")
+          required=[
+              'data-cs-step="text"',
+              'data-cs-step="audio"',
+              'data-cs-step="cover"',
+              'data-cs-step="test"',
+              'data-cs-step="live"',
+              'function renderWorkflow()',
+              'function goToWorkflowStep(step)',
+              'function focusNextProductionAction()',
+              'setTimeout(focusNextProductionAction,120)',
+              'setTimeout(()=>goToWorkflowStep("live"),100)',
+              'window.DarContentStudio={',
+              'staleAudio',
+          ]
+          # The actual stale-audio guard is structural; do not rely on a label.
+          required.remove('staleAudio')
+          missing=[x for x in required if x not in src]
+          if missing:
+              raise SystemExit("Zero-detour workflow markers missing: "+", ".join(missing))
+          if 'document.addEventListener("keydown"' in src:
+              raise SystemExit("Content Studio must not install a duplicate global production shortcut handler")
+          if 'audioAsset=null;' not in src or 'stagingPublished=false;' not in src:
+              raise SystemExit("Text edits must invalidate stale production assets/status")
+          print("Zero-detour Content Studio workflow OK")
+          PY
+
+      - name: Validate strict Alif-Ba audio workflow
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          studio=Path("voice-studio/alphabet-audio-studio.js").read_text(encoding="utf-8")
+          installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          kids=Path("test/kids/index.html").read_text(encoding="utf-8")
+          manifest=Path("test/kids/data/alphabet-audio.json").read_text(encoding="utf-8")
+
+          groups=[
+              ("html",html,[
+                  'id="alphabetAudioSection"',
+                  'id="alphabetPackNextBtn"',
+                  'id="alphabetPackApproveBtn"',
+                  'alphabet-audio-studio.js?v=295',
+              ]),
+              ("studio",studio,[
+                  '/api/admin/kids-alphabet-audio',
+                  '/api/admin/kids-alphabet-audio/verify',
+                  '/api/admin/kids-content/media',
+                  'function playerFullyHeard()',
+                  'await confirmQA()',
+                  'if(!qaConfirmed)',
+                  'lastGeneratedText',
+                  'serhat-alphabet-human-reviewed',
+                  'current.slot?.text',
+              ]),
+              ("installer",installer,[
+                  'download_repo_file "voice-studio/alphabet-audio-studio.js"',
+                  'alphabet-audio-studio.js',
+                  'CFBundleShortVersionString</key><string>2.9.5',
+              ]),
+              ("engine",engine,[
+                  '/studio/alphabet-audio-studio.js',
+                  'alphabet-audio-studio.js',
+              ]),
+              ("kids",kids,[
+                  'alphabet-audio.json?v=1',
+                  'audioEvidenceComplete',
+                  'PROGRESS_KEY="kids.alphabet.progress.v2."',
+                  'Referenzaufnahme noch nicht freigegeben',
+              ]),
+              ("manifest",manifest,[
+                  '"syntheticFallback": false',
+                  '"requireExplicitVerification": true',
+                  '"sourceVoice": "authorized-owner-voice"',
+              ]),
+          ]
+          errors=[]
+          for label,source,required in groups:
+              missing=[x for x in required if x not in source]
+              if missing:
+                  errors.append(label+": "+", ".join(missing))
+          forbidden=[x for x in ['function speakArabic','lang:"ar-SA"'] if x in kids]
+          if forbidden:
+              errors.append("kids system Arabic TTS fallback remains: "+", ".join(forbidden))
+          if 'if(!playerFullyHeard())' not in studio:
+              errors.append("human full-listen gate missing")
+          if errors:
+              raise SystemExit("Strict Alif-Ba audio validation failed: "+" | ".join(errors))
+          print("Strict Alif-Ba audio workflow OK")
+          PY
+
+      - name: Compile Voice Engine
+        run: python -m py_compile voice-studio/local-engine.py
+
+      - name: Smoke-test Voice Engine runtime state
+        run: |
+          python - <<'PY'
+          import importlib.util, os, shutil, tempfile
+          from pathlib import Path
+
+          root=Path.cwd()
+          tmp=Path(tempfile.mkdtemp(prefix="dar-voice-smoke-"))
+          app=tmp/"studio"
+          home=tmp/"home"
+          app.mkdir(parents=True)
+          home.mkdir(parents=True)
+          shutil.copy2(root/"data/pronunciation/pronunciation-rules.json",app/"pronunciation-rules.json")
+          shutil.copy2(root/"data/pronunciation/voice-production-profile.json",app/"voice-production-profile.json")
+          shutil.copy2(root/"data/pronunciation/islamic-master-library.json",app/"islamic-master-library.json")
+          os.environ["DAR_VOICE_APP_HOME"]=str(app)
+          os.environ["HOME"]=str(home)
+
+          spec=importlib.util.spec_from_file_location("dar_voice_engine_smoke",root/"voice-studio/local-engine.py")
+          mod=importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(mod)
+
+          assert mod.HOST == "127.0.0.1", mod.HOST
+          assert mod.NETWORK_MODE is False
+          assert mod.PAIR_TOKEN == ""
+
+          # Companion authorization is deny-by-default and token-gated on LAN.
+          remote=object.__new__(mod.H)
+          remote.client_address=("192.168.50.20",54321)
+          remote.headers={}
+          remote.path="/health"
+          assert remote.remote_authorized() is False
+
+          mod.NETWORK_MODE=True
+          mod.PAIR_TOKEN="0123456789abcdef"
+          assert remote.remote_authorized() is False
+          remote.headers={"Cookie":"DARVOICE_PAIR=0123456789abcdef"}
+          assert remote.remote_authorized() is True
+          remote.headers={"Cookie":"DARVOICE_PAIR=wrong"}
+          assert remote.remote_authorized() is False
+
+          loopback=object.__new__(mod.H)
+          loopback.client_address=("127.0.0.1",12345)
+          loopback.headers={}
+          loopback.path="/health"
+          assert loopback.remote_authorized() is True
+
+          status=mod.get_status()
+          assert isinstance(status,dict)
+          assert "audio_lock_pending" in status
+          assert isinstance(status["audio_lock_pending"],list)
+          assert hasattr(mod,"AUDIO_LOCK_STATE_LOCK")
+          assert hasattr(mod,"PENDING_AUDIO_LOCKS")
+          assert hasattr(mod,"PENDING_AUDIO_RENDER_ID")
+          state=mod.learning_state()
+          assert state["masterEntries"] >= 25, state
+          assert state["masterProphets"] >= 25, state
+          prepared,found=mod.prepare("Mūsā und ʿĀʾišah")
+          assert "مُوسَى" in prepared, prepared
+          assert "عَائِشَة" in prepared, prepared
+          assert "رَضِيَ اللَّهُ عَنْهَا" in prepared, prepared
+          assert mod.detect_unresolved_islamic_terms("Mūsā sagte") == []
+          unknown=mod.detect_unresolved_islamic_terms("ʿAbdulx al-Majhūl sagte")
+          assert unknown, unknown
+          print("Voice Engine runtime smoke OK",state["masterEntries"],state["masterProphets"])
+          PY
+
+      - name: Validate pronunciation and regression fixtures
+        run: |
+          python scripts/voice-studio/validate-v2.py \
+            data/pronunciation/pronunciation-rules.json \
+            data/pronunciation/voice-production-profile.json \
+            voice-studio/local-engine.py \
+            data/pronunciation/voice-regression-fixtures.json
+
+      - name: Validate Voice Studio UI hooks
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          required=[
+              'id="styleMode"',
+              'id="qaProsody"',
+              'id="qaArabicRef"',
+              'id="qaTechnical"',
+              'id="qaBackend"',
+              'id="qaSpeed"',
+              'id="qaCoreLock"',
+              'id="qaHonorific"',
+              'id="learningSection"',
+              'id="learnTerm"',
+              'id="learnResults"',
+              'id="learnPreviewBtn"',
+              'id="learnConfirmBtn"',
+              'id="learnSyncBtn"',
+              'data-learning-term',
+              '"/analyze"',
+              '"/confirm-core-audio"',
+              '"/learning/search"',
+              '"/learning/sync"',
+              '"/learning/preview"',
+              '"/learning/confirm"',
+              'honorificPolicyEnabled',
+              'unresolvedIslamicTerms',
+              'Master-Bibliothek',
+              'lastGeneratedText',
+              'rerenderCurrentAudio',
+              'pendingAutoRerenderText',
+              'resetAudioQA(true)',
+              'Nach der letzten Bestätigung wird derselbe Text automatisch neu erzeugt',
+              'Alle offenen Aussprachen sind geklärt; derselbe Text wird jetzt automatisch neu erzeugt',
+              'style:$("#styleMode").value',
+              'data-audio-output-button',
+              'x-webkit-airplay="deny"',
+              'darAudioOutput',
+              'disableRemotePlayback',
+              'voice-studio-icon.png?v=295',
+              'VOICE STUDIO 2.9.5',
+          ]
+          missing=[x for x in required if x not in html]
+          if missing:
+              raise SystemExit("Missing Voice Studio 2 UI hooks: "+", ".join(missing))
+          print("Voice Studio UI hooks OK")
+          PY
+
+
+  mac-native-audio-route:
+    runs-on: macos-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Typecheck native macOS Voice Studio
+        run: |
+          xcrun swiftc -typecheck \
+            voice-studio/VoiceStudioApp.swift \
+            -framework Cocoa \
+            -framework WebKit \
+            -framework CoreAudio \
+            -framework CoreImage
+
+      - name: Verify native audio-route bridge markers
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          src=Path("voice-studio/VoiceStudioApp.swift").read_text(encoding="utf-8")
+          required=[
+              "WKScriptMessageHandler",
+              "darAudioOutput",
+              "kAudioHardwarePropertyDevices",
+              "kAudioHardwarePropertyDefaultOutputDevice",
+              "kAudioDevicePropertyScopeOutput",
+              "setDefaultOutputDevice",
+              "showAudioOutputMenu",
+              "Toneinstellungen öffnen",
+              "applyAppIcon",
+              "VoiceStudioIcon",
+              "updateLoadingProgress",
+              "status: \"Bereit\"",
+              "DĀRVoiceStudioMac/2.9.5",
+              "NSMenu(title: \"Produktion\")",
+              "newContent",
+              "focusText",
+              "produceContent",
+              "publishTestContent",
+              "publishLiveContent",
+              "window.DarContentStudio",
+              "darCompanion",
+              "showCompanionPairing",
+              "companionPairingURL",
+              "localIPv4Address",
+              "CIQRCodeGenerator",
+          ]
+          missing=[x for x in required if x not in src]
+          if missing:
+              raise SystemExit("Missing native audio routing markers: "+", ".join(missing))
+          print("Native macOS audio routing hooks OK")
+          PY
+,
+              'Ungültige oder fehlende validierte Release-Referenz',
+              'pkill -TERM -x DARVoiceStudioNative',
+              'download_repo_file "voice-studio/update-mac.command"',
+              'download_repo_file "voice-studio/alphabet-audio-studio.js"',
+              "chmod +x \"$TARGET/update-mac.command\"",
+              "CFBundleShortVersionString</key><string>2.9.5",
+          ]
+          html_required=[
+              'id="updateBtn"',
+              'id="appUpdateState"',
+              'darUpdater',
+              'darUpdateStateChanged',
+              'requestNativeUpdate',
+              'Update wird installiert',
+          ]
+          swift_required=[
+              'name: "darUpdater"',
+              "updateManifestURL",
+              "api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/version.json?ref=main",
+              'application/vnd.github.raw+json',
+              'DAR-Voice-Studio-Updater',
+              "checkForUpdates",
+              "installAvailableUpdate",
+              "openUpdateLog",
+              "update.log",
+              "Update-Protokoll öffnen",
+              "update-mac.command",
+              'DĀRVoiceStudioMac/2.9.5',
+          ]
+
+          groups=[
+              ("helper",helper,helper_required),
+              ("installer",installer,installer_required),
+              ("html",html,html_required),
+              ("swift",swift,swift_required),
+          ]
+          errors=[]
+          for label,source,required in groups:
+              missing=[x for x in required if x not in source]
+              if missing:
+                  errors.append(label+": "+", ".join(missing))
+          if errors:
+              raise SystemExit("In-app updater validation failed: "+" | ".join(errors))
+
+          for label,source in [("helper",helper),("installer",installer),("html",html),("swift",swift)]:
+              if "raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site" in source:
+                  raise SystemExit(label+" still depends on failing raw.githubusercontent.com transport")
+          if "api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main" not in html:
+              raise SystemExit("UI bootstrap command must use GitHub Contents API")
+          if 'PIN="' in installer and 'PIN=""' not in installer:
+              raise SystemExit("Installer must not hard-code a stale release PIN")
+          if 'releaseRef' not in installer:
+              raise SystemExit("Installer must resolve a validated releaseRef from version.json")
+          print("In-app updater package OK")
+          PY
+
+      - name: Validate secure iPad companion mode
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          swift=Path("voice-studio/VoiceStudioApp.swift").read_text(encoding="utf-8")
+
+          engine_required=[
+              'NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE"',
+              'PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN"',
+              'HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"',
+              'DARVOICE_PAIR=',
+              'remote_authorized',
+              'accept_pairing_url',
+              'hmac.compare_digest',
+              '"pairing_required":True',
+              '"companion_mode":bool(NETWORK_MODE and PAIR_TOKEN)',
+              '"start_url":"/studio/?pair="+PAIR_TOKEN',
+              'http://127.0.0.1:{PORT}/health',
+          ]
+          installer_required=[
+              'PAIR_TOKEN_FILE="$TARGET/ipad-pairing-token.txt"',
+              'uuidgen',
+              'DAR_VOICE_NETWORK_MODE</key><string>1',
+              'DAR_VOICE_PAIR_TOKEN</key><string>$PAIR_TOKEN',
+              'DAR_VOICE_NETWORK_MODE=1',
+              'DAR_VOICE_PAIR_TOKEN="$PAIR_TOKEN"',
+          ]
+          html_required=[
+              'const IS_ENGINE_ORIGIN=',
+              'const IS_COMPANION=',
+              'id="companionBtn"',
+              'id="companionPill"',
+              'darCompanion',
+              'Companion-Modus',
+              'Zum Home-Bildschirm',
+              '@media(min-width:800px) and (max-width:1180px)',
+          ]
+          swift_required=[
+              'name: "darCompanion"',
+              'ipad-pairing-token.txt',
+              'localIPv4Address',
+              'companionPairingURL',
+              'showCompanionPairing',
+              'CIQRCodeGenerator',
+              'Link kopieren',
+              'DAR_VOICE_NETWORK_MODE',
+              'DAR_VOICE_PAIR_TOKEN',
+          ]
+
+          groups=[
+              ("engine",engine,engine_required),
+              ("installer",installer,installer_required),
+              ("html",html,html_required),
+              ("swift",swift,swift_required),
+          ]
+          errors=[]
+          for label,source,required in groups:
+              missing=[x for x in required if x not in source]
+              if missing:
+                  errors.append(label+": "+", ".join(missing))
+          if errors:
+              raise SystemExit("Companion validation failed: "+" | ".join(errors))
+
+          # /health may report only whether companion mode is enabled.
+          # It must never serialize or return the actual secret value.
+          health_segment=engine[engine.index('if p=="/health"'):engine.index('elif p=="/status"')]
+          forbidden=[
+              '"pair_token":PAIR_TOKEN',
+              '"pairToken":PAIR_TOKEN',
+              '"token":PAIR_TOKEN',
+              '"pair":PAIR_TOKEN',
+          ]
+          leaked=[x for x in forbidden if x in health_segment]
+          if leaked:
+              raise SystemExit("PAIR_TOKEN value must never be exposed by /health: "+", ".join(leaked))
+          if '"companion_mode":bool(NETWORK_MODE and PAIR_TOKEN)' not in health_segment:
+              raise SystemExit("/health should expose only the companion-mode boolean")
+          print("Secure iPad/iPhone companion mode OK")
+          PY
+
+      - name: Validate zero-detour Content Studio workflow
+        run: |
+          node --check voice-studio/content-studio.js
+          node --check voice-studio/alphabet-audio-studio.js
+          python - <<'PY'
+          from pathlib import Path
+          src=Path("voice-studio/content-studio.js").read_text(encoding="utf-8")
+          required=[
+              'data-cs-step="text"',
+              'data-cs-step="audio"',
+              'data-cs-step="cover"',
+              'data-cs-step="test"',
+              'data-cs-step="live"',
+              'function renderWorkflow()',
+              'function goToWorkflowStep(step)',
+              'function focusNextProductionAction()',
+              'setTimeout(focusNextProductionAction,120)',
+              'setTimeout(()=>goToWorkflowStep("live"),100)',
+              'window.DarContentStudio={',
+              'staleAudio',
+          ]
+          # The actual stale-audio guard is structural; do not rely on a label.
+          required.remove('staleAudio')
+          missing=[x for x in required if x not in src]
+          if missing:
+              raise SystemExit("Zero-detour workflow markers missing: "+", ".join(missing))
+          if 'document.addEventListener("keydown"' in src:
+              raise SystemExit("Content Studio must not install a duplicate global production shortcut handler")
+          if 'audioAsset=null;' not in src or 'stagingPublished=false;' not in src:
+              raise SystemExit("Text edits must invalidate stale production assets/status")
+          print("Zero-detour Content Studio workflow OK")
+          PY
+
+      - name: Validate strict Alif-Ba audio workflow
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          studio=Path("voice-studio/alphabet-audio-studio.js").read_text(encoding="utf-8")
+          installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          kids=Path("test/kids/index.html").read_text(encoding="utf-8")
+          manifest=Path("test/kids/data/alphabet-audio.json").read_text(encoding="utf-8")
+
+          groups=[
+              ("html",html,[
+                  'id="alphabetAudioSection"',
+                  'id="alphabetPackNextBtn"',
+                  'id="alphabetPackApproveBtn"',
+                  'alphabet-audio-studio.js?v=295',
+              ]),
+              ("studio",studio,[
+                  '/api/admin/kids-alphabet-audio',
+                  '/api/admin/kids-alphabet-audio/verify',
+                  '/api/admin/kids-content/media',
+                  'function playerFullyHeard()',
+                  'await confirmQA()',
+                  'if(!qaConfirmed)',
+                  'lastGeneratedText',
+                  'serhat-alphabet-human-reviewed',
+                  'current.slot?.text',
+              ]),
+              ("installer",installer,[
+                  'download_repo_file "voice-studio/alphabet-audio-studio.js"',
+                  'alphabet-audio-studio.js',
+                  'CFBundleShortVersionString</key><string>2.9.5',
+              ]),
+              ("engine",engine,[
+                  '/studio/alphabet-audio-studio.js',
+                  'alphabet-audio-studio.js',
+              ]),
+              ("kids",kids,[
+                  'alphabet-audio.json?v=1',
+                  'audioEvidenceComplete',
+                  'PROGRESS_KEY="kids.alphabet.progress.v2."',
+                  'Referenzaufnahme noch nicht freigegeben',
+              ]),
+              ("manifest",manifest,[
+                  '"syntheticFallback": false',
+                  '"requireExplicitVerification": true',
+                  '"sourceVoice": "authorized-owner-voice"',
+              ]),
+          ]
+          errors=[]
+          for label,source,required in groups:
+              missing=[x for x in required if x not in source]
+              if missing:
+                  errors.append(label+": "+", ".join(missing))
+          forbidden=[x for x in ['function speakArabic','lang:"ar-SA"'] if x in kids]
+          if forbidden:
+              errors.append("kids system Arabic TTS fallback remains: "+", ".join(forbidden))
+          if 'if(!playerFullyHeard())' not in studio:
+              errors.append("human full-listen gate missing")
+          if errors:
+              raise SystemExit("Strict Alif-Ba audio validation failed: "+" | ".join(errors))
+          print("Strict Alif-Ba audio workflow OK")
+          PY
+
+      - name: Compile Voice Engine
+        run: python -m py_compile voice-studio/local-engine.py
+
+      - name: Smoke-test Voice Engine runtime state
+        run: |
+          python - <<'PY'
+          import importlib.util, os, shutil, tempfile
+          from pathlib import Path
+
+          root=Path.cwd()
+          tmp=Path(tempfile.mkdtemp(prefix="dar-voice-smoke-"))
+          app=tmp/"studio"
+          home=tmp/"home"
+          app.mkdir(parents=True)
+          home.mkdir(parents=True)
+          shutil.copy2(root/"data/pronunciation/pronunciation-rules.json",app/"pronunciation-rules.json")
+          shutil.copy2(root/"data/pronunciation/voice-production-profile.json",app/"voice-production-profile.json")
+          shutil.copy2(root/"data/pronunciation/islamic-master-library.json",app/"islamic-master-library.json")
+          os.environ["DAR_VOICE_APP_HOME"]=str(app)
+          os.environ["HOME"]=str(home)
+
+          spec=importlib.util.spec_from_file_location("dar_voice_engine_smoke",root/"voice-studio/local-engine.py")
+          mod=importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(mod)
+
+          assert mod.HOST == "127.0.0.1", mod.HOST
+          assert mod.NETWORK_MODE is False
+          assert mod.PAIR_TOKEN == ""
+
+          # Companion authorization is deny-by-default and token-gated on LAN.
+          remote=object.__new__(mod.H)
+          remote.client_address=("192.168.50.20",54321)
+          remote.headers={}
+          remote.path="/health"
+          assert remote.remote_authorized() is False
+
+          mod.NETWORK_MODE=True
+          mod.PAIR_TOKEN="0123456789abcdef"
+          assert remote.remote_authorized() is False
+          remote.headers={"Cookie":"DARVOICE_PAIR=0123456789abcdef"}
+          assert remote.remote_authorized() is True
+          remote.headers={"Cookie":"DARVOICE_PAIR=wrong"}
+          assert remote.remote_authorized() is False
+
+          loopback=object.__new__(mod.H)
+          loopback.client_address=("127.0.0.1",12345)
+          loopback.headers={}
+          loopback.path="/health"
+          assert loopback.remote_authorized() is True
+
+          status=mod.get_status()
+          assert isinstance(status,dict)
+          assert "audio_lock_pending" in status
+          assert isinstance(status["audio_lock_pending"],list)
+          assert hasattr(mod,"AUDIO_LOCK_STATE_LOCK")
+          assert hasattr(mod,"PENDING_AUDIO_LOCKS")
+          assert hasattr(mod,"PENDING_AUDIO_RENDER_ID")
+          state=mod.learning_state()
+          assert state["masterEntries"] >= 25, state
+          assert state["masterProphets"] >= 25, state
+          prepared,found=mod.prepare("Mūsā und ʿĀʾišah")
+          assert "مُوسَى" in prepared, prepared
+          assert "عَائِشَة" in prepared, prepared
+          assert "رَضِيَ اللَّهُ عَنْهَا" in prepared, prepared
+          assert mod.detect_unresolved_islamic_terms("Mūsā sagte") == []
+          unknown=mod.detect_unresolved_islamic_terms("ʿAbdulx al-Majhūl sagte")
+          assert unknown, unknown
+          print("Voice Engine runtime smoke OK",state["masterEntries"],state["masterProphets"])
+          PY
+
+      - name: Validate pronunciation and regression fixtures
+        run: |
+          python scripts/voice-studio/validate-v2.py \
+            data/pronunciation/pronunciation-rules.json \
+            data/pronunciation/voice-production-profile.json \
+            voice-studio/local-engine.py \
+            data/pronunciation/voice-regression-fixtures.json
+
+      - name: Validate Voice Studio UI hooks
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          required=[
+              'id="styleMode"',
+              'id="qaProsody"',
+              'id="qaArabicRef"',
+              'id="qaTechnical"',
+              'id="qaBackend"',
+              'id="qaSpeed"',
+              'id="qaCoreLock"',
+              'id="qaHonorific"',
+              'id="learningSection"',
+              'id="learnTerm"',
+              'id="learnResults"',
+              'id="learnPreviewBtn"',
+              'id="learnConfirmBtn"',
+              'id="learnSyncBtn"',
+              'data-learning-term',
+              '"/analyze"',
+              '"/confirm-core-audio"',
+              '"/learning/search"',
+              '"/learning/sync"',
+              '"/learning/preview"',
+              '"/learning/confirm"',
+              'honorificPolicyEnabled',
+              'unresolvedIslamicTerms',
+              'Master-Bibliothek',
+              'lastGeneratedText',
+              'rerenderCurrentAudio',
+              'pendingAutoRerenderText',
+              'resetAudioQA(true)',
+              'Nach der letzten Bestätigung wird derselbe Text automatisch neu erzeugt',
+              'Alle offenen Aussprachen sind geklärt; derselbe Text wird jetzt automatisch neu erzeugt',
+              'style:$("#styleMode").value',
+              'data-audio-output-button',
+              'x-webkit-airplay="deny"',
+              'darAudioOutput',
+              'disableRemotePlayback',
+              'voice-studio-icon.png?v=295',
+              'VOICE STUDIO 2.9.5',
+          ]
+          missing=[x for x in required if x not in html]
+          if missing:
+              raise SystemExit("Missing Voice Studio 2 UI hooks: "+", ".join(missing))
+          print("Voice Studio UI hooks OK")
+          PY
+
+
+  mac-native-audio-route:
+    runs-on: macos-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Typecheck native macOS Voice Studio
+        run: |
+          xcrun swiftc -typecheck \
+            voice-studio/VoiceStudioApp.swift \
+            -framework Cocoa \
+            -framework WebKit \
+            -framework CoreAudio \
+            -framework CoreImage
+
+      - name: Verify native audio-route bridge markers
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          src=Path("voice-studio/VoiceStudioApp.swift").read_text(encoding="utf-8")
+          required=[
+              "WKScriptMessageHandler",
+              "darAudioOutput",
+              "kAudioHardwarePropertyDevices",
+              "kAudioHardwarePropertyDefaultOutputDevice",
+              "kAudioDevicePropertyScopeOutput",
+              "setDefaultOutputDevice",
+              "showAudioOutputMenu",
+              "Toneinstellungen öffnen",
+              "applyAppIcon",
+              "VoiceStudioIcon",
+              "updateLoadingProgress",
+              "status: \"Bereit\"",
+              "DĀRVoiceStudioMac/2.9.5",
+              "NSMenu(title: \"Produktion\")",
+              "newContent",
+              "focusText",
+              "produceContent",
+              "publishTestContent",
+              "publishLiveContent",
+              "window.DarContentStudio",
+              "darCompanion",
+              "showCompanionPairing",
+              "companionPairingURL",
+              "localIPv4Address",
+              "CIQRCodeGenerator",
+          ]
+          missing=[x for x in required if x not in src]
+          if missing:
+              raise SystemExit("Missing native audio routing markers: "+", ".join(missing))
+          print("Native macOS audio routing hooks OK")
+          PY
+,
               'Ungültige oder fehlende validierte Release-Referenz',
               'pkill -TERM -x DARVoiceStudioNative',
               'download_repo_file "voice-studio/update-mac.command"',
