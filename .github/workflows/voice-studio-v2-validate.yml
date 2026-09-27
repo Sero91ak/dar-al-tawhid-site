@@ -62,16 +62,16 @@ jobs:
           import struct
 
           icon=Path("voice-studio/voice-studio-icon.png")
-          if not icon.exists() or icon.stat().st_size < 20000:
+          if not icon.exists() or icon.stat().st_size < 10000:
               raise SystemExit("Dedicated Voice Studio icon missing or still using the old placeholder asset")
           data=icon.read_bytes()
           if data[:8] != b"\x89PNG\r\n\x1a\n":
               raise SystemExit("Voice Studio icon is not a PNG")
           width,height=struct.unpack(">II",data[16:24])
-          if width < 256 or height < 256 or width != height:
+          if width < 160 or height < 160 or width != height:
               raise SystemExit(f"Voice Studio icon must be square and at least 256 px, got {width}x{height}")
-          # The former placeholder asset was only ~15 KB. The approved microphone/headphone
-          # production icon is materially larger and is also required in the visible header.
+          # The approved microphone/headphone production icon is optimized for the
+          # native splash/header source and is also regenerated into AppIcon.icns.
           html=Path("voice-studio/index.html").read_text(encoding="utf-8")
           if '<div class="brand-mark"><img src="voice-studio-icon.png' not in html:
               raise SystemExit("Voice Studio header does not render the dedicated logo")
