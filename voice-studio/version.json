@@ -1,6 +1,6 @@
 {
-  "version": "2.9.0",
-  "updatedAt": "2026-09-27T14:58:00+02:00",
+  "version": "2.9.1",
+  "updatedAt": "2026-09-27T15:02:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -233,7 +233,12 @@
     "quickWorkflowValidation": true,
     "zeroDetourWorkflowValidation": true,
     "contentStudioNativeMenuValidation": true,
-    "duplicateShortcutGuard": true
+    "duplicateShortcutGuard": true,
+    "inAppUpdaterValidation": true,
+    "updateHelperShellValidation": true,
+    "nativeUpdateBridgeValidation": true,
+    "updateInstallerPackagingValidation": true,
+    "noTerminalAfterMigration": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -415,5 +420,25 @@
   "workflowAutoJumpTestToLive": true,
   "workflowLiveReturnsToInventory": true,
   "nativeProductionMenu": true,
-  "nativeProductionShortcuts": true
+  "nativeProductionShortcuts": true,
+  "inAppUpdater": true,
+  "updateManifest": "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/version.json",
+  "updateHelper": "~/Applications/DAR-Voice-Studio/update-mac.command",
+  "updatePolicy": "silent-check-on-launch + manual-check + one-click-install + automatic-restart",
+  "updateRequiresTerminal": false,
+  "updateDetachedInstaller": true,
+  "updateAtomicSwap": true,
+  "updateRestartsApp": true,
+  "updateUi": {
+    "topButtonOnlyWhenAvailable": true,
+    "sideManualCheck": true,
+    "nativeAppMenu": true,
+    "states": [
+      "checking",
+      "current",
+      "available",
+      "installing",
+      "error"
+    ]
+  }
 }
