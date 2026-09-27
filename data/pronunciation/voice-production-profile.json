@@ -1,11 +1,11 @@
 {
   "schemaVersion": 8,
-  "id": "dar-own-voice-narration-v2.8.3",
+  "id": "dar-own-voice-narration-v2.8.4",
   "updatedAt": "2026-09-27",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade Serhat narration with strict sentence preflight, grammar-aware punctuation, verified-sentence fast reuse, model lazy-loading, automatic repair of moderate internal pauses, deterministic Islamic-name pronunciation, and strict final continuity QA.",
+  "productionGoal": "Production-grade Serhat narration with strict sentence preflight, grammar-aware punctuation, verified-sentence fast reuse, automatic pause repair, and zero-gap lexical bridges for German function words before/after Arabic MASTER terms.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -337,7 +337,14 @@
     "grammarAwarePunctuation": true,
     "visibleTextUnchanged": true,
     "zeroPauseGrammarComma": true,
-    "preflightBeforeModelInference": true
+    "preflightBeforeModelInference": true,
+    "lexicalBridgeEnabled": true,
+    "lexicalBridgeTrimThresholdRelative": 0.009,
+    "lexicalBridgeTrimSafetyMs": 2,
+    "lexicalBridgeCrossfadeMs": 118,
+    "lexicalBridgeMaxFraction": 0.46,
+    "inlineArabicMaxFraction": 0.38,
+    "functionWordArabicBinding": true
   },
   "qualityAssurance": {
     "maxRenderAttempts": 2,
@@ -436,7 +443,9 @@
     "moderatePauseAutoRepair": true,
     "qaCleanCacheOnly": true,
     "knownSentenceReuse": true,
-    "backendIndependentVerifiedCache": true
+    "backendIndependentVerifiedCache": true,
+    "lexicalBridgeRegression": true,
+    "noGapBeforeKnownArabicTerm": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -652,6 +661,8 @@
     "skipModelWhenAllSegmentsKnown": true,
     "verifiedSentenceFastReuse": true,
     "backendIndependentVerifiedCache": true,
-    "autoRepairModeratePause": true
+    "autoRepairModeratePause": true,
+    "lexicalBridgeEnabled": true,
+    "functionWordArabicBinding": true
   }
 }
