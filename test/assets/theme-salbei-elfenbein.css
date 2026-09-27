@@ -699,3 +699,177 @@ html[data-theme="light"][data-theme-variant="salbei"] ::selection{
   background:rgba(94,116,101,.22)!important;
   color:#17211B!important;
 }
+
+
+/* v1099 — Startseite: Lesbarkeit + weniger Kastenbau */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route{
+  --home-light-ink:#17211B;
+  --home-light-ink-soft:#2E3E34;
+  --home-light-muted:#536057;
+  --home-light-muted-strong:#46544B;
+  --home-light-accent:#3F5D4B;
+  --home-light-gold:#8A6A2F;
+  --home-light-line:rgba(63,93,75,.17);
+  --home-light-surface:rgba(255,255,255,.62);
+  --home-light-surface-strong:rgba(255,255,255,.84);
+}
+
+/* Layoutflächen bleiben Fläche – keine Card in Card */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route :is(
+  .home-v380-shell,
+  .home-v380-section,
+  .view-head-home-row--v380
+){
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .home-v380-section{
+  border:0!important;
+  border-radius:0!important;
+}
+
+/* Klare Typografie auf hellem Grund */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route :is(
+  .home-v380-section-title,
+  .home-v380-open-row__title,
+  .home-v380-post-title,
+  .home-v380-lib-card h3,
+  .home-v380-quran-hero__title
+){
+  color:var(--home-light-ink)!important;
+  -webkit-text-fill-color:var(--home-light-ink)!important;
+  text-shadow:none!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .home-v380-kicker{
+  color:var(--home-light-accent)!important;
+  -webkit-text-fill-color:var(--home-light-accent)!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route :is(
+  .home-v380-open-row__excerpt,
+  .home-v380-open-row__meta,
+  .home-v380-post-excerpt,
+  .home-v380-post-meta,
+  .home-v380-lib-card p,
+  .home-v380-quran-hero__meta,
+  .home-v380-quran-hero__when,
+  .home-v380-popular-text span
+){
+  color:var(--home-light-muted-strong)!important;
+  -webkit-text-fill-color:var(--home-light-muted-strong)!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route :is(
+  .home-v380-open-row__action,
+  .home-v380-post-action,
+  .home-v380-lib-card__foot,
+  .home-v380-text-link,
+  .home-v380-quran-hero__chevron
+){
+  color:var(--home-light-accent)!important;
+  -webkit-text-fill-color:var(--home-light-accent)!important;
+}
+
+/* „Heute für dich“: offene Zeilen statt heller Boxen */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .home-v380-open-row{
+  background:transparent!important;
+  background-color:transparent!important;
+  border:0!important;
+  border-bottom:1px solid var(--home-light-line)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  margin:0!important;
+  padding:15px 0!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .home-v380-open-row:last-child{
+  border-bottom:0!important;
+}
+
+/* Ramaḍān-Zeile im hellen Theme nicht als fremdfarbige Pill-/Card-Fläche */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .home-v380-open-row.ramadan-series-test-home{
+  background:transparent!important;
+  background-color:transparent!important;
+  border:0!important;
+  border-bottom:1px solid var(--home-light-line)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  padding:15px 0!important;
+  margin:0!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .ramadan-series-test-home .home-v380-kicker{
+  color:var(--home-light-gold)!important;
+  -webkit-text-fill-color:var(--home-light-gold)!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .ramadan-series-test-home .home-v380-open-row__title{
+  color:var(--home-light-ink)!important;
+  -webkit-text-fill-color:var(--home-light-ink)!important;
+  font-weight:700!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .ramadan-series-test-home .home-v380-open-row__excerpt{
+  color:var(--home-light-muted-strong)!important;
+  -webkit-text-fill-color:var(--home-light-muted-strong)!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .ramadan-series-test-home .home-v380-open-row__action{
+  color:var(--home-light-accent)!important;
+  -webkit-text-fill-color:var(--home-light-accent)!important;
+}
+
+/* Qurʾān-Fortsetzen bleibt eine echte Interaktions-Card, aber ruhiger und klarer */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .home-v380-quran-hero{
+  background:
+    radial-gradient(115% 100% at 0% 0%,rgba(176,141,79,.08),transparent 58%),
+    linear-gradient(168deg,var(--home-light-surface-strong),rgba(246,248,243,.78))!important;
+  border-color:rgba(63,93,75,.18)!important;
+  box-shadow:0 7px 20px rgba(31,49,39,.07)!important;
+}
+
+/* Karten nur dort, wo sie wirklich Navigation/Interaktion darstellen */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route :is(
+  .home-v380-post-preview,
+  .home-v380-lib-card
+){
+  background:linear-gradient(168deg,rgba(255,255,255,.82),rgba(246,248,243,.72))!important;
+  border-color:rgba(63,93,75,.16)!important;
+  box-shadow:0 6px 18px rgba(31,49,39,.055)!important;
+}
+
+/* Abschnittslinien statt zusätzlicher Flächen */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .home-v380-section-rule{
+  background:linear-gradient(90deg,rgba(63,93,75,.23),rgba(176,141,79,.14) 48%,transparent 92%)!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .home-start-rule{
+  background:linear-gradient(90deg,rgba(63,93,75,.30),rgba(176,141,79,.18) 58%,transparent 94%)!important;
+}
+
+/* Untere Navigation im hellen Theme mit sicherem Kontrast */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .bottom-nav-btn{
+  color:#56645B!important;
+  -webkit-text-fill-color:#56645B!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .bottom-nav-btn :is(svg,.nav-icon){
+  color:#56645B!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route :is(
+  .bottom-nav-btn.active,
+  .bottom-nav-btn.is-active,
+  .bottom-nav-btn[aria-current="page"]
+){
+  color:#294235!important;
+  -webkit-text-fill-color:#294235!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route :is(
+  .bottom-nav-btn.active,
+  .bottom-nav-btn.is-active,
+  .bottom-nav-btn[aria-current="page"]
+) :is(svg,.nav-icon){
+  color:#294235!important;
+}
+
+/* Sicherheitsnetz gegen versehentlich zu helle Home-Texte */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route :is(
+  .home-v380-section,
+  .home-v380-open-row,
+  .home-v380-quran-hero,
+  .home-v380-post-preview,
+  .home-v380-lib-card
+) :is(p,h2,h3,h4,span){
+  text-shadow:none!important;
+}
