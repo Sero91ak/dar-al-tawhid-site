@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1089";
+  const VER="1090";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -64,6 +64,8 @@
     im.src=src(file);
     im.decoding=prio==="high"?"sync":"async";
     im.fetchPriority=prio==="high"?"high":"low";
+    im.style.background="transparent";
+    im.style.backgroundColor="transparent";
     return im;
   }
   function fileFromTopic(text){
@@ -211,29 +213,32 @@
   }
   function fill(el,file,prio){
     if(!el||!file)return;
+    if(el.closest&&(el.closest(".qov-wake-labeled-btn")||el.closest(".qov-player-icon")||el.classList.contains("qov-wake-labeled-icon")))return;
     const want=src(file);
+    el.querySelectorAll("img.dar3d-icon").forEach(function(im,i){if(i>0){try{im.remove()}catch(e){}}});
     const existing=el.querySelector("img.dar3d-icon");
     if(existing){
-      const cur=existing.getAttribute("src")||"";
-      if(sameFile(cur,file)||cur.indexOf("blob:")===0)return;
       existing.setAttribute("src",want);
+      existing.style.background="transparent";
+      existing.style.backgroundColor="transparent";
+      try{el.style.fontSize="0";el.style.color="transparent"}catch(e){}
       return;
     }
     if(el.matches&&el.matches("img.dar3d-icon")){
-      const cur=el.getAttribute("src")||"";
-      if(sameFile(cur,file)||cur.indexOf("blob:")===0)return;
       el.setAttribute("src",want);
       return;
     }
-    try{el.style.fontSize="0";el.style.color="transparent"}catch(e){}
-    el.querySelectorAll("svg").forEach(function(s){try{s.remove()}catch(e){}});
+    try{el.style.fontSize="0";el.style.color="transparent";el.style.background="transparent"}catch(e){}
+    el.querySelectorAll("svg,img.dar3d-icon").forEach(function(s){try{s.remove()}catch(e){}});
     const keep=[];
     el.childNodes.forEach(function(n){if(n.nodeType===1&&n.classList&&(n.classList.contains("quick-action-badge")||n.classList.contains("quick-action-dot")))keep.push(n)});
     el.textContent="";
     keep.forEach(function(n){el.appendChild(n)});
-    el.insertBefore(imgFor(file,prio),el.firstChild);
+    const im=imgFor(file,prio);
+    im.style.background="transparent";
+    el.insertBefore(im,el.firstChild);
   }
-  const SLOT_SEL=".feature-icon,.emoji-emblem,.folder-icon,.book-library-icon,.prophets-spotlight__icon,.quick-action-emoji,.quiz-quick-icon,.scholars-index__mono,.prophets-row__icon,.prophets-detail__emoji,.home-v380-lib-card__ico,.library-focus-teaser__icon,.zakat-home-teaser-icon,.home-v380-quran-hero__mark,.qrc-btn-emoji,.qrc-play-mark,.home-hijri-ico,.settings-live-icon,.direct-pick-ico,.related-compact-icon,.more-quick-access__ico,.current-focus-icon,.qrc-menu-emoji,.qov-icon-btn,.qov-player-launch-ico,.qov-wake-labeled-icon";
+  const SLOT_SEL=".feature-icon,.emoji-emblem,.folder-icon,.book-library-icon,.prophets-spotlight__icon,.quick-action-emoji,.quiz-quick-icon,.scholars-index__mono,.prophets-row__icon,.prophets-detail__emoji,.home-v380-lib-card__ico,.library-focus-teaser__icon,.zakat-home-teaser-icon,.home-v380-quran-hero__mark,.qrc-btn-emoji,.qrc-play-mark,.home-hijri-ico,.settings-live-icon,.direct-pick-ico,.related-compact-icon,.more-quick-access__ico,.current-focus-icon,.qrc-menu-emoji";
   function scan(){
     document.querySelectorAll("#bottomNav [data-bottom-nav]").forEach(btn=>{
       const icon=btn.querySelector(".nav-icon");
@@ -265,7 +270,7 @@
   function openDb(){
     return new Promise((res,rej)=>{
       try{
-        const r=indexedDB.open("dar-3d-icon-pack",1);
+        const r=indexedDB.open("dar-3d-icon-pack-v1090",1);
         r.onupgradeneeded=function(){r.result.createObjectStore("png")};
         r.onsuccess=function(){res(r.result)};
         r.onerror=function(){rej(r.error)};
