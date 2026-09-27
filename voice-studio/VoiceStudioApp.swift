@@ -3,6 +3,7 @@ import WebKit
 import Foundation
 import Darwin
 import CoreAudio
+import CoreImage
 
 final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKScriptMessageHandler {
     private var window: NSWindow!
@@ -281,6 +282,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         return components.url?.absoluteString
     }
 
+    private func qrImage(for text: String, size: CGFloat = 220) -> NSImage? {
+        guard let data = text.data(using: .utf8),
+              let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
+        filter.setValue(data, forKey: "inputMessage")
+        filter.setValue("M", forKey: "inputCorrectionLevel")
+        guard let output = filter.outputImage else { return nil }
+
+        let scale = max(1, floor(size / max(output.extent.width, output.extent.height)))
+        let transformed = output.transformed(by: CGAffineTransform(scaleX: scale, y: scale))
+        let context = CIContext(options: [.useSoftwareRenderer: false])
+        guard let cg = context.createCGImage(transformed, from: transformed.extent) else { return nil }
+        return NSImage(cgImage: cg, size: NSSize(width: size, height: size))
+    }
+
     @objc private func showCompanionPairing(_ sender: Any?) {
         let alert = NSAlert()
         alert.alertStyle = .informational
@@ -293,7 +308,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             return
         }
 
-        alert.informativeText = "Öffne diesen Link auf dem iPad/iPhone im selben WLAN. Beim ersten Öffnen wird das Gerät sicher mit diesem Mac gekoppelt.\n\n\(url)\n\nDen Link nicht an andere Personen weitergeben."
+        alert.informativeText = "Scanne den QR-Code mit dem iPad/iPhone im selben WLAN oder kopiere den Link. Beim ersten Öffnen wird das Gerät sicher mit diesem Mac gekoppelt.\n\nDen Kopplungslink nicht an andere Personen weitergeben."
+        if let image = qrImage(for: url) {
+            let imageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 220, height: 220))
+            imageView.image = image
+            imageView.imageScaling = .scaleProportionallyUpOrDown
+            alert.accessoryView = imageView
+        }
         alert.addButton(withTitle: "Link kopieren")
         alert.addButton(withTitle: "Schließen")
         let response = alert.runModal()
