@@ -461,7 +461,9 @@
     "learnedCanonicalGroupPersistenceRegression": true,
     "learnedAliasPersistenceRegression": true,
     "learnedBackupRecoveryRegression": true,
-    "learnedMasterNeverReviewRegression": true
+    "learnedMasterNeverReviewRegression": true,
+    "learnedAudioBackupRegression": true,
+    "priorLearnedMigrationRegression": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -649,7 +651,11 @@
     "confirmedNeverReturnsToReview": true,
     "atomicLocalBackup": true,
     "backupRecovery": true,
-    "userMasterAlwaysPrecedesReview": true
+    "userMasterAlwaysPrecedesReview": true,
+    "confirmedAudioBackupPath": "~/SerhatVoice/PronunciationLearning/confirmed-audio",
+    "confirmedAudioBackupRecovery": true,
+    "migratePreviouslyLearnedTerms": true,
+    "noRetestAfterUpgrade": true
   },
   "productionRenderer": {
     "primaryAppleSilicon": "mlx-community/chatterbox-multilingual-v3",
