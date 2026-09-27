@@ -78,16 +78,22 @@ jobs:
           swift=Path("voice-studio/VoiceStudioApp.swift").read_text(encoding="utf-8")
 
           helper_required=[
-              "raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/install-mac.command",
+              "api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main",
+              "application/vnd.github.raw+json",
+              "DAR-Voice-Studio-Updater",
               "nohup /bin/bash",
               "update.log",
               "bash -n",
           ]
           installer_required=[
-              "update-mac.command?v=293",
+              'REPO_API="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site"',
+              'download_repo_file()',
+              'application/vnd.github.raw+json',
+              'DAR-Voice-Studio-Installer',
+              'download_repo_file "voice-studio/update-mac.command"',
+              'download_repo_file "voice-studio/alphabet-audio-studio.js"',
               "chmod +x \"$TARGET/update-mac.command\"",
               "CFBundleShortVersionString</key><string>2.9.3",
-              "alphabet-audio-studio.js?v=293",
           ]
           html_required=[
               'id="updateBtn"',
@@ -100,6 +106,9 @@ jobs:
           swift_required=[
               'name: "darUpdater"',
               "updateManifestURL",
+              "api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/version.json?ref=main",
+              'application/vnd.github.raw+json',
+              'DAR-Voice-Studio-Updater',
               "checkForUpdates",
               "installAvailableUpdate",
               "update-mac.command",
@@ -119,6 +128,12 @@ jobs:
                   errors.append(label+": "+", ".join(missing))
           if errors:
               raise SystemExit("In-app updater validation failed: "+" | ".join(errors))
+
+          for label,source in [("helper",helper),("installer",installer),("html",html),("swift",swift)]:
+              if "raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site" in source:
+                  raise SystemExit(label+" still depends on failing raw.githubusercontent.com transport")
+          if "api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main" not in html:
+              raise SystemExit("UI bootstrap command must use GitHub Contents API")
           print("In-app updater package OK")
           PY
 
@@ -269,7 +284,7 @@ jobs:
                   'current.slot?.text',
               ]),
               ("installer",installer,[
-                  'alphabet-audio-studio.js?v=293',
+                  'download_repo_file "voice-studio/alphabet-audio-studio.js"',
                   'alphabet-audio-studio.js',
                   'CFBundleShortVersionString</key><string>2.9.3',
               ]),
