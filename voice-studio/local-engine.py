@@ -55,6 +55,8 @@ USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
 USER_OVERRIDES_BACKUP_DIR=LEARNING_HOME/"backups"
 USER_OVERRIDES_BACKUP=USER_OVERRIDES_BACKUP_DIR/"user-overrides.latest.json"
 USER_OVERRIDES_BACKUP_DIR.mkdir(parents=True,exist_ok=True)
+LEARNING_CONFIRMED_AUDIO_DIR=LEARNING_HOME/"confirmed-audio"
+LEARNING_CONFIRMED_AUDIO_DIR.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_CACHE=LEARNING_HOME/"online-library.json"
 MASTER_LIBRARY_CACHE=LEARNING_HOME/"islamic-master-library.json"
 MASTER_LIBRARY_SEED=APP_HOME/"islamic-master-library.json"
@@ -445,9 +447,24 @@ def audio_lock_key_for_chunk(text:str):
     value=value.strip(AUDIO_LOCK_EDGE_CHARS)
     return AUDIO_LOCK_BY_TTS.get(value,"")
 
+def learning_audio_backup_path(key:str):
+    safe=re.sub(r"[^a-z0-9_-]+","_",str(key or "").lower()).strip("_")
+    return LEARNING_CONFIRMED_AUDIO_DIR/f"{safe}.wav"
+
 def audio_lock_path(key:str):
     safe=re.sub(r"[^a-z0-9_-]+","_",str(key or "").lower()).strip("_")
-    return MASTER_AUDIO_DIR/f"{safe}.wav"
+    dst=MASTER_AUDIO_DIR/f"{safe}.wav"
+    if not dst.exists():
+        backup=learning_audio_backup_path(key)
+        if backup.exists() and backup.stat().st_size>44:
+            try:
+                tmp=dst.with_suffix(".restore.tmp.wav")
+                shutil.copy2(backup,tmp)
+                os.replace(tmp,dst)
+                append_learning_log("audio_lock_restore_from_backup",lockKey=key)
+            except Exception as e:
+                print("[DĀR Voice] audio-lock backup restore warning",e,flush=True)
+    return dst
 
 def confirmed_audio_lock_keys():
     return sorted(key for key in set(AUDIO_LOCK_BY_TTS.values()) if key and audio_lock_path(key).exists())
@@ -653,6 +670,7 @@ def learned_canonical_forms(term:str,canonical:str,tts_text:str):
     canonical=str(canonical or term).strip()
     tts_text=str(tts_text or "").strip()
     target_norms={normalize_lookup(x) for x in (term,canonical) if x}
+    canonical_norm=normalize_lookup(canonical)
     forms=[]
 
     def add(value):
@@ -666,7 +684,7 @@ def learned_canonical_forms(term:str,canonical:str,tts_text:str):
         e_can=str(e.get("canonical","")).strip()
         e_tts=str(e.get("tts_text") or e.get("arabic") or "").strip()
         e_norm=normalize_lookup(e_can)
-        if (tts_text and e_tts==tts_text) or (e_norm and e_norm in target_norms):
+        if (e_norm and e_norm in target_norms) or (canonical_norm and e_norm==canonical_norm):
             add(e_can)
             for alias in e.get("aliases") or []:
                 add(alias)
@@ -675,7 +693,8 @@ def learned_canonical_forms(term:str,canonical:str,tts_text:str):
         for r in pool:
             r_can=str(r.get("canonical") or r.get("string_to_replace") or "").strip()
             r_tts=str(r.get("tts_text","")).strip()
-            if (tts_text and r_tts==tts_text) or normalize_lookup(r_can) in target_norms:
+            r_norm=normalize_lookup(r_can)
+            if (r_norm and r_norm in target_norms) or (canonical_norm and r_norm==canonical_norm):
                 add(r.get("string_to_replace"))
                 add(r_can)
 
@@ -723,6 +742,62 @@ def save_user_override_group(rule:dict,forms=None):
 def save_user_override(rule:dict):
     saved=save_user_override_group(rule,[str(rule.get("string_to_replace","")).strip()])
     return saved[0]
+
+def migrate_existing_user_override_groups():
+    """Alte, bereits bestätigte Lernwörter automatisch auf die neue Gruppenlogik
+    anheben. Der Nutzer muss sie nach einem Update nicht erneut testen."""
+    global USER_OVERRIDE_DATA
+    old_rules=list((USER_OVERRIDE_DATA or {}).get("rules") or [])
+    if not old_rules:
+        return 0
+
+    expanded=[]
+    seen=set()
+    changed=False
+    for rule in old_rules:
+        if str(rule.get("voice_lock",""))=="MASTER" and str(rule.get("tts_text","")).strip():
+            forms=learned_canonical_forms(
+                str(rule.get("string_to_replace","")),
+                str(rule.get("canonical") or rule.get("string_to_replace") or ""),
+                str(rule.get("tts_text",""))
+            )
+            if len(forms)>1:
+                changed=True
+            group_id=str(rule.get("learned_group_id") or rule.get("audio_lock_key") or learning_lock_key(str(rule.get("string_to_replace",""))))
+            for form in forms or [str(rule.get("string_to_replace",""))]:
+                norm=normalize_lookup(form)
+                key=(norm,str(rule.get("tts_text","")))
+                if not norm or key in seen:
+                    continue
+                seen.add(key)
+                item=dict(rule)
+                item["string_to_replace"]=form
+                item["voice_lock"]="MASTER"
+                item["priority"]="user-master"
+                item["learned_group_id"]=group_id
+                item["learned_alias_count"]=len(forms or [form])
+                expanded.append(item)
+        else:
+            norm=normalize_lookup(rule.get("string_to_replace",""))
+            key=(norm,str(rule.get("tts_text","")))
+            if key in seen:
+                continue
+            seen.add(key)
+            expanded.append(rule)
+
+    if changed or len(expanded)!=len(old_rules):
+        USER_OVERRIDE_DATA={
+            "schemaVersion":3,
+            "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+            "migratedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+            "rules":expanded,
+        }
+        _persist_user_override_data(USER_OVERRIDE_DATA)
+        rebuild_runtime_rules()
+        append_learning_log("override_group_migration",before=len(old_rules),after=len(expanded))
+    return max(0,len(expanded)-len(old_rules))
+
+migrate_existing_user_override_groups()
 
 def combined_search_rules():
     seen=set();out=[]
@@ -903,6 +978,10 @@ def confirm_learning_preview(preview_id:str,input_term:str=""):
     tmp=dst.with_suffix(".learn.tmp.wav")
     shutil.copy2(src,tmp)
     os.replace(tmp,dst)
+    audio_backup=learning_audio_backup_path(lock_key)
+    audio_backup_tmp=audio_backup.with_suffix(".tmp.wav")
+    shutil.copy2(dst,audio_backup_tmp)
+    os.replace(audio_backup_tmp,audio_backup)
     rule={
         "category":"USER LEARNED",
         "canonical":str(meta.get("canonical") or term),
