@@ -334,6 +334,7 @@ jobs:
               "language: \"ar\"",
               "pronunciationReference: false",
               "audio_size_invalid",
+              '.replace(/ة/g, "ه")',
           ]
           required_router=[
               'url.pathname === "/test/kids/api/recitation/grade"',
@@ -470,6 +471,9 @@ jobs:
                   'QURAN_PROGRESS_PREFIX="kids.quran.progress.v2."',
                   'recordQuranAttempt(!ayahPracticeHadError)',
                   'setTimeout(openDailyQuran,220)',
+                  'startMeter(stream);',
+                  'AbortController',
+                  'Die Wortprüfung hat zu lange gedauert',
                   'Referenzaufnahme noch nicht freigegeben',
               ]),
               ("manifest",manifest,[
