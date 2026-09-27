@@ -11,7 +11,9 @@
       "CC0-1.0",
       "Public-Domain",
       "CC-BY-4.0",
-      "CC-BY-3.0-US"
+      "CC-BY-3.0-US",
+      "CC-BY-SA-4.0",
+      "CC-BY-SA-3.0"
     ],
     "sourcePolicy": "Prefer exact human Arabic pronunciation recordings for standard Arabic/Fuṣḥā learning. License, speaker/source, exact lexical item and source page must be documented. Source metadata that only says Arabic must not be relabeled as explicitly MSA without evidence.",
     "note": "System-TTS und ungeprüfte KI-Stimmen sind als arabische Lernreferenz verboten. Externe Clips müssen Quelle, Sprecher, Lizenz und Originalseite dokumentieren.",
@@ -24,8 +26,9 @@
       "No clipping or truncation",
       "No synthetic system-TTS fallback"
     ],
-    "externalSourceRule": "verified=true only for individually identified human recordings with documented free license and MSA/Fuṣḥā source identity.",
-    "generatedPromotionRule": "Locally generated clips remain blocked unless separately human-reviewed; external human reference audio is preferred for alphabet learning."
+    "externalSourceRule": "verified=true only for individually identified human Arabic recordings with documented free license, exact lexical/letter target, source page, and speaker/author. CC BY-SA sources must remain unmodified external originals.",
+    "generatedPromotionRule": "Locally generated clips remain blocked unless separately human-reviewed; external human reference audio is preferred for alphabet learning.",
+    "shareAlikeRule": "CC BY-SA audio may be used only as an unmodified external original file with attribution and license link. Do not normalize, trim, remix, transcode into a project-owned derivative, or publish a modified copy unless the resulting audio is distributed under the same or compatible ShareAlike terms."
   },
   "letters": {
     "alif": {
@@ -85,12 +88,25 @@
       "word": {
         "text": "أَرْنَب",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-Fenakhay-%D8%A3%D8%B1%D9%86%D8%A8.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/alif/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:36:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/alif/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceUsageMode": "unmodified-external-original",
+        "shareAlike": true,
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "Fenakhay",
+        "sourceLanguage": "Arabic",
+        "sourceTranscription": "أرنب",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-Fenakhay-%D8%A3%D8%B1%D9%86%D8%A8.wav",
+        "sourceFile": "LL-Q13955 (ara)-Fenakhay-أرنب.wav",
+        "license": "CC-BY-SA-4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "attribution": "Fenakhay / Lingua Libre / Wikimedia Commons, CC BY-SA 4.0",
+        "verificationBasis": "Human Arabic pronunciation; exact transcription أرنب; Commons file page explicitly documents CC BY-SA 4.0."
       }
     },
     "ba": {
@@ -302,12 +318,25 @@
       "word": {
         "text": "ثَعْلَب",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ar-%D8%AB%D8%B9%D9%84%D8%A8.oga",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/tha/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:36:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/tha/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceUsageMode": "unmodified-external-original",
+        "shareAlike": true,
+        "sourceProvider": "Wikimedia Commons",
+        "sourceSpeaker": "İZAY",
+        "sourceLanguage": "Arabic",
+        "sourceTranscription": "ثعلب",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Ar-%D8%AB%D8%B9%D9%84%D8%A8.oga",
+        "sourceFile": "Ar-ثعلب.oga",
+        "license": "CC-BY-SA-4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "attribution": "İZAY / Wikimedia Commons, CC BY-SA 4.0",
+        "verificationBasis": "Human Arabic pronunciation; file description states Fox in Arabic; Commons allows selection of CC BY-SA 4.0."
       }
     },
     "jim": {
@@ -1105,12 +1134,25 @@
       "word": {
         "text": "ضِفْدَع",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/%D8%B6%D9%81%D8%AF%D8%B9.ogg",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/dad/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:36:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/dad/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceUsageMode": "unmodified-external-original",
+        "shareAlike": true,
+        "sourceProvider": "Wikimedia Commons",
+        "sourceSpeaker": "İZAY",
+        "sourceLanguage": "Arabic",
+        "sourceTranscription": "ضفدع",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:%D8%B6%D9%81%D8%AF%D8%B9.ogg",
+        "sourceFile": "ضفدع.ogg",
+        "license": "CC-BY-SA-3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "attribution": "İZAY / Wikimedia Commons, CC BY-SA 3.0",
+        "verificationBasis": "Human Arabic pronunciation; file description states Frog in Arabic; Commons file page explicitly documents CC BY-SA 3.0."
       }
     },
     "taa": {
@@ -1951,12 +1993,25 @@
       "word": {
         "text": "وَرْدَة",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-Zinou2go-%D9%88%D8%B1%D8%AF%D8%A9.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/waw/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:36:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/waw/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceUsageMode": "unmodified-external-original",
+        "shareAlike": true,
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "Zinou2go",
+        "sourceLanguage": "Arabic",
+        "sourceTranscription": "وردة",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-Zinou2go-%D9%88%D8%B1%D8%AF%D8%A9.wav",
+        "sourceFile": "LL-Q13955 (ara)-Zinou2go-وردة.wav",
+        "license": "CC-BY-SA-3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "attribution": "Zinou2go / Lingua Libre / Wikimedia Commons, CC BY-SA 3.0",
+        "verificationBasis": "Human Arabic pronunciation; exact transcription وردة; Commons file page explicitly documents CC BY-SA 3.0."
       }
     },
     "ya": {
@@ -2068,6 +2123,24 @@
           "license": "CC-BY-4.0",
           "language": "Arabic (ara)",
           "role": "Human pronunciation recordings for exact standard-Arabic example words"
+        },
+        {
+          "name": "Fenakhay / Lingua Libre",
+          "license": "CC-BY-SA-4.0",
+          "language": "Arabic (ara)",
+          "role": "Unmodified external human Arabic pronunciation recordings"
+        },
+        {
+          "name": "İZAY / Wikimedia Commons",
+          "license": "CC-BY-SA-4.0 or CC-BY-SA-3.0 per file",
+          "language": "Arabic",
+          "role": "Unmodified external human Arabic pronunciation recordings"
+        },
+        {
+          "name": "Zinou2go / Lingua Libre",
+          "license": "CC-BY-SA-3.0",
+          "language": "Arabic (ara)",
+          "role": "Unmodified external human Arabic pronunciation recordings"
         }
       ]
     }
