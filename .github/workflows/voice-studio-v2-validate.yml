@@ -59,7 +59,7 @@ jobs:
               "VoiceStudioIcon.png",
               "AppIcon.icns",
               "CFBundleIconFile",
-              "2.9.1",
+              "2.9.2",
           ]
           missing=[x for x in required if x not in installer]
           if missing:
@@ -84,9 +84,9 @@ jobs:
               "bash -n",
           ]
           installer_required=[
-              "update-mac.command?v=291",
+              "update-mac.command?v=292",
               "chmod +x \"$TARGET/update-mac.command\"",
-              "CFBundleShortVersionString</key><string>2.9.1",
+              "CFBundleShortVersionString</key><string>2.9.2",
           ]
           html_required=[
               'id="updateBtn"',
@@ -102,7 +102,7 @@ jobs:
               "checkForUpdates",
               "installAvailableUpdate",
               "update-mac.command",
-              'DĀRVoiceStudioMac/2.9.1',
+              'DĀRVoiceStudioMac/2.9.2',
           ]
 
           groups=[
@@ -119,6 +119,80 @@ jobs:
           if errors:
               raise SystemExit("In-app updater validation failed: "+" | ".join(errors))
           print("In-app updater package OK")
+          PY
+
+      - name: Validate secure iPad companion mode
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          swift=Path("voice-studio/VoiceStudioApp.swift").read_text(encoding="utf-8")
+
+          engine_required=[
+              'NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE"',
+              'PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN"',
+              'HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"',
+              'DARVOICE_PAIR=',
+              'remote_authorized',
+              'accept_pairing_url',
+              'hmac.compare_digest',
+              '"pairing_required":True',
+              '"companion_mode":bool(NETWORK_MODE and PAIR_TOKEN)',
+              '"start_url":"/studio/?pair="+PAIR_TOKEN',
+              'http://127.0.0.1:{PORT}/health',
+          ]
+          installer_required=[
+              'PAIR_TOKEN_FILE="$TARGET/ipad-pairing-token.txt"',
+              'uuidgen',
+              'DAR_VOICE_NETWORK_MODE</key><string>1',
+              'DAR_VOICE_PAIR_TOKEN</key><string>$PAIR_TOKEN',
+              'DAR_VOICE_NETWORK_MODE=1',
+              'DAR_VOICE_PAIR_TOKEN="$PAIR_TOKEN"',
+          ]
+          html_required=[
+              'const IS_ENGINE_ORIGIN=',
+              'const IS_COMPANION=',
+              'id="companionBtn"',
+              'id="companionPill"',
+              'darCompanion',
+              'Companion-Modus',
+              'Zum Home-Bildschirm',
+              '@media(min-width:800px) and (max-width:1180px)',
+          ]
+          swift_required=[
+              'name: "darCompanion"',
+              'ipad-pairing-token.txt',
+              'localIPv4Address',
+              'companionPairingURL',
+              'showCompanionPairing',
+              'CIQRCodeGenerator',
+              'Link kopieren',
+              'DAR_VOICE_NETWORK_MODE',
+              'DAR_VOICE_PAIR_TOKEN',
+          ]
+
+          groups=[
+              ("engine",engine,engine_required),
+              ("installer",installer,installer_required),
+              ("html",html,html_required),
+              ("swift",swift,swift_required),
+          ]
+          errors=[]
+          for label,source,required in groups:
+              missing=[x for x in required if x not in source]
+              if missing:
+                  errors.append(label+": "+", ".join(missing))
+          if errors:
+              raise SystemExit("Companion validation failed: "+" | ".join(errors))
+
+          # Pairing secret must never be emitted in health/status payload.
+          health_segment=engine[engine.index('if p=="/health"'):engine.index('elif p=="/status"')]
+          if 'PAIR_TOKEN' in health_segment:
+              raise SystemExit("PAIR_TOKEN must never be exposed by /health")
+          print("Secure iPad/iPhone companion mode OK")
           PY
 
       - name: Validate zero-detour Content Studio workflow
@@ -177,6 +251,10 @@ jobs:
           spec=importlib.util.spec_from_file_location("dar_voice_engine_smoke",root/"voice-studio/local-engine.py")
           mod=importlib.util.module_from_spec(spec)
           spec.loader.exec_module(mod)
+
+          assert mod.HOST == "127.0.0.1", mod.HOST
+          assert mod.NETWORK_MODE is False
+          assert mod.PAIR_TOKEN == ""
 
           status=mod.get_status()
           assert isinstance(status,dict)
@@ -247,8 +325,8 @@ jobs:
               'x-webkit-airplay="deny"',
               'darAudioOutput',
               'disableRemotePlayback',
-              'voice-studio-icon.png?v=290',
-              'VOICE STUDIO 2.9.1',
+              'voice-studio-icon.png?v=292',
+              'VOICE STUDIO 2.9.2',
           ]
           missing=[x for x in required if x not in html]
           if missing:
@@ -269,7 +347,8 @@ jobs:
             voice-studio/VoiceStudioApp.swift \
             -framework Cocoa \
             -framework WebKit \
-            -framework CoreAudio
+            -framework CoreAudio \
+            -framework CoreImage
 
       - name: Verify native audio-route bridge markers
         run: |
@@ -289,7 +368,7 @@ jobs:
               "VoiceStudioIcon",
               "updateLoadingProgress",
               "status: \"Bereit\"",
-              "DĀRVoiceStudioMac/2.9.1",
+              "DĀRVoiceStudioMac/2.9.2",
               "NSMenu(title: \"Produktion\")",
               "newContent",
               "focusText",
@@ -297,6 +376,11 @@ jobs:
               "publishTestContent",
               "publishLiveContent",
               "window.DarContentStudio",
+              "darCompanion",
+              "showCompanionPairing",
+              "companionPairingURL",
+              "localIPv4Address",
+              "CIQRCodeGenerator",
           ]
           missing=[x for x in required if x not in src]
           if missing:
