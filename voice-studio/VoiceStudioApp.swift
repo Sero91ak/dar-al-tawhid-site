@@ -16,11 +16,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.regular)
+        applyAppIcon()
         buildMenus()
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.8.7"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.0"
         config.userContentController.add(self, name: "darAudioOutput")
 
         webView = WKWebView(frame: .zero, configuration: config)
@@ -44,7 +45,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         NSApp.activate(ignoringOtherApps: true)
 
         showLoading()
+        ensureEngine()
         waitForEngine(attempt: 0)
+    }
+
+    private func bundledIconURL() -> URL? {
+        Bundle.main.url(forResource: "VoiceStudioIcon", withExtension: "png")
+    }
+
+    private func applyAppIcon() {
+        guard let url = bundledIconURL(), let icon = NSImage(contentsOf: url) else { return }
+        icon.size = NSSize(width: 512, height: 512)
+        NSApp.applicationIconImage = icon
     }
 
     private func menuItem(_ title: String, action: Selector?, key: String = "",
@@ -448,21 +460,67 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private func showLoading() {
         let html = """
         <!doctype html><html><head><meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
         <style>
-        html,body{margin:0;height:100%;background:#061318;color:#f5f1e8;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-        body{display:grid;place-items:center}.box{text-align:center}
-        .brand{font-family:Georgia,serif;letter-spacing:.15em;color:#e8d29a;font-weight:700;font-size:18px}
-        .sub{margin-top:12px;color:#91a4a8;font-size:13px}
-        .dot{width:8px;height:8px;border-radius:50%;background:#73bea1;display:inline-block;margin-right:8px;box-shadow:0 0 0 5px rgba(115,190,161,.10)}
+        :root{color-scheme:dark}
+        *{box-sizing:border-box}
+        html,body{margin:0;height:100%;background:#06131f;color:#f6f0e4;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif}
+        body{display:grid;place-items:center;overflow:hidden;background:
+          radial-gradient(circle at 50% 34%,rgba(25,104,150,.24),transparent 35rem),
+          radial-gradient(circle at 50% 88%,rgba(217,182,111,.10),transparent 28rem),
+          linear-gradient(145deg,#041019,#071d2a 52%,#092735)}
+        .box{width:min(520px,82vw);text-align:center;animation:appear .28s ease-out}
+        .logo-shell{width:184px;height:184px;margin:0 auto 23px;border-radius:42px;padding:5px;background:linear-gradient(145deg,#f2d58e,#6c4614);box-shadow:0 26px 70px rgba(0,0,0,.42),0 0 0 1px rgba(244,216,150,.22)}
+        .logo-shell img{width:100%;height:100%;object-fit:cover;border-radius:38px;display:block}
+        .brand{font-family:Georgia,serif;letter-spacing:.12em;color:#efd89d;font-weight:700;font-size:22px}
+        .studio{margin-top:7px;font-size:12px;font-weight:800;letter-spacing:.28em;color:#c4d0d5}
+        .status{margin-top:25px;color:#9fb0b8;font-size:12px;min-height:18px}
+        .progress{height:5px;margin:14px auto 0;border-radius:99px;background:rgba(255,255,255,.09);overflow:hidden}
+        .progress>i{display:block;width:8%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#c99d4b,#f1d897,#8bb9cf);transition:width .32s cubic-bezier(.2,.8,.2,1)}
+        .percent{margin-top:9px;color:#d8c18a;font-size:10px;font-weight:850;letter-spacing:.08em}
+        @keyframes appear{from{opacity:0;transform:translateY(7px) scale(.985)}to{opacity:1;transform:none}}
         </style></head><body><div class="box">
-        <div class="brand">DĀR AL TAWḤĪD</div>
-        <div class="sub"><span class="dot"></span>Serhat Engine wird gestartet …</div>
+          <div class="logo-shell"><img src="VoiceStudioIcon.png" alt="DĀR AL TAWḤĪD Voice Studio"></div>
+          <div class="brand">DĀR AL TAWḤĪD</div>
+          <div class="studio">VOICE STUDIO</div>
+          <div id="status" class="status">Studio wird vorbereitet …</div>
+          <div class="progress"><i id="bar"></i></div>
+          <div id="percent" class="percent">8 %</div>
         </div></body></html>
         """
-        webView.loadHTMLString(html, baseURL: nil)
+        webView.loadHTMLString(html, baseURL: Bundle.main.resourceURL)
+    }
+
+    private func updateLoadingProgress(_ percent: Int, status: String) {
+        let value = max(0, min(100, percent))
+        let statusJS = javascriptStringLiteral(status)
+        let js = """
+        (() => {
+          const bar=document.getElementById('bar');
+          const pct=document.getElementById('percent');
+          const status=document.getElementById('status');
+          if(bar)bar.style.width='\(value)%';
+          if(pct)pct.textContent='\(value) %';
+          if(status)status.textContent=\(statusJS);
+        })();
+        """
+        DispatchQueue.main.async { [weak self] in
+            self?.webView.evaluateJavaScript(js, completionHandler: nil)
+        }
     }
 
     private func waitForEngine(attempt: Int) {
+        let progress = min(94, 12 + attempt)
+        let phase: String
+        if attempt < 3 {
+            phase = "Serhat Engine wird verbunden …"
+        } else if attempt < 12 {
+            phase = "Aussprachebibliothek wird geladen …"
+        } else {
+            phase = "Voice Studio wird startklar gemacht …"
+        }
+        updateLoadingProgress(progress, status: phase)
+
         var request = URLRequest(url: healthURL)
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 1.5
@@ -471,14 +529,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             guard let self = self else { return }
             let ok = (response as? HTTPURLResponse)?.statusCode == 200 && error == nil
             if ok {
-                DispatchQueue.main.async {
-                    self.webView.load(URLRequest(url: self.studioURL, cachePolicy: .reloadIgnoringLocalCacheData))
+                self.updateLoadingProgress(100, status: "Bereit")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
+                    self.webView.load(URLRequest(
+                        url: self.studioURL,
+                        cachePolicy: .reloadIgnoringLocalCacheData
+                    ))
                 }
                 return
             }
 
             if attempt < 80 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
                     self.waitForEngine(attempt: attempt + 1)
                 }
             } else {
