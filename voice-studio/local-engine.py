@@ -1031,7 +1031,7 @@ def get_status():
     out["honorific_name_variants"]=sum(1 for r in RULES if r.get("required_honorific_key"))
     out["honorific_audio_keys"]=sorted(k for k in HONORIFIC_KEYS if k in HONORIFIC_TTS_BY_KEY)
     out["pronunciation_learning"]=learning_state()
-    out["performance_engine"]="persistent-conditionals+flow-bridge-v3"
+    out["performance_engine"]="continuous-sentence-flow-v1"
     out["reference_prepares_total"]=MODEL_REFERENCE_PREPARES
     out["reference_cache_hits_total"]=MODEL_REFERENCE_CACHE_HITS
     out["render_cache"]=dict(RENDER_CACHE_STATS)
@@ -1556,27 +1556,95 @@ def warm_model():
         pass
 
 def split_chunks(text:str,max_chars:int=150):
-    text=re.sub(r"\s+"," ",text).strip()
-    if len(text)<=max_chars:
-        return [text] if text else []
-    pieces=re.split(r"(?<=[.!?…])\s+",text)
-    chunks=[];current=""
-    for piece in pieces:
-        if len(piece)>max_chars:
-            words=piece.split()
-            for word in words:
-                candidate=(current+" "+word).strip()
-                if current and len(candidate)>max_chars:
-                    chunks.append(current);current=word
-                else:
-                    current=candidate
+    """Flow-aware Chunking: nie stumpf mitten im Satz schneiden, wenn eine
+    natürliche Phrasengrenze vorhanden ist.
+
+    Reihenfolge der Trennstellen:
+    1. echtes Satzende
+    2. Komma/Semikolon/Doppelpunkt/Gedankenstrich
+    3. natürliche Konjunktion
+    4. nur als letzter Notfall eine Wortgrenze
+
+    Dadurch bekommt das TTS-Modell zusammenhängende Sinnphrasen statt
+    willkürlicher Zeichenblöcke; die Satzmelodie bleibt deutlich stabiler.
+    """
+    value=re.sub(r"\s+"," ",str(text or "")).strip()
+    if not value:
+        return []
+    if len(value)<=max_chars:
+        return [value]
+
+    def split_long_piece(piece:str):
+        out=[]
+        rest=piece.strip()
+        floor=max(24,int(max_chars*0.48))
+        while len(rest)>max_chars:
+            window=rest[:max_chars+1]
+            cuts=[]
+
+            # Phrasenzeichen bleiben am linken Chunk.
+            for m in re.finditer(r"[,،;؛:]\s+|\s+[–—]\s+",window):
+                cut=m.end()
+                if floor<=cut<=max_chars:
+                    cuts.append((3,cut))
+
+            # Konjunktion beginnt den rechten Chunk, damit sie prosodisch
+            # nicht wie das Ende des vorigen Satzteils klingt.
+            for m in re.finditer(
+                r"\s+(?:und|oder|aber|denn|doch|weil|wenn|während|sowie|obwohl|damit|dass)\s+",
+                window,flags=re.I
+            ):
+                cut=m.start()
+                if floor<=cut<=max_chars:
+                    cuts.append((2,cut))
+
+            # Letzter Fallback: saubere Wortgrenze nahe dem Limit.
+            if not cuts:
+                spaces=[m.start() for m in re.finditer(r"\s+",window) if floor<=m.start()<=max_chars]
+                if spaces:
+                    cuts.append((1,spaces[-1]))
+
+            if not cuts:
+                # Extrem langes Einzelwort / URL: harte Grenze ist besser als
+                # ein unendlicher Render; normalerweise nie erreicht.
+                cut=max_chars
+            else:
+                # Höchste Qualitätsklasse zuerst, darin die späteste Stelle.
+                best_quality=max(q for q,_ in cuts)
+                cut=max(pos for q,pos in cuts if q==best_quality)
+
+            left=rest[:cut].strip()
+            right=rest[cut:].strip()
+            if not left or not right:
+                cut=min(max_chars,max(1,len(rest)-1))
+                left=rest[:cut].strip()
+                right=rest[cut:].strip()
+            out.append(left)
+            rest=right
+
+        if rest:
+            out.append(rest)
+        return out
+
+    # Satzenden bleiben die primäre Einheit.
+    sentences=[p.strip() for p in re.split(r"(?<=[.!?؟…])\s+",value) if p.strip()]
+    chunks=[]
+    current=""
+    for sentence in sentences:
+        if len(sentence)>max_chars:
+            if current:
+                chunks.append(current)
+                current=""
+            chunks.extend(split_long_piece(sentence))
             continue
-        candidate=(current+" "+piece).strip()
+        candidate=(current+" "+sentence).strip()
         if current and len(candidate)>max_chars:
-            chunks.append(current);current=piece
+            chunks.append(current)
+            current=sentence
         else:
             current=candidate
-    if current:chunks.append(current)
+    if current:
+        chunks.append(current)
     return [c for c in chunks if c.strip()]
 
 ARABIC_CHAR_RE=re.compile(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff]")
@@ -1938,8 +2006,13 @@ def is_inline_arabic_micro_term(text:str):
     words=len([x for x in re.split(r"\s+",value) if x])
     return 0<letters<=12 and words<=3
 
-def trim_segment_edges(wav,sr:int,aggressive:bool=False):
-    """Echte Randstille entfernen; bei Inline-Arabisch besonders eng für flüssige Satzübergänge."""
+def trim_segment_edges(wav,sr:int,aggressive:bool=False,inline:bool=False):
+    """Randstille vor jedem internen Stitch entfernen.
+
+    aggressive=True gilt für *alle* internen Satz-/Phrasengrenzen. inline=True
+    ist die noch engere Variante für kurze arabische Begriffe im deutschen Satz.
+    Das verhindert das typische KI-Muster: sprechen → warten → Wort → warten → weiter.
+    """
     import torch
     w=normalize_segment_shape(wav)
     if w.numel()==0 or w.shape[-1]<8:
@@ -1953,16 +2026,20 @@ def trim_segment_edges(wav,sr:int,aggressive:bool=False):
     # Profilgesteuerte Randstille: konservativ trimmen, Anlaute/Konsonanten schützen.
     rel=float(CONTINUITY_CONFIG.get("trimThresholdRelative",0.0035))
     if aggressive:
+        rel=max(rel,float(CONTINUITY_CONFIG.get("boundaryTrimThresholdRelative",0.006)))
+    if inline:
         rel=max(rel,float(CONTINUITY_CONFIG.get("inlineArabicTrimThresholdRelative",0.012)))
     threshold=max(peak*rel,1e-5)
     active=torch.nonzero(envelope>threshold).flatten()
     if active.numel()==0:
         return w
 
-    pad_ms=float(
-        CONTINUITY_CONFIG.get("inlineArabicTrimSafetyMs",5)
-        if aggressive else CONTINUITY_CONFIG.get("trimSafetyMs",20)
-    )
+    if inline:
+        pad_ms=float(CONTINUITY_CONFIG.get("inlineArabicTrimSafetyMs",5))
+    elif aggressive:
+        pad_ms=float(CONTINUITY_CONFIG.get("boundaryTrimSafetyMs",8))
+    else:
+        pad_ms=float(CONTINUITY_CONFIG.get("trimSafetyMs",20))
     pad=max(1,int(sr*pad_ms/1000.0))
     start=max(0,int(active[0].item())-pad)
     end=min(w.shape[-1],int(active[-1].item())+pad+1)
@@ -2033,8 +2110,12 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str,mode:str="narratio
         silence_ms=longest*10
         metrics["max_internal_silence_ms"]=silence_ms
         has_punctuation=bool(re.search(r"[.!?؟…,:;،؛]",str(text)))
-        key="maxInternalSilenceMsWithPunctuation" if has_punctuation else "maxInternalSilenceMsWithoutPunctuation"
-        limit=int(QA_CONFIG.get(key,1250 if has_punctuation else 700))
+        if has_punctuation:
+            mode_limits=QA_CONFIG.get("maxInternalSilenceMsWithPunctuationByMode") or {}
+            limit=int(mode_limits.get(mode,QA_CONFIG.get("maxInternalSilenceMsWithPunctuation",700)))
+        else:
+            limit=int(QA_CONFIG.get("maxInternalSilenceMsWithoutPunctuation",480))
+        metrics["internal_silence_limit_ms"]=limit
         if silence_ms>limit:
             metrics["issues"].append("excessive_internal_pause" if has_punctuation else "unexpected_internal_hold")
 
@@ -2250,6 +2331,7 @@ def join_rendered_segments(items,sr:int):
         raise RuntimeError("Keine Audiosegmente erzeugt.")
 
     cleaned=[]
+    edge_stats=[]
     for pos,item in enumerate(items):
         wav,lang,chunk=item[0],item[1],item[2]
         left_lang=items[pos-1][1] if pos>0 else None
@@ -2258,7 +2340,17 @@ def join_rendered_segments(items,sr:int):
             lang=="ar" and is_inline_arabic_micro_term(chunk)
             and (left_lang=="de" or right_lang=="de")
         )
-        trimmed=trim_segment_edges(wav,sr,aggressive=inline_micro)
+        internal=(pos>0 or pos+1<len(items))
+        before=normalize_segment_shape(wav)
+        before_samples=int(before.shape[-1])
+        trimmed=trim_segment_edges(wav,sr,aggressive=internal,inline=inline_micro)
+        removed=max(0,before_samples-int(trimmed.shape[-1]))
+        edge_stats.append({
+            "index":pos+1,
+            "language":lang,
+            "inline_micro":bool(inline_micro),
+            "trimmed_ms":round(removed/max(1,int(sr))*1000.0,2),
+        })
         cleaned.append((trimmed,*item[1:]))
     cleaned=gently_level_segments(cleaned)
 
@@ -2266,8 +2358,9 @@ def join_rendered_segments(items,sr:int):
     prev_lang=cleaned[0][1]
     prev_chunk=cleaned[0][2]
     prev_mode=cleaned[0][3]
+    boundary_stats=[]
 
-    for item in cleaned[1:]:
+    for boundary_idx,item in enumerate(cleaned[1:],1):
         wav,lang,chunk,mode=item[0],item[1],item[2],item[3]
         prev_text=prev_chunk.strip()
         sentence_end=bool(re.search(r"[.!?؟…]$",prev_text))
@@ -2302,17 +2395,25 @@ def join_rendered_segments(items,sr:int):
         else:
             ms=max(8,int(p["crossfade_ms"]))
             if inline_boundary:
-                # Deutlich längerer Equal-Power-Bridge: die separate arabische
-                # Aussprache verschmilzt mit der deutschen Satzmelodie statt hörbar
-                # als einzelnes eingesetztes Wort zu erscheinen.
                 ms=max(ms,int(CONTINUITY_CONFIG.get("inlineArabicCrossfadeMs",72)))
-                full=crossfade_audio(full,wav,sr,ms/1000.0,equal_power=True)
             else:
-                if prev_lang==lang:
-                    ms=min(ms,int(CONTINUITY_CONFIG.get("sameLanguageCrossfadeMaxMs",22)))
-                else:
-                    ms=max(ms,int(CONTINUITY_CONFIG.get("languageCrossfadeMinMs",14)))
-                full=crossfade_audio(full,wav,sr,ms/1000.0)
+                # Auch rein deutsche Chunkgrenzen dürfen nicht wie zwei Aufnahmen
+                # klingen. Nicht-punktuierte Grenzen werden grundsätzlich als
+                # fortlaufende Phrase mit Equal-Power-Bridge verbunden.
+                ms=max(ms,int(CONTINUITY_CONFIG.get("internalFlowCrossfadeMs",52)))
+                if prev_lang!=lang:
+                    ms=max(ms,int(CONTINUITY_CONFIG.get("languageCrossfadeMinMs",44)))
+            full=crossfade_audio(full,wav,sr,ms/1000.0,equal_power=True)
+
+        boundary_stats.append({
+            "index":boundary_idx,
+            "from_language":prev_lang,
+            "to_language":lang,
+            "sentence_end":bool(sentence_end),
+            "soft_pause":bool(soft_pause),
+            "inline_boundary":bool(inline_boundary),
+            "crossfade_ms":0 if (sentence_end or soft_pause) else int(ms),
+        })
 
         prev_lang=lang
         prev_chunk=chunk
@@ -2324,7 +2425,16 @@ def join_rendered_segments(items,sr:int):
         fade=torch.linspace(0.0,1.0,edge,dtype=full.dtype).view(1,-1)
         full[...,:edge]*=fade
         full[...,-edge:]*=torch.flip(fade,dims=[1])
+
+    join_rendered_segments._last_continuity={
+        "engine":"continuous-flow-v1",
+        "edge_trims":edge_stats,
+        "boundaries":boundary_stats,
+        "max_trimmed_ms":max([x["trimmed_ms"] for x in edge_stats],default=0.0),
+    }
     return full
+
+join_rendered_segments._last_continuity={}
 
 def save_wav(path:Path,wav,sr:int):
     """Schreibt intern ausschließlich RIFF/WAV PCM16 mono.
@@ -2479,11 +2589,10 @@ def generate(text:str,prepared:str="",style:str="auto"):
         render_started_perf=time.perf_counter()
         prepares_before=MODEL_REFERENCE_PREPARES
 
-        # Performance: gleiche Sprache/Referenz zusammen erzeugen. Das Ergebnis wird
-        # anschließend wieder exakt in die ursprüngliche Textreihenfolge eingesetzt.
-        # Damit wechseln wir bei langen DE/AR-Dokumenten typischerweise nur 1–2× die
-        # teure Voice-Conditioning-Referenz statt bei jedem Fachbegriff.
-        execution_order=sorted(range(total),key=lambda i:(0 if plan[i][0]=="de" else 1,i))
+        # Qualitätsmodus: immer in echter Textreihenfolge rendern.
+        # Sprach-Batching war schneller, ließ aber getrennte Segmente stärker wie
+        # unabhängige Aufnahmen wirken. Kontinuität hat Vorrang vor maximalem Durchsatz.
+        execution_order=list(range(total))
 
         for processed_pos,original_idx in enumerate(execution_order,1):
             lang,chunk=plan[original_idx]
@@ -2578,12 +2687,17 @@ def generate(text:str,prepared:str="",style:str="auto"):
         qa_segments=[x for x in qa_segments if x is not None]
         sr=int(model.sr)
         full=join_rendered_segments(outputs,sr)
+        continuity_metrics=dict(getattr(join_rendered_segments,"_last_continuity",{}) or {})
         final_metrics=audio_quality_metrics(full,sr,text,"de",doc_mode)
-        # Final composite may legitimately contain punctuation pauses; only hard
-        # signal defects are fatal here.
+
         fatal=[x for x in final_metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
+        final_limits=QA_CONFIG.get("finalMaxInternalSilenceMsByMode") or {}
+        final_pause_limit=int(final_limits.get(doc_mode,QA_CONFIG.get("finalMaxInternalSilenceMs",620)))
+        final_metrics["final_internal_silence_limit_ms"]=final_pause_limit
+        if int(final_metrics.get("max_internal_silence_ms",0) or 0)>final_pause_limit:
+            fatal.append("unnatural_final_internal_pause")
         if fatal:
-            raise RuntimeError("Finale Audio-QA fehlgeschlagen: "+", ".join(fatal))
+            raise RuntimeError("Finale Audio-QA fehlgeschlagen: "+", ".join(dict.fromkeys(fatal)))
 
         staged_audio_locks=stage_pending_audio_locks(render_id,new_audio_lock_candidates,sr)
 
@@ -2591,7 +2705,8 @@ def generate(text:str,prepared:str="",style:str="auto"):
             "mode":doc_mode,
             "segment_modes":sorted({x.get("mode","narration") for x in qa_segments}),
             "rescued_segments":sum(1 for x in qa_segments if x.get("rescued")),
-            "continuity_engine":"sentence-context-2.1",
+            "continuity_engine":"continuous-flow-v1",
+            "continuity":continuity_metrics,
             "render_id":render_id,
             "audio_lock_confirmed":confirmed_audio_lock_keys(),
             "audio_lock_pending":staged_audio_locks,
@@ -2605,7 +2720,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 "reference_cache_hits_total":MODEL_REFERENCE_CACHE_HITS,
                 "segment_cache_hits":sum(1 for x in qa_segments if x.get("segment_cache")=="hit"),
                 "segment_cache_misses":sum(1 for x in qa_segments if x.get("segment_cache")=="miss"),
-                "execution_strategy":"mlx-bounded-long-form-v1" if getattr(model,"_dar_backend","torch")=="mlx" else "persistent-conditionals+flow-bridge-v3",
+                "execution_strategy":"mlx-bounded-long-form-v1" if getattr(model,"_dar_backend","torch")=="mlx" else "continuous-sentence-flow-v1",
                 "backend":"mlx" if getattr(model,"_dar_backend","torch")=="mlx" else "torch",
             },
         }
