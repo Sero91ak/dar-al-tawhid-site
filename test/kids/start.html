@@ -2357,6 +2357,8 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 #alphabetModal .ab-complete-mark{width:94px;height:94px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:rgba(82,196,132,.16);border:1px solid rgba(82,196,132,.42);font:900 48px/1 Fredoka,system-ui,sans-serif;color:#d5ffe5}
 #alphabetModal .ab-nav button:disabled{opacity:.42;cursor:not-allowed}
 #alphabetModal .ab-audio-status{min-height:20px;margin:2px 6px 4px;text-align:center;font:700 12px/1.35 Fredoka,system-ui,sans-serif;color:rgba(255,255,255,.68)}
+#alphabetModal .ab-audio-credit{min-height:16px;margin:0 8px 5px;text-align:center;font:650 10px/1.35 Fredoka,system-ui,sans-serif;color:rgba(255,255,255,.48)}
+#alphabetModal .ab-audio-credit a{color:#b9ddd8;text-decoration:underline;text-underline-offset:2px}
 #alphabetModal .ab-audio-status.ok{color:#d5ffe5}
 #alphabetModal .ab-audio-status.warn{color:#ffe2a8}
 #alphabetModal .ab-h.audio-pending{opacity:.52;border:1px dashed rgba(255,226,168,.36)}
@@ -2895,6 +2897,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
           </div>
         </div>
         <p class="ab-audio-status" id="abAudioStatus" aria-live="polite"></p>
+        <p class="ab-audio-credit" id="abAudioCredit"></p>
         <div class="ab-nav">
           <button type="button" id="abPrev">Zurück</button>
           <button type="button" class="ab-play" id="abPlay">Hören</button>
@@ -4938,6 +4941,30 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     el.classList.remove("ok","warn");
     if(state)el.classList.add(state);
   }
+  function setAudioCredit(slot){
+    var el=document.getElementById("abAudioCredit");
+    if(!el)return;
+    if(!slot||!slot.sourceProvider){
+      el.textContent="";
+      return;
+    }
+    el.textContent="";
+    var prefix=document.createTextNode(
+      "Quelle: "+String(slot.sourceProvider||"")+
+      (slot.sourceSpeaker?" · "+String(slot.sourceSpeaker):"")+
+      (slot.license?" · "+String(slot.license):"")
+    );
+    el.appendChild(prefix);
+    if(slot.sourcePage&&/^https:\/\//i.test(String(slot.sourcePage))){
+      el.appendChild(document.createTextNode(" · "));
+      var a=document.createElement("a");
+      a.href=String(slot.sourcePage);
+      a.target="_blank";
+      a.rel="noopener noreferrer";
+      a.textContent="Nachweis";
+      el.appendChild(a);
+    }
+  }
   function stopAlphabetAudio(){
     if(alphabetAudioEl){
       try{alphabetAudioEl.pause();alphabetAudioEl.currentTime=0}catch(e){}
@@ -4949,8 +4976,10 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     var slot=audioSlot(item.id,kind,key);
     if(!slot){
       setAudioStatus("Referenzaufnahme noch nicht freigegeben.","warn");
+      setAudioCredit(null);
       return false;
     }
+    setAudioCredit(slot);
     stopAlphabetAudio();
     var url=String(slot.url||"");
     if(!(url.indexOf("/")===0||/^https:\/\//i.test(url))){
@@ -4963,7 +4992,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     audio.onended=function(){
       recordAudioEvidence(ageKey(),item.id,kind,key||"");
       alphabetAudioEl=null;
-      setAudioStatus("Geprüfte Referenzaufnahme.","ok");
+      setAudioStatus(slot.sourceType==="external-human-pronunciation"?"Geprüfte menschliche Fuṣḥā/MSA-Referenz.":"Geprüfte Referenzaufnahme.","ok");
       if(typeof onDone==="function")onDone();
       updateHeader(item,ageKey());
     };
