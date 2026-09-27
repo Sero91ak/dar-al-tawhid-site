@@ -3,7 +3,8 @@ set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
 REPO_API="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site"
-PIN="166259acebacd4c560411ee0f7005996b673c312"
+RELEASE_MANIFEST_URL="$REPO_API/contents/voice-studio/version.json?ref=main"
+PIN=""
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -26,8 +27,10 @@ trap cleanup_stage EXIT
 # Sonst aktiviert macOS am Ende nur die alte Binary erneut.
 osascript -e 'tell application id "de.dar-al-tawhid.voice-studio" to quit' >/dev/null 2>&1 || true
 pkill -TERM -x DARVoiceStudio >/dev/null 2>&1 || true
+pkill -TERM -x DARVoiceStudioNative >/dev/null 2>&1 || true
 sleep 1
 pkill -KILL -x DARVoiceStudio >/dev/null 2>&1 || true
+pkill -KILL -x DARVoiceStudioNative >/dev/null 2>&1 || true
 
 # Die vorhandene App bleibt während Download, Validierung und Engine-Start unangetastet.
 # Erst ein vollständig gebautes und signiertes neues Bundle ersetzt sie atomar.
@@ -52,6 +55,33 @@ say_status() {
 }
 
 say_status "DĀR Voice Studio wird eingerichtet …"
+
+resolve_release_ref() {
+  local manifest="$STAGE/release-version.json"
+  curl -fsSL \
+    -H "Accept: application/vnd.github.raw+json" \
+    -H "User-Agent: DAR-Voice-Studio-Installer" \
+    "$RELEASE_MANIFEST_URL" -o "$manifest"
+  PIN="$("$VENV/bin/python" - "$manifest" <<'PY'
+import json,sys
+p=sys.argv[1]
+with open(p,encoding="utf-8") as f:
+    data=json.load(f)
+ref=str(data.get("releaseRef") or "").strip()
+version=str(data.get("version") or "").strip()
+if not ref or ref=="main":
+    raise SystemExit("Kein validierter releaseRef im Voice-Studio-Manifest.")
+print(ref)
+PY
+)"
+  if [ -z "$PIN" ]; then
+    echo "FEHLER: Validierte Release-Referenz fehlt."
+    exit 1
+  fi
+  echo "Installiere validierten Voice-Studio-Release: $PIN"
+}
+
+resolve_release_ref
 
 download_repo_file() {
   local path="$1"
@@ -189,7 +219,7 @@ if ! /bin/bash -n "$STAGE/update-mac.command"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.9.4-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-2.9.5-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
@@ -209,7 +239,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
 done
 chmod +x "$TARGET/update-mac.command"
 
-echo "Voice Studio 2.9.4 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.9.5 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -493,8 +523,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.9.4</string>
-  <key>CFBundleShortVersionString</key><string>2.9.4</string>
+  <key>CFBundleVersion</key><string>2.9.5</string>
+  <key>CFBundleShortVersionString</key><string>2.9.5</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon.icns</string>
@@ -517,8 +547,8 @@ cat > "$PLIST" <<'PLIST'
 PLIST
 /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable $BUNDLE_EXECUTABLE" "$PLIST"
 if [ "$BUNDLE_EXECUTABLE" = "DARVoiceStudioNative" ]; then
-  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.4 · Native" "$PLIST" 2>/dev/null || \
-    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.4 · Native'" "$PLIST"
+  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.5 · Native" "$PLIST" 2>/dev/null || \
+    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.5 · Native'" "$PLIST"
 fi
 /usr/bin/plutil -lint "$PLIST" >/dev/null
 
@@ -573,7 +603,7 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.9.4 ist installiert."
+say_status "DĀR Voice Studio 2.9.5 ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
   "$APP/Contents/MacOS/$BUNDLE_EXECUTABLE" >/dev/null 2>&1 &
