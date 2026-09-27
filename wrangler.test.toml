@@ -23,3 +23,7 @@ watch_paths = [
 [assets]
 directory = "."
 binding = "ASSETS"
+
+# Workers AI: Qurʾān-Wortprüfung im Kids-Lernmodus.
+[ai]
+binding = "AI"
