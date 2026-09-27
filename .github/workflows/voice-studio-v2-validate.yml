@@ -467,6 +467,9 @@ jobs:
                   'DUA_PROGRESS_PREFIX="kids.dua.progress.v2."',
                   'recordDuaAttempt(d.id,!duaQuestionHadError)',
                   'duaQuestionHadError=true',
+                  'QURAN_PROGRESS_PREFIX="kids.quran.progress.v2."',
+                  'recordQuranAttempt(!ayahPracticeHadError)',
+                  'setTimeout(openDailyQuran,220)',
                   'Referenzaufnahme noch nicht freigegeben',
               ]),
               ("manifest",manifest,[
@@ -491,6 +494,8 @@ jobs:
               errors.append("legacy one-shot story mastery returned")
           if 'localStorage.setItem("kids.dua."+d.id,"1")' in kids:
               errors.append("legacy one-shot Dua mastery returned")
+          if 'recordQuranAttempt(!ayahPracticeHadError)' not in kids:
+              errors.append("spaced Quran ayah mastery missing")
           if 'if(!playerFullyHeard())' not in studio:
               errors.append("human full-listen gate missing")
           if errors:
