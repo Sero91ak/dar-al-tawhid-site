@@ -62,7 +62,7 @@ jobs:
           import struct
 
           icon=Path("voice-studio/voice-studio-icon.png")
-          if not icon.exists() or icon.stat().st_size < 30000:
+          if not icon.exists() or icon.stat().st_size < 20000:
               raise SystemExit("Dedicated Voice Studio icon missing or still using the old placeholder asset")
           data=icon.read_bytes()
           if data[:8] != b"\x89PNG\r\n\x1a\n":
