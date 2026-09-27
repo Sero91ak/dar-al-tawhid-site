@@ -1,6 +1,6 @@
 {
-  "version": "2.9.10",
-  "updatedAt": "2026-09-27T23:36:00+02:00",
+  "version": "2.9.11",
+  "updatedAt": "2026-09-27T23:59:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -322,8 +322,8 @@
     "completedSegmentProgress": true,
     "narrativePunctuationStaysNarrative": true,
     "narrativeColonNeverForcesList": true,
-    "contextCarrierBridgeEnabled": true,
-    "deArabicFlowStrategy": "contextual bridge + tight crossfade"
+    "contextCarrierBridgeEnabled": false,
+    "deArabicFlowStrategy": "stable normal segments + tight crossfade"
   },
   "contentStudio": {
     "enabled": true,
@@ -526,10 +526,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "665b31294b899be1044c6e18f9132eb45fdd4dc9",
+  "releaseRef": "095487c31b505e20e4421f6719bb16a7d238c53b",
   "releaseChannel": "validated-main",
   "updateRepair": true,
-  "updateRepairReason": "2.9.10 flow hotfix: restore contextual DE-Arabic coarticulation now that narrative list-mode bug is fixed",
+  "updateRepairReason": "stability rollback: disable DE-Arabic carrier bridge because it can abort generation",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
