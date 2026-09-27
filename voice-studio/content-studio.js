@@ -19,6 +19,9 @@ let productionPhase="draft";
 let productionError="";
 let quizDraft=[];
 let gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
+let legacyQuestion={};
+let legacyClaimIds=[];
+let legacyTags=[];
 let inventoryState={legacy:[],staging:[],live:[]};
 let busy=false;
 
@@ -241,6 +244,7 @@ function bind(){
       const source=inv.dataset.csSource||"";
       if(source==="live")loadLiveForEdit(inv.dataset.csInventory);
       else if(source==="staging")loadRemoteItem(inv.dataset.csInventory);
+      else if(source==="legacy")loadLegacyForEdit(inv.dataset.csInventory);
     }
   });
   setInterval(refreshQa,1200);
@@ -255,6 +259,7 @@ function resetEditorForKind(){
   q("csAgeMin").value="6";q("csAgeMax").value="10";q("csModeRead").checked=true;q("csModeListen").checked=true;
   q("csCategory").value=studioKind==="quiz"?"Quiz · geprüft":studioKind==="game"?"Spiel":studioKind==="ios"?"iOS · Inhalt":"Qurʾān · geprüft";
   coverFile=null;coverRemoteUrl="";coverAsset=null;audioAsset=null;quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
+  legacyQuestion={};legacyClaimIds=[];legacyTags=[];
   q("csCover")?.querySelector("img")?.remove();q("csCoverTitle").textContent="Neuer Inhalt";
 }
 function renderKindEditor(){
@@ -328,6 +333,9 @@ function fields(){
     modes:{read:!!q("csModeRead")?.checked,listen:!!q("csModeListen")?.checked},
     text,
     sourceRefs:String(q("csSources")?.value||"").split(/\n+/).map(x=>x.trim()).filter(Boolean),
+    question:legacyQuestion&&typeof legacyQuestion==="object"?legacyQuestion:{},
+    claimIds:[...legacyClaimIds],
+    tags:[...legacyTags],
     cover:coverAsset||{},
     audio:audioAsset||{},
     quiz:studioKind==="quiz"?{questions:quizDraft.map(x=>({...x,answers:(x.answers||[]).filter(a=>String(a.label||"").trim())}))}:null,
@@ -352,7 +360,8 @@ function persistDraft(){
       topic:q("csTopic")?.value||"",prophetId:q("csProphet")?.value||"",
       ageMin:q("csAgeMin")?.value||"6",ageMax:q("csAgeMax")?.value||"10",
       read:q("csModeRead")?.checked!==false,listen:q("csModeListen")?.checked!==false,
-      sources:q("csSources")?.value||"",text:q("text")?.value||"",quiz:quizDraft,game:gameDraft
+      sources:q("csSources")?.value||"",text:q("text")?.value||"",quiz:quizDraft,game:gameDraft,
+      legacyQuestion,legacyClaimIds,legacyTags
     }));
   }catch{}
 }
@@ -365,6 +374,9 @@ function restoreDraft(){
     q("csModeRead").checked=d.read!==false;q("csModeListen").checked=d.listen!==false;
     q("csSources").value=d.sources||"";q("text").value=d.text||"";
     quizDraft=Array.isArray(d.quiz)?d.quiz:[];gameDraft=d.game&&typeof d.game==="object"?d.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
+    legacyQuestion=d.legacyQuestion&&typeof d.legacyQuestion==="object"?d.legacyQuestion:{};
+    legacyClaimIds=Array.isArray(d.legacyClaimIds)?d.legacyClaimIds:[];
+    legacyTags=Array.isArray(d.legacyTags)?d.legacyTags:[];
     q("csCoverTitle").textContent=d.title||"Neuer Inhalt";
   }catch{}
 }
@@ -584,11 +596,11 @@ function renderInventory(){
     const audioOk=!!String((row.staging||row.live)?.audio?.url||"").trim();
     const coverOk=!!String((row.staging||row.live)?.cover?.url||"").trim();
     const age=(Number(active.ageMin)||4)+"–"+(Number(active.ageMax)||10)+" J.";
-    const source=row.staging?"staging":row.live?"live":"";
-    const id=(row.staging||row.live)?.id||"";
+    const source=row.staging?"staging":row.live?"live":row.legacy?"legacy":"";
+    const id=(row.staging||row.live||row.legacy)?.id||"";
     const open=source?'<button type="button" class="cs-inventory-item editable" data-cs-inventory="'+escapeHtml(id)+'" data-cs-source="'+source+'">':'<div class="cs-inventory-item">';
     const close=source?'</button>':'</div>';
-    const editHint=source==='live'?' · anklicken zum Bearbeiten':source==='staging'?' · Arbeitsversion öffnen':'';
+    const editHint=source==='live'?' · anklicken zum Bearbeiten':source==='staging'?' · Arbeitsversion öffnen':source==='legacy'?' · anklicken zum Übernehmen':'';
     return open+'<b>'+escapeHtml(row.title||active.id)+'</b><span class="cs-inventory-meta">'+escapeHtml(inventoryKindLabel(active.kind||"story"))+' · '+escapeHtml(age)+' · Text '+(textOk?"✓":"–")+' · Audio '+(audioOk?"✓":"–")+' · Cover '+(coverOk?"✓":"–")+escapeHtml(editHint)+'</span><span class="cs-inventory-chips">'+chips.join("")+'</span>'+close;
   }).join("");
 }
@@ -613,6 +625,43 @@ async function loadLibrary(force=false){
   if(legacy.status==="rejected"&&!workerSecret())setStudioMessage("Kids-Bestand konnte nicht geladen werden. Admin-Verbindung ist ebenfalls nicht gesetzt.","warn");
 }
 
+async function loadLegacyForEdit(id){
+  const x=inventoryState.legacy.find(i=>i.id===id);
+  if(!x){setStudioMessage("BESTAND-Inhalt wurde nicht gefunden.","bad");return}
+  studioKind="story";
+  contentId=x.id||"";
+  savedRevision=0;
+  contentStatus="draft";
+  stagingPublished=false;
+  productionPhase="draft";
+  productionError="";
+  document.querySelectorAll("[data-cs-kind]").forEach(b=>b.classList.toggle("active",b.dataset.csKind===studioKind));
+  q("styleMode").value="kids_story";
+  q("csPublishTest").textContent="In Test-Kids veröffentlichen";
+  q("csPublishLive").textContent="Live veröffentlichen";
+  q("csTitle").value=x.title||"";
+  q("csCategory").value=x.category||"Qurʾān · geprüft";
+  q("csTopic").value=x.scene||"";
+  q("csProphet").value=x.prophetId||"";
+  q("csAgeMin").value=String(x.ageMin||4);
+  q("csAgeMax").value=String(x.ageMax||10);
+  q("csModeRead").checked=true;
+  q("csModeListen").checked=true;
+  q("csSources").value=(x.sourceRefs||[]).join("\n");
+  q("text").value=x.text||"";
+  legacyQuestion=x.question&&typeof x.question==="object"?x.question:{};
+  legacyClaimIds=Array.isArray(x.claimIds)?[...x.claimIds]:[];
+  legacyTags=["legacy-kids",x.id?("legacy-id:"+x.id):""].filter(Boolean);
+  coverAsset=null;audioAsset=null;coverFile=null;coverRemoteUrl="";
+  quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
+  q("csCover")?.querySelector("img")?.remove();
+  q("csCoverTitle").textContent=x.title||"Inhalt";
+  renderKindEditor();
+  if(typeof renderAnalysis==="function")renderAnalysis();
+  renderStatus();refreshQa();persistDraft();
+  setStudioMessage("BESTAND-Inhalt übernommen. Original bleibt unverändert. Text, Alter, Prophet, Quellen und vorhandene Quizfragen sind im Studio-Arbeitsentwurf erhalten. Jetzt Cover/Serhat-Audio vorbereiten und zuerst in Test-Kids veröffentlichen.","good");
+}
+
 async function loadLiveForEdit(id){
   const x=inventoryState.live.find(i=>i.id===id);
   if(!x){setStudioMessage("Live-Inhalt wurde nicht gefunden.","bad");return}
@@ -634,6 +683,9 @@ async function loadLiveForEdit(id){
   q("csModeListen").checked=x.modes?.listen!==false;
   q("csSources").value=(x.sourceRefs||[]).join("\n");
   q("text").value=x.text||"";
+  legacyQuestion=x.question&&typeof x.question==="object"?x.question:{};
+  legacyClaimIds=Array.isArray(x.claimIds)?[...x.claimIds]:[];
+  legacyTags=Array.isArray(x.tags)?[...x.tags]:[];
   coverAsset=x.cover?.url?x.cover:null;
   audioAsset=x.audio?.url?x.audio:null;
   quizDraft=Array.isArray(x.quiz?.questions)?x.quiz.questions:[];
@@ -659,7 +711,11 @@ async function loadRemoteItem(id){
     document.querySelectorAll("[data-cs-kind]").forEach(b=>b.classList.toggle("active",b.dataset.csKind===studioKind));
     q("csTitle").value=x.title||"";q("csCategory").value=x.category||"";q("csTopic").value=x.topic||"";q("csProphet").value=x.prophetId||"";
     q("csAgeMin").value=String(x.ageMin||4);q("csAgeMax").value=String(x.ageMax||10);q("csModeRead").checked=x.modes?.read!==false;q("csModeListen").checked=x.modes?.listen!==false;
-    q("csSources").value=(x.sourceRefs||[]).join("\n");q("text").value=x.text||"";coverAsset=x.cover?.url?x.cover:null;audioAsset=x.audio?.url?x.audio:null;
+    q("csSources").value=(x.sourceRefs||[]).join("\n");q("text").value=x.text||"";
+    legacyQuestion=x.question&&typeof x.question==="object"?x.question:{};
+    legacyClaimIds=Array.isArray(x.claimIds)?[...x.claimIds]:[];
+    legacyTags=Array.isArray(x.tags)?[...x.tags]:[];
+    coverAsset=x.cover?.url?x.cover:null;audioAsset=x.audio?.url?x.audio:null;
     quizDraft=Array.isArray(x.quiz?.questions)?x.quiz.questions:[];gameDraft=x.game&&typeof x.game==="object"?x.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
     coverFile=null;coverRemoteUrl="";if(coverAsset?.url)renderCover(coverAsset.url);q("csCoverTitle").textContent=x.title||"Inhalt";
     renderKindEditor();if(typeof renderAnalysis==="function")renderAnalysis();renderStatus();refreshQa();setStudioMessage("Staging-Paket geladen.","good");

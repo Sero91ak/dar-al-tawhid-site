@@ -1,6 +1,6 @@
 {
-  "version": "2.7.4",
-  "updatedAt": "2026-09-27T06:45:00+02:00",
+  "version": "2.7.5",
+  "updatedAt": "2026-09-27T07:15:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -294,6 +294,9 @@
     "stagingInventory": true,
     "liveInventory": true,
     "inventorySearch": true,
-    "liveEditWorkingCopy": true
+    "liveEditWorkingCopy": true,
+    "legacyImportToStudio": true,
+    "legacyQuestionBankPreserved": true,
+    "legacyClaimsPreserved": true
   }
 }
