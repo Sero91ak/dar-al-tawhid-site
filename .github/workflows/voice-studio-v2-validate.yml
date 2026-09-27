@@ -36,6 +36,35 @@ jobs:
       - name: Validate Mac installer shell syntax
         run: bash -n voice-studio/install-mac.command
 
+      - name: Validate Voice Studio app identity asset
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import struct
+
+          icon=Path("voice-studio/voice-studio-icon.png")
+          if not icon.exists() or icon.stat().st_size < 10000:
+              raise SystemExit("Dedicated Voice Studio icon missing or unexpectedly small")
+          data=icon.read_bytes()
+          if data[:8] != b"\x89PNG\r\n\x1a\n":
+              raise SystemExit("Voice Studio icon is not a PNG")
+          width,height=struct.unpack(">II",data[16:24])
+          if width < 256 or height < 256 or width != height:
+              raise SystemExit(f"Voice Studio icon must be square and at least 256 px, got {width}x{height}")
+          installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
+          required=[
+              "voice-studio/voice-studio-icon.png",
+              "VoiceStudioIcon.png",
+              "AppIcon.icns",
+              "CFBundleIconFile",
+              "2.9.0",
+          ]
+          missing=[x for x in required if x not in installer]
+          if missing:
+              raise SystemExit("Installer identity integration missing: "+", ".join(missing))
+          print("Voice Studio app identity OK",width,height,icon.stat().st_size)
+          PY
+
       - name: Compile Voice Engine
         run: python -m py_compile voice-studio/local-engine.py
 
@@ -130,6 +159,8 @@ jobs:
               'x-webkit-airplay="deny"',
               'darAudioOutput',
               'disableRemotePlayback',
+              'voice-studio-icon.png?v=290',
+              'VOICE STUDIO 2.9.0',
           ]
           missing=[x for x in required if x not in html]
           if missing:
@@ -166,6 +197,11 @@ jobs:
               "setDefaultOutputDevice",
               "showAudioOutputMenu",
               "Toneinstellungen öffnen",
+              "applyAppIcon",
+              "VoiceStudioIcon",
+              "updateLoadingProgress",
+              "status: \"Bereit\"",
+              "DĀRVoiceStudioMac/2.9.0",
           ]
           missing=[x for x in required if x not in src]
           if missing:
