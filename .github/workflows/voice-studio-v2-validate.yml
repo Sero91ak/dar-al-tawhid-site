@@ -9,6 +9,12 @@ on:
       - "data/pronunciation/islamic-master-library.json"
       - "data/pronunciation/voice-regression-fixtures.json"
       - "scripts/voice-studio/validate-v2.py"
+      - "test/kids/**"
+      - "cloudflare/kids-content-media.js"
+      - "cloudflare/worker.js"
+      - "cloudflare/site-router.js"
+      - "cloudflare/test-app-worker.js"
+      - "_headers"
       - ".github/workflows/voice-studio-v2-validate.yml"
   pull_request:
     paths:
@@ -18,6 +24,13 @@ on:
       - "data/pronunciation/islamic-master-library.json"
       - "data/pronunciation/voice-regression-fixtures.json"
       - "scripts/voice-studio/validate-v2.py"
+      - "test/kids/**"
+      - "cloudflare/kids-content-media.js"
+      - "cloudflare/worker.js"
+      - "cloudflare/site-router.js"
+      - "cloudflare/test-app-worker.js"
+      - "_headers"
+      - ".github/workflows/voice-studio-v2-validate.yml"
 
 permissions:
   contents: read
@@ -294,6 +307,61 @@ jobs:
           print("Zero-detour Content Studio workflow OK")
           PY
 
+      - name: Validate Kids release coherence
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          version=json.loads(Path("test/kids/version.json").read_text(encoding="utf-8"))
+          build=str(version.get("buildId") or "").strip()
+          label=str(version.get("label") or "").strip()
+          if not re.fullmatch(r"kids-shell-v12-tab\d+",build):
+              raise SystemExit("Invalid Kids buildId: "+build)
+          m=re.search(r"V0\.(\d+)",label)
+          if not m:
+              raise SystemExit("Invalid Kids label: "+label)
+          minor=m.group(1)
+
+          required_build_files=[
+              "test/kids/index.html",
+              "test/kids/start.html",
+              "test/kids/shell.html",
+              "test/kids/manifest.webmanifest",
+              "cloudflare/site-router.js",
+              "cloudflare/test-app-worker.js",
+              "_headers",
+              "test/kids/v12-alive.txt",
+          ]
+          failures=[]
+          for name in required_build_files:
+              src=Path(name).read_text(encoding="utf-8")
+              if build not in src:
+                  failures.append(name+" missing "+build)
+
+          for name in ("test/kids/index.html","test/kids/start.html","test/kids/shell.html"):
+              src=Path(name).read_text(encoding="utf-8")
+              ids=set(re.findall(r'kids-shell-v12-tab\d+',src))
+              if ids != {build}:
+                  failures.append(name+" has inconsistent embedded build ids: "+repr(sorted(ids)))
+
+          sw=Path("test/kids/sw.js").read_text(encoding="utf-8")
+          expected_cache="dar-al-tawhid-kids-v"+minor
+          if expected_cache not in sw:
+              failures.append("test/kids/sw.js missing "+expected_cache)
+
+          router=Path("cloudflare/site-router.js").read_text(encoding="utf-8")
+          worker=Path("cloudflare/test-app-worker.js").read_text(encoding="utf-8")
+          if label not in router:
+              failures.append("site-router version response missing "+label)
+          if label not in worker:
+              failures.append("test-app-worker version response missing "+label)
+
+          if failures:
+              raise SystemExit("Kids release coherence failed:\n- "+"\n- ".join(failures))
+          print("Kids release coherent",build,label,expected_cache)
+          PY
+
       - name: Validate strict Alif-Ba audio workflow
         run: |
           python - <<'PY'
@@ -336,6 +404,11 @@ jobs:
                   'alphabet-audio.json?v=1',
                   'audioEvidenceComplete',
                   'PROGRESS_KEY="kids.alphabet.progress.v2."',
+                  'reviewBucket',
+                  'reviewQueueMode',
+                  'lastMistakeAt',
+                  'if(entry.stage==="secure")return 30;',
+                  'Keine Wiederholung fällig',
                   'Referenzaufnahme noch nicht freigegeben',
               ]),
               ("manifest",manifest,[
@@ -352,6 +425,8 @@ jobs:
           forbidden=[x for x in ['function speakArabic','lang:"ar-SA"'] if x in kids]
           if forbidden:
               errors.append("kids system Arabic TTS fallback remains: "+", ".join(forbidden))
+          if 'if(e.stage==="secure")continue;' in kids:
+              errors.append("secure alphabet items are still skipped forever instead of becoming due again")
           if 'if(!playerFullyHeard())' not in studio:
               errors.append("human full-listen gate missing")
           if errors:
