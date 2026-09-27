@@ -2663,7 +2663,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
       <div class="parent-card">
         <div class="label-row"><strong>Lernfortschritt</strong><span style="color:var(--sage);font-size:11px">LOKAL</span></div>
         <div class="parent-progress-grid">
-          <div class="parent-progress-stat"><strong id="parentStoriesDone">0</strong><span>Geschichten verstanden</span></div>
+          <div class="parent-progress-stat"><strong id="parentStoriesDone">0</strong><span>Geschichten sicher</span></div>
           <div class="parent-progress-stat"><strong id="parentDuasDone">0</strong><span>Duʿāʾ gelernt</span></div>
           <div class="parent-progress-stat"><strong id="parentQuizCorrect">0</strong><span>Quizfragen richtig</span></div>
           <div class="parent-progress-stat"><strong id="parentTodayDone">0/3</strong><span>Heute geschafft</span></div>
@@ -2921,7 +2921,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab38";
+const KIDS_BUILD_ID="kids-shell-v12-tab39";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -3071,6 +3071,7 @@ var speaking=false;
 var storyManualStop=false;
 var currentStoryKey="coin";
 var storyQuestionPassed=false;
+var storyQuestionHadError=false;
 var authenticStories=[];
 var kidsDuas=[];
 var verifiedKnowledge=[];
@@ -3224,7 +3225,7 @@ function updateParentProgress(){
   var storyCount=0;
   var storyIds=Object.keys(stories).concat(authenticStories.map(function(s){return s.id}));
   Array.from(new Set(storyIds)).forEach(function(k){
-    try{if(localStorage.getItem("kids.story."+k)==="1")storyCount++}catch(e){}
+    try{if(storyProgress(k).stage==="secure")storyCount++}catch(e){}
   });
   var duaCount=0;
   kidsDuas.forEach(function(d){
@@ -5507,6 +5508,74 @@ function renderQuizFinish(){
 }
 document.getElementById("openQuizButton").addEventListener("click",openQuiz);
 
+var STORY_PROGRESS_PREFIX="kids.story.progress.v2.";
+function storyProgressDefault(){
+  return {stage:"new",attempts:0,reviewPasses:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0};
+}
+function storyProgress(key){
+  var storageKey=STORY_PROGRESS_PREFIX+key;
+  try{
+    var raw=JSON.parse(localStorage.getItem(storageKey)||"null");
+    if(raw&&typeof raw==="object"){
+      var base=storyProgressDefault();
+      Object.keys(base).forEach(function(k){if(raw[k]===undefined)raw[k]=base[k]});
+      return raw;
+    }
+    if(localStorage.getItem("kids.story."+key)==="1"){
+      var migrated=storyProgressDefault();
+      migrated.stage="learning";
+      migrated.attempts=1;
+      migrated.reviewPasses=1;
+      migrated.dueAt=Date.now();
+      migrated.lastSeenAt=Date.now();
+      localStorage.setItem(storageKey,JSON.stringify(migrated));
+      return migrated;
+    }
+  }catch(e){}
+  return storyProgressDefault();
+}
+function saveStoryProgress(key,entry){
+  try{localStorage.setItem(STORY_PROGRESS_PREFIX+key,JSON.stringify(entry||storyProgressDefault()))}catch(e){}
+}
+function recordStoryAttempt(key,firstTry){
+  var e=storyProgress(key);
+  var now=Date.now();
+  e.attempts=Number(e.attempts||0)+1;
+  e.lastSeenAt=now;
+  var counted=false;
+  if(firstTry){
+    e.consecutiveFirstTry=Number(e.consecutiveFirstTry||0)+1;
+    if(!e.dueAt||now>=Number(e.dueAt||0)){
+      e.reviewPasses=Number(e.reviewPasses||0)+1;
+      counted=true;
+      if(e.reviewPasses===1)e.dueAt=now+10*60*1000;
+      else if(e.reviewPasses===2)e.dueAt=now+24*60*60*1000;
+      else e.dueAt=now+7*24*60*60*1000;
+    }
+  }else{
+    e.wrong=Number(e.wrong||0)+1;
+    e.lapses=Number(e.lapses||0)+1;
+    e.lastMistakeAt=now;
+    e.consecutiveFirstTry=0;
+    e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
+    e.dueAt=now+5*60*1000;
+  }
+  if(e.reviewPasses>=3)e.stage="secure";
+  else if(e.reviewPasses>=2)e.stage="review";
+  else e.stage="learning";
+  saveStoryProgress(key,e);
+  return{entry:e,counted:counted,firstTry:firstTry};
+}
+function storyButtonLabel(key){
+  var e=storyProgress(key),now=Date.now();
+  if(e.stage==="secure"){
+    return Number(e.dueAt||0)<=now?"○ Wiederholen":"✓ Sicher verstanden";
+  }
+  if(e.attempts&&Number(e.dueAt||0)>now)return"✓ Wiederholung später";
+  if(e.attempts)return"○ Wiederholen";
+  return"○ Frage beantworten";
+}
+
 function openStory(key){
   currentStoryKey=key;
   var s=storyData(key);
@@ -5519,7 +5588,8 @@ function openStory(key){
   var storySource=document.getElementById("storySource");
   storySource.textContent=s.verification==="approved"?(s.sourceRefs||[]).join(" · "):"";
   storyQuestionPassed=false;
-  document.getElementById("storyDone").textContent=localStorage.getItem("kids.story."+key)==="1"?"✓ Frage noch einmal":"○ Frage beantworten";
+  storyQuestionHadError=false;
+  document.getElementById("storyDone").textContent=storyButtonLabel(key);
   document.getElementById("storyQuestion").classList.remove("show");
   document.getElementById("storyQuestionFeedback").textContent="";
   document.getElementById("storyModal").classList.add("open");
@@ -5580,13 +5650,16 @@ function renderStoryQuestion(){
         storyQuestionPassed=true;
         b.classList.add("correct");
         feedback.className="story-question-feedback good";
-        feedback.textContent="✓ "+q.success;
-        localStorage.setItem("kids.story."+currentStoryKey,"1");
-        document.getElementById("storyDone").textContent="✓ Verstanden";
+        var storyResult=recordStoryAttempt(currentStoryKey,!storyQuestionHadError);
+        if(storyResult.entry&&storyResult.entry.stage==="secure")feedback.textContent="✓ "+q.success+" · sicher";
+        else if(!storyQuestionHadError&&!storyResult.counted)feedback.textContent="✓ "+q.success+" · Wiederholung später";
+        else feedback.textContent="✓ "+q.success;
+        document.getElementById("storyDone").textContent=storyButtonLabel(currentStoryKey);
         markDailyDone("story");
         updateParentProgress();
         quizSpeak(q.success);
       }else{
+        storyQuestionHadError=true;
         b.classList.add("wrong");
         feedback.className="story-question-feedback bad";
         feedback.textContent=q.retry;
