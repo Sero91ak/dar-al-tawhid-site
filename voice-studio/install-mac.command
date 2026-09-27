@@ -3,7 +3,7 @@ set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
 REPO_API="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site"
-PIN="0a86c9dfc4883462e2c12ba6b4b41c6757091f85"
+PIN="166259acebacd4c560411ee0f7005996b673c312"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
