@@ -2921,7 +2921,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab41";
+const KIDS_BUILD_ID="kids-shell-v12-tab42";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -3061,6 +3061,7 @@ var meterRaf=0;
 var practiceActive=false;
 var practiceRequired=false;
 var ayahPassed=false;
+var ayahPracticeHadError=false;
 var currentPracticeWord=0;
 var wordStates=[];
 var recognitionRestartTimer=0;
@@ -3252,7 +3253,7 @@ function launchDailyStep(step){
   if(step==="story"){openStory(dailyStoryKey());return}
   if(step==="dua"){openDailyDua();return}
   if(step==="quiz"){openQuiz();return}
-  if(step==="quran"){showTab("quran");setTimeout(function(){openSurah(112,0,"learn")},220)}
+  if(step==="quran"){showTab("quran");setTimeout(openDailyQuran,220)}
 }
 function launchNextDailyStep(){
   var plan=dailyPlan();
@@ -3414,10 +3415,125 @@ function stopQuran(){
   currentPracticeWord=0;
   wordStates=[];
   ayahPassed=false;
+  ayahPracticeHadError=false;
   updateLearnStatus(" Erst hören",false);
   document.getElementById("ayahPlay").textContent=" Āyah anhören";
   document.getElementById("speakAlong").textContent=" Jetzt mitsprechen";
 }
+var QURAN_PROGRESS_PREFIX="kids.quran.progress.v2.";
+function quranProgressDefault(){
+  return {stage:"new",attempts:0,reviewPasses:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0,surah:0,ayahIndex:0,verseId:0,label:""};
+}
+function quranProgressKey(surah,verseId){
+  return QURAN_PROGRESS_PREFIX+String(surah)+":"+String(verseId);
+}
+function quranProgress(surah,verseId){
+  try{
+    var raw=JSON.parse(localStorage.getItem(quranProgressKey(surah,verseId))||"null");
+    if(raw&&typeof raw==="object"){
+      var base=quranProgressDefault();
+      Object.keys(base).forEach(function(k){if(raw[k]===undefined)raw[k]=base[k]});
+      return raw;
+    }
+  }catch(e){}
+  return quranProgressDefault();
+}
+function saveQuranProgress(surah,verseId,entry){
+  try{localStorage.setItem(quranProgressKey(surah,verseId),JSON.stringify(entry||quranProgressDefault()))}catch(e){}
+}
+function recordQuranAttempt(firstTry){
+  if(!currentSurah||!currentSurah.verses.length)return{entry:quranProgressDefault(),counted:false,firstTry:firstTry};
+  var verse=currentSurah.verses[currentAyahIndex]||{};
+  var e=quranProgress(currentSurah.id,verse.id);
+  var now=Date.now();
+  e.surah=currentSurah.id;
+  e.ayahIndex=currentAyahIndex;
+  e.verseId=Number(verse.id||currentAyahIndex+1);
+  e.label=currentSurah.transliteration||("Sūrah "+currentSurah.id);
+  e.attempts=Number(e.attempts||0)+1;
+  e.lastSeenAt=now;
+  var counted=false;
+  if(firstTry){
+    e.consecutiveFirstTry=Number(e.consecutiveFirstTry||0)+1;
+    if(!e.dueAt||now>=Number(e.dueAt||0)){
+      e.reviewPasses=Number(e.reviewPasses||0)+1;
+      counted=true;
+      if(e.reviewPasses===1)e.dueAt=now+10*60*1000;
+      else if(e.reviewPasses===2)e.dueAt=now+24*60*60*1000;
+      else e.dueAt=now+7*24*60*60*1000;
+    }
+  }else{
+    e.wrong=Number(e.wrong||0)+1;
+    e.lapses=Number(e.lapses||0)+1;
+    e.lastMistakeAt=now;
+    e.consecutiveFirstTry=0;
+    e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
+    e.dueAt=now+5*60*1000;
+  }
+  if(e.reviewPasses>=3)e.stage="secure";
+  else if(e.reviewPasses>=2)e.stage="review";
+  else e.stage="learning";
+  saveQuranProgress(currentSurah.id,verse.id,e);
+  return{entry:e,counted:counted,firstTry:firstTry};
+}
+function quranProgressStatus(surah,verseId){
+  var e=quranProgress(surah,verseId),now=Date.now();
+  if(e.stage==="secure")return Number(e.dueAt||0)<=now?"Wiederholung fällig":"sicher";
+  if(e.attempts&&Number(e.dueAt||0)>now)return"Wiederholung später";
+  if(e.attempts)return"Wiederholung fällig";
+  return"neu";
+}
+function quranReviewPriority(entry,now){
+  if(!entry||!entry.attempts)return 99;
+  var due=Number(entry.dueAt||0);
+  if(due>now)return 99;
+  var recentMistake=Number(entry.lastMistakeAt||0)>0&&now-Number(entry.lastMistakeAt||0)<=14*24*60*60*1000;
+  if(recentMistake)return 10;
+  if(entry.stage==="learning")return 20;
+  if(entry.stage==="review")return 25;
+  if(entry.stage==="secure")return 30;
+  return 35;
+}
+function nextQuranReview(){
+  var now=Date.now(),items=[];
+  try{
+    for(var i=0;i<localStorage.length;i++){
+      var key=localStorage.key(i);
+      if(!key||key.indexOf(QURAN_PROGRESS_PREFIX)!==0)continue;
+      var entry=JSON.parse(localStorage.getItem(key)||"null");
+      if(!entry||typeof entry!=="object")continue;
+      var bucket=quranReviewPriority(entry,now);
+      if(bucket>=99)continue;
+      items.push({
+        bucket:bucket,
+        due:Number(entry.dueAt||0),
+        lastSeen:Number(entry.lastSeenAt||0),
+        surah:Number(entry.surah||0),
+        ayahIndex:Number(entry.ayahIndex||0)
+      });
+    }
+  }catch(e){}
+  items=items.filter(function(x){return x.surah>0}).sort(function(a,b){
+    if(a.bucket!==b.bucket)return a.bucket-b.bucket;
+    if(a.due!==b.due)return a.due-b.due;
+    return a.lastSeen-b.lastSeen;
+  });
+  return items[0]||null;
+}
+function openDailyQuran(){
+  var review=nextQuranReview();
+  if(review){
+    openSurah(review.surah,review.ayahIndex,"learn");
+    return;
+  }
+  var resume=readQuranResume();
+  if(resume&&resume.surah){
+    openSurah(Number(resume.surah),Number(resume.ayah||0),"learn");
+    return;
+  }
+  openSurah(112,0,"learn");
+}
+
 function openSurah(id,ayahIndex,mode){
   stopQuran();
   practiceRequired=(mode==="learn");
@@ -3504,7 +3620,8 @@ function renderAyah(){
   if(!currentSurah||!currentSurah.verses.length)return;
   var v=currentSurah.verses[currentAyahIndex];
   document.getElementById("quranTitle").textContent=currentSurah.transliteration;
-  document.getElementById("quranSubtitle").textContent="Āyah "+v.id+" von "+currentSurah.verses.length;
+  var mastery=quranProgressStatus(currentSurah.id,v.id);
+  document.getElementById("quranSubtitle").textContent="Āyah "+v.id+" von "+currentSurah.verses.length+(practiceRequired?" · "+mastery:"");
   recitationMatched=0;
   recitationWrong=-1;
   recitationState="idle";
@@ -3512,6 +3629,7 @@ function renderAyah(){
   currentPracticeWord=0;
   wordStates=rawAyahWords().map(function(){return "pending"});
   ayahPassed=!practiceRequired;
+  ayahPracticeHadError=false;
   lastWordHeard="";
   lastWordScore=0;
   renderAyahWords(0,-1,0);
@@ -3861,13 +3979,22 @@ function completeAyahPractice(){
   stopWordRecognition();
   stopRecordingCapture();
   wordStates=wordStates.map(function(){return "green"});
+  var masteryResult=recordQuranAttempt(!ayahPracticeHadError);
   renderAyahWords(wordStates.length,-1,-1);
   renderWordCoach();
-  updateLearnStatus("✓ Sehr gut! Die Āyah ist geschafft.",false,"success");
+  if(masteryResult.entry&&masteryResult.entry.stage==="secure"){
+    updateLearnStatus("✓ Sehr gut! Die Āyah ist jetzt sicher.",false,"success");
+  }else if(!ayahPracticeHadError&&!masteryResult.counted){
+    updateLearnStatus("✓ Āyah geschafft. Die nächste Wiederholung kommt später.",false,"success");
+  }else if(ayahPracticeHadError){
+    updateLearnStatus("✓ Āyah geschafft. Wegen der Fehler wird sie bald wiederholt.",false,"success");
+  }else{
+    updateLearnStatus("✓ Āyah geschafft. Wiederholung gespeichert.",false,"success");
+  }
   setLessonStep("done");
   markDailyDone("quran");
   var btn=document.getElementById("speakAlong");
-  btn.textContent="✓ GESCHAFFT";
+  btn.textContent=masteryResult.entry&&masteryResult.entry.stage==="secure"?"✓ SICHER":"✓ GESCHAFFT";
   btn.classList.add("active");
   btn.classList.remove("mic-live");
   setNextLock();
@@ -3973,6 +4100,7 @@ function applyServerGrade(data){
   }
 
   if(grade==="orange"){
+    ayahPracticeHadError=true;
     wordStates[idx]="orange";
     paintPracticeState(heard,score,"orange");
     updateLearnStatus("Fast richtig. Bleib bei diesem Wort und versuch es noch einmal.",true);
@@ -3980,6 +4108,7 @@ function applyServerGrade(data){
     return;
   }
 
+  ayahPracticeHadError=true;
   wordStates[idx]="red";
   paintPracticeState(heard,score,"red");
   document.getElementById("micMonitor").classList.add("error");
@@ -4220,6 +4349,7 @@ document.getElementById("speakAlong").addEventListener("click",function(){
       currentPracticeWord=0;
       wordStates=rawAyahWords().map(function(){return "pending"});
       ayahPassed=false;
+      ayahPracticeHadError=false;
       lastWordHeard="";
       lastWordScore=0;
       recitationTranscript="";
