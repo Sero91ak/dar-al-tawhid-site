@@ -1630,11 +1630,14 @@ def load_mlx_model():
 
 def load_production_model():
     global ACTIVE_BACKEND
-    if MLX_ENABLED and importlib.util.find_spec("mlx_audio") is not None and not MLX_MODEL_ERROR:
+    # Ein früherer MLX-Fehler darf die High-Speed-Engine nicht für die gesamte
+    # App-Laufzeit sperren. Der überwachte Worker wird bei jedem neuen Render
+    # erneut versucht; erst ein aktueller Startfehler fällt auf PyTorch/MPS zurück.
+    if MLX_ENABLED and importlib.util.find_spec("mlx_audio") is not None:
         try:
             return load_mlx_model()
         except Exception as e:
-            print("[DĀR Voice] MLX fallback auf PyTorch/MPS:",e,flush=True)
+            print("[DĀR Voice] MLX aktuell nicht verfügbar, Fallback auf PyTorch/MPS:",e,flush=True)
     ACTIVE_BACKEND="torch"
     return load_model()
 
@@ -1745,8 +1748,8 @@ def warm_model():
                 prepare_reference_if_needed(model,"ar",prosody_settings("narration","ar","تجربة")["exaggeration"])
             prepare_reference_if_needed(model,"de",prosody_settings("narration","de","Warmup")["exaggeration"])
         cleanup_render_cache()
-    except Exception:
-        pass
+    except Exception as e:
+        print("[DĀR Voice] MLX/Voice warmup warning:",e,flush=True)
 
 def split_chunks(text:str,max_chars:int=150):
     """Flow-aware Chunking: nie stumpf mitten im Satz schneiden, wenn eine
@@ -3279,39 +3282,81 @@ def generate(text:str,prepared:str="",style:str="auto"):
                             )
                         metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
                     except Exception as first_error:
+                        mlx_recovered=False
                         if getattr(model,"_dar_backend","torch")=="mlx" and "generation_timeout" in str(first_error):
-                            # Nach einem echten stuck inference wurde der MLX-Prozess bereits
-                            # hart beendet. Kein unüberwachtes In-Process-Fallback starten.
-                            print("[DĀR Voice] MLX watchdog stopped stuck inference:",first_error,flush=True)
-                            raise
-                        if getattr(model,"_dar_backend","torch")=="mlx":
-                            print("[DĀR Voice] MLX segment failed, retry PyTorch/MPS:",first_error,flush=True)
-                            set_status(message=f"{lang_label} · MLX-Fallback auf PyTorch/MPS …")
-                            model=load_model()
-                            segment_started=time.perf_counter()
-                            if bridge_direction and lang=="de" and not audio_lock_key:
-                                wav,metrics=render_context_bridge(
-                                    model,chunk,mode,bridge_direction,seed_base=core_seed
+                            # Ein einzelner festhängender Satz darf keinen ganzen Langtext
+                            # abbrechen. Der Watchdog hat den Worker bereits hart beendet:
+                            # Metal/MLX frisch starten und genau diesen Abschnitt erneut
+                            # durch die bestehende QA-/Feinsegmentierungs-Rettung schicken.
+                            print("[DĀR Voice] MLX watchdog: restart + segment rescue:",first_error,flush=True)
+                            set_status(
+                                progress=pct,
+                                message=f"{lang_label} · Watchdog · MLX wird neu gestartet, Abschnitt {idx}/{total} bleibt erhalten …"
+                            )
+                            try:
+                                _stop_mlx_process("watchdog recovery before segment retry")
+                                retry_model=MLXModelAdapter(_start_mlx_process())
+                                segment_started=time.perf_counter()
+                                if bridge_direction and lang=="de" and not audio_lock_key:
+                                    wav,metrics=render_context_bridge(
+                                        retry_model,chunk,mode,bridge_direction,seed_base=core_seed+313
+                                    )
+                                else:
+                                    wav,metrics=render_segment_with_qa(
+                                        retry_model,chunk,lang,mode,critical,seed_base=core_seed+313
+                                    )
+                                metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
+                                metrics["watchdog_restart"]=True
+                                model=retry_model
+                                mlx_recovered=True
+                                set_status(
+                                    progress=pct,
+                                    message=f"{lang_label} · MLX-Rescue erfolgreich · Abschnitt {idx}/{total} …"
                                 )
+                            except Exception as retry_error:
+                                print("[DĀR Voice] MLX watchdog rescue failed:",retry_error,flush=True)
+                                first_error=retry_error
+
+                        if not mlx_recovered:
+                            if getattr(model,"_dar_backend","torch")=="mlx":
+                                # Letzte kontrollierte Rückfallebene: Der betroffene
+                                # Abschnitt wird auf MPS erzeugt, statt den gesamten
+                                # Auftrag nach einem MLX-Problem zu verwerfen.
+                                print("[DĀR Voice] MLX segment failed, retry PyTorch/MPS:",first_error,flush=True)
+                                set_status(
+                                    progress=pct,
+                                    message=f"{lang_label} · MLX-Rescue erschöpft · PyTorch/MPS für Abschnitt {idx}/{total} …"
+                                )
+                                _stop_mlx_process("fallback after MLX segment failure")
+                                model=load_model()
+                                segment_started=time.perf_counter()
+                                if bridge_direction and lang=="de" and not audio_lock_key:
+                                    wav,metrics=render_context_bridge(
+                                        model,chunk,mode,bridge_direction,seed_base=core_seed
+                                    )
+                                else:
+                                    wav,metrics=render_segment_with_qa(
+                                        model,chunk,lang,mode,critical,seed_base=core_seed
+                                    )
+                                metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
+                                metrics["mlx_fallback_after_error"]=type(first_error).__name__
+                            elif MODEL_DEVICE=="mps":
+                                print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
+                                set_status(
+                                    progress=pct,
+                                    message=f"{lang_label} · MPS-Fallback auf CPU · Abschnitt {idx}/{total} …"
+                                )
+                                model=load_model(force_device="cpu")
+                                if bridge_direction and lang=="de" and not audio_lock_key:
+                                    wav,metrics=render_context_bridge(
+                                        model,chunk,mode,bridge_direction,seed_base=core_seed
+                                    )
+                                else:
+                                    wav,metrics=render_segment_with_qa(
+                                        model,chunk,lang,mode,critical,seed_base=core_seed
+                                    )
                             else:
-                                wav,metrics=render_segment_with_qa(
-                                    model,chunk,lang,mode,critical,seed_base=core_seed
-                                )
-                            metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
-                        elif MODEL_DEVICE=="mps":
-                            print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
-                            set_status(message=f"{lang_label} · MPS-Fallback auf CPU …")
-                            model=load_model(force_device="cpu")
-                            if bridge_direction and lang=="de" and not audio_lock_key:
-                                wav,metrics=render_context_bridge(
-                                    model,chunk,mode,bridge_direction,seed_base=core_seed
-                                )
-                            else:
-                                wav,metrics=render_segment_with_qa(
-                                    model,chunk,lang,mode,critical,seed_base=core_seed
-                                )
-                        else:
-                            raise
+                                raise
                     if not audio_lock_key:
                         if bridge_direction:
                             save_context_bridge_cache(bridge_cache_key,wav,render_sr)
