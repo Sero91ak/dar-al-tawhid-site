@@ -189,7 +189,7 @@ if ! /bin/bash -n "$STAGE/update-mac.command"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.9.3-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-2.9.4-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
@@ -209,7 +209,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
 done
 chmod +x "$TARGET/update-mac.command"
 
-echo "Voice Studio 2.9.3 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.9.4 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -467,6 +467,11 @@ APPSTART
 chmod +x "$MACOS/DARVoiceStudio"
 [ -f "$MACOS/DARVoiceStudioNative" ] && chmod +x "$MACOS/DARVoiceStudioNative" || true
 
+BUNDLE_EXECUTABLE="DARVoiceStudio"
+if [ "$BUILD_OK" -eq 1 ] && [ -x "$MACOS/DARVoiceStudioNative" ]; then
+  BUNDLE_EXECUTABLE="DARVoiceStudioNative"
+fi
+echo "macOS Bundle-Executable: $BUNDLE_EXECUTABLE"
 
 # App-Icon aus dem eigenen Voice-Studio-Logo erzeugen.
 if [ -s "$TARGET/voice-studio-icon.png" ]; then
@@ -488,11 +493,12 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.9.3</string>
-  <key>CFBundleShortVersionString</key><string>2.9.3</string>
+  <key>CFBundleVersion</key><string>2.9.4</string>
+  <key>CFBundleShortVersionString</key><string>2.9.4</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
-  <key>CFBundleIconFile</key><string>AppIcon</string>
+  <key>CFBundleIconFile</key><string>AppIcon.icns</string>
+  <key>CFBundleIconName</key><string>AppIcon</string>
   <key>NSHighResolutionCapable</key><true/>
   <key>NSAppTransportSecurity</key>
   <dict>
@@ -509,6 +515,11 @@ cat > "$PLIST" <<'PLIST'
 </dict>
 </plist>
 PLIST
+/usr/libexec/PlistBuddy -c "Set :CFBundleExecutable $BUNDLE_EXECUTABLE" "$PLIST"
+if [ "$BUNDLE_EXECUTABLE" = "DARVoiceStudioNative" ]; then
+  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.4 · Native" "$PLIST" 2>/dev/null || \
+    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.4 · Native'" "$PLIST"
+fi
 /usr/bin/plutil -lint "$PLIST" >/dev/null
 
 if [ ! -s "$RESOURCES/VoiceStudioIcon.png" ]; then
@@ -527,8 +538,8 @@ if command -v codesign >/dev/null 2>&1; then
 fi
 
 # Bundle vor dem Austausch technisch prüfen.
-if [ ! -x "$MACOS/DARVoiceStudio" ]; then
-  echo "FEHLER: Neuer App-Launcher fehlt. Die vorhandene App bleibt erhalten."
+if [ ! -x "$MACOS/$BUNDLE_EXECUTABLE" ]; then
+  echo "FEHLER: Neues Bundle-Executable fehlt: $BUNDLE_EXECUTABLE. Die vorhandene App bleibt erhalten."
   exit 1
 fi
 if command -v codesign >/dev/null 2>&1; then
@@ -555,15 +566,17 @@ fi
 LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
 "$LSREGISTER" -u "$APP" >/dev/null 2>&1 || true
 "$LSREGISTER" -f "$APP" >/dev/null 2>&1 || true
+/usr/bin/touch "$APP"
+/usr/bin/killall Dock >/dev/null 2>&1 || true
 
-# Finder/LaunchServices kurz Zeit geben, die neue Binary zu übernehmen.
+# Finder/LaunchServices kurz Zeit geben, die neue Binary und das neue App-Icon zu übernehmen.
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.9.3 ist installiert."
+say_status "DĀR Voice Studio 2.9.4 ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
-  "$APP/Contents/MacOS/DARVoiceStudio" >/dev/null 2>&1 &
+  "$APP/Contents/MacOS/$BUNDLE_EXECUTABLE" >/dev/null 2>&1 &
 fi
 
 sleep 2
