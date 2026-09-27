@@ -126,9 +126,49 @@ jobs:
               'Nach der letzten Bestätigung wird derselbe Text automatisch neu erzeugt',
               'Alle offenen Aussprachen sind geklärt; derselbe Text wird jetzt automatisch neu erzeugt',
               'style:$("#styleMode").value',
+              'data-audio-output-button',
+              'x-webkit-airplay="deny"',
+              'darAudioOutput',
+              'disableRemotePlayback',
           ]
           missing=[x for x in required if x not in html]
           if missing:
               raise SystemExit("Missing Voice Studio 2 UI hooks: "+", ".join(missing))
           print("Voice Studio UI hooks OK")
+          PY
+
+
+  mac-native-audio-route:
+    runs-on: macos-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Typecheck native macOS Voice Studio
+        run: |
+          xcrun swiftc -typecheck \
+            voice-studio/VoiceStudioApp.swift \
+            -framework Cocoa \
+            -framework WebKit \
+            -framework CoreAudio
+
+      - name: Verify native audio-route bridge markers
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          src=Path("voice-studio/VoiceStudioApp.swift").read_text(encoding="utf-8")
+          required=[
+              "WKScriptMessageHandler",
+              "darAudioOutput",
+              "kAudioHardwarePropertyDevices",
+              "kAudioHardwarePropertyDefaultOutputDevice",
+              "kAudioDevicePropertyScopeOutput",
+              "setDefaultOutputDevice",
+              "showAudioOutputMenu",
+              "Toneinstellungen öffnen",
+          ]
+          missing=[x for x in required if x not in src]
+          if missing:
+              raise SystemExit("Missing native audio routing markers: "+", ".join(missing))
+          print("Native macOS audio routing hooks OK")
           PY
