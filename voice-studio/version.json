@@ -1,6 +1,6 @@
 {
   "version": "2.9.0",
-  "updatedAt": "2026-09-27T14:45:00+02:00",
+  "updatedAt": "2026-09-27T14:58:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -41,7 +41,12 @@
     "studio": [
       "⌘↩ Audio erzeugen",
       "⇧⌘↩ Neu prüfen",
-      "⌘K Textfeld fokussieren"
+      "⌘K Textfeld fokussieren",
+      "⌘N Neuer Inhalt",
+      "⌘1 Zum Text",
+      "⇧⌘E Audio + Cover erzeugen",
+      "⇧⌘T Test veröffentlichen",
+      "⇧⌘L Live veröffentlichen"
     ]
   },
   "macAppUpdatePolicy": "keep-old-bundle-until-new-build-validated + atomic swap + ad-hoc-sign + launchservices-reregister",
@@ -225,7 +230,10 @@
     "nativeAudioRouteValidation": true,
     "dedicatedIconValidation": true,
     "launchSplashValidation": true,
-    "quickWorkflowValidation": true
+    "quickWorkflowValidation": true,
+    "zeroDetourWorkflowValidation": true,
+    "contentStudioNativeMenuValidation": true,
+    "duplicateShortcutGuard": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -309,7 +317,12 @@
     "directProduce": true,
     "directTestPublish": true,
     "directLivePublish": true,
-    "stickyWorkflowControls": true
+    "stickyWorkflowControls": true,
+    "workflowNavigator": true,
+    "workflowAutoNext": true,
+    "nativeProductionMenu": true,
+    "directEditAfterInventoryOpen": true,
+    "staleAudioInvalidatedOnTextEdit": true
   },
   "audioFormat": "wav-pcm16-mono",
   "legacyFloatWavMigration": true,
@@ -389,5 +402,18 @@
     "live"
   ],
   "zeroDetourWorkflow": true,
-  "compactWorkspace": true
+  "compactWorkspace": true,
+  "workflowNavigator": [
+    "Text",
+    "Audio",
+    "Cover",
+    "Test",
+    "Live"
+  ],
+  "workflowAutoNext": true,
+  "workflowAutoJumpAfterProduce": true,
+  "workflowAutoJumpTestToLive": true,
+  "workflowLiveReturnsToInventory": true,
+  "nativeProductionMenu": true,
+  "nativeProductionShortcuts": true
 }
