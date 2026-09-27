@@ -48,23 +48,6 @@ async function fetchKidsMirror(pathname, search) {
   return fetch(next.toString(), { method: "GET", redirect: "follow" });
 }
 
-function isolateKidsUpdateHtml(html) {
-  if (typeof html !== "string" || !html) return html;
-  if (html.indexOf("kidsOverlayKillV1") < 0) {
-    html = html.replace(
-      "</head>",
-      '<style id="kidsOverlayKillV1">.kids-update-layer,.kids-update-layer.is-open{display:none!important;visibility:hidden!important;pointer-events:none!important;transform:none!important;height:0!important;max-height:0!important;overflow:hidden!important}</style></head>'
-    );
-  }
-  html = html.replace(/function kidsWantPreview\(\)\{[\s\S]*?\n  \}/, "function kidsWantPreview(){ return false; }");
-  html = html.replace(/if\(kidsWantPreview\(\)\)\{[\s\S]*?return;\s*\}/, "");
-  html = html.replace(/if\(remote && remote!==KIDS_BUILD_ID\)/g, "if(false)");
-  html = html.replace(/if\(remote && remote.indexOf\("kids-shell-"\)===0 && remote!==KIDS_BUILD_ID\)/g, "if(false)");
-  html = html.replace(/location\.replace\(u\.toString\(\)\);/g, "void 0;");
-  html = html.replace(/layer\.classList\.add\("is-open"\);/g, "");
-  return html;
-}
-
 function kidsHeaders(assetResponse) {
   const headers = new Headers(assetResponse.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
@@ -275,43 +258,43 @@ export default {
     }
 
     if (kidsPath && (request.method === "GET" || request.method === "HEAD")) {
-      if (url.pathname === "/test/kids/version.json" || url.pathname === "/test/kids/version.json/") {
-        const headers = kidsHeaders(new Response(""));
-        headers.set("Content-Type", "application/json; charset=utf-8");
-        const body = JSON.stringify({ buildId: "kids-shell-v12-tab31", label: "KIDS · V0.31" });
-        if (request.method === "HEAD") return new Response(null, { status: 200, headers });
-        return new Response(body, { status: 200, headers });
-      }
-      if (url.pathname.endsWith("/v12-alive.txt")) {
-        const headers = kidsHeaders(new Response(""));
-        headers.set("Content-Type", "text/plain; charset=utf-8");
-        const body = "kids-shell-v12-tab12\nKIDS · V0.13\n";
-        if (request.method === "HEAD") return new Response(null, { status: 200, headers });
-        return new Response(body, { status: 200, headers });
-      }
-
-      let assetResponse = null;
       try {
-        assetResponse = await fetchKidsMirror(url.pathname, url.search);
-      } catch (e) {}
-      if (!assetResponse || assetResponse.status >= 400) {
-        assetResponse = await env.ASSETS.fetch(request);
+        if (url.pathname === "/test/kids/version.json" || url.pathname === "/test/kids/version.json/") {
+          const headers = kidsHeaders(new Response(""));
+          headers.set("Content-Type", "application/json; charset=utf-8");
+          const body = JSON.stringify({ buildId: "kids-shell-v12-tab31", label: "KIDS · V0.31" });
+          if (request.method === "HEAD") return new Response(null, { status: 200, headers });
+          return new Response(body, { status: 200, headers });
+        }
+        if (url.pathname.endsWith("/v12-alive.txt")) {
+          const headers = kidsHeaders(new Response(""));
+          headers.set("Content-Type", "text/plain; charset=utf-8");
+          const body = "kids-shell-v12-tab12\nKIDS · V0.13\n";
+          if (request.method === "HEAD") return new Response(null, { status: 200, headers });
+          return new Response(body, { status: 200, headers });
+        }
+
+        let assetResponse = await env.ASSETS.fetch(request);
+        if (!assetResponse || assetResponse.status >= 400) {
+          try {
+            assetResponse = await fetchKidsMirror(url.pathname, url.search);
+          } catch (mirrorErr) {}
+        }
+        if (!assetResponse) {
+          return new Response("Kids unavailable", { status: 503, headers: { "Content-Type": "text/plain; charset=utf-8" } });
+        }
+        const headers = kidsHeaders(assetResponse);
+        if (request.method === "HEAD") {
+          return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
+        }
+        return new Response(assetResponse.body, {
+          status: assetResponse.status,
+          statusText: assetResponse.statusText,
+          headers
+        });
+      } catch (kidsErr) {
+        return new Response("Kids unavailable", { status: 503, headers: { "Content-Type": "text/plain; charset=utf-8" } });
       }
-      const headers = kidsHeaders(assetResponse);
-      if (request.method === "HEAD") {
-        return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
-      }
-      const type = String(assetResponse.headers.get("content-type") || "");
-      if (type.includes("text/html")) {
-        const html = isolateKidsUpdateHtml(await assetResponse.text());
-        headers.set("Content-Type", "text/html; charset=utf-8");
-        return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
-      }
-      return new Response(assetResponse.body, {
-        status: assetResponse.status,
-        statusText: assetResponse.statusText,
-        headers
-      });
     }
 
     if ((request.method === "GET" || request.method === "HEAD") && isRoot && nativeApp) {
