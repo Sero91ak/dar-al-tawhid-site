@@ -343,7 +343,7 @@ if [ -n "$SWIFTC" ] && [ -n "$SDK_PATH" ]; then
   echo "Swift: $SWIFTC"
   echo "SDK:   $SDK_PATH"
   echo "Target: ${ARCH}-apple-macosx${DEPLOY_TARGET}"
-  if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$SWIFTC"       -sdk "$SDK_PATH"       -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"       "$TARGET/VoiceStudioApp.swift"       -o "$MACOS/DARVoiceStudioNative"       -framework Cocoa       -framework WebKit       -framework CoreAudio; then
+  if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$SWIFTC"       -sdk "$SDK_PATH"       -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"       "$TARGET/VoiceStudioApp.swift"       -o "$MACOS/DARVoiceStudioNative"       -framework Cocoa       -framework WebKit       -framework CoreAudio       -framework CoreImage; then
     BUILD_OK=1
   fi
 fi
@@ -355,7 +355,7 @@ if [ "$BUILD_OK" -ne 1 ] && [ -d "/Applications/Xcode.app/Contents/Developer" ];
   XSDK="$(DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcrun --sdk macosx --show-sdk-path 2>/dev/null || true)"
   if [ -n "$XSWIFTC" ] && [ -n "$XSDK" ]; then
     echo "Erster Swift-Build fehlgeschlagen – versuche vollständiges Xcode …"
-    if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$XSWIFTC"         -sdk "$XSDK"         -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"         "$TARGET/VoiceStudioApp.swift"         -o "$MACOS/DARVoiceStudioNative"         -framework Cocoa         -framework WebKit         -framework CoreAudio; then
+    if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$XSWIFTC"         -sdk "$XSDK"         -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"         "$TARGET/VoiceStudioApp.swift"         -o "$MACOS/DARVoiceStudioNative"         -framework Cocoa         -framework WebKit         -framework CoreAudio         -framework CoreImage; then
       BUILD_OK=1
     fi
   fi
