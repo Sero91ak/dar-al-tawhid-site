@@ -1,58 +1,50 @@
-const QURAN_AUDIO_EDITIONS = new Set([
-  "ar.alafasy",
-  "ar.abdurrahmaansudais",
-  "ar.saoodshuraym",
-  "ar.saudalshuraim",
-  "ar.husary",
-  "ar.husarymujawwad",
-  "ar.minshawi",
-  "ar.minshawimujawwad",
-  "ar.abdulbasitmurattal",
-  "ar.abdulbasitmujawwad",
-  "ar.abdullahbasfar",
-  "ar.ahmedajamy",
-  "ar.hanirifai",
-  "ar.hudhaify",
-  "ar.mahermuaiqly",
-  "ar.muhammadayyoub",
-  "ar.muhammadjibreel",
-  "ar.shaatree",
-  "ar.yasseraldossari",
-  "ar.aymanswoaid"
-]);
+const KIDS_VERSION_BODY = JSON.stringify({
+  buildId: "kids-shell-v12-tab31",
+  label: "KIDS · V0.31"
+});
 
-async function proxyQuranAudio(request, url) {
-  const match = url.pathname.match(/^\/quran-audio\/([^/]+)\/(\d+)\.mp3$/);
-  if (!match) return null;
-  const edition = decodeURIComponent(match[1] || "");
-  const ayah = Number(match[2]);
-  if (!QURAN_AUDIO_EDITIONS.has(edition) || !Number.isInteger(ayah) || ayah < 1 || ayah > 6236) {
-    return new Response("Bad recitation request", { status: 400 });
-  }
-  const upstream = `https://cdn.islamic.network/quran/audio/128/${edition}/${ayah}.mp3`;
-  const headers = new Headers();
-  const range = request.headers.get("Range");
-  if (range) headers.set("Range", range);
-  headers.set("Accept", "audio/mpeg,audio/*;q=0.9,*/*;q=0.8");
-  const res = await fetch(upstream, {
-    headers,
-    cf: { cacheTtl: 31536000, cacheEverything: true, cacheKey: upstream }
+function kidsVersionResponse() {
+  return new Response(KIDS_VERSION_BODY, {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0"
+    }
   });
-  const out = new Headers(res.headers);
-  out.set("Cache-Control", "public, max-age=31536000, immutable");
-  out.set("CDN-Cache-Control", "public, max-age=31536000, immutable");
-  out.set("Access-Control-Allow-Origin", "*");
-  out.set("Content-Type", res.headers.get("Content-Type") || "audio/mpeg");
-  return new Response(res.body, { status: res.status, statusText: res.statusText, headers: out });
+}
+
+function isKidsHtmlPath(path) {
+  return path === "/test/kids/start"
+    || path === "/test/kids/start.html"
+    || path === "/test/kids/index.html"
+    || path === "/test/kids/shell.html"
+    || path === "/test/kids"
+    || path === "/test/kids/";
+}
+
+function patchKidsHtml(html) {
+  if (!html) return html;
+  if (!html.includes("kidsOverlayKillV1")) {
+    html = html.replace(
+      "</head>",
+      '<style id="kidsOverlayKillV1">.kids-update-layer,.kids-update-layer.is-open{display:none!important;visibility:hidden!important;pointer-events:none!important;transform:none!important;height:0!important;overflow:hidden!important}</style></head>'
+    );
+  }
+  html = html.replace("location.replace(u.toString());", "void 0;");
+  html = html.replace(
+    'try{ return localStorage.getItem(SEEN_KEY)!=="1"; }catch(e2){ return true; }',
+    "return false;"
+  );
+  html = html.replace(
+    "if(remote && remote!==KIDS_BUILD_ID)",
+    "if(false && remote && remote!==KIDS_BUILD_ID)"
+  );
+  return html;
 }
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (request.method === "GET" || request.method === "HEAD") {
-      const audio = await proxyQuranAudio(request, url);
-      if (audio) return audio;
-    }
 
     if (url.pathname === "/" || url.pathname === "/index.html") {
       return Response.redirect(`${url.origin}/test/${url.search || ""}`, 302);
@@ -78,15 +70,29 @@ export default {
       const target = new URL(request.url);
       target.pathname = "/test/kids/start";
       target.searchParams.delete("darsw");
-      target.searchParams.delete("kv");
+      target.searchParams.set("kv", "kids-shell-v12-tab31");
       return Response.redirect(target.toString(), 307);
+    }
+
+    if (url.pathname === "/test/kids/version.json") {
+      return kidsVersionResponse();
     }
 
     const asset = await env.ASSETS.fetch(request);
     const path = url.pathname;
     const kidsPath = path === "/test/kids" || path.startsWith("/test/kids/");
-    const bust = kidsPath
-      || /\/test\/(index\.html)?$/.test(path)
+    if (kidsPath) {
+      if (asset && asset.ok && isKidsHtmlPath(path)) {
+        const html = patchKidsHtml(await asset.text());
+        const headers = new Headers(asset.headers);
+        headers.set("Content-Type", "text/html; charset=utf-8");
+        headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        headers.delete("Content-Length");
+        return new Response(html, { status: asset.status, statusText: asset.statusText, headers });
+      }
+      return asset;
+    }
+    const bust = /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
       || path.endsWith("/test/version.json")
       || path.endsWith("/test/service-worker.js");

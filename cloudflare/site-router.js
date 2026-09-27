@@ -49,15 +49,19 @@ async function fetchKidsMirror(pathname, search) {
 }
 
 function isolateKidsUpdateHtml(html) {
-  if (typeof html !== "string" || html.indexOf("kidsWantPreview") < 0) return html;
-  html = html.replace(
-    /try\{\s*return localStorage\.getItem\(SEEN_KEY\)!=="1";\s*\}catch\(e2\)\{\s*return true;\s*\}/g,
-    'try{return /(?:^|[?&])demo=update(?:&|$)/.test(String(location.search||""));}catch(e2){return false;}'
-  );
-  html = html.replace(
-    /if\(remote && remote!==KIDS_BUILD_ID\)/g,
-    'if(remote && remote.indexOf("kids-shell-")===0 && remote!==KIDS_BUILD_ID)'
-  );
+  if (typeof html !== "string" || !html) return html;
+  if (html.indexOf("kidsOverlayKillV1") < 0) {
+    html = html.replace(
+      "</head>",
+      '<style id="kidsOverlayKillV1">.kids-update-layer,.kids-update-layer.is-open{display:none!important;visibility:hidden!important;pointer-events:none!important;transform:none!important;height:0!important;max-height:0!important;overflow:hidden!important}</style></head>'
+    );
+  }
+  html = html.replace(/function kidsWantPreview\(\)\{[\s\S]*?\n  \}/, "function kidsWantPreview(){ return false; }");
+  html = html.replace(/if\(kidsWantPreview\(\)\)\{[\s\S]*?return;\s*\}/, "");
+  html = html.replace(/if\(remote && remote!==KIDS_BUILD_ID\)/g, "if(false)");
+  html = html.replace(/if\(remote && remote.indexOf\("kids-shell-"\)===0 && remote!==KIDS_BUILD_ID\)/g, "if(false)");
+  html = html.replace(/location\.replace\(u\.toString\(\)\);/g, "void 0;");
+  html = html.replace(/layer\.classList\.add\("is-open"\);/g, "");
   return html;
 }
 
@@ -271,6 +275,13 @@ export default {
     }
 
     if (kidsPath && (request.method === "GET" || request.method === "HEAD")) {
+      if (url.pathname === "/test/kids/version.json" || url.pathname === "/test/kids/version.json/") {
+        const headers = kidsHeaders(new Response(""));
+        headers.set("Content-Type", "application/json; charset=utf-8");
+        const body = JSON.stringify({ buildId: "kids-shell-v12-tab31", label: "KIDS · V0.31" });
+        if (request.method === "HEAD") return new Response(null, { status: 200, headers });
+        return new Response(body, { status: 200, headers });
+      }
       if (url.pathname.endsWith("/v12-alive.txt")) {
         const headers = kidsHeaders(new Response(""));
         headers.set("Content-Type", "text/plain; charset=utf-8");
