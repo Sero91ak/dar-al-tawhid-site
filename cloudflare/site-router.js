@@ -217,6 +217,7 @@ export default {
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeApp = isNativeAppRequest(ua);
     const kidsPath = url.pathname === "/test/kids" || url.pathname.startsWith("/test/kids/");
+    const kidsRecitationGrade = url.pathname === "/test/kids/api/recitation/grade";
     const voicePath = url.pathname === "/voice-studio" || url.pathname.startsWith("/voice-studio/");
     const legacyVoicePath = url.pathname === "/test/voice-studio" || url.pathname.startsWith("/test/voice-studio/");
 
@@ -255,6 +256,31 @@ export default {
         statusText: assetResponse.statusText,
         headers
       });
+    }
+
+    if (kidsRecitationGrade && request.method === "POST") {
+      try {
+        const target = new URL(request.url);
+        target.protocol = "https:";
+        target.hostname = "dar-al-tawhid-test.sero91ak.workers.dev";
+        target.port = "";
+        const upstream = await fetch(new Request(target.toString(), request));
+        const headers = new Headers(upstream.headers);
+        headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        headers.set("CDN-Cache-Control", "no-store");
+        headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+        headers.delete("Content-Length");
+        return new Response(upstream.body, {
+          status: upstream.status,
+          statusText: upstream.statusText,
+          headers
+        });
+      } catch (error) {
+        return new Response(JSON.stringify({ ok: false, error: "kids_recitation_proxy_failed" }), {
+          status: 502,
+          headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" }
+        });
+      }
     }
 
     if (kidsPath && (request.method === "GET" || request.method === "HEAD")) {
