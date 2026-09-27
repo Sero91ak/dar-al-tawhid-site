@@ -1,11 +1,11 @@
 {
   "schemaVersion": 8,
-  "id": "dar-own-voice-narration-v2.8.6",
+  "id": "dar-own-voice-narration-v2.8.8",
   "updatedAt": "2026-09-27",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade Serhat narration with permanent user-confirmed pronunciation learning: confirmed words, canonical groups, aliases and their confirmed WAV locks persist locally across tasks, restarts and Voice Studio updates; backed up atomically and always override REVIEW suggestions.",
+  "productionGoal": "Production-grade Serhat narration with strict sentence preflight, persistent learned pronunciation, verified-sentence fast reuse, and contextual coarticulation at every German-Arabic boundary so short German fragments are never synthesized as isolated final utterances.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -332,7 +332,7 @@
     "continuousSentenceFlow": true,
     "renderInOriginalTextOrder": true,
     "noArtificialThinkingPause": true,
-    "flowArchitecture": "continuous-sentence-flow-v2",
+    "flowArchitecture": "continuous-sentence-flow-v3",
     "strictSentencePreflight": true,
     "grammarAwarePunctuation": true,
     "visibleTextUnchanged": true,
@@ -353,7 +353,14 @@
     "strongLexicalBridgeCrossfadeMs": 108,
     "strongLexicalBridgeMaxFraction": 0.43,
     "noGapOnUnpunctuatedBoundary": true,
-    "antiStutterOverlapCap": true
+    "antiStutterOverlapCap": true,
+    "contextualCoarticulation": true,
+    "contextBridgeAllGermanArabicBoundaries": true,
+    "contextBridgeCarrierRemoved": true,
+    "contextBridgeLeadIn": true,
+    "contextBridgeFollowOn": true,
+    "contextBridgeNoStandaloneGermanFragment": true,
+    "contextBridgeCache": true
   },
   "qualityAssurance": {
     "maxRenderAttempts": 2,
@@ -463,7 +470,12 @@
     "learnedBackupRecoveryRegression": true,
     "learnedMasterNeverReviewRegression": true,
     "learnedAudioBackupRegression": true,
-    "priorLearnedMigrationRegression": true
+    "priorLearnedMigrationRegression": true,
+    "contextBridgeRenderAttempts": 3,
+    "contextualCoarticulationRegression": true,
+    "noStandaloneGermanBeforeArabicRegression": true,
+    "carrierNeverExposedRegression": true,
+    "contextBridgeCacheRegression": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -680,7 +692,7 @@
     "preserveAntiHoldQa": true,
     "inlineArabicFlowBridge": true,
     "flowBridgeVersion": 3,
-    "flowArchitecture": "continuous-sentence-flow-v2",
+    "flowArchitecture": "continuous-sentence-flow-v3",
     "phraseAwareChunking": true,
     "renderInOriginalTextOrder": true,
     "generalBoundaryFlowBridge": true,
@@ -701,6 +713,11 @@
     "automaticTightJoin": true,
     "noGapOnUnpunctuatedBoundary": true,
     "preserveLearnedPronunciationAcrossUpdates": true,
-    "userLearnedMasterPriority": true
+    "userLearnedMasterPriority": true,
+    "contextualCoarticulation": true,
+    "contextBridgeAllGermanArabicBoundaries": true,
+    "contextBridgeLeadIn": true,
+    "contextBridgeFollowOn": true,
+    "contextBridgeCache": true
   }
 }
