@@ -255,6 +255,15 @@ async function approveCurrent(){
     busy=false;
   }
 }
+function normalizedReferenceBlob(file){
+  const name=String(file?.name||"").toLowerCase();
+  const ext=(name.match(/\.(wav|m4a|aac|mp3)$/)||[])[1]||"";
+  const fallback={wav:"audio/wav",m4a:"audio/mp4",aac:"audio/aac",mp3:"audio/mpeg"}[ext]||"";
+  const mime=String(file?.type||"").toLowerCase();
+  const useType=mime.indexOf("audio/")===0?mime:fallback;
+  if(!useType)throw Error("Dateiformat nicht erkannt. Verwende WAV, M4A, AAC oder MP3.");
+  return mime===useType?file:new Blob([file],{type:useType});
+}
 async function installArabicReferenceFile(file){
   if(busy||!file)return;
   if(Number(file.size||0)>32*1024*1024){setMsg("Arabische Master-Aufnahme ist größer als 32 MB.","bad");return}
@@ -262,7 +271,7 @@ async function installArabicReferenceFile(file){
   const btn=q("alphabetPackReferenceBtn"),old=btn?.textContent;
   if(btn){btn.disabled=true;btn.textContent="Master wird geprüft …"}
   try{
-    const dataUrl=await blobToDataUrl(file);
+    const dataUrl=await blobToDataUrl(normalizedReferenceBlob(file));
     const r=await localRequest("/arabic-reference",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
