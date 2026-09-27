@@ -12,7 +12,7 @@
       "Public-Domain",
       "CC-BY-4.0"
     ],
-    "sourcePolicy": "Prefer exact human MSA/Fuṣḥā recordings. A letter-name slot may use a source whose transcription is the single Arabic letter only when the source is explicitly an Arabic/MSA pronunciation recording for that letter entity.",
+    "sourcePolicy": "Prefer exact human MSA/Fuṣḥā recordings. A letter-name slot may use a source whose transcription is the single Arabic letter only when the source is explicitly an Arabic/MSA pronunciation recording for that letter entity. For example words, Arabic diacritics may differ or be omitted when the underlying lexical item is identical.",
     "note": "System-TTS und ungeprüfte KI-Stimmen sind als arabische Lernreferenz verboten. Externe Clips müssen Quelle, Sprecher, Lizenz und Originalseite dokumentieren.",
     "qaRequirements": [
       "Human speaker",
@@ -149,12 +149,23 @@
       "word": {
         "text": "بَطَّة",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-AlNatiq-%D8%A8%D8%B7%D8%A9.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/ba/word.m4a"
+        "qaBy": "source-license-and-msa-identity-verified-2026-09-27",
+        "qaAt": "2026-09-27T23:59:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/ba/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "AlNatiq",
+        "sourceLanguage": "Modern Standard Arabic (ara)",
+        "sourceTranscription": "بطة",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-AlNatiq-%D8%A8%D8%B7%D8%A9.wav",
+        "sourceFile": "LL-Q13955 (ara)-AlNatiq-بطة.wav",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "attribution": "AlNatiq / Lingua Libre / Wikimedia Commons, CC0 1.0",
+        "verificationBasis": "Exact lexical item in Modern Standard Arabic; source transcription omits optional vocalization marks."
       }
     },
     "ta": {
@@ -799,12 +810,23 @@
       "word": {
         "text": "سَمَكَة",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-AlNatiq-%D8%B3%D9%85%D9%83%D8%A9.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/sin/word.m4a"
+        "qaBy": "source-license-and-msa-identity-verified-2026-09-27",
+        "qaAt": "2026-09-27T23:59:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/sin/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "AlNatiq",
+        "sourceLanguage": "Modern Standard Arabic (ara)",
+        "sourceTranscription": "سمكة",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-AlNatiq-%D8%B3%D9%85%D9%83%D8%A9.wav",
+        "sourceFile": "LL-Q13955 (ara)-AlNatiq-سمكة.wav",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "attribution": "AlNatiq / Lingua Libre / Wikimedia Commons, CC0 1.0",
+        "verificationBasis": "Exact lexical item in Modern Standard Arabic; source transcription omits optional vocalization marks."
       }
     },
     "shin": {
@@ -1579,12 +1601,23 @@
       "word": {
         "text": "مَسْجِد",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-AlNatiq-%D9%85%D8%B3%D8%AC%D8%AF.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/mim/word.m4a"
+        "qaBy": "source-license-and-msa-identity-verified-2026-09-27",
+        "qaAt": "2026-09-27T23:59:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/mim/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "AlNatiq",
+        "sourceLanguage": "Modern Standard Arabic (ara)",
+        "sourceTranscription": "مسجد",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-AlNatiq-%D9%85%D8%B3%D8%AC%D8%AF.wav",
+        "sourceFile": "LL-Q13955 (ara)-AlNatiq-مسجد.wav",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "attribution": "AlNatiq / Lingua Libre / Wikimedia Commons, CC0 1.0",
+        "verificationBasis": "Exact lexical item in Modern Standard Arabic; source transcription omits optional vocalization marks."
       }
     },
     "nun": {
