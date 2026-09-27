@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-import concurrent.futures, difflib, gc, hashlib, importlib.util, json, os, platform, re, shutil, subprocess, sys, threading, time, traceback, unicodedata, urllib.request, uuid
+import base64, concurrent.futures, difflib, gc, hashlib, importlib.util, json, os, platform, re, shutil, subprocess, sys, threading, time, traceback, unicodedata, urllib.request, uuid
 import multiprocessing as mp
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -3073,6 +3073,109 @@ def find_ffmpeg():
             return candidate
     return None
 
+def install_arabic_reference(data_url:str,original_name:str=""):
+    """Installiert eine explizit vom Besitzer ausgewählte arabische Master-Referenz.
+
+    Die Datei wird lokal normalisiert und atomar als ~/SerhatVoice/Serhat_AR_MASTER.wav
+    gespeichert. Sie wird niemals automatisch aus der deutschen Referenz erzeugt.
+    """
+    global REF_AR,ARABIC_DEDICATED_REFERENCE,MODEL_ACTIVE_REFERENCE
+    value=str(data_url or "").strip()
+    m=re.match(r"^data:(audio/[A-Za-z0-9.+-]+);base64,(.+)$",value,re.S)
+    if not m:
+        raise ValueError("Arabische Referenzdatei ist kein gültiges Audio.")
+    mime=m.group(1).lower()
+    allowed={
+        "audio/wav":".wav","audio/x-wav":".wav","audio/wave":".wav",
+        "audio/mp4":".m4a","audio/m4a":".m4a","audio/aac":".aac",
+        "audio/mpeg":".mp3","audio/mp3":".mp3"
+    }
+    if mime not in allowed:
+        raise ValueError("Audioformat nicht erlaubt. Verwende WAV, M4A/AAC oder MP3.")
+    try:
+        payload=base64.b64decode(m.group(2),validate=True)
+    except Exception as e:
+        raise ValueError("Arabische Referenzdatei ist beschädigt.") from e
+    if len(payload)<1024:
+        raise ValueError("Arabische Referenzdatei ist leer oder zu klein.")
+    if len(payload)>32*1024*1024:
+        raise ValueError("Arabische Referenzdatei ist größer als 32 MB.")
+
+    ffmpeg=find_ffmpeg()
+    if not ffmpeg:
+        raise RuntimeError("ffmpeg fehlt – arabische Master-Referenz kann nicht vorbereitet werden.")
+
+    upload=OUTPUT/f"arabic_reference_upload_{uuid.uuid4().hex[:10]}{allowed[mime]}"
+    tmp=VOICE_HOME/f".Serhat_AR_MASTER_{uuid.uuid4().hex[:10]}.wav"
+    target=VOICE_HOME/"Serhat_AR_MASTER.wav"
+    upload.write_bytes(payload)
+    try:
+        cmd=[
+            ffmpeg,"-y","-v","error","-i",str(upload),
+            "-vn","-ac","1","-ar","24000","-c:a","pcm_s16le",
+            "-af","highpass=f=65,alimiter=limit=0.95",
+            str(tmp)
+        ]
+        p=subprocess.run(cmd,capture_output=True,text=True)
+        if p.returncode!=0 or not tmp.exists() or tmp.stat().st_size<=1024:
+            detail=(p.stderr or "")[-1200:]
+            raise RuntimeError("Arabische Referenz konnte nicht normalisiert werden. "+detail)
+
+        import wave, numpy as np
+        with wave.open(str(tmp),"rb") as wf:
+            channels=int(wf.getnchannels())
+            rate=int(wf.getframerate())
+            frames=int(wf.getnframes())
+            raw=wf.readframes(frames)
+        duration=float(frames)/max(1,rate)
+        if channels!=1 or rate!=24000:
+            raise RuntimeError("Arabische Referenz hat nach der Normalisierung ein ungültiges Format.")
+        if duration<6.0:
+            raise ValueError("Arabische Master-Referenz ist zu kurz. Mindestens 6 Sekunden klare Sprache aufnehmen.")
+        if duration>180.0:
+            raise ValueError("Arabische Master-Referenz ist zu lang. Maximal 180 Sekunden verwenden.")
+        samples=np.frombuffer(raw,dtype=np.int16).astype(np.float32)
+        if samples.size<rate*4:
+            raise ValueError("Arabische Master-Referenz enthält zu wenig verwertbares Audio.")
+        amp=np.abs(samples)/32768.0
+        peak=float(np.max(amp)) if amp.size else 0.0
+        rms=float(np.sqrt(np.mean(np.square(samples/32768.0)))) if samples.size else 0.0
+        clipped=float(np.mean(amp>=0.995)) if amp.size else 0.0
+        if peak<0.04 or rms<0.008:
+            raise ValueError("Arabische Master-Referenz ist zu leise oder enthält fast nur Stille.")
+        if clipped>0.01:
+            raise ValueError("Arabische Master-Referenz übersteuert zu stark. Aufnahme mit weniger Pegel wiederholen.")
+
+        target.parent.mkdir(parents=True,exist_ok=True)
+        os.replace(tmp,target)
+        REF_AR=target
+        ARABIC_DEDICATED_REFERENCE=bool(
+            REF_AR.exists() and REF_DE.exists() and REF_AR.resolve()!=REF_DE.resolve()
+        )
+        MODEL_ACTIVE_REFERENCE=None
+        set_status(
+            message="Eigene arabische Master-Referenz installiert",
+            last_error=""
+        )
+        return {
+            "ok":True,
+            "path":str(target),
+            "name":str(original_name or target.name),
+            "durationSeconds":round(duration,2),
+            "sampleRate":rate,
+            "channels":channels,
+            "peak":round(peak,4),
+            "rms":round(rms,4),
+            "clippedRatio":round(clipped,6),
+            "arabicReferenceDedicated":ARABIC_DEDICATED_REFERENCE
+        }
+    finally:
+        try: upload.unlink(missing_ok=True)
+        except Exception: pass
+        try:
+            if tmp.exists(): tmp.unlink(missing_ok=True)
+        except Exception: pass
+
 def app_delivery_audio(src:Path):
     src=Path(src)
     if not src.exists() or src.stat().st_size<=44:
@@ -3830,6 +3933,18 @@ class H(BaseHTTPRequestHandler):
                 return self.send_json(200,{"ok":True,"unlocked":key,"status":get_status()})
             except Exception as e:
                 return self.send_json(400,{"ok":False,"error":str(e),"status":get_status()})
+
+        if p=="/arabic-reference":
+            try:
+                result=install_arabic_reference(
+                    str(data.get("dataUrl","")),
+                    str(data.get("filename",""))
+                )
+                return self.send_json(200,result)
+            except ValueError as e:
+                return self.send_json(422,{"ok":False,"error":str(e),"status":get_status()})
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e),"status":get_status()})
 
         if p=="/generate":
             try:
