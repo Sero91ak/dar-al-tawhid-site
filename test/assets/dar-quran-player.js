@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 960;
+    var PLAYER_BUILD = 961;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -2058,7 +2058,7 @@
     var html = document.documentElement;
     var body = document.body;
     var el = document.getElementById("darQuranMiniPlayer");
-    var show = !isFullPlayerRoute() && (isReaderRoute() || showLearningPlayer() || (!LEARN_PLAYER_ONLY && !!state.sessionActive));
+    var show = !isFullPlayerRoute() && isReaderRoute();
     if (isReaderRoute()) {
       capsuleCollapsed = false;
       capsuleDimmed = false;
@@ -2550,7 +2550,7 @@
     var page = playerRoot();
     if (onFull) mountPlayerPage(page);
     else if (page && page.parentNode === document.body) page.hidden = true;
-    var show = !onFull && (isReaderRoute() || showLearningPlayer() || (!LEARN_PLAYER_ONLY && !!state.sessionActive));
+    var show = !onFull && isReaderRoute();
     el.classList.toggle("is-on", show);
     el.setAttribute("aria-hidden", show ? "false" : "true");
     setPlayerLayout(show);

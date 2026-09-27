@@ -6503,6 +6503,23 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "boot-unstick-home-v1060-1083-2026-09-27",
+      "approvedBy": "user-explicit-app-does-not-work",
+      "reason": "Nutzer: Die App geht nicht. Reparatur-Bildschirm, Start bricht ab.",
+      "paths": [
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
