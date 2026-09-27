@@ -86,7 +86,7 @@ jobs:
               'BUNDLE_EXECUTABLE="DARVoiceStudioNative"',
               'PlistBuddy -c "Set :CFBundleExecutable $BUNDLE_EXECUTABLE"',
               'killall Dock',
-              "2.9.5",
+              "2.9.6",
           ]
           missing=[x for x in required if x not in installer]
           if missing:
@@ -148,7 +148,7 @@ jobs:
               'download_repo_file "voice-studio/update-mac.command"',
               'download_repo_file "voice-studio/alphabet-audio-studio.js"',
               "chmod +x \"$TARGET/update-mac.command\"",
-              "CFBundleShortVersionString</key><string>2.9.5",
+              "CFBundleShortVersionString</key><string>2.9.6",
           ]
           html_required=[
               'id="updateBtn"',
@@ -170,7 +170,7 @@ jobs:
               "update.log",
               "Update-Protokoll öffnen",
               "update-mac.command",
-              'DĀRVoiceStudioMac/2.9.5',
+              'DĀRVoiceStudioMac/2.9.6',
           ]
 
           groups=[
@@ -425,7 +425,7 @@ jobs:
                   'id="alphabetAudioSection"',
                   'id="alphabetPackNextBtn"',
                   'id="alphabetPackApproveBtn"',
-                  'alphabet-audio-studio.js?v=295',
+                  'alphabet-audio-studio.js?v=296',
               ]),
               ("studio",studio,[
                   '/api/admin/kids-alphabet-audio',
@@ -441,7 +441,7 @@ jobs:
               ("installer",installer,[
                   'download_repo_file "voice-studio/alphabet-audio-studio.js"',
                   'alphabet-audio-studio.js',
-                  'CFBundleShortVersionString</key><string>2.9.5',
+                  'CFBundleShortVersionString</key><string>2.9.6',
               ]),
               ("engine",engine,[
                   '/studio/alphabet-audio-studio.js',
@@ -623,8 +623,8 @@ jobs:
               'x-webkit-airplay="deny"',
               'darAudioOutput',
               'disableRemotePlayback',
-              'voice-studio-icon.png?v=295',
-              'VOICE STUDIO 2.9.5',
+              'voice-studio-icon.png?v=296',
+              'VOICE STUDIO 2.9.6',
           ]
           missing=[x for x in required if x not in html]
           if missing:
@@ -666,7 +666,7 @@ jobs:
               "VoiceStudioIcon",
               "updateLoadingProgress",
               "status: \"Bereit\"",
-              "DĀRVoiceStudioMac/2.9.5",
+              "DĀRVoiceStudioMac/2.9.6",
               "NSMenu(title: \"Produktion\")",
               "newContent",
               "focusText",
