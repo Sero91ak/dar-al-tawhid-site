@@ -776,12 +776,25 @@
       "word": {
         "text": "رُمَّان",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-Fjmustak-%D8%B1%D9%85%D8%A7%D9%86.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/ra/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:43:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/ra/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceUsageMode": "unmodified-external-original",
+        "shareAlike": true,
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "Fjmustak",
+        "sourceLanguage": "Arabic (ara)",
+        "sourceTranscription": "رمان",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-Fjmustak-%D8%B1%D9%85%D8%A7%D9%86.wav",
+        "sourceFile": "LL-Q13955 (ara)-Fjmustak-رمان.wav",
+        "license": "CC-BY-SA-4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "attribution": "Fjmustak / Lingua Libre / Wikimedia Commons, CC BY-SA 4.0",
+        "verificationBasis": "Exact human Arabic pronunciation file; Commons documents transcription رمان, speaker Fjmustak and CC BY-SA 4.0."
       }
     },
     "zay": {
@@ -2139,6 +2152,12 @@
         {
           "name": "Zinou2go / Lingua Libre",
           "license": "CC-BY-SA-3.0",
+          "language": "Arabic (ara)",
+          "role": "Unmodified external human Arabic pronunciation recordings"
+        },
+        {
+          "name": "Fjmustak / Lingua Libre",
+          "license": "CC-BY-SA-4.0",
           "language": "Arabic (ara)",
           "role": "Unmodified external human Arabic pronunciation recordings"
         }
