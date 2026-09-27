@@ -19,7 +19,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.4"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.5"
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -29,7 +29,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.4"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.5"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
         config.userContentController.add(self, name: "darCompanion")
@@ -88,6 +88,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         appRoot.submenu = appMenu
         appMenu.addItem(menuItem("Über DĀR Voice Studio", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:))))
         appMenu.addItem(menuItem("Nach Updates suchen…", action: #selector(checkForUpdatesFromMenu(_:)), target: self))
+        appMenu.addItem(menuItem("Update-Protokoll öffnen…", action: #selector(openUpdateLog(_:)), target: self))
         appMenu.addItem(menuItem("iPad / iPhone verbinden…", action: #selector(showCompanionPairing(_:)), target: self))
         appMenu.addItem(.separator())
         appMenu.addItem(menuItem("DĀR Voice Studio ausblenden", action: #selector(NSApplication.hide(_:)), key: "h"))
@@ -405,13 +406,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         checkForUpdates(userInitiated: true)
     }
 
+    private func updateLogURL() -> URL {
+        FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Applications/DAR-Voice-Studio/update.log")
+    }
+
+    @objc private func openUpdateLog(_ sender: Any?) {
+        let url = updateLogURL()
+        if FileManager.default.fileExists(atPath: url.path) {
+            NSWorkspace.shared.open(url)
+        } else {
+            let alert = NSAlert()
+            alert.messageText = "Noch kein Update-Protokoll vorhanden"
+            alert.informativeText = "Sobald ein Update gestartet wurde, wird hier ein Protokoll angelegt."
+            alert.runModal()
+        }
+    }
+
     private func installAvailableUpdate() {
         let helper = FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent("Applications/DAR-Voice-Studio/update-mac.command")
         guard FileManager.default.fileExists(atPath: helper.path) else {
             publishUpdateState(
                 "error",
-                message: "Updater fehlt. Diese Installation muss einmalig auf Voice Studio 2.9.1 aktualisiert werden."
+                message: "Lokaler Updater fehlt. Die Installation ist unvollständig."
             )
             return
         }
@@ -419,17 +437,34 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         publishUpdateState(
             "installing",
             latest: latestKnownVersion,
-            message: "Update wird installiert · App startet danach automatisch neu."
+            message: "Update wird vorbereitet · die vorhandene App bleibt bis zur erfolgreichen Prüfung erhalten."
         )
+
+        let logURL = updateLogURL()
+        let fm = FileManager.default
+        if !fm.fileExists(atPath: logURL.path) {
+            fm.createFile(atPath: logURL.path, contents: nil)
+        }
+        let logHandle = FileHandle(forWritingAtPath: logURL.path)
+        try? logHandle?.seekToEnd()
 
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/bin/bash")
         process.arguments = [helper.path]
-        process.standardOutput = FileHandle.nullDevice
-        process.standardError = FileHandle.nullDevice
+        process.standardOutput = logHandle ?? FileHandle.nullDevice
+        process.standardError = logHandle ?? FileHandle.nullDevice
+        process.terminationHandler = { [weak self] p in
+            try? logHandle?.close()
+            guard p.terminationStatus != 0 else { return }
+            self?.publishUpdateState(
+                "error",
+                message: "Update konnte nicht gestartet werden. Öffne „Update-Protokoll“ für Details."
+            )
+        }
         do {
             try process.run()
         } catch {
+            try? logHandle?.close()
             publishUpdateState("error", message: "Updater konnte nicht gestartet werden: \(error.localizedDescription)")
         }
     }
