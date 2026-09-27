@@ -65,6 +65,38 @@ jobs:
           print("Voice Studio app identity OK",width,height,icon.stat().st_size)
           PY
 
+      - name: Validate zero-detour Content Studio workflow
+        run: |
+          node --check voice-studio/content-studio.js
+          python - <<'PY'
+          from pathlib import Path
+          src=Path("voice-studio/content-studio.js").read_text(encoding="utf-8")
+          required=[
+              'data-cs-step="text"',
+              'data-cs-step="audio"',
+              'data-cs-step="cover"',
+              'data-cs-step="test"',
+              'data-cs-step="live"',
+              'function renderWorkflow()',
+              'function goToWorkflowStep(step)',
+              'function focusNextProductionAction()',
+              'setTimeout(focusNextProductionAction,120)',
+              'setTimeout(()=>goToWorkflowStep("live"),100)',
+              'window.DarContentStudio={',
+              'staleAudio',
+          ]
+          # The actual stale-audio guard is structural; do not rely on a label.
+          required.remove('staleAudio')
+          missing=[x for x in required if x not in src]
+          if missing:
+              raise SystemExit("Zero-detour workflow markers missing: "+", ".join(missing))
+          if 'document.addEventListener("keydown"' in src:
+              raise SystemExit("Content Studio must not install a duplicate global production shortcut handler")
+          if 'audioAsset=null;' not in src or 'stagingPublished=false;' not in src:
+              raise SystemExit("Text edits must invalidate stale production assets/status")
+          print("Zero-detour Content Studio workflow OK")
+          PY
+
       - name: Compile Voice Engine
         run: python -m py_compile voice-studio/local-engine.py
 
@@ -202,6 +234,13 @@ jobs:
               "updateLoadingProgress",
               "status: \"Bereit\"",
               "DĀRVoiceStudioMac/2.9.0",
+              "NSMenu(title: \"Produktion\")",
+              "newContent",
+              "focusText",
+              "produceContent",
+              "publishTestContent",
+              "publishLiveContent",
+              "window.DarContentStudio",
           ]
           missing=[x for x in required if x not in src]
           if missing:
