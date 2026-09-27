@@ -48,6 +48,23 @@ async function fetchKidsMirror(pathname, search) {
   return fetch(next.toString(), { method: "GET", redirect: "follow" });
 }
 
+function isolateKidsUpdateHtml(html) {
+  if (typeof html !== "string" || !html) return html;
+  if (html.indexOf("kidsOverlayKillV1") < 0) {
+    html = html.replace(
+      "</head>",
+      '<style id="kidsOverlayKillV1">.kids-update-layer,.kids-update-layer.is-open{display:none!important;visibility:hidden!important;pointer-events:none!important;transform:none!important;height:0!important;max-height:0!important;overflow:hidden!important}</style></head>'
+    );
+  }
+  html = html.replace(/function kidsWantPreview\(\)\{[\s\S]*?\n  \}/, "function kidsWantPreview(){ return false; }");
+  html = html.replace(/if\(kidsWantPreview\(\)\)\{[\s\S]*?return;\s*\}/, "");
+  html = html.replace(/if\(remote && remote!==KIDS_BUILD_ID\)/g, "if(false)");
+  html = html.replace(/if\(remote && remote.indexOf\("kids-shell-"\)===0 && remote!==KIDS_BUILD_ID\)/g, "if(false)");
+  html = html.replace(/location\.replace\(u\.toString\(\)\);/g, "void 0;");
+  html = html.replace(/layer\.classList\.add\("is-open"\);/g, "");
+  return html;
+}
+
 function kidsHeaders(assetResponse) {
   const headers = new Headers(assetResponse.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
@@ -58,33 +75,6 @@ function kidsHeaders(assetResponse) {
   headers.delete("ETag");
   headers.delete("Content-Length");
   return headers;
-}
-
-function patchKidsHtml(html) {
-  if (!html) return html;
-  if (!html.includes("kidsOverlayKillV1")) {
-    html = html.replace(
-      "</head>",
-      '<style id="kidsOverlayKillV1">.kids-update-layer,.kids-update-layer.is-open{display:none!important;visibility:hidden!important;pointer-events:none!important;transform:none!important;height:0!important;overflow:hidden!important}</style></head>'
-    );
-  }
-  html = html.replace("location.replace(u.toString());", "void 0;");
-  html = html.replace(
-    'try{ return localStorage.getItem(SEEN_KEY)!=="1"; }catch(e2){ return true; }',
-    "return false;"
-  );
-  html = html.replace(
-    "if(remote && remote!==KIDS_BUILD_ID)",
-    "if(false && remote && remote!==KIDS_BUILD_ID)"
-  );
-  return html;
-}
-
-function isKidsHtmlPath(pathname) {
-  return pathname === "/test/kids/start"
-    || pathname === "/test/kids/start.html"
-    || pathname === "/test/kids/index.html"
-    || pathname === "/test/kids/shell.html";
 }
 
 function browserManifestResponse(request) {
@@ -185,9 +175,61 @@ function publicWebsiteAddon() {
 </script>`;
 }
 
+const QURAN_AUDIO_EDITIONS = new Set([
+  "ar.alafasy",
+  "ar.abdurrahmaansudais",
+  "ar.saoodshuraym",
+  "ar.saudalshuraim",
+  "ar.husary",
+  "ar.husarymujawwad",
+  "ar.minshawi",
+  "ar.minshawimujawwad",
+  "ar.abdulbasitmurattal",
+  "ar.abdulbasitmujawwad",
+  "ar.abdullahbasfar",
+  "ar.ahmedajamy",
+  "ar.hanirifai",
+  "ar.hudhaify",
+  "ar.mahermuaiqly",
+  "ar.muhammadayyoub",
+  "ar.muhammadjibreel",
+  "ar.shaatree",
+  "ar.yasseraldossari",
+  "ar.aymanswoaid"
+]);
+
+async function proxyQuranAudio(request, url) {
+  const match = url.pathname.match(/^\/quran-audio\/([^/]+)\/(\d+)\.mp3$/);
+  if (!match) return null;
+  const edition = decodeURIComponent(match[1] || "");
+  const ayah = Number(match[2]);
+  if (!QURAN_AUDIO_EDITIONS.has(edition) || !Number.isInteger(ayah) || ayah < 1 || ayah > 6236) {
+    return new Response("Bad recitation request", { status: 400 });
+  }
+  const upstream = `https://cdn.islamic.network/quran/audio/128/${edition}/${ayah}.mp3`;
+  const headers = new Headers();
+  const range = request.headers.get("Range");
+  if (range) headers.set("Range", range);
+  headers.set("Accept", "audio/mpeg,audio/*;q=0.9,*/*;q=0.8");
+  const res = await fetch(upstream, {
+    headers,
+    cf: { cacheTtl: 31536000, cacheEverything: true, cacheKey: upstream }
+  });
+  const out = new Headers(res.headers);
+  out.set("Cache-Control", "public, max-age=31536000, immutable");
+  out.set("CDN-Cache-Control", "public, max-age=31536000, immutable");
+  out.set("Access-Control-Allow-Origin", "*");
+  out.set("Content-Type", res.headers.get("Content-Type") || "audio/mpeg");
+  return new Response(res.body, { status: res.status, statusText: res.statusText, headers: out });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (request.method === "GET" || request.method === "HEAD") {
+      const audio = await proxyQuranAudio(request, url);
+      if (audio) return audio;
+    }
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeApp = isNativeAppRequest(ua);
@@ -233,6 +275,13 @@ export default {
     }
 
     if (kidsPath && (request.method === "GET" || request.method === "HEAD")) {
+      if (url.pathname === "/test/kids/version.json" || url.pathname === "/test/kids/version.json/") {
+        const headers = kidsHeaders(new Response(""));
+        headers.set("Content-Type", "application/json; charset=utf-8");
+        const body = JSON.stringify({ buildId: "kids-shell-v12-tab31", label: "KIDS · V0.31" });
+        if (request.method === "HEAD") return new Response(null, { status: 200, headers });
+        return new Response(body, { status: 200, headers });
+      }
       if (url.pathname.endsWith("/v12-alive.txt")) {
         const headers = kidsHeaders(new Response(""));
         headers.set("Content-Type", "text/plain; charset=utf-8");
@@ -241,30 +290,22 @@ export default {
         return new Response(body, { status: 200, headers });
       }
 
-      if (url.pathname === "/test/kids/version.json" || url.pathname === "/test/kids/version.json/") {
-        const headers = kidsHeaders(new Response(""));
-        headers.set("Content-Type", "application/json; charset=utf-8");
-        const body = JSON.stringify({
-          buildId: "kids-shell-v12-tab31",
-          label: "KIDS · V0.31"
-        });
-        if (request.method === "HEAD") return new Response(null, { status: 200, headers });
-        return new Response(body, { status: 200, headers });
+      let assetResponse = null;
+      try {
+        assetResponse = await fetchKidsMirror(url.pathname, url.search);
+      } catch (e) {}
+      if (!assetResponse || assetResponse.status >= 400) {
+        assetResponse = await env.ASSETS.fetch(request);
       }
-
-      const assetResponse = await fetchKidsMirror(url.pathname, url.search);
       const headers = kidsHeaders(assetResponse);
       if (request.method === "HEAD") {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
-      if (assetResponse.ok && isKidsHtmlPath(url.pathname)) {
-        const html = patchKidsHtml(await assetResponse.text());
+      const type = String(assetResponse.headers.get("content-type") || "");
+      if (type.includes("text/html")) {
+        const html = isolateKidsUpdateHtml(await assetResponse.text());
         headers.set("Content-Type", "text/html; charset=utf-8");
-        return new Response(html, {
-          status: assetResponse.status,
-          statusText: assetResponse.statusText,
-          headers
-        });
+        return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
       return new Response(assetResponse.body, {
         status: assetResponse.status,
@@ -331,6 +372,15 @@ export default {
         status: assetResponse.status,
         statusText: assetResponse.statusText,
         headers
+      });
+    }
+
+    try {
+      return await env.ASSETS.fetch(request);
+    } catch (err) {
+      return new Response("Not Found", {
+        status: 404,
+        headers: { "content-type": "text/plain; charset=utf-8" }
       });
     }
   }
