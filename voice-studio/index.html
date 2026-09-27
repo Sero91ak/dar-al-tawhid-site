@@ -564,11 +564,14 @@ input,select{
       <div id="alphabetPackLabel" style="font-size:11px;color:var(--muted)">Noch kein Kandidat gewählt</div>
       <div id="alphabetPackArabic" dir="rtl" lang="ar" style="font-size:34px;text-align:center;margin:8px 0;color:var(--gold2)">—</div>
     </div>
+    <audio id="alphabetPackPlayer" class="learning-player" controls x-webkit-airplay="deny" disableremoteplayback hidden style="width:100%;margin:6px 0 9px"></audio>
+    <div class="learning-status" id="alphabetPackNowPlaying" style="margin-bottom:6px">Noch nichts abgespielt</div>
     <div class="learning-actions">
-      <button id="alphabetPackNextBtn" class="btn secondary" type="button">Nächsten Kandidaten anhören</button>
+      <button id="alphabetPackNextBtn" class="btn secondary" type="button">Bāʾ-Kandidat hören</button>
       <button id="alphabetPackApproveBtn" class="btn primary" type="button" disabled>Vollständig gehört · gleiche Stimme bestätigen</button>
     </div>
     <button id="alphabetPackRetryBtn" class="btn quiet" type="button" style="width:100%;margin-top:7px" disabled>Kandidat erneut hören</button>
+    <a id="alphabetPackSourceLink" class="learning-status" target="_blank" rel="noopener noreferrer" hidden style="display:block;margin-top:7px">Quelle / Lizenz prüfen</a>
     <div id="alphabetPackMessage" class="learning-status" style="margin-top:8px">Nur ausdrücklich bestätigte Aufnahmen derselben Referenzstimme werden freigegeben.</div>
   </section>
 
