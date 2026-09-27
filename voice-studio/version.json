@@ -1,6 +1,6 @@
 {
-  "version": "2.7.6",
-  "updatedAt": "2026-09-27T10:15:00+02:00",
+  "version": "2.7.7",
+  "updatedAt": "2026-09-27T11:30:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -300,5 +300,8 @@
     "legacyClaimsPreserved": true
   },
   "audioFormat": "wav-pcm16-mono",
-  "legacyFloatWavMigration": true
+  "legacyFloatWavMigration": true,
+  "continuousInlineArabic": true,
+  "flowBridgeVersion": 3,
+  "inlineArabicCrossfadeMs": 72
 }
