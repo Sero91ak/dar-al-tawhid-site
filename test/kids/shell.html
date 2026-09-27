@@ -2921,7 +2921,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab37";
+const KIDS_BUILD_ID="kids-shell-v12-tab38";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -5197,13 +5197,14 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     reviewQueueMode=true;
     var queued=nextReviewIndex(ageKey(),"");
     if(queued>=0)idx=queued;
+    else completeMode=true;
     var m=document.getElementById("alphabetModal");
     if(m)m.classList.add("open");
     render();
   }
   window.kidsAlphabetOnAge=function(){
     step=0;practiceToken="";practicePassed=false;practiceMistakes=0;practiceAudioHeard=false;practiceTargetKey="";practiceMode="visual";completeMode=false;reviewQueueMode=true;
-    var queued=nextReviewIndex(ageKey(),"");if(queued>=0)idx=queued;
+    var queued=nextReviewIndex(ageKey(),"");if(queued>=0)idx=queued;else completeMode=true;
     render();
   };
   window.openAlphabet=openAlphabet;
@@ -5260,14 +5261,79 @@ function quizAgeRange(){
   if(age==="6–8")return{min:6,max:8,limit:4};
   return{min:9,max:10,limit:5};
 }
-function quizMastery(id){
-  try{return Number(localStorage.getItem("kids.quiz.mastery."+id)||"0")}catch(e){return 0}
+var QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v2.";
+function quizProgressDefault(){
+  return {stage:"new",attempts:0,reviewPasses:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0};
 }
-function markQuizMastery(id){
+function quizProgress(id){
+  var key=QUIZ_PROGRESS_PREFIX+id;
   try{
-    var key="kids.quiz.mastery."+id;
-    localStorage.setItem(key,String(Math.min(5,quizMastery(id)+1)));
+    var raw=JSON.parse(localStorage.getItem(key)||"null");
+    if(raw&&typeof raw==="object"){
+      var base=quizProgressDefault();
+      Object.keys(base).forEach(function(k){if(raw[k]===undefined)raw[k]=base[k]});
+      return raw;
+    }
+    var legacy=Number(localStorage.getItem("kids.quiz.mastery."+id)||"0");
+    if(legacy>0){
+      var migrated=quizProgressDefault();
+      migrated.stage="learning";
+      migrated.attempts=legacy;
+      migrated.reviewPasses=1;
+      migrated.dueAt=Date.now();
+      migrated.lastSeenAt=Date.now();
+      localStorage.setItem(key,JSON.stringify(migrated));
+      return migrated;
+    }
   }catch(e){}
+  return quizProgressDefault();
+}
+function saveQuizProgress(id,entry){
+  try{localStorage.setItem(QUIZ_PROGRESS_PREFIX+id,JSON.stringify(entry||quizProgressDefault()))}catch(e){}
+}
+function quizMastery(id){
+  return Number(quizProgress(id).reviewPasses||0);
+}
+function quizPriority(id,now){
+  var e=quizProgress(id);
+  if(!e.attempts)return{bucket:40,due:0,lastSeen:0,entry:e};
+  var due=Number(e.dueAt||0);
+  if(due>now)return{bucket:90,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+  var recentMistake=Number(e.lastMistakeAt||0)>0&&now-Number(e.lastMistakeAt||0)<=14*24*60*60*1000;
+  if(recentMistake)return{bucket:10,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+  if(e.stage==="learning")return{bucket:20,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+  if(e.stage==="review")return{bucket:25,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+  if(e.stage==="secure")return{bucket:30,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+  return{bucket:35,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+}
+function recordQuizAttempt(id,firstTry){
+  var e=quizProgress(id);
+  var now=Date.now();
+  e.attempts=Number(e.attempts||0)+1;
+  e.lastSeenAt=now;
+  var counted=false;
+  if(firstTry){
+    e.consecutiveFirstTry=Number(e.consecutiveFirstTry||0)+1;
+    if(!e.dueAt||now>=Number(e.dueAt||0)){
+      e.reviewPasses=Number(e.reviewPasses||0)+1;
+      counted=true;
+      if(e.reviewPasses===1)e.dueAt=now+10*60*1000;
+      else if(e.reviewPasses===2)e.dueAt=now+24*60*60*1000;
+      else e.dueAt=now+7*24*60*60*1000;
+    }
+  }else{
+    e.wrong=Number(e.wrong||0)+1;
+    e.lapses=Number(e.lapses||0)+1;
+    e.lastMistakeAt=now;
+    e.consecutiveFirstTry=0;
+    e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
+    e.dueAt=now+5*60*1000;
+  }
+  if(e.reviewPasses>=3)e.stage="secure";
+  else if(e.reviewPasses>=2)e.stage="review";
+  else e.stage="learning";
+  saveQuizProgress(id,e);
+  return{entry:e,counted:counted,firstTry:firstTry};
 }
 function deterministicQuizRank(id){
   var str=todayKey()+"|"+age+"|"+String(id||"");
@@ -5280,6 +5346,7 @@ function deterministicQuizRank(id){
 }
 function quizBankForAge(){
   var r=quizAgeRange();
+  var now=Date.now();
   var pool=kidsQuizPool.filter(function(q){
     return q.verification==="approved" &&
       q.canonicalStatus==="published" &&
@@ -5288,11 +5355,13 @@ function quizBankForAge(){
       Number(q.ageMax)>=r.max;
   });
   pool.sort(function(a,b){
-    var ma=quizMastery(a.id),mb=quizMastery(b.id);
-    if(ma!==mb)return ma-mb;
+    var pa=quizPriority(a.id,now),pb=quizPriority(b.id,now);
+    if(pa.bucket!==pb.bucket)return pa.bucket-pb.bucket;
+    if(pa.due!==pb.due)return pa.due-pb.due;
+    if(pa.lastSeen!==pb.lastSeen)return pa.lastSeen-pb.lastSeen;
     return deterministicQuizRank(a.id)-deterministicQuizRank(b.id);
   });
-  return pool.slice(0,r.limit);
+  return pool.filter(function(q){return quizPriority(q.id,now).bucket<90}).slice(0,r.limit);
 }
 function fetchKidsQuiz(){
   return fetch("/test/kids/data/quiz-kids.json?v="+Date.now(),{cache:"no-store"})
@@ -5346,7 +5415,7 @@ function beginQuizSession(){
   document.getElementById("quizAgeLabel").textContent=age==="4–5"?"4–5 Jahre · hören & tippen":(age==="6–8"?"6–8 Jahre · geprüfte Fragen":"9–10 Jahre · geprüft & vertieft");
   if(!currentQuiz.length){
     document.getElementById("quizProgress").innerHTML="";
-    document.getElementById("quizBody").innerHTML='<div class="quiz-finish"><div class="star"></div><h3>Gerade keine Frage verfügbar</h3><p>Es werden nur geprüfte Fragen angezeigt.</p></div>';
+    document.getElementById("quizBody").innerHTML='<div class="quiz-finish"><div class="star"></div><h3>Für jetzt geschafft</h3><p>Keine geprüfte Wiederholung ist gerade fällig. Komm später wieder.</p></div>';
     return;
   }
   renderQuizQuestion();
@@ -5402,7 +5471,12 @@ function chooseQuizAnswer(index,button){
     var src=document.getElementById("quizSource");
     if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
     document.getElementById("quizNext").classList.add("show");
-    if(!quizQuestionHadError)markQuizMastery(q.id);
+    var masteryResult=recordQuizAttempt(q.id,!quizQuestionHadError);
+    if(masteryResult.entry&&masteryResult.entry.stage==="secure"){
+      document.getElementById("quizFeedback").textContent="✓ "+q.success+" · sicher";
+    }else if(!quizQuestionHadError&&!masteryResult.counted){
+      document.getElementById("quizFeedback").textContent="✓ "+q.success+" · Wiederholung später";
+    }
     quizSpeak(q.success);
   }else{
     quizQuestionHadError=true;
