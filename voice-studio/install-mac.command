@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/1557ac686a3c00b74fdb259e39be625c2020b39f"
+RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/ff6d89b5a3fa6d45a7deac2dcfad60aecd31ed9d"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -41,20 +41,21 @@ say_status "DĀR Voice Studio wird eingerichtet …"
 
 # Neue Version zuerst vollständig in einen isolierten Staging-Ordner laden.
 # Die funktionierende Installation wird erst nach allen Prüfungen ersetzt.
-curl -fsSL "$RAW/voice-studio/local-engine.py?v=288" -o "$STAGE/local-engine.py"
-curl -fsSL "$RAW/voice-studio/speech_flow.py?v=288" -o "$STAGE/speech_flow.py"
-curl -fsSL "$RAW/voice-studio/index.html?v=288" -o "$STAGE/studio.html"
-curl -fsSL "$RAW/voice-studio/content-studio.js?v=288" -o "$STAGE/content-studio.js"
-curl -fsSL "$RAW/voice-studio/VoiceStudioApp.swift?v=288" -o "$STAGE/VoiceStudioApp.swift"
-curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=288" -o "$STAGE/pronunciation-rules.json"
-curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=288" -o "$STAGE/voice-production-profile.json"
-curl -fsSL "$RAW/data/pronunciation/islamic-master-library.json?v=288" -o "$STAGE/islamic-master-library.json"
-curl -fsSL "$RAW/data/pronunciation/voice-regression-fixtures.json?v=288" -o "$STAGE/voice-regression-fixtures.json"
-curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=288" -o "$STAGE/validate-v2.py"
-curl -fsSL "$RAW/watermark-my-logo-full.png?v=288" -o "$STAGE/watermark-my-logo-full.png" || true
-curl -fsSL "$RAW/app-icon-512.png?v=288" -o "$STAGE/app-icon-512.png" || true
+curl -fsSL "$RAW/voice-studio/local-engine.py?v=290" -o "$STAGE/local-engine.py"
+curl -fsSL "$RAW/voice-studio/speech_flow.py?v=290" -o "$STAGE/speech_flow.py"
+curl -fsSL "$RAW/voice-studio/index.html?v=290" -o "$STAGE/studio.html"
+curl -fsSL "$RAW/voice-studio/content-studio.js?v=290" -o "$STAGE/content-studio.js"
+curl -fsSL "$RAW/voice-studio/VoiceStudioApp.swift?v=290" -o "$STAGE/VoiceStudioApp.swift"
+curl -fsSL "$RAW/voice-studio/voice-studio-icon.png?v=290" -o "$STAGE/voice-studio-icon.png"
+curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=290" -o "$STAGE/pronunciation-rules.json"
+curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=290" -o "$STAGE/voice-production-profile.json"
+curl -fsSL "$RAW/data/pronunciation/islamic-master-library.json?v=290" -o "$STAGE/islamic-master-library.json"
+curl -fsSL "$RAW/data/pronunciation/voice-regression-fixtures.json?v=290" -o "$STAGE/voice-regression-fixtures.json"
+curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=290" -o "$STAGE/validate-v2.py"
+curl -fsSL "$RAW/watermark-my-logo-full.png?v=290" -o "$STAGE/watermark-my-logo-full.png" || true
+curl -fsSL "$RAW/app-icon-512.png?v=290" -o "$STAGE/app-icon-512.png" || true
 
-for required in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for required in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
     echo "FEHLER: Update-Datei fehlt oder ist leer: $required"
     exit 1
@@ -152,7 +153,7 @@ if ! "$PY" -m py_compile "$STAGE/local-engine.py" "$STAGE/speech_flow.py"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.8.8-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-2.9.0-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
@@ -160,18 +161,18 @@ fi
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP="$BACKUPS/$STAMP"
 mkdir -p "$BACKUP"
-for old in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for old in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
 done
 
-for fresh in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for fresh in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   mv "$STAGE/$fresh" "$TARGET/$fresh"
 done
 for optional in watermark-my-logo-full.png app-icon-512.png; do
   [ -s "$STAGE/$optional" ] && mv "$STAGE/$optional" "$TARGET/$optional" || true
 done
 
-echo "Voice Studio 2.8.8 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.9.0 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -300,6 +301,7 @@ MACOS="$APP_BUILD/Contents/MacOS"
 RESOURCES="$APP_BUILD/Contents/Resources"
 PLIST="$APP_BUILD/Contents/Info.plist"
 mkdir -p "$MACOS" "$RESOURCES"
+cp "$TARGET/voice-studio-icon.png" "$RESOURCES/VoiceStudioIcon.png"
 
 # Native macOS-App: versionierte Swift-Quelle wurde oben atomar aus dem Repository installiert.
 # Dadurch kann die echte Mac-App separat kompiliert und in CI geprüft werden.
@@ -425,14 +427,14 @@ chmod +x "$MACOS/DARVoiceStudio"
 [ -f "$MACOS/DARVoiceStudioNative" ] && chmod +x "$MACOS/DARVoiceStudioNative" || true
 
 
-# App-Icon aus bestehendem DĀR-Icon erzeugen.
-if [ -s "$TARGET/app-icon-512.png" ]; then
+# App-Icon aus dem eigenen Voice-Studio-Logo erzeugen.
+if [ -s "$TARGET/voice-studio-icon.png" ]; then
   ICONSET="$TARGET/AppIcon.iconset"
   rm -rf "$ICONSET"
   mkdir -p "$ICONSET"
   for spec in "16 icon_16x16.png" "32 icon_16x16@2x.png" "32 icon_32x32.png" "64 icon_32x32@2x.png" "128 icon_128x128.png" "256 icon_128x128@2x.png" "256 icon_256x256.png" "512 icon_256x256@2x.png" "512 icon_512x512.png" "1024 icon_512x512@2x.png"; do
     set -- $spec
-    sips -z "$1" "$1" "$TARGET/app-icon-512.png" --out "$ICONSET/$2" >/dev/null 2>&1 || true
+    sips -z "$1" "$1" "$TARGET/voice-studio-icon.png" --out "$ICONSET/$2" >/dev/null 2>&1 || true
   done
   iconutil -c icns "$ICONSET" -o "$RESOURCES/AppIcon.icns" >/dev/null 2>&1 || true
 fi
@@ -445,8 +447,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.8.8</string>
-  <key>CFBundleShortVersionString</key><string>2.8.8</string>
+  <key>CFBundleVersion</key><string>2.9.0</string>
+  <key>CFBundleShortVersionString</key><string>2.9.0</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
@@ -467,6 +469,15 @@ cat > "$PLIST" <<'PLIST'
 </plist>
 PLIST
 /usr/bin/plutil -lint "$PLIST" >/dev/null
+
+if [ ! -s "$RESOURCES/VoiceStudioIcon.png" ]; then
+  echo "FEHLER: Voice-Studio-App-Logo fehlt im neuen App-Bundle."
+  exit 1
+fi
+if [ ! -s "$RESOURCES/AppIcon.icns" ]; then
+  echo "FEHLER: macOS-App-Icon konnte nicht erzeugt werden."
+  exit 1
+fi
 
 # Lokales ad-hoc Codesigning nach jedem Neuaufbau. Dadurch behandelt macOS
 # Bundle, Binary, Info.plist und Ressourcen als eine konsistente neue App.
@@ -508,7 +519,7 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.8.8 ist installiert."
+say_status "DĀR Voice Studio 2.9.0 ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
   "$APP/Contents/MacOS/DARVoiceStudio" >/dev/null 2>&1 &
