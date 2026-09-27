@@ -1,6 +1,6 @@
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v12-tab31",
-  label: "KIDS · V0.31"
+  buildId: "kids-shell-v12-tab32",
+  label: "KIDS · V0.32"
 });
 
 function kidsVersionResponse() {

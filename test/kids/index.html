@@ -2077,6 +2077,63 @@ html,body,.app,.ambient{
 #view-today .kids-wordmark{
   margin-top:max(10px, env(safe-area-inset-top, 0px))!important;
 }
+
+/* KIDS_WORDMARK_SKY_V33 — Titel im Himmel über der Moschee, groß und kurvig */
+#view-today .kids-wordmark{
+  position:absolute!important;
+  top:max(2px, env(safe-area-inset-top, 0px))!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  width:min(96vw, 680px)!important;
+  margin:0!important;
+  z-index:6!important;
+  pointer-events:none;
+}
+#view-today .wm-dar-wrap{
+  position:relative;
+  width:100%;
+  overflow:visible;
+}
+#view-today .wm-dar-svg{
+  display:block!important;
+  width:100%!important;
+  height:clamp(88px, 26vw, 136px)!important;
+  overflow:visible!important;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.42)) drop-shadow(0 12px 22px rgba(8,24,36,.38));
+  animation:darFloat 4.2s ease-in-out infinite;
+}
+@keyframes darFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-7px) scale(1.02)}
+}
+#view-today .wm-dar-fx{
+  position:absolute;
+  inset:-12% -8%;
+  pointer-events:none;
+  border-radius:40%;
+  background:linear-gradient(115deg, transparent 28%, rgba(255,255,255,.78) 50%, transparent 72%);
+  background-size:220% 100%;
+  mix-blend-mode:soft-light;
+  animation:darShine 3.5s ease-in-out infinite;
+}
+@keyframes darShine{
+  0%{background-position:-90% 0;opacity:.2}
+  45%{opacity:1}
+  100%{background-position:190% 0;opacity:.15}
+}
+#view-today .wm-kids{
+  font-size:clamp(34px, 10.8vw, 56px)!important;
+  margin-top:-10px!important;
+}
+#view-today .hero::before{
+  background-position:center 52%!important;
+}
+@media(min-width:700px){
+  #view-today .wm-kids{font-size:60px!important}
+}
+@media(max-width:380px){
+  #view-today .wm-kids{font-size:32px!important}
+}
 .page-head{
   padding-top:max(12px, env(safe-area-inset-top, 0px))!important;
   margin-top:0!important;
@@ -2203,7 +2260,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .profile-list button{text-align:left;border-radius:14px;min-height:46px;border:0;background:rgba(255,255,255,.06);color:#fff;padding:8px 12px}
 
 @media(prefers-reduced-motion:reduce){
-  .kids-sky *,#view-today .wm-dar-svg,#view-today .wm-kids span,.kid-pop{animation:none!important}
+  #view-today .wm-dar-svg,#view-today .wm-dar-fx,#view-today .wm-kids span,.kid-pop{animation:none!important}
 }
 
 
@@ -2430,12 +2487,22 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
         </div>
         <div class="kids-wordmark">
           <span class="wm-dar">DĀR AL TAWḤĪD</span>
-          <svg class="wm-dar-svg" viewBox="0 0 340 64" aria-hidden="true">
-            <path id="wmArc" d="M12 50 C 90 14, 250 14, 328 50" fill="none"></path>
-            <text fill="#f7e3b4" font-size="30" font-family="Fredoka, system-ui, sans-serif" font-weight="700" letter-spacing="3.6">
-              <textPath href="#wmArc" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath>
-            </text>
-          </svg>
+          <div class="wm-dar-wrap">
+            <svg class="wm-dar-svg" viewBox="0 0 560 108" aria-hidden="true">
+              <defs>
+                <linearGradient id="wmGoldFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#fff8e0"></stop>
+                  <stop offset=".42" stop-color="#f4d48a"></stop>
+                  <stop offset="1" stop-color="#c8923e"></stop>
+                </linearGradient>
+              </defs>
+              <path id="wmArc" d="M18 86 C 150 10, 410 10, 542 86" fill="none"></path>
+              <text fill="url(#wmGoldFill)" stroke="rgba(255,255,255,.62)" stroke-width="2.4" paint-order="stroke fill" font-size="46" font-family="Fredoka, system-ui, sans-serif" font-weight="700" letter-spacing="1.8">
+                <textPath href="#wmArc" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath>
+              </text>
+            </svg>
+            <span class="wm-dar-fx" aria-hidden="true"></span>
+          </div>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
         </div>
         <div class="cloud"></div>
@@ -2889,7 +2956,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab31";
+const KIDS_BUILD_ID="kids-shell-v12-tab32";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
