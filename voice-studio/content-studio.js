@@ -289,9 +289,16 @@ function mount(){
 }
 function bind(){
   document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>switchKind(btn.dataset.csKind)));
-  q("csTitle")?.addEventListener("input",()=>{q("csCoverTitle").textContent=q("csTitle").value||"Neue Geschichte";persistDraft();refreshQa()});
+  q("csTitle")?.addEventListener("input",()=>{q("csCoverTitle").textContent=q("csTitle").value||"Neue Geschichte";persistDraft();refreshQa();renderWorkflow()});
   ["csCategory","csTopic","csProphet","csAgeMin","csAgeMax","csModeRead","csModeListen","csSources"].forEach(id=>q(id)?.addEventListener("change",()=>{persistDraft();refreshQa()}));
-  q("text")?.addEventListener("input",()=>{persistDraft();refreshQa()});
+  q("text")?.addEventListener("input",()=>{
+    if(lastGeneratedText&&String(q("text")?.value||"").trim()!==lastGeneratedText){
+      audioAsset=null;
+      if(productionPhase!=="draft")setProductionPhase("draft");
+      stagingPublished=false;
+    }
+    persistDraft();refreshQa();
+  });
   q("csStructured")?.addEventListener("input",()=>{captureStructuredEditor();persistDraft();refreshQa()});
   q("csStructured")?.addEventListener("change",()=>{captureStructuredEditor();persistDraft();refreshQa()});
   q("csStructured")?.addEventListener("click",e=>{
@@ -639,6 +646,7 @@ async function publishTest(){
     const pub=await adminApi("/api/admin/kids-content/publish",{method:"POST",body:JSON.stringify({id:contentId,live:false,sendPush:false})});
     contentStatus="published";stagingPublished=true;setProductionPhase("test-published");renderStatus();
     setStudioMessage(effectiveTarget()==="ios"?"iOS-Paket im Staging veröffentlicht. Kein Besucher-Push wurde gesendet.":"In Test-Kids veröffentlicht. Kein Besucher-Push wurde gesendet.","good");await loadLibrary();
+    setTimeout(()=>goToWorkflowStep("live"),100);
     return pub;
   }catch(e){contentStatus="draft";renderStatus();setStudioMessage(e.message||String(e),"bad")}
   finally{busy=false;refreshQa()}
@@ -652,6 +660,8 @@ async function publishLive(){
     contentStatus="published";setProductionPhase("live-published");renderStatus();
     const p=pub.push||{};
     setStudioMessage(effectiveTarget()==="ios"?"iOS-Inhalt live veröffentlicht.":(p.sent?"Live veröffentlicht · Kids-Push gesendet.":"Live veröffentlicht · Push: "+(p.reason||"kein Empfänger")),effectiveTarget()==="ios"||p.sent?"good":"warn");
+    await loadLibrary(true);
+    setTimeout(()=>q("csLibrarySection")?.scrollIntoView?.({behavior:"smooth",block:"center"}),100);
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
   finally{busy=false;renderStatus();refreshQa()}
 }
