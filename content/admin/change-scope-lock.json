@@ -123,6 +123,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-learn-player-3d-stop-2026-09-27",
+      "approvedBy": "user-explicit-player-button-3d-stop-nicht-pause-regeln",
+      "reason": "Nutzer: Qurʾān-Lernen Vers-Playerbutton als echtes 3D-Playerbild; Stop beendet und blendet Player aus; Player-Buttons nach bestehender Regel, kein Hängen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "test/index.html",
+        "test/version.json",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css",
+        "assets/dar-3d-icons/",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css",
+        "test/assets/dar-3d-icons/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "test-quran-dock-align-learn-2026-09-27",
       "approvedBy": "user-explicit-koranbereich-anheftung-tabs-harmonieren-lernkoran-test",
       "reason": "Nutzer: Qurʾān-Anheftung und Tab-Leiste in der Test-App seitlich angleichen, Buttons behalten, Lern-Qurʾān in der Test-App wieder sichtbar.",

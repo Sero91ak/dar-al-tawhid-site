@@ -300,6 +300,15 @@ html.is-quran-player-route #darQuranPlayer .dqp-skip,
 }
 html.is-quran-player-route #darQuranPlayer .dqp-skip svg,
 #darQuranPlayer .dqp-skip svg{width:22px;height:22px;fill:#EED3AE;stroke:none}
+html.is-quran-player-route #darQuranPlayer .dqp-stop,
+#darQuranPlayer .dqp-stop{
+  width:52px;height:42px;min-width:52px!important;min-height:42px!important;
+  border-radius:16px!important;
+  background:rgba(238,211,174,.16)!important;
+  border:1px solid rgba(238,211,174,.38)!important;
+  color:#E2C29A!important;
+}
+#darQuranPlayer .dqp-stop svg{width:18px;height:18px}
 html.is-quran-player-route #darQuranPlayer .dqp-play,
 #darQuranPlayer .dqp-play{
   width:64px;height:42px;min-width:64px!important;min-height:42px!important;
