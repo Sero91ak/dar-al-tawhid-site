@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v33";
+const CACHE_NAME="dar-al-tawhid-kids-v34";
 const PRECACHE=[
   "/test/kids/index.html",
   "/test/kids/start.html",
