@@ -66,6 +66,7 @@ import {
   promoteKidsContentMedia,
   readKidsAlphabetAudioManifest,
   verifyKidsAlphabetAudioSlot,
+  verifyKidsAlphabetExternalAudioSlot,
   KIDS_CONTENT_MEDIA_LIMITS
 } from "./kids-content-media.js";
 import { sendKidsContentPush, kidsPushPreview } from "./kids-content-push.js";
@@ -510,6 +511,18 @@ export default {
         const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
         try {
           return json(await verifyKidsAlphabetAudioSlot(env, input, helpers), cors);
+        } catch (error) {
+          return json({ ok: false, error: error?.message || String(error) }, cors, error?.status || 400);
+        }
+      }
+
+      if (url.pathname === "/api/admin/kids-alphabet-audio/verify-external" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        try {
+          return json(await verifyKidsAlphabetExternalAudioSlot(env, input, helpers), cors);
         } catch (error) {
           return json({ ok: false, error: error?.message || String(error) }, cors, error?.status || 400);
         }
