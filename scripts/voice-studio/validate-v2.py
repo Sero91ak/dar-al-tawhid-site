@@ -333,8 +333,8 @@ def main():
     for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","MASTER_LIBRARY_CACHE","MASTER_LIBRARY_URL","islamic-master-library.json","unresolvedIslamicTerms","librarySuggestions","Ungeprüfte islamische Namen/Begriffe erkannt","user_rules+BASE_RULES+MASTER_RULES","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","continuous-sentence-flow-v2","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend","unnatural_final_internal_pause","execution_order=list(range(total))","Flow-aware Chunking"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
     split_src=ast.get_source_segment(engine_source,next((n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=="split_chunks"),None)) or ""
-    if "Konjunktion" not in split_src or "Satzenden" not in split_src:
-        fail("flow-aware chunking implementation missing")
+    if "Konjunktion" not in split_src or "Jeder Satz bleibt eine eigene QA-/Retry-Einheit" not in split_src:
+        fail("sentence-first flow-aware chunking implementation missing")
     if "execution_order=list(range(total))" not in engine_source:
         fail("rendering must preserve original text order")
     function_nodes={n.name:n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
