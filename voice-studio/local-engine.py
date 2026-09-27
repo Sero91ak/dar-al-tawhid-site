@@ -2114,15 +2114,20 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str,mode:str="narratio
                 run=0
         silence_ms=longest*10
         metrics["max_internal_silence_ms"]=silence_ms
-        has_punctuation=bool(re.search(r"[.!?؟…,:;،؛]",str(text)))
-        if has_punctuation:
+        probe=str(text or "").strip()
+        # Ein Satzendpunkt erlaubt keine lange Stille mitten im Satz. Nur echte
+        # interne Satzzeichen erhalten einen etwas größeren Pausenrahmen.
+        core=re.sub(r"[.!?؟…]+$","",probe).strip()
+        has_internal_punctuation=bool(re.search(r"[,،;؛:!?؟…]|\.(?=\s+\S)",core))
+        if has_internal_punctuation:
             mode_limits=QA_CONFIG.get("maxInternalSilenceMsWithPunctuationByMode") or {}
-            limit=int(mode_limits.get(mode,QA_CONFIG.get("maxInternalSilenceMsWithPunctuation",700)))
+            limit=int(mode_limits.get(mode,QA_CONFIG.get("maxInternalSilenceMsWithPunctuation",560)))
         else:
-            limit=int(QA_CONFIG.get("maxInternalSilenceMsWithoutPunctuation",480))
+            limit=int(QA_CONFIG.get("maxInternalSilenceMsWithoutPunctuation",380))
+        metrics["internal_punctuation"]=has_internal_punctuation
         metrics["internal_silence_limit_ms"]=limit
         if silence_ms>limit:
-            metrics["issues"].append("excessive_internal_pause" if has_punctuation else "unexpected_internal_hold")
+            metrics["issues"].append("excessive_internal_pause" if has_internal_punctuation else "unexpected_internal_hold")
 
     # Sustained-hold guard: auffällig gleichförmige Energie über fast eine Sekunde
     # ist bei kurzen Segmenten ein typisches Hängen/Dehnen des TTS-Modells.
