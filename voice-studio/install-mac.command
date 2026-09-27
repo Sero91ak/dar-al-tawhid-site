@@ -2,7 +2,8 @@
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
-RAW="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/cea84c85f71596277860085f813c7658cf9181b2"
+REPO_API="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site"
+PIN="0a86c9dfc4883462e2c12ba6b4b41c6757091f85"
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -52,23 +53,39 @@ say_status() {
 
 say_status "DĀR Voice Studio wird eingerichtet …"
 
+download_repo_file() {
+  local path="$1"
+  local out="$2"
+  curl -fsSL \
+    -H "Accept: application/vnd.github.raw+json" \
+    -H "User-Agent: DAR-Voice-Studio-Installer" \
+    "$REPO_API/contents/$path?ref=$PIN" \
+    -o "$out"
+}
+
+download_optional_repo_file() {
+  local path="$1"
+  local out="$2"
+  download_repo_file "$path" "$out" || true
+}
+
 # Neue Version zuerst vollständig in einen isolierten Staging-Ordner laden.
 # Die funktionierende Installation wird erst nach allen Prüfungen ersetzt.
-curl -fsSL "$RAW/voice-studio/local-engine.py?v=293" -o "$STAGE/local-engine.py"
-curl -fsSL "$RAW/voice-studio/speech_flow.py?v=293" -o "$STAGE/speech_flow.py"
-curl -fsSL "$RAW/voice-studio/index.html?v=293" -o "$STAGE/studio.html"
-curl -fsSL "$RAW/voice-studio/content-studio.js?v=293" -o "$STAGE/content-studio.js"
-curl -fsSL "$RAW/voice-studio/alphabet-audio-studio.js?v=293" -o "$STAGE/alphabet-audio-studio.js"
-curl -fsSL "$RAW/voice-studio/VoiceStudioApp.swift?v=293" -o "$STAGE/VoiceStudioApp.swift"
-curl -fsSL "$RAW/voice-studio/update-mac.command?v=293" -o "$STAGE/update-mac.command"
-curl -fsSL "$RAW/voice-studio/voice-studio-icon.png?v=293" -o "$STAGE/voice-studio-icon.png"
-curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=293" -o "$STAGE/pronunciation-rules.json"
-curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=293" -o "$STAGE/voice-production-profile.json"
-curl -fsSL "$RAW/data/pronunciation/islamic-master-library.json?v=293" -o "$STAGE/islamic-master-library.json"
-curl -fsSL "$RAW/data/pronunciation/voice-regression-fixtures.json?v=293" -o "$STAGE/voice-regression-fixtures.json"
-curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=293" -o "$STAGE/validate-v2.py"
-curl -fsSL "$RAW/watermark-my-logo-full.png?v=293" -o "$STAGE/watermark-my-logo-full.png" || true
-curl -fsSL "$RAW/app-icon-512.png?v=293" -o "$STAGE/app-icon-512.png" || true
+download_repo_file "voice-studio/local-engine.py" "$STAGE/local-engine.py"
+download_repo_file "voice-studio/speech_flow.py" "$STAGE/speech_flow.py"
+download_repo_file "voice-studio/index.html" "$STAGE/studio.html"
+download_repo_file "voice-studio/content-studio.js" "$STAGE/content-studio.js"
+download_repo_file "voice-studio/alphabet-audio-studio.js" "$STAGE/alphabet-audio-studio.js"
+download_repo_file "voice-studio/VoiceStudioApp.swift" "$STAGE/VoiceStudioApp.swift"
+download_repo_file "voice-studio/update-mac.command" "$STAGE/update-mac.command"
+download_repo_file "voice-studio/voice-studio-icon.png" "$STAGE/voice-studio-icon.png"
+download_repo_file "data/pronunciation/pronunciation-rules.json" "$STAGE/pronunciation-rules.json"
+download_repo_file "data/pronunciation/voice-production-profile.json" "$STAGE/voice-production-profile.json"
+download_repo_file "data/pronunciation/islamic-master-library.json" "$STAGE/islamic-master-library.json"
+download_repo_file "data/pronunciation/voice-regression-fixtures.json" "$STAGE/voice-regression-fixtures.json"
+download_repo_file "scripts/voice-studio/validate-v2.py" "$STAGE/validate-v2.py"
+download_optional_repo_file "watermark-my-logo-full.png" "$STAGE/watermark-my-logo-full.png"
+download_optional_repo_file "app-icon-512.png" "$STAGE/app-icon-512.png"
 
 for required in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
