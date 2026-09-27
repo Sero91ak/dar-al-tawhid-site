@@ -561,6 +561,7 @@ const IS_LOCAL=location.hostname==="127.0.0.1"||location.hostname==="localhost";
 const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
 let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null;
+let learnedCanonicals=new Set(),learnedTerms=new Set();
 const $=s=>document.querySelector(s);
 
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
@@ -647,8 +648,9 @@ function renderAnalysis(){
   $("#termList").innerHTML=unique.length
     ?unique.map(r=>{
       const master=r.voice_lock==="MASTER";
-      const l=master||LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace);
-      const label=master?"MASTER":(l?"LOCKED":r.voice_lock==="REVIEW"?"REVIEW":"VERIFIED");
+      const persisted=learnedCanonicals.has(String(r.canonical||""))||learnedTerms.has(String(r.string_to_replace||""));
+      const l=master||persisted||LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace);
+      const label=(master||persisted)?"MASTER":(l?"LOCKED":r.voice_lock==="REVIEW"?"REVIEW":"VERIFIED");
       const term=String(r.string_to_replace||r.canonical||"");
       return '<button type="button" class="term clickable '+(l?'locked':'verified')+'" data-learning-term="'+esc(term)+'" title="Aussprache prüfen / korrigieren">'+esc(r.canonical||r.string_to_replace)+' · '+label+'</button>';
     }).join("")
@@ -717,8 +719,11 @@ function renderLearningState(d={}){
   const learned=Number(d.learned||0),online=Number(d.onlineRules||0),master=Number(d.masterEntries||0);
   const prophets=Number(d.masterProphets||0),sahaba=Number(d.masterSahaba||0),sahabiyyat=Number(d.masterSahabiyyat||0);
   const synced=d.onlineSyncedAt?(" · online "+String(d.onlineSyncedAt).replace("T"," ").slice(0,16)):"";
-  $("#learnState").textContent=learned+" dauerhaft gelernt · "+master+" Master-Einträge ("+
+  learnedCanonicals=new Set(Array.isArray(d.learnedCanonicals)?d.learnedCanonicals.map(String):[]);
+  learnedTerms=new Set(Array.isArray(d.learnedTerms)?d.learnedTerms.map(String):[]);
+  $("#learnState").textContent=learned+" dauerhaft gelernt · lokal gesichert + Backup · "+master+" Master-Einträge ("+
     prophets+" Propheten · "+sahaba+" Ṣaḥābah · "+sahabiyyat+" Ṣaḥābiyyāt) · "+online+" Online-Regeln"+synced;
+  if($("#text")?.value)renderAnalysis();
 }
 async function loadLearningState(){
   if(!engineOK){$("#learnState").textContent="Engine starten, um den Lernwortschatz zu verwenden.";return}
@@ -827,7 +832,7 @@ async function confirmLearning(){
         await generate({autoRerender:true});
       }
     }else{
-      setMessage("Gespeichert: „"+term+"“ ist sofort aktiv. Beim nächsten Erzeugen wird automatisch die bestätigte Aussprache verwendet.","good");
+      setMessage("Dauerhaft gespeichert: „"+term+"“ und bekannte Schreibvarianten sind lokal als MASTER gesichert. Diese Aussprache wird künftig automatisch wiederverwendet.","good");
     }
   }catch(e){setMessage(e.message||String(e));btn.disabled=false}
   finally{if(btn)btn.textContent=old}
