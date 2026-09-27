@@ -1,6 +1,6 @@
 {
-  "version": "2.9.1",
-  "updatedAt": "2026-09-27T15:02:00+02:00",
+  "version": "2.9.2",
+  "updatedAt": "2026-09-27T15:18:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -238,7 +238,12 @@
     "updateHelperShellValidation": true,
     "nativeUpdateBridgeValidation": true,
     "updateInstallerPackagingValidation": true,
-    "noTerminalAfterMigration": true
+    "noTerminalAfterMigration": true,
+    "companionAuthValidation": true,
+    "companionLoopbackCompatibility": true,
+    "companionNativeQRValidation": true,
+    "companionInstallerTokenPersistence": true,
+    "companionNoTokenLeakHealth": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -440,5 +445,37 @@
       "installing",
       "error"
     ]
-  }
+  },
+  "companionMode": true,
+  "companionArchitecture": "secure-same-wifi-mac-engine",
+  "companionTransport": "http-local-lan-same-origin",
+  "companionEngineHost": "0.0.0.0 when paired; loopback otherwise",
+  "companionPairing": {
+    "persistentToken": true,
+    "tokenFile": "~/Applications/DAR-Voice-Studio/ipad-pairing-token.txt",
+    "cookie": "DARVOICE_PAIR",
+    "cookieMaxAgeSeconds": 31536000,
+    "qrPairing": true,
+    "copyLink": true,
+    "sameWifiRequired": true,
+    "unauthorizedRemoteRequestsBlocked": true,
+    "tokenNeverReturnedByHealth": true
+  },
+  "companionDevices": [
+    "iPad",
+    "iPhone"
+  ],
+  "companionCapabilities": {
+    "editor": true,
+    "pronunciationLibrary": true,
+    "pronunciationLearning": true,
+    "audioGenerationOnMac": true,
+    "audioPlaybackOnDevice": true,
+    "contentStudio": true,
+    "testPublish": true,
+    "livePublish": true,
+    "homeScreenMode": true
+  },
+  "tabletLayout": true,
+  "companionHomeScreenManifest": true
 }
