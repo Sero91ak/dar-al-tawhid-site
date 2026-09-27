@@ -1,6 +1,6 @@
 {
   "schemaVersion": 8,
-  "id": "dar-own-voice-narration-v2.8.1",
+  "id": "dar-own-voice-narration-v2.8.2",
   "updatedAt": "2026-09-27",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
@@ -422,7 +422,14 @@
     "strictSentencePreflightRegression": true,
     "zeroPauseInfinitiveRegression": true,
     "renderPlanBoundaryRegression": true,
-    "visibleTextIntegrityRegression": true
+    "visibleTextIntegrityRegression": true,
+    "inlineArabicSilenceThresholdRelative": 0.0045,
+    "inlineArabicSilenceAbsolute": 0.00015,
+    "inlineArabicInternalSilenceMs": 500,
+    "inlineArabicRenderAttempts": 4,
+    "inlineArabicPhonemeAwarePauseQa": true,
+    "fullSentenceContinuityStillAuthoritative": true,
+    "errorShowsSegmentTextAndSilenceMs": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -631,6 +638,8 @@
     "generalBoundaryFlowBridge": true,
     "noHardWordBoundaryChunking": true,
     "strictSentencePreflight": true,
-    "grammarAwarePunctuation": true
+    "grammarAwarePunctuation": true,
+    "inlineArabicPhonemeAwarePauseQa": true,
+    "inlineArabicRenderAttempts": 4
   }
 }
