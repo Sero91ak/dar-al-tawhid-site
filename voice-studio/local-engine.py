@@ -2007,7 +2007,14 @@ def file_signature(path:Path):
         return str(path)
 
 def contextual_bridge_direction(plan,index:int):
-    """DE↔AR-Grenzen erhalten Kontext-Rendering statt isolierter Mini-Fragmente."""
+    """DE↔AR-Grenzen: stabiler Fallback ohne Carrier-Kontext-Rendering.
+
+    Die Carrier-Bridge kann auf einzelnen Apple-Silicon/MLX-Runs hängen oder
+    abbrechen. Bis der Übergang separat neu gebaut ist, rendern wir die normalen
+    Segmente und verbinden sie ausschließlich im Stitcher per engem Crossfade.
+    """
+    return ""
+
     if index<0 or index>=len(plan):
         return ""
     lang,text=plan[index]
