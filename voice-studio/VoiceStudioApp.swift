@@ -119,6 +119,45 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         viewMenu.addItem(.separator())
         viewMenu.addItem(menuItem("Vollbild", action: #selector(toggleFullScreen(_:)), key: "f", modifiers: [.command, .control], target: self))
 
+        let productionRoot = NSMenuItem()
+        main.addItem(productionRoot)
+        let productionMenu = NSMenu(title: "Produktion")
+        productionRoot.submenu = productionMenu
+        productionMenu.addItem(menuItem(
+            "Neuer Inhalt",
+            action: #selector(newContent(_:)),
+            key: "n",
+            target: self
+        ))
+        productionMenu.addItem(menuItem(
+            "Zum Text",
+            action: #selector(focusText(_:)),
+            key: "1",
+            target: self
+        ))
+        productionMenu.addItem(.separator())
+        productionMenu.addItem(menuItem(
+            "Audio + Cover erzeugen",
+            action: #selector(produceContent(_:)),
+            key: "e",
+            modifiers: [.command, .shift],
+            target: self
+        ))
+        productionMenu.addItem(menuItem(
+            "In Test veröffentlichen",
+            action: #selector(publishTestContent(_:)),
+            key: "t",
+            modifiers: [.command, .shift],
+            target: self
+        ))
+        productionMenu.addItem(menuItem(
+            "Live veröffentlichen",
+            action: #selector(publishLiveContent(_:)),
+            key: "l",
+            modifiers: [.command, .shift],
+            target: self
+        ))
+
         let audioRoot = NSMenuItem()
         main.addItem(audioRoot)
         let audioMenu = NSMenu(title: "Audio")
@@ -143,6 +182,32 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         windowMenu.addItem(menuItem("Minimieren", action: #selector(NSWindow.performMiniaturize(_:)), key: "m"))
         windowMenu.addItem(menuItem("Zoom", action: #selector(NSWindow.performZoom(_:))))
         NSApp.windowsMenu = windowMenu
+    }
+
+    private func runStudioAction(_ javascript: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.webView.evaluateJavaScript(javascript, completionHandler: nil)
+        }
+    }
+
+    @objc private func newContent(_ sender: Any?) {
+        runStudioAction("window.DarContentStudio && window.DarContentStudio.newCurrentItem && window.DarContentStudio.newCurrentItem();")
+    }
+
+    @objc private func focusText(_ sender: Any?) {
+        runStudioAction("window.DarContentStudio && window.DarContentStudio.goToWorkflowStep && window.DarContentStudio.goToWorkflowStep('text');")
+    }
+
+    @objc private func produceContent(_ sender: Any?) {
+        runStudioAction("window.DarContentStudio && window.DarContentStudio.produce && window.DarContentStudio.produce();")
+    }
+
+    @objc private func publishTestContent(_ sender: Any?) {
+        runStudioAction("window.DarContentStudio && window.DarContentStudio.publishTest && window.DarContentStudio.publishTest();")
+    }
+
+    @objc private func publishLiveContent(_ sender: Any?) {
+        runStudioAction("window.DarContentStudio && window.DarContentStudio.publishLive && window.DarContentStudio.publishLive();")
     }
 
     private func outputDeviceIDs() -> [AudioDeviceID] {
