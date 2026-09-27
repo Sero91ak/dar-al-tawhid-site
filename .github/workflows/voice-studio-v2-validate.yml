@@ -14,6 +14,8 @@ on:
       - "cloudflare/worker.js"
       - "cloudflare/site-router.js"
       - "cloudflare/test-app-worker.js"
+      - "wrangler.test.toml"
+      - "scripts/test-app-health-check.js"
       - "_headers"
       - ".github/workflows/voice-studio-v2-validate.yml"
   pull_request:
@@ -29,6 +31,8 @@ on:
       - "cloudflare/worker.js"
       - "cloudflare/site-router.js"
       - "cloudflare/test-app-worker.js"
+      - "wrangler.test.toml"
+      - "scripts/test-app-health-check.js"
       - "_headers"
       - ".github/workflows/voice-studio-v2-validate.yml"
 
@@ -305,6 +309,43 @@ jobs:
           if 'audioAsset=null;' not in src or 'stagingPublished=false;' not in src:
               raise SystemExit("Text edits must invalidate stale production assets/status")
           print("Zero-detour Content Studio workflow OK")
+          PY
+
+      - name: Validate Kids recitation grading route
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          worker=Path("cloudflare/test-app-worker.js").read_text(encoding="utf-8")
+          router=Path("cloudflare/site-router.js").read_text(encoding="utf-8")
+          wrangler=Path("wrangler.test.toml").read_text(encoding="utf-8")
+          health=Path("scripts/test-app-health-check.js").read_text(encoding="utf-8")
+          required_worker=[
+              '"/test/kids/api/recitation/grade"',
+              "gradeKidsRecitation",
+              "@cf/openai/whisper-large-v3-turbo",
+              "language: \"ar\"",
+              "pronunciationReference: false",
+              "audio_size_invalid",
+          ]
+          required_router=[
+              'url.pathname === "/test/kids/api/recitation/grade"',
+              "request.method === \"POST\"",
+              "dar-al-tawhid-test.sero91ak.workers.dev",
+              "kids_recitation_proxy_failed",
+          ]
+          required_wrangler=['[ai]','binding = "AI"']
+          failures=[]
+          for marker in required_worker:
+              if marker not in worker: failures.append("worker missing "+marker)
+          for marker in required_router:
+              if marker not in router: failures.append("router missing "+marker)
+          for marker in required_wrangler:
+              if marker not in wrangler: failures.append("wrangler missing "+marker)
+          if "@cf/openai/whisper-large-v3-turbo" not in health:
+              failures.append("health check does not guard ASR model")
+          if failures:
+              raise SystemExit("Kids recitation route validation failed:\n- "+"\n- ".join(failures))
+          print("Kids recitation grading route OK")
           PY
 
       - name: Validate Kids release coherence
