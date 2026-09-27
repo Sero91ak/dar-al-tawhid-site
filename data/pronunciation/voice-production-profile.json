@@ -1,11 +1,11 @@
 {
   "schemaVersion": 8,
-  "id": "dar-own-voice-narration-v2.8.2",
+  "id": "dar-own-voice-narration-v2.8.3",
   "updatedAt": "2026-09-27",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade Serhat narration with strict sentence preflight before synthesis, grammar-aware punctuation prosody, continuous sentence flow, deterministic Islamic-name pronunciation, no artificial thinking pauses, persistent confirmed audio locks, and strict post-render continuity QA.",
+  "productionGoal": "Production-grade Serhat narration with strict sentence preflight, grammar-aware punctuation, verified-sentence fast reuse, model lazy-loading, automatic repair of moderate internal pauses, deterministic Islamic-name pronunciation, and strict final continuity QA.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -429,7 +429,14 @@
     "inlineArabicRenderAttempts": 4,
     "inlineArabicPhonemeAwarePauseQa": true,
     "fullSentenceContinuityStillAuthoritative": true,
-    "errorShowsSegmentTextAndSilenceMs": true
+    "errorShowsSegmentTextAndSilenceMs": true,
+    "autoRepairPauseWithoutPunctuationMs": 150,
+    "autoRepairPauseWithPunctuationMs": 220,
+    "autoRepairPauseMaxMs": 950,
+    "moderatePauseAutoRepair": true,
+    "qaCleanCacheOnly": true,
+    "knownSentenceReuse": true,
+    "backendIndependentVerifiedCache": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -640,6 +647,11 @@
     "strictSentencePreflight": true,
     "grammarAwarePunctuation": true,
     "inlineArabicPhonemeAwarePauseQa": true,
-    "inlineArabicRenderAttempts": 4
+    "inlineArabicRenderAttempts": 4,
+    "lazyModelLoad": true,
+    "skipModelWhenAllSegmentsKnown": true,
+    "verifiedSentenceFastReuse": true,
+    "backendIndependentVerifiedCache": true,
+    "autoRepairModeratePause": true
   }
 }
