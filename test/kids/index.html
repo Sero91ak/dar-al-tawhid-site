@@ -2921,7 +2921,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab43";
+const KIDS_BUILD_ID="kids-shell-v12-tab44";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6359,6 +6359,68 @@ fetchCatalog();
   overscroll-behavior:contain!important;
   touch-action:pan-y!important;
   padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;
+}
+</style>
+<style id="kids-wordmark-solid-center-v1">
+/* No glass/rays over the sky title. DĀR AL TAWḤĪD + Kids sit in the middle, readable. */
+#view-today .kids-sky,
+#view-today .sky-rays,
+#view-today .sky-stars,
+#view-today .sky-rain{
+  display:none!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+#view-today .hero::after{
+  background:linear-gradient(180deg,transparent 0 56%,rgba(8,28,42,.42) 78%,rgba(8,28,42,.78) 100%)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  filter:none!important;
+}
+#view-today .hero::before{
+  filter:none!important;
+  -webkit-filter:none!important;
+  background-position:center 46%!important;
+}
+#view-today .kids-wordmark{
+  position:absolute!important;
+  left:50%!important;
+  top:42%!important;
+  right:auto!important;
+  bottom:auto!important;
+  transform:translate(-50%,-50%)!important;
+  margin:0!important;
+  width:min(92%,460px)!important;
+  z-index:6!important;
+  filter:none!important;
+  text-align:center!important;
+  pointer-events:none!important;
+}
+#view-today .wm-dar-svg{
+  display:none!important;
+  animation:none!important;
+  filter:none!important;
+}
+#view-today .wm-dar{
+  display:block!important;
+  margin:0 auto 8px!important;
+  color:#fff8e0!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-weight:800!important;
+  font-size:clamp(17px,5vw,24px)!important;
+  letter-spacing:.14em!important;
+  line-height:1.15!important;
+  text-align:center!important;
+  text-transform:uppercase!important;
+  text-shadow:0 1px 0 rgba(0,0,0,.25),0 3px 10px rgba(0,0,0,.55)!important;
+  filter:none!important;
+  animation:none!important;
+  -webkit-text-stroke:0!important;
+}
+#view-today .wm-kids{
+  justify-content:center!important;
+  margin:0 auto!important;
+  filter:none!important;
 }
 </style>
 
