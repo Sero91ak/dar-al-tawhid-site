@@ -475,7 +475,11 @@
     "contextualCoarticulationRegression": true,
     "noStandaloneGermanBeforeArabicRegression": true,
     "carrierNeverExposedRegression": true,
-    "contextBridgeCacheRegression": true
+    "contextBridgeCacheRegression": true,
+    "inlineArabicFlowRepairTriggerMs": 120,
+    "inlineArabicFlowTargetPauseMs": 45,
+    "inlineArabicFlowRepairMaxMs": 700,
+    "inlineArabicProactiveFlowRepair": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
