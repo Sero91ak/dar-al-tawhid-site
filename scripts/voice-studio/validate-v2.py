@@ -226,6 +226,14 @@ def main():
     if not bool(qa.get("visibleTextIntegrityRegression")): fail("visible-text integrity QA missing")
     if not bool(qa.get("inlineArabicPhonemeAwarePauseQa")): fail("inline Arabic phoneme-aware pause QA missing")
     if not bool(qa.get("fullSentenceContinuityStillAuthoritative")): fail("full-sentence continuity authority missing")
+    for flag in ("moderatePauseAutoRepair","qaCleanCacheOnly","knownSentenceReuse","backendIndependentVerifiedCache"):
+        if not bool(qa.get(flag)): fail("fast reuse/pause-repair QA missing: "+flag)
+    if int(qa.get("autoRepairPauseWithoutPunctuationMs",999))>180:
+        fail("auto-repair no-punctuation target too long")
+    if int(qa.get("autoRepairPauseWithPunctuationMs",999))>250:
+        fail("auto-repair punctuation target too long")
+    if not 700<=int(qa.get("autoRepairPauseMaxMs",0))<=1100:
+        fail("auto-repair maximum pause window invalid")
     if int(qa.get("inlineArabicRenderAttempts",0))<4: fail("inline Arabic retries too low")
     if not 420<=int(qa.get("inlineArabicInternalSilenceMs",0))<=550:
         fail("inline Arabic internal-silence guard invalid")
@@ -257,7 +265,7 @@ def main():
     if int(renderer.get("arabicChunkMaxChars",0))>90: fail("Arabic chunk ceiling too high")
     if int(renderer.get("germanMaxNewTokens",0))>360: fail("German token ceiling too high")
     if int(renderer.get("arabicMaxNewTokens",0))>300: fail("Arabic token ceiling too high")
-    for flag in ("voiceCloning","boundedGeneration","tokenCeilingRescue","preservePronunciationRules","preserveConfirmedAudioLocks","preserveHonorificPolicy","preserveTechnicalQa","preserveAntiStutterQa","preserveAntiHoldQa","phraseAwareChunking","renderInOriginalTextOrder","generalBoundaryFlowBridge","noHardWordBoundaryChunking"):
+    for flag in ("voiceCloning","boundedGeneration","tokenCeilingRescue","preservePronunciationRules","preserveConfirmedAudioLocks","preserveHonorificPolicy","preserveTechnicalQa","preserveAntiStutterQa","preserveAntiHoldQa","phraseAwareChunking","renderInOriginalTextOrder","generalBoundaryFlowBridge","noHardWordBoundaryChunking","lazyModelLoad","skipModelWhenAllSegmentsKnown","verifiedSentenceFastReuse","backendIndependentVerifiedCache","autoRepairModeratePause"):
         if not renderer.get(flag): fail("production renderer policy missing: "+flag)
     if renderer.get("flowArchitecture")!="continuous-sentence-flow-v2":
         fail("continuous sentence-flow architecture identity missing")
@@ -335,15 +343,24 @@ def main():
     except SyntaxError as e:
         fail(f"engine syntax error: {e}")
     functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
-    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","derive_master_entries_from_rules","build_master_library","master_rules_from_entries","master_suggestions","detect_unresolved_islamic_terms","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale","file_signature","render_cache_key","load_render_cache","save_render_cache","cleanup_render_cache","reference_for_language","prepare_reference_if_needed","generation_token_budget","generation_timeout_seconds","_mlx_process_main","_start_mlx_process","_stop_mlx_process","load_mlx_model","load_production_model","render_with_mlx","is_inline_arabic_micro_term"}:
+    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","derive_master_entries_from_rules","build_master_library","master_rules_from_entries","master_suggestions","detect_unresolved_islamic_terms","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale","file_signature","render_cache_key","load_render_cache","save_render_cache","cleanup_render_cache","reference_for_language","prepare_reference_if_needed","generation_token_budget","generation_timeout_seconds","_mlx_process_main","_start_mlx_process","_stop_mlx_process","load_mlx_model","load_production_model","render_with_mlx","is_inline_arabic_micro_term","repair_internal_pause","legacy_render_cache_keys"}:
         if required not in functions: fail(f"engine missing production function: {required}")
-    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","MASTER_LIBRARY_CACHE","MASTER_LIBRARY_URL","islamic-master-library.json","unresolvedIslamicTerms","librarySuggestions","Ungeprüfte islamische Namen/Begriffe erkannt","user_rules+BASE_RULES+MASTER_RULES","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","continuous-sentence-flow-v2","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend","unnatural_final_internal_pause","execution_order=list(range(total))","Flow-aware Chunking","inline_arabic_internal_hold","inlineArabicRenderAttempts","inlineArabicSilenceThresholdRelative"}:
+    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","MASTER_LIBRARY_CACHE","MASTER_LIBRARY_URL","islamic-master-library.json","unresolvedIslamicTerms","librarySuggestions","Ungeprüfte islamische Namen/Begriffe erkannt","user_rules+BASE_RULES+MASTER_RULES","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","continuous-sentence-flow-v2","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend","unnatural_final_internal_pause","execution_order=list(range(total))","Flow-aware Chunking","inline_arabic_internal_hold","inlineArabicRenderAttempts","inlineArabicSilenceThresholdRelative","cache-only-fast-path","Stimm-Modell wird nicht geladen","cache_reused_without_resynthesis","pause auto-repair"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
     split_src=ast.get_source_segment(engine_source,next((n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=="split_chunks"),None)) or ""
     if "Konjunktion" not in split_src or "Jeder Satz bleibt eine eigene QA-/Retry-Einheit" not in split_src:
         fail("sentence-first flow-aware chunking implementation missing")
     if "execution_order=list(range(total))" not in engine_source:
         fail("rendering must preserve original text order")
+    prosody_src=ast.get_source_segment(engine_source,next((n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=="detect_prosody_mode"),None)) or ""
+    if 'value.count(",")>=1 and " und " in low' in prosody_src:
+        fail("normal comma+und sentences must not be forced into list mode")
+    cache_key_src=ast.get_source_segment(engine_source,next((n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=="render_cache_key"),None)) or ""
+    if "ACTIVE_BACKEND" in cache_key_src:
+        fail("verified sentence cache key must be backend independent")
+    repair_src=ast.get_source_segment(engine_source,next((n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=="repair_internal_pause"),None)) or ""
+    if "pause_runs_repaired" not in repair_src or "autoRepairPauseMaxMs" not in repair_src:
+        fail("moderate pause auto-repair implementation missing")
     function_nodes={n.name:n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
     save_src=ast.get_source_segment(engine_source,function_nodes.get("save_wav")) or ""
     load_src=ast.get_source_segment(engine_source,function_nodes.get("load_locked_wav")) or ""
