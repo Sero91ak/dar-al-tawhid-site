@@ -433,26 +433,90 @@ def pending_audio_lock_keys():
         return sorted(PENDING_AUDIO_LOCKS)
 
 def load_locked_wav(path:Path,target_sr:int):
+    """Lädt MASTER-/Cache-WAV robust und migriert alte IEEE-Float-WAVs auf PCM16.
+
+    Python wave akzeptiert WAV format code 3 (IEEE float) nicht. Ältere
+    torchaudio-Versionen konnten genau dieses Format erzeugen. Darum wird ein
+    solcher Altbestand einmalig mit torchaudio oder ffmpeg gelesen und danach
+    atomar als PCM16-WAV zurückgeschrieben.
+    """
     import numpy as np, torch, wave
     cache_key=(str(path),int(target_sr),file_signature(path))
     cached=AUDIO_WAV_CACHE.get(cache_key)
     if cached is not None:
         return cached.clone()
-    with wave.open(str(path),"rb") as wf:
-        channels=wf.getnchannels()
-        width=wf.getsampwidth()
-        sr=wf.getframerate()
-        frames=wf.readframes(wf.getnframes())
-    if width!=2:
-        raise RuntimeError(f"MASTER-Audio hat nicht unterstützte Sample-Breite: {width}")
-    arr=np.frombuffer(frames,dtype=np.int16).astype(np.float32)/32767.0
-    if channels>1:
-        arr=arr.reshape(-1,channels).mean(axis=1)
-    w=torch.from_numpy(arr).view(1,-1)
+
+    def read_pcm16(p:Path):
+        with wave.open(str(p),"rb") as wf:
+            channels=wf.getnchannels()
+            width=wf.getsampwidth()
+            sr=wf.getframerate()
+            frames=wf.readframes(wf.getnframes())
+        if width!=2:
+            raise wave.Error(f"unsupported PCM sample width: {width}")
+        arr=np.frombuffer(frames,dtype=np.int16).astype(np.float32)/32767.0
+        if channels>1:
+            arr=arr.reshape(-1,channels).mean(axis=1)
+        return torch.from_numpy(arr).view(1,-1),int(sr)
+
+    try:
+        w,sr=read_pcm16(path)
+    except (wave.Error,EOFError) as first:
+        migrated=False
+        load_error=None
+        try:
+            import torchaudio as ta
+            w,sr=ta.load(str(path))
+            w=w.detach().float().cpu()
+            if w.ndim==1:
+                w=w.unsqueeze(0)
+            if w.ndim>2:
+                w=w.reshape(w.shape[0],-1)
+            if w.shape[0]>1:
+                w=w.mean(dim=0,keepdim=True)
+            if not bool(torch.isfinite(w).all().item()):
+                raise RuntimeError("nicht-finite Samples im Legacy-WAV")
+            tmp=path.with_name(path.name+f".pcm16.{os.getpid()}.{uuid.uuid4().hex[:8]}.wav")
+            try:
+                save_wav(tmp,w,int(sr))
+                os.replace(tmp,path)
+                migrated=True
+            finally:
+                try: tmp.unlink(missing_ok=True)
+                except Exception: pass
+        except Exception as e:
+            load_error=e
+
+        if not migrated:
+            ffmpeg=find_ffmpeg()
+            if not ffmpeg:
+                raise RuntimeError(
+                    f"WAV nicht lesbar ({first}); Legacy-Konvertierung fehlgeschlagen ({load_error})"
+                ) from load_error
+            tmp=path.with_name(path.name+f".ffmpeg-pcm16.{os.getpid()}.{uuid.uuid4().hex[:8]}.wav")
+            try:
+                p=subprocess.run(
+                    [ffmpeg,"-y","-v","error","-i",str(path),"-vn","-ac","1","-c:a","pcm_s16le",str(tmp)],
+                    capture_output=True,text=True
+                )
+                if p.returncode!=0 or not tmp.exists() or tmp.stat().st_size<=44:
+                    detail=(p.stderr or "")[-1200:]
+                    raise RuntimeError("Legacy-WAV konnte nicht nach PCM16 konvertiert werden. "+detail)
+                os.replace(tmp,path)
+                w,sr=read_pcm16(path)
+                migrated=True
+            finally:
+                try: tmp.unlink(missing_ok=True)
+                except Exception: pass
+
+        if migrated:
+            print("[DĀR Voice] legacy WAV migrated to PCM16:",path,flush=True)
+
     if int(sr)!=int(target_sr) and w.shape[-1]>1:
         new_len=max(1,round(w.shape[-1]*float(target_sr)/float(sr)))
         w=torch.nn.functional.interpolate(w.unsqueeze(0),size=new_len,mode="linear",align_corners=False).squeeze(0)
-    AUDIO_WAV_CACHE[cache_key]=w.clone()
+    final_key=(str(path),int(target_sr),file_signature(path))
+    AUDIO_WAV_CACHE[final_key]=w.clone()
     return w
 
 def split_audio_locked_spans(text:str):
@@ -2203,23 +2267,26 @@ def join_rendered_segments(items,sr:int):
     return full
 
 def save_wav(path:Path,wav,sr:int):
+    """Schreibt intern ausschließlich RIFF/WAV PCM16 mono.
+
+    Kein torchaudio.save: einige macOS/torchaudio-Backends schreiben Float-WAV
+    (WAVE_FORMAT_IEEE_FLOAT = 3), das Python wave später nicht lesen kann.
+    """
+    import numpy as np, wave
     tensor=wav.detach().float().cpu()
     if tensor.ndim==1:
         tensor=tensor.unsqueeze(0)
-    try:
-        import torchaudio as ta
-        ta.save(str(path),tensor,sr)
-        return
-    except Exception as first:
-        print("[DĀR Voice] torchaudio.save fallback:",first,flush=True)
-
-    # Robuster Fallback ohne TorchCodec/torchaudio-Backend.
-    import numpy as np, wave
-    arr=tensor.squeeze(0).numpy()
+    if tensor.ndim>2:
+        tensor=tensor.reshape(tensor.shape[0],-1)
+    if tensor.shape[0]>1:
+        tensor=tensor.mean(dim=0,keepdim=True)
+    arr=tensor.squeeze(0).contiguous().numpy()
     arr=np.nan_to_num(arr,nan=0.0,posinf=0.0,neginf=0.0)
-    peak=float(np.max(np.abs(arr))) if arr.size else 1.0
-    if peak>1.0: arr=arr/peak
-    pcm=(np.clip(arr,-1.0,1.0)*32767.0).astype(np.int16)
+    peak=float(np.max(np.abs(arr))) if arr.size else 0.0
+    if peak>1.0:
+        arr=arr/peak
+    pcm=np.rint(np.clip(arr,-1.0,1.0)*32767.0).astype(np.int16)
+    path.parent.mkdir(parents=True,exist_ok=True)
     with wave.open(str(path),"wb") as wf:
         wf.setnchannels(1)
         wf.setsampwidth(2)
