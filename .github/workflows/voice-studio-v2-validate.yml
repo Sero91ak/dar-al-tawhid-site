@@ -456,7 +456,7 @@ jobs:
                   'if p=="/arabic-reference"',
               ]),
               ("kids",kids,[
-                  'alphabet-audio.json?v=1',
+                  'alphabet-audio.json?v=2',
                   'audioEvidenceComplete',
                   'PROGRESS_KEY="kids.alphabet.progress.v2."',
                   'reviewBucket',
@@ -484,7 +484,11 @@ jobs:
               ("manifest",manifest,[
                   '"syntheticFallback": false',
                   '"requireExplicitVerification": true',
-                  '"sourceVoice": "authorized-owner-voice"',
+                  '"arabicReference": "human-recording-free-license-fusha-msa-only"',
+                  '"acceptedLicenses"',
+                  '"externalSourceRule"',
+                  '"CC0-1.0"',
+                  '"CC-BY-4.0"',
               ]),
           ]
           errors=[]
