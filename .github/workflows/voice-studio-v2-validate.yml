@@ -456,7 +456,7 @@ jobs:
                   'if p=="/arabic-reference"',
               ]),
               ("kids",kids,[
-                  'alphabet-audio.json?v=2',
+                  'alphabet-audio.json?v=3',
                   'audioEvidenceComplete',
                   'PROGRESS_KEY="kids.alphabet.progress.v2."',
                   'reviewBucket',
@@ -489,6 +489,7 @@ jobs:
                   '"externalSourceRule"',
                   '"CC0-1.0"',
                   '"CC-BY-4.0"',
+                  '"CC-BY-3.0-US"',
               ]),
           ]
           errors=[]
@@ -515,7 +516,7 @@ jobs:
               errors.append("free-license external human Fuṣḥā/MSA sources missing")
           if '"sourcePage": "https://commons.wikimedia.org/wiki/' not in manifest:
               errors.append("Wikimedia source-page provenance missing")
-          if '"license": "CC0-1.0"' not in manifest or '"license": "CC-BY-4.0"' not in manifest:
+          if '"license": "CC0-1.0"' not in manifest or '"license": "CC-BY-4.0"' not in manifest or '"license": "CC-BY-3.0-US"' not in manifest:
               errors.append("required free-license metadata missing")
           if '"sourceLanguage": "Modern Standard Arabic (ara)"' not in manifest:
               errors.append("MSA source identity missing")
