@@ -2042,7 +2042,26 @@ def is_inline_arabic_micro_term(text:str):
     words=len([x for x in re.split(r"\s+",value) if x])
     return 0<letters<=12 and words<=3
 
-def trim_segment_edges(wav,sr:int,aggressive:bool=False,inline:bool=False):
+GERMAN_LINK_WORDS={
+    "der","die","das","den","dem","des",
+    "ein","eine","einen","einem","einer","eines",
+    "mein","meine","dein","deine","sein","seine","ihr","ihre",
+    "unser","unsere","euer","eure",
+    "für","mit","von","zu","zum","zur","bei","im","in","am","an","auf","über","unter",
+    "und","oder","aber","denn","auch","nur","selbst","durch"
+}
+
+def is_german_link_fragment(text:str):
+    """Kurzer Funktionswort-Block direkt vor/nach einem arabischen Fachbegriff.
+    Solche Wörter gehören prosodisch eng zum Nachbarwort: 'der Qurʾān', 'für Allāh'."""
+    words=[
+        re.sub(r"[^A-Za-zÄÖÜäöüß]+","",w).casefold()
+        for w in re.findall(r"\S+",str(text or ""))
+    ]
+    words=[w for w in words if w]
+    return 0<len(words)<=3 and all(w in GERMAN_LINK_WORDS for w in words)
+
+def trim_segment_edges(wav,sr:int,aggressive:bool=False,inline:bool=False,lexical:bool=False):
     """Randstille vor jedem internen Stitch entfernen.
 
     aggressive=True gilt für *alle* internen Satz-/Phrasengrenzen. inline=True
@@ -2063,6 +2082,8 @@ def trim_segment_edges(wav,sr:int,aggressive:bool=False,inline:bool=False):
     rel=float(CONTINUITY_CONFIG.get("trimThresholdRelative",0.0035))
     if aggressive:
         rel=max(rel,float(CONTINUITY_CONFIG.get("boundaryTrimThresholdRelative",0.006)))
+    if lexical:
+        rel=max(rel,float(CONTINUITY_CONFIG.get("lexicalBridgeTrimThresholdRelative",0.009)))
     if inline:
         rel=max(rel,float(CONTINUITY_CONFIG.get("inlineArabicTrimThresholdRelative",0.012)))
     threshold=max(peak*rel,1e-5)
@@ -2070,7 +2091,9 @@ def trim_segment_edges(wav,sr:int,aggressive:bool=False,inline:bool=False):
     if active.numel()==0:
         return w
 
-    if inline:
+    if lexical:
+        pad_ms=float(CONTINUITY_CONFIG.get("lexicalBridgeTrimSafetyMs",2))
+    elif inline:
         pad_ms=float(CONTINUITY_CONFIG.get("inlineArabicTrimSafetyMs",5))
     elif aggressive:
         pad_ms=float(CONTINUITY_CONFIG.get("boundaryTrimSafetyMs",8))
@@ -2470,11 +2493,12 @@ def gently_level_segments(items):
         out.append((w,*item[1:]))
     return out
 
-def crossfade_audio(left,right,sr:int,seconds:float,equal_power:bool=False):
+def crossfade_audio(left,right,sr:int,seconds:float,equal_power:bool=False,max_fraction:float=0.333):
     import torch
     a=normalize_segment_shape(left)
     b=normalize_segment_shape(right)
-    n=min(int(sr*seconds),a.shape[-1]//3,b.shape[-1]//3)
+    frac=max(0.20,min(0.49,float(max_fraction)))
+    n=min(int(sr*seconds),int(a.shape[-1]*frac),int(b.shape[-1]*frac))
     if n<8:
         return torch.cat([a,b],dim=-1)
 
@@ -2504,15 +2528,30 @@ def join_rendered_segments(items,sr:int):
             lang=="ar" and is_inline_arabic_micro_term(chunk)
             and (left_lang=="de" or right_lang=="de")
         )
+        next_inline_ar=(
+            lang=="de" and right_lang=="ar" and pos+1<len(items)
+            and is_inline_arabic_micro_term(items[pos+1][2])
+        )
+        prev_inline_ar=(
+            lang=="de" and left_lang=="ar" and pos>0
+            and is_inline_arabic_micro_term(items[pos-1][2])
+        )
+        lexical_bridge=bool(
+            lang=="de" and is_german_link_fragment(chunk)
+            and (next_inline_ar or prev_inline_ar)
+        )
         internal=(pos>0 or pos+1<len(items))
         before=normalize_segment_shape(wav)
         before_samples=int(before.shape[-1])
-        trimmed=trim_segment_edges(wav,sr,aggressive=internal,inline=inline_micro)
+        trimmed=trim_segment_edges(
+            wav,sr,aggressive=internal,inline=inline_micro,lexical=lexical_bridge
+        )
         removed=max(0,before_samples-int(trimmed.shape[-1]))
         edge_stats.append({
             "index":pos+1,
             "language":lang,
             "inline_micro":bool(inline_micro),
+            "lexical_bridge":bool(lexical_bridge),
             "trimmed_ms":round(removed/max(1,int(sr))*1000.0,2),
         })
         cleaned.append((trimmed,*item[1:]))
@@ -2534,6 +2573,13 @@ def join_rendered_segments(items,sr:int):
         prev_inline_ar=(prev_lang=="ar" and is_inline_arabic_micro_term(prev_chunk))
         cur_inline_ar=(lang=="ar" and is_inline_arabic_micro_term(chunk))
         inline_boundary=(prev_inline_ar and lang=="de") or (cur_inline_ar and prev_lang=="de")
+        lexical_into_ar=bool(
+            prev_lang=="de" and cur_inline_ar and is_german_link_fragment(prev_chunk)
+        )
+        lexical_out_of_ar=bool(
+            prev_inline_ar and lang=="de" and is_german_link_fragment(chunk)
+        )
+        lexical_boundary=lexical_into_ar or lexical_out_of_ar
 
         if sentence_end:
             factors=CONTINUITY_CONFIG.get("sentencePauseFactors") or {}
@@ -2558,8 +2604,16 @@ def join_rendered_segments(items,sr:int):
             full=torch.cat([full,silence,wav],dim=-1)
         else:
             ms=max(8,int(p["crossfade_ms"]))
-            if inline_boundary:
+            max_fraction=0.333
+            if lexical_boundary:
+                # Funktionswort + Fachbegriff ist *eine* lexikalische Einheit:
+                # "der Qurʾān", "für Allāh", "mit Ibrāhīm". Hier darf keine
+                # hörbare Sprachwechsel-Lücke entstehen.
+                ms=max(ms,int(CONTINUITY_CONFIG.get("lexicalBridgeCrossfadeMs",118)))
+                max_fraction=float(CONTINUITY_CONFIG.get("lexicalBridgeMaxFraction",0.46))
+            elif inline_boundary:
                 ms=max(ms,int(CONTINUITY_CONFIG.get("inlineArabicCrossfadeMs",72)))
+                max_fraction=float(CONTINUITY_CONFIG.get("inlineArabicMaxFraction",0.38))
             else:
                 # Auch rein deutsche Chunkgrenzen dürfen nicht wie zwei Aufnahmen
                 # klingen. Nicht-punktuierte Grenzen werden grundsätzlich als
@@ -2567,7 +2621,9 @@ def join_rendered_segments(items,sr:int):
                 ms=max(ms,int(CONTINUITY_CONFIG.get("internalFlowCrossfadeMs",52)))
                 if prev_lang!=lang:
                     ms=max(ms,int(CONTINUITY_CONFIG.get("languageCrossfadeMinMs",44)))
-            full=crossfade_audio(full,wav,sr,ms/1000.0,equal_power=True)
+            full=crossfade_audio(
+                full,wav,sr,ms/1000.0,equal_power=True,max_fraction=max_fraction
+            )
 
         boundary_stats.append({
             "index":boundary_idx,
@@ -2576,6 +2632,7 @@ def join_rendered_segments(items,sr:int):
             "sentence_end":bool(sentence_end),
             "soft_pause":bool(soft_pause),
             "inline_boundary":bool(inline_boundary),
+            "lexical_boundary":bool(lexical_boundary),
             "crossfade_ms":0 if (sentence_end or soft_pause) else int(ms),
         })
 
