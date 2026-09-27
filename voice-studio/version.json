@@ -161,7 +161,16 @@
     "originalMasterCanonicalTerms": 894,
     "originalMasterSha256": "b629a50c27ee4b73c2a0bac3c0856dfc67f8c2fbf1b2ef8df4a69689a524b14b",
     "alphabetArabicReferenceRequired": true,
-    "alphabetArabicReferencePath": "~/SerhatVoice/Serhat_AR_MASTER.wav"
+    "alphabetArabicReferencePath": "~/SerhatVoice/Serhat_AR_MASTER.wav",
+    "arabicReferenceImport": true,
+    "arabicReferenceImportFormats": [
+      "wav",
+      "m4a",
+      "aac",
+      "mp3"
+    ],
+    "arabicReferenceMinSeconds": 6,
+    "arabicReferenceMaxSeconds": 180
   },
   "releaseSafety": {
     "stagedInstaller": true,
