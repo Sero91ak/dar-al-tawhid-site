@@ -1,11 +1,11 @@
 {
   "schemaVersion": 8,
-  "id": "dar-own-voice-narration-v2.8.5",
+  "id": "dar-own-voice-narration-v2.8.6",
   "updatedAt": "2026-09-27",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade Serhat narration with automatic gapless joins across every unpunctuated segment boundary, structural boundary classification instead of per-word patches, verified-sentence fast reuse, strict sentence preflight, pause auto-repair, deterministic Islamic-name pronunciation, and strict final continuity QA.",
+  "productionGoal": "Production-grade Serhat narration with permanent user-confirmed pronunciation learning: confirmed words, canonical groups, aliases and their confirmed WAV locks persist locally across tasks, restarts and Voice Studio updates; backed up atomically and always override REVIEW suggestions.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -457,7 +457,11 @@
     "noGapBeforeKnownArabicTerm": true,
     "automaticBoundaryRegression": true,
     "noPerWordPatchDependency": true,
-    "unpunctuatedBoundaryMustBeGapless": true
+    "unpunctuatedBoundaryMustBeGapless": true,
+    "learnedCanonicalGroupPersistenceRegression": true,
+    "learnedAliasPersistenceRegression": true,
+    "learnedBackupRecoveryRegression": true,
+    "learnedMasterNeverReviewRegression": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -635,7 +639,17 @@
       "policy": "Do not treat higher rule count as proof of complete import; preserve every original match form semantically and validate against the source-of-truth manifest when available."
     },
     "pendingAutoRerenderAcrossMultipleCorrections": true,
-    "rerenderOnlyAfterLastUnresolvedTerm": true
+    "rerenderOnlyAfterLastUnresolvedTerm": true,
+    "localBackupPath": "~/SerhatVoice/PronunciationLearning/backups/user-overrides.latest.json",
+    "persistAcrossTasks": true,
+    "persistAcrossRestart": true,
+    "persistAcrossAppUpdates": true,
+    "confirmedCanonicalGroupBecomesMaster": true,
+    "confirmedAliasesBecomeMaster": true,
+    "confirmedNeverReturnsToReview": true,
+    "atomicLocalBackup": true,
+    "backupRecovery": true,
+    "userMasterAlwaysPrecedesReview": true
   },
   "productionRenderer": {
     "primaryAppleSilicon": "mlx-community/chatterbox-multilingual-v3",
@@ -679,6 +693,8 @@
     "automaticBoundaryClassification": true,
     "structuralNotWordSpecific": true,
     "automaticTightJoin": true,
-    "noGapOnUnpunctuatedBoundary": true
+    "noGapOnUnpunctuatedBoundary": true,
+    "preserveLearnedPronunciationAcrossUpdates": true,
+    "userLearnedMasterPriority": true
   }
 }
