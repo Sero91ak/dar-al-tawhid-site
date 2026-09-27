@@ -1,11 +1,11 @@
 {
   "schemaVersion": 8,
-  "id": "dar-own-voice-narration-v2.8.4",
+  "id": "dar-own-voice-narration-v2.8.5",
   "updatedAt": "2026-09-27",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade Serhat narration with strict sentence preflight, grammar-aware punctuation, verified-sentence fast reuse, automatic pause repair, and zero-gap lexical bridges for German function words before/after Arabic MASTER terms.",
+  "productionGoal": "Production-grade Serhat narration with automatic gapless joins across every unpunctuated segment boundary, structural boundary classification instead of per-word patches, verified-sentence fast reuse, strict sentence preflight, pause auto-repair, deterministic Islamic-name pronunciation, and strict final continuity QA.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -344,7 +344,16 @@
     "lexicalBridgeCrossfadeMs": 118,
     "lexicalBridgeMaxFraction": 0.46,
     "inlineArabicMaxFraction": 0.38,
-    "functionWordArabicBinding": true
+    "functionWordArabicBinding": true,
+    "automaticBoundaryClassification": true,
+    "structuralNotWordSpecific": true,
+    "automaticTightJoin": true,
+    "automaticTightJoinCrossfadeMs": 64,
+    "automaticTightJoinMaxFraction": 0.36,
+    "strongLexicalBridgeCrossfadeMs": 108,
+    "strongLexicalBridgeMaxFraction": 0.43,
+    "noGapOnUnpunctuatedBoundary": true,
+    "antiStutterOverlapCap": true
   },
   "qualityAssurance": {
     "maxRenderAttempts": 2,
@@ -445,7 +454,10 @@
     "knownSentenceReuse": true,
     "backendIndependentVerifiedCache": true,
     "lexicalBridgeRegression": true,
-    "noGapBeforeKnownArabicTerm": true
+    "noGapBeforeKnownArabicTerm": true,
+    "automaticBoundaryRegression": true,
+    "noPerWordPatchDependency": true,
+    "unpunctuatedBoundaryMustBeGapless": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -663,6 +675,10 @@
     "backendIndependentVerifiedCache": true,
     "autoRepairModeratePause": true,
     "lexicalBridgeEnabled": true,
-    "functionWordArabicBinding": true
+    "functionWordArabicBinding": true,
+    "automaticBoundaryClassification": true,
+    "structuralNotWordSpecific": true,
+    "automaticTightJoin": true,
+    "noGapOnUnpunctuatedBoundary": true
   }
 }
