@@ -2353,6 +2353,10 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 #alphabetModal .ab-practice-feedback{min-height:28px;margin:14px 0 0;font:800 15px/1.35 Fredoka,system-ui,sans-serif;color:rgba(255,255,255,.9)}
 #alphabetModal .ab-complete-mark{width:94px;height:94px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:rgba(82,196,132,.16);border:1px solid rgba(82,196,132,.42);font:900 48px/1 Fredoka,system-ui,sans-serif;color:#d5ffe5}
 #alphabetModal .ab-nav button:disabled{opacity:.42;cursor:not-allowed}
+#alphabetModal .ab-audio-status{min-height:20px;margin:2px 6px 4px;text-align:center;font:700 12px/1.35 Fredoka,system-ui,sans-serif;color:rgba(255,255,255,.68)}
+#alphabetModal .ab-audio-status.ok{color:#d5ffe5}
+#alphabetModal .ab-audio-status.warn{color:#ffe2a8}
+#alphabetModal .ab-h.audio-pending{opacity:.52;border:1px dashed rgba(255,226,168,.36)}
 #alphabetModal .lesson-steps{margin:2px 0 8px;flex:none;grid-template-columns:repeat(5,minmax(0,1fr))}
 .app[data-age="4–5"] #alphabetModal .lesson-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
@@ -2897,6 +2901,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
             <p class="ab-hint" id="abCompleteText"></p>
           </div>
         </div>
+        <p class="ab-audio-status" id="abAudioStatus" aria-live="polite"></p>
         <div class="ab-nav">
           <button type="button" id="abPrev">Zurück</button>
           <button type="button" class="ab-play" id="abPlay">Hören</button>
@@ -4524,8 +4529,11 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   var practiceMistakes=0;
   var practiceToken="";
   var completeMode=false;
+  var alphabetAudioManifest={letters:{}};
+  var alphabetAudioEl=null;
   var KEY="kids.alphabet.idx";
-  var MASTER_KEY="kids.alphabet.mastered.";
+  var LEGACY_MASTER_KEY="kids.alphabet.mastered.";
+  var PROGRESS_KEY="kids.alphabet.progress.v2.";
 
   function ageKey(){
     try{return localStorage.getItem("kids.age")||"6–8"}catch(e){return "6–8"}
@@ -4545,51 +4553,181 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   function ageExplanation(item,a){
     return item&&item.ages&&item.ages[a]?String(item.ages[a]):"";
   }
-  function mastered(a){
+  function progressMap(a){
+    var key=PROGRESS_KEY+a;
+    var map={};
     try{
-      var raw=JSON.parse(localStorage.getItem(MASTER_KEY+a)||"[]");
-      return Array.isArray(raw)?raw:[];
-    }catch(e){return []}
+      var raw=JSON.parse(localStorage.getItem(key)||"{}");
+      if(raw&&typeof raw==="object"&&!Array.isArray(raw))map=raw;
+    }catch(e){}
+    try{
+      var legacy=JSON.parse(localStorage.getItem(LEGACY_MASTER_KEY+a)||"[]");
+      if(Array.isArray(legacy)){
+        legacy.forEach(function(id){
+          if(!map[id])map[id]={
+            stage:"learning",attempts:1,firstTryPasses:1,wrong:0,reviewPasses:1,
+            dueAt:Date.now(),lastSeenAt:Date.now(),audio:{name:false,word:false,harakat:[]}
+          };
+        });
+        localStorage.removeItem(LEGACY_MASTER_KEY+a);
+        localStorage.setItem(key,JSON.stringify(map));
+      }
+    }catch(e){}
+    return map;
   }
-  function markMastered(a,id){
-    var list=mastered(a);
-    if(list.indexOf(id)<0)list.push(id);
-    try{localStorage.setItem(MASTER_KEY+a,JSON.stringify(list))}catch(e){}
-    return list;
+  function saveProgress(a,map){
+    try{localStorage.setItem(PROGRESS_KEY+a,JSON.stringify(map||{}))}catch(e){}
   }
-  function voiceFor(lang){
-    if(!speech||typeof speech.getVoices!=="function")return null;
-    var want=String(lang||"").toLowerCase();
-    var base=want.split("-")[0];
-    var voices=speech.getVoices()||[];
-    return voices.find(function(v){return String(v.lang||"").toLowerCase()===want})||
-      voices.find(function(v){return String(v.lang||"").toLowerCase().indexOf(base)===0})||null;
+  function progressEntry(a,id){
+    var map=progressMap(a);
+    return map[id]||{stage:"new",attempts:0,firstTryPasses:0,wrong:0,reviewPasses:0,dueAt:0,lastSeenAt:0,audio:{name:false,word:false,harakat:[]}};
   }
-  function speakSequence(parts){
+  function audioSlot(id,kind,key){
+    var letter=alphabetAudioManifest&&alphabetAudioManifest.letters&&alphabetAudioManifest.letters[id];
+    if(!letter)return null;
+    var slot=kind==="harakat"?(letter.harakat&&letter.harakat[key]):letter[kind];
+    if(!slot||slot.verified!==true||!String(slot.url||"").trim())return null;
+    return slot;
+  }
+  function requiredHarakatKeys(a){
+    return a==="4–5"?["fatha"]:["fatha","kasra","damma"];
+  }
+  function audioEvidenceComplete(a,id,entry){
+    var ev=(entry&&entry.audio)||{};
+    if(!ev.name||!ev.word)return false;
+    var heard=Array.isArray(ev.harakat)?ev.harakat:[];
+    return requiredHarakatKeys(a).every(function(k){return heard.indexOf(k)>=0});
+  }
+  function allRequiredAudioPublished(a,id){
+    if(!audioSlot(id,"name")||!audioSlot(id,"word"))return false;
+    return requiredHarakatKeys(a).every(function(k){return !!audioSlot(id,"harakat",k)});
+  }
+  function recordAudioEvidence(a,id,kind,key){
+    var map=progressMap(a);
+    var e=map[id]||progressEntry(a,id);
+    e.audio=e.audio&&typeof e.audio==="object"?e.audio:{name:false,word:false,harakat:[]};
+    if(kind==="harakat"){
+      e.audio.harakat=Array.isArray(e.audio.harakat)?e.audio.harakat:[];
+      if(e.audio.harakat.indexOf(key)<0)e.audio.harakat.push(key);
+    }else e.audio[kind]=true;
+    if(e.reviewPasses>=3&&audioEvidenceComplete(a,id,e))e.stage="secure";
+    map[id]=e;saveProgress(a,map);
+  }
+  function recordPractice(a,id,firstTry,mistakes){
+    var map=progressMap(a);
+    var e=map[id]||progressEntry(a,id);
+    var now=Date.now();
+    e.audio=e.audio&&typeof e.audio==="object"?e.audio:{name:false,word:false,harakat:[]};
+    e.attempts=Number(e.attempts||0)+1;
+    e.wrong=Number(e.wrong||0)+Math.max(0,Number(mistakes||0));
+    e.lastSeenAt=now;
+    var counted=false;
+    if(firstTry){
+      e.firstTryPasses=Number(e.firstTryPasses||0)+1;
+      if(!e.dueAt||now>=Number(e.dueAt||0)){
+        e.reviewPasses=Number(e.reviewPasses||0)+1;
+        counted=true;
+        if(e.reviewPasses===1)e.dueAt=now+10*60*1000;
+        else if(e.reviewPasses===2)e.dueAt=now+24*60*60*1000;
+        else e.dueAt=now+7*24*60*60*1000;
+      }
+    }else{
+      e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
+      e.dueAt=now+5*60*1000;
+    }
+    if(e.reviewPasses>=3&&audioEvidenceComplete(a,id,e))e.stage="secure";
+    else if(e.reviewPasses>=2)e.stage="review";
+    else e.stage="learning";
+    map[id]=e;saveProgress(a,map);
+    return {entry:e,counted:counted,firstTry:firstTry};
+  }
+  function progressStats(a){
+    var map=progressMap(a),secure=0,learning=0,due=0,open=0,now=Date.now();
+    letters.forEach(function(l){
+      var e=map[l.id];
+      if(!e){open+=1;return}
+      if(e.stage==="secure")secure+=1;
+      else{learning+=1;if(!e.dueAt||Number(e.dueAt)<=now)due+=1}
+    });
+    return {secure:secure,learning:learning,due:due,open:open};
+  }
+  function nextReviewIndex(a){
+    var map=progressMap(a),now=Date.now(),best=-1,bestDue=Infinity;
+    for(var i=0;i<letters.length;i++){
+      var e=map[letters[i].id];
+      if(!e)return i;
+      if(e.stage==="secure")continue;
+      var due=Number(e.dueAt||0);
+      if(due<=now)return i;
+      if(due<bestDue){best=i;bestDue=due}
+    }
+    return best>=0?best:0;
+  }
+  function setAudioStatus(message,state){
+    var el=document.getElementById("abAudioStatus");
+    if(!el)return;
+    el.textContent=message||"";
+    el.classList.remove("ok","warn");
+    if(state)el.classList.add(state);
+  }
+  function stopAlphabetAudio(){
+    if(alphabetAudioEl){
+      try{alphabetAudioEl.pause();alphabetAudioEl.currentTime=0}catch(e){}
+      alphabetAudioEl=null;
+    }
+  }
+  window.stopKidsAlphabetAudio=stopAlphabetAudio;
+  function playVerifiedSlot(item,kind,key,onDone){
+    var slot=audioSlot(item.id,kind,key);
+    if(!slot){
+      setAudioStatus("Referenzaufnahme noch nicht freigegeben.","warn");
+      return false;
+    }
+    stopAlphabetAudio();
+    var url=String(slot.url||"");
+    if(!(url.indexOf("/")===0||/^https:\/\//i.test(url))){
+      setAudioStatus("Ungültiger Audio-Pfad.","warn");
+      return false;
+    }
+    var audio=new Audio(url);
+    alphabetAudioEl=audio;
+    audio.preload="auto";
+    audio.onended=function(){
+      recordAudioEvidence(ageKey(),item.id,kind,key||"");
+      alphabetAudioEl=null;
+      setAudioStatus("Geprüfte Referenzaufnahme.","ok");
+      if(typeof onDone==="function")onDone();
+      updateHeader(item,ageKey());
+    };
+    audio.onerror=function(){
+      alphabetAudioEl=null;
+      setAudioStatus("Freigegebene Aufnahme konnte nicht geladen werden.","warn");
+    };
+    audio.play().catch(function(){
+      alphabetAudioEl=null;
+      setAudioStatus("Audio konnte auf diesem Gerät nicht gestartet werden.","warn");
+    });
+    return true;
+  }
+  function playVerifiedSequence(item,specs,index,onDone){
+    var list=Array.isArray(specs)?specs:[];
+    var i=Number(index||0);
+    if(i>=list.length){if(typeof onDone==="function")onDone();return true}
+    var s=list[i];
+    return playVerifiedSlot(item,s.kind,s.key,function(){playVerifiedSequence(item,list,i+1,onDone)});
+  }
+  function speakGerman(text){
     if(!speech||typeof SpeechSynthesisUtterance==="undefined")return false;
     try{speech.cancel()}catch(e){}
-    var voices=typeof speech.getVoices==="function"?(speech.getVoices()||[]):[];
-    var spoken=0;
-    (parts||[]).filter(function(p){return p&&String(p.text||"").trim()}).forEach(function(p){
-      var lang=p.lang||"de-DE";
-      var v=voiceFor(lang);
-      if(/^ar/i.test(lang)&&voices.length&&!v)return;
-      var u=new SpeechSynthesisUtterance(String(p.text||"").trim());
-      u.lang=lang;
-      if(v)u.voice=v;
-      if(/^ar/i.test(u.lang)){u.rate=.68;u.pitch=.96}
-      else{u.rate=ageKey()==="4–5"?.80:.88;u.pitch=.96}
-      speech.speak(u);spoken+=1;
-    });
-    return spoken>0;
+    var u=new SpeechSynthesisUtterance(String(text||""));
+    u.lang="de-DE";u.rate=ageKey()==="4–5"?.80:.88;u.pitch=.96;
+    speech.speak(u);return true;
   }
-  function speakArabic(text){speakSequence([{text:text,lang:"ar-SA"}])}
-  function speakGerman(text){speakSequence([{text:text,lang:"de-DE"}])}
   function updateHeader(item,a){
     var lab=document.getElementById("abAgeLabel");
     if(!lab)return;
-    var count=mastered(a).length;
-    lab.textContent="Buchstabe "+(idx+1)+" / "+letters.length+" · "+count+" geübt · "+a+" Jahre";
+    var s=progressStats(a);
+    lab.textContent="Buchstabe "+(idx+1)+" / "+letters.length+" · "+s.secure+" sicher · "+s.learning+" lernen";
   }
   var similar={
     alif:["lam","dal"],ba:["ta","tha","nun","ya"],ta:["ba","tha","nun"],tha:["ta","ba","shin"],
@@ -4637,10 +4775,14 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
           practicePassed=true;
           b.classList.add("correct");
           box.querySelectorAll("button").forEach(function(x){x.disabled=true});
-          var list=markMastered(a,item.id);
-          feedback.textContent="Richtig! Das ist "+item.nameDe+".";
+          var result=recordPractice(a,item.id,practiceMistakes===0,practiceMistakes);
+          var secure=result.entry&&result.entry.stage==="secure";
+          if(secure)feedback.textContent="Richtig! "+item.nameDe+" ist jetzt sicher.";
+          else if(practiceMistakes>0)feedback.textContent="Richtig – wir wiederholen "+item.nameDe+" später noch einmal.";
+          else if(result.counted)feedback.textContent="Richtig. Wiederholung gespeichert.";
+          else feedback.textContent="Richtig. Die nächste Wiederholung zählt erst später für „sicher“.";
           updateHeader(item,a);
-          speakSequence([{text:item.nameAr||item.ar,lang:"ar-SA"},{text:"Richtig.",lang:"de-DE"}]);
+          if(!playVerifiedSlot(item,"name","",function(){speakGerman("Richtig.");}))speakGerman("Richtig.");
           var next=document.getElementById("abNext");
           if(next)next.textContent=idx===letters.length-1?"Fertig":"Nächster";
         }else{
@@ -4664,21 +4806,22 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
       document.querySelectorAll("#alphabetModal .lesson-step").forEach(function(el){
         el.classList.remove("active");el.classList.add("done");
       });
-      var count=mastered(a).length;
+      var summary=progressStats(a);
       var lab=document.getElementById("abAgeLabel");
-      if(lab)lab.textContent="Runde abgeschlossen · "+count+" / "+letters.length+" geübt · "+a+" Jahre";
+      if(lab)lab.textContent="Runde abgeschlossen · "+summary.secure+" sicher · "+summary.learning+" lernen";
       var title=document.getElementById("abCompleteTitle");
-      if(title)title.textContent=count===letters.length?"Runde geschafft":"Ende erreicht";
+      if(title)title.textContent=summary.secure===letters.length?"Alle Buchstaben sicher":"Runde beendet";
       var txt=document.getElementById("abCompleteText");
-      if(txt)txt.textContent=count===letters.length?
-        "Alle 28 Buchstaben wurden in dieser Altersstufe mindestens einmal richtig erkannt.":
-        count+" von "+letters.length+" Buchstaben wurden bisher richtig erkannt. Die übrigen Buchstaben sind noch offen.";
+      if(txt)txt.textContent=summary.secure===letters.length?
+        "Alle 28 Buchstaben erfüllen die Wiederholungs- und Audio-Bedingungen.":
+        summary.secure+" sicher · "+summary.learning+" im Lernen · "+summary.open+" noch offen. „Sicher“ gibt es erst nach zeitlich getrennten Wiederholungen und gehörten, freigegebenen Referenzaufnahmen.";
       var prevDone=document.getElementById("abPrev");
       var playDone=document.getElementById("abPlay");
       var nextDone=document.getElementById("abNext");
       if(prevDone){prevDone.disabled=false;prevDone.textContent="Zurück"}
       if(playDone){playDone.disabled=true;playDone.textContent="Hören"}
-      if(nextDone){nextDone.disabled=false;nextDone.textContent="Von vorne"}
+      setAudioStatus("Nur menschlich freigegebene Referenzaufnahmen zählen für „sicher“.","warn");
+      if(nextDone){nextDone.disabled=false;nextDone.textContent=summary.secure===letters.length?"Neue Runde":"Unsichere üben"}
       return;
     }
     if(step>=plan.length)step=0;
@@ -4723,12 +4866,16 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
       har.innerHTML="";
       var list=item.harakat||[];
       if(a==="4–5")list=list.slice(0,1);
-      list.forEach(function(h){
+      var hk=["fatha","kasra","damma"];
+      list.forEach(function(h,hi){
+        var key=hk[hi]||("h"+(hi+1));
+        var ready=!!audioSlot(item.id,"harakat",key);
         var b=document.createElement("button");
         b.type="button";
-        b.className="ab-h";
+        b.className="ab-h"+(ready?"":" audio-pending");
         b.innerHTML="<b lang=\"ar\" dir=\"rtl\">"+(h.ar||"")+"</b><small>"+kidLaut(h.laut||"")+"</small>";
-        b.addEventListener("click",function(){speakArabic(h.ar||"")});
+        b.setAttribute("aria-label",(h.laut||"")+" anhören");
+        b.addEventListener("click",function(){playVerifiedSlot(item,"harakat",key)});
         har.appendChild(b);
       });
     }
@@ -4785,7 +4932,17 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     var prevBtn=document.getElementById("abPrev");
     var playBtn=document.getElementById("abPlay");
     if(prevBtn){prevBtn.disabled=idx===0&&step===0;prevBtn.textContent="Zurück"}
-    if(playBtn){playBtn.disabled=false;playBtn.textContent="Hören"}
+    var audioReady=false;
+    if(pane==="see"||pane==="practice")audioReady=!!audioSlot(item.id,"name");
+    else if(pane==="word")audioReady=!!audioSlot(item.id,"word");
+    else if(pane==="sound")audioReady=requiredHarakatKeys(a).every(function(k){return !!audioSlot(item.id,"harakat",k)});
+    else if(pane==="form")audioReady=true;
+    if(playBtn){playBtn.disabled=!audioReady;playBtn.textContent="Hören"}
+    if(pane==="form")setAudioStatus("Formen werden visuell gelernt.","");
+    else if(audioReady)setAudioStatus("Geprüfte Referenzaufnahme verfügbar.","ok");
+    else if(pane==="sound")setAudioStatus("Ḥarakāt-Aufnahmen noch nicht vollständig freigegeben.","warn");
+    else if(pane==="word")setAudioStatus("Wortaufnahme noch nicht freigegeben.","warn");
+    else setAudioStatus("Referenzaufnahme noch nicht freigegeben.","warn");
     try{localStorage.setItem(KEY,String(idx))}catch(e){}
   }
   function goStep(dir){
@@ -4802,7 +4959,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
         practicePassed=true;
       }else{
         completeMode=false;
-        idx=0;
+        idx=progressStats(a).secure===letters.length?0:nextReviewIndex(a);
         step=0;
         practiceToken="";
         practicePassed=false;
@@ -4847,22 +5004,22 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     var a=ageKey();
     var pane=stepsForAge(a)[step];
     if(pane==="see"){
-      speakSequence([{text:item.nameAr||item.ar,lang:"ar-SA"}]);
+      playVerifiedSlot(item,"name","");
     }else if(pane==="sound"){
-      var list=item.harakat||[];
-      if(a==="4–5")list=list.slice(0,1);
-      speakSequence(list.map(function(x){return {text:x.ar||"",lang:"ar-SA"}}));
+      var specs=requiredHarakatKeys(a).map(function(k){return {kind:"harakat",key:k}});
+      playVerifiedSequence(item,specs,0);
     }else if(pane==="word"){
-      speakSequence([{text:item.wordAr||"",lang:"ar-SA"},{text:item.wordDe||"",lang:"de-DE"}]);
+      playVerifiedSlot(item,"word","");
     }else if(pane==="form"){
       speakGerman(item.connect==="left-none"?
         "Dieser Buchstabe verbindet sich nicht mit dem nächsten Buchstaben.":
         "Dieser Buchstabe kann sich mit dem vorherigen und dem nächsten Buchstaben verbinden.");
     }else{
-      speakSequence([{text:"Finde den Buchstaben.",lang:"de-DE"},{text:item.nameAr||item.ar,lang:"ar-SA"}]);
+      if(!playVerifiedSlot(item,"name",""))setAudioStatus("Hörhilfe noch nicht freigegeben – die Übung bleibt visuell.","warn");
     }
   }
   function openAlphabet(){
+    stopAlphabetAudio();
     step=0;
     practiceToken="";
     practicePassed=false;
@@ -4874,8 +5031,13 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   }
   window.kidsAlphabetOnAge=function(){step=0;practiceToken="";practicePassed=false;practiceMistakes=0;completeMode=false;render()};
   window.openAlphabet=openAlphabet;
-  fetch("/test/kids/data/alphabet-kids.json?v=6",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(data){
+  Promise.all([
+    fetch("/test/kids/data/alphabet-kids.json?v=7",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
+    fetch("/test/kids/data/alphabet-audio.json?v=1",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
+  ]).then(function(result){
+    var data=result[0],audioData=result[1];
     letters=(data&&data.letters)||[];
+    alphabetAudioManifest=audioData&&audioData.letters?audioData:{letters:{}};
     try{idx=Math.max(0,Math.min(letters.length-1,Number(localStorage.getItem(KEY)||"0")))}catch(e){idx=0}
     var dots=document.getElementById("abDots");
     if(dots)dots.innerHTML="";
@@ -5200,7 +5362,7 @@ document.querySelectorAll("[data-close]").forEach(function(b){
     if(type==="quiz"){try{speech.cancel()}catch(e){} document.getElementById("quizModal").classList.remove("open")}
     if(type==="quran"){stopQuran();releaseMicStream();document.getElementById("quranModal").classList.remove("open")}
     if(type==="fullquran"){document.getElementById("fullQuranModal").classList.remove("open")}
-    if(type==="alphabet"){try{speech.cancel()}catch(e){} document.getElementById("alphabetModal").classList.remove("open")}
+    if(type==="alphabet"){try{speech.cancel()}catch(e){} if(window.stopKidsAlphabetAudio)window.stopKidsAlphabetAudio();document.getElementById("alphabetModal").classList.remove("open")}
   });
 });
 
