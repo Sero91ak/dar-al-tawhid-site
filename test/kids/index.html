@@ -2664,7 +2664,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
         <div class="label-row"><strong>Lernfortschritt</strong><span style="color:var(--sage);font-size:11px">LOKAL</span></div>
         <div class="parent-progress-grid">
           <div class="parent-progress-stat"><strong id="parentStoriesDone">0</strong><span>Geschichten sicher</span></div>
-          <div class="parent-progress-stat"><strong id="parentDuasDone">0</strong><span>Duʿāʾ gelernt</span></div>
+          <div class="parent-progress-stat"><strong id="parentDuasDone">0</strong><span>Duʿāʾ sicher</span></div>
           <div class="parent-progress-stat"><strong id="parentQuizCorrect">0</strong><span>Quizfragen richtig</span></div>
           <div class="parent-progress-stat"><strong id="parentTodayDone">0/3</strong><span>Heute geschafft</span></div>
           <div class="parent-progress-stat"><strong id="parentQuranResume">–</strong><span>Letzter Qurʾān-Stand</span></div>
@@ -2921,7 +2921,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab39";
+const KIDS_BUILD_ID="kids-shell-v12-tab40";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -3078,6 +3078,7 @@ var verifiedKnowledge=[];
 var currentKnowledge=null;
 var currentDuaIndex=0;
 var duaQuestionPassed=false;
+var duaQuestionHadError=false;
 var currentQuiz=[];
 var currentQuizIndex=0;
 var quizLocked=false;
@@ -3229,7 +3230,7 @@ function updateParentProgress(){
   });
   var duaCount=0;
   kidsDuas.forEach(function(d){
-    try{if(localStorage.getItem("kids.dua."+d.id)==="1")duaCount++}catch(e){}
+    try{if(duaProgress(d.id).stage==="secure")duaCount++}catch(e){}
   });
   var quizCount=0;
   try{quizCount=Number(localStorage.getItem("kids.quiz.correct")||"0")}catch(e){}
@@ -4380,6 +4381,72 @@ function fetchKidsDuas(){
       return [];
     });
 }
+var DUA_PROGRESS_PREFIX="kids.dua.progress.v2.";
+function duaProgressDefault(){
+  return {stage:"new",attempts:0,reviewPasses:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0};
+}
+function duaProgress(id){
+  var storageKey=DUA_PROGRESS_PREFIX+id;
+  try{
+    var raw=JSON.parse(localStorage.getItem(storageKey)||"null");
+    if(raw&&typeof raw==="object"){
+      var base=duaProgressDefault();
+      Object.keys(base).forEach(function(k){if(raw[k]===undefined)raw[k]=base[k]});
+      return raw;
+    }
+    if(localStorage.getItem("kids.dua."+id)==="1"){
+      var migrated=duaProgressDefault();
+      migrated.stage="learning";
+      migrated.attempts=1;
+      migrated.reviewPasses=1;
+      migrated.dueAt=Date.now();
+      migrated.lastSeenAt=Date.now();
+      localStorage.setItem(storageKey,JSON.stringify(migrated));
+      return migrated;
+    }
+  }catch(e){}
+  return duaProgressDefault();
+}
+function saveDuaProgress(id,entry){
+  try{localStorage.setItem(DUA_PROGRESS_PREFIX+id,JSON.stringify(entry||duaProgressDefault()))}catch(e){}
+}
+function recordDuaAttempt(id,firstTry){
+  var e=duaProgress(id);
+  var now=Date.now();
+  e.attempts=Number(e.attempts||0)+1;
+  e.lastSeenAt=now;
+  var counted=false;
+  if(firstTry){
+    e.consecutiveFirstTry=Number(e.consecutiveFirstTry||0)+1;
+    if(!e.dueAt||now>=Number(e.dueAt||0)){
+      e.reviewPasses=Number(e.reviewPasses||0)+1;
+      counted=true;
+      if(e.reviewPasses===1)e.dueAt=now+10*60*1000;
+      else if(e.reviewPasses===2)e.dueAt=now+24*60*60*1000;
+      else e.dueAt=now+7*24*60*60*1000;
+    }
+  }else{
+    e.wrong=Number(e.wrong||0)+1;
+    e.lapses=Number(e.lapses||0)+1;
+    e.lastMistakeAt=now;
+    e.consecutiveFirstTry=0;
+    e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
+    e.dueAt=now+5*60*1000;
+  }
+  if(e.reviewPasses>=3)e.stage="secure";
+  else if(e.reviewPasses>=2)e.stage="review";
+  else e.stage="learning";
+  saveDuaProgress(id,e);
+  return{entry:e,counted:counted,firstTry:firstTry};
+}
+function duaProgressLabel(id){
+  var e=duaProgress(id),now=Date.now();
+  if(e.stage==="secure")return Number(e.dueAt||0)<=now?"Wiederholung fällig":"✓ Sicher gelernt";
+  if(e.attempts&&Number(e.dueAt||0)>now)return"✓ Wiederholung später";
+  if(e.attempts)return"Wiederholung fällig";
+  return"";
+}
+
 function openDailyDua(){
   if(!kidsDuas.length){
     fetchKidsDuas().then(function(){
@@ -4433,6 +4500,7 @@ function openDuaAt(index){
   currentDuaIndex=(Number(index)||0)%list.length;
   if(currentDuaIndex<0)currentDuaIndex=list.length-1;
   duaQuestionPassed=false;
+  duaQuestionHadError=false;
   document.getElementById("duaModal").classList.add("open");
   renderDua();
 }
@@ -4441,9 +4509,9 @@ function renderDua(){
   var list=filteredDuas();
   var d=list[currentDuaIndex];
   if(!d)return;
-  var done=false;
-  try{done=localStorage.getItem("kids.dua."+d.id)==="1"}catch(e){}
-  duaQuestionPassed=done;
+  var progress=duaProgress(d.id);
+  duaQuestionPassed=false;
+  var progressText=duaProgressLabel(d.id);
   var older="";
   if(d.olderNote&&age!=="4–5"){
     older='<div class="dua-old-note"><strong>'+d.olderNote.title+'</strong><div class="ar">'+d.olderNote.arabic+'</div><div class="dua-tr">'+d.olderNote.transliteration+'</div></div>';
@@ -4462,14 +4530,13 @@ function renderDua(){
     '<div class="dua-actions '+(d.type==="quran"&&Array.isArray(d.quranRefs)&&d.quranRefs.length?"has-quran":"")+'">'+
       (d.type==="quran"&&Array.isArray(d.quranRefs)&&d.quranRefs.length?'<button id="duaQuranAudio" class="dua-quran-audio"> Qurʾān hören</button>':'')+
       '<button id="duaListen" class="dua-listen"> Erklärung hören</button><button id="duaNextItem" class="dua-next-item">Nächstes Duʿāʾ ›</button></div>'+
-    '<div class="dua-question"><h3>'+d.quiz.question+'</h3><div id="duaAnswers" class="dua-answer-grid"></div><div id="duaFeedback" class="dua-feedback">'+(done?"✓ Schon gelernt":"")+'</div></div>'+
+    '<div class="dua-question"><h3>'+d.quiz.question+'</h3><div id="duaAnswers" class="dua-answer-grid"></div><div id="duaFeedback" class="dua-feedback">'+progressText+'</div></div>'+
     '<div class="dua-source">'+d.source+(sourceLink?' · '+sourceLink:'')+'</div>';
   var answers=document.getElementById("duaAnswers");
   d.quiz.answers.forEach(function(a){
     var b=document.createElement("button");
     b.className="dua-answer";
     b.textContent=a.label;
-    if(done&&a.correct)b.classList.add("correct");
     b.addEventListener("click",function(){
       if(duaQuestionPassed)return;
       var fb=document.getElementById("duaFeedback");
@@ -4477,12 +4544,15 @@ function renderDua(){
         duaQuestionPassed=true;
         b.classList.add("correct");
         fb.className="dua-feedback good";
-        fb.textContent="✓ Richtig. Sehr gut!";
-        try{localStorage.setItem("kids.dua."+d.id,"1")}catch(e){}
+        var duaResult=recordDuaAttempt(d.id,!duaQuestionHadError);
+        if(duaResult.entry&&duaResult.entry.stage==="secure")fb.textContent="✓ Richtig. Sicher gelernt.";
+        else if(!duaQuestionHadError&&!duaResult.counted)fb.textContent="✓ Richtig. Wiederholung später.";
+        else fb.textContent="✓ Richtig. Sehr gut!";
         markDailyDone("dua");
         updateParentProgress();
         quizSpeak("Richtig. Sehr gut.");
       }else{
+        duaQuestionHadError=true;
         b.classList.add("wrong");
         fb.className="dua-feedback bad";
         fb.textContent="Noch nicht. Hör die Erklärung noch einmal.";
@@ -4506,9 +4576,11 @@ function renderDua(){
   });
   document.getElementById("duaNextItem").addEventListener("click",function(){
     currentDuaIndex=(currentDuaIndex+1)%list.length;
+    duaQuestionPassed=false;
+    duaQuestionHadError=false;
     renderDua();
   });
-  if(!done)setTimeout(function(){quizSpeak(d.childPrompt+" "+d.meaning)},260);
+  if(!progress.attempts||Number(progress.dueAt||0)<=Date.now())setTimeout(function(){quizSpeak(d.childPrompt+" "+d.meaning)},260);
 }
 document.getElementById("openDuaButton").addEventListener("click",function(){
   if(!kidsDuas.length){
