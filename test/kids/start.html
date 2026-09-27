@@ -2077,63 +2077,6 @@ html,body,.app,.ambient{
 #view-today .kids-wordmark{
   margin-top:max(10px, env(safe-area-inset-top, 0px))!important;
 }
-
-/* KIDS_WORDMARK_SKY_V33 — Titel im Himmel über der Moschee, groß und kurvig */
-#view-today .kids-wordmark{
-  position:absolute!important;
-  top:max(2px, env(safe-area-inset-top, 0px))!important;
-  left:50%!important;
-  transform:translateX(-50%)!important;
-  width:min(96vw, 680px)!important;
-  margin:0!important;
-  z-index:6!important;
-  pointer-events:none;
-}
-#view-today .wm-dar-wrap{
-  position:relative;
-  width:100%;
-  overflow:visible;
-}
-#view-today .wm-dar-svg{
-  display:block!important;
-  width:100%!important;
-  height:clamp(88px, 26vw, 136px)!important;
-  overflow:visible!important;
-  filter:drop-shadow(0 2px 0 rgba(255,255,255,.42)) drop-shadow(0 12px 22px rgba(8,24,36,.38));
-  animation:darFloat 4.2s ease-in-out infinite;
-}
-@keyframes darFloat{
-  0%,100%{transform:translateY(0) scale(1)}
-  50%{transform:translateY(-7px) scale(1.02)}
-}
-#view-today .wm-dar-fx{
-  position:absolute;
-  inset:-12% -8%;
-  pointer-events:none;
-  border-radius:40%;
-  background:linear-gradient(115deg, transparent 28%, rgba(255,255,255,.78) 50%, transparent 72%);
-  background-size:220% 100%;
-  mix-blend-mode:soft-light;
-  animation:darShine 3.5s ease-in-out infinite;
-}
-@keyframes darShine{
-  0%{background-position:-90% 0;opacity:.2}
-  45%{opacity:1}
-  100%{background-position:190% 0;opacity:.15}
-}
-#view-today .wm-kids{
-  font-size:clamp(34px, 10.8vw, 56px)!important;
-  margin-top:-10px!important;
-}
-#view-today .hero::before{
-  background-position:center 52%!important;
-}
-@media(min-width:700px){
-  #view-today .wm-kids{font-size:60px!important}
-}
-@media(max-width:380px){
-  #view-today .wm-kids{font-size:32px!important}
-}
 .page-head{
   padding-top:max(12px, env(safe-area-inset-top, 0px))!important;
   margin-top:0!important;
@@ -2210,7 +2153,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
   background:radial-gradient(circle at 35% 35%,#fff8e6,#f3d592 58%,#c9a15a);
   box-shadow:0 0 22px rgba(255,220,150,.5);
 }
-#view-today .wm-dar-svg{width:100%!important;height:clamp(88px,26vw,136px)!important}
+#view-today .wm-dar-svg{width:min(100%,560px)!important;height:78px!important}
 #view-stories.view.active{animation:openSide .62s cubic-bezier(.16,1,.3,1)}
 #view-quran.view.active{animation:openRise .62s cubic-bezier(.16,1,.3,1)}
 #view-parents.view.active{animation:openCalm .62s cubic-bezier(.16,1,.3,1)}
@@ -2260,7 +2203,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .profile-list button{text-align:left;border-radius:14px;min-height:46px;border:0;background:rgba(255,255,255,.06);color:#fff;padding:8px 12px}
 
 @media(prefers-reduced-motion:reduce){
-  #view-today .wm-dar-svg,#view-today .wm-dar-fx,#view-today .wm-kids span,.kid-pop{animation:none!important}
+  .kids-sky *,#view-today .wm-dar-svg,#view-today .wm-kids span,.kid-pop{animation:none!important}
 }
 
 
@@ -2398,8 +2341,29 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .app[data-age="4–5"] #alphabetModal .ab-dots{display:none}
 #alphabetModal .ab-dot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.18);cursor:pointer}
 #alphabetModal .ab-dot.on{background:#e2bd72;transform:scale(1.25)}
-#alphabetModal .lesson-steps{margin:2px 0 8px;flex:none}
-.app[data-age="4–5"] #alphabetModal .lesson-steps{gap:6px}
+#alphabetModal .ab-dots{flex-wrap:nowrap;gap:3px;overflow:hidden}
+#alphabetModal .ab-dot{width:6px;height:6px;min-width:6px}
+#alphabetModal .lesson-steps{margin:2px 0 8px;flex:none;grid-template-columns:repeat(5,minmax(0,1fr))}
+#alphabetModal .ab-practice-title{margin:0 0 16px;font:800 clamp(20px,6vw,28px)/1.25 Fredoka,system-ui,sans-serif;color:#fff8e6}
+#alphabetModal .ab-practice-stimulus{min-height:0;margin:0 0 12px;font-family:"Noto Naskh Arabic","Amiri",serif;font-size:clamp(62px,18vw,92px);line-height:1;color:#fff8e6}
+#alphabetModal .ab-practice-stimulus:empty{display:none}
+#alphabetModal .ab-practice-choice.ab-practice-latin{font-family:Fredoka,system-ui,sans-serif;font-size:clamp(24px,8vw,38px)}
+#alphabetModal .ab-practice-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:100%;max-width:520px;margin:0 auto}
+.app[data-age="4–5"] #alphabetModal .ab-practice-choices{grid-template-columns:repeat(2,minmax(0,1fr));max-width:380px}
+#alphabetModal .ab-practice-choice{min-height:112px;border:1px solid rgba(226,189,114,.22);border-radius:24px;background:rgba(255,255,255,.055);color:#fff8e6;font-family:"Noto Naskh Arabic","Amiri",serif;font-size:clamp(54px,16vw,78px);cursor:pointer}
+#alphabetModal .ab-practice-choice.correct{background:rgba(82,196,132,.18);border-color:rgba(82,196,132,.58)}
+#alphabetModal .ab-practice-choice.wrong{background:rgba(220,92,92,.14);border-color:rgba(220,92,92,.48)}
+#alphabetModal .ab-practice-feedback{min-height:28px;margin:14px 0 0;font:800 15px/1.35 Fredoka,system-ui,sans-serif;color:rgba(255,255,255,.9)}
+#alphabetModal .ab-complete-mark{width:94px;height:94px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:rgba(82,196,132,.16);border:1px solid rgba(82,196,132,.42);font:900 48px/1 Fredoka,system-ui,sans-serif;color:#d5ffe5}
+#alphabetModal .ab-nav button:disabled{opacity:.42;cursor:not-allowed}
+#alphabetModal .ab-audio-status{min-height:20px;margin:2px 6px 4px;text-align:center;font:700 12px/1.35 Fredoka,system-ui,sans-serif;color:rgba(255,255,255,.68)}
+#alphabetModal .ab-audio-credit{min-height:16px;margin:0 8px 5px;text-align:center;font:650 10px/1.35 Fredoka,system-ui,sans-serif;color:rgba(255,255,255,.48)}
+#alphabetModal .ab-audio-credit a{color:#b9ddd8;text-decoration:underline;text-underline-offset:2px}
+#alphabetModal .ab-audio-status.ok{color:#d5ffe5}
+#alphabetModal .ab-audio-status.warn{color:#ffe2a8}
+#alphabetModal .ab-h.audio-pending{opacity:.52;border:1px dashed rgba(255,226,168,.36)}
+#alphabetModal .lesson-steps{margin:2px 0 8px;flex:none;grid-template-columns:repeat(5,minmax(0,1fr))}
+.app[data-age="4–5"] #alphabetModal .lesson-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
 </style>
@@ -2471,7 +2435,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon">KIDS · V0.31</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.50</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2480,11 +2444,6 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
       </div>
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
-        <div id="kidsSky" class="kids-sky" aria-hidden="true">
-          <div class="sky-rays"></div>
-          <div class="sky-stars"></div>
-          <div class="sky-rain"></div>
-        </div>
         <div class="kids-wordmark">
           <span class="wm-dar">DĀR AL TAWḤĪD</span>
           <div class="wm-dar-wrap">
@@ -2711,8 +2670,8 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
       <div class="parent-card">
         <div class="label-row"><strong>Lernfortschritt</strong><span style="color:var(--sage);font-size:11px">LOKAL</span></div>
         <div class="parent-progress-grid">
-          <div class="parent-progress-stat"><strong id="parentStoriesDone">0</strong><span>Geschichten verstanden</span></div>
-          <div class="parent-progress-stat"><strong id="parentDuasDone">0</strong><span>Duʿāʾ gelernt</span></div>
+          <div class="parent-progress-stat"><strong id="parentStoriesDone">0</strong><span>Geschichten sicher</span></div>
+          <div class="parent-progress-stat"><strong id="parentDuasDone">0</strong><span>Duʿāʾ sicher</span></div>
           <div class="parent-progress-stat"><strong id="parentQuizCorrect">0</strong><span>Quizfragen richtig</span></div>
           <div class="parent-progress-stat"><strong id="parentTodayDone">0/3</strong><span>Heute geschafft</span></div>
           <div class="parent-progress-stat"><strong id="parentQuranResume">–</strong><span>Letzter Qurʾān-Stand</span></div>
@@ -2912,9 +2871,10 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
       <div class="ab-body">
         <div class="lesson-steps">
           <div class="lesson-step" id="abStepSee">Sehen</div>
-          <div class="lesson-step" id="abStepSound">Laut</div>
+          <div class="lesson-step" id="abStepSound">Hören</div>
           <div class="lesson-step" id="abStepWord">Wort</div>
           <div class="lesson-step" id="abStepForm">Form</div>
+          <div class="lesson-step" id="abStepPractice">Üben</div>
         </div>
         <div class="ab-dots" id="abDots"></div>
         <div class="ab-stage">
@@ -2940,7 +2900,20 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
             <p class="ab-hint" id="abHintForm"></p>
             <div class="ab-forms" id="abForms"></div>
           </div>
+          <div class="ab-pane" id="abPanePractice" data-pane="practice">
+            <p class="ab-practice-title" id="abPracticePrompt"></p>
+            <div class="ab-practice-stimulus" id="abPracticeStimulus" lang="ar" dir="rtl"></div>
+            <div class="ab-practice-choices" id="abPracticeChoices"></div>
+            <p class="ab-practice-feedback" id="abPracticeFeedback" aria-live="polite"></p>
+          </div>
+          <div class="ab-pane" id="abPaneComplete" data-pane="complete">
+            <div class="ab-complete-mark" aria-hidden="true">✓</div>
+            <p class="ab-practice-title" id="abCompleteTitle">Runde geschafft</p>
+            <p class="ab-hint" id="abCompleteText"></p>
+          </div>
         </div>
+        <p class="ab-audio-status" id="abAudioStatus" aria-live="polite"></p>
+        <p class="ab-audio-credit" id="abAudioCredit"></p>
         <div class="ab-nav">
           <button type="button" id="abPrev">Zurück</button>
           <button type="button" class="ab-play" id="abPlay">Hören</button>
@@ -2956,7 +2929,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab32";
+const KIDS_BUILD_ID="kids-shell-v12-tab50";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -3096,6 +3069,7 @@ var meterRaf=0;
 var practiceActive=false;
 var practiceRequired=false;
 var ayahPassed=false;
+var ayahPracticeHadError=false;
 var currentPracticeWord=0;
 var wordStates=[];
 var recognitionRestartTimer=0;
@@ -3106,12 +3080,14 @@ var speaking=false;
 var storyManualStop=false;
 var currentStoryKey="coin";
 var storyQuestionPassed=false;
+var storyQuestionHadError=false;
 var authenticStories=[];
 var kidsDuas=[];
 var verifiedKnowledge=[];
 var currentKnowledge=null;
 var currentDuaIndex=0;
 var duaQuestionPassed=false;
+var duaQuestionHadError=false;
 var currentQuiz=[];
 var currentQuizIndex=0;
 var quizLocked=false;
@@ -3259,11 +3235,11 @@ function updateParentProgress(){
   var storyCount=0;
   var storyIds=Object.keys(stories).concat(authenticStories.map(function(s){return s.id}));
   Array.from(new Set(storyIds)).forEach(function(k){
-    try{if(localStorage.getItem("kids.story."+k)==="1")storyCount++}catch(e){}
+    try{if(storyProgress(k).stage==="secure")storyCount++}catch(e){}
   });
   var duaCount=0;
   kidsDuas.forEach(function(d){
-    try{if(localStorage.getItem("kids.dua."+d.id)==="1")duaCount++}catch(e){}
+    try{if(duaProgress(d.id).stage==="secure")duaCount++}catch(e){}
   });
   var quizCount=0;
   try{quizCount=Number(localStorage.getItem("kids.quiz.correct")||"0")}catch(e){}
@@ -3285,7 +3261,7 @@ function launchDailyStep(step){
   if(step==="story"){openStory(dailyStoryKey());return}
   if(step==="dua"){openDailyDua();return}
   if(step==="quiz"){openQuiz();return}
-  if(step==="quran"){showTab("quran");setTimeout(function(){openSurah(112,0,"learn")},220)}
+  if(step==="quran"){showTab("quran");setTimeout(openDailyQuran,220)}
 }
 function launchNextDailyStep(){
   var plan=dailyPlan();
@@ -3447,10 +3423,125 @@ function stopQuran(){
   currentPracticeWord=0;
   wordStates=[];
   ayahPassed=false;
+  ayahPracticeHadError=false;
   updateLearnStatus(" Erst hören",false);
   document.getElementById("ayahPlay").textContent=" Āyah anhören";
   document.getElementById("speakAlong").textContent=" Jetzt mitsprechen";
 }
+var QURAN_PROGRESS_PREFIX="kids.quran.progress.v2.";
+function quranProgressDefault(){
+  return {stage:"new",attempts:0,reviewPasses:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0,surah:0,ayahIndex:0,verseId:0,label:""};
+}
+function quranProgressKey(surah,verseId){
+  return QURAN_PROGRESS_PREFIX+String(surah)+":"+String(verseId);
+}
+function quranProgress(surah,verseId){
+  try{
+    var raw=JSON.parse(localStorage.getItem(quranProgressKey(surah,verseId))||"null");
+    if(raw&&typeof raw==="object"){
+      var base=quranProgressDefault();
+      Object.keys(base).forEach(function(k){if(raw[k]===undefined)raw[k]=base[k]});
+      return raw;
+    }
+  }catch(e){}
+  return quranProgressDefault();
+}
+function saveQuranProgress(surah,verseId,entry){
+  try{localStorage.setItem(quranProgressKey(surah,verseId),JSON.stringify(entry||quranProgressDefault()))}catch(e){}
+}
+function recordQuranAttempt(firstTry){
+  if(!currentSurah||!currentSurah.verses.length)return{entry:quranProgressDefault(),counted:false,firstTry:firstTry};
+  var verse=currentSurah.verses[currentAyahIndex]||{};
+  var e=quranProgress(currentSurah.id,verse.id);
+  var now=Date.now();
+  e.surah=currentSurah.id;
+  e.ayahIndex=currentAyahIndex;
+  e.verseId=Number(verse.id||currentAyahIndex+1);
+  e.label=currentSurah.transliteration||("Sūrah "+currentSurah.id);
+  e.attempts=Number(e.attempts||0)+1;
+  e.lastSeenAt=now;
+  var counted=false;
+  if(firstTry){
+    e.consecutiveFirstTry=Number(e.consecutiveFirstTry||0)+1;
+    if(!e.dueAt||now>=Number(e.dueAt||0)){
+      e.reviewPasses=Number(e.reviewPasses||0)+1;
+      counted=true;
+      if(e.reviewPasses===1)e.dueAt=now+10*60*1000;
+      else if(e.reviewPasses===2)e.dueAt=now+24*60*60*1000;
+      else e.dueAt=now+7*24*60*60*1000;
+    }
+  }else{
+    e.wrong=Number(e.wrong||0)+1;
+    e.lapses=Number(e.lapses||0)+1;
+    e.lastMistakeAt=now;
+    e.consecutiveFirstTry=0;
+    e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
+    e.dueAt=now+5*60*1000;
+  }
+  if(e.reviewPasses>=3)e.stage="secure";
+  else if(e.reviewPasses>=2)e.stage="review";
+  else e.stage="learning";
+  saveQuranProgress(currentSurah.id,verse.id,e);
+  return{entry:e,counted:counted,firstTry:firstTry};
+}
+function quranProgressStatus(surah,verseId){
+  var e=quranProgress(surah,verseId),now=Date.now();
+  if(e.stage==="secure")return Number(e.dueAt||0)<=now?"Wiederholung fällig":"sicher";
+  if(e.attempts&&Number(e.dueAt||0)>now)return"Wiederholung später";
+  if(e.attempts)return"Wiederholung fällig";
+  return"neu";
+}
+function quranReviewPriority(entry,now){
+  if(!entry||!entry.attempts)return 99;
+  var due=Number(entry.dueAt||0);
+  if(due>now)return 99;
+  var recentMistake=Number(entry.lastMistakeAt||0)>0&&now-Number(entry.lastMistakeAt||0)<=14*24*60*60*1000;
+  if(recentMistake)return 10;
+  if(entry.stage==="learning")return 20;
+  if(entry.stage==="review")return 25;
+  if(entry.stage==="secure")return 30;
+  return 35;
+}
+function nextQuranReview(){
+  var now=Date.now(),items=[];
+  try{
+    for(var i=0;i<localStorage.length;i++){
+      var key=localStorage.key(i);
+      if(!key||key.indexOf(QURAN_PROGRESS_PREFIX)!==0)continue;
+      var entry=JSON.parse(localStorage.getItem(key)||"null");
+      if(!entry||typeof entry!=="object")continue;
+      var bucket=quranReviewPriority(entry,now);
+      if(bucket>=99)continue;
+      items.push({
+        bucket:bucket,
+        due:Number(entry.dueAt||0),
+        lastSeen:Number(entry.lastSeenAt||0),
+        surah:Number(entry.surah||0),
+        ayahIndex:Number(entry.ayahIndex||0)
+      });
+    }
+  }catch(e){}
+  items=items.filter(function(x){return x.surah>0}).sort(function(a,b){
+    if(a.bucket!==b.bucket)return a.bucket-b.bucket;
+    if(a.due!==b.due)return a.due-b.due;
+    return a.lastSeen-b.lastSeen;
+  });
+  return items[0]||null;
+}
+function openDailyQuran(){
+  var review=nextQuranReview();
+  if(review){
+    openSurah(review.surah,review.ayahIndex,"learn");
+    return;
+  }
+  var resume=readQuranResume();
+  if(resume&&resume.surah){
+    openSurah(Number(resume.surah),Number(resume.ayah||0),"learn");
+    return;
+  }
+  openSurah(112,0,"learn");
+}
+
 function openSurah(id,ayahIndex,mode){
   stopQuran();
   practiceRequired=(mode==="learn");
@@ -3537,7 +3628,8 @@ function renderAyah(){
   if(!currentSurah||!currentSurah.verses.length)return;
   var v=currentSurah.verses[currentAyahIndex];
   document.getElementById("quranTitle").textContent=currentSurah.transliteration;
-  document.getElementById("quranSubtitle").textContent="Āyah "+v.id+" von "+currentSurah.verses.length;
+  var mastery=quranProgressStatus(currentSurah.id,v.id);
+  document.getElementById("quranSubtitle").textContent="Āyah "+v.id+" von "+currentSurah.verses.length+(practiceRequired?" · "+mastery:"");
   recitationMatched=0;
   recitationWrong=-1;
   recitationState="idle";
@@ -3545,6 +3637,7 @@ function renderAyah(){
   currentPracticeWord=0;
   wordStates=rawAyahWords().map(function(){return "pending"});
   ayahPassed=!practiceRequired;
+  ayahPracticeHadError=false;
   lastWordHeard="";
   lastWordScore=0;
   renderAyahWords(0,-1,0);
@@ -3868,6 +3961,7 @@ function ensureMicrophonePermission(){
     };
     recitationStream=stream;
     recitationPermissionReady=true;
+    startMeter(stream);
     document.getElementById("micMonitor").classList.remove("error");
     document.getElementById("micStateText").textContent="Mikrofon bereit";
     return true;
@@ -3894,13 +3988,22 @@ function completeAyahPractice(){
   stopWordRecognition();
   stopRecordingCapture();
   wordStates=wordStates.map(function(){return "green"});
+  var masteryResult=recordQuranAttempt(!ayahPracticeHadError);
   renderAyahWords(wordStates.length,-1,-1);
   renderWordCoach();
-  updateLearnStatus("✓ Sehr gut! Die Āyah ist geschafft.",false,"success");
+  if(masteryResult.entry&&masteryResult.entry.stage==="secure"){
+    updateLearnStatus("✓ Sehr gut! Die Āyah ist jetzt sicher.",false,"success");
+  }else if(!ayahPracticeHadError&&!masteryResult.counted){
+    updateLearnStatus("✓ Āyah geschafft. Die nächste Wiederholung kommt später.",false,"success");
+  }else if(ayahPracticeHadError){
+    updateLearnStatus("✓ Āyah geschafft. Wegen der Fehler wird sie bald wiederholt.",false,"success");
+  }else{
+    updateLearnStatus("✓ Āyah geschafft. Wiederholung gespeichert.",false,"success");
+  }
   setLessonStep("done");
   markDailyDone("quran");
   var btn=document.getElementById("speakAlong");
-  btn.textContent="✓ GESCHAFFT";
+  btn.textContent=masteryResult.entry&&masteryResult.entry.stage==="secure"?"✓ SICHER":"✓ GESCHAFFT";
   btn.classList.add("active");
   btn.classList.remove("mic-live");
   setNextLock();
@@ -3967,14 +4070,21 @@ async function gradeCapturedWord(blob,expected){
   form.append("audio",blob,"word.wav");
   form.append("expected",expected);
   form.append("age",age);
-  var response=await fetch("/test/kids/api/recitation/grade",{
-    method:"POST",
-    body:form,
-    cache:"no-store"
-  });
-  var data=await response.json().catch(function(){return{}});
-  if(!response.ok||!data.ok)throw new Error(data.error||"grade_failed");
-  return data;
+  var controller=typeof AbortController!=="undefined"?new AbortController():null;
+  var timeout=setTimeout(function(){if(controller)controller.abort()},15000);
+  try{
+    var response=await fetch("/test/kids/api/recitation/grade",{
+      method:"POST",
+      body:form,
+      cache:"no-store",
+      signal:controller?controller.signal:undefined
+    });
+    var data=await response.json().catch(function(){return{}});
+    if(!response.ok||!data.ok)throw new Error(data.error||"grade_failed");
+    return data;
+  }finally{
+    clearTimeout(timeout);
+  }
 }
 function applyServerGrade(data){
   if(!practiceActive||ayahPassed)return;
@@ -4006,6 +4116,7 @@ function applyServerGrade(data){
   }
 
   if(grade==="orange"){
+    ayahPracticeHadError=true;
     wordStates[idx]="orange";
     paintPracticeState(heard,score,"orange");
     updateLearnStatus("Fast richtig. Bleib bei diesem Wort und versuch es noch einmal.",true);
@@ -4013,6 +4124,7 @@ function applyServerGrade(data){
     return;
   }
 
+  ayahPracticeHadError=true;
   wordStates[idx]="red";
   paintPracticeState(heard,score,"red");
   document.getElementById("micMonitor").classList.add("error");
@@ -4052,8 +4164,9 @@ async function finishWordCapture(){
     applyServerGrade(result);
   }catch(error){
     document.getElementById("micMonitor").classList.add("error");
-    document.getElementById("micStateText").textContent="Prüfung fehlgeschlagen — noch einmal";
-    updateLearnStatus("Das Wort konnte nicht geprüft werden. Sprich es bitte noch einmal.",false,"error");
+    var timedOut=String(error&&error.name||"")==="AbortError";
+    document.getElementById("micStateText").textContent=timedOut?"Prüfung dauert zu lange — noch einmal":"Prüfung fehlgeschlagen — noch einmal";
+    updateLearnStatus(timedOut?"Die Wortprüfung hat zu lange gedauert. Sprich es bitte noch einmal.":"Das Wort konnte nicht geprüft werden. Sprich es bitte noch einmal.",false,"error");
   }finally{
     wordCaptureBusy=false;
     if(practiceActive&&!ayahPassed){
@@ -4253,6 +4366,7 @@ document.getElementById("speakAlong").addEventListener("click",function(){
       currentPracticeWord=0;
       wordStates=rawAyahWords().map(function(){return "pending"});
       ayahPassed=false;
+      ayahPracticeHadError=false;
       lastWordHeard="";
       lastWordScore=0;
       recitationTranscript="";
@@ -4414,6 +4528,72 @@ function fetchKidsDuas(){
       return [];
     });
 }
+var DUA_PROGRESS_PREFIX="kids.dua.progress.v2.";
+function duaProgressDefault(){
+  return {stage:"new",attempts:0,reviewPasses:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0};
+}
+function duaProgress(id){
+  var storageKey=DUA_PROGRESS_PREFIX+id;
+  try{
+    var raw=JSON.parse(localStorage.getItem(storageKey)||"null");
+    if(raw&&typeof raw==="object"){
+      var base=duaProgressDefault();
+      Object.keys(base).forEach(function(k){if(raw[k]===undefined)raw[k]=base[k]});
+      return raw;
+    }
+    if(localStorage.getItem("kids.dua."+id)==="1"){
+      var migrated=duaProgressDefault();
+      migrated.stage="learning";
+      migrated.attempts=1;
+      migrated.reviewPasses=1;
+      migrated.dueAt=Date.now();
+      migrated.lastSeenAt=Date.now();
+      localStorage.setItem(storageKey,JSON.stringify(migrated));
+      return migrated;
+    }
+  }catch(e){}
+  return duaProgressDefault();
+}
+function saveDuaProgress(id,entry){
+  try{localStorage.setItem(DUA_PROGRESS_PREFIX+id,JSON.stringify(entry||duaProgressDefault()))}catch(e){}
+}
+function recordDuaAttempt(id,firstTry){
+  var e=duaProgress(id);
+  var now=Date.now();
+  e.attempts=Number(e.attempts||0)+1;
+  e.lastSeenAt=now;
+  var counted=false;
+  if(firstTry){
+    e.consecutiveFirstTry=Number(e.consecutiveFirstTry||0)+1;
+    if(!e.dueAt||now>=Number(e.dueAt||0)){
+      e.reviewPasses=Number(e.reviewPasses||0)+1;
+      counted=true;
+      if(e.reviewPasses===1)e.dueAt=now+10*60*1000;
+      else if(e.reviewPasses===2)e.dueAt=now+24*60*60*1000;
+      else e.dueAt=now+7*24*60*60*1000;
+    }
+  }else{
+    e.wrong=Number(e.wrong||0)+1;
+    e.lapses=Number(e.lapses||0)+1;
+    e.lastMistakeAt=now;
+    e.consecutiveFirstTry=0;
+    e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
+    e.dueAt=now+5*60*1000;
+  }
+  if(e.reviewPasses>=3)e.stage="secure";
+  else if(e.reviewPasses>=2)e.stage="review";
+  else e.stage="learning";
+  saveDuaProgress(id,e);
+  return{entry:e,counted:counted,firstTry:firstTry};
+}
+function duaProgressLabel(id){
+  var e=duaProgress(id),now=Date.now();
+  if(e.stage==="secure")return Number(e.dueAt||0)<=now?"Wiederholung fällig":"✓ Sicher gelernt";
+  if(e.attempts&&Number(e.dueAt||0)>now)return"✓ Wiederholung später";
+  if(e.attempts)return"Wiederholung fällig";
+  return"";
+}
+
 function openDailyDua(){
   if(!kidsDuas.length){
     fetchKidsDuas().then(function(){
@@ -4467,6 +4647,7 @@ function openDuaAt(index){
   currentDuaIndex=(Number(index)||0)%list.length;
   if(currentDuaIndex<0)currentDuaIndex=list.length-1;
   duaQuestionPassed=false;
+  duaQuestionHadError=false;
   document.getElementById("duaModal").classList.add("open");
   renderDua();
 }
@@ -4475,9 +4656,9 @@ function renderDua(){
   var list=filteredDuas();
   var d=list[currentDuaIndex];
   if(!d)return;
-  var done=false;
-  try{done=localStorage.getItem("kids.dua."+d.id)==="1"}catch(e){}
-  duaQuestionPassed=done;
+  var progress=duaProgress(d.id);
+  duaQuestionPassed=false;
+  var progressText=duaProgressLabel(d.id);
   var older="";
   if(d.olderNote&&age!=="4–5"){
     older='<div class="dua-old-note"><strong>'+d.olderNote.title+'</strong><div class="ar">'+d.olderNote.arabic+'</div><div class="dua-tr">'+d.olderNote.transliteration+'</div></div>';
@@ -4496,14 +4677,13 @@ function renderDua(){
     '<div class="dua-actions '+(d.type==="quran"&&Array.isArray(d.quranRefs)&&d.quranRefs.length?"has-quran":"")+'">'+
       (d.type==="quran"&&Array.isArray(d.quranRefs)&&d.quranRefs.length?'<button id="duaQuranAudio" class="dua-quran-audio"> Qurʾān hören</button>':'')+
       '<button id="duaListen" class="dua-listen"> Erklärung hören</button><button id="duaNextItem" class="dua-next-item">Nächstes Duʿāʾ ›</button></div>'+
-    '<div class="dua-question"><h3>'+d.quiz.question+'</h3><div id="duaAnswers" class="dua-answer-grid"></div><div id="duaFeedback" class="dua-feedback">'+(done?"✓ Schon gelernt":"")+'</div></div>'+
+    '<div class="dua-question"><h3>'+d.quiz.question+'</h3><div id="duaAnswers" class="dua-answer-grid"></div><div id="duaFeedback" class="dua-feedback">'+progressText+'</div></div>'+
     '<div class="dua-source">'+d.source+(sourceLink?' · '+sourceLink:'')+'</div>';
   var answers=document.getElementById("duaAnswers");
   d.quiz.answers.forEach(function(a){
     var b=document.createElement("button");
     b.className="dua-answer";
     b.textContent=a.label;
-    if(done&&a.correct)b.classList.add("correct");
     b.addEventListener("click",function(){
       if(duaQuestionPassed)return;
       var fb=document.getElementById("duaFeedback");
@@ -4511,12 +4691,15 @@ function renderDua(){
         duaQuestionPassed=true;
         b.classList.add("correct");
         fb.className="dua-feedback good";
-        fb.textContent="✓ Richtig. Sehr gut!";
-        try{localStorage.setItem("kids.dua."+d.id,"1")}catch(e){}
+        var duaResult=recordDuaAttempt(d.id,!duaQuestionHadError);
+        if(duaResult.entry&&duaResult.entry.stage==="secure")fb.textContent="✓ Richtig. Sicher gelernt.";
+        else if(!duaQuestionHadError&&!duaResult.counted)fb.textContent="✓ Richtig. Wiederholung später.";
+        else fb.textContent="✓ Richtig. Sehr gut!";
         markDailyDone("dua");
         updateParentProgress();
         quizSpeak("Richtig. Sehr gut.");
       }else{
+        duaQuestionHadError=true;
         b.classList.add("wrong");
         fb.className="dua-feedback bad";
         fb.textContent="Noch nicht. Hör die Erklärung noch einmal.";
@@ -4540,9 +4723,11 @@ function renderDua(){
   });
   document.getElementById("duaNextItem").addEventListener("click",function(){
     currentDuaIndex=(currentDuaIndex+1)%list.length;
+    duaQuestionPassed=false;
+    duaQuestionHadError=false;
     renderDua();
   });
-  if(!done)setTimeout(function(){quizSpeak(d.childPrompt+" "+d.meaning)},260);
+  if(!progress.attempts||Number(progress.dueAt||0)<=Date.now())setTimeout(function(){quizSpeak(d.childPrompt+" "+d.meaning)},260);
 }
 document.getElementById("openDuaButton").addEventListener("click",function(){
   if(!kidsDuas.length){
@@ -4564,40 +4749,459 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   var letters=[];
   var idx=0;
   var step=0;
+  var practicePassed=false;
+  var practiceMistakes=0;
+  var practiceToken="";
+  var practiceMode="visual";
+  var practiceAudioHeard=false;
+  var practiceTargetKey="";
+  var completeMode=false;
+  var reviewQueueMode=true;
+  var alphabetAudioManifest={letters:{}};
+  var alphabetAudioEl=null;
   var KEY="kids.alphabet.idx";
+  var LEGACY_MASTER_KEY="kids.alphabet.mastered.";
+  var PROGRESS_KEY="kids.alphabet.progress.v2.";
+
   function ageKey(){
     try{return localStorage.getItem("kids.age")||"6–8"}catch(e){return "6–8"}
   }
   function stepsForAge(a){
-    if(a==="4–5")return ["see","word"];
-    if(a==="9–10")return ["see","sound","word","form"];
-    return ["see","sound","word"];
+    if(a==="4–5")return ["see","sound","word","practice"];
+    return ["see","sound","word","form","practice"];
   }
   function stepLabels(a){
-    if(a==="4–5")return {see:"Bild",word:"Wort"};
-    if(a==="9–10")return {see:"Sehen",sound:"Laut",word:"Wort",form:"Form"};
-    return {see:"Sehen",sound:"Laut",word:"Wort"};
+    if(a==="4–5")return {see:"Sehen",sound:"Hören",word:"Wort",practice:"Zeig mal"};
+    if(a==="9–10")return {see:"Sehen",sound:"Laut",word:"Wort",form:"Formen",practice:"Prüfen"};
+    return {see:"Sehen",sound:"Hören",word:"Wort",form:"Verbinden",practice:"Üben"};
   }
   function kidLaut(s){
-    return String(s||"")
-      .replace(/ṯ/g,"th").replace(/ḏ/g,"dh").replace(/ṣ/g,"s")
-      .replace(/ḍ/g,"d").replace(/ṭ/g,"t").replace(/ẓ/g,"z")
-      .replace(/ʿ/g,"").replace(/ḥ/g,"h").replace(/ā/g,"aa");
+    return String(s||"");
   }
-  function kidsAlphabetSpeak(text){
-    if(typeof quizSpeak==="function")quizSpeak(text);
+  function ageExplanation(item,a){
+    return item&&item.ages&&item.ages[a]?String(item.ages[a]):"";
+  }
+  function progressMap(a){
+    var key=PROGRESS_KEY+a;
+    var map={};
+    try{
+      var raw=JSON.parse(localStorage.getItem(key)||"{}");
+      if(raw&&typeof raw==="object"&&!Array.isArray(raw))map=raw;
+    }catch(e){}
+    try{
+      var legacy=JSON.parse(localStorage.getItem(LEGACY_MASTER_KEY+a)||"[]");
+      if(Array.isArray(legacy)){
+        legacy.forEach(function(id){
+          if(!map[id])map[id]={
+            stage:"learning",attempts:1,firstTryPasses:1,wrong:0,reviewPasses:1,
+            dueAt:Date.now(),lastSeenAt:Date.now(),lastPracticeAt:0,lastMistakeAt:0,lapses:0,consecutiveFirstTry:1,lastMode:"visual",skills:{visual:1,audio:0,harakat:0,form:0},audio:{name:false,word:false,harakat:[]}
+          };
+        });
+        localStorage.removeItem(LEGACY_MASTER_KEY+a);
+        localStorage.setItem(key,JSON.stringify(map));
+      }
+    }catch(e){}
+    return map;
+  }
+  function saveProgress(a,map){
+    try{localStorage.setItem(PROGRESS_KEY+a,JSON.stringify(map||{}))}catch(e){}
+  }
+  function progressEntry(a,id){
+    var map=progressMap(a);
+    return map[id]||{stage:"new",attempts:0,firstTryPasses:0,wrong:0,reviewPasses:0,dueAt:0,lastSeenAt:0,lastPracticeAt:0,lastMistakeAt:0,lapses:0,consecutiveFirstTry:0,lastMode:"",skills:{visual:0,audio:0,harakat:0,form:0},audio:{name:false,word:false,harakat:[]}};
+  }
+  function audioSlot(id,kind,key){
+    var letter=alphabetAudioManifest&&alphabetAudioManifest.letters&&alphabetAudioManifest.letters[id];
+    if(!letter)return null;
+    var slot=kind==="harakat"?(letter.harakat&&letter.harakat[key]):letter[kind];
+    if(!slot||slot.verified!==true||!String(slot.url||"").trim())return null;
+    return slot;
+  }
+  function requiredHarakatKeys(a){
+    return a==="4–5"?["fatha"]:["fatha","kasra","damma"];
+  }
+  function requiredSkills(a){
+    return a==="4–5"?["visual","audio"]:["visual","audio","harakat","form"];
+  }
+  function skillsComplete(a,entry){
+    var s=(entry&&entry.skills)||{};
+    return requiredSkills(a).every(function(k){return Number(s[k]||0)>=1});
+  }
+  function practiceModeAvailable(a,item,mode){
+    if(mode==="audio")return !!audioSlot(item.id,"name");
+    if(mode==="form")return a!=="4–5";
+    if(mode==="harakat")return a!=="4–5";
+    return true;
+  }
+  function choosePracticeMode(a,item,entry){
+    var s=(entry&&entry.skills)||{};
+    var required=requiredSkills(a);
+    for(var i=0;i<required.length;i++){
+      var mode=required[i];
+      if(Number(s[mode]||0)<1&&practiceModeAvailable(a,item,mode))return mode;
+    }
+    var available=required.filter(function(mode){return practiceModeAvailable(a,item,mode)});
+    if(!available.length)return "visual";
+    return available[Number(entry&&entry.attempts||0)%available.length];
+  }
+  function audioEvidenceComplete(a,id,entry){
+    var ev=(entry&&entry.audio)||{};
+    if(!ev.name||!ev.word)return false;
+    var heard=Array.isArray(ev.harakat)?ev.harakat:[];
+    return requiredHarakatKeys(a).every(function(k){return heard.indexOf(k)>=0});
+  }
+  function allRequiredAudioPublished(a,id){
+    if(!audioSlot(id,"name")||!audioSlot(id,"word"))return false;
+    return requiredHarakatKeys(a).every(function(k){return !!audioSlot(id,"harakat",k)});
+  }
+  function recordAudioEvidence(a,id,kind,key){
+    var map=progressMap(a);
+    var e=map[id]||progressEntry(a,id);
+    e.audio=e.audio&&typeof e.audio==="object"?e.audio:{name:false,word:false,harakat:[]};
+    if(kind==="harakat"){
+      e.audio.harakat=Array.isArray(e.audio.harakat)?e.audio.harakat:[];
+      if(e.audio.harakat.indexOf(key)<0)e.audio.harakat.push(key);
+    }else e.audio[kind]=true;
+    if(e.reviewPasses>=3&&audioEvidenceComplete(a,id,e)&&skillsComplete(a,e))e.stage="secure";
+    map[id]=e;saveProgress(a,map);
+  }
+  function recordPractice(a,id,mode,firstTry,mistakes){
+    var map=progressMap(a);
+    var e=map[id]||progressEntry(a,id);
+    var now=Date.now();
+    e.audio=e.audio&&typeof e.audio==="object"?e.audio:{name:false,word:false,harakat:[]};
+    e.skills=e.skills&&typeof e.skills==="object"?e.skills:{visual:0,audio:0,harakat:0,form:0};
+    e.attempts=Number(e.attempts||0)+1;
+    e.lastMode=String(mode||"");
+    e.lastPracticeAt=now;
+    if(firstTry&&requiredSkills(a).indexOf(mode)>=0)e.skills[mode]=Number(e.skills[mode]||0)+1;
+    e.wrong=Number(e.wrong||0)+Math.max(0,Number(mistakes||0));
+    e.lastSeenAt=now;
+    var counted=false;
+    if(firstTry){
+      e.firstTryPasses=Number(e.firstTryPasses||0)+1;
+      e.consecutiveFirstTry=Number(e.consecutiveFirstTry||0)+1;
+      if(!e.dueAt||now>=Number(e.dueAt||0)){
+        e.reviewPasses=Number(e.reviewPasses||0)+1;
+        counted=true;
+        if(e.reviewPasses===1)e.dueAt=now+10*60*1000;
+        else if(e.reviewPasses===2)e.dueAt=now+24*60*60*1000;
+        else e.dueAt=now+7*24*60*60*1000;
+      }
+    }else{
+      e.consecutiveFirstTry=0;
+      e.lastMistakeAt=now;
+      e.lapses=Number(e.lapses||0)+1;
+      e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
+      e.dueAt=now+5*60*1000;
+    }
+    if(e.reviewPasses>=3&&audioEvidenceComplete(a,id,e)&&skillsComplete(a,e))e.stage="secure";
+    else if(e.reviewPasses>=2)e.stage="review";
+    else e.stage="learning";
+    map[id]=e;saveProgress(a,map);
+    return {entry:e,counted:counted,firstTry:firstTry};
+  }
+  function progressStats(a){
+    var map=progressMap(a),secure=0,learning=0,due=0,open=0,now=Date.now();
+    letters.forEach(function(l){
+      var e=map[l.id];
+      if(!e){open+=1;return}
+      if(e.stage==="secure")secure+=1;
+      else learning+=1;
+      var when=Number(e.dueAt||0);
+      if(when>0&&when<=now)due+=1;
+    });
+    return {secure:secure,learning:learning,due:due,open:open};
+  }
+  function reviewBucket(entry,now){
+    if(!entry)return 40;
+    var due=Number(entry.dueAt||0);
+    if(due>now)return 99;
+    var mistakeAt=Number(entry.lastMistakeAt||0);
+    if(mistakeAt>0&&now-mistakeAt<=14*24*60*60*1000)return 10;
+    if(entry.stage==="learning")return 20;
+    if(entry.stage==="review")return 25;
+    if(entry.stage==="secure")return 30;
+    return 35;
+  }
+  function nextReviewIndex(a,excludeId){
+    var map=progressMap(a),now=Date.now(),candidates=[];
+    for(var i=0;i<letters.length;i++){
+      var item=letters[i],e=map[item.id],bucket=reviewBucket(e,now);
+      if(bucket>=99)continue;
+      candidates.push({
+        index:i,
+        id:item.id,
+        bucket:bucket,
+        due:e?Number(e.dueAt||0):0,
+        lastSeen:e?Number(e.lastSeenAt||0):0
+      });
+    }
+    if(!candidates.length)return -1;
+    candidates.sort(function(x,y){
+      if(x.bucket!==y.bucket)return x.bucket-y.bucket;
+      if(x.due!==y.due)return x.due-y.due;
+      if(x.lastSeen!==y.lastSeen)return x.lastSeen-y.lastSeen;
+      return x.index-y.index;
+    });
+    if(excludeId&&candidates.length>1&&candidates[0].id===excludeId){
+      var alternate=candidates.find(function(c){return c.id!==excludeId});
+      if(alternate)return alternate.index;
+    }
+    return candidates[0].index;
+  }
+  function setAudioStatus(message,state){
+    var el=document.getElementById("abAudioStatus");
+    if(!el)return;
+    el.textContent=message||"";
+    el.classList.remove("ok","warn");
+    if(state)el.classList.add(state);
+  }
+  function setAudioCredit(slot){
+    var el=document.getElementById("abAudioCredit");
+    if(!el)return;
+    if(!slot||!slot.sourceProvider){
+      el.textContent="";
+      return;
+    }
+    el.textContent="";
+    var prefix=document.createTextNode(
+      "Quelle: "+String(slot.sourceProvider||"")+
+      (slot.sourceSpeaker?" · "+String(slot.sourceSpeaker):"")+
+      (slot.license?" · "+String(slot.license):"")
+    );
+    el.appendChild(prefix);
+    if(slot.sourcePage&&/^https:\/\//i.test(String(slot.sourcePage))){
+      el.appendChild(document.createTextNode(" · "));
+      var a=document.createElement("a");
+      a.href=String(slot.sourcePage);
+      a.target="_blank";
+      a.rel="noopener noreferrer";
+      a.textContent="Nachweis";
+      el.appendChild(a);
+    }
+  }
+  function stopAlphabetAudio(){
+    if(alphabetAudioEl){
+      try{alphabetAudioEl.pause();alphabetAudioEl.currentTime=0}catch(e){}
+      alphabetAudioEl=null;
+    }
+  }
+  window.stopKidsAlphabetAudio=stopAlphabetAudio;
+  function playVerifiedSlot(item,kind,key,onDone){
+    var slot=audioSlot(item.id,kind,key);
+    if(!slot){
+      setAudioStatus("Noch keine Aufnahme mit derselben Alif-Stimme freigegeben.","warn");
+      setAudioCredit(null);
+      return false;
+    }
+    setAudioCredit(slot);
+    stopAlphabetAudio();
+    var url=String(slot.url||"");
+    if(!(url.indexOf("/")===0||/^https:\/\//i.test(url))){
+      setAudioStatus("Ungültiger Audio-Pfad.","warn");
+      return false;
+    }
+    var audio=new Audio(url);
+    alphabetAudioEl=audio;
+    audio.preload="auto";
+    audio.onended=function(){
+      recordAudioEvidence(ageKey(),item.id,kind,key||"");
+      alphabetAudioEl=null;
+      setAudioStatus(slot.sourceType==="external-human-pronunciation"?"Einheitliche Alif-Referenzstimme.":"Geprüfte Referenzaufnahme.","ok");
+      if(typeof onDone==="function")onDone();
+      updateHeader(item,ageKey());
+    };
+    audio.onerror=function(){
+      alphabetAudioEl=null;
+      setAudioStatus("Freigegebene Aufnahme konnte nicht geladen werden.","warn");
+    };
+    audio.play().catch(function(){
+      alphabetAudioEl=null;
+      setAudioStatus("Audio konnte auf diesem Gerät nicht gestartet werden.","warn");
+    });
+    return true;
+  }
+  function playVerifiedSequence(item,specs,index,onDone){
+    var list=Array.isArray(specs)?specs:[];
+    var i=Number(index||0);
+    if(i>=list.length){if(typeof onDone==="function")onDone();return true}
+    var s=list[i];
+    return playVerifiedSlot(item,s.kind,s.key,function(){playVerifiedSequence(item,list,i+1,onDone)});
+  }
+  function speakGerman(text){
+    if(!speech||typeof SpeechSynthesisUtterance==="undefined")return false;
+    try{speech.cancel()}catch(e){}
+    var u=new SpeechSynthesisUtterance(String(text||""));
+    u.lang="de-DE";u.rate=ageKey()==="4–5"?.80:.88;u.pitch=.96;
+    speech.speak(u);return true;
+  }
+  function updateHeader(item,a){
+    var lab=document.getElementById("abAgeLabel");
+    if(!lab)return;
+    var s=progressStats(a);
+    lab.textContent="Buchstabe "+(idx+1)+" / "+letters.length+" · "+s.secure+" sicher · "+s.learning+" lernen · "+s.due+" fällig";
+  }
+  var similar={
+    alif:["lam","dal"],ba:["ta","tha","nun","ya"],ta:["ba","tha","nun"],tha:["ta","ba","shin"],
+    jim:["ha","kha"],ha:["jim","kha","haa"],kha:["ha","jim","ghayn"],dal:["dhal","ra"],dhal:["dal","zay"],
+    ra:["zay","dal"],zay:["ra","dhal"],sin:["shin","sad"],shin:["sin","tha"],sad:["dad","sin"],dad:["sad","dal"],
+    taa:["zaa","ta"],zaa:["taa","dhal"],ayn:["ghayn","ha"],ghayn:["ayn","kha"],fa:["qaf","ba"],qaf:["fa","kaf"],
+    kaf:["qaf","lam"],lam:["alif","kaf"],mim:["nun","fa"],nun:["ba","ta","ya"],haa:["ha","mim"],waw:["ra","dal"],ya:["ba","nun","ta"]
+  };
+  function shuffled(list){
+    var a=list.slice();
+    for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}
+    return a;
+  }
+  function practiceOptions(item,a){
+    var wanted=a==="4–5"?2:3;
+    var ids=[item.id].concat(similar[item.id]||[]);
+    for(var d=1;ids.length<wanted&&d<letters.length;d++){
+      var x=letters[(idx+d)%letters.length];
+      if(x&&ids.indexOf(x.id)<0)ids.push(x.id);
+    }
+    var opts=ids.map(function(id){return letters.find(function(x){return x.id===id})}).filter(Boolean).slice(0,wanted);
+    return shuffled(opts);
+  }
+  function renderPractice(item,a){
+    var prompt=document.getElementById("abPracticePrompt");
+    var stimulus=document.getElementById("abPracticeStimulus");
+    var box=document.getElementById("abPracticeChoices");
+    var feedback=document.getElementById("abPracticeFeedback");
+    if(!prompt||!stimulus||!box||!feedback)return;
+    var token=a+"|"+item.id;
+    if(token!==practiceToken){
+      practiceToken=token;
+      practicePassed=false;
+      practiceMistakes=0;
+      practiceAudioHeard=false;
+      practiceTargetKey="";
+      practiceMode=choosePracticeMode(a,item,progressEntry(a,item.id));
+    }
+    box.innerHTML="";
+    stimulus.textContent="";
+    feedback.textContent="";
+
+    if(practiceMode==="audio"){
+      prompt.textContent="Hör genau hin. Welcher Buchstabe ist das?";
+      feedback.textContent=audioSlot(item.id,"name")?"Tippe zuerst auf „Hören“.":"Geprüfte Hörreferenz fehlt noch.";
+    }else if(practiceMode==="harakat"){
+      var hkeys=["fatha","kasra","damma"];
+      var hIndex=Number(progressEntry(a,item.id).attempts||0)%hkeys.length;
+      practiceTargetKey=hkeys[hIndex];
+      var hList=item.harakat||[];
+      var target=hList[hIndex]||hList[0]||{};
+      prompt.textContent="Welcher Laut steht hier?";
+      stimulus.textContent=target.ar||"";
+      shuffled(hList.map(function(h,i){return {id:hkeys[i],label:h.laut||"",ar:h.ar||""}})).forEach(function(choice){
+        var b=document.createElement("button");
+        b.type="button";
+        b.className="ab-practice-choice ab-practice-latin";
+        b.textContent=choice.label;
+        b.addEventListener("click",function(){handlePracticeChoice(choice.id===practiceTargetKey,b,item,a,box,feedback)});
+        box.appendChild(b);
+      });
+      return;
+    }else if(practiceMode==="form"){
+      var entry=progressEntry(a,item.id);
+      var formKeys=item.connect==="left-none"?["fin"]:["ini","mid","fin"];
+      practiceTargetKey=formKeys[Number(entry.attempts||0)%formKeys.length];
+      var f=item.forms||{};
+      stimulus.textContent=f[practiceTargetKey]||f.iso||item.ar||"";
+      prompt.textContent="Welcher Buchstabe ist diese Form?";
+    }else{
+      prompt.textContent=a==="4–5"?"Wo ist "+item.nameDe+"?":"Finde den Buchstaben "+item.nameDe+".";
+    }
+
+    practiceOptions(item,a).forEach(function(choice){
+      var b=document.createElement("button");
+      b.type="button";
+      b.className="ab-practice-choice";
+      if(practiceMode==="form"){
+        var cf=choice.forms||{};
+        b.textContent=cf.iso||choice.ar||"";
+      }else b.textContent=choice.ar||"";
+      b.setAttribute("lang","ar");
+      b.setAttribute("dir","rtl");
+      b.setAttribute("aria-label",practiceMode==="audio"?"Antwort":(choice.nameDe||""));
+      if(practiceMode==="audio"&&!practiceAudioHeard)b.disabled=true;
+      b.addEventListener("click",function(){handlePracticeChoice(choice.id===item.id,b,item,a,box,feedback)});
+      box.appendChild(b);
+    });
+  }
+  function handlePracticeChoice(correct,button,item,a,box,feedback){
+    if(practicePassed)return;
+    if(correct){
+      practicePassed=true;
+      button.classList.add("correct");
+      box.querySelectorAll("button").forEach(function(x){x.disabled=true});
+      var result=recordPractice(a,item.id,practiceMode,practiceMistakes===0,practiceMistakes);
+      var secure=result.entry&&result.entry.stage==="secure";
+      if(secure)feedback.textContent="Richtig! "+item.nameDe+" ist jetzt sicher.";
+      else if(practiceMistakes>0)feedback.textContent="Richtig – diese Aufgabe zählt noch nicht als sicher.";
+      else if(!skillsComplete(a,result.entry))feedback.textContent="Richtig. Weitere Fähigkeiten werden noch geprüft.";
+      else if(result.counted)feedback.textContent="Richtig. Wiederholung gespeichert.";
+      else feedback.textContent="Richtig. Die nächste zeitliche Wiederholung steht noch aus.";
+      updateHeader(item,a);
+      if(practiceMode==="harakat"){
+        if(!playVerifiedSlot(item,"harakat",practiceTargetKey,function(){speakGerman("Richtig.");}))speakGerman("Richtig.");
+      }else if(!playVerifiedSlot(item,"name","",function(){speakGerman("Richtig.");}))speakGerman("Richtig.");
+      var next=document.getElementById("abNext");
+      if(next){next.disabled=false;next.textContent=reviewQueueMode?"Nächster":(idx===letters.length-1?"Fertig":"Nächster")}
+    }else{
+      practiceMistakes+=1;
+      button.classList.add("wrong");
+      feedback.textContent="Noch einmal – schau oder hör genau hin.";
+      speakGerman("Noch einmal.");
+    }
+  }
+  function unlockAudioPractice(){
+    practiceAudioHeard=true;
+    document.querySelectorAll("#alphabetModal #abPracticeChoices button").forEach(function(b){b.disabled=false});
+    var feedback=document.getElementById("abPracticeFeedback");
+    if(feedback)feedback.textContent="Jetzt wähle den gehörten Buchstaben.";
   }
   function render(){
     if(!letters.length)return;
     var a=ageKey();
     var plan=stepsForAge(a);
+    if(completeMode){
+      document.querySelectorAll("#alphabetModal .ab-pane").forEach(function(p){
+        p.classList.toggle("on",p.getAttribute("data-pane")==="complete");
+      });
+      document.querySelectorAll("#alphabetModal .lesson-step").forEach(function(el){
+        el.classList.remove("active");el.classList.add("done");
+      });
+      var summary=progressStats(a);
+      var queuedIndex=nextReviewIndex(a,"");
+      var hasQueued=queuedIndex>=0;
+      var lab=document.getElementById("abAgeLabel");
+      if(lab)lab.textContent="Runde abgeschlossen · "+summary.secure+" sicher · "+summary.learning+" lernen · "+summary.due+" fällig";
+      var title=document.getElementById("abCompleteTitle");
+      if(title)title.textContent=summary.secure===letters.length?(summary.due>0?"Wiederholung fällig":"Für heute geschafft"):"Runde beendet";
+      var txt=document.getElementById("abCompleteText");
+      if(txt)txt.textContent=summary.secure===letters.length?
+        (summary.due>0?
+          "Alle 28 Buchstaben sind sicher, aber mindestens eine zeitliche Wiederholung ist jetzt fällig.":
+          "Alle 28 Buchstaben erfüllen Sehen/Hören, die altersgerechten Leseaufgaben, die Audio-Bedingungen und die zeitlich getrennten Wiederholungen. Die nächste Wiederholung wird erst zum vorgesehenen Zeitpunkt freigeschaltet."):
+        summary.secure+" sicher · "+summary.learning+" im Lernen · "+summary.open+" noch offen · "+summary.due+" Wiederholungen fällig. Fehler und fällige Wiederholungen kommen vor neuen Inhalten.";
+      var prevDone=document.getElementById("abPrev");
+      var playDone=document.getElementById("abPlay");
+      var nextDone=document.getElementById("abNext");
+      if(prevDone){prevDone.disabled=false;prevDone.textContent="Zurück"}
+      if(playDone){playDone.disabled=true;playDone.textContent="Hören"}
+      setAudioStatus("Nur menschlich freigegebene Referenzaufnahmen zählen für „sicher“.","warn");
+      if(nextDone){nextDone.disabled=!hasQueued;nextDone.textContent=hasQueued?"Nächste Wiederholung":"Keine Wiederholung fällig"}
+      return;
+    }
     if(step>=plan.length)step=0;
     var pane=plan[step];
     var item=letters[idx]||letters[0];
-    var lab=document.getElementById("abAgeLabel");
-    if(lab)lab.textContent=(idx+1)+" / "+letters.length+" · "+(a==="4–5"?"klein":(a==="9–10"?"groß":"mittel"));
+    updateHeader(item,a);
+
     var labels=stepLabels(a);
-    ["See","Sound","Word","Form"].forEach(function(id){
+    ["See","Sound","Word","Form","Practice"].forEach(function(id){
       var el=document.getElementById("abStep"+id);
       var key=id.toLowerCase();
       if(!el)return;
@@ -4610,53 +5214,70 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     document.querySelectorAll("#alphabetModal .ab-pane").forEach(function(p){
       p.classList.toggle("on",p.getAttribute("data-pane")===pane);
     });
+
     var src="/test/kids/assets/alphabet/alpha-"+item.id+".png";
     var picSee=document.getElementById("abPicSee");
     var picWord=document.getElementById("abPicWord");
     if(picSee){picSee.src=src;picSee.alt=item.wordDe||""}
     if(picWord){picWord.src=src;picWord.alt=item.wordDe||""}
+
     var L=item.ar||"";
     ["abLetterSee","abLetterSound","abLetterForm"].forEach(function(id){
-      var el=document.getElementById(id); if(el)el.textContent=L;
+      var el=document.getElementById(id);if(el)el.textContent=L;
     });
     var nameSee=document.getElementById("abNameSee");
     if(nameSee)nameSee.textContent=item.nameDe||"";
     var hintSee=document.getElementById("abHintSee");
-    if(hintSee)hintSee.textContent=a==="4–5"?("Das ist "+(item.nameDe||"")+"."):(item.nameAr+" · "+(item.nameDe||""));
+    if(hintSee)hintSee.textContent=ageExplanation(item,a)||("Das ist "+(item.nameDe||"")+".");
+
     var hintSound=document.getElementById("abHintSound");
-    if(hintSound)hintSound.textContent=a==="4–5"?"Tippe auf den Laut.":"Fatḥa a · Kasra i · Ḍamma u";
+    if(hintSound)hintSound.textContent=a==="4–5"?"Tippe auf den Laut und sprich nach.":"Tippe auf jeden Laut und sprich nach: Fatḥa · Kasra · Ḍamma.";
     var har=document.getElementById("abHarakat");
     if(har){
       har.innerHTML="";
       var list=item.harakat||[];
       if(a==="4–5")list=list.slice(0,1);
-      list.forEach(function(h){
+      var hk=["fatha","kasra","damma"];
+      list.forEach(function(h,hi){
+        var key=hk[hi]||("h"+(hi+1));
+        var ready=!!audioSlot(item.id,"harakat",key);
         var b=document.createElement("button");
         b.type="button";
-        b.className="ab-h";
-        b.innerHTML="<b lang=\"ar\" dir=\"rtl\">"+(h.ar||"")+"</b><small>"+kidLaut(h.laut||h.speak||"")+"</small>";
-        b.addEventListener("click",function(){kidsAlphabetSpeak((h.speak||h.laut||"")+". ")});
+        b.className="ab-h"+(ready?"":" audio-pending");
+        b.innerHTML="<b lang=\"ar\" dir=\"rtl\">"+(h.ar||"")+"</b><small>"+kidLaut(h.laut||"")+"</small>";
+        b.setAttribute("aria-label",(h.laut||"")+" anhören");
+        b.addEventListener("click",function(){playVerifiedSlot(item,"harakat",key)});
         har.appendChild(b);
       });
     }
+
     var wd=document.getElementById("abWordDe");
     var wa=document.getElementById("abWordAr");
     var hw=document.getElementById("abHintWord");
     if(wd)wd.textContent=item.wordDe||"";
     if(wa)wa.textContent=item.wordAr||"";
-    if(hw)hw.textContent=a==="4–5"?"":("Laut: "+kidLaut(item.wordLaut||""));
+    if(hw)hw.textContent=a==="4–5"?"Höre und sprich nach.":"Lautschrift: "+kidLaut(item.wordLaut||"");
+
     var hf=document.getElementById("abHintForm");
-    if(hf)hf.textContent=item.connect==="left-none"?"Verbindet nicht nach links.":"Verbindet nach beiden Seiten.";
+    if(hf)hf.textContent=item.connect==="left-none"?
+      "Dieser Buchstabe verbindet sich nicht mit dem nächsten Buchstaben.":
+      "Dieser Buchstabe kann sich mit dem vorherigen und dem nächsten Buchstaben verbinden.";
     var forms=document.getElementById("abForms");
     if(forms){
       forms.innerHTML="";
       var f=item.forms||{};
-      [["Allein",f.iso],["Anfang",f.ini],["Mitte",f.mid],["Ende",f.fin]].forEach(function(row){
+      var rows=item.connect==="left-none"?
+        [["Allein",f.iso],["Nach Buchstabe",f.fin]]:
+        [["Allein",f.iso],["Anfang",f.ini],["Mitte",f.mid],["Ende",f.fin]];
+      rows.forEach(function(row){
         var s=document.createElement("span");
         s.innerHTML=row[0]+"<b lang=\"ar\" dir=\"rtl\">"+(row[1]||"")+"</b>";
         forms.appendChild(s);
       });
     }
+
+    if(pane==="practice")renderPractice(item,a);
+
     var dots=document.getElementById("abDots");
     if(dots){
       if(!dots.childNodes.length){
@@ -4665,45 +5286,181 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
           d.type="button";
           d.className="ab-dot";
           d.setAttribute("aria-label",it.nameDe||"");
-          d.addEventListener("click",function(){idx=i;step=0;render();});
+          d.addEventListener("click",function(){reviewQueueMode=false;idx=i;step=0;practiceToken="";practicePassed=false;practiceMistakes=0;practiceAudioHeard=false;practiceTargetKey="";render()});
           dots.appendChild(d);
         });
       }
       dots.querySelectorAll(".ab-dot").forEach(function(d,i){d.classList.toggle("on",i===idx)});
     }
+
     var next=document.getElementById("abNext");
-    if(next)next.textContent=step>=plan.length-1?"Nächster":"Weiter";
+    if(next){
+      next.disabled=pane==="practice"&&!practicePassed;
+      if(pane==="practice"&&!practicePassed)next.textContent="Erst richtig wählen";
+      else if(pane==="practice"&&practicePassed)next.textContent=reviewQueueMode?"Nächster":(idx===letters.length-1?"Fertig":"Nächster");
+      else next.textContent="Weiter";
+    }
+    var prevBtn=document.getElementById("abPrev");
+    var playBtn=document.getElementById("abPlay");
+    if(prevBtn){prevBtn.disabled=idx===0&&step===0;prevBtn.textContent="Zurück"}
+    var audioReady=false;
+    if(pane==="see")audioReady=!!audioSlot(item.id,"name");
+    else if(pane==="practice")audioReady=practiceMode==="audio"&&!!audioSlot(item.id,"name");
+    else if(pane==="word")audioReady=!!audioSlot(item.id,"word");
+    else if(pane==="sound")audioReady=requiredHarakatKeys(a).every(function(k){return !!audioSlot(item.id,"harakat",k)});
+    else if(pane==="form")audioReady=true;
+    if(playBtn){
+      playBtn.disabled=(pane==="practice"&&practiceMode!=="audio")?true:!audioReady;
+      playBtn.textContent="Hören";
+    }
+    if(pane==="practice"&&practiceMode==="audio"){
+      setAudioStatus(audioReady?"Geprüfte Hörreferenz verfügbar. Erst hören, dann antworten.":"Hörprüfung wartet auf freigegebene Referenzaufnahme.",audioReady?"ok":"warn");
+    }else if(pane==="practice")setAudioStatus("Diese Übung prüft "+(practiceMode==="form"?"die Buchstabenform":practiceMode==="harakat"?"die Ḥaraka":"das visuelle Erkennen")+".","");
+    else if(pane==="form")setAudioStatus("Formen werden visuell gelernt.","");
+    else if(audioReady)setAudioStatus("Geprüfte Referenzaufnahme verfügbar.","ok");
+    else if(pane==="sound")setAudioStatus("Ḥarakāt-Aufnahmen noch nicht vollständig freigegeben.","warn");
+    else if(pane==="word")setAudioStatus("Wortaufnahme noch nicht freigegeben.","warn");
+    else setAudioStatus("Noch keine Aufnahme mit derselben Alif-Stimme freigegeben.","warn");
     try{localStorage.setItem(KEY,String(idx))}catch(e){}
   }
   function goStep(dir){
     if(!letters.length)return;
-    var plan=stepsForAge(ageKey());
+    var a=ageKey();
+    var plan=stepsForAge(a);
+
+    if(completeMode){
+      if(dir<0){
+        completeMode=false;
+        reviewQueueMode=false;
+        idx=letters.length-1;
+        step=plan.length-1;
+        practiceToken=a+"|"+(letters[idx]&&letters[idx].id||"");
+        practicePassed=true;
+      }else{
+        var queued=nextReviewIndex(a,"");
+        if(queued<0)return;
+        completeMode=false;
+        reviewQueueMode=true;
+        idx=queued;
+        step=0;
+        practiceToken="";
+        practicePassed=false;
+        practiceMistakes=0;
+        practiceAudioHeard=false;
+        practiceTargetKey="";
+      }
+      render();
+      return;
+    }
+
+    var pane=plan[step];
+    var currentItem=letters[idx]||letters[0];
+    if(dir<0){
+      reviewQueueMode=false;
+      if(idx===0&&step===0)return;
+    }
+    if(dir>0&&pane==="practice"&&!practicePassed){
+      var feedback=document.getElementById("abPracticeFeedback");
+      if(feedback)feedback.textContent="Wähle zuerst den richtigen Buchstaben.";
+      return;
+    }
+    if(dir>0&&pane==="practice"&&practicePassed&&reviewQueueMode){
+      var nextQueued=nextReviewIndex(a,currentItem&&currentItem.id||"");
+      if(nextQueued<0){
+        completeMode=true;
+        render();
+        return;
+      }
+      idx=nextQueued;
+      step=0;
+      practiceToken="";
+      practicePassed=false;
+      practiceMistakes=0;
+      practiceAudioHeard=false;
+      practiceTargetKey="";
+      render();
+      return;
+    }
+    if(dir>0&&pane==="practice"&&practicePassed&&idx===letters.length-1){
+      completeMode=true;
+      render();
+      return;
+    }
+
     step+=dir;
-    if(step>=plan.length){step=0;idx=(idx+1)%letters.length}
-    if(step<0){idx=(idx-1+letters.length)%letters.length;step=stepsForAge(ageKey()).length-1}
+    if(step>=plan.length){
+      step=0;
+      idx=Math.min(idx+1,letters.length-1);
+      practiceToken="";
+      practicePassed=false;
+      practiceMistakes=0;
+      practiceAudioHeard=false;
+      practiceTargetKey="";
+    }
+    if(step<0){
+      idx=Math.max(0,idx-1);
+      step=stepsForAge(ageKey()).length-1;
+      practiceToken="";
+      practicePassed=false;
+      practiceMistakes=0;
+      practiceAudioHeard=false;
+      practiceTargetKey="";
+    }
     render();
   }
   function speakNow(){
-    var item=letters[idx]; if(!item)return;
+    var item=letters[idx];if(!item)return;
     var a=ageKey();
     var pane=stepsForAge(a)[step];
-    if(pane==="see")kidsAlphabetSpeak((item.speakName||item.nameDe)+". Das ist "+(item.nameDe||"")+".");
-    else if(pane==="sound"){
-      var h=(item.harakat&&item.harakat[0])||{};
-      kidsAlphabetSpeak(a==="4–5"?(h.speak||""): (item.harakat||[]).map(function(x){return x.speak}).join(". "));
-    }else if(pane==="word")kidsAlphabetSpeak((item.wordSpeak||item.wordDe)+". ");
-    else kidsAlphabetSpeak(item.connect==="left-none"?"Verbindet nicht nach links.":"Verbindet nach beiden Seiten.");
+    if(pane==="see"){
+      playVerifiedSlot(item,"name","");
+    }else if(pane==="sound"){
+      var specs=requiredHarakatKeys(a).map(function(k){return {kind:"harakat",key:k}});
+      playVerifiedSequence(item,specs,0);
+    }else if(pane==="word"){
+      playVerifiedSlot(item,"word","");
+    }else if(pane==="form"){
+      speakGerman(item.connect==="left-none"?
+        "Dieser Buchstabe verbindet sich nicht mit dem nächsten Buchstaben.":
+        "Dieser Buchstabe kann sich mit dem vorherigen und dem nächsten Buchstaben verbinden.");
+    }else{
+      if(practiceMode==="audio"){
+        if(!playVerifiedSlot(item,"name","",unlockAudioPractice))setAudioStatus("Hörprüfung wartet auf freigegebene Referenzaufnahme.","warn");
+      }else{
+        setAudioStatus("Für diese Aufgabe ist keine Hörhilfe vorgesehen.","");
+      }
+    }
   }
   function openAlphabet(){
+    stopAlphabetAudio();
     step=0;
+    practiceToken="";
+    practicePassed=false;
+    practiceMistakes=0;
+    practiceAudioHeard=false;
+    practiceTargetKey="";
+    completeMode=false;
+    reviewQueueMode=true;
+    var queued=nextReviewIndex(ageKey(),"");
+    if(queued>=0)idx=queued;
+    else completeMode=true;
     var m=document.getElementById("alphabetModal");
     if(m)m.classList.add("open");
     render();
   }
-  window.kidsAlphabetOnAge=function(){step=0;render();};
+  window.kidsAlphabetOnAge=function(){
+    step=0;practiceToken="";practicePassed=false;practiceMistakes=0;practiceAudioHeard=false;practiceTargetKey="";practiceMode="visual";completeMode=false;reviewQueueMode=true;
+    var queued=nextReviewIndex(ageKey(),"");if(queued>=0)idx=queued;else completeMode=true;
+    render();
+  };
   window.openAlphabet=openAlphabet;
-  fetch("/test/kids/data/alphabet-kids.json?v=3",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(data){
+  Promise.all([
+    fetch("/test/kids/data/alphabet-kids.json?v=8",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
+    fetch("/test/kids/data/alphabet-audio.json?v=5",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
+  ]).then(function(result){
+    var data=result[0],audioData=result[1];
     letters=(data&&data.letters)||[];
+    alphabetAudioManifest=audioData&&audioData.letters?audioData:{letters:{}};
     try{idx=Math.max(0,Math.min(letters.length-1,Number(localStorage.getItem(KEY)||"0")))}catch(e){idx=0}
     var dots=document.getElementById("abDots");
     if(dots)dots.innerHTML="";
@@ -4750,14 +5507,79 @@ function quizAgeRange(){
   if(age==="6–8")return{min:6,max:8,limit:4};
   return{min:9,max:10,limit:5};
 }
-function quizMastery(id){
-  try{return Number(localStorage.getItem("kids.quiz.mastery."+id)||"0")}catch(e){return 0}
+var QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v2.";
+function quizProgressDefault(){
+  return {stage:"new",attempts:0,reviewPasses:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0};
 }
-function markQuizMastery(id){
+function quizProgress(id){
+  var key=QUIZ_PROGRESS_PREFIX+id;
   try{
-    var key="kids.quiz.mastery."+id;
-    localStorage.setItem(key,String(Math.min(5,quizMastery(id)+1)));
+    var raw=JSON.parse(localStorage.getItem(key)||"null");
+    if(raw&&typeof raw==="object"){
+      var base=quizProgressDefault();
+      Object.keys(base).forEach(function(k){if(raw[k]===undefined)raw[k]=base[k]});
+      return raw;
+    }
+    var legacy=Number(localStorage.getItem("kids.quiz.mastery."+id)||"0");
+    if(legacy>0){
+      var migrated=quizProgressDefault();
+      migrated.stage="learning";
+      migrated.attempts=legacy;
+      migrated.reviewPasses=1;
+      migrated.dueAt=Date.now();
+      migrated.lastSeenAt=Date.now();
+      localStorage.setItem(key,JSON.stringify(migrated));
+      return migrated;
+    }
   }catch(e){}
+  return quizProgressDefault();
+}
+function saveQuizProgress(id,entry){
+  try{localStorage.setItem(QUIZ_PROGRESS_PREFIX+id,JSON.stringify(entry||quizProgressDefault()))}catch(e){}
+}
+function quizMastery(id){
+  return Number(quizProgress(id).reviewPasses||0);
+}
+function quizPriority(id,now){
+  var e=quizProgress(id);
+  if(!e.attempts)return{bucket:40,due:0,lastSeen:0,entry:e};
+  var due=Number(e.dueAt||0);
+  if(due>now)return{bucket:90,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+  var recentMistake=Number(e.lastMistakeAt||0)>0&&now-Number(e.lastMistakeAt||0)<=14*24*60*60*1000;
+  if(recentMistake)return{bucket:10,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+  if(e.stage==="learning")return{bucket:20,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+  if(e.stage==="review")return{bucket:25,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+  if(e.stage==="secure")return{bucket:30,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+  return{bucket:35,due:due,lastSeen:Number(e.lastSeenAt||0),entry:e};
+}
+function recordQuizAttempt(id,firstTry){
+  var e=quizProgress(id);
+  var now=Date.now();
+  e.attempts=Number(e.attempts||0)+1;
+  e.lastSeenAt=now;
+  var counted=false;
+  if(firstTry){
+    e.consecutiveFirstTry=Number(e.consecutiveFirstTry||0)+1;
+    if(!e.dueAt||now>=Number(e.dueAt||0)){
+      e.reviewPasses=Number(e.reviewPasses||0)+1;
+      counted=true;
+      if(e.reviewPasses===1)e.dueAt=now+10*60*1000;
+      else if(e.reviewPasses===2)e.dueAt=now+24*60*60*1000;
+      else e.dueAt=now+7*24*60*60*1000;
+    }
+  }else{
+    e.wrong=Number(e.wrong||0)+1;
+    e.lapses=Number(e.lapses||0)+1;
+    e.lastMistakeAt=now;
+    e.consecutiveFirstTry=0;
+    e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
+    e.dueAt=now+5*60*1000;
+  }
+  if(e.reviewPasses>=3)e.stage="secure";
+  else if(e.reviewPasses>=2)e.stage="review";
+  else e.stage="learning";
+  saveQuizProgress(id,e);
+  return{entry:e,counted:counted,firstTry:firstTry};
 }
 function deterministicQuizRank(id){
   var str=todayKey()+"|"+age+"|"+String(id||"");
@@ -4770,6 +5592,7 @@ function deterministicQuizRank(id){
 }
 function quizBankForAge(){
   var r=quizAgeRange();
+  var now=Date.now();
   var pool=kidsQuizPool.filter(function(q){
     return q.verification==="approved" &&
       q.canonicalStatus==="published" &&
@@ -4778,11 +5601,13 @@ function quizBankForAge(){
       Number(q.ageMax)>=r.max;
   });
   pool.sort(function(a,b){
-    var ma=quizMastery(a.id),mb=quizMastery(b.id);
-    if(ma!==mb)return ma-mb;
+    var pa=quizPriority(a.id,now),pb=quizPriority(b.id,now);
+    if(pa.bucket!==pb.bucket)return pa.bucket-pb.bucket;
+    if(pa.due!==pb.due)return pa.due-pb.due;
+    if(pa.lastSeen!==pb.lastSeen)return pa.lastSeen-pb.lastSeen;
     return deterministicQuizRank(a.id)-deterministicQuizRank(b.id);
   });
-  return pool.slice(0,r.limit);
+  return pool.filter(function(q){return quizPriority(q.id,now).bucket<90}).slice(0,r.limit);
 }
 function fetchKidsQuiz(){
   return fetch("/test/kids/data/quiz-kids.json?v="+Date.now(),{cache:"no-store"})
@@ -4836,7 +5661,7 @@ function beginQuizSession(){
   document.getElementById("quizAgeLabel").textContent=age==="4–5"?"4–5 Jahre · hören & tippen":(age==="6–8"?"6–8 Jahre · geprüfte Fragen":"9–10 Jahre · geprüft & vertieft");
   if(!currentQuiz.length){
     document.getElementById("quizProgress").innerHTML="";
-    document.getElementById("quizBody").innerHTML='<div class="quiz-finish"><div class="star"></div><h3>Gerade keine Frage verfügbar</h3><p>Es werden nur geprüfte Fragen angezeigt.</p></div>';
+    document.getElementById("quizBody").innerHTML='<div class="quiz-finish"><div class="star"></div><h3>Für jetzt geschafft</h3><p>Keine geprüfte Wiederholung ist gerade fällig. Komm später wieder.</p></div>';
     return;
   }
   renderQuizQuestion();
@@ -4892,7 +5717,12 @@ function chooseQuizAnswer(index,button){
     var src=document.getElementById("quizSource");
     if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
     document.getElementById("quizNext").classList.add("show");
-    if(!quizQuestionHadError)markQuizMastery(q.id);
+    var masteryResult=recordQuizAttempt(q.id,!quizQuestionHadError);
+    if(masteryResult.entry&&masteryResult.entry.stage==="secure"){
+      document.getElementById("quizFeedback").textContent="✓ "+q.success+" · sicher";
+    }else if(!quizQuestionHadError&&!masteryResult.counted){
+      document.getElementById("quizFeedback").textContent="✓ "+q.success+" · Wiederholung später";
+    }
     quizSpeak(q.success);
   }else{
     quizQuestionHadError=true;
@@ -4923,6 +5753,74 @@ function renderQuizFinish(){
 }
 document.getElementById("openQuizButton").addEventListener("click",openQuiz);
 
+var STORY_PROGRESS_PREFIX="kids.story.progress.v2.";
+function storyProgressDefault(){
+  return {stage:"new",attempts:0,reviewPasses:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0};
+}
+function storyProgress(key){
+  var storageKey=STORY_PROGRESS_PREFIX+key;
+  try{
+    var raw=JSON.parse(localStorage.getItem(storageKey)||"null");
+    if(raw&&typeof raw==="object"){
+      var base=storyProgressDefault();
+      Object.keys(base).forEach(function(k){if(raw[k]===undefined)raw[k]=base[k]});
+      return raw;
+    }
+    if(localStorage.getItem("kids.story."+key)==="1"){
+      var migrated=storyProgressDefault();
+      migrated.stage="learning";
+      migrated.attempts=1;
+      migrated.reviewPasses=1;
+      migrated.dueAt=Date.now();
+      migrated.lastSeenAt=Date.now();
+      localStorage.setItem(storageKey,JSON.stringify(migrated));
+      return migrated;
+    }
+  }catch(e){}
+  return storyProgressDefault();
+}
+function saveStoryProgress(key,entry){
+  try{localStorage.setItem(STORY_PROGRESS_PREFIX+key,JSON.stringify(entry||storyProgressDefault()))}catch(e){}
+}
+function recordStoryAttempt(key,firstTry){
+  var e=storyProgress(key);
+  var now=Date.now();
+  e.attempts=Number(e.attempts||0)+1;
+  e.lastSeenAt=now;
+  var counted=false;
+  if(firstTry){
+    e.consecutiveFirstTry=Number(e.consecutiveFirstTry||0)+1;
+    if(!e.dueAt||now>=Number(e.dueAt||0)){
+      e.reviewPasses=Number(e.reviewPasses||0)+1;
+      counted=true;
+      if(e.reviewPasses===1)e.dueAt=now+10*60*1000;
+      else if(e.reviewPasses===2)e.dueAt=now+24*60*60*1000;
+      else e.dueAt=now+7*24*60*60*1000;
+    }
+  }else{
+    e.wrong=Number(e.wrong||0)+1;
+    e.lapses=Number(e.lapses||0)+1;
+    e.lastMistakeAt=now;
+    e.consecutiveFirstTry=0;
+    e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
+    e.dueAt=now+5*60*1000;
+  }
+  if(e.reviewPasses>=3)e.stage="secure";
+  else if(e.reviewPasses>=2)e.stage="review";
+  else e.stage="learning";
+  saveStoryProgress(key,e);
+  return{entry:e,counted:counted,firstTry:firstTry};
+}
+function storyButtonLabel(key){
+  var e=storyProgress(key),now=Date.now();
+  if(e.stage==="secure"){
+    return Number(e.dueAt||0)<=now?"○ Wiederholen":"✓ Sicher verstanden";
+  }
+  if(e.attempts&&Number(e.dueAt||0)>now)return"✓ Wiederholung später";
+  if(e.attempts)return"○ Wiederholen";
+  return"○ Frage beantworten";
+}
+
 function openStory(key){
   currentStoryKey=key;
   var s=storyData(key);
@@ -4935,7 +5833,8 @@ function openStory(key){
   var storySource=document.getElementById("storySource");
   storySource.textContent=s.verification==="approved"?(s.sourceRefs||[]).join(" · "):"";
   storyQuestionPassed=false;
-  document.getElementById("storyDone").textContent=localStorage.getItem("kids.story."+key)==="1"?"✓ Frage noch einmal":"○ Frage beantworten";
+  storyQuestionHadError=false;
+  document.getElementById("storyDone").textContent=storyButtonLabel(key);
   document.getElementById("storyQuestion").classList.remove("show");
   document.getElementById("storyQuestionFeedback").textContent="";
   document.getElementById("storyModal").classList.add("open");
@@ -4996,13 +5895,16 @@ function renderStoryQuestion(){
         storyQuestionPassed=true;
         b.classList.add("correct");
         feedback.className="story-question-feedback good";
-        feedback.textContent="✓ "+q.success;
-        localStorage.setItem("kids.story."+currentStoryKey,"1");
-        document.getElementById("storyDone").textContent="✓ Verstanden";
+        var storyResult=recordStoryAttempt(currentStoryKey,!storyQuestionHadError);
+        if(storyResult.entry&&storyResult.entry.stage==="secure")feedback.textContent="✓ "+q.success+" · sicher";
+        else if(!storyQuestionHadError&&!storyResult.counted)feedback.textContent="✓ "+q.success+" · Wiederholung später";
+        else feedback.textContent="✓ "+q.success;
+        document.getElementById("storyDone").textContent=storyButtonLabel(currentStoryKey);
         markDailyDone("story");
         updateParentProgress();
         quizSpeak(q.success);
       }else{
+        storyQuestionHadError=true;
         b.classList.add("wrong");
         feedback.className="story-question-feedback bad";
         feedback.textContent=q.retry;
@@ -5028,7 +5930,7 @@ document.querySelectorAll("[data-close]").forEach(function(b){
     if(type==="quiz"){try{speech.cancel()}catch(e){} document.getElementById("quizModal").classList.remove("open")}
     if(type==="quran"){stopQuran();releaseMicStream();document.getElementById("quranModal").classList.remove("open")}
     if(type==="fullquran"){document.getElementById("fullQuranModal").classList.remove("open")}
-    if(type==="alphabet"){try{speech.cancel()}catch(e){} document.getElementById("alphabetModal").classList.remove("open")}
+    if(type==="alphabet"){try{speech.cancel()}catch(e){} if(window.stopKidsAlphabetAudio)window.stopKidsAlphabetAudio();document.getElementById("alphabetModal").classList.remove("open")}
   });
 });
 
@@ -5468,7 +6370,15 @@ fetchCatalog();
 </script>
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
-<script src="/test/kids/content-studio-feed.js?v=studio1"></script>\n</body>
+<script src="/test/kids/content-studio-feed.js?v=studio1"></script>\n<script>
+(function(){
+  if(!("serviceWorker" in navigator))return;
+  window.addEventListener("load",function(){
+    navigator.serviceWorker.register("/test/kids/sw.js",{scope:"/test/kids/"}).catch(function(){});
+  });
+})();
+</script>
+</body>
 
 <style id="kids-quiz-scroll-v1">
 #quizModal.modal{touch-action:pan-y!important}
@@ -5483,6 +6393,54 @@ fetchCatalog();
   overscroll-behavior:contain!important;
   touch-action:pan-y!important;
   padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;
+}
+</style>
+<style id="kids-wordmark-sky-curve-v33">
+#view-today .kids-wordmark,.kids-wordmark{
+  position:absolute!important;
+  left:50%!important;top:max(6px, env(safe-area-inset-top, 0px))!important;
+  right:auto!important;bottom:auto!important;
+  transform:translateX(-50%)!important;
+  margin:0!important;width:min(96vw,680px)!important;
+  z-index:7!important;text-align:center!important;pointer-events:none!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;gap:0!important;
+}
+#view-today .wm-dar,.wm-dar{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+#view-today .wm-dar-wrap{
+  position:relative;width:100%;overflow:visible;
+}
+#view-today .wm-dar-svg,.wm-dar-svg{
+  display:block!important;opacity:1!important;visibility:visible!important;
+  width:100%!important;height:clamp(88px,26vw,136px)!important;
+  overflow:visible!important;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.42)) drop-shadow(0 12px 22px rgba(8,24,36,.38));
+  animation:darFloat 4.2s ease-in-out infinite;
+}
+@keyframes darFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-7px) scale(1.02)}
+}
+#view-today .wm-dar-fx{
+  position:absolute;inset:-12% -8%;pointer-events:none;border-radius:40%;
+  background:linear-gradient(115deg,transparent 28%,rgba(255,255,255,.78) 50%,transparent 72%);
+  background-size:220% 100%;
+  mix-blend-mode:soft-light;
+  animation:darShine 3.5s ease-in-out infinite;
+}
+@keyframes darShine{
+  0%{background-position:-90% 0;opacity:.2}
+  45%{opacity:1}
+  100%{background-position:190% 0;opacity:.15}
+}
+#view-today .wm-kids,.wm-kids{
+  display:flex!important;justify-content:center!important;align-items:flex-end!important;
+  margin:-8px auto 0!important;font-size:clamp(34px,10.8vw,56px)!important;
+}
+#view-today .hero::before,.hero::before{
+  background-position:center 54%!important;
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .wm-dar-svg,#view-today .wm-dar-fx,#view-today .wm-kids span{animation:none!important}
 }
 </style>
 
