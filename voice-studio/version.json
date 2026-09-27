@@ -318,7 +318,8 @@
     "hardSegmentWatchdog": true,
     "stuckWorkerKillAndRestart": true,
     "completedSegmentProgress": true,
-    "narrativePunctuationStaysNarrative": true
+    "narrativePunctuationStaysNarrative": true,
+    "narrativeColonNeverForcesList": true
   },
   "contentStudio": {
     "enabled": true,
@@ -521,10 +522,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "c6c09911f8149d3200ef004301e27f3fa415481e",
+  "releaseRef": "6679946a53bfd6218ca332ff3f0492d0083f4131",
   "releaseChannel": "stable",
   "updateRepair": true,
-  "updateRepairReason": "2.9.9 sentence-flow hotfix: narrative punctuation no longer forces list prosody",
+  "updateRepairReason": "2.9.9 sentence-flow hotfix: narrative colon and commas no longer trigger list prosody",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
