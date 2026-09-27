@@ -1,3 +1,47 @@
+const KIDS_VERSION_BODY = JSON.stringify({
+  buildId: "kids-shell-v12-tab31",
+  label: "KIDS · V0.31"
+});
+
+function kidsVersionResponse() {
+  return new Response(KIDS_VERSION_BODY, {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0"
+    }
+  });
+}
+
+function isKidsHtmlPath(path) {
+  return path === "/test/kids/start"
+    || path === "/test/kids/start.html"
+    || path === "/test/kids/index.html"
+    || path === "/test/kids/shell.html"
+    || path === "/test/kids"
+    || path === "/test/kids/";
+}
+
+function patchKidsHtml(html) {
+  if (!html) return html;
+  if (!html.includes("kidsOverlayKillV1")) {
+    html = html.replace(
+      "</head>",
+      '<style id="kidsOverlayKillV1">.kids-update-layer,.kids-update-layer.is-open{display:none!important;visibility:hidden!important;pointer-events:none!important;transform:none!important;height:0!important;overflow:hidden!important}</style></head>'
+    );
+  }
+  html = html.replace("location.replace(u.toString());", "void 0;");
+  html = html.replace(
+    'try{ return localStorage.getItem(SEEN_KEY)!=="1"; }catch(e2){ return true; }',
+    "return false;"
+  );
+  html = html.replace(
+    "if(remote && remote!==KIDS_BUILD_ID)",
+    "if(false && remote && remote!==KIDS_BUILD_ID)"
+  );
+  return html;
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -31,22 +75,23 @@ export default {
     }
 
     if (url.pathname === "/test/kids/version.json") {
-      return new Response(JSON.stringify({
-        buildId: "kids-shell-v12-tab31",
-        label: "KIDS · V0.31"
-      }), {
-        status: 200,
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0"
-        }
-      });
+      return kidsVersionResponse();
     }
 
     const asset = await env.ASSETS.fetch(request);
     const path = url.pathname;
     const kidsPath = path === "/test/kids" || path.startsWith("/test/kids/");
-    if (kidsPath) return asset;
+    if (kidsPath) {
+      if (asset && asset.ok && isKidsHtmlPath(path)) {
+        const html = patchKidsHtml(await asset.text());
+        const headers = new Headers(asset.headers);
+        headers.set("Content-Type", "text/html; charset=utf-8");
+        headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        headers.delete("Content-Length");
+        return new Response(html, { status: asset.status, statusText: asset.statusText, headers });
+      }
+      return asset;
+    }
     const bust = /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
       || path.endsWith("/test/version.json")

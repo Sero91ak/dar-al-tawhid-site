@@ -60,6 +60,33 @@ function kidsHeaders(assetResponse) {
   return headers;
 }
 
+function patchKidsHtml(html) {
+  if (!html) return html;
+  if (!html.includes("kidsOverlayKillV1")) {
+    html = html.replace(
+      "</head>",
+      '<style id="kidsOverlayKillV1">.kids-update-layer,.kids-update-layer.is-open{display:none!important;visibility:hidden!important;pointer-events:none!important;transform:none!important;height:0!important;overflow:hidden!important}</style></head>'
+    );
+  }
+  html = html.replace("location.replace(u.toString());", "void 0;");
+  html = html.replace(
+    'try{ return localStorage.getItem(SEEN_KEY)!=="1"; }catch(e2){ return true; }',
+    "return false;"
+  );
+  html = html.replace(
+    "if(remote && remote!==KIDS_BUILD_ID)",
+    "if(false && remote && remote!==KIDS_BUILD_ID)"
+  );
+  return html;
+}
+
+function isKidsHtmlPath(pathname) {
+  return pathname === "/test/kids/start"
+    || pathname === "/test/kids/start.html"
+    || pathname === "/test/kids/index.html"
+    || pathname === "/test/kids/shell.html";
+}
+
 function browserManifestResponse(request) {
   const manifest = {
     $schema: "https://json.schemastore.org/web-manifest-combined.json",
@@ -229,6 +256,15 @@ export default {
       const headers = kidsHeaders(assetResponse);
       if (request.method === "HEAD") {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
+      }
+      if (assetResponse.ok && isKidsHtmlPath(url.pathname)) {
+        const html = patchKidsHtml(await assetResponse.text());
+        headers.set("Content-Type", "text/html; charset=utf-8");
+        return new Response(html, {
+          status: assetResponse.status,
+          statusText: assetResponse.statusText,
+          headers
+        });
       }
       return new Response(assetResponse.body, {
         status: assetResponse.status,
