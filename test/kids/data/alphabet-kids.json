@@ -1,36 +1,1156 @@
 {
-  "version": 2,
+  "version": 3,
   "id": "KIDS_ARABIC_ALPHABET_V2",
   "audioSync": "KIDS_ALPHABET_AUDIO_SYNC_V1",
-  "note": "Hijāʾī-Reihenfolge. Ḥarakāt: Fatḥa a, Kasra i, Ḍamma u. Alif wird mit Hamza أَ إِ أُ gelehrt. Lautschrift für deutsche Kinder, TTS getrennt (speak).",
+  "note": "Hijāʾī-Reihenfolge. Ḥarakāt: Fatḥa a, Kasra i, Ḍamma u. Alif wird mit Hamza أَ إِ أُ eingeführt. Arabische Aussprache wird in der UI getrennt von deutschen Erklärungen wiedergegeben; deutsche Lautschrift ist nur Zusatzhilfe.",
   "letters": [
-    {"id":"alif","ar":"ا","nameDe":"Alif","nameAr":"أَلِف","lautName":"Alif","speakName":"Alif","connect":"left-none","harakat":[{"ar":"أَ","laut":"a","speak":"a"},{"ar":"إِ","laut":"i","speak":"i"},{"ar":"أُ","laut":"u","speak":"u"}],"wordAr":"أَرْنَب","wordDe":"Hase","wordLaut":"arnab","wordSpeak":"arnab, Hase","forms":{"iso":"ا","ini":"ا","mid":"ـا","fin":"ـا"},"ages":{"4–5":"Das ist Alif. Ein gerader Strich. Wort: Hase. أَرْنَب","6–8":"Alif. Mit Hamza: أَ a, إِ i, أُ u. Wort أَرْنَب arnab.","9–10":"Alif verbindet nicht nach links. Hamza: أَ إِ أُ. Als Madd nach Fatḥa wird ا zu ā."}},
-    {"id":"ba","ar":"ب","nameDe":"Bā","nameAr":"بَاء","lautName":"Bā","speakName":"Ba","connect":"both","harakat":[{"ar":"بَ","laut":"ba","speak":"ba"},{"ar":"بِ","laut":"bi","speak":"bi"},{"ar":"بُ","laut":"bu","speak":"bu"}],"wordAr":"بَطَّة","wordDe":"Ente","wordLaut":"baṭṭa","wordSpeak":"batta, Ente","forms":{"iso":"ب","ini":"بـ","mid":"ـبـ","fin":"ـب"},"ages":{"4–5":"Bā. Ein Punkt unten. Wort: Ente. بَطَّة","6–8":"Bā: بَ ba, بِ bi, بُ bu. Wort بَطَّة baṭṭa.","9–10":"Bā verbindet nach beiden Seiten. Punkt immer unten. بـ ـبـ ـب"}},
-    {"id":"ta","ar":"ت","nameDe":"Tā","nameAr":"تَاء","lautName":"Tā","speakName":"Ta","connect":"both","harakat":[{"ar":"تَ","laut":"ta","speak":"ta"},{"ar":"تِ","laut":"ti","speak":"ti"},{"ar":"تُ","laut":"tu","speak":"tu"}],"wordAr":"تُفَّاحَة","wordDe":"Apfel","wordLaut":"tuffāḥa","wordSpeak":"tuffaha, Apfel","forms":{"iso":"ت","ini":"تـ","mid":"ـتـ","fin":"ـت"},"ages":{"4–5":"Tā. Zwei Punkte oben. Wort: Apfel. تُفَّاحَة","6–8":"Tā: تَ ta, تِ ti, تُ tu. Wort تُفَّاحَة tuffāḥa.","9–10":"Tā verbindet nach beiden Seiten. Zwei Punkte bleiben oben."}},
-    {"id":"tha","ar":"ث","nameDe":"Thā","nameAr":"ثَاء","lautName":"Ṯā","speakName":"Tha, weiches ss zwischen den Zaehnen","connect":"both","harakat":[{"ar":"ثَ","laut":"ṯa","speak":"tha"},{"ar":"ثِ","laut":"ṯi","speak":"thi"},{"ar":"ثُ","laut":"ṯu","speak":"thu"}],"wordAr":"ثَعْلَب","wordDe":"Fuchs","wordLaut":"thaʿlab","wordSpeak":"thalab, Fuchs","forms":{"iso":"ث","ini":"ثـ","mid":"ـثـ","fin":"ـث"},"ages":{"4–5":"Thā. Drei Punkte oben. Zunge an die Zähne. Wort: Fuchs. ثَعْلَب","6–8":"Thā: ثَ ṯa, ثِ ṯi, ثُ ṯu. Nicht s wie Sīn. Wort ثَعْلَب thaʿlab.","9–10":"ث ist stimmloses th. Drei Punkte oben. Nicht ت und nicht س."}},
-    {"id":"jim","ar":"ج","nameDe":"Dschīm","nameAr":"جِيم","lautName":"Dschīm","speakName":"Dschim","connect":"both","harakat":[{"ar":"جَ","laut":"dscha","speak":"dscha"},{"ar":"جِ","laut":"dschi","speak":"dschi"},{"ar":"جُ","laut":"dschu","speak":"dschu"}],"wordAr":"جَمَل","wordDe":"Kamel","wordLaut":"jamal","wordSpeak":"dschamal, Kamel","forms":{"iso":"ج","ini":"جـ","mid":"ـجـ","fin":"ـج"},"ages":{"4–5":"Dschīm. Ein Punkt unten. Wort: Kamel. جَمَل","6–8":"Dschīm: جَ dscha, جِ dschi, جُ dschu. Wort جَمَل jamal.","9–10":"ج klingt wie dsch, nicht wie deutsches j in ja. Punkt unten."}},
-    {"id":"ha","ar":"ح","nameDe":"Ḥā","nameAr":"حَاء","lautName":"Ḥā","speakName":"Ha, tief aus der Kehle","connect":"both","harakat":[{"ar":"حَ","laut":"ḥa","speak":"ha, tief"},{"ar":"حِ","laut":"ḥi","speak":"hi, tief"},{"ar":"حُ","laut":"ḥu","speak":"hu, tief"}],"wordAr":"حِصَان","wordDe":"Pferd","wordLaut":"ḥiṣān","wordSpeak":"hisan, Pferd","forms":{"iso":"ح","ini":"حـ","mid":"ـحـ","fin":"ـح"},"ages":{"4–5":"Ḥā. Wie Dschīm, aber ohne Punkt. Wort: Pferd. حِصَان","6–8":"Ḥā: enger Hauch aus der Kehle. حَ ḥa, حِ ḥi, حُ ḥu. Wort حِصَان ḥiṣān.","9–10":"ح ohne Punkt. Nicht ه (weiches h) und nicht خ (ch)."}},
-    {"id":"kha","ar":"خ","nameDe":"Chā","nameAr":"خَاء","lautName":"Khā","speakName":"Cha, wie in Dach","connect":"both","harakat":[{"ar":"خَ","laut":"cha","speak":"cha"},{"ar":"خِ","laut":"chi","speak":"chi"},{"ar":"خُ","laut":"chu","speak":"chu"}],"wordAr":"خُبْز","wordDe":"Brot","wordLaut":"khubz","wordSpeak":"chubs, Brot","forms":{"iso":"خ","ini":"خـ","mid":"ـخـ","fin":"ـخ"},"ages":{"4–5":"Chā. Ein Punkt oben. Wie ch in Dach. Wort: Brot. خُبْز","6–8":"Chā: خَ cha, خِ chi, خُ chu. Wort خُبْز khubz.","9–10":"خ Punkt oben. ح ohne Punkt. ج Punkt unten."}},
-    {"id":"dal","ar":"د","nameDe":"Dāl","nameAr":"دَال","lautName":"Dāl","speakName":"Dal","connect":"left-none","harakat":[{"ar":"دَ","laut":"da","speak":"da"},{"ar":"دِ","laut":"di","speak":"di"},{"ar":"دُ","laut":"du","speak":"du"}],"wordAr":"دِيك","wordDe":"Hahn","wordLaut":"dīk","wordSpeak":"diik, Hahn","forms":{"iso":"د","ini":"د","mid":"ـد","fin":"ـد"},"ages":{"4–5":"Dāl. Kurz und rund. Wort: Hahn. دِيك","6–8":"Dāl verbindet nicht nach links. دَ da, دِ di, دُ du. Wort دِيك dīk.","9–10":"Nicht-verbindend nach links: ا د ذ ر ز و."}},
-    {"id":"dhal","ar":"ذ","nameDe":"Dhāl","nameAr":"ذَال","lautName":"Ḏāl","speakName":"Dhal, weiches d zwischen den Zaehnen","connect":"left-none","harakat":[{"ar":"ذَ","laut":"ḏa","speak":"dha"},{"ar":"ذِ","laut":"ḏi","speak":"dhi"},{"ar":"ذُ","laut":"ḏu","speak":"dhu"}],"wordAr":"ذُرَة","wordDe":"Mais","wordLaut":"dhura","wordSpeak":"dura, Mais","forms":{"iso":"ذ","ini":"ذ","mid":"ـذ","fin":"ـذ"},"ages":{"4–5":"Dhāl. Dāl mit Punkt oben. Wort: Mais. ذُرَة","6–8":"Dhāl: ذَ ḏa, ذِ ḏi, ذُ ḏu. Stimmhaftes th. Wort ذُرَة dhura.","9–10":"ذ verbindet nicht nach links. Ein Punkt unterscheidet von د."}},
-    {"id":"ra","ar":"ر","nameDe":"Rā","nameAr":"رَاء","lautName":"Rā","speakName":"Ra","connect":"left-none","harakat":[{"ar":"رَ","laut":"ra","speak":"ra"},{"ar":"رِ","laut":"ri","speak":"ri"},{"ar":"رُ","laut":"ru","speak":"ru"}],"wordAr":"رُمَّان","wordDe":"Granatapfel","wordLaut":"rummān","wordSpeak":"rumman, Granatapfel","forms":{"iso":"ر","ini":"ر","mid":"ـر","fin":"ـر"},"ages":{"4–5":"Rā. Kleiner Bogen. Wort: Granatapfel. رُمَّان","6–8":"Rā: رَ ra, رِ ri, رُ ru. Zungenspitze. Wort رُمَّان rummān.","9–10":"ر verbindet nicht nach links. Ohne Punkt. ز hat einen Punkt."}},
-    {"id":"zay","ar":"ز","nameDe":"Zāy","nameAr":"زَاي","lautName":"Zāy","speakName":"Sai","connect":"left-none","harakat":[{"ar":"زَ","laut":"za","speak":"sa, stimmhaft"},{"ar":"زِ","laut":"zi","speak":"si, stimmhaft"},{"ar":"زُ","laut":"zu","speak":"su, stimmhaft"}],"wordAr":"زَهْرَة","wordDe":"Blume","wordLaut":"zahra","wordSpeak":"sahra, Blume","forms":{"iso":"ز","ini":"ز","mid":"ـز","fin":"ـز"},"ages":{"4–5":"Zāy. Rā mit Punkt. Wort: Blume. زَهْرَة","6–8":"Zāy: زَ za, زِ zi, زُ zu. Wie stimmhaftes s. Wort زَهْرَة zahra.","9–10":"ز verbindet nicht nach links. Punkt unterscheidet von ر."}},
-    {"id":"sin","ar":"س","nameDe":"Sīn","nameAr":"سِين","lautName":"Sīn","speakName":"Siin","connect":"both","harakat":[{"ar":"سَ","laut":"sa","speak":"sa"},{"ar":"سِ","laut":"si","speak":"si"},{"ar":"سُ","laut":"su","speak":"su"}],"wordAr":"سَمَكَة","wordDe":"Fisch","wordLaut":"samaka","wordSpeak":"samaka, Fisch","forms":{"iso":"س","ini":"سـ","mid":"ـسـ","fin":"ـس"},"ages":{"4–5":"Sīn. Drei Zähne, keine Punkte. Wort: Fisch. سَمَكَة","6–8":"Sīn: سَ sa, سِ si, سُ su. Wort سَمَكَة samaka.","9–10":"س ohne Punkte. ش hat drei Punkte. ص ist der volle s-Laut."}},
-    {"id":"shin","ar":"ش","nameDe":"Schīn","nameAr":"شِين","lautName":"Shīn","speakName":"Schiin","connect":"both","harakat":[{"ar":"شَ","laut":"scha","speak":"scha"},{"ar":"شِ","laut":"schi","speak":"schi"},{"ar":"شُ","laut":"schu","speak":"schu"}],"wordAr":"شَمْس","wordDe":"Sonne","wordLaut":"shams","wordSpeak":"schams, Sonne","forms":{"iso":"ش","ini":"شـ","mid":"ـشـ","fin":"ـش"},"ages":{"4–5":"Schīn. Sīn mit drei Punkten. Wort: Sonne. شَمْس","6–8":"Schīn: شَ scha, شِ schi, شُ schu. Wort شَمْس shams.","9–10":"ش drei Punkte oben. س keine Punkte."}},
-    {"id":"sad","ar":"ص","nameDe":"Ṣād","nameAr":"صَاد","lautName":"Ṣād","speakName":"Sad, volles s","connect":"both","harakat":[{"ar":"صَ","laut":"ṣa","speak":"ssa, voll"},{"ar":"صِ","laut":"ṣi","speak":"ssi, voll"},{"ar":"صُ","laut":"ṣu","speak":"ssu, voll"}],"wordAr":"صَقْر","wordDe":"Falke","wordLaut":"ṣaqr","wordSpeak":"ssakr, Falke","forms":{"iso":"ص","ini":"صـ","mid":"ـصـ","fin":"ـص"},"ages":{"4–5":"Ṣād. Rund und voll. Wort: Falke. صَقْر","6–8":"Ṣād: volles s, Zunge hinten. صَ ṣa, صِ ṣi, صُ ṣu. Wort صَقْر ṣaqr.","9–10":"ص emphatisch. Nicht س. Mund etwas weiter, Laut dunkler."}},
-    {"id":"dad","ar":"ض","nameDe":"Ḍād","nameAr":"ضَاد","lautName":"Ḍād","speakName":"Dad, schweres d","connect":"both","harakat":[{"ar":"ضَ","laut":"ḍa","speak":"da, schwer"},{"ar":"ضِ","laut":"ḍi","speak":"di, schwer"},{"ar":"ضُ","laut":"ḍu","speak":"du, schwer"}],"wordAr":"ضِفْدَع","wordDe":"Frosch","wordLaut":"ḍifdaʿ","wordSpeak":"difda, Frosch","forms":{"iso":"ض","ini":"ضـ","mid":"ـضـ","fin":"ـض"},"ages":{"4–5":"Ḍād. Ṣād mit Punkt. Wort: Frosch. ضِفْدَع","6–8":"Ḍād: schweres d. ضَ ḍa, ضِ ḍi, ضُ ḍu. Wort ضِفْدَع ḍifdaʿ.","9–10":"ض emphatisch. Punkt oben. Nicht د."}},
-    {"id":"taa","ar":"ط","nameDe":"Ṭā","nameAr":"طَاء","lautName":"Ṭā","speakName":"Ta, volles t","connect":"both","harakat":[{"ar":"طَ","laut":"ṭa","speak":"ta, voll"},{"ar":"طِ","laut":"ṭi","speak":"ti, voll"},{"ar":"طُ","laut":"ṭu","speak":"tu, voll"}],"wordAr":"طَائِر","wordDe":"Vogel","wordLaut":"ṭāʾir","wordSpeak":"ta-ir, Vogel","forms":{"iso":"ط","ini":"طـ","mid":"ـطـ","fin":"ـط"},"ages":{"4–5":"Ṭā. Steht aufrecht. Wort: Vogel. طَائِر","6–8":"Ṭā: volles t. طَ ṭa, طِ ṭi, طُ ṭu. Wort طَائِر ṭāʾir.","9–10":"ط emphatisch. Nicht ت. ظ hat einen Punkt."}},
-    {"id":"zaa","ar":"ظ","nameDe":"Ẓā","nameAr":"ظَاء","lautName":"Ẓā","speakName":"Da, schwer zwischen den Zaehnen","connect":"both","harakat":[{"ar":"ظَ","laut":"ẓa","speak":"dha, schwer"},{"ar":"ظِ","laut":"ẓi","speak":"dhi, schwer"},{"ar":"ظُ","laut":"ẓu","speak":"dhu, schwer"}],"wordAr":"ظِلّ","wordDe":"Schatten","wordLaut":"ẓill","wordSpeak":"zill, Schatten","forms":{"iso":"ظ","ini":"ظـ","mid":"ـظـ","fin":"ـظ"},"ages":{"4–5":"Ẓā. Ṭā mit Punkt. Wort: Schatten. ظِلّ","6–8":"Ẓā: emphatisches dh. ظَ ẓa, ظِ ẓi, ظُ ẓu. Wort ظِلّ ẓill.","9–10":"ظ emphatisch mit Punkt. Nicht ذ und nicht ط."}},
-    {"id":"ayn","ar":"ع","nameDe":"ʿAin","nameAr":"عَيْن","lautName":"ʿAyn","speakName":"Ain, aus der Kehle","connect":"both","harakat":[{"ar":"عَ","laut":"ʿa","speak":"a, aus der Kehle"},{"ar":"عِ","laut":"ʿi","speak":"i, aus der Kehle"},{"ar":"عُ","laut":"ʿu","speak":"u, aus der Kehle"}],"wordAr":"عَيْن","wordDe":"Auge","wordLaut":"ʿayn","wordSpeak":"ain, Auge","forms":{"iso":"ع","ini":"عـ","mid":"ـعـ","fin":"ـع"},"ages":{"4–5":"ʿAin. Aus der Kehle. Wort: Auge. عَيْن","6–8":"ʿAin: عَ ʿa, عِ ʿi, عُ ʿu. Wort عَيْن ʿayn.","9–10":"ع Kehllaut. Nicht Alif. غ hat einen Punkt."}},
-    {"id":"ghayn","ar":"غ","nameDe":"Ghain","nameAr":"غَيْن","lautName":"Ghayn","speakName":"Gain, weiches g aus der Kehle","connect":"both","harakat":[{"ar":"غَ","laut":"gha","speak":"gha"},{"ar":"غِ","laut":"ghi","speak":"ghi"},{"ar":"غُ","laut":"ghu","speak":"ghu"}],"wordAr":"غَيْمَة","wordDe":"Wolke","wordLaut":"ghayma","wordSpeak":"gaima, Wolke","forms":{"iso":"غ","ini":"غـ","mid":"ـغـ","fin":"ـغ"},"ages":{"4–5":"Ghain. ʿAin mit Punkt. Wort: Wolke. غَيْمَة","6–8":"Ghain: غَ gha, غِ ghi, غُ ghu. Wort غَيْمَة ghayma.","9–10":"غ Punkt oben. ʿAin ohne Punkt. Laut wie weiches g in der Kehle."}},
-    {"id":"fa","ar":"ف","nameDe":"Fā","nameAr":"فَاء","lautName":"Fā","speakName":"Fa","connect":"both","harakat":[{"ar":"فَ","laut":"fa","speak":"fa"},{"ar":"فِ","laut":"fi","speak":"fi"},{"ar":"فُ","laut":"fu","speak":"fu"}],"wordAr":"فَرَاشَة","wordDe":"Schmetterling","wordLaut":"farāsha","wordSpeak":"farascha, Schmetterling","forms":{"iso":"ف","ini":"فـ","mid":"ـفـ","fin":"ـف"},"ages":{"4–5":"Fā. Ein Punkt im Kreis. Wort: Schmetterling. فَرَاشَة","6–8":"Fā: فَ fa, فِ fi, فُ fu. Wort فَرَاشَة farāsha.","9–10":"ف ein Punkt. ق zwei Punkte."}},
-    {"id":"qaf","ar":"ق","nameDe":"Qāf","nameAr":"قَاف","lautName":"Qāf","speakName":"Kaf, tief aus der Kehle","connect":"both","harakat":[{"ar":"قَ","laut":"qa","speak":"ka, tief"},{"ar":"قِ","laut":"qi","speak":"ki, tief"},{"ar":"قُ","laut":"qu","speak":"ku, tief"}],"wordAr":"قَمَر","wordDe":"Mond","wordLaut":"qamar","wordSpeak":"kamar, Mond","forms":{"iso":"ق","ini":"قـ","mid":"ـقـ","fin":"ـق"},"ages":{"4–5":"Qāf. Zwei Punkte. Wort: Mond. قَمَر","6–8":"Qāf: tiefer als Kāf. قَ qa, قِ qi, قُ qu. Wort قَمَر qamar.","9–10":"ق zwei Punkte, Zäpfchen. ك ist vorn im Mund."}},
-    {"id":"kaf","ar":"ك","nameDe":"Kāf","nameAr":"كَاف","lautName":"Kāf","speakName":"Kaf","connect":"both","harakat":[{"ar":"كَ","laut":"ka","speak":"ka"},{"ar":"كِ","laut":"ki","speak":"ki"},{"ar":"كُ","laut":"ku","speak":"ku"}],"wordAr":"كِتَاب","wordDe":"Buch","wordLaut":"kitāb","wordSpeak":"kitaab, Buch","forms":{"iso":"ك","ini":"كـ","mid":"ـكـ","fin":"ـك"},"ages":{"4–5":"Kāf. Oben ein kleines Häkchen. Wort: Buch. كِتَاب","6–8":"Kāf: كَ ka, كِ ki, كُ ku. Wort كِتَاب kitāb.","9–10":"ك vorn am Gaumen. Nicht ق. Das Häkchen ist kein Hamza."}},
-    {"id":"lam","ar":"ل","nameDe":"Lām","nameAr":"لَام","lautName":"Lām","speakName":"Lam","connect":"both","harakat":[{"ar":"لَ","laut":"la","speak":"la"},{"ar":"لِ","laut":"li","speak":"li"},{"ar":"لُ","laut":"lu","speak":"lu"}],"wordAr":"لَبَن","wordDe":"Milch","wordLaut":"laban","wordSpeak":"laban, Milch","forms":{"iso":"ل","ini":"لـ","mid":"ـلـ","fin":"ـل"},"ages":{"4–5":"Lām. Lang mit einem Fuß. Wort: Milch. لَبَن","6–8":"Lām: لَ la, لِ li, لُ lu. Wort لَبَن laban.","9–10":"ل verbindet nach beiden Seiten. ل + ا schreibt man oft لا."}},
-    {"id":"mim","ar":"م","nameDe":"Mīm","nameAr":"مِيم","lautName":"Mīm","speakName":"Miim","connect":"both","harakat":[{"ar":"مَ","laut":"ma","speak":"ma"},{"ar":"مِ","laut":"mi","speak":"mi"},{"ar":"مُ","laut":"mu","speak":"mu"}],"wordAr":"مَسْجِد","wordDe":"Moschee","wordLaut":"masjid","wordSpeak":"masdjid, Moschee","forms":{"iso":"م","ini":"مـ","mid":"ـمـ","fin":"ـم"},"ages":{"4–5":"Mīm. Ein kleiner Kreis. Wort: Moschee. مَسْجِد","6–8":"Mīm: مَ ma, مِ mi, مُ mu. Wort مَسْجِد masjid.","9–10":"م verbindet nach beiden Seiten. Kreis bleibt sichtbar."}},
-    {"id":"nun","ar":"ن","nameDe":"Nūn","nameAr":"نُون","lautName":"Nūn","speakName":"Nuun","connect":"both","harakat":[{"ar":"نَ","laut":"na","speak":"na"},{"ar":"نِ","laut":"ni","speak":"ni"},{"ar":"نُ","laut":"nu","speak":"nu"}],"wordAr":"نَجْم","wordDe":"Stern","wordLaut":"najm","wordSpeak":"nadschm, Stern","forms":{"iso":"ن","ini":"نـ","mid":"ـنـ","fin":"ـن"},"ages":{"4–5":"Nūn. Ein Punkt oben. Wort: Stern. نَجْم","6–8":"Nūn: نَ na, نِ ni, نُ nu. Wort نَجْم najm.","9–10":"ن ein Punkt. ت zwei Punkte. ة am Wortende ist etwas anderes."}},
-    {"id":"haa","ar":"ه","nameDe":"Hā","nameAr":"هَاء","lautName":"Hā","speakName":"Ha, weicher Hauch","connect":"both","harakat":[{"ar":"هَ","laut":"ha","speak":"ha, weich"},{"ar":"هِ","laut":"hi","speak":"hi, weich"},{"ar":"هُ","laut":"hu","speak":"hu, weich"}],"wordAr":"هِلَال","wordDe":"Mondsichel","wordLaut":"hilāl","wordSpeak":"hilal, Mondsichel","forms":{"iso":"ه","ini":"هـ","mid":"ـهـ","fin":"ـه"},"ages":{"4–5":"Hā. Weicher Hauch. Wort: Mondsichel. هِلَال","6–8":"Hā: هَ ha, هِ hi, هُ hu. Wort هِلَال hilāl.","9–10":"ه weiches h. Mitte ـهـ. Nicht ح (enge Kehle)."}},
-    {"id":"waw","ar":"و","nameDe":"Wāw","nameAr":"وَاو","lautName":"Wāw","speakName":"Wau","connect":"left-none","harakat":[{"ar":"وَ","laut":"wa","speak":"wa"},{"ar":"وِ","laut":"wi","speak":"wi"},{"ar":"وُ","laut":"wu","speak":"wu"}],"wordAr":"وَرْدَة","wordDe":"Rose","wordLaut":"warda","wordSpeak":"warda, Rose","forms":{"iso":"و","ini":"و","mid":"ـو","fin":"ـو"},"ages":{"4–5":"Wāw. Rund wie eine Schüssel. Wort: Rose. وَرْدَة","6–8":"Wāw: وَ wa. Nach Fatḥa als Madd ū. Wort وَرْدَة warda.","9–10":"و verbindet nicht nach links. Konsonant w und langer Vokal ū."}},
-    {"id":"ya","ar":"ي","nameDe":"Yā","nameAr":"يَاء","lautName":"Yā","speakName":"Ya","connect":"both","harakat":[{"ar":"يَ","laut":"ya","speak":"ya"},{"ar":"يِ","laut":"yi","speak":"yi"},{"ar":"يُ","laut":"yu","speak":"yu"}],"wordAr":"يَد","wordDe":"Hand","wordLaut":"yad","wordSpeak":"jad, Hand","forms":{"iso":"ي","ini":"يـ","mid":"ـيـ","fin":"ـي"},"ages":{"4–5":"Yā. Zwei Punkte unten. Wort: Hand. يَد","6–8":"Yā: يَ ya. Nach Kasra als Madd ī. Wort يَد yad.","9–10":"ي zwei Punkte unten. ت zwei oben. Konsonant y und langer Vokal ī."}}
+    {
+      "id": "alif",
+      "ar": "ا",
+      "nameDe": "Alif",
+      "nameAr": "أَلِف",
+      "lautName": "Alif",
+      "speakName": "Alif",
+      "connect": "left-none",
+      "harakat": [
+        {
+          "ar": "أَ",
+          "laut": "a",
+          "speak": "a"
+        },
+        {
+          "ar": "إِ",
+          "laut": "i",
+          "speak": "i"
+        },
+        {
+          "ar": "أُ",
+          "laut": "u",
+          "speak": "u"
+        }
+      ],
+      "wordAr": "أَرْنَب",
+      "wordDe": "Hase",
+      "wordLaut": "arnab",
+      "wordSpeak": "arnab, Hase",
+      "forms": {
+        "iso": "ا",
+        "ini": "ا",
+        "mid": "ـا",
+        "fin": "ـا"
+      },
+      "ages": {
+        "4–5": "Das ist Alif. Ein gerader Strich. Wort: Hase. أَرْنَب",
+        "6–8": "Alif. Mit Hamza: أَ a, إِ i, أُ u. Wort أَرْنَب arnab.",
+        "9–10": "Alif verbindet nicht nach links. Hamza: أَ إِ أُ. Als Madd nach Fatḥa wird ا zu ā."
+      }
+    },
+    {
+      "id": "ba",
+      "ar": "ب",
+      "nameDe": "Bāʾ",
+      "nameAr": "بَاء",
+      "lautName": "Bā",
+      "speakName": "Ba",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "بَ",
+          "laut": "ba",
+          "speak": "ba"
+        },
+        {
+          "ar": "بِ",
+          "laut": "bi",
+          "speak": "bi"
+        },
+        {
+          "ar": "بُ",
+          "laut": "bu",
+          "speak": "bu"
+        }
+      ],
+      "wordAr": "بَطَّة",
+      "wordDe": "Ente",
+      "wordLaut": "baṭṭa",
+      "wordSpeak": "batta, Ente",
+      "forms": {
+        "iso": "ب",
+        "ini": "بـ",
+        "mid": "ـبـ",
+        "fin": "ـب"
+      },
+      "ages": {
+        "4–5": "Bā. Ein Punkt unten. Wort: Ente. بَطَّة",
+        "6–8": "Bā: بَ ba, بِ bi, بُ bu. Wort بَطَّة baṭṭa.",
+        "9–10": "Bā verbindet nach beiden Seiten. Punkt immer unten. بـ ـبـ ـب"
+      }
+    },
+    {
+      "id": "ta",
+      "ar": "ت",
+      "nameDe": "Tāʾ",
+      "nameAr": "تَاء",
+      "lautName": "Tā",
+      "speakName": "Ta",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "تَ",
+          "laut": "ta",
+          "speak": "ta"
+        },
+        {
+          "ar": "تِ",
+          "laut": "ti",
+          "speak": "ti"
+        },
+        {
+          "ar": "تُ",
+          "laut": "tu",
+          "speak": "tu"
+        }
+      ],
+      "wordAr": "تُفَّاحَة",
+      "wordDe": "Apfel",
+      "wordLaut": "tuffāḥa",
+      "wordSpeak": "tuffaha, Apfel",
+      "forms": {
+        "iso": "ت",
+        "ini": "تـ",
+        "mid": "ـتـ",
+        "fin": "ـت"
+      },
+      "ages": {
+        "4–5": "Tā. Zwei Punkte oben. Wort: Apfel. تُفَّاحَة",
+        "6–8": "Tā: تَ ta, تِ ti, تُ tu. Wort تُفَّاحَة tuffāḥa.",
+        "9–10": "Tā verbindet nach beiden Seiten. Zwei Punkte bleiben oben."
+      }
+    },
+    {
+      "id": "tha",
+      "ar": "ث",
+      "nameDe": "Ṯāʾ",
+      "nameAr": "ثَاء",
+      "lautName": "Ṯā",
+      "speakName": "Tha, weiches ss zwischen den Zaehnen",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "ثَ",
+          "laut": "ṯa",
+          "speak": "tha"
+        },
+        {
+          "ar": "ثِ",
+          "laut": "ṯi",
+          "speak": "thi"
+        },
+        {
+          "ar": "ثُ",
+          "laut": "ṯu",
+          "speak": "thu"
+        }
+      ],
+      "wordAr": "ثَعْلَب",
+      "wordDe": "Fuchs",
+      "wordLaut": "thaʿlab",
+      "wordSpeak": "thalab, Fuchs",
+      "forms": {
+        "iso": "ث",
+        "ini": "ثـ",
+        "mid": "ـثـ",
+        "fin": "ـث"
+      },
+      "ages": {
+        "4–5": "Thā. Drei Punkte oben. Zunge an die Zähne. Wort: Fuchs. ثَعْلَب",
+        "6–8": "Thā: ثَ ṯa, ثِ ṯi, ثُ ṯu. Nicht s wie Sīn. Wort ثَعْلَب thaʿlab.",
+        "9–10": "ث ist stimmloses th. Drei Punkte oben. Nicht ت und nicht س."
+      }
+    },
+    {
+      "id": "jim",
+      "ar": "ج",
+      "nameDe": "Ǧīm",
+      "nameAr": "جِيم",
+      "lautName": "Dschīm",
+      "speakName": "Dschim",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "جَ",
+          "laut": "dscha",
+          "speak": "dscha"
+        },
+        {
+          "ar": "جِ",
+          "laut": "dschi",
+          "speak": "dschi"
+        },
+        {
+          "ar": "جُ",
+          "laut": "dschu",
+          "speak": "dschu"
+        }
+      ],
+      "wordAr": "جَمَل",
+      "wordDe": "Kamel",
+      "wordLaut": "jamal",
+      "wordSpeak": "dschamal, Kamel",
+      "forms": {
+        "iso": "ج",
+        "ini": "جـ",
+        "mid": "ـجـ",
+        "fin": "ـج"
+      },
+      "ages": {
+        "4–5": "Dschīm. Ein Punkt unten. Wort: Kamel. جَمَل",
+        "6–8": "Dschīm: جَ dscha, جِ dschi, جُ dschu. Wort جَمَل jamal.",
+        "9–10": "ج klingt wie dsch, nicht wie deutsches j in ja. Punkt unten."
+      }
+    },
+    {
+      "id": "ha",
+      "ar": "ح",
+      "nameDe": "Ḥāʾ",
+      "nameAr": "حَاء",
+      "lautName": "Ḥā",
+      "speakName": "Ha, tief aus der Kehle",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "حَ",
+          "laut": "ḥa",
+          "speak": "ha, tief"
+        },
+        {
+          "ar": "حِ",
+          "laut": "ḥi",
+          "speak": "hi, tief"
+        },
+        {
+          "ar": "حُ",
+          "laut": "ḥu",
+          "speak": "hu, tief"
+        }
+      ],
+      "wordAr": "حِصَان",
+      "wordDe": "Pferd",
+      "wordLaut": "ḥiṣān",
+      "wordSpeak": "hisan, Pferd",
+      "forms": {
+        "iso": "ح",
+        "ini": "حـ",
+        "mid": "ـحـ",
+        "fin": "ـح"
+      },
+      "ages": {
+        "4–5": "Ḥā. Wie Dschīm, aber ohne Punkt. Wort: Pferd. حِصَان",
+        "6–8": "Ḥāʾ: حَ ḥa, حِ ḥi, حُ ḥu. Ein deutlicher, enger Hauch aus dem Rachen. Wort حِصَان ḥiṣān.",
+        "9–10": "ح hat keinen Punkt. Es ist nicht ه (weiches h) und nicht خ (kh). Achte besonders auf den Rachenlaut."
+      }
+    },
+    {
+      "id": "kha",
+      "ar": "خ",
+      "nameDe": "Khāʾ",
+      "nameAr": "خَاء",
+      "lautName": "Khā",
+      "speakName": "Cha, wie in Dach",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "خَ",
+          "laut": "cha",
+          "speak": "cha"
+        },
+        {
+          "ar": "خِ",
+          "laut": "chi",
+          "speak": "chi"
+        },
+        {
+          "ar": "خُ",
+          "laut": "chu",
+          "speak": "chu"
+        }
+      ],
+      "wordAr": "خُبْز",
+      "wordDe": "Brot",
+      "wordLaut": "khubz",
+      "wordSpeak": "chubs, Brot",
+      "forms": {
+        "iso": "خ",
+        "ini": "خـ",
+        "mid": "ـخـ",
+        "fin": "ـخ"
+      },
+      "ages": {
+        "4–5": "Chā. Ein Punkt oben. Wie ch in Dach. Wort: Brot. خُبْز",
+        "6–8": "Chā: خَ cha, خِ chi, خُ chu. Wort خُبْز khubz.",
+        "9–10": "خ Punkt oben. ح ohne Punkt. ج Punkt unten."
+      }
+    },
+    {
+      "id": "dal",
+      "ar": "د",
+      "nameDe": "Dāl",
+      "nameAr": "دَال",
+      "lautName": "Dāl",
+      "speakName": "Dal",
+      "connect": "left-none",
+      "harakat": [
+        {
+          "ar": "دَ",
+          "laut": "da",
+          "speak": "da"
+        },
+        {
+          "ar": "دِ",
+          "laut": "di",
+          "speak": "di"
+        },
+        {
+          "ar": "دُ",
+          "laut": "du",
+          "speak": "du"
+        }
+      ],
+      "wordAr": "دِيك",
+      "wordDe": "Hahn",
+      "wordLaut": "dīk",
+      "wordSpeak": "diik, Hahn",
+      "forms": {
+        "iso": "د",
+        "ini": "د",
+        "mid": "ـد",
+        "fin": "ـد"
+      },
+      "ages": {
+        "4–5": "Dāl. Kurz und rund. Wort: Hahn. دِيك",
+        "6–8": "Dāl verbindet nicht nach links. دَ da, دِ di, دُ du. Wort دِيك dīk.",
+        "9–10": "Nicht-verbindend nach links: ا د ذ ر ز و."
+      }
+    },
+    {
+      "id": "dhal",
+      "ar": "ذ",
+      "nameDe": "Ḏāl",
+      "nameAr": "ذَال",
+      "lautName": "Ḏāl",
+      "speakName": "Dhal, weiches d zwischen den Zaehnen",
+      "connect": "left-none",
+      "harakat": [
+        {
+          "ar": "ذَ",
+          "laut": "ḏa",
+          "speak": "dha"
+        },
+        {
+          "ar": "ذِ",
+          "laut": "ḏi",
+          "speak": "dhi"
+        },
+        {
+          "ar": "ذُ",
+          "laut": "ḏu",
+          "speak": "dhu"
+        }
+      ],
+      "wordAr": "ذُرَة",
+      "wordDe": "Mais",
+      "wordLaut": "dhura",
+      "wordSpeak": "dura, Mais",
+      "forms": {
+        "iso": "ذ",
+        "ini": "ذ",
+        "mid": "ـذ",
+        "fin": "ـذ"
+      },
+      "ages": {
+        "4–5": "Dhāl. Dāl mit Punkt oben. Wort: Mais. ذُرَة",
+        "6–8": "Dhāl: ذَ ḏa, ذِ ḏi, ذُ ḏu. Stimmhaftes th. Wort ذُرَة dhura.",
+        "9–10": "ذ verbindet nicht nach links. Ein Punkt unterscheidet von د."
+      }
+    },
+    {
+      "id": "ra",
+      "ar": "ر",
+      "nameDe": "Rāʾ",
+      "nameAr": "رَاء",
+      "lautName": "Rā",
+      "speakName": "Ra",
+      "connect": "left-none",
+      "harakat": [
+        {
+          "ar": "رَ",
+          "laut": "ra",
+          "speak": "ra"
+        },
+        {
+          "ar": "رِ",
+          "laut": "ri",
+          "speak": "ri"
+        },
+        {
+          "ar": "رُ",
+          "laut": "ru",
+          "speak": "ru"
+        }
+      ],
+      "wordAr": "رُمَّان",
+      "wordDe": "Granatapfel",
+      "wordLaut": "rummān",
+      "wordSpeak": "rumman, Granatapfel",
+      "forms": {
+        "iso": "ر",
+        "ini": "ر",
+        "mid": "ـر",
+        "fin": "ـر"
+      },
+      "ages": {
+        "4–5": "Rā. Kleiner Bogen. Wort: Granatapfel. رُمَّان",
+        "6–8": "Rā: رَ ra, رِ ri, رُ ru. Zungenspitze. Wort رُمَّان rummān.",
+        "9–10": "ر verbindet nicht nach links. Ohne Punkt. ز hat einen Punkt."
+      }
+    },
+    {
+      "id": "zay",
+      "ar": "ز",
+      "nameDe": "Zāy",
+      "nameAr": "زَاي",
+      "lautName": "Zāy",
+      "speakName": "Sai",
+      "connect": "left-none",
+      "harakat": [
+        {
+          "ar": "زَ",
+          "laut": "za",
+          "speak": "sa, stimmhaft"
+        },
+        {
+          "ar": "زِ",
+          "laut": "zi",
+          "speak": "si, stimmhaft"
+        },
+        {
+          "ar": "زُ",
+          "laut": "zu",
+          "speak": "su, stimmhaft"
+        }
+      ],
+      "wordAr": "زَهْرَة",
+      "wordDe": "Blume",
+      "wordLaut": "zahra",
+      "wordSpeak": "sahra, Blume",
+      "forms": {
+        "iso": "ز",
+        "ini": "ز",
+        "mid": "ـز",
+        "fin": "ـز"
+      },
+      "ages": {
+        "4–5": "Zāy. Rā mit Punkt. Wort: Blume. زَهْرَة",
+        "6–8": "Zāy: زَ za, زِ zi, زُ zu. Wie stimmhaftes s. Wort زَهْرَة zahra.",
+        "9–10": "ز verbindet nicht nach links. Punkt unterscheidet von ر."
+      }
+    },
+    {
+      "id": "sin",
+      "ar": "س",
+      "nameDe": "Sīn",
+      "nameAr": "سِين",
+      "lautName": "Sīn",
+      "speakName": "Siin",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "سَ",
+          "laut": "sa",
+          "speak": "sa"
+        },
+        {
+          "ar": "سِ",
+          "laut": "si",
+          "speak": "si"
+        },
+        {
+          "ar": "سُ",
+          "laut": "su",
+          "speak": "su"
+        }
+      ],
+      "wordAr": "سَمَكَة",
+      "wordDe": "Fisch",
+      "wordLaut": "samaka",
+      "wordSpeak": "samaka, Fisch",
+      "forms": {
+        "iso": "س",
+        "ini": "سـ",
+        "mid": "ـسـ",
+        "fin": "ـس"
+      },
+      "ages": {
+        "4–5": "Sīn. Drei Zähne, keine Punkte. Wort: Fisch. سَمَكَة",
+        "6–8": "Sīn: سَ sa, سِ si, سُ su. Wort سَمَكَة samaka.",
+        "9–10": "س ohne Punkte. ش hat drei Punkte. ص ist der volle s-Laut."
+      }
+    },
+    {
+      "id": "shin",
+      "ar": "ش",
+      "nameDe": "Shīn",
+      "nameAr": "شِين",
+      "lautName": "Shīn",
+      "speakName": "Schiin",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "شَ",
+          "laut": "scha",
+          "speak": "scha"
+        },
+        {
+          "ar": "شِ",
+          "laut": "schi",
+          "speak": "schi"
+        },
+        {
+          "ar": "شُ",
+          "laut": "schu",
+          "speak": "schu"
+        }
+      ],
+      "wordAr": "شَمْس",
+      "wordDe": "Sonne",
+      "wordLaut": "shams",
+      "wordSpeak": "schams, Sonne",
+      "forms": {
+        "iso": "ش",
+        "ini": "شـ",
+        "mid": "ـشـ",
+        "fin": "ـش"
+      },
+      "ages": {
+        "4–5": "Schīn. Sīn mit drei Punkten. Wort: Sonne. شَمْس",
+        "6–8": "Schīn: شَ scha, شِ schi, شُ schu. Wort شَمْس shams.",
+        "9–10": "ش drei Punkte oben. س keine Punkte."
+      }
+    },
+    {
+      "id": "sad",
+      "ar": "ص",
+      "nameDe": "Ṣād",
+      "nameAr": "صَاد",
+      "lautName": "Ṣād",
+      "speakName": "Sad, volles s",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "صَ",
+          "laut": "ṣa",
+          "speak": "ssa, voll"
+        },
+        {
+          "ar": "صِ",
+          "laut": "ṣi",
+          "speak": "ssi, voll"
+        },
+        {
+          "ar": "صُ",
+          "laut": "ṣu",
+          "speak": "ssu, voll"
+        }
+      ],
+      "wordAr": "صَقْر",
+      "wordDe": "Falke",
+      "wordLaut": "ṣaqr",
+      "wordSpeak": "ssakr, Falke",
+      "forms": {
+        "iso": "ص",
+        "ini": "صـ",
+        "mid": "ـصـ",
+        "fin": "ـص"
+      },
+      "ages": {
+        "4–5": "Ṣād. Rund und voll. Wort: Falke. صَقْر",
+        "6–8": "Ṣād: volles s, Zunge hinten. صَ ṣa, صِ ṣi, صُ ṣu. Wort صَقْر ṣaqr.",
+        "9–10": "ص emphatisch. Nicht س. Mund etwas weiter, Laut dunkler."
+      }
+    },
+    {
+      "id": "dad",
+      "ar": "ض",
+      "nameDe": "Ḍād",
+      "nameAr": "ضَاد",
+      "lautName": "Ḍād",
+      "speakName": "Dad, schweres d",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "ضَ",
+          "laut": "ḍa",
+          "speak": "da, schwer"
+        },
+        {
+          "ar": "ضِ",
+          "laut": "ḍi",
+          "speak": "di, schwer"
+        },
+        {
+          "ar": "ضُ",
+          "laut": "ḍu",
+          "speak": "du, schwer"
+        }
+      ],
+      "wordAr": "ضِفْدَع",
+      "wordDe": "Frosch",
+      "wordLaut": "ḍifdaʿ",
+      "wordSpeak": "difda, Frosch",
+      "forms": {
+        "iso": "ض",
+        "ini": "ضـ",
+        "mid": "ـضـ",
+        "fin": "ـض"
+      },
+      "ages": {
+        "4–5": "Ḍād. Ṣād mit Punkt. Wort: Frosch. ضِفْدَع",
+        "6–8": "Ḍād: schweres d. ضَ ḍa, ضِ ḍi, ضُ ḍu. Wort ضِفْدَع ḍifdaʿ.",
+        "9–10": "ض emphatisch. Punkt oben. Nicht د."
+      }
+    },
+    {
+      "id": "taa",
+      "ar": "ط",
+      "nameDe": "Ṭāʾ",
+      "nameAr": "طَاء",
+      "lautName": "Ṭā",
+      "speakName": "Ta, volles t",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "طَ",
+          "laut": "ṭa",
+          "speak": "ta, voll"
+        },
+        {
+          "ar": "طِ",
+          "laut": "ṭi",
+          "speak": "ti, voll"
+        },
+        {
+          "ar": "طُ",
+          "laut": "ṭu",
+          "speak": "tu, voll"
+        }
+      ],
+      "wordAr": "طَائِر",
+      "wordDe": "Vogel",
+      "wordLaut": "ṭāʾir",
+      "wordSpeak": "ta-ir, Vogel",
+      "forms": {
+        "iso": "ط",
+        "ini": "طـ",
+        "mid": "ـطـ",
+        "fin": "ـط"
+      },
+      "ages": {
+        "4–5": "Ṭā. Steht aufrecht. Wort: Vogel. طَائِر",
+        "6–8": "Ṭā: volles t. طَ ṭa, طِ ṭi, طُ ṭu. Wort طَائِر ṭāʾir.",
+        "9–10": "ط emphatisch. Nicht ت. ظ hat einen Punkt."
+      }
+    },
+    {
+      "id": "zaa",
+      "ar": "ظ",
+      "nameDe": "Ẓāʾ",
+      "nameAr": "ظَاء",
+      "lautName": "Ẓā",
+      "speakName": "Da, schwer zwischen den Zaehnen",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "ظَ",
+          "laut": "ẓa",
+          "speak": "dha, schwer"
+        },
+        {
+          "ar": "ظِ",
+          "laut": "ẓi",
+          "speak": "dhi, schwer"
+        },
+        {
+          "ar": "ظُ",
+          "laut": "ẓu",
+          "speak": "dhu, schwer"
+        }
+      ],
+      "wordAr": "ظِلّ",
+      "wordDe": "Schatten",
+      "wordLaut": "ẓill",
+      "wordSpeak": "zill, Schatten",
+      "forms": {
+        "iso": "ظ",
+        "ini": "ظـ",
+        "mid": "ـظـ",
+        "fin": "ـظ"
+      },
+      "ages": {
+        "4–5": "Ẓā. Ṭā mit Punkt. Wort: Schatten. ظِلّ",
+        "6–8": "Ẓā: emphatisches dh. ظَ ẓa, ظِ ẓi, ظُ ẓu. Wort ظِلّ ẓill.",
+        "9–10": "ظ emphatisch mit Punkt. Nicht ذ und nicht ط."
+      }
+    },
+    {
+      "id": "ayn",
+      "ar": "ع",
+      "nameDe": "ʿAyn",
+      "nameAr": "عَيْن",
+      "lautName": "ʿAyn",
+      "speakName": "Ain, aus der Kehle",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "عَ",
+          "laut": "ʿa",
+          "speak": "a, aus der Kehle"
+        },
+        {
+          "ar": "عِ",
+          "laut": "ʿi",
+          "speak": "i, aus der Kehle"
+        },
+        {
+          "ar": "عُ",
+          "laut": "ʿu",
+          "speak": "u, aus der Kehle"
+        }
+      ],
+      "wordAr": "عَيْن",
+      "wordDe": "Auge",
+      "wordLaut": "ʿayn",
+      "wordSpeak": "ain, Auge",
+      "forms": {
+        "iso": "ع",
+        "ini": "عـ",
+        "mid": "ـعـ",
+        "fin": "ـع"
+      },
+      "ages": {
+        "4–5": "ʿAin. Aus der Kehle. Wort: Auge. عَيْن",
+        "6–8": "ʿAin: عَ ʿa, عِ ʿi, عُ ʿu. Wort عَيْن ʿayn.",
+        "9–10": "ع Kehllaut. Nicht Alif. غ hat einen Punkt."
+      }
+    },
+    {
+      "id": "ghayn",
+      "ar": "غ",
+      "nameDe": "Ghayn",
+      "nameAr": "غَيْن",
+      "lautName": "Ghayn",
+      "speakName": "Gain, weiches g aus der Kehle",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "غَ",
+          "laut": "gha",
+          "speak": "gha"
+        },
+        {
+          "ar": "غِ",
+          "laut": "ghi",
+          "speak": "ghi"
+        },
+        {
+          "ar": "غُ",
+          "laut": "ghu",
+          "speak": "ghu"
+        }
+      ],
+      "wordAr": "غَيْمَة",
+      "wordDe": "Wolke",
+      "wordLaut": "ghayma",
+      "wordSpeak": "gaima, Wolke",
+      "forms": {
+        "iso": "غ",
+        "ini": "غـ",
+        "mid": "ـغـ",
+        "fin": "ـغ"
+      },
+      "ages": {
+        "4–5": "Ghain. ʿAin mit Punkt. Wort: Wolke. غَيْمَة",
+        "6–8": "Ghayn: غَ gha, غِ ghi, غُ ghu. Reibelaut aus dem oberen Rachen. Wort غَيْمَة ghayma.",
+        "9–10": "غ hat einen Punkt über der Form von ع. Der Laut wird im oberen Rachen gebildet."
+      }
+    },
+    {
+      "id": "fa",
+      "ar": "ف",
+      "nameDe": "Fāʾ",
+      "nameAr": "فَاء",
+      "lautName": "Fā",
+      "speakName": "Fa",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "فَ",
+          "laut": "fa",
+          "speak": "fa"
+        },
+        {
+          "ar": "فِ",
+          "laut": "fi",
+          "speak": "fi"
+        },
+        {
+          "ar": "فُ",
+          "laut": "fu",
+          "speak": "fu"
+        }
+      ],
+      "wordAr": "فَرَاشَة",
+      "wordDe": "Schmetterling",
+      "wordLaut": "farāsha",
+      "wordSpeak": "farascha, Schmetterling",
+      "forms": {
+        "iso": "ف",
+        "ini": "فـ",
+        "mid": "ـفـ",
+        "fin": "ـف"
+      },
+      "ages": {
+        "4–5": "Fā. Ein Punkt im Kreis. Wort: Schmetterling. فَرَاشَة",
+        "6–8": "Fā: فَ fa, فِ fi, فُ fu. Wort فَرَاشَة farāsha.",
+        "9–10": "ف ein Punkt. ق zwei Punkte."
+      }
+    },
+    {
+      "id": "qaf",
+      "ar": "ق",
+      "nameDe": "Qāf",
+      "nameAr": "قَاف",
+      "lautName": "Qāf",
+      "speakName": "Kaf, tief aus der Kehle",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "قَ",
+          "laut": "qa",
+          "speak": "ka, tief"
+        },
+        {
+          "ar": "قِ",
+          "laut": "qi",
+          "speak": "ki, tief"
+        },
+        {
+          "ar": "قُ",
+          "laut": "qu",
+          "speak": "ku, tief"
+        }
+      ],
+      "wordAr": "قَمَر",
+      "wordDe": "Mond",
+      "wordLaut": "qamar",
+      "wordSpeak": "kamar, Mond",
+      "forms": {
+        "iso": "ق",
+        "ini": "قـ",
+        "mid": "ـقـ",
+        "fin": "ـق"
+      },
+      "ages": {
+        "4–5": "Qāf. Zwei Punkte oben. Höre genau auf den tiefen Laut. Wort: Mond. قَمَر",
+        "6–8": "Qāf: قَ qa, قِ qi, قُ qu. Der Laut entsteht weit hinten am Zäpfchen. Nicht wie Kāf. Wort قَمَر qamar.",
+        "9–10": "ق hat zwei Punkte und wird weit hinten am Zäpfchen gebildet. ك Kāf wird weiter vorn am Gaumen gebildet."
+      }
+    },
+    {
+      "id": "kaf",
+      "ar": "ك",
+      "nameDe": "Kāf",
+      "nameAr": "كَاف",
+      "lautName": "Kāf",
+      "speakName": "Kaf",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "كَ",
+          "laut": "ka",
+          "speak": "ka"
+        },
+        {
+          "ar": "كِ",
+          "laut": "ki",
+          "speak": "ki"
+        },
+        {
+          "ar": "كُ",
+          "laut": "ku",
+          "speak": "ku"
+        }
+      ],
+      "wordAr": "كِتَاب",
+      "wordDe": "Buch",
+      "wordLaut": "kitāb",
+      "wordSpeak": "kitaab, Buch",
+      "forms": {
+        "iso": "ك",
+        "ini": "كـ",
+        "mid": "ـكـ",
+        "fin": "ـك"
+      },
+      "ages": {
+        "4–5": "Kāf. Oben ein kleines Häkchen. Wort: Buch. كِتَاب",
+        "6–8": "Kāf: كَ ka, كِ ki, كُ ku. Wort كِتَاب kitāb.",
+        "9–10": "ك vorn am Gaumen. Nicht ق. Das Häkchen ist kein Hamza."
+      }
+    },
+    {
+      "id": "lam",
+      "ar": "ل",
+      "nameDe": "Lām",
+      "nameAr": "لَام",
+      "lautName": "Lām",
+      "speakName": "Lam",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "لَ",
+          "laut": "la",
+          "speak": "la"
+        },
+        {
+          "ar": "لِ",
+          "laut": "li",
+          "speak": "li"
+        },
+        {
+          "ar": "لُ",
+          "laut": "lu",
+          "speak": "lu"
+        }
+      ],
+      "wordAr": "لَبَن",
+      "wordDe": "Milch",
+      "wordLaut": "laban",
+      "wordSpeak": "laban, Milch",
+      "forms": {
+        "iso": "ل",
+        "ini": "لـ",
+        "mid": "ـلـ",
+        "fin": "ـل"
+      },
+      "ages": {
+        "4–5": "Lām. Lang mit einem Fuß. Wort: Milch. لَبَن",
+        "6–8": "Lām: لَ la, لِ li, لُ lu. Wort لَبَن laban.",
+        "9–10": "ل verbindet nach beiden Seiten. ل + ا schreibt man oft لا."
+      }
+    },
+    {
+      "id": "mim",
+      "ar": "م",
+      "nameDe": "Mīm",
+      "nameAr": "مِيم",
+      "lautName": "Mīm",
+      "speakName": "Miim",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "مَ",
+          "laut": "ma",
+          "speak": "ma"
+        },
+        {
+          "ar": "مِ",
+          "laut": "mi",
+          "speak": "mi"
+        },
+        {
+          "ar": "مُ",
+          "laut": "mu",
+          "speak": "mu"
+        }
+      ],
+      "wordAr": "مَسْجِد",
+      "wordDe": "Moschee",
+      "wordLaut": "masjid",
+      "wordSpeak": "masdjid, Moschee",
+      "forms": {
+        "iso": "م",
+        "ini": "مـ",
+        "mid": "ـمـ",
+        "fin": "ـم"
+      },
+      "ages": {
+        "4–5": "Mīm. Ein kleiner Kreis. Wort: Moschee. مَسْجِد",
+        "6–8": "Mīm: مَ ma, مِ mi, مُ mu. Wort مَسْجِد masjid.",
+        "9–10": "م verbindet nach beiden Seiten. Kreis bleibt sichtbar."
+      }
+    },
+    {
+      "id": "nun",
+      "ar": "ن",
+      "nameDe": "Nūn",
+      "nameAr": "نُون",
+      "lautName": "Nūn",
+      "speakName": "Nuun",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "نَ",
+          "laut": "na",
+          "speak": "na"
+        },
+        {
+          "ar": "نِ",
+          "laut": "ni",
+          "speak": "ni"
+        },
+        {
+          "ar": "نُ",
+          "laut": "nu",
+          "speak": "nu"
+        }
+      ],
+      "wordAr": "نَجْم",
+      "wordDe": "Stern",
+      "wordLaut": "najm",
+      "wordSpeak": "nadschm, Stern",
+      "forms": {
+        "iso": "ن",
+        "ini": "نـ",
+        "mid": "ـنـ",
+        "fin": "ـن"
+      },
+      "ages": {
+        "4–5": "Nūn. Ein Punkt oben. Wort: Stern. نَجْم",
+        "6–8": "Nūn: نَ na, نِ ni, نُ nu. Wort نَجْم najm.",
+        "9–10": "ن ein Punkt. ت zwei Punkte. ة am Wortende ist etwas anderes."
+      }
+    },
+    {
+      "id": "haa",
+      "ar": "ه",
+      "nameDe": "Hāʾ",
+      "nameAr": "هَاء",
+      "lautName": "Hā",
+      "speakName": "Ha, weicher Hauch",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "هَ",
+          "laut": "ha",
+          "speak": "ha, weich"
+        },
+        {
+          "ar": "هِ",
+          "laut": "hi",
+          "speak": "hi, weich"
+        },
+        {
+          "ar": "هُ",
+          "laut": "hu",
+          "speak": "hu, weich"
+        }
+      ],
+      "wordAr": "هِلَال",
+      "wordDe": "Mondsichel",
+      "wordLaut": "hilāl",
+      "wordSpeak": "hilal, Mondsichel",
+      "forms": {
+        "iso": "ه",
+        "ini": "هـ",
+        "mid": "ـهـ",
+        "fin": "ـه"
+      },
+      "ages": {
+        "4–5": "Hā. Weicher Hauch. Wort: Mondsichel. هِلَال",
+        "6–8": "Hā: هَ ha, هِ hi, هُ hu. Wort هِلَال hilāl.",
+        "9–10": "ه weiches h. Mitte ـهـ. Nicht ح (enge Kehle)."
+      }
+    },
+    {
+      "id": "waw",
+      "ar": "و",
+      "nameDe": "Wāw",
+      "nameAr": "وَاو",
+      "lautName": "Wāw",
+      "speakName": "Wau",
+      "connect": "left-none",
+      "harakat": [
+        {
+          "ar": "وَ",
+          "laut": "wa",
+          "speak": "wa"
+        },
+        {
+          "ar": "وِ",
+          "laut": "wi",
+          "speak": "wi"
+        },
+        {
+          "ar": "وُ",
+          "laut": "wu",
+          "speak": "wu"
+        }
+      ],
+      "wordAr": "وَرْدَة",
+      "wordDe": "Rose",
+      "wordLaut": "warda",
+      "wordSpeak": "warda, Rose",
+      "forms": {
+        "iso": "و",
+        "ini": "و",
+        "mid": "ـو",
+        "fin": "ـو"
+      },
+      "ages": {
+        "4–5": "Wāw. Rund wie eine Schüssel. Wort: Rose. وَرْدَة",
+        "6–8": "Wāw: وَ wa. Nach Ḍamma kann و als Madd den langen Vokal ū bilden. Wort وَرْدَة warda.",
+        "9–10": "و verbindet sich nicht mit dem nächsten Buchstaben. Es kann Konsonant w sein und nach Ḍamma als Madd den langen Vokal ū bilden."
+      }
+    },
+    {
+      "id": "ya",
+      "ar": "ي",
+      "nameDe": "Yāʾ",
+      "nameAr": "يَاء",
+      "lautName": "Yā",
+      "speakName": "Ya",
+      "connect": "both",
+      "harakat": [
+        {
+          "ar": "يَ",
+          "laut": "ya",
+          "speak": "ya"
+        },
+        {
+          "ar": "يِ",
+          "laut": "yi",
+          "speak": "yi"
+        },
+        {
+          "ar": "يُ",
+          "laut": "yu",
+          "speak": "yu"
+        }
+      ],
+      "wordAr": "يَد",
+      "wordDe": "Hand",
+      "wordLaut": "yad",
+      "wordSpeak": "jad, Hand",
+      "forms": {
+        "iso": "ي",
+        "ini": "يـ",
+        "mid": "ـيـ",
+        "fin": "ـي"
+      },
+      "ages": {
+        "4–5": "Yā. Zwei Punkte unten. Wort: Hand. يَد",
+        "6–8": "Yā: يَ ya. Nach Kasra als Madd ī. Wort يَد yad.",
+        "9–10": "ي zwei Punkte unten. ت zwei oben. Konsonant y und langer Vokal ī."
+      }
+    }
   ]
 }
