@@ -2007,7 +2007,15 @@ def file_signature(path:Path):
         return str(path)
 
 def contextual_bridge_direction(plan,index:int):
-    """DE↔AR-Grenzen erhalten Kontext-Rendering statt isolierter Mini-Fragmente."""
+    """DE↔AR-Grenzen: derzeit bewusst ohne Carrier-Kontext-Rendering.
+
+    Der frühere Context-Bridge-Ansatz erzeugte bei kurzen deutschen Fragmenten
+    hörbare Neuansätze und Cropping-Artefakte. Wir verwenden wieder die bereits
+    bewährten normalen Segment-Renderings plus enge, interpunktionsabhängige
+    Crossfades in join_rendered_segments().
+    """
+    return ""
+
     if index<0 or index>=len(plan):
         return ""
     lang,text=plan[index]
