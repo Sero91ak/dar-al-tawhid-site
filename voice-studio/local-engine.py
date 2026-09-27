@@ -2007,12 +2007,14 @@ def file_signature(path:Path):
         return str(path)
 
 def contextual_bridge_direction(plan,index:int):
-    """DE↔AR-Grenzen erhalten wieder Kontext-Rendering, aber nur best-effort.
+    """DE↔AR-Grenzen: stabiler Fallback ohne Carrier-Kontext-Rendering.
 
-    Die eigentliche Stabilität liegt im Fallback von render_context_bridge():
-    Wenn Carrier/Cropping nicht sauber klappt, wird dasselbe Fragment normal
-    gerendert statt den gesamten Auftrag abzubrechen.
+    Die Carrier-Bridge kann auf einzelnen Apple-Silicon/MLX-Runs hängen oder
+    abbrechen. Bis der Übergang separat neu gebaut ist, rendern wir die normalen
+    Segmente und verbinden sie ausschließlich im Stitcher per engem Crossfade.
     """
+    return ""
+
     if index<0 or index>=len(plan):
         return ""
     lang,text=plan[index]
@@ -2164,27 +2166,7 @@ def render_context_bridge(model,text:str,mode:str,direction:str,seed_base:int=20
             return cropped,metrics
         except Exception as e:
             last_error=e
-
-    # Best-effort statt harter Abbruch: Wenn Carrier-Erzeugung oder das Cropping
-    # nicht zuverlässig gelingt, bleibt der Render stabil. Das normale Segment
-    # wird erzeugt und anschließend vom bestehenden Tight-Join/Crossfade verbunden.
-    try:
-        fallback,metrics=render_segment_with_qa(
-            model,source,"de",mode,False,
-            seed_base=max(1,int(seed_base))+attempts*seed_offset
-        )
-        metrics.update({
-            "context_bridge":False,
-            "context_bridge_fallback":True,
-            "context_bridge_error":str(last_error or "")[:240],
-            "carrier_not_exposed":True,
-        })
-        return fallback,metrics
-    except Exception as fallback_error:
-        raise RuntimeError(
-            f"Kontext-Bridge und stabiler Fallback fehlgeschlagen ({direction}): "
-            f"{last_error}; fallback={fallback_error}"
-        ) from fallback_error
+    raise RuntimeError(f"Kontext-Bridge fehlgeschlagen ({direction}): {last_error}")
 
 def _render_cache_digest(text:str,language_id:str,mode:str,backend=None,schema:int=3):
     p=prosody_settings(mode,language_id,text)
@@ -2634,15 +2616,10 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str,mode:str="narratio
         )
         if 0<letters<=24:
             if letters<=12:
-                # Kritische Kernbegriffe (z. B. Qurʾān) werden beim ersten Einsatz
-                # absichtlich als eigener Kandidat erzeugt. Ihre Aussprache darf etwas
-                # länger sein als ein gewöhnlicher Inline-Begriff, solange die separaten
-                # Silence-/Plateau-/Clipping-Guards sauber bleiben.
-                if audio_lock_key_for_chunk(text):
-                    max_dur=float(QA_CONFIG.get("coreArabicMaxSecondsBase",1.20))+letters*float(QA_CONFIG.get("coreArabicMaxSecondsPerLetter",0.40))
-                    metrics["core_arabic_duration_guard"]=True
-                else:
-                    max_dur=float(QA_CONFIG.get("inlineArabicMaxSecondsBase",0.65))+letters*float(QA_CONFIG.get("inlineArabicMaxSecondsPerLetter",0.15))
+                # Einzelne Namen/Begriffe dürfen nicht wie isolierte Ansagen mehrere
+                # Sekunden stehen bleiben. Das war die Hauptursache hörbarer Stopps
+                # mitten in deutschen Sätzen (z. B. vor/nach Allāh).
+                max_dur=float(QA_CONFIG.get("inlineArabicMaxSecondsBase",0.65))+letters*float(QA_CONFIG.get("inlineArabicMaxSecondsPerLetter",0.15))
             else:
                 max_dur=float(QA_CONFIG.get("shortArabicMaxSecondsBase",1.2))+letters*float(QA_CONFIG.get("shortArabicMaxSecondsPerLetter",0.34))
             metrics["inline_arabic_max_seconds"]=round(max_dur,3)
@@ -3506,15 +3483,10 @@ def generate(text:str,prepared:str="",style:str="auto"):
                             else:
                                 raise
                     if not audio_lock_key:
-                        if bridge_direction and metrics.get("context_bridge"):
+                        if bridge_direction:
                             save_context_bridge_cache(bridge_cache_key,wav,render_sr)
                             metrics["context_bridge_cache"]="miss"
                         else:
-                            # Auch ein Bridge-Fallback wird nur als normales,
-                            # QA-sauberes Segment gecacht. So kann ein späterer Render
-                            # erneut versuchen, echte Kontext-Koartikulation zu erzeugen.
-                            if not cache_key:
-                                cache_key=render_cache_key(chunk,lang,mode)
                             save_render_cache(cache_key,wav,render_sr)
                             metrics["segment_cache"]="miss"
                     if audio_lock_key:
