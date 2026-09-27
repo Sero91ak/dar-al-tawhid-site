@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" class="kids-hello">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -2435,7 +2435,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.51</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.52</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2462,6 +2462,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
             </svg>
           </div>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
+          <span class="wm-sparks" aria-hidden="true"><i></i><i></i><i></i></span>
         </div>
         <div class="cloud"></div>
         <div class="city"></div>
@@ -2928,8 +2929,8 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab51";
-try{document.documentElement.classList.add("kids-hello");setTimeout(function(){document.documentElement.classList.remove("kids-hello")},1800)}catch(eHello){}
+const KIDS_BUILD_ID="kids-shell-v12-tab52";
+try{document.documentElement.classList.add("kids-hello");setTimeout(function(){document.documentElement.classList.remove("kids-hello")},2400)}catch(eHello){}
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6395,19 +6396,20 @@ fetchCatalog();
   padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;
 }
 </style>
-<style id="kids-wordmark-sky-curve-v34">
+<style id="kids-wordmark-sky-zone-v35">
 #view-today .kids-wordmark,.kids-wordmark{
   position:absolute!important;
   left:50%!important;
-  top:max(8px, env(safe-area-inset-top, 0px))!important;
+  top:22%!important;
   right:auto!important;bottom:auto!important;
-  transform:translateX(-50%)!important;
+  transform:translate(-50%,-8%)!important;
   margin:0!important;
-  width:min(92vw,560px)!important;
-  height:clamp(132px,36vw,188px)!important;
+  width:min(88vw,520px)!important;
+  height:auto!important;
+  min-height:0!important;
   z-index:7!important;text-align:center!important;pointer-events:none!important;
   display:flex!important;flex-direction:column!important;align-items:center!important;
-  justify-content:center!important;gap:0!important;
+  justify-content:flex-start!important;gap:0!important;
 }
 #view-today .wm-dar,.wm-dar{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 #view-today .wm-dar-wrap{
@@ -6415,50 +6417,90 @@ fetchCatalog();
 }
 #view-today .wm-dar-svg,.wm-dar-svg{
   display:block!important;opacity:1!important;visibility:visible!important;
-  width:100%!important;height:clamp(48px,14vw,68px)!important;
+  width:100%!important;height:clamp(44px,13vw,62px)!important;
   margin:0 auto!important;overflow:visible!important;
-  filter:drop-shadow(0 3px 8px rgba(8,24,36,.35));
-  animation:none!important;
+  filter:drop-shadow(0 4px 10px rgba(8,24,36,.4));
+  animation:darJelly 2.6s ease-in-out infinite!important;
+}
+@keyframes darJelly{
+  0%,100%{transform:scale(1)}
+  35%{transform:scale(1.06,.94)}
+  55%{transform:scale(.97,1.05)}
 }
 #view-today .wm-dar-fx{display:none!important}
 #view-today .wm-kids,.wm-kids{
   display:flex!important;justify-content:center!important;align-items:flex-end!important;
-  margin:-22px auto 0!important;
-  font-size:clamp(42px,12.4vw,64px)!important;
-  line-height:.82!important;
+  margin:-18px auto 0!important;
+  font-size:clamp(44px,13vw,68px)!important;
+  line-height:.8!important;
 }
 #view-today .wm-kids span{
-  animation-name:kidsBalloon!important;
-  animation-duration:2.8s!important;
+  animation:kidsJelly 1.8s ease-in-out infinite!important;
 }
-@keyframes kidsBalloon{
-  0%,100%{transform:translateY(0) scale(1)}
-  50%{transform:translateY(-5px) scale(1.04)}
+#view-today .wm-kids .k{animation-delay:0s!important}
+#view-today .wm-kids .i{animation-delay:.12s!important}
+#view-today .wm-kids .d{animation-delay:.24s!important}
+#view-today .wm-kids .s{animation-delay:.36s!important}
+@keyframes kidsJelly{
+  0%,100%{transform:translateY(0) rotate(var(--r,0deg)) scale(1)}
+  40%{transform:translateY(-11px) rotate(var(--r,0deg)) scale(1.12, .92)}
+  62%{transform:translateY(-3px) rotate(var(--r,0deg)) scale(.96, 1.08)}
+}
+#view-today .wm-kids .k{--r:-8deg}
+#view-today .wm-kids .i{--r:6deg}
+#view-today .wm-kids .d{--r:-4deg}
+#view-today .wm-kids .s{--r:8deg}
+#view-today .wm-sparks{
+  position:absolute;inset:-6% 8% 8%;pointer-events:none;
+}
+#view-today .wm-sparks i{
+  position:absolute;width:7px;height:7px;border-radius:50%;
+  background:#fff6c8;box-shadow:0 0 10px #ffe38a;
+  animation:kidsSpark 1.6s ease-in-out infinite;
+}
+#view-today .wm-sparks i:nth-child(1){left:12%;top:18%;animation-delay:0s}
+#view-today .wm-sparks i:nth-child(2){right:14%;top:8%;animation-delay:.35s}
+#view-today .wm-sparks i:nth-child(3){left:58%;bottom:12%;width:5px;height:5px;animation-delay:.7s}
+@keyframes kidsSpark{
+  0%,100%{opacity:.15;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.35)}
+}
+html.kids-hello #view-today .kids-wordmark{
+  animation:helloLand 1s cubic-bezier(.18,1.22,.28,1) both!important;
+}
+html.kids-hello #view-today .wm-dar-svg{
+  animation:helloDar 1s cubic-bezier(.18,1.22,.28,1) both!important;
+}
+html.kids-hello #view-today .wm-kids span{
+  animation:helloKid .7s cubic-bezier(.2,1.4,.28,1) both!important;
+}
+html.kids-hello #view-today .wm-kids .k{animation-delay:.28s!important}
+html.kids-hello #view-today .wm-kids .i{animation-delay:.42s!important}
+html.kids-hello #view-today .wm-kids .d{animation-delay:.56s!important}
+html.kids-hello #view-today .wm-kids .s{animation-delay:.7s!important}
+@keyframes helloLand{
+  0%{opacity:0;transform:translate(-50%,-28%) scale(.84)}
+  70%{opacity:1;transform:translate(-50%,-4%) scale(1.05)}
+  100%{opacity:1;transform:translate(-50%,-8%) scale(1)}
+}
+@keyframes helloDar{
+  0%{opacity:0;transform:translateY(-18px) scale(.9)}
+  100%{opacity:1;transform:none}
+}
+@keyframes helloKid{
+  0%{opacity:0;transform:translateY(22px) scale(.3) rotate(-12deg)}
+  72%{opacity:1;transform:translateY(-8px) scale(1.18) rotate(8deg)}
+  100%{opacity:1;transform:translateY(0) scale(1) rotate(var(--r,0deg))}
 }
 #view-today .hero::before,.hero::before{
   background-position:center 54%!important;
 }
-html.kids-hello .wm-dar-svg{
-  animation:helloDar .72s cubic-bezier(.22,1.1,.28,1) both!important;
-}
-html.kids-hello .wm-kids span{
-  animation:helloKid .58s cubic-bezier(.2,1.35,.28,1) both!important;
-}
-html.kids-hello .wm-kids .k{animation-delay:.22s!important}
-html.kids-hello .wm-kids .i{animation-delay:.34s!important}
-html.kids-hello .wm-kids .d{animation-delay:.46s!important}
-html.kids-hello .wm-kids .s{animation-delay:.58s!important}
-@keyframes helloDar{
-  from{opacity:0;transform:translateY(-10px) scale(.94)}
-  to{opacity:1;transform:none}
-}
-@keyframes helloKid{
-  from{opacity:0;transform:translateY(14px) scale(.45)}
-  to{opacity:1;transform:none}
-}
 @media(prefers-reduced-motion:reduce){
-  html.kids-hello .wm-dar-svg,html.kids-hello .wm-kids span,
-  #view-today .wm-dar-svg,#view-today .wm-kids span{animation:none!important}
+  html.kids-hello #view-today .kids-wordmark,
+  html.kids-hello #view-today .wm-dar-svg,
+  html.kids-hello #view-today .wm-kids span,
+  #view-today .wm-kids span,
+  #view-today .wm-sparks i{animation:none!important}
 }
 </style>
 
