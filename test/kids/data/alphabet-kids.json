@@ -1,8 +1,8 @@
 {
-  "version": 7,
+  "version": 8,
   "id": "KIDS_ARABIC_ALPHABET_V2",
   "audioSync": "KIDS_ALPHABET_AUDIO_SYNC_V1",
-  "note": "Hijāʾī-Reihenfolge. Altersfelder sind kurze Merksätze. Arabische Referenzaussprache kommt ausschließlich aus menschlich freigegebenen Clips im alphabet-audio-Manifest; kein System-TTS-Fallback. Lernstatus „sicher“ erfordert zeitlich getrennte Wiederholungen und gehörte Referenzclips.",
+  "note": "Hijāʾī-Reihenfolge. Arabische Referenzaussprache ausschließlich aus menschlich freigegebenen Clips. Kein arabisches System-TTS. Lernstatus „sicher“ erfordert altersgerechte Fähigkeiten (4–5: sehen+hören; ab 6: zusätzlich Ḥaraka+Form), vollständige Audio-Evidenz und drei zeitlich getrennte erfolgreiche Wiederholungen.",
   "letters": [
     {
       "id": "alif",
