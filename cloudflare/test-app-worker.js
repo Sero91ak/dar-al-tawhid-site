@@ -1,6 +1,6 @@
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v12-tab38",
-  label: "KIDS · V0.38"
+  buildId: "kids-shell-v12-tab39",
+  label: "KIDS · V0.39"
 });
 
 function kidsVersionResponse() {
@@ -41,7 +41,7 @@ export default {
       const target = new URL(request.url);
       target.pathname = "/test/kids/start";
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v12-tab38");
+      target.searchParams.set("kv", "kids-shell-v12-tab39");
       return Response.redirect(target.toString(), 307);
     }
 
