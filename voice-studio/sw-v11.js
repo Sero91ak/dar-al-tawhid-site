@@ -1,16 +1,14 @@
-const CACHE="dar-voice-studio-v15";
+const CACHE="dar-voice-studio-v16";
 const SHELL=[
   "/voice-studio/",
   "/voice-studio/index.html",
   "/voice-studio/content-studio.js",
   "/voice-studio/manifest.webmanifest",
   "/voice-studio/version.json",
+  "/voice-studio/voice-studio-icon.png",
   "/data/pronunciation/pronunciation-rules.json",
   "/data/pronunciation/voice-production-profile.json",
-  "/watermark-my-logo-full.png",
-  "/app-icon-192.png",
-  "/app-icon-512.png",
-  "/apple-touch-icon.png"
+  "/voice-studio/voice-studio-icon.png"
 ];
 
 self.addEventListener("install",event=>{
@@ -40,6 +38,7 @@ self.addEventListener("fetch",event=>{
     url.pathname==="/voice-studio/index.html" ||
     url.pathname==="/voice-studio/content-studio.js" ||
     url.pathname==="/voice-studio/version.json" ||
+    url.pathname==="/voice-studio/voice-studio-icon.png" ||
     url.pathname==="/voice-studio/service-worker.js" ||
     url.pathname==="/voice-studio/install-mac.command" ||
     url.pathname==="/voice-studio/local-engine.py" ||
