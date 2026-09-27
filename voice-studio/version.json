@@ -1,6 +1,6 @@
 {
-  "version": "2.9.3",
-  "updatedAt": "2026-09-27T18:39:00+02:00",
+  "version": "2.9.4",
+  "updatedAt": "2026-09-27T19:58:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -246,7 +246,9 @@
     "companionNoTokenLeakHealth": true,
     "alphabetAudioUiValidation": true,
     "alphabetAudioHumanQaRequired": true,
-    "alphabetAudioManifestVerification": true
+    "alphabetAudioManifestVerification": true,
+    "nativeBundleExecutableValidation": true,
+    "macDockIconValidation": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -493,5 +495,11 @@
   },
   "downloadTransport": "github-contents-api-raw-media-type",
   "rawGithubFallbackDisabled": true,
-  "transportHotfix": "raw.githubusercontent.com returned 404 on production Mac; all installer/update fetches moved to GitHub Contents API"
+  "transportHotfix": "raw.githubusercontent.com returned 404 on production Mac; all installer/update fetches moved to GitHub Contents API",
+  "macAppIconFix": true,
+  "macBundleExecutablePolicy": "native-binary-when-built; shell-launcher-only-fallback",
+  "macBundleIconFile": "AppIcon.icns",
+  "macBundleIconName": "AppIcon",
+  "macDockRefresh": true,
+  "macLaunchServicesReregister": true
 }
