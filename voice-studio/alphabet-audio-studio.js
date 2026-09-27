@@ -128,12 +128,12 @@ function nextCandidate(){
   return candidateList(manifest)[0]||null;
 }
 function playerFullyHeard(){
-  const p=q("player");
+  const p=q("alphabetPackPlayer");
   if(!p||!Number.isFinite(Number(p.duration))||Number(p.duration)<=0)return false;
   return Boolean(p.ended)||Number(p.currentTime)>=Math.max(0,Number(p.duration)-0.15);
 }
 function playExternal(url,{candidate=false,label=""}={}){
-  const p=q("player");
+  const p=q("alphabetPackPlayer");
   if(!p)throw Error("Audio-Player nicht gefunden.");
   if(!/^https:\/\//i.test(String(url||"")))throw Error("Externe Audio-URL ist ungültig.");
   const token=++playToken;
