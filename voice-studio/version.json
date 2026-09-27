@@ -1,6 +1,6 @@
 {
   "version": "2.9.10",
-  "updatedAt": "2026-09-27T23:08:00+02:00",
+  "updatedAt": "2026-09-27T23:36:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -266,7 +266,9 @@
     "updateFailureLogValidation": true,
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
-    "appIconPwaCacheRefresh": true
+    "appIconPwaCacheRefresh": true,
+    "validatedCommit": "63bcc1c998faf422478b4f348a9628eec290a33f",
+    "validatedAt": "2026-09-27T23:35:40+02:00"
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -522,8 +524,8 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "6679946a53bfd6218ca332ff3f0492d0083f4131",
-  "releaseChannel": "stable",
+  "releaseRef": "63bcc1c998faf422478b4f348a9628eec290a33f",
+  "releaseChannel": "validated-main",
   "updateRepair": true,
   "updateRepairReason": "2.9.9 sentence-flow hotfix: narrative colon and commas no longer trigger list prosody",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
