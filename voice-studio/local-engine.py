@@ -52,6 +52,9 @@ MASTER_AUDIO_MANIFEST=MASTER_AUDIO_DIR/"manifest.json"
 LEARNING_HOME=VOICE_HOME/"PronunciationLearning"
 LEARNING_PENDING_DIR=LEARNING_HOME/"pending"
 USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
+USER_OVERRIDES_BACKUP_DIR=LEARNING_HOME/"backups"
+USER_OVERRIDES_BACKUP=USER_OVERRIDES_BACKUP_DIR/"user-overrides.latest.json"
+USER_OVERRIDES_BACKUP_DIR.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_CACHE=LEARNING_HOME/"online-library.json"
 MASTER_LIBRARY_CACHE=LEARNING_HOME/"islamic-master-library.json"
 MASTER_LIBRARY_SEED=APP_HOME/"islamic-master-library.json"
@@ -156,7 +159,23 @@ def validate_master_library(data):
 BASE_LIB=json.load(PRON.open(encoding="utf-8"))
 VOICE_PROFILE=json.load(PROFILE.open(encoding="utf-8"))
 BASE_RULES=list(BASE_LIB.get("rules",[]))
-USER_OVERRIDE_DATA=load_json_file(USER_OVERRIDES_FILE,{"schemaVersion":1,"rules":[]})
+
+def load_persistent_user_overrides():
+    primary=load_json_file(USER_OVERRIDES_FILE,{"schemaVersion":1,"rules":[]})
+    rules=list((primary or {}).get("rules") or [])
+    if rules:
+        return primary
+    backup=load_json_file(USER_OVERRIDES_BACKUP,{"schemaVersion":1,"rules":[]})
+    backup_rules=list((backup or {}).get("rules") or [])
+    if backup_rules:
+        restored=dict(backup)
+        restored["restoredAt"]=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        atomic_write_json(USER_OVERRIDES_FILE,restored)
+        append_learning_log("override_restore_from_backup",rules=len(backup_rules))
+        return restored
+    return primary
+
+USER_OVERRIDE_DATA=load_persistent_user_overrides()
 ONLINE_LIB=load_json_file(ONLINE_LIBRARY_CACHE,{"schemaVersion":1,"rules":[],"syncedAt":None})
 ONLINE_RULES=list((ONLINE_LIB or {}).get("rules") or [])
 INSTALLED_MASTER_LIB=load_json_file(MASTER_LIBRARY_SEED,{"schemaVersion":1,"entries":[],"sources":{}})
@@ -615,22 +634,95 @@ def unlock_audio_lock(key:str):
     audio_lock_path(key).unlink(missing_ok=True)
     return key
 
-def save_user_override(rule:dict):
+def _persist_user_override_data(data:dict):
+    """Primärdatei + lokale Sicherung atomar schreiben.
+
+    Updates der Voice-Studio-App ändern diese Dateien nicht; sie liegen bewusst
+    außerhalb des App-Verzeichnisses unter ~/SerhatVoice/PronunciationLearning.
+    """
+    atomic_write_json(USER_OVERRIDES_FILE,data)
+    atomic_write_json(USER_OVERRIDES_BACKUP,data)
+
+def learned_canonical_forms(term:str,canonical:str,tts_text:str):
+    """Alle bekannten Schreibvarianten derselben bestätigten Aussprache sammeln.
+
+    So wird nicht nur exakt 'Ismāʿīl' gespeichert, sondern die komplette lokale
+    kanonische Gruppe. Ein anderer Alias darf später nicht wieder als REVIEW auftauchen.
+    """
+    term=str(term or "").strip()
+    canonical=str(canonical or term).strip()
+    tts_text=str(tts_text or "").strip()
+    target_norms={normalize_lookup(x) for x in (term,canonical) if x}
+    forms=[]
+
+    def add(value):
+        value=str(value or "").strip()
+        if value and value not in forms:
+            forms.append(value)
+
+    add(term); add(canonical)
+
+    for e in MASTER_ENTRIES:
+        e_can=str(e.get("canonical","")).strip()
+        e_tts=str(e.get("tts_text") or e.get("arabic") or "").strip()
+        e_norm=normalize_lookup(e_can)
+        if (tts_text and e_tts==tts_text) or (e_norm and e_norm in target_norms):
+            add(e_can)
+            for alias in e.get("aliases") or []:
+                add(alias)
+
+    for pool in (BASE_RULES,MASTER_RULES,ONLINE_RULES):
+        for r in pool:
+            r_can=str(r.get("canonical") or r.get("string_to_replace") or "").strip()
+            r_tts=str(r.get("tts_text","")).strip()
+            if (tts_text and r_tts==tts_text) or normalize_lookup(r_can) in target_norms:
+                add(r.get("string_to_replace"))
+                add(r_can)
+
+    return forms
+
+def save_user_override_group(rule:dict,forms=None):
     global USER_OVERRIDE_DATA
     needle=str(rule.get("string_to_replace","")).strip()
     if not needle:
         raise ValueError("Zu lernendes Wort fehlt.")
+
+    forms=list(forms or [needle])
+    if needle not in forms:
+        forms.insert(0,needle)
+    forms=[str(x).strip() for x in forms if str(x).strip()]
+    forms=list(dict.fromkeys(forms))
+    normalized={normalize_lookup(x) for x in forms if normalize_lookup(x)}
+
     rules=list((USER_OVERRIDE_DATA or {}).get("rules") or [])
-    rules=[r for r in rules if str(r.get("string_to_replace",""))!=needle]
-    rules.insert(0,rule)
+    # Alte Varianten derselben lokalen Lerngruppe komplett ersetzen.
+    rules=[
+        r for r in rules
+        if normalize_lookup(r.get("string_to_replace","")) not in normalized
+        and str(r.get("learned_group_id",""))!=str(rule.get("learned_group_id",""))
+    ]
+
+    group_rules=[]
+    for form in forms:
+        item=dict(rule)
+        item["string_to_replace"]=form
+        item["voice_lock"]="MASTER"
+        item["priority"]="user-master"
+        item["learned_alias_count"]=len(forms)
+        group_rules.append(item)
+
     USER_OVERRIDE_DATA={
-        "schemaVersion":2,
+        "schemaVersion":3,
         "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "rules":rules,
+        "rules":group_rules+rules,
     }
-    atomic_write_json(USER_OVERRIDES_FILE,USER_OVERRIDE_DATA)
+    _persist_user_override_data(USER_OVERRIDE_DATA)
     rebuild_runtime_rules()
-    return rule
+    return group_rules
+
+def save_user_override(rule:dict):
+    saved=save_user_override_group(rule,[str(rule.get("string_to_replace","")).strip()])
+    return saved[0]
 
 def combined_search_rules():
     seen=set();out=[]
@@ -826,11 +918,16 @@ def confirm_learning_preview(preview_id:str,input_term:str=""):
         "audio_lock_key":lock_key,
         "audio_lock_policy":"CONFIRMED_WAV",
         "learned_at":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "learned_group_id":lock_key,
     }
     if meta.get("required_honorific_key"):
         rule["required_honorific_key"]=meta["required_honorific_key"]
-    save_user_override(rule)
-    append_learning_log("confirmed",term=term,canonical=rule["canonical"],lockKey=lock_key)
+    forms=learned_canonical_forms(term,rule["canonical"],rule["tts_text"])
+    saved_rules=save_user_override_group(rule,forms)
+    append_learning_log(
+        "confirmed",term=term,canonical=rule["canonical"],lockKey=lock_key,
+        savedForms=[r.get("string_to_replace") for r in saved_rules]
+    )
     with LEARNING_LOCK:
         LEARNING_PREVIEWS.pop(str(preview_id),None)
     try: src.unlink(missing_ok=True)
@@ -851,7 +948,14 @@ def learning_state():
         "masterSahabiyyat":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabiyyah"),
         "masterProphets":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="prophet"),
         "autoSyncHours":24,
-        "learnedTerms":[str(r.get("string_to_replace","")) for r in user_rules[:50]],
+        "learnedTerms":[str(r.get("string_to_replace","")) for r in user_rules[:100]],
+        "learnedCanonicals":list(dict.fromkeys(
+            str(r.get("canonical") or r.get("string_to_replace",""))
+            for r in user_rules if r.get("voice_lock")=="MASTER"
+        ))[:100],
+        "persistentPath":str(USER_OVERRIDES_FILE),
+        "backupPath":str(USER_OVERRIDES_BACKUP),
+        "persistent":True,
     }
 
 ISLAMIC_DISTINCTIVE_RE=re.compile(r"[ʿʾāīūḥṣḍṭẓḏṯšǧġḫĀĪŪḤṢḌṬẒḎṮŠǦĠḪ]|[\u0600-\u06ff]")
