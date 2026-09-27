@@ -9,6 +9,7 @@ let current=null;
 let busy=false;
 let playToken=0;
 let heardSourceFile="";
+let referenceHeard=false;
 
 const q=id=>document.getElementById(id);
 
@@ -145,8 +146,12 @@ function playExternal(url,{candidate=false,label=""}={}){
   if(!p)throw Error("Audio-Player nicht gefunden.");
   if(!/^https:\/\//i.test(String(url||"")))throw Error("Externe Audio-URL ist ungültig.");
   const token=++playToken;
-  heardSourceFile="";
-  if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=true;
+  if(candidate){
+    heardSourceFile="";
+    if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=true;
+  }
+  const playing=q("alphabetPackNowPlaying");
+  if(playing)playing.textContent=(candidate?"Kandidat: ":"Referenz: ")+(label||"Audio");
   try{p.pause()}catch{}
   p.src=String(url);
   p.hidden=false;
@@ -155,10 +160,21 @@ function playExternal(url,{candidate=false,label=""}={}){
     if(token!==playToken)return;
     if(candidate&&current?.candidate){
       heardSourceFile=String(current.candidate.sourceFile||"");
-      if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=false;
-      setMsg("Kandidat vollständig angehört. Wenn die Stimme wirklich der Alif-Referenz entspricht, kannst du ihn jetzt bestätigen.","good");
+      const ready=referenceHeard&&heardSourceFile===String(current.candidate.sourceFile||"");
+      if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=!ready;
+      if(playing)playing.textContent="Bāʾ vollständig gehört";
+      setMsg(
+        ready
+          ?"Alif und Bāʾ wurden vollständig gehört. Wenn es für dich dieselbe Stimme ist, kannst du jetzt bestätigen."
+          :"Bāʾ vollständig gehört. Höre jetzt einmal Alif als direkte Referenz.",
+        ready?"good":"warn"
+      );
     }else{
-      setMsg((label||"Referenz")+" vollständig angehört. Jetzt den Kandidaten direkt dagegen hören.","good");
+      referenceHeard=true;
+      const ready=Boolean(current?.candidate)&&heardSourceFile===String(current.candidate.sourceFile||"");
+      if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=!ready;
+      if(playing)playing.textContent="Alif vollständig gehört";
+      setMsg(ready?"Alif und Bāʾ wurden vollständig gehört. Direkter Vergleich abgeschlossen.":"Alif vollständig gehört. Jetzt Bāʾ vollständig anhören.",ready?"good":"warn");
     }
   };
   p.onerror=()=>{
@@ -211,8 +227,8 @@ async function startNext(){
 async function approveCurrent(){
   if(busy||!current?.candidate)return;
   if(!workerSecret()){setMsg("Publisher-Verbindung fehlt. Freigabe kann ohne Admin-Publisher nicht gespeichert werden.","bad");return}
-  if(heardSourceFile!==String(current.candidate.sourceFile||"")||!playerFullyHeard()){
-    setMsg("Kandidat zuerst vollständig anhören. Die Freigabe bleibt bis zum Ende der Wiedergabe gesperrt.","bad");
+  if(!referenceHeard||heardSourceFile!==String(current.candidate.sourceFile||"")){
+    setMsg("Für die Freigabe müssen Alif und Bāʾ in dieser Prüfrunde jeweils vollständig angehört worden sein.","bad");
     return;
   }
 
@@ -232,6 +248,7 @@ async function approveCurrent(){
     });
     setMsg("Aufnahme als gleiche Alif-Stimme bestätigt und freigegeben.","good");
     heardSourceFile="";
+    referenceHeard=false;
     await loadManifest();
     current=nextCandidate();
     renderCurrent();
