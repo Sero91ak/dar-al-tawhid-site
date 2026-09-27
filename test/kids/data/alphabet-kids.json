@@ -1,8 +1,8 @@
 {
-  "version": 6,
+  "version": 7,
   "id": "KIDS_ARABIC_ALPHABET_V2",
   "audioSync": "KIDS_ALPHABET_AUDIO_SYNC_V1",
-  "note": "Hijāʾī-Reihenfolge. Altersfelder sind kurze Merksätze für den Schritt Sehen; Hören, Wort und Formen bleiben getrennte Lernschritte. Hamza/Alif und Madd-Regeln werden getrennt erklärt. Arabischer Sprechtext bleibt arabisch; wissenschaftliche Lautschrift bleibt separat.",
+  "note": "Hijāʾī-Reihenfolge. Altersfelder sind kurze Merksätze. Arabische Referenzaussprache kommt ausschließlich aus menschlich freigegebenen Clips im alphabet-audio-Manifest; kein System-TTS-Fallback. Lernstatus „sicher“ erfordert zeitlich getrennte Wiederholungen und gehörte Referenzclips.",
   "letters": [
     {
       "id": "alif",
