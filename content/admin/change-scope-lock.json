@@ -6488,6 +6488,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "prophets-focus-tdz-v1059-1082-2026-09-27",
+      "approvedBy": "user-explicit-app-repair-prophets-focus-crash",
+      "reason": "Nutzer: App wird repariert, Cannot access PROPHETS_FOCUS_START before initialization.",
+      "paths": [
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
