@@ -19,16 +19,16 @@
   ],
   "icons": [
     {
-      "src": "/app-icon-192.png",
-      "sizes": "192x192",
+      "src": "/voice-studio/voice-studio-icon.png?v=290",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/app-icon-512.png",
+      "src": "/voice-studio/voice-studio-icon.png?v=290",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "maskable"
     }
   ],
   "shortcuts": [
@@ -38,8 +38,9 @@
       "url": "/voice-studio/?new=1",
       "icons": [
         {
-          "src": "/app-icon-192.png",
-          "sizes": "192x192"
+          "src": "/voice-studio/voice-studio-icon.png?v=290",
+          "sizes": "512x512",
+          "type": "image/png"
         }
       ]
     }
