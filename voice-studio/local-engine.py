@@ -2724,7 +2724,35 @@ def generate(text:str,prepared:str="",style:str="auto"):
     )
 
     try:
-        model=load_production_model()
+        # Fast path: bekannte, bereits verifizierte Sätze und bestätigte
+        # Aussprache-Audios werden vor dem schweren Modellstart gesucht.
+        model=None
+        render_sr=24000
+        preloaded={}
+        for pre_idx,(pre_lang,pre_chunk) in enumerate(plan):
+            pre_mode=resolve_segment_prosody(pre_chunk,doc_mode,style)
+            pre_lock=audio_lock_key_for_chunk(pre_chunk)
+            pre_lock_path=audio_lock_path(pre_lock) if pre_lock else None
+            if pre_lock and pre_lock_path.exists():
+                try:
+                    pre_wav=load_locked_wav(pre_lock_path,render_sr)
+                    pre_metrics=audio_quality_metrics(pre_wav,render_sr,pre_chunk,pre_lang,pre_mode)
+                    hard=[x for x in pre_metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
+                    if not hard:
+                        pre_metrics.update({
+                            "attempt":0,"critical":True,"rescued":False,
+                            "audio_lock":"confirmed","fast_reuse":True
+                        })
+                        preloaded[pre_idx]=(pre_wav,pre_metrics,"lock")
+                        continue
+                except Exception:
+                    pass
+            if not pre_lock:
+                pre_wav,pre_metrics,_=load_render_cache(pre_chunk,pre_lang,pre_mode,render_sr)
+                if pre_wav is not None:
+                    pre_metrics["fast_reuse"]=True
+                    preloaded[pre_idx]=(pre_wav,pre_metrics,"cache")
+
         outputs=[None]*len(plan)
         qa_segments=[None]*len(plan)
         total=len(plan)
@@ -2733,6 +2761,11 @@ def generate(text:str,prepared:str="",style:str="auto"):
         new_audio_lock_candidates={}
         render_started_perf=time.perf_counter()
         prepares_before=MODEL_REFERENCE_PREPARES
+
+        if len(preloaded)==total:
+            set_status(progress=8,message=f"{total}/{total} bekannt · Stimm-Modell wird nicht geladen")
+        elif preloaded:
+            set_status(progress=8,message=f"{len(preloaded)}/{total} bekannt · nur neue Sätze werden erzeugt")
 
         # Qualitätsmodus: immer in echter Textreihenfolge rendern.
         # Sprach-Batching war schneller, ließ aber getrennte Segmente stärker wie
@@ -2751,9 +2784,11 @@ def generate(text:str,prepared:str="",style:str="auto"):
             print(f"[DĀR Voice] segment {idx}/{total} lang={lang} mode={mode} critical={critical} lock={audio_lock_key or '-'}: {chunk}",flush=True)
 
             locked_path=audio_lock_path(audio_lock_key) if audio_lock_key else None
-            if audio_lock_key and locked_path.exists():
-                wav=load_locked_wav(locked_path,int(model.sr))
-                metrics=audio_quality_metrics(wav,int(model.sr),chunk,lang,mode)
+            if original_idx in preloaded:
+                wav,metrics,_reuse_kind=preloaded[original_idx]
+            elif audio_lock_key and locked_path.exists():
+                wav=load_locked_wav(locked_path,render_sr)
+                metrics=audio_quality_metrics(wav,render_sr,chunk,lang,mode)
                 hard=[x for x in metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
                 if hard:
                     raise RuntimeError("Bestätigter Kern-Audio-Lock ist technisch beschädigt: "+audio_lock_key)
@@ -2763,7 +2798,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 metrics["audio_lock"]="confirmed"
             elif audio_lock_key and audio_lock_key in session_audio_locks:
                 wav=session_audio_locks[audio_lock_key].clone()
-                metrics=audio_quality_metrics(wav,int(model.sr),chunk,lang,mode)
+                metrics=audio_quality_metrics(wav,render_sr,chunk,lang,mode)
                 metrics["attempt"]=0
                 metrics["critical"]=True
                 metrics["rescued"]=False
@@ -2772,10 +2807,14 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 cached_wav=cached_metrics=None
                 cache_key=""
                 if not audio_lock_key:
-                    cached_wav,cached_metrics,cache_key=load_render_cache(chunk,lang,mode,int(model.sr))
+                    cached_wav,cached_metrics,cache_key=load_render_cache(chunk,lang,mode,render_sr)
                 if cached_wav is not None:
                     wav,metrics=cached_wav,cached_metrics
                 else:
+                    if model is None:
+                        set_status(message=f"{lang_label} · neuer Satz · Stimm-Modell wird einmalig geladen …")
+                        model=load_production_model()
+                        render_sr=int(model.sr)
                     try:
                         core_seed=2026
                         if audio_lock_key:
@@ -2806,7 +2845,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
                         else:
                             raise
                     if not audio_lock_key:
-                        save_render_cache(cache_key,wav,int(model.sr))
+                        save_render_cache(cache_key,wav,render_sr)
                         metrics["segment_cache"]="miss"
                     if audio_lock_key:
                         wav=wav.detach().float().cpu()
@@ -2830,7 +2869,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
 
         outputs=[x for x in outputs if x is not None]
         qa_segments=[x for x in qa_segments if x is not None]
-        sr=int(model.sr)
+        sr=int(render_sr)
         full=join_rendered_segments(outputs,sr)
         continuity_metrics=dict(getattr(join_rendered_segments,"_last_continuity",{}) or {})
         final_metrics=audio_quality_metrics(full,sr,synthesis_text,"de",doc_mode)
@@ -2866,8 +2905,10 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 "reference_cache_hits_total":MODEL_REFERENCE_CACHE_HITS,
                 "segment_cache_hits":sum(1 for x in qa_segments if x.get("segment_cache")=="hit"),
                 "segment_cache_misses":sum(1 for x in qa_segments if x.get("segment_cache")=="miss"),
-                "execution_strategy":"mlx-bounded-long-form-v1" if getattr(model,"_dar_backend","torch")=="mlx" else "continuous-sentence-flow-v2",
-                "backend":"mlx" if getattr(model,"_dar_backend","torch")=="mlx" else "torch",
+                "execution_strategy":"cache-only-fast-path" if model is None else ("mlx-bounded-long-form-v1" if getattr(model,"_dar_backend","torch")=="mlx" else "continuous-sentence-flow-v2"),
+                "backend":"cache-only" if model is None else ("mlx" if getattr(model,"_dar_backend","torch")=="mlx" else "torch"),
+                "fast_reused_segments":sum(1 for x in qa_segments if x.get("fast_reuse") or x.get("segment_cache")=="hit"),
+                "model_load_skipped":bool(model is None),
             },
         }
         set_status(last_qa=qa_summary)
