@@ -203,12 +203,13 @@ img.dar3d-icon{
 }
 .direct-pick-well .direct-pick-ico{
   position:absolute;
-  left:8px;
+  left:auto;
+  right:22px;
   top:50%;
   transform:translateY(-50%);
-  width:28px;
-  height:28px;
-  padding:1px;
+  width:16px;
+  height:16px;
+  padding:0;
   overflow:hidden;
   display:grid;
   place-items:center;
@@ -232,7 +233,8 @@ img.dar3d-icon{
   object-fit:contain!important;
 }
 .direct-pick-well .direct-pick{
-  padding-left:42px!important;
+  padding-left:12px!important;
+  padding-right:44px!important;
   text-overflow:ellipsis;
 }
 .related-compact-icon,
@@ -248,8 +250,8 @@ img.dar3d-icon{
 .more-quick-access__ico{
   display:grid!important;
   place-items:center!important;
-  width:36px;
-  height:36px;
+  width:22px;
+  height:22px;
   overflow:hidden;
   font-size:0!important;
 }
@@ -289,16 +291,19 @@ img.dar3d-icon{
 .quick-action-emoji{
   display:grid!important;
   place-items:center;
-  width:48px;height:48px;
+  width:34px;height:34px;
   pointer-events:none;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
 }
 .quick-action img.dar3d-icon,
 .quick-action-emoji img.dar3d-icon{
-  width:48px!important;
-  height:48px!important;
-  max-width:48px!important;
-  max-height:48px!important;
+  width:34px!important;
+  height:34px!important;
+  max-width:34px!important;
+  max-height:34px!important;
   object-fit:contain!important;
+  object-position:center!important;
 }
 
 /* Quran reader: 3D fills the ayah wells, never a tiny glyph */
