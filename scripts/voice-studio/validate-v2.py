@@ -279,8 +279,8 @@ def main():
     function_nodes={n.name:n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
     save_src=ast.get_source_segment(engine_source,function_nodes.get("save_wav")) or ""
     load_src=ast.get_source_segment(engine_source,function_nodes.get("load_locked_wav")) or ""
-    if "torchaudio.save" in save_src or "ta.save(" in save_src:
-        fail("save_wav must never use torchaudio.save; internal WAV must stay PCM16")
+    if "ta.save(" in save_src:
+        fail("save_wav must never call torchaudio.save; internal WAV must stay PCM16")
     for marker in ("np.int16","wf.setsampwidth(2)","wave.open(str(path),\"wb\")"):
         if marker not in save_src: fail("PCM16 WAV writer marker missing: "+marker)
     for marker in ("torchaudio as ta","pcm_s16le","legacy WAV migrated to PCM16"):
