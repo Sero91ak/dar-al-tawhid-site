@@ -7,6 +7,8 @@ const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 let manifest=null;
 let current=null;
 let busy=false;
+let arabicReferenceReady=false;
+let currentRenderReferenceReady=false;
 
 const q=id=>document.getElementById(id);
 function workerBase(){
@@ -31,6 +33,34 @@ function setMsg(text,type=""){
   const el=q("alphabetPackMessage");if(!el)return;
   el.textContent=text||"";
   el.style.color=type==="good"?"var(--green)":type==="bad"?"var(--red)":type==="warn"?"var(--amber)":"";
+}
+function setReferenceState(ok,detail=""){
+  arabicReferenceReady=ok===true;
+  const el=q("alphabetPackReferenceState");
+  if(el){
+    el.textContent=arabicReferenceReady
+      ?"Arabische Master-Referenz: bereit · Serhat_AR_MASTER.wav"
+      :"Arabische Master-Referenz: fehlt · ~/SerhatVoice/Serhat_AR_MASTER.wav";
+    el.style.color=arabicReferenceReady?"var(--green)":"var(--red)";
+    if(detail)el.title=detail;
+  }
+  return arabicReferenceReady;
+}
+async function refreshArabicReferenceState({quiet=false}={}){
+  try{
+    const r=await localRequest("/health",{method:"GET"});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||d?.ok===false)throw Error(d?.last_error||d?.error||("HTTP "+r.status));
+    return setReferenceState(d?.reference_arabic_dedicated===true);
+  }catch(e){
+    setReferenceState(false,e?.message||String(e));
+    if(!quiet)setMsg("Arabische Master-Referenz konnte nicht geprüft werden. Engine-Verbindung kontrollieren.","bad");
+    return false;
+  }
+}
+function requireArabicReference(){
+  if(arabicReferenceReady)return true;
+  throw Error("Strenger Alif-Bāʾ-Modus blockiert: geprüfte arabische Master-Referenz fehlt. Lege Serhat_AR_MASTER.wav in ~/SerhatVoice/ ab und prüfe die Engine erneut.");
 }
 function slotList(m){
   const out=[];
@@ -84,6 +114,9 @@ function exactTextReady(){
 }
 async function prepareCurrent({generateNow=true}={}){
   if(!current)return;
+  currentRenderReferenceReady=false;
+  const refOk=await refreshArabicReferenceState({quiet:true});
+  if(!refOk)requireArabicReference();
   const text=String(current.slot?.text||"").trim();
   if(!text)throw Error("Slot-Text fehlt.");
   const editor=q("text");
@@ -96,6 +129,9 @@ async function prepareCurrent({generateNow=true}={}){
   setMsg("Slot geladen. Exakter arabischer Text wird erzeugt.","warn");
   if(generateNow){
     await generate();
+    const refStillOk=await refreshArabicReferenceState({quiet:true});
+    if(!refStillOk)throw Error("Arabische Master-Referenz war nach dem Rendern nicht mehr aktiv. Clip wird nicht zur Freigabe zugelassen.");
+    currentRenderReferenceReady=true;
     if(!exactTextReady()||String(lastGeneratedText||"").trim()!==text){
       throw Error("Erzeugtes Audio gehört nicht mehr exakt zu diesem Slot.");
     }
@@ -112,6 +148,14 @@ async function startNext(){
     await loadManifest();
     current=nextPending();
     renderCurrent();
+    if(current){
+      const refOk=await refreshArabicReferenceState({quiet:true});
+      if(!refOk){
+        currentRenderReferenceReady=false;
+        setMsg("0 ungeprüfte Fallbacks: Für Alif-Bāʾ wird zuerst eine eigene arabische Master-Referenz benötigt. Erwartet: ~/SerhatVoice/Serhat_AR_MASTER.wav","bad");
+        return;
+      }
+    }
     if(!current){
       setMsg("Alle 140 Alif-Bāʾ-Clips sind verifiziert.","good");
       if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=true;
@@ -145,6 +189,9 @@ function mediaId(x){
 }
 async function approveCurrent(){
   if(busy||!current)return;
+  const refOk=await refreshArabicReferenceState({quiet:true});
+  if(!refOk){setMsg("Freigabe blockiert: die eigene arabische Master-Referenz ist nicht aktiv.","bad");return}
+  if(!currentRenderReferenceReady){setMsg("Freigabe blockiert: dieser Clip wurde nicht nachweislich mit der aktiven arabischen Master-Referenz erzeugt. Clip neu erzeugen.","bad");return}
   if(!workerSecret()){setMsg("Publisher-Verbindung fehlt. Zuerst den Admin-Publisher verbinden.","bad");return}
   if(!exactTextReady()||String(lastGeneratedText||"").trim()!==String(current.slot?.text||"").trim()){
     setMsg("Text oder Audio wurde nach dem Rendern verändert. Clip neu erzeugen.","bad");return;
@@ -175,7 +222,7 @@ async function approveCurrent(){
         staging:true,
         dataUrl:await blobToDataUrl(blob),
         originalName:mediaId(current)+".m4a",
-        source:"serhat-alphabet-human-reviewed"
+        source:"serhat-alphabet-dedicated-arabic-human-reviewed"
       })
     });
     if(!up.asset?.key)throw Error("Audio-Upload lieferte keinen Asset-Pfad.");
@@ -210,6 +257,7 @@ async function approveCurrent(){
 }
 async function retryCurrent(){
   if(busy||!current)return;
+  currentRenderReferenceReady=false;
   busy=true;
   const btn=q("alphabetPackRetryBtn"),old=btn?.textContent;
   if(btn){btn.disabled=true;btn.textContent="Wird neu erzeugt …"}
@@ -221,9 +269,15 @@ async function retryCurrent(){
 q("alphabetPackNextBtn")?.addEventListener("click",startNext);
 q("alphabetPackApproveBtn")?.addEventListener("click",approveCurrent);
 q("alphabetPackRetryBtn")?.addEventListener("click",retryCurrent);
-loadManifest().then(()=>{
+Promise.all([loadManifest(),refreshArabicReferenceState({quiet:true})]).then(()=>{
   current=nextPending();
   renderCurrent();
-  if(current)setMsg("Nächster offener Slot ist bereit. „Nächsten Clip erzeugen“ startet die Produktion.");
+  if(!current){
+    setMsg("Alle 140 Alif-Bāʾ-Clips sind verifiziert.","good");
+  }else if(!arabicReferenceReady){
+    setMsg("Produktion gesperrt, bis ~/SerhatVoice/Serhat_AR_MASTER.wav als eigene arabische Referenz erkannt wird.","bad");
+  }else{
+    setMsg("Nächster offener Slot ist bereit. „Nächsten Clip erzeugen“ startet die Produktion.");
+  }
 });
 })();
