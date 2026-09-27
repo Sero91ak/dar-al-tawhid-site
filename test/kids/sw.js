@@ -1,10 +1,11 @@
-const CACHE_NAME="dar-al-tawhid-kids-v34";
+const CACHE_NAME="dar-al-tawhid-kids-v35";
 const PRECACHE=[
   "/test/kids/index.html",
   "/test/kids/start.html",
   "/test/kids/shell.html",
   "/test/kids/manifest.webmanifest",
   "/test/kids/data/alphabet-kids.json",
+  "/test/kids/data/alphabet-audio.json",
   "/test/kids/data/dua-kids.json",
   "/test/kids/data/quiz-kids.json",
   "/test/kids/data/stories-authentic.json",
@@ -33,7 +34,8 @@ self.addEventListener("activate",function(event){
 });
 
 function isKidsRequest(url){
-  return url.origin===self.location.origin&&url.pathname.indexOf("/test/kids/")===0;
+  if(url.origin!==self.location.origin)return false;
+  return url.pathname.indexOf("/test/kids/")===0||url.pathname.indexOf("/assets/kids-alphabet-audio/")===0;
 }
 function networkFirst(request,fallback){
   return fetch(request,{cache:"no-store"}).then(function(response){
