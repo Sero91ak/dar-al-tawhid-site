@@ -1846,6 +1846,23 @@ def load_render_cache(text:str,language_id:str,mode:str,target_sr:int):
             if hard:
                 path.unlink(missing_ok=True)
                 continue
+
+            remaining=set(metrics.get("issues") or [])
+            if remaining and remaining.issubset({"unexpected_internal_hold","excessive_internal_pause"}):
+                repaired,repair_meta=repair_internal_pause(wav,target_sr,text,language_id,mode)
+                if repair_meta.get("repaired"):
+                    repaired_metrics=audio_quality_metrics(repaired,target_sr,text,language_id,mode)
+                    if not repaired_metrics.get("issues"):
+                        wav=repaired
+                        metrics=repaired_metrics
+                        metrics.update(repair_meta)
+                        save_wav(path,wav,target_sr)
+                        remaining=set()
+            if remaining:
+                # Nur wirklich freigegebene Sätze werden als "bekannt" wiederverwendet.
+                path.unlink(missing_ok=True)
+                continue
+
             if candidate!=key:
                 try:
                     migrated=render_cache_path(key)
