@@ -4,7 +4,8 @@ import concurrent.futures, difflib, gc, hashlib, importlib.util, json, os, platf
 import multiprocessing as mp
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urlparse, parse_qs
+import hmac
 try:
     from speech_flow import prepare_flow_text
 except ModuleNotFoundError:
@@ -40,7 +41,9 @@ ARABIC_DEDICATED_REFERENCE=REF_AR.exists() and REF_DE.exists() and REF_AR.resolv
 # Backward-compatible name used by older status/error paths.
 REF=REF_DE
 
-HOST="127.0.0.1"
+NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
+PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
+HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
@@ -3423,13 +3426,73 @@ class VoiceHTTPServer(ThreadingHTTPServer):
     daemon_threads=True
 
 class H(BaseHTTPRequestHandler):
+    def is_loopback_client(self):
+        try:
+            host=str(self.client_address[0] or "")
+            return host in ("127.0.0.1","::1") or host.startswith("127.")
+        except Exception:
+            return False
+
+    def request_pair_token(self):
+        header=str(self.headers.get("X-DAR-Voice-Token","") or "").strip()
+        if header:
+            return header
+        cookie=str(self.headers.get("Cookie","") or "")
+        m=re.search(r"(?:^|;\s*)DARVOICE_PAIR=([^;]+)",cookie)
+        if m:
+            return m.group(1).strip()
+        try:
+            query=parse_qs(urlparse(self.path).query)
+            return str((query.get("pair") or [""])[0]).strip()
+        except Exception:
+            return ""
+
+    def token_matches(self,value):
+        value=str(value or "")
+        return bool(PAIR_TOKEN and value and hmac.compare_digest(value,PAIR_TOKEN))
+
+    def remote_authorized(self):
+        if self.is_loopback_client():
+            return True
+        if not NETWORK_MODE or not PAIR_TOKEN:
+            return False
+        return self.token_matches(self.request_pair_token())
+
+    def accept_pairing_url(self):
+        if self.is_loopback_client() or not NETWORK_MODE or not PAIR_TOKEN:
+            return False
+        parsed=urlparse(self.path)
+        if parsed.path not in ("/","/studio","/studio/","/studio/index.html"):
+            return False
+        query=parse_qs(parsed.query)
+        supplied=str((query.get("pair") or [""])[0]).strip()
+        if not self.token_matches(supplied):
+            return False
+        self.send_response(302)
+        self.send_header("Location","/studio/")
+        self.send_header(
+            "Set-Cookie",
+            "DARVOICE_PAIR="+PAIR_TOKEN+"; Path=/; Max-Age=31536000; SameSite=Strict; HttpOnly"
+        )
+        self.send_header("Cache-Control","no-store")
+        self.end_headers()
+        return True
+
+    def reject_remote(self):
+        self.send_json(403,{
+            "ok":False,
+            "error":"Dieses Gerät ist noch nicht mit DĀR Voice Studio gekoppelt.",
+            "pairing_required":True
+        })
+
     def cors(self):
         origin=self.headers.get("Origin","")
         allowed=origin if origin in ("https://dar-al-tawhid.de","https://www.dar-al-tawhid.de") or origin.startswith("http://127.0.0.1") or origin.startswith("http://localhost") else "https://dar-al-tawhid.de"
         self.send_header("Access-Control-Allow-Origin",allowed)
         self.send_header("Vary","Origin")
-        self.send_header("Access-Control-Allow-Headers","Content-Type")
+        self.send_header("Access-Control-Allow-Headers","Content-Type,X-DAR-Voice-Token")
         self.send_header("Access-Control-Allow-Methods","GET,POST,OPTIONS")
+        self.send_header("Access-Control-Allow-Credentials","true")
         self.send_header("Access-Control-Expose-Headers","X-Learning-Preview-Id, X-Learning-Lock-Key")
         self.send_header("Access-Control-Allow-Private-Network","true")
         self.send_header("Cache-Control","no-store")
@@ -3442,6 +3505,8 @@ class H(BaseHTTPRequestHandler):
         self.cors();self.end_headers();self.wfile.write(b)
 
     def do_OPTIONS(self):
+        if not self.remote_authorized():
+            return self.reject_remote()
         self.send_response(204);self.cors();self.end_headers()
 
     def send_file(self,path:Path,content_type:str):
@@ -3456,6 +3521,11 @@ class H(BaseHTTPRequestHandler):
         self.wfile.write(b)
 
     def do_GET(self):
+        if self.accept_pairing_url():
+            return
+        if not self.remote_authorized():
+            return self.reject_remote()
+
         p=urlparse(self.path).path
         if p=="/health":
             st=get_status()
@@ -3472,7 +3542,9 @@ class H(BaseHTTPRequestHandler):
                 "progress":st["progress"],
                 "last_error":st["last_error"],
                 "library":LIB.get("counts",{}),
-                "profile":VOICE_PROFILE.get("delivery",{})
+                "profile":VOICE_PROFILE.get("delivery",{}),
+                "companion_mode":bool(NETWORK_MODE and PAIR_TOKEN),
+                "companion_client":not self.is_loopback_client()
             })
         elif p=="/status":
             self.send_json(200,{"ok":True,**get_status()})
@@ -3515,6 +3587,22 @@ class H(BaseHTTPRequestHandler):
             self.send_file(APP_HOME/"content-studio.js","application/javascript; charset=utf-8")
         elif p=="/studio/voice-studio-icon.png":
             self.send_file(APP_HOME/"voice-studio-icon.png","image/png")
+        elif p=="/studio/manifest.webmanifest":
+            self.send_json(200,{
+                "name":"DĀR AL TAWḤĪD Voice Studio",
+                "short_name":"Voice Studio",
+                "id":"/studio/",
+                "start_url":"/studio/",
+                "scope":"/studio/",
+                "display":"standalone",
+                "background_color":"#06131f",
+                "theme_color":"#071923",
+                "orientation":"any",
+                "icons":[
+                    {"src":"/studio/voice-studio-icon.png","sizes":"512x512","type":"image/png","purpose":"any"},
+                    {"src":"/studio/voice-studio-icon.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+                ]
+            })
         elif p=="/data/pronunciation/pronunciation-rules.json":
             self.send_json(200,LIB)
         elif p=="/data/pronunciation/islamic-master-library.json":
@@ -3563,6 +3651,8 @@ class H(BaseHTTPRequestHandler):
             self.send_json(404,{"error":"not found"})
 
     def do_POST(self):
+        if not self.remote_authorized():
+            return self.reject_remote()
         p=urlparse(self.path).path
         n=int(self.headers.get("Content-Length","0") or 0)
         try:data=json.loads(self.rfile.read(n) or b"{}")
@@ -3762,6 +3852,7 @@ def stop_stale_own_listener():
 def serve_single_instance():
     print(f"DĀR Voice Engine http://{HOST}:{PORT}",flush=True)
     print("Referenz:",REF,flush=True)
+    print("Companion:", "LAN geschützt aktiv" if NETWORK_MODE and PAIR_TOKEN else "nur lokal", flush=True)
 
     # ZUERST den Port binden. Erst danach Modell/Online-Sync starten.
     # Dadurch kann ein zweiter Starter niemals parallel ein zweites Chatterbox-Modell laden.
