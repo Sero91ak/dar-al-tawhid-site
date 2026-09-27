@@ -72,6 +72,18 @@ if (/BYPASS_POST_CACHE"\)\}\}catch\(e\)\{\}/.test(extractMainScript(indexHtml)) 
   fail("index.html: hardRefreshApp Klammerfehler");
 }
 
+function checkNoStrayQuranBind(label, html) {
+  const main = extractMainScript(html);
+  if (/\}bindQuranOfflineAudioSection\(backdrop\)\s*\nfunction /.test(main)) {
+    fail(`${label}: bindQuranOfflineAudioSection(backdrop) läuft außerhalb der Funktion (Start-Absturz)`);
+  } else {
+    ok(`${label}: Qurʾān-Anzeige-Bindung nicht auf Top-Level`);
+  }
+}
+checkNoStrayQuranBind("index.html", indexHtml);
+checkNoStrayQuranBind("test/index.html", read("test/index.html"));
+checkJsSyntax("test/index.html", extractMainScript(read("test/index.html")));
+
 // Admin app
 checkJsSyntax("admin/index.html", extractAdminMainScript(read("admin/index.html")));
 const adminHtml = read("admin/index.html");

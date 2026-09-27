@@ -6520,6 +6520,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-display-bind-tdz-v1061-1084-2026-09-27",
+      "at": "2026-09-27T15:10:00.000Z",
+      "reason": "Nutzer: iOS-App startet nicht. bindQuranOfflineAudioSection(backdrop) lief beim Script-Start (backdrop TDZ/ReferenceError), Abbruch der Initialisierung.",
+      "files": [
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "scripts/app-health-check.js",
+        "content/admin/change-scope-lock.json"
+      ]
     }
   ],
   "enabled": true
