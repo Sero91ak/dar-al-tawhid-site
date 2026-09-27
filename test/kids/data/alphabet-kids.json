@@ -1,8 +1,8 @@
 {
-  "version": 3,
+  "version": 4,
   "id": "KIDS_ARABIC_ALPHABET_V2",
   "audioSync": "KIDS_ALPHABET_AUDIO_SYNC_V1",
-  "note": "Hijāʾī-Reihenfolge. Ḥarakāt: Fatḥa a, Kasra i, Ḍamma u. Alif wird mit Hamza أَ إِ أُ eingeführt. Arabische Aussprache wird in der UI getrennt von deutschen Erklärungen wiedergegeben; deutsche Lautschrift ist nur Zusatzhilfe.",
+  "note": "Hijāʾī-Reihenfolge. Ḥarakāt: Fatḥa a, Kasra i, Ḍamma u. Arabischer Sprechtext bleibt arabisch; wissenschaftliche Lautschrift ist davon getrennt. Synthetische Sprache ist nur Fallback, keine Makhārij-Referenz.",
   "letters": [
     {
       "id": "alif",
@@ -10,29 +10,29 @@
       "nameDe": "Alif",
       "nameAr": "أَلِف",
       "lautName": "Alif",
-      "speakName": "Alif",
+      "speakName": "أَلِف",
       "connect": "left-none",
       "harakat": [
         {
           "ar": "أَ",
           "laut": "a",
-          "speak": "a"
+          "speak": "أَ"
         },
         {
           "ar": "إِ",
           "laut": "i",
-          "speak": "i"
+          "speak": "إِ"
         },
         {
           "ar": "أُ",
           "laut": "u",
-          "speak": "u"
+          "speak": "أُ"
         }
       ],
       "wordAr": "أَرْنَب",
       "wordDe": "Hase",
       "wordLaut": "arnab",
-      "wordSpeak": "arnab, Hase",
+      "wordSpeak": "أَرْنَب",
       "forms": {
         "iso": "ا",
         "ini": "ا",
@@ -50,30 +50,30 @@
       "ar": "ب",
       "nameDe": "Bāʾ",
       "nameAr": "بَاء",
-      "lautName": "Bā",
-      "speakName": "Ba",
+      "lautName": "Bāʾ",
+      "speakName": "بَاء",
       "connect": "both",
       "harakat": [
         {
           "ar": "بَ",
           "laut": "ba",
-          "speak": "ba"
+          "speak": "بَ"
         },
         {
           "ar": "بِ",
           "laut": "bi",
-          "speak": "bi"
+          "speak": "بِ"
         },
         {
           "ar": "بُ",
           "laut": "bu",
-          "speak": "bu"
+          "speak": "بُ"
         }
       ],
       "wordAr": "بَطَّة",
       "wordDe": "Ente",
       "wordLaut": "baṭṭa",
-      "wordSpeak": "batta, Ente",
+      "wordSpeak": "بَطَّة",
       "forms": {
         "iso": "ب",
         "ini": "بـ",
@@ -91,30 +91,30 @@
       "ar": "ت",
       "nameDe": "Tāʾ",
       "nameAr": "تَاء",
-      "lautName": "Tā",
-      "speakName": "Ta",
+      "lautName": "Tāʾ",
+      "speakName": "تَاء",
       "connect": "both",
       "harakat": [
         {
           "ar": "تَ",
           "laut": "ta",
-          "speak": "ta"
+          "speak": "تَ"
         },
         {
           "ar": "تِ",
           "laut": "ti",
-          "speak": "ti"
+          "speak": "تِ"
         },
         {
           "ar": "تُ",
           "laut": "tu",
-          "speak": "tu"
+          "speak": "تُ"
         }
       ],
       "wordAr": "تُفَّاحَة",
       "wordDe": "Apfel",
       "wordLaut": "tuffāḥa",
-      "wordSpeak": "tuffaha, Apfel",
+      "wordSpeak": "تُفَّاحَة",
       "forms": {
         "iso": "ت",
         "ini": "تـ",
@@ -132,30 +132,30 @@
       "ar": "ث",
       "nameDe": "Ṯāʾ",
       "nameAr": "ثَاء",
-      "lautName": "Ṯā",
-      "speakName": "Tha, weiches ss zwischen den Zaehnen",
+      "lautName": "Ṯāʾ",
+      "speakName": "ثَاء",
       "connect": "both",
       "harakat": [
         {
           "ar": "ثَ",
           "laut": "ṯa",
-          "speak": "tha"
+          "speak": "ثَ"
         },
         {
           "ar": "ثِ",
           "laut": "ṯi",
-          "speak": "thi"
+          "speak": "ثِ"
         },
         {
           "ar": "ثُ",
           "laut": "ṯu",
-          "speak": "thu"
+          "speak": "ثُ"
         }
       ],
       "wordAr": "ثَعْلَب",
       "wordDe": "Fuchs",
-      "wordLaut": "thaʿlab",
-      "wordSpeak": "thalab, Fuchs",
+      "wordLaut": "ṯaʿlab",
+      "wordSpeak": "ثَعْلَب",
       "forms": {
         "iso": "ث",
         "ini": "ثـ",
@@ -163,9 +163,9 @@
         "fin": "ـث"
       },
       "ages": {
-        "4–5": "Thā. Drei Punkte oben. Zunge an die Zähne. Wort: Fuchs. ثَعْلَب",
-        "6–8": "Thā: ثَ ṯa, ثِ ṯi, ثُ ṯu. Nicht s wie Sīn. Wort ثَعْلَب thaʿlab.",
-        "9–10": "ث ist stimmloses th. Drei Punkte oben. Nicht ت und nicht س."
+        "4–5": "Ṯāʾ. Drei Punkte oben. Die Zungenspitze kommt leicht zwischen die Zähne. Wort: Fuchs. ثَعْلَب",
+        "6–8": "Ṯāʾ: ثَ ṯa, ثِ ṯi, ثُ ṯu. Stimmloser Zahnlaut; nicht wie Sīn. Wort ثَعْلَب ṯaʿlab.",
+        "9–10": "ث ist ein stimmloser interdentaler Reibelaut. Drei Punkte oben. Nicht ت und nicht س."
       }
     },
     {
@@ -173,30 +173,30 @@
       "ar": "ج",
       "nameDe": "Ǧīm",
       "nameAr": "جِيم",
-      "lautName": "Dschīm",
-      "speakName": "Dschim",
+      "lautName": "Ǧīm",
+      "speakName": "جِيم",
       "connect": "both",
       "harakat": [
         {
           "ar": "جَ",
           "laut": "dscha",
-          "speak": "dscha"
+          "speak": "جَ"
         },
         {
           "ar": "جِ",
           "laut": "dschi",
-          "speak": "dschi"
+          "speak": "جِ"
         },
         {
           "ar": "جُ",
           "laut": "dschu",
-          "speak": "dschu"
+          "speak": "جُ"
         }
       ],
       "wordAr": "جَمَل",
       "wordDe": "Kamel",
-      "wordLaut": "jamal",
-      "wordSpeak": "dschamal, Kamel",
+      "wordLaut": "ǧamal",
+      "wordSpeak": "جَمَل",
       "forms": {
         "iso": "ج",
         "ini": "جـ",
@@ -214,30 +214,30 @@
       "ar": "ح",
       "nameDe": "Ḥāʾ",
       "nameAr": "حَاء",
-      "lautName": "Ḥā",
-      "speakName": "Ha, tief aus der Kehle",
+      "lautName": "Ḥāʾ",
+      "speakName": "حَاء",
       "connect": "both",
       "harakat": [
         {
           "ar": "حَ",
           "laut": "ḥa",
-          "speak": "ha, tief"
+          "speak": "حَ"
         },
         {
           "ar": "حِ",
           "laut": "ḥi",
-          "speak": "hi, tief"
+          "speak": "حِ"
         },
         {
           "ar": "حُ",
           "laut": "ḥu",
-          "speak": "hu, tief"
+          "speak": "حُ"
         }
       ],
       "wordAr": "حِصَان",
       "wordDe": "Pferd",
       "wordLaut": "ḥiṣān",
-      "wordSpeak": "hisan, Pferd",
+      "wordSpeak": "حِصَان",
       "forms": {
         "iso": "ح",
         "ini": "حـ",
@@ -253,32 +253,32 @@
     {
       "id": "kha",
       "ar": "خ",
-      "nameDe": "Khāʾ",
+      "nameDe": "Ḫāʾ",
       "nameAr": "خَاء",
-      "lautName": "Khā",
-      "speakName": "Cha, wie in Dach",
+      "lautName": "Ḫāʾ",
+      "speakName": "خَاء",
       "connect": "both",
       "harakat": [
         {
           "ar": "خَ",
           "laut": "cha",
-          "speak": "cha"
+          "speak": "خَ"
         },
         {
           "ar": "خِ",
           "laut": "chi",
-          "speak": "chi"
+          "speak": "خِ"
         },
         {
           "ar": "خُ",
           "laut": "chu",
-          "speak": "chu"
+          "speak": "خُ"
         }
       ],
       "wordAr": "خُبْز",
       "wordDe": "Brot",
-      "wordLaut": "khubz",
-      "wordSpeak": "chubs, Brot",
+      "wordLaut": "ḫubz",
+      "wordSpeak": "خُبْز",
       "forms": {
         "iso": "خ",
         "ini": "خـ",
@@ -297,29 +297,29 @@
       "nameDe": "Dāl",
       "nameAr": "دَال",
       "lautName": "Dāl",
-      "speakName": "Dal",
+      "speakName": "دَال",
       "connect": "left-none",
       "harakat": [
         {
           "ar": "دَ",
           "laut": "da",
-          "speak": "da"
+          "speak": "دَ"
         },
         {
           "ar": "دِ",
           "laut": "di",
-          "speak": "di"
+          "speak": "دِ"
         },
         {
           "ar": "دُ",
           "laut": "du",
-          "speak": "du"
+          "speak": "دُ"
         }
       ],
       "wordAr": "دِيك",
       "wordDe": "Hahn",
       "wordLaut": "dīk",
-      "wordSpeak": "diik, Hahn",
+      "wordSpeak": "دِيك",
       "forms": {
         "iso": "د",
         "ini": "د",
@@ -338,29 +338,29 @@
       "nameDe": "Ḏāl",
       "nameAr": "ذَال",
       "lautName": "Ḏāl",
-      "speakName": "Dhal, weiches d zwischen den Zaehnen",
+      "speakName": "ذَال",
       "connect": "left-none",
       "harakat": [
         {
           "ar": "ذَ",
           "laut": "ḏa",
-          "speak": "dha"
+          "speak": "ذَ"
         },
         {
           "ar": "ذِ",
           "laut": "ḏi",
-          "speak": "dhi"
+          "speak": "ذِ"
         },
         {
           "ar": "ذُ",
           "laut": "ḏu",
-          "speak": "dhu"
+          "speak": "ذُ"
         }
       ],
       "wordAr": "ذُرَة",
       "wordDe": "Mais",
-      "wordLaut": "dhura",
-      "wordSpeak": "dura, Mais",
+      "wordLaut": "ḏura",
+      "wordSpeak": "ذُرَة",
       "forms": {
         "iso": "ذ",
         "ini": "ذ",
@@ -368,9 +368,9 @@
         "fin": "ـذ"
       },
       "ages": {
-        "4–5": "Dhāl. Dāl mit Punkt oben. Wort: Mais. ذُرَة",
-        "6–8": "Dhāl: ذَ ḏa, ذِ ḏi, ذُ ḏu. Stimmhaftes th. Wort ذُرَة dhura.",
-        "9–10": "ذ verbindet nicht nach links. Ein Punkt unterscheidet von د."
+        "4–5": "Ḏāl. Dāl mit einem Punkt oben. Die Zungenspitze kommt leicht zwischen die Zähne. Wort: Mais. ذُرَة",
+        "6–8": "Ḏāl: ذَ ḏa, ذِ ḏi, ذُ ḏu. Stimmhafter Zahnlaut. Wort ذُرَة ḏura.",
+        "9–10": "ذ ist ein stimmhafter interdentaler Reibelaut und verbindet sich nicht mit dem nächsten Buchstaben."
       }
     },
     {
@@ -378,30 +378,30 @@
       "ar": "ر",
       "nameDe": "Rāʾ",
       "nameAr": "رَاء",
-      "lautName": "Rā",
-      "speakName": "Ra",
+      "lautName": "Rāʾ",
+      "speakName": "رَاء",
       "connect": "left-none",
       "harakat": [
         {
           "ar": "رَ",
           "laut": "ra",
-          "speak": "ra"
+          "speak": "رَ"
         },
         {
           "ar": "رِ",
           "laut": "ri",
-          "speak": "ri"
+          "speak": "رِ"
         },
         {
           "ar": "رُ",
           "laut": "ru",
-          "speak": "ru"
+          "speak": "رُ"
         }
       ],
       "wordAr": "رُمَّان",
       "wordDe": "Granatapfel",
       "wordLaut": "rummān",
-      "wordSpeak": "rumman, Granatapfel",
+      "wordSpeak": "رُمَّان",
       "forms": {
         "iso": "ر",
         "ini": "ر",
@@ -420,29 +420,29 @@
       "nameDe": "Zāy",
       "nameAr": "زَاي",
       "lautName": "Zāy",
-      "speakName": "Sai",
+      "speakName": "زَاي",
       "connect": "left-none",
       "harakat": [
         {
           "ar": "زَ",
           "laut": "za",
-          "speak": "sa, stimmhaft"
+          "speak": "زَ"
         },
         {
           "ar": "زِ",
           "laut": "zi",
-          "speak": "si, stimmhaft"
+          "speak": "زِ"
         },
         {
           "ar": "زُ",
           "laut": "zu",
-          "speak": "su, stimmhaft"
+          "speak": "زُ"
         }
       ],
       "wordAr": "زَهْرَة",
       "wordDe": "Blume",
       "wordLaut": "zahra",
-      "wordSpeak": "sahra, Blume",
+      "wordSpeak": "زَهْرَة",
       "forms": {
         "iso": "ز",
         "ini": "ز",
@@ -461,29 +461,29 @@
       "nameDe": "Sīn",
       "nameAr": "سِين",
       "lautName": "Sīn",
-      "speakName": "Siin",
+      "speakName": "سِين",
       "connect": "both",
       "harakat": [
         {
           "ar": "سَ",
           "laut": "sa",
-          "speak": "sa"
+          "speak": "سَ"
         },
         {
           "ar": "سِ",
           "laut": "si",
-          "speak": "si"
+          "speak": "سِ"
         },
         {
           "ar": "سُ",
           "laut": "su",
-          "speak": "su"
+          "speak": "سُ"
         }
       ],
       "wordAr": "سَمَكَة",
       "wordDe": "Fisch",
       "wordLaut": "samaka",
-      "wordSpeak": "samaka, Fisch",
+      "wordSpeak": "سَمَكَة",
       "forms": {
         "iso": "س",
         "ini": "سـ",
@@ -499,32 +499,32 @@
     {
       "id": "shin",
       "ar": "ش",
-      "nameDe": "Shīn",
+      "nameDe": "Šīn",
       "nameAr": "شِين",
-      "lautName": "Shīn",
-      "speakName": "Schiin",
+      "lautName": "Šīn",
+      "speakName": "شِين",
       "connect": "both",
       "harakat": [
         {
           "ar": "شَ",
           "laut": "scha",
-          "speak": "scha"
+          "speak": "شَ"
         },
         {
           "ar": "شِ",
           "laut": "schi",
-          "speak": "schi"
+          "speak": "شِ"
         },
         {
           "ar": "شُ",
           "laut": "schu",
-          "speak": "schu"
+          "speak": "شُ"
         }
       ],
       "wordAr": "شَمْس",
       "wordDe": "Sonne",
-      "wordLaut": "shams",
-      "wordSpeak": "schams, Sonne",
+      "wordLaut": "šams",
+      "wordSpeak": "شَمْس",
       "forms": {
         "iso": "ش",
         "ini": "شـ",
@@ -543,29 +543,29 @@
       "nameDe": "Ṣād",
       "nameAr": "صَاد",
       "lautName": "Ṣād",
-      "speakName": "Sad, volles s",
+      "speakName": "صَاد",
       "connect": "both",
       "harakat": [
         {
           "ar": "صَ",
           "laut": "ṣa",
-          "speak": "ssa, voll"
+          "speak": "صَ"
         },
         {
           "ar": "صِ",
           "laut": "ṣi",
-          "speak": "ssi, voll"
+          "speak": "صِ"
         },
         {
           "ar": "صُ",
           "laut": "ṣu",
-          "speak": "ssu, voll"
+          "speak": "صُ"
         }
       ],
       "wordAr": "صَقْر",
       "wordDe": "Falke",
       "wordLaut": "ṣaqr",
-      "wordSpeak": "ssakr, Falke",
+      "wordSpeak": "صَقْر",
       "forms": {
         "iso": "ص",
         "ini": "صـ",
@@ -584,29 +584,29 @@
       "nameDe": "Ḍād",
       "nameAr": "ضَاد",
       "lautName": "Ḍād",
-      "speakName": "Dad, schweres d",
+      "speakName": "ضَاد",
       "connect": "both",
       "harakat": [
         {
           "ar": "ضَ",
           "laut": "ḍa",
-          "speak": "da, schwer"
+          "speak": "ضَ"
         },
         {
           "ar": "ضِ",
           "laut": "ḍi",
-          "speak": "di, schwer"
+          "speak": "ضِ"
         },
         {
           "ar": "ضُ",
           "laut": "ḍu",
-          "speak": "du, schwer"
+          "speak": "ضُ"
         }
       ],
       "wordAr": "ضِفْدَع",
       "wordDe": "Frosch",
       "wordLaut": "ḍifdaʿ",
-      "wordSpeak": "difda, Frosch",
+      "wordSpeak": "ضِفْدَع",
       "forms": {
         "iso": "ض",
         "ini": "ضـ",
@@ -624,30 +624,30 @@
       "ar": "ط",
       "nameDe": "Ṭāʾ",
       "nameAr": "طَاء",
-      "lautName": "Ṭā",
-      "speakName": "Ta, volles t",
+      "lautName": "Ṭāʾ",
+      "speakName": "طَاء",
       "connect": "both",
       "harakat": [
         {
           "ar": "طَ",
           "laut": "ṭa",
-          "speak": "ta, voll"
+          "speak": "طَ"
         },
         {
           "ar": "طِ",
           "laut": "ṭi",
-          "speak": "ti, voll"
+          "speak": "طِ"
         },
         {
           "ar": "طُ",
           "laut": "ṭu",
-          "speak": "tu, voll"
+          "speak": "طُ"
         }
       ],
       "wordAr": "طَائِر",
       "wordDe": "Vogel",
       "wordLaut": "ṭāʾir",
-      "wordSpeak": "ta-ir, Vogel",
+      "wordSpeak": "طَائِر",
       "forms": {
         "iso": "ط",
         "ini": "طـ",
@@ -665,30 +665,30 @@
       "ar": "ظ",
       "nameDe": "Ẓāʾ",
       "nameAr": "ظَاء",
-      "lautName": "Ẓā",
-      "speakName": "Da, schwer zwischen den Zaehnen",
+      "lautName": "Ẓāʾ",
+      "speakName": "ظَاء",
       "connect": "both",
       "harakat": [
         {
           "ar": "ظَ",
           "laut": "ẓa",
-          "speak": "dha, schwer"
+          "speak": "ظَ"
         },
         {
           "ar": "ظِ",
           "laut": "ẓi",
-          "speak": "dhi, schwer"
+          "speak": "ظِ"
         },
         {
           "ar": "ظُ",
           "laut": "ẓu",
-          "speak": "dhu, schwer"
+          "speak": "ظُ"
         }
       ],
       "wordAr": "ظِلّ",
       "wordDe": "Schatten",
       "wordLaut": "ẓill",
-      "wordSpeak": "zill, Schatten",
+      "wordSpeak": "ظِلّ",
       "forms": {
         "iso": "ظ",
         "ini": "ظـ",
@@ -707,29 +707,29 @@
       "nameDe": "ʿAyn",
       "nameAr": "عَيْن",
       "lautName": "ʿAyn",
-      "speakName": "Ain, aus der Kehle",
+      "speakName": "عَيْن",
       "connect": "both",
       "harakat": [
         {
           "ar": "عَ",
           "laut": "ʿa",
-          "speak": "a, aus der Kehle"
+          "speak": "عَ"
         },
         {
           "ar": "عِ",
           "laut": "ʿi",
-          "speak": "i, aus der Kehle"
+          "speak": "عِ"
         },
         {
           "ar": "عُ",
           "laut": "ʿu",
-          "speak": "u, aus der Kehle"
+          "speak": "عُ"
         }
       ],
       "wordAr": "عَيْن",
       "wordDe": "Auge",
       "wordLaut": "ʿayn",
-      "wordSpeak": "ain, Auge",
+      "wordSpeak": "عَيْن",
       "forms": {
         "iso": "ع",
         "ini": "عـ",
@@ -745,32 +745,32 @@
     {
       "id": "ghayn",
       "ar": "غ",
-      "nameDe": "Ghayn",
+      "nameDe": "Ġayn",
       "nameAr": "غَيْن",
-      "lautName": "Ghayn",
-      "speakName": "Gain, weiches g aus der Kehle",
+      "lautName": "Ġayn",
+      "speakName": "غَيْن",
       "connect": "both",
       "harakat": [
         {
           "ar": "غَ",
           "laut": "gha",
-          "speak": "gha"
+          "speak": "غَ"
         },
         {
           "ar": "غِ",
           "laut": "ghi",
-          "speak": "ghi"
+          "speak": "غِ"
         },
         {
           "ar": "غُ",
           "laut": "ghu",
-          "speak": "ghu"
+          "speak": "غُ"
         }
       ],
       "wordAr": "غَيْمَة",
       "wordDe": "Wolke",
-      "wordLaut": "ghayma",
-      "wordSpeak": "gaima, Wolke",
+      "wordLaut": "ġayma",
+      "wordSpeak": "غَيْمَة",
       "forms": {
         "iso": "غ",
         "ini": "غـ",
@@ -778,9 +778,9 @@
         "fin": "ـغ"
       },
       "ages": {
-        "4–5": "Ghain. ʿAin mit Punkt. Wort: Wolke. غَيْمَة",
-        "6–8": "Ghayn: غَ gha, غِ ghi, غُ ghu. Reibelaut aus dem oberen Rachen. Wort غَيْمَة ghayma.",
-        "9–10": "غ hat einen Punkt über der Form von ع. Der Laut wird im oberen Rachen gebildet."
+        "4–5": "Ġayn. ʿAyn mit einem Punkt oben. Der Laut kommt weit hinten aus dem Rachen. Wort: Wolke. غَيْمَة",
+        "6–8": "Ġayn: غَ ġa, غِ ġi, غُ ġu. Stimmhafter Reibelaut weit hinten im Rachen. Wort غَيْمَة ġayma.",
+        "9–10": "غ hat einen Punkt über der Form von ع. Der Laut wird weit hinten im Rachen gebildet; er ist kein deutsches g."
       }
     },
     {
@@ -788,30 +788,30 @@
       "ar": "ف",
       "nameDe": "Fāʾ",
       "nameAr": "فَاء",
-      "lautName": "Fā",
-      "speakName": "Fa",
+      "lautName": "Fāʾ",
+      "speakName": "فَاء",
       "connect": "both",
       "harakat": [
         {
           "ar": "فَ",
           "laut": "fa",
-          "speak": "fa"
+          "speak": "فَ"
         },
         {
           "ar": "فِ",
           "laut": "fi",
-          "speak": "fi"
+          "speak": "فِ"
         },
         {
           "ar": "فُ",
           "laut": "fu",
-          "speak": "fu"
+          "speak": "فُ"
         }
       ],
       "wordAr": "فَرَاشَة",
       "wordDe": "Schmetterling",
-      "wordLaut": "farāsha",
-      "wordSpeak": "farascha, Schmetterling",
+      "wordLaut": "farāša",
+      "wordSpeak": "فَرَاشَة",
       "forms": {
         "iso": "ف",
         "ini": "فـ",
@@ -830,29 +830,29 @@
       "nameDe": "Qāf",
       "nameAr": "قَاف",
       "lautName": "Qāf",
-      "speakName": "Kaf, tief aus der Kehle",
+      "speakName": "قَاف",
       "connect": "both",
       "harakat": [
         {
           "ar": "قَ",
           "laut": "qa",
-          "speak": "ka, tief"
+          "speak": "قَ"
         },
         {
           "ar": "قِ",
           "laut": "qi",
-          "speak": "ki, tief"
+          "speak": "قِ"
         },
         {
           "ar": "قُ",
           "laut": "qu",
-          "speak": "ku, tief"
+          "speak": "قُ"
         }
       ],
       "wordAr": "قَمَر",
       "wordDe": "Mond",
       "wordLaut": "qamar",
-      "wordSpeak": "kamar, Mond",
+      "wordSpeak": "قَمَر",
       "forms": {
         "iso": "ق",
         "ini": "قـ",
@@ -860,9 +860,9 @@
         "fin": "ـق"
       },
       "ages": {
-        "4–5": "Qāf. Zwei Punkte oben. Höre genau auf den tiefen Laut. Wort: Mond. قَمَر",
-        "6–8": "Qāf: قَ qa, قِ qi, قُ qu. Der Laut entsteht weit hinten am Zäpfchen. Nicht wie Kāf. Wort قَمَر qamar.",
-        "9–10": "ق hat zwei Punkte und wird weit hinten am Zäpfchen gebildet. ك Kāf wird weiter vorn am Gaumen gebildet."
+        "4–5": "Qāf. Zwei Punkte oben. Der Laut kommt weit hinten im Mund. Wort: Mond. قَمَر",
+        "6–8": "Qāf: قَ qa, قِ qi, قُ qu. Der Laut wird am Zäpfchen gebildet. Nicht wie Kāf. Wort قَمَر qamar.",
+        "9–10": "ق hat zwei Punkte und wird am Zäpfchen gebildet. ك Kāf wird weiter vorn am Gaumen gebildet."
       }
     },
     {
@@ -871,29 +871,29 @@
       "nameDe": "Kāf",
       "nameAr": "كَاف",
       "lautName": "Kāf",
-      "speakName": "Kaf",
+      "speakName": "كَاف",
       "connect": "both",
       "harakat": [
         {
           "ar": "كَ",
           "laut": "ka",
-          "speak": "ka"
+          "speak": "كَ"
         },
         {
           "ar": "كِ",
           "laut": "ki",
-          "speak": "ki"
+          "speak": "كِ"
         },
         {
           "ar": "كُ",
           "laut": "ku",
-          "speak": "ku"
+          "speak": "كُ"
         }
       ],
       "wordAr": "كِتَاب",
       "wordDe": "Buch",
       "wordLaut": "kitāb",
-      "wordSpeak": "kitaab, Buch",
+      "wordSpeak": "كِتَاب",
       "forms": {
         "iso": "ك",
         "ini": "كـ",
@@ -912,29 +912,29 @@
       "nameDe": "Lām",
       "nameAr": "لَام",
       "lautName": "Lām",
-      "speakName": "Lam",
+      "speakName": "لَام",
       "connect": "both",
       "harakat": [
         {
           "ar": "لَ",
           "laut": "la",
-          "speak": "la"
+          "speak": "لَ"
         },
         {
           "ar": "لِ",
           "laut": "li",
-          "speak": "li"
+          "speak": "لِ"
         },
         {
           "ar": "لُ",
           "laut": "lu",
-          "speak": "lu"
+          "speak": "لُ"
         }
       ],
       "wordAr": "لَبَن",
       "wordDe": "Milch",
       "wordLaut": "laban",
-      "wordSpeak": "laban, Milch",
+      "wordSpeak": "لَبَن",
       "forms": {
         "iso": "ل",
         "ini": "لـ",
@@ -953,29 +953,29 @@
       "nameDe": "Mīm",
       "nameAr": "مِيم",
       "lautName": "Mīm",
-      "speakName": "Miim",
+      "speakName": "مِيم",
       "connect": "both",
       "harakat": [
         {
           "ar": "مَ",
           "laut": "ma",
-          "speak": "ma"
+          "speak": "مَ"
         },
         {
           "ar": "مِ",
           "laut": "mi",
-          "speak": "mi"
+          "speak": "مِ"
         },
         {
           "ar": "مُ",
           "laut": "mu",
-          "speak": "mu"
+          "speak": "مُ"
         }
       ],
       "wordAr": "مَسْجِد",
       "wordDe": "Moschee",
-      "wordLaut": "masjid",
-      "wordSpeak": "masdjid, Moschee",
+      "wordLaut": "masǧid",
+      "wordSpeak": "مَسْجِد",
       "forms": {
         "iso": "م",
         "ini": "مـ",
@@ -994,29 +994,29 @@
       "nameDe": "Nūn",
       "nameAr": "نُون",
       "lautName": "Nūn",
-      "speakName": "Nuun",
+      "speakName": "نُون",
       "connect": "both",
       "harakat": [
         {
           "ar": "نَ",
           "laut": "na",
-          "speak": "na"
+          "speak": "نَ"
         },
         {
           "ar": "نِ",
           "laut": "ni",
-          "speak": "ni"
+          "speak": "نِ"
         },
         {
           "ar": "نُ",
           "laut": "nu",
-          "speak": "nu"
+          "speak": "نُ"
         }
       ],
       "wordAr": "نَجْم",
       "wordDe": "Stern",
-      "wordLaut": "najm",
-      "wordSpeak": "nadschm, Stern",
+      "wordLaut": "naǧm",
+      "wordSpeak": "نَجْم",
       "forms": {
         "iso": "ن",
         "ini": "نـ",
@@ -1034,30 +1034,30 @@
       "ar": "ه",
       "nameDe": "Hāʾ",
       "nameAr": "هَاء",
-      "lautName": "Hā",
-      "speakName": "Ha, weicher Hauch",
+      "lautName": "Hāʾ",
+      "speakName": "هَاء",
       "connect": "both",
       "harakat": [
         {
           "ar": "هَ",
           "laut": "ha",
-          "speak": "ha, weich"
+          "speak": "هَ"
         },
         {
           "ar": "هِ",
           "laut": "hi",
-          "speak": "hi, weich"
+          "speak": "هِ"
         },
         {
           "ar": "هُ",
           "laut": "hu",
-          "speak": "hu, weich"
+          "speak": "هُ"
         }
       ],
       "wordAr": "هِلَال",
       "wordDe": "Mondsichel",
       "wordLaut": "hilāl",
-      "wordSpeak": "hilal, Mondsichel",
+      "wordSpeak": "هِلَال",
       "forms": {
         "iso": "ه",
         "ini": "هـ",
@@ -1076,29 +1076,29 @@
       "nameDe": "Wāw",
       "nameAr": "وَاو",
       "lautName": "Wāw",
-      "speakName": "Wau",
+      "speakName": "وَاو",
       "connect": "left-none",
       "harakat": [
         {
           "ar": "وَ",
           "laut": "wa",
-          "speak": "wa"
+          "speak": "وَ"
         },
         {
           "ar": "وِ",
           "laut": "wi",
-          "speak": "wi"
+          "speak": "وِ"
         },
         {
           "ar": "وُ",
           "laut": "wu",
-          "speak": "wu"
+          "speak": "وُ"
         }
       ],
       "wordAr": "وَرْدَة",
       "wordDe": "Rose",
       "wordLaut": "warda",
-      "wordSpeak": "warda, Rose",
+      "wordSpeak": "وَرْدَة",
       "forms": {
         "iso": "و",
         "ini": "و",
@@ -1116,30 +1116,30 @@
       "ar": "ي",
       "nameDe": "Yāʾ",
       "nameAr": "يَاء",
-      "lautName": "Yā",
-      "speakName": "Ya",
+      "lautName": "Yāʾ",
+      "speakName": "يَاء",
       "connect": "both",
       "harakat": [
         {
           "ar": "يَ",
           "laut": "ya",
-          "speak": "ya"
+          "speak": "يَ"
         },
         {
           "ar": "يِ",
           "laut": "yi",
-          "speak": "yi"
+          "speak": "يِ"
         },
         {
           "ar": "يُ",
           "laut": "yu",
-          "speak": "yu"
+          "speak": "يُ"
         }
       ],
       "wordAr": "يَد",
       "wordDe": "Hand",
       "wordLaut": "yad",
-      "wordSpeak": "jad, Hand",
+      "wordSpeak": "يَد",
       "forms": {
         "iso": "ي",
         "ini": "يـ",
