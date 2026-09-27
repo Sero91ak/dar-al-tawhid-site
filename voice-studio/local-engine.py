@@ -2201,6 +2201,89 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str,mode:str="narratio
     metrics["issues"]=list(dict.fromkeys(metrics["issues"]))
     return metrics
 
+def repair_internal_pause(wav,sr:int,text:str,language_id:str,mode:str):
+    """Kürzt nur klar erkannte stille Inseln mitten im Satz.
+
+    Das ist wesentlich schneller als einen ansonsten guten Satz komplett neu zu
+    synthetisieren. Sehr lange Aussetzer bleiben ein echter QA-Fehler und werden
+    weiterhin neu gerendert.
+    """
+    import torch
+    w=normalize_segment_shape(wav)
+    if language_id=="ar" or not w.numel() or w.shape[-1]<int(sr*0.3):
+        return w,{"repaired":False}
+
+    env=w.abs().amax(dim=0)
+    peak=float(env.max().item()) if env.numel() else 0.0
+    if peak<=1e-7:
+        return w,{"repaired":False}
+
+    frame=max(1,int(sr*0.010))
+    count=env.numel()//frame
+    if count<5:
+        return w,{"repaired":False}
+    framed=env[:count*frame].reshape(count,frame).mean(dim=1)
+    threshold=max(peak*0.012,0.0004)
+    silent=(framed<threshold).tolist()
+
+    probe=str(text or "").strip()
+    core=re.sub(r"[.!?؟…]+$","",probe).strip()
+    has_internal_punctuation=bool(re.search(r"[,،;؛:!?؟…]|\.(?=\s+\S)",core))
+    target_ms=int(
+        QA_CONFIG.get("autoRepairPauseWithPunctuationMs",220)
+        if has_internal_punctuation else QA_CONFIG.get("autoRepairPauseWithoutPunctuationMs",150)
+    )
+    trigger_ms=int(
+        (QA_CONFIG.get("maxInternalSilenceMsWithPunctuationByMode") or {}).get(
+            mode,QA_CONFIG.get("maxInternalSilenceMsWithPunctuation",560)
+        )
+        if has_internal_punctuation else QA_CONFIG.get("maxInternalSilenceMsWithoutPunctuation",380)
+    )
+    max_repair_ms=int(QA_CONFIG.get("autoRepairPauseMaxMs",950))
+
+    runs=[]
+    start=None
+    for i,flag in enumerate(silent):
+        if i==0 or i==len(silent)-1:
+            continue
+        if flag and start is None:
+            start=i
+        if (not flag or i==len(silent)-2) and start is not None:
+            end=i if not flag else i+1
+            dur=(end-start)*10
+            if dur>trigger_ms and dur<=max_repair_ms:
+                runs.append((start,end,dur))
+            start=None
+
+    if not runs:
+        return w,{"repaired":False}
+
+    keep_frames=max(2,int(round(target_ms/10.0)))
+    pieces=[]
+    cursor=0
+    removed_ms=0
+    for start_f,end_f,dur in runs:
+        start_s=start_f*frame
+        end_s=min(w.shape[-1],end_f*frame)
+        run_frames=max(1,end_f-start_f)
+        keep=min(run_frames,keep_frames)
+        left_keep=keep//2
+        right_keep=keep-left_keep
+        cut_start=min(end_s,start_s+left_keep*frame)
+        cut_end=max(cut_start,end_s-right_keep*frame)
+        pieces.append(w[...,cursor:cut_start])
+        pieces.append(w[...,cut_end:end_s])
+        cursor=end_s
+        removed_ms+=max(0,dur-target_ms)
+    pieces.append(w[...,cursor:])
+    repaired=torch.cat([p for p in pieces if p.shape[-1]>0],dim=-1)
+    return repaired,{
+        "repaired":True,
+        "pause_runs_repaired":len(runs),
+        "pause_ms_removed":int(removed_ms),
+        "target_pause_ms":int(target_ms),
+    }
+
 def split_rescue_chunks(text:str,force:bool=False):
     """Nicht-MASTER Segmente deterministisch teilen; bei Watchdog-Timeout auch kurze Problemsegmente."""
     value=re.sub(r"\s+"," ",str(text or "")).strip()
@@ -2258,6 +2341,23 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
             last=(None,{"issues":["generation_token_limit"],"attempt":attempt+1,"critical":bool(critical),"rescued":False})
             break
         metrics=audio_quality_metrics(wav,int(model.sr),text,language_id,mode)
+
+        pause_only={"unexpected_internal_hold","excessive_internal_pause"}
+        current_issues=set(metrics.get("issues") or [])
+        if current_issues and current_issues.issubset(pause_only):
+            repaired,repair_meta=repair_internal_pause(wav,int(model.sr),text,language_id,mode)
+            if repair_meta.get("repaired"):
+                repaired_metrics=audio_quality_metrics(repaired,int(model.sr),text,language_id,mode)
+                if not repaired_metrics.get("issues"):
+                    wav=repaired
+                    metrics=repaired_metrics
+                    metrics.update(repair_meta)
+                    print(
+                        f"[DĀR Voice] pause auto-repair lang={language_id} mode={mode} "
+                        f"removed={repair_meta.get('pause_ms_removed',0)}ms",
+                        flush=True
+                    )
+
         metrics.update(getattr(render_with_model,"_last_backend_meta",{}) or {})
         metrics["attempt"]=attempt+1
         metrics["critical"]=bool(critical)
