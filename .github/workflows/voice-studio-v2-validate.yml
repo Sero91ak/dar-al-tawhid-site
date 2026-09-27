@@ -511,6 +511,14 @@ jobs:
               errors.append("spaced Quran ayah mastery missing")
           if 'if(!playerFullyHeard())' not in studio:
               errors.append("human full-listen gate missing")
+          if '"sourceType": "external-human-pronunciation"' not in manifest:
+              errors.append("free-license external human Fuṣḥā/MSA sources missing")
+          if '"sourcePage": "https://commons.wikimedia.org/wiki/' not in manifest:
+              errors.append("Wikimedia source-page provenance missing")
+          if '"license": "CC0-1.0"' not in manifest or '"license": "CC-BY-4.0"' not in manifest:
+              errors.append("required free-license metadata missing")
+          if '"sourceLanguage": "Modern Standard Arabic (ara)"' not in manifest:
+              errors.append("MSA source identity missing")
           if errors:
               raise SystemExit("Strict Alif-Ba audio validation failed: "+" | ".join(errors))
           print("Strict Alif-Ba audio workflow OK")
