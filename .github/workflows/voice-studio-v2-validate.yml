@@ -188,10 +188,20 @@ jobs:
           if errors:
               raise SystemExit("Companion validation failed: "+" | ".join(errors))
 
-          # Pairing secret must never be emitted in health/status payload.
+          # /health may report only whether companion mode is enabled.
+          # It must never serialize or return the actual secret value.
           health_segment=engine[engine.index('if p=="/health"'):engine.index('elif p=="/status"')]
-          if 'PAIR_TOKEN' in health_segment:
-              raise SystemExit("PAIR_TOKEN must never be exposed by /health")
+          forbidden=[
+              '"pair_token":PAIR_TOKEN',
+              '"pairToken":PAIR_TOKEN',
+              '"token":PAIR_TOKEN',
+              '"pair":PAIR_TOKEN',
+          ]
+          leaked=[x for x in forbidden if x in health_segment]
+          if leaked:
+              raise SystemExit("PAIR_TOKEN value must never be exposed by /health: "+", ".join(leaked))
+          if '"companion_mode":bool(NETWORK_MODE and PAIR_TOKEN)' not in health_segment:
+              raise SystemExit("/health should expose only the companion-mode boolean")
           print("Secure iPad/iPhone companion mode OK")
           PY
 
