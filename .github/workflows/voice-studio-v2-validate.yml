@@ -412,6 +412,9 @@ jobs:
                   'QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v2."',
                   'function quizPriority(id,now)',
                   'recordQuizAttempt(q.id,!quizQuestionHadError)',
+                  'STORY_PROGRESS_PREFIX="kids.story.progress.v2."',
+                  'recordStoryAttempt(currentStoryKey,!storyQuestionHadError)',
+                  'storyQuestionHadError=true',
                   'Referenzaufnahme noch nicht freigegeben',
               ]),
               ("manifest",manifest,[
@@ -432,6 +435,8 @@ jobs:
               errors.append("secure alphabet items are still skipped forever instead of becoming due again")
           if 'Math.min(5,quizMastery(id)+1)' in kids:
               errors.append("legacy one-shot quiz mastery increment returned")
+          if 'localStorage.setItem("kids.story."+currentStoryKey,"1")' in kids:
+              errors.append("legacy one-shot story mastery returned")
           if 'if(!playerFullyHeard())' not in studio:
               errors.append("human full-listen gate missing")
           if errors:
