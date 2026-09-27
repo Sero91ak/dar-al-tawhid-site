@@ -83,6 +83,9 @@ textarea:focus{border-color:rgba(217,182,111,.45);box-shadow:0 0 0 4px rgba(217,
 .btn{min-height:44px;border:0;border-radius:13px;padding:11px 14px;font-weight:800;font-size:13px;cursor:pointer;transition:transform .14s ease,filter .14s ease,opacity .14s ease}.btn:active{transform:scale(.985)}.primary{background:linear-gradient(180deg,#e2c47d,#d4ad5e);color:#11212b;box-shadow:0 8px 24px rgba(217,182,111,.14)}.secondary{background:rgba(255,255,255,.075);color:var(--ink);border:1px solid var(--line)}.quiet{background:transparent;color:#cbd6dc;border:1px solid var(--line)}.btn:disabled{opacity:.38;cursor:not-allowed;transform:none}
 .player-wrap{margin-top:12px;padding:12px;border-radius:16px;border:1px solid var(--line);background:rgba(0,0,0,.12)}audio{width:100%;height:38px}.download-row{display:flex;gap:8px;margin-top:8px}
 .download-row a{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.audio-route-row{display:flex;align-items:center;gap:8px;margin-top:8px;min-width:0}
+.audio-route-btn{min-height:36px!important;padding:8px 11px!important;font-size:11px!important;white-space:nowrap;max-width:62%;overflow:hidden;text-overflow:ellipsis}
+.audio-route-hint{font-size:9px;color:var(--muted);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .side-section{padding:0 0 16px;margin-bottom:16px;border-bottom:1px solid var(--line)}.side-section:last-child{border:0;margin:0;padding:0}
 .side-title{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#91a4b2;font-weight:850;margin-bottom:10px}
 .profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.profile-box{background:#071927;border:1px solid var(--line);border-radius:14px;padding:11px}.profile-box small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}.profile-box strong{font-size:13px}
@@ -402,7 +405,7 @@ input,select{
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark" aria-hidden="true"><img src="/watermark-my-logo-full.png" alt=""></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.8.6 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.8.7 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="installBtn" class="btn quiet install-btn">App installieren</button>
@@ -414,7 +417,7 @@ input,select{
 <main class="panel editor-panel">
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.8.6</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.8.7</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
 
   <div class="textbox-wrap">
@@ -447,7 +450,11 @@ input,select{
 
   <div id="playerWrap" class="player-wrap" hidden>
     <div class="section-title">Audio-Vorschau</div>
-    <audio id="player" controls></audio>
+    <audio id="player" controls x-webkit-airplay="deny" disableremoteplayback></audio>
+    <div class="audio-route-row">
+      <button class="btn quiet audio-route-btn" type="button" data-audio-output-button>Audio-Ausgabe: System</button>
+      <span class="audio-route-hint">AirPods · Bluetooth · Mac-Lautsprecher</span>
+    </div>
     <div id="downloadRow" class="download-row">
       <a id="wavLink" class="btn secondary" download="dar-serhat-voice.wav">WAV speichern</a>
       <button id="qaConfirmBtn" class="btn secondary">Aussprache bestätigen</button>
@@ -517,7 +524,11 @@ input,select{
       <button id="learnPreviewBtn" class="btn secondary" type="button">Neue Aussprache testen</button>
       <button id="learnConfirmBtn" class="btn primary" type="button" disabled>So merken</button>
     </div>
-    <audio id="learnPlayer" class="learning-player" controls hidden></audio>
+    <audio id="learnPlayer" class="learning-player" controls x-webkit-airplay="deny" disableremoteplayback hidden></audio>
+    <div class="audio-route-row">
+      <button class="btn quiet audio-route-btn" type="button" data-audio-output-button>Audio-Ausgabe: System</button>
+      <span class="audio-route-hint">AirPods · Bluetooth · Mac-Lautsprecher</span>
+    </div>
     <button id="learnSyncBtn" class="btn quiet" type="button" style="width:100%">Online-Wortschatz aktualisieren</button>
     <div id="learnState" class="learning-status">Lernwortschatz wird geladen …</div>
   </section>
@@ -542,7 +553,7 @@ input,select{
   <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
 </aside>
 </div>
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.8.6 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.8.7 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
 </div>
 </div>
 
@@ -580,6 +591,21 @@ function localRequest(path,options={}){
     return fetch(url,base);
   }
 }
+function requestAudioOutput(){
+  const nativeHandler=window.webkit?.messageHandlers?.darAudioOutput;
+  if(nativeHandler){
+    nativeHandler.postMessage({action:"show"});
+    return;
+  }
+  setMessage("Audio-Ausgabe: In der Mac-App werden AirPods, Bluetooth-Geräte und Lautsprecher direkt angezeigt. Im Browser bitte die macOS-Tonausgabe verwenden.","warn");
+}
+window.darAudioOutputChanged=name=>{
+  const label=String(name||"Systemausgabe");
+  document.querySelectorAll("[data-audio-output-button]").forEach(btn=>{
+    btn.textContent="Audio-Ausgabe: "+label;
+    btn.title="Audio-Ausgabe wechseln · "+label;
+  });
+};
 function buildBuckets(rules){
   const m=new Map();
   for(const r of rules){
@@ -1222,6 +1248,13 @@ $("#installEngineBtn").onclick=async()=>{
     :"Terminal öffnen und den angezeigten Setup-Befehl kopieren/einfügen.","good");
 };
 $("#qaConfirmBtn").onclick=confirmQA;
+document.querySelectorAll("[data-audio-output-button]").forEach(btn=>{
+  btn.addEventListener("click",requestAudioOutput);
+});
+for(const audio of [$("#player"),$("#learnPlayer")].filter(Boolean)){
+  try{audio.disableRemotePlayback=true}catch(_){}
+  audio.setAttribute("x-webkit-airplay","deny");
+}
 
 // Hardware-Tastaturen: Mac, iMac und iPad Magic Keyboard.
 // Standard-Bearbeitung (⌘C/⌘V/⌘X/⌘A/⌘Z) niemals abfangen;
@@ -1280,7 +1313,7 @@ if(IS_LOCAL){
     $("#installEngineBtn").style.display="none";
     $("#setupCommandWrap").style.display="none";
     $("#startEngineBtn").style.display="none";
-    const nativeMac=/DĀRVoiceStudioMac\/1\.0/.test(navigator.userAgent);
+    const nativeMac=/DĀRVoiceStudioMac\//.test(navigator.userAgent);
     $("#engineHelp").textContent=nativeMac
       ?"Native Mac-App · Serhat Engine und Studio laufen lokal auf diesem Mac."
       :"Lokales Produktionsstudio · Für die eigenständige Mac-App einmal auf der Website „Mac-App installieren / aktualisieren“ ausführen.";
