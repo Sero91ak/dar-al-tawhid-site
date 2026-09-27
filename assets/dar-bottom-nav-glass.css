@@ -510,3 +510,23 @@ html #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active)::before,
 html #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active):not(.is-pressed)::before{
   opacity:0!important;
 }
+
+/* Per-appearance opaque bar — no shared icy saturate */
+:root, html[data-theme="dark"], html:not([data-theme]) { --bottom-nav-fill:#0c0b09; --bottom-nav-saturation:1; --bottom-nav-blur:0px; }
+html[data-theme="light"] { --bottom-nav-fill:#f4ead2; --bottom-nav-saturation:1; --bottom-nav-blur:0px; }
+html[data-theme="soft"] { --bottom-nav-fill:#efe4dc; --bottom-nav-saturation:1; --bottom-nav-blur:0px; }
+html[data-theme="royal"] { --bottom-nav-fill:#071629; --bottom-nav-saturation:1; --bottom-nav-blur:0px; }
+html[data-theme="bordeaux"] { --bottom-nav-fill:#140b0c; --bottom-nav-saturation:1; --bottom-nav-blur:0px; }
+html[data-theme="dar-al-layl"] { --bottom-nav-fill:#050605; --bottom-nav-saturation:1; --bottom-nav-blur:0px; }
+html[data-theme="aurora"] { --bottom-nav-fill:#081018; --bottom-nav-saturation:1; --bottom-nav-blur:0px; }
+html[data-theme="eisgold"] { --bottom-nav-fill:#f7f4ea; --bottom-nav-saturation:1; --bottom-nav-blur:0px; }
+html[data-theme] #bottomNav.bottom-nav,
+html.dar-ios-native-app #bottomNav.bottom-nav,
+#bottomNav.bottom-nav,
+.bottom-nav {
+  background: var(--bottom-nav-fill, var(--bg, #0c0b09)) !important;
+  background-color: var(--bottom-nav-fill, var(--bg, #0c0b09)) !important;
+  background-image: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
