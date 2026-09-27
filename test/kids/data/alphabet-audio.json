@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "id": "KIDS_ALPHABET_AUDIO_V2",
-  "updatedAt": "2026-09-27",
+  "updatedAt": "2026-09-28",
   "policy": {
     "arabicReference": "human-recording-free-license-fusha-msa-only",
     "syntheticFallback": false,
@@ -10,13 +10,14 @@
     "acceptedLicenses": [
       "CC0-1.0",
       "Public-Domain",
-      "CC-BY-4.0"
+      "CC-BY-4.0",
+      "CC-BY-3.0-US"
     ],
-    "sourcePolicy": "Prefer exact human MSA/Fuṣḥā recordings. A letter-name slot may use a source whose transcription is the single Arabic letter only when the source is explicitly an Arabic/MSA pronunciation recording for that letter entity. For example words, Arabic diacritics may differ or be omitted when the underlying lexical item is identical.",
+    "sourcePolicy": "Prefer exact human Arabic pronunciation recordings for standard Arabic/Fuṣḥā learning. License, speaker/source, exact lexical item and source page must be documented. Source metadata that only says Arabic must not be relabeled as explicitly MSA without evidence.",
     "note": "System-TTS und ungeprüfte KI-Stimmen sind als arabische Lernreferenz verboten. Externe Clips müssen Quelle, Sprecher, Lizenz und Originalseite dokumentieren.",
     "qaRequirements": [
       "Human speaker",
-      "Arabic / Modern Standard Arabic or explicitly Fuṣḥā",
+      "Arabic pronunciation suitable for standard Arabic/Fuṣḥā learning",
       "Exact lexical item or unambiguous Arabic letter entity",
       "License permits redistribution/commercial app use",
       "Source page retained",
@@ -225,12 +226,23 @@
       "word": {
         "text": "تُفَّاحَة",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ar-%D8%AA%D9%81%D8%A7%D8%AD%D8%A9.ogg",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/ta/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/ta/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Shtooka Project / Wikimedia Commons",
+        "sourceSpeaker": "Nhaily Mustapha",
+        "sourceLanguage": "Arabic",
+        "sourceTranscription": "تفاحة",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Ar-%D8%AA%D9%81%D8%A7%D8%AD%D8%A9.ogg",
+        "sourceFile": "Ar-تفاحة.ogg",
+        "license": "CC-BY-3.0-US",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/us/",
+        "attribution": "Nhaily Mustapha; Vion Nicolas / Shtooka Project / Wikimedia Commons, CC BY 3.0 US",
+        "verificationBasis": "Human Arabic learning-pronunciation recording; exact standard-Arabic lexical item; Wikimedia file page documents CC BY 3.0 US."
       }
     },
     "tha": {
@@ -355,12 +367,23 @@
       "word": {
         "text": "جَمَل",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D8%AC%D9%85%D9%84.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/jim/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/jim/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "Annisa Tiara Ramadhani",
+        "sourceLanguage": "Arabic (ara)",
+        "sourceTranscription": "جمل",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D8%AC%D9%85%D9%84.wav",
+        "sourceFile": "LL-Q13955 (ara)-Annisa Tiara Ramadhani-جمل.wav",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "attribution": "Annisa Tiara Ramadhani / Lingua Libre / Wikimedia Commons, CC0 1.0",
+        "verificationBasis": "Lingua Libre human Arabic pronunciation recording; exact standard-Arabic lexical item; source file is CC0."
       }
     },
     "ha": {
@@ -420,12 +443,23 @@
       "word": {
         "text": "حِصَان",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D8%AD%D8%B5%D8%A7%D9%86.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/ha/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/ha/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "Annisa Tiara Ramadhani",
+        "sourceLanguage": "Arabic (ara)",
+        "sourceTranscription": "حصان",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D8%AD%D8%B5%D8%A7%D9%86.wav",
+        "sourceFile": "LL-Q13955 (ara)-Annisa Tiara Ramadhani-حصان.wav",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "attribution": "Annisa Tiara Ramadhani / Lingua Libre / Wikimedia Commons, CC0 1.0",
+        "verificationBasis": "Lingua Libre human Arabic pronunciation recording; exact standard-Arabic lexical item; source file is CC0."
       }
     },
     "kha": {
@@ -485,12 +519,23 @@
       "word": {
         "text": "خُبْز",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ar-%D8%AE%D8%A8%D8%B2.ogg",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/kha/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/kha/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Shtooka Project / Wikimedia Commons",
+        "sourceSpeaker": "Nhaily Mustapha",
+        "sourceLanguage": "Arabic",
+        "sourceTranscription": "خبز",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Ar-%D8%AE%D8%A8%D8%B2.ogg",
+        "sourceFile": "Ar-خبز.ogg",
+        "license": "CC-BY-3.0-US",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/us/",
+        "attribution": "Nhaily Mustapha; Vion Nicolas / Shtooka Project / Wikimedia Commons, CC BY 3.0 US",
+        "verificationBasis": "Human Arabic learning-pronunciation recording; exact standard-Arabic lexical item; Wikimedia file page documents CC BY 3.0 US."
       }
     },
     "dal": {
@@ -550,12 +595,23 @@
       "word": {
         "text": "دِيك",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D8%AF%D9%8A%D9%83.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/dal/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/dal/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "Annisa Tiara Ramadhani",
+        "sourceLanguage": "Arabic (ara)",
+        "sourceTranscription": "ديك",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D8%AF%D9%8A%D9%83.wav",
+        "sourceFile": "LL-Q13955 (ara)-Annisa Tiara Ramadhani-ديك.wav",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "attribution": "Annisa Tiara Ramadhani / Lingua Libre / Wikimedia Commons, CC0 1.0",
+        "verificationBasis": "Lingua Libre human Arabic pronunciation recording; exact standard-Arabic lexical item; source file is CC0."
       }
     },
     "dhal": {
@@ -745,12 +801,23 @@
       "word": {
         "text": "زَهْرَة",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ar-%D8%B2%D9%87%D8%B1%D8%A9.ogg",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/zay/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/zay/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Shtooka Project / Wikimedia Commons",
+        "sourceSpeaker": "Nhaily Mustapha",
+        "sourceLanguage": "Arabic",
+        "sourceTranscription": "زهرة",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Ar-%D8%B2%D9%87%D8%B1%D8%A9.ogg",
+        "sourceFile": "Ar-زهرة.ogg",
+        "license": "CC-BY-3.0-US",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/us/",
+        "attribution": "Nhaily Mustapha; Vion Nicolas / Shtooka Project / Wikimedia Commons, CC BY 3.0 US",
+        "verificationBasis": "Human Arabic learning-pronunciation recording; exact standard-Arabic lexical item; Wikimedia file page documents CC BY 3.0 US."
       }
     },
     "sin": {
@@ -886,12 +953,23 @@
       "word": {
         "text": "شَمْس",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D8%B4%D9%85%D8%B3.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/shin/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/shin/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "Annisa Tiara Ramadhani",
+        "sourceLanguage": "Arabic (ara)",
+        "sourceTranscription": "شمس",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D8%B4%D9%85%D8%B3.wav",
+        "sourceFile": "LL-Q13955 (ara)-Annisa Tiara Ramadhani-شمس.wav",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "attribution": "Annisa Tiara Ramadhani / Lingua Libre / Wikimedia Commons, CC0 1.0",
+        "verificationBasis": "Lingua Libre human Arabic pronunciation recording; exact standard-Arabic lexical item; source file is CC0."
       }
     },
     "sad": {
@@ -1081,12 +1159,23 @@
       "word": {
         "text": "طَائِر",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ar-%D8%B7%D8%A7%D8%A6%D8%B1.ogg",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/taa/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/taa/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Shtooka Project / Wikimedia Commons",
+        "sourceSpeaker": "Nhaily Mustapha",
+        "sourceLanguage": "Arabic",
+        "sourceTranscription": "طائر",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Ar-%D8%B7%D8%A7%D8%A6%D8%B1.ogg",
+        "sourceFile": "Ar-طائر.ogg",
+        "license": "CC-BY-3.0-US",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/us/",
+        "attribution": "Nhaily Mustapha; Vion Nicolas / Shtooka Project / Wikimedia Commons, CC BY 3.0 US",
+        "verificationBasis": "Human Arabic learning-pronunciation recording; exact standard-Arabic lexical item; Wikimedia file page documents CC BY 3.0 US."
       }
     },
     "zaa": {
@@ -1211,12 +1300,23 @@
       "word": {
         "text": "عَيْن",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ar-%D8%B9%D9%8A%D9%86.ogg",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/ayn/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/ayn/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Shtooka Project / Wikimedia Commons",
+        "sourceSpeaker": "Nhaily Mustapha",
+        "sourceLanguage": "Arabic",
+        "sourceTranscription": "عين",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Ar-%D8%B9%D9%8A%D9%86.ogg",
+        "sourceFile": "Ar-عين.ogg",
+        "license": "CC-BY-3.0-US",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/us/",
+        "attribution": "Nhaily Mustapha; Vion Nicolas / Shtooka Project / Wikimedia Commons, CC BY 3.0 US",
+        "verificationBasis": "Human Arabic learning-pronunciation recording; exact standard-Arabic lexical item; Wikimedia file page documents CC BY 3.0 US."
       }
     },
     "ghayn": {
@@ -1406,12 +1506,23 @@
       "word": {
         "text": "قَمَر",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D9%82%D9%85%D8%B1.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/qaf/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/qaf/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "Annisa Tiara Ramadhani",
+        "sourceLanguage": "Arabic (ara)",
+        "sourceTranscription": "قمر",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D9%82%D9%85%D8%B1.wav",
+        "sourceFile": "LL-Q13955 (ara)-Annisa Tiara Ramadhani-قمر.wav",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "attribution": "Annisa Tiara Ramadhani / Lingua Libre / Wikimedia Commons, CC0 1.0",
+        "verificationBasis": "Lingua Libre human Arabic pronunciation recording; exact standard-Arabic lexical item; source file is CC0."
       }
     },
     "kaf": {
@@ -1471,12 +1582,23 @@
       "word": {
         "text": "كِتَاب",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D9%83%D8%AA%D8%A7%D8%A8.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/kaf/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/kaf/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "Annisa Tiara Ramadhani",
+        "sourceLanguage": "Arabic (ara)",
+        "sourceTranscription": "كتاب",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D9%83%D8%AA%D8%A7%D8%A8.wav",
+        "sourceFile": "LL-Q13955 (ara)-Annisa Tiara Ramadhani-كتاب.wav",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "attribution": "Annisa Tiara Ramadhani / Lingua Libre / Wikimedia Commons, CC0 1.0",
+        "verificationBasis": "Lingua Libre human Arabic pronunciation recording; exact standard-Arabic lexical item; source file is CC0."
       }
     },
     "lam": {
@@ -1677,12 +1799,23 @@
       "word": {
         "text": "نَجْم",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D9%86%D8%AC%D9%85.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/nun/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/nun/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "Annisa Tiara Ramadhani",
+        "sourceLanguage": "Arabic (ara)",
+        "sourceTranscription": "نجم",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-Annisa%20Tiara%20Ramadhani-%D9%86%D8%AC%D9%85.wav",
+        "sourceFile": "LL-Q13955 (ara)-Annisa Tiara Ramadhani-نجم.wav",
+        "license": "CC0-1.0",
+        "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "attribution": "Annisa Tiara Ramadhani / Lingua Libre / Wikimedia Commons, CC0 1.0",
+        "verificationBasis": "Lingua Libre human Arabic pronunciation recording; exact standard-Arabic lexical item; source file is CC0."
       }
     },
     "haa": {
@@ -1872,12 +2005,23 @@
       "word": {
         "text": "يَد",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ar-%D9%8A%D8%AF.ogg",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/ya/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:18:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/ya/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Shtooka Project / Wikimedia Commons",
+        "sourceSpeaker": "Nhaily Mustapha",
+        "sourceLanguage": "Arabic",
+        "sourceTranscription": "يد",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Ar-%D9%8A%D8%AF.ogg",
+        "sourceFile": "Ar-يد.ogg",
+        "license": "CC-BY-3.0-US",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/us/",
+        "attribution": "Nhaily Mustapha; Vion Nicolas / Shtooka Project / Wikimedia Commons, CC BY 3.0 US",
+        "verificationBasis": "Human Arabic learning-pronunciation recording; exact standard-Arabic lexical item; Wikimedia file page documents CC BY 3.0 US."
       }
     }
   },
@@ -1895,6 +2039,18 @@
           "license": "CC0-1.0",
           "language": "Modern Standard Arabic (ara)",
           "role": "Individual Arabic letter pronunciation recordings"
+        },
+        {
+          "name": "Annisa Tiara Ramadhani / Lingua Libre",
+          "license": "CC0-1.0",
+          "language": "Arabic (ara)",
+          "role": "Human pronunciation recordings for standard Arabic example words"
+        },
+        {
+          "name": "Shtooka Project / Nhaily Mustapha",
+          "license": "CC-BY-3.0-US",
+          "language": "Arabic",
+          "role": "Human Arabic-learning pronunciation recordings for exact example words"
         }
       ]
     }
