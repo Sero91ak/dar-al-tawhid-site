@@ -553,24 +553,23 @@ input,select{
 
   <section class="side-section" id="alphabetAudioSection">
     <div class="side-title">Alif-Bāʾ Audio-Pack</div>
-    <div class="notice">Strenger Modus: 140 Einzelclips · Serhat-Stimme · jeder Clip anhören · erst danach freigeben. Die Kids-App verwendet niemals arabisches System-TTS als Referenz.</div>
+    <div class="notice">Strenger Single-Voice-Modus: ausschließlich die von dir gewählte Alif-Stimme der Escuela Internacional de Árabe (Eiarabe). Andere Sprecher bleiben gesperrt. Jeder Kandidat muss vollständig angehört und ausdrücklich bestätigt werden.</div>
     <div id="alphabetPackProgress" class="learning-status" style="margin-top:9px">Manifest wird geladen …</div>
-    <div id="alphabetPackReferenceState" class="learning-status" style="margin-top:6px;color:var(--amber)">Arabische Master-Referenz wird geprüft …</div>
+    <div id="alphabetPackReferenceState" class="learning-status" style="margin-top:6px;color:var(--amber)">Alif-Referenz wird geprüft …</div>
     <div class="learning-actions" style="margin-top:8px">
-      <button id="alphabetPackReferenceBtn" class="btn quiet" type="button">Arabische Master-Aufnahme laden</button>
-      <input id="alphabetPackReferenceFile" type="file" accept=".wav,.m4a,.aac,.mp3,audio/*" hidden>
+      <button id="alphabetPackReferenceBtn" class="btn quiet" type="button">Alif-Referenz hören</button>
     </div>
-    <div class="notice" style="margin-top:6px">Einmalig: 6–180 Sekunden klare, kontrollierte arabische Sprachaufnahme auswählen. Sie wird nur lokal als <b>Serhat_AR_MASTER.wav</b> gespeichert und ersetzt niemals automatisch die deutsche Referenz.</div>
+    <div class="notice" style="margin-top:6px">Nur frei lizenzierte Originalaufnahmen derselben Eiarabe-Serie werden hier angeboten. Es wird keine fremde Stimme, kein System-TTS und kein Voice-Cloning als Ersatz verwendet.</div>
     <div id="alphabetPackCurrent" style="margin:10px 0;padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.025)">
-      <div id="alphabetPackLabel" style="font-size:11px;color:var(--muted)">Noch kein Slot gewählt</div>
+      <div id="alphabetPackLabel" style="font-size:11px;color:var(--muted)">Noch kein Kandidat gewählt</div>
       <div id="alphabetPackArabic" dir="rtl" lang="ar" style="font-size:34px;text-align:center;margin:8px 0;color:var(--gold2)">—</div>
     </div>
     <div class="learning-actions">
-      <button id="alphabetPackNextBtn" class="btn secondary" type="button">Nächsten Clip erzeugen</button>
-      <button id="alphabetPackApproveBtn" class="btn primary" type="button" disabled>Angehört & freigeben</button>
+      <button id="alphabetPackNextBtn" class="btn secondary" type="button">Nächsten Kandidaten anhören</button>
+      <button id="alphabetPackApproveBtn" class="btn primary" type="button" disabled>Vollständig gehört · gleiche Stimme bestätigen</button>
     </div>
-    <button id="alphabetPackRetryBtn" class="btn quiet" type="button" style="width:100%;margin-top:7px" disabled>Clip neu erzeugen</button>
-    <div id="alphabetPackMessage" class="learning-status" style="margin-top:8px">Nur ausdrücklich bestätigte Clips werden veröffentlicht.</div>
+    <button id="alphabetPackRetryBtn" class="btn quiet" type="button" style="width:100%;margin-top:7px" disabled>Kandidat erneut hören</button>
+    <div id="alphabetPackMessage" class="learning-status" style="margin-top:8px">Nur ausdrücklich bestätigte Aufnahmen derselben Referenzstimme werden freigegeben.</div>
   </section>
 
   <section id="engineSetupSection" class="side-section">
