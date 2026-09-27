@@ -1,0 +1,1387 @@
+{
+  "schemaVersion": 1,
+  "id": "KIDS_ALPHABET_AUDIO_V1",
+  "updatedAt": "2026-09-27",
+  "policy": {
+    "arabicReference": "human-approved-recording-only",
+    "sourceVoice": "authorized-owner-voice",
+    "syntheticFallback": false,
+    "requireExplicitVerification": true,
+    "quranRecitation": "real-recording-only",
+    "note": "Ein Clip wird von der Kids-App nur abgespielt, wenn verified=true und url gesetzt ist. System-TTS ist für arabische Referenzlaute verboten."
+  },
+  "letters": {
+    "alif": {
+      "name": {
+        "text": "أَلِف",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "أَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "إِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "أُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "أَرْنَب",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "ba": {
+      "name": {
+        "text": "بَاء",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "بَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "بِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "بُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "بَطَّة",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "ta": {
+      "name": {
+        "text": "تَاء",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "تَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "تِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "تُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "تُفَّاحَة",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "tha": {
+      "name": {
+        "text": "ثَاء",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "ثَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "ثِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "ثُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "ثَعْلَب",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "jim": {
+      "name": {
+        "text": "جِيم",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "جَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "جِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "جُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "جَمَل",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "ha": {
+      "name": {
+        "text": "حَاء",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "حَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "حِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "حُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "حِصَان",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "kha": {
+      "name": {
+        "text": "خَاء",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "خَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "خِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "خُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "خُبْز",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "dal": {
+      "name": {
+        "text": "دَال",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "دَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "دِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "دُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "دِيك",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "dhal": {
+      "name": {
+        "text": "ذَال",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "ذَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "ذِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "ذُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "ذُرَة",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "ra": {
+      "name": {
+        "text": "رَاء",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "رَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "رِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "رُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "رُمَّان",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "zay": {
+      "name": {
+        "text": "زَاي",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "زَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "زِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "زُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "زَهْرَة",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "sin": {
+      "name": {
+        "text": "سِين",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "سَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "سِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "سُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "سَمَكَة",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "shin": {
+      "name": {
+        "text": "شِين",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "شَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "شِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "شُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "شَمْس",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "sad": {
+      "name": {
+        "text": "صَاد",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "صَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "صِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "صُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "صَقْر",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "dad": {
+      "name": {
+        "text": "ضَاد",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "ضَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "ضِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "ضُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "ضِفْدَع",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "taa": {
+      "name": {
+        "text": "طَاء",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "طَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "طِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "طُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "طَائِر",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "zaa": {
+      "name": {
+        "text": "ظَاء",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "ظَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "ظِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "ظُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "ظِلّ",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "ayn": {
+      "name": {
+        "text": "عَيْن",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "عَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "عِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "عُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "عَيْن",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "ghayn": {
+      "name": {
+        "text": "غَيْن",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "غَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "غِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "غُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "غَيْمَة",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "fa": {
+      "name": {
+        "text": "فَاء",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "فَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "فِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "فُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "فَرَاشَة",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "qaf": {
+      "name": {
+        "text": "قَاف",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "قَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "قِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "قُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "قَمَر",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "kaf": {
+      "name": {
+        "text": "كَاف",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "كَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "كِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "كُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "كِتَاب",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "lam": {
+      "name": {
+        "text": "لَام",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "لَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "لِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "لُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "لَبَن",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "mim": {
+      "name": {
+        "text": "مِيم",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "مَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "مِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "مُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "مَسْجِد",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "nun": {
+      "name": {
+        "text": "نُون",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "نَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "نِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "نُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "نَجْم",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "haa": {
+      "name": {
+        "text": "هَاء",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "هَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "هِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "هُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "هِلَال",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "waw": {
+      "name": {
+        "text": "وَاو",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "وَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "وِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "وُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "وَرْدَة",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    },
+    "ya": {
+      "name": {
+        "text": "يَاء",
+        "role": "letter-name",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      },
+      "harakat": {
+        "fatha": {
+          "text": "يَ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "kasra": {
+          "text": "يِ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        },
+        "damma": {
+          "text": "يُ",
+          "role": "harakah-syllable",
+          "verified": false,
+          "url": "",
+          "sha256": "",
+          "qaBy": "",
+          "qaAt": ""
+        }
+      },
+      "word": {
+        "text": "يَد",
+        "role": "example-word",
+        "verified": false,
+        "url": "",
+        "sha256": "",
+        "qaBy": "",
+        "qaAt": ""
+      }
+    }
+  }
+}
