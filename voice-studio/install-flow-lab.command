@@ -54,7 +54,16 @@ fi
 export DAR_VOICE_APP_HOME="$TARGET"
 export DAR_VOICE_HOME="$LAB_HOME"
 export DAR_VOICE_PORT="$PORT"
-export SERHAT_VOICE_REF="$PROD_HOME/Serhat_Adobe_MASTER.wav"
+
+if [ -f "$PROD_HOME/Serhat_Adobe_MASTER.wav" ]; then
+  export SERHAT_VOICE_REF="$PROD_HOME/Serhat_Adobe_MASTER.wav"
+elif [ -f "$PROD_HOME/Serhat_FINAL_REF.wav" ]; then
+  export SERHAT_VOICE_REF="$PROD_HOME/Serhat_FINAL_REF.wav"
+else
+  echo "FEHLER: Keine deutsche Serhat-Referenz gefunden."
+  exit 1
+fi
+
 if [ -f "$PROD_HOME/Serhat_AR_MASTER.wav" ]; then
   export SERHAT_VOICE_REF_AR="$PROD_HOME/Serhat_AR_MASTER.wav"
 fi
