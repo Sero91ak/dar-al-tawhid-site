@@ -159,7 +159,8 @@ const APP_SHELL = [
   '/assets/site-analytics.js',
   '/assets/jummah-friday.js',
   '/data/jummah-series.json',
-  '/test/assets/theme-salbei-elfenbein.css',\n  '/test/assets/test-update-surface.js'
+  '/test/assets/theme-salbei-elfenbein.css',
+  '/test/assets/test-update-surface.js'
 ];
 
 let bypassPostCacheUntil = 0;
