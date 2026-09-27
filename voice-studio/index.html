@@ -556,6 +556,11 @@ input,select{
     <div class="notice">Strenger Modus: 140 Einzelclips · Serhat-Stimme · jeder Clip anhören · erst danach freigeben. Die Kids-App verwendet niemals arabisches System-TTS als Referenz.</div>
     <div id="alphabetPackProgress" class="learning-status" style="margin-top:9px">Manifest wird geladen …</div>
     <div id="alphabetPackReferenceState" class="learning-status" style="margin-top:6px;color:var(--amber)">Arabische Master-Referenz wird geprüft …</div>
+    <div class="learning-actions" style="margin-top:8px">
+      <button id="alphabetPackReferenceBtn" class="btn quiet" type="button">Arabische Master-Aufnahme laden</button>
+      <input id="alphabetPackReferenceFile" type="file" accept="audio/wav,audio/x-wav,audio/mp4,audio/m4a,audio/aac,audio/mpeg" hidden>
+    </div>
+    <div class="notice" style="margin-top:6px">Einmalig: 6–180 Sekunden klare, kontrollierte arabische Sprachaufnahme auswählen. Sie wird nur lokal als <b>Serhat_AR_MASTER.wav</b> gespeichert und ersetzt niemals automatisch die deutsche Referenz.</div>
     <div id="alphabetPackCurrent" style="margin:10px 0;padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.025)">
       <div id="alphabetPackLabel" style="font-size:11px;color:var(--muted)">Noch kein Slot gewählt</div>
       <div id="alphabetPackArabic" dir="rtl" lang="ar" style="font-size:34px;text-align:center;margin:8px 0;color:var(--gold2)">—</div>
