@@ -2042,24 +2042,39 @@ def is_inline_arabic_micro_term(text:str):
     words=len([x for x in re.split(r"\s+",value) if x])
     return 0<letters<=12 and words<=3
 
-GERMAN_LINK_WORDS={
-    "der","die","das","den","dem","des",
-    "ein","eine","einen","einem","einer","eines",
-    "mein","meine","dein","deine","sein","seine","ihr","ihre",
-    "unser","unsere","euer","eure",
-    "für","mit","von","zu","zum","zur","bei","im","in","am","an","auf","über","unter",
-    "und","oder","aber","denn","auch","nur","selbst","durch"
-}
+def flow_boundary_strength(left_text:str,left_lang:str,right_text:str,right_lang:str):
+    """Automatische Satzfluss-Klassifikation ohne Wortlisten.
 
-def is_german_link_fragment(text:str):
-    """Kurzer Funktionswort-Block direkt vor/nach einem arabischen Fachbegriff.
-    Solche Wörter gehören prosodisch eng zum Nachbarwort: 'der Qurʾān', 'für Allāh'."""
-    words=[
-        re.sub(r"[^A-Za-zÄÖÜäöüß]+","",w).casefold()
-        for w in re.findall(r"\S+",str(text or ""))
-    ]
-    words=[w for w in words if w]
-    return 0<len(words)<=3 and all(w in GERMAN_LINK_WORDS for w in words)
+    0 = echte Satz-/Phrasenpause
+    1 = normale nahtlose Satzfortsetzung
+    2 = besonders enge Wortgruppen-Grenze, z. B. kurzer deutscher Fragmentblock
+        direkt vor/nach einem arabischen Fachbegriff.
+
+    Entscheidend ist die Struktur der Grenze, nicht ein einzelnes Wort. Dadurch
+    funktionieren auch neue Kombinationen wie 'wer glaubt', 'er sagte',
+    'die Sunnah', 'für Allāh', 'mit Ibrāhīm' usw. automatisch.
+    """
+    left=str(left_text or "").strip()
+    right=str(right_text or "").strip()
+    if not left or not right:
+        return 0
+
+    # Echte Interpunktion darf ihre natürliche Pause behalten.
+    if re.search(r"[.!?؟…,:;،؛]$",left):
+        return 0
+
+    left_words=re.findall(r"\S+",left)
+    right_words=re.findall(r"\S+",right)
+    cross_language=str(left_lang)!=str(right_lang)
+
+    # Sprachwechsel innerhalb desselben Satzes braucht die engste Brücke,
+    # besonders wenn eine Seite nur aus einem kurzen grammatischen Fragment besteht.
+    if cross_language and (len(left_words)<=4 or len(right_words)<=4):
+        return 2
+
+    # Auch innerhalb derselben Sprache dürfen willkürliche Chunk-Grenzen nie
+    # wie eine Denkpause klingen.
+    return 1
 
 def trim_segment_edges(wav,sr:int,aggressive:bool=False,inline:bool=False,lexical:bool=False):
     """Randstille vor jedem internen Stitch entfernen.
@@ -2528,18 +2543,15 @@ def join_rendered_segments(items,sr:int):
             lang=="ar" and is_inline_arabic_micro_term(chunk)
             and (left_lang=="de" or right_lang=="de")
         )
-        next_inline_ar=(
-            lang=="de" and right_lang=="ar" and pos+1<len(items)
-            and is_inline_arabic_micro_term(items[pos+1][2])
+        left_strength=(
+            flow_boundary_strength(items[pos-1][2],items[pos-1][1],chunk,lang)
+            if pos>0 else 0
         )
-        prev_inline_ar=(
-            lang=="de" and left_lang=="ar" and pos>0
-            and is_inline_arabic_micro_term(items[pos-1][2])
+        right_strength=(
+            flow_boundary_strength(chunk,lang,items[pos+1][2],items[pos+1][1])
+            if pos+1<len(items) else 0
         )
-        lexical_bridge=bool(
-            lang=="de" and is_german_link_fragment(chunk)
-            and (next_inline_ar or prev_inline_ar)
-        )
+        lexical_bridge=max(left_strength,right_strength)>=1
         internal=(pos>0 or pos+1<len(items))
         before=normalize_segment_shape(wav)
         before_samples=int(before.shape[-1])
@@ -2573,13 +2585,9 @@ def join_rendered_segments(items,sr:int):
         prev_inline_ar=(prev_lang=="ar" and is_inline_arabic_micro_term(prev_chunk))
         cur_inline_ar=(lang=="ar" and is_inline_arabic_micro_term(chunk))
         inline_boundary=(prev_inline_ar and lang=="de") or (cur_inline_ar and prev_lang=="de")
-        lexical_into_ar=bool(
-            prev_lang=="de" and cur_inline_ar and is_german_link_fragment(prev_chunk)
-        )
-        lexical_out_of_ar=bool(
-            prev_inline_ar and lang=="de" and is_german_link_fragment(chunk)
-        )
-        lexical_boundary=lexical_into_ar or lexical_out_of_ar
+        boundary_strength=flow_boundary_strength(prev_chunk,prev_lang,chunk,lang)
+        lexical_boundary=boundary_strength>=1
+        strong_lexical_boundary=boundary_strength>=2
 
         if sentence_end:
             factors=CONTINUITY_CONFIG.get("sentencePauseFactors") or {}
@@ -2605,22 +2613,25 @@ def join_rendered_segments(items,sr:int):
         else:
             ms=max(8,int(p["crossfade_ms"]))
             max_fraction=0.333
-            if lexical_boundary:
-                # Funktionswort + Fachbegriff ist *eine* lexikalische Einheit:
-                # "der Qurʾān", "für Allāh", "mit Ibrāhīm". Hier darf keine
-                # hörbare Sprachwechsel-Lücke entstehen.
-                ms=max(ms,int(CONTINUITY_CONFIG.get("lexicalBridgeCrossfadeMs",118)))
-                max_fraction=float(CONTINUITY_CONFIG.get("lexicalBridgeMaxFraction",0.46))
+
+            if strong_lexical_boundary:
+                # Kurzer Fragmentblock + Sprachwechsel: maximal eng, aber mit
+                # begrenztem Overlap gegen Doppelphoneme/Stottern.
+                ms=max(ms,int(CONTINUITY_CONFIG.get("strongLexicalBridgeCrossfadeMs",108)))
+                max_fraction=float(CONTINUITY_CONFIG.get("strongLexicalBridgeMaxFraction",0.43))
+            elif lexical_boundary:
+                # Jede nicht punktuierte Segmentgrenze innerhalb eines Satzes
+                # wird automatisch als nahtlose Fortsetzung behandelt.
+                ms=max(ms,int(CONTINUITY_CONFIG.get("automaticTightJoinCrossfadeMs",64)))
+                max_fraction=float(CONTINUITY_CONFIG.get("automaticTightJoinMaxFraction",0.36))
             elif inline_boundary:
                 ms=max(ms,int(CONTINUITY_CONFIG.get("inlineArabicCrossfadeMs",72)))
                 max_fraction=float(CONTINUITY_CONFIG.get("inlineArabicMaxFraction",0.38))
             else:
-                # Auch rein deutsche Chunkgrenzen dürfen nicht wie zwei Aufnahmen
-                # klingen. Nicht-punktuierte Grenzen werden grundsätzlich als
-                # fortlaufende Phrase mit Equal-Power-Bridge verbunden.
                 ms=max(ms,int(CONTINUITY_CONFIG.get("internalFlowCrossfadeMs",52)))
                 if prev_lang!=lang:
                     ms=max(ms,int(CONTINUITY_CONFIG.get("languageCrossfadeMinMs",44)))
+
             full=crossfade_audio(
                 full,wav,sr,ms/1000.0,equal_power=True,max_fraction=max_fraction
             )
@@ -2633,6 +2644,8 @@ def join_rendered_segments(items,sr:int):
             "soft_pause":bool(soft_pause),
             "inline_boundary":bool(inline_boundary),
             "lexical_boundary":bool(lexical_boundary),
+            "strong_lexical_boundary":bool(strong_lexical_boundary),
+            "boundary_strength":int(boundary_strength),
             "crossfade_ms":0 if (sentence_end or soft_pause) else int(ms),
         })
 
