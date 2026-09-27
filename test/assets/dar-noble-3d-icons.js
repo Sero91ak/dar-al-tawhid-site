@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1079";
+  const VER="1080";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -25,6 +25,7 @@
     wasiyyah:"wasiyyah.png",widgets:"widgets.png","image-editor":"image.png",
     news:"news.png","news-detail":"news.png",frauen:"frauen.png",propheten:"prophets.png",
     "quran-player":"audio.png",orient:"compass.png","continue-reading":"quran.png",
+    audio:"audio.png",player:"audio.png",listen:"audio.png",reciter:"audio.png",
     "quran-topics":"ilm.png","quran-search":"ilm.png",appstore:"spark.png"
   };
   const BY_EMOJI={
@@ -34,20 +35,25 @@
     "🕌":"mosque.png","🕋":"qibla.png","🧾":"zakat.png","🌙":"ramadan.png",
     "♡":"heart.png","❤️":"heart.png","♥":"heart.png","💛":"heart.png","⚙️":"settings.png","🧠":"quiz.png",
     "🗓️":"calendar.png","📅":"calendar.png","🔔":"bell.png","🔐":"lock.png","ℹ️":"scale.png","⚖️":"scale.png",
-    "🧩":"widgets.png","🖼️":"image.png","🎧":"headphones.png","📁":"library.png","🆕":"posts.png",
+    "🧩":"widgets.png","🖼️":"image.png","🎧":"audio.png","📁":"library.png","🆕":"posts.png",
     "🧭":"compass.png","⚠️":"shield.png","📿":"dua.png","☝️":"ilm.png","🔗":"hadith.png",
     "🕊️":"dua.png","🌌":"dua.png","🌤️":"prayer.png","🌳":"frauen.png","🌾":"zakat.png",
     "🌼":"dua.png","💧":"dua.png","🤝":"dua.png","📄":"library.png","🗂️":"ilm.png","🔍":"ilm.png",
     "📊":"scale.png","🔁":"saved.png","🏕":"prophets.png","⛺":"prophets.png","👶":"prophets.png",
     "🧬":"prophets.png","🙌":"prophets.png","🗡":"prophets.png","🗡️":"prophets.png","👑":"prophets.png",
     "⚡":"prophets.png","🌿":"prophets.png","🌊":"prophets.png","🐋":"prophets.png","🛕":"mosque.png",
-    "◆":"prophets.png","◇":"prophets.png","▶":"play.png","🔖":"saved.png","⭐":"saved.png","📤":"posts.png",
+    "◆":"prophets.png","◇":"prophets.png","▶":"audio.png","🔖":"saved.png","⭐":"saved.png","📤":"posts.png",
     "🔎":"ilm.png","💡":"ilm.png","🎨":"image.png","🛡️":"shield.png","🌅":"prayer.png","☀️":"prayer.png",
     "🕐":"calendar.png","◷":"calendar.png","📲":"spark.png","📍":"compass.png"
   };
-  function netSrc(file){return BASE+(file||"ilm.png")+"?v="+VER}
+  function adultFile(file){
+    const f=String(file||"ilm.png");
+    if(f==="play.png"||f==="headphones.png")return "audio.png";
+    return f;
+  }
+  function netSrc(file){return BASE+adultFile(file||"ilm.png")+"?v="+VER}
   function src(file){
-    const f=file||"ilm.png";
+    const f=adultFile(file||"ilm.png");
     return localSrc[f]||netSrc(f);
   }
   function imgHtml(file){return '<img class="dar3d-icon" alt="" decoding="async" src="'+src(file)+'">'}
@@ -74,7 +80,8 @@
     if(/qur|quran|tafsir/.test(k))return "quran.png";
     if(/du'a|dua|bittgeb|du\u02bf/.test(k))return "dua.png";
     if(/adab|akhlaq|tarbiyyah|tazkiyah|zuhd/.test(k))return "heart.png";
-    if(/wissen|ilm|thema/.test(k))return "ilm.png";
+    if(/wissen|ilm/.test(k))return "ilm.png";
+    if(/thema|beitrag/.test(k))return "posts.png";
     if(/gebet|salah|salat|prayer|moschee/.test(k))return "mosque.png";
     if(/zakat|zak[aā]t/.test(k))return "zakat.png";
     if(/rama/.test(k))return "ramadan.png";
@@ -100,18 +107,26 @@
     if(/faqih/.test(k))return "scale.png";
     return "scholars.png";
   }
+  function topicFallback(text){
+    const k=String(text||"");
+    if(!k)return "ilm.png";
+    const pool=["ilm.png","hadith.png","scholars.png","scale.png","compass.png","shield.png","spark.png","heart.png"];
+    let n=0;
+    for(let i=0;i<k.length;i++) n=(n+k.charCodeAt(i)*(i+3))%997;
+    return pool[n%pool.length];
+  }
   function fileFromKind(kind,hint){
     const k=String(kind||"").toLowerCase();
     const h=String(hint||"");
     if(k==="prophet"||k==="propheten")return "prophets.png";
     if(k==="scholar"||k==="scholars")return fileFromScholarGroup(h);
-    if(k==="topic"||k==="post"||k==="series")return fileFromTopic(h)||"ilm.png";
+    if(k==="topic"||k==="post"||k==="series")return fileFromTopic(h)||topicFallback(h);
     if(k==="dua"||k==="duas"||k==="dua-cat")return fileFromTopic(h)||"dua.png";
-    if(k==="ayah-play"||k==="play")return "play.png";
+    if(k==="ayah-play"||k==="play"||k==="audio"||k==="listen"||k==="player")return "audio.png";
     if(k==="ayah-bookmark"||k==="bookmark"||k==="bookmarkfill")return "saved.png";
     if(k==="ayah-share"||k==="share")return "posts.png";
     if(k==="ayah-tafsir"||k==="tafsir"||k==="book")return "quran.png";
-    if(k==="search")return "ilm.png";
+    if(k==="search")return "compass.png";
     if(k==="paint"||k==="image")return "image.png";
     if(k==="more")return "more.png";
     if(k==="orient")return "compass.png";
@@ -124,7 +139,7 @@
     const fromHint=fileFromTopic(h);
     if(fromHint)return fromHint;
     if(BY_EMOJI[h])return BY_EMOJI[h];
-    return "ilm.png";
+    return topicFallback(h||k);
   }
   function fileFromHost(host,el){
     if(!host&&!el)return "";
@@ -148,7 +163,18 @@
         if(v==="repeat")return "saved.png";
         return "quiz.png";
       }
-      if(el.classList.contains("quran-ayah-action-btn--play")||el.classList.contains("qrc-play-mark"))return "play.png";
+      if(el.classList.contains("qov-icon-btn")||el.classList.contains("qov-player-launch-ico")){
+        if(el.getAttribute("data-nav")==="quran-player"||el.classList.contains("qov-player-icon"))return "audio.png";
+        if(el.hasAttribute("data-qov-open-display")||el.id==="qovSettingsBtn")return "settings.png";
+      }
+      if(el.classList.contains("qov-wake-labeled-icon"))return "mosque.png";
+      if(el.classList.contains("qrc-context-btn")||(host&&host.classList&&host.classList.contains("qrc-context-btn"))){
+        const hid=(el.id||(host&&host.id)||"");
+        if(hid==="qrcContextSearchBtn")return "compass.png";
+        if(hid==="qrcContextTafsirBtn")return "quran.png";
+        if(hid==="qrcContextBookmarksBtn")return "saved.png";
+      }
+      if(el.classList.contains("quran-ayah-action-btn--play")||el.classList.contains("qrc-play-mark"))return "audio.png";
       if(el.classList.contains("home-hijri-ico"))return "calendar.png";
       if(el.classList.contains("more-quick-access__ico")){
         const chip=el.closest("[data-more-quick]");
@@ -207,7 +233,7 @@
     keep.forEach(function(n){el.appendChild(n)});
     el.insertBefore(imgFor(file,prio),el.firstChild);
   }
-  const SLOT_SEL=".feature-icon,.emoji-emblem,.folder-icon,.book-library-icon,.prophets-spotlight__icon,.quick-action-emoji,.quiz-quick-icon,.scholars-index__mono,.prophets-row__icon,.prophets-detail__emoji,.home-v380-lib-card__ico,.library-focus-teaser__icon,.zakat-home-teaser-icon,.home-v380-quran-hero__mark,.qrc-btn-emoji,.qrc-play-mark,.home-hijri-ico,.settings-live-icon,.direct-pick-ico,.related-compact-icon,.more-quick-access__ico,.current-focus-icon,.qrc-menu-emoji";
+  const SLOT_SEL=".feature-icon,.emoji-emblem,.folder-icon,.book-library-icon,.prophets-spotlight__icon,.quick-action-emoji,.quiz-quick-icon,.scholars-index__mono,.prophets-row__icon,.prophets-detail__emoji,.home-v380-lib-card__ico,.library-focus-teaser__icon,.zakat-home-teaser-icon,.home-v380-quran-hero__mark,.qrc-btn-emoji,.qrc-play-mark,.home-hijri-ico,.settings-live-icon,.direct-pick-ico,.related-compact-icon,.more-quick-access__ico,.current-focus-icon,.qrc-menu-emoji,.qov-icon-btn,.qov-player-launch-ico,.qov-wake-labeled-icon";
   function scan(){
     document.querySelectorAll("#bottomNav [data-bottom-nav]").forEach(btn=>{
       const icon=btn.querySelector(".nav-icon");
@@ -217,7 +243,7 @@
     const root=document.getElementById("appView")||document;
     root.querySelectorAll(SLOT_SEL).forEach(el=>{
       if(el.querySelector(".emoji-emblem")&&!el.classList.contains("emoji-emblem"))return;
-      const host=el.closest("[data-bottom-nav],[data-nav],[data-qa-action],[data-more-quick],[data-quran-continue],[data-scholar-open],[data-prophet-id],.quick-action,.prophets-spotlight,.quiz-home-quick-card,.scholars-index__row,.prophets-row,.prophets-detail,.post-row,.topics-theme-card,.dua-theme-card,.dua-row,.quran-ayah-action-btn,.direct-pick-well,.related-compact-card,.current-focus-row");
+      const host=el.closest("[data-bottom-nav],[data-nav],[data-qa-action],[data-more-quick],[data-quran-continue],[data-scholar-open],[data-prophet-id],.quick-action,.prophets-spotlight,.quiz-home-quick-card,.scholars-index__row,.prophets-row,.prophets-detail,.post-row,.topics-theme-card,.dua-theme-card,.dua-row,.quran-ayah-action-btn,.direct-pick-well,.related-compact-card,.current-focus-row,.qrc-context-btn,.qov-icon-btn,.qov-learn-launch,.qov-player-launch");
       fill(el,fileFromHost(host,el)||fileFromKind("",el.textContent||""));
     });
     document.querySelectorAll("#quickAccessMenu .quick-action-emoji,#quickAccessLayer .quick-action-emoji").forEach(el=>{
@@ -227,7 +253,7 @@
     root.querySelectorAll(".quran-ayah-action-btn").forEach(btn=>{
       if(btn.querySelector("img.dar3d-icon"))return;
       let file="quran.png";
-      if(btn.classList.contains("quran-ayah-action-btn--play"))file="play.png";
+      if(btn.classList.contains("quran-ayah-action-btn--play"))file="audio.png";
       else if(btn.classList.contains("quran-ayah-action-btn--bookmark"))file="saved.png";
       else if(btn.classList.contains("quran-ayah-action-btn--share"))file="posts.png";
       else if(btn.classList.contains("quran-ayah-action-btn--tafsir"))file="quran.png";

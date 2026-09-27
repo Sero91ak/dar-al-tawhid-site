@@ -6551,6 +6551,28 @@
         "test/service-worker.js",
         "content/admin/change-scope-lock.json"
       ]
+    },
+    {
+      "id": "adult-3d-icons-quran-dock-v1063-1086-2026-09-27",
+      "at": "2026-09-27T16:55:00.000Z",
+      "reason": "Nutzer: Kinder-Play/Kopfhörer, gleiche Bücher nebeneinander, Icons nicht mittig, Lern-Dock ragt über Tab-Leiste.",
+      "files": [
+        "assets/dar-noble-3d-icons.js",
+        "assets/dar-noble-3d-icons.css",
+        "test/assets/dar-noble-3d-icons.js",
+        "test/assets/dar-noble-3d-icons.css",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ]
     }
   ],
   "enabled": true

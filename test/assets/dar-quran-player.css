@@ -1147,3 +1147,18 @@ html[data-theme="bordeaux"] #darQuranPlayer{
   opacity:.72;
 }
 .dqp-opt-seed{margin:0 10px 10px}
+
+
+/* Learn/context dock: same width as the tab bar */
+body.is-quran-reader-route .qrc-context-bar,
+body.is-quran-reader-route .qrc-context-bar.qrc-context-bar--dock,
+.qrc-context-bar.qrc-context-bar--dock,
+html.dar-ios-native-app body.is-quran-reader-route .qrc-context-bar{
+  left:0!important;
+  right:0!important;
+  width:var(--dar-nav-width)!important;
+  max-width:min(900px,calc(100vw - 2 * var(--dar-nav-gutter)))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box!important;
+}

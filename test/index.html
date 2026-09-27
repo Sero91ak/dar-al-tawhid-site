@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
-<script src="/test/assets/dar-noble-3d-icons.js?v=1079"></script><!-- DAR_NOBLE_3D_HEAD -->
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1085";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script src="/test/assets/dar-noble-3d-icons.js?v=1080"></script><!-- DAR_NOBLE_3D_HEAD -->
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1086";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1060";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 
 <script>
@@ -10481,10 +10481,10 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/assets/scholars-index.js?v=589" defer></script>
 <script src="/test/assets/prophets/prophets.js?v=35" defer></script>
 <script src="/test/assets/dar-quran-audio-pack.js?v=1055" defer></script>
-<script src="/test/assets/dar-quran-player.js?v=961" defer></script>
+<script src="/test/assets/dar-quran-player.js?v=962" defer></script>
 <script>
 (function(){
-  var WANT=961;
+  var WANT=962;
   function boot(){
     if(window.__DAR_QURAN_PLAYER_BUILD===WANT&&window.DARQuranPlayer)return;
     var s=document.createElement("script");
@@ -12116,7 +12116,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/scholars-index.css?v=588">
 <link rel="preload" href="/test/data/prophets/index.json" as="fetch" crossorigin>
 <link rel="stylesheet" href="/test/assets/prophets/prophets.css?v=17">
-<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=984">
+<link rel="stylesheet" href="/test/assets/dar-quran-player.css?v=985">
 <link rel="stylesheet" href="/test/assets/ilm-research-chat.css?v=980">
 <link rel="stylesheet" href="/test/assets/frauen/frauen-fiqh.css?v=791">
 <link rel="stylesheet" href="/assets/adaptive-layout.css?v=16">
@@ -12126,7 +12126,7 @@ html[data-theme="soft"] .footer-actions .footer-action-tg{
 <link rel="stylesheet" href="/assets/global-update-banner.css?v=3">
 <link rel="stylesheet" href="/test/assets/app-soft-boot.css?v=668">
 <link rel="stylesheet" href="/test/assets/dar-setup-hub.css?v=8"><!-- DAR_SETUP_HUB_V1 -->
-<link rel="stylesheet" href="/test/assets/dar-noble-3d-icons.css?v=1079"><!-- DAR_NOBLE_3D_TEST -->
+<link rel="stylesheet" href="/test/assets/dar-noble-3d-icons.css?v=1080"><!-- DAR_NOBLE_3D_TEST -->
 <link rel="preload" as="image" href="/test/assets/dar-3d-icons/home.png?v=1079">
 <link rel="preload" as="image" href="/test/assets/dar-3d-icons/quiz.png?v=1079">
 <link rel="preload" as="image" href="/test/assets/dar-3d-icons/ilm.png?v=1079">
@@ -15652,8 +15652,12 @@ body.is-quran-reader-route .qrc-footer-nav button{
 }
 .qrc-context-bar{
   position:fixed;
-  left:max(14px,env(safe-area-inset-left));
-  right:max(14px,env(safe-area-inset-right));
+  left:0;
+  right:0;
+  width:var(--dar-nav-width);
+  max-width:min(900px,calc(100vw - 2 * var(--dar-nav-gutter)));
+  margin-left:auto;
+  margin-right:auto;
   bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm + var(--bottom-navigation-height,64px));
   z-index:39;
   height:var(--qrc-context-bar-h);
@@ -15713,7 +15717,7 @@ body.is-quran-reader-route .qrc-footer-nav button{
 .qrc-context-btn:active{transform:scale(.97);background:color-mix(in srgb,var(--quran-accent,var(--gold2)) 8%,transparent)}
 .qrc-context-btn:focus-visible{outline:2px solid var(--quran-accent,var(--gold2));outline-offset:2px}
 @media(max-width:700px){
-  .qrc-context-bar{left:max(10px,env(safe-area-inset-left));right:max(10px,env(safe-area-inset-right))}
+  .qrc-context-bar{left:0;right:0;width:var(--dar-nav-width);margin-left:auto;margin-right:auto}
 }
 @media(prefers-reduced-motion:reduce){
   .qrc-context-bar,.qrc-context-btn,.quran-ayah-action-btn{transition:none!important}
@@ -21022,7 +21026,7 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 </nav>
 </div>
 <script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock"),q=document.getElementById("quickAccessLayer"),s=document.getElementById("bottomNavSecondary");var isTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";if(s){if(isTest){s.setAttribute("data-bottom-nav","ilm");s.setAttribute("aria-label","ʿIlm");s.innerHTML='<span class="nav-icon nav-icon--emoji" aria-hidden="true" style="width:36px;height:36px;min-width:36px;min-height:36px;padding:3px;box-sizing:border-box;overflow:hidden;display:grid;place-items:center"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/ilm.png?v=1079" alt="" decoding="sync" fetchpriority="high" style="width:100%;height:100%;object-fit:contain"></span><span>ʿIlm</span>'}else{s.setAttribute("data-bottom-nav","quiz");s.setAttribute("aria-label","Quiz");s.innerHTML='<span class="nav-icon nav-icon--emoji" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/quiz.png?v=1079" alt="" decoding="sync" fetchpriority="high"></span><span>Quiz</span>'}}if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);if(q&&q.parentElement!==document.body)document.body.appendChild(q);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
-<script src="/test/assets/dar-noble-3d-icons.js?v=1079"></script><!-- DAR_NOBLE_3D_TEST -->
+<script src="/test/assets/dar-noble-3d-icons.js?v=1080"></script><!-- DAR_NOBLE_3D_TEST -->
 <script>document.documentElement.classList.add("dar-test-performance-v1");</script>
 <script>!function(){try{if(!/DarAlTawhid-iOS/i.test(String(navigator.userAgent||"")))return;if(document.documentElement.classList.contains("dar-ios-native-tabs"))return;function show(){try{if(document.documentElement.classList.contains("is-quran-player-route")||document.body.classList.contains("dar-quran-player-open"))return;document.documentElement.classList.remove("dar-soft-booting");var n=document.getElementById("bottomNav");if(!n)return;n.removeAttribute("hidden");n.style.setProperty("display","flex","important");n.style.setProperty("visibility","visible","important");n.style.setProperty("opacity","1","important");n.style.setProperty("pointer-events","auto","important");n.style.setProperty("z-index","80","important");document.body&&document.body.classList.add("has-bottom-nav")}catch(e){}}show();document.addEventListener("DOMContentLoaded",show);setTimeout(show,200);setTimeout(show,800);setTimeout(show,2000)}catch(e){}}();</script>
 <div class="float-actions" id="floatActions" hidden aria-hidden="true" data-mode="disabled">
@@ -21628,7 +21632,7 @@ function renderQuranAyahActionsRow(surah,ayah,ayahData){const saved=isQuranAyahB
 async function openQuranAyahTafsirDirect(surah,ayah){const sid=Number(surah),aid=Number(ayah);if(!Number.isFinite(sid)||!Number.isFinite(aid))return;await openQuranExplanationPanel(sid,aid,quranDefaultTafsirTab(sid,aid))}
 let qrcVisibleAyah={surah:0,ayah:0};let qrcVisibleAyahMap=new Map();let qrcVisibleAyahObserver=null;let qrcContextBarState={surahId:0,surahName:""};
 function getQrcContextBarBottomInset(){const nav=$("bottomNav");if(nav){const r=nav.getBoundingClientRect();const vh=window.innerHeight||document.documentElement.clientHeight||0;if(r.height>20&&vh>0)return Math.max(0,Math.round(vh-r.top))+"px"}const h=Number(String(getComputedStyle(document.documentElement).getPropertyValue("--bottom-navigation-height")).replace("px",""))||70;return"calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm + "+h+"px)"}
-function syncQrcContextBarDock(){const bar=$("qrcContextBar");const nav=$("bottomNav");if(!bar)return;bar.classList.add("qrc-context-bar--dock");bar.style.removeProperty("left");bar.style.removeProperty("right");bar.style.removeProperty("width");if(nav){const r=nav.getBoundingClientRect();const vh=window.innerHeight||document.documentElement.clientHeight||0;if(r.width>40&&r.height>20){const gap=Math.max(0,Math.round(vh-r.top));bar.style.setProperty("bottom",Math.max(0,gap-1)+"px","important");document.documentElement.style.setProperty("--qrc-dock-nav-h",Math.round(r.height)+"px");return}}bar.style.setProperty("bottom",getQrcContextBarBottomInset(),"important")}
+function syncQrcContextBarDock(){const bar=$("qrcContextBar");const nav=$("bottomNav");if(!bar)return;bar.classList.add("qrc-context-bar--dock");bar.style.removeProperty("left");bar.style.removeProperty("right");bar.style.removeProperty("width");if(nav){const r=nav.getBoundingClientRect();const vh=window.innerHeight||document.documentElement.clientHeight||0;if(r.width>40&&r.height>20){const gap=Math.max(0,Math.round(vh-r.top));bar.style.setProperty("bottom",Math.max(0,gap-1)+"px","important");bar.style.setProperty("left",Math.round(r.left)+"px","important");bar.style.setProperty("width",Math.round(r.width)+"px","important");bar.style.setProperty("right","auto","important");bar.style.setProperty("margin-left","0","important");bar.style.setProperty("max-width","none","important");document.documentElement.style.setProperty("--qrc-dock-nav-h",Math.round(r.height)+"px");return}}bar.style.setProperty("bottom",getQrcContextBarBottomInset(),"important")}
 function renderQuranContextBar(surahId,meta,ayah){const name=meta?.transliteration||("Sūrah "+surahId);const ay=Number(ayah)||1;return '<nav class="qrc-context-bar qrc-context-bar--dock" id="qrcContextBar" aria-label="Qurʾān Lesedock"><button type="button" class="qrc-context-pos" id="qrcContextPosBtn" aria-label="Sūrah und Āyah wählen"><span id="qrcContextPosLabel">'+esc(name)+' · '+esc(surahId)+':'+esc(ay)+'</span><span class="qrc-context-chevron" aria-hidden="true">▾</span></button><div class="qrc-context-actions" role="group" aria-label="Schnellaktionen"><button type="button" class="qrc-context-btn" id="qrcContextSearchBtn" aria-label="Qurʾān durchsuchen">'+qrcBtnEmoji("search")+'</button><button type="button" class="qrc-context-btn" id="qrcContextTafsirBtn" aria-label="Tafsīr zur sichtbaren Āyah">'+qrcBtnEmoji("book")+'</button><button type="button" class="qrc-context-btn" id="qrcContextBookmarksBtn" aria-label="Merkliste öffnen">'+qrcBtnEmoji("bookmark")+'</button></div></nav>'}
 function ensureQrcContextBarOnBody(surahId,meta,ayah){const nodes=[...document.querySelectorAll("#qrcContextBar")];let bar=nodes.find(el=>el.parentElement===document.body)||nodes[nodes.length-1]||null;nodes.forEach(el=>{if(bar&&el!==bar)el.remove()});if(!bar){bar=document.createElement("div");bar.innerHTML=renderQuranContextBar(surahId,meta,ayah);bar=bar.firstElementChild;document.body.appendChild(bar)}else{bar.outerHTML=renderQuranContextBar(surahId,meta,ayah);bar=$("qrcContextBar")}qrcContextBarState={surahId:Number(surahId),surahName:meta?.transliteration||""};return bar}
 function updateQuranContextBarLabel(surahId,ayah){const label=$("qrcContextPosLabel");if(!label)return;const name=qrcContextBarState.surahName||quranSurahMeta(surahId)?.transliteration||("Sūrah "+surahId);label.textContent=name+" · "+surahId+":"+Number(ayah||1);qrcVisibleAyah={surah:Number(surahId),ayah:Number(ayah||1)}}
@@ -27652,7 +27656,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1085";
+const APP_BUILD_ID="app-shell-v1086";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -30607,10 +30611,12 @@ body.is-quran-reader-route .qrc-context-bar,
 body.is-quran-reader-route .qrc-context-bar.qrc-context-bar--dock,
 .qrc-context-bar.qrc-context-bar--dock{
   position:fixed!important;
-  left:var(--qrc-dock-inset-l)!important;
-  right:var(--qrc-dock-inset-r)!important;
-  width:auto!important;
-  max-width:none!important;
+  left:0!important;
+  right:0!important;
+  width:var(--dar-nav-width)!important;
+  max-width:min(900px,calc(100vw - 2 * var(--dar-nav-gutter)))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
   z-index:39!important;
   display:flex!important;
   align-items:center!important;

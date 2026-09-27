@@ -319,3 +319,39 @@ body.is-quran-reader-route .qrc-context-btn .qrc-btn-emoji{
 body.is-quran-reader-route .qrc-context-btn img.dar3d-icon{
   width:22px!important;height:22px!important;
 }
+
+
+/* Adult knowledge app: center 3D marks; no kids play/headphones scale */
+#bottomNav .bottom-nav-btn{
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+}
+#bottomNav .bottom-nav-btn .nav-icon,
+#bottomNav .bottom-nav-btn.active .nav-icon{
+  transform:none!important;
+  margin:0 auto!important;
+}
+#bottomNav .bottom-nav-btn > span:not(.nav-icon){
+  text-align:center!important;
+  margin:0 auto!important;
+}
+.qrc-context-btn,
+.qov-icon-btn,
+.qov-player-launch-ico,
+.qov-wake-labeled-icon{
+  display:grid!important;
+  place-items:center!important;
+}
+.qrc-context-btn .qrc-btn-emoji,
+.qov-icon-btn img.dar3d-icon,
+.qov-player-launch-ico img.dar3d-icon{
+  margin:0 auto!important;
+}
+.qov-icon-btn img.dar3d-icon,
+.qov-player-launch-ico img.dar3d-icon{
+  width:26px!important;
+  height:26px!important;
+  max-width:26px!important;
+  max-height:26px!important;
+}
