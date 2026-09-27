@@ -217,7 +217,7 @@ if ! /bin/bash -n "$STAGE/update-mac.command"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.9.7-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-2.9.8-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
@@ -237,7 +237,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
 done
 chmod +x "$TARGET/update-mac.command"
 
-echo "Voice Studio 2.9.7 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.9.8 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -521,8 +521,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.9.7</string>
-  <key>CFBundleShortVersionString</key><string>2.9.7</string>
+  <key>CFBundleVersion</key><string>2.9.8</string>
+  <key>CFBundleShortVersionString</key><string>2.9.8</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon.icns</string>
@@ -545,8 +545,8 @@ cat > "$PLIST" <<'PLIST'
 PLIST
 /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable $BUNDLE_EXECUTABLE" "$PLIST"
 if [ "$BUNDLE_EXECUTABLE" = "DARVoiceStudioNative" ]; then
-  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.7 · Native" "$PLIST" 2>/dev/null || \
-    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.7 · Native'" "$PLIST"
+  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.8 · Native" "$PLIST" 2>/dev/null || \
+    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.8 · Native'" "$PLIST"
 fi
 /usr/bin/plutil -lint "$PLIST" >/dev/null
 
@@ -601,7 +601,7 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.9.7 ist installiert."
+say_status "DĀR Voice Studio 2.9.8 ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
   "$APP/Contents/MacOS/$BUNDLE_EXECUTABLE" >/dev/null 2>&1 &

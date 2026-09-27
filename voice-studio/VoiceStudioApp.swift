@@ -19,7 +19,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.7"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.8"
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -29,7 +29,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.7"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.8"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
         config.userContentController.add(self, name: "darCompanion")
@@ -821,7 +821,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
           linear-gradient(145deg,#041019,#071d2a 52%,#092735)}
         .box{width:min(520px,82vw);text-align:center;animation:appear .28s ease-out}
         .logo-shell{width:184px;height:184px;margin:0 auto 23px;border-radius:42px;padding:5px;background:linear-gradient(145deg,#f2d58e,#6c4614);box-shadow:0 26px 70px rgba(0,0,0,.42),0 0 0 1px rgba(244,216,150,.22)}
-        .logo-shell img{width:100%;height:100%;object-fit:cover;border-radius:38px;display:block}
+        .logo-shell img{width:100%;height:100%;object-fit:contain;border-radius:38px;display:block;background:#06131f}
         .brand{font-family:Georgia,serif;letter-spacing:.12em;color:#efd89d;font-weight:700;font-size:22px}
         .studio{margin-top:7px;font-size:12px;font-weight:800;letter-spacing:.28em;color:#c4d0d5}
         .status{margin-top:25px;color:#9fb0b8;font-size:12px;min-height:18px}
@@ -860,14 +860,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     }
 
     private func waitForEngine(attempt: Int) {
-        let progress = min(94, 12 + attempt)
+        // Der Balken zeigt ausschließlich den Start-/Verbindungszustand.
+        // Modell-Warmup und Aussprachebibliothek laufen im Engine-Prozess
+        // separat und dürfen den sichtbaren App-Start nicht blockieren.
+        let progress = min(92, 12 + min(attempt, 80))
         let phase: String
         if attempt < 3 {
             phase = "Serhat Engine wird verbunden …"
         } else if attempt < 12 {
-            phase = "Aussprachebibliothek wird geladen …"
+            phase = "Lokale Voice-Dienste werden geprüft …"
+        } else if attempt < 32 {
+            phase = "Serhat Engine startet …"
         } else {
-            phase = "Voice Studio wird startklar gemacht …"
+            phase = "Engine wird automatisch neu verbunden …"
         }
         updateLoadingProgress(progress, status: phase)
 
@@ -887,6 +892,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
                     ))
                 }
                 return
+            }
+
+            // Falls LaunchAgent oder Direktstart beendet wurde, nicht 40+ Sekunden
+            // blind weiterzählen: kontrolliert erneut prüfen/starten.
+            if attempt == 12 || attempt == 30 || attempt == 50 {
+                self.ensureEngine()
             }
 
             if attempt < 80 {
