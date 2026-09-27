@@ -45,6 +45,7 @@ curl -fsSL "$RAW/voice-studio/local-engine.py?v=286" -o "$STAGE/local-engine.py"
 curl -fsSL "$RAW/voice-studio/speech_flow.py?v=286" -o "$STAGE/speech_flow.py"
 curl -fsSL "$RAW/voice-studio/index.html?v=286" -o "$STAGE/studio.html"
 curl -fsSL "$RAW/voice-studio/content-studio.js?v=286" -o "$STAGE/content-studio.js"
+curl -fsSL "$RAW/voice-studio/VoiceStudioApp.swift?v=286" -o "$STAGE/VoiceStudioApp.swift"
 curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=286" -o "$STAGE/pronunciation-rules.json"
 curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=286" -o "$STAGE/voice-production-profile.json"
 curl -fsSL "$RAW/data/pronunciation/islamic-master-library.json?v=286" -o "$STAGE/islamic-master-library.json"
@@ -53,7 +54,7 @@ curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=286" -o "$STAGE/validate-
 curl -fsSL "$RAW/watermark-my-logo-full.png?v=286" -o "$STAGE/watermark-my-logo-full.png" || true
 curl -fsSL "$RAW/app-icon-512.png?v=286" -o "$STAGE/app-icon-512.png" || true
 
-for required in local-engine.py speech_flow.py studio.html content-studio.js pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for required in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
     echo "FEHLER: Update-Datei fehlt oder ist leer: $required"
     exit 1
@@ -151,7 +152,7 @@ if ! "$PY" -m py_compile "$STAGE/local-engine.py" "$STAGE/speech_flow.py"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.8.6-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-2.8.7-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
@@ -159,18 +160,18 @@ fi
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP="$BACKUPS/$STAMP"
 mkdir -p "$BACKUP"
-for old in local-engine.py speech_flow.py studio.html content-studio.js pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for old in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
 done
 
-for fresh in local-engine.py speech_flow.py studio.html content-studio.js pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for fresh in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   mv "$STAGE/$fresh" "$TARGET/$fresh"
 done
 for optional in watermark-my-logo-full.png app-icon-512.png; do
   [ -s "$STAGE/$optional" ] && mv "$STAGE/$optional" "$TARGET/$optional" || true
 done
 
-echo "Voice Studio 2.8.6 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.8.7 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -300,341 +301,8 @@ RESOURCES="$APP_BUILD/Contents/Resources"
 PLIST="$APP_BUILD/Contents/Info.plist"
 mkdir -p "$MACOS" "$RESOURCES"
 
-# Native macOS-App: eigenes Fenster mit WKWebView, kein Safari/Chrome.
-cat > "$TARGET/VoiceStudioApp.swift" <<'SWIFT'
-import Cocoa
-import WebKit
-import Foundation
-import Darwin
-
-final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
-    private var window: NSWindow!
-    private var webView: WKWebView!
-    private var engineProcess: Process?
-    private var engineOutHandle: FileHandle?
-    private var engineErrHandle: FileHandle?
-
-    private let studioURL = URL(string: "http://127.0.0.1:8787/studio/")!
-    private let healthURL = URL(string: "http://127.0.0.1:8787/health")!
-
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        NSApp.setActivationPolicy(.regular)
-        buildMenus()
-
-        let config = WKWebViewConfiguration()
-        config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.8.6"
-
-        webView = WKWebView(frame: .zero, configuration: config)
-        webView.navigationDelegate = self
-        webView.allowsBackForwardNavigationGestures = true
-
-        window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 1500, height: 940),
-            styleMask: [.titled, .closable, .miniaturizable, .resizable],
-            backing: .buffered,
-            defer: false
-        )
-        window.title = "DĀR AL TAWḤĪD · Voice Studio"
-        window.titleVisibility = .hidden
-        window.titlebarAppearsTransparent = true
-        window.backgroundColor = NSColor(red: 0.024, green: 0.075, blue: 0.094, alpha: 1)
-        window.minSize = NSSize(width: 1000, height: 680)
-        window.contentView = webView
-        window.center()
-        window.makeKeyAndOrderFront(nil)
-        NSApp.activate(ignoringOtherApps: true)
-
-        showLoading()
-        waitForEngine(attempt: 0)
-    }
-
-    private func menuItem(_ title: String, action: Selector?, key: String = "",
-                          modifiers: NSEvent.ModifierFlags = [.command],
-                          target: AnyObject? = nil) -> NSMenuItem {
-        let item = NSMenuItem(title: title, action: action, keyEquivalent: key)
-        item.keyEquivalentModifierMask = key.isEmpty ? [] : modifiers
-        item.target = target
-        return item
-    }
-
-    private func buildMenus() {
-        let main = NSMenu()
-        NSApp.mainMenu = main
-
-        let appRoot = NSMenuItem()
-        main.addItem(appRoot)
-        let appMenu = NSMenu(title: "DĀR Voice Studio")
-        appRoot.submenu = appMenu
-        appMenu.addItem(menuItem("Über DĀR Voice Studio", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:))))
-        appMenu.addItem(.separator())
-        appMenu.addItem(menuItem("DĀR Voice Studio ausblenden", action: #selector(NSApplication.hide(_:)), key: "h"))
-        let hideOthers = menuItem("Andere ausblenden", action: #selector(NSApplication.hideOtherApplications(_:)), key: "h", modifiers: [.command, .option])
-        appMenu.addItem(hideOthers)
-        appMenu.addItem(menuItem("Alle einblenden", action: #selector(NSApplication.unhideAllApplications(_:))))
-        appMenu.addItem(.separator())
-        appMenu.addItem(menuItem("DĀR Voice Studio beenden", action: #selector(NSApplication.terminate(_:)), key: "q"))
-
-        let fileRoot = NSMenuItem()
-        main.addItem(fileRoot)
-        let fileMenu = NSMenu(title: "Ablage")
-        fileRoot.submenu = fileMenu
-        fileMenu.addItem(menuItem("Fenster schließen", action: #selector(NSWindow.performClose(_:)), key: "w"))
-
-        let editRoot = NSMenuItem()
-        main.addItem(editRoot)
-        let editMenu = NSMenu(title: "Bearbeiten")
-        editRoot.submenu = editMenu
-
-        editMenu.addItem(menuItem("Widerrufen", action: Selector(("undo:")), key: "z"))
-        editMenu.addItem(menuItem("Wiederholen", action: Selector(("redo:")), key: "z", modifiers: [.command, .shift]))
-        editMenu.addItem(.separator())
-        editMenu.addItem(menuItem("Ausschneiden", action: Selector(("cut:")), key: "x"))
-        editMenu.addItem(menuItem("Kopieren", action: Selector(("copy:")), key: "c"))
-        editMenu.addItem(menuItem("Einsetzen", action: Selector(("paste:")), key: "v"))
-        editMenu.addItem(menuItem("Einsetzen und Stil anpassen", action: Selector(("pasteAsPlainText:")), key: "v", modifiers: [.command, .option, .shift]))
-        editMenu.addItem(menuItem("Löschen", action: Selector(("delete:"))))
-        editMenu.addItem(.separator())
-        editMenu.addItem(menuItem("Alles auswählen", action: Selector(("selectAll:")), key: "a"))
-
-        let viewRoot = NSMenuItem()
-        main.addItem(viewRoot)
-        let viewMenu = NSMenu(title: "Darstellung")
-        viewRoot.submenu = viewMenu
-        viewMenu.addItem(menuItem("Neu laden", action: #selector(reloadStudio(_:)), key: "r", target: self))
-        viewMenu.addItem(.separator())
-        viewMenu.addItem(menuItem("Vergrößern", action: #selector(zoomIn(_:)), key: "+", target: self))
-        viewMenu.addItem(menuItem("Verkleinern", action: #selector(zoomOut(_:)), key: "-", target: self))
-        viewMenu.addItem(menuItem("Originalgröße", action: #selector(resetZoom(_:)), key: "0", target: self))
-        viewMenu.addItem(.separator())
-        viewMenu.addItem(menuItem("Vollbild", action: #selector(toggleFullScreen(_:)), key: "f", modifiers: [.command, .control], target: self))
-
-        let windowRoot = NSMenuItem()
-        main.addItem(windowRoot)
-        let windowMenu = NSMenu(title: "Fenster")
-        windowRoot.submenu = windowMenu
-        windowMenu.addItem(menuItem("Minimieren", action: #selector(NSWindow.performMiniaturize(_:)), key: "m"))
-        windowMenu.addItem(menuItem("Zoom", action: #selector(NSWindow.performZoom(_:))))
-        NSApp.windowsMenu = windowMenu
-    }
-
-    @objc private func reloadStudio(_ sender: Any?) {
-        webView.reload()
-    }
-
-    @objc private func zoomIn(_ sender: Any?) {
-        webView.pageZoom = min(webView.pageZoom + 0.10, 2.0)
-    }
-
-    @objc private func zoomOut(_ sender: Any?) {
-        webView.pageZoom = max(webView.pageZoom - 0.10, 0.5)
-    }
-
-    @objc private func resetZoom(_ sender: Any?) {
-        webView.pageZoom = 1.0
-    }
-
-    @objc private func toggleFullScreen(_ sender: Any?) {
-        window.toggleFullScreen(sender)
-    }
-
-    private func ensureEngine() {
-        var request = URLRequest(url: healthURL)
-        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
-        request.timeoutInterval = 1.0
-
-        URLSession.shared.dataTask(with: request) { [weak self] _, response, error in
-            guard let self = self else { return }
-            let ok = (response as? HTTPURLResponse)?.statusCode == 200 && error == nil
-            if !ok {
-                self.startEngineDirectly()
-            }
-        }.resume()
-    }
-
-    private func startEngineDirectly() {
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard let self = self else { return }
-            if let p = self.engineProcess, p.isRunning { return }
-
-            let fm = FileManager.default
-            let home = fm.homeDirectoryForCurrentUser
-            let target = home.appendingPathComponent("Applications/DAR-Voice-Studio")
-            let python = home.appendingPathComponent("SerhatVoice/.venv/bin/python")
-            let engine = target.appendingPathComponent("local-engine.py")
-            let adobe = home.appendingPathComponent("SerhatVoice/Serhat_Adobe_MASTER.wav")
-            let fallback = home.appendingPathComponent("SerhatVoice/Serhat_FINAL_REF.wav")
-            let arabic = home.appendingPathComponent("SerhatVoice/Serhat_AR_MASTER.wav")
-
-            guard fm.isExecutableFile(atPath: python.path),
-                  fm.fileExists(atPath: engine.path) else {
-                return
-            }
-
-            let process = Process()
-            process.executableURL = python
-            process.arguments = [engine.path]
-            process.currentDirectoryURL = target
-
-            var env = ProcessInfo.processInfo.environment
-            env["DAR_VOICE_APP_HOME"] = target.path
-            env["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
-            env["PATH"] = "/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-            for ffmpeg in ["/opt/homebrew/bin/ffmpeg", "/usr/local/bin/ffmpeg", "/opt/local/bin/ffmpeg"] {
-                if FileManager.default.isExecutableFile(atPath: ffmpeg) {
-                    env["DAR_FFMPEG_BIN"] = ffmpeg
-                    break
-                }
-            }
-            if fm.fileExists(atPath: adobe.path) {
-                env["SERHAT_VOICE_REF"] = adobe.path
-            } else if fm.fileExists(atPath: fallback.path) {
-                env["SERHAT_VOICE_REF"] = fallback.path
-            }
-            if fm.fileExists(atPath: arabic.path) {
-                env["SERHAT_VOICE_REF_AR"] = arabic.path
-            }
-            process.environment = env
-
-            let logURL = target.appendingPathComponent("engine.log")
-            let errURL = target.appendingPathComponent("engine-error.log")
-            if !fm.fileExists(atPath: logURL.path) { fm.createFile(atPath: logURL.path, contents: nil) }
-            if !fm.fileExists(atPath: errURL.path) { fm.createFile(atPath: errURL.path, contents: nil) }
-
-            let out = FileHandle(forWritingAtPath: logURL.path)
-            let err = FileHandle(forWritingAtPath: errURL.path)
-            try? out?.seekToEnd()
-            try? err?.seekToEnd()
-            process.standardOutput = out
-            process.standardError = err
-
-            self.engineProcess = process
-            self.engineOutHandle = out
-            self.engineErrHandle = err
-
-            process.terminationHandler = { [weak self] _ in
-                self?.engineProcess = nil
-            }
-
-            do {
-                try process.run()
-            } catch {
-                NSLog("DĀR Voice engine start failed: \(error)")
-                self.engineProcess = nil
-            }
-        }
-    }
-
-    private func showLoading() {
-        let html = """
-        <!doctype html><html><head><meta charset="utf-8">
-        <style>
-        html,body{margin:0;height:100%;background:#061318;color:#f5f1e8;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-        body{display:grid;place-items:center}.box{text-align:center}
-        .brand{font-family:Georgia,serif;letter-spacing:.15em;color:#e8d29a;font-weight:700;font-size:18px}
-        .sub{margin-top:12px;color:#91a4a8;font-size:13px}
-        .dot{width:8px;height:8px;border-radius:50%;background:#73bea1;display:inline-block;margin-right:8px;box-shadow:0 0 0 5px rgba(115,190,161,.10)}
-        </style></head><body><div class="box">
-        <div class="brand">DĀR AL TAWḤĪD</div>
-        <div class="sub"><span class="dot"></span>Serhat Engine wird gestartet …</div>
-        </div></body></html>
-        """
-        webView.loadHTMLString(html, baseURL: nil)
-    }
-
-    private func waitForEngine(attempt: Int) {
-        var request = URLRequest(url: healthURL)
-        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
-        request.timeoutInterval = 1.5
-
-        URLSession.shared.dataTask(with: request) { [weak self] _, response, error in
-            guard let self = self else { return }
-            let ok = (response as? HTTPURLResponse)?.statusCode == 200 && error == nil
-            if ok {
-                DispatchQueue.main.async {
-                    self.webView.load(URLRequest(url: self.studioURL, cachePolicy: .reloadIgnoringLocalCacheData))
-                }
-                return
-            }
-
-            if attempt < 80 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                    self.waitForEngine(attempt: attempt + 1)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.showFailure()
-                }
-            }
-        }.resume()
-    }
-
-    private func escapedHTML(_ text: String) -> String {
-        text
-            .replacingOccurrences(of: "&", with: "&amp;")
-            .replacingOccurrences(of: "<", with: "&lt;")
-            .replacingOccurrences(of: ">", with: "&gt;")
-    }
-
-    private func errorTail() -> String {
-        let path = FileManager.default.homeDirectoryForCurrentUser
-            .appendingPathComponent("Applications/DAR-Voice-Studio/engine-error.log")
-        guard let data = try? Data(contentsOf: path),
-              let text = String(data: data, encoding: .utf8) else { return "" }
-        return String(text.suffix(5000))
-    }
-
-    private func showFailure() {
-        let details = escapedHTML(errorTail())
-        let detailBlock = details.isEmpty ? "" : "<pre>\(details)</pre>"
-        let html = """
-        <!doctype html><html><head><meta charset="utf-8">
-        <style>
-        html,body{margin:0;height:100%;background:#061318;color:#f5f1e8;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-        body{display:grid;place-items:center}.box{width:min(760px,85vw);padding:36px;text-align:center}
-        h1{font-size:21px}p{color:#9cafb4;line-height:1.55}
-        pre{text-align:left;white-space:pre-wrap;max-height:320px;overflow:auto;background:#031016;border:1px solid rgba(255,255,255,.1);padding:14px;border-radius:12px;color:#e8c7c7;font-size:11px}
-        </style></head><body><div class="box">
-        <h1>Serhat Engine konnte nicht gestartet werden</h1>
-        <p>Die App hat die Engine automatisch erneut gestartet. Unten steht der aktuelle Fehler aus dem lokalen Protokoll.</p>
-        \(detailBlock)
-        </div></body></html>
-        """
-        webView.loadHTMLString(html, baseURL: nil)
-    }
-
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
-                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        guard let url = navigationAction.request.url else {
-            decisionHandler(.cancel)
-            return
-        }
-        if let host = url.host, host != "127.0.0.1" && host != "localhost" {
-            NSWorkspace.shared.open(url)
-            decisionHandler(.cancel)
-            return
-        }
-        decisionHandler(.allow)
-    }
-
-    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        true
-    }
-
-    func applicationWillTerminate(_ notification: Notification) {
-        if let p = engineProcess, p.isRunning {
-            p.terminate()
-        }
-        try? engineOutHandle?.close()
-        try? engineErrHandle?.close()
-    }
-}
-
-let app = NSApplication.shared
-let delegate = AppDelegate()
-app.delegate = delegate
-app.run()
-SWIFT
+# Native macOS-App: versionierte Swift-Quelle wurde oben atomar aus dem Repository installiert.
+# Dadurch kann die echte Mac-App separat kompiliert und in CI geprüft werden.
 
 # Native Mac-App bauen. Auf sehr neuen macOS-Versionen darf swiftc nicht
 # automatisch gegen die aktuelle Systemversion (z. B. macOS 27) targeten,
@@ -650,7 +318,7 @@ if [ -n "$SWIFTC" ] && [ -n "$SDK_PATH" ]; then
   echo "Swift: $SWIFTC"
   echo "SDK:   $SDK_PATH"
   echo "Target: ${ARCH}-apple-macosx${DEPLOY_TARGET}"
-  if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$SWIFTC"       -sdk "$SDK_PATH"       -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"       "$TARGET/VoiceStudioApp.swift"       -o "$MACOS/DARVoiceStudioNative"       -framework Cocoa       -framework WebKit; then
+  if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$SWIFTC"       -sdk "$SDK_PATH"       -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"       "$TARGET/VoiceStudioApp.swift"       -o "$MACOS/DARVoiceStudioNative"       -framework Cocoa       -framework WebKit       -framework CoreAudio; then
     BUILD_OK=1
   fi
 fi
