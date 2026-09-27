@@ -105,7 +105,8 @@ function injectStyles(){
   .cs-inventory-toolbar .btn{min-width:40px;min-height:38px}
   .cs-inventory-summary{font-size:9px;color:#809397;line-height:1.45;margin:0 0 8px}
   .cs-inventory{display:grid;gap:7px;max-height:360px;overflow:auto;padding-right:2px}
-  .cs-inventory-item{border:1px solid var(--line);border-radius:11px;padding:9px;background:rgba(255,255,255,.025);color:#e8eeee}
+  .cs-inventory-item{width:100%;text-align:left;border:1px solid var(--line);border-radius:11px;padding:9px;background:rgba(255,255,255,.025);color:#e8eeee}
+  button.cs-inventory-item{cursor:pointer}.cs-inventory-item.editable:hover{border-color:rgba(217,182,111,.35);background:rgba(217,182,111,.05)}
   .cs-inventory-item b{display:block;font-size:11px;line-height:1.28}
   .cs-inventory-meta{display:block;margin-top:5px;font-size:9px;color:#7f9499;line-height:1.35}
   .cs-inventory-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
@@ -235,6 +236,12 @@ function bind(){
   document.addEventListener("click",e=>{
     const item=e.target.closest?.("[data-cs-item]");
     if(item)loadRemoteItem(item.dataset.csItem);
+    const inv=e.target.closest?.("[data-cs-inventory]");
+    if(inv){
+      const source=inv.dataset.csSource||"";
+      if(source==="live")loadLiveForEdit(inv.dataset.csInventory);
+      else if(source==="staging")loadRemoteItem(inv.dataset.csInventory);
+    }
   });
   setInterval(refreshQa,1200);
 }
@@ -577,7 +584,12 @@ function renderInventory(){
     const audioOk=!!String((row.staging||row.live)?.audio?.url||"").trim();
     const coverOk=!!String((row.staging||row.live)?.cover?.url||"").trim();
     const age=(Number(active.ageMin)||4)+"–"+(Number(active.ageMax)||10)+" J.";
-    return '<div class="cs-inventory-item"><b>'+escapeHtml(row.title||active.id)+'</b><span class="cs-inventory-meta">'+escapeHtml(inventoryKindLabel(active.kind||"story"))+' · '+escapeHtml(age)+' · Text '+(textOk?"✓":"–")+' · Audio '+(audioOk?"✓":"–")+' · Cover '+(coverOk?"✓":"–")+'</span><span class="cs-inventory-chips">'+chips.join("")+'</span></div>';
+    const source=row.staging?"staging":row.live?"live":"";
+    const id=(row.staging||row.live)?.id||"";
+    const open=source?'<button type="button" class="cs-inventory-item editable" data-cs-inventory="'+escapeHtml(id)+'" data-cs-source="'+source+'">':'<div class="cs-inventory-item">';
+    const close=source?'</button>':'</div>';
+    const editHint=source==='live'?' · anklicken zum Bearbeiten':source==='staging'?' · Arbeitsversion öffnen':'';
+    return open+'<b>'+escapeHtml(row.title||active.id)+'</b><span class="cs-inventory-meta">'+escapeHtml(inventoryKindLabel(active.kind||"story"))+' · '+escapeHtml(age)+' · Text '+(textOk?"✓":"–")+' · Audio '+(audioOk?"✓":"–")+' · Cover '+(coverOk?"✓":"–")+escapeHtml(editHint)+'</span><span class="cs-inventory-chips">'+chips.join("")+'</span>'+close;
   }).join("");
 }
 async function loadLibrary(force=false){
@@ -599,6 +611,44 @@ async function loadLibrary(force=false){
   };
   renderInventory();
   if(legacy.status==="rejected"&&!workerSecret())setStudioMessage("Kids-Bestand konnte nicht geladen werden. Admin-Verbindung ist ebenfalls nicht gesetzt.","warn");
+}
+
+async function loadLiveForEdit(id){
+  const x=inventoryState.live.find(i=>i.id===id);
+  if(!x){setStudioMessage("Live-Inhalt wurde nicht gefunden.","bad");return}
+  studioKind=x.appTarget==="ios"?"ios":(x.kind||"story");
+  contentId=x.id;
+  savedRevision=x.revision||0;
+  contentStatus="draft";
+  stagingPublished=false;
+  productionPhase="draft";
+  productionError="";
+  document.querySelectorAll("[data-cs-kind]").forEach(b=>b.classList.toggle("active",b.dataset.csKind===studioKind));
+  q("csTitle").value=x.title||"";
+  q("csCategory").value=x.category||"";
+  q("csTopic").value=x.topic||"";
+  q("csProphet").value=x.prophetId||"";
+  q("csAgeMin").value=String(x.ageMin||4);
+  q("csAgeMax").value=String(x.ageMax||10);
+  q("csModeRead").checked=x.modes?.read!==false;
+  q("csModeListen").checked=x.modes?.listen!==false;
+  q("csSources").value=(x.sourceRefs||[]).join("\n");
+  q("text").value=x.text||"";
+  coverAsset=x.cover?.url?x.cover:null;
+  audioAsset=x.audio?.url?x.audio:null;
+  quizDraft=Array.isArray(x.quiz?.questions)?x.quiz.questions:[];
+  gameDraft=x.game&&typeof x.game==="object"?x.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
+  coverFile=null;
+  coverRemoteUrl="";
+  q("csCover")?.querySelector("img")?.remove();
+  if(coverAsset?.url)renderCover(coverAsset.url);
+  q("csCoverTitle").textContent=x.title||"Inhalt";
+  renderKindEditor();
+  if(typeof renderAnalysis==="function")renderAnalysis();
+  renderStatus();
+  refreshQa();
+  persistDraft();
+  setStudioMessage("Live-Version als Arbeitskopie geladen. Deine Änderungen gehen zuerst nur ins Staging; die aktuelle Live-Version bleibt unverändert, bis du erneut Test → Live veröffentlichst.","good");
 }
 
 async function loadRemoteItem(id){
