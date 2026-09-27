@@ -1,10 +1,10 @@
 {
-  "version": "2.9.13",
-  "updatedAt": "2026-09-28T01:03:00+02:00",
+  "version": "2.9.14",
+  "updatedAt": "2026-09-28T01:10:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v24",
+  "cache": "dar-voice-studio-v25",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -326,7 +326,10 @@
     "deArabicFlowStrategy": "context bridge when clean; normal tight-join fallback when bridge fails",
     "inlineArabicMaxSecondsBase": 0.95,
     "inlineArabicMaxSecondsPerLetter": 0.25,
-    "contextBridgeNonfatalFallback": true
+    "contextBridgeNonfatalFallback": true,
+    "coreArabicDurationGuard": true,
+    "coreArabicMaxSecondsBase": 1.2,
+    "coreArabicMaxSecondsPerLetter": 0.4
   },
   "contentStudio": {
     "enabled": true,
@@ -529,10 +532,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "a035fb409992bea9b9f2b1c8282ffa2d349be50d",
+  "releaseRef": "51e86a96d06586b4c0181335cbd3cc36be006bfd",
   "releaseChannel": "validated-main",
   "updateRepair": true,
-  "updateRepairReason": "safe contextual DE-Arabic coarticulation with automatic normal-render fallback",
+  "updateRepairReason": "core Arabic lock QA hotfix: Qurʾān no longer fails short_arabic_too_long while silence/plateau/clipping guards remain active",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
