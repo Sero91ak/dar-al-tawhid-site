@@ -59,7 +59,7 @@ jobs:
               "VoiceStudioIcon.png",
               "AppIcon.icns",
               "CFBundleIconFile",
-              "2.9.2",
+              "2.9.3",
           ]
           missing=[x for x in required if x not in installer]
           if missing:
@@ -84,9 +84,10 @@ jobs:
               "bash -n",
           ]
           installer_required=[
-              "update-mac.command?v=292",
+              "update-mac.command?v=293",
               "chmod +x \"$TARGET/update-mac.command\"",
-              "CFBundleShortVersionString</key><string>2.9.2",
+              "CFBundleShortVersionString</key><string>2.9.3",
+              "alphabet-audio-studio.js?v=293",
           ]
           html_required=[
               'id="updateBtn"',
@@ -102,7 +103,7 @@ jobs:
               "checkForUpdates",
               "installAvailableUpdate",
               "update-mac.command",
-              'DĀRVoiceStudioMac/2.9.2',
+              'DĀRVoiceStudioMac/2.9.3',
           ]
 
           groups=[
@@ -208,6 +209,7 @@ jobs:
       - name: Validate zero-detour Content Studio workflow
         run: |
           node --check voice-studio/content-studio.js
+          node --check voice-studio/alphabet-audio-studio.js
           python - <<'PY'
           from pathlib import Path
           src=Path("voice-studio/content-studio.js").read_text(encoding="utf-8")
@@ -235,6 +237,71 @@ jobs:
           if 'audioAsset=null;' not in src or 'stagingPublished=false;' not in src:
               raise SystemExit("Text edits must invalidate stale production assets/status")
           print("Zero-detour Content Studio workflow OK")
+          PY
+
+      - name: Validate strict Alif-Ba audio workflow
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          studio=Path("voice-studio/alphabet-audio-studio.js").read_text(encoding="utf-8")
+          installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          kids=Path("test/kids/index.html").read_text(encoding="utf-8")
+          manifest=Path("test/kids/data/alphabet-audio.json").read_text(encoding="utf-8")
+
+          groups=[
+              ("html",html,[
+                  'id="alphabetAudioSection"',
+                  'id="alphabetPackNextBtn"',
+                  'id="alphabetPackApproveBtn"',
+                  'alphabet-audio-studio.js?v=293',
+              ]),
+              ("studio",studio,[
+                  '/api/admin/kids-alphabet-audio',
+                  '/api/admin/kids-alphabet-audio/verify',
+                  '/api/admin/kids-content/media',
+                  'function playerFullyHeard()',
+                  'await confirmQA()',
+                  'if(!qaConfirmed)',
+                  'lastGeneratedText',
+                  'serhat-alphabet-human-reviewed',
+                  'current.slot?.text',
+              ]),
+              ("installer",installer,[
+                  'alphabet-audio-studio.js?v=293',
+                  'alphabet-audio-studio.js',
+                  'CFBundleShortVersionString</key><string>2.9.3',
+              ]),
+              ("engine",engine,[
+                  '/studio/alphabet-audio-studio.js',
+                  'alphabet-audio-studio.js',
+              ]),
+              ("kids",kids,[
+                  'alphabet-audio.json?v=1',
+                  'audioEvidenceComplete',
+                  'PROGRESS_KEY="kids.alphabet.progress.v2."',
+                  'Referenzaufnahme noch nicht freigegeben',
+              ]),
+              ("manifest",manifest,[
+                  '"syntheticFallback": false',
+                  '"requireExplicitVerification": true',
+                  '"sourceVoice": "authorized-owner-voice"',
+              ]),
+          ]
+          errors=[]
+          for label,source,required in groups:
+              missing=[x for x in required if x not in source]
+              if missing:
+                  errors.append(label+": "+", ".join(missing))
+          forbidden=[x for x in ['function speakArabic','lang:"ar-SA"'] if x in kids]
+          if forbidden:
+              errors.append("kids system Arabic TTS fallback remains: "+", ".join(forbidden))
+          if 'if(!playerFullyHeard())' not in studio:
+              errors.append("human full-listen gate missing")
+          if errors:
+              raise SystemExit("Strict Alif-Ba audio validation failed: "+" | ".join(errors))
+          print("Strict Alif-Ba audio workflow OK")
           PY
 
       - name: Compile Voice Engine
@@ -356,8 +423,8 @@ jobs:
               'x-webkit-airplay="deny"',
               'darAudioOutput',
               'disableRemotePlayback',
-              'voice-studio-icon.png?v=292',
-              'VOICE STUDIO 2.9.2',
+              'voice-studio-icon.png?v=293',
+              'VOICE STUDIO 2.9.3',
           ]
           missing=[x for x in required if x not in html]
           if missing:
@@ -399,7 +466,7 @@ jobs:
               "VoiceStudioIcon",
               "updateLoadingProgress",
               "status: \"Bereit\"",
-              "DĀRVoiceStudioMac/2.9.2",
+              "DĀRVoiceStudioMac/2.9.3",
               "NSMenu(title: \"Produktion\")",
               "newContent",
               "focusText",
