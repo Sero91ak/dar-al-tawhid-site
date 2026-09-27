@@ -126,6 +126,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-visible-update-banner-2026-09-27",
+      "approvedBy": "user-explicit-sehe-keine-push-test-ios-besucher",
+      "reason": "Nutzer sieht keinen Update-Hinweis in Test/iOS/Besucher. Banner bei neuerer version.json wieder sichtbar machen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/test-update-surface.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-3d-icon-fill-well-2026-09-27",
       "approvedBy": "user-explicit-3d-zu-klein-flaeche-ausnutzen-linie",
       "reason": "3D-Bilder fuellen die Icon-Flaeche, 2px Abstand zur Linie, nicht darueber.",
