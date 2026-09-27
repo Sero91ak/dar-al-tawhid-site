@@ -5,6 +5,7 @@ import multiprocessing as mp
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
+from speech_flow import prepare_flow_text
 
 # Apple-Silicon: unsupported MPS ops dürfen auf CPU zurückfallen statt den Render abzubrechen.
 os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
@@ -1031,7 +1032,7 @@ def get_status():
     out["honorific_name_variants"]=sum(1 for r in RULES if r.get("required_honorific_key"))
     out["honorific_audio_keys"]=sorted(k for k in HONORIFIC_KEYS if k in HONORIFIC_TTS_BY_KEY)
     out["pronunciation_learning"]=learning_state()
-    out["performance_engine"]="continuous-sentence-flow-v1"
+    out["performance_engine"]="continuous-sentence-flow-v2"
     out["reference_prepares_total"]=MODEL_REFERENCE_PREPARES
     out["reference_cache_hits_total"]=MODEL_REFERENCE_CACHE_HITS
     out["render_cache"]=dict(RENDER_CACHE_STATS)
@@ -2550,9 +2551,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
         raise RuntimeError("Referenzstimme fehlt: "+str(REF_DE))
 
     speak,found=prepare(text)
-    plan=build_render_plan(speak)
-    if not plan:
-        raise ValueError("Sprechtext ist leer.")
+    synthesis_text,plan,flow_preflight=prepare_flow_text(text,speak,build_render_plan)
 
     if not RENDER_LOCK.acquire(blocking=False):
         raise RuntimeError("Es läuft bereits eine Audio-Erzeugung.")
@@ -2575,7 +2574,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
         last_error="",
         prosody_mode=doc_mode,
         last_qa={},
-        message=f"Audio wird vorbereitet · {doc_mode} …"
+        message=f"Satzfluss geprüft · {flow_preflight['sentences']} Sätze · Audio wird vorbereitet …"
     )
 
     try:
@@ -2688,7 +2687,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
         sr=int(model.sr)
         full=join_rendered_segments(outputs,sr)
         continuity_metrics=dict(getattr(join_rendered_segments,"_last_continuity",{}) or {})
-        final_metrics=audio_quality_metrics(full,sr,text,"de",doc_mode)
+        final_metrics=audio_quality_metrics(full,sr,synthesis_text,"de",doc_mode)
 
         fatal=[x for x in final_metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
         final_limits=QA_CONFIG.get("finalMaxInternalSilenceMsByMode") or {}
@@ -2705,7 +2704,8 @@ def generate(text:str,prepared:str="",style:str="auto"):
             "mode":doc_mode,
             "segment_modes":sorted({x.get("mode","narration") for x in qa_segments}),
             "rescued_segments":sum(1 for x in qa_segments if x.get("rescued")),
-            "continuity_engine":"continuous-flow-v1",
+            "continuity_engine":"continuous-sentence-flow-v2",
+            "preflight":flow_preflight,
             "continuity":continuity_metrics,
             "render_id":render_id,
             "audio_lock_confirmed":confirmed_audio_lock_keys(),
@@ -2720,7 +2720,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 "reference_cache_hits_total":MODEL_REFERENCE_CACHE_HITS,
                 "segment_cache_hits":sum(1 for x in qa_segments if x.get("segment_cache")=="hit"),
                 "segment_cache_misses":sum(1 for x in qa_segments if x.get("segment_cache")=="miss"),
-                "execution_strategy":"mlx-bounded-long-form-v1" if getattr(model,"_dar_backend","torch")=="mlx" else "continuous-sentence-flow-v1",
+                "execution_strategy":"mlx-bounded-long-form-v1" if getattr(model,"_dar_backend","torch")=="mlx" else "continuous-sentence-flow-v2",
                 "backend":"mlx" if getattr(model,"_dar_backend","torch")=="mlx" else "torch",
             },
         }
