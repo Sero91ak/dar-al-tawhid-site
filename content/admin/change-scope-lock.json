@@ -6535,6 +6535,22 @@
         "scripts/app-health-check.js",
         "content/admin/change-scope-lock.json"
       ]
+    },
+    {
+      "id": "tabbar-theme-glass-v1062-1085-2026-09-27",
+      "at": "2026-09-27T15:40:00.000Z",
+      "reason": "Nutzer: Tab-Leiste Farbe passt nicht zu jedem Erscheinungsbild. Einheitliches Glas, Tönung je Theme.",
+      "files": [
+        "assets/dar-bottom-nav-glass.css",
+        "assets/adaptive-layout.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ]
     }
   ],
   "enabled": true
