@@ -54,22 +54,23 @@ say_status "DĀR Voice Studio wird eingerichtet …"
 
 # Neue Version zuerst vollständig in einen isolierten Staging-Ordner laden.
 # Die funktionierende Installation wird erst nach allen Prüfungen ersetzt.
-curl -fsSL "$RAW/voice-studio/local-engine.py?v=292" -o "$STAGE/local-engine.py"
-curl -fsSL "$RAW/voice-studio/speech_flow.py?v=292" -o "$STAGE/speech_flow.py"
-curl -fsSL "$RAW/voice-studio/index.html?v=292" -o "$STAGE/studio.html"
-curl -fsSL "$RAW/voice-studio/content-studio.js?v=292" -o "$STAGE/content-studio.js"
-curl -fsSL "$RAW/voice-studio/VoiceStudioApp.swift?v=292" -o "$STAGE/VoiceStudioApp.swift"
-curl -fsSL "$RAW/voice-studio/update-mac.command?v=292" -o "$STAGE/update-mac.command"
-curl -fsSL "$RAW/voice-studio/voice-studio-icon.png?v=292" -o "$STAGE/voice-studio-icon.png"
-curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=292" -o "$STAGE/pronunciation-rules.json"
-curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=292" -o "$STAGE/voice-production-profile.json"
-curl -fsSL "$RAW/data/pronunciation/islamic-master-library.json?v=292" -o "$STAGE/islamic-master-library.json"
-curl -fsSL "$RAW/data/pronunciation/voice-regression-fixtures.json?v=292" -o "$STAGE/voice-regression-fixtures.json"
-curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=292" -o "$STAGE/validate-v2.py"
-curl -fsSL "$RAW/watermark-my-logo-full.png?v=292" -o "$STAGE/watermark-my-logo-full.png" || true
-curl -fsSL "$RAW/app-icon-512.png?v=292" -o "$STAGE/app-icon-512.png" || true
+curl -fsSL "$RAW/voice-studio/local-engine.py?v=293" -o "$STAGE/local-engine.py"
+curl -fsSL "$RAW/voice-studio/speech_flow.py?v=293" -o "$STAGE/speech_flow.py"
+curl -fsSL "$RAW/voice-studio/index.html?v=293" -o "$STAGE/studio.html"
+curl -fsSL "$RAW/voice-studio/content-studio.js?v=293" -o "$STAGE/content-studio.js"
+curl -fsSL "$RAW/voice-studio/alphabet-audio-studio.js?v=293" -o "$STAGE/alphabet-audio-studio.js"
+curl -fsSL "$RAW/voice-studio/VoiceStudioApp.swift?v=293" -o "$STAGE/VoiceStudioApp.swift"
+curl -fsSL "$RAW/voice-studio/update-mac.command?v=293" -o "$STAGE/update-mac.command"
+curl -fsSL "$RAW/voice-studio/voice-studio-icon.png?v=293" -o "$STAGE/voice-studio-icon.png"
+curl -fsSL "$RAW/data/pronunciation/pronunciation-rules.json?v=293" -o "$STAGE/pronunciation-rules.json"
+curl -fsSL "$RAW/data/pronunciation/voice-production-profile.json?v=293" -o "$STAGE/voice-production-profile.json"
+curl -fsSL "$RAW/data/pronunciation/islamic-master-library.json?v=293" -o "$STAGE/islamic-master-library.json"
+curl -fsSL "$RAW/data/pronunciation/voice-regression-fixtures.json?v=293" -o "$STAGE/voice-regression-fixtures.json"
+curl -fsSL "$RAW/scripts/voice-studio/validate-v2.py?v=293" -o "$STAGE/validate-v2.py"
+curl -fsSL "$RAW/watermark-my-logo-full.png?v=293" -o "$STAGE/watermark-my-logo-full.png" || true
+curl -fsSL "$RAW/app-icon-512.png?v=293" -o "$STAGE/app-icon-512.png" || true
 
-for required in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for required in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
     echo "FEHLER: Update-Datei fehlt oder ist leer: $required"
     exit 1
@@ -171,7 +172,7 @@ if ! /bin/bash -n "$STAGE/update-mac.command"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.9.2-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-2.9.3-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
@@ -179,11 +180,11 @@ fi
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP="$BACKUPS/$STAMP"
 mkdir -p "$BACKUP"
-for old in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for old in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
 done
 
-for fresh in local-engine.py speech_flow.py studio.html content-studio.js VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for fresh in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   mv "$STAGE/$fresh" "$TARGET/$fresh"
 done
 for optional in watermark-my-logo-full.png app-icon-512.png; do
@@ -191,7 +192,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
 done
 chmod +x "$TARGET/update-mac.command"
 
-echo "Voice Studio 2.9.2 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.9.3 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
