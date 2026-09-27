@@ -11,40 +11,37 @@ html[data-theme] {
   --bottom-tab-capsule-radius: 999px;
 }
 
-/* Opaque, theme-owned bar. No iOS saturate/blue frost. */
+/* Unified glass recipe: same blur/alpha, theme-tinted fill */
 :root,
 html[data-theme="dark"],
 html:not([data-theme]) {
-  --bottom-nav-fill: #0c0b09;
-  --bottom-nav-bg: #0c0b09;
-  --bottom-nav-bg-glass: #0c0b09;
-  --bottom-nav-border: rgba(255, 255, 255, 0.12);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.22);
-  --bottom-nav-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
-  --bottom-nav-blur: 0px;
-  --bottom-nav-saturation: 1;
+  --bottom-nav-bg: rgba(12, 10, 8, 0.62);
+  --bottom-nav-bg-glass: rgba(18, 15, 12, 0.22);
+  --bottom-nav-border: rgba(255, 255, 255, 0.16);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.28);
+  --bottom-nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+  --bottom-nav-blur: 32px;
+  --bottom-nav-saturation: 1.7;
 
-  --bottom-tab-active-bg: rgba(239, 215, 142, 0.14);
-  --bottom-tab-active-border: rgba(239, 215, 142, 0.24);
-  --bottom-tab-active-highlight: rgba(255, 255, 255, 0.2);
-  --bottom-tab-active-shadow: rgba(0, 0, 0, 0.16);
+  --bottom-tab-active-bg: rgba(239, 215, 142, 0.16);
+  --bottom-tab-active-border: rgba(239, 215, 142, 0.28);
+  --bottom-tab-active-highlight: rgba(255, 255, 255, 0.22);
+  --bottom-tab-active-shadow: rgba(0, 0, 0, 0.14);
   --bottom-tab-active-icon: #efd78e;
   --bottom-tab-active-text: #f8efd4;
   --bottom-tab-active-indicator: rgba(239, 215, 142, 0.88);
-  --bottom-tab-inactive-icon: rgba(248, 239, 212, 0.7);
-  --bottom-tab-inactive-text: rgba(248, 239, 212, 0.7);
+  --bottom-tab-inactive-icon: rgba(248, 239, 212, 0.72);
+  --bottom-tab-inactive-text: rgba(248, 239, 212, 0.72);
 }
 
-/* —— Klassisch Hell —— */
 html[data-theme="light"] {
-  --bottom-nav-fill: #f4ead2;
-  --bottom-nav-bg: #f4ead2;
-  --bottom-nav-bg-glass: #f4ead2;
-  --bottom-nav-border: rgba(155, 122, 60, 0.16);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.65);
-  --bottom-nav-shadow: 0 8px 24px rgba(120, 90, 40, 0.1);
-  --bottom-nav-blur: 0px;
-  --bottom-nav-saturation: 1;
+  --bottom-nav-bg: rgba(255, 248, 228, 0.7);
+  --bottom-nav-bg-glass: rgba(255, 250, 238, 0.3);
+  --bottom-nav-border: rgba(155, 122, 60, 0.18);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.72);
+  --bottom-nav-shadow: 0 10px 28px rgba(120, 90, 40, 0.08);
+  --bottom-nav-blur: 32px;
+  --bottom-nav-saturation: 1.7;
 
   --bottom-tab-active-bg: rgba(155, 122, 60, 0.14);
   --bottom-tab-active-border: rgba(155, 122, 60, 0.24);
@@ -57,16 +54,14 @@ html[data-theme="light"] {
   --bottom-tab-inactive-text: rgba(74, 55, 32, 0.68);
 }
 
-/* —— Sanft Elegant —— */
 html[data-theme="soft"] {
-  --bottom-nav-fill: #efe4dc;
-  --bottom-nav-bg: #efe4dc;
-  --bottom-nav-bg-glass: #efe4dc;
-  --bottom-nav-border: rgba(116, 76, 98, 0.16);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.58);
-  --bottom-nav-shadow: 0 8px 24px rgba(96, 62, 78, 0.1);
-  --bottom-nav-blur: 0px;
-  --bottom-nav-saturation: 1;
+  --bottom-nav-bg: rgba(255, 247, 242, 0.7);
+  --bottom-nav-bg-glass: rgba(255, 244, 240, 0.3);
+  --bottom-nav-border: rgba(116, 76, 98, 0.18);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.68);
+  --bottom-nav-shadow: 0 10px 28px rgba(96, 62, 78, 0.08);
+  --bottom-nav-blur: 32px;
+  --bottom-nav-saturation: 1.7;
 
   --bottom-tab-active-bg: rgba(116, 76, 98, 0.13);
   --bottom-tab-active-border: rgba(116, 76, 98, 0.24);
@@ -79,16 +74,14 @@ html[data-theme="soft"] {
   --bottom-tab-inactive-text: rgba(58, 38, 48, 0.68);
 }
 
-/* —— Royal Nachtblau —— */
 html[data-theme="royal"] {
-  --bottom-nav-fill: #071629;
-  --bottom-nav-bg: #071629;
-  --bottom-nav-bg-glass: #071629;
-  --bottom-nav-border: rgba(239, 215, 142, 0.16);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.14);
-  --bottom-nav-shadow: 0 8px 26px rgba(0, 0, 0, 0.28);
-  --bottom-nav-blur: 0px;
-  --bottom-nav-saturation: 1;
+  --bottom-nav-bg: rgba(7, 21, 43, 0.64);
+  --bottom-nav-bg-glass: rgba(10, 28, 52, 0.22);
+  --bottom-nav-border: rgba(239, 215, 142, 0.18);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.18);
+  --bottom-nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  --bottom-nav-blur: 32px;
+  --bottom-nav-saturation: 1.7;
 
   --bottom-tab-active-bg: rgba(239, 215, 142, 0.13);
   --bottom-tab-active-border: rgba(239, 215, 142, 0.24);
@@ -101,16 +94,14 @@ html[data-theme="royal"] {
   --bottom-tab-inactive-text: rgba(248, 236, 204, 0.7);
 }
 
-/* —— Bordeaux Royal Premium —— */
 html[data-theme="bordeaux"] {
-  --bottom-nav-fill: #140b0c;
-  --bottom-nav-bg: #140b0c;
-  --bottom-nav-bg-glass: #140b0c;
-  --bottom-nav-border: rgba(214, 190, 132, 0.16);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.12);
-  --bottom-nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
-  --bottom-nav-blur: 0px;
-  --bottom-nav-saturation: 1;
+  --bottom-nav-bg: rgba(22, 10, 12, 0.64);
+  --bottom-nav-bg-glass: rgba(62, 24, 30, 0.24);
+  --bottom-nav-border: rgba(214, 190, 132, 0.18);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.16);
+  --bottom-nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+  --bottom-nav-blur: 32px;
+  --bottom-nav-saturation: 1.7;
 
   --bottom-tab-active-bg: rgba(214, 190, 132, 0.14);
   --bottom-tab-active-border: rgba(214, 190, 132, 0.26);
@@ -123,16 +114,14 @@ html[data-theme="bordeaux"] {
   --bottom-tab-inactive-text: rgba(247, 238, 216, 0.7);
 }
 
-/* —— Dār al-Layl —— */
 html[data-theme="dar-al-layl"] {
-  --bottom-nav-fill: #050605;
-  --bottom-nav-bg: #050605;
-  --bottom-nav-bg-glass: #050605;
-  --bottom-nav-border: rgba(168, 139, 79, 0.14);
-  --bottom-nav-highlight: rgba(216, 193, 139, 0.16);
-  --bottom-nav-shadow: 0 8px 26px rgba(0, 0, 0, 0.3);
-  --bottom-nav-blur: 0px;
-  --bottom-nav-saturation: 1;
+  --bottom-nav-bg: rgba(7, 11, 9, 0.64);
+  --bottom-nav-bg-glass: rgba(16, 22, 18, 0.22);
+  --bottom-nav-border: rgba(168, 139, 79, 0.16);
+  --bottom-nav-highlight: rgba(216, 193, 139, 0.18);
+  --bottom-nav-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+  --bottom-nav-blur: 32px;
+  --bottom-nav-saturation: 1.7;
 
   --bottom-tab-active-bg: rgba(168, 139, 79, 0.15);
   --bottom-tab-active-border: rgba(216, 193, 139, 0.26);
@@ -147,14 +136,6 @@ html[data-theme="dar-al-layl"] {
 
 /* —— Aurora (legacy theme) —— */
 html[data-theme="aurora"] {
-  --bottom-nav-fill: #081018;
-  --bottom-nav-bg: #081018;
-  --bottom-nav-bg-glass: #081018;
-  --bottom-nav-border: rgba(231, 213, 157, 0.16);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.14);
-  --bottom-nav-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
-  --bottom-nav-blur: 0px;
-  --bottom-nav-saturation: 1;
   --bottom-tab-active-bg: rgba(231, 213, 157, 0.14);
   --bottom-tab-active-border: rgba(231, 213, 157, 0.24);
   --bottom-tab-active-highlight: rgba(255, 255, 255, 0.16);
@@ -168,14 +149,13 @@ html[data-theme="aurora"] {
 
 /* —— Eisgold —— */
 html[data-theme="eisgold"] {
-  --bottom-nav-fill: #f7f4ea;
-  --bottom-nav-bg: #f7f4ea;
-  --bottom-nav-bg-glass: #f7f4ea;
-  --bottom-nav-border: rgba(200, 169, 90, 0.34);
-  --bottom-nav-highlight: rgba(255, 255, 255, 0.82);
-  --bottom-nav-shadow: 0 8px 24px rgba(20, 32, 51, 0.08);
-  --bottom-nav-blur: 0px;
-  --bottom-nav-saturation: 1;
+  --bottom-nav-bg: rgba(236, 246, 252, 0.7);
+  --bottom-nav-bg-glass: rgba(232, 244, 252, 0.28);
+  --bottom-nav-border: rgba(200, 169, 90, 0.22);
+  --bottom-nav-highlight: rgba(255, 255, 255, 0.78);
+  --bottom-nav-shadow: 0 10px 28px rgba(20, 32, 51, 0.08);
+  --bottom-nav-blur: 32px;
+  --bottom-nav-saturation: 1.7;
 
   --bottom-tab-active-bg: rgba(184, 150, 58, 0.22);
   --bottom-tab-active-border: rgba(184, 150, 58, 0.38);
@@ -188,24 +168,47 @@ html[data-theme="eisgold"] {
   --bottom-tab-inactive-text: #0a1628;
 }
 
-/* Opaque theme-owned bar — no saturate frost, no ice-blue overlay */
+/* —— Frosted glass: no transform on the bar so iOS blur can sample the page —— */
 html[data-theme] #bottomNav.bottom-nav,
 html[data-theme] #appChromeDock #bottomNav.bottom-nav,
-html.dar-ios-native-app #bottomNav.bottom-nav,
-html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav,
 #bottomNav.bottom-nav,
 .bottom-nav {
-  background: var(--bottom-nav-fill) !important;
-  background-color: var(--bottom-nav-fill) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: var(--bottom-nav-bg-glass) !important;
   background-image: none !important;
   border: 1px solid var(--bottom-nav-border) !important;
   box-shadow: var(--bottom-nav-shadow), inset 0 1px 0 var(--bottom-nav-highlight) !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
+  -webkit-backdrop-filter: blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation)) !important;
+  backdrop-filter: blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation)) !important;
   contain: none !important;
   isolation: auto !important;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
+  transform: none !important;
+  -webkit-transform: none !important;
+}
+
+html.dar-ios-native-app #bottomNav.bottom-nav,
+html.dar-ios-native-app #appChromeDock #bottomNav.bottom-nav {
+  -webkit-backdrop-filter: blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation)) !important;
+  backdrop-filter: blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation)) !important;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html[data-theme] #bottomNav.bottom-nav,
+  #bottomNav.bottom-nav,
+  .bottom-nav {
+    background: var(--bottom-nav-bg) !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  html[data-theme] #bottomNav.bottom-nav,
+  #bottomNav.bottom-nav,
+  .bottom-nav {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background: var(--bottom-nav-bg) !important;
+  }
 }
 
 /* —— Tabs: touch area unchanged, visual capsule via ::before —— */
@@ -266,8 +269,8 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn::before,
   z-index: 0 !important;
   background: var(--bottom-tab-active-bg) !important;
   border: 1px solid var(--bottom-tab-active-border) !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
+  -webkit-backdrop-filter: blur(10px) saturate(120%) !important;
+  backdrop-filter: blur(10px) saturate(120%) !important;
   box-shadow:
     0 4px 12px var(--bottom-tab-active-shadow),
     inset 0 1px 0 var(--bottom-tab-active-highlight) !important;
@@ -286,6 +289,7 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
   background: transparent !important;
   box-shadow: none !important;
   filter: none !important;
+  border-radius: 999px !important;
 }
 
 html[data-theme] #bottomNav.bottom-nav .bottom-nav-btn.active::before,
@@ -372,7 +376,7 @@ html[data-theme] #bottomNav.bottom-nav .bottom-nav-pill,
   }
 }
 
-/* iOS/TestFlight: Tab-Bar deckend je Erscheinungsbild. Oben beim Scrollen kein Blur. */
+/* iOS/TestFlight: Tab-Bar bleibt Glas. Oben beim Scrollen kein Blur/Translucent. */
 html.dar-ios-native-app .top-shell,
 html.dar-ios-native-app .header,
 html.dar-ios-native-app .header.theme-hero-surface,
@@ -401,4 +405,108 @@ html.dar-ios-native-app #topSwimAura{
   pointer-events: none !important;
   height: 0 !important;
   background: none !important;
+}
+
+/* APP_TOP_SOLID_LOCK_V1006
+   Appweit: obere Safe-Area / Header niemals milchig, geblurt oder translucent.
+   Die untere #bottomNav-Glasoptik bleibt ausdrücklich unangetastet. */
+html.dar-ios-native-app,
+html.dar-android-native-app,
+html.is-standalone-pwa{
+  --dar-app-top-solid:
+    var(--quran-page-bg,
+      var(--theme-feed-bg,
+        var(--dar-edge-fill,
+          var(--page-cover,
+            var(--outer-bg-flat,
+              var(--bg,#050706))))));
+}
+
+html.dar-ios-native-app :is(.top-shell,.header,.header.theme-hero-surface,.sf-top,.qov-header,.app-bar,.view-head,.settings-page-head),
+html.dar-android-native-app :is(.top-shell,.header,.header.theme-hero-surface,.sf-top,.qov-header,.app-bar,.view-head,.settings-page-head),
+html.is-standalone-pwa :is(.top-shell,.header,.header.theme-hero-surface,.sf-top,.qov-header,.app-bar,.view-head,.settings-page-head){
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  filter:none!important;
+  background:var(--dar-app-top-solid)!important;
+  background-color:var(--dar-app-top-solid)!important;
+  background-image:none!important;
+}
+
+html.dar-ios-native-app :is(.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura),
+html.dar-android-native-app :is(.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura),
+html.is-standalone-pwa :is(.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura){
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  height:0!important;
+  min-height:0!important;
+  max-height:0!important;
+  background:none!important;
+  filter:none!important;
+  pointer-events:none!important;
+}
+
+html.dar-ios-native-app :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::before,
+html.dar-ios-native-app :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::after,
+html.dar-android-native-app :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::before,
+html.dar-android-native-app :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::after,
+html.is-standalone-pwa :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::before,
+html.is-standalone-pwa :is(.top-shell,.header,.sf-top,.qov-header,.app-bar)::after{
+  content:none!important;
+  display:none!important;
+  opacity:0!important;
+  background:none!important;
+  background-image:none!important;
+  filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+/* Mobile Browser/Test shell: gleiches Verhalten wie installierte App. */
+@media (max-width:900px){
+  html[data-theme] :is(.top-shell,.header,.header.theme-hero-surface,.sf-top,.qov-header,.app-bar,.view-head,.settings-page-head){
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+    filter:none!important;
+    background:
+      var(--quran-page-bg,
+        var(--theme-feed-bg,
+          var(--dar-edge-fill,
+            var(--page-cover,
+              var(--outer-bg-flat,
+                var(--bg,#050706))))))!important;
+    background-image:none!important;
+  }
+  html[data-theme] :is(.top-edge-fade,.top-swim-aura,#topEdgeFade,#topSwimAura){
+    display:none!important;
+    visibility:hidden!important;
+    opacity:0!important;
+    background:none!important;
+    filter:none!important;
+    pointer-events:none!important;
+  }
+}
+
+
+/* Adult dock only: no Kids oval, no sticky-hover ghost, full tab hit-target */
+html #bottomNav.bottom-nav,
+html.dar-ios-native-app #bottomNav.bottom-nav,
+html.dar-test-performance-v1 #bottomNav.bottom-nav{
+  overflow:hidden!important;
+  pointer-events:auto!important;
+}
+html #bottomNav.bottom-nav .bottom-nav-btn{
+  pointer-events:auto!important;
+  isolation:isolate;
+  overflow:visible!important;
+}
+html #bottomNav.bottom-nav .bottom-nav-btn > *{
+  pointer-events:none!important;
+  position:relative;
+  z-index:1;
+}
+html #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active)::before,
+html #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active):not(.is-pressed)::before{
+  opacity:0!important;
 }
