@@ -551,9 +551,20 @@ input,select{
     <div id="learnState" class="learning-status">Lernwortschatz wird geladen …</div>
   </section>
 
-  <section class="side-section">
-    <div class="side-title">Kids-App</div>
-    <div class="notice">Audio zuerst erzeugen, anhören und die Aussprache bestätigen. Danach kannst du die fertige WAV direkt speichern. Die automatische Kids-App-Ablage wird separat an den Audio-Speicher angebunden.</div>
+  <section class="side-section" id="alphabetAudioSection">
+    <div class="side-title">Alif-Bāʾ Audio-Pack</div>
+    <div class="notice">Strenger Modus: 140 Einzelclips · Serhat-Stimme · jeder Clip anhören · erst danach freigeben. Die Kids-App verwendet niemals arabisches System-TTS als Referenz.</div>
+    <div id="alphabetPackProgress" class="learning-status" style="margin-top:9px">Manifest wird geladen …</div>
+    <div id="alphabetPackCurrent" style="margin:10px 0;padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.025)">
+      <div id="alphabetPackLabel" style="font-size:11px;color:var(--muted)">Noch kein Slot gewählt</div>
+      <div id="alphabetPackArabic" dir="rtl" lang="ar" style="font-size:34px;text-align:center;margin:8px 0;color:var(--gold2)">—</div>
+    </div>
+    <div class="learning-actions">
+      <button id="alphabetPackNextBtn" class="btn secondary" type="button">Nächsten Clip erzeugen</button>
+      <button id="alphabetPackApproveBtn" class="btn primary" type="button" disabled>Angehört & freigeben</button>
+    </div>
+    <button id="alphabetPackRetryBtn" class="btn quiet" type="button" style="width:100%;margin-top:7px" disabled>Clip neu erzeugen</button>
+    <div id="alphabetPackMessage" class="learning-status" style="margin-top:8px">Nur ausdrücklich bestätigte Clips werden veröffentlicht.</div>
   </section>
 
   <section id="engineSetupSection" class="side-section">
@@ -1438,4 +1449,4 @@ loadLibrary();
 checkHealth({quiet:true}).then(()=>analyzeProsody());
 setInterval(()=>checkHealth({quiet:true}),5000);
 </script>
-<script src="content-studio.js?v=292"></script>\n</body>\n</html>\n
+<script src="content-studio.js?v=292"></script>\n<script src="alphabet-audio-studio.js?v=1"></script>\n</body>\n</html>\n
