@@ -66,6 +66,50 @@ function statusLabel(){
   if(contentStatus==="published")return"Veröffentlicht";
   return"Entwurf";
 }
+function qaSnapshot(){
+  const text=String(q("text")?.value||"").trim();
+  const script=typeof voiceScript==="function"?voiceScript():text;
+  const same=!!lastAudio&&lastGeneratedText===script;
+  const cover=!!(coverFile||coverRemoteUrl||coverAsset?.url);
+  const audio=!q("csModeListen")?.checked||same||!!audioAsset?.url;
+  const pron=!q("csModeListen")?.checked||Boolean(qaConfirmed&&same)||Boolean(audioAsset?.url&&contentId);
+  const title=!!String(q("csTitle")?.value||"").trim();
+  return{text:!!text,title,cover,audio,pron,test:stagingPublished,live:productionPhase==="live-published"};
+}
+function renderWorkflow(){
+  const state=qaSnapshot();
+  const current=!state.text?"text":!state.audio||!state.pron?"audio":!state.cover?"cover":!state.test?"test":!state.live?"live":"live";
+  document.querySelectorAll("[data-cs-step]").forEach(btn=>{
+    const step=btn.dataset.csStep;
+    let value="blocked";
+    if(step==="text")value=state.text?"ready":current==="text"?"current":"blocked";
+    if(step==="audio")value=(state.audio&&state.pron)?"ready":current==="audio"?"current":"blocked";
+    if(step==="cover")value=state.cover?"ready":current==="cover"?"current":"blocked";
+    if(step==="test")value=state.test?"ready":current==="test"?"current":"blocked";
+    if(step==="live")value=state.live?"ready":current==="live"?"current":"blocked";
+    btn.dataset.state=value;
+  });
+}
+function goToWorkflowStep(step){
+  const target={
+    text:q("text"),
+    audio:q("playerWrap")||q("generate"),
+    cover:q("csCover"),
+    test:q("csPublishTest"),
+    live:q("csPublishLive")
+  }[step];
+  if(!target)return;
+  target.scrollIntoView?.({behavior:"smooth",block:"center"});
+  if(["TEXTAREA","INPUT","BUTTON"].includes(target.tagName))setTimeout(()=>target.focus?.({preventScroll:true}),180);
+}
+function focusNextProductionAction(){
+  const state=qaSnapshot();
+  if(!state.text)return goToWorkflowStep("text");
+  if(!state.audio||!state.pron)return goToWorkflowStep("audio");
+  if(!state.cover)return goToWorkflowStep("cover");
+  if(!state.test)return goToWorkflowStep("test");
+  if(!state.live)return goToWorkflowStep("live");
+}
 function renderStatus(){
   const el=q("csStatus"); if(!el)return;
   el.textContent=statusLabel();
@@ -77,6 +121,7 @@ function renderStatus(){
   if(quickLive)quickLive.disabled=liveDisabled;
   const produce=q("csQuickProduce");if(produce)produce.disabled=busy;
   const copy=q("csQuickCopy");if(copy)copy.disabled=!String(q("text")?.value||"").trim();
+  renderWorkflow();
 }
 function injectStyles(){
   const st=document.createElement("style");
@@ -88,6 +133,12 @@ function injectStyles(){
   .cs-nav-tabs{overflow-x:auto;scrollbar-width:none}.cs-nav-tabs::-webkit-scrollbar{display:none}
   .cs-fast-actions{margin-left:auto;flex:0 0 auto}
   .cs-fast-actions .btn{min-height:34px;padding:7px 10px;border-radius:10px;font-size:10px;white-space:nowrap}
+  .cs-flow{display:flex;align-items:center;gap:4px;min-width:0}
+  .cs-flow-step{appearance:none;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.025);color:#82979d;border-radius:999px;padding:5px 8px;font-size:9px;font-weight:850;white-space:nowrap;cursor:pointer}
+  .cs-flow-step[data-state="ready"]{color:#9bd8ba;border-color:rgba(121,190,160,.24);background:rgba(121,190,160,.045)}
+  .cs-flow-step[data-state="current"]{color:#f0d59a;border-color:rgba(217,182,111,.35);background:rgba(217,182,111,.07)}
+  .cs-flow-step[data-state="blocked"]{opacity:.48}
+  .cs-flow-step:focus-visible{outline:2px solid rgba(217,182,111,.55);outline-offset:1px}
   .cs-fast-actions .primary{box-shadow:none}
   .cs-tab{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#aab9bd;border-radius:10px;padding:8px 10px;font-size:10px;font-weight:800;white-space:nowrap;cursor:pointer}
   .cs-tab.active{border-color:rgba(217,182,111,.42);background:rgba(217,182,111,.09);color:#f1d59a}
@@ -125,7 +176,7 @@ function injectStyles(){
   .cs-inventory-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
   .cs-chip{font-size:8px;font-weight:900;padding:3px 6px;border-radius:999px;border:1px solid rgba(255,255,255,.09);color:#b8c7ca}
   .cs-chip.legacy{color:#e8d08c;border-color:rgba(232,208,140,.26)}.cs-chip.test{color:#9ecceb;border-color:rgba(112,175,220,.28)}.cs-chip.live{color:#a8ddc5;border-color:rgba(112,205,160,.28)}.cs-chip.internal{color:#e3b0df;border-color:rgba(195,125,190,.25)}
-  @media(max-width:1100px){.content-studio-nav{align-items:flex-start;flex-direction:column;top:64px}.cs-nav-tabs,.cs-fast-actions{width:100%;overflow-x:auto}.cs-fast-actions{margin-left:0}.cs-fast-actions .btn{flex:0 0 auto}}
+  @media(max-width:1240px){.content-studio-nav{align-items:flex-start;flex-direction:column;top:64px}.cs-nav-tabs,.cs-flow,.cs-fast-actions{width:100%;overflow-x:auto}.cs-fast-actions{margin-left:0}.cs-fast-actions .btn,.cs-flow-step{flex:0 0 auto}}
   @media(max-width:900px){.cs-grid{grid-template-columns:1fr 1fr}.cs-field.span4{grid-column:1/-1}}
   @media(max-width:600px){.cs-grid{grid-template-columns:1fr}.cs-field.span2,.cs-field.span4{grid-column:1}.cs-actions{grid-template-columns:1fr}.cs-fast-actions .btn{min-height:36px}}
   `;
@@ -139,11 +190,18 @@ function navHtml(){
       <button class="cs-tab" data-cs-kind="game">Kids · Spiele</button>
       <button class="cs-tab" data-cs-kind="ios">iOS · Inhalte</button>
     </div>
+    <div class="cs-flow" aria-label="Produktionsweg">
+      <button class="cs-flow-step" type="button" data-cs-step="text">Text</button>
+      <button class="cs-flow-step" type="button" data-cs-step="audio">Audio</button>
+      <button class="cs-flow-step" type="button" data-cs-step="cover">Cover</button>
+      <button class="cs-flow-step" type="button" data-cs-step="test">Test</button>
+      <button class="cs-flow-step" type="button" data-cs-step="live">Live</button>
+    </div>
     <div class="cs-fast-actions" aria-label="Schnellproduktion">
       <button id="csQuickNew" class="btn quiet" type="button" title="Neuen Inhalt starten">Neu</button>
       <button id="csQuickCopy" class="btn quiet" type="button" title="Aktuellen Text kopieren">Kopieren</button>
-      <button id="csQuickProduce" class="btn primary" type="button" title="Audio und Cover vorbereiten">Erzeugen</button>
-      <button id="csQuickTest" class="btn secondary" type="button" title="In Test veröffentlichen">Test</button>
+      <button id="csQuickProduce" class="btn primary" type="button" title="Audio und Cover vorbereiten · ⌘↩">Erzeugen</button>
+      <button id="csQuickTest" class="btn secondary" type="button" title="In Test veröffentlichen · ⇧⌘↩">Test</button>
       <button id="csQuickLive" class="btn secondary" type="button" title="Geprüfte Version live veröffentlichen" disabled>Live</button>
     </div>
   </nav>`;
@@ -258,7 +316,21 @@ function bind(){
   q("csQuickProduce")?.addEventListener("click",produce);
   q("csQuickTest")?.addEventListener("click",publishTest);
   q("csQuickLive")?.addEventListener("click",publishLive);
+  document.querySelectorAll("[data-cs-step]").forEach(btn=>btn.addEventListener("click",()=>goToWorkflowStep(btn.dataset.csStep)));
   q("csSaveConnection")?.addEventListener("click",saveConnection);
+  document.addEventListener("keydown",e=>{
+    const mod=e.metaKey||e.ctrlKey;
+    if(mod&&e.key==="Enter"&&!e.shiftKey){
+      e.preventDefault();
+      if(!busy)produce();
+      return;
+    }
+    if(mod&&e.shiftKey&&e.key==="Enter"){
+      e.preventDefault();
+      const test=q("csPublishTest");
+      if(test&&!test.disabled&&!busy)publishTest();
+    }
+  });
   q("csInventorySearch")?.addEventListener("input",renderInventory);
   q("csInventoryRefresh")?.addEventListener("click",()=>loadLibrary(true));
   document.addEventListener("click",e=>{
@@ -475,6 +547,7 @@ async function produce(){
     setProductionPhase(needsVoice&&!qaConfirmed?"awaiting-qa":"ready");
     if(workerSecret())await checkpointPackage(productionPhase);
     setStudioMessage(needsVoice&&!qaConfirmed?"Audio und Cover vorbereitet. Aussprache anhören und bestätigen; danach ist Test-Publish frei.":"Produktionspaket ist bereit für den Test-Publish.","good");
+    setTimeout(focusNextProductionAction,120);
   }catch(e){
     setProductionPhase("error",e.message||String(e));
     if(workerSecret()&&contentId){try{await checkpointPackage("error",productionError)}catch{}}
@@ -707,6 +780,7 @@ async function loadLegacyForEdit(id){
   if(typeof renderAnalysis==="function")renderAnalysis();
   renderStatus();refreshQa();persistDraft();
   setStudioMessage("BESTAND-Inhalt übernommen. Original bleibt unverändert. Text, Alter, Prophet, Quellen und vorhandene Quizfragen sind im Studio-Arbeitsentwurf erhalten. Jetzt Cover/Serhat-Audio vorbereiten und zuerst in Test-Kids veröffentlichen.","good");
+  setTimeout(()=>goToWorkflowStep("text"),80);
 }
 
 async function loadLiveForEdit(id){
@@ -748,6 +822,7 @@ async function loadLiveForEdit(id){
   refreshQa();
   persistDraft();
   setStudioMessage("Live-Version als Arbeitskopie geladen. Deine Änderungen gehen zuerst nur ins Staging; die aktuelle Live-Version bleibt unverändert, bis du erneut Test → Live veröffentlichst.","good");
+  setTimeout(()=>goToWorkflowStep("text"),80);
 }
 
 async function loadRemoteItem(id){
@@ -765,7 +840,7 @@ async function loadRemoteItem(id){
     coverAsset=x.cover?.url?x.cover:null;audioAsset=x.audio?.url?x.audio:null;
     quizDraft=Array.isArray(x.quiz?.questions)?x.quiz.questions:[];gameDraft=x.game&&typeof x.game==="object"?x.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
     coverFile=null;coverRemoteUrl="";if(coverAsset?.url)renderCover(coverAsset.url);q("csCoverTitle").textContent=x.title||"Inhalt";
-    renderKindEditor();if(typeof renderAnalysis==="function")renderAnalysis();renderStatus();refreshQa();setStudioMessage("Staging-Paket geladen.","good");
+    renderKindEditor();if(typeof renderAnalysis==="function")renderAnalysis();renderStatus();refreshQa();setStudioMessage("Staging-Paket geladen.","good");setTimeout(()=>goToWorkflowStep("text"),80);
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
 }
 function refreshQa(){
@@ -791,6 +866,6 @@ function refreshQa(){
 }
 function paintQa(id,ok,label){const el=q(id);if(!el)return;el.textContent=label;el.className=ok?"good":"warn"}
 
-window.DarContentStudio={mount,fields,loadLibrary,publishTest,publishLive,generateCover};
+window.DarContentStudio={mount,fields,loadLibrary,publishTest,publishLive,generateCover,produce,newCurrentItem,copyCurrentText,goToWorkflowStep,focusNextProductionAction};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
 })();
