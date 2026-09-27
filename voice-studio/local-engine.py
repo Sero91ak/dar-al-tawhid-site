@@ -3601,8 +3601,8 @@ class H(BaseHTTPRequestHandler):
                 "theme_color":"#071923",
                 "orientation":"any",
                 "icons":[
-                    {"src":"/studio/voice-studio-icon.png","sizes":"512x512","type":"image/png","purpose":"any"},
-                    {"src":"/studio/voice-studio-icon.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+                    {"src":"/studio/voice-studio-icon.png","sizes":"256x256","type":"image/png","purpose":"any"},
+                    {"src":"/studio/voice-studio-icon.png","sizes":"256x256","type":"image/png","purpose":"maskable"}
                 ]
             })
         elif p=="/data/pronunciation/pronunciation-rules.json":
