@@ -105,7 +105,9 @@
     "test/assets/dar-noble-3d-icons.js",
     "assets/dar-noble-3d-icons.js",
     "assets/dar-noble-3d-icons.css",
-    "assets/dar-3d-icons/"
+    "assets/dar-3d-icons/",
+    "data/offline-content-manifest.json",
+    "_headers"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -6367,6 +6369,29 @@
         "test/kids/shell.html",
         "test/kids/index.html",
         "test/kids/version.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-3d-icons-offline-full-v1053-1076-2026-09-27",
+      "approvedBy": "user-explicit-ios-test-3d-everywhere-offline",
+      "reason": "Nutzer: iOS- und Test-App überall 3D-Bilder anbinden, lokal speichern, Offline ohne Ruckeln.",
+      "paths": [
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/dar-noble-3d-icons.js",
+        "assets/dar-noble-3d-icons.css",
+        "assets/dar-3d-icons/",
+        "test/assets/dar-noble-3d-icons.js",
+        "test/assets/dar-noble-3d-icons.css",
+        "test/assets/dar-3d-icons/",
+        "data/offline-content-manifest.json",
+        "_headers",
+        "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     }

@@ -1,3 +1,9 @@
+/assets/dar-3d-icons/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/test/assets/dar-3d-icons/*
+  Cache-Control: public, max-age=31536000, immutable
+
 /.well-known/assetlinks.json
   Content-Type: application/json
   Cache-Control: no-cache, must-revalidate, max-age=0

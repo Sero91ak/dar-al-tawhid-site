@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1075';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1076';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -36,11 +36,41 @@ const APP_SHELL = [
   '/test/data/prophets/search-index.json',
   '/test/assets/dar-noble-3d-icons.js',
   '/test/assets/dar-noble-3d-icons.css',
+  '/test/assets/dar-3d-icons/audio.png',
+  '/test/assets/dar-3d-icons/bell.png',
+  '/test/assets/dar-3d-icons/calendar.png',
+  '/test/assets/dar-3d-icons/compass.png',
+  '/test/assets/dar-3d-icons/dua.png',
+  '/test/assets/dar-3d-icons/frauen.png',
+  '/test/assets/dar-3d-icons/hadith.png',
+  '/test/assets/dar-3d-icons/headphones.png',
+  '/test/assets/dar-3d-icons/heart.png',
   '/test/assets/dar-3d-icons/home.png',
   '/test/assets/dar-3d-icons/ilm.png',
-  '/test/assets/dar-3d-icons/posts.png',
-  '/test/assets/dar-3d-icons/quran.png',
+  '/test/assets/dar-3d-icons/image.png',
+  '/test/assets/dar-3d-icons/jummah.png',
+  '/test/assets/dar-3d-icons/library.png',
+  '/test/assets/dar-3d-icons/lock.png',
   '/test/assets/dar-3d-icons/more.png',
+  '/test/assets/dar-3d-icons/mosque.png',
+  '/test/assets/dar-3d-icons/news.png',
+  '/test/assets/dar-3d-icons/play.png',
+  '/test/assets/dar-3d-icons/posts.png',
+  '/test/assets/dar-3d-icons/prayer.png',
+  '/test/assets/dar-3d-icons/prophets.png',
+  '/test/assets/dar-3d-icons/qibla.png',
+  '/test/assets/dar-3d-icons/quiz.png',
+  '/test/assets/dar-3d-icons/quran.png',
+  '/test/assets/dar-3d-icons/ramadan.png',
+  '/test/assets/dar-3d-icons/saved.png',
+  '/test/assets/dar-3d-icons/scale.png',
+  '/test/assets/dar-3d-icons/scholars.png',
+  '/test/assets/dar-3d-icons/settings.png',
+  '/test/assets/dar-3d-icons/shield.png',
+  '/test/assets/dar-3d-icons/spark.png',
+  '/test/assets/dar-3d-icons/wasiyyah.png',
+  '/test/assets/dar-3d-icons/widgets.png',
+  '/test/assets/dar-3d-icons/zakat.png',
   '/test/assets/dar-quran-player.css',
   '/test/assets/ilm-research-chat.js',
   '/test/assets/ilm-research-chat.css',

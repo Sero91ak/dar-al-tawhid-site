@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1052';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1053';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -66,11 +66,41 @@ const APP_SHELL = [
   '/assets/global-update-banner.css',
   '/assets/dar-noble-3d-icons.js',
   '/assets/dar-noble-3d-icons.css',
+  '/assets/dar-3d-icons/audio.png',
+  '/assets/dar-3d-icons/bell.png',
+  '/assets/dar-3d-icons/calendar.png',
+  '/assets/dar-3d-icons/compass.png',
+  '/assets/dar-3d-icons/dua.png',
+  '/assets/dar-3d-icons/frauen.png',
+  '/assets/dar-3d-icons/hadith.png',
+  '/assets/dar-3d-icons/headphones.png',
+  '/assets/dar-3d-icons/heart.png',
   '/assets/dar-3d-icons/home.png',
-  '/assets/dar-3d-icons/quiz.png',
-  '/assets/dar-3d-icons/posts.png',
-  '/assets/dar-3d-icons/quran.png',
+  '/assets/dar-3d-icons/ilm.png',
+  '/assets/dar-3d-icons/image.png',
+  '/assets/dar-3d-icons/jummah.png',
+  '/assets/dar-3d-icons/library.png',
+  '/assets/dar-3d-icons/lock.png',
   '/assets/dar-3d-icons/more.png',
+  '/assets/dar-3d-icons/mosque.png',
+  '/assets/dar-3d-icons/news.png',
+  '/assets/dar-3d-icons/play.png',
+  '/assets/dar-3d-icons/posts.png',
+  '/assets/dar-3d-icons/prayer.png',
+  '/assets/dar-3d-icons/prophets.png',
+  '/assets/dar-3d-icons/qibla.png',
+  '/assets/dar-3d-icons/quiz.png',
+  '/assets/dar-3d-icons/quran.png',
+  '/assets/dar-3d-icons/ramadan.png',
+  '/assets/dar-3d-icons/saved.png',
+  '/assets/dar-3d-icons/scale.png',
+  '/assets/dar-3d-icons/scholars.png',
+  '/assets/dar-3d-icons/settings.png',
+  '/assets/dar-3d-icons/shield.png',
+  '/assets/dar-3d-icons/spark.png',
+  '/assets/dar-3d-icons/wasiyyah.png',
+  '/assets/dar-3d-icons/widgets.png',
+  '/assets/dar-3d-icons/zakat.png',
   '/assets/jummah-friday.js',
   '/data/jummah-series.json'
 ];
