@@ -1,8 +1,8 @@
 {
-  "version": 4,
+  "version": 5,
   "id": "KIDS_ARABIC_ALPHABET_V2",
   "audioSync": "KIDS_ALPHABET_AUDIO_SYNC_V1",
-  "note": "Hijāʾī-Reihenfolge. Ḥarakāt: Fatḥa a, Kasra i, Ḍamma u. Arabischer Sprechtext bleibt arabisch; wissenschaftliche Lautschrift ist davon getrennt. Synthetische Sprache ist nur Fallback, keine Makhārij-Referenz.",
+  "note": "Hijāʾī-Reihenfolge. Altersstufen fachlich vereinheitlicht. Hamza/Alif und Madd-Regeln werden getrennt erklärt. Arabischer Sprechtext bleibt arabisch; wissenschaftliche Lautschrift bleibt separat. Synthetische Sprache ist nur Fallback, keine Makhārij-Referenz.",
   "letters": [
     {
       "id": "alif",
@@ -41,8 +41,8 @@
       },
       "ages": {
         "4–5": "Das ist Alif. Ein gerader Strich. Wort: Hase. أَرْنَب",
-        "6–8": "Alif. Mit Hamza: أَ a, إِ i, أُ u. Wort أَرْنَب arnab.",
-        "9–10": "Alif verbindet nicht nach links. Hamza: أَ إِ أُ. Als Madd nach Fatḥa wird ا zu ā."
+        "6–8": "Alif. Am Anfang lernst du Hamza auf oder unter Alif: أَ a, إِ i, أُ u. Wort أَرْنَب arnab.",
+        "9–10": "Unterscheide Alif ا und Hamza ء: أَ، إِ، أُ sind Hamza auf oder unter Alif. Als Madd folgt ein Alif ohne eigene Ḥaraka auf Fatḥa und verlängert a zu ā."
       }
     },
     {
@@ -81,9 +81,9 @@
         "fin": "ـب"
       },
       "ages": {
-        "4–5": "Bā. Ein Punkt unten. Wort: Ente. بَطَّة",
-        "6–8": "Bā: بَ ba, بِ bi, بُ bu. Wort بَطَّة baṭṭa.",
-        "9–10": "Bā verbindet nach beiden Seiten. Punkt immer unten. بـ ـبـ ـب"
+        "4–5": "Bāʾ. Ein Punkt unten. Wort: Ente. بَطَّة",
+        "6–8": "Bāʾ: بَ ba, بِ bi, بُ bu. Ein Punkt unten. Wort بَطَّة baṭṭa.",
+        "9–10": "ب verbindet sich mit dem vorherigen und dem nächsten Buchstaben. Der Punkt bleibt unten: ب · بـ · ـبـ · ـب."
       }
     },
     {
@@ -122,9 +122,9 @@
         "fin": "ـت"
       },
       "ages": {
-        "4–5": "Tā. Zwei Punkte oben. Wort: Apfel. تُفَّاحَة",
-        "6–8": "Tā: تَ ta, تِ ti, تُ tu. Wort تُفَّاحَة tuffāḥa.",
-        "9–10": "Tā verbindet nach beiden Seiten. Zwei Punkte bleiben oben."
+        "4–5": "Tāʾ. Zwei Punkte oben. Wort: Apfel. تُفَّاحَة",
+        "6–8": "Tāʾ: تَ ta, تِ ti, تُ tu. Zwei Punkte oben. Wort تُفَّاحَة tuffāḥa.",
+        "9–10": "ت verbindet sich nach beiden Seiten. Zwei Punkte oben unterscheiden Tāʾ von ب und ث."
       }
     },
     {
@@ -164,7 +164,7 @@
       },
       "ages": {
         "4–5": "Ṯāʾ. Drei Punkte oben. Die Zungenspitze kommt leicht zwischen die Zähne. Wort: Fuchs. ثَعْلَب",
-        "6–8": "Ṯāʾ: ثَ ṯa, ثِ ṯi, ثُ ṯu. Stimmloser Zahnlaut; nicht wie Sīn. Wort ثَعْلَب ṯaʿlab.",
+        "6–8": "Ṯāʾ: ثَ ṯa, ثِ ṯi, ثُ ṯu. Stimmloser Zahnlaut; die Zungenspitze liegt leicht zwischen den Zähnen. Wort ثَعْلَب ṯaʿlab.",
         "9–10": "ث ist ein stimmloser interdentaler Reibelaut. Drei Punkte oben. Nicht ت und nicht س."
       }
     },
@@ -204,9 +204,9 @@
         "fin": "ـج"
       },
       "ages": {
-        "4–5": "Dschīm. Ein Punkt unten. Wort: Kamel. جَمَل",
-        "6–8": "Dschīm: جَ dscha, جِ dschi, جُ dschu. Wort جَمَل jamal.",
-        "9–10": "ج klingt wie dsch, nicht wie deutsches j in ja. Punkt unten."
+        "4–5": "Ǧīm. Ein Punkt unten. Wort: Kamel. جَمَل",
+        "6–8": "Ǧīm: جَ ǧa, جِ ǧi, جُ ǧu. Ein Punkt unten. Wort جَمَل ǧamal.",
+        "9–10": "ج hat einen Punkt unten. Im Standardarabischen wird es als ǧ gesprochen; nicht wie deutsches j in „ja“."
       }
     },
     {
@@ -245,9 +245,9 @@
         "fin": "ـح"
       },
       "ages": {
-        "4–5": "Ḥā. Wie Dschīm, aber ohne Punkt. Wort: Pferd. حِصَان",
-        "6–8": "Ḥāʾ: حَ ḥa, حِ ḥi, حُ ḥu. Ein deutlicher, enger Hauch aus dem Rachen. Wort حِصَان ḥiṣān.",
-        "9–10": "ح hat keinen Punkt. Es ist nicht ه (weiches h) und nicht خ (kh). Achte besonders auf den Rachenlaut."
+        "4–5": "Ḥāʾ. Wie Ǧīm, aber ohne Punkt. Der Laut kommt aus dem Rachen. Wort: Pferd. حِصَان",
+        "6–8": "Ḥāʾ: حَ ḥa, حِ ḥi, حُ ḥu. Ein stimmloser Rachenlaut aus der mittleren Rachenregion. Wort حِصَان ḥiṣān.",
+        "9–10": "ح hat keinen Punkt. Sein Makhrāj liegt in der mittleren Rachenregion. Nicht ه und nicht خ."
       }
     },
     {
@@ -286,9 +286,9 @@
         "fin": "ـخ"
       },
       "ages": {
-        "4–5": "Chā. Ein Punkt oben. Wie ch in Dach. Wort: Brot. خُبْز",
-        "6–8": "Chā: خَ cha, خِ chi, خُ chu. Wort خُبْز khubz.",
-        "9–10": "خ Punkt oben. ح ohne Punkt. ج Punkt unten."
+        "4–5": "Ḫāʾ. Ein Punkt oben. Der Laut kommt weit hinten aus dem Rachen. Wort: Brot. خُبْز",
+        "6–8": "Ḫāʾ: خَ ḫa, خِ ḫi, خُ ḫu. Reibelaut aus der oberen Rachenregion. Wort خُبْز ḫubz.",
+        "9–10": "خ hat einen Punkt oben. Sein Makhrāj liegt in der oberen Rachenregion. Vergleiche: ج Punkt unten, ح ohne Punkt, خ Punkt oben."
       }
     },
     {
@@ -327,9 +327,9 @@
         "fin": "ـد"
       },
       "ages": {
-        "4–5": "Dāl. Kurz und rund. Wort: Hahn. دِيك",
-        "6–8": "Dāl verbindet nicht nach links. دَ da, دِ di, دُ du. Wort دِيك dīk.",
-        "9–10": "Nicht-verbindend nach links: ا د ذ ر ز و."
+        "4–5": "Dāl. Ohne Punkt. Wort: Hahn. دِيك",
+        "6–8": "Dāl: دَ da, دِ di, دُ du. Es verbindet sich nicht mit dem nächsten Buchstaben. Wort دِيك dīk.",
+        "9–10": "د verbindet sich nicht mit dem nächsten Buchstaben. Zu dieser Gruppe gehören ا د ذ ر ز و."
       }
     },
     {
@@ -409,9 +409,9 @@
         "fin": "ـر"
       },
       "ages": {
-        "4–5": "Rā. Kleiner Bogen. Wort: Granatapfel. رُمَّان",
-        "6–8": "Rā: رَ ra, رِ ri, رُ ru. Zungenspitze. Wort رُمَّان rummān.",
-        "9–10": "ر verbindet nicht nach links. Ohne Punkt. ز hat einen Punkt."
+        "4–5": "Rāʾ. Ohne Punkt. Wort: Granatapfel. رُمَّان",
+        "6–8": "Rāʾ: رَ ra, رِ ri, رُ ru. Die Zungenspitze arbeitet nahe dem oberen Zahnfleisch. Wort رُمَّان rummān.",
+        "9–10": "ر verbindet sich nicht mit dem nächsten Buchstaben. ز hat dieselbe Grundform mit einem Punkt oben."
       }
     },
     {
@@ -450,9 +450,9 @@
         "fin": "ـز"
       },
       "ages": {
-        "4–5": "Zāy. Rā mit Punkt. Wort: Blume. زَهْرَة",
-        "6–8": "Zāy: زَ za, زِ zi, زُ zu. Wie stimmhaftes s. Wort زَهْرَة zahra.",
-        "9–10": "ز verbindet nicht nach links. Punkt unterscheidet von ر."
+        "4–5": "Zāy. Rāʾ mit einem Punkt oben. Wort: Blume. زَهْرَة",
+        "6–8": "Zāy: زَ za, زِ zi, زُ zu. Stimmhafter s-Laut. Wort زَهْرَة zahra.",
+        "9–10": "ز verbindet sich nicht mit dem nächsten Buchstaben. Der Punkt oben unterscheidet Zāy von ر."
       }
     },
     {
@@ -492,8 +492,8 @@
       },
       "ages": {
         "4–5": "Sīn. Drei Zähne, keine Punkte. Wort: Fisch. سَمَكَة",
-        "6–8": "Sīn: سَ sa, سِ si, سُ su. Wort سَمَكَة samaka.",
-        "9–10": "س ohne Punkte. ش hat drei Punkte. ص ist der volle s-Laut."
+        "6–8": "Sīn: سَ sa, سِ si, سُ su. Heller s-Laut. Wort سَمَكَة samaka.",
+        "9–10": "س hat keine Punkte. ش hat drei Punkte; ص ist der emphatische Gegenlaut."
       }
     },
     {
@@ -532,9 +532,9 @@
         "fin": "ـش"
       },
       "ages": {
-        "4–5": "Schīn. Sīn mit drei Punkten. Wort: Sonne. شَمْس",
-        "6–8": "Schīn: شَ scha, شِ schi, شُ schu. Wort شَمْس shams.",
-        "9–10": "ش drei Punkte oben. س keine Punkte."
+        "4–5": "Šīn. Wie Sīn, aber mit drei Punkten oben. Wort: Sonne. شَمْس",
+        "6–8": "Šīn: شَ ša, شِ ši, شُ šu. Drei Punkte oben. Wort شَمْس šams.",
+        "9–10": "ش hat drei Punkte über derselben Grundform wie س."
       }
     },
     {
@@ -573,9 +573,9 @@
         "fin": "ـص"
       },
       "ages": {
-        "4–5": "Ṣād. Rund und voll. Wort: Falke. صَقْر",
-        "6–8": "Ṣād: volles s, Zunge hinten. صَ ṣa, صِ ṣi, صُ ṣu. Wort صَقْر ṣaqr.",
-        "9–10": "ص emphatisch. Nicht س. Mund etwas weiter, Laut dunkler."
+        "4–5": "Ṣād. Ein kräftiger, dunkler s-Laut. Wort: Falke. صَقْر",
+        "6–8": "Ṣād: صَ ṣa, صِ ṣi, صُ ṣu. Emphatischer s-Laut; deutlich dunkler als Sīn. Wort صَقْر ṣaqr.",
+        "9–10": "ص ist emphatisch und unterscheidet sich artikulatorisch von س; die Zungenspitze bleibt vorn, während der hintere Mundraum mitarbeitet."
       }
     },
     {
@@ -614,9 +614,9 @@
         "fin": "ـض"
       },
       "ages": {
-        "4–5": "Ḍād. Ṣād mit Punkt. Wort: Frosch. ضِفْدَع",
-        "6–8": "Ḍād: schweres d. ضَ ḍa, ضِ ḍi, ضُ ḍu. Wort ضِفْدَع ḍifdaʿ.",
-        "9–10": "ض emphatisch. Punkt oben. Nicht د."
+        "4–5": "Ḍād. Ṣād mit einem Punkt oben. Wort: Frosch. ضِفْدَع",
+        "6–8": "Ḍād: ضَ ḍa, ضِ ḍi, ضُ ḍu. Emphatischer Laut; der seitliche Zungenrand arbeitet an den oberen Backenzähnen. Wort ضِفْدَع ḍifdaʿ.",
+        "9–10": "ض ist emphatisch. Sein klassischer Makhrāj liegt am seitlichen Zungenrand mit den oberen Backenzähnen. Nicht د."
       }
     },
     {
@@ -655,9 +655,9 @@
         "fin": "ـط"
       },
       "ages": {
-        "4–5": "Ṭā. Steht aufrecht. Wort: Vogel. طَائِر",
-        "6–8": "Ṭā: volles t. طَ ṭa, طِ ṭi, طُ ṭu. Wort طَائِر ṭāʾir.",
-        "9–10": "ط emphatisch. Nicht ت. ظ hat einen Punkt."
+        "4–5": "Ṭāʾ. Kräftiges, dunkles t. Wort: Vogel. طَائِر",
+        "6–8": "Ṭāʾ: طَ ṭa, طِ ṭi, طُ ṭu. Emphatisches t; nicht wie Tāʾ. Wort طَائِر ṭāʾir.",
+        "9–10": "ط ist ein emphatischer t-Laut. ت ist der nicht-emphatische Gegenlaut; ظ hat zusätzlich einen Punkt."
       }
     },
     {
@@ -696,9 +696,9 @@
         "fin": "ـظ"
       },
       "ages": {
-        "4–5": "Ẓā. Ṭā mit Punkt. Wort: Schatten. ظِلّ",
-        "6–8": "Ẓā: emphatisches dh. ظَ ẓa, ظِ ẓi, ظُ ẓu. Wort ظِلّ ẓill.",
-        "9–10": "ظ emphatisch mit Punkt. Nicht ذ und nicht ط."
+        "4–5": "Ẓāʾ. Ṭāʾ mit einem Punkt. Die Zungenspitze kommt leicht zwischen die Zähne. Wort: Schatten. ظِلّ",
+        "6–8": "Ẓāʾ: ظَ ẓa, ظِ ẓi, ظُ ẓu. Emphatischer stimmhafter Zahnlaut. Wort ظِلّ ẓill.",
+        "9–10": "ظ ist ein emphatischer stimmhafter interdentaler Laut. Er hat einen Punkt und ist weder ذ noch ط."
       }
     },
     {
@@ -737,9 +737,9 @@
         "fin": "ـع"
       },
       "ages": {
-        "4–5": "ʿAin. Aus der Kehle. Wort: Auge. عَيْن",
-        "6–8": "ʿAin: عَ ʿa, عِ ʿi, عُ ʿu. Wort عَيْن ʿayn.",
-        "9–10": "ع Kehllaut. Nicht Alif. غ hat einen Punkt."
+        "4–5": "ʿAyn. Ein besonderer Laut aus dem Rachen. Wort: Auge. عَيْن",
+        "6–8": "ʿAyn: عَ ʿa, عِ ʿi, عُ ʿu. Der Laut entsteht in der mittleren Rachenregion. Wort عَيْن ʿayn.",
+        "9–10": "ع ist ein stimmhafter Rachenlaut aus der mittleren Rachenregion. Es ist kein Alif; غ hat dieselbe Grundform mit einem Punkt."
       }
     },
     {
@@ -779,8 +779,8 @@
       },
       "ages": {
         "4–5": "Ġayn. ʿAyn mit einem Punkt oben. Der Laut kommt weit hinten aus dem Rachen. Wort: Wolke. غَيْمَة",
-        "6–8": "Ġayn: غَ ġa, غِ ġi, غُ ġu. Stimmhafter Reibelaut weit hinten im Rachen. Wort غَيْمَة ġayma.",
-        "9–10": "غ hat einen Punkt über der Form von ع. Der Laut wird weit hinten im Rachen gebildet; er ist kein deutsches g."
+        "6–8": "Ġayn: غَ ġa, غِ ġi, غُ ġu. Stimmhafter Reibelaut aus der oberen Rachenregion. Wort غَيْمَة ġayma.",
+        "9–10": "غ hat einen Punkt über der Form von ع. Sein Makhrāj liegt in der oberen Rachenregion; es ist kein deutsches g."
       }
     },
     {
@@ -819,9 +819,9 @@
         "fin": "ـف"
       },
       "ages": {
-        "4–5": "Fā. Ein Punkt im Kreis. Wort: Schmetterling. فَرَاشَة",
-        "6–8": "Fā: فَ fa, فِ fi, فُ fu. Wort فَرَاشَة farāsha.",
-        "9–10": "ف ein Punkt. ق zwei Punkte."
+        "4–5": "Fāʾ. Ein Punkt oben. Wort: Schmetterling. فَرَاشَة",
+        "6–8": "Fāʾ: فَ fa, فِ fi, فُ fu. Unterlippe und obere Schneidezähne bilden den Laut. Wort فَرَاشَة farāša.",
+        "9–10": "ف hat einen Punkt oben. Der Laut entsteht zwischen Unterlippe und oberen Schneidezähnen; ق hat zwei Punkte."
       }
     },
     {
@@ -861,8 +861,8 @@
       },
       "ages": {
         "4–5": "Qāf. Zwei Punkte oben. Der Laut kommt weit hinten im Mund. Wort: Mond. قَمَر",
-        "6–8": "Qāf: قَ qa, قِ qi, قُ qu. Der Laut wird am Zäpfchen gebildet. Nicht wie Kāf. Wort قَمَر qamar.",
-        "9–10": "ق hat zwei Punkte und wird am Zäpfchen gebildet. ك Kāf wird weiter vorn am Gaumen gebildet."
+        "6–8": "Qāf: قَ qa, قِ qi, قُ qu. Der Laut entsteht weit hinten, am hinteren Zungenrücken nahe dem Zäpfchen. Wort قَمَر qamar.",
+        "9–10": "ق hat zwei Punkte. Sein Makhrāj liegt weit hinten am Zungenrücken nahe dem Zäpfchen; ك wird etwas weiter vorn gebildet."
       }
     },
     {
@@ -901,9 +901,9 @@
         "fin": "ـك"
       },
       "ages": {
-        "4–5": "Kāf. Oben ein kleines Häkchen. Wort: Buch. كِتَاب",
-        "6–8": "Kāf: كَ ka, كِ ki, كُ ku. Wort كِتَاب kitāb.",
-        "9–10": "ك vorn am Gaumen. Nicht ق. Das Häkchen ist kein Hamza."
+        "4–5": "Kāf. Ein Laut vom hinteren Teil der Zunge. Wort: Buch. كِتَاب",
+        "6–8": "Kāf: كَ ka, كِ ki, كُ ku. Der hintere Zungenrücken berührt den hinteren Gaumen; weiter vorn als Qāf. Wort كِتَاب kitāb.",
+        "9–10": "ك wird am hinteren Zungenrücken gegen den Gaumen gebildet und liegt im Makhrāj weiter vorn als ق."
       }
     },
     {
@@ -942,9 +942,9 @@
         "fin": "ـل"
       },
       "ages": {
-        "4–5": "Lām. Lang mit einem Fuß. Wort: Milch. لَبَن",
+        "4–5": "Lām. Ein langer Strich mit Bogen. Wort: Milch. لَبَن",
         "6–8": "Lām: لَ la, لِ li, لُ lu. Wort لَبَن laban.",
-        "9–10": "ل verbindet nach beiden Seiten. ل + ا schreibt man oft لا."
+        "9–10": "ل verbindet sich nach beiden Seiten. Mit Alif entsteht die Ligatur لا."
       }
     },
     {
@@ -983,9 +983,9 @@
         "fin": "ـم"
       },
       "ages": {
-        "4–5": "Mīm. Ein kleiner Kreis. Wort: Moschee. مَسْجِد",
-        "6–8": "Mīm: مَ ma, مِ mi, مُ mu. Wort مَسْجِد masjid.",
-        "9–10": "م verbindet nach beiden Seiten. Kreis bleibt sichtbar."
+        "4–5": "Mīm. Ein kleiner geschlossener Teil gehört zur Form. Wort: Moschee. مَسْجِد",
+        "6–8": "Mīm: مَ ma, مِ mi, مُ mu. Die Lippen schließen sich beim Laut. Wort مَسْجِد masǧid.",
+        "9–10": "م verbindet sich nach beiden Seiten. Der Laut wird mit geschlossenen Lippen gebildet."
       }
     },
     {
@@ -1025,8 +1025,8 @@
       },
       "ages": {
         "4–5": "Nūn. Ein Punkt oben. Wort: Stern. نَجْم",
-        "6–8": "Nūn: نَ na, نِ ni, نُ nu. Wort نَجْم najm.",
-        "9–10": "ن ein Punkt. ت zwei Punkte. ة am Wortende ist etwas anderes."
+        "6–8": "Nūn: نَ na, نِ ni, نُ nu. Ein Punkt oben. Wort نَجْم naǧm.",
+        "9–10": "ن hat einen Punkt oben. ت hat zwei Punkte oben; ي zwei Punkte unten."
       }
     },
     {
@@ -1065,9 +1065,9 @@
         "fin": "ـه"
       },
       "ages": {
-        "4–5": "Hā. Weicher Hauch. Wort: Mondsichel. هِلَال",
-        "6–8": "Hā: هَ ha, هِ hi, هُ hu. Wort هِلَال hilāl.",
-        "9–10": "ه weiches h. Mitte ـهـ. Nicht ح (enge Kehle)."
+        "4–5": "Hāʾ. Ein weicher Hauch. Wort: Mondsichel. هِلَال",
+        "6–8": "Hāʾ: هَ ha, هِ hi, هُ hu. Weicher Hauch aus dem Kehlkopf. Wort هِلَال hilāl.",
+        "9–10": "ه ist ein weicher Hauchlaut aus dem Kehlkopf. Nicht ح, dessen Makhrāj tiefer im Rachen liegt."
       }
     },
     {
@@ -1106,9 +1106,9 @@
         "fin": "ـو"
       },
       "ages": {
-        "4–5": "Wāw. Rund wie eine Schüssel. Wort: Rose. وَرْدَة",
-        "6–8": "Wāw: وَ wa. Nach Ḍamma kann و als Madd den langen Vokal ū bilden. Wort وَرْدَة warda.",
-        "9–10": "و verbindet sich nicht mit dem nächsten Buchstaben. Es kann Konsonant w sein und nach Ḍamma als Madd den langen Vokal ū bilden."
+        "4–5": "Wāw. Rund und klein. Wort: Rose. وَرْدَة",
+        "6–8": "Wāw: وَ wa, وِ wi, وُ wu. Als Madd: Ḍamma + Wāw sākinah ergibt ū. Wort وَرْدَة warda.",
+        "9–10": "و verbindet sich nicht mit dem nächsten Buchstaben. Als Konsonant ist es w; als Madd ergibt Ḍamma vor Wāw sākinah den langen Vokal ū."
       }
     },
     {
@@ -1147,9 +1147,9 @@
         "fin": "ـي"
       },
       "ages": {
-        "4–5": "Yā. Zwei Punkte unten. Wort: Hand. يَد",
-        "6–8": "Yā: يَ ya. Nach Kasra als Madd ī. Wort يَد yad.",
-        "9–10": "ي zwei Punkte unten. ت zwei oben. Konsonant y und langer Vokal ī."
+        "4–5": "Yāʾ. Zwei Punkte unten. Wort: Hand. يَد",
+        "6–8": "Yāʾ: يَ ya, يِ yi, يُ yu. Als Madd: Kasra + Yāʾ sākinah ergibt ī. Wort يَد yad.",
+        "9–10": "ي hat zwei Punkte unten. Als Konsonant ist es y; als Madd ergibt Kasra vor Yāʾ sākinah den langen Vokal ī."
       }
     }
   ]
