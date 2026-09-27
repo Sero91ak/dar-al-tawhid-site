@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1090";
+  const VER="1092";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -270,7 +270,7 @@
   function openDb(){
     return new Promise((res,rej)=>{
       try{
-        const r=indexedDB.open("dar-3d-icon-pack-v1090",1);
+        const r=indexedDB.open("dar-3d-icon-pack-v1092",1);
         r.onupgradeneeded=function(){r.result.createObjectStore("png")};
         r.onsuccess=function(){res(r.result)};
         r.onerror=function(){rej(r.error)};
