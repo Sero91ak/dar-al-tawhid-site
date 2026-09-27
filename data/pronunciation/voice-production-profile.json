@@ -1,11 +1,11 @@
 {
   "schemaVersion": 8,
-  "id": "dar-own-voice-narration-v2.8.0",
+  "id": "dar-own-voice-narration-v2.8.1",
   "updatedAt": "2026-09-27",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade Serhat narration with continuous sentence flow, deterministic Islamic-name pronunciation, no artificial thinking pauses, verified master-library merge, mandatory honorifics, persistent confirmed audio locks, and strict continuity QA.",
+  "productionGoal": "Production-grade Serhat narration with strict sentence preflight before synthesis, grammar-aware punctuation prosody, continuous sentence flow, deterministic Islamic-name pronunciation, no artificial thinking pauses, persistent confirmed audio locks, and strict post-render continuity QA.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -331,7 +331,13 @@
     "internalFlowCrossfadeMs": 52,
     "continuousSentenceFlow": true,
     "renderInOriginalTextOrder": true,
-    "noArtificialThinkingPause": true
+    "noArtificialThinkingPause": true,
+    "flowArchitecture": "continuous-sentence-flow-v2",
+    "strictSentencePreflight": true,
+    "grammarAwarePunctuation": true,
+    "visibleTextUnchanged": true,
+    "zeroPauseGrammarComma": true,
+    "preflightBeforeModelInference": true
   },
   "qualityAssurance": {
     "maxRenderAttempts": 2,
@@ -340,12 +346,12 @@
     "minRms": 0.0015,
     "minPeak": 0.01,
     "maxClippingRatio": 0.02,
-    "maxInternalSilenceMsWithoutPunctuation": 480,
+    "maxInternalSilenceMsWithoutPunctuation": 380,
     "shortArabicMaxSecondsBase": 1.2,
     "shortArabicMaxSecondsPerLetter": 0.34,
     "requireHumanConfirmationForMaster": true,
     "note": "Automatic QA rejects technical silence, excessive punctuation pauses, suspicious sustained holds, clipping and implausibly slow/long segments. One controlled retry remains the default; non-MASTER long segments may use deterministic clause rescue. Human semantic pronunciation review is still mandatory.",
-    "maxInternalSilenceMsWithPunctuation": 700,
+    "maxInternalSilenceMsWithPunctuation": 560,
     "minSpeechRateWords": 6,
     "minSpeechRateWpmByMode": {
       "default": 78,
@@ -388,31 +394,35 @@
     "inlineArabicMaxSecondsPerLetter": 0.15,
     "inlineArabicFlowRegression": true,
     "maxInternalSilenceMsWithPunctuationByMode": {
-      "narration": 650,
-      "kids_story": 720,
-      "kids_lesson": 680,
-      "teaching": 650,
-      "gentle": 780,
-      "serious": 780,
-      "question": 700,
-      "list": 680,
-      "dua": 850
+      "narration": 540,
+      "kids_story": 580,
+      "kids_lesson": 560,
+      "teaching": 540,
+      "gentle": 650,
+      "serious": 650,
+      "question": 560,
+      "list": 560,
+      "dua": 720
     },
-    "finalMaxInternalSilenceMs": 620,
+    "finalMaxInternalSilenceMs": 520,
     "finalMaxInternalSilenceMsByMode": {
-      "narration": 620,
-      "kids_story": 700,
-      "kids_lesson": 660,
-      "teaching": 620,
-      "gentle": 760,
-      "serious": 760,
-      "question": 680,
-      "list": 650,
-      "dua": 820
+      "narration": 500,
+      "kids_story": 560,
+      "kids_lesson": 540,
+      "teaching": 500,
+      "gentle": 620,
+      "serious": 620,
+      "question": 540,
+      "list": 540,
+      "dua": 700
     },
     "continuousSentenceFlowRegression": true,
     "originalTextOrderRegression": true,
-    "generalBoundaryTrimRegression": true
+    "generalBoundaryTrimRegression": true,
+    "strictSentencePreflightRegression": true,
+    "zeroPauseInfinitiveRegression": true,
+    "renderPlanBoundaryRegression": true,
+    "visibleTextIntegrityRegression": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -615,10 +625,12 @@
     "preserveAntiHoldQa": true,
     "inlineArabicFlowBridge": true,
     "flowBridgeVersion": 3,
-    "flowArchitecture": "continuous-sentence-flow-v1",
+    "flowArchitecture": "continuous-sentence-flow-v2",
     "phraseAwareChunking": true,
     "renderInOriginalTextOrder": true,
     "generalBoundaryFlowBridge": true,
-    "noHardWordBoundaryChunking": true
+    "noHardWordBoundaryChunking": true,
+    "strictSentencePreflight": true,
+    "grammarAwarePunctuation": true
   }
 }
