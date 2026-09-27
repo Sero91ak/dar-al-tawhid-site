@@ -247,7 +247,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         guard let data = try? JSONSerialization.data(withJSONObject: [value]),
               let json = String(data: data, encoding: .utf8),
               json.count >= 2 else {
-            return ""Audio-Ausgabe""
+            return "\"Audio-Ausgabe\""
         }
         return String(json.dropFirst().dropLast())
     }
