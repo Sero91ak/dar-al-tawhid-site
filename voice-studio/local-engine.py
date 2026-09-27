@@ -2089,13 +2089,23 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str,mode:str="narratio
     if peak<min_peak: metrics["issues"].append("low_peak")
     if clipping>max_clip: metrics["issues"].append("clipping")
 
-    # 10-ms energy frames: echte interne Stille wird auch bei Satzzeichen begrenzt.
+    # 10-ms energy frames. Kurze arabische Namen/Begriffe bekommen einen
+    # niedrigeren Silence-Floor: leise Reibelaute und unvoiced consonants dürfen
+    # nicht fälschlich als "Denkpause" gewertet werden. Echte Pausen werden
+    # anschließend zusätzlich im vollständigen Satz geprüft.
     env=w.abs().amax(dim=0)
+    inline_arabic=language_id=="ar" and is_inline_arabic_micro_term(text)
     frame=max(1,int(sr*0.010))
     count=env.numel()//frame
     if count>=3 and peak>0:
         framed=env[:count*frame].reshape(count,frame).mean(dim=1)
-        threshold=max(peak*0.012,0.0004)
+        if inline_arabic:
+            threshold=max(
+                peak*float(QA_CONFIG.get("inlineArabicSilenceThresholdRelative",0.0045)),
+                float(QA_CONFIG.get("inlineArabicSilenceAbsolute",0.00015))
+            )
+        else:
+            threshold=max(peak*0.012,0.0004)
         silent=(framed<threshold).tolist()
         longest=run=0
         for flag in silent[1:-1]:
@@ -2110,15 +2120,21 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str,mode:str="narratio
         # interne Satzzeichen erhalten einen etwas größeren Pausenrahmen.
         core=re.sub(r"[.!?؟…]+$","",probe).strip()
         has_internal_punctuation=bool(re.search(r"[,،;؛:!?؟…]|\.(?=\s+\S)",core))
-        if has_internal_punctuation:
+        if inline_arabic:
+            limit=int(QA_CONFIG.get("inlineArabicInternalSilenceMs",500))
+        elif has_internal_punctuation:
             mode_limits=QA_CONFIG.get("maxInternalSilenceMsWithPunctuationByMode") or {}
             limit=int(mode_limits.get(mode,QA_CONFIG.get("maxInternalSilenceMsWithPunctuation",560)))
         else:
             limit=int(QA_CONFIG.get("maxInternalSilenceMsWithoutPunctuation",380))
         metrics["internal_punctuation"]=has_internal_punctuation
+        metrics["inline_arabic_microterm"]=bool(inline_arabic)
         metrics["internal_silence_limit_ms"]=limit
         if silence_ms>limit:
-            metrics["issues"].append("excessive_internal_pause" if has_internal_punctuation else "unexpected_internal_hold")
+            if inline_arabic:
+                metrics["issues"].append("inline_arabic_internal_hold")
+            else:
+                metrics["issues"].append("excessive_internal_pause" if has_internal_punctuation else "unexpected_internal_hold")
 
     # Sustained-hold guard: auffällig gleichförmige Energie über fast eine Sekunde
     # ist bei kurzen Segmenten ein typisches Hängen/Dehnen des TTS-Modells.
@@ -2217,6 +2233,8 @@ def split_rescue_chunks(text:str,force:bool=False):
 def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool=False,seed_base:int=2026):
     import torch
     attempts=max(1,int(QA_CONFIG.get("maxRenderAttempts",2)))
+    if language_id=="ar" and is_inline_arabic_micro_term(text):
+        attempts=max(attempts,int(QA_CONFIG.get("inlineArabicRenderAttempts",4)))
     seed_offset=max(1,int(QA_CONFIG.get("retrySeedOffset",97)))
     seed_base=max(1,int(seed_base))
     last=None
@@ -2248,7 +2266,7 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
         print(f"[DĀR Voice] QA retry {attempt+1}/{attempts} lang={language_id} mode={mode}: {metrics['issues']}",flush=True)
 
     rescue_allowed={
-        "unexpected_internal_hold","excessive_internal_pause","suspicious_sustained_hold",
+        "unexpected_internal_hold","inline_arabic_internal_hold","excessive_internal_pause","suspicious_sustained_hold",
         "short_arabic_too_long","segment_too_long","speech_rate_too_slow","generation_token_limit","generation_timeout"
     }
     last_issues=set(last[1]["issues"]) if last else set()
@@ -2286,7 +2304,12 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
                     return joined,metrics
 
     issues=", ".join(last[1]["issues"]) if last else "unknown"
-    raise RuntimeError(f"Audio-QA fehlgeschlagen ({language_id}/{mode}): {issues}")
+    max_hold=(last[1].get("max_internal_silence_ms") if last else None)
+    detail=f"Audio-QA fehlgeschlagen ({language_id}/{mode}): {issues}"
+    if max_hold is not None:
+        detail+=f" · interne Stille {max_hold} ms"
+    detail+=f" · Text: {str(text or '')[:72]}"
+    raise RuntimeError(detail)
 
 def gently_level_segments(items):
     """Kleine Pegelsprünge glätten, ohne die natürliche Dynamik plattzumachen."""
