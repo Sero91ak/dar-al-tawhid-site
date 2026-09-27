@@ -1,8 +1,9 @@
-const CACHE="dar-voice-studio-v16";
+const CACHE="dar-voice-studio-v17";
 const SHELL=[
   "/voice-studio/",
   "/voice-studio/index.html",
   "/voice-studio/content-studio.js",
+  "/voice-studio/alphabet-audio-studio.js",
   "/voice-studio/manifest.webmanifest",
   "/voice-studio/version.json",
   "/voice-studio/voice-studio-icon.png",
@@ -37,6 +38,7 @@ self.addEventListener("fetch",event=>{
     url.pathname==="/voice-studio/" ||
     url.pathname==="/voice-studio/index.html" ||
     url.pathname==="/voice-studio/content-studio.js" ||
+    url.pathname==="/voice-studio/alphabet-audio-studio.js" ||
     url.pathname==="/voice-studio/version.json" ||
     url.pathname==="/voice-studio/voice-studio-icon.png" ||
     url.pathname==="/voice-studio/service-worker.js" ||
