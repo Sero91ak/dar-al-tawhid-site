@@ -1,10 +1,10 @@
 {
-  "version": "2.8.8",
-  "updatedAt": "2026-09-27T14:25:00+02:00",
+  "version": "2.9.0",
+  "updatedAt": "2026-09-27T14:45:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v11",
+  "cache": "dar-voice-studio-v16",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -222,7 +222,10 @@
     "contentStudioServerPublishValidation": true,
     "contentStudioMacPackagingValidation": true,
     "nativeMacSwiftTypecheck": true,
-    "nativeAudioRouteValidation": true
+    "nativeAudioRouteValidation": true,
+    "dedicatedIconValidation": true,
+    "launchSplashValidation": true,
+    "quickWorkflowValidation": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -299,7 +302,14 @@
     "liveEditWorkingCopy": true,
     "legacyImportToStudio": true,
     "legacyQuestionBankPreserved": true,
-    "legacyClaimsPreserved": true
+    "legacyClaimsPreserved": true,
+    "quickProductionBar": true,
+    "directNew": true,
+    "directCopy": true,
+    "directProduce": true,
+    "directTestPublish": true,
+    "directLivePublish": true,
+    "stickyWorkflowControls": true
   },
   "audioFormat": "wav-pcm16-mono",
   "legacyFloatWavMigration": true,
@@ -362,5 +372,22 @@
   "contextBridgeFollowOn": true,
   "contextBridgeCache": true,
   "contextBridgeCarrierRemoved": true,
-  "noStandaloneGermanBeforeArabic": true
+  "noStandaloneGermanBeforeArabic": true,
+  "dedicatedAppIcon": true,
+  "appIconAsset": "voice-studio/voice-studio-icon.png",
+  "nativeLaunchSplash": true,
+  "nativeLaunchProgress": true,
+  "launchProgressEndsAt100": true,
+  "runtimeDockIcon": true,
+  "topLeftBrandUsesAppIcon": true,
+  "quickProductionBar": true,
+  "quickProductionActions": [
+    "new",
+    "copy",
+    "produce",
+    "test",
+    "live"
+  ],
+  "zeroDetourWorkflow": true,
+  "compactWorkspace": true
 }
