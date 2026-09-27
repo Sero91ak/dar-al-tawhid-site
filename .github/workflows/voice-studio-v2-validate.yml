@@ -415,6 +415,9 @@ jobs:
                   'STORY_PROGRESS_PREFIX="kids.story.progress.v2."',
                   'recordStoryAttempt(currentStoryKey,!storyQuestionHadError)',
                   'storyQuestionHadError=true',
+                  'DUA_PROGRESS_PREFIX="kids.dua.progress.v2."',
+                  'recordDuaAttempt(d.id,!duaQuestionHadError)',
+                  'duaQuestionHadError=true',
                   'Referenzaufnahme noch nicht freigegeben',
               ]),
               ("manifest",manifest,[
@@ -437,6 +440,8 @@ jobs:
               errors.append("legacy one-shot quiz mastery increment returned")
           if 'localStorage.setItem("kids.story."+currentStoryKey,"1")' in kids:
               errors.append("legacy one-shot story mastery returned")
+          if 'localStorage.setItem("kids.dua."+d.id,"1")' in kids:
+              errors.append("legacy one-shot Dua mastery returned")
           if 'if(!playerFullyHeard())' not in studio:
               errors.append("human full-listen gate missing")
           if errors:
