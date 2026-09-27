@@ -6452,6 +6452,27 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-learn-player-always-3d-ayah-v1057-1080-2026-09-27",
+      "approvedBy": "user-explicit-learn-player-missing-3d-not-enlarged",
+      "reason": "Nutzer: Lernplayer im Koranbereich unsichtbar; 3D-Bilder nicht alle großgezogen.",
+      "paths": [
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-player.css",
+        "assets/dar-noble-3d-icons.css",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.css",
+        "test/assets/dar-noble-3d-icons.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true

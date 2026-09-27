@@ -833,6 +833,15 @@ html.player-reader-dock #darQuranPlayerSlot,
 html.player-learn #darQuranPlayerSlot{
   height:0!important;
 }
+#darQuranMiniPlayer.is-on.is-learn,
+#darQuranMiniPlayer.is-on.is-reader-dock,
+html.player-learn #darQuranMiniPlayer.is-on,
+html.player-reader-dock #darQuranMiniPlayer.is-on{
+  transform:translate3d(0,0,0)!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
 #darQuranMiniPlayer.is-reader-dock,
 #darQuranMiniPlayer.is-learn{
   top:var(--qrc-chrome-h,calc(env(safe-area-inset-top,0px) + 92px));
