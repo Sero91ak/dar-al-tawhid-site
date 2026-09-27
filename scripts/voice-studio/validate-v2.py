@@ -276,6 +276,16 @@ def main():
         if required not in functions: fail(f"engine missing production function: {required}")
     for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","MASTER_LIBRARY_CACHE","MASTER_LIBRARY_URL","islamic-master-library.json","unresolvedIslamicTerms","librarySuggestions","Ungeprüfte islamische Namen/Begriffe erkannt","user_rules+BASE_RULES+MASTER_RULES","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","persistent-conditionals+segment-cache-v2","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
+    function_nodes={n.name:n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
+    save_src=ast.get_source_segment(engine_source,function_nodes.get("save_wav")) or ""
+    load_src=ast.get_source_segment(engine_source,function_nodes.get("load_locked_wav")) or ""
+    if "torchaudio.save" in save_src or "ta.save(" in save_src:
+        fail("save_wav must never use torchaudio.save; internal WAV must stay PCM16")
+    for marker in ("np.int16","wf.setsampwidth(2)","wave.open(str(path),\"wb\")"):
+        if marker not in save_src: fail("PCM16 WAV writer marker missing: "+marker)
+    for marker in ("torchaudio as ta","pcm_s16le","legacy WAV migrated to PCM16"):
+        if marker not in load_src: fail("legacy float-WAV migration marker missing: "+marker)
+
     state_pos=engine_source.find("AUDIO_LOCK_STATE_LOCK=threading.RLock()")
     pending_fn_pos=engine_source.find("def pending_audio_lock_keys")
     if state_pos<0 or pending_fn_pos<0 or state_pos>pending_fn_pos:
