@@ -1,6 +1,6 @@
 {
-  "version": "2.7.5",
-  "updatedAt": "2026-09-27T07:15:00+02:00",
+  "version": "2.7.6",
+  "updatedAt": "2026-09-27T10:15:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -298,5 +298,7 @@
     "legacyImportToStudio": true,
     "legacyQuestionBankPreserved": true,
     "legacyClaimsPreserved": true
-  }
+  },
+  "audioFormat": "wav-pcm16-mono",
+  "legacyFloatWavMigration": true
 }
