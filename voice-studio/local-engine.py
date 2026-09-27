@@ -62,9 +62,11 @@ MASTER_LIBRARY_CACHE=LEARNING_HOME/"islamic-master-library.json"
 MASTER_LIBRARY_SEED=APP_HOME/"islamic-master-library.json"
 LEARNING_LOG=LEARNING_HOME/"learning-log.jsonl"
 RENDER_CACHE_DIR=VOICE_HOME/"RenderCache"/"v3"
+CONTEXT_BRIDGE_CACHE_DIR=RENDER_CACHE_DIR/"context-bridge-v1"
 LEARNING_HOME.mkdir(parents=True,exist_ok=True)
 LEARNING_PENDING_DIR.mkdir(parents=True,exist_ok=True)
 RENDER_CACHE_DIR.mkdir(parents=True,exist_ok=True)
+CONTEXT_BRIDGE_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_URL=os.environ.get(
     "DAR_VOICE_ONLINE_LIBRARY_URL",
     "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/data/pronunciation/pronunciation-rules.json"
@@ -1219,7 +1221,7 @@ def get_status():
     out["honorific_name_variants"]=sum(1 for r in RULES if r.get("required_honorific_key"))
     out["honorific_audio_keys"]=sorted(k for k in HONORIFIC_KEYS if k in HONORIFIC_TTS_BY_KEY)
     out["pronunciation_learning"]=learning_state()
-    out["performance_engine"]="continuous-sentence-flow-v2"
+    out["performance_engine"]="continuous-sentence-flow-v3"
     out["reference_prepares_total"]=MODEL_REFERENCE_PREPARES
     out["reference_cache_hits_total"]=MODEL_REFERENCE_CACHE_HITS
     out["render_cache"]=dict(RENDER_CACHE_STATS)
@@ -1982,6 +1984,161 @@ def file_signature(path:Path):
         return f"{path.resolve()}|{st.st_size}|{st.st_mtime_ns}"
     except Exception:
         return str(path)
+
+def contextual_bridge_direction(plan,index:int):
+    """DE↔AR-Grenzen erhalten Kontext-Rendering statt isolierter Mini-Fragmente."""
+    if index<0 or index>=len(plan):
+        return ""
+    lang,text=plan[index]
+    if lang!="de":
+        return ""
+    value=str(text or "").strip()
+    if not value:
+        return ""
+    prev_item=plan[index-1] if index>0 else None
+    next_item=plan[index+1] if index+1<len(plan) else None
+    if next_item and next_item[0]=="ar" and not re.search(r"[.!?؟…,:;،؛]$",value):
+        return "lead-in"
+    if prev_item and prev_item[0]=="ar":
+        prev_text=str(prev_item[1] or "").strip()
+        if not re.search(r"[.!?؟…,:;،؛]$",prev_text):
+            return "follow-on"
+    return ""
+
+def context_bridge_cache_key(text:str,language_id:str,mode:str,direction:str):
+    payload={
+        "schema":1,
+        "kind":"context-bridge",
+        "direction":str(direction),
+        "text":str(text),
+        "language":str(language_id),
+        "mode":str(mode),
+        "reference":file_signature(reference_for_language(language_id)),
+    }
+    raw=json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(",",":")).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+def context_bridge_cache_path(key:str):
+    return CONTEXT_BRIDGE_CACHE_DIR/f"{key}.wav"
+
+def _find_context_separator(wav,sr:int,expected_fraction:float):
+    import torch
+    w=normalize_segment_shape(wav)
+    if not w.numel():
+        return None
+    env=w.abs().amax(dim=0)
+    peak=float(env.max().item()) if env.numel() else 0.0
+    if peak<=1e-7:
+        return None
+    frame=max(1,int(sr*0.010))
+    count=env.numel()//frame
+    if count<12:
+        return None
+    levels=env[:count*frame].reshape(count,frame).mean(dim=1)
+    center=int(max(2,min(count-3,round(count*float(expected_fraction)))))
+    radius=max(4,int(count*0.18))
+    lo=max(2,center-radius)
+    hi=min(count-2,center+radius)
+    if hi<=lo:
+        return None
+    window=levels[lo:hi]
+    idx=lo+int(torch.argmin(window).item())
+    floor=max(peak*0.055,0.00035)
+    if float(levels[idx].item())>floor:
+        return None
+    start=idx
+    end=idx+1
+    while start>lo and float(levels[start-1].item())<=floor:
+        start-=1
+    while end<hi and float(levels[end].item())<=floor:
+        end+=1
+    if (end-start)*10<20:
+        return None
+    return start*frame,min(w.shape[-1],end*frame)
+
+def _crop_context_bridge_audio(wav,sr:int,source_text:str,context_text:str,direction:str):
+    w=normalize_segment_shape(wav)
+    if direction=="lead-in":
+        expected=(len(str(source_text))+1)/max(2,len(str(context_text))+1)
+    else:
+        expected=len("weiter, ")/max(2,len(str(context_text))+1)
+    sep=_find_context_separator(w,sr,expected)
+    if not sep:
+        return None,{"context_bridge":False,"reason":"separator_not_found"}
+    start,end=sep
+    out=w[...,:start] if direction=="lead-in" else w[...,end:]
+    out=trim_segment_edges(out,sr,aggressive=True,lexical=True)
+    if not out.numel() or out.shape[-1]<int(sr*0.10):
+        return None,{"context_bridge":False,"reason":"cropped_too_short"}
+    return out,{
+        "context_bridge":True,
+        "direction":direction,
+        "carrier_text":context_text,
+        "separator_ms":[round(start/sr*1000,1),round(end/sr*1000,1)],
+    }
+
+def load_context_bridge_cache(text:str,language_id:str,mode:str,direction:str,target_sr:int):
+    key=context_bridge_cache_key(text,language_id,mode,direction)
+    path=context_bridge_cache_path(key)
+    if not path.exists() or path.stat().st_size<=44:
+        return None,None,key
+    try:
+        wav=load_locked_wav(path,target_sr)
+        metrics=audio_quality_metrics(wav,target_sr,text,language_id,mode)
+        if metrics.get("issues"):
+            path.unlink(missing_ok=True)
+            return None,None,key
+        metrics.update({
+            "context_bridge":True,
+            "context_bridge_cache":"hit",
+            "cache_reused_without_resynthesis":True,
+        })
+        return wav,metrics,key
+    except Exception:
+        try: path.unlink(missing_ok=True)
+        except Exception: pass
+        return None,None,key
+
+def save_context_bridge_cache(key:str,wav,sr:int):
+    if not key:
+        return
+    path=context_bridge_cache_path(key)
+    tmp=path.with_name(path.name+f".tmp.{os.getpid()}.{uuid.uuid4().hex[:8]}.wav")
+    try:
+        save_wav(tmp,wav,sr)
+        if tmp.exists() and tmp.stat().st_size>44:
+            os.replace(tmp,path)
+    finally:
+        try: tmp.unlink(missing_ok=True)
+        except Exception: pass
+
+def render_context_bridge(model,text:str,mode:str,direction:str,seed_base:int=2026):
+    """Erzeugt ein deutsches Fragment mit Fortsetzungs-Kontext und entfernt den Carrier."""
+    import torch
+    source=str(text or "").strip()
+    carrier=f"{source}, weiter" if direction=="lead-in" else f"weiter, {source}"
+    attempts=max(2,int(QA_CONFIG.get("contextBridgeRenderAttempts",3)))
+    seed_offset=max(1,int(QA_CONFIG.get("retrySeedOffset",97)))
+    last_error=None
+    for attempt in range(attempts):
+        torch.manual_seed(max(1,int(seed_base))+attempt*seed_offset)
+        try:
+            rendered=render_with_model(model,carrier,"de",mode)
+            cropped,meta=_crop_context_bridge_audio(rendered,int(model.sr),source,carrier,direction)
+            if cropped is None:
+                last_error=RuntimeError(meta.get("reason","context bridge crop failed"))
+                continue
+            metrics=audio_quality_metrics(cropped,int(model.sr),source,"de",mode)
+            if metrics.get("issues"):
+                last_error=RuntimeError(", ".join(metrics["issues"]))
+                continue
+            metrics.update(meta)
+            metrics["attempt"]=attempt+1
+            metrics["carrier_not_exposed"]=True
+            return cropped,metrics
+        except Exception as e:
+            last_error=e
+    raise RuntimeError(f"Kontext-Bridge fehlgeschlagen ({direction}): {last_error}")
 
 def _render_cache_digest(text:str,language_id:str,mode:str,backend=None,schema:int=3):
     p=prosody_settings(mode,language_id,text)
@@ -3018,10 +3175,20 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 except Exception:
                     pass
             if not pre_lock:
-                pre_wav,pre_metrics,_=load_render_cache(pre_chunk,pre_lang,pre_mode,render_sr)
-                if pre_wav is not None:
-                    pre_metrics["fast_reuse"]=True
-                    preloaded[pre_idx]=(pre_wav,pre_metrics,"cache")
+                pre_bridge=contextual_bridge_direction(plan,pre_idx)
+                if pre_bridge:
+                    pre_wav,pre_metrics,_=load_context_bridge_cache(
+                        pre_chunk,pre_lang,pre_mode,pre_bridge,render_sr
+                    )
+                    if pre_wav is not None:
+                        pre_metrics["fast_reuse"]=True
+                        preloaded[pre_idx]=(pre_wav,pre_metrics,"context-bridge")
+                        continue
+                else:
+                    pre_wav,pre_metrics,_=load_render_cache(pre_chunk,pre_lang,pre_mode,render_sr)
+                    if pre_wav is not None:
+                        pre_metrics["fast_reuse"]=True
+                        preloaded[pre_idx]=(pre_wav,pre_metrics,"cache")
 
         outputs=[None]*len(plan)
         qa_segments=[None]*len(plan)
@@ -3048,6 +3215,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
             pct=8+int(((processed_pos-1)/max(1,total))*78)
             lang_label="Arabisch" if lang=="ar" else "Deutsch"
             mode=resolve_segment_prosody(chunk,doc_mode,style)
+            bridge_direction=contextual_bridge_direction(plan,original_idx)
             audio_lock_key=audio_lock_key_for_chunk(chunk)
             critical=bool(audio_lock_key) or (lang=="ar" and any(x and x in chunk for x in master_forms))
             set_status(progress=pct,message=f"{lang_label} · {mode} · Abschnitt {idx}/{total} …")
@@ -3076,8 +3244,14 @@ def generate(text:str,prepared:str="",style:str="auto"):
             else:
                 cached_wav=cached_metrics=None
                 cache_key=""
+                bridge_cache_key=""
                 if not audio_lock_key:
-                    cached_wav,cached_metrics,cache_key=load_render_cache(chunk,lang,mode,render_sr)
+                    if bridge_direction:
+                        cached_wav,cached_metrics,bridge_cache_key=load_context_bridge_cache(
+                            chunk,lang,mode,bridge_direction,render_sr
+                        )
+                    else:
+                        cached_wav,cached_metrics,cache_key=load_render_cache(chunk,lang,mode,render_sr)
                 if cached_wav is not None:
                     wav,metrics=cached_wav,cached_metrics
                 else:
@@ -3092,7 +3266,14 @@ def generate(text:str,prepared:str="",style:str="auto"):
                             key_salt=sum((i+1)*ord(ch) for i,ch in enumerate(audio_lock_key))
                             core_seed=2026+((render_salt+key_salt*131)%900000)
                         segment_started=time.perf_counter()
-                        wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
+                        if bridge_direction and lang=="de" and not audio_lock_key:
+                            wav,metrics=render_context_bridge(
+                                model,chunk,mode,bridge_direction,seed_base=core_seed
+                            )
+                        else:
+                            wav,metrics=render_segment_with_qa(
+                                model,chunk,lang,mode,critical,seed_base=core_seed
+                            )
                         metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
                     except Exception as first_error:
                         if getattr(model,"_dar_backend","torch")=="mlx" and "generation_timeout" in str(first_error):
@@ -3105,7 +3286,14 @@ def generate(text:str,prepared:str="",style:str="auto"):
                             set_status(message=f"{lang_label} · MLX-Fallback auf PyTorch/MPS …")
                             model=load_model()
                             segment_started=time.perf_counter()
-                            wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
+                            if bridge_direction and lang=="de" and not audio_lock_key:
+                                wav,metrics=render_context_bridge(
+                                    model,chunk,mode,bridge_direction,seed_base=core_seed
+                                )
+                            else:
+                                wav,metrics=render_segment_with_qa(
+                                    model,chunk,lang,mode,critical,seed_base=core_seed
+                                )
                             metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
                         elif MODEL_DEVICE=="mps":
                             print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
@@ -3115,8 +3303,12 @@ def generate(text:str,prepared:str="",style:str="auto"):
                         else:
                             raise
                     if not audio_lock_key:
-                        save_render_cache(cache_key,wav,render_sr)
-                        metrics["segment_cache"]="miss"
+                        if bridge_direction:
+                            save_context_bridge_cache(bridge_cache_key,wav,render_sr)
+                            metrics["context_bridge_cache"]="miss"
+                        else:
+                            save_render_cache(cache_key,wav,render_sr)
+                            metrics["segment_cache"]="miss"
                     if audio_lock_key:
                         wav=wav.detach().float().cpu()
                         session_audio_locks[audio_lock_key]=wav.clone()
@@ -3128,6 +3320,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 "language":lang,
                 "mode":mode,
                 "critical":critical,
+                "context_bridge_direction":bridge_direction or None,
                 **metrics
             }
             outputs[original_idx]=(wav.detach().float().cpu(),lang,chunk,mode,metrics)
@@ -3159,7 +3352,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
             "mode":doc_mode,
             "segment_modes":sorted({x.get("mode","narration") for x in qa_segments}),
             "rescued_segments":sum(1 for x in qa_segments if x.get("rescued")),
-            "continuity_engine":"continuous-sentence-flow-v2",
+            "continuity_engine":"continuous-sentence-flow-v3",
             "preflight":flow_preflight,
             "continuity":continuity_metrics,
             "render_id":render_id,
@@ -3175,9 +3368,11 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 "reference_cache_hits_total":MODEL_REFERENCE_CACHE_HITS,
                 "segment_cache_hits":sum(1 for x in qa_segments if x.get("segment_cache")=="hit"),
                 "segment_cache_misses":sum(1 for x in qa_segments if x.get("segment_cache")=="miss"),
-                "execution_strategy":"cache-only-fast-path" if model is None else ("mlx-bounded-long-form-v1" if getattr(model,"_dar_backend","torch")=="mlx" else "continuous-sentence-flow-v2"),
+                "execution_strategy":"cache-only-fast-path" if model is None else ("mlx-bounded-long-form-v1" if getattr(model,"_dar_backend","torch")=="mlx" else "continuous-sentence-flow-v3"),
                 "backend":"cache-only" if model is None else ("mlx" if getattr(model,"_dar_backend","torch")=="mlx" else "torch"),
-                "fast_reused_segments":sum(1 for x in qa_segments if x.get("fast_reuse") or x.get("segment_cache")=="hit"),
+                "fast_reused_segments":sum(1 for x in qa_segments if x.get("fast_reuse") or x.get("segment_cache")=="hit" or x.get("context_bridge_cache")=="hit"),
+                "context_bridge_segments":sum(1 for x in qa_segments if x.get("context_bridge")),
+                "context_bridge_cache_hits":sum(1 for x in qa_segments if x.get("context_bridge_cache")=="hit"),
                 "model_load_skipped":bool(model is None),
             },
         }
