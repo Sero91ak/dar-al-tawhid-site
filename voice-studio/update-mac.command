@@ -4,7 +4,7 @@ set -euo pipefail
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 UPDATER_DIR="$TARGET/.updater"
 LOG="$TARGET/update.log"
-REMOTE_INSTALLER="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/install-mac.command"
+REMOTE_INSTALLER="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main"
 TMP="$UPDATER_DIR/install-current.command"
 
 mkdir -p "$UPDATER_DIR" "$TARGET"
@@ -16,7 +16,10 @@ touch "$LOG"
   echo "Lade aktuellen Installer …"
 } >>"$LOG"
 
-curl -fsSL "${REMOTE_INSTALLER}?cb=$(date +%s)" -o "$TMP"
+curl -fsSL \
+  -H "Accept: application/vnd.github.raw+json" \
+  -H "User-Agent: DAR-Voice-Studio-Updater" \
+  "$REMOTE_INSTALLER" -o "$TMP"
 chmod +x "$TMP"
 
 /bin/bash -n "$TMP"
