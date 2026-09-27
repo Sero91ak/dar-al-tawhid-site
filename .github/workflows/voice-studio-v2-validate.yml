@@ -456,7 +456,7 @@ jobs:
                   'if p=="/arabic-reference"',
               ]),
               ("kids",kids,[
-                  'alphabet-audio.json?v=3',
+                  'alphabet-audio.json?v=4',
                   'audioEvidenceComplete',
                   'PROGRESS_KEY="kids.alphabet.progress.v2."',
                   'reviewBucket',
@@ -490,6 +490,10 @@ jobs:
                   '"CC0-1.0"',
                   '"CC-BY-4.0"',
                   '"CC-BY-3.0-US"',
+                  '"CC-BY-SA-4.0"',
+                  '"CC-BY-SA-3.0"',
+                  '"shareAlikeRule"',
+                  '"sourceUsageMode": "unmodified-external-original"',
               ]),
           ]
           errors=[]
@@ -516,8 +520,10 @@ jobs:
               errors.append("free-license external human Fuṣḥā/MSA sources missing")
           if '"sourcePage": "https://commons.wikimedia.org/wiki/' not in manifest:
               errors.append("Wikimedia source-page provenance missing")
-          if '"license": "CC0-1.0"' not in manifest or '"license": "CC-BY-4.0"' not in manifest or '"license": "CC-BY-3.0-US"' not in manifest:
+          if '"license": "CC0-1.0"' not in manifest or '"license": "CC-BY-4.0"' not in manifest or '"license": "CC-BY-3.0-US"' not in manifest or '"license": "CC-BY-SA-4.0"' not in manifest or '"license": "CC-BY-SA-3.0"' not in manifest:
               errors.append("required free-license metadata missing")
+          if '"shareAlikeRule"' not in manifest or '"sourceUsageMode": "unmodified-external-original"' not in manifest:
+              errors.append("ShareAlike original-file handling policy missing")
           if '"sourceLanguage": "Modern Standard Arabic (ara)"' not in manifest:
               errors.append("MSA source identity missing")
           if errors:
