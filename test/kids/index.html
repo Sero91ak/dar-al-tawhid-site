@@ -569,6 +569,12 @@ html,body{background:#06131f!important}
   transform:translate3d(0,0,0)!important;
   visibility:visible;
 }
+.kids-update-layer[hidden]{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  transform:translate3d(0,-110%,0)!important;
+}
 .kids-update-card{
   width:100%;
   position:relative;
@@ -2265,7 +2271,7 @@ html.kids-tab-hit-lock .bottom-nav,html.kids-tab-hit-lock .bottom-nav *{pointer-
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&display=swap">
 </head>
 <body>
-<div id="kidsUpdateLayer" class="kids-update-layer">
+<div id="kidsUpdateLayer" class="kids-update-layer" hidden>
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
     <div class="kids-update-scene"></div>
     <div class="kids-update-copy">
@@ -2755,13 +2761,24 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 (function(){
   var pendingKidsBuild="";
   var SEEN_KEY="darKidsFriendlyUpdateSeenV8";
-  function kidsWantPreview(){
-    try{
-      return /(?:^|[?&])demo=update(?:&|$)/.test(String(location.search||""));
-    }catch(e){ return false; }
+  function kidsWantPreview(){ return false; }
+  function kidsIsKidsBuild(id){
+    return /^kids-shell-/.test(String(id||"").trim());
+  }
+  function kidsBuildRank(id){
+    var m=String(id||"").trim().match(/^kids-shell-v(\d+)-tab(\d+)/i);
+    if(!m) return 0;
+    return (Number(m[1])*1000)+Number(m[2]);
+  }
+  function kidsHideUpdate(){
+    var layer=document.getElementById("kidsUpdateLayer");
+    if(!layer)return;
+    layer.classList.remove("is-open");
+    layer.setAttribute("hidden","hidden");
   }
   function kidsShowUpdate(title,text,targetBuild){
     pendingKidsBuild=String(targetBuild||KIDS_BUILD_ID);
+    if(!kidsIsKidsBuild(pendingKidsBuild)) pendingKidsBuild=KIDS_BUILD_ID;
     var layer=document.getElementById("kidsUpdateLayer");
     var h=document.getElementById("kidsUpdateTitle");
     var p=document.getElementById("kidsUpdateText");
@@ -2772,6 +2789,7 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
       btn.dataset.bound="1";
       btn.addEventListener("click",function(){
         try{ localStorage.setItem(SEEN_KEY,"1"); }catch(e){}
+        kidsHideUpdate();
         kidsHardReload(pendingKidsBuild);
       });
     }
@@ -2781,6 +2799,7 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
   }
   function kidsHardReload(targetBuild){
     var want=String(targetBuild||KIDS_BUILD_ID);
+    if(!kidsIsKidsBuild(want)) want=KIDS_BUILD_ID;
     if(want===KIDS_BUILD_ID){
       try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,want)}catch(e){}
     }else{
@@ -2794,21 +2813,19 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
   async function kidsCheckRemoteVersion(){
     try{
       var r=await fetch("/test/kids/version.json?cb="+Date.now(),{cache:"no-store"});
-      if(!r.ok)return;
+      if(!r.ok){ kidsHideUpdate(); return; }
       var j=await r.json();
       var remote=String(j.buildId||"").trim();
-      if(remote && remote!==KIDS_BUILD_ID){
-        kidsShowUpdate("Neue Sachen sind da","Tippe auf den goldenen Knopf.",remote);
-      }else if(remote===KIDS_BUILD_ID){
+      if(!kidsIsKidsBuild(remote) || remote===KIDS_BUILD_ID || kidsBuildRank(remote)<=kidsBuildRank(KIDS_BUILD_ID)){
         try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,KIDS_BUILD_ID)}catch(e){}
+        kidsHideUpdate();
+        return;
       }
-    }catch(e){}
+      kidsShowUpdate("Neue Sachen sind da","Tippe auf den goldenen Knopf.",remote);
+    }catch(e){ kidsHideUpdate(); }
   }
   function kidsBootUpdate(){
-    if(kidsWantPreview()){
-      kidsShowUpdate("Neue Sachen sind da","Tippe auf den goldenen Knopf.",KIDS_BUILD_ID);
-      return;
-    }
+    kidsHideUpdate();
     kidsCheckRemoteVersion();
   }
   kidsBootUpdate();
