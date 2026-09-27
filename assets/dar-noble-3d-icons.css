@@ -1,6 +1,7 @@
-/* Live + web/iOS/Android (not Kids): larger 3D in existing slots, inset from rim, no two-line labels */
+/* Live + web/iOS/Android (not Kids): 3D fills its well, inset from the rim, never over the line */
 img.dar3d-icon{
   display:block;
+  box-sizing:border-box;
   object-fit:contain;
   object-position:center;
   pointer-events:none;
@@ -11,7 +12,7 @@ img.dar3d-icon{
   width:36px!important;
   height:36px!important;
   min-height:36px!important;
-  padding:3px!important;
+  padding:2px!important;
   overflow:hidden!important;
   display:grid!important;
   place-items:center!important;
@@ -19,6 +20,8 @@ img.dar3d-icon{
 #bottomNav .bottom-nav-btn .nav-icon img.dar3d-icon{
   width:100%!important;
   height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
 }
 #bottomNav .bottom-nav-btn > span:not(.nav-icon){
   white-space:nowrap!important;
@@ -26,6 +29,8 @@ img.dar3d-icon{
   text-overflow:ellipsis!important;
   max-width:100%!important;
 }
+
+/* Wells: 2px inset from the 1px border so the image sits in the area, not on the line */
 .feature-icon,
 .folder-icon,
 .book-library-icon,
@@ -33,9 +38,50 @@ img.dar3d-icon{
 .dua-theme-card__icon,
 .topics-theme-card__icon,
 .dua-row__icon,
-.post-row__icon{
+.post-row__icon,
+.scholars-index__mono,
+.prophets-row__icon,
+.prophets-detail__emoji,
+.quiz-quick-icon,
+.quick-action-emoji,
+.home-v380-lib-card__ico,
+.home-v380-quran-hero__mark,
+.more-feature-row__icon,
+.library-focus-teaser__icon,
+.zakat-home-teaser-icon,
+.qrc-btn-emoji,
+.home-hijri-ico{
   box-sizing:border-box!important;
-  padding:4px!important;
+  overflow:hidden!important;
+  display:grid!important;
+  place-items:center!important;
+}
+.dua-theme-card__icon,
+.topics-theme-card__icon,
+.dua-row__icon,
+.post-row__icon{
+  padding:2px!important;
+  overflow:hidden!important;
+}
+.dua-theme-card__icon .emoji-emblem,
+.topics-theme-card__icon .emoji-emblem,
+.dua-row__icon .emoji-emblem,
+.post-row__icon .emoji-emblem,
+.folder-icon .emoji-emblem,
+.book-library-icon .emoji-emblem,
+.feature-icon .emoji-emblem{
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  padding:0!important;
+  margin:0!important;
+  overflow:hidden!important;
+  display:grid!important;
+  place-items:center!important;
+  font-size:0!important;
+  line-height:0!important;
+  color:transparent!important;
 }
 .feature-icon img.dar3d-icon,
 .folder-icon img.dar3d-icon,
@@ -48,9 +94,25 @@ img.dar3d-icon{
 .quick-action-emoji img.dar3d-icon,
 .library-focus-teaser__icon img.dar3d-icon,
 .zakat-home-teaser-icon img.dar3d-icon,
-.home-discover-pdf-cover__fallback img.dar3d-icon{
+.home-discover-pdf-cover__fallback img.dar3d-icon,
+.scholars-index__mono img.dar3d-icon,
+.prophets-row__icon img.dar3d-icon,
+.prophets-detail__emoji img.dar3d-icon,
+.quiz-quick-icon img.dar3d-icon,
+.home-v380-lib-card__ico img.dar3d-icon,
+.home-v380-quran-hero__mark img.dar3d-icon,
+.more-feature-row__icon img.dar3d-icon,
+.qrc-btn-emoji img.dar3d-icon,
+.home-hijri-ico img.dar3d-icon,
+.quran-ayah-action-btn img.dar3d-icon{
   width:100%!important;
   height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  padding:0!important;
+  margin:0 auto!important;
 }
 .home-v380-lib-card__ico,
 .home-v380-lib-card--noble .home-v380-lib-card__ico{
@@ -58,11 +120,8 @@ img.dar3d-icon{
   width:42px!important;
   height:42px!important;
   flex:0 0 42px!important;
-  padding:4px!important;
-}
-.home-v380-lib-card__ico img.dar3d-icon{
-  width:100%!important;
-  height:100%!important;
+  padding:2px!important;
+  overflow:hidden!important;
 }
 .home-v380-lib-card--compact h3,
 .home-v380-lib-card--noble h3{
@@ -76,17 +135,15 @@ img.dar3d-icon{
   width:36px!important;
   height:36px!important;
   flex:0 0 36px!important;
-  padding:3px!important;
+  padding:2px!important;
   display:grid!important;
   place-items:center!important;
+  overflow:hidden!important;
   opacity:1!important;
 }
-.home-v380-quran-hero__mark img.dar3d-icon{
-  width:100%!important;
-  height:100%!important;
-}
 .more-feature-row .feature-icon{
-  padding:4px!important;
+  padding:2px!important;
+  overflow:hidden!important;
 }
 .more-feature-row h4{
   white-space:nowrap!important;
@@ -97,5 +154,44 @@ img.dar3d-icon{
   box-sizing:border-box!important;
   width:28px!important;
   height:28px!important;
-  padding:3px!important;
+  padding:2px!important;
+  overflow:hidden!important;
 }
+.scholars-index__mono{
+  width:34px!important;
+  height:34px!important;
+  padding:2px!important;
+  overflow:hidden!important;
+  font-size:0!important;
+  line-height:0!important;
+}
+.prophets-row__icon,
+.prophets-detail__emoji{
+  padding:2px!important;
+  overflow:hidden!important;
+  font-size:0!important;
+  line-height:0!important;
+}
+.quiz-quick-icon{
+  width:28px!important;
+  height:28px!important;
+  min-width:28px!important;
+  min-height:28px!important;
+  padding:1px!important;
+  overflow:hidden!important;
+  font-size:0!important;
+  line-height:0!important;
+}
+.qrc-btn-emoji,.home-hijri-ico,.settings-live-icon{
+  font-size:0!important;
+  line-height:0!important;
+  color:transparent!important;
+}
+.home-hijri-ico{
+  width:18px!important;
+  height:18px!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+.quran-ayah-action-btn svg{display:none!important}
+.qrc-play-mark{font-size:0!important}

@@ -242,6 +242,13 @@
     return "◆";
   }
 
+  function prophetIconHtml(id, p) {
+    if (typeof window.dar3dIconMarkup === "function") {
+      return window.dar3dIconMarkup("prophet", (p && (p.id || p.name)) || id || "");
+    }
+    return prophetMark(id, p);
+  }
+
   function isDisputedStatus(status) {
     return !!(status && DISPUTED_STATUSES[String(status)]);
   }
@@ -986,7 +993,7 @@
     }
     return (
       '<button type="button" class="prophets-spotlight more-feature-row" data-nav="propheten" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa" aria-label="Die Propheten öffnen">' +
-      '<span class="feature-icon prophets-spotlight__icon" aria-hidden="true">✦</span>' +
+      '<span class="feature-icon prophets-spotlight__icon" aria-hidden="true">' + prophetIconHtml("prophets") + "</span>" +
       '<span class="prophets-spotlight__body">' +
       "<h4>Die Propheten <span class=\"feature-badge\">Wissen</span></h4>" +
       '<p><span class="prophets-spotlight__ar-inline" lang="ar" dir="rtl">الأنبياء</span>' +
@@ -1096,7 +1103,7 @@
       esc(p.id) +
       '">' +
       '<span class="prophets-row__icon" aria-hidden="true">' +
-      mark +
+      (typeof window.dar3dIconMarkup === "function" ? window.dar3dIconMarkup("prophet", p.id || p.name) : mark) +
       "</span>" +
       '<span class="prophets-row__body">' +
       '<span class="prophets-row__titleline">' +
@@ -1851,7 +1858,7 @@
       '<header class="prophets-detail__head">' +
       '<div class="prophets-detail__head-top">' +
       '<span class="prophets-detail__emoji" aria-hidden="true">' +
-      mark +
+      prophetIconHtml(meta.id, meta) +
       "</span>" +
       '<h2 class="prophets-detail__name">' +
       esc(meta.name || "…") +
@@ -1882,7 +1889,7 @@
       '<header class="prophets-detail__head">' +
       '<div class="prophets-detail__head-top">' +
       '<span class="prophets-detail__emoji" aria-hidden="true">' +
-      mark +
+      prophetIconHtml(meta.id, meta) +
       "</span>" +
       '<h2 class="prophets-detail__name">' +
       esc(meta.name) +
@@ -1982,7 +1989,7 @@
       '<header class="prophets-detail__head">' +
       '<div class="prophets-detail__head-top">' +
       '<span class="prophets-detail__emoji" aria-hidden="true">' +
-      prophetMark(profile.id, profile) +
+      prophetIconHtml(profile.id, profile) +
       "</span>" +
       '<h2 class="prophets-detail__name">' +
       esc(profile.name) +

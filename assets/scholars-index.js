@@ -378,8 +378,11 @@
     const sub = metaParts.join(' · ');
     const aria = `${s.displayName}, ${sub.replace(/ · /g, ', ')}, öffnen`;
     const glyph = s.glyph || scholarGlyphFromMeta(s);
+    const icon = (typeof window.dar3dIconMarkup === 'function')
+      ? window.dar3dIconMarkup('scholar', s.primaryGroup || glyph)
+      : glyph;
     return `<button type="button" class="scholars-index__row" data-scholar-open="${esc(s.id)}" aria-label="${esc(aria)}">
-      <span class="scholars-index__mono${s.primaryGroup === 'prophet' ? ' scholars-index__mono--prophet' : ''}" data-group="${esc(s.primaryGroup || '')}" aria-hidden="true">${glyph}</span>
+      <span class="scholars-index__mono${s.primaryGroup === 'prophet' ? ' scholars-index__mono--prophet' : ''}" data-group="${esc(s.primaryGroup || '')}" aria-hidden="true">${icon}</span>
       <span class="scholars-index__copy">
         <span class="scholars-index__name">${esc(s.displayName)}</span>
         <span class="scholars-index__sub">${esc(sub)}</span>

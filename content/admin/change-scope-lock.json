@@ -102,7 +102,10 @@
     "test/assets/test-update-surface.js",
     "test/assets/dar-3d-icons/",
     "test/assets/dar-noble-3d-icons.css",
-    "test/assets/dar-noble-3d-icons.js"
+    "test/assets/dar-noble-3d-icons.js",
+    "assets/dar-noble-3d-icons.js",
+    "assets/dar-noble-3d-icons.css",
+    "assets/dar-3d-icons/"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -122,6 +125,69 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "adult-3d-icon-fill-well-2026-09-27",
+      "approvedBy": "user-explicit-3d-zu-klein-flaeche-ausnutzen-linie",
+      "reason": "3D-Bilder fuellen die Icon-Flaeche, 2px Abstand zur Linie, nicht darueber.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/dar-noble-3d-icons.css",
+        "test/assets/dar-noble-3d-icons.css"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-list-3d-icons-render-2026-09-27",
+      "approvedBy": "user-explicit-immer-noch-keine-3d-listen-intensiv-passend",
+      "reason": "Nutzer-Screenshots: Themen, Beitraege, Quiz, Propheten, Gelehrte, Quran-Aktionen noch Emoji. Glyph-Funktionen geben jetzt 3D-PNG aus, Extra-Icons heart/play/spark/shield/mosque.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/dar-noble-3d-icons.js",
+        "assets/dar-noble-3d-icons.css",
+        "assets/dar-3d-icons/",
+        "test/assets/dar-noble-3d-icons.js",
+        "test/assets/dar-noble-3d-icons.css",
+        "test/assets/dar-3d-icons/",
+        "assets/scholars-index.js",
+        "assets/prophets/prophets.js",
+        "test/assets/prophets/prophets.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "adult-list-3d-icons-2026-09-26",
+      "approvedBy": "user-explicit-viele-bereiche-keine-3d-bilder-suchen-umbauen",
+      "reason": "Nutzer: viele Bereiche in Test/Besucher/iOS ohne 3D-Bilder. Vorhandene dar-3d-icons auf Gelehrte, Themen, Beitraege, Propheten, Quiz, Dua mappen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/dar-noble-3d-icons.js",
+        "assets/dar-noble-3d-icons.css",
+        "test/assets/dar-noble-3d-icons.js",
+        "test/assets/dar-noble-3d-icons.css",
+        "assets/scholars-index.js",
+        "assets/prophets/prophets.js",
+        "test/assets/prophets/prophets.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
     {
       "id": "kids-quiz-scroll-2026-09-26",
       "approvedBy": "user-explicit-kids-quiz-kann-nicht-scrollen",
