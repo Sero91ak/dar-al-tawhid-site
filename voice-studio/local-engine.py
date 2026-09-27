@@ -3299,7 +3299,14 @@ def generate(text:str,prepared:str="",style:str="auto"):
                             print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
                             set_status(message=f"{lang_label} · MPS-Fallback auf CPU …")
                             model=load_model(force_device="cpu")
-                            wav,metrics=render_segment_with_qa(model,chunk,lang,mode,critical,seed_base=core_seed)
+                            if bridge_direction and lang=="de" and not audio_lock_key:
+                                wav,metrics=render_context_bridge(
+                                    model,chunk,mode,bridge_direction,seed_base=core_seed
+                                )
+                            else:
+                                wav,metrics=render_segment_with_qa(
+                                    model,chunk,lang,mode,critical,seed_base=core_seed
+                                )
                         else:
                             raise
                     if not audio_lock_key:
