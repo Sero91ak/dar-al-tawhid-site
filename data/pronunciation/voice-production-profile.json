@@ -1,11 +1,11 @@
 {
   "schemaVersion": 8,
-  "id": "dar-own-voice-narration-v2.7.7",
+  "id": "dar-own-voice-narration-v2.8.0",
   "updatedAt": "2026-09-27",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
-  "productionGoal": "Production-grade Serhat narration with deterministic Islamic-name pronunciation, verified master-library merge, unresolved-term blocking, mandatory honorifics, persistent confirmed audio locks, immediate learned-rule activation, and automatic rerender of the current text after pronunciation confirmation.",
+  "productionGoal": "Production-grade Serhat narration with continuous sentence flow, deterministic Islamic-name pronunciation, no artificial thinking pauses, verified master-library merge, mandatory honorifics, persistent confirmed audio locks, and strict continuity QA.",
   "delivery": {
     "genderPresentation": "male",
     "character": [
@@ -309,7 +309,7 @@
     "outputEdgeFadeMs": 12,
     "segmentContextProsody": true,
     "sameLanguageCrossfadeMaxMs": 22,
-    "languageCrossfadeMinMs": 14,
+    "languageCrossfadeMinMs": 44,
     "sentencePauseFactors": {
       "period": 1,
       "question": 1.06,
@@ -325,7 +325,13 @@
     "inlineArabicTrimSafetyMs": 5,
     "inlineArabicCrossfadeMs": 72,
     "inlineArabicSoftPauseMaxMs": 22,
-    "inlineArabicMicroTermBridge": true
+    "inlineArabicMicroTermBridge": true,
+    "boundaryTrimThresholdRelative": 0.006,
+    "boundaryTrimSafetyMs": 8,
+    "internalFlowCrossfadeMs": 52,
+    "continuousSentenceFlow": true,
+    "renderInOriginalTextOrder": true,
+    "noArtificialThinkingPause": true
   },
   "qualityAssurance": {
     "maxRenderAttempts": 2,
@@ -334,12 +340,12 @@
     "minRms": 0.0015,
     "minPeak": 0.01,
     "maxClippingRatio": 0.02,
-    "maxInternalSilenceMsWithoutPunctuation": 700,
+    "maxInternalSilenceMsWithoutPunctuation": 480,
     "shortArabicMaxSecondsBase": 1.2,
     "shortArabicMaxSecondsPerLetter": 0.34,
     "requireHumanConfirmationForMaster": true,
     "note": "Automatic QA rejects technical silence, excessive punctuation pauses, suspicious sustained holds, clipping and implausibly slow/long segments. One controlled retry remains the default; non-MASTER long segments may use deterministic clause rescue. Human semantic pronunciation review is still mandatory.",
-    "maxInternalSilenceMsWithPunctuation": 1250,
+    "maxInternalSilenceMsWithPunctuation": 700,
     "minSpeechRateWords": 6,
     "minSpeechRateWpmByMode": {
       "default": 78,
@@ -380,7 +386,33 @@
     "multiCorrectionAutoRerenderRegression": true,
     "inlineArabicMaxSecondsBase": 0.65,
     "inlineArabicMaxSecondsPerLetter": 0.15,
-    "inlineArabicFlowRegression": true
+    "inlineArabicFlowRegression": true,
+    "maxInternalSilenceMsWithPunctuationByMode": {
+      "narration": 650,
+      "kids_story": 720,
+      "kids_lesson": 680,
+      "teaching": 650,
+      "gentle": 780,
+      "serious": 780,
+      "question": 700,
+      "list": 680,
+      "dua": 850
+    },
+    "finalMaxInternalSilenceMs": 620,
+    "finalMaxInternalSilenceMsByMode": {
+      "narration": 620,
+      "kids_story": 700,
+      "kids_lesson": 660,
+      "teaching": 620,
+      "gentle": 760,
+      "serious": 760,
+      "question": 680,
+      "list": 650,
+      "dua": 820
+    },
+    "continuousSentenceFlowRegression": true,
+    "originalTextOrderRegression": true,
+    "generalBoundaryTrimRegression": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -582,6 +614,11 @@
     "preserveAntiStutterQa": true,
     "preserveAntiHoldQa": true,
     "inlineArabicFlowBridge": true,
-    "flowBridgeVersion": 3
+    "flowBridgeVersion": 3,
+    "flowArchitecture": "continuous-sentence-flow-v1",
+    "phraseAwareChunking": true,
+    "renderInOriginalTextOrder": true,
+    "generalBoundaryFlowBridge": true,
+    "noHardWordBoundaryChunking": true
   }
 }
