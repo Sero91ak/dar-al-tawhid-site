@@ -200,8 +200,8 @@ function navHtml(){
     <div class="cs-fast-actions" aria-label="Schnellproduktion">
       <button id="csQuickNew" class="btn quiet" type="button" title="Neuen Inhalt starten">Neu</button>
       <button id="csQuickCopy" class="btn quiet" type="button" title="Aktuellen Text kopieren">Kopieren</button>
-      <button id="csQuickProduce" class="btn primary" type="button" title="Audio und Cover vorbereiten · ⌘↩">Erzeugen</button>
-      <button id="csQuickTest" class="btn secondary" type="button" title="In Test veröffentlichen · ⇧⌘↩">Test</button>
+      <button id="csQuickProduce" class="btn primary" type="button" title="Audio und Cover vorbereiten · ⇧⌘E">Erzeugen</button>
+      <button id="csQuickTest" class="btn secondary" type="button" title="In Test veröffentlichen · ⇧⌘T">Test</button>
       <button id="csQuickLive" class="btn secondary" type="button" title="Geprüfte Version live veröffentlichen" disabled>Live</button>
     </div>
   </nav>`;
@@ -325,19 +325,6 @@ function bind(){
   q("csQuickLive")?.addEventListener("click",publishLive);
   document.querySelectorAll("[data-cs-step]").forEach(btn=>btn.addEventListener("click",()=>goToWorkflowStep(btn.dataset.csStep)));
   q("csSaveConnection")?.addEventListener("click",saveConnection);
-  document.addEventListener("keydown",e=>{
-    const mod=e.metaKey||e.ctrlKey;
-    if(mod&&e.key==="Enter"&&!e.shiftKey){
-      e.preventDefault();
-      if(!busy)produce();
-      return;
-    }
-    if(mod&&e.shiftKey&&e.key==="Enter"){
-      e.preventDefault();
-      const test=q("csPublishTest");
-      if(test&&!test.disabled&&!busy)publishTest();
-    }
-  });
   q("csInventorySearch")?.addEventListener("input",renderInventory);
   q("csInventoryRefresh")?.addEventListener("click",()=>loadLibrary(true));
   document.addEventListener("click",e=>{
