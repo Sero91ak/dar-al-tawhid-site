@@ -2921,7 +2921,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab42";
+const KIDS_BUILD_ID="kids-shell-v12-tab43";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -3953,6 +3953,7 @@ function ensureMicrophonePermission(){
     };
     recitationStream=stream;
     recitationPermissionReady=true;
+    startMeter(stream);
     document.getElementById("micMonitor").classList.remove("error");
     document.getElementById("micStateText").textContent="Mikrofon bereit";
     return true;
@@ -4061,14 +4062,21 @@ async function gradeCapturedWord(blob,expected){
   form.append("audio",blob,"word.wav");
   form.append("expected",expected);
   form.append("age",age);
-  var response=await fetch("/test/kids/api/recitation/grade",{
-    method:"POST",
-    body:form,
-    cache:"no-store"
-  });
-  var data=await response.json().catch(function(){return{}});
-  if(!response.ok||!data.ok)throw new Error(data.error||"grade_failed");
-  return data;
+  var controller=typeof AbortController!=="undefined"?new AbortController():null;
+  var timeout=setTimeout(function(){if(controller)controller.abort()},15000);
+  try{
+    var response=await fetch("/test/kids/api/recitation/grade",{
+      method:"POST",
+      body:form,
+      cache:"no-store",
+      signal:controller?controller.signal:undefined
+    });
+    var data=await response.json().catch(function(){return{}});
+    if(!response.ok||!data.ok)throw new Error(data.error||"grade_failed");
+    return data;
+  }finally{
+    clearTimeout(timeout);
+  }
 }
 function applyServerGrade(data){
   if(!practiceActive||ayahPassed)return;
@@ -4148,8 +4156,9 @@ async function finishWordCapture(){
     applyServerGrade(result);
   }catch(error){
     document.getElementById("micMonitor").classList.add("error");
-    document.getElementById("micStateText").textContent="Prüfung fehlgeschlagen — noch einmal";
-    updateLearnStatus("Das Wort konnte nicht geprüft werden. Sprich es bitte noch einmal.",false,"error");
+    var timedOut=String(error&&error.name||"")==="AbortError";
+    document.getElementById("micStateText").textContent=timedOut?"Prüfung dauert zu lange — noch einmal":"Prüfung fehlgeschlagen — noch einmal";
+    updateLearnStatus(timedOut?"Die Wortprüfung hat zu lange gedauert. Sprich es bitte noch einmal.":"Das Wort konnte nicht geprüft werden. Sprich es bitte noch einmal.",false,"error");
   }finally{
     wordCaptureBusy=false;
     if(practiceActive&&!ayahPassed){
