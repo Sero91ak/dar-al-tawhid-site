@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" class="kids-intro-active">
+<html lang="de" class="kids-hello">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -2368,333 +2368,6 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
-
-<style id="kids-launch-intro-v1">
-html.kids-intro-active,
-html.kids-intro-active body{
-  height:100%;
-  overflow:hidden!important;
-  overscroll-behavior:none!important;
-}
-html.kids-intro-active body{touch-action:none}
-html.kids-intro-active .app{
-  pointer-events:none!important;
-  user-select:none!important;
-  transform:scale(.986);
-  filter:saturate(.86) brightness(.8);
-}
-html.kids-intro-active.kids-intro-reveal .app{
-  transform:none;
-  filter:none;
-  transition:transform .78s cubic-bezier(.16,1,.3,1),filter .62s ease;
-}
-#kidsLaunchIntro{
-  position:fixed;
-  inset:0;
-  z-index:2147483000;
-  min-height:100dvh;
-  overflow:hidden;
-  display:grid;
-  place-items:center;
-  isolation:isolate;
-  color:#fff9e9;
-  background:
-    radial-gradient(circle at 50% 60%,rgba(115,201,193,.18),transparent 34%),
-    radial-gradient(circle at 78% 17%,rgba(255,225,157,.17),transparent 19%),
-    linear-gradient(160deg,#06131f 0%,#0a2438 43%,#123e56 72%,#1a5368 100%);
-  opacity:1;
-  visibility:visible;
-  -webkit-font-smoothing:antialiased;
-  transition:opacity .58s ease,visibility 0s linear .58s;
-  touch-action:none;
-}
-#kidsLaunchIntro.is-leaving{opacity:0;visibility:hidden}
-#kidsLaunchIntro::before{
-  content:"";
-  position:absolute;
-  inset:-18%;
-  z-index:-5;
-  background:
-    radial-gradient(ellipse at 28% 38%,rgba(104,207,208,.25),transparent 30%),
-    radial-gradient(ellipse at 72% 54%,rgba(226,189,114,.18),transparent 28%),
-    conic-gradient(from 210deg at 50% 55%,rgba(82,180,192,.05),rgba(255,216,136,.16),rgba(78,174,190,.06),rgba(82,180,192,.05));
-  filter:blur(26px);
-  animation:introAurora 7s ease-in-out infinite alternate;
-}
-#kidsLaunchIntro::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:-14vh;
-  width:min(120vw,760px);
-  aspect-ratio:1.8;
-  transform:translateX(-50%);
-  border-radius:50%;
-  background:radial-gradient(ellipse,rgba(94,206,197,.18) 0%,rgba(34,126,146,.08) 40%,transparent 72%);
-  filter:blur(8px);
-  z-index:-4;
-}
-@keyframes introAurora{
-  from{transform:translate3d(-2%,-1%,0) scale(1)}
-  to{transform:translate3d(3%,2%,0) scale(1.06)}
-}
-.kids-intro-stars{position:absolute;inset:0;z-index:-3;pointer-events:none}
-.kids-intro-star{
-  --s:3px;--o:.45;--d:0s;
-  position:absolute;
-  left:var(--x);top:var(--y);
-  width:var(--s);height:var(--s);
-  border-radius:50%;
-  background:#fff7d9;
-  opacity:var(--o);
-  box-shadow:0 0 7px rgba(255,239,185,.72);
-  animation:introTwinkle 2.2s ease-in-out var(--d) infinite alternate;
-}
-.kids-intro-star.big{
-  box-shadow:0 0 5px #fff,0 0 16px rgba(255,217,120,.72);
-}
-@keyframes introTwinkle{
-  0%{opacity:.12;transform:scale(.58)}
-  100%{opacity:1;transform:scale(1.32)}
-}
-.kids-intro-stage{
-  position:relative;
-  width:min(92vw,520px);
-  height:min(88dvh,700px);
-  min-height:520px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  perspective:1100px;
-  transform-style:preserve-3d;
-}
-.kids-intro-halo{
-  position:absolute;
-  left:50%;top:46%;
-  width:min(76vw,390px);
-  aspect-ratio:1;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(117,220,208,.19),rgba(234,199,124,.08) 38%,transparent 68%);
-  filter:blur(4px);
-  animation:introHalo 2.8s ease-in-out infinite alternate;
-}
-@keyframes introHalo{
-  from{opacity:.68;transform:translate(-50%,-50%) scale(.94)}
-  to{opacity:1;transform:translate(-50%,-50%) scale(1.05)}
-}
-.kids-intro-brand{
-  position:relative;
-  z-index:8;
-  text-align:center;
-  margin:0 0 4px;
-  opacity:0;
-  transform:translateY(-18px) scale(.94);
-  animation:introBrandIn .9s cubic-bezier(.16,1,.3,1) .18s forwards;
-}
-.kids-intro-brand-main{
-  display:block;
-  font-family:"Avenir Next","SF Pro Rounded",system-ui,sans-serif;
-  font-weight:800;
-  font-size:clamp(24px,7.3vw,38px);
-  line-height:1;
-  letter-spacing:.07em;
-  white-space:nowrap;
-  color:#f5d58e;
-  text-shadow:0 3px 12px rgba(0,0,0,.33),0 0 18px rgba(232,194,113,.22);
-}
-@keyframes introBrandIn{
-  0%{opacity:0;transform:translateY(-20px) scale(.94)}
-  70%{opacity:1;transform:translateY(2px) scale(1.015)}
-  100%{opacity:1;transform:none}
-}
-.kids-intro-kids{
-  position:relative;
-  z-index:9;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  gap:clamp(1px,.8vw,5px);
-  margin-top:2px;
-  min-height:64px;
-}
-.kids-intro-kids span{
-  display:inline-block;
-  font-family:"SF Pro Rounded","Avenir Next",system-ui,sans-serif;
-  font-weight:900;
-  font-size:clamp(44px,13vw,66px);
-  line-height:.9;
-  text-shadow:0 5px 12px rgba(0,0,0,.3),0 0 14px color-mix(in srgb,currentColor 42%,transparent);
-  opacity:0;
-  transform:translateY(30px) rotateX(35deg) scale(.35);
-  transform-origin:50% 100%;
-  animation:introKidPop .68s cubic-bezier(.18,1.42,.34,1) forwards;
-}
-.kids-intro-kids .k{color:#f1c56f;animation-delay:.5s}
-.kids-intro-kids .i{color:#79d5c9;animation-delay:.62s}
-.kids-intro-kids .d{color:#efaa8e;animation-delay:.74s}
-.kids-intro-kids .s{color:#b6a7e8;animation-delay:.86s}
-@keyframes introKidPop{
-  0%{opacity:0;transform:translateY(28px) rotateX(38deg) scale(.3)}
-  68%{opacity:1;transform:translateY(-7px) rotateX(-7deg) scale(1.13,.9)}
-  84%{transform:translateY(2px) rotateX(3deg) scale(.97,1.06)}
-  100%{opacity:1;transform:none}
-}
-.kids-intro-book-zone{
-  position:relative;
-  z-index:7;
-  width:min(76vw,390px);
-  height:210px;
-  margin-top:4px;
-  transform-style:preserve-3d;
-}
-.kids-intro-book-light{
-  position:absolute;
-  left:50%;top:52%;
-  width:74%;height:46%;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:radial-gradient(ellipse,rgba(255,232,162,.42),rgba(95,211,202,.13) 42%,transparent 72%);
-  filter:blur(13px);
-  opacity:0;
-  animation:introBookLight 1.3s ease .7s forwards;
-}
-@keyframes introBookLight{
-  to{opacity:1;transform:translate(-50%,-50%) scale(1.18)}
-}
-.kids-intro-book{
-  position:absolute;
-  left:50%;bottom:6px;
-  width:100%;
-  height:auto;
-  overflow:visible;
-  opacity:0;
-  transform:translateX(-50%) translateY(34px) rotateX(58deg) scale(.78);
-  transform-origin:50% 80%;
-  filter:drop-shadow(0 20px 22px rgba(0,0,0,.42)) drop-shadow(0 0 18px rgba(234,196,111,.15));
-  animation:introBookOpen 1.05s cubic-bezier(.16,1,.3,1) .62s forwards;
-}
-@keyframes introBookOpen{
-  0%{opacity:0;transform:translateX(-50%) translateY(38px) rotateX(64deg) scale(.72)}
-  72%{opacity:1;transform:translateX(-50%) translateY(-3px) rotateX(8deg) scale(1.025)}
-  100%{opacity:1;transform:translateX(-50%) translateY(0) rotateX(0) scale(1)}
-}
-.kids-intro-letter{
-  position:absolute;
-  z-index:10;
-  font-family:"Geeza Pro","Noto Naskh Arabic","Arial",sans-serif;
-  font-weight:700;
-  font-size:clamp(48px,15vw,78px);
-  line-height:1;
-  color:#f7dc96;
-  text-shadow:0 4px 10px rgba(0,0,0,.34),0 0 16px rgba(244,205,119,.42);
-  opacity:0;
-  transform-origin:50% 100%;
-}
-.kids-intro-letter.alif{left:69%;top:8%;animation:introLetterA 1.15s cubic-bezier(.16,1,.3,1) 1.14s forwards}
-.kids-intro-letter.ba{left:41%;top:1%;color:#85ded3;animation:introLetterB 1.2s cubic-bezier(.16,1,.3,1) 1.28s forwards}
-.kids-intro-letter.ta{left:14%;top:18%;color:#efb28f;animation:introLetterC 1.2s cubic-bezier(.16,1,.3,1) 1.42s forwards}
-@keyframes introLetterA{
-  0%{opacity:0;transform:translate(-80px,95px) rotate(14deg) scale(.2)}
-  65%{opacity:1;transform:translate(8px,-7px) rotate(-4deg) scale(1.08)}
-  100%{opacity:1;transform:translate(0,0) rotate(0) scale(1)}
-}
-@keyframes introLetterB{
-  0%{opacity:0;transform:translate(6px,112px) rotate(-8deg) scale(.2)}
-  65%{opacity:1;transform:translate(-4px,-8px) rotate(3deg) scale(1.09)}
-  100%{opacity:1;transform:none}
-}
-@keyframes introLetterC{
-  0%{opacity:0;transform:translate(92px,84px) rotate(-18deg) scale(.2)}
-  65%{opacity:1;transform:translate(-7px,-5px) rotate(4deg) scale(1.08)}
-  100%{opacity:1;transform:none}
-}
-.kids-intro-swish{
-  position:absolute;
-  left:13%;right:13%;top:37%;
-  height:46%;
-  border:1px solid rgba(255,231,162,.24);
-  border-left-color:transparent;
-  border-bottom-color:transparent;
-  border-radius:50%;
-  opacity:0;
-  transform:rotate(-11deg) scale(.72);
-  animation:introSwish 1.3s ease 1.1s forwards;
-}
-.kids-intro-swish::after{
-  content:"";
-  position:absolute;
-  right:8%;top:5%;
-  width:6px;height:6px;border-radius:50%;
-  background:#fff3c5;
-  box-shadow:0 0 12px #ffe19a;
-}
-@keyframes introSwish{
-  0%{opacity:0;transform:rotate(-18deg) scale(.68)}
-  50%{opacity:.9}
-  100%{opacity:.34;transform:rotate(2deg) scale(1.03)}
-}
-.kids-intro-greeting{
-  position:relative;
-  z-index:11;
-  text-align:center;
-  margin-top:-8px;
-  opacity:0;
-  transform:translateY(12px);
-  animation:introGreeting .72s ease 1.62s forwards;
-}
-.kids-intro-greeting strong{
-  display:block;
-  font-family:"SF Pro Rounded","Avenir Next",system-ui,sans-serif;
-  font-size:clamp(20px,6vw,30px);
-  line-height:1.18;
-  font-weight:800;
-  color:#fff8e7;
-  text-shadow:0 3px 12px rgba(0,0,0,.28);
-}
-.kids-intro-greeting span{
-  display:block;
-  margin-top:7px;
-  color:rgba(255,255,255,.78);
-  font-size:clamp(13px,3.7vw,17px);
-  font-weight:650;
-  letter-spacing:.02em;
-}
-@keyframes introGreeting{to{opacity:1;transform:none}}
-.kids-intro-ground{
-  position:absolute;
-  left:50%;bottom:7%;
-  width:74%;height:2px;
-  transform:translateX(-50%);
-  background:linear-gradient(90deg,transparent,rgba(239,201,122,.62),rgba(111,218,207,.66),rgba(239,201,122,.62),transparent);
-  filter:blur(.2px);
-  opacity:0;
-  animation:introGround 1s ease 1.7s forwards;
-}
-@keyframes introGround{to{opacity:.55}}
-#kidsLaunchIntro.is-leaving .kids-intro-stage{
-  transform:translateY(-5px) scale(1.035);
-  opacity:.35;
-  filter:blur(4px);
-  transition:transform .58s cubic-bezier(.16,1,.3,1),opacity .48s ease,filter .48s ease;
-}
-@media(max-height:650px){
-  .kids-intro-stage{height:92dvh;min-height:470px}
-  .kids-intro-book-zone{height:178px}
-  .kids-intro-greeting{margin-top:-14px}
-}
-@media(prefers-reduced-motion:reduce){
-  #kidsLaunchIntro::before,.kids-intro-star,.kids-intro-halo{animation:none!important}
-  .kids-intro-brand,.kids-intro-kids span,.kids-intro-book,.kids-intro-book-light,
-  .kids-intro-letter,.kids-intro-swish,.kids-intro-greeting,.kids-intro-ground{
-    animation-duration:.01ms!important;
-    animation-delay:0s!important;
-    animation-iteration-count:1!important;
-    opacity:1!important;
-  }
-}
-</style>
 </head>
 <body>
 <div id="kidsUpdateLayer" class="kids-update-layer">
@@ -2760,79 +2433,6 @@ html.kids-intro-active.kids-intro-reveal .app{
   </div>
 </div>
 
-
-<div id="kidsLaunchIntro" aria-hidden="true">
-  <div class="kids-intro-stars" aria-hidden="true">
-    <i class="kids-intro-star big" style="--x:10%;--y:13%;--s:4px;--d:.1s"></i>
-    <i class="kids-intro-star" style="--x:22%;--y:26%;--s:2px;--d:.8s"></i>
-    <i class="kids-intro-star" style="--x:34%;--y:9%;--s:3px;--d:1.3s"></i>
-    <i class="kids-intro-star big" style="--x:48%;--y:18%;--s:4px;--d:.5s"></i>
-    <i class="kids-intro-star" style="--x:63%;--y:8%;--s:2px;--d:1.8s"></i>
-    <i class="kids-intro-star big" style="--x:81%;--y:20%;--s:4px;--d:1s"></i>
-    <i class="kids-intro-star" style="--x:91%;--y:34%;--s:2px;--d:.2s"></i>
-    <i class="kids-intro-star" style="--x:14%;--y:48%;--s:2px;--d:1.6s"></i>
-    <i class="kids-intro-star" style="--x:86%;--y:51%;--s:3px;--d:.7s"></i>
-    <i class="kids-intro-star big" style="--x:7%;--y:72%;--s:4px;--d:1.2s"></i>
-    <i class="kids-intro-star" style="--x:29%;--y:81%;--s:2px;--d:.4s"></i>
-    <i class="kids-intro-star" style="--x:73%;--y:78%;--s:3px;--d:1.7s"></i>
-    <i class="kids-intro-star big" style="--x:92%;--y:68%;--s:4px;--d:.9s"></i>
-  </div>
-  <div class="kids-intro-stage">
-    <div class="kids-intro-halo"></div>
-    <div class="kids-intro-brand">
-      <span class="kids-intro-brand-main">DĀR AL TAWḤĪD</span>
-      <div class="kids-intro-kids" aria-hidden="true">
-        <span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span>
-      </div>
-    </div>
-    <div class="kids-intro-book-zone" aria-hidden="true">
-      <div class="kids-intro-book-light"></div>
-      <div class="kids-intro-swish"></div>
-      <span class="kids-intro-letter ta">ت</span>
-      <span class="kids-intro-letter ba">ب</span>
-      <span class="kids-intro-letter alif">ا</span>
-      <svg class="kids-intro-book" viewBox="0 0 360 190" focusable="false">
-        <defs>
-          <linearGradient id="kiCover" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#173f52"/>
-            <stop offset=".52" stop-color="#0f3041"/>
-            <stop offset="1" stop-color="#071b2a"/>
-          </linearGradient>
-          <linearGradient id="kiPageL" x1="0" y1="0" x2="1" y2=".8">
-            <stop offset="0" stop-color="#fff7dc"/>
-            <stop offset=".62" stop-color="#f2ddb0"/>
-            <stop offset="1" stop-color="#cda45f"/>
-          </linearGradient>
-          <linearGradient id="kiPageR" x1="1" y1="0" x2="0" y2=".8">
-            <stop offset="0" stop-color="#fff7dc"/>
-            <stop offset=".62" stop-color="#f2ddb0"/>
-            <stop offset="1" stop-color="#cda45f"/>
-          </linearGradient>
-          <radialGradient id="kiGlow" cx=".5" cy=".35" r=".65">
-            <stop offset="0" stop-color="#fff4be" stop-opacity=".9"/>
-            <stop offset=".45" stop-color="#e3bf70" stop-opacity=".3"/>
-            <stop offset="1" stop-color="#73c9c1" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <ellipse cx="180" cy="148" rx="148" ry="33" fill="url(#kiGlow)" opacity=".82"/>
-        <path d="M29 139 Q92 125 179 160 Q268 125 331 139 L316 161 Q249 151 180 178 Q111 151 44 161 Z" fill="url(#kiCover)" stroke="#c89b50" stroke-width="3"/>
-        <path d="M42 65 Q104 53 179 88 L179 158 Q113 127 38 139 Z" fill="url(#kiPageL)" stroke="#eccf8c" stroke-width="2.5"/>
-        <path d="M318 65 Q256 53 181 88 L181 158 Q247 127 322 139 Z" fill="url(#kiPageR)" stroke="#eccf8c" stroke-width="2.5"/>
-        <path d="M179 88 Q180 117 180 158" fill="none" stroke="#b98640" stroke-width="3" opacity=".75"/>
-        <path d="M58 81 Q113 73 163 96 M57 93 Q111 84 163 106 M55 105 Q110 96 163 117 M54 117 Q107 108 161 128" fill="none" stroke="#a77b45" stroke-width="2" opacity=".36"/>
-        <path d="M302 81 Q247 73 197 96 M303 93 Q249 84 197 106 M305 105 Q250 96 197 117 M306 117 Q253 108 199 128" fill="none" stroke="#a77b45" stroke-width="2" opacity=".36"/>
-        <path d="M72 75 Q111 65 159 88" fill="none" stroke="#fff3c0" stroke-width="2" opacity=".8"/>
-        <path d="M288 75 Q249 65 201 88" fill="none" stroke="#fff3c0" stroke-width="2" opacity=".8"/>
-      </svg>
-    </div>
-    <div class="kids-intro-greeting">
-      <strong>As-Salāmu ʿalaykum!</strong>
-      <span>Bereit zum Entdecken?</span>
-    </div>
-    <div class="kids-intro-ground" aria-hidden="true"></div>
-  </div>
-</div>
-
 <div class="app">
   <div class="ambient"></div>
   <div class="dev-ribbon" hidden>KIDS · V0.53</div>
@@ -2845,24 +2445,8 @@ html.kids-intro-active.kids-intro-reveal .app{
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div class="kids-wordmark">
-          <span class="wm-dar">DĀR AL TAWḤĪD</span>
-          <div class="wm-dar-wrap">
-            <svg class="wm-dar-svg" viewBox="0 0 560 72" aria-hidden="true">
-              <defs>
-                <linearGradient id="wmGoldFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#fff8e0"></stop>
-                  <stop offset=".42" stop-color="#f4d48a"></stop>
-                  <stop offset="1" stop-color="#c8923e"></stop>
-                </linearGradient>
-              </defs>
-              <path id="wmArc" d="M26 58 C 160 18, 400 18, 534 58" fill="none"></path>
-              <text fill="url(#wmGoldFill)" stroke="rgba(255,255,255,.55)" stroke-width="2.1" paint-order="stroke fill" font-size="40" font-family="Fredoka, system-ui, sans-serif" font-weight="700" letter-spacing="1.4">
-                <textPath href="#wmArc" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath>
-              </text>
-            </svg>
-          </div>
+          <p class="wm-dar-line">DĀR AL TAWḤĪD</p>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
-          <span class="wm-sparks" aria-hidden="true"><i></i><i></i><i></i></span>
         </div>
         <div class="cloud"></div>
         <div class="city"></div>
@@ -3328,43 +2912,9 @@ html.kids-intro-active.kids-intro-reveal .app{
 <audio id="quranAudio" preload="none" playsinline></audio>
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
-
-<script id="kids-launch-intro-runtime-v1">
-(function(){
-  var root=document.documentElement;
-  var intro=document.getElementById("kidsLaunchIntro");
-  if(!intro){
-    root.classList.remove("kids-intro-active");
-    return;
-  }
-  var reduced=false;
-  try{reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
-  var finished=false;
-  function finishIntro(){
-    if(finished)return;
-    finished=true;
-    root.classList.add("kids-intro-reveal");
-    intro.classList.add("is-leaving");
-    window.setTimeout(function(){
-      try{intro.remove()}catch(e){intro.style.display="none"}
-      root.classList.remove("kids-intro-active","kids-intro-reveal");
-      try{document.body.style.removeProperty("touch-action")}catch(e2){}
-    },reduced?160:650);
-  }
-  function startIntro(){
-    window.setTimeout(finishIntro,reduced?620:3050);
-  }
-  if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",startIntro,{once:true});
-  }else{
-    startIntro();
-  }
-  window.setTimeout(finishIntro,reduced?1200:4600);
-})();
-</script>
-
 <script>
 const KIDS_BUILD_ID="kids-shell-v12-tab53";
+try{document.documentElement.classList.add("kids-hello");setTimeout(function(){document.documentElement.classList.remove("kids-hello")},2200)}catch(eHello){}
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6830,111 +6380,95 @@ fetchCatalog();
   padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;
 }
 </style>
-<style id="kids-wordmark-sky-zone-v35">
+<style id="kids-wordmark-cinema-v36">
+#view-today .wm-dar-svg,.wm-dar-svg,.wm-dar-wrap,.wm-sparks,.wm-dar-fx{display:none!important}
 #view-today .kids-wordmark,.kids-wordmark{
   position:absolute!important;
-  left:50%!important;
-  top:22%!important;
+  left:42%!important;
+  top:20%!important;
   right:auto!important;bottom:auto!important;
-  transform:translate(-50%,-8%)!important;
+  transform:translate(-50%,0)!important;
   margin:0!important;
-  width:min(88vw,520px)!important;
-  height:auto!important;
-  min-height:0!important;
+  width:min(64vw,340px)!important;
+  max-width:calc(100% - 118px)!important;
   z-index:7!important;text-align:center!important;pointer-events:none!important;
   display:flex!important;flex-direction:column!important;align-items:center!important;
-  justify-content:flex-start!important;gap:0!important;
+  gap:2px!important;
+  animation:cinemaHold 10s ease-in-out infinite!important;
 }
 #view-today .wm-dar,.wm-dar{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-#view-today .wm-dar-wrap{
-  position:relative;width:100%;height:auto;overflow:visible;line-height:0;
+#view-today .wm-dar-line{
+  display:block!important;position:static!important;width:auto!important;height:auto!important;
+  margin:0!important;padding:0 4px!important;clip:auto!important;overflow:visible!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-weight:700!important;
+  font-size:clamp(20px,5.4vw,30px)!important;
+  letter-spacing:.16em!important;
+  line-height:1.2!important;
+  white-space:nowrap!important;
+  color:#f7e7b8!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.35),0 10px 22px rgba(8,24,36,.42)!important;
+  transform:perspective(520px) rotateX(12deg)!important;
+  transform-origin:50% 80%!important;
 }
-#view-today .wm-dar-svg,.wm-dar-svg{
-  display:block!important;opacity:1!important;visibility:visible!important;
-  width:100%!important;height:clamp(44px,13vw,62px)!important;
-  margin:0 auto!important;overflow:visible!important;
-  filter:drop-shadow(0 4px 10px rgba(8,24,36,.4));
-  animation:darJelly 2.6s ease-in-out infinite!important;
-}
-@keyframes darJelly{
-  0%,100%{transform:scale(1)}
-  35%{transform:scale(1.06,.94)}
-  55%{transform:scale(.97,1.05)}
-}
-#view-today .wm-dar-fx{display:none!important}
 #view-today .wm-kids,.wm-kids{
-  display:flex!important;justify-content:center!important;align-items:flex-end!important;
-  margin:-18px auto 0!important;
-  font-size:clamp(44px,13vw,68px)!important;
-  line-height:.8!important;
+  display:flex!important;justify-content:center!important;align-items:baseline!important;
+  gap:.02em!important;
+  margin:0 auto!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-weight:700!important;
+  font-size:clamp(46px,13.2vw,70px)!important;
+  line-height:.92!important;
+  letter-spacing:.01em!important;
 }
 #view-today .wm-kids span{
-  animation:kidsJelly 1.8s ease-in-out infinite!important;
+  display:inline-block!important;
+  transform:none!important;
+  rotate:none!important;
+  animation:none!important;
+  -webkit-text-stroke:2.4px rgba(255,255,255,.48)!important;
+  paint-order:stroke fill!important;
+  text-shadow:0 2px 0 rgba(255,255,255,.45),0 8px 16px rgba(8,24,36,.28)!important;
 }
-#view-today .wm-kids .k{animation-delay:0s!important}
-#view-today .wm-kids .i{animation-delay:.12s!important}
-#view-today .wm-kids .d{animation-delay:.24s!important}
-#view-today .wm-kids .s{animation-delay:.36s!important}
-@keyframes kidsJelly{
-  0%,100%{transform:translateY(0) rotate(var(--r,0deg)) scale(1)}
-  40%{transform:translateY(-11px) rotate(var(--r,0deg)) scale(1.12, .92)}
-  62%{transform:translateY(-3px) rotate(var(--r,0deg)) scale(.96, 1.08)}
-}
-#view-today .wm-kids .k{--r:-8deg}
-#view-today .wm-kids .i{--r:6deg}
-#view-today .wm-kids .d{--r:-4deg}
-#view-today .wm-kids .s{--r:8deg}
-#view-today .wm-sparks{
-  position:absolute;inset:-6% 8% 8%;pointer-events:none;
-}
-#view-today .wm-sparks i{
-  position:absolute;width:7px;height:7px;border-radius:50%;
-  background:#fff6c8;box-shadow:0 0 10px #ffe38a;
-  animation:kidsSpark 1.6s ease-in-out infinite;
-}
-#view-today .wm-sparks i:nth-child(1){left:12%;top:18%;animation-delay:0s}
-#view-today .wm-sparks i:nth-child(2){right:14%;top:8%;animation-delay:.35s}
-#view-today .wm-sparks i:nth-child(3){left:58%;bottom:12%;width:5px;height:5px;animation-delay:.7s}
-@keyframes kidsSpark{
-  0%,100%{opacity:.15;transform:scale(.6)}
-  50%{opacity:1;transform:scale(1.35)}
-}
+#view-today .wm-kids .k{color:#ffd45e!important}
+#view-today .wm-kids .i{color:#62d4ff!important}
+#view-today .wm-kids .d{color:#ff7ab8!important}
+#view-today .wm-kids .s{color:#74e08f!important}
 html.kids-hello #view-today .kids-wordmark{
-  animation:helloLand 1s cubic-bezier(.18,1.22,.28,1) both!important;
+  animation:cinemaOpen 1.85s cubic-bezier(.16,1,.3,1) both!important;
 }
-html.kids-hello #view-today .wm-dar-svg{
-  animation:helloDar 1s cubic-bezier(.18,1.22,.28,1) both!important;
+html.kids-hello #view-today .wm-dar-line{
+  animation:cinemaTitle 1.55s cubic-bezier(.16,1,.3,1) both!important;
 }
-html.kids-hello #view-today .wm-kids span{
-  animation:helloKid .7s cubic-bezier(.2,1.4,.28,1) both!important;
+html.kids-hello #view-today .wm-kids{
+  animation:cinemaKids 1.7s cubic-bezier(.16,1,.3,1) both!important;
+  animation-delay:.18s!important;
 }
-html.kids-hello #view-today .wm-kids .k{animation-delay:.28s!important}
-html.kids-hello #view-today .wm-kids .i{animation-delay:.42s!important}
-html.kids-hello #view-today .wm-kids .d{animation-delay:.56s!important}
-html.kids-hello #view-today .wm-kids .s{animation-delay:.7s!important}
-@keyframes helloLand{
-  0%{opacity:0;transform:translate(-50%,-28%) scale(.84)}
-  70%{opacity:1;transform:translate(-50%,-4%) scale(1.05)}
-  100%{opacity:1;transform:translate(-50%,-8%) scale(1)}
+html.kids-hello #view-today .wm-kids span{animation:none!important;transform:none!important}
+@keyframes cinemaOpen{
+  0%{opacity:0;filter:blur(14px);transform:translate(-50%,8px) scale(.96)}
+  100%{opacity:1;filter:blur(0);transform:translate(-50%,0) scale(1)}
 }
-@keyframes helloDar{
-  0%{opacity:0;transform:translateY(-18px) scale(.9)}
-  100%{opacity:1;transform:none}
+@keyframes cinemaTitle{
+  0%{opacity:0;letter-spacing:.34em;filter:blur(8px)}
+  100%{opacity:1;letter-spacing:.16em;filter:blur(0)}
 }
-@keyframes helloKid{
-  0%{opacity:0;transform:translateY(22px) scale(.3) rotate(-12deg)}
-  72%{opacity:1;transform:translateY(-8px) scale(1.18) rotate(8deg)}
-  100%{opacity:1;transform:translateY(0) scale(1) rotate(var(--r,0deg))}
+@keyframes cinemaKids{
+  0%{opacity:0;transform:translateY(12px) scale(.92);filter:blur(8px)}
+  100%{opacity:1;transform:none;filter:blur(0)}
+}
+@keyframes cinemaHold{
+  0%,100%{transform:translate(-50%,0) scale(1)}
+  50%{transform:translate(-50%,-3px) scale(1.012)}
 }
 #view-today .hero::before,.hero::before{
   background-position:center 54%!important;
 }
 @media(prefers-reduced-motion:reduce){
   html.kids-hello #view-today .kids-wordmark,
-  html.kids-hello #view-today .wm-dar-svg,
-  html.kids-hello #view-today .wm-kids span,
-  #view-today .wm-kids span,
-  #view-today .wm-sparks i{animation:none!important}
+  html.kids-hello #view-today .wm-dar-line,
+  html.kids-hello #view-today .wm-kids,
+  #view-today .kids-wordmark{animation:none!important;filter:none!important}
 }
 </style>
 
