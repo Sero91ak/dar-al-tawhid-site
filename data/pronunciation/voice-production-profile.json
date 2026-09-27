@@ -1,7 +1,7 @@
 {
   "schemaVersion": 8,
-  "id": "dar-own-voice-narration-v2.7.1",
-  "updatedAt": "2026-09-26",
+  "id": "dar-own-voice-narration-v2.7.7",
+  "updatedAt": "2026-09-27",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
@@ -320,7 +320,12 @@
       "comma": 0.86,
       "semicolon": 1,
       "colon": 1.08
-    }
+    },
+    "inlineArabicTrimThresholdRelative": 0.012,
+    "inlineArabicTrimSafetyMs": 5,
+    "inlineArabicCrossfadeMs": 72,
+    "inlineArabicSoftPauseMaxMs": 22,
+    "inlineArabicMicroTermBridge": true
   },
   "qualityAssurance": {
     "maxRenderAttempts": 2,
@@ -372,7 +377,10 @@
     "unknownIslamicTermDetectionRegression": true,
     "masterLibraryPrecedenceRegression": true,
     "confirmedPronunciationAutoRerenderRegression": true,
-    "multiCorrectionAutoRerenderRegression": true
+    "multiCorrectionAutoRerenderRegression": true,
+    "inlineArabicMaxSecondsBase": 0.65,
+    "inlineArabicMaxSecondsPerLetter": 0.15,
+    "inlineArabicFlowRegression": true
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
@@ -572,6 +580,8 @@
     "preserveHonorificPolicy": true,
     "preserveTechnicalQa": true,
     "preserveAntiStutterQa": true,
-    "preserveAntiHoldQa": true
+    "preserveAntiHoldQa": true,
+    "inlineArabicFlowBridge": true,
+    "flowBridgeVersion": 3
   }
 }
