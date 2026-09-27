@@ -62,18 +62,7 @@ resolve_release_ref() {
     -H "Accept: application/vnd.github.raw+json" \
     -H "User-Agent: DAR-Voice-Studio-Installer" \
     "$RELEASE_MANIFEST_URL" -o "$manifest"
-  PIN="$("$VENV/bin/python" - "$manifest" <<'PY'
-import json,sys
-p=sys.argv[1]
-with open(p,encoding="utf-8") as f:
-    data=json.load(f)
-ref=str(data.get("releaseRef") or "").strip()
-version=str(data.get("version") or "").strip()
-if not ref or ref=="main":
-    raise SystemExit("Kein validierter releaseRef im Voice-Studio-Manifest.")
-print(ref)
-PY
-)"
+  PIN="$(/usr/bin/plutil -extract releaseRef raw -o - "$manifest" 2>/dev/null || true)"
   if [ -z "$PIN" ]; then
     echo "FEHLER: Validierte Release-Referenz fehlt."
     exit 1
