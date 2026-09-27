@@ -2338,19 +2338,19 @@
     try { hold = Number(audioEl().currentTime) || Number(state.current) || 0; } catch (eHold) { hold = Number(state.current) || 0; }
     state.current = hold;
     state.resumeAt = hold;
-    persistCurrent("stop");
     state.sessionActive = false;
     state.playing = false;
-    unloadAudio();
-    capsuleCollapsed = false;
-    capsuleDimmed = false;
-    clearSleepTimer();
     state.learnMode = false;
     state.learnLoop = false;
     state.learnStay = false;
     state.learnRate = 1;
     lastFollowKey = "";
     writeMode("none");
+    persistCurrent("stop");
+    unloadAudio();
+    capsuleCollapsed = false;
+    capsuleDimmed = false;
+    clearSleepTimer();
     var mini = document.getElementById("darQuranMiniPlayer");
     if (mini) {
       mini.classList.remove("is-on", "is-away", "player-collapsed", "player-expanded", "player-dim", "is-learn", "is-reader-dock");
