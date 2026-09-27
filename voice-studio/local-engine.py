@@ -1631,25 +1631,16 @@ def split_chunks(text:str,max_chars:int=150):
             out.append(rest)
         return out
 
-    # Satzenden bleiben die primäre Einheit.
+    # Jeder Satz bleibt eine eigene QA-/Retry-Einheit. Das kostet bei langen
+    # Dokumenten ein paar zusätzliche Modellaufrufe, verhindert aber, dass eine
+    # fehlerhafte Pause in Satz 2 den korrekt gesprochenen Satz 1 mitreißt.
     sentences=[p.strip() for p in re.split(r"(?<=[.!?؟…])\s+",value) if p.strip()]
     chunks=[]
-    current=""
     for sentence in sentences:
         if len(sentence)>max_chars:
-            if current:
-                chunks.append(current)
-                current=""
             chunks.extend(split_long_piece(sentence))
-            continue
-        candidate=(current+" "+sentence).strip()
-        if current and len(candidate)>max_chars:
-            chunks.append(current)
-            current=sentence
         else:
-            current=candidate
-    if current:
-        chunks.append(current)
+            chunks.append(sentence)
     return [c for c in chunks if c.strip()]
 
 ARABIC_CHAR_RE=re.compile(r"[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff]")
