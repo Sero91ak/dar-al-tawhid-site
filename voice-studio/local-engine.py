@@ -3585,6 +3585,8 @@ class H(BaseHTTPRequestHandler):
             self.send_file(APP_HOME/"studio.html","text/html; charset=utf-8")
         elif p=="/studio/content-studio.js":
             self.send_file(APP_HOME/"content-studio.js","application/javascript; charset=utf-8")
+        elif p=="/studio/alphabet-audio-studio.js":
+            self.send_file(APP_HOME/"alphabet-audio-studio.js","application/javascript; charset=utf-8")
         elif p=="/studio/voice-studio-icon.png":
             self.send_file(APP_HOME/"voice-studio-icon.png","image/png")
         elif p=="/studio/manifest.webmanifest":
