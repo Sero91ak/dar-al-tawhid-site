@@ -194,6 +194,103 @@ function mediaError(message, status = 400) {
   return err;
 }
 
+
+const KIDS_ALPHABET_AUDIO_PATH = "test/kids/data/alphabet-audio.json";
+const KIDS_ALPHABET_IDS = new Set([
+  "alif","ba","ta","tha","jim","ha","kha","dal","dhal","ra","zay","sin","shin","sad",
+  "dad","taa","zaa","ayn","ghayn","fa","qaf","kaf","lam","mim","nun","haa","waw","ya"
+]);
+
+function alphabetAudioSlot(manifest, letterId, kind, key = "") {
+  const letter = manifest?.letters?.[letterId];
+  if (!letter) return null;
+  if (kind === "harakat") {
+    if (!["fatha","kasra","damma"].includes(key)) return null;
+    return letter?.harakat?.[key] || null;
+  }
+  if (!["name","word"].includes(kind)) return null;
+  return letter?.[kind] || null;
+}
+
+export async function readKidsAlphabetAudioManifest(env, helpers) {
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const file = await helpers.githubGet(env, owner, repo, KIDS_ALPHABET_AUDIO_PATH, branch);
+  if (!file?.content) throw mediaError("Alif-Bāʾ-Audio-Manifest fehlt", 404);
+  let manifest;
+  try {
+    manifest = JSON.parse(helpers.base64ToUtf8(file.content));
+  } catch {
+    throw mediaError("Alif-Bāʾ-Audio-Manifest ist ungültig", 500);
+  }
+  return { manifest, sha: file.sha || "", path: KIDS_ALPHABET_AUDIO_PATH };
+}
+
+export async function verifyKidsAlphabetAudioSlot(env, input, helpers) {
+  const letterId = safeId(input?.letterId);
+  const kind = clean(input?.kind, 30).toLowerCase();
+  const key = clean(input?.key, 30).toLowerCase();
+  const text = clean(input?.text, 200);
+  if (!KIDS_ALPHABET_IDS.has(letterId)) throw mediaError("Unbekannter Alif-Bāʾ-Buchstabe", 422);
+  if (!["name","word","harakat"].includes(kind)) throw mediaError("Unbekannter Audio-Slot", 422);
+  if (kind === "harakat" && !["fatha","kasra","damma"].includes(key)) throw mediaError("Unbekannte Ḥaraka", 422);
+
+  const asset = input?.asset && typeof input.asset === "object" ? input.asset : {};
+  const assetKey = clean(asset.key, 800).replace(/^\/+/, "");
+  const assetUrl = clean(asset.url, 1200);
+  const sha256 = clean(asset.sha256, 100).toLowerCase();
+  const mime = clean(asset.mime, 100).toLowerCase();
+  if (!assetKey || !assetKey.startsWith("test/kids/media/studio/alphabet-")) {
+    throw mediaError("Audio stammt nicht aus dem freigegebenen Alif-Bāʾ-Stagingpfad", 422);
+  }
+  if (!/^audio\//.test(mime)) throw mediaError("Slot-Datei ist kein Audio", 415);
+  if (!/^[a-f0-9]{64}$/.test(sha256)) throw mediaError("Audio-Prüfsumme fehlt oder ist ungültig", 422);
+
+  const state = await readKidsAlphabetAudioManifest(env, helpers);
+  const slot = alphabetAudioSlot(state.manifest, letterId, kind, key);
+  if (!slot) throw mediaError("Audio-Slot existiert nicht", 404);
+  if (!text || text !== clean(slot.text, 200)) {
+    throw mediaError("Arabischer Slot-Text stimmt nicht exakt mit dem Manifest überein", 422);
+  }
+
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const uploaded = await helpers.githubGet(env, owner, repo, assetKey, branch);
+  if (!uploaded?.content) throw mediaError("Hochgeladene Audiodatei wurde im Repository nicht gefunden", 404);
+
+  const verifiedUrl = assetUrl && assetUrl.replace(/^https?:\/\/[^/]+/i, "").replace(/^\/+/, "/");
+  slot.verified = true;
+  slot.url = verifiedUrl || ("/" + assetKey);
+  slot.sha256 = sha256;
+  slot.qaBy = "owner-confirmed-voice-studio";
+  slot.qaAt = new Date().toISOString();
+  slot.sourceVoice = "authorized-owner-voice";
+  slot.source = "serhat-voice-studio-human-approved";
+
+  state.manifest.updatedAt = new Date().toISOString().slice(0, 10);
+  const saved = await helpers.githubPut(
+    env,
+    owner,
+    repo,
+    state.path,
+    JSON.stringify(state.manifest, null, 2) + "\n",
+    `Verify Kids alphabet audio ${letterId} ${kind}${key ? ":" + key : ""}`,
+    branch,
+    state.sha
+  );
+
+  return {
+    ok: true,
+    letterId,
+    kind,
+    key,
+    slot,
+    commitSha: saved?.commit?.sha || ""
+  };
+}
+
 export const KIDS_CONTENT_MEDIA_LIMITS = Object.freeze({
   coverBytes: MAX_COVER_BYTES,
   audioBytes: MAX_AUDIO_BYTES
