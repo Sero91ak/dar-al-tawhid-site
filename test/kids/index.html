@@ -2893,7 +2893,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
           </div>
           <div class="ab-pane" id="abPaneComplete" data-pane="complete">
             <div class="ab-complete-mark" aria-hidden="true">✓</div>
-            <p class="ab-practice-title">Runde geschafft</p>
+            <p class="ab-practice-title" id="abCompleteTitle">Runde geschafft</p>
             <p class="ab-hint" id="abCompleteText"></p>
           </div>
         </div>
@@ -4667,15 +4667,17 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
       var count=mastered(a).length;
       var lab=document.getElementById("abAgeLabel");
       if(lab)lab.textContent="Runde abgeschlossen · "+count+" / "+letters.length+" geübt · "+a+" Jahre";
+      var title=document.getElementById("abCompleteTitle");
+      if(title)title.textContent=count===letters.length?"Runde geschafft":"Ende erreicht";
       var txt=document.getElementById("abCompleteText");
       if(txt)txt.textContent=count===letters.length?
         "Alle 28 Buchstaben wurden in dieser Altersstufe mindestens einmal richtig erkannt.":
-        count+" von "+letters.length+" Buchstaben wurden bisher richtig erkannt.";
+        count+" von "+letters.length+" Buchstaben wurden bisher richtig erkannt. Die übrigen Buchstaben sind noch offen.";
       var prevDone=document.getElementById("abPrev");
       var playDone=document.getElementById("abPlay");
       var nextDone=document.getElementById("abNext");
       if(prevDone){prevDone.disabled=false;prevDone.textContent="Zurück"}
-      if(playDone){playDone.disabled=false;playDone.textContent="Hören"}
+      if(playDone){playDone.disabled=true;playDone.textContent="Hören"}
       if(nextDone){nextDone.disabled=false;nextDone.textContent="Von vorne"}
       return;
     }
@@ -4782,7 +4784,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     }
     var prevBtn=document.getElementById("abPrev");
     var playBtn=document.getElementById("abPlay");
-    if(prevBtn){prevBtn.disabled=false;prevBtn.textContent="Zurück"}
+    if(prevBtn){prevBtn.disabled=idx===0&&step===0;prevBtn.textContent="Zurück"}
     if(playBtn){playBtn.disabled=false;playBtn.textContent="Hören"}
     try{localStorage.setItem(KEY,String(idx))}catch(e){}
   }
@@ -4811,6 +4813,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     }
 
     var pane=plan[step];
+    if(dir<0&&idx===0&&step===0)return;
     if(dir>0&&pane==="practice"&&!practicePassed){
       var feedback=document.getElementById("abPracticeFeedback");
       if(feedback)feedback.textContent="Wähle zuerst den richtigen Buchstaben.";
@@ -4831,7 +4834,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
       practiceMistakes=0;
     }
     if(step<0){
-      idx=(idx-1+letters.length)%letters.length;
+      idx=Math.max(0,idx-1);
       step=stepsForAge(ageKey()).length-1;
       practiceToken="";
       practicePassed=false;
