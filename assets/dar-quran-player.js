@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 956;
+    var PLAYER_BUILD = 957;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -2455,7 +2455,7 @@
   function miniMarkup() {
     return (
       '<div class="dqp-top-main">' +
-        '<span class="dqp-top-mark" aria-hidden="true"><img class="dar-ui-icon" src="/assets/ui-icons/dar-icon-quran-3d.png" alt="" draggable="false"></span>' +
+        '<span class="dqp-top-mark" aria-hidden="true">📖</span>' +
         '<button type="button" data-dqp-mini="open" class="dqp-top-open">' +
           '<span class="dqp-top-text"><b></b><span></span></span>' +
         "</button>" +
