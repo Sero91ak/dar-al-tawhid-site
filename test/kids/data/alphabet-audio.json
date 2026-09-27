@@ -671,12 +671,23 @@
       "word": {
         "text": "ذُرَة",
         "role": "example-word",
-        "verified": false,
-        "url": "",
+        "verified": true,
+        "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/LL-Q13955%20(ara)-Rashed%20Aljahdali-%D8%B0%D8%B1%D8%A9.wav",
         "sha256": "",
-        "qaBy": "",
-        "qaAt": "",
-        "expectedPath": "/assets/kids-alphabet-audio/dhal/word.m4a"
+        "qaBy": "free-license-human-arabic-source-verified-2026-09-28",
+        "qaAt": "2026-09-28T00:27:00+02:00",
+        "expectedPath": "/assets/kids-alphabet-audio/dhal/word.m4a",
+        "sourceType": "external-human-pronunciation",
+        "sourceProvider": "Lingua Libre / Wikimedia Commons",
+        "sourceSpeaker": "Rashed Aljahdali",
+        "sourceLanguage": "Arabic (ara)",
+        "sourceTranscription": "ذرة",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:LL-Q13955%20(ara)-Rashed%20Aljahdali-%D8%B0%D8%B1%D8%A9.wav",
+        "sourceFile": "LL-Q13955 (ara)-Rashed Aljahdali-ذرة.wav",
+        "license": "CC-BY-4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+        "attribution": "Rashed Aljahdali / Lingua Libre / Wikimedia Commons, CC BY 4.0",
+        "verificationBasis": "Human Lingua Libre Arabic pronunciation recording; exact lexical item ذرة; Wikimedia file page documents CC BY 4.0."
       }
     },
     "ra": {
@@ -2051,6 +2062,12 @@
           "license": "CC-BY-3.0-US",
           "language": "Arabic",
           "role": "Human Arabic-learning pronunciation recordings for exact example words"
+        },
+        {
+          "name": "Rashed Aljahdali / Lingua Libre",
+          "license": "CC-BY-4.0",
+          "language": "Arabic (ara)",
+          "role": "Human pronunciation recordings for exact standard-Arabic example words"
         }
       ]
     }
