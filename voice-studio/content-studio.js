@@ -71,15 +71,25 @@ function renderStatus(){
   el.textContent=statusLabel();
   el.dataset.status=contentStatus;
   const live=q("csPublishLive");
-  if(live)live.disabled=busy||!stagingPublished;
+  const quickLive=q("csQuickLive");
+  const liveDisabled=busy||!stagingPublished;
+  if(live)live.disabled=liveDisabled;
+  if(quickLive)quickLive.disabled=liveDisabled;
+  const produce=q("csQuickProduce");if(produce)produce.disabled=busy;
+  const copy=q("csQuickCopy");if(copy)copy.disabled=!String(q("text")?.value||"").trim();
 }
 function injectStyles(){
   const st=document.createElement("style");
   st.id="contentStudioStyles";
   st.textContent=`
-  .content-studio-nav{display:flex;align-items:center;gap:7px;padding:8px 4px 13px;overflow-x:auto;scrollbar-width:none}
+  .content-studio-nav{position:sticky;top:72px;z-index:28;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 4px 9px;background:linear-gradient(180deg,rgba(6,19,24,.98),rgba(6,19,24,.94));border-bottom:1px solid rgba(255,255,255,.07);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
   .content-studio-nav::-webkit-scrollbar{display:none}
-  .cs-tab{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#aab9bd;border-radius:10px;padding:9px 12px;font-size:11px;font-weight:800;white-space:nowrap;cursor:pointer}
+  .cs-nav-tabs,.cs-fast-actions{display:flex;align-items:center;gap:6px;min-width:0}
+  .cs-nav-tabs{overflow-x:auto;scrollbar-width:none}.cs-nav-tabs::-webkit-scrollbar{display:none}
+  .cs-fast-actions{margin-left:auto;flex:0 0 auto}
+  .cs-fast-actions .btn{min-height:34px;padding:7px 10px;border-radius:10px;font-size:10px;white-space:nowrap}
+  .cs-fast-actions .primary{box-shadow:none}
+  .cs-tab{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#aab9bd;border-radius:10px;padding:8px 10px;font-size:10px;font-weight:800;white-space:nowrap;cursor:pointer}
   .cs-tab.active{border-color:rgba(217,182,111,.42);background:rgba(217,182,111,.09);color:#f1d59a}
   .cs-meta{margin:0 0 14px;padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}
   .cs-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
@@ -115,17 +125,27 @@ function injectStyles(){
   .cs-inventory-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
   .cs-chip{font-size:8px;font-weight:900;padding:3px 6px;border-radius:999px;border:1px solid rgba(255,255,255,.09);color:#b8c7ca}
   .cs-chip.legacy{color:#e8d08c;border-color:rgba(232,208,140,.26)}.cs-chip.test{color:#9ecceb;border-color:rgba(112,175,220,.28)}.cs-chip.live{color:#a8ddc5;border-color:rgba(112,205,160,.28)}.cs-chip.internal{color:#e3b0df;border-color:rgba(195,125,190,.25)}
+  @media(max-width:1100px){.content-studio-nav{align-items:flex-start;flex-direction:column;top:64px}.cs-nav-tabs,.cs-fast-actions{width:100%;overflow-x:auto}.cs-fast-actions{margin-left:0}.cs-fast-actions .btn{flex:0 0 auto}}
   @media(max-width:900px){.cs-grid{grid-template-columns:1fr 1fr}.cs-field.span4{grid-column:1/-1}}
-  @media(max-width:600px){.cs-grid{grid-template-columns:1fr}.cs-field.span2,.cs-field.span4{grid-column:1}.cs-actions{grid-template-columns:1fr}}
+  @media(max-width:600px){.cs-grid{grid-template-columns:1fr}.cs-field.span2,.cs-field.span4{grid-column:1}.cs-actions{grid-template-columns:1fr}.cs-fast-actions .btn{min-height:36px}}
   `;
   document.head.appendChild(st);
 }
 function navHtml(){
-  return `<nav class="content-studio-nav" aria-label="Studio Bereiche">
-    <button class="cs-tab active" data-cs-kind="story">Kids · Geschichten</button>
-    <button class="cs-tab" data-cs-kind="quiz">Kids · Quiz</button>
-    <button class="cs-tab" data-cs-kind="game">Kids · Spiele</button>
-    <button class="cs-tab" data-cs-kind="ios">iOS · Inhalte</button>
+  return `<nav class="content-studio-nav" aria-label="Studio Bereiche und Schnellaktionen">
+    <div class="cs-nav-tabs">
+      <button class="cs-tab active" data-cs-kind="story">Kids · Geschichten</button>
+      <button class="cs-tab" data-cs-kind="quiz">Kids · Quiz</button>
+      <button class="cs-tab" data-cs-kind="game">Kids · Spiele</button>
+      <button class="cs-tab" data-cs-kind="ios">iOS · Inhalte</button>
+    </div>
+    <div class="cs-fast-actions" aria-label="Schnellproduktion">
+      <button id="csQuickNew" class="btn quiet" type="button" title="Neuen Inhalt starten">Neu</button>
+      <button id="csQuickCopy" class="btn quiet" type="button" title="Aktuellen Text kopieren">Kopieren</button>
+      <button id="csQuickProduce" class="btn primary" type="button" title="Audio und Cover vorbereiten">Erzeugen</button>
+      <button id="csQuickTest" class="btn secondary" type="button" title="In Test veröffentlichen">Test</button>
+      <button id="csQuickLive" class="btn secondary" type="button" title="Geprüfte Version live veröffentlichen" disabled>Live</button>
+    </div>
   </nav>`;
 }
 function metaHtml(){
@@ -233,6 +253,11 @@ function bind(){
   q("csSave")?.addEventListener("click",()=>saveDraftRemote(false));
   q("csPublishTest")?.addEventListener("click",publishTest);
   q("csPublishLive")?.addEventListener("click",publishLive);
+  q("csQuickNew")?.addEventListener("click",newCurrentItem);
+  q("csQuickCopy")?.addEventListener("click",copyCurrentText);
+  q("csQuickProduce")?.addEventListener("click",produce);
+  q("csQuickTest")?.addEventListener("click",publishTest);
+  q("csQuickLive")?.addEventListener("click",publishLive);
   q("csSaveConnection")?.addEventListener("click",saveConnection);
   q("csInventorySearch")?.addEventListener("input",renderInventory);
   q("csInventoryRefresh")?.addEventListener("click",()=>loadLibrary(true));
@@ -248,6 +273,28 @@ function bind(){
     }
   });
   setInterval(refreshQa,1200);
+}
+function newCurrentItem(){
+  persistDraft();
+  contentId="";savedRevision=0;stagingPublished=false;contentStatus="draft";
+  setProductionPhase("draft");productionError="";
+  resetEditorForKind();
+  renderKindEditor();
+  renderStatus();refreshQa();persistDraft();
+  q("csTitle")?.focus();
+  setStudioMessage("Neuer Arbeitsentwurf bereit. Der vorherige lokale Entwurf bleibt gespeichert.","good");
+}
+async function copyCurrentText(){
+  const value=String(q("text")?.value||"").trim();
+  if(!value){setStudioMessage("Kein Text zum Kopieren vorhanden.","warn");return}
+  try{
+    await navigator.clipboard.writeText(value);
+    setStudioMessage("Text kopiert.","good");
+  }catch{
+    q("text")?.focus();q("text")?.select();
+    document.execCommand?.("copy");
+    setStudioMessage("Text kopiert.","good");
+  }
 }
 function effectiveKind(){return studioKind==="ios"?"lesson":studioKind}
 function effectiveTarget(){return studioKind==="ios"?"ios":"kids"}
@@ -734,7 +781,12 @@ function refreshQa(){
   paintQa("csQaText",contentOk,contentOk?(studioKind==="quiz"?"Fragen bereit":studioKind==="game"?"Spiel bereit":"bereit"):"fehlt");
   paintQa("csQaCover",cover,cover?"bereit":"fehlt");paintQa("csQaAudio",audio,audio?"bereit":"fehlt");paintQa("csQaPron",pron,pron?"bestätigt":"offen");
   if(productionPhase==="awaiting-qa"&&contentOk&&cover&&audio&&pron)productionPhase="ready";
-  const test=q("csPublishTest");if(test)test.disabled=busy||!contentOk||!cover||!audio||!pron||!q("csTitle")?.value.trim();
+  const test=q("csPublishTest");
+  const testDisabled=busy||!contentOk||!cover||!audio||!pron||!q("csTitle")?.value.trim();
+  if(test)test.disabled=testDisabled;
+  const quickTest=q("csQuickTest");if(quickTest)quickTest.disabled=testDisabled;
+  const quickCopy=q("csQuickCopy");if(quickCopy)quickCopy.disabled=!text;
+  const quickProduce=q("csQuickProduce");if(quickProduce)quickProduce.disabled=busy;
   renderStatus();
 }
 function paintQa(id,ok,label){const el=q(id);if(!el)return;el.textContent=label;el.className=ok?"good":"warn"}
