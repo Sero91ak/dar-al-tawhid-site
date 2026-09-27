@@ -2921,7 +2921,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab31";
+const KIDS_BUILD_ID="kids-shell-v12-tab37";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -4536,6 +4536,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   var practiceAudioHeard=false;
   var practiceTargetKey="";
   var completeMode=false;
+  var reviewQueueMode=true;
   var alphabetAudioManifest={letters:{}};
   var alphabetAudioEl=null;
   var KEY="kids.alphabet.idx";
@@ -4573,7 +4574,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
         legacy.forEach(function(id){
           if(!map[id])map[id]={
             stage:"learning",attempts:1,firstTryPasses:1,wrong:0,reviewPasses:1,
-            dueAt:Date.now(),lastSeenAt:Date.now(),skills:{visual:1,audio:0,harakat:0,form:0},audio:{name:false,word:false,harakat:[]}
+            dueAt:Date.now(),lastSeenAt:Date.now(),lastPracticeAt:0,lastMistakeAt:0,lapses:0,consecutiveFirstTry:1,lastMode:"visual",skills:{visual:1,audio:0,harakat:0,form:0},audio:{name:false,word:false,harakat:[]}
           };
         });
         localStorage.removeItem(LEGACY_MASTER_KEY+a);
@@ -4587,7 +4588,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   }
   function progressEntry(a,id){
     var map=progressMap(a);
-    return map[id]||{stage:"new",attempts:0,firstTryPasses:0,wrong:0,reviewPasses:0,dueAt:0,lastSeenAt:0,skills:{visual:0,audio:0,harakat:0,form:0},audio:{name:false,word:false,harakat:[]}};
+    return map[id]||{stage:"new",attempts:0,firstTryPasses:0,wrong:0,reviewPasses:0,dueAt:0,lastSeenAt:0,lastPracticeAt:0,lastMistakeAt:0,lapses:0,consecutiveFirstTry:0,lastMode:"",skills:{visual:0,audio:0,harakat:0,form:0},audio:{name:false,word:false,harakat:[]}};
   }
   function audioSlot(id,kind,key){
     var letter=alphabetAudioManifest&&alphabetAudioManifest.letters&&alphabetAudioManifest.letters[id];
@@ -4651,12 +4652,15 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     e.audio=e.audio&&typeof e.audio==="object"?e.audio:{name:false,word:false,harakat:[]};
     e.skills=e.skills&&typeof e.skills==="object"?e.skills:{visual:0,audio:0,harakat:0,form:0};
     e.attempts=Number(e.attempts||0)+1;
+    e.lastMode=String(mode||"");
+    e.lastPracticeAt=now;
     if(firstTry&&requiredSkills(a).indexOf(mode)>=0)e.skills[mode]=Number(e.skills[mode]||0)+1;
     e.wrong=Number(e.wrong||0)+Math.max(0,Number(mistakes||0));
     e.lastSeenAt=now;
     var counted=false;
     if(firstTry){
       e.firstTryPasses=Number(e.firstTryPasses||0)+1;
+      e.consecutiveFirstTry=Number(e.consecutiveFirstTry||0)+1;
       if(!e.dueAt||now>=Number(e.dueAt||0)){
         e.reviewPasses=Number(e.reviewPasses||0)+1;
         counted=true;
@@ -4665,6 +4669,9 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
         else e.dueAt=now+7*24*60*60*1000;
       }
     }else{
+      e.consecutiveFirstTry=0;
+      e.lastMistakeAt=now;
+      e.lapses=Number(e.lapses||0)+1;
       e.reviewPasses=Math.max(0,Number(e.reviewPasses||0)-1);
       e.dueAt=now+5*60*1000;
     }
@@ -4680,21 +4687,48 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
       var e=map[l.id];
       if(!e){open+=1;return}
       if(e.stage==="secure")secure+=1;
-      else{learning+=1;if(!e.dueAt||Number(e.dueAt)<=now)due+=1}
+      else learning+=1;
+      var when=Number(e.dueAt||0);
+      if(when>0&&when<=now)due+=1;
     });
     return {secure:secure,learning:learning,due:due,open:open};
   }
-  function nextReviewIndex(a){
-    var map=progressMap(a),now=Date.now(),best=-1,bestDue=Infinity;
+  function reviewBucket(entry,now){
+    if(!entry)return 40;
+    var due=Number(entry.dueAt||0);
+    if(due>now)return 99;
+    var mistakeAt=Number(entry.lastMistakeAt||0);
+    if(mistakeAt>0&&now-mistakeAt<=14*24*60*60*1000)return 10;
+    if(entry.stage==="learning")return 20;
+    if(entry.stage==="review")return 25;
+    if(entry.stage==="secure")return 30;
+    return 35;
+  }
+  function nextReviewIndex(a,excludeId){
+    var map=progressMap(a),now=Date.now(),candidates=[];
     for(var i=0;i<letters.length;i++){
-      var e=map[letters[i].id];
-      if(!e)return i;
-      if(e.stage==="secure")continue;
-      var due=Number(e.dueAt||0);
-      if(due<=now)return i;
-      if(due<bestDue){best=i;bestDue=due}
+      var item=letters[i],e=map[item.id],bucket=reviewBucket(e,now);
+      if(bucket>=99)continue;
+      candidates.push({
+        index:i,
+        id:item.id,
+        bucket:bucket,
+        due:e?Number(e.dueAt||0):0,
+        lastSeen:e?Number(e.lastSeenAt||0):0
+      });
     }
-    return best>=0?best:0;
+    if(!candidates.length)return -1;
+    candidates.sort(function(x,y){
+      if(x.bucket!==y.bucket)return x.bucket-y.bucket;
+      if(x.due!==y.due)return x.due-y.due;
+      if(x.lastSeen!==y.lastSeen)return x.lastSeen-y.lastSeen;
+      return x.index-y.index;
+    });
+    if(excludeId&&candidates.length>1&&candidates[0].id===excludeId){
+      var alternate=candidates.find(function(c){return c.id!==excludeId});
+      if(alternate)return alternate.index;
+    }
+    return candidates[0].index;
   }
   function setAudioStatus(message,state){
     var el=document.getElementById("abAudioStatus");
@@ -4760,7 +4794,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     var lab=document.getElementById("abAgeLabel");
     if(!lab)return;
     var s=progressStats(a);
-    lab.textContent="Buchstabe "+(idx+1)+" / "+letters.length+" · "+s.secure+" sicher · "+s.learning+" lernen";
+    lab.textContent="Buchstabe "+(idx+1)+" / "+letters.length+" · "+s.secure+" sicher · "+s.learning+" lernen · "+s.due+" fällig";
   }
   var similar={
     alif:["lam","dal"],ba:["ta","tha","nun","ya"],ta:["ba","tha","nun"],tha:["ta","ba","shin"],
@@ -4868,7 +4902,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
         if(!playVerifiedSlot(item,"harakat",practiceTargetKey,function(){speakGerman("Richtig.");}))speakGerman("Richtig.");
       }else if(!playVerifiedSlot(item,"name","",function(){speakGerman("Richtig.");}))speakGerman("Richtig.");
       var next=document.getElementById("abNext");
-      if(next){next.disabled=false;next.textContent=idx===letters.length-1?"Fertig":"Nächster"}
+      if(next){next.disabled=false;next.textContent=reviewQueueMode?"Nächster":(idx===letters.length-1?"Fertig":"Nächster")}
     }else{
       practiceMistakes+=1;
       button.classList.add("wrong");
@@ -4894,21 +4928,25 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
         el.classList.remove("active");el.classList.add("done");
       });
       var summary=progressStats(a);
+      var queuedIndex=nextReviewIndex(a,"");
+      var hasQueued=queuedIndex>=0;
       var lab=document.getElementById("abAgeLabel");
-      if(lab)lab.textContent="Runde abgeschlossen · "+summary.secure+" sicher · "+summary.learning+" lernen";
+      if(lab)lab.textContent="Runde abgeschlossen · "+summary.secure+" sicher · "+summary.learning+" lernen · "+summary.due+" fällig";
       var title=document.getElementById("abCompleteTitle");
-      if(title)title.textContent=summary.secure===letters.length?"Alle Buchstaben sicher":"Runde beendet";
+      if(title)title.textContent=summary.secure===letters.length?(summary.due>0?"Wiederholung fällig":"Für heute geschafft"):"Runde beendet";
       var txt=document.getElementById("abCompleteText");
       if(txt)txt.textContent=summary.secure===letters.length?
-        "Alle 28 Buchstaben erfüllen Sehen/Hören, die altersgerechten Leseaufgaben, die Audio-Bedingungen und die zeitlich getrennten Wiederholungen.":
-        summary.secure+" sicher · "+summary.learning+" im Lernen · "+summary.open+" noch offen. „Sicher“ gibt es erst nach zeitlich getrennten Wiederholungen und gehörten, freigegebenen Referenzaufnahmen.";
+        (summary.due>0?
+          "Alle 28 Buchstaben sind sicher, aber mindestens eine zeitliche Wiederholung ist jetzt fällig.":
+          "Alle 28 Buchstaben erfüllen Sehen/Hören, die altersgerechten Leseaufgaben, die Audio-Bedingungen und die zeitlich getrennten Wiederholungen. Die nächste Wiederholung wird erst zum vorgesehenen Zeitpunkt freigeschaltet."):
+        summary.secure+" sicher · "+summary.learning+" im Lernen · "+summary.open+" noch offen · "+summary.due+" Wiederholungen fällig. Fehler und fällige Wiederholungen kommen vor neuen Inhalten.";
       var prevDone=document.getElementById("abPrev");
       var playDone=document.getElementById("abPlay");
       var nextDone=document.getElementById("abNext");
       if(prevDone){prevDone.disabled=false;prevDone.textContent="Zurück"}
       if(playDone){playDone.disabled=true;playDone.textContent="Hören"}
       setAudioStatus("Nur menschlich freigegebene Referenzaufnahmen zählen für „sicher“.","warn");
-      if(nextDone){nextDone.disabled=false;nextDone.textContent=summary.secure===letters.length?"Neue Runde":"Unsichere üben"}
+      if(nextDone){nextDone.disabled=!hasQueued;nextDone.textContent=hasQueued?"Nächste Wiederholung":"Keine Wiederholung fällig"}
       return;
     }
     if(step>=plan.length)step=0;
@@ -5002,7 +5040,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
           d.type="button";
           d.className="ab-dot";
           d.setAttribute("aria-label",it.nameDe||"");
-          d.addEventListener("click",function(){idx=i;step=0;practiceToken="";render()});
+          d.addEventListener("click",function(){reviewQueueMode=false;idx=i;step=0;practiceToken="";practicePassed=false;practiceMistakes=0;practiceAudioHeard=false;practiceTargetKey="";render()});
           dots.appendChild(d);
         });
       }
@@ -5013,7 +5051,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     if(next){
       next.disabled=pane==="practice"&&!practicePassed;
       if(pane==="practice"&&!practicePassed)next.textContent="Erst richtig wählen";
-      else if(pane==="practice"&&practicePassed)next.textContent=idx===letters.length-1?"Fertig":"Nächster";
+      else if(pane==="practice"&&practicePassed)next.textContent=reviewQueueMode?"Nächster":(idx===letters.length-1?"Fertig":"Nächster");
       else next.textContent="Weiter";
     }
     var prevBtn=document.getElementById("abPrev");
@@ -5047,27 +5085,54 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     if(completeMode){
       if(dir<0){
         completeMode=false;
+        reviewQueueMode=false;
         idx=letters.length-1;
         step=plan.length-1;
         practiceToken=a+"|"+(letters[idx]&&letters[idx].id||"");
         practicePassed=true;
       }else{
+        var queued=nextReviewIndex(a,"");
+        if(queued<0)return;
         completeMode=false;
-        idx=progressStats(a).secure===letters.length?0:nextReviewIndex(a);
+        reviewQueueMode=true;
+        idx=queued;
         step=0;
         practiceToken="";
         practicePassed=false;
         practiceMistakes=0;
+        practiceAudioHeard=false;
+        practiceTargetKey="";
       }
       render();
       return;
     }
 
     var pane=plan[step];
-    if(dir<0&&idx===0&&step===0)return;
+    var currentItem=letters[idx]||letters[0];
+    if(dir<0){
+      reviewQueueMode=false;
+      if(idx===0&&step===0)return;
+    }
     if(dir>0&&pane==="practice"&&!practicePassed){
       var feedback=document.getElementById("abPracticeFeedback");
       if(feedback)feedback.textContent="Wähle zuerst den richtigen Buchstaben.";
+      return;
+    }
+    if(dir>0&&pane==="practice"&&practicePassed&&reviewQueueMode){
+      var nextQueued=nextReviewIndex(a,currentItem&&currentItem.id||"");
+      if(nextQueued<0){
+        completeMode=true;
+        render();
+        return;
+      }
+      idx=nextQueued;
+      step=0;
+      practiceToken="";
+      practicePassed=false;
+      practiceMistakes=0;
+      practiceAudioHeard=false;
+      practiceTargetKey="";
+      render();
       return;
     }
     if(dir>0&&pane==="practice"&&practicePassed&&idx===letters.length-1){
@@ -5129,11 +5194,18 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     practiceAudioHeard=false;
     practiceTargetKey="";
     completeMode=false;
+    reviewQueueMode=true;
+    var queued=nextReviewIndex(ageKey(),"");
+    if(queued>=0)idx=queued;
     var m=document.getElementById("alphabetModal");
     if(m)m.classList.add("open");
     render();
   }
-  window.kidsAlphabetOnAge=function(){step=0;practiceToken="";practicePassed=false;practiceMistakes=0;practiceAudioHeard=false;practiceTargetKey="";practiceMode="visual";completeMode=false;render()};
+  window.kidsAlphabetOnAge=function(){
+    step=0;practiceToken="";practicePassed=false;practiceMistakes=0;practiceAudioHeard=false;practiceTargetKey="";practiceMode="visual";completeMode=false;reviewQueueMode=true;
+    var queued=nextReviewIndex(ageKey(),"");if(queued>=0)idx=queued;
+    render();
+  };
   window.openAlphabet=openAlphabet;
   Promise.all([
     fetch("/test/kids/data/alphabet-kids.json?v=8",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
