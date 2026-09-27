@@ -3348,7 +3348,7 @@ html.kids-intro-active.kids-intro-reveal .app{
 </script>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab54";
+const KIDS_BUILD_ID="kids-shell-v12-tab55";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6814,83 +6814,70 @@ fetchCatalog();
   padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;
 }
 </style>
-<style id="kids-wordmark-cinema-v36">
+<style id="kids-wordmark-center-v37">
 #view-today .wm-dar-svg,.wm-dar-svg,.wm-dar-wrap,.wm-sparks,.wm-dar-fx{display:none!important}
 #view-today .kids-wordmark,.kids-wordmark{
   position:absolute!important;
-  left:42%!important;
-  top:20%!important;
+  left:50%!important;
+  top:18%!important;
   right:auto!important;bottom:auto!important;
-  transform:translate(-50%,0)!important;
+  transform:translateX(-50%)!important;
   margin:0!important;
-  width:min(64vw,340px)!important;
-  max-width:calc(100% - 118px)!important;
+  width:min(86vw,420px)!important;
   z-index:7!important;text-align:center!important;pointer-events:none!important;
   display:flex!important;flex-direction:column!important;align-items:center!important;
-  gap:2px!important;
-  animation:cinemaOpen 1.85s cubic-bezier(.16,1,.3,1) both, cinemaHold 10s ease-in-out 1.85s infinite!important;
+  gap:4px!important;
+  animation:none!important;
 }
 #view-today .wm-dar,.wm-dar{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 #view-today .wm-dar-line{
   display:block!important;position:static!important;width:auto!important;height:auto!important;
-  margin:0!important;padding:0 4px!important;clip:auto!important;overflow:visible!important;
+  margin:0!important;padding:0 6px!important;clip:auto!important;overflow:visible!important;
   font-family:"Fredoka",system-ui,sans-serif!important;
   font-weight:700!important;
-  font-size:clamp(20px,5.4vw,30px)!important;
-  letter-spacing:.16em!important;
+  font-size:clamp(22px,5.8vw,32px)!important;
+  letter-spacing:.14em!important;
   line-height:1.2!important;
   white-space:nowrap!important;
   color:#f7e7b8!important;
-  text-shadow:0 1px 0 rgba(255,255,255,.35),0 10px 22px rgba(8,24,36,.42)!important;
-  transform:perspective(520px) rotateX(12deg)!important;
-  transform-origin:50% 80%!important;
-  animation:cinemaTitle 1.55s cubic-bezier(.16,1,.3,1) both!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.35),0 8px 18px rgba(8,24,36,.4)!important;
+  animation:darCloud 3.8s ease-in-out infinite!important;
+}
+@keyframes darCloud{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-7px) scale(1.03)}
 }
 #view-today .wm-kids,.wm-kids{
-  display:flex!important;justify-content:center!important;align-items:baseline!important;
-  gap:.02em!important;
+  display:flex!important;justify-content:center!important;align-items:flex-end!important;
+  gap:.04em!important;
   margin:0 auto!important;
   font-family:"Fredoka",system-ui,sans-serif!important;
   font-weight:700!important;
-  font-size:clamp(46px,13.2vw,70px)!important;
-  line-height:.92!important;
-  letter-spacing:.01em!important;
-  animation:cinemaKids 1.7s cubic-bezier(.16,1,.3,1) .18s both!important;
+  font-size:clamp(52px,16vw,84px)!important;
+  line-height:.86!important;
+  letter-spacing:0!important;
+  animation:none!important;
 }
 #view-today .wm-kids span{
   display:inline-block!important;
-  transform:none!important;
-  rotate:none!important;
-  animation:none!important;
-  -webkit-text-stroke:2.4px rgba(255,255,255,.48)!important;
+  -webkit-text-stroke:4px rgba(255,255,255,.55)!important;
   paint-order:stroke fill!important;
-  text-shadow:0 2px 0 rgba(255,255,255,.45),0 8px 16px rgba(8,24,36,.28)!important;
+  text-shadow:0 2px 0 rgba(255,255,255,.7),0 6px 0 rgba(40,22,8,.16),0 12px 18px rgba(8,24,36,.28)!important;
+  animation:kidsBalloon 2.6s ease-in-out infinite!important;
 }
-#view-today .wm-kids .k{color:#ffd45e!important}
-#view-today .wm-kids .i{color:#62d4ff!important}
-#view-today .wm-kids .d{color:#ff7ab8!important}
-#view-today .wm-kids .s{color:#74e08f!important}
-@keyframes cinemaOpen{
-  0%{opacity:0;filter:blur(14px);transform:translate(-50%,8px) scale(.96)}
-  100%{opacity:1;filter:blur(0);transform:translate(-50%,0) scale(1)}
-}
-@keyframes cinemaTitle{
-  0%{opacity:0;letter-spacing:.34em;filter:blur(8px)}
-  100%{opacity:1;letter-spacing:.16em;filter:blur(0)}
-}
-@keyframes cinemaKids{
-  0%{opacity:0;transform:translateY(12px) scale(.92);filter:blur(8px)}
-  100%{opacity:1;transform:none;filter:blur(0)}
-}
-@keyframes cinemaHold{
-  0%,100%{transform:translate(-50%,0) scale(1)}
-  50%{transform:translate(-50%,-3px) scale(1.012)}
+#view-today .wm-kids .k{color:#ffd45e!important;rotate:-8deg!important;animation-delay:0s!important}
+#view-today .wm-kids .i{color:#62d4ff!important;rotate:6deg!important;animation-delay:.12s!important}
+#view-today .wm-kids .d{color:#ff7ab8!important;rotate:-4deg!important;animation-delay:.24s!important}
+#view-today .wm-kids .s{color:#74e08f!important;rotate:8deg!important;animation-delay:.36s!important}
+@keyframes kidsBalloon{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-12px) scale(1.08)}
 }
 #view-today .hero::before,.hero::before{
   background-position:center 54%!important;
 }
 @media(prefers-reduced-motion:reduce){
-  #view-today .kids-wordmark,#view-today .wm-dar-line,#view-today .wm-kids{animation:none!important;filter:none!important}
+  #view-today .wm-dar-line,#view-today .wm-kids span{animation:none!important}
 }
 </style>
 
