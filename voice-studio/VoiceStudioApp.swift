@@ -18,7 +18,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.1"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.2"
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -28,9 +28,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.1"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.2"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
+        config.userContentController.add(self, name: "darCompanion")
 
         webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = self
@@ -86,6 +87,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         appRoot.submenu = appMenu
         appMenu.addItem(menuItem("Über DĀR Voice Studio", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:))))
         appMenu.addItem(menuItem("Nach Updates suchen…", action: #selector(checkForUpdatesFromMenu(_:)), target: self))
+        appMenu.addItem(menuItem("iPad / iPhone verbinden…", action: #selector(showCompanionPairing(_:)), target: self))
         appMenu.addItem(.separator())
         appMenu.addItem(menuItem("DĀR Voice Studio ausblenden", action: #selector(NSApplication.hide(_:)), key: "h"))
         let hideOthers = menuItem("Andere ausblenden", action: #selector(NSApplication.hideOtherApplications(_:)), key: "h", modifiers: [.command, .option])
@@ -217,6 +219,89 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
     @objc private func publishLiveContent(_ sender: Any?) {
         runStudioAction("window.DarContentStudio && window.DarContentStudio.publishLive && window.DarContentStudio.publishLive();")
+    }
+
+    private func companionToken() -> String? {
+        let path = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Applications/DAR-Voice-Studio/ipad-pairing-token.txt")
+        guard let raw = try? String(contentsOf: path, encoding: .utf8) else { return nil }
+        let token = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        return token.isEmpty ? nil : token
+    }
+
+    private func localIPv4Address() -> String? {
+        var address: String?
+        var ifaddr: UnsafeMutablePointer<ifaddrs>?
+        guard getifaddrs(&ifaddr) == 0, let first = ifaddr else { return nil }
+        defer { freeifaddrs(ifaddr) }
+
+        var pointer: UnsafeMutablePointer<ifaddrs>? = first
+        var fallback: String?
+        while let current = pointer {
+            let interface = current.pointee
+            defer { pointer = interface.ifa_next }
+            guard let addr = interface.ifa_addr,
+                  addr.pointee.sa_family == UInt8(AF_INET) else { continue }
+
+            let name = String(cString: interface.ifa_name)
+            if name == "lo0" { continue }
+
+            var host = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+            let length = socklen_t(addr.pointee.sa_len)
+            let result = getnameinfo(
+                addr,
+                length,
+                &host,
+                socklen_t(host.count),
+                nil,
+                0,
+                NI_NUMERICHOST
+            )
+            guard result == 0 else { continue }
+            let value = String(cString: host)
+            if value.hasPrefix("169.254.") { continue }
+            if name == "en0" || name == "en1" {
+                address = value
+                break
+            }
+            if fallback == nil { fallback = value }
+        }
+        return address ?? fallback
+    }
+
+    private func companionPairingURL() -> String? {
+        guard let ip = localIPv4Address(),
+              let token = companionToken() else { return nil }
+        var components = URLComponents()
+        components.scheme = "http"
+        components.host = ip
+        components.port = 8787
+        components.path = "/studio/"
+        components.queryItems = [URLQueryItem(name: "pair", value: token)]
+        return components.url?.absoluteString
+    }
+
+    @objc private func showCompanionPairing(_ sender: Any?) {
+        let alert = NSAlert()
+        alert.alertStyle = .informational
+        alert.messageText = "iPad / iPhone mit Voice Studio verbinden"
+
+        guard let url = companionPairingURL() else {
+            alert.informativeText = "Keine lokale WLAN-Adresse oder kein Kopplungsschlüssel verfügbar. Verbinde den Mac mit demselben WLAN wie dein iPad/iPhone und starte Voice Studio erneut."
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
+            return
+        }
+
+        alert.informativeText = "Öffne diesen Link auf dem iPad/iPhone im selben WLAN. Beim ersten Öffnen wird das Gerät sicher mit diesem Mac gekoppelt.\n\n\(url)\n\nDen Link nicht an andere Personen weitergeben."
+        alert.addButton(withTitle: "Link kopieren")
+        alert.addButton(withTitle: "Schließen")
+        let response = alert.runModal()
+        if response == .alertFirstButtonReturn {
+            let pasteboard = NSPasteboard.general
+            pasteboard.clearContents()
+            pasteboard.setString(url, forType: .string)
+        }
     }
 
     private func versionParts(_ value: String) -> [Int] {
@@ -541,6 +626,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
                 checkForUpdates(userInitiated: true)
             }
         }
+
+        if message.name == "darCompanion" {
+            DispatchQueue.main.async { [weak self] in
+                self?.showCompanionPairing(nil)
+            }
+        }
     }
 
     @objc private func reloadStudio(_ sender: Any?) {
@@ -604,6 +695,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             var env = ProcessInfo.processInfo.environment
             env["DAR_VOICE_APP_HOME"] = target.path
             env["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+            let pairFile = target.appendingPathComponent("ipad-pairing-token.txt")
+            if let rawPair = try? String(contentsOf: pairFile, encoding: .utf8) {
+                let pair = rawPair.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !pair.isEmpty {
+                    env["DAR_VOICE_NETWORK_MODE"] = "1"
+                    env["DAR_VOICE_PAIR_TOKEN"] = pair
+                }
+            }
             env["PATH"] = "/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
             for ffmpeg in ["/opt/homebrew/bin/ffmpeg", "/usr/local/bin/ffmpeg", "/opt/local/bin/ffmpeg"] {
                 if FileManager.default.isExecutableFile(atPath: ffmpeg) {
