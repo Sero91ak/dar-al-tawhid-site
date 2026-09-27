@@ -2634,10 +2634,15 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str,mode:str="narratio
         )
         if 0<letters<=24:
             if letters<=12:
-                # Einzelne Namen/Begriffe dürfen nicht wie isolierte Ansagen mehrere
-                # Sekunden stehen bleiben. Das war die Hauptursache hörbarer Stopps
-                # mitten in deutschen Sätzen (z. B. vor/nach Allāh).
-                max_dur=float(QA_CONFIG.get("inlineArabicMaxSecondsBase",0.65))+letters*float(QA_CONFIG.get("inlineArabicMaxSecondsPerLetter",0.15))
+                # Kritische Kernbegriffe (z. B. Qurʾān) werden beim ersten Einsatz
+                # absichtlich als eigener Kandidat erzeugt. Ihre Aussprache darf etwas
+                # länger sein als ein gewöhnlicher Inline-Begriff, solange die separaten
+                # Silence-/Plateau-/Clipping-Guards sauber bleiben.
+                if audio_lock_key_for_chunk(text):
+                    max_dur=float(QA_CONFIG.get("coreArabicMaxSecondsBase",1.20))+letters*float(QA_CONFIG.get("coreArabicMaxSecondsPerLetter",0.40))
+                    metrics["core_arabic_duration_guard"]=True
+                else:
+                    max_dur=float(QA_CONFIG.get("inlineArabicMaxSecondsBase",0.65))+letters*float(QA_CONFIG.get("inlineArabicMaxSecondsPerLetter",0.15))
             else:
                 max_dur=float(QA_CONFIG.get("shortArabicMaxSecondsBase",1.2))+letters*float(QA_CONFIG.get("shortArabicMaxSecondsPerLetter",0.34))
             metrics["inline_arabic_max_seconds"]=round(max_dur,3)
