@@ -1730,7 +1730,9 @@ def detect_prosody_mode(text:str):
             return mode
 
     word_count=len(re.findall(r"\S+",value))
-    if value.count(",")>=3 or value.count(";")>=2 or ":" in value or (value.count(",")>=1 and " und " in low and word_count<=20):
+    # Ein normaler Satz mit Relativ-/Infinitivkomma und "und" ist keine Liste.
+    # Der frühere Shortcut erzeugte unnötig abgehackte Listen-Prosodie.
+    if value.count(",")>=3 or value.count(";")>=2 or ":" in value:
         return "list"
 
     teaching=CONTEXT_CONFIG.get("teaching") or ["bedeutet","lernen wir","erklärt","grundlage","pflicht","wir beten","wir finden","liest","bereiten wir uns","folgen"]
