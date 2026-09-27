@@ -2435,7 +2435,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.49</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.51</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2447,7 +2447,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
         <div class="kids-wordmark">
           <span class="wm-dar">DĀR AL TAWḤĪD</span>
           <div class="wm-dar-wrap">
-            <svg class="wm-dar-svg" viewBox="0 0 560 108" aria-hidden="true">
+            <svg class="wm-dar-svg" viewBox="0 0 560 72" aria-hidden="true">
               <defs>
                 <linearGradient id="wmGoldFill" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0" stop-color="#fff8e0"></stop>
@@ -2455,12 +2455,11 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
                   <stop offset="1" stop-color="#c8923e"></stop>
                 </linearGradient>
               </defs>
-              <path id="wmArc" d="M18 86 C 150 10, 410 10, 542 86" fill="none"></path>
-              <text fill="url(#wmGoldFill)" stroke="rgba(255,255,255,.62)" stroke-width="2.4" paint-order="stroke fill" font-size="46" font-family="Fredoka, system-ui, sans-serif" font-weight="700" letter-spacing="1.8">
+              <path id="wmArc" d="M26 58 C 160 18, 400 18, 534 58" fill="none"></path>
+              <text fill="url(#wmGoldFill)" stroke="rgba(255,255,255,.55)" stroke-width="2.1" paint-order="stroke fill" font-size="40" font-family="Fredoka, system-ui, sans-serif" font-weight="700" letter-spacing="1.4">
                 <textPath href="#wmArc" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath>
               </text>
             </svg>
-            <span class="wm-dar-fx" aria-hidden="true"></span>
           </div>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
         </div>
@@ -2929,7 +2928,8 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab50";
+const KIDS_BUILD_ID="kids-shell-v12-tab51";
+try{document.documentElement.classList.add("kids-hello");setTimeout(function(){document.documentElement.classList.remove("kids-hello")},1800)}catch(eHello){}
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6395,52 +6395,70 @@ fetchCatalog();
   padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;
 }
 </style>
-<style id="kids-wordmark-sky-curve-v33">
+<style id="kids-wordmark-sky-curve-v34">
 #view-today .kids-wordmark,.kids-wordmark{
   position:absolute!important;
-  left:50%!important;top:max(6px, env(safe-area-inset-top, 0px))!important;
+  left:50%!important;
+  top:max(8px, env(safe-area-inset-top, 0px))!important;
   right:auto!important;bottom:auto!important;
   transform:translateX(-50%)!important;
-  margin:0!important;width:min(96vw,680px)!important;
+  margin:0!important;
+  width:min(92vw,560px)!important;
+  height:clamp(132px,36vw,188px)!important;
   z-index:7!important;text-align:center!important;pointer-events:none!important;
-  display:flex!important;flex-direction:column!important;align-items:center!important;gap:0!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;
+  justify-content:center!important;gap:0!important;
 }
 #view-today .wm-dar,.wm-dar{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 #view-today .wm-dar-wrap{
-  position:relative;width:100%;overflow:visible;
+  position:relative;width:100%;height:auto;overflow:visible;line-height:0;
 }
 #view-today .wm-dar-svg,.wm-dar-svg{
   display:block!important;opacity:1!important;visibility:visible!important;
-  width:100%!important;height:clamp(88px,26vw,136px)!important;
-  overflow:visible!important;
-  filter:drop-shadow(0 2px 0 rgba(255,255,255,.42)) drop-shadow(0 12px 22px rgba(8,24,36,.38));
-  animation:darFloat 4.2s ease-in-out infinite;
+  width:100%!important;height:clamp(48px,14vw,68px)!important;
+  margin:0 auto!important;overflow:visible!important;
+  filter:drop-shadow(0 3px 8px rgba(8,24,36,.35));
+  animation:none!important;
 }
-@keyframes darFloat{
-  0%,100%{transform:translateY(0) scale(1)}
-  50%{transform:translateY(-7px) scale(1.02)}
-}
-#view-today .wm-dar-fx{
-  position:absolute;inset:-12% -8%;pointer-events:none;border-radius:40%;
-  background:linear-gradient(115deg,transparent 28%,rgba(255,255,255,.78) 50%,transparent 72%);
-  background-size:220% 100%;
-  mix-blend-mode:soft-light;
-  animation:darShine 3.5s ease-in-out infinite;
-}
-@keyframes darShine{
-  0%{background-position:-90% 0;opacity:.2}
-  45%{opacity:1}
-  100%{background-position:190% 0;opacity:.15}
-}
+#view-today .wm-dar-fx{display:none!important}
 #view-today .wm-kids,.wm-kids{
   display:flex!important;justify-content:center!important;align-items:flex-end!important;
-  margin:-8px auto 0!important;font-size:clamp(34px,10.8vw,56px)!important;
+  margin:-22px auto 0!important;
+  font-size:clamp(42px,12.4vw,64px)!important;
+  line-height:.82!important;
+}
+#view-today .wm-kids span{
+  animation-name:kidsBalloon!important;
+  animation-duration:2.8s!important;
+}
+@keyframes kidsBalloon{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-5px) scale(1.04)}
 }
 #view-today .hero::before,.hero::before{
   background-position:center 54%!important;
 }
+html.kids-hello .wm-dar-svg{
+  animation:helloDar .72s cubic-bezier(.22,1.1,.28,1) both!important;
+}
+html.kids-hello .wm-kids span{
+  animation:helloKid .58s cubic-bezier(.2,1.35,.28,1) both!important;
+}
+html.kids-hello .wm-kids .k{animation-delay:.22s!important}
+html.kids-hello .wm-kids .i{animation-delay:.34s!important}
+html.kids-hello .wm-kids .d{animation-delay:.46s!important}
+html.kids-hello .wm-kids .s{animation-delay:.58s!important}
+@keyframes helloDar{
+  from{opacity:0;transform:translateY(-10px) scale(.94)}
+  to{opacity:1;transform:none}
+}
+@keyframes helloKid{
+  from{opacity:0;transform:translateY(14px) scale(.45)}
+  to{opacity:1;transform:none}
+}
 @media(prefers-reduced-motion:reduce){
-  #view-today .wm-dar-svg,#view-today .wm-dar-fx,#view-today .wm-kids span{animation:none!important}
+  html.kids-hello .wm-dar-svg,html.kids-hello .wm-kids span,
+  #view-today .wm-dar-svg,#view-today .wm-kids span{animation:none!important}
 }
 </style>
 
