@@ -13,6 +13,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
     private let studioURL = URL(string: "http://127.0.0.1:8787/studio/")!
     private let healthURL = URL(string: "http://127.0.0.1:8787/health")!
+    private let updateManifestURL = URL(string: "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/version.json")!
+    private var latestKnownVersion = ""
+    private var updateAvailable = false
+
+    private var currentVersion: String {
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.1"
+    }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.regular)
@@ -21,8 +28,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.0"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.1"
         config.userContentController.add(self, name: "darAudioOutput")
+        config.userContentController.add(self, name: "darUpdater")
 
         webView = WKWebView(frame: .zero, configuration: config)
         webView.navigationDelegate = self
@@ -77,6 +85,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         let appMenu = NSMenu(title: "DĀR Voice Studio")
         appRoot.submenu = appMenu
         appMenu.addItem(menuItem("Über DĀR Voice Studio", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:))))
+        appMenu.addItem(menuItem("Nach Updates suchen…", action: #selector(checkForUpdatesFromMenu(_:)), target: self))
         appMenu.addItem(.separator())
         appMenu.addItem(menuItem("DĀR Voice Studio ausblenden", action: #selector(NSApplication.hide(_:)), key: "h"))
         let hideOthers = menuItem("Andere ausblenden", action: #selector(NSApplication.hideOtherApplications(_:)), key: "h", modifiers: [.command, .option])
@@ -208,6 +217,113 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
     @objc private func publishLiveContent(_ sender: Any?) {
         runStudioAction("window.DarContentStudio && window.DarContentStudio.publishLive && window.DarContentStudio.publishLive();")
+    }
+
+    private func versionParts(_ value: String) -> [Int] {
+        value.split(separator: ".").map { part in
+            Int(part.prefix { $0.isNumber }) ?? 0
+        }
+    }
+
+    private func isVersion(_ candidate: String, newerThan installed: String) -> Bool {
+        let a = versionParts(candidate)
+        let b = versionParts(installed)
+        let count = max(a.count, b.count)
+        for i in 0..<count {
+            let left = i < a.count ? a[i] : 0
+            let right = i < b.count ? b[i] : 0
+            if left != right { return left > right }
+        }
+        return false
+    }
+
+    private func publishUpdateState(_ state: String, latest: String? = nil, message: String = "") {
+        let payload: [String: Any] = [
+            "state": state,
+            "current": currentVersion,
+            "latest": latest ?? latestKnownVersion,
+            "message": message
+        ]
+        guard JSONSerialization.isValidJSONObject(payload),
+              let data = try? JSONSerialization.data(withJSONObject: payload),
+              let json = String(data: data, encoding: .utf8) else { return }
+        DispatchQueue.main.async { [weak self] in
+            self?.webView.evaluateJavaScript(
+                "window.darUpdateStateChanged && window.darUpdateStateChanged(\(json));",
+                completionHandler: nil
+            )
+        }
+    }
+
+    private func checkForUpdates(userInitiated: Bool = false) {
+        if userInitiated {
+            publishUpdateState("checking", message: "Neue Version wird geprüft …")
+        }
+        var request = URLRequest(url: updateManifestURL)
+        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        request.timeoutInterval = 8
+        request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
+
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            guard let self = self else { return }
+            guard error == nil,
+                  (response as? HTTPURLResponse)?.statusCode == 200,
+                  let data = data,
+                  let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let latest = object["version"] as? String,
+                  !latest.isEmpty else {
+                self.publishUpdateState(
+                    "error",
+                    message: userInitiated ? "Update-Prüfung nicht erreichbar." : ""
+                )
+                return
+            }
+
+            self.latestKnownVersion = latest
+            self.updateAvailable = self.isVersion(latest, newerThan: self.currentVersion)
+            if self.updateAvailable {
+                self.publishUpdateState("available", latest: latest, message: "Update verfügbar")
+            } else {
+                self.publishUpdateState(
+                    "current",
+                    latest: latest,
+                    message: userInitiated ? "Voice Studio ist aktuell." : ""
+                )
+            }
+        }.resume()
+    }
+
+    @objc private func checkForUpdatesFromMenu(_ sender: Any?) {
+        checkForUpdates(userInitiated: true)
+    }
+
+    private func installAvailableUpdate() {
+        let helper = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Applications/DAR-Voice-Studio/update-mac.command")
+        guard FileManager.default.fileExists(atPath: helper.path) else {
+            publishUpdateState(
+                "error",
+                message: "Updater fehlt. Diese Installation muss einmalig auf Voice Studio 2.9.1 aktualisiert werden."
+            )
+            return
+        }
+
+        publishUpdateState(
+            "installing",
+            latest: latestKnownVersion,
+            message: "Update wird installiert · App startet danach automatisch neu."
+        )
+
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/bin/bash")
+        process.arguments = [helper.path]
+        process.standardOutput = FileHandle.nullDevice
+        process.standardError = FileHandle.nullDevice
+        do {
+            try process.run()
+        } catch {
+            publishUpdateState("error", message: "Updater konnte nicht gestartet werden: \(error.localizedDescription)")
+        }
     }
 
     private func outputDeviceIDs() -> [AudioDeviceID] {
@@ -409,9 +525,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         _ userContentController: WKUserContentController,
         didReceive message: WKScriptMessage
     ) {
-        guard message.name == "darAudioOutput" else { return }
-        DispatchQueue.main.async { [weak self] in
-            self?.showAudioOutputMenu(nil)
+        if message.name == "darAudioOutput" {
+            DispatchQueue.main.async { [weak self] in
+                self?.showAudioOutputMenu(nil)
+            }
+            return
+        }
+
+        if message.name == "darUpdater" {
+            let body = message.body as? [String: Any]
+            let action = String(describing: body?["action"] ?? "check")
+            if action == "install" {
+                installAvailableUpdate()
+            } else {
+                checkForUpdates(userInitiated: true)
+            }
         }
     }
 
@@ -652,6 +780,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         publishCurrentAudioOutput()
+        if webView.url?.host == "127.0.0.1" || webView.url?.host == "localhost" {
+            publishUpdateState("checking", message: "")
+            checkForUpdates()
+        }
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
