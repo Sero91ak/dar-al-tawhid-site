@@ -256,6 +256,27 @@ jobs:
           assert mod.NETWORK_MODE is False
           assert mod.PAIR_TOKEN == ""
 
+          # Companion authorization is deny-by-default and token-gated on LAN.
+          remote=object.__new__(mod.H)
+          remote.client_address=("192.168.50.20",54321)
+          remote.headers={}
+          remote.path="/health"
+          assert remote.remote_authorized() is False
+
+          mod.NETWORK_MODE=True
+          mod.PAIR_TOKEN="0123456789abcdef"
+          assert remote.remote_authorized() is False
+          remote.headers={"Cookie":"DARVOICE_PAIR=0123456789abcdef"}
+          assert remote.remote_authorized() is True
+          remote.headers={"Cookie":"DARVOICE_PAIR=wrong"}
+          assert remote.remote_authorized() is False
+
+          loopback=object.__new__(mod.H)
+          loopback.client_address=("127.0.0.1",12345)
+          loopback.headers={}
+          loopback.path="/health"
+          assert loopback.remote_authorized() is True
+
           status=mod.get_status()
           assert isinstance(status,dict)
           assert "audio_lock_pending" in status
