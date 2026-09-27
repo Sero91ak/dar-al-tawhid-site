@@ -1,7 +1,7 @@
 {
   "schemaVersion": 8,
   "id": "dar-own-voice-narration-v2.8.8",
-  "updatedAt": "2026-09-27",
+  "updatedAt": "2026-09-28",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
@@ -413,8 +413,8 @@
     "masterLibraryPrecedenceRegression": true,
     "confirmedPronunciationAutoRerenderRegression": true,
     "multiCorrectionAutoRerenderRegression": true,
-    "inlineArabicMaxSecondsBase": 0.65,
-    "inlineArabicMaxSecondsPerLetter": 0.15,
+    "inlineArabicMaxSecondsBase": 0.95,
+    "inlineArabicMaxSecondsPerLetter": 0.25,
     "inlineArabicFlowRegression": true,
     "maxInternalSilenceMsWithPunctuationByMode": {
       "narration": 540,
