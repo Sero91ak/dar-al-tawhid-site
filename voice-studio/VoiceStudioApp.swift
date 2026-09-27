@@ -1,0 +1,560 @@
+import Cocoa
+import WebKit
+import Foundation
+import Darwin
+import CoreAudio
+
+final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+    private var window: NSWindow!
+    private var webView: WKWebView!
+    private var engineProcess: Process?
+    private var engineOutHandle: FileHandle?
+    private var engineErrHandle: FileHandle?
+
+    private let studioURL = URL(string: "http://127.0.0.1:8787/studio/")!
+    private let healthURL = URL(string: "http://127.0.0.1:8787/health")!
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        NSApp.setActivationPolicy(.regular)
+        buildMenus()
+
+        let config = WKWebViewConfiguration()
+        config.websiteDataStore = .default()
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.8.7"
+        config.userContentController.add(self, name: "darAudioOutput")
+
+        webView = WKWebView(frame: .zero, configuration: config)
+        webView.navigationDelegate = self
+        webView.allowsBackForwardNavigationGestures = true
+
+        window = NSWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 1500, height: 940),
+            styleMask: [.titled, .closable, .miniaturizable, .resizable],
+            backing: .buffered,
+            defer: false
+        )
+        window.title = "DĀR AL TAWḤĪD · Voice Studio"
+        window.titleVisibility = .hidden
+        window.titlebarAppearsTransparent = true
+        window.backgroundColor = NSColor(red: 0.024, green: 0.075, blue: 0.094, alpha: 1)
+        window.minSize = NSSize(width: 1000, height: 680)
+        window.contentView = webView
+        window.center()
+        window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+
+        showLoading()
+        waitForEngine(attempt: 0)
+    }
+
+    private func menuItem(_ title: String, action: Selector?, key: String = "",
+                          modifiers: NSEvent.ModifierFlags = [.command],
+                          target: AnyObject? = nil) -> NSMenuItem {
+        let item = NSMenuItem(title: title, action: action, keyEquivalent: key)
+        item.keyEquivalentModifierMask = key.isEmpty ? [] : modifiers
+        item.target = target
+        return item
+    }
+
+    private func buildMenus() {
+        let main = NSMenu()
+        NSApp.mainMenu = main
+
+        let appRoot = NSMenuItem()
+        main.addItem(appRoot)
+        let appMenu = NSMenu(title: "DĀR Voice Studio")
+        appRoot.submenu = appMenu
+        appMenu.addItem(menuItem("Über DĀR Voice Studio", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:))))
+        appMenu.addItem(.separator())
+        appMenu.addItem(menuItem("DĀR Voice Studio ausblenden", action: #selector(NSApplication.hide(_:)), key: "h"))
+        let hideOthers = menuItem("Andere ausblenden", action: #selector(NSApplication.hideOtherApplications(_:)), key: "h", modifiers: [.command, .option])
+        appMenu.addItem(hideOthers)
+        appMenu.addItem(menuItem("Alle einblenden", action: #selector(NSApplication.unhideAllApplications(_:))))
+        appMenu.addItem(.separator())
+        appMenu.addItem(menuItem("DĀR Voice Studio beenden", action: #selector(NSApplication.terminate(_:)), key: "q"))
+
+        let fileRoot = NSMenuItem()
+        main.addItem(fileRoot)
+        let fileMenu = NSMenu(title: "Ablage")
+        fileRoot.submenu = fileMenu
+        fileMenu.addItem(menuItem("Fenster schließen", action: #selector(NSWindow.performClose(_:)), key: "w"))
+
+        let editRoot = NSMenuItem()
+        main.addItem(editRoot)
+        let editMenu = NSMenu(title: "Bearbeiten")
+        editRoot.submenu = editMenu
+
+        editMenu.addItem(menuItem("Widerrufen", action: Selector(("undo:")), key: "z"))
+        editMenu.addItem(menuItem("Wiederholen", action: Selector(("redo:")), key: "z", modifiers: [.command, .shift]))
+        editMenu.addItem(.separator())
+        editMenu.addItem(menuItem("Ausschneiden", action: Selector(("cut:")), key: "x"))
+        editMenu.addItem(menuItem("Kopieren", action: Selector(("copy:")), key: "c"))
+        editMenu.addItem(menuItem("Einsetzen", action: Selector(("paste:")), key: "v"))
+        editMenu.addItem(menuItem("Einsetzen und Stil anpassen", action: Selector(("pasteAsPlainText:")), key: "v", modifiers: [.command, .option, .shift]))
+        editMenu.addItem(menuItem("Löschen", action: Selector(("delete:"))))
+        editMenu.addItem(.separator())
+        editMenu.addItem(menuItem("Alles auswählen", action: Selector(("selectAll:")), key: "a"))
+
+        let viewRoot = NSMenuItem()
+        main.addItem(viewRoot)
+        let viewMenu = NSMenu(title: "Darstellung")
+        viewRoot.submenu = viewMenu
+        viewMenu.addItem(menuItem("Neu laden", action: #selector(reloadStudio(_:)), key: "r", target: self))
+        viewMenu.addItem(.separator())
+        viewMenu.addItem(menuItem("Vergrößern", action: #selector(zoomIn(_:)), key: "+", target: self))
+        viewMenu.addItem(menuItem("Verkleinern", action: #selector(zoomOut(_:)), key: "-", target: self))
+        viewMenu.addItem(menuItem("Originalgröße", action: #selector(resetZoom(_:)), key: "0", target: self))
+        viewMenu.addItem(.separator())
+        viewMenu.addItem(menuItem("Vollbild", action: #selector(toggleFullScreen(_:)), key: "f", modifiers: [.command, .control], target: self))
+
+        let audioRoot = NSMenuItem()
+        main.addItem(audioRoot)
+        let audioMenu = NSMenu(title: "Audio")
+        audioRoot.submenu = audioMenu
+        audioMenu.addItem(menuItem(
+            "Audio-Ausgabe wählen…",
+            action: #selector(showAudioOutputMenu(_:)),
+            key: "o",
+            modifiers: [.command, .option],
+            target: self
+        ))
+        audioMenu.addItem(menuItem(
+            "Toneinstellungen öffnen…",
+            action: #selector(openSoundSettings(_:)),
+            target: self
+        ))
+
+        let windowRoot = NSMenuItem()
+        main.addItem(windowRoot)
+        let windowMenu = NSMenu(title: "Fenster")
+        windowRoot.submenu = windowMenu
+        windowMenu.addItem(menuItem("Minimieren", action: #selector(NSWindow.performMiniaturize(_:)), key: "m"))
+        windowMenu.addItem(menuItem("Zoom", action: #selector(NSWindow.performZoom(_:))))
+        NSApp.windowsMenu = windowMenu
+    }
+
+    private func outputDeviceIDs() -> [AudioDeviceID] {
+        var address = AudioObjectPropertyAddress(
+            mSelector: kAudioHardwarePropertyDevices,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMain
+        )
+        var dataSize: UInt32 = 0
+        guard AudioObjectGetPropertyDataSize(
+            AudioObjectID(kAudioObjectSystemObject),
+            &address,
+            0,
+            nil,
+            &dataSize
+        ) == noErr else { return [] }
+
+        let count = Int(dataSize) / MemoryLayout<AudioDeviceID>.size
+        guard count > 0 else { return [] }
+        var devices = [AudioDeviceID](repeating: 0, count: count)
+        let status = devices.withUnsafeMutableBufferPointer { buffer -> OSStatus in
+            guard let base = buffer.baseAddress else { return OSStatus(kAudio_ParamError) }
+            return AudioObjectGetPropertyData(
+                AudioObjectID(kAudioObjectSystemObject),
+                &address,
+                0,
+                nil,
+                &dataSize,
+                base
+            )
+        }
+        guard status == noErr else { return [] }
+        return devices.filter { hasOutputStreams($0) }
+    }
+
+    private func hasOutputStreams(_ deviceID: AudioDeviceID) -> Bool {
+        var address = AudioObjectPropertyAddress(
+            mSelector: kAudioDevicePropertyStreams,
+            mScope: kAudioDevicePropertyScopeOutput,
+            mElement: kAudioObjectPropertyElementMain
+        )
+        var size: UInt32 = 0
+        return AudioObjectGetPropertyDataSize(deviceID, &address, 0, nil, &size) == noErr &&
+            size >= UInt32(MemoryLayout<AudioStreamID>.size)
+    }
+
+    private func audioDeviceName(_ deviceID: AudioDeviceID) -> String {
+        var address = AudioObjectPropertyAddress(
+            mSelector: kAudioObjectPropertyName,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMain
+        )
+        var name: CFString = "Audio-Gerät" as CFString
+        var size = UInt32(MemoryLayout<CFString>.size)
+        let status = AudioObjectGetPropertyData(deviceID, &address, 0, nil, &size, &name)
+        return status == noErr ? (name as String) : "Audio-Gerät"
+    }
+
+    private func defaultOutputDeviceID() -> AudioDeviceID? {
+        var address = AudioObjectPropertyAddress(
+            mSelector: kAudioHardwarePropertyDefaultOutputDevice,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMain
+        )
+        var deviceID = AudioDeviceID(0)
+        var size = UInt32(MemoryLayout<AudioDeviceID>.size)
+        let status = AudioObjectGetPropertyData(
+            AudioObjectID(kAudioObjectSystemObject),
+            &address,
+            0,
+            nil,
+            &size,
+            &deviceID
+        )
+        return status == noErr && deviceID != 0 ? deviceID : nil
+    }
+
+    @discardableResult
+    private func setDefaultOutputDevice(_ deviceID: AudioDeviceID) -> Bool {
+        var output = deviceID
+        var outputAddress = AudioObjectPropertyAddress(
+            mSelector: kAudioHardwarePropertyDefaultOutputDevice,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMain
+        )
+        let size = UInt32(MemoryLayout<AudioDeviceID>.size)
+        let outputStatus = AudioObjectSetPropertyData(
+            AudioObjectID(kAudioObjectSystemObject),
+            &outputAddress,
+            0,
+            nil,
+            size,
+            &output
+        )
+
+        var system = deviceID
+        var systemAddress = AudioObjectPropertyAddress(
+            mSelector: kAudioHardwarePropertyDefaultSystemOutputDevice,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMain
+        )
+        _ = AudioObjectSetPropertyData(
+            AudioObjectID(kAudioObjectSystemObject),
+            &systemAddress,
+            0,
+            nil,
+            size,
+            &system
+        )
+        return outputStatus == noErr
+    }
+
+    private func javascriptStringLiteral(_ value: String) -> String {
+        guard let data = try? JSONSerialization.data(withJSONObject: [value]),
+              let json = String(data: data, encoding: .utf8),
+              json.count >= 2 else {
+            return ""Audio-Ausgabe""
+        }
+        return String(json.dropFirst().dropLast())
+    }
+
+    private func publishCurrentAudioOutput(_ explicitName: String? = nil) {
+        let name = explicitName ?? defaultOutputDeviceID().map(audioDeviceName) ?? "Systemausgabe"
+        let literal = javascriptStringLiteral(name)
+        DispatchQueue.main.async { [weak self] in
+            self?.webView.evaluateJavaScript(
+                "window.darAudioOutputChanged && window.darAudioOutputChanged(\(literal));",
+                completionHandler: nil
+            )
+        }
+    }
+
+    @objc private func showAudioOutputMenu(_ sender: Any?) {
+        let devices = outputDeviceIDs()
+        let current = defaultOutputDeviceID()
+        let menu = NSMenu(title: "Audio-Ausgabe")
+
+        if devices.isEmpty {
+            let empty = NSMenuItem(
+                title: "Keine verfügbaren Audio-Ausgänge gefunden",
+                action: nil,
+                keyEquivalent: ""
+            )
+            empty.isEnabled = false
+            menu.addItem(empty)
+        } else {
+            let sorted = devices.sorted { left, right in
+                if left == current && right != current { return true }
+                if right == current && left != current { return false }
+                return audioDeviceName(left).localizedCaseInsensitiveCompare(audioDeviceName(right)) == .orderedAscending
+            }
+            for device in sorted {
+                let item = NSMenuItem(
+                    title: audioDeviceName(device),
+                    action: #selector(selectAudioOutput(_:)),
+                    keyEquivalent: ""
+                )
+                item.target = self
+                item.representedObject = NSNumber(value: device)
+                item.state = device == current ? .on : .off
+                menu.addItem(item)
+            }
+        }
+
+        menu.addItem(.separator())
+        let settings = NSMenuItem(
+            title: "Toneinstellungen öffnen…",
+            action: #selector(openSoundSettings(_:)),
+            keyEquivalent: ""
+        )
+        settings.target = self
+        menu.addItem(settings)
+
+        menu.popUp(positioning: nil, at: NSEvent.mouseLocation, in: nil)
+    }
+
+    @objc private func selectAudioOutput(_ sender: NSMenuItem) {
+        guard let number = sender.representedObject as? NSNumber else { return }
+        let deviceID = AudioDeviceID(number.uint32Value)
+        let name = audioDeviceName(deviceID)
+        if setDefaultOutputDevice(deviceID) {
+            publishCurrentAudioOutput(name)
+        } else {
+            let alert = NSAlert()
+            alert.messageText = "Audio-Ausgabe konnte nicht gewechselt werden"
+            alert.informativeText = "Bitte prüfe, ob das Gerät verbunden ist, und versuche es erneut."
+            alert.alertStyle = .warning
+            alert.runModal()
+        }
+    }
+
+    @objc private func openSoundSettings(_ sender: Any?) {
+        if let url = URL(string: "x-apple.systempreferences:com.apple.Sound-Settings.extension") {
+            NSWorkspace.shared.open(url)
+        }
+    }
+
+    func userContentController(
+        _ userContentController: WKUserContentController,
+        didReceive message: WKScriptMessage
+    ) {
+        guard message.name == "darAudioOutput" else { return }
+        DispatchQueue.main.async { [weak self] in
+            self?.showAudioOutputMenu(nil)
+        }
+    }
+
+    @objc private func reloadStudio(_ sender: Any?) {
+        webView.reload()
+    }
+
+    @objc private func zoomIn(_ sender: Any?) {
+        webView.pageZoom = min(webView.pageZoom + 0.10, 2.0)
+    }
+
+    @objc private func zoomOut(_ sender: Any?) {
+        webView.pageZoom = max(webView.pageZoom - 0.10, 0.5)
+    }
+
+    @objc private func resetZoom(_ sender: Any?) {
+        webView.pageZoom = 1.0
+    }
+
+    @objc private func toggleFullScreen(_ sender: Any?) {
+        window.toggleFullScreen(sender)
+    }
+
+    private func ensureEngine() {
+        var request = URLRequest(url: healthURL)
+        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        request.timeoutInterval = 1.0
+
+        URLSession.shared.dataTask(with: request) { [weak self] _, response, error in
+            guard let self = self else { return }
+            let ok = (response as? HTTPURLResponse)?.statusCode == 200 && error == nil
+            if !ok {
+                self.startEngineDirectly()
+            }
+        }.resume()
+    }
+
+    private func startEngineDirectly() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
+            if let p = self.engineProcess, p.isRunning { return }
+
+            let fm = FileManager.default
+            let home = fm.homeDirectoryForCurrentUser
+            let target = home.appendingPathComponent("Applications/DAR-Voice-Studio")
+            let python = home.appendingPathComponent("SerhatVoice/.venv/bin/python")
+            let engine = target.appendingPathComponent("local-engine.py")
+            let adobe = home.appendingPathComponent("SerhatVoice/Serhat_Adobe_MASTER.wav")
+            let fallback = home.appendingPathComponent("SerhatVoice/Serhat_FINAL_REF.wav")
+            let arabic = home.appendingPathComponent("SerhatVoice/Serhat_AR_MASTER.wav")
+
+            guard fm.isExecutableFile(atPath: python.path),
+                  fm.fileExists(atPath: engine.path) else {
+                return
+            }
+
+            let process = Process()
+            process.executableURL = python
+            process.arguments = [engine.path]
+            process.currentDirectoryURL = target
+
+            var env = ProcessInfo.processInfo.environment
+            env["DAR_VOICE_APP_HOME"] = target.path
+            env["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
+            env["PATH"] = "/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+            for ffmpeg in ["/opt/homebrew/bin/ffmpeg", "/usr/local/bin/ffmpeg", "/opt/local/bin/ffmpeg"] {
+                if FileManager.default.isExecutableFile(atPath: ffmpeg) {
+                    env["DAR_FFMPEG_BIN"] = ffmpeg
+                    break
+                }
+            }
+            if fm.fileExists(atPath: adobe.path) {
+                env["SERHAT_VOICE_REF"] = adobe.path
+            } else if fm.fileExists(atPath: fallback.path) {
+                env["SERHAT_VOICE_REF"] = fallback.path
+            }
+            if fm.fileExists(atPath: arabic.path) {
+                env["SERHAT_VOICE_REF_AR"] = arabic.path
+            }
+            process.environment = env
+
+            let logURL = target.appendingPathComponent("engine.log")
+            let errURL = target.appendingPathComponent("engine-error.log")
+            if !fm.fileExists(atPath: logURL.path) { fm.createFile(atPath: logURL.path, contents: nil) }
+            if !fm.fileExists(atPath: errURL.path) { fm.createFile(atPath: errURL.path, contents: nil) }
+
+            let out = FileHandle(forWritingAtPath: logURL.path)
+            let err = FileHandle(forWritingAtPath: errURL.path)
+            try? out?.seekToEnd()
+            try? err?.seekToEnd()
+            process.standardOutput = out
+            process.standardError = err
+
+            self.engineProcess = process
+            self.engineOutHandle = out
+            self.engineErrHandle = err
+
+            process.terminationHandler = { [weak self] _ in
+                self?.engineProcess = nil
+            }
+
+            do {
+                try process.run()
+            } catch {
+                NSLog("DĀR Voice engine start failed: \(error)")
+                self.engineProcess = nil
+            }
+        }
+    }
+
+    private func showLoading() {
+        let html = """
+        <!doctype html><html><head><meta charset="utf-8">
+        <style>
+        html,body{margin:0;height:100%;background:#061318;color:#f5f1e8;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+        body{display:grid;place-items:center}.box{text-align:center}
+        .brand{font-family:Georgia,serif;letter-spacing:.15em;color:#e8d29a;font-weight:700;font-size:18px}
+        .sub{margin-top:12px;color:#91a4a8;font-size:13px}
+        .dot{width:8px;height:8px;border-radius:50%;background:#73bea1;display:inline-block;margin-right:8px;box-shadow:0 0 0 5px rgba(115,190,161,.10)}
+        </style></head><body><div class="box">
+        <div class="brand">DĀR AL TAWḤĪD</div>
+        <div class="sub"><span class="dot"></span>Serhat Engine wird gestartet …</div>
+        </div></body></html>
+        """
+        webView.loadHTMLString(html, baseURL: nil)
+    }
+
+    private func waitForEngine(attempt: Int) {
+        var request = URLRequest(url: healthURL)
+        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        request.timeoutInterval = 1.5
+
+        URLSession.shared.dataTask(with: request) { [weak self] _, response, error in
+            guard let self = self else { return }
+            let ok = (response as? HTTPURLResponse)?.statusCode == 200 && error == nil
+            if ok {
+                DispatchQueue.main.async {
+                    self.webView.load(URLRequest(url: self.studioURL, cachePolicy: .reloadIgnoringLocalCacheData))
+                }
+                return
+            }
+
+            if attempt < 80 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                    self.waitForEngine(attempt: attempt + 1)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.showFailure()
+                }
+            }
+        }.resume()
+    }
+
+    private func escapedHTML(_ text: String) -> String {
+        text
+            .replacingOccurrences(of: "&", with: "&amp;")
+            .replacingOccurrences(of: "<", with: "&lt;")
+            .replacingOccurrences(of: ">", with: "&gt;")
+    }
+
+    private func errorTail() -> String {
+        let path = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Applications/DAR-Voice-Studio/engine-error.log")
+        guard let data = try? Data(contentsOf: path),
+              let text = String(data: data, encoding: .utf8) else { return "" }
+        return String(text.suffix(5000))
+    }
+
+    private func showFailure() {
+        let details = escapedHTML(errorTail())
+        let detailBlock = details.isEmpty ? "" : "<pre>\(details)</pre>"
+        let html = """
+        <!doctype html><html><head><meta charset="utf-8">
+        <style>
+        html,body{margin:0;height:100%;background:#061318;color:#f5f1e8;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+        body{display:grid;place-items:center}.box{width:min(760px,85vw);padding:36px;text-align:center}
+        h1{font-size:21px}p{color:#9cafb4;line-height:1.55}
+        pre{text-align:left;white-space:pre-wrap;max-height:320px;overflow:auto;background:#031016;border:1px solid rgba(255,255,255,.1);padding:14px;border-radius:12px;color:#e8c7c7;font-size:11px}
+        </style></head><body><div class="box">
+        <h1>Serhat Engine konnte nicht gestartet werden</h1>
+        <p>Die App hat die Engine automatisch erneut gestartet. Unten steht der aktuelle Fehler aus dem lokalen Protokoll.</p>
+        \(detailBlock)
+        </div></body></html>
+        """
+        webView.loadHTMLString(html, baseURL: nil)
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        publishCurrentAudioOutput()
+    }
+
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        guard let url = navigationAction.request.url else {
+            decisionHandler(.cancel)
+            return
+        }
+        if let host = url.host, host != "127.0.0.1" && host != "localhost" {
+            NSWorkspace.shared.open(url)
+            decisionHandler(.cancel)
+            return
+        }
+        decisionHandler(.allow)
+    }
+
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        true
+    }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        if let p = engineProcess, p.isRunning {
+            p.terminate()
+        }
+        try? engineOutHandle?.close()
+        try? engineErrHandle?.close()
+    }
+}
+
+let app = NSApplication.shared
+let delegate = AppDelegate()
+app.delegate = delegate
+app.run()
