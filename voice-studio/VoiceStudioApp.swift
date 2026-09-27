@@ -14,7 +14,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
     private let studioURL = URL(string: "http://127.0.0.1:8787/studio/")!
     private let healthURL = URL(string: "http://127.0.0.1:8787/health")!
-    private let updateManifestURL = URL(string: "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/version.json")!
+    private let updateManifestURL = URL(string: "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/version.json?ref=main")!
     private var latestKnownVersion = ""
     private var updateAvailable = false
 
@@ -369,6 +369,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 8
         request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
+        request.setValue("application/vnd.github.raw+json", forHTTPHeaderField: "Accept")
+        request.setValue("DAR-Voice-Studio-Updater", forHTTPHeaderField: "User-Agent")
 
         URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             guard let self = self else { return }
