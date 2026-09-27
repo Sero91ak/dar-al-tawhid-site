@@ -107,7 +107,15 @@
     "assets/dar-noble-3d-icons.css",
     "assets/dar-3d-icons/",
     "data/offline-content-manifest.json",
-    "_headers"
+    "_headers",
+    "assets/dar-quran-player.js",
+    "assets/dar-quran-audio-pack.js",
+    "test/assets/dar-quran-player.js",
+    "test/assets/dar-quran-audio-pack.js",
+    "data/quran-reciters.json",
+    "cloudflare/site-router.js",
+    "cloudflare/test-app-worker.js",
+    "apple-tv/quran/audio/catalog.json"
   ],
   "protectedPrefixes": [
     "index.html",
@@ -6390,6 +6398,31 @@
         "test/assets/dar-noble-3d-icons.css",
         "test/assets/dar-3d-icons/",
         "data/offline-content-manifest.json",
+        "_headers",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-reciters-offline-pack-v1054-1077-2026-09-27",
+      "approvedBy": "user-explicit-all-reciter-mp3-offline-tv",
+      "reason": "Nutzer: gespeicherte Rezitatoren komplett, alle MP3s in Apps/Apple TV, Offline flüssig für Rezitation und Lernen.",
+      "paths": [
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "assets/dar-quran-player.js",
+        "assets/dar-quran-audio-pack.js",
+        "test/assets/dar-quran-player.js",
+        "test/assets/dar-quran-audio-pack.js",
+        "data/quran-reciters.json",
+        "data/offline-content-manifest.json",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js",
+        "apple-tv/quran/audio/catalog.json",
         "_headers",
         "content/admin/change-scope-lock.json"
       ],

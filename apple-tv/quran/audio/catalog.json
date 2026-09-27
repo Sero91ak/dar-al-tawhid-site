@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.2",
+  "status": "active",
+  "target": "tvOS-only",
+  "provider": {
+    "name": "DĀR AL TAWḤĪD audio pack",
+    "editionsURL": "https://api.alquran.cloud/v1/edition/format/audio",
+    "surahURLTemplate": "https://api.alquran.cloud/v1/surah/{surah}/{edition}",
+    "cdnBaseURL": "https://cdn.islamic.network",
+    "appProxyURL": "https://dar-al-tawhid.de/quran-audio/{edition}/{ayah}.mp3",
+    "catalogURL": "https://dar-al-tawhid.de/data/quran-reciters.json"
+  },
+  "readerSync": {
+    "mode": "ayah-by-ayah",
+    "arabicEdition": "quran-uthmani",
+    "germanEdition": "de.bubenheim",
+    "germanTranslationName": "Bubenheim & Elyas",
+    "advanceTrigger": "audio-item-finished",
+    "showArabic": true,
+    "showGerman": true,
+    "persistLastPosition": true
+  },
+  "selection": {
+    "includeAllAvailableArabicAudioEditions": false,
+    "language": "ar",
+    "format": "audio",
+    "defaultEdition": "ar.alafasy",
+    "persistSelection": true,
+    "sort": "displayName"
+  },
+  "offline": {
+    "cacheLastSuccessfulEditionList": true,
+    "cacheLoadedSurahText": true,
+    "cacheLoadedGermanTranslation": true,
+    "downloadSeedSurahs": [1, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114],
+    "downloadSelectedReciter": true,
+    "diskPack": true,
+    "fallbackRequired": true
+  },
+  "fallbackEditions": [
+    "ar.alafasy",
+    "ar.abdurrahmaansudais",
+    "ar.saoodshuraym",
+    "ar.husary",
+    "ar.husarymujawwad",
+    "ar.minshawi",
+    "ar.minshawimujawwad",
+    "ar.abdulbasitmurattal",
+    "ar.abdulbasitmujawwad",
+    "ar.abdullahbasfar",
+    "ar.ahmedajamy",
+    "ar.hanirifai",
+    "ar.hudhaify",
+    "ar.mahermuaiqly",
+    "ar.muhammadayyoub",
+    "ar.muhammadjibreel",
+    "ar.shaatree",
+    "ar.yasseraldossari",
+    "ar.aymanswoaid"
+  ]
+}

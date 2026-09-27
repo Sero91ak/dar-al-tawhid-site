@@ -1,5 +1,5 @@
 {
-  "version": "offline-bundle-v1053-3d",
+  "version": "offline-bundle-v1054-quran-audio",
   "requiredStatic": [
     "/",
     "/index.html",
@@ -110,7 +110,12 @@
     "/test/assets/dar-3d-icons/spark.png",
     "/test/assets/dar-3d-icons/wasiyyah.png",
     "/test/assets/dar-3d-icons/widgets.png",
-    "/test/assets/dar-3d-icons/zakat.png"
+    "/test/assets/dar-3d-icons/zakat.png",
+    "/data/quran-reciters.json",
+    "/assets/dar-quran-audio-pack.js",
+    "/test/assets/dar-quran-audio-pack.js",
+    "/assets/dar-quran-player.js",
+    "/test/assets/dar-quran-player.js"
   ],
   "requiredData": [
     "/content/duas/duas.json",

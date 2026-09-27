@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 956;
+    var PLAYER_BUILD = 957;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -40,8 +40,9 @@
   var RECITERS = [
     { id: "alafasy", name: "Mišārī Rāšid al-ʿAfāsī", folder: "Alafasy_128kbps", edition: "ar.alafasy" },
     { id: "sudais", name: "ʿAbd ar-Raḥmān as-Sudais", folder: "Abdurrahmaan_As-Sudais_192kbps", edition: "ar.abdurrahmaansudais" },
-    { id: "shuraim", name: "Saʿūd aš-Šuraym", folder: "Saood_ash-Shuraym_128kbps", edition: "ar.saudalshuraim" },
+    { id: "shuraim", name: "Saʿūd aš-Šuraym", folder: "Saood_ash-Shuraym_128kbps", edition: "ar.saoodshuraym" },
     { id: "husary", name: "Maḥmūd Ḫalīl al-Ḥuṣarī", folder: "Husary_128kbps", edition: "ar.husary" },
+    { id: "husarymujawwad", name: "al-Ḥuṣarī (Muǧawwad)", folder: "Husary_Mujawwad_128kbps", edition: "ar.husarymujawwad" },
     { id: "minshawi", name: "Muḥammad Ṣiddīq al-Minšāwī", folder: "Minshawy_Murattal_128kbps", edition: "ar.minshawi" },
     { id: "minshawimujawwad", name: "al-Minšāwī (Muǧawwad)", folder: "Minshawy_Mujawwad_192kbps", edition: "ar.minshawimujawwad" },
     { id: "basit", name: "ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad", folder: "Abdul_Basit_Murattal_192kbps", edition: "ar.abdulbasitmurattal" },
@@ -54,7 +55,8 @@
     { id: "shaatree", name: "Abū Bakr aš-Šāṭirī", folder: "Abu_Bakr_Ash-Shaatree_128kbps", edition: "ar.shaatree" },
     { id: "hanirifai", name: "Hānī ar-Rifāʿī", folder: "Hani_Rifai_192kbps", edition: "ar.hanirifai" },
     { id: "abdullahbasfar", name: "ʿAbdullāh Baṣfar", folder: "Abdullah_Basfar_192kbps", edition: "ar.abdullahbasfar" },
-    { id: "yasseraldossari", name: "Yāsir ad-Dawsarī", folder: "Yasser_Ad-Dussary_128kbps", edition: "ar.yasseraldossari" }
+    { id: "yasseraldossari", name: "Yāsir ad-Dawsarī", folder: "Yasser_Ad-Dussary_128kbps", edition: "ar.yasseraldossari" },
+    { id: "aymanswoaid", name: "Ayman Suwayd", folder: "Ayman_Sowaid_64kbps", edition: "ar.aymanswoaid" }
   ];
   var SHUFFLE = ["off", "surah", "reciter", "both"];
   var REPEAT = ["off", "ayah", "surah"];
@@ -563,14 +565,7 @@
     return n + ayah;
   }
   function urlsFor(surah, ayah) {
-    var rec = reciterById(state.reciter);
-    var s = pad(surah, 3);
-    var a = pad(ayah, 3);
-    var g = globalAyah(surah, ayah);
-    return [
-      "https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3",
-      "https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + g + ".mp3"
-    ];
+    return urlsForWithRec(reciterById(state.reciter), surah, ayah);
   }
   function probeAudioUrl(url) {
     return Promise.resolve(true);
@@ -586,10 +581,14 @@
     var s = pad(surah, 3);
     var a = pad(ayah, 3);
     var g = globalAyah(surah, ayah);
-    return [
-      "https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3",
-      "https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + g + ".mp3"
-    ];
+    var pack = window.DARQuranAudioPack;
+    var list = [];
+    if (pack && typeof pack.url === "function") list.push(pack.url(rec.edition, g));
+    else list.push("/quran-audio/" + rec.edition + "/" + g + ".mp3");
+    list.push("/quran-audio/" + rec.edition + "/" + g + ".mp3");
+    list.push("https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3");
+    list.push("https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + g + ".mp3");
+    return list.filter(function (u, i, arr) { return u && arr.indexOf(u) === i; });
   }
   function missingAudioHalt(qari, surah, ayah, url) {
     state.playing = false;
@@ -653,6 +652,15 @@
     var wantQari = state.reciter;
     var surah = state.surah;
     var ayah = state.ayah;
+    try {
+      var pack = window.DARQuranAudioPack;
+      var recNow = reciterById(wantQari);
+      if (pack && recNow) {
+        pack.ensure(recNow.edition, surah, ayah);
+        pack.prefetchSurah(recNow.edition, surah);
+        if (typeof pack.downloadReciter === "function") pack.downloadReciter(recNow.edition);
+      }
+    } catch (ePack) {}
     resolvePlayable(wantQari, surah, ayah).then(function (hit) {
       if (gen !== playGen) return;
       if (!hit) {

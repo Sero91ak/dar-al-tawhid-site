@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1053';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1054';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -66,6 +66,8 @@ const APP_SHELL = [
   '/assets/global-update-banner.css',
   '/assets/dar-noble-3d-icons.js',
   '/assets/dar-noble-3d-icons.css',
+  '/assets/dar-quran-audio-pack.js',
+  '/data/quran-reciters.json',
   '/assets/dar-3d-icons/audio.png',
   '/assets/dar-3d-icons/bell.png',
   '/assets/dar-3d-icons/calendar.png',
@@ -688,6 +690,26 @@ self.addEventListener('fetch', (event) => {
           })
           .catch(() => cached || Response.error());
         return cached || networkPromise;
+      })
+    );
+    return;
+  }
+
+  // Qurʾān-Rezitation: same-origin MP3s cache-first for offline/learn/prayer.
+  if (url.pathname.startsWith('/quran-audio/') && url.pathname.endsWith('.mp3')) {
+    event.respondWith(
+      caches.open(CACHE_VERSION).then(async (cache) => {
+        const cached = await cache.match(request);
+        if (cached) return cached;
+        try {
+          const response = await fetch(request);
+          if (response && response.ok) {
+            try { cache.put(request, response.clone()); } catch (e) {}
+          }
+          return response;
+        } catch (e) {
+          return cached || Response.error();
+        }
       })
     );
     return;
