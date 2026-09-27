@@ -1,6 +1,6 @@
 {
-  "version": "2.8.2",
-  "updatedAt": "2026-09-27T12:50:00+02:00",
+  "version": "2.8.3",
+  "updatedAt": "2026-09-27T13:05:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -319,5 +319,12 @@
   "inlineArabicPhonemeAwarePauseQa": true,
   "inlineArabicRenderAttempts": 4,
   "fullSentenceContinuityStillAuthoritative": true,
-  "errorShowsSegmentTextAndSilenceMs": true
+  "errorShowsSegmentTextAndSilenceMs": true,
+  "verifiedSentenceFastReuse": true,
+  "lazyModelLoad": true,
+  "skipModelWhenAllSegmentsKnown": true,
+  "backendIndependentVerifiedCache": true,
+  "moderatePauseAutoRepair": true,
+  "qaCleanCacheOnly": true,
+  "normalSentenceNotListMode": true
 }
