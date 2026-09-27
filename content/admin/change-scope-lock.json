@@ -6582,6 +6582,17 @@
         "test/service-worker.js",
         "content/admin/change-scope-lock.json"
       ]
+    },
+    {
+      "id": "test-salbei-home-readability-deboxing-v1099-2026-09-27",
+      "approvedBy": "user-explicit-light-theme-readability-and-remove-unnecessary-boxes",
+      "reason": "Nutzer: In der Test-App beim hellen Salbei/Elfenbein-Erscheinungsbild sind mehrere Schriften zu blass/unlesbar; unnötige helle Kastenflächen und verschachtelte Boxen auf der Startseite entfernen bzw. vereinfachen. Nur Test/Staging, keine Besucher-Live-App.",
+      "paths": [
+        "test/assets/theme-salbei-elfenbein.css",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
     }
   ],
   "enabled": true
