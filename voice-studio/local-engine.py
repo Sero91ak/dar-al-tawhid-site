@@ -3086,8 +3086,8 @@ def install_arabic_reference(data_url:str,original_name:str=""):
         raise ValueError("Arabische Referenzdatei ist kein gültiges Audio.")
     mime=m.group(1).lower()
     allowed={
-        "audio/wav":".wav","audio/x-wav":".wav","audio/wave":".wav",
-        "audio/mp4":".m4a","audio/m4a":".m4a","audio/aac":".aac",
+        "audio/wav":".wav","audio/x-wav":".wav","audio/wave":".wav","audio/vnd.wave":".wav",
+        "audio/mp4":".m4a","audio/m4a":".m4a","audio/x-m4a":".m4a","audio/aac":".aac","audio/x-aac":".aac",
         "audio/mpeg":".mp3","audio/mp3":".mp3"
     }
     if mime not in allowed:
@@ -3822,6 +3822,8 @@ class H(BaseHTTPRequestHandler):
             return self.reject_remote()
         p=urlparse(self.path).path
         n=int(self.headers.get("Content-Length","0") or 0)
+        if p=="/arabic-reference" and n>46*1024*1024:
+            return self.send_json(413,{"ok":False,"error":"Arabische Referenzdatei ist zu groß."})
         try:data=json.loads(self.rfile.read(n) or b"{}")
         except Exception:return self.send_json(400,{"error":"Ungültiges JSON"})
 
