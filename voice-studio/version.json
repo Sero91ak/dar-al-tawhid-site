@@ -306,7 +306,8 @@
     "supervisedMlxWorker": true,
     "hardSegmentWatchdog": true,
     "stuckWorkerKillAndRestart": true,
-    "completedSegmentProgress": true
+    "completedSegmentProgress": true,
+    "narrativePunctuationStaysNarrative": true
   },
   "contentStudio": {
     "enabled": true,
@@ -509,10 +510,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "4f11508bc8a12612bc71aefb64c9e4c5e339d1c8",
+  "releaseRef": "c6c09911f8149d3200ef004301e27f3fa415481e",
   "releaseChannel": "stable",
   "updateRepair": true,
-  "updateRepairReason": "repair stale 2.9.6 release pin; install one coherent 2.9.9 build with current logo and audio engine",
+  "updateRepairReason": "2.9.9 sentence-flow hotfix: narrative punctuation no longer forces list prosody",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
