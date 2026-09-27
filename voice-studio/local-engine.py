@@ -1031,7 +1031,7 @@ def get_status():
     out["honorific_name_variants"]=sum(1 for r in RULES if r.get("required_honorific_key"))
     out["honorific_audio_keys"]=sorted(k for k in HONORIFIC_KEYS if k in HONORIFIC_TTS_BY_KEY)
     out["pronunciation_learning"]=learning_state()
-    out["performance_engine"]="persistent-conditionals+segment-cache-v2"
+    out["performance_engine"]="persistent-conditionals+flow-bridge-v3"
     out["reference_prepares_total"]=MODEL_REFERENCE_PREPARES
     out["reference_cache_hits_total"]=MODEL_REFERENCE_CACHE_HITS
     out["render_cache"]=dict(RENDER_CACHE_STATS)
@@ -1704,13 +1704,17 @@ def prosody_settings(mode:str,language_id:str,text:str=""):
     temperature=float(lang_cfg.get("temperature",0.44 if short_ar else (0.50 if is_ar else 0.55)))
 
     if short_ar:
-        # Guard rail: short Arabic terms should remain neutral and compact.
-        exaggeration=min(exaggeration,0.16)
-        temperature=min(temperature,0.48)
+        # Kurze arabische Begriffe werden mitten in deutscher Narration als Teil des
+        # Satzflusses gesprochen, nicht wie eine separate Ansage. Etwas mehr
+        # Beweglichkeit verhindert langes Dehnen; Temperatur bleibt kontrolliert.
+        exaggeration=max(0.18,min(exaggeration,0.24))
+        temperature=min(temperature,0.46)
+        cfg=0.0
 
     if audio_lock_key_for_chunk(text):
-        # Kernbegriffe müssen maximal stabil und nicht expressiv gesprochen werden.
-        exaggeration=min(exaggeration,0.08)
+        # Kernbegriffe bleiben stabil, dürfen aber akustisch nicht aus dem Satz
+        # herausfallen. Extrem niedrige Exaggeration machte sie unnötig langsam.
+        exaggeration=max(0.14,min(exaggeration,0.20))
         temperature=min(temperature,0.36)
         cfg=0.0
 
@@ -1922,8 +1926,20 @@ def normalize_segment_shape(wav):
         w=w.reshape(w.shape[0],-1)
     return w
 
-def trim_segment_edges(wav,sr:int):
-    """Nur echte Randstille entfernen; Konsonanten/Anlaute bleiben geschützt."""
+def is_inline_arabic_micro_term(text:str):
+    """Kurzer arabischer Name/Begriff, der innerhalb eines deutschen Satzes flüssig eingebettet wird."""
+    value=str(text or "").strip().strip(AUDIO_LOCK_EDGE_CHARS)
+    if not value:
+        return False
+    letters=sum(
+        1 for ch in value
+        if ARABIC_CHAR_RE.match(ch) and unicodedata.category(ch).startswith("L")
+    )
+    words=len([x for x in re.split(r"\s+",value) if x])
+    return 0<letters<=12 and words<=3
+
+def trim_segment_edges(wav,sr:int,aggressive:bool=False):
+    """Echte Randstille entfernen; bei Inline-Arabisch besonders eng für flüssige Satzübergänge."""
     import torch
     w=normalize_segment_shape(wav)
     if w.numel()==0 or w.shape[-1]<8:
@@ -1935,12 +1951,19 @@ def trim_segment_edges(wav,sr:int):
         return w
 
     # Profilgesteuerte Randstille: konservativ trimmen, Anlaute/Konsonanten schützen.
-    threshold=max(peak*float(CONTINUITY_CONFIG.get("trimThresholdRelative",0.0035)),1e-5)
+    rel=float(CONTINUITY_CONFIG.get("trimThresholdRelative",0.0035))
+    if aggressive:
+        rel=max(rel,float(CONTINUITY_CONFIG.get("inlineArabicTrimThresholdRelative",0.012)))
+    threshold=max(peak*rel,1e-5)
     active=torch.nonzero(envelope>threshold).flatten()
     if active.numel()==0:
         return w
 
-    pad=max(1,int(sr*float(CONTINUITY_CONFIG.get("trimSafetyMs",20))/1000.0))
+    pad_ms=float(
+        CONTINUITY_CONFIG.get("inlineArabicTrimSafetyMs",5)
+        if aggressive else CONTINUITY_CONFIG.get("trimSafetyMs",20)
+    )
+    pad=max(1,int(sr*pad_ms/1000.0))
     start=max(0,int(active[0].item())-pad)
     end=min(w.shape[-1],int(active[-1].item())+pad+1)
     return w[...,start:end]
@@ -2043,9 +2066,19 @@ def audio_quality_metrics(wav,sr:int,text:str,language_id:str,mode:str="narratio
             metrics["issues"].append("suspicious_sustained_hold")
 
     if language_id=="ar":
-        letters=len(ARABIC_CHAR_RE.findall(str(text)))
+        letters=sum(
+            1 for ch in str(text or "")
+            if ARABIC_CHAR_RE.match(ch) and unicodedata.category(ch).startswith("L")
+        )
         if 0<letters<=24:
-            max_dur=float(QA_CONFIG.get("shortArabicMaxSecondsBase",1.2))+letters*float(QA_CONFIG.get("shortArabicMaxSecondsPerLetter",0.34))
+            if letters<=12:
+                # Einzelne Namen/Begriffe dürfen nicht wie isolierte Ansagen mehrere
+                # Sekunden stehen bleiben. Das war die Hauptursache hörbarer Stopps
+                # mitten in deutschen Sätzen (z. B. vor/nach Allāh).
+                max_dur=float(QA_CONFIG.get("inlineArabicMaxSecondsBase",0.65))+letters*float(QA_CONFIG.get("inlineArabicMaxSecondsPerLetter",0.15))
+            else:
+                max_dur=float(QA_CONFIG.get("shortArabicMaxSecondsBase",1.2))+letters*float(QA_CONFIG.get("shortArabicMaxSecondsPerLetter",0.34))
+            metrics["inline_arabic_max_seconds"]=round(max_dur,3)
             if duration>max_dur:
                 metrics["issues"].append("short_arabic_too_long")
     else:
@@ -2192,7 +2225,7 @@ def gently_level_segments(items):
         out.append((w,*item[1:]))
     return out
 
-def crossfade_audio(left,right,sr:int,seconds:float):
+def crossfade_audio(left,right,sr:int,seconds:float,equal_power:bool=False):
     import torch
     a=normalize_segment_shape(left)
     b=normalize_segment_shape(right)
@@ -2200,8 +2233,13 @@ def crossfade_audio(left,right,sr:int,seconds:float):
     if n<8:
         return torch.cat([a,b],dim=-1)
 
-    fade_in=torch.linspace(0.0,1.0,n,dtype=a.dtype).view(1,-1)
-    fade_out=1.0-fade_in
+    x=torch.linspace(0.0,1.0,n,dtype=a.dtype).view(1,-1)
+    if equal_power:
+        fade_in=torch.sqrt(x.clamp_min(0.0))
+        fade_out=torch.sqrt((1.0-x).clamp_min(0.0))
+    else:
+        fade_in=x
+        fade_out=1.0-x
     mixed=a[...,-n:]*fade_out+b[...,:n]*fade_in
     return torch.cat([a[...,:-n],mixed,b[...,n:]],dim=-1)
 
@@ -2212,9 +2250,16 @@ def join_rendered_segments(items,sr:int):
         raise RuntimeError("Keine Audiosegmente erzeugt.")
 
     cleaned=[]
-    for item in items:
-        wav=item[0]
-        cleaned.append((trim_segment_edges(wav,sr),*item[1:]))
+    for pos,item in enumerate(items):
+        wav,lang,chunk=item[0],item[1],item[2]
+        left_lang=items[pos-1][1] if pos>0 else None
+        right_lang=items[pos+1][1] if pos+1<len(items) else None
+        inline_micro=(
+            lang=="ar" and is_inline_arabic_micro_term(chunk)
+            and (left_lang=="de" or right_lang=="de")
+        )
+        trimmed=trim_segment_edges(wav,sr,aggressive=inline_micro)
+        cleaned.append((trimmed,*item[1:]))
     cleaned=gently_level_segments(cleaned)
 
     full=cleaned[0][0]
@@ -2228,6 +2273,10 @@ def join_rendered_segments(items,sr:int):
         sentence_end=bool(re.search(r"[.!?؟…]$",prev_text))
         soft_pause=bool(re.search(r"[,،;؛:]$",prev_text))
         p=prosody_settings(prev_mode,prev_lang,prev_chunk)
+
+        prev_inline_ar=(prev_lang=="ar" and is_inline_arabic_micro_term(prev_chunk))
+        cur_inline_ar=(lang=="ar" and is_inline_arabic_micro_term(chunk))
+        inline_boundary=(prev_inline_ar and lang=="de") or (cur_inline_ar and prev_lang=="de")
 
         if sentence_end:
             factors=CONTINUITY_CONFIG.get("sentencePauseFactors") or {}
@@ -2244,15 +2293,26 @@ def join_rendered_segments(items,sr:int):
             elif re.search(r"[;؛]$",prev_text): factor=float(factors.get("semicolon",1.0))
             else: factor=float(factors.get("colon",1.08))
             pause=max(0,int(p["soft_pause_ms"]*factor))
+            if prev_inline_ar and lang=="de":
+                # Nach einem eingebetteten Namen/Begriff nur die echte Satzzeichenpause,
+                # keine zusätzliche "Ansage-Lücke".
+                pause=min(pause,int(CONTINUITY_CONFIG.get("inlineArabicSoftPauseMaxMs",22)))
             silence=torch.zeros((1,max(1,int(sr*pause/1000))),dtype=full.dtype)
             full=torch.cat([full,silence,wav],dim=-1)
         else:
             ms=max(8,int(p["crossfade_ms"]))
-            if prev_lang==lang:
-                ms=min(ms,int(CONTINUITY_CONFIG.get("sameLanguageCrossfadeMaxMs",22)))
+            if inline_boundary:
+                # Deutlich längerer Equal-Power-Bridge: die separate arabische
+                # Aussprache verschmilzt mit der deutschen Satzmelodie statt hörbar
+                # als einzelnes eingesetztes Wort zu erscheinen.
+                ms=max(ms,int(CONTINUITY_CONFIG.get("inlineArabicCrossfadeMs",72)))
+                full=crossfade_audio(full,wav,sr,ms/1000.0,equal_power=True)
             else:
-                ms=max(ms,int(CONTINUITY_CONFIG.get("languageCrossfadeMinMs",14)))
-            full=crossfade_audio(full,wav,sr,ms/1000.0)
+                if prev_lang==lang:
+                    ms=min(ms,int(CONTINUITY_CONFIG.get("sameLanguageCrossfadeMaxMs",22)))
+                else:
+                    ms=max(ms,int(CONTINUITY_CONFIG.get("languageCrossfadeMinMs",14)))
+                full=crossfade_audio(full,wav,sr,ms/1000.0)
 
         prev_lang=lang
         prev_chunk=chunk
@@ -2545,7 +2605,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
                 "reference_cache_hits_total":MODEL_REFERENCE_CACHE_HITS,
                 "segment_cache_hits":sum(1 for x in qa_segments if x.get("segment_cache")=="hit"),
                 "segment_cache_misses":sum(1 for x in qa_segments if x.get("segment_cache")=="miss"),
-                "execution_strategy":"mlx-bounded-long-form-v1" if getattr(model,"_dar_backend","torch")=="mlx" else "persistent-conditionals+segment-cache-v2",
+                "execution_strategy":"mlx-bounded-long-form-v1" if getattr(model,"_dar_backend","torch")=="mlx" else "persistent-conditionals+flow-bridge-v3",
                 "backend":"mlx" if getattr(model,"_dar_backend","torch")=="mlx" else "torch",
             },
         }
