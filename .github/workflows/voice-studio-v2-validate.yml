@@ -59,6 +59,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import json
           import struct
 
           icon=Path("voice-studio/voice-studio-icon.png")
@@ -456,7 +457,7 @@ jobs:
                   'if p=="/arabic-reference"',
               ]),
               ("kids",kids,[
-                  'alphabet-audio.json?v=4',
+                  'alphabet-audio.json?v=5',
                   'audioEvidenceComplete',
                   'PROGRESS_KEY="kids.alphabet.progress.v2."',
                   'reviewBucket',
@@ -479,7 +480,7 @@ jobs:
                   'startMeter(stream);',
                   'AbortController',
                   'Die Wortprüfung hat zu lange gedauert',
-                  'Referenzaufnahme noch nicht freigegeben',
+                  'Noch keine Aufnahme mit derselben Alif-Stimme freigegeben.',
               ]),
               ("manifest",manifest,[
                   '"syntheticFallback": false',
@@ -494,6 +495,11 @@ jobs:
                   '"CC-BY-SA-3.0"',
                   '"shareAlikeRule"',
                   '"sourceUsageMode": "unmodified-external-original"',
+                  '"voiceMode": "single-voice-only"',
+                  '"canonicalVoiceId": "eiarabe-alif-2026"',
+                  '"mixedSpeakersForbidden": true',
+                  '"requireSameHumanVoice": true',
+                  '"canonicalVoiceAnchorFile": "Letra alif por la Escuela Internacional de Árabe.ogg"',
               ]),
           ]
           errors=[]
@@ -526,6 +532,31 @@ jobs:
               errors.append("ShareAlike original-file handling policy missing")
           if '"sourceLanguage": "Modern Standard Arabic (ara)"' not in manifest:
               errors.append("MSA source identity missing")
+          manifest_obj=json.loads(manifest)
+          active_verified=[]
+          for letter_id,letter in manifest_obj.get("letters",{}).items():
+              slot_items=[("name",letter.get("name")),("word",letter.get("word"))]
+              slot_items += [("harakat."+k,v) for k,v in (letter.get("harakat") or {}).items()]
+              for slot_kind,slot in slot_items:
+                  if isinstance(slot,dict) and slot.get("verified") is True and slot.get("url"):
+                      active_verified.append((letter_id,slot_kind,slot))
+          if len(active_verified) != 1:
+              errors.append(f"single-voice policy requires exactly 1 currently approved anchor clip, found {len(active_verified)}")
+          elif not (
+              active_verified[0][0]=="alif" and
+              active_verified[0][1]=="name" and
+              active_verified[0][2].get("voiceProfileId")=="eiarabe-alif-2026" and
+              active_verified[0][2].get("canonicalVoice") is True and
+              active_verified[0][2].get("sameVoiceConfirmed") is True and
+              active_verified[0][2].get("sourceFile")=="Letra alif por la Escuela Internacional de Árabe.ogg"
+          ):
+              errors.append("approved Kids audio is not the exact Eiarabe Alif canonical voice anchor")
+          if manifest_obj.get("policy",{}).get("voiceMode")!="single-voice-only":
+              errors.append("single-voice policy missing")
+          if manifest_obj.get("policy",{}).get("mixedSpeakersForbidden") is not True:
+              errors.append("mixed-speaker protection missing")
+          if manifest_obj.get("policy",{}).get("canonicalVoiceId")!="eiarabe-alif-2026":
+              errors.append("canonical Alif voice id mismatch")
           if errors:
               raise SystemExit("Strict Alif-Ba audio validation failed: "+" | ".join(errors))
           print("Strict Alif-Ba audio workflow OK")
