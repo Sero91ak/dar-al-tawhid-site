@@ -431,6 +431,9 @@ jobs:
                   'id="alphabetPackReferenceBtn"',
                   'id="alphabetPackNextBtn"',
                   'id="alphabetPackApproveBtn"',
+                  'id="alphabetPackPlayer"',
+                  'id="alphabetPackNowPlaying"',
+                  'id="alphabetPackSourceLink"',
                   'Alif-Referenz hören',
                   'gleiche Stimme bestätigen',
                   'alphabet-audio-studio.js?v=2913',
@@ -444,6 +447,8 @@ jobs:
                   's.sourceSpeaker==="Eiarabe"',
                   's.license==="CC-BY-4.0"',
                   'heardSourceFile',
+                  'referenceHeard',
+                  'q("alphabetPackPlayer")',
                   'current.candidate.sourceFile',
                   'canonicalVoiceId',
               ]),
@@ -539,8 +544,10 @@ jobs:
               errors.append("legacy one-shot Dua mastery returned")
           if 'recordQuranAttempt(!ayahPracticeHadError)' not in kids:
               errors.append("spaced Quran ayah mastery missing")
-          if 'if(heardSourceFile!==String(current.candidate.sourceFile||"")||!playerFullyHeard())' not in studio:
-              errors.append("external candidate full-listen gate missing")
+          if 'if(!referenceHeard||heardSourceFile!==String(current.candidate.sourceFile||""))' not in studio:
+              errors.append("Alif + candidate dual full-listen gate missing")
+          if 'if(candidate&&current?.candidate)' not in studio or 'referenceHeard=true;' not in studio:
+              errors.append("dual comparison completion state missing")
 
           manifest_obj=json.loads(manifest)
           active_verified=[]
