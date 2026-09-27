@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 962;
+    var PLAYER_BUILD = 964;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -88,6 +88,16 @@
   var leaveLock = false;
   var fullUiWanted = false;
   var dismissUntil = 0;
+  var LEARN_CLOSED_KEY = "dar_quran_learn_ui_closed_v1";
+  var learnUiClosed = false;
+  try { learnUiClosed = sessionStorage.getItem(LEARN_CLOSED_KEY) === "1"; } catch (eClosedInit) {}
+  function setLearnUiClosed(on) {
+    learnUiClosed = !!on;
+    try {
+      if (learnUiClosed) sessionStorage.setItem(LEARN_CLOSED_KEY, "1");
+      else sessionStorage.removeItem(LEARN_CLOSED_KEY);
+    } catch (eClosedSet) {}
+  }
   var verses = [];
   var meta = null;
   var seekLock = false;
@@ -902,8 +912,15 @@
     if (!(Number(state.ayah) >= 1)) state.ayah = 1;
     if (!(Number(state.surah) >= 1)) state.surah = 1;
   }
+  function readerLearnWanted() {
+    return isReaderRoute() && !learnUiClosed;
+  }
   function ensureReaderLearnPlayer() {
     if (!isReaderRoute()) return false;
+    if (learnUiClosed) {
+      applyLearnChrome();
+      return false;
+    }
     syncReaderPosition();
     enterLearnMode();
     writeMode("learning-quran");
@@ -912,7 +929,7 @@
     return true;
   }
   function showLearningPlayer() {
-    return isReaderRoute() && Number(state.ayah) >= 1;
+    return readerLearnWanted() && Number(state.ayah) >= 1;
   }
   function cleanupLearningPlayerOnRouteLeave() {
     state.playerMode = playerModeNow();
@@ -965,8 +982,8 @@
   function applyLearnChrome() {
     var html = document.documentElement;
     var body = document.body;
-    var onLearn = isReaderRoute();
-    var onDock = isReaderRoute() && !isFullPlayerRoute();
+    var onLearn = readerLearnWanted();
+    var onDock = readerLearnWanted() && !isFullPlayerRoute();
     html.classList.toggle("player-learn", onLearn);
     html.classList.toggle("player-reader-dock", onDock);
     if (body) {
@@ -1094,6 +1111,7 @@
     ayah = Number(ayah);
     if (!(surah >= 1 && surah <= 114) || !(ayah >= 1)) return;
     if (!isQuranArea()) return;
+    setLearnUiClosed(false);
     enterLearnMode();
     writeMode("learning-quran");
     state.playerMode = "learning-quran";
@@ -2058,8 +2076,8 @@
     var html = document.documentElement;
     var body = document.body;
     var el = document.getElementById("darQuranMiniPlayer");
-    var show = !isFullPlayerRoute() && isReaderRoute();
-    if (isReaderRoute()) {
+    var show = !isFullPlayerRoute() && readerLearnWanted();
+    if (readerLearnWanted()) {
       capsuleCollapsed = false;
       capsuleDimmed = false;
     }
@@ -2294,6 +2312,7 @@
     restoreGlobalPlayer({ play: !!state.playing, from: "pinned-global" });
   }
   function togglePlay(forcePlay) {
+    if (forcePlay === true) setLearnUiClosed(false);
     if (LEARN_PLAYER_ONLY && !isQuranArea()) {
       cleanupLearningPlayerOnRouteLeave();
       return;
@@ -2349,18 +2368,14 @@
     capsuleDimmed = false;
     clearSleepTimer();
     lastFollowKey = "";
-    if (isReaderRoute()) {
-      enterLearnMode();
-      state.playerMode = "learning-quran";
-    } else {
-      state.learnMode = false;
-      state.learnLoop = false;
-      state.learnStay = false;
-      state.learnRate = 1;
-      state.playerMode = "none";
-      var mini = document.getElementById("darQuranMiniPlayer");
-      if (mini) mini.classList.remove("is-away", "player-collapsed", "player-expanded", "player-dim", "is-learn", "is-reader-dock");
-    }
+    setLearnUiClosed(true);
+    state.learnMode = false;
+    state.learnLoop = false;
+    state.learnStay = false;
+    state.learnRate = 1;
+    state.playerMode = "none";
+    var mini = document.getElementById("darQuranMiniPlayer");
+    if (mini) mini.classList.remove("is-away", "player-collapsed", "player-expanded", "player-dim", "is-learn", "is-reader-dock", "is-on");
     syncMediaSession();
     paintChrome();
     paintMini();
@@ -2550,7 +2565,7 @@
     var page = playerRoot();
     if (onFull) mountPlayerPage(page);
     else if (page && page.parentNode === document.body) page.hidden = true;
-    var show = !onFull && isReaderRoute();
+    var show = !onFull && readerLearnWanted();
     el.classList.toggle("is-on", show);
     el.setAttribute("aria-hidden", show ? "false" : "true");
     setPlayerLayout(show);

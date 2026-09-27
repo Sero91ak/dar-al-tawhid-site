@@ -1162,3 +1162,22 @@ html.dar-ios-native-app body.is-quran-reader-route .qrc-context-bar{
   margin-right:auto!important;
   box-sizing:border-box!important;
 }
+
+/* Stop in the reader closes the learn bar completely */
+html.player-stopped #darQuranMiniPlayer,
+#darQuranMiniPlayer:not(.is-on){
+  transform:translate3d(0,calc(-100% - 24px),0)!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  height:0!important;
+  min-height:0!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+html.player-stopped #qrcChromeSpacer,
+html.player-stopped.player-learn #qrcChromeSpacer,
+html.player-stopped.player-reader-dock #qrcChromeSpacer{
+  height:var(--qrc-chrome-h,78px)!important;
+  min-height:var(--qrc-chrome-h,78px)!important;
+}
