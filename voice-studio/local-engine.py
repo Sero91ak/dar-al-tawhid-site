@@ -1931,16 +1931,14 @@ def detect_prosody_mode(text:str):
         if re.match(r"^(?:[-•–—]|\d+[.)])\s+\S",line)
     )>=2
     semicolon_list=(value.count(";")>=2 and word_count<=60)
-    colon_enum=False
-    if ":" in value:
-        tail=value.split(":",1)[1].strip()
-        tail_words=len(re.findall(r"\S+",tail))
-        colon_enum=(
-            tail.count(",")>=2
-            and tail_words<=32
-            and len(re.findall(r"[.!?؟…]",tail.rstrip(".!?؟…"))) == 0
-        )
-    if structured_list or semicolon_list or colon_enum:
+
+    # Doppelpunkt + Kommas ist in normalem Erzähltext sehr häufig
+    # ("... erinnert uns daran: Eine gute Tat ..., und wir ...").
+    # Das darf niemals automatisch Listen-Prosodie aktivieren. Echte Listen
+    # werden automatisch nur noch an klarer Listenstruktur oder mehreren
+    # Semikolon-Gliedern erkannt; alles andere kann bei Bedarf manuell auf
+    # "Aufzählung" gestellt werden.
+    if structured_list or semicolon_list:
         return "list"
 
     teaching=CONTEXT_CONFIG.get("teaching") or ["bedeutet","lernen wir","erklärt","grundlage","pflicht","wir beten","wir finden","liest","bereiten wir uns","folgen"]
