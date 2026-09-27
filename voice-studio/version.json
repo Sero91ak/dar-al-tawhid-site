@@ -1,10 +1,10 @@
 {
-  "version": "2.9.9",
-  "updatedAt": "2026-09-27T22:48:00+02:00",
+  "version": "2.9.10",
+  "updatedAt": "2026-09-27T23:08:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v21",
+  "cache": "dar-voice-studio-v22",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -159,7 +159,9 @@
     "autoRerenderCurrentTextAfterCorrection": true,
     "originalMasterSourceRows": 3719,
     "originalMasterCanonicalTerms": 894,
-    "originalMasterSha256": "b629a50c27ee4b73c2a0bac3c0856dfc67f8c2fbf1b2ef8df4a69689a524b14b"
+    "originalMasterSha256": "b629a50c27ee4b73c2a0bac3c0856dfc67f8c2fbf1b2ef8df4a69689a524b14b",
+    "alphabetArabicReferenceRequired": true,
+    "alphabetArabicReferencePath": "~/SerhatVoice/Serhat_AR_MASTER.wav"
   },
   "releaseSafety": {
     "stagedInstaller": true,
@@ -527,5 +529,6 @@
     "runtimeDockIcon": true,
     "launchServicesRefresh": true,
     "staleWebIconCacheEvicted": true
-  }
+  },
+  "alphabetAudioStrictArabicReference": true
 }
