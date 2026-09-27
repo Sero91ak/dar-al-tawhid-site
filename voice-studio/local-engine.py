@@ -3592,7 +3592,7 @@ class H(BaseHTTPRequestHandler):
                 "name":"DĀR AL TAWḤĪD Voice Studio",
                 "short_name":"Voice Studio",
                 "id":"/studio/",
-                "start_url":"/studio/",
+                "start_url":"/studio/?pair="+PAIR_TOKEN if PAIR_TOKEN else "/studio/",
                 "scope":"/studio/",
                 "display":"standalone",
                 "background_color":"#06131f",
