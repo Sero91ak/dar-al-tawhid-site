@@ -18,7 +18,7 @@ os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
 APP_HOME=Path(os.environ.get("DAR_VOICE_APP_HOME",str(Path.home()/"Applications"/"DAR-Voice-Studio"))).expanduser()
 PRON=APP_HOME/"pronunciation-rules.json"
 PROFILE=APP_HOME/"voice-production-profile.json"
-VOICE_HOME=Path.home()/"SerhatVoice"
+VOICE_HOME=Path(os.environ.get("DAR_VOICE_HOME",str(Path.home()/"SerhatVoice"))).expanduser()
 
 def first_existing(paths):
     for p in paths:
@@ -44,7 +44,7 @@ REF=REF_DE
 NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
-PORT=8787
+PORT=int(os.environ.get("DAR_VOICE_PORT","8787"))
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_DIR=VOICE_HOME/"MasterPronunciations"
