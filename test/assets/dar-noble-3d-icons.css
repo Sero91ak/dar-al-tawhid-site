@@ -289,15 +289,15 @@ img.dar3d-icon{
 .quick-action-emoji{
   display:grid!important;
   place-items:center;
-  width:44px;height:44px;
+  width:48px;height:48px;
   pointer-events:none;
 }
 .quick-action img.dar3d-icon,
 .quick-action-emoji img.dar3d-icon{
-  width:44px!important;
-  height:44px!important;
-  max-width:44px!important;
-  max-height:44px!important;
+  width:48px!important;
+  height:48px!important;
+  max-width:48px!important;
+  max-height:48px!important;
   object-fit:contain!important;
 }
 

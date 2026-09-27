@@ -2,8 +2,8 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1092";
-  const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","wasiyyah.png","widgets.png","zakat.png"];
+  const VER="1093";
+  const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","topics.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
       const p=String(location.pathname||"");
@@ -24,9 +24,9 @@
     calendar:"calendar.png",notifications:"bell.png",account:"lock.png",about:"scale.png",
     wasiyyah:"wasiyyah.png",widgets:"widgets.png","image-editor":"image.png",
     news:"news.png","news-detail":"news.png",frauen:"frauen.png",propheten:"prophets.png",
-    "quran-player":"audio.png",orient:"compass.png","continue-reading":"quran.png",
+    "quran-player":"quran.png",orient:"compass.png","continue-reading":"audio.png",
     audio:"audio.png",player:"audio.png",listen:"audio.png",reciter:"audio.png",
-    "quran-topics":"ilm.png","quran-search":"ilm.png",appstore:"spark.png"
+    "quran-topics":"topics.png","quran-search":"ilm.png",appstore:"spark.png"
   };
   const BY_EMOJI={
     "⌂":"home.png","🏠":"home.png","📚":"library.png","✦":"spark.png","✨":"spark.png","🌟":"spark.png",
@@ -270,7 +270,7 @@
   function openDb(){
     return new Promise((res,rej)=>{
       try{
-        const r=indexedDB.open("dar-3d-icon-pack-v1092",1);
+        const r=indexedDB.open("dar-3d-icon-pack-v1093",1);
         r.onupgradeneeded=function(){r.result.createObjectStore("png")};
         r.onsuccess=function(){res(r.result)};
         r.onerror=function(){rej(r.error)};
