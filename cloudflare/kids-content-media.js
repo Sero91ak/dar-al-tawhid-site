@@ -291,6 +291,95 @@ export async function verifyKidsAlphabetAudioSlot(env, input, helpers) {
   };
 }
 
+
+export async function verifyKidsAlphabetExternalAudioSlot(env, input, helpers) {
+  const letterId = safeId(input?.letterId);
+  const kind = clean(input?.kind, 30).toLowerCase();
+  const key = clean(input?.key, 30).toLowerCase();
+  const text = clean(input?.text, 200);
+  const sourceFile = clean(input?.sourceFile, 500);
+
+  if (!KIDS_ALPHABET_IDS.has(letterId)) throw mediaError("Unbekannter Alif-Bāʾ-Buchstabe", 422);
+  if (!["name","word","harakat"].includes(kind)) throw mediaError("Unbekannter Audio-Slot", 422);
+  if (kind === "harakat" && !["fatha","kasra","damma"].includes(key)) throw mediaError("Unbekannte Ḥaraka", 422);
+  if (!sourceFile) throw mediaError("Externe Quelldatei fehlt", 422);
+
+  const state = await readKidsAlphabetAudioManifest(env, helpers);
+  const slot = alphabetAudioSlot(state.manifest, letterId, kind, key);
+  if (!slot) throw mediaError("Audio-Slot existiert nicht", 404);
+  if (!text || text !== clean(slot.text, 200)) {
+    throw mediaError("Arabischer Slot-Text stimmt nicht exakt mit dem Manifest überein", 422);
+  }
+
+  const candidates = Array.isArray(slot.alternateSources) ? slot.alternateSources : [];
+  const candidate = candidates.find((item) => clean(item?.sourceFile, 500) === sourceFile);
+  if (!candidate) throw mediaError("Externe Kandidatenquelle ist im Manifest nicht hinterlegt", 404);
+
+  const provider = clean(candidate.sourceProvider, 500);
+  const speaker = clean(candidate.sourceSpeaker, 200);
+  const sourceType = clean(candidate.sourceType, 100);
+  const license = clean(candidate.license, 100);
+  const sourcePage = clean(candidate.sourcePage, 1200);
+  const url = clean(candidate.url, 1200);
+  const canonicalVoiceId = clean(state.manifest?.policy?.canonicalVoiceId, 200);
+
+  const sameSeries =
+    provider === "Wikimedia Commons / Escuela Internacional de Árabe" &&
+    speaker === "Eiarabe" &&
+    sourceType === "external-human-pronunciation" &&
+    license === "CC-BY-4.0" &&
+    /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/i.test(sourcePage) &&
+    /^https:\/\/commons\.wikimedia\.org\/wiki\/Special:Redirect\/file\//i.test(url) &&
+    /por la Escuela Internacional de Árabe\.ogg$/i.test(sourceFile);
+
+  if (!sameSeries || !canonicalVoiceId) {
+    throw mediaError("Quelle gehört nicht zur freigegebenen Eiarabe-Alif-Serie", 422);
+  }
+
+  [
+    "url","sourceType","sourceUsageMode","sourceProvider","sourceSpeaker","sourceLanguage",
+    "sourceTranscription","sourcePage","sourceFile","license","licenseUrl","attribution"
+  ].forEach((field) => {
+    if (candidate[field] !== undefined && candidate[field] !== null && candidate[field] !== "") {
+      slot[field] = candidate[field];
+    }
+  });
+
+  slot.verified = true;
+  slot.sha256 = "";
+  slot.qaBy = "owner-confirmed-external-canonical-voice";
+  slot.qaAt = new Date().toISOString();
+  slot.voiceProfileId = canonicalVoiceId;
+  slot.canonicalVoice = false;
+  slot.sameVoiceConfirmed = true;
+  slot.verificationBasis =
+    "Owner listened to the complete external candidate and explicitly confirmed that it matches the canonical Eiarabe Alif reference voice. Original Wikimedia provenance and CC BY 4.0 attribution retained.";
+
+  state.manifest.updatedAt = new Date().toISOString().slice(0, 10);
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const saved = await helpers.githubPut(
+    env,
+    owner,
+    repo,
+    state.path,
+    JSON.stringify(state.manifest, null, 2) + "\n",
+    `Verify external Kids alphabet audio ${letterId} ${kind}${key ? ":" + key : ""}`,
+    branch,
+    state.sha
+  );
+
+  return {
+    ok: true,
+    letterId,
+    kind,
+    key,
+    slot,
+    commitSha: saved?.commit?.sha || ""
+  };
+}
+
 export const KIDS_CONTENT_MEDIA_LIMITS = Object.freeze({
   coverBytes: MAX_COVER_BYTES,
   audioBytes: MAX_AUDIO_BYTES
