@@ -34,7 +34,9 @@ jobs:
           python-version: "3.11"
 
       - name: Validate Mac installer shell syntax
-        run: bash -n voice-studio/install-mac.command
+        run: |
+          bash -n voice-studio/install-mac.command
+          bash -n voice-studio/update-mac.command
 
       - name: Validate Voice Studio app identity asset
         run: |
@@ -57,12 +59,66 @@ jobs:
               "VoiceStudioIcon.png",
               "AppIcon.icns",
               "CFBundleIconFile",
-              "2.9.0",
+              "2.9.1",
           ]
           missing=[x for x in required if x not in installer]
           if missing:
               raise SystemExit("Installer identity integration missing: "+", ".join(missing))
           print("Voice Studio app identity OK",width,height,icon.stat().st_size)
+          PY
+
+      - name: Validate in-app updater package
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          helper=Path("voice-studio/update-mac.command").read_text(encoding="utf-8")
+          installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          swift=Path("voice-studio/VoiceStudioApp.swift").read_text(encoding="utf-8")
+
+          helper_required=[
+              "raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/install-mac.command",
+              "nohup /bin/bash",
+              "update.log",
+              "bash -n",
+          ]
+          installer_required=[
+              "update-mac.command?v=291",
+              "chmod +x \"$TARGET/update-mac.command\"",
+              "CFBundleShortVersionString</key><string>2.9.1",
+          ]
+          html_required=[
+              'id="updateBtn"',
+              'id="appUpdateState"',
+              'darUpdater',
+              'darUpdateStateChanged',
+              'requestNativeUpdate',
+              'Update wird installiert',
+          ]
+          swift_required=[
+              'name: "darUpdater"',
+              "updateManifestURL",
+              "checkForUpdates",
+              "installAvailableUpdate",
+              "update-mac.command",
+              'DĀRVoiceStudioMac/2.9.1',
+          ]
+
+          groups=[
+              ("helper",helper,helper_required),
+              ("installer",installer,installer_required),
+              ("html",html,html_required),
+              ("swift",swift,swift_required),
+          ]
+          errors=[]
+          for label,source,required in groups:
+              missing=[x for x in required if x not in source]
+              if missing:
+                  errors.append(label+": "+", ".join(missing))
+          if errors:
+              raise SystemExit("In-app updater validation failed: "+" | ".join(errors))
+          print("In-app updater package OK")
           PY
 
       - name: Validate zero-detour Content Studio workflow
@@ -192,7 +248,7 @@ jobs:
               'darAudioOutput',
               'disableRemotePlayback',
               'voice-studio-icon.png?v=290',
-              'VOICE STUDIO 2.9.0',
+              'VOICE STUDIO 2.9.1',
           ]
           missing=[x for x in required if x not in html]
           if missing:
@@ -233,7 +289,7 @@ jobs:
               "VoiceStudioIcon",
               "updateLoadingProgress",
               "status: \"Bereit\"",
-              "DĀRVoiceStudioMac/2.9.0",
+              "DĀRVoiceStudioMac/2.9.1",
               "NSMenu(title: \"Produktion\")",
               "newContent",
               "focusText",
