@@ -4797,8 +4797,6 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
       practiceMistakes=0;
       practiceAudioHeard=false;
       practiceTargetKey="";
-      practiceAudioHeard=false;
-      practiceTargetKey="";
       practiceMode=choosePracticeMode(a,item,progressEntry(a,item.id));
     }
     box.innerHTML="";
@@ -5135,7 +5133,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     if(m)m.classList.add("open");
     render();
   }
-  window.kidsAlphabetOnAge=function(){step=0;practiceToken="";practicePassed=false;practiceMistakes=0;completeMode=false;render()};
+  window.kidsAlphabetOnAge=function(){step=0;practiceToken="";practicePassed=false;practiceMistakes=0;practiceAudioHeard=false;practiceTargetKey="";practiceMode="visual";completeMode=false;render()};
   window.openAlphabet=openAlphabet;
   Promise.all([
     fetch("/test/kids/data/alphabet-kids.json?v=8",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
