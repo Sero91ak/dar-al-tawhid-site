@@ -11,9 +11,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="DĀR Voice Studio">
 <meta name="description" content="Private Sprachproduktion für DĀR AL TAWḤĪD Kids">
-<link rel="manifest" href="manifest.webmanifest?v=11">
-<link rel="apple-touch-icon" href="voice-studio-icon.png?v=290">
-<link rel="icon" type="image/png" href="voice-studio-icon.png?v=290">
+<link rel="manifest" href="manifest.webmanifest?v=12">
+<link rel="apple-touch-icon" href="voice-studio-icon.png?v=292">
+<link rel="icon" type="image/png" href="voice-studio-icon.png?v=292">
 <title>DĀR AL TAWḤĪD – Voice Studio</title>
 <style>
 :root{
@@ -59,6 +59,8 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-vi
 .update-btn.installing{display:inline-flex;background:rgba(217,182,111,.08);border-color:rgba(217,182,111,.26);color:#ecd59c}
 .update-state{margin-top:7px;font-size:9px;line-height:1.45;color:#809397}
 .update-state.good{color:#9bd8ba}.update-state.warn{color:#f1c77c}.update-state.bad{color:#ef9d9d}
+.companion-pill{display:none;align-items:center;gap:7px;padding:7px 10px;border:1px solid rgba(105,200,157,.25);border-radius:999px;background:rgba(105,200,157,.055);color:#9bd8ba;font-size:10px;font-weight:800;white-space:nowrap}
+.companion-pill::before{content:"";width:7px;height:7px;border-radius:50%;background:#69c89d;box-shadow:0 0 0 3px rgba(105,200,157,.1)}
 .workspace{flex:1;display:grid;grid-template-columns:minmax(0,1.72fr) minmax(340px,.58fr);gap:12px;min-height:0}
 .panel{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.026));border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--radius);min-width:0}
 .editor-panel{padding:clamp(15px,1.45vw,24px);display:flex;flex-direction:column;min-height:0}
@@ -121,6 +123,15 @@ input{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line
   .preview-grid{grid-template-columns:1fr}
   .side-panel{top:76px}
   .badges{display:none}
+}
+@media(min-width:800px) and (max-width:1180px){
+  .shell{padding-left:max(10px,var(--safe-left));padding-right:max(10px,var(--safe-right))}
+  .topbar{padding-left:12px;padding-right:12px}
+  .workspace{grid-template-columns:minmax(0,1.55fr) minmax(310px,.78fr);gap:9px}
+  .editor-panel{padding:14px 16px}
+  .side-panel{padding:13px;top:76px;max-height:calc(100dvh - 88px)}
+  .heading-row{gap:10px}
+  .lead{max-width:62ch}
 }
 @media(max-width:799px){
   .app{padding:var(--safe-top) 0 var(--safe-bottom)}
@@ -409,10 +420,11 @@ input,select{
 <div class="shell">
 <header class="topbar">
   <div class="brand-wrap">
-    <div class="brand-mark"><img src="voice-studio-icon.png?v=290" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.1 · SERHAT VOICE</div></div>
+    <div class="brand-mark"><img src="voice-studio-icon.png?v=292" alt="DĀR AL TAWḤĪD Voice Studio"></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.2 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
+    <span id="companionPill" class="companion-pill">Mit Mac verbunden</span>
     <button id="installBtn" class="btn quiet install-btn">App installieren</button>
     <button id="updateBtn" class="btn update-btn" type="button" hidden>Update</button>
     <div class="status"><span id="engineDot" class="dot"></span><span id="engineLabel">Engine wird geprüft …</span></div>
@@ -423,7 +435,7 @@ input,select{
 <main class="panel editor-panel">
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.1</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.2</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
 
   <div class="textbox-wrap">
@@ -547,12 +559,13 @@ input,select{
   <section id="engineSetupSection" class="side-section">
     <div class="side-title">Serhat Engine</div>
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
+    <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.1</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.2</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/install-mac.command' | /bin/bash</textarea>
-      <div class="notice" style="margin-top:6px">Nur für die erste Installation bzw. für ältere Builds ohne In-App-Updater. Ab Voice Studio 2.9.1 werden Updates direkt in der App installiert – ohne Terminal.</div>
+      <div class="notice" style="margin-top:6px">Nur für die erste Installation bzw. für ältere Builds ohne In-App-Updater. Ab Voice Studio 2.9.2 werden Updates direkt in der App installiert – ohne Terminal.</div>
     </div>
     <button id="healthBtn" class="btn quiet" style="width:100%;margin-top:8px">Verbindung erneut prüfen</button>
     <div id="engineHelp" class="notice" style="margin-top:9px">Installiert „DĀR Voice Studio“ als eigenständige Mac-App unter Programme. Danach arbeitest du ohne Safari oder Browserleiste; deine vorhandene SerhatVoice-/Chatterbox-Engine wird automatisch verwendet.</div>
@@ -560,7 +573,7 @@ input,select{
   <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
 </aside>
 </div>
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.1 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.2 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
 </div>
 </div>
 
@@ -575,7 +588,10 @@ const PROSODY_LABELS={
   auto:"Auto",narration:"Erzählung",kids_story:"Kinder-Geschichte",kids_lesson:"Kinder-Unterricht",
   teaching:"Unterricht",gentle:"Sanft",serious:"Ernst",question:"Frage",list:"Aufzählung",dua:"Duʿāʾ"
 };
-const IS_LOCAL=location.hostname==="127.0.0.1"||location.hostname==="localhost";
+const IS_LOOPBACK=location.hostname==="127.0.0.1"||location.hostname==="localhost";
+const IS_ENGINE_ORIGIN=location.port==="8787"&&/^https?:$/.test(location.protocol);
+const IS_COMPANION=IS_ENGINE_ORIGIN&&!IS_LOOPBACK;
+const IS_LOCAL=IS_LOOPBACK||IS_ENGINE_ORIGIN;
 const NATIVE_MAC=/DĀRVoiceStudioMac\//.test(navigator.userAgent);
 const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
 let nativeUpdateState="idle",nativeLatestVersion="";
@@ -606,7 +622,11 @@ function requestAudioOutput(){
     nativeHandler.postMessage({action:"show"});
     return;
   }
-  setMessage("Audio-Ausgabe: In der Mac-App werden AirPods, Bluetooth-Geräte und Lautsprecher direkt angezeigt. Im Browser bitte die macOS-Tonausgabe verwenden.","warn");
+  if(IS_COMPANION){
+    setMessage("Audio-Ausgabe läuft über iPad/iPhone. AirPods oder Bluetooth-Geräte wählst du direkt im Kontrollzentrum des Geräts.","good");
+  }else{
+    setMessage("Audio-Ausgabe: In der Mac-App werden AirPods, Bluetooth-Geräte und Lautsprecher direkt angezeigt. Im Browser bitte die System-Tonausgabe verwenden.","warn");
+  }
 }
 window.darAudioOutputChanged=name=>{
   const label=String(name||"Systemausgabe");
@@ -642,7 +662,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.1")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.2")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -660,7 +680,7 @@ window.darUpdateStateChanged=data=>{
     state.className="update-state";
   }else if(nativeUpdateState==="current"){
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.1")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.2")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     side.textContent="Update erneut prüfen";
@@ -986,9 +1006,13 @@ function updateEngineUI(data){
   $("#engineLabel").textContent=!engineOK
     ?"Engine nicht gestartet"
     :loading?"Stimm-Modell wird geladen …"
-    :modelReady?"Serhat Engine bereit"
+    :modelReady?(IS_COMPANION?"Serhat Engine bereit · iPad":"Serhat Engine bereit")
     :modelError?"Stimm-Modell Fehler"
     :"Engine verbunden · Modell wartet";
+  if(IS_COMPANION&&engineOK){
+    $("#companionPill").style.display="inline-flex";
+    $("#companionPill").textContent="Mit Mac verbunden";
+  }
 
   $("#engineDot").className="dot "+(engineOK&&!modelError?"ok":"bad");
   $("#qaEngine").textContent=!engineOK?"offline":loading?"lädt":modelReady?"bereit":modelError?"Fehler":"verbunden";
@@ -1317,6 +1341,14 @@ $("#updateBtn").onclick=()=>{
   if(nativeUpdateState==="available")requestNativeUpdate("install");
   else requestNativeUpdate("check");
 };
+$("#companionBtn").onclick=()=>{
+  const handler=window.webkit?.messageHandlers?.darCompanion;
+  if(handler){
+    handler.postMessage({action:"show"});
+  }else if(IS_COMPANION){
+    setMessage("Dieses iPad/iPhone ist bereits mit dem Mac verbunden.","good");
+  }
+};
 $("#qaConfirmBtn").onclick=confirmQA;
 document.querySelectorAll("[data-audio-output-button]").forEach(btn=>{
   btn.addEventListener("click",requestAudioOutput);
@@ -1360,7 +1392,7 @@ for(const b of [$("#analyzeBtn"),$("#mobileAnalyzeBtn")].filter(Boolean)){
 
 const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
 const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-if(isIOS&&!isStandalone){$("#installBtn").style.display="inline-flex";$("#installBtn").textContent="Als App nutzen"}
+if(isIOS&&!isStandalone){$("#installBtn").style.display="inline-flex";$("#installBtn").textContent=IS_COMPANION?"Zum Home-Bildschirm":"Als App nutzen"}
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e;$("#installBtn").style.display="inline-flex"});
 $("#installBtn").onclick=async()=>{
   if(deferredInstall){
@@ -1370,7 +1402,7 @@ $("#installBtn").onclick=async()=>{
     $("#installBtn").style.display="none";
     return;
   }
-  if(isIOS)alert("Auf iPhone/iPad: In Safari auf Teilen tippen und anschließend „Zum Home-Bildschirm“ wählen.");
+  if(isIOS)alert("Auf iPhone/iPad: In Safari auf Teilen tippen und anschließend „Zum Home-Bildschirm“ wählen. Danach öffnet Voice Studio wie eine eigene App.");
 };
 window.addEventListener("appinstalled",()=>{$("#installBtn").style.display="none"});
 
@@ -1383,11 +1415,20 @@ if(IS_LOCAL){
     $("#setupCommandWrap").style.display="none";
     $("#startEngineBtn").style.display="none";
     if(NATIVE_MAC){
+      $("#companionBtn").style.display="block";
       $("#installEngineBtn").style.display="block";
       $("#installEngineBtn").textContent="Nach Updates suchen";
-      $("#engineHelp").textContent="Native Mac-App · Serhat Engine und Studio laufen lokal auf diesem Mac. Updates werden hier direkt geprüft und installiert.";
+      $("#engineHelp").textContent="Native Mac-App · Serhat Engine und Studio laufen lokal auf diesem Mac. iPad/iPhone können sicher über dasselbe WLAN gekoppelt werden.";
       requestNativeUpdate("check");
+    }else if(IS_COMPANION){
+      $("#companionBtn").style.display="none";
+      $("#installEngineBtn").style.display="none";
+      $("#appUpdateState").textContent="Companion-Modus · Updates werden am Mac installiert";
+      $("#appUpdateState").className="update-state good";
+      $("#engineHelp").textContent="iPad/iPhone Companion · Voice Engine, Aussprachelernen und Produktion laufen auf deinem gekoppelten Mac.";
+      $("#companionPill").style.display="inline-flex";
     }else{
+      $("#companionBtn").style.display="none";
       $("#installEngineBtn").style.display="none";
       $("#engineHelp").textContent="Lokales Produktionsstudio · Für die eigenständige Mac-App einmal auf der Website installieren.";
     }
@@ -1397,4 +1438,4 @@ loadLibrary();
 checkHealth({quiet:true}).then(()=>analyzeProsody());
 setInterval(()=>checkHealth({quiet:true}),5000);
 </script>
-<script src="content-studio.js?v=291"></script>\n</body>\n</html>\n
+<script src="content-studio.js?v=292"></script>\n</body>\n</html>\n
