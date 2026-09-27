@@ -104,6 +104,14 @@ function renderCurrent(){
     q("alphabetPackLabel").textContent=current.letterId.toUpperCase()+" · "+current.label+" · Eiarabe-Kandidat";
   }
   if(q("alphabetPackArabic"))q("alphabetPackArabic").textContent=current.slot?.text||"—";
+  const sourceLink=q("alphabetPackSourceLink");
+  if(sourceLink){
+    const page=String(current.candidate?.sourcePage||"");
+    sourceLink.hidden=!/^https:\/\//i.test(page);
+    if(!sourceLink.hidden)sourceLink.href=page;
+  }
+  const playing=q("alphabetPackNowPlaying");
+  if(playing)playing.textContent="Noch nichts abgespielt";
   if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=true;
   if(q("alphabetPackRetryBtn"))q("alphabetPackRetryBtn").disabled=false;
 }
