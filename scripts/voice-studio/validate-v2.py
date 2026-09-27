@@ -152,7 +152,7 @@ def main():
     if int(prof.get("schemaVersion",0))<8: fail("voice profile schemaVersion must be >=8")
     qa=prof.get("qualityAssurance") or {}
     if int(qa.get("maxRenderAttempts",0))<2: fail("QA maxRenderAttempts must be >=2")
-    if int(qa.get("maxInternalSilenceMsWithPunctuation",0))<900: fail("QA punctuation-pause guard missing")
+    if not 450<=int(qa.get("maxInternalSilenceMsWithPunctuation",0))<=900: fail("QA punctuation-pause guard invalid")
     if int(qa.get("minSpeechRateWords",0))<4: fail("QA speech-rate minimum sample size missing")
     if not isinstance(qa.get("minSpeechRateWpmByMode"),dict): fail("QA speech-rate mode thresholds missing")
     if int(qa.get("maxSustainedEnergyPlateauMs",0))<700: fail("QA sustained-hold guard missing")
