@@ -1,10 +1,10 @@
 {
-  "version": "2.9.2",
-  "updatedAt": "2026-09-27T15:18:00+02:00",
+  "version": "2.9.3",
+  "updatedAt": "2026-09-27T18:39:00+02:00",
   "deployTrigger": "voice-studio-clean-deploy",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v16",
+  "cache": "dar-voice-studio-v17",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -243,7 +243,10 @@
     "companionLoopbackCompatibility": true,
     "companionNativeQRValidation": true,
     "companionInstallerTokenPersistence": true,
-    "companionNoTokenLeakHealth": true
+    "companionNoTokenLeakHealth": true,
+    "alphabetAudioUiValidation": true,
+    "alphabetAudioHumanQaRequired": true,
+    "alphabetAudioManifestVerification": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -477,5 +480,15 @@
     "homeScreenMode": true
   },
   "tabletLayout": true,
-  "companionHomeScreenManifest": true
+  "companionHomeScreenManifest": true,
+  "alphabetAudio": {
+    "enabled": true,
+    "slots": 140,
+    "policy": "human-approved-only",
+    "manifest": "/test/kids/data/alphabet-audio.json",
+    "systemArabicTtsFallback": false,
+    "exactSlotTextValidation": true,
+    "repositoryAssetValidation": true,
+    "sha256Required": true
+  }
 }
