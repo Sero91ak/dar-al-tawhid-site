@@ -435,8 +435,12 @@ jobs:
                   'await confirmQA()',
                   'if(!qaConfirmed)',
                   'lastGeneratedText',
-                  'serhat-alphabet-human-reviewed',
+                  'serhat-alphabet-dedicated-arabic-human-reviewed',
                   'current.slot?.text',
+                  'reference_arabic_dedicated',
+                  'currentRenderReferenceReady',
+                  'function refreshArabicReferenceState',
+                  '/arabic-reference',
               ]),
               ("installer",installer,[
                   'download_repo_file "voice-studio/alphabet-audio-studio.js"',
@@ -446,6 +450,10 @@ jobs:
               ("engine",engine,[
                   '/studio/alphabet-audio-studio.js',
                   'alphabet-audio-studio.js',
+                  'def install_arabic_reference',
+                  'Serhat_AR_MASTER.wav',
+                  'reference_arabic_dedicated',
+                  'if p=="/arabic-reference"',
               ]),
               ("kids",kids,[
                   'alphabet-audio.json?v=1',
