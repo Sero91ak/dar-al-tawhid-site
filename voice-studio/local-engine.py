@@ -3793,7 +3793,9 @@ class H(BaseHTTPRequestHandler):
 
 def existing_engine_health(timeout:float=0.6):
     try:
-        req=urllib.request.Request(f"http://{HOST}:{PORT}/health",headers={"Cache-Control":"no-cache"})
+        # Auch wenn der Server für den Companion-Modus auf 0.0.0.0 lauscht,
+        # wird die lokale Doppelstart-Prüfung immer über Loopback durchgeführt.
+        req=urllib.request.Request(f"http://127.0.0.1:{PORT}/health",headers={"Cache-Control":"no-cache"})
         with urllib.request.urlopen(req,timeout=timeout) as resp:
             return int(getattr(resp,"status",0) or 0)==200
     except Exception:
