@@ -56,12 +56,40 @@ say_status() {
 
 say_status "DĀR Voice Studio wird eingerichtet …"
 
+ensure_archive() {
+  local ref="$1"
+  local zip="$2"
+  if [ -s "$zip" ]; then
+    return 0
+  fi
+  echo "GitHub API nicht erreichbar – nutze Repository-Archiv als sicheren Fallback."
+  curl -fL --retry 3 --retry-delay 2 \
+    -H "User-Agent: DAR-Voice-Studio-Installer" \
+    "https://codeload.github.com/Sero91ak/dar-al-tawhid-site/zip/$ref" \
+    -o "$zip"
+}
+
+extract_from_archive() {
+  local zip="$1"
+  local ref="$2"
+  local path="$3"
+  local out="$4"
+  /usr/bin/unzip -p "$zip" "dar-al-tawhid-site-$ref/$path" > "$out"
+  [ -s "$out" ]
+}
+
 resolve_release_ref() {
   local manifest="$STAGE/release-version.json"
-  curl -fsSL \
+  local main_zip="$STAGE/main.zip"
+
+  if ! curl -fsSL --retry 2 --retry-delay 1 \
     -H "Accept: application/vnd.github.raw+json" \
     -H "User-Agent: DAR-Voice-Studio-Installer" \
-    "$RELEASE_MANIFEST_URL" -o "$manifest"
+    "$RELEASE_MANIFEST_URL" -o "$manifest"; then
+    ensure_archive "refs/heads/main" "$main_zip"
+    /usr/bin/unzip -p "$main_zip" "dar-al-tawhid-site-main/voice-studio/version.json" > "$manifest"
+  fi
+
   PIN="$(/usr/bin/plutil -extract releaseRef raw -o - "$manifest" 2>/dev/null || true)"
   if [[ ! "$PIN" =~ ^[0-9a-fA-F]{40}$ ]]; then
     echo "FEHLER: Ungültige oder fehlende validierte Release-Referenz."
@@ -75,11 +103,18 @@ resolve_release_ref
 download_repo_file() {
   local path="$1"
   local out="$2"
-  curl -fsSL \
+  local release_zip="$STAGE/release-$PIN.zip"
+
+  if curl -fsSL --retry 2 --retry-delay 1 \
     -H "Accept: application/vnd.github.raw+json" \
     -H "User-Agent: DAR-Voice-Studio-Installer" \
     "$REPO_API/contents/$path?ref=$PIN" \
-    -o "$out"
+    -o "$out"; then
+    return 0
+  fi
+
+  ensure_archive "$PIN" "$release_zip"
+  extract_from_archive "$release_zip" "$PIN" "$path" "$out"
 }
 
 download_optional_repo_file() {
