@@ -2276,8 +2276,60 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 }
 #view-quran .quran-hero{min-height:168px!important;border:0!important;border-radius:26px!important}
 
+/* KIDS_ARABIC_ALPHABET_V1 — kompakter Buchstaben-Lernbereich */
+.ab-learn{
+  margin:14px 0 4px;padding:12px 12px 14px;border-radius:24px;
+  background:rgba(10,34,48,.94);box-shadow:0 14px 28px rgba(0,0,0,.16);
+  border:0
+}
+.ab-learn .ab-kicker{font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--gold);margin:0 0 4px}
+.ab-learn .ab-title{font-family:Fredoka,system-ui,sans-serif;font-size:18px;margin:0 0 10px;font-weight:700}
+.ab-strip{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 0 8px;scrollbar-width:none}
+.ab-strip::-webkit-scrollbar{display:none}
+.ab-chip{
+  flex:0 0 auto;width:44px;height:44px;border:0;border-radius:14px;cursor:pointer;
+  background:rgba(255,255,255,.06);color:#f7e3b4;font-size:22px;font-weight:700;
+  font-family:"Noto Naskh Arabic","Amiri",serif
+}
+.ab-chip.on{background:rgba(226,189,114,.22);color:#102030;background:#e2bd72}
+.ab-stage{display:grid;grid-template-columns:118px 1fr;gap:10px;align-items:center}
+.ab-pic{width:118px;height:118px;border-radius:20px;object-fit:cover;display:block;background:#071522}
+.ab-letter{
+  font-family:"Noto Naskh Arabic","Amiri",serif;font-size:clamp(52px,16vw,78px);
+  line-height:1.1;margin:0;color:#fff8e6;text-align:right
+}
+.ab-name{margin:0;font-size:13px;font-weight:800;color:#e2bd72}
+.ab-word{margin:4px 0 0;font-size:15px;font-weight:700}
+.ab-word b{font-family:"Noto Naskh Arabic","Amiri",serif;font-size:22px;font-weight:700;margin-inline-start:6px}
+.ab-explain{margin:8px 0 0;font-size:12px;line-height:1.45;color:rgba(255,255,255,.86)}
+.ab-harakat{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.ab-h{
+  min-height:40px;min-width:52px;padding:0 10px;border:0;border-radius:14px;cursor:pointer;
+  background:rgba(226,189,114,.12);color:#fff3cf;font-family:"Noto Naskh Arabic",serif;font-size:20px
+}
+.ab-forms{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.ab-forms span{background:rgba(255,255,255,.06);border-radius:12px;padding:6px 8px;font-size:11px;color:rgba(255,255,255,.8)}
+.ab-forms b{display:block;font-family:"Noto Naskh Arabic",serif;font-size:18px;color:#fff;font-weight:700}
+.ab-nav{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+.ab-nav button{
+  min-height:44px;border:0;border-radius:16px;background:rgba(255,255,255,.07);color:#fff;font-weight:800;font-size:12px;cursor:pointer
+}
+.ab-nav .ab-play{background:#e2bd72;color:#102030}
+.ab-count{grid-column:1/-1;text-align:center;font-size:11px;color:var(--soft);margin-top:2px}
+.app[data-age="4–5"] .ab-forms{display:none}
+.app[data-age="4–5"] .ab-harakat .ab-h:nth-child(n+2){display:none}
+.app[data-age="4–5"] .ab-letter{font-size:clamp(64px,20vw,92px)}
+.app[data-age="4–5"] .ab-stage{grid-template-columns:1fr}
+.app[data-age="4–5"] .ab-pic{width:100%;height:160px}
+.app[data-age="9–10"] .ab-explain{font-size:13px}
+@media(max-width:420px){
+  .ab-stage{grid-template-columns:96px 1fr}
+  .ab-pic{width:96px;height:96px}
+}
+
+
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
 </head>
 <body>
 <div id="kidsUpdateLayer" class="kids-update-layer">
@@ -2512,6 +2564,30 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
           </button>
         </div>
       </div>
+
+
+      <section class="ab-learn" id="kidsAlphabetLearn" aria-label="Arabisches Alphabet lernen">
+        <p class="ab-kicker">BUCHSTABEN · HARAKAT · BILD</p>
+        <h3 class="ab-title">Alif-Bāʾ lernen</h3>
+        <div class="ab-strip" id="abStrip" role="list"></div>
+        <div class="ab-stage">
+          <img class="ab-pic" id="abPic" alt="" width="118" height="118">
+          <div>
+            <p class="ab-letter" id="abLetter" lang="ar" dir="rtl"></p>
+            <p class="ab-name" id="abName"></p>
+            <p class="ab-word" id="abWord"></p>
+          </div>
+        </div>
+        <p class="ab-explain" id="abExplain"></p>
+        <div class="ab-harakat" id="abHarakat"></div>
+        <div class="ab-forms" id="abForms"></div>
+        <div class="ab-nav">
+          <button type="button" id="abPrev">Zurück</button>
+          <button type="button" class="ab-play" id="abPlay">Vorlesen</button>
+          <button type="button" id="abNext">Weiter</button>
+          <div class="ab-count" id="abCount"></div>
+        </div>
+      </section>
 
       <div class="section-title">Meine kurzen Sūrah</div>
       <div class="surah-banner" aria-hidden="true"></div>
@@ -4364,6 +4440,107 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   openDuaAt(duaDailyIndex(list));
 });
 
+
+(function(){
+  "use strict";
+  var letters=[];
+  var idx=0;
+  var KEY="kids.alphabet.idx";
+  function ageKey(){
+    try{return localStorage.getItem("kids.age")||"6–8"}catch(e){return "6–8"}
+  }
+  function render(){
+    if(!letters.length)return;
+    var item=letters[idx]||letters[0];
+    var a=ageKey();
+    var pic=document.getElementById("abPic");
+    var letter=document.getElementById("abLetter");
+    var name=document.getElementById("abName");
+    var word=document.getElementById("abWord");
+    var expl=document.getElementById("abExplain");
+    var har=document.getElementById("abHarakat");
+    var forms=document.getElementById("abForms");
+    var count=document.getElementById("abCount");
+    var strip=document.getElementById("abStrip");
+    if(pic){
+      pic.src="/test/kids/assets/alphabet/alpha-"+item.id+".png";
+      pic.alt=item.wordDe||item.name;
+    }
+    if(letter)letter.textContent=item.ar||"";
+    if(name)name.textContent=item.name+" · "+(item.nameAr||"");
+    if(word)word.innerHTML=(item.wordDe||"")+'<b lang="ar" dir="rtl">'+(item.wordAr||"")+"</b>";
+    if(expl)expl.textContent=(item.ages&&item.ages[a])||"";
+    if(har){
+      har.innerHTML="";
+      (item.harakat||[]).forEach(function(h){
+        var b=document.createElement("button");
+        b.type="button";
+        b.className="ab-h";
+        b.textContent=h;
+        b.addEventListener("click",function(){kidsAlphabetSpeak(h+" . "+(item.ages&&item.ages[a]||item.name));});
+        har.appendChild(b);
+      });
+    }
+    if(forms){
+      forms.innerHTML="";
+      var f=item.forms||{};
+      [["Allein",f.iso],["Anfang",f.ini],["Mitte",f.mid],["Ende",f.fin]].forEach(function(row){
+        var s=document.createElement("span");
+        s.innerHTML=row[0]+"<b lang=\"ar\" dir=\"rtl\">"+(row[1]||"")+"</b>";
+        forms.appendChild(s);
+      });
+    }
+    if(count)count.textContent=(idx+1)+" von "+letters.length;
+    if(strip){
+      strip.querySelectorAll(".ab-chip").forEach(function(c,i){c.classList.toggle("on",i===idx)});
+      var on=strip.querySelector(".ab-chip.on");
+      if(on)on.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});
+    }
+    try{localStorage.setItem(KEY,String(idx))}catch(e){}
+  }
+  function kidsAlphabetSpeak(text){
+    /* KIDS_ALPHABET_AUDIO_SYNC_V1 — später: echte Buchstaben-Audiodateien aus item.audio */
+    if(typeof quizSpeak==="function")quizSpeak(text);
+  }
+  function go(n){
+    if(!letters.length)return;
+    idx=(n+letters.length)%letters.length;
+    render();
+  }
+  function buildStrip(){
+    var strip=document.getElementById("abStrip");
+    if(!strip)return;
+    strip.innerHTML="";
+    letters.forEach(function(item,i){
+      var b=document.createElement("button");
+      b.type="button";
+      b.className="ab-chip"+(i===idx?" on":"");
+      b.textContent=item.ar;
+      b.setAttribute("aria-label",item.name);
+      b.addEventListener("click",function(){idx=i;render();});
+      strip.appendChild(b);
+    });
+  }
+  window.kidsAlphabetOnAge=function(){render();};
+  fetch("/test/kids/data/alphabet-kids.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(data){
+    letters=(data&&data.letters)||[];
+    try{idx=Math.max(0,Math.min(letters.length-1,Number(localStorage.getItem(KEY)||"0")))}catch(e){idx=0}
+    buildStrip();
+    render();
+  }).catch(function(){});
+  var prev=document.getElementById("abPrev");
+  var next=document.getElementById("abNext");
+  var play=document.getElementById("abPlay");
+  if(prev)prev.addEventListener("click",function(){go(idx-1)});
+  if(next)next.addEventListener("click",function(){go(idx+1)});
+  if(play)play.addEventListener("click",function(){
+    var item=letters[idx];
+    if(!item)return;
+    var a=ageKey();
+    kidsAlphabetSpeak(item.name+". "+((item.ages&&item.ages[a])||"")+" Wort: "+item.wordDe+".");
+  });
+})();
+
 function quizSpeak(text){
   if(!("speechSynthesis" in window))return;
   try{speech.cancel()}catch(e){}
@@ -4708,6 +4885,7 @@ function setAge(a){
   document.getElementById("ageHelp").textContent=ageHelp[a]||"";
   var app=document.querySelector(".app");
   if(app)app.setAttribute("data-age",a);
+  if(window.kidsAlphabetOnAge)window.kidsAlphabetOnAge();
   updateDailyJourney();
   updateParentProgress();
   renderKnowledgeCard();
