@@ -2354,7 +2354,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 #alphabetModal .ab-complete-mark{width:94px;height:94px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:rgba(82,196,132,.16);border:1px solid rgba(82,196,132,.42);font:900 48px/1 Fredoka,system-ui,sans-serif;color:#d5ffe5}
 #alphabetModal .ab-nav button:disabled{opacity:.42;cursor:not-allowed}
 #alphabetModal .lesson-steps{margin:2px 0 8px;flex:none;grid-template-columns:repeat(5,minmax(0,1fr))}
-.app[data-age="4–5"] #alphabetModal .lesson-steps{gap:6px}
+.app[data-age="4–5"] #alphabetModal .lesson-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
 </style>
@@ -4874,7 +4874,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   }
   window.kidsAlphabetOnAge=function(){step=0;practiceToken="";practicePassed=false;practiceMistakes=0;completeMode=false;render()};
   window.openAlphabet=openAlphabet;
-  fetch("/test/kids/data/alphabet-kids.json?v=5",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(data){
+  fetch("/test/kids/data/alphabet-kids.json?v=6",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(data){
     letters=(data&&data.letters)||[];
     try{idx=Math.max(0,Math.min(letters.length-1,Number(localStorage.getItem(KEY)||"0")))}catch(e){idx=0}
     var dots=document.getElementById("abDots");
