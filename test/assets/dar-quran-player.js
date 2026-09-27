@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 958;
+    var PLAYER_BUILD = 959;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -2370,11 +2370,6 @@
         openReciterSheet();
         return;
       }
-      if (act === "learn-download") {
-        e.preventDefault();
-        openReciterSheet();
-        return;
-      }
       if (act === "prev") { e.preventDefault(); prevAyah(); return; }
       if (act === "next") { e.preventDefault(); nextAyah(false); return; }
       if (act === "vol") return;
@@ -2481,7 +2476,6 @@
       "</div>" +
       '<div class="dqp-learn" data-dqp-learn hidden>' +
         '<button type="button" class="dqp-learn-btn dqp-learn-reciter" data-dqp-mini="learn-reciter" aria-label="Qāriʾ wählen"><span class="dqp-learn-lab">Qāriʾ</span></button>' +
-        '<button type="button" class="dqp-learn-btn dqp-learn-dl" data-dqp-mini="learn-download" aria-label="Rezitation auf dieses Gerät laden"><span class="dqp-learn-lab">Download</span></button>' +
         '<button type="button" class="dqp-learn-btn" data-dqp-mini="learn-loop" aria-pressed="true" aria-label="Āyah wiederholen"><span class="dqp-learn-lab">Wiederholen</span></button>' +
         '<button type="button" class="dqp-learn-btn" data-dqp-mini="learn-stay" aria-pressed="true" aria-label="Bei der Āyah bleiben"><span class="dqp-learn-lab">Bleiben</span></button>' +
         '<button type="button" class="dqp-learn-btn dqp-learn-rate" data-dqp-mini="learn-rate" aria-label="Tempo"><span class="dqp-learn-lab" data-dqp-learn-rate-lab>1×</span></button>' +
@@ -2506,6 +2500,7 @@
       !el.querySelector("[data-dqp-mini=learn-reciter]") ||
       !el.querySelector("[data-dqp-mini=pause]") ||
       !el.querySelector("[data-dqp-mini=stop]") ||
+      el.querySelector("[data-dqp-mini=learn-download]") ||
       el.querySelector("[data-dqp-mini=prev]") ||
       el.querySelector("[data-dqp-mini=vol]")
     ) {
@@ -2591,7 +2586,7 @@
     sh.dataset.dqpSheetBound = "1";
     function handle(ev) {
       if (ev.target === sh) { closeSheet(); return; }
-      var t = ev.target.closest ? ev.target.closest("[data-dqp],[data-dqp-opt],[data-dqp-dl]") : null;
+      var t = ev.target.closest ? ev.target.closest("[data-dqp],[data-dqp-opt]") : null;
       if (!t || !sh.contains(t)) return;
       ev.preventDefault();
       ev.stopPropagation();
@@ -2599,15 +2594,6 @@
       if (act === "sheet-close") { closeSheet(); return; }
       var opt = t.getAttribute("data-dqp-opt");
       if (opt) onOpt(opt);
-      var dl = t.getAttribute("data-dqp-dl");
-      if (dl) {
-        var recDl = reciterById(dl);
-        var packDl = window.DARQuranAudioPack;
-        if (recDl && packDl && typeof packDl.downloadReciter === "function") {
-          packDl.downloadReciter(recDl.edition);
-          paintReciterDownloadButtons();
-        }
-      }
     }
     sh.addEventListener("click", handle, true);
     sh.addEventListener("pointerup", function (ev) {
@@ -2641,8 +2627,6 @@
     return learnSheet();
   }
   function closeSheet() {
-    clearInterval(reciterSheetTimer);
-    reciterSheetTimer = 0;
     var sh = activeSheetEl();
     if (!sh) return;
     sh.classList.remove("is-open");
@@ -2806,40 +2790,13 @@
     }
     draw();
   }
-  function reciterDownloadLabel(rec) {
-    var pack = window.DARQuranAudioPack;
-    if (!pack || typeof pack.downloadLabel !== "function") return "Download";
-    return pack.downloadLabel(rec.edition);
-  }
-  var reciterSheetTimer = 0;
-  function paintReciterDownloadButtons() {
-    document.querySelectorAll("[data-dqp-dl]").forEach(function (btn) {
-      var id = btn.getAttribute("data-dqp-dl");
-      var rec = reciterById(id);
-      if (!rec) return;
-      var pack = window.DARQuranAudioPack;
-      var label = reciterDownloadLabel(rec);
-      btn.textContent = label;
-      var done = pack && pack.reciterProgress && pack.reciterProgress(rec.edition).complete;
-      btn.classList.toggle("is-done", !!done);
-      btn.disabled = !!done;
-    });
-  }
   function openReciterSheet() {
     if (!isFullPlayerRoute()) fullUiWanted = false;
-    var packNote = '<p class="dqp-dl-hint">Download speichert den Qāriʾ auf diesem Gerät. Danach geht die Rezitation auch offline.</p>';
-    var seedBtn = '<button type="button" class="dqp-opt dqp-opt-seed" data-dqp-opt="dl-seed">Gebets-Suren für alle speichern</button>';
-    openSheet("Qāriʾ", packNote + seedBtn + '<div class="dqp-opt-list">' + RECITERS.map(function (r) {
+    openSheet("Qāriʾ", '<div class="dqp-opt-list">' + RECITERS.map(function (r) {
       var key = r.id + ":" + state.surah + ":" + state.ayah;
-      var mark = availCache[key] === false ? "nicht verfügbar" : reciterDownloadLabel(r);
-      return '<div class="dqp-opt-row">' +
-        '<button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '"><span class="dqp-opt-name">' + esc(r.name) + "</span><span class=\"dqp-opt-meta\">" + esc(mark) + "</span></button>" +
-        '<button type="button" class="dqp-dl" data-dqp-dl="' + r.id + '">' + esc(reciterDownloadLabel(r)) + "</button>" +
-        "</div>";
+      var mark = availCache[key] === false ? "nicht verfügbar" : "";
+      return '<button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '"><span class="dqp-opt-name">' + esc(r.name) + "</span>" + (mark ? '<span class="dqp-opt-meta">' + esc(mark) + "</span>" : "") + "</button>";
     }).join("") + "</div>");
-    paintReciterDownloadButtons();
-    clearInterval(reciterSheetTimer);
-    reciterSheetTimer = setInterval(paintReciterDownloadButtons, 900);
   }
   function openMenu() {
     openSheet("Optionen", [
@@ -2908,12 +2865,6 @@
       saveState();
       paintInfo();
       loadAudio(state.playing, true);
-      return;
-    }
-    if (id === "dl-seed") {
-      var packSeed = window.DARQuranAudioPack;
-      if (packSeed && typeof packSeed.startSeed === "function") packSeed.startSeed();
-      paintReciterDownloadButtons();
       return;
     }
     if (id === "m-shuffle") {
@@ -3057,15 +3008,6 @@
       if (act === "pick-reciter") { openReciterSheet(); return; }
       var opt = t.getAttribute("data-dqp-opt");
       if (opt) onOpt(opt);
-      var dl = t.getAttribute("data-dqp-dl");
-      if (dl) {
-        var recDl = reciterById(dl);
-        var packDl = window.DARQuranAudioPack;
-        if (recDl && packDl && typeof packDl.downloadReciter === "function") {
-          packDl.downloadReciter(recDl.edition);
-          paintReciterDownloadButtons();
-        }
-      }
     }
     root.addEventListener("click", onPlayerAction);
     root.addEventListener("keydown", function (ev) {

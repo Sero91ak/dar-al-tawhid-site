@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1076";
+  const VER="1079";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -177,20 +177,35 @@
     }
     return "";
   }
+  function sameFile(cur,file){
+    const f=String(file||"");
+    const c=String(cur||"");
+    if(!f||!c)return false;
+    return c.indexOf(f)!==-1;
+  }
   function fill(el,file,prio){
     if(!el||!file)return;
     const want=src(file);
     const existing=el.querySelector("img.dar3d-icon");
     if(existing){
-      if(existing.getAttribute("src")!==want)existing.setAttribute("src",want);
+      const cur=existing.getAttribute("src")||"";
+      if(sameFile(cur,file)||cur.indexOf("blob:")===0)return;
+      existing.setAttribute("src",want);
       return;
     }
     if(el.matches&&el.matches("img.dar3d-icon")){
-      if(el.getAttribute("src")!==want)el.setAttribute("src",want);
+      const cur=el.getAttribute("src")||"";
+      if(sameFile(cur,file)||cur.indexOf("blob:")===0)return;
+      el.setAttribute("src",want);
       return;
     }
+    try{el.style.fontSize="0";el.style.color="transparent"}catch(e){}
+    el.querySelectorAll("svg").forEach(function(s){try{s.remove()}catch(e){}});
+    const keep=[];
+    el.childNodes.forEach(function(n){if(n.nodeType===1&&n.classList&&(n.classList.contains("quick-action-badge")||n.classList.contains("quick-action-dot")))keep.push(n)});
     el.textContent="";
-    el.appendChild(imgFor(file,prio));
+    keep.forEach(function(n){el.appendChild(n)});
+    el.insertBefore(imgFor(file,prio),el.firstChild);
   }
   const SLOT_SEL=".feature-icon,.emoji-emblem,.folder-icon,.book-library-icon,.prophets-spotlight__icon,.quick-action-emoji,.quiz-quick-icon,.scholars-index__mono,.prophets-row__icon,.prophets-detail__emoji,.home-v380-lib-card__ico,.library-focus-teaser__icon,.zakat-home-teaser-icon,.home-v380-quran-hero__mark,.qrc-btn-emoji,.qrc-play-mark,.home-hijri-ico,.settings-live-icon,.direct-pick-ico,.related-compact-icon,.more-quick-access__ico,.current-focus-icon,.qrc-menu-emoji";
   function scan(){

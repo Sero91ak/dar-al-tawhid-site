@@ -272,3 +272,31 @@ img.dar3d-icon{
   vertical-align:middle;
   font-size:0!important;
 }
+
+/* No emoji flash: slots never paint Color Emoji; 3D PNG is the only mark */
+.feature-icon,.emoji-emblem,.folder-icon,.book-library-icon,.quick-action-emoji,
+.quiz-quick-icon,.scholars-index__mono,.prophets-row__icon,.prophets-detail__emoji,
+.prophets-spotlight__icon,.home-v380-lib-card__ico,.library-focus-teaser__icon,
+.zakat-home-teaser-icon,.home-v380-quran-hero__mark,.qrc-btn-emoji,.qrc-play-mark,
+.home-hijri-ico,.settings-live-icon,.direct-pick-ico,.related-compact-icon,
+.more-quick-access__ico,.current-focus-icon,.qrc-menu-emoji,.nav-icon{
+  font-size:0!important;
+  line-height:0!important;
+  color:transparent!important;
+  -webkit-text-fill-color:transparent!important;
+  font-family:ui-sans-serif,system-ui,sans-serif!important;
+}
+.quick-action-emoji{
+  display:grid!important;
+  place-items:center;
+  width:22px;height:22px;
+  pointer-events:none;
+}
+.quick-action img.dar3d-icon,
+.quick-action-emoji img.dar3d-icon{
+  width:22px!important;
+  height:22px!important;
+  max-width:22px!important;
+  max-height:22px!important;
+  object-fit:contain!important;
+}
