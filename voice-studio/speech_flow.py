@@ -7,7 +7,31 @@ import unicodedata
 FLOW_WEAK_ENDINGS={
     "und","oder","aber","denn","doch","weil","wenn","obwohl","während","damit","dass",
     "um","ohne","statt","anstatt","als","wie","zu","für","mit","von","bei","nach","vor",
-    "darum","dazu","dafür","daran","darauf","dabei","davon"
+    "darum","dazu","dafür","daran","darauf","dabei","davon","davor","danach"
+}
+
+INFINITIVE_TRIGGER_FORMS={
+    "bitte","bittest","bittet","bitten","bat","baten",
+    "fordere","forderst","fordert","fordern","auffordern","aufgefordert",
+    "erlaube","erlaubst","erlaubt","erlauben",
+    "verbiete","verbietest","verbietet","verbieten",
+    "helfe","hilfst","hilft","helfen","half","halfen",
+    "versuche","versuchst","versucht","versuchen","versuchte","versuchten",
+    "hoffe","hoffst","hofft","hoffen","hoffte","hofften",
+    "plane","planst","plant","planen","plante","planten",
+    "beginne","beginnst","beginnt","beginnen","begann","begannen",
+    "fange","fängst","fängt","fangen","anfangen","angefangen",
+    "vergesse","vergisst","vergessen","vergaß","vergaßen",
+    "lerne","lernst","lernt","lernen","lernte","lernten",
+    "rate","rätst","rät","raten","riet","rieten",
+    "empfehle","empfiehlst","empfiehlt","empfehlen","empfahl","empfahlen",
+    "verspreche","versprichst","verspricht","versprechen","versprach","versprachen",
+    "beschließe","beschließt","beschließen","beschloss","beschlossen",
+    "entscheide","entscheidest","entscheidet","entscheiden","entschied","entschieden",
+    "wünsche","wünschst","wünscht","wünschen",
+    "beabsichtige","beabsichtigst","beabsichtigt","beabsichtigen",
+    "scheine","scheinst","scheint","scheinen",
+    "drohe","drohst","droht","drohen"
 }
 
 def _spoken_infinitive_near_start(text:str):
@@ -29,12 +53,8 @@ def _zero_pause_grammar_comma(left:str,right:str):
     if re.search(r"\b(?:darum|dazu|dafür|daran|darauf|dabei|davon|davor|danach)$",tail):
         return True,"pronominaladverb_infinitive"
 
-    if re.search(
-        r"\b(?:bitten|auffordern|erlauben|verbieten|helfen|versuchen|hoffen|planen|"
-        r"beginnen|anfangen|aufhören|vergessen|lernen|raten|empfehlen|versprechen|"
-        r"beschließen|entscheiden|wünschen|beabsichtigen|scheinen|drohen)(?:\s+\w+){0,4}$",
-        tail
-    ):
+    tail_words=[re.sub(r"[^a-zäöüß-]","",w) for w in tail.split()[-6:]]
+    if any(w in INFINITIVE_TRIGGER_FORMS for w in tail_words):
         return True,"verb_infinitive"
 
     clause=tail.split(".")[-1].split("!")[-1].split("?")[-1]
@@ -42,6 +62,39 @@ def _zero_pause_grammar_comma(left:str,right:str):
         return True,"infinitive_connector"
 
     return False,""
+
+def analyze_punctuation(text:str):
+    """Erstellt einen reinen Prosodieplan. Er ändert den sichtbaren Text nicht."""
+    value=str(text or "")
+    plan=[]
+    for idx,ch in enumerate(value):
+        if ch not in ",،;؛:.!?؟…":
+            continue
+        left=value[:idx]
+        right=value[idx+1:]
+        if ch in ",،":
+            zero,reason=_zero_pause_grammar_comma(left,right)
+            if zero:
+                pause_class="zero"
+            elif re.match(r"\s*(?:und|oder|aber|denn|doch|sowie)\b",right,flags=re.I):
+                pause_class="micro"
+                reason="coordination"
+            else:
+                pause_class="short"
+                reason="comma"
+        elif ch in ";؛:":
+            pause_class="phrase"
+            reason="phrase_punctuation"
+        else:
+            pause_class="sentence"
+            reason="sentence_end"
+        plan.append({
+            "index":idx,
+            "mark":ch,
+            "pause_class":pause_class,
+            "reason":reason,
+        })
+    return plan
 
 def normalize_synthesis_punctuation(text:str):
     value=unicodedata.normalize("NFC",str(text or ""))
@@ -122,7 +175,7 @@ def validate_render_plan(source_text:str,synthesis_text:str,plan):
         raise ValueError("Satzfluss-Vorprüfung fehlgeschlagen: "+"; ".join(issues[:6]))
 
     return {
-        "engine":"strict-sentence-preflight-v1",
+        "engine":"strict-sentence-preflight-v2",
         "sentences":len(sentences),
         "segments":len(plan),
         "boundaries":boundaries,
@@ -136,5 +189,7 @@ def prepare_flow_text(source_text:str,speak_text:str,build_plan):
     plan=build_plan(synthesis)
     report=validate_render_plan(source_text,synthesis,plan)
     report["punctuation_decisions"]=decisions
+    report["punctuation_plan"]=analyze_punctuation(speak_text)
     report["zero_pause_grammar_commas"]=len(decisions)
+    report["fast_text_only_preflight"]=True
     return synthesis,plan,report
