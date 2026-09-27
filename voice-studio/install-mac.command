@@ -471,8 +471,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.9.2</string>
-  <key>CFBundleShortVersionString</key><string>2.9.2</string>
+  <key>CFBundleVersion</key><string>2.9.3</string>
+  <key>CFBundleShortVersionString</key><string>2.9.3</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
@@ -543,7 +543,7 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.9.2 ist installiert."
+say_status "DĀR Voice Studio 2.9.3 ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
   "$APP/Contents/MacOS/DARVoiceStudio" >/dev/null 2>&1 &
