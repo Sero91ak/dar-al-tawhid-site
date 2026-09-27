@@ -14,12 +14,12 @@
     "fallbackReference": "~/SerhatVoice/Serhat_FINAL_REF.wav"
   },
   "setupMethod": "native-macos-wkwebview-existing-serhatvoice",
-  "setupCommand": "curl -fsSL 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/install-mac.command' | /bin/bash",
+  "setupCommand": "curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash",
   "macApp": "~/Applications/DĀR Voice Studio.app",
   "macAppRuntime": "single engine owner: launch-agent first, controlled direct fallback, passive native WKWebView",
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
-  "setupSource": "github-raw",
+  "setupSource": "github-contents-api",
   "engineVersion": "supervised-mlx-watchdog+bounded-segments+anti-stall-v2",
   "modelWarmup": true,
   "mpsFallback": true,
@@ -430,7 +430,7 @@
   "nativeProductionMenu": true,
   "nativeProductionShortcuts": true,
   "inAppUpdater": true,
-  "updateManifest": "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/version.json",
+  "updateManifest": "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/version.json?ref=main",
   "updateHelper": "~/Applications/DAR-Voice-Studio/update-mac.command",
   "updatePolicy": "silent-check-on-launch + manual-check + one-click-install + automatic-restart",
   "updateRequiresTerminal": false,
@@ -490,5 +490,8 @@
     "exactSlotTextValidation": true,
     "repositoryAssetValidation": true,
     "sha256Required": true
-  }
+  },
+  "downloadTransport": "github-contents-api-raw-media-type",
+  "rawGithubFallbackDisabled": true,
+  "transportHotfix": "raw.githubusercontent.com returned 404 on production Mac; all installer/update fetches moved to GitHub Contents API"
 }
