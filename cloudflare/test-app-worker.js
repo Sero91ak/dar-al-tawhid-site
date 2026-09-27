@@ -26,8 +26,21 @@ export default {
       const target = new URL(request.url);
       target.pathname = "/test/kids/start";
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v12-tab32");
+      target.searchParams.set("kv", "kids-shell-v12-tab31");
       return Response.redirect(target.toString(), 307);
+    }
+
+    if (url.pathname === "/test/kids/version.json") {
+      return new Response(JSON.stringify({
+        buildId: "kids-shell-v12-tab31",
+        label: "KIDS · V0.31"
+      }), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0"
+        }
+      });
     }
 
     const asset = await env.ASSETS.fetch(request);
