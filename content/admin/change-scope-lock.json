@@ -6473,6 +6473,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "route-aliases-tdz-v1058-1081-2026-09-27",
+      "approvedBy": "user-explicit-app-repair-route-aliases-crash",
+      "reason": "Nutzer: App wird repariert, Cannot access ROUTE_ALIASES before initialization.",
+      "paths": [
+        "index.html",
+        "version.json",
+        "service-worker.js",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
