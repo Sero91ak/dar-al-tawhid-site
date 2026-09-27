@@ -262,7 +262,7 @@ export default {
         if (url.pathname === "/test/kids/version.json" || url.pathname === "/test/kids/version.json/") {
           const headers = kidsHeaders(new Response(""));
           headers.set("Content-Type", "application/json; charset=utf-8");
-          const body = JSON.stringify({ buildId: "kids-shell-v12-tab31", label: "KIDS · V0.31" });
+          const body = JSON.stringify({ buildId: "kids-shell-v12-tab37", label: "KIDS · V0.37" });
           if (request.method === "HEAD") return new Response(null, { status: 200, headers });
           return new Response(body, { status: 200, headers });
         }
