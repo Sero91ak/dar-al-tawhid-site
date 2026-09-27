@@ -1800,12 +1800,11 @@ def file_signature(path:Path):
     except Exception:
         return str(path)
 
-def render_cache_key(text:str,language_id:str,mode:str):
+def _render_cache_digest(text:str,language_id:str,mode:str,backend=None,schema:int=3):
     p=prosody_settings(mode,language_id,text)
     payload={
-        "schema":2,
+        "schema":int(schema),
         "model":"chatterbox-multilingual-v3",
-        "backend":str(ACTIVE_BACKEND),
         "text":str(text),
         "language":str(language_id),
         "mode":str(mode),
@@ -1814,39 +1813,61 @@ def render_cache_key(text:str,language_id:str,mode:str):
         "cfg_weight":round(float(p["cfg_weight"]),6),
         "temperature":round(float(p["temperature"]),6),
     }
+    if backend is not None:
+        payload["backend"]=str(backend)
     raw=json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(",",":")).encode("utf-8")
     return hashlib.sha256(raw).hexdigest()
+
+def render_cache_key(text:str,language_id:str,mode:str):
+    # Verifiziertes Audio ist backend-unabhängig wiederverwendbar. Dadurch muss
+    # ein Satz nach Wechsel MLX ↔ PyTorch/MPS nicht erneut synthetisiert werden.
+    return _render_cache_digest(text,language_id,mode,backend=None,schema=3)
+
+def legacy_render_cache_keys(text:str,language_id:str,mode:str):
+    return [
+        _render_cache_digest(text,language_id,mode,backend="mlx",schema=2),
+        _render_cache_digest(text,language_id,mode,backend="torch",schema=2),
+    ]
 
 def render_cache_path(key:str):
     return RENDER_CACHE_DIR/f"{key}.wav"
 
 def load_render_cache(text:str,language_id:str,mode:str,target_sr:int):
     key=render_cache_key(text,language_id,mode)
-    path=render_cache_path(key)
-    if not path.exists() or path.stat().st_size<=44:
-        RENDER_CACHE_STATS["misses"]+=1
-        return None,None,key
-    try:
-        wav=load_locked_wav(path,target_sr)
-        metrics=audio_quality_metrics(wav,target_sr,text,language_id,mode)
-        hard=[x for x in metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
-        if hard:
-            path.unlink(missing_ok=True)
-            RENDER_CACHE_STATS["misses"]+=1
-            return None,None,key
-        try: os.utime(path,None)
-        except Exception: pass
-        RENDER_CACHE_STATS["hits"]+=1
-        metrics["attempt"]=0
-        metrics["critical"]=False
-        metrics["rescued"]=False
-        metrics["segment_cache"]="hit"
-        return wav,metrics,key
-    except Exception:
-        try: path.unlink(missing_ok=True)
-        except Exception: pass
-        RENDER_CACHE_STATS["misses"]+=1
-        return None,None,key
+    candidates=[key]+legacy_render_cache_keys(text,language_id,mode)
+    for candidate in candidates:
+        path=render_cache_path(candidate)
+        if not path.exists() or path.stat().st_size<=44:
+            continue
+        try:
+            wav=load_locked_wav(path,target_sr)
+            metrics=audio_quality_metrics(wav,target_sr,text,language_id,mode)
+            hard=[x for x in metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
+            if hard:
+                path.unlink(missing_ok=True)
+                continue
+            if candidate!=key:
+                try:
+                    migrated=render_cache_path(key)
+                    if not migrated.exists():
+                        save_wav(migrated,wav,target_sr)
+                except Exception:
+                    pass
+            try: os.utime(path,None)
+            except Exception: pass
+            RENDER_CACHE_STATS["hits"]+=1
+            metrics["attempt"]=0
+            metrics["critical"]=False
+            metrics["rescued"]=False
+            metrics["segment_cache"]="hit"
+            metrics["cache_reused_without_resynthesis"]=True
+            return wav,metrics,key
+        except Exception:
+            try: path.unlink(missing_ok=True)
+            except Exception: pass
+            continue
+    RENDER_CACHE_STATS["misses"]+=1
+    return None,None,key
 
 def save_render_cache(key:str,wav,sr:int):
     if not key:
