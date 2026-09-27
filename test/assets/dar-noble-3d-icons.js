@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1080";
+  const VER="1088";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -48,7 +48,7 @@
   };
   function adultFile(file){
     const f=String(file||"ilm.png");
-    if(f==="play.png"||f==="headphones.png")return "audio.png";
+    if(f==="headphones.png")return "audio.png";
     return f;
   }
   function netSrc(file){return BASE+adultFile(file||"ilm.png")+"?v="+VER}
@@ -164,17 +164,17 @@
         return "quiz.png";
       }
       if(el.classList.contains("qov-icon-btn")||el.classList.contains("qov-player-launch-ico")){
-        if(el.getAttribute("data-nav")==="quran-player"||el.classList.contains("qov-player-icon"))return "audio.png";
+        if(el.getAttribute("data-nav")==="quran-player"||el.classList.contains("qov-player-icon"))return "play.png";
         if(el.hasAttribute("data-qov-open-display")||el.id==="qovSettingsBtn")return "settings.png";
       }
-      if(el.classList.contains("qov-wake-labeled-icon"))return "mosque.png";
+      if(el.classList.contains("qov-wake-labeled-icon"))return "spark.png";
       if(el.classList.contains("qrc-context-btn")||(host&&host.classList&&host.classList.contains("qrc-context-btn"))){
         const hid=(el.id||(host&&host.id)||"");
         if(hid==="qrcContextSearchBtn")return "compass.png";
         if(hid==="qrcContextTafsirBtn")return "quran.png";
         if(hid==="qrcContextBookmarksBtn")return "saved.png";
       }
-      if(el.classList.contains("quran-ayah-action-btn--play")||el.classList.contains("qrc-play-mark"))return "audio.png";
+      if(el.classList.contains("quran-ayah-action-btn--play")||el.classList.contains("qrc-play-mark"))return "play.png";
       if(el.classList.contains("home-hijri-ico"))return "calendar.png";
       if(el.classList.contains("more-quick-access__ico")){
         const chip=el.closest("[data-more-quick]");
