@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "name": "DĀR Voice by Serhat Abu Malik",
   "bundleId": "de.daraltawhid.darvoice.serhatabumalik",
   "enginePort": 8789,
@@ -16,5 +16,12 @@
   "sharedReferenceVoice": "~/SerhatVoice/Serhat_Adobe_MASTER.wav",
   "isolatedRuntimeHome": "~/SerhatVoice/DARVoiceStandalone",
   "nativeCompileMode": "swiftc -parse-as-library",
-  "repair": "Fix @main compilation and loading-page interpolation"
+  "repair": "Applied uploaded Serhat Abu Malik watermark to in-app header and native macOS icon; replaced dark UI with light parchment theme.",
+  "theme": "light parchment cream + gold",
+  "branding": {
+    "name": "DĀR Voice by Serhat Abu Malik",
+    "headerLogo": "Serhat Abu Malik watermark-derived icon",
+    "nativeDockIcon": "Serhat Abu Malik watermark-derived icon",
+    "placement": "left aligned, unboxed, parchment-integrated"
+  }
 }
