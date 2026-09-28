@@ -4,7 +4,8 @@
   "target": "tvOS-only",
   "provider": {
     "name": "DĀR AL TAWḤĪD audio pack",
-    "editionsURL": "https://dar-al-tawhid.de/data/quran-reciters.json",
+    "editionsURL": "https://api.alquran.cloud/v1/edition/format/audio",
+    "listedRecitersURL": "https://dar-al-tawhid.de/data/quran-reciters.json",
     "surahURLTemplate": "https://api.alquran.cloud/v1/surah/{surah}/{edition}",
     "cdnBaseURL": "https://cdn.islamic.network",
     "appProxyURL": "https://dar-al-tawhid.de/quran-audio/{edition}/{ayah}.mp3",
@@ -21,7 +22,10 @@
     "persistLastPosition": true
   },
   "selection": {
-    "includeAllAvailableArabicAudioEditions": false,
+    "includeAllAvailableArabicAudioEditions": true,
+    "useEmbeddedReciters": true,
+    "allowChoiceWithoutDownload": true,
+    "lockToDownloadedOnly": false,
     "language": "ar",
     "format": "audio",
     "defaultEdition": "ar.alafasy",

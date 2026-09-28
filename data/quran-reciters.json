@@ -10,7 +10,9 @@
     "autoStart": true,
     "playWhenFirstAyahReady": true,
     "waitForFullReciter": false,
-    "startSeedOnLaunch": true
+    "startSeedOnLaunch": true,
+    "allowChoiceWithoutDownload": true,
+    "lockToDownloadedOnly": false
   },
   "reciters": [
     {"id":"alafasy","name":"Mišārī Rāšid al-ʿAfāsī","folder":"Alafasy_128kbps","edition":"ar.alafasy","style":"murattal"},

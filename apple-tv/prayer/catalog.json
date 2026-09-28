@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "status": "active",
   "target": "tvOS-only",
   "feature": "adhan",
@@ -8,17 +8,55 @@
     "timesURL": "https://dar-al-tawhid.de/api/prayer/times",
     "statusURL": "https://dar-al-tawhid.de/api/prayer/status",
     "workerTimesURL": "https://dar-admin-publisher.sero91ak.workers.dev/api/prayer/times",
+    "recitersURL": "https://dar-al-tawhid.de/data/quran-reciters.json",
+    "appProxyURL": "https://dar-al-tawhid.de/quran-audio/{edition}/{ayah}.mp3",
     "defaultLat": 50.6256,
     "defaultLon": 6.9491,
     "defaultTimeZone": "Europe/Berlin",
     "methodAngle": 12,
     "asrFactor": 1
   },
+  "selection": {
+    "includeAllReciters": true,
+    "useEmbeddedReciters": true,
+    "allowChoiceWithoutDownload": true,
+    "lockToDownloadedOnly": false,
+    "defaultEdition": "ar.alafasy",
+    "persistSelection": true,
+    "sort": "displayName"
+  },
   "playback": {
     "autoStart": true,
     "autoStartAdhan": true,
     "playAtPrayerEntry": true,
     "playAdvanceReminder": true,
+    "playViaProxyUntilCached": true,
     "prayers": ["fajr", "dhuhr", "asr", "maghrib", "isha"]
-  }
+  },
+  "offline": {
+    "downloadSelectedReciter": true,
+    "downloadSelectedReciterInBackground": true,
+    "lockToDownloadedOnly": false
+  },
+  "reciters": [
+    {"id":"alafasy","name":"Mišārī Rāšid al-ʿAfāsī","edition":"ar.alafasy"},
+    {"id":"sudais","name":"ʿAbd ar-Raḥmān as-Sudais","edition":"ar.abdurrahmaansudais"},
+    {"id":"shuraim","name":"Saʿūd aš-Šuraym","edition":"ar.saoodshuraym"},
+    {"id":"husary","name":"Maḥmūd Ḫalīl al-Ḥuṣarī","edition":"ar.husary"},
+    {"id":"husarymujawwad","name":"al-Ḥuṣarī (Muǧawwad)","edition":"ar.husarymujawwad"},
+    {"id":"minshawi","name":"Muḥammad Ṣiddīq al-Minšāwī","edition":"ar.minshawi"},
+    {"id":"minshawimujawwad","name":"al-Minšāwī (Muǧawwad)","edition":"ar.minshawimujawwad"},
+    {"id":"basit","name":"ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad","edition":"ar.abdulbasitmurattal"},
+    {"id":"abdulbasitmujawwad","name":"ʿAbd al-Bāsiṭ (Muǧawwad)","edition":"ar.abdulbasitmujawwad"},
+    {"id":"ajamy","name":"Aḥmad ibn ʿAlī al-ʿAǧamī","edition":"ar.ahmedajamy"},
+    {"id":"muhammadayoub","name":"Muḥammad Ayyūb","edition":"ar.muhammadayoub"},
+    {"id":"hudhaify","name":"ʿAlī al-Ḥuḏayfī","edition":"ar.hudhaify"},
+    {"id":"muhammadjibreel","name":"Muḥammad Ǧibrīl","edition":"ar.muhammadjibreel"},
+    {"id":"maher","name":"Māhir al-Muʿayqlī","edition":"ar.mahermuaiqly"},
+    {"id":"shaatree","name":"Abū Bakr aš-Šāṭirī","edition":"ar.shaatree"},
+    {"id":"hanirifai","name":"Hānī ar-Rifāʿī","edition":"ar.hanirifai"},
+    {"id":"abdullahbasfar","name":"ʿAbdullāh Baṣfar","edition":"ar.abdullahbasfar"},
+    {"id":"yasseraldossari","name":"Yāsir ad-Dawsarī","edition":"ar.yasseraldossari"},
+    {"id":"aymanswoaid","name":"Ayman Suwayd","edition":"ar.aymanswoaid"}
+  ]
 }

@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 965;
+    var PLAYER_BUILD = 967;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -258,8 +258,29 @@
 
   var FALLBACK_QARI = "alafasy";
   var availCache = Object.create(null);
+  function listReciters() {
+    var by = Object.create(null);
+    RECITERS.forEach(function (r) { by[r.id] = r; });
+    try {
+      var extra = window.DARQuranAudioPack && typeof window.DARQuranAudioPack.reciters === "function"
+        ? window.DARQuranAudioPack.reciters()
+        : [];
+      (extra || []).forEach(function (r) {
+        if (!r || !r.id) return;
+        var prev = by[r.id] || {};
+        by[r.id] = {
+          id: r.id,
+          name: r.name || prev.name || r.id,
+          folder: r.folder || prev.folder || "",
+          edition: r.edition || prev.edition
+        };
+      });
+    } catch (eList) {}
+    return Object.keys(by).map(function (k) { return by[k]; });
+  }
   function reciterById(id) {
-    return RECITERS.find(function (r) { return r.id === id; }) || RECITERS[0];
+    var list = listReciters();
+    return list.find(function (r) { return r.id === id; }) || list[0];
   }
   function esc(s) {
     return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -2706,11 +2727,12 @@
   }
   function pickRandomReciter() {
     var tries = 0;
-    var id = RECITERS[Math.floor(Math.random() * RECITERS.length)].id;
+    var pool = listReciters();
+    var id = pool[Math.floor(Math.random() * pool.length)].id;
     while (tries < 8) {
       var key = id + ":" + state.surah + ":" + state.ayah;
       if (availCache[key] !== false) return id;
-      id = RECITERS[Math.floor(Math.random() * RECITERS.length)].id;
+      id = pool[Math.floor(Math.random() * pool.length)].id;
       tries += 1;
     }
     return FALLBACK_QARI;
@@ -2845,12 +2867,14 @@
     draw();
   }
   function openReciterSheet() {
-    if (!isFullPlayerRoute()) fullUiWanted = false;
-    openSheet("Qāriʾ", '<div class="dqp-opt-list">' + RECITERS.map(function (r) {
-      var key = r.id + ":" + state.surah + ":" + state.ayah;
-      var mark = availCache[key] === false ? "nicht verfügbar" : "";
-      return '<button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '"><span class="dqp-opt-name">' + esc(r.name) + "</span>" + (mark ? '<span class="dqp-opt-meta">' + esc(mark) + "</span>" : "") + "</button>";
-    }).join("") + "</div>");
+    var rows = listReciters().map(function (r) {
+      var p = window.DARQuranAudioPack && window.DARQuranAudioPack.reciterProgress
+        ? window.DARQuranAudioPack.reciterProgress(r.edition)
+        : {};
+      var mark = p.complete ? "gespeichert" : (p.downloading || p.have > 0 ? "lädt" : "online");
+      return '<button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '" data-q="' + esc((r.name + " " + r.id).toLowerCase()) + '"><span class="dqp-opt-name">' + esc(r.name) + "</span><span class=\"dqp-opt-meta\">" + esc(mark) + "</span></button>";
+    }).join("");
+    openSheet("Qāriʾ wählen", '<input class="dqp-search" data-dqp-search type="search" placeholder="Rezitator suchen" autocomplete="off"><div class="dqp-opt-list">' + rows + "</div>");
   }
   function openMenu() {
     openSheet("Optionen", [

@@ -2,7 +2,7 @@
 (function () {
   if (window.__darQuranAudioPackBoot) return;
   window.__darQuranAudioPackBoot = true;
-  var VER = "1057";
+  var VER = "1058";
   var DB_NAME = "dar-quran-audio-pack";
   var STORE = "mp3";
   var CACHE_NAME = "dar-quran-audio-v" + VER;
@@ -11,25 +11,25 @@
   var DEFAULT_EDITION = "ar.alafasy";
   var SEED_SURAHS = [1, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114];
   var FALLBACK_RECITERS = [
-    { id: "alafasy", edition: "ar.alafasy" },
-    { id: "sudais", edition: "ar.abdurrahmaansudais" },
-    { id: "shuraim", edition: "ar.saoodshuraym" },
-    { id: "husary", edition: "ar.husary" },
-    { id: "husarymujawwad", edition: "ar.husarymujawwad" },
-    { id: "minshawi", edition: "ar.minshawi" },
-    { id: "minshawimujawwad", edition: "ar.minshawimujawwad" },
-    { id: "basit", edition: "ar.abdulbasitmurattal" },
-    { id: "abdulbasitmujawwad", edition: "ar.abdulbasitmujawwad" },
-    { id: "ajamy", edition: "ar.ahmedajamy" },
-    { id: "muhammadayoub", edition: "ar.muhammadayyoub" },
-    { id: "hudhaify", edition: "ar.hudhaify" },
-    { id: "muhammadjibreel", edition: "ar.muhammadjibreel" },
-    { id: "maher", edition: "ar.mahermuaiqly" },
-    { id: "shaatree", edition: "ar.shaatree" },
-    { id: "hanirifai", edition: "ar.hanirifai" },
-    { id: "abdullahbasfar", edition: "ar.abdullahbasfar" },
-    { id: "yasseraldossari", edition: "ar.yasseraldossari" },
-    { id: "aymanswoaid", edition: "ar.aymanswoaid" }
+    { id: "alafasy", name: "Mišārī Rāšid al-ʿAfāsī", folder: "Alafasy_128kbps", edition: "ar.alafasy" },
+    { id: "sudais", name: "ʿAbd ar-Raḥmān as-Sudais", folder: "Abdurrahmaan_As-Sudais_192kbps", edition: "ar.abdurrahmaansudais" },
+    { id: "shuraim", name: "Saʿūd aš-Šuraym", folder: "Saood_ash-Shuraym_128kbps", edition: "ar.saoodshuraym" },
+    { id: "husary", name: "Maḥmūd Ḫalīl al-Ḥuṣarī", folder: "Husary_128kbps", edition: "ar.husary" },
+    { id: "husarymujawwad", name: "al-Ḥuṣarī (Muǧawwad)", folder: "Husary_Mujawwad_128kbps", edition: "ar.husarymujawwad" },
+    { id: "minshawi", name: "Muḥammad Ṣiddīq al-Minšāwī", folder: "Minshawy_Murattal_128kbps", edition: "ar.minshawi" },
+    { id: "minshawimujawwad", name: "al-Minšāwī (Muǧawwad)", folder: "Minshawy_Mujawwad_192kbps", edition: "ar.minshawimujawwad" },
+    { id: "basit", name: "ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad", folder: "Abdul_Basit_Murattal_192kbps", edition: "ar.abdulbasitmurattal" },
+    { id: "abdulbasitmujawwad", name: "ʿAbd al-Bāsiṭ (Muǧawwad)", folder: "Abdul_Basit_Mujawwad_128kbps", edition: "ar.abdulbasitmujawwad" },
+    { id: "ajamy", name: "Aḥmad ibn ʿAlī al-ʿAǧamī", folder: "Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net", edition: "ar.ahmedajamy" },
+    { id: "muhammadayoub", name: "Muḥammad Ayyūb", folder: "Muhammad_Ayyoub_128kbps", edition: "ar.muhammadayoub" },
+    { id: "hudhaify", name: "ʿAlī al-Ḥuḏayfī", folder: "Hudhaify_128kbps", edition: "ar.hudhaify" },
+    { id: "muhammadjibreel", name: "Muḥammad Ǧibrīl", folder: "Muhammad_Jibreel_128kbps", edition: "ar.muhammadjibreel" },
+    { id: "maher", name: "Māhir al-Muʿayqlī", folder: "MaherAlMuaiqly128kbps", edition: "ar.mahermuaiqly" },
+    { id: "shaatree", name: "Abū Bakr aš-Šāṭirī", folder: "Abu_Bakr_Ash-Shaatree_128kbps", edition: "ar.shaatree" },
+    { id: "hanirifai", name: "Hānī ar-Rifāʿī", folder: "Hani_Rifai_192kbps", edition: "ar.hanirifai" },
+    { id: "abdullahbasfar", name: "ʿAbdullāh Baṣfar", folder: "Abdullah_Basfar_192kbps", edition: "ar.abdullahbasfar" },
+    { id: "yasseraldossari", name: "Yāsir ad-Dawsarī", folder: "Yasser_Ad-Dussary_128kbps", edition: "ar.yasseraldossari" },
+    { id: "aymanswoaid", name: "Ayman Suwayd", folder: "Ayman_Sowaid_64kbps", edition: "ar.aymanswoaid" }
   ];
   var reciters = FALLBACK_RECITERS.slice();
   var surahs = [];
