@@ -27,6 +27,10 @@ jobs:
           curl -L --fail --retry 3 --retry-delay 2 "$SFX_URL" -o /tmp/kids-sfx.mp3
           test -s /tmp/kids-voice.mp3
           test -s /tmp/kids-sfx.mp3
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
       - name: Mix final cinema master
         run: |
           set -euo pipefail
