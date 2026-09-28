@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1094";
+  const VER="1106";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","topics.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -19,7 +19,7 @@
     hadith:"hadith.png",scholars:"scholars.png",scholar:"scholars.png",
     books:"library.png",book:"library.png",bibliothek:"library.png","bibliothek-detail":"library.png",
     topics:"ilm.png",topic:"ilm.png",
-    prayer:"prayer.png",jummah:"jummah.png",qibla:"qibla.png",zakat:"zakat.png",
+    prayer:"prayer.png",jummah:"jummah.png",qibla:"compass.png",zakat:"zakat.png",
     ramadan:"ramadan.png",saved:"saved.png",settings:"settings.png",quiz:"quiz.png",
     calendar:"calendar.png",notifications:"bell.png",account:"lock.png",about:"scale.png",
     wasiyyah:"wasiyyah.png",widgets:"widgets.png","image-editor":"image.png",
@@ -32,7 +32,7 @@
     "⌂":"home.png","🏠":"home.png","📚":"library.png","✦":"spark.png","✨":"spark.png","🌟":"spark.png",
     "📖":"quran.png","☰":"more.png","🤲":"dua.png","📜":"hadith.png","👤":"scholars.png",
     "📘":"hadith.png","📗":"hadith.png","📙":"hadith.png","📒":"hadith.png","📓":"hadith.png",
-    "🕌":"mosque.png","🕋":"qibla.png","🧾":"zakat.png","🌙":"ramadan.png",
+    "🕌":"mosque.png","🕋":"compass.png","🧾":"zakat.png","🌙":"ramadan.png",
     "♡":"heart.png","❤️":"heart.png","♥":"heart.png","💛":"heart.png","⚙️":"settings.png","🧠":"quiz.png",
     "🗓️":"calendar.png","📅":"calendar.png","🔔":"bell.png","🔐":"lock.png","ℹ️":"scale.png","⚖️":"scale.png",
     "🧩":"widgets.png","🖼️":"image.png","🎧":"audio.png","📁":"library.png","🆕":"posts.png",
@@ -214,10 +214,6 @@
   function fill(el,file,prio){
     if(!el||!file)return;
     if(el.closest&&(el.closest(".qov-wake-labeled-btn")||el.closest(".qov-player-icon")||el.classList.contains("qov-wake-labeled-icon")))return;
-    if(el.closest&&el.closest("#quickAccessLayer,#quickAccessMenu")){
-      const baked=el.matches&&el.matches("img.dar3d-icon")?el:el.querySelector("img.dar3d-icon");
-      if(baked&&baked.getAttribute("src"))return;
-    }
     const want=src(file);
     el.querySelectorAll("img.dar3d-icon").forEach(function(im,i){if(i>0){try{im.remove()}catch(e){}}});
     const existing=el.querySelector("img.dar3d-icon");
@@ -274,7 +270,7 @@
   function openDb(){
     return new Promise((res,rej)=>{
       try{
-        const r=indexedDB.open("dar-3d-icon-pack-v1094",1);
+        const r=indexedDB.open("dar-3d-icon-pack-v1106",1);
         r.onupgradeneeded=function(){r.result.createObjectStore("png")};
         r.onsuccess=function(){res(r.result)};
         r.onerror=function(){rej(r.error)};
