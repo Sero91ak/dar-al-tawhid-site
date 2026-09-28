@@ -6,7 +6,7 @@ enum KidsAppShell {
         "www.dar-al-tawhid.de"
     ]
 
-    static let launchURL = URL(string: "https://dar-al-tawhid.de/test/kids/start?kv=kids-shell-v12-tab77")!
+    static let launchURL = URL(string: "https://dar-al-tawhid.de/test/kids/start?kv=kids-shell-v12-tab78")!
 
     static func isKidsURL(_ url: URL) -> Bool {
         let scheme = url.scheme?.lowercased() ?? ""
