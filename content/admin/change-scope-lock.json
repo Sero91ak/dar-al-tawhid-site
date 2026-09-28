@@ -148,6 +148,25 @@
   ],
   "unlockedScopes": [
     {
+      "id": "quran-learn-studio-repair-2026-09-28",
+      "approvedBy": "user-explicit-lern-player-vollstaendig-reparieren",
+      "reason": "Nutzer: Der Lern-Player muss vollständig geprüft und wieder funktionsfähig hergestellt werden (Hören, Sprechen, Live-Wörter, Fortschritt).",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/dar-quran-learn-studio.js",
+        "assets/dar-quran-learn-studio.css",
+        "test/assets/dar-quran-learn-studio.js",
+        "test/assets/dar-quran-learn-studio.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "test/version.json",
+        "service-worker.js",
+        "test/service-worker.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "kids-ios-app-store-shell-2026-09-28",
       "approvedBy": "user-explicit-kinder-app-komplett-umgewandelt-ios-app-store",
       "reason": "Nutzer: Die Kinder-App muss komplett zu einer iOS-App umgewandelt werden, damit sie für den App Store bereit ist. Eigene native Hülle, getrennt von der Erwachsenen-App.",

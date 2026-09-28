@@ -1,0 +1,96 @@
+/* DĀR AL TAWḤĪD · Qurʾān Lern-Studio */
+#dqlRoot{
+  position:fixed;inset:0;z-index:7600;
+  display:none;align-items:stretch;justify-content:center;
+  background:rgba(4,6,8,.72);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  padding:max(10px,env(safe-area-inset-top)) 12px max(12px,env(safe-area-inset-bottom));
+  box-sizing:border-box;
+}
+#dqlRoot.is-open{display:flex}
+html.dql-open,html.dql-open body{overflow:hidden!important;overscroll-behavior:none!important}
+html.dql-open #appView,html.dql-open #bottomNav,html.dql-open #appChromeDock,
+html.dql-open #qrcContextBar,html.dql-open #darQuranMiniPlayer{
+  pointer-events:none!important;
+}
+html.dql-open #dqlRoot,html.dql-open #dqlRoot *{pointer-events:auto}
+.dql-shell{
+  width:min(560px,100%);max-height:100%;
+  display:flex;flex-direction:column;gap:10px;
+  background:color-mix(in srgb,var(--bg,#0c100e) 92%,#000);
+  border:1px solid color-mix(in srgb,var(--gold2,#e8d9a8) 28%,transparent);
+  border-radius:22px;
+  box-shadow:0 18px 48px rgba(0,0,0,.45);
+  overflow:hidden;
+}
+.dql-head{
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+  padding:10px 12px 8px;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#e8d9a8) 16%,transparent);
+}
+.dql-head button{
+  flex:0 0 auto;min-width:42px;min-height:42px;border-radius:12px;
+  border:1px solid color-mix(in srgb,var(--gold2,#e8d9a8) 22%,transparent);
+  background:transparent;color:var(--cream,#f4ead2);font:inherit;cursor:pointer;
+}
+.dql-meta{flex:1;min-width:0}
+.dql-meta b{display:block;font-size:15px;color:var(--cream,#f4ead2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dql-meta small{display:block;font-size:11px;color:color-mix(in srgb,var(--cream,#f4ead2) 68%,transparent)}
+.dql-prog{height:4px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin:0 12px}
+.dql-prog>i{display:block;height:100%;width:0;background:var(--gold2,#e8d9a8);transition:width .25s ease}
+.dql-body{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:8px 14px 12px}
+.dql-ar{
+  font-size:clamp(26px,7vw,40px);line-height:1.7;text-align:center;
+  direction:rtl;font-family:var(--arabic,serif);color:var(--cream,#f4ead2);
+  overflow-wrap:anywhere;word-break:break-word;
+}
+.dql-ar.long{font-size:clamp(22px,5.6vw,32px)}
+.dql-word{display:inline;margin:0 .12em;border-radius:8px;padding:0 .08em;transition:background .15s,color .15s}
+.dql-word.is-ok{background:rgba(70,180,90,.28);color:#d8ffd8}
+.dql-word.is-near{background:rgba(210,140,40,.32);color:#ffe7b8}
+.dql-word.is-bad{background:rgba(190,60,50,.32);color:#ffd0cc}
+.dql-word.is-now{background:rgba(232,217,168,.18);box-shadow:0 0 0 1px color-mix(in srgb,var(--gold2,#e8d9a8) 45%,transparent)}
+.dql-lat,.dql-de{
+  margin-top:10px;text-align:center;font-size:14px;line-height:1.45;
+  color:color-mix(in srgb,var(--cream,#f4ead2) 78%,transparent);
+  overflow-wrap:anywhere;
+}
+.dql-status{margin-top:10px;text-align:center;font-size:12.5px;min-height:1.3em}
+.dql-status.is-err{color:#ffb4ac}
+.dql-status.is-ok{color:#b8f0c0}
+.dql-mic{
+  margin-top:12px;padding:10px 12px;border-radius:14px;
+  border:1px solid color-mix(in srgb,var(--gold2,#e8d9a8) 16%,transparent);
+  background:rgba(255,255,255,.03);
+}
+.dql-mic-top{display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.dql-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#6a6;margin-inline-end:6px}
+.dql-mic.is-live .dql-dot{background:#e35;box-shadow:0 0 0 4px rgba(227,53,80,.18);animation:dqlPulse 1s ease infinite}
+.dql-mic.is-err{border-color:rgba(220,80,70,.45)}
+.dql-meter{height:6px;margin-top:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.dql-meter>i{display:block;height:100%;width:4%;background:linear-gradient(90deg,#8cff9a,#e8d9a8)}
+@keyframes dqlPulse{50%{opacity:.45}}
+.dql-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px 8px;flex-shrink:0}
+.dql-actions button,.dql-nav button,.dql-after button{
+  min-height:48px;border-radius:14px;border:1px solid color-mix(in srgb,var(--gold2,#e8d9a8) 24%,transparent);
+  background:color-mix(in srgb,var(--gold2,#e8d9a8) 10%,transparent);color:var(--cream,#f4ead2);
+  font-weight:750;letter-spacing:.04em;cursor:pointer;
+}
+.dql-actions .dql-listen.is-on{background:color-mix(in srgb,var(--gold2,#e8d9a8) 22%,transparent)}
+.dql-actions .dql-speak.is-on{background:rgba(227,53,80,.22);border-color:rgba(227,53,80,.4)}
+.dql-nav{display:flex;gap:8px;padding:0 12px 12px;flex-shrink:0}
+.dql-nav button{flex:1}
+.dql-after{display:none;grid-template-columns:1fr 1fr;gap:8px;padding:0 12px 12px}
+.dql-after.is-on{display:grid}
+.dql-after .dql-done{background:rgba(70,180,90,.22);border-color:rgba(70,180,90,.4)}
+html[data-theme="light"] .dql-shell,html[data-theme="eisgold"] .dql-shell,html[data-theme="soft"] .dql-shell{
+  background:#fffdf8;color:#1a1612;
+}
+html[data-theme="light"] .dql-ar,html[data-theme="eisgold"] .dql-ar,html[data-theme="soft"] .dql-ar,
+html[data-theme="light"] .dql-meta b,html[data-theme="eisgold"] .dql-meta b,html[data-theme="soft"] .dql-meta b{
+  color:#1a1612;
+}
+@media(max-height:700px){
+  .dql-ar{font-size:clamp(22px,6vw,32px)}
+  .dql-actions button,.dql-nav button,.dql-after button{min-height:44px}
+}
