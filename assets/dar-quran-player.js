@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 967;
+    var PLAYER_BUILD = 968;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -669,7 +669,16 @@
       if (gen !== playGen) return;
       var name = err && err.name;
       logAudio("play rejected", { name: name, message: err && err.message, snap: snapAudio(a) });
-      if (name === "AbortError") return;
+      if (name === "AbortError") {
+        engine.abortRetries = (engine.abortRetries || 0) + 1;
+        if (engine.abortRetries <= 2) {
+          setTimeout(function () {
+            if (gen !== playGen) return;
+            runPlay(a, gen);
+          }, 180);
+        }
+        return;
+      }
       if (name === "NotAllowedError") {
         state.playing = false;
         state.error = "Tippe erneut auf Wiedergabe, um den Ton zu starten.";
@@ -688,17 +697,10 @@
     allowAdvance = false;
     engine.started = false;
     ignoreEndedUntil = Date.now() + 1200;
+    engine.abortRetries = 0;
     var wantQari = state.reciter;
     var surah = state.surah;
     var ayah = state.ayah;
-    try {
-      var pack = window.DARQuranAudioPack;
-      var recNow = reciterById(wantQari);
-      if (pack && recNow) {
-        pack.ensure(recNow.edition, surah, ayah);
-        pack.prefetchSurah(recNow.edition, surah);
-      }
-    } catch (ePack) {}
     resolvePlayable(wantQari, surah, ayah).then(function (hit) {
       if (gen !== playGen) return;
       if (!hit) {
@@ -729,6 +731,14 @@
         state.sessionActive = true;
         runPlay(a, gen);
       }
+      try {
+        var pack = window.DARQuranAudioPack;
+        var recNow = reciterById(hit.qari || wantQari);
+        if (pack && recNow) {
+          pack.ensure(recNow.edition, surah, ayah);
+          pack.prefetchSurah(recNow.edition, surah);
+        }
+      } catch (ePack) {}
       applyLearnRate();
       syncProgressSample(true);
       if (state.playing) startProgressClock();
@@ -2867,14 +2877,13 @@
     draw();
   }
   function openReciterSheet() {
+    var pack = window.DARQuranAudioPack;
     var rows = listReciters().map(function (r) {
-      var p = window.DARQuranAudioPack && window.DARQuranAudioPack.reciterProgress
-        ? window.DARQuranAudioPack.reciterProgress(r.edition)
-        : {};
-      var mark = p.complete ? "gespeichert" : (p.downloading || p.have > 0 ? "lädt" : "online");
-      return '<button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '" data-q="' + esc((r.name + " " + r.id).toLowerCase()) + '"><span class="dqp-opt-name">' + esc(r.name) + "</span><span class=\"dqp-opt-meta\">" + esc(mark) + "</span></button>";
+      var lab = pack && typeof pack.downloadLabel === "function" ? pack.downloadLabel(r.edition) : "Download";
+      var done = lab === "Gespeichert";
+      return '<div class="dqp-opt-row" data-q="' + esc((r.name + " " + r.id).toLowerCase()) + '"><button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '"><span class="dqp-opt-name">' + esc(r.name) + "</span></button><button type=\"button\" class=\"dqp-dl" + (done ? " is-done" : "") + "\" data-dqp-dl=\"" + esc(r.edition) + "\">" + esc(lab) + "</button></div>";
     }).join("");
-    openSheet("Qāriʾ wählen", '<input class="dqp-search" data-dqp-search type="search" placeholder="Rezitator suchen" autocomplete="off"><div class="dqp-opt-list">' + rows + "</div>");
+    openSheet("Qāriʾ wählen", '<p class="dqp-dl-hint">Stimme spielt sofort online. Download ist freiwillig und lädt nur den gewählten Qāriʾ.</p><input class="dqp-search" data-dqp-search type="search" placeholder="Rezitator suchen" autocomplete="off"><div class="dqp-opt-list">' + rows + "</div>");
   }
   function openMenu() {
     openSheet("Optionen", [
@@ -2942,7 +2951,7 @@
       state.resumeAt = audioEl().currentTime || 0;
       saveState();
       paintInfo();
-      loadAudio(state.playing, true);
+      loadAudio(true, true);
       return;
     }
     if (id === "m-shuffle") {
@@ -3059,6 +3068,21 @@
     var swipeY = null;
     var grabClose = false;
     function onPlayerAction(ev) {
+      var dl = ev.target && ev.target.closest ? ev.target.closest("[data-dqp-dl]") : null;
+      if (dl) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        var ed = dl.getAttribute("data-dqp-dl");
+        try {
+          if (window.DARQuranAudioPack && typeof window.DARQuranAudioPack.downloadReciter === "function") {
+            window.DARQuranAudioPack.downloadReciter(ed);
+          }
+        } catch (eDl) {}
+        dl.textContent = window.DARQuranAudioPack && typeof window.DARQuranAudioPack.downloadLabel === "function"
+          ? window.DARQuranAudioPack.downloadLabel(ed)
+          : "Lädt …";
+        return;
+      }
       var t = ev.target && ev.target.closest ? ev.target.closest("[data-dqp],[data-dqp-opt]") : null;
       if (!t) return;
       var act = t.getAttribute("data-dqp");
@@ -3110,7 +3134,7 @@
       }
       if (ev.target && ev.target.hasAttribute("data-dqp-search")) {
         var needle = String(ev.target.value || "").toLowerCase();
-        root.querySelectorAll(".dqp-opt[data-q]").forEach(function (opt) {
+        root.querySelectorAll(".dqp-opt-row[data-q], .dqp-opt[data-q]").forEach(function (opt) {
           opt.style.display = !needle || String(opt.getAttribute("data-q")).indexOf(needle) >= 0 ? "" : "none";
         });
       }
@@ -3351,6 +3375,7 @@
 
   loadState();
   ensureTadCatalog();
+  var tvAutoStarted = false;
   function resumeVisibleSession() {
     loadState({ keepLiveSession: true });
     if (LEARN_PLAYER_ONLY && !isQuranArea()) {
@@ -3361,7 +3386,12 @@
     if (isAppleTvApp()) {
       state.sessionActive = true;
       var tv = audioEl();
-      if (!audioHasSrc(tv) || tv.paused) loadAudio(true, true);
+      if (!tvAutoStarted) {
+        tvAutoStarted = true;
+        loadAudio(true, true);
+      } else if (!audioHasSrc(tv) && !state.playing) {
+        loadAudio(true, true);
+      }
       paintMini();
       return;
     }

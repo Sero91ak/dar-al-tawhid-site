@@ -2,12 +2,11 @@
 (function () {
   if (window.__darQuranAudioPackBoot) return;
   window.__darQuranAudioPackBoot = true;
-  var VER = "1058";
+  var VER = "1059";
   var DB_NAME = "dar-quran-audio-pack";
   var STORE = "mp3";
   var CACHE_NAME = "dar-quran-audio-v" + VER;
   var AYAH_TOTAL = 6236;
-  var HYDRATE_URL_CAP = 96;
   var DEFAULT_EDITION = "ar.alafasy";
   var SEED_SURAHS = [1, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114];
   var FALLBACK_RECITERS = [
@@ -33,10 +32,10 @@
   ];
   var reciters = FALLBACK_RECITERS.slice();
   var surahs = [];
-  var localSrc = Object.create(null);
+  var cachedKeys = Object.create(null);
   var pending = Object.create(null);
   var inflight = 0;
-  var MAX_INFLIGHT = 3;
+  var MAX_INFLIGHT = 2;
   var queue = [];
   var seeded = false;
   var cancelled = Object.create(null);
@@ -98,8 +97,7 @@
     return out;
   }
   function url(edition, ayah) {
-    var k = key(edition, ayah);
-    return localSrc[k] || proxyUrl(edition, ayah);
+    return proxyUrl(edition, ayah);
   }
   function isTvPlayback() {
     try {
@@ -109,13 +107,10 @@
     } catch (eTv) {}
     return false;
   }
-  function rememberBlob(edition, ayah, blob) {
-    if (!blob || !blob.size) return;
+  function markHave(edition, ayah) {
     var k = key(edition, ayah);
-    if (localSrc[k]) {
-      try { URL.revokeObjectURL(localSrc[k]); } catch (e) {}
-    }
-    localSrc[k] = URL.createObjectURL(blob);
+    if (cachedKeys[k]) return;
+    cachedKeys[k] = true;
     status.have += 1;
   }
   async function hydrate() {
@@ -124,12 +119,11 @@
       var tx = db.transaction(STORE, "readonly");
       var store = tx.objectStore(STORE);
       await new Promise(function (done) {
-        var made = 0;
         var timed = false;
         var timer = setTimeout(function () {
           timed = true;
           done();
-        }, isTvPlayback() ? 900 : 1800);
+        }, isTvPlayback() ? 400 : 1200);
         var req = store.openCursor();
         req.onsuccess = function () {
           if (timed) return;
@@ -140,12 +134,7 @@
             return;
           }
           var parts = String(cur.key).split(":");
-          if (cur.value instanceof Blob) {
-            if (made < HYDRATE_URL_CAP) {
-              rememberBlob(parts[0], Number(parts[1]), cur.value);
-              made += 1;
-            } else status.have += 1;
-          }
+          if (cur.value instanceof Blob && cur.value.size > 800) markHave(parts[0], Number(parts[1]));
           cur.continue();
         };
         req.onerror = function () {
@@ -158,7 +147,7 @@
   function enqueue(edition, ayah, urgent) {
     var k = key(edition, ayah);
     if (cancelled[edition]) return;
-    if (localSrc[k] || pending[k]) return;
+    if (cachedKeys[k] || pending[k]) return;
     pending[k] = true;
     if (urgent) queue.unshift({ edition: edition, ayah: ayah });
     else queue.push({ edition: edition, ayah: ayah });
@@ -190,7 +179,7 @@
         pending[k] = false;
         return;
       }
-      rememberBlob(edition, ayah, blob);
+      markHave(edition, ayah);
       try {
         var db = await openDb();
         db.transaction(STORE, "readwrite").objectStore(STORE).put(blob, k);
@@ -238,17 +227,12 @@
     if (seeded) return;
     seeded = true;
     status.seed = true;
-    var ayahs = seedAyahs();
-    var first = reciters.filter(function (r) { return r.edition === DEFAULT_EDITION; });
-    var rest = reciters.filter(function (r) { return r.edition !== DEFAULT_EDITION; });
-    first.concat(rest).forEach(function (r, idx) {
-      ayahs.forEach(function (n) { enqueue(r.edition, n, idx === 0); });
-    });
+    seedAyahs().forEach(function (n) { enqueue(DEFAULT_EDITION, n, true); });
   }
   function haveCount(edition) {
     var n = 0;
     var prefix = String(edition || "") + ":";
-    Object.keys(localSrc).forEach(function (k) {
+    Object.keys(cachedKeys).forEach(function (k) {
       if (k.indexOf(prefix) === 0) n += 1;
     });
     return n;
@@ -296,13 +280,10 @@
     if (!ed) return;
     cancelEdition(ed);
     var prefix = ed + ":";
-    Object.keys(localSrc).forEach(function (k) {
-      if (k.indexOf(prefix) === 0) {
-        try { URL.revokeObjectURL(localSrc[k]); } catch (eRev) {}
-        delete localSrc[k];
-      }
+    Object.keys(cachedKeys).forEach(function (k) {
+      if (k.indexOf(prefix) === 0) delete cachedKeys[k];
     });
-    status.have = Object.keys(localSrc).length;
+    status.have = Object.keys(cachedKeys).length;
     try {
       var db = await openDb();
       var store = db.transaction(STORE, "readwrite").objectStore(STORE);
