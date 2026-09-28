@@ -174,12 +174,61 @@ async function fetchVersionBuild(base) {
     const kidsPub = await waitKids("public", publicBase);
     const kidsDev = await waitKids("workers.dev", workersBase);
     if (!kidsPub || !kidsDev) {
-      console.warn(
-        `Kids Test Cache noch alt (expect ${kidsExpect}). Origin ist Dar-Test-Worker; kein Besucher-Build. public=${kidsPub} workers.dev=${kidsDev}`
+      throw new Error(
+        `Kids Test Cache noch alt (expect ${kidsExpect}). public=${kidsPub} workers.dev=${kidsDev}`
       );
-    } else {
-      console.log(`Kids Test live OK — ${kidsExpect}`);
     }
+
+    async function verifyKidsCinema(label, base) {
+      const startUrl = `${base}/kids/start?verify=${Date.now()}`;
+      const startRes = await fetch(startUrl, {
+        cache: "no-store",
+        headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
+      });
+      const html = await startRes.text();
+      const htmlOk =
+        startRes.status === 200 &&
+        html.includes("kids-launch-v77") &&
+        html.includes("/test/kids/assets/kids-cinema/intro-v74.mp4") &&
+        !html.includes("kids-launch-v77-seen");
+      console.log(
+        `${label} kids cinema HTML: ${startUrl} -> ${startRes.status} ok=${htmlOk}`
+      );
+      if (!htmlOk) return false;
+
+      const videoUrl = `${base}/kids/assets/kids-cinema/intro-v74.mp4?verify=${Date.now()}`;
+      const videoRes = await fetch(videoUrl, {
+        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-cache",
+          Pragma: "no-cache",
+          Range: "bytes=0-2047"
+        }
+      });
+      const contentType = String(videoRes.headers.get("content-type") || "").toLowerCase();
+      const buf = new Uint8Array(await videoRes.arrayBuffer());
+      const hasFtyp =
+        buf.length >= 12 &&
+        String.fromCharCode(...buf.slice(4, 8)) === "ftyp";
+      const videoOk =
+        (videoRes.status === 200 || videoRes.status === 206) &&
+        contentType.includes("video/mp4") &&
+        hasFtyp;
+      console.log(
+        `${label} kids cinema MP4: ${videoUrl} -> ${videoRes.status} type=${contentType || "?"} bytes=${buf.length} ftyp=${hasFtyp} ok=${videoOk}`
+      );
+      return videoOk;
+    }
+
+    const cinemaPub = await verifyKidsCinema("public", publicBase);
+    const cinemaDev = await verifyKidsCinema("workers.dev", workersBase);
+    if (!cinemaPub || !cinemaDev) {
+      throw new Error(
+        `Kids Cinema Intro fehlt/ist nicht abspielbar. public=${cinemaPub} workers.dev=${cinemaDev}`
+      );
+    }
+
+    console.log(`Kids Test live OK — ${kidsExpect} + Cinema Intro MP4`);
   }
 })().catch((error) => {
   console.error(error.message || error);
