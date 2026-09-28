@@ -1,0 +1,43 @@
+name: Extract Kids Cinema Fallback Frames
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/extract-kids-cinema-fallback.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg >/dev/null
+      - name: Extract clean mobile fallback frames
+        run: |
+          set -euo pipefail
+          mkdir -p test/kids/assets/kids-cinema/fallback
+          ffmpeg -hide_banner -y -ss 0.10 -i test/kids/assets/kids-cinema/intro-final.mp4 -frames:v 1 -vf "scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280" -q:v 5 test/kids/assets/kids-cinema/fallback/scene-1.jpg
+          ffmpeg -hide_banner -y -ss 3.35 -i test/kids/assets/kids-cinema/intro-final.mp4 -frames:v 1 -vf "scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280" -q:v 5 test/kids/assets/kids-cinema/fallback/scene-2.jpg
+          ffmpeg -hide_banner -y -ss 6.45 -i test/kids/assets/kids-cinema/intro-final.mp4 -frames:v 1 -vf "scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280" -q:v 5 test/kids/assets/kids-cinema/fallback/scene-3.jpg
+          ls -lh test/kids/assets/kids-cinema/fallback
+      - name: Commit fallback frames
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add test/kids/assets/kids-cinema/fallback
+          if git diff --cached --quiet; then
+            echo "Fallback frames already current."
+            exit 0
+          fi
+          git commit -m "Kids V0.66: add instant cinema fallback frames"
+          git push origin HEAD:main
