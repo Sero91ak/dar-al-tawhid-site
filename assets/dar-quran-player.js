@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 972;
+    var PLAYER_BUILD = 973;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -93,6 +93,7 @@
   var sleepUntil = 0;
   var sleepWatch = 0;
   var sleepPicked = 15;
+  var sleepMode = "off";
   var leaveLock = false;
   var fullUiWanted = false;
   var dismissUntil = 0;
@@ -396,7 +397,6 @@
       playing: !!state.playing,
       sessionActive: LEARN_PLAYER_ONLY ? false : !!state.sessionActive,
       lastSurahs: lastSurahs.slice(-12),
-      sleepUntil: sleepUntil > Date.now() ? sleepUntil : 0,
       sleepPicked: sleepPicked,
       timestamp: Date.now()
     };
@@ -497,9 +497,6 @@
     if (!LEARN_PLAYER_ONLY && raw.sessionActive === true) state.sessionActive = true;
     if (Array.isArray(raw.lastSurahs)) lastSurahs = raw.lastSurahs.map(Number).filter(Boolean);
     if (Number(raw.sleepPicked) >= 1 && Number(raw.sleepPicked) <= 60) sleepPicked = Math.round(Number(raw.sleepPicked));
-    if (Number(raw.sleepUntil) > Date.now() + 400) {
-      armSleepTimer(Number(raw.sleepUntil) - Date.now());
-    }
   }
   function applyLearnBlob(raw) {
     if (!raw || typeof raw !== "object") return false;
@@ -583,8 +580,16 @@
     a.addEventListener("error", onAudioError);
   }
   function audioEl() {
-    var a = document.getElementById("darQuranPlayerAudio");
+    var nodes = document.querySelectorAll("audio#darQuranPlayerAudio");
+    var a = nodes[0] || null;
+    var i;
+    for (i = 1; i < nodes.length; i++) {
+      try { nodes[i].pause(); } catch (eDup) {}
+      try { nodes[i].removeAttribute("src"); nodes[i].load(); } catch (eClr) {}
+      try { nodes[i].remove(); } catch (eRm) {}
+    }
     if (a) {
+      if (a.id !== "darQuranPlayerAudio") a.id = "darQuranPlayerAudio";
       bindAudioListeners(a);
       return a;
     }
@@ -703,17 +708,20 @@
     var gen = ++playGen;
     urlIndex = 0;
     state.error = "";
+    state.loading = true;
     trackHeard = false;
     allowAdvance = false;
     engine.started = false;
     ignoreEndedUntil = Date.now() + 1200;
     engine.abortRetries = 0;
+    try { audioEl().pause(); } catch (eStopOld) {}
     var wantQari = state.reciter;
     var surah = state.surah;
     var ayah = state.ayah;
     resolvePlayable(wantQari, surah, ayah).then(function (hit) {
       if (gen !== playGen) return;
       if (!hit) {
+        state.loading = false;
         missingAudioHalt(wantQari, surah, ayah, "");
         return;
       }
@@ -752,10 +760,14 @@
         seekStart();
       });
       seekStart();
+      state.loading = false;
       if (autoplay) {
         state.playing = true;
         state.sessionActive = true;
         runPlay(a, gen);
+      } else {
+        state.playing = false;
+        paintChrome();
       }
       try {
         var pack = window.DARQuranAudioPack;
@@ -840,7 +852,7 @@
     }
   }
   function onPlayEv() {
-    if (!isAppleTvApp() && !isQuranArea()) {
+    if (!isAppleTvApp() && !isQuranArea() && !isFullPlayerRoute()) {
       try { audioEl().pause(); } catch (ePlayLeave) {}
       persistCurrent("blocked-play-off-quran");
       state.playing = false;
@@ -922,6 +934,14 @@
       state.playing = false;
       paintChrome();
       paintMini();
+      return;
+    }
+    if (sleepMode === "ayah") {
+      fireSleepTimer();
+      return;
+    }
+    if (sleepMode === "surah" && state.ayah >= ayahCount(state.surah)) {
+      fireSleepTimer();
       return;
     }
     if (state.repeat === "ayah") {
@@ -1230,7 +1250,7 @@
       volmax: '<path d="M4 10h2.4L10 7.2v9.6L6.4 14H4z" fill="currentColor"/><path d="M13 9.2a3.4 3.4 0 0 1 0 5.6M15.4 7.2a6 6 0 0 1 0 9.6" fill="none" stroke="currentColor" stroke-width="1.5"/>',
       shuffle: '<path d="M4 7h4l3 5 3-5h6M4 17h4l3-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
       repeat: '<path d="M7 8h9l-2-2M17 16H8l2 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-      stop: '<rect x="6.5" y="6.5" width="11" height="11" rx="1.8" fill="currentColor"/>'
+      skip: '<path d="M7 12l8-5.5v11z" fill="currentColor"/>',
     };
     return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (p[name] || "") + "</svg>";
   }
@@ -1255,7 +1275,8 @@
         "</div>" +
         '<div class="dqp-foot">' +
         '<div class="dqp-meta">' +
-          '<button type="button" class="dqp-title" data-dqp="pick-ayah">—</button>' +
+          '<button type="button" class="dqp-title" data-dqp="pick-surah">—</button>' +
+          '<button type="button" class="dqp-ayah-chip" data-dqp="pick-ayah">Āyah 1</button>' +
           '<button type="button" class="dqp-more" data-dqp="menu" aria-label="Optionen">' + icon("more") + "</button>" +
           '<button type="button" class="dqp-artist" data-dqp="pick-reciter">—</button>' +
         "</div>" +
@@ -1268,8 +1289,10 @@
           '<div class="dqp-times"><span data-dqp-cur>––:––</span><span data-dqp-dur>––:––</span></div>' +
         "</section>" +
         '<div class="dqp-controls">' +
-          '<button class="dqp-skip" type="button" data-dqp="prev" aria-label="Vorige Āyah">' + icon("prev") + "</button>" +
+          '<button class="dqp-skip" type="button" data-dqp="prev" aria-label="Vorherige Āyah">' + icon("prev") + "</button>" +
+          '<button class="dqp-skip dqp-skip-sec" type="button" data-dqp="back15" aria-label="15 Sekunden zurück">−15</button>' +
           '<button class="dqp-play" type="button" data-dqp="play" aria-label="Wiedergabe">' + icon("play") + "</button>" +
+          '<button class="dqp-skip dqp-skip-sec" type="button" data-dqp="fwd15" aria-label="15 Sekunden vor">+15</button>' +
           '<button class="dqp-skip" type="button" data-dqp="next" aria-label="Nächste Āyah">' + icon("next") + "</button>" +
         "</div>" +
         '<div class="dqp-volume">' +
@@ -1564,10 +1587,12 @@
     if (!root) return;
     var m = meta || {};
     var lat = root.querySelector(".dqp-title");
+    var ay = root.querySelector(".dqp-ayah-chip");
     var q = root.querySelector(".dqp-artist");
     if (lat) lat.textContent = m.transliteration
-      ? ("Sūrah " + m.transliteration + " · Āyah " + state.ayah)
-      : ("Āyah " + state.ayah);
+      ? ("Sūrah " + m.transliteration)
+      : ("Sūrah " + state.surah);
+    if (ay) ay.textContent = "Āyah " + state.ayah;
     if (q) q.textContent = reciterById(state.reciter).name;
     syncMediaSession();
   }
@@ -1897,8 +1922,9 @@
   }
   function audioHasSrc(a) {
     if (!a) return false;
-    var src = String(a.currentSrc || a.getAttribute("src") || "");
-    return src && src.indexOf("http") === 0;
+    var src = String(a.currentSrc || a.getAttribute("src") || "").trim();
+    if (!src || src === "about:blank") return false;
+    return true;
   }
   function srcMatchesAyah(src, surah, ayah) {
     src = String(src || "");
@@ -1909,6 +1935,24 @@
     if (g && src.indexOf("/" + g + ".mp3") >= 0) return true;
     return false;
   }
+  function lockBackground() {
+    var view = document.getElementById("appView");
+    var app = document.querySelector(".app");
+    [view, app].forEach(function (el) {
+      if (!el) return;
+      try { el.setAttribute("inert", ""); } catch (eIn) {}
+      el.setAttribute("aria-hidden", "true");
+    });
+  }
+  function unlockBackground() {
+    var view = document.getElementById("appView");
+    var app = document.querySelector(".app");
+    [view, app].forEach(function (el) {
+      if (!el) return;
+      try { el.removeAttribute("inert"); } catch (eUn) {}
+      el.removeAttribute("aria-hidden");
+    });
+  }
   function hideFullPlayerUi() {
     var root = playerRoot();
     if (root) {
@@ -1918,6 +1962,7 @@
       try { root.setAttribute("inert", ""); } catch (e) {}
       try { if (document.activeElement && root.contains(document.activeElement)) document.activeElement.blur(); } catch (e2) {}
     }
+    if (!isFullPlayerRoute()) unlockBackground();
   }
   function dismissFullPlayer() {
     fullUiWanted = false;
@@ -1949,7 +1994,7 @@
     return bodyOne || visible || nodes[0];
   }
   function ensureFreshShell(root) {
-    if (root && root.querySelector && root.querySelector(".dqp-back") && root.querySelector(".dqp-foot") && root.querySelector("[data-dqp-sleep-live]") && root.querySelector("[data-dqp=pick-ayah]")) return root;
+    if (root && root.querySelector && root.querySelector(".dqp-back") && root.querySelector(".dqp-foot") && root.querySelector("[data-dqp-sleep-live]") && root.querySelector("[data-dqp=pick-ayah]") && root.querySelector("[data-dqp=back15]") && root.querySelector(".dqp-ayah-chip")) return root;
     var wrap = document.createElement("div");
     wrap.innerHTML = renderShell();
     var neu = wrap.firstElementChild;
@@ -2038,6 +2083,8 @@
     return Math.max(0, sleepUntil - Date.now());
   }
   function sleepLabel() {
+    if (sleepMode === "ayah") return "Sleep-Timer · Ende der Āyah";
+    if (sleepMode === "surah") return "Sleep-Timer · Ende der Sūrah";
     var left = sleepLeftMs();
     if (!left) return "Sleep-Timer";
     var s = Math.ceil(left / 1000);
@@ -2052,11 +2099,11 @@
     return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
   }
   function paintSleepLive() {
-    var on = sleepLeftMs() > 0;
+    var on = sleepLeftMs() > 0 || sleepMode === "ayah" || sleepMode === "surah";
     var live = document.querySelector("[data-dqp-sleep-live]");
     if (live) {
       live.hidden = !on;
-      live.textContent = on ? sleepClock() : "";
+      live.textContent = sleepMode === "ayah" ? "Āyah" : (sleepMode === "surah" ? "Sūrah" : (on ? sleepClock() : ""));
       live.setAttribute("aria-hidden", on ? "false" : "true");
       live.classList.toggle("is-on", on);
     }
@@ -2070,8 +2117,8 @@
     var sl = box.querySelector("[data-dqp=sleep-mins]");
     var nEl = box.querySelector("[data-dqp-sleep-n]");
     var shown = on ? Math.max(1, Math.ceil(sleepLeftMs() / 60000)) : sleepPicked;
-    if (clock) clock.textContent = on ? sleepClock() : "— —";
-    if (stateEl) stateEl.textContent = on ? "Aktiv · zählt herunter" : "Bereit";
+    if (clock) clock.textContent = sleepMode === "ayah" ? "Āyah" : (sleepMode === "surah" ? "Sūrah" : (sleepLeftMs() > 0 ? sleepClock() : "— —"));
+    if (stateEl) stateEl.textContent = sleepMode === "ayah" ? "Stoppt am Ende der Āyah" : (sleepMode === "surah" ? "Stoppt am Ende der Sūrah" : (sleepLeftMs() > 0 ? "Aktiv · zählt herunter" : "Bereit"));
     if (nEl) nEl.textContent = String(shown);
     if (sl && document.activeElement !== sl) {
       sl.value = String(shown);
@@ -2080,11 +2127,14 @@
     box.querySelectorAll("[data-dqp-opt^='sleep-']").forEach(function (b) {
       var id = String(b.getAttribute("data-dqp-opt") || "");
       if (id === "sleep-off") return;
+      if (id === "sleep-ayah") { b.classList.toggle("is-on", sleepMode === "ayah"); return; }
+      if (id === "sleep-surah") { b.classList.toggle("is-on", sleepMode === "surah"); return; }
       var mins = Number(id.slice(6));
-      b.classList.toggle("is-on", on ? Math.ceil(sleepLeftMs() / 60000) === mins : mins === sleepPicked);
+      b.classList.toggle("is-on", sleepMode === "mins" && sleepLeftMs() > 0 ? Math.ceil(sleepLeftMs() / 60000) === mins : mins === sleepPicked && sleepMode !== "ayah" && sleepMode !== "surah");
     });
   }
   function clearSleepTimer() {
+    sleepMode = "off";
     sleepUntil = 0;
     if (sleepWatch) {
       clearInterval(sleepWatch);
@@ -2094,7 +2144,7 @@
     try { saveState(); } catch (eSl2) {}
   }
   function fireSleepTimer() {
-    if (!sleepUntil) return;
+    sleepMode = "off";
     sleepUntil = 0;
     if (sleepWatch) {
       clearInterval(sleepWatch);
@@ -2110,11 +2160,13 @@
       sleepWatch = 0;
     }
     if (ms < 1000) {
+      sleepMode = "off";
       sleepUntil = 0;
       paintSleepLive();
       try { saveState(); } catch (eSl0) {}
       return;
     }
+    sleepMode = "mins";
     sleepUntil = Date.now() + ms;
     try { saveState(); } catch (eSl1) {}
     sleepWatch = setInterval(function () {
@@ -2133,6 +2185,15 @@
     mins = Math.max(1, Math.min(60, Math.round(Number(mins) || 0)));
     sleepPicked = mins;
     armSleepTimer(mins * 60000);
+  }
+  function setSleepEndMode(mode) {
+    if (sleepWatch) {
+      clearInterval(sleepWatch);
+      sleepWatch = 0;
+    }
+    sleepUntil = 0;
+    sleepMode = mode === "surah" ? "surah" : "ayah";
+    paintSleepLive();
   }
   function slotEl() {
     var s = document.getElementById("darQuranPlayerSlot");
@@ -2340,6 +2401,7 @@
     qlog("[QURAN_STATE] restore global player state", opts);
     var snap = readGlobal();
     applyGlobalBlob(snap);
+    exitLearnMode(true);
     state.learnMode = false;
     writeMode("global-quran");
     wantFullPlayer();
@@ -2389,7 +2451,7 @@
   }
   function togglePlay(forcePlay) {
     if (forcePlay === true) setLearnUiClosed(false);
-    if (!isAppleTvApp() && !isQuranArea()) {
+    if (!isAppleTvApp() && !isQuranArea() && !isFullPlayerRoute()) {
       cleanupLearningPlayerOnRouteLeave();
       return;
     }
@@ -2794,8 +2856,10 @@
     return FALLBACK_QARI;
   }
   async function gotoAyah(ayah, autoplay) {
-    state.ayah = Math.max(1, Math.min(totalAyat() || 286, Number(ayah) || 1));
+    var max = ayahCount(state.surah) || totalAyat() || 1;
+    state.ayah = Math.max(1, Math.min(max, Number(ayah) || 1));
     state.resumeAt = 0;
+    state.current = 0;
     writeHash();
     saveState();
     paintInfo();
@@ -2808,13 +2872,18 @@
     });
   }
   async function gotoSurah(id, ayah, autoplay, keepReciter) {
+    try { audioEl().pause(); } catch (eGs) {}
     var next = Math.max(1, Math.min(114, Number(id) || 1));
     rememberSurah(next);
     state.surah = next;
-    state.ayah = Number(ayah) || 1;
+    var max = ayahCount(next) || 1;
+    state.ayah = Math.max(1, Math.min(max, Number(ayah) || 1));
     state.resumeAt = 0;
+    state.current = 0;
     if (!keepReciter && (state.shuffle === "reciter" || state.shuffle === "both")) state.reciter = pickRandomReciter();
     writeHash();
+    paintInfo();
+    paintAyah(false);
     loadAudio(!!autoplay || state.playing, false);
     ensureData().then(function () {
       paintInfo();
@@ -2860,13 +2929,30 @@
     logAudio("previous clicked", { surah: state.surah, ayah: state.ayah, qari: state.reciter });
     if (state.ayah > 1) return gotoAyah(state.ayah - 1, state.playing);
     if (state.surah > 1) {
-      await gotoSurah(state.surah - 1, 1, state.playing, true);
-      return gotoAyah(totalAyat(), state.playing);
+      var prevS = state.surah - 1;
+      var last = ayahCount(prevS) || 1;
+      return gotoSurah(prevS, last, state.playing, true);
     }
+    return gotoAyah(1, state.playing);
   }
   function skip(d) {
     var a = audioEl();
-    a.currentTime = Math.max(0, (a.currentTime || 0) + d);
+    var dur = audioDuration(a);
+    var now = Number(a.currentTime) || 0;
+    var t = now + Number(d) || 0;
+    if (t < 0) t = 0;
+    if (dur > 0 && t >= dur - 0.05) {
+      if (Number(d) > 0) {
+        nextAyah(!!state.playing);
+        return;
+      }
+      t = dur;
+    }
+    try { a.currentTime = t; } catch (eSk) {}
+    state.current = t;
+    state.resumeAt = t;
+    syncProgressSample(true);
+    paintProgress();
   }
   function clipTxt(s, n) {
     s = String(s || "").replace(/\s+/g, " ").trim();
@@ -2961,11 +3047,13 @@
       '<div class="dqp-sleep-clock" data-dqp-sleep-clock>' + (sleepLeftMs() > 0 ? sleepClock() : "— —") + "</div>",
       '<div class="dqp-sleep-state" data-dqp-sleep-state>' + (sleepLeftMs() > 0 ? "Aktiv · zählt herunter" : "Bereit") + "</div>",
       '<div class="dqp-sleep-presets">',
-      [5, 15, 30, 50].map(function (m) {
-        var active = sleepLeftMs() > 0 ? Math.ceil(sleepLeftMs() / 60000) === m : m === sleepPicked;
+      [5, 10, 15, 30].map(function (m) {
+        var active = sleepMode === "mins" && sleepLeftMs() > 0 ? Math.ceil(sleepLeftMs() / 60000) === m : m === sleepPicked && sleepMode !== "ayah" && sleepMode !== "surah";
         return '<button type="button" class="dqp-opt' + (active ? " is-on" : "") + '" data-dqp-opt="sleep-' + m + '">' + m + " Min</button>";
       }).join(""),
       "</div>",
+      '<button type="button" class="dqp-opt' + (sleepMode === "ayah" ? " is-on" : "") + '" data-dqp-opt="sleep-ayah">Ende der Āyah</button>',
+      '<button type="button" class="dqp-opt' + (sleepMode === "surah" ? " is-on" : "") + '" data-dqp-opt="sleep-surah">Ende der Sūrah</button>',
       '<div class="dqp-sleep-slide">',
       '<div class="dqp-sleep-slide-lab"><span>1 Min</span><span><b data-dqp-sleep-n>' + shown + "</b> Min</span><span>60 Min</span></div>",
       '<input class="dqp-sleep-range" data-dqp="sleep-mins" type="range" min="1" max="60" step="1" value="' + shown + '" aria-label="Minuten">',
@@ -2988,11 +3076,15 @@
     }
     if (id.indexOf("r-") === 0) {
       closeSheet();
+      var aRec = audioEl();
+      var wasPlaying = !!(state.playing && aRec && !aRec.paused);
+      try { aRec.pause(); } catch (eRec) {}
       state.reciter = id.slice(2);
-      state.resumeAt = audioEl().currentTime || 0;
+      state.resumeAt = 0;
+      state.current = 0;
       saveState();
       paintInfo();
-      loadAudio(true, true);
+      loadAudio(wasPlaying, false);
       return;
     }
     if (id === "m-shuffle") {
@@ -3045,6 +3137,8 @@
     if (id === "m-scale-plus") { setTextScale(state.textScale + 1); return; }
     if (id === "m-sleep") { openSleepSheet(); return; }
     if (id === "sleep-off") { clearSleepTimer(); return; }
+    if (id === "sleep-ayah") { setSleepEndMode("ayah"); return; }
+    if (id === "sleep-surah") { setSleepEndMode("surah"); return; }
     if (id.indexOf("sleep-") === 0) {
       setSleepMinutes(Number(id.slice(6)));
       return;
@@ -3063,6 +3157,7 @@
     root.hidden = false;
     root.style.display = "";
     try { root.removeAttribute("inert"); } catch (e) {}
+    lockBackground();
     try {
       var extras = document.querySelectorAll("#darQuranPlayer");
       for (var xi = 0; xi < extras.length; xi++) {
@@ -3185,8 +3280,11 @@
       sl.addEventListener("input", function () {
         seekLock = true;
         var a = audioEl();
-        if (a.duration) a.currentTime = (Number(sl.value) / 1000) * a.duration;
+        var d = audioDuration(a);
+        if (d > 0) a.currentTime = (Number(sl.value) / 1000) * d;
         state.current = a.currentTime || 0;
+        state.resumeAt = state.current;
+        syncProgressSample(true);
         paintProgress();
       });
       sl.addEventListener("change", function () { seekLock = false; saveState(); });
