@@ -1,0 +1,370 @@
+/* DĀR AL TAWḤĪD · TEST APP
+   HOME THEME CONSISTENCY v1121
+   Eine Startseiten-Geometrie, aber echte Farbwelt je Erscheinungsbild.
+   Keine zusätzliche horizontale Wissensleiste. */
+
+html[data-theme] body.is-home-route{
+  --hc-text:#F6EDD2;
+  --hc-muted:#B8AD91;
+  --hc-accent:#EFD78E;
+  --hc-border:rgba(210,177,91,.30);
+  --hc-border-soft:rgba(210,177,91,.16);
+  --hc-glass:rgba(20,18,14,.24);
+  --hc-glass-strong:rgba(20,18,14,.34);
+  --hc-glass-soft:rgba(20,18,14,.14);
+  --hc-wash-top:rgba(5,7,6,.34);
+  --hc-wash-bottom:rgba(5,7,6,.60);
+}
+
+/* Hell */
+html[data-theme="light"] body.is-home-route{
+  --hc-text:#2B241D;
+  --hc-muted:#51483D;
+  --hc-accent:#8A6530;
+  --hc-border:rgba(155,122,60,.30);
+  --hc-border-soft:rgba(155,122,60,.17);
+  --hc-glass:rgba(255,255,255,.55);
+  --hc-glass-strong:rgba(255,255,255,.68);
+  --hc-glass-soft:rgba(255,255,255,.40);
+  --hc-wash-top:rgba(242,238,227,.60);
+  --hc-wash-bottom:rgba(242,238,227,.78);
+}
+
+/* Sanft */
+html[data-theme="soft"] body.is-home-route{
+  --hc-text:#291D24;
+  --hc-muted:#5D4C54;
+  --hc-accent:#7D5368;
+  --hc-border:rgba(116,76,98,.30);
+  --hc-border-soft:rgba(116,76,98,.16);
+  --hc-glass:rgba(255,248,241,.54);
+  --hc-glass-strong:rgba(255,248,241,.66);
+  --hc-glass-soft:rgba(255,248,241,.38);
+  --hc-wash-top:rgba(239,226,220,.60);
+  --hc-wash-bottom:rgba(229,210,204,.76);
+}
+
+/* Royal Nachtblau */
+html[data-theme="royal"] body.is-home-route{
+  --hc-text:#F8ECD0;
+  --hc-muted:#C7BB9F;
+  --hc-accent:#F1D992;
+  --hc-border:rgba(239,215,142,.34);
+  --hc-border-soft:rgba(239,215,142,.17);
+  --hc-glass:rgba(16,39,70,.24);
+  --hc-glass-strong:rgba(16,39,70,.34);
+  --hc-glass-soft:rgba(16,39,70,.15);
+  --hc-wash-top:rgba(6,18,37,.34);
+  --hc-wash-bottom:rgba(4,16,35,.60);
+}
+
+/* Bordeaux Royal */
+html[data-theme="bordeaux"] body.is-home-route{
+  --hc-text:#F5EBDD;
+  --hc-muted:rgba(245,235,215,.86);
+  --hc-accent:#E8DCC4;
+  --hc-border:rgba(214,190,132,.30);
+  --hc-border-soft:rgba(214,190,132,.15);
+  --hc-glass:rgba(91,35,42,.19);
+  --hc-glass-strong:rgba(91,35,42,.27);
+  --hc-glass-soft:rgba(91,35,42,.11);
+  --hc-wash-top:rgba(20,11,12,.32);
+  --hc-wash-bottom:rgba(20,11,12,.55);
+}
+
+/* Dār al-Layl */
+html[data-theme="dar-al-layl"] body.is-home-route{
+  --hc-text:#F1EDE3;
+  --hc-muted:#B8BCB5;
+  --hc-accent:#D8C18B;
+  --hc-border:rgba(168,139,79,.18);
+  --hc-border-soft:rgba(168,139,79,.09);
+  --hc-glass:rgba(16,20,17,.26);
+  --hc-glass-strong:rgba(16,20,17,.36);
+  --hc-glass-soft:rgba(16,20,17,.15);
+  --hc-wash-top:rgba(3,4,3,.38);
+  --hc-wash-bottom:rgba(3,4,3,.64);
+}
+
+/* Eisgold */
+html[data-theme="eisgold"] body.is-home-route{
+  --hc-text:#111111;
+  --hc-muted:#1A1A1A;
+  --hc-accent:#A9852F;
+  --hc-border:rgba(200,169,90,.42);
+  --hc-border-soft:rgba(200,169,90,.22);
+  --hc-glass:rgba(255,255,255,.60);
+  --hc-glass-strong:rgba(255,255,255,.74);
+  --hc-glass-soft:rgba(255,255,255,.44);
+  --hc-wash-top:rgba(252,254,255,.58);
+  --hc-wash-bottom:rgba(232,243,251,.78);
+}
+
+/* Aurora / grün-dunkel — Legacy wird weiterhin sauber unterstützt. */
+html[data-theme="aurora"] body.is-home-route{
+  --hc-text:#F6F1E3;
+  --hc-muted:rgba(246,241,227,.76);
+  --hc-accent:#E7D59D;
+  --hc-border:rgba(216,190,122,.28);
+  --hc-border-soft:rgba(216,190,122,.14);
+  --hc-glass:rgba(24,66,56,.22);
+  --hc-glass-strong:rgba(24,66,56,.31);
+  --hc-glass-soft:rgba(24,66,56,.13);
+  --hc-wash-top:rgba(5,8,6,.34);
+  --hc-wash-bottom:rgba(5,8,6,.58);
+}
+
+/* Salbei / Elfenbein ist eine Variante von light. */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route{
+  --hc-text:#17211B;
+  --hc-muted:#536057;
+  --hc-accent:#3F5D4B;
+  --hc-border:rgba(94,116,101,.24);
+  --hc-border-soft:rgba(94,116,101,.14);
+  --hc-glass:rgba(255,255,255,.57);
+  --hc-glass-strong:rgba(255,255,255,.70);
+  --hc-glass-soft:rgba(249,250,246,.42);
+  --hc-wash-top:rgba(244,246,240,.58);
+  --hc-wash-bottom:rgba(238,242,235,.78);
+}
+
+/* Hintergrundmotiv wird in jeder Farbwelt sichtbar, aber passend getönt. */
+html[data-theme] body.is-home-route{
+  color:var(--hc-text)!important;
+  background:
+    linear-gradient(180deg,var(--hc-wash-top) 0%,var(--hc-wash-bottom) 100%),
+    url("/assets/feed-backgrounds/auto/mosque/bg-pro-mosque-09-mobile.webp") 50% 18%/cover scroll no-repeat!important;
+  background-color:var(--bg)!important;
+}
+
+html[data-theme] body.is-home-route::before{
+  opacity:.025!important;
+  background:none!important;
+  filter:none!important;
+}
+
+/* Keine deckende Schale mehr über dem Motiv. */
+html[data-theme] body.is-home-route :is(
+  #appRoot,
+  #appShell,
+  .app,
+  #appView,
+  #appView.view,
+  .view,
+  .top-shell,
+  .top-shell.theme-hero-shell,
+  .header.theme-hero-surface
+){
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* Die vom Nutzer als unnötig markierte horizontale Wischleiste ist komplett aus. */
+html[data-theme] body.is-home-route #appView .home-premium-access__rail{
+  display:none!important;
+  visibility:hidden!important;
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+
+/* Einheitliche Glasmaterialien. */
+html[data-theme] body.is-home-route :is(
+  .header-prayer-hub__main,
+  .header-prayer-hub__status,
+  #appView .home-v380-quran-hero,
+  #appView .home-tawhid-entry,
+  #appView .home-premium-access-card,
+  #appView .home-discover-pdf-card,
+  #appView .home-v380-post-preview,
+  #appView .home-v380-lib-card,
+  #appView .home-v380-popular-row,
+  #appView .home-v380-search-field,
+  #appView .direct-pick-well
+){
+  border-color:var(--hc-border)!important;
+  color:var(--hc-text)!important;
+  -webkit-backdrop-filter:blur(11px) saturate(1.03)!important;
+  backdrop-filter:blur(11px) saturate(1.03)!important;
+}
+
+html[data-theme] body.is-home-route :is(
+  .header-prayer-hub__main,
+  #appView .home-v380-quran-hero,
+  #appView .home-tawhid-entry
+){
+  background:var(--hc-glass-strong)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.11),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+html[data-theme] body.is-home-route :is(
+  .header-prayer-hub__status,
+  #appView .home-premium-access-card,
+  #appView .home-discover-pdf-card,
+  #appView .home-v380-post-preview,
+  #appView .home-v380-lib-card,
+  #appView .home-v380-popular-row,
+  #appView .home-v380-search-field,
+  #appView .direct-pick-well
+){
+  background:var(--hc-glass)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+
+/* "Heute" bewusst offen, damit der Hintergrund nicht wieder verschwindet. */
+html[data-theme] body.is-home-route #appView :is(
+  .home-today-cards .home-v380-today__season > .home-v380-open-row,
+  .home-today-cards .highlight-sections .recommended-box,
+  .home-today-cards .highlight-sections .daily-box
+){
+  background:linear-gradient(90deg,var(--hc-glass-soft),transparent 72%)!important;
+  background-image:linear-gradient(90deg,var(--hc-glass-soft),transparent 72%)!important;
+  border-color:var(--hc-border-soft)!important;
+  box-shadow:none!important;
+  color:var(--hc-text)!important;
+  -webkit-backdrop-filter:blur(5px)!important;
+  backdrop-filter:blur(5px)!important;
+}
+
+/* Titel/Primärtext. */
+html[data-theme] body.is-home-route #appView :is(
+  .home-v380-quran-hero__title,
+  .home-tawhid-entry__copy h3,
+  .home-premium-access-card h3,
+  .home-v380-section-title,
+  .home-v380-open-row__title,
+  .recommended-title,
+  .daily-title,
+  .home-discover-pdf-title,
+  .home-v380-post-title,
+  .home-v380-popular-text h4,
+  .home-v380-lib-card h3
+){
+  color:var(--hc-text)!important;
+  -webkit-text-fill-color:var(--hc-text)!important;
+  text-shadow:none!important;
+}
+
+/* Sekundärtext. */
+html[data-theme] body.is-home-route #appView :is(
+  .home-v380-quran-hero__meta,
+  .home-v380-quran-hero__when,
+  .home-tawhid-entry__copy p,
+  .home-premium-access-card p,
+  .home-v380-open-row__excerpt,
+  .home-v380-open-row__meta,
+  .recommended-text,
+  .daily-text,
+  .home-discover-pdf-meta,
+  .home-v380-post-excerpt,
+  .home-v380-post-meta,
+  .home-v380-popular-text span,
+  .home-v380-lib-card p
+){
+  color:var(--hc-muted)!important;
+  -webkit-text-fill-color:var(--hc-muted)!important;
+}
+
+/* Labels/Akzente. */
+html[data-theme] body.is-home-route :is(
+  .header-prayer-hour,
+  .header-prayer-zone__count-label,
+  .home-tawhid-entry__label,
+  #appView .home-v380-kicker,
+  #appView .recommended-label,
+  #appView .daily-label,
+  #appView .home-v380-popular-rank,
+  #appView .search-input-icon
+){
+  color:var(--hc-accent)!important;
+  -webkit-text-fill-color:var(--hc-accent)!important;
+}
+
+/* Gebetsbereich: keine falschen Theme-Texte. */
+html[data-theme] body.is-home-route :is(
+  .header-prayer-name,
+  .header-prayer-zone__countdown
+){
+  color:var(--hc-text)!important;
+  -webkit-text-fill-color:var(--hc-text)!important;
+  text-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route :is(
+  .header-prayer-zone__caption,
+  .header-prayer-hub__status,
+  .header-prayer-hub__status > span
+){
+  color:var(--hc-muted)!important;
+  -webkit-text-fill-color:var(--hc-muted)!important;
+}
+
+/* Kleine Home-Pills passend zum jeweiligen Erscheinungsbild. */
+html[data-theme] body.is-home-route #appView :is(
+  .home-premium-access__all,
+  .home-v380-text-link,
+  .home-v380-filter-chip,
+  .home-v380-active-chip,
+  .home-v380-filter-reset,
+  .home-v380-search-clear
+){
+  border-color:var(--hc-border-soft)!important;
+  background:var(--hc-glass-soft)!important;
+  color:var(--hc-text)!important;
+  -webkit-text-fill-color:var(--hc-text)!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-filter-chip.is-active{
+  border-color:var(--hc-border)!important;
+  color:var(--hc-accent)!important;
+  -webkit-text-fill-color:var(--hc-accent)!important;
+}
+
+/* Suchfeld */
+html[data-theme] body.is-home-route #appView .home-v380-search-field :is(input,.search){
+  color:var(--hc-text)!important;
+  -webkit-text-fill-color:var(--hc-text)!important;
+  background:transparent!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-search-field :is(input,.search)::placeholder{
+  color:color-mix(in srgb,var(--hc-muted) 72%,transparent)!important;
+  -webkit-text-fill-color:color-mix(in srgb,var(--hc-muted) 72%,transparent)!important;
+}
+
+/* Linien */
+html[data-theme] body.is-home-route #appView .home-v380-section-rule{
+  background:linear-gradient(90deg,var(--hc-border),var(--hc-border-soft) 64%,transparent)!important;
+}
+
+/* Footer bleibt offen. */
+html[data-theme] body.is-home-route .footer{
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* Helle Erscheinungsbilder: 3D-Objekte normal mischen, nicht abdunkeln. */
+html[data-theme="light"] body.is-home-route #appView :is(
+  .home-v380-quran-hero::after,
+  .home-tawhid-entry::after
+),
+html[data-theme="soft"] body.is-home-route #appView :is(
+  .home-v380-quran-hero::after,
+  .home-tawhid-entry::after
+),
+html[data-theme="eisgold"] body.is-home-route #appView :is(
+  .home-v380-quran-hero::after,
+  .home-tawhid-entry::after
+),
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route #appView :is(
+  .home-v380-quran-hero::after,
+  .home-tawhid-entry::after
+){
+  mix-blend-mode:normal!important;
+  opacity:.96!important;
+}
