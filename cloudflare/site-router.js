@@ -54,7 +54,7 @@ function kidsHeaders(assetResponse) {
   headers.set("CDN-Cache-Control", "no-store");
   headers.set("Cloudflare-CDN-Cache-Control", "no-store");
   headers.set("Pragma", "no-cache");
-  headers.set("X-Kids-Build", "kids-shell-v12-tab55");
+  headers.set("X-Kids-Build", "kids-shell-v12-tab12");
   headers.delete("ETag");
   headers.delete("Content-Length");
   return headers;
@@ -217,7 +217,6 @@ export default {
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeApp = isNativeAppRequest(ua);
     const kidsPath = url.pathname === "/test/kids" || url.pathname.startsWith("/test/kids/");
-    const kidsRecitationGrade = url.pathname === "/test/kids/api/recitation/grade";
     const voicePath = url.pathname === "/voice-studio" || url.pathname.startsWith("/voice-studio/");
     const legacyVoicePath = url.pathname === "/test/voice-studio" || url.pathname.startsWith("/test/voice-studio/");
 
@@ -258,44 +257,19 @@ export default {
       });
     }
 
-    if (kidsRecitationGrade && request.method === "POST") {
-      try {
-        const target = new URL(request.url);
-        target.protocol = "https:";
-        target.hostname = "dar-al-tawhid-test.sero91ak.workers.dev";
-        target.port = "";
-        const upstream = await fetch(new Request(target.toString(), request));
-        const headers = new Headers(upstream.headers);
-        headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
-        headers.set("CDN-Cache-Control", "no-store");
-        headers.set("Cloudflare-CDN-Cache-Control", "no-store");
-        headers.delete("Content-Length");
-        return new Response(upstream.body, {
-          status: upstream.status,
-          statusText: upstream.statusText,
-          headers
-        });
-      } catch (error) {
-        return new Response(JSON.stringify({ ok: false, error: "kids_recitation_proxy_failed" }), {
-          status: 502,
-          headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" }
-        });
-      }
-    }
-
     if (kidsPath && (request.method === "GET" || request.method === "HEAD")) {
       try {
         if (url.pathname === "/test/kids/version.json" || url.pathname === "/test/kids/version.json/") {
           const headers = kidsHeaders(new Response(""));
           headers.set("Content-Type", "application/json; charset=utf-8");
-          const body = JSON.stringify({ buildId: "kids-shell-v12-tab55", label: "KIDS · V0.55" });
+          const body = JSON.stringify({ buildId: "kids-shell-v12-tab56", label: "KIDS · V0.56" });
           if (request.method === "HEAD") return new Response(null, { status: 200, headers });
           return new Response(body, { status: 200, headers });
         }
         if (url.pathname.endsWith("/v12-alive.txt")) {
           const headers = kidsHeaders(new Response(""));
           headers.set("Content-Type", "text/plain; charset=utf-8");
-          const body = "kids-shell-v12-tab55\nKIDS · V0.55\n";
+          const body = "kids-shell-v12-tab12\nKIDS · V0.13\n";
           if (request.method === "HEAD") return new Response(null, { status: 200, headers });
           return new Response(body, { status: 200, headers });
         }

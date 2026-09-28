@@ -2497,7 +2497,7 @@ html.kids-intro-active.kids-intro-reveal .app{transform:none;filter:none;transit
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.53</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.56</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2507,7 +2507,7 @@ html.kids-intro-active.kids-intro-reveal .app{transform:none;filter:none;transit
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div class="kids-wordmark">
-          <p class="wm-dar-line">DĀR AL TAWḤĪD</p>
+          <p class="wm-dar-line" aria-label="DĀR AL TAWḤĪD"><span>D</span><span>Ā</span><span>R</span><span class="gap"> </span><span>A</span><span>L</span><span class="gap"> </span><span>T</span><span>A</span><span>W</span><span>Ḥ</span><span>Ī</span><span>D</span></p>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
         </div>
         <div class="cloud"></div>
@@ -6507,38 +6507,63 @@ fetchCatalog();
   padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;
 }
 </style>
-<style id="kids-wordmark-center-v37">
+<style id="kids-wordmark-brand-arc-v38">
 #view-today .wm-dar-svg,.wm-dar-svg,.wm-dar-wrap,.wm-sparks,.wm-dar-fx{display:none!important}
 #view-today .kids-wordmark,.kids-wordmark{
   position:absolute!important;
   left:50%!important;
-  top:18%!important;
+  top:14%!important;
   right:auto!important;bottom:auto!important;
   transform:translateX(-50%)!important;
   margin:0!important;
-  width:min(86vw,420px)!important;
+  width:min(94vw,460px)!important;
   z-index:7!important;text-align:center!important;pointer-events:none!important;
   display:flex!important;flex-direction:column!important;align-items:center!important;
-  gap:4px!important;
+  gap:2px!important;
   animation:none!important;
 }
 #view-today .wm-dar,.wm-dar{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
 #view-today .wm-dar-line{
-  display:block!important;position:static!important;width:auto!important;height:auto!important;
-  margin:0!important;padding:0 6px!important;clip:auto!important;overflow:visible!important;
+  display:flex!important;justify-content:center!important;align-items:flex-end!important;
+  position:static!important;width:100%!important;height:auto!important;
+  margin:0!important;padding:10px 2px 6px!important;clip:auto!important;overflow:visible!important;
   font-family:"Fredoka",system-ui,sans-serif!important;
-  font-weight:700!important;
-  font-size:clamp(22px,5.8vw,32px)!important;
-  letter-spacing:.14em!important;
-  line-height:1.2!important;
+  font-weight:800!important;
+  font-size:clamp(28px,8.4vw,44px)!important;
+  letter-spacing:0!important;
+  line-height:1!important;
   white-space:nowrap!important;
-  color:#f7e7b8!important;
-  text-shadow:0 1px 0 rgba(255,255,255,.35),0 8px 18px rgba(8,24,36,.4)!important;
-  animation:darCloud 3.8s ease-in-out infinite!important;
+  color:#ffe9b4!important;
+  gap:0!important;
+  animation:none!important;
 }
-@keyframes darCloud{
-  0%,100%{transform:translateY(0) scale(1)}
-  50%{transform:translateY(-7px) scale(1.03)}
+#view-today .wm-dar-line span{
+  display:inline-block!important;
+  --arc:0px;--tilt:0deg;
+  transform-origin:50% 100%!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.5),0 10px 20px rgba(8,24,36,.42)!important;
+  animation:darArcBob 3.6s ease-in-out infinite!important;
+}
+#view-today .wm-dar-line .gap{
+  width:.22em!important;min-width:.22em!important;
+  text-shadow:none!important;animation:none!important;
+}
+#view-today .wm-dar-line span:nth-child(1){--arc:18px;--tilt:-10deg;animation-delay:0s}
+#view-today .wm-dar-line span:nth-child(2){--arc:10px;--tilt:-6deg;animation-delay:.05s}
+#view-today .wm-dar-line span:nth-child(3){--arc:4px;--tilt:-3deg;animation-delay:.1s}
+#view-today .wm-dar-line span:nth-child(4){--arc:0px}
+#view-today .wm-dar-line span:nth-child(5){--arc:-6px;--tilt:2deg;animation-delay:.15s}
+#view-today .wm-dar-line span:nth-child(6){--arc:-10px;--tilt:0deg;animation-delay:.2s}
+#view-today .wm-dar-line span:nth-child(7){--arc:-12px}
+#view-today .wm-dar-line span:nth-child(8){--arc:-10px;--tilt:-2deg;animation-delay:.25s}
+#view-today .wm-dar-line span:nth-child(9){--arc:-6px;--tilt:2deg;animation-delay:.3s}
+#view-today .wm-dar-line span:nth-child(10){--arc:2px;--tilt:4deg;animation-delay:.35s}
+#view-today .wm-dar-line span:nth-child(11){--arc:8px;--tilt:6deg;animation-delay:.4s}
+#view-today .wm-dar-line span:nth-child(12){--arc:14px;--tilt:8deg;animation-delay:.45s}
+#view-today .wm-dar-line span:nth-child(13){--arc:20px;--tilt:11deg;animation-delay:.5s}
+@keyframes darArcBob{
+  0%,100%{transform:translateY(var(--arc)) rotate(var(--tilt)) scale(1)}
+  50%{transform:translateY(calc(var(--arc) - 7px)) rotate(var(--tilt)) scale(1.05)}
 }
 #view-today .wm-kids,.wm-kids{
   display:flex!important;justify-content:center!important;align-items:flex-end!important;
@@ -6570,7 +6595,8 @@ fetchCatalog();
   background-position:center 54%!important;
 }
 @media(prefers-reduced-motion:reduce){
-  #view-today .wm-dar-line,#view-today .wm-kids span{animation:none!important}
+  #view-today .wm-dar-line span,#view-today .wm-kids span{animation:none!important}
+  #view-today .wm-dar-line span{transform:translateY(var(--arc)) rotate(var(--tilt))!important}
 }
 </style>
 
