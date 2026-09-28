@@ -453,7 +453,11 @@ input,select{
 .free-progress{height:7px;border-radius:999px;background:rgba(143,107,56,.12);overflow:hidden;margin-top:10px}
 .free-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#b88b45,#d7b878);transition:width .25s ease}
 .free-voice-side .notice{color:#756b60}
-body.free-voice-mode .content-studio-nav{display:none!important}
+body.free-voice-mode .content-studio-nav .cs-flow,
+body.free-voice-mode .content-studio-nav .cs-fast-actions{display:none!important}
+body.free-voice-mode .content-studio-nav{justify-content:flex-start!important}
+body.free-voice-mode .content-studio-nav [data-cs-kind]{opacity:.58}
+body.free-voice-mode #csFreeVoiceTab{opacity:1;border-color:rgba(217,182,111,.42);background:rgba(217,182,111,.09);color:#f1d59a}
 body.free-voice-mode .mobile-actions{display:none!important}
 @media(max-width:799px){
   .free-voice-workspace{display:block;padding-top:8px}
@@ -1276,7 +1280,9 @@ function setStudioMode(mode){
   $("#freeVoiceWorkspace").hidden=!free;
   document.body.classList.toggle("free-voice-mode",free);
   const nav=document.querySelector(".content-studio-nav");
-  if(nav)nav.style.display=free?"none":"";
+  if(nav)nav.style.display="";
+  const freeTab=$("#csFreeVoiceTab");
+  if(freeTab)freeTab.classList.toggle("active",free);
   const btn=$("#freeVoiceToggleBtn");
   if(btn)btn.textContent=free?"Zur Produktion":"Freie Stimme";
   if(free){
@@ -1596,7 +1602,7 @@ $("#qaConfirmBtn").onclick=confirmQA;
 document.querySelectorAll("[data-audio-output-button]").forEach(btn=>{
   btn.addEventListener("click",requestAudioOutput);
 });
-for(const audio of [$("#player"),$("#learnPlayer")].filter(Boolean)){
+for(const audio of [$("#player"),$("#learnPlayer"),$("#freeVoicePlayer")].filter(Boolean)){
   try{audio.disableRemotePlayback=true}catch(_){}
   audio.setAttribute("x-webkit-airplay","deny");
 }
@@ -1620,7 +1626,7 @@ window.addEventListener("keydown",e=>{
   }
   if((e.key==="k"||e.key==="K")&&!e.shiftKey&&!e.altKey){
     e.preventDefault();
-    const field=$("#text");
+    const field=studioMode==="free"?$("#freeVoiceText"):$("#text");
     field?.focus();
     return;
   }
