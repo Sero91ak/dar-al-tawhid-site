@@ -13,12 +13,12 @@ const COMMIT_MSG =
   process.env.TEST_PAGES_COMMIT_MSG ||
   "chore(test): sync test staging from test-library-canonical for GitHub Pages";
 
+// TEST_UI_ISOLATION_GUARD:
+// Dieser Branch publiziert ausschließlich Quellen-/Bibliotheksdaten nach main.
+// Test-UI, Test-Version, Manifest und Service Worker bleiben auf main autoritativ,
+// damit Bibliotheks-Syncs weder die Test-App zurücksetzen noch Live-Shell-Dateien berühren.
 const SYNC_FILES = [
-  "test/index.html",
-  "test/version.json",
-  "test/manifest.json",
   "test/assets/library/canonical-source-library.js",
-  "service-worker.js",
   "data/books-library.json",
   "data/scholars-library.json",
   "data/library-authority.json",
@@ -82,15 +82,6 @@ function main() {
   }
 
   const stamp = Date.now();
-  const indexPath = path.join(ROOT, "test/index.html");
-  let html = fs.readFileSync(indexPath, "utf8");
-  if (html.includes("<!-- pages-deploy-stamp:")) {
-    html = html.replace(/<!-- pages-deploy-stamp:\d+ -->/, `<!-- pages-deploy-stamp:${stamp} -->`);
-  } else {
-    html = html.replace("<head>", `<head>\n<!-- pages-deploy-stamp:${stamp} -->`);
-  }
-  fs.writeFileSync(indexPath, html);
-
   const stashName = `test-pages-sync-${stamp}`;
   const dirty = runOut("git", ["status", "--porcelain"]);
   if (dirty) {
