@@ -1,12 +1,27 @@
 # DĀR AL TAWḤĪD Kids
 
-Eigenständige Kids-Test-App. Nicht die Besucher-App.
+Eigenständige Kids-App. Nicht die Besucher-App und nicht die Erwachsenen-iOS-App.
 
-## Der Link, den du nutzt
+## Web (Dar Test)
 
-https://dar-al-tawhid.de/test/kids/?darsw=1012&kv=20260925-12
+https://dar-al-tawhid.de/test/kids/
 
 Kurz: https://dar-al-tawhid.de/test/kids/
+
+## iOS (App Store / TestFlight)
+
+Eigenes Xcode-Projekt: `ios/DarAlTawhidKids/`
+
+Bundle-ID: `de.daraltawhid.kids`  
+Anleitung: `ios/DarAlTawhidKids/README.md`
+
+## Deploy (ohne Cloudflare-Builds-Kostenfalle)
+
+Kids liegt auf dem **Dar-Test-Worker** (`dar-al-tawhid.de/test/kids/`), nicht auf der Besucher-App.
+
+- Nur `test/kids/**` und `ios/DarAlTawhidKids/**` für Kids ändern — **kein** Besucher-`wrangler deploy`.
+- Keine Push-Nachrichten aus Kids an Besucher.
+
 
 ## Deploy (ohne Cloudflare-Builds-Kostenfalle)
 

@@ -18,6 +18,14 @@
 <meta name="msapplication-TileColor" content="#0c2636">
 <meta name="msapplication-TileImage" content="/test/kids/icons/icon-192.png?v=logo28">
 <title>DĀR AL TAWḤĪD Kids</title>
+<script>
+(function(){try{
+  if(window.DAR_KIDS_IOS_APP||window.DAR_IOS_NATIVE_APP){
+    document.documentElement.classList.add("dar-ios-native-app","kids-ios-app");
+  }
+}catch(e){}})();
+</script>
+
 <meta name="description" content="Die Kinderwelt von DĀR AL TAWḤĪD – Geschichten, Qurʾān und Duʿāʾ.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_DE">
@@ -2535,7 +2543,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.75</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.76</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3014,7 +3022,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab75";
+const KIDS_BUILD_ID="kids-shell-v12-tab76";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6616,5 +6624,12 @@ fetchCatalog();
   #view-today .wm-dar-line,#view-today .wm-kids span{animation:none!important}
 }
 </style>
-
+<style id="kids-ios-native-shell-v76">
+html.kids-ios-app,html.dar-ios-native-app.kids-ios-app,html.kids-ios-app body{
+  overscroll-behavior:none!important;
+  -webkit-overflow-scrolling:touch;
+  background:#0c2636;
+}
+html.kids-ios-app .kids-update-layer{display:none!important}
+</style>
 </html>

@@ -147,6 +147,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-ios-app-store-shell-2026-09-28",
+      "approvedBy": "user-explicit-kinder-app-komplett-umgewandelt-ios-app-store",
+      "reason": "Nutzer: Die Kinder-App muss komplett zu einer iOS-App umgewandelt werden, damit sie für den App Store bereit ist. Eigene native Hülle, getrennt von der Erwachsenen-App.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "ios/DarAlTawhidKids/",
+        "kids/",
+        "KIDS.md",
+        "test/kids/",
+        "cloudflare/test-app-worker.js",
+        "cloudflare/site-router.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-visible-update-banner-2026-09-27",
       "approvedBy": "user-explicit-sehe-keine-push-test-ios-besucher",
       "reason": "Nutzer sieht keinen Update-Hinweis in Test/iOS/Besucher. Banner bei neuerer version.json wieder sichtbar machen.",
