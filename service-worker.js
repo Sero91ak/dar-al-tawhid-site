@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v538-fast-boot';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1079';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -46,6 +46,7 @@ const APP_SHELL = [
   '/content/duas/duas.json',
   '/content/quran/surahs.json',
   '/content/quran-athar/de/001.json',
+  '/assets/bottom-nav-global-v1075.css',
   '/assets/site-analytics.js'
 ];
 

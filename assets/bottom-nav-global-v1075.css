@@ -1,0 +1,215 @@
+/**
+ * DĀR AL TAWḤĪD · Global Bottom Navigation v1075
+ * One geometry across Start / ʿIlm / Beiträge / Qurʾān / Mehr.
+ * Only the active tab changes. Theme colors come from dar-bottom-nav-glass.css.
+ */
+
+:root,
+html[data-theme]{
+  --dar-global-nav-h:clamp(64px,6.2vh + 28px,72px);
+  --dar-global-nav-w:min(680px,calc(100vw - 28px));
+  --dar-global-nav-radius:999px;
+  --dar-global-active-gap-x:4px;
+  --dar-global-active-gap-y:4px;
+}
+
+/* One bar shape everywhere. */
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav,
+html body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav,
+html body.has-bottom-nav #bottomNav.bottom-nav{
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:calc(7px + env(safe-area-inset-bottom,0px))!important;
+  width:var(--dar-global-nav-w)!important;
+  max-width:var(--dar-global-nav-w)!important;
+  height:var(--dar-global-nav-h)!important;
+  min-height:var(--dar-global-nav-h)!important;
+  max-height:var(--dar-global-nav-h)!important;
+  margin:0!important;
+  padding:5px 6px!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:stretch!important;
+  gap:2px!important;
+  overflow:hidden!important;
+  border-radius:var(--dar-global-nav-radius)!important;
+  transform:translateX(-50%)!important;
+  -webkit-transform:translateX(-50%)!important;
+  background:var(--bottom-nav-bg-glass)!important;
+  background-image:none!important;
+  border:1px solid var(--bottom-nav-border)!important;
+  box-shadow:var(--bottom-nav-shadow),inset 0 1px 0 var(--bottom-nav-highlight)!important;
+  -webkit-backdrop-filter:blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation,1))!important;
+  backdrop-filter:blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation,1))!important;
+  contain:none!important;
+  isolation:auto!important;
+  z-index:1200!important;
+}
+
+/* Five equal touch fields; never reshape per route. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn{
+  position:relative!important;
+  z-index:1!important;
+  flex:1 1 20%!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:calc(var(--dar-global-nav-h) - 10px)!important;
+  min-height:calc(var(--dar-global-nav-h) - 10px)!important;
+  max-height:calc(var(--dar-global-nav-h) - 10px)!important;
+  margin:0!important;
+  padding:4px 2px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:2px!important;
+  overflow:visible!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--bottom-tab-inactive-text)!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+}
+
+/* Bigger active oval: fills almost the complete tab field. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:0!important;
+  left:var(--dar-global-active-gap-x)!important;
+  right:var(--dar-global-active-gap-x)!important;
+  top:var(--dar-global-active-gap-y)!important;
+  bottom:var(--dar-global-active-gap-y)!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  border-radius:999px!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  transform:scale(.98)!important;
+  -webkit-transform:scale(.98)!important;
+  background:var(--bottom-tab-active-bg)!important;
+  border:1px solid var(--bottom-tab-active-border)!important;
+  box-shadow:0 4px 12px var(--bottom-tab-active-shadow),inset 0 1px 0 var(--bottom-tab-active-highlight)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  backdrop-filter:blur(12px)!important;
+  transition:opacity 130ms linear,transform 150ms cubic-bezier(.22,.84,.32,1)!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active::before,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:active::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:active::before{
+  opacity:1!important;
+  transform:scale(1)!important;
+  -webkit-transform:scale(1)!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed{
+  color:var(--bottom-tab-active-text)!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+  position:relative!important;
+  z-index:2!important;
+  width:29px!important;
+  height:29px!important;
+  min-width:29px!important;
+  min-height:29px!important;
+  max-width:29px!important;
+  max-height:29px!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  color:var(--bottom-tab-inactive-icon)!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+  filter:none!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon{
+  color:var(--bottom-tab-active-icon)!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:29px!important;
+  height:29px!important;
+  max-width:29px!important;
+  max-height:29px!important;
+  object-fit:contain!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon),
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon){
+  position:relative!important;
+  z-index:2!important;
+  color:inherit!important;
+  font-size:clamp(9px,2.25vw,10.5px)!important;
+  line-height:1!important;
+  font-weight:850!important;
+  white-space:nowrap!important;
+}
+
+/* Old moving pill must never appear. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-pill,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-pill{
+  display:none!important;
+}
+
+/* Reserve exactly the same space on every route. */
+html[data-theme] body.has-bottom-nav,
+html body.has-bottom-nav{
+  padding-bottom:calc(var(--dar-global-nav-h) + env(safe-area-inset-bottom,0px) + 20px)!important;
+}
+
+@media(max-width:390px){
+  :root,
+  html[data-theme]{
+    --dar-global-nav-w:calc(100vw - 22px);
+    --dar-global-nav-h:64px;
+    --dar-global-active-gap-x:3px;
+    --dar-global-active-gap-y:3px;
+  }
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon,
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+    width:27px!important;
+    height:27px!important;
+    min-width:27px!important;
+    min-height:27px!important;
+    max-width:27px!important;
+    max-height:27px!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before{
+    transition:none!important;
+  }
+}
