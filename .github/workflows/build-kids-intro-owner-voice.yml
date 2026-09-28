@@ -22,7 +22,7 @@ jobs:
         run: |
           set -euo pipefail
           for i in $(seq 1 18); do
-            code="$(curl -L -sS -o /tmp/voice-health.json -w '%{http_code}' https://dar-al-tawhid.de/voice-studio/api/health || true)"
+            code="$(curl -L -sS -o /tmp/voice-health.json -w '%{http_code}' https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/health || true)"
             cat /tmp/voice-health.json || true
             if [ "$code" = "200" ] && grep -q '"ok":true' /tmp/voice-health.json; then
               exit 0
@@ -43,7 +43,7 @@ jobs:
             "profile": "kids_intro"
           }
           JSON
-          curl -L --fail --retry 5 --retry-delay 3             -H 'Origin: https://dar-al-tawhid.de'             -H 'Referer: https://dar-al-tawhid.de/voice-studio/'             -H 'Content-Type: application/json'             --data-binary @/tmp/kids-voice.json             https://dar-al-tawhid.de/voice-studio/api/generate             -o test/kids/assets/kids-cinema/intro-voice-serhat.mp3
+          curl -L --fail --retry 5 --retry-delay 3             -H 'Origin: https://dar-al-tawhid.de'             -H 'Referer: https://dar-al-tawhid.de/voice-studio/'             -H 'Content-Type: application/json'             --data-binary @/tmp/kids-voice.json             https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/generate             -o test/kids/assets/kids-cinema/intro-voice-serhat.mp3
           test -s test/kids/assets/kids-cinema/intro-voice-serhat.mp3
           bytes="$(wc -c < test/kids/assets/kids-cinema/intro-voice-serhat.mp3)"
           if [ "$bytes" -lt 10000 ]; then
