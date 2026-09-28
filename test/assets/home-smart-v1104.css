@@ -2007,5 +2007,144 @@ body.is-home-route :is(
     width:100%!important;
   }
 }
+
+/* Tatsächlich aktive Schnellzugriffe aus renderHomePremiumQuickAccess(). */
+body.is-home-route .home-premium-access__grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:8px!important;
+  margin:10px 0 0!important;
+}
+body.is-home-route .home-premium-access-card{
+  position:relative!important;
+  min-width:0!important;
+  min-height:76px!important;
+  display:grid!important;
+  grid-template-columns:44px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:9px!important;
+  padding:10px 11px!important;
+  overflow:hidden!important;
+  border:1px solid var(--ref-border-soft)!important;
+  border-radius:22px!important;
+  background:color-mix(in srgb,var(--ref-surface-flat) 86%,transparent)!important;
+  color:var(--ref-text)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 5%,transparent)!important;
+  text-align:left!important;
+  transform:none!important;
+}
+body.is-home-route .home-premium-access-card::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  pointer-events:none!important;
+  background:linear-gradient(118deg,color-mix(in srgb,var(--ref-accent) 5%,transparent),transparent 48%)!important;
+}
+body.is-home-route .home-premium-access-card__icon{
+  position:relative!important;
+  z-index:1!important;
+  width:44px!important;
+  height:44px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:visible!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-home-route .home-premium-access-card__icon img.dar3d-icon{
+  width:42px!important;
+  height:42px!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 7px 9px rgba(0,0,0,.18))!important;
+}
+body.is-home-route .home-premium-access-card__body{
+  position:relative!important;
+  z-index:1!important;
+  min-width:0!important;
+}
+body.is-home-route .home-premium-access-card h3{
+  margin:0!important;
+  color:var(--ref-text)!important;
+  -webkit-text-fill-color:var(--ref-text)!important;
+  font-size:clamp(12px,3vw,13.5px)!important;
+  line-height:1.08!important;
+  font-weight:900!important;
+}
+body.is-home-route .home-premium-access-card p{
+  margin:3px 0 0!important;
+  color:var(--ref-muted)!important;
+  -webkit-text-fill-color:var(--ref-muted)!important;
+  font-size:8.9px!important;
+  line-height:1.18!important;
+  font-weight:650!important;
+  display:-webkit-box!important;
+  -webkit-line-clamp:2!important;
+  -webkit-box-orient:vertical!important;
+  overflow:hidden!important;
+}
+
+/* Zweite Reihe nur als ruhige horizontale Wissensnavigation. */
+body.is-home-route .home-premium-access__rail{
+  display:flex!important;
+  gap:0!important;
+  margin:10px 0 0!important;
+  padding:7px 0!important;
+  overflow-x:auto!important;
+  border-top:1px solid var(--ref-border-soft)!important;
+  border-bottom:1px solid var(--ref-border-soft)!important;
+  scrollbar-width:none!important;
+}
+body.is-home-route .home-premium-access__rail::-webkit-scrollbar{display:none!important}
+body.is-home-route .home-premium-mini{
+  flex:0 0 auto!important;
+  min-height:34px!important;
+  padding:4px 11px 4px 6px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  border:0!important;
+  border-right:1px solid var(--ref-border-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--ref-muted)!important;
+  -webkit-text-fill-color:var(--ref-muted)!important;
+  box-shadow:none!important;
+  font-size:9.2px!important;
+  font-weight:780!important;
+}
+body.is-home-route .home-premium-mini__icon{
+  width:25px!important;
+  height:25px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:visible!important;
+}
+body.is-home-route .home-premium-mini__icon img.dar3d-icon{
+  width:24px!important;
+  height:24px!important;
+  object-fit:contain!important;
+}
+
+@media(max-width:370px){
+  body.is-home-route .home-premium-access-card{
+    min-height:68px!important;
+    grid-template-columns:38px minmax(0,1fr)!important;
+    gap:6px!important;
+    padding:8px!important;
+  }
+  body.is-home-route .home-premium-access-card__icon,
+  body.is-home-route .home-premium-access-card__icon img.dar3d-icon{
+    width:36px!important;
+    height:36px!important;
+  }
+  body.is-home-route .home-premium-access-card p{display:none!important}
+}
+@media(min-width:760px){
+  body.is-home-route .home-premium-access__grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+}
+
 /* /v1113 · REFERENZ-REBUILD */
 
