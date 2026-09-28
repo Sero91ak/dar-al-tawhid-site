@@ -194,6 +194,16 @@ CONTEXT_CONFIG=VOICE_PROFILE.get("contextDetection") or {}
 QA_CONFIG=VOICE_PROFILE.get("qualityAssurance") or {}
 CONTINUITY_CONFIG=VOICE_PROFILE.get("continuity") or {}
 
+FIXED_PHRASE_TTS={
+    str(item.get("tts_text") or "").strip()
+    for item in ((VOICE_PROFILE.get("pronunciation") or {}).get("fixedPhrases") or [])
+    if str(item.get("tts_text") or "").strip()
+}
+
+def is_profile_fixed_phrase_tts(text:str):
+    value=str(text or "").strip().strip(AUDIO_LOCK_EDGE_CHARS if "AUDIO_LOCK_EDGE_CHARS" in globals() else " \t\r\n.,،;؛:!?؟…·-–—()[]{}«»\"“”„‘’")
+    return value in FIXED_PHRASE_TTS
+
 LIB={}
 RULES=[]
 MASTER_TTS=set()
@@ -2710,7 +2720,9 @@ def repair_internal_pause(wav,sr:int,text:str,language_id:str,mode:str):
     """
     import torch
     w=normalize_segment_shape(wav)
-    if language_id=="ar" or not w.numel() or w.shape[-1]<int(sr*0.3):
+    inline_arabic=language_id=="ar" and is_inline_arabic_micro_term(text)
+    fixed_phrase=language_id=="ar" and is_profile_fixed_phrase_tts(text)
+    if (language_id=="ar" and not inline_arabic and not fixed_phrase) or not w.numel() or w.shape[-1]<int(sr*0.3):
         return w,{"repaired":False}
 
     env=w.abs().amax(dim=0)
@@ -2723,23 +2735,38 @@ def repair_internal_pause(wav,sr:int,text:str,language_id:str,mode:str):
     if count<5:
         return w,{"repaired":False}
     framed=env[:count*frame].reshape(count,frame).mean(dim=1)
-    threshold=max(peak*0.012,0.0004)
+    if inline_arabic or fixed_phrase:
+        threshold=max(
+            peak*float(QA_CONFIG.get("inlineArabicSilenceThresholdRelative",0.0045)),
+            float(QA_CONFIG.get("inlineArabicSilenceAbsolute",0.00015))
+        )
+    else:
+        threshold=max(peak*0.012,0.0004)
     silent=(framed<threshold).tolist()
 
     probe=str(text or "").strip()
     core=re.sub(r"[.!?؟…]+$","",probe).strip()
     has_internal_punctuation=bool(re.search(r"[,،;؛:!?؟…]|\.(?=\s+\S)",core))
-    target_ms=int(
-        QA_CONFIG.get("autoRepairPauseWithPunctuationMs",220)
-        if has_internal_punctuation else QA_CONFIG.get("autoRepairPauseWithoutPunctuationMs",150)
-    )
-    trigger_ms=int(
-        (QA_CONFIG.get("maxInternalSilenceMsWithPunctuationByMode") or {}).get(
-            mode,QA_CONFIG.get("maxInternalSilenceMsWithPunctuation",560)
+    if inline_arabic:
+        target_ms=int(QA_CONFIG.get("inlineArabicFlowTargetPauseMs",45))
+        trigger_ms=int(QA_CONFIG.get("inlineArabicFlowRepairTriggerMs",120))
+        max_repair_ms=int(QA_CONFIG.get("inlineArabicFlowRepairMaxMs",700))
+    elif fixed_phrase:
+        target_ms=int(QA_CONFIG.get("fixedPhraseFlowTargetPauseMs",140))
+        trigger_ms=int(QA_CONFIG.get("fixedPhraseFlowRepairTriggerMs",320))
+        max_repair_ms=int(QA_CONFIG.get("fixedPhraseFlowRepairMaxMs",900))
+    else:
+        target_ms=int(
+            QA_CONFIG.get("autoRepairPauseWithPunctuationMs",220)
+            if has_internal_punctuation else QA_CONFIG.get("autoRepairPauseWithoutPunctuationMs",150)
         )
-        if has_internal_punctuation else QA_CONFIG.get("maxInternalSilenceMsWithoutPunctuation",380)
-    )
-    max_repair_ms=int(QA_CONFIG.get("autoRepairPauseMaxMs",950))
+        trigger_ms=int(
+            (QA_CONFIG.get("maxInternalSilenceMsWithPunctuationByMode") or {}).get(
+                mode,QA_CONFIG.get("maxInternalSilenceMsWithPunctuation",560)
+            )
+            if has_internal_punctuation else QA_CONFIG.get("maxInternalSilenceMsWithoutPunctuation",380)
+        )
+        max_repair_ms=int(QA_CONFIG.get("autoRepairPauseMaxMs",950))
 
     runs=[]
     start=None
@@ -2828,6 +2855,25 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
         torch.manual_seed(seed_base+attempt*seed_offset)
         try:
             wav=render_with_model(model,text,language_id,mode)
+
+            # Arabische Kernbegriffe und bestätigte Mehrwort-Phrasen dürfen keine
+            # hörbare KI-"Denkpause" enthalten. Vor der QA nur echte energiearme
+            # Inseln komprimieren; aktive Phoneme bleiben unangetastet.
+            proactive_pause_repair={}
+            if language_id=="ar" and (
+                is_inline_arabic_micro_term(text) or is_profile_fixed_phrase_tts(text)
+            ):
+                compacted,proactive_pause_repair=repair_internal_pause(
+                    wav,int(model.sr),text,language_id,mode
+                )
+                if proactive_pause_repair.get("repaired"):
+                    wav=compacted
+                    print(
+                        f"[DĀR Voice] Arabic phrase flow repair "
+                        f"removed={proactive_pause_repair.get('pause_ms_removed',0)}ms "
+                        f"text={str(text or '')[:72]}",
+                        flush=True
+                    )
         except GenerationTimeoutReached as e:
             print(f"[DĀR Voice] watchdog rescue: {e}",flush=True)
             last=(None,{"issues":["generation_timeout"],"attempt":attempt+1,"critical":bool(critical),"rescued":False})
@@ -2841,8 +2887,14 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
             last=(None,{"issues":["generation_token_limit"],"attempt":attempt+1,"critical":bool(critical),"rescued":False})
             break
         metrics=audio_quality_metrics(wav,int(model.sr),text,language_id,mode)
+        if proactive_pause_repair.get("repaired"):
+            metrics.update({
+                "arabic_phrase_flow_repaired":True,
+                "pause_ms_removed":int(proactive_pause_repair.get("pause_ms_removed",0)),
+                "target_pause_ms":int(proactive_pause_repair.get("target_pause_ms",0)),
+            })
 
-        pause_only={"unexpected_internal_hold","excessive_internal_pause"}
+        pause_only={"unexpected_internal_hold","excessive_internal_pause","inline_arabic_internal_hold"}
         current_issues=set(metrics.get("issues") or [])
         if current_issues and current_issues.issubset(pause_only):
             repaired,repair_meta=repair_internal_pause(wav,int(model.sr),text,language_id,mode)
