@@ -1,0 +1,575 @@
+/* TEST ONLY · DĀR AL TAWḤĪD Startseite v1101
+   Ziel: kompakter, Tawḥīd-zentriert, echte 3D-Assets, 4K-Hero, starke Lesbarkeit.
+   Keine Geometrieänderung außerhalb der Startseite. */
+
+body.is-home-route .top-shell.theme-hero-shell{
+  margin-bottom:10px!important;
+  border-radius:24px!important;
+  overflow:hidden!important;
+  border:1px solid color-mix(in srgb,var(--theme-border) 82%,transparent)!important;
+  background:var(--theme-surface)!important;
+  box-shadow:0 18px 48px color-mix(in srgb,#000 18%,transparent)!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  padding:clamp(14px,3.4vw,22px)!important;
+  min-height:0!important;
+  border:0!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 96%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 90%,transparent) 42%,
+      color-mix(in srgb,var(--bg) 72%,transparent) 72%,
+      color-mix(in srgb,var(--bg) 48%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 88%,transparent),
+      color-mix(in srgb,var(--bg) 74%,transparent)),
+    url("/assets/feed-backgrounds/auto/mosque/bg-pro-mosque-59.webp") center 46%/cover no-repeat!important;
+  box-shadow:none!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 18% 15%,color-mix(in srgb,var(--theme-accent) 12%,transparent),transparent 34%),
+    linear-gradient(180deg,transparent 58%,color-mix(in srgb,var(--bg) 35%,transparent))!important;
+}
+
+body.is-home-route .top-shell .header-row--brand-only,
+body.is-home-route .top-shell .brand{
+  position:relative!important;
+  z-index:2!important;
+}
+
+body.is-home-route .top-shell .brand-kicker-row{
+  margin-bottom:5px!important;
+}
+body.is-home-route .top-shell .brand-kicker-row small{
+  display:inline-flex!important;
+  align-items:center!important;
+  min-height:24px!important;
+  padding:4px 9px!important;
+  border-radius:999px!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 34%,var(--theme-border))!important;
+  background:color-mix(in srgb,var(--theme-surface) 78%,transparent)!important;
+  color:var(--theme-accent)!important;
+  font-family:var(--font-ui,var(--sans))!important;
+  font-size:clamp(9px,2.2vw,10.5px)!important;
+  font-weight:900!important;
+  letter-spacing:.09em!important;
+  text-transform:uppercase!important;
+  text-shadow:none!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  backdrop-filter:blur(12px)!important;
+}
+
+body.is-home-route .top-shell .brand-main{
+  display:flex!important;
+  align-items:center!important;
+  gap:clamp(10px,2.5vw,16px)!important;
+}
+body.is-home-route .top-shell .brand-main .logo{
+  width:clamp(66px,17vw,92px)!important;
+  height:clamp(66px,17vw,92px)!important;
+  flex:0 0 auto!important;
+  border-radius:50%!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 8px 20px color-mix(in srgb,#000 25%,transparent))!important;
+}
+body.is-home-route .top-shell .brand-main h1.brand-title-refined{
+  margin:0!important;
+  color:var(--theme-text)!important;
+  -webkit-text-fill-color:var(--theme-text)!important;
+  font-size:clamp(29px,7.2vw,48px)!important;
+  line-height:.95!important;
+  letter-spacing:.025em!important;
+  text-shadow:0 2px 18px color-mix(in srgb,var(--bg) 70%,transparent)!important;
+}
+body.is-home-route .top-shell .brand-main h1.brand-title-refined::after{
+  width:min(100%,190px)!important;
+  background:linear-gradient(90deg,var(--theme-accent),color-mix(in srgb,var(--theme-accent) 42%,transparent),transparent)!important;
+}
+
+body.is-home-route .top-shell .hero-text{
+  position:relative!important;
+  z-index:2!important;
+  display:grid!important;
+  gap:4px!important;
+  max-width:min(760px,100%)!important;
+  margin-top:8px!important;
+  padding:9px 11px!important;
+  border:1px solid color-mix(in srgb,var(--theme-border) 68%,transparent)!important;
+  border-radius:14px!important;
+  background:color-mix(in srgb,var(--theme-surface) 74%,transparent)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 18%,transparent)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.05)!important;
+  backdrop-filter:blur(14px) saturate(1.05)!important;
+}
+body.is-home-route .top-shell .salam{
+  color:var(--theme-text)!important;
+  font-size:clamp(13px,3.15vw,16px)!important;
+  font-weight:800!important;
+  line-height:1.25!important;
+  text-shadow:none!important;
+}
+body.is-home-route .top-shell .intro{
+  color:color-mix(in srgb,var(--theme-text) 78%,var(--theme-muted) 22%)!important;
+  font-size:clamp(11px,2.65vw,13.5px)!important;
+  line-height:1.42!important;
+  font-weight:650!important;
+  max-width:68ch!important;
+}
+body.is-home-route .top-shell .intro strong{
+  color:var(--theme-accent)!important;
+  font-weight:900!important;
+}
+
+/* Gebetszeiten: bleibt erhalten, aber kompakter und klarer über dem 4K-Hero */
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub{
+  position:relative!important;
+  z-index:2!important;
+  margin-top:10px!important;
+  padding:10px 11px 9px!important;
+  min-height:72px!important;
+  border-radius:16px!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 28%,var(--theme-border))!important;
+  background:
+    radial-gradient(circle at 8% 0%,color-mix(in srgb,var(--theme-accent) 10%,transparent),transparent 40%),
+    color-mix(in srgb,var(--theme-surface) 86%,transparent)!important;
+  box-shadow:0 10px 26px color-mix(in srgb,#000 14%,transparent),inset 0 1px 0 color-mix(in srgb,#fff 18%,transparent)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.08)!important;
+  backdrop-filter:blur(18px) saturate(1.08)!important;
+}
+body.is-home-route .header-prayer-hub__status{
+  margin-top:7px!important;
+  padding-top:7px!important;
+}
+
+/* Ibn Sīrīn: unverändert im Inhalt, aber wie eine echte Wissenskarte */
+body.is-home-route .top-shell.theme-hero-shell .isnad{
+  position:relative!important;
+  overflow:hidden!important;
+  margin:0!important;
+  padding:12px 118px 12px 14px!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--theme-accent) 30%,var(--theme-border))!important;
+  border-radius:0!important;
+  background:
+    radial-gradient(circle at 96% 48%,color-mix(in srgb,var(--theme-accent) 9%,transparent),transparent 26%),
+    linear-gradient(145deg,color-mix(in srgb,var(--theme-surface) 98%,transparent),color-mix(in srgb,var(--theme-surface) 90%,var(--bg) 10%))!important;
+  box-shadow:none!important;
+}
+body.is-home-route .top-shell.theme-hero-shell .isnad::after{
+  content:""!important;
+  position:absolute!important;
+  right:14px!important;
+  top:50%!important;
+  width:88px!important;
+  height:88px!important;
+  transform:translateY(-50%)!important;
+  background:url("/test/assets/dar-3d-icons/library.png?v=1094") center/contain no-repeat!important;
+  opacity:.70!important;
+  pointer-events:none!important;
+  filter:drop-shadow(0 8px 14px color-mix(in srgb,#000 18%,transparent))!important;
+}
+body.is-home-route .isnad-label{
+  color:var(--theme-accent)!important;
+  font-size:clamp(9px,2.15vw,10.5px)!important;
+  letter-spacing:.13em!important;
+  font-weight:950!important;
+  margin-bottom:5px!important;
+}
+body.is-home-route .isnad-quote{
+  gap:3px!important;
+}
+body.is-home-route .isnad-speaker{
+  color:var(--theme-accent)!important;
+  font-size:clamp(11px,2.75vw,13px)!important;
+  font-weight:850!important;
+}
+body.is-home-route .isnad-words{
+  color:var(--theme-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(16px,4.15vw,21px)!important;
+  line-height:1.2!important;
+  font-weight:800!important;
+}
+body.is-home-route .isnad-source{
+  color:var(--theme-muted)!important;
+  font-size:clamp(9.5px,2.3vw,11px)!important;
+  line-height:1.3!important;
+  margin-top:5px!important;
+}
+
+/* App-Bar + Startseiten-Titel kompakt */
+body.is-home-route .app-bar{
+  margin-bottom:5px!important;
+}
+body.is-home-route #appView.view{
+  padding-top:8px!important;
+}
+body.is-home-route .view-head-home{
+  margin:0 0 8px!important;
+  padding:0!important;
+}
+body.is-home-route .view-head-home-row{
+  min-height:38px!important;
+  align-items:center!important;
+}
+body.is-home-route .home-start-title{
+  font-size:clamp(22px,5.4vw,30px)!important;
+  line-height:1!important;
+  margin:0!important;
+}
+body.is-home-route .home-start-rule{
+  margin:6px 0 5px!important;
+}
+body.is-home-route .view-head-home-chips{
+  min-height:0!important;
+  margin:0!important;
+}
+
+/* Primärer Einstieg */
+.home-premium-access{
+  margin:0 0 10px!important;
+  padding:10px!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 24%,var(--theme-border))!important;
+  border-radius:18px!important;
+  background:
+    radial-gradient(circle at 8% 0%,color-mix(in srgb,var(--theme-accent) 8%,transparent),transparent 34%),
+    linear-gradient(160deg,color-mix(in srgb,var(--theme-surface) 97%,transparent),color-mix(in srgb,var(--theme-surface) 90%,var(--bg) 10%))!important;
+  box-shadow:0 12px 30px color-mix(in srgb,#000 11%,transparent),inset 0 1px 0 color-mix(in srgb,#fff 15%,transparent)!important;
+}
+.home-premium-access__head{
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  margin:0 1px 8px!important;
+}
+.home-premium-access__headcopy{
+  min-width:0!important;
+}
+.home-premium-access__kicker{
+  display:block!important;
+  color:var(--theme-accent)!important;
+  font-size:clamp(8.5px,2vw,9.5px)!important;
+  font-weight:950!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+  margin-bottom:2px!important;
+}
+.home-premium-access__title{
+  margin:0!important;
+  color:var(--theme-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(21px,5.1vw,27px)!important;
+  line-height:1!important;
+  font-weight:850!important;
+}
+.home-premium-access__all{
+  flex:0 0 auto!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--theme-accent)!important;
+  font:inherit!important;
+  font-size:11px!important;
+  font-weight:850!important;
+  padding:6px 2px!important;
+  cursor:pointer!important;
+}
+
+.home-tawhid-entry{
+  position:relative!important;
+  isolation:isolate!important;
+  width:100%!important;
+  min-height:94px!important;
+  display:grid!important;
+  grid-template-columns:64px minmax(0,1fr) 24px!important;
+  align-items:center!important;
+  gap:10px!important;
+  padding:12px 12px!important;
+  margin:0 0 8px!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 48%,var(--theme-border))!important;
+  border-radius:16px!important;
+  overflow:hidden!important;
+  text-align:left!important;
+  color:var(--theme-text)!important;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--theme-accent) 18%,var(--theme-surface)) 0%,color-mix(in srgb,var(--theme-surface) 94%,transparent) 62%),
+    url("/assets/feed-backgrounds/auto/abstract/bg-pro-abstract-67.webp") center 58%/cover no-repeat!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 18%,transparent),0 8px 22px color-mix(in srgb,#000 10%,transparent)!important;
+  cursor:pointer!important;
+}
+.home-tawhid-entry::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--theme-surface) 88%,transparent),color-mix(in srgb,var(--theme-surface) 72%,transparent) 64%,color-mix(in srgb,var(--theme-surface) 46%,transparent))!important;
+}
+.home-tawhid-entry__icon{
+  width:62px!important;
+  height:62px!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:4px!important;
+  border-radius:15px!important;
+  background:color-mix(in srgb,var(--theme-surface) 82%,transparent)!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 32%,var(--theme-border))!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 18%,transparent)!important;
+}
+.home-tawhid-entry__icon img.dar3d-icon{
+  width:100%!important;height:100%!important;object-fit:contain!important;
+}
+.home-tawhid-entry__copy{
+  min-width:0!important;
+}
+.home-tawhid-entry__label{
+  display:block!important;
+  margin-bottom:2px!important;
+  color:var(--theme-accent)!important;
+  font-size:9px!important;
+  font-weight:950!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+}
+.home-tawhid-entry__copy h3{
+  margin:0!important;
+  color:var(--theme-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(18px,4.4vw,23px)!important;
+  line-height:1.05!important;
+}
+.home-tawhid-entry__copy p{
+  margin:4px 0 0!important;
+  color:color-mix(in srgb,var(--theme-text) 74%,var(--theme-muted) 26%)!important;
+  font-size:clamp(10px,2.5vw,12px)!important;
+  line-height:1.28!important;
+  font-weight:650!important;
+}
+.home-tawhid-entry__arrow{
+  color:var(--theme-accent)!important;
+  font-size:26px!important;
+  line-height:1!important;
+  text-align:right!important;
+}
+
+.home-premium-access__grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:7px!important;
+}
+.home-premium-access-card{
+  position:relative!important;
+  min-width:0!important;
+  min-height:88px!important;
+  display:grid!important;
+  grid-template-columns:46px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:8px!important;
+  padding:9px!important;
+  border:1px solid color-mix(in srgb,var(--theme-border) 86%,var(--theme-accent) 14%)!important;
+  border-radius:14px!important;
+  background:color-mix(in srgb,var(--theme-surface) 96%,transparent)!important;
+  color:var(--theme-text)!important;
+  text-align:left!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 14%,transparent)!important;
+  cursor:pointer!important;
+}
+.home-premium-access-card__icon{
+  width:44px!important;
+  height:44px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+}
+.home-premium-access-card__icon img.dar3d-icon{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 4px 8px color-mix(in srgb,#000 22%,transparent))!important;
+}
+.home-premium-access-card__body{
+  min-width:0!important;
+}
+.home-premium-access-card h3{
+  margin:0!important;
+  color:var(--theme-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(14px,3.45vw,17px)!important;
+  line-height:1.05!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.home-premium-access-card p{
+  margin:3px 0 0!important;
+  color:var(--theme-muted)!important;
+  font-size:clamp(9px,2.2vw,10.5px)!important;
+  line-height:1.2!important;
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  overflow:hidden!important;
+}
+
+.home-premium-access__rail{
+  display:flex!important;
+  gap:6px!important;
+  overflow-x:auto!important;
+  scroll-snap-type:x proximity!important;
+  -webkit-overflow-scrolling:touch!important;
+  scrollbar-width:none!important;
+  margin:8px -2px 0!important;
+  padding:1px 2px 2px!important;
+}
+.home-premium-access__rail::-webkit-scrollbar{display:none!important}
+.home-premium-mini{
+  flex:0 0 auto!important;
+  min-width:94px!important;
+  min-height:40px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  padding:6px 9px 6px 7px!important;
+  border:1px solid color-mix(in srgb,var(--theme-border) 88%,var(--theme-accent) 12%)!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--theme-surface) 94%,transparent)!important;
+  color:var(--theme-text)!important;
+  font:inherit!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  white-space:nowrap!important;
+  scroll-snap-align:start!important;
+  cursor:pointer!important;
+}
+.home-premium-mini__icon{
+  width:27px!important;
+  height:27px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+}
+.home-premium-mini__icon img.dar3d-icon{
+  width:100%!important;height:100%!important;object-fit:contain!important;
+}
+
+/* bestehende Module nach dem Schnellzugriff verkleinern */
+body.is-home-route .home-v380-shell{
+  gap:8px!important;
+}
+body.is-home-route .home-v380-quran-hero{
+  min-height:52px!important;
+  padding:8px 10px!important;
+  margin:0 0 2px!important;
+  border-radius:14px!important;
+}
+body.is-home-route .home-v380-quran-hero__mark{
+  width:38px!important;
+  height:38px!important;
+  flex-basis:38px!important;
+}
+body.is-home-route .home-v380-quran-hero__title{
+  font-size:clamp(14px,3.4vw,16px)!important;
+}
+body.is-home-route .home-v380-section{
+  margin-top:8px!important;
+  margin-bottom:8px!important;
+}
+body.is-home-route .home-v380-section-title{
+  font-size:clamp(18px,4.4vw,23px)!important;
+}
+body.is-home-route .home-v380-discover,
+body.is-home-route .home-v380-libraries--noble,
+body.is-home-route .home-v380-search-wrap--noble{
+  border-radius:16px!important;
+}
+body.is-home-route .home-v380-post-preview{
+  min-height:0!important;
+}
+body.is-home-route .home-v380-popular-wrap{
+  display:none!important;
+}
+
+/* Wissen & Quellen: kompakte 2-Spalten-Liste */
+body.is-home-route .home-v380-libraries--noble .home-v380-lib-grid--fixed{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:7px!important;
+}
+body.is-home-route .home-v380-lib-card--noble{
+  min-height:62px!important;
+  padding:8px!important;
+}
+body.is-home-route .home-v380-lib-card--noble .home-v380-lib-card__ico{
+  width:38px!important;
+  height:38px!important;
+  flex-basis:38px!important;
+}
+body.is-home-route .home-v380-lib-card--noble h3{
+  font-size:clamp(12px,3vw,14px)!important;
+}
+body.is-home-route .home-v380-lib-card--noble p{
+  font-size:9.5px!important;
+}
+
+/* Hover/press */
+@media(hover:hover){
+  .home-tawhid-entry:hover,
+  .home-premium-access-card:hover,
+  .home-premium-mini:hover{
+    border-color:color-mix(in srgb,var(--theme-accent) 50%,var(--theme-border))!important;
+    filter:brightness(1.025)!important;
+  }
+}
+.home-tawhid-entry:active,
+.home-premium-access-card:active,
+.home-premium-mini:active{
+  transform:scale(.985)!important;
+}
+
+/* Tablet */
+@media(min-width:720px){
+  .home-premium-access__grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+  .home-premium-access-card{
+    min-height:94px!important;
+  }
+}
+
+/* Sehr kleine iPhones */
+@media(max-width:370px){
+  body.is-home-route .top-shell .brand-main h1.brand-title-refined{
+    font-size:27px!important;
+  }
+  body.is-home-route .top-shell .brand-main .logo{
+    width:60px!important;height:60px!important;
+  }
+  body.is-home-route .top-shell.theme-hero-shell .isnad{
+    padding-right:92px!important;
+  }
+  body.is-home-route .top-shell.theme-hero-shell .isnad::after{
+    width:70px!important;height:70px!important;right:10px!important;
+  }
+  .home-tawhid-entry{
+    grid-template-columns:54px minmax(0,1fr) 18px!important;
+  }
+  .home-tawhid-entry__icon{
+    width:52px!important;height:52px!important;
+  }
+  .home-premium-access-card{
+    grid-template-columns:40px minmax(0,1fr)!important;
+    padding:8px 7px!important;
+  }
+  .home-premium-access-card__icon{
+    width:38px!important;height:38px!important;
+  }
+}
