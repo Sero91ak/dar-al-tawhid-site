@@ -35805,4 +35805,160 @@ img.dar3d-icon{background:transparent!important;background-color:transparent!imp
 </style>
 <link rel="stylesheet" href="/test/assets/theme-salbei-elfenbein.css?v=2">
 <link rel="stylesheet" href="/test/assets/home-premium-start-v1101.css?v=2">
+
+<style id="home-readability-v1102">
+/* TEST ONLY · Home contrast/readability guard.
+   Ändert nur Startseite; keine Route, Gebetslogik oder Inhalte. */
+html[data-theme="dark"] body.is-home-route{
+  --home-read-text:#F7F0DD;--home-read-muted:#C9C0A7;--home-read-accent:#E6C979;
+  --home-read-surface:rgba(9,9,7,.91);--home-read-card:rgba(18,17,13,.94);--home-read-border:rgba(230,201,121,.25);
+}
+html[data-theme="light"] body.is-home-route{
+  --home-read-text:#211D18;--home-read-muted:#5B5248;--home-read-accent:#7A5B23;
+  --home-read-surface:rgba(255,253,247,.94);--home-read-card:rgba(255,255,252,.97);--home-read-border:rgba(122,91,35,.22);
+}
+html[data-theme="eisgold"] body.is-home-route{
+  --home-read-text:#17212A;--home-read-muted:#536573;--home-read-accent:#476D82;
+  --home-read-surface:rgba(244,250,253,.95);--home-read-card:rgba(252,254,255,.98);--home-read-border:rgba(71,109,130,.22);
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route{
+  --home-read-text:#17211B;--home-read-muted:#536057;--home-read-accent:#3F5D4B;
+  --home-read-surface:rgba(248,250,246,.95);--home-read-card:rgba(255,255,252,.98);--home-read-border:rgba(63,93,75,.22);
+}
+html[data-theme="soft"] body.is-home-route{
+  --home-read-text:#2D2228;--home-read-muted:#61525A;--home-read-accent:#7A5062;
+  --home-read-surface:rgba(255,249,247,.95);--home-read-card:rgba(255,252,250,.98);--home-read-border:rgba(122,80,98,.22);
+}
+html[data-theme="royal"] body.is-home-route{
+  --home-read-text:#FFF4D7;--home-read-muted:#C8D1E0;--home-read-accent:#F0D486;
+  --home-read-surface:rgba(7,19,40,.91);--home-read-card:rgba(11,28,54,.95);--home-read-border:rgba(240,212,134,.24);
+}
+html[data-theme="bordeaux"] body.is-home-route{
+  --home-read-text:#FFF2D8;--home-read-muted:#D7C0B9;--home-read-accent:#E2C57F;
+  --home-read-surface:rgba(31,12,16,.92);--home-read-card:rgba(46,18,23,.95);--home-read-border:rgba(226,197,127,.24);
+}
+html[data-theme="dar-al-layl"] body.is-home-route{
+  --home-read-text:#F3EBDD;--home-read-muted:#B8B2A6;--home-read-accent:#D8C18B;
+  --home-read-surface:rgba(9,13,11,.92);--home-read-card:rgba(15,20,17,.96);--home-read-border:rgba(216,193,139,.22);
+}
+
+/* Top / Marke / Gebetszeiten / Ibn Sīrīn */
+body.is-home-route .top-shell.theme-hero-shell{
+  --theme-text:var(--home-read-text)!important;
+  --theme-muted:var(--home-read-muted)!important;
+  --theme-accent:var(--home-read-accent)!important;
+  --premium-title:var(--home-read-text)!important;
+  --premium-body:var(--home-read-muted)!important;
+  --premium-label:var(--home-read-accent)!important;
+  --cream:var(--home-read-text)!important;
+  --muted:var(--home-read-muted)!important;
+  --gold2:var(--home-read-accent)!important;
+}
+body.is-home-route .brand-main .brand-title-refined,
+body.is-home-route .top-shell .salam,
+body.is-home-route .isnad-words{
+  color:var(--home-read-text)!important;
+  -webkit-text-fill-color:var(--home-read-text)!important;
+}
+body.is-home-route .top-shell .intro,
+body.is-home-route .isnad-source{
+  color:var(--home-read-muted)!important;
+}
+body.is-home-route .brand-kicker-row small,
+body.is-home-route .top-shell .intro strong,
+body.is-home-route .isnad-label,
+body.is-home-route .isnad-speaker{
+  color:var(--home-read-accent)!important;
+}
+body.is-home-route .top-shell .intro{
+  font-size:clamp(12.2px,3vw,14px)!important;
+  line-height:1.46!important;
+}
+body.is-home-route .isnad-source{
+  font-size:clamp(10.8px,2.6vw,12px)!important;
+  line-height:1.38!important;
+}
+body.is-home-route .header-prayer-hub{
+  color:var(--home-read-text)!important;
+}
+
+/* Home-Flächen */
+body.is-home-route .home-premium-access{
+  border-color:var(--home-read-border)!important;
+  background:var(--home-read-surface)!important;
+}
+body.is-home-route .home-tawhid-entry,
+body.is-home-route .home-premium-access-card,
+body.is-home-route .home-premium-mini,
+body.is-home-route .home-v380-quran-hero,
+body.is-home-route .home-v380-open-row,
+body.is-home-route .home-v380-post-preview,
+body.is-home-route .home-discover-pdf-card{
+  border-color:var(--home-read-border)!important;
+}
+body.is-home-route .home-premium-access-card,
+body.is-home-route .home-premium-mini{
+  background:var(--home-read-card)!important;
+}
+
+/* Haupttexte: niemals blass */
+body.is-home-route :is(
+  .home-start-title,.home-premium-access__title,.home-tawhid-entry__copy h3,
+  .home-premium-access-card h3,.home-premium-mini>span:last-child,
+  .home-v380-section-title,.home-v380-quran-hero__title,
+  .home-v380-open-row__title,.home-v380-post-title,.home-discover-pdf-title
+){
+  color:var(--home-read-text)!important;
+  -webkit-text-fill-color:var(--home-read-text)!important;
+  text-shadow:none!important;
+}
+
+/* Sekundärtexte: Mindestgröße + echter Kontrast */
+body.is-home-route :is(
+  .home-tawhid-entry__copy p,.home-premium-access-card p,
+  .home-v380-quran-hero__meta,.home-v380-quran-hero__when,
+  .home-v380-open-row__excerpt,.home-v380-open-row__meta,
+  .home-v380-post-excerpt,.home-v380-post-meta,
+  .home-discover-pdf-meta
+){
+  color:var(--home-read-muted)!important;
+  -webkit-text-fill-color:var(--home-read-muted)!important;
+}
+body.is-home-route .home-premium-access-card p{
+  font-size:clamp(10.7px,2.55vw,12px)!important;
+  line-height:1.28!important;
+}
+body.is-home-route .home-tawhid-entry__copy p{
+  font-size:clamp(11px,2.7vw,12.5px)!important;
+  line-height:1.34!important;
+}
+body.is-home-route .home-premium-mini{
+  color:var(--home-read-text)!important;
+  font-size:11.2px!important;
+  font-weight:850!important;
+}
+
+/* Akzente nur für Orientierung, nicht als schwacher Fließtext */
+body.is-home-route :is(
+  .home-premium-access__kicker,.home-premium-access__all,
+  .home-tawhid-entry__label,.home-tawhid-entry__arrow,.home-v380-kicker
+){
+  color:var(--home-read-accent)!important;
+  -webkit-text-fill-color:var(--home-read-accent)!important;
+}
+body.is-home-route .home-tawhid-entry__label{
+  font-size:9.8px!important;
+}
+body.is-home-route .home-premium-access__kicker{
+  font-size:9.5px!important;
+}
+
+/* Kleine Displays: Text nicht bis zur Unlesbarkeit schrumpfen */
+@media(max-width:390px){
+  body.is-home-route .home-premium-access-card h3{font-size:14.5px!important}
+  body.is-home-route .home-premium-access-card p{font-size:10.5px!important}
+  body.is-home-route .home-premium-mini{font-size:10.8px!important}
+  body.is-home-route .isnad-source{font-size:10.5px!important}
+}
+</style>
 </html>
