@@ -782,3 +782,223 @@ html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .home-t
     transition:none!important;
   }
 }
+
+
+/* v1105 · SCHRITT 1 · HERO exakt nach Zielbild */
+/* Nur Startseiten-Kopf: durchgehendes Moschee-Nachtbild, offene Typografie,
+   keine dunklen Rechteckplatten hinter Marke, Begrüßung oder Ibn-Sīrīn-Zitat. */
+
+body.is-home-route .top-shell.theme-hero-shell{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  margin:0 0 10px!important;
+  border:0!important;
+  border-radius:0 0 24px 24px!important;
+  background:
+    linear-gradient(180deg,rgba(4,12,24,.14) 0%,rgba(5,15,30,.30) 44%,rgba(4,13,27,.74) 100%),
+    linear-gradient(90deg,rgba(3,12,25,.60) 0%,rgba(4,15,31,.38) 52%,rgba(3,12,25,.18) 100%),
+    url("/assets/feed-backgrounds/auto/mosque/bg-nature-mosque-pexels-54.webp") 65% 42%/cover no-repeat!important;
+  box-shadow:none!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 74% 10%,rgba(218,190,122,.10),transparent 28%),
+    linear-gradient(180deg,rgba(1,8,18,.10),rgba(1,8,18,.12) 55%,rgba(1,8,18,.54) 100%)!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface{
+  position:relative!important;
+  z-index:1!important;
+  padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 12px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface::before,
+body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface::after{
+  content:none!important;
+  display:none!important;
+}
+
+body.is-home-route .top-shell .brand-kicker-row{
+  margin:0 0 8px!important;
+}
+
+body.is-home-route .top-shell .brand-kicker-row small{
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:#e5c978!important;
+  -webkit-text-fill-color:#e5c978!important;
+  font-size:clamp(9px,2.25vw,11px)!important;
+  font-weight:900!important;
+  letter-spacing:.20em!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.72)!important;
+}
+
+body.is-home-route .top-shell .brand-main{
+  align-items:center!important;
+  gap:12px!important;
+  margin:0!important;
+}
+
+body.is-home-route .top-shell .brand-main .logo{
+  width:clamp(68px,17vw,86px)!important;
+  height:clamp(68px,17vw,86px)!important;
+  flex:0 0 clamp(68px,17vw,86px)!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  filter:drop-shadow(0 9px 16px rgba(0,0,0,.38))!important;
+}
+
+body.is-home-route .top-shell .brand-main h1.brand-title-refined{
+  margin:0!important;
+  color:#fff8e9!important;
+  -webkit-text-fill-color:#fff8e9!important;
+  font-size:clamp(31px,7.7vw,46px)!important;
+  line-height:.94!important;
+  font-weight:700!important;
+  letter-spacing:.035em!important;
+  text-shadow:0 3px 18px rgba(0,0,0,.58)!important;
+}
+
+body.is-home-route .top-shell .brand-main h1.brand-title-refined::after{
+  content:""!important;
+  display:block!important;
+  width:min(220px,88%)!important;
+  height:1px!important;
+  margin-top:9px!important;
+  background:linear-gradient(90deg,#d9bc73 0%,rgba(217,188,115,.70) 66%,transparent 100%)!important;
+}
+
+/* Begrüßung liegt direkt auf dem Bild, ohne Panel. */
+body.is-home-route .top-shell .hero-text{
+  margin:14px 0 0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+body.is-home-route .top-shell .salam{
+  margin:0 0 7px!important;
+  color:#fff7e8!important;
+  -webkit-text-fill-color:#fff7e8!important;
+  font-size:clamp(13px,3.25vw,16px)!important;
+  line-height:1.32!important;
+  font-weight:650!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.72)!important;
+}
+
+body.is-home-route .top-shell .intro{
+  margin:0!important;
+  max-width:64ch!important;
+  color:#f0eee8!important;
+  -webkit-text-fill-color:#f0eee8!important;
+  font-size:clamp(12.4px,3vw,14.2px)!important;
+  line-height:1.48!important;
+  font-weight:650!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.72)!important;
+}
+
+body.is-home-route .top-shell .intro strong{
+  color:#e7c978!important;
+  -webkit-text-fill-color:#e7c978!important;
+  font-weight:900!important;
+}
+
+/* Ibn-Sīrīn-Teil als offener Editorial-Bereich auf demselben Hintergrund. */
+body.is-home-route .top-shell.theme-hero-shell .isnad{
+  position:relative!important;
+  z-index:1!important;
+  margin:0!important;
+  padding:17px 16px 18px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:linear-gradient(180deg,rgba(3,12,25,.05),rgba(3,12,25,.30))!important;
+  box-shadow:none!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .isnad::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  left:16px!important;
+  right:16px!important;
+  top:0!important;
+  height:1px!important;
+  background:linear-gradient(90deg,#d7b96e 0%,rgba(215,185,110,.70) 52%,transparent 100%)!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .isnad::after{
+  content:none!important;
+  display:none!important;
+}
+
+body.is-home-route .isnad-label{
+  margin:0 0 6px!important;
+  color:#ddc078!important;
+  font-size:clamp(9px,2.2vw,10.5px)!important;
+  font-weight:900!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.66)!important;
+}
+
+body.is-home-route .isnad-speaker{
+  display:block!important;
+  margin:0 0 4px!important;
+  color:#e5c879!important;
+  font-size:clamp(12px,2.9vw,14px)!important;
+  font-weight:900!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.66)!important;
+}
+
+body.is-home-route .isnad-words{
+  color:#fff8eb!important;
+  -webkit-text-fill-color:#fff8eb!important;
+  font-size:clamp(17px,4.25vw,22px)!important;
+  line-height:1.28!important;
+  font-weight:650!important;
+  text-shadow:0 2px 14px rgba(0,0,0,.70)!important;
+}
+
+body.is-home-route .isnad-source{
+  margin-top:7px!important;
+  color:#d9dde5!important;
+  font-size:clamp(10.5px,2.55vw,12px)!important;
+  line-height:1.35!important;
+  font-weight:650!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.65)!important;
+}
+
+@media(max-width:520px){
+  body.is-home-route .top-shell.theme-hero-shell{
+    background-position:66% 42%!important;
+  }
+  body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface{
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  body.is-home-route .top-shell.theme-hero-shell .isnad{
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  body.is-home-route .top-shell.theme-hero-shell .isnad::before{
+    left:14px!important;
+    right:14px!important;
+  }
+}
