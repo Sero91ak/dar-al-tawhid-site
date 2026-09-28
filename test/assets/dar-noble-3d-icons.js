@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1107";
+  const VER="1108";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","topics.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -221,7 +221,7 @@
   }
   function fill(el,file,prio){
     if(!el||!file)return;
-    if(el.closest&&(el.closest(".qov-wake-labeled-btn")||el.closest(".qov-player-icon")||el.classList.contains("qov-wake-labeled-icon")))return;
+    if(el.closest&&(el.closest(".qov-wake-labeled-btn")||el.closest(".qov-player-icon")||el.closest(".quran-ayah-action-btn--play")||el.classList.contains("qov-wake-labeled-icon")))return;
     const want=src(file);
     el.querySelectorAll("img.dar3d-icon").forEach(function(im,i){if(i>0){try{im.remove()}catch(e){}}});
     const existing=el.querySelector("img.dar3d-icon");
@@ -264,9 +264,18 @@
       fill(el,fileFromHost(host,el)||fileFromKind("",el.textContent||""));
     });
     root.querySelectorAll(".quran-ayah-action-btn").forEach(btn=>{
+      if(btn.classList.contains("quran-ayah-action-btn--play")){
+        btn.querySelectorAll("img.dar3d-icon").forEach(function(im){try{im.remove()}catch(e){}});
+        if(!btn.querySelector(".qrc-play-mark")){
+          const mark=document.createElement("span");
+          mark.className="qrc-play-mark";
+          mark.setAttribute("aria-hidden","true");
+          btn.appendChild(mark);
+        }
+        return;
+      }
       let file="quran.png";
-      if(btn.classList.contains("quran-ayah-action-btn--play"))file="play.png";
-      else if(btn.classList.contains("quran-ayah-action-btn--bookmark"))file="saved.png";
+      if(btn.classList.contains("quran-ayah-action-btn--bookmark"))file="saved.png";
       else if(btn.classList.contains("quran-ayah-action-btn--share")) { btn.remove(); return; }
       else if(btn.classList.contains("quran-ayah-action-btn--tafsir"))file="quran.png";
       const imgs=btn.querySelectorAll("img.dar3d-icon");
