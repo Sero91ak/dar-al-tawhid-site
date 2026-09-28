@@ -878,6 +878,7 @@ def pronunciation_search(query:str,limit:int=10):
             "canonical":str(r.get("canonical") or r.get("string_to_replace","")),
             "alias":str(r.get("alias","")),
             "ttsText":str(r.get("tts_text","")),
+            "ttsLanguage":str(r.get("tts_language") or ("ar" if re.search(r"[\u0600-\u06ff]",str(r.get("tts_text",""))) else "de")),
             "ipa":str(r.get("ipa","")),
             "category":str(r.get("category","")),
             "audioLockKey":str(r.get("audio_lock_key","")),
@@ -946,22 +947,27 @@ def learning_lock_key(term:str,existing_key:str=""):
     digest=hashlib.sha1(normalize_lookup(term).encode("utf-8")).hexdigest()[:12]
     return "learned_"+digest
 
-def create_learning_preview(term:str,tts_text:str="",canonical:str=""):
+def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_id:str=""):
     term=str(term or "").strip()
     if not term:
         raise ValueError("Wort oder Name fehlt.")
     rule=find_learning_rule(term,tts_text,canonical)
     effective_tts=str(tts_text or (rule or {}).get("tts_text","")).strip()
     if not effective_tts:
-        raise ValueError("Keine Sprechform gefunden. Online suchen oder die arabische Sprechform eintragen.")
-    if not re.search(r"[\u0600-\u06ff]",effective_tts):
-        raise ValueError("Die manuelle Sprechform muss in arabischer Schrift angegeben werden.")
+        raise ValueError("Keine Sprechform gefunden. Bitte eine Sprechform eintragen oder einen Bibliothekstreffer wählen.")
+
+    requested=str(language_id or (rule or {}).get("tts_language") or "").strip().lower()
+    if requested not in ("ar","de"):
+        requested="ar" if re.search(r"[\u0600-\u06ff]",effective_tts) else "de"
+    if requested=="ar" and not re.search(r"[\u0600-\u06ff]",effective_tts):
+        raise ValueError("Für Arabisch muss die Sprechform in arabischer Schrift angegeben werden.")
+
     model=load_production_model()
     preview_id=uuid.uuid4().hex[:16]
     existing_key=str((rule or {}).get("audio_lock_key","")) or str(AUDIO_LOCK_BY_TTS.get(effective_tts,""))
     lock_key=learning_lock_key(term,existing_key)
     seed=3000+(int(preview_id[:8],16)%800000)
-    wav,metrics=render_segment_with_qa(model,effective_tts,"ar","narration",True,seed_base=seed)
+    wav,metrics=render_segment_with_qa(model,effective_tts,requested,"narration",True,seed_base=seed)
     path=LEARNING_PENDING_DIR/f"{preview_id}.wav"
     save_wav(path,wav,int(model.sr))
     meta={
@@ -969,6 +975,7 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str=""):
         "term":term,
         "canonical":str(canonical or (rule or {}).get("canonical") or term),
         "tts_text":effective_tts,
+        "tts_language":requested,
         "alias":str((rule or {}).get("alias","")),
         "ipa":str((rule or {}).get("ipa","")),
         "category":str((rule or {}).get("category","USER LEARNED")),
@@ -1018,8 +1025,8 @@ def confirm_learning_preview(preview_id:str,input_term:str=""):
         "ipa":str(meta.get("ipa","")),
         "priority":"user-master",
         "tts_text":str(meta["tts_text"]),
-        "tts_language":"ar",
-        "tts_strategy":"user-confirmed-audio-learning-v1",
+        "tts_language":str(meta.get("tts_language") or ("ar" if re.search(r"[\u0600-\u06ff]",str(meta["tts_text"])) else "de")),
+        "tts_strategy":"user-confirmed-audio-learning-v2",
         "voice_lock":"MASTER",
         "qa_tier":"critical",
         "audio_lock_key":lock_key,
@@ -1280,6 +1287,33 @@ def source_honorific_match(text:str,pos:int,required_key:str=""):
 
 def source_has_honorific(text:str,pos:int,required_key:str=""):
     return source_honorific_match(text,pos,required_key) is not None
+
+def apply_user_learned_overrides(text:str):
+    """Lokale, vom Nutzer bestätigte Aussprachekorrekturen zuerst anwenden.
+
+    Dadurch überschreibt eine bewusst gelernte Auswahl wie
+    'Raḥmatullāhi wa Barakātuh' oder 'Kids' immer unsere eingebauten Presets.
+    """
+    value=str(text or "")
+    found=[]
+    rules=[
+        dict(x or {})
+        for x in ((USER_OVERRIDE_DATA or {}).get("rules") or [])
+        if str((x or {}).get("string_to_replace") or "").strip()
+        and str((x or {}).get("tts_text") or "").strip()
+    ]
+    rules.sort(key=lambda x:len(str(x.get("string_to_replace") or "")),reverse=True)
+    for rule in rules:
+        form=str(rule.get("string_to_replace") or "").strip()
+        tts=str(rule.get("tts_text") or "").strip()
+        if not form or form not in value:
+            continue
+        count=value.count(form)
+        value=value.replace(form,tts)
+        hit=dict(rule)
+        hit["learned_override_matches"]=count
+        found.append(hit)
+    return value,found
 
 def apply_profile_fixed_phrases(text:str):
     """Kleine, explizit bestätigte Mehrwort-Phrasen vor Einzelwort-Regeln anwenden.
@@ -3409,9 +3443,10 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         speak=text
         found=[]
     elif free_mode and free_pronunciation:
-        phrase_text,phrase_found=apply_profile_fixed_phrases(text)
+        learned_text,learned_found=apply_user_learned_overrides(text)
+        phrase_text,phrase_found=apply_profile_fixed_phrases(learned_text)
         speak,word_found=prepare(phrase_text)
-        found=phrase_found+word_found
+        found=learned_found+phrase_found+word_found
     else:
         speak,found=prepare(text)
     if free_mode:
@@ -4121,6 +4156,7 @@ class H(BaseHTTPRequestHandler):
                     str(data.get("term","")),
                     str(data.get("ttsText","")),
                     str(data.get("canonical","")),
+                    str(data.get("language","")),
                 )
                 b=Path(meta["path"]).read_bytes()
                 self.send_response(200)
