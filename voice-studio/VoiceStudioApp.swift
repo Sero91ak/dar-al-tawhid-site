@@ -148,6 +148,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             key: "1",
             target: self
         ))
+        productionMenu.addItem(menuItem(
+            "Freie Stimme",
+            action: #selector(openFreeVoice(_:)),
+            key: "2",
+            target: self
+        ))
         productionMenu.addItem(.separator())
         productionMenu.addItem(menuItem(
             "Audio + Cover erzeugen",
@@ -208,7 +214,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     }
 
     @objc private func focusText(_ sender: Any?) {
-        runStudioAction("window.DarContentStudio && window.DarContentStudio.goToWorkflowStep && window.DarContentStudio.goToWorkflowStep('text');")
+        runStudioAction("window.setStudioMode && window.setStudioMode('production'); window.DarContentStudio && window.DarContentStudio.goToWorkflowStep && window.DarContentStudio.goToWorkflowStep('text');")
+    }
+
+    @objc private func openFreeVoice(_ sender: Any?) {
+        runStudioAction("window.setStudioMode && window.setStudioMode('free');")
     }
 
     @objc private func produceContent(_ sender: Any?) {
