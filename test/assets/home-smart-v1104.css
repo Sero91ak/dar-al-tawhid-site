@@ -2637,3 +2637,195 @@ body.is-home-route .header-prayer-hub__place{
     max-width:24%!important;
   }
 }
+
+/* v1106 · SCHRITT 3 · QURʾĀN-WEITERLESEN ALS PREMIUM-KAPSEL */
+/* Reines Layout-Upgrade der vorhandenen Qurʾān-Weiterlesen-Schaltfläche.
+   data-nav / data-quran-continue und Lesefortschritt bleiben unverändert. */
+
+body.is-home-route .home-v380-quran-hero{
+  position:relative!important;
+  isolation:isolate!important;
+  display:flex!important;
+  align-items:center!important;
+  width:100%!important;
+  min-height:104px!important;
+  margin:12px 0 14px!important;
+  padding:15px 112px 15px 22px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(222,194,124,.52)!important;
+  border-radius:999px!important;
+  color:#fff8ea!important;
+  background:
+    radial-gradient(circle at 84% 42%,rgba(222,194,124,.15) 0%,rgba(222,194,124,.055) 24%,transparent 48%),
+    linear-gradient(100deg,rgba(17,31,51,.94) 0%,rgba(8,20,38,.91) 54%,rgba(5,15,30,.88) 100%)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.09),
+    inset 0 -1px 0 rgba(222,194,124,.055),
+    0 14px 34px rgba(0,0,0,.24)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.08)!important;
+  backdrop-filter:blur(18px) saturate(1.08)!important;
+  text-align:left!important;
+  transform:none!important;
+}
+
+body.is-home-route .home-v380-quran-hero::before{
+  content:""!important;
+  position:absolute!important;
+  inset:1px!important;
+  z-index:0!important;
+  border-radius:inherit!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(115deg,rgba(255,255,255,.055) 0%,transparent 24%,transparent 66%,rgba(222,194,124,.045) 100%)!important;
+}
+
+/* 3D-Qurʾān klar sichtbar, aber als Teil der Kapsel – kein separates Kästchen. */
+body.is-home-route .home-v380-quran-hero::after{
+  content:""!important;
+  position:absolute!important;
+  right:12px!important;
+  top:50%!important;
+  z-index:1!important;
+  width:96px!important;
+  height:96px!important;
+  transform:translateY(-50%) rotate(-5deg)!important;
+  pointer-events:none!important;
+  background:url("/test/assets/dar-3d-icons/quran.png?v=1106") center/contain no-repeat!important;
+  opacity:.96!important;
+  mix-blend-mode:normal!important;
+  filter:
+    drop-shadow(0 12px 16px rgba(0,0,0,.34))
+    drop-shadow(0 1px 5px rgba(222,194,124,.14))
+    saturate(.96)!important;
+}
+
+body.is-home-route .home-v380-quran-hero__body{
+  position:relative!important;
+  z-index:2!important;
+  flex:1 1 auto!important;
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:4px!important;
+}
+
+body.is-home-route .home-v380-quran-hero .home-v380-kicker{
+  margin:0 0 1px!important;
+  color:#dfc27a!important;
+  -webkit-text-fill-color:#dfc27a!important;
+  font-family:var(--font-ui,var(--sans))!important;
+  font-size:clamp(8px,1.9vw,9.5px)!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+}
+
+body.is-home-route .home-v380-quran-hero__title{
+  margin:0!important;
+  max-width:100%!important;
+  color:#fff8ea!important;
+  -webkit-text-fill-color:#fff8ea!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(20px,4.8vw,24px)!important;
+  line-height:1.04!important;
+  font-weight:850!important;
+  letter-spacing:-.01em!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.34)!important;
+}
+
+body.is-home-route .home-v380-quran-hero__meta{
+  margin:1px 0 0!important;
+  max-width:34ch!important;
+  color:rgba(236,235,228,.74)!important;
+  -webkit-text-fill-color:rgba(236,235,228,.74)!important;
+  font-size:clamp(10px,2.35vw,11.5px)!important;
+  line-height:1.25!important;
+  font-weight:650!important;
+}
+
+body.is-home-route .home-v380-quran-hero__when{
+  margin:0!important;
+  color:rgba(222,194,124,.78)!important;
+  -webkit-text-fill-color:rgba(222,194,124,.78)!important;
+  font-size:clamp(8.8px,2.05vw,10px)!important;
+  line-height:1.15!important;
+  font-weight:750!important;
+}
+
+body.is-home-route .home-v380-quran-hero__chevron{
+  display:none!important;
+}
+
+/* Alte Icon-Slots dürfen keine zweite Qurʾān-Grafik erzeugen. */
+body.is-home-route .home-v380-quran-hero__mark{
+  display:none!important;
+}
+
+@media(hover:hover){
+  body.is-home-route .home-v380-quran-hero:hover{
+    border-color:rgba(228,201,132,.66)!important;
+    background:
+      radial-gradient(circle at 84% 42%,rgba(222,194,124,.18) 0%,rgba(222,194,124,.07) 25%,transparent 49%),
+      linear-gradient(100deg,rgba(19,34,55,.95) 0%,rgba(9,22,41,.93) 54%,rgba(6,17,33,.90) 100%)!important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.10),
+      0 16px 36px rgba(0,0,0,.27)!important;
+  }
+}
+
+body.is-home-route .home-v380-quran-hero:active{
+  transform:none!important;
+  opacity:.94!important;
+}
+
+@media(max-width:430px){
+  body.is-home-route .home-v380-quran-hero{
+    min-height:94px!important;
+    margin:10px 0 12px!important;
+    padding:13px 91px 13px 18px!important;
+    border-radius:999px!important;
+  }
+
+  body.is-home-route .home-v380-quran-hero::after{
+    right:8px!important;
+    width:82px!important;
+    height:82px!important;
+    transform:translateY(-50%) rotate(-5deg)!important;
+  }
+
+  body.is-home-route .home-v380-quran-hero__title{
+    font-size:clamp(18px,5.2vw,21px)!important;
+  }
+
+  body.is-home-route .home-v380-quran-hero__meta{
+    max-width:28ch!important;
+    font-size:9.8px!important;
+  }
+
+  body.is-home-route .home-v380-quran-hero__when{
+    font-size:8.7px!important;
+  }
+}
+
+@media(max-width:360px){
+  body.is-home-route .home-v380-quran-hero{
+    min-height:90px!important;
+    padding-left:15px!important;
+    padding-right:82px!important;
+  }
+
+  body.is-home-route .home-v380-quran-hero::after{
+    right:5px!important;
+    width:76px!important;
+    height:76px!important;
+  }
+
+  body.is-home-route .home-v380-quran-hero__title{
+    font-size:17.5px!important;
+  }
+}
+/* /v1106 · SCHRITT 3 */
+
