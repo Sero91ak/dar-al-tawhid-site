@@ -1240,3 +1240,169 @@ html.is-standalone-pwa[data-theme] body.is-home-route{
 }
 /* /v1117 · VISIBLE BACKDROP */
 
+/* v1117 · BODY BACKGROUND · ECHTES SICHTBARES MOTIV */
+/* Das Motiv sitzt direkt auf body.is-home-route und kann nicht mehr von einer
+   deckenden Theme-Fläche "übermalt" werden. */
+
+html[data-theme] body.is-home-route{
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb,var(--bg) 34%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 46%,transparent) 44%,
+      color-mix(in srgb,var(--bg) 58%,transparent) 100%
+    ),
+    url("/assets/feed-backgrounds/auto/mosque/bg-nature-mosque-pexels-54.webp") 54% 42%/cover fixed no-repeat!important;
+  background-color:var(--bg)!important;
+}
+
+html[data-theme="bordeaux"] body.is-home-route{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20,11,12,.30) 0%,
+      rgba(20,11,12,.44) 46%,
+      rgba(20,11,12,.58) 100%
+    ),
+    url("/assets/feed-backgrounds/auto/mosque/bg-nature-mosque-pexels-54.webp") 54% 42%/cover fixed no-repeat!important;
+  background-color:#140B0C!important;
+}
+
+html[data-theme="royal"] body.is-home-route{
+  background:
+    linear-gradient(180deg,rgba(7,22,44,.30),rgba(4,12,24,.58)),
+    url("/assets/feed-backgrounds/auto/mosque/bg-nature-mosque-pexels-54.webp") 54% 42%/cover fixed no-repeat!important;
+}
+
+html[data-theme="dar-al-layl"] body.is-home-route,
+html[data-theme="dark"] body.is-home-route{
+  background:
+    linear-gradient(180deg,rgba(5,6,5,.30),rgba(5,6,5,.60)),
+    url("/assets/feed-backgrounds/auto/mosque/bg-nature-mosque-pexels-54.webp") 54% 42%/cover fixed no-repeat!important;
+}
+
+html[data-theme="light"] body.is-home-route,
+html[data-theme="soft"] body.is-home-route,
+html[data-theme="eisgold"] body.is-home-route{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.56),rgba(255,255,255,.72)),
+    url("/assets/feed-backgrounds/auto/mosque/bg-nature-mosque-pexels-54.webp") 54% 42%/cover fixed no-repeat!important;
+}
+
+/* Die zusätzliche Pseudo-Bildschicht ist nun unnötig und würde das Bild doppeln. */
+html[data-theme] body.is-home-route #appRoot::before{
+  display:none!important;
+  content:none!important;
+}
+
+/* Alle Home-Schalen vollständig transparent, damit body sichtbar bleibt. */
+html[data-theme] body.is-home-route :is(
+  #appRoot,
+  #appShell,
+  .app,
+  #appView,
+  #appView.view,
+  .view,
+  .top-shell,
+  .top-shell.theme-hero-shell
+){
+  background:transparent!important;
+  background-image:none!important;
+}
+
+/* Noch leichteres Theme-Glas. */
+html[data-theme] body.is-home-route{
+  --hra-glass:color-mix(in srgb,var(--card) 26%,transparent);
+  --hra-glass-strong:color-mix(in srgb,var(--card) 34%,transparent);
+  --hra-glass-soft:color-mix(in srgb,var(--card) 18%,transparent);
+  --hra-glass-faint:color-mix(in srgb,var(--card) 10%,transparent);
+}
+
+html[data-theme="bordeaux"] body.is-home-route{
+  --hra-glass:rgba(91,35,42,.22);
+  --hra-glass-strong:rgba(91,35,42,.30);
+  --hra-glass-soft:rgba(91,35,42,.15);
+  --hra-glass-faint:rgba(91,35,42,.08);
+}
+
+html[data-theme="royal"] body.is-home-route{
+  --hra-glass:rgba(8,27,48,.22);
+  --hra-glass-strong:rgba(8,27,48,.30);
+  --hra-glass-soft:rgba(8,27,48,.15);
+  --hra-glass-faint:rgba(8,27,48,.08);
+}
+
+html[data-theme="dar-al-layl"] body.is-home-route,
+html[data-theme="dark"] body.is-home-route{
+  --hra-glass:rgba(12,12,10,.22);
+  --hra-glass-strong:rgba(12,12,10,.30);
+  --hra-glass-soft:rgba(12,12,10,.15);
+  --hra-glass-faint:rgba(12,12,10,.08);
+}
+
+html[data-theme="light"] body.is-home-route,
+html[data-theme="soft"] body.is-home-route,
+html[data-theme="eisgold"] body.is-home-route{
+  --hra-glass:rgba(255,255,255,.44);
+  --hra-glass-strong:rgba(255,255,255,.56);
+  --hra-glass-soft:rgba(255,255,255,.32);
+  --hra-glass-faint:rgba(255,255,255,.20);
+}
+
+/* Sichtbare Hauptflächen mit reduziertem Blur: Motiv bleibt erkennbar. */
+html[data-theme] body.is-home-route :is(
+  .header-prayer-hub__main,
+  .header-prayer-hub__status,
+  #appView .home-v380-quran-hero.home-v380-quran-hero--compact.home-v380-quran-hero--reading,
+  #appView .home-tawhid-entry.dar-click-glow,
+  #appView .home-premium-access-card,
+  #appView .home-premium-mini,
+  #appView .home-discover-pdf-card,
+  #appView .home-v380-post-preview,
+  #appView .home-v380-lib-card,
+  #appView .home-v380-search-field,
+  #appView .direct-pick-well,
+  #appChromeDock #bottomNav.bottom-nav
+){
+  -webkit-backdrop-filter:blur(10px) saturate(1.03)!important;
+  backdrop-filter:blur(10px) saturate(1.03)!important;
+}
+
+/* Gerade die großen Flächen nicht mehr vollflächig "rot" wirken lassen. */
+html[data-theme="bordeaux"] body.is-home-route #appView .home-v380-quran-hero.home-v380-quran-hero--compact.home-v380-quran-hero--reading,
+html[data-theme="bordeaux"] body.is-home-route #appView .home-tawhid-entry.dar-click-glow{
+  background:
+    radial-gradient(circle at 86% 44%,rgba(232,220,196,.06),transparent 38%),
+    rgba(91,35,42,.26)!important;
+}
+
+html[data-theme="bordeaux"] body.is-home-route #appView .home-premium-access__grid > .home-premium-access-card,
+html[data-theme="bordeaux"] body.is-home-route #appView .home-discover-pdf-card,
+html[data-theme="bordeaux"] body.is-home-route #appView .home-v380-post-preview,
+html[data-theme="bordeaux"] body.is-home-route #appView .home-v380-search-field{
+  background:rgba(91,35,42,.18)!important;
+}
+
+/* Heute-Felder praktisch offen. */
+html[data-theme] body.is-home-route #appView .home-today-cards .home-v380-today__season > .home-v380-open-row,
+html[data-theme] body.is-home-route #appView .home-today-cards .highlight-sections .recommended-box,
+html[data-theme] body.is-home-route #appView .home-today-cards .highlight-sections .daily-box{
+  background:linear-gradient(90deg,var(--hra-glass-faint),transparent 70%)!important;
+  -webkit-backdrop-filter:blur(4px)!important;
+  backdrop-filter:blur(4px)!important;
+}
+
+/* Bottom-Bar ebenfalls deutlich transparenter. */
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav{
+  background:var(--hra-glass)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+/* iOS: fixed backgrounds können ruckeln; innerhalb Standalone auf scroll wechseln. */
+html.is-standalone-pwa[data-theme] body.is-home-route,
+html.dar-ios-native-app[data-theme] body.is-home-route{
+  background-attachment:scroll!important;
+}
+/* /v1117 · BODY BACKGROUND */
+
