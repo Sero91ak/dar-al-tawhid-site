@@ -2530,6 +2530,146 @@ html.kids-intro-active.kids-intro-reveal .app{
   .kids-cinema-brand{opacity:1;filter:none;transform:translateX(-50%)}
   .kids-cinema-video{transform:none!important}
 }
+
+.kids-cinema-poster{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    linear-gradient(180deg,rgba(1,8,16,.05),rgba(1,8,16,.2)),
+    url("/test/kids/assets/kids-art/quran-reise-v11-clean.png") center 58%/cover no-repeat;
+  transform:scale(1.035);
+  filter:saturate(1.18) contrast(1.06) brightness(.88);
+  animation:kidsPosterPush 9.8s cubic-bezier(.16,.72,.18,1) both;
+  opacity:1;
+  transition:opacity .7s ease;
+}
+#kidsCinemaIntro.is-playing .kids-cinema-poster{opacity:.14}
+@keyframes kidsPosterPush{
+  from{transform:scale(1.08) translate3d(0,1.2%,0)}
+  to{transform:scale(1.015) translate3d(0,-.6%,0)}
+}
+.kids-cinema-light{
+  position:absolute;
+  z-index:4;
+  left:50%;
+  top:68%;
+  width:min(82vw,520px);
+  aspect-ratio:1.55;
+  transform:translate(-50%,-50%) scale(.35);
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(255,251,222,.86) 0 3%,rgba(255,213,110,.42) 11%,rgba(83,224,215,.16) 31%,transparent 68%);
+  filter:blur(11px);
+  mix-blend-mode:screen;
+  opacity:0;
+  animation:kidsLightRise 5.2s cubic-bezier(.16,1,.3,1) 2.7s both;
+  pointer-events:none;
+}
+@keyframes kidsLightRise{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}
+  35%{opacity:.65;transform:translate(-50%,-50%) scale(.78)}
+  68%{opacity:.92;transform:translate(-50%,-50%) scale(1.06)}
+  100%{opacity:.34;transform:translate(-50%,-50%) scale(.92)}
+}
+.kids-cinema-letters{
+  position:absolute;
+  inset:0;
+  z-index:6;
+  pointer-events:none;
+  perspective:1100px;
+  transform-style:preserve-3d;
+}
+.kids-cinema-letter{
+  position:absolute;
+  left:50%;
+  top:68%;
+  width:clamp(72px,20vw,112px);
+  height:clamp(72px,20vw,112px);
+  display:grid;
+  place-items:center;
+  font-family:"Noto Naskh Arabic","Geeza Pro","Arial",sans-serif;
+  font-size:clamp(62px,18vw,102px);
+  font-weight:700;
+  line-height:1;
+  opacity:0;
+  transform-style:preserve-3d;
+  transform-origin:50% 80%;
+  -webkit-text-stroke:.6px rgba(255,255,255,.3);
+  backface-visibility:hidden;
+}
+.kids-cinema-letter::before{
+  content:attr(data-letter);
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  transform:translate3d(3px,5px,-6px);
+  color:rgba(70,39,15,.72);
+  filter:blur(.3px);
+  z-index:-1;
+}
+.kids-cinema-letter.alif{
+  margin-left:18vw;
+  color:#f6d278;
+  text-shadow:0 2px 0 #fff2c0,0 7px 14px rgba(0,0,0,.46),0 0 18px rgba(255,216,116,.58),0 0 42px rgba(255,183,66,.28);
+  animation:kidsLetterAlif 4.8s cubic-bezier(.16,1,.3,1) 3.55s both;
+}
+.kids-cinema-letter.ba{
+  margin-left:-7vw;
+  color:#76ded3;
+  text-shadow:0 2px 0 #d9fffb,0 7px 14px rgba(0,0,0,.46),0 0 18px rgba(81,225,214,.65),0 0 44px rgba(39,181,193,.3);
+  animation:kidsLetterBa 4.9s cubic-bezier(.16,1,.3,1) 3.78s both;
+}
+.kids-cinema-letter.ta{
+  margin-left:-32vw;
+  color:#eeb18f;
+  text-shadow:0 2px 0 #ffe0c8,0 7px 14px rgba(0,0,0,.46),0 0 18px rgba(240,170,132,.6),0 0 42px rgba(214,110,93,.26);
+  animation:kidsLetterTa 5s cubic-bezier(.16,1,.3,1) 4.02s both;
+}
+@keyframes kidsLetterAlif{
+  0%{opacity:0;filter:blur(6px);transform:translate3d(-50%,12px,-190px) rotateX(64deg) rotateY(-34deg) rotateZ(12deg) scale(.16)}
+  22%{opacity:.96;filter:blur(1px);transform:translate3d(-50%,-82px,64px) rotateX(8deg) rotateY(14deg) rotateZ(-4deg) scale(1.06)}
+  48%{opacity:1;filter:none;transform:translate3d(-50%,-177px,132px) rotateX(-2deg) rotateY(-5deg) rotateZ(2deg) scale(1)}
+  78%{opacity:.96;transform:translate3d(-50%,-190px,138px) rotateX(2deg) rotateY(4deg) rotateZ(-1deg) scale(1.02)}
+  100%{opacity:0;filter:blur(2px);transform:translate3d(-50%,-214px,74px) rotateY(-5deg) scale(.96)}
+}
+@keyframes kidsLetterBa{
+  0%{opacity:0;filter:blur(6px);transform:translate3d(-50%,14px,-220px) rotateX(62deg) rotateY(35deg) rotateZ(-14deg) scale(.15)}
+  22%{opacity:.96;filter:blur(1px);transform:translate3d(-50%,-70px,58px) rotateX(-5deg) rotateY(-12deg) rotateZ(6deg) scale(1.08)}
+  48%{opacity:1;filter:none;transform:translate3d(-50%,-148px,146px) rotateX(3deg) rotateY(6deg) rotateZ(-2deg) scale(1)}
+  78%{opacity:.96;transform:translate3d(-50%,-163px,151px) rotateX(-2deg) rotateY(-4deg) rotateZ(1deg) scale(1.03)}
+  100%{opacity:0;filter:blur(2px);transform:translate3d(-50%,-192px,82px) rotateY(6deg) scale(.95)}
+}
+@keyframes kidsLetterTa{
+  0%{opacity:0;filter:blur(6px);transform:translate3d(-50%,14px,-205px) rotateX(66deg) rotateY(-32deg) rotateZ(16deg) scale(.15)}
+  22%{opacity:.94;filter:blur(1px);transform:translate3d(-50%,-57px,52px) rotateX(5deg) rotateY(13deg) rotateZ(-7deg) scale(1.08)}
+  48%{opacity:1;filter:none;transform:translate3d(-50%,-126px,132px) rotateX(-3deg) rotateY(-5deg) rotateZ(3deg) scale(1)}
+  78%{opacity:.95;transform:translate3d(-50%,-143px,139px) rotateX(2deg) rotateY(4deg) rotateZ(-1deg) scale(1.02)}
+  100%{opacity:0;filter:blur(2px);transform:translate3d(-50%,-174px,78px) rotateY(-5deg) scale(.95)}
+}
+.kids-cinema-ribbon{
+  position:absolute;
+  z-index:5;
+  left:11%;
+  right:11%;
+  top:41%;
+  height:38%;
+  pointer-events:none;
+  opacity:0;
+  animation:kidsRibbonReveal 4.4s ease 3.45s both;
+  filter:drop-shadow(0 0 7px rgba(255,218,115,.42));
+}
+.kids-cinema-ribbon path{
+  fill:none;
+  stroke-linecap:round;
+  stroke-dasharray:900;
+  stroke-dashoffset:900;
+}
+.kids-cinema-ribbon .gold{stroke:url(#kidsGoldTrail);stroke-width:1.55;animation:kidsTrailDraw 4s cubic-bezier(.16,.8,.2,1) 3.55s both}
+.kids-cinema-ribbon .aqua{stroke:url(#kidsAquaTrail);stroke-width:1.25;animation:kidsTrailDraw 4.15s cubic-bezier(.16,.8,.2,1) 3.72s both}
+@keyframes kidsRibbonReveal{0%{opacity:0}18%{opacity:.82}100%{opacity:.12}}
+@keyframes kidsTrailDraw{to{stroke-dashoffset:0}}
+
 </style>
 </head>
 <body>
@@ -2601,8 +2741,10 @@ html.kids-intro-active.kids-intro-reveal .app{
   <video
     id="kidsCinemaVideo"
     class="kids-cinema-video"
-    src="/test/kids/assets/kids-cinema/intro-final.mp4?v=59"
-    preload="auto"
+    src="/test/kids/assets/kids-cinema/intro-final.mp4?v=60"
+    preload="metadata"
+    muted
+    defaultmuted
     playsinline
     webkit-playsinline
     autoplay
@@ -2620,7 +2762,7 @@ html.kids-intro-active.kids-intro-reveal .app{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.59</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.60</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3098,19 +3240,15 @@ html.kids-intro-active.kids-intro-reveal .app{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 
-<script id="kids-cinema-intro-runtime-v4">
+<script id="kids-cinema-intro-runtime-v5">
 (function(){
   var root=document.documentElement;
   var intro=document.getElementById("kidsCinemaIntro");
   var video=document.getElementById("kidsCinemaVideo");
   var soundBtn=document.getElementById("kidsCinemaSound");
-  if(!intro||!video){
-    root.classList.remove("kids-intro-active");
-    return;
-  }
+  if(!intro||!video){root.classList.remove("kids-intro-active");return}
 
-  var finished=false;
-  var audioUnlocked=false;
+  var finished=false,audioUnlocked=false,startedAt=Date.now(),progressSeen=false;
   var reduced=false;
   try{reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
 
@@ -3123,96 +3261,87 @@ html.kids-intro-active.kids-intro-reveal .app{
       try{video.pause()}catch(e){}
       try{intro.remove()}catch(e){intro.style.display="none"}
       root.classList.remove("kids-intro-active","kids-intro-reveal");
-    },960);
+    },850);
   }
 
   function showSound(){
     if(soundBtn&&!audioUnlocked)soundBtn.classList.add("show");
   }
 
+  function playMuted(){
+    if(reduced){setTimeout(finish,900);return}
+    try{
+      video.defaultMuted=true;
+      video.muted=true;
+      video.playsInline=true;
+      video.setAttribute("muted","");
+      video.load();
+      var p=video.play();
+      if(p&&typeof p.catch==="function")p.catch(function(){});
+    }catch(e){}
+    setTimeout(showSound,650);
+  }
+
   function unlockSound(restart){
     audioUnlocked=true;
     if(soundBtn)soundBtn.classList.remove("show");
     try{
+      if(restart&&video.currentTime>0.65)video.currentTime=0;
       video.muted=false;
-      video.volume=1;
-      if(restart&&video.currentTime>1.05)video.currentTime=0;
-      var p=video.play();
-      if(p&&typeof p.catch==="function")p.catch(function(){showSound()});
-    }catch(e){showSound()}
-  }
-
-  function startPlayback(){
-    if(reduced){
-      setTimeout(finish,900);
-      return;
-    }
-    try{
-      video.muted=false;
+      video.defaultMuted=false;
+      video.removeAttribute("muted");
       video.volume=1;
       var p=video.play();
-      if(p&&typeof p.then==="function"){
-        p.then(function(){
-          audioUnlocked=true;
-          if(soundBtn)soundBtn.classList.remove("show");
-        }).catch(function(){
-          try{
-            video.muted=true;
-            var mutedPlay=video.play();
-            if(mutedPlay&&typeof mutedPlay.catch==="function")mutedPlay.catch(function(){});
-          }catch(e){}
-          showSound();
-        });
-      }
-    }catch(e){
-      try{video.muted=true;video.play()}catch(e2){}
-      showSound();
-    }
+      if(p&&typeof p.catch==="function")p.catch(function(){
+        audioUnlocked=false;
+        video.muted=true;
+        showSound();
+      });
+    }catch(e){audioUnlocked=false;showSound()}
   }
 
-  video.addEventListener("loadeddata",function(){
-    intro.classList.add("is-ready");
-  },{once:true});
+  function markPlaying(){
+    progressSeen=true;
+    intro.classList.add("is-ready","is-playing");
+  }
 
-  video.addEventListener("canplay",function(){
-    intro.classList.add("is-ready");
-  },{once:true});
-
+  video.addEventListener("playing",markPlaying,{once:true});
+  video.addEventListener("timeupdate",function(){
+    if(video.currentTime>.08&&!progressSeen)markPlaying();
+  });
+  video.addEventListener("loadeddata",function(){intro.classList.add("is-ready")},{once:true});
+  video.addEventListener("canplay",function(){intro.classList.add("is-ready")},{once:true});
   video.addEventListener("ended",finish,{once:true});
+  video.addEventListener("error",function(){setTimeout(finish,500)},{once:true});
 
-  video.addEventListener("error",function(){
-    setTimeout(finish,700);
-  },{once:true});
-
-  if(soundBtn){
-    soundBtn.addEventListener("click",function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      unlockSound(true);
-    });
-  }
+  if(soundBtn)soundBtn.addEventListener("click",function(e){
+    e.preventDefault();e.stopPropagation();unlockSound(true);
+  });
 
   intro.addEventListener("pointerdown",function(e){
     if(e.target===soundBtn)return;
-    if(!audioUnlocked&&video.muted)unlockSound(true);
+    if(!audioUnlocked)unlockSound(true);
   },{once:true,passive:true});
 
   if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",startPlayback,{once:true});
+    document.addEventListener("DOMContentLoaded",playMuted,{once:true});
   }else{
-    startPlayback();
+    playMuted();
   }
 
   setTimeout(function(){
-    if(!intro.classList.contains("is-ready"))intro.classList.add("is-ready");
-  },1200);
+    intro.classList.add("is-ready");
+    if(!progressSeen){
+      try{video.pause()}catch(e){}
+    }
+  },2500);
 
-  setTimeout(finish,15000);
+  setTimeout(finish,10400);
 })();
 </script>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab59";
+const KIDS_BUILD_ID="kids-shell-v12-tab60";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
