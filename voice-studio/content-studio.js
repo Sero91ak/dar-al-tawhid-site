@@ -189,6 +189,7 @@ function navHtml(){
       <button class="cs-tab" data-cs-kind="quiz">Kids · Quiz</button>
       <button class="cs-tab" data-cs-kind="game">Kids · Spiele</button>
       <button class="cs-tab" data-cs-kind="ios">iOS · Inhalte</button>
+      <button id="csFreeVoiceTab" class="cs-tab" type="button">Freie Stimme</button>
     </div>
     <div class="cs-flow" aria-label="Produktionsweg">
       <button class="cs-flow-step" type="button" data-cs-step="text">Text</button>
@@ -288,7 +289,11 @@ function mount(){
   loadLibrary();
 }
 function bind(){
-  document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>switchKind(btn.dataset.csKind)));
+  document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>{
+    window.setStudioMode?.("production");
+    switchKind(btn.dataset.csKind);
+  }));
+  q("csFreeVoiceTab")?.addEventListener("click",()=>window.setStudioMode?.("free"));
   q("csTitle")?.addEventListener("input",()=>{q("csCoverTitle").textContent=q("csTitle").value||"Neue Geschichte";persistDraft();refreshQa();renderWorkflow()});
   ["csCategory","csTopic","csProphet","csAgeMin","csAgeMax","csModeRead","csModeListen","csSources"].forEach(id=>q(id)?.addEventListener("change",()=>{persistDraft();refreshQa()}));
   q("text")?.addEventListener("input",()=>{
