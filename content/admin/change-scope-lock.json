@@ -6593,6 +6593,16 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
+      "id": "voice-studio-alif-ba-ci-2026-09-28",
+      "approvedBy": "user-explicit-mach-weiter-alif-reference-voice",
+      "reason": "Nutzer beauftragt die Fortsetzung des Kids-Alif/Bāʾ-Audioworkflows. Ausschließlich die bereits geänderte Voice-Studio-CI-Prüfung für den dedizierten Alif/Bāʾ-Vergleich freischalten; keine weiteren geschützten Bereiche.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/voice-studio-v2-validate.yml"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
     }
   ],
   "enabled": true
