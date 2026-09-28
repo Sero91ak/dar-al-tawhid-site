@@ -2366,11 +2366,93 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .app[data-age="4–5"] #alphabetModal .lesson-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
+/* KIDS V0.70 · lightweight non-blocking launch */
+.kids-launch-v70{
+  position:fixed;
+  inset:0;
+  z-index:70;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  pointer-events:none;
+  background:linear-gradient(160deg,#071522 0%,#0c2636 58%,#123f54 100%);
+  opacity:1;
+  animation:kidsLaunchLayer 1450ms cubic-bezier(.22,.61,.36,1) forwards;
+  will-change:opacity;
+}
+.kids-launch-v70__mark{
+  width:min(82vw,420px);
+  text-align:center;
+  transform:translate3d(0,10px,0) scale(.975);
+  opacity:0;
+  animation:kidsLaunchMark 1100ms cubic-bezier(.22,.61,.36,1) 70ms forwards;
+  will-change:transform,opacity;
+}
+.kids-launch-v70__hello{
+  display:block;
+  margin:0 0 10px;
+  color:rgba(249,243,232,.72);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.kids-launch-v70__mark strong{
+  display:block;
+  color:#f9f3e8;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(25px,7.4vw,39px);
+  line-height:1.05;
+  letter-spacing:.08em;
+}
+.kids-launch-v70__mark small{
+  display:block;
+  margin-top:8px;
+  color:#e2bd72;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.32em;
+}
+.kids-launch-v70__line{
+  display:block;
+  width:74px;
+  height:1px;
+  margin:18px auto 0;
+  background:rgba(226,189,114,.82);
+  transform:scaleX(0);
+  animation:kidsLaunchLine 720ms cubic-bezier(.22,.61,.36,1) 180ms forwards;
+  transform-origin:center;
+}
+@keyframes kidsLaunchLayer{
+  0%,64%{opacity:1}
+  100%{opacity:0;visibility:hidden}
+}
+@keyframes kidsLaunchMark{
+  0%{opacity:0;transform:translate3d(0,10px,0) scale(.975)}
+  22%,72%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+  100%{opacity:0;transform:translate3d(0,-5px,0) scale(1.01)}
+}
+@keyframes kidsLaunchLine{
+  from{transform:scaleX(0)}
+  to{transform:scaleX(1)}
+}
+@media (prefers-reduced-motion:reduce){
+  .kids-launch-v70{display:none!important}
+}
+
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
 
 </head>
 <body>
+<div class="kids-launch-v70" data-kids-launch="v70" aria-hidden="true">
+  <div class="kids-launch-v70__mark">
+    <span class="kids-launch-v70__hello">Willkommen</span>
+    <strong>DĀR AL TAWḤĪD</strong>
+    <small>KIDS</small>
+    <i class="kids-launch-v70__line"></i>
+  </div>
+</div>
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
     <div class="kids-update-scene"></div>
@@ -2437,7 +2519,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.69</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.70</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2916,7 +2998,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab69";
+const KIDS_BUILD_ID="kids-shell-v12-tab70";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6365,6 +6447,23 @@ fetchCatalog();
   });
 })();
 </script>
+<script>
+(function(){
+  var launch=document.querySelector(".kids-launch-v70");
+  if(!launch)return;
+  var removed=false;
+  function removeLaunch(){
+    if(removed)return;
+    removed=true;
+    launch.remove();
+  }
+  launch.addEventListener("animationend",function(event){
+    if(event.animationName==="kidsLaunchLayer")removeLaunch();
+  },{once:true});
+  window.setTimeout(removeLaunch,1700);
+})();
+</script>
+
 </body>
 
 <style id="kids-quiz-scroll-v1">
