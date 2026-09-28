@@ -5,7 +5,7 @@
   "status": "completed-earliest-sharh-audit",
   "createdAfterRuleChange": true,
   "ruleVersion": 6,
-  "reason": "Der 25er-Unterblock wurde unter Regel v6 am tatsächlichen Branch-Ende fortgeführt. HAD-2696–2720 behandeln Ṣaḥīḥ-Muslim-Texte zu Nifāq-Eigenschaften, unberechtigtem Takfīr, Abstammungszuschreibung, Beschimpfung/Bekämpfung eines Muslims sowie der Zuschreibung des Regens. Alle Datensätze besitzen sharhStatus=verified, eine konkrete klassische Šarḥ-Zuordnung und keine geschätzten Seiten. Kufr-/Nifāq-Bezeichnungen werden mit den klassischen Differenzierungen erklärt und nicht pauschal als automatischer Takfīr des einzelnen Täters ausgegeben. Muslim 68–70 wurden bewusst für einen eigenen Kontext-Audit zurückgestellt, weil diese Texte den historischen Rechtskontext versklavter Personen betreffen und nicht ohne gesonderte Einordnung als isolierte Karten übernommen werden sollen.",
+  "reason": "Der 25er-Unterblock HAD-2696–2720 wurde unter Regel v6 vollständig geprüft und am tatsächlichen offenen Branch-Ende ergänzt. Er führt Ṣaḥīḥ Muslim von den restlichen Klauseln aus Muslim 58 über Muslim 59–65 sowie Muslim 67–71 fort. Muslim 66 wiederholt den Aussagekern von Muslim 65 als Variantenüberlieferung und wurde zur Vermeidung eines inhaltlichen Duplikats nicht als eigener Aussage-Datensatz angelegt. Alle 25 Datensätze besitzen sharhStatus=verified, eine eindeutige Ṣaḥīḥ-Muslim-Zuordnung und einen konkreten frühen bzw. nach frühester Priorität geprüften direkten Šarḥ-Nachweis. Unsichere Druckseiten aus al-Māzirīs al-Muʿlim wurden nicht geschätzt. Bei Nifāq-, Takfīr- und Kufr-Formulierungen werden die frühen Differenzierungen ausdrücklich bewahrt; aus mehrdeutigen Begriffen wird kein pauschaler Kufr akbar/Nifāq akbar des einzelnen Täters abgeleitet. Muslim 68–70 werden als historischer Rechtskontext wiedergegeben, ohne daraus ein modernes pauschales Statusurteil zu konstruieren.",
   "completionRequirement": {
     "allRecordsHaveSharh": true,
     "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
@@ -16,12 +16,7 @@
     "perRecordImmediateActivation": true,
     "blockActivationAllowed": true
   },
-  "earliestSharhDecision": "Für Muslim 58 wurde al-Māzirī als frühester gesichert greifbarer direkter Šarḥ fortgeführt. Bei den folgenden Varianten wurde Qāḍī ʿIyāḍ als nächster Prioritätsschritt verwendet, wo seine konkrete Stelle editionssicher greifbar war und eine genau passende al-Māzirī-Einzelstelle nicht ohne Schätzung isoliert werden konnte.",
-  "deferredForDedicatedContextAudit": [
-    "Muslim 68",
-    "Muslim 69",
-    "Muslim 70"
-  ],
+  "sourceSequenceNote": "Muslim 66 ist eine Varianten-/Wiederholungsüberlieferung zu Muslim 65 und wurde bewusst nicht als doppelter Aussage-Datensatz angelegt.",
   "readyForImmediateTargets": [
     "appleTvScreensaver",
     "testAppHadithLibraryBehindGate",
@@ -42,117 +37,117 @@
     {
       "id": "HAD-2698",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-next-priority-direct-muslim-sharh-with-nifaq-clarification"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-with-nifaq-clarification"
     },
     {
       "id": "HAD-2699",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-next-priority-direct-muslim-sharh-with-nifaq-clarification"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-with-nifaq-clarification"
     },
     {
       "id": "HAD-2700",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-next-priority-direct-muslim-sharh-with-nifaq-clarification"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-with-nifaq-clarification"
     },
     {
       "id": "HAD-2701",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-with-takfir-guardrail"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-with-nifaq-clarification"
     },
     {
       "id": "HAD-2702",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-with-takfir-guardrail"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-with-nifaq-clarification"
     },
     {
       "id": "HAD-2703",
-      "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-with-kufr-context"
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-with-takfir-clarification"
     },
     {
       "id": "HAD-2704",
-      "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-with-warning-context"
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-with-takfir-clarification"
     },
     {
       "id": "HAD-2705",
-      "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-with-takfir-guardrail"
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-with-kufr-clarification"
     },
     {
       "id": "HAD-2706",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-with-kufr-context"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check"
     },
     {
       "id": "HAD-2707",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-with-warning-context"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-with-takfir-clarification"
     },
     {
       "id": "HAD-2708",
-      "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-fisq-context"
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-with-kufr-clarification"
     },
     {
       "id": "HAD-2709",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-with-kufr-context"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check"
     },
     {
       "id": "HAD-2710",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-with-kufr-context"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check"
     },
     {
       "id": "HAD-2711",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-kufr-al-amal-context"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-with-kufr-clarification"
     },
     {
       "id": "HAD-2712",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-kufr-al-amal-context"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-with-kufr-clarification"
     },
     {
       "id": "HAD-2713",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-kufr-al-amal-context"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-with-kufr-clarification"
     },
     {
       "id": "HAD-2714",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check"
     },
     {
       "id": "HAD-2715",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-with-kufr-clarification"
     },
     {
       "id": "HAD-2716",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-historical-context-with-kufr-clarification"
     },
     {
       "id": "HAD-2717",
       "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+      "auditStatus": "verified-direct-muslim-sharh-after-earliest-check-historical-context"
     },
     {
       "id": "HAD-2718",
-      "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-historical-context-with-kufr-clarification"
     },
     {
       "id": "HAD-2719",
-      "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-with-kufr-clarification"
     },
     {
       "id": "HAD-2720",
-      "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-with-kufr-clarification"
     }
   ]
 }
