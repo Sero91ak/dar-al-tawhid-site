@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-VERSION="1.0.0"
+VERSION="1.0.1"
 REPO="Sero91ak/dar-al-tawhid-site"
 TARGET="$HOME/Applications/DAR-Voice-Serhat"
 VOICE_ROOT="$HOME/SerhatVoice"
@@ -78,7 +78,7 @@ done
 APP_STAGE="$TMP/DĀR Voice by Serhat Abu Malik.app"
 mkdir -p "$APP_STAGE/Contents/MacOS" "$APP_STAGE/Contents/Resources"
 
-xcrun swiftc -O   "$TARGET/DarVoiceSerhatApp.swift"   -framework Cocoa   -framework WebKit   -o "$APP_STAGE/Contents/MacOS/DARVoiceSerhat"
+xcrun swiftc -parse-as-library -O   "$TARGET/DarVoiceSerhatApp.swift"   -framework Cocoa   -framework WebKit   -o "$APP_STAGE/Contents/MacOS/DARVoiceSerhat"
 
 ICONSET="$TMP/AppIcon.iconset"
 mkdir -p "$ICONSET"
@@ -113,8 +113,8 @@ cat > "$APP_STAGE/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key><string>de.daraltawhid.darvoice.serhatabumalik</string>
   <key>CFBundleExecutable</key><string>DARVoiceSerhat</string>
   <key>CFBundlePackageType</key><string>APPL</string>
-  <key>CFBundleShortVersionString</key><string>1.0.0</string>
-  <key>CFBundleVersion</key><string>100</string>
+  <key>CFBundleShortVersionString</key><string>1.0.1</string>
+  <key>CFBundleVersion</key><string>101</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
   <key>LSMinimumSystemVersion</key><string>13.0</string>
   <key>NSHighResolutionCapable</key><true/>
