@@ -58,15 +58,10 @@
       try{hero.after(prayer)}catch(e){}
     }
 
+    /* Kein künstlich unfreigestelltes 3D-PNG an der Ibn-Sīrīn-Aussage. */
     const isnad=top.querySelector(".isnad");
-    if(isnad&&!isnad.querySelector(".home-isnad-3d")){
-      const book=document.createElement("img");
-      book.className="home-isnad-3d";
-      book.src=iconSrc("library.png");
-      book.alt="";
-      book.decoding="async";
-      book.setAttribute("aria-hidden","true");
-      isnad.appendChild(book);
+    if(isnad){
+      isnad.querySelectorAll(".home-isnad-3d").forEach(function(el){el.remove()});
     }
   }
 
@@ -120,11 +115,10 @@
     if(!shell)return;
     shell.classList.add("home-v380-shell--premium-v2");
 
-    /* Qurʾān-Fortsetzen bleibt erhalten, direkt nach Schnellzugriff. */
-    const quick=shell.querySelector(".home-premium-quick");
+    /* Qurʾān-Lesen bleibt auf der Startseite ganz oben angeheftet. */
     const quran=shell.querySelector(".home-v380-quran-hero");
-    if(quick&&quran&&quick.nextElementSibling!==quran){
-      try{quick.after(quran)}catch(e){}
+    if(quran&&shell.firstElementChild!==quran){
+      try{shell.insertBefore(quran,shell.firstElementChild)}catch(e){}
     }
   }
 
