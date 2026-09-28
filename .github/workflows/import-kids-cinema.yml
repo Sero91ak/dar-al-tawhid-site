@@ -17,13 +17,17 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-      - name: Download rendered cinema preview
+      - name: Download and optimize Veo cinema intro
         env:
           VIDEO_URL: "https://d2jqrm6oza8nb6.cloudfront.net/datasets/fcdba0c8-9042-4867-ae1f-5fd56bf499d6.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzQ0ZGNjYjU3Y2U2OTg2OCIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDcyNDUzM30.lYDg7tR7JkZnoSB5_vT62oKI6VeLZ6g6nS0Qp33ZN4M"
         run: |
           set -euo pipefail
           mkdir -p test/kids/assets/kids-cinema
-          curl -L --fail --retry 3 --retry-delay 2 "$VIDEO_URL" -o test/kids/assets/kids-cinema/intro-v74.mp4
+          curl -L --fail --retry 3 --retry-delay 2 "$VIDEO_URL" -o /tmp/intro-v74-source.mp4
+          ffmpeg -hide_banner -loglevel error -y -i /tmp/intro-v74-source.mp4 \
+            -an -vf "scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280" \
+            -c:v libx264 -preset medium -crf 27 -pix_fmt yuv420p -movflags +faststart \
+            test/kids/assets/kids-cinema/intro-v74.mp4
           test -s test/kids/assets/kids-cinema/intro-v74.mp4
           bytes="$(wc -c < test/kids/assets/kids-cinema/intro-v74.mp4)"
           if [ "$bytes" -lt 100000 ]; then
