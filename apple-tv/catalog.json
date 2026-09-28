@@ -1,0 +1,85 @@
+{
+  "project": "DĀR AL TAWḤĪD – Apple TV Content",
+  "schemaVersion": "1.5",
+  "language": "de",
+  "defaultModule": "hadith",
+  "screensaver": {
+    "enabled": true,
+    "rotationConfigPath": "screensaver/rotation.json"
+  },
+  "quran": {
+    "reader": {
+      "status": "active",
+      "target": "tvOS-only",
+      "view": "QuranTabView",
+      "arabicEdition": "quran-uthmani",
+      "germanEdition": "de.bubenheim",
+      "germanTranslationName": "Bubenheim & Elyas",
+      "syncMode": "ayah-by-ayah",
+      "autoAdvance": true,
+      "persistLastPosition": true,
+      "remoteLoad": true,
+      "offlineCache": true
+    },
+    "audio": {
+      "status": "active",
+      "target": "tvOS-only",
+      "catalogPath": "quran/audio/catalog.json",
+      "remoteLoad": true,
+      "offlineCache": true,
+      "fallbackRequired": true
+    },
+    "tadabbur": {
+      "status": "active",
+      "target": "tvOS-only",
+      "rootPath": "quran/tadabbur",
+      "catalogPath": "quran/tadabbur/catalog.json",
+      "schemaPath": "quran/tadabbur/schema.json",
+      "entriesPath": "quran/tadabbur/entries.json",
+      "entriesIndexPath": "quran/tadabbur/entries-index.json",
+      "coveragePath": "quran/tadabbur/coverage.json",
+      "remoteLoad": true,
+      "offlineCache": true,
+      "fallbackRequired": true
+    }
+  },
+  "modules": [
+    {
+      "id": "hadith",
+      "title": "Ḥadīṯe",
+      "status": "active",
+      "recordType": "hadith",
+      "rootPath": "hadith",
+      "catalogPath": "hadith/catalog.json",
+      "schemaPath": "hadith/schema.json",
+      "remoteLoad": true,
+      "offlineCache": true,
+      "sortOrder": 10
+    },
+    {
+      "id": "dua",
+      "title": "Duʿāʾ",
+      "status": "planned",
+      "recordType": "dua",
+      "rootPath": "dua",
+      "catalogPath": "dua/catalog.json",
+      "schemaPath": "dua/schema.json",
+      "remoteLoad": true,
+      "offlineCache": true,
+      "sortOrder": 20
+    },
+    {
+      "id": "athar",
+      "title": "Āṯār & Aussagen der Salaf",
+      "status": "planned",
+      "recordType": "athar",
+      "rootPath": "athar",
+      "catalogPath": "athar/catalog.json",
+      "schemaPath": "athar/schema.json",
+      "remoteLoad": true,
+      "offlineCache": true,
+      "sortOrder": 30,
+      "scope": "Ṣaḥābah, Tābiʿīn und Salaf"
+    }
+  ]
+}
