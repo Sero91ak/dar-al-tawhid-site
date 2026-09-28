@@ -1,6 +1,6 @@
 {
-  "buildId": "kids-shell-v12-tab78",
-  "label": "KIDS · V0.78",
-  "releasedAt": "2026-09-28T15:24:00.000Z",
-  "note": "Video-only intro. The prepared Veo MP4 is the only visual shown during launch. All generated overlay elements, branding text, Arabic letter animation, sparks, shading, greeting copy, visible audio button and prior generated intro visuals are removed."
+  "buildId": "kids-shell-v12-tab79",
+  "label": "KIDS · V0.79",
+  "releasedAt": "2026-09-28T16:05:00.000Z",
+  "note": "Video-only cinema intro, iOS-safe and non-blocking. MP4 bypasses the service worker. Multiple muted inline play attempts are used. If playback does not begin within 3.2 seconds, the intro layer is removed so the Kids app always opens."
 }
