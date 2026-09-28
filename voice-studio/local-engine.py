@@ -1359,16 +1359,32 @@ def apply_profile_fixed_phrases(text:str):
         effective_tts=tts
         effective_lang=str(item.get("tts_language") or "ar")
 
-        # Wenn ein Teil der langen Salām-Formel bewusst gelernt wurde, soll nicht
-        # die starre Vollphrase darüberbügeln. Dann greifen die kleineren Bausteine.
+        # Die vollständige Begrüßung bleibt EIN Segment. Gelernte Teilkorrekturen
+        # werden in diese eine arabische Phrase eingebaut, statt drei neue TTS-
+        # Segmente zu erzeugen. Das verhindert hörbare Neustarts zwischen den Wörtern.
         if phrase_id=="salam_full_greeting":
-            if learned(
-                "Raḥmatullāhi","wa Raḥmatullāhi",
-                "Barakātuh","wa Barakātuh",
+            tail_rule=learned(
                 "Raḥmatullāhi wa Barakātuh",
                 "wa Raḥmatullāhi wa Barakātuh"
-            ):
-                continue
+            )
+            rahma_rule=learned("wa Raḥmatullāhi","Raḥmatullāhi")
+            baraka_rule=learned("wa Barakātuh","Barakātuh")
+
+            def _strip_arabic_wa(v):
+                x=str(v or "").strip()
+                return re.sub(r"^[و][َُِّْٰ]*","",x).strip()
+
+            if tail_rule and str(tail_rule.get("tts_language") or "ar")=="ar":
+                tail=_strip_arabic_wa(tail_rule.get("tts_text"))
+                effective_tts="السَّلَامُ عَلَيْكُمْ وَ"+tail
+            elif rahma_rule or baraka_rule:
+                rahma=_strip_arabic_wa(
+                    rahma_rule.get("tts_text") if rahma_rule else "رَحْمَتُ اللَّهِ"
+                )
+                baraka=_strip_arabic_wa(
+                    baraka_rule.get("tts_text") if baraka_rule else "بَرَكَاتُهُ"
+                )
+                effective_tts="السَّلَامُ عَلَيْكُمْ وَ"+rahma+" وَ"+baraka
 
         if phrase_id=="salam_part_2_rahmatullahi":
             rule=learned("wa Raḥmatullāhi","Raḥmatullāhi")
@@ -1391,16 +1407,15 @@ def apply_profile_fixed_phrases(text:str):
                 effective_tts=str(rule.get("tts_text") or effective_tts).strip()
 
         if phrase_id=="dar_al_tawhid_kids_brand_phrase":
+            # Die Markenphrase bleibt absichtlich EIN deutscher Kontextblock.
+            # Dadurch bekommt "Kids" keine isolierte Zischlaut-Endung und es gibt
+            # keinen Sprachmodell-Neustart nach TAWḤĪD.
             rule=learned("Kids")
-            if rule:
-                learned_tts=str(rule.get("tts_text") or "").strip()
-                learned_lang=str(rule.get("tts_language") or "").strip()
-                if learned_lang=="ar" and learned_tts:
-                    effective_tts="دَارُ التَّوْحِيد "+learned_tts
-                elif learned_lang=="de":
-                    # Bei lateinischer Nutzerkorrektur die Vollphrase freigeben;
-                    # danach werden DĀR AL TAWḤĪD und Kids separat, aber eng gestitcht.
-                    continue
+            kids_form="Kids"
+            if rule and str(rule.get("tts_language") or "")=="de":
+                kids_form=str(rule.get("tts_text") or "Kids").strip() or "Kids"
+            effective_tts="Daar al Tauhiid "+kids_form
+            effective_lang="de"
 
         count=value.count(form)
         value=value.replace(form,effective_tts)
@@ -2091,12 +2106,19 @@ def _expand_free_voice_phrase_plan(lang:str,segment:str):
     return [(lang,x.strip()) for x in parts if x.strip()]
 
 def build_free_render_plan(text:str):
-    """Freie Stimme: kurze MPS-sichere Phrasen + stabile Mehrwort-Aussprachepläne."""
+    """Freie Stimme: ganze Sätze bevorzugen, nur lange Sätze sicher teilen.
+
+    Die frühere 64/72-Zeichen-Aufteilung machte die Ausgabe schnell, aber hörbar
+    stückelig. Nach der MPS-Stabilisierung dürfen natürliche Sätze wieder länger
+    bleiben; nur wirklich lange Segmente werden begrenzt.
+    """
     plan=[]
+    de_max=int(CONTINUITY_CONFIG.get("freeVoiceGermanMaxChars",108))
+    ar_max=int(CONTINUITY_CONFIG.get("freeVoiceArabicMaxChars",96))
     for lang,segment in split_language_segments(text):
         expanded=_expand_free_voice_phrase_plan(lang,segment)
         for exp_lang,exp_segment in expanded:
-            max_chars=64 if exp_lang=="ar" else 72
+            max_chars=ar_max if exp_lang=="ar" else de_max
             for chunk in split_chunks(exp_segment,max_chars=max_chars):
                 if chunk.strip():
                     plan.append((exp_lang,chunk.strip()))
