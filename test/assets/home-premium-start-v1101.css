@@ -772,3 +772,28 @@ body.is-home-route .home-tawhid-entry{
   border-radius:10px!important;
   box-shadow:0 7px 18px color-mix(in srgb,#000 9%,transparent)!important;
 }
+
+
+/* v1103 · STEP 2 · Qurʾān-Weiterlesen direkt oben */
+body.is-home-route .home-v380-shell{
+  display:flex!important;
+  flex-direction:column!important;
+}
+body.is-home-route .home-v380-quran-hero{
+  order:-100!important;
+  margin:0 0 10px!important;
+  min-height:58px!important;
+  border-radius:10px!important;
+  border:1px solid color-mix(in srgb,var(--theme-accent) 26%,var(--theme-border))!important;
+  box-shadow:none!important;
+  background:color-mix(in srgb,var(--theme-surface) 94%,var(--bg) 6%)!important;
+}
+body.is-home-route .home-v380-quran-hero__mark{
+  width:42px!important;
+  height:42px!important;
+  flex-basis:42px!important;
+}
+body.is-home-route .home-v380-quran-hero__title{
+  font-size:clamp(15px,3.65vw,17px)!important;
+  font-weight:900!important;
+}
