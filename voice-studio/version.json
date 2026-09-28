@@ -1,10 +1,10 @@
 {
-  "version": "2.9.18",
-  "updatedAt": "2026-09-28T11:20:00+02:00",
-  "deployTrigger": "voice-studio-2.9.18-free-voice-mps-short-phrase-render",
+  "version": "2.9.19",
+  "updatedAt": "2026-09-28T11:32:00+02:00",
+  "deployTrigger": "voice-studio-2.9.19-fixed-phrases-and-confirmed-audio",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v28",
+  "cache": "dar-voice-studio-v29",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -542,10 +542,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "9911d204281813343b362f48ab40b898201773d1",
+  "releaseRef": "fc4d1e83bf66cc2dcad6c26b6fc4c676c4b7ae1a",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Freie Stimme blieb bei 8 % stehen, weil der erste MPS-Block bis 140 Zeichen lang war und der Fortschritt erst nach vollständigem Segmentabschluss stieg. Nur Free Voice nutzt jetzt kurze 72-Zeichen-DE/64-Zeichen-AR-Phrasen; Produktionsplan bleibt unverändert.",
+  "updateRepairReason": "Freie Stimme nutzte bisher nur Textregeln, nicht bestätigte Audio-Master; die komplette Salam-Formel fehlte zudem als Mehrwortregel. 2.9.19 führt feste Phrasen für Salam und DĀR AL TAWḤĪD Kids ein und verwendet vorhandene bestätigte Audio-Locks im freien Bereich, ohne neue Locks zu erzeugen.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -595,6 +595,13 @@
       "arabicMaxChars": 64,
       "productionPlanUnchanged": true,
       "purpose": "avoid long first MPS block at 8% and expose segment progress"
+    },
+    "pronunciationFix": {
+      "fixedPhraseGreeting": true,
+      "fixedPhraseBrandKids": true,
+      "reuseExistingConfirmedAudioLocks": true,
+      "createNewLocks": false,
+      "productionModeUnaffected": true
     }
   }
 }
