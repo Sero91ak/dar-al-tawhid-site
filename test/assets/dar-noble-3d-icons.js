@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1106";
+  const VER="1107";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","topics.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -124,7 +124,8 @@
     if(k==="scholar"||k==="scholars")return fileFromScholarGroup(h);
     if(k==="topic"||k==="post"||k==="series")return fileFromTopic(h)||topicFallback(h);
     if(k==="dua"||k==="duas"||k==="dua-cat")return fileFromTopic(h)||"dua.png";
-    if(k==="ayah-play"||k==="play"||k==="audio"||k==="listen"||k==="player")return "audio.png";
+    if(k==="audio"||k==="listen"||k==="headphones")return "audio.png";
+    if(k==="ayah-play"||k==="play"||k==="player")return "play.png";
     if(k==="ayah-bookmark"||k==="bookmark"||k==="bookmarkfill")return "saved.png";
     if(k==="ayah-share"||k==="share")return "posts.png";
     if(k==="ayah-tafsir"||k==="tafsir"||k==="book")return "quran.png";
@@ -177,6 +178,13 @@
         if(hid==="qrcContextBookmarksBtn")return "saved.png";
       }
       if(el.classList.contains("quran-ayah-action-btn--play")||el.classList.contains("qrc-play-mark"))return "play.png";
+      if(el.classList.contains("quran-ayah-action-btn--bookmark"))return "saved.png";
+      if(el.classList.contains("quran-ayah-action-btn--tafsir"))return "quran.png";
+      if(host&&host.classList){
+        if(host.classList.contains("quran-ayah-action-btn--play"))return "play.png";
+        if(host.classList.contains("quran-ayah-action-btn--bookmark"))return "saved.png";
+        if(host.classList.contains("quran-ayah-action-btn--tafsir"))return "quran.png";
+      }
       if(el.classList.contains("home-hijri-ico"))return "calendar.png";
       if(el.classList.contains("more-quick-access__ico")){
         const chip=el.closest("[data-more-quick]");
@@ -256,15 +264,22 @@
       fill(el,fileFromHost(host,el)||fileFromKind("",el.textContent||""));
     });
     root.querySelectorAll(".quran-ayah-action-btn").forEach(btn=>{
-      if(btn.querySelector("img.dar3d-icon"))return;
       let file="quran.png";
       if(btn.classList.contains("quran-ayah-action-btn--play"))file="play.png";
       else if(btn.classList.contains("quran-ayah-action-btn--bookmark"))file="saved.png";
       else if(btn.classList.contains("quran-ayah-action-btn--share")) { btn.remove(); return; }
       else if(btn.classList.contains("quran-ayah-action-btn--tafsir"))file="quran.png";
+      const imgs=btn.querySelectorAll("img.dar3d-icon");
+      if(imgs.length){
+        imgs.forEach(function(im,i){if(i>0)try{im.remove()}catch(e){}});
+        imgs[0].setAttribute("src",src(file));
+        btn.style.backgroundImage="none";
+        return;
+      }
       const svg=btn.querySelector("svg,.qrc-play-mark,.qrc-btn-emoji");
       if(svg)svg.replaceWith(imgFor(file));
       else btn.insertBefore(imgFor(file),btn.firstChild);
+      btn.style.backgroundImage="none";
     });
   }
   function openDb(){
