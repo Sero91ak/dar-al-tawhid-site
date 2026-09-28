@@ -3,7 +3,7 @@
 Eigene native App, getrennt von der Erwachsenen-App (`de.daraltawhid.app`).
 
 - Bundle-ID: `de.daraltawhid.kids`
-- Anzeigename: **DĀR Kids**
+- Anzeigename auf dem Homescreen: **TAWḤĪD KIDS** (der volle Name DĀR AL TAWḤĪD KIDS wird von iOS abgeschnitten)
 - Lädt: `https://dar-al-tawhid.de/test/kids/start`
 - Keine Erwachsenen-Navigation, kein Besucher-Feed, kein Push an alle
 
