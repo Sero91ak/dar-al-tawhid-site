@@ -2374,113 +2374,29 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .app[data-age="4–5"] #alphabetModal .lesson-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
-/* KIDS V0.77 · reliable Veo cinema intro */
-.kids-launch-v77{
-  position:fixed;inset:0;z-index:70;overflow:hidden;pointer-events:none;
-  background:#041724;color:#fff;opacity:1;
+/* KIDS V0.78 · VIDEO ONLY — no generated overlay */
+.kids-launch-v78{
+  position:fixed;inset:0;z-index:1000;overflow:hidden;
+  background:#000;opacity:1;pointer-events:auto;
 }
-.k77-video{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;
-  background:#041724;opacity:1;transform:none;will-change:auto;
+.k78-video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center center;
+  display:block;background:#000;
 }
-.k77-shade{
-  position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(2,17,27,.52) 0%,rgba(2,17,27,.04) 24%,rgba(2,17,27,.03) 64%,rgba(2,17,27,.58) 100%);
-  pointer-events:none;
-}
-.k77-brand{
-  position:absolute;top:max(24px,calc(env(safe-area-inset-top) + 8px));left:18px;right:18px;
-  text-align:center;color:#fff4df;font:700 clamp(20px,5.8vw,29px)/1.06 Georgia,"Times New Roman",serif;
-  letter-spacing:.13em;text-shadow:0 2px 14px rgba(0,0,0,.36);
-  opacity:0;transform:translateY(-8px);animation:k77Brand .72s ease .18s forwards;
-}
-.k77-letter{
-  position:absolute;left:50%;top:53%;
-  font-family:"Noto Naskh Arabic","Geeza Pro","Traditional Arabic",serif;
-  font-size:clamp(31px,8vw,45px);line-height:1;color:#ffe49a;opacity:0;
-  text-shadow:0 0 10px rgba(255,211,104,.34),0 3px 12px rgba(0,0,0,.22);
-  will-change:transform,opacity;
-  animation:k77Fly 2.35s cubic-bezier(.18,.72,.2,1) var(--d) forwards;
-}
-.k77-letter.a{--x0:-72px;--x1:-112px;--x2:-124px;--r:-9deg;--d:1.05s}
-.k77-letter.b{--x0:-38px;--x1:-62px;--x2:-72px;--r:8deg;--d:1.28s}
-.k77-letter.c{--x0:-4px;--x1:9px;--x2:18px;--r:-6deg;--d:1.51s}
-.k77-letter.d{--x0:34px;--x1:66px;--x2:78px;--r:8deg;--d:1.74s}
-.k77-letter.e{--x0:68px;--x1:106px;--x2:119px;--r:-9deg;--d:1.97s}
-.k77-spark{
-  position:absolute;left:50%;top:54%;font-size:14px;color:#ffe6a4;opacity:0;
-  animation:k77Spark 1.9s ease var(--sd) forwards;
-}
-.k77-spark.s1{--sx:-96px;--sy:-124px;--sd:1.3s}
-.k77-spark.s2{--sx:14px;--sy:-154px;--sd:1.55s}
-.k77-spark.s3{--sx:98px;--sy:-116px;--sd:1.8s}
-.k77-copy{
-  position:absolute;left:18px;right:18px;bottom:max(82px,calc(env(safe-area-inset-bottom) + 72px));
-  text-align:center;opacity:0;transform:translateY(12px);
-  animation:k77Copy .85s ease 3.2s forwards;
-}
-.k77-kids{display:block;color:#f2c769;font:900 13px/1 Fredoka,system-ui,sans-serif;letter-spacing:.34em;margin-bottom:8px}
-.k77-salam{display:block;color:#fff4e0;font:700 clamp(15px,4.25vw,19px)/1.38 Georgia,"Times New Roman",serif;text-wrap:balance;text-shadow:0 2px 10px rgba(0,0,0,.28)}
-.k77-sub{display:block;margin-top:7px;color:rgba(255,255,255,.70);font:750 11px/1.2 Fredoka,system-ui,sans-serif;letter-spacing:.14em}
-.k77-line{display:block;width:72px;height:1px;margin:13px auto 0;background:rgba(230,188,104,.86);transform:scaleX(0);animation:k77Line .62s ease 3.55s forwards}
-.k77-sound{
-  position:absolute;left:50%;bottom:max(22px,calc(env(safe-area-inset-bottom) + 10px));
-  transform:translateX(-50%);pointer-events:auto;border:1px solid rgba(230,188,104,.46);
-  background:rgba(4,28,43,.90);color:#fff0c8;min-height:46px;padding:0 19px;border-radius:999px;
-  font:850 13px/1 Fredoka,system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.28);
-  opacity:0;animation:k77Button .3s ease 3.65s forwards;
-}
-.k77-sound[hidden]{display:none!important}
-@keyframes k77Brand{to{opacity:1;transform:none}}
-@keyframes k77Fly{
-  0%{opacity:0;transform:translate3d(var(--x0),18px,0) rotate(0) scale(.68)}
-  18%{opacity:1}
-  63%{opacity:1;transform:translate3d(var(--x1),-128px,0) rotate(var(--r)) scale(1.05)}
-  82%{opacity:.92;transform:translate3d(var(--x2),-152px,0) rotate(var(--r)) scale(1)}
-  100%{opacity:0;transform:translate3d(var(--x2),-82px,0) rotate(0) scale(.76)}
-}
-@keyframes k77Spark{0%{opacity:0;transform:translate3d(0,0,0) scale(.5)}28%{opacity:1}100%{opacity:0;transform:translate3d(var(--sx),var(--sy),0) scale(1.1)}}
-@keyframes k77Copy{to{opacity:1;transform:none}}
-@keyframes k77Line{to{transform:scaleX(1)}}
-@keyframes k77Button{to{opacity:1}}
-
-.kids-launch-v77:not(.is-playing) .k77-brand,
-.kids-launch-v77:not(.is-playing) .k77-letter,
-.kids-launch-v77:not(.is-playing) .k77-spark,
-.kids-launch-v77:not(.is-playing) .k77-copy,
-.kids-launch-v77:not(.is-playing) .k77-line,
-.kids-launch-v77:not(.is-playing) .k77-sound{animation-play-state:paused!important}
-.kids-launch-v77.is-ending{animation:k77FadeOut .42s ease forwards}
-@keyframes k77FadeOut{to{opacity:0;visibility:hidden}}
-@media (prefers-reduced-motion:reduce){
-  .k77-letter,.k77-spark{display:none!important}
-}
+.kids-launch-v78.is-ending{animation:k78FadeOut .28s ease forwards}
+@keyframes k78FadeOut{to{opacity:0;visibility:hidden}}
 
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
 
 </head>
 <body>
-<div class="kids-launch-v77" data-kids-launch="v77" aria-hidden="true">
-  <video id="kidsCinemaV77" class="k77-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture>
-    <source src="/test/kids/assets/kids-cinema/intro-v74.mp4" type="video/mp4">
+<div class="kids-launch-v78" data-kids-launch="v78" aria-hidden="true">
+  <video id="kidsCinemaV78" class="k78-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture>
+    <source src="/test/kids/assets/kids-cinema/intro-v74.mp4?v=78" type="video/mp4">
   </video>
-  <div class="k77-shade"></div>
-  <div class="k77-brand">DĀR AL TAWḤĪD</div>
-  <span class="k77-letter a">ا</span><span class="k77-letter b">ب</span><span class="k77-letter c">ت</span><span class="k77-letter d">ح</span><span class="k77-letter e">ق</span>
-  <span class="k77-spark s1">✦</span><span class="k77-spark s2">✦</span><span class="k77-spark s3">✦</span>
-  <div class="k77-copy">
-    <span class="k77-kids">KIDS</span>
-    <span class="k77-salam">As-Salāmu ʿalaykum wa raḥmatullāhi wa barakātuh, Kids</span>
-    <span class="k77-sub">Kinderbereich</span>
-    <i class="k77-line"></i>
-  </div>
-  <button class="k77-sound" id="kidsLaunchSoundV77" type="button" hidden>🔊 Begrüßung anhören</button>
 </div>
-<audio id="kidsLaunchAudioV77" preload="none">
-  <source src="/test/kids/assets/kids-cinema/intro-voice-serhat.mp3?v=75" type="audio/mpeg">
-  <source src="https://dnznrvs05pmza.cloudfront.net/text_to_speech/9b567740-b9ef-4d8c-8bcb-dee04b899e71/D_R_AL_TAW__D_Kids_Intro_Kurz.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMWNmZTBmZWJhYjBmYzg0NCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDcwNjY2N30.P_qopuo5woF3AWNvRpIxcEj7w4l2xVN9eau2g0BVlvg" type="audio/mpeg">
-</audio>
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
     <div class="kids-update-scene"></div>
@@ -2547,7 +2463,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.77</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.78</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3026,7 +2942,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab77";
+const KIDS_BUILD_ID="kids-shell-v12-tab78";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6477,95 +6393,37 @@ fetchCatalog();
 </script>
 <script>
 (function(){
-  var launch=document.querySelector(".kids-launch-v77");
-  var video=document.getElementById("kidsCinemaV77");
-  var audio=document.getElementById("kidsLaunchAudioV77");
-  var soundButton=document.getElementById("kidsLaunchSoundV77");
-  if(!launch)return;
+  var launch=document.querySelector(".kids-launch-v78");
+  var video=document.getElementById("kidsCinemaV78");
+  if(!launch||!video)return;
 
-  var removed=false,audioStarted=false,startedAt=0,finishTimer=0;
-
-  function hideSound(){if(soundButton)soundButton.hidden=true}
-  function showSound(){if(soundButton&&!audioStarted)soundButton.hidden=false}
-  function startAudio(){
-    if(!audio||audioStarted)return Promise.resolve(false);
-    var p;
-    try{p=audio.play()}catch(e){showSound();return Promise.resolve(false)}
-    if(!p||typeof p.then!=="function"){audioStarted=true;hideSound();return Promise.resolve(true)}
-    return p.then(function(){audioStarted=true;hideSound();return true}).catch(function(){showSound();return false});
-  }
+  var removed=false;
   function removeLaunch(){
     if(removed)return;
     removed=true;
     launch.classList.add("is-ending");
     window.setTimeout(function(){
-      try{if(video)video.pause()}catch(e){}
+      try{video.pause()}catch(e){}
       launch.remove();
-      if(audio)audio.remove();
-    },430);
-  }
-  function onPlaying(){
-    if(startedAt)return;
-    startedAt=Date.now();
-    launch.classList.add("is-playing");
-    if(finishTimer)window.clearTimeout(finishTimer);
-    finishTimer=window.setTimeout(removeLaunch,9000);
-    startAudio();
+    },300);
   }
 
-  if(soundButton){
-    soundButton.hidden=false;
-    soundButton.addEventListener("click",function(e){
-      e.preventDefault();e.stopPropagation();
-      if(video&&video.paused){try{video.play()}catch(err){}}
-      startAudio();
-    });
-  }
+  video.muted=true;
+  video.defaultMuted=true;
+  video.setAttribute("muted","");
+  video.setAttribute("playsinline","");
+  video.addEventListener("ended",removeLaunch,{once:true});
+  video.addEventListener("error",function(){window.setTimeout(removeLaunch,350)},{once:true});
 
-  if(video){
-    video.muted=true;
-    video.defaultMuted=true;
-    video.setAttribute("muted","");
-    video.setAttribute("playsinline","");
-    video.addEventListener("playing",onPlaying);
-    video.addEventListener("ended",removeLaunch,{once:true});
-    video.addEventListener("error",function(){
-      launch.classList.add("is-playing");
-      showSound();
-      if(finishTimer)window.clearTimeout(finishTimer);
-      finishTimer=window.setTimeout(removeLaunch,8200);
-    },{once:true});
-    video.addEventListener("canplay",function(){
-      var cp;
-      try{cp=video.play()}catch(e){}
-      if(cp&&typeof cp.catch==="function"){cp.catch(function(){showSound()})}
-    },{once:true});
+  function play(){
     var p;
-    try{p=video.play()}catch(e){}
-    if(p&&typeof p.catch==="function"){p.catch(function(){showSound()})}
-  }else{
-    launch.classList.add("is-playing");
-    finishTimer=window.setTimeout(removeLaunch,8200);
+    try{p=video.play()}catch(e){return}
+    if(p&&typeof p.catch==="function"){p.catch(function(){})}
   }
 
-  document.addEventListener("pointerdown",function(){
-    if(video&&video.paused){try{video.play()}catch(e){}}
-    startAudio();
-  },{once:true,capture:true});
-
-  window.setTimeout(function(){
-    if(!startedAt&&video&&video.readyState>=2){
-      var p;try{p=video.play()}catch(e){}
-      if(p&&typeof p.catch==="function"){p.catch(function(){})}
-    }
-  },700);
-
-  window.setTimeout(function(){
-    if(!removed&&!startedAt){
-      launch.classList.add("is-playing");
-      finishTimer=window.setTimeout(removeLaunch,8200);
-    }
-  },2500);
+  video.addEventListener("canplay",play,{once:true});
+  play();
+  window.setTimeout(play,500);
 })();
 </script>
 
