@@ -531,6 +531,41 @@ input,select{
 #freeVoiceWorkspace .free-progress{
   background:rgba(151,111,53,.14) !important;
 }
+#freeVoiceWorkspace .free-selection-hint{
+  margin-top:8px;color:#74695c;font-size:11px;line-height:1.45
+}
+#freeVoiceWorkspace .free-learning{
+  border-top:1px solid rgba(151,111,53,.16);
+  padding-top:15px
+}
+#freeVoiceWorkspace .free-learn-input{
+  width:100%;background:#fffdf8!important;color:#172b37!important;
+  border:1px solid rgba(151,111,53,.28)!important;border-radius:10px;
+  padding:9px 10px;font-size:12px;outline:none
+}
+#freeVoiceWorkspace .free-learn-input:focus{
+  border-color:#b88b45!important;box-shadow:0 0 0 3px rgba(184,139,69,.10)
+}
+#freeVoiceWorkspace .free-learn-results{
+  display:grid;gap:6px;margin-top:9px
+}
+#freeVoiceWorkspace .free-learn-result{
+  text-align:left;border:1px solid rgba(151,111,53,.20);background:#fffaf2;
+  color:#21333c;border-radius:10px;padding:8px 9px;cursor:pointer;font-size:11px
+}
+#freeVoiceWorkspace .free-learn-result:hover,
+#freeVoiceWorkspace .free-learn-result.active{
+  border-color:#b88b45;background:#f4e6cf
+}
+#freeVoiceWorkspace .free-learn-result small{
+  display:block;color:#7b6f61;margin-top:3px;line-height:1.35
+}
+#freeVoiceWorkspace .free-learn-actions{
+  display:flex;gap:7px;flex-wrap:wrap;margin-top:9px
+}
+#freeVoiceWorkspace #freeVoiceLearnPlayer{
+  width:100%;margin-top:9px
+}
 body.free-voice-mode .content-studio-nav .cs-flow,
 body.free-voice-mode .content-studio-nav .cs-fast-actions{display:none!important}
 body.free-voice-mode .content-studio-nav{justify-content:flex-start!important}
@@ -552,7 +587,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.21 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.22 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -567,7 +602,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <main class="panel editor-panel">
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.21</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.22</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
 
   <div class="textbox-wrap">
@@ -712,11 +747,11 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
     <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.21</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.22</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash</textarea>
-      <div class="notice" style="margin-top:6px">Nur für die erste Installation bzw. für ältere Builds ohne In-App-Updater. Ab Voice Studio 2.9.21 werden Updates direkt in der App installiert – ohne Terminal.</div>
+      <div class="notice" style="margin-top:6px">Nur für die erste Installation bzw. für ältere Builds ohne In-App-Updater. Ab Voice Studio 2.9.22 werden Updates direkt in der App installiert – ohne Terminal.</div>
     </div>
     <button id="healthBtn" class="btn quiet" style="width:100%;margin-top:8px">Verbindung erneut prüfen</button>
     <div id="engineHelp" class="notice" style="margin-top:9px">Installiert „DĀR Voice Studio“ als eigenständige Mac-App unter Programme. Danach arbeitest du ohne Safari oder Browserleiste; deine vorhandene SerhatVoice-/Chatterbox-Engine wird automatisch verwendet.</div>
@@ -737,8 +772,10 @@ body.free-voice-mode .mobile-actions{display:none!important}
 
     <div class="free-actions">
       <button id="freeVoiceGenerateBtn" class="btn primary" type="button">Stimme erzeugen</button>
+      <button id="freeVoiceImproveBtn" class="btn secondary" type="button">Auswahl Aussprache verbessern</button>
       <button id="freeVoiceClearBtn" class="btn secondary" type="button">Leeren</button>
     </div>
+    <div class="free-selection-hint">Markiere im Text ein Wort oder eine ganze Phrase und klicke auf „Auswahl Aussprache verbessern“.</div>
 
     <div id="freeVoicePlayerWrap" class="free-player" hidden>
       <div class="section-title">Audio-Vorschau</div>
@@ -773,6 +810,26 @@ body.free-voice-mode .mobile-actions{display:none!important}
       <div class="notice" style="margin-top:7px">Aus: Text wird frei gesprochen. An: bekannte Begriffe dürfen intern mit deiner bestehenden Aussprachebibliothek vorbereitet werden. Es entstehen hier keine neuen Kids-/Audio-Locks.</div>
     </section>
 
+    <section id="freeVoiceLearningSection" class="side-section free-learning" hidden>
+      <div class="side-title">Aussprache verbessern</div>
+      <label for="freeVoiceLearnTerm">Ausgewählt</label>
+      <input id="freeVoiceLearnTerm" class="free-learn-input" type="text" readonly>
+      <label for="freeVoiceLearnLanguage" style="margin-top:9px">Sprache der Sprechform</label>
+      <select id="freeVoiceLearnLanguage">
+        <option value="ar">Arabisch</option>
+        <option value="de">Deutsch / Lateinisch</option>
+      </select>
+      <label for="freeVoiceLearnSpeech" style="margin-top:9px">Sprechform</label>
+      <input id="freeVoiceLearnSpeech" class="free-learn-input" type="text" placeholder="z. B. arabische Schrift oder phonetische deutsche Form">
+      <div id="freeVoiceLearnResults" class="free-learn-results"></div>
+      <div class="free-learn-actions">
+        <button id="freeVoiceLearnPreviewBtn" class="btn secondary" type="button">Test anhören</button>
+        <button id="freeVoiceLearnConfirmBtn" class="btn primary" type="button" disabled>So merken</button>
+      </div>
+      <audio id="freeVoiceLearnPlayer" controls hidden></audio>
+      <div id="freeVoiceLearnStatus" class="notice" style="margin-top:8px">Auswahl prüfen und eine passende Sprechform testen.</div>
+    </section>
+
     <section class="side-section">
       <div class="side-title">Status</div>
       <div class="free-status-row"><span id="freeVoiceDot" class="dot"></span><strong id="freeVoiceEngineLabel">Serhat Engine</strong></div>
@@ -782,7 +839,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.21 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.22 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
 </div>
 </div>
 
@@ -806,6 +863,7 @@ const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
 let nativeUpdateState="idle",nativeLatestVersion="";
 let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let studioMode="production",freeVoiceAudioUrl="",freeVoiceProgressTimer=null;
+let freeVoiceLearningResults=[],freeVoiceLearningCandidate=null,freeVoiceLearningPreviewId="",freeVoiceLearningPreviewUrl="";
 let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null;
 let learnedCanonicals=new Set(),learnedTerms=new Set();
 const $=s=>document.querySelector(s);
@@ -872,7 +930,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.21")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.22")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -890,7 +948,7 @@ window.darUpdateStateChanged=data=>{
     state.className="update-state";
   }else if(nativeUpdateState==="current"){
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.21")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.22")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     side.textContent="Update erneut prüfen";
@@ -1370,6 +1428,194 @@ function setStudioMode(mode){
   }
 }
 
+function getFreeVoiceSelection(){
+  const ta=$("#freeVoiceText");
+  if(!ta)return "";
+  let value=ta.value.slice(ta.selectionStart,ta.selectionEnd).trim();
+  if(!value){
+    const p=ta.selectionStart||0;
+    const left=ta.value.slice(0,p),right=ta.value.slice(p);
+    const a=(left.match(/[^\s,.!?;:()]+$/)||[""])[0];
+    const b=(right.match(/^[^\s,.!?;:()]+/)||[""])[0];
+    value=(a+b).trim();
+  }
+  return value;
+}
+
+function freeVoicePresetFor(term){
+  const value=String(term||"").trim();
+  const low=value.toLocaleLowerCase("de-DE");
+  if(low==="raḥmatullāhi wa barakātuh"||low==="rahmatullahi wa barakatuh"){
+    return {language:"ar",speech:"رَحْمَةُ اللَّهِ وَبَرَكَاتُهُ"};
+  }
+  if(low==="wa raḥmatullāhi wa barakātuh"||low==="wa rahmatullahi wa barakatuh"){
+    return {language:"ar",speech:"وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ"};
+  }
+  if(low==="raḥmatullāhi"||low==="rahmatullahi"){
+    return {language:"ar",speech:"رَحْمَةُ اللَّهِ"};
+  }
+  if(low==="barakātuh"||low==="barakatuh"){
+    return {language:"ar",speech:"بَرَكَاتُهُ"};
+  }
+  if(low==="kids"){
+    return {language:"de",speech:"Kids"};
+  }
+  return null;
+}
+
+function clearFreeVoiceLearningPreview(){
+  freeVoiceLearningPreviewId="";
+  $("#freeVoiceLearnConfirmBtn").disabled=true;
+  const p=$("#freeVoiceLearnPlayer");
+  if(freeVoiceLearningPreviewUrl){URL.revokeObjectURL(freeVoiceLearningPreviewUrl);freeVoiceLearningPreviewUrl=""}
+  if(p){p.pause();p.removeAttribute("src");p.hidden=true}
+}
+
+function renderFreeVoiceLearningResults(results){
+  freeVoiceLearningResults=Array.isArray(results)?results:[];
+  freeVoiceLearningCandidate=null;
+  clearFreeVoiceLearningPreview();
+  const wrap=$("#freeVoiceLearnResults");
+  if(!wrap)return;
+  if(!freeVoiceLearningResults.length){
+    wrap.innerHTML='<div class="notice">Kein Bibliothekstreffer. Du kannst die Sprechform direkt selbst eingeben und testen.</div>';
+    return;
+  }
+  wrap.innerHTML=freeVoiceLearningResults.slice(0,5).map((r,i)=>
+    '<button type="button" class="free-learn-result" data-free-learn-index="'+i+'"><b>'+esc(r.canonical||r.input||"Treffer")+'</b>'+
+    '<small>'+esc(r.ttsText||"")+' · '+esc(r.source||"Bibliothek")+'</small></button>'
+  ).join("");
+  wrap.querySelectorAll("[data-free-learn-index]").forEach(btn=>btn.addEventListener("click",()=>{
+    const i=Number(btn.dataset.freeLearnIndex),item=freeVoiceLearningResults[i];
+    if(!item)return;
+    freeVoiceLearningCandidate=item;
+    wrap.querySelectorAll(".free-learn-result").forEach((el,j)=>el.classList.toggle("active",j===i));
+    $("#freeVoiceLearnSpeech").value=item.ttsText||"";
+    $("#freeVoiceLearnLanguage").value=item.ttsLanguage==="de"?"de":"ar";
+    $("#freeVoiceLearnStatus").textContent="Treffer gewählt. Jetzt Test anhören.";
+    clearFreeVoiceLearningPreview();
+  }));
+}
+
+async function openFreeVoicePronunciation(){
+  const term=getFreeVoiceSelection();
+  if(!term){
+    $("#freeVoiceStatus").textContent="Markiere zuerst im Text ein Wort oder eine Phrase.";
+    $("#freeVoiceText").focus();
+    return;
+  }
+  $("#freeVoiceLearningSection").hidden=false;
+  $("#freeVoiceLearnTerm").value=term;
+  $("#freeVoiceLearnStatus").textContent="Suche passende Aussprache …";
+  freeVoiceLearningCandidate=null;
+  clearFreeVoiceLearningPreview();
+
+  const preset=freeVoicePresetFor(term);
+  if(preset){
+    $("#freeVoiceLearnLanguage").value=preset.language;
+    $("#freeVoiceLearnSpeech").value=preset.speech;
+  }else{
+    $("#freeVoiceLearnSpeech").value="";
+    $("#freeVoiceLearnLanguage").value=/[\u0600-\u06ff]/.test(term)?"ar":"ar";
+  }
+
+  try{
+    const r=await localRequest("/learning/search",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({query:term,limit:8})
+    });
+    const d=await r.json().catch(()=>({}));
+    if(r.ok&&d.ok){
+      renderFreeVoiceLearningResults(d.results||[]);
+      if(!preset&&(d.results||[]).length){
+        const first=d.results[0];
+        freeVoiceLearningCandidate=first;
+        $("#freeVoiceLearnSpeech").value=first.ttsText||"";
+        $("#freeVoiceLearnLanguage").value=first.ttsLanguage==="de"?"de":"ar";
+      }
+      $("#freeVoiceLearnStatus").textContent=preset
+        ?"Vorschlag eingesetzt. Anhören und nur bei korrekter Aussprache speichern."
+        :"Sprechform prüfen, testen und bei korrekter Aussprache speichern.";
+    }else{
+      renderFreeVoiceLearningResults([]);
+      $("#freeVoiceLearnStatus").textContent="Sprechform selbst eingeben und testen.";
+    }
+  }catch(_){
+    renderFreeVoiceLearningResults([]);
+    $("#freeVoiceLearnStatus").textContent="Sprechform selbst eingeben und testen.";
+  }
+  $("#freeVoiceLearningSection").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+
+async function previewFreeVoiceLearning(){
+  const term=$("#freeVoiceLearnTerm").value.trim();
+  const speech=$("#freeVoiceLearnSpeech").value.trim();
+  const language=$("#freeVoiceLearnLanguage").value;
+  if(!term||!speech){
+    $("#freeVoiceLearnStatus").textContent="Auswahl und Sprechform werden benötigt.";
+    return;
+  }
+  clearFreeVoiceLearningPreview();
+  const btn=$("#freeVoiceLearnPreviewBtn"),old=btn.textContent;
+  btn.disabled=true;btn.textContent="Erzeuge Test …";
+  try{
+    const r=await localRequest("/learning/preview",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        term,
+        ttsText:speech,
+        canonical:freeVoiceLearningCandidate?.canonical||term,
+        language
+      })
+    });
+    if(!r.ok){
+      const d=await r.json().catch(()=>({}));
+      throw Error(d.error||"Test-Audio konnte nicht erzeugt werden.");
+    }
+    const blob=await r.blob();
+    freeVoiceLearningPreviewId=r.headers.get("X-Learning-Preview-Id")||"";
+    if(!freeVoiceLearningPreviewId)throw Error("Test-ID fehlt.");
+    freeVoiceLearningPreviewUrl=URL.createObjectURL(blob);
+    const p=$("#freeVoiceLearnPlayer");
+    p.src=freeVoiceLearningPreviewUrl;p.hidden=false;
+    $("#freeVoiceLearnConfirmBtn").disabled=false;
+    $("#freeVoiceLearnStatus").textContent="Genau anhören. Wenn es stimmt, „So merken“ drücken.";
+    await p.play().catch(()=>{});
+  }catch(e){
+    $("#freeVoiceLearnStatus").textContent=e.message||String(e);
+  }finally{
+    btn.disabled=false;btn.textContent=old;
+  }
+}
+
+async function confirmFreeVoiceLearning(){
+  if(!freeVoiceLearningPreviewId){
+    $("#freeVoiceLearnStatus").textContent="Zuerst einen Aussprache-Test anhören.";
+    return;
+  }
+  const term=$("#freeVoiceLearnTerm").value.trim();
+  const btn=$("#freeVoiceLearnConfirmBtn"),old=btn.textContent;
+  btn.disabled=true;btn.textContent="Wird gelernt …";
+  try{
+    const r=await localRequest("/learning/confirm",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({previewId:freeVoiceLearningPreviewId,term})
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.ok)throw Error(d.error||"Aussprache konnte nicht gespeichert werden.");
+    clearFreeVoiceLearningPreview();
+    $("#freeVoicePronunciation").checked=true;
+    $("#freeVoiceLearnStatus").textContent="Dauerhaft gespeichert. Diese Auswahl hat künftig Vorrang vor eingebauten Presets.";
+    $("#freeVoiceStatus").textContent="Aussprache „"+term+"“ gespeichert. Text kann jetzt neu erzeugt werden.";
+    await loadLibrary().catch(()=>{});
+  }catch(e){
+    $("#freeVoiceLearnStatus").textContent=e.message||String(e);
+    btn.disabled=false;
+  }finally{
+    btn.textContent=old;
+  }
+}
+
 async function generateFreeVoice(){
   const btn=$("#freeVoiceGenerateBtn");
   const old=btn.textContent;
@@ -1634,10 +1880,19 @@ $("#generateBtn").onclick=generate;
 $("#mobileGenerateBtn").onclick=generate;
 $("#freeVoiceToggleBtn").onclick=()=>setStudioMode(studioMode==="free"?"production":"free");
 $("#freeVoiceGenerateBtn").onclick=generateFreeVoice;
+$("#freeVoiceImproveBtn").onclick=openFreeVoicePronunciation;
+$("#freeVoiceLearnPreviewBtn").onclick=previewFreeVoiceLearning;
+$("#freeVoiceLearnConfirmBtn").onclick=confirmFreeVoiceLearning;
+$("#freeVoiceLearnSpeech").addEventListener("input",clearFreeVoiceLearningPreview);
+$("#freeVoiceLearnLanguage").addEventListener("change",clearFreeVoiceLearningPreview);
 $("#freeVoiceClearBtn").onclick=()=>{
   $("#freeVoiceText").value="";
   updateFreeVoiceCounter();
   $("#freeVoicePlayerWrap").hidden=true;
+  $("#freeVoiceLearningSection").hidden=true;
+  $("#freeVoiceLearnTerm").value="";
+  $("#freeVoiceLearnSpeech").value="";
+  clearFreeVoiceLearningPreview();
   $("#freeVoiceText").focus();
 };
 $("#freeVoiceText").addEventListener("input",updateFreeVoiceCounter);
