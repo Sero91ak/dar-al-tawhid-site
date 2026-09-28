@@ -85,7 +85,30 @@
       "onlineNeverOverridesUserOrInstalledRules": true,
       "persistentAudioMasterRequiresHumanConfirmation": true,
       "unknownIslamicTermsBlockedBeforeRender": true
-    }
+    },
+    "fixedPhrases": [
+      {
+        "id": "salam_full_greeting",
+        "forms": [
+          "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",
+          "as-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",
+          "As-salāmu ʿalaykum wa raḥmatullāhi wa barakātuh"
+        ],
+        "tts_text": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ",
+        "tts_language": "ar",
+        "scope": "free_voice_pronunciation_library"
+      },
+      {
+        "id": "dar_al_tawhid_kids_brand_phrase",
+        "forms": [
+          "DĀR AL TAWḤĪD Kids",
+          "Dār al-Tawḥīd Kids"
+        ],
+        "tts_text": "دَار التَّوْحِيد كِدْس",
+        "tts_language": "ar",
+        "scope": "free_voice_pronunciation_library"
+      }
+    ]
   },
   "prosody": {
     "automatic": true,
