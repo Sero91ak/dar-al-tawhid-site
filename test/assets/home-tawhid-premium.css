@@ -1,0 +1,268 @@
+/* TEST ONLY · Home Hero / Tawhid Focus · v1
+   Keine Logikänderung. Nutzt vorhandenes Logo, Prayer Hub und 3D-Assets. */
+
+body.is-home-route .theme-hero-shell{
+  position:relative!important;
+  overflow:hidden!important;
+  background:transparent!important;
+  isolation:isolate!important;
+  margin-bottom:10px!important;
+}
+
+body.is-home-route .theme-hero-surface{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  padding:18px 16px 14px!important;
+  border-radius:22px!important;
+  border:1px solid color-mix(in srgb,var(--gold2) 24%,var(--line))!important;
+  background:var(--premium-bg)!important;
+  box-shadow:0 16px 40px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+
+body.is-home-route .theme-hero-surface::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-2!important;
+  pointer-events:none!important;
+  background:
+    url("/assets/feed-backgrounds/auto/mosque/bg-pro-mosque-09-mobile.webp") center 48%/cover no-repeat!important;
+  opacity:.38!important;
+  filter:saturate(.92) contrast(1.06)!important;
+  transform:scale(1.015)!important;
+}
+
+body.is-home-route .theme-hero-surface::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 96%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 88%,transparent) 47%,
+      color-mix(in srgb,var(--bg) 60%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 18%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 74%,transparent) 100%)!important;
+}
+
+html[data-theme="light"] body.is-home-route .theme-hero-surface::after,
+html[data-theme="soft"] body.is-home-route .theme-hero-surface::after,
+html[data-theme="eisgold"] body.is-home-route .theme-hero-surface::after,
+html[data-theme="salbei"] body.is-home-route .theme-hero-surface::after{
+  background:
+    linear-gradient(90deg,
+      rgba(250,249,244,.98) 0%,
+      rgba(250,249,244,.91) 47%,
+      rgba(250,249,244,.62) 100%),
+    linear-gradient(180deg,rgba(250,249,244,.14),rgba(246,247,242,.78))!important;
+}
+
+body.is-home-route .header-row--brand-only{
+  margin:0!important;
+  padding:0!important;
+}
+
+body.is-home-route .brand{
+  width:100%!important;
+  min-width:0!important;
+}
+
+body.is-home-route .brand-kicker-row{
+  margin:0 0 7px!important;
+}
+
+body.is-home-route .brand-kicker-row small{
+  display:inline-flex!important;
+  align-items:center!important;
+  min-height:24px!important;
+  padding:4px 9px!important;
+  border-radius:999px!important;
+  border:1px solid color-mix(in srgb,var(--gold2) 34%,transparent)!important;
+  background:color-mix(in srgb,var(--bg) 66%,transparent)!important;
+  color:var(--premium-label,var(--gold2))!important;
+  font-size:9.5px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  backdrop-filter:blur(12px)!important;
+}
+
+body.is-home-route .brand-main{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-width:0!important;
+}
+
+body.is-home-route .brand-main .logo{
+  width:62px!important;
+  height:62px!important;
+  flex:0 0 62px!important;
+  object-fit:contain!important;
+  border-radius:50%!important;
+  filter:drop-shadow(0 9px 18px rgba(0,0,0,.20))!important;
+}
+
+body.is-home-route .brand-main .brand-title-refined{
+  margin:0!important;
+  min-width:0!important;
+  color:var(--premium-title,var(--text))!important;
+  -webkit-text-fill-color:var(--premium-title,var(--text))!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(28px,7vw,42px)!important;
+  line-height:.98!important;
+  font-weight:800!important;
+  letter-spacing:.025em!important;
+  text-shadow:0 2px 18px color-mix(in srgb,var(--bg) 38%,transparent)!important;
+}
+
+body.is-home-route .brand-main .brand-title-refined::after{
+  width:min(170px,75%)!important;
+  margin-top:8px!important;
+}
+
+body.is-home-route .header-prayer-hub{
+  position:relative!important;
+  z-index:2!important;
+  margin:13px 0 10px!important;
+  border:1px solid color-mix(in srgb,var(--gold2) 26%,var(--line))!important;
+  border-radius:16px!important;
+  background:color-mix(in srgb,var(--bg) 72%,transparent)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.06)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.05)!important;
+  backdrop-filter:blur(16px) saturate(1.05)!important;
+}
+
+html[data-theme="light"] body.is-home-route .header-prayer-hub,
+html[data-theme="soft"] body.is-home-route .header-prayer-hub,
+html[data-theme="eisgold"] body.is-home-route .header-prayer-hub,
+html[data-theme="salbei"] body.is-home-route .header-prayer-hub{
+  background:rgba(255,255,255,.78)!important;
+  box-shadow:0 10px 28px rgba(31,49,39,.08),inset 0 1px 0 rgba(255,255,255,.88)!important;
+}
+
+body.is-home-route .hero-text{
+  position:relative!important;
+  z-index:2!important;
+  margin:0!important;
+  padding:0 2px!important;
+  max-width:720px!important;
+}
+
+body.is-home-route .hero-text .salam{
+  margin:0 0 5px!important;
+  color:var(--premium-title,var(--text))!important;
+  font-size:clamp(13px,3.3vw,15.5px)!important;
+  line-height:1.28!important;
+  font-weight:800!important;
+}
+
+body.is-home-route .hero-text .intro{
+  margin:0!important;
+  color:var(--premium-body,var(--muted))!important;
+  font-size:clamp(11.5px,3vw,13.5px)!important;
+  line-height:1.48!important;
+  font-weight:650!important;
+  max-width:650px!important;
+}
+
+body.is-home-route .hero-text .intro strong{
+  color:var(--premium-title,var(--text))!important;
+  font-weight:900!important;
+}
+
+body.is-home-route .hero-text .intro strong:first-child{
+  color:var(--premium-label,var(--gold2))!important;
+}
+
+/* Ibn Sīrīn: unverändert inhaltlich, kompakter und mit echtem vorhandenem 3D-Buch-Akzent. */
+body.is-home-route .isnad{
+  position:relative!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  margin:8px 0 0!important;
+  padding:13px 76px 12px 14px!important;
+  border:1px solid color-mix(in srgb,var(--gold2) 24%,var(--line))!important;
+  border-radius:18px!important;
+  background:var(--theme-surface-elevated,var(--premium-bg))!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.09)!important;
+}
+
+body.is-home-route .isnad::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:-1!important;
+  right:5px!important;
+  bottom:-7px!important;
+  width:78px!important;
+  height:78px!important;
+  pointer-events:none!important;
+  background:url("/test/assets/dar-3d-icons/books.png?v=1094") center/contain no-repeat!important;
+  opacity:.30!important;
+  filter:saturate(.9)!important;
+}
+
+body.is-home-route .isnad-label{
+  margin-bottom:6px!important;
+  color:var(--premium-label,var(--gold2))!important;
+  font-size:9px!important;
+  line-height:1!important;
+  font-weight:950!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+}
+
+body.is-home-route .isnad-quote{
+  display:block!important;
+  color:var(--premium-title,var(--text))!important;
+  font-size:clamp(12px,3.2vw,14px)!important;
+  line-height:1.42!important;
+  font-weight:800!important;
+}
+
+body.is-home-route .isnad-speaker{
+  display:block!important;
+  margin-bottom:3px!important;
+  color:var(--premium-label,var(--gold2))!important;
+  font-weight:900!important;
+}
+
+body.is-home-route .isnad-words{
+  color:var(--premium-title,var(--text))!important;
+}
+
+body.is-home-route .isnad-source{
+  margin-top:6px!important;
+  color:var(--premium-body,var(--muted))!important;
+  font-size:10.5px!important;
+  line-height:1.35!important;
+  font-weight:700!important;
+}
+
+@media(max-width:520px){
+  body.is-home-route .theme-hero-surface{
+    padding:14px 12px 12px!important;
+    border-radius:18px!important;
+  }
+  body.is-home-route .brand-main{gap:10px!important}
+  body.is-home-route .brand-main .logo{
+    width:52px!important;height:52px!important;flex-basis:52px!important;
+  }
+  body.is-home-route .brand-main .brand-title-refined{
+    font-size:clamp(25px,7.2vw,34px)!important;
+  }
+  body.is-home-route .header-prayer-hub{margin:10px 0 8px!important}
+  body.is-home-route .isnad{
+    padding:11px 62px 10px 12px!important;
+    border-radius:16px!important;
+  }
+  body.is-home-route .isnad::after{
+    width:64px!important;height:64px!important;right:3px!important;bottom:-5px!important;opacity:.26!important;
+  }
+}
