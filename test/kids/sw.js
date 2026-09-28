@@ -1,9 +1,12 @@
-const CACHE_NAME="dar-al-tawhid-kids-v67";
+const CACHE_NAME="dar-al-tawhid-kids-v68";
 const PRECACHE=[
   "/test/kids/index.html",
   "/test/kids/start.html",
   "/test/kids/shell.html",
   "/test/kids/manifest.webmanifest",
+  "/test/kids/assets/kids-cinema/runtime/scene-1.webp",
+  "/test/kids/assets/kids-cinema/runtime/scene-2.webp",
+  "/test/kids/assets/kids-cinema/runtime/scene-3.webp",
   "/test/kids/assets/kids-cinema/fallback/scene-1.jpg",
   "/test/kids/assets/kids-cinema/fallback/scene-2.jpg",
   "/test/kids/assets/kids-cinema/fallback/scene-3.jpg",
