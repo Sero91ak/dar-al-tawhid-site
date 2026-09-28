@@ -4,12 +4,15 @@
 const WORKER_DEFAULT="https://dar-admin-publisher.sero91ak.workers.dev";
 const WORKER_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
+const TARGET_VOICE="serhat-owner-voice-2026";
+
 let manifest=null;
 let current=null;
 let busy=false;
-let playToken=0;
-let heardSourceFile="";
-let referenceHeard=false;
+let candidateBlob=null;
+let candidateUrl="";
+let candidateHeard=false;
+let variant=0;
 
 const q=id=>document.getElementById(id);
 
@@ -27,7 +30,11 @@ function headers(){
   return h;
 }
 async function adminApi(path,options={}){
-  const r=await fetch(workerBase()+path,{...options,headers:{...headers(),...(options.headers||{})},cache:"no-store"});
+  const r=await fetch(workerBase()+path,{
+    ...options,
+    headers:{...headers(),...(options.headers||{})},
+    cache:"no-store"
+  });
   const d=await r.json().catch(()=>({}));
   if(!r.ok||d?.ok===false)throw Error(d?.error||("HTTP "+r.status));
   return d;
@@ -38,6 +45,17 @@ function setMsg(text,type=""){
   el.textContent=text||"";
   el.style.color=type==="good"?"var(--green)":type==="bad"?"var(--red)":type==="warn"?"var(--amber)":"";
 }
+function publisherState(){
+  const el=q("alphabetPublisherState");
+  if(!el)return;
+  if(workerSecret()){
+    el.textContent="Cloudflare Publisher: verbunden · nur Speichern/Veröffentlichen";
+    el.style.color="var(--green)";
+  }else{
+    el.textContent="Cloudflare Publisher: nicht verbunden · Erzeugen/Hören lokal möglich";
+    el.style.color="var(--amber)";
+  }
+}
 function slotList(m){
   const out=[];
   const letters=m?.letters||{};
@@ -45,76 +63,73 @@ function slotList(m){
     const l=letters[letterId]||{};
     if(l.name)out.push({letterId,kind:"name",key:"",slot:l.name,label:"Buchstabenname"});
     ["fatha","kasra","damma"].forEach(key=>{
-      if(l.harakat?.[key])out.push({letterId,kind:"harakat",key,slot:l.harakat[key],label:key==="fatha"?"Fatḥa":key==="kasra"?"Kasra":"Ḍamma"});
+      if(l.harakat?.[key])out.push({
+        letterId,kind:"harakat",key,slot:l.harakat[key],
+        label:key==="fatha"?"Fatḥah":key==="kasra"?"Kasrah":"Ḍammah"
+      });
     });
     if(l.word)out.push({letterId,kind:"word",key:"",slot:l.word,label:"Beispielwort"});
   });
   return out;
 }
-function isCanonicalSeriesSource(source,m){
-  const s=source||{};
+function isOwnerMaster(item){
+  const slot=item?.slot||{};
   return Boolean(
-    s.sourceType==="external-human-pronunciation" &&
-    s.sourceProvider==="Wikimedia Commons / Escuela Internacional de Árabe" &&
-    s.sourceSpeaker==="Eiarabe" &&
-    s.license==="CC-BY-4.0" &&
-    /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/i.test(String(s.sourcePage||"")) &&
-    /^https:\/\/commons\.wikimedia\.org\/wiki\/Special:Redirect\/file\//i.test(String(s.url||"")) &&
-    /por la Escuela Internacional de Árabe\.ogg$/i.test(String(s.sourceFile||"")) &&
-    String(m?.policy?.canonicalVoiceId||"")==="eiarabe-alif-2026"
+    slot.verified===true &&
+    slot.url &&
+    (slot.sourceVoice==="authorized-owner-voice" || slot.voiceProfileId===TARGET_VOICE)
   );
 }
-function candidateForSlot(slot,m){
-  const sources=Array.isArray(slot?.alternateSources)?slot.alternateSources:[];
-  return sources.find(source=>isCanonicalSeriesSource(source,m))||null;
-}
-function candidateList(m){
-  return slotList(m).map(item=>({...item,candidate:candidateForSlot(item.slot,m)}))
-    .filter(item=>item.slot?.verified!==true&&item.candidate);
-}
-function canonicalAnchor(){
+function pendingList(m){return slotList(m).filter(item=>!isOwnerMaster(item))}
+function alifPronunciationReference(){
   const slot=manifest?.letters?.alif?.name;
-  if(!slot||slot.verified!==true||!slot.url||slot.voiceProfileId!=="eiarabe-alif-2026"||slot.sameVoiceConfirmed!==true)return null;
+  if(!slot?.url)return null;
   return slot;
+}
+function clearCandidate(){
+  candidateHeard=false;
+  candidateBlob=null;
+  if(candidateUrl){URL.revokeObjectURL(candidateUrl);candidateUrl=""}
+  const p=q("alphabetPackPlayer");
+  if(p){try{p.pause()}catch{};p.removeAttribute("src");p.hidden=true}
+  const approve=q("alphabetPackApproveBtn");
+  if(approve)approve.disabled=true;
+  const retry=q("alphabetPackRetryBtn");
+  if(retry)retry.disabled=true;
+  const now=q("alphabetPackNowPlaying");
+  if(now)now.textContent="Noch kein Serhat-Kandidat erzeugt";
 }
 function renderProgress(){
   const all=slotList(manifest);
-  const done=all.filter(x=>x.slot?.verified===true&&x.slot?.url).length;
-  const candidates=candidateList(manifest).length;
+  const done=all.filter(isOwnerMaster).length;
   if(q("alphabetPackProgress")){
-    q("alphabetPackProgress").textContent=done+" / "+all.length+" Clips freigegeben · "+candidates+" gleicher-Stimmen-Kandidat"+(candidates===1?"":"en");
+    q("alphabetPackProgress").textContent=done+" / "+all.length+" Serhat-Master bestätigt · "+(all.length-done)+" offen";
   }
   const ref=q("alphabetPackReferenceState");
   if(ref){
-    const anchor=canonicalAnchor();
+    const anchor=alifPronunciationReference();
     ref.textContent=anchor
-      ?"Referenzstimme aktiv: Alif · Escuela Internacional de Árabe / Eiarabe · CC BY 4.0"
-      :"Referenzstimme fehlt oder ist nicht eindeutig verifiziert.";
-    ref.style.color=anchor?"var(--green)":"var(--red)";
+      ?"Aussprache-Referenz: Alif · Eiarabe. Zielstimme: Serhat Abu Malik."
+      :"Alif-Aussprache-Referenz fehlt. Serhat-Kandidaten können trotzdem erzeugt werden.";
+    ref.style.color=anchor?"var(--green)":"var(--amber)";
   }
+  publisherState();
 }
 function renderCurrent(){
   if(!current){
-    if(q("alphabetPackLabel"))q("alphabetPackLabel").textContent="Kein weiterer Kandidat derselben Stimme gefunden";
-    if(q("alphabetPackArabic"))q("alphabetPackArabic").textContent="—";
+    if(q("alphabetPackLabel"))q("alphabetPackLabel").textContent="Alphabet-Audio-Pack vollständig";
+    if(q("alphabetPackArabic"))q("alphabetPackArabic").textContent="✓";
+    if(q("alphabetPackGenerateBtn"))q("alphabetPackGenerateBtn").disabled=true;
     if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=true;
-    if(q("alphabetPackRetryBtn"))q("alphabetPackRetryBtn").disabled=true;
     return;
   }
   if(q("alphabetPackLabel")){
-    q("alphabetPackLabel").textContent=current.letterId.toUpperCase()+" · "+current.label+" · Eiarabe-Kandidat";
+    q("alphabetPackLabel").textContent=
+      current.letterId.toUpperCase()+" · "+current.label+" · Serhat-Lernstimme";
   }
   if(q("alphabetPackArabic"))q("alphabetPackArabic").textContent=current.slot?.text||"—";
-  const sourceLink=q("alphabetPackSourceLink");
-  if(sourceLink){
-    const page=String(current.candidate?.sourcePage||"");
-    sourceLink.hidden=!/^https:\/\//i.test(page);
-    if(!sourceLink.hidden)sourceLink.href=page;
-  }
-  const playing=q("alphabetPackNowPlaying");
-  if(playing)playing.textContent="Noch nichts abgespielt";
-  if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=true;
-  if(q("alphabetPackRetryBtn"))q("alphabetPackRetryBtn").disabled=false;
+  if(q("alphabetPackGenerateBtn"))q("alphabetPackGenerateBtn").disabled=false;
+  clearCandidate();
 }
 async function loadManifest(){
   try{
@@ -123,7 +138,7 @@ async function loadManifest(){
       manifest=d.manifest||null;
     }else{
       const r=await fetch("/test/kids/data/alphabet-audio.json?cb="+Date.now(),{cache:"no-store"});
-      if(!r.ok)throw Error("Audio-Manifest nicht erreichbar");
+      if(!r.ok)throw Error("Alphabet-Audio-Manifest nicht erreichbar");
       manifest=await r.json();
     }
     renderProgress();
@@ -133,154 +148,167 @@ async function loadManifest(){
     return null;
   }
 }
-function nextCandidate(){
-  return candidateList(manifest)[0]||null;
-}
-function playerFullyHeard(){
-  const p=q("alphabetPackPlayer");
-  if(!p||!Number.isFinite(Number(p.duration))||Number(p.duration)<=0)return false;
-  return Boolean(p.ended)||Number(p.currentTime)>=Math.max(0,Number(p.duration)-0.15);
-}
-function playExternal(url,{candidate=false,label=""}={}){
-  const p=q("alphabetPackPlayer");
-  if(!p)throw Error("Audio-Player nicht gefunden.");
-  if(!/^https:\/\//i.test(String(url||"")))throw Error("Externe Audio-URL ist ungültig.");
-  const token=++playToken;
-  if(candidate){
-    heardSourceFile="";
-    if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=true;
-  }
-  const playing=q("alphabetPackNowPlaying");
-  if(playing)playing.textContent=(candidate?"Kandidat: ":"Referenz: ")+(label||"Audio");
-  try{p.pause()}catch{}
-  p.src=String(url);
-  p.hidden=false;
-  p.load();
-  p.onended=()=>{
-    if(token!==playToken)return;
-    if(candidate&&current?.candidate){
-      heardSourceFile=String(current.candidate.sourceFile||"");
-      const ready=referenceHeard&&heardSourceFile===String(current.candidate.sourceFile||"");
-      if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=!ready;
-      if(playing)playing.textContent="Bāʾ vollständig gehört";
-      setMsg(
-        ready
-          ?"Alif und Bāʾ wurden vollständig gehört. Wenn es für dich dieselbe Stimme ist, kannst du jetzt bestätigen."
-          :"Bāʾ vollständig gehört. Höre jetzt einmal Alif als direkte Referenz.",
-        ready?"good":"warn"
-      );
-    }else{
-      referenceHeard=true;
-      const ready=Boolean(current?.candidate)&&heardSourceFile===String(current.candidate.sourceFile||"");
-      if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=!ready;
-      if(playing)playing.textContent="Alif vollständig gehört";
-      setMsg(ready?"Alif und Bāʾ wurden vollständig gehört. Direkter Vergleich abgeschlossen.":"Alif vollständig gehört. Jetzt Bāʾ vollständig anhören.",ready?"good":"warn");
-    }
-  };
-  p.onerror=()=>{
-    if(token!==playToken)return;
-    heardSourceFile="";
-    setMsg("Audio konnte nicht geladen werden.","bad");
-  };
-  return p.play();
+function nextPending(){
+  return pendingList(manifest)[0]||null;
 }
 async function playReference(){
-  const anchor=canonicalAnchor();
-  if(!anchor){setMsg("Die Alif-Referenz ist nicht verfügbar.","bad");return}
+  const slot=alifPronunciationReference();
+  if(!slot?.url){setMsg("Alif-Aussprache-Referenz nicht verfügbar.","warn");return}
+  const p=q("alphabetPackPlayer");
+  if(!p)return;
   try{
-    await playExternal(anchor.url,{candidate:false,label:"Alif-Referenz"});
-    setMsg("Alif-Referenz läuft. Danach Bāʾ direkt vergleichen.","warn");
-  }catch(e){
-    setMsg(e?.message||String(e),"bad");
-  }
+    p.pause();
+    p.src=String(slot.url);
+    p.hidden=false;
+    p.onended=()=>setMsg("Alif-Aussprache-Referenz vollständig gehört. Jetzt Serhat-Kandidat erzeugen.","good");
+    q("alphabetPackNowPlaying").textContent="Aussprache-Referenz: Alif";
+    await p.play();
+  }catch(e){setMsg(e?.message||String(e),"bad")}
 }
-async function playCurrentCandidate(){
-  if(!current?.candidate){setMsg("Kein Kandidat derselben Stimme vorhanden.","warn");return}
-  try{
-    await playExternal(current.candidate.url,{candidate:true,label:current.slot?.text||"Kandidat"});
-    setMsg("Kandidat läuft. Bitte vollständig anhören und mit Alif vergleichen.","warn");
-  }catch(e){
-    setMsg(e?.message||String(e),"bad");
-  }
-}
-async function startNext(){
-  if(busy)return;
+async function generateCandidate(){
+  if(busy||!current)return;
   busy=true;
-  const btn=q("alphabetPackNextBtn"),old=btn?.textContent;
-  if(btn){btn.disabled=true;btn.textContent="Wird geladen …"}
+  const btn=q("alphabetPackGenerateBtn"),old=btn?.textContent;
+  if(btn){btn.disabled=true;btn.textContent="Serhat-Stimme wird erzeugt …"}
   try{
-    await loadManifest();
-    current=nextCandidate();
-    renderCurrent();
-    if(!current){
-      setMsg("Aktuell gibt es keine weitere frei lizenzierte Aufnahme aus derselben Eiarabe-Serie. Andere Sprecher bleiben gesperrt.","warn");
-      return;
+    clearCandidate();
+    const slotId=[current.letterId,current.kind,current.key||"main"].join("-");
+    const r=await fetch("/alphabet/preview",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        text:String(current.slot?.text||""),
+        slotId,
+        variant
+      }),
+      cache:"no-store"
+    });
+    if(!r.ok){
+      const d=await r.json().catch(()=>({}));
+      throw Error(d.error||"Serhat-Kandidat konnte nicht erzeugt werden.");
     }
-    await playCurrentCandidate();
+    candidateBlob=await r.blob();
+    if(!candidateBlob.size)throw Error("Leere Audiodatei erhalten.");
+    candidateUrl=URL.createObjectURL(candidateBlob);
+    const p=q("alphabetPackPlayer");
+    p.src=candidateUrl;p.hidden=false;
+    p.onended=()=>{
+      candidateHeard=true;
+      q("alphabetPackApproveBtn").disabled=false;
+      setMsg("Serhat-Kandidat vollständig gehört. Wenn Aussprache und Stimme stimmen, jetzt als Master bestätigen.","good");
+    };
+    p.onerror=()=>setMsg("Serhat-Kandidat konnte nicht abgespielt werden.","bad");
+    q("alphabetPackRetryBtn").disabled=false;
+    q("alphabetPackNowPlaying").textContent="Serhat-Kandidat · Variante "+(variant+1);
+    setMsg("Kandidat erzeugt. Bitte vollständig anhören.","warn");
+    await p.play().catch(()=>{});
   }catch(e){
     setMsg(e?.message||String(e),"bad");
   }finally{
-    if(btn){btn.disabled=false;btn.textContent=old||"Nächsten Kandidaten anhören"}
+    if(btn){btn.disabled=false;btn.textContent=old||"Serhat-Kandidat erzeugen"}
     busy=false;
   }
 }
+async function regenerateCandidate(){
+  variant=(variant+1)%20;
+  await generateCandidate();
+}
+function blobToDataUrl(blob){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onerror=()=>reject(Error("Audio konnte nicht für den Publisher vorbereitet werden."));
+    reader.onload=()=>resolve(String(reader.result||""));
+    reader.readAsDataURL(blob);
+  });
+}
 async function approveCurrent(){
-  if(busy||!current?.candidate)return;
-  if(!workerSecret()){setMsg("Publisher-Verbindung fehlt. Freigabe kann ohne Admin-Publisher nicht gespeichert werden.","bad");return}
-  if(!referenceHeard||heardSourceFile!==String(current.candidate.sourceFile||"")){
-    setMsg("Für die Freigabe müssen Alif und Bāʾ in dieser Prüfrunde jeweils vollständig angehört worden sein.","bad");
+  if(busy||!current||!candidateBlob)return;
+  if(!candidateHeard){
+    setMsg("Bitte den Serhat-Kandidaten zuerst vollständig anhören.","warn");
+    return;
+  }
+  if(!workerSecret()){
+    setMsg("Cloudflare Publisher ist nicht verbunden. Stimme ist lokal erzeugt, kann aber noch nicht in die Kids-App gespeichert werden.","bad");
+    publisherState();
     return;
   }
 
   busy=true;
   const btn=q("alphabetPackApproveBtn"),old=btn?.textContent;
-  if(btn){btn.disabled=true;btn.textContent="Wird freigegeben …"}
+  if(btn){btn.disabled=true;btn.textContent="Master wird gespeichert …"}
   try{
-    await adminApi("/api/admin/kids-alphabet-audio/verify-external",{
+    const dataUrl=await blobToDataUrl(candidateBlob);
+    const id=[
+      "alphabet",
+      current.letterId,
+      current.kind,
+      current.key||"main"
+    ].join("-");
+    const uploaded=await adminApi("/api/admin/kids-content/media",{
+      method:"POST",
+      body:JSON.stringify({
+        id,
+        role:"audio",
+        staging:true,
+        dataUrl,
+        originalName:id+".wav",
+        source:"serhat-local-voice"
+      })
+    });
+    const asset=uploaded?.asset;
+    if(!asset?.key)throw Error("Publisher hat keinen Audio-Pfad zurückgegeben.");
+
+    await adminApi("/api/admin/kids-alphabet-audio/verify",{
       method:"POST",
       body:JSON.stringify({
         letterId:current.letterId,
         kind:current.kind,
         key:current.key,
         text:String(current.slot?.text||""),
-        sourceFile:String(current.candidate.sourceFile||"")
+        asset
       })
     });
-    setMsg("Aufnahme als gleiche Alif-Stimme bestätigt und freigegeben.","good");
-    heardSourceFile="";
-    referenceHeard=false;
+
+    setMsg("Bestätigt: dieser Clip ist jetzt ein fester Serhat-Master für den Kids-Lernbereich.","good");
+    variant=0;
     await loadManifest();
-    current=nextCandidate();
+    current=nextPending();
     renderCurrent();
-    if(!current){
-      setMsg("Bāʾ ist übernommen. Weitere frei lizenzierte Eiarabe-Buchstaben sind derzeit nicht vorhanden; fremde Stimmen bleiben gesperrt.","good");
-    }
   }catch(e){
     setMsg(e?.message||String(e),"bad");
   }finally{
-    if(btn){btn.disabled=!current;btn.textContent=old||"Vollständig gehört · gleiche Stimme bestätigen"}
+    if(btn){btn.textContent=old||"Als Serhat-Master bestätigen";btn.disabled=!candidateHeard}
     busy=false;
   }
 }
 async function retryCurrent(){
-  if(busy||!current)return;
-  await playCurrentCandidate();
+  const p=q("alphabetPackPlayer");
+  if(!candidateUrl||!p){setMsg("Zuerst einen Serhat-Kandidaten erzeugen.","warn");return}
+  candidateHeard=false;
+  q("alphabetPackApproveBtn").disabled=true;
+  p.src=candidateUrl;p.hidden=false;
+  p.onended=()=>{
+    candidateHeard=true;
+    q("alphabetPackApproveBtn").disabled=false;
+    setMsg("Kandidat vollständig gehört. Bei korrekter Aussprache bestätigen.","good");
+  };
+  q("alphabetPackNowPlaying").textContent="Serhat-Kandidat erneut";
+  await p.play().catch(()=>{});
 }
 
 q("alphabetPackReferenceBtn")?.addEventListener("click",playReference);
-q("alphabetPackNextBtn")?.addEventListener("click",startNext);
+q("alphabetPackGenerateBtn")?.addEventListener("click",generateCandidate);
+q("alphabetPackRegenerateBtn")?.addEventListener("click",regenerateCandidate);
 q("alphabetPackApproveBtn")?.addEventListener("click",approveCurrent);
 q("alphabetPackRetryBtn")?.addEventListener("click",retryCurrent);
 
 loadManifest().then(()=>{
-  current=nextCandidate();
+  current=nextPending();
   renderCurrent();
-  if(!canonicalAnchor()){
-    setMsg("Alif-Referenz fehlt. Externe Kandidaten werden nicht freigegeben.","bad");
-  }else if(current){
-    setMsg("Nächster Kandidat derselben Eiarabe-Serie ist bereit. Erst Alif, dann Kandidat anhören.");
+  if(current){
+    setMsg("Bereit. Dieser Clip wird lokal mit deiner Serhat-Stimme erzeugt. Cloudflare wird erst nach deiner Bestätigung zum Speichern verwendet.");
   }else{
-    setMsg("Keine weitere frei lizenzierte Aufnahme derselben Eiarabe-Serie gefunden.","warn");
+    setMsg("Alle Alphabet-/Ḥarakāt-/Wort-Clips sind als Serhat-Master bestätigt.","good");
   }
 });
 })();
