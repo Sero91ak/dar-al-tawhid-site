@@ -1316,17 +1316,30 @@ def apply_user_learned_overrides(text:str):
     return value,found
 
 def apply_profile_fixed_phrases(text:str):
-    """Kleine, explizit bestätigte Mehrwort-Phrasen vor Einzelwort-Regeln anwenden.
-
-    Das löst zwei Fälle, die eine Wortbibliothek strukturell nicht sauber kann:
-    eine vollständige arabische Begrüßungsformel und eine gemischtsprachige
-    Markenphrase wie 'DĀR AL TAWḤĪD Kids'. Sichtbarer Text bleibt unverändert;
-    nur der interne Sprechtext wird ersetzt.
-    """
+    """Mehrwort-Phrasen mit Vorrang für lokal bestätigte Teilkorrekturen."""
     value=str(text or "")
     found=[]
     cfg=(VOICE_PROFILE.get("pronunciation") or {}).get("fixedPhrases") or []
     phrases=[]
+
+    learned_rules=[
+        dict(x or {})
+        for x in ((USER_OVERRIDE_DATA or {}).get("rules") or [])
+        if str((x or {}).get("string_to_replace") or "").strip()
+        and str((x or {}).get("tts_text") or "").strip()
+    ]
+    learned_by_norm={}
+    for rule in learned_rules:
+        learned_by_norm[normalize_lookup(rule.get("string_to_replace",""))]=rule
+        learned_by_norm.setdefault(normalize_lookup(rule.get("canonical","")),rule)
+
+    def learned(*forms):
+        for form in forms:
+            rule=learned_by_norm.get(normalize_lookup(form))
+            if rule:
+                return rule
+        return None
+
     for raw in cfg:
         item=dict(raw or {})
         tts=str(item.get("tts_text") or "").strip()
@@ -1338,30 +1351,67 @@ def apply_profile_fixed_phrases(text:str):
                 phrases.append((form,tts,item))
     phrases.sort(key=lambda x:len(x[0]),reverse=True)
 
-    learned_terms=[
-        str((rule or {}).get("string_to_replace") or "").strip()
-        for rule in ((USER_OVERRIDE_DATA or {}).get("rules") or [])
-        if str((rule or {}).get("string_to_replace") or "").strip()
-    ]
-
     for form,tts,item in phrases:
         if form not in value:
             continue
-        # Eine ausdrücklich gelernte Auswahl hat immer Vorrang – auch dann,
-        # wenn ihre Sprechform zufällig gleich geschrieben ist. So kann z. B.
-        # "Kids" das eingebaute DĀR-...-Kids-Preset gezielt übersteuern.
-        if any(term and term in form and term in value for term in learned_terms):
-            continue
+
+        phrase_id=str(item.get("id") or "")
+        effective_tts=tts
+        effective_lang=str(item.get("tts_language") or "ar")
+
+        # Wenn ein Teil der langen Salām-Formel bewusst gelernt wurde, soll nicht
+        # die starre Vollphrase darüberbügeln. Dann greifen die kleineren Bausteine.
+        if phrase_id=="salam_full_greeting":
+            if learned(
+                "Raḥmatullāhi","wa Raḥmatullāhi",
+                "Barakātuh","wa Barakātuh",
+                "Raḥmatullāhi wa Barakātuh",
+                "wa Raḥmatullāhi wa Barakātuh"
+            ):
+                continue
+
+        if phrase_id=="salam_part_2_rahmatullahi":
+            rule=learned("wa Raḥmatullāhi","Raḥmatullāhi")
+            if rule and str(rule.get("tts_language") or "ar")=="ar":
+                learned_tts=str(rule.get("tts_text") or "").strip()
+                effective_tts=learned_tts if learned_tts.startswith("و") else "وَ"+learned_tts
+
+        if phrase_id=="salam_part_3":
+            rule=learned("wa Barakātuh","Barakātuh")
+            if rule and str(rule.get("tts_language") or "ar")=="ar":
+                learned_tts=str(rule.get("tts_text") or "").strip()
+                effective_tts=learned_tts if learned_tts.startswith("و") else "وَ"+learned_tts
+
+        if phrase_id=="salam_tail_rahmatullahi_barakatuh":
+            rule=learned(
+                "Raḥmatullāhi wa Barakātuh",
+                "wa Raḥmatullāhi wa Barakātuh"
+            )
+            if rule and str(rule.get("tts_language") or "ar")=="ar":
+                effective_tts=str(rule.get("tts_text") or effective_tts).strip()
+
+        if phrase_id=="dar_al_tawhid_kids_brand_phrase":
+            rule=learned("Kids")
+            if rule:
+                learned_tts=str(rule.get("tts_text") or "").strip()
+                learned_lang=str(rule.get("tts_language") or "").strip()
+                if learned_lang=="ar" and learned_tts:
+                    effective_tts="دَارُ التَّوْحِيد "+learned_tts
+                elif learned_lang=="de":
+                    # Bei lateinischer Nutzerkorrektur die Vollphrase freigeben;
+                    # danach werden DĀR AL TAWḤĪD und Kids separat, aber eng gestitcht.
+                    continue
+
         count=value.count(form)
-        value=value.replace(form,tts)
+        value=value.replace(form,effective_tts)
         found.append({
             "canonical":form,
             "string_to_replace":form,
-            "tts_text":tts,
-            "tts_language":str(item.get("tts_language") or "ar"),
-            "tts_strategy":"profile-fixed-phrase-v1",
+            "tts_text":effective_tts,
+            "tts_language":effective_lang,
+            "tts_strategy":"profile-fixed-phrase-v2",
             "voice_lock":"PROFILE_PHRASE",
-            "fixed_phrase_id":str(item.get("id") or ""),
+            "fixed_phrase_id":phrase_id,
             "fixed_phrase_matches":count,
         })
     return value,found
@@ -3454,10 +3504,10 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         speak=text
         found=[]
     elif free_mode and free_pronunciation:
-        learned_text,learned_found=apply_user_learned_overrides(text)
-        phrase_text,phrase_found=apply_profile_fixed_phrases(learned_text)
-        speak,word_found=prepare(phrase_text)
-        found=learned_found+phrase_found+word_found
+        phrase_text,phrase_found=apply_profile_fixed_phrases(text)
+        learned_text,learned_found=apply_user_learned_overrides(phrase_text)
+        speak,word_found=prepare(learned_text)
+        found=phrase_found+learned_found+word_found
     else:
         speak,found=prepare(text)
     if free_mode:
