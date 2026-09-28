@@ -1,10 +1,10 @@
 {
-  "version": "2.9.25",
-  "updatedAt": "2026-09-28T13:29:00+02:00",
-  "deployTrigger": "voice-studio-2.9.25-serhat-kids-alphabet-masters",
+  "version": "2.9.26",
+  "updatedAt": "2026-09-28T13:35:00+02:00",
+  "deployTrigger": "voice-studio-2.9.26-kids-final-pause-repair",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v35",
+  "cache": "dar-voice-studio-v36",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -367,7 +367,14 @@
     "nativeProductionMenu": true,
     "directEditAfterInventoryOpen": true,
     "staleAudioInvalidatedOnTextEdit": true,
-    "freeVoiceIntegrated": true
+    "freeVoiceIntegrated": true,
+    "kidsFinalPauseRepair": {
+      "mode": "kids_lesson",
+      "thresholdStillStrict": true,
+      "autoRepairEligibilityMaxMs": 950,
+      "remeasureAfterRepair": true,
+      "freeVoiceUnaffected": true
+    }
   },
   "audioFormat": "wav-pcm16-mono",
   "legacyFloatWavMigration": true,
@@ -542,10 +549,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "bcda5a457ad186bfacb78e1568fc520ed638b037",
+  "releaseRef": "ff8a109174316827947d95c156bccf5a99d8c717",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Kids alphabet production now generates each letter/harakah/example locally with the Serhat engine, requires full listen + explicit approval, and uses Cloudflare only as publisher after approval.",
+  "updateRepairReason": "Content Studio Kids passed segment QA but the final joined file was rejected by a single 720 ms silent island. 2.9.26 keeps the strict segment/final thresholds, but for kids_lesson only, a moderate final silent island up to 950 ms is compressed once and the full output is re-measured before acceptance.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -661,5 +668,14 @@
       "example-word"
     ],
     "kidsManifestVersion": 6
+  },
+  "alphabetVoice": {
+    "workflow": {
+      "targetVoice": "Serhat Abu Malik",
+      "generation": "local Serhat Engine on Mac",
+      "cloudflareRole": "publisher/storage only after explicit human approval",
+      "autoPublish": false,
+      "pronunciationReference": "Eiarabe Alif remains reference until Serhat Alif master is approved"
+    }
   }
 }
