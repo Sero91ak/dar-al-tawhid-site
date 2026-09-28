@@ -30,11 +30,11 @@ Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-048` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4361
-totalVerifiedEntries: 4361
-loadedEntries: 4361
-uniqueVerifiedReferences: 4361
-missingCount: 1875
+entriesCount: 4363
+totalVerifiedEntries: 4363
+loadedEntries: 4363
+uniqueVerifiedReferences: 4363
+missingCount: 1873
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:4
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-050.json
-nächster Gap-Fill-Batch: entries-gap-06-051.json
+letzter Gap-Fill-Batch: entries-gap-06-051.json
+nächster Gap-Fill-Batch: entries-gap-06-052.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `171` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `173` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -75,6 +75,7 @@ Danach gibt es keinen weiteren Qurʾān-Vers. Alle weiteren Arbeiten sind aussch
 06-016  2      06-032  1      06-048  2
 06-049  5
 06-050  2
+06-051  2
 ```
 
 Die Zahl hinter jedem Batch ist die aktuell registrierte Eintragszahl der Datei.
@@ -115,6 +116,7 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 06-048: 3:117, 3:118
 06-049: 2:4, 2:5, 2:7, 2:21, 2:50
 06-050: 2:42, 2:52
+06-051: 2:44, 2:83
 ```
 
 ## Nächste echte Audit-Lücken
@@ -132,7 +134,6 @@ Der aktuelle nächste 25er-Auditbereich beginnt mit:
 2:36
 2:38
 2:43
-2:44
 2:46
 2:47
 2:48
@@ -144,7 +145,6 @@ Der aktuelle nächste 25er-Auditbereich beginnt mit:
 2:70
 2:72
 2:82
-2:83
 2:87
 2:90
 2:91
@@ -153,6 +153,8 @@ Der aktuelle nächste 25er-Auditbereich beginnt mit:
 2:94
 2:95
 2:96
+2:98
+2:99
 ```
 
 Diese Referenzen sind Arbeitsziele, keine Aufforderung zum künstlichen Füllen. Ein Vers bleibt offen, bis ein konkreter früher Bericht mit belastbarer Zuordnung und ausreichend geprüfter Überlieferungskette vorliegt.
