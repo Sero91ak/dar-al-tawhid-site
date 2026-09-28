@@ -1,10 +1,10 @@
 {
-  "version": "2.9.23",
-  "updatedAt": "2026-09-28T12:29:00+02:00",
-  "deployTrigger": "voice-studio-2.9.23-curated-pronunciation-variants",
+  "version": "2.9.24",
+  "updatedAt": "2026-09-28T12:40:00+02:00",
+  "deployTrigger": "voice-studio-2.9.24-sentence-flow-and-kids-context",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v33",
+  "cache": "dar-voice-studio-v34",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -542,10 +542,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "44fe8b0146f33fd0424f2b7781a057cd25ab61b0",
+  "releaseRef": "393a436b23dfe8317dd84a7d3fe003d85d6f6f36",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Free Voice pronunciation editor showed irrelevant fuzzy matches for Raḥmatullāhi and default Kids sounded with a z. 2.9.23 adds curated selectable variants for Raḥmatullāhi/Barakātuh/Kids, changes default Kids to كِتْس, and composes learned subword overrides into fixed phrases.",
+  "updateRepairReason": "Free Voice sounded choppy because greeting and brand words were split into too many isolated TTS segments. 2.9.24 renders the full salām as one Arabic phrase, DĀR AL TAWḤĪD Kids as one German-context phrase, and uses longer sentence-oriented chunks.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -635,6 +635,15 @@
       "kidsDefault": "كِتْس",
       "hideIrrelevantFuzzyMatchesWhenPresetExists": true,
       "learnedSubwordComposition": true
+    },
+    "flowRepair": {
+      "greetingSingleArabicSegment": true,
+      "brandKidsSingleGermanSegment": true,
+      "germanMaxChars": 108,
+      "arabicMaxChars": 96,
+      "kidsDefaultLanguage": "de",
+      "kidsDefaultSpeech": "Kids",
+      "productionModeUnaffected": true
     }
   }
 }
