@@ -7,71 +7,73 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		K10000000000000000000001 /* DarAlTawhidKidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = K10000000000000000000011 /* DarAlTawhidKidsApp.swift */; };
-		K10000000000000000000002 /* KidsWebAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = K10000000000000000000012 /* KidsWebAppView.swift */; };
-		K10000000000000000000003 /* KidsAppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = K10000000000000000000013 /* KidsAppShell.swift */; };
-		K10000000000000000000004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = K10000000000000000000014 /* Assets.xcassets */; };
-		K10000000000000000000005 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = K10000000000000000000015 /* PrivacyInfo.xcprivacy */; };
-		K10000000000000000000006 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = K10000000000000000000016 /* WebKit.framework */; };
+		A10000000000000000000001 /* DarAlTawhidKidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* DarAlTawhidKidsApp.swift */; };
+		A10000000000000000000002 /* KidsWebAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* KidsWebAppView.swift */; };
+		A10000000000000000000003 /* KidsAppShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* KidsAppShell.swift */; };
+		A10000000000000000000004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* Assets.xcassets */; };
+		A10000000000000000000005 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000015 /* PrivacyInfo.xcprivacy */; };
+		A10000000000000000000006 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		K10000000000000000000010 /* DarAlTawhidKids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhidKids.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		K10000000000000000000011 /* DarAlTawhidKidsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAlTawhidKidsApp.swift; sourceTree = "<group>"; };
-		K10000000000000000000012 /* KidsWebAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsWebAppView.swift; sourceTree = "<group>"; };
-		K10000000000000000000013 /* KidsAppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsAppShell.swift; sourceTree = "<group>"; };
-		K10000000000000000000014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		K10000000000000000000015 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		K10000000000000000000016 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		K10000000000000000000017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10000000000000000000010 /* TAWHID Kids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TAWHID Kids.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10000000000000000000011 /* DarAlTawhidKidsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAlTawhidKidsApp.swift; sourceTree = "<group>"; };
+		A10000000000000000000012 /* KidsWebAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsWebAppView.swift; sourceTree = "<group>"; };
+		A10000000000000000000013 /* KidsAppShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KidsAppShell.swift; sourceTree = "<group>"; };
+		A10000000000000000000014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A10000000000000000000015 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		A10000000000000000000016 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A10000000000000000000017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A10000000000000000000018 /* DarAlTawhidKids.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DarAlTawhidKids.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		K10000000000000000000020 /* Frameworks */ = {
+		A10000000000000000000020 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				K10000000000000000000006 /* WebKit.framework in Frameworks */,
+				A10000000000000000000006 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		K10000000000000000000030 = {
+		A10000000000000000000030 = {
 			isa = PBXGroup;
 			children = (
-				K10000000000000000000031 /* DarAlTawhidKids */,
-				K10000000000000000000032 /* Products */,
-				K10000000000000000000033 /* Frameworks */,
+				A10000000000000000000031 /* DarAlTawhidKids */,
+				A10000000000000000000032 /* Products */,
+				A10000000000000000000033 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		K10000000000000000000031 /* DarAlTawhidKids */ = {
+		A10000000000000000000031 /* DarAlTawhidKids */ = {
 			isa = PBXGroup;
 			children = (
-				K10000000000000000000011 /* DarAlTawhidKidsApp.swift */,
-				K10000000000000000000012 /* KidsWebAppView.swift */,
-				K10000000000000000000013 /* KidsAppShell.swift */,
-				K10000000000000000000014 /* Assets.xcassets */,
-				K10000000000000000000015 /* PrivacyInfo.xcprivacy */,
-				K10000000000000000000017 /* Info.plist */,
+				A10000000000000000000011 /* DarAlTawhidKidsApp.swift */,
+				A10000000000000000000012 /* KidsWebAppView.swift */,
+				A10000000000000000000013 /* KidsAppShell.swift */,
+				A10000000000000000000014 /* Assets.xcassets */,
+				A10000000000000000000015 /* PrivacyInfo.xcprivacy */,
+				A10000000000000000000017 /* Info.plist */,
+				A10000000000000000000018 /* DarAlTawhidKids.entitlements */,
 			);
 			path = DarAlTawhidKids;
 			sourceTree = "<group>";
 		};
-		K10000000000000000000032 /* Products */ = {
+		A10000000000000000000032 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				K10000000000000000000010 /* DarAlTawhidKids.app */,
+				A10000000000000000000010 /* TAWHID Kids.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		K10000000000000000000033 /* Frameworks */ = {
+		A10000000000000000000033 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				K10000000000000000000016 /* WebKit.framework */,
+				A10000000000000000000016 /* WebKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -79,13 +81,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		K10000000000000000000040 /* DarAlTawhidKids */ = {
+		A10000000000000000000040 /* DarAlTawhidKids */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = K10000000000000000000060 /* Build configuration list for PBXNativeTarget "DarAlTawhidKids" */;
+			buildConfigurationList = A10000000000000000000060 /* Build configuration list for PBXNativeTarget "DarAlTawhidKids" */;
 			buildPhases = (
-				K10000000000000000000050 /* Sources */,
-				K10000000000000000000020 /* Frameworks */,
-				K10000000000000000000051 /* Resources */,
+				A10000000000000000000050 /* Sources */,
+				A10000000000000000000020 /* Frameworks */,
+				A10000000000000000000051 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -93,25 +95,25 @@
 			);
 			name = DarAlTawhidKids;
 			productName = DarAlTawhidKids;
-			productReference = K10000000000000000000010 /* DarAlTawhidKids.app */;
+			productReference = A10000000000000000000010 /* TAWHID Kids.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		K10000000000000000000070 /* Project object */ = {
+		A10000000000000000000070 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					K10000000000000000000040 = {
+					A10000000000000000000040 = {
 						CreatedOnToolsVersion = 16.0;
 					};
 				};
 			};
-			buildConfigurationList = K10000000000000000000080 /* Build configuration list for PBXProject "DarAlTawhidKids" */;
+			buildConfigurationList = A10000000000000000000080 /* Build configuration list for PBXProject "DarAlTawhidKids" */;
 			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = de;
 			hasScannedForEncodings = 0;
@@ -120,43 +122,43 @@
 				en,
 				Base,
 			);
-			mainGroup = K10000000000000000000030;
-			productRefGroup = K10000000000000000000032 /* Products */;
+			mainGroup = A10000000000000000000030;
+			productRefGroup = A10000000000000000000032 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				K10000000000000000000040 /* DarAlTawhidKids */,
+				A10000000000000000000040 /* DarAlTawhidKids */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		K10000000000000000000051 /* Resources */ = {
+		A10000000000000000000051 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				K10000000000000000000004 /* Assets.xcassets in Resources */,
-				K10000000000000000000005 /* PrivacyInfo.xcprivacy in Resources */,
+				A10000000000000000000004 /* Assets.xcassets in Resources */,
+				A10000000000000000000005 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		K10000000000000000000050 /* Sources */ = {
+		A10000000000000000000050 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				K10000000000000000000001 /* DarAlTawhidKidsApp.swift in Sources */,
-				K10000000000000000000002 /* KidsWebAppView.swift in Sources */,
-				K10000000000000000000003 /* KidsAppShell.swift in Sources */,
+				A10000000000000000000001 /* DarAlTawhidKidsApp.swift in Sources */,
+				A10000000000000000000002 /* KidsWebAppView.swift in Sources */,
+				A10000000000000000000003 /* KidsAppShell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		K10000000000000000000081 /* Debug */ = {
+		A10000000000000000000081 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -176,7 +178,7 @@
 			};
 			name = Debug;
 		};
-		K10000000000000000000082 /* Release */ = {
+		A10000000000000000000082 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -194,10 +196,12 @@
 			};
 			name = Release;
 		};
-		K10000000000000000000061 /* Debug */ = {
+		A10000000000000000000061 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DarAlTawhidKids/DarAlTawhidKids.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
@@ -212,7 +216,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.kids;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TAWHID Kids";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -221,10 +225,12 @@
 			};
 			name = Debug;
 		};
-		K10000000000000000000062 /* Release */ = {
+		A10000000000000000000062 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DarAlTawhidKids/DarAlTawhidKids.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ALVZ35NL2N;
@@ -239,7 +245,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.kids;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "TAWHID Kids";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -251,25 +257,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		K10000000000000000000060 /* Build configuration list for PBXNativeTarget "DarAlTawhidKids" */ = {
+		A10000000000000000000060 /* Build configuration list for PBXNativeTarget "DarAlTawhidKids" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				K10000000000000000000061 /* Debug */,
-				K10000000000000000000062 /* Release */,
+				A10000000000000000000061 /* Debug */,
+				A10000000000000000000062 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		K10000000000000000000080 /* Build configuration list for PBXProject "DarAlTawhidKids" */ = {
+		A10000000000000000000080 /* Build configuration list for PBXProject "DarAlTawhidKids" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				K10000000000000000000081 /* Debug */,
-				K10000000000000000000082 /* Release */,
+				A10000000000000000000081 /* Debug */,
+				A10000000000000000000082 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = K10000000000000000000070 /* Project object */;
+	rootObject = A10000000000000000000070 /* Project object */;
 }

@@ -2,6 +2,8 @@
 
 Native iOS wrapper for TestFlight distribution.
 
+Kids ist eine **eigene** App: `../DarAlTawhidKids/DarAlTawhidKids.xcodeproj` (Bundle `de.daraltawhid.kids`). Nicht in dieses Target mischen. Workspace enthält beide Projekte.
+
 ## First TestFlight flow
 
 1. Open `DarAlTawhid.xcodeproj` in Xcode.

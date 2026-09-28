@@ -3,23 +3,30 @@
 Eigene native App, getrennt von der Erwachsenen-App (`de.daraltawhid.app`).
 
 - Bundle-ID: `de.daraltawhid.kids`
-- Anzeigename auf dem Homescreen: **TAWḤĪD KIDS** (der volle Name DĀR AL TAWḤĪD KIDS wird von iOS abgeschnitten)
-- Lädt: `https://dar-al-tawhid.de/test/kids/start`
-- Keine Erwachsenen-Navigation, kein Besucher-Feed, kein Push an alle
+- Anzeigename auf dem Homescreen: **TAWḤĪD KIDS**
+- Team: `ALVZ35NL2N`
+- Start: `https://dar-al-tawhid.de/test/kids/start`
+- Schema: `daraltawhidkids://`
+
+Die WKWebView bleibt auf `/test/kids/`. Keine Erwachsenen-Navigation.
 
 ## In Xcode öffnen
 
+Doppelklick auf `Xcode-oeffnen.command` oder:
+
 `ios/DarAlTawhidKids/DarAlTawhidKids.xcodeproj`
 
-Team: `ALVZ35NL2N` (wie die Haupt-App). Signing Automatic.
+Scheme **DarAlTawhidKids**, Signing Automatic, Team prüfen, Gerät oder Simulator, Run.
+
+Beide Projekte: `ios/DarAlTawhid/DarAlTawhid.xcworkspace`.
 
 ## App Store / TestFlight
 
 1. In App Store Connect eine **neue App** anlegen (nicht die Erwachsenen-App überschreiben).
 2. Bundle-ID `de.daraltawhid.kids` registrieren.
 3. Alter: **4+**, Kategorie **Bildung**. Nicht die strenge Apple-„Kids Category“, solange kein Parental Gate gebaut ist.
-4. Datenschutz: keine Werbung, kein Tracking (siehe `PrivacyInfo.xcprivacy`).
-5. Archive in Xcode → Distribute App → App Store Connect.
-6. TestFlight zuerst, danach Review.
+4. Datenschutz: keine Werbung, kein Tracking (`PrivacyInfo.xcprivacy`).
+5. Archive → Distribute App → App Store Connect.
+6. IPA nicht mit der Erwachsenen-Datei auf dem Schreibtisch vermischen.
 
-Die Web-Kids-Inhalte bleiben unter `test/kids/` und werden von der nativen Hülle angezeigt. Änderungen an der Kinderwelt erscheinen nach Deploy ohne neuen Store-Build, außer die native Hülle selbst ändert sich.
+Web-Kids unter `test/kids/` erscheinen nach Deploy ohne neuen Store-Build, außer die native Hülle ändert sich.

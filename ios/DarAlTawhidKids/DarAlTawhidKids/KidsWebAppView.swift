@@ -30,6 +30,7 @@ struct KidsWebAppView: UIViewRepresentable {
         configuration.userContentController.addUserScript(
             WKUserScript(source: bridge, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         )
+        configuration.applicationNameForUserAgent = "DarAlTawhidKids-iOS"
 
         let webView = WKWebView(frame: .zero, configuration: configuration)
         webView.scrollView.contentInsetAdjustmentBehavior = .never
@@ -59,6 +60,10 @@ struct KidsWebAppView: UIViewRepresentable {
             if KidsAppShell.isKidsURL(url) || url.scheme == "about" || url.scheme == "blob" || url.scheme == "data" {
                 decisionHandler(.allow)
                 return
+            }
+            let scheme = url.scheme?.lowercased() ?? ""
+            if scheme == "http" || scheme == "https" || scheme == "tel" || scheme == "mailto" {
+                UIApplication.shared.open(url)
             }
             decisionHandler(.cancel)
         }
