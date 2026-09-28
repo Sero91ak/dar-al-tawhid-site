@@ -3021,3 +3021,272 @@ body.is-home-route .home-tawhid-entry:active{
 }
 /* /v1107 · SCHRITT 4 */
 
+/* v1108 · SCHRITT 5 · SCHNELLZUGRIFFE ALS PREMIUM-KAPSELN */
+/* Nur die vorhandenen Schnellzugriffe werden neu gezeichnet.
+   data-home-premium-nav, Klick-Handler und Navigation bleiben unverändert. */
+
+body.is-home-route .home-premium-quick{
+  order:0!important;
+  width:100%!important;
+  margin:0 0 14px!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+}
+
+/* Ruhige Abschnittszeile statt großer Kartenüberschrift. */
+body.is-home-route .home-premium-quick__head{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  margin:0 4px 8px!important;
+  padding:0 2px!important;
+}
+
+body.is-home-route .home-premium-quick__kicker{
+  display:none!important;
+}
+
+body.is-home-route .home-premium-quick__title{
+  margin:0!important;
+  color:rgba(243,239,229,.86)!important;
+  -webkit-text-fill-color:rgba(243,239,229,.86)!important;
+  font-family:var(--font-ui,var(--sans))!important;
+  font-size:clamp(11px,2.65vw,13px)!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.11em!important;
+  text-transform:uppercase!important;
+}
+
+body.is-home-route .home-premium-quick__all{
+  min-height:28px!important;
+  margin:0!important;
+  padding:4px 10px!important;
+  border:1px solid rgba(222,194,124,.28)!important;
+  border-radius:999px!important;
+  background:rgba(7,17,31,.44)!important;
+  color:#d9c184!important;
+  -webkit-text-fill-color:#d9c184!important;
+  font-size:9.5px!important;
+  line-height:1!important;
+  font-weight:850!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+  backdrop-filter:blur(10px)!important;
+}
+
+/* Zwei ruhige Spalten auf iPhone; drei ab Tablet-Breite. */
+body.is-home-route .home-premium-quick__grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:8px!important;
+  width:100%!important;
+}
+
+/* Jede Karte wird zu einer echten Capsule: Icon links, Text kompakt, kein Pfeil. */
+body.is-home-route .home-premium-card{
+  position:relative!important;
+  isolation:isolate!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:68px!important;
+  margin:0!important;
+  padding:8px 13px 8px 9px!important;
+  display:grid!important;
+  grid-template-columns:42px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:8px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(222,194,124,.30)!important;
+  border-radius:999px!important;
+  color:#fff8ea!important;
+  background:
+    radial-gradient(circle at 12% 28%,rgba(222,194,124,.09),transparent 36%),
+    linear-gradient(104deg,rgba(17,31,50,.82) 0%,rgba(8,20,37,.78) 64%,rgba(5,15,29,.74) 100%)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 8px 22px rgba(0,0,0,.17)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.04)!important;
+  backdrop-filter:blur(14px) saturate(1.04)!important;
+  text-align:left!important;
+  transform:none!important;
+}
+
+body.is-home-route .home-premium-card::before{
+  content:""!important;
+  position:absolute!important;
+  inset:1px!important;
+  z-index:0!important;
+  border-radius:inherit!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(115deg,rgba(255,255,255,.038),transparent 31%,transparent 72%,rgba(222,194,124,.025))!important;
+}
+
+/* Tawḥīd-Karte bleibt leicht betont, aber nicht als fremder Kartentyp. */
+body.is-home-route .home-premium-card--tawhid{
+  border-color:rgba(226,197,124,.44)!important;
+  background:
+    radial-gradient(circle at 13% 26%,rgba(222,194,124,.13),transparent 38%),
+    linear-gradient(104deg,rgba(20,35,55,.88) 0%,rgba(9,22,40,.84) 64%,rgba(5,16,31,.79) 100%)!important;
+}
+
+body.is-home-route .home-premium-card__visual{
+  position:relative!important;
+  z-index:2!important;
+  width:42px!important;
+  height:42px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:visible!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+body.is-home-route .home-premium-card__visual img,
+body.is-home-route .home-premium-card__visual img.dar3d-icon{
+  display:block!important;
+  width:40px!important;
+  height:40px!important;
+  max-width:40px!important;
+  max-height:40px!important;
+  object-fit:contain!important;
+  filter:
+    drop-shadow(0 6px 9px rgba(0,0,0,.25))
+    saturate(.94)!important;
+}
+
+body.is-home-route .home-premium-card__body{
+  position:relative!important;
+  z-index:2!important;
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:2px!important;
+}
+
+body.is-home-route .home-premium-card__body strong{
+  width:100%!important;
+  margin:0!important;
+  overflow:hidden!important;
+  color:#fff8ea!important;
+  -webkit-text-fill-color:#fff8ea!important;
+  font-family:var(--font-ui,var(--sans))!important;
+  font-size:clamp(11.2px,2.9vw,13.3px)!important;
+  line-height:1.08!important;
+  font-weight:900!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+}
+
+body.is-home-route .home-premium-card__body span{
+  width:100%!important;
+  margin:0!important;
+  overflow:hidden!important;
+  color:rgba(232,232,226,.63)!important;
+  -webkit-text-fill-color:rgba(232,232,226,.63)!important;
+  font-size:clamp(8.2px,2vw,9.5px)!important;
+  line-height:1.18!important;
+  font-weight:650!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+  display:block!important;
+}
+
+body.is-home-route .home-premium-card__chev{
+  display:none!important;
+}
+
+/* Touch und Hover bleiben ruhig – keine springenden Karten. */
+body.is-home-route .home-premium-card:active{
+  transform:none!important;
+  opacity:.93!important;
+}
+
+body.is-home-route .home-premium-card:focus-visible{
+  outline:none!important;
+  border-color:rgba(229,202,132,.70)!important;
+  box-shadow:
+    0 0 0 2px rgba(222,194,124,.12),
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 8px 22px rgba(0,0,0,.18)!important;
+}
+
+@media(hover:hover){
+  body.is-home-route .home-premium-card:hover{
+    transform:none!important;
+    border-color:rgba(229,202,132,.52)!important;
+    background:
+      radial-gradient(circle at 12% 28%,rgba(222,194,124,.12),transparent 36%),
+      linear-gradient(104deg,rgba(19,34,54,.86) 0%,rgba(9,22,40,.82) 64%,rgba(6,17,32,.78) 100%)!important;
+    filter:none!important;
+  }
+}
+
+@media(max-width:390px){
+  body.is-home-route .home-premium-quick__grid{
+    gap:7px!important;
+  }
+
+  body.is-home-route .home-premium-card{
+    min-height:64px!important;
+    grid-template-columns:38px minmax(0,1fr)!important;
+    gap:6px!important;
+    padding:7px 10px 7px 8px!important;
+  }
+
+  body.is-home-route .home-premium-card__visual{
+    width:38px!important;
+    height:38px!important;
+  }
+
+  body.is-home-route .home-premium-card__visual img,
+  body.is-home-route .home-premium-card__visual img.dar3d-icon{
+    width:36px!important;
+    height:36px!important;
+    max-width:36px!important;
+    max-height:36px!important;
+  }
+
+  body.is-home-route .home-premium-card__body strong{
+    font-size:10.8px!important;
+  }
+
+  body.is-home-route .home-premium-card__body span{
+    font-size:7.9px!important;
+  }
+}
+
+@media(min-width:760px){
+  body.is-home-route .home-premium-quick__grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:9px!important;
+  }
+
+  body.is-home-route .home-premium-card{
+    min-height:72px!important;
+    grid-template-columns:44px minmax(0,1fr)!important;
+    padding:9px 15px 9px 10px!important;
+  }
+
+  body.is-home-route .home-premium-card__visual{
+    width:44px!important;
+    height:44px!important;
+  }
+
+  body.is-home-route .home-premium-card__visual img,
+  body.is-home-route .home-premium-card__visual img.dar3d-icon{
+    width:42px!important;
+    height:42px!important;
+    max-width:42px!important;
+    max-height:42px!important;
+  }
+}
+/* /v1108 · SCHRITT 5 */
+
