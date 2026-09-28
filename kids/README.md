@@ -1,23 +1,11 @@
 # DĀR AL TAWḤĪD Kids
 
-Die echte Kids-App liegt hier:
+Die Kids-App liegt hier:
 
-**Web:** `/test/kids/` → https://dar-al-tawhid.de/test/kids/
+**Web:** `/kids/` → https://dar-al-tawhid.de/kids/
 
-**iOS (App Store):** `ios/DarAlTawhidKids/` — Bundle-ID `de.daraltawhid.kids`
+**iOS:** `ios/DarAlTawhidKids/` — Bundle-ID `de.daraltawhid.kids`
 
-GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/test/kids
+Designregeln: `kids/KIDS-DESIGN.md`
 
-Dieser Ordner `kids/` ist nur der Hinweis für Programmierer. Die App liegt unter `test/kids/`. `/kids/test/` gibt es nicht.
-
-Designregeln (keine System-Emojis, Edge-to-Edge, Glass-Nav): `test/kids/KIDS-DESIGN.md`
-
-
-Web: https://dar-al-tawhid.de/test/kids/
-
-GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/tree/main/test/kids
-
-Dieser Ordner `kids/` ist nur der Hinweis für Programmierer. Die App liegt unter `test/kids/`. `/kids/test/` gibt es nicht.
-
-Designregeln (keine System-Emojis, Edge-to-Edge, Glass-Nav): `test/kids/KIDS-DESIGN.md`
-
+`/test/kids/` gibt es nicht mehr als App — nur noch Weiterleitung auf `/kids/`.

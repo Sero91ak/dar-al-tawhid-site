@@ -9,7 +9,7 @@ on:
       - "data/pronunciation/islamic-master-library.json"
       - "data/pronunciation/voice-regression-fixtures.json"
       - "scripts/voice-studio/validate-v2.py"
-      - "test/kids/**"
+      - "kids/**"
       - "cloudflare/kids-content-media.js"
       - "cloudflare/worker.js"
       - "cloudflare/site-router.js"
@@ -26,7 +26,7 @@ on:
       - "data/pronunciation/islamic-master-library.json"
       - "data/pronunciation/voice-regression-fixtures.json"
       - "scripts/voice-studio/validate-v2.py"
-      - "test/kids/**"
+      - "kids/**"
       - "cloudflare/kids-content-media.js"
       - "cloudflare/worker.js"
       - "cloudflare/site-router.js"
@@ -326,7 +326,7 @@ jobs:
           wrangler=Path("wrangler.test.toml").read_text(encoding="utf-8")
           health=Path("scripts/test-app-health-check.js").read_text(encoding="utf-8")
           required_worker=[
-              '"/test/kids/api/recitation/grade"',
+              '"/kids/api/recitation/grade"',
               "gradeKidsRecitation",
               "@cf/openai/whisper-large-v3-turbo",
               "language: \"ar\"",
@@ -335,7 +335,7 @@ jobs:
               '.replace(/ة/g, "ه")',
           ]
           required_router=[
-              'url.pathname === "/test/kids/api/recitation/grade"',
+              'url.pathname === "/kids/api/recitation/grade"',
               "request.method === \"POST\"",
               "dar-al-tawhid-test.sero91ak.workers.dev",
               "kids_recitation_proxy_failed",
@@ -361,7 +361,7 @@ jobs:
           from pathlib import Path
           import json, re
 
-          version=json.loads(Path("test/kids/version.json").read_text(encoding="utf-8"))
+          version=json.loads(Path("kids/version.json").read_text(encoding="utf-8"))
           build=str(version.get("buildId") or "").strip()
           label=str(version.get("label") or "").strip()
           if not re.fullmatch(r"kids-shell-v12-tab\d+",build):
@@ -372,14 +372,14 @@ jobs:
           minor=m.group(1)
 
           required_build_files=[
-              "test/kids/index.html",
-              "test/kids/start.html",
-              "test/kids/shell.html",
-              "test/kids/manifest.webmanifest",
+              "kids/index.html",
+              "kids/start.html",
+              "kids/shell.html",
+              "kids/manifest.webmanifest",
               "cloudflare/site-router.js",
               "cloudflare/test-app-worker.js",
               "_headers",
-              "test/kids/v12-alive.txt",
+              "kids/v12-alive.txt",
           ]
           failures=[]
           for name in required_build_files:
@@ -387,16 +387,16 @@ jobs:
               if build not in src:
                   failures.append(name+" missing "+build)
 
-          for name in ("test/kids/index.html","test/kids/start.html","test/kids/shell.html"):
+          for name in ("kids/index.html","kids/start.html","kids/shell.html"):
               src=Path(name).read_text(encoding="utf-8")
               ids=set(re.findall(r'kids-shell-v12-tab\d+',src))
               if ids != {build}:
                   failures.append(name+" has inconsistent embedded build ids: "+repr(sorted(ids)))
 
-          sw=Path("test/kids/sw.js").read_text(encoding="utf-8")
+          sw=Path("kids/sw.js").read_text(encoding="utf-8")
           expected_cache="dar-al-tawhid-kids-v"+minor
           if expected_cache not in sw:
-              failures.append("test/kids/sw.js missing "+expected_cache)
+              failures.append("kids/sw.js missing "+expected_cache)
 
           router=Path("cloudflare/site-router.js").read_text(encoding="utf-8")
           worker=Path("cloudflare/test-app-worker.js").read_text(encoding="utf-8")
@@ -420,8 +420,8 @@ jobs:
           studio=Path("voice-studio/alphabet-audio-studio.js").read_text(encoding="utf-8")
           installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
           engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
-          kids=Path("test/kids/index.html").read_text(encoding="utf-8")
-          manifest=Path("test/kids/data/alphabet-audio.json").read_text(encoding="utf-8")
+          kids=Path("kids/index.html").read_text(encoding="utf-8")
+          manifest=Path("kids/data/alphabet-audio.json").read_text(encoding="utf-8")
           worker=Path("cloudflare/worker.js").read_text(encoding="utf-8")
           media=Path("cloudflare/kids-content-media.js").read_text(encoding="utf-8")
 

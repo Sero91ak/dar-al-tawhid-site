@@ -473,7 +473,7 @@ def main():
 
     integration_paths=[]
     kids_admin_js=root/"cloudflare/kids-content-admin.js"
-    kids_feed_js=root/"test/kids/content-studio-feed.js"
+    kids_feed_js=root/"kids/content-studio-feed.js"
     if kids_admin_js.exists() and kids_feed_js.exists():
         admin_source=kids_admin_js.read_text(encoding="utf-8")
         feed_source=kids_feed_js.read_text(encoding="utf-8")

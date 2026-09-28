@@ -84,14 +84,14 @@ if (!testWrangler.includes('[ai]') || !testWrangler.includes('binding = "AI"')) 
   ok("wrangler.test.toml: Workers-AI-Binding vorhanden");
 }
 for (const marker of [
-  '"/test/kids/api/recitation/grade"',
+  '"/kids/api/recitation/grade"',
   '@cf/openai/whisper-large-v3-turbo',
   'gradeKidsRecitation',
   'pronunciationReference: false'
 ]) {
   if (!worker.includes(marker)) fail(`test-app-worker.js: Kids-Rezitationsmarker fehlt: ${marker}`);
 }
-if (worker.includes('"/test/kids/api/recitation/grade"') && worker.includes("@cf/openai/whisper-large-v3-turbo")) {
+if (worker.includes('"/kids/api/recitation/grade"') && worker.includes("@cf/openai/whisper-large-v3-turbo")) {
   ok("test-app-worker.js: Kids-Rezitationsendpoint vorhanden");
 }
 

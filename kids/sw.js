@@ -1,21 +1,21 @@
-const CACHE_NAME="dar-al-tawhid-kids-v79";
+const CACHE_NAME="dar-al-tawhid-kids-v80";
 const PRECACHE=[
-  "/test/kids/index.html",
-  "/test/kids/start.html",
-  "/test/kids/shell.html",
-  "/test/kids/manifest.webmanifest",
-  "/test/kids/assets/kids-art/quran-reise-v11-clean.png",
-  "/test/kids/assets/kids-art/hero-entdecke.png",
-  "/test/kids/assets/kids-art/home-journey-v11-clean2.jpg",
-  "/test/kids/data/alphabet-kids.json",
-  "/test/kids/data/alphabet-audio.json",
-  "/test/kids/data/dua-kids.json",
-  "/test/kids/data/quiz-kids.json",
-  "/test/kids/data/stories-authentic.json",
-  "/test/kids/data/verified-content.json",
-  "/test/kids/icons/icon-192.png?v=logo28",
-  "/test/kids/icons/icon-512.png?v=logo28",
-  "/test/kids/icons/apple-touch-icon.png?v=logo28"
+  "/kids/index.html",
+  "/kids/start.html",
+  "/kids/shell.html",
+  "/kids/manifest.webmanifest",
+  "/kids/assets/kids-art/quran-reise-v11-clean.png",
+  "/kids/assets/kids-art/hero-entdecke.png",
+  "/kids/assets/kids-art/home-journey-v11-clean2.jpg",
+  "/kids/data/alphabet-kids.json",
+  "/kids/data/alphabet-audio.json",
+  "/kids/data/dua-kids.json",
+  "/kids/data/quiz-kids.json",
+  "/kids/data/stories-authentic.json",
+  "/kids/data/verified-content.json",
+  "/kids/icons/icon-192.png?v=logo28",
+  "/kids/icons/icon-512.png?v=logo28",
+  "/kids/icons/apple-touch-icon.png?v=logo28"
 ];
 
 self.addEventListener("install",function(event){
@@ -38,7 +38,7 @@ self.addEventListener("activate",function(event){
 
 function isKidsRequest(url){
   if(url.origin!==self.location.origin)return false;
-  return url.pathname.indexOf("/test/kids/")===0||url.pathname.indexOf("/assets/kids-alphabet-audio/")===0;
+  return url.pathname.indexOf("/kids/")===0||url.pathname.indexOf("/assets/kids-alphabet-audio/")===0;
 }
 function networkFirst(request,fallback){
   return fetch(request,{cache:"no-store"}).then(function(response){
@@ -85,18 +85,18 @@ self.addEventListener("fetch",function(event){
   if(!isKidsRequest(url))return;
 
   if(request.mode==="navigate"||request.destination==="document"){
-    event.respondWith(networkFirst(request,"/test/kids/start.html"));
+    event.respondWith(networkFirst(request,"/kids/start.html"));
     return;
   }
-  if(url.pathname==="/test/kids/assets/kids-cinema/intro-v74.mp4"){
+  if(url.pathname==="/kids/assets/kids-cinema/intro-v74.mp4"){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname==="/test/kids/version.json"){
+  if(url.pathname==="/kids/version.json"){
     event.respondWith(networkFirst(request));
     return;
   }
-  if(url.pathname.indexOf("/test/kids/data/")===0){
+  if(url.pathname.indexOf("/kids/data/")===0){
     event.respondWith(staleWhileRevalidate(request));
     return;
   }

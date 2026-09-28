@@ -27510,7 +27510,7 @@ async function requestHardShellRefresh(){
   if(!("serviceWorker" in navigator))return false;
   try{
     const p=String(location.pathname||"");
-    const scope=p.indexOf("/test/kids")===0?"/test/kids/":(p.indexOf("/test")===0?"/test/":"/");
+    const scope=(p.indexOf("/kids")===0||p.indexOf("/test/kids")===0)?"/kids/":(p.indexOf("/test")===0?"/test/":"/");
     const reg=await navigator.serviceWorker.getRegistration(scope);
     if(!reg)return false;
     if(reg.waiting)reg.waiting.postMessage({type:"SKIP_WAITING"});
@@ -27542,7 +27542,7 @@ async function clearAppRuntimeCaches(){
   try{
     if("serviceWorker" in navigator){
       const p=String(location.pathname||"");
-      const scope=p.indexOf("/test/kids")===0?"/test/kids/":(p.indexOf("/test")===0?"/test/":"/");
+      const scope=(p.indexOf("/kids")===0||p.indexOf("/test/kids")===0)?"/kids/":(p.indexOf("/test")===0?"/test/":"/");
       const reg=await navigator.serviceWorker.getRegistration(scope);
       reg?.active?.postMessage?.({type:"HARD_REFRESH"});
       reg?.waiting?.postMessage?.({type:"SKIP_WAITING"});
@@ -29194,7 +29194,7 @@ window.addEventListener("load",()=>{
 (function(){const pushBtn=document.getElementById("pushFloat");if(!pushBtn)return;async function waitForOneSignal(timeoutMs){const start=Date.now();while(Date.now()-start<(timeoutMs||10000)){try{if(window.OneSignal&&window.DAR_ONE_SIGNAL_READY)return window.OneSignal}catch(e){}await new Promise(resolve=>setTimeout(resolve,180))}return window.OneSignal||null}async function activatePushFromFloat(){const permission=typeof getNotificationPermission==="function"?getNotificationPermission():"default";if(permission==="denied"){alert("Benachrichtigungen sind im Browser blockiert. Bitte zuerst in den Browser-Einstellungen erlauben.");return}const OneSignal=await waitForOneSignal();try{if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.isPushSupported==="function"&&!OneSignal.Notifications.isPushSupported()){alert("Dieser Browser unterstützt Web-Push-Benachrichtigungen nicht.");return}if(OneSignal&&OneSignal.User&&OneSignal.User.PushSubscription&&typeof OneSignal.User.PushSubscription.optIn==="function"){await OneSignal.User.PushSubscription.optIn()}else if(OneSignal&&OneSignal.Notifications&&typeof OneSignal.Notifications.requestPermission==="function"){await OneSignal.Notifications.requestPermission()}else if(typeof requestNotificationPermission==="function"){await requestNotificationPermission()}await new Promise(r=>setTimeout(r,500));const state=typeof readOneSignalPushSubscriptionState==="function"?readOneSignalPushSubscriptionState(OneSignal):null;if(state&&state.optedIn&&state.subscriptionId){const welcomed=typeof syncPushRegistrationAndWelcome==="function"?await syncPushRegistrationAndWelcome(OneSignal):false;if(typeof getPrayerSettings==="function"&&getPrayerSettings().reminder&&typeof syncPrayerPushTags==="function"){await syncPrayerPushTags(undefined,{retries:5})}if(typeof maintainPushHealth==="function")await maintainPushHealth({silent:true});if(typeof updatePushFloatButton==="function")updatePushFloatButton();alert(welcomed?"✓ Push aktiv – Willkommens-Nachricht (As-Salāmu ʿalaykum) wurde gesendet.":"✓ Push aktiv – Willkommens-Nachricht wird automatisch zugestellt.")}else{alert("Push konnte noch nicht verbunden werden. Bitte erneut tippen oder die App vom Home-Bildschirm öffnen.")}}catch(e){console.error(e);alert("Push konnte nicht aktiviert werden. Bitte prüfe Browser-Berechtigung und OneSignal-Service-Worker.")}}pushBtn.addEventListener("click",function(ev){ev.preventDefault();activatePushFromFloat()});pushBtn.setAttribute("tabindex","0");pushBtn.setAttribute("aria-hidden","false");pushBtn.style.pointerEvents="auto"})();
 </script>
 <script>
-if("serviceWorker" in navigator){window.addEventListener("load",function(){var swUrl="/service-worker.js";var swOpts={updateViaCache:"none"};try{var p=String(location.pathname||"");if(p.indexOf("/test/kids")===0)return;if(p.indexOf("/test")===0){swUrl="/test/service-worker.js";swOpts.scope="/test/"}}catch(e){}navigator.serviceWorker.register(swUrl,swOpts).catch(function(e){console.warn("Service Worker konnte nicht registriert werden:",e)})})}
+if("serviceWorker" in navigator){window.addEventListener("load",function(){var swUrl="/service-worker.js";var swOpts={updateViaCache:"none"};try{var p=String(location.pathname||"");if((p.indexOf("/kids")===0||p.indexOf("/test/kids")===0))return;if(p.indexOf("/test")===0){swUrl="/test/service-worker.js";swOpts.scope="/test/"}}catch(e){}navigator.serviceWorker.register(swUrl,swOpts).catch(function(e){console.warn("Service Worker konnte nicht registriert werden:",e)})})}
 </script>
 
 <script>
@@ -29344,7 +29344,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     function getUpdateBtn() { return document.getElementById('homeRefreshBtn'); }
     function versionJsonPath() {
       var p = String(location.pathname || '');
-      if (p.indexOf('/test/kids') === 0) return '/test/kids/version.json';
+      if ((p.indexOf('/kids') === 0 || p.indexOf('/test/kids') === 0)) return '/kids/version.json';
       if (p.indexOf('/test') === 0) return '/test/version.json';
       return '/version.json';
     }
@@ -29363,7 +29363,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
     function isCanonicalShellBuildId(buildId) {
       var id = String(buildId || '').trim();
       var p = String(location.pathname || '');
-      if (p.indexOf('/test/kids') === 0) return /^kids-shell-/.test(id);
+      if ((p.indexOf('/kids') === 0 || p.indexOf('/test/kids') === 0)) return /^kids-shell-/.test(id);
       var testApp = p.indexOf('/test') === 0;
       return testApp ? /^app-shell-v\d+(?:-test)?$/.test(id) : /^app-shell-v\d+$/.test(id);
     }
@@ -29493,7 +29493,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       }
       if (state.updateOfferBlockedUntil && Date.now() < Number(state.updateOfferBlockedUntil) && String(state.updateOfferBlockedBuildId || '') === id) {
         var p = String(location.pathname || '');
-        var darTest = p.indexOf('/test') === 0 && p.indexOf('/test/kids') !== 0;
+        var darTest = p.indexOf('/test') === 0 && (p.indexOf('/kids') !== 0 && p.indexOf('/test/kids') !== 0);
         if (!(darTest && parseShellBuildNum(id) > parseShellBuildNum(APP_BUILD_ID))) return false;
       }
       try {
@@ -29516,7 +29516,7 @@ document.addEventListener("visibilitychange",function(){if(document.visibilitySt
       if (!("serviceWorker" in navigator)) return null;
       try {
         var p = String(location.pathname || '');
-        if (p.indexOf('/test/kids') === 0) return navigator.serviceWorker.getRegistration('/test/kids/');
+        if ((p.indexOf('/kids') === 0 || p.indexOf('/test/kids') === 0)) return navigator.serviceWorker.getRegistration('/kids/');
         if (p.indexOf('/test') === 0) return navigator.serviceWorker.getRegistration('/test/');
         return navigator.serviceWorker.getRegistration('/');
       } catch (e) { return null; }

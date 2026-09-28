@@ -103,7 +103,7 @@ export async function persistKidsContentMedia(env, input, helpers) {
   const sha256 = await sha256Hex(payload.bytes);
   const ext = extFor(payload.mime, role);
   const short = sha256.slice(0, 14);
-  const root = staging ? "test/kids/media/studio" : "assets/kids-content";
+  const root = staging ? "kids/media/studio" : "assets/kids-content";
   const path = `${root}/${id}/${role}-${short}.${ext}`;
 
   const owner = env.GITHUB_OWNER || "Sero91ak";
@@ -147,7 +147,7 @@ export async function promoteKidsContentMedia(env, item, helpers) {
     const asset = item?.[role];
     const key = clean(asset?.key, 800).replace(/^\/+/, "");
     if (!key) continue;
-    if (!key.startsWith("test/kids/media/studio/")) {
+    if (!key.startsWith("kids/media/studio/")) {
       replacements[role] = asset;
       continue;
     }
@@ -195,7 +195,7 @@ function mediaError(message, status = 400) {
 }
 
 
-const KIDS_ALPHABET_AUDIO_PATH = "test/kids/data/alphabet-audio.json";
+const KIDS_ALPHABET_AUDIO_PATH = "kids/data/alphabet-audio.json";
 const KIDS_ALPHABET_IDS = new Set([
   "alif","ba","ta","tha","jim","ha","kha","dal","dhal","ra","zay","sin","shin","sad",
   "dad","taa","zaa","ayn","ghayn","fa","qaf","kaf","lam","mim","nun","haa","waw","ya"
@@ -241,7 +241,7 @@ export async function verifyKidsAlphabetAudioSlot(env, input, helpers) {
   const assetUrl = clean(asset.url, 1200);
   const sha256 = clean(asset.sha256, 100).toLowerCase();
   const mime = clean(asset.mime, 100).toLowerCase();
-  if (!assetKey || !assetKey.startsWith("test/kids/media/studio/alphabet-")) {
+  if (!assetKey || !assetKey.startsWith("kids/media/studio/alphabet-")) {
     throw mediaError("Audio stammt nicht aus dem freigegebenen Alif-Bāʾ-Stagingpfad", 422);
   }
   if (!/^audio\//.test(mime)) throw mediaError("Slot-Datei ist kein Audio", 415);

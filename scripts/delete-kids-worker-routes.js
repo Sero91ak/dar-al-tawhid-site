@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Löscht Custom-Domain-Routen des Workers dar-al-tawhid-kids auf /test/kids.
+ * Löscht Custom-Domain-Routen des Workers dar-al-tawhid-kids auf /kids.
  * Nicht anfassen: dar-al-tawhid-site (/*), dar-al-tawhid-test (/voice-studio).
  */
 const { execFileSync } = require("child_process");
@@ -31,7 +31,7 @@ function isKidsLiveRoute(route) {
   const script = String(route.script || "");
   if (script !== "dar-al-tawhid-kids") return false;
   return (
-    pattern.includes("dar-al-tawhid.de/test/kids") ||
+    pattern.includes("dar-al-tawhid.de/kids") ||
     /\/test\/kids(\/|$|\*)/.test(pattern)
   );
 }

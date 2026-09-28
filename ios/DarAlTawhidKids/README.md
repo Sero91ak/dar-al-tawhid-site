@@ -5,10 +5,10 @@ Eigene native App, getrennt von der Erwachsenen-App (`de.daraltawhid.app`).
 - Bundle-ID: `de.daraltawhid.kids`
 - Anzeigename auf dem Homescreen: **TAWḤĪD KIDS**
 - Team: `ALVZ35NL2N`
-- Start: `https://dar-al-tawhid.de/test/kids/start`
+- Start: `https://dar-al-tawhid.de/kids/start`
 - Schema: `daraltawhidkids://`
 
-Die WKWebView bleibt auf `/test/kids/`. Keine Erwachsenen-Navigation.
+Die WKWebView bleibt auf `/kids/`. Keine Erwachsenen-Navigation.
 
 ## In Xcode öffnen
 
@@ -29,4 +29,4 @@ Beide Projekte: `ios/DarAlTawhid/DarAlTawhid.xcworkspace`.
 5. Archive → Distribute App → App Store Connect.
 6. IPA nicht mit der Erwachsenen-Datei auf dem Schreibtisch vermischen.
 
-Web-Kids unter `test/kids/` erscheinen nach Deploy ohne neuen Store-Build, außer die native Hülle ändert sich.
+Web-Kids unter `kids/` erscheinen nach Deploy ohne neuen Store-Build, außer die native Hülle ändert sich.

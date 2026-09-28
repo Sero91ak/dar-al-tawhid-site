@@ -86,13 +86,13 @@
   Cache-Control: no-store, no-cache, must-revalidate, max-age=0
   Pragma: no-cache
 
-/test/kids/
+/kids/
   Cache-Control: no-store, no-cache, must-revalidate, max-age=0
   CDN-Cache-Control: no-store
   Cloudflare-CDN-Cache-Control: no-store
-  X-Kids-Build: kids-shell-v12-tab79
+  X-Kids-Build: kids-shell-v13-live1
 
-/test/kids/*
+/kids/*
   Cache-Control: no-store, no-cache, must-revalidate, max-age=0
   CDN-Cache-Control: no-store
   Cloudflare-CDN-Cache-Control: no-store

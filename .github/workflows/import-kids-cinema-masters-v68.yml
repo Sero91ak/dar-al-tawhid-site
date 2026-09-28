@@ -23,12 +23,12 @@ jobs:
           S3: "https://at.adobe.com/dNjkatKRr0uYNvbC"
         run: |
           set -euo pipefail
-          mkdir -p test/kids/assets/kids-cinema/masters
-          curl -L --fail --retry 4 --retry-delay 2 "$S1" -o test/kids/assets/kids-cinema/masters/scene-1.png
-          curl -L --fail --retry 4 --retry-delay 2 "$S2" -o test/kids/assets/kids-cinema/masters/scene-2.png
-          curl -L --fail --retry 4 --retry-delay 2 "$S3" -o test/kids/assets/kids-cinema/masters/scene-3.png
-          file test/kids/assets/kids-cinema/masters/scene-*.png
-          for f in test/kids/assets/kids-cinema/masters/scene-*.png; do
+          mkdir -p kids/assets/kids-cinema/masters
+          curl -L --fail --retry 4 --retry-delay 2 "$S1" -o kids/assets/kids-cinema/masters/scene-1.png
+          curl -L --fail --retry 4 --retry-delay 2 "$S2" -o kids/assets/kids-cinema/masters/scene-2.png
+          curl -L --fail --retry 4 --retry-delay 2 "$S3" -o kids/assets/kids-cinema/masters/scene-3.png
+          file kids/assets/kids-cinema/masters/scene-*.png
+          for f in kids/assets/kids-cinema/masters/scene-*.png; do
             test "$(wc -c < "$f")" -gt 1000000
           done
       - name: Commit masters
@@ -36,7 +36,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add test/kids/assets/kids-cinema/masters
+          git add kids/assets/kids-cinema/masters
           if git diff --cached --quiet; then
             echo "Masters already current."
             exit 0

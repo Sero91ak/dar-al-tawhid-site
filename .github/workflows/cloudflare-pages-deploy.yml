@@ -24,7 +24,7 @@ on:
       - wrangler.toml
       - _headers
       - _redirects
-      - test/kids/**
+      - kids/**
       - test/index.html
       - test/version.json
       - test/assets/**

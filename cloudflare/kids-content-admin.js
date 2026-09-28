@@ -1,6 +1,6 @@
 /**
  * DĀR AL TAWḤĪD Content Studio — gemeinsames Paketmodell für Kids/iOS.
- * Staging wird von /test/kids/ konsumiert. Live wird erst nach explizitem Publish befüllt.
+ * Staging wird von /kids/ konsumiert. Live wird erst nach explizitem Publish befüllt.
  */
 const DEFAULT_STAGING_PATH = "content/staging/kids/content-index.json";
 const DEFAULT_LIVE_PATH = "content/kids/content-index.json";
