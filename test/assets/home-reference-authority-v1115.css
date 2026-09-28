@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD · TEST HOME · VISUAL AUTHORITY v1115
+/* DĀR AL TAWḤĪD · TEST HOME · VISUAL AUTHORITY v1116
    Grounded against iPhone screenshots 2026-09-28.
    Must load LAST after all legacy home/theme CSS. */
 
@@ -744,3 +744,259 @@ html[data-theme] body.is-home-route #appView :is(
     grid-template-columns:repeat(3,minmax(0,1fr))!important;
   }
 }
+
+/* v1116 · GLASS MATERIAL · HINTERGRUND SICHTBAR */
+/* Theme-Farbe bleibt erhalten, aber Home-Oberflächen sind echtes Glas statt Vollflächen.
+   Wichtig: nur echte Farb-Tokens (--card/--bg) werden in color-mix() verwendet. */
+
+html[data-theme] body.is-home-route{
+  --hra-glass:color-mix(in srgb,var(--card) 42%,transparent);
+  --hra-glass-strong:color-mix(in srgb,var(--card) 52%,transparent);
+  --hra-glass-soft:color-mix(in srgb,var(--card) 28%,transparent);
+  --hra-glass-faint:color-mix(in srgb,var(--card) 18%,transparent);
+  --hra-glass-blur:18px;
+}
+
+html[data-theme="bordeaux"] body.is-home-route{
+  --hra-glass:color-mix(in srgb,var(--card) 34%,transparent);
+  --hra-glass-strong:color-mix(in srgb,var(--card) 43%,transparent);
+  --hra-glass-soft:color-mix(in srgb,var(--card) 22%,transparent);
+  --hra-glass-faint:color-mix(in srgb,var(--card) 14%,transparent);
+}
+
+html[data-theme="royal"] body.is-home-route,
+html[data-theme="dark"] body.is-home-route,
+html[data-theme="dar-al-layl"] body.is-home-route{
+  --hra-glass:color-mix(in srgb,var(--card) 36%,transparent);
+  --hra-glass-strong:color-mix(in srgb,var(--card) 46%,transparent);
+  --hra-glass-soft:color-mix(in srgb,var(--card) 24%,transparent);
+  --hra-glass-faint:color-mix(in srgb,var(--card) 15%,transparent);
+}
+
+html[data-theme="light"] body.is-home-route,
+html[data-theme="soft"] body.is-home-route,
+html[data-theme="eisgold"] body.is-home-route{
+  --hra-glass:color-mix(in srgb,var(--card) 62%,transparent);
+  --hra-glass-strong:color-mix(in srgb,var(--card) 72%,transparent);
+  --hra-glass-soft:color-mix(in srgb,var(--card) 48%,transparent);
+  --hra-glass-faint:color-mix(in srgb,var(--card) 34%,transparent);
+}
+
+/* Eine ruhige Bild-Ebene hinter der kompletten Startseite. */
+html[data-theme] body.is-home-route #appRoot{
+  position:relative!important;
+  isolation:isolate!important;
+  background:transparent!important;
+}
+
+html[data-theme] body.is-home-route #appRoot::before{
+  content:""!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb,var(--bg) 16%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 34%,transparent) 42%,
+      color-mix(in srgb,var(--bg) 54%,transparent) 100%
+    ),
+    url("/assets/feed-backgrounds/auto/mosque/bg-nature-mosque-pexels-54.webp") 54% 44%/cover no-repeat!important;
+  opacity:.84!important;
+  filter:saturate(.78) contrast(.96)!important;
+}
+
+html[data-theme="light"] body.is-home-route #appRoot::before,
+html[data-theme="soft"] body.is-home-route #appRoot::before,
+html[data-theme="eisgold"] body.is-home-route #appRoot::before{
+  opacity:.28!important;
+  filter:saturate(.62) contrast(.90)!important;
+}
+
+html[data-theme] body.is-home-route #appShell,
+html[data-theme] body.is-home-route .app{
+  position:relative!important;
+  z-index:1!important;
+  background:transparent!important;
+  background-image:none!important;
+}
+
+html[data-theme] body.is-home-route #appView,
+html[data-theme] body.is-home-route #appView.view,
+html[data-theme] body.is-home-route .view,
+html[data-theme] body.is-home-route .top-shell,
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell{
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* Marken-/Hero-Fläche vollständig offen. */
+html[data-theme] body.is-home-route .top-shell .header.theme-hero-surface,
+html[data-theme] body.is-home-route .top-shell .header,
+html[data-theme] body.is-home-route .top-shell .brand-main,
+html[data-theme] body.is-home-route .top-shell .hero-text,
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell .isnad{
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* Gebetszeiten: lesbares Glas, nicht massive Theme-Platte. */
+html[data-theme] body.is-home-route .header-prayer-hub__main{
+  background:
+    radial-gradient(circle at 50% 0%,color-mix(in srgb,var(--hra-accent) 7%,transparent),transparent 44%),
+    var(--hra-glass-strong)!important;
+  -webkit-backdrop-filter:blur(var(--hra-glass-blur)) saturate(1.05)!important;
+  backdrop-filter:blur(var(--hra-glass-blur)) saturate(1.05)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+
+html[data-theme] body.is-home-route .header-prayer-hub__status{
+  background:var(--hra-glass)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.04)!important;
+  backdrop-filter:blur(16px) saturate(1.04)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045)!important;
+}
+
+/* Hauptflächen: Bild sichtbar, Text bleibt durch Blur lesbar. */
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero.home-v380-quran-hero--compact.home-v380-quran-hero--reading,
+html[data-theme] body.is-home-route #appView .home-tawhid-entry.dar-click-glow{
+  background:
+    radial-gradient(circle at 86% 44%,color-mix(in srgb,var(--hra-accent) 8%,transparent),transparent 38%),
+    var(--hra-glass-strong)!important;
+  -webkit-backdrop-filter:blur(var(--hra-glass-blur)) saturate(1.04)!important;
+  backdrop-filter:blur(var(--hra-glass-blur)) saturate(1.04)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.13),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+/* Schnellzugriffe: nur leichte Farb-Tönung. */
+html[data-theme] body.is-home-route #appView .home-premium-access__grid > .home-premium-access-card{
+  background:var(--hra-glass)!important;
+  -webkit-backdrop-filter:blur(15px) saturate(1.03)!important;
+  backdrop-filter:blur(15px) saturate(1.03)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-premium-mini{
+  background:var(--hra-glass-soft)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  backdrop-filter:blur(12px)!important;
+}
+
+/* Heute: möglichst offen; keine rote Fläche hinter jedem Textblock. */
+html[data-theme] body.is-home-route #appView .home-today-cards .home-v380-today__season > .home-v380-open-row,
+html[data-theme] body.is-home-route #appView .home-today-cards .highlight-sections .recommended-box,
+html[data-theme] body.is-home-route #appView .home-today-cards .highlight-sections .daily-box{
+  background:linear-gradient(90deg,var(--hra-glass-faint),transparent 82%)!important;
+  background-image:linear-gradient(90deg,var(--hra-glass-faint),transparent 82%)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  backdrop-filter:blur(8px)!important;
+  box-shadow:none!important;
+}
+
+/* Neu & wichtig / Bibliotheken / Posts: transparentes Editorial-Glas. */
+html[data-theme] body.is-home-route #appView .home-discover-pdf-card,
+html[data-theme] body.is-home-route #appView .home-v380-post-preview,
+html[data-theme] body.is-home-route #appView .home-v380-lib-card,
+html[data-theme] body.is-home-route #appView .home-v380-popular-row{
+  background:var(--hra-glass)!important;
+  -webkit-backdrop-filter:blur(15px) saturate(1.03)!important;
+  backdrop-filter:blur(15px) saturate(1.03)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+
+/* Suche: kein roter Container, nur Felder als Glas. */
+html[data-theme] body.is-home-route #appView .home-v380-search-box,
+html[data-theme] body.is-home-route #appView .home-v380-search-panel,
+html[data-theme] body.is-home-route #appView .direct-pick-panel.home-direct-pick{
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .direct-pick-well{
+  background:var(--hra-glass-soft)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  backdrop-filter:blur(12px)!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-search-field{
+  background:var(--hra-glass)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.03)!important;
+  backdrop-filter:blur(16px) saturate(1.03)!important;
+}
+
+/* Home-Premium-Klassen dürfen keine alten Theme-Vollflächen erben. */
+html[data-theme] body.is-home-route #appView :is(
+  .recommended-box.premium-surface,
+  .daily-box.premium-surface
+){
+  background:linear-gradient(90deg,var(--hra-glass-faint),transparent 82%)!important;
+  background-image:linear-gradient(90deg,var(--hra-glass-faint),transparent 82%)!important;
+  box-shadow:none!important;
+}
+
+/* Footer bleibt offen über dem Hintergrund. */
+html[data-theme] body.is-home-route .footer,
+html[data-theme] body.has-bottom-nav.is-home-route .footer{
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* Bottom-Bar echtes Frosted Glass. */
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav{
+  background:var(--hra-glass)!important;
+  background-image:none!important;
+  -webkit-backdrop-filter:blur(22px) saturate(1.08)!important;
+  backdrop-filter:blur(22px) saturate(1.08)!important;
+  box-shadow:0 9px 24px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav .bottom-nav-btn.active{
+  background:var(--hra-glass-soft)!important;
+  box-shadow:none!important;
+}
+
+/* Bordeaux speziell: keine einzige kräftig rote Startseitenplatte mehr. */
+html[data-theme="bordeaux"] body.is-home-route #appView :is(
+  .home-v380-quran-hero,
+  .home-tawhid-entry,
+  .home-premium-access-card,
+  .home-premium-mini,
+  .home-discover-pdf-card,
+  .home-v380-post-preview,
+  .home-v380-lib-card,
+  .home-v380-search-field,
+  .direct-pick-well
+),
+html[data-theme="bordeaux"] body.is-home-route :is(
+  .header-prayer-hub__main,
+  .header-prayer-hub__status,
+  #bottomNav.bottom-nav
+){
+  border-color:color-mix(in srgb,var(--hra-accent) 30%,transparent)!important;
+}
+
+/* Fallback ohne backdrop-filter: weiterhin halbtransparent, nicht wieder vollflächig. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  html[data-theme] body.is-home-route #appView :is(
+    .home-v380-quran-hero,
+    .home-tawhid-entry,
+    .home-premium-access-card,
+    .home-premium-mini,
+    .home-discover-pdf-card,
+    .home-v380-post-preview,
+    .home-v380-lib-card,
+    .home-v380-search-field,
+    .direct-pick-well
+  ){
+    background:color-mix(in srgb,var(--card) 56%,transparent)!important;
+  }
+}
+/* /v1116 · GLASS MATERIAL */
+
