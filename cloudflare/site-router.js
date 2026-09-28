@@ -207,70 +207,217 @@ function publicWebsiteAddon() {
 </script>`;
 }
 
-const QURAN_AUDIO_EDITIONS = new Set([
-  "ar.alafasy",
-  "ar.abdurrahmaansudais",
-  "ar.saoodshuraym",
-  "ar.saudalshuraim",
-  "ar.husary",
-  "ar.husarymujawwad",
-  "ar.minshawi",
-  "ar.minshawimujawwad",
-  "ar.abdulbasitmurattal",
-  "ar.abdulbasitmujawwad",
-  "ar.abdullahbasfar",
-  "ar.ahmedajamy",
-  "ar.hanirifai",
-  "ar.hudhaify",
-  "ar.mahermuaiqly",
-  "ar.muhammadayyoub",
-  "ar.muhammadjibreel",
-  "ar.shaatree",
-  "ar.yasseraldossari",
-  "ar.aymanswoaid"
-]);
+const SURAH_AYAH_COUNTS = [7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,28,20,56,40,31,50,40,46,42,29,19,36,25,22,17,19,26,30,20,15,21,11,8,8,19,5,8,8,11,11,8,3,9,5,4,7,3,6,3,5,4,5,6];
 
-async function proxyQuranAudio(request, url) {
-  const match = url.pathname.match(/^\/quran-audio\/([^/]+)\/(\d+)\.mp3$/);
-  if (!match) return null;
-  const edition = decodeURIComponent(match[1] || "");
-  const ayah = Number(match[2]);
-  if (!QURAN_AUDIO_EDITIONS.has(edition) || !Number.isInteger(ayah) || ayah < 1 || ayah > 6236) {
-    return new Response("Bad recitation request", { status: 400 });
+const QURAN_EDITION_ALIASES = {
+  "ar.alafasy": "ar.alafasy",
+  "alafasy": "ar.alafasy",
+  "alafasy_128kbps": "ar.alafasy",
+  "ar.abdurrahmaansudais": "ar.abdurrahmaansudais",
+  "sudais": "ar.abdurrahmaansudais",
+  "abdurrahmaan_as-sudais_192kbps": "ar.abdurrahmaansudais",
+  "ar.saoodshuraym": "ar.saoodshuraym",
+  "ar.saudalshuraim": "ar.saoodshuraym",
+  "shuraim": "ar.saoodshuraym",
+  "saood_ash-shuraym_128kbps": "ar.saoodshuraym",
+  "ar.husary": "ar.husary",
+  "husary": "ar.husary",
+  "husary_128kbps": "ar.husary",
+  "ar.husarymujawwad": "ar.husarymujawwad",
+  "husary_mujawwad_128kbps": "ar.husarymujawwad",
+  "ar.minshawi": "ar.minshawi",
+  "minshawi": "ar.minshawi",
+  "minshawy_murattal_128kbps": "ar.minshawi",
+  "ar.minshawimujawwad": "ar.minshawimujawwad",
+  "minshawy_mujawwad_192kbps": "ar.minshawimujawwad",
+  "ar.abdulbasitmurattal": "ar.abdulbasitmurattal",
+  "basit": "ar.abdulbasitmurattal",
+  "abdul_basit_murattal_192kbps": "ar.abdulbasitmurattal",
+  "ar.abdulbasitmujawwad": "ar.abdulbasitmujawwad",
+  "abdul_basit_mujawwad_128kbps": "ar.abdulbasitmujawwad",
+  "ar.ahmedajamy": "ar.ahmedajamy",
+  "ajamy": "ar.ahmedajamy",
+  "ahmed_ibn_ali_al-ajamy_128kbps_ketaballah.net": "ar.ahmedajamy",
+  "ar.muhammadayyoub": "ar.muhammadayyoub",
+  "ar.muhammadayoub": "ar.muhammadayyoub",
+  "muhammadayoub": "ar.muhammadayyoub",
+  "muhammad_ayyoub_128kbps": "ar.muhammadayyoub",
+  "ar.hudhaify": "ar.hudhaify",
+  "hudhaify": "ar.hudhaify",
+  "hudhaify_128kbps": "ar.hudhaify",
+  "ar.muhammadjibreel": "ar.muhammadjibreel",
+  "muhammad_jibreel_128kbps": "ar.muhammadjibreel",
+  "ar.mahermuaiqly": "ar.mahermuaiqly",
+  "maher": "ar.mahermuaiqly",
+  "maheralmuaiqly128kbps": "ar.mahermuaiqly",
+  "ar.shaatree": "ar.shaatree",
+  "abu_bakr_ash-shaatree_128kbps": "ar.shaatree",
+  "ar.hanirifai": "ar.hanirifai",
+  "hani_rifai_192kbps": "ar.hanirifai",
+  "ar.abdullahbasfar": "ar.abdullahbasfar",
+  "abdullah_basfar_192kbps": "ar.abdullahbasfar",
+  "ar.yasseraldossari": "ar.yasseraldossari",
+  "yasser_ad-dussary_128kbps": "ar.yasseraldossari",
+  "ar.aymanswoaid": "ar.aymanswoaid",
+  "ayman_sowaid_64kbps": "ar.aymanswoaid"
+};
+
+function resolveQuranEdition(raw) {
+  const key = decodeURIComponent(String(raw || "")).trim();
+  if (!key) return "";
+  if (QURAN_EDITION_ALIASES[key]) return QURAN_EDITION_ALIASES[key];
+  const lower = key.toLowerCase();
+  if (QURAN_EDITION_ALIASES[lower]) return QURAN_EDITION_ALIASES[lower];
+  return QURAN_EDITION_ALIASES[lower.replace(/\s+/g, "_")] || "";
+}
+
+function globalAyahFromToken(token) {
+  const raw = String(token || "");
+  if (/^\d{6}$/.test(raw)) {
+    const surah = Number(raw.slice(0, 3));
+    const ayah = Number(raw.slice(3));
+    if (!(surah >= 1 && surah <= 114) || ayah < 1) return 0;
+    const count = SURAH_AYAH_COUNTS[surah - 1] || 0;
+    if (ayah > count) return 0;
+    let global = ayah;
+    for (let i = 0; i < surah - 1; i += 1) global += SURAH_AYAH_COUNTS[i];
+    return global;
   }
-  const upstreams = [
-    `https://cdn.islamic.network/quran/audio/128/${edition}/${ayah}.mp3`,
-    `https://cdn.alquran.cloud/media/audio/ayah/${edition}/${ayah}`
-  ];
+  const ayah = Number(raw);
+  if (!Number.isInteger(ayah) || ayah < 1 || ayah > 6236) return 0;
+  return ayah;
+}
+
+function audioFail(status, message) {
+  return new Response(message, {
+    status,
+    headers: {
+      "Cache-Control": "no-store",
+      "CDN-Cache-Control": "no-store",
+      "Cloudflare-CDN-Cache-Control": "no-store",
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "text/plain; charset=utf-8"
+    }
+  });
+}
+
+function audioOkHeaders(res, used) {
+  const out = new Headers();
+  const type = String(res.headers.get("Content-Type") || "");
+  out.set("Content-Type", type.indexOf("audio") >= 0 || type.indexOf("mpeg") >= 0 ? type : "audio/mpeg");
+  out.set("Access-Control-Allow-Origin", "*");
+  out.set("Accept-Ranges", "bytes");
+  out.set("Cache-Control", "public, max-age=86400, must-revalidate");
+  out.set("CDN-Cache-Control", "public, max-age=86400, must-revalidate");
+  out.set("Cloudflare-CDN-Cache-Control", "public, max-age=86400, must-revalidate");
+  if (used) out.set("X-Dar-Quran-Audio", used);
+  const len = res.headers.get("Content-Length");
+  if (len) out.set("Content-Length", len);
+  const range = res.headers.get("Content-Range");
+  if (range) out.set("Content-Range", range);
+  return out;
+}
+
+async function fetchAudioUpstream(upstreams, request) {
   const headers = new Headers();
   const range = request.headers.get("Range");
   if (range) headers.set("Range", range);
   headers.set("Accept", "audio/mpeg,audio/*;q=0.9,*/*;q=0.8");
-  try {
-    let res = null;
-    let used = upstreams[0];
-    for (const upstream of upstreams) {
-      used = upstream;
-      try {
-        res = await fetch(upstream, {
-          headers,
-          cf: { cacheTtl: 31536000, cacheEverything: true, cacheKey: upstream }
-        });
-        if (res && (res.ok || res.status === 206)) break;
-      } catch (eUp) {
-        res = null;
-      }
+  let res = null;
+  let used = upstreams[0];
+  for (const upstream of upstreams) {
+    used = upstream;
+    try {
+      res = await fetch(upstream, {
+        method: request.method === "HEAD" ? "GET" : request.method,
+        headers,
+        cf: {
+          cacheEverything: true,
+          cacheTtlByStatus: { "200": 86400, "206": 86400, "400-599": 0 }
+        }
+      });
+      if (res && (res.ok || res.status === 206)) break;
+    } catch (eUp) {
+      res = null;
     }
-    if (!res) return new Response("Recitation upstream unavailable", { status: 502 });
-    const out = new Headers(res.headers);
-    out.set("Cache-Control", "public, max-age=31536000, immutable");
-    out.set("CDN-Cache-Control", "public, max-age=31536000, immutable");
-    out.set("Access-Control-Allow-Origin", "*");
-    out.set("Content-Type", res.headers.get("Content-Type") || "audio/mpeg");
-    out.set("X-Dar-Quran-Audio", used);
+  }
+  return { res, used };
+}
+
+async function proxyQuranAudio(request, url) {
+  const surahMatch = url.pathname.match(/^\/quran-audio\/([^/]+)\/surah\/(\d+)\.json$/);
+  if (surahMatch) {
+    const edition = resolveQuranEdition(surahMatch[1]);
+    const surah = Number(surahMatch[2]);
+    if (!edition || !(surah >= 1 && surah <= 114)) return audioFail(400, "Bad recitation request");
+    try {
+      const dest = `https://api.alquran.cloud/v1/surah/${surah}/${edition}`;
+      const upstream = await fetch(dest, {
+        headers: { Accept: "application/json" },
+        cf: { cacheTtlByStatus: { "200": 3600, "400-599": 0 } }
+      });
+      if (!upstream.ok) return audioFail(upstream.status, "Recitation metadata unavailable");
+      const payload = await upstream.json();
+      const ayahs = (((payload || {}).data || {}).ayahs) || [];
+      for (const ayah of ayahs) {
+        const n = Number(ayah.number);
+        if (n >= 1) {
+          ayah.audio = `https://dar-al-tawhid.de/quran-audio/${edition}/${n}.mp3`;
+          ayah.audioSecondary = [`https://cdn.islamic.network/quran/audio/128/${edition}/${n}.mp3`];
+        }
+      }
+      return new Response(JSON.stringify(payload), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "public, max-age=300, must-revalidate"
+        }
+      });
+    } catch (eMeta) {
+      return audioFail(502, "Recitation metadata error");
+    }
+  }
+
+  const match = url.pathname.match(/^\/quran-audio\/([^/]+)\/(\d+)\.mp3$/);
+  if (!match) return null;
+  const edition = resolveQuranEdition(match[1]);
+  const ayah = globalAyahFromToken(match[2]);
+  if (!edition || !ayah) return audioFail(400, "Bad recitation request");
+  const upstreams = [
+    `https://cdn.islamic.network/quran/audio/128/${edition}/${ayah}.mp3`,
+    `https://cdn.alquran.cloud/media/audio/ayah/${edition}/${ayah}`
+  ];
+  try {
+    const { res, used } = await fetchAudioUpstream(upstreams, request);
+    if (!res || !(res.ok || res.status === 206)) return audioFail(502, "Recitation upstream unavailable");
+    const out = audioOkHeaders(res, used);
+    if (request.method === "HEAD") {
+      return new Response(null, { status: res.status === 206 ? 206 : 200, headers: out });
+    }
     return new Response(res.body, { status: res.status, statusText: res.statusText, headers: out });
   } catch (eProxy) {
-    return new Response("Recitation proxy error", { status: 502 });
+    return audioFail(502, "Recitation proxy error");
+  }
+}
+
+async function proxyAdhanAudio(request, url) {
+  const match = url.pathname.match(/^\/(?:apple-tv\/)?adhan\/(.+\.mp3)$/i);
+  if (!match) return null;
+  let file = decodeURIComponent(match[1] || "");
+  if (!file || file.indexOf("..") >= 0 || file.indexOf("/") >= 0) return audioFail(400, "Bad adhan request");
+  const upstream = `https://raw.githubusercontent.com/Kiwifu/adhan-mp3/main/${encodeURIComponent(file).replace(/%2F/g, "/")}`;
+  try {
+    const { res, used } = await fetchAudioUpstream([upstream], request);
+    if (!res || !(res.ok || res.status === 206)) return audioFail(502, "Adhan upstream unavailable");
+    const out = audioOkHeaders(res, used);
+    out.set("X-Dar-Adhan-Audio", used);
+    if (request.method === "HEAD") {
+      return new Response(null, { status: res.status === 206 ? 206 : 200, headers: out });
+    }
+    return new Response(res.body, { status: res.status, statusText: res.statusText, headers: out });
+  } catch (eAdhan) {
+    return audioFail(502, "Adhan proxy error");
   }
 }
 
@@ -280,6 +427,8 @@ export default {
     if (request.method === "GET" || request.method === "HEAD") {
       const audio = await proxyQuranAudio(request, url);
       if (audio) return audio;
+      const adhan = await proxyAdhanAudio(request, url);
+      if (adhan) return adhan;
     }
     if (request.method === "OPTIONS" && isPrayerApiPath(url.pathname)) {
       return new Response(null, {
