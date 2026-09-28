@@ -99,14 +99,16 @@
         "scope": "free_voice_pronunciation_library"
       },
       {
-        "id": "dar_al_tawhid_kids_brand_phrase",
+        "id": "dar_al_tawhid_brand_phrase",
         "forms": [
-          "DĀR AL TAWḤĪD Kids",
-          "Dār al-Tawḥīd Kids"
+          "DĀR AL TAWḤĪD",
+          "Dār al-Tawḥīd",
+          "Dar al-Tawhid"
         ],
-        "tts_text": "دَار التَّوْحِيد كِدْس",
+        "tts_text": "دَارُ التَّوْحِيد",
         "tts_language": "ar",
-        "scope": "free_voice_pronunciation_library"
+        "scope": "free_voice_pronunciation_library",
+        "joinNextLatinWordTightly": true
       }
     ]
   },
@@ -499,7 +501,13 @@
     "noStandaloneGermanBeforeArabicRegression": true,
     "carrierNeverExposedRegression": true,
     "contextBridgeCacheRegression": true,
-    "freeVoiceFinalMaxInternalSilenceMs": 1200
+    "freeVoiceFinalMaxInternalSilenceMs": 1200,
+    "inlineArabicFlowRepairTriggerMs": 120,
+    "inlineArabicFlowTargetPauseMs": 45,
+    "inlineArabicFlowRepairMaxMs": 700,
+    "fixedPhraseFlowRepairTriggerMs": 320,
+    "fixedPhraseFlowTargetPauseMs": 140,
+    "fixedPhraseFlowRepairMaxMs": 900
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
