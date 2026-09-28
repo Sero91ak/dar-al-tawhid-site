@@ -163,7 +163,7 @@ async function fetchManifestJson(url,options={}){
   if(!r.ok)throw Error("HTTP "+r.status);
   const d=await r.json();
   if(d?.content&&typeof d.content==="string"){
-    const decoded=atob(d.content.replace(/\\s+/g,""));
+    const decoded=atob(d.content.replace(/\s+/g,""));
     const bytes=Uint8Array.from(decoded,ch=>ch.charCodeAt(0));
     return JSON.parse(new TextDecoder("utf-8").decode(bytes));
   }
