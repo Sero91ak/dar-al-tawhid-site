@@ -3280,33 +3280,42 @@ def postprocess(src:Path):
         print("[DĀR Voice] ffmpeg fallback:",p.stderr[-1200:],flush=True)
     return src
 
-def generate(text:str,prepared:str="",style:str="auto"):
+def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free_pronunciation:bool=False):
     quran_guard(text)
-    unresolved=detect_unresolved_islamic_terms(text)
-    if unresolved:
-        terms=", ".join(str(x.get("term","")) for x in unresolved[:6])
-        raise ValueError(
-            "Ungeprüfte islamische Namen/Begriffe erkannt: "+terms+
-            ". Bitte zuerst in der Ausspracheanalyse prüfen oder im Lernzentrum bestätigen."
-        )
+    if not free_mode:
+        unresolved=detect_unresolved_islamic_terms(text)
+        if unresolved:
+            terms=", ".join(str(x.get("term","")) for x in unresolved[:6])
+            raise ValueError(
+                "Ungeprüfte islamische Namen/Begriffe erkannt: "+terms+
+                ". Bitte zuerst in der Ausspracheanalyse prüfen oder im Lernzentrum bestätigen."
+            )
     if not REF_DE.exists():
         raise RuntimeError("Referenzstimme fehlt: "+str(REF_DE))
 
-    speak,found=prepare(text)
+    if free_mode and not free_pronunciation:
+        # Freie Stimme = sichtbaren Text unverändert sprechen. Keine Kids-/Content-
+        # Bindung, keine Pflichtkorrektur und keine automatische Aussprache-Lock-Kette.
+        speak=text
+        found=[]
+    else:
+        speak,found=prepare(text)
     synthesis_text,plan,flow_preflight=prepare_flow_text(text,speak,build_render_plan)
 
     if not RENDER_LOCK.acquire(blocking=False):
         raise RuntimeError("Es läuft bereits eine Audio-Erzeugung.")
 
-    # Ein neuer Render macht jeden unbestätigten Kandidaten des vorherigen Renders ungültig.
-    discard_pending_audio_locks()
+    # Nur der Produktionsmodus verwaltet bestätigbare Kern-Audio-Locks.
+    if not free_mode:
+        discard_pending_audio_locks()
 
     doc_mode=resolve_prosody_mode(text,style)
     master_forms={
         str(r.get("tts_text",""))
         for r in found
-        if r.get("voice_lock")=="MASTER" and r.get("tts_text")
+        if (not free_mode) and r.get("voice_lock")=="MASTER" and r.get("tts_text")
     }
+    lock_key_for=(lambda chunk: "" if free_mode else audio_lock_key_for_chunk(chunk))
 
     set_status(
         render_state="rendering",
@@ -3327,7 +3336,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
         preloaded={}
         for pre_idx,(pre_lang,pre_chunk) in enumerate(plan):
             pre_mode=resolve_segment_prosody(pre_chunk,doc_mode,style)
-            pre_lock=audio_lock_key_for_chunk(pre_chunk)
+            pre_lock=lock_key_for(pre_chunk)
             pre_lock_path=audio_lock_path(pre_lock) if pre_lock else None
             if pre_lock and pre_lock_path.exists():
                 try:
@@ -3385,7 +3394,7 @@ def generate(text:str,prepared:str="",style:str="auto"):
             lang_label="Arabisch" if lang=="ar" else "Deutsch"
             mode=resolve_segment_prosody(chunk,doc_mode,style)
             bridge_direction=contextual_bridge_direction(plan,original_idx)
-            audio_lock_key=audio_lock_key_for_chunk(chunk)
+            audio_lock_key=lock_key_for(chunk)
             critical=bool(audio_lock_key) or (lang=="ar" and any(x and x in chunk for x in master_forms))
             set_status(progress=pct,message=f"{lang_label} · {mode} · Abschnitt {idx}/{total} …")
             print(f"[DĀR Voice] segment {idx}/{total} lang={lang} mode={mode} critical={critical} lock={audio_lock_key or '-'}: {chunk}",flush=True)
@@ -3564,7 +3573,10 @@ def generate(text:str,prepared:str="",style:str="auto"):
         if fatal:
             raise RuntimeError("Finale Audio-QA fehlgeschlagen: "+", ".join(dict.fromkeys(fatal)))
 
-        staged_audio_locks=stage_pending_audio_locks(render_id,new_audio_lock_candidates,sr)
+        staged_audio_locks=(
+            [] if free_mode
+            else stage_pending_audio_locks(render_id,new_audio_lock_candidates,sr)
+        )
 
         qa_summary={
             "mode":doc_mode,
@@ -3579,6 +3591,8 @@ def generate(text:str,prepared:str="",style:str="auto"):
             "segments":qa_segments,
             "final":final_metrics,
             "arabic_reference_dedicated":ARABIC_DEDICATED_REFERENCE,
+            "free_voice_mode":bool(free_mode),
+            "free_voice_pronunciation_library":bool(free_pronunciation),
             "performance":{
                 "render_seconds":round(time.perf_counter()-render_started_perf,3),
                 "segments":total,
@@ -3791,6 +3805,8 @@ class H(BaseHTTPRequestHandler):
             })
         elif p in ("/studio","/studio/","/studio/index.html"):
             self.send_file(APP_HOME/"studio.html","text/html; charset=utf-8")
+        elif p in ("/studio/free","/studio/free/","/studio/free-voice.html"):
+            self.send_file(APP_HOME/"free-voice.html","text/html; charset=utf-8")
         elif p=="/studio/content-studio.js":
             self.send_file(APP_HOME/"content-studio.js","application/javascript; charset=utf-8")
         elif p=="/studio/alphabet-audio-studio.js":
@@ -3991,13 +4007,19 @@ class H(BaseHTTPRequestHandler):
             except Exception as e:
                 return self.send_json(500,{"ok":False,"error":str(e),"status":get_status()})
 
-        if p=="/generate":
+        if p in ("/generate","/generate-free"):
             try:
                 text=str(data.get("text","")).strip()
                 prepared=str(data.get("prepared","")).strip()
                 style=str(data.get("style","auto")).strip() or "auto"
+                free_mode=(p=="/generate-free")
+                free_pronunciation=bool(data.get("pronunciationLibrary",False))
                 if not text:raise ValueError("Text fehlt.")
-                out=generate(text,prepared,style)
+                out=generate(
+                    text,prepared,style,
+                    free_mode=free_mode,
+                    free_pronunciation=free_pronunciation
+                )
                 b=out.read_bytes()
                 self.send_response(200)
                 self.send_header("Content-Type","audio/wav")
