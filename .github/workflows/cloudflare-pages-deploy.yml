@@ -41,6 +41,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: dar-al-tawhid-visitor-deploy
+  cancel-in-progress: true
+
 jobs:
   classify:
     runs-on: ubuntu-latest
