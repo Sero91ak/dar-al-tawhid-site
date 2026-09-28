@@ -360,3 +360,41 @@ body.is-quran-reader-route .qrc-context-btn img.dar3d-icon{
   max-width:26px!important;
   max-height:26px!important;
 }
+
+/* Quick-access tiles: baked 3D, dead-center, no overflow crop */
+#quickAccessLayer .quick-action,
+#quickAccessMenu .quick-action{
+  display:grid!important;
+  place-items:center!important;
+  place-content:center!important;
+  padding:0!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+}
+#quickAccessLayer .quick-action-emoji,
+#quickAccessMenu .quick-action-emoji{
+  display:grid!important;
+  place-items:center!important;
+  place-content:center!important;
+  width:36px!important;
+  height:36px!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+#quickAccessLayer .quick-action img.dar3d-icon,
+#quickAccessMenu .quick-action img.dar3d-icon,
+#quickAccessLayer .quick-action-emoji img.dar3d-icon,
+#quickAccessMenu .quick-action-emoji img.dar3d-icon{
+  width:36px!important;
+  height:36px!important;
+  max-width:36px!important;
+  max-height:36px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  display:block!important;
+  justify-self:center!important;
+  align-self:center!important;
+}

@@ -214,6 +214,10 @@
   function fill(el,file,prio){
     if(!el||!file)return;
     if(el.closest&&(el.closest(".qov-wake-labeled-btn")||el.closest(".qov-player-icon")||el.classList.contains("qov-wake-labeled-icon")))return;
+    if(el.closest&&el.closest("#quickAccessLayer,#quickAccessMenu")){
+      const baked=el.matches&&el.matches("img.dar3d-icon")?el:el.querySelector("img.dar3d-icon");
+      if(baked&&baked.getAttribute("src"))return;
+    }
     const want=src(file);
     el.querySelectorAll("img.dar3d-icon").forEach(function(im,i){if(i>0){try{im.remove()}catch(e){}}});
     const existing=el.querySelector("img.dar3d-icon");
