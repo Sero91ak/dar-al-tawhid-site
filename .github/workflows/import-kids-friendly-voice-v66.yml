@@ -1,0 +1,40 @@
+name: Import Kids Friendly Voice V66
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-kids-friendly-voice-v66.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Download friendly Kids greeting
+        env:
+          VOICE_URL_B64: "aHR0cHM6Ly9kbnpucnZzMDVwbXphLmNsb3VkZnJvbnQubmV0L3RleHRfdG9fc3BlZWNoLzU4M2ZhYWQyLTk4M2ItNDIyOS04NTM2LTM0MTEzMzU2YzQxOS9EX1JfS2lkc19mcmV1bmRsaWNoZV9JbnRyb19CZWdyX191bmdfVjY2Lm1wMz9fand0PWV5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUpyWlhsSVlYTm9Jam9pTkdVeE5XSTNZMk0wTW1aalpUTTNOeUlzSW1KMVkydGxkQ0k2SW5KMWJuZGhlUzEwWVhOckxXRnlkR2xtWVdOMGNoa2lMQ0p6ZEdGblpTSTZJbkJ5YjJRaUxDSmxlSEFpT2pFM09UQTJPRGt6TlRaOS45MS1BLXZqUHF4R0JrVV9fa3NHV3hLSGtqMXhxSU1ZcUwwc1ZZcTBiMVpV"
+        run: |
+          set -euo pipefail
+          mkdir -p test/kids/assets/kids-cinema
+          VOICE_URL="$(printf '%s' "$VOICE_URL_B64" | base64 -d)"
+          curl -L --fail --retry 4 --retry-delay 2 "$VOICE_URL"             -o test/kids/assets/kids-cinema/intro-voice-friendly.mp3
+          test -s test/kids/assets/kids-cinema/intro-voice-friendly.mp3
+          test "$(wc -c < test/kids/assets/kids-cinema/intro-voice-friendly.mp3)" -gt 10000
+      - name: Commit voice
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add test/kids/assets/kids-cinema/intro-voice-friendly.mp3
+          if git diff --cached --quiet; then
+            echo "Friendly voice already current."
+            exit 0
+          fi
+          git commit -m "Kids V0.66: add friendly intro voice fallback"
+          git push origin HEAD:main
