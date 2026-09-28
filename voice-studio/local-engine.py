@@ -3872,11 +3872,39 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         sr=int(render_sr)
         full=join_rendered_segments(outputs,sr)
         continuity_metrics=dict(getattr(join_rendered_segments,"_last_continuity",{}) or {})
-        final_metrics=audio_quality_metrics(full,sr,synthesis_text,"de",doc_mode)
 
-        fatal=[x for x in final_metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
         final_limits=QA_CONFIG.get("finalMaxInternalSilenceMsByMode") or {}
         final_pause_limit=int(final_limits.get(doc_mode,QA_CONFIG.get("finalMaxInternalSilenceMs",620)))
+        final_metrics=audio_quality_metrics(full,sr,synthesis_text,"de",doc_mode)
+
+        # Content-Studio/Kids-Lesson: Wenn alle Einzelabschnitte sauber waren,
+        # darf eine einzige moderate Restpause im fertigen Join nicht die ganze
+        # Produktion verwerfen. Statt den Grenzwert einfach hochzusetzen wird
+        # genau diese echte stille Insel einmal komprimiert und danach erneut
+        # vollständig gemessen. Technische QA und Segment-QA bleiben unverändert.
+        kids_final_repair={}
+        measured_before=int(final_metrics.get("max_internal_silence_ms",0) or 0)
+        kids_final_repair_max=int(QA_CONFIG.get("kidsLessonFinalAutoRepairMaxMs",950))
+        if (
+            not free_mode
+            and doc_mode=="kids_lesson"
+            and measured_before>final_pause_limit
+            and measured_before<=kids_final_repair_max
+        ):
+            repaired,kids_final_repair=repair_internal_pause(
+                full,sr,synthesis_text,"de",doc_mode
+            )
+            if kids_final_repair.get("repaired"):
+                full=repaired
+                final_metrics=audio_quality_metrics(full,sr,synthesis_text,"de",doc_mode)
+                final_metrics.update({
+                    "kids_lesson_final_pause_repaired":True,
+                    "kids_lesson_final_pause_before_ms":measured_before,
+                    "kids_lesson_final_pause_removed_ms":int(kids_final_repair.get("pause_ms_removed",0)),
+                    "kids_lesson_final_pause_target_ms":int(kids_final_repair.get("target_pause_ms",0)),
+                })
+
+        fatal=[x for x in final_metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
 
         # "Freie Stimme" kann beliebige vollständige Sätze mit Punkt, Ausrufezeichen
         # und bewussten Satzpausen enthalten. Der globale Endtest sieht nur die
