@@ -13,6 +13,7 @@ Kurz: https://dar-al-tawhid.de/test/kids/
 Eigenes Xcode-Projekt: `ios/DarAlTawhidKids/`
 
 Bundle-ID: `de.daraltawhid.kids`  
+Homescreen: **TAWḤĪD KIDS** (voller Name passt nicht ungekürzt)  
 Anleitung: `ios/DarAlTawhidKids/README.md`
 
 ## Deploy (ohne Cloudflare-Builds-Kostenfalle)
