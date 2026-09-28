@@ -3767,6 +3767,8 @@ class H(BaseHTTPRequestHandler):
             self.send_file(APP_HOME/"alphabet-audio-studio.js","application/javascript; charset=utf-8")
         elif p=="/studio/voice-studio-icon.png":
             self.send_file(APP_HOME/"voice-studio-icon.png","image/png")
+        elif p=="/studio/serhat-app-icon.png":
+            self.send_file(APP_HOME/"serhat-app-icon.png","image/png")
         elif p=="/studio/manifest.webmanifest":
             self.send_json(200,{
                 "name":"DĀR AL TAWḤĪD Voice Studio",
