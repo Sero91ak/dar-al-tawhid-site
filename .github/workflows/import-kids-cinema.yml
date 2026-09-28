@@ -1,0 +1,44 @@
+name: Import Kids Cinema Intro
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-kids-cinema.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import-video:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Download rendered cinema preview
+        env:
+          VIDEO_URL: "https://at.adobe.com/wwCIkOTiB4MJm05g"
+        run: |
+          set -euo pipefail
+          mkdir -p test/kids/assets/kids-cinema
+          curl -L --fail --retry 3 --retry-delay 2 "$VIDEO_URL" -o test/kids/assets/kids-cinema/intro-v1.mp4
+          test -s test/kids/assets/kids-cinema/intro-v1.mp4
+          bytes="$(wc -c < test/kids/assets/kids-cinema/intro-v1.mp4)"
+          if [ "$bytes" -lt 100000 ]; then
+            echo "Downloaded file is unexpectedly small: $bytes bytes" >&2
+            exit 1
+          fi
+      - name: Commit cinema video
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add test/kids/assets/kids-cinema/intro-v1.mp4
+          if git diff --cached --quiet; then
+            echo "Cinema video already current."
+            exit 0
+          fi
+          git commit -m "Kids: add rendered photorealistic cinema intro"
+          git push origin HEAD:main
