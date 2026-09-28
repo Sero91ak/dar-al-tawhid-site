@@ -1,10 +1,10 @@
 {
-  "version": "2.9.19",
-  "updatedAt": "2026-09-28T11:32:00+02:00",
-  "deployTrigger": "voice-studio-2.9.19-fixed-phrases-and-confirmed-audio",
+  "version": "2.9.20",
+  "updatedAt": "2026-09-28T11:52:00+02:00",
+  "deployTrigger": "voice-studio-2.9.20-arabic-fixed-phrase-flow-repair",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v29",
+  "cache": "dar-voice-studio-v30",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -542,10 +542,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "fc4d1e83bf66cc2dcad6c26b6fc4c676c4b7ae1a",
+  "releaseRef": "5739df2c90ca40c9658c53b0a2aa4cd184658696",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Freie Stimme nutzte bisher nur Textregeln, nicht bestätigte Audio-Master; die komplette Salam-Formel fehlte zudem als Mehrwortregel. 2.9.19 führt feste Phrasen für Salam und DĀR AL TAWḤĪD Kids ein und verwendet vorhandene bestätigte Audio-Locks im freien Bereich, ohne neue Locks zu erzeugen.",
+  "updateRepairReason": "Screenshot showed DĀR AL TAWḤĪD Kids as one Arabic fixed phrase failing QA with 540 ms internal hold. 2.9.20 keeps DĀR AL TAWḤĪD Arabic and Kids Latin/German, joins them tightly, and proactively compresses only true silent islands inside Arabic fixed phrases before QA.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -601,7 +601,11 @@
       "fixedPhraseBrandKids": true,
       "reuseExistingConfirmedAudioLocks": true,
       "createNewLocks": false,
-      "productionModeUnaffected": true
+      "productionModeUnaffected": true,
+      "brandPhraseSplit": true,
+      "arabicFixedPhrasePauseRepair": true,
+      "greetingFixedPhrasePreserved": true,
+      "kidsWordStaysLatin": true
     }
   }
 }
