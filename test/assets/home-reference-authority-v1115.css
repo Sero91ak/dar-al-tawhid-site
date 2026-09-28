@@ -1,0 +1,746 @@
+/* DĀR AL TAWḤĪD · TEST HOME · VISUAL AUTHORITY v1115
+   Grounded against iPhone screenshots 2026-09-28.
+   Must load LAST after all legacy home/theme CSS. */
+
+html[data-theme] body.is-home-route{
+  --hra-accent:var(--theme-surface-elevated-accent,var(--theme-accent,var(--gold2)));
+  --hra-text:var(--theme-surface-elevated-text,var(--theme-text,var(--text)));
+  --hra-muted:var(--theme-surface-elevated-muted,var(--theme-muted,var(--muted)));
+  --hra-surface:var(--theme-surface-elevated,var(--premium-bg,var(--theme-surface,var(--card))));
+  --hra-flat:var(--theme-surface,var(--card));
+  --hra-border:color-mix(in srgb,var(--theme-border,var(--line)) 72%,var(--hra-accent) 28%);
+  --hra-soft-border:color-mix(in srgb,var(--theme-border,var(--line)) 82%,transparent);
+  --hra-shadow:0 9px 22px color-mix(in srgb,var(--theme-text,var(--text)) 9%,transparent);
+  padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))!important;
+}
+
+/* ─────────────────────────────────────────────
+   HERO · keine rechteckigen Textplatten
+   ───────────────────────────────────────────── */
+html[data-theme] body.is-home-route .top-shell .brand-main,
+html[data-theme] body.is-home-route .top-shell .brand-lockup,
+html[data-theme] body.is-home-route .top-shell .brand-copy,
+html[data-theme] body.is-home-route .top-shell .hero-text,
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell .isnad{
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route .top-shell .brand-main::before,
+html[data-theme] body.is-home-route .top-shell .brand-main::after,
+html[data-theme] body.is-home-route .top-shell .hero-text::before,
+html[data-theme] body.is-home-route .top-shell .hero-text::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* ─────────────────────────────────────────────
+   QURʾĀN · echtes horizontales Oval
+   ───────────────────────────────────────────── */
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero.home-v380-quran-hero--compact.home-v380-quran-hero--reading{
+  position:relative!important;
+  isolation:isolate!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:8px!important;
+  width:100%!important;
+  min-height:92px!important;
+  height:auto!important;
+  margin:0 0 10px!important;
+  padding:13px 88px 13px 20px!important;
+  overflow:hidden!important;
+  border:1px solid var(--hra-border)!important;
+  border-radius:999px!important;
+  background:
+    radial-gradient(circle at 88% 42%,color-mix(in srgb,var(--hra-accent) 11%,transparent),transparent 38%),
+    color-mix(in srgb,var(--hra-surface) 94%,transparent)!important;
+  color:var(--hra-text)!important;
+  box-shadow:var(--hra-shadow),inset 0 1px 0 color-mix(in srgb,#fff 6%,transparent)!important;
+  transform:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero.home-v380-quran-hero--reading::before{
+  content:""!important;
+  position:absolute!important;
+  inset:1px!important;
+  border:0!important;
+  border-radius:inherit!important;
+  pointer-events:none!important;
+  background:linear-gradient(115deg,color-mix(in srgb,#fff 4%,transparent),transparent 32%,transparent 70%,color-mix(in srgb,var(--hra-accent) 3%,transparent))!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero.home-v380-quran-hero--reading::after{
+  content:""!important;
+  position:absolute!important;
+  right:7px!important;
+  top:50%!important;
+  width:76px!important;
+  height:76px!important;
+  transform:translateY(-50%) rotate(-4deg)!important;
+  background:url("/test/assets/dar-3d-icons/quran.png?v=1115") center/contain no-repeat!important;
+  opacity:.98!important;
+  pointer-events:none!important;
+  filter:drop-shadow(0 9px 12px rgba(0,0,0,.22))!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero__mark,
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero__chevron{
+  display:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero__body{
+  position:relative!important;
+  z-index:2!important;
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:2px!important;
+  padding:0!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero__title{
+  margin:0!important;
+  color:var(--hra-text)!important;
+  -webkit-text-fill-color:var(--hra-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(19px,4.7vw,23px)!important;
+  line-height:1.04!important;
+  font-weight:800!important;
+  white-space:normal!important;
+  text-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero__resume{
+  position:relative!important;
+  z-index:2!important;
+  min-width:0!important;
+  max-width:108px!important;
+  padding:0!important;
+  border:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-end!important;
+  justify-content:center!important;
+  gap:2px!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero__meta,
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero__when{
+  margin:0!important;
+  max-width:108px!important;
+  overflow:hidden!important;
+  color:var(--hra-muted)!important;
+  -webkit-text-fill-color:var(--hra-muted)!important;
+  font-size:8.7px!important;
+  line-height:1.16!important;
+  font-weight:720!important;
+  text-align:right!important;
+  white-space:nowrap!important;
+  text-overflow:ellipsis!important;
+}
+
+/* ─────────────────────────────────────────────
+   TAWḤĪD · dominante, aber schlanke Ovalfläche
+   ───────────────────────────────────────────── */
+html[data-theme] body.is-home-route #appView .home-premium-access{
+  margin-bottom:13px!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-premium-access__head{
+  display:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-tawhid-entry.dar-click-glow{
+  position:relative!important;
+  isolation:isolate!important;
+  display:block!important;
+  width:100%!important;
+  min-height:104px!important;
+  height:auto!important;
+  margin:0!important;
+  padding:14px 91px 14px 19px!important;
+  overflow:hidden!important;
+  border:1px solid color-mix(in srgb,var(--hra-border) 64%,var(--hra-accent) 36%)!important;
+  border-radius:999px!important;
+  background:
+    radial-gradient(circle at 86% 46%,color-mix(in srgb,var(--hra-accent) 13%,transparent),transparent 39%),
+    color-mix(in srgb,var(--hra-surface) 95%,transparent)!important;
+  color:var(--hra-text)!important;
+  box-shadow:0 10px 26px color-mix(in srgb,var(--theme-text,var(--text)) 10%,transparent),inset 0 1px 0 color-mix(in srgb,#fff 7%,transparent)!important;
+  transform:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-tawhid-entry.dar-click-glow::before{
+  content:""!important;
+  position:absolute!important;
+  inset:1px!important;
+  z-index:0!important;
+  border-radius:inherit!important;
+  background:linear-gradient(115deg,color-mix(in srgb,#fff 4%,transparent),transparent 32%,transparent 72%,color-mix(in srgb,var(--hra-accent) 3%,transparent))!important;
+  pointer-events:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-tawhid-entry.dar-click-glow::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:1!important;
+  right:7px!important;
+  top:50%!important;
+  width:78px!important;
+  height:78px!important;
+  transform:translateY(-50%) rotate(2deg)!important;
+  background:url("/test/assets/dar-3d-icons/ilm.png?v=1115") center/contain no-repeat!important;
+  opacity:.98!important;
+  pointer-events:none!important;
+  filter:drop-shadow(0 9px 12px rgba(0,0,0,.22))!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-tawhid-entry__icon,
+html[data-theme] body.is-home-route #appView .home-tawhid-entry__arrow{
+  display:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-tawhid-entry__copy{
+  position:relative!important;
+  z-index:2!important;
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  gap:3px!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-tawhid-entry__label{
+  margin:0!important;
+  color:var(--hra-accent)!important;
+  -webkit-text-fill-color:var(--hra-accent)!important;
+  font-size:8.4px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-tawhid-entry__copy h3{
+  margin:0!important;
+  color:var(--hra-text)!important;
+  -webkit-text-fill-color:var(--hra-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(20px,4.9vw,24px)!important;
+  line-height:1.03!important;
+  font-weight:840!important;
+  text-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-tawhid-entry__copy p{
+  margin:1px 0 0!important;
+  max-width:31ch!important;
+  color:var(--hra-muted)!important;
+  -webkit-text-fill-color:var(--hra-muted)!important;
+  font-size:9.3px!important;
+  line-height:1.24!important;
+  font-weight:650!important;
+}
+
+/* ─────────────────────────────────────────────
+   SCHNELLZUGRIFFE · sechs getrennte Capsules
+   ───────────────────────────────────────────── */
+html[data-theme] body.is-home-route #appView .home-premium-access__grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:7px!important;
+  margin:9px 0 0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-premium-access__grid > .home-premium-access-card{
+  position:relative!important;
+  min-width:0!important;
+  min-height:60px!important;
+  height:auto!important;
+  margin:0!important;
+  padding:7px 10px 7px 8px!important;
+  display:grid!important;
+  grid-template-columns:36px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:7px!important;
+  overflow:hidden!important;
+  border:1px solid var(--hra-soft-border)!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--hra-flat) 86%,transparent)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 4%,transparent)!important;
+  color:var(--hra-text)!important;
+  transform:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-premium-access-card__icon{
+  width:36px!important;
+  height:36px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:visible!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-premium-access-card__icon img.dar3d-icon{
+  width:34px!important;
+  height:34px!important;
+  max-width:34px!important;
+  max-height:34px!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 5px 7px rgba(0,0,0,.16))!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-premium-access-card h3{
+  margin:0!important;
+  color:var(--hra-text)!important;
+  -webkit-text-fill-color:var(--hra-text)!important;
+  font-size:11.2px!important;
+  line-height:1.06!important;
+  font-weight:860!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-premium-access-card p{
+  margin:2px 0 0!important;
+  color:var(--hra-muted)!important;
+  -webkit-text-fill-color:var(--hra-muted)!important;
+  font-size:7.9px!important;
+  line-height:1.12!important;
+  font-weight:650!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  display:block!important;
+}
+
+/* Kleine Wissensleiste als einzelne Mini-Pills, nicht als Tabellenreihe. */
+html[data-theme] body.is-home-route #appView .home-premium-access__rail{
+  display:flex!important;
+  gap:5px!important;
+  margin:8px 0 0!important;
+  padding:0 0 2px!important;
+  overflow-x:auto!important;
+  border:0!important;
+  background:transparent!important;
+  scrollbar-width:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-premium-access__rail::-webkit-scrollbar{
+  display:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-premium-mini{
+  flex:0 0 auto!important;
+  min-height:29px!important;
+  padding:3px 8px 3px 5px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:4px!important;
+  border:1px solid var(--hra-soft-border)!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--hra-flat) 80%,transparent)!important;
+  color:var(--hra-muted)!important;
+  -webkit-text-fill-color:var(--hra-muted)!important;
+  box-shadow:none!important;
+  font-size:8.2px!important;
+  font-weight:760!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-premium-mini__icon,
+html[data-theme] body.is-home-route #appView .home-premium-mini__icon img.dar3d-icon{
+  width:21px!important;
+  height:21px!important;
+  max-width:21px!important;
+  max-height:21px!important;
+}
+
+/* ─────────────────────────────────────────────
+   HEUTE FÜR DICH · offene Editorial-Zeilen
+   ───────────────────────────────────────────── */
+html[data-theme] body.is-home-route #appView .home-today-cards{
+  margin:13px 0 16px!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-today-cards .home-v380-section-title{
+  margin:0 0 8px!important;
+  color:var(--hra-text)!important;
+  -webkit-text-fill-color:var(--hra-text)!important;
+  font-size:clamp(20px,4.8vw,25px)!important;
+  line-height:1.04!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-today-cards .home-v380-today__season,
+html[data-theme] body.is-home-route #appView .home-today-cards .home-v380-today__highlights{
+  margin:0!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-today-cards .home-v380-today__season > .home-v380-open-row,
+html[data-theme] body.is-home-route #appView .home-today-cards .highlight-sections .recommended-box,
+html[data-theme] body.is-home-route #appView .home-today-cards .highlight-sections .daily-box{
+  position:relative!important;
+  width:100%!important;
+  min-height:70px!important;
+  margin:0!important;
+  padding:11px 3px!important;
+  border:0!important;
+  border-bottom:1px solid var(--hra-soft-border)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  color:var(--hra-text)!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-today-cards .highlight-sections{
+  margin:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-today-cards .gold-divider{
+  display:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-today-cards :is(.recommended-label,.daily-label,.home-v380-kicker){
+  margin:0 0 4px!important;
+  color:var(--hra-accent)!important;
+  -webkit-text-fill-color:var(--hra-accent)!important;
+  font-size:8.2px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-today-cards :is(.recommended-title,.daily-title,.home-v380-open-row__title){
+  margin:0!important;
+  color:var(--hra-text)!important;
+  -webkit-text-fill-color:var(--hra-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(16px,3.8vw,19px)!important;
+  line-height:1.12!important;
+  font-weight:820!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-today-cards :is(.recommended-text,.daily-text,.home-v380-open-row__excerpt,.folder-meta){
+  margin-top:4px!important;
+  color:var(--hra-muted)!important;
+  -webkit-text-fill-color:var(--hra-muted)!important;
+  font-size:9.1px!important;
+  line-height:1.24!important;
+}
+
+/* ─────────────────────────────────────────────
+   NEU & WICHTIG · kompakte Editorial-Karten
+   ───────────────────────────────────────────── */
+html[data-theme] body.is-home-route #appView .home-v380-discover{
+  margin:14px 0 16px!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-discover .home-v380-section-title{
+  font-size:clamp(20px,4.8vw,25px)!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-discover-pdf-list{
+  display:flex!important;
+  gap:8px!important;
+  margin:0 -2px!important;
+  padding:2px!important;
+  overflow-x:auto!important;
+  scrollbar-width:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-discover-pdf-list::-webkit-scrollbar{
+  display:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-discover-pdf-card{
+  flex:0 0 min(88%,430px)!important;
+  min-height:118px!important;
+  padding:12px 14px!important;
+  border:1px solid var(--hra-soft-border)!important;
+  border-radius:22px!important;
+  background:color-mix(in srgb,var(--hra-flat) 88%,transparent)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 4%,transparent)!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-discover-pdf-cover{
+  width:62px!important;
+  min-width:62px!important;
+  height:82px!important;
+  border-radius:10px!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-discover-pdf-title{
+  font-size:clamp(15px,3.6vw,18px)!important;
+  line-height:1.12!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-discover-pdf-meta{
+  font-size:9px!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-discover-posts .home-v380-post-preview{
+  min-height:128px!important;
+  padding:14px 16px!important;
+  border:1px solid var(--hra-soft-border)!important;
+  border-radius:22px!important;
+  background:color-mix(in srgb,var(--hra-flat) 88%,transparent)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 4%,transparent)!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-discover-posts .home-v380-post-title{
+  font-size:clamp(16px,3.8vw,19px)!important;
+  line-height:1.12!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-discover-posts .home-v380-post-excerpt,
+html[data-theme] body.is-home-route #appView .home-discover-posts .home-v380-post-meta{
+  font-size:9.2px!important;
+  line-height:1.24!important;
+}
+
+/* ─────────────────────────────────────────────
+   SUCHE · kein großer Kasten um Kasten
+   ───────────────────────────────────────────── */
+html[data-theme] body.is-home-route #appView .home-v380-search-wrap{
+  margin:14px 0 10px!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-search-box,
+html[data-theme] body.is-home-route #appView .home-v380-search-panel,
+html[data-theme] body.is-home-route #appView .direct-pick-panel.home-direct-pick{
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .direct-pick-panel.home-direct-pick .direct-pick-title{
+  margin:0 0 6px!important;
+}
+
+html[data-theme] body.is-home-route #appView .direct-pick-panel.home-direct-pick .direct-pick-title h3{
+  margin:0!important;
+  color:var(--hra-muted)!important;
+  -webkit-text-fill-color:var(--hra-muted)!important;
+  font-size:10px!important;
+  font-weight:820!important;
+}
+
+html[data-theme] body.is-home-route #appView .direct-pick-panel.home-direct-pick .direct-pick-title span{
+  display:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .direct-pick-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:6px!important;
+}
+
+html[data-theme] body.is-home-route #appView .direct-pick-well{
+  min-width:0!important;
+  min-height:36px!important;
+  padding:3px 7px!important;
+  border:1px solid var(--hra-soft-border)!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--hra-flat) 82%,transparent)!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .direct-pick-ico{
+  width:22px!important;
+  height:22px!important;
+  flex:0 0 22px!important;
+}
+
+html[data-theme] body.is-home-route #appView .direct-pick{
+  min-width:0!important;
+  font-size:9px!important;
+  font-weight:800!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-search-divider{
+  display:none!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-search-field{
+  min-height:50px!important;
+  margin:8px 0 0!important;
+  padding:0 13px!important;
+  border:1px solid var(--hra-border)!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--hra-flat) 88%,transparent)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 4%,transparent)!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-search-field .search,
+html[data-theme] body.is-home-route #appView .home-v380-search-field input{
+  height:48px!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:var(--hra-text)!important;
+  -webkit-text-fill-color:var(--hra-text)!important;
+  font-size:13px!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-filter-chips{
+  margin-top:7px!important;
+  gap:5px!important;
+}
+
+html[data-theme] body.is-home-route #appView .home-v380-filter-chip{
+  min-height:29px!important;
+  padding:5px 9px!important;
+  border-radius:999px!important;
+  font-size:8.3px!important;
+}
+
+/* ─────────────────────────────────────────────
+   FOOTER · kein meterhoher leerer Raum
+   ───────────────────────────────────────────── */
+html[data-theme] body.is-home-route .footer,
+html[data-theme] body.has-bottom-nav.is-home-route .footer{
+  min-height:0!important;
+  margin-top:12px!important;
+  margin-bottom:0!important;
+  padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))!important;
+}
+
+html[data-theme] body.is-home-route .footer-actions{
+  margin-top:10px!important;
+}
+
+/* ─────────────────────────────────────────────
+   BOTTOM NAV · klein, schwebend, verdeckt nichts
+   ───────────────────────────────────────────── */
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav{
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  bottom:calc(7px + env(safe-area-inset-bottom,0px))!important;
+  width:min(calc(100vw - 28px),680px)!important;
+  max-width:min(calc(100vw - 28px),680px)!important;
+  min-height:64px!important;
+  height:64px!important;
+  padding:5px 6px!important;
+  gap:2px!important;
+  transform:translateX(-50%)!important;
+  -webkit-transform:translateX(-50%)!important;
+  border:1px solid var(--hra-border)!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--hra-flat) 95%,transparent)!important;
+  box-shadow:0 9px 26px color-mix(in srgb,var(--theme-text,var(--text)) 17%,transparent),inset 0 1px 0 color-mix(in srgb,#fff 5%,transparent)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.05)!important;
+  backdrop-filter:blur(18px) saturate(1.05)!important;
+  overflow:hidden!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav .bottom-nav-btn{
+  min-width:0!important;
+  max-width:none!important;
+  min-height:52px!important;
+  height:52px!important;
+  margin:0!important;
+  padding:3px 2px!important;
+  gap:1px!important;
+  border-radius:999px!important;
+  font-size:9px!important;
+  line-height:1!important;
+  overflow:hidden!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+  width:27px!important;
+  height:27px!important;
+  min-width:27px!important;
+  min-height:27px!important;
+  padding:1px!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:26px!important;
+  height:26px!important;
+  max-width:26px!important;
+  max-height:26px!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav .bottom-nav-btn.active{
+  border:1px solid color-mix(in srgb,var(--hra-accent) 30%,transparent)!important;
+  background:color-mix(in srgb,var(--hra-accent) 9%,var(--hra-flat))!important;
+  color:var(--hra-accent)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 5%,transparent)!important;
+}
+
+/* Touch bleibt ruhig. */
+html[data-theme] body.is-home-route #appView :is(
+  .home-v380-quran-hero,
+  .home-tawhid-entry,
+  .home-premium-access-card,
+  .home-premium-mini,
+  .home-v380-open-row,
+  .recommended-box,
+  .daily-box,
+  .home-discover-pdf-card,
+  .home-v380-post-preview
+):active{
+  transform:none!important;
+  opacity:.93!important;
+}
+
+@media(max-width:390px){
+  html[data-theme] body.is-home-route #appView .home-v380-quran-hero.home-v380-quran-hero--compact.home-v380-quran-hero--reading{
+    min-height:88px!important;
+    padding-left:16px!important;
+    padding-right:82px!important;
+  }
+  html[data-theme] body.is-home-route #appView .home-v380-quran-hero.home-v380-quran-hero--reading::after{
+    width:70px!important;
+    height:70px!important;
+  }
+  html[data-theme] body.is-home-route #appView .home-tawhid-entry.dar-click-glow{
+    min-height:98px!important;
+    padding-left:16px!important;
+    padding-right:84px!important;
+  }
+  html[data-theme] body.is-home-route #appView .home-tawhid-entry.dar-click-glow::after{
+    width:70px!important;
+    height:70px!important;
+  }
+  html[data-theme] body.is-home-route #appView .home-premium-access-card p{
+    font-size:7.5px!important;
+  }
+}
+
+@media(min-width:760px){
+  html[data-theme] body.is-home-route #appView .home-premium-access__grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+}
