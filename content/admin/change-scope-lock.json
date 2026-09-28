@@ -99,7 +99,7 @@
     "test/assets/dar-ios-oversize-copy.css",
     "kids/",
     "KIDS.md",
-    "test/kids/",
+    "kids/",
     "scripts/kids-design-guard.js",
     "assets/qibla-quick-view.js",
     "assets/qibla-quick-view.css",
@@ -155,7 +155,7 @@
         "ios/DarAlTawhidKids/",
         "kids/",
         "KIDS.md",
-        "test/kids/",
+        "kids/",
         "cloudflare/test-app-worker.js",
         "cloudflare/site-router.js"
       ],
@@ -246,10 +246,10 @@
       "reason": "Nutzer: Kids Quiz-Bereich laesst sich nicht scrollen. overflow/touch-action am Quiz-Modal.",
       "paths": [
         "content/admin/change-scope-lock.json",
-        "test/kids/index.html",
-        "test/kids/shell.html",
-        "test/kids/start.html",
-        "test/kids/version.json"
+        "kids/index.html",
+        "kids/shell.html",
+        "kids/start.html",
+        "kids/version.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
@@ -622,7 +622,7 @@
         "content/admin/change-scope-lock.json",
         "kids/",
         "KIDS.md",
-        "test/kids/",
+        "kids/",
         "_redirects",
         "_headers",
         "scripts/kids-design-guard.js",
@@ -6398,11 +6398,11 @@
         "voice-studio/sw-v11.js",
         "voice-studio/version.json",
         "scripts/voice-studio/validate-v2.py",
-        "test/kids/content-studio-feed.js",
-        "test/kids/start.html",
-        "test/kids/shell.html",
-        "test/kids/index.html",
-        "test/kids/version.json"
+        "kids/content-studio-feed.js",
+        "kids/start.html",
+        "kids/shell.html",
+        "kids/index.html",
+        "kids/version.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },

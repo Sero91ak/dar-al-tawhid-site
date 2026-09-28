@@ -181,21 +181,22 @@ export default {
     // Dadurch nutzt /test/kids/ exakt dieselbe App-Shell wie der funktionierende
     // /test/kids/start-Aufruf und alte darsw-Cache-Buster können keine ältere
     // Root-Darstellung mit abgesetzter unterer Safe-Area mehr festhalten.
-    if (url.pathname === "/test/kids" || url.pathname === "/test/kids/") {
-      const target = new URL(request.url);
-      target.pathname = "/test/kids/start";
-      target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v12-tab79");
-      return Response.redirect(target.toString(), 307);
-    }
-
-    if (url.pathname === "/test/kids/version.json") {
-      return kidsVersionResponse();
-    }
-
-    if (url.pathname === "/test/kids/api/recitation/grade") {
+    if (url.pathname === "/kids/api/recitation/grade" || url.pathname === "/test/kids/api/recitation/grade") {
       if (request.method !== "POST") return kidsJson({ ok: false, error: "method_not_allowed" }, 405);
       return gradeKidsRecitation(request, env);
+    }
+
+    if (
+      (request.method === "GET" || request.method === "HEAD") &&
+      (url.pathname === "/test/kids" || url.pathname === "/test/kids/" || url.pathname.startsWith("/test/kids/"))
+    ) {
+      const target = new URL("https://dar-al-tawhid.de" + url.pathname.replace(/^\/test\/kids/, "/kids") + url.search);
+      if (target.pathname === "/kids" || target.pathname === "/kids/") {
+        target.pathname = "/kids/start";
+      }
+      target.searchParams.delete("darsw");
+      target.searchParams.set("kv", "kids-shell-v13-live1");
+      return Response.redirect(target.toString(), 301);
     }
 
     const asset = await env.ASSETS.fetch(request);

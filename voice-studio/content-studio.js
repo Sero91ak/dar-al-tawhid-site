@@ -668,9 +668,9 @@ function inventoryKindLabel(kind){
 async function fetchLegacyKidsInventory(){
   const urls=[];
   try{
-    if(location.hostname==="dar-al-tawhid.de"||location.hostname.endsWith(".dar-al-tawhid.de"))urls.push("/test/kids/data/stories-authentic.json?cb="+Date.now());
+    if(location.hostname==="dar-al-tawhid.de"||location.hostname.endsWith(".dar-al-tawhid.de"))urls.push("/kids/data/stories-authentic.json?cb="+Date.now());
   }catch{}
-  urls.push("https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/test/kids/data/stories-authentic.json?cb="+Date.now());
+  urls.push("https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/kids/data/stories-authentic.json?cb="+Date.now());
   let lastError=null;
   for(const url of urls){
     try{

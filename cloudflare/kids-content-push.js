@@ -11,7 +11,7 @@ function appId(env) {
 }
 
 function kidsBase(env) {
-  return String(env.KIDS_APP_URL || "https://dar-al-tawhid.de/test/kids/start").replace(/\/$/, "");
+  return String(env.KIDS_APP_URL || "https://dar-al-tawhid.de/kids/start").replace(/\/$/, "");
 }
 
 function ageGroupsFor(item) {
@@ -106,9 +106,9 @@ export async function sendKidsContentPush(env, item) {
       publishedAt: item.publishedAt
     },
     idempotency_key: await uuid(seed),
-    chrome_web_icon: "https://dar-al-tawhid.de/test/kids/icons/icon-192.png?v=logo28",
+    chrome_web_icon: "https://dar-al-tawhid.de/kids/icons/icon-192.png?v=logo28",
     chrome_web_badge: "https://dar-al-tawhid.de/notification-badge-96.png?v=3",
-    firefox_icon: "https://dar-al-tawhid.de/test/kids/icons/icon-192.png?v=logo28",
+    firefox_icon: "https://dar-al-tawhid.de/kids/icons/icon-192.png?v=logo28",
     name: `kids-content-${item.id}-r${item.publishedRevision || item.revision || 1}`
   };
 

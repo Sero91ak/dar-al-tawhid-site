@@ -149,7 +149,7 @@ async function fetchVersionBuild(base) {
     `Dar Test live OK — public und workers.dev liefern identisch ${TEST_EXPECT_BUILD}.`
   );
 
-  const kidsPath = path.join(ROOT_DIR, "test/kids/version.json");
+  const kidsPath = path.join(ROOT_DIR, "kids/version.json");
   if (fs.existsSync(kidsPath)) {
     const kidsExpect = JSON.parse(fs.readFileSync(kidsPath, "utf8")).buildId;
     async function waitKids(label, base) {
@@ -196,7 +196,7 @@ async function fetchVersionBuild(base) {
         startRes.status === 200 &&
         html.includes("kids-launch-v79") &&
         html.includes('id="kidsCinemaV79"') &&
-        html.includes("/test/kids/assets/kids-cinema/intro-v74.mp4?v=79") &&
+        html.includes("/kids/assets/kids-cinema/intro-v74.mp4?v=79") &&
         html.includes("if(!started)removeLaunch()") &&
         html.includes("},3200)") &&
         overlayFree;

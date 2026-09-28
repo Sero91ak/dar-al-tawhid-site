@@ -6,14 +6,14 @@ enum KidsAppShell {
         "www.dar-al-tawhid.de"
     ]
 
-    static let launchURL = URL(string: "https://dar-al-tawhid.de/test/kids/start?kv=kids-shell-v12-tab79")!
+    static let launchURL = URL(string: "https://dar-al-tawhid.de/kids/start?kv=kids-shell-v13-live1")!
 
     static func isKidsURL(_ url: URL) -> Bool {
         let scheme = url.scheme?.lowercased() ?? ""
         if scheme == "daraltawhidkids" { return true }
         guard let host = url.host?.lowercased(), hosts.contains(host) else { return false }
         let path = url.path.lowercased()
-        return path == "/test/kids" || path.hasPrefix("/test/kids/")
+        return path == "/kids" || path.hasPrefix("/kids/") || path == "/test/kids" || path.hasPrefix("/test/kids/")
     }
 
     static func inAppURL(from incoming: URL) -> URL {
@@ -24,6 +24,9 @@ enum KidsAppShell {
             var components = URLComponents(url: incoming, resolvingAgainstBaseURL: false) ?? URLComponents()
             components.scheme = "https"
             components.host = "dar-al-tawhid.de"
+            if let path = components.path, path.hasPrefix("/test/kids") {
+                components.path = "/kids" + String(path.dropFirst("/test/kids".count))
+            }
             return components.url ?? launchURL
         }
         return launchURL

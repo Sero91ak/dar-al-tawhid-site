@@ -42,7 +42,7 @@ jobs:
       - name: Render clean 9:16 cinema master
         run: |
           set -euo pipefail
-          mkdir -p test/kids/assets/kids-cinema
+          mkdir -p kids/assets/kids-cinema
           ffmpeg -hide_banner -y \
             -loop 1 -t 3.6 -i /tmp/kids-cinema/scene1.png \
             -loop 1 -t 3.6 -i /tmp/kids-cinema/scene2.png \
@@ -56,21 +56,21 @@ jobs:
             -map "[v]" -t 9.25 -r 24 \
             -c:v libx264 -preset slow -crf 24 -profile:v high -level 4.1 \
             -movflags +faststart -an \
-            test/kids/assets/kids-cinema/intro-final.mp4
+            kids/assets/kids-cinema/intro-final.mp4
 
           ffmpeg -hide_banner -y -i /tmp/kids-cinema/scene1.png \
             -vf "scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920" \
-            -frames:v 1 -q:v 4 test/kids/assets/kids-cinema/poster-v65.jpg
+            -frames:v 1 -q:v 4 kids/assets/kids-cinema/poster-v65.jpg
 
           ffprobe -v error -show_entries format=duration,size:stream=width,height,codec_name,pix_fmt \
-            -of default=nw=1 test/kids/assets/kids-cinema/intro-final.mp4
+            -of default=nw=1 kids/assets/kids-cinema/intro-final.mp4
 
       - name: Commit clean cinema master
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add test/kids/assets/kids-cinema/intro-final.mp4 test/kids/assets/kids-cinema/poster-v65.jpg
+          git add kids/assets/kids-cinema/intro-final.mp4 kids/assets/kids-cinema/poster-v65.jpg
           if git diff --cached --quiet; then
             echo "Cinema master already current."
             exit 0

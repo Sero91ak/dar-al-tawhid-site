@@ -34,10 +34,34 @@ function iosNativeHeaders(assetResponse) {
 }
 
 const KIDS_MIRROR = "https://dar-al-tawhid-test.sero91ak.workers.dev";
-// KIDS_PUBLIC_ROUTER_V79_FINAL — video-only intro; deploy pinned to latest main.
+const KIDS_BUILD = "kids-shell-v13-live1";
+const KIDS_LABEL = "KIDS · V0.80";
+
+function isLegacyKidsPath(pathname) {
+  return pathname === "/test/kids" || pathname.startsWith("/test/kids/");
+}
+
+function isLiveKidsPath(pathname) {
+  return pathname === "/kids" || pathname.startsWith("/kids/");
+}
+
+function isKidsPath(pathname) {
+  return isLiveKidsPath(pathname) || isLegacyKidsPath(pathname);
+}
+
+function toLiveKidsPath(pathname) {
+  if (!isLegacyKidsPath(pathname)) return pathname;
+  return "/kids" + pathname.slice("/test/kids".length);
+}
+
+function toMirrorKidsPath(pathname) {
+  const live = toLiveKidsPath(pathname);
+  if (live === "/kids" || live === "/kids/") return "/test/kids/";
+  return "/test/kids" + live.slice("/kids".length);
+}
 
 async function fetchKidsMirror(pathname, search) {
-  const path = pathname === "/test/kids" ? "/test/kids/" : pathname;
+  const path = toMirrorKidsPath(pathname);
   const dest = `${KIDS_MIRROR}${path}${search || ""}`;
   const res = await fetch(dest, { method: "GET", redirect: "manual" });
   if (res.status < 300 || res.status >= 400) return res;
@@ -55,7 +79,7 @@ function kidsHeaders(assetResponse) {
   headers.set("CDN-Cache-Control", "no-store");
   headers.set("Cloudflare-CDN-Cache-Control", "no-store");
   headers.set("Pragma", "no-cache");
-  headers.set("X-Kids-Build", "kids-shell-v12-tab79");
+  headers.set("X-Kids-Build", KIDS_BUILD);
   headers.delete("ETag");
   headers.delete("Content-Length");
   return headers;
@@ -217,8 +241,10 @@ export default {
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeApp = isNativeAppRequest(ua);
-    const kidsPath = url.pathname === "/test/kids" || url.pathname.startsWith("/test/kids/");
-    const kidsRecitationGrade = url.pathname === "/test/kids/api/recitation/grade";
+    const kidsPath = isKidsPath(url.pathname);
+    const kidsRecitationGrade =
+      url.pathname === "/kids/api/recitation/grade" ||
+      url.pathname === "/test/kids/api/recitation/grade";
     const voicePath = url.pathname === "/voice-studio" || url.pathname.startsWith("/voice-studio/");
     const legacyVoicePath = url.pathname === "/test/voice-studio" || url.pathname.startsWith("/test/voice-studio/");
 
@@ -265,6 +291,7 @@ export default {
         target.protocol = "https:";
         target.hostname = "dar-al-tawhid-test.sero91ak.workers.dev";
         target.port = "";
+        target.pathname = "/test/kids/api/recitation/grade";
         const upstream = await fetch(new Request(target.toString(), request));
         const headers = new Headers(upstream.headers);
         headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
@@ -286,22 +313,45 @@ export default {
 
     if (kidsPath && (request.method === "GET" || request.method === "HEAD")) {
       try {
-        if (url.pathname === "/test/kids/version.json" || url.pathname === "/test/kids/version.json/") {
+        if (isLegacyKidsPath(url.pathname)) {
+          const target = new URL(request.url);
+          target.pathname = toLiveKidsPath(url.pathname) || "/kids/";
+          return Response.redirect(target.toString(), 301);
+        }
+        if (url.pathname === "/kids" || url.pathname === "/kids/") {
+          const target = new URL(request.url);
+          target.pathname = "/kids/start";
+          target.searchParams.delete("darsw");
+          target.searchParams.set("kv", KIDS_BUILD);
+          return Response.redirect(target.toString(), 307);
+        }
+        if (url.pathname === "/kids/version.json" || url.pathname === "/kids/version.json/") {
           const headers = kidsHeaders(new Response(""));
           headers.set("Content-Type", "application/json; charset=utf-8");
-          const body = JSON.stringify({ buildId: "kids-shell-v12-tab79", label: "KIDS · V0.79" });
+          const body = JSON.stringify({ buildId: KIDS_BUILD, label: KIDS_LABEL });
           if (request.method === "HEAD") return new Response(null, { status: 200, headers });
           return new Response(body, { status: 200, headers });
         }
         if (url.pathname.endsWith("/v12-alive.txt")) {
           const headers = kidsHeaders(new Response(""));
           headers.set("Content-Type", "text/plain; charset=utf-8");
-          const body = "kids-shell-v12-tab79\nKIDS · V0.79\n";
+          const body = `${KIDS_BUILD}\n${KIDS_LABEL}\n`;
           if (request.method === "HEAD") return new Response(null, { status: 200, headers });
           return new Response(body, { status: 200, headers });
         }
 
-        let assetResponse = await env.ASSETS.fetch(request);
+        const pretty = {
+          "/kids/start": "/kids/start.html",
+          "/kids/index": "/kids/index.html",
+          "/kids/shell": "/kids/shell.html"
+        };
+        let assetRequest = request;
+        if (pretty[url.pathname]) {
+          const prettyUrl = new URL(request.url);
+          prettyUrl.pathname = pretty[url.pathname];
+          assetRequest = new Request(prettyUrl.toString(), request);
+        }
+        let assetResponse = await env.ASSETS.fetch(assetRequest);
         if (!assetResponse || assetResponse.status >= 400) {
           try {
             assetResponse = await fetchKidsMirror(url.pathname, url.search);

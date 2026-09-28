@@ -2,15 +2,15 @@
 /**
  * KIDS_DESIGN_GUARD
  * Sichert Edge-to-Edge, Glass-Tab-Bar und das Verbot von System-Emojis
- * in DĀR AL TAWḤĪD Kids (/test/kids/).
+ * in DĀR AL TAWḤĪD Kids (/kids/).
  */
 const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.join(__dirname, "..");
 const MARKER = "KIDS_DESIGN_GUARD";
-const KIDS_HTML = "test/kids/index.html";
-const KIDS_DOC = "test/kids/KIDS-DESIGN.md";
+const KIDS_HTML = "kids/index.html";
+const KIDS_DOC = "kids/KIDS-DESIGN.md";
 
 function fail(msg) {
   console.error(`${MARKER} FAIL: ${msg}`);
@@ -54,7 +54,7 @@ function runKidsDesignGuard() {
   for (const e of banned) {
     if (html.includes(e)) failed += fail(`${KIDS_HTML}: System-Emoji als UI-Symbol verboten: ${e}`);
   }
-  const iconDir = path.join(ROOT, "test/kids/assets/kids-icons");
+  const iconDir = path.join(ROOT, "kids/assets/kids-icons");
   if (!fs.existsSync(iconDir)) return fail("kids-icons Ordner fehlt");
   const must = ["headphones-real-v12.png", "moon-real-v12.png", "sun-real-v12.png", "quran-real-v12.png", "parents-real-v12.png"];
   for (const f of must) {

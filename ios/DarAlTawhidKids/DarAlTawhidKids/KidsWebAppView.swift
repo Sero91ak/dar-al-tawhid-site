@@ -41,13 +41,28 @@ struct KidsWebAppView: UIViewRepresentable {
         webView.scrollView.backgroundColor = webView.backgroundColor
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
-        webView.load(URLRequest(url: KidsAppShell.launchURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 30))
+        webView.alpha = 0
+        webView.load(URLRequest(url: KidsAppShell.launchURL, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30))
         return webView
     }
 
     func updateUIView(_ uiView: WKWebView, context: Context) {}
 
     final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
+        private var hasPresentedInitialPage = false
+
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            guard !hasPresentedInitialPage else { return }
+            hasPresentedInitialPage = true
+            UIView.animate(
+                withDuration: 0.28,
+                delay: 0,
+                options: [.allowUserInteraction, .beginFromCurrentState, .curveEaseOut]
+            ) {
+                webView.alpha = 1
+            }
+        }
+
         func webView(
             _ webView: WKWebView,
             decidePolicyFor navigationAction: WKNavigationAction,

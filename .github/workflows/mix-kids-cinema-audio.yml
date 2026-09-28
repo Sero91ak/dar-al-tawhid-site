@@ -34,14 +34,14 @@ jobs:
       - name: Mix final cinema master
         run: |
           set -euo pipefail
-          ffmpeg -hide_banner -y             -i test/kids/assets/kids-cinema/intro-v1.mp4             -i /tmp/kids-voice.mp3             -i /tmp/kids-sfx.mp3             -filter_complex "[1:a]volume=1.0,adelay=220|220[voice];[2:a]volume=0.16[sfx];[voice][sfx]amix=inputs=2:duration=longest:dropout_transition=0,alimiter=limit=0.93,apad=pad_dur=1.0[mix]"             -map 0:v:0 -map "[mix]"             -c:v copy -c:a aac -b:a 192k -t 9.3 -movflags +faststart             test/kids/assets/kids-cinema/intro-final.mp4
-          test -s test/kids/assets/kids-cinema/intro-final.mp4
+          ffmpeg -hide_banner -y             -i kids/assets/kids-cinema/intro-v1.mp4             -i /tmp/kids-voice.mp3             -i /tmp/kids-sfx.mp3             -filter_complex "[1:a]volume=1.0,adelay=220|220[voice];[2:a]volume=0.16[sfx];[voice][sfx]amix=inputs=2:duration=longest:dropout_transition=0,alimiter=limit=0.93,apad=pad_dur=1.0[mix]"             -map 0:v:0 -map "[mix]"             -c:v copy -c:a aac -b:a 192k -t 9.3 -movflags +faststart             kids/assets/kids-cinema/intro-final.mp4
+          test -s kids/assets/kids-cinema/intro-final.mp4
       - name: Commit final master
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add test/kids/assets/kids-cinema/intro-final.mp4
+          git add kids/assets/kids-cinema/intro-final.mp4
           if git diff --cached --quiet; then
             echo "Final cinema master already current."
             exit 0

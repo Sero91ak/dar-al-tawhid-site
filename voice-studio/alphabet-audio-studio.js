@@ -191,7 +191,7 @@ async function loadManifest(){
 
   if(!manifest){
     try{
-      const api="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/test/kids/data/alphabet-audio.json?ref=main&cb="+Date.now();
+      const api="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/kids/data/alphabet-audio.json?ref=main&cb="+Date.now();
       const remote=await fetchManifestJson(api,{
         headers:{Accept:"application/vnd.github.raw+json"}
       });

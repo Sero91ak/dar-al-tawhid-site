@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Nur /test/kids/* am CDN leeren.
+ * Nur /kids/* am CDN leeren.
  * Kein Besucher-Deploy, kein purge_everything, keine Workers Builds.
  */
 const SITE_URL = (process.env.SITE_URL || "https://dar-al-tawhid.de").replace(/\/$/, "");
@@ -25,19 +25,19 @@ function authHeaders() {
 
 async function main() {
   const files = [
-    `${SITE_URL}/test/kids`,
-    `${SITE_URL}/test/kids/`,
-    `${SITE_URL}/test/kids/index.html`,
-    `${SITE_URL}/test/kids/version.json`,
-    `${SITE_URL}/test/kids/manifest.webmanifest`,
-    `${SITE_URL}/test/kids/shell.html`,
-    `${SITE_URL}/test/kids/start`,
-    `${SITE_URL}/test/kids/start.html`,
-    `${SITE_URL}/test/kids/?kv=20260925-12`,
-    `${SITE_URL}/test/kids/v12-alive.txt`,
-    `${SITE_URL}/test/kids/assets/kids-cinema/intro-v74.mp4`
+    `${SITE_URL}/kids`,
+    `${SITE_URL}/kids/`,
+    `${SITE_URL}/kids/index.html`,
+    `${SITE_URL}/kids/version.json`,
+    `${SITE_URL}/kids/manifest.webmanifest`,
+    `${SITE_URL}/kids/shell.html`,
+    `${SITE_URL}/kids/start`,
+    `${SITE_URL}/kids/start.html`,
+    `${SITE_URL}/kids/?kv=20260925-12`,
+    `${SITE_URL}/kids/v12-alive.txt`,
+    `${SITE_URL}/kids/assets/kids-cinema/intro-v74.mp4`
   ];
-  const prefixes = [`${new URL(SITE_URL).hostname}/test/kids`];
+  const prefixes = [`${new URL(SITE_URL).hostname}/kids`];
   for (const body of [{ files }, { prefixes }]) {
     const res = await fetch(`https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/purge_cache`, {
       method: "POST",
