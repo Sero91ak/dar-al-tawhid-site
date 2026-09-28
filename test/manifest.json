@@ -1,13 +1,13 @@
 {
   "name": "Dar Test",
   "short_name": "Dar Test",
-  "start_url": "/test/?env=staging&source=pwa&v=android-boot-v661#home",
+  "start_url": "/test/?env=staging&source=pwa#home",
   "scope": "/test/",
   "id": "/test/?env=staging",
   "display": "standalone",
-  "background_color": "#050706",
-  "theme_color": "#050706",
-  "description": "Private DĀR AL TAWḤĪD Test-App für Admin-Vorschau vor Live-Veröffentlichung.",
+  "background_color": "#061826",
+  "theme_color": "#061826",
+  "description": "Private DAR AL TAWḤID Test-App für Admin-Vorschau vor Live-Veröffentlichung.",
   "orientation": "any",
   "icons": [
     {
@@ -23,7 +23,6 @@
       "purpose": "any maskable"
     }
   ],
-  "gcm_sender_id": "482941809286",
   "display_override": [
     "standalone",
     "fullscreen"

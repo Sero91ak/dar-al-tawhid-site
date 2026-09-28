@@ -1,11 +1,10 @@
-// workers-deploy-stamp:1790519588673
-/* DĀR AL TAWḤĪD – Offline Light Service Worker
+// workers-deploy-stamp:1785515013954
+/* DAR AL TAWḤID – Offline Light Service Worker
    Ziel: Startseite/App-Hülle offline nutzbar machen, ohne viel Speicher zu belegen.
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1074';
-const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v538-fast-boot';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -21,25 +20,13 @@ const APP_SHELL = [
   '/manifest-staging.json',
   '/test/manifest.json',
   '/version.json',
-  '/assets/visitor-ios-deprecation.js',
   '/data/quran-search-keywords.json',
   '/data/quran-search-index.json',
   '/data/offline-content-manifest.json',
   '/test/assets/library/canonical-source-library.js',
   '/assets/library/canonical-source-library.js',
-  '/assets/prophets/prophets.js',
-  '/assets/prophets/prophets.css',
-  '/data/prophets/index.json',
-  '/data/prophets/search-index.json',
-  '/test/assets/prophets/prophets.js',
-  '/test/assets/prophets/prophets.css',
-  '/test/data/prophets/index.json',
-  '/test/data/prophets/search-index.json',
   '/data/books-library.json',
   '/data/scholars-library.json',
-  '/quran-player-artwork-512.png',
-  '/assets/quran-player-artwork-512.png',
-  '/test/assets/quran-player-artwork-512.png',
   '/test-apple-touch-icon.png',
   '/test-app-icon-192.png',
   '/test-app-icon-512.png',
@@ -59,53 +46,7 @@ const APP_SHELL = [
   '/content/duas/duas.json',
   '/content/quran/surahs.json',
   '/content/quran-athar/de/001.json',
-  '/assets/site-analytics.js',
-  '/assets/qibla-quick-view.js',
-  '/assets/qibla-quick-view.css',
-  '/assets/global-update-banner.js',
-  '/assets/global-update-banner.css',
-  '/assets/dar-noble-3d-icons.js',
-  '/assets/dar-noble-3d-icons.css',
-  '/assets/dar-quran-audio-pack.js',
-  '/data/quran-reciters.json',
-  '/assets/dar-3d-icons/audio.png',
-  '/assets/dar-3d-icons/bell.png',
-  '/assets/dar-3d-icons/calendar.png',
-  '/assets/dar-3d-icons/compass.png',
-  '/assets/dar-3d-icons/dua.png',
-  '/assets/dar-3d-icons/frauen.png',
-  '/assets/dar-3d-icons/hadith.png',
-  '/assets/dar-3d-icons/headphones.png',
-  '/assets/dar-3d-icons/heart.png',
-  '/assets/dar-3d-icons/home.png',
-  '/assets/dar-3d-icons/ilm.png',
-  '/assets/dar-3d-icons/image.png',
-  '/assets/dar-3d-icons/jummah.png',
-  '/assets/dar-3d-icons/library.png',
-  '/assets/dar-3d-icons/lock.png',
-  '/assets/dar-3d-icons/more.png',
-  '/assets/dar-3d-icons/mosque.png',
-  '/assets/dar-3d-icons/news.png',
-  '/assets/dar-3d-icons/play.png',
-  '/assets/dar-3d-icons/posts.png',
-  '/assets/dar-3d-icons/prayer.png',
-  '/assets/dar-3d-icons/prophets.png',
-  '/assets/dar-3d-icons/qibla.png',
-  '/assets/dar-3d-icons/quiz.png',
-  '/assets/dar-3d-icons/quran.png',
-  '/assets/dar-3d-icons/ramadan.png',
-  '/assets/dar-3d-icons/saved.png',
-  '/assets/dar-3d-icons/scale.png',
-  '/assets/dar-3d-icons/scholars.png',
-  '/assets/dar-3d-icons/settings.png',
-  '/assets/dar-3d-icons/shield.png',
-  '/assets/dar-3d-icons/spark.png',
-  '/assets/dar-3d-icons/topics.png',
-  '/assets/dar-3d-icons/wasiyyah.png',
-  '/assets/dar-3d-icons/widgets.png',
-  '/assets/dar-3d-icons/zakat.png',
-  '/assets/jummah-friday.js',
-  '/data/jummah-series.json'
+  '/assets/site-analytics.js'
 ];
 
 let bypassPostCacheUntil = 0;
@@ -307,14 +248,8 @@ function isFeedAssetRequest(url) {
     || url.pathname.startsWith('/assets/posts/');
 }
 
-function isKidsPath(url) {
-  const p = url.pathname || '';
-  return p === '/test/kids' || p.startsWith('/test/kids/');
-}
-
 function isAppShellRequest(url) {
   if (url.origin !== self.location.origin) return false;
-  if (isKidsPath(url)) return false;
   if (url.pathname === '/' || url.pathname === '/index.html') return true;
   if (url.pathname === '/test/' || url.pathname === '/test/index.html') return true;
   if (url.pathname === '/version.json' || url.pathname === '/test/version.json') return true;
@@ -329,31 +264,7 @@ function isPostDataRequest(url) {
   return url.pathname.includes('/content/posts/') || url.pathname.endsWith('/posts-index.json') || url.pathname.includes('/content/staging/posts/') || url.pathname.includes('/content/stories/') || url.pathname.includes('/content/staging/stories/') || url.pathname.includes('/content/focus-feed/') || url.pathname.includes('/content/staging/focus-feed/') || url.pathname.includes('/content/feed-backgrounds/') || url.pathname.includes('/content/staging/feed-backgrounds/') || url.pathname.includes('/assets/feed-backgrounds/') || url.pathname.includes('/content/updates/') || url.pathname.includes('/content/staging/updates/');
 }
 
-function isProphetsTestDataRequest(url) {
-  return url.pathname.indexOf('/test/data/prophets/') === 0;
-}
-
-function isProphetsProfileDataRequest(url) {
-  const p = url.pathname;
-  if (isProphetsCatalogRequest(url)) return false;
-  if (p.indexOf('/data/prophets/') !== 0 && p.indexOf('/test/data/prophets/') !== 0) return false;
-  if (p.indexOf('/hadith/') >= 0) return true;
-  if (p.indexOf('/relations/') >= 0) return true;
-  return /\.json$/i.test(p);
-}
-
-function isProphetsCatalogRequest(url) {
-  const p = url.pathname;
-  return (
-    p === '/test/data/prophets/index.json' ||
-    p === '/test/data/prophets/search-index.json' ||
-    p === '/data/prophets/index.json' ||
-    p === '/data/prophets/search-index.json'
-  );
-}
-
 function navigationShellKey(url) {
-  if (isKidsPath(url)) return url.pathname;
   return url.pathname.startsWith('/test') ? '/test/index.html' : '/index.html';
 }
 
@@ -513,57 +424,13 @@ self.addEventListener('install', (event) => {
   );
 });
 
-async function purgePastVisualCaches() {
-  const keys = await caches.keys();
-  await Promise.all(
-    keys
-      .filter((key) => key.startsWith('dar-al-tawhid-offline-light-') && key !== CACHE_VERSION)
-      .map((key) => caches.delete(key))
-  );
-  try {
-    const cache = await caches.open(CACHE_VERSION);
-    const requests = await cache.keys();
-    await Promise.all(
-      requests
-        .filter((req) => {
-          try {
-            const u = new URL(req.url);
-            if (VISUAL_SHELL_KEYS.includes(u.pathname)) return true;
-            if (/\.(css|js)(\?|$)/i.test(u.pathname)) return true;
-            if (u.pathname === '/manifest.json' || u.pathname === '/test/manifest.json') return true;
-            return false;
-          } catch (e) {
-            return false;
-          }
-        })
-        .map((req) => cache.delete(req))
-    );
-  } catch (e) {}
-}
-
 self.addEventListener('activate', (event) => {
-  event.waitUntil((async () => {
-    try {
-      await purgePastVisualCaches();
-      await self.clients.claim();
-      await postToClients({ type: 'VISUAL_CACHE_INVALIDATED', version: CACHE_VERSION });
-      const stamp = String(CACHE_VERSION).replace(/^.*v/, '');
-      const list = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
-      await Promise.all(list.map((client) => {
-        try {
-          const u = new URL(client.url, self.location.origin);
-          if (u.pathname.indexOf('/admin') === 0) return null;
-          if (u.pathname.indexOf('/desktop-preview') === 0) return null;
-          if (u.searchParams.get('darsw') === stamp) return null;
-          u.searchParams.set('darsw', stamp);
-          if (typeof client.navigate === 'function') return client.navigate(u.href);
-        } catch (e) {}
-        return null;
-      }));
-    } catch (e) {
-      try { await self.clients.claim(); } catch (e2) {}
-    }
-  })());
+  event.waitUntil(
+    caches.keys().then((keys) => Promise.all(
+      keys.filter((key) => key.startsWith('dar-al-tawhid-offline-light-') && key !== CACHE_VERSION)
+        .map((key) => caches.delete(key))
+    )).then(() => self.clients.claim())
+  );
 });
 
 // Wenn Nutzer auf Push-Benachrichtigung klickt → Beitrag öffnen
@@ -592,28 +459,6 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
 
   if (request.method !== 'GET') return;
-  if (isKidsPath(url)) return;
-
-  const ua = String(request.headers.get('User-Agent') || '');
-  // PUBLIC WEBSITE ROOT GATE v2
-  // Normale Browser-Navigation am öffentlichen Root NICHT mit respondWith()
-  // übernehmen. Dadurch geht die Navigation direkt zum Cloudflare-Router und
-  // Safari erhält niemals eine bereits umgeleitete Service-Worker-Response.
-  const nativeAppRequest = /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(ua);
-  const publicRootNavigation =
-    !nativeAppRequest &&
-    url.origin === self.location.origin &&
-    (url.pathname === '/' || url.pathname === '/index.html') &&
-    (request.mode === 'navigate' || request.destination === 'document');
-
-  if (publicRootNavigation) {
-    return;
-  }
-
-  if (/DarAlTawhid-iOS/i.test(ua) && (request.mode === 'navigate' || isAppShellRequest(url) || request.destination === 'document')) {
-    event.respondWith(fetch(request, { cache: 'no-store' }));
-    return;
-  }
 
   // Keine OneSignal-Dateien anfassen.
   if (url.pathname.startsWith('/push/onesignal/')) return;
@@ -677,48 +522,8 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Propheten-Katalog (Index/Suche): Cache-first + Hintergrund-Refresh → Seite öffnet sofort.
-  if (isProphetsCatalogRequest(url)) {
-    event.respondWith(
-      caches.open(CACHE_VERSION).then(async (cache) => {
-        const cached = await cache.match(request);
-        const networkPromise = fetch(request)
-          .then((response) => {
-            if (response && response.ok) {
-              try { cache.put(request, response.clone()); } catch (e) {}
-            }
-            return response;
-          })
-          .catch(() => cached || Response.error());
-        return cached || networkPromise;
-      })
-    );
-    return;
-  }
-
-  // Qurʾān-Rezitation: same-origin MP3s cache-first for offline/learn/prayer.
-  if (url.pathname.startsWith('/quran-audio/') && url.pathname.endsWith('.mp3')) {
-    event.respondWith(
-      caches.open(CACHE_VERSION).then(async (cache) => {
-        const cached = await cache.match(request);
-        if (cached) return cached;
-        try {
-          const response = await fetch(request);
-          if (response && response.ok) {
-            try { cache.put(request, response.clone()); } catch (e) {}
-          }
-          return response;
-        } catch (e) {
-          return cached || Response.error();
-        }
-      })
-    );
-    return;
-  }
-
   // Beitragsdaten und Index: Network-first, damit neue Beiträge nicht blockiert werden.
-  // Propheten-Testprofile: Network-first + Runtime-Cache der geöffneten Dateien.
-  if (isPostDataRequest(url) || isFeedAssetRequest(url) || isProphetsTestDataRequest(url) || isProphetsProfileDataRequest(url) || Date.now() < bypassPostCacheUntil) {
+  if (isPostDataRequest(url) || isFeedAssetRequest(url) || Date.now() < bypassPostCacheUntil) {
     event.respondWith(
       fetch(request, { cache: 'no-store' })
         .then((response) => {
@@ -728,17 +533,6 @@ self.addEventListener('fetch', (event) => {
           }
           return response;
         })
-        .catch(() => caches.match(request))
-    );
-    return;
-  }
-
-  // Styles/Scripts: network-only bevorzugt – alte Optik darf nicht aus Cache gewinnen.
-  // Offline-Fallback nur wenn Netz fehlt; erfolgreiche Antworten werden nicht mehr
-  // als dauerhafte visuelle Quelle zurückgeschrieben.
-  if (request.destination === 'style' || request.destination === 'script' || /\.(css|js)(\?|$)/i.test(url.pathname)) {
-    event.respondWith(
-      fetch(request, { cache: 'no-store' })
         .catch(() => caches.match(request))
     );
     return;
@@ -758,4 +552,3 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-
