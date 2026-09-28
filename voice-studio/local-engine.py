@@ -1258,6 +1258,46 @@ def source_honorific_match(text:str,pos:int,required_key:str=""):
 def source_has_honorific(text:str,pos:int,required_key:str=""):
     return source_honorific_match(text,pos,required_key) is not None
 
+def apply_profile_fixed_phrases(text:str):
+    """Kleine, explizit bestätigte Mehrwort-Phrasen vor Einzelwort-Regeln anwenden.
+
+    Das löst zwei Fälle, die eine Wortbibliothek strukturell nicht sauber kann:
+    eine vollständige arabische Begrüßungsformel und eine gemischtsprachige
+    Markenphrase wie 'DĀR AL TAWḤĪD Kids'. Sichtbarer Text bleibt unverändert;
+    nur der interne Sprechtext wird ersetzt.
+    """
+    value=str(text or "")
+    found=[]
+    cfg=(VOICE_PROFILE.get("pronunciation") or {}).get("fixedPhrases") or []
+    phrases=[]
+    for raw in cfg:
+        item=dict(raw or {})
+        tts=str(item.get("tts_text") or "").strip()
+        if not tts:
+            continue
+        for form in (item.get("forms") or []):
+            form=str(form or "").strip()
+            if form:
+                phrases.append((form,tts,item))
+    phrases.sort(key=lambda x:len(x[0]),reverse=True)
+
+    for form,tts,item in phrases:
+        if form not in value:
+            continue
+        count=value.count(form)
+        value=value.replace(form,tts)
+        found.append({
+            "canonical":form,
+            "string_to_replace":form,
+            "tts_text":tts,
+            "tts_language":str(item.get("tts_language") or "ar"),
+            "tts_strategy":"profile-fixed-phrase-v1",
+            "voice_lock":"PROFILE_PHRASE",
+            "fixed_phrase_id":str(item.get("id") or ""),
+            "fixed_phrase_matches":count,
+        })
+    return value,found
+
 def prepare(text:str):
     pos=0;out=[];found=[]
     while pos<len(text):
@@ -3276,6 +3316,10 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
     if free_mode and not free_pronunciation:
         speak=text
         found=[]
+    elif free_mode and free_pronunciation:
+        phrase_text,phrase_found=apply_profile_fixed_phrases(text)
+        speak,word_found=prepare(phrase_text)
+        found=phrase_found+word_found
     else:
         speak,found=prepare(text)
     if free_mode:
@@ -3294,9 +3338,23 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
     master_forms={
         str(r.get("tts_text",""))
         for r in found
-        if (not free_mode) and r.get("voice_lock")=="MASTER" and r.get("tts_text")
+        if r.get("tts_text") and (
+            (not free_mode and r.get("voice_lock")=="MASTER")
+            or (free_mode and free_pronunciation and r.get("audio_lock_key"))
+        )
     }
-    lock_key_for=(lambda chunk: "" if free_mode else audio_lock_key_for_chunk(chunk))
+    def lock_key_for(chunk):
+        if not free_mode:
+            return audio_lock_key_for_chunk(chunk)
+        if not free_pronunciation:
+            return ""
+        # Im freien Bereich nur bereits bestätigte lokale Audio-Master benutzen.
+        # Neue Locks werden hier niemals angelegt oder bestätigt.
+        key=audio_lock_key_for_chunk(chunk)
+        if not key:
+            return ""
+        path=audio_lock_path(key)
+        return key if path.exists() and path.stat().st_size>44 else ""
 
     set_status(
         render_state="rendering",
