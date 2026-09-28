@@ -5,7 +5,7 @@
 <!-- workers-deploy-stamp:1785515013940 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v539-test";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v539";</script>
 <script>document.documentElement.dataset.appPath=(location.pathname.indexOf("/test/")===0||location.pathname==="/test")?"test":"visitor";</script>
 <script>/* BOOT_AUTONOMOUS_GUARD: früher Watchdog — repariert hängendes „App wird geladen…“ autonom */(function(){var K="dar_boot_autonomous_guard_v1",MAX=3;function stuck(){try{var e=document.getElementById("appView");if(!e)return false;var t=(e.textContent||"").trim();return!t||t==="App wird geladen…"}catch(x){return false}}function soft(){try{if(typeof render==="function"&&stuck())render()}catch(x){}}function hard(){try{var r=sessionStorage.getItem(K),d=r?JSON.parse(r):{},n=Number(d.tries)||0;if(n>=MAX){if(stuck()){var e=document.getElementById("appView");if(e)e.innerHTML='<section class="premium-surface app-recovery-panel"><h2>App-Reparatur</h2><p>Mehrfacher Reparaturversuch. Bitte Browser-Cache leeren oder App neu installieren.</p><button type="button" onclick="location.reload()">Erneut laden</button></section>'}return}sessionStorage.setItem(K,JSON.stringify({tries:n+1,at:Date.now()}));try{localStorage.removeItem("dar_app_version_state_v1");sessionStorage.removeItem("dar_version_stuck_guard_v1");sessionStorage.removeItem("dar_version_update_pending")}catch(x){}if("serviceWorker"in navigator){navigator.serviceWorker.getRegistration("/").then(function(g){g&&g.active&&g.active.postMessage({type:"HARD_REFRESH"})}).catch(function(){})}var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(x){location.reload()}}document.addEventListener("DOMContentLoaded",function(){setTimeout(soft,1800);setTimeout(soft,4000)});window.addEventListener("load",function(){setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},2500)},6500)});setTimeout(function(){if(window.__darAppBootOk||!stuck())return;soft();setTimeout(function(){if(window.__darAppBootOk||!stuck())return;hard()},3000)},11000)})();</script>
 <script>/* QURAN_PROGRESS_HELPERS_GUARD: früh im Head, damit kein Cache-Build abstürzt */window.formatQuranProgressTime=window.formatQuranProgressTime||function(v){const ts=Date.parse(String(v||""));if(!Number.isFinite(ts))return"";return new Date(ts).toLocaleString("de-DE",{hour:"2-digit",minute:"2-digit",day:"2-digit",month:"2-digit"})};window.quranContinueMetaLine=window.quranContinueMetaLine||function(e){if(!e)return"";const p=[`Sūrah ${e.surahName||e.surahNumber}`,`Āyah ${e.ayahNumber}`];if(e.juzNumber)p.push(`Juzʾ ${e.juzNumber}`);return p.join(" · ")};window.quranProgressPreviewText=window.quranProgressPreviewText||function(){return""};window.quranSurahProgressPercent=window.quranSurahProgressPercent||function(){return 0};</script>
@@ -17505,11 +17505,11 @@ html[data-theme] #bottomNav.bottom-nav{
 </div>
 <div id="appChromeDock" class="app-chrome-dock" data-nav-dock="bottom">
 <nav id="bottomNav" class="bottom-nav" aria-label="Hauptnavigation">
-  <button class="bottom-nav-btn" type="button" data-bottom-nav="home" aria-label="Startseite"><span class="nav-icon" aria-hidden="true">⌂</span><span>Start</span></button>
-  <button class="bottom-nav-btn" type="button" data-bottom-nav="ilm" aria-label="ʿIlm"><span class="nav-icon nav-icon--emoji" aria-hidden="true">📚</span><span>ʿIlm</span></button>
-  <button class="bottom-nav-btn" type="button" data-bottom-nav="feed" aria-label="Feed"><span class="nav-icon" aria-hidden="true">✦</span><span>Feed</span></button>
-  <button class="bottom-nav-btn" type="button" data-bottom-nav="quran" aria-label="Qurʾān öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon nav-icon--emoji" aria-hidden="true">📖</span><span>Qurʾān</span></button>
-  <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Mehr öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon" aria-hidden="true">☰</span><span>Mehr</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="home" aria-label="Startseite"><span class="nav-icon" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/home.png?v=1094" alt="" decoding="sync"></span><span>Start</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="ilm" aria-label="ʿIlm"><span class="nav-icon" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/ilm.png?v=1094" alt="" decoding="sync"></span><span>ʿIlm</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="recent" aria-label="Beiträge"><span class="nav-icon" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/posts.png?v=1094" alt="" decoding="sync"></span><span>Beiträge</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="quran" aria-label="Qurʾān öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/quran.png?v=1094" alt="" decoding="sync"></span><span>Qurʾān</span></button>
+  <button class="bottom-nav-btn" type="button" data-bottom-nav="more" aria-label="Mehr öffnen. Gedrückt halten für Schnellzugriff."><span class="nav-icon" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/more.png?v=1094" alt="" decoding="sync"></span><span>Mehr</span></button>
 </nav>
 </div>
 <script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock"),q=document.getElementById("quickAccessLayer");if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);if(q&&q.parentElement!==document.body)document.body.appendChild(q);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
@@ -22233,14 +22233,14 @@ function renderHomePremiumQuickAccess(){
 function renderHomeQuranHero(){
   const prog=getPreferredQuranProgress();
   if(!prog){
-    return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__title">Qurʾān weiterlesen</span></div></button>`;
+    return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><span class="home-v380-quran-hero__mark" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/quran.png?v=1094" alt="" decoding="async"></span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__title">Qurʾān weiterlesen</span></div></button>`;
   }
   const ay=Math.max(1,Number(prog.ayahNumber)||1);
   const target=`${esc(prog.surahNumber)}:${esc(ay)}`;
   const meta=quranContinueMetaLine(prog);
   const when=formatQuranProgressTime(prog.updatedAt);
   const aria=`Qurʾān weiterlesen${meta?`. ${meta}`:""}${when?`. Zuletzt ${when}`:""}`;
-  return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-quran-continue="${target}" aria-label="${esc(aria)}"><span class="home-v380-quran-hero__mark" aria-hidden="true">📖</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__title">Qurʾān weiterlesen</span></div><div class="home-v380-quran-hero__resume">${meta?`<span class="home-v380-quran-hero__meta">${esc(meta)}</span>`:""}${when?`<span class="home-v380-quran-hero__when">Zuletzt ${esc(when)}</span>`:""}</div></button>`;
+  return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-quran-continue="${target}" aria-label="${esc(aria)}"><span class="home-v380-quran-hero__mark" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/quran.png?v=1094" alt="" decoding="async"></span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__title">Qurʾān weiterlesen</span></div><div class="home-v380-quran-hero__resume">${meta?`<span class="home-v380-quran-hero__meta">${esc(meta)}</span>`:""}${when?`<span class="home-v380-quran-hero__when">Zuletzt ${esc(when)}</span>`:""}</div></button>`;
 }
 function renderHomeDailyDuaRow(){
   const d=dailyDua();
@@ -22712,7 +22712,7 @@ function hardRefreshApp(){
     window.location.assign(target);
   })();
 }
-const APP_BUILD_ID="app-shell-v539-test";
+const APP_BUILD_ID="app-shell-v539";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -24980,5 +24980,15 @@ body.is-home-route .home-v380-lib-card--noble p{
   }
 }
 
+
+body.is-home-route #bottomNav .nav-icon{
+  width:34px!important;height:34px!important;display:grid!important;place-items:center!important;overflow:hidden!important;
+}
+body.is-home-route #bottomNav .nav-icon img.dar3d-icon{
+  width:100%!important;height:100%!important;object-fit:contain!important;filter:drop-shadow(0 2px 5px rgba(0,0,0,.22))!important;
+}
+body.is-home-route .home-v380-quran-hero__mark img.dar3d-icon{
+  width:100%!important;height:100%!important;object-fit:contain!important;
+}
 </style>
 </html>
