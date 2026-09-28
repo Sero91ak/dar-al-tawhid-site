@@ -268,6 +268,19 @@ export async function verifyKidsAlphabetAudioSlot(env, input, helpers) {
   slot.qaAt = new Date().toISOString();
   slot.sourceVoice = "authorized-owner-voice";
   slot.source = "serhat-voice-studio-human-approved";
+  slot.sourceType = "owner-voice-generated-human-approved";
+  slot.sourceProvider = "DĀR Voice Studio";
+  slot.sourceSpeaker = "Serhat Abu Malik";
+  slot.sourceLanguage = "Arabic";
+  slot.voiceProfileId = "serhat-owner-voice-2026";
+  slot.sameVoiceConfirmed = true;
+  slot.canonicalVoice = letterId === "alif" && kind === "name";
+  slot.verificationBasis = "Locally generated with the authorized Serhat voice in DĀR Voice Studio; owner listened to the complete candidate and explicitly approved pronunciation and voice before publication.";
+  delete slot.sourcePage;
+  delete slot.sourceFile;
+  delete slot.license;
+  delete slot.licenseUrl;
+  delete slot.attribution;
 
   state.manifest.updatedAt = new Date().toISOString().slice(0, 10);
   const saved = await helpers.githubPut(
