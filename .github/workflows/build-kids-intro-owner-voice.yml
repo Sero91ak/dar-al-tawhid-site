@@ -1,0 +1,71 @@
+name: Build Kids Intro Owner Voice
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-kids-intro-owner-voice.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build-voice:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Wait for DĀR Voice cloud engine
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 18); do
+            code="$(curl -L -sS -o /tmp/voice-health.json -w '%{http_code}' https://dar-al-tawhid.de/voice-studio/api/health || true)"
+            cat /tmp/voice-health.json || true
+            if [ "$code" = "200" ] && grep -q '"ok":true' /tmp/voice-health.json; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "Voice health did not become ready" >&2
+          exit 1
+
+      - name: Generate warm owner-voice Kids greeting
+        run: |
+          set -euo pipefail
+          mkdir -p test/kids/assets/kids-cinema
+          cat >/tmp/kids-voice.json <<'JSON'
+          {
+            "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. Willkommen bei DĀR AL TAWḤĪD Kids. Los geht’s!",
+            "prepared": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. Willkommen bei دار التوحيد Kids. Los geht’s!",
+            "profile": "kids_intro"
+          }
+          JSON
+          curl -L --fail --retry 5 --retry-delay 3             -H 'Origin: https://dar-al-tawhid.de'             -H 'Referer: https://dar-al-tawhid.de/voice-studio/'             -H 'Content-Type: application/json'             --data-binary @/tmp/kids-voice.json             https://dar-al-tawhid.de/voice-studio/api/generate             -o test/kids/assets/kids-cinema/intro-voice-serhat.mp3
+          test -s test/kids/assets/kids-cinema/intro-voice-serhat.mp3
+          bytes="$(wc -c < test/kids/assets/kids-cinema/intro-voice-serhat.mp3)"
+          if [ "$bytes" -lt 10000 ]; then
+            echo "Voice file too small: $bytes" >&2
+            exit 1
+          fi
+
+      - name: Inspect greeting
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg >/dev/null
+          ffprobe -v error             -show_entries format=duration,size             -of default=nw=1             test/kids/assets/kids-cinema/intro-voice-serhat.mp3
+
+      - name: Commit owner voice
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add test/kids/assets/kids-cinema/intro-voice-serhat.mp3
+          if git diff --cached --quiet; then
+            echo "Owner voice already current."
+            exit 0
+          fi
+          git commit -m "Kids V0.66: add warm owner-voice cinema greeting"
+          git push origin HEAD:main
