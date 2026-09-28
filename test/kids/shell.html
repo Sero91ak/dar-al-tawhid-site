@@ -2374,27 +2374,27 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .app[data-age="4–5"] #alphabetModal .lesson-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
-/* KIDS V0.78 · VIDEO ONLY — no generated overlay */
-.kids-launch-v78{
+/* KIDS V0.79 · VIDEO ONLY · iOS-safe playback */
+.kids-launch-v79{
   position:fixed;inset:0;z-index:1000;overflow:hidden;
   background:#000;opacity:1;pointer-events:auto;
 }
-.k78-video{
+.k79-video{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center center;
   display:block;background:#000;
 }
-.kids-launch-v78.is-ending{animation:k78FadeOut .28s ease forwards}
-@keyframes k78FadeOut{to{opacity:0;visibility:hidden}}
+.kids-launch-v79.is-ending{animation:k79FadeOut .28s ease forwards}
+@keyframes k79FadeOut{to{opacity:0;visibility:hidden}}
 
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
 
 </head>
 <body>
-<div class="kids-launch-v78" data-kids-launch="v78" aria-hidden="true">
-  <video id="kidsCinemaV78" class="k78-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture>
-    <source src="/test/kids/assets/kids-cinema/intro-v74.mp4?v=78" type="video/mp4">
+<div class="kids-launch-v79" data-kids-launch="v79" aria-hidden="true">
+  <video id="kidsCinemaV79" class="k79-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture>
+    <source src="/test/kids/assets/kids-cinema/intro-v74.mp4?v=79" type="video/mp4">
   </video>
 </div>
 <div id="kidsUpdateLayer" class="kids-update-layer">
@@ -2463,7 +2463,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.78</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.79</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2942,7 +2942,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab78";
+const KIDS_BUILD_ID="kids-shell-v12-tab79";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6393,14 +6393,20 @@ fetchCatalog();
 </script>
 <script>
 (function(){
-  var launch=document.querySelector(".kids-launch-v78");
-  var video=document.getElementById("kidsCinemaV78");
+  var launch=document.querySelector(".kids-launch-v79");
+  var video=document.getElementById("kidsCinemaV79");
   if(!launch||!video)return;
 
   var removed=false;
+  var started=false;
+  var startupTimer=0;
+  var maxTimer=0;
+
   function removeLaunch(){
     if(removed)return;
     removed=true;
+    if(startupTimer)clearTimeout(startupTimer);
+    if(maxTimer)clearTimeout(maxTimer);
     launch.classList.add("is-ending");
     window.setTimeout(function(){
       try{video.pause()}catch(e){}
@@ -6408,22 +6414,62 @@ fetchCatalog();
     },300);
   }
 
-  video.muted=true;
-  video.defaultMuted=true;
-  video.setAttribute("muted","");
-  video.setAttribute("playsinline","");
-  video.addEventListener("ended",removeLaunch,{once:true});
-  video.addEventListener("error",function(){window.setTimeout(removeLaunch,350)},{once:true});
-
-  function play(){
+  function tryPlay(){
+    if(removed)return;
+    video.muted=true;
+    video.defaultMuted=true;
+    video.volume=0;
+    video.setAttribute("muted","");
+    video.setAttribute("playsinline","");
     var p;
     try{p=video.play()}catch(e){return}
     if(p&&typeof p.catch==="function"){p.catch(function(){})}
   }
 
-  video.addEventListener("canplay",play,{once:true});
-  play();
-  window.setTimeout(play,500);
+  function onPlaying(){
+    if(started)return;
+    started=true;
+    if(startupTimer)clearTimeout(startupTimer);
+    var remaining=9000;
+    if(Number.isFinite(video.duration)&&video.duration>0){
+      remaining=Math.min(12000,Math.max(1500,(video.duration-video.currentTime)*1000+900));
+    }
+    maxTimer=setTimeout(removeLaunch,remaining);
+  }
+
+  video.muted=true;
+  video.defaultMuted=true;
+  video.volume=0;
+  video.autoplay=true;
+  video.playsInline=true;
+  video.preload="auto";
+
+  video.addEventListener("loadedmetadata",function(){
+    try{video.currentTime=0}catch(e){}
+    tryPlay();
+  },{once:true});
+  video.addEventListener("loadeddata",tryPlay,{once:true});
+  video.addEventListener("canplay",tryPlay,{once:true});
+  video.addEventListener("playing",onPlaying,{once:true});
+  video.addEventListener("ended",removeLaunch,{once:true});
+  video.addEventListener("error",removeLaunch,{once:true});
+
+  document.addEventListener("visibilitychange",function(){
+    if(!document.hidden&&!started)tryPlay();
+  });
+  document.addEventListener("pointerdown",function(){
+    if(!started)tryPlay();
+  },{once:true,capture:true});
+
+  try{video.load()}catch(e){}
+  tryPlay();
+  setTimeout(tryPlay,250);
+  setTimeout(tryPlay,750);
+  setTimeout(tryPlay,1400);
+
+  startupTimer=setTimeout(function(){
+    if(!started)removeLaunch();
+  },3200);
 })();
 </script>
 
