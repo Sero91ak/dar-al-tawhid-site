@@ -26,10 +26,18 @@ ROOT="$TMP/src/dar-al-tawhid-site-$BRANCH"
 test -f "$ROOT/voice-studio/local-engine.py"
 test -f "$ROOT/voice-studio/speech_flow.py"
 test -f "$ROOT/voice-studio/index.html"
+test -f "$ROOT/voice-studio/free-voice.html"
 test -f "$ROOT/data/pronunciation/voice-production-profile.json"
 
 mkdir -p "$TARGET" "$LAB_HOME"
 cp -R "$ROOT/voice-studio/." "$TARGET/"
+
+# Die Engine liefert /studio/ aus studio.html. Im Repository heißt die UI index.html.
+# Deshalb die aktuelle Lab-Oberfläche bei jedem Install explizit dorthin spiegeln,
+# damit kein altes studio.html aus einem früheren Test stehen bleibt.
+cp "$ROOT/voice-studio/index.html" "$TARGET/studio.html"
+cp "$ROOT/voice-studio/free-voice.html" "$TARGET/free-voice.html"
+
 cp "$ROOT/data/pronunciation/"*.json "$TARGET/" 2>/dev/null || true
 
 # Nur Kopien bestätigter Lern-/Lock-Audios übernehmen. Produktion bleibt unangetastet.
@@ -88,5 +96,6 @@ if [ "$READY" != "1" ]; then
 fi
 
 echo "Flow Lab bereit: http://127.0.0.1:$PORT/studio/"
+echo "Freie Stimme: http://127.0.0.1:$PORT/studio/free/"
 echo "Produktive App/Port 8787 blieb unverändert."
-open "http://127.0.0.1:$PORT/studio/"
+open "http://127.0.0.1:$PORT/studio/free/"
