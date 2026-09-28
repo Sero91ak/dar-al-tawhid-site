@@ -1,0 +1,161 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2746-2770",
+  "seriesBoundary": [
+    "2651-2750",
+    "2751-2850"
+  ],
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "HAD-2746–2770 führt Ṣaḥīḥ Muslim 83–92 fort, schließt 2651–2750 bei HAD-2750 und eröffnet 2751–2850. Muslim 88a/88b wurden zusammengeführt; Muslim 89 ist bereits in HAD-2671–2678 erfasst; Muslim 90b und 91c sind Varianten/Wiederholungen. Früher direkter al-Māzirī-Šarḥ wurde wo greifbar priorisiert, sonst Qāḍī ʿIyāḍ mit exakter Seiten-/Kapitelzuordnung; keine Seite wurde geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "dedupeDecisions": [
+    "Muslim 88b merged with Muslim 88a",
+    "Muslim 89 already represented by HAD-2671–2678",
+    "Muslim 90b variant not duplicated",
+    "Muslim 91c repeats Muslim 91a"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2746",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2747",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2748",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2749",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2750",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2751",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2752",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2753",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2754",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2755",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2756",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2757",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2758",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2759",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2760",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2761",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2762",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2763",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2764",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2765",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2766",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2767",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2768",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2769",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2770",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-next-priority-direct-muslim-sharh"
+    }
+  ]
+}

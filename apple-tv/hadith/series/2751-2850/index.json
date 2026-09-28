@@ -1,0 +1,44 @@
+{
+  "series": "2751-2850",
+  "status": "incremental-active",
+  "count": 20,
+  "firstId": "HAD-2751",
+  "lastId": "HAD-2770",
+  "plannedLastId": "HAD-2850",
+  "contentTypes": {
+    "hadith": 20,
+    "athar": 0
+  },
+  "screensaver": {
+    "included": true,
+    "rotation": "shuffleBag",
+    "showEveryItemBeforeRepeat": true,
+    "requireVerifiedSharh": true
+  },
+  "completionRule": {
+    "sharhRequiredForCompletion": true,
+    "allIndexedRecordsSharhStatus": "verified"
+  },
+  "files": [
+    "HAD-2751.json",
+    "HAD-2752.json",
+    "HAD-2753.json",
+    "HAD-2754.json",
+    "HAD-2755.json",
+    "HAD-2756.json",
+    "HAD-2757.json",
+    "HAD-2758.json",
+    "HAD-2759.json",
+    "HAD-2760.json",
+    "HAD-2761.json",
+    "HAD-2762.json",
+    "HAD-2763.json",
+    "HAD-2764.json",
+    "HAD-2765.json",
+    "HAD-2766.json",
+    "HAD-2767.json",
+    "HAD-2768.json",
+    "HAD-2769.json",
+    "HAD-2770.json"
+  ]
+}
