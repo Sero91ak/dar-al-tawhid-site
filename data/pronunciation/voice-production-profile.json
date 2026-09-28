@@ -117,11 +117,11 @@
           "Wa Raḥmatullāhi",
           "wa raḥmatullāhi"
         ],
-        "tts_text": "وَرَحْمَةُ اللَّهِ",
+        "tts_text": "وَرَحْمَتُ اللَّهِ",
         "tts_language": "ar",
         "scope": "free_voice_pronunciation_library",
-        "flowRepairTriggerMs": 180,
-        "flowRepairTargetMs": 70
+        "flowRepairTriggerMs": 150,
+        "flowRepairTargetMs": 55
       },
       {
         "id": "salam_part_3",
@@ -143,11 +143,11 @@
           "Dār al-Tawḥīd Kids",
           "Dar al-Tawhid Kids"
         ],
-        "tts_text": "دَارُ التَّوْحِيد كِدْز",
+        "tts_text": "دَارُ التَّوْحِيد كِتْس",
         "tts_language": "ar",
         "scope": "free_voice_pronunciation_library",
-        "flowRepairTriggerMs": 110,
-        "flowRepairTargetMs": 45,
+        "flowRepairTriggerMs": 90,
+        "flowRepairTargetMs": 35,
         "flowRepairMaxMs": 1000
       },
       {
@@ -162,6 +162,18 @@
         "scope": "free_voice_pronunciation_library",
         "flowRepairTriggerMs": 180,
         "flowRepairTargetMs": 70
+      },
+      {
+        "id": "salam_tail_rahmatullahi_barakatuh",
+        "forms": [
+          "Raḥmatullāhi wa Barakātuh",
+          "raḥmatullāhi wa barakātuh"
+        ],
+        "tts_text": "رَحْمَتُ اللَّهِ وَبَرَكَاتُهُ",
+        "tts_language": "ar",
+        "scope": "free_voice_pronunciation_library",
+        "flowRepairTriggerMs": 150,
+        "flowRepairTargetMs": 55
       }
     ],
     "freeVoicePhraseRenderPlans": [
