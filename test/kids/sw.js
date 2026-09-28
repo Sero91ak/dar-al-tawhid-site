@@ -1,16 +1,9 @@
-const CACHE_NAME="dar-al-tawhid-kids-v69";
+const CACHE_NAME="dar-al-tawhid-kids-v70";
 const PRECACHE=[
   "/test/kids/index.html",
   "/test/kids/start.html",
   "/test/kids/shell.html",
   "/test/kids/manifest.webmanifest",
-  "/test/kids/assets/kids-cinema/runtime/scene-1.webp",
-  "/test/kids/assets/kids-cinema/runtime/scene-2.webp",
-  "/test/kids/assets/kids-cinema/runtime/scene-3.webp",
-  "/test/kids/assets/kids-cinema/fallback/scene-1.jpg",
-  "/test/kids/assets/kids-cinema/fallback/scene-2.jpg",
-  "/test/kids/assets/kids-cinema/fallback/scene-3.jpg",
-  "/test/kids/assets/kids-cinema/poster-v65.jpg",
   "/test/kids/assets/kids-art/quran-reise-v11-clean.png",
   "/test/kids/assets/kids-art/hero-entdecke.png",
   "/test/kids/assets/kids-art/home-journey-v11-clean2.jpg",
