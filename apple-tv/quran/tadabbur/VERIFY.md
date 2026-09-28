@@ -22,6 +22,7 @@ Nach jeder Änderung an einem dieser Bereiche muss der Prüfer laufen:
 
 - `catalog.json`
 - `entries-index.json`
+- `coverage.json`
 - `entries.json`
 - `entries-batch-*.json`
 
@@ -43,6 +44,9 @@ Der Prüfer kontrolliert:
 - Jede Datei hat eine gültige `entries`-Liste.
 - Die Anzahl der Einträge pro Datei stimmt mit dem Index überein.
 - Jede Referenz hat das Format `Sūrah:Āyah`, z. B. `99:5` oder `114:6`.
+- Jede Referenz liegt innerhalb der echten Qurʾān-Grenzen aus `coverage.json`.
+- `coverage.verseCounts` enthält exakt 114 Sūren.
+- Die Summe aus `coverage.verseCounts` beträgt exakt 6236 Verse.
 - Keine Referenz ist doppelt.
 - Pflichtfelder sind vorhanden und nicht leer:
   - `reference`
@@ -62,9 +66,10 @@ TADABBUR VERIFY OK
 entries: 5102
 files: ...
 last_reference: 114:6
+coverage_verses: 6236
 ```
 
-Die genaue Dateianzahl kann steigen, wenn später weitere Batch-Dateien ergänzt werden. Entscheidend ist, dass Katalog, Index und tatsächliche Dateien übereinstimmen.
+Die genaue Dateianzahl kann steigen, wenn später weitere Batch-Dateien ergänzt werden. Entscheidend ist, dass Katalog, Index, Coverage und tatsächliche Dateien übereinstimmen.
 
 ## Xcode-Regel
 
@@ -76,6 +81,7 @@ Die App lädt:
 apple-tv/catalog.json
 quran/tadabbur/catalog.json
 quran/tadabbur/entries-index.json
+coverage.json
 alle registrierten Batch-Dateien
 ```
 
@@ -94,5 +100,6 @@ Ein neuer Tadabbur-Batch darf erst registriert werden, wenn:
 1. die Quellen/Zuordnungen geprüft sind,
 2. `catalog.json` aktualisiert ist,
 3. `entries-index.json` aktualisiert ist,
-4. der Prüfer erfolgreich läuft,
-5. die App weiterhin bei fehlendem Eintrag den festen Fallback zeigt.
+4. `coverage.json` weiterhin 114 Sūren und 6236 Verse bestätigt,
+5. der Prüfer erfolgreich läuft,
+6. die App weiterhin bei fehlendem Eintrag den festen Fallback zeigt.
