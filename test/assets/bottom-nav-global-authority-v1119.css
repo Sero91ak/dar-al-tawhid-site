@@ -1,0 +1,253 @@
+/* DĀR AL TAWḤĪD · GLOBAL BOTTOM NAV AUTHORITY v1119
+   Eine einzige Tab-Leiste für die gesamte App.
+   Form/Größe/Material bleiben bei jedem Routenwechsel identisch.
+   Nur der aktive/gedrückte Tab erhält die ovale Innenkapsel. */
+
+:root,
+html[data-theme]{
+  --bottom-tab-capsule-w:70px;
+  --bottom-tab-capsule-h:48px;
+  --bottom-tab-capsule-radius:999px;
+}
+
+/* Einheitlicher Platz unter dem Inhalt auf ALLEN normalen App-Routen. */
+html[data-theme] body.has-bottom-nav{
+  padding-bottom:calc(var(--dar-nav-height) + env(safe-area-inset-bottom,0px) + 22px)!important;
+}
+
+/* Globale Dock-Geometrie — identisch mit der gewünschten Startseiten-Leiste. */
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  top:auto!important;
+  bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+
+  width:var(--dar-nav-width)!important;
+  max-width:min(900px,calc(100vw - 2 * var(--dar-nav-gutter)))!important;
+  height:var(--dar-nav-height)!important;
+  min-height:var(--dar-nav-height)!important;
+  max-height:var(--dar-nav-height)!important;
+  padding:var(--dar-nav-pad-y) var(--dar-nav-pad-x)!important;
+
+  flex-direction:row!important;
+  align-items:stretch!important;
+  justify-content:space-around!important;
+  gap:0!important;
+
+  border:1px solid var(--bottom-nav-border)!important;
+  border-radius:var(--dar-nav-radius)!important;
+  background:var(--bottom-nav-bg-glass)!important;
+  background-image:none!important;
+  box-shadow:
+    var(--bottom-nav-shadow),
+    inset 0 1px 0 var(--bottom-nav-highlight)!important;
+  -webkit-backdrop-filter:blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation,1))!important;
+  backdrop-filter:blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation,1))!important;
+
+  transform:none!important;
+  -webkit-transform:none!important;
+  contain:none!important;
+  isolation:auto!important;
+  overflow:hidden!important;
+
+  transition:
+    width .5s cubic-bezier(.22,1,.36,1),
+    max-width .5s cubic-bezier(.22,1,.36,1),
+    height .5s cubic-bezier(.22,1,.36,1),
+    min-height .5s cubic-bezier(.22,1,.36,1),
+    padding .5s cubic-bezier(.22,1,.36,1),
+    border-radius .5s cubic-bezier(.22,1,.36,1),
+    bottom .5s cubic-bezier(.22,1,.36,1)!important;
+}
+
+/* Jeder Tab hat überall exakt dieselbe Touch-/Icon-/Text-Geometrie. */
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn{
+  position:relative!important;
+  z-index:1!important;
+  flex:1!important;
+  min-width:0!important;
+  max-width:88px!important;
+  min-height:calc(var(--dar-nav-height) - 10px)!important;
+  height:auto!important;
+  margin:0!important;
+  padding:clamp(4px,.5vh,7px) clamp(2px,.4vw,6px)!important;
+  gap:2px!important;
+
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+
+  border:0!important;
+  border-radius:12px!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  color:var(--bottom-tab-inactive-text)!important;
+  text-shadow:none!important;
+  font-size:var(--dar-nav-label)!important;
+  line-height:1!important;
+  filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+/* Icons überall gleich groß — keine Route darf sie vergrößern/verkleinern. */
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+  position:relative!important;
+  z-index:1!important;
+  box-sizing:border-box!important;
+  width:36px!important;
+  height:36px!important;
+  min-width:36px!important;
+  min-height:36px!important;
+  padding:2px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+  color:var(--bottom-tab-inactive-icon)!important;
+  transform:none!important;
+  filter:none!important;
+}
+
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  transform:none!important;
+  filter:none!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon){
+  position:relative!important;
+  z-index:1!important;
+  color:inherit!important;
+}
+
+/* Basis der ovalen Innenkapsel: unsichtbar, bis Tab aktiv/gedrückt ist. */
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn::before,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:var(--bottom-tab-capsule-w)!important;
+  min-width:0!important;
+  max-width:calc(100% - 10px)!important;
+  height:var(--bottom-tab-capsule-h)!important;
+  max-height:calc(100% - 6px)!important;
+  border-radius:var(--bottom-tab-capsule-radius)!important;
+  transform:translate(-50%,-50%) scale(.98)!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  z-index:0!important;
+
+  background:var(--bottom-tab-active-bg)!important;
+  border:1px solid var(--bottom-tab-active-border)!important;
+  box-shadow:
+    0 4px 12px var(--bottom-tab-active-shadow),
+    inset 0 1px 0 var(--bottom-tab-active-highlight)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+  backdrop-filter:blur(10px)!important;
+
+  transition:
+    opacity 120ms linear,
+    transform 120ms cubic-bezier(.22,.84,.32,1)!important;
+}
+
+/* Aktiv = dauerhaft ovale Markierung auf genau dem aktuellen Bereich. */
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:is(.active,.is-active,[aria-current="page"]),
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(.active,.is-active,[aria-current="page"]){
+  border:0!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  color:var(--bottom-tab-active-text)!important;
+  filter:none!important;
+  transform:none!important;
+}
+
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:is(.active,.is-active,[aria-current="page"])::before,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(.active,.is-active,[aria-current="page"])::before{
+  opacity:1!important;
+  transform:translate(-50%,-50%) scale(1)!important;
+}
+
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:is(.active,.is-active,[aria-current="page"]) .nav-icon,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(.active,.is-active,[aria-current="page"]) .nav-icon{
+  color:var(--bottom-tab-active-icon)!important;
+  transform:none!important;
+  filter:none!important;
+}
+
+/* Beim Antippen sofort ovale Rückmeldung, noch bevor der Routenwechsel fertig ist. */
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:is(:active,.is-pressed)::before,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(:active,.is-pressed)::before{
+  opacity:.88!important;
+  transform:translate(-50%,-50%) scale(.985)!important;
+}
+
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn:is(:active,.is-pressed),
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(:active,.is-pressed){
+  color:var(--bottom-tab-active-text)!important;
+  transform:none!important;
+  filter:none!important;
+}
+
+/* Alter gleitender Pill-Indikator bleibt aus — nur der konkrete Tab ist markiert. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-pill{
+  display:none!important;
+}
+
+/* Wichtige vorhandene Sonderfälle behalten ihre Funktion. */
+html[data-theme] body.is-post-route #bottomNav.bottom-nav.post-nav-hidden{
+  transform:translateY(120%)!important;
+  -webkit-transform:translateY(120%)!important;
+}
+
+html.adaptive-keyboard-open[data-theme] body.has-bottom-nav #bottomNav.bottom-nav,
+html.adaptive-keyboard-open[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav{
+  bottom:max(8px,calc(var(--layout-vv-offset-top,0px) + 8px))!important;
+}
+
+@media(max-width:390px){
+  :root,
+  html[data-theme]{
+    --bottom-tab-capsule-w:68px;
+    --bottom-tab-capsule-h:46px;
+  }
+
+  html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    min-height:34px!important;
+  }
+}
+
+@media(min-width:768px){
+  :root,
+  html[data-theme]{
+    --bottom-tab-capsule-w:62px;
+    --bottom-tab-capsule-h:44px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn,
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before{
+    transition-duration:.01ms!important;
+  }
+}
