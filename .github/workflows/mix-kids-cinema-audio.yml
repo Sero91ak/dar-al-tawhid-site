@@ -1,0 +1,46 @@
+name: Mix Kids Cinema Audio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/mix-kids-cinema-audio.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  mix-audio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Download voice and cinematic sound
+        env:
+          VOICE_URL: "https://dnznrvs05pmza.cloudfront.net/text_to_speech/9b567740-b9ef-4d8c-8bcb-dee04b899e71/D_R_AL_TAW__D_Kids_Intro_Kurz.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMWNmZTBmZWJhYjBmYzg0NCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDcwNjY2N30.P_qopuo5woF3AWNvRpIxcEj7w4l2xVN9eau2g0BVlvg"
+          SFX_URL: "https://dnznrvs05pmza.cloudfront.net/audio_sfx/6ac7d9bf-683f-46ca-8bf2-c4387b327b5a/D_R_AL_TAW__D_Kids_Intro_Cinematic_SFX.mp3?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzNhZWY1NmEzZTc3ZDI1YSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDY4MjczMH0.qxn1w1w8lq4KOI7L6jyY9k5foX9TNQYJgpGNKE5XTdY"
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 --retry-delay 2 "$VOICE_URL" -o /tmp/kids-voice.mp3
+          curl -L --fail --retry 3 --retry-delay 2 "$SFX_URL" -o /tmp/kids-sfx.mp3
+          test -s /tmp/kids-voice.mp3
+          test -s /tmp/kids-sfx.mp3
+      - name: Mix final cinema master
+        run: |
+          set -euo pipefail
+          ffmpeg -hide_banner -y             -i test/kids/assets/kids-cinema/intro-v1.mp4             -i /tmp/kids-voice.mp3             -i /tmp/kids-sfx.mp3             -filter_complex "[1:a]volume=1.0,adelay=220|220[voice];[2:a]volume=0.16[sfx];[voice][sfx]amix=inputs=2:duration=longest:dropout_transition=0,alimiter=limit=0.93,apad=pad_dur=1.0[mix]"             -map 0:v:0 -map "[mix]"             -c:v copy -c:a aac -b:a 192k -t 9.3 -movflags +faststart             test/kids/assets/kids-cinema/intro-final.mp4
+          test -s test/kids/assets/kids-cinema/intro-final.mp4
+      - name: Commit final master
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add test/kids/assets/kids-cinema/intro-final.mp4
+          if git diff --cached --quiet; then
+            echo "Final cinema master already current."
+            exit 0
+          fi
+          git commit -m "Kids: add final cinema intro with voice and sound"
+          git push origin HEAD:main
