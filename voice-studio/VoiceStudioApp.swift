@@ -19,7 +19,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.19"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.20"
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -29,7 +29,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.19"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.20"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
         config.userContentController.add(self, name: "darCompanion")
