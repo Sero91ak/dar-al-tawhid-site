@@ -1338,8 +1338,19 @@ def apply_profile_fixed_phrases(text:str):
                 phrases.append((form,tts,item))
     phrases.sort(key=lambda x:len(x[0]),reverse=True)
 
+    learned_terms=[
+        str((rule or {}).get("string_to_replace") or "").strip()
+        for rule in ((USER_OVERRIDE_DATA or {}).get("rules") or [])
+        if str((rule or {}).get("string_to_replace") or "").strip()
+    ]
+
     for form,tts,item in phrases:
         if form not in value:
+            continue
+        # Eine ausdrücklich gelernte Auswahl hat immer Vorrang – auch dann,
+        # wenn ihre Sprechform zufällig gleich geschrieben ist. So kann z. B.
+        # "Kids" das eingebaute DĀR-...-Kids-Preset gezielt übersteuern.
+        if any(term and term in form and term in value for term in learned_terms):
             continue
         count=value.count(form)
         value=value.replace(form,tts)
