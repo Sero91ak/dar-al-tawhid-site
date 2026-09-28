@@ -1,6 +1,6 @@
 {
-  "buildId": "kids-shell-v12-tab70",
-  "label": "KIDS · V0.70",
-  "releasedAt": "2026-09-28T10:50:00.000Z",
-  "note": "Neuer Startkern von Null: leichte, nicht blockierende Begrüßungsanimation nur mit opacity/transform. Keine Bilder, kein Blur, kein Audio, keine Start-Sperre. Alte Cinema-Assets aus dem PWA-Precache entfernt."
+  "buildId": "kids-shell-v12-tab71",
+  "label": "KIDS · V0.71",
+  "releasedAt": "2026-09-28T11:03:00.000Z",
+  "note": "Leichte Qurʾān-Begrüßungsanimation: SVG-Buch, einzelne arabische Buchstaben steigen auf und fallen weich aus, danach DĀR AL TAWḤĪD KIDS. Nur transform/opacity; keine Cinema-Bilder, kein Video, kein Blur. Audio ist optional/non-blocking, nicht im Precache und wird bei iOS-Autoplay-Sperre per kleinem Begrüßungsbutton freigeschaltet."
 }
