@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 970;
+    var PLAYER_BUILD = 972;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -87,7 +87,7 @@
     playing: false, sessionActive: false, duration: 0, current: 0, resumeAt: 0,
     loading: true, error: "", layer: 0, textScale: 7, volume: 1,
     layers: { ar: true, de: true, lat: false, tad: false, taf: false },
-    learnMode: false, learnLoop: true, learnStay: true, learnRate: 1,
+    learnMode: false, learnLoop: false, learnStay: false, learnRate: 1,
     playerMode: "none"
   };
   var sleepUntil = 0;
@@ -257,6 +257,7 @@
   }
 
   var FALLBACK_QARI = "alafasy";
+  var AYAH_COUNTS = [7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,28,20,56,40,31,50,40,46,42,29,19,36,25,22,17,19,26,30,20,15,21,11,8,8,19,5,8,8,11,11,8,3,9,5,4,7,3,6,3,5,4,5,6];
   var availCache = Object.create(null);
   function listReciters() {
     var by = Object.create(null);
@@ -317,7 +318,13 @@
     if (found) return found;
     return verses[id - 1] || null;
   }
-  function totalAyat() { return (meta && meta.total_verses) || verses.length || 1; }
+  function totalAyat() {
+    var hard = ayahCountHard(state.surah);
+    var fromMeta = meta && Number(meta.total_verses);
+    if (fromMeta > 0) return fromMeta;
+    if (verses && verses.length > 1) return verses.length;
+    return hard;
+  }
   function qlog(tag, data) {
     try {
       if (data !== undefined) console.log(tag, data);
@@ -595,13 +602,17 @@
     bindAudioListeners(a);
     return a;
   }
+  function ayahCountHard(surah) {
+    var i = Number(surah) - 1;
+    if (i >= 0 && i < AYAH_COUNTS.length) return AYAH_COUNTS[i] || 1;
+    return 1;
+  }
   function globalAyah(surah, ayah) {
     var n = 0;
-    var list = (window.quranMeta && window.quranMeta.surahs) || [];
-    for (var i = 0; i < list.length; i++) {
-      if (Number(list[i].id) < surah) n += Number(list[i].total_verses) || 0;
-    }
-    return n + ayah;
+    var s = Number(surah) || 1;
+    var a = Number(ayah) || 1;
+    for (var j = 1; j < s && j <= 114; j++) n += AYAH_COUNTS[j - 1] || 0;
+    return n + a;
   }
   function urlsFor(surah, ayah) {
     return urlsForWithRec(reciterById(state.reciter), surah, ayah);
@@ -622,10 +633,9 @@
     var g = globalAyah(surah, ayah);
     var pack = window.DARQuranAudioPack;
     var list = [];
-    if (pack && typeof pack.url === "function") list.push(pack.url(rec.edition, g));
-    else list.push("/quran-audio/" + rec.edition + "/" + g + ".mp3");
-    list.push("/quran-audio/" + rec.edition + "/" + g + ".mp3");
     list.push("https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3");
+    if (pack && typeof pack.url === "function") list.push(pack.url(rec.edition, g));
+    list.push("/quran-audio/" + rec.edition + "/" + g + ".mp3");
     list.push("https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + g + ".mp3");
     return list.filter(function (u, i, arr) { return u && arr.indexOf(u) === i; });
   }
@@ -830,7 +840,7 @@
     }
   }
   function onPlayEv() {
-    if (LEARN_PLAYER_ONLY && !isQuranArea()) {
+    if (!isAppleTvApp() && !isQuranArea()) {
       try { audioEl().pause(); } catch (ePlayLeave) {}
       persistCurrent("blocked-play-off-quran");
       state.playing = false;
@@ -921,6 +931,7 @@
       return;
     }
     await nextAyah(true);
+    followPlayingAyah(true);
   }
   function quranRouteName() {
     var hashName = String(location.hash || "").replace(/^#\/?/, "").split("/")[0].toLowerCase();
@@ -964,7 +975,7 @@
     return "none";
   }
   function syncReaderPosition() {
-    if (state.sessionActive && (state.playing || engine.loadedAyah >= 1)) return;
+    if (state.sessionActive || state.learnMode || state.playing) return;
     try {
       var hash = String(location.hash || "").replace(/^#\/?/, "");
       var m = hash.match(/^quran-surah\/(\d+)(?:\/(\d+))?/i);
@@ -1002,20 +1013,24 @@
   }
   function cleanupLearningPlayerOnRouteLeave() {
     state.playerMode = playerModeNow();
+    if (isAppleTvApp()) {
+      applyLearnChrome();
+      return;
+    }
     if (isQuranArea()) {
       applyLearnChrome();
       return;
     }
-    if (state.learnMode) {
-      persistCurrent("route-leave-learning");
+    if (state.learnMode || state.sessionActive || state.playing) {
+      persistCurrent("route-leave-quran");
       try { audioEl().pause(); } catch (eLeave) {}
       state.playing = false;
       state.learnMode = false;
       state.sessionActive = false;
-      writeMode("learning-quran");
+      writeMode("none");
       applyLearnChrome();
       paintMini();
-      qlog("[QURAN_ROUTE] learning paused off-route");
+      qlog("[QURAN_ROUTE] player paused off-route (no home player)");
       return;
     }
     applyLearnChrome();
@@ -1168,8 +1183,6 @@
   }
   function enterLearnMode() {
     state.learnMode = true;
-    state.learnLoop = true;
-    state.learnStay = true;
     if (LEARN_RATES.indexOf(Number(state.learnRate)) < 0) state.learnRate = 1;
     applyLearnRate();
     applyLearnChrome();
@@ -1179,19 +1192,23 @@
     ayah = Number(ayah);
     if (!(surah >= 1 && surah <= 114) || !(ayah >= 1)) return;
     setLearnUiClosed(false);
-    enterLearnMode();
-    writeMode("learning-quran");
-    state.playerMode = "learning-quran";
-    state.sessionActive = true;
-    persistCurrent("ayah-play");
-    lastFollowKey = "";
     state.surah = surah;
     state.ayah = ayah;
     state.resumeAt = 0;
     state.current = 0;
+    lastFollowKey = "";
+    enterLearnMode();
+    state.learnLoop = false;
+    state.learnStay = false;
+    writeMode("learning-quran");
+    state.playerMode = "learning-quran";
+    state.sessionActive = true;
+    persistCurrent("ayah-play");
     saveState();
     loadAudio(true, false);
     ensureData().then(function () {
+      if (Number(state.ayah) !== ayah) state.ayah = ayah;
+      if (Number(state.surah) !== surah) state.surah = surah;
       paintInfo();
       paintAyah(false);
       paintMini();
@@ -2372,7 +2389,7 @@
   }
   function togglePlay(forcePlay) {
     if (forcePlay === true) setLearnUiClosed(false);
-    if (LEARN_PLAYER_ONLY && !isQuranArea()) {
+    if (!isAppleTvApp() && !isQuranArea()) {
       cleanupLearningPlayerOnRouteLeave();
       return;
     }
@@ -2693,7 +2710,7 @@
     markPlayingAyah();
     paintMiniProgress();
     syncMediaSession();
-    if (state.learnMode && !state.learnLoop) followPlayingAyah(false);
+    if (state.learnMode) followPlayingAyah(false);
   }
   function bindLearnSheet(sh) {
     if (!sh || sh.dataset.dqpSheetBound === "1") return;
@@ -2805,12 +2822,7 @@
     });
   }
   function ayahCount(surah) {
-    var list = (window.quranMeta && window.quranMeta.surahs) || [];
-    var i;
-    for (i = 0; i < list.length; i++) {
-      if (Number(list[i].id) === Number(surah)) return Number(list[i].total_verses) || 1;
-    }
-    return totalAyat();
+    return ayahCountHard(surah);
   }
   async function nextAyah(fromEnd) {
     logAudio(fromEnd ? "advance after ended" : "next clicked", { surah: state.surah, ayah: state.ayah, qari: state.reciter });
@@ -3407,7 +3419,7 @@
   var tvAutoStarted = false;
   function resumeVisibleSession() {
     loadState({ keepLiveSession: true });
-    if (LEARN_PLAYER_ONLY && !isQuranArea()) {
+    if (!isAppleTvApp() && !isQuranArea()) {
       cleanupLearningPlayerOnRouteLeave();
       paintMini();
       return;

@@ -331,6 +331,16 @@ html.adaptive-keyboard-open #bottomNav.bottom-nav {
 html[data-layout] body {
   overflow-x: hidden;
 }
+@media (orientation: landscape) {
+  html[data-layout] body {
+    overflow-x: auto;
+  }
+  html[data-layout] #appView.view,
+  html[data-layout] .view {
+    overflow-x: visible;
+    min-width: 0;
+  }
+}
 
 html[data-layout] .app,
 html[data-layout] .view {

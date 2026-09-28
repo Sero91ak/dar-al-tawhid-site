@@ -76,6 +76,26 @@ html:not(.dar-ios-native-app) body.is-quran-overview #appView.view{
   padding-top:max(6px, env(safe-area-inset-top, 0px))!important;
 }
 
+@media (orientation: landscape){
+  html #appView.view,
+  html .view,
+  html.dar-ios-native-app #appView.view{
+    padding-left:max(18px, env(safe-area-inset-left, 0px))!important;
+    padding-right:max(18px, env(safe-area-inset-right, 0px))!important;
+  }
+  html .theme-switch-head h3,
+  html .theme-switch-note,
+  html .account-panel h3,
+  html .account-panel p,
+  html.dar-ios-native-app .theme-switch-head h3,
+  html.dar-ios-native-app .theme-switch-note{
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:unset!important;
+    overflow-wrap:anywhere!important;
+  }
+}
+
 /* APP_TOP_SOLID_LOCK_V1006
    Appweit: obere Safe-Area / Header niemals milchig, geblurt oder translucent.
    Die untere #bottomNav-Glasoptik bleibt ausdrücklich unangetastet. */
