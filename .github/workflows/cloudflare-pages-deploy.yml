@@ -36,6 +36,7 @@ on:
       - scripts/sync-app-build-ids.js
       - scripts/verify-live-deploy.js
       - scripts/purge-cloudflare-cache.js
+      - .github/workflows/cloudflare-pages-deploy.yml
 
 permissions:
   contents: read
@@ -50,7 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - id: scope
         name: Änderungstyp bestimmen
