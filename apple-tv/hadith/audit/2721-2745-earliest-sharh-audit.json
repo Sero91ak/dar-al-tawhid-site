@@ -1,0 +1,153 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2721-2745",
+  "series": "2651-2750",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock HAD-2721–2745 wurde unter Regel v6 fortgeführt. Er umfasst Ṣaḥīḥ Muslim 72–82: Regen-/Sternzuschreibung, Liebe zu den Anṣār und ʿAlī رضي الله عنه, Muslim 79 mit der prophetischen Erklärung von Nuqṣān al-ʿAql wa-d-Dīn sowie Muslim 81–82 zu Suǧūd und dem Verlassen der Ṣalāh. Alle Datensätze besitzen sharhStatus=verified und konkrete direkte Nachweise aus Qāḍī ʿIyāḍ, Ikmāl al-Muʿlim 1/331–345. Muslim 77 wurde als inhaltliche Wiederholung von Muslim 76 und Muslim 80 als Bedeutungsvariante von Muslim 79 nicht als eigener Aussage-Datensatz dupliziert. Kufr-/Nifāq-Aussagen und Muslim 79/82 werden mit dem dokumentierten klassischen Kontext wiedergegeben; keine geschätzten Seiten.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "sourceSequenceNote": "Muslim 77 wiederholt den Kern von Muslim 76; Muslim 80 überliefert sinngemäß Muslim 79. Beide wurden zur Vermeidung doppelter Karten nicht separat angelegt.",
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2721",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+    },
+    {
+      "id": "HAD-2722",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+    },
+    {
+      "id": "HAD-2723",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+    },
+    {
+      "id": "HAD-2724",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+    },
+    {
+      "id": "HAD-2725",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+    },
+    {
+      "id": "HAD-2726",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-rain-attribution-context"
+    },
+    {
+      "id": "HAD-2727",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2728",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2729",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2730",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2731",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2732",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2733",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2734",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2735",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2736",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2737",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-with-context-guardrail"
+    },
+    {
+      "id": "HAD-2738",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-with-context-guardrail"
+    },
+    {
+      "id": "HAD-2739",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-with-context-guardrail"
+    },
+    {
+      "id": "HAD-2740",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-with-context-guardrail"
+    },
+    {
+      "id": "HAD-2741",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-with-context-guardrail"
+    },
+    {
+      "id": "HAD-2742",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2743",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2744",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2745",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh-with-salah-kufr-ikhtilaf"
+    }
+  ]
+}
