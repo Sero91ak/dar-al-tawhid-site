@@ -1,29 +1,68 @@
-/* Adult landscape/tablet: Kids-Baustil — zentrierte Lesespalte, kein enges Dual-Rail. */
-@media (orientation: landscape), (min-width: 700px) {
-  html #appView.view,
-  html body #appView.view,
-  html .view,
-  html .dar-fold {
-    width: min(860px, calc(100% - 44px)) !important;
-    max-width: min(860px, calc(100% - 44px)) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    box-sizing: border-box !important;
-  }
+/* Adult landscape: volle Lesebreite, Safe-Area, Schriften nicht abschneiden. */
+@media (orientation: landscape) {
   html #appView.view,
   html body #appView.view,
   html .view {
-    padding-left: max(22px, env(safe-area-inset-left, 0px)) !important;
-    padding-right: max(22px, env(safe-area-inset-right, 0px)) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: visible !important;
+    padding-left: max(18px, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(18px, env(safe-area-inset-right, 0px)) !important;
+    padding-bottom: calc(128px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  html .dar-fold {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+  html .dar-fold[data-fold-mode="dual"] {
+    grid-template-columns: 1fr !important;
+  }
+  html .dar-fold__pane {
+    padding-left: 0 !important;
+  }
+  html .theme-switch-panel,
+  html .account-panel,
+  html .font-slider-panel,
+  html .app-font-panel,
+  html .reading-font-panel,
+  html .premium-surface {
+    overflow: visible !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
   }
   html .view-head h2,
   html .home-start-title,
   html .topics-hub h2,
-  html .feed-head h2 {
-    font-size: clamp(28px, 4.2vw, 40px) !important;
-    line-height: 1.15 !important;
+  html .feed-head h2,
+  html .theme-switch-head h3,
+  html .account-panel h3,
+  html .view h2,
+  html .view h3 {
     white-space: normal !important;
     overflow: visible !important;
+    text-overflow: unset !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    max-width: 100% !important;
+    line-height: 1.18 !important;
+  }
+  html .theme-switch-note,
+  html .account-panel p,
+  html .theme-switch-btn {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    overflow-wrap: anywhere !important;
+    max-width: 100% !important;
+  }
+  html #adaptiveNavPanel .theme-switch-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
   html .search-line,
   html .search-pro-panel .search-line {
@@ -41,17 +80,11 @@
     width: 100% !important;
     min-width: 0 !important;
     font-size: 15px !important;
-    white-space: nowrap !important;
   }
-  html .advanced-toggle {
-    white-space: nowrap !important;
-    flex: 0 0 auto !important;
-  }
-  html .dar-fold[data-fold-mode="dual"] {
-    grid-template-columns: 1fr !important;
-  }
-  html .dar-fold__pane {
-    padding-left: 0 !important;
+  html #appChromeDock #bottomNav.bottom-nav,
+  html #bottomNav.bottom-nav,
+  html.dar-ios-native-app #bottomNav.bottom-nav {
+    transition: width .48s cubic-bezier(.22,1,.36,1), max-width .48s cubic-bezier(.22,1,.36,1) !important;
   }
 }
 
@@ -65,16 +98,14 @@
   }
 }
 
-@media (orientation: landscape) {
-  html #appChromeDock #bottomNav.bottom-nav,
-  html #bottomNav.bottom-nav,
-  html.dar-ios-native-app #bottomNav.bottom-nav {
-    transition: width .48s cubic-bezier(.22,1,.36,1), max-width .48s cubic-bezier(.22,1,.36,1) !important;
-  }
+@media (orientation: landscape) and (min-width: 1100px) {
   html #appView.view,
   html body #appView.view,
   html .view {
-    padding-bottom: calc(108px + env(safe-area-inset-bottom, 0px)) !important;
+    width: min(860px, calc(100% - 48px)) !important;
+    max-width: min(860px, calc(100% - 48px)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 }
 
