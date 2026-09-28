@@ -1,6 +1,6 @@
 {
-  "buildId": "kids-shell-v12-tab69",
-  "label": "KIDS · V0.69",
-  "releasedAt": "2026-09-28T12:48:00.000Z",
-  "note": "Start vollständig zurückgesetzt: kein Cinema-Intro, keine Start-Stimme, keine Intro-Preloads, keine Verzögerung. Kids-App öffnet direkt auf der originalen Startseite. Neuer Intro-Aufbau beginnt später separat von Null."
+  "buildId": "kids-shell-v12-tab70",
+  "label": "KIDS · V0.70",
+  "releasedAt": "2026-09-28T10:50:00.000Z",
+  "note": "Neuer Startkern von Null: leichte, nicht blockierende Begrüßungsanimation nur mit opacity/transform. Keine Bilder, kein Blur, kein Audio, keine Start-Sperre. Alte Cinema-Assets aus dem PWA-Precache entfernt."
 }
