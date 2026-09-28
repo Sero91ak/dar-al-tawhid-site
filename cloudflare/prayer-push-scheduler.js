@@ -183,6 +183,43 @@ function tahajjudUtc(maghribUtc, fajrUtc, mode) {
   return new Date(maghribUtc.getTime() + ((fajrUtc.getTime() - maghribUtc.getTime()) * 2 / 3));
 }
 
+export function computePublicPrayerTimes({ lat, lon, timeZone, angle, asrFactor } = {}) {
+  const tz = String(timeZone || "Europe/Berlin");
+  const latN = Number(lat);
+  const lonN = Number(lon);
+  if (!Number.isFinite(latN) || !Number.isFinite(lonN)) {
+    return { ok: false, error: "lat/lon fehlen" };
+  }
+  const methodAngle = Number(angle);
+  const asr = Number(asrFactor);
+  const method = Number.isFinite(methodAngle) && methodAngle > 0 ? methodAngle : 12;
+  const asrN = Number.isFinite(asr) && asr > 0 ? asr : 1;
+  const d = todayLocal(tz);
+  const list = prayerTimes(d, latN, lonN, tz, method, asrN, "off");
+  const times = {};
+  for (const p of list) {
+    times[p.key] = {
+      name: p.name,
+      key: p.key,
+      time: p.time == null ? null : formatHour(p.time)
+    };
+  }
+  return {
+    ok: true,
+    date: `${d.year}-${String(d.month).padStart(2, "0")}-${String(d.day).padStart(2, "0")}`,
+    timeZone: tz,
+    lat: latN,
+    lon: lonN,
+    methodAngle: method,
+    asrFactor: asrN,
+    times,
+    playback: {
+      autoStartAdhan: true,
+      playAtPrayerEntry: true
+    }
+  };
+}
+
 function prayerTimes(localDate, lat, lon, tz, methodAngle, asrFactor, tahajjudMode) {
   const fajr = sunTime(localDate, lat, lon, methodAngle, true, tz);
   const dhuhr = solarNoon(localDate, lat, lon, tz);

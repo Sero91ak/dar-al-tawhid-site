@@ -20,6 +20,7 @@ import {
   ensurePrayerSchedulerFresh,
   triggerPrayerWorkflowForSubscription
 } from "./prayer-push-admin.js";
+import { computePublicPrayerTimes } from "./prayer-push-scheduler.js";
 import { registerNativeIosPush } from "./ios-native-push-register.js";
 import {
   readDailyPushStatus,
@@ -221,6 +222,17 @@ export default {
       if (url.pathname === "/api/prayer/status" && request.method === "GET") {
         const result = await readPrayerPushStatus(env, githubGet, base64ToUtf8);
         return json(result, cors, result.ok ? 200 : 200);
+      }
+
+      if (url.pathname === "/api/prayer/times" && request.method === "GET") {
+        const result = computePublicPrayerTimes({
+          lat: url.searchParams.get("lat"),
+          lon: url.searchParams.get("lon"),
+          timeZone: url.searchParams.get("tz") || url.searchParams.get("timeZone"),
+          angle: url.searchParams.get("angle"),
+          asrFactor: url.searchParams.get("asr") || url.searchParams.get("asrFactor")
+        });
+        return json(result, cors, result.ok ? 200 : 400);
       }
 
       if (url.pathname === "/api/daily/status" && request.method === "GET") {

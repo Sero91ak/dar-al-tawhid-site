@@ -34,6 +34,29 @@ function iosNativeHeaders(assetResponse) {
 }
 
 const KIDS_MIRROR = "https://dar-al-tawhid-test.sero91ak.workers.dev";
+const PRAYER_API_ORIGIN = "https://dar-admin-publisher.sero91ak.workers.dev";
+
+function isPrayerApiPath(pathname) {
+  return /^\/api\/(prayer|daily|jummah)(\/|$)/.test(pathname) || pathname === "/api/push/welcome";
+}
+
+async function proxyPrayerApi(request, url) {
+  if (!isPrayerApiPath(url.pathname)) return null;
+  const dest = `${PRAYER_API_ORIGIN}${url.pathname}${url.search || ""}`;
+  const headers = new Headers(request.headers);
+  headers.delete("host");
+  const init = {
+    method: request.method,
+    headers,
+    redirect: "follow"
+  };
+  if (request.method !== "GET" && request.method !== "HEAD") init.body = request.body;
+  const upstream = await fetch(dest, init);
+  const out = new Headers(upstream.headers);
+  out.set("Access-Control-Allow-Origin", "*");
+  out.set("Cache-Control", "no-store");
+  return new Response(upstream.body, { status: upstream.status, statusText: upstream.statusText, headers: out });
+}
 // KIDS_PUBLIC_ROUTER_V79_FINAL — video-only intro; deploy pinned to latest main.
 
 async function fetchKidsMirror(pathname, search) {
@@ -233,6 +256,18 @@ export default {
       const audio = await proxyQuranAudio(request, url);
       if (audio) return audio;
     }
+    if (request.method === "OPTIONS" && isPrayerApiPath(url.pathname)) {
+      return new Response(null, {
+        status: 204,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type,Authorization"
+        }
+      });
+    }
+    const prayerApi = await proxyPrayerApi(request, url);
+    if (prayerApi) return prayerApi;
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeApp = isNativeAppRequest(ua);

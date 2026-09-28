@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0",
+  "status": "active",
+  "target": "tvOS-only",
+  "feature": "adhan",
+  "provider": {
+    "name": "DĀR AL TAWḤĪD Adhān",
+    "timesURL": "https://dar-al-tawhid.de/api/prayer/times",
+    "statusURL": "https://dar-al-tawhid.de/api/prayer/status",
+    "workerTimesURL": "https://dar-admin-publisher.sero91ak.workers.dev/api/prayer/times",
+    "defaultLat": 50.6256,
+    "defaultLon": 6.9491,
+    "defaultTimeZone": "Europe/Berlin",
+    "methodAngle": 12,
+    "asrFactor": 1
+  },
+  "playback": {
+    "autoStart": true,
+    "autoStartAdhan": true,
+    "playAtPrayerEntry": true,
+    "playAdvanceReminder": true,
+    "prayers": ["fajr", "dhuhr", "asr", "maghrib", "isha"]
+  }
+}
