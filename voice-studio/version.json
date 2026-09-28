@@ -1,7 +1,7 @@
 {
   "version": "2.9.14",
-  "updatedAt": "2026-09-28T01:34:15+02:00",
-  "deployTrigger": "voice-studio-clean-deploy",
+  "updatedAt": "2026-09-28T08:02:00+02:00",
+  "deployTrigger": "voice-studio-2.9.14-live-deploy-after-scope-unlock",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v24",
@@ -267,8 +267,8 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "946a442791c760f7570fb2aca008fab4efa71274",
-    "validatedAt": "2026-09-28T01:34:15+02:00"
+    "validatedCommit": "e49804bea857dae25a16ca72e83b486c25e30690",
+    "validatedAt": "2026-09-28T01:35:15+02:00"
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -538,7 +538,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "946a442791c760f7570fb2aca008fab4efa71274",
+  "releaseRef": "e49804bea857dae25a16ca72e83b486c25e30690",
   "releaseChannel": "validated-main",
   "updateRepair": true,
   "updateRepairReason": "Stable 2.9.12 baseline pinned while sentence-flow work moves to isolated lab branch",
