@@ -1910,3 +1910,251 @@ body.is-home-route .header-prayer-hub__ico{
     margin:0 4px!important;
   }
 }
+
+
+/* v1105 · SCHRITT 2 · Gebetszeiten als Premium-Kapseln */
+/* Nur Darstellung. Bestehende Gebetsberechnung, Countdown, IDs und Klicklogik bleiben unverändert. */
+
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub{
+  margin:13px 0 0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+/* Hauptkapsel: aktuell · Countdown · nächstes Gebet */
+body.is-home-route .header-prayer-hub__main{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(78px,.72fr) minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:0!important;
+  min-height:78px!important;
+  padding:8px 12px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(222,194,123,.34)!important;
+  border-radius:999px!important;
+  background:
+    linear-gradient(180deg,rgba(16,27,43,.76),rgba(7,17,32,.68))!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 10px 28px rgba(0,0,0,.18)!important;
+  -webkit-backdrop-filter:blur(17px) saturate(1.04)!important;
+  backdrop-filter:blur(17px) saturate(1.04)!important;
+}
+
+body.is-home-route .header-prayer-hub__main::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  pointer-events:none!important;
+  border-radius:inherit!important;
+  background:
+    radial-gradient(circle at 13% 0%,rgba(239,211,139,.10),transparent 30%),
+    linear-gradient(90deg,rgba(255,255,255,.015),transparent 38%,rgba(255,255,255,.025))!important;
+}
+
+/* Drei Zonen innerhalb derselben Kapsel */
+body.is-home-route .header-prayer-zone{
+  position:relative!important;
+  z-index:1!important;
+  min-width:0!important;
+  min-height:54px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  padding:4px 10px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+body.is-home-route .header-prayer-zone--now{
+  align-items:flex-start!important;
+  text-align:left!important;
+}
+
+body.is-home-route .header-prayer-zone--next{
+  align-items:flex-end!important;
+  text-align:right!important;
+}
+
+body.is-home-route .header-prayer-zone--count{
+  align-items:center!important;
+  text-align:center!important;
+  border-left:1px solid rgba(222,194,123,.18)!important;
+  border-right:1px solid rgba(222,194,123,.18)!important;
+}
+
+body.is-home-route .header-prayer-zone--count::before,
+body.is-home-route .header-prayer-zone--count::after{
+  content:none!important;
+  display:none!important;
+}
+
+body.is-home-route .header-prayer-primary,
+body.is-home-route .header-prayer-secondary{
+  width:100%!important;
+  margin:0 0 4px!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub .header-prayer-line{
+  display:flex!important;
+  align-items:baseline!important;
+  gap:4px!important;
+  width:100%!important;
+  min-width:0!important;
+  overflow:visible!important;
+}
+
+body.is-home-route .header-prayer-zone--next .header-prayer-line{
+  justify-content:flex-end!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub .header-prayer-line .header-prayer-name{
+  color:#fff5dc!important;
+  -webkit-text-fill-color:#fff5dc!important;
+  font-family:var(--serif),Georgia,serif!important;
+  font-size:clamp(16px,4vw,19px)!important;
+  font-weight:750!important;
+  line-height:1!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.42)!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub .header-prayer-line .header-prayer-hour{
+  color:#e3c676!important;
+  -webkit-text-fill-color:#e3c676!important;
+  font-family:var(--sans),system-ui,sans-serif!important;
+  font-size:clamp(13px,3.3vw,16px)!important;
+  font-weight:900!important;
+  letter-spacing:.02em!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub .header-prayer-line .header-prayer-sep{
+  color:rgba(231,207,145,.62)!important;
+  font-size:10px!important;
+}
+
+body.is-home-route .header-prayer-zone__caption{
+  display:block!important;
+  color:rgba(232,228,216,.66)!important;
+  font-size:clamp(7.5px,1.85vw,9px)!important;
+  font-weight:850!important;
+  line-height:1.15!important;
+  letter-spacing:.095em!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+}
+
+body.is-home-route .header-prayer-zone--next .header-prayer-zone__caption{
+  text-align:right!important;
+}
+
+body.is-home-route .header-prayer-zone__count-label{
+  order:0!important;
+  display:block!important;
+  margin-bottom:4px!important;
+  color:rgba(232,228,216,.60)!important;
+  font-size:clamp(7px,1.75vw,8.5px)!important;
+  font-weight:850!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+}
+
+body.is-home-route .header-prayer-zone__count-label[hidden]{
+  display:none!important;
+}
+
+body.is-home-route .header-prayer-zone__countdown{
+  order:1!important;
+  color:#e5c87a!important;
+  -webkit-text-fill-color:#e5c87a!important;
+  font-family:var(--sans),system-ui,sans-serif!important;
+  font-size:clamp(10.5px,2.7vw,13px)!important;
+  font-weight:900!important;
+  line-height:1.15!important;
+  letter-spacing:.025em!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.42)!important;
+}
+
+/* Zweite, eigenständige Info-Kapsel */
+body.is-home-route .header-prayer-hub__status{
+  position:relative!important;
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:0!important;
+  width:100%!important;
+  min-height:35px!important;
+  margin:7px 0 0!important;
+  padding:6px 12px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(222,194,123,.24)!important;
+  border-radius:999px!important;
+  background:rgba(8,18,33,.54)!important;
+  color:rgba(245,239,224,.78)!important;
+  font-size:clamp(8px,1.95vw,10px)!important;
+  font-weight:800!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
+  -webkit-backdrop-filter:blur(13px)!important;
+  backdrop-filter:blur(13px)!important;
+}
+
+body.is-home-route .header-prayer-hub__status::before{
+  content:none!important;
+  display:none!important;
+}
+
+body.is-home-route .header-prayer-hub__status>span{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:4px!important;
+  white-space:nowrap!important;
+}
+
+body.is-home-route .header-prayer-hub__status>span+span::before{
+  content:""!important;
+  width:1px!important;
+  height:14px!important;
+  margin:0 8px!important;
+  background:rgba(222,194,123,.18)!important;
+  opacity:1!important;
+}
+
+body.is-home-route .header-prayer-hub__ico{
+  color:#dfc274!important;
+  opacity:.90!important;
+  font-size:.95em!important;
+}
+
+/* Nur auf sehr schmalen Geräten etwas enger, ohne Texte abzuschneiden. */
+@media(max-width:390px){
+  body.is-home-route .header-prayer-hub__main{
+    grid-template-columns:minmax(0,1fr) minmax(70px,.66fr) minmax(0,1fr)!important;
+    min-height:72px!important;
+    padding:7px 8px!important;
+  }
+  body.is-home-route .header-prayer-zone{
+    padding-inline:7px!important;
+  }
+  body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub .header-prayer-line .header-prayer-name{
+    font-size:14.5px!important;
+  }
+  body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub .header-prayer-line .header-prayer-hour{
+    font-size:12px!important;
+  }
+  body.is-home-route .header-prayer-hub__status{
+    padding-inline:8px!important;
+    font-size:7.5px!important;
+  }
+  body.is-home-route .header-prayer-hub__status>span+span::before{
+    margin-inline:5px!important;
+  }
+}
