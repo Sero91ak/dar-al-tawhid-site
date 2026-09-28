@@ -82,6 +82,15 @@ function isOwnerMaster(item){
 }
 function pendingList(m){return slotList(m).filter(item=>!isOwnerMaster(item))}
 function alifPronunciationReference(){
+  const policyUrl=String(manifest?.policy?.pronunciationReferenceUrl||"").trim();
+  if(policyUrl){
+    return {
+      url:policyUrl,
+      text:String(manifest?.policy?.canonicalVoiceAnchorText||"أَلِف"),
+      sourceType:"external-human-pronunciation",
+      sourceProvider:String(manifest?.policy?.canonicalVoiceLabel||"Eiarabe Alif")
+    };
+  }
   const slot=manifest?.letters?.alif?.name;
   if(!slot?.url)return null;
   return slot;
@@ -100,6 +109,16 @@ function clearCandidate(){
   if(now)now.textContent="Noch kein Serhat-Kandidat erzeugt";
 }
 function renderProgress(){
+  if(!manifest){
+    if(q("alphabetPackProgress"))q("alphabetPackProgress").textContent="Alphabet-Audio-Manifest nicht geladen";
+    const ref=q("alphabetPackReferenceState");
+    if(ref){
+      ref.textContent="Alif-Aussprache-Referenz wartet auf das Manifest.";
+      ref.style.color="var(--amber)";
+    }
+    publisherState();
+    return;
+  }
   const all=slotList(manifest);
   const done=all.filter(isOwnerMaster).length;
   if(q("alphabetPackProgress")){
@@ -110,12 +129,20 @@ function renderProgress(){
     const anchor=alifPronunciationReference();
     ref.textContent=anchor
       ?"Aussprache-Referenz: Alif · Eiarabe. Zielstimme: Serhat Abu Malik."
-      :"Alif-Aussprache-Referenz fehlt. Serhat-Kandidaten können trotzdem erzeugt werden.";
+      :"Alif-Aussprache-Referenz fehlt.";
     ref.style.color=anchor?"var(--green)":"var(--amber)";
   }
   publisherState();
 }
 function renderCurrent(){
+  if(!manifest){
+    if(q("alphabetPackLabel"))q("alphabetPackLabel").textContent="Alphabet-Audio-Manifest nicht geladen";
+    if(q("alphabetPackArabic"))q("alphabetPackArabic").textContent="!";
+    if(q("alphabetPackGenerateBtn"))q("alphabetPackGenerateBtn").disabled=true;
+    if(q("alphabetPackApproveBtn"))q("alphabetPackApproveBtn").disabled=true;
+    if(q("alphabetPackRetryBtn"))q("alphabetPackRetryBtn").disabled=true;
+    return;
+  }
   if(!current){
     if(q("alphabetPackLabel"))q("alphabetPackLabel").textContent="Alphabet-Audio-Pack vollständig";
     if(q("alphabetPackArabic"))q("alphabetPackArabic").textContent="✓";
@@ -131,29 +158,65 @@ function renderCurrent(){
   if(q("alphabetPackGenerateBtn"))q("alphabetPackGenerateBtn").disabled=false;
   clearCandidate();
 }
+async function fetchManifestJson(url,options={}){
+  const r=await fetch(url,{cache:"no-store",...options});
+  if(!r.ok)throw Error("HTTP "+r.status);
+  const d=await r.json();
+  if(d?.content&&typeof d.content==="string"){
+    const decoded=atob(d.content.replace(/\\s+/g,""));
+    const bytes=Uint8Array.from(decoded,ch=>ch.charCodeAt(0));
+    return JSON.parse(new TextDecoder("utf-8").decode(bytes));
+  }
+  return d;
+}
 async function loadManifest(){
-  try{
-    if(workerSecret()){
+  const errors=[];
+  manifest=null;
+
+  if(workerSecret()){
+    try{
       const d=await adminApi("/api/admin/kids-alphabet-audio",{method:"GET"});
-      manifest=d.manifest||null;
-    }else{
-      const r=await fetch("/test/kids/data/alphabet-audio.json?cb="+Date.now(),{cache:"no-store"});
-      if(!r.ok)throw Error("Alphabet-Audio-Manifest nicht erreichbar");
-      manifest=await r.json();
-    }
+      if(d?.manifest?.letters?.alif)manifest=d.manifest;
+      else throw Error("Publisher lieferte kein gültiges Alphabet-Manifest");
+    }catch(e){errors.push("Publisher: "+(e?.message||String(e)))}
+  }
+
+  if(!manifest){
+    try{
+      const local=await fetchManifestJson("/studio/alphabet-audio.json?cb="+Date.now());
+      if(local?.letters?.alif)manifest=local;
+      else throw Error("lokale Manifest-Datei ist ungültig");
+    }catch(e){errors.push("Lokal: "+(e?.message||String(e)))}
+  }
+
+  if(!manifest){
+    try{
+      const api="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/test/kids/data/alphabet-audio.json?ref=main&cb="+Date.now();
+      const remote=await fetchManifestJson(api,{
+        headers:{Accept:"application/vnd.github.raw+json"}
+      });
+      if(remote?.letters?.alif)manifest=remote;
+      else throw Error("GitHub lieferte kein gültiges Alphabet-Manifest");
+    }catch(e){errors.push("GitHub: "+(e?.message||String(e)))}
+  }
+
+  if(!manifest){
     renderProgress();
-    return manifest;
-  }catch(e){
-    setMsg(e.message||String(e),"bad");
+    setMsg("Alphabet-Audio-Manifest konnte nicht geladen werden. "+errors.join(" · "),"bad");
     return null;
   }
+
+  renderProgress();
+  return manifest;
 }
 function nextPending(){
+  if(!manifest)return null;
   return pendingList(manifest)[0]||null;
 }
 async function playReference(){
+  if(!manifest){setMsg("Alphabet-Audio-Manifest ist noch nicht geladen.","warn");return}
   const slot=alifPronunciationReference();
-  if(!slot?.url){setMsg("Alif-Aussprache-Referenz nicht verfügbar.","warn");return}
+  if(!slot?.url){setMsg("Alif-Aussprache-Referenz fehlt im Manifest.","bad");return}
   const p=q("alphabetPackPlayer");
   if(!p)return;
   try{
@@ -305,10 +368,11 @@ q("alphabetPackRetryBtn")?.addEventListener("click",retryCurrent);
 loadManifest().then(()=>{
   current=nextPending();
   renderCurrent();
+  if(!manifest)return;
   if(current){
-    setMsg("Bereit. Dieser Clip wird lokal mit deiner Serhat-Stimme erzeugt. Cloudflare wird erst nach deiner Bestätigung zum Speichern verwendet.");
+    setMsg("Bereit. Alif ist als feste Aussprache-Referenz geladen. Dieser Clip wird lokal mit deiner Serhat-Stimme erzeugt. Cloudflare wird erst nach deiner Bestätigung zum Speichern verwendet.");
   }else{
-    setMsg("Alle Alphabet-/Ḥarakāt-/Wort-Clips sind als Serhat-Master bestätigt.","good");
+    setMsg("Alle Alphabet-/Ḥarakāt-/Wort-Clips sind als Serhat-Master bestätigt. Die Alif-Aussprache-Referenz bleibt separat erhalten.","good");
   }
 });
 })();
