@@ -1,6 +1,6 @@
 {
-  "buildId": "kids-shell-v12-tab76",
-  "label": "KIDS · V0.76",
-  "releasedAt": "2026-09-28T14:58:00.000Z",
-  "note": "Native iOS-Hülle DĀR Kids für App Store / TestFlight"
+  "buildId": "kids-shell-v12-tab77",
+  "label": "KIDS · V0.77",
+  "releasedAt": "2026-09-28T15:08:00.000Z",
+  "note": "Cinema intro cache consistency repair. Veo intro now runs on every full Kids app start, with no sessionStorage skip. Overlay timing begins only after video playback starts. Reduced Motion no longer shortens the video intro. Service worker, manifest, alive marker, public router and test worker are synchronized on V0.77."
 }
