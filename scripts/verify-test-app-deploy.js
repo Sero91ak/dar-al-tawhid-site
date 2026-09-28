@@ -186,13 +186,20 @@ async function fetchVersionBuild(base) {
         headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
       });
       const html = await startRes.text();
+      const forbiddenOverlay = [
+        "k77-brand","k77-letter","k77-spark","k77-copy","k77-sound",
+        "kidsLaunchAudio","kidsLaunchSound",
+        "As-Salāmu ʿalaykum wa raḥmatullāhi wa barakātuh, Kids"
+      ];
+      const overlayFree = forbiddenOverlay.every((needle) => !html.includes(needle));
       const htmlOk =
         startRes.status === 200 &&
-        html.includes("kids-launch-v77") &&
-        html.includes("/test/kids/assets/kids-cinema/intro-v74.mp4") &&
-        !html.includes("kids-launch-v77-seen");
+        html.includes("kids-launch-v78") &&
+        html.includes('id="kidsCinemaV78"') &&
+        html.includes("/test/kids/assets/kids-cinema/intro-v74.mp4?v=78") &&
+        overlayFree;
       console.log(
-        `${label} kids cinema HTML: ${startUrl} -> ${startRes.status} ok=${htmlOk}`
+        `${label} kids cinema HTML: ${startUrl} -> ${startRes.status} overlayFree=${overlayFree} ok=${htmlOk}`
       );
       if (!htmlOk) return false;
 
