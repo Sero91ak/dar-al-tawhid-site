@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-28T22:00:44.615Z",
+  "updatedAt": "2026-09-28T22:00:50.590Z",
   "cacheVersion": 120,
   "settings": {
     "autoDownloadEnabled": true,
@@ -33,28 +33,19 @@
     ]
   },
   "syncState": {
-    "lastSyncAt": "2026-09-28T18:01:18.043Z",
-    "lastSyncStatus": "error",
-    "lastSyncError": "API-Keys fehlen: PEXELS_API_KEY, UNSPLASH_ACCESS_KEY, PIXABAY_API_KEY",
-    "nextSyncAt": "2026-09-29T18:01:18.338Z",
-    "dailyDownloadDate": "2026-09-27",
-    "dailyDownloadCount": 0,
-    "lastRunDownloads": 20,
-    "lastRunRejected": 79,
+    "lastSyncAt": "2026-09-28T22:00:10.298Z",
+    "lastSyncStatus": "ok",
+    "lastSyncError": "pexels:15103188: Download 404",
+    "nextSyncAt": "2026-09-29T22:00:50.590Z",
+    "dailyDownloadDate": "2026-09-28",
+    "dailyDownloadCount": 5,
+    "lastRunDownloads": 5,
+    "lastRunRejected": 13,
     "lastRunErrors": [
-      "pexels:15103188: Download 404",
-      "unsplash:ymJt1_jLreY: Update is not a fast forward",
-      "unsplash:Q_AqgwKWD6k: Update is not a fast forward",
-      "pexels:18124200: Update is not a fast forward",
-      "pexels:31948750: Update is not a fast forward",
-      "unsplash:V18GNaBeZqM: Update is not a fast forward",
-      "unsplash:FeYlAOm-64Y: Update is not a fast forward",
-      "pexels:10593073: Update is not a fast forward",
-      "pexels:8390018: Update is not a fast forward",
-      "pexels:4220953: Update is not a fast forward"
+      "pexels:15103188: Download 404"
     ],
-    "totalDownloads": 90,
-    "totalRejected": 240
+    "totalDownloads": 95,
+    "totalRejected": 251
   },
   "items": [
     {
