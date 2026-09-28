@@ -3003,7 +3003,10 @@ html.kids-intro-active.kids-intro-reveal .app{transform:none;filter:none;transit
     }catch(e){return false}
   }
   function cinematicSfx(){
-    if(audioStarted)return;
+    if(audioStarted){
+      try{if(audioCtx&&audioCtx.state==="suspended")audioCtx.resume().catch(function(){})}catch(e){}
+      return;
+    }
     audioStarted=true;
     var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
     try{
@@ -3028,6 +3031,7 @@ html.kids-intro-active.kids-intro-reveal .app{transform:none;filter:none;transit
   }
   function boot(){
     if(reduced){setTimeout(finish,1450);return}
+    setTimeout(cinematicSfx,80);
     setTimeout(function(){if(!speechStarted)speak()},260);
     setTimeout(function(){if(!speechStarted&&soundBtn)soundBtn.classList.add("show")},1150);
     setTimeout(finish,8600);
