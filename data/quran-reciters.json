@@ -1,11 +1,17 @@
 {
-  "version": "quran-reciters-v1",
-  "updatedAt": "2026-09-27T12:20:00.000Z",
+  "version": "quran-reciters-v2",
+  "updatedAt": "2026-09-28T17:00:00.000Z",
   "ayahCount": 6236,
   "audioProxy": "/quran-audio/{edition}/{ayah}.mp3",
   "cdn": "https://cdn.islamic.network/quran/audio/128/{edition}/{ayah}.mp3",
   "everyayah": "https://everyayah.com/data/{folder}/{surah3}{ayah3}.mp3",
   "seedSurahs": [1, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114],
+  "playback": {
+    "autoStart": true,
+    "playWhenFirstAyahReady": true,
+    "waitForFullReciter": false,
+    "startSeedOnLaunch": true
+  },
   "reciters": [
     {"id":"alafasy","name":"Mišārī Rāšid al-ʿAfāsī","folder":"Alafasy_128kbps","edition":"ar.alafasy","style":"murattal"},
     {"id":"sudais","name":"ʿAbd ar-Raḥmān as-Sudais","folder":"Abdurrahmaan_As-Sudais_192kbps","edition":"ar.abdurrahmaansudais","style":"murattal"},

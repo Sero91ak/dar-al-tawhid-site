@@ -1,7 +1,7 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 964;
-  /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
+    var PLAYER_BUILD = 965;
+  /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
       if (window.DAR_OFFICIAL_IOS_APP === true) return true;
@@ -13,13 +13,21 @@
     } catch (eOff) {}
     return false;
   }
+  function isAppleTvApp() {
+    try {
+      if (window.DAR_APPLE_TV_APP === true) return true;
+      var ua = String(navigator.userAgent || "");
+      if (/AppleTV|Apple TV|tvOS|DarAlTawhid-tvOS/i.test(ua)) return true;
+    } catch (eTv) {}
+    return false;
+  }
   function isTestAppPath() {
     try {
       var p = String(location.pathname || "");
       return p === "/test" || p.indexOf("/test/") === 0;
     } catch (eT) { return false; }
   }
-  var LEARN_PLAYER_ONLY = !isOfficialIosApp() && !isTestAppPath();
+  var LEARN_PLAYER_ONLY = !isOfficialIosApp() && !isTestAppPath() && !isAppleTvApp();
   if (window.__DAR_QURAN_PLAYER_BUILD === PLAYER_BUILD && window.DARQuranPlayer) return;
   try {
     var staleAudio = document.getElementById("darQuranPlayerAudio");
@@ -3326,6 +3334,13 @@
       paintMini();
       return;
     }
+    if (isAppleTvApp()) {
+      state.sessionActive = true;
+      var tv = audioEl();
+      if (!audioHasSrc(tv) || tv.paused) loadAudio(true, true);
+      paintMini();
+      return;
+    }
     if (state.sessionActive && !LEARN_PLAYER_ONLY && readMode() === "global-quran") {
       var a = audioEl();
       if (!audioHasSrc(a) && state.playing) loadAudio(true, true);
@@ -3411,12 +3426,14 @@
       watchQuranBodyClass();
       ensureReaderLearnPlayer();
       cleanupLearningPlayerOnRouteLeave();
+      resumeVisibleSession();
       paintMini();
     }, { once: true });
   } else {
     watchQuranBodyClass();
     ensureReaderLearnPlayer();
     cleanupLearningPlayerOnRouteLeave();
+    resumeVisibleSession();
     paintMini();
   }
 })();

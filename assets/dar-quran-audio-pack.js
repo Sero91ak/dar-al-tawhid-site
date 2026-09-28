@@ -2,11 +2,13 @@
 (function () {
   if (window.__darQuranAudioPackBoot) return;
   window.__darQuranAudioPackBoot = true;
-  var VER = "1054";
+  var VER = "1057";
   var DB_NAME = "dar-quran-audio-pack";
   var STORE = "mp3";
   var CACHE_NAME = "dar-quran-audio-v" + VER;
   var AYAH_TOTAL = 6236;
+  var HYDRATE_URL_CAP = 96;
+  var DEFAULT_EDITION = "ar.alafasy";
   var SEED_SURAHS = [1, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114];
   var FALLBACK_RECITERS = [
     { id: "alafasy", edition: "ar.alafasy" },
@@ -99,6 +101,14 @@
     var k = key(edition, ayah);
     return localSrc[k] || proxyUrl(edition, ayah);
   }
+  function isTvPlayback() {
+    try {
+      if (window.DAR_APPLE_TV_APP === true) return true;
+      var ua = String(navigator.userAgent || "");
+      if (/AppleTV|Apple TV|tvOS|DarAlTawhid-tvOS/i.test(ua)) return true;
+    } catch (eTv) {}
+    return false;
+  }
   function rememberBlob(edition, ayah, blob) {
     if (!blob || !blob.size) return;
     var k = key(edition, ayah);
@@ -114,15 +124,34 @@
       var tx = db.transaction(STORE, "readonly");
       var store = tx.objectStore(STORE);
       await new Promise(function (done) {
+        var made = 0;
+        var timed = false;
+        var timer = setTimeout(function () {
+          timed = true;
+          done();
+        }, isTvPlayback() ? 900 : 1800);
         var req = store.openCursor();
         req.onsuccess = function () {
+          if (timed) return;
           var cur = req.result;
-          if (!cur) { done(); return; }
+          if (!cur) {
+            clearTimeout(timer);
+            done();
+            return;
+          }
           var parts = String(cur.key).split(":");
-          if (cur.value instanceof Blob) rememberBlob(parts[0], Number(parts[1]), cur.value);
+          if (cur.value instanceof Blob) {
+            if (made < HYDRATE_URL_CAP) {
+              rememberBlob(parts[0], Number(parts[1]), cur.value);
+              made += 1;
+            } else status.have += 1;
+          }
           cur.continue();
         };
-        req.onerror = function () { done(); };
+        req.onerror = function () {
+          clearTimeout(timer);
+          done();
+        };
       });
     } catch (e) {}
   }
@@ -143,7 +172,17 @@
       return;
     }
     try {
-      var res = await fetch(proxyUrl(edition, ayah), { credentials: "same-origin" });
+      var urls = [
+        proxyUrl(edition, ayah),
+        "https://cdn.islamic.network/quran/audio/128/" + encodeURIComponent(edition) + "/" + ayah + ".mp3"
+      ];
+      var res = null;
+      for (var ui = 0; ui < urls.length; ui++) {
+        try {
+          res = await fetch(urls[ui], { credentials: ui === 0 ? "same-origin" : "omit" });
+          if (res && res.ok) break;
+        } catch (eFetch) { res = null; }
+      }
       if (!res || !res.ok) throw new Error("proxy");
       var blob = await res.blob();
       if (!blob || blob.size < 800) throw new Error("empty");
@@ -200,8 +239,10 @@
     seeded = true;
     status.seed = true;
     var ayahs = seedAyahs();
-    reciters.forEach(function (r) {
-      ayahs.forEach(function (n) { enqueue(r.edition, n, r.edition === "ar.alafasy"); });
+    var first = reciters.filter(function (r) { return r.edition === DEFAULT_EDITION; });
+    var rest = reciters.filter(function (r) { return r.edition !== DEFAULT_EDITION; });
+    first.concat(rest).forEach(function (r, idx) {
+      ayahs.forEach(function (n) { enqueue(r.edition, n, idx === 0); });
     });
   }
   function haveCount(edition) {
@@ -289,12 +330,22 @@
     } catch (eCacheDel) {}
   }
   async function loadCatalog() {
-    try {
-      var res = await fetch("/data/quran-reciters.json?v=" + VER, { cache: "force-cache" });
-      if (!res.ok) return;
-      var data = await res.json();
-      if (data && Array.isArray(data.reciters) && data.reciters.length) reciters = data.reciters;
-    } catch (e) {}
+    var urls = [
+      "/data/quran-reciters.json?v=" + VER,
+      "/apple-tv/quran/audio/catalog.json?v=" + VER
+    ];
+    for (var i = 0; i < urls.length; i++) {
+      try {
+        var res = await fetch(urls[i], { cache: "no-store" });
+        if (!res.ok) continue;
+        var data = await res.json();
+        var list = (data && data.reciters) || [];
+        if (Array.isArray(list) && list.length) {
+          reciters = list;
+          break;
+        }
+      } catch (e) {}
+    }
     try {
       if (!verseCounts().length) {
         var sres = await fetch("/content/quran/surahs.json", { cache: "force-cache" });
@@ -321,7 +372,8 @@
     status: function () { return { have: status.have, queued: queue.length, seed: status.seed, reciter: status.reciter }; }
   };
   (async function boot() {
-    await hydrate();
-    await loadCatalog();
+    try { await loadCatalog(); } catch (eCat) {}
+    try { startSeed(); } catch (eSeed) {}
+    hydrate();
   })();
 })();

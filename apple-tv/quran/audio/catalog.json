@@ -1,10 +1,10 @@
 {
-  "schemaVersion": "1.2",
+  "schemaVersion": "1.3",
   "status": "active",
   "target": "tvOS-only",
   "provider": {
     "name": "DĀR AL TAWḤĪD audio pack",
-    "editionsURL": "https://api.alquran.cloud/v1/edition/format/audio",
+    "editionsURL": "https://dar-al-tawhid.de/data/quran-reciters.json",
     "surahURLTemplate": "https://api.alquran.cloud/v1/surah/{surah}/{edition}",
     "cdnBaseURL": "https://cdn.islamic.network",
     "appProxyURL": "https://dar-al-tawhid.de/quran-audio/{edition}/{ayah}.mp3",
@@ -28,14 +28,24 @@
     "persistSelection": true,
     "sort": "displayName"
   },
+  "playback": {
+    "autoStart": true,
+    "autoStartOnLaunch": true,
+    "playWhenFirstAyahReady": true,
+    "waitForFullReciter": false,
+    "waitForSeed": false,
+    "playViaProxyUntilCached": true
+  },
   "offline": {
     "cacheLastSuccessfulEditionList": true,
     "cacheLoadedSurahText": true,
     "cacheLoadedGermanTranslation": true,
     "downloadSeedSurahs": [1, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114],
     "downloadSelectedReciter": true,
+    "downloadSelectedReciterInBackground": true,
     "diskPack": true,
-    "fallbackRequired": true
+    "fallbackRequired": true,
+    "startSeedOnLaunch": true
   },
   "fallbackEditions": [
     "ar.alafasy",
@@ -57,5 +67,26 @@
     "ar.shaatree",
     "ar.yasseraldossari",
     "ar.aymanswoaid"
+  ],
+  "reciters": [
+    {"id":"alafasy","name":"Mišārī Rāšid al-ʿAfāsī","folder":"Alafasy_128kbps","edition":"ar.alafasy","style":"murattal"},
+    {"id":"sudais","name":"ʿAbd ar-Raḥmān as-Sudais","folder":"Abdurrahmaan_As-Sudais_192kbps","edition":"ar.abdurrahmaansudais","style":"murattal"},
+    {"id":"shuraim","name":"Saʿūd aš-Šuraym","folder":"Saood_ash-Shuraym_128kbps","edition":"ar.saoodshuraym","style":"murattal"},
+    {"id":"husary","name":"Maḥmūd Ḫalīl al-Ḥuṣarī","folder":"Husary_128kbps","edition":"ar.husary","style":"murattal"},
+    {"id":"husarymujawwad","name":"al-Ḥuṣarī (Muǧawwad)","folder":"Husary_Mujawwad_128kbps","edition":"ar.husarymujawwad","style":"mujawwad"},
+    {"id":"minshawi","name":"Muḥammad Ṣiddīq al-Minšāwī","folder":"Minshawy_Murattal_128kbps","edition":"ar.minshawi","style":"murattal"},
+    {"id":"minshawimujawwad","name":"al-Minšāwī (Muǧawwad)","folder":"Minshawy_Mujawwad_192kbps","edition":"ar.minshawimujawwad","style":"mujawwad"},
+    {"id":"basit","name":"ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad","folder":"Abdul_Basit_Murattal_192kbps","edition":"ar.abdulbasitmurattal","style":"murattal"},
+    {"id":"abdulbasitmujawwad","name":"ʿAbd al-Bāsiṭ (Muǧawwad)","folder":"Abdul_Basit_Mujawwad_128kbps","edition":"ar.abdulbasitmujawwad","style":"mujawwad"},
+    {"id":"ajamy","name":"Aḥmad ibn ʿAlī al-ʿAǧamī","folder":"Ahmed_ibn_Ali_al-Ajamy_128kbps_ketaballah.net","edition":"ar.ahmedajamy","style":"murattal"},
+    {"id":"muhammadayoub","name":"Muḥammad Ayyūb","folder":"Muhammad_Ayyoub_128kbps","edition":"ar.muhammadayoub","style":"murattal"},
+    {"id":"hudhaify","name":"ʿAlī al-Ḥuḏayfī","folder":"Hudhaify_128kbps","edition":"ar.hudhaify","style":"murattal"},
+    {"id":"muhammadjibreel","name":"Muḥammad Ǧibrīl","folder":"Muhammad_Jibreel_128kbps","edition":"ar.muhammadjibreel","style":"murattal"},
+    {"id":"maher","name":"Māhir al-Muʿayqlī","folder":"MaherAlMuaiqly128kbps","edition":"ar.mahermuaiqly","style":"murattal"},
+    {"id":"shaatree","name":"Abū Bakr aš-Šāṭirī","folder":"Abu_Bakr_Ash-Shaatree_128kbps","edition":"ar.shaatree","style":"murattal"},
+    {"id":"hanirifai","name":"Hānī ar-Rifāʿī","folder":"Hani_Rifai_192kbps","edition":"ar.hanirifai","style":"murattal"},
+    {"id":"abdullahbasfar","name":"ʿAbdullāh Baṣfar","folder":"Abdullah_Basfar_192kbps","edition":"ar.abdullahbasfar","style":"murattal"},
+    {"id":"yasseraldossari","name":"Yāsir ad-Dawsarī","folder":"Yasser_Ad-Dussary_128kbps","edition":"ar.yasseraldossari","style":"murattal"},
+    {"id":"aymanswoaid","name":"Ayman Suwayd","folder":"Ayman_Sowaid_64kbps","edition":"ar.aymanswoaid","style":"muallim"}
   ]
 }

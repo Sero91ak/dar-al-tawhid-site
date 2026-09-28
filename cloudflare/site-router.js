@@ -190,21 +190,40 @@ async function proxyQuranAudio(request, url) {
   if (!QURAN_AUDIO_EDITIONS.has(edition) || !Number.isInteger(ayah) || ayah < 1 || ayah > 6236) {
     return new Response("Bad recitation request", { status: 400 });
   }
-  const upstream = `https://cdn.islamic.network/quran/audio/128/${edition}/${ayah}.mp3`;
+  const upstreams = [
+    `https://cdn.islamic.network/quran/audio/128/${edition}/${ayah}.mp3`,
+    `https://cdn.alquran.cloud/media/audio/ayah/${edition}/${ayah}`
+  ];
   const headers = new Headers();
   const range = request.headers.get("Range");
   if (range) headers.set("Range", range);
   headers.set("Accept", "audio/mpeg,audio/*;q=0.9,*/*;q=0.8");
-  const res = await fetch(upstream, {
-    headers,
-    cf: { cacheTtl: 31536000, cacheEverything: true, cacheKey: upstream }
-  });
-  const out = new Headers(res.headers);
-  out.set("Cache-Control", "public, max-age=31536000, immutable");
-  out.set("CDN-Cache-Control", "public, max-age=31536000, immutable");
-  out.set("Access-Control-Allow-Origin", "*");
-  out.set("Content-Type", res.headers.get("Content-Type") || "audio/mpeg");
-  return new Response(res.body, { status: res.status, statusText: res.statusText, headers: out });
+  try {
+    let res = null;
+    let used = upstreams[0];
+    for (const upstream of upstreams) {
+      used = upstream;
+      try {
+        res = await fetch(upstream, {
+          headers,
+          cf: { cacheTtl: 31536000, cacheEverything: true, cacheKey: upstream }
+        });
+        if (res && (res.ok || res.status === 206)) break;
+      } catch (eUp) {
+        res = null;
+      }
+    }
+    if (!res) return new Response("Recitation upstream unavailable", { status: 502 });
+    const out = new Headers(res.headers);
+    out.set("Cache-Control", "public, max-age=31536000, immutable");
+    out.set("CDN-Cache-Control", "public, max-age=31536000, immutable");
+    out.set("Access-Control-Allow-Origin", "*");
+    out.set("Content-Type", res.headers.get("Content-Type") || "audio/mpeg");
+    out.set("X-Dar-Quran-Audio", used);
+    return new Response(res.body, { status: res.status, statusText: res.statusText, headers: out });
+  } catch (eProxy) {
+    return new Response("Recitation proxy error", { status: 502 });
+  }
 }
 
 export default {
