@@ -3,10 +3,10 @@
   "schemaVersion": "1.3",
   "language": "de",
   "authenticOnly": true,
-  "totalCount": 2745,
-  "currentSeries": "2651-2750",
-  "latestId": "HAD-2745",
-  "nextId": "HAD-2746",
+  "totalCount": 2770,
+  "currentSeries": "2751-2850",
+  "latestId": "HAD-2770",
+  "nextId": "HAD-2771",
   "supportedRecordTypes": [
     "hadith",
     "athar"
@@ -416,22 +416,41 @@
     },
     {
       "id": "2651-2750",
-      "status": "incremental-active",
+      "status": "complete",
       "activation": "per-record-immediate",
-      "count": 95,
+      "count": 100,
       "firstId": "HAD-2651",
-      "lastId": "HAD-2745",
+      "lastId": "HAD-2750",
       "plannedLastId": "HAD-2750",
       "indexPath": "series/2651-2750/index.json",
       "contentTypes": {
-        "hadith": 95,
+        "hadith": 100,
         "athar": 0
       },
       "screensaverIncluded": true,
       "showSharh": true,
       "showSharhSource": true,
       "requireVerifiedSharh": true,
-      "readyThrough": "HAD-2745"
+      "readyThrough": "HAD-2750"
+    },
+    {
+      "id": "2751-2850",
+      "status": "incremental-active",
+      "activation": "per-record-immediate",
+      "count": 20,
+      "firstId": "HAD-2751",
+      "lastId": "HAD-2770",
+      "plannedLastId": "HAD-2850",
+      "indexPath": "series/2751-2850/index.json",
+      "contentTypes": {
+        "hadith": 20,
+        "athar": 0
+      },
+      "screensaverIncluded": true,
+      "showSharh": true,
+      "showSharhSource": true,
+      "requireVerifiedSharh": true,
+      "readyThrough": "HAD-2770"
     }
   ],
   "xcode": {
