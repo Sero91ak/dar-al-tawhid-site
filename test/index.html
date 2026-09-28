@@ -35961,4 +35961,190 @@ body.is-home-route .home-premium-access__kicker{
   body.is-home-route .isnad-source{font-size:10.5px!important}
 }
 </style>
+
+<style id="home-hero-visual-v1103">
+/* TEST ONLY · Startseite: echte Marke + hochwertiges Bild + bestehende 3D-Assets.
+   Kein Austausch von Inhalt oder Funktion. */
+html[data-theme="dark"] body.is-home-route{
+  --home-hero-left:rgba(5,7,6,.96);--home-hero-mid:rgba(5,7,6,.82);--home-hero-right:rgba(5,7,6,.48);
+  --home-hero-top:rgba(5,7,6,.18);--home-hero-bottom:rgba(5,7,6,.88);
+}
+html[data-theme="light"] body.is-home-route{
+  --home-hero-left:rgba(247,244,235,.98);--home-hero-mid:rgba(247,244,235,.91);--home-hero-right:rgba(247,244,235,.67);
+  --home-hero-top:rgba(247,244,235,.12);--home-hero-bottom:rgba(247,244,235,.89);
+}
+html[data-theme="eisgold"] body.is-home-route{
+  --home-hero-left:rgba(232,243,251,.98);--home-hero-mid:rgba(232,243,251,.91);--home-hero-right:rgba(232,243,251,.68);
+  --home-hero-top:rgba(232,243,251,.12);--home-hero-bottom:rgba(216,238,251,.91);
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route{
+  --home-hero-left:rgba(244,246,240,.98);--home-hero-mid:rgba(244,246,240,.91);--home-hero-right:rgba(244,246,240,.66);
+  --home-hero-top:rgba(244,246,240,.10);--home-hero-bottom:rgba(238,242,235,.91);
+}
+html[data-theme="soft"] body.is-home-route{
+  --home-hero-left:rgba(247,238,235,.98);--home-hero-mid:rgba(247,238,235,.91);--home-hero-right:rgba(247,238,235,.67);
+  --home-hero-top:rgba(247,238,235,.11);--home-hero-bottom:rgba(242,230,226,.91);
+}
+html[data-theme="royal"] body.is-home-route{
+  --home-hero-left:rgba(7,22,44,.96);--home-hero-mid:rgba(7,22,44,.83);--home-hero-right:rgba(7,22,44,.49);
+  --home-hero-top:rgba(7,22,44,.16);--home-hero-bottom:rgba(7,22,44,.90);
+}
+html[data-theme="bordeaux"] body.is-home-route{
+  --home-hero-left:rgba(20,11,12,.96);--home-hero-mid:rgba(20,11,12,.83);--home-hero-right:rgba(20,11,12,.50);
+  --home-hero-top:rgba(20,11,12,.16);--home-hero-bottom:rgba(20,11,12,.91);
+}
+html[data-theme="dar-al-layl"] body.is-home-route{
+  --home-hero-left:rgba(5,6,5,.96);--home-hero-mid:rgba(5,6,5,.84);--home-hero-right:rgba(5,6,5,.50);
+  --home-hero-top:rgba(5,6,5,.16);--home-hero-bottom:rgba(5,6,5,.91);
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface,
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  padding-bottom:14px!important;
+  background-color:var(--page-cover,var(--bg))!important;
+  background-image:
+    linear-gradient(90deg,var(--home-hero-left) 0%,var(--home-hero-mid) 52%,var(--home-hero-right) 100%),
+    linear-gradient(180deg,var(--home-hero-top) 0%,var(--home-hero-bottom) 100%),
+    url("/assets/feed-backgrounds/auto/mosque/bg-nature-mosque-pexels-54.webp")!important;
+  background-size:100% 100%,100% 100%,cover!important;
+  background-repeat:no-repeat!important;
+  background-position:center,center,center 48%!important;
+}
+
+/* Das Original-Logo ist wieder klarer Mittelpunkt der Marke. */
+body.is-home-route .top-shell .brand-main .logo{
+  width:clamp(64px,16vw,84px)!important;
+  height:clamp(64px,16vw,84px)!important;
+  flex:0 0 clamp(64px,16vw,84px)!important;
+  object-fit:contain!important;
+  border-radius:50%!important;
+  filter:drop-shadow(0 10px 18px rgba(0,0,0,.22))!important;
+}
+body.is-home-route .top-shell .brand-main{
+  align-items:center!important;
+  gap:11px!important;
+}
+body.is-home-route .top-shell .brand-main .brand-title-refined{
+  font-size:clamp(29px,7vw,43px)!important;
+  line-height:1!important;
+  letter-spacing:.025em!important;
+}
+
+/* Gebetszeiten bleiben funktional, bekommen aber eine klar abgegrenzte Lesefläche. */
+body.is-home-route .header-prayer-hub{
+  margin-top:11px!important;
+  border:1px solid var(--home-read-border)!important;
+  border-radius:16px!important;
+  background:var(--home-read-surface)!important;
+  box-shadow:0 9px 25px rgba(0,0,0,.10),inset 0 1px 0 rgba(255,255,255,.06)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.04)!important;
+  backdrop-filter:blur(12px) saturate(1.04)!important;
+}
+
+/* Ibn Sīrīn bleibt direkt darunter; vorhandenes 3D-Bibliotheksbild nur als ruhiger Akzent. */
+body.is-home-route .top-shell.theme-hero-shell .isnad{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  margin:8px 12px 0!important;
+  padding:12px 76px 11px 13px!important;
+  border:1px solid var(--home-read-border)!important;
+  border-radius:17px!important;
+  background:var(--home-read-card)!important;
+  box-shadow:0 9px 24px rgba(0,0,0,.075)!important;
+}
+body.is-home-route .top-shell.theme-hero-shell .isnad::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  right:5px!important;
+  bottom:-7px!important;
+  width:76px!important;
+  height:76px!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:url("/test/assets/dar-3d-icons/library.png?v=1094") center/contain no-repeat!important;
+  opacity:.34!important;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.10))!important;
+}
+
+/* Tawḥīd bleibt vor allen anderen Bereichen sichtbar und stärker als normale Kacheln. */
+body.is-home-route .home-tawhid-entry{
+  border:1px solid color-mix(in srgb,var(--home-read-accent) 48%,var(--home-read-border))!important;
+  background:
+    radial-gradient(circle at 82% 25%,color-mix(in srgb,var(--home-read-accent) 18%,transparent),transparent 38%),
+    linear-gradient(115deg,color-mix(in srgb,var(--home-read-card) 86%,var(--home-read-accent) 14%),var(--home-read-card))!important;
+  box-shadow:0 12px 28px rgba(0,0,0,.09),inset 0 1px 0 rgba(255,255,255,.07)!important;
+}
+body.is-home-route .home-tawhid-entry__icon{
+  width:68px!important;
+  min-width:68px!important;
+  height:68px!important;
+}
+body.is-home-route .home-tawhid-entry__icon img,
+body.is-home-route .home-tawhid-entry__icon .dar3d-icon{
+  width:64px!important;
+  height:64px!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 9px 11px rgba(0,0,0,.16))!important;
+}
+body.is-home-route .home-tawhid-entry__copy h3{
+  font-size:clamp(19px,4.8vw,24px)!important;
+  margin-bottom:3px!important;
+}
+
+/* Echte 3D-Grafiken etwas größer, Text bleibt kompakt. */
+body.is-home-route .home-premium-access-card__icon{
+  width:52px!important;
+  min-width:52px!important;
+  height:52px!important;
+}
+body.is-home-route .home-premium-access-card__icon img,
+body.is-home-route .home-premium-access-card__icon .dar3d-icon{
+  width:50px!important;
+  height:50px!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 7px 10px rgba(0,0,0,.14))!important;
+}
+body.is-home-route .home-premium-mini__icon img,
+body.is-home-route .home-premium-mini__icon .dar3d-icon{
+  filter:drop-shadow(0 5px 8px rgba(0,0,0,.12))!important;
+}
+
+@media(max-width:520px){
+  body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface{
+    background-position:center,center,58% 48%!important;
+  }
+  body.is-home-route .top-shell .brand-main .logo{
+    width:60px!important;height:60px!important;flex-basis:60px!important;
+  }
+  body.is-home-route .top-shell .brand-main .brand-title-refined{
+    font-size:clamp(27px,7.6vw,35px)!important;
+  }
+  body.is-home-route .top-shell.theme-hero-shell .isnad{
+    margin:7px 10px 0!important;
+    padding:11px 62px 10px 12px!important;
+  }
+  body.is-home-route .top-shell.theme-hero-shell .isnad::after{
+    width:62px!important;height:62px!important;opacity:.30!important;
+  }
+  body.is-home-route .home-tawhid-entry__icon{
+    width:60px!important;min-width:60px!important;height:60px!important;
+  }
+  body.is-home-route .home-tawhid-entry__icon img,
+  body.is-home-route .home-tawhid-entry__icon .dar3d-icon{
+    width:57px!important;height:57px!important;
+  }
+  body.is-home-route .home-premium-access-card__icon{
+    width:47px!important;min-width:47px!important;height:47px!important;
+  }
+  body.is-home-route .home-premium-access-card__icon img,
+  body.is-home-route .home-premium-access-card__icon .dar3d-icon{
+    width:45px!important;height:45px!important;
+  }
+}
+</style>
 </html>
