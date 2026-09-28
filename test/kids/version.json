@@ -1,6 +1,6 @@
 {
-  "buildId": "kids-shell-v12-tab77",
-  "label": "KIDS · V0.77",
-  "releasedAt": "2026-09-28T15:08:00.000Z",
-  "note": "Cinema intro cache consistency repair. Veo intro now runs on every full Kids app start, with no sessionStorage skip. Overlay timing begins only after video playback starts. Reduced Motion no longer shortens the video intro. Service worker, manifest, alive marker, public router and test worker are synchronized on V0.77."
+  "buildId": "kids-shell-v12-tab78",
+  "label": "KIDS · V0.78",
+  "releasedAt": "2026-09-28T15:24:00.000Z",
+  "note": "Video-only intro. The prepared Veo MP4 is the only visual shown during launch. All generated overlay elements, branding text, Arabic letter animation, sparks, shading, greeting copy, visible audio button and prior generated intro visuals are removed."
 }
