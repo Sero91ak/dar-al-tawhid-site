@@ -30,11 +30,11 @@ Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-048` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4354
-totalVerifiedEntries: 4354
-loadedEntries: 4354
-uniqueVerifiedReferences: 4354
-missingCount: 1882
+entriesCount: 4359
+totalVerifiedEntries: 4359
+loadedEntries: 4195
+uniqueVerifiedReferences: 4195
+missingCount: 2041
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:4
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-048.json
-nächster Gap-Fill-Batch: entries-gap-06-049.json
+letzter Gap-Fill-Batch: entries-gap-06-049.json
+nächster Gap-Fill-Batch: entries-gap-06-050.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `164` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `5` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -73,6 +73,7 @@ Danach gibt es keinen weiteren Qurʾān-Vers. Alle weiteren Arbeiten sind aussch
 06-014  3      06-030  3      06-046  2
 06-015  3      06-031  3      06-047  2
 06-016  2      06-032  1      06-048  2
+06-049  5
 ```
 
 Die Zahl hinter jedem Batch ist die aktuell registrierte Eintragszahl der Datei.
@@ -111,6 +112,7 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 06-046: 3:100, 3:112
 06-047: 3:111, 3:113
 06-048: 3:117, 3:118
+06-049: 2:4, 2:5, 2:7, 2:21, 2:50
 ```
 
 ## Nächste echte Audit-Lücken
@@ -118,37 +120,37 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 Der erste weiterhin fehlende Vers ist:
 
 ```text
-2:4
+1:1
 ```
 
 Der aktuelle nächste 25er-Auditbereich beginnt mit:
 
 ```text
-2:4
-2:5
+1:1
+1:2
+1:3
+1:4
+1:5
+1:6
+1:7
+2:1
+2:2
+2:3
 2:6
-2:7
-2:21
-2:36
-2:38
-2:42
-2:43
-2:44
-2:46
-2:47
-2:48
-2:49
-2:50
-2:51
-2:52
-2:53
-2:64
-2:67
-2:70
-2:72
-2:82
-2:83
-2:87
+2:8
+2:9
+2:10
+2:11
+2:12
+2:13
+2:14
+2:15
+2:16
+2:17
+2:18
+2:19
+2:20
+2:22
 ```
 
 Diese Referenzen sind Arbeitsziele, keine Aufforderung zum künstlichen Füllen. Ein Vers bleibt offen, bis ein konkreter früher Bericht mit belastbarer Zuordnung und ausreichend geprüfter Überlieferungskette vorliegt.
