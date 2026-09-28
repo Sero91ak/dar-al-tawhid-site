@@ -1,7 +1,7 @@
 {
   "version": "2.9.26",
-  "updatedAt": "2026-09-28T13:35:00+02:00",
-  "deployTrigger": "voice-studio-2.9.26-kids-final-pause-repair",
+  "updatedAt": "2026-09-28T14:15:00+02:00",
+  "deployTrigger": "voice-studio-2.9.26-alif-manifest-reference-repair",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v36",
@@ -549,10 +549,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "ff8a109174316827947d95c156bccf5a99d8c717",
+  "releaseRef": "b1927f935b2aac9d109148d6a857f713465566a7",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Content Studio Kids passed segment QA but the final joined file was rejected by a single 720 ms silent island. 2.9.26 keeps the strict segment/final thresholds, but for kids_lesson only, a moderate final silent island up to 950 ms is compressed once and the full output is re-measured before acceptance.",
+  "updateRepairReason": "Alif-/Alphabet-Manifest-Reparatur: Die lokale Mac-App erhält alphabet-audio.json jetzt als installierte Runtime-Datei, die Engine stellt /studio/alphabet-audio.json bereit, fehlgeschlagene Manifest-Ladevorgänge werden nicht mehr fälschlich als 'vollständig' angezeigt, und die dauerhafte Eiarabe-Alif-Aussprache-Referenz wird aus policy.pronunciationReferenceUrl geladen.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -677,5 +677,13 @@
       "autoPublish": false,
       "pronunciationReference": "Eiarabe Alif remains reference until Serhat Alif master is approved"
     }
+  },
+  "alphabetManifestRepair": {
+    "localPackagedManifest": true,
+    "localEngineRoute": "/studio/alphabet-audio.json",
+    "githubContentsFallback": true,
+    "nullManifestNeverComplete": true,
+    "alifReferenceSource": "policy.pronunciationReferenceUrl",
+    "validatedVoiceStudioCommit": "b1927f935b2aac9d109148d6a857f713465566a7"
   }
 }
