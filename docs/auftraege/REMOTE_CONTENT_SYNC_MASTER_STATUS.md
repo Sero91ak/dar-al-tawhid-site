@@ -6,40 +6,38 @@ Branch: `apple-tv-hadith-staging`
 
 ## Grundsatz
 
-Alles, was bisher vorbereitet wurde, muss zusammenarbeiten:
+Alles muss zusammenarbeiten:
 
 - GitHub liefert Inhalt, Versionen, Kataloge, Indexdateien und Batch-Dateien.
-- Xcode/App lädt nur Root-Katalog und Bereichs-Kataloge.
+- Xcode/App lädt Root-Katalog und Bereichs-Kataloge.
 - Die App kennt keine festen Inhaltsgrenzen.
-- Neue Inhalte, neue Aussagen, neue Ḥadīṯe, neue Šarḥ-Dateien, Bildschirmschoner-Inhalte, Duʿāʾ, Serien und Korrekturen müssen ohne Bolt-, Xcode- oder App-Store-Update online synchronisiert werden.
+- Neue Inhalte, neue Aussagen, neue Ḥadīṯe, Šarḥ-Dateien, Bildschirmschoner-Inhalte, Duʿāʾ, Serien, Āṯār und Korrekturen müssen ohne Bolt-, Xcode- oder App-Store-Update synchronisiert werden.
 - Sobald die App Internet hat, prüft sie den neuesten Stand.
 - Offline bleibt der letzte vollständige Cache aktiv.
 
-## Bereits angelegte GitHub-Struktur
-
-### Root
+## Root
 
 ```text
 apple-tv/catalog.json
 ```
 
-Aufgabe:
+Pflicht:
 
 - zentraler Einstieg für Apple TV / iOS / iPadOS
 - enthält `remoteContentSync`
 - verweist auf Qurʾān, Ḥadīṯ, Šarḥ, Screensaver, Duʿāʾ, Serien, Āṯār und Hintergründe
-- darf keine harten Inhaltsgrenzen in Xcode benötigen
+- keine harten Inhaltsgrenzen in Xcode
 
-### Qurʾān-Tadabbur
+## Qurʾān-Tadabbur
+
+Datenstruktur:
 
 ```text
 apple-tv/quran/tadabbur/catalog.json
 apple-tv/quran/tadabbur/entries-index.json
-apple-tv/quran/tadabbur/xcode/TVQuranTadabburSupport.swift
-apple-tv/quran/tadabbur/entries-batch-05z-113.json
-apple-tv/quran/tadabbur/entries-batch-05z-114.json
-apple-tv/quran/tadabbur/entries-batch-05z-115.json
-apple-tv/quran/tadabbur/entries-batch-05z-116.json
+apple-tv/quran/tadabbur/coverage.json
+apple-tv/quran/tadabbur/entries.json
+apple-tv/quran/tadabbur/entries-batch-*.json
 ```
 
 Aktueller registrierter Stand:
@@ -49,19 +47,50 @@ entriesCount: 5102
 totalVerifiedEntries: 5102
 letzter Batch: entries-batch-05z-116.json
 letzter Vers: 114:6
+Coverage: 114 Sūren / 6236 Verse
+```
+
+Aktive Xcode-Datei:
+
+```text
+apple-tv/xcode/TVQuranTadabburSupport.swift
+```
+
+Aktive Qurʾān-Ansicht:
+
+```text
+apple-tv/xcode/QuranTabView.swift
 ```
 
 Pflicht/Stand:
 
-- Apple TV, iOS und iPadOS müssen diesen Stand automatisch erkennen.
-- Keine feste Grenze im Code.
-- Neue Batch-Dateien müssen künftig automatisch über den Katalog erkannt werden.
 - `TVQuranTadabburSupport.swift` ist am zentralen `RemoteContentSyncService` angebunden.
-- Tadabbur wird in `QuranTabView.swift` sichtbar direkt unter der Qurʾān-Übersetzung gerendert.
-- Lookup erfolgt über exakte Referenz `Sūrah:Āyah`.
-- Wenn kein geprüfter Eintrag existiert, erscheint nur der feste Fallback.
+- Der Store triggert `syncCatalog(relativeCatalogPath: "quran/tadabbur/catalog.json")`.
+- Daten werden bevorzugt aus dem zentralen Sync-Cache geladen.
+- Bei Bedarf fällt der Store auf Remote zurück.
+- Danach bleibt der letzte gültige lokale Tadabbur-Cache erhalten.
+- `QuranTabView.swift` lädt `TVQuranTadabburStore.shared` in `prepare()`.
+- Pro Vers wird die Referenz `Sūrah:Āyah` gebildet.
+- `TVQuranTadabburCard` erscheint direkt unter der deutschen Übersetzung.
+- Bei fehlendem geprüften Eintrag erscheint nur der feste Fallback.
+- Keine Logos in der Tadabbur-Karte.
+- Keine erfundenen oder KI-generierten Tadabbur-Texte.
 
-### Ḥadīṯ / Āṯār Legacy-Katalog
+Prüfung:
+
+```text
+apple-tv/quran/tadabbur/tools/verify_tadabbur_catalog.py
+apple-tv/quran/tadabbur/VERIFY.md
+```
+
+Der Prüfer kontrolliert jetzt zusätzlich:
+
+- `coverage.verseCounts` enthält exakt 114 Sūren.
+- Summe der Verse ist exakt 6236.
+- Jede Referenz liegt innerhalb der echten Sūrah-/Āyah-Grenzen.
+- Referenzen wie `115:1` oder `2:999` werden blockiert.
+
+## Ḥadīṯ / Āṯār Legacy-Katalog
 
 ```text
 apple-tv/hadith/catalog.json
@@ -79,13 +108,14 @@ nextId: HAD-2546
 currentSeries: 2451-2550
 ```
 
-Besonderheit:
+Pflicht/Stand:
 
-- Dieser Bereich nutzt bereits eine ältere, funktionierende Struktur mit `series[].indexPath`.
-- Der neue `RemoteContentSyncService` synchronisiert deshalb nicht nur `entriesPaths`, sondern auch `series[].indexPath`.
-- Zusätzlich liest der Service die Serien-Indexdateien und lädt daraus die einzelnen `HAD-xxxx.json`-Datensätze in den zentralen Sync-Cache.
+- bestehende Legacy-Struktur mit `series[].indexPath` bleibt gültig.
+- `RemoteContentSyncService` synchronisiert `series[].indexPath`.
+- Serien-Indizes werden ausgelesen.
+- einzelne `HAD-xxxx.json` werden daraus geladen und gecacht.
 
-### Ḥadīṯ-Šarḥ
+## Ḥadīṯ-Šarḥ
 
 ```text
 apple-tv/hadith/sharh/catalog.json
@@ -101,13 +131,13 @@ entriesCount: 0
 
 Pflicht:
 
-- Katalog muss gültig leer ladbar sein.
-- Kein 404.
-- Kein Crash.
-- Wenn Šarḥ-Dateien später ergänzt werden, erkennt Xcode sie automatisch.
-- Šarḥ wird über `hadithId`, `reference`, `bookId`, `chapterId` oder `sharhId` mit Ḥadīṯen verbunden.
+- gültig leer ladbar
+- kein 404
+- kein Crash
+- spätere Šarḥ-Dateien automatisch über Katalog laden
+- Verbindung zu Ḥadīṯ über `hadithId`, `reference`, `bookId`, `chapterId` oder `sharhId`
 
-### Bildschirmschoner
+## Bildschirmschoner
 
 ```text
 apple-tv/screensaver/catalog.json
@@ -121,16 +151,16 @@ Status:
 active
 ```
 
-Pflicht:
+Pflicht/Stand:
 
-- Bildschirmschoner lädt eigenen Katalog.
-- `rotation.json` bleibt aktiv.
-- Inhalte können aus `hadith/catalog.json`, Āṯār, Duʿāʾ, Qurʾān-Tadabbur und Tagesinhalten kommen.
-- Nach 60 Sekunden Inaktivität muss der Bildschirmschoner starten.
-- Kein leerer Bildschirmschoner.
-- Offline letzter Cache.
+- eigener Screensaver-Katalog
+- `rotation.json` bleibt aktiv
+- Inhalte können aus Ḥadīṯ, Āṯār, Duʿāʾ, Qurʾān-Tadabbur und Tagesinhalten kommen
+- Start nach 60 Sekunden Inaktivität
+- kein leerer Bildschirmschoner
+- offline letzter Cache
 
-### Qurʾān-Audio
+## Qurʾān-Audio
 
 ```text
 apple-tv/quran/audio/catalog.json
@@ -138,11 +168,11 @@ apple-tv/quran/audio/catalog.json
 
 Pflicht:
 
-- Der Sync-Service muss diesen bestehenden Spezialkatalog ebenfalls erkennen.
-- Auch wenn keine `entriesPaths` vorhanden sind, darf der Katalog nicht fehlschlagen.
-- Audio-/Edition-Daten bleiben über den bestehenden Provider abrufbar.
+- bestehender Spezialkatalog bleibt gültig
+- darf auch ohne `entriesPaths` nicht fehlschlagen
+- Audio-/Edition-Daten bleiben über bestehenden Provider abrufbar
 
-### Hintergründe
+## Hintergründe
 
 ```text
 apple-tv/backgrounds/catalog.json
@@ -150,11 +180,11 @@ apple-tv/backgrounds/catalog.json
 
 Pflicht:
 
-- Hintergrund-Katalog muss weiterhin funktionieren.
-- Bundle-Hintergrund bleibt gültig.
-- Remote-Sync darf diesen Katalog nicht zerstören.
+- Hintergrund-Katalog bleibt gültig
+- Bundle-Hintergrund bleibt gültig
+- Remote-Sync darf ihn nicht zerstören
 
-### Duʿāʾ
+## Duʿāʾ
 
 ```text
 apple-tv/dua/catalog.json
@@ -170,11 +200,11 @@ entriesCount: 0
 
 Pflicht:
 
-- Gültig leer ladbar.
-- Kein 404.
-- Sobald Duʿāʾ-Dateien registriert werden, automatisch synchronisieren.
+- gültig leer ladbar
+- kein 404
+- spätere Duʿāʾ-Dateien automatisch synchronisieren
 
-### Serien / 30-Tage-Bereiche
+## Serien / 30-Tage-Bereiche
 
 ```text
 apple-tv/series/catalog.json
@@ -190,12 +220,12 @@ entriesCount: 0
 
 Pflicht:
 
-- Gültig leer ladbar.
-- Spätere 30-Tage-Serien über Katalog laden.
-- Fortschritt lokal speichern.
-- Abschluss/Beglückwünschung über App-Logik, Inhalte aber per Remote-Katalog.
+- gültig leer ladbar
+- spätere 30-Tage-Serien über Katalog laden
+- Fortschritt lokal speichern
+- Abschluss/Beglückwünschung über App-Logik, Inhalte per Remote-Katalog
 
-### Āṯār & Aussagen der Salaf
+## Āṯār & Aussagen der Salaf
 
 ```text
 apple-tv/athar/catalog.json
@@ -211,10 +241,9 @@ entriesCount: 0
 
 Pflicht:
 
-- Root-Katalog verweist auf Āṯār.
-- Deshalb muss auch dieser Bereich gültig existieren.
-- Kein 404.
-- Spätere Āṯār-Dateien automatisch laden.
+- gültige Basis für spätere Āṯār-Dateien
+- kein 404
+- automatische Synchronisierung nach Registrierung im Katalog
 
 ## Bereits angelegte Xcode-Struktur
 
@@ -224,8 +253,8 @@ apple-tv/xcode/RemoteContentSyncService.swift
 apple-tv/xcode/RemoteContentSyncCoordinator.swift
 apple-tv/xcode/QuranContentService.swift
 apple-tv/xcode/QuranTabView.swift
+apple-tv/xcode/TVQuranTadabburSupport.swift
 apple-tv/xcode/ScreensaverRotationService.swift
-apple-tv/quran/tadabbur/xcode/TVQuranTadabburSupport.swift
 apple-tv/hadith/xcode/HadithRemoteService.swift
 apple-tv/hadith/xcode/HadithScreensaverProvider.swift
 apple-tv/xcode/AUFTRAG_REMOTE_CONTENT_SYNC_IMPLEMENTATION.md
@@ -233,123 +262,85 @@ apple-tv/xcode/AUFTRAG_REMOTE_CONTENT_SYNC_IMPLEMENTATION.md
 
 ### AppleTVContentRegistry.swift
 
-Pflicht:
+Pflicht/Stand:
 
-- Root-Katalog laden.
-- `remoteContentSync` decodieren.
-- `quran.tadabbur` decodieren.
-- `screensaver.catalogPath` decodieren.
-- geplante Module decodieren.
-- optionale `schemaPath` unterstützen.
-- URLs aus relativen Katalogpfaden bilden.
+- Root-Katalog laden
+- `remoteContentSync` decodieren
+- `quran.tadabbur` decodieren
+- `screensaver.catalogPath` decodieren
+- geplante Module decodieren
+- optionale `schemaPath` unterstützen
+- URLs aus relativen Katalogpfaden bilden
 
 ### RemoteContentSyncService.swift
 
-Ist umgesetzt als zentrale Sync-Schicht.
-
 Pflicht/Stand:
 
-- Root-Katalog laden.
-- Qurʾān-Audio synchronisieren.
-- Qurʾān-Tadabbur synchronisieren.
-- Screensaver synchronisieren.
-- alle Module aus Root-Katalog synchronisieren.
-- Hintergründe synchronisieren.
-- Standard-Kataloge mit `entriesPaths` unterstützen.
-- Legacy-Kataloge mit `series[].indexPath` unterstützen.
-- Serien-Indexdateien auslesen.
-- einzelne HAD-Dateien aus Serien-Indizes laden.
-- zuerst Staging-Cache schreiben.
-- validieren.
-- erst danach aktiven Cache ersetzen.
-- alten Cache bei Fehler behalten.
+- Root-Katalog laden
+- Qurʾān-Audio synchronisieren
+- Qurʾān-Tadabbur synchronisieren
+- Screensaver synchronisieren
+- alle Module aus Root-Katalog synchronisieren
+- Hintergründe synchronisieren
+- Standard-Kataloge mit `entriesPaths` unterstützen
+- Legacy-Kataloge mit `series[].indexPath` unterstützen
+- Serien-Indexdateien auslesen
+- einzelne HAD-Dateien aus Serien-Indizes laden
+- zuerst Staging-Cache schreiben
+- validieren
+- erst danach aktiven Cache ersetzen
+- alten Cache bei Fehler behalten
 
 ### RemoteContentSyncCoordinator.swift
 
-Ist umgesetzt als App-Lifecycle-Brücke.
-
 Pflicht/Stand:
 
-- `appDidStart()` für App-Start.
-- `appDidEnterForeground()` für Rückkehr aus Hintergrund.
-- `appleTVDidWake()` für Apple-TV-Wake.
-- `contentAreaDidOpen()` für Qurʾān, Ḥadīṯ, Šarḥ, Screensaver, Duʿāʾ, Serien.
-- `hadithDidOpen()` für Ḥadīṯ + Šarḥ-Prüfung.
-- `manualRefresh()` für Debug/Admin.
-- respektiert `minimumRefreshIntervalHours` aus Root-Katalog.
+- `appDidStart()` für App-Start
+- `appDidEnterForeground()` für Rückkehr aus Hintergrund
+- `appleTVDidWake()` für Apple-TV-Wake
+- `contentAreaDidOpen()` für Qurʾān, Ḥadīṯ, Šarḥ, Screensaver, Duʿāʾ, Serien
+- `hadithDidOpen()` für Ḥadīṯ + Šarḥ-Prüfung
+- `manualRefresh()` für Debug/Admin
+- respektiert `minimumRefreshIntervalHours` aus Root-Katalog
 
 ### QuranContentService.swift
 
-Ist angebunden.
-
 Pflicht/Stand:
 
-- triggert `RemoteContentSyncService.shared.syncAll(trigger: .contentOpen)` beim Laden der Sūrenliste.
-- triggert denselben Sync beim Laden einer synchronisierten Sūrah.
-- dadurch werden Qurʾān-Tadabbur und Qurʾān-Audio-Kataloge beim Öffnen aktuell gehalten.
-- lokaler Qurʾān-Cache bleibt erhalten.
-
-### TVQuranTadabburSupport.swift
-
-Ist angebunden.
-
-Pflicht/Stand:
-
-- triggert `RemoteContentSyncService.shared.syncCatalog(relativeCatalogPath: "quran/tadabbur/catalog.json")`.
-- lädt Tadabbur-Daten bevorzugt aus dem zentralen Sync-Cache.
-- fällt bei Bedarf auf Remote zurück.
-- fällt danach auf den letzten gültigen lokalen Tadabbur-Cache zurück.
-- validiert Referenzen, Pflichtfelder, doppelte IDs und Gesamtanzahl.
-- rendert `TVQuranTadabburCard` ohne Logo, mit Dar-al-Layl-Karte, cremefarbener Schrift und Goldakzent.
-
-### QuranTabView.swift
-
-Ist sichtbar angebunden.
-
-Pflicht/Stand:
-
-- hält `TVQuranTadabburStore.shared` als `@StateObject`.
-- lädt Tadabbur im `prepare()`.
-- bildet pro Vers die Referenz `Sūrah:Āyah`.
-- rendert `TVQuranTadabburCard` direkt unter der deutschen Übersetzung.
-- zeigt bei fehlendem Eintrag nur den festen Fallback.
-- keine Logos in der Tadabbur-Karte.
+- triggert `RemoteContentSyncService.shared.syncAll(trigger: .contentOpen)` beim Laden der Sūrenliste
+- triggert denselben Sync beim Laden einer synchronisierten Sūrah
+- dadurch werden Qurʾān-Tadabbur und Qurʾān-Audio-Kataloge beim Öffnen aktuell gehalten
+- lokaler Qurʾān-Cache bleibt erhalten
 
 ### HadithRemoteService.swift
 
-Ist angebunden.
-
 Pflicht/Stand:
 
-- triggert `RemoteContentSyncService` beim Laden aller Ḥadīṯe.
-- lädt zuerst aus zentral synchronisiertem Cache.
-- fällt bei Bedarf auf Remote zurück.
-- fällt danach auf alten lokalen Ḥadīṯ-Cache zurück.
-- unterstützt bestehende Legacy-Struktur mit `series/*/index.json` und einzelnen `HAD-xxxx.json` Dateien.
+- triggert `RemoteContentSyncService` beim Laden aller Ḥadīṯe
+- lädt zuerst aus zentral synchronisiertem Cache
+- fällt bei Bedarf auf Remote zurück
+- fällt danach auf alten lokalen Ḥadīṯ-Cache zurück
+- unterstützt Legacy-Struktur mit `series/*/index.json` und einzelnen `HAD-xxxx.json`
 
 ### ScreensaverRotationService.swift
 
-Ist angebunden.
-
 Pflicht/Stand:
 
-- triggert `RemoteContentSyncService` beim Screensaver-Start.
-- lädt `rotation.json` bevorzugt aus zentralem Sync-Cache.
-- fällt bei Bedarf auf Remote zurück.
-- fällt danach auf eigenen Config-Cache zurück.
-- Rotation bleibt shuffle-bag-basiert ohne Wiederholung vor vollständigem Zyklus.
+- triggert `RemoteContentSyncService` beim Screensaver-Start
+- lädt `rotation.json` bevorzugt aus zentralem Sync-Cache
+- fällt bei Bedarf auf Remote zurück
+- fällt danach auf eigenen Config-Cache zurück
+- Rotation bleibt shuffle-bag-basiert ohne Wiederholung vor vollständigem Zyklus
 
 ### HadithScreensaverProvider.swift
 
-Ist indirekt angebunden.
-
 Pflicht/Stand:
 
-- nutzt `HadithRemoteService.shared.loadAllHadith()`.
-- profitiert dadurch automatisch vom zentral synchronisierten Ḥadīṯ-/Āṯār-Cache.
-- liefert Inhalte an `ScreensaverRotationService`.
+- nutzt `HadithRemoteService.shared.loadAllHadith()`
+- profitiert vom zentral synchronisierten Ḥadīṯ-/Āṯār-Cache
+- liefert Inhalte an `ScreensaverRotationService`
 
-## Strenge Regeln für Xcode
+## Strenge Xcode-Regeln
 
 Verboten:
 
@@ -371,16 +362,9 @@ Bereichs-Kataloge aus Root-Katalog
 
 ## Produktionsregel
 
-Staging:
-
 ```text
-GitHub-Branch / Test-URL
-```
-
-Production:
-
-```text
-Cloudflare / Website / stabile Live-URL
+Staging: GitHub-Branch / Test-URL
+Production: Cloudflare / Website / stabile Live-URL
 ```
 
 Live-App darf nicht dauerhaft auf Staging zeigen.
@@ -397,24 +381,23 @@ Live-App darf nicht dauerhaft auf Staging zeigen.
 8. `entries-batch-05z-116.json` laden.
 9. Vers `114:6` öffnen.
 10. Tadabbur-Karte unter der deutschen Übersetzung prüfen.
-11. Ḥadīṯ-Katalog laden.
-12. `totalCount = 2545` erkennen.
-13. `series/2451-2550/index.json` laden.
-14. einzelne `HAD-xxxx.json` Dateien aus dem Serien-Index laden.
-15. Screensaver-Katalog laden.
-16. `rotation.json` laden.
-17. Apple TV 60 Sekunden nicht bedienen.
-18. Bildschirmschoner startet.
-19. Šarḥ-Katalog lädt ohne Crash, auch wenn leer.
-20. Duʿāʾ-Katalog lädt ohne Crash, auch wenn leer.
-21. Serien-Katalog lädt ohne Crash, auch wenn leer.
-22. Āṯār-Katalog lädt ohne Crash, auch wenn leer.
-23. Internet ausschalten.
-24. App neu starten.
-25. Letzter vollständiger Cache bleibt aktiv.
-26. Remote-Datei korrigieren.
-27. App online starten.
-28. Korrektur wird ohne App-Update übernommen.
+11. Prüfer ausführen: `python3 apple-tv/quran/tadabbur/tools/verify_tadabbur_catalog.py`.
+12. Ergebnis muss `TADABBUR VERIFY OK` sein.
+13. Ḥadīṯ-Katalog laden.
+14. `totalCount = 2545` erkennen.
+15. `series/2451-2550/index.json` laden.
+16. einzelne `HAD-xxxx.json` Dateien laden.
+17. Screensaver-Katalog laden.
+18. `rotation.json` laden.
+19. Apple TV 60 Sekunden nicht bedienen.
+20. Bildschirmschoner startet.
+21. Šarḥ-, Duʿāʾ-, Serien- und Āṯār-Kataloge laden ohne Crash, auch wenn leer.
+22. Internet ausschalten.
+23. App neu starten.
+24. letzter vollständiger Cache bleibt aktiv.
+25. Remote-Datei korrigieren.
+26. App online starten.
+27. Korrektur wird ohne App-Update übernommen.
 
 ## Schlussregel
 
