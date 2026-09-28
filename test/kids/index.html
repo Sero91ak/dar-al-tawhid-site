@@ -2880,7 +2880,7 @@ html.kids-intro-active.kids-intro-reveal .app{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.61</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.62</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3358,7 +3358,7 @@ html.kids-intro-active.kids-intro-reveal .app{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 
-<script id="kids-cinema-intro-runtime-v6">
+<script id="kids-cinema-intro-runtime-v7">
 (function(){
   var root=document.documentElement;
   var intro=document.getElementById("kidsCinemaIntro");
@@ -3369,13 +3369,22 @@ html.kids-intro-active.kids-intro-reveal .app{
   var finished=false,videoDone=false,speechStarted=false,speechDone=false;
   var reduced=false;
   try{reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
-  var greeting="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. Willkommen bei DĀR AL TAWḤĪD Kids. Los geht’s!";
 
-  function pickVoice(){
-    if(!("speechSynthesis" in window))return null;
-    var voices=speechSynthesis.getVoices?speechSynthesis.getVoices():[];
+  function allVoices(){
+    if(!("speechSynthesis" in window)||!speechSynthesis.getVoices)return [];
+    return speechSynthesis.getVoices()||[];
+  }
+
+  function pickGermanVoice(){
+    var voices=allVoices();
     var de=voices.filter(function(v){return /^de[-_]/i.test(v.lang||"")});
     return de.find(function(v){return /Markus|Martin|Daniel|Thomas|Stefan|male/i.test(v.name||"")})||de[0]||voices[0]||null;
+  }
+
+  function pickArabicVoice(){
+    var voices=allVoices();
+    var ar=voices.filter(function(v){return /^ar(?:[-_]|$)/i.test(v.lang||"")});
+    return ar.find(function(v){return /ar[-_]SA|Saudi|Majed|Maged|Tarik|male/i.test((v.lang||"")+" "+(v.name||""))})||ar[0]||null;
   }
 
   function maybeFinish(){
@@ -3403,6 +3412,16 @@ html.kids-intro-active.kids-intro-reveal .app{
     }
   }
 
+  function makeUtterance(text,lang,voice,rate,pitch){
+    var u=new SpeechSynthesisUtterance(text);
+    if(voice)u.voice=voice;
+    u.lang=lang;
+    u.rate=rate;
+    u.pitch=pitch;
+    u.volume=1;
+    return u;
+  }
+
   function speakGreeting(){
     if(!("speechSynthesis" in window)||typeof SpeechSynthesisUtterance==="undefined"){
       speechDone=true;return false;
@@ -3410,22 +3429,41 @@ html.kids-intro-active.kids-intro-reveal .app{
     try{
       speechSynthesis.cancel();
       speechDone=false;
-      var u=new SpeechSynthesisUtterance(greeting);
-      var v=pickVoice(); if(v)u.voice=v;
-      u.lang="de-DE";u.rate=.98;u.pitch=.94;u.volume=1;
-      u.onstart=function(){
+
+      var deVoice=pickGermanVoice();
+      var arVoice=pickArabicVoice();
+      var parts=[];
+
+      parts.push(makeUtterance(
+        "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. Willkommen bei",
+        "de-DE",deVoice,.98,.94
+      ));
+
+      if(arVoice){
+        parts.push(makeUtterance("دَار التَّوْحِيد","ar-SA",arVoice,.92,.96));
+      }else{
+        parts.push(makeUtterance("Daar at-Tauhied","de-DE",deVoice,.90,.94));
+      }
+
+      parts.push(makeUtterance("Kids. Los geht’s!","de-DE",deVoice,.98,.94));
+
+      parts[0].onstart=function(){
         speechStarted=true;
         if(soundBtn)soundBtn.classList.remove("show");
       };
-      u.onend=function(){
+
+      var done=false;
+      function finishSpeech(){
+        if(done)return;
+        done=true;
         speechDone=true;
         maybeFinish();
-      };
-      u.onerror=function(){
-        speechDone=true;
-        maybeFinish();
-      };
-      speechSynthesis.speak(u);
+      }
+
+      parts[parts.length-1].onend=finishSpeech;
+      parts[parts.length-1].onerror=finishSpeech;
+
+      for(var i=0;i<parts.length;i++)speechSynthesis.speak(parts[i]);
       return true;
     }catch(e){
       speechDone=true;
@@ -3482,23 +3520,23 @@ html.kids-intro-active.kids-intro-reveal .app{
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});
   else requestAnimationFrame(start);
 
-  /* Safety only: never trap the app forever. */
+  /* Safety only: never trap the app forever, but leave enough room for the full segmented greeting. */
   setTimeout(function(){
     if(!finished){
       videoDone=true;
       if(!speechStarted)speechDone=true;
       if(speechStarted&&!speechDone){
-        setTimeout(finish,2200);
+        setTimeout(finish,2600);
       }else{
         finish();
       }
     }
-  },13200);
+  },14800);
 })();
 </script>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab61";
+const KIDS_BUILD_ID="kids-shell-v12-tab62";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
