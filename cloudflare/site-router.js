@@ -34,7 +34,7 @@ function iosNativeHeaders(assetResponse) {
 }
 
 const KIDS_MIRROR = "https://dar-al-tawhid-test.sero91ak.workers.dev";
-// KIDS_PUBLIC_ROUTER_V78_FINAL — video-only Kids build; newest visitor deploy must win.
+// KIDS_PUBLIC_ROUTER_V79_FINAL — video-only intro; deploy pinned to latest main.
 
 async function fetchKidsMirror(pathname, search) {
   const path = pathname === "/test/kids" ? "/test/kids/" : pathname;
