@@ -75,9 +75,10 @@ export async function probeElevenAuth(env) {
   }
 }
 
-export async function synthesizeDarVoice(env, text) {
+export async function synthesizeDarVoice(env, text, options = {}) {
   const key = elevenKey(env);
   const voiceId = darVoiceId(env);
+  const profile = String(options?.profile || "").trim().toLowerCase();
   if (!key || !voiceId) {
     return {
       ok: false,
@@ -98,13 +99,19 @@ export async function synthesizeDarVoice(env, text) {
     body: JSON.stringify({
       text: script,
       model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_multilingual_v2"),
-      // Ruhig, würdevoll, nicht hektisch – exakt den vorgegebenen Text lesen
-      voice_settings: {
-        stability: 0.72,
-        similarity_boost: 0.78,
-        style: 0.08,
-        use_speaker_boost: true
-      }
+      voice_settings: profile === "kids_intro"
+        ? {
+            stability: 0.50,
+            similarity_boost: 0.86,
+            style: 0.30,
+            use_speaker_boost: true
+          }
+        : {
+            stability: 0.72,
+            similarity_boost: 0.78,
+            style: 0.08,
+            use_speaker_boost: true
+          }
     })
   });
   if (!res.ok) {
