@@ -2369,7 +2369,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
 
-<style id="kids-cinema-intro-v4">
+<style id="kids-cinema-intro-v5">
 html.kids-intro-active,
 html.kids-intro-active body{
   height:100%;
@@ -2380,18 +2380,15 @@ html.kids-intro-active body{touch-action:none;background:#020a12}
 html.kids-intro-active .app{
   pointer-events:none!important;
   user-select:none!important;
-  opacity:0;
-  transform:scale(.985);
-  filter:blur(6px);
+  transform:scale(1.018);
+  filter:brightness(.64) saturate(.82) blur(1px);
 }
 html.kids-intro-active.kids-intro-reveal .app{
-  opacity:1;
   transform:none;
   filter:none;
   transition:
-    opacity .88s ease .08s,
-    transform 1.08s cubic-bezier(.16,1,.3,1) .02s,
-    filter .78s ease .02s;
+    transform 1.15s cubic-bezier(.16,1,.3,1),
+    filter 1.05s ease;
 }
 #kidsCinemaIntro{
   position:fixed;
@@ -2399,32 +2396,39 @@ html.kids-intro-active.kids-intro-reveal .app{
   z-index:2147483000;
   overflow:hidden;
   isolation:isolate;
-  background:
-    radial-gradient(circle at 50% 42%,rgba(14,58,77,.48),transparent 48%),
-    linear-gradient(180deg,#020a12,#061827 55%,#03101a);
-  color:#fff;
-  touch-action:none;
+  background:#020a12;
   opacity:1;
   visibility:visible;
-  transition:opacity .9s ease,visibility 0s linear .9s;
+  touch-action:none;
+  transition:
+    opacity 1.05s ease,
+    filter .95s ease,
+    transform 1.15s cubic-bezier(.16,1,.3,1),
+    visibility 0s linear 1.05s;
 }
-#kidsCinemaIntro.is-leaving{opacity:0;visibility:hidden}
+#kidsCinemaIntro.is-leaving{
+  opacity:0;
+  visibility:hidden;
+  filter:blur(7px);
+  transform:scale(1.035);
+}
 .kids-cinema-video{
   position:absolute;
   inset:0;
-  z-index:1;
   width:100%;
   height:100%;
   object-fit:cover;
   object-position:center center;
-  opacity:0;
-  transform:scale(1.01);
   background:#020a12;
-  transition:opacity .65s ease,transform 10s cubic-bezier(.16,.72,.18,1);
-}
-#kidsCinemaIntro.is-ready .kids-cinema-video{
   opacity:1;
-  transform:scale(1);
+  transform:scale(1.035);
+  animation:kidsCinemaCameraV64 11.4s cubic-bezier(.18,.68,.18,1) both;
+}
+@keyframes kidsCinemaCameraV64{
+  0%{transform:scale(1.065) translate3d(0,1%,0);filter:saturate(1.05) contrast(1.02) brightness(.94)}
+  32%{transform:scale(1.035) translate3d(-.5%,-.2%,0);filter:saturate(1.1) contrast(1.04) brightness(1)}
+  64%{transform:scale(1.05) translate3d(.4%,-.7%,0);filter:saturate(1.12) contrast(1.04) brightness(1.02)}
+  100%{transform:scale(1.012) translate3d(0,-1.3%,0);filter:saturate(1.06) contrast(1.02) brightness(.98)}
 }
 .kids-cinema-grade{
   position:absolute;
@@ -2432,223 +2436,71 @@ html.kids-intro-active.kids-intro-reveal .app{
   z-index:3;
   pointer-events:none;
   background:
-    linear-gradient(180deg,rgba(0,5,12,.10) 0%,transparent 19%,transparent 74%,rgba(0,4,10,.22) 100%),
-    radial-gradient(ellipse at 50% 48%,transparent 56%,rgba(0,3,8,.20) 100%);
+    linear-gradient(180deg,rgba(0,5,12,.14) 0%,transparent 20%,transparent 69%,rgba(0,4,10,.28) 100%),
+    radial-gradient(ellipse at 50% 48%,transparent 47%,rgba(0,4,10,.1) 77%,rgba(0,3,8,.34) 100%);
+  box-shadow:inset 0 0 72px rgba(0,0,0,.2);
 }
-.kids-cinema-loading{
-  position:absolute;
-  z-index:2;
-  left:50%;
-  top:50%;
-  width:72px;
-  height:1px;
-  transform:translate(-50%,-50%);
-  background:linear-gradient(90deg,transparent,rgba(244,213,143,.72),transparent);
-  opacity:.7;
-  animation:kidsCinemaLoadPulse 1.35s ease-in-out infinite alternate;
-  pointer-events:none;
-  transition:opacity .3s ease;
-}
-#kidsCinemaIntro.is-ready .kids-cinema-loading{opacity:0}
-@keyframes kidsCinemaLoadPulse{from{transform:translate(-50%,-50%) scaleX(.55);opacity:.25}to{transform:translate(-50%,-50%) scaleX(1.2);opacity:.82}}
-.kids-cinema-sound{
-  position:absolute;
-  z-index:9;
-  left:50%;
-  bottom:max(22px,calc(env(safe-area-inset-bottom) + 10px));
-  transform:translateX(-50%) translateY(12px);
-  appearance:none;
-  border:1px solid rgba(255,255,255,.24);
-  border-radius:999px;
-  background:rgba(3,15,26,.7);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  color:#fff5dc;
-  padding:10px 16px;
-  font:750 12px/1 "Avenir Next",system-ui,sans-serif;
-  letter-spacing:.025em;
-  box-shadow:0 8px 24px rgba(0,0,0,.24);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .3s ease,transform .3s ease;
-}
-.kids-cinema-sound.show{
-  opacity:1;
-  pointer-events:auto;
-  transform:translateX(-50%) translateY(0);
-}
-#kidsCinemaIntro.is-leaving .kids-cinema-video{
-  transform:scale(1.015);
-  transition:transform .9s cubic-bezier(.16,1,.3,1);
-}
-#kidsCinemaIntro.is-leaving .kids-cinema-grade{opacity:0;transition:opacity .7s ease}
 #kidsCinemaIntro::after{
   content:"";
-  position:absolute;
-  z-index:12;
-  left:50%;
-  top:58%;
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  transform:translate(-50%,-50%) scale(.1);
-  background:#fff7dd;
-  opacity:0;
-  pointer-events:none;
-  box-shadow:0 0 28px 12px rgba(255,226,151,.6),0 0 110px 58px rgba(91,213,205,.22);
-}
-#kidsCinemaIntro.is-leaving::after{
-  animation:kidsCinemaExitBloom .95s cubic-bezier(.16,1,.3,1) both;
-}
-@keyframes kidsCinemaExitBloom{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.1)}
-  42%{opacity:.86;transform:translate(-50%,-50%) scale(12)}
-  100%{opacity:0;transform:translate(-50%,-50%) scale(42)}
-}
-@media(prefers-reduced-motion:reduce){
-  .kids-cinema-loading{animation:none!important}
-  .kids-cinema-video{transform:none!important}
-}
-
-.kids-cinema-poster{
-  position:absolute;
-  inset:0;
-  z-index:0;
-  background:
-    linear-gradient(180deg,rgba(1,8,16,.05),rgba(1,8,16,.2)),
-    url("/test/kids/assets/kids-art/quran-reise-v11-clean.png") center 58%/cover no-repeat;
-  transform:scale(1.035);
-  filter:saturate(1.18) contrast(1.06) brightness(.88);
-  animation:kidsPosterPush 9.8s cubic-bezier(.16,.72,.18,1) both;
-  opacity:1;
-  transition:opacity .7s ease;
-}
-#kidsCinemaIntro.is-playing .kids-cinema-poster{opacity:.14}
-@keyframes kidsPosterPush{
-  from{transform:scale(1.08) translate3d(0,1.2%,0)}
-  to{transform:scale(1.015) translate3d(0,-.6%,0)}
-}
-.kids-cinema-light{
-  position:absolute;
-  z-index:4;
-  left:50%;
-  top:68%;
-  width:min(82vw,520px);
-  aspect-ratio:1.55;
-  transform:translate(-50%,-50%) scale(.35);
-  border-radius:50%;
-  background:radial-gradient(ellipse,rgba(255,251,222,.86) 0 3%,rgba(255,213,110,.42) 11%,rgba(83,224,215,.16) 31%,transparent 68%);
-  filter:blur(11px);
-  mix-blend-mode:screen;
-  opacity:0;
-  animation:kidsLightRise 5.2s cubic-bezier(.16,1,.3,1) 2.7s both;
-  pointer-events:none;
-}
-@keyframes kidsLightRise{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}
-  35%{opacity:.65;transform:translate(-50%,-50%) scale(.78)}
-  68%{opacity:.92;transform:translate(-50%,-50%) scale(1.06)}
-  100%{opacity:.34;transform:translate(-50%,-50%) scale(.92)}
-}
-.kids-cinema-letters{
   position:absolute;
   inset:0;
   z-index:6;
   pointer-events:none;
-  perspective:1100px;
-  transform-style:preserve-3d;
-}
-.kids-cinema-letter{
-  position:absolute;
-  left:50%;
-  top:68%;
-  width:clamp(72px,20vw,112px);
-  height:clamp(72px,20vw,112px);
-  display:grid;
-  place-items:center;
-  font-family:"Noto Naskh Arabic","Geeza Pro","Arial",sans-serif;
-  font-size:clamp(62px,18vw,102px);
-  font-weight:700;
-  line-height:1;
   opacity:0;
-  transform-style:preserve-3d;
-  transform-origin:50% 80%;
-  -webkit-text-stroke:.6px rgba(255,255,255,.3);
-  backface-visibility:hidden;
+  background:radial-gradient(circle at 50% 55%,rgba(255,247,211,.76),rgba(89,218,207,.22) 31%,rgba(6,24,36,.06) 63%,transparent 80%);
+  mix-blend-mode:screen;
 }
-.kids-cinema-letter::before{
-  content:attr(data-letter);
+#kidsCinemaIntro.is-leaving::after{
+  animation:kidsCinemaRevealV64 1.12s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes kidsCinemaRevealV64{
+  0%{opacity:0;transform:scale(.74)}
+  42%{opacity:.7;transform:scale(1.1)}
+  100%{opacity:0;transform:scale(1.8)}
+}
+.kids-cinema-sound{
   position:absolute;
-  inset:0;
+  z-index:10;
+  right:max(14px,calc(env(safe-area-inset-right) + 10px));
+  bottom:max(16px,calc(env(safe-area-inset-bottom) + 10px));
+  width:44px;
+  height:44px;
   display:grid;
   place-items:center;
-  transform:translate3d(3px,5px,-6px);
-  color:rgba(70,39,15,.72);
-  filter:blur(.3px);
-  z-index:-1;
-}
-.kids-cinema-letter.alif{
-  margin-left:18vw;
-  color:#f6d278;
-  text-shadow:0 2px 0 #fff2c0,0 7px 14px rgba(0,0,0,.46),0 0 18px rgba(255,216,116,.58),0 0 42px rgba(255,183,66,.28);
-  animation:kidsLetterAlif 4.8s cubic-bezier(.16,1,.3,1) 3.55s both;
-}
-.kids-cinema-letter.ba{
-  margin-left:-7vw;
-  color:#76ded3;
-  text-shadow:0 2px 0 #d9fffb,0 7px 14px rgba(0,0,0,.46),0 0 18px rgba(81,225,214,.65),0 0 44px rgba(39,181,193,.3);
-  animation:kidsLetterBa 4.9s cubic-bezier(.16,1,.3,1) 3.78s both;
-}
-.kids-cinema-letter.ta{
-  margin-left:-32vw;
-  color:#eeb18f;
-  text-shadow:0 2px 0 #ffe0c8,0 7px 14px rgba(0,0,0,.46),0 0 18px rgba(240,170,132,.6),0 0 42px rgba(214,110,93,.26);
-  animation:kidsLetterTa 5s cubic-bezier(.16,1,.3,1) 4.02s both;
-}
-@keyframes kidsLetterAlif{
-  0%{opacity:0;filter:blur(6px);transform:translate3d(-50%,12px,-190px) rotateX(64deg) rotateY(-34deg) rotateZ(12deg) scale(.16)}
-  22%{opacity:.96;filter:blur(1px);transform:translate3d(-50%,-82px,64px) rotateX(8deg) rotateY(14deg) rotateZ(-4deg) scale(1.06)}
-  48%{opacity:1;filter:none;transform:translate3d(-50%,-177px,132px) rotateX(-2deg) rotateY(-5deg) rotateZ(2deg) scale(1)}
-  78%{opacity:.96;transform:translate3d(-50%,-190px,138px) rotateX(2deg) rotateY(4deg) rotateZ(-1deg) scale(1.02)}
-  100%{opacity:0;filter:blur(2px);transform:translate3d(-50%,-214px,74px) rotateY(-5deg) scale(.96)}
-}
-@keyframes kidsLetterBa{
-  0%{opacity:0;filter:blur(6px);transform:translate3d(-50%,14px,-220px) rotateX(62deg) rotateY(35deg) rotateZ(-14deg) scale(.15)}
-  22%{opacity:.96;filter:blur(1px);transform:translate3d(-50%,-70px,58px) rotateX(-5deg) rotateY(-12deg) rotateZ(6deg) scale(1.08)}
-  48%{opacity:1;filter:none;transform:translate3d(-50%,-148px,146px) rotateX(3deg) rotateY(6deg) rotateZ(-2deg) scale(1)}
-  78%{opacity:.96;transform:translate3d(-50%,-163px,151px) rotateX(-2deg) rotateY(-4deg) rotateZ(1deg) scale(1.03)}
-  100%{opacity:0;filter:blur(2px);transform:translate3d(-50%,-192px,82px) rotateY(6deg) scale(.95)}
-}
-@keyframes kidsLetterTa{
-  0%{opacity:0;filter:blur(6px);transform:translate3d(-50%,14px,-205px) rotateX(66deg) rotateY(-32deg) rotateZ(16deg) scale(.15)}
-  22%{opacity:.94;filter:blur(1px);transform:translate3d(-50%,-57px,52px) rotateX(5deg) rotateY(13deg) rotateZ(-7deg) scale(1.08)}
-  48%{opacity:1;filter:none;transform:translate3d(-50%,-126px,132px) rotateX(-3deg) rotateY(-5deg) rotateZ(3deg) scale(1)}
-  78%{opacity:.95;transform:translate3d(-50%,-143px,139px) rotateX(2deg) rotateY(4deg) rotateZ(-1deg) scale(1.02)}
-  100%{opacity:0;filter:blur(2px);transform:translate3d(-50%,-174px,78px) rotateY(-5deg) scale(.95)}
-}
-.kids-cinema-ribbon{
-  position:absolute;
-  z-index:5;
-  left:11%;
-  right:11%;
-  top:41%;
-  height:38%;
+  padding:0;
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:50%;
+  background:rgba(2,14,24,.48);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 8px 24px rgba(0,0,0,.2);
+  color:#fff4dc;
+  opacity:0;
   pointer-events:none;
-  opacity:0;
-  animation:kidsRibbonReveal 4.4s ease 3.45s both;
-  filter:drop-shadow(0 0 7px rgba(255,218,115,.42));
+  transform:translateY(8px) scale(.94);
+  transition:opacity .28s ease,transform .28s ease;
 }
-.kids-cinema-ribbon path{
-  fill:none;
-  stroke-linecap:round;
-  stroke-dasharray:900;
-  stroke-dashoffset:900;
+.kids-cinema-sound.show{
+  opacity:1;
+  pointer-events:auto;
+  transform:none;
 }
-.kids-cinema-ribbon .gold{stroke:url(#kidsGoldTrail);stroke-width:1.55;animation:kidsTrailDraw 4s cubic-bezier(.16,.8,.2,1) 3.55s both}
-.kids-cinema-ribbon .aqua{stroke:url(#kidsAquaTrail);stroke-width:1.25;animation:kidsTrailDraw 4.15s cubic-bezier(.16,.8,.2,1) 3.72s both}
-@keyframes kidsRibbonReveal{0%{opacity:0}18%{opacity:.82}100%{opacity:.12}}
-@keyframes kidsTrailDraw{to{stroke-dashoffset:0}}
-
+.kids-cinema-sound svg{width:20px;height:20px;display:block}
+.kids-cinema-sound .pulse{
+  position:absolute;
+  inset:-5px;
+  border:1px solid rgba(242,209,134,.32);
+  border-radius:50%;
+  animation:kidsSoundPulse 1.8s ease-out infinite;
+}
+@keyframes kidsSoundPulse{
+  0%{opacity:.55;transform:scale(.86)}
+  70%,100%{opacity:0;transform:scale(1.32)}
+}
+@media(prefers-reduced-motion:reduce){
+  .kids-cinema-video{animation:none!important;transform:none!important}
+  .kids-cinema-sound .pulse{animation:none!important}
+}
 </style>
 
 <style id="kids-cinema-v61-fixes">
@@ -2833,8 +2685,8 @@ html.kids-intro-active.kids-intro-reveal .app{
   <video
     id="kidsCinemaVideo"
     class="kids-cinema-video"
-    poster="/test/kids/assets/kids-art/quran-reise-v11-clean.png?v=63"
-    src="/test/kids/assets/kids-cinema/intro-final.mp4?v=63"
+    poster="/test/kids/assets/kids-art/dua-night-v11.jpg?v=64"
+    src="/test/kids/assets/kids-cinema/intro-final.mp4?v=64"
     preload="auto"
     muted
     defaultmuted
@@ -2844,14 +2696,20 @@ html.kids-intro-active.kids-intro-reveal .app{
     disablepictureinpicture
     controlslist="nodownload noplaybackrate noremoteplayback"
   ></video>
-  <div class="kids-cinema-loading" aria-hidden="true"></div>
+  <audio id="kidsCinemaVoice" preload="auto" playsinline></audio>
   <div class="kids-cinema-grade" aria-hidden="true"></div>
-  <button class="kids-cinema-sound" id="kidsCinemaSound" type="button">Ton aktivieren</button>
+  <button class="kids-cinema-sound" id="kidsCinemaSound" type="button" aria-label="Begrüßung abspielen" hidden>
+    <span class="pulse" aria-hidden="true"></span>
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 10v4h4l5 4V6L8 10H4Z" fill="currentColor"/>
+      <path d="M16 9.2c1.2.8 1.8 1.7 1.8 2.8S17.2 14 16 14.8M18.5 6.8c2 1.5 3 3.2 3 5.2s-1 3.7-3 5.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+    </svg>
+  </button>
 </div>
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.63</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.64</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3329,123 +3187,81 @@ html.kids-intro-active.kids-intro-reveal .app{
 <audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 
-<script id="kids-cinema-intro-runtime-v7">
+<script id="kids-cinema-intro-runtime-v8">
 (function(){
   var root=document.documentElement;
   var intro=document.getElementById("kidsCinemaIntro");
   var video=document.getElementById("kidsCinemaVideo");
+  var voice=document.getElementById("kidsCinemaVoice");
   var soundBtn=document.getElementById("kidsCinemaSound");
   if(!intro||!video){root.classList.remove("kids-intro-active");return}
 
-  var finished=false,videoDone=false,speechStarted=false,speechDone=false;
+  var finished=false,videoDone=false,voiceStarted=false,voiceDone=true,voiceAvailable=false;
+  var ownVoiceUrl="/test/kids/assets/kids-cinema/intro-voice-serhat.mp3?v=64";
   var reduced=false;
   try{reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
 
-  function allVoices(){
-    if(!("speechSynthesis" in window)||!speechSynthesis.getVoices)return [];
-    return speechSynthesis.getVoices()||[];
-  }
-
-  function pickGermanVoice(){
-    var voices=allVoices();
-    var de=voices.filter(function(v){return /^de[-_]/i.test(v.lang||"")});
-    return de.find(function(v){return /Markus|Martin|Daniel|Thomas|Stefan|male/i.test(v.name||"")})||de[0]||voices[0]||null;
-  }
-
-  function pickArabicVoice(){
-    var voices=allVoices();
-    var ar=voices.filter(function(v){return /^ar(?:[-_]|$)/i.test(v.lang||"")});
-    return ar.find(function(v){return /ar[-_]SA|Saudi|Majed|Maged|Tarik|male/i.test((v.lang||"")+" "+(v.name||""))})||ar[0]||null;
-  }
-
   function maybeFinish(){
     if(finished)return;
-    if(videoDone && (speechDone || !speechStarted)) finish();
+    if(videoDone && (!voiceStarted || voiceDone))finish();
   }
 
   function finish(){
     if(finished)return;
     finished=true;
-    try{if("speechSynthesis" in window&&!speechDone)speechSynthesis.cancel()}catch(e){}
     root.classList.add("kids-intro-reveal");
     intro.classList.add("is-leaving");
     setTimeout(function(){
       try{video.pause()}catch(e){}
+      try{if(voice)voice.pause()}catch(e){}
       try{intro.remove()}catch(e){intro.style.display="none"}
       root.classList.remove("kids-intro-active","kids-intro-reveal");
     },1180);
   }
 
   function showSound(){
-    if(soundBtn&&!speechStarted){
-      soundBtn.textContent="Begrüßung hören";
-      soundBtn.classList.add("show");
-    }
+    if(!soundBtn||!voiceAvailable)return;
+    soundBtn.hidden=false;
+    soundBtn.classList.add("show");
   }
 
-  function makeUtterance(text,lang,voice,rate,pitch){
-    var u=new SpeechSynthesisUtterance(text);
-    if(voice)u.voice=voice;
-    u.lang=lang;
-    u.rate=rate;
-    u.pitch=pitch;
-    u.volume=1;
-    return u;
+  function hideSound(){
+    if(!soundBtn)return;
+    soundBtn.classList.remove("show");
   }
 
-  function speakGreeting(){
-    if(!("speechSynthesis" in window)||typeof SpeechSynthesisUtterance==="undefined"){
-      speechDone=true;return false;
-    }
+  function playOwnVoice(restart){
+    if(!voice||!voiceAvailable)return false;
     try{
-      speechSynthesis.cancel();
-      speechDone=false;
-
-      var deVoice=pickGermanVoice();
-      var arVoice=pickArabicVoice();
-      var parts=[];
-
-      parts.push(makeUtterance(
-        "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. Willkommen bei",
-        "de-DE",deVoice,.98,.94
-      ));
-
-      if(arVoice){
-        parts.push(makeUtterance("دَار التَّوْحِيد","ar-SA",arVoice,.92,.96));
-      }else{
-        parts.push(makeUtterance("Daar at-Tauhied","de-DE",deVoice,.90,.94));
+      if(restart)voice.currentTime=0;
+      voice.volume=1;
+      var p=voice.play();
+      if(p&&typeof p.then==="function"){
+        p.then(function(){
+          voiceStarted=true;voiceDone=false;hideSound();
+        }).catch(showSound);
       }
-
-      parts.push(makeUtterance("Kids. Los geht’s!","de-DE",deVoice,.98,.94));
-
-      parts[0].onstart=function(){
-        speechStarted=true;
-        if(soundBtn)soundBtn.classList.remove("show");
-      };
-
-      var done=false;
-      function finishSpeech(){
-        if(done)return;
-        done=true;
-        speechDone=true;
-        maybeFinish();
-      }
-
-      parts[parts.length-1].onend=finishSpeech;
-      parts[parts.length-1].onerror=finishSpeech;
-
-      for(var i=0;i<parts.length;i++)speechSynthesis.speak(parts[i]);
       return true;
-    }catch(e){
-      speechDone=true;
-      return false;
-    }
+    }catch(e){showSound();return false}
+  }
+
+  function probeOwnVoice(){
+    fetch(ownVoiceUrl,{method:"HEAD",cache:"no-store"})
+      .then(function(r){
+        if(!r.ok)return;
+        voiceAvailable=true;
+        voice.src=ownVoiceUrl;
+        voice.load();
+        setTimeout(function(){playOwnVoice(false)},180);
+        setTimeout(function(){
+          if(!voiceStarted)showSound();
+        },850);
+      })
+      .catch(function(){});
   }
 
   function start(){
-    intro.classList.add("is-ready","is-active");
-    if(reduced){videoDone=true;speechDone=true;setTimeout(finish,1200);return}
-
+    if(reduced){videoDone=true;setTimeout(finish,900);return}
     try{
       video.muted=true;
       video.defaultMuted=true;
@@ -3455,59 +3271,38 @@ html.kids-intro-active.kids-intro-reveal .app{
       var p=video.play();
       if(p&&typeof p.catch==="function")p.catch(function(){});
     }catch(e){}
-
-    setTimeout(speakGreeting,160);
-    setTimeout(showSound,1150);
+    probeOwnVoice();
   }
 
-  video.addEventListener("ended",function(){
-    videoDone=true;
-    maybeFinish();
-  },{once:true});
+  video.addEventListener("ended",function(){videoDone=true;maybeFinish()},{once:true});
+  video.addEventListener("error",function(){videoDone=true;maybeFinish()},{once:true});
 
-  video.addEventListener("error",function(){
-    videoDone=true;
-    maybeFinish();
-  },{once:true});
+  if(voice){
+    voice.addEventListener("play",function(){voiceStarted=true;voiceDone=false;hideSound()});
+    voice.addEventListener("ended",function(){voiceDone=true;maybeFinish()});
+    voice.addEventListener("error",function(){voiceDone=true;voiceAvailable=false;hideSound()});
+  }
 
   if(soundBtn)soundBtn.addEventListener("click",function(e){
-    e.preventDefault();e.stopPropagation();
-    speechStarted=false;speechDone=false;
-    soundBtn.classList.remove("show");
-    speakGreeting();
+    e.preventDefault();e.stopPropagation();playOwnVoice(true);
   });
 
   intro.addEventListener("pointerdown",function(e){
-    if(e.target===soundBtn)return;
-    if(!speechStarted)speakGreeting();
+    if(e.target===soundBtn||soundBtn&&soundBtn.contains(e.target))return;
+    if(voiceAvailable&&!voiceStarted)playOwnVoice(false);
   },{passive:true});
-
-  if("speechSynthesis" in window&&speechSynthesis.addEventListener){
-    speechSynthesis.addEventListener("voiceschanged",function(){
-      if(!speechStarted&&!speechDone)speakGreeting();
-    },{once:true});
-  }
 
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});
   else requestAnimationFrame(start);
 
-  /* Safety only: never trap the app forever, but leave enough room for the full segmented greeting. */
   setTimeout(function(){
-    if(!finished){
-      videoDone=true;
-      if(!speechStarted)speechDone=true;
-      if(speechStarted&&!speechDone){
-        setTimeout(finish,2600);
-      }else{
-        finish();
-      }
-    }
-  },14800);
+    if(!finished){videoDone=true;maybeFinish()}
+  },14500);
 })();
 </script>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab63";
+const KIDS_BUILD_ID="kids-shell-v12-tab64";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
