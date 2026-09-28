@@ -1,0 +1,47 @@
+name: Build Kids Cinema Runtime V68
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'test/kids/assets/kids-cinema/masters/scene-*.png'
+      - '.github/workflows/build-kids-cinema-runtime-v68.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg >/dev/null
+      - name: Build high-quality mobile cinema frames
+        run: |
+          set -euo pipefail
+          mkdir -p test/kids/assets/kids-cinema/runtime
+          for n in 1 2 3; do
+            ffmpeg -hide_banner -loglevel error -y               -i "test/kids/assets/kids-cinema/masters/scene-$n.png"               -vf "scale=1440:2560:force_original_aspect_ratio=increase,crop=1440:2560"               -frames:v 1 -c:v libwebp -quality 88 -compression_level 6               "test/kids/assets/kids-cinema/runtime/scene-$n.webp"
+          done
+          ls -lh test/kids/assets/kids-cinema/runtime
+          for f in test/kids/assets/kids-cinema/runtime/scene-*.webp; do
+            test "$(wc -c < "$f")" -gt 100000
+            test "$(wc -c < "$f")" -lt 1800000
+          done
+      - name: Commit runtime frames
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add test/kids/assets/kids-cinema/runtime
+          if git diff --cached --quiet; then
+            echo "Runtime frames already current."
+            exit 0
+          fi
+          git commit -m "Kids V0.68: add 1440p high-quality cinema runtime frames"
+          git push origin HEAD:main
