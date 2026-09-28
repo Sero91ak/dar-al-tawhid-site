@@ -1002,3 +1002,313 @@ body.is-home-route .isnad-source{
     right:14px!important;
   }
 }
+
+
+/* v1105 · SCHRITT 2 · Gebetszeiten + Datum als echte Kapseln */
+/* Nur Header-Gebetsanzeige: zwei eigenständige ovale Kapseln wie im Zielbild.
+   Gebetslogik und IDs bleiben unverändert. */
+
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub{
+  display:block!important;
+  width:100%!important;
+  margin:15px 0 0!important;
+  padding:0!important;
+  min-height:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+/* Hauptkapsel: aktuelles Gebet | Countdown | nächstes Gebet */
+body.is-home-route .header-prayer-hub__main{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.08fr) minmax(88px,.78fr) minmax(0,1.08fr)!important;
+  align-items:center!important;
+  gap:0!important;
+  min-height:68px!important;
+  padding:8px 15px!important;
+  border:1px solid rgba(222,190,111,.78)!important;
+  border-radius:999px!important;
+  background:
+    linear-gradient(180deg,rgba(8,22,41,.78),rgba(4,15,30,.72))!important;
+  box-shadow:
+    0 9px 24px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,244,203,.10),
+    0 0 0 1px rgba(222,190,111,.06)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.06)!important;
+  backdrop-filter:blur(12px) saturate(1.06)!important;
+}
+
+body.is-home-route .header-prayer-zone{
+  position:relative!important;
+  min-width:0!important;
+  min-height:48px!important;
+  padding:3px 10px!important;
+  gap:4px!important;
+  justify-content:center!important;
+}
+
+body.is-home-route .header-prayer-zone--now{
+  align-items:flex-start!important;
+  text-align:left!important;
+  padding-left:3px!important;
+}
+
+body.is-home-route .header-prayer-zone--next{
+  align-items:flex-end!important;
+  text-align:right!important;
+  padding-right:3px!important;
+}
+
+body.is-home-route .header-prayer-zone--count{
+  align-items:center!important;
+  text-align:center!important;
+  justify-self:stretch!important;
+  padding-inline:9px!important;
+}
+
+/* Nur die beiden feinen vertikalen Goldtrenner in der Hauptkapsel */
+body.is-home-route .header-prayer-zone--now::before{
+  content:none!important;
+  display:none!important;
+}
+
+body.is-home-route .header-prayer-zone--count::before,
+body.is-home-route .header-prayer-zone--count::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  top:7%!important;
+  bottom:7%!important;
+  width:1px!important;
+  background:linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(222,190,111,.72) 22%,
+    rgba(222,190,111,.72) 78%,
+    transparent 100%
+  )!important;
+  box-shadow:none!important;
+}
+
+body.is-home-route .header-prayer-zone--count::before{left:0!important}
+body.is-home-route .header-prayer-zone--count::after{right:0!important}
+
+/* Gebetsname + Zeit wie im Referenzbild */
+body.is-home-route .header-prayer-primary,
+body.is-home-route .header-prayer-secondary,
+body.is-home-route .header-prayer-hub .header-prayer-line{
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  align-items:baseline!important;
+  gap:5px!important;
+  min-width:0!important;
+  max-width:100%!important;
+  line-height:1!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub .header-prayer-line .header-prayer-name{
+  color:#fff7e8!important;
+  -webkit-text-fill-color:#fff7e8!important;
+  font-family:var(--serif)!important;
+  font-size:clamp(17px,4.25vw,21px)!important;
+  font-weight:650!important;
+  letter-spacing:.01em!important;
+  line-height:1!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.55)!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub .header-prayer-line .header-prayer-sep{
+  color:#d8ba72!important;
+  font-size:clamp(11px,2.8vw,14px)!important;
+  opacity:.92!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub .header-prayer-line .header-prayer-hour{
+  color:#fff7e8!important;
+  -webkit-text-fill-color:#fff7e8!important;
+  font-family:var(--sans),ui-sans-serif,system-ui,sans-serif!important;
+  font-size:clamp(18px,4.55vw,23px)!important;
+  font-weight:900!important;
+  letter-spacing:.015em!important;
+  line-height:1!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.55)!important;
+}
+
+/* Kleine Untertitel: AKTUELLES GEBET / NÄCHSTES GEBET */
+body.is-home-route .header-prayer-zone__caption{
+  color:#d9d6ca!important;
+  font-family:var(--sans),ui-sans-serif,system-ui,sans-serif!important;
+  font-size:clamp(6.8px,1.62vw,8px)!important;
+  font-weight:800!important;
+  letter-spacing:.12em!important;
+  line-height:1!important;
+  opacity:.90!important;
+  text-transform:uppercase!important;
+  text-shadow:0 1px 6px rgba(0,0,0,.60)!important;
+}
+
+/* Countdown mittig */
+body.is-home-route .header-prayer-zone__count-label{
+  display:block!important;
+  color:#d7d2c5!important;
+  font-family:var(--sans),ui-sans-serif,system-ui,sans-serif!important;
+  font-size:clamp(7px,1.65vw,8px)!important;
+  font-weight:750!important;
+  letter-spacing:.12em!important;
+  line-height:1!important;
+  opacity:.92!important;
+  text-transform:uppercase!important;
+}
+
+body.is-home-route .header-prayer-zone__count-label[hidden]{
+  display:block!important;
+}
+
+body.is-home-route .header-prayer-zone__countdown{
+  display:block!important;
+  color:#fff7e8!important;
+  -webkit-text-fill-color:#fff7e8!important;
+  font-family:var(--sans),ui-sans-serif,system-ui,sans-serif!important;
+  font-size:clamp(13px,3.25vw,16px)!important;
+  font-weight:900!important;
+  line-height:1.08!important;
+  letter-spacing:.01em!important;
+  text-align:center!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.58)!important;
+}
+
+/* Zweite, schlanke Kapsel: Datum · Hiǧrī · Uhrzeit · Ort */
+body.is-home-route .header-prayer-hub__status{
+  position:relative!important;
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:4px!important;
+  min-height:43px!important;
+  margin:7px 0 0!important;
+  padding:7px 13px!important;
+  border:1px solid rgba(222,190,111,.52)!important;
+  border-radius:999px!important;
+  background:linear-gradient(180deg,rgba(7,20,38,.66),rgba(4,15,29,.58))!important;
+  box-shadow:
+    0 7px 18px rgba(0,0,0,.15),
+    inset 0 1px 0 rgba(255,244,203,.07)!important;
+  color:#f2eee2!important;
+  font-family:var(--sans),ui-sans-serif,system-ui,sans-serif!important;
+  font-size:clamp(8.8px,2.18vw,10.5px)!important;
+  font-weight:750!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  -webkit-backdrop-filter:blur(10px) saturate(1.03)!important;
+  backdrop-filter:blur(10px) saturate(1.03)!important;
+}
+
+body.is-home-route .header-prayer-hub__status::before{
+  content:none!important;
+  display:none!important;
+}
+
+body.is-home-route .header-prayer-hub__status>span{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  flex:0 1 auto!important;
+  min-width:0!important;
+  color:#f0ece0!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+
+body.is-home-route .header-prayer-hub__status>span+span::before{
+  content:none!important;
+  display:none!important;
+}
+
+body.is-home-route .header-prayer-hub__ico{
+  flex:0 0 auto!important;
+  color:#dfc078!important;
+  opacity:.98!important;
+  font-size:1.02em!important;
+  line-height:1!important;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.38))!important;
+}
+
+/* Hover/Focus bleibt edel und ruhig */
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub:hover,
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub:focus-visible{
+  border:0!important;
+  box-shadow:none!important;
+  filter:none!important;
+  outline:none!important;
+}
+
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub:focus-visible .header-prayer-hub__main{
+  border-color:rgba(235,207,139,.94)!important;
+  box-shadow:
+    0 9px 24px rgba(0,0,0,.22),
+    0 0 0 2px rgba(222,190,111,.12)!important;
+}
+
+/* Kleine iPhones: Proportionen bewahren, nichts quetschen */
+@media(max-width:430px){
+  body.is-home-route .header-prayer-hub__main{
+    grid-template-columns:minmax(0,1.12fr) minmax(76px,.76fr) minmax(0,1.12fr)!important;
+    min-height:64px!important;
+    padding:7px 11px!important;
+  }
+
+  body.is-home-route .header-prayer-zone{
+    min-height:46px!important;
+    padding-inline:6px!important;
+  }
+
+  body.is-home-route .header-prayer-zone--now{padding-left:1px!important}
+  body.is-home-route .header-prayer-zone--next{padding-right:1px!important}
+
+  body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub .header-prayer-line .header-prayer-name{
+    font-size:clamp(15.5px,4.15vw,18px)!important;
+  }
+
+  body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub .header-prayer-line .header-prayer-hour{
+    font-size:clamp(16px,4.25vw,19px)!important;
+  }
+
+  body.is-home-route .header-prayer-zone__countdown{
+    font-size:clamp(11.5px,3.05vw,14px)!important;
+  }
+
+  body.is-home-route .header-prayer-hub__status{
+    min-height:40px!important;
+    padding:6px 9px!important;
+    font-size:clamp(7.7px,2.05vw,9px)!important;
+    gap:2px!important;
+  }
+
+  body.is-home-route .header-prayer-hub__status>span{
+    gap:3px!important;
+  }
+
+  body.is-home-route .header-prayer-hub__ico{
+    font-size:.92em!important;
+  }
+}
+
+@media(max-width:370px){
+  body.is-home-route .header-prayer-hub__main{
+    grid-template-columns:minmax(0,1.08fr) minmax(68px,.70fr) minmax(0,1.08fr)!important;
+    padding-inline:9px!important;
+  }
+
+  body.is-home-route .header-prayer-hub__status{
+    font-size:7.4px!important;
+    padding-inline:7px!important;
+  }
+}
