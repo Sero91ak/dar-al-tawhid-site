@@ -1186,3 +1186,28 @@ html body.is-home-route .home-premium-mini:active{
     border-left:1px solid var(--home-smart-hairline)!important;
   }
 }
+
+
+/* v1103 · STEP 4 · Tawḥīd direkt nach Qurʾān priorisieren */
+body.is-home-route .home-premium-access{
+  order:-90!important;
+  margin-top:0!important;
+  margin-bottom:10px!important;
+}
+body.is-home-route .home-tawhid-entry{
+  order:-10!important;
+  min-height:84px!important;
+  margin-bottom:7px!important;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--theme-surface) 98%,transparent) 0%,color-mix(in srgb,var(--theme-surface) 92%,transparent) 72%,color-mix(in srgb,var(--theme-surface) 86%,transparent) 100%)!important;
+}
+body.is-home-route .home-tawhid-entry::before{
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--theme-accent) 9%,transparent),transparent 46%)!important;
+}
+body.is-home-route .home-tawhid-entry__label{
+  color:var(--theme-accent)!important;
+}
+body.is-home-route .home-tawhid-entry__copy h3{
+  font-size:clamp(19px,4.6vw,24px)!important;
+}
