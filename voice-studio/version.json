@@ -1,10 +1,10 @@
 {
-  "version": "2.9.16",
-  "updatedAt": "2026-09-28T10:58:00+02:00",
-  "deployTrigger": "voice-studio-2.9.16-free-voice-parchment-contrast",
+  "version": "2.9.17",
+  "updatedAt": "2026-09-28T11:08:00+02:00",
+  "deployTrigger": "voice-studio-2.9.17-free-voice-final-pause-qa",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v26",
+  "cache": "dar-voice-studio-v27",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -542,10 +542,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "992fc13709cc04628dc54622a027c4aefde9f269",
+  "releaseRef": "ae4e6cf5e340da5c8f11989aad6b460ac7b1e04f",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Freie Stimme: dunkle globale Studio-Regeln überschriebene den hellen Bereich; ID-spezifische Pergament-/Kontrastregeln sichern jetzt Hintergrund, Textfeld, Text, Placeholder, Seitenleiste und Buttons.",
+  "updateRepairReason": "Freie Stimme scheiterte an der globalen End-QA bei legitimen Satzpausen. Produktions-QA bleibt unverändert; nur der freie Bereich erlaubt bis 1200 ms globale Satzpause, während Segment-QA weiterhin streng bleibt.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -583,6 +583,12 @@
     ],
     "returnToProduction": "Topbar: Zur Produktion or any Kids/iOS tab",
     "contrastFix": true,
-    "globalDarkRuleIsolation": true
+    "globalDarkRuleIsolation": true,
+    "finalPauseQa": {
+      "segmentQa": "unchanged",
+      "globalFinalMaxInternalSilenceMs": 1200,
+      "productionModeUnaffected": true,
+      "errorNowShowsMeasuredPauseMs": true
+    }
   }
 }
