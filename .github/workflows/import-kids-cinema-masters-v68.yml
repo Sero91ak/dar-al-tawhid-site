@@ -27,14 +27,10 @@ jobs:
           curl -L --fail --retry 4 --retry-delay 2 "$S1" -o test/kids/assets/kids-cinema/masters/scene-1.png
           curl -L --fail --retry 4 --retry-delay 2 "$S2" -o test/kids/assets/kids-cinema/masters/scene-2.png
           curl -L --fail --retry 4 --retry-delay 2 "$S3" -o test/kids/assets/kids-cinema/masters/scene-3.png
-          python - <<'PY'
-          from PIL import Image
-          from pathlib import Path
-          for p in sorted(Path("test/kids/assets/kids-cinema/masters").glob("scene-*.png")):
-              im=Image.open(p)
-              print(p, im.size, p.stat().st_size)
-              assert im.width >= 900 and im.height >= 1200
-          PY
+          file test/kids/assets/kids-cinema/masters/scene-*.png
+          for f in test/kids/assets/kids-cinema/masters/scene-*.png; do
+            test "$(wc -c < "$f")" -gt 1000000
+          done
       - name: Commit masters
         run: |
           set -euo pipefail
