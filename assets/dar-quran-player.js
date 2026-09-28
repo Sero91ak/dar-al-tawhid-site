@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 964;
+    var PLAYER_BUILD = 965;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App und iOS-App: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -114,7 +114,7 @@
   var trackHeard = false;
   var playGen = 0;
   var allowAdvance = false;
-  var engine = { started: false, lastUrl: "" };
+  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0 };
 
   var lastSysVolAt = 0;
   function usesSystemVolume() {
@@ -685,16 +685,32 @@
       logAudio("loadAudio", { autoplay: !!autoplay, keepTime: !!keepTime, url: hit.url, qari: hit.qari, before: snapAudio(a) });
       a.muted = false;
       a.defaultMuted = false;
+      try { a.pause(); } catch (ePauseSrc) {}
+      var prev = String(a.getAttribute("src") || a.currentSrc || "");
+      if (prev && (prev === hit.url || prev.split("?")[0] === String(hit.url).split("?")[0])) {
+        try { a.removeAttribute("src"); a.load(); } catch (eBlank) {}
+      }
+      engine.lastUrl = hit.url;
+      engine.loadedSurah = surah;
+      engine.loadedAyah = ayah;
       a.src = hit.url;
       logAudio("src after", snapAudio(a));
-      if (keepTime && state.resumeAt > 0) {
-        a.addEventListener("loadedmetadata", function once() {
-          a.removeEventListener("loadedmetadata", once);
-          if (gen !== playGen) return;
-          if (state.resumeAt < (a.duration || 1e9)) a.currentTime = state.resumeAt;
+      function seekStart() {
+        if (gen !== playGen) return;
+        var t = keepTime ? (Number(state.resumeAt) || 0) : 0;
+        if (!keepTime) {
           state.resumeAt = 0;
-        });
+          state.current = 0;
+          t = 0;
+        }
+        try { a.currentTime = t; } catch (eSeek0) {}
+        if (keepTime) state.resumeAt = 0;
       }
+      a.addEventListener("loadedmetadata", function once() {
+        a.removeEventListener("loadedmetadata", once);
+        seekStart();
+      });
+      seekStart();
       if (autoplay) {
         state.playing = true;
         state.sessionActive = true;
@@ -893,6 +909,7 @@
     return "none";
   }
   function syncReaderPosition() {
+    if (state.sessionActive && (state.playing || engine.loadedAyah >= 1)) return;
     try {
       var hash = String(location.hash || "").replace(/^#\/?/, "");
       var m = hash.match(/^quran-surah\/(\d+)(?:\/(\d+))?/i);
@@ -1038,10 +1055,9 @@
   function followPlayingAyah(force) {
     if (!state.learnMode || !isReaderRoute() || !state.sessionActive) return;
     var key = state.surah + ":" + state.ayah;
-    if (!force && state.learnLoop) return;
     if (!force && lastFollowKey === key) return;
     lastFollowKey = key;
-    revealPlayingAyah(!!force || !state.learnLoop);
+    revealPlayingAyah(true);
   }
   function markPlayingAyah() {
     document.querySelectorAll(".quran-ayah.is-dqp-playing").forEach(function (n) {
@@ -1117,19 +1133,11 @@
     state.playerMode = "learning-quran";
     state.sessionActive = true;
     persistCurrent("ayah-play");
-    var a = audioEl();
-    var same = state.surah === surah && state.ayah === ayah && audioHasSrc(a);
-    if (same) {
-      togglePlay(true);
-      applyLearnRate();
-      paintMini();
-      revealPlayingAyah(true);
-      return;
-    }
     lastFollowKey = "";
     state.surah = surah;
     state.ayah = ayah;
     state.resumeAt = 0;
+    state.current = 0;
     saveState();
     loadAudio(true, false);
     ensureData().then(function () {
@@ -2325,8 +2333,8 @@
     state.sessionActive = true;
     saveState();
     var a = audioEl();
-    if (!audioHasSrc(a)) {
-      loadAudio(true, true);
+    if (!audioHasSrc(a) || engine.loadedSurah !== state.surah || engine.loadedAyah !== state.ayah) {
+      loadAudio(true, false);
       return;
     }
     if (forcePlay === true || a.paused) {
@@ -3388,6 +3396,17 @@
     if (!btn) return;
     ev.preventDefault();
     restoreLearning({ play: false, from: "continue-card" });
+  }, true);
+  document.addEventListener("click", function (ev) {
+    var playBtn = ev.target && ev.target.closest ? ev.target.closest("[data-qrc-ayah-play]") : null;
+    if (!playBtn) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    var parts = String(playBtn.getAttribute("data-qrc-ayah-play") || "").split(":");
+    var surah = Number(parts[0]);
+    var ayah = Number(parts[1]);
+    if (!Number.isFinite(surah) || !Number.isFinite(ayah)) return;
+    playFromReader(surah, ayah);
   }, true);
   function watchQuranBodyClass() {
     if (!document.body || window.__dqpQuranBodyWatch) return;
