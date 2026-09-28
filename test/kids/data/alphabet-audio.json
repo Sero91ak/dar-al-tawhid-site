@@ -16,7 +16,7 @@
       "CC-BY-SA-3.0"
     ],
     "sourcePolicy": "Prefer exact human Arabic pronunciation recordings for standard Arabic/Fuṣḥā learning. License, speaker/source, exact lexical item and source page must be documented. Source metadata that only says Arabic must not be relabeled as explicitly MSA without evidence.",
-    "note": "Kids learning audio must use one consistent human Arabic voice. The approved anchor is the exact voice heard in the Eiarabe Alif clip. Other speakers and even same-account clips remain inactive until the same human voice is audibly confirmed.",
+    "note": "Finaler Kids-Lernbereich soll mit der autorisierten Serhat-Stimme aus DĀR Voice Studio aufgebaut werden. Jeder lokal erzeugte Clip muss vollständig angehört und ausdrücklich bestätigt werden. Die vorhandene Eiarabe-Alif-Aufnahme bleibt ausschließlich als Aussprache-Referenz erhalten, bis ein Serhat-Alif-Master bestätigt ist.",
     "qaRequirements": [
       "Human speaker",
       "Arabic pronunciation suitable for standard Arabic/Fuṣḥā learning",
@@ -27,9 +27,9 @@
       "No synthetic system-TTS fallback"
     ],
     "externalSourceRule": "verified=true only for individually identified human Arabic recordings with documented free license, exact lexical/letter target, source page, and speaker/author. CC BY-SA sources must remain unmodified external originals.",
-    "generatedPromotionRule": "Locally generated clips remain blocked unless separately human-reviewed; external human reference audio is preferred for alphabet learning.",
+    "generatedPromotionRule": "Lokale Serhat-Voice-Kandidaten dürfen erst nach vollständigem Anhören und ausdrücklicher Bestätigung in das Kids-Manifest übernommen werden.",
     "shareAlikeRule": "CC BY-SA audio may be used only as an unmodified external original file with attribution and license link. Do not normalize, trim, remix, transcode into a project-owned derivative, or publish a modified copy unless the resulting audio is distributed under the same or compatible ShareAlike terms.",
-    "voiceMode": "single-voice-only",
+    "voiceMode": "owner-voice-generated-human-approved",
     "canonicalVoiceId": "eiarabe-alif-2026",
     "canonicalVoiceLabel": "Escuela Internacional de Árabe – Alif reference voice",
     "canonicalVoiceAnchorText": "أَلِف",
@@ -37,7 +37,16 @@
     "canonicalVoiceAnchorPage": "https://commons.wikimedia.org/wiki/File:Letra_alif_por_la_Escuela_Internacional_de_%C3%81rabe.ogg",
     "canonicalVoiceLicense": "CC-BY-4.0",
     "requireSameHumanVoice": true,
-    "mixedSpeakersForbidden": true
+    "mixedSpeakersForbidden": true,
+    "targetVoiceProfileId": "serhat-owner-voice-2026",
+    "targetVoiceLabel": "Serhat Abu Malik · DĀR Voice Studio",
+    "authorizedOwnerVoiceGeneration": true,
+    "requireHumanApprovalForGeneratedAudio": true,
+    "autoPublishGeneratedAudio": false,
+    "pronunciationReferenceId": "eiarabe-alif-2026",
+    "pronunciationReferenceLabel": "Escuela Internacional de Árabe – Alif pronunciation reference",
+    "pronunciationReferenceUrl": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Letra%20alif%20por%20la%20Escuela%20Internacional%20de%20%C3%81rabe.ogg",
+    "pronunciationReferencePurpose": "Aussprache-/Lernreferenz; nicht die Zielstimme für den finalen Kids-Audio-Pack."
   },
   "letters": {
     "alif": {
