@@ -3,68 +3,68 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071923">
+<meta name="theme-color" content="#f2e5d2">
 <title>DĀR Voice by Serhat Abu Malik</title>
 <style>
 :root{
-  --bg:#06131f;--bg2:#0a1d2d;--panel:#0c2234;--ink:#f7f2e8;--muted:#9eafb8;
-  --line:rgba(220,190,118,.18);--gold:#d6b766;--gold2:#efd98d;--green:#58c69a;--red:#e77c7c;
+  --paper:#f4eadb;--paper2:#fffaf1;--paper3:#eadcc7;--ink:#182a35;--muted:#756d63;
+  --line:rgba(143,107,56,.24);--gold:#b88b45;--gold2:#d4ad68;--green:#3f8f6d;--red:#b44f4f;
 }
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:
-radial-gradient(circle at 18% 0%,rgba(47,95,107,.18),transparent 32%),
-linear-gradient(160deg,var(--bg),#05111a 62%,#071923);color:var(--ink);
+radial-gradient(circle at 15% 0%,rgba(184,139,69,.10),transparent 30%),
+linear-gradient(160deg,#f8f0e4,var(--paper) 64%,#ecdec9);color:var(--ink);
 font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
 body{min-height:100vh;padding:18px}
 .app{max-width:1180px;margin:0 auto}
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:6px 2px 20px}
-.brand{display:flex;align-items:center;gap:14px}
-.brand img{width:58px;height:58px;border-radius:16px}
-.brand strong{display:block;letter-spacing:.06em;font-size:18px}
-.brand span{display:block;color:var(--gold2);font-size:12px;margin-top:4px;letter-spacing:.08em}
-.status-pill{border:1px solid var(--line);border-radius:999px;padding:8px 11px;color:var(--muted);font-size:12px}
-.grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px}
-.panel{border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,rgba(14,39,55,.92),rgba(8,27,39,.9));box-shadow:0 22px 60px rgba(0,0,0,.18)}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:8px 4px 18px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:16px;min-width:0}
+.brand img{width:86px;height:72px;object-fit:contain;object-position:left center;border-radius:0;mix-blend-mode:multiply;opacity:.95;filter:contrast(1.02)}
+.brand strong{display:block;letter-spacing:.065em;font-size:19px;color:#132735}
+.brand span{display:block;color:#9a733b;font-size:12px;margin-top:4px;letter-spacing:.08em}
+.status-pill{border:1px solid var(--line);border-radius:999px;padding:8px 11px;background:rgba(255,255,255,.44);color:var(--muted);font-size:12px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;margin-top:16px}
+.panel{border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,rgba(255,250,241,.97),rgba(247,238,224,.96));box-shadow:0 18px 50px rgba(95,72,45,.10)}
 .main{padding:24px}.side{padding:20px}
-.kicker{color:var(--gold2);font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:800}
-h1{font-size:31px;margin:7px 0 6px;letter-spacing:-.02em}
+.kicker{color:#9a733b;font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:800}
+h1{font-size:31px;margin:7px 0 6px;letter-spacing:-.02em;color:#162a36}
 .lead{color:var(--muted);line-height:1.55;max-width:760px}
-textarea{width:100%;min-height:340px;resize:vertical;margin-top:22px;padding:18px;border-radius:16px;border:1px solid rgba(255,255,255,.11);outline:none;background:rgba(1,10,17,.52);color:var(--ink);font:500 16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif}
-textarea:focus{border-color:rgba(214,183,102,.58);box-shadow:0 0 0 3px rgba(214,183,102,.08)}
+textarea{width:100%;min-height:340px;resize:vertical;margin-top:22px;padding:18px;border-radius:16px;border:1px solid rgba(143,107,56,.20);outline:none;background:rgba(255,255,255,.72);color:var(--ink);font:500 16px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro Text",sans-serif;box-shadow:inset 0 1px 0 rgba(255,255,255,.85)}
+textarea:focus{border-color:rgba(184,139,69,.62);box-shadow:0 0 0 3px rgba(184,139,69,.10)}
 .meta{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:12px;margin:8px 3px 0}
 .actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
-.btn{border:1px solid var(--line);border-radius:12px;padding:11px 15px;background:rgba(255,255,255,.035);color:var(--ink);font-weight:700;cursor:pointer;text-decoration:none}
-.btn:hover{background:rgba(255,255,255,.06)}
-.btn.primary{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#1b180f;border-color:transparent}
+.btn{border:1px solid var(--line);border-radius:12px;padding:11px 15px;background:rgba(255,255,255,.55);color:var(--ink);font-weight:700;cursor:pointer;text-decoration:none}
+.btn:hover{background:#fffaf2}
+.btn.primary{background:linear-gradient(180deg,#d6b777,#b88b45);color:#fff;border-color:transparent;box-shadow:0 7px 18px rgba(146,102,38,.18)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 label{display:block;color:var(--muted);font-size:12px;font-weight:700;margin:0 0 7px}
-select{width:100%;padding:11px 12px;border-radius:11px;border:1px solid rgba(255,255,255,.1);background:#071824;color:var(--ink)}
-.block{padding:15px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+select{width:100%;padding:11px 12px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,.70);color:var(--ink)}
+.block{padding:15px 0;border-bottom:1px solid rgba(143,107,56,.13)}
 .block:last-child{border-bottom:0}
 .check{display:flex;align-items:flex-start;gap:10px;color:var(--ink);font-size:14px;line-height:1.45}
 .check input{margin-top:3px}
 .hint{color:var(--muted);font-size:12px;line-height:1.5;margin-top:7px}
 .state{display:flex;align-items:center;gap:8px;font-size:13px}
-.dot{width:9px;height:9px;border-radius:50%;background:#d59c57;box-shadow:0 0 0 4px rgba(213,156,87,.08)}
+.dot{width:9px;height:9px;border-radius:50%;background:#c5904f;box-shadow:0 0 0 4px rgba(197,144,79,.10)}
 .dot.good{background:var(--green)}.dot.bad{background:var(--red)}
-.progress{height:7px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:10px}
-.progress>i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .25s ease}
+.progress{height:7px;border-radius:999px;background:rgba(143,107,56,.11);overflow:hidden;margin-top:10px}
+.progress>i{display:block;width:0;height:100%;background:linear-gradient(90deg,#b88b45,#d7b878);transition:width .25s ease}
 .status-text{color:var(--muted);font-size:12px;line-height:1.45;margin-top:8px;min-height:34px}
-.player{margin-top:20px;padding:16px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:rgba(0,0,0,.12)}
+.player{margin-top:20px;padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.48)}
 .player[hidden]{display:none}
 audio{width:100%}
 .player-actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-.notice{margin-top:14px;padding:12px 13px;border:1px solid rgba(88,198,154,.16);border-radius:12px;background:rgba(88,198,154,.05);color:#cfe9dd;font-size:12px;line-height:1.5}
-.error{color:#ffb4b4}
-.footer{text-align:center;color:var(--muted);font-size:11px;padding:18px 0 4px}
-@media(max-width:820px){body{padding:10px}.grid{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}.main{padding:18px}.side{padding:18px}textarea{min-height:260px}}
+.notice{margin-top:14px;padding:12px 13px;border:1px solid rgba(63,143,109,.18);border-radius:12px;background:rgba(63,143,109,.06);color:#416d5d;font-size:12px;line-height:1.5}
+.error{color:#a84141}
+.footer{text-align:center;color:#8f795d;font-size:11px;padding:18px 0 4px}
+@media(max-width:820px){body{padding:10px}.grid{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}.main{padding:18px}.side{padding:18px}textarea{min-height:260px}.brand img{width:78px;height:66px}}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="topbar">
   <div class="brand">
-    <img src="/studio/voice-studio-icon.png" alt="">
+    <img src="/studio/serhat-app-icon.png" alt="Serhat Abu Malik Wasserzeichen">
     <div>
       <strong>DĀR Voice</strong>
       <span>by Serhat Abu Malik</span>
