@@ -34,6 +34,7 @@ function iosNativeHeaders(assetResponse) {
 }
 
 const KIDS_MIRROR = "https://dar-al-tawhid-test.sero91ak.workers.dev";
+// KIDS_PUBLIC_ROUTER_V77 — keep public /test/kids aligned with Dar Test.
 
 async function fetchKidsMirror(pathname, search) {
   const path = pathname === "/test/kids" ? "/test/kids/" : pathname;
