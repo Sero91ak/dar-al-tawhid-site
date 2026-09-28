@@ -3529,11 +3529,29 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         fatal=[x for x in final_metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
         final_limits=QA_CONFIG.get("finalMaxInternalSilenceMsByMode") or {}
         final_pause_limit=int(final_limits.get(doc_mode,QA_CONFIG.get("finalMaxInternalSilenceMs",620)))
+
+        # "Freie Stimme" kann beliebige vollständige Sätze mit Punkt, Ausrufezeichen
+        # und bewussten Satzpausen enthalten. Der globale Endtest sieht nur die
+        # längste stille Insel und kann nicht erkennen, ob sie grammatisch gewollt
+        # ist. Deshalb bleibt die strenge Segment-QA unverändert, während nur der
+        # globale End-Grenzwert im freien Bereich großzügiger ist.
+        if free_mode:
+            final_pause_limit=max(
+                final_pause_limit,
+                int(QA_CONFIG.get("freeVoiceFinalMaxInternalSilenceMs",1200))
+            )
+            final_metrics["free_voice_final_pause_policy"]=True
+
         final_metrics["final_internal_silence_limit_ms"]=final_pause_limit
-        if int(final_metrics.get("max_internal_silence_ms",0) or 0)>final_pause_limit:
+        measured_final_pause=int(final_metrics.get("max_internal_silence_ms",0) or 0)
+        if measured_final_pause>final_pause_limit:
             fatal.append("unnatural_final_internal_pause")
         if fatal:
-            raise RuntimeError("Finale Audio-QA fehlgeschlagen: "+", ".join(dict.fromkeys(fatal)))
+            raise RuntimeError(
+                "Finale Audio-QA fehlgeschlagen: "
+                +", ".join(dict.fromkeys(fatal))
+                +f" · interne Stille {measured_final_pause} ms"
+            )
 
         staged_audio_locks=(
             [] if free_mode
