@@ -94,9 +94,12 @@
           "as-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",
           "As-salāmu ʿalaykum wa raḥmatullāhi wa barakātuh"
         ],
-        "tts_text": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",
+        "tts_text": "السَّلَامُ عَلَيْكُمْ وَرَحْمَتُ اللَّهِ وَبَرَكَاتُهُ",
         "tts_language": "ar",
-        "scope": "free_voice_pronunciation_library"
+        "scope": "free_voice_pronunciation_library",
+        "flowRepairTriggerMs": 170,
+        "flowRepairTargetMs": 65,
+        "flowRepairMaxMs": 900
       },
       {
         "id": "salam_part_1",
@@ -143,11 +146,11 @@
           "Dār al-Tawḥīd Kids",
           "Dar al-Tawhid Kids"
         ],
-        "tts_text": "دَارُ التَّوْحِيد كِتْس",
-        "tts_language": "ar",
+        "tts_text": "Daar al Tauhiid Kids",
+        "tts_language": "de",
         "scope": "free_voice_pronunciation_library",
-        "flowRepairTriggerMs": 90,
-        "flowRepairTargetMs": 35,
+        "flowRepairTriggerMs": 0,
+        "flowRepairTargetMs": 0,
         "flowRepairMaxMs": 1000
       },
       {
@@ -176,19 +179,7 @@
         "flowRepairTargetMs": 55
       }
     ],
-    "freeVoicePhraseRenderPlans": [
-      {
-        "id": "salam_full_greeting_flow",
-        "sourceTts": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",
-        "language": "ar",
-        "chunks": [
-          "السَّلَامُ عَلَيْكُمْ",
-          "وَرَحْمَةُ اللَّهِ",
-          "وَبَرَكَاتُهُ"
-        ],
-        "join": "tight"
-      }
-    ]
+    "freeVoicePhraseRenderPlans": []
   },
   "prosody": {
     "automatic": true,
@@ -463,7 +454,12 @@
     "contextBridgeLeadIn": true,
     "contextBridgeFollowOn": true,
     "contextBridgeNoStandaloneGermanFragment": true,
-    "contextBridgeCache": true
+    "contextBridgeCache": true,
+    "freeVoiceGermanMaxChars": 108,
+    "freeVoiceArabicMaxChars": 96,
+    "freeVoiceSentenceFirst": true,
+    "freeVoiceBrandPhraseSingleGermanSegment": true,
+    "freeVoiceGreetingSingleArabicSegment": true
   },
   "qualityAssurance": {
     "maxRenderAttempts": 2,
