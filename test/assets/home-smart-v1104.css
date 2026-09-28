@@ -1250,1780 +1250,762 @@ body.is-home-route .header-prayer-hub__empty{
 }
 /* /v1112 · SCHRITT 2 KONSOLIDIERT */
 
+/* v1113 · REFERENZ-REBUILD · HOME MASTER */
+/* Ein konsolidierter visueller Layer nach der erzeugten Referenz:
+   wenige starke Flächen, klare Hierarchie, echte 3D-Objekte, keine "Pillen überall".
+   Alle Farben stammen aus dem aktiven Erscheinungsbild. */
 
-/* v1106 · SCHRITT 3 · QURʾĀN-WEITERLESEN ALS PREMIUM-KAPSEL */
-/* Reines Layout-Upgrade der vorhandenen Qurʾān-Weiterlesen-Schaltfläche.
-   data-nav / data-quran-continue und Lesefortschritt bleiben unverändert. */
+body.is-home-route{
+  --ref-accent:var(--theme-surface-elevated-accent,var(--theme-accent,var(--gold2)));
+  --ref-text:var(--theme-surface-elevated-text,var(--theme-text,var(--text)));
+  --ref-muted:var(--theme-surface-elevated-muted,var(--theme-muted,var(--muted)));
+  --ref-surface:var(--theme-surface-elevated,var(--premium-bg,var(--theme-surface,var(--card))));
+  --ref-surface-flat:var(--theme-surface,var(--card));
+  --ref-border:color-mix(in srgb,var(--theme-border,var(--line)) 78%,var(--ref-accent) 22%);
+  --ref-border-soft:color-mix(in srgb,var(--theme-border,var(--line)) 88%,transparent);
+  --ref-shadow:0 12px 30px color-mix(in srgb,var(--theme-text,var(--text)) 10%,transparent);
+}
 
+/* Header kompakt halten; das Mini-Tawḥīd-Badge im Hero wird nicht doppelt gezeigt. */
+body.is-home-route .home-tawhid-focus{display:none!important}
+body.is-home-route #appView.view{padding-top:10px!important}
+body.is-home-route .home-v380-shell{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+  width:100%!important;
+}
+
+/* ── Qurʾān: große elegante Referenzfläche ─────────────────── */
 body.is-home-route .home-v380-quran-hero{
+  order:-300!important;
   position:relative!important;
   isolation:isolate!important;
   display:flex!important;
   align-items:center!important;
   width:100%!important;
-  min-height:104px!important;
-  margin:12px 0 14px!important;
-  padding:15px 112px 15px 22px!important;
+  min-height:112px!important;
+  margin:0 0 12px!important;
+  padding:18px 112px 18px 21px!important;
   overflow:hidden!important;
-  border:1px solid rgba(222,194,124,.52)!important;
-  border-radius:999px!important;
-  color:#fff8ea!important;
+  border:1px solid var(--ref-border)!important;
+  border-radius:30px!important;
   background:
-    radial-gradient(circle at 84% 42%,rgba(222,194,124,.15) 0%,rgba(222,194,124,.055) 24%,transparent 48%),
-    linear-gradient(100deg,rgba(17,31,51,.94) 0%,rgba(8,20,38,.91) 54%,rgba(5,15,30,.88) 100%)!important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.09),
-    inset 0 -1px 0 rgba(222,194,124,.055),
-    0 14px 34px rgba(0,0,0,.24)!important;
-  -webkit-backdrop-filter:blur(18px) saturate(1.08)!important;
-  backdrop-filter:blur(18px) saturate(1.08)!important;
+    radial-gradient(circle at 86% 42%,color-mix(in srgb,var(--ref-accent) 12%,transparent),transparent 38%),
+    var(--ref-surface)!important;
+  color:var(--ref-text)!important;
+  box-shadow:var(--ref-shadow),inset 0 1px 0 color-mix(in srgb,#fff 7%,transparent)!important;
   text-align:left!important;
   transform:none!important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.04)!important;
+  backdrop-filter:blur(16px) saturate(1.04)!important;
 }
-
 body.is-home-route .home-v380-quran-hero::before{
   content:""!important;
   position:absolute!important;
   inset:1px!important;
-  z-index:0!important;
   border-radius:inherit!important;
   pointer-events:none!important;
-  background:
-    linear-gradient(115deg,rgba(255,255,255,.055) 0%,transparent 24%,transparent 66%,rgba(222,194,124,.045) 100%)!important;
+  background:linear-gradient(116deg,color-mix(in srgb,#fff 4%,transparent),transparent 28%,transparent 72%,color-mix(in srgb,var(--ref-accent) 3%,transparent))!important;
 }
-
-/* 3D-Qurʾān klar sichtbar, aber als Teil der Kapsel – kein separates Kästchen. */
 body.is-home-route .home-v380-quran-hero::after{
   content:""!important;
   position:absolute!important;
-  right:12px!important;
-  top:50%!important;
   z-index:1!important;
-  width:96px!important;
-  height:96px!important;
+  right:10px!important;
+  top:50%!important;
+  width:100px!important;
+  height:100px!important;
   transform:translateY(-50%) rotate(-5deg)!important;
   pointer-events:none!important;
-  background:url("/test/assets/dar-3d-icons/quran.png?v=1106") center/contain no-repeat!important;
-  opacity:.96!important;
+  background:url("/test/assets/dar-3d-icons/quran.png?v=1113") center/contain no-repeat!important;
+  opacity:.98!important;
   mix-blend-mode:normal!important;
-  filter:
-    drop-shadow(0 12px 16px rgba(0,0,0,.34))
-    drop-shadow(0 1px 5px rgba(222,194,124,.14))
-    saturate(.96)!important;
+  filter:drop-shadow(0 13px 17px rgba(0,0,0,.24)) saturate(.97)!important;
 }
-
+body.is-home-route .home-v380-quran-hero__mark,
+body.is-home-route .home-v380-quran-hero__chevron{display:none!important}
 body.is-home-route .home-v380-quran-hero__body{
   position:relative!important;
   z-index:2!important;
-  flex:1 1 auto!important;
   min-width:0!important;
   display:flex!important;
   flex-direction:column!important;
-  align-items:flex-start!important;
-  justify-content:center!important;
   gap:4px!important;
 }
-
 body.is-home-route .home-v380-quran-hero .home-v380-kicker{
   margin:0 0 1px!important;
-  color:#dfc27a!important;
-  -webkit-text-fill-color:#dfc27a!important;
-  font-family:var(--font-ui,var(--sans))!important;
-  font-size:clamp(8px,1.9vw,9.5px)!important;
+  color:var(--ref-accent)!important;
+  -webkit-text-fill-color:var(--ref-accent)!important;
+  font-size:8.5px!important;
   line-height:1!important;
   font-weight:900!important;
-  letter-spacing:.14em!important;
+  letter-spacing:.15em!important;
   text-transform:uppercase!important;
 }
-
 body.is-home-route .home-v380-quran-hero__title{
   margin:0!important;
-  max-width:100%!important;
-  color:#fff8ea!important;
-  -webkit-text-fill-color:#fff8ea!important;
+  color:var(--ref-text)!important;
+  -webkit-text-fill-color:var(--ref-text)!important;
   font-family:var(--font-display,var(--serif))!important;
-  font-size:clamp(20px,4.8vw,24px)!important;
-  line-height:1.04!important;
+  font-size:clamp(21px,5vw,26px)!important;
+  line-height:1.03!important;
   font-weight:850!important;
-  letter-spacing:-.01em!important;
-  text-shadow:0 2px 12px rgba(0,0,0,.34)!important;
+  letter-spacing:-.015em!important;
+  text-shadow:none!important;
 }
-
 body.is-home-route .home-v380-quran-hero__meta{
   margin:1px 0 0!important;
   max-width:34ch!important;
-  color:rgba(236,235,228,.74)!important;
-  -webkit-text-fill-color:rgba(236,235,228,.74)!important;
+  color:var(--ref-muted)!important;
+  -webkit-text-fill-color:var(--ref-muted)!important;
   font-size:clamp(10px,2.35vw,11.5px)!important;
-  line-height:1.25!important;
+  line-height:1.28!important;
   font-weight:650!important;
 }
-
 body.is-home-route .home-v380-quran-hero__when{
   margin:0!important;
-  color:rgba(222,194,124,.78)!important;
-  -webkit-text-fill-color:rgba(222,194,124,.78)!important;
-  font-size:clamp(8.8px,2.05vw,10px)!important;
-  line-height:1.15!important;
+  color:color-mix(in srgb,var(--ref-muted) 82%,var(--ref-accent) 18%)!important;
+  -webkit-text-fill-color:color-mix(in srgb,var(--ref-muted) 82%,var(--ref-accent) 18%)!important;
+  font-size:8.8px!important;
   font-weight:750!important;
 }
 
-body.is-home-route .home-v380-quran-hero__chevron{
-  display:none!important;
-}
-
-/* Alte Icon-Slots dürfen keine zweite Qurʾān-Grafik erzeugen. */
-body.is-home-route .home-v380-quran-hero__mark{
-  display:none!important;
-}
-
-@media(hover:hover){
-  body.is-home-route .home-v380-quran-hero:hover{
-    border-color:rgba(228,201,132,.66)!important;
-    background:
-      radial-gradient(circle at 84% 42%,rgba(222,194,124,.18) 0%,rgba(222,194,124,.07) 25%,transparent 49%),
-      linear-gradient(100deg,rgba(19,34,55,.95) 0%,rgba(9,22,41,.93) 54%,rgba(6,17,33,.90) 100%)!important;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.10),
-      0 16px 36px rgba(0,0,0,.27)!important;
-  }
-}
-
-body.is-home-route .home-v380-quran-hero:active{
-  transform:none!important;
-  opacity:.94!important;
-}
-
-@media(max-width:430px){
-  body.is-home-route .home-v380-quran-hero{
-    min-height:94px!important;
-    margin:10px 0 12px!important;
-    padding:13px 91px 13px 18px!important;
-    border-radius:999px!important;
-  }
-
-  body.is-home-route .home-v380-quran-hero::after{
-    right:8px!important;
-    width:82px!important;
-    height:82px!important;
-    transform:translateY(-50%) rotate(-5deg)!important;
-  }
-
-  body.is-home-route .home-v380-quran-hero__title{
-    font-size:clamp(18px,5.2vw,21px)!important;
-  }
-
-  body.is-home-route .home-v380-quran-hero__meta{
-    max-width:28ch!important;
-    font-size:9.8px!important;
-  }
-
-  body.is-home-route .home-v380-quran-hero__when{
-    font-size:8.7px!important;
-  }
-}
-
-@media(max-width:360px){
-  body.is-home-route .home-v380-quran-hero{
-    min-height:90px!important;
-    padding-left:15px!important;
-    padding-right:82px!important;
-  }
-
-  body.is-home-route .home-v380-quran-hero::after{
-    right:5px!important;
-    width:76px!important;
-    height:76px!important;
-  }
-
-  body.is-home-route .home-v380-quran-hero__title{
-    font-size:17.5px!important;
-  }
-}
-/* /v1106 · SCHRITT 3 */
-
-/* v1107 · SCHRITT 4 · TAWḤĪD-HAUPTBEREICH ALS PREMIUM-KAPSEL */
-/* Nur Darstellung. Bestehende Navigation, data-Attribute und Inhaltslogik bleiben unverändert. */
-
+/* ── Tawḥīd: visuell stärkste Hauptfläche ──────────────────── */
 body.is-home-route .home-premium-access{
   order:-200!important;
-  margin:0 0 12px!important;
+  margin:0 0 14px!important;
   padding:0!important;
   border:0!important;
-  border-radius:0!important;
   background:transparent!important;
   box-shadow:none!important;
 }
-
-/* Doppelte Abschnittsüberschrift entfernen: die Hierarchie sitzt direkt in der Hauptkapsel. */
-body.is-home-route .home-premium-access__head{
-  display:none!important;
-}
-
-/* Eine große, durchgehende Tawḥīd-Kapsel direkt unter Qurʾān. */
+body.is-home-route .home-premium-access__head{display:none!important}
 body.is-home-route .home-tawhid-entry{
   position:relative!important;
   isolation:isolate!important;
   display:block!important;
   width:100%!important;
-  min-height:116px!important;
-  margin:0 0 10px!important;
-  padding:18px 118px 17px 23px!important;
+  min-height:128px!important;
+  margin:0!important;
+  padding:20px 126px 19px 22px!important;
   overflow:hidden!important;
-  border:1px solid rgba(222,194,124,.54)!important;
-  border-radius:999px!important;
-  color:#fff8ea!important;
+  border:1px solid color-mix(in srgb,var(--ref-border) 68%,var(--ref-accent) 32%)!important;
+  border-radius:32px!important;
   background:
-    radial-gradient(circle at 84% 44%,rgba(222,194,124,.16) 0%,rgba(222,194,124,.06) 25%,transparent 49%),
-    linear-gradient(102deg,rgba(20,35,55,.96) 0%,rgba(9,23,42,.94) 53%,rgba(5,16,31,.91) 100%)!important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.09),
-    inset 0 -1px 0 rgba(222,194,124,.055),
-    0 15px 36px rgba(0,0,0,.25)!important;
-  -webkit-backdrop-filter:blur(18px) saturate(1.08)!important;
-  backdrop-filter:blur(18px) saturate(1.08)!important;
+    radial-gradient(circle at 84% 44%,color-mix(in srgb,var(--ref-accent) 15%,transparent),transparent 39%),
+    var(--ref-surface)!important;
+  color:var(--ref-text)!important;
+  box-shadow:0 16px 36px color-mix(in srgb,var(--theme-text,var(--text)) 12%,transparent),inset 0 1px 0 color-mix(in srgb,#fff 8%,transparent)!important;
   text-align:left!important;
   transform:none!important;
 }
-
-/* Glasreflex und feine Tiefe ohne zusätzliche Box. */
 body.is-home-route .home-tawhid-entry::before{
   content:""!important;
   position:absolute!important;
   inset:1px!important;
-  z-index:0!important;
   border-radius:inherit!important;
   pointer-events:none!important;
   background:
-    radial-gradient(circle at 18% 20%,rgba(255,255,255,.06),transparent 31%),
-    linear-gradient(115deg,rgba(255,255,255,.045),transparent 28%,transparent 68%,rgba(222,194,124,.045))!important;
+    radial-gradient(circle at 14% 12%,color-mix(in srgb,var(--ref-accent) 7%,transparent),transparent 34%),
+    linear-gradient(115deg,color-mix(in srgb,#fff 4%,transparent),transparent 27%,transparent 72%,color-mix(in srgb,var(--ref-accent) 3%,transparent))!important;
 }
-
-/* 3D-Wissensmotiv integriert statt separater Icon-Kachel. */
 body.is-home-route .home-tawhid-entry::after{
   content:""!important;
   position:absolute!important;
-  right:12px!important;
-  top:50%!important;
   z-index:1!important;
-  width:102px!important;
-  height:102px!important;
+  right:9px!important;
+  top:50%!important;
+  width:112px!important;
+  height:112px!important;
   transform:translateY(-50%) rotate(4deg)!important;
   pointer-events:none!important;
-  background:url("/test/assets/dar-3d-icons/ilm.png?v=1107") center/contain no-repeat!important;
-  opacity:.97!important;
+  background:url("/test/assets/dar-3d-icons/ilm.png?v=1113") center/contain no-repeat!important;
+  opacity:.98!important;
   mix-blend-mode:normal!important;
-  filter:
-    drop-shadow(0 13px 17px rgba(0,0,0,.34))
-    drop-shadow(0 1px 5px rgba(222,194,124,.14))
-    saturate(.96)!important;
+  filter:drop-shadow(0 14px 18px rgba(0,0,0,.24)) saturate(.96)!important;
 }
-
-/* Alte linke Icon-Kachel und Pfeil werden optisch nicht mehr gebraucht. */
 body.is-home-route .home-tawhid-entry__icon,
-body.is-home-route .home-tawhid-entry__arrow{
-  display:none!important;
-}
-
+body.is-home-route .home-tawhid-entry__arrow{display:none!important}
 body.is-home-route .home-tawhid-entry__copy{
   position:relative!important;
   z-index:2!important;
-  min-width:0!important;
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:flex-start!important;
-  justify-content:center!important;
-  gap:4px!important;
-}
-
-body.is-home-route .home-tawhid-entry__label{
-  display:block!important;
-  margin:0 0 1px!important;
-  color:#dfc27a!important;
-  -webkit-text-fill-color:#dfc27a!important;
-  font-family:var(--font-ui,var(--sans))!important;
-  font-size:clamp(8px,1.9vw,9.5px)!important;
-  line-height:1!important;
-  font-weight:900!important;
-  letter-spacing:.14em!important;
-  text-transform:uppercase!important;
-}
-
-body.is-home-route .home-tawhid-entry__copy h3{
-  margin:0!important;
-  max-width:100%!important;
-  color:#fff8ea!important;
-  -webkit-text-fill-color:#fff8ea!important;
-  font-family:var(--font-display,var(--serif))!important;
-  font-size:clamp(21px,5vw,25px)!important;
-  line-height:1.04!important;
-  font-weight:850!important;
-  letter-spacing:-.01em!important;
-  text-shadow:0 2px 12px rgba(0,0,0,.34)!important;
-}
-
-body.is-home-route .home-tawhid-entry__copy p{
-  margin:1px 0 0!important;
-  max-width:35ch!important;
-  color:rgba(236,235,228,.74)!important;
-  -webkit-text-fill-color:rgba(236,235,228,.74)!important;
-  font-size:clamp(10px,2.35vw,11.5px)!important;
-  line-height:1.28!important;
-  font-weight:650!important;
-}
-
-/* Keine fremden Hover-Regeln dürfen aus der Kapsel wieder eine flache Fläche machen. */
-@media(hover:hover){
-  body.is-home-route .home-tawhid-entry:hover{
-    border-color:rgba(228,201,132,.68)!important;
-    background:
-      radial-gradient(circle at 84% 44%,rgba(222,194,124,.19) 0%,rgba(222,194,124,.075) 25%,transparent 49%),
-      linear-gradient(102deg,rgba(22,38,59,.97) 0%,rgba(10,25,45,.95) 53%,rgba(6,18,34,.92) 100%)!important;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.10),
-      0 17px 38px rgba(0,0,0,.28)!important;
-    filter:none!important;
-  }
-}
-
-body.is-home-route .home-tawhid-entry:active{
-  transform:none!important;
-  opacity:.94!important;
-}
-
-@media(max-width:430px){
-  body.is-home-route .home-tawhid-entry{
-    min-height:104px!important;
-    margin-bottom:9px!important;
-    padding:15px 94px 15px 18px!important;
-    border-radius:999px!important;
-  }
-
-  body.is-home-route .home-tawhid-entry::after{
-    right:7px!important;
-    width:86px!important;
-    height:86px!important;
-  }
-
-  body.is-home-route .home-tawhid-entry__copy h3{
-    font-size:clamp(18.5px,5.25vw,21.5px)!important;
-  }
-
-  body.is-home-route .home-tawhid-entry__copy p{
-    max-width:28ch!important;
-    font-size:9.8px!important;
-  }
-}
-
-@media(max-width:360px){
-  body.is-home-route .home-tawhid-entry{
-    min-height:98px!important;
-    padding-left:15px!important;
-    padding-right:84px!important;
-  }
-
-  body.is-home-route .home-tawhid-entry::after{
-    right:4px!important;
-    width:78px!important;
-    height:78px!important;
-  }
-
-  body.is-home-route .home-tawhid-entry__copy h3{
-    font-size:18px!important;
-  }
-}
-/* /v1107 · SCHRITT 4 */
-
-/* v1108 · SCHRITT 5 · SCHNELLZUGRIFFE ALS PREMIUM-KAPSELN */
-/* Nur die vorhandenen Schnellzugriffe werden neu gezeichnet.
-   data-home-premium-nav, Klick-Handler und Navigation bleiben unverändert. */
-
-body.is-home-route .home-premium-quick{
-  order:0!important;
-  width:100%!important;
-  margin:0 0 14px!important;
-  padding:0!important;
-  border:0!important;
-  background:transparent!important;
-}
-
-/* Ruhige Abschnittszeile statt großer Kartenüberschrift. */
-body.is-home-route .home-premium-quick__head{
-  display:flex!important;
-  align-items:center!important;
-  justify-content:space-between!important;
-  gap:10px!important;
-  margin:0 4px 8px!important;
-  padding:0 2px!important;
-}
-
-body.is-home-route .home-premium-quick__kicker{
-  display:none!important;
-}
-
-body.is-home-route .home-premium-quick__title{
-  margin:0!important;
-  color:rgba(243,239,229,.86)!important;
-  -webkit-text-fill-color:rgba(243,239,229,.86)!important;
-  font-family:var(--font-ui,var(--sans))!important;
-  font-size:clamp(11px,2.65vw,13px)!important;
-  line-height:1!important;
-  font-weight:900!important;
-  letter-spacing:.11em!important;
-  text-transform:uppercase!important;
-}
-
-body.is-home-route .home-premium-quick__all{
-  min-height:28px!important;
-  margin:0!important;
-  padding:4px 10px!important;
-  border:1px solid rgba(222,194,124,.28)!important;
-  border-radius:999px!important;
-  background:rgba(7,17,31,.44)!important;
-  color:#d9c184!important;
-  -webkit-text-fill-color:#d9c184!important;
-  font-size:9.5px!important;
-  line-height:1!important;
-  font-weight:850!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
-  -webkit-backdrop-filter:blur(10px)!important;
-  backdrop-filter:blur(10px)!important;
-}
-
-/* Zwei ruhige Spalten auf iPhone; drei ab Tablet-Breite. */
-body.is-home-route .home-premium-quick__grid{
-  display:grid!important;
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
-  gap:8px!important;
-  width:100%!important;
-}
-
-/* Jede Karte wird zu einer echten Capsule: Icon links, Text kompakt, kein Pfeil. */
-body.is-home-route .home-premium-card{
-  position:relative!important;
-  isolation:isolate!important;
-  width:100%!important;
-  min-width:0!important;
-  min-height:68px!important;
-  margin:0!important;
-  padding:8px 13px 8px 9px!important;
-  display:grid!important;
-  grid-template-columns:42px minmax(0,1fr)!important;
-  align-items:center!important;
-  gap:8px!important;
-  overflow:hidden!important;
-  border:1px solid rgba(222,194,124,.30)!important;
-  border-radius:999px!important;
-  color:#fff8ea!important;
-  background:
-    radial-gradient(circle at 12% 28%,rgba(222,194,124,.09),transparent 36%),
-    linear-gradient(104deg,rgba(17,31,50,.82) 0%,rgba(8,20,37,.78) 64%,rgba(5,15,29,.74) 100%)!important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    0 8px 22px rgba(0,0,0,.17)!important;
-  -webkit-backdrop-filter:blur(14px) saturate(1.04)!important;
-  backdrop-filter:blur(14px) saturate(1.04)!important;
-  text-align:left!important;
-  transform:none!important;
-}
-
-body.is-home-route .home-premium-card::before{
-  content:""!important;
-  position:absolute!important;
-  inset:1px!important;
-  z-index:0!important;
-  border-radius:inherit!important;
-  pointer-events:none!important;
-  background:
-    linear-gradient(115deg,rgba(255,255,255,.038),transparent 31%,transparent 72%,rgba(222,194,124,.025))!important;
-}
-
-/* Tawḥīd-Karte bleibt leicht betont, aber nicht als fremder Kartentyp. */
-body.is-home-route .home-premium-card--tawhid{
-  border-color:rgba(226,197,124,.44)!important;
-  background:
-    radial-gradient(circle at 13% 26%,rgba(222,194,124,.13),transparent 38%),
-    linear-gradient(104deg,rgba(20,35,55,.88) 0%,rgba(9,22,40,.84) 64%,rgba(5,16,31,.79) 100%)!important;
-}
-
-body.is-home-route .home-premium-card__visual{
-  position:relative!important;
-  z-index:2!important;
-  width:42px!important;
-  height:42px!important;
-  display:grid!important;
-  place-items:center!important;
-  overflow:visible!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-
-body.is-home-route .home-premium-card__visual img,
-body.is-home-route .home-premium-card__visual img.dar3d-icon{
-  display:block!important;
-  width:40px!important;
-  height:40px!important;
-  max-width:40px!important;
-  max-height:40px!important;
-  object-fit:contain!important;
-  filter:
-    drop-shadow(0 6px 9px rgba(0,0,0,.25))
-    saturate(.94)!important;
-}
-
-body.is-home-route .home-premium-card__body{
-  position:relative!important;
-  z-index:2!important;
-  min-width:0!important;
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:flex-start!important;
-  justify-content:center!important;
-  gap:2px!important;
-}
-
-body.is-home-route .home-premium-card__body strong{
-  width:100%!important;
-  margin:0!important;
-  overflow:hidden!important;
-  color:#fff8ea!important;
-  -webkit-text-fill-color:#fff8ea!important;
-  font-family:var(--font-ui,var(--sans))!important;
-  font-size:clamp(11.2px,2.9vw,13.3px)!important;
-  line-height:1.08!important;
-  font-weight:900!important;
-  white-space:nowrap!important;
-  text-overflow:ellipsis!important;
-}
-
-body.is-home-route .home-premium-card__body span{
-  width:100%!important;
-  margin:0!important;
-  overflow:hidden!important;
-  color:rgba(232,232,226,.63)!important;
-  -webkit-text-fill-color:rgba(232,232,226,.63)!important;
-  font-size:clamp(8.2px,2vw,9.5px)!important;
-  line-height:1.18!important;
-  font-weight:650!important;
-  white-space:nowrap!important;
-  text-overflow:ellipsis!important;
-  display:block!important;
-}
-
-body.is-home-route .home-premium-card__chev{
-  display:none!important;
-}
-
-/* Touch und Hover bleiben ruhig – keine springenden Karten. */
-body.is-home-route .home-premium-card:active{
-  transform:none!important;
-  opacity:.93!important;
-}
-
-body.is-home-route .home-premium-card:focus-visible{
-  outline:none!important;
-  border-color:rgba(229,202,132,.70)!important;
-  box-shadow:
-    0 0 0 2px rgba(222,194,124,.12),
-    inset 0 1px 0 rgba(255,255,255,.07),
-    0 8px 22px rgba(0,0,0,.18)!important;
-}
-
-@media(hover:hover){
-  body.is-home-route .home-premium-card:hover{
-    transform:none!important;
-    border-color:rgba(229,202,132,.52)!important;
-    background:
-      radial-gradient(circle at 12% 28%,rgba(222,194,124,.12),transparent 36%),
-      linear-gradient(104deg,rgba(19,34,54,.86) 0%,rgba(9,22,40,.82) 64%,rgba(6,17,32,.78) 100%)!important;
-    filter:none!important;
-  }
-}
-
-@media(max-width:390px){
-  body.is-home-route .home-premium-quick__grid{
-    gap:7px!important;
-  }
-
-  body.is-home-route .home-premium-card{
-    min-height:64px!important;
-    grid-template-columns:38px minmax(0,1fr)!important;
-    gap:6px!important;
-    padding:7px 10px 7px 8px!important;
-  }
-
-  body.is-home-route .home-premium-card__visual{
-    width:38px!important;
-    height:38px!important;
-  }
-
-  body.is-home-route .home-premium-card__visual img,
-  body.is-home-route .home-premium-card__visual img.dar3d-icon{
-    width:36px!important;
-    height:36px!important;
-    max-width:36px!important;
-    max-height:36px!important;
-  }
-
-  body.is-home-route .home-premium-card__body strong{
-    font-size:10.8px!important;
-  }
-
-  body.is-home-route .home-premium-card__body span{
-    font-size:7.9px!important;
-  }
-}
-
-@media(min-width:760px){
-  body.is-home-route .home-premium-quick__grid{
-    grid-template-columns:repeat(3,minmax(0,1fr))!important;
-    gap:9px!important;
-  }
-
-  body.is-home-route .home-premium-card{
-    min-height:72px!important;
-    grid-template-columns:44px minmax(0,1fr)!important;
-    padding:9px 15px 9px 10px!important;
-  }
-
-  body.is-home-route .home-premium-card__visual{
-    width:44px!important;
-    height:44px!important;
-  }
-
-  body.is-home-route .home-premium-card__visual img,
-  body.is-home-route .home-premium-card__visual img.dar3d-icon{
-    width:42px!important;
-    height:42px!important;
-    max-width:42px!important;
-    max-height:42px!important;
-  }
-}
-/* /v1108 · SCHRITT 5 */
-
-/* v1109 · SCHRITT 6 · HEUTE UND ENTDECKEN IM PREMIUM-CAPSULE-SYSTEM */
-/* Ausschließlich Startseiten-Inhaltsmodule.
-   Navigation, data-nav, Datenquellen, Slider-Logik und Inhalte bleiben unverändert. */
-
-/* Abschnittsüberschriften: kleiner, ruhiger, näher an der Capsule-Navigation. */
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"],
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"]{
-  margin:12px 0 14px!important;
-  padding:0!important;
-  border:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-
-body.is-home-route #homeTodayTitle,
-body.is-home-route #homeDiscoverTitle{
-  margin:0!important;
-  color:rgba(246,241,229,.90)!important;
-  -webkit-text-fill-color:rgba(246,241,229,.90)!important;
-  font-family:var(--font-display,var(--serif))!important;
-  font-size:clamp(19px,4.7vw,23px)!important;
-  line-height:1.04!important;
-  font-weight:850!important;
-  letter-spacing:-.01em!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-section-head{
-  align-items:center!important;
-  margin:0 2px 8px!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-section-rule,
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] > .home-v380-section-rule{
-  width:100%!important;
-  height:1px!important;
-  margin:7px 0 9px!important;
-  background:linear-gradient(90deg,rgba(222,194,124,.36),rgba(222,194,124,.08) 62%,transparent)!important;
-  opacity:1!important;
-}
-
-/* "Alle Beiträge" als kleine passende Capsule statt nacktem Textlink. */
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] > .home-v380-section-head .home-v380-text-link{
-  min-height:29px!important;
-  padding:5px 11px!important;
-  border:1px solid rgba(222,194,124,.28)!important;
-  border-radius:999px!important;
-  background:rgba(7,17,31,.44)!important;
-  color:#d9c184!important;
-  -webkit-text-fill-color:#d9c184!important;
-  font-size:9.5px!important;
-  line-height:1!important;
-  font-weight:850!important;
-  text-decoration:none!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
-  -webkit-backdrop-filter:blur(10px)!important;
-  backdrop-filter:blur(10px)!important;
-}
-
-/* HEUTE: jede offene Zeile wird zur ruhigen, breiten Inhalts-Capsule. */
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home){
-  position:relative!important;
-  isolation:isolate!important;
-  display:flex!important;
-  align-items:center!important;
-  width:100%!important;
-  min-height:92px!important;
-  gap:10px!important;
-  margin:0 0 8px!important;
-  padding:13px 78px 13px 18px!important;
-  overflow:hidden!important;
-  border:1px solid rgba(222,194,124,.27)!important;
-  border-radius:28px!important;
-  color:#fff8ea!important;
-  background:
-    radial-gradient(circle at 86% 42%,rgba(222,194,124,.09),transparent 34%),
-    linear-gradient(104deg,rgba(16,30,49,.76),rgba(8,20,37,.72) 66%,rgba(5,15,29,.68))!important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05),
-    0 8px 22px rgba(0,0,0,.15)!important;
-  -webkit-backdrop-filter:blur(13px) saturate(1.03)!important;
-  backdrop-filter:blur(13px) saturate(1.03)!important;
-  text-align:left!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home)::before{
-  content:""!important;
-  position:absolute!important;
-  inset:1px!important;
-  z-index:0!important;
-  border-radius:inherit!important;
-  pointer-events:none!important;
-  background:linear-gradient(115deg,rgba(255,255,255,.035),transparent 31%,transparent 74%,rgba(222,194,124,.025))!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home)::after{
-  content:""!important;
-  position:absolute!important;
-  right:10px!important;
-  top:50%!important;
-  z-index:1!important;
-  width:62px!important;
-  height:62px!important;
-  transform:translateY(-50%) rotate(-4deg)!important;
-  pointer-events:none!important;
-  opacity:.24!important;
-  mix-blend-mode:luminosity!important;
-  filter:drop-shadow(0 7px 10px rgba(0,0,0,.20)) saturate(.82)!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row[data-nav="dua"]::after{
-  background:url("/test/assets/dar-3d-icons/dua.png?v=1109") center/contain no-repeat!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row[data-nav="post"]::after{
-  background:url("/test/assets/dar-3d-icons/posts.png?v=1109") center/contain no-repeat!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-open-row__body{
-  position:relative!important;
-  z-index:2!important;
-  min-width:0!important;
-  gap:4px!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-kicker{
-  color:#d9c184!important;
-  -webkit-text-fill-color:#d9c184!important;
-  font-size:8.5px!important;
-  line-height:1!important;
-  font-weight:900!important;
-  letter-spacing:.13em!important;
-  text-transform:uppercase!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-open-row__title{
-  margin:0!important;
-  color:#fff8ea!important;
-  -webkit-text-fill-color:#fff8ea!important;
-  font-size:clamp(15px,3.7vw,18px)!important;
-  line-height:1.12!important;
-  font-weight:850!important;
-  -webkit-line-clamp:2!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-open-row__excerpt,
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-open-row__meta{
-  margin:0!important;
-  color:rgba(232,232,226,.64)!important;
-  -webkit-text-fill-color:rgba(232,232,226,.64)!important;
-  font-size:clamp(9.2px,2.15vw,10.5px)!important;
-  line-height:1.28!important;
-  -webkit-line-clamp:2!important;
-}
-
-/* Aktion bleibt vorhanden, aber als kleines Gold-Pill statt freiem Pfeil. */
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-open-row__action{
-  position:absolute!important;
-  z-index:3!important;
-  right:14px!important;
-  bottom:10px!important;
-  min-height:22px!important;
-  padding:4px 8px!important;
-  border:1px solid rgba(222,194,124,.24)!important;
-  border-radius:999px!important;
-  background:rgba(5,15,29,.56)!important;
-  color:#d9c184!important;
-  -webkit-text-fill-color:#d9c184!important;
-  font-size:8px!important;
-  line-height:1!important;
-  font-weight:850!important;
-  -webkit-backdrop-filter:blur(7px)!important;
-  backdrop-filter:blur(7px)!important;
-}
-
-/* ENTDECKEN: Sliderkarten werden kompakter und visuell mit den oberen Capsules verbunden. */
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] > .home-v380-post-slider{
-  display:flex!important;
-  gap:9px!important;
-  margin:0 -2px!important;
-  padding:2px 2px 7px!important;
-  overflow-x:auto!important;
-  scroll-snap-type:x mandatory!important;
-  scrollbar-width:none!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] > .home-v380-post-slider::-webkit-scrollbar{
-  display:none!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview{
-  position:relative!important;
-  isolation:isolate!important;
-  flex:0 0 min(86%,430px)!important;
-  min-height:154px!important;
-  padding:16px 68px 14px 16px!important;
-  overflow:hidden!important;
-  border:1px solid rgba(222,194,124,.28)!important;
-  border-radius:28px!important;
-  color:#fff8ea!important;
-  background:
-    radial-gradient(circle at 88% 72%,rgba(222,194,124,.08),transparent 34%),
-    linear-gradient(112deg,rgba(17,31,50,.79),rgba(8,20,37,.75) 66%,rgba(5,15,29,.70))!important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05),
-    0 9px 24px rgba(0,0,0,.16)!important;
-  scroll-snap-align:start!important;
-  text-align:left!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview::before{
-  content:""!important;
-  position:absolute!important;
-  inset:1px!important;
-  z-index:0!important;
-  border-radius:inherit!important;
-  pointer-events:none!important;
-  background:linear-gradient(118deg,rgba(255,255,255,.035),transparent 32%,transparent 72%,rgba(222,194,124,.025))!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview::after{
-  content:""!important;
-  position:absolute!important;
-  right:8px!important;
-  bottom:9px!important;
-  z-index:1!important;
-  width:58px!important;
-  height:58px!important;
-  background:url("/test/assets/dar-3d-icons/posts.png?v=1109") center/contain no-repeat!important;
-  pointer-events:none!important;
-  opacity:.20!important;
-  mix-blend-mode:luminosity!important;
-  filter:drop-shadow(0 7px 10px rgba(0,0,0,.18)) saturate(.80)!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview > *{
-  position:relative!important;
-  z-index:2!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview .home-v380-kicker{
-  color:#d9c184!important;
-  -webkit-text-fill-color:#d9c184!important;
-  font-size:8.4px!important;
-  font-weight:900!important;
-  letter-spacing:.13em!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-title{
-  color:#fff8ea!important;
-  -webkit-text-fill-color:#fff8ea!important;
-  font-size:clamp(16px,3.8vw,19px)!important;
-  line-height:1.13!important;
-  font-weight:850!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-excerpt,
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-meta{
-  color:rgba(232,232,226,.64)!important;
-  -webkit-text-fill-color:rgba(232,232,226,.64)!important;
-  font-size:clamp(9.3px,2.15vw,10.5px)!important;
-  line-height:1.30!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-action{
-  align-self:flex-start!important;
-  min-height:22px!important;
-  margin-top:auto!important;
-  padding:4px 8px!important;
-  border:1px solid rgba(222,194,124,.24)!important;
-  border-radius:999px!important;
-  background:rgba(5,15,29,.48)!important;
-  color:#d9c184!important;
-  -webkit-text-fill-color:#d9c184!important;
-  font-size:8.2px!important;
-  line-height:1!important;
-  font-weight:850!important;
-}
-
-/* "Meist gelesen" als kompakte Liste aus Mini-Capsules statt offener Linien. */
-body.is-home-route .home-v380-popular-wrap{
-  margin:10px 0 0!important;
-}
-
-body.is-home-route #homePopularTitle{
-  display:block!important;
-  margin:0 2px 7px!important;
-  color:#d9c184!important;
-  -webkit-text-fill-color:#d9c184!important;
-  font-size:8.8px!important;
-  line-height:1!important;
-  font-weight:900!important;
-  letter-spacing:.13em!important;
-  text-transform:uppercase!important;
-}
-
-body.is-home-route .home-v380-popular-list{
-  display:flex!important;
-  flex-direction:column!important;
-  gap:6px!important;
-}
-
-body.is-home-route .home-v380-popular-row{
-  display:grid!important;
-  grid-template-columns:28px minmax(0,1fr) auto!important;
-  align-items:center!important;
-  gap:8px!important;
-  width:100%!important;
-  min-height:58px!important;
-  padding:8px 12px!important;
-  border:1px solid rgba(222,194,124,.22)!important;
-  border-radius:999px!important;
-  background:linear-gradient(105deg,rgba(15,28,46,.67),rgba(7,18,34,.62))!important;
-  color:#fff8ea!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
-  text-align:left!important;
-}
-
-body.is-home-route .home-v380-popular-rank{
-  color:#d9c184!important;
-  -webkit-text-fill-color:#d9c184!important;
-  font-size:12px!important;
-  font-weight:950!important;
-  text-align:center!important;
-}
-
-body.is-home-route .home-v380-popular-text h4{
-  margin:0 0 2px!important;
-  color:#fff8ea!important;
-  -webkit-text-fill-color:#fff8ea!important;
-  font-size:clamp(12px,2.9vw,14px)!important;
-  line-height:1.12!important;
-  font-weight:820!important;
-  -webkit-line-clamp:1!important;
-}
-
-body.is-home-route .home-v380-popular-text span{
-  color:rgba(232,232,226,.58)!important;
-  -webkit-text-fill-color:rgba(232,232,226,.58)!important;
-  font-size:8.8px!important;
-  line-height:1.15!important;
-}
-
-/* Interaktion: keine springenden Inhaltskarten. */
-body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:active,
-body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview:active,
-body.is-home-route .home-v380-popular-row:active{
-  transform:none!important;
-  opacity:.93!important;
-}
-
-@media(hover:hover){
-  body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home):hover,
-  body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview:hover,
-  body.is-home-route .home-v380-popular-row:hover{
-    transform:none!important;
-    filter:none!important;
-    border-color:rgba(226,198,126,.43)!important;
-  }
-}
-
-@media(max-width:390px){
-  body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home){
-    min-height:88px!important;
-    padding:12px 68px 12px 15px!important;
-    border-radius:25px!important;
-  }
-
-  body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home)::after{
-    right:7px!important;
-    width:54px!important;
-    height:54px!important;
-  }
-
-  body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-open-row__action{
-    right:10px!important;
-    bottom:8px!important;
-    font-size:7.6px!important;
-  }
-
-  body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview{
-    flex-basis:88%!important;
-    min-height:148px!important;
-    padding:14px 60px 13px 14px!important;
-    border-radius:25px!important;
-  }
-
-  body.is-home-route .home-v380-popular-row{
-    grid-template-columns:24px minmax(0,1fr) auto!important;
-    min-height:54px!important;
-    padding:7px 10px!important;
-  }
-}
-
-@media(min-width:760px){
-  body.is-home-route .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview{
-    flex-basis:min(48%,420px)!important;
-  }
-}
-/* /v1109 · SCHRITT 6 */
-
-/* v1110 · SCHRITT 7 · BIBLIOTHEKEN UND SUCHE IM PREMIUM-CAPSULE-SYSTEM */
-/* Reines UI-Upgrade für Bibliotheken + Suche/Filter.
-   data-nav, Filter-Events, IDs, Selects und Suchlogik bleiben unverändert. */
-
-/* ── Bibliotheken ───────────────────────────────────────────── */
-body.is-home-route .home-v380-section[aria-labelledby="homeLibrariesTitle"]{
-  margin:12px 0 14px!important;
-  padding:0!important;
-  border:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeLibrariesTitle"] .home-v380-section-head{
-  align-items:center!important;
-  margin:0 2px 8px!important;
-}
-
-body.is-home-route #homeLibrariesTitle{
-  margin:0!important;
-  color:rgba(246,241,229,.90)!important;
-  -webkit-text-fill-color:rgba(246,241,229,.90)!important;
-  font-family:var(--font-display,var(--serif))!important;
-  font-size:clamp(19px,4.7vw,23px)!important;
-  line-height:1.04!important;
-  font-weight:850!important;
-  letter-spacing:-.01em!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeLibrariesTitle"] .home-v380-section-head .home-v380-open-row__meta{
-  margin-top:3px!important;
-  color:rgba(232,232,226,.58)!important;
-  -webkit-text-fill-color:rgba(232,232,226,.58)!important;
-  font-size:9.4px!important;
-  line-height:1.22!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeLibrariesTitle"] > .home-v380-section-rule{
-  width:100%!important;
-  height:1px!important;
-  margin:7px 0 9px!important;
-  background:linear-gradient(90deg,rgba(222,194,124,.36),rgba(222,194,124,.08) 62%,transparent)!important;
-  opacity:1!important;
-}
-
-body.is-home-route .home-v380-section[aria-labelledby="homeLibrariesTitle"] .home-v380-text-link{
-  min-height:29px!important;
-  padding:5px 11px!important;
-  border:1px solid rgba(222,194,124,.28)!important;
-  border-radius:999px!important;
-  background:rgba(7,17,31,.44)!important;
-  color:#d9c184!important;
-  -webkit-text-fill-color:#d9c184!important;
-  font-size:9.5px!important;
-  line-height:1!important;
-  font-weight:850!important;
-  text-decoration:none!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
-  -webkit-backdrop-filter:blur(10px)!important;
-  backdrop-filter:blur(10px)!important;
-}
-
-body.is-home-route .home-v380-lib-grid,
-body.is-home-route .home-v380-lib-grid.home-v380-lib-grid--slider{
-  display:flex!important;
-  gap:9px!important;
-  width:100%!important;
-  margin:0 -2px!important;
-  padding:2px 2px 7px!important;
-  overflow-x:auto!important;
-  scroll-snap-type:x mandatory!important;
-  -webkit-overflow-scrolling:touch!important;
-  scrollbar-width:none!important;
-}
-
-body.is-home-route .home-v380-lib-grid::-webkit-scrollbar,
-body.is-home-route .home-v380-lib-grid.home-v380-lib-grid--slider::-webkit-scrollbar{
-  display:none!important;
-}
-
-body.is-home-route .home-v380-lib-card{
-  position:relative!important;
-  isolation:isolate!important;
-  flex:0 0 min(86%,430px)!important;
-  min-width:0!important;
-  min-height:108px!important;
-  height:auto!important;
-  margin:0!important;
-  padding:16px 86px 14px 17px!important;
   display:flex!important;
   flex-direction:column!important;
   align-items:flex-start!important;
   justify-content:center!important;
   gap:5px!important;
+}
+body.is-home-route .home-tawhid-entry__label{
+  margin:0!important;
+  color:var(--ref-accent)!important;
+  -webkit-text-fill-color:var(--ref-accent)!important;
+  font-size:8.7px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.15em!important;
+  text-transform:uppercase!important;
+}
+body.is-home-route .home-tawhid-entry__copy h3{
+  margin:0!important;
+  color:var(--ref-text)!important;
+  -webkit-text-fill-color:var(--ref-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(23px,5.5vw,29px)!important;
+  line-height:1.02!important;
+  font-weight:880!important;
+  letter-spacing:-.018em!important;
+  text-shadow:none!important;
+}
+body.is-home-route .home-tawhid-entry__copy p{
+  margin:0!important;
+  max-width:35ch!important;
+  color:var(--ref-muted)!important;
+  -webkit-text-fill-color:var(--ref-muted)!important;
+  font-size:clamp(10px,2.35vw,11.5px)!important;
+  line-height:1.30!important;
+  font-weight:650!important;
+}
+
+/* ── Schnellzugriff: 2x2 kompakt, keine zweite Hauptnavigation ─ */
+body.is-home-route .home-premium-quick{
+  order:-100!important;
+  width:100%!important;
+  margin:0 0 17px!important;
+  padding:0!important;
+}
+body.is-home-route .home-premium-quick__head{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:10px!important;
+  margin:0 2px 9px!important;
+}
+body.is-home-route .home-premium-quick__kicker{display:none!important}
+body.is-home-route .home-premium-quick__title{
+  margin:0!important;
+  color:var(--ref-text)!important;
+  -webkit-text-fill-color:var(--ref-text)!important;
+  font-family:var(--font-ui,var(--sans))!important;
+  font-size:11px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+}
+body.is-home-route .home-premium-quick__all{
+  min-height:28px!important;
+  padding:5px 10px!important;
+  border:1px solid var(--premium-pill-border,var(--ref-border))!important;
+  border-radius:999px!important;
+  background:var(--premium-pill-bg,var(--ref-surface))!important;
+  color:var(--premium-pill-text,var(--ref-accent))!important;
+  -webkit-text-fill-color:var(--premium-pill-text,var(--ref-accent))!important;
+  font-size:9px!important;
+  font-weight:850!important;
+}
+body.is-home-route .home-premium-quick__grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:8px!important;
+}
+body.is-home-route .home-premium-card{
+  position:relative!important;
+  min-width:0!important;
+  min-height:78px!important;
+  margin:0!important;
+  padding:11px 12px!important;
+  display:grid!important;
+  grid-template-columns:46px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:9px!important;
   overflow:hidden!important;
-  border:1px solid rgba(222,194,124,.29)!important;
-  border-radius:32px!important;
-  color:#fff8ea!important;
-  background:
-    radial-gradient(circle at 86% 44%,rgba(222,194,124,.10),transparent 37%),
-    linear-gradient(105deg,rgba(17,31,50,.80),rgba(8,20,37,.75) 65%,rgba(5,15,29,.70))!important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.055),
-    0 9px 24px rgba(0,0,0,.16)!important;
-  -webkit-backdrop-filter:blur(14px) saturate(1.04)!important;
-  backdrop-filter:blur(14px) saturate(1.04)!important;
-  scroll-snap-align:start!important;
+  border:1px solid var(--ref-border-soft)!important;
+  border-radius:22px!important;
+  background:color-mix(in srgb,var(--ref-surface-flat) 86%,transparent)!important;
+  color:var(--ref-text)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 5%,transparent)!important;
   text-align:left!important;
   transform:none!important;
 }
-
-body.is-home-route .home-v380-lib-card::before{
+body.is-home-route .home-premium-card::before{
   content:""!important;
   position:absolute!important;
-  inset:1px!important;
-  z-index:0!important;
-  border-radius:inherit!important;
+  inset:0!important;
   pointer-events:none!important;
-  background:linear-gradient(116deg,rgba(255,255,255,.04),transparent 31%,transparent 72%,rgba(222,194,124,.028))!important;
+  background:linear-gradient(118deg,color-mix(in srgb,var(--ref-accent) 5%,transparent),transparent 46%)!important;
+}
+body.is-home-route .home-premium-card__visual{
+  position:relative!important;
+  z-index:1!important;
+  width:46px!important;
+  height:46px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:visible!important;
+}
+body.is-home-route .home-premium-card__visual img{
+  width:44px!important;
+  height:44px!important;
+  max-width:44px!important;
+  max-height:44px!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 7px 9px rgba(0,0,0,.18))!important;
+}
+body.is-home-route .home-premium-card__body{
+  position:relative!important;
+  z-index:1!important;
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:3px!important;
+}
+body.is-home-route .home-premium-card__body strong{
+  color:var(--ref-text)!important;
+  -webkit-text-fill-color:var(--ref-text)!important;
+  font-size:clamp(12px,3vw,13.5px)!important;
+  line-height:1.08!important;
+  font-weight:900!important;
+}
+body.is-home-route .home-premium-card__body span{
+  color:var(--ref-muted)!important;
+  -webkit-text-fill-color:var(--ref-muted)!important;
+  font-size:9px!important;
+  line-height:1.18!important;
+  font-weight:650!important;
+  display:-webkit-box!important;
+  -webkit-line-clamp:2!important;
+  -webkit-box-orient:vertical!important;
+  overflow:hidden!important;
+}
+body.is-home-route .home-premium-card__chev{display:none!important}
+
+/* ── Sekundärinhalte: Referenzbild nutzt offene Linien statt Pillenwand ─ */
+body.is-home-route .home-v380-section{
+  margin:10px 0 16px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-home-route .home-v380-section-head{
+  align-items:center!important;
+  margin:0 2px 7px!important;
+}
+body.is-home-route .home-v380-section-title{
+  margin:0!important;
+  color:var(--ref-text)!important;
+  -webkit-text-fill-color:var(--ref-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(19px,4.6vw,23px)!important;
+  line-height:1.04!important;
+  font-weight:850!important;
+  letter-spacing:-.012em!important;
+}
+body.is-home-route .home-v380-section-rule{
+  height:1px!important;
+  margin:7px 0 4px!important;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--ref-accent) 34%,transparent),color-mix(in srgb,var(--theme-border,var(--line)) 46%,transparent) 64%,transparent)!important;
+  opacity:1!important;
+}
+body.is-home-route .home-v380-text-link{
+  min-height:28px!important;
+  padding:5px 10px!important;
+  border:1px solid var(--premium-pill-border,var(--ref-border))!important;
+  border-radius:999px!important;
+  background:var(--premium-pill-bg,var(--ref-surface))!important;
+  color:var(--premium-pill-text,var(--ref-accent))!important;
+  -webkit-text-fill-color:var(--premium-pill-text,var(--ref-accent))!important;
+  font-size:9px!important;
+  font-weight:850!important;
+  text-decoration:none!important;
 }
 
+/* Heute: schmale Reader-Zeilen, keine großen Capsulen. */
+body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home){
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:12px!important;
+  width:100%!important;
+  min-height:74px!important;
+  margin:0!important;
+  padding:12px 3px!important;
+  border:0!important;
+  border-bottom:1px solid var(--ref-border-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--ref-text)!important;
+  box-shadow:none!important;
+  text-align:left!important;
+}
+body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home)::before,
+body.is-home-route .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home)::after{
+  content:none!important;
+  display:none!important;
+}
+body.is-home-route .home-v380-open-row__body{gap:4px!important}
+body.is-home-route .home-v380-kicker{
+  color:var(--ref-accent)!important;
+  -webkit-text-fill-color:var(--ref-accent)!important;
+  font-size:8.2px!important;
+  font-weight:900!important;
+  letter-spacing:.13em!important;
+}
+body.is-home-route .home-v380-open-row__title{
+  color:var(--ref-text)!important;
+  -webkit-text-fill-color:var(--ref-text)!important;
+  font-size:clamp(15px,3.65vw,18px)!important;
+  line-height:1.14!important;
+  font-weight:840!important;
+}
+body.is-home-route .home-v380-open-row__excerpt,
+body.is-home-route .home-v380-open-row__meta{
+  color:var(--ref-muted)!important;
+  -webkit-text-fill-color:var(--ref-muted)!important;
+  font-size:9.6px!important;
+  line-height:1.28!important;
+}
+body.is-home-route .home-v380-open-row__action,
+body.is-home-route .home-v380-post-action{
+  border:0!important;
+  background:transparent!important;
+  color:var(--ref-accent)!important;
+  -webkit-text-fill-color:var(--ref-accent)!important;
+  font-size:9px!important;
+  font-weight:900!important;
+  white-space:nowrap!important;
+}
+
+/* Entdecken: echte Editorial-Karten, nicht pillenförmig. */
+body.is-home-route .home-v380-post-slider{
+  display:flex!important;
+  gap:10px!important;
+  margin:0 -2px!important;
+  padding:3px 2px 6px!important;
+  overflow-x:auto!important;
+  scroll-snap-type:x mandatory!important;
+  scrollbar-width:none!important;
+}
+body.is-home-route .home-v380-post-slider::-webkit-scrollbar{display:none!important}
+body.is-home-route .home-v380-post-preview{
+  position:relative!important;
+  flex:0 0 min(86%,430px)!important;
+  min-height:152px!important;
+  padding:16px 18px 14px!important;
+  overflow:hidden!important;
+  border:1px solid var(--ref-border-soft)!important;
+  border-radius:24px!important;
+  background:color-mix(in srgb,var(--ref-surface-flat) 88%,transparent)!important;
+  color:var(--ref-text)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 5%,transparent)!important;
+  scroll-snap-align:start!important;
+}
+body.is-home-route .home-v380-post-preview::after{
+  content:""!important;
+  position:absolute!important;
+  right:9px!important;
+  bottom:8px!important;
+  width:58px!important;
+  height:58px!important;
+  background:url("/test/assets/dar-3d-icons/posts.png?v=1113") center/contain no-repeat!important;
+  opacity:.13!important;
+  pointer-events:none!important;
+}
+body.is-home-route .home-v380-post-title{
+  position:relative!important;
+  z-index:1!important;
+  color:var(--ref-text)!important;
+  -webkit-text-fill-color:var(--ref-text)!important;
+  font-size:clamp(16px,3.8vw,19px)!important;
+  line-height:1.13!important;
+  font-weight:850!important;
+}
+body.is-home-route .home-v380-post-excerpt,
+body.is-home-route .home-v380-post-meta{
+  position:relative!important;
+  z-index:1!important;
+  color:var(--ref-muted)!important;
+  -webkit-text-fill-color:var(--ref-muted)!important;
+  font-size:9.6px!important;
+  line-height:1.30!important;
+}
+
+/* Meist gelesen: wieder feine Zeilen statt Mini-Pillen. */
+body.is-home-route .home-v380-popular-wrap{margin-top:11px!important}
+body.is-home-route .home-v380-popular-list{gap:0!important}
+body.is-home-route .home-v380-popular-row{
+  display:grid!important;
+  grid-template-columns:28px minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:9px!important;
+  min-height:58px!important;
+  padding:9px 3px!important;
+  border:0!important;
+  border-bottom:1px solid var(--ref-border-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--ref-text)!important;
+  box-shadow:none!important;
+}
+body.is-home-route .home-v380-popular-rank{
+  color:var(--ref-accent)!important;
+  -webkit-text-fill-color:var(--ref-accent)!important;
+  font-weight:950!important;
+}
+body.is-home-route .home-v380-popular-text h4{
+  margin:0 0 2px!important;
+  color:var(--ref-text)!important;
+  -webkit-text-fill-color:var(--ref-text)!important;
+  font-size:clamp(12px,2.9vw,14px)!important;
+  line-height:1.14!important;
+  font-weight:820!important;
+}
+body.is-home-route .home-v380-popular-text span{
+  color:var(--ref-muted)!important;
+  -webkit-text-fill-color:var(--ref-muted)!important;
+  font-size:8.8px!important;
+}
+
+/* Bibliotheken: zwei edle Flächen, passend zum Bild. */
+body.is-home-route .home-v380-lib-grid,
+body.is-home-route .home-v380-lib-grid.home-v380-lib-grid--slider{
+  display:flex!important;
+  gap:9px!important;
+  margin:0 -2px!important;
+  padding:3px 2px 6px!important;
+  overflow-x:auto!important;
+  scroll-snap-type:x mandatory!important;
+  scrollbar-width:none!important;
+}
+body.is-home-route .home-v380-lib-grid::-webkit-scrollbar{display:none!important}
+body.is-home-route .home-v380-lib-card{
+  position:relative!important;
+  flex:0 0 min(86%,430px)!important;
+  min-height:112px!important;
+  padding:16px 80px 14px 17px!important;
+  overflow:hidden!important;
+  border:1px solid var(--ref-border-soft)!important;
+  border-radius:24px!important;
+  background:color-mix(in srgb,var(--ref-surface-flat) 88%,transparent)!important;
+  color:var(--ref-text)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 5%,transparent)!important;
+  scroll-snap-align:start!important;
+}
 body.is-home-route .home-v380-lib-card::after{
   content:""!important;
   position:absolute!important;
-  right:11px!important;
+  right:9px!important;
   top:50%!important;
-  z-index:1!important;
-  width:70px!important;
-  height:70px!important;
-  transform:translateY(-50%) rotate(-4deg)!important;
+  width:66px!important;
+  height:66px!important;
+  transform:translateY(-50%)!important;
   pointer-events:none!important;
   opacity:.88!important;
-  filter:drop-shadow(0 9px 12px rgba(0,0,0,.26)) saturate(.92)!important;
+  filter:drop-shadow(0 8px 10px rgba(0,0,0,.18))!important;
 }
-
 body.is-home-route .home-v380-lib-card[data-nav="bibliothek"]::after{
-  background:url("/test/assets/dar-3d-icons/library.png?v=1110") center/contain no-repeat!important;
+  background:url("/test/assets/dar-3d-icons/library.png?v=1113") center/contain no-repeat!important;
 }
-
 body.is-home-route .home-v380-lib-card[data-nav="books"]::after{
-  background:url("/test/assets/dar-3d-icons/ilm.png?v=1110") center/contain no-repeat!important;
+  background:url("/test/assets/dar-3d-icons/ilm.png?v=1113") center/contain no-repeat!important;
 }
-
-body.is-home-route .home-v380-lib-card > *{
-  position:relative!important;
-  z-index:2!important;
-}
-
 body.is-home-route .home-v380-lib-card h3{
-  margin:0!important;
-  color:#fff8ea!important;
-  -webkit-text-fill-color:#fff8ea!important;
-  font-family:var(--font-display,var(--serif))!important;
+  margin:0 0 5px!important;
+  color:var(--ref-text)!important;
+  -webkit-text-fill-color:var(--ref-text)!important;
   font-size:clamp(16px,3.8vw,19px)!important;
   line-height:1.10!important;
   font-weight:850!important;
 }
-
 body.is-home-route .home-v380-lib-card p{
   margin:0!important;
-  max-width:31ch!important;
-  color:rgba(232,232,226,.63)!important;
-  -webkit-text-fill-color:rgba(232,232,226,.63)!important;
-  font-size:clamp(9.3px,2.15vw,10.5px)!important;
+  color:var(--ref-muted)!important;
+  -webkit-text-fill-color:var(--ref-muted)!important;
+  font-size:9.6px!important;
   line-height:1.28!important;
-  font-weight:650!important;
-  -webkit-line-clamp:2!important;
 }
-
 body.is-home-route .home-v380-lib-card__foot{
-  align-self:flex-start!important;
-  min-height:22px!important;
-  margin-top:2px!important;
-  padding:4px 8px!important;
-  border:1px solid rgba(222,194,124,.24)!important;
-  border-radius:999px!important;
-  background:rgba(5,15,29,.50)!important;
-  color:#d9c184!important;
-  -webkit-text-fill-color:#d9c184!important;
-  font-size:8.2px!important;
-  line-height:1!important;
-  font-weight:850!important;
+  margin-top:7px!important;
+  color:var(--ref-accent)!important;
+  -webkit-text-fill-color:var(--ref-accent)!important;
+  font-size:9px!important;
+  font-weight:900!important;
 }
 
-/* ── Suche und Filter ───────────────────────────────────────── */
-body.is-home-route .home-v380-search{
-  position:relative!important;
-  margin:12px 0 16px!important;
-  padding:0!important;
-  border:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-}
-
-body.is-home-route #homeSearchTitle{
-  margin:0!important;
-  color:rgba(246,241,229,.90)!important;
-  -webkit-text-fill-color:rgba(246,241,229,.90)!important;
-  font-family:var(--font-display,var(--serif))!important;
-  font-size:clamp(19px,4.7vw,23px)!important;
-  line-height:1.04!important;
-  font-weight:850!important;
-  letter-spacing:-.01em!important;
-}
-
-body.is-home-route .home-v380-search > .home-v380-section-rule{
-  width:100%!important;
-  height:1px!important;
-  margin:7px 0 9px!important;
-  background:linear-gradient(90deg,rgba(222,194,124,.36),rgba(222,194,124,.08) 62%,transparent)!important;
-  opacity:1!important;
-}
-
+/* Suche bleibt die einzige bewusst voll pillenförmige Funktionsfläche. */
 body.is-home-route .home-v380-search-field{
-  position:relative!important;
-  min-height:54px!important;
+  min-height:52px!important;
   padding:0 14px!important;
-  gap:9px!important;
-  overflow:hidden!important;
-  border:1px solid rgba(222,194,124,.31)!important;
+  border:1px solid var(--ref-border)!important;
   border-radius:999px!important;
-  background:
-    radial-gradient(circle at 10% 0%,rgba(222,194,124,.075),transparent 34%),
-    linear-gradient(105deg,rgba(17,31,50,.78),rgba(8,20,37,.73))!important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05),
-    0 8px 22px rgba(0,0,0,.14)!important;
-  -webkit-backdrop-filter:blur(14px) saturate(1.03)!important;
-  backdrop-filter:blur(14px) saturate(1.03)!important;
+  background:color-mix(in srgb,var(--ref-surface-flat) 90%,transparent)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 5%,transparent)!important;
 }
-
-body.is-home-route .home-v380-search-field:focus-within{
-  border-color:rgba(229,202,132,.66)!important;
-  box-shadow:
-    0 0 0 2px rgba(222,194,124,.10),
-    inset 0 1px 0 rgba(255,255,255,.06),
-    0 9px 24px rgba(0,0,0,.16)!important;
-}
-
 body.is-home-route .home-v380-search-field .search-input-icon{
-  color:#d9c184!important;
-  opacity:.86!important;
+  color:var(--ref-accent)!important;
 }
-
-body.is-home-route .home-v380-search-field .search-input-icon svg{
-  width:17px!important;
-  height:17px!important;
-}
-
 body.is-home-route .home-v380-search-field .search,
 body.is-home-route .home-v380-search-field input{
-  height:52px!important;
-  min-width:0!important;
-  padding:0!important;
-  border:0!important;
-  outline:0!important;
-  background:transparent!important;
-  color:#fff8ea!important;
-  -webkit-text-fill-color:#fff8ea!important;
+  height:50px!important;
+  color:var(--ref-text)!important;
+  -webkit-text-fill-color:var(--ref-text)!important;
   font-size:14px!important;
-  font-weight:650!important;
-  box-shadow:none!important;
 }
-
-body.is-home-route .home-v380-search-field .search::placeholder,
 body.is-home-route .home-v380-search-field input::placeholder{
-  color:rgba(232,232,226,.49)!important;
-  -webkit-text-fill-color:rgba(232,232,226,.49)!important;
-  opacity:1!important;
+  color:color-mix(in srgb,var(--ref-muted) 72%,transparent)!important;
+  -webkit-text-fill-color:color-mix(in srgb,var(--ref-muted) 72%,transparent)!important;
 }
-
-body.is-home-route .home-v380-search-clear{
-  flex:0 0 30px!important;
-  width:30px!important;
-  height:30px!important;
-  padding:0!important;
-  border:1px solid rgba(222,194,124,.22)!important;
-  border-radius:999px!important;
-  background:rgba(5,15,29,.50)!important;
-  color:#d9c184!important;
-  font-size:15px!important;
-  line-height:1!important;
-}
-
 body.is-home-route .home-v380-filter-chips{
-  display:flex!important;
   gap:7px!important;
-  margin-top:9px!important;
-  padding:0 0 3px!important;
-  overflow-x:auto!important;
-  scrollbar-width:none!important;
-}
-
-body.is-home-route .home-v380-filter-chips::-webkit-scrollbar{
-  display:none!important;
-}
-
-body.is-home-route .home-v380-filter-chip{
-  flex:0 0 auto!important;
-  min-height:34px!important;
-  padding:7px 12px!important;
-  border:1px solid rgba(222,194,124,.24)!important;
-  border-radius:999px!important;
-  background:rgba(7,17,31,.43)!important;
-  color:rgba(239,235,225,.76)!important;
-  -webkit-text-fill-color:rgba(239,235,225,.76)!important;
-  font-size:9.5px!important;
-  line-height:1!important;
-  font-weight:850!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)!important;
-  -webkit-backdrop-filter:blur(9px)!important;
-  backdrop-filter:blur(9px)!important;
-}
-
-body.is-home-route .home-v380-filter-chip.is-active{
-  border-color:rgba(226,197,124,.56)!important;
-  background:linear-gradient(105deg,rgba(80,63,30,.28),rgba(13,25,41,.55))!important;
-  color:#e3ca8c!important;
-  -webkit-text-fill-color:#e3ca8c!important;
-}
-
-body.is-home-route .home-v380-active-filters{
-  gap:6px!important;
   margin-top:8px!important;
 }
-
-body.is-home-route .home-v380-active-chip{
-  min-height:31px!important;
-  padding:6px 9px!important;
-  border:1px solid rgba(226,197,124,.38)!important;
-  border-radius:999px!important;
-  background:rgba(13,25,41,.62)!important;
-  color:#e3ca8c!important;
-  -webkit-text-fill-color:#e3ca8c!important;
-  font-size:9px!important;
-  font-weight:800!important;
-}
-
-body.is-home-route .home-v380-active-chip button{
-  color:#e3ca8c!important;
-  -webkit-text-fill-color:#e3ca8c!important;
-}
-
+body.is-home-route .home-v380-filter-chip,
+body.is-home-route .home-v380-active-chip,
 body.is-home-route .home-v380-filter-reset{
-  min-height:31px!important;
+  min-height:32px!important;
   padding:6px 10px!important;
-  border:1px solid rgba(222,194,124,.22)!important;
+  border:1px solid var(--premium-pill-border,var(--ref-border))!important;
   border-radius:999px!important;
-  background:rgba(7,17,31,.40)!important;
-  color:rgba(239,235,225,.66)!important;
-  -webkit-text-fill-color:rgba(239,235,225,.66)!important;
+  background:var(--premium-pill-bg,var(--ref-surface))!important;
+  color:var(--premium-pill-text,var(--ref-muted))!important;
+  -webkit-text-fill-color:var(--premium-pill-text,var(--ref-muted))!important;
   font-size:9px!important;
-  font-weight:800!important;
-}
-
-/* Verborgene Desktop-Selects/Filter behalten Funktion, erhalten aber denselben Look wenn sichtbar. */
-body.is-home-route .home-v380-filter-panel-wrap .filter-select{
-  min-height:42px!important;
-  border:1px solid rgba(222,194,124,.26)!important;
-  border-radius:18px!important;
-  background:rgba(8,20,37,.78)!important;
-  color:#fff8ea!important;
+  font-weight:820!important;
   box-shadow:none!important;
 }
+body.is-home-route .home-v380-filter-chip.is-active{
+  border-color:color-mix(in srgb,var(--ref-accent) 55%,var(--ref-border))!important;
+  color:var(--ref-accent)!important;
+  -webkit-text-fill-color:var(--ref-accent)!important;
+}
 
-body.is-home-route .home-v380-lib-card:active,
-body.is-home-route .home-v380-filter-chip:active,
-body.is-home-route .home-v380-search-clear:active{
+/* Interaktion bewusst ruhig. */
+body.is-home-route :is(
+  .home-v380-quran-hero,
+  .home-tawhid-entry,
+  .home-premium-card,
+  .home-v380-open-row,
+  .home-v380-post-preview,
+  .home-v380-lib-card,
+  .home-v380-popular-row
+){
+  -webkit-tap-highlight-color:transparent!important;
+  transition:border-color .14s ease,opacity .14s ease,filter .14s ease!important;
+}
+body.is-home-route :is(
+  .home-v380-quran-hero,
+  .home-tawhid-entry,
+  .home-premium-card,
+  .home-v380-open-row,
+  .home-v380-post-preview,
+  .home-v380-lib-card,
+  .home-v380-popular-row
+):active{
   transform:none!important;
   opacity:.93!important;
 }
-
-@media(hover:hover){
-  body.is-home-route .home-v380-lib-card:hover{
-    transform:none!important;
-    filter:none!important;
-    border-color:rgba(229,202,132,.48)!important;
-  }
-
-  body.is-home-route .home-v380-filter-chip:hover{
-    border-color:rgba(229,202,132,.43)!important;
-    color:#e4d4aa!important;
-    -webkit-text-fill-color:#e4d4aa!important;
-  }
-}
-
-@media(max-width:390px){
-  body.is-home-route .home-v380-lib-card{
-    flex-basis:88%!important;
-    min-height:102px!important;
-    padding:14px 75px 13px 15px!important;
-    border-radius:29px!important;
-  }
-
-  body.is-home-route .home-v380-lib-card::after{
-    right:8px!important;
-    width:62px!important;
-    height:62px!important;
-  }
-
-  body.is-home-route .home-v380-search-field{
-    min-height:51px!important;
-    padding:0 12px!important;
-  }
-
-  body.is-home-route .home-v380-search-field .search,
-  body.is-home-route .home-v380-search-field input{
-    height:49px!important;
-    font-size:13px!important;
-  }
-
-  body.is-home-route .home-v380-filter-chip{
-    min-height:32px!important;
-    padding:6px 10px!important;
-    font-size:9px!important;
-  }
-}
-
-@media(min-width:760px){
-  body.is-home-route .home-v380-lib-grid,
-  body.is-home-route .home-v380-lib-grid.home-v380-lib-grid--slider{
-    display:grid!important;
-    grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    gap:9px!important;
-    margin:0!important;
-    padding:0!important;
-    overflow:visible!important;
-  }
-
-  body.is-home-route .home-v380-lib-card{
-    flex:none!important;
-    width:100%!important;
-    min-height:112px!important;
-  }
-}
-/* /v1110 · SCHRITT 7 */
-
-/* v1111 · THEME-FIDELITY-FIX · KEINE FESTEN BLAUFLÄCHEN */
-/* Zentrale Korrekturschicht für die in v1105–v1110 aufgebauten Startseitenmodule.
-   Geometrie/Navigation bleiben erhalten. Farben kommen ausschließlich aus dem aktiven Erscheinungsbild. */
-
-body.is-home-route{
-  --hs-gold:var(--theme-surface-elevated-accent,var(--theme-accent,var(--gold2)))!important;
-  --hs-gold-soft:color-mix(in srgb,var(--hs-gold) 22%,transparent)!important;
-  --hs-line:color-mix(in srgb,var(--theme-border,var(--line)) 76%,var(--hs-gold) 24%)!important;
-  --hs-theme-surface:var(--theme-surface-elevated,var(--premium-bg,var(--theme-surface,var(--card))))!important;
-  --hs-theme-text:var(--theme-surface-elevated-text,var(--theme-text,var(--text)))!important;
-  --hs-theme-muted:var(--theme-surface-elevated-muted,var(--theme-muted,var(--muted)))!important;
-  --hs-theme-accent:var(--theme-surface-elevated-accent,var(--theme-accent,var(--gold2)))!important;
-  --hs-theme-border:color-mix(in srgb,var(--theme-border,var(--line)) 78%,var(--hs-theme-accent) 22%)!important;
-  --hs-theme-pill-bg:var(--premium-pill-bg,var(--theme-surface-elevated,var(--theme-surface,var(--card))))!important;
-  --hs-theme-pill-text:var(--premium-pill-text,var(--hs-theme-accent))!important;
-  --hs-theme-pill-border:var(--premium-pill-border,var(--hs-theme-border))!important;
-  --hs-theme-shadow:0 10px 26px color-mix(in srgb,var(--theme-text,var(--text)) 10%,transparent)!important;
-}
-
-/* HERO: das gewählte Erscheinungsbild bestimmt die Grundfarbe; kein erzwungenes Blau mehr. */
-body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface{
-  background:
-    linear-gradient(
-      92deg,
-      color-mix(in srgb,var(--theme-surface,var(--card)) 96%,transparent) 0%,
-      color-mix(in srgb,var(--theme-surface,var(--card)) 90%,transparent) 48%,
-      color-mix(in srgb,var(--theme-surface,var(--card)) 78%,transparent) 100%
-    ),
-    url("/assets/feed-backgrounds/auto/mosque/bg-nature-mosque-pexels-54.webp") 62% 46%/cover no-repeat!important;
-  color:var(--theme-text,var(--text))!important;
-}
-body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface::before{
-  background:
-    radial-gradient(circle at 18% 4%,color-mix(in srgb,var(--hs-theme-accent) 14%,transparent),transparent 31%),
-    linear-gradient(180deg,transparent 56%,color-mix(in srgb,var(--theme-surface,var(--card)) 32%,transparent))!important;
-}
-body.is-home-route .top-shell :is(
-  .brand-main h1.brand-title-refined,
-  .salam
-){
-  color:var(--theme-text,var(--text))!important;
-  -webkit-text-fill-color:var(--theme-text,var(--text))!important;
-  text-shadow:none!important;
-}
-body.is-home-route .top-shell .intro{
-  color:var(--theme-muted,var(--muted))!important;
-  -webkit-text-fill-color:var(--theme-muted,var(--muted))!important;
-}
-body.is-home-route .top-shell .intro strong,
-body.is-home-route .top-shell .brand-kicker-row small{
-  color:var(--hs-theme-accent)!important;
-  -webkit-text-fill-color:var(--hs-theme-accent)!important;
-}
-
-/* GEBETSZEITEN: beide Kapseln werden vollständig theme-echt. */
-body.is-home-route .header-prayer-hub__main,
-body.is-home-route .header-prayer-hub__status{
-  border-color:var(--hs-theme-border)!important;
-  background:var(--hs-theme-surface)!important;
-  color:var(--hs-theme-text)!important;
-  box-shadow:var(--hs-theme-shadow)!important;
-}
-body.is-home-route .header-prayer-hub__main::before,
-body.is-home-route .header-prayer-hub__main::after{
-  background:
-    radial-gradient(circle at 50% -20%,color-mix(in srgb,var(--hs-theme-accent) 11%,transparent),transparent 45%),
-    linear-gradient(90deg,color-mix(in srgb,var(--hs-theme-accent) 4%,transparent),transparent 33%,transparent 67%,color-mix(in srgb,var(--hs-theme-accent) 3%,transparent))!important;
-}
-body.is-home-route .header-prayer-zone--count{
-  border-left-color:color-mix(in srgb,var(--hs-theme-accent) 24%,transparent)!important;
-  border-right-color:color-mix(in srgb,var(--hs-theme-accent) 24%,transparent)!important;
-}
-body.is-home-route .header-prayer-zone--count::before,
-body.is-home-route .header-prayer-zone--count::after,
-body.is-home-route .header-prayer-hub__status>span+span::before{
-  background:color-mix(in srgb,var(--hs-theme-accent) 26%,transparent)!important;
-}
-body.is-home-route .header-prayer-hub__status>span+span{
-  border-left-color:color-mix(in srgb,var(--hs-theme-accent) 20%,transparent)!important;
-}
-body.is-home-route :is(
-  .header-prayer-name,
-  .header-prayer-zone__countdown,
-  .header-prayer-hub__empty
-){
-  color:var(--hs-theme-text)!important;
-  -webkit-text-fill-color:var(--hs-theme-text)!important;
-  text-shadow:none!important;
-}
-body.is-home-route :is(
-  .header-prayer-hour,
-  .header-prayer-sep,
-  .header-prayer-zone__count-label,
-  .header-prayer-hub__ico
-){
-  color:var(--hs-theme-accent)!important;
-  -webkit-text-fill-color:var(--hs-theme-accent)!important;
-  text-shadow:none!important;
-}
-body.is-home-route :is(
-  .header-prayer-zone__caption,
-  .header-prayer-hub__status,
-  .header-prayer-hub__status>span
-){
-  color:var(--hs-theme-muted)!important;
-  -webkit-text-fill-color:var(--hs-theme-muted)!important;
-  text-shadow:none!important;
-}
-
-/* HAUPTKAPSELN + SCHNELLZUGRIFFE + INHALTSKARTEN: dieselbe Geometrie, echte Theme-Farbe. */
-body.is-home-route :is(
-  .home-v380-quran-hero,
-  .home-tawhid-entry,
-  .home-premium-card,
-  .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home),
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview,
-  .home-v380-popular-row,
-  .home-v380-lib-card,
-  .home-v380-search-field
-){
-  border-color:var(--hs-theme-border)!important;
-  background:var(--hs-theme-surface)!important;
-  color:var(--hs-theme-text)!important;
-  box-shadow:var(--hs-theme-shadow)!important;
-}
-
-/* Akzentlicht bleibt, verwendet aber die jeweilige Theme-Akzentfarbe. */
-body.is-home-route :is(
-  .home-v380-quran-hero,
-  .home-tawhid-entry,
-  .home-premium-card,
-  .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home),
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview,
-  .home-v380-lib-card
-)::before{
-  background:
-    radial-gradient(circle at 14% 8%,color-mix(in srgb,var(--hs-theme-accent) 9%,transparent),transparent 40%),
-    linear-gradient(115deg,color-mix(in srgb,#fff 4%,transparent),transparent 30%,transparent 72%,color-mix(in srgb,var(--hs-theme-accent) 3%,transparent))!important;
-}
-
-body.is-home-route .home-premium-card--tawhid{
-  border-color:color-mix(in srgb,var(--hs-theme-border) 70%,var(--hs-theme-accent) 30%)!important;
-  background:var(--hs-theme-surface)!important;
-}
-
-/* Titel/Text in allen neuen Bereichen nicht mehr auf Creme/Weiß festnageln. */
-body.is-home-route :is(
-  .home-v380-quran-hero__title,
-  .home-tawhid-entry__copy h3,
-  .home-premium-card__body strong,
-  #homeTodayTitle,
-  #homeDiscoverTitle,
-  #homeLibrariesTitle,
-  #homeSearchTitle,
-  .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-open-row__title,
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-title,
-  .home-v380-popular-text h4,
-  .home-v380-lib-card h3,
-  .home-v380-search-field .search,
-  .home-v380-search-field input
-){
-  color:var(--hs-theme-text)!important;
-  -webkit-text-fill-color:var(--hs-theme-text)!important;
-  text-shadow:none!important;
-}
-
-body.is-home-route :is(
-  .home-v380-quran-hero__meta,
-  .home-tawhid-entry__copy p,
-  .home-premium-card__body span,
-  .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-open-row__excerpt,
-  .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-open-row__meta,
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-excerpt,
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-meta,
-  .home-v380-popular-text span,
-  .home-v380-section[aria-labelledby="homeLibrariesTitle"] .home-v380-section-head .home-v380-open-row__meta,
-  .home-v380-lib-card p,
-  .home-premium-quick__title
-){
-  color:var(--hs-theme-muted)!important;
-  -webkit-text-fill-color:var(--hs-theme-muted)!important;
-}
-
-body.is-home-route :is(
-  .home-v380-quran-hero .home-v380-kicker,
-  .home-v380-quran-hero__when,
-  .home-tawhid-entry__label,
-  .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-kicker,
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-kicker,
-  #homePopularTitle,
-  .home-v380-popular-rank,
-  .home-v380-search-field .search-input-icon
-){
-  color:var(--hs-theme-accent)!important;
-  -webkit-text-fill-color:var(--hs-theme-accent)!important;
-}
-
-/* Kleine Pills/Actions verwenden das Theme-Pill-System, nicht Nachtblau. */
-body.is-home-route :is(
-  .home-premium-quick__all,
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] > .home-v380-section-head .home-v380-text-link,
-  .home-v380-section[aria-labelledby="homeLibrariesTitle"] .home-v380-text-link,
-  .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-open-row__action,
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-action,
-  .home-v380-lib-card__foot,
-  .home-v380-search-clear,
-  .home-v380-filter-chip,
-  .home-v380-active-chip,
-  .home-v380-filter-reset
-){
-  border-color:var(--hs-theme-pill-border)!important;
-  background:var(--hs-theme-pill-bg)!important;
-  color:var(--hs-theme-pill-text)!important;
-  -webkit-text-fill-color:var(--hs-theme-pill-text)!important;
-  box-shadow:none!important;
-}
-
-body.is-home-route .home-v380-filter-chip.is-active{
-  border-color:color-mix(in srgb,var(--hs-theme-accent) 55%,var(--hs-theme-border))!important;
-  background:color-mix(in srgb,var(--hs-theme-accent) 12%,var(--theme-surface,var(--card)))!important;
-  color:var(--hs-theme-accent)!important;
-  -webkit-text-fill-color:var(--hs-theme-accent)!important;
-}
-
-body.is-home-route .home-v380-search-field .search::placeholder,
-body.is-home-route .home-v380-search-field input::placeholder{
-  color:color-mix(in srgb,var(--hs-theme-muted) 72%,transparent)!important;
-  -webkit-text-fill-color:color-mix(in srgb,var(--hs-theme-muted) 72%,transparent)!important;
-}
-
-/* Abschnittslinien ebenfalls Theme-Akzent statt festem Gold/Blau. */
-body.is-home-route :is(
-  .home-v380-section[aria-labelledby="homeTodayTitle"] .home-v380-section-rule,
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] > .home-v380-section-rule,
-  .home-v380-section[aria-labelledby="homeLibrariesTitle"] > .home-v380-section-rule,
-  .home-v380-search > .home-v380-section-rule
-){
-  background:linear-gradient(90deg,color-mix(in srgb,var(--hs-theme-accent) 38%,transparent),color-mix(in srgb,var(--hs-theme-accent) 8%,transparent) 62%,transparent)!important;
-}
-
-/* Filter-Selects: theme-echt, falls der Desktop-Panel sichtbar ist. */
-body.is-home-route .home-v380-filter-panel-wrap .filter-select{
-  border-color:var(--hs-theme-border)!important;
-  background:var(--theme-surface,var(--card))!important;
-  color:var(--theme-text,var(--text))!important;
-}
-
-/* Theme-Hover nur leicht aufhellen/abdunkeln – niemals in eine andere Farbwelt wechseln. */
 @media(hover:hover){
   body.is-home-route :is(
     .home-v380-quran-hero,
     .home-tawhid-entry,
     .home-premium-card,
-    .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row:not(.ramadan-series-test-home),
-    .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview,
-    .home-v380-popular-row,
+    .home-v380-post-preview,
     .home-v380-lib-card
   ):hover{
-    border-color:color-mix(in srgb,var(--hs-theme-border) 68%,var(--hs-theme-accent) 32%)!important;
-    background:var(--hs-theme-surface)!important;
+    transform:none!important;
     filter:brightness(1.015)!important;
+    border-color:color-mix(in srgb,var(--ref-border) 64%,var(--ref-accent) 36%)!important;
   }
 }
 
-/* Helle Erscheinungsbilder: keine dunklen Textschatten/Blend-Modi aus früheren Schritten. */
-html[data-theme="light"] body.is-home-route :is(
-  .home-v380-quran-hero::after,
-  .home-tawhid-entry::after,
-  .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row::after,
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview::after
-),
-html[data-theme="soft"] body.is-home-route :is(
-  .home-v380-quran-hero::after,
-  .home-tawhid-entry::after,
-  .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row::after,
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview::after
-),
-html[data-theme="eisgold"] body.is-home-route :is(
-  .home-v380-quran-hero::after,
-  .home-tawhid-entry::after,
-  .home-v380-section[aria-labelledby="homeTodayTitle"] > .home-v380-open-row::after,
-  .home-v380-section[aria-labelledby="homeDiscoverTitle"] .home-v380-post-preview::after
-){
-  mix-blend-mode:normal!important;
+/* iPhone-Proportionen aus der Referenz: kompakt, aber nicht gequetscht. */
+@media(max-width:430px){
+  body.is-home-route .home-v380-quran-hero{
+    min-height:102px!important;
+    padding:15px 91px 15px 17px!important;
+    border-radius:28px!important;
+  }
+  body.is-home-route .home-v380-quran-hero::after{
+    right:6px!important;
+    width:84px!important;
+    height:84px!important;
+  }
+  body.is-home-route .home-tawhid-entry{
+    min-height:116px!important;
+    padding:17px 99px 16px 18px!important;
+    border-radius:29px!important;
+  }
+  body.is-home-route .home-tawhid-entry::after{
+    right:5px!important;
+    width:91px!important;
+    height:91px!important;
+  }
+  body.is-home-route .home-tawhid-entry__copy h3{font-size:clamp(21px,5.4vw,25px)!important}
+  body.is-home-route .home-premium-card{
+    min-height:72px!important;
+    grid-template-columns:40px minmax(0,1fr)!important;
+    gap:7px!important;
+    padding:9px 10px!important;
+    border-radius:20px!important;
+  }
+  body.is-home-route .home-premium-card__visual,
+  body.is-home-route .home-premium-card__visual img{
+    width:39px!important;
+    height:39px!important;
+    max-width:39px!important;
+    max-height:39px!important;
+  }
+  body.is-home-route .home-v380-post-preview,
+  body.is-home-route .home-v380-lib-card{
+    flex-basis:88%!important;
+  }
 }
-/* /v1111 · THEME-FIDELITY-FIX */
+
+@media(max-width:370px){
+  body.is-home-route .home-v380-quran-hero{
+    min-height:96px!important;
+    padding-left:15px!important;
+    padding-right:82px!important;
+  }
+  body.is-home-route .home-v380-quran-hero::after{
+    width:76px!important;
+    height:76px!important;
+  }
+  body.is-home-route .home-tawhid-entry{
+    min-height:108px!important;
+    padding-left:15px!important;
+    padding-right:88px!important;
+  }
+  body.is-home-route .home-tawhid-entry::after{
+    width:82px!important;
+    height:82px!important;
+  }
+  body.is-home-route .home-premium-card__body span{display:none!important}
+}
+
+@media(min-width:760px){
+  body.is-home-route .home-premium-quick__grid{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+  body.is-home-route .home-v380-post-preview{
+    flex-basis:min(48%,420px)!important;
+  }
+  body.is-home-route .home-v380-lib-grid,
+  body.is-home-route .home-v380-lib-grid.home-v380-lib-grid--slider{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+  body.is-home-route .home-v380-lib-card{
+    flex:none!important;
+    width:100%!important;
+  }
+}
+/* /v1113 · REFERENZ-REBUILD */
 
