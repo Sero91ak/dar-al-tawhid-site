@@ -1,14 +1,20 @@
 #!/bin/bash
 set -euo pipefail
 
-VERSION="1.0.2"
+VERSION="1.0.3"
 REPO="Sero91ak/dar-al-tawhid-site"
 TARGET="$HOME/Applications/DAR-Voice-Serhat"
 VOICE_ROOT="$HOME/SerhatVoice"
 VOICE_HOME="$VOICE_ROOT/DARVoiceStandalone"
 VENV="$VOICE_ROOT/.venv"
 PY="$VENV/bin/python"
-APP="$HOME/Applications/DĀR Voice by Serhat Abu Malik.app"
+USER_APP="$HOME/Applications/DĀR Voice by Serhat Abu Malik.app"
+SYSTEM_APP="/Applications/DĀR Voice by Serhat Abu Malik.app"
+if [ -w "/Applications" ]; then
+  APP="$SYSTEM_APP"
+else
+  APP="$USER_APP"
+fi
 BACKUPS="$TARGET/backups"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
@@ -242,7 +248,23 @@ make_icon 512 icon_256x256@2x.png
 make_icon 512 icon_512x512.png
 make_icon 1024 icon_512x512@2x.png
 
-/usr/bin/iconutil -c icns "$ICONSET" -o "$APP_STAGE/Contents/Resources/AppIcon.icns"
+if ! /usr/bin/iconutil -c icns "$ICONSET" -o "$APP_STAGE/Contents/Resources/AppIcon.icns"; then
+  echo "WARNUNG: Serhat-App-Icon konnte nicht als ICNS gebaut werden. Es wird der sichere Fallback verwendet."
+  rm -rf "$ICONSET"
+  mkdir -p "$ICONSET"
+  SRC_ICON="$TARGET/voice-studio-icon.png"
+  make_icon 16 icon_16x16.png
+  make_icon 32 icon_16x16@2x.png
+  make_icon 32 icon_32x32.png
+  make_icon 64 icon_32x32@2x.png
+  make_icon 128 icon_128x128.png
+  make_icon 256 icon_128x128@2x.png
+  make_icon 256 icon_256x256.png
+  make_icon 512 icon_256x256@2x.png
+  make_icon 512 icon_512x512.png
+  make_icon 1024 icon_512x512@2x.png
+  /usr/bin/iconutil -c icns "$ICONSET" -o "$APP_STAGE/Contents/Resources/AppIcon.icns"
+fi
 
 cat > "$APP_STAGE/Contents/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
@@ -254,8 +276,8 @@ cat > "$APP_STAGE/Contents/Info.plist" <<'PLIST'
   <key>CFBundleIdentifier</key><string>de.daraltawhid.darvoice.serhatabumalik</string>
   <key>CFBundleExecutable</key><string>DARVoiceSerhat</string>
   <key>CFBundlePackageType</key><string>APPL</string>
-  <key>CFBundleShortVersionString</key><string>1.0.2</string>
-  <key>CFBundleVersion</key><string>102</string>
+  <key>CFBundleShortVersionString</key><string>1.0.3</string>
+  <key>CFBundleVersion</key><string>103</string>
   <key>CFBundleIconFile</key><string>AppIcon</string>
   <key>LSMinimumSystemVersion</key><string>13.0</string>
   <key>NSHighResolutionCapable</key><true/>
@@ -270,6 +292,19 @@ if [ -d "$APP" ]; then
   mv "$APP" "$OLD_APP"
 fi
 mv "$APP_STAGE" "$APP"
+
+if [ ! -x "$APP/Contents/MacOS/DARVoiceSerhat" ]; then
+  echo "FEHLER: App-Bundle wurde nicht vollständig erstellt: $APP"
+  exit 1
+fi
+if ! /usr/bin/plutil -lint "$APP/Contents/Info.plist" >/dev/null; then
+  echo "FEHLER: Info.plist der App ist ungültig."
+  exit 1
+fi
+if ! /usr/bin/codesign --verify --deep --strict "$APP" >/dev/null 2>&1; then
+  echo "FEHLER: App-Signatur konnte nicht verifiziert werden."
+  exit 1
+fi
 
 /usr/bin/xattr -dr com.apple.quarantine "$APP" 2>/dev/null || true
 /usr/bin/touch "$APP"
@@ -286,5 +321,9 @@ echo "App-Name: DĀR Voice by Serhat Abu Malik"
 echo "Engine: 127.0.0.1:8789"
 echo "Runtime: $VOICE_HOME"
 echo "Backup: $BACKUP"
+echo "App-Pfad: $APP"
 
+# Die App nach der Installation im Finder sichtbar machen und direkt starten.
+open -R "$APP" >/dev/null 2>&1 || true
+sleep 1
 open "$APP"
