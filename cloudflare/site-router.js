@@ -54,7 +54,7 @@ function kidsHeaders(assetResponse) {
   headers.set("CDN-Cache-Control", "no-store");
   headers.set("Cloudflare-CDN-Cache-Control", "no-store");
   headers.set("Pragma", "no-cache");
-  headers.set("X-Kids-Build", "kids-shell-v12-tab63");
+  headers.set("X-Kids-Build", "kids-shell-v12-tab64");
   headers.delete("ETag");
   headers.delete("Content-Length");
   return headers;
@@ -288,14 +288,14 @@ export default {
         if (url.pathname === "/test/kids/version.json" || url.pathname === "/test/kids/version.json/") {
           const headers = kidsHeaders(new Response(""));
           headers.set("Content-Type", "application/json; charset=utf-8");
-          const body = JSON.stringify({ buildId: "kids-shell-v12-tab63", label: "KIDS · V0.63" });
+          const body = JSON.stringify({ buildId: "kids-shell-v12-tab64", label: "KIDS · V0.64" });
           if (request.method === "HEAD") return new Response(null, { status: 200, headers });
           return new Response(body, { status: 200, headers });
         }
         if (url.pathname.endsWith("/v12-alive.txt")) {
           const headers = kidsHeaders(new Response(""));
           headers.set("Content-Type", "text/plain; charset=utf-8");
-          const body = "kids-shell-v12-tab63\nKIDS · V0.63\n";
+          const body = "kids-shell-v12-tab64\nKIDS · V0.64\n";
           if (request.method === "HEAD") return new Response(null, { status: 200, headers });
           return new Response(body, { status: 200, headers });
         }
