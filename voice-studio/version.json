@@ -1,10 +1,10 @@
 {
-  "version": "2.9.15",
-  "updatedAt": "2026-09-28T10:12:00+02:00",
-  "deployTrigger": "voice-studio-2.9.15-free-voice-integrated",
+  "version": "2.9.16",
+  "updatedAt": "2026-09-28T10:58:00+02:00",
+  "deployTrigger": "voice-studio-2.9.16-free-voice-parchment-contrast",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v25",
+  "cache": "dar-voice-studio-v26",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -542,10 +542,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "f5b20d2dd0f8a02380d8f1cb6f684f41f4cda1da",
+  "releaseRef": "992fc13709cc04628dc54622a027c4aefde9f269",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Freie Stimme wurde als interner Bereich direkt in DĀR Voice Studio integriert; kein zweites App-Bundle erforderlich.",
+  "updateRepairReason": "Freie Stimme: dunkle globale Studio-Regeln überschriebene den hellen Bereich; ID-spezifische Pergament-/Kontrastregeln sichern jetzt Hintergrund, Textfeld, Text, Placeholder, Seitenleiste und Buttons.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -574,13 +574,15 @@
     "optionalPronunciationLibrary": true,
     "output": "wav",
     "draftStorage": "local browser storage",
-    "uiTheme": "light parchment workspace inside existing Voice Studio",
+    "uiTheme": "light parchment cream + high-contrast navy/anthracite text",
     "mainAppBrandingUnchanged": true,
     "navigation": [
       "Topbar: Freie Stimme",
       "Content Studio tab: Freie Stimme",
       "macOS menu: Produktion → Freie Stimme"
     ],
-    "returnToProduction": "Topbar: Zur Produktion or any Kids/iOS tab"
+    "returnToProduction": "Topbar: Zur Produktion or any Kids/iOS tab",
+    "contrastFix": true,
+    "globalDarkRuleIsolation": true
   }
 }
