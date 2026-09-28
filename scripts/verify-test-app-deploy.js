@@ -194,9 +194,11 @@ async function fetchVersionBuild(base) {
       const overlayFree = forbiddenOverlay.every((needle) => !html.includes(needle));
       const htmlOk =
         startRes.status === 200 &&
-        html.includes("kids-launch-v78") &&
-        html.includes('id="kidsCinemaV78"') &&
-        html.includes("/test/kids/assets/kids-cinema/intro-v74.mp4?v=78") &&
+        html.includes("kids-launch-v79") &&
+        html.includes('id="kidsCinemaV79"') &&
+        html.includes("/test/kids/assets/kids-cinema/intro-v74.mp4?v=79") &&
+        html.includes("if(!started)removeLaunch()") &&
+        html.includes("},3200)") &&
         overlayFree;
       console.log(
         `${label} kids cinema HTML: ${startUrl} -> ${startRes.status} overlayFree=${overlayFree} ok=${htmlOk}`
