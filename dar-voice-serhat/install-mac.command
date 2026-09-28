@@ -276,6 +276,7 @@ mv "$APP_STAGE" "$APP"
 if [ -x "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister" ]; then
   "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister" -f "$APP" >/dev/null 2>&1 || true
 fi
+/usr/bin/killall Dock >/dev/null 2>&1 || true
 
 echo
 echo "Installiert:"
