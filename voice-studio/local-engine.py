@@ -997,6 +997,55 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
     append_learning_log("preview",term=term,canonical=meta["canonical"],lockKey=lock_key)
     return meta
 
+def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
+    """Generate one Arabic learning clip in the local Serhat voice.
+
+    Nothing is published here. The returned WAV is only a candidate; the user
+    must listen and explicitly approve it before Cloudflare is used as a
+    publisher for the Kids manifest.
+    """
+    value=str(text or "").strip()
+    if not value:
+        raise ValueError("Arabischer Lerntext fehlt.")
+    if not re.search(r"[\u0600-\u06ff]",value):
+        raise ValueError("Für den Alphabet-Lernbereich wird arabischer Text erwartet.")
+
+    model=load_production_model()
+    slot=str(slot_id or "alphabet").strip()
+    variant=max(0,min(99,int(variant or 0)))
+    digest=int(hashlib.sha1((slot+"|"+value).encode("utf-8")).hexdigest()[:8],16)
+    seed=7000+(digest%500000)+(variant*173)
+
+    wav,metrics=render_segment_with_qa(
+        model,
+        value,
+        "ar",
+        "kids_lesson",
+        True,
+        seed_base=seed
+    )
+    wav=trim_segment_edges(
+        wav,
+        int(model.sr),
+        aggressive=True,
+        inline=is_inline_arabic_micro_term(value),
+        lexical=False
+    )
+
+    preview_id=uuid.uuid4().hex[:16]
+    path=LEARNING_PENDING_DIR/f"alphabet-{preview_id}.wav"
+    save_wav(path,wav,int(model.sr))
+    return {
+        "id":preview_id,
+        "path":str(path),
+        "slot":slot,
+        "text":value,
+        "variant":variant,
+        "sample_rate":int(model.sr),
+        "metrics":metrics,
+        "voice":"serhat-local-owner-voice"
+    }
+
 def confirm_learning_preview(preview_id:str,input_term:str=""):
     with LEARNING_LOCK:
         meta=dict(LEARNING_PREVIEWS.get(str(preview_id or "")) or {})
@@ -4258,6 +4307,24 @@ class H(BaseHTTPRequestHandler):
                 return self.send_json(200,{"ok":True,"rule":rule,**learning_state()})
             except Exception as e:
                 return self.send_json(400,{"ok":False,"error":str(e),**learning_state()})
+
+        if p=="/alphabet/preview":
+            try:
+                meta=create_alphabet_voice_preview(
+                    str(data.get("text","")),
+                    str(data.get("slotId","")),
+                    int(data.get("variant",0) or 0),
+                )
+                b=Path(meta["path"]).read_bytes()
+                self.send_response(200)
+                self.send_header("Content-Type","audio/wav")
+                self.send_header("Content-Length",str(len(b)))
+                self.send_header("X-Alphabet-Preview-Id",meta["id"])
+                self.send_header("X-Alphabet-Voice","serhat-local-owner-voice")
+                self.cors();self.end_headers();self.wfile.write(b)
+                return
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e),"status":get_status()})
 
         if p=="/confirm-core-audio":
             try:
