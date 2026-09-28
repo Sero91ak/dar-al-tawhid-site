@@ -53,7 +53,7 @@ function readTestCacheVersion() {
   const versionPath = path.join(ROOT, 'test', 'version.json');
   const data = JSON.parse(fs.readFileSync(versionPath, 'utf8'));
   const buildId = String(data.buildId || '');
-  const match = buildId.match(/app-shell-v(\d+)$/);
+  const match = buildId.match(/app-shell-v(\d+)(?:-test)?$/);
   if (!match) throw new Error('test/version.json: gültige buildId fehlt');
   return `dar-al-tawhid-offline-light-v${match[1]}-test`;
 }
