@@ -94,9 +94,61 @@
           "as-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",
           "As-salāmu ʿalaykum wa raḥmatullāhi wa barakātuh"
         ],
-        "tts_text": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ",
+        "tts_text": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",
         "tts_language": "ar",
         "scope": "free_voice_pronunciation_library"
+      },
+      {
+        "id": "salam_part_1",
+        "forms": [
+          "As-Salāmu ʿalaykum",
+          "as-Salāmu ʿalaykum"
+        ],
+        "tts_text": "السَّلَامُ عَلَيْكُمْ",
+        "tts_language": "ar",
+        "scope": "free_voice_pronunciation_library",
+        "flowRepairTriggerMs": 220,
+        "flowRepairTargetMs": 90
+      },
+      {
+        "id": "salam_part_2_rahmatullahi",
+        "forms": [
+          "wa Raḥmatullāhi",
+          "Wa Raḥmatullāhi",
+          "wa raḥmatullāhi"
+        ],
+        "tts_text": "وَرَحْمَةُ اللَّهِ",
+        "tts_language": "ar",
+        "scope": "free_voice_pronunciation_library",
+        "flowRepairTriggerMs": 180,
+        "flowRepairTargetMs": 70
+      },
+      {
+        "id": "salam_part_3",
+        "forms": [
+          "wa Barakātuh",
+          "Wa Barakātuh",
+          "wa barakātuh"
+        ],
+        "tts_text": "وَبَرَكَاتُهُ",
+        "tts_language": "ar",
+        "scope": "free_voice_pronunciation_library",
+        "flowRepairTriggerMs": 180,
+        "flowRepairTargetMs": 70
+      },
+      {
+        "id": "dar_al_tawhid_kids_brand_phrase",
+        "forms": [
+          "DĀR AL TAWḤĪD Kids",
+          "Dār al-Tawḥīd Kids",
+          "Dar al-Tawhid Kids"
+        ],
+        "tts_text": "دَارُ التَّوْحِيد كِدْز",
+        "tts_language": "ar",
+        "scope": "free_voice_pronunciation_library",
+        "flowRepairTriggerMs": 110,
+        "flowRepairTargetMs": 45,
+        "flowRepairMaxMs": 1000
       },
       {
         "id": "dar_al_tawhid_brand_phrase",
@@ -108,7 +160,21 @@
         "tts_text": "دَارُ التَّوْحِيد",
         "tts_language": "ar",
         "scope": "free_voice_pronunciation_library",
-        "joinNextLatinWordTightly": true
+        "flowRepairTriggerMs": 180,
+        "flowRepairTargetMs": 70
+      }
+    ],
+    "freeVoicePhraseRenderPlans": [
+      {
+        "id": "salam_full_greeting_flow",
+        "sourceTts": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",
+        "language": "ar",
+        "chunks": [
+          "السَّلَامُ عَلَيْكُمْ",
+          "وَرَحْمَةُ اللَّهِ",
+          "وَبَرَكَاتُهُ"
+        ],
+        "join": "tight"
       }
     ]
   },
