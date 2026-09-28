@@ -287,6 +287,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Immer neuesten main-Stand deployen
+        shell: bash
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+          echo "Deploy HEAD: $(git rev-parse HEAD)"
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
