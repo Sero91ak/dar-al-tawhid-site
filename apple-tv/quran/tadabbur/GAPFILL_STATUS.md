@@ -32,9 +32,9 @@ Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-048` gilt jetzt:
 Qurʾān-Gesamtverse: 6236
 entriesCount: 4359
 totalVerifiedEntries: 4359
-loadedEntries: 4195
-uniqueVerifiedReferences: 4195
-missingCount: 2041
+loadedEntries: 4359
+uniqueVerifiedReferences: 4359
+missingCount: 1877
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -46,7 +46,7 @@ letzter Gap-Fill-Batch: entries-gap-06-049.json
 nächster Gap-Fill-Batch: entries-gap-06-050.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `5` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `169` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -120,37 +120,37 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 Der erste weiterhin fehlende Vers ist:
 
 ```text
-1:1
+2:6
 ```
 
 Der aktuelle nächste 25er-Auditbereich beginnt mit:
 
 ```text
-1:1
-1:2
-1:3
-1:4
-1:5
-1:6
-1:7
-2:1
-2:2
-2:3
 2:6
-2:8
-2:9
-2:10
-2:11
-2:12
-2:13
-2:14
-2:15
-2:16
-2:17
-2:18
-2:19
-2:20
-2:22
+2:36
+2:38
+2:42
+2:43
+2:44
+2:46
+2:47
+2:48
+2:49
+2:51
+2:52
+2:53
+2:64
+2:67
+2:70
+2:72
+2:82
+2:83
+2:87
+2:90
+2:91
+2:92
+2:93
+2:94
 ```
 
 Diese Referenzen sind Arbeitsziele, keine Aufforderung zum künstlichen Füllen. Ein Vers bleibt offen, bis ein konkreter früher Bericht mit belastbarer Zuordnung und ausreichend geprüfter Überlieferungskette vorliegt.
