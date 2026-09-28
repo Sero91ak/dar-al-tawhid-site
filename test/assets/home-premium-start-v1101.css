@@ -27,7 +27,7 @@ body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface{
     linear-gradient(180deg,
       color-mix(in srgb,var(--bg) 88%,transparent),
       color-mix(in srgb,var(--bg) 74%,transparent)),
-    url("/assets/feed-backgrounds/auto/mosque/bg-pro-mosque-59.webp") center 46%/cover no-repeat!important;
+    url("/assets/feed-backgrounds/auto/mosque/bg-nature-mosque-pexels-54.webp") center 46%/cover no-repeat!important;
   box-shadow:none!important;
 }
 
@@ -571,5 +571,135 @@ body.is-home-route .home-v380-lib-card--noble p{
   }
   .home-premium-access-card__icon{
     width:38px!important;height:38px!important;
+  }
+}
+
+
+/* v1101.2 · Kontrast- und Lesbarkeits-Härtung für alle Erscheinungsbilder */
+body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface{
+  background:
+    linear-gradient(90deg,rgba(4,19,13,.96) 0%,rgba(5,30,20,.91) 44%,rgba(5,26,19,.76) 72%,rgba(4,18,13,.58) 100%),
+    linear-gradient(180deg,rgba(4,18,13,.24),rgba(4,18,13,.64)),
+    url("/assets/feed-backgrounds/auto/mosque/bg-nature-mosque-pexels-54.webp") center 46%/cover no-repeat!important;
+}
+body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface::before{
+  background:
+    radial-gradient(circle at 18% 12%,rgba(231,205,133,.13),transparent 34%),
+    linear-gradient(180deg,transparent 54%,rgba(3,16,11,.34))!important;
+}
+body.is-home-route .top-shell .brand-kicker-row small{
+  background:rgba(5,29,20,.76)!important;
+  border-color:rgba(231,205,133,.38)!important;
+  color:#EED89B!important;
+  -webkit-text-fill-color:#EED89B!important;
+}
+body.is-home-route .top-shell .brand-main h1.brand-title-refined{
+  color:#FFF8E8!important;
+  -webkit-text-fill-color:#FFF8E8!important;
+  text-shadow:0 3px 18px rgba(0,0,0,.42)!important;
+}
+body.is-home-route .top-shell .brand-main h1.brand-title-refined::after{
+  background:linear-gradient(90deg,#E7CD85,rgba(231,205,133,.46),transparent)!important;
+}
+body.is-home-route .top-shell .hero-text{
+  background:rgba(5,29,20,.78)!important;
+  border-color:rgba(231,205,133,.26)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 8px 24px rgba(0,0,0,.16)!important;
+}
+body.is-home-route .top-shell .salam{
+  color:#FFF9EB!important;
+  -webkit-text-fill-color:#FFF9EB!important;
+}
+body.is-home-route .top-shell .intro{
+  color:#EDF2EA!important;
+  -webkit-text-fill-color:#EDF2EA!important;
+}
+body.is-home-route .top-shell .intro strong{
+  color:#F0D995!important;
+  -webkit-text-fill-color:#F0D995!important;
+}
+body.is-home-route .top-shell.theme-hero-shell .header-prayer-hub{
+  background:
+    radial-gradient(circle at 8% 0%,rgba(231,205,133,.10),transparent 40%),
+    rgba(4,25,17,.88)!important;
+  border-color:rgba(231,205,133,.28)!important;
+  color:#FFF8E8!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.08)!important;
+}
+body.is-home-route .header-prayer-hub :is(
+  .header-prayer-name,.header-prayer-hour,.header-prayer-zone__countdown,.header-prayer-primary,.header-prayer-secondary
+){
+  color:#FFF8E8!important;
+  -webkit-text-fill-color:#FFF8E8!important;
+}
+body.is-home-route .header-prayer-hub :is(
+  .header-prayer-zone__caption,.header-prayer-zone__count-label,.header-prayer-hub__status,
+  .header-prayer-hub__date,.header-prayer-hub__hijri,.header-prayer-hub__clock,.header-prayer-hub__place
+){
+  color:#DDE8DF!important;
+  -webkit-text-fill-color:#DDE8DF!important;
+}
+body.is-home-route .header-prayer-hub__ico{color:#E7CD85!important;-webkit-text-fill-color:#E7CD85!important}
+body.is-home-route .header-prayer-sep{color:rgba(231,205,133,.72)!important}
+body.is-home-route .header-prayer-hub__empty{color:#F2E7C8!important;-webkit-text-fill-color:#F2E7C8!important}
+
+/* Schnellzugriff: Body-Text nie in schwachem Gold; 3D-Motive bleiben dominant. */
+body.is-home-route .home-premium-access-card,
+body.is-home-route .home-premium-mini,
+body.is-home-route .home-tawhid-entry{
+  -webkit-tap-highlight-color:transparent!important;
+}
+body.is-home-route .home-premium-access-card h3,
+body.is-home-route .home-premium-access__title,
+body.is-home-route .home-tawhid-entry__copy h3{
+  color:var(--theme-text)!important;
+  -webkit-text-fill-color:var(--theme-text)!important;
+}
+body.is-home-route .home-premium-access-card p,
+body.is-home-route .home-tawhid-entry__copy p{
+  color:var(--theme-muted)!important;
+  -webkit-text-fill-color:var(--theme-muted)!important;
+  opacity:1!important;
+}
+body.is-home-route .home-premium-access-card__icon,
+body.is-home-route .home-tawhid-entry__icon{
+  overflow:visible!important;
+}
+body.is-home-route .home-premium-access-card__icon img.dar3d-icon,
+body.is-home-route .home-tawhid-entry__icon img.dar3d-icon,
+body.is-home-route .home-premium-mini__icon img.dar3d-icon{
+  filter:drop-shadow(0 5px 8px rgba(0,0,0,.20))!important;
+}
+
+/* Ibn-Sīrīn-Karte: Text hat Vorrang vor Dekoration. */
+body.is-home-route .top-shell.theme-hero-shell .isnad::after{
+  opacity:.58!important;
+}
+body.is-home-route .top-shell.theme-hero-shell .isnad::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0 0 0 auto!important;
+  width:min(36%,190px)!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,var(--theme-surface),color-mix(in srgb,var(--theme-surface) 76%,transparent) 55%,color-mix(in srgb,var(--theme-surface) 62%,transparent)),
+    url("/assets/feed-backgrounds/auto/books/bg-nature-books-pixabay-39.webp") right center/cover no-repeat!important;
+  opacity:.38!important;
+}
+body.is-home-route .top-shell.theme-hero-shell .isnad > *{
+  position:relative!important;
+  z-index:1!important;
+}
+
+/* Kleine Geräte: keine Textquetschung. */
+@media(max-width:430px){
+  body.is-home-route .home-premium-access-card{
+    min-height:82px!important;
+  }
+  body.is-home-route .home-premium-access-card h3{
+    font-size:clamp(13px,3.5vw,16px)!important;
+  }
+  body.is-home-route .home-premium-access-card p{
+    font-size:9.5px!important;
   }
 }
