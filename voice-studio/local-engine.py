@@ -194,15 +194,28 @@ CONTEXT_CONFIG=VOICE_PROFILE.get("contextDetection") or {}
 QA_CONFIG=VOICE_PROFILE.get("qualityAssurance") or {}
 CONTINUITY_CONFIG=VOICE_PROFILE.get("continuity") or {}
 
+FIXED_PHRASE_ITEMS=[
+    dict(item or {})
+    for item in ((VOICE_PROFILE.get("pronunciation") or {}).get("fixedPhrases") or [])
+    if str((item or {}).get("tts_text") or "").strip()
+]
 FIXED_PHRASE_TTS={
     str(item.get("tts_text") or "").strip()
-    for item in ((VOICE_PROFILE.get("pronunciation") or {}).get("fixedPhrases") or [])
-    if str(item.get("tts_text") or "").strip()
+    for item in FIXED_PHRASE_ITEMS
 }
 
+def fixed_phrase_config_for_tts(text:str):
+    value=str(text or "").strip().strip(
+        AUDIO_LOCK_EDGE_CHARS if "AUDIO_LOCK_EDGE_CHARS" in globals()
+        else " \t\r\n.,،;؛:!?؟…·-–—()[]{}«»\"“”„‘’"
+    )
+    for item in FIXED_PHRASE_ITEMS:
+        if str(item.get("tts_text") or "").strip()==value:
+            return item
+    return {}
+
 def is_profile_fixed_phrase_tts(text:str):
-    value=str(text or "").strip().strip(AUDIO_LOCK_EDGE_CHARS if "AUDIO_LOCK_EDGE_CHARS" in globals() else " \t\r\n.,،;؛:!?؟…·-–—()[]{}«»\"“”„‘’")
-    return value in FIXED_PHRASE_TTS
+    return bool(fixed_phrase_config_for_tts(text))
 
 LIB={}
 RULES=[]
@@ -1952,20 +1965,46 @@ def build_render_plan(text:str):
                     plan.append((lang,chunk.strip()))
     return plan
 
-def build_free_render_plan(text:str):
-    """Freie Stimme: kleinere, natürliche Phrasen statt eines großen ersten Blocks.
+def _expand_free_voice_phrase_plan(lang:str,segment:str):
+    """Profilgesteuerte Mehrwort-Phrasen in stabile Sprechbausteine zerlegen."""
+    value=str(segment or "")
+    render_plans=(VOICE_PROFILE.get("pronunciation") or {}).get("freeVoicePhraseRenderPlans") or []
+    parts=[value]
+    for raw in render_plans:
+        item=dict(raw or {})
+        source=str(item.get("sourceTts") or "").strip()
+        chunks=[str(x or "").strip() for x in (item.get("chunks") or []) if str(x or "").strip()]
+        target_lang=str(item.get("language") or "ar")
+        if not source or len(chunks)<2 or target_lang!=lang:
+            continue
+        expanded=[]
+        for part in parts:
+            if source not in part:
+                expanded.append(part)
+                continue
+            before,after=part.split(source,1)
+            if before.strip():
+                expanded.append(before.strip())
+            expanded.extend(chunks)
+            if after.strip():
+                # Komma/Punkt direkt hinter der Phrase gehört akustisch an den letzten Chunk.
+                if re.fullmatch(r"[\s,،;؛:!?؟….]+",after):
+                    expanded[-1]=(expanded[-1]+after).strip()
+                else:
+                    expanded.append(after.strip())
+        parts=expanded
+    return [(lang,x.strip()) for x in parts if x.strip()]
 
-    Der normale Produktionsplan bleibt unverändert. Im freien Bereich war ein
-    deutscher Block bis 140 Zeichen möglich; auf PyTorch/MPS bleibt die UI dann
-    bis zum Ende dieses kompletten ersten Blocks bei 8 %. 60–72 Zeichen halten
-    jeden Inferenzschritt kurz und lassen den Fortschritt sichtbar weiterlaufen.
-    """
+def build_free_render_plan(text:str):
+    """Freie Stimme: kurze MPS-sichere Phrasen + stabile Mehrwort-Aussprachepläne."""
     plan=[]
     for lang,segment in split_language_segments(text):
-        max_chars=64 if lang=="ar" else 72
-        for chunk in split_chunks(segment,max_chars=max_chars):
-            if chunk.strip():
-                plan.append((lang,chunk.strip()))
+        expanded=_expand_free_voice_phrase_plan(lang,segment)
+        for exp_lang,exp_segment in expanded:
+            max_chars=64 if exp_lang=="ar" else 72
+            for chunk in split_chunks(exp_segment,max_chars=max_chars):
+                if chunk.strip():
+                    plan.append((exp_lang,chunk.strip()))
     return plan
 
 def detect_prosody_mode(text:str):
@@ -2752,9 +2791,10 @@ def repair_internal_pause(wav,sr:int,text:str,language_id:str,mode:str):
         trigger_ms=int(QA_CONFIG.get("inlineArabicFlowRepairTriggerMs",120))
         max_repair_ms=int(QA_CONFIG.get("inlineArabicFlowRepairMaxMs",700))
     elif fixed_phrase:
-        target_ms=int(QA_CONFIG.get("fixedPhraseFlowTargetPauseMs",140))
-        trigger_ms=int(QA_CONFIG.get("fixedPhraseFlowRepairTriggerMs",320))
-        max_repair_ms=int(QA_CONFIG.get("fixedPhraseFlowRepairMaxMs",900))
+        phrase_cfg=fixed_phrase_config_for_tts(text)
+        target_ms=int(phrase_cfg.get("flowRepairTargetMs",QA_CONFIG.get("fixedPhraseFlowTargetPauseMs",140)))
+        trigger_ms=int(phrase_cfg.get("flowRepairTriggerMs",QA_CONFIG.get("fixedPhraseFlowRepairTriggerMs",320)))
+        max_repair_ms=int(phrase_cfg.get("flowRepairMaxMs",QA_CONFIG.get("fixedPhraseFlowRepairMaxMs",900)))
     else:
         target_ms=int(
             QA_CONFIG.get("autoRepairPauseWithPunctuationMs",220)
