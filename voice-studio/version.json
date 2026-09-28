@@ -1,10 +1,10 @@
 {
-  "version": "2.9.14",
-  "updatedAt": "2026-09-28T08:02:00+02:00",
-  "deployTrigger": "voice-studio-2.9.14-live-deploy-after-scope-unlock",
+  "version": "2.9.15",
+  "updatedAt": "2026-09-28T10:04:00+02:00",
+  "deployTrigger": "voice-studio-2.9.15-free-voice-integrated",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v24",
+  "cache": "dar-voice-studio-v25",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -268,7 +268,9 @@
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
     "validatedCommit": "e49804bea857dae25a16ca72e83b486c25e30690",
-    "validatedAt": "2026-09-28T01:35:15+02:00"
+    "validatedAt": "2026-09-28T01:35:15+02:00",
+    "freeVoiceIsolation": true,
+    "mainAppBrandingUnchanged": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -363,7 +365,8 @@
     "workflowAutoNext": true,
     "nativeProductionMenu": true,
     "directEditAfterInventoryOpen": true,
-    "staleAudioInvalidatedOnTextEdit": true
+    "staleAudioInvalidatedOnTextEdit": true,
+    "freeVoiceIntegrated": true
   },
   "audioFormat": "wav-pcm16-mono",
   "legacyFloatWavMigration": true,
@@ -538,10 +541,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "e49804bea857dae25a16ca72e83b486c25e30690",
-  "releaseChannel": "validated-main",
+  "releaseRef": "90148bc408fa9793a100cd45cdcec599f47807df",
+  "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Stable 2.9.12 baseline pinned while sentence-flow work moves to isolated lab branch",
+  "updateRepairReason": "Freie Stimme wurde als interner Bereich direkt in DĀR Voice Studio integriert; kein zweites App-Bundle erforderlich.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -557,5 +560,20 @@
     "staleWebIconCacheEvicted": true
   },
   "alphabetAudioStrictArabicReference": true,
-  "alphabetAudioReferenceMode": "external-eiarabe-canonical"
+  "alphabetAudioReferenceMode": "external-eiarabe-canonical",
+  "freeVoice": {
+    "enabled": true,
+    "integratedIntoMainApp": true,
+    "separateAppRequired": false,
+    "route": "/generate-free",
+    "kidsBindings": false,
+    "coverGeneration": false,
+    "testPublish": false,
+    "livePublish": false,
+    "optionalPronunciationLibrary": true,
+    "output": "wav",
+    "draftStorage": "local browser storage",
+    "uiTheme": "light parchment workspace inside existing Voice Studio",
+    "mainAppBrandingUnchanged": true
+  }
 }
