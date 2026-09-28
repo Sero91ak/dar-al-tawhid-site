@@ -1,6 +1,6 @@
 {
   "version": "2.9.15",
-  "updatedAt": "2026-09-28T10:04:00+02:00",
+  "updatedAt": "2026-09-28T10:12:00+02:00",
   "deployTrigger": "voice-studio-2.9.15-free-voice-integrated",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -43,6 +43,7 @@
       "⇧⌘↩ Neu prüfen",
       "⌘K Textfeld fokussieren",
       "⌘N Neuer Inhalt",
+      "⌘2 Freie Stimme",
       "⌘1 Zum Text",
       "⇧⌘E Audio + Cover erzeugen",
       "⇧⌘T Test veröffentlichen",
@@ -541,7 +542,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "90148bc408fa9793a100cd45cdcec599f47807df",
+  "releaseRef": "f5b20d2dd0f8a02380d8f1cb6f684f41f4cda1da",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "Freie Stimme wurde als interner Bereich direkt in DĀR Voice Studio integriert; kein zweites App-Bundle erforderlich.",
@@ -574,6 +575,12 @@
     "output": "wav",
     "draftStorage": "local browser storage",
     "uiTheme": "light parchment workspace inside existing Voice Studio",
-    "mainAppBrandingUnchanged": true
+    "mainAppBrandingUnchanged": true,
+    "navigation": [
+      "Topbar: Freie Stimme",
+      "Content Studio tab: Freie Stimme",
+      "macOS menu: Produktion → Freie Stimme"
+    ],
+    "returnToProduction": "Topbar: Zur Produktion or any Kids/iOS tab"
   }
 }
