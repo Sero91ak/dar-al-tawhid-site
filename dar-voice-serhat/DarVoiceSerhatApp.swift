@@ -71,7 +71,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
         h1{font-size:26px;margin:0 0 8px}p{color:#9eafb8;margin:0}
         .gold{color:#efd98d;font-size:12px;letter-spacing:.1em;margin-top:8px}
         </style></head><body><div class="w"><div class="card">
-        <h1>DĀR Voice</h1><p>(escaped)</p><div class="gold">by Serhat Abu Malik</div>
+        <h1>DĀR Voice</h1><p>\(escaped)</p><div class="gold">by Serhat Abu Malik</div>
         </div></div></body></html>
         """
         webView.loadHTMLString(html, baseURL: nil)
