@@ -16,6 +16,20 @@ html[data-theme] body.is-home-route{
   --hc-wash-bottom:rgba(5,7,6,.60);
 }
 
+/* Klassisch Dunkel */
+html[data-theme="dark"] body.is-home-route{
+  --hc-text:#F6EDD2;
+  --hc-muted:#B8AD91;
+  --hc-accent:#EFD78E;
+  --hc-border:rgba(210,177,91,.30);
+  --hc-border-soft:rgba(210,177,91,.16);
+  --hc-glass:rgba(20,18,14,.24);
+  --hc-glass-strong:rgba(20,18,14,.34);
+  --hc-glass-soft:rgba(20,18,14,.14);
+  --hc-wash-top:rgba(5,7,6,.34);
+  --hc-wash-bottom:rgba(5,7,6,.60);
+}
+
 /* Hell */
 html[data-theme="light"] body.is-home-route{
   --hc-text:#2B241D;
