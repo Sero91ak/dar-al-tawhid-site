@@ -1,6 +1,6 @@
 {
-  "buildId": "kids-shell-v12-tab74",
-  "label": "KIDS · V0.74",
-  "releasedAt": "2026-09-28T14:36:00.000Z",
-  "note": "Real Veo cinema intro integrated. Mobile H.264 720x1280, faststart, no video audio, about 3 MB. Controlled Arabic letters and sparks are live app overlays; DĀR AL TAWḤĪD and Salām remain crisp UI text. Old V0.73 keyvisual preloads removed. Intro video is not precached."
+  "buildId": "kids-shell-v12-tab75",
+  "label": "KIDS · V0.75",
+  "releasedAt": "2026-09-28T14:46:00.000Z",
+  "note": "Reliable Veo video playback fix. New session key forces a fresh intro test. The intro is marked seen only after the video actually enters playing state. The 720x1280 H.264 Veo intro is now precached by the Kids service worker; muted autoplay and playsinline are set both in markup and JS."
 }
