@@ -1,0 +1,49 @@
+name: Import Kids Cinema Masters V68
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-kids-cinema-masters-v68.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Download original cinema masters
+        env:
+          S1: "https://at.adobe.com/TRgQ2rWaVQ5SL9m1"
+          S2: "https://at.adobe.com/q32FgGRSVi5pRYDc"
+          S3: "https://at.adobe.com/dNjkatKRr0uYNvbC"
+        run: |
+          set -euo pipefail
+          mkdir -p test/kids/assets/kids-cinema/masters
+          curl -L --fail --retry 4 --retry-delay 2 "$S1" -o test/kids/assets/kids-cinema/masters/scene-1.png
+          curl -L --fail --retry 4 --retry-delay 2 "$S2" -o test/kids/assets/kids-cinema/masters/scene-2.png
+          curl -L --fail --retry 4 --retry-delay 2 "$S3" -o test/kids/assets/kids-cinema/masters/scene-3.png
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          for p in sorted(Path("test/kids/assets/kids-cinema/masters").glob("scene-*.png")):
+              im=Image.open(p)
+              print(p, im.size, p.stat().st_size)
+              assert im.width >= 900 and im.height >= 1200
+          PY
+      - name: Commit masters
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add test/kids/assets/kids-cinema/masters
+          if git diff --cached --quiet; then
+            echo "Masters already current."
+            exit 0
+          fi
+          git commit -m "Kids V0.68: restore original high-resolution cinema masters"
+          git push origin HEAD:main
