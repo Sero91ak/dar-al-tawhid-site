@@ -107,6 +107,7 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
     const body = await request.json().catch(() => ({}));
     const original = String(body.text || "").trim();
     const prepared = String(body.prepared || original).trim();
+    const profile = String(body.profile || "").trim().toLowerCase();
 
     if (!original || !prepared) return json({ ok: false, error: "Text fehlt." }, cors, 400);
     if (original.length > 5000 || prepared.length > 5000) {
@@ -127,7 +128,7 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
     }
 
     assertVoiceRateLimit(request, prepared.length);
-    const result = await synthesizeDarVoice(env, prepared);
+    const result = await synthesizeDarVoice(env, prepared, { profile });
     if (!result.ok) {
       return json({
         ok: false,
