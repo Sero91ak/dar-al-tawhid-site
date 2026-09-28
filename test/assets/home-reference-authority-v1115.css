@@ -1406,3 +1406,142 @@ html.dar-ios-native-app[data-theme] body.is-home-route{
 }
 /* /v1117 · BODY BACKGROUND */
 
+/* v1118 · GLOBAL BOTTOM NAV PARITY */
+/* Die Bottom-Navigation ist global. Auf Home darf sie weder eigene Geometrie
+   noch eigenes Material bekommen. Diese Regeln spiegeln das globale Dock-System
+   aus adaptive-layout.css + dar-bottom-nav-glass.css. */
+
+html[data-theme] body.is-home-route.has-bottom-nav{
+  padding-bottom:calc(var(--dar-nav-height) + env(safe-area-inset-bottom,0px) + 22px)!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  top:auto!important;
+  bottom:calc(max(7px,calc(env(safe-area-inset-bottom) - 18px)) + 3mm)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+
+  width:var(--dar-nav-width)!important;
+  max-width:min(900px,calc(100vw - 2 * var(--dar-nav-gutter)))!important;
+  height:var(--dar-nav-height)!important;
+  min-height:var(--dar-nav-height)!important;
+  max-height:var(--dar-nav-height)!important;
+  padding:var(--dar-nav-pad-y) var(--dar-nav-pad-x)!important;
+
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:stretch!important;
+  justify-content:space-around!important;
+  gap:0!important;
+
+  border:1px solid var(--bottom-nav-border)!important;
+  border-radius:var(--dar-nav-radius)!important;
+  background:var(--bottom-nav-bg-glass)!important;
+  background-image:none!important;
+  box-shadow:
+    var(--bottom-nav-shadow),
+    inset 0 1px 0 var(--bottom-nav-highlight)!important;
+  -webkit-backdrop-filter:blur(var(--bottom-nav-blur))!important;
+  backdrop-filter:blur(var(--bottom-nav-blur))!important;
+
+  transform:none!important;
+  -webkit-transform:none!important;
+  contain:none!important;
+  isolation:auto!important;
+  overflow:hidden!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav .bottom-nav-btn{
+  flex:1!important;
+  min-width:0!important;
+  max-width:88px!important;
+  min-height:calc(var(--dar-nav-height) - 10px)!important;
+  height:auto!important;
+  padding:clamp(4px,.5vh,7px) clamp(2px,.4vw,6px)!important;
+  gap:2px!important;
+
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+
+  border:0!important;
+  border-radius:12px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--bottom-tab-inactive-text)!important;
+  font-size:var(--dar-nav-label)!important;
+  line-height:1!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+  box-sizing:border-box!important;
+  width:36px!important;
+  height:36px!important;
+  min-width:36px!important;
+  min-height:36px!important;
+  padding:2px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+  color:var(--bottom-tab-inactive-icon)!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav .bottom-nav-btn.active{
+  border:0!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--bottom-tab-active-text)!important;
+  filter:none!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active::before,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav .bottom-nav-btn.active::before{
+  opacity:1!important;
+  background:var(--bottom-tab-active-bg)!important;
+  border:1px solid var(--bottom-tab-active-border)!important;
+  box-shadow:
+    0 4px 12px var(--bottom-tab-active-shadow),
+    inset 0 1px 0 var(--bottom-tab-active-highlight)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+  backdrop-filter:blur(10px)!important;
+}
+
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon{
+  color:var(--bottom-tab-active-icon)!important;
+  transform:none!important;
+  filter:none!important;
+}
+
+/* Keine Home-spezifische Formanimation beim Routenwechsel. */
+html[data-theme] body.is-home-route #appChromeDock #bottomNav.bottom-nav,
+html[data-theme] body.is-home-route #bottomNav.bottom-nav{
+  transition:
+    width .5s cubic-bezier(.22,1,.36,1),
+    max-width .5s cubic-bezier(.22,1,.36,1),
+    height .5s cubic-bezier(.22,1,.36,1),
+    min-height .5s cubic-bezier(.22,1,.36,1),
+    padding .5s cubic-bezier(.22,1,.36,1),
+    border-radius .5s cubic-bezier(.22,1,.36,1),
+    bottom .5s cubic-bezier(.22,1,.36,1)!important;
+}
+/* /v1118 · GLOBAL BOTTOM NAV PARITY */
+
