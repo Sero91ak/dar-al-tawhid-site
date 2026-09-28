@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "name": "DĀR Voice by Serhat Abu Malik",
+  "bundleId": "de.daraltawhid.darvoice.serhatabumalik",
+  "enginePort": 8789,
+  "appHome": "~/Applications/DAR-Voice-Serhat",
+  "appBundle": "~/Applications/DĀR Voice by Serhat Abu Malik.app",
+  "voiceMode": "free-text-standalone",
+  "kidsBindings": false,
+  "publishing": false,
+  "coverGeneration": false,
+  "output": [
+    "wav"
+  ],
+  "optionalPronunciationLibrary": true,
+  "sharedReferenceVoice": "~/SerhatVoice/Serhat_Adobe_MASTER.wav",
+  "isolatedRuntimeHome": "~/SerhatVoice/DARVoiceStandalone"
+}
