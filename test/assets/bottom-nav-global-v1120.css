@@ -1,0 +1,209 @@
+/**
+ * DĀR AL TAWḤĪD · TEST APP
+ * GLOBAL BOTTOM NAV AUTHORITY v1120
+ * Eine Form auf jeder Route. Nur active/pressed wechselt.
+ */
+
+:root,
+html[data-theme]{
+  --dar-nav-radius:999px!important;
+  --bottom-tab-capsule-w:96px!important;
+  --bottom-tab-capsule-h:60px!important;
+  --bottom-tab-capsule-radius:999px!important;
+}
+
+/* Eine einzige globale Außenkapsel — unabhängig von der aktuellen Route. */
+html[data-theme] body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav,
+html body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+html body.has-bottom-nav #bottomNav.bottom-nav{
+  left:0!important;
+  right:0!important;
+  top:auto!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  width:var(--dar-nav-width)!important;
+  max-width:min(900px,calc(100vw - 2 * var(--dar-nav-gutter)))!important;
+  height:var(--dar-nav-height)!important;
+  min-height:var(--dar-nav-height)!important;
+  max-height:var(--dar-nav-height)!important;
+  padding:4px 6px!important;
+  gap:2px!important;
+  border-radius:999px!important;
+  flex-direction:row!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+  overflow:visible!important;
+
+  background:var(--bottom-nav-bg-glass,var(--bottom-nav-bg))!important;
+  background-image:none!important;
+  border:1px solid var(--bottom-nav-border)!important;
+  box-shadow:
+    var(--bottom-nav-shadow),
+    inset 0 1px 0 var(--bottom-nav-highlight)!important;
+  -webkit-backdrop-filter:blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation))!important;
+  backdrop-filter:blur(var(--bottom-nav-blur)) saturate(var(--bottom-nav-saturation))!important;
+}
+
+/* Alle fünf Felder exakt gleich breit und gleich geformt. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn{
+  position:relative!important;
+  isolation:isolate!important;
+  flex:1 1 20%!important;
+  width:20%!important;
+  min-width:0!important;
+  max-width:none!important;
+  height:calc(var(--dar-nav-height) - 8px)!important;
+  min-height:calc(var(--dar-nav-height) - 8px)!important;
+  margin:0!important;
+  padding:4px 3px!important;
+  gap:2px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border:0!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  color:var(--bottom-tab-inactive-text)!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+
+/* Große, luftige aktive Kapsel.
+   Sie umschließt Icon + Label und ist auf jedem Tab gleich sichtbar. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before{
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  z-index:0!important;
+  display:block!important;
+  width:min(var(--bottom-tab-capsule-w),calc(100% - 4px))!important;
+  max-width:calc(100% - 4px)!important;
+  height:min(var(--bottom-tab-capsule-h),calc(100% - 2px))!important;
+  max-height:calc(100% - 2px)!important;
+  min-width:0!important;
+  border-radius:999px!important;
+  border:1px solid transparent!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  opacity:0!important;
+  transform:translate(-50%,-50%) scale(.94)!important;
+  pointer-events:none!important;
+  transition:
+    opacity 130ms linear,
+    transform 170ms cubic-bezier(.22,.84,.32,1),
+    background-color 170ms ease,
+    border-color 170ms ease!important;
+}
+
+/* Aktiver Tab + direkter Press-Zustand: dasselbe große Oval. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active::before,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before{
+  opacity:1!important;
+  transform:translate(-50%,-50%) scale(1)!important;
+  background:var(--bottom-tab-active-bg)!important;
+  border-color:var(--bottom-tab-active-border)!important;
+  box-shadow:
+    0 5px 15px var(--bottom-tab-active-shadow),
+    inset 0 1px 0 var(--bottom-tab-active-highlight)!important;
+  -webkit-backdrop-filter:blur(13px) saturate(1.04)!important;
+  backdrop-filter:blur(13px) saturate(1.04)!important;
+}
+
+/* Inhalt immer über der aktiven Kapsel. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn > *,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn > *{
+  position:relative!important;
+  z-index:2!important;
+}
+
+/* 3D-Icon bekommt mehr Luft und wächst im aktiven Feld leicht. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+  width:31px!important;
+  height:31px!important;
+  min-width:31px!important;
+  min-height:31px!important;
+  padding:1px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:visible!important;
+  transform:none!important;
+  transition:width 150ms ease,height 150ms ease,transform 150ms ease!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed .nav-icon{
+  width:34px!important;
+  height:34px!important;
+  min-width:34px!important;
+  min-height:34px!important;
+  color:var(--bottom-tab-active-icon)!important;
+}
+
+/* Label bleibt in der Kapsel vollständig sichtbar. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon),
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon){
+  max-width:100%!important;
+  margin:0!important;
+  color:inherit!important;
+  font-size:var(--dar-nav-label)!important;
+  line-height:1!important;
+  font-weight:850!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed{
+  color:var(--bottom-tab-active-text)!important;
+  background:transparent!important;
+  border-radius:999px!important;
+  box-shadow:none!important;
+}
+
+/* Auf sehr schmalen iPhones bleibt die Kapsel groß genug, ohne Nachbarfelder zu berühren. */
+@media(max-width:390px){
+  :root,
+  html[data-theme]{
+    --bottom-tab-capsule-w:88px!important;
+    --bottom-tab-capsule-h:58px!important;
+  }
+
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+    width:29px!important;
+    height:29px!important;
+    min-width:29px!important;
+    min-height:29px!important;
+  }
+
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon,
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active .nav-icon{
+    width:32px!important;
+    height:32px!important;
+    min-width:32px!important;
+    min-height:32px!important;
+  }
+}
