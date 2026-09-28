@@ -1902,6 +1902,22 @@ def build_render_plan(text:str):
                     plan.append((lang,chunk.strip()))
     return plan
 
+def build_free_render_plan(text:str):
+    """Freie Stimme: kleinere, natürliche Phrasen statt eines großen ersten Blocks.
+
+    Der normale Produktionsplan bleibt unverändert. Im freien Bereich war ein
+    deutscher Block bis 140 Zeichen möglich; auf PyTorch/MPS bleibt die UI dann
+    bis zum Ende dieses kompletten ersten Blocks bei 8 %. 60–72 Zeichen halten
+    jeden Inferenzschritt kurz und lassen den Fortschritt sichtbar weiterlaufen.
+    """
+    plan=[]
+    for lang,segment in split_language_segments(text):
+        max_chars=64 if lang=="ar" else 72
+        for chunk in split_chunks(segment,max_chars=max_chars):
+            if chunk.strip():
+                plan.append((lang,chunk.strip()))
+    return plan
+
 def detect_prosody_mode(text:str):
     value=str(text or "").strip()
     low=value.casefold()
@@ -3262,7 +3278,10 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         found=[]
     else:
         speak,found=prepare(text)
-    synthesis_text,plan,flow_preflight=prepare_flow_text(text,speak,build_render_plan)
+    if free_mode:
+        synthesis_text,plan,flow_preflight=prepare_flow_text(text,speak,build_free_render_plan)
+    else:
+        synthesis_text,plan,flow_preflight=prepare_flow_text(text,speak,build_render_plan)
 
     if not RENDER_LOCK.acquire(blocking=False):
         raise RuntimeError("Es läuft bereits eine Audio-Erzeugung.")
@@ -3333,6 +3352,11 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         outputs=[None]*len(plan)
         qa_segments=[None]*len(plan)
         total=len(plan)
+        if free_mode:
+            set_status(
+                progress=6,
+                message=f"Freie Stimme · {total} kurze Sprachabschnitte vorbereitet"
+            )
         render_id=uuid.uuid4().hex[:12]
         session_audio_locks={}
         new_audio_lock_candidates={}
@@ -3358,7 +3382,14 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             bridge_direction=contextual_bridge_direction(plan,original_idx)
             audio_lock_key=lock_key_for(chunk)
             critical=bool(audio_lock_key) or (lang=="ar" and any(x and x in chunk for x in master_forms))
-            set_status(progress=pct,message=f"{lang_label} · {mode} · Abschnitt {idx}/{total} …")
+            set_status(
+                progress=pct,
+                message=(
+                    f"Freie Stimme · {lang_label} · Abschnitt {idx}/{total} …"
+                    if free_mode else
+                    f"{lang_label} · {mode} · Abschnitt {idx}/{total} …"
+                )
+            )
             print(f"[DĀR Voice] segment {idx}/{total} lang={lang} mode={mode} critical={critical} lock={audio_lock_key or '-'}: {chunk}",flush=True)
 
             locked_path=audio_lock_path(audio_lock_key) if audio_lock_key else None
