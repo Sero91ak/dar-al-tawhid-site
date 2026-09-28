@@ -587,7 +587,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.22 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.23 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -602,7 +602,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <main class="panel editor-panel">
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.22</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.23</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
 
   <div class="textbox-wrap">
@@ -747,11 +747,11 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
     <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.22</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.23</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash</textarea>
-      <div class="notice" style="margin-top:6px">Nur für die erste Installation bzw. für ältere Builds ohne In-App-Updater. Ab Voice Studio 2.9.22 werden Updates direkt in der App installiert – ohne Terminal.</div>
+      <div class="notice" style="margin-top:6px">Nur für die erste Installation bzw. für ältere Builds ohne In-App-Updater. Ab Voice Studio 2.9.23 werden Updates direkt in der App installiert – ohne Terminal.</div>
     </div>
     <button id="healthBtn" class="btn quiet" style="width:100%;margin-top:8px">Verbindung erneut prüfen</button>
     <div id="engineHelp" class="notice" style="margin-top:9px">Installiert „DĀR Voice Studio“ als eigenständige Mac-App unter Programme. Danach arbeitest du ohne Safari oder Browserleiste; deine vorhandene SerhatVoice-/Chatterbox-Engine wird automatisch verwendet.</div>
@@ -839,7 +839,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.22 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.23 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
 </div>
 </div>
 
@@ -930,7 +930,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.22")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.23")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -948,7 +948,7 @@ window.darUpdateStateChanged=data=>{
     state.className="update-state";
   }else if(nativeUpdateState==="current"){
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.22")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.23")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     side.textContent="Update erneut prüfen";
@@ -1446,19 +1446,57 @@ function freeVoicePresetFor(term){
   const value=String(term||"").trim();
   const low=value.toLocaleLowerCase("de-DE");
   if(low==="raḥmatullāhi wa barakātuh"||low==="rahmatullahi wa barakatuh"){
-    return {language:"ar",speech:"رَحْمَةُ اللَّهِ وَبَرَكَاتُهُ"};
+    return {
+      language:"ar",
+      speech:"رَحْمَتُ اللَّهِ وَبَرَكَاتُهُ",
+      variants:[
+        {canonical:"Variante 1 · verbunden",ttsText:"رَحْمَتُ اللَّهِ وَبَرَكَاتُهُ",ttsLanguage:"ar",source:"empfohlen"},
+        {canonical:"Variante 2 · klassisch",ttsText:"رَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",ttsLanguage:"ar",source:"Alternative"},
+        {canonical:"Variante 3 · mit wa",ttsText:"وَرَحْمَتُ اللَّهِ وَبَرَكَاتُهُ",ttsLanguage:"ar",source:"Alternative"}
+      ]
+    };
   }
   if(low==="wa raḥmatullāhi wa barakātuh"||low==="wa rahmatullahi wa barakatuh"){
-    return {language:"ar",speech:"وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ"};
+    return {
+      language:"ar",
+      speech:"وَرَحْمَتُ اللَّهِ وَبَرَكَاتُهُ",
+      variants:[
+        {canonical:"Variante 1 · verbunden",ttsText:"وَرَحْمَتُ اللَّهِ وَبَرَكَاتُهُ",ttsLanguage:"ar",source:"empfohlen"},
+        {canonical:"Variante 2 · klassisch",ttsText:"وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",ttsLanguage:"ar",source:"Alternative"}
+      ]
+    };
   }
   if(low==="raḥmatullāhi"||low==="rahmatullahi"){
-    return {language:"ar",speech:"رَحْمَةُ اللَّهِ"};
+    return {
+      language:"ar",
+      speech:"رَحْمَتُ اللَّهِ",
+      variants:[
+        {canonical:"Variante 1 · verbunden",ttsText:"رَحْمَتُ اللَّهِ",ttsLanguage:"ar",source:"empfohlen"},
+        {canonical:"Variante 2 · klassisch",ttsText:"رَحْمَةُ اللَّهِ",ttsLanguage:"ar",source:"Alternative"},
+        {canonical:"Variante 3 · mit wa",ttsText:"وَرَحْمَتُ اللَّهِ",ttsLanguage:"ar",source:"Alternative"}
+      ]
+    };
   }
   if(low==="barakātuh"||low==="barakatuh"){
-    return {language:"ar",speech:"بَرَكَاتُهُ"};
+    return {
+      language:"ar",
+      speech:"بَرَكَاتُهُ",
+      variants:[
+        {canonical:"Variante 1",ttsText:"بَرَكَاتُهُ",ttsLanguage:"ar",source:"empfohlen"},
+        {canonical:"Variante 2 · mit wa",ttsText:"وَبَرَكَاتُهُ",ttsLanguage:"ar",source:"Alternative"}
+      ]
+    };
   }
   if(low==="kids"){
-    return {language:"de",speech:"Kids"};
+    return {
+      language:"ar",
+      speech:"كِتْس",
+      variants:[
+        {canonical:"Kids · weiches s",ttsText:"كِتْس",ttsLanguage:"ar",source:"empfohlen"},
+        {canonical:"Kids · deutsche Testform",ttsText:"Kitts",ttsLanguage:"de",source:"Alternative"},
+        {canonical:"Kids · kurze Testform",ttsText:"Kits",ttsLanguage:"de",source:"Alternative"}
+      ]
+    };
   }
   return null;
 }
@@ -1514,35 +1552,34 @@ async function openFreeVoicePronunciation(){
   if(preset){
     $("#freeVoiceLearnLanguage").value=preset.language;
     $("#freeVoiceLearnSpeech").value=preset.speech;
+    renderFreeVoiceLearningResults(preset.variants||[]);
+    $("#freeVoiceLearnStatus").textContent="Mehrere passende Sprechformen stehen bereit. Variante anklicken, Test anhören und nur die beste speichern.";
   }else{
     $("#freeVoiceLearnSpeech").value="";
     $("#freeVoiceLearnLanguage").value=/[\u0600-\u06ff]/.test(term)?"ar":"ar";
-  }
-
-  try{
-    const r=await localRequest("/learning/search",{
-      method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({query:term,limit:8})
-    });
-    const d=await r.json().catch(()=>({}));
-    if(r.ok&&d.ok){
-      renderFreeVoiceLearningResults(d.results||[]);
-      if(!preset&&(d.results||[]).length){
-        const first=d.results[0];
-        freeVoiceLearningCandidate=first;
-        $("#freeVoiceLearnSpeech").value=first.ttsText||"";
-        $("#freeVoiceLearnLanguage").value=first.ttsLanguage==="de"?"de":"ar";
+    try{
+      const r=await localRequest("/learning/search",{
+        method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({query:term,limit:8})
+      });
+      const d=await r.json().catch(()=>({}));
+      if(r.ok&&d.ok){
+        renderFreeVoiceLearningResults(d.results||[]);
+        if((d.results||[]).length){
+          const first=d.results[0];
+          freeVoiceLearningCandidate=first;
+          $("#freeVoiceLearnSpeech").value=first.ttsText||"";
+          $("#freeVoiceLearnLanguage").value=first.ttsLanguage==="de"?"de":"ar";
+        }
+        $("#freeVoiceLearnStatus").textContent="Sprechform prüfen, testen und bei korrekter Aussprache speichern.";
+      }else{
+        renderFreeVoiceLearningResults([]);
+        $("#freeVoiceLearnStatus").textContent="Sprechform selbst eingeben und testen.";
       }
-      $("#freeVoiceLearnStatus").textContent=preset
-        ?"Vorschlag eingesetzt. Anhören und nur bei korrekter Aussprache speichern."
-        :"Sprechform prüfen, testen und bei korrekter Aussprache speichern.";
-    }else{
+    }catch(_){
       renderFreeVoiceLearningResults([]);
       $("#freeVoiceLearnStatus").textContent="Sprechform selbst eingeben und testen.";
     }
-  }catch(_){
-    renderFreeVoiceLearningResults([]);
-    $("#freeVoiceLearnStatus").textContent="Sprechform selbst eingeben und testen.";
   }
   $("#freeVoiceLearningSection").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
