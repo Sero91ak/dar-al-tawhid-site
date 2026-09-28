@@ -7,10 +7,8 @@
   window.__DAR_HOME_PREMIUM_V2=true;
 
   const ICON_BASE="/test/assets/dar-3d-icons/";
-  const ICON_VER="1094";
+  const ICON_VER="1113";
   const cards=[
-    {nav:"quran",icon:"quran.png",title:"Qurʾān",desc:"Lesen, hören und weiterlesen."},
-    {nav:"topics",icon:"ilm.png",title:"Tawḥīd & Beiträge",desc:"Wissen aus Qurʾān, Sunnah und Āthār.",emph:true},
     {nav:"duas",icon:"dua.png",title:"Duʿāʾ",desc:"Authentische Bittgebete geordnet."},
     {nav:"prayer",icon:"prayer.png",title:"Gebetszeiten",desc:"Zeiten, Qiblah und Erinnerungen."},
     {nav:"quiz",icon:"quiz.png",title:"Quiz",desc:"Wissen prüfen und festigen."},
@@ -43,15 +41,7 @@
       kicker.textContent="TAWḤĪD · QURʾĀN · SUNNAH · ĀTHĀR";
     }
 
-    if(!hero.querySelector(".home-tawhid-focus")){
-      const focus=document.createElement("div");
-      focus.className="home-tawhid-focus";
-      focus.setAttribute("aria-label","Tawḥīd im Mittelpunkt. Qurʾān, Sunnah und Āthār der Salaf.");
-      focus.innerHTML=
-        '<img class="home-tawhid-focus__icon" src="'+iconSrc("ilm.png")+'" alt="" decoding="async">'+
-        '<div class="home-tawhid-focus__copy"><strong>Tawḥīd im Mittelpunkt</strong><span>Qurʾān · Sunnah · Āthār der Salaf</span></div>';
-      hero.insertBefore(focus,hero.firstChild);
-    }
+    hero.querySelectorAll(".home-tawhid-focus").forEach(function(el){el.remove()});
 
     /* Text vor Gebetszeiten: klare Hierarchie wie im freigegebenen Konzept. */
     if(prayer&&prayer.previousElementSibling!==hero){
