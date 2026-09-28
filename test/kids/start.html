@@ -2615,7 +2615,7 @@ html.kids-intro-active.kids-intro-reveal .app{
   #kidsCinemaIntro.is-active::before{animation:none!important}
 }
 </style>
-</head>
+<link rel="preload" as="image" href="/test/kids/assets/kids-cinema/poster-v65.jpg?v=65" fetchpriority="high">\n</head>
 <body>
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
@@ -2685,8 +2685,8 @@ html.kids-intro-active.kids-intro-reveal .app{
   <video
     id="kidsCinemaVideo"
     class="kids-cinema-video"
-    poster="/test/kids/assets/kids-art/dua-night-v11.jpg?v=64"
-    src="/test/kids/assets/kids-cinema/intro-final.mp4?v=64"
+    poster="/test/kids/assets/kids-cinema/poster-v65.jpg?v=65"
+    src="/test/kids/assets/kids-cinema/intro-final.mp4?v=65"
     preload="auto"
     muted
     defaultmuted
@@ -2709,7 +2709,7 @@ html.kids-intro-active.kids-intro-reveal .app{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V0.64</div>
+  <div class="dev-ribbon" hidden>KIDS · V0.65</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3197,7 +3197,7 @@ html.kids-intro-active.kids-intro-reveal .app{
   if(!intro||!video){root.classList.remove("kids-intro-active");return}
 
   var finished=false,videoDone=false,voiceStarted=false,voiceDone=true,voiceAvailable=false;
-  var ownVoiceUrl="/test/kids/assets/kids-cinema/intro-voice-serhat.mp3?v=64";
+  var ownVoiceUrl="/test/kids/assets/kids-cinema/intro-voice-serhat.mp3?v=65";
   var reduced=false;
   try{reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
 
@@ -3302,7 +3302,7 @@ html.kids-intro-active.kids-intro-reveal .app{
 </script>
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab64";
+const KIDS_BUILD_ID="kids-shell-v12-tab65";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
