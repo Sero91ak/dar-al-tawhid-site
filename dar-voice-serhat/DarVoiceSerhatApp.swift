@@ -13,7 +13,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate {
     private var voiceHome: String { home + "/SerhatVoice/DARVoiceStandalone" }
     private var pythonPath: String { home + "/SerhatVoice/.venv/bin/python" }
     private var enginePath: String { appHome + "/local-engine.py" }
-    private var iconPath: String { appHome + "/voice-studio-icon.png" }
+    private var iconPath: String { appHome + "/serhat-app-icon.png" }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApp.setActivationPolicy(.regular)
