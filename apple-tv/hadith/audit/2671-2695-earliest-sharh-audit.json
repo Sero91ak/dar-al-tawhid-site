@@ -1,0 +1,152 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2671-2695",
+  "series": "2651-2750",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock wurde unter Regel v6 vollständig geprüft. HAD-2671–2686 waren bereits vorhanden und bestanden den Pflichtfeld-/Šarḥ-Audit. HAD-2687–2695 wurden am tatsächlichen offenen Branch-Ende ergänzt. Alle Datensätze besitzen eine eindeutige Ṣaḥīḥ-/Muttafaqun-ʿalayh-Quelle, sharhStatus=verified und einen konkreten Šarḥ-Nachweis. Unsichere Druckseiten wurden nicht geschätzt. Bei Muslim 58 wird Nifāq ausdrücklich als Nifāq der Eigenschaften/Handlungen erklärt und nicht pauschal als Nifāq akbar für jeden Täter.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2671",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2672",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2673",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2674",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2675",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2676",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2677",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2678",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2679",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2680",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2681",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2682",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "verified-direct-muslim-sharh"
+    },
+    {
+      "id": "HAD-2683",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2684",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2685",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2686",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2687",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2688",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2689",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2690",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2691",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2692",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2693",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-with-nifaq-clarification"
+    },
+    {
+      "id": "HAD-2694",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-with-nifaq-clarification"
+    },
+    {
+      "id": "HAD-2695",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-with-nifaq-clarification"
+    }
+  ]
+}
