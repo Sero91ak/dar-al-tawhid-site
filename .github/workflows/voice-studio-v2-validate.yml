@@ -429,40 +429,38 @@ jobs:
               ("html",html,[
                   'id="alphabetAudioSection"',
                   'id="alphabetPackReferenceBtn"',
-                  'id="alphabetPackNextBtn"',
+                  'id="alphabetPackGenerateBtn"',
+                  'id="alphabetPackRegenerateBtn"',
                   'id="alphabetPackApproveBtn"',
                   'id="alphabetPackPlayer"',
                   'id="alphabetPackNowPlaying"',
-                  'id="alphabetPackSourceLink"',
-                  'Alif-Referenz hören',
-                  'gleiche Stimme bestätigen',
+                  'id="alphabetPublisherState"',
+                  'Serhat-Kandidat erzeugen',
+                  'Als Serhat-Master bestätigen',
+                  'Cloudflare Publisher',
                   'alphabet-audio-studio.js?v=2914',
               ]),
               ("studio",studio,[
-                  '/api/admin/kids-alphabet-audio',
-                  '/api/admin/kids-alphabet-audio/verify-external',
-                  'function playerFullyHeard()',
-                  'function isCanonicalSeriesSource',
-                  'Wikimedia Commons / Escuela Internacional de Árabe',
-                  's.sourceSpeaker==="Eiarabe"',
-                  's.license==="CC-BY-4.0"',
-                  'heardSourceFile',
-                  'referenceHeard',
-                  'q("alphabetPackPlayer")',
-                  'current.candidate.sourceFile',
-                  'canonicalVoiceId',
+                  '/alphabet/preview',
+                  '/api/admin/kids-content/media',
+                  '/api/admin/kids-alphabet-audio/verify',
+                  'Serhat-Kandidat',
+                  'candidateHeard',
+                  'blobToDataUrl',
+                  'serhat-local-voice',
+                  'Cloudflare Publisher',
+                  'nur Speichern/Veröffentlichen',
               ]),
               ("worker",worker,[
-                  'verifyKidsAlphabetExternalAudioSlot',
-                  '/api/admin/kids-alphabet-audio/verify-external',
+                  'verifyKidsAlphabetAudioSlot',
+                  '/api/admin/kids-alphabet-audio/verify',
               ]),
               ("media",media,[
-                  'export async function verifyKidsAlphabetExternalAudioSlot',
-                  'owner-confirmed-external-canonical-voice',
-                  'Quelle gehört nicht zur freigegebenen Eiarabe-Alif-Serie',
-                  'Wikimedia Commons / Escuela Internacional de Árabe',
-                  'speaker === "Eiarabe"',
-                  'license === "CC-BY-4.0"',
+                  'export async function verifyKidsAlphabetAudioSlot',
+                  'owner-confirmed-voice-studio',
+                  'authorized-owner-voice',
+                  'serhat-owner-voice-2026',
+                  'DĀR Voice Studio',
                   'sameVoiceConfirmed = true',
               ]),
               ("installer",installer,[
@@ -472,6 +470,9 @@ jobs:
               ("engine",engine,[
                   '/studio/alphabet-audio-studio.js',
                   'alphabet-audio-studio.js',
+                  'def create_alphabet_voice_preview',
+                  'if p=="/alphabet/preview"',
+                  'serhat-local-owner-voice',
               ]),
               ("kids",kids,[
                   'alphabet-audio.json?v=5',
@@ -497,20 +498,17 @@ jobs:
                   'startMeter(stream);',
                   'AbortController',
                   'Die Wortprüfung hat zu lange gedauert',
-                  'Noch keine Aufnahme mit derselben Alif-Stimme freigegeben.',
               ]),
               ("manifest",manifest,[
                   '"syntheticFallback": false',
                   '"requireExplicitVerification": true',
-                  '"arabicReference": "human-recording-free-license-fusha-msa-only"',
-                  '"acceptedLicenses"',
-                  '"externalSourceRule"',
-                  '"CC-BY-4.0"',
-                  '"voiceMode": "single-voice-only"',
-                  '"canonicalVoiceId": "eiarabe-alif-2026"',
+                  '"voiceMode": "owner-voice-generated-human-approved"',
+                  '"targetVoiceProfileId": "serhat-owner-voice-2026"',
+                  '"authorizedOwnerVoiceGeneration": true',
+                  '"requireHumanApprovalForGeneratedAudio": true',
+                  '"autoPublishGeneratedAudio": false',
+                  '"pronunciationReferenceId": "eiarabe-alif-2026"',
                   '"mixedSpeakersForbidden": true',
-                  '"requireSameHumanVoice": true',
-                  '"canonicalVoiceAnchorFile": "Letra alif por la Escuela Internacional de Árabe.ogg"',
               ]),
           ]
           errors=[]
@@ -520,16 +518,12 @@ jobs:
                   errors.append(label+": "+", ".join(missing))
 
           for forbidden in [
-              '/api/admin/kids-content/media',
-              '/api/admin/kids-alphabet-audio/verify"',
-              'serhat-alphabet-dedicated-arabic-human-reviewed',
-              'reference_arabic_dedicated',
-              'currentRenderReferenceReady',
-              '/arabic-reference',
-              'Serhat_AR_MASTER.wav',
+              'speechSynthesis',
+              'lang:"ar-SA"',
+              'autoPublishGeneratedAudio": true',
           ]:
               if forbidden in studio:
-                  errors.append("obsolete alphabet generation path remains in studio: "+forbidden)
+                  errors.append("unsafe alphabet generation path remains in studio: "+forbidden)
 
           forbidden_kids=[x for x in ['function speakArabic','lang:"ar-SA"'] if x in kids]
           if forbidden_kids:
@@ -544,10 +538,10 @@ jobs:
               errors.append("legacy one-shot Dua mastery returned")
           if 'recordQuranAttempt(!ayahPracticeHadError)' not in kids:
               errors.append("spaced Quran ayah mastery missing")
-          if 'if(!referenceHeard||heardSourceFile!==String(current.candidate.sourceFile||""))' not in studio:
-              errors.append("Alif + candidate dual full-listen gate missing")
-          if 'if(candidate&&current?.candidate)' not in studio or 'referenceHeard=true;' not in studio:
-              errors.append("dual comparison completion state missing")
+          if 'if(!candidateHeard)' not in studio:
+              errors.append("Serhat alphabet candidate full-listen gate missing")
+          if 'p.onended=()=>{' not in studio or 'candidateHeard=true;' not in studio:
+              errors.append("alphabet candidate completion state missing")
 
           manifest_obj=json.loads(manifest)
           active_verified=[]
@@ -558,48 +552,40 @@ jobs:
                   if isinstance(slot,dict) and slot.get("verified") is True and slot.get("url"):
                       active_verified.append((letter_id,slot_kind,slot))
 
-          anchor=None
-          for letter_id,slot_kind,slot in active_verified:
-              if letter_id=="alif" and slot_kind=="name":
-                  anchor=slot
-                  break
-          if not anchor:
-              errors.append("canonical Alif anchor is not active")
-          elif not (
-              anchor.get("voiceProfileId")=="eiarabe-alif-2026" and
-              anchor.get("canonicalVoice") is True and
-              anchor.get("sameVoiceConfirmed") is True and
-              anchor.get("sourceProvider")=="Wikimedia Commons / Escuela Internacional de Árabe" and
-              anchor.get("sourceSpeaker")=="Eiarabe" and
-              anchor.get("license")=="CC-BY-4.0" and
-              anchor.get("sourceFile")=="Letra alif por la Escuela Internacional de Árabe.ogg"
-          ):
-              errors.append("approved Kids audio anchor is not the exact Eiarabe Alif canonical voice")
+          pronunciation_anchor=manifest_obj.get("policy",{}).get("pronunciationReferenceId")
+          if pronunciation_anchor!="eiarabe-alif-2026":
+              errors.append("Alif pronunciation reference id mismatch")
 
           for letter_id,slot_kind,slot in active_verified:
-              if letter_id=="alif" and slot_kind=="name":
-                  continue
-              if not (
-                  slot.get("voiceProfileId")=="eiarabe-alif-2026" and
-                  slot.get("canonicalVoice") is False and
+              owner_voice=(
+                  slot.get("sourceVoice")=="authorized-owner-voice" and
+                  slot.get("voiceProfileId")=="serhat-owner-voice-2026" and
                   slot.get("sameVoiceConfirmed") is True and
-                  slot.get("sourceType")=="external-human-pronunciation" and
+                  slot.get("sourceProvider")=="DĀR Voice Studio" and
+                  slot.get("sourceSpeaker")=="Serhat Abu Malik"
+              )
+              legacy_reference=(
+                  letter_id=="alif" and slot_kind=="name" and
+                  slot.get("voiceProfileId")=="eiarabe-alif-2026" and
                   slot.get("sourceProvider")=="Wikimedia Commons / Escuela Internacional de Árabe" and
-                  slot.get("sourceSpeaker")=="Eiarabe" and
-                  slot.get("license")=="CC-BY-4.0" and
-                  str(slot.get("sourceFile") or "").endswith("por la Escuela Internacional de Árabe.ogg")
-              ):
-                  errors.append(f"mixed or unconfirmed active alphabet voice: {letter_id} {slot_kind}")
+                  slot.get("sourceSpeaker")=="Eiarabe"
+              )
+              if not (owner_voice or legacy_reference):
+                  errors.append(f"unapproved active alphabet voice: {letter_id} {slot_kind}")
 
           policy=manifest_obj.get("policy",{})
-          if policy.get("voiceMode")!="single-voice-only":
-              errors.append("single-voice policy missing")
+          if policy.get("voiceMode")!="owner-voice-generated-human-approved":
+              errors.append("owner-voice alphabet policy missing")
+          if policy.get("targetVoiceProfileId")!="serhat-owner-voice-2026":
+              errors.append("Serhat target voice id mismatch")
+          if policy.get("authorizedOwnerVoiceGeneration") is not True:
+              errors.append("owner-voice generation authorization marker missing")
+          if policy.get("requireHumanApprovalForGeneratedAudio") is not True:
+              errors.append("human approval requirement missing")
+          if policy.get("autoPublishGeneratedAudio") is not False:
+              errors.append("alphabet generated audio must never auto-publish")
           if policy.get("mixedSpeakersForbidden") is not True:
               errors.append("mixed-speaker protection missing")
-          if policy.get("canonicalVoiceId")!="eiarabe-alif-2026":
-              errors.append("canonical Alif voice id mismatch")
-          if policy.get("requireSameHumanVoice") is not True:
-              errors.append("same-human-voice requirement missing")
 
           if errors:
               raise SystemExit("Strict Alif-Ba audio validation failed: "+" | ".join(errors))
