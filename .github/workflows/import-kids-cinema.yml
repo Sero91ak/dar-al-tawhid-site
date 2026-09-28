@@ -1,4 +1,4 @@
-name: Import Kids Cinema Intro
+name: Import Kids Cinema Intro V74
 
 on:
   push:
@@ -19,13 +19,13 @@ jobs:
           ref: main
       - name: Download rendered cinema preview
         env:
-          VIDEO_URL: "https://at.adobe.com/wwCIkOTiB4MJm05g"
+          VIDEO_URL: "https://d2jqrm6oza8nb6.cloudfront.net/datasets/fcdba0c8-9042-4867-ae1f-5fd56bf499d6.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzQ0ZGNjYjU3Y2U2OTg2OCIsImJ1Y2tldCI6InJ1bndheS1kYXRhc2V0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MDcyNDUzM30.lYDg7tR7JkZnoSB5_vT62oKI6VeLZ6g6nS0Qp33ZN4M"
         run: |
           set -euo pipefail
           mkdir -p test/kids/assets/kids-cinema
-          curl -L --fail --retry 3 --retry-delay 2 "$VIDEO_URL" -o test/kids/assets/kids-cinema/intro-v1.mp4
-          test -s test/kids/assets/kids-cinema/intro-v1.mp4
-          bytes="$(wc -c < test/kids/assets/kids-cinema/intro-v1.mp4)"
+          curl -L --fail --retry 3 --retry-delay 2 "$VIDEO_URL" -o test/kids/assets/kids-cinema/intro-v74.mp4
+          test -s test/kids/assets/kids-cinema/intro-v74.mp4
+          bytes="$(wc -c < test/kids/assets/kids-cinema/intro-v74.mp4)"
           if [ "$bytes" -lt 100000 ]; then
             echo "Downloaded file is unexpectedly small: $bytes bytes" >&2
             exit 1
@@ -35,7 +35,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add test/kids/assets/kids-cinema/intro-v1.mp4
+          git add test/kids/assets/kids-cinema/intro-v74.mp4
           if git diff --cached --quiet; then
             echo "Cinema video already current."
             exit 0
