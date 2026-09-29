@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 973;
+  var PLAYER_BUILD = 974;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -2454,8 +2454,30 @@
     restoreGlobalPlayer({ play: false, from: "header-icon" });
   }
   function launchLearnPlayer() {
+    var snap = readLearn() || {};
+    var surah = Number(snap.surahNumber || snap.surah) || state.surah || 1;
+    var ayah = Number(snap.ayahNumber || snap.ayah) || state.ayah || 1;
+    if (window.DARQuranLearnStudio && typeof window.DARQuranLearnStudio.open === "function") {
+      window.DARQuranLearnStudio.open(surah, ayah);
+      return;
+    }
     qlog("[QURAN_ROUTE] mode = learning-quran", { from: "learn-launch-bar" });
     restoreLearning({ play: false, from: "learn-launch-bar" });
+  }
+  function pauseForLearnStudio() {
+    if (state.learnMode) return false;
+    var a = audioEl();
+    var wasPlaying = !!state.playing && !!a && !a.paused;
+    if (!wasPlaying) return false;
+    captureTime();
+    try { a.pause(); } catch (eLearnStudioPause) {}
+    state.playing = false;
+    saveGlobalState("learn-studio-focus");
+    return true;
+  }
+  function resumeAfterLearnStudio(wasPlaying) {
+    if (!wasPlaying || state.learnMode) return;
+    togglePlay(true);
   }
   function launchPlayback() {
     launchGlobalPlayer();
@@ -3470,6 +3492,9 @@
     launchPlayback: launchPlayback,
     launchGlobalPlayer: launchGlobalPlayer,
     launchLearnPlayer: launchLearnPlayer,
+    pauseForLearnStudio: pauseForLearnStudio,
+    resumeAfterLearnStudio: resumeAfterLearnStudio,
+    getState: function () { return this.store(); },
     restoreLearning: function (play) { restoreLearning({ play: !!play, from: "api" }); },
     learnResume: readLearn,
     persistNow: persistCurrent
@@ -3482,6 +3507,10 @@
       if (Number(opts.surahNumber) >= 1) state.surah = Number(opts.surahNumber);
       if (Number(opts.ayahNumber) >= 1) state.ayah = Number(opts.ayahNumber);
       if (LEARN_PLAYER_ONLY || isQuranArea()) {
+        if (window.DARQuranLearnStudio && typeof window.DARQuranLearnStudio.open === "function") {
+          window.DARQuranLearnStudio.open(state.surah, state.ayah);
+          return;
+        }
         playFromReader(state.surah, state.ayah);
         return;
       }
