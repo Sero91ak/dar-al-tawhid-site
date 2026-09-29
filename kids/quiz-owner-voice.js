@@ -38,11 +38,14 @@
 
   var originalQuizSpeak=window.quizSpeak;
   window.quizSpeak=function(text){
-    if(inQuiz()){
-      // Im Quiz niemals System-TTS benutzen. Entweder Serhat-Master oder still bleiben.
+    if(inQuiz()&&ready){
+      // Sobald der Serhat-Quiz-Pack vorhanden ist, benutzt der Quiz-Bereich
+      // ausschließlich die Owner-Voice-Master. Fehlende neue Texte bleiben
+      // bewusst still, statt auf eine fremde Systemstimme zurückzufallen.
       if(playSerhat(text))return;
       return;
     }
+    // Übergangs-Fallback nur solange noch gar kein Serhat-Quiz-Pack erzeugt wurde.
     if(typeof originalQuizSpeak==="function")return originalQuizSpeak(text);
   };
 
