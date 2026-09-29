@@ -1,10 +1,10 @@
 {
-  "version": "2.9.26",
-  "updatedAt": "2026-09-28T14:15:00+02:00",
-  "deployTrigger": "voice-studio-2.9.26-alif-manifest-reference-repair",
+  "version": "2.9.27",
+  "updatedAt": "2026-09-29T10:58:00+02:00",
+  "deployTrigger": "voice-studio-2.9.27-kids-story-final-pause-repair",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v36",
+  "cache": "dar-voice-studio-v37",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -369,11 +369,19 @@
     "staleAudioInvalidatedOnTextEdit": true,
     "freeVoiceIntegrated": true,
     "kidsFinalPauseRepair": {
-      "mode": "kids_lesson",
+      "modes": [
+        "kids_story",
+        "kids_lesson"
+      ],
       "thresholdStillStrict": true,
-      "autoRepairEligibilityMaxMs": 950,
+      "autoRepairEligibilityMaxMsByMode": {
+        "kids_story": 950,
+        "kids_lesson": 950
+      },
       "remeasureAfterRepair": true,
-      "freeVoiceUnaffected": true
+      "freeVoiceUnaffected": true,
+      "technicalQaUnchanged": true,
+      "segmentQaUnchanged": true
     }
   },
   "audioFormat": "wav-pcm16-mono",
@@ -549,10 +557,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "b1927f935b2aac9d109148d6a857f713465566a7",
+  "releaseRef": "f48d4a6771a46d25810ca0acc9a8f6365753fd62",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Alif-/Alphabet-Manifest-Reparatur: Die lokale Mac-App erhält alphabet-audio.json jetzt als installierte Runtime-Datei, die Engine stellt /studio/alphabet-audio.json bereit, fehlgeschlagene Manifest-Ladevorgänge werden nicht mehr fälschlich als 'vollständig' angezeigt, und die dauerhafte Eiarabe-Alif-Aussprache-Referenz wird aus policy.pronunciationReferenceUrl geladen.",
+  "updateRepairReason": "Kids-Story-Final-QA: Eine moderate Join-Stille von 620 ms wurde bei Kids-Geschichten abgelehnt, obwohl derselbe sichere Reparaturpfad bereits für Kids-Lernclips existierte. 2.9.27 wendet die begrenzte Stille-Komprimierung nun auf kids_story und kids_lesson an, misst das komplette Audio danach erneut und lässt technische/Segment-QA unverändert.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -685,5 +693,13 @@
     "nullManifestNeverComplete": true,
     "alifReferenceSource": "policy.pronunciationReferenceUrl",
     "validatedVoiceStudioCommit": "b1927f935b2aac9d109148d6a857f713465566a7"
+  },
+  "kidsStoryFinalPauseRepair": {
+    "fixedIn": "2.9.27",
+    "repairRef": "f48d4a6771a46d25810ca0acc9a8f6365753fd62",
+    "observedFailureMs": 620,
+    "mode": "kids_story",
+    "finalLimitMs": 560,
+    "action": "compress detected silent island once, then rerun full final QA"
   }
 }
