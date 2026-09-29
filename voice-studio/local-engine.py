@@ -56,6 +56,9 @@ LEARNING_HOME=VOICE_HOME/"PronunciationLearning"
 LEARNING_PENDING_DIR=LEARNING_HOME/"pending"
 ALPHABET_MASTER_HOME=VOICE_HOME/"AlphabetMasters"
 ALPHABET_MASTER_STATE=ALPHABET_MASTER_HOME/"local-masters.json"
+ALPHABET_EXPORT_HOME=VOICE_HOME/"KidsAppExport"
+ALPHABET_BATCH_STATE_FILE=ALPHABET_EXPORT_HOME/"batch-state.json"
+ALPHABET_PUBLISH_REPO=VOICE_HOME/"KidsAppPublishRepo"
 USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
 USER_OVERRIDES_BACKUP_DIR=LEARNING_HOME/"backups"
 USER_OVERRIDES_BACKUP=USER_OVERRIDES_BACKUP_DIR/"user-overrides.latest.json"
@@ -71,6 +74,7 @@ CONTEXT_BRIDGE_CACHE_DIR=RENDER_CACHE_DIR/"context-bridge-v1"
 LEARNING_HOME.mkdir(parents=True,exist_ok=True)
 LEARNING_PENDING_DIR.mkdir(parents=True,exist_ok=True)
 ALPHABET_MASTER_HOME.mkdir(parents=True,exist_ok=True)
+ALPHABET_EXPORT_HOME.mkdir(parents=True,exist_ok=True)
 RENDER_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 CONTEXT_BRIDGE_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_URL=os.environ.get(
@@ -83,7 +87,24 @@ MASTER_LIBRARY_URL=os.environ.get(
 )
 LEARNING_LOCK=threading.Lock()
 ALPHABET_MASTER_LOCK=threading.Lock()
+ALPHABET_BATCH_LOCK=threading.Lock()
+ALPHABET_BATCH_STATE_LOCK=threading.Lock()
 LEARNING_PREVIEWS={}
+ALPHABET_BATCH_STATE={
+    "running":False,
+    "phase":"idle",
+    "progress":0,
+    "completed":0,
+    "total":141,
+    "current":"",
+    "error":"",
+    "exportPath":"",
+    "zipPath":"",
+    "repoPublished":False,
+    "repoPublishError":"",
+    "startedAt":"",
+    "finishedAt":"",
+}
 
 def load_json_file(path:Path,default):
     try:
@@ -1118,6 +1139,364 @@ def confirm_alphabet_voice_preview(
     except Exception:
         pass
     return master
+
+
+def _alphabet_batch_snapshot():
+    with ALPHABET_BATCH_STATE_LOCK:
+        data=dict(ALPHABET_BATCH_STATE)
+    data["persistentStatePath"]=str(ALPHABET_BATCH_STATE_FILE)
+    return data
+
+def _set_alphabet_batch_state(**updates):
+    with ALPHABET_BATCH_STATE_LOCK:
+        ALPHABET_BATCH_STATE.update(updates)
+        data=dict(ALPHABET_BATCH_STATE)
+    try:
+        atomic_write_json(ALPHABET_BATCH_STATE_FILE,data)
+    except Exception:
+        pass
+    return data
+
+def _alphabet_slot(manifest,letter_id:str,kind:str,key:str=""):
+    letter=(manifest.get("letters") or {}).get(letter_id) or {}
+    if kind=="harakat":
+        return (letter.get("harakat") or {}).get(key)
+    return letter.get(kind)
+
+def _alphabet_tasks(manifest):
+    tasks=[]
+    for letter_id,letter in (manifest.get("letters") or {}).items():
+        if letter.get("name"):
+            tasks.append((letter_id,"name","",letter["name"]))
+        for key in ("fatha","kasra","damma"):
+            slot=(letter.get("harakat") or {}).get(key)
+            if slot:
+                tasks.append((letter_id,"harakat",key,slot))
+        if letter.get("word"):
+            tasks.append((letter_id,"word","",letter["word"]))
+    return tasks
+
+def _audio_duration_seconds(path:Path):
+    import wave
+    path=Path(path)
+    if path.suffix.lower()==".wav":
+        with wave.open(str(path),"rb") as wf:
+            return float(wf.getnframes())/max(1,int(wf.getframerate()))
+    ffmpeg=find_ffmpeg()
+    ffprobe=None
+    if ffmpeg:
+        candidate=Path(ffmpeg).with_name("ffprobe")
+        if candidate.exists():
+            ffprobe=str(candidate)
+    ffprobe=ffprobe or shutil.which("ffprobe")
+    if not ffprobe:
+        return 0.0
+    try:
+        out=subprocess.check_output(
+            [ffprobe,"-v","error","-show_entries","format=duration","-of","default=nw=1:nk=1",str(path)],
+            text=True,stderr=subprocess.DEVNULL,timeout=15
+        ).strip()
+        return float(out or 0.0)
+    except Exception:
+        return 0.0
+
+def _encode_kids_m4a(src:Path,dst:Path):
+    src=Path(src);dst=Path(dst)
+    if not src.exists() or src.stat().st_size<=44:
+        raise RuntimeError("Lokaler Serhat-Master fehlt: "+str(src))
+    ffmpeg=find_ffmpeg()
+    if not ffmpeg:
+        raise RuntimeError("ffmpeg fehlt – Kids-App-M4A kann nicht erstellt werden.")
+    dst.parent.mkdir(parents=True,exist_ok=True)
+    tmp=dst.with_suffix(".tmp.m4a")
+    cmd=[
+        ffmpeg,"-y","-v","error","-i",str(src),
+        "-vn","-ac","1","-ar","24000",
+        "-c:a","aac","-b:a","72k",
+        "-movflags","+faststart",
+        str(tmp)
+    ]
+    p=subprocess.run(cmd,capture_output=True,text=True)
+    if p.returncode!=0 or not tmp.exists() or tmp.stat().st_size<=1024:
+        try: tmp.unlink(missing_ok=True)
+        except Exception: pass
+        raise RuntimeError("Kids-App-Audio konnte nicht erstellt werden. "+(p.stderr or "")[-800:])
+    os.replace(tmp,dst)
+    return dst
+
+def _slot_asset_name(kind:str,key:str):
+    return (key if kind=="harakat" else kind)+".m4a"
+
+def _promote_slot_to_owner_voice(slot:dict,letter_id:str,kind:str,key:str,asset:Path,metrics:dict,build_id:str):
+    now=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    old_external=None
+    old_url=str(slot.get("url") or "").strip()
+    old_type=str(slot.get("sourceType") or "").strip()
+    if old_url and old_type.startswith("external-"):
+        old_external={
+            "url":old_url,
+            "sourceType":old_type,
+            "sourceProvider":slot.get("sourceProvider"),
+            "sourceSpeaker":slot.get("sourceSpeaker"),
+            "sourceLanguage":slot.get("sourceLanguage"),
+            "sourceTranscription":slot.get("sourceTranscription"),
+            "sourcePage":slot.get("sourcePage"),
+            "sourceFile":slot.get("sourceFile"),
+            "license":slot.get("license"),
+            "licenseUrl":slot.get("licenseUrl"),
+            "attribution":slot.get("attribution"),
+            "archivedAt":now,
+            "archiveReason":"Live-Lernclip durch autorisierte Serhat-Eigentümerstimme ersetzt."
+        }
+    alternates=[dict(x) for x in (slot.get("alternateSources") or []) if isinstance(x,dict)]
+    if old_external and not any(str(x.get("url") or "")==old_url for x in alternates):
+        alternates.append(old_external)
+
+    rel="/kids/assets/kids-alphabet-audio/"+letter_id+"/"+_slot_asset_name(kind,key)
+    sha=hashlib.sha256(asset.read_bytes()).hexdigest()
+    slot.update({
+        "verified":True,
+        "url":rel+"?v="+build_id,
+        "expectedPath":rel,
+        "sha256":sha,
+        "qaBy":"local-serhat-engine-auto-qa",
+        "qaAt":now,
+        "qaDurationSeconds":round(_audio_duration_seconds(asset),3),
+        "qaMetrics":metrics or {},
+        "sourceType":"owner-voice-generated",
+        "sourceProvider":"DĀR Voice Studio · lokale Serhat Engine",
+        "sourceSpeaker":"Serhat Abu Malik",
+        "sourceLanguage":"Arabic / Fuṣḥā learning",
+        "sourceTranscription":str(slot.get("text") or ""),
+        "sourcePage":"",
+        "sourceFile":asset.name,
+        "license":"Owner-authorized",
+        "licenseUrl":"",
+        "attribution":"Serhat Abu Malik · DĀR AL TAWḤĪD",
+        "verificationBasis":"Lokale autorisierte Serhat-Stimme; technische QA der Voice Engine bestanden.",
+        "voiceProfileId":"serhat-owner-voice-2026",
+        "sourceVoice":"authorized-owner-voice",
+        "canonicalVoice":True,
+        "sameVoiceConfirmed":True,
+        "autoApproved":True,
+        "requiresManualReview":False,
+    })
+    if alternates:
+        slot["alternateSources"]=alternates
+
+def _prepare_publish_repo(export_ready:Path):
+    git=shutil.which("git")
+    if not git:
+        return False,"git ist auf diesem Mac nicht verfügbar."
+    repo=ALPHABET_PUBLISH_REPO
+    env=dict(os.environ)
+    env["GIT_TERMINAL_PROMPT"]="0"
+
+    def run(args,timeout=180):
+        return subprocess.run(args,capture_output=True,text=True,env=env,timeout=timeout)
+
+    try:
+        if not (repo/".git").exists():
+            if repo.exists():
+                shutil.rmtree(repo)
+            p=run([git,"clone","--depth","1","https://github.com/Sero91ak/dar-al-tawhid-site.git",str(repo)],300)
+            if p.returncode!=0:
+                return False,"Repository konnte nicht vorbereitet werden: "+(p.stderr or p.stdout)[-600:]
+        else:
+            p=run([git,"-C",str(repo),"fetch","origin","main"],180)
+            if p.returncode!=0:
+                return False,"Repository-Update fehlgeschlagen: "+(p.stderr or p.stdout)[-600:]
+            p=run([git,"-C",str(repo),"reset","--hard","origin/main"],60)
+            if p.returncode!=0:
+                return False,"Repository konnte nicht auf main gesetzt werden."
+
+        source_kids=export_ready/"kids"
+        if not source_kids.exists():
+            return False,"Export enthält keinen Kids-Ordner."
+
+        for rel in [
+            Path("data/alphabet-audio.json"),
+            Path("assets/kids-cinema/intro-voice-serhat.m4a"),
+        ]:
+            src=source_kids/rel
+            dst=repo/"kids"/rel
+            dst.parent.mkdir(parents=True,exist_ok=True)
+            shutil.copy2(src,dst)
+
+        src_audio=source_kids/"assets/kids-alphabet-audio"
+        dst_audio=repo/"kids/assets/kids-alphabet-audio"
+        if dst_audio.exists():
+            shutil.rmtree(dst_audio)
+        shutil.copytree(src_audio,dst_audio)
+
+        p=run([git,"-C",str(repo),"add","kids/data/alphabet-audio.json","kids/assets/kids-alphabet-audio","kids/assets/kids-cinema/intro-voice-serhat.m4a"],60)
+        if p.returncode!=0:
+            return False,"Git staging fehlgeschlagen: "+(p.stderr or p.stdout)[-500:]
+
+        diff=run([git,"-C",str(repo),"diff","--cached","--quiet"],30)
+        if diff.returncode==0:
+            return True,"Kids-App enthält bereits genau dieses Serhat-Stimmenpaket."
+
+        run([git,"-C",str(repo),"config","user.name","Serhat Abu Malik"],20)
+        run([git,"-C",str(repo),"config","user.email","73606501+Sero91ak@users.noreply.github.com"],20)
+        p=run([git,"-C",str(repo),"commit","-m","Kids: install complete local Serhat owner-voice pack"],120)
+        if p.returncode!=0:
+            return False,"Git commit fehlgeschlagen: "+(p.stderr or p.stdout)[-600:]
+
+        # Wenn gh bereits angemeldet ist, nutzt git dessen Credential Helper.
+        gh=shutil.which("gh")
+        if gh:
+            auth=run([gh,"auth","status"],30)
+            if auth.returncode==0:
+                run([gh,"auth","setup-git"],30)
+
+        p=run([git,"-C",str(repo),"push","origin","HEAD:main"],300)
+        if p.returncode!=0:
+            return False,"Paket ist lokal fertig, GitHub-Push aber nicht angemeldet: "+(p.stderr or p.stdout)[-700:]
+        return True,"Serhat-Stimmenpaket wurde nach GitHub main übertragen; der normale Kids-Deploy startet automatisch."
+    except Exception as e:
+        return False,str(e)
+
+def build_full_local_kids_voice_pack():
+    if not ALPHABET_BATCH_LOCK.acquire(blocking=False):
+        return _alphabet_batch_snapshot()
+    try:
+        started=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        _set_alphabet_batch_state(
+            running=True,phase="preparing",progress=1,completed=0,total=141,current="Manifest wird vorbereitet …",
+            error="",exportPath="",zipPath="",repoPublished=False,repoPublishError="",
+            startedAt=started,finishedAt=""
+        )
+
+        manifest_path=APP_HOME/"alphabet-audio.json"
+        manifest=load_json_file(manifest_path,{})
+        if not (manifest.get("letters") or {}).get("alif"):
+            raise RuntimeError("Installiertes Alphabet-Manifest fehlt oder ist ungültig.")
+        tasks=_alphabet_tasks(manifest)
+        if len(tasks)!=140:
+            raise RuntimeError(f"Alphabet-Pack unvollständig: erwartet 140 Clips, gefunden {len(tasks)}.")
+
+        build_id="serhat-local-"+time.strftime("%Y%m%d-%H%M%S")
+        build_root=ALPHABET_EXPORT_HOME/(".build-"+uuid.uuid4().hex[:10])
+        ready=ALPHABET_EXPORT_HOME/"ready"
+        if build_root.exists():
+            shutil.rmtree(build_root)
+        (build_root/"kids/assets/kids-alphabet-audio").mkdir(parents=True,exist_ok=True)
+        (build_root/"kids/assets/kids-cinema").mkdir(parents=True,exist_ok=True)
+        (build_root/"kids/data").mkdir(parents=True,exist_ok=True)
+
+        generated=[]
+        for index,(letter_id,kind,key,slot) in enumerate(tasks,1):
+            text_value=str((slot or {}).get("text") or "").strip()
+            if not text_value:
+                raise RuntimeError(f"Text fehlt bei {letter_id}/{kind}/{key or 'main'}.")
+            slot_id="-".join([letter_id,kind,key or "main"])
+            pct=2+int((index-1)/141*88)
+            _set_alphabet_batch_state(
+                phase="alphabet",progress=pct,completed=index-1,
+                current=f"{index}/140 · {letter_id.upper()} · {kind}{(' · '+key) if key else ''} · {text_value}"
+            )
+
+            meta=create_alphabet_voice_preview(text_value,slot_id,0)
+            master=confirm_alphabet_voice_preview(
+                str(meta["id"]),slot_id,letter_id,kind,key,text_value
+            )
+            master_wav=ALPHABET_MASTER_HOME/str(master["filename"])
+            asset=build_root/"kids/assets/kids-alphabet-audio"/letter_id/_slot_asset_name(kind,key)
+            _encode_kids_m4a(master_wav,asset)
+            _promote_slot_to_owner_voice(slot,letter_id,kind,key,asset,meta.get("metrics") or {},build_id)
+            generated.append(str(asset))
+
+        _set_alphabet_batch_state(
+            phase="greeting",progress=91,completed=140,
+            current="Kids-Begrüßung wird mit deiner Serhat-Stimme erzeugt …"
+        )
+        greeting_text=(
+            "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. "
+            "Willkommen bei DĀR AL TAWḤĪD Kids. Los geht’s!"
+        )
+        greeting_wav=generate(
+            greeting_text,"","kids_lesson",
+            free_mode=True,free_pronunciation=True
+        )
+        greeting_asset=build_root/"kids/assets/kids-cinema/intro-voice-serhat.m4a"
+        _encode_kids_m4a(greeting_wav,greeting_asset)
+
+        policy=manifest.setdefault("policy",{})
+        policy.update({
+            "requireExplicitVerification":False,
+            "requireHumanApprovalForGeneratedAudio":False,
+            "autoPublishGeneratedAudio":True,
+            "voiceMode":"owner-voice-generated-auto-qa-local",
+            "targetVoiceProfileId":"serhat-owner-voice-2026",
+            "targetVoiceLabel":"Serhat Abu Malik · DĀR Voice Studio",
+            "authorizedOwnerVoiceGeneration":True,
+            "generatedPromotionRule":"Die lokale Serhat Engine erzeugt alle 140 Lernclips automatisch. Jeder Clip muss die technische Engine-QA bestehen; nur Fehler werden gestoppt und zur Prüfung gemeldet.",
+            "note":"Finaler Kids-Lernbereich nutzt die autorisierte Serhat-Stimme. Die Eiarabe-Alif-Datei bleibt ausschließlich als separate Aussprache-Referenz in policy.pronunciationReferenceUrl erhalten.",
+            "batchBuild":{
+                "id":build_id,
+                "voiceProfileId":"serhat-owner-voice-2026",
+                "clips":140,
+                "manualPerClipApprovalRequired":False,
+                "technicalQaRequired":True,
+                "failedQaBlocksBuild":True,
+                "engine":"local-serhat-engine"
+            }
+        })
+        manifest["updatedAt"]=time.strftime("%Y-%m-%d")
+        manifest["ownerVoiceGreeting"]={
+            "url":"/kids/assets/kids-cinema/intro-voice-serhat.m4a?v="+build_id,
+            "text":greeting_text,
+            "voiceProfileId":"serhat-owner-voice-2026",
+            "sourceVoice":"authorized-owner-voice",
+            "sourceType":"local-owner-generated",
+            "sha256":hashlib.sha256(greeting_asset.read_bytes()).hexdigest(),
+            "durationSeconds":round(_audio_duration_seconds(greeting_asset),3),
+        }
+        atomic_write_json(build_root/"kids/data/alphabet-audio.json",manifest)
+
+        if ready.exists():
+            shutil.rmtree(ready)
+        os.replace(build_root,ready)
+        zip_base=ALPHABET_EXPORT_HOME/"DAR-AL-TAWHID-Kids-Serhat-Voice-Pack"
+        try:
+            Path(str(zip_base)+".zip").unlink(missing_ok=True)
+        except Exception:
+            pass
+        zip_path=Path(shutil.make_archive(str(zip_base),"zip",root_dir=str(ready)))
+
+        _set_alphabet_batch_state(
+            phase="publishing",progress=96,completed=141,current="Fertiges Paket wird direkt in die Kids-App übernommen …",
+            exportPath=str(ready),zipPath=str(zip_path)
+        )
+        published,publish_message=_prepare_publish_repo(ready)
+
+        finished=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        return _set_alphabet_batch_state(
+            running=False,phase="complete",progress=100,completed=141,current="Fertig",
+            error="",exportPath=str(ready),zipPath=str(zip_path),
+            repoPublished=bool(published),
+            repoPublishError="" if published else publish_message,
+            repoPublishMessage=publish_message,
+            startedAt=started,finishedAt=finished
+        )
+    except Exception as e:
+        finished=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        return _set_alphabet_batch_state(
+            running=False,phase="error",error=str(e),current="Abgebrochen",
+            finishedAt=finished
+        )
+    finally:
+        ALPHABET_BATCH_LOCK.release()
+
+def start_full_local_kids_voice_pack():
+    state=_alphabet_batch_snapshot()
+    if state.get("running"):
+        return state
+    thread=threading.Thread(target=build_full_local_kids_voice_pack,daemon=True,name="dar-alphabet-batch")
+    thread.start()
+    time.sleep(0.05)
+    return _alphabet_batch_snapshot()
 
 def confirm_learning_preview(preview_id:str,input_term:str=""):
     with LEARNING_LOCK:
@@ -4297,6 +4676,8 @@ class H(BaseHTTPRequestHandler):
             self.send_json(200,{"ok":True,**learning_state()})
         elif p=="/alphabet/state":
             self.send_json(200,{"ok":True,**alphabet_master_state()})
+        elif p=="/alphabet/batch-state":
+            self.send_json(200,{"ok":True,**_alphabet_batch_snapshot()})
         elif p.startswith("/alphabet/master/"):
             name=p.rsplit("/",1)[-1]
             if not re.fullmatch(r"[a-z0-9_-]+\.wav",name):
@@ -4451,6 +4832,13 @@ class H(BaseHTTPRequestHandler):
                 return
             except Exception as e:
                 return self.send_json(400,{"ok":False,"error":str(e),"status":get_status()})
+
+        if p=="/alphabet/batch-start":
+            try:
+                state=start_full_local_kids_voice_pack()
+                return self.send_json(202,{"ok":True,**state})
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e),**_alphabet_batch_snapshot()})
 
         if p=="/alphabet/confirm":
             try:
