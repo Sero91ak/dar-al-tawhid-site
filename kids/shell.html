@@ -4830,7 +4830,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     var letter=alphabetAudioManifest&&alphabetAudioManifest.letters&&alphabetAudioManifest.letters[id];
     if(!letter)return null;
     var slot=kind==="harakat"?(letter.harakat&&letter.harakat[key]):letter[kind];
-    if(!slot||slot.verified!==true||!String(slot.url||"").trim())return null;
+    if(!slot||slot.verified!==true||slot.linguisticVerified!==true||!String(slot.url||"").trim())return null;
     return slot;
   }
   function requiredHarakatKeys(a){
@@ -5024,7 +5024,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     audio.onended=function(){
       recordAudioEvidence(ageKey(),item.id,kind,key||"");
       alphabetAudioEl=null;
-      setAudioStatus(slot.sourceVoice==="authorized-owner-voice"?"Geprüfte Serhat-Lernstimme.":slot.sourceType==="external-human-pronunciation"?"Alif-Aussprache-Referenz.":"Geprüfte Lernaufnahme.","ok");
+      setAudioStatus(slot.sourceVoice==="authorized-owner-voice"?"Sprachlich geprüfte Serhat-Lernstimme.":slot.sourceType==="external-human-pronunciation"?"Aussprache-Referenz.":"Geprüfte Lernaufnahme.","ok");
       if(typeof onDone==="function")onDone();
       updateHeader(item,ageKey());
     };
