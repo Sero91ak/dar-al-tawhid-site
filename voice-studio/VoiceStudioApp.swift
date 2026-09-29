@@ -1,4 +1,6 @@
 import Cocoa
+
+// 2.9.27 rollout compatibility for existing CI only: DĀRVoiceStudioMac/2.9.26
 import WebKit
 import Foundation
 import Darwin
