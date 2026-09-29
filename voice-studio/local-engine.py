@@ -1180,7 +1180,8 @@ def alphabet_master_state():
     }
 
 def confirm_alphabet_voice_preview(
-    preview_id:str,slot_id:str,letter_id:str,kind:str,key:str,text:str
+    preview_id:str,slot_id:str,letter_id:str,kind:str,key:str,text:str,
+    linguistic_verified:bool=True
 ):
     preview_id=str(preview_id or "").strip()
     if not re.fullmatch(r"[0-9a-f]{16}",preview_id):
@@ -1211,13 +1212,17 @@ def confirm_alphabet_voice_preview(
         "kind":kind,
         "key":key,
         "text":value,
-        "verified":True,
+        "verified":bool(linguistic_verified),
+        "linguisticVerified":bool(linguistic_verified),
+        "technicalQaPassed":True,
+        "reviewStatus":"approved" if linguistic_verified else "needs-human-review",
         "sourceVoice":"authorized-owner-voice",
         "voiceProfileId":"serhat-owner-voice-2026",
         "sourceType":"local-owner-confirmed-master",
         "url":"/alphabet/master/"+filename,
         "filename":filename,
         "confirmedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "reviewedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z") if linguistic_verified else "",
     }
     with ALPHABET_MASTER_LOCK:
         state=alphabet_master_state()
@@ -1238,6 +1243,34 @@ def confirm_alphabet_voice_preview(
         pass
     return master
 
+
+def approve_existing_alphabet_master(slot_id:str):
+    slot_id=str(slot_id or "").strip().lower()
+    if not re.fullmatch(r"[a-z0-9_-]{3,80}",slot_id):
+        raise ValueError("Ungültiger Alphabet-Slot.")
+    now=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    with ALPHABET_MASTER_LOCK:
+        state=alphabet_master_state()
+        masters=[]
+        approved=None
+        for raw in (state.get("masters") or []):
+            item=dict(raw or {})
+            if str(item.get("slotId") or "")==slot_id:
+                item["verified"]=True
+                item["linguisticVerified"]=True
+                item["technicalQaPassed"]=True
+                item["reviewStatus"]="approved"
+                item["reviewedAt"]=now
+                approved=item
+            masters.append(item)
+        if approved is None:
+            raise ValueError("Lokaler Serhat-Master für diesen Slot fehlt.")
+        atomic_write_json(ALPHABET_MASTER_STATE,{
+            "schemaVersion":1,
+            "updatedAt":now,
+            "masters":masters,
+        })
+    return approved
 
 def _alphabet_batch_snapshot():
     with ALPHABET_BATCH_STATE_LOCK:
@@ -1353,7 +1386,10 @@ def _promote_slot_to_owner_voice(slot:dict,letter_id:str,kind:str,key:str,asset:
     rel="/kids/assets/kids-alphabet-audio/"+letter_id+"/"+_slot_asset_name(kind,key)
     sha=hashlib.sha256(asset.read_bytes()).hexdigest()
     slot.update({
-        "verified":True,
+        "verified":False,
+        "linguisticVerified":False,
+        "technicalQaPassed":True,
+        "reviewStatus":"needs-human-review",
         "url":rel+"?v="+build_id,
         "expectedPath":rel,
         "sha256":sha,
@@ -1371,13 +1407,13 @@ def _promote_slot_to_owner_voice(slot:dict,letter_id:str,kind:str,key:str,asset:
         "license":"Owner-authorized",
         "licenseUrl":"",
         "attribution":"Serhat Abu Malik · DĀR AL TAWḤĪD",
-        "verificationBasis":"Lokale autorisierte Serhat-Stimme; technische QA der Voice Engine bestanden.",
+        "verificationBasis":"Technische QA bestanden; sprachliche Aussprache muss separat menschlich bestätigt werden.",
         "voiceProfileId":"serhat-owner-voice-2026",
         "sourceVoice":"authorized-owner-voice",
         "canonicalVoice":True,
         "sameVoiceConfirmed":True,
-        "autoApproved":True,
-        "requiresManualReview":False,
+        "autoApproved":False,
+        "requiresManualReview":True,
     })
     if alternates:
         slot["alternateSources"]=alternates
@@ -1804,7 +1840,8 @@ def build_full_local_kids_voice_pack():
             if master_wav is None:
                 meta=create_alphabet_voice_preview(text_value,slot_id,0)
                 master=confirm_alphabet_voice_preview(
-                    str(meta["id"]),slot_id,letter_id,kind,key,text_value
+                    str(meta["id"]),slot_id,letter_id,kind,key,text_value,
+                    linguistic_verified=False
                 )
                 master_wav=ALPHABET_MASTER_HOME/str(master["filename"])
                 meta_metrics=meta.get("metrics") or {}
@@ -1812,6 +1849,14 @@ def build_full_local_kids_voice_pack():
             asset=build_root/"kids/assets/kids-alphabet-audio"/letter_id/_slot_asset_name(kind,key)
             _encode_kids_m4a(master_wav,asset)
             _promote_slot_to_owner_voice(slot,letter_id,kind,key,asset,meta_metrics,build_id)
+            if bool(cached_master.get("linguisticVerified")):
+                slot.update({
+                    "verified":True,
+                    "linguisticVerified":True,
+                    "reviewStatus":"approved",
+                    "requiresManualReview":False,
+                    "reviewedAt":str(cached_master.get("reviewedAt") or ""),
+                })
             generated.append(str(asset))
 
         quiz_manifest=_build_quiz_owner_voice_pack(
@@ -5302,6 +5347,13 @@ class H(BaseHTTPRequestHandler):
                 return self.send_json(202,{"ok":True,**state})
             except Exception as e:
                 return self.send_json(500,{"ok":False,"error":str(e),**_alphabet_batch_snapshot()})
+
+        if p=="/alphabet/review-approve":
+            try:
+                master=approve_existing_alphabet_master(str(data.get("slotId","")))
+                return self.send_json(200,{"ok":True,"master":master,**alphabet_master_state()})
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e)})
 
         if p=="/alphabet/confirm":
             try:
