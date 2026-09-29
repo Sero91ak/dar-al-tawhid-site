@@ -132,18 +132,9 @@ struct KidsNativeIntroOverlay: View {
 }
 
 struct KidsRootView: View {
-    @StateObject private var intro = KidsNativeIntroController()
-
     var body: some View {
-        ZStack {
-            KidsWebAppView()
-            if intro.isVisible {
-                KidsNativeIntroOverlay(controller: intro)
-                    .transition(.opacity)
-                    .allowsHitTesting(false)
-            }
-        }
-        .ignoresSafeArea()
-        .background(Color(red: 12 / 255, green: 38 / 255, blue: 54 / 255))
+        KidsWebAppView()
+            .ignoresSafeArea()
+            .background(Color(red: 12 / 255, green: 38 / 255, blue: 54 / 255))
     }
 }

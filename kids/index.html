@@ -2375,7 +2375,6 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
 /* KIDS V0.82 · cinematic start, skip, spring title */
-html.kids-ios-app .kids-launch-v79{display:none!important}
 .kids-launch-v79{
   position:fixed;inset:0;z-index:2147483000;overflow:hidden;
   background:
@@ -2444,7 +2443,7 @@ html.kids-ios-app .kids-launch-v79{display:none!important}
 
 </head>
 <body>
-<div class="kids-launch-v79" data-kids-launch="v90">
+<div class="kids-launch-v79" data-kids-launch="v91">
   <div class="k79-halo" aria-hidden="true"></div>
   <div class="k79-seal"><img src="/kids/icons/icon-1024.png?v=logo28" alt=""></div>
   <div class="k79-mark" id="kidsLaunchMark" aria-hidden="true">
@@ -6453,10 +6452,6 @@ fetchCatalog();
   var greeting=document.getElementById("kidsOwnerGreeting");
   var mark=document.getElementById("kidsLaunchMark");
   if(!launch)return;
-  if(window.DAR_KIDS_IOS_APP||window.DAR_IOS_NATIVE_APP||document.documentElement.classList.contains("kids-ios-app")){
-    launch.remove();
-    return;
-  }
 
   var removed=false;
   var spoken=false;
