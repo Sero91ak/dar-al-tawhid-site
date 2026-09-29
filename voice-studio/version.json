@@ -1,10 +1,10 @@
 {
-  "version": "2.9.27",
-  "updatedAt": "2026-09-29T10:58:00+02:00",
-  "deployTrigger": "voice-studio-2.9.27-kids-story-final-pause-repair",
+  "version": "2.9.28",
+  "updatedAt": "2026-09-29T11:08:00+02:00",
+  "deployTrigger": "voice-studio-2.9.28-local-alphabet-master",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v37",
+  "cache": "dar-voice-studio-v38",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -557,10 +557,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "f48d4a6771a46d25810ca0acc9a8f6365753fd62",
+  "releaseRef": "ce44ed6c81d65479e36f72d999bb48cb9e54ae61",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Kids-Story-Final-QA: Eine moderate Join-Stille von 620 ms wurde bei Kids-Geschichten abgelehnt, obwohl derselbe sichere Reparaturpfad bereits für Kids-Lernclips existierte. 2.9.27 wendet die begrenzte Stille-Komprimierung nun auf kids_story und kids_lesson an, misst das komplette Audio danach erneut und lässt technische/Segment-QA unverändert.",
+  "updateRepairReason": "Alif–Yāʾ-Master-Bestätigung wurde vollständig von Cloudflare/GitHub entkoppelt. Kandidaten werden lokal erzeugt, lokal vollständig angehört und nach Bestätigung persistent unter ~/SerhatVoice/AlphabetMasters gespeichert. Cloudflare/GitHub ist dafür nicht mehr erforderlich.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -701,5 +701,19 @@
     "mode": "kids_story",
     "finalLimitMs": 560,
     "action": "compress detected silent island once, then rerun full final QA"
+  },
+  "alphabetLocalMaster": {
+    "enabled": true,
+    "cloudflareRequired": false,
+    "githubCodeRequired": false,
+    "persistentPath": "~/SerhatVoice/AlphabetMasters/local-masters.json",
+    "audioPath": "~/SerhatVoice/AlphabetMasters/",
+    "previewEndpoint": "/alphabet/preview",
+    "confirmEndpoint": "/alphabet/confirm",
+    "stateEndpoint": "/alphabet/state",
+    "masterAudioEndpoint": "/alphabet/master/<slot>.wav",
+    "humanListenBeforeConfirm": true,
+    "persistentAcrossUpdates": true,
+    "publisherSeparated": true
   }
 }
