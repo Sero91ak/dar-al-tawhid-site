@@ -25,6 +25,20 @@ jobs:
         run: |
           node --check voice-studio/alphabet-audio-studio.js
 
+      - name: Validate repository Kids JSON
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          for p in [
+              Path("kids/data/alphabet-audio.json"),
+              Path("kids/data/quiz-kids.json"),
+              Path("kids/data/quiz-audio.json"),
+          ]:
+              json.loads(p.read_text(encoding="utf-8"))
+              print("valid json:", p)
+          PY
+
       - name: Validate full local batch markers
         run: |
           python3 - <<'PY'
@@ -50,6 +64,7 @@ jobs:
               'def load_alphabet_manifest',
               'def load_quiz_manifest',
               'Kids data self-healed',
+              'legacy JSON terminator repaired',
               'quiz-audio.json',
               'kids-quiz-audio',
           ]
@@ -63,7 +78,7 @@ jobs:
           required_html=[
               'id="alphabetPackBatchBtn"',
               'id="alphabetPackBatchState"',
-              "VOICE STUDIO 2.9.32",
+              "VOICE STUDIO 2.9.33",
           ]
           failures=[]
           for label,src,markers in (
