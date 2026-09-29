@@ -24,6 +24,7 @@ on:
       - wrangler.toml
       - _headers
       - _redirects
+      - apple-tv/**
       - kids/**
       - test/index.html
       - test/version.json
