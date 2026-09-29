@@ -24,6 +24,7 @@ watch_paths = [
   "voice-studio/**",
   "data/pronunciation/**",
   "cloudflare/site-router.js",
+  "cloudflare/preview-gate.js",
   "_redirects",
   "_headers",
   "kids/**",
@@ -32,3 +33,8 @@ watch_paths = [
   "q/**",
   "links/**"
 ]
+
+[vars]
+PREVIEW_GATE_USER = "dar"
+PREVIEW_GATE_PASS = "NurIntern81"
+

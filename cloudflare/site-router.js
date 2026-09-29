@@ -1,3 +1,4 @@
+import { gateHiddenSurfaces } from "./preview-gate.js";
 function isNativeAppRequest(ua) {
   return /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(String(ua || ""));
 }
@@ -442,6 +443,8 @@ export default {
     }
     const prayerApi = await proxyPrayerApi(request, url);
     if (prayerApi) return prayerApi;
+    const gated = gateHiddenSurfaces(request, url, env, "live");
+    if (gated) return gated;
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeApp = isNativeAppRequest(ua);
