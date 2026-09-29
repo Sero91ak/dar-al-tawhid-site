@@ -137,6 +137,72 @@ def atomic_write_json(path:Path,data):
         try: tmp.unlink(missing_ok=True)
         except Exception: pass
 
+
+def load_kids_repo_json(local_name:str,repo_path:str,validator):
+    """Load packaged Kids JSON and self-heal a missing/invalid installer copy.
+
+    GitHub's Contents API can return either the requested raw media or a JSON
+    envelope containing base64 data. Both forms are accepted. A valid remote
+    recovery is persisted into APP_HOME so the next app start is fully local.
+    """
+    local_path=APP_HOME/local_name
+    local=load_json_file(local_path,{})
+    try:
+        if validator(local):
+            return local
+    except Exception:
+        pass
+
+    url=(
+        "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/"
+        +repo_path+"?ref=main"
+    )
+    try:
+        req=urllib.request.Request(
+            url,
+            headers={
+                "Accept":"application/vnd.github.raw+json",
+                "User-Agent":"DAR-Voice-Studio-Kids-Manifest-Recovery/1",
+            },
+        )
+        with urllib.request.urlopen(req,timeout=25) as response:
+            raw=response.read()
+        try:
+            remote=json.loads(raw.decode("utf-8"))
+        except Exception:
+            remote=None
+
+        if isinstance(remote,dict) and isinstance(remote.get("content"),str):
+            decoded=base64.b64decode(re.sub(r"\s+","",remote["content"]))
+            remote=json.loads(decoded.decode("utf-8"))
+        elif not isinstance(remote,dict):
+            remote=json.loads(raw.decode("utf-8"))
+
+        if not validator(remote):
+            raise ValueError("GitHub lieferte eine ungültige Kids-Datendatei.")
+
+        atomic_write_json(local_path,remote)
+        print("[DĀR Voice] Kids data self-healed:",local_path,flush=True)
+        return remote
+    except Exception as e:
+        raise RuntimeError(
+            f"{local_name} fehlt oder ist ungültig; automatische Wiederherstellung fehlgeschlagen: {e}"
+        ) from e
+
+def load_alphabet_manifest():
+    return load_kids_repo_json(
+        "alphabet-audio.json",
+        "kids/data/alphabet-audio.json",
+        lambda d:isinstance(d,dict) and isinstance((d.get("letters") or {}).get("alif"),dict),
+    )
+
+def load_quiz_manifest():
+    return load_kids_repo_json(
+        "quiz-kids.json",
+        "kids/data/quiz-kids.json",
+        lambda d:isinstance(d,dict) and len(d.get("items") or [])>0,
+    )
+
 def normalize_lookup(value:str):
     text=unicodedata.normalize("NFKD",str(value or "").casefold())
     text="".join(ch for ch in text if not unicodedata.combining(ch))
@@ -1605,14 +1671,8 @@ def build_full_local_kids_voice_pack():
             startedAt=started,finishedAt=""
         )
 
-        manifest_path=APP_HOME/"alphabet-audio.json"
-        quiz_path=APP_HOME/"quiz-kids.json"
-        manifest=load_json_file(manifest_path,{})
-        quiz_data=load_json_file(quiz_path,{})
-        if not (manifest.get("letters") or {}).get("alif"):
-            raise RuntimeError("Installiertes Alphabet-Manifest fehlt oder ist ungültig.")
-        if not (quiz_data.get("items") or []):
-            raise RuntimeError("Installierte Kids-Quizdaten fehlen oder sind ungültig.")
+        manifest=load_alphabet_manifest()
+        quiz_data=load_quiz_manifest()
         tasks=_alphabet_tasks(manifest)
         if len(tasks)!=140:
             raise RuntimeError(f"Alphabet-Pack unvollständig: erwartet 140 Clips, gefunden {len(tasks)}.")
@@ -4910,7 +4970,17 @@ class H(BaseHTTPRequestHandler):
         elif p=="/studio/alphabet-audio-studio.js":
             self.send_file(APP_HOME/"alphabet-audio-studio.js","application/javascript; charset=utf-8")
         elif p=="/studio/alphabet-audio.json":
-            self.send_file(APP_HOME/"alphabet-audio.json","application/json; charset=utf-8")
+            try:
+                load_alphabet_manifest()
+                self.send_file(APP_HOME/"alphabet-audio.json","application/json; charset=utf-8")
+            except Exception as e:
+                self.send_json(503,{"ok":False,"error":str(e)})
+        elif p=="/studio/quiz-kids.json":
+            try:
+                load_quiz_manifest()
+                self.send_file(APP_HOME/"quiz-kids.json","application/json; charset=utf-8")
+            except Exception as e:
+                self.send_json(503,{"ok":False,"error":str(e)})
         elif p=="/studio/voice-studio-icon.png":
             self.send_file(APP_HOME/"voice-studio-icon.png","image/png")
         elif p=="/studio/manifest.webmanifest":
