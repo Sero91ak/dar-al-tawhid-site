@@ -1120,12 +1120,114 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
     append_learning_log("preview",term=term,canonical=meta["canonical"],lockKey=lock_key)
     return meta
 
+
+def _alphabet_slot_kind(slot_id:str):
+    parts=[p for p in str(slot_id or "").strip().lower().split("-") if p]
+    if len(parts)>=2 and parts[1] in ("name","harakat","word"):
+        return parts[1],(parts[2] if len(parts)>=3 else "")
+    return "",""
+
+def _alphabet_expected_duration(kind:str):
+    if kind=="harakat":
+        return (0.18,1.35)
+    if kind=="name":
+        return (0.32,2.40)
+    if kind=="word":
+        return (0.30,3.20)
+    return (0.18,3.20)
+
+def _extract_repeated_pronunciation_token(wav,sr:int,expected_count:int=3):
+    """Extract one clean token from a repeated short-learning render.
+
+    Very short Arabic CV targets such as بَ / بِ / بُ are unreliable when sent
+    to TTS as a single glyph: the model can swallow the token or emit silence.
+    Repeating the exact target three times gives the acoustic model enough
+    context. We then isolate one voiced island and return only that token.
+    """
+    import torch
+    w=normalize_segment_shape(wav)
+    meta={"repeatedTokenExtracted":False,"detectedTokens":0}
+    if not w.numel():
+        return w,meta
+
+    env=w.abs().amax(dim=0)
+    peak=float(env.max().item()) if env.numel() else 0.0
+    if peak<=1e-7:
+        return w,meta
+
+    frame=max(1,int(sr*0.010))
+    count=env.numel()//frame
+    if count<8:
+        return w,meta
+    framed=env[:count*frame].reshape(count,frame).mean(dim=1)
+    threshold=max(peak*0.018,0.00035)
+    active=(framed>threshold).tolist()
+
+    # Merge tiny internal gaps (<60 ms) so fricatives/stops are not split.
+    max_gap=6
+    i=0
+    while i<len(active):
+        if active[i]:
+            i+=1
+            continue
+        j=i
+        while j<len(active) and not active[j]:
+            j+=1
+        if i>0 and j<len(active) and (j-i)<=max_gap:
+            for k in range(i,j): active[k]=True
+        i=j
+
+    runs=[]
+    start=None
+    for i,flag in enumerate(active+[False]):
+        if flag and start is None:
+            start=i
+        elif not flag and start is not None:
+            dur_ms=(i-start)*10
+            if 90<=dur_ms<=2200:
+                runs.append((start,i,dur_ms))
+            start=None
+
+    meta["detectedTokens"]=len(runs)
+    if not runs:
+        return trim_segment_edges(w,sr,aggressive=True,inline=True),meta
+
+    # Prefer a central token among the expected repetitions; otherwise choose
+    # the duration closest to the median to avoid clipped first/last attempts.
+    usable=runs
+    if len(runs)>=expected_count:
+        center=len(runs)//2
+        usable=runs[max(0,center-1):min(len(runs),center+2)]
+    durations=sorted(x[2] for x in usable)
+    median=durations[len(durations)//2]
+    chosen=min(usable,key=lambda x:(abs(x[2]-median),abs((x[0]+x[1])/2-count/2)))
+
+    pad=max(1,int(sr*0.025))
+    s=max(0,chosen[0]*frame-pad)
+    e=min(w.shape[-1],chosen[1]*frame+pad)
+    out=w[...,s:e]
+    out=trim_segment_edges(out,sr,aggressive=True,inline=True)
+    meta.update({
+        "repeatedTokenExtracted":True,
+        "selectedDurationMs":int(round(out.shape[-1]/max(1,sr)*1000)),
+    })
+    return out,meta
+
+def _alphabet_render_prompt(value:str,kind:str):
+    value=str(value or "").strip()
+    if kind=="harakat":
+        # Exact same Fuṣḥā target repeated; no carrier word is introduced that
+        # could contaminate the learned syllable.
+        return f"{value}. {value}. {value}.",3
+    return value,1
+
 def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
     """Generate one Arabic learning clip in the local Serhat voice.
 
-    Nothing is published here. The returned WAV is only a candidate; the user
-    must listen and explicitly approve it before Cloudflare is used as a
-    publisher for the Kids manifest.
+    Alphabet learning is now Fuṣḥā-strict. Technical QA never counts as
+    linguistic approval. For isolated Ḥarakāt the target is rendered three
+    times, one clean token is extracted, and that isolated token is measured
+    again before it is offered for review.
     """
     value=str(text or "").strip()
     if not value:
@@ -1135,25 +1237,90 @@ def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
 
     model=load_production_model()
     slot=str(slot_id or "alphabet").strip()
+    kind,key=_alphabet_slot_kind(slot)
     variant=max(0,min(99,int(variant or 0)))
     digest=int(hashlib.sha1((slot+"|"+value).encode("utf-8")).hexdigest()[:8],16)
-    seed=7000+(digest%500000)+(variant*173)
+    seed0=7000+(digest%500000)+(variant*173)
 
-    wav,metrics=render_segment_with_qa(
-        model,
-        value,
-        "ar",
-        "kids_lesson",
-        True,
-        seed_base=seed
-    )
-    wav=trim_segment_edges(
-        wav,
-        int(model.sr),
-        aggressive=True,
-        inline=is_inline_arabic_micro_term(value),
-        lexical=False
-    )
+    prompt,repeat_count=_alphabet_render_prompt(value,kind)
+    min_dur,max_dur=_alphabet_expected_duration(kind)
+    best=None
+    failures=[]
+
+    # Outer candidates are deliberate pronunciation variants. We keep the
+    # technically cleanest one; none is linguistically auto-approved.
+    for outer in range(4):
+        seed=seed0+outer*997
+        try:
+            wav,render_metrics=render_segment_with_qa(
+                model,
+                prompt,
+                "ar",
+                "kids_lesson",
+                True,
+                seed_base=seed
+            )
+        except Exception as e:
+            failures.append(str(e))
+            continue
+
+        extraction={}
+        if repeat_count>1:
+            wav,extraction=_extract_repeated_pronunciation_token(
+                wav,int(model.sr),repeat_count
+            )
+        else:
+            wav=trim_segment_edges(
+                wav,int(model.sr),
+                aggressive=True,
+                inline=is_inline_arabic_micro_term(value),
+                lexical=False
+            )
+
+        final_metrics=audio_quality_metrics(
+            wav,int(model.sr),value,"ar","kids_lesson"
+        )
+        duration=float(final_metrics.get("duration_s",0) or 0)
+        issues=list(final_metrics.get("issues") or [])
+        if duration<min_dur:
+            issues.append("alphabet_target_too_short")
+        if duration>max_dur:
+            issues.append("alphabet_target_too_long")
+        if kind=="harakat" and repeat_count>1 and not extraction.get("repeatedTokenExtracted"):
+            issues.append("harakat_token_not_isolated")
+        final_metrics["issues"]=list(dict.fromkeys(issues))
+        final_metrics["fushaStrict"]=True
+        final_metrics["alphabetKind"]=kind or "unknown"
+        final_metrics["alphabetKey"]=key
+        final_metrics["renderPrompt"]=prompt
+        final_metrics["renderAttempt"]=outer+1
+        final_metrics.update(extraction)
+
+        score=(
+            len(final_metrics["issues"])*1000
+            +abs(duration-({"harakat":0.65,"name":1.05,"word":1.20}.get(kind,1.0)))*10
+            +float(final_metrics.get("max_internal_silence_ms",0) or 0)/1000
+        )
+        candidate=(score,wav,final_metrics)
+        if best is None or score<best[0]:
+            best=candidate
+        if not final_metrics["issues"]:
+            break
+
+    if best is None:
+        raise RuntimeError(
+            "Fuṣḥā-Serhat-Kandidat konnte nicht erzeugt werden. "
+            +(failures[-1] if failures else "Unbekannter Renderfehler.")
+        )
+
+    _,wav,metrics=best
+    hard=list(metrics.get("issues") or [])
+    if hard:
+        raise RuntimeError(
+            "Fuṣḥā-Serhat-Kandidat verworfen: "
+            +", ".join(hard)
+            +" · Text: "+value
+        )
 
     preview_id=uuid.uuid4().hex[:16]
     path=LEARNING_PENDING_DIR/f"alphabet-{preview_id}.wav"
@@ -1166,7 +1333,9 @@ def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
         "variant":variant,
         "sample_rate":int(model.sr),
         "metrics":metrics,
-        "voice":"serhat-local-owner-voice"
+        "voice":"serhat-local-owner-voice",
+        "fushaStrict":True,
+        "linguisticVerified":False,
     }
 
 def alphabet_master_state():
