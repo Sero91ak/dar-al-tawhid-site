@@ -590,6 +590,14 @@ def audio_lock_key_for_chunk(text:str):
     value=value.strip(AUDIO_LOCK_EDGE_CHARS)
     return AUDIO_LOCK_BY_TTS.get(value,"")
 
+def honorific_lock_keys_in_chunk(text:str):
+    value=str(text or "")
+    found=[]
+    for form,key in AUDIO_LOCK_BY_TTS.items():
+        if key in HONORIFIC_KEYS and form and form in value and key not in found:
+            found.append(key)
+    return found
+
 def learning_audio_backup_path(key:str):
     safe=re.sub(r"[^a-z0-9_-]+","_",str(key or "").lower()).strip("_")
     return LEARNING_CONFIRMED_AUDIO_DIR/f"{safe}.wav"
@@ -3012,6 +3020,25 @@ def _expand_free_voice_phrase_plan(lang:str,segment:str):
         parts=expanded
     return [(lang,x.strip()) for x in parts if x.strip()]
 
+def build_free_pronunciation_render_plan(text:str):
+    """Freie Aussprache: bestätigte Kern-/Ehrenformeln bleiben eigene Audioblöcke.
+
+    Der normale freie Modus bleibt unverändert. Nur wenn free_pronunciation aktiv
+    ist, werden bekannte Audio-Locks aus längeren arabischen Segmenten getrennt.
+    So wird z. B. ein Name plus رضي الله عنه nicht als ein einziger langer
+    ar/kids_lesson-Chunk gerendert, sondern Name und Ehrenformel bleiben getrennt.
+    """
+    plan=[]
+    for kind,value in split_audio_locked_spans(text):
+        clean=str(value or "").strip()
+        if not clean:
+            continue
+        if kind=="lock":
+            plan.append(("ar",clean))
+            continue
+        plan.extend(build_free_render_plan(clean))
+    return plan
+
 def build_free_render_plan(text:str):
     """Freie Stimme: ganze Sätze bevorzugen, nur lange Sätze sicher teilen.
 
@@ -3786,7 +3813,8 @@ def repair_internal_pause(wav,sr:int,text:str,language_id:str,mode:str):
     inline_arabic=language_id=="ar" and is_inline_arabic_micro_term(text)
     fixed_phrase=language_id=="ar" and is_profile_fixed_phrase_tts(text)
     honorific_key=audio_lock_key_for_chunk(text) if language_id=="ar" else ""
-    honorific_phrase=honorific_key in HONORIFIC_KEYS
+    honorific_keys=honorific_lock_keys_in_chunk(text) if language_id=="ar" else []
+    honorific_phrase=(honorific_key in HONORIFIC_KEYS) or bool(honorific_keys)
     if (
         (language_id=="ar" and not inline_arabic and not fixed_phrase and not honorific_phrase)
         or not w.numel()
@@ -3941,6 +3969,7 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
                 is_inline_arabic_micro_term(text)
                 or is_profile_fixed_phrase_tts(text)
                 or audio_lock_key_for_chunk(text) in HONORIFIC_KEYS
+                or bool(honorific_lock_keys_in_chunk(text))
             ):
                 compacted,proactive_pause_repair=repair_internal_pause(
                     wav,int(model.sr),text,language_id,mode
@@ -4455,7 +4484,11 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         found=phrase_found+learned_found+word_found
     else:
         speak,found=prepare(text)
-    if free_mode:
+    if free_mode and free_pronunciation:
+        synthesis_text,plan,flow_preflight=prepare_flow_text(
+            text,speak,build_free_pronunciation_render_plan
+        )
+    elif free_mode:
         synthesis_text,plan,flow_preflight=prepare_flow_text(text,speak,build_free_render_plan)
     else:
         synthesis_text,plan,flow_preflight=prepare_flow_text(text,speak,build_render_plan)
