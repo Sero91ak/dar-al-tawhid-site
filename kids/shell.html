@@ -2396,6 +2396,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
   <video id="kidsCinemaV79" class="k79-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture>
     <source src="/kids/assets/kids-cinema/intro-v74.mp4?v=79" type="video/mp4">
   </video>
+  <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-serhat.m4a?v=serhat-owner-20260929"></audio>
 </div>
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
@@ -6395,6 +6396,7 @@ fetchCatalog();
 (function(){
   var launch=document.querySelector(".kids-launch-v79");
   var video=document.getElementById("kidsCinemaV79");
+  var greeting=document.getElementById("kidsOwnerGreeting");
   if(!launch||!video)return;
 
   var removed=false;
@@ -6426,10 +6428,28 @@ fetchCatalog();
     if(p&&typeof p.catch==="function"){p.catch(function(){})}
   }
 
+  function tryOwnerGreeting(){
+    if(!greeting)return;
+    if(!(window.DAR_KIDS_IOS_APP||window.DAR_IOS_NATIVE_APP||window.DAR_OFFICIAL_IOS_APP))return;
+    try{
+      if(sessionStorage.getItem("kids.owner.greeting.played.v1")==="1")return;
+    }catch(e){}
+    greeting.volume=0.96;
+    greeting.currentTime=0;
+    var gp;
+    try{gp=greeting.play()}catch(e){return}
+    if(gp&&typeof gp.then==="function"){
+      gp.then(function(){
+        try{sessionStorage.setItem("kids.owner.greeting.played.v1","1")}catch(e){}
+      }).catch(function(){});
+    }
+  }
+
   function onPlaying(){
     if(started)return;
     started=true;
     if(startupTimer)clearTimeout(startupTimer);
+    setTimeout(tryOwnerGreeting,260);
     var remaining=9000;
     if(Number.isFinite(video.duration)&&video.duration>0){
       remaining=Math.min(12000,Math.max(1500,(video.duration-video.currentTime)*1000+900));
@@ -6459,6 +6479,7 @@ fetchCatalog();
   });
   document.addEventListener("pointerdown",function(){
     if(!started)tryPlay();
+    tryOwnerGreeting();
   },{once:true,capture:true});
 
   try{video.load()}catch(e){}
