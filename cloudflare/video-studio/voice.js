@@ -106,12 +106,19 @@ export async function synthesizeDarVoice(env, text, options = {}) {
             style: 0.30,
             use_speaker_boost: true
           }
-        : {
-            stability: 0.72,
-            similarity_boost: 0.78,
-            style: 0.08,
-            use_speaker_boost: true
-          }
+        : profile === "kids_alphabet"
+          ? {
+              stability: 0.78,
+              similarity_boost: 0.88,
+              style: 0.04,
+              use_speaker_boost: true
+            }
+          : {
+              stability: 0.72,
+              similarity_boost: 0.78,
+              style: 0.08,
+              use_speaker_boost: true
+            }
     })
   });
   if (!res.ok) {
