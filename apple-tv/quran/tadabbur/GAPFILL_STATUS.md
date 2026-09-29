@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-066` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-067` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4392
-totalVerifiedEntries: 4392
-loadedEntries: 4392
-uniqueVerifiedReferences: 4392
-missingCount: 1844
+entriesCount: 4394
+totalVerifiedEntries: 4394
+loadedEntries: 4394
+uniqueVerifiedReferences: 4394
+missingCount: 1842
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:6
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-066.json
-nächster Gap-Fill-Batch: entries-gap-06-067.json
+letzter Gap-Fill-Batch: entries-gap-06-067.json
+nächster Gap-Fill-Batch: entries-gap-06-068.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `202` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `204` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -91,6 +91,7 @@ Danach gibt es keinen weiteren Qurʾān-Vers. Alle weiteren Arbeiten sind aussch
 06-064  1
 06-065  2
 06-066  1
+06-067  2
 ```
 
 Die Zahl hinter jedem Batch ist die aktuell registrierte Eintragszahl der Datei.
@@ -147,6 +148,7 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 06-064: 2:137
 06-065: 2:134, 2:135
 06-066: 2:141
+06-067: 2:91, 2:95
 ```
 
 ## Nächste echte Audit-Lücken
@@ -168,9 +170,7 @@ Der aktuelle nächste 25er-Auditbereich beginnt mit:
 2:49
 2:64
 2:82
-2:91
 2:92
-2:95
 2:98
 2:99
 2:107
@@ -185,6 +185,8 @@ Der aktuelle nächste 25er-Auditbereich beginnt mit:
 2:139
 2:140
 2:145
+2:146
+2:147
 ```
 
 Diese Referenzen sind Arbeitsziele, keine Aufforderung zum künstlichen Füllen. Ein Vers bleibt offen, bis ein konkreter früher Bericht mit belastbarer Zuordnung und ausreichend geprüfter Überlieferungskette vorliegt.
