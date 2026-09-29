@@ -381,7 +381,7 @@ function setBatchUi(state){
     btn.disabled=running;
     btn.textContent=running
       ?"Gesamtes Serhat-Paket wird erzeugt …"
-      :"Alle 140 Clips + Begrüßung automatisch erzeugen";
+      :"Alphabet + Quiz + Begrüßung automatisch erzeugen";
   }
   if(!line)return;
 
@@ -406,7 +406,7 @@ function setBatchUi(state){
     const published=Boolean(state?.repoPublished);
     const publishMsg=String(state?.repoPublishMessage||state?.repoPublishError||"").trim();
     line.textContent=published
-      ?"Fertig: 140 Lernclips + Begrüßung wurden erzeugt und direkt in die Kids-App übertragen."
+      ?"Fertig: Alphabet, kompletter Quiz-Bereich und Begrüßung wurden mit deiner Serhat-Stimme erzeugt und direkt in die Kids-App übertragen."
       :"Audio-Paket vollständig erzeugt. "+(publishMsg||"Der automatische GitHub-Push ist auf diesem Mac noch nicht angemeldet.");
     line.style.color=published?"var(--green)":"var(--amber)";
     return;
@@ -458,7 +458,7 @@ async function startFullBatch(auto=false){
     if(!r.ok||d?.ok===false)throw Error(d?.error||"Komplettes Serhat-Paket konnte nicht gestartet werden.");
     setBatchUi(d);
     setMsg(
-      "Automatik läuft: Alif bis Yāʾ, Fatḥah/Kasrah/Ḍammah, Beispielwörter und Kids-Begrüßung werden mit deiner Serhat-Stimme erzeugt. Nur technische QA-Fehler stoppen den Lauf.",
+      "Automatik läuft: Alif bis Yāʾ, Fatḥah/Kasrah/Ḍammah, Beispielwörter, der komplette Kids-Quiz-Bereich und die Begrüßung werden mit deiner Serhat-Stimme erzeugt. Nur technische QA-Fehler stoppen den Lauf.",
       "good"
     );
     beginBatchPolling();
@@ -474,11 +474,8 @@ async function maybeAutoStartFullBatch(){
     beginBatchPolling();
     return;
   }
-  if(state?.phase==="complete"&&Number(state?.completed||0)>=141)return;
-  const pending=pendingList(manifest);
-  if(pending.length){
-    await startFullBatch(true);
-  }
+  if(state?.phase==="complete"&&Number(state?.completed||0)>=226&&Number(state?.total||0)>=226)return;
+  await startFullBatch(true);
 }
 
 q("alphabetPackReferenceBtn")?.addEventListener("click",playReference);
