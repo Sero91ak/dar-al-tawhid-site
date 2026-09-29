@@ -59,6 +59,7 @@ ALPHABET_MASTER_STATE=ALPHABET_MASTER_HOME/"local-masters.json"
 ALPHABET_EXPORT_HOME=VOICE_HOME/"KidsAppExport"
 ALPHABET_BATCH_STATE_FILE=ALPHABET_EXPORT_HOME/"batch-state.json"
 ALPHABET_PUBLISH_REPO=VOICE_HOME/"KidsAppPublishRepo"
+ALPHABET_GENERATION_PROFILE="fusha-strict-v2"
 QUIZ_MASTER_HOME=VOICE_HOME/"QuizMasters"
 USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
 USER_OVERRIDES_BACKUP_DIR=LEARNING_HOME/"backups"
@@ -1334,6 +1335,7 @@ def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
         "sample_rate":int(model.sr),
         "metrics":metrics,
         "voice":"serhat-local-owner-voice",
+        "generationProfile":ALPHABET_GENERATION_PROFILE,
         "fushaStrict":True,
         "linguisticVerified":False,
     }
@@ -1388,6 +1390,7 @@ def confirm_alphabet_voice_preview(
         "sourceVoice":"authorized-owner-voice",
         "voiceProfileId":"serhat-owner-voice-2026",
         "sourceType":"local-owner-confirmed-master",
+        "generationProfile":ALPHABET_GENERATION_PROFILE,
         "url":"/alphabet/master/"+filename,
         "filename":filename,
         "confirmedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
@@ -1567,6 +1570,7 @@ def _promote_slot_to_owner_voice(slot:dict,letter_id:str,kind:str,key:str,asset:
         "qaDurationSeconds":round(_audio_duration_seconds(asset),3),
         "qaMetrics":metrics or {},
         "sourceType":"owner-voice-generated",
+        "generationProfile":ALPHABET_GENERATION_PROFILE,
         "sourceProvider":"DĀR Voice Studio · lokale Serhat Engine",
         "sourceSpeaker":"Serhat Abu Malik",
         "sourceLanguage":"Arabic / Fuṣḥā learning",
@@ -1936,10 +1940,31 @@ def _prepare_publish_repo(export_ready:Path):
             if auth.returncode==0:
                 run([gh,"auth","setup-git"],30)
 
-        p=run([git,"-C",str(repo),"push","origin","HEAD:main"],300)
-        if p.returncode!=0:
-            return False,"Paket ist lokal fertig, GitHub-Push aber nicht angemeldet: "+(p.stderr or p.stdout)[-700:]
-        return True,"Serhat-Stimmenpaket wurde nach GitHub main übertragen; der normale Kids-Deploy startet automatisch."
+        last_push=""
+        for attempt in range(1,4):
+            # Der Audio-Build kann lange laufen; main darf inzwischen weitergezogen
+            # sein. Vor jedem Push den einen lokalen Pack-Commit auf den aktuellen
+            # origin/main rebasen. Bei transientem GitHub-5xx erneut versuchen.
+            fetch=run([git,"-C",str(repo),"fetch","origin","main"],180)
+            if fetch.returncode!=0:
+                last_push=(fetch.stderr or fetch.stdout)[-700:]
+            else:
+                rebase=run([git,"-C",str(repo),"rebase","origin/main"],180)
+                if rebase.returncode!=0:
+                    run([git,"-C",str(repo),"rebase","--abort"],30)
+                    return False,"Paket ist lokal fertig, konnte aber nicht konfliktfrei auf den aktuellen main-Stand gesetzt werden: "+(rebase.stderr or rebase.stdout)[-700:]
+                p=run([git,"-C",str(repo),"push","origin","HEAD:main"],300)
+                if p.returncode==0:
+                    return True,"Serhat-Stimmenpaket wurde nach GitHub main übertragen; der normale Kids-Deploy startet automatisch."
+                last_push=(p.stderr or p.stdout)[-700:]
+                low=last_push.lower()
+                transient=("500" in low or "502" in low or "503" in low or "504" in low or "internal server error" in low)
+                if not transient:
+                    break
+            if attempt<3:
+                time.sleep(attempt*3)
+
+        return False,"Paket ist lokal fertig; GitHub-Push nach 3 Versuchen fehlgeschlagen: "+last_push
     except Exception as e:
         return False,str(e)
 
@@ -1950,6 +1975,7 @@ def build_full_local_kids_voice_pack():
         started=time.strftime("%Y-%m-%dT%H:%M:%S%z")
         _set_alphabet_batch_state(
             running=True,phase="preparing",progress=1,completed=0,total=226,current="Manifest und Quizdaten werden vorbereitet …",
+            generationProfile=ALPHABET_GENERATION_PROFILE,
             error="",exportPath="",zipPath="",repoPublished=False,repoPublishError="",
             startedAt=started,finishedAt=""
         )
@@ -1990,9 +2016,16 @@ def build_full_local_kids_voice_pack():
 
             cached_master=existing_alphabet_masters.get(slot_id) or {}
             cached_file=ALPHABET_MASTER_HOME/str(cached_master.get("filename") or "")
+            cached_profile=str(cached_master.get("generationProfile") or "")
             meta_metrics={}
             master_wav=None
-            if cached_file.name and cached_file.exists() and cached_file.stat().st_size>44:
+            cache_reused=False
+            if (
+                cached_profile==ALPHABET_GENERATION_PROFILE
+                and cached_file.name
+                and cached_file.exists()
+                and cached_file.stat().st_size>44
+            ):
                 try:
                     cached_wav=load_locked_wav(cached_file,24000)
                     cached_metrics=audio_quality_metrics(
@@ -2001,10 +2034,13 @@ def build_full_local_kids_voice_pack():
                     hard={"empty_audio","non_finite","near_silence","low_peak","clipping"}
                     if not any(x in hard for x in (cached_metrics.get("issues") or [])):
                         master_wav=cached_file
+                        cache_reused=True
                         meta_metrics=cached_metrics
                         meta_metrics["alphabet_master_cache"]="hit"
+                        meta_metrics["generationProfile"]=ALPHABET_GENERATION_PROFILE
                 except Exception:
                     master_wav=None
+                    cache_reused=False
 
             if master_wav is None:
                 meta=create_alphabet_voice_preview(text_value,slot_id,0)
@@ -2014,11 +2050,13 @@ def build_full_local_kids_voice_pack():
                 )
                 master_wav=ALPHABET_MASTER_HOME/str(master["filename"])
                 meta_metrics=meta.get("metrics") or {}
+                meta_metrics["alphabet_master_cache"]="regenerated"
+                meta_metrics["generationProfile"]=ALPHABET_GENERATION_PROFILE
 
             asset=build_root/"kids/assets/kids-alphabet-audio"/letter_id/_slot_asset_name(kind,key)
             _encode_kids_m4a(master_wav,asset)
             _promote_slot_to_owner_voice(slot,letter_id,kind,key,asset,meta_metrics,build_id)
-            if bool(cached_master.get("linguisticVerified")):
+            if cache_reused and bool(cached_master.get("linguisticVerified")):
                 slot.update({
                     "verified":True,
                     "linguisticVerified":True,
@@ -2071,7 +2109,8 @@ def build_full_local_kids_voice_pack():
                 "quizTechnicalQaRequired":True,
                 "technicalQaRequired":True,
                 "failedQaBlocksBuild":True,
-                "engine":"local-serhat-engine"
+                "engine":"local-serhat-engine",
+                "generationProfile":ALPHABET_GENERATION_PROFILE
             }
         })
         manifest["updatedAt"]=time.strftime("%Y-%m-%d")
