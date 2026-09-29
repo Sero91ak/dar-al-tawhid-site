@@ -1,10 +1,10 @@
 {
-  "version": "2.9.31",
-  "updatedAt": "2026-09-29T12:08:00+02:00",
-  "deployTrigger": "voice-studio-2.9.31-quiz-token-limit-rescue",
+  "version": "2.9.32",
+  "updatedAt": "2026-09-29T13:15:00+02:00",
+  "deployTrigger": "voice-studio-2.9.32-kids-manifest-self-heal",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v41",
+  "cache": "dar-voice-studio-v42",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -557,10 +557,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "94880dab4900618bd63bd6e6aef41e5e0b611a42",
+  "releaseRef": "74b3f2c7cefdd6f88b47f8dda17764023f51c760",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Quiz-Batch konnte bei längeren gesprochenen Frage+Antwort-Prompts mit generation_token_limit stoppen. 2.9.31 zerlegt ausschließlich Quiz-Ansagen semantisch in sichere kurze Serhat-Sprachblöcke, rendert jeden Block mit vollständiger QA, setzt sie anschließend wieder zu einem einzigen Quiz-Audio zusammen und prüft das Gesamt-Audio. Bereits fertige Alphabet- und Quiz-Master werden beim Neustart wiederverwendet, sodass der Batch nach einem Fehler fortgesetzt wird statt von vorn zu synthetisieren.",
+  "updateRepairReason": "2.9.31 konnte nach dem Update ein leeres/ungültiges installiertes Alphabet-Manifest sehen. 2.9.32 validiert Alphabet- und Quiz-JSON bereits im Installer, entpackt bei Bedarf GitHub-Contents-base64-Envelope korrekt und repariert fehlende/ungültige Kids-Datendateien zusätzlich zur Laufzeit serverseitig aus GitHub main. Der lokale Batch verwendet danach dieselben selbst reparierten Daten und setzt mit vorhandenen Alphabet-/Quiz-Mastern fort.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -765,5 +765,19 @@
     "persistentMasterCache": "~/SerhatVoice/QuizMasters/",
     "resumeAfterFailure": true
   },
-  "validatedQuizVoiceRef": "94880dab4900618bd63bd6e6aef41e5e0b611a42"
+  "validatedQuizVoiceRef": "74b3f2c7cefdd6f88b47f8dda17764023f51c760",
+  "kidsManifestRecovery": {
+    "enabled": true,
+    "installerValidatesAlphabet": true,
+    "installerValidatesQuiz": true,
+    "githubContentsEnvelopeDecode": true,
+    "runtimeSelfHeal": true,
+    "alphabetLocalPath": "~/Applications/DAR-Voice-Studio/alphabet-audio.json",
+    "quizLocalPath": "~/Applications/DAR-Voice-Studio/quiz-kids.json",
+    "runtimeAlphabetRoute": "/studio/alphabet-audio.json",
+    "runtimeQuizRoute": "/studio/quiz-kids.json",
+    "batchUsesRecoveredManifests": true,
+    "existingAlphabetMastersPreserved": true,
+    "existingQuizMastersPreserved": true
+  }
 }
