@@ -59,6 +59,7 @@ ALPHABET_MASTER_STATE=ALPHABET_MASTER_HOME/"local-masters.json"
 ALPHABET_EXPORT_HOME=VOICE_HOME/"KidsAppExport"
 ALPHABET_BATCH_STATE_FILE=ALPHABET_EXPORT_HOME/"batch-state.json"
 ALPHABET_PUBLISH_REPO=VOICE_HOME/"KidsAppPublishRepo"
+QUIZ_MASTER_HOME=VOICE_HOME/"QuizMasters"
 USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
 USER_OVERRIDES_BACKUP_DIR=LEARNING_HOME/"backups"
 USER_OVERRIDES_BACKUP=USER_OVERRIDES_BACKUP_DIR/"user-overrides.latest.json"
@@ -75,6 +76,7 @@ LEARNING_HOME.mkdir(parents=True,exist_ok=True)
 LEARNING_PENDING_DIR.mkdir(parents=True,exist_ok=True)
 ALPHABET_MASTER_HOME.mkdir(parents=True,exist_ok=True)
 ALPHABET_EXPORT_HOME.mkdir(parents=True,exist_ok=True)
+QUIZ_MASTER_HOME.mkdir(parents=True,exist_ok=True)
 RENDER_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 CONTEXT_BRIDGE_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_URL=os.environ.get(
@@ -1309,6 +1311,150 @@ def _quiz_voice_texts(quiz_data):
     add("Sehr gut. Du hast das Quiz geschafft.")
     return texts
 
+
+def _quiz_bounded_parts(text:str,max_chars:int=48):
+    value=re.sub(r"\s+"," ",str(text or "")).strip()
+    if not value:
+        return []
+    max_chars=max(24,int(max_chars))
+
+    # Fragen mit vorgelesenen Optionen zuerst semantisch trennen. So bleibt
+    # "Antwort 1:" bei seiner Antwort und landet nie in einem riesigen TTS-Block.
+    semantic=[
+        x.strip()
+        for x in re.split(r"\s+(?=Antwort\s+\d+\s*:)",value,flags=re.I)
+        if x.strip()
+    ]
+    parts=[]
+    for segment in semantic:
+        sentence_bits=[
+            x.strip() for x in re.split(r"(?<=[.!?؟])\s+",segment) if x.strip()
+        ] or [segment]
+        for bit in sentence_bits:
+            current=bit
+            while len(current)>max_chars:
+                window=current[:max_chars+1]
+                cuts=[
+                    window.rfind(", "),
+                    window.rfind("; "),
+                    window.rfind(": "),
+                    window.rfind(" und "),
+                    window.rfind(" "),
+                ]
+                cut=max(cuts)
+                if cut<max(12,int(max_chars*0.45)):
+                    cut=max_chars
+                else:
+                    # Trennzeichen/Wort nicht verlieren.
+                    if current[cut:cut+2] in (", ","; ",": "):
+                        cut+=1
+                left=current[:cut].strip()
+                right=current[cut:].strip()
+                if not left or not right:
+                    break
+                parts.append(left)
+                current=right
+            if current:
+                parts.append(current)
+    return [x for x in parts if x]
+
+def _quiz_join_paths(paths,text_value:str):
+    items=[]
+    sr=24000
+    for path,spoken in paths:
+        wav=load_locked_wav(Path(path),sr)
+        items.append((wav,"de",spoken,"kids_lesson",{}))
+    if not items:
+        raise RuntimeError("Quiz-Audio enthält keine erzeugten Teilstücke.")
+    joined=join_rendered_segments(items,sr)
+    joined=trim_segment_edges(joined,sr,aggressive=False)
+
+    metrics=audio_quality_metrics(joined,sr,text_value,"de","kids_lesson")
+    pause_issues={
+        "unexpected_internal_hold","excessive_internal_pause","suspicious_sustained_hold"
+    }
+    current=set(metrics.get("issues") or [])
+    if current and current.issubset(pause_issues|{"segment_too_long","speech_rate_too_slow"}):
+        repaired,meta=repair_internal_pause(joined,sr,text_value,"de","kids_lesson")
+        if meta.get("repaired"):
+            joined=repaired
+            metrics=audio_quality_metrics(joined,sr,text_value,"de","kids_lesson")
+            metrics.update(meta)
+
+    # Der zusammengesetzte Quiz-Prompt darf naturgemäß länger als ein einzelnes
+    # TTS-Segment sein. Längen-/Rate-Hinweise sind deshalb hier keine Fehler;
+    # jedes Teilstück wurde bereits vollständig durch die strenge Engine-QA geprüft.
+    hard={
+        "empty_audio","non_finite","near_silence","low_peak","clipping",
+        "unexpected_internal_hold","excessive_internal_pause",
+        "suspicious_sustained_hold","generation_token_limit","generation_timeout"
+    }
+    hard_found=[x for x in (metrics.get("issues") or []) if x in hard]
+    if hard_found:
+        raise RuntimeError(
+            "Quiz-Gesamt-Audio-QA fehlgeschlagen: "+", ".join(hard_found)+
+            " · Text: "+str(text_value)[:72]
+        )
+    metrics["issues"]=[x for x in (metrics.get("issues") or []) if x in hard]
+    metrics["quiz_composite"]=True
+    metrics["quiz_parts"]=len(items)
+    return joined,sr,metrics
+
+def _generate_quiz_voice_master(text_value:str):
+    value=re.sub(r"\s+"," ",str(text_value or "")).strip()
+    if not value:
+        raise ValueError("Quiz-Sprachtext fehlt.")
+    digest=hashlib.sha1(value.encode("utf-8")).hexdigest()[:20]
+    master=QUIZ_MASTER_HOME/(digest+".wav")
+
+    # Bereits bestandene Quiz-Master werden bei einem späteren Batch direkt
+    # wiederverwendet. Dadurch setzt ein Lauf nach einem einzelnen Fehler fort,
+    # statt alle vorherigen Quiztexte erneut zu synthetisieren.
+    if master.exists() and master.stat().st_size>1024:
+        try:
+            wav=load_locked_wav(master,24000)
+            metrics=audio_quality_metrics(wav,24000,value,"de","kids_lesson")
+            hard={"empty_audio","non_finite","near_silence","low_peak","clipping"}
+            if not any(x in hard for x in (metrics.get("issues") or [])):
+                metrics["quiz_master_cache"]="hit"
+                return master,metrics
+        except Exception:
+            pass
+
+    base_parts=_quiz_bounded_parts(value,48)
+    if not base_parts:
+        raise RuntimeError("Quiztext konnte nicht in sichere Sprachblöcke zerlegt werden.")
+
+    rendered=[]
+    for part in base_parts:
+        queue=[part]
+        while queue:
+            piece=queue.pop(0)
+            try:
+                path=generate(
+                    piece,"","kids_lesson",
+                    free_mode=True,free_pronunciation=True
+                )
+                rendered.append((Path(path),piece))
+            except RuntimeError as e:
+                message=str(e)
+                if (
+                    ("generation_token_limit" in message or "generation_timeout" in message)
+                    and len(piece)>24
+                ):
+                    rescue=_quiz_bounded_parts(piece,max(24,min(34,len(piece)//2+4)))
+                    if len(rescue)>1:
+                        queue=rescue+queue
+                        continue
+                raise
+
+    joined,sr,metrics=_quiz_join_paths(rendered,value)
+    tmp=master.with_suffix(".tmp.wav")
+    save_wav(tmp,joined,sr)
+    os.replace(tmp,master)
+    metrics["quiz_master_cache"]="write"
+    return master,metrics
+
 def _build_quiz_owner_voice_pack(quiz_data,build_root:Path,build_id:str,start_index:int,total:int):
     texts=_quiz_voice_texts(quiz_data)
     entries={}
@@ -1329,11 +1475,9 @@ def _build_quiz_owner_voice_pack(quiz_data,build_root:Path,build_id:str,start_in
         digest=hashlib.sha1(text_value.encode("utf-8")).hexdigest()[:16]
         asset=out_dir/(digest+".m4a")
         source=generated_cache.get(text_value)
+        source_metrics={}
         if source is None:
-            source=generate(
-                text_value,"","kids_lesson",
-                free_mode=True,free_pronunciation=True
-            )
+            source,source_metrics=_generate_quiz_voice_master(text_value)
             generated_cache[text_value]=source
         _encode_kids_m4a(source,asset)
         entries[text_value]={
@@ -1344,6 +1488,7 @@ def _build_quiz_owner_voice_pack(quiz_data,build_root:Path,build_id:str,start_in
             "sourceVoice":"authorized-owner-voice",
             "sourceType":"local-owner-generated",
             "qaBy":"local-serhat-engine-auto-qa",
+            "qaMetrics":source_metrics,
         }
 
     manifest={
@@ -1485,6 +1630,10 @@ def build_full_local_kids_voice_pack():
         (build_root/"kids/data").mkdir(parents=True,exist_ok=True)
 
         generated=[]
+        existing_alphabet_masters={
+            str((m or {}).get("slotId") or ""):dict(m or {})
+            for m in (alphabet_master_state().get("masters") or [])
+        }
         for index,(letter_id,kind,key,slot) in enumerate(tasks,1):
             text_value=str((slot or {}).get("text") or "").strip()
             if not text_value:
@@ -1496,14 +1645,35 @@ def build_full_local_kids_voice_pack():
                 current=f"{index}/140 · {letter_id.upper()} · {kind}{(' · '+key) if key else ''} · {text_value}"
             )
 
-            meta=create_alphabet_voice_preview(text_value,slot_id,0)
-            master=confirm_alphabet_voice_preview(
-                str(meta["id"]),slot_id,letter_id,kind,key,text_value
-            )
-            master_wav=ALPHABET_MASTER_HOME/str(master["filename"])
+            cached_master=existing_alphabet_masters.get(slot_id) or {}
+            cached_file=ALPHABET_MASTER_HOME/str(cached_master.get("filename") or "")
+            meta_metrics={}
+            master_wav=None
+            if cached_file.name and cached_file.exists() and cached_file.stat().st_size>44:
+                try:
+                    cached_wav=load_locked_wav(cached_file,24000)
+                    cached_metrics=audio_quality_metrics(
+                        cached_wav,24000,text_value,"ar","kids_lesson"
+                    )
+                    hard={"empty_audio","non_finite","near_silence","low_peak","clipping"}
+                    if not any(x in hard for x in (cached_metrics.get("issues") or [])):
+                        master_wav=cached_file
+                        meta_metrics=cached_metrics
+                        meta_metrics["alphabet_master_cache"]="hit"
+                except Exception:
+                    master_wav=None
+
+            if master_wav is None:
+                meta=create_alphabet_voice_preview(text_value,slot_id,0)
+                master=confirm_alphabet_voice_preview(
+                    str(meta["id"]),slot_id,letter_id,kind,key,text_value
+                )
+                master_wav=ALPHABET_MASTER_HOME/str(master["filename"])
+                meta_metrics=meta.get("metrics") or {}
+
             asset=build_root/"kids/assets/kids-alphabet-audio"/letter_id/_slot_asset_name(kind,key)
             _encode_kids_m4a(master_wav,asset)
-            _promote_slot_to_owner_voice(slot,letter_id,kind,key,asset,meta.get("metrics") or {},build_id)
+            _promote_slot_to_owner_voice(slot,letter_id,kind,key,asset,meta_metrics,build_id)
             generated.append(str(asset))
 
         quiz_manifest=_build_quiz_owner_voice_pack(
