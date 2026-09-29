@@ -199,6 +199,12 @@ function renderCurrent(){
   }
   if(q("alphabetPackArabic"))q("alphabetPackArabic").textContent=current.slot?.text||"—";
   if(q("alphabetPackGenerateBtn"))q("alphabetPackGenerateBtn").disabled=false;
+  const refBtn=q("alphabetPackReferenceBtn");
+  const ref=currentPronunciationReference();
+  if(refBtn){
+    refBtn.disabled=!ref;
+    refBtn.textContent=ref?"Menschliche Referenz hören":"Keine Referenz hinterlegt";
+  }
   clearCandidate();
   if(current.slot?.localMasterUrl){
     loadExistingMasterCandidate();
