@@ -1,10 +1,10 @@
 {
-  "version": "2.9.36",
-  "updatedAt": "2026-09-29T16:01:00+02:00",
-  "deployTrigger": "voice-studio-2.9.36-compound-honorific-split",
+  "version": "2.9.37",
+  "updatedAt": "2026-09-29T16:12:00+02:00",
+  "deployTrigger": "voice-studio-2.9.37-alphabet-linguistic-review",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v46",
+  "cache": "dar-voice-studio-v47",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -557,10 +557,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "ff2f5bff5bb0fc2b4e705886230cb286a91c28b0",
+  "releaseRef": "5d9802dc804b818bbb9b6f77e400f52657dec3f7",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Quiz-Batch: zusammengesetzte arabische Blöcke aus Name plus Ehrenformel werden bei aktivierter freier Aussprache jetzt in eigene geschützte Audio-Lock-Blöcke getrennt. Der normale Freie-Stimme-Modus bleibt unverändert. Ein begrenzter Fallback erkennt Ehrenformeln zusätzlich innerhalb größerer arabischer Chunks. Bestehende Alphabet- und Quiz-Master werden weiterverwendet.",
+  "updateRepairReason": "Nach vollständigem Praxistest wurden zahlreiche Aussprachefehler und stumme Alphabet-Clips festgestellt. Technische Audio-QA wird deshalb nicht mehr als sprachliche Verifikation behandelt. Alle 140 automatisch erzeugten Serhat-Clips bleiben als technische Kandidaten erhalten, wurden aber aus der Live-Freigabe zurückgesetzt. Voice Studio 2.9.37 führt eine echte sprachliche Einzelprüfung ein: vorhandenen Serhat-Clip anhören, vorhandene menschliche Referenz vergleichen, nur korrekte Clips bestätigen; falsche oder stumme Clips als neue Variante erzeugen. Die Kids-App spielt nur noch sprachlich bestätigte Alphabet-Master ab.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -779,7 +779,7 @@
     "normalFreeVoiceUnchanged": true,
     "compoundHonorificPauseFallback": true
   },
-  "validatedQuizVoiceRef": "ff2f5bff5bb0fc2b4e705886230cb286a91c28b0",
+  "validatedQuizVoiceRef": "5d9802dc804b818bbb9b6f77e400f52657dec3f7",
   "kidsManifestRecovery": {
     "enabled": true,
     "installerValidatesAlphabet": true,
@@ -800,5 +800,17 @@
     "repositoryAlphabetManifestValid": true,
     "repositoryAlphabetOwnerMasters": 140,
     "repositoryGreetingPresent": true
+  },
+  "alphabetLinguisticReview": {
+    "enabled": true,
+    "totalCandidates": 140,
+    "automaticLinguisticApproval": false,
+    "technicalQaSeparate": true,
+    "existingCandidatesPreserved": true,
+    "livePlaybackRequiresLinguisticVerified": true,
+    "humanReferenceSlotsAvailable": 49,
+    "reviewEndpoint": "/alphabet/review-approve",
+    "regenerateWrongOrSilent": true,
+    "xcodeRequired": false
   }
 }
