@@ -7,10 +7,10 @@ from pathlib import Path
 from urllib.parse import urlparse, parse_qs
 import hmac
 try:
-    from speech_flow import prepare_flow_text
+    from speech_flow import prepare_flow_text, FLOW_WEAK_ENDINGS
 except ModuleNotFoundError:
     sys.path.insert(0,str(Path(__file__).resolve().parent))
-    from speech_flow import prepare_flow_text
+    from speech_flow import prepare_flow_text, FLOW_WEAK_ENDINGS
 
 # Apple-Silicon: unsupported MPS ops dürfen auf CPU zurückfallen statt den Render abzubrechen.
 os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
@@ -1438,13 +1438,61 @@ def _quiz_bounded_parts(text:str,max_chars:int=48):
                         cut+=1
                 left=current[:cut].strip()
                 right=current[cut:].strip()
+
+                # Die strenge Satzfluss-QA verbietet Grenzen direkt nach
+                # grammatisch abhängigen Funktionswörtern wie "als", "zu",
+                # "mit", "für", "dass" usw. Der Quiz-Splitter darf solche
+                # Grenzen daher gar nicht erst erzeugen. Verschiebe den Cut
+                # deterministisch vor das abhängige Wort, sodass es zusammen
+                # mit seinem Folgeteil gesprochen wird.
+                if left and right and not re.search(r"[,،;؛:.!?؟…]$",left):
+                    last_word=re.sub(
+                        r"[^A-Za-zÄÖÜäöüß]+$","",
+                        left.split()[-1]
+                    ).casefold()
+                    if last_word in FLOW_WEAK_ENDINGS:
+                        prev_space=left.rfind(" ")
+                        if prev_space>=max(8,int(max_chars*0.30)):
+                            cut=prev_space
+                            left=current[:cut].strip()
+                            right=current[cut:].strip()
+
                 if not left or not right:
                     break
                 parts.append(left)
                 current=right
             if current:
                 parts.append(current)
-    return [x for x in parts if x]
+
+    # Zweite Schutzschicht für Sonderfälle aus vorherigen semantischen Splits:
+    # Ein schwaches Endwort wird zum nächsten Teil verschoben. So kann auch ein
+    # zukünftiger Quiztext keine künstliche Pause nach "als"/"zu"/"mit" erzeugen.
+    balanced=[]
+    i=0
+    while i<len(parts):
+        part=str(parts[i] or "").strip()
+        if not part:
+            i+=1
+            continue
+        if i+1<len(parts) and not re.search(r"[,،;؛:.!?؟…]$",part):
+            words=part.split()
+            end_word=re.sub(
+                r"[^A-Za-zÄÖÜäöüß]+$","",
+                words[-1] if words else ""
+            ).casefold()
+            if end_word in FLOW_WEAK_ENDINGS:
+                next_part=str(parts[i+1] or "").strip()
+                if len(words)>1:
+                    moved=words[-1]
+                    part=" ".join(words[:-1]).strip()
+                    parts[i+1]=(moved+" "+next_part).strip()
+                else:
+                    parts[i+1]=(part+" "+next_part).strip()
+                    i+=1
+                    continue
+        balanced.append(part)
+        i+=1
+    return [x for x in balanced if x]
 
 def _quiz_join_paths(paths,text_value:str):
     items=[]
