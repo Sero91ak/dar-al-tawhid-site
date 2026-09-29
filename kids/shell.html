@@ -2374,70 +2374,100 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .app[data-age="4–5"] #alphabetModal .lesson-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
-/* KIDS V0.93 · cinematic title card */
+/* KIDS V0.94 · hang, widen, load, burst; voice only in preview */
 .kids-launch-v79{
   position:absolute;left:0;top:0;width:100%;min-height:100%;min-height:100dvh;
   z-index:9999;box-sizing:border-box;
   background:#02060c;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:0;
+  padding:48px 16px 28px;overflow:visible;
 }
-.k79-curtain{
-  position:absolute;inset:0;background:#000;z-index:5;
-  animation:k79Curtain 1.4s ease forwards;
-  pointer-events:none;
+.k79-water{
+  position:absolute;left:50%;top:42%;width:min(140vw,640px);height:min(140vw,640px);
+  margin:-min(70vw,320px) 0 0 -min(70vw,320px);
+  background:url("/kids/icons/icon-1024.png?v=logo28") center/contain no-repeat;
+  opacity:.09;pointer-events:none;z-index:0;
+  animation:k79Water 9s ease-out forwards;
 }
-@keyframes k79Curtain{to{opacity:0}}
-.k79-bar{
-  position:absolute;left:0;right:0;height:42px;background:#000;z-index:4;pointer-events:none;
+@keyframes k79Water{
+  0%{opacity:0;transform:scale(.8)}
+  24%{opacity:.14;transform:scale(1)}
+  100%{opacity:.08;transform:scale(1.18)}
 }
-.k79-bar.top{top:0}
-.k79-bar.bot{bottom:0}
-.k79-glow{
-  position:absolute;width:min(92vw,420px);height:min(92vw,420px);border-radius:50%;
-  background:radial-gradient(circle,rgba(232,196,112,.28) 0%,rgba(12,38,54,.0) 68%);
-  animation:k79Glow 8.4s ease-in-out forwards;
-  pointer-events:none;
+.k79-cord{
+  position:absolute;top:0;left:50%;width:2px;height:72px;margin-left:-1px;
+  background:linear-gradient(#c9a86a,#8a6a3a);z-index:3;pointer-events:none;
+  transform-origin:top center;
+  animation:k79Cord 2.6s ease-in-out 2;
 }
-@keyframes k79Glow{
-  0%{opacity:0;transform:scale(.7)}
-  18%{opacity:1;transform:scale(1)}
-  100%{opacity:.85;transform:scale(1.12)}
+@keyframes k79Cord{
+  0%{transform:rotate(-8deg)}
+  50%{transform:rotate(7deg)}
+  100%{transform:rotate(0)}
+}
+.k79-hang{
+  position:relative;z-index:2;transform-origin:50% -36px;
+  animation:k79Swing 2.6s ease-in-out 2;
+}
+@keyframes k79Swing{
+  0%{transform:rotate(-8deg) scale(.82)}
+  50%{transform:rotate(7deg) scale(.9)}
+  100%{transform:rotate(0) scale(1)}
 }
 .k79-poster{
-  position:relative;z-index:2;width:min(78vw,340px);height:min(78vw,340px);
-  border-radius:76px;
-  box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 0 1px rgba(243,226,192,.35);
-  animation:k79Poster 8.4s ease-out forwards;
+  width:min(72vw,300px);height:min(72vw,300px);border-radius:68px;
+  box-shadow:0 28px 70px rgba(0,0,0,.55),0 0 0 1px rgba(243,226,192,.4);
+  animation:k79Widen 3.6s 2.5s ease-out forwards;
 }
-.k79-poster img{
-  width:100%;height:100%;display:block;border-radius:76px;
+@keyframes k79Widen{
+  0%{width:min(72vw,300px);height:min(72vw,300px)}
+  100%{width:min(92vw,420px);height:min(92vw,420px)}
 }
-@keyframes k79Poster{
-  0%{opacity:0;transform:scale(.72)}
-  16%{opacity:1;transform:scale(1)}
-  100%{opacity:1;transform:scale(1.08)}
-}
-.k79-mark{
-  position:relative;z-index:2;text-align:center;margin-top:28px;
-  animation:k79Credit 8.4s ease forwards;
-}
-@keyframes k79Credit{
-  0%,12%{opacity:0;transform:translateY(18px)}
-  28%{opacity:1;transform:translateY(0)}
-  100%{opacity:1;transform:translateY(0)}
-}
+.k79-poster img{width:100%;height:100%;display:block;border-radius:68px}
+.k79-mark{position:relative;z-index:2;text-align:center;margin-top:22px}
 .k79-mark .k79-dar{
-  display:block;
-  font-family:"Cinzel",Georgia,serif;font-weight:700;letter-spacing:.42em;
-  font-size:clamp(13px,3.6vw,18px);color:#e8d4a8;
+  display:block;font-family:"Cinzel",Georgia,serif;font-weight:700;letter-spacing:.38em;
+  font-size:clamp(12px,3.4vw,17px);color:#f0e2c0;
+  animation:k79In .9s .4s ease both;
 }
 .k79-mark .k79-kids{
-  display:block;margin-top:10px;
-  font-family:"Fredoka","Cinzel",sans-serif;font-weight:700;letter-spacing:.22em;
-  font-size:clamp(34px,10vw,58px);color:#ffe9c2;
+  display:block;margin-top:8px;font-family:"Fredoka",sans-serif;font-weight:700;letter-spacing:.2em;
+  font-size:clamp(32px,9.4vw,56px);color:#ffe7b0;
+  animation:k79In .9s .62s ease both;
 }
-.kids-launch-v79.is-ending{opacity:0;transition:opacity .7s ease;pointer-events:none}
+@keyframes k79In{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.k79-load{
+  position:relative;z-index:2;width:min(72vw,280px);margin-top:22px;text-align:center;
+}
+.k79-load-track{
+  height:7px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;
+}
+.k79-load-fill{
+  display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,#e2bd72,#ffe7b8,#73c9c1);
+}
+.k79-load-pct{
+  display:block;margin-top:8px;font-family:"Fredoka",sans-serif;font-weight:700;
+  font-size:13px;letter-spacing:.12em;color:#ffe7b0;
+}
+.k79-burst{
+  position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0;
+}
+.kids-launch-v79.is-burst .k79-burst{opacity:1}
+.k79-spark{
+  position:absolute;left:50%;top:46%;width:10px;height:10px;margin:-5px;border-radius:50%;
+  background:#ffe7b8;opacity:0;
+}
+.kids-launch-v79.is-burst .k79-spark{
+  animation:k79Pop .9s ease-out forwards;
+}
+@keyframes k79Pop{
+  0%{opacity:1;transform:translate(0,0) scale(.4)}
+  70%{opacity:1}
+  100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.4)}
+}
+.kids-launch-v79.is-ending{opacity:0;transition:opacity .55s ease;pointer-events:none}
+
 
 
 
@@ -2446,16 +2476,21 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 </head>
 <body>
-<div class="kids-launch-v79" id="kidsLaunch" data-kids-launch="v93">
-  <div class="k79-bar top" aria-hidden="true"></div>
-  <div class="k79-bar bot" aria-hidden="true"></div>
-  <div class="k79-glow" aria-hidden="true"></div>
-  <div class="k79-poster"><img src="/kids/icons/icon-1024.png?v=logo28" width="340" height="340" alt=""></div>
-  <div class="k79-mark" id="kidsLaunchMark">
+<div class="kids-launch-v79" id="kidsLaunch" data-kids-launch="v94">
+  <div class="k79-water" aria-hidden="true"></div>
+  <div class="k79-cord" aria-hidden="true"></div>
+  <div class="k79-hang">
+    <div class="k79-poster"><img src="/kids/icons/icon-1024.png?v=logo28" width="300" height="300" alt=""></div>
+  </div>
+  <div class="k79-mark">
     <span class="k79-dar">DĀR AL TAWḤĪD</span>
     <span class="k79-kids">Kids</span>
   </div>
-  <div class="k79-curtain" aria-hidden="true"></div>
+  <div class="k79-load">
+    <div class="k79-load-track"><span class="k79-load-fill" id="kidsLaunchFill"></span></div>
+    <span class="k79-load-pct" id="kidsLaunchPct">0%</span>
+  </div>
+  <div class="k79-burst" aria-hidden="true"><i class="k79-spark" style="--x:-90px;--y:-70px;animation-delay:0.0s;background:#ffe7b8"></i><i class="k79-spark" style="--x:80px;--y:-80px;animation-delay:0.04s;background:#73c9c1"></i><i class="k79-spark" style="--x:110px;--y:20px;animation-delay:0.08s;background:#e2bd72"></i><i class="k79-spark" style="--x:-120px;--y:30px;animation-delay:0.05s;background:#8ec5e8"></i><i class="k79-spark" style="--x:20px;--y:-120px;animation-delay:0.02s;background:#efb08f"></i><i class="k79-spark" style="--x:-40px;--y:90px;animation-delay:0.1s;background:#c78aa0"></i><i class="k79-spark" style="--x:60px;--y:100px;animation-delay:0.07s;background:#9ec49e"></i><i class="k79-spark" style="--x:-70px;--y:-20px;animation-delay:0.03s;background:#ffe7b8"></i><i class="k79-spark" style="--x:130px;--y:-40px;animation-delay:0.09s;background:#9f91d6"></i><i class="k79-spark" style="--x:-130px;--y:-50px;animation-delay:0.06s;background:#73c9c1"></i><i class="k79-spark" style="--x:0px;--y:110px;animation-delay:0.11s;background:#e2bd72"></i><i class="k79-spark" style="--x:40px;--y:-90px;animation-delay:0.01s;background:#fff"></i></div>
   <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-serhat-soft.m4a?v=87"></audio>
 </div>
 <div id="kidsUpdateLayer" class="kids-update-layer">
@@ -6448,40 +6483,71 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=93",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=94",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
 <script>
 (function(){
-  var launch=document.getElementById("kidsLaunch")||document.querySelector(".kids-launch-v79");
+  var launch=document.getElementById("kidsLaunch");
   var greeting=document.getElementById("kidsOwnerGreeting");
+  var fill=document.getElementById("kidsLaunchFill");
+  var pct=document.getElementById("kidsLaunchPct");
   if(!launch)return;
   var removed=false;
+  var spoken=false;
+  var raf=0;
+  function setLoad(p){
+    p=Math.max(0,Math.min(100,Math.round(p)));
+    if(fill)fill.style.width=p+"%";
+    if(pct)pct.textContent=p+"%";
+  }
+  function tick(){
+    if(removed||!greeting)return;
+    var d=greeting.duration;
+    if(d&&isFinite(d)&&d>0)setLoad((greeting.currentTime/d)*100);
+    raf=requestAnimationFrame(tick);
+  }
+  function finishVoice(){
+    if(removed)return;
+    setLoad(100);
+    launch.classList.add("is-burst");
+    window.setTimeout(removeLaunch,920);
+  }
   function removeLaunch(){
     if(removed)return;
     removed=true;
+    cancelAnimationFrame(raf);
     launch.classList.add("is-ending");
     window.setTimeout(function(){
-      try{if(greeting)greeting.pause()}catch(e2){}
+      try{
+        if(greeting){
+          greeting.pause();
+          greeting.removeAttribute("src");
+          greeting.load();
+        }
+      }catch(e2){}
       if(launch.parentNode)launch.parentNode.removeChild(launch);
-    },420);
+    },560);
   }
   function speakTitle(){
-    if(!greeting)return;
+    if(spoken||removed||!greeting)return;
+    spoken=true;
     greeting.muted=false;
     greeting.volume=0.92;
     try{greeting.currentTime=0}catch(e){}
     var gp;
-    try{gp=greeting.play()}catch(ePlay){return}
-    if(gp&&typeof gp.catch==="function")gp.catch(function(){});
+    try{gp=greeting.play()}catch(ePlay){spoken=false;return}
+    if(gp&&typeof gp.catch==="function")gp.catch(function(){spoken=false});
+    tick();
   }
+  greeting.addEventListener("ended",finishVoice);
+  greeting.addEventListener("error",function(){window.setTimeout(finishVoice,400)});
   speakTitle();
-  document.addEventListener("touchstart",speakTitle,{once:true,passive:true});
-  document.addEventListener("click",speakTitle,{once:true});
-  setTimeout(removeLaunch,8400);
+  window.setTimeout(function(){if(!removed)finishVoice()},14000);
 })();
 </script>
+
 
 
 <style id="kids-quiz-scroll-v1">
