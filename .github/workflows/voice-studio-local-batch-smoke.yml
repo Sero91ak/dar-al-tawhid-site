@@ -155,6 +155,9 @@ jobs:
               'def _alphabet_render_prompt',
               'harakat_token_not_isolated',
               'fushaStrict',
+              'ALPHABET_GENERATION_PROFILE="fusha-strict-v2"',
+              'cached_profile==ALPHABET_GENERATION_PROFILE',
+              'generationProfile=ALPHABET_GENERATION_PROFILE',
               'quiz-audio.json',
               'kids-quiz-audio',
           ]
@@ -168,7 +171,8 @@ jobs:
           required_html=[
               'id="alphabetPackBatchBtn"',
               'id="alphabetPackBatchState"',
-              "VOICE STUDIO 2.9.39",
+              "VOICE STUDIO 2.9.40",
+              "alphabet-audio-studio.js?v=2927",
           ]
           failures=[]
           for label,src,markers in (
