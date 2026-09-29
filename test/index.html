@@ -9,7 +9,7 @@
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
 <script src="/test/assets/dar-noble-3d-icons.js?v=1108"></script><!-- DAR_NOBLE_3D_HEAD -->
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1138";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1139";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1060";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 
 <script>
@@ -27686,7 +27686,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1138";
+const APP_BUILD_ID="app-shell-v1139";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -36598,34 +36598,39 @@ body.is-quran-reader-route.qrc-dock-united .qrc-body{
     allLight(".theme-hero-shell::before")+","+allLight(".theme-hero-shell::after")+","+allLight(".theme-hero-surface::before")+","+allLight(".theme-hero-surface::after")+","+allLight(".view::before")+","+allLight(".view::after")+","+allLight(".view-head::before")+","+allLight(".dar-home-library-stage")+","+allLight(".header.theme-hero-surface::before")+","+allLight(".header.theme-hero-surface::after")+"{content:none!important;display:none!important;background:none!important;background-image:none!important;opacity:0!important}",
     allLight(".view h2")+","+allLight(".view-head h2")+","+allLight(".eyebrow")+","+allLight(".view-desc")+","+allLight(".brand-title-refined")+","+allLight(".brand-title")+","+allLight(".salam")+","+allLight(".intro")+","+allLight(".isnad-quote")+","+allLight(".isnad-words")+"{color:#14110e!important;-webkit-text-fill-color:#14110e!important;text-shadow:none!important;opacity:1!important;background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important}",
     allLight(".view-desc")+","+allLight(".intro")+","+allLight(".eyebrow")+" {color:#2c2823!important;-webkit-text-fill-color:#2c2823!important}",
-    H+" .header-prayer-hub,"+H+" .top-shell.theme-hero-shell .header-prayer-hub{background:transparent!important;border:0!important;box-shadow:none!important;padding:4px 0 0!important}",
-    H+" .header-prayer-hub__main{border-radius:24px!important;overflow:hidden!important;background:rgba(255,255,255,.22)!important;border:1px solid rgba(90,74,42,.16)!important;box-shadow:none!important;-webkit-backdrop-filter:blur(10px)!important;backdrop-filter:blur(10px)!important}",
-    H+" .header-prayer-hub__status{border-radius:18px!important;overflow:hidden!important;background:rgba(255,255,255,.18)!important;border:1px solid rgba(90,74,42,.12)!important;box-shadow:none!important}",
-    H+" .header-prayer-hub__main::before,"+H+" .header-prayer-hub__status::before{content:none!important;display:none!important}",
+    H+" .top-shell.theme-hero-shell .header-prayer-hub,"+H+" .header-prayer-hub{display:block!important;width:100%!important;margin-top:10px!important;padding:8px 14px 8px!important;border-radius:999px!important;overflow:hidden!important;background:var(--outer-bg,#F4F6F0)!important;background-image:none!important;border:1px solid rgba(94,116,101,.22)!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}",
+    H+" .header-prayer-hub__main,"+H+" .header-prayer-hub__status{background:transparent!important;background-image:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}",
+    H+" .header-prayer-hub__main{min-height:0!important;padding:2px 2px 6px!important;overflow:visible!important}",
+    H+" .header-prayer-hub__status{margin:0!important;padding:6px 2px 2px!important;min-height:0!important;border-top:1px solid rgba(94,116,101,.18)!important;overflow:visible!important}",
+    H+" .header-prayer-hub__main::before,"+H+" .header-prayer-hub__status::before{content:none!important;display:none!important;background:none!important}",
     H+" .header-prayer-name,"+H+" .header-prayer-hour,"+H+" .header-prayer-hub__status,"+H+" .header-prayer-hub__status>span,"+H+" .header-prayer-zone__caption{color:#14110e!important;-webkit-text-fill-color:#14110e!important;text-shadow:none!important}",
-    "@media(max-width:430px){"+H+" .header-prayer-hub__main{border-radius:22px!important}"+H+" .header-prayer-hub__status{border-radius:16px!important}}",
+    "@media(max-width:430px){"+H+" .header-prayer-hub{border-radius:999px!important;padding:7px 12px 7px!important}}",
     H+" .brand-kicker-row small,"+H+" .brand-main h1.brand-title-refined,"+H+" .isnad-quote,"+H+" .isnad-words,"+H+" .isnad-speaker,"+H+" .isnad-label,"+H+" .isnad-source{color:#14110e!important;-webkit-text-fill-color:#14110e!important;text-shadow:none!important;opacity:1!important}",
     H+" .isnad,"+H+" .home-premium-access-card,"+H+" .home-tawhid-entry{background:transparent!important;box-shadow:none!important}",
     H+" .home-tawhid-entry__arrow,"+H+" .home-v380-quran-hero__chevron{display:none!important}"
   ].join("");
   function flattenHub(){
     if(!document.body||!document.body.classList.contains("is-home-route"))return;
-    var dark=/(dark|royal|bordeaux|dar-al-layl)/.test(document.documentElement.getAttribute("data-theme")||"");
-    document.querySelectorAll(".header-prayer-hub__main").forEach(function(el){
-      el.style.setProperty("border-radius","24px","important");
+    document.querySelectorAll(".header-prayer-hub").forEach(function(el){
+      el.style.setProperty("border-radius","999px","important");
       el.style.setProperty("overflow","hidden","important");
-      el.style.setProperty("background",dark?"rgba(20,14,10,.35)":"rgba(255,255,255,.22)","important");
+      el.style.setProperty("background","var(--outer-bg,#F4F6F0)","important");
+      el.style.setProperty("background-image","none","important");
+      el.style.setProperty("border","1px solid rgba(94,116,101,.22)","important");
+      el.style.setProperty("box-shadow","none","important");
+    });
+    document.querySelectorAll(".header-prayer-hub__main,.header-prayer-hub__status").forEach(function(el){
+      el.style.setProperty("background","transparent","important");
+      el.style.setProperty("background-image","none","important");
+      el.style.setProperty("border-radius","0","important");
       el.style.setProperty("box-shadow","none","important");
     });
     document.querySelectorAll(".header-prayer-hub__status").forEach(function(el){
-      el.style.setProperty("border-radius","18px","important");
-      el.style.setProperty("overflow","hidden","important");
-      el.style.setProperty("background",dark?"rgba(20,14,10,.28)":"rgba(255,255,255,.18)","important");
+      el.style.setProperty("border","0","important");
+      el.style.setProperty("border-top","1px solid rgba(94,116,101,.18)","important");
+      el.style.setProperty("margin","0","important");
     });
-    document.querySelectorAll(".header-prayer-hub").forEach(function(el){
-      el.style.setProperty("border-radius","0","important");
-      el.style.setProperty("background","transparent","important");
-    });
+    var dark=/(dark|royal|bordeaux|dar-al-layl)/.test(document.documentElement.getAttribute("data-theme")||"");
     if(dark)return;
     document.querySelectorAll("h1.brand-title-refined,.brand-kicker-row small,.isnad-quote,.isnad-words,.view-head h2,.eyebrow,.view-desc").forEach(function(el){
       el.style.setProperty("color","#14110e","important");
@@ -36634,14 +36639,14 @@ body.is-quran-reader-route.qrc-dock-united .qrc-body{
     });
   }
   function pin(){
-    var live=document.getElementById("home-library-stage-live-v1138");
+    var live=document.getElementById("home-library-stage-live-v1139");
     if(!live){
       live=document.createElement("style");
-      live.id="home-library-stage-live-v1138";
+      live.id="home-library-stage-live-v1139";
     }
     live.textContent=CSS;
     document.documentElement.appendChild(live);
-    ["home-library-stage-live-v1135","home-library-stage-live-v1136","home-library-stage-live-v1137"].forEach(function(id){
+    ["home-library-stage-live-v1135","home-library-stage-live-v1136","home-library-stage-live-v1137","home-library-stage-live-v1138"].forEach(function(id){
       var stale=document.getElementById(id);
       if(stale&&stale!==live)stale.remove();
     });
