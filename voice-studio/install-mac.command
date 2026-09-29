@@ -133,6 +133,7 @@ download_repo_file "voice-studio/index.html" "$STAGE/studio.html"
 download_repo_file "voice-studio/content-studio.js" "$STAGE/content-studio.js"
 download_repo_file "voice-studio/alphabet-audio-studio.js" "$STAGE/alphabet-audio-studio.js"
 download_repo_file "kids/data/alphabet-audio.json" "$STAGE/alphabet-audio.json"
+download_repo_file "kids/data/quiz-kids.json" "$STAGE/quiz-kids.json"
 download_repo_file "voice-studio/VoiceStudioApp.swift" "$STAGE/VoiceStudioApp.swift"
 download_repo_file "voice-studio/update-mac.command" "$STAGE/update-mac.command"
 download_repo_file "voice-studio/voice-studio-icon.png" "$STAGE/voice-studio-icon.png"
@@ -144,7 +145,7 @@ download_repo_file "scripts/voice-studio/validate-v2.py" "$STAGE/validate-v2.py"
 download_optional_repo_file "watermark-my-logo-full.png" "$STAGE/watermark-my-logo-full.png"
 download_optional_repo_file "app-icon-512.png" "$STAGE/app-icon-512.png"
 
-for required in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for required in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
     echo "FEHLER: Update-Datei fehlt oder ist leer: $required"
     exit 1
