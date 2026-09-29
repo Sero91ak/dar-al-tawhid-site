@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v91";
+const CACHE_NAME="dar-al-tawhid-kids-v92";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -83,12 +83,8 @@ self.addEventListener("fetch",function(event){
   var url=new URL(request.url);
   if(!isKidsRequest(url))return;
 
-  if(request.mode==="navigate"||request.destination==="document"){
-    event.respondWith(networkFirst(request,"/kids/start.html"));
-    return;
-  }
-  if(url.pathname==="/kids/start"||url.pathname==="/kids/start.html"||url.pathname==="/kids/start/"){
-    event.respondWith(networkFirst(request,"/kids/start.html"));
+  if(request.mode==="navigate"||request.destination==="document"||url.pathname==="/kids/start"||url.pathname==="/kids/start.html"||url.pathname==="/kids/start/"||url.pathname==="/kids/"||url.pathname==="/kids/index.html"||url.pathname==="/kids/shell.html"){
+    event.respondWith(fetch(request,{cache:"no-store"}));
     return;
   }
   if(url.pathname.indexOf("/kids/assets/kids-cinema/")===0&&url.pathname.indexOf(".mp4")>0){
