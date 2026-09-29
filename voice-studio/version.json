@@ -1,10 +1,10 @@
 {
-  "version": "2.9.37",
-  "updatedAt": "2026-09-29T16:12:00+02:00",
-  "deployTrigger": "voice-studio-2.9.37-alphabet-linguistic-review",
+  "version": "2.9.38",
+  "updatedAt": "2026-09-29T16:50:00+02:00",
+  "deployTrigger": "voice-studio-2.9.38-force-review-update",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v47",
+  "cache": "dar-voice-studio-v48",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -557,10 +557,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "5d9802dc804b818bbb9b6f77e400f52657dec3f7",
+  "releaseRef": "c36e3742a4cf4b542ce9c8486732be3b04f6d5f1",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Nach vollständigem Praxistest wurden zahlreiche Aussprachefehler und stumme Alphabet-Clips festgestellt. Technische Audio-QA wird deshalb nicht mehr als sprachliche Verifikation behandelt. Alle 140 automatisch erzeugten Serhat-Clips bleiben als technische Kandidaten erhalten, wurden aber aus der Live-Freigabe zurückgesetzt. Voice Studio 2.9.37 führt eine echte sprachliche Einzelprüfung ein: vorhandenen Serhat-Clip anhören, vorhandene menschliche Referenz vergleichen, nur korrekte Clips bestätigen; falsche oder stumme Clips als neue Variante erzeugen. Die Kids-App spielt nur noch sprachlich bestätigte Alphabet-Master ab.",
+  "updateRepairReason": "2.9.38 erzwingt einen eindeutig neueren nativen Release, damit Installationen mit UI 2.9.36 oder einem bereits auf 2.9.37 markierten Bundle die Alphabet-Linguistik-Prüfung sicher als Update angeboten bekommen. Die 2.9.37 Review-Logik bleibt unverändert enthalten.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -812,5 +812,12 @@
     "reviewEndpoint": "/alphabet/review-approve",
     "regenerateWrongOrSilent": true,
     "xcodeRequired": false
+  },
+  "updateVisibilityRepair": {
+    "forceNewSemanticVersion": true,
+    "previousUiVersion": "2.9.36",
+    "previousBundleVersionPossibly": "2.9.37",
+    "targetVersion": "2.9.38",
+    "alphabetReviewIncluded": true
   }
 }
