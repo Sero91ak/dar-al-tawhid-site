@@ -454,16 +454,64 @@ async function proxyAdhanAudio(request, url) {
   if (!match) return null;
   let file = decodeURIComponent(match[1] || "");
   if (!file || file.indexOf("..") >= 0 || file.indexOf("/") >= 0) return audioFail(400, "Bad adhan request");
-  const upstream = `https://raw.githubusercontent.com/Kiwifu/adhan-mp3/main/${encodeURIComponent(file).replace(/%2F/g, "/")}`;
+  const encoded = encodeURIComponent(file).replace(/%2F/g, "/");
+  const upstreams = [
+    `https://raw.githubusercontent.com/Kiwifu/adhan-mp3/main/${encoded}`,
+    `https://cdn.jsdelivr.net/gh/Kiwifu/adhan-mp3@main/${encoded}`
+  ];
   try {
-    const { res, used } = await fetchAudioUpstream([upstream], request);
-    if (!res || !(res.ok || res.status === 206)) return audioFail(502, "Adhan upstream unavailable");
-    const out = audioOkHeaders(res, used);
-    out.set("X-Dar-Adhan-Audio", used);
-    if (request.method === "HEAD") {
-      return new Response(null, { status: res.status === 206 ? 206 : 200, headers: out });
+    let body = null;
+    let used = upstreams[0];
+    for (const upstream of upstreams) {
+      used = upstream;
+      const res = await fetch(upstream, {
+        method: "GET",
+        headers: {
+          Accept: "audio/mpeg,audio/*;q=0.9,*/*;q=0.8",
+          "User-Agent": "DarAlTawhidTV"
+        },
+        cf: { cacheEverything: true, cacheTtlByStatus: { "200": 86400, "400-599": 0 } }
+      });
+      if (!res || !res.ok) continue;
+      const buf = await res.arrayBuffer();
+      if (buf && buf.byteLength > 1024) {
+        body = buf;
+        break;
+      }
     }
-    return new Response(res.body, { status: res.status, statusText: res.statusText, headers: out });
+    if (!body) return audioFail(502, "Adhan upstream unavailable");
+    const size = body.byteLength;
+    const range = request.headers.get("Range") || request.headers.get("range") || "";
+    const rangeMatch = range.match(/bytes=(\d*)-(\d*)/);
+    let start = 0;
+    let end = size - 1;
+    let status = 200;
+    if (rangeMatch) {
+      start = rangeMatch[1] ? Number(rangeMatch[1]) : 0;
+      end = rangeMatch[2] ? Number(rangeMatch[2]) : size - 1;
+      if (Number.isNaN(start) || start < 0) start = 0;
+      if (Number.isNaN(end) || end >= size) end = size - 1;
+      if (start > end) start = 0;
+      status = 206;
+    }
+    const headers = {
+      "Content-Type": "audio/mpeg",
+      "Accept-Ranges": "bytes",
+      "Access-Control-Allow-Origin": "*",
+      "Cache-Control": "public, max-age=86400, must-revalidate",
+      "X-Dar-Adhan-Audio": used
+    };
+    if (status === 206) {
+      headers["Content-Range"] = "bytes " + start + "-" + end + "/" + size;
+      headers["Content-Length"] = String(end - start + 1);
+    } else {
+      headers["Content-Length"] = String(size);
+    }
+    if (request.method === "HEAD") {
+      return new Response(null, { status, headers });
+    }
+    const slice = status === 206 ? body.slice(start, end + 1) : body;
+    return new Response(slice, { status, headers });
   } catch (eAdhan) {
     return audioFail(502, "Adhan proxy error");
   }
