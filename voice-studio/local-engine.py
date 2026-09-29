@@ -54,6 +54,8 @@ PENDING_AUDIO_DIR.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_MANIFEST=MASTER_AUDIO_DIR/"manifest.json"
 LEARNING_HOME=VOICE_HOME/"PronunciationLearning"
 LEARNING_PENDING_DIR=LEARNING_HOME/"pending"
+ALPHABET_MASTER_HOME=VOICE_HOME/"AlphabetMasters"
+ALPHABET_MASTER_STATE=ALPHABET_MASTER_HOME/"local-masters.json"
 USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
 USER_OVERRIDES_BACKUP_DIR=LEARNING_HOME/"backups"
 USER_OVERRIDES_BACKUP=USER_OVERRIDES_BACKUP_DIR/"user-overrides.latest.json"
@@ -68,6 +70,7 @@ RENDER_CACHE_DIR=VOICE_HOME/"RenderCache"/"v3"
 CONTEXT_BRIDGE_CACHE_DIR=RENDER_CACHE_DIR/"context-bridge-v1"
 LEARNING_HOME.mkdir(parents=True,exist_ok=True)
 LEARNING_PENDING_DIR.mkdir(parents=True,exist_ok=True)
+ALPHABET_MASTER_HOME.mkdir(parents=True,exist_ok=True)
 RENDER_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 CONTEXT_BRIDGE_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_URL=os.environ.get(
@@ -79,6 +82,7 @@ MASTER_LIBRARY_URL=os.environ.get(
     "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/data/pronunciation/islamic-master-library.json"
 )
 LEARNING_LOCK=threading.Lock()
+ALPHABET_MASTER_LOCK=threading.Lock()
 LEARNING_PREVIEWS={}
 
 def load_json_file(path:Path,default):
@@ -1045,6 +1049,75 @@ def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
         "metrics":metrics,
         "voice":"serhat-local-owner-voice"
     }
+
+def alphabet_master_state():
+    state=load_json_file(ALPHABET_MASTER_STATE,{"schemaVersion":1,"masters":[]})
+    masters=list((state or {}).get("masters") or [])
+    return {
+        "schemaVersion":1,
+        "masters":masters,
+        "count":len(masters),
+        "persistentPath":str(ALPHABET_MASTER_STATE),
+    }
+
+def confirm_alphabet_voice_preview(
+    preview_id:str,slot_id:str,letter_id:str,kind:str,key:str,text:str
+):
+    preview_id=str(preview_id or "").strip()
+    if not re.fullmatch(r"[0-9a-f]{16}",preview_id):
+        raise ValueError("Der Serhat-Kandidat ist nicht mehr gültig. Bitte neu erzeugen.")
+    slot_id=str(slot_id or "").strip().lower()
+    if not re.fullmatch(r"[a-z0-9_-]{3,80}",slot_id):
+        raise ValueError("Ungültiger Alphabet-Slot.")
+    letter_id=str(letter_id or "").strip().lower()
+    kind=str(kind or "").strip().lower()
+    key=str(key or "").strip().lower()
+    value=str(text or "").strip()
+    if not letter_id or kind not in ("name","harakat","word") or not value:
+        raise ValueError("Alphabet-Master ist unvollständig.")
+
+    src=LEARNING_PENDING_DIR/f"alphabet-{preview_id}.wav"
+    if not src.exists() or src.stat().st_size<=44:
+        raise ValueError("Der erzeugte Serhat-Kandidat fehlt. Bitte neu erzeugen.")
+
+    filename=re.sub(r"[^a-z0-9_-]+","-",slot_id).strip("-")+".wav"
+    dst=ALPHABET_MASTER_HOME/filename
+    tmp=dst.with_suffix(".tmp.wav")
+    shutil.copy2(src,tmp)
+    os.replace(tmp,dst)
+
+    master={
+        "slotId":slot_id,
+        "letterId":letter_id,
+        "kind":kind,
+        "key":key,
+        "text":value,
+        "verified":True,
+        "sourceVoice":"authorized-owner-voice",
+        "voiceProfileId":"serhat-owner-voice-2026",
+        "sourceType":"local-owner-confirmed-master",
+        "url":"/alphabet/master/"+filename,
+        "filename":filename,
+        "confirmedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+    }
+    with ALPHABET_MASTER_LOCK:
+        state=alphabet_master_state()
+        masters=[
+            dict(item) for item in (state.get("masters") or [])
+            if str((item or {}).get("slotId") or "")!=slot_id
+        ]
+        masters.append(master)
+        masters.sort(key=lambda x:str(x.get("slotId") or ""))
+        atomic_write_json(ALPHABET_MASTER_STATE,{
+            "schemaVersion":1,
+            "updatedAt":master["confirmedAt"],
+            "masters":masters,
+        })
+    try:
+        src.unlink(missing_ok=True)
+    except Exception:
+        pass
+    return master
 
 def confirm_learning_preview(preview_id:str,input_term:str=""):
     with LEARNING_LOCK:
@@ -4222,6 +4295,13 @@ class H(BaseHTTPRequestHandler):
             })
         elif p=="/learning/state":
             self.send_json(200,{"ok":True,**learning_state()})
+        elif p=="/alphabet/state":
+            self.send_json(200,{"ok":True,**alphabet_master_state()})
+        elif p.startswith("/alphabet/master/"):
+            name=p.rsplit("/",1)[-1]
+            if not re.fullmatch(r"[a-z0-9_-]+\.wav",name):
+                return self.send_json(400,{"ok":False,"error":"Ungültiger Master-Dateiname."})
+            self.send_file(ALPHABET_MASTER_HOME/name,"audio/wav")
         elif p=="/publish-audio":
             try:
                 st=get_status()
@@ -4371,6 +4451,20 @@ class H(BaseHTTPRequestHandler):
                 return
             except Exception as e:
                 return self.send_json(400,{"ok":False,"error":str(e),"status":get_status()})
+
+        if p=="/alphabet/confirm":
+            try:
+                master=confirm_alphabet_voice_preview(
+                    str(data.get("previewId","")),
+                    str(data.get("slotId","")),
+                    str(data.get("letterId","")),
+                    str(data.get("kind","")),
+                    str(data.get("key","")),
+                    str(data.get("text","")),
+                )
+                return self.send_json(200,{"ok":True,"master":master,**alphabet_master_state()})
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e)})
 
         if p=="/confirm-core-audio":
             try:
