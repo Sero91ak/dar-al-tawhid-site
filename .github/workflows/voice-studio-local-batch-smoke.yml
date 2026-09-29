@@ -65,6 +65,9 @@ jobs:
               'def load_quiz_manifest',
               'Kids data self-healed',
               'legacy JSON terminator repaired',
+              'honorific_flow_repaired',
+              'honorificFlowRepairTriggerMs',
+              'honorificFlowRepairMaxMs',
               'quiz-audio.json',
               'kids-quiz-audio',
           ]
@@ -78,7 +81,7 @@ jobs:
           required_html=[
               'id="alphabetPackBatchBtn"',
               'id="alphabetPackBatchState"',
-              "VOICE STUDIO 2.9.33",
+              "VOICE STUDIO 2.9.34",
           ]
           failures=[]
           for label,src,markers in (
