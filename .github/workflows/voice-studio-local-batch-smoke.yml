@@ -44,6 +44,9 @@ jobs:
               'manualPerClipApprovalRequired',
               'def _quiz_voice_texts',
               'def _build_quiz_owner_voice_pack',
+              'def _generate_quiz_voice_master',
+              'def _quiz_bounded_parts',
+              'QuizMasters',
               'quiz-audio.json',
               'kids-quiz-audio',
           ]
@@ -57,7 +60,7 @@ jobs:
           required_html=[
               'id="alphabetPackBatchBtn"',
               'id="alphabetPackBatchState"',
-              "VOICE STUDIO 2.9.30",
+              "VOICE STUDIO 2.9.31",
           ]
           failures=[]
           for label,src,markers in (
