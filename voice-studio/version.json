@@ -1,10 +1,10 @@
 {
-  "version": "2.9.38",
-  "updatedAt": "2026-09-29T16:50:00+02:00",
-  "deployTrigger": "voice-studio-2.9.38-force-review-update",
+  "version": "2.9.39",
+  "updatedAt": "2026-09-29T16:58:00+02:00",
+  "deployTrigger": "voice-studio-2.9.39-fusha-strict-alphabet",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v48",
+  "cache": "dar-voice-studio-v49",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -557,10 +557,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "c36e3742a4cf4b542ce9c8486732be3b04f6d5f1",
+  "releaseRef": "14833ec77e121e5871887be7f65a9e0e42c69f95",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "2.9.38 erzwingt einen eindeutig neueren nativen Release, damit Installationen mit UI 2.9.36 oder einem bereits auf 2.9.37 markierten Bundle die Alphabet-Linguistik-Prüfung sicher als Update angeboten bekommen. Die 2.9.37 Review-Logik bleibt unverändert enthalten.",
+  "updateRepairReason": "Alphabet-Produktion wurde auf Fuṣḥā-Strengmodus umgestellt. Alle 28 Buchstaben tragen jetzt kanonische MSA/Fuṣḥā-Phonemziele; Fatḥah/Kasrah/Ḍammah werden nicht mehr als einzelnes riskantes Glyph gerendert, sondern dreifach mit identischem Ziel gesprochen, ein sauberer Einzellaut wird akustisch isoliert und anschließend erneut technisch geprüft. Bis zu vier Varianten werden erzeugt und nur ein technisch sauberer Kandidat angeboten. Technische QA bleibt ausdrücklich getrennt von der sprachlichen Freigabe.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -819,5 +819,25 @@
     "previousBundleVersionPossibly": "2.9.37",
     "targetVersion": "2.9.38",
     "alphabetReviewIncluded": true
+  },
+  "alphabetFushaStrict": {
+    "enabled": true,
+    "canonicalLetters": 28,
+    "totalSlots": 140,
+    "canonicalIpaTargets": true,
+    "harakatShortVowels": [
+      "a",
+      "i",
+      "u"
+    ],
+    "harakatRepeatedRenderCount": 3,
+    "harakatTokenIsolation": true,
+    "harakatPostExtractionQa": true,
+    "candidateAttempts": 4,
+    "dialectVariantsAccepted": false,
+    "automaticLinguisticApproval": false,
+    "humanReferenceSlotsCurrently": 49,
+    "humanReviewStillRequiredWhenNoAuthoritativeReference": true,
+    "technicalQaNeverEqualsPronunciationApproval": true
   }
 }
