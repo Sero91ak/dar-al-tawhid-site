@@ -5,6 +5,7 @@ const WORKER_DEFAULT="https://dar-admin-publisher.sero91ak.workers.dev";
 const WORKER_URL_KEY="darAdminWorkerPublishUrlV1";
 const WORKER_SECRET_KEY="darAdminWorkerSecretV1";
 const TARGET_VOICE="serhat-owner-voice-2026";
+const ALPHABET_GENERATION_PROFILE="fusha-strict-v2";
 
 let manifest=null;
 let current=null;
@@ -449,8 +450,8 @@ function setBatchUi(state){
   if(btn){
     btn.disabled=running;
     btn.textContent=running
-      ?"Gesamtes Serhat-Paket wird erzeugt …"
-      :"Alphabet + Quiz + Begrüßung automatisch erzeugen";
+      ?"Fuṣḥā-Paket wird neu erzeugt …"
+      :"Fuṣḥā-Alphabet + Quiz + Begrüßung erzeugen";
   }
   if(!line)return;
 
@@ -475,12 +476,12 @@ function setBatchUi(state){
     const published=Boolean(state?.repoPublished);
     const publishMsg=String(state?.repoPublishMessage||state?.repoPublishError||"").trim();
     line.textContent=published
-      ?"Fertig: Alphabet, kompletter Quiz-Bereich und Begrüßung wurden mit deiner Serhat-Stimme erzeugt und direkt in die Kids-App übertragen."
+      ?"Fertig: Fuṣḥā-Alphabet, kompletter Quiz-Bereich und Begrüßung wurden mit deiner Serhat-Stimme erzeugt und direkt in die Kids-App übertragen."
       :"Audio-Paket vollständig erzeugt. "+(publishMsg||"Der automatische GitHub-Push ist auf diesem Mac noch nicht angemeldet.");
     line.style.color=published?"var(--green)":"var(--amber)";
     return;
   }
-  line.textContent="Bereit: lokale Serhat Engine erzeugt das komplette Kids-Stimmenpaket automatisch.";
+  line.textContent="Bereit: Fuṣḥā-Strengmodus erzeugt alle 140 Alphabet-Kandidaten mit der aktuellen Aussprache-Engine neu.";
   line.style.color="var(--muted)";
 }
 async function readBatchState(){
@@ -527,7 +528,7 @@ async function startFullBatch(auto=false){
     if(!r.ok||d?.ok===false)throw Error(d?.error||"Komplettes Serhat-Paket konnte nicht gestartet werden.");
     setBatchUi(d);
     setMsg(
-      "Automatik läuft: Alif bis Yāʾ, Fatḥah/Kasrah/Ḍammah, Beispielwörter, der komplette Kids-Quiz-Bereich und die Begrüßung werden mit deiner Serhat-Stimme erzeugt. Nur technische QA-Fehler stoppen den Lauf.",
+      "Fuṣḥā-Neuerzeugung läuft: Alle 140 Alphabet-Kandidaten werden mit der aktuellen Strenglogik neu erstellt; alte Kandidaten aus früheren Engines werden nicht wiederverwendet. Quiz und Begrüßung bleiben im Gesamtpaket enthalten.",
       "good"
     );
     beginBatchPolling();
@@ -543,7 +544,13 @@ async function maybeAutoStartFullBatch(){
     beginBatchPolling();
     return;
   }
-  if(state?.phase==="complete"&&Number(state?.completed||0)>=226&&Number(state?.total||0)>=226)return;
+  const profile=String(state?.generationProfile||"");
+  if(
+    state?.phase==="complete" &&
+    Number(state?.completed||0)>=226 &&
+    Number(state?.total||0)>=226 &&
+    profile===ALPHABET_GENERATION_PROFILE
+  )return;
   await startFullBatch(true);
 }
 
@@ -559,7 +566,7 @@ loadManifest().then(()=>{
   renderCurrent();
   if(!manifest)return;
   if(current){
-    setMsg("Die 140 Serhat-Clips sind technische Kandidaten. Wegen festgestellter Aussprachefehler muss jeder Lernclip sprachlich geprüft werden; bestehende Kandidaten werden wiederverwendet.");
+    setMsg("Fuṣḥā-Strengmodus aktiv. Kandidaten aus älteren Alphabet-Engines werden automatisch neu erzeugt; nur Kandidaten aus "+ALPHABET_GENERATION_PROFILE+" dürfen wiederverwendet werden.");
   }else{
     setMsg("Alle Alphabet-/Ḥarakāt-/Wort-Clips sind sprachlich bestätigt. Die Aussprache-Referenzen bleiben separat erhalten.","good");
   }
