@@ -22,6 +22,7 @@
   var meterRaf = 0;
   var analyser = null;
   var audioCtx = null;
+  var resumeGlobalOnClose = false;
 
   function $(id) { return document.getElementById(id); }
   function esc(s) {
@@ -636,6 +637,11 @@
 
   function open(surah, ayah) {
     ensureRoot();
+    if (!state.open) {
+      try {
+        resumeGlobalOnClose = !!(window.DARQuranPlayer && typeof window.DARQuranPlayer.pauseForLearnStudio === "function" && window.DARQuranPlayer.pauseForLearnStudio());
+      } catch (eFocus) { resumeGlobalOnClose = false; }
+    }
     var store = readStore();
     var s = Number(surah) || Number(store.surah) || 1;
     var a = Number(ayah) || Number(store.ayah) || 1;
@@ -651,6 +657,12 @@
     var el = $("dqlRoot");
     if (el) el.classList.remove("is-open");
     lockBg(false);
+    if (resumeGlobalOnClose) {
+      try {
+        if (window.DARQuranPlayer && typeof window.DARQuranPlayer.resumeAfterLearnStudio === "function") window.DARQuranPlayer.resumeAfterLearnStudio(true);
+      } catch (eResume) {}
+    }
+    resumeGlobalOnClose = false;
   }
 
   document.addEventListener("visibilitychange", function () {
