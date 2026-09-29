@@ -9,7 +9,7 @@
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
 <script src="/test/assets/dar-noble-3d-icons.js?v=1108"></script><!-- DAR_NOBLE_3D_HEAD -->
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1133";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1134";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1060";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 
 <script>
@@ -20988,6 +20988,7 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 <div class="app">
   <section class="top-shell theme-hero-shell">
     <header class="header theme-hero-surface">
+      <div class="dar-home-library-stage dar-home-library-stage--hero" aria-hidden="true"><img src="/test/assets/dar-3d-icons/dar-home-hero-library-4k.png?v=1134" alt="" decoding="async"></div>
       <div class="header-row header-row--brand-only">
         <div class="brand">
           <div class="brand-kicker-row">
@@ -27183,14 +27184,14 @@ function renderHomePremiumQuickAccess(){
 function renderHomeQuranHero(){
   const prog=getPreferredQuranProgress();
   if(!prog){
-    return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><span class="home-v380-quran-hero__mark" aria-hidden="true">${typeof window.dar3dIconMarkup==="function"?window.dar3dIconMarkup("quran"):""}</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__title">Qurʾān weiterlesen</span></div></button>`;
+  return `<div class="home-v380-quran-hero-wrap"><div class="dar-home-library-stage dar-home-library-stage--quran" aria-hidden="true"><img src="/test/assets/dar-3d-icons/dar-home-section-quran.png?v=1134" alt="" decoding="async"></div><button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-nav="quran" aria-label="Qurʾān-Lesung beginnen"><span class="home-v380-quran-hero__mark" aria-hidden="true">${typeof window.dar3dIconMarkup==="function"?window.dar3dIconMarkup("quran"):""}</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__title">Qurʾān weiterlesen</span></div></button></div>`;
   }
   const ay=Math.max(1,Number(prog.ayahNumber)||1);
   const target=`${esc(prog.surahNumber)}:${esc(ay)}`;
   const meta=quranContinueMetaLine(prog);
   const when=formatQuranProgressTime(prog.updatedAt);
   const aria=`Qurʾān weiterlesen${meta?`. ${meta}`:""}${when?`. Zuletzt ${when}`:""}`;
-  return `<button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-quran-continue="${target}" aria-label="${esc(aria)}"><span class="home-v380-quran-hero__mark" aria-hidden="true">${typeof window.dar3dIconMarkup==="function"?window.dar3dIconMarkup("quran"):""}</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__title">Qurʾān weiterlesen</span></div><div class="home-v380-quran-hero__resume">${meta?`<span class="home-v380-quran-hero__meta">${esc(meta)}</span>`:""}${when?`<span class="home-v380-quran-hero__when">Zuletzt ${esc(when)}</span>`:""}</div></button>`;
+  return `<div class="home-v380-quran-hero-wrap"><div class="dar-home-library-stage dar-home-library-stage--quran" aria-hidden="true"><img src="/test/assets/dar-3d-icons/dar-home-section-quran.png?v=1134" alt="" decoding="async"></div><button type="button" class="home-v380-quran-hero home-v380-quran-hero--compact home-v380-quran-hero--reading dar-click-glow" data-quran-continue="${target}" aria-label="${esc(aria)}"><span class="home-v380-quran-hero__mark" aria-hidden="true">${typeof window.dar3dIconMarkup==="function"?window.dar3dIconMarkup("quran"):""}</span><div class="home-v380-quran-hero__body"><span class="home-v380-quran-hero__title">Qurʾān weiterlesen</span></div><div class="home-v380-quran-hero__resume">${meta?`<span class="home-v380-quran-hero__meta">${esc(meta)}</span>`:""}${when?`<span class="home-v380-quran-hero__when">Zuletzt ${esc(when)}</span>`:""}</div></button></div>`;
 }
 function renderHomeDailyDuaRow(){
   const d=dailyDua();
@@ -27217,7 +27218,7 @@ function renderHomeTodaySection(){
   if(!highlights&&!ramadan)return"";
   const ramadanWrap=ramadan?`<div class="home-v380-today__season">${ramadan}</div>`:"";
   const highlightsWrap=highlights?`<div class="home-v380-today__highlights">${highlights}</div>`:"";
-  return `<section class="home-v380-section home-today-cards" aria-labelledby="homeTodayTitle"><h2 class="home-v380-section-title" id="homeTodayTitle">Heute für dich</h2>${ramadanWrap}${highlightsWrap}</section>`;
+  return `<section class="home-v380-section home-today-cards" aria-labelledby="homeTodayTitle"><div class="dar-home-library-stage dar-home-library-stage--today" aria-hidden="true"><img src="/test/assets/dar-3d-icons/dar-home-section-today.png?v=1134" alt="" decoding="async"></div><h2 class="home-v380-section-title" id="homeTodayTitle">Heute für dich</h2>${ramadanWrap}${highlightsWrap}</section>`;
 }
 function homeDiscoverPosts(excludeIds=new Set()){
   const rec=recommendedPost();
@@ -27685,14 +27686,14 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1133";
+const APP_BUILD_ID="app-shell-v1134";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
 function stripFeedPageHeader(){document.querySelectorAll("#appView>.view-head").forEach(el=>el.remove())}
 function initPremiumFeedTab(force){if(currentRoute.view!=="feed")return;stripFeedPageHeader();const run=()=>{if(!window.DAR_PREMIUM_FEED)return false;(window.DAR_PREMIUM_FEED.onAppReady||window.DAR_PREMIUM_FEED.rebuild).call(window.DAR_PREMIUM_FEED,{force:!!force});return true};if(!run()){requestAnimationFrame(()=>{stripFeedPageHeader();if(!run())setTimeout(()=>{stripFeedPageHeader();if(!run())setTimeout(run,400)},150)})}}
 window.addEventListener("load",()=>{if(readRoute().view==="feed")initPremiumFeedTab(true)});
-function renderHome(){return`${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderHomeQuranHero()}${renderHomePremiumQuickAccess()}${renderOfflineBox()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
+function renderHome(){return`${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell"><div class="dar-home-library-stage dar-home-library-stage--page" aria-hidden="true"><img src="/test/assets/dar-3d-icons/dar-home-section-knowledge.png?v=1134" alt="" decoding="async"></div>${renderHomeQuranHero()}${renderHomePremiumQuickAccess()}${renderOfflineBox()}${renderHomeTodaySection()}${renderHomeDiscoverSection()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);let idx=0;const row=([name,count])=>{idx+=1;return`<article class="topics-theme-card dua-theme-card" data-nav="topic" data-value="${esc(name)}"><span class="topics-theme-card__idx dua-theme-card__idx" aria-hidden="true">${String(idx).padStart(2,"0")}</span><div class="topics-theme-card__icon dua-theme-card__icon" aria-hidden="true"><span class="emoji-emblem">${topicGlyph(name)}</span></div><div class="topics-theme-card__body dua-theme-card__body"><h3>${esc(name)}</h3><p class="topics-theme-card__count dua-theme-card__count">${count} Beiträge</p></div><span class="topics-theme-card__chev dua-theme-card__chev" aria-hidden="true">›</span></article>`};const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="topics-theme-grid grid-list" aria-label="${esc(title)}">${items.map(row).join("")}</div></section>`:"";return`${renderStagingBanner()}<div class="topics-hub">${setPageHeader("Beiträge","Aussagen mit Quellen und Nachweisen","Beiträge")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid topic-collection"></div></section><div class="topics-hub__label"><b>Themen</b><span>${entries.length} Bereiche</span></div>${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}</div>`}
 function renderScholars(){const items=buildScholarCatalog();if(window.DARScholarsIndex&&typeof window.DARScholarsIndex.renderScholars==="function")return window.DARScholarsIndex.renderScholars(items,esc);return`<section class="scholars-index"><header class="scholars-index__header"><p class="scholars-index__eyebrow">PERSONEN &amp; ÜBERLIEFERER</p><h1 class="scholars-index__title">Gelehrte</h1><p class="scholars-index__subtitle">Beiträge nach Ṣaḥābah, Tābiʿīn, Imāmen und frühen Gelehrten</p></header><div class="scholars-index__loading">Gelehrte werden geladen…</div></section>`}
 function renderFiltered(type,value){let filtered,displayValue=value;if(type==="scholar"){const ref=resolveScholarRef(value);displayValue=ref.label;filtered=postsForScholarKey(ref.key)}else if(type==="category"){displayValue=normalizePostCategory(value);filtered=posts.filter(post=>normalizePostCategory(post.category)===normalizePostCategory(value))}else{filtered=posts.filter(post=>String(post[type]||"")===String(value))}filtered=[...filtered].sort(comparePostsNewestFirst);const visible=filtered.slice(0,FILTER_RENDER_LIMIT);const hidden=Math.max(0,filtered.length-visible.length);const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};const routeMap={category:"topic",scholar:"scholar",book:"book"};const url=routeUrl(routeMap[type]||"topic",type==="scholar"?resolveScholarRef(value).key:value);const desc=`${filtered.length} Beiträge im Bereich ${displayValue} auf DĀR AL TAWḤĪD.`;return`<div class="topic-collection-page">${setHeader(displayValue,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid topic-collection" aria-label="${esc(displayValue)}">${visible.length?visible.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}${hidden?`<div class="empty">${hidden} weitere Beiträge in dieser Kategorie – nutze die Suche zum Eingrenzen.</div>`:""}</section></div>`}
@@ -36316,39 +36317,65 @@ body.is-home-route .header-prayer-hub__status>span+span{
   body.is-home-route .header-prayer-hub__status{font-size:clamp(8.4px,2vw,10px)!important;padding-top:7px!important}
 }
 </style>
-<style id="home-library-stage-v1133">
-/* TEST v1133 · Startseite: sichtbare Bibliothek oben, darunter liniengetrennte Bereiche, Glow statt Pfeile */
-html[data-theme] body.is-home-route .top-shell.theme-hero-shell,
-body.is-home-route .top-shell.theme-hero-shell{
-  margin-bottom:8px!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  overflow:visible!important;
-}
+<style id="home-library-stage-v1134">
+/* TEST v1134 · echtes IMG im Header, weil iOS background-image:none setzt */
+body:not(.is-home-route) .dar-home-library-stage--hero{display:none!important}
+html.dar-ios-native-app body.is-home-route .header,
+html.dar-ios-native-app body.is-home-route .header.theme-hero-surface,
 html[data-theme] body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface,
 body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface{
   position:relative!important;
   isolation:isolate!important;
   overflow:hidden!important;
-  border:0!important;
-  border-radius:0 0 22px 22px!important;
-  min-height:clamp(220px,52vw,340px)!important;
-  background:
-    linear-gradient(180deg,color-mix(in srgb,var(--bg,#0b1210) 28%,transparent) 0%,color-mix(in srgb,var(--bg,#0b1210) 42%,transparent) 46%,color-mix(in srgb,var(--bg,#0b1210) 78%,transparent) 100%),
-    linear-gradient(90deg,color-mix(in srgb,var(--bg,#0b1210) 55%,transparent) 0%,color-mix(in srgb,var(--bg,#0b1210) 18%,transparent) 58%,transparent 100%),
-    url("/test/assets/dar-3d-icons/dar-home-hero-library-4k.png") center 42%/cover no-repeat!important;
-  box-shadow:none!important;
+  min-height:clamp(240px,56vw,380px)!important;
 }
-html[data-theme] body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface::before,
-body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface::before{
-  content:""!important;
+html.dar-ios-native-app body.is-home-route .dar-home-library-stage,
+html.dar-ios-native-app body.is-home-route .dar-home-library-stage img,
+html[data-theme] body.is-home-route .dar-home-library-stage,
+body.is-home-route .dar-home-library-stage{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:none!important;
+}
+html.dar-ios-native-app body.is-home-route .dar-home-library-stage,
+html[data-theme] body.is-home-route .dar-home-library-stage,
+body.is-home-route .dar-home-library-stage{
   position:absolute!important;
   inset:0!important;
-  z-index:-1!important;
-  pointer-events:none!important;
-  background:radial-gradient(circle at 72% 38%,color-mix(in srgb,var(--theme-accent,#EED3AE) 10%,transparent),transparent 42%)!important;
+  z-index:0!important;
+  overflow:hidden!important;
+}
+html.dar-ios-native-app body.is-home-route .dar-home-library-stage img,
+html[data-theme] body.is-home-route .dar-home-library-stage img,
+body.is-home-route .dar-home-library-stage img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 38%!important;
+  filter:none!important;
+}
+html[data-theme] body.is-home-route .dar-home-library-stage--hero::after,
+body.is-home-route .dar-home-library-stage--hero::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(180deg,rgba(8,10,9,.28) 0%,rgba(8,10,9,.18) 42%,rgba(8,10,9,.72) 100%)!important;
+}
+html[data-theme] body.is-home-route .header.theme-hero-surface > :not(.dar-home-library-stage),
+body.is-home-route .header.theme-hero-surface > :not(.dar-home-library-stage){
+  position:relative!important;
+  z-index:2!important;
+}
+html[data-theme] body.is-home-route .home-v380-shell,
+body.is-home-route .home-v380-shell,
+html[data-theme] body.is-home-route .home-v380-quran-hero-wrap,
+body.is-home-route .home-v380-quran-hero-wrap,
+html[data-theme] body.is-home-route .home-today-cards,
+body.is-home-route .home-today-cards{
+  position:relative!important;
+  isolation:isolate!important;
 }
 html[data-theme] body.is-home-route #appView.view,
 body.is-home-route #appView.view{
@@ -36559,4 +36586,37 @@ body.is-quran-reader-route.qrc-dock-united .qrc-body{
   padding-bottom:calc(118px + env(safe-area-inset-bottom,0px) + 16px)!important;
 }
 </style>
+<script>
+(function(){
+  var CSS=[
+    "body:not(.is-home-route) .dar-home-library-stage--hero{display:none!important}",
+    "html.dar-ios-native-app body.is-home-route .dar-home-library-stage,",
+    "html.dar-ios-native-app body.is-home-route .dar-home-library-stage img,",
+    "html[data-theme] body.is-home-route .dar-home-library-stage,",
+    "html[data-theme] body.is-home-route .dar-home-library-stage img{display:block!important;visibility:visible!important;opacity:1!important}",
+    "html.dar-ios-native-app body.is-home-route .dar-home-library-stage,",
+    "html[data-theme] body.is-home-route .dar-home-library-stage{position:absolute!important;inset:0!important;z-index:0!important;overflow:hidden!important;pointer-events:none!important}",
+    "html.dar-ios-native-app body.is-home-route .dar-home-library-stage img,",
+    "html[data-theme] body.is-home-route .dar-home-library-stage img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 38%!important;filter:none!important}",
+    "html.dar-ios-native-app body.is-home-route .header.theme-hero-surface,",
+    "html[data-theme] body.is-home-route .header.theme-hero-surface{position:relative!important;overflow:hidden!important;min-height:clamp(240px,56vw,380px)!important}",
+    "html[data-theme] body.is-home-route .header.theme-hero-surface>:not(.dar-home-library-stage){position:relative!important;z-index:2!important}"
+  ].join("");
+  function pin(){
+    var live=document.getElementById("home-library-stage-live-v1134");
+    if(!live){
+      live=document.createElement("style");
+      live.id="home-library-stage-live-v1134";
+    }
+    live.textContent=CSS;
+    document.documentElement.appendChild(live);
+  }
+  pin();
+  document.addEventListener("DOMContentLoaded",pin);
+  window.addEventListener("pageshow",pin);
+  window.addEventListener("hashchange",function(){setTimeout(pin,50)});
+  setTimeout(pin,90);
+  setTimeout(pin,700);
+})();
+</script>
 </html>
