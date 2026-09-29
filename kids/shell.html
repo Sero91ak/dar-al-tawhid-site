@@ -2381,13 +2381,9 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
   opacity:1;pointer-events:auto;
 }
 .k79-video{
-  position:absolute;left:50%;top:50%;
-  width:auto;height:92%;
-  max-width:92%;
-  transform:translate(-50%,-50%) scale(.92);
-  object-fit:contain;object-position:center center;
-  display:block;background:transparent;
-  filter:saturate(1.05) contrast(1.04);
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center center;
+  display:block;background:#14110e;z-index:1;
 }
 .k79-mark{
   position:absolute;left:0;right:0;top:12%;
@@ -2421,13 +2417,18 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
   100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
 }
 .k79-skip{
-  position:absolute;right:14px;top:max(12px,env(safe-area-inset-top));
-  z-index:3;min-height:40px;padding:0 14px;
+  position:absolute;right:16px;top:max(18px,calc(env(safe-area-inset-top,0px) + 12px));
+  z-index:8;min-height:44px;min-width:44px;padding:0 16px;
   border:0;border-radius:999px;
-  background:rgba(20,16,12,.42);color:#f6ead4;
-  font:650 13px/1 "Fredoka",sans-serif;
-  letter-spacing:.04em;
-  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  background:rgba(18,14,10,.72);color:#f6ead4;
+  font:700 15px/1 "Fredoka",sans-serif;
+  letter-spacing:.03em;
+  pointer-events:auto;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+}
+.k79-skip-bottom{
+  top:auto;right:16px;left:16px;
+  bottom:max(18px,calc(env(safe-area-inset-bottom,0px) + 14px));
 }
 .kids-launch-v79.is-ending{animation:k79FadeOut .28s ease forwards;pointer-events:none}
 @keyframes k79FadeOut{to{opacity:0;visibility:hidden}}
@@ -2437,16 +2438,17 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 </head>
 <body>
-<div class="kids-launch-v79" data-kids-launch="v82" aria-hidden="true">
+<div class="kids-launch-v79" data-kids-launch="v83">
   <video id="kidsCinemaV79" class="k79-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture>
-    <source src="/kids/assets/kids-cinema/intro-v74.mp4?v=82" type="video/mp4">
+    <source src="/kids/assets/kids-cinema/intro-v74.mp4?v=83" type="video/mp4">
   </video>
-  <div class="k79-mark" id="kidsLaunchMark">
+  <div class="k79-mark" id="kidsLaunchMark" aria-hidden="true">
     <span class="k79-dar">DĀR AL TAWḤĪD</span>
     <span class="k79-kids">Kids</span>
   </div>
   <button type="button" class="k79-skip" id="kidsLaunchSkip">Überspringen</button>
-  <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-clear.m4a?v=82"></audio>
+  <button type="button" class="k79-skip k79-skip-bottom" id="kidsLaunchSkipBottom">Überspringen</button>
+  <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-serhat-soft.m4a?v=83"></audio>
 </div>
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
@@ -6497,9 +6499,6 @@ fetchCatalog();
     if(started)return;
     started=true;
     if(startupTimer)clearTimeout(startupTimer);
-    try{
-      if(video.currentTime<0.35)video.currentTime=0.35;
-    }catch(eSeek){}
     speakTitle();
     var remaining=8200;
     if(Number.isFinite(video.duration)&&video.duration>0){
@@ -6515,10 +6514,7 @@ fetchCatalog();
   video.playsInline=true;
   video.preload="auto";
 
-  video.addEventListener("loadedmetadata",function(){
-    try{video.currentTime=0.35}catch(e){}
-    tryPlay();
-  },{once:true});
+  video.addEventListener("loadedmetadata",tryPlay,{once:true});
   video.addEventListener("loadeddata",tryPlay,{once:true});
   video.addEventListener("canplay",tryPlay,{once:true});
   video.addEventListener("playing",onPlaying,{once:true});
@@ -6526,13 +6522,18 @@ fetchCatalog();
   video.addEventListener("error",removeLaunch,{once:true});
   video.addEventListener("abort",removeLaunch,{once:true});
 
-  if(skip){
-    skip.addEventListener("click",function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      removeLaunch();
+  function bindSkip(btn){
+    if(!btn)return;
+    ["pointerdown","click","touchend"].forEach(function(ev){
+      btn.addEventListener(ev,function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        removeLaunch();
+      },true);
     });
   }
+  bindSkip(skip);
+  bindSkip(document.getElementById("kidsLaunchSkipBottom"));
   launch.addEventListener("pointerdown",function(e){
     if(e.target&&e.target.closest&&e.target.closest(".k79-skip"))return;
     if(!started)tryPlay();
