@@ -2384,7 +2384,7 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
   object-fit:cover;object-position:center center;
   display:block;background:#000;
 }
-.kids-launch-v79.is-ending{animation:k79FadeOut .28s ease forwards}
+.kids-launch-v79.is-ending{animation:k79FadeOut .28s ease forwards;pointer-events:none}
 @keyframes k79FadeOut{to{opacity:0;visibility:hidden}}
 
 </style>
@@ -2393,8 +2393,8 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 </head>
 <body>
 <div class="kids-launch-v79" data-kids-launch="v79" aria-hidden="true">
-  <video id="kidsCinemaV79" class="k79-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture>
-    <source src="/kids/assets/kids-cinema/intro-v74.mp4?v=79" type="video/mp4">
+  <video id="kidsCinemaV79" class="k79-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture poster="/kids/assets/kids-cinema/poster-v65.jpg">
+    <source src="/kids/assets/kids-cinema/intro-v74.mp4?v=81" type="video/mp4">
   </video>
   <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-serhat.m4a?v=serhat-owner-20260929"></audio>
 </div>
@@ -6473,6 +6473,8 @@ fetchCatalog();
   video.addEventListener("playing",onPlaying,{once:true});
   video.addEventListener("ended",removeLaunch,{once:true});
   video.addEventListener("error",removeLaunch,{once:true});
+  video.addEventListener("stalled",removeLaunch,{once:true});
+  video.addEventListener("abort",removeLaunch,{once:true});
 
   document.addEventListener("visibilitychange",function(){
     if(!document.hidden&&!started)tryPlay();
@@ -6490,7 +6492,8 @@ fetchCatalog();
 
   startupTimer=setTimeout(function(){
     if(!started)removeLaunch();
-  },3200);
+  },15000);
+  setTimeout(removeLaunch,15000);
 })();
 </script>
 
