@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "status": "active",
   "playViaWeb": true,
   "autoplay": true,
@@ -7,86 +7,198 @@
     {
       "id": "Ali_Ibn_Ahmad_Mala_-_HQ_(علي_بن_أحمد_ملا).mp3",
       "name": "ʿAlī ibn Aḥmad Mullā",
+      "location": "al-Masǧid al-Ḥarām · Makkah",
       "isFajr": false,
       "url": "https://dar-al-tawhid.de/adhan/Ali_Ibn_Ahmad_Mala_-_HQ_%28%D8%B9%D9%84%D9%8A_%D8%A8%D9%86_%D8%A3%D8%AD%D9%85%D8%AF_%D9%85%D9%84%D8%A7%29.mp3"
     },
     {
       "id": "Mishary_Al_Afasy_-_HQ_(مشاري_العفاسي).mp3",
       "name": "Mišārī Rāšid al-ʿAfāsī",
+      "location": "Kuwait",
       "isFajr": false,
       "url": "https://dar-al-tawhid.de/adhan/Mishary_Al_Afasy_-_HQ_%28%D9%85%D8%B4%D8%A7%D8%B1%D9%8A_%D8%A7%D9%84%D8%B9%D9%81%D8%A7%D8%B3%D9%8A%29.mp3"
     },
     {
       "id": "Abdulbasit_Abdusamad_1_-_Egypt_(عبد_الباسط_عبد_الصمد_-_مصر).mp3",
       "name": "ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad",
+      "location": "Ägypten",
       "isFajr": false,
       "url": "https://dar-al-tawhid.de/adhan/Abdulbasit_Abdusamad_1_-_Egypt_%28%D8%B9%D8%A8%D8%AF_%D8%A7%D9%84%D8%A8%D8%A7%D8%B3%D8%B7_%D8%B9%D8%A8%D8%AF_%D8%A7%D9%84%D8%B5%D9%85%D8%AF_-_%D9%85%D8%B5%D8%B1%29.mp3"
     },
     {
       "id": "Mohamed_Siddiq_El-Minshawi_-_Egypt_1_(محمد_صديق_المنشاوي_-_مصر).mp3",
       "name": "Muḥammad Ṣiddīq al-Minšāwī",
+      "location": "Ägypten",
       "isFajr": false,
       "url": "https://dar-al-tawhid.de/adhan/Mohamed_Siddiq_El-Minshawi_-_Egypt_1_%28%D9%85%D8%AD%D9%85%D8%AF_%D8%B5%D8%AF%D9%8A%D9%82_%D8%A7%D9%84%D9%85%D9%86%D8%B4%D8%A7%D9%88%D9%8A_-_%D9%85%D8%B5%D8%B1%29.mp3"
     },
     {
       "id": "Mahmoud_Khalil_Al_Hussary_-_Cairo_(محمود_خليل_الحصري_-_القاهرة).mp3",
       "name": "Maḥmūd Ḫalīl al-Ḥuṣarī",
+      "location": "Kairo",
       "isFajr": false,
       "url": "https://dar-al-tawhid.de/adhan/Mahmoud_Khalil_Al_Hussary_-_Cairo_%28%D9%85%D8%AD%D9%85%D9%88%D8%AF_%D8%AE%D9%84%D9%8A%D9%84_%D8%A7%D9%84%D8%AD%D8%B5%D8%B1%D9%8A_-_%D8%A7%D9%84%D9%82%D8%A7%D9%87%D8%B1%D8%A9%29.mp3"
     },
     {
       "id": "Muhammad_Refaat_-_Cairo_(محمد_رفعت_-_القاهرة).mp3",
       "name": "Muḥammad Rifʿat",
+      "location": "Kairo",
       "isFajr": false,
       "url": "https://dar-al-tawhid.de/adhan/Muhammad_Refaat_-_Cairo_%28%D9%85%D8%AD%D9%85%D8%AF_%D8%B1%D9%81%D8%B9%D8%AA_-_%D8%A7%D9%84%D9%82%D8%A7%D9%87%D8%B1%D8%A9%29.mp3"
     },
     {
       "id": "Mahmoud_Ali_Al_Banna_-_Cairo_(محمود_علي_البنا_-_القاهرة).mp3",
       "name": "Maḥmūd ʿAlī al-Bannāʾ",
+      "location": "Kairo",
       "isFajr": false,
       "url": "https://dar-al-tawhid.de/adhan/Mahmoud_Ali_Al_Banna_-_Cairo_%28%D9%85%D8%AD%D9%85%D9%88%D8%AF_%D8%B9%D9%84%D9%8A_%D8%A7%D9%84%D8%A8%D9%86%D8%A7_-_%D8%A7%D9%84%D9%82%D8%A7%D9%87%D8%B1%D8%A9%29.mp3"
     },
     {
       "id": "Mustafa_Ismail_-_Egypt_(مصطفى_إسماعيل_-_مصر).mp3",
       "name": "Muṣṭafā Ismāʿīl",
+      "location": "Ägypten",
       "isFajr": false,
       "url": "https://dar-al-tawhid.de/adhan/Mustafa_Ismail_-_Egypt_%28%D9%85%D8%B5%D8%B7%D9%81%D9%89_%D8%A5%D8%B3%D9%85%D8%A7%D8%B9%D9%8A%D9%84_-_%D9%85%D8%B5%D8%B1%29.mp3"
     },
     {
       "id": "Yasser_Al-Dosari_-_Saudi_Arabia_(ياسر_الدوسري_-_المملكة_العربية_السعودية).mp3",
       "name": "Yāsir ad-Dawsarī",
+      "location": "Saudi-Arabien",
       "isFajr": false,
       "url": "https://dar-al-tawhid.de/adhan/Yasser_Al-Dosari_-_Saudi_Arabia_%28%D9%8A%D8%A7%D8%B3%D8%B1_%D8%A7%D9%84%D8%AF%D9%88%D8%B3%D8%B1%D9%8A_-_%D8%A7%D9%84%D9%85%D9%85%D9%84%D9%83%D8%A9_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9_%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9%29.mp3"
     },
     {
       "id": "Nasser_Al_Qatami_-_HQ_(ناصر_القطامي).mp3",
       "name": "Nāṣir al-Qaṭāmī",
+      "location": "Saudi-Arabien",
       "isFajr": false,
       "url": "https://dar-al-tawhid.de/adhan/Nasser_Al_Qatami_-_HQ_%28%D9%86%D8%A7%D8%B5%D8%B1_%D8%A7%D9%84%D9%82%D8%B7%D8%A7%D9%85%D9%8A%29.mp3"
     },
     {
+      "id": "Muhammad_Khaleel_Raml_-_Al_Haram_Al_Maki_(محمد_خليل_رمل_-_الحرم_المكي).mp3",
+      "name": "Muḥammad Ḫalīl Raml",
+      "location": "al-Masǧid al-Ḥarām · Makkah",
+      "isFajr": false,
+      "url": "https://dar-al-tawhid.de/adhan/Muhammad_Khaleel_Raml_-_Al_Haram_Al_Maki_%28%D9%85%D8%AD%D9%85%D8%AF_%D8%AE%D9%84%D9%8A%D9%84_%D8%B1%D9%85%D9%84_-_%D8%A7%D9%84%D8%AD%D8%B1%D9%85_%D8%A7%D9%84%D9%85%D9%83%D9%8A%29.mp3"
+    },
+    {
+      "id": "Faruq_Abdul_Rahman_Hadrawe_-_Al_Haram_Al_Maki_(فاروق_عبدالرحمن_حضراوي_-_الحرم_المكي).mp3",
+      "name": "Fārūq ʿAbd ar-Raḥmān Ḥaḍrāwī",
+      "location": "al-Masǧid al-Ḥarām · Makkah",
+      "isFajr": false,
+      "url": "https://dar-al-tawhid.de/adhan/Faruq_Abdul_Rahman_Hadrawe_-_Al_Haram_Al_Maki_%28%D9%81%D8%A7%D8%B1%D9%88%D9%82_%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D8%B1%D8%AD%D9%85%D9%86_%D8%AD%D8%B6%D8%B1%D8%A7%D9%88%D9%8A_-_%D8%A7%D9%84%D8%AD%D8%B1%D9%85_%D8%A7%D9%84%D9%85%D9%83%D9%8A%29.mp3"
+    },
+    {
+      "id": "Assem_Bukhrare_-_Al_Haram_Al_Maki_(عاصم_بخراري_-_الحرم_المكي).mp3",
+      "name": "ʿĀṣim Buḫrārī",
+      "location": "al-Masǧid al-Ḥarām · Makkah",
+      "isFajr": false,
+      "url": "https://dar-al-tawhid.de/adhan/Assem_Bukhrare_-_Al_Haram_Al_Maki_%28%D8%B9%D8%A7%D8%B5%D9%85_%D8%A8%D8%AE%D8%B1%D8%A7%D8%B1%D9%8A_-_%D8%A7%D9%84%D8%AD%D8%B1%D9%85_%D8%A7%D9%84%D9%85%D9%83%D9%8A%29.mp3"
+    },
+    {
+      "id": "Nayf_Fedah_-_Al_Haram_Al_Maki_(نايف_فداح_-_الحرم_المكي).mp3",
+      "name": "Nāyif Faddāḥ",
+      "location": "al-Masǧid al-Ḥarām · Makkah",
+      "isFajr": false,
+      "url": "https://dar-al-tawhid.de/adhan/Nayf_Fedah_-_Al_Haram_Al_Maki_%28%D9%86%D8%A7%D9%8A%D9%81_%D9%81%D8%AF%D8%A7%D8%AD_-_%D8%A7%D9%84%D8%AD%D8%B1%D9%85_%D8%A7%D9%84%D9%85%D9%83%D9%8A%29.mp3"
+    },
+    {
+      "id": "Najee_Qazaz_-_Al_Aqsa_Jerusalem_(ناجي_قزاز_-_المسجد_الأقصى_القدس).mp3",
+      "name": "Nāǧī Qazzāz",
+      "location": "al-Masǧid al-Aqṣā · al-Quds",
+      "isFajr": false,
+      "url": "https://dar-al-tawhid.de/adhan/Najee_Qazaz_-_Al_Aqsa_Jerusalem_%28%D9%86%D8%A7%D8%AC%D9%8A_%D9%82%D8%B2%D8%A7%D8%B2_-_%D8%A7%D9%84%D9%85%D8%B3%D8%AC%D8%AF_%D8%A7%D9%84%D8%A3%D9%82%D8%B5%D9%89_%D8%A7%D9%84%D9%82%D8%AF%D8%B3%29.mp3"
+    },
+    {
+      "id": "NurDin_Hamza_Al_Maghriby_-_Al_Aqsa_Jerusalem_(نور_الدين_حمزة_المغربي_-_المسجد_الأقصى_القدس).mp3",
+      "name": "Nūr ad-Dīn Ḥamza al-Maġribī",
+      "location": "al-Masǧid al-Aqṣā · al-Quds",
+      "isFajr": false,
+      "url": "https://dar-al-tawhid.de/adhan/NurDin_Hamza_Al_Maghriby_-_Al_Aqsa_Jerusalem_%28%D9%86%D9%88%D8%B1_%D8%A7%D9%84%D8%AF%D9%8A%D9%86_%D8%AD%D9%85%D8%B2%D8%A9_%D8%A7%D9%84%D9%85%D8%BA%D8%B1%D8%A8%D9%8A_-_%D8%A7%D9%84%D9%85%D8%B3%D8%AC%D8%AF_%D8%A7%D9%84%D8%A3%D9%82%D8%B5%D9%89_%D8%A7%D9%84%D9%82%D8%AF%D8%B3%29.mp3"
+    },
+    {
+      "id": "Ahmd_At-Trablsy_1_(أحمد_الطرابلسي).mp3",
+      "name": "Aḥmad aṭ-Ṭarābulusī",
+      "location": "Kuwait",
+      "isFajr": false,
+      "url": "https://dar-al-tawhid.de/adhan/Ahmd_At-Trablsy_1_%28%D8%A3%D8%AD%D9%85%D8%AF_%D8%A7%D9%84%D8%B7%D8%B1%D8%A7%D8%A8%D9%84%D8%B3%D9%8A%29.mp3"
+    },
+    {
+      "id": "Taha_Al_Junayd_(طه_الجنيد).mp3",
+      "name": "Ṭāhā al-Ǧunayd",
+      "location": "Bahrain",
+      "isFajr": false,
+      "url": "https://dar-al-tawhid.de/adhan/Taha_Al_Junayd_%28%D8%B7%D9%87_%D8%A7%D9%84%D8%AC%D9%86%D9%8A%D8%AF%29.mp3"
+    },
+    {
+      "id": "Wadi_Al_Yamani_(وديع_اليمني).mp3",
+      "name": "Wadīʿ al-Yamanī",
+      "location": "Jemen",
+      "isFajr": false,
+      "url": "https://dar-al-tawhid.de/adhan/Wadi_Al_Yamani_%28%D9%88%D8%AF%D9%8A%D8%B9_%D8%A7%D9%84%D9%8A%D9%85%D9%86%D9%8A%29.mp3"
+    },
+    {
+      "id": "Ahmad_Al_Amade_1_-_Qatar_(أحمد_العمادي_-_قطر).mp3",
+      "name": "Aḥmad al-ʿImādī",
+      "location": "Katar",
+      "isFajr": false,
+      "url": "https://dar-al-tawhid.de/adhan/Ahmad_Al_Amade_1_-_Qatar_%28%D8%A3%D8%AD%D9%85%D8%AF_%D8%A7%D9%84%D8%B9%D9%85%D8%A7%D8%AF%D9%8A_-_%D9%82%D8%B7%D8%B1%29.mp3"
+    },
+    {
       "id": "Adhan_Fajr_Al_Haram_Al_Maki_(أذان_الفجر_الحرم_المكي).mp3",
       "name": "al-Ḥaram al-Makkī · Faǧr",
+      "location": "al-Masǧid al-Ḥarām · Makkah",
       "isFajr": true,
       "url": "https://dar-al-tawhid.de/adhan/Adhan_Fajr_Al_Haram_Al_Maki_%28%D8%A3%D8%B0%D8%A7%D9%86_%D8%A7%D9%84%D9%81%D8%AC%D8%B1_%D8%A7%D9%84%D8%AD%D8%B1%D9%85_%D8%A7%D9%84%D9%85%D9%83%D9%8A%29.mp3"
     },
     {
       "id": "Adhan_Fajr_Al_Haram_Al_Madani_(أذان_الفجر_الحرم_المدني).mp3",
       "name": "al-Ḥaram al-Madanī · Faǧr",
+      "location": "al-Masǧid an-Nabawī · Madīnah",
       "isFajr": true,
       "url": "https://dar-al-tawhid.de/adhan/Adhan_Fajr_Al_Haram_Al_Madani_%28%D8%A3%D8%B0%D8%A7%D9%86_%D8%A7%D9%84%D9%81%D8%AC%D8%B1_%D8%A7%D9%84%D8%AD%D8%B1%D9%85_%D8%A7%D9%84%D9%85%D8%AF%D9%86%D9%8A%29.mp3"
     },
     {
       "id": "Abdulbasit_Abdusamad_6_-_Fajr_Egypt_(عبد_الباسط_عبد_الصمد_-_فجر_مصر).mp3",
       "name": "ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad · Faǧr",
+      "location": "Ägypten",
       "isFajr": true,
       "url": "https://dar-al-tawhid.de/adhan/Abdulbasit_Abdusamad_6_-_Fajr_Egypt_%28%D8%B9%D8%A8%D8%AF_%D8%A7%D9%84%D8%A8%D8%A7%D8%B3%D8%B7_%D8%B9%D8%A8%D8%AF_%D8%A7%D9%84%D8%B5%D9%85%D8%AF_-_%D9%81%D8%AC%D8%B1_%D9%85%D8%B5%D8%B1%29.mp3"
     },
     {
+      "id": "Ahmad_Nawaf_Al_Mejlad_2_-_Fajr_(أحمد_نواف_المجلد_-_الفجر).mp3",
+      "name": "Aḥmad Nawāf al-Maǧlad · Faǧr",
+      "location": "Saudi-Arabien",
+      "isFajr": true,
+      "url": "https://dar-al-tawhid.de/adhan/Ahmad_Nawaf_Al_Mejlad_2_-_Fajr_%28%D8%A3%D8%AD%D9%85%D8%AF_%D9%86%D9%88%D8%A7%D9%81_%D8%A7%D9%84%D9%85%D8%AC%D9%84%D8%AF_-_%D8%A7%D9%84%D9%81%D8%AC%D8%B1%29.mp3"
+    },
+    {
+      "id": "Ahmd_At-Trablsy_-_Fajr_Kuwait_(أحمد_الطرابلسي_-_فجر_الكويت).mp3",
+      "name": "Aḥmad aṭ-Ṭarābulusī · Faǧr",
+      "location": "Kuwait",
+      "isFajr": true,
+      "url": "https://dar-al-tawhid.de/adhan/Ahmd_At-Trablsy_-_Fajr_Kuwait_%28%D8%A3%D8%AD%D9%85%D8%AF_%D8%A7%D9%84%D8%B7%D8%B1%D8%A7%D8%A8%D9%84%D8%B3%D9%8A_-_%D9%81%D8%AC%D8%B1_%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA%29.mp3"
+    },
+    {
       "id": "Mishary_Rashid_Alafasy_3_-_Fajr_Kuwait_(مشاري_راشد_العفاسي_-_فجر_الكويت).mp3",
       "name": "Mišārī Rāšid al-ʿAfāsī · Faǧr",
+      "location": "Kuwait",
       "isFajr": true,
       "url": "https://dar-al-tawhid.de/adhan/Mishary_Rashid_Alafasy_3_-_Fajr_Kuwait_%28%D9%85%D8%B4%D8%A7%D8%B1%D9%8A_%D8%B1%D8%A7%D8%B4%D8%AF_%D8%A7%D9%84%D8%B9%D9%81%D8%A7%D8%B3%D9%8A_-_%D9%81%D8%AC%D8%B1_%D8%A7%D9%84%D9%83%D9%88%D9%8A%D8%AA%29.mp3"
+    },
+    {
+      "id": "Yaseen_Al_Aassaf_2_-_Fajr_Iraq_(ياسين_الأسف_-_فجر_العراق).mp3",
+      "name": "Yāsīn al-ʿAṣṣāf · Faǧr",
+      "location": "Irak",
+      "isFajr": true,
+      "url": "https://dar-al-tawhid.de/adhan/Yaseen_Al_Aassaf_2_-_Fajr_Iraq_%28%D9%8A%D8%A7%D8%B3%D9%8A%D9%86_%D8%A7%D9%84%D8%A3%D8%B3%D9%81_-_%D9%81%D8%AC%D8%B1_%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D9%82%29.mp3"
+    },
+    {
+      "id": "Fajr_Adhan_by_Nasreddine_Toubar_(اذان_الفجر_بصوت_نصر_الدين_طوبار).mp3",
+      "name": "Naṣr ad-Dīn Ṭūbār · Faǧr",
+      "location": "Ägypten",
+      "isFajr": true,
+      "url": "https://dar-al-tawhid.de/adhan/Fajr_Adhan_by_Nasreddine_Toubar_%28%D8%A7%D8%B0%D8%A7%D9%86_%D8%A7%D9%84%D9%81%D8%AC%D8%B1_%D8%A8%D8%B5%D9%88%D8%AA_%D9%86%D8%B5%D8%B1_%D8%A7%D9%84%D8%AF%D9%8A%D9%86_%D8%B7%D9%88%D8%A8%D8%A7%D8%B1%29.mp3"
     }
   ]
 }
