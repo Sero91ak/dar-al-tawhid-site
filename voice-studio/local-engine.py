@@ -111,7 +111,29 @@ ALPHABET_BATCH_STATE={
 def load_json_file(path:Path,default):
     try:
         if path.exists():
-            return json.loads(path.read_text(encoding="utf-8"))
+            raw=path.read_text(encoding="utf-8")
+            try:
+                return json.loads(raw)
+            except json.JSONDecodeError:
+                # 2.9.26–2.9.32 konnten bei atomaren JSON-Schreibvorgängen
+                # versehentlich die zwei Literalzeichen "\\n" hinter ein
+                # ansonsten gültiges JSON setzen. Diesen exakt bekannten Altfall
+                # einmalig reparieren; sonst niemals Daten stillschweigend ändern.
+                repaired=raw
+                changed=False
+                while repaired.endswith("\\n"):
+                    repaired=repaired[:-2]
+                    changed=True
+                if changed:
+                    repaired=repaired.rstrip()+"\n"
+                    parsed=json.loads(repaired)
+                    try:
+                        path.write_text(repaired,encoding="utf-8")
+                        print("[DĀR Voice] legacy JSON terminator repaired:",path,flush=True)
+                    except Exception as write_error:
+                        print("[DĀR Voice] JSON repair write warning",path,write_error,flush=True)
+                    return parsed
+                raise
     except Exception as e:
         print("[DĀR Voice] JSON load warning",path,e,flush=True)
         # Ein beschädigter, reproduzierbarer Online-Cache wird automatisch
@@ -131,7 +153,7 @@ def atomic_write_json(path:Path,data):
     # Prozess-eigene Tempdatei verhindert Cache-Kollisionen bei parallelen Starts.
     tmp=path.with_name(path.name+f".tmp.{os.getpid()}.{uuid.uuid4().hex[:8]}")
     try:
-        tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+        tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         os.replace(tmp,path)
     finally:
         try: tmp.unlink(missing_ok=True)
@@ -4971,14 +4993,12 @@ class H(BaseHTTPRequestHandler):
             self.send_file(APP_HOME/"alphabet-audio-studio.js","application/javascript; charset=utf-8")
         elif p=="/studio/alphabet-audio.json":
             try:
-                load_alphabet_manifest()
-                self.send_file(APP_HOME/"alphabet-audio.json","application/json; charset=utf-8")
+                self.send_json(200,load_alphabet_manifest())
             except Exception as e:
                 self.send_json(503,{"ok":False,"error":str(e)})
         elif p=="/studio/quiz-kids.json":
             try:
-                load_quiz_manifest()
-                self.send_file(APP_HOME/"quiz-kids.json","application/json; charset=utf-8")
+                self.send_json(200,load_quiz_manifest())
             except Exception as e:
                 self.send_json(503,{"ok":False,"error":str(e)})
         elif p=="/studio/voice-studio-icon.png":
