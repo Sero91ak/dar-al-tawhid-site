@@ -1,0 +1,154 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2821-2850",
+  "series": "2751-2850",
+  "status": "completed-earliest-sharh-audit",
+  "ruleVersion": 6,
+  "reason": "Ṣaḥīḥ Muslim 121–134. Reine Isnād-/Wortlautvarianten wurden nicht künstlich vervielfacht. Früher Šarḥ wird über al-Māzirī, al-Muʿlim bi-Fawāʾid Muslim, exakt nach Kitāb al-Īmān und jeweiligem Muslim-Abschnitt geführt. Wo die konkrete Druckseite nicht editionssicher verifiziert war, blieb sharhPage bewusst null; keine Seitenzahl wurde geschätzt. Muslim 124 bewahrt die prophetische Erklärung von Ẓulm als Širk in diesem Vers; Muslim 127–134 differenziert bloße Waswasah von Wort/Tat und dokumentiert die prophetische Behandlung durch Īmān-Bekräftigung, Istiʿāḏah und Abbruch der Gedankenkette.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "dedupeDecisions": [
+    "Muslim 123a-d grouped by substantive cores",
+    "Muslim 124b not duplicated",
+    "Muslim 127b-c not duplicated as separate hadith cards",
+    "Muslim 128 variants split only by substantive clauses",
+    "Muslim 132b not duplicated",
+    "Muslim 134b-d split only where instruction differs"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2821",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2822",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2823",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2824",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2825",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2826",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2827",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2828",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2829",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2830",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2831",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2832",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2833",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2834",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2835",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2836",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2837",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2838",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2839",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2840",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2841",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2842",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2843",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2844",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2845",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2846",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2847",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2848",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2849",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2850",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    }
+  ]
+}
