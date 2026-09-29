@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-067` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-068` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4394
-totalVerifiedEntries: 4394
-loadedEntries: 4394
-uniqueVerifiedReferences: 4394
-missingCount: 1842
+entriesCount: 4395
+totalVerifiedEntries: 4395
+loadedEntries: 4395
+uniqueVerifiedReferences: 4395
+missingCount: 1841
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:6
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-067.json
-nächster Gap-Fill-Batch: entries-gap-06-068.json
+letzter Gap-Fill-Batch: entries-gap-06-068.json
+nächster Gap-Fill-Batch: entries-gap-06-069.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `204` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `205` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -92,6 +92,7 @@ Danach gibt es keinen weiteren Qurʾān-Vers. Alle weiteren Arbeiten sind aussch
 06-065  2
 06-066  1
 06-067  2
+06-068  1
 ```
 
 Die Zahl hinter jedem Batch ist die aktuell registrierte Eintragszahl der Datei.
@@ -149,6 +150,7 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 06-065: 2:134, 2:135
 06-066: 2:141
 06-067: 2:91, 2:95
+06-068: 2:146
 ```
 
 ## Nächste echte Audit-Lücken
@@ -185,8 +187,8 @@ Der aktuelle nächste 25er-Auditbereich beginnt mit:
 2:139
 2:140
 2:145
-2:146
 2:147
+2:148
 ```
 
 Diese Referenzen sind Arbeitsziele, keine Aufforderung zum künstlichen Füllen. Ein Vers bleibt offen, bis ein konkreter früher Bericht mit belastbarer Zuordnung und ausreichend geprüfter Überlieferungskette vorliegt.
