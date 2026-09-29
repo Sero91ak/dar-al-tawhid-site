@@ -47,6 +47,9 @@ jobs:
               'def _generate_quiz_voice_master',
               'def _quiz_bounded_parts',
               'QuizMasters',
+              'def load_alphabet_manifest',
+              'def load_quiz_manifest',
+              'Kids data self-healed',
               'quiz-audio.json',
               'kids-quiz-audio',
           ]
@@ -60,7 +63,7 @@ jobs:
           required_html=[
               'id="alphabetPackBatchBtn"',
               'id="alphabetPackBatchState"',
-              "VOICE STUDIO 2.9.31",
+              "VOICE STUDIO 2.9.32",
           ]
           failures=[]
           for label,src,markers in (
