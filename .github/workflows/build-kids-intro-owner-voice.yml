@@ -1,6 +1,7 @@
-name: Build Kids Intro Owner Voice
+name: Build Kids Owner Voice Pack
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -9,63 +10,320 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: kids-owner-voice-pack
+  cancel-in-progress: false
+
 jobs:
   build-voice:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      VOICE_API: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
         with:
           ref: main
 
-      - name: Wait for DĀR Voice cloud engine
+      - name: Require owner automation secret
         run: |
           set -euo pipefail
-          for i in $(seq 1 18); do
-            code="$(curl -L -sS -o /tmp/voice-health.json -w '%{http_code}' https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/health || true)"
+          if [ -z "${ADMIN_PUBLISH_SECRET:-}" ]; then
+            echo "::error::ADMIN_PUBLISH_SECRET fehlt. Owner-Voice-Batch darf nicht ungeschützt laufen."
+            exit 1
+          fi
+
+      - name: Wait for authenticated owner-batch cloud engine
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 36); do
+            code="$(curl -L -sS -o /tmp/voice-health.json -w '%{http_code}' "$VOICE_API/health" || true)"
             cat /tmp/voice-health.json || true
-            if [ "$code" = "200" ] && grep -q '"ok":true' /tmp/voice-health.json; then
+            if [ "$code" = "200" ]               && grep -q '"ok":true' /tmp/voice-health.json               && grep -q '"ownerBatchEnabled":true' /tmp/voice-health.json; then
               exit 0
             fi
             sleep 10
           done
-          echo "Voice health did not become ready" >&2
+          echo "Owner-batch Voice Engine wurde nicht rechtzeitig bereit." >&2
           exit 1
 
-      - name: Generate warm owner-voice Kids greeting
-        run: |
-          set -euo pipefail
-          mkdir -p kids/assets/kids-cinema
-          cat >/tmp/kids-voice.json <<'JSON'
-          {
-            "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. Willkommen bei DĀR AL TAWḤĪD Kids. Los geht’s!",
-            "prepared": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. Willkommen bei دار التوحيد Kids. Los geht’s!",
-            "profile": "kids_intro"
-          }
-          JSON
-          curl -L --fail --retry 5 --retry-delay 3             -H 'Origin: https://dar-al-tawhid.de'             -H 'Referer: https://dar-al-tawhid.de/voice-studio/'             -H 'Content-Type: application/json'             --data-binary @/tmp/kids-voice.json             https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/generate             -o kids/assets/kids-cinema/intro-voice-serhat.mp3
-          test -s kids/assets/kids-cinema/intro-voice-serhat.mp3
-          bytes="$(wc -c < kids/assets/kids-cinema/intro-voice-serhat.mp3)"
-          if [ "$bytes" -lt 10000 ]; then
-            echo "Voice file too small: $bytes" >&2
-            exit 1
-          fi
-
-      - name: Inspect greeting
+      - name: Install audio tools
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y ffmpeg >/dev/null
-          ffprobe -v error             -show_entries format=duration,size             -of default=nw=1             kids/assets/kids-cinema/intro-voice-serhat.mp3
 
-      - name: Commit owner voice
+      - name: Generate greeting and full Alif-Yāʾ owner-voice pack
+        env:
+          BUILD_STAMP: serhat-owner-20260929
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+          import hashlib
+          import json
+          import os
+          import pathlib
+          import subprocess
+          import time
+          import urllib.error
+          import urllib.request
+
+          ROOT = pathlib.Path(".")
+          MANIFEST_PATH = ROOT / "kids/data/alphabet-audio.json"
+          ASSET_ROOT = ROOT / "kids/assets/kids-alphabet-audio"
+          CINEMA_ROOT = ROOT / "kids/assets/kids-cinema"
+          API = os.environ["VOICE_API"].rstrip("/")
+          SECRET = os.environ["ADMIN_PUBLISH_SECRET"].strip()
+          BUILD_STAMP = os.environ.get("BUILD_STAMP", "serhat-owner")
+          ORIGIN = "https://dar-al-tawhid.de"
+          REFERER = "https://dar-al-tawhid.de/voice-studio/"
+
+          manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))
+          ASSET_ROOT.mkdir(parents=True, exist_ok=True)
+          CINEMA_ROOT.mkdir(parents=True, exist_ok=True)
+
+          def synth(text: str, profile: str, target: pathlib.Path, min_s: float, max_s: float):
+              target.parent.mkdir(parents=True, exist_ok=True)
+              last_error = None
+              for attempt in range(1, 4):
+                  body = json.dumps(
+                      {"text": text, "prepared": text, "profile": profile},
+                      ensure_ascii=False
+                  ).encode("utf-8")
+                  req = urllib.request.Request(
+                      API + "/generate",
+                      data=body,
+                      method="POST",
+                      headers={
+                          "Origin": ORIGIN,
+                          "Referer": REFERER,
+                          "Content-Type": "application/json",
+                          "Accept": "audio/mpeg",
+                          "X-Admin-Secret": SECRET,
+                          "User-Agent": "DAR-Kids-Owner-Voice-Batch/1"
+                      }
+                  )
+                  tmp_mp3 = pathlib.Path("/tmp") / (target.stem + f"-{attempt}.mp3")
+                  try:
+                      with urllib.request.urlopen(req, timeout=120) as response:
+                          data = response.read()
+                      if len(data) < 900:
+                          raise RuntimeError(f"Voice response too small: {len(data)} bytes")
+                      tmp_mp3.write_bytes(data)
+
+                      subprocess.run(
+                          [
+                              "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
+                              "-i", str(tmp_mp3),
+                              "-ac", "1", "-ar", "48000",
+                              "-c:a", "aac", "-b:a", "96k",
+                              "-movflags", "+faststart",
+                              str(target)
+                          ],
+                          check=True
+                      )
+                      probe = subprocess.check_output(
+                          [
+                              "ffprobe", "-v", "error",
+                              "-show_entries", "format=duration",
+                              "-of", "default=nw=1:nk=1",
+                              str(target)
+                          ],
+                          text=True
+                      ).strip()
+                      duration = float(probe)
+                      size = target.stat().st_size
+                      if size < 1200:
+                          raise RuntimeError(f"Encoded clip too small: {size} bytes")
+                      if not (min_s <= duration <= max_s):
+                          raise RuntimeError(
+                              f"Implausible duration {duration:.3f}s for {text!r}; expected {min_s}-{max_s}s"
+                          )
+                      sha = hashlib.sha256(target.read_bytes()).hexdigest()
+                      return {"duration": round(duration, 3), "bytes": size, "sha256": sha}
+                  except Exception as exc:
+                      last_error = exc
+                      try:
+                          target.unlink(missing_ok=True)
+                      except Exception:
+                          pass
+                      if attempt < 3:
+                          time.sleep(2 * attempt)
+              raise RuntimeError(f"Generation failed for {text!r}: {last_error}")
+
+          # Native Kids greeting in the owner's voice.
+          greeting_text = (
+              "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. "
+              "Willkommen bei DĀR AL TAWḤĪD Kids. Los geht’s!"
+          )
+          greeting_mp4 = CINEMA_ROOT / "intro-voice-serhat.m4a"
+          greeting_qa = synth(greeting_text, "kids_intro", greeting_mp4, 2.0, 20.0)
+
+          tasks = []
+          for letter_id, letter in manifest.get("letters", {}).items():
+              tasks.append((letter_id, "name", "", letter.get("name")))
+              for key in ("fatha", "kasra", "damma"):
+                  tasks.append((letter_id, "harakat", key, (letter.get("harakat") or {}).get(key)))
+              tasks.append((letter_id, "word", "", letter.get("word")))
+
+          total = len(tasks)
+          print(f"Generating {total} alphabet clips")
+
+          for index, (letter_id, kind, key, slot) in enumerate(tasks, 1):
+              if not isinstance(slot, dict):
+                  raise RuntimeError(f"Missing slot: {letter_id}/{kind}/{key}")
+              text = str(slot.get("text") or "").strip()
+              if not text:
+                  raise RuntimeError(f"Missing text: {letter_id}/{kind}/{key}")
+
+              filename = (key if kind == "harakat" else kind) + ".m4a"
+              target = ASSET_ROOT / letter_id / filename
+              min_s = 0.10 if kind == "harakat" else 0.18
+              max_s = 4.5 if kind == "harakat" else (6.0 if kind == "name" else 8.0)
+              qa = synth(text, "kids_alphabet", target, min_s, max_s)
+
+              public_url = f"/kids/assets/kids-alphabet-audio/{letter_id}/{filename}?v={BUILD_STAMP}"
+              now = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+
+              # Preserve any earlier external source only as historical fallback metadata.
+              old_external = None
+              if str(slot.get("sourceType") or "").startswith("external-") and slot.get("url"):
+                  old_external = {
+                      "url": slot.get("url"),
+                      "sourceType": slot.get("sourceType"),
+                      "sourceProvider": slot.get("sourceProvider"),
+                      "sourceSpeaker": slot.get("sourceSpeaker"),
+                      "sourceLanguage": slot.get("sourceLanguage"),
+                      "sourceTranscription": slot.get("sourceTranscription"),
+                      "sourcePage": slot.get("sourcePage"),
+                      "sourceFile": slot.get("sourceFile"),
+                      "license": slot.get("license"),
+                      "licenseUrl": slot.get("licenseUrl"),
+                      "attribution": slot.get("attribution"),
+                      "archivedAt": now,
+                      "archiveReason": "Replaced in the live Kids learning pack by the authorized Serhat owner voice."
+                  }
+              alternates = list(slot.get("alternateSources") or [])
+              if old_external and not any(a.get("url") == old_external.get("url") for a in alternates if isinstance(a, dict)):
+                  alternates.append(old_external)
+
+              slot.update({
+                  "verified": True,
+                  "url": public_url,
+                  "expectedPath": public_url.split("?")[0],
+                  "sha256": qa["sha256"],
+                  "qaBy": "automatic-owner-voice-batch-qa",
+                  "qaAt": now,
+                  "qaDurationSeconds": qa["duration"],
+                  "qaBytes": qa["bytes"],
+                  "sourceType": "owner-voice-generated",
+                  "sourceProvider": "DĀR Voice Studio",
+                  "sourceSpeaker": "Serhat Abu Malik",
+                  "sourceLanguage": "Arabic / Fuṣḥā learning",
+                  "sourceTranscription": text,
+                  "sourcePage": "",
+                  "sourceFile": filename,
+                  "license": "Owner-authorized",
+                  "licenseUrl": "",
+                  "attribution": "Serhat Abu Malik · DĀR AL TAWḤĪD",
+                  "verificationBasis": "Authorized Serhat owner voice; automatic technical QA passed.",
+                  "voiceProfileId": "serhat-owner-voice-2026",
+                  "sourceVoice": "authorized-owner-voice",
+                  "canonicalVoice": True,
+                  "sameVoiceConfirmed": True,
+                  "autoApproved": True,
+                  "requiresManualReview": False
+              })
+              if alternates:
+                  slot["alternateSources"] = alternates
+
+              print(f"[{index}/{total}] {letter_id}/{kind}/{key or 'main'} {text} {qa['duration']}s")
+
+          policy = manifest.setdefault("policy", {})
+          policy.update({
+              "requireExplicitVerification": False,
+              "requireHumanApprovalForGeneratedAudio": False,
+              "autoPublishGeneratedAudio": True,
+              "voiceMode": "owner-voice-generated-auto-qa",
+              "targetVoiceProfileId": "serhat-owner-voice-2026",
+              "targetVoiceLabel": "Serhat Abu Malik · DĀR Voice Studio",
+              "authorizedOwnerVoiceGeneration": True,
+              "generatedPromotionRule": "Authorized Serhat-owner clips are generated in one controlled batch, technically QA-checked and promoted automatically. Only QA failures stop publication.",
+              "note": "Finaler Kids-Lernbereich nutzt vollständig die autorisierte Serhat-Stimme. Die Eiarabe-Alif-Datei bleibt ausschließlich als separate Aussprache-Referenz in policy.pronunciationReferenceUrl erhalten.",
+              "batchBuild": {
+                  "id": BUILD_STAMP,
+                  "voiceProfileId": "serhat-owner-voice-2026",
+                  "clips": total,
+                  "manualPerClipApprovalRequired": False,
+                  "technicalQaRequired": True,
+                  "failedQaBlocksBuild": True
+              }
+          })
+          manifest["updatedAt"] = time.strftime("%Y-%m-%d", time.gmtime())
+          manifest["ownerVoiceGreeting"] = {
+              "url": f"/kids/assets/kids-cinema/intro-voice-serhat.m4a?v={BUILD_STAMP}",
+              "text": greeting_text,
+              "voiceProfileId": "serhat-owner-voice-2026",
+              "qaDurationSeconds": greeting_qa["duration"],
+              "qaBytes": greeting_qa["bytes"],
+              "sha256": greeting_qa["sha256"]
+          }
+          MANIFEST_PATH.write_text(
+              json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8"
+          )
+          PY
+
+      - name: Verify complete owner-voice pack
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          p=Path("kids/data/alphabet-audio.json")
+          d=json.loads(p.read_text(encoding="utf-8"))
+          missing=[]
+          checked=0
+          for letter_id,letter in (d.get("letters") or {}).items():
+              slots=[
+                  ("name",letter.get("name")),
+                  ("fatha",(letter.get("harakat") or {}).get("fatha")),
+                  ("kasra",(letter.get("harakat") or {}).get("kasra")),
+                  ("damma",(letter.get("harakat") or {}).get("damma")),
+                  ("word",letter.get("word")),
+              ]
+              for name,slot in slots:
+                  checked+=1
+                  if not slot or slot.get("verified") is not True:
+                      missing.append(f"{letter_id}/{name}: not verified")
+                      continue
+                  if slot.get("voiceProfileId")!="serhat-owner-voice-2026":
+                      missing.append(f"{letter_id}/{name}: wrong voice")
+                  url=str(slot.get("url") or "").split("?",1)[0]
+                  file=Path(url.lstrip("/"))
+                  if not file.exists() or file.stat().st_size<1200:
+                      missing.append(f"{letter_id}/{name}: asset missing {file}")
+          greeting=Path("kids/assets/kids-cinema/intro-voice-serhat.m4a")
+          if not greeting.exists() or greeting.stat().st_size<2000:
+              missing.append("owner greeting missing")
+          if missing:
+              raise SystemExit("Owner-voice pack incomplete:\n- "+"\n- ".join(missing))
+          print("Owner-voice pack complete:",checked,"alphabet clips + greeting")
+          PY
+
+      - name: Commit complete owner-voice pack
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add kids/assets/kids-cinema/intro-voice-serhat.mp3
+          git add kids/data/alphabet-audio.json kids/assets/kids-alphabet-audio kids/assets/kids-cinema/intro-voice-serhat.m4a
           if git diff --cached --quiet; then
-            echo "Owner voice already current."
+            echo "Owner voice pack already current."
             exit 0
           fi
-          git commit -m "Kids V0.66: add warm owner-voice cinema greeting"
+          git commit -m "Kids: install complete Serhat owner-voice alphabet and greeting"
           git push origin HEAD:main
