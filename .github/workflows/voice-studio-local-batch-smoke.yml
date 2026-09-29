@@ -32,6 +32,8 @@ jobs:
           engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
           js=Path("voice-studio/alphabet-audio-studio.js").read_text(encoding="utf-8")
           html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          quizjs=Path("kids/quiz-owner-voice.js").read_text(encoding="utf-8")
+          quizaudio=Path("kids/data/quiz-audio.json").read_text(encoding="utf-8")
           required_engine=[
               "def build_full_local_kids_voice_pack",
               "def start_full_local_kids_voice_pack",
@@ -40,13 +42,17 @@ jobs:
               'KidsAppExport',
               'KidsAppPublishRepo',
               'manualPerClipApprovalRequired',
+              'def _quiz_voice_texts',
+              'def _build_quiz_owner_voice_pack',
+              'quiz-audio.json',
+              'kids-quiz-audio',
           ]
           required_js=[
               "startFullBatch",
               "maybeAutoStartFullBatch",
               'fetch("/alphabet/batch-start"',
               'fetch("/alphabet/batch-state',
-              "Alle 140 Clips + Begrüßung",
+              "Alphabet + Quiz + Begrüßung",
           ]
           required_html=[
               'id="alphabetPackBatchBtn"',
@@ -58,6 +64,8 @@ jobs:
               ("engine",engine,required_engine),
               ("js",js,required_js),
               ("html",html,required_html),
+              ("quiz-runtime",quizjs,["DARKidsQuizVoice","quiz-audio.json","originalQuizSpeak"]),
+              ("quiz-manifest",quizaudio,["KIDS_QUIZ_OWNER_VOICE_V1","serhat-owner-voice-2026"]),
           ):
               missing=[m for m in markers if m not in src]
               if missing:
