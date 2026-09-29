@@ -1881,22 +1881,25 @@ def build_full_local_kids_voice_pack():
 
         policy=manifest.setdefault("policy",{})
         policy.update({
-            "requireExplicitVerification":False,
-            "requireHumanApprovalForGeneratedAudio":False,
-            "autoPublishGeneratedAudio":True,
-            "voiceMode":"owner-voice-generated-auto-qa-local",
+            "requireExplicitVerification":True,
+            "requireHumanApprovalForGeneratedAudio":True,
+            "autoPublishGeneratedAudio":False,
+            "voiceMode":"owner-voice-generated-linguistic-review-required",
             "targetVoiceProfileId":"serhat-owner-voice-2026",
             "targetVoiceLabel":"Serhat Abu Malik · DĀR Voice Studio",
             "authorizedOwnerVoiceGeneration":True,
-            "generatedPromotionRule":"Die lokale Serhat Engine erzeugt alle 140 Lernclips automatisch. Jeder Clip muss die technische Engine-QA bestehen; nur Fehler werden gestoppt und zur Prüfung gemeldet.",
-            "note":"Finaler Kids-Lernbereich nutzt die autorisierte Serhat-Stimme. Die Eiarabe-Alif-Datei bleibt ausschließlich als separate Aussprache-Referenz in policy.pronunciationReferenceUrl erhalten.",
+            "linguisticReviewRequired":True,
+            "technicalQaIsNotPronunciationVerification":True,
+            "generatedPromotionRule":"Die lokale Serhat Engine darf alle 140 Lernclips technisch erzeugen und prüfen. Kein Alphabet-Clip wird allein wegen technischer QA sprachlich freigegeben; jeder Lernclip muss vollständig angehört und menschlich bestätigt werden.",
+            "note":"Serhat-Clips bleiben als technische Kandidaten erhalten, bis ihre arabische Aussprache menschlich bestätigt ist. Die Eiarabe-Alif-Datei und weitere externe Aufnahmen bleiben nur als Aussprache-Referenzen erhalten.",
             "batchBuild":{
                 "id":build_id,
                 "voiceProfileId":"serhat-owner-voice-2026",
                 "clips":140,
                 "quizVoiceClips":len(quiz_texts),
                 "quizQuestions":len(quiz_data.get("items") or []),
-                "manualPerClipApprovalRequired":False,
+                "alphabetManualLinguisticApprovalRequired":True,
+                "quizTechnicalQaRequired":True,
                 "technicalQaRequired":True,
                 "failedQaBlocksBuild":True,
                 "engine":"local-serhat-engine"
