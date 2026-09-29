@@ -39,6 +39,36 @@ jobs:
               print("valid json:", p)
           PY
 
+      - name: Validate Quiz weak-ending chunking
+        run: |
+          python3 - <<'PY'
+          import ast, re, sys
+          from pathlib import Path
+          sys.path.insert(0, "voice-studio")
+          from speech_flow import FLOW_WEAK_ENDINGS
+
+          source=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          tree=ast.parse(source)
+          node=next(
+              n for n in tree.body
+              if isinstance(n,ast.FunctionDef) and n.name=="_quiz_bounded_parts"
+          )
+          module=ast.Module(body=[node],type_ignores=[])
+          ns={"re":re,"FLOW_WEAK_ENDINGS":FLOW_WEAK_ENDINGS}
+          exec(compile(module,"<quiz_chunk_test>","exec"),ns)
+          fn=ns["_quiz_bounded_parts"]
+
+          sample="Richtig. Qurʾān 51:56 nennt die Anbetung Allahs als Zweck."
+          parts=fn(sample,48)
+          print(parts)
+          assert all(
+              re.sub(r"[^A-Za-zÄÖÜäöüß]+$","",p.split()[-1]).casefold()
+              not in FLOW_WEAK_ENDINGS
+              for p in parts[:-1] if p and not re.search(r"[,،;؛:.!?؟…]$",p)
+          ), parts
+          assert any("als Zweck." in p for p in parts), parts
+          PY
+
       - name: Validate full local batch markers
         run: |
           python3 - <<'PY'
@@ -68,6 +98,8 @@ jobs:
               'honorific_flow_repaired',
               'honorificFlowRepairTriggerMs',
               'honorificFlowRepairMaxMs',
+              'FLOW_WEAK_ENDINGS',
+              'grammatisch abhängigen Funktionswörtern',
               'quiz-audio.json',
               'kids-quiz-audio',
           ]
@@ -81,7 +113,7 @@ jobs:
           required_html=[
               'id="alphabetPackBatchBtn"',
               'id="alphabetPackBatchState"',
-              "VOICE STUDIO 2.9.34",
+              "VOICE STUDIO 2.9.35",
           ]
           failures=[]
           for label,src,markers in (
