@@ -95,7 +95,7 @@ ALPHABET_BATCH_STATE={
     "phase":"idle",
     "progress":0,
     "completed":0,
-    "total":141,
+    "total":226,
     "current":"",
     "error":"",
     "exportPath":"",
@@ -1284,6 +1284,87 @@ def _promote_slot_to_owner_voice(slot:dict,letter_id:str,kind:str,key:str,asset:
     if alternates:
         slot["alternateSources"]=alternates
 
+
+def _quiz_voice_texts(quiz_data):
+    texts=[]
+    seen=set()
+    def add(value):
+        text=re.sub(r"\s+"," ",str(value or "")).strip()
+        if text and text not in seen:
+            seen.add(text);texts.append(text)
+    for item in (quiz_data.get("items") or []):
+        question=str(item.get("question") or "").strip()
+        answers=list(item.get("answers") or [])
+        labels=[str((a or {}).get("label") or "").strip() for a in answers]
+        spoken=" ".join(
+            f"Antwort {i+1}: {label}."
+            for i,label in enumerate(labels) if label
+        ).strip()
+        add((question+" "+spoken).strip())
+        lower=[x.casefold() for x in labels]
+        if len(lower)==2 and "ja" in lower and "nein" in lower:
+            add((question+" Ja oder Nein?").strip())
+        add(item.get("success"))
+        add(item.get("retry"))
+    add("Sehr gut. Du hast das Quiz geschafft.")
+    return texts
+
+def _build_quiz_owner_voice_pack(quiz_data,build_root:Path,build_id:str,start_index:int,total:int):
+    texts=_quiz_voice_texts(quiz_data)
+    entries={}
+    out_dir=build_root/"kids/assets/kids-quiz-audio"
+    out_dir.mkdir(parents=True,exist_ok=True)
+    generated_cache={}
+
+    for offset,text_value in enumerate(texts,1):
+        current_index=start_index+offset
+        pct=2+int((current_index-1)/max(1,total)*88)
+        _set_alphabet_batch_state(
+            phase="quiz",
+            progress=min(94,pct),
+            completed=current_index-1,
+            total=total,
+            current=f"Quiz-Stimme {offset}/{len(texts)} · {text_value[:72]}"
+        )
+        digest=hashlib.sha1(text_value.encode("utf-8")).hexdigest()[:16]
+        asset=out_dir/(digest+".m4a")
+        source=generated_cache.get(text_value)
+        if source is None:
+            source=generate(
+                text_value,"","kids_lesson",
+                free_mode=True,free_pronunciation=True
+            )
+            generated_cache[text_value]=source
+        _encode_kids_m4a(source,asset)
+        entries[text_value]={
+            "url":f"/kids/assets/kids-quiz-audio/{asset.name}?v={build_id}",
+            "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
+            "durationSeconds":round(_audio_duration_seconds(asset),3),
+            "voiceProfileId":"serhat-owner-voice-2026",
+            "sourceVoice":"authorized-owner-voice",
+            "sourceType":"local-owner-generated",
+            "qaBy":"local-serhat-engine-auto-qa",
+        }
+
+    manifest={
+        "schemaVersion":1,
+        "id":"KIDS_QUIZ_OWNER_VOICE_V1",
+        "buildId":build_id,
+        "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "voiceProfileId":"serhat-owner-voice-2026",
+        "speaker":"Serhat Abu Malik",
+        "manualPerClipApprovalRequired":False,
+        "technicalQaRequired":True,
+        "systemTtsFallbackAllowed":False,
+        "entries":entries,
+        "counts":{
+            "quizQuestions":len(quiz_data.get("items") or []),
+            "uniqueSpokenTexts":len(entries)
+        }
+    }
+    atomic_write_json(build_root/"kids/data/quiz-audio.json",manifest)
+    return manifest
+
 def _prepare_publish_repo(export_ready:Path):
     git=shutil.which("git")
     if not git:
@@ -1316,6 +1397,7 @@ def _prepare_publish_repo(export_ready:Path):
 
         for rel in [
             Path("data/alphabet-audio.json"),
+            Path("data/quiz-audio.json"),
             Path("assets/kids-cinema/intro-voice-serhat.m4a"),
         ]:
             src=source_kids/rel
@@ -1329,7 +1411,17 @@ def _prepare_publish_repo(export_ready:Path):
             shutil.rmtree(dst_audio)
         shutil.copytree(src_audio,dst_audio)
 
-        p=run([git,"-C",str(repo),"add","kids/data/alphabet-audio.json","kids/assets/kids-alphabet-audio","kids/assets/kids-cinema/intro-voice-serhat.m4a"],60)
+        src_quiz=source_kids/"assets/kids-quiz-audio"
+        dst_quiz=repo/"kids/assets/kids-quiz-audio"
+        if dst_quiz.exists():
+            shutil.rmtree(dst_quiz)
+        shutil.copytree(src_quiz,dst_quiz)
+
+        p=run([git,"-C",str(repo),"add",
+            "kids/data/alphabet-audio.json","kids/assets/kids-alphabet-audio",
+            "kids/data/quiz-audio.json","kids/assets/kids-quiz-audio",
+            "kids/assets/kids-cinema/intro-voice-serhat.m4a"
+        ],60)
         if p.returncode!=0:
             return False,"Git staging fehlgeschlagen: "+(p.stderr or p.stdout)[-500:]
 
@@ -1363,18 +1455,25 @@ def build_full_local_kids_voice_pack():
     try:
         started=time.strftime("%Y-%m-%dT%H:%M:%S%z")
         _set_alphabet_batch_state(
-            running=True,phase="preparing",progress=1,completed=0,total=141,current="Manifest wird vorbereitet …",
+            running=True,phase="preparing",progress=1,completed=0,total=226,current="Manifest und Quizdaten werden vorbereitet …",
             error="",exportPath="",zipPath="",repoPublished=False,repoPublishError="",
             startedAt=started,finishedAt=""
         )
 
         manifest_path=APP_HOME/"alphabet-audio.json"
+        quiz_path=APP_HOME/"quiz-kids.json"
         manifest=load_json_file(manifest_path,{})
+        quiz_data=load_json_file(quiz_path,{})
         if not (manifest.get("letters") or {}).get("alif"):
             raise RuntimeError("Installiertes Alphabet-Manifest fehlt oder ist ungültig.")
+        if not (quiz_data.get("items") or []):
+            raise RuntimeError("Installierte Kids-Quizdaten fehlen oder sind ungültig.")
         tasks=_alphabet_tasks(manifest)
         if len(tasks)!=140:
             raise RuntimeError(f"Alphabet-Pack unvollständig: erwartet 140 Clips, gefunden {len(tasks)}.")
+        quiz_texts=_quiz_voice_texts(quiz_data)
+        total_work=len(tasks)+len(quiz_texts)+1
+        _set_alphabet_batch_state(total=total_work)
 
         build_id="serhat-local-"+time.strftime("%Y%m%d-%H%M%S")
         build_root=ALPHABET_EXPORT_HOME/(".build-"+uuid.uuid4().hex[:10])
@@ -1391,7 +1490,7 @@ def build_full_local_kids_voice_pack():
             if not text_value:
                 raise RuntimeError(f"Text fehlt bei {letter_id}/{kind}/{key or 'main'}.")
             slot_id="-".join([letter_id,kind,key or "main"])
-            pct=2+int((index-1)/141*88)
+            pct=2+int((index-1)/max(1,total_work)*88)
             _set_alphabet_batch_state(
                 phase="alphabet",progress=pct,completed=index-1,
                 current=f"{index}/140 · {letter_id.upper()} · {kind}{(' · '+key) if key else ''} · {text_value}"
@@ -1407,8 +1506,13 @@ def build_full_local_kids_voice_pack():
             _promote_slot_to_owner_voice(slot,letter_id,kind,key,asset,meta.get("metrics") or {},build_id)
             generated.append(str(asset))
 
+        quiz_manifest=_build_quiz_owner_voice_pack(
+            quiz_data,build_root,build_id,len(tasks),total_work
+        )
+
         _set_alphabet_batch_state(
-            phase="greeting",progress=91,completed=140,
+            phase="greeting",progress=94,completed=len(tasks)+len(quiz_texts),
+            total=total_work,
             current="Kids-Begrüßung wird mit deiner Serhat-Stimme erzeugt …"
         )
         greeting_text=(
@@ -1437,6 +1541,8 @@ def build_full_local_kids_voice_pack():
                 "id":build_id,
                 "voiceProfileId":"serhat-owner-voice-2026",
                 "clips":140,
+                "quizVoiceClips":len(quiz_texts),
+                "quizQuestions":len(quiz_data.get("items") or []),
                 "manualPerClipApprovalRequired":False,
                 "technicalQaRequired":True,
                 "failedQaBlocksBuild":True,
@@ -1466,14 +1572,14 @@ def build_full_local_kids_voice_pack():
         zip_path=Path(shutil.make_archive(str(zip_base),"zip",root_dir=str(ready)))
 
         _set_alphabet_batch_state(
-            phase="publishing",progress=96,completed=141,current="Fertiges Paket wird direkt in die Kids-App übernommen …",
+            phase="publishing",progress=97,completed=total_work,total=total_work,current="Fertiges Alphabet-, Quiz- und Begrüßungspaket wird direkt in die Kids-App übernommen …",
             exportPath=str(ready),zipPath=str(zip_path)
         )
         published,publish_message=_prepare_publish_repo(ready)
 
         finished=time.strftime("%Y-%m-%dT%H:%M:%S%z")
         return _set_alphabet_batch_state(
-            running=False,phase="complete",progress=100,completed=141,current="Fertig",
+            running=False,phase="complete",progress=100,completed=total_work,total=total_work,current="Fertig",
             error="",exportPath=str(ready),zipPath=str(zip_path),
             repoPublished=bool(published),
             repoPublishError="" if published else publish_message,
