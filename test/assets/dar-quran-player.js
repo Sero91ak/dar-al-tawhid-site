@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 973;
+    var PLAYER_BUILD = 974;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -996,11 +996,18 @@
     if (!(Number(state.surah) >= 1)) state.surah = 1;
   }
   function readerLearnWanted() {
-    return isReaderRoute();
+    return isReaderRoute() && !learnUiClosed && (!!state.sessionActive || !!state.learnMode || !!state.playing);
   }
   function ensureReaderLearnPlayer() {
     if (!isReaderRoute()) return false;
-    setLearnUiClosed(false);
+    if (learnUiClosed) {
+      applyLearnChrome();
+      return false;
+    }
+    if (!(state.sessionActive || state.learnMode || state.playing)) {
+      applyLearnChrome();
+      return false;
+    }
     syncReaderPosition();
     enterLearnMode();
     writeMode("learning-quran");
@@ -1017,23 +1024,16 @@
       applyLearnChrome();
       return;
     }
-    if (isQuranArea()) {
+    if (isReaderRoute()) {
       applyLearnChrome();
       return;
     }
-    if (state.learnMode || state.sessionActive || state.playing) {
-      persistCurrent("route-leave-quran");
-      try { audioEl().pause(); } catch (eLeave) {}
-      state.playing = false;
-      state.learnMode = false;
-      state.sessionActive = false;
-      writeMode("none");
-      applyLearnChrome();
-      paintMini();
-      qlog("[QURAN_ROUTE] player paused off-route (no home player)");
-      return;
-    }
+    persistCurrent("route-leave-quran");
+    try { audioEl().pause(); } catch (eLeave) {}
+    state.playing = false;
     applyLearnChrome();
+    paintMini();
+    qlog("[QURAN_ROUTE] learn player only on reader");
   }
   function applyLearnRate() {
     var rate = state.learnMode ? (Number(state.learnRate) || 1) : 1;
@@ -2428,40 +2428,32 @@
     engine.started = false;
     stopProgressClock();
     if (engine.fallbackTimer) { clearTimeout(engine.fallbackTimer); engine.fallbackTimer = 0; }
-    var hold = 0;
-    try { hold = Number(audioEl().currentTime) || Number(state.current) || 0; } catch (eHold) { hold = Number(state.current) || 0; }
     persistCurrent("stop");
     state.playing = false;
-    state.current = hold;
-    state.resumeAt = hold;
+    state.current = 0;
+    state.resumeAt = 0;
     var a = document.getElementById("darQuranPlayerAudio");
     if (a) {
       try { a.pause(); } catch (e) {}
       try { a.currentTime = 0; } catch (eSeekStop) {}
     }
-    state.current = 0;
-    state.resumeAt = 0;
     saveState();
     capsuleCollapsed = false;
     capsuleDimmed = false;
     clearSleepTimer();
     lastFollowKey = "";
-    if (isReaderRoute()) {
-      setLearnUiClosed(false);
-      enterLearnMode();
-      state.sessionActive = true;
-      state.playerMode = "learning-quran";
-    } else {
-      state.sessionActive = false;
-      setLearnUiClosed(true);
-      state.learnMode = false;
-      state.learnLoop = false;
-      state.learnStay = false;
-      state.learnRate = 1;
-      state.playerMode = "none";
-    }
+    setLearnUiClosed(true);
+    state.sessionActive = false;
+    state.learnMode = false;
+    state.learnLoop = false;
+    state.learnStay = false;
+    state.learnRate = 1;
+    state.playerMode = "none";
+    writeMode("none");
+    engine.loadedSurah = 0;
+    engine.loadedAyah = 0;
     var mini = document.getElementById("darQuranMiniPlayer");
-    if (mini && !isReaderRoute()) mini.classList.remove("is-away", "player-collapsed", "player-expanded", "player-dim", "is-learn", "is-reader-dock", "is-on");
+    if (mini) mini.classList.remove("is-away", "player-collapsed", "player-expanded", "player-dim", "is-learn", "is-reader-dock", "is-on");
     syncMediaSession();
     paintChrome();
     paintMini();
@@ -3419,7 +3411,7 @@
   var tvAutoStarted = false;
   function resumeVisibleSession() {
     loadState({ keepLiveSession: true });
-    if (!isAppleTvApp() && !isQuranArea()) {
+    if (!isAppleTvApp() && !isReaderRoute() && !isFullPlayerRoute()) {
       cleanupLearningPlayerOnRouteLeave();
       paintMini();
       return;
