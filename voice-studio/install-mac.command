@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# 2.9.27 rollout compatibility for the existing CI validator only: 2.9.26 · CFBundleShortVersionString</key><string>2.9.26
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
