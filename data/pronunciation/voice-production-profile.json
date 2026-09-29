@@ -582,7 +582,11 @@
     "fixedPhraseFlowRepairTriggerMs": 320,
     "fixedPhraseFlowTargetPauseMs": 140,
     "fixedPhraseFlowRepairMaxMs": 900,
-    "kidsLessonFinalAutoRepairMaxMs": 950
+    "kidsLessonFinalAutoRepairMaxMs": 950,
+    "kidsFinalAutoRepairMaxMsByMode": {
+      "kids_story": 950,
+      "kids_lesson": 950
+    }
   },
   "religiousAudio": {
     "quranRecitation": "real-recording-only",
