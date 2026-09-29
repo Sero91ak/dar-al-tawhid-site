@@ -1,5 +1,5 @@
-const DEFAULT_USER = "dar";
-const DEFAULT_PASS = "NurIntern81";
+const DEFAULT_USER = "Dawud";
+const DEFAULT_PASS = "Malik20";
 
 export function isKidsNativeApp(ua) {
   return /DarAlTawhidKids-iOS/i.test(String(ua || ""));
@@ -18,14 +18,18 @@ function gatePass(env) {
 }
 
 function unauthorizedGate() {
-  return new Response("Interner Bereich. Passwort erforderlich.", {
+  const html = "<!doctype html><html lang=\"de\"><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title></title><style>html,body{margin:0;min-height:100%;background:#0b0a09;color:#0b0a09}</style></head><body></body></html>";
+  return new Response(html, {
     status: 401,
     headers: {
-      "WWW-Authenticate": 'Basic realm="DAR intern", charset="UTF-8"',
+      "WWW-Authenticate": "Basic realm=\"DAR intern\", charset=\"UTF-8\"",
       "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
       "CDN-Cache-Control": "no-store",
-      "Content-Type": "text/plain; charset=utf-8",
-      "X-Robots-Tag": "noindex, nofollow, noarchive"
+      "Cloudflare-CDN-Cache-Control": "no-store",
+      "Pragma": "no-cache",
+      "Content-Type": "text/html; charset=utf-8",
+      "X-Robots-Tag": "noindex, nofollow, noarchive",
+      "X-Frame-Options": "DENY"
     }
   });
 }
@@ -57,13 +61,9 @@ function isGatedPath(pathname) {
 export function gateHiddenSurfaces(request, url, env, mode) {
   const pathname = url.pathname || "/";
   const ua = request.headers.get("User-Agent") || "";
-  if (mode === "workers-dev") {
-    if (isKidsNativeApp(ua) || isOfficialNativeApp(ua) || hasValidGateAuth(request, env)) return null;
-    return unauthorizedGate();
-  }
+  if (hasValidGateAuth(request, env)) return null;
+  if (mode === "workers-dev") return unauthorizedGate();
   if (!isGatedPath(pathname)) return null;
   if ((pathname === "/kids" || pathname.startsWith("/kids/")) && isKidsNativeApp(ua)) return null;
-  if ((pathname === "/test" || pathname.startsWith("/test/")) && isOfficialNativeApp(ua)) return null;
-  if (hasValidGateAuth(request, env)) return null;
   return unauthorizedGate();
 }
