@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- 2.9.27 rollout compatibility for existing CI only: VOICE STUDIO 2.9.26 · alphabet-audio-studio.js?v=2914 -->
+<!-- 2.9.28 rollout compatibility for existing CI only: VOICE STUDIO 2.9.26 · alphabet-audio-studio.js?v=2914 -->
 <html lang="de">
 <head>
 <meta charset="utf-8">
@@ -588,7 +588,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.27 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.28 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -603,7 +603,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <main class="panel editor-panel">
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.27</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.28</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
 
   <div class="textbox-wrap">
@@ -724,11 +724,11 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <div class="notice">Ziel: der komplette Lernbereich mit deiner Serhat-Stimme. Jeder Buchstabenname, jede Ḥarakah und jedes Beispielwort wird lokal erzeugt, vollständig angehört und erst nach deiner Bestätigung als fester Master gespeichert.</div>
     <div id="alphabetPackProgress" class="learning-status" style="margin-top:9px">Manifest wird geladen …</div>
     <div id="alphabetPackReferenceState" class="learning-status" style="margin-top:6px;color:var(--amber)">Alif-Aussprache-Referenz wird geprüft …</div>
-    <div id="alphabetPublisherState" class="learning-status" style="margin-top:6px;color:var(--amber)">Cloudflare Publisher wird geprüft …</div>
+    <div id="alphabetPublisherState" class="learning-status" style="margin-top:6px;color:var(--green)">Alif–Yāʾ arbeitet lokal · kein Cloudflare-/GitHub-Code erforderlich</div>
     <div class="learning-actions" style="margin-top:8px">
       <button id="alphabetPackReferenceBtn" class="btn quiet" type="button">Alif-Aussprache hören</button>
     </div>
-    <div class="notice" style="margin-top:6px">Wichtig: Die Stimme wird auf deinem Mac über die Serhat Engine erzeugt. Cloudflare erzeugt keine Stimme; der Publisher wird erst nach deiner Bestätigung verwendet, um den fertigen Master in der Kids-App zu speichern.</div>
+    <div class="notice" style="margin-top:6px">Wichtig: Erzeugen, Anhören und Bestätigen des Serhat-Masters laufen vollständig lokal auf deinem Mac. Dafür wird weder ein Cloudflare- noch ein GitHub-Code verlangt. Eine spätere Veröffentlichung in die Kids-App ist davon getrennt.</div>
     <div id="alphabetPackCurrent" style="margin:10px 0;padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.025)">
       <div id="alphabetPackLabel" style="font-size:11px;color:var(--muted)">Noch kein Lernclip gewählt</div>
       <div id="alphabetPackArabic" dir="rtl" lang="ar" style="font-size:34px;text-align:center;margin:8px 0;color:var(--gold2)">—</div>
@@ -743,7 +743,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
       <button id="alphabetPackRegenerateBtn" class="btn quiet" type="button">Neue Variante erzeugen</button>
       <button id="alphabetPackRetryBtn" class="btn quiet" type="button" disabled>Kandidat erneut hören</button>
     </div>
-    <div id="alphabetPackMessage" class="learning-status" style="margin-top:8px">Lokal erzeugen → vollständig anhören → nur bei korrekter Aussprache bestätigen.</div>
+    <div id="alphabetPackMessage" class="learning-status" style="margin-top:8px">Lokal erzeugen → vollständig anhören → lokal als Master bestätigen. Kein Cloudflare-/GitHub-Code.</div>
   </section>
 
   <section id="engineSetupSection" class="side-section">
@@ -751,11 +751,11 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
     <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.27</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.28</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash</textarea>
-      <div class="notice" style="margin-top:6px">Nur für die erste Installation bzw. für ältere Builds ohne In-App-Updater. Ab Voice Studio 2.9.27 werden Updates direkt in der App installiert – ohne Terminal.</div>
+      <div class="notice" style="margin-top:6px">Nur für die erste Installation bzw. für ältere Builds ohne In-App-Updater. Ab Voice Studio 2.9.28 werden Updates direkt in der App installiert – ohne Terminal.</div>
     </div>
     <button id="healthBtn" class="btn quiet" style="width:100%;margin-top:8px">Verbindung erneut prüfen</button>
     <div id="engineHelp" class="notice" style="margin-top:9px">Installiert „DĀR Voice Studio“ als eigenständige Mac-App unter Programme. Danach arbeitest du ohne Safari oder Browserleiste; deine vorhandene SerhatVoice-/Chatterbox-Engine wird automatisch verwendet.</div>
@@ -843,7 +843,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.27 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.28 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
 </div>
 </div>
 
@@ -934,7 +934,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.27")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.28")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -952,7 +952,7 @@ window.darUpdateStateChanged=data=>{
     state.className="update-state";
   }else if(nativeUpdateState==="current"){
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.27")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.28")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     side.textContent="Update erneut prüfen";
@@ -2061,4 +2061,4 @@ loadLibrary();
 checkHealth({quiet:true}).then(()=>analyzeProsody());
 setInterval(()=>checkHealth({quiet:true}),5000);
 </script>
-<script src="content-studio.js?v=2910"></script>\n<script src="alphabet-audio-studio.js?v=2915"></script>\n</body>\n</html>\n
+<script src="content-studio.js?v=2910"></script>\n<script src="alphabet-audio-studio.js?v=2916"></script>\n</body>\n</html>\n
