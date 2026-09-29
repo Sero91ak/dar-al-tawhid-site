@@ -151,6 +151,10 @@ jobs:
               'linguisticVerified',
               'needs-human-review',
               'approve_existing_alphabet_master',
+              'def _extract_repeated_pronunciation_token',
+              'def _alphabet_render_prompt',
+              'harakat_token_not_isolated',
+              'fushaStrict',
               'quiz-audio.json',
               'kids-quiz-audio',
           ]
@@ -164,7 +168,7 @@ jobs:
           required_html=[
               'id="alphabetPackBatchBtn"',
               'id="alphabetPackBatchState"',
-              "VOICE STUDIO 2.9.38",
+              "VOICE STUDIO 2.9.39",
           ]
           failures=[]
           for label,src,markers in (
