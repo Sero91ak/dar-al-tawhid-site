@@ -1,6 +1,6 @@
 import Cocoa
 
-// 2.9.28 rollout compatibility for existing CI only: DĀRVoiceStudioMac/2.9.26
+// 2.9.29 rollout compatibility for existing CI only: DĀRVoiceStudioMac/2.9.26
 import WebKit
 import Foundation
 import Darwin
@@ -21,7 +21,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.28"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.29"
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -31,7 +31,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.28"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.29"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
         config.userContentController.add(self, name: "darCompanion")
