@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1110";
+  const VER="1111";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","topics.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -268,7 +268,7 @@
       if(btn.classList.contains("quran-ayah-action-btn--play")){
         btn.querySelectorAll("img,svg,.qrc-play-mark,.qrc-btn-emoji").forEach(function(n){try{n.remove()}catch(e){}});
         if(String(btn.textContent||"").trim()!=="\u25B6") btn.textContent="\u25B6";
-        btn.classList.add("qov-player-icon");
+        btn.classList.remove("qov-player-icon");
         btn.style.fontSize="";
         btn.style.color="";
         btn.style.backgroundImage="none";

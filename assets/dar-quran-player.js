@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 972;
+    var PLAYER_BUILD = 973;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -3477,8 +3477,9 @@
   }
   document.addEventListener("click", function (ev) {
     if (onLearnLaunchTap(ev)) return;
+    if (ev.target && ev.target.closest && ev.target.closest("[data-qrc-ayah-play], .quran-ayah-action-btn--play")) return;
     var globalIcon = ev.target && ev.target.closest ? ev.target.closest(".qov-player-icon, [data-qa-action='quran-player']") : null;
-    if (globalIcon && !globalIcon.closest(".qov-learn-launch, [data-dqp-learn-resume], [data-qov-learn-launch]")) {
+    if (globalIcon && !globalIcon.closest(".qov-learn-launch, [data-dqp-learn-resume], [data-qov-learn-launch], .qrc-ayah-list, .quran-ayah")) {
       ev.preventDefault();
       ev.stopPropagation();
       launchGlobalPlayer();
