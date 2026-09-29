@@ -30,6 +30,30 @@ struct KidsWebAppView: UIViewRepresentable {
         configuration.userContentController.addUserScript(
             WKUserScript(source: bridge, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         )
+        let autoplay = """
+        (function(){
+          function kick(){
+            var v=document.getElementById("kidsCinemaV79");
+            if(!v)return;
+            v.muted=true;
+            v.defaultMuted=true;
+            v.autoplay=true;
+            v.playsInline=true;
+            v.setAttribute("muted","");
+            v.setAttribute("playsinline","");
+            v.setAttribute("webkit-playsinline","");
+            var p=v.play();
+            if(p&&p.catch)p.catch(function(){});
+          }
+          kick();
+          document.addEventListener("DOMContentLoaded",kick);
+          window.addEventListener("load",kick);
+          setInterval(kick,300);
+        })();
+        """
+        configuration.userContentController.addUserScript(
+            WKUserScript(source: autoplay, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        )
         configuration.applicationNameForUserAgent = "DarAlTawhidKids-iOS"
 
         let webView = WKWebView(frame: .zero, configuration: configuration)
@@ -51,6 +75,21 @@ struct KidsWebAppView: UIViewRepresentable {
     final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
         private var hasPresentedInitialPage = false
 
+        private func kickIntroPlayback(_ webView: WKWebView) {
+            let js = """
+            (function(){
+              var v=document.getElementById("kidsCinemaV79");
+              if(!v)return;
+              v.muted=true;v.defaultMuted=true;v.autoplay=true;v.playsInline=true;
+              v.setAttribute("muted","");v.setAttribute("playsinline","");
+              var p=v.play();
+              if(p&&p.catch)p.catch(function(){});
+            })();
+            """
+            webView.evaluateJavaScript(js, completionHandler: nil)
+        }
+
+
         func loadKidsHome(in webView: WKWebView) {
             webView.alpha = 1
             hasPresentedInitialPage = false
@@ -63,7 +102,12 @@ struct KidsWebAppView: UIViewRepresentable {
             )
         }
 
+        func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+            kickIntroPlayback(webView)
+        }
+
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            kickIntroPlayback(webView)
             guard !hasPresentedInitialPage else { return }
             hasPresentedInitialPage = true
             UIView.animate(

@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v84";
+const CACHE_NAME="dar-al-tawhid-kids-v85";
 const PRECACHE=[
   "/kids/index.html",
   "/kids/start.html",
@@ -94,8 +94,8 @@ self.addEventListener("fetch",function(event){
     event.respondWith(networkFirst(request,"/kids/start.html"));
     return;
   }
-  if(url.pathname==="/kids/assets/kids-cinema/intro-v74.mp4"){
-    event.respondWith(fetch(request,{cache:"no-store"}).catch(function(){return caches.match(request)}));
+  if(url.pathname.indexOf("/kids/assets/kids-cinema/")===0&&url.pathname.indexOf(".mp4")>0){
+    event.respondWith(fetch(request));
     return;
   }
   if(url.pathname==="/kids/version.json"){

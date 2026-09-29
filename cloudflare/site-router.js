@@ -422,6 +422,52 @@ async function proxyAdhanAudio(request, url) {
   }
 }
 
+
+let kidsIntroBuffer = null;
+async function serveKidsIntroVideo(request, url, env) {
+  if (!/^\/kids\/assets\/kids-cinema\/.+\.mp4$/i.test(url.pathname)) return null;
+  if (request.method !== "GET" && request.method !== "HEAD") return null;
+  try {
+    if (!kidsIntroBuffer) {
+      const assetUrl = new URL(url.pathname, url.origin);
+      const asset = await env.ASSETS.fetch(new Request(assetUrl.toString(), { method: "GET" }));
+      if (!asset || !asset.ok) return null;
+      kidsIntroBuffer = await asset.arrayBuffer();
+    }
+    const size = kidsIntroBuffer.byteLength;
+    const range = request.headers.get("Range") || request.headers.get("range") || "";
+    const match = range.match(/bytes=(\d*)-(\d*)/);
+    let start = 0;
+    let end = size - 1;
+    let status = 200;
+    if (match) {
+      start = match[1] ? Number(match[1]) : 0;
+      end = match[2] ? Number(match[2]) : size - 1;
+      if (Number.isNaN(start) || start < 0) start = 0;
+      if (Number.isNaN(end) || end >= size) end = size - 1;
+      if (start > end) start = 0;
+      status = 206;
+    }
+    const headers = {
+      "Content-Type": "video/mp4",
+      "Accept-Ranges": "bytes",
+      "Cache-Control": "public, max-age=86400",
+      "Access-Control-Allow-Origin": "*"
+    };
+    if (status === 206) {
+      headers["Content-Range"] = "bytes " + start + "-" + end + "/" + size;
+      headers["Content-Length"] = String(end - start + 1);
+    } else {
+      headers["Content-Length"] = String(size);
+    }
+    if (request.method === "HEAD") return new Response(null, { status, headers });
+    const body = status === 206 ? kidsIntroBuffer.slice(start, end + 1) : kidsIntroBuffer;
+    return new Response(body, { status, headers });
+  } catch (eVid) {
+    return null;
+  }
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -445,6 +491,10 @@ export default {
     if (prayerApi) return prayerApi;
     const gated = gateHiddenSurfaces(request, url, env, "live");
     if (gated) return gated;
+    if (request.method === "GET" || request.method === "HEAD") {
+      const intro = await serveKidsIntroVideo(request, url, env);
+      if (intro) return intro;
+    }
     const isRoot = url.pathname === "/" || url.pathname === "/index.html";
     const ua = String(request.headers.get("User-Agent") || "");
     const nativeApp = isNativeAppRequest(ua);
