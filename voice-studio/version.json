@@ -557,7 +557,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "9eae87d722088d761848f88187527005916a6d5e",
+  "releaseRef": "15bee7f607eef81d872426409b74027b01237646",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "Der komplette Kids-Quiz-Bereich wurde in die lokale Serhat-Stimmenautomatik aufgenommen. Alle Quizfragen inklusive vorgelesener Antwortmöglichkeiten, Erfolgsrückmeldungen, Fehlversuch-Hinweise und Quiz-Abschluss werden lokal mit der autorisierten Serhat-Stimme erzeugt und technisch geprüft. Der Quiz-Runtime-Player nutzt nach vorhandenem Serhat-Pack keine Systemstimme mehr.",
@@ -755,5 +755,6 @@
     "runtime": "kids/quiz-owner-voice.js",
     "packagedQuizSource": "voice-studio/quiz-kids.json",
     "xcodeRequired": false
-  }
+  },
+  "validatedQuizVoiceRef": "15bee7f607eef81d872426409b74027b01237646"
 }
