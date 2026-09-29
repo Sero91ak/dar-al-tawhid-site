@@ -2374,15 +2374,60 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .app[data-age="4–5"] #alphabetModal .lesson-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
-/* KIDS V0.79 · VIDEO ONLY · iOS-safe playback */
+/* KIDS V0.82 · cinematic start, skip, spring title */
 .kids-launch-v79{
   position:fixed;inset:0;z-index:1000;overflow:hidden;
-  background:#000;opacity:1;pointer-events:auto;
+  background:radial-gradient(120% 90% at 50% 28%,#2b241c 0%,#14110e 58%,#0b0a09 100%);
+  opacity:1;pointer-events:auto;
 }
 .k79-video{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:center center;
-  display:block;background:#000;
+  position:absolute;left:50%;top:50%;
+  width:auto;height:92%;
+  max-width:92%;
+  transform:translate(-50%,-50%) scale(.92);
+  object-fit:contain;object-position:center center;
+  display:block;background:transparent;
+  filter:saturate(1.05) contrast(1.04);
+}
+.k79-mark{
+  position:absolute;left:0;right:0;top:12%;
+  z-index:2;pointer-events:none;text-align:center;
+  padding:0 18px;
+}
+.k79-mark .k79-dar,.k79-mark .k79-kids{
+  display:block;opacity:0;transform:translateY(34px) scale(.82);
+  filter:blur(8px);
+}
+.k79-mark .k79-dar{
+  font-family:"Cinzel",Georgia,serif;
+  font-weight:700;letter-spacing:.22em;
+  font-size:clamp(18px,5.6vw,34px);
+  color:#f3e2c0;
+  text-shadow:0 10px 28px rgba(0,0,0,.45);
+}
+.k79-mark .k79-kids{
+  margin-top:8px;
+  font-family:"Fredoka","Cinzel",sans-serif;
+  font-weight:700;letter-spacing:.16em;
+  font-size:clamp(28px,9vw,54px);
+  color:#ffe7b8;
+  text-shadow:0 12px 30px rgba(0,0,0,.4);
+}
+.k79-mark.is-in .k79-dar{animation:k79Spring .78s cubic-bezier(.18,1.15,.32,1) forwards}
+.k79-mark.is-in .k79-kids{animation:k79Spring .78s .16s cubic-bezier(.18,1.15,.32,1) forwards}
+@keyframes k79Spring{
+  0%{opacity:0;transform:translateY(34px) scale(.82);filter:blur(8px)}
+  62%{opacity:1;transform:translateY(-6px) scale(1.04);filter:blur(0)}
+  100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+}
+.k79-skip{
+  position:absolute;right:14px;top:max(12px,env(safe-area-inset-top));
+  z-index:3;min-height:40px;padding:0 14px;
+  border:0;border-radius:999px;
+  background:rgba(20,16,12,.42);color:#f6ead4;
+  font:650 13px/1 "Fredoka",sans-serif;
+  letter-spacing:.04em;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
 }
 .kids-launch-v79.is-ending{animation:k79FadeOut .28s ease forwards;pointer-events:none}
 @keyframes k79FadeOut{to{opacity:0;visibility:hidden}}
@@ -2392,11 +2437,16 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 </head>
 <body>
-<div class="kids-launch-v79" data-kids-launch="v79" aria-hidden="true">
-  <video id="kidsCinemaV79" class="k79-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture poster="/kids/assets/kids-cinema/poster-v65.jpg">
-    <source src="/kids/assets/kids-cinema/intro-v74.mp4?v=81" type="video/mp4">
+<div class="kids-launch-v79" data-kids-launch="v82" aria-hidden="true">
+  <video id="kidsCinemaV79" class="k79-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture>
+    <source src="/kids/assets/kids-cinema/intro-v74.mp4?v=82" type="video/mp4">
   </video>
-  <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-serhat.m4a?v=serhat-owner-20260929"></audio>
+  <div class="k79-mark" id="kidsLaunchMark">
+    <span class="k79-dar">DĀR AL TAWḤĪD</span>
+    <span class="k79-kids">Kids</span>
+  </div>
+  <button type="button" class="k79-skip" id="kidsLaunchSkip">Überspringen</button>
+  <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-clear.m4a?v=82"></audio>
 </div>
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
@@ -6397,10 +6447,13 @@ fetchCatalog();
   var launch=document.querySelector(".kids-launch-v79");
   var video=document.getElementById("kidsCinemaV79");
   var greeting=document.getElementById("kidsOwnerGreeting");
+  var mark=document.getElementById("kidsLaunchMark");
+  var skip=document.getElementById("kidsLaunchSkip");
   if(!launch||!video)return;
 
   var removed=false;
   var started=false;
+  var spoken=false;
   var startupTimer=0;
   var maxTimer=0;
 
@@ -6412,8 +6465,20 @@ fetchCatalog();
     launch.classList.add("is-ending");
     window.setTimeout(function(){
       try{video.pause()}catch(e){}
+      try{if(greeting)greeting.pause()}catch(e2){}
       launch.remove();
     },300);
+  }
+
+  function speakTitle(){
+    if(spoken||!greeting)return;
+    spoken=true;
+    if(mark)mark.classList.add("is-in");
+    greeting.volume=0.92;
+    try{greeting.currentTime=0}catch(e){}
+    var gp;
+    try{gp=greeting.play()}catch(ePlay){return}
+    if(gp&&typeof gp.catch==="function")gp.catch(function(){spoken=false});
   }
 
   function tryPlay(){
@@ -6428,31 +6493,17 @@ fetchCatalog();
     if(p&&typeof p.catch==="function"){p.catch(function(){})}
   }
 
-  function tryOwnerGreeting(){
-    if(!greeting)return;
-    if(!(window.DAR_KIDS_IOS_APP||window.DAR_IOS_NATIVE_APP||window.DAR_OFFICIAL_IOS_APP))return;
-    try{
-      if(sessionStorage.getItem("kids.owner.greeting.played.v1")==="1")return;
-    }catch(e){}
-    greeting.volume=0.96;
-    greeting.currentTime=0;
-    var gp;
-    try{gp=greeting.play()}catch(e){return}
-    if(gp&&typeof gp.then==="function"){
-      gp.then(function(){
-        try{sessionStorage.setItem("kids.owner.greeting.played.v1","1")}catch(e){}
-      }).catch(function(){});
-    }
-  }
-
   function onPlaying(){
     if(started)return;
     started=true;
     if(startupTimer)clearTimeout(startupTimer);
-    setTimeout(tryOwnerGreeting,260);
-    var remaining=9000;
+    try{
+      if(video.currentTime<0.35)video.currentTime=0.35;
+    }catch(eSeek){}
+    speakTitle();
+    var remaining=8200;
     if(Number.isFinite(video.duration)&&video.duration>0){
-      remaining=Math.min(12000,Math.max(1500,(video.duration-video.currentTime)*1000+900));
+      remaining=Math.min(9000,Math.max(2200,(video.duration-video.currentTime)*1000+400));
     }
     maxTimer=setTimeout(removeLaunch,remaining);
   }
@@ -6465,7 +6516,7 @@ fetchCatalog();
   video.preload="auto";
 
   video.addEventListener("loadedmetadata",function(){
-    try{video.currentTime=0}catch(e){}
+    try{video.currentTime=0.35}catch(e){}
     tryPlay();
   },{once:true});
   video.addEventListener("loadeddata",tryPlay,{once:true});
@@ -6473,27 +6524,33 @@ fetchCatalog();
   video.addEventListener("playing",onPlaying,{once:true});
   video.addEventListener("ended",removeLaunch,{once:true});
   video.addEventListener("error",removeLaunch,{once:true});
-  video.addEventListener("stalled",removeLaunch,{once:true});
   video.addEventListener("abort",removeLaunch,{once:true});
+
+  if(skip){
+    skip.addEventListener("click",function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      removeLaunch();
+    });
+  }
+  launch.addEventListener("pointerdown",function(e){
+    if(e.target&&e.target.closest&&e.target.closest(".k79-skip"))return;
+    if(!started)tryPlay();
+    speakTitle();
+  });
 
   document.addEventListener("visibilitychange",function(){
     if(!document.hidden&&!started)tryPlay();
   });
-  document.addEventListener("pointerdown",function(){
-    if(!started)tryPlay();
-    tryOwnerGreeting();
-  },{once:true,capture:true});
 
   try{video.load()}catch(e){}
   tryPlay();
-  setTimeout(tryPlay,250);
-  setTimeout(tryPlay,750);
-  setTimeout(tryPlay,1400);
+  setTimeout(tryPlay,180);
+  setTimeout(tryPlay,480);
 
   startupTimer=setTimeout(function(){
     if(!started)removeLaunch();
-  },15000);
-  setTimeout(removeLaunch,15000);
+  },12000);
 })();
 </script>
 
