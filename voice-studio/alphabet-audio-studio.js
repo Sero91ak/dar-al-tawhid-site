@@ -13,6 +13,7 @@ let candidateBlob=null;
 let candidateUrl="";
 let candidateHeard=false;
 let candidatePreviewId="";
+let candidateExistingMaster=false;
 let variant=0;
 let batchPollTimer=0;
 let batchAutoStarted=false;
@@ -79,6 +80,7 @@ function isOwnerMaster(item){
   const slot=item?.slot||{};
   return Boolean(
     slot.verified===true &&
+    slot.linguisticVerified===true &&
     slot.url &&
     (slot.sourceVoice==="authorized-owner-voice" || slot.voiceProfileId===TARGET_VOICE)
   );
@@ -101,15 +103,22 @@ async function applyLocalMasters(){
     for(const master of (d?.masters||[])){
       const slot=slotForMaster(manifest,master);
       if(!slot)continue;
+      const linguisticVerified=master?.linguisticVerified===true;
       Object.assign(slot,{
-        verified:true,
+        verified:linguisticVerified,
+        linguisticVerified,
+        technicalQaPassed:true,
+        reviewStatus:linguisticVerified?"approved":"needs-human-review",
         sourceVoice:"authorized-owner-voice",
         voiceProfileId:TARGET_VOICE,
-        sourceType:"local-owner-confirmed-master",
-        url:String(master.url||slot.url||""),
+        sourceType:"local-owner-candidate",
         localMaster:true,
-        localMasterConfirmedAt:String(master.confirmedAt||"")
+        localMasterUrl:String(master.url||""),
+        localMasterFilename:String(master.filename||""),
+        localMasterConfirmedAt:String(master.confirmedAt||""),
+        reviewedAt:String(master.reviewedAt||"")
       });
+      if(linguisticVerified&&master.url)slot.url=String(master.url);
     }
   }catch{}
 }
@@ -130,6 +139,7 @@ function alifPronunciationReference(){
 function clearCandidate(){
   candidateHeard=false;
   candidatePreviewId="";
+  candidateExistingMaster=false;
   candidateBlob=null;
   if(candidateUrl){URL.revokeObjectURL(candidateUrl);candidateUrl=""}
   const p=q("alphabetPackPlayer");
@@ -155,7 +165,7 @@ function renderProgress(){
   const all=slotList(manifest);
   const done=all.filter(isOwnerMaster).length;
   if(q("alphabetPackProgress")){
-    q("alphabetPackProgress").textContent=done+" / "+all.length+" Serhat-Master bestätigt · "+(all.length-done)+" offen";
+    q("alphabetPackProgress").textContent=done+" / "+all.length+" sprachlich bestätigt · "+(all.length-done)+" prüfen";
   }
   const ref=q("alphabetPackReferenceState");
   if(ref){
@@ -185,11 +195,14 @@ function renderCurrent(){
   }
   if(q("alphabetPackLabel")){
     q("alphabetPackLabel").textContent=
-      current.letterId.toUpperCase()+" · "+current.label+" · Serhat-Lernstimme";
+      current.letterId.toUpperCase()+" · "+current.label+" · sprachliche Prüfung";
   }
   if(q("alphabetPackArabic"))q("alphabetPackArabic").textContent=current.slot?.text||"—";
   if(q("alphabetPackGenerateBtn"))q("alphabetPackGenerateBtn").disabled=false;
   clearCandidate();
+  if(current.slot?.localMasterUrl){
+    loadExistingMasterCandidate();
+  }
 }
 async function fetchManifestJson(url,options={}){
   const r=await fetch(url,{cache:"no-store",...options});
@@ -237,18 +250,63 @@ function nextPending(){
   if(!manifest)return null;
   return pendingList(manifest)[0]||null;
 }
+function currentPronunciationReference(){
+  if(current?.slot){
+    const alts=Array.isArray(current.slot.alternateSources)?current.slot.alternateSources:[];
+    const ext=alts.find(a=>
+      String(a?.sourceType||"").startsWith("external-") &&
+      String(a?.url||"").trim()
+    );
+    if(ext)return ext;
+  }
+  if(current?.letterId==="alif"&&current?.kind==="name"){
+    return alifPronunciationReference();
+  }
+  return null;
+}
+async function loadExistingMasterCandidate(){
+  if(!current?.slot?.localMasterUrl)return;
+  try{
+    const r=await fetch(String(current.slot.localMasterUrl),{cache:"no-store"});
+    if(!r.ok)throw Error("Lokaler Serhat-Kandidat konnte nicht geladen werden.");
+    candidateBlob=await r.blob();
+    if(!candidateBlob.size)throw Error("Lokaler Serhat-Kandidat ist leer.");
+    candidateExistingMaster=true;
+    candidatePreviewId="";
+    candidateUrl=URL.createObjectURL(candidateBlob);
+    const p=q("alphabetPackPlayer");
+    if(!p)return;
+    p.src=candidateUrl;
+    p.hidden=false;
+    p.onended=()=>{
+      candidateHeard=true;
+      q("alphabetPackApproveBtn").disabled=false;
+      setMsg("Bestehenden Serhat-Clip vollständig gehört. Nur bei sprachlich korrekter Aussprache bestätigen.","warn");
+    };
+    p.onerror=()=>setMsg("Bestehender Serhat-Clip konnte nicht abgespielt werden.","bad");
+    q("alphabetPackRetryBtn").disabled=false;
+    q("alphabetPackNowPlaying").textContent="Vorhandener Serhat-Clip · sprachlich noch nicht bestätigt";
+    setMsg("Dieser Clip hat nur technische QA bestanden. Bitte anhören; bei Fehlern eine neue Variante erzeugen.","warn");
+  }catch(e){
+    setMsg(e?.message||String(e),"bad");
+  }
+}
+
 async function playReference(){
   if(!manifest){setMsg("Alphabet-Audio-Manifest ist noch nicht geladen.","warn");return}
-  const slot=alifPronunciationReference();
-  if(!slot?.url){setMsg("Alif-Aussprache-Referenz fehlt im Manifest.","bad");return}
+  const slot=currentPronunciationReference();
+  if(!slot?.url){
+    setMsg("Für diesen Clip ist noch keine externe menschliche Aussprache-Referenz hinterlegt.","warn");
+    return;
+  }
   const p=q("alphabetPackPlayer");
   if(!p)return;
   try{
     p.pause();
     p.src=String(slot.url);
     p.hidden=false;
-    p.onended=()=>setMsg("Alif-Aussprache-Referenz vollständig gehört. Jetzt Serhat-Kandidat erzeugen.","good");
-    q("alphabetPackNowPlaying").textContent="Aussprache-Referenz: Alif";
+    p.onended=()=>setMsg("Menschliche Aussprache-Referenz vollständig gehört. Jetzt mit dem Serhat-Clip vergleichen.","good");
+    q("alphabetPackNowPlaying").textContent="Menschliche Aussprache-Referenz · "+String(slot.sourceProvider||"Arabisch");
     await p.play();
   }catch(e){setMsg(e?.message||String(e),"bad")}
 }
@@ -259,6 +317,7 @@ async function generateCandidate(){
   if(btn){btn.disabled=true;btn.textContent="Serhat-Stimme wird erzeugt …"}
   try{
     clearCandidate();
+    candidateExistingMaster=false;
     const slotId=[current.letterId,current.kind,current.key||"main"].join("-");
     const r=await fetch("/alphabet/preview",{
       method:"POST",
@@ -316,7 +375,7 @@ async function approveCurrent(){
     setMsg("Bitte den Serhat-Kandidaten zuerst vollständig anhören.","warn");
     return;
   }
-  if(!candidatePreviewId){
+  if(!candidateExistingMaster&&!candidatePreviewId){
     setMsg("Lokale Bestätigungs-ID fehlt. Bitte Kandidat neu erzeugen.","bad");
     return;
   }
@@ -326,23 +385,27 @@ async function approveCurrent(){
   if(btn){btn.disabled=true;btn.textContent="Master wird lokal gespeichert …"}
   try{
     const slotId=[current.letterId,current.kind,current.key||"main"].join("-");
-    const r=await fetch("/alphabet/confirm",{
+    const endpoint=candidateExistingMaster?"/alphabet/review-approve":"/alphabet/confirm";
+    const payload=candidateExistingMaster
+      ?{slotId}
+      :{
+          previewId:candidatePreviewId,
+          slotId,
+          letterId:current.letterId,
+          kind:current.kind,
+          key:current.key||"",
+          text:String(current.slot?.text||"")
+        };
+    const r=await fetch(endpoint,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        previewId:candidatePreviewId,
-        slotId,
-        letterId:current.letterId,
-        kind:current.kind,
-        key:current.key||"",
-        text:String(current.slot?.text||"")
-      }),
+      body:JSON.stringify(payload),
       cache:"no-store"
     });
     const d=await r.json().catch(()=>({}));
     if(!r.ok||d?.ok===false)throw Error(d?.error||"Serhat-Master konnte lokal nicht gespeichert werden.");
 
-    setMsg("Bestätigt: lokal als fester Serhat-Master gespeichert. Kein Cloudflare-/GitHub-Code erforderlich.","good");
+    setMsg("Sprachlich bestätigt: Dieser Serhat-Clip ist jetzt als Lern-Master freigegeben.","good");
     variant=0;
     await loadManifest();
     current=nextPending();
@@ -490,9 +553,9 @@ loadManifest().then(()=>{
   renderCurrent();
   if(!manifest)return;
   if(current){
-    setMsg("Bereit. Die lokale Serhat Engine übernimmt jetzt automatisch das komplette Alif–Yāʾ-Paket; Einzelbestätigungen sind nur noch als manuelle Fehlerkorrektur vorhanden.");
+    setMsg("Die 140 Serhat-Clips sind technische Kandidaten. Wegen festgestellter Aussprachefehler muss jeder Lernclip sprachlich geprüft werden; bestehende Kandidaten werden wiederverwendet.");
   }else{
-    setMsg("Alle Alphabet-/Ḥarakāt-/Wort-Clips sind lokal als Serhat-Master vorhanden. Die Alif-Aussprache-Referenz bleibt separat erhalten.","good");
+    setMsg("Alle Alphabet-/Ḥarakāt-/Wort-Clips sind sprachlich bestätigt. Die Aussprache-Referenzen bleiben separat erhalten.","good");
   }
   readBatchState().then(state=>{
     if(state?.running)beginBatchPolling();
