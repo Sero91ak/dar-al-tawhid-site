@@ -164,7 +164,7 @@ jobs:
           required_html=[
               'id="alphabetPackBatchBtn"',
               'id="alphabetPackBatchState"',
-              "VOICE STUDIO 2.9.37",
+              "VOICE STUDIO 2.9.38",
           ]
           failures=[]
           for label,src,markers in (
