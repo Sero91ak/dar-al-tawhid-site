@@ -1,0 +1,132 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2851-2875",
+  "series": "2851-2950",
+  "status": "completed-earliest-sharh-audit",
+  "ruleVersion": 6,
+  "reason": "Fortsetzung mit Waswasah, Ruʾyah-Berichten, Ṣifāt und Tawbah. Authentische Aussagen von ʿĀʾišah, Abū Ḏarr und Ibn ʿAbbās zur Ruʾyah wurden nach Gewährsperson und Wortlaut getrennt gehalten. Früher Šarḥ nach al-Māzirī; unsichere Druckseiten wurden nicht geschätzt und bleiben null. Ṣifāt-Texte werden bestätigt ohne Takyīf/Tamṯīl. Tawbah-Berichte werden ohne Abschwächung der zugrunde liegenden Sünden wiedergegeben.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "dedupeDecisions": [
+    "Muslim 134 variants split only by distinct prophetic instruction",
+    "Ruʾyah reports kept separate by narrator and wording",
+    "Muslim 179 split only into substantive clauses",
+    "Tawbah parallels retained only where independent narrator/text adds content"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2851",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2852",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2853",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2854",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2855",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2856",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2857",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2858",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2859",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2860",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2861",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2862",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2863",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2864",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2865",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2866",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2867",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2868",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2869",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2870",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2871",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2872",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2873",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2874",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2875",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    }
+  ]
+}
