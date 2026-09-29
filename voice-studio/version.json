@@ -1,10 +1,10 @@
 {
-  "version": "2.9.30",
-  "updatedAt": "2026-09-29T11:56:00+02:00",
-  "deployTrigger": "voice-studio-2.9.30-local-serhat-quiz-voice",
+  "version": "2.9.31",
+  "updatedAt": "2026-09-29T12:08:00+02:00",
+  "deployTrigger": "voice-studio-2.9.31-quiz-token-limit-rescue",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v40",
+  "cache": "dar-voice-studio-v41",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -557,10 +557,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "15bee7f607eef81d872426409b74027b01237646",
+  "releaseRef": "94880dab4900618bd63bd6e6aef41e5e0b611a42",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Der komplette Kids-Quiz-Bereich wurde in die lokale Serhat-Stimmenautomatik aufgenommen. Alle Quizfragen inklusive vorgelesener Antwortmöglichkeiten, Erfolgsrückmeldungen, Fehlversuch-Hinweise und Quiz-Abschluss werden lokal mit der autorisierten Serhat-Stimme erzeugt und technisch geprüft. Der Quiz-Runtime-Player nutzt nach vorhandenem Serhat-Pack keine Systemstimme mehr.",
+  "updateRepairReason": "Quiz-Batch konnte bei längeren gesprochenen Frage+Antwort-Prompts mit generation_token_limit stoppen. 2.9.31 zerlegt ausschließlich Quiz-Ansagen semantisch in sichere kurze Serhat-Sprachblöcke, rendert jeden Block mit vollständiger QA, setzt sie anschließend wieder zu einem einzigen Quiz-Audio zusammen und prüft das Gesamt-Audio. Bereits fertige Alphabet- und Quiz-Master werden beim Neustart wiederverwendet, sodass der Batch nach einem Fehler fortgesetzt wird statt von vorn zu synthetisieren.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -735,7 +735,9 @@
     "preservesAlifPronunciationReference": true,
     "quizIncluded": true,
     "quizVoiceTexts": 85,
-    "totalGeneratedUnits": 226
+    "totalGeneratedUnits": 226,
+    "resumeExistingAlphabetMasters": true,
+    "resumeExistingQuizMasters": true
   },
   "quizOwnerVoice": {
     "enabled": true,
@@ -754,7 +756,14 @@
     "assets": "kids/assets/kids-quiz-audio/",
     "runtime": "kids/quiz-owner-voice.js",
     "packagedQuizSource": "voice-studio/quiz-kids.json",
-    "xcodeRequired": false
+    "xcodeRequired": false,
+    "tokenLimitRescue": true,
+    "semanticPromptChunking": true,
+    "maxQuizRenderPartChars": 48,
+    "recursiveTokenLimitRescue": true,
+    "compositeFinalQa": true,
+    "persistentMasterCache": "~/SerhatVoice/QuizMasters/",
+    "resumeAfterFailure": true
   },
-  "validatedQuizVoiceRef": "15bee7f607eef81d872426409b74027b01237646"
+  "validatedQuizVoiceRef": "94880dab4900618bd63bd6e6aef41e5e0b611a42"
 }
