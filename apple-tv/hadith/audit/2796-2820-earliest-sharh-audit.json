@@ -1,0 +1,134 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2796-2820",
+  "series": "2751-2850",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Fortsetzung von Ṣaḥīḥ Muslim 108–120. Reine Isnād-/Wiederholungsvarianten wurden zusammengeführt. Muslim 109–113 werden als schwere Waʿīd-Texte ohne operationalisierende Details und ohne pauschalen Einzelfall-Takfīr wiedergegeben; Muslim 116 bewahrt ausdrücklich Muslims Kapitelbeweis, dass Selbsttötung nicht automatisch Kufr ist. Muslim 118 warnt vor Fitnah und Religionsverkauf für Dunyā, ohne daraus unbelegten Einzelfall-Takfīr abzuleiten.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "dedupeDecisions": [
+    "Muslim 108b merged with 108a",
+    "Muslim 109b not duplicated",
+    "Muslim 110a-d split only by substantive clauses",
+    "Muslim 113b not duplicated",
+    "Muslim 119b-d merged with 119a",
+    "Muslim 120b-c merged with 120a"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2796",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2797",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2798",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2799",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2800",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2801",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2802",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2803",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2804",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2805",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2806",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2807",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2808",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2809",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2810",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2811",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2812",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2813",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2814",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2815",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2816",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2817",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2818",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2819",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-2820",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    }
+  ]
+}
