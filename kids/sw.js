@@ -11,6 +11,8 @@ const PRECACHE=[
   "/kids/data/alphabet-audio.json",
   "/kids/data/dua-kids.json",
   "/kids/data/quiz-kids.json",
+  "/kids/data/quiz-audio.json",
+  "/kids/quiz-owner-voice.js?v=1",
   "/kids/data/stories-authentic.json",
   "/kids/data/verified-content.json",
   "/kids/icons/icon-192.png?v=logo28",
