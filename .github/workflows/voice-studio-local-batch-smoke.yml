@@ -1,0 +1,68 @@
+name: Voice Studio Local Batch Smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'voice-studio/local-engine.py'
+      - 'voice-studio/alphabet-audio-studio.js'
+      - 'voice-studio/index.html'
+      - 'voice-studio/version.json'
+      - '.github/workflows/voice-studio-local-batch-smoke.yml'
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile local Voice Engine
+        run: |
+          python3 -m py_compile voice-studio/local-engine.py
+
+      - name: Check Alphabet Studio JavaScript
+        run: |
+          node --check voice-studio/alphabet-audio-studio.js
+
+      - name: Validate full local batch markers
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          js=Path("voice-studio/alphabet-audio-studio.js").read_text(encoding="utf-8")
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          required_engine=[
+              "def build_full_local_kids_voice_pack",
+              "def start_full_local_kids_voice_pack",
+              'if p=="/alphabet/batch-start"',
+              'elif p=="/alphabet/batch-state"',
+              'KidsAppExport',
+              'KidsAppPublishRepo',
+              'manualPerClipApprovalRequired',
+          ]
+          required_js=[
+              "startFullBatch",
+              "maybeAutoStartFullBatch",
+              'fetch("/alphabet/batch-start"',
+              'fetch("/alphabet/batch-state',
+              "Alle 140 Clips + Begrüßung",
+          ]
+          required_html=[
+              'id="alphabetPackBatchBtn"',
+              'id="alphabetPackBatchState"',
+              "VOICE STUDIO 2.9.29",
+          ]
+          failures=[]
+          for label,src,markers in (
+              ("engine",engine,required_engine),
+              ("js",js,required_js),
+              ("html",html,required_html),
+          ):
+              missing=[m for m in markers if m not in src]
+              if missing:
+                  failures.append(label+": "+", ".join(missing))
+          if failures:
+              raise SystemExit("Local batch smoke failed: "+" | ".join(failures))
+          print("Voice Studio local Serhat batch markers OK")
+          PY
