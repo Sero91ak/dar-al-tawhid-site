@@ -59,7 +59,13 @@
       "engine": "local-serhat-engine"
     },
     "linguisticReviewRequired": true,
-    "technicalQaIsNotPronunciationVerification": true
+    "technicalQaIsNotPronunciationVerification": true,
+    "fushaStrict": true,
+    "fushaDialectVariantsAccepted": false,
+    "canonicalPhonology": "Modern Standard Arabic / Classical Fuṣḥā consonants with short vowels /a i u/",
+    "harakatGenerationStrategy": "repeat-three-times, isolate-clean-token, rerun-technical-QA",
+    "pronunciationVerification": "human-reference where available + mandatory linguistic review; technical QA alone never approves",
+    "ipaPurpose": "canonical target metadata and diagnostics; IPA metadata does not auto-certify generated audio"
   },
   "letters": {
     "alif": {
@@ -124,7 +130,10 @@
         ],
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "ʔa.lif",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -171,7 +180,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ʔa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "إِ",
@@ -217,7 +230,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ʔi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "أُ",
@@ -263,7 +280,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ʔu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -330,8 +351,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "ʔ",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "ʔ"
     },
     "ba": {
       "name": {
@@ -396,7 +421,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "baːʔ",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -443,7 +471,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ba",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "بِ",
@@ -489,7 +521,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "bi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "بُ",
@@ -535,7 +571,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "bu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -600,8 +640,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "b",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "b"
     },
     "ta": {
       "name": {
@@ -666,7 +710,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "taːʔ",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -713,7 +760,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ta",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "تِ",
@@ -759,7 +810,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ti",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "تُ",
@@ -805,7 +860,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "tu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -870,8 +929,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "t",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "t"
     },
     "tha": {
       "name": {
@@ -936,7 +999,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "θaːʔ",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -983,7 +1049,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "θa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "ثِ",
@@ -1029,7 +1099,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "θi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "ثُ",
@@ -1075,7 +1149,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "θu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -1142,8 +1220,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "θ",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "θ"
     },
     "jim": {
       "name": {
@@ -1208,7 +1290,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "d͡ʒiːm",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -1255,7 +1340,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "d͡ʒa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "جِ",
@@ -1301,7 +1390,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "d͡ʒi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "جُ",
@@ -1347,7 +1440,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "d͡ʒu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -1412,8 +1509,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "d͡ʒ",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "d͡ʒ"
     },
     "ha": {
       "name": {
@@ -1478,7 +1579,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "ħaːʔ",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -1525,7 +1629,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ħa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "حِ",
@@ -1571,7 +1679,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ħi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "حُ",
@@ -1617,7 +1729,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ħu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -1682,8 +1798,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "ħ",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "ħ"
     },
     "kha": {
       "name": {
@@ -1748,7 +1868,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "xaːʔ",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -1795,7 +1918,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "xa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "خِ",
@@ -1841,7 +1968,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "xi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "خُ",
@@ -1887,7 +2018,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "xu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -1952,8 +2087,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "x",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "x"
     },
     "dal": {
       "name": {
@@ -2000,7 +2139,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "daːl",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -2047,7 +2189,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "da",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "دِ",
@@ -2093,7 +2239,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "di",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "دُ",
@@ -2139,7 +2289,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "du",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -2204,8 +2358,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "d",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "d"
     },
     "dhal": {
       "name": {
@@ -2270,7 +2428,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "ðaːl",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -2317,7 +2478,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ða",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "ذِ",
@@ -2363,7 +2528,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ði",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "ذُ",
@@ -2409,7 +2578,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ðu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -2474,8 +2647,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "ð",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "ð"
     },
     "ra": {
       "name": {
@@ -2540,7 +2717,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "raːʔ",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -2587,7 +2767,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ra",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "رِ",
@@ -2633,7 +2817,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ri",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "رُ",
@@ -2679,7 +2867,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ru",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -2746,8 +2938,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "r",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "r"
     },
     "zay": {
       "name": {
@@ -2794,7 +2990,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "zaːj",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -2841,7 +3040,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "za",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "زِ",
@@ -2887,7 +3090,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "zi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "زُ",
@@ -2933,7 +3140,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "zu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -2998,8 +3209,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "z",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "z"
     },
     "sin": {
       "name": {
@@ -3064,7 +3279,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "siːn",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -3111,7 +3329,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "sa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "سِ",
@@ -3157,7 +3379,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "si",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "سُ",
@@ -3203,7 +3429,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "su",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -3268,8 +3498,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "s",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "s"
     },
     "shin": {
       "name": {
@@ -3334,7 +3568,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "ʃiːn",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -3381,7 +3618,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ʃa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "شِ",
@@ -3427,7 +3668,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ʃi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "شُ",
@@ -3473,7 +3718,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ʃu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -3538,8 +3787,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "ʃ",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "ʃ"
     },
     "sad": {
       "name": {
@@ -3604,7 +3857,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "sˤaːd",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -3651,7 +3907,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "sˤa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "صِ",
@@ -3697,7 +3957,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "sˤi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "صُ",
@@ -3743,7 +4007,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "sˤu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -3790,8 +4058,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "sˤ",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "sˤ"
     },
     "dad": {
       "name": {
@@ -3856,7 +4128,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "dˤaːd",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -3903,7 +4178,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "dˤa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "ضِ",
@@ -3949,7 +4228,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "dˤi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "ضُ",
@@ -3995,7 +4278,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "dˤu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -4062,8 +4349,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "dˤ",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "dˤ"
     },
     "taa": {
       "name": {
@@ -4128,7 +4419,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "tˤaːʔ",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -4175,7 +4469,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "tˤa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "طِ",
@@ -4221,7 +4519,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "tˤi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "طُ",
@@ -4267,7 +4569,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "tˤu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -4332,8 +4638,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "tˤ",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "tˤ"
     },
     "zaa": {
       "name": {
@@ -4380,7 +4690,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "ðˤaːʔ",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -4427,7 +4740,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ðˤa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "ظِ",
@@ -4473,7 +4790,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ðˤi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "ظُ",
@@ -4519,7 +4840,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ðˤu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -4566,8 +4891,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "ðˤ",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "ðˤ"
     },
     "ayn": {
       "name": {
@@ -4632,7 +4961,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "ʕajn",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -4679,7 +5011,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ʕa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "عِ",
@@ -4725,7 +5061,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ʕi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "عُ",
@@ -4771,7 +5111,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ʕu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -4836,8 +5180,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "ʕ",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "ʕ"
     },
     "ghayn": {
       "name": {
@@ -4902,7 +5250,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "ɣajn",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -4949,7 +5300,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ɣa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "غِ",
@@ -4995,7 +5350,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ɣi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "غُ",
@@ -5041,7 +5400,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ɣu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -5108,8 +5471,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "ɣ",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "ɣ"
     },
     "fa": {
       "name": {
@@ -5174,7 +5541,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "faːʔ",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -5221,7 +5591,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "fa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "فِ",
@@ -5267,7 +5641,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "fi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "فُ",
@@ -5313,7 +5691,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "fu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -5380,8 +5762,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "f",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "f"
     },
     "qaf": {
       "name": {
@@ -5446,7 +5832,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "qaːf",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -5493,7 +5882,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "qa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "قِ",
@@ -5539,7 +5932,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "qi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "قُ",
@@ -5585,7 +5982,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "qu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -5650,8 +6051,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "q",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "q"
     },
     "kaf": {
       "name": {
@@ -5716,7 +6121,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "kaːf",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -5763,7 +6171,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ka",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "كِ",
@@ -5809,7 +6221,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ki",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "كُ",
@@ -5855,7 +6271,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ku",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -5920,8 +6340,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "k",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "k"
     },
     "lam": {
       "name": {
@@ -5986,7 +6410,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "laːm",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -6033,7 +6460,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "la",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "لِ",
@@ -6079,7 +6510,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "li",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "لُ",
@@ -6125,7 +6560,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "lu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -6192,8 +6631,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "l",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "l"
     },
     "mim": {
       "name": {
@@ -6258,7 +6701,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "miːm",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -6305,7 +6751,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ma",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "مِ",
@@ -6351,7 +6801,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "mi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "مُ",
@@ -6397,7 +6851,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "mu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -6462,8 +6920,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "m",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "m"
     },
     "nun": {
       "name": {
@@ -6528,7 +6990,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "nuːn",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -6575,7 +7040,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "na",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "نِ",
@@ -6621,7 +7090,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ni",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "نُ",
@@ -6667,7 +7140,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "nu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -6732,8 +7209,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "n",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "n"
     },
     "haa": {
       "name": {
@@ -6798,7 +7279,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "haːʔ",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -6845,7 +7329,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ha",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "هِ",
@@ -6891,7 +7379,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "hi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "هُ",
@@ -6937,7 +7429,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "hu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -6984,8 +7480,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "h",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "h"
     },
     "waw": {
       "name": {
@@ -7032,7 +7532,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "waːw",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -7079,7 +7582,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "wa",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "وِ",
@@ -7125,7 +7632,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "wi",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "وُ",
@@ -7171,7 +7682,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "wu",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -7238,8 +7753,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "w",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "w"
     },
     "ya": {
       "name": {
@@ -7304,7 +7823,10 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
+        "reviewStatus": "needs-human-review",
+        "fushaIpa": "jaːʔ",
+        "fushaTargetType": "letter-name",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
       },
       "harakat": {
         "fatha": {
@@ -7351,7 +7873,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ja",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "a",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "kasra": {
           "text": "يِ",
@@ -7397,7 +7923,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ji",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "i",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         },
         "damma": {
           "text": "يُ",
@@ -7443,7 +7973,11 @@
           "requiresManualReview": true,
           "technicalQaPassed": true,
           "linguisticVerified": false,
-          "reviewStatus": "needs-human-review"
+          "reviewStatus": "needs-human-review",
+          "fushaIpa": "ju",
+          "fushaTargetType": "consonant-short-vowel",
+          "fushaVowel": "u",
+          "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
         }
       },
       "word": {
@@ -7508,8 +8042,12 @@
         "requiresManualReview": true,
         "technicalQaPassed": true,
         "linguisticVerified": false,
-        "reviewStatus": "needs-human-review"
-      }
+        "reviewStatus": "needs-human-review",
+        "fushaInitialIpa": "j",
+        "fushaTargetType": "fully-vocalized-word",
+        "fushaStandard": "Modern Standard Arabic / Fuṣḥā"
+      },
+      "fushaPhoneme": "j"
     }
   },
   "sources": {
