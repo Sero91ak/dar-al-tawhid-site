@@ -3737,7 +3737,13 @@ def repair_internal_pause(wav,sr:int,text:str,language_id:str,mode:str):
     w=normalize_segment_shape(wav)
     inline_arabic=language_id=="ar" and is_inline_arabic_micro_term(text)
     fixed_phrase=language_id=="ar" and is_profile_fixed_phrase_tts(text)
-    if (language_id=="ar" and not inline_arabic and not fixed_phrase) or not w.numel() or w.shape[-1]<int(sr*0.3):
+    honorific_key=audio_lock_key_for_chunk(text) if language_id=="ar" else ""
+    honorific_phrase=honorific_key in HONORIFIC_KEYS
+    if (
+        (language_id=="ar" and not inline_arabic and not fixed_phrase and not honorific_phrase)
+        or not w.numel()
+        or w.shape[-1]<int(sr*0.3)
+    ):
         return w,{"repaired":False}
 
     env=w.abs().amax(dim=0)
@@ -3750,7 +3756,7 @@ def repair_internal_pause(wav,sr:int,text:str,language_id:str,mode:str):
     if count<5:
         return w,{"repaired":False}
     framed=env[:count*frame].reshape(count,frame).mean(dim=1)
-    if inline_arabic or fixed_phrase:
+    if inline_arabic or fixed_phrase or honorific_phrase:
         threshold=max(
             peak*float(QA_CONFIG.get("inlineArabicSilenceThresholdRelative",0.0045)),
             float(QA_CONFIG.get("inlineArabicSilenceAbsolute",0.00015))
@@ -3771,6 +3777,13 @@ def repair_internal_pause(wav,sr:int,text:str,language_id:str,mode:str):
         target_ms=int(phrase_cfg.get("flowRepairTargetMs",QA_CONFIG.get("fixedPhraseFlowTargetPauseMs",140)))
         trigger_ms=int(phrase_cfg.get("flowRepairTriggerMs",QA_CONFIG.get("fixedPhraseFlowRepairTriggerMs",320)))
         max_repair_ms=int(phrase_cfg.get("flowRepairMaxMs",QA_CONFIG.get("fixedPhraseFlowRepairMaxMs",900)))
+    elif honorific_phrase:
+        # Bekannte Ehrenformeln sind feste, kurze arabische Sprachbausteine.
+        # Eine 500–900-ms-Denkpause mitten in ﷺ/رضي الله عنه ist kein natürlicher
+        # Bestandteil der Formel und darf sicher komprimiert werden.
+        target_ms=int(QA_CONFIG.get("honorificFlowTargetPauseMs",90))
+        trigger_ms=int(QA_CONFIG.get("honorificFlowRepairTriggerMs",180))
+        max_repair_ms=int(QA_CONFIG.get("honorificFlowRepairMaxMs",900))
     else:
         target_ms=int(
             QA_CONFIG.get("autoRepairPauseWithPunctuationMs",220)
@@ -3877,7 +3890,9 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
             # Inseln komprimieren; aktive Phoneme bleiben unangetastet.
             proactive_pause_repair={}
             if language_id=="ar" and (
-                is_inline_arabic_micro_term(text) or is_profile_fixed_phrase_tts(text)
+                is_inline_arabic_micro_term(text)
+                or is_profile_fixed_phrase_tts(text)
+                or audio_lock_key_for_chunk(text) in HONORIFIC_KEYS
             ):
                 compacted,proactive_pause_repair=repair_internal_pause(
                     wav,int(model.sr),text,language_id,mode
@@ -3906,6 +3921,7 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
         if proactive_pause_repair.get("repaired"):
             metrics.update({
                 "arabic_phrase_flow_repaired":True,
+                "honorific_flow_repaired":bool(audio_lock_key_for_chunk(text) in HONORIFIC_KEYS),
                 "pause_ms_removed":int(proactive_pause_repair.get("pause_ms_removed",0)),
                 "target_pause_ms":int(proactive_pause_repair.get("target_pause_ms",0)),
             })
