@@ -1,10 +1,10 @@
 {
-  "version": "2.9.39",
-  "updatedAt": "2026-09-29T16:58:00+02:00",
-  "deployTrigger": "voice-studio-2.9.39-fusha-strict-alphabet",
+  "version": "2.9.40",
+  "updatedAt": "2026-09-29T20:20:00+02:00",
+  "deployTrigger": "voice-studio-2.9.40-fusha-v2-regeneration",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v49",
+  "cache": "dar-voice-studio-v50",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -557,10 +557,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "14833ec77e121e5871887be7f65a9e0e42c69f95",
+  "releaseRef": "d33f96b7407370b3a88462253685e6c08545ba0e",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "Alphabet-Produktion wurde auf Fuṣḥā-Strengmodus umgestellt. Alle 28 Buchstaben tragen jetzt kanonische MSA/Fuṣḥā-Phonemziele; Fatḥah/Kasrah/Ḍammah werden nicht mehr als einzelnes riskantes Glyph gerendert, sondern dreifach mit identischem Ziel gesprochen, ein sauberer Einzellaut wird akustisch isoliert und anschließend erneut technisch geprüft. Bis zu vier Varianten werden erzeugt und nur ein technisch sauberer Kandidat angeboten. Technische QA bleibt ausdrücklich getrennt von der sprachlichen Freigabe.",
+  "updateRepairReason": "2.9.40 erzwingt die vollständige Neuerzeugung aller 140 Alphabet-Kandidaten mit dem Fuṣḥā-Strengprofil `fusha-strict-v2`. Alte Kandidaten ohne dieses Profil werden nicht mehr aus dem Cache übernommen. Kurze Ḥarakāt werden dreifach erzeugt, als sauberer Einzellaut isoliert und erneut geprüft. Sprachliche Freigaben werden nur beibehalten, wenn exakt derselbe aktuelle Profil-Clip wiederverwendet wird. Der automatische GitHub-Push rebasiert vor dem Push auf origin/main und wiederholt transiente HTTP-5xx-Fehler bis zu drei Mal.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -779,7 +779,7 @@
     "normalFreeVoiceUnchanged": true,
     "compoundHonorificPauseFallback": true
   },
-  "validatedQuizVoiceRef": "5d9802dc804b818bbb9b6f77e400f52657dec3f7",
+  "validatedQuizVoiceRef": "d33f96b7407370b3a88462253685e6c08545ba0e",
   "kidsManifestRecovery": {
     "enabled": true,
     "installerValidatesAlphabet": true,
@@ -811,7 +811,14 @@
     "humanReferenceSlotsAvailable": 49,
     "reviewEndpoint": "/alphabet/review-approve",
     "regenerateWrongOrSilent": true,
-    "xcodeRequired": false
+    "xcodeRequired": false,
+    "generationProfile": "fusha-strict-v2",
+    "forceRegenerateLegacyCandidates": true,
+    "reuseOnlyMatchingProfile": true,
+    "preserveApprovalOnlyOnExactReusedProfile": true,
+    "harakatTripleRenderExtraction": true,
+    "autoStartWhenProfileOutdated": true,
+    "publishRetry5xx": 3
   },
   "updateVisibilityRepair": {
     "forceNewSemanticVersion": true,
