@@ -402,6 +402,53 @@ async function proxyQuranAudio(request, url) {
   }
 }
 
+async function proxyQuranText(request, url) {
+  if (url.pathname === "/quran-text/surah-list.json") {
+    try {
+      const upstream = await fetch("https://api.alquran.cloud/v1/surah", {
+        headers: { Accept: "application/json" },
+        cf: { cacheTtlByStatus: { "200": 86400, "400-599": 0 } }
+      });
+      if (!upstream.ok) return audioFail(upstream.status, "Surah list unavailable");
+      return new Response(await upstream.text(), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "public, max-age=86400, must-revalidate"
+        }
+      });
+    } catch (eList) {
+      return audioFail(502, "Surah list error");
+    }
+  }
+  const textMatch = url.pathname.match(/^\/quran-text\/([^/]+)\/surah\/(\d+)\.json$/);
+  if (!textMatch) return null;
+  const edition = decodeURIComponent(textMatch[1] || "");
+  const surah = Number(textMatch[2]);
+  if (!edition || edition.indexOf("..") >= 0 || !(surah >= 1 && surah <= 114)) {
+    return audioFail(400, "Bad text request");
+  }
+  try {
+    const dest = `https://api.alquran.cloud/v1/surah/${surah}/${edition}`;
+    const upstream = await fetch(dest, {
+      headers: { Accept: "application/json" },
+      cf: { cacheTtlByStatus: { "200": 3600, "400-599": 0 } }
+    });
+    if (!upstream.ok) return audioFail(upstream.status, "Text unavailable");
+    return new Response(await upstream.text(), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+        "Cache-Control": "public, max-age=300, must-revalidate"
+      }
+    });
+  } catch (eText) {
+    return audioFail(502, "Text proxy error");
+  }
+}
+
 async function proxyAdhanAudio(request, url) {
   const match = url.pathname.match(/^\/(?:apple-tv\/)?adhan\/(.+\.mp3)$/i);
   if (!match) return null;
@@ -474,6 +521,8 @@ export default {
     if (request.method === "GET" || request.method === "HEAD") {
       const audio = await proxyQuranAudio(request, url);
       if (audio) return audio;
+      const text = await proxyQuranText(request, url);
+      if (text) return text;
       const adhan = await proxyAdhanAudio(request, url);
       if (adhan) return adhan;
     }
