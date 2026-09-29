@@ -2374,123 +2374,30 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .app[data-age="4–5"] #alphabetModal .lesson-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
-/* KIDS V0.94 · hang, widen, load, burst; voice only in preview */
-.kids-launch-v79{
-  position:absolute;left:0;top:0;width:100%;min-height:100%;min-height:100dvh;
-  z-index:9999;box-sizing:border-box;
-  background:#02060c;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:48px 16px 28px;overflow:visible;
-}
-.k79-water{
-  position:absolute;left:50%;top:42%;width:min(140vw,640px);height:min(140vw,640px);
-  margin:-min(70vw,320px) 0 0 -min(70vw,320px);
-  background:url("/kids/icons/icon-1024.png?v=logo28") center/contain no-repeat;
-  opacity:.09;pointer-events:none;z-index:0;
-  animation:k79Water 9s ease-out forwards;
-}
-@keyframes k79Water{
-  0%{opacity:0;transform:scale(.8)}
-  24%{opacity:.14;transform:scale(1)}
-  100%{opacity:.08;transform:scale(1.18)}
-}
-.k79-cord{
-  position:absolute;top:0;left:50%;width:2px;height:72px;margin-left:-1px;
-  background:linear-gradient(#c9a86a,#8a6a3a);z-index:3;pointer-events:none;
-  transform-origin:top center;
-  animation:k79Cord 2.6s ease-in-out 2;
-}
-@keyframes k79Cord{
-  0%{transform:rotate(-8deg)}
-  50%{transform:rotate(7deg)}
-  100%{transform:rotate(0)}
-}
-.k79-hang{
-  position:relative;z-index:2;transform-origin:50% -36px;
-  animation:k79Swing 2.6s ease-in-out 2;
-}
-@keyframes k79Swing{
-  0%{transform:rotate(-8deg) scale(.82)}
-  50%{transform:rotate(7deg) scale(.9)}
-  100%{transform:rotate(0) scale(1)}
-}
-.k79-poster{
-  width:min(72vw,300px);height:min(72vw,300px);border-radius:68px;
-  box-shadow:0 28px 70px rgba(0,0,0,.55),0 0 0 1px rgba(243,226,192,.4);
-  animation:k79Widen 3.6s 2.5s ease-out forwards;
-}
-@keyframes k79Widen{
-  0%{width:min(72vw,300px);height:min(72vw,300px)}
-  100%{width:min(92vw,420px);height:min(92vw,420px)}
-}
-.k79-poster img{width:100%;height:100%;display:block;border-radius:68px}
-.k79-mark{position:relative;z-index:2;text-align:center;margin-top:22px}
-.k79-mark .k79-dar{
-  display:block;font-family:"Cinzel",Georgia,serif;font-weight:700;letter-spacing:.38em;
-  font-size:clamp(12px,3.4vw,17px);color:#f0e2c0;
-  animation:k79In .9s .4s ease both;
-}
-.k79-mark .k79-kids{
-  display:block;margin-top:8px;font-family:"Fredoka",sans-serif;font-weight:700;letter-spacing:.2em;
-  font-size:clamp(32px,9.4vw,56px);color:#ffe7b0;
-  animation:k79In .9s .62s ease both;
-}
-@keyframes k79In{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.k79-load{
-  position:relative;z-index:2;width:min(72vw,280px);margin-top:22px;text-align:center;
-}
-.k79-load-track{
-  height:7px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;
-}
-.k79-load-fill{
-  display:block;height:100%;width:0;border-radius:99px;
-  background:linear-gradient(90deg,#e2bd72,#ffe7b8,#73c9c1);
-}
-.k79-load-pct{
-  display:block;margin-top:8px;font-family:"Fredoka",sans-serif;font-weight:700;
-  font-size:13px;letter-spacing:.12em;color:#ffe7b0;
-}
-.k79-burst{
-  position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0;
-}
-.kids-launch-v79.is-burst .k79-burst{opacity:1}
-.k79-spark{
-  position:absolute;left:50%;top:46%;width:10px;height:10px;margin:-5px;border-radius:50%;
-  background:#ffe7b8;opacity:0;
-}
-.kids-launch-v79.is-burst .k79-spark{
-  animation:k79Pop .9s ease-out forwards;
-}
-@keyframes k79Pop{
-  0%{opacity:1;transform:translate(0,0) scale(.4)}
-  70%{opacity:1}
-  100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.4)}
-}
-.kids-launch-v79.is-ending{opacity:0;transition:opacity .55s ease;pointer-events:none}
-
-
-
-
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
+<link rel="stylesheet" href="/kids/assets/kids-open-v95.css?v=95">
+
 
 </head>
 <body>
-<div class="kids-launch-v79" id="kidsLaunch" data-kids-launch="v94">
-  <div class="k79-water" aria-hidden="true"></div>
-  <div class="k79-cord" aria-hidden="true"></div>
-  <div class="k79-hang">
-    <div class="k79-poster"><img src="/kids/icons/icon-1024.png?v=logo28" width="300" height="300" alt=""></div>
+<div class="kids-open" id="kidsLaunch" data-kids-launch="v95">
+  <div class="kids-open__sky" aria-hidden="true"></div>
+  <div class="kids-open__stars" aria-hidden="true"></div>
+  <div class="kids-open__stage">
+    <div class="kids-open__halo" aria-hidden="true"></div>
+    <svg class="kids-open__ring" viewBox="0 0 120 120" aria-hidden="true">
+      <circle class="kids-open__ring-bg" cx="60" cy="60" r="54"></circle>
+      <circle class="kids-open__ring-fg" id="kidsLaunchRing" cx="60" cy="60" r="54"></circle>
+    </svg>
+    <div class="kids-open__seal" id="kidsLaunchSeal"><img src="/kids/icons/icon-1024.png?v=logo28" width="320" height="320" alt=""></div>
   </div>
-  <div class="k79-mark">
-    <span class="k79-dar">DĀR AL TAWḤĪD</span>
-    <span class="k79-kids">Kids</span>
+  <div class="kids-open__titles">
+    <p class="kids-open__dar">DĀR AL TAWḤĪD</p>
+    <p class="kids-open__kids">Kids</p>
   </div>
-  <div class="k79-load">
-    <div class="k79-load-track"><span class="k79-load-fill" id="kidsLaunchFill"></span></div>
-    <span class="k79-load-pct" id="kidsLaunchPct">0%</span>
-  </div>
-  <div class="k79-burst" aria-hidden="true"><i class="k79-spark" style="--x:-90px;--y:-70px;animation-delay:0.0s;background:#ffe7b8"></i><i class="k79-spark" style="--x:80px;--y:-80px;animation-delay:0.04s;background:#73c9c1"></i><i class="k79-spark" style="--x:110px;--y:20px;animation-delay:0.08s;background:#e2bd72"></i><i class="k79-spark" style="--x:-120px;--y:30px;animation-delay:0.05s;background:#8ec5e8"></i><i class="k79-spark" style="--x:20px;--y:-120px;animation-delay:0.02s;background:#efb08f"></i><i class="k79-spark" style="--x:-40px;--y:90px;animation-delay:0.1s;background:#c78aa0"></i><i class="k79-spark" style="--x:60px;--y:100px;animation-delay:0.07s;background:#9ec49e"></i><i class="k79-spark" style="--x:-70px;--y:-20px;animation-delay:0.03s;background:#ffe7b8"></i><i class="k79-spark" style="--x:130px;--y:-40px;animation-delay:0.09s;background:#9f91d6"></i><i class="k79-spark" style="--x:-130px;--y:-50px;animation-delay:0.06s;background:#73c9c1"></i><i class="k79-spark" style="--x:0px;--y:110px;animation-delay:0.11s;background:#e2bd72"></i><i class="k79-spark" style="--x:40px;--y:-90px;animation-delay:0.01s;background:#fff"></i></div>
+  <p class="kids-open__pct" id="kidsLaunchPct">0%</p>
+  <div class="kids-open__bloom" aria-hidden="true"></div>
   <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-serhat-soft.m4a?v=87"></audio>
 </div>
 <div id="kidsUpdateLayer" class="kids-update-layer">
@@ -6483,70 +6390,12 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=94",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=95",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
-<script>
-(function(){
-  var launch=document.getElementById("kidsLaunch");
-  var greeting=document.getElementById("kidsOwnerGreeting");
-  var fill=document.getElementById("kidsLaunchFill");
-  var pct=document.getElementById("kidsLaunchPct");
-  if(!launch)return;
-  var removed=false;
-  var spoken=false;
-  var raf=0;
-  function setLoad(p){
-    p=Math.max(0,Math.min(100,Math.round(p)));
-    if(fill)fill.style.width=p+"%";
-    if(pct)pct.textContent=p+"%";
-  }
-  function tick(){
-    if(removed||!greeting)return;
-    var d=greeting.duration;
-    if(d&&isFinite(d)&&d>0)setLoad((greeting.currentTime/d)*100);
-    raf=requestAnimationFrame(tick);
-  }
-  function finishVoice(){
-    if(removed)return;
-    setLoad(100);
-    launch.classList.add("is-burst");
-    window.setTimeout(removeLaunch,920);
-  }
-  function removeLaunch(){
-    if(removed)return;
-    removed=true;
-    cancelAnimationFrame(raf);
-    launch.classList.add("is-ending");
-    window.setTimeout(function(){
-      try{
-        if(greeting){
-          greeting.pause();
-          greeting.removeAttribute("src");
-          greeting.load();
-        }
-      }catch(e2){}
-      if(launch.parentNode)launch.parentNode.removeChild(launch);
-    },560);
-  }
-  function speakTitle(){
-    if(spoken||removed||!greeting)return;
-    spoken=true;
-    greeting.muted=false;
-    greeting.volume=0.92;
-    try{greeting.currentTime=0}catch(e){}
-    var gp;
-    try{gp=greeting.play()}catch(ePlay){spoken=false;return}
-    if(gp&&typeof gp.catch==="function")gp.catch(function(){spoken=false});
-    tick();
-  }
-  greeting.addEventListener("ended",finishVoice);
-  greeting.addEventListener("error",function(){window.setTimeout(finishVoice,400)});
-  speakTitle();
-  window.setTimeout(function(){if(!removed)finishVoice()},14000);
-})();
-</script>
+<script src="/kids/assets/kids-open-v95.js?v=95"></script>
+
 
 
 
