@@ -1,10 +1,10 @@
 {
-  "version": "2.9.32",
-  "updatedAt": "2026-09-29T13:15:00+02:00",
-  "deployTrigger": "voice-studio-2.9.32-kids-manifest-self-heal",
+  "version": "2.9.33",
+  "updatedAt": "2026-09-29T13:33:00+02:00",
+  "deployTrigger": "voice-studio-2.9.33-json-terminator-repair",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v42",
+  "cache": "dar-voice-studio-v43",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -557,10 +557,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "74b3f2c7cefdd6f88b47f8dda17764023f51c760",
+  "releaseRef": "e48936c3913f933a445e3b1e42e1c6de95be9fae",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "2.9.31 konnte nach dem Update ein leeres/ungültiges installiertes Alphabet-Manifest sehen. 2.9.32 validiert Alphabet- und Quiz-JSON bereits im Installer, entpackt bei Bedarf GitHub-Contents-base64-Envelope korrekt und repariert fehlende/ungültige Kids-Datendateien zusätzlich zur Laufzeit serverseitig aus GitHub main. Der lokale Batch verwendet danach dieselben selbst reparierten Daten und setzt mit vorhandenen Alphabet-/Quiz-Mastern fort.",
+  "updateRepairReason": "Ursache des 2.9.32-Manifestfehlers gefunden: atomic_write_json schrieb bei lokalen JSON-Dateien die Literalzeichen \\\\n hinter das gültige JSON. Dadurch meldeten Python/Browser `Extra data` und auch die automatische Wiederherstellung speicherte erneut eine ungültige Datei. 2.9.33 korrigiert den Writer, repariert vorhandene lokale Altdateien einmalig ohne Datenverlust, liefert wiederhergestellte Manifestobjekte direkt aus und validiert die Repository-Kids-JSONs im CI. Das Repository-Alphabet-Manifest selbst wurde repariert und enthält bereits 140/140 Serhat-Master plus Begrüßung.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -765,7 +765,7 @@
     "persistentMasterCache": "~/SerhatVoice/QuizMasters/",
     "resumeAfterFailure": true
   },
-  "validatedQuizVoiceRef": "74b3f2c7cefdd6f88b47f8dda17764023f51c760",
+  "validatedQuizVoiceRef": "e48936c3913f933a445e3b1e42e1c6de95be9fae",
   "kidsManifestRecovery": {
     "enabled": true,
     "installerValidatesAlphabet": true,
@@ -778,6 +778,13 @@
     "runtimeQuizRoute": "/studio/quiz-kids.json",
     "batchUsesRecoveredManifests": true,
     "existingAlphabetMastersPreserved": true,
-    "existingQuizMastersPreserved": true
+    "existingQuizMastersPreserved": true,
+    "literalBackslashNRootCauseFixed": true,
+    "legacyLocalJsonAutoRepair": true,
+    "atomicWriterUsesRealNewline": true,
+    "directJsonResponseAfterRecovery": true,
+    "repositoryAlphabetManifestValid": true,
+    "repositoryAlphabetOwnerMasters": 140,
+    "repositoryGreetingPresent": true
   }
 }
