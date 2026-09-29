@@ -9,7 +9,7 @@
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
 <script src="/test/assets/dar-noble-3d-icons.js?v=1108"></script><!-- DAR_NOBLE_3D_HEAD -->
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1132";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1133";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1060";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 
 <script>
@@ -27178,7 +27178,7 @@ function renderHomePremiumQuickAccess(){
     {nav:"quiz",title:"Quiz",desc:"Wissen festigen",kind:"quiz"}
   ];
   const mainCards=main.map(c=>`<button type="button" class="home-premium-access-card dar-click-glow" data-nav="${c.nav}" aria-label="${esc(c.title)} öffnen"><span class="home-premium-access-card__icon" aria-hidden="true">${icon(c.kind,c.title)}</span><span class="home-premium-access-card__body"><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></span></button>`).join("");
-  return `<section class="home-premium-access" aria-labelledby="homePremiumAccessTitle"><div class="home-premium-access__head"><div class="home-premium-access__headcopy"><span class="home-premium-access__kicker">Grundlage des Dīn</span><h2 class="home-premium-access__title" id="homePremiumAccessTitle">Tawḥīd zuerst</h2></div><button type="button" class="home-premium-access__all" data-nav="more">Alle Bereiche →</button></div><button type="button" class="home-tawhid-entry dar-click-glow" data-nav="topic" data-value="Tawḥīd" aria-label="Tawḥīd-Bereich öffnen"><span class="home-tawhid-entry__icon" aria-hidden="true">${icon("topic","Tawḥīd")}</span><span class="home-tawhid-entry__copy"><span class="home-tawhid-entry__label">Tawḥīd im Mittelpunkt</span><h3>Allah allein dienen</h3><p>Beweise und Aussagen aus Qurʾān, authentischer Sunnah und den Āthār der Salaf.</p></span><span class="home-tawhid-entry__arrow" aria-hidden="true">›</span></button><div class="home-premium-access__grid">${mainCards}</div></section>`;
+  return `<section class="home-premium-access" aria-labelledby="homePremiumAccessTitle"><div class="home-premium-access__head"><div class="home-premium-access__headcopy"><span class="home-premium-access__kicker">Grundlage des Dīn</span><h2 class="home-premium-access__title" id="homePremiumAccessTitle">Tawḥīd zuerst</h2></div><button type="button" class="home-premium-access__all" data-nav="more">Alle Bereiche</button></div><button type="button" class="home-tawhid-entry dar-click-glow" data-nav="topic" data-value="Tawḥīd" aria-label="Tawḥīd-Bereich öffnen"><span class="home-tawhid-entry__icon" aria-hidden="true">${icon("topic","Tawḥīd")}</span><span class="home-tawhid-entry__copy"><span class="home-tawhid-entry__label">Tawḥīd im Mittelpunkt</span><h3>Allah allein dienen</h3><p>Beweise und Aussagen aus Qurʾān, authentischer Sunnah und den Āthār der Salaf.</p></span><span class="home-tawhid-entry__arrow" aria-hidden="true">›</span></button><div class="home-premium-access__grid">${mainCards}</div></section>`;
 }
 function renderHomeQuranHero(){
   const prog=getPreferredQuranProgress();
@@ -27350,7 +27350,7 @@ function renderHomeLibrariesSection(){
     {nav:"frauen",icon:"🌿",title:"Frauen",desc:"Wissen & Fiqh für Muslimāt",aria:"Frauen-Bereich öffnen"}
   ];
   const cards=defs.map(c=>`<button type="button" class="home-v380-lib-card home-v380-lib-card--compact home-v380-lib-card--noble" data-nav="${c.nav}" aria-label="${esc(c.aria)}"><span class="home-v380-lib-card__ico" aria-hidden="true">${typeof window.dar3dIconMarkup==="function"?window.dar3dIconMarkup(c.nav,c.title):c.icon}</span><div class="home-v380-lib-card__body"><h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p></div></button>`).join("");
-  return `<section class="home-v380-section home-v380-libraries--noble" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Wissen & Quellen</h2></div><button type="button" class="home-v380-text-link" data-nav="more">Alle Bereiche →</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid home-v380-lib-grid--fixed home-v380-lib-grid--compact home-v380-lib-grid--noble">${cards}</div></section>`;
+  return `<section class="home-v380-section home-v380-libraries--noble" aria-labelledby="homeLibrariesTitle"><div class="home-v380-section-head"><div><h2 class="home-v380-section-title" id="homeLibrariesTitle">Wissen & Quellen</h2></div><button type="button" class="home-v380-text-link" data-nav="more">Alle Bereiche</button></div><div class="home-v380-section-rule" aria-hidden="true"></div><div class="home-v380-lib-grid home-v380-lib-grid--fixed home-v380-lib-grid--compact home-v380-lib-grid--noble">${cards}</div></section>`;
 }
 function renderHomeSearchSection(){
   const cats=uniqueList("category").map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
@@ -27685,7 +27685,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1132";
+const APP_BUILD_ID="app-shell-v1133";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -36314,6 +36314,192 @@ body.is-home-route .header-prayer-hub__status>span+span{
   body.is-home-route .header-prayer-hub__main{min-height:48px!important;padding:1px 0 5px!important}
   html[data-theme] body.is-home-route .header-prayer-hub__status,
   body.is-home-route .header-prayer-hub__status{font-size:clamp(8.4px,2vw,10px)!important;padding-top:7px!important}
+}
+</style>
+<style id="home-library-stage-v1133">
+/* TEST v1133 · Startseite: sichtbare Bibliothek oben, darunter liniengetrennte Bereiche, Glow statt Pfeile */
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell,
+body.is-home-route .top-shell.theme-hero-shell{
+  margin-bottom:8px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface,
+body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0 0 22px 22px!important;
+  min-height:clamp(220px,52vw,340px)!important;
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--bg,#0b1210) 28%,transparent) 0%,color-mix(in srgb,var(--bg,#0b1210) 42%,transparent) 46%,color-mix(in srgb,var(--bg,#0b1210) 78%,transparent) 100%),
+    linear-gradient(90deg,color-mix(in srgb,var(--bg,#0b1210) 55%,transparent) 0%,color-mix(in srgb,var(--bg,#0b1210) 18%,transparent) 58%,transparent 100%),
+    url("/test/assets/dar-3d-icons/dar-home-hero-library-4k.png") center 42%/cover no-repeat!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface::before,
+body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:radial-gradient(circle at 72% 38%,color-mix(in srgb,var(--theme-accent,#EED3AE) 10%,transparent),transparent 42%)!important;
+}
+html[data-theme] body.is-home-route #appView.view,
+body.is-home-route #appView.view{
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--bg,#0b1210) 82%,transparent),color-mix(in srgb,var(--bg,#0b1210) 92%,transparent)),
+    url("/test/assets/dar-3d-icons/dar-home-section-knowledge.png") center top/cover no-repeat fixed!important;
+}
+html[data-theme] body.is-home-route .home-v380-section,
+body.is-home-route .home-v380-section,
+html[data-theme] body.is-home-route .home-premium-access,
+body.is-home-route .home-premium-access{
+  position:relative!important;
+  isolation:isolate!important;
+  margin-top:clamp(18px,4.5vw,26px)!important;
+  padding:14px 0 16px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-home-route .home-v380-section::before,
+body.is-home-route .home-v380-section::before,
+html[data-theme] body.is-home-route .home-premium-access::before,
+body.is-home-route .home-premium-access::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0 -2px!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  opacity:.34!important;
+  border-radius:0!important;
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--bg,#0b1210) 55%,transparent),color-mix(in srgb,var(--bg,#0b1210) 88%,transparent)),
+    url("/test/assets/dar-3d-icons/dar-home-section-knowledge.png") center/cover no-repeat!important;
+}
+html[data-theme] body.is-home-route .home-v380-quran-hero,
+body.is-home-route .home-v380-quran-hero{
+  position:relative!important;
+  isolation:isolate!important;
+  margin-top:10px!important;
+  min-height:72px!important;
+  padding:12px 4px!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--theme-accent,#EED3AE) 34%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-home-route .home-v380-quran-hero::before,
+body.is-home-route .home-v380-quran-hero::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-1!important;
+  opacity:.4!important;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--bg,#0b1210) 72%,transparent),color-mix(in srgb,var(--bg,#0b1210) 40%,transparent)),
+    url("/test/assets/dar-3d-icons/dar-home-section-quran.png") right center/cover no-repeat!important;
+}
+html[data-theme] body.is-home-route .home-today-cards::before,
+body.is-home-route .home-today-cards::before{
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--bg,#0b1210) 58%,transparent),color-mix(in srgb,var(--bg,#0b1210) 90%,transparent)),
+    url("/test/assets/dar-3d-icons/dar-home-section-today.png") center/cover no-repeat!important;
+}
+html[data-theme] body.is-home-route .home-tawhid-entry,
+body.is-home-route .home-tawhid-entry,
+html[data-theme] body.is-home-route .home-premium-access-card,
+body.is-home-route .home-premium-access-card,
+html[data-theme] body.is-home-route .home-premium-mini,
+body.is-home-route .home-premium-mini,
+html[data-theme] body.is-home-route .home-v380-open-row,
+body.is-home-route .home-v380-open-row,
+html[data-theme] body.is-home-route .home-v380-post-preview,
+body.is-home-route .home-v380-post-preview,
+html[data-theme] body.is-home-route .home-discover-pdf-card,
+body.is-home-route .home-discover-pdf-card,
+html[data-theme] body.is-home-route .home-v380-lib-card,
+body.is-home-route .home-v380-lib-card,
+html[data-theme] body.is-home-route .home-v380-popular-row,
+body.is-home-route .home-v380-popular-row,
+html[data-theme] body.is-home-route .home-v380-search-box,
+body.is-home-route .home-v380-search-box,
+html[data-theme] body.is-home-route .recommended-box,
+body.is-home-route .recommended-box,
+html[data-theme] body.is-home-route .daily-box,
+body.is-home-route .daily-box{
+  background:transparent!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  border-color:transparent!important;
+  border-left:0!important;
+  border-right:0!important;
+  border-top:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--theme-accent,#EED3AE) 22%,transparent)!important;
+}
+html[data-theme] body.is-home-route .home-premium-access-card,
+body.is-home-route .home-premium-access-card{
+  min-height:72px!important;
+  padding:10px 6px!important;
+}
+html[data-theme] body.is-home-route .home-tawhid-entry__arrow,
+body.is-home-route .home-tawhid-entry__arrow,
+html[data-theme] body.is-home-route .home-v380-quran-hero__chevron,
+body.is-home-route .home-v380-quran-hero__chevron,
+html[data-theme] body.is-home-route .home-v380-open-row__action,
+body.is-home-route .home-v380-open-row__action,
+html[data-theme] body.is-home-route .qov-direct-arrow,
+body.is-home-route .qov-direct-arrow,
+html[data-theme] body.is-home-route .home-v380-lib-card .folder-meta,
+body.is-home-route .qov-resume-arrow{
+  display:none!important;
+}
+html[data-theme] body.is-home-route .home-v380-section-rule,
+body.is-home-route .home-v380-section-rule,
+html[data-theme] body.is-home-route .home-start-rule,
+body.is-home-route .home-start-rule{
+  height:1px!important;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--theme-accent,#EED3AE) 55%,transparent),transparent 92%)!important;
+  opacity:1!important;
+}
+html[data-theme] body.is-home-route .dar-click-glow:hover,
+body.is-home-route .dar-click-glow:hover,
+html[data-theme] body.is-home-route .dar-click-glow:focus-visible,
+body.is-home-route .dar-click-glow:focus-visible,
+html[data-theme] body.is-home-route .home-premium-access-card:hover,
+body.is-home-route .home-premium-access-card:hover,
+html[data-theme] body.is-home-route .home-tawhid-entry:hover,
+body.is-home-route .home-tawhid-entry:hover,
+html[data-theme] body.is-home-route .home-v380-quran-hero:hover,
+body.is-home-route .home-v380-quran-hero:hover,
+html[data-theme] body.is-home-route .home-v380-open-row:hover,
+body.is-home-route .home-v380-open-row:hover,
+html[data-theme] body.is-home-route .home-v380-post-preview:hover,
+body.is-home-route .home-v380-post-preview:hover,
+html[data-theme] body.is-home-route .home-discover-pdf-card:hover,
+body.is-home-route .home-discover-pdf-card:hover,
+html[data-theme] body.is-home-route .home-premium-access__all:hover,
+body.is-home-route .home-premium-access__all:hover{
+  outline:none!important;
+  filter:none!important;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--theme-accent,#EED3AE) 42%,transparent),0 0 22px color-mix(in srgb,var(--theme-accent,#EED3AE) 28%,transparent)!important;
+}
+html[data-theme] body.is-home-route .home-premium-access-card__icon img,
+body.is-home-route .home-premium-access-card__icon img,
+html[data-theme] body.is-home-route .home-tawhid-entry__icon img,
+body.is-home-route .home-tawhid-entry__icon img,
+html[data-theme] body.is-home-route .home-v380-quran-hero__mark img,
+body.is-home-route .home-v380-quran-hero__mark img{
+  opacity:1!important;
+  filter:none!important;
 }
 </style>
 <style id="quran-united-tabbar-v1081">
