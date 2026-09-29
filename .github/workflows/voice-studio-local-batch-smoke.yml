@@ -95,6 +95,26 @@ jobs:
           ],out
           PY
 
+      - name: Validate Alphabet linguistic review gate
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("kids/data/alphabet-audio.json").read_text(encoding="utf-8"))
+          slots=[]
+          for letter in (d.get("letters") or {}).values():
+              slots.append(letter.get("name"))
+              slots.extend((letter.get("harakat") or {}).values())
+              slots.append(letter.get("word"))
+          slots=[s for s in slots if s]
+          assert len(slots)==140, len(slots)
+          assert all(s.get("technicalQaPassed") is True for s in slots), "technical QA marker missing"
+          assert all(s.get("linguisticVerified") is False for s in slots), "generated clip incorrectly linguistically approved"
+          assert all(s.get("verified") is False for s in slots), "unreviewed clip is still live"
+          assert d.get("policy",{}).get("linguisticReviewRequired") is True
+          print("Alphabet linguistic review gate OK:",len(slots))
+          PY
+
       - name: Validate full local batch markers
         run: |
           python3 - <<'PY'
@@ -128,6 +148,9 @@ jobs:
               'grammatisch abhängigen Funktionswörtern',
               'def build_free_pronunciation_render_plan',
               'def honorific_lock_keys_in_chunk',
+              'linguisticVerified',
+              'needs-human-review',
+              'approve_existing_alphabet_master',
               'quiz-audio.json',
               'kids-quiz-audio',
           ]
@@ -141,7 +164,7 @@ jobs:
           required_html=[
               'id="alphabetPackBatchBtn"',
               'id="alphabetPackBatchState"',
-              "VOICE STUDIO 2.9.36",
+              "VOICE STUDIO 2.9.37",
           ]
           failures=[]
           for label,src,markers in (
