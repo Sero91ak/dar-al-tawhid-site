@@ -38,6 +38,12 @@ function assertVoiceStudioOrigin(request, env) {
   }
 }
 
+function isOwnerAutomationAuthorized(request, env) {
+  const supplied = String(request.headers.get("X-Admin-Secret") || "").trim();
+  const expected = String(env.ADMIN_PUBLISH_SECRET || "").trim();
+  return Boolean(supplied && expected && supplied === expected);
+}
+
 function assertVoiceRateLimit(request, chars) {
   const key =
     request.headers.get("CF-Connecting-IP") ||
@@ -98,7 +104,8 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
       provider: configured ? "ElevenLabs Cloud" : "Cloud Voice nicht konfiguriert",
       voiceConfigured: configured,
       localEngineRequired: false,
-      output: "audio/mpeg"
+      output: "audio/mpeg",
+      ownerBatchEnabled: true
     }, cors, configured ? 200 : 503);
   }
 
@@ -127,7 +134,8 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
       }, cors, 503);
     }
 
-    assertVoiceRateLimit(request, prepared.length);
+    const ownerAutomation = isOwnerAutomationAuthorized(request, env);
+    if (!ownerAutomation) assertVoiceRateLimit(request, prepared.length);
     const result = await synthesizeDarVoice(env, prepared, { profile });
     if (!result.ok) {
       return json({
