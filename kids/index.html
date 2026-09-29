@@ -2416,20 +2416,6 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
   62%{opacity:1;transform:translateY(-6px) scale(1.04);filter:blur(0)}
   100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
 }
-.k79-skip{
-  position:absolute;right:16px;top:max(18px,calc(env(safe-area-inset-top,0px) + 12px));
-  z-index:8;min-height:44px;min-width:44px;padding:0 16px;
-  border:0;border-radius:999px;
-  background:rgba(18,14,10,.72);color:#f6ead4;
-  font:700 15px/1 "Fredoka",sans-serif;
-  letter-spacing:.03em;
-  pointer-events:auto;
-  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
-}
-.k79-skip-bottom{
-  top:auto;right:16px;left:16px;
-  bottom:max(18px,calc(env(safe-area-inset-bottom,0px) + 14px));
-}
 .kids-launch-v79.is-ending{animation:k79FadeOut .28s ease forwards;pointer-events:none}
 @keyframes k79FadeOut{to{opacity:0;visibility:hidden}}
 
@@ -2438,18 +2424,24 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 
 </head>
 <body>
-<div class="kids-launch-v79" data-kids-launch="v83">
-  <video id="kidsCinemaV79" class="k79-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture>
-    <source src="/kids/assets/kids-cinema/intro-v74.mp4?v=83" type="video/mp4">
-  </video>
+<div class="kids-launch-v79" data-kids-launch="v84">
+  <video id="kidsCinemaV79" class="k79-video" src="/kids/assets/kids-cinema/intro-v74.mp4?v=84" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture></video>
   <div class="k79-mark" id="kidsLaunchMark" aria-hidden="true">
     <span class="k79-dar">DĀR AL TAWḤĪD</span>
     <span class="k79-kids">Kids</span>
   </div>
-  <button type="button" class="k79-skip" id="kidsLaunchSkip">Überspringen</button>
-  <button type="button" class="k79-skip k79-skip-bottom" id="kidsLaunchSkipBottom">Überspringen</button>
-  <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-serhat-soft.m4a?v=83"></audio>
+  <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-serhat-soft.m4a?v=84"></audio>
 </div>
+<script>
+(function(){
+  var v=document.getElementById("kidsCinemaV79");
+  if(!v)return;
+  v.muted=true;v.defaultMuted=true;v.autoplay=true;v.playsInline=true;
+  var kick=function(){try{v.play()}catch(e){}};
+  kick();
+  v.addEventListener("loadeddata",kick,{once:true});
+})();
+</script>
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
     <div class="kids-update-scene"></div>
@@ -6450,36 +6442,37 @@ fetchCatalog();
   var video=document.getElementById("kidsCinemaV79");
   var greeting=document.getElementById("kidsOwnerGreeting");
   var mark=document.getElementById("kidsLaunchMark");
-  var skip=document.getElementById("kidsLaunchSkip");
   if(!launch||!video)return;
 
   var removed=false;
   var started=false;
   var spoken=false;
-  var startupTimer=0;
+  var kicks=0;
+  var kickTimer=0;
   var maxTimer=0;
 
   function removeLaunch(){
     if(removed)return;
     removed=true;
-    if(startupTimer)clearTimeout(startupTimer);
+    if(kickTimer)clearInterval(kickTimer);
     if(maxTimer)clearTimeout(maxTimer);
     launch.classList.add("is-ending");
     window.setTimeout(function(){
       try{video.pause()}catch(e){}
       try{if(greeting)greeting.pause()}catch(e2){}
       launch.remove();
-    },300);
+    },280);
   }
 
   function speakTitle(){
     if(spoken||!greeting)return;
     spoken=true;
     if(mark)mark.classList.add("is-in");
+    greeting.muted=false;
     greeting.volume=0.92;
     try{greeting.currentTime=0}catch(e){}
     var gp;
-    try{gp=greeting.play()}catch(ePlay){return}
+    try{gp=greeting.play()}catch(ePlay){spoken=false;return}
     if(gp&&typeof gp.catch==="function")gp.catch(function(){spoken=false});
   }
 
@@ -6488,88 +6481,45 @@ fetchCatalog();
     video.muted=true;
     video.defaultMuted=true;
     video.volume=0;
+    video.autoplay=true;
+    video.playsInline=true;
     video.setAttribute("muted","");
     video.setAttribute("playsinline","");
+    video.setAttribute("autoplay","");
     var p;
     try{p=video.play()}catch(e){return}
-    if(p&&typeof p.catch==="function"){p.catch(function(){})}
+    if(p&&typeof p.catch==="function")p.catch(function(){});
   }
 
   function onPlaying(){
     if(started)return;
     started=true;
-    if(startupTimer)clearTimeout(startupTimer);
+    if(kickTimer)clearInterval(kickTimer);
     speakTitle();
-    var remaining=8200;
+    var remaining=8000;
     if(Number.isFinite(video.duration)&&video.duration>0){
-      remaining=Math.min(9000,Math.max(2200,(video.duration-video.currentTime)*1000+400));
+      remaining=Math.min(9000,Math.max(2500,(video.duration-video.currentTime)*1000+350));
     }
     maxTimer=setTimeout(removeLaunch,remaining);
   }
 
-  video.muted=true;
-  video.defaultMuted=true;
-  video.volume=0;
-  video.autoplay=true;
-  video.playsInline=true;
-  video.preload="auto";
-
-  video.addEventListener("loadedmetadata",tryPlay,{once:true});
-  video.addEventListener("loadeddata",tryPlay,{once:true});
-  video.addEventListener("canplay",tryPlay,{once:true});
-  video.addEventListener("playing",onPlaying,{once:true});
-  video.addEventListener("ended",removeLaunch,{once:true});
-  video.addEventListener("error",removeLaunch,{once:true});
-  video.addEventListener("abort",removeLaunch,{once:true});
-
-  function bindSkip(btn){
-    if(!btn)return;
-    ["pointerdown","click","touchend"].forEach(function(ev){
-      btn.addEventListener(ev,function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        removeLaunch();
-      },true);
-    });
-  }
-  bindSkip(skip);
-  bindSkip(document.getElementById("kidsLaunchSkipBottom"));
-  launch.addEventListener("pointerdown",function(e){
-    if(e.target&&e.target.closest&&e.target.closest(".k79-skip"))return;
-    if(!started)tryPlay();
-    speakTitle();
-  });
-
+  video.addEventListener("playing",onPlaying);
+  video.addEventListener("ended",removeLaunch);
+  video.addEventListener("error",removeLaunch);
   document.addEventListener("visibilitychange",function(){
-    if(!document.hidden&&!started)tryPlay();
+    if(!document.hidden)tryPlay();
   });
-
-  try{video.load()}catch(e){}
+  window.addEventListener("pageshow",tryPlay);
   tryPlay();
-  setTimeout(tryPlay,180);
-  setTimeout(tryPlay,480);
+  kickTimer=setInterval(function(){
+    kicks+=1;
+    if(started||removed||kicks>40){clearInterval(kickTimer);return}
+    tryPlay();
+  },200);
 
-  startupTimer=setTimeout(function(){
-    if(!started)removeLaunch();
-  },12000);
+  setTimeout(function(){if(!started)removeLaunch();},10000);
 })();
-</script>
-
-</body>
-
-<style id="kids-quiz-scroll-v1">
-#quizModal.modal{touch-action:pan-y!important}
-#quizModal .modal-shell{min-height:0!important}
-#quizModal .quiz-stage,
-#quizModal #quizBody{
-  flex:1 1 auto!important;
-  min-height:0!important;
-  overflow-y:auto!important;
-  overflow-x:hidden!important;
-  -webkit-overflow-scrolling:touch!important;
-  overscroll-behavior:contain!important;
-  touch-action:pan-y!important;
-  padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))!important;
+</script>+ env(safe-area-inset-bottom,0px))!important;
 }
 </style>
 <style id="kids-wordmark-readable-v40">

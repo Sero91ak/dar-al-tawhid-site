@@ -41,6 +41,7 @@ struct KidsWebAppView: UIViewRepresentable {
         webView.scrollView.backgroundColor = webView.backgroundColor
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
+        webView.alpha = 1
         context.coordinator.loadKidsHome(in: webView)
         return webView
     }
@@ -51,7 +52,7 @@ struct KidsWebAppView: UIViewRepresentable {
         private var hasPresentedInitialPage = false
 
         func loadKidsHome(in webView: WKWebView) {
-            webView.alpha = 0
+            webView.alpha = 1
             hasPresentedInitialPage = false
             webView.load(
                 URLRequest(
