@@ -14,6 +14,8 @@ let candidateUrl="";
 let candidateHeard=false;
 let candidatePreviewId="";
 let variant=0;
+let batchPollTimer=0;
+let batchAutoStarted=false;
 
 const q=id=>document.getElementById(id);
 
@@ -367,20 +369,137 @@ async function retryCurrent(){
   await p.play().catch(()=>{});
 }
 
+
+function isLocalVoiceStudio(){
+  return /^(127\.0\.0\.1|localhost)$/i.test(location.hostname||"");
+}
+function setBatchUi(state){
+  const btn=q("alphabetPackBatchBtn");
+  const line=q("alphabetPackBatchState");
+  const running=Boolean(state?.running);
+  if(btn){
+    btn.disabled=running;
+    btn.textContent=running
+      ?"Gesamtes Serhat-Paket wird erzeugt …"
+      :"Alle 140 Clips + Begrüßung automatisch erzeugen";
+  }
+  if(!line)return;
+
+  const progress=Math.max(0,Math.min(100,Number(state?.progress||0)));
+  const completed=Number(state?.completed||0);
+  const total=Number(state?.total||141);
+  const phase=String(state?.phase||"idle");
+  const current=String(state?.current||"").trim();
+  const error=String(state?.error||"").trim();
+
+  if(error){
+    line.textContent="Automatik gestoppt: "+error;
+    line.style.color="var(--red)";
+    return;
+  }
+  if(running){
+    line.textContent=progress+" % · "+completed+"/"+total+" · "+(current||"Serhat Engine arbeitet …");
+    line.style.color="var(--gold2)";
+    return;
+  }
+  if(phase==="complete"){
+    const published=Boolean(state?.repoPublished);
+    const publishMsg=String(state?.repoPublishMessage||state?.repoPublishError||"").trim();
+    line.textContent=published
+      ?"Fertig: 140 Lernclips + Begrüßung wurden erzeugt und direkt in die Kids-App übertragen."
+      :"Audio-Paket vollständig erzeugt. "+(publishMsg||"Der automatische GitHub-Push ist auf diesem Mac noch nicht angemeldet.");
+    line.style.color=published?"var(--green)":"var(--amber)";
+    return;
+  }
+  line.textContent="Bereit: lokale Serhat Engine erzeugt das komplette Kids-Stimmenpaket automatisch.";
+  line.style.color="var(--muted)";
+}
+async function readBatchState(){
+  try{
+    const r=await fetch("/alphabet/batch-state?cb="+Date.now(),{cache:"no-store"});
+    if(!r.ok)return null;
+    const d=await r.json();
+    setBatchUi(d);
+    return d;
+  }catch{return null}
+}
+function stopBatchPolling(){
+  if(batchPollTimer){clearInterval(batchPollTimer);batchPollTimer=0}
+}
+function beginBatchPolling(){
+  stopBatchPolling();
+  batchPollTimer=setInterval(async()=>{
+    const state=await readBatchState();
+    if(!state)return;
+    if(!state.running){
+      stopBatchPolling();
+      if(state.phase==="complete"){
+        await loadManifest();
+        current=nextPending();
+        renderCurrent();
+      }
+    }
+  },1800);
+}
+async function startFullBatch(auto=false){
+  if(!isLocalVoiceStudio()){
+    if(!auto)setMsg("Der automatische 140-Clip-Batch läuft nur in der installierten Mac-App.","warn");
+    return;
+  }
+  if(busy)return;
+  try{
+    const r=await fetch("/alphabet/batch-start",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:"{}",
+      cache:"no-store"
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||d?.ok===false)throw Error(d?.error||"Komplettes Serhat-Paket konnte nicht gestartet werden.");
+    setBatchUi(d);
+    setMsg(
+      "Automatik läuft: Alif bis Yāʾ, Fatḥah/Kasrah/Ḍammah, Beispielwörter und Kids-Begrüßung werden mit deiner Serhat-Stimme erzeugt. Nur technische QA-Fehler stoppen den Lauf.",
+      "good"
+    );
+    beginBatchPolling();
+  }catch(e){
+    if(!auto)setMsg(e?.message||String(e),"bad");
+  }
+}
+async function maybeAutoStartFullBatch(){
+  if(batchAutoStarted||!isLocalVoiceStudio()||!manifest)return;
+  batchAutoStarted=true;
+  const state=await readBatchState();
+  if(state?.running){
+    beginBatchPolling();
+    return;
+  }
+  if(state?.phase==="complete"&&Number(state?.completed||0)>=141)return;
+  const pending=pendingList(manifest);
+  if(pending.length){
+    await startFullBatch(true);
+  }
+}
+
 q("alphabetPackReferenceBtn")?.addEventListener("click",playReference);
 q("alphabetPackGenerateBtn")?.addEventListener("click",generateCandidate);
 q("alphabetPackRegenerateBtn")?.addEventListener("click",regenerateCandidate);
 q("alphabetPackApproveBtn")?.addEventListener("click",approveCurrent);
 q("alphabetPackRetryBtn")?.addEventListener("click",retryCurrent);
+q("alphabetPackBatchBtn")?.addEventListener("click",()=>startFullBatch(false));
 
 loadManifest().then(()=>{
   current=nextPending();
   renderCurrent();
   if(!manifest)return;
   if(current){
-    setMsg("Bereit. Alif ist als feste Aussprache-Referenz geladen. Erzeugen, Anhören und Master-Bestätigung laufen vollständig lokal – ohne Cloudflare-/GitHub-Code.");
+    setMsg("Bereit. Die lokale Serhat Engine übernimmt jetzt automatisch das komplette Alif–Yāʾ-Paket; Einzelbestätigungen sind nur noch als manuelle Fehlerkorrektur vorhanden.");
   }else{
-    setMsg("Alle Alphabet-/Ḥarakāt-/Wort-Clips sind lokal als Serhat-Master bestätigt. Die Alif-Aussprache-Referenz bleibt separat erhalten.","good");
+    setMsg("Alle Alphabet-/Ḥarakāt-/Wort-Clips sind lokal als Serhat-Master vorhanden. Die Alif-Aussprache-Referenz bleibt separat erhalten.","good");
   }
+  readBatchState().then(state=>{
+    if(state?.running)beginBatchPolling();
+    maybeAutoStartFullBatch();
+  });
 });
 })();
