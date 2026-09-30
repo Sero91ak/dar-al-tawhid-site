@@ -1602,9 +1602,9 @@
     if (tadCatalogReady) return tadCatalogReady;
     window.__DAR_TADABBUR_READY = false;
     var roots = [
+      "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/quran/tadabbur/",
       "/apple-tv/quran/tadabbur/",
-      "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/apple-tv/quran/tadabbur/",
-      "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/quran/tadabbur/"
+      "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/apple-tv/quran/tadabbur/"
     ];
     tadCatalogReady = (function next(i) {
       if (i >= roots.length) {
