@@ -306,15 +306,15 @@ function audioOkHeaders(res, used) {
   const type = String(res.headers.get("Content-Type") || "");
   out.set("Content-Type", type.indexOf("audio") >= 0 || type.indexOf("mpeg") >= 0 ? type : "audio/mpeg");
   out.set("Access-Control-Allow-Origin", "*");
-  out.set("Accept-Ranges", "bytes");
+  const contentRange = res.headers.get("Content-Range");
+  if (res.status === 206 || contentRange) out.set("Accept-Ranges", "bytes");
   out.set("Cache-Control", "public, max-age=86400, must-revalidate");
   out.set("CDN-Cache-Control", "public, max-age=86400, must-revalidate");
   out.set("Cloudflare-CDN-Cache-Control", "public, max-age=86400, must-revalidate");
   if (used) out.set("X-Dar-Quran-Audio", used);
   const len = res.headers.get("Content-Length");
   if (len) out.set("Content-Length", len);
-  const range = res.headers.get("Content-Range");
-  if (range) out.set("Content-Range", range);
+  if (contentRange) out.set("Content-Range", contentRange);
   return out;
 }
 
@@ -331,10 +331,12 @@ async function fetchAudioUpstream(upstreams, request) {
       res = await fetch(upstream, {
         method: request.method === "HEAD" ? "GET" : request.method,
         headers,
-        cf: {
-          cacheEverything: true,
-          cacheTtlByStatus: { "200": 86400, "206": 86400, "400-599": 0 }
-        }
+        cf: range
+          ? { cacheEverything: false }
+          : {
+              cacheEverything: true,
+              cacheTtlByStatus: { "200": 86400, "400-599": 0 }
+            }
       });
       if (res && (res.ok || res.status === 206)) break;
     } catch (eUp) {

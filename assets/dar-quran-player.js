@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 972;
+    var PLAYER_BUILD = 975;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -122,7 +122,7 @@
   var trackHeard = false;
   var playGen = 0;
   var allowAdvance = false;
-  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0 };
+  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0 };
 
   var lastSysVolAt = 0;
   function usesSystemVolume() {
@@ -570,6 +570,50 @@
       error: a.error ? a.error.code : null
     };
   }
+  function syncPublicAudioState(a) {
+    a = a || document.getElementById("darQuranPlayerAudio");
+    window.quranAudioState = {
+      isPlaying: !!(a && !a.paused && state.playing),
+      isLoading: !!(a && a.readyState < 3 && state.playing),
+      currentSurah: state.surah,
+      currentAyah: state.ayah,
+      currentQari: state.reciter,
+      currentUrl: engine.lastUrl || String((a && a.currentSrc) || ""),
+      currentTime: Number((a && a.currentTime) || state.current || 0),
+      duration: Number((a && a.duration) || state.duration || 0),
+      error: state.error || (a && a.error ? String(a.error.code) : ""),
+      hasActuallyStartedPlayback: !!engine.started
+    };
+    return window.quranAudioState;
+  }
+  function clearStallRetry() {
+    if (!engine.stallTimer) return;
+    clearTimeout(engine.stallTimer);
+    engine.stallTimer = 0;
+  }
+  function scheduleStallRetry(kind) {
+    clearStallRetry();
+    var gen = playGen;
+    var a = audioEl();
+    var at = Number(a.currentTime) || 0;
+    engine.stallTimer = setTimeout(function () {
+      engine.stallTimer = 0;
+      if (gen !== playGen || window.__DAR_ADHAN_ACTIVE === true) return;
+      var live = audioEl();
+      if (!state.playing || !state.sessionActive || live.ended) return;
+      if ((Number(live.currentTime) || 0) > at + 0.2 || live.readyState >= 3) return;
+      state.current = at;
+      state.resumeAt = at;
+      logAudio("retry after " + kind, snapAudio(live));
+      loadAudio(true, true);
+    }, 8000);
+  }
+  function onAudioSignal(ev) {
+    var kind = ev && ev.type ? ev.type : "event";
+    logAudio(kind, snapAudio(ev && ev.currentTarget));
+    syncPublicAudioState(ev && ev.currentTarget);
+    if (kind === "stalled" || kind === "waiting") scheduleStallRetry(kind);
+  }
   function bindAudioListeners(a) {
     if (!a || a.dataset.dqpEngineBound === "1") return;
     a.dataset.dqpEngineBound = "1";
@@ -581,6 +625,9 @@
     a.addEventListener("play", onPlayEv);
     a.addEventListener("pause", onPauseEv);
     a.addEventListener("error", onAudioError);
+    ["stalled", "waiting", "suspend", "abort", "emptied"].forEach(function (kind) {
+      a.addEventListener(kind, onAudioSignal);
+    });
   }
   function audioEl() {
     var a = document.getElementById("darQuranPlayerAudio");
@@ -590,7 +637,7 @@
     }
     a = document.createElement("audio");
     a.id = "darQuranPlayerAudio";
-    a.preload = "auto";
+    a.preload = isAppleTvApp() ? "metadata" : "auto";
     a.setAttribute("playsinline", "");
     a.setAttribute("webkit-playsinline", "");
     a.playsInline = true;
@@ -633,9 +680,9 @@
     var g = globalAyah(surah, ayah);
     var pack = window.DARQuranAudioPack;
     var list = [];
-    list.push("https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3");
     if (pack && typeof pack.url === "function") list.push(pack.url(rec.edition, g));
     list.push("/quran-audio/" + rec.edition + "/" + g + ".mp3");
+    list.push("https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3");
     list.push("https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + g + ".mp3");
     return list.filter(function (u, i, arr) { return u && arr.indexOf(u) === i; });
   }
@@ -654,7 +701,7 @@
     if (volCtx && volCtx.state === "suspended") {
       try { volCtx.resume(); } catch (eVolR) {}
     }
-    logAudio("play request", {
+    logAudio("play requested", {
       surah: state.surah,
       ayah: state.ayah,
       qari: state.reciter,
@@ -670,9 +717,11 @@
     p.then(function () {
       if (gen !== playGen) return;
       engine.started = true;
+      engine.lastProgressAt = Date.now();
       state.playing = true;
       state.sessionActive = true;
       logAudio("play resolved", snapAudio(a));
+      syncPublicAudioState(a);
       paintChrome();
       paintMini();
     }).catch(function (err) {
@@ -694,6 +743,7 @@
         state.error = "Tippe erneut auf Wiedergabe, um den Ton zu starten.";
         paintError();
         paintChrome();
+        syncPublicAudioState(a);
         return;
       }
       tryFallback();
@@ -706,6 +756,7 @@
     trackHeard = false;
     allowAdvance = false;
     engine.started = false;
+    clearStallRetry();
     ignoreEndedUntil = Date.now() + 1200;
     engine.abortRetries = 0;
     var wantQari = state.reciter;
@@ -735,7 +786,8 @@
       engine.loadedSurah = surah;
       engine.loadedAyah = ayah;
       a.src = hit.url;
-      logAudio("src after", snapAudio(a));
+      logAudio("src changed", snapAudio(a));
+      syncPublicAudioState(a);
       function seekStart() {
         if (gen !== playGen) return;
         var t = keepTime ? (Number(state.resumeAt) || 0) : 0;
@@ -762,7 +814,6 @@
         var recNow = reciterById(hit.qari || wantQari);
         if (pack && recNow) {
           pack.ensure(recNow.edition, surah, ayah);
-          pack.prefetchSurah(recNow.edition, surah);
         }
       } catch (ePack) {}
       applyLearnRate();
@@ -793,6 +844,7 @@
         allowAdvance = false;
         engine.lastUrl = hit.url;
         audioEl().src = hit.url;
+        logAudio("src changed", snapAudio(audioEl()));
         if (state.playing || state.sessionActive) runPlay(audioEl(), playGen);
         paintChrome();
       });
@@ -805,6 +857,7 @@
     engine.lastUrl = urls[urlIndex];
     logAudio("fallback url", { url: engine.lastUrl, index: urlIndex });
     a.src = engine.lastUrl;
+    logAudio("src changed", snapAudio(a));
     if (state.playing || state.sessionActive) runPlay(a, playGen);
   }
   function onTime() {
@@ -812,6 +865,9 @@
     var a = audioEl();
     state.duration = audioDuration(a);
     syncProgressSample(false);
+    engine.lastProgressAt = Date.now();
+    clearStallRetry();
+    syncPublicAudioState(a);
     if (engine.started && (Number(state.current) || 0) > 0.25 && isFinite(state.duration) && state.duration > 1) {
       trackHeard = true;
       allowAdvance = true;
@@ -833,7 +889,9 @@
     if (state.playing) startProgressClock();
   }
   function onCanPlay() {
+    clearStallRetry();
     logAudio("canplay", snapAudio());
+    syncPublicAudioState(audioEl());
     if (state.error) {
       state.error = "";
       paintError();
@@ -859,6 +917,7 @@
     markPlayingAyah();
     syncProgressSample(true);
     startProgressClock();
+    syncPublicAudioState(audioEl());
   }
   function onPauseEv() {
     state.playing = false;
@@ -873,11 +932,13 @@
       state.resumeAt = state.current;
     } catch (ePause) {}
     paintProgress();
+    syncPublicAudioState(audioEl());
   }
   function onAudioError() {
     var a = audioEl();
     var code = a.error && a.error.code;
     logAudio("error", { code: code, snap: snapAudio(a) });
+    syncPublicAudioState(a);
     if (code === 1) return;
     if (engine.fallbackTimer) clearTimeout(engine.fallbackTimer);
     engine.fallbackTimer = setTimeout(function () {
@@ -908,6 +969,7 @@
   async function onEnded() {
     logAudio("ended", snapAudio());
     if (!trackReallyFinished()) return;
+    clearStallRetry();
     trackHeard = false;
     allowAdvance = false;
     engine.started = false;
@@ -3409,13 +3471,206 @@
         currentUrl: engine.lastUrl || String(a.currentSrc || ""),
         currentTime: state.current,
         duration: state.duration,
-        error: state.error || ""
+        error: state.error || "",
+        hasActuallyStartedPlayback: !!engine.started
       };
     }
   };
 
+  function bootAppleTvAdhanRuntime() {
+    var params;
+    try { params = new URLSearchParams(location.search); } catch (eParams) { params = { get: function () { return ""; } }; }
+    var debug = params.get("audioDebug") === "1" || params.get("adhanDebug") === "1";
+    if (!isAppleTvApp() && !debug) return;
+    if (window.__DAR_APPLE_TV_ADHAN_BOOTED) return;
+    window.__DAR_APPLE_TV_ADHAN_BOOTED = true;
+    if (debug) window.__DAR_QURAN_AUDIO_DEBUG = true;
+
+    var prayerData = null;
+    var adhanCatalog = null;
+    var scheduler = 0;
+    var loadedDate = "";
+    var adhanAudio = document.createElement("audio");
+    adhanAudio.id = "darAppleTvAdhanAudio";
+    adhanAudio.preload = "metadata";
+    adhanAudio.setAttribute("playsinline", "");
+    adhanAudio.setAttribute("webkit-playsinline", "");
+    adhanAudio.style.display = "none";
+    document.body.appendChild(adhanAudio);
+
+    function adhanLog(msg, data) {
+      if (data !== undefined) console.log("[ADHAN] " + msg, data);
+      else console.log("[ADHAN] " + msg);
+      if (!debug) return;
+      var out = document.getElementById("darAppleTvAudioDebugLog");
+      if (out) {
+        var line = document.createElement("div");
+        line.textContent = new Date().toLocaleTimeString("de-DE") + " [ADHAN] " + msg;
+        out.prepend(line);
+        while (out.childNodes.length > 18) out.removeChild(out.lastChild);
+      }
+    }
+    function berlinParts(date) {
+      var parts = new Intl.DateTimeFormat("sv-SE", {
+        timeZone: "Europe/Berlin",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }).formatToParts(date || new Date());
+      var out = {};
+      parts.forEach(function (p) { if (p.type !== "literal") out[p.type] = p.value; });
+      return {
+        date: out.year + "-" + out.month + "-" + out.day,
+        time: out.hour + ":" + out.minute
+      };
+    }
+    function storePrayerData(data) {
+      prayerData = data;
+      try { localStorage.setItem("darAppleTvPrayerTimesV1", JSON.stringify(data)); } catch (eStore) {}
+      return data;
+    }
+    function readPrayerFallback() {
+      try { return JSON.parse(localStorage.getItem("darAppleTvPrayerTimesV1") || "null"); } catch (eRead) { return null; }
+    }
+    async function refreshPrayerTimes(force) {
+      var now = berlinParts();
+      if (!force && loadedDate === now.date && prayerData) return prayerData;
+      loadedDate = now.date;
+      try {
+        var res = await fetch("/api/prayer/times?lat=50.6256&lon=6.9491&date=" + encodeURIComponent(now.date), { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return storePrayerData(await res.json());
+      } catch (err) {
+        adhanLog("prayer times fallback", String(err && err.message || err));
+        prayerData = readPrayerFallback();
+        return prayerData;
+      }
+    }
+    async function loadAdhanCatalog() {
+      if (adhanCatalog) return adhanCatalog;
+      try {
+        var res = await fetch("/apple-tv/prayer/adhan.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        adhanCatalog = await res.json();
+      } catch (err) {
+        adhanLog("catalog error", String(err && err.message || err));
+        adhanCatalog = { recordings: [] };
+      }
+      return adhanCatalog;
+    }
+    function selectedRecording(prayerKey) {
+      var rows = adhanCatalog && Array.isArray(adhanCatalog.recordings) ? adhanCatalog.recordings : [];
+      var saved = "";
+      try { saved = localStorage.getItem("darAppleTvAdhanFile") || ""; } catch (eSaved) {}
+      var exact = rows.filter(function (r) { return r.id === saved; })[0];
+      if (exact) return exact;
+      var fajr = prayerKey === "fajr";
+      return rows.filter(function (r) { return !!r.isFajr === fajr; })[0] || rows[0] || null;
+    }
+    function pauseQuranForAdhan() {
+      var quran = document.getElementById("darQuranPlayerAudio");
+      var wasPlaying = !!(quran && !quran.paused);
+      adhanLog("blocked by quran?", wasPlaying);
+      if (wasPlaying) {
+        try { quran.pause(); } catch (ePause) {}
+        adhanLog("quran paused for adhan");
+      }
+      return wasPlaying;
+    }
+    async function playAdhan(prayerKey, reason) {
+      if (window.__DAR_ADHAN_ACTIVE === true) return false;
+      await loadAdhanCatalog();
+      var recording = selectedRecording(prayerKey);
+      if (!recording || !recording.url) {
+        adhanLog("play rejected", "missing audio url");
+        return false;
+      }
+      window.__DAR_ADHAN_ACTIVE = true;
+      pauseQuranForAdhan();
+      adhanAudio.src = recording.url;
+      adhanLog("trigger prayer", { prayer: prayerKey, reason: reason || "scheduler" });
+      adhanLog("audio url", recording.url);
+      adhanLog("play requested");
+      try {
+        await adhanAudio.play();
+        adhanLog("play resolved");
+        return true;
+      } catch (err) {
+        window.__DAR_ADHAN_ACTIVE = false;
+        adhanLog("play rejected", { name: err && err.name, message: err && err.message });
+        return false;
+      }
+    }
+    function nextPrayer(now) {
+      if (!prayerData || !prayerData.times) return null;
+      var order = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
+      for (var i = 0; i < order.length; i += 1) {
+        var row = prayerData.times[order[i]];
+        if (row && String(row.time) > now.time) return row;
+      }
+      return null;
+    }
+    async function schedulerTick() {
+      var now = berlinParts();
+      adhanLog("current time", now.time);
+      await refreshPrayerTimes(loadedDate !== now.date);
+      var next = nextPrayer(now);
+      adhanLog("next prayer", next || "tomorrow");
+      if (!prayerData || !prayerData.times) return;
+      var keys = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
+      for (var i = 0; i < keys.length; i += 1) {
+        var row = prayerData.times[keys[i]];
+        if (!row || row.time !== now.time) continue;
+        var triggerKey = now.date + ":" + keys[i];
+        try {
+          if (localStorage.getItem("darAppleTvLastAdhanV1") === triggerKey) return;
+          localStorage.setItem("darAppleTvLastAdhanV1", triggerKey);
+        } catch (eDedupe) {}
+        await playAdhan(keys[i], "scheduler");
+        return;
+      }
+    }
+    adhanAudio.addEventListener("ended", function () {
+      window.__DAR_ADHAN_ACTIVE = false;
+      adhanLog("adhan finished");
+      adhanLog("quran resume decision", "paused by policy");
+    });
+    adhanAudio.addEventListener("error", function () {
+      window.__DAR_ADHAN_ACTIVE = false;
+      adhanLog("play rejected", adhanAudio.error ? adhanAudio.error.code : "audio error");
+    });
+
+    window.DARAppleTVAdhan = {
+      testNow: function (prayerKey) { return playAdhan(prayerKey || "dhuhr", "manual test"); },
+      simulate: function (prayerKey) { return playAdhan(prayerKey || "dhuhr", "simulation"); },
+      refresh: function () { return refreshPrayerTimes(true); },
+      state: function () { return { active: window.__DAR_ADHAN_ACTIVE === true, date: loadedDate, times: prayerData && prayerData.times }; }
+    };
+    if (debug) {
+      var panel = document.createElement("aside");
+      panel.id = "darAppleTvAudioDebug";
+      panel.style.cssText = "position:fixed;z-index:99999;right:12px;top:12px;width:min(360px,calc(100vw - 24px));max-height:44vh;overflow:auto;background:#111;color:#fff;padding:10px;font:12px/1.35 monospace;border:1px solid #c8a85b";
+      panel.innerHTML = '<button type="button" id="darAppleTvAdhanTest" style="padding:8px 12px;margin-bottom:8px">Aḏān jetzt testen</button><div id="darAppleTvAudioDebugLog"></div>';
+      document.body.appendChild(panel);
+      panel.querySelector("#darAppleTvAdhanTest").addEventListener("click", function () { playAdhan("dhuhr", "debug button"); });
+    }
+    adhanLog("scheduler started");
+    Promise.all([loadAdhanCatalog(), refreshPrayerTimes(true)]).then(function () {
+      schedulerTick();
+      if (!scheduler) scheduler = setInterval(schedulerTick, 30000);
+    });
+    window.addEventListener("focus", function () { refreshPrayerTimes(true).then(schedulerTick); });
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "visible") refreshPrayerTimes(true).then(schedulerTick);
+    });
+  }
+
   loadState();
   ensureTadCatalog();
+  bootAppleTvAdhanRuntime();
   var tvAutoStarted = false;
   function resumeVisibleSession() {
     loadState({ keepLiveSession: true });

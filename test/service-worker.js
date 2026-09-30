@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1131';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1142-audio-hotfix';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -370,6 +370,13 @@ function isFeedAssetRequest(url) {
     || url.pathname.startsWith('/assets/posts/');
 }
 
+function isAudioRequest(request, url) {
+  return request.destination === 'audio'
+    || /\.(?:mp3|m4a|aac|ogg|wav)$/i.test(url.pathname)
+    || url.pathname.startsWith('/quran-audio/')
+    || /^\/(?:apple-tv\/)?adhan\//i.test(url.pathname);
+}
+
 function isKidsPath(url) {
   const p = url.pathname || '';
   return p === '/test/kids' || p.startsWith('/test/kids/');
@@ -558,9 +565,20 @@ self.addEventListener('message', (event) => {
     return;
   }
   if (data.type !== 'PRECACHE' || !Array.isArray(data.urls) || !data.urls.length) return;
+  const safeUrls = data.urls.filter((raw) => {
+    try {
+      const url = new URL(raw, self.location.origin);
+      return !/\.(?:mp3|m4a|aac|ogg|wav)$/i.test(url.pathname)
+        && !url.pathname.startsWith('/quran-audio/')
+        && !/^\/(?:apple-tv\/)?adhan\//i.test(url.pathname);
+    } catch (e) {
+      return false;
+    }
+  });
+  if (!safeUrls.length) return;
   event.waitUntil(
     caches.open(CACHE_VERSION).then((cache) => Promise.allSettled(
-      data.urls.map((url) => fetch(url, { cache: 'reload' })
+      safeUrls.map((url) => fetch(url, { cache: 'reload' })
         .then((response) => (response && response.ok ? cache.put(url, response) : null))
         .catch(() => null))
     ))
@@ -580,7 +598,10 @@ async function purgePastVisualCaches() {
   const keys = await caches.keys();
   await Promise.all(
     keys
-      .filter((key) => key.startsWith('dar-al-tawhid-offline-light-') && key !== CACHE_VERSION)
+      .filter((key) => (
+        (key.startsWith('dar-al-tawhid-offline-light-') && key !== CACHE_VERSION)
+        || key.startsWith('dar-quran-audio-v')
+      ))
       .map((key) => caches.delete(key))
   );
   try {
@@ -646,6 +667,9 @@ self.addEventListener('fetch', (event) => {
 
   // Admin-App hat eigenen Service Worker unter /admin/ – nicht abfangen.
   if (url.pathname.startsWith('/admin')) return;
+
+  // Audio/Range immer direkt zum Netz: Cache API darf keine 200/206-Antworten vermischen.
+  if (isAudioRequest(request, url)) return;
 
   // Fest gepinnte CDN-Bootdatei auf die aktuelle Origin-Datei umbiegen.
   if (isPinnedLiveBootRequest(url)) {

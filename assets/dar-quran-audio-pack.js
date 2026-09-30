@@ -1,8 +1,8 @@
-/* Local Qurʾān recitation pack: IDB + Cache API, seed (Gebet/Juz 30) then full reciter. */
+/* Qurʾān recitation availability + opt-in offline pack. No audio downloads at app boot. */
 (function () {
   if (window.__darQuranAudioPackBoot) return;
   window.__darQuranAudioPackBoot = true;
-  var VER = "1061";
+  var VER = "1062";
   var DB_NAME = "dar-quran-audio-pack";
   var STORE = "mp3";
   var CACHE_NAME = "dar-quran-audio-v" + VER;
@@ -36,8 +36,9 @@
   var cachedKeys = Object.create(null);
   var pending = Object.create(null);
   var inflight = 0;
-  var MAX_INFLIGHT = 2;
+  var MAX_INFLIGHT = 1;
   var queue = [];
+  var pumpTimer = 0;
   var seeded = false;
   var cancelled = Object.create(null);
   var status = { have: 0, queued: 0, seed: false, reciter: "" };
@@ -203,6 +204,17 @@
     pending[k] = false;
   }
   function pump() {
+    var activePlayback = window.__DAR_ADHAN_ACTIVE === true
+      || !!(window.quranAudioState && window.quranAudioState.isPlaying);
+    if (activePlayback) {
+      if (!pumpTimer) {
+        pumpTimer = setTimeout(function () {
+          pumpTimer = 0;
+          pump();
+        }, 1500);
+      }
+      return;
+    }
     while (inflight < MAX_INFLIGHT && queue.length) {
       var job = queue.shift();
       status.queued = queue.length;
@@ -218,17 +230,11 @@
   }
   function ensure(edition, surah, ayah) {
     if (!edition) return;
+    if (isTvPlayback()) return;
     var g = globalAyah(surah, ayah);
-    enqueue(edition, g, true);
-    var verses = ayahsForSurah(surah);
-    verses.forEach(function (n) { enqueue(edition, n, n === g); });
-    [g + 1, g + 2, g + 3].forEach(function (n) {
-      if (n <= AYAH_TOTAL) enqueue(edition, n, true);
-    });
+    if (g < AYAH_TOTAL) enqueue(edition, g + 1, false);
   }
-  function prefetchSurah(edition, surah) {
-    ayahsForSurah(surah).forEach(function (n) { enqueue(edition, n, false); });
-  }
+  function prefetchSurah() {}
   function startSeed() {
     if (seeded) return;
     seeded = true;
@@ -360,7 +366,6 @@
   };
   (async function boot() {
     try { await loadCatalog(); } catch (eCat) {}
-    try { startSeed(); } catch (eSeed) {}
     hydrate();
   })();
 })();
