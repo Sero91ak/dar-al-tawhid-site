@@ -4,53 +4,87 @@ import SwiftUI
 /// Place this where the current reciter control is shown.
 struct QuranReciterPickerButton: View {
     @ObservedObject var store: QuranReciterSelectionStore
+    @ObservedObject private var pack = QuranOfflinePackStore.shared
     @State private var isPresented = false
 
     var body: some View {
-        Button {
-            isPresented = true
-        } label: {
-            HStack(spacing: 14) {
-                Image(systemName: "waveform")
-                    .font(.title3)
+        HStack(spacing: 16) {
+            Button {
+                isPresented = true
+            } label: {
+                HStack(spacing: 14) {
+                    Image(systemName: "waveform")
+                        .font(.title3)
 
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("REZITATOR")
-                        .font(.caption2.weight(.semibold))
-                        .foregroundStyle(.secondary)
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text("REZITATOR")
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(.secondary)
 
-                    Text(currentTitle)
-                        .font(.headline)
+                        Text(currentTitle)
+                            .font(.headline)
+                            .lineLimit(1)
+                    }
+
+                    Spacer(minLength: 8)
+
+                    if store.isLoading {
+                        ProgressView()
+                    } else {
+                        Image(systemName: "chevron.down")
+                            .font(.caption.weight(.bold))
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .frame(minWidth: 280, maxWidth: 440, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .accessibilityLabel("Qurʾān-Rezitator auswählen")
+            .accessibilityValue(currentTitle)
+
+            Button {
+                pack.toggleDownload(edition: store.selectedIdentifier)
+            } label: {
+                HStack(spacing: 10) {
+                    Image(systemName: pack.isDownloading && pack.edition == store.selectedIdentifier ? "stop.circle" : "arrow.down.circle")
+                    Text(downloadTitle)
                         .lineLimit(1)
                 }
-
-                Spacer(minLength: 8)
-
-                if store.isLoading {
-                    ProgressView()
-                } else {
-                    Image(systemName: "chevron.down")
-                        .font(.caption.weight(.bold))
-                        .foregroundStyle(.secondary)
-                }
+                .font(.headline)
+                .frame(minWidth: 210)
             }
-            .frame(minWidth: 320, maxWidth: 520, alignment: .leading)
-            .contentShape(Rectangle())
+            .disabled(store.selectedIdentifier.isEmpty)
+            .accessibilityLabel("Gewählten Rezitator herunterladen")
         }
-        .accessibilityLabel("Qurʾān-Rezitator auswählen")
-        .accessibilityValue(currentTitle)
         .sheet(isPresented: $isPresented) {
             QuranReciterPickerSheet(store: store)
         }
         .task {
+            pack.refresh(edition: store.selectedIdentifier)
             if !store.loadFinished {
                 await store.load()
             }
+        }
+        .onChange(of: store.selectedIdentifier) { _, id in
+            pack.refresh(edition: id)
         }
     }
 
     private var currentTitle: String {
         store.selectedReciter?.displayName ?? "Rezitator auswählen"
+    }
+
+    private var downloadTitle: String {
+        if pack.have >= QuranOfflinePackStore.ayahTotal - 5 && pack.edition == store.selectedIdentifier {
+            return "Gespeichert"
+        }
+        if pack.isDownloading && pack.edition == store.selectedIdentifier {
+            return "Lädt \(pack.have)/\(QuranOfflinePackStore.ayahTotal)"
+        }
+        if pack.have > 0 && pack.edition == store.selectedIdentifier {
+            return "Download \(pack.have)/\(QuranOfflinePackStore.ayahTotal)"
+        }
+        return "Download"
     }
 }
 

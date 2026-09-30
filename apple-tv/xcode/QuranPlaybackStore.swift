@@ -112,11 +112,11 @@ final class QuranPlaybackStore: ObservableObject {
             triedFallbackForIndex = currentIndex
             if let original = verse.audioURL,
                original.absoluteString != (Self.siteAudioURL(edition: surah?.reciterIdentifier, verse: verse)?.absoluteString ?? "") {
-                startDownloadAndPlay(url: original)
+                startDownloadAndPlay(url: original, edition: surah?.reciterIdentifier ?? "", ayah: verse.globalNumber)
                 return
             }
             if let fallback = Self.fallbackAudioURL(for: verse.audioURLString) {
-                startDownloadAndPlay(url: fallback)
+                startDownloadAndPlay(url: fallback, edition: surah?.reciterIdentifier ?? "", ayah: verse.globalNumber)
                 return
             }
         }
@@ -267,25 +267,51 @@ final class QuranPlaybackStore: ObservableObject {
 
         triedFallbackForIndex = nil
         persistReadingPosition()
-        startDownloadAndPlay(url: url)
+        let edition = surah?.reciterIdentifier ?? ""
+        let ayah = verse.globalNumber
+        startDownloadAndPlay(url: url, edition: edition, ayah: ayah)
     }
 
-    private func startDownloadAndPlay(url: URL) {
+    private func startDownloadAndPlay(url: URL, edition: String = "", ayah: Int = 0) {
         playTask?.cancel()
         generation += 1
         let token = generation
         isPlaying = true
         playTask = Task { [weak self] in
-            await self?.downloadAndPlay(url: url, token: token)
+            await self?.downloadAndPlay(url: url, edition: edition, ayah: ayah, token: token)
         }
     }
 
-    private func downloadAndPlay(url: URL, token: Int) async {
+    private func playFromFile(_ file: URL) throws {
         prepareSpeaker()
+        audioPlayer?.stop()
+        let player = try AVAudioPlayer(contentsOf: file)
+        player.delegate = playerDelegate
+        player.volume = 1
+        player.prepareToPlay()
+        audioPlayer = player
+        prepareSpeaker()
+        guard player.play() else {
+            throw URLError(.cannotDecodeContentData)
+        }
+        isPlaying = true
+    }
+
+    private func downloadAndPlay(url: URL, edition: String, ayah: Int, token: Int) async {
+        prepareSpeaker()
+
+        if ayah >= 1, let local = QuranOfflinePackStore.shared.fileIfPresent(edition: edition, ayah: ayah) {
+            do {
+                try playFromFile(local)
+                return
+            } catch {
+                // Datei unbrauchbar: neu laden
+            }
+        }
 
         do {
             var request = URLRequest(url: url)
-            request.cachePolicy = .returnCacheDataElseLoad
+            request.cachePolicy = .reloadIgnoringLocalCacheData
             request.timeoutInterval = 25
             let (data, response) = try await URLSession.shared.data(for: request)
             guard token == generation, !Task.isCancelled else { return }
@@ -296,18 +322,16 @@ final class QuranPlaybackStore: ObservableObject {
                 return
             }
 
-            audioPlayer?.stop()
-            let player = try AVAudioPlayer(data: data)
-            player.delegate = playerDelegate
-            player.volume = 1
-            player.prepareToPlay()
-            audioPlayer = player
-            prepareSpeaker()
-            guard player.play() else {
-                handleItemFailure()
-                return
+            if ayah >= 1 {
+                QuranOfflinePackStore.shared.save(data, edition: edition, ayah: ayah)
             }
-            isPlaying = true
+            if let file = QuranOfflinePackStore.shared.fileIfPresent(edition: edition, ayah: ayah) {
+                try playFromFile(file)
+            } else {
+                let tmp = FileManager.default.temporaryDirectory.appendingPathComponent("dar-quran-\(ayah).mp3")
+                try data.write(to: tmp, options: .atomic)
+                try playFromFile(tmp)
+            }
         } catch {
             guard token == generation, !Task.isCancelled else { return }
             handleItemFailure()
@@ -379,5 +403,98 @@ final class QuranPlaybackStore: ObservableObject {
         guard let surah, let verse = currentVerse else { return }
         UserDefaults.standard.set(surah.number, forKey: Self.lastSurahKey)
         UserDefaults.standard.set(verse.numberInSurah, forKey: Self.lastAyahKey)
+    }
+}
+
+@MainActor
+final class QuranOfflinePackStore: ObservableObject {
+    static let shared = QuranOfflinePackStore()
+    static let ayahTotal = 6236
+
+    @Published private(set) var edition = ""
+    @Published private(set) var have = 0
+    @Published private(set) var isDownloading = false
+
+    private var downloadTask: Task<Void, Never>?
+    private var cancelled = false
+
+    var total: Int { Self.ayahTotal }
+
+    func toggleDownload(edition: String) {
+        guard !edition.isEmpty else { return }
+        if isDownloading && self.edition == edition {
+            cancelled = true
+            downloadTask?.cancel()
+            isDownloading = false
+            return
+        }
+        startDownload(edition: edition)
+    }
+
+    func fileIfPresent(edition: String, ayah: Int) -> URL? {
+        let url = fileURL(edition: edition, ayah: ayah)
+        guard FileManager.default.fileExists(atPath: url.path) else { return nil }
+        return url
+    }
+
+    func save(_ data: Data, edition: String, ayah: Int) {
+        guard !edition.isEmpty, ayah >= 1, data.count > 64 else { return }
+        let url = fileURL(edition: edition, ayah: ayah)
+        try? FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try? data.write(to: url, options: .atomic)
+        if self.edition == edition || self.edition.isEmpty {
+            refresh(edition: edition)
+        }
+    }
+
+    func refresh(edition: String) {
+        guard !edition.isEmpty else { return }
+        self.edition = edition
+        let dir = folder(edition: edition)
+        let count = (try? FileManager.default.contentsOfDirectory(atPath: dir.path).filter { $0.hasSuffix(".mp3") }.count) ?? 0
+        have = count
+    }
+
+    private func startDownload(edition: String) {
+        cancelled = false
+        isDownloading = true
+        self.edition = edition
+        refresh(edition: edition)
+        downloadTask?.cancel()
+        downloadTask = Task { [weak self] in
+            await self?.downloadAll(edition: edition)
+        }
+    }
+
+    private func downloadAll(edition: String) async {
+        for ayah in 1...Self.ayahTotal {
+            if cancelled || Task.isCancelled { break }
+            if fileIfPresent(edition: edition, ayah: ayah) != nil { continue }
+            guard let url = URL(string: "https://dar-al-tawhid.de/quran-audio/\(edition)/\(ayah).mp3") else { continue }
+            do {
+                let (data, response) = try await URLSession.shared.data(from: url)
+                guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode), data.count > 64 else {
+                    continue
+                }
+                save(data, edition: edition, ayah: ayah)
+            } catch {
+                continue
+            }
+            try? await Task.sleep(nanoseconds: 250_000_000)
+        }
+        isDownloading = false
+        refresh(edition: edition)
+    }
+
+    private func folder(edition: String) -> URL {
+        let root = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("DarAlTawhidAppleTV/QuranAudio", isDirectory: true)
+            .appendingPathComponent(edition.replacingOccurrences(of: "/", with: "-"), isDirectory: true)
+        try? FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        return root
+    }
+
+    private func fileURL(edition: String, ayah: Int) -> URL {
+        folder(edition: edition).appendingPathComponent("\(ayah).mp3")
     }
 }
