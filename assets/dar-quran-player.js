@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 981;
+    var PLAYER_BUILD = 982;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -661,7 +661,7 @@
     }
     a = document.createElement("audio");
     a.id = "darQuranPlayerAudio";
-    a.preload = isAppleTvApp() ? "auto" : "auto";
+    a.preload = "metadata";
     a.setAttribute("playsinline", "");
     a.setAttribute("webkit-playsinline", "");
     a.playsInline = true;
@@ -669,11 +669,7 @@
     a.muted = false;
     a.defaultMuted = false;
     a.volume = 1;
-    if (isAppleTvApp()) {
-      a.style.cssText = "position:fixed;left:0;bottom:0;width:8px;height:8px;opacity:0.02;pointer-events:none;z-index:1";
-    } else {
-      a.style.display = "none";
-    }
+    a.style.display = "none";
     document.body.appendChild(a);
     bindAudioListeners(a);
     return a;
@@ -740,6 +736,9 @@
       if (!isAppleTvApp()) return path;
       if (path.indexOf("http") === 0) return path;
       return origin + path;
+    }
+    if (isAppleTvApp()) {
+      return ["https://dar-al-tawhid.de/quran-audio/" + rec.edition + "/" + g + ".mp3"];
     }
     if (pack && typeof pack.url === "function") list.push(absProxy(pack.url(rec.edition, g)));
     list.push(absProxy("/quran-audio/" + rec.edition + "/" + g + ".mp3"));
@@ -904,6 +903,19 @@
   }
   function preloadNext() {}
   function tryFallback() {
+    if (isAppleTvApp() && !isOffline()) {
+      urlIndex += 1;
+      var more = urlsFor(state.surah, state.ayah);
+      if (urlIndex < more.length) {
+        var aMore = audioEl();
+        setAudioSrc(aMore, more[urlIndex]);
+        engine.lastUrl = more[urlIndex];
+        runPlay(aMore, playGen);
+        return;
+      }
+      missingAudioHalt(state.reciter, state.surah, state.ayah, engine.lastUrl);
+      return;
+    }
     if (!engine.blobTried) {
       engine.blobTried = true;
       var genSaved = playGen;
