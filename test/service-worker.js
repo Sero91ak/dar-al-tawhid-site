@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1146';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1147';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -155,7 +155,8 @@ const APP_SHELL = [
   '/watermark-circle-soft.png',
   '/content/duas/duas.json',
   '/content/quran/surahs.json',
-  '/content/quran-athar/de/001.json',
+  '/apple-tv/quran/tadabbur/catalog.json',
+  '/apple-tv/quran/tadabbur/entries-index.json',
   '/assets/site-analytics.js',
   '/assets/jummah-friday.js',
   '/data/jummah-series.json',
@@ -397,6 +398,12 @@ function isPinnedLiveBootRequest(url) {
 
 function isPostDataRequest(url) {
   return url.pathname.includes('/content/posts/') || url.pathname.endsWith('/posts-index.json') || url.pathname.includes('/content/staging/posts/') || url.pathname.includes('/content/stories/') || url.pathname.includes('/content/staging/stories/') || url.pathname.includes('/content/focus-feed/') || url.pathname.includes('/content/staging/focus-feed/') || url.pathname.includes('/content/feed-backgrounds/') || url.pathname.includes('/content/staging/feed-backgrounds/') || url.pathname.includes('/assets/feed-backgrounds/') || url.pathname.includes('/content/updates/') || url.pathname.includes('/content/staging/updates/');
+}
+
+function isTadabburDataRequest(url) {
+  return url.origin === self.location.origin
+    && url.pathname.indexOf('/apple-tv/quran/tadabbur/') === 0
+    && /\.json$/i.test(url.pathname);
 }
 
 function isProphetsTestDataRequest(url) {
@@ -762,6 +769,23 @@ self.addEventListener('fetch', (event) => {
           return cached || Response.error();
         }
       })
+    );
+    return;
+  }
+
+  // Taddabur-Daten: Network-first, damit neue geprüfte Batches sofort in Web/iOS sichtbar sind.
+  // Bei Netzfehler bleibt der zuletzt erfolgreiche Offline-Stand nutzbar.
+  if (isTadabburDataRequest(url)) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
     );
     return;
   }
