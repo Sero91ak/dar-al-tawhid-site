@@ -13,12 +13,17 @@ final class QuranPlaybackStore: ObservableObject {
     private let contentService: QuranContentService
     private let player = AVPlayer()
     private var cancellables = Set<AnyCancellable>()
+    private var itemStatusObservation: NSKeyValueObservation?
+    private var triedFallbackForIndex: Int?
+    private var resumeAfterInterruption = false
 
     private static let lastSurahKey = "dar.appleTV.quran.lastSurah"
     private static let lastAyahKey = "dar.appleTV.quran.lastAyah"
 
     init(contentService: QuranContentService = .shared) {
         self.contentService = contentService
+        player.isMuted = false
+        player.volume = 1.0
 
         NotificationCenter.default.publisher(for: .AVPlayerItemDidPlayToEndTime)
             .receive(on: DispatchQueue.main)
@@ -31,6 +36,115 @@ final class QuranPlaybackStore: ObservableObject {
                 self.advanceAfterPlayback()
             }
             .store(in: &cancellables)
+
+        NotificationCenter.default.publisher(for: .AVPlayerItemFailedToPlayToEndTime)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] notification in
+                guard let self,
+                      let failedItem = notification.object as? AVPlayerItem,
+                      failedItem === self.player.currentItem else {
+                    return
+                }
+                self.handleItemFailure()
+            }
+            .store(in: &cancellables)
+
+        NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] notification in
+                self?.handleInterruption(notification)
+            }
+            .store(in: &cancellables)
+
+        NotificationCenter.default.publisher(for: AVAudioSession.mediaServicesWereResetNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.activateAudioSession()
+                if self.isPlaying { self.playCurrent() }
+            }
+            .store(in: &cancellables)
+    }
+
+    /// tvOS only routes AVPlayer output to the TV/HomePod when the shared
+    /// session is active in a playback category. Other audio in the app (e.g.
+    /// the Aḏān) may deactivate or re-categorise the shared session, so it is
+    /// re-asserted before every Āyah.
+    private func activateAudioSession() {
+        let session = AVAudioSession.sharedInstance()
+        do {
+            if session.category != .playback || session.mode != .default {
+                try session.setCategory(.playback, mode: .default, options: [])
+            }
+            try session.setActive(true)
+        } catch {
+            try? session.setCategory(.playback)
+            try? session.setActive(true)
+        }
+        player.isMuted = false
+        player.volume = 1.0
+    }
+
+    private func handleInterruption(_ notification: Notification) {
+        guard let info = notification.userInfo,
+              let rawType = info[AVAudioSessionInterruptionTypeKey] as? UInt,
+              let type = AVAudioSession.InterruptionType(rawValue: rawType) else {
+            return
+        }
+
+        switch type {
+        case .began:
+            resumeAfterInterruption = isPlaying
+            player.pause()
+        case .ended:
+            guard resumeAfterInterruption else { return }
+            resumeAfterInterruption = false
+            activateAudioSession()
+            if player.currentItem != nil {
+                player.play()
+                isPlaying = true
+            } else {
+                playCurrent()
+            }
+        @unknown default:
+            break
+        }
+    }
+
+    private func handleItemFailure() {
+        guard let verse = currentVerse else { return }
+
+        if triedFallbackForIndex != currentIndex,
+           let fallback = Self.fallbackAudioURL(for: verse.audioURLString) {
+            triedFallbackForIndex = currentIndex
+            startItem(url: fallback)
+            return
+        }
+
+        advanceAfterPlayback()
+    }
+
+    private static func fallbackAudioURL(for urlString: String) -> URL? {
+        guard urlString.contains("/audio/128/") else { return nil }
+        return URL(string: urlString.replacingOccurrences(of: "/audio/128/", with: "/audio/64/"))
+    }
+
+    private func startItem(url: URL) {
+        activateAudioSession()
+        let item = AVPlayerItem(url: url)
+        let itemID = ObjectIdentifier(item)
+        itemStatusObservation = item.observe(\.status, options: [.new]) { [weak self] observedItem, _ in
+            guard observedItem.status == .failed else { return }
+            Task { @MainActor [weak self] in
+                guard let self,
+                      let current = self.player.currentItem,
+                      ObjectIdentifier(current) == itemID else { return }
+                self.handleItemFailure()
+            }
+        }
+        player.replaceCurrentItem(with: item)
+        player.play()
+        isPlaying = true
     }
 
     var currentVerse: QuranSynchronizedVerse? {
@@ -148,10 +262,8 @@ final class QuranPlaybackStore: ObservableObject {
             return
         }
 
-        let item = AVPlayerItem(url: url)
-        player.replaceCurrentItem(with: item)
-        player.play()
-        isPlaying = true
+        triedFallbackForIndex = nil
+        startItem(url: url)
         persistReadingPosition()
     }
 

@@ -5004,6 +5004,16 @@
       "expiresAt": "2026-12-31T23:59:00.000Z"
     },
     {
+      "id": "apple-tv-quran-native-audio-session-2026-09-30",
+      "approvedBy": "user-explicit-apple-tv-audio-repair",
+      "reason": "Nutzer: Qurʾān-Rezitation in der Apple-TV-App läuft sichtbar, ist aber stumm – nativen AVPlayer (Audio-Session, Lautstärke, Aḏān-Unterbrechung) reparieren. Nur Apple TV, Push ist live.",
+      "paths": [
+        "apple-tv/xcode/QuranPlaybackStore.swift",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "hadith-live-sync-2026-09-23",
       "approvedBy": "user-explicit-live-hadith-sync",
       "reason": "Nutzer: neue verifizierte Ḥadīṯ-Datensätze direkt für Apple-TV-Bildschirmschoner sowie aktuell für Test-App und iOS-Ḥadīṯ-Bibliothek synchronisieren.",
