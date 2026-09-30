@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 978;
+    var PLAYER_BUILD = 979;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -758,9 +758,6 @@
   }
   function runPlay(a, gen) {
     applyVolume(true);
-    if (volCtx && volCtx.state === "suspended") {
-      try { volCtx.resume(); } catch (eVolR) {}
-    }
     logAudio("play requested", {
       surah: state.surah,
       ayah: state.ayah,
