@@ -1,13 +1,13 @@
 {
-  "enabled": false,
-  "status": "in-progress",
-  "label": "Noch nicht freigegeben",
-  "releaseRequired": true,
-  "releasedByUser": false,
+  "enabled": true,
+  "status": "open",
+  "label": "Freigegeben",
+  "releaseRequired": false,
+  "releasedByUser": true,
   "targetHash": "#hadith-bibliothek",
   "cardTitle": "Ḥadīṯ-Bibliothek",
-  "cardSubtitle": "Šarḥ wird vorbereitet.",
-  "lockedMessage": "Ḥadīṯ-Bibliothek ist noch nicht freigegeben.",
+  "cardSubtitle": "Werke, Kitāb, Bāb und Šarḥ.",
+  "lockedMessage": "",
   "chips": [
     "Šarḥ",
     "Quelle"
@@ -21,12 +21,12 @@
   },
   "visibility": {
     "showInMoreAreaWhileLocked": true,
-    "allowOpenWhileLocked": false,
-    "showLockedStatus": true,
+    "allowOpenWhileLocked": true,
+    "showLockedStatus": false,
     "placement": "learning-and-knowledge-list",
     "compactListItem": true,
     "hideOutsideMoreRoute": true,
     "disableTopFallback": true
   },
-  "releaseRule": "Erst wenn releasedByUser true und enabled true gesetzt sind, darf die Ḥadīṯ-Bibliothek geöffnet werden. Bis dahin bleibt sie kompakt im Bereich Lernen & Wissen sichtbar."
+  "releaseRule": "Ḥadīṯ-Bibliothek ist in der iOS-App und in den Web-Apps frei. Die Katalogzeile unter Lernen & Wissen öffnet die Bibliothek."
 }

@@ -1,17 +1,17 @@
 /* DĀR AL TAWḤĪD – Hadith-Bibliothek: eine Katalogzeile, gesperrt bis Freigabe */
 (function () {
   "use strict";
-  if (window.__DAR_HADITH_LIBRARY_GATE_V5) return;
-  window.__DAR_HADITH_LIBRARY_GATE_V5 = true;
+  if (window.__DAR_HADITH_LIBRARY_GATE_V6) return;
+  window.__DAR_HADITH_LIBRARY_GATE_V6 = true;
 
   var TOAST_ID = "dar-hadith-library-gate-toast";
   var DATA_LOADER_ID = "dar-hadith-library-data-loader";
   var DEFAULT_STATE = {
-    enabled: false,
-    status: "in-progress",
-    label: "Noch nicht freigegeben",
-    releaseRequired: true,
-    releasedByUser: false,
+    enabled: true,
+    status: "open",
+    label: "Freigegeben",
+    releaseRequired: false,
+    releasedByUser: true,
     targetHash: "#hadith-bibliothek",
     lockedMessage: "Ḥadīṯ-Bibliothek ist noch nicht freigegeben."
   };
@@ -62,8 +62,19 @@
     }
   }
 
+  function isOfficialIosApp() {
+    try {
+      if (window.DAR_OFFICIAL_IOS_APP === true || window.DAR_IOS_NATIVE_APP === true) return true;
+      var ua = String(navigator.userAgent || "");
+      if (/DarAlTawhid-iOS/i.test(ua) || /DarAlTawhidOfficialIOS/i.test(ua)) return true;
+      return document.documentElement.classList.contains("dar-ios-native-app");
+    } catch (e) {
+      return false;
+    }
+  }
+
   function isOpen() {
-    if (isTestPath()) return true;
+    if (isTestPath() || isOfficialIosApp()) return true;
     return !!(gateState.enabled && gateState.releasedByUser === true);
   }
 
@@ -84,7 +95,7 @@
   }
 
   function loadGateState() {
-    return fetch(dataPath("hadith-library-gate.json?v=3"), { cache: "no-store" })
+    return fetch(dataPath("hadith-library-gate.json?v=4"), { cache: "no-store" })
       .then(function (res) { return res.ok ? res.json() : null; })
       .then(function (data) {
         gateState = mergeState(data);
