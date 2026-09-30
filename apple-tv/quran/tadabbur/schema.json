@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Apple TV Qurʾān Tadabbur Entry",
+  "type": "object",
+  "required": ["reference", "text", "narrator", "generation", "source", "grading"],
+  "properties": {
+    "reference": {"type": "string", "pattern": "^[0-9]{1,3}:[0-9]{1,3}$"},
+    "text": {"type": "string", "minLength": 1, "maxLength": 420},
+    "narrator": {"type": "string", "minLength": 1},
+    "generation": {"type": "string", "enum": ["Ṣaḥābī", "Tābiʿī", "Atbāʿ at-Tābiʿīn"]},
+    "source": {"type": "string", "minLength": 1},
+    "grading": {"type": "string", "minLength": 1},
+    "sourceUrl": {"type": "string", "format": "uri"},
+    "relation": {"type": "string", "enum": ["direkte Tafsīr-Aussage", "authentischer Ḥadīṯ zum Vers", "authentischer Āṯar zum Vers"]},
+    "note": {"type": "string"}
+  },
+  "additionalProperties": false
+}

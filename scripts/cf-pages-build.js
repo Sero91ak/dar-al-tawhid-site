@@ -46,6 +46,12 @@ execFileSync(process.execPath, [syncBuildIds], {
   stdio: 'inherit'
 });
 
+const quranSearchBuilder = path.join(__dirname, 'build-quran-search-index.js');
+execFileSync(process.execPath, [quranSearchBuilder], {
+  cwd: root,
+  stdio: 'inherit'
+});
+
 const forceWorkersTestUpload = path.join(__dirname, 'force-workers-test-upload.js');
 execFileSync(process.execPath, [forceWorkersTestUpload], {
   cwd: root,
@@ -54,4 +60,5 @@ execFileSync(process.execPath, [forceWorkersTestUpload], {
 
 console.log('CF Pages: kanonischer Bücher-/Autorenindex geprüft und erstellt.');
 console.log('CF Pages: Besucher-App mit geprüfter Quellenbibliothek verbunden.');
+console.log('CF Pages: Qurʾān-Suchindex aus geprüftem Taddabur-Katalog neu erstellt.');
 console.log('CF Pages: statisches Deploy aus Repo-Root (index.html, assets/, content/, data/).');

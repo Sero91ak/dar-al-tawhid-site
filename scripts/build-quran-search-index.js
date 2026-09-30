@@ -6,7 +6,7 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const QURAN_DIR = path.join(ROOT, "content/quran");
 const TAFSIR_DIR = path.join(ROOT, "content/tafsir/de");
-const ATHAR_DIR = path.join(ROOT, "content/quran-athar/de");
+const TADABBUR_DIR = path.join(ROOT, "apple-tv/quran/tadabbur");
 const KEYWORDS_PATH = path.join(ROOT, "data/quran-search-keywords.json");
 const OUTPUT_PATH = path.join(ROOT, "data/quran-search-index.json");
 
@@ -91,15 +91,38 @@ function normalizeTafsirPayload(data) {
   return map;
 }
 
-function normalizeAtharPayload(data) {
-  const rows = Array.isArray(data) ? data : data?.verses || data?.ayahs || [];
-  const map = new Map();
-  rows.forEach((row) => {
-    const id = Number(row.id || row.ayah || row.verse);
-    if (!Number.isFinite(id)) return;
-    map.set(id, Array.isArray(row.athar) ? row.athar : Array.isArray(row.items) ? row.items : []);
+function loadVerifiedTadabburByReference() {
+  const catalog = readJson(path.join(TADABBUR_DIR, "catalog.json"));
+  const indexPath = String(catalog?.entriesIndexPath || "entries-index.json");
+  const index = readJson(path.join(TADABBUR_DIR, indexPath));
+  const files = Array.isArray(index?.files) ? index.files : [];
+  const byReference = new Map();
+  let loaded = 0;
+
+  files.forEach((file) => {
+    const filePath = String(file?.path || "").trim();
+    if (!filePath) return;
+    const payload = readJson(path.join(TADABBUR_DIR, filePath));
+    const rows = Array.isArray(payload) ? payload : Array.isArray(payload?.entries) ? payload.entries : [];
+    const expectedFileCount = Number(file?.count);
+    if (Number.isFinite(expectedFileCount) && expectedFileCount >= 0 && rows.length !== expectedFileCount) {
+      throw new Error(`Tadabbur count mismatch in ${filePath}: ${rows.length}/${expectedFileCount}`);
+    }
+    loaded += rows.length;
+    rows.forEach((row) => {
+      const reference = String(row?.reference || "").trim();
+      if (reference && !byReference.has(reference)) byReference.set(reference, row);
+    });
   });
-  return map;
+
+  const expected = Number(catalog?.entriesCount || index?.totalVerifiedEntries || 0);
+  if (expected > 0 && loaded !== expected) {
+    throw new Error(`Tadabbur total mismatch: ${loaded}/${expected}`);
+  }
+  if (expected > 0 && byReference.size !== expected) {
+    throw new Error(`Tadabbur unique-reference mismatch: ${byReference.size}/${expected}`);
+  }
+  return byReference;
 }
 
 function flattenQuranWordTerms(entry) {
@@ -108,13 +131,18 @@ function flattenQuranWordTerms(entry) {
     .join(" ");
 }
 
-function flattenQuranAtharText(list) {
-  return (Array.isArray(list) ? list : [])
-    .map((item) =>
-      [item.person, item.name, item.generation, item.category, item.text, item.source, item.note]
-        .filter(Boolean)
-        .join(" ")
-    )
+function flattenVerifiedTadabburText(entry) {
+  if (!entry || typeof entry !== "object") return "";
+  return [
+    entry.narrator,
+    entry.generation,
+    entry.text || entry.reflection,
+    entry.source,
+    entry.grading,
+    entry.relation,
+    entry.note,
+  ]
+    .filter(Boolean)
     .join(" ");
 }
 
@@ -152,6 +180,7 @@ function main() {
   const keywordItems = readJson(KEYWORDS_PATH);
   const keywordLookup = buildKeywordLookup(keywordItems);
   const keywordLabelLookup = buildKeywordLabelLookup(keywordItems);
+  const tadabburByReference = loadVerifiedTadabburByReference();
   const rows = [];
 
   (meta?.surahs || []).forEach((surahMeta) => {
@@ -160,20 +189,19 @@ function main() {
 
     const surah = readJson(path.join(QURAN_DIR, `${pad3(id)}.json`));
     const tafsirMap = normalizeTafsirPayload(readOptionalJson(path.join(TAFSIR_DIR, `${pad3(id)}.json`), { verses: [] }));
-    const atharMap = normalizeAtharPayload(readOptionalJson(path.join(ATHAR_DIR, `${pad3(id)}.json`), { verses: [] }));
     const surahName = surahMeta.transliteration || surah.transliteration || "";
     const surahArabic = surahMeta.name || surah.name || "";
 
     (Array.isArray(surah.verses) ? surah.verses : []).forEach((verse) => {
       const tafsirEntry = tafsirMap.get(Number(verse.id)) || null;
-      const atharList = atharMap.get(Number(verse.id)) || [];
+      const tadabburEntry = tadabburByReference.get(`${id}:${Number(verse.id)}`) || null;
       const tagText = [
         tafsirEntry?.meaning,
         tafsirText(tafsirEntry?.tafsir),
         tafsirEntry?.sabab,
         tafsirText(tafsirEntry?.hadiths),
         flattenQuranWordTerms(tafsirEntry),
-        flattenQuranAtharText(atharList),
+        flattenVerifiedTadabburText(tadabburEntry),
       ]
         .filter(Boolean)
         .join(" ");
