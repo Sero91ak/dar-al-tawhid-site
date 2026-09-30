@@ -6691,6 +6691,26 @@
         "test/assets/dar-quran-player.js"
       ],
       "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
+      "id": "universal-content-sync-2026-09-30",
+      "approvedBy": "user-explicit-auftrag-universelle-content-synchronisation",
+      "reason": "Nutzer-Auftrag: Single-Source-of-Truth für Ḥadīṯ, Tadabbur und Āṯār, Loader, Validierung, Cache-Konsistenz. Kein UI-Umbau.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "scripts/validate-canonical-content.js",
+        "scripts/app-health-check.js",
+        "scripts/cf-pages-build.js",
+        "assets/hadith-library-data.js",
+        "test/assets/hadith-library-data.js",
+        "apple-tv/hadith/catalog.json",
+        "apple-tv/hadith/manifest.json",
+        "test/data/hadith-library/catalog.json",
+        "data/hadith-library/",
+        "_headers",
+        "_redirects"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
     }
   ],
   "enabled": true
