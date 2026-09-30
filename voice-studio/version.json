@@ -1,10 +1,10 @@
 {
-  "version": "2.9.40",
-  "updatedAt": "2026-09-29T20:20:00+02:00",
-  "deployTrigger": "voice-studio-2.9.40-fusha-v2-regeneration",
+  "version": "2.9.41",
+  "updatedAt": "2026-09-29T22:18:00+02:00",
+  "deployTrigger": "voice-studio-2.9.41-harakat-post-extraction-qa",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v50",
+  "cache": "dar-voice-studio-v51",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -557,10 +557,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "d33f96b7407370b3a88462253685e6c08545ba0e",
+  "releaseRef": "7dc1c5e8936efb0c64b17c4a5baab705f8517d8c",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "2.9.40 erzwingt die vollständige Neuerzeugung aller 140 Alphabet-Kandidaten mit dem Fuṣḥā-Strengprofil `fusha-strict-v2`. Alte Kandidaten ohne dieses Profil werden nicht mehr aus dem Cache übernommen. Kurze Ḥarakāt werden dreifach erzeugt, als sauberer Einzellaut isoliert und erneut geprüft. Sprachliche Freigaben werden nur beibehalten, wenn exakt derselbe aktuelle Profil-Clip wiederverwendet wird. Der automatische GitHub-Push rebasiert vor dem Push auf origin/main und wiederholt transiente HTTP-5xx-Fehler bis zu drei Mal.",
+  "updateRepairReason": "2.9.40 prüfte den absichtlich dreifach gesprochenen Ḥarakāt-Roh-Render bereits mit der finalen Kurzlaut-QA und stoppte deshalb mit `short_arabic_too_long`, bevor ein einzelner Laut isoliert werden konnte. 2.9.41 trennt Roh- und Final-QA strikt: der dreifache Arbeits-Render wird nur auf harte Wellenform-/Generationsfehler geprüft; danach wird genau ein sauberer Laut isoliert und erst dieser mit der normalen strengen Arabisch-QA, Dauergrenzen und Stilleprüfung bewertet.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -779,7 +779,7 @@
     "normalFreeVoiceUnchanged": true,
     "compoundHonorificPauseFallback": true
   },
-  "validatedQuizVoiceRef": "d33f96b7407370b3a88462253685e6c08545ba0e",
+  "validatedQuizVoiceRef": "7dc1c5e8936efb0c64b17c4a5baab705f8517d8c",
   "kidsManifestRecovery": {
     "enabled": true,
     "installerValidatesAlphabet": true,
@@ -818,7 +818,18 @@
     "preserveApprovalOnlyOnExactReusedProfile": true,
     "harakatTripleRenderExtraction": true,
     "autoStartWhenProfileOutdated": true,
-    "publishRetry5xx": 3
+    "publishRetry5xx": 3,
+    "harakatPreExtractionFinalQaDisabled": true,
+    "harakatRawHardQaOnly": true,
+    "harakatFinalQaAfterIsolation": true,
+    "harakatRawIgnoredExpectedIssues": [
+      "short_arabic_too_long",
+      "unexpected_internal_hold",
+      "inline_arabic_internal_hold",
+      "excessive_internal_pause",
+      "suspicious_sustained_hold"
+    ],
+    "harakatFinalClipStillStrict": true
   },
   "updateVisibilityRepair": {
     "forceNewSemanticVersion": true,

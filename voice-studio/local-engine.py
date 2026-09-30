@@ -1222,6 +1222,68 @@ def _alphabet_render_prompt(value:str,kind:str):
         return f"{value}. {value}. {value}.",3
     return value,1
 
+def _render_repeated_harakat_raw(model,prompt:str,seed_base:int):
+    """Render the deliberate repeated Ḥarakāt prompt without final short-token QA.
+
+    The prompt contains the same target three times only so the acoustic model
+    reliably produces the tiny CV syllable. Running the normal final Arabic
+    duration QA on that temporary triple render is wrong by construction and
+    caused short_arabic_too_long before extraction could happen.
+
+    This stage therefore checks only hard waveform/generation failures. The
+    isolated single token is still passed through the normal strict
+    audio_quality_metrics() afterwards.
+    """
+    import torch
+
+    attempts=max(2,int(QA_CONFIG.get("inlineArabicRenderAttempts",4)))
+    seed_offset=max(1,int(QA_CONFIG.get("retrySeedOffset",97)))
+    last_error=""
+
+    for attempt in range(attempts):
+        torch.manual_seed(max(1,int(seed_base))+attempt*seed_offset)
+        try:
+            wav=render_with_model(model,prompt,"ar","kids_lesson")
+        except GenerationTimeoutReached as e:
+            last_error="generation_timeout: "+str(e)
+            continue
+        except GenerationTokenLimitReached as e:
+            last_error="generation_token_limit: "+str(e)
+            continue
+        except Exception as e:
+            last_error=str(e)
+            continue
+
+        metrics=audio_quality_metrics(
+            wav,int(model.sr),prompt,"ar","kids_lesson"
+        )
+        # The repeated working prompt is intentionally longer and contains
+        # pauses between repetitions. Those are not defects in the final clip.
+        ignored={
+            "short_arabic_too_long",
+            "unexpected_internal_hold",
+            "inline_arabic_internal_hold",
+            "excessive_internal_pause",
+            "suspicious_sustained_hold",
+            "segment_too_long",
+            "speech_rate_too_slow",
+        }
+        hard=[x for x in (metrics.get("issues") or []) if x not in ignored]
+        if hard:
+            last_error=", ".join(hard)
+            continue
+
+        metrics["temporaryRepeatedHarakatRender"]=True
+        metrics["ignoredPreExtractionIssues"]=[
+            x for x in (metrics.get("issues") or []) if x in ignored
+        ]
+        return wav,metrics
+
+    raise RuntimeError(
+        "Ḥarakāt-Rohaufnahme konnte nicht sauber erzeugt werden"
+        +(": "+last_error if last_error else "")
+    )
+
 def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
     """Generate one Arabic learning clip in the local Serhat voice.
 
@@ -1253,14 +1315,21 @@ def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
     for outer in range(4):
         seed=seed0+outer*997
         try:
-            wav,render_metrics=render_segment_with_qa(
-                model,
-                prompt,
-                "ar",
-                "kids_lesson",
-                True,
-                seed_base=seed
-            )
+            if repeat_count>1:
+                # Temporary triple render: do not apply the final short-Arabic
+                # duration rule until one clean token has been isolated.
+                wav,render_metrics=_render_repeated_harakat_raw(
+                    model,prompt,seed
+                )
+            else:
+                wav,render_metrics=render_segment_with_qa(
+                    model,
+                    prompt,
+                    "ar",
+                    "kids_lesson",
+                    True,
+                    seed_base=seed
+                )
         except Exception as e:
             failures.append(str(e))
             continue
@@ -1295,6 +1364,7 @@ def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
         final_metrics["alphabetKey"]=key
         final_metrics["renderPrompt"]=prompt
         final_metrics["renderAttempt"]=outer+1
+        final_metrics["preExtractionMetrics"]=render_metrics
         final_metrics.update(extraction)
 
         score=(
