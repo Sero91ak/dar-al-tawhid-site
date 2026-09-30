@@ -2029,7 +2029,7 @@
   function audioHasSrc(a) {
     if (!a) return false;
     var src = String(a.currentSrc || a.getAttribute("src") || "");
-    return src && src.indexOf("http") === 0;
+    return src && (src.indexOf("http") === 0 || src.indexOf("blob:") === 0);
   }
   function srcMatchesAyah(src, surah, ayah) {
     src = String(src || "");
@@ -3847,6 +3847,7 @@
       var m = String(hm || "").match(/^(\d{1,2}):(\d{2})/);
       return m ? Number(m[1]) * 60 + Number(m[2]) : -1;
     }
+    var lastTriggerKey = "";
     async function schedulerTick() {
       var now = berlinParts();
       adhanLog("current time", now.time);
@@ -3861,6 +3862,8 @@
         var late = row ? nowMin - toMinutes(row.time) : -1;
         if (!row || late < 0 || late > 2) continue;
         var triggerKey = now.date + ":" + keys[i];
+        if (lastTriggerKey === triggerKey) return;
+        lastTriggerKey = triggerKey;
         try {
           if (localStorage.getItem("darAppleTvLastAdhanV1") === triggerKey) return;
           localStorage.setItem("darAppleTvLastAdhanV1", triggerKey);

@@ -3847,6 +3847,7 @@
       var m = String(hm || "").match(/^(\d{1,2}):(\d{2})/);
       return m ? Number(m[1]) * 60 + Number(m[2]) : -1;
     }
+    var lastTriggerKey = "";
     async function schedulerTick() {
       var now = berlinParts();
       adhanLog("current time", now.time);
@@ -3861,6 +3862,8 @@
         var late = row ? nowMin - toMinutes(row.time) : -1;
         if (!row || late < 0 || late > 2) continue;
         var triggerKey = now.date + ":" + keys[i];
+        if (lastTriggerKey === triggerKey) return;
+        lastTriggerKey = triggerKey;
         try {
           if (localStorage.getItem("darAppleTvLastAdhanV1") === triggerKey) return;
           localStorage.setItem("darAppleTvLastAdhanV1", triggerKey);
@@ -3884,6 +3887,8 @@
       testNow: function (prayerKey) { return playAdhan(prayerKey || "dhuhr", "manual test"); },
       simulate: function (prayerKey) { return playAdhan(prayerKey || "dhuhr", "simulation"); },
       refresh: function () { return refreshPrayerTimes(true); },
+      stop: function () { finishAdhan("manual stop"); },
+      cacheOffline: cacheAdhanOffline,
       state: function () { return { active: window.__DAR_ADHAN_ACTIVE === true, date: loadedDate, times: prayerData && prayerData.times }; }
     };
     if (debug) {
