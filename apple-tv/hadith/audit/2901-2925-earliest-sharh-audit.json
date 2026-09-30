@@ -1,0 +1,134 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2901-2925",
+  "series": "2851-2950",
+  "status": "completed-earliest-sharh-audit",
+  "ruleVersion": 6,
+  "sourceProgression": "Ṣaḥīḥ Muslim 2770 – Ḥadīṯ al-Ifk, Kitāb at-Tawbah",
+  "reason": "25 eigenständige Ereignis- und Lehrkerne aus dem langen authentischen Ifk-Bericht. Keine Isnād- oder Wortlautvarianten künstlich vervielfacht. Fokus auf tatsächliche Reiseumstände, Beweisprüfung, Schutz der Ehre, Offenbarung der Baraʾah, Tawbah/Vergebung und Abū Bakrs praktische Reaktion. Früher Šarḥ nach al-Māzirī; nicht editionssicher verifizierte Druckseiten bleiben null.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "iosHadithLibrarySynced": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "dedupeDecisions": [
+    "Muslim 2770 treated as one long source report",
+    "Only distinct events/teachings became records",
+    "Repeated isnad and parallel wording omitted",
+    "No accusation converted into a general individual-status ruling"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2901",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2902",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2903",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2904",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2905",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2906",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2907",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2908",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2909",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2910",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2911",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2912",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2913",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2914",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2915",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2916",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2917",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2918",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2919",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2920",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2921",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2922",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2923",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2924",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2925",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    }
+  ]
+}
