@@ -120,36 +120,98 @@
     cachedKeys[k] = true;
     status.have += 1;
   }
-  async function hydrate() {
-    try {
-      var db = await openDb();
-      var tx = db.transaction(STORE, "readonly");
-      var store = tx.objectStore(STORE);
-      await new Promise(function (done) {
-        var timed = false;
-        var timer = setTimeout(function () {
-          timed = true;
-          done();
-        }, isTvPlayback() ? 400 : 1200);
-        var req = store.openCursor();
-        req.onsuccess = function () {
-          if (timed) return;
-          var cur = req.result;
-          if (!cur) {
-            clearTimeout(timer);
-            done();
+  var hydrated = null;
+  function hydrate() {
+    if (hydrated) return hydrated;
+    hydrated = (async function () {
+      try {
+        var db = await openDb();
+        var store = db.transaction(STORE, "readonly").objectStore(STORE);
+        await new Promise(function (done) {
+          var timer = setTimeout(done, 8000);
+          var finish = function () { clearTimeout(timer); done(); };
+          if (typeof store.getAllKeys === "function") {
+            var reqKeys = store.getAllKeys();
+            reqKeys.onsuccess = function () {
+              (reqKeys.result || []).forEach(function (k) {
+                var parts = String(k).split(":");
+                if (parts[0] !== "adhan") markHave(parts[0], Number(parts[1]));
+              });
+              finish();
+            };
+            reqKeys.onerror = finish;
             return;
           }
-          var parts = String(cur.key).split(":");
-          if (cur.value instanceof Blob && cur.value.size > 800) markHave(parts[0], Number(parts[1]));
-          cur.continue();
-        };
-        req.onerror = function () {
-          clearTimeout(timer);
-          done();
-        };
+          var req = store.openKeyCursor ? store.openKeyCursor() : store.openCursor();
+          req.onsuccess = function () {
+            var cur = req.result;
+            if (!cur) { finish(); return; }
+            var parts = String(cur.key).split(":");
+            if (parts[0] !== "adhan") markHave(parts[0], Number(parts[1]));
+            cur.continue();
+          };
+          req.onerror = finish;
+        });
+      } catch (e) {}
+    })();
+    return hydrated;
+  }
+  function readBlob(k) {
+    return openDb().then(function (db) {
+      return new Promise(function (res) {
+        try {
+          var req = db.transaction(STORE, "readonly").objectStore(STORE).get(k);
+          req.onsuccess = function () {
+            var b = req.result;
+            res(b instanceof Blob && b.size > 800 ? b : null);
+          };
+          req.onerror = function () { res(null); };
+        } catch (eGet) { res(null); }
       });
-    } catch (e) {}
+    }).catch(function () { return null; });
+  }
+  function blobUrl(edition, ayah) {
+    return readBlob(key(edition, ayah)).then(function (b) {
+      if (!b) return null;
+      markHave(edition, ayah);
+      return URL.createObjectURL(b.type ? b : new Blob([b], { type: "audio/mpeg" }));
+    });
+  }
+  function has(edition, ayah) {
+    return !!cachedKeys[key(edition, ayah)];
+  }
+  function adhanKey(id) {
+    return "adhan:" + String(id || "");
+  }
+  function adhanBlobUrl(id) {
+    return readBlob(adhanKey(id)).then(function (b) {
+      return b ? URL.createObjectURL(b.type ? b : new Blob([b], { type: "audio/mpeg" })) : null;
+    });
+  }
+  async function cacheAdhan(id, src) {
+    if (!id || !src) return false;
+    if (await readBlob(adhanKey(id))) return true;
+    try {
+      var res = await fetch(src, { credentials: "omit" });
+      if (!res.ok) return false;
+      var blob = await res.blob();
+      if (!blob || blob.size < 800) return false;
+      var db = await openDb();
+      db.transaction(STORE, "readwrite").objectStore(STORE).put(blob, adhanKey(id));
+      return true;
+    } catch (eAdhan) {
+      return false;
+    }
+  }
+  var WANT_KEY = "darQuranAudioPackWantV1";
+  function readWanted() {
+    try {
+      var list = JSON.parse(localStorage.getItem(WANT_KEY) || "[]");
+      return Array.isArray(list) ? list.filter(Boolean) : [];
+    } catch (eWant) { return []; }
+  }
+  function writeWanted(list) {
+    try { localStorage.setItem(WANT_KEY, JSON.stringify(list)); } catch (eWantW) {}
   }
   function enqueue(edition, ayah, urgent) {
     var k = key(edition, ayah);
@@ -186,45 +248,59 @@
         pending[k] = false;
         return;
       }
-      markHave(edition, ayah);
       try {
         var db = await openDb();
-        db.transaction(STORE, "readwrite").objectStore(STORE).put(blob, k);
-      } catch (ePut) {}
-      try {
-        if ("caches" in window) {
-          var cache = await caches.open(CACHE_NAME);
-          await cache.put(proxyUrl(edition, ayah), new Response(blob, { headers: { "Content-Type": "audio/mpeg", "Cache-Control": "public, max-age=31536000" } }));
-        }
-      } catch (eCache) {}
+        await new Promise(function (done, fail) {
+          var tx = db.transaction(STORE, "readwrite");
+          tx.objectStore(STORE).put(blob, k);
+          tx.oncomplete = done;
+          tx.onerror = function () { fail(tx.error); };
+          tx.onabort = function () { fail(tx.error); };
+        });
+      } catch (ePut) {
+        throw new Error("store");
+      }
+      markHave(edition, ayah);
+      failStreak = 0;
     } catch (e) {
       pending[k] = false;
+      failStreak += 1;
+      if (!cancelled[edition] && e && e.message !== "store") {
+        pending[k] = true;
+        queue.push({ edition: edition, ayah: ayah });
+      }
       return;
     }
     pending[k] = false;
   }
+  var failStreak = 0;
+  function waitPump(ms) {
+    if (pumpTimer) return;
+    pumpTimer = setTimeout(function () {
+      pumpTimer = 0;
+      pump();
+    }, ms);
+  }
   function pump() {
-    var activePlayback = window.__DAR_ADHAN_ACTIVE === true
-      || !!(window.quranAudioState && window.quranAudioState.isPlaying);
-    if (activePlayback) {
-      if (!pumpTimer) {
-        pumpTimer = setTimeout(function () {
-          pumpTimer = 0;
-          pump();
-        }, 1500);
-      }
-      return;
+    if (!queue.length) return;
+    var st = window.quranAudioState || {};
+    if (window.__DAR_ADHAN_ACTIVE === true || st.isLoading) return waitPump(1500);
+    if (navigator.onLine === false) return waitPump(15000);
+    if (failStreak >= 3) {
+      failStreak = 0;
+      return waitPump(30000);
     }
+    var gap = st.isPlaying ? 1200 : 150;
     while (inflight < MAX_INFLIGHT && queue.length) {
       var job = queue.shift();
       status.queued = queue.length;
       inflight += 1;
       fetchOne(job.edition, job.ayah).then(function () {
         inflight -= 1;
-        pump();
+        waitPump(gap);
       }, function () {
         inflight -= 1;
-        pump();
+        waitPump(gap);
       });
     }
   }
@@ -274,11 +350,23 @@
     if (!edition) return;
     cancelled[edition] = false;
     status.reciter = edition;
-    for (var n = 1; n <= AYAH_TOTAL; n++) enqueue(edition, n, false);
+    var wanted = readWanted();
+    if (wanted.indexOf(edition) === -1) {
+      wanted.push(edition);
+      writeWanted(wanted);
+    }
+    return hydrate().then(function () {
+      if (cancelled[edition]) return;
+      for (var n = 1; n <= AYAH_TOTAL; n++) enqueue(edition, n, false);
+    });
+  }
+  function isWanted(edition) {
+    return readWanted().indexOf(String(edition || "")) !== -1;
   }
   function cancelEdition(edition) {
     var ed = String(edition || "");
     if (!ed) return;
+    writeWanted(readWanted().filter(function (w) { return w !== ed; }));
     cancelled[ed] = true;
     queue = queue.filter(function (job) { return job.edition !== ed; });
     Object.keys(pending).forEach(function (k) {
@@ -354,6 +442,11 @@
     proxyUrl: proxyUrl,
     ensure: ensure,
     prefetchSurah: prefetchSurah,
+    blobUrl: blobUrl,
+    has: has,
+    isWanted: isWanted,
+    cacheAdhan: cacheAdhan,
+    adhanBlobUrl: adhanBlobUrl,
     downloadReciter: downloadReciter,
     cancelEdition: cancelEdition,
     removeReciter: removeReciter,
@@ -366,6 +459,15 @@
   };
   (async function boot() {
     try { await loadCatalog(); } catch (eCat) {}
-    hydrate();
+    await hydrate();
+    var wanted = readWanted();
+    if (!wanted.length) return;
+    setTimeout(function () {
+      readWanted().forEach(function (ed) {
+        if (reciterProgress(ed).complete) return;
+        cancelled[ed] = false;
+        for (var n = 1; n <= AYAH_TOTAL; n++) enqueue(ed, n, false);
+      });
+    }, 20000);
   })();
 })();
