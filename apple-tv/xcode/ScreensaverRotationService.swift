@@ -37,19 +37,39 @@ actor ScreensaverRotationService {
 
     private let decoder = JSONDecoder()
     private let encoder = JSONEncoder()
+    private var memoryConfig: ScreensaverRotationConfig?
+    private var memoryConfigLoadedAt: Date?
+
+    /// tvOS garantiert keinen dauerhaften Dateispeicher (Application Support/Caches
+    /// können gelöscht werden). UserDefaults bleibt über Neustarts erhalten.
+    private static let stateDefaultsKey = "dar.appleTV.screensaver.rotationState.v2"
+    private static let configRefreshInterval: TimeInterval = 6 * 60 * 60
+
+    static let builtInConfig = ScreensaverRotationConfig(
+        schemaVersion: "builtin",
+        mode: "shuffleBag",
+        persistProgress: true,
+        storage: "userDefaults",
+        cyclePolicy: .init(
+            showEveryItemBeforeRepeat: true,
+            shuffleEachCycle: true,
+            crossCycleCooldownCount: 20,
+            preventImmediateRepeat: true,
+            newItemsPolicy: "appendToRemainingAndReshuffle",
+            removedItemsPolicy: "dropFromState"
+        ),
+        futureModuleMixing: .init(enabled: false, strategy: "weighted", weights: ["hadith": 1])
+    )
 
     /// Liefert die nächste Content-ID für den Bildschirmschoner.
-    /// Vor jeder Rotation wird der zentrale RemoteContentSyncService getriggert.
-    /// Dadurch bekommt der Screensaver neue Ḥadīṯe, Āṯār, Duʿāʾ oder Qurʾān-Hinweise automatisch,
-    /// sobald sie im jeweiligen GitHub-/Production-Katalog registriert sind.
+    /// Wirft nie wegen Netz oder Speicher: Konfiguration fällt auf Cache bzw.
+    /// eingebaute Regel zurück, der Fortschritt wird in UserDefaults gehalten.
     func nextID(availableIDs: [String], catalogFingerprint: String) async throws -> String? {
-        _ = await RemoteContentSyncService.shared.syncAll(trigger: .screensaverStart)
-
-        let config = try await loadConfig()
+        let config = await currentConfig()
         let available = Array(Set(availableIDs)).sorted()
         guard !available.isEmpty else { return nil }
 
-        var state = (try? loadState()) ?? ScreensaverRotationState(
+        var state = loadState() ?? ScreensaverRotationState(
             cycleNumber: 0,
             remainingQueue: [],
             shownIDs: [],
@@ -77,6 +97,14 @@ actor ScreensaverRotationService {
 
         guard !state.remainingQueue.isEmpty else { return nil }
 
+        if config.cyclePolicy.preventImmediateRepeat,
+           let last = state.shownIDs.last ?? state.recentCooldownIDs.last,
+           state.remainingQueue.first == last,
+           state.remainingQueue.count > 1,
+           let swapIndex = state.remainingQueue.dropFirst().firstIndex(where: { $0 != last }) {
+            state.remainingQueue.swapAt(0, swapIndex)
+        }
+
         let next = state.remainingQueue.removeFirst()
         state.shownIDs.append(next)
 
@@ -87,21 +115,41 @@ actor ScreensaverRotationService {
             state.recentCooldownIDs = []
         }
 
-        try saveState(state)
+        saveState(state)
         return next
     }
 
     /// Optional für Diagnose/UI: aktueller persistierter Rotationsstand.
     func currentState() -> ScreensaverRotationState? {
-        try? loadState()
+        loadState()
     }
 
     /// Nur für bewusste Tests/Debugging verwenden, nicht beim normalen App-Start.
     func resetProgress() throws {
-        let url = try stateURL()
-        if FileManager.default.fileExists(atPath: url.path) {
-            try FileManager.default.removeItem(at: url)
+        UserDefaults.standard.removeObject(forKey: Self.stateDefaultsKey)
+        for url in [try? stateURL(), try? legacyStateURL()].compactMap({ $0 }) {
+            if FileManager.default.fileExists(atPath: url.path) {
+                try FileManager.default.removeItem(at: url)
+            }
         }
+    }
+
+    private func currentConfig() async -> ScreensaverRotationConfig {
+        if let memoryConfig,
+           let loadedAt = memoryConfigLoadedAt,
+           Date().timeIntervalSince(loadedAt) < Self.configRefreshInterval {
+            return memoryConfig
+        }
+        if let loaded = try? await loadConfig() {
+            memoryConfig = loaded
+            memoryConfigLoadedAt = Date()
+            return loaded
+        }
+        let fallback = memoryConfig ?? (try? loadConfigCache()) ?? Self.builtInConfig
+        memoryConfig = fallback
+        // Offline nicht bei jeder Karte erneut auf das Netz warten: in 10 Minuten wieder versuchen.
+        memoryConfigLoadedAt = Date().addingTimeInterval(-(Self.configRefreshInterval - 10 * 60))
+        return fallback
     }
 
     private func reconcile(
@@ -227,20 +275,39 @@ actor ScreensaverRotationService {
     }
 
     private func stateURL() throws -> URL {
-        let root = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        let root = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("DarAlTawhidAppleTV", isDirectory: true)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         return root.appendingPathComponent("screensaver-rotation-state.json")
     }
 
-    private func saveState(_ state: ScreensaverRotationState) throws {
-        let data = try encoder.encode(state)
-        try data.write(to: stateURL(), options: .atomic)
+    private func legacyStateURL() throws -> URL {
+        FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("DarAlTawhidAppleTV", isDirectory: true)
+            .appendingPathComponent("screensaver-rotation-state.json")
     }
 
-    private func loadState() throws -> ScreensaverRotationState {
-        let data = try Data(contentsOf: stateURL())
-        return try decoder.decode(ScreensaverRotationState.self, from: data)
+    private func saveState(_ state: ScreensaverRotationState) {
+        guard let data = try? encoder.encode(state) else { return }
+        UserDefaults.standard.set(data, forKey: Self.stateDefaultsKey)
+        if let url = try? stateURL() {
+            try? data.write(to: url, options: .atomic)
+        }
+    }
+
+    private func loadState() -> ScreensaverRotationState? {
+        if let data = UserDefaults.standard.data(forKey: Self.stateDefaultsKey),
+           let state = try? decoder.decode(ScreensaverRotationState.self, from: data) {
+            return state
+        }
+        for url in [try? stateURL(), try? legacyStateURL()].compactMap({ $0 }) {
+            if let data = try? Data(contentsOf: url),
+               let state = try? decoder.decode(ScreensaverRotationState.self, from: data) {
+                UserDefaults.standard.set(data, forKey: Self.stateDefaultsKey)
+                return state
+            }
+        }
+        return nil
     }
 
     private func configCacheURL() throws -> URL {

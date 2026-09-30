@@ -18,6 +18,9 @@ Diese Dateien in das tvOS-Target übernehmen:
 - `apple-tv/hadith/xcode/HadithCardView.swift`
 - `apple-tv/hadith/xcode/HadithRemoteService.swift`
 - `apple-tv/hadith/xcode/HadithScreensaverProvider.swift`
+- `apple-tv/hadith/xcode/HadithScreensaverRotationView.swift`
+
+Als Bildschirmschoner-Ansicht ausschließlich `HadithScreensaverRotationView()` verwenden. Sie wechselt autonom alle 60 Sekunden, hält bei Fehlern nie an und setzt beim Neustart am gespeicherten Stand fort. Keinen eigenen Timer und keine eigene Auswahl daneben bauen.
 
 Alle aktuell im GitHub-Katalog registrierten Inhalte laden:
 
@@ -77,7 +80,7 @@ Der Bildschirmschoner verwendet ein persistentes Shuffle-Bag-System:
 
 - jede verfügbare Aussage einmal zeigen, bevor Wiederholungen erlaubt sind
 - Reihenfolge pro Zyklus mischen
-- Fortschritt dauerhaft in Application Support speichern
+- Fortschritt dauerhaft in UserDefaults speichern (tvOS löscht Application Support/Caches bei Bedarf); Datei in Caches nur als Zusatzkopie
 - App-/Apple-TV-Neustart setzt den Zyklus nicht zurück
 - neue GitHub-IDs werden in die noch offene Queue integriert
 - bereits gezeigte IDs bleiben bis zum Zyklusende gesperrt
