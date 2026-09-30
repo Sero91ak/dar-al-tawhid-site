@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 977;
+    var PLAYER_BUILD = 978;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -2535,6 +2535,14 @@
     state.sessionActive = true;
     saveState();
     var a = audioEl();
+    logAudio("play source check", {
+      hasSource: !!audioHasSrc(a),
+      loadedSurah: engine.loadedSurah,
+      loadedAyah: engine.loadedAyah,
+      currentSurah: state.surah,
+      currentAyah: state.ayah,
+      snap: snapAudio(a)
+    });
     if (!audioHasSrc(a) || engine.loadedSurah !== state.surah || engine.loadedAyah !== state.ayah) {
       loadAudio(true, false);
       return;
