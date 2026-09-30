@@ -1,8 +1,8 @@
 /* DĀR AL TAWḤĪD – Hadith-Bibliothek: eine Katalogzeile, gesperrt bis Freigabe */
 (function () {
   "use strict";
-  if (window.__DAR_HADITH_LIBRARY_GATE_V7) return;
-  window.__DAR_HADITH_LIBRARY_GATE_V7 = true;
+  if (window.__DAR_HADITH_LIBRARY_GATE_V8) return;
+  window.__DAR_HADITH_LIBRARY_GATE_V8 = true;
 
   var TOAST_ID = "dar-hadith-library-gate-toast";
   var DATA_LOADER_ID = "dar-hadith-library-data-loader";
@@ -16,30 +16,6 @@
     lockedMessage: "Ḥadīṯ-Bibliothek ist noch nicht freigegeben."
   };
   var gateState = DEFAULT_STATE;
-
-  /* Single source of truth for every existing structured Ḥadīṯ view.
-   * Redirect only Ḥadīṯ data requests; UI/navigation/rendering stay untouched.
-   */
-  (function installHadithSourceBridge(){
-    try {
-      if (window.__DAR_HADITH_SOURCE_BRIDGE_V1 || typeof window.fetch !== "function") return;
-      window.__DAR_HADITH_SOURCE_BRIDGE_V1 = true;
-      var nativeFetch = window.fetch.bind(window);
-      var rawRoot = "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/hadith/";
-      window.fetch = function(input, init){
-        try {
-          var raw = typeof input === "string" ? input : (input && input.url ? input.url : "");
-          var u = new URL(raw, location.href);
-          if (u.origin === location.origin && u.pathname.indexOf("/apple-tv/hadith/") === 0) {
-            var rel = u.pathname.slice("/apple-tv/hadith/".length);
-            var target = rawRoot + rel + (u.search || "");
-            return nativeFetch(target, Object.assign({}, init || {}, {cache:"no-store", credentials:"omit"}));
-          }
-        } catch (_e) {}
-        return nativeFetch(input, init);
-      };
-    } catch (_e) {}
-  })();
 
   function basePath() {
     try {
