@@ -151,6 +151,26 @@
   ],
   "unlockedScopes": [
     {
+      "id": "hadith-universal-sync-2026-09-30",
+      "approvedBy": "user-explicit-alle-website-ios-webapps-apple-tv",
+      "reason": "Nutzer verlangt eine gemeinsame Ḥadīṯ-Quelle und immer synchronen Stand in Website, iOS-App, Web-Apps und Apple TV.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/hadith-library-data.js",
+        "assets/hadith-library-gate.js",
+        "assets/hadith-library-gate.css",
+        "assets/hadith-library-renderer.js",
+        "test/assets/hadith-library-data.js",
+        "test/assets/hadith-library-gate.js",
+        "test/assets/hadith-library-gate.css",
+        "test/assets/hadith-library-renderer.js",
+        "data/hadith-library-gate.json",
+        "test/data/hadith-library/",
+        "apple-tv/hadith/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "quran-learn-studio-repair-2026-09-28",
       "approvedBy": "user-explicit-lern-player-vollstaendig-reparieren",
       "reason": "Nutzer: Der Lern-Player muss vollständig geprüft und wieder funktionsfähig hergestellt werden (Hören, Sprechen, Live-Wörter, Fortschritt).",
