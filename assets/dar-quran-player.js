@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 975;
+    var PLAYER_BUILD = 976;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -906,6 +906,8 @@
       paintMini();
       return;
     }
+    engine.started = true;
+    engine.lastProgressAt = Date.now();
     state.playing = true;
     state.sessionActive = true;
     if (state.learnMode) writeMode("learning-quran");
