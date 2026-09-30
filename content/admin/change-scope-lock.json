@@ -5009,6 +5009,7 @@
       "reason": "Nutzer: Qurʾān-Rezitation in der Apple-TV-App läuft sichtbar, ist aber stumm – nativen AVPlayer (Audio-Session, Lautstärke, Aḏān-Unterbrechung) reparieren. Nur Apple TV, Push ist live.",
       "paths": [
         "apple-tv/xcode/QuranPlaybackStore.swift",
+        "apple-tv/xcode/QuranTabView.swift",
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"

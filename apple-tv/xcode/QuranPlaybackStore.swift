@@ -2,6 +2,19 @@ import Foundation
 import AVFoundation
 import Combine
 
+private final class QuranAudioPlayerDelegate: NSObject, AVAudioPlayerDelegate {
+    var onFinish: (() -> Void)?
+    var onDecodeError: (() -> Void)?
+
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        onFinish?()
+    }
+
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        onDecodeError?()
+    }
+}
+
 @MainActor
 final class QuranPlaybackStore: ObservableObject {
     @Published private(set) var surah: QuranSynchronizedSurah?
@@ -11,43 +24,30 @@ final class QuranPlaybackStore: ObservableObject {
     @Published private(set) var errorMessage: String?
 
     private let contentService: QuranContentService
-    private let player = AVPlayer()
+    private let playerDelegate = QuranAudioPlayerDelegate()
+    private var audioPlayer: AVAudioPlayer?
+    private var playTask: Task<Void, Never>?
     private var cancellables = Set<AnyCancellable>()
-    private var itemStatusObservation: NSKeyValueObservation?
     private var triedFallbackForIndex: Int?
     private var resumeAfterInterruption = false
+    private var generation = 0
 
     private static let lastSurahKey = "dar.appleTV.quran.lastSurah"
     private static let lastAyahKey = "dar.appleTV.quran.lastAyah"
 
     init(contentService: QuranContentService = .shared) {
         self.contentService = contentService
-        player.isMuted = false
-        player.volume = 1.0
-
-        NotificationCenter.default.publisher(for: .AVPlayerItemDidPlayToEndTime)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] notification in
-                guard let self,
-                      let endedItem = notification.object as? AVPlayerItem,
-                      endedItem === self.player.currentItem else {
-                    return
-                }
-                self.advanceAfterPlayback()
+        playerDelegate.onFinish = { [weak self] in
+            Task { @MainActor in
+                self?.advanceAfterPlayback()
             }
-            .store(in: &cancellables)
-
-        NotificationCenter.default.publisher(for: .AVPlayerItemFailedToPlayToEndTime)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] notification in
-                guard let self,
-                      let failedItem = notification.object as? AVPlayerItem,
-                      failedItem === self.player.currentItem else {
-                    return
-                }
-                self.handleItemFailure()
+        }
+        playerDelegate.onDecodeError = { [weak self] in
+            Task { @MainActor in
+                self?.handleItemFailure()
             }
-            .store(in: &cancellables)
+        }
+        prepareSpeaker()
 
         NotificationCenter.default.publisher(for: AVAudioSession.interruptionNotification)
             .receive(on: DispatchQueue.main)
@@ -60,29 +60,24 @@ final class QuranPlaybackStore: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.activateAudioSession()
+                self.prepareSpeaker()
                 if self.isPlaying { self.playCurrent() }
             }
             .store(in: &cancellables)
     }
 
-    /// Apple TV gibt Ton nur aus, wenn die gemeinsame Audio-Sitzung auf
-    /// Wiedergabe steht und aktiv ist. Anderer Ton in der App (z. B. der Aḏān)
-    /// kann diese Sitzung unterbrechen; deshalb wird sie vor jedem Āyah
-    /// erneut eingeschaltet.
-    private func activateAudioSession() {
+    /// Tonausgang der Apple-TV-App einschalten (auch Simulator → Mac-Lautsprecher).
+    func prepareSpeaker() {
         let session = AVAudioSession.sharedInstance()
         do {
-            if session.category != .playback || session.mode != .default {
-                try session.setCategory(.playback, mode: .default, options: [])
-            }
+            try session.setCategory(.playback, mode: .default, options: [])
             try session.setActive(true)
         } catch {
             try? session.setCategory(.playback)
             try? session.setActive(true)
         }
-        player.isMuted = false
-        player.volume = 1.0
+        audioPlayer?.volume = 1
+        audioPlayer?.isMeteringEnabled = false
     }
 
     private func handleInterruption(_ notification: Notification) {
@@ -95,13 +90,12 @@ final class QuranPlaybackStore: ObservableObject {
         switch type {
         case .began:
             resumeAfterInterruption = isPlaying
-            player.pause()
+            audioPlayer?.pause()
         case .ended:
             guard resumeAfterInterruption else { return }
             resumeAfterInterruption = false
-            activateAudioSession()
-            if player.currentItem != nil {
-                player.play()
+            prepareSpeaker()
+            if let audioPlayer, audioPlayer.play() {
                 isPlaying = true
             } else {
                 playCurrent()
@@ -117,7 +111,7 @@ final class QuranPlaybackStore: ObservableObject {
         if triedFallbackForIndex != currentIndex,
            let fallback = Self.fallbackAudioURL(for: verse.audioURLString) {
             triedFallbackForIndex = currentIndex
-            startItem(url: fallback)
+            startDownloadAndPlay(url: fallback)
             return
         }
 
@@ -127,24 +121,6 @@ final class QuranPlaybackStore: ObservableObject {
     private static func fallbackAudioURL(for urlString: String) -> URL? {
         guard urlString.contains("/audio/128/") else { return nil }
         return URL(string: urlString.replacingOccurrences(of: "/audio/128/", with: "/audio/64/"))
-    }
-
-    private func startItem(url: URL) {
-        activateAudioSession()
-        let item = AVPlayerItem(url: url)
-        let itemID = ObjectIdentifier(item)
-        itemStatusObservation = item.observe(\.status, options: [.new]) { [weak self] observedItem, _ in
-            guard observedItem.status == .failed else { return }
-            Task { @MainActor [weak self] in
-                guard let self,
-                      let current = self.player.currentItem,
-                      ObjectIdentifier(current) == itemID else { return }
-                self.handleItemFailure()
-            }
-        }
-        player.replaceCurrentItem(with: item)
-        player.play()
-        isPlaying = true
     }
 
     var currentVerse: QuranSynchronizedVerse? {
@@ -248,11 +224,18 @@ final class QuranPlaybackStore: ObservableObject {
     }
 
     func togglePlayPause() {
+        prepareSpeaker()
         if isPlaying {
             pause()
-        } else {
-            playCurrent()
+            return
         }
+        if let audioPlayer, audioPlayer.currentTime > 0.05, audioPlayer.currentTime < audioPlayer.duration {
+            if audioPlayer.play() {
+                isPlaying = true
+                return
+            }
+        }
+        playCurrent()
     }
 
     func playCurrent() {
@@ -263,18 +246,65 @@ final class QuranPlaybackStore: ObservableObject {
         }
 
         triedFallbackForIndex = nil
-        startItem(url: url)
         persistReadingPosition()
+        startDownloadAndPlay(url: url)
+    }
+
+    private func startDownloadAndPlay(url: URL) {
+        playTask?.cancel()
+        generation += 1
+        let token = generation
+        isPlaying = true
+        playTask = Task { [weak self] in
+            await self?.downloadAndPlay(url: url, token: token)
+        }
+    }
+
+    private func downloadAndPlay(url: URL, token: Int) async {
+        prepareSpeaker()
+
+        do {
+            var request = URLRequest(url: url)
+            request.cachePolicy = .returnCacheDataElseLoad
+            request.timeoutInterval = 25
+            let (data, response) = try await URLSession.shared.data(for: request)
+            guard token == generation, !Task.isCancelled else { return }
+            guard let http = response as? HTTPURLResponse,
+                  (200...299).contains(http.statusCode),
+                  data.count > 64 else {
+                handleItemFailure()
+                return
+            }
+
+            audioPlayer?.stop()
+            let player = try AVAudioPlayer(data: data)
+            player.delegate = playerDelegate
+            player.volume = 1
+            player.prepareToPlay()
+            audioPlayer = player
+            prepareSpeaker()
+            guard player.play() else {
+                handleItemFailure()
+                return
+            }
+            isPlaying = true
+        } catch {
+            guard token == generation, !Task.isCancelled else { return }
+            handleItemFailure()
+        }
     }
 
     func pause() {
-        player.pause()
+        audioPlayer?.pause()
         isPlaying = false
     }
 
     func stop() {
-        player.pause()
-        player.replaceCurrentItem(with: nil)
+        playTask?.cancel()
+        playTask = nil
+        generation += 1
+        audioPlayer?.stop()
+        audioPlayer = nil
         isPlaying = false
     }
 
@@ -320,7 +350,8 @@ final class QuranPlaybackStore: ObservableObject {
             playCurrent()
         } else {
             isPlaying = false
-            player.replaceCurrentItem(with: nil)
+            audioPlayer?.stop()
+            audioPlayer = nil
         }
     }
 

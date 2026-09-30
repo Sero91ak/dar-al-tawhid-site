@@ -18,6 +18,7 @@ struct QuranTabView: View {
     @StateObject private var reciterStore = QuranReciterSelectionStore()
     @StateObject private var playbackStore = QuranPlaybackStore()
     @StateObject private var tadabburStore = TVQuranTadabburStore.shared
+    @Environment(\.scenePhase) private var scenePhase
 
     @State private var surahs: [QuranSurahSummary] = []
     @State private var isLoadingSurahs = false
@@ -54,7 +55,16 @@ struct QuranTabView: View {
             .padding(.horizontal, 72)
             .padding(.vertical, 44)
         }
+        .onAppear {
+            playbackStore.prepareSpeaker()
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active {
+                playbackStore.prepareSpeaker()
+            }
+        }
         .task {
+            playbackStore.prepareSpeaker()
             await prepare()
         }
         .onChange(of: reciterStore.selectedIdentifier) { _, newIdentifier in
