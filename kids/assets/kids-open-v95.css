@@ -1,11 +1,17 @@
 .kids-open{
   position:absolute;left:0;top:0;width:100%;min-height:100%;min-height:100dvh;
   z-index:9999;box-sizing:border-box;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:max(28px,env(safe-area-inset-top)) 20px max(28px,env(safe-area-inset-bottom));
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding:max(28px,env(safe-area-inset-top)) 20px max(36px,env(safe-area-inset-bottom));
   background:#07131e;
   color:#f6ecd4;
   overflow:hidden;
+}
+html.kids-ios-app #kidsLaunch,
+html.dar-ios-native-app #kidsLaunch{display:none!important}
+.kids-open__film{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  background:#07131e;z-index:1;
 }
 .kids-open__sky{
   position:absolute;inset:0;pointer-events:none;
@@ -50,6 +56,7 @@
 }
 .kids-open__seal img{width:100%;height:100%;display:block;object-fit:cover}
 .kids-open__titles{position:relative;z-index:2;text-align:center;margin-top:26px}
+.kids-open__titles--over{margin-top:0;margin-bottom:12px;text-shadow:0 8px 24px rgba(0,0,0,.45)}
 .kids-open__dar{
   margin:0;font-family:"Cinzel",Georgia,serif;font-weight:700;
   letter-spacing:.34em;font-size:clamp(12px,3.3vw,16px);color:#efe2c0;
