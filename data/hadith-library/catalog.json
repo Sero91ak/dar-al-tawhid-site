@@ -1,0 +1,18 @@
+{
+  "project": "DĀR AL TAWḤĪD – Ḥadīṯ-Bibliothek",
+  "schemaVersion": "2.0",
+  "language": "de",
+  "mode": "library",
+  "sourceOfTruth": "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
+  "dataRoot": "https://dar-al-tawhid.de/apple-tv/hadith/",
+  "loaderPath": "/assets/hadith-library-data.js",
+  "seriesMode": "auto-from-source-catalog",
+  "display": {
+    "showHadith": true,
+    "showSource": true,
+    "showGrade": true,
+    "showSharh": true,
+    "requireVerifiedSharh": false
+  },
+  "syncRule": "Ein Datensatz in apple-tv/hadith/ ist der gemeinsame Stand für Test-App, iOS-WebView, Website und Apple TV."
+}

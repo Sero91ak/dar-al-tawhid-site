@@ -26,11 +26,11 @@
   "hadithLibrary": {
     "enabledForTestApp": true,
     "enabledForIosApp": true,
-    "catalogPath": "/test/data/hadith-library/catalog.json",
-    "sourceOfTruth": "/apple-tv/hadith/catalog.json",
+    "catalogPath": "/apple-tv/hadith/catalog.json",
+    "sourceOfTruth": "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
     "showSharh": true,
     "showSharhSource": true,
-    "requireVerifiedSharh": true
+    "requireVerifiedSharh": false
   },
   "syncPolicy": {
     "sourceOfTruth": "apple-tv/hadith/",
@@ -38,12 +38,16 @@
     "appleTvScreensaverSharhMode": "compact",
     "testAppHadithLibraryShowsSharh": true,
     "iosHadithLibraryShowsSharh": true,
-    "onlyVerifiedSharhOnline": true
+    "onlyVerifiedSharhOnline": false
   },
   "releasePolicy": {
     "onlineBranch": "main",
     "stagingBranch": "apple-tv-hadith-staging",
     "publishedRange": "HAD-0001-HAD-0263",
-    "excludeStatuses": ["missing", "needs-review"]
-  }
+    "excludeStatuses": [
+      "missing",
+      "needs-review"
+    ]
+  },
+  "readyThrough": "HAD-0259"
 }

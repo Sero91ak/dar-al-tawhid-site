@@ -177,6 +177,16 @@ try {
   fail(`post-push-hang-guard: ${e.message}`);
 }
 
+try {
+  require("child_process").execFileSync(
+    process.execPath,
+    [path.join(__dirname, "validate-canonical-content.js")],
+    { stdio: "inherit" }
+  );
+} catch (e) {
+  fail("canonical-content validation");
+}
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);

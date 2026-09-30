@@ -1,5 +1,5 @@
 /* DĀR AL TAWḤĪD – central verified Ḥadīṯ data bridge
- * Source of truth: GitHub branch apple-tv-hadith-staging / apple-tv/hadith/
+ * Source of truth: /apple-tv/hadith/ (dar-al-tawhid.de, then GitHub main).
  * Used by Test App and prepared live/iOS Ḥadīṯ library.
  */
 (function () {
@@ -7,10 +7,12 @@
   if (window.__DAR_HADITH_LIBRARY_DATA_V2) return;
   window.__DAR_HADITH_LIBRARY_DATA_V2 = true;
 
-  var RAW_ROOT = "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/hadith/";
-  var RAW_CATALOG = RAW_ROOT + "catalog.json";
+  var LIVE_ROOT = "https://dar-al-tawhid.de/apple-tv/hadith/";
+  var LIVE_CATALOG = LIVE_ROOT + "catalog.json";
   var LOCAL_ROOT = "/apple-tv/hadith/";
   var LOCAL_CATALOG = LOCAL_ROOT + "catalog.json";
+  var RAW_ROOT = "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/apple-tv/hadith/";
+  var RAW_CATALOG = RAW_ROOT + "catalog.json";
 
   function isTestPath() {
     try {
@@ -113,7 +115,11 @@
   }
 
   function rootForCatalog(url) {
-    return String(url).indexOf("raw.githubusercontent.com/") >= 0 ? RAW_ROOT : LOCAL_ROOT;
+    var value = String(url || "");
+    if (value.indexOf("/apple-tv/hadith/") === 0) return LOCAL_ROOT;
+    if (value.indexOf("dar-al-tawhid.de/apple-tv/hadith/") >= 0) return LIVE_ROOT;
+    if (value.indexOf("raw.githubusercontent.com/") >= 0) return RAW_ROOT;
+    return LOCAL_ROOT;
   }
 
   function absolute(root, relative) {
@@ -132,7 +138,9 @@
         return fetchJson(absolute(root, seriesDir + file), version);
       })).then(function (records) {
         return records
-          .filter(function (record) { return record && (record.recordType || "hadith") === "hadith" && record.id; })
+          .filter(function (record) {
+            return !!(record && record.id && String(record.textMarkdown || record.german || "").trim());
+          })
           .map(function (record) {
             var out = toLibraryRecord(record);
             out.seriesId = series.id || index.series || null;
@@ -165,8 +173,9 @@
       .then(function (libraryCatalog) {
         var sourceCandidates = [];
         if (options.sourceCatalogPath) sourceCandidates.push(options.sourceCatalogPath);
-        sourceCandidates.push(RAW_CATALOG);
         sourceCandidates.push(LOCAL_CATALOG);
+        sourceCandidates.push(LIVE_CATALOG);
+        sourceCandidates.push(RAW_CATALOG);
 
         return firstJson(sourceCandidates, Date.now()).then(function (sourceHit) {
           var sourceCatalog = sourceHit.data;

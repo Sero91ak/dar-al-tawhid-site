@@ -4,8 +4,8 @@
   "language": "de",
   "authenticOnly": true,
   "mode": "library",
-  "sourceOfTruth": "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/hadith/catalog.json",
-  "dataRoot": "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/hadith/",
+  "sourceOfTruth": "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
+  "dataRoot": "https://dar-al-tawhid.de/apple-tv/hadith/",
   "loaderPath": "/test/assets/hadith-library-data.js",
   "gateStatePath": "/test/data/hadith-library-gate.json",
   "seriesMode": "auto-from-source-catalog",
@@ -23,15 +23,15 @@
     "showGrade": true,
     "showSharh": true,
     "showSharhSource": true,
-    "requireVerifiedSharh": true
+    "requireVerifiedSharh": false
   },
-  "syncRule": "Verifizierte HAD-Datensätze werden zentral aus apple-tv-hadith-staging geladen; Test-App benötigt pro neuem Datensatz keinen eigenen Daten-Commit.",
+  "syncRule": "Geprüfte HAD-Datensätze werden zentral aus /apple-tv/hadith/ geladen; kein zweiter manueller Push je Oberfläche.",
   "surfaces": {
     "testApp": true,
-    "iosApp": false,
-    "appleTvScreensaver": false,
-    "visitorApp": false,
-    "website": false,
-    "androidWebApp": false
+    "iosApp": true,
+    "appleTvScreensaver": true,
+    "visitorApp": true,
+    "website": true,
+    "androidWebApp": true
   }
 }

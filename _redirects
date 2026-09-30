@@ -20,4 +20,8 @@
 /test/kids/ /kids/ 301
 /test/kids/* /kids/:splat 301
 
+/apple-tv/tadabbur /apple-tv/quran/tadabbur/ 200
+/apple-tv/tadabbur/ /apple-tv/quran/tadabbur/ 200
+/apple-tv/tadabbur/* /apple-tv/quran/tadabbur/:splat 200
+
 
