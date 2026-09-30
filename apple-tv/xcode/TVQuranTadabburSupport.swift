@@ -52,7 +52,7 @@ final class TVQuranTadabburStore: ObservableObject {
 
     private let relativeCatalogPath = "quran/tadabbur/catalog.json"
     private let baseURL = URL(
-        string: "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/quran/tadabbur/"
+        string: "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/apple-tv/quran/tadabbur/"
     )!
 
     private let cacheURL: URL = {
