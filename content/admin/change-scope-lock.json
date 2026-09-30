@@ -151,6 +151,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "universal-islamic-content-sync-2026-09-30",
+      "approvedBy": "user-explicit-tadabbur-hadith-salaf-sahaba-all-surfaces",
+      "reason": "Nutzer verlangt: Tadabbur, Ḥadīṯe, Aussagen der Ṣaḥābah/Tābiʿīn/Salaf und zugehörige geprüfte Inhalte nach Erstellung automatisch in iOS-App, Web-Apps/Website und Apple TV synchronisieren; bestehende UI nicht verändern.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "apple-tv/quran/tadabbur/",
+        "apple-tv/hadith/",
+        "assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.js",
+        "assets/hadith-library-data.js",
+        "test/assets/hadith-library-data.js",
+        "content/quran-athar/de/",
+        "data/quran-search-index.json",
+        "scripts/build-quran-search-index.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "hadith-universal-sync-2026-09-30",
       "approvedBy": "user-explicit-alle-website-ios-webapps-apple-tv",
       "reason": "Nutzer verlangt eine gemeinsame Ḥadīṯ-Quelle und immer synchronen Stand in Website, iOS-App, Web-Apps und Apple TV.",
