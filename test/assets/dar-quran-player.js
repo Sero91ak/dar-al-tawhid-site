@@ -1645,7 +1645,7 @@
       "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/quran/tadabbur/",
       "/apple-tv/quran/tadabbur/",
       "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/apple-tv/quran/tadabbur/"
-    ];
+    ]; /* UNIVERSAL_CONTENT_SYNC_V1: canonical staging first on iOS/Web; tvOS uses the same catalog tree. */
     tadCatalogReady = (function next(i) {
       if (i >= roots.length) {
         window.__DAR_TADABBUR_READY = true;
