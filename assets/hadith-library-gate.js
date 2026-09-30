@@ -1,8 +1,8 @@
 /* DĀR AL TAWḤĪD – Hadith-Bibliothek: eine Katalogzeile, gesperrt bis Freigabe */
 (function () {
   "use strict";
-  if (window.__DAR_HADITH_LIBRARY_GATE_V6) return;
-  window.__DAR_HADITH_LIBRARY_GATE_V6 = true;
+  if (window.__DAR_HADITH_LIBRARY_GATE_V7) return;
+  window.__DAR_HADITH_LIBRARY_GATE_V7 = true;
 
   var TOAST_ID = "dar-hadith-library-gate-toast";
   var DATA_LOADER_ID = "dar-hadith-library-data-loader";
