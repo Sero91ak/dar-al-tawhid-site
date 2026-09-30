@@ -66,10 +66,10 @@ final class QuranPlaybackStore: ObservableObject {
             .store(in: &cancellables)
     }
 
-    /// tvOS only routes AVPlayer output to the TV/HomePod when the shared
-    /// session is active in a playback category. Other audio in the app (e.g.
-    /// the Aḏān) may deactivate or re-categorise the shared session, so it is
-    /// re-asserted before every Āyah.
+    /// Apple TV gibt Ton nur aus, wenn die gemeinsame Audio-Sitzung auf
+    /// Wiedergabe steht und aktiv ist. Anderer Ton in der App (z. B. der Aḏān)
+    /// kann diese Sitzung unterbrechen; deshalb wird sie vor jedem Āyah
+    /// erneut eingeschaltet.
     private func activateAudioSession() {
         let session = AVAudioSession.sharedInstance()
         do {
