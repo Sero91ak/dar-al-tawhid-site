@@ -1444,7 +1444,8 @@
       el.classList.remove("is-leave", "is-enter");
       fitAyah(el);
       paintError();
-      Promise.all([ensureTadCatalog(), loadTranslit(state.surah), loadTafsir(state.surah)]).then(function () {
+      var tadLoad = state.layers.tad ? ensureTadCatalog() : Promise.resolve(null);
+      Promise.all([tadLoad, loadTranslit(state.surah), loadTafsir(state.surah)]).then(function () {
         paintLat(el);
         paintTad(el);
         paintTaf(el);
@@ -1497,6 +1498,24 @@
     }
     return out;
   }
+  function normalizeTadItem(row) {
+    if (!row || typeof row !== "object") return null;
+    var ref = String(row.reference || "").trim();
+    var reflection = String(row.reflection || row.text || "").trim();
+    if (!ref || reflection.length < 3) return null;
+    return {
+      id: String(row.id || ref).trim() || ref,
+      reference: ref,
+      verse: String(row.verse || "").trim(),
+      reflection: reflection,
+      narrator: String(row.narrator || "").trim(),
+      generation: String(row.generation || "").trim(),
+      source: String(row.source || "").trim(),
+      grading: String(row.grading || "").trim(),
+      sourceUrl: String(row.sourceUrl || "").trim(),
+      relation: String(row.relation || "").trim()
+    };
+  }
   function ingestTadItems(items) {
     var by = window.__DAR_TADABBUR_BY_REF && typeof window.__DAR_TADABBUR_BY_REF === "object"
       ? window.__DAR_TADABBUR_BY_REF
@@ -1504,8 +1523,9 @@
     var list = Array.isArray(window.__DAR_TADABBUR_ITEMS) ? window.__DAR_TADABBUR_ITEMS.slice() : [];
     var seen = {};
     list.forEach(function (it) { if (it && it.id) seen[it.id] = 1; });
-    (items || []).forEach(function (it) {
-      if (!it || !it.reference || !it.reflection) return;
+    (items || []).forEach(function (raw) {
+      var it = normalizeTadItem(raw);
+      if (!it) return;
       if (it.id && seen[it.id]) return;
       if (it.id) seen[it.id] = 1;
       list.push(it);
@@ -1519,44 +1539,84 @@
     var rows = [];
     if (Array.isArray(raw)) rows = raw;
     else if (raw && Array.isArray(raw.items)) rows = raw.items;
-    var out = [];
-    var seen = {};
-    for (var i = 0; i < rows.length; i++) {
-      var row = rows[i] || {};
-      var id = String(row.id || "").trim();
-      var ref = String(row.reference || "").trim();
-      var reflection = String(row.reflection || "").trim();
-      if (!ref || reflection.length < 20) continue;
-      if (seen[id || ref]) continue;
-      seen[id || ref] = 1;
-      out.push({
-        id: id || ref,
-        reference: ref,
-        verse: String(row.verse || "").trim(),
-        reflection: reflection,
-        narrator: String(row.narrator || "").trim(),
-        generation: String(row.generation || "").trim(),
-        source: String(row.source || "").trim()
+    else if (raw && Array.isArray(raw.entries)) rows = raw.entries;
+    ingestTadItems(rows);
+    return rows;
+  }
+  function joinTadUrl(base, path) {
+    return String(base || "").replace(/\/+$/, "") + "/" + String(path || "").replace(/^\/+/, "");
+  }
+  function fetchTadJson(url, cacheMode) {
+    return fetch(url, { cache: cacheMode || "no-store" }).then(function (r) {
+      if (!r.ok) throw new Error("Tadabbur HTTP " + r.status);
+      return r.json();
+    });
+  }
+  function loadIndexedTadCatalog(base) {
+    return fetchTadJson(joinTadUrl(base, "catalog.json"), "no-store").then(function (catalog) {
+      if (Array.isArray(catalog) || (catalog && Array.isArray(catalog.items))) {
+        parseTadCatalog(catalog);
+        return window.__DAR_TADABBUR_BY_REF || {};
+      }
+      var indexPath = String((catalog && catalog.entriesIndexPath) || "entries-index.json");
+      return fetchTadJson(joinTadUrl(base, indexPath), "no-store").then(function (index) {
+        var files = Array.isArray(index && index.files) ? index.files.slice() : [];
+        if (!files.length) throw new Error("Tadabbur index empty");
+        var cursor = 0;
+        var loaded = 0;
+        var expected = Number((catalog && catalog.entriesCount) || (index && index.totalVerifiedEntries) || 0);
+        var workerCount = Math.min(8, files.length);
+        function worker() {
+          var pos = cursor++;
+          if (pos >= files.length) return Promise.resolve();
+          var item = files[pos] || {};
+          var filePath = String(item.path || item.file || "").trim();
+          if (!filePath) return worker();
+          return fetchTadJson(joinTadUrl(base, filePath), "default").then(function (payload) {
+            var rows = Array.isArray(payload) ? payload : (payload && Array.isArray(payload.entries) ? payload.entries : []);
+            if (Number(item.count) >= 0 && rows.length !== Number(item.count)) {
+              throw new Error("Tadabbur count mismatch: " + filePath);
+            }
+            loaded += rows.length;
+            ingestTadItems(rows);
+            return worker();
+          });
+        }
+        var workers = [];
+        for (var i = 0; i < workerCount; i++) workers.push(worker());
+        return Promise.all(workers).then(function () {
+          if (expected > 0 && loaded !== expected) {
+            throw new Error("Tadabbur total mismatch: " + loaded + "/" + expected);
+          }
+          return window.__DAR_TADABBUR_BY_REF || {};
+        });
       });
-    }
-    ingestTadItems(out);
-    return out;
+    });
   }
   function ensureTadCatalog() {
     var existing = window.__DAR_TADABBUR_BY_REF;
-    if (existing && Object.keys(existing).length) return Promise.resolve(existing);
+    if (existing && Object.keys(existing).length) {
+      window.__DAR_TADABBUR_READY = true;
+      return Promise.resolve(existing);
+    }
     if (tadCatalogReady) return tadCatalogReady;
-    var urls = [
-      "/apple-tv/tadabbur/catalog.json",
-      "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/tadabbur/catalog.json"
+    window.__DAR_TADABBUR_READY = false;
+    var roots = [
+      "/apple-tv/quran/tadabbur/",
+      "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/apple-tv/quran/tadabbur/",
+      "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/quran/tadabbur/"
     ];
     tadCatalogReady = (function next(i) {
-      if (i >= urls.length) return Promise.resolve(window.__DAR_TADABBUR_BY_REF || {});
-      return fetch(urls[i], { cache: "no-store" }).then(function (r) {
-        if (!r.ok) return next(i + 1);
-        return r.json().then(parseTadCatalog).then(function () { return window.__DAR_TADABBUR_BY_REF || {}; });
-      }).catch(function () { return next(i + 1); });
-    })(0);
+      if (i >= roots.length) {
+        window.__DAR_TADABBUR_READY = true;
+        return Promise.resolve(window.__DAR_TADABBUR_BY_REF || {});
+      }
+      return loadIndexedTadCatalog(roots[i]).catch(function () { return next(i + 1); });
+    })(0).then(function (by) {
+      window.__DAR_TADABBUR_READY = true;
+      try { window.dispatchEvent(new CustomEvent("dar-tadabbur-ready")); } catch (eEvt) {}
+      return by;
+    });
     return tadCatalogReady;
   }
   function tadEntryFor(surah, ayah) {
@@ -1620,7 +1680,8 @@
     var catalog = tadEntryFor(state.surah, state.ayah);
     if (!catalog || !catalog.reflection) return "";
     var meta = [catalog.narrator, catalog.generation].filter(Boolean).join(" · ");
-    var tail = [meta, catalog.source].filter(Boolean).join("\n");
+    var grade = catalog.grading ? ("Einstufung: " + catalog.grading) : "";
+    var tail = [meta, catalog.source, grade].filter(Boolean).join("\n");
     return tail ? (catalog.reflection + "\n\n" + tail) : catalog.reflection;
   }
   function loadTadForSurah() {
@@ -1642,7 +1703,10 @@
     var tadEl = el.querySelector("[data-tad]");
     var sec = el.querySelector('[data-sec="tad"]');
     var text = tadPlain();
-    if (tadEl) tadEl.textContent = text || "Kein Tadabbur-Eintrag zu dieser Āyah.";
+    if (tadEl) {
+      var fallback = "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.";
+      tadEl.textContent = text || (state.layers.tad && !window.__DAR_TADABBUR_READY ? "Tadabbur wird geladen …" : fallback);
+    }
     if (sec) sec.hidden = !state.layers.tad;
   }
   function paintTaf(el) {
