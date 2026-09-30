@@ -52,7 +52,7 @@ final class TVQuranTadabburStore: ObservableObject {
 
     private let relativeCatalogPath = "quran/tadabbur/catalog.json"
     private let baseURL = URL(
-        string: "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/quran/tadabbur/"
+        string: "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/apple-tv/quran/tadabbur/"
     )!
 
     private let cacheURL: URL = {
@@ -168,7 +168,10 @@ final class TVQuranTadabburStore: ObservableObject {
 
     private func loadJSON<T: Decodable>(_ relativePath: String) async throws -> T {
         let url = baseURL.appendingPathComponent(relativePath)
-        let (data, response) = try await URLSession.shared.data(from: url)
+        var request = URLRequest(url: url)
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        request.timeoutInterval = 20
+        let (data, response) = try await URLSession.shared.data(for: request)
         guard let http = response as? HTTPURLResponse,
               (200...299).contains(http.statusCode) else {
             throw URLError(.badServerResponse)
