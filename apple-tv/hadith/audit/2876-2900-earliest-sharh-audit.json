@@ -1,0 +1,133 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2876-2900",
+  "series": "2851-2950",
+  "status": "completed-earliest-sharh-audit",
+  "ruleVersion": 6,
+  "sourceProgression": "Ṣaḥīḥ Muslim 2766–2769, Kitāb at-Tawbah",
+  "reason": "Fortsetzung des Tawbah-Abschnitts: Abschluss des Berichts über den hundertfachen Täter, Muslim 2767 zur Vergebung, Muslim 2768 zur privaten Rechenschaft des Gläubigen und strukturierte eigenständige Lehrpunkte aus dem langen Bericht über Kaʿb ibn Mālik in Muslim 2769. Varianten wurden nicht künstlich vervielfacht. Früher Šarḥ nach al-Māzirī; nicht editionssicher verifizierte Druckseiten bleiben null.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "dedupeDecisions": [
+    "Muslim 2766 split only into distinct Tawbah stages",
+    "Muslim 2767 variants consolidated by substantive core",
+    "Muslim 2768 split into four distinct eschatological statements",
+    "Muslim 2769 segmented by distinct events and teachings; no isnad/wording duplicates"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2876",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2877",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2878",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2879",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2880",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2881",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2882",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2883",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2884",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2885",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2886",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2887",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2888",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2889",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2890",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2891",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2892",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2893",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2894",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2895",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2896",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2897",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2898",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2899",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    },
+    {
+      "id": "HAD-2900",
+      "auditStatus": "verified-earliest-sharh-no-estimated-page"
+    }
+  ]
+}
