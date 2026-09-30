@@ -302,49 +302,60 @@ function audioFail(status, message) {
   });
 }
 
-function audioOkHeaders(res, used) {
-  const out = new Headers();
-  const type = String(res.headers.get("Content-Type") || "");
-  out.set("Content-Type", type.indexOf("audio") >= 0 || type.indexOf("mpeg") >= 0 ? type : "audio/mpeg");
-  out.set("Access-Control-Allow-Origin", "*");
-  const contentRange = res.headers.get("Content-Range");
-  if (res.status === 206 || contentRange) out.set("Accept-Ranges", "bytes");
-  out.set("Cache-Control", "public, max-age=86400, must-revalidate");
-  out.set("CDN-Cache-Control", "public, max-age=86400, must-revalidate");
-  out.set("Cloudflare-CDN-Cache-Control", "public, max-age=86400, must-revalidate");
-  if (used) out.set("X-Dar-Quran-Audio", used);
-  const len = res.headers.get("Content-Length");
-  if (len) out.set("Content-Length", len);
-  if (contentRange) out.set("Content-Range", contentRange);
-  return out;
+function audioRangeResponse(body, request, extra) {
+  const size = body.byteLength;
+  const range = request.headers.get("Range") || request.headers.get("range") || "";
+  const rangeMatch = range.match(/bytes=(\d*)-(\d*)/);
+  let start = 0;
+  let end = size - 1;
+  let status = 200;
+  if (rangeMatch) {
+    start = rangeMatch[1] ? Number(rangeMatch[1]) : 0;
+    end = rangeMatch[2] ? Number(rangeMatch[2]) : size - 1;
+    if (Number.isNaN(start) || start < 0) start = 0;
+    if (Number.isNaN(end) || end >= size) end = size - 1;
+    if (start > end) start = 0;
+    status = 206;
+  }
+  const headers = {
+    "Content-Type": "audio/mpeg",
+    "Accept-Ranges": "bytes",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Range",
+    "Access-Control-Expose-Headers": "Content-Length, Content-Range, Accept-Ranges",
+    "Cache-Control": "public, max-age=86400, must-revalidate",
+    ...(extra || {})
+  };
+  if (status === 206) {
+    headers["Content-Range"] = "bytes " + start + "-" + end + "/" + size;
+    headers["Content-Length"] = String(end - start + 1);
+  } else {
+    headers["Content-Length"] = String(size);
+  }
+  if (request.method === "HEAD") return new Response(null, { status, headers });
+  const slice = status === 206 ? body.slice(start, end + 1) : body;
+  return new Response(slice, { status, headers });
 }
 
-async function fetchAudioUpstream(upstreams, request) {
-  const headers = new Headers();
-  const range = request.headers.get("Range");
-  if (range) headers.set("Range", range);
-  headers.set("Accept", "audio/mpeg,audio/*;q=0.9,*/*;q=0.8");
-  let res = null;
+async function fetchFullAudio(upstreams) {
   let used = upstreams[0];
   for (const upstream of upstreams) {
     used = upstream;
     try {
-      res = await fetch(upstream, {
-        method: request.method === "HEAD" ? "GET" : request.method,
-        headers,
-        cf: range
-          ? { cacheEverything: false }
-          : {
-              cacheEverything: true,
-              cacheTtlByStatus: { "200": 86400, "400-599": 0 }
-            }
+      const res = await fetch(upstream, {
+        method: "GET",
+        headers: {
+          Accept: "audio/mpeg,audio/*;q=0.9,*/*;q=0.8",
+          "User-Agent": "DarAlTawhidTV"
+        },
+        cf: { cacheEverything: true, cacheTtlByStatus: { "200": 86400, "400-599": 0 } }
       });
-      if (res && (res.ok || res.status === 206)) break;
-    } catch (eUp) {
-      res = null;
-    }
+      if (!res || !res.ok) continue;
+      const buf = await res.arrayBuffer();
+      if (buf && buf.byteLength > 800) return { body: buf, used };
+    } catch (eUp) {}
   }
-  return { res, used };
+  return { body: null, used };
 }
 
 async function proxyQuranAudio(request, url) {
@@ -392,13 +403,9 @@ async function proxyQuranAudio(request, url) {
     `https://cdn.alquran.cloud/media/audio/ayah/${edition}/${ayah}`
   ];
   try {
-    const { res, used } = await fetchAudioUpstream(upstreams, request);
-    if (!res || !(res.ok || res.status === 206)) return audioFail(502, "Recitation upstream unavailable");
-    const out = audioOkHeaders(res, used);
-    if (request.method === "HEAD") {
-      return new Response(null, { status: res.status === 206 ? 206 : 200, headers: out });
-    }
-    return new Response(res.body, { status: res.status, statusText: res.statusText, headers: out });
+    const { body, used } = await fetchFullAudio(upstreams);
+    if (!body) return audioFail(502, "Recitation upstream unavailable");
+    return audioRangeResponse(body, request, { "X-Dar-Quran-Audio": used });
   } catch (eProxy) {
     return audioFail(502, "Recitation proxy error");
   }

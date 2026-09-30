@@ -1,9 +1,12 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 980;
+    var PLAYER_BUILD = 981;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
+      if (window.DAR_APPLE_TV_APP === true) return false;
+      var uaTv = String(navigator.userAgent || "");
+      if (/AppleTV|Apple TV|tvOS|DarAlTawhid-tvOS/i.test(uaTv)) return false;
       if (window.DAR_OFFICIAL_IOS_APP === true) return true;
       if (window.DAR_IOS_NATIVE_APP === true) return true;
       var ua = String(navigator.userAgent || "");
@@ -126,7 +129,28 @@
 
   var lastSysVolAt = 0;
   function usesSystemVolume() {
-    return isOfficialIosApp();
+    return isOfficialIosApp() && !isAppleTvApp();
+  }
+  function unlockSpeaker(a) {
+    a = a || document.getElementById("darQuranPlayerAudio");
+    if (!a) return;
+    try { a.defaultMuted = false; } catch (e0) {}
+    try { a.muted = false; } catch (e1) {}
+    try { a.volume = 1; } catch (e2) {}
+    if (!(Number(state.volume) > 0)) state.volume = 1;
+  }
+  function armTvSpeakerUnlock() {
+    if (!isAppleTvApp() || window.__DAR_TV_SPEAKER_UNLOCK) return;
+    window.__DAR_TV_SPEAKER_UNLOCK = true;
+    function go() {
+      unlockSpeaker();
+      if (window.__DAR_ADHAN_ACTIVE === true) return;
+      var a = document.getElementById("darQuranPlayerAudio");
+      if (a && a.paused && (engine.wantPlay || state.sessionActive || state.playing)) runPlay(a, playGen);
+    }
+    ["pointerdown", "click", "keydown", "keyup", "touchstart"].forEach(function (kind) {
+      window.addEventListener(kind, go, true);
+    });
   }
   function postSystemVolume(v) {
     var now = Date.now();
@@ -637,14 +661,19 @@
     }
     a = document.createElement("audio");
     a.id = "darQuranPlayerAudio";
-    a.preload = isAppleTvApp() ? "metadata" : "auto";
+    a.preload = isAppleTvApp() ? "auto" : "auto";
     a.setAttribute("playsinline", "");
     a.setAttribute("webkit-playsinline", "");
     a.playsInline = true;
     a.controls = false;
     a.muted = false;
     a.defaultMuted = false;
-    a.style.display = "none";
+    a.volume = 1;
+    if (isAppleTvApp()) {
+      a.style.cssText = "position:fixed;left:0;bottom:0;width:8px;height:8px;opacity:0.02;pointer-events:none;z-index:1";
+    } else {
+      a.style.display = "none";
+    }
     document.body.appendChild(a);
     bindAudioListeners(a);
     return a;
@@ -704,8 +733,16 @@
     var g = globalAyah(surah, ayah);
     var pack = window.DARQuranAudioPack;
     var list = [];
-    if (pack && typeof pack.url === "function") list.push(pack.url(rec.edition, g));
-    list.push("/quran-audio/" + rec.edition + "/" + g + ".mp3");
+    var origin = "";
+    try { origin = String(location.origin || ""); } catch (eOrigin) { origin = ""; }
+    if (isAppleTvApp() && (!origin || origin.indexOf("http") !== 0)) origin = "https://dar-al-tawhid.de";
+    function absProxy(path) {
+      if (!isAppleTvApp()) return path;
+      if (path.indexOf("http") === 0) return path;
+      return origin + path;
+    }
+    if (pack && typeof pack.url === "function") list.push(absProxy(pack.url(rec.edition, g)));
+    list.push(absProxy("/quran-audio/" + rec.edition + "/" + g + ".mp3"));
     list.push("https://everyayah.com/data/" + rec.folder + "/" + s + a + ".mp3");
     list.push("https://cdn.islamic.network/quran/audio/128/" + rec.edition + "/" + g + ".mp3");
     return list.filter(function (u, i, arr) { return u && arr.indexOf(u) === i; });
@@ -726,6 +763,7 @@
   }
   function runPlay(a, gen) {
     engine.wantPlay = true;
+    unlockSpeaker(a);
     if (window.__DAR_ADHAN_ACTIVE === true) {
       state.playing = false;
       logAudio("play deferred: adhan active", snapAudio(a));
@@ -813,6 +851,8 @@
       logAudio("loadAudio", { autoplay: !!autoplay, keepTime: !!keepTime, url: hit.url, qari: hit.qari, before: snapAudio(a) });
       a.muted = false;
       a.defaultMuted = false;
+      a.volume = 1;
+      unlockSpeaker(a);
       try { a.pause(); } catch (ePauseSrc) {}
       var prev = String(a.getAttribute("src") || a.currentSrc || "");
       if (prev && (prev === hit.url || prev.split("?")[0] === String(hit.url).split("?")[0])) {
@@ -3914,6 +3954,7 @@
   loadState();
   ensureTadCatalog();
   bootAppleTvAdhanRuntime();
+  armTvSpeakerUnlock();
   var tvAutoStarted = false;
   function resumeVisibleSession() {
     loadState({ keepLiveSession: true });
