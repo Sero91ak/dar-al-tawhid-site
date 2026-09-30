@@ -122,7 +122,7 @@
   var trackHeard = false;
   var playGen = 0;
   var allowAdvance = false;
-  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0 };
+  var engine = { started: false, lastUrl: "", loadedSurah: 0, loadedAyah: 0, stallTimer: 0, lastProgressAt: 0, wantPlay: false, objectUrl: "", blobTried: false, haltedOffline: false, watchReloadAt: 0, endedAt: 0 };
 
   var lastSysVolAt = 0;
   function usesSystemVolume() {
@@ -673,6 +673,30 @@
     var url = list[0] || "";
     return Promise.resolve(url ? { qari: rec.id, url: url } : null);
   }
+  function isOffline() {
+    try { return navigator.onLine === false; } catch (eOnline) { return false; }
+  }
+  function savedAyahUrl(qari, surah, ayah) {
+    var pack = window.DARQuranAudioPack;
+    var rec = reciterById(qari) || reciterById(FALLBACK_QARI);
+    if (!pack || typeof pack.blobUrl !== "function" || !rec) return Promise.resolve(null);
+    return pack.blobUrl(rec.edition, globalAyah(surah, ayah)).catch(function () { return null; });
+  }
+  function resolveSource(qari, surah, ayah) {
+    if (!isOffline()) return resolvePlayable(qari, surah, ayah);
+    return savedAyahUrl(qari, surah, ayah).then(function (saved) {
+      if (saved) return { qari: qari, url: saved, saved: true };
+      return resolvePlayable(qari, surah, ayah);
+    });
+  }
+  function setAudioSrc(a, url) {
+    var old = engine.objectUrl;
+    a.src = url;
+    engine.objectUrl = String(url).indexOf("blob:") === 0 ? url : "";
+    if (old && old !== url) {
+      try { URL.revokeObjectURL(old); } catch (eRevoke) {}
+    }
+  }
   function urlsForWithRec(rec, surah, ayah) {
     rec = rec || reciterById(state.reciter);
     var s = pad(surah, 3);
@@ -690,13 +714,23 @@
     state.playing = false;
     allowAdvance = false;
     engine.started = false;
-    state.error = "Diese Rezitation ist für diesen Qāriʾ nicht verfügbar.";
+    engine.wantPlay = false;
+    engine.haltedOffline = isOffline();
+    state.error = engine.haltedOffline
+      ? "Offline: Diese Āyah ist auf diesem Gerät noch nicht gespeichert. Die Wiedergabe geht weiter, sobald Internet da ist."
+      : "Diese Rezitation ist für diesen Qāriʾ nicht verfügbar.";
     console.log("[QURAN_AUDIO] missing audio", { qari: qari, surah: surah, ayah: ayah, url: url || "" });
     paintError();
     paintChrome();
     paintMini();
   }
   function runPlay(a, gen) {
+    engine.wantPlay = true;
+    if (window.__DAR_ADHAN_ACTIVE === true) {
+      state.playing = false;
+      logAudio("play deferred: adhan active", snapAudio(a));
+      return;
+    }
     applyVolume(true);
     logAudio("play requested", {
       surah: state.surah,
@@ -753,14 +787,19 @@
     trackHeard = false;
     allowAdvance = false;
     engine.started = false;
+    engine.wantPlay = !!autoplay;
+    engine.haltedOffline = false;
     clearStallRetry();
     ignoreEndedUntil = Date.now() + 1200;
     engine.abortRetries = 0;
     var wantQari = state.reciter;
     var surah = state.surah;
     var ayah = state.ayah;
-    resolvePlayable(wantQari, surah, ayah).then(function (hit) {
-      if (gen !== playGen) return;
+    resolveSource(wantQari, surah, ayah).then(function (hit) {
+      if (gen !== playGen) {
+        if (hit && hit.saved) { try { URL.revokeObjectURL(hit.url); } catch (eStale) {} }
+        return;
+      }
       if (!hit) {
         missingAudioHalt(wantQari, surah, ayah, "");
         return;
@@ -782,8 +821,9 @@
       engine.lastUrl = hit.url;
       engine.loadedSurah = surah;
       engine.loadedAyah = ayah;
-      a.src = hit.url;
-      logAudio("src changed", snapAudio(a));
+      engine.blobTried = !!hit.saved;
+      setAudioSrc(a, hit.url);
+      logAudio("src changed", { saved: !!hit.saved, snap: snapAudio(a) });
       syncPublicAudioState(a);
       function seekStart() {
         if (gen !== playGen) return;
@@ -824,8 +864,34 @@
   }
   function preloadNext() {}
   function tryFallback() {
+    if (!engine.blobTried) {
+      engine.blobTried = true;
+      var genSaved = playGen;
+      var sSaved = state.surah;
+      var aSaved = state.ayah;
+      savedAyahUrl(state.reciter, sSaved, aSaved).then(function (saved) {
+        if (genSaved !== playGen || sSaved !== state.surah || aSaved !== state.ayah) {
+          if (saved) { try { URL.revokeObjectURL(saved); } catch (eStaleSaved) {} }
+          return;
+        }
+        if (!saved) { tryFallback(); return; }
+        ignoreEndedUntil = Date.now() + 1200;
+        engine.started = false;
+        allowAdvance = false;
+        engine.lastUrl = saved;
+        var el = audioEl();
+        logAudio("fallback saved offline copy", { surah: sSaved, ayah: aSaved });
+        setAudioSrc(el, saved);
+        if (state.playing || state.sessionActive || engine.wantPlay) runPlay(el, playGen);
+      });
+      return;
+    }
     var urls = urlsFor(state.surah, state.ayah);
     urlIndex += 1;
+    if (urlIndex >= urls.length && isOffline()) {
+      missingAudioHalt(state.reciter, state.surah, state.ayah, engine.lastUrl);
+      return;
+    }
     if (urlIndex >= urls.length) {
       resolvePlayable(FALLBACK_QARI, state.surah, state.ayah).then(function (hit) {
         if (!hit || hit.url === engine.lastUrl) {
@@ -840,7 +906,7 @@
         engine.started = false;
         allowAdvance = false;
         engine.lastUrl = hit.url;
-        audioEl().src = hit.url;
+        setAudioSrc(audioEl(), hit.url);
         logAudio("src changed", snapAudio(audioEl()));
         if (state.playing || state.sessionActive) runPlay(audioEl(), playGen);
         paintChrome();
@@ -853,7 +919,7 @@
     var a = audioEl();
     engine.lastUrl = urls[urlIndex];
     logAudio("fallback url", { url: engine.lastUrl, index: urlIndex });
-    a.src = engine.lastUrl;
+    setAudioSrc(a, engine.lastUrl);
     logAudio("src changed", snapAudio(a));
     if (state.playing || state.sessionActive) runPlay(a, playGen);
   }
@@ -919,6 +985,8 @@
     syncPublicAudioState(audioEl());
   }
   function onPauseEv() {
+    var pausedEl = document.getElementById("darQuranPlayerAudio");
+    if (!(pausedEl && pausedEl.ended) && Date.now() >= ignoreEndedUntil && window.__DAR_ADHAN_ACTIVE !== true) engine.wantPlay = false;
     state.playing = false;
     saveState();
     paintChrome();
@@ -966,6 +1034,7 @@
     return true;
   }
   async function onEnded() {
+    engine.endedAt = Date.now();
     logAudio("ended", snapAudio());
     if (!trackReallyFinished()) return;
     clearStallRetry();
@@ -981,6 +1050,7 @@
     }
     if (state.learnMode && state.learnStay) {
       state.playing = false;
+      engine.wantPlay = false;
       paintChrome();
       paintMini();
       return;
@@ -2491,6 +2561,7 @@
   }
   function stopSession() {
     playGen += 1;
+    engine.wantPlay = false;
     ignoreEndedUntil = Date.now() + 4000;
     trackHeard = false;
     allowAdvance = false;
@@ -2778,6 +2849,13 @@
     sh.dataset.dqpSheetBound = "1";
     function handle(ev) {
       if (ev.target === sh) { closeSheet(); return; }
+      var dlBtn = ev.target.closest ? ev.target.closest("[data-dqp-dl]") : null;
+      if (dlBtn && sh.contains(dlBtn)) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        startReciterDownload(dlBtn);
+        return;
+      }
       var t = ev.target.closest ? ev.target.closest("[data-dqp],[data-dqp-opt]") : null;
       if (!t || !sh.contains(t)) return;
       ev.preventDefault();
@@ -2978,6 +3056,32 @@
     }
     draw();
   }
+  var dlLabelTimer = 0;
+  function paintDownloadButtons() {
+    var pack = window.DARQuranAudioPack;
+    var btns = document.querySelectorAll("[data-dqp-dl]");
+    if (!btns.length) {
+      clearInterval(dlLabelTimer);
+      dlLabelTimer = 0;
+      return;
+    }
+    if (!pack || typeof pack.downloadLabel !== "function") return;
+    btns.forEach(function (btn) {
+      var ed = btn.getAttribute("data-dqp-dl");
+      var lab = pack.downloadLabel(ed);
+      if (btn.textContent !== lab) btn.textContent = lab;
+      btn.classList.toggle("is-done", lab === "Gespeichert");
+    });
+  }
+  function startReciterDownload(btn) {
+    var ed = btn.getAttribute("data-dqp-dl");
+    var pack = window.DARQuranAudioPack;
+    if (!ed || !pack || typeof pack.downloadReciter !== "function") return;
+    logAudio("download requested", { edition: ed });
+    try { pack.downloadReciter(ed); } catch (eDl) {}
+    btn.textContent = "Lädt …";
+    if (!dlLabelTimer) dlLabelTimer = setInterval(paintDownloadButtons, 1500);
+  }
   function openReciterSheet() {
     var pack = window.DARQuranAudioPack;
     var rows = listReciters().map(function (r) {
@@ -2986,6 +3090,7 @@
       return '<div class="dqp-opt-row" data-q="' + esc((r.name + " " + r.id).toLowerCase()) + '"><button type="button" class="dqp-opt' + (r.id === state.reciter ? " is-on" : "") + '" data-dqp-opt="r-' + r.id + '"><span class="dqp-opt-name">' + esc(r.name) + "</span></button><button type=\"button\" class=\"dqp-dl" + (done ? " is-done" : "") + "\" data-dqp-dl=\"" + esc(r.edition) + "\">" + esc(lab) + "</button></div>";
     }).join("");
     openSheet("Qāriʾ wählen", '<p class="dqp-dl-hint">Stimme spielt sofort online. Download ist freiwillig und lädt nur den gewählten Qāriʾ.</p><input class="dqp-search" data-dqp-search type="search" placeholder="Rezitator suchen" autocomplete="off"><div class="dqp-opt-list">' + rows + "</div>");
+    if (!dlLabelTimer) dlLabelTimer = setInterval(paintDownloadButtons, 1500);
   }
   function openMenu() {
     openSheet("Optionen", [
@@ -3174,15 +3279,7 @@
       if (dl) {
         ev.stopPropagation();
         ev.preventDefault();
-        var ed = dl.getAttribute("data-dqp-dl");
-        try {
-          if (window.DARQuranAudioPack && typeof window.DARQuranAudioPack.downloadReciter === "function") {
-            window.DARQuranAudioPack.downloadReciter(ed);
-          }
-        } catch (eDl) {}
-        dl.textContent = window.DARQuranAudioPack && typeof window.DARQuranAudioPack.downloadLabel === "function"
-          ? window.DARQuranAudioPack.downloadLabel(ed)
-          : "Lädt …";
+        startReciterDownload(dl);
         return;
       }
       var t = ev.target && ev.target.closest ? ev.target.closest("[data-dqp],[data-dqp-opt]") : null;
@@ -3526,37 +3623,78 @@
         time: out.hour + ":" + out.minute
       };
     }
-    function storePrayerData(data) {
+    var DAYS_KEY = "darAppleTvPrayerTimesDaysV1";
+    function readPrayerDays() {
+      try {
+        var days = JSON.parse(localStorage.getItem(DAYS_KEY) || "{}");
+        return days && typeof days === "object" ? days : {};
+      } catch (eDays) { return {}; }
+    }
+    function storePrayerDay(date, data) {
+      var days = readPrayerDays();
+      days[date] = data;
+      Object.keys(days).sort().slice(0, -10).forEach(function (k) { delete days[k]; });
+      try { localStorage.setItem(DAYS_KEY, JSON.stringify(days)); } catch (eDaysW) {}
+    }
+    function storePrayerData(data, date) {
       prayerData = data;
       try { localStorage.setItem("darAppleTvPrayerTimesV1", JSON.stringify(data)); } catch (eStore) {}
+      if (date) storePrayerDay(date, data);
       return data;
     }
-    function readPrayerFallback() {
+    function readPrayerFallback(date) {
+      var days = readPrayerDays();
+      if (date && days[date]) return days[date];
       try { return JSON.parse(localStorage.getItem("darAppleTvPrayerTimesV1") || "null"); } catch (eRead) { return null; }
+    }
+    function fetchPrayerDay(date) {
+      return fetch("/api/prayer/times?lat=50.6256&lon=6.9491&date=" + encodeURIComponent(date), { cache: "no-store" }).then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      });
+    }
+    var prefetchedFor = "";
+    function prefetchPrayerDays(today) {
+      if (prefetchedFor === today) return;
+      prefetchedFor = today;
+      var base = new Date(today + "T12:00:00Z");
+      var chain = Promise.resolve();
+      for (var i = 1; i <= 7; i += 1) {
+        (function (offset) {
+          var d = new Date(base.getTime() + offset * 86400000).toISOString().slice(0, 10);
+          if (readPrayerDays()[d]) return;
+          chain = chain.then(function () {
+            return fetchPrayerDay(d).then(function (data) { storePrayerDay(d, data); }, function () {});
+          });
+        })(i);
+      }
+      chain.then(function () { adhanLog("prayer times cached offline", Object.keys(readPrayerDays()).length + " days"); });
     }
     async function refreshPrayerTimes(force) {
       var now = berlinParts();
       if (!force && loadedDate === now.date && prayerData) return prayerData;
       loadedDate = now.date;
       try {
-        var res = await fetch("/api/prayer/times?lat=50.6256&lon=6.9491&date=" + encodeURIComponent(now.date), { cache: "no-store" });
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return storePrayerData(await res.json());
+        var data = storePrayerData(await fetchPrayerDay(now.date), now.date);
+        setTimeout(function () { prefetchPrayerDays(now.date); }, 5000);
+        return data;
       } catch (err) {
         adhanLog("prayer times fallback", String(err && err.message || err));
-        prayerData = readPrayerFallback();
+        prayerData = readPrayerFallback(now.date);
         return prayerData;
       }
     }
     async function loadAdhanCatalog() {
-      if (adhanCatalog) return adhanCatalog;
+      if (adhanCatalog && adhanCatalog.recordings && adhanCatalog.recordings.length) return adhanCatalog;
       try {
         var res = await fetch("/apple-tv/prayer/adhan.json", { cache: "no-store" });
         if (!res.ok) throw new Error("HTTP " + res.status);
         adhanCatalog = await res.json();
+        try { localStorage.setItem("darAppleTvAdhanCatalogV1", JSON.stringify(adhanCatalog)); } catch (eCatStore) {}
       } catch (err) {
         adhanLog("catalog error", String(err && err.message || err));
-        adhanCatalog = { recordings: [] };
+        try { adhanCatalog = JSON.parse(localStorage.getItem("darAppleTvAdhanCatalogV1") || "null"); } catch (eCatRead) { adhanCatalog = null; }
+        if (!adhanCatalog) adhanCatalog = { recordings: [] };
       }
       return adhanCatalog;
     }
@@ -3569,15 +3707,97 @@
       var fajr = prayerKey === "fajr";
       return rows.filter(function (r) { return !!r.isFajr === fajr; })[0] || rows[0] || null;
     }
+    function sameOriginAdhanUrl(url) {
+      try {
+        var u = new URL(url, location.href);
+        if (u.pathname.indexOf("/adhan/") === 0) return u.pathname + u.search;
+        return u.href;
+      } catch (eUrl) { return url; }
+    }
+    function cacheAdhanOffline() {
+      var pack = window.DARQuranAudioPack;
+      if (!pack || typeof pack.cacheAdhan !== "function") return;
+      if (window.__DAR_ADHAN_ACTIVE === true || isOffline()) return;
+      var picks = [selectedRecording("dhuhr"), selectedRecording("fajr")].filter(Boolean);
+      picks.reduce(function (chain, rec) {
+        return chain.then(function () {
+          return pack.cacheAdhan(rec.id, sameOriginAdhanUrl(rec.url)).then(function (ok) {
+            adhanLog("offline copy", { id: rec.id, ok: !!ok });
+          });
+        });
+      }, Promise.resolve());
+    }
+    var resumeQuranAfter = false;
+    var adhanBlobTried = false;
+    var adhanObjectUrl = "";
+    var adhanRecording = null;
+    var adhanWatch = 0;
+    var adhanStartedAt = 0;
     function pauseQuranForAdhan() {
       var quran = document.getElementById("darQuranPlayerAudio");
-      var wasPlaying = !!(quran && !quran.paused);
+      var audible = !!(quran && !quran.paused);
+      var wasPlaying = audible || !!(engine.wantPlay && state.sessionActive);
       adhanLog("blocked by quran?", wasPlaying);
-      if (wasPlaying) {
+      if (audible) {
         try { quran.pause(); } catch (ePause) {}
         adhanLog("quran paused for adhan");
       }
       return wasPlaying;
+    }
+    function clearAdhanWatch() {
+      if (adhanWatch) clearInterval(adhanWatch);
+      adhanWatch = 0;
+    }
+    function setAdhanSrc(url) {
+      var old = adhanObjectUrl;
+      adhanAudio.src = url;
+      adhanObjectUrl = String(url).indexOf("blob:") === 0 ? url : "";
+      if (old && old !== url) { try { URL.revokeObjectURL(old); } catch (eRevokeAdhan) {} }
+    }
+    function finishAdhan(reason) {
+      if (window.__DAR_ADHAN_ACTIVE !== true) return;
+      clearAdhanWatch();
+      window.__DAR_ADHAN_ACTIVE = false;
+      try { adhanAudio.pause(); } catch (eStopAdhan) {}
+      adhanLog("adhan finished", reason);
+      var resume = resumeQuranAfter;
+      resumeQuranAfter = false;
+      if (!resume) {
+        adhanLog("quran resume decision", "quran was not playing");
+        return;
+      }
+      adhanLog("quran resume decision", "resume");
+      setTimeout(function () {
+        if (window.__DAR_ADHAN_ACTIVE === true) return;
+        logAudio("resume after adhan", { surah: state.surah, ayah: state.ayah, at: state.resumeAt });
+        togglePlay(true);
+      }, 700);
+    }
+    function tryAdhanOfflineCopy(why) {
+      var pack = window.DARQuranAudioPack;
+      if (adhanBlobTried || !adhanRecording || !pack || typeof pack.adhanBlobUrl !== "function") return Promise.resolve(false);
+      adhanBlobTried = true;
+      return pack.adhanBlobUrl(adhanRecording.id).then(function (blobUrl) {
+        if (!blobUrl || window.__DAR_ADHAN_ACTIVE !== true) return false;
+        adhanLog("using offline copy", why);
+        setAdhanSrc(blobUrl);
+        adhanStartedAt = Date.now();
+        return adhanAudio.play().then(function () { return true; }, function () { return false; });
+      });
+    }
+    function armAdhanWatch() {
+      clearAdhanWatch();
+      adhanStartedAt = Date.now();
+      adhanWatch = setInterval(function () {
+        if (window.__DAR_ADHAN_ACTIVE !== true) { clearAdhanWatch(); return; }
+        var t = Number(adhanAudio.currentTime) || 0;
+        var elapsed = Date.now() - adhanStartedAt;
+        if (elapsed > 12000 && t < 0.5) {
+          tryAdhanOfflineCopy("no progress").then(function (ok) { if (!ok && Date.now() - adhanStartedAt > 12000) finishAdhan("timeout"); });
+          return;
+        }
+        if (elapsed > 8 * 60000) finishAdhan("max duration");
+      }, 3000);
     }
     async function playAdhan(prayerKey, reason) {
       if (window.__DAR_ADHAN_ACTIVE === true) return false;
@@ -3588,18 +3808,29 @@
         return false;
       }
       window.__DAR_ADHAN_ACTIVE = true;
-      pauseQuranForAdhan();
-      adhanAudio.src = recording.url;
+      adhanRecording = recording;
+      adhanBlobTried = false;
+      resumeQuranAfter = pauseQuranForAdhan();
       adhanLog("trigger prayer", { prayer: prayerKey, reason: reason || "scheduler" });
-      adhanLog("audio url", recording.url);
+      var src = recording.url;
+      var pack = window.DARQuranAudioPack;
+      if (isOffline() && pack && typeof pack.adhanBlobUrl === "function") {
+        adhanBlobTried = true;
+        var offlineUrl = await pack.adhanBlobUrl(recording.id);
+        if (offlineUrl) src = offlineUrl;
+      }
+      setAdhanSrc(src);
+      adhanLog("audio url", String(src).indexOf("blob:") === 0 ? "offline copy" : src);
       adhanLog("play requested");
+      armAdhanWatch();
       try {
         await adhanAudio.play();
         adhanLog("play resolved");
         return true;
       } catch (err) {
-        window.__DAR_ADHAN_ACTIVE = false;
         adhanLog("play rejected", { name: err && err.name, message: err && err.message });
+        if (err && err.name !== "NotAllowedError" && await tryAdhanOfflineCopy("play rejected")) return true;
+        finishAdhan("play rejected");
         return false;
       }
     }
@@ -3612,6 +3843,10 @@
       }
       return null;
     }
+    function toMinutes(hm) {
+      var m = String(hm || "").match(/^(\d{1,2}):(\d{2})/);
+      return m ? Number(m[1]) * 60 + Number(m[2]) : -1;
+    }
     async function schedulerTick() {
       var now = berlinParts();
       adhanLog("current time", now.time);
@@ -3619,10 +3854,12 @@
       var next = nextPrayer(now);
       adhanLog("next prayer", next || "tomorrow");
       if (!prayerData || !prayerData.times) return;
+      var nowMin = toMinutes(now.time);
       var keys = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
       for (var i = 0; i < keys.length; i += 1) {
         var row = prayerData.times[keys[i]];
-        if (!row || row.time !== now.time) continue;
+        var late = row ? nowMin - toMinutes(row.time) : -1;
+        if (!row || late < 0 || late > 2) continue;
         var triggerKey = now.date + ":" + keys[i];
         try {
           if (localStorage.getItem("darAppleTvLastAdhanV1") === triggerKey) return;
@@ -3633,13 +3870,14 @@
       }
     }
     adhanAudio.addEventListener("ended", function () {
-      window.__DAR_ADHAN_ACTIVE = false;
-      adhanLog("adhan finished");
-      adhanLog("quran resume decision", "paused by policy");
+      finishAdhan("ended");
     });
     adhanAudio.addEventListener("error", function () {
-      window.__DAR_ADHAN_ACTIVE = false;
-      adhanLog("play rejected", adhanAudio.error ? adhanAudio.error.code : "audio error");
+      if (window.__DAR_ADHAN_ACTIVE !== true) return;
+      adhanLog("audio error", adhanAudio.error ? adhanAudio.error.code : "audio error");
+      tryAdhanOfflineCopy("audio error").then(function (ok) {
+        if (!ok) finishAdhan("audio error");
+      });
     });
 
     window.DARAppleTVAdhan = {
@@ -3660,6 +3898,7 @@
     Promise.all([loadAdhanCatalog(), refreshPrayerTimes(true)]).then(function () {
       schedulerTick();
       if (!scheduler) scheduler = setInterval(schedulerTick, 30000);
+      setTimeout(cacheAdhanOffline, 30000);
     });
     window.addEventListener("focus", function () { refreshPrayerTimes(true).then(schedulerTick); });
     document.addEventListener("visibilitychange", function () {
@@ -3704,6 +3943,33 @@
     }, 4000);
   }
   armPersistBeat();
+  setInterval(function playbackWatchdog() {
+    if (!engine.wantPlay || window.__DAR_ADHAN_ACTIVE === true) return;
+    var a = document.getElementById("darQuranPlayerAudio");
+    if (!a || !audioHasSrc(a)) return;
+    var now = Date.now();
+    if (a.ended) {
+      if (now - (engine.endedAt || 0) < 4000) return;
+      engine.endedAt = now;
+      logAudio("watchdog advance after stuck ended", snapAudio(a));
+      engine.started = true;
+      ignoreEndedUntil = 0;
+      onEnded();
+      return;
+    }
+    if (!a.paused && now - (engine.lastProgressAt || 0) > 20000 && now - (engine.watchReloadAt || 0) > 20000) {
+      engine.watchReloadAt = now;
+      state.resumeAt = Number(a.currentTime) || 0;
+      logAudio("watchdog reload after no progress", snapAudio(a));
+      loadAudio(true, true);
+    }
+  }, 4000);
+  window.addEventListener("online", function () {
+    if (!engine.haltedOffline || window.__DAR_ADHAN_ACTIVE === true) return;
+    engine.haltedOffline = false;
+    logAudio("online again: resume", { surah: state.surah, ayah: state.ayah });
+    loadAudio(true, true);
+  });
   function onRoutePaint() {
     if (routePaintT) clearTimeout(routePaintT);
     routePaintT = setTimeout(function () {
