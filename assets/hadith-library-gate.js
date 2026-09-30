@@ -6,7 +6,6 @@
 
   var TOAST_ID = "dar-hadith-library-gate-toast";
   var DATA_LOADER_ID = "dar-hadith-library-data-loader";
-  var RENDERER_ID = "dar-hadith-library-renderer-loader";
   var DEFAULT_STATE = {
     enabled: true,
     status: "open",
@@ -44,14 +43,6 @@
     document.head.appendChild(script);
   }
 
-  function ensureRenderer() {
-    if (window.DARHadithLibraryRenderer || document.getElementById(RENDERER_ID)) return;
-    var script = document.createElement("script");
-    script.id = RENDERER_ID;
-    script.src = assetPath("hadith-library-renderer.js?v=1");
-    script.setAttribute("defer", "");
-    document.head.appendChild(script);
-  }
 
   function currentHashKey() {
     var hash = String(location.hash || "").replace(/^#\/?/, "");
@@ -144,7 +135,6 @@
 
   function navigateToLibrary() {
     ensureDataLoader();
-    ensureRenderer();
     if (!isOpen()) {
       toast(gateState.lockedMessage || DEFAULT_STATE.lockedMessage);
       return;
@@ -175,7 +165,6 @@
   function refresh() {
     ensureCss();
     ensureDataLoader();
-    ensureRenderer();
     stripInjectedCard();
     loadGateState().then(function () {
       blockLockedRoute();
@@ -188,8 +177,7 @@
     open: navigateToLibrary,
     state: function () { return gateState; },
     data: function () { return window.DARHadithLibraryData || null; },
-    ensureDataLoader: ensureDataLoader,
-    ensureRenderer: ensureRenderer
+    ensureDataLoader: ensureDataLoader
   };
 
   if (document.readyState === "loading") {
