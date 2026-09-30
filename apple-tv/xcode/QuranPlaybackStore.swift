@@ -108,17 +108,31 @@ final class QuranPlaybackStore: ObservableObject {
     private func handleItemFailure() {
         guard let verse = currentVerse else { return }
 
-        if triedFallbackForIndex != currentIndex,
-           let fallback = Self.fallbackAudioURL(for: verse.audioURLString) {
+        if triedFallbackForIndex != currentIndex {
             triedFallbackForIndex = currentIndex
-            startDownloadAndPlay(url: fallback)
-            return
+            if let original = verse.audioURL,
+               original.absoluteString != (Self.siteAudioURL(edition: surah?.reciterIdentifier, verse: verse)?.absoluteString ?? "") {
+                startDownloadAndPlay(url: original)
+                return
+            }
+            if let fallback = Self.fallbackAudioURL(for: verse.audioURLString) {
+                startDownloadAndPlay(url: fallback)
+                return
+            }
         }
 
         advanceAfterPlayback()
     }
 
+    private static func siteAudioURL(edition: String?, verse: QuranSynchronizedVerse) -> URL? {
+        guard let edition, !edition.isEmpty, verse.globalNumber >= 1 else { return nil }
+        return URL(string: "https://dar-al-tawhid.de/quran-audio/\(edition)/\(verse.globalNumber).mp3")
+    }
+
     private static func fallbackAudioURL(for urlString: String) -> URL? {
+        if urlString.contains("dar-al-tawhid.de/quran-audio/") {
+            return nil
+        }
         guard urlString.contains("/audio/128/") else { return nil }
         return URL(string: urlString.replacingOccurrences(of: "/audio/128/", with: "/audio/64/"))
     }
@@ -239,8 +253,14 @@ final class QuranPlaybackStore: ObservableObject {
     }
 
     func playCurrent() {
-        guard let verse = currentVerse,
-              let url = verse.audioURL else {
+        guard let verse = currentVerse else {
+            isPlaying = false
+            return
+        }
+
+        let url = Self.siteAudioURL(edition: surah?.reciterIdentifier, verse: verse)
+            ?? verse.audioURL
+        guard let url else {
             isPlaying = false
             return
         }
