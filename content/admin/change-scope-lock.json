@@ -6641,6 +6641,18 @@
         ".github/workflows/voice-studio-v2-validate.yml"
       ],
       "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
+      "id": "quran-tadabbur-shared-live-ios-tvos-2026-09-30",
+      "approvedBy": "user-explicit-mach-weiter-push-apple-tv-ios-webapp",
+      "reason": "Nutzer: Taddabur weiterführen und denselben geprüften Qurʾān-Taddabur-Datenstand direkt in Apple TV, iOS-App und Web-App verfügbar machen. Nur Taddabur-Datenbaum und Qurʾān-Player-Taddabur-Loader; keine Push-Benachrichtigungslogik.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "apple-tv/quran/tadabbur/",
+        "assets/dar-quran-player.js",
+        "test/assets/dar-quran-player.js"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
     }
   ],
   "enabled": true
