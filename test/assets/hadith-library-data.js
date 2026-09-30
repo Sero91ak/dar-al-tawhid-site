@@ -132,7 +132,7 @@
         return fetchJson(absolute(root, seriesDir + file), version);
       })).then(function (records) {
         return records
-          .filter(hasVerifiedSharh)
+          .filter(function (record) { return record && (record.recordType || "hadith") === "hadith" && record.id; })
           .map(function (record) {
             var out = toLibraryRecord(record);
             out.seriesId = series.id || index.series || null;
