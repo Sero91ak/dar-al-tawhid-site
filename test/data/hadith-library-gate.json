@@ -10,9 +10,9 @@
   "lockedMessage": "",
   "chips": ["Test", "Šarḥ", "Quelle"],
   "surfaces": {
-    "iosApp": false,
-    "androidWebApp": false,
-    "website": false,
+    "iosApp": true,
+    "androidWebApp": true,
+    "website": true,
     "testApp": true,
     "appleTvScreensaver": false
   },
@@ -25,5 +25,5 @@
     "hideOutsideMoreRoute": true,
     "disableTopFallback": true
   },
-  "releaseRule": "Nur die Test-App ist geöffnet. Die Besucher-App bleibt gesperrt, bis ausdrücklich live freigegeben wird."
+  "releaseRule": "Test-App und offizielle iOS-App sind geöffnet, wie die Web-Apps."
 }
