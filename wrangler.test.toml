@@ -17,7 +17,8 @@ routes = []
 watch_paths = [
   "test/**",
   "wrangler.test.toml",
-  "cloudflare/test-app-worker.js"
+  "cloudflare/test-app-worker.js",
+  "cloudflare/preview-gate.js"
 ]
 
 [assets]
@@ -27,3 +28,8 @@ binding = "ASSETS"
 # Workers AI: Qurʾān-Wortprüfung im Kids-Lernmodus.
 [ai]
 binding = "AI"
+
+[vars]
+PREVIEW_GATE_USER = "Dawud"
+PREVIEW_GATE_PASS = "Malik20"
+

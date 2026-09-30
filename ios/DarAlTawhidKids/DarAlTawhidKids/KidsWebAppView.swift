@@ -36,11 +36,12 @@ struct KidsWebAppView: UIViewRepresentable {
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         webView.scrollView.bounces = false
         webView.allowsBackForwardNavigationGestures = false
-        webView.isOpaque = false
+        webView.isOpaque = true
         webView.backgroundColor = UIColor(red: 12 / 255, green: 38 / 255, blue: 54 / 255, alpha: 1)
         webView.scrollView.backgroundColor = webView.backgroundColor
         webView.navigationDelegate = context.coordinator
         webView.uiDelegate = context.coordinator
+        webView.alpha = 1
         context.coordinator.loadKidsHome(in: webView)
         return webView
     }
@@ -51,7 +52,7 @@ struct KidsWebAppView: UIViewRepresentable {
         private var hasPresentedInitialPage = false
 
         func loadKidsHome(in webView: WKWebView) {
-            webView.alpha = 0
+            webView.alpha = 1
             hasPresentedInitialPage = false
             webView.load(
                 URLRequest(

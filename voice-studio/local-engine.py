@@ -7,10 +7,10 @@ from pathlib import Path
 from urllib.parse import urlparse, parse_qs
 import hmac
 try:
-    from speech_flow import prepare_flow_text
+    from speech_flow import prepare_flow_text, FLOW_WEAK_ENDINGS
 except ModuleNotFoundError:
     sys.path.insert(0,str(Path(__file__).resolve().parent))
-    from speech_flow import prepare_flow_text
+    from speech_flow import prepare_flow_text, FLOW_WEAK_ENDINGS
 
 # Apple-Silicon: unsupported MPS ops dürfen auf CPU zurückfallen statt den Render abzubrechen.
 os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
@@ -54,6 +54,13 @@ PENDING_AUDIO_DIR.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_MANIFEST=MASTER_AUDIO_DIR/"manifest.json"
 LEARNING_HOME=VOICE_HOME/"PronunciationLearning"
 LEARNING_PENDING_DIR=LEARNING_HOME/"pending"
+ALPHABET_MASTER_HOME=VOICE_HOME/"AlphabetMasters"
+ALPHABET_MASTER_STATE=ALPHABET_MASTER_HOME/"local-masters.json"
+ALPHABET_EXPORT_HOME=VOICE_HOME/"KidsAppExport"
+ALPHABET_BATCH_STATE_FILE=ALPHABET_EXPORT_HOME/"batch-state.json"
+ALPHABET_PUBLISH_REPO=VOICE_HOME/"KidsAppPublishRepo"
+ALPHABET_GENERATION_PROFILE="fusha-strict-v2"
+QUIZ_MASTER_HOME=VOICE_HOME/"QuizMasters"
 USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
 USER_OVERRIDES_BACKUP_DIR=LEARNING_HOME/"backups"
 USER_OVERRIDES_BACKUP=USER_OVERRIDES_BACKUP_DIR/"user-overrides.latest.json"
@@ -68,6 +75,9 @@ RENDER_CACHE_DIR=VOICE_HOME/"RenderCache"/"v3"
 CONTEXT_BRIDGE_CACHE_DIR=RENDER_CACHE_DIR/"context-bridge-v1"
 LEARNING_HOME.mkdir(parents=True,exist_ok=True)
 LEARNING_PENDING_DIR.mkdir(parents=True,exist_ok=True)
+ALPHABET_MASTER_HOME.mkdir(parents=True,exist_ok=True)
+ALPHABET_EXPORT_HOME.mkdir(parents=True,exist_ok=True)
+QUIZ_MASTER_HOME.mkdir(parents=True,exist_ok=True)
 RENDER_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 CONTEXT_BRIDGE_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_URL=os.environ.get(
@@ -79,12 +89,52 @@ MASTER_LIBRARY_URL=os.environ.get(
     "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/data/pronunciation/islamic-master-library.json"
 )
 LEARNING_LOCK=threading.Lock()
+ALPHABET_MASTER_LOCK=threading.Lock()
+ALPHABET_BATCH_LOCK=threading.Lock()
+ALPHABET_BATCH_STATE_LOCK=threading.Lock()
 LEARNING_PREVIEWS={}
+ALPHABET_BATCH_STATE={
+    "running":False,
+    "phase":"idle",
+    "progress":0,
+    "completed":0,
+    "total":226,
+    "current":"",
+    "error":"",
+    "exportPath":"",
+    "zipPath":"",
+    "repoPublished":False,
+    "repoPublishError":"",
+    "startedAt":"",
+    "finishedAt":"",
+}
 
 def load_json_file(path:Path,default):
     try:
         if path.exists():
-            return json.loads(path.read_text(encoding="utf-8"))
+            raw=path.read_text(encoding="utf-8")
+            try:
+                return json.loads(raw)
+            except json.JSONDecodeError:
+                # 2.9.26–2.9.32 konnten bei atomaren JSON-Schreibvorgängen
+                # versehentlich die zwei Literalzeichen "\\n" hinter ein
+                # ansonsten gültiges JSON setzen. Diesen exakt bekannten Altfall
+                # einmalig reparieren; sonst niemals Daten stillschweigend ändern.
+                repaired=raw
+                changed=False
+                while repaired.endswith("\\n"):
+                    repaired=repaired[:-2]
+                    changed=True
+                if changed:
+                    repaired=repaired.rstrip()+"\n"
+                    parsed=json.loads(repaired)
+                    try:
+                        path.write_text(repaired,encoding="utf-8")
+                        print("[DĀR Voice] legacy JSON terminator repaired:",path,flush=True)
+                    except Exception as write_error:
+                        print("[DĀR Voice] JSON repair write warning",path,write_error,flush=True)
+                    return parsed
+                raise
     except Exception as e:
         print("[DĀR Voice] JSON load warning",path,e,flush=True)
         # Ein beschädigter, reproduzierbarer Online-Cache wird automatisch
@@ -104,11 +154,77 @@ def atomic_write_json(path:Path,data):
     # Prozess-eigene Tempdatei verhindert Cache-Kollisionen bei parallelen Starts.
     tmp=path.with_name(path.name+f".tmp.{os.getpid()}.{uuid.uuid4().hex[:8]}")
     try:
-        tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+        tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         os.replace(tmp,path)
     finally:
         try: tmp.unlink(missing_ok=True)
         except Exception: pass
+
+
+def load_kids_repo_json(local_name:str,repo_path:str,validator):
+    """Load packaged Kids JSON and self-heal a missing/invalid installer copy.
+
+    GitHub's Contents API can return either the requested raw media or a JSON
+    envelope containing base64 data. Both forms are accepted. A valid remote
+    recovery is persisted into APP_HOME so the next app start is fully local.
+    """
+    local_path=APP_HOME/local_name
+    local=load_json_file(local_path,{})
+    try:
+        if validator(local):
+            return local
+    except Exception:
+        pass
+
+    url=(
+        "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/"
+        +repo_path+"?ref=main"
+    )
+    try:
+        req=urllib.request.Request(
+            url,
+            headers={
+                "Accept":"application/vnd.github.raw+json",
+                "User-Agent":"DAR-Voice-Studio-Kids-Manifest-Recovery/1",
+            },
+        )
+        with urllib.request.urlopen(req,timeout=25) as response:
+            raw=response.read()
+        try:
+            remote=json.loads(raw.decode("utf-8"))
+        except Exception:
+            remote=None
+
+        if isinstance(remote,dict) and isinstance(remote.get("content"),str):
+            decoded=base64.b64decode(re.sub(r"\s+","",remote["content"]))
+            remote=json.loads(decoded.decode("utf-8"))
+        elif not isinstance(remote,dict):
+            remote=json.loads(raw.decode("utf-8"))
+
+        if not validator(remote):
+            raise ValueError("GitHub lieferte eine ungültige Kids-Datendatei.")
+
+        atomic_write_json(local_path,remote)
+        print("[DĀR Voice] Kids data self-healed:",local_path,flush=True)
+        return remote
+    except Exception as e:
+        raise RuntimeError(
+            f"{local_name} fehlt oder ist ungültig; automatische Wiederherstellung fehlgeschlagen: {e}"
+        ) from e
+
+def load_alphabet_manifest():
+    return load_kids_repo_json(
+        "alphabet-audio.json",
+        "kids/data/alphabet-audio.json",
+        lambda d:isinstance(d,dict) and isinstance((d.get("letters") or {}).get("alif"),dict),
+    )
+
+def load_quiz_manifest():
+    return load_kids_repo_json(
+        "quiz-kids.json",
+        "kids/data/quiz-kids.json",
+        lambda d:isinstance(d,dict) and len(d.get("items") or [])>0,
+    )
 
 def normalize_lookup(value:str):
     text=unicodedata.normalize("NFKD",str(value or "").casefold())
@@ -474,6 +590,14 @@ def audio_lock_key_for_chunk(text:str):
     value=str(text or "").strip()
     value=value.strip(AUDIO_LOCK_EDGE_CHARS)
     return AUDIO_LOCK_BY_TTS.get(value,"")
+
+def honorific_lock_keys_in_chunk(text:str):
+    value=str(text or "")
+    found=[]
+    for form,key in AUDIO_LOCK_BY_TTS.items():
+        if key in HONORIFIC_KEYS and form and form in value and key not in found:
+            found.append(key)
+    return found
 
 def learning_audio_backup_path(key:str):
     safe=re.sub(r"[^a-z0-9_-]+","_",str(key or "").lower()).strip("_")
@@ -997,12 +1121,176 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
     append_learning_log("preview",term=term,canonical=meta["canonical"],lockKey=lock_key)
     return meta
 
+
+def _alphabet_slot_kind(slot_id:str):
+    parts=[p for p in str(slot_id or "").strip().lower().split("-") if p]
+    if len(parts)>=2 and parts[1] in ("name","harakat","word"):
+        return parts[1],(parts[2] if len(parts)>=3 else "")
+    return "",""
+
+def _alphabet_expected_duration(kind:str):
+    if kind=="harakat":
+        return (0.18,1.35)
+    if kind=="name":
+        return (0.32,2.40)
+    if kind=="word":
+        return (0.30,3.20)
+    return (0.18,3.20)
+
+def _extract_repeated_pronunciation_token(wav,sr:int,expected_count:int=3):
+    """Extract one clean token from a repeated short-learning render.
+
+    Very short Arabic CV targets such as بَ / بِ / بُ are unreliable when sent
+    to TTS as a single glyph: the model can swallow the token or emit silence.
+    Repeating the exact target three times gives the acoustic model enough
+    context. We then isolate one voiced island and return only that token.
+    """
+    import torch
+    w=normalize_segment_shape(wav)
+    meta={"repeatedTokenExtracted":False,"detectedTokens":0}
+    if not w.numel():
+        return w,meta
+
+    env=w.abs().amax(dim=0)
+    peak=float(env.max().item()) if env.numel() else 0.0
+    if peak<=1e-7:
+        return w,meta
+
+    frame=max(1,int(sr*0.010))
+    count=env.numel()//frame
+    if count<8:
+        return w,meta
+    framed=env[:count*frame].reshape(count,frame).mean(dim=1)
+    threshold=max(peak*0.018,0.00035)
+    active=(framed>threshold).tolist()
+
+    # Merge tiny internal gaps (<60 ms) so fricatives/stops are not split.
+    max_gap=6
+    i=0
+    while i<len(active):
+        if active[i]:
+            i+=1
+            continue
+        j=i
+        while j<len(active) and not active[j]:
+            j+=1
+        if i>0 and j<len(active) and (j-i)<=max_gap:
+            for k in range(i,j): active[k]=True
+        i=j
+
+    runs=[]
+    start=None
+    for i,flag in enumerate(active+[False]):
+        if flag and start is None:
+            start=i
+        elif not flag and start is not None:
+            dur_ms=(i-start)*10
+            if 90<=dur_ms<=2200:
+                runs.append((start,i,dur_ms))
+            start=None
+
+    meta["detectedTokens"]=len(runs)
+    if not runs:
+        return trim_segment_edges(w,sr,aggressive=True,inline=True),meta
+
+    # Prefer a central token among the expected repetitions; otherwise choose
+    # the duration closest to the median to avoid clipped first/last attempts.
+    usable=runs
+    if len(runs)>=expected_count:
+        center=len(runs)//2
+        usable=runs[max(0,center-1):min(len(runs),center+2)]
+    durations=sorted(x[2] for x in usable)
+    median=durations[len(durations)//2]
+    chosen=min(usable,key=lambda x:(abs(x[2]-median),abs((x[0]+x[1])/2-count/2)))
+
+    pad=max(1,int(sr*0.025))
+    s=max(0,chosen[0]*frame-pad)
+    e=min(w.shape[-1],chosen[1]*frame+pad)
+    out=w[...,s:e]
+    out=trim_segment_edges(out,sr,aggressive=True,inline=True)
+    meta.update({
+        "repeatedTokenExtracted":True,
+        "selectedDurationMs":int(round(out.shape[-1]/max(1,sr)*1000)),
+    })
+    return out,meta
+
+def _alphabet_render_prompt(value:str,kind:str):
+    value=str(value or "").strip()
+    if kind=="harakat":
+        # Exact same Fuṣḥā target repeated; no carrier word is introduced that
+        # could contaminate the learned syllable.
+        return f"{value}. {value}. {value}.",3
+    return value,1
+
+def _render_repeated_harakat_raw(model,prompt:str,seed_base:int):
+    """Render the deliberate repeated Ḥarakāt prompt without final short-token QA.
+
+    The prompt contains the same target three times only so the acoustic model
+    reliably produces the tiny CV syllable. Running the normal final Arabic
+    duration QA on that temporary triple render is wrong by construction and
+    caused short_arabic_too_long before extraction could happen.
+
+    This stage therefore checks only hard waveform/generation failures. The
+    isolated single token is still passed through the normal strict
+    audio_quality_metrics() afterwards.
+    """
+    import torch
+
+    attempts=max(2,int(QA_CONFIG.get("inlineArabicRenderAttempts",4)))
+    seed_offset=max(1,int(QA_CONFIG.get("retrySeedOffset",97)))
+    last_error=""
+
+    for attempt in range(attempts):
+        torch.manual_seed(max(1,int(seed_base))+attempt*seed_offset)
+        try:
+            wav=render_with_model(model,prompt,"ar","kids_lesson")
+        except GenerationTimeoutReached as e:
+            last_error="generation_timeout: "+str(e)
+            continue
+        except GenerationTokenLimitReached as e:
+            last_error="generation_token_limit: "+str(e)
+            continue
+        except Exception as e:
+            last_error=str(e)
+            continue
+
+        metrics=audio_quality_metrics(
+            wav,int(model.sr),prompt,"ar","kids_lesson"
+        )
+        # The repeated working prompt is intentionally longer and contains
+        # pauses between repetitions. Those are not defects in the final clip.
+        ignored={
+            "short_arabic_too_long",
+            "unexpected_internal_hold",
+            "inline_arabic_internal_hold",
+            "excessive_internal_pause",
+            "suspicious_sustained_hold",
+            "segment_too_long",
+            "speech_rate_too_slow",
+        }
+        hard=[x for x in (metrics.get("issues") or []) if x not in ignored]
+        if hard:
+            last_error=", ".join(hard)
+            continue
+
+        metrics["temporaryRepeatedHarakatRender"]=True
+        metrics["ignoredPreExtractionIssues"]=[
+            x for x in (metrics.get("issues") or []) if x in ignored
+        ]
+        return wav,metrics
+
+    raise RuntimeError(
+        "Ḥarakāt-Rohaufnahme konnte nicht sauber erzeugt werden"
+        +(": "+last_error if last_error else "")
+    )
+
 def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
     """Generate one Arabic learning clip in the local Serhat voice.
 
-    Nothing is published here. The returned WAV is only a candidate; the user
-    must listen and explicitly approve it before Cloudflare is used as a
-    publisher for the Kids manifest.
+    Alphabet learning is now Fuṣḥā-strict. Technical QA never counts as
+    linguistic approval. For isolated Ḥarakāt the target is rendered three
+    times, one clean token is extracted, and that isolated token is measured
+    again before it is offered for review.
     """
     value=str(text or "").strip()
     if not value:
@@ -1012,25 +1300,98 @@ def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
 
     model=load_production_model()
     slot=str(slot_id or "alphabet").strip()
+    kind,key=_alphabet_slot_kind(slot)
     variant=max(0,min(99,int(variant or 0)))
     digest=int(hashlib.sha1((slot+"|"+value).encode("utf-8")).hexdigest()[:8],16)
-    seed=7000+(digest%500000)+(variant*173)
+    seed0=7000+(digest%500000)+(variant*173)
 
-    wav,metrics=render_segment_with_qa(
-        model,
-        value,
-        "ar",
-        "kids_lesson",
-        True,
-        seed_base=seed
-    )
-    wav=trim_segment_edges(
-        wav,
-        int(model.sr),
-        aggressive=True,
-        inline=is_inline_arabic_micro_term(value),
-        lexical=False
-    )
+    prompt,repeat_count=_alphabet_render_prompt(value,kind)
+    min_dur,max_dur=_alphabet_expected_duration(kind)
+    best=None
+    failures=[]
+
+    # Outer candidates are deliberate pronunciation variants. We keep the
+    # technically cleanest one; none is linguistically auto-approved.
+    for outer in range(4):
+        seed=seed0+outer*997
+        try:
+            if repeat_count>1:
+                # Temporary triple render: do not apply the final short-Arabic
+                # duration rule until one clean token has been isolated.
+                wav,render_metrics=_render_repeated_harakat_raw(
+                    model,prompt,seed
+                )
+            else:
+                wav,render_metrics=render_segment_with_qa(
+                    model,
+                    prompt,
+                    "ar",
+                    "kids_lesson",
+                    True,
+                    seed_base=seed
+                )
+        except Exception as e:
+            failures.append(str(e))
+            continue
+
+        extraction={}
+        if repeat_count>1:
+            wav,extraction=_extract_repeated_pronunciation_token(
+                wav,int(model.sr),repeat_count
+            )
+        else:
+            wav=trim_segment_edges(
+                wav,int(model.sr),
+                aggressive=True,
+                inline=is_inline_arabic_micro_term(value),
+                lexical=False
+            )
+
+        final_metrics=audio_quality_metrics(
+            wav,int(model.sr),value,"ar","kids_lesson"
+        )
+        duration=float(final_metrics.get("duration_s",0) or 0)
+        issues=list(final_metrics.get("issues") or [])
+        if duration<min_dur:
+            issues.append("alphabet_target_too_short")
+        if duration>max_dur:
+            issues.append("alphabet_target_too_long")
+        if kind=="harakat" and repeat_count>1 and not extraction.get("repeatedTokenExtracted"):
+            issues.append("harakat_token_not_isolated")
+        final_metrics["issues"]=list(dict.fromkeys(issues))
+        final_metrics["fushaStrict"]=True
+        final_metrics["alphabetKind"]=kind or "unknown"
+        final_metrics["alphabetKey"]=key
+        final_metrics["renderPrompt"]=prompt
+        final_metrics["renderAttempt"]=outer+1
+        final_metrics["preExtractionMetrics"]=render_metrics
+        final_metrics.update(extraction)
+
+        score=(
+            len(final_metrics["issues"])*1000
+            +abs(duration-({"harakat":0.65,"name":1.05,"word":1.20}.get(kind,1.0)))*10
+            +float(final_metrics.get("max_internal_silence_ms",0) or 0)/1000
+        )
+        candidate=(score,wav,final_metrics)
+        if best is None or score<best[0]:
+            best=candidate
+        if not final_metrics["issues"]:
+            break
+
+    if best is None:
+        raise RuntimeError(
+            "Fuṣḥā-Serhat-Kandidat konnte nicht erzeugt werden. "
+            +(failures[-1] if failures else "Unbekannter Renderfehler.")
+        )
+
+    _,wav,metrics=best
+    hard=list(metrics.get("issues") or [])
+    if hard:
+        raise RuntimeError(
+            "Fuṣḥā-Serhat-Kandidat verworfen: "
+            +", ".join(hard)
+            +" · Text: "+value
+        )
 
     preview_id=uuid.uuid4().hex[:16]
     path=LEARNING_PENDING_DIR/f"alphabet-{preview_id}.wav"
@@ -1043,8 +1404,839 @@ def create_alphabet_voice_preview(text:str,slot_id:str="",variant:int=0):
         "variant":variant,
         "sample_rate":int(model.sr),
         "metrics":metrics,
-        "voice":"serhat-local-owner-voice"
+        "voice":"serhat-local-owner-voice",
+        "generationProfile":ALPHABET_GENERATION_PROFILE,
+        "fushaStrict":True,
+        "linguisticVerified":False,
     }
+
+def alphabet_master_state():
+    state=load_json_file(ALPHABET_MASTER_STATE,{"schemaVersion":1,"masters":[]})
+    masters=list((state or {}).get("masters") or [])
+    return {
+        "schemaVersion":1,
+        "masters":masters,
+        "count":len(masters),
+        "persistentPath":str(ALPHABET_MASTER_STATE),
+    }
+
+def confirm_alphabet_voice_preview(
+    preview_id:str,slot_id:str,letter_id:str,kind:str,key:str,text:str,
+    linguistic_verified:bool=True
+):
+    preview_id=str(preview_id or "").strip()
+    if not re.fullmatch(r"[0-9a-f]{16}",preview_id):
+        raise ValueError("Der Serhat-Kandidat ist nicht mehr gültig. Bitte neu erzeugen.")
+    slot_id=str(slot_id or "").strip().lower()
+    if not re.fullmatch(r"[a-z0-9_-]{3,80}",slot_id):
+        raise ValueError("Ungültiger Alphabet-Slot.")
+    letter_id=str(letter_id or "").strip().lower()
+    kind=str(kind or "").strip().lower()
+    key=str(key or "").strip().lower()
+    value=str(text or "").strip()
+    if not letter_id or kind not in ("name","harakat","word") or not value:
+        raise ValueError("Alphabet-Master ist unvollständig.")
+
+    src=LEARNING_PENDING_DIR/f"alphabet-{preview_id}.wav"
+    if not src.exists() or src.stat().st_size<=44:
+        raise ValueError("Der erzeugte Serhat-Kandidat fehlt. Bitte neu erzeugen.")
+
+    filename=re.sub(r"[^a-z0-9_-]+","-",slot_id).strip("-")+".wav"
+    dst=ALPHABET_MASTER_HOME/filename
+    tmp=dst.with_suffix(".tmp.wav")
+    shutil.copy2(src,tmp)
+    os.replace(tmp,dst)
+
+    master={
+        "slotId":slot_id,
+        "letterId":letter_id,
+        "kind":kind,
+        "key":key,
+        "text":value,
+        "verified":bool(linguistic_verified),
+        "linguisticVerified":bool(linguistic_verified),
+        "technicalQaPassed":True,
+        "reviewStatus":"approved" if linguistic_verified else "needs-human-review",
+        "sourceVoice":"authorized-owner-voice",
+        "voiceProfileId":"serhat-owner-voice-2026",
+        "sourceType":"local-owner-confirmed-master",
+        "generationProfile":ALPHABET_GENERATION_PROFILE,
+        "url":"/alphabet/master/"+filename,
+        "filename":filename,
+        "confirmedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "reviewedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z") if linguistic_verified else "",
+    }
+    with ALPHABET_MASTER_LOCK:
+        state=alphabet_master_state()
+        masters=[
+            dict(item) for item in (state.get("masters") or [])
+            if str((item or {}).get("slotId") or "")!=slot_id
+        ]
+        masters.append(master)
+        masters.sort(key=lambda x:str(x.get("slotId") or ""))
+        atomic_write_json(ALPHABET_MASTER_STATE,{
+            "schemaVersion":1,
+            "updatedAt":master["confirmedAt"],
+            "masters":masters,
+        })
+    try:
+        src.unlink(missing_ok=True)
+    except Exception:
+        pass
+    return master
+
+
+def approve_existing_alphabet_master(slot_id:str):
+    slot_id=str(slot_id or "").strip().lower()
+    if not re.fullmatch(r"[a-z0-9_-]{3,80}",slot_id):
+        raise ValueError("Ungültiger Alphabet-Slot.")
+    now=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    with ALPHABET_MASTER_LOCK:
+        state=alphabet_master_state()
+        masters=[]
+        approved=None
+        for raw in (state.get("masters") or []):
+            item=dict(raw or {})
+            if str(item.get("slotId") or "")==slot_id:
+                item["verified"]=True
+                item["linguisticVerified"]=True
+                item["technicalQaPassed"]=True
+                item["reviewStatus"]="approved"
+                item["reviewedAt"]=now
+                approved=item
+            masters.append(item)
+        if approved is None:
+            raise ValueError("Lokaler Serhat-Master für diesen Slot fehlt.")
+        atomic_write_json(ALPHABET_MASTER_STATE,{
+            "schemaVersion":1,
+            "updatedAt":now,
+            "masters":masters,
+        })
+    return approved
+
+def _alphabet_batch_snapshot():
+    with ALPHABET_BATCH_STATE_LOCK:
+        data=dict(ALPHABET_BATCH_STATE)
+    data["persistentStatePath"]=str(ALPHABET_BATCH_STATE_FILE)
+    return data
+
+def _set_alphabet_batch_state(**updates):
+    with ALPHABET_BATCH_STATE_LOCK:
+        ALPHABET_BATCH_STATE.update(updates)
+        data=dict(ALPHABET_BATCH_STATE)
+    try:
+        atomic_write_json(ALPHABET_BATCH_STATE_FILE,data)
+    except Exception:
+        pass
+    return data
+
+def _alphabet_slot(manifest,letter_id:str,kind:str,key:str=""):
+    letter=(manifest.get("letters") or {}).get(letter_id) or {}
+    if kind=="harakat":
+        return (letter.get("harakat") or {}).get(key)
+    return letter.get(kind)
+
+def _alphabet_tasks(manifest):
+    tasks=[]
+    for letter_id,letter in (manifest.get("letters") or {}).items():
+        if letter.get("name"):
+            tasks.append((letter_id,"name","",letter["name"]))
+        for key in ("fatha","kasra","damma"):
+            slot=(letter.get("harakat") or {}).get(key)
+            if slot:
+                tasks.append((letter_id,"harakat",key,slot))
+        if letter.get("word"):
+            tasks.append((letter_id,"word","",letter["word"]))
+    return tasks
+
+def _audio_duration_seconds(path:Path):
+    import wave
+    path=Path(path)
+    if path.suffix.lower()==".wav":
+        with wave.open(str(path),"rb") as wf:
+            return float(wf.getnframes())/max(1,int(wf.getframerate()))
+    ffmpeg=find_ffmpeg()
+    ffprobe=None
+    if ffmpeg:
+        candidate=Path(ffmpeg).with_name("ffprobe")
+        if candidate.exists():
+            ffprobe=str(candidate)
+    ffprobe=ffprobe or shutil.which("ffprobe")
+    if not ffprobe:
+        return 0.0
+    try:
+        out=subprocess.check_output(
+            [ffprobe,"-v","error","-show_entries","format=duration","-of","default=nw=1:nk=1",str(path)],
+            text=True,stderr=subprocess.DEVNULL,timeout=15
+        ).strip()
+        return float(out or 0.0)
+    except Exception:
+        return 0.0
+
+def _encode_kids_m4a(src:Path,dst:Path):
+    src=Path(src);dst=Path(dst)
+    if not src.exists() or src.stat().st_size<=44:
+        raise RuntimeError("Lokaler Serhat-Master fehlt: "+str(src))
+    ffmpeg=find_ffmpeg()
+    if not ffmpeg:
+        raise RuntimeError("ffmpeg fehlt – Kids-App-M4A kann nicht erstellt werden.")
+    dst.parent.mkdir(parents=True,exist_ok=True)
+    tmp=dst.with_suffix(".tmp.m4a")
+    cmd=[
+        ffmpeg,"-y","-v","error","-i",str(src),
+        "-vn","-ac","1","-ar","24000",
+        "-c:a","aac","-b:a","72k",
+        "-movflags","+faststart",
+        str(tmp)
+    ]
+    p=subprocess.run(cmd,capture_output=True,text=True)
+    if p.returncode!=0 or not tmp.exists() or tmp.stat().st_size<=1024:
+        try: tmp.unlink(missing_ok=True)
+        except Exception: pass
+        raise RuntimeError("Kids-App-Audio konnte nicht erstellt werden. "+(p.stderr or "")[-800:])
+    os.replace(tmp,dst)
+    return dst
+
+def _slot_asset_name(kind:str,key:str):
+    return (key if kind=="harakat" else kind)+".m4a"
+
+def _promote_slot_to_owner_voice(slot:dict,letter_id:str,kind:str,key:str,asset:Path,metrics:dict,build_id:str):
+    now=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    old_external=None
+    old_url=str(slot.get("url") or "").strip()
+    old_type=str(slot.get("sourceType") or "").strip()
+    if old_url and old_type.startswith("external-"):
+        old_external={
+            "url":old_url,
+            "sourceType":old_type,
+            "sourceProvider":slot.get("sourceProvider"),
+            "sourceSpeaker":slot.get("sourceSpeaker"),
+            "sourceLanguage":slot.get("sourceLanguage"),
+            "sourceTranscription":slot.get("sourceTranscription"),
+            "sourcePage":slot.get("sourcePage"),
+            "sourceFile":slot.get("sourceFile"),
+            "license":slot.get("license"),
+            "licenseUrl":slot.get("licenseUrl"),
+            "attribution":slot.get("attribution"),
+            "archivedAt":now,
+            "archiveReason":"Live-Lernclip durch autorisierte Serhat-Eigentümerstimme ersetzt."
+        }
+    alternates=[dict(x) for x in (slot.get("alternateSources") or []) if isinstance(x,dict)]
+    if old_external and not any(str(x.get("url") or "")==old_url for x in alternates):
+        alternates.append(old_external)
+
+    rel="/kids/assets/kids-alphabet-audio/"+letter_id+"/"+_slot_asset_name(kind,key)
+    sha=hashlib.sha256(asset.read_bytes()).hexdigest()
+    slot.update({
+        "verified":False,
+        "linguisticVerified":False,
+        "technicalQaPassed":True,
+        "reviewStatus":"needs-human-review",
+        "url":rel+"?v="+build_id,
+        "expectedPath":rel,
+        "sha256":sha,
+        "qaBy":"local-serhat-engine-auto-qa",
+        "qaAt":now,
+        "qaDurationSeconds":round(_audio_duration_seconds(asset),3),
+        "qaMetrics":metrics or {},
+        "sourceType":"owner-voice-generated",
+        "generationProfile":ALPHABET_GENERATION_PROFILE,
+        "sourceProvider":"DĀR Voice Studio · lokale Serhat Engine",
+        "sourceSpeaker":"Serhat Abu Malik",
+        "sourceLanguage":"Arabic / Fuṣḥā learning",
+        "sourceTranscription":str(slot.get("text") or ""),
+        "sourcePage":"",
+        "sourceFile":asset.name,
+        "license":"Owner-authorized",
+        "licenseUrl":"",
+        "attribution":"Serhat Abu Malik · DĀR AL TAWḤĪD",
+        "verificationBasis":"Technische QA bestanden; sprachliche Aussprache muss separat menschlich bestätigt werden.",
+        "voiceProfileId":"serhat-owner-voice-2026",
+        "sourceVoice":"authorized-owner-voice",
+        "canonicalVoice":True,
+        "sameVoiceConfirmed":True,
+        "autoApproved":False,
+        "requiresManualReview":True,
+    })
+    if alternates:
+        slot["alternateSources"]=alternates
+
+
+def _quiz_voice_texts(quiz_data):
+    texts=[]
+    seen=set()
+    def add(value):
+        text=re.sub(r"\s+"," ",str(value or "")).strip()
+        if text and text not in seen:
+            seen.add(text);texts.append(text)
+    for item in (quiz_data.get("items") or []):
+        question=str(item.get("question") or "").strip()
+        answers=list(item.get("answers") or [])
+        labels=[str((a or {}).get("label") or "").strip() for a in answers]
+        spoken=" ".join(
+            f"Antwort {i+1}: {label}."
+            for i,label in enumerate(labels) if label
+        ).strip()
+        add((question+" "+spoken).strip())
+        lower=[x.casefold() for x in labels]
+        if len(lower)==2 and "ja" in lower and "nein" in lower:
+            add((question+" Ja oder Nein?").strip())
+        add(item.get("success"))
+        add(item.get("retry"))
+    add("Sehr gut. Du hast das Quiz geschafft.")
+    return texts
+
+
+def _quiz_bounded_parts(text:str,max_chars:int=48):
+    value=re.sub(r"\s+"," ",str(text or "")).strip()
+    if not value:
+        return []
+    max_chars=max(24,int(max_chars))
+
+    # Fragen mit vorgelesenen Optionen zuerst semantisch trennen. So bleibt
+    # "Antwort 1:" bei seiner Antwort und landet nie in einem riesigen TTS-Block.
+    semantic=[
+        x.strip()
+        for x in re.split(r"\s+(?=Antwort\s+\d+\s*:)",value,flags=re.I)
+        if x.strip()
+    ]
+    parts=[]
+    for segment in semantic:
+        sentence_bits=[
+            x.strip() for x in re.split(r"(?<=[.!?؟])\s+",segment) if x.strip()
+        ] or [segment]
+        for bit in sentence_bits:
+            current=bit
+            while len(current)>max_chars:
+                window=current[:max_chars+1]
+                cuts=[
+                    window.rfind(", "),
+                    window.rfind("; "),
+                    window.rfind(": "),
+                    window.rfind(" und "),
+                    window.rfind(" "),
+                ]
+                cut=max(cuts)
+                if cut<max(12,int(max_chars*0.45)):
+                    cut=max_chars
+                else:
+                    # Trennzeichen/Wort nicht verlieren.
+                    if current[cut:cut+2] in (", ","; ",": "):
+                        cut+=1
+                left=current[:cut].strip()
+                right=current[cut:].strip()
+
+                # Die strenge Satzfluss-QA verbietet Grenzen direkt nach
+                # grammatisch abhängigen Funktionswörtern wie "als", "zu",
+                # "mit", "für", "dass" usw. Der Quiz-Splitter darf solche
+                # Grenzen daher gar nicht erst erzeugen. Verschiebe den Cut
+                # deterministisch vor das abhängige Wort, sodass es zusammen
+                # mit seinem Folgeteil gesprochen wird.
+                if left and right and not re.search(r"[,،;؛:.!?؟…]$",left):
+                    last_word=re.sub(
+                        r"[^A-Za-zÄÖÜäöüß]+$","",
+                        left.split()[-1]
+                    ).casefold()
+                    if last_word in FLOW_WEAK_ENDINGS:
+                        prev_space=left.rfind(" ")
+                        if prev_space>=max(8,int(max_chars*0.30)):
+                            cut=prev_space
+                            left=current[:cut].strip()
+                            right=current[cut:].strip()
+
+                if not left or not right:
+                    break
+                parts.append(left)
+                current=right
+            if current:
+                parts.append(current)
+
+    # Zweite Schutzschicht für Sonderfälle aus vorherigen semantischen Splits:
+    # Ein schwaches Endwort wird zum nächsten Teil verschoben. So kann auch ein
+    # zukünftiger Quiztext keine künstliche Pause nach "als"/"zu"/"mit" erzeugen.
+    balanced=[]
+    i=0
+    while i<len(parts):
+        part=str(parts[i] or "").strip()
+        if not part:
+            i+=1
+            continue
+        if i+1<len(parts) and not re.search(r"[,،;؛:.!?؟…]$",part):
+            words=part.split()
+            end_word=re.sub(
+                r"[^A-Za-zÄÖÜäöüß]+$","",
+                words[-1] if words else ""
+            ).casefold()
+            if end_word in FLOW_WEAK_ENDINGS:
+                next_part=str(parts[i+1] or "").strip()
+                if len(words)>1:
+                    moved=words[-1]
+                    part=" ".join(words[:-1]).strip()
+                    parts[i+1]=(moved+" "+next_part).strip()
+                else:
+                    parts[i+1]=(part+" "+next_part).strip()
+                    i+=1
+                    continue
+        balanced.append(part)
+        i+=1
+    return [x for x in balanced if x]
+
+def _quiz_join_paths(paths,text_value:str):
+    items=[]
+    sr=24000
+    for path,spoken in paths:
+        wav=load_locked_wav(Path(path),sr)
+        items.append((wav,"de",spoken,"kids_lesson",{}))
+    if not items:
+        raise RuntimeError("Quiz-Audio enthält keine erzeugten Teilstücke.")
+    joined=join_rendered_segments(items,sr)
+    joined=trim_segment_edges(joined,sr,aggressive=False)
+
+    metrics=audio_quality_metrics(joined,sr,text_value,"de","kids_lesson")
+    pause_issues={
+        "unexpected_internal_hold","excessive_internal_pause","suspicious_sustained_hold"
+    }
+    current=set(metrics.get("issues") or [])
+    if current and current.issubset(pause_issues|{"segment_too_long","speech_rate_too_slow"}):
+        repaired,meta=repair_internal_pause(joined,sr,text_value,"de","kids_lesson")
+        if meta.get("repaired"):
+            joined=repaired
+            metrics=audio_quality_metrics(joined,sr,text_value,"de","kids_lesson")
+            metrics.update(meta)
+
+    # Der zusammengesetzte Quiz-Prompt darf naturgemäß länger als ein einzelnes
+    # TTS-Segment sein. Längen-/Rate-Hinweise sind deshalb hier keine Fehler;
+    # jedes Teilstück wurde bereits vollständig durch die strenge Engine-QA geprüft.
+    hard={
+        "empty_audio","non_finite","near_silence","low_peak","clipping",
+        "unexpected_internal_hold","excessive_internal_pause",
+        "suspicious_sustained_hold","generation_token_limit","generation_timeout"
+    }
+    hard_found=[x for x in (metrics.get("issues") or []) if x in hard]
+    if hard_found:
+        raise RuntimeError(
+            "Quiz-Gesamt-Audio-QA fehlgeschlagen: "+", ".join(hard_found)+
+            " · Text: "+str(text_value)[:72]
+        )
+    metrics["issues"]=[x for x in (metrics.get("issues") or []) if x in hard]
+    metrics["quiz_composite"]=True
+    metrics["quiz_parts"]=len(items)
+    return joined,sr,metrics
+
+def _generate_quiz_voice_master(text_value:str):
+    value=re.sub(r"\s+"," ",str(text_value or "")).strip()
+    if not value:
+        raise ValueError("Quiz-Sprachtext fehlt.")
+    digest=hashlib.sha1(value.encode("utf-8")).hexdigest()[:20]
+    master=QUIZ_MASTER_HOME/(digest+".wav")
+
+    # Bereits bestandene Quiz-Master werden bei einem späteren Batch direkt
+    # wiederverwendet. Dadurch setzt ein Lauf nach einem einzelnen Fehler fort,
+    # statt alle vorherigen Quiztexte erneut zu synthetisieren.
+    if master.exists() and master.stat().st_size>1024:
+        try:
+            wav=load_locked_wav(master,24000)
+            metrics=audio_quality_metrics(wav,24000,value,"de","kids_lesson")
+            hard={"empty_audio","non_finite","near_silence","low_peak","clipping"}
+            if not any(x in hard for x in (metrics.get("issues") or [])):
+                metrics["quiz_master_cache"]="hit"
+                return master,metrics
+        except Exception:
+            pass
+
+    base_parts=_quiz_bounded_parts(value,48)
+    if not base_parts:
+        raise RuntimeError("Quiztext konnte nicht in sichere Sprachblöcke zerlegt werden.")
+
+    rendered=[]
+    for part in base_parts:
+        queue=[part]
+        while queue:
+            piece=queue.pop(0)
+            try:
+                path=generate(
+                    piece,"","kids_lesson",
+                    free_mode=True,free_pronunciation=True
+                )
+                rendered.append((Path(path),piece))
+            except RuntimeError as e:
+                message=str(e)
+                if (
+                    ("generation_token_limit" in message or "generation_timeout" in message)
+                    and len(piece)>24
+                ):
+                    rescue=_quiz_bounded_parts(piece,max(24,min(34,len(piece)//2+4)))
+                    if len(rescue)>1:
+                        queue=rescue+queue
+                        continue
+                raise
+
+    joined,sr,metrics=_quiz_join_paths(rendered,value)
+    tmp=master.with_suffix(".tmp.wav")
+    save_wav(tmp,joined,sr)
+    os.replace(tmp,master)
+    metrics["quiz_master_cache"]="write"
+    return master,metrics
+
+def _build_quiz_owner_voice_pack(quiz_data,build_root:Path,build_id:str,start_index:int,total:int):
+    texts=_quiz_voice_texts(quiz_data)
+    entries={}
+    out_dir=build_root/"kids/assets/kids-quiz-audio"
+    out_dir.mkdir(parents=True,exist_ok=True)
+    generated_cache={}
+
+    for offset,text_value in enumerate(texts,1):
+        current_index=start_index+offset
+        pct=2+int((current_index-1)/max(1,total)*88)
+        _set_alphabet_batch_state(
+            phase="quiz",
+            progress=min(94,pct),
+            completed=current_index-1,
+            total=total,
+            current=f"Quiz-Stimme {offset}/{len(texts)} · {text_value[:72]}"
+        )
+        digest=hashlib.sha1(text_value.encode("utf-8")).hexdigest()[:16]
+        asset=out_dir/(digest+".m4a")
+        source=generated_cache.get(text_value)
+        source_metrics={}
+        if source is None:
+            source,source_metrics=_generate_quiz_voice_master(text_value)
+            generated_cache[text_value]=source
+        _encode_kids_m4a(source,asset)
+        entries[text_value]={
+            "url":f"/kids/assets/kids-quiz-audio/{asset.name}?v={build_id}",
+            "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
+            "durationSeconds":round(_audio_duration_seconds(asset),3),
+            "voiceProfileId":"serhat-owner-voice-2026",
+            "sourceVoice":"authorized-owner-voice",
+            "sourceType":"local-owner-generated",
+            "qaBy":"local-serhat-engine-auto-qa",
+            "qaMetrics":source_metrics,
+        }
+
+    manifest={
+        "schemaVersion":1,
+        "id":"KIDS_QUIZ_OWNER_VOICE_V1",
+        "buildId":build_id,
+        "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "voiceProfileId":"serhat-owner-voice-2026",
+        "speaker":"Serhat Abu Malik",
+        "manualPerClipApprovalRequired":False,
+        "technicalQaRequired":True,
+        "systemTtsFallbackAllowed":False,
+        "entries":entries,
+        "counts":{
+            "quizQuestions":len(quiz_data.get("items") or []),
+            "uniqueSpokenTexts":len(entries)
+        }
+    }
+    atomic_write_json(build_root/"kids/data/quiz-audio.json",manifest)
+    return manifest
+
+def _prepare_publish_repo(export_ready:Path):
+    git=shutil.which("git")
+    if not git:
+        return False,"git ist auf diesem Mac nicht verfügbar."
+    repo=ALPHABET_PUBLISH_REPO
+    env=dict(os.environ)
+    env["GIT_TERMINAL_PROMPT"]="0"
+
+    def run(args,timeout=180):
+        return subprocess.run(args,capture_output=True,text=True,env=env,timeout=timeout)
+
+    try:
+        if not (repo/".git").exists():
+            if repo.exists():
+                shutil.rmtree(repo)
+            p=run([git,"clone","--depth","1","https://github.com/Sero91ak/dar-al-tawhid-site.git",str(repo)],300)
+            if p.returncode!=0:
+                return False,"Repository konnte nicht vorbereitet werden: "+(p.stderr or p.stdout)[-600:]
+        else:
+            p=run([git,"-C",str(repo),"fetch","origin","main"],180)
+            if p.returncode!=0:
+                return False,"Repository-Update fehlgeschlagen: "+(p.stderr or p.stdout)[-600:]
+            p=run([git,"-C",str(repo),"reset","--hard","origin/main"],60)
+            if p.returncode!=0:
+                return False,"Repository konnte nicht auf main gesetzt werden."
+
+        source_kids=export_ready/"kids"
+        if not source_kids.exists():
+            return False,"Export enthält keinen Kids-Ordner."
+
+        for rel in [
+            Path("data/alphabet-audio.json"),
+            Path("data/quiz-audio.json"),
+            Path("assets/kids-cinema/intro-voice-serhat.m4a"),
+        ]:
+            src=source_kids/rel
+            dst=repo/"kids"/rel
+            dst.parent.mkdir(parents=True,exist_ok=True)
+            shutil.copy2(src,dst)
+
+        src_audio=source_kids/"assets/kids-alphabet-audio"
+        dst_audio=repo/"kids/assets/kids-alphabet-audio"
+        if dst_audio.exists():
+            shutil.rmtree(dst_audio)
+        shutil.copytree(src_audio,dst_audio)
+
+        src_quiz=source_kids/"assets/kids-quiz-audio"
+        dst_quiz=repo/"kids/assets/kids-quiz-audio"
+        if dst_quiz.exists():
+            shutil.rmtree(dst_quiz)
+        shutil.copytree(src_quiz,dst_quiz)
+
+        p=run([git,"-C",str(repo),"add",
+            "kids/data/alphabet-audio.json","kids/assets/kids-alphabet-audio",
+            "kids/data/quiz-audio.json","kids/assets/kids-quiz-audio",
+            "kids/assets/kids-cinema/intro-voice-serhat.m4a"
+        ],60)
+        if p.returncode!=0:
+            return False,"Git staging fehlgeschlagen: "+(p.stderr or p.stdout)[-500:]
+
+        diff=run([git,"-C",str(repo),"diff","--cached","--quiet"],30)
+        if diff.returncode==0:
+            return True,"Kids-App enthält bereits genau dieses Serhat-Stimmenpaket."
+
+        run([git,"-C",str(repo),"config","user.name","Serhat Abu Malik"],20)
+        run([git,"-C",str(repo),"config","user.email","73606501+Sero91ak@users.noreply.github.com"],20)
+        p=run([git,"-C",str(repo),"commit","-m","Kids: install complete local Serhat owner-voice pack"],120)
+        if p.returncode!=0:
+            return False,"Git commit fehlgeschlagen: "+(p.stderr or p.stdout)[-600:]
+
+        # Wenn gh bereits angemeldet ist, nutzt git dessen Credential Helper.
+        gh=shutil.which("gh")
+        if gh:
+            auth=run([gh,"auth","status"],30)
+            if auth.returncode==0:
+                run([gh,"auth","setup-git"],30)
+
+        last_push=""
+        for attempt in range(1,4):
+            # Der Audio-Build kann lange laufen; main darf inzwischen weitergezogen
+            # sein. Vor jedem Push den einen lokalen Pack-Commit auf den aktuellen
+            # origin/main rebasen. Bei transientem GitHub-5xx erneut versuchen.
+            fetch=run([git,"-C",str(repo),"fetch","origin","main"],180)
+            if fetch.returncode!=0:
+                last_push=(fetch.stderr or fetch.stdout)[-700:]
+            else:
+                rebase=run([git,"-C",str(repo),"rebase","origin/main"],180)
+                if rebase.returncode!=0:
+                    run([git,"-C",str(repo),"rebase","--abort"],30)
+                    return False,"Paket ist lokal fertig, konnte aber nicht konfliktfrei auf den aktuellen main-Stand gesetzt werden: "+(rebase.stderr or rebase.stdout)[-700:]
+                p=run([git,"-C",str(repo),"push","origin","HEAD:main"],300)
+                if p.returncode==0:
+                    return True,"Serhat-Stimmenpaket wurde nach GitHub main übertragen; der normale Kids-Deploy startet automatisch."
+                last_push=(p.stderr or p.stdout)[-700:]
+                low=last_push.lower()
+                transient=("500" in low or "502" in low or "503" in low or "504" in low or "internal server error" in low)
+                if not transient:
+                    break
+            if attempt<3:
+                time.sleep(attempt*3)
+
+        return False,"Paket ist lokal fertig; GitHub-Push nach 3 Versuchen fehlgeschlagen: "+last_push
+    except Exception as e:
+        return False,str(e)
+
+def build_full_local_kids_voice_pack():
+    if not ALPHABET_BATCH_LOCK.acquire(blocking=False):
+        return _alphabet_batch_snapshot()
+    try:
+        started=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        _set_alphabet_batch_state(
+            running=True,phase="preparing",progress=1,completed=0,total=226,current="Manifest und Quizdaten werden vorbereitet …",
+            generationProfile=ALPHABET_GENERATION_PROFILE,
+            error="",exportPath="",zipPath="",repoPublished=False,repoPublishError="",
+            startedAt=started,finishedAt=""
+        )
+
+        manifest=load_alphabet_manifest()
+        quiz_data=load_quiz_manifest()
+        tasks=_alphabet_tasks(manifest)
+        if len(tasks)!=140:
+            raise RuntimeError(f"Alphabet-Pack unvollständig: erwartet 140 Clips, gefunden {len(tasks)}.")
+        quiz_texts=_quiz_voice_texts(quiz_data)
+        total_work=len(tasks)+len(quiz_texts)+1
+        _set_alphabet_batch_state(total=total_work)
+
+        build_id="serhat-local-"+time.strftime("%Y%m%d-%H%M%S")
+        build_root=ALPHABET_EXPORT_HOME/(".build-"+uuid.uuid4().hex[:10])
+        ready=ALPHABET_EXPORT_HOME/"ready"
+        if build_root.exists():
+            shutil.rmtree(build_root)
+        (build_root/"kids/assets/kids-alphabet-audio").mkdir(parents=True,exist_ok=True)
+        (build_root/"kids/assets/kids-cinema").mkdir(parents=True,exist_ok=True)
+        (build_root/"kids/data").mkdir(parents=True,exist_ok=True)
+
+        generated=[]
+        existing_alphabet_masters={
+            str((m or {}).get("slotId") or ""):dict(m or {})
+            for m in (alphabet_master_state().get("masters") or [])
+        }
+        for index,(letter_id,kind,key,slot) in enumerate(tasks,1):
+            text_value=str((slot or {}).get("text") or "").strip()
+            if not text_value:
+                raise RuntimeError(f"Text fehlt bei {letter_id}/{kind}/{key or 'main'}.")
+            slot_id="-".join([letter_id,kind,key or "main"])
+            pct=2+int((index-1)/max(1,total_work)*88)
+            _set_alphabet_batch_state(
+                phase="alphabet",progress=pct,completed=index-1,
+                current=f"{index}/140 · {letter_id.upper()} · {kind}{(' · '+key) if key else ''} · {text_value}"
+            )
+
+            cached_master=existing_alphabet_masters.get(slot_id) or {}
+            cached_file=ALPHABET_MASTER_HOME/str(cached_master.get("filename") or "")
+            cached_profile=str(cached_master.get("generationProfile") or "")
+            meta_metrics={}
+            master_wav=None
+            cache_reused=False
+            if (
+                cached_profile==ALPHABET_GENERATION_PROFILE
+                and cached_file.name
+                and cached_file.exists()
+                and cached_file.stat().st_size>44
+            ):
+                try:
+                    cached_wav=load_locked_wav(cached_file,24000)
+                    cached_metrics=audio_quality_metrics(
+                        cached_wav,24000,text_value,"ar","kids_lesson"
+                    )
+                    hard={"empty_audio","non_finite","near_silence","low_peak","clipping"}
+                    if not any(x in hard for x in (cached_metrics.get("issues") or [])):
+                        master_wav=cached_file
+                        cache_reused=True
+                        meta_metrics=cached_metrics
+                        meta_metrics["alphabet_master_cache"]="hit"
+                        meta_metrics["generationProfile"]=ALPHABET_GENERATION_PROFILE
+                except Exception:
+                    master_wav=None
+                    cache_reused=False
+
+            if master_wav is None:
+                meta=create_alphabet_voice_preview(text_value,slot_id,0)
+                master=confirm_alphabet_voice_preview(
+                    str(meta["id"]),slot_id,letter_id,kind,key,text_value,
+                    linguistic_verified=False
+                )
+                master_wav=ALPHABET_MASTER_HOME/str(master["filename"])
+                meta_metrics=meta.get("metrics") or {}
+                meta_metrics["alphabet_master_cache"]="regenerated"
+                meta_metrics["generationProfile"]=ALPHABET_GENERATION_PROFILE
+
+            asset=build_root/"kids/assets/kids-alphabet-audio"/letter_id/_slot_asset_name(kind,key)
+            _encode_kids_m4a(master_wav,asset)
+            _promote_slot_to_owner_voice(slot,letter_id,kind,key,asset,meta_metrics,build_id)
+            if cache_reused and bool(cached_master.get("linguisticVerified")):
+                slot.update({
+                    "verified":True,
+                    "linguisticVerified":True,
+                    "reviewStatus":"approved",
+                    "requiresManualReview":False,
+                    "reviewedAt":str(cached_master.get("reviewedAt") or ""),
+                })
+            generated.append(str(asset))
+
+        quiz_manifest=_build_quiz_owner_voice_pack(
+            quiz_data,build_root,build_id,len(tasks),total_work
+        )
+
+        _set_alphabet_batch_state(
+            phase="greeting",progress=94,completed=len(tasks)+len(quiz_texts),
+            total=total_work,
+            current="Kids-Begrüßung wird mit deiner Serhat-Stimme erzeugt …"
+        )
+        greeting_text=(
+            "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. "
+            "Willkommen bei DĀR AL TAWḤĪD Kids. Los geht’s!"
+        )
+        greeting_wav=generate(
+            greeting_text,"","kids_lesson",
+            free_mode=True,free_pronunciation=True
+        )
+        greeting_asset=build_root/"kids/assets/kids-cinema/intro-voice-serhat.m4a"
+        _encode_kids_m4a(greeting_wav,greeting_asset)
+
+        policy=manifest.setdefault("policy",{})
+        policy.update({
+            "requireExplicitVerification":True,
+            "requireHumanApprovalForGeneratedAudio":True,
+            "autoPublishGeneratedAudio":False,
+            "voiceMode":"owner-voice-generated-linguistic-review-required",
+            "targetVoiceProfileId":"serhat-owner-voice-2026",
+            "targetVoiceLabel":"Serhat Abu Malik · DĀR Voice Studio",
+            "authorizedOwnerVoiceGeneration":True,
+            "linguisticReviewRequired":True,
+            "technicalQaIsNotPronunciationVerification":True,
+            "generatedPromotionRule":"Die lokale Serhat Engine darf alle 140 Lernclips technisch erzeugen und prüfen. Kein Alphabet-Clip wird allein wegen technischer QA sprachlich freigegeben; jeder Lernclip muss vollständig angehört und menschlich bestätigt werden.",
+            "note":"Serhat-Clips bleiben als technische Kandidaten erhalten, bis ihre arabische Aussprache menschlich bestätigt ist. Die Eiarabe-Alif-Datei und weitere externe Aufnahmen bleiben nur als Aussprache-Referenzen erhalten.",
+            "batchBuild":{
+                "id":build_id,
+                "voiceProfileId":"serhat-owner-voice-2026",
+                "clips":140,
+                "quizVoiceClips":len(quiz_texts),
+                "quizQuestions":len(quiz_data.get("items") or []),
+                "alphabetManualLinguisticApprovalRequired":True,
+                "quizTechnicalQaRequired":True,
+                "technicalQaRequired":True,
+                "failedQaBlocksBuild":True,
+                "engine":"local-serhat-engine",
+                "generationProfile":ALPHABET_GENERATION_PROFILE
+            }
+        })
+        manifest["updatedAt"]=time.strftime("%Y-%m-%d")
+        manifest["ownerVoiceGreeting"]={
+            "url":"/kids/assets/kids-cinema/intro-voice-serhat.m4a?v="+build_id,
+            "text":greeting_text,
+            "voiceProfileId":"serhat-owner-voice-2026",
+            "sourceVoice":"authorized-owner-voice",
+            "sourceType":"local-owner-generated",
+            "sha256":hashlib.sha256(greeting_asset.read_bytes()).hexdigest(),
+            "durationSeconds":round(_audio_duration_seconds(greeting_asset),3),
+        }
+        atomic_write_json(build_root/"kids/data/alphabet-audio.json",manifest)
+
+        if ready.exists():
+            shutil.rmtree(ready)
+        os.replace(build_root,ready)
+        zip_base=ALPHABET_EXPORT_HOME/"DAR-AL-TAWHID-Kids-Serhat-Voice-Pack"
+        try:
+            Path(str(zip_base)+".zip").unlink(missing_ok=True)
+        except Exception:
+            pass
+        zip_path=Path(shutil.make_archive(str(zip_base),"zip",root_dir=str(ready)))
+
+        _set_alphabet_batch_state(
+            phase="publishing",progress=97,completed=total_work,total=total_work,current="Fertiges Alphabet-, Quiz- und Begrüßungspaket wird direkt in die Kids-App übernommen …",
+            exportPath=str(ready),zipPath=str(zip_path)
+        )
+        published,publish_message=_prepare_publish_repo(ready)
+
+        finished=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        return _set_alphabet_batch_state(
+            running=False,phase="complete",progress=100,completed=total_work,total=total_work,current="Fertig",
+            error="",exportPath=str(ready),zipPath=str(zip_path),
+            repoPublished=bool(published),
+            repoPublishError="" if published else publish_message,
+            repoPublishMessage=publish_message,
+            startedAt=started,finishedAt=finished
+        )
+    except Exception as e:
+        finished=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        return _set_alphabet_batch_state(
+            running=False,phase="error",error=str(e),current="Abgebrochen",
+            finishedAt=finished
+        )
+    finally:
+        ALPHABET_BATCH_LOCK.release()
+
+def start_full_local_kids_voice_pack():
+    state=_alphabet_batch_snapshot()
+    if state.get("running"):
+        return state
+    thread=threading.Thread(target=build_full_local_kids_voice_pack,daemon=True,name="dar-alphabet-batch")
+    thread.start()
+    time.sleep(0.05)
+    return _alphabet_batch_snapshot()
 
 def confirm_learning_preview(preview_id:str,input_term:str=""):
     with LEARNING_LOCK:
@@ -2154,6 +3346,25 @@ def _expand_free_voice_phrase_plan(lang:str,segment:str):
         parts=expanded
     return [(lang,x.strip()) for x in parts if x.strip()]
 
+def build_free_pronunciation_render_plan(text:str):
+    """Freie Aussprache: bestätigte Kern-/Ehrenformeln bleiben eigene Audioblöcke.
+
+    Der normale freie Modus bleibt unverändert. Nur wenn free_pronunciation aktiv
+    ist, werden bekannte Audio-Locks aus längeren arabischen Segmenten getrennt.
+    So wird z. B. ein Name plus رضي الله عنه nicht als ein einziger langer
+    ar/kids_lesson-Chunk gerendert, sondern Name und Ehrenformel bleiben getrennt.
+    """
+    plan=[]
+    for kind,value in split_audio_locked_spans(text):
+        clean=str(value or "").strip()
+        if not clean:
+            continue
+        if kind=="lock":
+            plan.append(("ar",clean))
+            continue
+        plan.extend(build_free_render_plan(clean))
+    return plan
+
 def build_free_render_plan(text:str):
     """Freie Stimme: ganze Sätze bevorzugen, nur lange Sätze sicher teilen.
 
@@ -2927,7 +4138,14 @@ def repair_internal_pause(wav,sr:int,text:str,language_id:str,mode:str):
     w=normalize_segment_shape(wav)
     inline_arabic=language_id=="ar" and is_inline_arabic_micro_term(text)
     fixed_phrase=language_id=="ar" and is_profile_fixed_phrase_tts(text)
-    if (language_id=="ar" and not inline_arabic and not fixed_phrase) or not w.numel() or w.shape[-1]<int(sr*0.3):
+    honorific_key=audio_lock_key_for_chunk(text) if language_id=="ar" else ""
+    honorific_keys=honorific_lock_keys_in_chunk(text) if language_id=="ar" else []
+    honorific_phrase=(honorific_key in HONORIFIC_KEYS) or bool(honorific_keys)
+    if (
+        (language_id=="ar" and not inline_arabic and not fixed_phrase and not honorific_phrase)
+        or not w.numel()
+        or w.shape[-1]<int(sr*0.3)
+    ):
         return w,{"repaired":False}
 
     env=w.abs().amax(dim=0)
@@ -2940,7 +4158,7 @@ def repair_internal_pause(wav,sr:int,text:str,language_id:str,mode:str):
     if count<5:
         return w,{"repaired":False}
     framed=env[:count*frame].reshape(count,frame).mean(dim=1)
-    if inline_arabic or fixed_phrase:
+    if inline_arabic or fixed_phrase or honorific_phrase:
         threshold=max(
             peak*float(QA_CONFIG.get("inlineArabicSilenceThresholdRelative",0.0045)),
             float(QA_CONFIG.get("inlineArabicSilenceAbsolute",0.00015))
@@ -2961,6 +4179,13 @@ def repair_internal_pause(wav,sr:int,text:str,language_id:str,mode:str):
         target_ms=int(phrase_cfg.get("flowRepairTargetMs",QA_CONFIG.get("fixedPhraseFlowTargetPauseMs",140)))
         trigger_ms=int(phrase_cfg.get("flowRepairTriggerMs",QA_CONFIG.get("fixedPhraseFlowRepairTriggerMs",320)))
         max_repair_ms=int(phrase_cfg.get("flowRepairMaxMs",QA_CONFIG.get("fixedPhraseFlowRepairMaxMs",900)))
+    elif honorific_phrase:
+        # Bekannte Ehrenformeln sind feste, kurze arabische Sprachbausteine.
+        # Eine 500–900-ms-Denkpause mitten in ﷺ/رضي الله عنه ist kein natürlicher
+        # Bestandteil der Formel und darf sicher komprimiert werden.
+        target_ms=int(QA_CONFIG.get("honorificFlowTargetPauseMs",90))
+        trigger_ms=int(QA_CONFIG.get("honorificFlowRepairTriggerMs",180))
+        max_repair_ms=int(QA_CONFIG.get("honorificFlowRepairMaxMs",900))
     else:
         target_ms=int(
             QA_CONFIG.get("autoRepairPauseWithPunctuationMs",220)
@@ -3067,7 +4292,10 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
             # Inseln komprimieren; aktive Phoneme bleiben unangetastet.
             proactive_pause_repair={}
             if language_id=="ar" and (
-                is_inline_arabic_micro_term(text) or is_profile_fixed_phrase_tts(text)
+                is_inline_arabic_micro_term(text)
+                or is_profile_fixed_phrase_tts(text)
+                or audio_lock_key_for_chunk(text) in HONORIFIC_KEYS
+                or bool(honorific_lock_keys_in_chunk(text))
             ):
                 compacted,proactive_pause_repair=repair_internal_pause(
                     wav,int(model.sr),text,language_id,mode
@@ -3096,6 +4324,7 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
         if proactive_pause_repair.get("repaired"):
             metrics.update({
                 "arabic_phrase_flow_repaired":True,
+                "honorific_flow_repaired":bool(audio_lock_key_for_chunk(text) in HONORIFIC_KEYS),
                 "pause_ms_removed":int(proactive_pause_repair.get("pause_ms_removed",0)),
                 "target_pause_ms":int(proactive_pause_repair.get("target_pause_ms",0)),
             })
@@ -3581,7 +4810,11 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         found=phrase_found+learned_found+word_found
     else:
         speak,found=prepare(text)
-    if free_mode:
+    if free_mode and free_pronunciation:
+        synthesis_text,plan,flow_preflight=prepare_flow_text(
+            text,speak,build_free_pronunciation_render_plan
+        )
+    elif free_mode:
         synthesis_text,plan,flow_preflight=prepare_flow_text(text,speak,build_free_render_plan)
     else:
         synthesis_text,plan,flow_preflight=prepare_flow_text(text,speak,build_render_plan)
@@ -3877,17 +5110,25 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         final_pause_limit=int(final_limits.get(doc_mode,QA_CONFIG.get("finalMaxInternalSilenceMs",620)))
         final_metrics=audio_quality_metrics(full,sr,synthesis_text,"de",doc_mode)
 
-        # Content-Studio/Kids-Lesson: Wenn alle Einzelabschnitte sauber waren,
-        # darf eine einzige moderate Restpause im fertigen Join nicht die ganze
-        # Produktion verwerfen. Statt den Grenzwert einfach hochzusetzen wird
-        # genau diese echte stille Insel einmal komprimiert und danach erneut
-        # vollständig gemessen. Technische QA und Segment-QA bleiben unverändert.
+        # Content-Studio/Kids: Wenn alle Einzelabschnitte sauber waren,
+        # darf eine einzige moderate Restpause im fertigen Join weder eine
+        # Kids-Geschichte noch einen Kids-Lernclip komplett verwerfen. Der
+        # Grenzwert bleibt streng: Nur die tatsächlich erkannte stille Insel
+        # wird einmal komprimiert und danach wird das vollständige Audio erneut
+        # gemessen. Technische QA und Segment-QA bleiben unverändert.
         kids_final_repair={}
         measured_before=int(final_metrics.get("max_internal_silence_ms",0) or 0)
-        kids_final_repair_max=int(QA_CONFIG.get("kidsLessonFinalAutoRepairMaxMs",950))
+        kids_final_repair_modes={"kids_story","kids_lesson"}
+        kids_repair_limits=QA_CONFIG.get("kidsFinalAutoRepairMaxMsByMode") or {}
+        kids_final_repair_max=int(
+            kids_repair_limits.get(
+                doc_mode,
+                QA_CONFIG.get("kidsLessonFinalAutoRepairMaxMs",950)
+            )
+        )
         if (
             not free_mode
-            and doc_mode=="kids_lesson"
+            and doc_mode in kids_final_repair_modes
             and measured_before>final_pause_limit
             and measured_before<=kids_final_repair_max
         ):
@@ -3898,11 +5139,19 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                 full=repaired
                 final_metrics=audio_quality_metrics(full,sr,synthesis_text,"de",doc_mode)
                 final_metrics.update({
-                    "kids_lesson_final_pause_repaired":True,
-                    "kids_lesson_final_pause_before_ms":measured_before,
-                    "kids_lesson_final_pause_removed_ms":int(kids_final_repair.get("pause_ms_removed",0)),
-                    "kids_lesson_final_pause_target_ms":int(kids_final_repair.get("target_pause_ms",0)),
+                    "kids_final_pause_repaired":True,
+                    "kids_final_pause_mode":doc_mode,
+                    "kids_final_pause_before_ms":measured_before,
+                    "kids_final_pause_removed_ms":int(kids_final_repair.get("pause_ms_removed",0)),
+                    "kids_final_pause_target_ms":int(kids_final_repair.get("target_pause_ms",0)),
                 })
+                if doc_mode=="kids_lesson":
+                    final_metrics.update({
+                        "kids_lesson_final_pause_repaired":True,
+                        "kids_lesson_final_pause_before_ms":measured_before,
+                        "kids_lesson_final_pause_removed_ms":int(kids_final_repair.get("pause_ms_removed",0)),
+                        "kids_lesson_final_pause_target_ms":int(kids_final_repair.get("target_pause_ms",0)),
+                    })
 
         fatal=[x for x in final_metrics["issues"] if x in ("empty_audio","non_finite","near_silence","low_peak","clipping","too_short")]
 
@@ -4166,7 +5415,15 @@ class H(BaseHTTPRequestHandler):
         elif p=="/studio/alphabet-audio-studio.js":
             self.send_file(APP_HOME/"alphabet-audio-studio.js","application/javascript; charset=utf-8")
         elif p=="/studio/alphabet-audio.json":
-            self.send_file(APP_HOME/"alphabet-audio.json","application/json; charset=utf-8")
+            try:
+                self.send_json(200,load_alphabet_manifest())
+            except Exception as e:
+                self.send_json(503,{"ok":False,"error":str(e)})
+        elif p=="/studio/quiz-kids.json":
+            try:
+                self.send_json(200,load_quiz_manifest())
+            except Exception as e:
+                self.send_json(503,{"ok":False,"error":str(e)})
         elif p=="/studio/voice-studio-icon.png":
             self.send_file(APP_HOME/"voice-studio-icon.png","image/png")
         elif p=="/studio/manifest.webmanifest":
@@ -4206,6 +5463,15 @@ class H(BaseHTTPRequestHandler):
             })
         elif p=="/learning/state":
             self.send_json(200,{"ok":True,**learning_state()})
+        elif p=="/alphabet/state":
+            self.send_json(200,{"ok":True,**alphabet_master_state()})
+        elif p=="/alphabet/batch-state":
+            self.send_json(200,{"ok":True,**_alphabet_batch_snapshot()})
+        elif p.startswith("/alphabet/master/"):
+            name=p.rsplit("/",1)[-1]
+            if not re.fullmatch(r"[a-z0-9_-]+\.wav",name):
+                return self.send_json(400,{"ok":False,"error":"Ungültiger Master-Dateiname."})
+            self.send_file(ALPHABET_MASTER_HOME/name,"audio/wav")
         elif p=="/publish-audio":
             try:
                 st=get_status()
@@ -4355,6 +5621,34 @@ class H(BaseHTTPRequestHandler):
                 return
             except Exception as e:
                 return self.send_json(400,{"ok":False,"error":str(e),"status":get_status()})
+
+        if p=="/alphabet/batch-start":
+            try:
+                state=start_full_local_kids_voice_pack()
+                return self.send_json(202,{"ok":True,**state})
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e),**_alphabet_batch_snapshot()})
+
+        if p=="/alphabet/review-approve":
+            try:
+                master=approve_existing_alphabet_master(str(data.get("slotId","")))
+                return self.send_json(200,{"ok":True,"master":master,**alphabet_master_state()})
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e)})
+
+        if p=="/alphabet/confirm":
+            try:
+                master=confirm_alphabet_voice_preview(
+                    str(data.get("previewId","")),
+                    str(data.get("slotId","")),
+                    str(data.get("letterId","")),
+                    str(data.get("kind","")),
+                    str(data.get("key","")),
+                    str(data.get("text","")),
+                )
+                return self.send_json(200,{"ok":True,"master":master,**alphabet_master_state()})
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e)})
 
         if p=="/confirm-core-audio":
             try:

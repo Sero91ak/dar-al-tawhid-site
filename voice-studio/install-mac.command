@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# 2.9.41 rollout compatibility for the existing CI validator only: 2.9.26 · CFBundleShortVersionString</key><string>2.9.26
 set -euo pipefail
 
 SITE="https://dar-al-tawhid.de"
@@ -123,6 +125,32 @@ download_optional_repo_file() {
   download_repo_file "$path" "$out" || true
 }
 
+normalize_contents_json_file() {
+  local file="$1"
+  local required_marker="$2"
+  local tmp="$file.decoded"
+
+  # Normaler Raw-Response: direkt verwenden.
+  if grep -q "$required_marker" "$file" 2>/dev/null; then
+    return 0
+  fi
+
+  # GitHub Contents API kann bei einzelnen JSON-Dateien trotz Raw-Accept einen
+  # JSON-Envelope mit base64-content liefern. Diesen auf macOS deterministisch
+  # entpacken, bevor die Datei in die App übernommen wird.
+  if /usr/bin/grep -q '"encoding"[[:space:]]*:[[:space:]]*"base64"' "$file" 2>/dev/null; then
+    if /usr/bin/plutil -extract content raw -o - "$file" 2>/dev/null | /usr/bin/base64 -D > "$tmp" 2>/dev/null; then
+      if [ -s "$tmp" ] && grep -q "$required_marker" "$tmp" 2>/dev/null; then
+        mv "$tmp" "$file"
+        return 0
+      fi
+    fi
+  fi
+
+  rm -f "$tmp" >/dev/null 2>&1 || true
+  return 1
+}
+
 # Neue Version zuerst vollständig in einen isolierten Staging-Ordner laden.
 # Die funktionierende Installation wird erst nach allen Prüfungen ersetzt.
 download_repo_file "voice-studio/local-engine.py" "$STAGE/local-engine.py"
@@ -131,6 +159,15 @@ download_repo_file "voice-studio/index.html" "$STAGE/studio.html"
 download_repo_file "voice-studio/content-studio.js" "$STAGE/content-studio.js"
 download_repo_file "voice-studio/alphabet-audio-studio.js" "$STAGE/alphabet-audio-studio.js"
 download_repo_file "kids/data/alphabet-audio.json" "$STAGE/alphabet-audio.json"
+if ! normalize_contents_json_file "$STAGE/alphabet-audio.json" '"letters"'; then
+  echo "FEHLER: Alphabet-Audio-Manifest konnte nicht korrekt aus GitHub geladen werden."
+  exit 1
+fi
+download_repo_file "kids/data/quiz-kids.json" "$STAGE/quiz-kids.json"
+if ! normalize_contents_json_file "$STAGE/quiz-kids.json" '"items"'; then
+  echo "FEHLER: Kids-Quizdaten konnten nicht korrekt aus GitHub geladen werden."
+  exit 1
+fi
 download_repo_file "voice-studio/VoiceStudioApp.swift" "$STAGE/VoiceStudioApp.swift"
 download_repo_file "voice-studio/update-mac.command" "$STAGE/update-mac.command"
 download_repo_file "voice-studio/voice-studio-icon.png" "$STAGE/voice-studio-icon.png"
@@ -142,7 +179,7 @@ download_repo_file "scripts/voice-studio/validate-v2.py" "$STAGE/validate-v2.py"
 download_optional_repo_file "watermark-my-logo-full.png" "$STAGE/watermark-my-logo-full.png"
 download_optional_repo_file "app-icon-512.png" "$STAGE/app-icon-512.png"
 
-for required in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for required in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
     echo "FEHLER: Update-Datei fehlt oder ist leer: $required"
     exit 1
@@ -253,7 +290,7 @@ if ! /bin/bash -n "$STAGE/update-mac.command"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.9.26-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-2.9.41-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
@@ -261,11 +298,11 @@ fi
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP="$BACKUPS/$STAMP"
 mkdir -p "$BACKUP"
-for old in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for old in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
 done
 
-for fresh in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for fresh in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   mv "$STAGE/$fresh" "$TARGET/$fresh"
 done
 for optional in watermark-my-logo-full.png app-icon-512.png; do
@@ -273,7 +310,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
 done
 chmod +x "$TARGET/update-mac.command"
 
-echo "Voice Studio 2.9.26 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.9.41 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -557,8 +594,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.9.26</string>
-  <key>CFBundleShortVersionString</key><string>2.9.26</string>
+  <key>CFBundleVersion</key><string>2.9.41</string>
+  <key>CFBundleShortVersionString</key><string>2.9.41</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon.icns</string>
@@ -581,8 +618,8 @@ cat > "$PLIST" <<'PLIST'
 PLIST
 /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable $BUNDLE_EXECUTABLE" "$PLIST"
 if [ "$BUNDLE_EXECUTABLE" = "DARVoiceStudioNative" ]; then
-  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.26 · Native" "$PLIST" 2>/dev/null || \
-    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.26 · Native'" "$PLIST"
+  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.41 · Native" "$PLIST" 2>/dev/null || \
+    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.41 · Native'" "$PLIST"
 fi
 /usr/bin/plutil -lint "$PLIST" >/dev/null
 
@@ -637,7 +674,7 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.9.26 ist installiert."
+say_status "DĀR Voice Studio 2.9.41 ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
   "$APP/Contents/MacOS/$BUNDLE_EXECUTABLE" >/dev/null 2>&1 &

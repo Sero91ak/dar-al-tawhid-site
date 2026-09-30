@@ -1,0 +1,215 @@
+name: Voice Studio Local Batch Smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'voice-studio/local-engine.py'
+      - 'voice-studio/alphabet-audio-studio.js'
+      - 'voice-studio/index.html'
+      - 'voice-studio/version.json'
+      - '.github/workflows/voice-studio-local-batch-smoke.yml'
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile local Voice Engine
+        run: |
+          python3 -m py_compile voice-studio/local-engine.py
+
+      - name: Check Alphabet Studio JavaScript
+        run: |
+          node --check voice-studio/alphabet-audio-studio.js
+
+      - name: Validate repository Kids JSON
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          for p in [
+              Path("kids/data/alphabet-audio.json"),
+              Path("kids/data/quiz-kids.json"),
+              Path("kids/data/quiz-audio.json"),
+          ]:
+              json.loads(p.read_text(encoding="utf-8"))
+              print("valid json:", p)
+          PY
+
+      - name: Validate Quiz weak-ending chunking
+        run: |
+          python3 - <<'PY'
+          import ast, re, sys
+          from pathlib import Path
+          sys.path.insert(0, "voice-studio")
+          from speech_flow import FLOW_WEAK_ENDINGS
+
+          source=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          tree=ast.parse(source)
+          node=next(
+              n for n in tree.body
+              if isinstance(n,ast.FunctionDef) and n.name=="_quiz_bounded_parts"
+          )
+          module=ast.Module(body=[node],type_ignores=[])
+          ns={"re":re,"FLOW_WEAK_ENDINGS":FLOW_WEAK_ENDINGS}
+          exec(compile(module,"<quiz_chunk_test>","exec"),ns)
+          fn=ns["_quiz_bounded_parts"]
+
+          sample="Richtig. Qurʾān 51:56 nennt die Anbetung Allahs als Zweck."
+          parts=fn(sample,48)
+          print(parts)
+          assert all(
+              re.sub(r"[^A-Za-zÄÖÜäöüß]+$","",p.split()[-1]).casefold()
+              not in FLOW_WEAK_ENDINGS
+              for p in parts[:-1] if p and not re.search(r"[,،;؛:.!?؟…]$",p)
+          ), parts
+          assert any("als Zweck." in p for p in parts), parts
+          PY
+
+      - name: Validate compound Arabic honorific split
+        run: |
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+          src=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          tree=ast.parse(src)
+          node=next(
+              n for n in tree.body
+              if isinstance(n,ast.FunctionDef) and n.name=="build_free_pronunciation_render_plan"
+          )
+          ns={}
+          ns["split_audio_locked_spans"]=lambda text:[
+              ("text","ابْنُ عَبَّاس"),
+              ("lock","رَضِيَ اللَّهُ عَنْهُ"),
+          ]
+          ns["build_free_render_plan"]=lambda text:[("ar",text.strip())] if text.strip() else []
+          exec(compile(ast.Module(body=[node],type_ignores=[]),"<honorific_split>","exec"),ns)
+          out=ns["build_free_pronunciation_render_plan"]("ابْنُ عَبَّاس رَضِيَ اللَّهُ عَنْهُ")
+          print(out)
+          assert out==[
+              ("ar","ابْنُ عَبَّاس"),
+              ("ar","رَضِيَ اللَّهُ عَنْهُ"),
+          ],out
+          PY
+
+      - name: Validate Alphabet linguistic review gate
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("kids/data/alphabet-audio.json").read_text(encoding="utf-8"))
+          slots=[]
+          for letter in (d.get("letters") or {}).values():
+              slots.append(letter.get("name"))
+              slots.extend((letter.get("harakat") or {}).values())
+              slots.append(letter.get("word"))
+          slots=[s for s in slots if s]
+          assert len(slots)==140, len(slots)
+          assert all(s.get("technicalQaPassed") is True for s in slots), "technical QA marker missing"
+          assert all(s.get("linguisticVerified") is False for s in slots), "generated clip incorrectly linguistically approved"
+          assert all(s.get("verified") is False for s in slots), "unreviewed clip is still live"
+          assert d.get("policy",{}).get("linguisticReviewRequired") is True
+          print("Alphabet linguistic review gate OK:",len(slots))
+          PY
+
+      - name: Validate Harakat extraction before final QA
+        run: |
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+
+          src=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          tree=ast.parse(src)
+          fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="create_alphabet_voice_preview")
+          body=ast.unparse(fn)
+          assert "_render_repeated_harakat_raw" in body
+          assert "_extract_repeated_pronunciation_token" in body
+          assert "audio_quality_metrics(wav, int(model.sr), value" in body.replace("\n"," ")
+          raw=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=="_render_repeated_harakat_raw")
+          raw_body=ast.unparse(raw)
+          assert "short_arabic_too_long" in raw_body
+          assert "ignoredPreExtractionIssues" in raw_body
+          print("Ḥarakāt extraction-before-final-QA wiring OK")
+          PY
+
+      - name: Validate full local batch markers
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          js=Path("voice-studio/alphabet-audio-studio.js").read_text(encoding="utf-8")
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          quizjs=Path("kids/quiz-owner-voice.js").read_text(encoding="utf-8")
+          quizaudio=Path("kids/data/quiz-audio.json").read_text(encoding="utf-8")
+          required_engine=[
+              "def build_full_local_kids_voice_pack",
+              "def start_full_local_kids_voice_pack",
+              'if p=="/alphabet/batch-start"',
+              'elif p=="/alphabet/batch-state"',
+              'KidsAppExport',
+              'KidsAppPublishRepo',
+              'manualPerClipApprovalRequired',
+              'def _quiz_voice_texts',
+              'def _build_quiz_owner_voice_pack',
+              'def _generate_quiz_voice_master',
+              'def _quiz_bounded_parts',
+              'QuizMasters',
+              'def load_alphabet_manifest',
+              'def load_quiz_manifest',
+              'Kids data self-healed',
+              'legacy JSON terminator repaired',
+              'honorific_flow_repaired',
+              'honorificFlowRepairTriggerMs',
+              'honorificFlowRepairMaxMs',
+              'FLOW_WEAK_ENDINGS',
+              'grammatisch abhängigen Funktionswörtern',
+              'def build_free_pronunciation_render_plan',
+              'def honorific_lock_keys_in_chunk',
+              'linguisticVerified',
+              'needs-human-review',
+              'approve_existing_alphabet_master',
+              'def _extract_repeated_pronunciation_token',
+              'def _alphabet_render_prompt',
+              'harakat_token_not_isolated',
+              'fushaStrict',
+              'ALPHABET_GENERATION_PROFILE="fusha-strict-v2"',
+              'cached_profile==ALPHABET_GENERATION_PROFILE',
+              'generationProfile=ALPHABET_GENERATION_PROFILE',
+              'def _render_repeated_harakat_raw',
+              'temporaryRepeatedHarakatRender',
+              'ignoredPreExtractionIssues',
+              'preExtractionMetrics',
+              'quiz-audio.json',
+              'kids-quiz-audio',
+          ]
+          required_js=[
+              "startFullBatch",
+              "maybeAutoStartFullBatch",
+              'fetch("/alphabet/batch-start"',
+              'fetch("/alphabet/batch-state',
+              "Alphabet + Quiz + Begrüßung",
+          ]
+          required_html=[
+              'id="alphabetPackBatchBtn"',
+              'id="alphabetPackBatchState"',
+              "VOICE STUDIO 2.9.41",
+              "alphabet-audio-studio.js?v=2928",
+          ]
+          failures=[]
+          for label,src,markers in (
+              ("engine",engine,required_engine),
+              ("js",js,required_js),
+              ("html",html,required_html),
+              ("quiz-runtime",quizjs,["DARKidsQuizVoice","quiz-audio.json","originalQuizSpeak"]),
+              ("quiz-manifest",quizaudio,["KIDS_QUIZ_OWNER_VOICE_V1","serhat-owner-voice-2026"]),
+          ):
+              missing=[m for m in markers if m not in src]
+              if missing:
+                  failures.append(label+": "+", ".join(missing))
+          if failures:
+              raise SystemExit("Local batch smoke failed: "+" | ".join(failures))
+          print("Voice Studio local Serhat batch markers OK")
+          PY

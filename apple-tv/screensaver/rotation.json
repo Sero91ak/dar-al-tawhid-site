@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0",
+  "mode": "persistent-shuffled-cycle",
+  "persistProgress": true,
+  "storage": "application-support",
+  "cyclePolicy": {
+    "showEveryItemBeforeRepeat": true,
+    "shuffleEachCycle": true,
+    "crossCycleCooldownCount": 5,
+    "preventImmediateRepeat": true,
+    "newItemsPolicy": "appendToRemainingAndReshuffle",
+    "removedItemsPolicy": "removeFromQueue"
+  },
+  "futureModuleMixing": {
+    "enabled": false,
+    "strategy": "weighted",
+    "weights": {
+      "hadith": 1
+    }
+  }
+}

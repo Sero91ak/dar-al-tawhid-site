@@ -1,3 +1,4 @@
+import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
   buildId: "kids-shell-v12-tab79",
   label: "KIDS · V0.79"
@@ -160,6 +161,8 @@ async function gradeKidsRecitation(request, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    const gated = gateHiddenSurfaces(request, url, env, "workers-dev");
+    if (gated) return gated;
 
     if (url.pathname === "/" || url.pathname === "/index.html") {
       return Response.redirect(`${url.origin}/test/${url.search || ""}`, 302);

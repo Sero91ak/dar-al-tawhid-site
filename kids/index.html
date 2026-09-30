@@ -2374,28 +2374,31 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .app[data-age="4–5"] #alphabetModal .lesson-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
-/* KIDS V0.79 · VIDEO ONLY · iOS-safe playback */
-.kids-launch-v79{
-  position:fixed;inset:0;z-index:1000;overflow:hidden;
-  background:#000;opacity:1;pointer-events:auto;
-}
-.k79-video{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:center center;
-  display:block;background:#000;
-}
-.kids-launch-v79.is-ending{animation:k79FadeOut .28s ease forwards}
-@keyframes k79FadeOut{to{opacity:0;visibility:hidden}}
-
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
+<link rel="stylesheet" href="/kids/assets/kids-open-v95.css?v=95">
+
 
 </head>
 <body>
-<div class="kids-launch-v79" data-kids-launch="v79" aria-hidden="true">
-  <video id="kidsCinemaV79" class="k79-video" autoplay muted playsinline webkit-playsinline preload="auto" disablepictureinpicture>
-    <source src="/kids/assets/kids-cinema/intro-v74.mp4?v=79" type="video/mp4">
-  </video>
+<div class="kids-open" id="kidsLaunch" data-kids-launch="v95">
+  <div class="kids-open__sky" aria-hidden="true"></div>
+  <div class="kids-open__stars" aria-hidden="true"></div>
+  <div class="kids-open__stage">
+    <div class="kids-open__halo" aria-hidden="true"></div>
+    <svg class="kids-open__ring" viewBox="0 0 120 120" aria-hidden="true">
+      <circle class="kids-open__ring-bg" cx="60" cy="60" r="54"></circle>
+      <circle class="kids-open__ring-fg" id="kidsLaunchRing" cx="60" cy="60" r="54"></circle>
+    </svg>
+    <div class="kids-open__seal" id="kidsLaunchSeal"><img src="/kids/icons/icon-1024.png?v=logo28" width="320" height="320" alt=""></div>
+  </div>
+  <div class="kids-open__titles">
+    <p class="kids-open__dar">DĀR AL TAWḤĪD</p>
+    <p class="kids-open__kids">Kids</p>
+  </div>
+  <p class="kids-open__pct" id="kidsLaunchPct">0%</p>
+  <div class="kids-open__bloom" aria-hidden="true"></div>
+  <audio id="kidsOwnerGreeting" preload="auto" src="/kids/assets/kids-cinema/intro-voice-serhat-soft.m4a?v=87"></audio>
 </div>
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
@@ -4827,7 +4830,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     var letter=alphabetAudioManifest&&alphabetAudioManifest.letters&&alphabetAudioManifest.letters[id];
     if(!letter)return null;
     var slot=kind==="harakat"?(letter.harakat&&letter.harakat[key]):letter[kind];
-    if(!slot||slot.verified!==true||!String(slot.url||"").trim())return null;
+    if(!slot||slot.verified!==true||slot.linguisticVerified!==true||!String(slot.url||"").trim())return null;
     return slot;
   }
   function requiredHarakatKeys(a){
@@ -5021,7 +5024,7 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
     audio.onended=function(){
       recordAudioEvidence(ageKey(),item.id,kind,key||"");
       alphabetAudioEl=null;
-      setAudioStatus(slot.sourceVoice==="authorized-owner-voice"?"Geprüfte Serhat-Lernstimme.":slot.sourceType==="external-human-pronunciation"?"Alif-Aussprache-Referenz.":"Geprüfte Lernaufnahme.","ok");
+      setAudioStatus(slot.sourceVoice==="authorized-owner-voice"?"Sprachlich geprüfte Serhat-Lernstimme.":slot.sourceType==="external-human-pronunciation"?"Aussprache-Referenz.":"Geprüfte Lernaufnahme.","ok");
       if(typeof onDone==="function")onDone();
       updateHeader(item,ageKey());
     };
@@ -6383,97 +6386,18 @@ fetchCatalog();
 </script>
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
-<script src="/kids/content-studio-feed.js?v=studio1"></script>\n<script>
+<script src="/kids/content-studio-feed.js?v=studio1"></script>\n<script src="/kids/quiz-owner-voice.js?v=1"></script>\n<script>
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=95",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
-<script>
-(function(){
-  var launch=document.querySelector(".kids-launch-v79");
-  var video=document.getElementById("kidsCinemaV79");
-  if(!launch||!video)return;
+<script src="/kids/assets/kids-open-v95.js?v=95"></script>
 
-  var removed=false;
-  var started=false;
-  var startupTimer=0;
-  var maxTimer=0;
 
-  function removeLaunch(){
-    if(removed)return;
-    removed=true;
-    if(startupTimer)clearTimeout(startupTimer);
-    if(maxTimer)clearTimeout(maxTimer);
-    launch.classList.add("is-ending");
-    window.setTimeout(function(){
-      try{video.pause()}catch(e){}
-      launch.remove();
-    },300);
-  }
 
-  function tryPlay(){
-    if(removed)return;
-    video.muted=true;
-    video.defaultMuted=true;
-    video.volume=0;
-    video.setAttribute("muted","");
-    video.setAttribute("playsinline","");
-    var p;
-    try{p=video.play()}catch(e){return}
-    if(p&&typeof p.catch==="function"){p.catch(function(){})}
-  }
-
-  function onPlaying(){
-    if(started)return;
-    started=true;
-    if(startupTimer)clearTimeout(startupTimer);
-    var remaining=9000;
-    if(Number.isFinite(video.duration)&&video.duration>0){
-      remaining=Math.min(12000,Math.max(1500,(video.duration-video.currentTime)*1000+900));
-    }
-    maxTimer=setTimeout(removeLaunch,remaining);
-  }
-
-  video.muted=true;
-  video.defaultMuted=true;
-  video.volume=0;
-  video.autoplay=true;
-  video.playsInline=true;
-  video.preload="auto";
-
-  video.addEventListener("loadedmetadata",function(){
-    try{video.currentTime=0}catch(e){}
-    tryPlay();
-  },{once:true});
-  video.addEventListener("loadeddata",tryPlay,{once:true});
-  video.addEventListener("canplay",tryPlay,{once:true});
-  video.addEventListener("playing",onPlaying,{once:true});
-  video.addEventListener("ended",removeLaunch,{once:true});
-  video.addEventListener("error",removeLaunch,{once:true});
-
-  document.addEventListener("visibilitychange",function(){
-    if(!document.hidden&&!started)tryPlay();
-  });
-  document.addEventListener("pointerdown",function(){
-    if(!started)tryPlay();
-  },{once:true,capture:true});
-
-  try{video.load()}catch(e){}
-  tryPlay();
-  setTimeout(tryPlay,250);
-  setTimeout(tryPlay,750);
-  setTimeout(tryPlay,1400);
-
-  startupTimer=setTimeout(function(){
-    if(!started)removeLaunch();
-  },3200);
-})();
-</script>
-
-</body>
 
 <style id="kids-quiz-scroll-v1">
 #quizModal.modal{touch-action:pan-y!important}

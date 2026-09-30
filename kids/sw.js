@@ -1,8 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v80";
+const CACHE_NAME="dar-al-tawhid-kids-v95";
 const PRECACHE=[
-  "/kids/index.html",
-  "/kids/start.html",
-  "/kids/shell.html",
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
   "/kids/assets/kids-art/hero-entdecke.png",
@@ -11,6 +8,8 @@ const PRECACHE=[
   "/kids/data/alphabet-audio.json",
   "/kids/data/dua-kids.json",
   "/kids/data/quiz-kids.json",
+  "/kids/data/quiz-audio.json",
+  "/kids/quiz-owner-voice.js?v=1",
   "/kids/data/stories-authentic.json",
   "/kids/data/verified-content.json",
   "/kids/icons/icon-192.png?v=logo28",
@@ -84,11 +83,11 @@ self.addEventListener("fetch",function(event){
   var url=new URL(request.url);
   if(!isKidsRequest(url))return;
 
-  if(request.mode==="navigate"||request.destination==="document"){
-    event.respondWith(networkFirst(request,"/kids/start.html"));
+  if(request.mode==="navigate"||request.destination==="document"||url.pathname==="/kids/start"||url.pathname==="/kids/start.html"||url.pathname==="/kids/start/"||url.pathname==="/kids/"||url.pathname==="/kids/index.html"||url.pathname==="/kids/shell.html"){
+    event.respondWith(fetch(request,{cache:"no-store"}));
     return;
   }
-  if(url.pathname==="/kids/assets/kids-cinema/intro-v74.mp4"){
+  if(url.pathname.indexOf("/kids/assets/kids-cinema/")===0&&url.pathname.indexOf(".mp4")>0){
     event.respondWith(fetch(request));
     return;
   }
