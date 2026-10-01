@@ -1,0 +1,99 @@
+name: Import Kids Prophet Scenes
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-kids-prophet-scenes.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-prophet-scenes
+  cancel-in-progress: true
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Download generated scene art
+        run: |
+          set -euo pipefail
+          curl -fL --retry 4 --retry-delay 2 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:f7e93a60-6c25-4c21-9fa0-c85c95c5d766' -o "/tmp/library.png"
+          curl -fL --retry 4 --retry-delay 2 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:5ef9b517-8dfc-47e0-addc-1c3c62369129' -o "/tmp/garden.png"
+          curl -fL --retry 4 --retry-delay 2 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:0ddebf36-9c45-40d3-99f1-5f1d73597906' -o "/tmp/ocean.png"
+          curl -fL --retry 4 --retry-delay 2 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:8fd47132-5e93-4c12-9202-bf5a0c344f19' -o "/tmp/desert.png"
+          curl -fL --retry 4 --retry-delay 2 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:875a4906-aa88-4a11-bba3-8f5614aebc6c' -o "/tmp/mountain.png"
+          curl -fL --retry 4 --retry-delay 2 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:4ce910fe-def7-4122-aaa3-704a6bf7070a' -o "/tmp/royal.png"
+          curl -fL --retry 4 --retry-delay 2 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:fc5cab96-606b-4cf6-adaf-9c95cfffd5ea' -o "/tmp/water.png"
+          curl -fL --retry 4 --retry-delay 2 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:3364883f-fc3a-42c9-bb5c-7998a3c6f952' -o "/tmp/night.png"
+
+      - name: Optimize app scenes
+        run: |
+          python -m pip install pillow
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageEnhance
+          items=[
+              ("library", Path("/tmp/library.png")),
+              ("garden", Path("/tmp/garden.png")),
+              ("ocean", Path("/tmp/ocean.png")),
+              ("desert", Path("/tmp/desert.png")),
+              ("mountain", Path("/tmp/mountain.png")),
+              ("royal", Path("/tmp/royal.png")),
+              ("water", Path("/tmp/water.png")),
+              ("night", Path("/tmp/night.png")),
+          ]
+          out=Path("kids/assets/prophet-scenes")
+          out.mkdir(parents=True,exist_ok=True)
+          for name,src in items:
+              im=Image.open(src).convert("RGB")
+              # Crop to 16:9 if generation returns a close but non-exact ratio.
+              w,h=im.size
+              target_ratio=16/9
+              if w/h>target_ratio:
+                  nw=int(h*target_ratio); left=(w-nw)//2; im=im.crop((left,0,left+nw,h))
+              elif w/h<target_ratio:
+                  nh=int(w/target_ratio); top=(h-nh)//2; im=im.crop((0,top,w,top+nh))
+              im=im.resize((1600,900),Image.Resampling.LANCZOS)
+              im=ImageEnhance.Contrast(im).enhance(1.03)
+              im=ImageEnhance.Color(im).enhance(1.04)
+              dest=out/(name+".webp")
+              im.save(dest,"WEBP",quality=88,method=6)
+              print(name, im.size, dest.stat().st_size)
+          PY
+
+      - name: Verify scenes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          files=sorted(Path("kids/assets/prophet-scenes").glob("*.webp"))
+          assert len(files)==8, len(files)
+          for p in files:
+              im=Image.open(p)
+              assert im.size==(1600,900), (p,im.size)
+          print("Prophet scenes QA: 8/8")
+          PY
+
+      - name: Commit scenes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/assets/prophet-scenes
+          if git diff --cached --quiet; then
+            echo "Scenes already current."
+            exit 0
+          fi
+          git commit -m "Kids: add cinematic prophet scene backgrounds"
+          git pull --rebase origin main
+          git push origin HEAD:main
