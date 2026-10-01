@@ -26,27 +26,27 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-102` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-103` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4431
-totalVerifiedEntries: 4431
-loadedEntries: 4431
-uniqueVerifiedReferences: 4431
-missingCount: 1805
+entriesCount: 4432
+totalVerifiedEntries: 4432
+loadedEntries: 4432
+uniqueVerifiedReferences: 4432
+missingCount: 1804
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
-firstMissingReference: 2:6
+firstMissingReference: 2:38
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-102.json
-nächster Gap-Fill-Batch: entries-gap-06-103.json
+letzter Gap-Fill-Batch: entries-gap-06-103.json
+nächster Gap-Fill-Batch: entries-gap-06-104.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `241` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `242` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -127,6 +127,7 @@ Danach gibt es keinen weiteren Qurʾān-Vers. Alle weiteren Arbeiten sind aussch
 06-100  1
 06-101  1
 06-102  1
+06-103  1
 ```
 
 Die Zahl hinter jedem Batch ist die aktuell registrierte Eintragszahl der Datei.
@@ -217,6 +218,7 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 06-100: 2:155
 06-101: 2:157
 06-102: 2:149
+06-103: 2:6
 ```
 
 ## Nächste echte Audit-Lücken
@@ -224,17 +226,14 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 Der erste weiterhin fehlende Vers ist:
 
 ```text
-2:6
+2:38
 ```
 
 Der aktuelle nächste 25er-Auditbereich beginnt mit:
 
 ```text
-2:6
-2:36
 2:38
 2:43
-2:48
 2:49
 2:64
 2:82
@@ -252,11 +251,12 @@ Der aktuelle nächste 25er-Auditbereich beginnt mit:
 2:133
 2:145
 2:147
-2:149
 2:151
-2:155
-06-090: 2:175
-06-091: 2:253
+2:162
+2:169
+2:176
+2:186
+2:190
 ```
 
 Diese Referenzen sind Arbeitsziele, keine Aufforderung zum künstlichen Füllen. Ein Vers bleibt offen, bis ein konkreter früher Bericht mit belastbarer Zuordnung und ausreichend geprüfter Überlieferungskette vorliegt.
