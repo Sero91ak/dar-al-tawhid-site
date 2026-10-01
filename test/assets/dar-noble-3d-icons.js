@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1159";
+  const VER="1160";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","topics.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -246,7 +246,7 @@
       el.setAttribute("src",want);
       return;
     }
-    try{el.style.fontSize="0";el.style.color="transparent";el.style.background="transparent"}catch(e){}
+    try{el.style.fontSize="0";el.style.color="transparent"}catch(e){}
     el.querySelectorAll("svg,img.dar3d-icon").forEach(function(s){try{s.remove()}catch(e){}});
     const keep=[];
     el.childNodes.forEach(function(n){if(n.nodeType===1&&n.classList&&(n.classList.contains("quick-action-badge")||n.classList.contains("quick-action-dot")))keep.push(n)});
