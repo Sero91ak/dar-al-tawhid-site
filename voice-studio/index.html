@@ -71,21 +71,22 @@ h1{font-size:clamp(26px,2.1vw,40px);line-height:1.02;letter-spacing:-.035em;marg
 .lead{font-size:13px;line-height:1.5;color:var(--muted);max-width:760px}
 .badges{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
 .badge{font-size:10px;font-weight:800;letter-spacing:.04em;padding:6px 9px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#cbd7df;white-space:nowrap}
-.prophet-pick{margin:0 0 14px;padding:14px 14px 12px;border:1px solid rgba(217,182,111,.32);border-radius:18px;background:linear-gradient(180deg,rgba(217,182,111,.10),rgba(255,255,255,.03));box-shadow:inset 0 1px rgba(255,255,255,.05)}
-.prophet-pick-head{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;justify-content:space-between;margin-bottom:10px}
-.prophet-pick-kicker{font-size:10px;font-weight:900;letter-spacing:.12em;color:var(--gold2);text-transform:uppercase}
-.prophet-pick h2{margin:4px 0 4px;font-size:20px;line-height:1.1}
-.prophet-pick-row{display:flex;flex-wrap:wrap;gap:8px;align-items:end}
-.prophet-pick .cs-field{min-width:120px}
-.prophet-pick select{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:10px 11px;font-size:12px;min-height:40px}
-.prophet-pick .notice{margin-top:8px}
-.prophet-pick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:7px}
-.prophet-pick-card{appearance:none;text-align:left;border:1px solid rgba(255,255,255,.09);background:#071927;color:var(--ink);border-radius:12px;padding:6px;cursor:pointer;min-width:0}
-.prophet-pick-card img{display:block;width:100%;height:58px;object-fit:cover;border-radius:8px;background:#0a2230}
-.prophet-pick-card strong{display:block;margin-top:6px;font-size:11px;line-height:1.2}
-.prophet-pick-card small{display:block;color:var(--soft);font-size:9px;margin-top:2px}
-.prophet-pick-card.active{border-color:rgba(217,182,111,.55);box-shadow:0 0 0 1px rgba(217,182,111,.28)}
+.prophet-pick{margin:0 0 10px;padding:10px 12px 8px;border:1px solid rgba(217,182,111,.28);border-radius:14px;background:rgba(217,182,111,.06)}
+.prophet-pick-head{margin-bottom:8px}
+.prophet-pick-kicker{font-size:9px;font-weight:900;letter-spacing:.12em;color:var(--gold2);text-transform:uppercase}
+.prophet-pick h2{margin:3px 0 3px;font-size:16px;line-height:1.15}
+.prophet-pick .notice{margin-top:4px}
+.prophet-pick-list{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.prophet-pick-item{display:grid;grid-template-columns:minmax(0,1fr) 88px 72px;gap:6px;align-items:center;border:1px solid rgba(255,255,255,.08);background:#071927;border-radius:10px;padding:5px 7px;min-width:0}
+.prophet-pick-item.active{border-color:rgba(217,182,111,.5);background:rgba(217,182,111,.08)}
+.prophet-pick-item button.prophet-pick-name{appearance:none;background:transparent;border:0;color:var(--ink);text-align:left;font-size:12px;font-weight:800;padding:2px 0;cursor:pointer;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prophet-pick-status{font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prophet-pick-status.busy{color:#f1c77c}
+.prophet-pick-status.good{color:#9bd8ba}
+.prophet-pick-status.bad{color:#ef9d9d}
+.prophet-pick-item .prophet-pick-push{min-height:30px;padding:0 8px;font-size:10px;border-radius:8px}
 .prophet-pick.focus{outline:2px solid rgba(217,182,111,.55);outline-offset:2px}
+@media(max-width:900px){.prophet-pick-list{grid-template-columns:1fr}}
 textarea{
   width:100%;height:clamp(330px,48vh,760px);min-height:290px;resize:vertical;
   background:linear-gradient(180deg,#071a29,#071725);color:var(--ink);border:1px solid rgba(255,255,255,.10);
@@ -617,19 +618,14 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <main class="panel editor-panel">
   <div class="prophet-pick" id="prophetPick">
     <div class="prophet-pick-head">
-      <div>
-        <div class="prophet-pick-kicker">Kids · fest vorbereitet</div>
-        <h2>Geschichten der Propheten</h2>
-        <div class="notice" style="margin:0">Prophet antippen · Text schreiben · Audio erzeugen · in Kids pushen. Cover und Quellen sind schon da.</div>
-      </div>
-      <div class="prophet-pick-row">
-        <div class="cs-field" style="flex:0 0 120px"><label for="prophetPickAge">Alter</label><select id="prophetPickAge"><option value="4-5">4–5</option><option value="6-8" selected>6–8</option><option value="9-10">9–10</option></select></div>
-        <button id="prophetPickPush" class="btn primary" type="button" disabled>In Kids-App pushen</button>
-      </div>
+      <div class="prophet-pick-kicker">Kids · ein Auftrag · alle Altersstufen</div>
+      <h2>Geschichten der Propheten</h2>
+      <div class="notice" style="margin:0">Namen wählen · einen Text schreiben · Audio erzeugen · beim Propheten pushen. Lesen &amp; Hören und 4–5 / 6–8 / 9–10 werden automatisch zugeordnet.</div>
     </div>
     <select id="prophetPickId" hidden><option value="">— wählen —</option></select>
-    <div id="prophetPickGrid" class="prophet-pick-grid"></div>
-    <div id="prophetPickReady" class="notice">25 Plätze sind vorbereitet. Wähle zuerst Muḥammad ﷺ oder einen anderen Propheten.</div>
+    <select id="prophetPickAge" hidden><option value="all" selected>alle</option></select>
+    <div id="prophetPickList" class="prophet-pick-list"></div>
+    <div id="prophetPickReady" class="notice">Ein Push je Prophet. Die Kids-App erkennt Audio, Lesetext und Altersstufe selbst.</div>
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
@@ -784,7 +780,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
     <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.44</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.45</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash</textarea>
@@ -2097,9 +2093,11 @@ checkHealth({quiet:true}).then(()=>analyzeProsody());
 setInterval(()=>checkHealth({quiet:true}),5000);
 
 (function prophetStoryManualLoader(){
-  const sel=$("#prophetPickId"),age=$("#prophetPickAge"),ta=$("#text"),push=$("#prophetPickPush"),ready=$("#prophetPickReady"),grid=$("#prophetPickGrid");
-  if(!sel||!ta||!push)return;
+  const sel=$("#prophetPickId"),ta=$("#text"),ready=$("#prophetPickReady"),list=$("#prophetPickList");
+  if(!sel||!ta||!list)return;
+  const AGES=["4-5","6-8","9-10"];
   let pack=[];
+  const busy=new Map();
   function honor(it){
     if(!it)return"";
     if(it.id==="muhammad")return"ﷺ";
@@ -2115,34 +2113,57 @@ setInterval(()=>checkHealth({quiet:true}),5000);
     if(v.indexOf("http")===0)return v;
     return "https://dar-al-tawhid.de"+v;
   }
-  function fillSelect(){
+  function slotInfo(it){
+    const scripts=it&&it.scripts&&typeof it.scripts==="object"?it.scripts:{};
+    const audio=it&&it.audio&&typeof it.audio==="object"?it.audio:{};
+    const readyAges=AGES.filter(a=>scripts[a]&&audio[a]&&audio[a].url);
+    if(busy.get(it.id)==="push")return {cls:"busy",text:"lädt …"};
+    if(busy.get(it.id)==="error")return {cls:"bad",text:"fehlgeschlagen"};
+    if(readyAges.length===3)return {cls:"good",text:"in Kids · erledigt"};
+    if(readyAges.length)return {cls:"busy",text:readyAges.length+"/3 in Kids"};
+    if(AGES.some(a=>scripts[a]))return {cls:"busy",text:"Text in Kids"};
+    return {cls:"",text:"offen"};
+  }
+  function fillList(){
     const cur=sel.value;
     sel.innerHTML='<option value="">— wählen —</option>'+pack.map(it=>'<option value="'+it.id+'">'+label(it)+'</option>').join("");
     if(cur)sel.value=cur;
-    if(grid){
-      grid.innerHTML=pack.map(it=>'<button class="prophet-pick-card'+(sel.value===it.id?" active":"")+'" type="button" data-ps-pick="'+it.id+'">'+(it.cover?'<img src="'+coverSrc(it.cover)+'" alt="">':"")+'<strong>'+label(it)+'</strong><small>'+(it.nameAr||"")+'</small></button>').join("");
-      grid.querySelectorAll("[data-ps-pick]").forEach(btn=>btn.addEventListener("click",()=>{
-        sel.value=btn.dataset.psPick;
-        prepareSlot();
-        $("#text")?.scrollIntoView({behavior:"smooth",block:"center"});
-      }));
-    }
+    list.innerHTML=pack.map(it=>{
+      const st=slotInfo(it);
+      const pushing=busy.get(it.id)==="push";
+      return '<div class="prophet-pick-item'+(sel.value===it.id?" active":"")+'" data-ps-pick="'+it.id+'">'+
+        '<button class="prophet-pick-name" type="button" data-ps-pick="'+it.id+'">'+label(it)+'</button>'+
+        '<span class="prophet-pick-status '+st.cls+'" data-ps-status="'+it.id+'">'+st.text+'</span>'+
+        '<button class="btn primary prophet-pick-push" type="button" data-ps-push="'+it.id+'" '+(pushing?"disabled":"")+'>'+(pushing?"Lädt":"Push")+'</button>'+
+      '</div>';
+    }).join("");
+    list.querySelectorAll("[data-ps-pick]").forEach(el=>el.addEventListener("click",()=>{
+      sel.value=el.dataset.psPick;
+      prepareSlot();
+    }));
+    list.querySelectorAll("[data-ps-push]").forEach(btn=>btn.addEventListener("click",e=>{
+      e.stopPropagation();
+      sel.value=btn.dataset.psPush;
+      prepareSlot();
+      pushOne(btn.dataset.psPush);
+    }));
   }
   let lastId="";
   function prepareSlot(){
     const it=pack.find(x=>x.id===sel.value);
-    const key=age.value||"6-8";
-    if(grid)grid.querySelectorAll("[data-ps-pick]").forEach(b=>b.classList.toggle("active",b.dataset.psPick===sel.value));
+    fillList();
     if(!it){
-      push.disabled=true;
       lastId="";
-      if(ready)ready.textContent="25 Plätze sind vorbereitet. Wähle zuerst Muḥammad ﷺ oder einen anderen Propheten.";
+      if(ready)ready.textContent="Namen wählen, einen Text schreiben, Audio erzeugen, dann den Push-Button dieses Propheten.";
       return;
     }
     const switched=it.id!==lastId;
     lastId=it.id;
-    ta.placeholder="Deine Erzählung für "+label(it)+" · Alter "+key.replace("-","–");
-    if(switched)ta.value="";
+    ta.placeholder="Eine Erzählung für "+label(it)+" · gilt automatisch für 4–5, 6–8 und 9–10";
+    if(switched){
+      const scripts=it.scripts&&typeof it.scripts==="object"?it.scripts:{};
+      ta.value=String(scripts["6-8"]||scripts["4-5"]||scripts["9-10"]||"");
+    }
     const title=$("#csTitle");if(title)title.value=it.title||it.name||"";
     const prophet=$("#csProphet");if(prophet)prophet.value=it.id||"";
     const sources=$("#csSources");if(sources)sources.value=(it.sourceRefs||[]).join("\n");
@@ -2156,10 +2177,7 @@ setInterval(()=>checkHealth({quiet:true}),5000);
       img.alt=it.name||"";
       cover.prepend(img);
     }
-    const hasAudio=!!(it.audio&&it.audio[key]&&it.audio[key].url);
-    const hasScript=!!(it.scripts&&it.scripts[key]);
-    if(ready)ready.textContent=label(it)+" · "+key.replace("-","–")+" ist vorbereitet."+(hasScript||hasAudio?" In der Kids-App liegt schon eine Fassung.":" Schreibe den Text, erzeuge Audio, höre zu, dann pushen.");
-    push.disabled=false;
+    if(ready)ready.textContent=label(it)+" gewählt. Ein Text, ein Audio, ein Push – Kids ordnet Lesen, Hören und Alter selbst zu.";
     ta.dispatchEvent(new Event("input"));
     ta.focus();
   }
@@ -2177,37 +2195,37 @@ setInterval(()=>checkHealth({quiet:true}),5000);
         items=d.items||[];
       }
       pack=items.slice().sort((a,b)=>Number(a.displayOrder||99)-Number(b.displayOrder||99));
-      fillSelect();
+      fillList();
     }catch(e){console.warn("[DĀR Voice] Prophet stories library",e)}
   }
-  sel.addEventListener("change",prepareSlot);
-  age.addEventListener("change",prepareSlot);
-  push.addEventListener("click",async()=>{
-    const it=pack.find(x=>x.id===sel.value);
+  async function pushOne(id){
+    const it=pack.find(x=>x.id===id);
     if(!it){setMessage("Zuerst einen Propheten wählen.","warn");return;}
     const text=String(ta.value||"").trim();
-    if(text.length<40){setMessage("Zuerst deinen Erzähltext einfügen.","warn");return;}
-    push.disabled=true;push.textContent="Wird in Kids-App geschrieben …";
+    if(text.length<40){setMessage("Zuerst den Erzähltext für "+label(it)+" schreiben.","warn");return;}
+    busy.set(id,"push");fillList();
+    setMessage(label(it)+" wird in die Kids-App geschrieben …","warn");
     try{
       const r=await localRequest("/prophet-stories/publish",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({id:it.id,age:age.value||"6-8",text})
+        body:JSON.stringify({id:it.id,age:"all",text})
       });
       const d=await r.json().catch(()=>({}));
       if(!r.ok||d.ok===false)throw Error(d.error||"Push fehlgeschlagen");
-      setMessage(label(it)+" ist in der Kids-App. Nach dem Deploy erscheint die Erzählung unter Geschichten der Propheten.","good");
+      busy.delete(id);
+      setMessage(label(it)+" ist in der Kids-App (Lesen & Hören, alle Altersstufen).","good");
       await loadPack();sel.value=it.id;prepareSlot();
     }catch(e){
-      setMessage(e.message||String(e),"bad");
-    }finally{
-      push.disabled=false;push.textContent="In Kids-App pushen";
+      busy.set(id,"error");fillList();
+      setMessage((e.message||String(e)),"bad");
     }
-  });
+  }
+  sel.addEventListener("change",prepareSlot);
   loadPack();
 })();
 </script>
-<script src="content-studio.js?v=2912"></script>
+<script src="content-studio.js?v=2913"></script>
 <script src="alphabet-audio-studio.js?v=2929"></script>
 </body>
 </html>

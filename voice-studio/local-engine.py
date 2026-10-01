@@ -218,7 +218,7 @@ def load_kids_repo_json(local_name:str,repo_path:str,validator):
 
 def refresh_studio_ui_from_github():
     files=(
-        ("voice-studio/index.html","studio.html",("id=\"prophetPick\"","Geschichten der Propheten")),
+        ("voice-studio/index.html","studio.html",("id=\"prophetPick\"","prophetPickList","Geschichten der Propheten")),
         ("voice-studio/content-studio.js","content-studio.js",("csProphetTab","ensureProphetUi")),
     )
     for repo,name,markers in files:
@@ -5454,10 +5454,15 @@ def start_prophet_story_voice_pack():
 
 def publish_manual_prophet_story(item_id:str,age:str,text:str):
     item_id=str(item_id or "").strip()
-    age=str(age or "").strip()
+    requested=str(age or "all").strip()
     text=str(text or "").strip()
-    if age not in ("4-5","6-8","9-10"):
-        raise ValueError("Alter muss 4-5, 6-8 oder 9-10 sein.")
+    ages=("4-5","6-8","9-10")
+    if requested in ("","all","auto","*"):
+        target_ages=ages
+    elif requested in ages:
+        target_ages=(requested,)
+    else:
+        raise ValueError("Alter muss all, 4-5, 6-8 oder 9-10 sein.")
     if not item_id:
         raise ValueError("Prophet fehlt.")
     if len(text)<40:
@@ -5491,41 +5496,51 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str):
     item=next((x for x in items if str(x.get("id"))==item_id),None)
     if not item:
         raise ValueError("Prophet nicht gefunden: "+item_id)
-    asset=repo/"kids/assets/prophet-story-audio"/item_id/(age+".m4a")
-    _encode_kids_m4a(src,asset)
-    dur=round(_audio_duration_seconds(asset),3)
-    if dur<5 or asset.stat().st_size<4000:
+    first=target_ages[0]
+    first_asset=repo/"kids/assets/prophet-story-audio"/item_id/(first+".m4a")
+    _encode_kids_m4a(src,first_asset)
+    dur=round(_audio_duration_seconds(first_asset),3)
+    if dur<5 or first_asset.stat().st_size<4000:
         raise RuntimeError("Audio-QA fehlgeschlagen: zu kurz oder leer.")
     stamp=time.strftime("%Y%m%d-%H%M%S")
     scripts=item.get("scripts") if isinstance(item.get("scripts"),dict) else {}
-    scripts[age]=text
-    item["scripts"]=scripts
     audio=item.get("audio") if isinstance(item.get("audio"),dict) else {}
-    audio[age]={
-        "url":f"/kids/assets/prophet-story-audio/{item_id}/{age}.m4a?v={stamp}",
+    rels=[]
+    meta={
         "durationSec":dur,
-        "bytes":asset.stat().st_size,
-        "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
+        "bytes":first_asset.stat().st_size,
+        "sha256":hashlib.sha256(first_asset.read_bytes()).hexdigest(),
         "voiceProfile":"kids_story",
         "voiceProfileId":"serhat-owner-voice-2026",
         "source":"DĀR Voice Studio local engine",
         "sourceSpeaker":"Serhat Abu Malik",
         "manual":True,
+        "allAges":requested in ("","all","auto","*"),
+        "modes":["read","listen"],
         "technicalQaPassed":True,
         "publishedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
     }
+    for a in target_ages:
+        asset=repo/"kids/assets/prophet-story-audio"/item_id/(a+".m4a")
+        if asset!=first_asset:
+            asset.parent.mkdir(parents=True,exist_ok=True)
+            shutil.copy2(first_asset,asset)
+        scripts[a]=text
+        audio[a]={**meta,"url":f"/kids/assets/prophet-story-audio/{item_id}/{a}.m4a?v={stamp}"}
+        rels.append(str(asset.relative_to(repo)))
+    item["scripts"]=scripts
     item["audio"]=audio
     manifest["updatedAt"]=time.strftime("%Y-%m-%d")
     atomic_write_json(data_path,manifest)
-    p=rr([git,"-C",str(repo),"add","kids/data/prophet-stories.json",str(asset.relative_to(repo))],60)
+    p=rr([git,"-C",str(repo),"add","kids/data/prophet-stories.json",*rels],60)
     if p.returncode!=0:
         raise RuntimeError("Git staging fehlgeschlagen.")
     if rr([git,"-C",str(repo),"diff","--cached","--quiet"],30).returncode==0:
-        return {"ok":True,"unchanged":True,"id":item_id,"age":age,"url":audio[age]["url"]}
+        return {"ok":True,"unchanged":True,"id":item_id,"ages":list(target_ages),"url":audio[first]["url"]}
     rr([git,"-C",str(repo),"config","user.name","Serhat Abu Malik"],20)
     rr([git,"-C",str(repo),"config","user.email","73606501+Sero91ak@users.noreply.github.com"],20)
     name=str(item.get("name") or item_id)
-    msg=f"Kids: Prophetengeschichte {name} · Alter {age} aus Voice Studio"
+    msg=f"Kids: Prophetengeschichte {name} · alle Altersstufen aus Voice Studio" if len(target_ages)>1 else f"Kids: Prophetengeschichte {name} · Alter {first} aus Voice Studio"
     p=rr([git,"-C",str(repo),"commit","-m",msg],120)
     if p.returncode!=0:
         raise RuntimeError("Git commit fehlgeschlagen: "+(p.stderr or p.stdout)[-600:])
@@ -5539,12 +5554,13 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str):
                 raise RuntimeError("Rebase fehlgeschlagen.")
             push=rr([git,"-C",str(repo),"push","origin","HEAD:main"],300)
             if push.returncode==0:
-                return {"ok":True,"id":item_id,"name":name,"age":age,"url":audio[age]["url"],"durationSec":dur,"pushed":True}
+                return {"ok":True,"id":item_id,"name":name,"ages":list(target_ages),"url":audio[first]["url"],"durationSec":dur,"pushed":True}
             last=(push.stderr or push.stdout)[-700:]
         else:
             last=(fetch.stderr or fetch.stdout)[-700:]
         if attempt<3: time.sleep(attempt*3)
     raise RuntimeError("GitHub-Push fehlgeschlagen: "+last)
+
 
 
 class H(BaseHTTPRequestHandler):

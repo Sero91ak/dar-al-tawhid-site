@@ -273,19 +273,14 @@ function publishHtml(){
 function prophetPickHtml(){
   return `<div class="prophet-pick" id="prophetPick">
     <div class="prophet-pick-head">
-      <div>
-        <div class="prophet-pick-kicker">Kids · fest vorbereitet</div>
-        <h2>Geschichten der Propheten</h2>
-        <div class="notice" style="margin:0">Prophet antippen · Text schreiben · Audio erzeugen · in Kids pushen. Cover und Quellen sind schon da.</div>
-      </div>
-      <div class="prophet-pick-row">
-        <div class="cs-field" style="flex:0 0 120px"><label for="prophetPickAge">Alter</label><select id="prophetPickAge"><option value="4-5">4–5</option><option value="6-8" selected>6–8</option><option value="9-10">9–10</option></select></div>
-        <button id="prophetPickPush" class="btn primary" type="button" disabled>In Kids-App pushen</button>
-      </div>
+      <div class="prophet-pick-kicker">Kids · ein Auftrag · alle Altersstufen</div>
+      <h2>Geschichten der Propheten</h2>
+      <div class="notice" style="margin:0">Namen wählen · einen Text schreiben · Audio erzeugen · beim Propheten pushen. Lesen &amp; Hören und 4–5 / 6–8 / 9–10 werden automatisch zugeordnet.</div>
     </div>
     <select id="prophetPickId" hidden><option value="">— wählen —</option></select>
-    <div id="prophetPickGrid" class="prophet-pick-grid"></div>
-    <div id="prophetPickReady" class="notice">25 Plätze sind vorbereitet. Wähle zuerst Muḥammad ﷺ oder einen anderen Propheten.</div>
+    <select id="prophetPickAge" hidden><option value="all" selected>alle</option></select>
+    <div id="prophetPickList" class="prophet-pick-list"></div>
+    <div id="prophetPickReady" class="notice">Ein Push je Prophet. Die Kids-App erkennt Audio, Lesetext und Altersstufe selbst.</div>
   </div>`;
 }
 function ensureProphetUi(){
