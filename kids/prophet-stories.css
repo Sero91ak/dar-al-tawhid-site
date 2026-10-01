@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD Kids — Prophet Stories v10
+/* DĀR AL TAWḤĪD Kids — Prophet Stories v11
    Approved cinematic reference implemented with REAL transparent 3D symbols
    and REAL generated scenic backgrounds. */
 
@@ -1047,4 +1047,400 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
   .ps-title{font-size:50px}
   .ps-summary{font-size:16px;max-width:68%}
   .ps-read{font-size:18px}
+}
+
+
+/* ===== APPROVED GENERATED REFERENCES — v11 ===== */
+/* The approved references do NOT use a large library hero. The visual hierarchy is:
+   mode rail -> compact cinematic rows -> full scenic detail. */
+.ps-library-hero{display:none!important}
+.ps-wrap{
+  margin:0 -16px;
+  padding:0 0 24px;
+  overflow:hidden;
+  background:#05243a;
+}
+.ps-toolbar{
+  position:relative!important;
+  top:auto!important;
+  z-index:10;
+  padding:8px 10px 9px!important;
+  border-bottom:1px solid rgba(114,210,218,.20)!important;
+  background:linear-gradient(180deg,#082e4d 0%,#062844 100%)!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.ps-modes{
+  grid-template-columns:1.22fr .78fr .72fr!important;
+  gap:6px!important;
+}
+.ps-mode{
+  min-height:38px!important;
+  padding:5px 8px!important;
+  border-color:rgba(119,205,216,.22)!important;
+  background:rgba(3,31,51,.44)!important;
+  color:#dcecef!important;
+  font-size:10px!important;
+  font-weight:850!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.035)!important;
+}
+.ps-mode.active{
+  border-color:rgba(244,207,111,.56)!important;
+  color:#ffe49a!important;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,231,153,.17),transparent 65%),
+    rgba(91,74,40,.36)!important;
+  box-shadow:0 0 16px rgba(242,199,92,.14),inset 0 1px rgba(255,255,255,.07)!important;
+}
+
+/* Compact generated-reference rows */
+.ps-library-list{
+  position:relative;
+  background:#05243a!important;
+}
+.ps-story-row{
+  position:relative!important;
+  min-height:116px!important;
+  height:116px!important;
+  display:block!important;
+  overflow:hidden!important;
+  padding:0!important;
+  border:0!important;
+  border-bottom:1px solid rgba(103,199,209,.23)!important;
+  background-image:var(--scene)!important;
+  background-size:cover!important;
+  background-position:var(--scene-pos,center 52%)!important;
+  isolation:isolate;
+}
+.ps-story-row::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:1!important;
+  inset:0!important;
+  background:
+    linear-gradient(90deg,
+      rgba(1,18,31,.04) 0%,
+      rgba(1,18,31,.03) 29%,
+      rgba(2,21,36,.30) 42%,
+      rgba(2,21,36,.69) 61%,
+      rgba(2,21,36,.91) 100%)!important;
+  pointer-events:none;
+}
+.ps-story-row::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:6!important;
+  left:0;right:0;bottom:0;height:1px!important;
+  background:linear-gradient(90deg,rgba(241,197,93,.36),rgba(89,194,205,.20),transparent 88%)!important;
+}
+.ps-row-scene{display:none!important}
+
+/* 3D object is part of the landscape, not a separate card/column */
+.ps-row-art{
+  position:absolute!important;
+  z-index:2!important;
+  left:0!important;
+  top:0!important;
+  width:45%!important;
+  height:100%!important;
+  overflow:visible!important;
+  pointer-events:none!important;
+}
+.ps-row-art::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  left:-8%!important;
+  top:10%!important;
+  width:112%!important;
+  height:82%!important;
+  border-radius:50%!important;
+  background:
+    radial-gradient(circle at 48% 53%,
+      rgba(255,215,116,.18) 0%,
+      rgba(100,207,214,.10) 38%,
+      transparent 70%)!important;
+  filter:blur(10px)!important;
+  opacity:.92!important;
+}
+.ps-row-art::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:6%;
+  right:2%;
+  bottom:7%;
+  height:18%;
+  border-radius:50%;
+  background:radial-gradient(ellipse,rgba(0,0,0,.34),transparent 70%);
+  filter:blur(5px);
+}
+.ps-row-art img{
+  position:absolute!important;
+  z-index:2!important;
+  left:-8%!important;
+  top:-8%!important;
+  width:116%!important;
+  height:116%!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:scale(var(--row-object-scale,1)) translate(var(--row-object-x,0),var(--row-object-y,0))!important;
+  transform-origin:center!important;
+  filter:
+    saturate(1.12)
+    contrast(1.06)
+    brightness(1.08)
+    drop-shadow(0 10px 11px rgba(0,0,0,.31))
+    drop-shadow(0 0 10px rgba(245,196,88,.09))!important;
+}
+.ps-row-copy{
+  position:absolute!important;
+  z-index:4!important;
+  left:42%!important;
+  right:42px!important;
+  top:50%!important;
+  min-width:0!important;
+  padding:0!important;
+  transform:translateY(-50%)!important;
+}
+.ps-row-meta{
+  color:#bfe7d6!important;
+  font-size:7.7px!important;
+  line-height:1.15!important;
+  font-weight:900!important;
+  letter-spacing:.085em!important;
+}
+.ps-row-title{
+  margin-top:4px!important;
+  color:#fff!important;
+  font-size:22px!important;
+  line-height:.96!important;
+  font-weight:950!important;
+  letter-spacing:-.035em!important;
+  text-shadow:0 3px 12px rgba(0,0,0,.28)!important;
+}
+.ps-row-ar{
+  margin-top:5px!important;
+  color:#ead8a2!important;
+  font-size:14.5px!important;
+  line-height:1.2!important;
+  text-shadow:0 2px 9px rgba(0,0,0,.25)!important;
+}
+.ps-row-go{
+  position:absolute!important;
+  z-index:5!important;
+  right:10px!important;
+  top:50%!important;
+  width:31px!important;
+  height:31px!important;
+  transform:translateY(-50%)!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(244,209,118,.28)!important;
+  border-radius:50%!important;
+  background:rgba(4,31,50,.34)!important;
+  color:#f9dfa0!important;
+  font-size:20px!important;
+  box-shadow:0 0 13px rgba(239,196,91,.08)!important;
+}
+.ps-done{right:45px!important;bottom:8px!important}
+
+/* Individual framing makes each 3D object read as if it belongs to the scene. */
+.ps-story-row[data-ps-id="adam"]{--scene-pos:center 57%;--row-object-scale:1.12;--row-object-x:-1%;--row-object-y:1%}
+.ps-story-row[data-ps-id="idris"]{--scene-pos:center 47%;--row-object-scale:1.16;--row-object-x:-2%;--row-object-y:1%}
+.ps-story-row[data-ps-id="nuh"]{--scene-pos:center 53%;--row-object-scale:1.18;--row-object-x:-2%;--row-object-y:2%}
+.ps-story-row[data-ps-id="hud"]{--scene-pos:center 54%;--row-object-scale:1.15;--row-object-x:-1%;--row-object-y:2%}
+.ps-story-row[data-ps-id="salih"]{--scene-pos:center 55%;--row-object-scale:1.14;--row-object-x:-1%;--row-object-y:2%}
+.ps-story-row[data-ps-id="ibrahim"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="lut"]{--row-object-scale:1.10}
+.ps-story-row[data-ps-id="ismail"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="ishaq"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="yaqub"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="yusuf"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="ayyub"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="shuayb"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="musa"]{--row-object-scale:1.14}
+.ps-story-row[data-ps-id="harun"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="dhul-kifl"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="dawud"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="sulayman"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="ilyas"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="alyasa"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="yunus"]{--row-object-scale:1.16}
+.ps-story-row[data-ps-id="zakariyya"]{--row-object-scale:1.10}
+.ps-story-row[data-ps-id="yahya"]{--row-object-scale:1.10}
+.ps-story-row[data-ps-id="isa"]{--row-object-scale:1.12}
+.ps-story-row[data-ps-id="muhammad"]{--row-object-scale:1.10}
+
+/* Detail reference: short scenic header; the symbol is large and intentionally cropped
+   into the upper-right scene (Nūḥ boat/hull effect), not a centered sticker. */
+.ps-modal{background:#021522!important}
+.ps-sheet{
+  background:#041f34!important;
+}
+.ps-top{
+  padding:calc(8px + env(safe-area-inset-top)) 10px 6px!important;
+}
+.ps-top-label{display:none!important}
+.ps-close{
+  width:36px!important;
+  height:36px!important;
+  background:rgba(3,29,47,.40)!important;
+  border-color:rgba(241,206,117,.24)!important;
+  box-shadow:none!important;
+}
+.ps-hero{
+  min-height:388px!important;
+  background-size:cover!important;
+  background-position:var(--detail-scene-pos,center 50%)!important;
+}
+.ps-hero::before{
+  background:
+    linear-gradient(90deg,
+      rgba(3,22,38,.84) 0%,
+      rgba(3,22,38,.60) 34%,
+      rgba(3,22,38,.22) 60%,
+      rgba(3,22,38,.04) 100%),
+    linear-gradient(180deg,
+      rgba(2,15,26,.08) 0%,
+      rgba(2,15,26,.02) 38%,
+      rgba(2,15,26,.46) 100%)!important;
+}
+.ps-detail-glow{display:none!important}
+.ps-hero>img{
+  z-index:3!important;
+  top:-38px!important;
+  right:-7%!important;
+  width:58%!important;
+  height:220px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:scale(var(--detail-object-scale,1.28)) translate(var(--detail-object-x,0),var(--detail-object-y,0))!important;
+  transform-origin:top right!important;
+  filter:
+    saturate(1.12)
+    contrast(1.05)
+    brightness(1.07)
+    drop-shadow(0 16px 18px rgba(0,0,0,.27))
+    drop-shadow(0 0 13px rgba(241,198,95,.08))!important;
+}
+.ps-hero-copy{
+  left:14px!important;
+  right:14px!important;
+  top:31px!important;
+  bottom:13px!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+.ps-title{
+  max-width:54%!important;
+  font-size:clamp(43px,11.6vw,56px)!important;
+  line-height:.91!important;
+}
+.ps-ar{
+  margin-top:4px!important;
+  max-width:62%!important;
+  color:#f2d36f!important;
+  font-size:22px!important;
+  line-height:1.22!important;
+}
+.ps-summary{
+  margin-top:10px!important;
+  max-width:76%!important;
+  color:rgba(255,255,255,.88)!important;
+  font-size:14.5px!important;
+  line-height:1.42!important;
+}
+.ps-meta{
+  margin-top:11px!important;
+  gap:6px!important;
+}
+.ps-pill{
+  min-height:30px!important;
+  padding:5px 9px!important;
+  font-size:9.5px!important;
+  background:rgba(3,34,53,.49)!important;
+  border-color:rgba(127,207,216,.22)!important;
+}
+.ps-detail-modes{
+  margin-top:14px!important;
+  padding:3px!important;
+  gap:3px!important;
+  border-radius:999px!important;
+  background:rgba(3,29,47,.66)!important;
+}
+.ps-detail-mode{
+  min-height:40px!important;
+  padding:5px 7px!important;
+  font-size:9.8px!important;
+}
+.ps-body{
+  padding:18px 14px calc(34px + env(safe-area-inset-bottom))!important;
+  border-top:1px solid rgba(99,196,207,.17)!important;
+  background:linear-gradient(180deg,#05243a 0%,#041f34 100%)!important;
+}
+.ps-player{margin:0 0 14px!important}
+.ps-read{
+  font-size:17px!important;
+  line-height:1.62!important;
+}
+.ps-read p{padding-bottom:18px!important}
+.ps-read p+p{padding-top:18px!important}
+
+/* Per-detail composition. Nūḥ is deliberately oversized/cropped like the approved image. */
+.ps-hero[data-ps-id="nuh"]{
+  --detail-scene-pos:center 54%;
+  --detail-object-scale:1.56;
+  --detail-object-x:4%;
+  --detail-object-y:-3%;
+}
+.ps-hero[data-ps-id="nuh"]>img{
+  top:-73px!important;
+  right:-13%!important;
+  width:70%!important;
+  height:260px!important;
+}
+.ps-hero[data-ps-id="adam"]{--detail-scene-pos:center 56%;--detail-object-scale:1.34}
+.ps-hero[data-ps-id="idris"]{--detail-scene-pos:center 48%;--detail-object-scale:1.38}
+.ps-hero[data-ps-id="hud"]{--detail-scene-pos:center 55%;--detail-object-scale:1.38}
+.ps-hero[data-ps-id="salih"]{--detail-scene-pos:center 55%;--detail-object-scale:1.36}
+.ps-hero[data-ps-id="musa"]{--detail-object-scale:1.38}
+.ps-hero[data-ps-id="yunus"]{--detail-object-scale:1.42}
+
+/* iPhone tuning from the actual reference proportions */
+@media(max-width:430px){
+  .ps-wrap{margin:0 -16px!important}
+  .ps-toolbar{padding:7px 8px 8px!important}
+  .ps-mode{min-height:36px!important;font-size:9.3px!important;padding:4px 6px!important}
+  .ps-mode-icon{width:12px!important;height:12px!important;margin-right:4px!important}
+
+  .ps-story-row{min-height:108px!important;height:108px!important}
+  .ps-row-art{width:46%!important}
+  .ps-row-art img{left:-10%!important;top:-10%!important;width:120%!important;height:120%!important}
+  .ps-row-copy{left:42%!important;right:37px!important}
+  .ps-row-meta{font-size:7px!important}
+  .ps-row-title{font-size:20px!important}
+  .ps-row-ar{font-size:13px!important}
+  .ps-row-go{right:7px!important;width:28px!important;height:28px!important;font-size:18px!important}
+
+  .ps-hero{min-height:376px!important}
+  .ps-hero>img{top:-35px!important;right:-9%!important;width:60%!important;height:205px!important}
+  .ps-hero[data-ps-id="nuh"]>img{top:-70px!important;right:-15%!important;width:74%!important;height:245px!important}
+  .ps-hero-copy{left:12px!important;right:12px!important;top:28px!important;bottom:11px!important}
+  .ps-title{font-size:43px!important;max-width:55%!important}
+  .ps-ar{font-size:20px!important}
+  .ps-summary{font-size:13.5px!important;max-width:77%!important}
+  .ps-pill{min-height:28px!important;padding:5px 8px!important;font-size:8.8px!important}
+  .ps-detail-mode{min-height:38px!important;font-size:9px!important}
+  .ps-body{padding:16px 12px calc(32px + env(safe-area-inset-bottom))!important}
+  .ps-read{font-size:16.5px!important}
+}
+@media(max-width:375px){
+  .ps-story-row{min-height:102px!important;height:102px!important}
+  .ps-row-title{font-size:18.5px!important}
+  .ps-row-ar{font-size:12.3px!important}
+  .ps-hero{min-height:365px!important}
+  .ps-title{font-size:39px!important}
+  .ps-summary{font-size:13px!important}
 }
