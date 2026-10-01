@@ -16,12 +16,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
     private let studioURL = URL(string: "http://127.0.0.1:8787/studio/")!
     private let healthURL = URL(string: "http://127.0.0.1:8787/health")!
-    private let updateManifestURL = URL(string: "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/version.json?ref=main")!
+    private let updateManifestAPIURL = URL(string: "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/version.json?ref=main")!
     private var latestKnownVersion = ""
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.44"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.47"
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -31,7 +31,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.44"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.47"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
         config.userContentController.add(self, name: "darCompanion")
@@ -385,47 +385,107 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         return inner
     }
 
+    private func updateManifestSources() -> [URL] {
+        let stamp = String(Int(Date().timeIntervalSince1970))
+        var urls: [URL] = [updateManifestAPIURL]
+        if let site = URL(string: "https://dar-al-tawhid.de/voice-studio/version.json?update_check=\(stamp)") {
+            urls.append(site)
+        }
+        if let raw = URL(string: "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/version.json?update_check=\(stamp)") {
+            urls.append(raw)
+        }
+        return urls
+    }
+
+    private func finishUpdateCheck(with object: [String: Any], userInitiated: Bool) {
+        guard let latest = object["version"] as? String, !latest.isEmpty else {
+            publishUpdateState("error", message: "Update-Datei enthält keine gültige Versionsnummer.")
+            return
+        }
+
+        latestKnownVersion = latest
+        updateAvailable = isVersion(latest, newerThan: currentVersion)
+        if updateAvailable {
+            publishUpdateState("available", latest: latest, message: "Update verfügbar")
+            if !userInitiated {
+                DispatchQueue.main.async { [weak self] in self?.installAvailableUpdate() }
+            }
+        } else {
+            publishUpdateState(
+                "current",
+                latest: latest,
+                message: userInitiated ? "Voice Studio ist aktuell." : ""
+            )
+        }
+    }
+
+    private func checkUpdateSource(
+        _ sources: [URL],
+        index: Int,
+        userInitiated: Bool,
+        failures: [String]
+    ) {
+        guard index < sources.count else {
+            let detail = failures.suffix(3).joined(separator: " · ")
+            publishUpdateState(
+                "error",
+                message: detail.isEmpty
+                    ? "Update-Prüfung derzeit nicht erreichbar."
+                    : "Update-Prüfung derzeit nicht erreichbar. \(detail)"
+            )
+            return
+        }
+
+        let url = sources[index]
+        var request = URLRequest(url: url)
+        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        request.timeoutInterval = 7
+        request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
+        request.setValue("DAR-Voice-Studio-Updater/2.9.47", forHTTPHeaderField: "User-Agent")
+        if url.host == "api.github.com" {
+            request.setValue("application/vnd.github.raw+json", forHTTPHeaderField: "Accept")
+        } else {
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+        }
+
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            guard let self = self else { return }
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+
+            if error == nil,
+               status == 200,
+               let data = data,
+               let object = self.manifestObject(from: data),
+               object["version"] is String {
+                self.finishUpdateCheck(with: object, userInitiated: userInitiated)
+                return
+            }
+
+            var nextFailures = failures
+            if let error = error {
+                nextFailures.append("\(url.host ?? "Quelle"): \(error.localizedDescription)")
+            } else {
+                nextFailures.append("\(url.host ?? "Quelle"): HTTP \(status)")
+            }
+            self.checkUpdateSource(
+                sources,
+                index: index + 1,
+                userInitiated: userInitiated,
+                failures: nextFailures
+            )
+        }.resume()
+    }
+
     private func checkForUpdates(userInitiated: Bool = false) {
         if userInitiated {
             publishUpdateState("checking", message: "Neue Version wird geprüft …")
         }
-        var request = URLRequest(url: updateManifestURL)
-        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
-        request.timeoutInterval = 8
-        request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
-        request.setValue("application/vnd.github.raw+json", forHTTPHeaderField: "Accept")
-        request.setValue("DAR-Voice-Studio-Updater", forHTTPHeaderField: "User-Agent")
-
-        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            guard let self = self else { return }
-            guard error == nil,
-                  (response as? HTTPURLResponse)?.statusCode == 200,
-                  let data = data,
-                  let object = self.manifestObject(from: data),
-                  let latest = object["version"] as? String,
-                  !latest.isEmpty else {
-                self.publishUpdateState(
-                    "error",
-                    message: userInitiated ? "Update-Prüfung nicht erreichbar." : ""
-                )
-                return
-            }
-
-            self.latestKnownVersion = latest
-            self.updateAvailable = self.isVersion(latest, newerThan: self.currentVersion)
-            if self.updateAvailable {
-                self.publishUpdateState("available", latest: latest, message: "Update verfügbar")
-                if !userInitiated {
-                    DispatchQueue.main.async { self.installAvailableUpdate() }
-                }
-            } else {
-                self.publishUpdateState(
-                    "current",
-                    latest: latest,
-                    message: userInitiated ? "Voice Studio ist aktuell." : ""
-                )
-            }
-        }.resume()
+        checkUpdateSource(
+            updateManifestSources(),
+            index: 0,
+            userInitiated: userInitiated,
+            failures: []
+        )
     }
 
     @objc private func checkForUpdatesFromMenu(_ sender: Any?) {
