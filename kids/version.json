@@ -1,10 +1,10 @@
 {
-  "buildId": "kids-shell-v12-tab97",
-  "label": "KIDS · V0.97",
-  "releasedAt": "2026-10-01T16:58:00.000Z",
-  "note": "V0.97: Prophetenbereich neu gegen die freigegebenen Referenzbilder gebaut: kein großer Bibliotheks-Hero, chronologische Reihenfolge ab Ādam, kompakte Cinematic-Zeilen mit szenisch integrierten 3D-Objekten und neu proportionierte Detailseite.",
+  "buildId": "kids-shell-v12-tab98",
+  "label": "KIDS · V0.98",
+  "releasedAt": "2026-10-01T17:06:00.000Z",
+  "note": "V0.98: 3D-Objekte und Szenen neu als ein gemeinsames Cinematic-Layer-System aufgebaut. Hintergrund und Objekt erhalten dieselbe Licht-/Farbkorrektur; Nūḥs Schiff ist wie in der Referenz groß angeschnitten statt als kleines aufgesetztes Icon.",
   "visualSystem": {
-    "prophetStories": "approved-generated-reference-v11",
+    "prophetStories": "approved-generated-reference-v12",
     "transparentProphetSymbols": 25,
     "cinematicSceneBackgrounds": 8,
     "noSquareJpgCards": true,
@@ -14,6 +14,9 @@
     "libraryHero": false,
     "chronologicalOrder": true,
     "integrated3DObjects": true,
-    "detailComposition": "cropped-cinematic-object"
+    "detailComposition": "cropped-cinematic-object",
+    "sharedSceneGrade": true,
+    "objectStickerEffect": false,
+    "nuhOversizedCroppedVessel": true
   }
 }
