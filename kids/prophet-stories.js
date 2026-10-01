@@ -68,6 +68,12 @@ function buildText(item){
   return parts.join("\n\n").replace(/\s+\n/g,"\n").trim();
 }
 function words(text){return(String(text).match(/\S+/g)||[]).length}
+function symbolUrl(item){return "/kids/assets/prophet-symbols/"+encodeURIComponent(item.id)+".webp"}
+function setImageWithFallback(img,item){
+  if(!img||!item)return;
+  img.onerror=()=>{img.onerror=null;img.src=item.cover};
+  img.src=symbolUrl(item);
+}
 function audioMeta(item){return item&&item.audio&&item.audio[ageKey()]?item.audio[ageKey()]:null}
 function durationLabel(item,text){
   const m=audioMeta(item);
@@ -89,7 +95,7 @@ function renderCards(){
     const meta=(item.disputed?"IKHTILĀF · ":"QURʾĀN GEPRÜFT · ")+durationLabel(item,text);
     return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button" style="--ps-row:'+index+'">'+
       '<span class="ps-row-scene" aria-hidden="true"></span>'+
-      '<span class="ps-row-art" aria-hidden="true"><img src="'+esc(item.cover)+'" alt="" loading="'+(index<6?"eager":"lazy")+'"></span>'+
+      '<span class="ps-row-art" aria-hidden="true"><img src="'+esc(symbolUrl(item))+'" data-fallback="'+esc(item.cover)+'" alt="" loading="'+(index<6?"eager":"lazy")+'"></span>'+
       '<span class="ps-row-copy">'+
         '<span class="ps-row-meta">'+esc(meta)+'</span>'+
         '<span class="ps-row-title">'+esc(item.name)+(item.id==="muhammad"?" ﷺ":"")+'</span>'+
@@ -100,6 +106,9 @@ function renderCards(){
     '</button>';
   }).join("");
   grid.querySelectorAll("[data-ps-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.psId)));
+  grid.querySelectorAll("img[data-fallback]").forEach(img=>{
+    img.onerror=()=>{img.onerror=null;img.src=img.dataset.fallback||img.src};
+  });
   const doneEl=$("#psDoneCount");if(doneEl)doneEl.textContent=String(doneCount());
   const ageEl=$("#psAgeHero");if(ageEl)ageEl.textContent="Alter "+age();
 }
@@ -129,12 +138,12 @@ function ensureUi(){
     '<div class="ps-library-hero">'+
       '<div class="ps-hero-night" aria-hidden="true"></div>'+
       '<div class="ps-library-hero-art" aria-hidden="true">'+
-        '<span class="ps-hero-symbol s-adam"><img src="/kids/assets/prophet-stories/adam.jpg" alt=""></span>'+
-        '<span class="ps-hero-symbol s-idris"><img src="/kids/assets/prophet-stories/idris.jpg" alt=""></span>'+
-        '<span class="ps-hero-symbol s-nuh"><img src="/kids/assets/prophet-stories/nuh.jpg" alt=""></span>'+
-        '<span class="ps-hero-symbol s-hud"><img src="/kids/assets/prophet-stories/hud.jpg" alt=""></span>'+
-        '<span class="ps-hero-symbol s-salih"><img src="/kids/assets/prophet-stories/salih.jpg" alt=""></span>'+
-        '<span class="ps-hero-symbol s-ibrahim"><img src="/kids/assets/prophet-stories/ibrahim.jpg" alt=""></span>'+
+        '<span class="ps-hero-symbol s-adam"><img src="/kids/assets/prophet-symbols/adam.webp" alt=""></span>'+
+        '<span class="ps-hero-symbol s-idris"><img src="/kids/assets/prophet-symbols/idris.webp" alt=""></span>'+
+        '<span class="ps-hero-symbol s-nuh"><img src="/kids/assets/prophet-symbols/nuh.webp" alt=""></span>'+
+        '<span class="ps-hero-symbol s-hud"><img src="/kids/assets/prophet-symbols/hud.webp" alt=""></span>'+
+        '<span class="ps-hero-symbol s-salih"><img src="/kids/assets/prophet-symbols/salih.webp" alt=""></span>'+
+        '<span class="ps-hero-symbol s-ibrahim"><img src="/kids/assets/prophet-symbols/ibrahim.webp" alt=""></span>'+
       '</div>'+
       '<div class="ps-library-hero-copy">'+
         '<div class="ps-kicker">DĀR AL TAWḤĪD KIDS</div>'+
@@ -210,7 +219,7 @@ function renderActive(){
   if(!active)return;
   activeText=buildText(active);
   const hero=$(".ps-hero");if(hero)hero.setAttribute("data-ps-id",active.id);
-  $("#psHero").src=active.cover;$("#psHero").alt=active.name;
+  setImageWithFallback($("#psHero"),active);$("#psHero").alt=active.name;
   $("#psTitle").textContent=active.name+(active.id==="muhammad"?" ﷺ":"");
   $("#psArabic").textContent=arabicLine(active);
   $("#psSummary").textContent=active.summary||"";
