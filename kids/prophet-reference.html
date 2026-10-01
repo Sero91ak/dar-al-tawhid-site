@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#061d31">
+<title>Propheten · Referenzaufbau</title>
+<link rel="stylesheet" href="/kids/prophet-reference.css?v=1">
+</head>
+<body>
+<main class="pr-shell">
+  <section class="pr-list-panel" id="prListView" aria-label="Prophetenübersicht">
+    <div class="pr-modebar" aria-label="Darstellung">
+      <button class="pr-mode" type="button" data-mode="both"><span class="pr-ico pr-headphones"></span>Lesen &amp; Hören</button>
+      <button class="pr-mode" type="button" data-mode="listen"><span class="pr-ico pr-headphones"></span>Hören</button>
+      <button class="pr-mode active" type="button" data-mode="read"><span class="pr-ico pr-book"></span>Lesen</button>
+    </div>
+    <div class="pr-list" id="prList"></div>
+  </section>
+
+  <section class="pr-detail-panel" id="prDetailView" hidden aria-label="Prophetengeschichte">
+    <button class="pr-back" id="prBack" type="button" aria-label="Zurück">‹</button>
+    <div class="pr-detail-hero" id="prDetailHero">
+      <span class="pr-detail-scene" aria-hidden="true"></span>
+      <span class="pr-detail-art" aria-hidden="true"><img id="prDetailSymbol" src="" alt=""></span>
+      <span class="pr-detail-shade" aria-hidden="true"></span>
+      <div class="pr-detail-copy">
+        <h1 id="prTitle"></h1>
+        <div class="pr-arabic" id="prArabic" dir="rtl"></div>
+        <p class="pr-summary" id="prSummary"></p>
+        <div class="pr-pills" id="prPills"></div>
+      </div>
+    </div>
+    <div class="pr-detail-modebar" aria-label="Darstellung">
+      <button class="pr-mode" type="button" data-mode="both"><span class="pr-ico pr-headphones"></span>Lesen &amp; Hören</button>
+      <button class="pr-mode" type="button" data-mode="listen"><span class="pr-ico pr-headphones"></span>Hören</button>
+      <button class="pr-mode active" type="button" data-mode="read"><span class="pr-ico pr-book"></span>Lesen</button>
+    </div>
+    <div class="pr-reading" id="prReading"></div>
+  </section>
+</main>
+<script src="/kids/prophet-reference.js?v=1"></script>
+</body>
+</html>
