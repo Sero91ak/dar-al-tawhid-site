@@ -38,8 +38,8 @@ function iosNativeHeaders(assetResponse) {
 const KIDS_MIRROR = "https://dar-al-tawhid-test.sero91ak.workers.dev";
 const PRAYER_API_ORIGIN = "https://dar-admin-publisher.sero91ak.workers.dev";
 /* Apple TV live: /api/prayer/* und /quran-audio/* über diesen Router */
-const KIDS_BUILD = "kids-shell-v12-tab90";
-const KIDS_LABEL = "KIDS · V0.90";
+const KIDS_BUILD = "kids-shell-v12-tab91";
+const KIDS_LABEL = "KIDS · V0.91";
 
 function isPrayerApiPath(pathname) {
   return /^\/api\/(prayer|daily|jummah)(\/|$)/.test(pathname) || pathname === "/api/push/welcome";
