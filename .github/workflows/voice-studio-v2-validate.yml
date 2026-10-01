@@ -442,13 +442,14 @@ jobs:
               ]),
               ("studio",studio,[
                   '/alphabet/preview',
-                  '/api/admin/kids-content/media',
-                  '/api/admin/kids-alphabet-audio/verify',
+                  '/alphabet/confirm',
+                  '/alphabet/review-approve',
+                  '/alphabet/state',
                   'Serhat-Kandidat',
                   'candidateHeard',
-                  'blobToDataUrl',
+                  'linguisticVerified',
                   'serhat-owner-voice-2026',
-                  'Cloudflare Publisher',
+                  'kein Cloudflare-/GitHub-Code erforderlich',
                   'sprachlich bestätigt',
               ]),
               ("worker",worker,[
