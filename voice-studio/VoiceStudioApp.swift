@@ -16,7 +16,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
     private let studioURL = URL(string: "http://127.0.0.1:8787/studio/")!
     private let healthURL = URL(string: "http://127.0.0.1:8787/health")!
-    private let updateManifestAPIURL = URL(string: "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/version.json?ref=main")!
+    private let updateManifestURL = URL(string: "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/version.json?ref=main")!
     private var latestKnownVersion = ""
     private var updateAvailable = false
 
@@ -387,12 +387,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
     private func updateManifestSources() -> [URL] {
         let stamp = String(Int(Date().timeIntervalSince1970))
-        var urls: [URL] = [updateManifestAPIURL]
+        var urls: [URL] = [updateManifestURL]
         if let site = URL(string: "https://dar-al-tawhid.de/voice-studio/version.json?update_check=\(stamp)") {
             urls.append(site)
-        }
-        if let raw = URL(string: "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/voice-studio/version.json?update_check=\(stamp)") {
-            urls.append(raw)
         }
         return urls
     }
