@@ -2,7 +2,7 @@
   "project": "DĀR AL TAWḤĪD – Apple TV Qurʾān Tadabbur",
   "schemaVersion": "2.0",
   "language": "de",
-  "target": "tvOS-only",
+  "target": "shared-tvOS-iOS-iPadOS-web",
   "remoteLoad": true,
   "offlineCache": true,
   "entriesCount": 4428,
@@ -382,5 +382,12 @@
       "isnād ḥasan mawqūf",
       "isnād ṣaḥīḥ bis Überlieferer; Bericht mursal"
     ]
-  }
+  },
+  "clients": [
+    "tvOS",
+    "iOS WebView",
+    "iPadOS WebView",
+    "Web/PWA"
+  ],
+  "webLoaderPath": "/assets/quran-tadabbur-shared.js"
 }
