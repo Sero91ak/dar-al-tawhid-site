@@ -215,10 +215,10 @@ button{font:inherit;color:inherit}
   overflow:hidden;
   isolation:isolate;
   background-color:#031725;
-  background-image:var(--nuhHero);
+  background-image:var(--hero-sprite,var(--hero1));
   background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center 46%;
+  background-size:auto 500%;
+  background-position:var(--hero-x,52%) var(--hero-pos,0%);
 }
 .detail-hero::before{
   content:"";
