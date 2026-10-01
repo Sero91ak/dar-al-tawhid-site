@@ -2374,6 +2374,18 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .app[data-age="4–5"] #alphabetModal .lesson-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
 .app[data-age="4–5"] #alphabetModal .lesson-step{min-height:40px;font-size:11px}
 
+
+/* KIDS_SAFE_TOP_V32 — non-home views never sit under the iOS status bar */
+html:not([data-view="today"]) .shell{
+  padding-top:max(58px, env(safe-area-inset-top, 0px))!important;
+}
+html:not([data-view="today"]) .page-head{
+  padding-top:0!important;
+}
+html:not([data-view="today"]) .view.active{
+  scroll-margin-top:max(58px, env(safe-area-inset-top, 0px));
+}
+
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
 <link rel="stylesheet" href="/kids/assets/kids-open-v95.css?v=96">
