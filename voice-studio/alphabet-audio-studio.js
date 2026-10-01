@@ -577,28 +577,3 @@ loadManifest().then(()=>{
 });
 })();
 
-async function autoStartProphetStoryVoiceBatch(){
-  if(!isLocalVoiceStudio())return;
-  try{
-    const stateRes=await fetch("/prophet-stories/batch-state?cb="+Date.now(),{cache:"no-store"});
-    if(!stateRes.ok)return;
-    const state=await stateRes.json();
-    if(state?.running)return;
-    if(state?.phase==="complete"&&state?.repoPublished===true)return;
-    const r=await fetch("/prophet-stories/batch-start",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:"{}",
-      cache:"no-store"
-    });
-    const d=await r.json().catch(()=>({}));
-    if(r.ok&&d?.ok!==false){
-      console.info("[DĀR Voice] Prophet story owner-voice batch started.",d);
-    }else{
-      console.warn("[DĀR Voice] Prophet story batch could not start.",d);
-    }
-  }catch(e){
-    console.warn("[DĀR Voice] Prophet story auto-batch unavailable.",e);
-  }
-}
-window.addEventListener("load",()=>setTimeout(autoStartProphetStoryVoiceBatch,2600),{once:true});

@@ -94,6 +94,7 @@ ALPHABET_BATCH_LOCK=threading.Lock()
 ALPHABET_BATCH_STATE_LOCK=threading.Lock()
 PROPHET_STORY_BATCH_LOCK=threading.Lock()
 PROPHET_STORY_BATCH_STATE_LOCK=threading.Lock()
+PROPHET_STORY_BATCH_CANCEL=threading.Event()
 PROPHET_STORY_BATCH_STATE={"running":False,"phase":"idle","progress":0,"completed":0,"total":75,"current":"","error":"","repoPublished":False,"repoPublishError":"","startedAt":"","finishedAt":""}
 LEARNING_PREVIEWS={}
 ALPHABET_BATCH_STATE={
@@ -5360,6 +5361,7 @@ def build_prophet_story_voice_pack():
         return _prophet_batch_snapshot()
     try:
         started=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        PROPHET_STORY_BATCH_CANCEL.clear()
         _set_prophet_batch_state(running=True,phase="preparing",progress=1,completed=0,total=75,current="25 Prophetengeschichten werden vorbereitet …",error="",repoPublished=False,repoPublishError="",startedAt=started,finishedAt="")
         manifest=_prophet_story_manifest()
         items=list(manifest.get("items") or [])
@@ -5375,6 +5377,8 @@ def build_prophet_story_voice_pack():
         for item in items:
             item_audio={}
             for a in ages:
+                if PROPHET_STORY_BATCH_CANCEL.is_set():
+                    raise RuntimeError("Vom Nutzer gestoppt. Einzelne Geschichten bitte im Studio selbst erzeugen.")
                 n+=1
                 txt=_prophet_story_age_text(item,a)
                 pct=2+int((n-1)/max(1,total)*91)
@@ -5637,6 +5641,30 @@ class H(BaseHTTPRequestHandler):
             self.send_json(200,{"ok":True,**_alphabet_batch_snapshot()})
         elif p=="/prophet-stories/batch-state":
             self.send_json(200,{"ok":True,**_prophet_batch_snapshot()})
+        elif p=="/prophet-stories/library":
+            try:
+                man=_prophet_story_manifest()
+                items=[]
+                for it in list(man.get("items") or []):
+                    ages={}
+                    for a in ("4-5","6-8","9-10"):
+                        ages[a]=_prophet_story_age_text(it,a)
+                    items.append({
+                        "id":it.get("id"),
+                        "name":it.get("name"),
+                        "nameAr":it.get("nameAr"),
+                        "honorific":it.get("honorific"),
+                        "title":it.get("title"),
+                        "summary":it.get("summary"),
+                        "sourceRefs":it.get("sourceRefs") or [],
+                        "cover":it.get("cover"),
+                        "disputed":bool(it.get("disputed")),
+                        "displayOrder":it.get("displayOrder"),
+                        "texts":ages
+                    })
+                self.send_json(200,{"ok":True,"count":len(items),"items":items,"mode":"manual-studio"})
+            except Exception as e:
+                self.send_json(500,{"ok":False,"error":str(e)})
         elif p.startswith("/alphabet/master/"):
             name=p.rsplit("/",1)[-1]
             if not re.fullmatch(r"[a-z0-9_-]+\.wav",name):
@@ -5805,6 +5833,9 @@ class H(BaseHTTPRequestHandler):
                 return self.send_json(202,{"ok":True,**state})
             except Exception as e:
                 return self.send_json(500,{"ok":False,"error":str(e),**_prophet_batch_snapshot()})
+        if p=="/prophet-stories/batch-stop":
+            PROPHET_STORY_BATCH_CANCEL.set()
+            return self.send_json(200,{"ok":True,"stopRequested":True,**_prophet_batch_snapshot()})
 
         if p=="/alphabet/review-approve":
             try:

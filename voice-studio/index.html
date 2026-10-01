@@ -71,7 +71,11 @@ h1{font-size:clamp(26px,2.1vw,40px);line-height:1.02;letter-spacing:-.035em;marg
 .lead{font-size:13px;line-height:1.5;color:var(--muted);max-width:760px}
 .badges{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
 .badge{font-size:10px;font-weight:800;letter-spacing:.04em;padding:6px 9px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#cbd7df;white-space:nowrap}
-.textbox-wrap{position:relative;flex:1;min-height:290px}
+.prophet-pick{margin:0 0 12px;padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03)}
+.prophet-pick-row{display:flex;flex-wrap:wrap;gap:8px;align-items:end}
+.prophet-pick .cs-field{min-width:140px;flex:1}
+.prophet-pick select{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:10px 11px;font-size:12px;min-height:40px}
+.prophet-pick .notice{margin-top:8px}
 textarea{
   width:100%;height:clamp(330px,48vh,760px);min-height:290px;resize:vertical;
   background:linear-gradient(180deg,#071a29,#071725);color:var(--ink);border:1px solid rgba(255,255,255,.10);
@@ -606,6 +610,15 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <div class="badges"><span class="badge">SERHAT VOICE 2.9.42</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
 
+  <div class="prophet-pick" id="prophetPick">
+    <div class="section-title">Prophetengeschichten · selbst erzeugen</div>
+    <div class="prophet-pick-row">
+      <div class="cs-field"><label for="prophetPickId">Prophet</label><select id="prophetPickId"><option value="">— wählen —</option></select></div>
+      <div class="cs-field" style="flex:0 0 120px"><label for="prophetPickAge">Alter</label><select id="prophetPickAge"><option value="4-5">4–5</option><option value="6-8" selected>6–8</option><option value="9-10">9–10</option></select></div>
+      <button id="prophetPickLoad" class="btn secondary" type="button" style="min-height:40px">Text laden</button>
+    </div>
+    <div class="notice">Kein Automatik-Batch. Text hier prüfen und ändern, dann „Audio erzeugen“. Profil: Kinder-Geschichte.</div>
+  </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
     <div id="charCounter" class="counter">0 Zeichen</div>
@@ -2064,5 +2077,64 @@ if(IS_LOCAL){
 loadLibrary();
 checkHealth({quiet:true}).then(()=>analyzeProsody());
 setInterval(()=>checkHealth({quiet:true}),5000);
+
+(function prophetStoryManualLoader(){
+  const sel=$("#prophetPickId"),age=$("#prophetPickAge"),btn=$("#prophetPickLoad"),ta=$("#text");
+  if(!sel||!btn||!ta)return;
+  let pack=[];
+  function fillSelect(){
+    const cur=sel.value;
+    sel.innerHTML='<option value="">— wählen —</option>'+pack.map(it=>'<option value="'+it.id+'">'+(it.name||it.id)+'</option>').join("");
+    if(cur)sel.value=cur;
+  }
+  function buildText(it,key){
+    if(it.texts&&it.texts[key])return String(it.texts[key]);
+    const name=it.name||"";
+    const intro=key==="4-5"
+      ?"Komm, wir hören aufmerksam zu. Jetzt geht es um "+name+"."
+      :key==="9-10"
+      ?"Diese Erzählung über "+name+" folgt den geprüften Qurʾān-Belegen."
+      :"Heute geht es um "+name+".";
+    const ch=Array.isArray(it.chapters)?it.chapters.slice():[];
+    const parts=[intro].concat(key==="4-5"&&ch.length>4?[ch[0],ch[1],ch[Math.max(2,ch.length-2)],ch[ch.length-1]]:ch);
+    if(key==="9-10"&&it.older)parts.push(it.older);
+    parts.push((it.sourceRefs||[]).join(" · "));
+    return parts.filter(Boolean).join("\n\n");
+  }
+  async function loadPack(){
+    try{
+      let items=null;
+      const local=await fetch("/prophet-stories/library?cb="+Date.now(),{cache:"no-store"}).catch(()=>null);
+      if(local&&local.ok){
+        const d=await local.json();
+        if(Array.isArray(d.items)&&d.items.length)items=d.items;
+      }
+      if(!items){
+        const r=await fetch("https://dar-al-tawhid.de/kids/data/prophet-stories.json?cb="+Date.now(),{cache:"no-store"});
+        const d=await r.json();
+        items=d.items||[];
+      }
+      pack=items;
+      fillSelect();
+    }catch(e){console.warn("[DĀR Voice] Prophet stories library",e)}
+  }
+  btn.addEventListener("click",()=>{
+    const it=pack.find(x=>x.id===sel.value);
+    if(!it){setMessage("Zuerst einen Propheten wählen.","warn");return;}
+    const key=age.value||"6-8";
+    ta.value=buildText(it,key);
+    const title=$("#csTitle");if(title)title.value=it.title||it.name||"";
+    const prophet=$("#csProphet");if(prophet)prophet.value=it.id||"";
+    const sources=$("#csSources");if(sources)sources.value=(it.sourceRefs||[]).join("\n");
+    if($("#styleMode"))$("#styleMode").value="kids_story";
+    ta.dispatchEvent(new Event("input"));
+    setMessage((it.name||"")+" · Alter "+key.replace("-","–")+" geladen. Text prüfen, dann Audio erzeugen.","good");
+    ta.focus();
+  });
+  loadPack();
+})();
 </script>
-<script src="content-studio.js?v=2910"></script>\n<script src="alphabet-audio-studio.js?v=2928"></script>\n</body>\n</html>\n
+<script src="content-studio.js?v=2911"></script>
+<script src="alphabet-audio-studio.js?v=2929"></script>
+</body>
+</html>
