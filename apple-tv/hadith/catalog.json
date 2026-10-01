@@ -3,10 +3,10 @@
   "schemaVersion": "1.3",
   "language": "de",
   "authenticOnly": true,
-  "totalCount": 2925,
-  "currentSeries": "2751-2850",
-  "latestId": "HAD-2925",
-  "nextId": "HAD-2926",
+  "totalCount": 2935,
+  "currentSeries": "2851-2950",
+  "latestId": "HAD-2935",
+  "nextId": "HAD-2936",
   "supportedRecordTypes": [
     "hadith",
     "athar"
@@ -432,12 +432,9 @@
     },
     {
       "id": "2751-2850",
-      "status": "complete",
-      "activation": "per-record-immediate",
       "count": 100,
       "firstId": "HAD-2751",
       "lastId": "HAD-2850",
-      "plannedLastId": "HAD-2850",
       "indexPath": "series/2751-2850/index.json",
       "contentTypes": {
         "hadith": 100,
@@ -451,15 +448,22 @@
     },
     {
       "id": "2851-2950",
-      "path": "apple-tv/hadith/series/2851-2950/index.json",
-      "count": 75,
+      "status": "incremental-active",
+      "activation": "per-record-immediate",
+      "count": 85,
       "firstId": "HAD-2851",
-      "lastId": "HAD-2925",
+      "lastId": "HAD-2935",
+      "plannedLastId": "HAD-2950",
+      "indexPath": "series/2851-2950/index.json",
       "contentTypes": {
-        "hadith": 75
+        "hadith": 85,
+        "athar": 0
       },
-      "readyThrough": "HAD-2925",
-      "status": "in-progress"
+      "screensaverIncluded": true,
+      "showSharh": true,
+      "showSharhSource": true,
+      "requireVerifiedSharh": true,
+      "readyThrough": "HAD-2935"
     }
   ],
   "xcode": {
