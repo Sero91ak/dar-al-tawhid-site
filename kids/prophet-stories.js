@@ -122,31 +122,14 @@ function renderCards(){
   const ageEl=$("#psAgeHero");if(ageEl)ageEl.textContent="Alter "+age();
 }
 function setupFreeStories(view,section,old,title){
+  // Freie pädagogische Geschichten bleiben über ihre bisherigen Einstiegspunkte erreichbar,
+  // konkurrieren aber nicht mehr mit der Prophetenbibliothek auf dieser Hauptseite.
   const storyFeature=view.querySelector(".story-feature");
   const oldMore=view.querySelector(".story-more-title");
   const freeList=oldMore&&oldMore.nextElementSibling&&oldMore.nextElementSibling.classList.contains("story-list")?oldMore.nextElementSibling:null;
-  if(!storyFeature&&!freeList)return;
-  const wrap=document.createElement("section");
-  wrap.className="ps-free-wrap";
-  wrap.innerHTML=
-    '<button class="ps-free-toggle" type="button" aria-expanded="false">'+
-      '<span><small>NOCH MEHR ZUM ENTDECKEN</small><strong>Weitere Geschichten</strong></span>'+
-      '<span class="ps-free-count">'+((storyFeature?1:0)+(freeList?freeList.querySelectorAll(".story-row").length:0))+'</span>'+
-      '<span class="ps-free-chevron">⌄</span>'+
-    '</button>'+
-    '<div class="ps-free-panel" hidden></div>';
-  section.insertAdjacentElement("afterend",wrap);
-  const panel=wrap.querySelector(".ps-free-panel");
-  if(storyFeature)panel.appendChild(storyFeature);
-  if(oldMore)oldMore.remove();
-  if(freeList)panel.appendChild(freeList);
-  wrap.querySelector(".ps-free-toggle").addEventListener("click",e=>{
-    const btn=e.currentTarget;
-    const open=btn.getAttribute("aria-expanded")==="true";
-    btn.setAttribute("aria-expanded",open?"false":"true");
-    panel.hidden=open;
-    wrap.classList.toggle("open",!open);
-  });
+  if(storyFeature)storyFeature.style.display="none";
+  if(oldMore)oldMore.style.display="none";
+  if(freeList)freeList.style.display="none";
   view.querySelectorAll(".gentle-note").forEach(note=>{
     if(/Authentische Propheten/i.test(note.textContent||""))note.style.display="none";
   });
