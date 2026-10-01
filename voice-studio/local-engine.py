@@ -3121,10 +3121,11 @@ def render_with_mlx(model,text:str,language_id:str,mode:str):
     p=prosody_settings(mode,language_id,text)
     budget=mlx_token_budget(text,language_id)
     if language_id=="de" and mode=="kids_story":
-        # Kinder-Langtexte bekommen einen engeren Ausreißer-Deckel. Normale
-        # Satzblöcke liegen deutlich darunter; Token-Runaways werden früher
-        # gerettet, statt den ganzen Auftrag festzuhalten.
-        budget=min(int(budget),300)
+        # Kinder-Geschichten brauchen bei kurzen natürlichen Sätzen genug Reserve,
+        # dürfen bei Ausreißern aber weiterhin nie in einen 1000-Token-Runaway laufen.
+        # 220 vermeidet falsche Token-Limits bei ruhiger Erzählprosodie; 300 bleibt
+        # der harte Deckel für lange Satzblöcke.
+        budget=max(220,min(int(budget),300))
     timeout_s=generation_timeout_seconds(text,language_id)
     msg=_mlx_request({
         "op":"render",
@@ -3888,6 +3889,10 @@ def render_with_model(model,text:str,language_id:str,mode:str="narration"):
     # Sampling-Schleife minutenlang rechnen. Wir deckeln die interne T3-Inferenz,
     # ohne die restliche Chatterbox-Pipeline oder Voice-Conditioning zu verändern.
     cap=generation_token_budget(text,language_id)
+    if language_id=="de" and mode=="kids_story":
+        # Gleiche Reserve wie im MLX-Pfad, damit ein Backend-Wechsel nicht erneut
+        # am zu knappen Ceiling desselben kurzen Erzählsatzes scheitert.
+        cap=max(220,min(int(cap),300))
     original_inference=getattr(getattr(model,"t3",None),"inference",None)
     state={"tokens":0,"hit":False}
     if original_inference is not None:
@@ -4431,36 +4436,53 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
     }
     last_issues=set(last[1]["issues"]) if last else set()
     if bool(QA_CONFIG.get("rescueLongSegments",True)) and not critical and last_issues and last_issues.issubset(rescue_allowed):
-        parts=split_rescue_chunks(text,force=("generation_timeout" in last_issues))
+        # Token-Limit ist wie ein Watchdog-Timeout ein harter Hinweis, dass genau
+        # dieser Abschnitt kleiner werden muss. Auch kurze Sätze dürfen dann geteilt
+        # werden; vorher blieb z. B. ein 40-60-Zeichen-Kids-Satz endgültig hängen.
+        force_rescue=bool(last_issues.intersection({"generation_timeout","generation_token_limit"}))
+        parts=split_rescue_chunks(text,force=force_rescue)
         if len(parts)>1:
             rescued=[]
             rescue_metrics=[]
             for part_idx,part in enumerate(parts):
-                torch.manual_seed(seed_base+(attempts+part_idx)*seed_offset)
                 try:
-                    sub=render_with_model(model,part,language_id,mode)
-                except (GenerationTokenLimitReached,GenerationTimeoutReached):
+                    # Rekursiv durch dieselbe QA gehen: Wenn auch ein Teilstück am
+                    # Token-Limit landet, wird nur dieses Teilstück nochmals geteilt.
+                    # Die Textmenge schrumpft bei jedem Schritt; Ein-Wort-Teile
+                    # terminieren deterministisch und fallen dann ggf. ans Backend-Fallback.
+                    sub,subm=render_segment_with_qa(
+                        model,part,language_id,mode,False,
+                        seed_base=seed_base+(attempts+part_idx+1)*seed_offset
+                    )
+                except RuntimeError:
                     rescued=[]
                     break
-                subm=audio_quality_metrics(sub,int(model.sr),part,language_id,mode)
-                subm.update(getattr(render_with_model,"_last_backend_meta",{}) or {})
-                if subm["issues"]:
+                if subm.get("issues"):
                     rescued=[]
                     break
+                subm=dict(subm)
+                subm["recursive_rescue_part"]=True
                 rescued.append((sub,language_id,part,mode,subm))
                 rescue_metrics.append(subm)
             if rescued:
                 joined=join_rendered_segments(rescued,int(model.sr))
                 metrics=audio_quality_metrics(joined,int(model.sr),text,language_id,mode)
-                if not metrics["issues"]:
+                # Längen-/Rate-Hinweise gelten nach erfolgreicher Teil-QA nicht mehr
+                # für den wieder zusammengesetzten Satz. Technische Fehler und
+                # unnatürliche Pausen bleiben weiterhin fatal.
+                composite_ignored={"segment_too_long","speech_rate_too_slow"}
+                remaining=[x for x in (metrics.get("issues") or []) if x not in composite_ignored]
+                if not remaining:
+                    metrics["issues"]=[]
                     metrics.update({
                         "attempt":attempts,
                         "critical":False,
                         "rescued":True,
+                        "recursive_rescue":True,
                         "rescue_parts":len(parts),
                         "rescue_metrics":rescue_metrics,
                     })
-                    print(f"[DĀR Voice] segment rescued in {len(parts)} parts lang={language_id} mode={mode}",flush=True)
+                    print(f"[DĀR Voice] segment recursively rescued in {len(parts)} parts lang={language_id} mode={mode}",flush=True)
                     return joined,metrics
 
     issues=", ".join(last[1]["issues"]) if last else "unknown"
