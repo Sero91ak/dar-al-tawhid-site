@@ -84,27 +84,12 @@ function renderModeButtons(){
 }
 function renderCards(){
   const grid=$("#psGrid");if(!grid)return;
-  const featured=items.find(item=>item.id==="muhammad")||items[0];
-  const rest=items.filter(item=>!featured||item.id!==featured.id);
-  const featuredHtml=featured?(()=>{
-    const text=buildText(featured);
-    return '<button class="ps-featured" data-ps-id="'+esc(featured.id)+'" type="button">'+
-      '<span class="ps-featured-art" data-ps-id="'+esc(featured.id)+'"><img src="'+esc(featured.cover)+'" alt="" loading="eager"></span>'+
-      '<span class="ps-featured-overlay" aria-hidden="true"></span>'+
-      '<span class="ps-featured-copy">'+
-        '<span class="ps-featured-kicker">DER LETZTE PROPHET · QURʾĀN GEPRÜFT</span>'+
-        '<span class="ps-featured-title">'+esc(featured.name)+' ﷺ</span>'+
-        '<span class="ps-featured-ar" dir="rtl">'+esc(arabicLine(featured))+'</span>'+
-        '<span class="ps-featured-meta"><span>'+esc(durationLabel(featured,text))+'</span><span>Geschichte öffnen</span></span>'+
-      '</span>'+
-      (done(featured.id)?'<span class="ps-done ps-done-featured" aria-label="Abgeschlossen"></span>':'')+
-    '</button>';
-  })():"";
-  const rowsHtml=rest.map((item,index)=>{
+  grid.innerHTML=items.map((item,index)=>{
     const text=buildText(item);
     const meta=(item.disputed?"IKHTILĀF · ":"QURʾĀN GEPRÜFT · ")+durationLabel(item,text);
     return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button" style="--ps-row:'+index+'">'+
-      '<span class="ps-row-art" data-ps-id="'+esc(item.id)+'"><img src="'+esc(item.cover)+'" alt="" loading="'+(index<4?"eager":"lazy")+'"></span>'+
+      '<span class="ps-row-scene" aria-hidden="true"></span>'+
+      '<span class="ps-row-art" aria-hidden="true"><img src="'+esc(item.cover)+'" alt="" loading="'+(index<6?"eager":"lazy")+'"></span>'+
       '<span class="ps-row-copy">'+
         '<span class="ps-row-meta">'+esc(meta)+'</span>'+
         '<span class="ps-row-title">'+esc(item.name)+(item.id==="muhammad"?" ﷺ":"")+'</span>'+
@@ -114,9 +99,6 @@ function renderCards(){
       (done(item.id)?'<span class="ps-done" aria-label="Abgeschlossen"></span>':'')+
     '</button>';
   }).join("");
-  grid.innerHTML=featuredHtml+
-    '<div class="ps-library-label"><span>Propheten im Qurʾān</span><small>'+rest.length+' Geschichten</small></div>'+
-    '<div class="ps-library-list">'+rowsHtml+'</div>';
   grid.querySelectorAll("[data-ps-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.psId)));
   const doneEl=$("#psDoneCount");if(doneEl)doneEl.textContent=String(doneCount());
   const ageEl=$("#psAgeHero");if(ageEl)ageEl.textContent="Alter "+age();
@@ -145,29 +127,34 @@ function ensureUi(){
   section.id="prophetStoriesSection";section.className="ps-wrap";
   section.innerHTML=
     '<div class="ps-library-hero">'+
+      '<div class="ps-hero-night" aria-hidden="true"></div>'+
       '<div class="ps-library-hero-art" aria-hidden="true">'+
-        '<img class="ps-hero-art-one" src="/kids/assets/prophet-stories/nuh.jpg" alt="">'+
-        '<img class="ps-hero-art-two" src="/kids/assets/prophet-stories/ibrahim.jpg" alt="">'+
-        '<img class="ps-hero-art-three" src="/kids/assets/prophet-stories/yunus.jpg" alt="">'+
+        '<span class="ps-hero-symbol s-adam"><img src="/kids/assets/prophet-stories/adam.jpg" alt=""></span>'+
+        '<span class="ps-hero-symbol s-idris"><img src="/kids/assets/prophet-stories/idris.jpg" alt=""></span>'+
+        '<span class="ps-hero-symbol s-nuh"><img src="/kids/assets/prophet-stories/nuh.jpg" alt=""></span>'+
+        '<span class="ps-hero-symbol s-hud"><img src="/kids/assets/prophet-stories/hud.jpg" alt=""></span>'+
+        '<span class="ps-hero-symbol s-salih"><img src="/kids/assets/prophet-stories/salih.jpg" alt=""></span>'+
+        '<span class="ps-hero-symbol s-ibrahim"><img src="/kids/assets/prophet-stories/ibrahim.jpg" alt=""></span>'+
       '</div>'+
       '<div class="ps-library-hero-copy">'+
-        '<div class="ps-kicker">QURʾĀN · GEPRÜFT · KINDGERECHT</div>'+
-        '<h2>Geschichten der Propheten</h2>'+
-        '<p>Eine ruhige Bibliothek zum Lesen, Hören und Entdecken.</p>'+
+        '<div class="ps-kicker">DĀR AL TAWḤĪD KIDS</div>'+
+        '<h2><span>Geschichten</span><strong>der Propheten</strong></h2>'+
+        '<p>Wahre Geschichten. Große Lehren.<br>Für kleine Herzen.</p>'+
         '<div class="ps-hero-stats"><span><strong id="psDoneCount">0</strong>/25 gehört</span><span id="psAgeHero">Alter 6–8</span></div>'+
       '</div>'+
     '</div>'+
     '<div class="ps-toolbar">'+
-      '<span class="ps-toolbar-label">Modus</span>'+
-      '<div class="ps-modes" id="psModes"><button class="ps-mode" data-ps-mode="both" type="button">Lesen &amp; Hören</button><button class="ps-mode" data-ps-mode="listen" type="button">Hören</button><button class="ps-mode" data-ps-mode="read" type="button">Lesen</button></div>'+
+      '<div class="ps-modes" id="psModes">'+
+        '<button class="ps-mode" data-ps-mode="both" type="button"><span>◉</span> Lesen &amp; Hören</button>'+
+        '<button class="ps-mode" data-ps-mode="listen" type="button"><span>◉</span> Hören</button>'+
+        '<button class="ps-mode" data-ps-mode="read" type="button"><span>▣</span> Lesen</button>'+
+      '</div>'+
     '</div>'+
-    '<div id="psGrid"></div>';
+    '<div id="psGrid" class="ps-library-list"></div>';
   if(pageHead){
     pageHead.hidden=true;
     pageHead.insertAdjacentElement("afterend",section);
-  }else{
-    view.insertBefore(section,view.firstChild);
-  }
+  }else view.insertBefore(section,view.firstChild);
   setupFreeStories(view,section,old,title);
   section.querySelectorAll("[data-ps-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.psMode)));
 
@@ -177,11 +164,15 @@ function ensureUi(){
     '<div class="ps-sheet" role="dialog" aria-modal="true" aria-labelledby="psTitle">'+
       '<div class="ps-top"><span class="ps-top-label">DĀR AL TAWḤĪD KIDS · PROPHETEN</span><button class="ps-close" id="psClose" type="button" aria-label="Schließen">×</button></div>'+
       '<div class="ps-scroll" id="psScroll">'+
-        '<div class="ps-hero"><img id="psHero" src="" alt=""><div class="ps-hero-copy"><h2 class="ps-title" id="psTitle"></h2><div class="ps-ar" id="psArabic" dir="rtl"></div></div></div>'+
+        '<div class="ps-hero">'+
+          '<span class="ps-detail-scene" aria-hidden="true"></span>'+
+          '<img id="psHero" src="" alt="">'+
+          '<div class="ps-hero-copy"><h2 class="ps-title" id="psTitle"></h2><div class="ps-ar" id="psArabic" dir="rtl"></div></div>'+
+        '</div>'+
         '<div class="ps-body">'+
           '<p class="ps-summary" id="psSummary"></p>'+
           '<div class="ps-meta" id="psMeta"></div>'+
-          '<div class="ps-detail-modes"><button class="ps-detail-mode" data-ps-mode="both" type="button">Lesen &amp; Hören</button><button class="ps-detail-mode" data-ps-mode="listen" type="button">Hören</button><button class="ps-detail-mode" data-ps-mode="read" type="button">Lesen</button></div>'+
+          '<div class="ps-detail-modes"><button class="ps-detail-mode" data-ps-mode="both" type="button">◉ Lesen &amp; Hören</button><button class="ps-detail-mode" data-ps-mode="listen" type="button">◉ Hören</button><button class="ps-detail-mode" data-ps-mode="read" type="button">▣ Lesen</button></div>'+
           '<div class="ps-player" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören</button></div><div class="ps-progress"><span id="psProgress"></span></div><div class="ps-player-note" id="psVoiceNote"></div></div>'+
           '<article class="ps-read" id="psRead"></article>'+
           '<div class="ps-sources"><strong>QUELLEN</strong><div id="psSources"></div></div>'+
@@ -213,7 +204,7 @@ function applyMode(){
 function renderActive(){
   if(!active)return;
   activeText=buildText(active);
-  const hero=$(".ps-hero");if(hero){hero.setAttribute("data-ps-id",active.id);hero.style.setProperty("--ps-bg",'url("'+String(active.cover).replace(/"/g,"%22")+'")')}
+  const hero=$(".ps-hero");if(hero)hero.setAttribute("data-ps-id",active.id);
   $("#psHero").src=active.cover;$("#psHero").alt=active.name;
   $("#psTitle").textContent=active.name+(active.id==="muhammad"?" ﷺ":"");
   $("#psArabic").textContent=arabicLine(active);
