@@ -165,14 +165,19 @@ function ensureUi(){
       '<div class="ps-top"><span class="ps-top-label">DĀR AL TAWḤĪD KIDS · PROPHETEN</span><button class="ps-close" id="psClose" type="button" aria-label="Schließen">×</button></div>'+
       '<div class="ps-scroll" id="psScroll">'+
         '<div class="ps-hero">'+
-          '<span class="ps-detail-scene" aria-hidden="true"></span>'+
+          '<span class="ps-detail-sky" aria-hidden="true"></span>'+
+          '<span class="ps-detail-land" aria-hidden="true"></span>'+
+          '<span class="ps-detail-glow" aria-hidden="true"></span>'+
           '<img id="psHero" src="" alt="">'+
-          '<div class="ps-hero-copy"><h2 class="ps-title" id="psTitle"></h2><div class="ps-ar" id="psArabic" dir="rtl"></div></div>'+
+          '<div class="ps-hero-copy">'+
+            '<h2 class="ps-title" id="psTitle"></h2>'+
+            '<div class="ps-ar" id="psArabic" dir="rtl"></div>'+
+            '<p class="ps-summary" id="psSummary"></p>'+
+            '<div class="ps-meta" id="psMeta"></div>'+
+            '<div class="ps-detail-modes"><button class="ps-detail-mode" data-ps-mode="both" type="button">◉ Lesen &amp; Hören</button><button class="ps-detail-mode" data-ps-mode="listen" type="button">◉ Hören</button><button class="ps-detail-mode" data-ps-mode="read" type="button">▣ Lesen</button></div>'+
+          '</div>'+
         '</div>'+
         '<div class="ps-body">'+
-          '<p class="ps-summary" id="psSummary"></p>'+
-          '<div class="ps-meta" id="psMeta"></div>'+
-          '<div class="ps-detail-modes"><button class="ps-detail-mode" data-ps-mode="both" type="button">◉ Lesen &amp; Hören</button><button class="ps-detail-mode" data-ps-mode="listen" type="button">◉ Hören</button><button class="ps-detail-mode" data-ps-mode="read" type="button">▣ Lesen</button></div>'+
           '<div class="ps-player" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören</button></div><div class="ps-progress"><span id="psProgress"></span></div><div class="ps-player-note" id="psVoiceNote"></div></div>'+
           '<article class="ps-read" id="psRead"></article>'+
           '<div class="ps-sources"><strong>QUELLEN</strong><div id="psSources"></div></div>'+
