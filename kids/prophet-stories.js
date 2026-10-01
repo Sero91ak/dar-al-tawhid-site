@@ -154,9 +154,9 @@ function ensureUi(){
     '</div>'+
     '<div class="ps-toolbar">'+
       '<div class="ps-modes" id="psModes">'+
-        '<button class="ps-mode" data-ps-mode="both" type="button"><span>◉</span> Lesen &amp; Hören</button>'+
-        '<button class="ps-mode" data-ps-mode="listen" type="button"><span>◉</span> Hören</button>'+
-        '<button class="ps-mode" data-ps-mode="read" type="button"><span>▣</span> Lesen</button>'+
+        '<button class="ps-mode" data-ps-mode="both" type="button"><span class="ps-mode-icon ps-mode-icon-headphones" aria-hidden="true"></span>Lesen &amp; Hören</button>'+
+        '<button class="ps-mode" data-ps-mode="listen" type="button"><span class="ps-mode-icon ps-mode-icon-headphones" aria-hidden="true"></span>Hören</button>'+
+        '<button class="ps-mode" data-ps-mode="read" type="button"><span class="ps-mode-icon ps-mode-icon-book" aria-hidden="true"></span>Lesen</button>'+
       '</div>'+
     '</div>'+
     '<div id="psGrid" class="ps-library-list"></div>';
@@ -183,7 +183,7 @@ function ensureUi(){
             '<div class="ps-ar" id="psArabic" dir="rtl"></div>'+
             '<p class="ps-summary" id="psSummary"></p>'+
             '<div class="ps-meta" id="psMeta"></div>'+
-            '<div class="ps-detail-modes"><button class="ps-detail-mode" data-ps-mode="both" type="button">◉ Lesen &amp; Hören</button><button class="ps-detail-mode" data-ps-mode="listen" type="button">◉ Hören</button><button class="ps-detail-mode" data-ps-mode="read" type="button">▣ Lesen</button></div>'+
+            '<div class="ps-detail-modes"><button class="ps-detail-mode" data-ps-mode="both" type="button"><span class="ps-mode-icon ps-mode-icon-headphones" aria-hidden="true"></span>Lesen &amp; Hören</button><button class="ps-detail-mode" data-ps-mode="listen" type="button"><span class="ps-mode-icon ps-mode-icon-headphones" aria-hidden="true"></span>Hören</button><button class="ps-detail-mode" data-ps-mode="read" type="button"><span class="ps-mode-icon ps-mode-icon-book" aria-hidden="true"></span>Lesen</button></div>'+
           '</div>'+
         '</div>'+
         '<div class="ps-body">'+
@@ -224,9 +224,9 @@ function renderActive(){
   $("#psArabic").textContent=arabicLine(active);
   $("#psSummary").textContent=active.summary||"";
   $("#psMeta").innerHTML=
-    '<span class="ps-pill">'+esc(durationLabel(active,activeText))+'</span>'+
-    '<span class="ps-pill">Alter '+esc(age())+'</span>'+
-    '<span class="ps-pill">Qurʾān · geprüft</span>'+
+    '<span class="ps-pill"><span class="ps-pill-icon ps-pill-icon-clock" aria-hidden="true"></span>'+esc(durationLabel(active,activeText))+'</span>'+
+    '<span class="ps-pill"><span class="ps-pill-icon ps-pill-icon-age" aria-hidden="true"></span>Alter '+esc(age())+'</span>'+
+    '<span class="ps-pill"><span class="ps-pill-icon ps-pill-icon-book" aria-hidden="true"></span>Qurʾān · geprüft</span>'+
     (active.disputed?'<span class="ps-pill warn">Prophetenstatus: Ikhtilāf</span>':'');
   $("#psRead").innerHTML=activeText.split(/\n{2,}/).map(p=>"<p>"+esc(p)+"</p>").join("");
   $("#psSources").textContent=(active.sourceRefs||[]).join(" · ");
