@@ -1,7 +1,7 @@
 {
-  "version": "2.9.46",
-  "updatedAt": "2026-10-01T13:15:00+02:00",
-  "deployTrigger": "voice-studio-2.9.46-prophet-scripts-ready-one-step-approval",
+  "version": "2.9.47",
+  "updatedAt": "2026-10-01T15:58:00+02:00",
+  "deployTrigger": "voice-studio-2.9.47-update-story-pronunciation-repair",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v54",
@@ -171,7 +171,14 @@
       "mp3"
     ],
     "arabicReferenceMinSeconds": 6,
-    "arabicReferenceMaxSeconds": 180
+    "arabicReferenceMaxSeconds": 180,
+    "storyTermsAdded": [
+      "Ḥirāʾ",
+      "Ḫadīǧah",
+      "al-Ḥudaybiyah"
+    ],
+    "germanPossessiveKnownNameHandling": true,
+    "khadijahHonorific": "radiyallahu_anha"
   },
   "releaseSafety": {
     "stagedInstaller": true,
@@ -268,12 +275,17 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "efceded638d87f8962cd6dfa7c3327f7804b4823",
-    "validatedAt": "2026-10-01T10:15:07+02:00",
+    "validatedCommit": "beff741fc723cf93182c4d0374ba8e764e64dc6e",
+    "validatedAt": "2026-10-01T15:57:00+02:00",
     "freeVoiceIsolation": true,
     "mainAppBrandingUnchanged": true,
     "prophetStoryLocalBatchSmoke": true,
-    "prophetStoryStaticAudio": true
+    "prophetStoryStaticAudio": true,
+    "multiSourceUpdateCheck": true,
+    "websiteManifestUpdateFallback": true,
+    "storyPronunciationSeedValidation": true,
+    "germanPossessiveIslamicNameValidation": true,
+    "khadijahHonorificValidation": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -559,10 +571,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "9d99a8480bf261f2a32b08a4525e4d693640a5c9",
+  "releaseRef": "beff741fc723cf93182c4d0374ba8e764e64dc6e",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "2.9.40 prüfte den absichtlich dreifach gesprochenen Ḥarakāt-Roh-Render bereits mit der finalen Kurzlaut-QA und stoppte deshalb mit `short_arabic_too_long`, bevor ein einzelner Laut isoliert werden konnte. 2.9.41 trennt Roh- und Final-QA strikt: der dreifache Arbeits-Render wird nur auf harte Wellenform-/Generationsfehler geprüft; danach wird genau ein sauberer Laut isoliert und erst dieser mit der normalen strengen Arabisch-QA, Dauergrenzen und Stilleprüfung bewertet.",
+  "updateRepairReason": "2.9.47 repariert die Update-Prüfung und die Story-Ausspracheerkennung für Ḥirāʾ, Ḫadīǧah, al-Ḥudaybiyah sowie deutsche Genitivformen wie Ibrāhīms.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -835,11 +847,13 @@
   },
   "updateVisibilityRepair": {
     "forceNewSemanticVersion": true,
-    "previousUiVersion": "2.9.45",
+    "previousUiVersion": "2.9.46",
     "previousBundleVersionPossibly": "2.9.45",
-    "targetVersion": "2.9.46",
+    "targetVersion": "2.9.47",
     "alphabetReviewIncluded": true,
-    "prophetStoriesIncluded": true
+    "prophetStoriesIncluded": true,
+    "updateCheckFallbackRepair": true,
+    "prophetStoryPronunciationRepair": true
   },
   "alphabetFushaStrict": {
     "enabled": true,
