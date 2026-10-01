@@ -620,12 +620,12 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <div class="prophet-pick-head">
       <div class="prophet-pick-kicker">Kids · ein Auftrag · alle Altersstufen</div>
       <h2>Geschichten der Propheten</h2>
-      <div class="notice" style="margin:0">Namen wählen · einen Text schreiben · Audio erzeugen · beim Propheten pushen. Lesen &amp; Hören und 4–5 / 6–8 / 9–10 werden automatisch zugeordnet.</div>
+      <div class="notice" style="margin:0">Alle 25 Erzähltexte sind vorbereitet. Prophet wählen · Audio erzeugen · vollständig anhören · Aussprache bestätigen. Danach wird die fertige Geschichte automatisch in Kids übernommen.</div>
     </div>
     <select id="prophetPickId" hidden><option value="">— wählen —</option></select>
     <select id="prophetPickAge" hidden><option value="all" selected>alle</option></select>
     <div id="prophetPickList" class="prophet-pick-list"></div>
-    <div id="prophetPickReady" class="notice">Ein Push je Prophet. Die Kids-App erkennt Audio, Lesetext und Altersstufe selbst.</div>
+    <div id="prophetPickReady" class="notice">25 Voice-Texte sind vorbereitet. Offen ist nur noch deine Serhat-Audioerzeugung und Ausspracheprüfung.</div>
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
@@ -668,7 +668,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
     </div>
     <div id="downloadRow" class="download-row">
       <a id="wavLink" class="btn secondary" download="dar-serhat-voice.wav">WAV speichern</a>
-      <button id="qaConfirmBtn" class="btn secondary">Aussprache bestätigen</button>
+      <button id="qaConfirmBtn" class="btn secondary">Aussprache bestätigen &amp; übernehmen</button>
     </div>
   </div>
 </main>
@@ -1890,8 +1890,8 @@ async function confirmQA(){
     return;
   }
   const btn=$("#qaConfirmBtn");
-  const old=btn?.textContent||"Aussprache bestätigen";
-  if(btn){btn.disabled=true;btn.textContent="Wird gesperrt …"}
+  const old=btn?.textContent||"Aussprache bestätigen & übernehmen";
+  if(btn){btn.disabled=true;btn.textContent="Wird bestätigt & übernommen …"}
   try{
     const r=await localRequest("/confirm-core-audio",{
       method:"POST",
@@ -1912,6 +1912,14 @@ async function confirmQA(){
       $("#qaCoreLock").className="good";
     }
     const justLocked=Array.isArray(d.confirmed)&&d.confirmed.length;
+    const selectedProphet=$("#prophetPickId")?.value||"";
+    if(selectedProphet&&typeof window.darPublishCurrentProphetStory==="function"){
+      setMessage("Aussprache bestätigt. Die fertige Prophetengeschichte wird jetzt automatisch in Kids übernommen …","warn");
+      const published=await window.darPublishCurrentProphetStory();
+      if(!published)return;
+      setMessage("Aussprache bestätigt und Prophetengeschichte automatisch in Kids übernommen.","good");
+      return;
+    }
     setMessage(justLocked
       ?("Aussprache bestätigt. "+d.confirmed.length+" Kern-Audio-Segment(e) wurden dauerhaft lokal gesperrt.")
       :"Aussprache bestätigt. Bereits gespeicherte Kern-Audio-Locks bleiben unverändert.","good");
@@ -2121,7 +2129,7 @@ setInterval(()=>checkHealth({quiet:true}),5000);
     if(busy.get(it.id)==="error")return {cls:"bad",text:"fehlgeschlagen"};
     if(readyAges.length===3)return {cls:"good",text:"in Kids · erledigt"};
     if(readyAges.length)return {cls:"busy",text:readyAges.length+"/3 in Kids"};
-    if(AGES.some(a=>scripts[a]))return {cls:"busy",text:"Text in Kids"};
+    if(AGES.some(a=>scripts[a]))return {cls:"busy",text:"Text fertig · Audio offen"};
     return {cls:"",text:"offen"};
   }
   function fillList(){
@@ -2134,7 +2142,7 @@ setInterval(()=>checkHealth({quiet:true}),5000);
       return '<div class="prophet-pick-item'+(sel.value===it.id?" active":"")+'" data-ps-pick="'+it.id+'">'+
         '<button class="prophet-pick-name" type="button" data-ps-pick="'+it.id+'">'+label(it)+'</button>'+
         '<span class="prophet-pick-status '+st.cls+'" data-ps-status="'+it.id+'">'+st.text+'</span>'+
-        '<button class="btn primary prophet-pick-push" type="button" data-ps-push="'+it.id+'" '+(pushing?"disabled":"")+'>'+(pushing?"Lädt":"Push")+'</button>'+
+        '<button class="btn primary prophet-pick-push" type="button" data-ps-push="'+it.id+'" '+(pushing?"disabled":"")+'>'+(pushing?"Lädt":"Übernehmen")+'</button>'+
       '</div>';
     }).join("");
     list.querySelectorAll("[data-ps-pick]").forEach(el=>el.addEventListener("click",()=>{
@@ -2159,7 +2167,7 @@ setInterval(()=>checkHealth({quiet:true}),5000);
     }
     const switched=it.id!==lastId;
     lastId=it.id;
-    ta.placeholder="Eine Erzählung für "+label(it)+" · gilt automatisch für 4–5, 6–8 und 9–10";
+    ta.placeholder="Voice-Text für "+label(it)+" · bereits vorbereitet · ein Audio für alle Altersstufen";
     if(switched){
       const scripts=it.scripts&&typeof it.scripts==="object"?it.scripts:{};
       ta.value=String(scripts["6-8"]||scripts["4-5"]||scripts["9-10"]||"");
@@ -2177,7 +2185,7 @@ setInterval(()=>checkHealth({quiet:true}),5000);
       img.alt=it.name||"";
       cover.prepend(img);
     }
-    if(ready)ready.textContent=label(it)+" gewählt. Ein Text, ein Audio, ein Push – Kids ordnet Lesen, Hören und Alter selbst zu.";
+    if(ready)ready.textContent=label(it)+" · Text ist fertig vorbereitet. Jetzt nur Audio erzeugen, vollständig anhören und Aussprache bestätigen.";
     ta.dispatchEvent(new Event("input"));
     ta.focus();
   }
@@ -2216,11 +2224,18 @@ setInterval(()=>checkHealth({quiet:true}),5000);
       busy.delete(id);
       setMessage(label(it)+" ist in der Kids-App (Lesen & Hören, alle Altersstufen).","good");
       await loadPack();sel.value=it.id;prepareSlot();
+      return true;
     }catch(e){
       busy.set(id,"error");fillList();
       setMessage((e.message||String(e)),"bad");
+      return false;
     }
   }
+  window.darPublishCurrentProphetStory=async()=>{
+    const id=sel.value;
+    if(!id)return false;
+    return await pushOne(id);
+  };
   sel.addEventListener("change",prepareSlot);
   loadPack();
 })();
