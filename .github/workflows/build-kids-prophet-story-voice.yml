@@ -1,0 +1,256 @@
+name: Build Kids Prophet Story Voice Pack
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-kids-prophet-story-voice.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-prophet-story-owner-voice
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      VOICE_API: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+      BUILD_STAMP: prophet-owner-20261001-v1
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Require owner automation secret
+        run: |
+          set -euo pipefail
+          test -n "${ADMIN_PUBLISH_SECRET:-}" || { echo "::error::ADMIN_PUBLISH_SECRET fehlt"; exit 1; }
+
+      - name: Wait for DĀR Voice
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 48); do
+            code="$(curl -L -sS -o /tmp/voice-health.json -w '%{http_code}' "$VOICE_API/health" || true)"
+            cat /tmp/voice-health.json || true
+            if [ "$code" = "200" ] && grep -q '"ok":true' /tmp/voice-health.json; then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::DĀR Voice nicht bereit"
+          exit 1
+
+      - name: Install audio tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg >/dev/null
+
+      - name: Generate all prophet story audios
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from __future__ import annotations
+          import hashlib, json, os, pathlib, subprocess, time, urllib.request
+
+          ROOT=pathlib.Path(".")
+          DATA=ROOT/"kids/data/prophet-stories.json"
+          OUT=ROOT/"kids/assets/prophet-story-audio"
+          API=os.environ["VOICE_API"].rstrip("/")
+          SECRET=os.environ["ADMIN_PUBLISH_SECRET"].strip()
+          STAMP=os.environ["BUILD_STAMP"].strip()
+          ORIGIN="https://dar-al-tawhid.de"
+          REFERER="https://dar-al-tawhid.de/voice-studio/"
+          AGES=("4-5","6-8","9-10")
+
+          doc=json.loads(DATA.read_text(encoding="utf-8"))
+          items=doc.get("items") or []
+          if len(items)!=25:
+              raise SystemExit(f"Expected 25 prophet story items, got {len(items)}")
+          OUT.mkdir(parents=True,exist_ok=True)
+
+          fusha=[
+              ("Banū Isrāʾīl","بنو إسرائيل"),("Israʾīliyyāt","إسرائيليات"),("al-Jūdī","الجودي"),
+              ("Tawḥīd","التوحيد"),("Qurʾān","القرآن"),("Firʿawn","فرعون"),("Shayṭān","الشيطان"),
+              ("Ṣalāh","الصلاة"),("Zakāh","الزكاة"),("Duʿāʾ","الدعاء"),("Ṣabr","الصبر"),
+              ("Kaʿbah","الكعبة"),("Tawrāh","التوراة"),("Injīl","الإنجيل"),("Zabūr","الزبور"),
+              ("Madyan","مدين"),("Jālūt","جالوت"),("Ṭuwā","طوى"),("Sabaʾ","سبأ"),
+              ("Baʿl","بعل"),("Thamūd","ثمود"),("ʿĀd","عاد"),("Īmān","الإيمان"),
+              ("Hiǧrah","الهجرة"),("Sīrah","السيرة"),("Maryam","مريم"),("Aḥmad","أحمد")
+          ]
+
+          def age_intro(item,age):
+              name=item["name"]
+              if age=="4-5":
+                  return f"Komm, wir hören aufmerksam zu. Jetzt geht es um {name}. Diese Geschichte stammt aus geprüften Qurʾān-Belegen. Wir erzählen sie ruhig und einfach und fügen keine erfundenen Abenteuer hinzu."
+              if age=="9-10":
+                  return f"Bevor wir beginnen, merk dir einen wichtigen Grundsatz: Diese Erzählung über {name} folgt den geprüften Qurʾān-Belegen des DĀR-AL-TAWḤĪD-Prophetenprofils. Wir unterscheiden bewusst zwischen sicherem Wissen und späteren Ausschmückungen. Achte beim Zuhören darauf, welche Entscheidungen, Prüfungen und Lehren der Qurʾān selbst hervorhebt."
+              return f"Mach es dir bequem und hör aufmerksam zu. Heute geht es um {name}. Die Geschichte ist aus geprüften Qurʾān-Belegen zusammengefasst. Wir bleiben bei dem, was zuverlässig berichtet ist, und machen aus unbekannten Einzelheiten keine erfundenen Abenteuer. Achte besonders darauf, was diese Geschichte über Tawḥīd, Vertrauen, Geduld und Gehorsam gegenüber Allah lehrt."
+
+          def age_outro(item,age):
+              if item.get("disputed"):
+                  return "Am Ende ist hier besonders wichtig: Dhū l-Kifl wird im Qurʾān lobend genannt. Sein genauer Prophetenstatus wurde von Gelehrten unterschiedlich beurteilt. Darum behaupten wir nicht mehr, als die Quellen sicher tragen. Genau so lernen wir, Wissen ehrlich und sorgfältig weiterzugeben."
+              if age=="4-5":
+                  return "Jetzt denk noch einmal an den wichtigsten Punkt der Geschichte. Allah kennt Seine Diener, hilft, prüft und führt. Wir lernen aus den Propheten, Allah zu gehorchen, Ihm zu vertrauen und nach einem Fehler wieder zu Ihm zurückzukehren. Gleich kommt eine kleine Frage für dich."
+              if age=="9-10":
+                  return "Fass die Geschichte noch einmal im Kopf zusammen: Was war der Auftrag dieses Propheten? Welche Prüfung kam vor? Wie zeigte sich Gehorsam gegenüber Allah? Genau diese Fragen helfen, Qurʾān-Geschichten nicht nur zu hören, sondern ihre Botschaft zu verstehen. Die verwendeten Qurʾān-Stellen findest du direkt unter der Erzählung."
+              return "Bevor du zur Frage weitergehst, denk noch einmal an die wichtigsten Punkte. Die Propheten riefen zu Allah, hielten in Prüfungen an der Wahrheit fest und vertrauten auf Seine Führung. Die Geschichte soll nicht nur spannend sein, sondern dir helfen, die Botschaft des Qurʾān zu verstehen. Die genauen Qurʾān-Stellen stehen direkt unter der Erzählung."
+
+          def chapters(item,age):
+              ch=list(item.get("chapters") or [])
+              if age!="4-5" or len(ch)<=4:
+                  return ch
+              return [ch[0],ch[1],ch[max(2,len(ch)-2)],ch[-1]]
+
+          def story_text(item,age):
+              parts=[age_intro(item,age),*chapters(item,age)]
+              if age=="9-10" and item.get("older"):
+                  parts.append(item["older"])
+              parts.append(age_outro(item,age))
+              return "\n\n".join(p.strip() for p in parts if str(p).strip()).strip()
+
+          def prepared_text(item,text):
+              value=text
+              # All prophet names receive Arabic Fuṣḥā spelling in the synthesis-only text.
+              for p in sorted(items,key=lambda x:len(str(x.get("name") or "")),reverse=True):
+                  name=str(p.get("name") or "")
+                  name_ar=str(p.get("nameAr") or name)
+                  honor="صلى الله عليه وسلم" if p.get("id")=="muhammad" else ("" if p.get("disputed") else "عليه السلام")
+                  repl=(name_ar+(" "+honor if honor else "")).strip()
+                  if name:
+                      value=value.replace(name,repl)
+              for src,dst in fusha:
+                  value=value.replace(src,dst)
+              return " ".join(value.split())
+
+          def synth(original,prepared,target):
+              target.parent.mkdir(parents=True,exist_ok=True)
+              last=None
+              for attempt in range(1,5):
+                  body=json.dumps({"text":original,"prepared":prepared,"profile":"kids_story"},ensure_ascii=False).encode("utf-8")
+                  req=urllib.request.Request(
+                      API+"/generate",data=body,method="POST",
+                      headers={
+                          "Origin":ORIGIN,"Referer":REFERER,
+                          "Content-Type":"application/json","Accept":"audio/mpeg",
+                          "X-Admin-Secret":SECRET,
+                          "User-Agent":"DAR-Kids-Prophet-Story-Voice/1"
+                      }
+                  )
+                  tmp=pathlib.Path("/tmp")/(target.stem+f"-{attempt}.mp3")
+                  try:
+                      with urllib.request.urlopen(req,timeout=180) as response:
+                          raw=response.read()
+                      if len(raw)<5000:
+                          raise RuntimeError(f"Voice response too small: {len(raw)}")
+                      tmp.write_bytes(raw)
+                      subprocess.run([
+                          "ffmpeg","-hide_banner","-loglevel","error","-y",
+                          "-i",str(tmp),
+                          "-af","loudnorm=I=-18:TP=-2:LRA=7",
+                          "-ac","1","-ar","48000","-c:a","aac","-b:a","96k",
+                          "-movflags","+faststart",str(target)
+                      ],check=True)
+                      dur=float(subprocess.check_output([
+                          "ffprobe","-v","error","-show_entries","format=duration",
+                          "-of","default=nw=1:nk=1",str(target)
+                      ],text=True).strip())
+                      size=target.stat().st_size
+                      if size<8000 or dur<25 or dur>540:
+                          raise RuntimeError(f"Implausible audio: duration={dur:.2f}s size={size}")
+                      sha=hashlib.sha256(target.read_bytes()).hexdigest()
+                      return {"durationSec":round(dur,3),"bytes":size,"sha256":sha}
+                  except Exception as exc:
+                      last=exc
+                      target.unlink(missing_ok=True)
+                      if attempt<4:
+                          time.sleep(3*attempt)
+              raise RuntimeError(f"Generation failed for {target}: {last}")
+
+          total=len(items)*len(AGES)
+          counter=0
+          for item in items:
+              audio_meta={}
+              for age in AGES:
+                  counter+=1
+                  original=story_text(item,age)
+                  prepared=prepared_text(item,original)
+                  if len(prepared)>4900:
+                      raise RuntimeError(f"{item['id']}/{age}: prepared text too long ({len(prepared)})")
+                  target=OUT/item["id"]/(age+".m4a")
+                  qa=synth(original,prepared,target)
+                  url=f"/kids/assets/prophet-story-audio/{item['id']}/{age}.m4a?v={STAMP}"
+                  audio_meta[age]={
+                      "url":url,
+                      "durationSec":qa["durationSec"],
+                      "bytes":qa["bytes"],
+                      "sha256":qa["sha256"],
+                      "voiceProfile":"kids_story",
+                      "voiceProfileId":"serhat-owner-voice-2026",
+                      "source":"DĀR Voice Studio",
+                      "sourceSpeaker":"Serhat Abu Malik",
+                      "language":"German narration with Arabic/Fuṣḥā terms",
+                      "generatedAt":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),
+                      "technicalQaPassed":True
+                  }
+                  print(f"[{counter}/{total}] {item['id']} {age}: {qa['durationSec']}s {qa['bytes']} bytes")
+              item["audio"]=audio_meta
+
+          doc["audioBuild"]={
+              "id":STAMP,
+              "voiceProfile":"kids_story",
+              "voiceProfileId":"serhat-owner-voice-2026",
+              "clips":total,
+              "ages":list(AGES),
+              "technicalQaPassed":True,
+              "generatedAt":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
+          }
+          doc["updatedAt"]=time.strftime("%Y-%m-%d",time.gmtime())
+          DATA.write_text(json.dumps(doc,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
+
+      - name: Verify complete story voice pack
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("kids/data/prophet-stories.json").read_text(encoding="utf-8"))
+          missing=[]
+          ages=("4-5","6-8","9-10")
+          for item in d.get("items") or []:
+              for age in ages:
+                  m=(item.get("audio") or {}).get(age) or {}
+                  url=str(m.get("url") or "").split("?",1)[0]
+                  p=Path(url.lstrip("/"))
+                  if not url or not p.exists() or p.stat().st_size<8000:
+                      missing.append(f"{item.get('id')}/{age}")
+                  if m.get("technicalQaPassed") is not True:
+                      missing.append(f"{item.get('id')}/{age}:qa")
+          if missing:
+              raise SystemExit("Incomplete prophet story audio:\n- "+"\n- ".join(missing))
+          assert len(d.get("items") or [])==25
+          assert (d.get("audioBuild") or {}).get("clips")==75
+          print("Prophet story owner voice pack complete: 75/75")
+          PY
+
+      - name: Commit story voice pack
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/prophet-stories.json kids/assets/prophet-story-audio
+          if git diff --cached --quiet; then
+            echo "Story voice pack already current."
+            exit 0
+          fi
+          git commit -m "Kids: install complete prophet story owner voice pack"
+          git pull --rebase origin main
+          git push origin HEAD:main
