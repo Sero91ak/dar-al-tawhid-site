@@ -984,8 +984,11 @@ window.darUpdateStateChanged=data=>{
     state.textContent="Voice Studio "+String(d.current||"2.9.48")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
-    side.textContent="Update erneut prüfen";
-    state.textContent=(d.message||"Update-Prüfung derzeit nicht erreichbar.")+" · Details: DĀR Voice Studio → Update-Protokoll öffnen…";
+    top.hidden=false;
+    top.classList.add("available");
+    top.textContent="Update direkt reparieren";
+    side.textContent="Update direkt reparieren / installieren";
+    state.textContent=(d.message||"Update-Prüfung derzeit nicht erreichbar.")+" · Direkter Update-Helper ist verfügbar.";
     state.className="update-state bad";
   }
 };
@@ -1980,7 +1983,7 @@ $("#healthBtn").onclick=()=>checkHealth();
 $("#startEngineBtn").onclick=startEngine;
 $("#installEngineBtn").onclick=async()=>{
   if(NATIVE_MAC){
-    requestNativeUpdate(nativeUpdateState==="available"?"install":"check");
+    requestNativeUpdate((nativeUpdateState==="available"||nativeUpdateState==="error")?"install":"check");
     return;
   }
   const wrap=$("#setupCommandWrap");
@@ -2000,7 +2003,7 @@ $("#installEngineBtn").onclick=async()=>{
     :"Für diese ältere Installation den angezeigten Setup-Befehl einmalig im Terminal ausführen.","good");
 };
 $("#updateBtn").onclick=()=>{
-  if(nativeUpdateState==="available")requestNativeUpdate("install");
+  if(nativeUpdateState==="available"||nativeUpdateState==="error")requestNativeUpdate("install");
   else requestNativeUpdate("check");
 };
 $("#companionBtn").onclick=()=>{
