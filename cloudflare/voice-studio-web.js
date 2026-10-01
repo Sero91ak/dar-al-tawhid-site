@@ -90,7 +90,7 @@ function looksLikeLongArabicRecitation(text) {
 
   const letters = (value.match(/[A-Za-zÀ-ÖØ-öø-ÿ\u0600-\u06ff]/g) || []).length;
   const arabicRatio = arabicChars / Math.max(1, letters);
-  return maxRun >= 4 || (arabicRatio >= 0.70 && arabicTokens >= 4);
+  return (maxRun >= 8 && arabicTokens >= 16) || (arabicRatio >= 0.70 && arabicTokens >= 8);
 }
 
 export async function handleVoiceStudioWebRequest(request, env, cors) {
