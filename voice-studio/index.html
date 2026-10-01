@@ -3,6 +3,65 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<script>
+(function(){
+  var KEY="dar_voice_studio_gate_ok";
+  function isInstalledApp(){
+    try{
+      if(window.matchMedia("(display-mode: standalone)").matches)return true;
+      if(window.navigator.standalone===true)return true;
+      if(/DĀRVoiceStudioMac\//.test(navigator.userAgent||""))return true;
+      var host=location.hostname;
+      if(host==="127.0.0.1"||host==="localhost")return true;
+      if(location.port==="8787")return true;
+      if(new URLSearchParams(location.search).get("app")==="1")return true;
+    }catch(e){}
+    return false;
+  }
+  function alreadyOpen(){
+    if(isInstalledApp())return true;
+    try{return localStorage.getItem(KEY)==="1"}catch(e){return false}
+  }
+  if(alreadyOpen()){
+    try{document.documentElement.classList.add("voice-gate-open")}catch(e){}
+    return;
+  }
+  document.documentElement.style.visibility="hidden";
+  function unlock(){
+    try{localStorage.setItem(KEY,"1")}catch(e){}
+    document.documentElement.classList.add("voice-gate-open");
+    var lock=document.getElementById("darVoiceStudioLock");
+    if(lock)lock.remove();
+    document.documentElement.style.visibility="visible";
+    try{document.body.style.visibility="visible"}catch(e){}
+  }
+  function tryOpen(input){
+    var value=String(input&&input.value||"").replace(/\s+/g,"").toLowerCase();
+    if(value==="dawud26"){unlock();return}
+    if(input){input.value="";input.placeholder="Nicht korrekt"}
+  }
+  function mount(){
+    if(document.getElementById("darVoiceStudioLock"))return;
+    var wrap=document.createElement("div");
+    wrap.id="darVoiceStudioLock";
+    wrap.style.cssText="position:fixed;inset:0;z-index:2147483647;background:#0e1411;display:flex;align-items:center;justify-content:center;visibility:visible;padding:24px;";
+    wrap.innerHTML='<form id="darVoiceStudioLockForm" style="width:min(360px,100%);display:grid;gap:12px;color:#F4F1E6;font:600 15px/1.3 system-ui,sans-serif"><div style="font:800 22px/1.1 Georgia,serif">DĀR AL TAWḤĪD</div><div style="opacity:.8">Interner Bereich</div><input id="darVoiceStudioLockInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" style="min-height:46px;border-radius:12px;border:1px solid #3d5146;background:#17211B;color:#F4F1E6;padding:0 12px"><button id="darVoiceStudioLockBtn" type="button" style="min-height:46px;border-radius:999px;border:0;background:#F4F1E6;color:#17211B;font:800 15px system-ui,sans-serif">Öffnen</button></form>';
+    document.documentElement.appendChild(wrap);
+    document.documentElement.style.visibility="visible";
+    var input=document.getElementById("darVoiceStudioLockInput");
+    var btn=document.getElementById("darVoiceStudioLockBtn");
+    var form=document.getElementById("darVoiceStudioLockForm");
+    function go(ev){if(ev){ev.preventDefault();ev.stopPropagation()}tryOpen(input)}
+    if(btn)btn.addEventListener("click",go,true);
+    if(form)form.addEventListener("submit",go,true);
+    if(input)input.addEventListener("keydown",function(ev){if(ev.key==="Enter")go(ev)});
+    setTimeout(function(){try{input.focus()}catch(e){}},30);
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);
+  else mount();
+})();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071522">
 <meta name="color-scheme" content="dark">
@@ -604,7 +663,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.46 · WEB-APP · GITHUB</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.47 · GESPERRTER LINK</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
