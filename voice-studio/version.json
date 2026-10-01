@@ -1,10 +1,10 @@
 {
-  "version": "2.9.41",
-  "updatedAt": "2026-09-29T22:18:00+02:00",
-  "deployTrigger": "voice-studio-2.9.41-harakat-post-extraction-qa",
+  "version": "2.9.42",
+  "updatedAt": "2026-10-01T10:16:00+02:00",
+  "deployTrigger": "voice-studio-2.9.42-prophet-story-owner-voice-batch",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v51",
+  "cache": "dar-voice-studio-v52",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -268,10 +268,12 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "e49804bea857dae25a16ca72e83b486c25e30690",
-    "validatedAt": "2026-09-28T01:35:15+02:00",
+    "validatedCommit": "993c443abd13c4cd98b6ec3263499336d1891bb3",
+    "validatedAt": "2026-10-01T10:15:07+02:00",
     "freeVoiceIsolation": true,
-    "mainAppBrandingUnchanged": true
+    "mainAppBrandingUnchanged": true,
+    "prophetStoryLocalBatchSmoke": true,
+    "prophetStoryStaticAudio": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -557,7 +559,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "7dc1c5e8936efb0c64b17c4a5baab705f8517d8c",
+  "releaseRef": "993c443abd13c4cd98b6ec3263499336d1891bb3",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.40 prüfte den absichtlich dreifach gesprochenen Ḥarakāt-Roh-Render bereits mit der finalen Kurzlaut-QA und stoppte deshalb mit `short_arabic_too_long`, bevor ein einzelner Laut isoliert werden konnte. 2.9.41 trennt Roh- und Final-QA strikt: der dreifache Arbeits-Render wird nur auf harte Wellenform-/Generationsfehler geprüft; danach wird genau ein sauberer Laut isoliert und erst dieser mit der normalen strengen Arabisch-QA, Dauergrenzen und Stilleprüfung bewertet.",
@@ -857,5 +859,25 @@
     "humanReferenceSlotsCurrently": 49,
     "humanReviewStillRequiredWhenNoAuthoritativeReference": true,
     "technicalQaNeverEqualsPronunciationApproval": true
+  },
+  "prophetStoryVoiceBatch": {
+    "enabled": true,
+    "automaticOnLocalStudioLoad": true,
+    "endpointStart": "/prophet-stories/batch-start",
+    "endpointState": "/prophet-stories/batch-state",
+    "stories": 25,
+    "ageProfiles": [
+      "4-5",
+      "6-8",
+      "9-10"
+    ],
+    "expectedClips": 75,
+    "prosody": "kids_story",
+    "engine": "local-serhat-engine",
+    "voiceProfileId": "serhat-owner-voice-2026",
+    "output": "kids/assets/prophet-story-audio/<prophet>/<age>.m4a",
+    "manifest": "kids/data/prophet-stories.json",
+    "autoPublishToMain": true,
+    "systemVoiceFallback": false
   }
 }
