@@ -2391,6 +2391,23 @@ def master_suggestions(query:str,limit:int=5):
             break
     return out
 
+def known_master_form_or_german_inflection(value:str):
+    """Bekannte Masterform oder harmlose deutsche Namensflexion erkennen.
+
+    Beispiel: Ibrāhīms -> Ibrāhīm + deutsches Genitiv-s.
+    Die Aussprache-Engine ersetzt weiterhin nur den Stamm Ibrāhīm; das sichtbare
+    deutsche s bleibt im Satz erhalten und wird nicht in die arabische Masterform
+    hineingeschrieben.
+    """
+    norm=normalize_lookup(value)
+    if not norm:
+        return False
+    if norm in MASTER_ALIAS_INDEX:
+        return True
+    if len(norm)>4 and norm.endswith("s") and norm[:-1] in MASTER_ALIAS_INDEX:
+        return True
+    return False
+
 def detect_unresolved_islamic_terms(text:str,limit:int=12):
     tokens=re.findall(r"[^\s,.;:!?؟،؛()\[\]{}«»\"“”„]+",str(text or ""))
     if not tokens:
@@ -2415,7 +2432,7 @@ def detect_unresolved_islamic_terms(text:str,limit:int=12):
         # „ʿAbdullāh ibn Masʿūd sagte“ nicht als unbekannter Vierwortname markiert.
         exact=None
         for phrase,width in reversed(candidates):
-            if normalize_lookup(phrase) in MASTER_ALIAS_INDEX:
+            if known_master_form_or_german_inflection(phrase):
                 exact=(phrase,width)
                 break
         if exact:
@@ -2433,7 +2450,7 @@ def detect_unresolved_islamic_terms(text:str,limit:int=12):
             chosen=(phrase,suggestions)
         else:
             norm=normalize_lookup(token)
-            chosen=None if norm in MASTER_ALIAS_INDEX else (token,master_suggestions(token,3))
+            chosen=None if known_master_form_or_german_inflection(token) else (token,master_suggestions(token,3))
 
         if chosen:
             phrase,suggestions=chosen
