@@ -57,7 +57,7 @@
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
 <script src="/test/assets/dar-noble-3d-icons.js?v=1165"></script><!-- DAR_NOBLE_3D_HEAD -->
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1166";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1167";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1060";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 
 <script>
@@ -27208,6 +27208,7 @@ function renderHomePremiumQuickAccess(){
     {nav:"propheten",title:"Die Propheten",desc:"Qurʾān · Sunnah · authentische Überlieferungen",kind:"propheten"},
     {nav:"frauen",title:"Frauen im Islam",desc:"Fiqh, Ṣaḥābiyyāt und Wissen",kind:"frauen"},
     {nav:"recent",title:"Beiträge",desc:"Aussagen und Quellen",kind:"recent"},
+    {nav:"bibliothek",title:"Bibliothek",desc:"Werke und PDF",kind:"bibliothek"},
     {nav:"duas",title:"Duʿāʾ",desc:"Qurʾān und Sunnah",kind:"duas"},
     {nav:"hadith",title:"Ḥadīṯ",desc:"Authentische Überlieferungen",kind:"hadith"},
     {nav:"prayer",title:"Gebetszeiten",desc:"Zeiten und Erinnerungen",kind:"prayer"},
@@ -27216,7 +27217,7 @@ function renderHomePremiumQuickAccess(){
     {nav:"more",title:"Alle Bereiche",desc:"Der vollständige Mehr-Bereich",kind:"more"}
   ];
   const list=rows.map(c=>`<button type="button" class="home-line-row" data-nav="${esc(c.nav)}" aria-label="${esc(c.title)} öffnen"><span class="home-line-row__ico">${icon(c.kind,c.title)}</span><span class="home-line-row__copy"><b>${esc(c.title)}</b><small>${esc(c.desc)}</small></span></button>`).join("");
-  return `<section class="home-line-tawhid" aria-labelledby="homeTawhidTitle"><p class="home-line-kicker">Begriff</p><h2 class="home-line-title" id="homeTawhidTitle">Was ist Tawḥīd</h2><p class="home-line-statement">Allah in Seiner Herrschaft, Anbetung und in Seinen Namen und Eigenschaften einzig machen.</p><p class="home-line-text">Der Kern ist, dass nur Allah angebetet wird. Die Belege dazu stehen im Qurʾān.</p><button type="button" class="home-line-open" data-nav="tawhid-guide">Ausführlich mit Belegen</button></section><section class="home-line-list" aria-label="Bereiche">${list}</section>`;
+  return `<section class="home-line-tawhid" aria-labelledby="homeTawhidTitle"><p class="home-line-kicker">Der Kern</p><h2 class="home-line-title" id="homeTawhidTitle">Tawḥīd</h2><p class="home-line-statement">Allah in Herrschaft, Anbetung und Namen einzig machen. Nur Ihm gebührt die Anbetung.</p><button type="button" class="home-line-open" data-nav="tawhid-guide">Ausführlich mit Belegen</button></section><section class="home-line-list" aria-label="Bereiche">${list}</section>`;
 }
 function renderTawhidGuide(){
   const blocks=[
@@ -27739,14 +27740,14 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1166";
+const APP_BUILD_ID="app-shell-v1167";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
 function stripFeedPageHeader(){document.querySelectorAll("#appView>.view-head").forEach(el=>el.remove())}
 function initPremiumFeedTab(force){if(currentRoute.view!=="feed")return;stripFeedPageHeader();const run=()=>{if(!window.DAR_PREMIUM_FEED)return false;(window.DAR_PREMIUM_FEED.onAppReady||window.DAR_PREMIUM_FEED.rebuild).call(window.DAR_PREMIUM_FEED,{force:!!force});return true};if(!run()){requestAnimationFrame(()=>{stripFeedPageHeader();if(!run())setTimeout(()=>{stripFeedPageHeader();if(!run())setTimeout(run,400)},150)})}}
 window.addEventListener("load",()=>{if(readRoute().view==="feed")initPremiumFeedTab(true)});
-function renderHome(){return`${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderHomeQuranHero()}${renderHomePremiumQuickAccess()}${renderHomeSearchSection()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
+function renderHome(){return`${renderStagingBanner()}${setHeader("Startseite")}<div id="focusFeedMount" style="display:none"></div><div class="home-v380-shell">${renderHomeQuranHero()}${renderHomePremiumQuickAccess()}<section id="homeSearchBlock" class="home-v380-section home-v380-search-results" style="display:none"><div class="home-v380-section-head"><h3 class="home-v380-section-title" style="font-size:clamp(18px,4vw,22px)">Suchergebnisse</h3><span id="homeSearchCount" class="home-v380-open-row__meta">0 Treffer</span></div><div id="homeSearchResults" class="home-v380-search-grid post-grid"></div></section></div>`}
 function renderTopics(){const entries=[...countBy("category").entries()].sort((a,b)=>categoryRank(a[0])-categoryRank(b[0])||a[0].localeCompare(b[0],"de"));const known=entries.filter(([name])=>categoryRank(name)<1000);const other=entries.filter(([name])=>categoryRank(name)>=1000);let idx=0;const row=([name,count])=>{idx+=1;return`<article class="topics-theme-card dua-theme-card" data-nav="topic" data-value="${esc(name)}"><span class="topics-theme-card__idx dua-theme-card__idx" aria-hidden="true">${String(idx).padStart(2,"0")}</span><div class="topics-theme-card__icon dua-theme-card__icon" aria-hidden="true"><span class="emoji-emblem">${topicGlyph(name)}</span></div><div class="topics-theme-card__body dua-theme-card__body"><h3>${esc(name)}</h3><p class="topics-theme-card__count dua-theme-card__count">${count} Beiträge</p></div><span class="topics-theme-card__chev dua-theme-card__chev" aria-hidden="true">›</span></article>`};const block=(title,items)=>items.length?`<section class="category-cluster"><h3>${title}</h3><div class="topics-theme-grid grid-list" aria-label="${esc(title)}">${items.map(row).join("")}</div></section>`:"";return`${renderStagingBanner()}<div class="topics-hub">${setPageHeader("Beiträge","Aussagen mit Quellen und Nachweisen","Beiträge")}${renderSearchPanel()}<section id="homeSearchBlock" class="section-block" style="display:none"><div class="section-head"><h3>Suchergebnisse</h3><span id="homeSearchCount">0 Treffer</span></div><div id="homeSearchResults" class="post-grid topic-collection"></div></section><div class="topics-hub__label"><b>Themen</b><span>${entries.length} Bereiche</span></div>${block("Hauptbereiche",known)}${block("Weitere Kategorien",other)}${!entries.length?`<div class="empty">Noch keine Kategorien erkannt.</div>`:""}</div>`}
 function renderScholars(){const items=buildScholarCatalog();if(window.DARScholarsIndex&&typeof window.DARScholarsIndex.renderScholars==="function")return window.DARScholarsIndex.renderScholars(items,esc);return`<section class="scholars-index"><header class="scholars-index__header"><p class="scholars-index__eyebrow">PERSONEN &amp; ÜBERLIEFERER</p><h1 class="scholars-index__title">Gelehrte</h1><p class="scholars-index__subtitle">Beiträge nach Ṣaḥābah, Tābiʿīn, Imāmen und frühen Gelehrten</p></header><div class="scholars-index__loading">Gelehrte werden geladen…</div></section>`}
 function renderFiltered(type,value){let filtered,displayValue=value;if(type==="scholar"){const ref=resolveScholarRef(value);displayValue=ref.label;filtered=postsForScholarKey(ref.key)}else if(type==="category"){displayValue=normalizePostCategory(value);filtered=posts.filter(post=>normalizePostCategory(post.category)===normalizePostCategory(value))}else{filtered=posts.filter(post=>String(post[type]||"")===String(value))}filtered=[...filtered].sort(comparePostsNewestFirst);const visible=filtered.slice(0,FILTER_RENDER_LIMIT);const hidden=Math.max(0,filtered.length-visible.length);const titleMap={category:"Kategorie",scholar:"Gelehrter",book:"Buch"};const routeMap={category:"topic",scholar:"scholar",book:"book"};const url=routeUrl(routeMap[type]||"topic",type==="scholar"?resolveScholarRef(value).key:value);const desc=`${filtered.length} Beiträge im Bereich ${displayValue} auf DĀR AL TAWḤĪD.`;return`<div class="topic-collection-page">${setHeader(displayValue,`${filtered.length} Beiträge in diesem Ordner. Über den Zurückbutton kommst du zur vorherigen Übersicht.`,titleMap[type]||"Auswahl")}${type==="scholar"?renderScholarProfile(value):""}${type==="book"?renderBookProfile(value):""}<section class="post-grid topic-collection" aria-label="${esc(displayValue)}">${visible.length?visible.map(postCard).join(""):`<div class="empty">Keine Beiträge gefunden.</div>`}${hidden?`<div class="empty">${hidden} weitere Beiträge in dieser Kategorie – nutze die Suche zum Eingrenzen.</div>`:""}</section></div>`}
@@ -36645,35 +36646,59 @@ html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .top-sh
   backdrop-filter:none!important;
 }
 </style>
-<style id="home-line-start-v1166">
+<style id="home-line-start-v1167">
 html[data-theme] body.is-home-route #appView .home-v380-quran-hero.home-v380-quran-hero--reading{
-  border:0!important;border-radius:0!important;background:transparent!important;
-  box-shadow:none!important;min-height:72px!important;
-  border-bottom:1px solid color-mix(in srgb,var(--gold2,#c6a15b) 35%,transparent)!important;
-  margin:0 0 8px!important;padding:8px 78px 12px 2px!important;
+  border:0!important;border-radius:0!important;background:transparent!important;background-image:none!important;
+  box-shadow:none!important;min-height:52px!important;max-height:none!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#c6a15b) 42%,transparent)!important;
+  margin:0 0 2px!important;padding:4px 58px 6px 2px!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
 }
-html[data-theme] body.is-home-route #appView .home-line-tawhid,
-html[data-theme] body.is-home-route #appView .tawhid-guide{
-  margin:14px 2px 8px;padding:0 0 8px;
-  border-bottom:1px solid color-mix(in srgb,var(--gold2,#c6a15b) 35%,transparent);
-  background:transparent;
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero.home-v380-quran-hero--reading::before{display:none!important;content:none!important}
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero.home-v380-quran-hero--reading::after{
+  width:46px!important;height:46px!important;right:2px!important;top:50%!important;
+  transform:translateY(-50%)!important;filter:none!important;
 }
-.home-line-kicker{margin:0 0 4px;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2,#c6a15b)}
-.home-line-title{margin:0 0 8px;font-family:var(--font-display,var(--serif));font-size:clamp(26px,6vw,34px);font-weight:650;line-height:1.05;color:var(--cream,var(--text))}
-.home-line-statement{margin:0 0 8px;font-family:var(--font-display,var(--serif));font-size:17px;line-height:1.35;color:var(--cream,var(--text))}
-.home-line-text{margin:0 0 12px;font-size:14px;line-height:1.45;color:var(--muted,var(--text))}
-.home-line-open{display:inline-flex;min-height:40px;padding:0 2px;border:0;background:transparent;color:var(--gold2,#c6a15b);font:800 14px/1 system-ui,sans-serif;letter-spacing:.02em}
-.home-line-list{display:flex;flex-direction:column;margin:6px 0 18px}
-.home-line-row{display:grid;grid-template-columns:42px minmax(0,1fr);gap:10px;align-items:center;width:100%;min-height:58px;padding:8px 2px;border:0;border-bottom:1px solid color-mix(in srgb,var(--gold2,#c6a15b) 28%,transparent);border-radius:0;background:transparent;color:inherit;text-align:left}
-.home-line-row__ico{width:40px;height:40px;display:grid;place-items:center}
-.home-line-row__ico img.dar3d-icon{width:36px!important;height:36px!important;min-width:0!important;min-height:0!important;object-fit:contain!important}
-.home-line-row__copy{min-width:0;display:flex;flex-direction:column;gap:2px}
-.home-line-row__copy b{font-size:16px;font-weight:750;color:var(--cream,var(--text))}
-.home-line-row__copy small{font-size:12px;color:var(--muted)}
-.tawhid-guide{padding:8px 2px 28px}
-.tawhid-guide__block,.tawhid-guide__proof{padding:12px 0;border-top:1px solid color-mix(in srgb,var(--gold2,#c6a15b) 28%,transparent)}
-.tawhid-guide__block h3,.tawhid-guide__proof h3{margin:0 0 6px;font-family:var(--font-display,var(--serif));font-size:20px;font-weight:650;color:var(--cream,var(--text))}
-.tawhid-guide__proofs-title{margin-top:18px}
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero__title{font-size:16px!important;font-weight:700!important}
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero__mark,
+html[data-theme] body.is-home-route #appView .home-tawhid-entry__icon{display:none!important}
+html[data-theme] body.is-home-route #appView .home-line-tawhid{
+  margin:10px 2px 4px!important;padding:2px 0 10px!important;
+  border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#c6a15b) 42%,transparent)!important;
+}
+html[data-theme] body.is-home-route #appView .home-line-kicker{margin:0 0 3px!important;font-size:11px!important;font-weight:800!important;letter-spacing:.16em!important;text-transform:uppercase!important;color:var(--gold2,#c6a15b)!important}
+html[data-theme] body.is-home-route #appView .home-line-title{margin:0 0 6px!important;font-family:var(--font-display,var(--serif))!important;font-size:clamp(28px,7vw,36px)!important;font-weight:650!important;line-height:1.02!important;color:var(--cream,var(--text))!important}
+html[data-theme] body.is-home-route #appView .home-line-statement{margin:0 0 8px!important;font-family:var(--font-display,var(--serif))!important;font-size:16.5px!important;line-height:1.32!important;color:var(--cream,var(--text))!important}
+html[data-theme] body.is-home-route #appView .home-line-open{display:inline-flex!important;min-height:36px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:var(--gold2,#c6a15b)!important;font:800 15px/1 system-ui,sans-serif!important}
+html[data-theme] body.is-home-route #appView .home-line-list{
+  display:grid!important;grid-template-columns:1fr 1fr!important;gap:0!important;
+  margin:0 0 88px!important;padding:0!important;background:transparent!important;
+}
+html[data-theme] body.is-home-route #appView .home-line-row{
+  display:grid!important;grid-template-columns:40px minmax(0,1fr)!important;gap:8px!important;align-items:center!important;
+  width:100%!important;min-height:92px!important;margin:0!important;padding:12px 10px!important;
+  border:0!important;border-radius:0!important;background:transparent!important;background-image:none!important;
+  box-shadow:none!important;color:inherit!important;text-align:left!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#c6a15b) 28%,transparent)!important;
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+}
+html[data-theme] body.is-home-route #appView .home-line-list .home-line-row:nth-child(odd){
+  border-right:1px solid color-mix(in srgb,var(--gold2,#c6a15b) 22%,transparent)!important;
+}
+html[data-theme] body.is-home-route #appView .home-line-row__ico{width:40px!important;height:40px!important;display:grid!important;place-items:center!important;background:transparent!important;border-radius:0!important}
+html[data-theme] body.is-home-route #appView .home-line-row__ico img.dar3d-icon{width:36px!important;height:36px!important;min-width:0!important;min-height:0!important;object-fit:contain!important}
+html[data-theme] body.is-home-route #appView .home-line-row__copy{min-width:0!important;display:flex!important;flex-direction:column!important;gap:3px!important}
+html[data-theme] body.is-home-route #appView .home-line-row__copy b{font-size:15px!important;font-weight:750!important;line-height:1.15!important;color:var(--cream,var(--text))!important}
+html[data-theme] body.is-home-route #appView .home-line-row__copy small{font-size:11.5px!important;line-height:1.25!important;color:var(--muted)!important}
+html[data-theme] body.is-home-route #appView .tawhid-guide{padding:8px 2px 28px!important;background:transparent!important}
+html[data-theme] body.is-home-route #appView .tawhid-guide__block,
+html[data-theme] body.is-home-route #appView .tawhid-guide__proof{padding:12px 0!important;border:0!important;border-radius:0!important;background:transparent!important;border-top:1px solid color-mix(in srgb,var(--gold2,#c6a15b) 28%,transparent)!important}
+html[data-theme] body.is-home-route #appView .tawhid-guide__block h3,
+html[data-theme] body.is-home-route #appView .tawhid-guide__proof h3{margin:0 0 6px!important;font-family:var(--font-display,var(--serif))!important;font-size:20px!important;font-weight:650!important;color:var(--cream,var(--text))!important}
+html[data-theme] body.is-home-route #appView .tawhid-guide__proofs-title{margin-top:18px!important}
+html[data-theme] body.is-home-route #appView .home-v380-search,
+html[data-theme] body.is-home-route #appView .home-search-section{display:none!important}
 </style>
 <style id="test-refresh-bar-v1160">
 #darTestRefreshBar{
