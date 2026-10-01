@@ -6,21 +6,21 @@
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="theme-color" content="#031421">
 <title>Propheten · Full-Bleed Referenz</title>
-<link rel="stylesheet" href="/kids/prophet-reference.css?v=5">
+<link rel="stylesheet" href="/kids/prophet-reference.css?v=6">
 </head>
 <body>
 <main class="golden-shell">
   <section class="golden-list" id="listView" aria-label="Prophetenübersicht">
     <header class="modebar" aria-label="Darstellung">
-      <button class="mode" data-mode="both" type="button">▣ <span>Lesen &amp; Hören</span></button>
-      <button class="mode" data-mode="listen" type="button">◉ <span>Hören</span></button>
-      <button class="mode active" data-mode="read" type="button">▤ <span>Lesen</span></button>
+      <button class="mode" data-mode="both" type="button"><span class="mode-icon icon-book"></span><span>Lesen &amp; Hören</span></button>
+      <button class="mode" data-mode="listen" type="button"><span class="mode-icon icon-headphones"></span><span>Hören</span></button>
+      <button class="mode active" data-mode="read" type="button"><span class="mode-icon icon-book"></span><span>Lesen</span></button>
     </header>
     <div id="storyList" class="story-list"></div>
   </section>
 
-  <section class="detail-view" id="detailView" hidden>
-    <div class="detail-hero" id="detailHero">
+  <section class="detail-view" id="detailView" hidden aria-label="Prophetengeschichte">
+    <div class="detail-hero">
       <button class="back" id="backBtn" type="button" aria-label="Zurück">‹</button>
       <div class="hero-copy">
         <span class="eyebrow">UNSER PROPHET</span>
@@ -31,19 +31,17 @@
       <div class="hero-pills">
         <span>◷ <b id="detailMinutes"></b></span>
         <span>♙ <b>Alter: 6–8</b></span>
-        <span>▤ <b>Qurʾān · geprüft</b></span>
+        <span><span class="mode-icon icon-book"></span><b>Qurʾān · geprüft</b></span>
       </div>
     </div>
-
     <div class="detail-modebar modebar">
-      <button class="mode active" data-mode="both" type="button">▤ <span>Lesen &amp; Hören</span></button>
-      <button class="mode" data-mode="listen" type="button">◉ <span>Hören</span></button>
-      <button class="mode" data-mode="read" type="button">▤ <span>Lesen</span></button>
+      <button class="mode" data-mode="both" type="button"><span class="mode-icon icon-book"></span><span>Lesen &amp; Hören</span></button>
+      <button class="mode" data-mode="listen" type="button"><span class="mode-icon icon-headphones"></span><span>Hören</span></button>
+      <button class="mode active" data-mode="read" type="button"><span class="mode-icon icon-book"></span><span>Lesen</span></button>
     </div>
-
     <article class="reading-card" id="readingCard"></article>
   </section>
 </main>
-<script src="/kids/prophet-reference.js?v=5"></script>
+<script src="/kids/prophet-reference.js?v=6"></script>
 </body>
 </html>
