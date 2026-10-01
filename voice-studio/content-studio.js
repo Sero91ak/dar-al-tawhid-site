@@ -270,7 +270,34 @@ function publishHtml(){
     <div id="csLibrary" class="cs-inventory"><div class="notice">Bestand · Staging · Live werden geladen …</div></div>
   </section>`;
 }
+function prophetPickHtml(){
+  return `<div class="prophet-pick" id="prophetPick">
+    <div class="prophet-pick-head">
+      <div>
+        <div class="prophet-pick-kicker">Kids · fest vorbereitet</div>
+        <h2>Geschichten der Propheten</h2>
+        <div class="notice" style="margin:0">Prophet antippen · Text schreiben · Audio erzeugen · in Kids pushen. Cover und Quellen sind schon da.</div>
+      </div>
+      <div class="prophet-pick-row">
+        <div class="cs-field" style="flex:0 0 120px"><label for="prophetPickAge">Alter</label><select id="prophetPickAge"><option value="4-5">4–5</option><option value="6-8" selected>6–8</option><option value="9-10">9–10</option></select></div>
+        <button id="prophetPickPush" class="btn primary" type="button" disabled>In Kids-App pushen</button>
+      </div>
+    </div>
+    <select id="prophetPickId" hidden><option value="">— wählen —</option></select>
+    <div id="prophetPickGrid" class="prophet-pick-grid"></div>
+    <div id="prophetPickReady" class="notice">25 Plätze sind vorbereitet. Wähle zuerst Muḥammad ﷺ oder einen anderen Propheten.</div>
+  </div>`;
+}
+function ensureProphetUi(){
+  const editor=document.querySelector(".editor-panel");
+  if(!editor)return;
+  if(!q("prophetPick")) editor.insertAdjacentHTML("afterbegin",prophetPickHtml());
+  const box=q("prophetPick");
+  if(box && editor.firstChild!==box) editor.insertBefore(box,editor.firstChild);
+}
 function mount(){
+  injectStyles();
+  ensureProphetUi();
   if(q("csMeta"))return;
   injectStyles();
   const top=document.querySelector(".topbar");

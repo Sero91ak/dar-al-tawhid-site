@@ -216,6 +216,35 @@ def load_kids_repo_json(local_name:str,repo_path:str,validator):
             f"{local_name} fehlt oder ist ungültig; automatische Wiederherstellung fehlgeschlagen: {e}"
         ) from e
 
+def refresh_studio_ui_from_github():
+    files=(
+        ("voice-studio/index.html","studio.html",("id=\"prophetPick\"","Geschichten der Propheten")),
+        ("voice-studio/content-studio.js","content-studio.js",("csProphetTab","ensureProphetUi")),
+    )
+    for repo,name,markers in files:
+        try:
+            req=urllib.request.Request(
+                "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/"+repo+"?ref=main",
+                headers={
+                    "Accept":"application/vnd.github.raw+json",
+                    "User-Agent":"DAR-Voice-Studio-Studio-Sync/1",
+                    "Cache-Control":"no-cache",
+                },
+            )
+            with urllib.request.urlopen(req,timeout=25) as response:
+                raw=response.read()
+            text=raw.decode("utf-8","replace")
+            if text.lstrip().startswith("{") and '"encoding"' in text[:400]:
+                remote=json.loads(text)
+                blob=str(remote.get("content") or "")
+                text=base64.b64decode(re.sub(r"\s+","",blob)).decode("utf-8","replace")
+            if not all(m in text for m in markers):
+                continue
+            (APP_HOME/name).write_text(text,encoding="utf-8")
+            print("[DĀR Voice] Studio-UI aktualisiert:",name,flush=True)
+        except Exception as e:
+            print("[DĀR Voice] Studio-UI Sync übersprungen:",name,e,flush=True)
+
 def load_alphabet_manifest():
     return load_kids_repo_json(
         "alphabet-audio.json",
@@ -6116,6 +6145,7 @@ def serve_single_instance():
         # Modell und Online-Wortschatz erst nach erfolgreichem exklusivem Bind vorladen.
         threading.Thread(target=warm_model,daemon=True).start()
         threading.Thread(target=refresh_online_library_if_stale,daemon=True).start()
+        threading.Thread(target=refresh_studio_ui_from_github,daemon=True).start()
         server.serve_forever()
     return 0
 

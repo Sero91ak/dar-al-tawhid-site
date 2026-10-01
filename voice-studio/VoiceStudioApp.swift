@@ -21,7 +21,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.43"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.44"
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -31,7 +31,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.43"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.44"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
         config.userContentController.add(self, name: "darCompanion")
@@ -90,6 +90,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         appRoot.submenu = appMenu
         appMenu.addItem(menuItem("Über DĀR Voice Studio", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:))))
         appMenu.addItem(menuItem("Nach Updates suchen…", action: #selector(checkForUpdatesFromMenu(_:)), target: self))
+        appMenu.addItem(menuItem("Update jetzt installieren…", action: #selector(installUpdateFromMenu(_:)), target: self))
         appMenu.addItem(menuItem("Update-Protokoll öffnen…", action: #selector(openUpdateLog(_:)), target: self))
         appMenu.addItem(menuItem("iPad / iPhone verbinden…", action: #selector(showCompanionPairing(_:)), target: self))
         appMenu.addItem(.separator())
@@ -374,6 +375,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         }
     }
 
+    private func manifestObject(from data: Data) -> [String: Any]? {
+        guard let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return nil }
+        if object["version"] is String { return object }
+        guard let content = object["content"] as? String else { return object }
+        let cleaned = content.replacingOccurrences(of: "\\s", with: "", options: .regularExpression)
+        guard let decoded = Data(base64Encoded: cleaned),
+              let inner = try? JSONSerialization.jsonObject(with: decoded) as? [String: Any] else { return object }
+        return inner
+    }
+
     private func checkForUpdates(userInitiated: Bool = false) {
         if userInitiated {
             publishUpdateState("checking", message: "Neue Version wird geprüft …")
@@ -390,7 +401,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             guard error == nil,
                   (response as? HTTPURLResponse)?.statusCode == 200,
                   let data = data,
-                  let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let object = self.manifestObject(from: data),
                   let latest = object["version"] as? String,
                   !latest.isEmpty else {
                 self.publishUpdateState(
@@ -404,6 +415,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             self.updateAvailable = self.isVersion(latest, newerThan: self.currentVersion)
             if self.updateAvailable {
                 self.publishUpdateState("available", latest: latest, message: "Update verfügbar")
+                if !userInitiated {
+                    DispatchQueue.main.async { self.installAvailableUpdate() }
+                }
             } else {
                 self.publishUpdateState(
                     "current",
@@ -416,6 +430,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
     @objc private func checkForUpdatesFromMenu(_ sender: Any?) {
         checkForUpdates(userInitiated: true)
+    }
+
+    @objc private func installUpdateFromMenu(_ sender: Any?) {
+        installAvailableUpdate()
     }
 
     private func updateLogURL() -> URL {
