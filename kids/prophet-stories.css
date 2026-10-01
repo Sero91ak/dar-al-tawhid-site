@@ -83,8 +83,8 @@
 .ps-card.featured{
   grid-column:1/-1;
   display:grid;
-  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
-  min-height:218px;
+  grid-template-columns:minmax(118px,.95fr) minmax(0,1.15fr);
+  min-height:168px;
   border-color:rgba(226,189,114,.19);
   background:
     radial-gradient(circle at 20% 20%,rgba(226,189,114,.10),transparent 34%),
@@ -102,26 +102,31 @@
   position:relative;
   display:block;
   width:100%;
-  aspect-ratio:1/1.02;
+  aspect-ratio:1/1;
   overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 38%,rgba(255,255,255,.045),transparent 47%),
-    #0a1c25;
+  background:#0a1c25;
 }
 .ps-card:not(.featured) .ps-art{border-bottom:1px solid rgba(255,255,255,.055)}
 .ps-art::after{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(180deg,transparent 58%,rgba(4,15,21,.20) 100%);
 }
-.ps-art img{
+.ps-art img,.ps-hero img{
   display:block;width:100%;height:100%;
-  object-fit:cover;
-  object-position:center 48%;
-  transform:scale(1.075);
-  filter:saturate(1.04) contrast(1.02) brightness(.97);
+  object-fit:contain;
+  object-position:center 46%;
+  transform:none;
+  filter:none;
 }
-.ps-card.featured .ps-art{height:100%;aspect-ratio:auto}
-.ps-card.featured .ps-art img{transform:scale(1.09);object-position:center 46%}
+.ps-card.featured .ps-art{height:100%;min-height:168px;aspect-ratio:auto}
+.ps-art[data-ps-id="muhammad"] img,.ps-hero[data-ps-id="muhammad"] img{object-position:center 52%}
+.ps-art[data-ps-id="nuh"] img,.ps-hero[data-ps-id="nuh"] img{object-position:center 48%}
+.ps-art[data-ps-id="musa"] img,.ps-hero[data-ps-id="musa"] img{object-position:center 58%}
+.ps-art[data-ps-id="isa"] img,.ps-hero[data-ps-id="isa"] img{object-position:center 42%}
+.ps-art[data-ps-id="ibrahim"] img,.ps-hero[data-ps-id="ibrahim"] img{object-position:center 50%}
+.ps-art[data-ps-id="yunus"] img,.ps-hero[data-ps-id="yunus"] img{object-position:center 50%}
+.ps-art[data-ps-id="sulayman"] img,.ps-hero[data-ps-id="sulayman"] img{object-position:center 46%}
+.ps-art[data-ps-id="dawud"] img,.ps-hero[data-ps-id="dawud"] img{object-position:center 48%}
 .ps-card-copy{
   display:flex;flex-direction:column;
   min-height:92px;
@@ -129,8 +134,8 @@
 }
 .ps-card.featured .ps-card-copy{
   min-height:0;
-  justify-content:flex-end;
-  padding:46px 15px 15px 14px;
+  justify-content:center;
+  padding:18px 14px 14px;
 }
 .ps-badges{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 7px}
 .ps-badge{
@@ -149,7 +154,7 @@
   margin-top:4px;
   color:rgba(255,255,255,.72);
   font:14px/1.25 "Geeza Pro","Noto Naskh Arabic",serif;
-  text-align:left;
+  text-align:right;
 }
 .ps-card.featured .ps-card-ar{font-size:17px;color:#e8d39c}
 .ps-card-foot{
@@ -222,17 +227,9 @@
 .ps-scroll::-webkit-scrollbar{display:none}
 .ps-hero{
   position:relative;
-  height:232px;
+  height:196px;
   overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 45%,rgba(255,255,255,.035),transparent 48%),
-    #091b24;
-}
-.ps-hero img{
-  display:block;width:100%;height:100%;
-  object-fit:cover;object-position:center 48%;
-  transform:scale(1.11);
-  filter:saturate(1.03) brightness(.93);
+  background:#091b24;
 }
 .ps-hero::after{
   content:"";position:absolute;inset:0;z-index:1;
@@ -255,7 +252,7 @@
   font:19px/1.25 "Geeza Pro","Noto Naskh Arabic",serif;
   text-align:left;
 }
-.ps-body{padding:13px 15px calc(42px + env(safe-area-inset-bottom))}
+.ps-body{padding:8px 15px calc(28px + env(safe-area-inset-bottom) + 64px)}
 .ps-summary{
   margin:0 0 11px;
   color:rgba(255,255,255,.72);
@@ -355,12 +352,12 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
 @media(min-width:700px){
   .ps-wrap{padding-bottom:108px}
   .ps-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
-  .ps-card.featured{grid-column:1/-1;min-height:250px;grid-template-columns:1.2fr .8fr}
-  .ps-art{aspect-ratio:1/1.05}
+  .ps-card.featured{grid-column:1/-1;min-height:188px;grid-template-columns:.9fr 1.1fr}
+  .ps-art{aspect-ratio:1/1}
   .ps-card-title{font-size:17px}
   .ps-card.featured .ps-card-title{font-size:28px}
   .ps-sheet{height:min(92dvh,900px);border-radius:31px;margin-bottom:18px}
-  .ps-hero{height:286px}
+  .ps-hero{height:220px}
   .ps-body{padding-left:22px;padding-right:22px}
   .ps-title{font-size:34px}
 }
@@ -371,10 +368,10 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
   .ps-card-copy{padding:9px 9px 10px}
   .ps-card-title{font-size:14px}
   .ps-card-ar{font-size:13px}
-  .ps-card.featured{min-height:205px}
-  .ps-card.featured .ps-card-copy{padding:43px 12px 13px}
+  .ps-card.featured{min-height:156px}
+  .ps-card.featured .ps-card-copy{padding:16px 12px 12px}
   .ps-card.featured .ps-card-title{font-size:22px}
-  .ps-hero{height:214px}
+  .ps-hero{height:176px}
   .ps-title{font-size:26px}
   .ps-body{padding-left:13px;padding-right:13px}
 }

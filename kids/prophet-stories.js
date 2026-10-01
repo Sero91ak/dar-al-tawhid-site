@@ -81,7 +81,7 @@ function renderCards(){
     const text=buildText(item);
     const featured=item.id==="muhammad"?" featured":"";
     return '<button class="ps-card'+featured+'" data-ps-id="'+esc(item.id)+'" type="button" style="--ps-i:'+index+'">'+
-      '<span class="ps-art"><img src="'+esc(item.cover)+'" alt="" loading="'+(index<5?"eager":"lazy")+'"></span>'+
+      '<span class="ps-art" data-ps-id="'+esc(item.id)+'"><img src="'+esc(item.cover)+'" alt="" loading="'+(index<5?"eager":"lazy")+'"></span>'+
       (done(item.id)?'<span class="ps-done" aria-label="Abgeschlossen"></span>':'')+
       '<span class="ps-card-copy">'+
         '<span class="ps-badges"><span class="ps-badge ok">QURʾĀN · GEPRÜFT</span>'+(item.disputed?'<span class="ps-badge warn">IKHTILĀF</span>':'')+'</span>'+
@@ -118,7 +118,7 @@ function ensureUi(){
           '<p class="ps-summary" id="psSummary"></p>'+
           '<div class="ps-meta" id="psMeta"></div>'+
           '<div class="ps-detail-modes"><button class="ps-detail-mode" data-ps-mode="both" type="button">Lesen &amp; Hören</button><button class="ps-detail-mode" data-ps-mode="listen" type="button">Hören</button><button class="ps-detail-mode" data-ps-mode="read" type="button">Lesen</button></div>'+
-          '<div class="ps-player" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören</button></div><div class="ps-progress"><span id="psProgress"></span></div><div class="ps-player-note" id="psVoiceNote">Erzählung · Fuṣḥā-Aussprache · DĀR Voice</div></div>'+
+          '<div class="ps-player" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören</button></div><div class="ps-progress"><span id="psProgress"></span></div><div class="ps-player-note" id="psVoiceNote"></div></div>'+
           '<article class="ps-read" id="psRead"></article>'+
           '<div class="ps-sources"><strong>QUELLEN</strong><div id="psSources"></div></div>'+
           '<div class="ps-question" id="psQuestion"></div>'+
@@ -133,7 +133,7 @@ function ensureUi(){
   audio.preload="metadata";
   audio.addEventListener("timeupdate",updateProgress);
   audio.addEventListener("loadedmetadata",updateProgress);
-  audio.addEventListener("ended",()=>{playing=false;updatePlayButton();markDone(active?.id||"");if($("#psVoiceNote"))$("#psVoiceNote").textContent="✓ Geschichte vollständig angehört."});
+  audio.addEventListener("ended",()=>{playing=false;updatePlayButton();markDone(active?.id||"");if($("#psVoiceNote"))$("#psVoiceNote").textContent="Geschichte vollständig angehört."});
   audio.addEventListener("play",()=>{playing=true;updatePlayButton()});
   audio.addEventListener("pause",()=>{playing=false;updatePlayButton()});
   return true;
@@ -148,6 +148,7 @@ function applyMode(){
 function renderActive(){
   if(!active)return;
   activeText=buildText(active);
+  const hero=$(".ps-hero");if(hero)hero.setAttribute("data-ps-id",active.id);
   $("#psHero").src=active.cover;$("#psHero").alt=active.name;
   $("#psTitle").textContent=active.name+(active.id==="muhammad"?" ﷺ":"");
   $("#psArabic").textContent=arabicLine(active);
@@ -170,7 +171,7 @@ function renderQuestion(){
     '<div class="ps-feedback" id="psFeedback"></div>';
   q.querySelectorAll("[data-ps-answer]").forEach(b=>b.addEventListener("click",()=>{
     const i=Number(b.dataset.psAnswer);
-    if(i===Number(active.correct||0)){b.classList.add("good");$("#psFeedback").textContent="✓ Richtig. Gut aufgepasst.";markDone(active.id)}
+    if(i===Number(active.correct||0)){b.classList.add("good");$("#psFeedback").textContent="Richtig. Gut aufgepasst.";markDone(active.id)}
     else{b.classList.add("bad");$("#psFeedback").textContent="Hör oder lies noch einmal in Ruhe nach.";setTimeout(()=>b.classList.remove("bad"),900)}
   }));
 }
@@ -194,10 +195,10 @@ function resetAudioForActive(){
   if(meta&&meta.url){
     audio.src=meta.url;
     audio.preload="metadata";
-    if(note)note.textContent="Erzählung · Fuṣḥā-Aussprache · DĀR Voice";
+    if(note)note.textContent="";
   }else{
     audio.removeAttribute("src");
-    if(note)note.textContent="Audio wird gerade für diese Geschichte bereitgestellt.";
+    if(note)note.textContent="Die Geschichte kann gelesen werden.";
   }
   $("#psProgress").style.width="0";
   updatePlayButton();
@@ -210,9 +211,7 @@ function updatePlayButton(){
   const b=$("#psPlay");if(!b)return;
   const meta=audioMeta(active);
   b.disabled=busy||!meta?.url;
-  if(busy)b.textContent="Laden …";
-  else if(!meta?.url)b.textContent="Audio folgt";
-  else if(playing)b.textContent="Pause";
+  if(playing)b.textContent="Pause";
   else if(audio.currentTime>0&&!audio.ended)b.textContent="Weiterhören";
   else b.textContent="Hören";
 }
@@ -228,7 +227,7 @@ async function toggleAudio(){
     busy=false;playing=true;updatePlayButton();
   }catch(err){
     busy=false;playing=false;updatePlayButton();
-    const note=$("#psVoiceNote");if(note)note.textContent="Audio konnte gerade nicht gestartet werden. Bitte erneut versuchen.";
+    const note=$("#psVoiceNote");if(note)note.textContent="Die Geschichte kann gelesen werden.";
   }
 }
 function stopAudio(){
