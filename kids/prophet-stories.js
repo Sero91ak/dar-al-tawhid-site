@@ -55,7 +55,13 @@ function chaptersForAge(item){
   if(age()!=="4–5"||ch.length<=4)return ch;
   return [ch[0],ch[1],ch[Math.max(2,ch.length-2)],ch[ch.length-1]];
 }
+function customScript(item){
+  const s=item&&item.scripts&&typeof item.scripts==="object"?item.scripts:{};
+  return String(s[ageKey()]||"").trim();
+}
 function buildText(item){
+  const owned=customScript(item);
+  if(owned)return owned;
   const parts=[ageIntro(item)].concat(chaptersForAge(item));
   if(age()==="9–10"&&item.older)parts.push(item.older);
   parts.push(ageOutro(item));

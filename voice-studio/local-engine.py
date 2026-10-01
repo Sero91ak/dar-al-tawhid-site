@@ -5423,6 +5423,100 @@ def start_prophet_story_voice_pack():
     time.sleep(.05)
     return _prophet_batch_snapshot()
 
+def publish_manual_prophet_story(item_id:str,age:str,text:str):
+    item_id=str(item_id or "").strip()
+    age=str(age or "").strip()
+    text=str(text or "").strip()
+    if age not in ("4-5","6-8","9-10"):
+        raise ValueError("Alter muss 4-5, 6-8 oder 9-10 sein.")
+    if not item_id:
+        raise ValueError("Prophet fehlt.")
+    if len(text)<40:
+        raise ValueError("Erzähltext ist zu kurz.")
+    st=get_status()
+    src=Path(str(st.get("last_output") or ""))
+    if not src.exists() or src.stat().st_size<=44:
+        raise ValueError("Zuerst Audio erzeugen und anhören.")
+    git=shutil.which("git")
+    if not git:
+        raise RuntimeError("git fehlt.")
+    repo=ALPHABET_PUBLISH_REPO
+    def rr(args,timeout=180):
+        return run(args,timeout)
+    gh=shutil.which("gh")
+    if gh:
+        auth=rr([gh,"auth","status"],30)
+        if auth.returncode==0:
+            rr([gh,"auth","setup-git"],30)
+    if not (repo/".git").exists():
+        if repo.exists(): shutil.rmtree(repo)
+        p=rr([git,"clone","https://github.com/Sero91ak/dar-al-tawhid-site.git",str(repo)],300)
+        if p.returncode!=0:
+            raise RuntimeError("Git clone fehlgeschlagen: "+(p.stderr or p.stdout)[-500:])
+    rr([git,"-C",str(repo),"fetch","origin","main"],180)
+    rr([git,"-C",str(repo),"checkout","main"],60)
+    rr([git,"-C",str(repo),"reset","--hard","origin/main"],60)
+    data_path=repo/"kids/data/prophet-stories.json"
+    manifest=json.loads(data_path.read_text(encoding="utf-8"))
+    items=list(manifest.get("items") or [])
+    item=next((x for x in items if str(x.get("id"))==item_id),None)
+    if not item:
+        raise ValueError("Prophet nicht gefunden: "+item_id)
+    asset=repo/"kids/assets/prophet-story-audio"/item_id/(age+".m4a")
+    _encode_kids_m4a(src,asset)
+    dur=round(_audio_duration_seconds(asset),3)
+    if dur<5 or asset.stat().st_size<4000:
+        raise RuntimeError("Audio-QA fehlgeschlagen: zu kurz oder leer.")
+    stamp=time.strftime("%Y%m%d-%H%M%S")
+    scripts=item.get("scripts") if isinstance(item.get("scripts"),dict) else {}
+    scripts[age]=text
+    item["scripts"]=scripts
+    audio=item.get("audio") if isinstance(item.get("audio"),dict) else {}
+    audio[age]={
+        "url":f"/kids/assets/prophet-story-audio/{item_id}/{age}.m4a?v={stamp}",
+        "durationSec":dur,
+        "bytes":asset.stat().st_size,
+        "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
+        "voiceProfile":"kids_story",
+        "voiceProfileId":"serhat-owner-voice-2026",
+        "source":"DĀR Voice Studio local engine",
+        "sourceSpeaker":"Serhat Abu Malik",
+        "manual":True,
+        "technicalQaPassed":True,
+        "publishedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+    }
+    item["audio"]=audio
+    manifest["updatedAt"]=time.strftime("%Y-%m-%d")
+    atomic_write_json(data_path,manifest)
+    p=rr([git,"-C",str(repo),"add","kids/data/prophet-stories.json",str(asset.relative_to(repo))],60)
+    if p.returncode!=0:
+        raise RuntimeError("Git staging fehlgeschlagen.")
+    if rr([git,"-C",str(repo),"diff","--cached","--quiet"],30).returncode==0:
+        return {"ok":True,"unchanged":True,"id":item_id,"age":age,"url":audio[age]["url"]}
+    rr([git,"-C",str(repo),"config","user.name","Serhat Abu Malik"],20)
+    rr([git,"-C",str(repo),"config","user.email","73606501+Sero91ak@users.noreply.github.com"],20)
+    name=str(item.get("name") or item_id)
+    msg=f"Kids: Prophetengeschichte {name} · Alter {age} aus Voice Studio"
+    p=rr([git,"-C",str(repo),"commit","-m",msg],120)
+    if p.returncode!=0:
+        raise RuntimeError("Git commit fehlgeschlagen: "+(p.stderr or p.stdout)[-600:])
+    last=""
+    for attempt in range(1,4):
+        fetch=rr([git,"-C",str(repo),"fetch","origin","main"],180)
+        if fetch.returncode==0:
+            rebase=rr([git,"-C",str(repo),"rebase","origin/main"],180)
+            if rebase.returncode!=0:
+                rr([git,"-C",str(repo),"rebase","--abort"],30)
+                raise RuntimeError("Rebase fehlgeschlagen.")
+            push=rr([git,"-C",str(repo),"push","origin","HEAD:main"],300)
+            if push.returncode==0:
+                return {"ok":True,"id":item_id,"name":name,"age":age,"url":audio[age]["url"],"durationSec":dur,"pushed":True}
+            last=(push.stderr or push.stdout)[-700:]
+        else:
+            last=(fetch.stderr or fetch.stdout)[-700:]
+        if attempt<3: time.sleep(attempt*3)
+    raise RuntimeError("GitHub-Push fehlgeschlagen: "+last)
+
 
 class H(BaseHTTPRequestHandler):
     def is_loopback_client(self):
@@ -5660,6 +5754,8 @@ class H(BaseHTTPRequestHandler):
                         "cover":it.get("cover"),
                         "disputed":bool(it.get("disputed")),
                         "displayOrder":it.get("displayOrder"),
+                        "scripts":it.get("scripts") if isinstance(it.get("scripts"),dict) else {},
+                        "audio":it.get("audio") if isinstance(it.get("audio"),dict) else {},
                         "texts":ages
                     })
                 self.send_json(200,{"ok":True,"count":len(items),"items":items,"mode":"manual-studio"})
@@ -5836,6 +5932,12 @@ class H(BaseHTTPRequestHandler):
         if p=="/prophet-stories/batch-stop":
             PROPHET_STORY_BATCH_CANCEL.set()
             return self.send_json(200,{"ok":True,"stopRequested":True,**_prophet_batch_snapshot()})
+        if p=="/prophet-stories/publish":
+            try:
+                result=publish_manual_prophet_story(str(data.get("id") or ""),str(data.get("age") or ""),str(data.get("text") or ""))
+                return self.send_json(200,result)
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e)})
 
         if p=="/alphabet/review-approve":
             try:

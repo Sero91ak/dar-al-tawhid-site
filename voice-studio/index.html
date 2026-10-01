@@ -611,13 +611,15 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </div>
 
   <div class="prophet-pick" id="prophetPick">
-    <div class="section-title">Prophetengeschichten · selbst erzeugen</div>
+    <div class="section-title">Kids · Prophetengeschichte vorbereiten</div>
     <div class="prophet-pick-row">
       <div class="cs-field"><label for="prophetPickId">Prophet</label><select id="prophetPickId"><option value="">— wählen —</option></select></div>
       <div class="cs-field" style="flex:0 0 120px"><label for="prophetPickAge">Alter</label><select id="prophetPickAge"><option value="4-5">4–5</option><option value="6-8" selected>6–8</option><option value="9-10">9–10</option></select></div>
-      <button id="prophetPickLoad" class="btn secondary" type="button" style="min-height:40px">Text laden</button>
     </div>
-    <div class="notice">Kein Automatik-Batch. Text hier prüfen und ändern, dann „Audio erzeugen“. Profil: Kinder-Geschichte.</div>
+    <div id="prophetPickReady" class="notice" style="margin-top:8px">Wähle den Propheten. Cover, Name, Quellen und Kids-Platz sind schon vorbereitet. Du schreibst nur den Text, erzeugst Audio und pusht.</div>
+    <div class="prophet-pick-row" style="margin-top:10px">
+      <button id="prophetPickPush" class="btn primary" type="button" disabled>In Kids-App pushen</button>
+    </div>
   </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
@@ -2079,27 +2081,56 @@ checkHealth({quiet:true}).then(()=>analyzeProsody());
 setInterval(()=>checkHealth({quiet:true}),5000);
 
 (function prophetStoryManualLoader(){
-  const sel=$("#prophetPickId"),age=$("#prophetPickAge"),btn=$("#prophetPickLoad"),ta=$("#text");
-  if(!sel||!btn||!ta)return;
+  const sel=$("#prophetPickId"),age=$("#prophetPickAge"),ta=$("#text"),push=$("#prophetPickPush"),ready=$("#prophetPickReady");
+  if(!sel||!ta||!push)return;
   let pack=[];
+  function honor(it){
+    if(!it)return"";
+    if(it.id==="muhammad")return"ﷺ";
+    if(it.disputed)return"";
+    return it.honorific||"";
+  }
+  function label(it){
+    return (it.name||it.id)+(honor(it)?" "+honor(it):"");
+  }
   function fillSelect(){
     const cur=sel.value;
-    sel.innerHTML='<option value="">— wählen —</option>'+pack.map(it=>'<option value="'+it.id+'">'+(it.name||it.id)+'</option>').join("");
+    sel.innerHTML='<option value="">— wählen —</option>'+pack.map(it=>'<option value="'+it.id+'">'+label(it)+'</option>').join("");
     if(cur)sel.value=cur;
   }
-  function buildText(it,key){
-    if(it.texts&&it.texts[key])return String(it.texts[key]);
-    const name=it.name||"";
-    const intro=key==="4-5"
-      ?"Komm, wir hören aufmerksam zu. Jetzt geht es um "+name+"."
-      :key==="9-10"
-      ?"Diese Erzählung über "+name+" folgt den geprüften Qurʾān-Belegen."
-      :"Heute geht es um "+name+".";
-    const ch=Array.isArray(it.chapters)?it.chapters.slice():[];
-    const parts=[intro].concat(key==="4-5"&&ch.length>4?[ch[0],ch[1],ch[Math.max(2,ch.length-2)],ch[ch.length-1]]:ch);
-    if(key==="9-10"&&it.older)parts.push(it.older);
-    parts.push((it.sourceRefs||[]).join(" · "));
-    return parts.filter(Boolean).join("\n\n");
+  let lastId="";
+  function prepareSlot(){
+    const it=pack.find(x=>x.id===sel.value);
+    const key=age.value||"6-8";
+    if(!it){
+      push.disabled=true;
+      lastId="";
+      if(ready)ready.textContent="Wähle den Propheten. Cover, Name, Quellen und Kids-Platz sind schon vorbereitet. Du schreibst nur den Text, erzeugst Audio und pusht.";
+      return;
+    }
+    const switched=it.id!==lastId;
+    lastId=it.id;
+    ta.placeholder="Deine Erzählung für "+label(it)+" · Alter "+key.replace("-","–");
+    if(switched)ta.value="";
+    const title=$("#csTitle");if(title)title.value=it.title||it.name||"";
+    const prophet=$("#csProphet");if(prophet)prophet.value=it.id||"";
+    const sources=$("#csSources");if(sources)sources.value=(it.sourceRefs||[]).join("\n");
+    const topic=$("#csTopic");if(topic)topic.value="Propheten · Qurʾān";
+    if($("#styleMode"))$("#styleMode").value="kids_story";
+    const cover=$("#csCover");
+    if(cover&&it.cover){
+      cover.querySelector("img")?.remove();
+      const img=document.createElement("img");
+      img.src=(String(it.cover).indexOf("http")===0?it.cover:("https://dar-al-tawhid.de"+it.cover));
+      img.alt=it.name||"";
+      cover.prepend(img);
+    }
+    const hasAudio=!!(it.audio&&it.audio[key]&&it.audio[key].url);
+    const hasScript=!!(it.scripts&&it.scripts[key]);
+    if(ready)ready.textContent=label(it)+" · "+key.replace("-","–")+" ist vorbereitet."+(hasScript||hasAudio?" In der Kids-App liegt schon eine Fassung.":" Schreibe den Text, erzeuge Audio, höre zu, dann pushen.");
+    push.disabled=false;
+    ta.dispatchEvent(new Event("input"));
+    ta.focus();
   }
   async function loadPack(){
     try{
@@ -2114,22 +2145,33 @@ setInterval(()=>checkHealth({quiet:true}),5000);
         const d=await r.json();
         items=d.items||[];
       }
-      pack=items;
+      pack=items.slice().sort((a,b)=>Number(a.displayOrder||99)-Number(b.displayOrder||99));
       fillSelect();
     }catch(e){console.warn("[DĀR Voice] Prophet stories library",e)}
   }
-  btn.addEventListener("click",()=>{
+  sel.addEventListener("change",prepareSlot);
+  age.addEventListener("change",prepareSlot);
+  push.addEventListener("click",async()=>{
     const it=pack.find(x=>x.id===sel.value);
     if(!it){setMessage("Zuerst einen Propheten wählen.","warn");return;}
-    const key=age.value||"6-8";
-    ta.value=buildText(it,key);
-    const title=$("#csTitle");if(title)title.value=it.title||it.name||"";
-    const prophet=$("#csProphet");if(prophet)prophet.value=it.id||"";
-    const sources=$("#csSources");if(sources)sources.value=(it.sourceRefs||[]).join("\n");
-    if($("#styleMode"))$("#styleMode").value="kids_story";
-    ta.dispatchEvent(new Event("input"));
-    setMessage((it.name||"")+" · Alter "+key.replace("-","–")+" geladen. Text prüfen, dann Audio erzeugen.","good");
-    ta.focus();
+    const text=String(ta.value||"").trim();
+    if(text.length<40){setMessage("Zuerst deinen Erzähltext einfügen.","warn");return;}
+    push.disabled=true;push.textContent="Wird in Kids-App geschrieben …";
+    try{
+      const r=await localRequest("/prophet-stories/publish",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({id:it.id,age:age.value||"6-8",text})
+      });
+      const d=await r.json().catch(()=>({}));
+      if(!r.ok||d.ok===false)throw Error(d.error||"Push fehlgeschlagen");
+      setMessage(label(it)+" ist in der Kids-App. Nach dem Deploy erscheint die Erzählung unter Geschichten der Propheten.","good");
+      await loadPack();sel.value=it.id;prepareSlot();
+    }catch(e){
+      setMessage(e.message||String(e),"bad");
+    }finally{
+      push.disabled=false;push.textContent="In Kids-App pushen";
+    }
   });
   loadPack();
 })();
