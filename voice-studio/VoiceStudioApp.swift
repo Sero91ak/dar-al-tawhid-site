@@ -21,7 +21,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.48"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.50"
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -31,7 +31,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.48"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.50"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
         config.userContentController.add(self, name: "darCompanion")
@@ -438,7 +438,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
                     "--retry", "2",
                     "--retry-delay", "1",
                     "-H", "Cache-Control: no-cache",
-                    "-H", "User-Agent: DAR-Voice-Studio-Updater/2.9.48"
+                    "-H", "User-Agent: DAR-Voice-Studio-Updater/2.9.50"
                 ]
                 if isGitHubAPI {
                     args += ["-H", "Accept: application/vnd.github.raw+json"]
@@ -507,7 +507,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 7
         request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
-        request.setValue("DAR-Voice-Studio-Updater/2.9.48", forHTTPHeaderField: "User-Agent")
+        request.setValue("DAR-Voice-Studio-Updater/2.9.50", forHTTPHeaderField: "User-Agent")
         if url.host == "api.github.com" {
             request.setValue("application/vnd.github.raw+json", forHTTPHeaderField: "Accept")
         } else {
@@ -612,9 +612,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         process.terminationHandler = { [weak self] p in
             try? logHandle?.close()
             guard p.terminationStatus != 0 else { return }
+            let code = p.terminationStatus
             self?.publishUpdateState(
                 "error",
-                message: "Update konnte nicht gestartet werden. Öffne „Update-Protokoll“ für Details."
+                message: "Update-Helper beendet mit Code \(code). Öffne „Update-Protokoll“ für die genaue Ursache."
             )
         }
         do {
