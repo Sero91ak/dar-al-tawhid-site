@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD Kids — Prophet Stories v11
+/* DĀR AL TAWḤĪD Kids — Prophet Stories v12
    Approved cinematic reference implemented with REAL transparent 3D symbols
    and REAL generated scenic backgrounds. */
 
@@ -1443,4 +1443,175 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
   .ps-hero{min-height:365px!important}
   .ps-title{font-size:39px!important}
   .ps-summary{font-size:13px!important}
+}
+
+
+/* ===== CINEMATIC INTEGRATION PASS — v12 ===== */
+/* Important: the scene is now its own color-graded layer. The 3D object sits inside
+   that layer stack and receives the same dark cinematic wash. This removes the
+   bright 'sticker on background' effect from the previous implementation. */
+
+.ps-story-row{
+  background:#05243a!important;
+}
+.ps-row-scene{
+  display:block!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:-3%!important;
+  background-image:var(--scene)!important;
+  background-size:cover!important;
+  background-position:var(--scene-pos,center 52%)!important;
+  filter:
+    brightness(.66)
+    saturate(1.13)
+    contrast(1.16)!important;
+  transform:scale(1.035)!important;
+}
+.ps-story-row::before{
+  z-index:3!important;
+  background:
+    radial-gradient(circle at 21% 49%,
+      rgba(244,203,105,.13) 0%,
+      rgba(244,203,105,.05) 18%,
+      transparent 38%),
+    linear-gradient(90deg,
+      rgba(2,20,34,.07) 0%,
+      rgba(2,20,34,.09) 30%,
+      rgba(2,20,34,.31) 45%,
+      rgba(2,20,34,.70) 64%,
+      rgba(2,20,34,.92) 100%)!important;
+}
+.ps-row-art{
+  z-index:2!important;
+}
+.ps-row-art img{
+  filter:
+    brightness(.93)
+    saturate(.98)
+    contrast(1.10)
+    drop-shadow(0 11px 12px rgba(0,0,0,.38))
+    drop-shadow(0 0 7px rgba(244,195,87,.11))!important;
+}
+.ps-row-art::before{
+  background:
+    radial-gradient(circle at 48% 53%,
+      rgba(255,210,99,.24) 0%,
+      rgba(255,210,99,.10) 22%,
+      rgba(74,176,194,.06) 44%,
+      transparent 72%)!important;
+  filter:blur(13px)!important;
+}
+.ps-row-art::after{
+  bottom:6%!important;
+  height:20%!important;
+  background:radial-gradient(ellipse,rgba(0,0,0,.46),transparent 70%)!important;
+  filter:blur(7px)!important;
+}
+
+/* Per-row grading: each object gets the light direction/color of its environment. */
+.ps-story-row[data-ps-id="adam"] .ps-row-art img{
+  filter:brightness(.96) saturate(.94) contrast(1.10)
+    drop-shadow(0 10px 12px rgba(0,0,0,.35))
+    drop-shadow(0 0 11px rgba(237,206,84,.22))!important;
+}
+.ps-story-row[data-ps-id="idris"] .ps-row-art img{
+  filter:brightness(.88) saturate(.88) contrast(1.12)
+    drop-shadow(0 10px 13px rgba(0,0,0,.40))
+    drop-shadow(0 0 11px rgba(230,184,82,.18))!important;
+}
+.ps-story-row[data-ps-id="nuh"] .ps-row-art img{
+  filter:brightness(.86) saturate(.92) contrast(1.12)
+    drop-shadow(0 12px 13px rgba(0,0,0,.42))
+    drop-shadow(0 0 10px rgba(117,196,217,.18))!important;
+}
+.ps-story-row[data-ps-id="hud"] .ps-row-art img,
+.ps-story-row[data-ps-id="salih"] .ps-row-art img{
+  filter:brightness(.90) saturate(.94) contrast(1.12)
+    drop-shadow(0 11px 13px rgba(0,0,0,.40))
+    drop-shadow(0 0 10px rgba(244,173,64,.19))!important;
+}
+
+/* Detail uses the same compositing logic: filtered scene -> oversized/cropped object ->
+   common cinematic wash -> text. */
+.ps-hero{
+  background:#041e32!important;
+}
+.ps-detail-sky{
+  display:block!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:-2%!important;
+  background-image:var(--scene)!important;
+  background-size:cover!important;
+  background-position:var(--detail-scene-pos,center 50%)!important;
+  filter:brightness(.64) saturate(1.12) contrast(1.15)!important;
+  transform:scale(1.025)!important;
+  pointer-events:none!important;
+}
+.ps-hero::before{
+  z-index:4!important;
+  background:
+    linear-gradient(90deg,
+      rgba(3,21,36,.80) 0%,
+      rgba(3,21,36,.56) 33%,
+      rgba(3,21,36,.18) 61%,
+      rgba(3,21,36,.04) 100%),
+    linear-gradient(180deg,
+      rgba(2,15,26,.04) 0%,
+      rgba(2,15,26,.03) 40%,
+      rgba(2,15,26,.50) 100%)!important;
+  pointer-events:none!important;
+}
+.ps-hero>img{
+  z-index:3!important;
+  filter:
+    brightness(.90)
+    saturate(.98)
+    contrast(1.10)
+    drop-shadow(0 15px 18px rgba(0,0,0,.39))
+    drop-shadow(0 0 10px rgba(242,195,90,.10))!important;
+}
+.ps-hero-copy{z-index:8!important}
+
+/* Nūḥ reference: the vessel is not a little icon; the hull enters from above-right
+   and feels embedded in the storm/water scene. */
+.ps-hero[data-ps-id="nuh"]>img{
+  top:-95px!important;
+  right:-18%!important;
+  width:82%!important;
+  height:300px!important;
+  transform:scale(1.62) translate(5%,-2%)!important;
+  filter:
+    brightness(.80)
+    saturate(.88)
+    contrast(1.14)
+    drop-shadow(0 18px 19px rgba(0,0,0,.48))
+    drop-shadow(0 0 12px rgba(106,190,216,.12))!important;
+}
+.ps-hero[data-ps-id="nuh"]::before{
+  background:
+    radial-gradient(circle at 75% 13%,rgba(250,201,87,.11),transparent 29%),
+    linear-gradient(90deg,
+      rgba(2,20,35,.82) 0%,
+      rgba(2,20,35,.55) 34%,
+      rgba(2,20,35,.18) 62%,
+      rgba(2,20,35,.03) 100%),
+    linear-gradient(180deg,rgba(2,15,27,.02),rgba(2,15,27,.04) 42%,rgba(2,15,27,.54) 100%)!important;
+}
+
+@media(max-width:430px){
+  .ps-row-scene{inset:-4%!important}
+  .ps-row-art img{
+    left:-11%!important;
+    top:-11%!important;
+    width:122%!important;
+    height:122%!important;
+  }
+  .ps-hero[data-ps-id="nuh"]>img{
+    top:-92px!important;
+    right:-20%!important;
+    width:86%!important;
+    height:285px!important;
+  }
 }
