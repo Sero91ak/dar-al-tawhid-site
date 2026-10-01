@@ -1,0 +1,112 @@
+name: Build Kids Prophet Symbols
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/build-kids-prophet-symbols.yml'
+      - 'kids/assets/prophet-stories/*.jpg'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-prophet-symbols
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Install background removal tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "rembg[cpu]" pillow onnxruntime
+
+      - name: Build transparent prophet symbols
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageFilter
+          from rembg import remove, new_session
+          import io
+
+          src_dir=Path("kids/assets/prophet-stories")
+          out_dir=Path("kids/assets/prophet-symbols")
+          out_dir.mkdir(parents=True,exist_ok=True)
+
+          session=new_session("u2net")
+          files=sorted(src_dir.glob("*.jpg"))
+          if len(files)!=25:
+              raise SystemExit(f"Expected 25 source images, found {len(files)}")
+
+          for src in files:
+              raw=src.read_bytes()
+              result=remove(raw,session=session,alpha_matting=True,
+                            alpha_matting_foreground_threshold=245,
+                            alpha_matting_background_threshold=10,
+                            alpha_matting_erode_size=5)
+              im=Image.open(io.BytesIO(result)).convert("RGBA")
+              alpha=im.getchannel("A")
+              # Remove tiny semitransparent background remnants but keep soft edges.
+              alpha=alpha.point(lambda a: 0 if a < 14 else a)
+              bbox=alpha.getbbox()
+              if not bbox:
+                  raise RuntimeError(f"No foreground detected for {src.name}")
+              im=im.crop(bbox)
+              w,h=im.size
+              pad=max(34,int(max(w,h)*0.10))
+              canvas=Image.new("RGBA",(w+pad*2,h+pad*2),(0,0,0,0))
+              canvas.alpha_composite(im,(pad,pad))
+              # Normalize to a consistent square transparent asset without stretching.
+              target=1024
+              scale=min((target-96)/canvas.width,(target-96)/canvas.height)
+              nw=max(1,int(canvas.width*scale)); nh=max(1,int(canvas.height*scale))
+              canvas=canvas.resize((nw,nh),Image.Resampling.LANCZOS)
+              final=Image.new("RGBA",(target,target),(0,0,0,0))
+              final.alpha_composite(canvas,((target-nw)//2,(target-nh)//2))
+              out=out_dir/(src.stem+".webp")
+              final.save(out,"WEBP",lossless=True,method=6)
+              print(src.name,"->",out, out.stat().st_size)
+
+          generated=sorted(out_dir.glob("*.webp"))
+          if len(generated)!=25:
+              raise SystemExit(f"Expected 25 generated symbols, found {len(generated)}")
+          PY
+
+      - name: Verify transparency
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          files=sorted(Path("kids/assets/prophet-symbols").glob("*.webp"))
+          assert len(files)==25, len(files)
+          for p in files:
+              im=Image.open(p).convert("RGBA")
+              a=im.getchannel("A")
+              lo,hi=a.getextrema()
+              if lo!=0 or hi<220:
+                  raise SystemExit(f"Transparency QA failed: {p} alpha={lo,hi}")
+          print("Transparent prophet symbols QA: 25/25")
+          PY
+
+      - name: Commit transparent symbols
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/assets/prophet-symbols
+          if git diff --cached --quiet; then
+            echo "Symbols already current."
+            exit 0
+          fi
+          git commit -m "Kids: build transparent prophet 3D symbols"
+          git pull --rebase origin main
+          git push origin HEAD:main
