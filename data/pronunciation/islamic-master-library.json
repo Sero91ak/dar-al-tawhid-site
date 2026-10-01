@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "libraryId": "dar-al-tawhid-islamic-pronunciation-master",
-  "updatedAt": "2026-09-26",
+  "updatedAt": "2026-10-01",
   "policy": {
     "precedence": [
       "user-confirmed-local",
@@ -28,6 +28,12 @@
       "title": "DĀR AL TAWḤĪD vorhandene Aussprachebibliothek",
       "scope": "Bestehende Ṣaḥābah-, Ṣaḥābiyyāt-, Namen-, Honorific- und Fachbegriffsvarianten",
       "policy": "Wird zur Laufzeit automatisch in den Master-Index übernommen und hat Vorrang vor Online-Einträgen."
+    },
+    "prophet_story_curated_terms_20261001": {
+      "type": "local-curated",
+      "title": "DĀR AL TAWḤĪD Prophetengeschichten – verifizierte Story-Begriffe",
+      "scope": "Wiederkehrende Namen und Orte der vorbereiteten 25 Prophetengeschichten",
+      "policy": "Dürfen fehlende Aussprache-Regeln ergänzen; persistente Audio-MASTER benötigen weiterhin Hörbestätigung."
     }
   },
   "derivedCollections": [
@@ -680,6 +686,88 @@
         "quran_named_prophets_islamweb_65657"
       ],
       "notes": "Verifizierter Namens-Seed; Audio wird nicht automatisch zum persistenten MASTER-Lock erhoben."
+    },
+    {
+      "id": "story_place_hira",
+      "canonical": "Ḥirāʾ",
+      "arabic": "حِرَاء",
+      "transliteration": "Ḥirāʾ",
+      "aliases": [
+        "Ḥirāʾ",
+        "Hira",
+        "Hirāʾ",
+        "Hiraa"
+      ],
+      "category": "place",
+      "personType": "term",
+      "gender": "",
+      "tts_text": "حِرَاء",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "local-curated",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "prophet_story_curated_terms_20261001"
+      ],
+      "notes": "Story-Ort; Aussprache-Regel darf automatisch ergänzt werden, Audio-MASTER erst nach Hörbestätigung."
+    },
+    {
+      "id": "story_sahabiyyah_khadijah",
+      "canonical": "Ḫadīǧah",
+      "arabic": "خَدِيجَة",
+      "transliteration": "Ḫadīǧah",
+      "aliases": [
+        "Ḫadīǧah",
+        "Khadījah",
+        "Khadijah",
+        "Khadija",
+        "Ḫadījah"
+      ],
+      "category": "sahabiyyah",
+      "personType": "sahabiyyah",
+      "gender": "female",
+      "tts_text": "خَدِيجَة",
+      "tts_language": "ar",
+      "required_honorific_key": "radiyallahu_anha",
+      "voice_lock": "REVIEW",
+      "qaStatus": "local-curated",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "prophet_story_curated_terms_20261001"
+      ],
+      "notes": "Ṣaḥābiyyah; raḍiya llāhu ʿanhā wird durch die Honorific-Pflichtlogik gesprochen."
+    },
+    {
+      "id": "story_place_hudaybiyah",
+      "canonical": "al-Ḥudaybiyah",
+      "arabic": "الْحُدَيْبِيَة",
+      "transliteration": "al-Ḥudaybiyah",
+      "aliases": [
+        "al-Ḥudaybiyah",
+        "al-Ḥudaybiyyah",
+        "al-Hudaybiyah",
+        "al-Hudaybiyyah",
+        "al-Hudaibiyah",
+        "Ḥudaybiyah",
+        "Hudaybiyah"
+      ],
+      "category": "place",
+      "personType": "term",
+      "gender": "",
+      "tts_text": "الْحُدَيْبِيَة",
+      "tts_language": "ar",
+      "required_honorific_key": "",
+      "voice_lock": "REVIEW",
+      "qaStatus": "local-curated",
+      "status": "verified",
+      "autoUse": true,
+      "sourceIds": [
+        "prophet_story_curated_terms_20261001"
+      ],
+      "notes": "Story-Ort; Aussprache-Regel darf automatisch ergänzt werden, Audio-MASTER erst nach Hörbestätigung."
     }
   ]
 }
