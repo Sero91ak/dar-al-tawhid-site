@@ -16,5 +16,23 @@
     "title": "Hilfe beim Gedenken und guten Gottesdienst",
     "snippet": "O Allah, hilf mir, Deiner zu gedenken, Dir zu danken und Dir auf beste Weise zu dienen.",
     "category": "Dhikr & Gottesdienst"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 466,
+      "remaining": 433
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 65,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
