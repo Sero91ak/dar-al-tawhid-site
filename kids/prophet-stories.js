@@ -100,18 +100,32 @@ function renderCards(){
   grid.querySelectorAll("[data-ps-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.psId)));
 }
 function ensureUi(){
-  const view=$("#view-stories");if(!view||$("#prophetStoriesSection"))return false;
-  const old=$("#authenticStoryList");
-  const title=old?.previousElementSibling;
-  const section=document.createElement("section");
-  section.id="prophetStoriesSection";section.className="ps-wrap";
-  section.innerHTML=
-    '<div class="ps-hero-head"><div class="ps-head-copy"><div class="ps-kicker">Qurʾān · geprüft · kindgerecht</div><h3>Geschichten der Propheten</h3><p>Entdecken, lesen und hören – mit geprüften Quellen und altersgerechter Erzählung.</p></div><div class="ps-count">25</div></div>'+
-    '<div class="ps-modes" id="psModes"><button class="ps-mode" data-ps-mode="both" type="button">Lesen &amp; Hören</button><button class="ps-mode" data-ps-mode="listen" type="button">Nur Hören</button><button class="ps-mode" data-ps-mode="read" type="button">Nur Lesen</button></div>'+
-    '<div class="ps-grid" id="psGrid"></div>';
-  if(old)view.insertBefore(section,title&&title.classList.contains("section-title")?title:old);else view.appendChild(section);
-  if(old){old.style.display="none";if(title)title.style.display="none"}
-  section.querySelectorAll("[data-ps-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.psMode)));
+  const view=$("#view-stories");if(!view)return false;
+  let section=$("#prophetStoriesSection");
+  if(!section){
+    section=document.createElement("section");
+    section.id="prophetStoriesSection";section.className="ps-wrap";
+    section.innerHTML=
+      '<div class="ps-hero-head"><div class="ps-head-copy"><div class="ps-kicker">Qurʾān · geprüft · kindgerecht</div><h3>Geschichten der Propheten</h3><p>Entdecken, lesen und hören – mit geprüften Quellen und altersgerechter Erzählung.</p></div><div class="ps-count">25</div></div>'+
+      '<div class="ps-modes" id="psModes"><button class="ps-mode" data-ps-mode="both" type="button">Lesen &amp; Hören</button><button class="ps-mode" data-ps-mode="listen" type="button">Nur Hören</button><button class="ps-mode" data-ps-mode="read" type="button">Nur Lesen</button></div>'+
+      '<div class="ps-grid" id="psGrid"></div>';
+    const head=view.querySelector(".page-head");
+    if(head)head.insertAdjacentElement("afterend",section);
+    else view.insertBefore(section,view.firstChild);
+  }
+  section.querySelectorAll("[data-ps-mode]").forEach(b=>{
+    if(b.dataset.psBound==="1")return;
+    b.dataset.psBound="1";
+    b.addEventListener("click",()=>setMode(b.dataset.psMode));
+  });
+  const home=document.getElementById("openProphetStories");
+  if(home&&home.dataset.psBound!=="1"){
+    home.dataset.psBound="1";
+    home.addEventListener("click",()=>{
+      setTimeout(()=>{$("#prophetStoriesSection")?.scrollIntoView({behavior:"smooth",block:"start"})},280);
+    });
+  }
+  if($("#psModal"))return true;
 
   const modal=document.createElement("div");
   modal.className="ps-modal";modal.id="psModal";
