@@ -25,7 +25,14 @@ function spritePos(id){
   const i=rank.get(id)??0;
   return (i/(ORDER.length-1)*100).toFixed(4)+"%";
 }
-function vars(item){return "--sprite-pos:"+spritePos(item.id)}
+function vars(item){
+  const i=rank.get(item.id)??0;
+  if(i<5){
+    const p=(i/4*100).toFixed(4)+"%";
+    return "--row-sprite:var(--sprite-first);--row-size:100% 500%;--sprite-pos:"+p;
+  }
+  return "--row-sprite:var(--sprite);--row-size:100% 2500%;--sprite-pos:"+spritePos(item.id);
+}
 function renderList(){
   const host=$("#prList");
   host.innerHTML=items.map(item=>
