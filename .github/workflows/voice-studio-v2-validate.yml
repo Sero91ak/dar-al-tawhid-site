@@ -436,8 +436,8 @@ jobs:
                   'id="alphabetPackNowPlaying"',
                   'id="alphabetPublisherState"',
                   'Serhat-Kandidat erzeugen',
-                  'Als Serhat-Master bestätigen',
-                  'Cloudflare Publisher',
+                  'Sprachlich korrekt bestätigen',
+                  'kein Cloudflare-/GitHub-Code erforderlich',
                   'alphabet-audio-studio.js?v=2914',
               ]),
               ("studio",studio,[
@@ -447,9 +447,9 @@ jobs:
                   'Serhat-Kandidat',
                   'candidateHeard',
                   'blobToDataUrl',
-                  'serhat-local-voice',
+                  'serhat-owner-voice-2026',
                   'Cloudflare Publisher',
-                  'nur Speichern/Veröffentlichen',
+                  'sprachlich bestätigt',
               ]),
               ("worker",worker,[
                   'verifyKidsAlphabetAudioSlot',
@@ -502,7 +502,7 @@ jobs:
               ("manifest",manifest,[
                   '"syntheticFallback": false',
                   '"requireExplicitVerification": true',
-                  '"voiceMode": "owner-voice-generated-human-approved"',
+                  '"voiceMode": "owner-voice-generated-linguistic-review-required"',
                   '"targetVoiceProfileId": "serhat-owner-voice-2026"',
                   '"authorizedOwnerVoiceGeneration": true',
                   '"requireHumanApprovalForGeneratedAudio": true',
@@ -561,8 +561,11 @@ jobs:
                   slot.get("sourceVoice")=="authorized-owner-voice" and
                   slot.get("voiceProfileId")=="serhat-owner-voice-2026" and
                   slot.get("sameVoiceConfirmed") is True and
-                  slot.get("sourceProvider")=="DĀR Voice Studio" and
-                  slot.get("sourceSpeaker")=="Serhat Abu Malik"
+                  str(slot.get("sourceProvider","")).startswith("DĀR Voice Studio") and
+                  slot.get("sourceSpeaker")=="Serhat Abu Malik" and
+                  slot.get("technicalQaPassed") is True and
+                  slot.get("linguisticVerified") is True and
+                  slot.get("reviewStatus")=="approved"
               )
               legacy_reference=(
                   letter_id=="alif" and slot_kind=="name" and
@@ -574,8 +577,12 @@ jobs:
                   errors.append(f"unapproved active alphabet voice: {letter_id} {slot_kind}")
 
           policy=manifest_obj.get("policy",{})
-          if policy.get("voiceMode")!="owner-voice-generated-human-approved":
-              errors.append("owner-voice alphabet policy missing")
+          if policy.get("voiceMode")!="owner-voice-generated-linguistic-review-required":
+              errors.append("owner-voice linguistic-review alphabet policy missing")
+          if policy.get("linguisticReviewRequired") is not True:
+              errors.append("alphabet linguistic review requirement missing")
+          if policy.get("technicalQaIsNotPronunciationVerification") is not True:
+              errors.append("technical QA must not equal pronunciation verification")
           if policy.get("targetVoiceProfileId")!="serhat-owner-voice-2026":
               errors.append("Serhat target voice id mismatch")
           if policy.get("authorizedOwnerVoiceGeneration") is not True:
