@@ -1,4 +1,5 @@
 import { gateHiddenSurfaces } from "./preview-gate.js";
+/* Dar Test (/test) ist ohne Passwort erreichbar. Kids bleibt geschützt. */
 function isNativeAppRequest(ua) {
   return /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(String(ua || ""));
 }

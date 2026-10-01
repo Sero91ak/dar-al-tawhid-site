@@ -52,10 +52,7 @@ function hasValidGateAuth(request, env) {
 
 function isGatedPath(pathname) {
   return pathname === "/kids"
-    || pathname.startsWith("/kids/")
-    || pathname === "/test"
-    || pathname.startsWith("/test/")
-    || pathname === "/test.html";
+    || pathname.startsWith("/kids/");
 }
 
 export function gateHiddenSurfaces(request, url, env, mode) {
