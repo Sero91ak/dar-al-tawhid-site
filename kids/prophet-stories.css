@@ -826,3 +826,319 @@ html.ps-modal-open .bottom-nav{
   .ps-hero img{padding:17px 42px 16px}
   .ps-title{font-size:25px}
 }
+
+/* Prophet Library v6 refinement */
+#view-stories.ps-world-view{
+  --ps-teal:#72c9c0;
+  --ps-gold:#e6c172;
+  --ps-sky:#83b9d3;
+  --ps-violet:#998ac9;
+  --ps-peach:#d9997d;
+  --ps-line:rgba(238,214,157,.16);
+}
+.ps-library-hero{
+  min-height:212px;
+  border-bottom:1px solid rgba(231,196,116,.22);
+  background:
+    radial-gradient(circle at 80% 12%,rgba(237,202,122,.20),transparent 22%),
+    radial-gradient(circle at 20% 100%,rgba(86,186,181,.14),transparent 38%),
+    linear-gradient(135deg,#123d4f 0%,#0d3444 44%,#0a2636 100%);
+}
+.ps-library-hero::after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(230,193,114,.72),rgba(114,201,192,.58),transparent);
+  box-shadow:0 0 16px rgba(230,193,114,.20);
+}
+.ps-library-hero-copy{padding-top:24px;padding-bottom:18px}
+.ps-library-hero h2{
+  text-wrap:balance;
+  text-shadow:0 4px 22px rgba(0,0,0,.22);
+}
+.ps-library-hero p{
+  color:rgba(255,255,255,.77);
+  font-size:12.5px;
+  line-height:1.52;
+}
+.ps-hero-stats span{
+  border-color:rgba(230,193,114,.16);
+  background:rgba(3,21,29,.48);
+  box-shadow:inset 0 1px rgba(255,255,255,.04);
+}
+.ps-library-hero-art img{
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 15px 30px rgba(0,0,0,.24),0 0 0 1px rgba(230,193,114,.06);
+}
+
+/* compact luminous mode switch */
+.ps-toolbar{
+  top:max(58px,env(safe-area-inset-top,0px));
+  min-height:52px;
+  gap:9px;
+  padding:7px 14px;
+  border-top:1px solid rgba(255,255,255,.035);
+  border-bottom:1px solid rgba(230,193,114,.16);
+  background:linear-gradient(180deg,rgba(7,29,41,.97),rgba(6,25,36,.94));
+  box-shadow:0 9px 26px rgba(0,0,0,.18),0 1px 0 rgba(114,201,192,.05);
+}
+.ps-toolbar-label{
+  color:rgba(255,255,255,.56);
+  font-size:8.5px;
+}
+.ps-modes{
+  padding:2px;
+  border:1px solid rgba(255,255,255,.055);
+  border-radius:999px;
+  background:rgba(255,255,255,.022);
+}
+.ps-mode{
+  min-height:32px;
+  padding:6px 11px;
+  border-color:transparent;
+  background:transparent;
+  color:rgba(255,255,255,.66);
+  font-size:10.5px;
+  transition:background .16s ease,color .16s ease,box-shadow .16s ease,border-color .16s ease;
+}
+.ps-mode.active{
+  border-color:rgba(232,196,116,.40);
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,231,166,.18),transparent 66%),
+    linear-gradient(135deg,rgba(230,193,114,.18),rgba(114,201,192,.08));
+  color:#ffe4a0;
+  box-shadow:0 0 17px rgba(230,193,114,.11),inset 0 1px rgba(255,255,255,.06);
+}
+
+/* Muḥammad ﷺ is a clean lead story, not text over a giant uncontrolled image */
+.ps-featured{
+  min-height:196px;
+  border-top:1px solid rgba(114,201,192,.10);
+  border-bottom:1px solid rgba(230,193,114,.20);
+  background:
+    radial-gradient(circle at 12% 25%,rgba(114,201,192,.11),transparent 34%),
+    linear-gradient(130deg,#0b3040 0%,#0a2937 56%,#081f2d 100%);
+}
+.ps-featured::before{
+  content:"";
+  position:absolute;
+  z-index:2;
+  left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,#efce7f,#72c9c0);
+  box-shadow:0 0 16px rgba(230,193,114,.24);
+}
+.ps-featured-art{
+  left:48%;
+  right:0;
+  width:auto;
+  border-left:1px solid rgba(230,193,114,.12);
+}
+.ps-featured-art img{
+  object-position:center 52%;
+  transform:scale(1.05);
+  filter:saturate(1.03) contrast(1.02) brightness(.92);
+}
+.ps-featured-overlay{
+  background:
+    linear-gradient(90deg,#0a2e3e 0%,rgba(10,46,62,.94) 35%,rgba(10,46,62,.52) 57%,rgba(7,24,34,.12) 82%,transparent 100%);
+}
+.ps-featured-copy{
+  width:60%;
+  min-height:196px;
+  padding-left:18px;
+}
+.ps-featured-kicker{font-size:8.5px;line-height:1.4}
+.ps-featured-title{font-size:31px}
+.ps-featured-ar{font-size:16px}
+.ps-featured-meta{font-size:10px}
+
+/* library rows: clearer separation, warmer accents, inset 3D art */
+.ps-library-label{
+  padding-top:15px;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  background:linear-gradient(90deg,rgba(114,201,192,.04),transparent 55%);
+}
+.ps-library-label span{font-size:16px}
+.ps-library-label small{font-size:10px;color:rgba(255,255,255,.50)}
+.ps-library-list{border-top:0}
+.ps-story-row{
+  --row-glow:rgba(114,201,192,.065);
+  min-height:120px;
+  grid-template-columns:126px minmax(0,1fr) 34px;
+  gap:12px;
+  padding:4px 13px 4px 7px;
+  border-bottom:1px solid rgba(220,233,232,.105);
+  background:
+    radial-gradient(circle at 12% 50%,var(--row-glow),transparent 37%),
+    linear-gradient(90deg,rgba(14,52,67,.92),rgba(10,42,57,.90) 56%,rgba(8,34,48,.96));
+}
+.ps-story-row:nth-child(5n+1){--row-glow:rgba(230,193,114,.075)}
+.ps-story-row:nth-child(5n+2){--row-glow:rgba(114,201,192,.080)}
+.ps-story-row:nth-child(5n+3){--row-glow:rgba(131,185,211,.080)}
+.ps-story-row:nth-child(5n+4){--row-glow:rgba(153,138,201,.070)}
+.ps-story-row:nth-child(5n+5){--row-glow:rgba(217,153,125,.068)}
+.ps-story-row::before{
+  content:"";
+  position:absolute;
+  left:0;top:13px;bottom:13px;width:2px;
+  border-radius:999px;
+  background:linear-gradient(180deg,rgba(230,193,114,.60),rgba(114,201,192,.30));
+  opacity:.75;
+}
+.ps-story-row:active{
+  background:
+    radial-gradient(circle at 20% 50%,rgba(230,193,114,.10),transparent 40%),
+    linear-gradient(90deg,#123e50,#0a3041);
+}
+.ps-row-art{
+  align-self:stretch;
+  margin:7px 0;
+  border-radius:21px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.085);
+  background:
+    radial-gradient(circle at 50% 42%,rgba(255,255,255,.045),transparent 52%),
+    #0a1b24;
+  box-shadow:0 8px 18px rgba(0,0,0,.18),inset 0 0 0 1px rgba(230,193,114,.025);
+}
+.ps-row-art img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:var(--ps-row-x,50%) var(--ps-row-y,50%);
+  transform:scale(var(--ps-row-scale,1.075));
+  border-radius:20px;
+}
+.ps-row-copy{padding:13px 0}
+.ps-row-meta{
+  color:#a6d8bf;
+  font-size:9px;
+  letter-spacing:.075em;
+}
+.ps-row-title{
+  margin-top:6px;
+  font-size:21px;
+  line-height:1.08;
+}
+.ps-row-ar{
+  margin-top:7px;
+  color:rgba(255,255,255,.70);
+  font-size:15px;
+  line-height:1.35;
+}
+.ps-row-go{
+  width:31px;height:31px;
+  border-color:rgba(230,193,114,.18);
+  background:rgba(230,193,114,.035);
+  color:#e7cb88;
+  box-shadow:0 0 14px rgba(230,193,114,.05),inset 0 1px rgba(255,255,255,.035);
+}
+
+/* tighter crop correction for source assets that expose pale rounded corners */
+.ps-row-art[data-ps-id="adam"]{--ps-row-scale:1.09;--ps-row-y:50%}
+.ps-row-art[data-ps-id="idris"]{--ps-row-scale:1.08;--ps-row-y:50%}
+.ps-row-art[data-ps-id="nuh"]{--ps-row-scale:1.11;--ps-row-y:54%}
+.ps-row-art[data-ps-id="hud"]{--ps-row-scale:1.10;--ps-row-y:55%}
+.ps-row-art[data-ps-id="salih"]{--ps-row-scale:1.09;--ps-row-y:52%}
+.ps-row-art[data-ps-id="ibrahim"]{--ps-row-scale:1.08;--ps-row-y:51%}
+.ps-row-art[data-ps-id="lut"]{--ps-row-scale:1.10;--ps-row-y:50%}
+.ps-row-art[data-ps-id="ismail"]{--ps-row-scale:1.09;--ps-row-y:52%}
+.ps-row-art[data-ps-id="ishaq"]{--ps-row-scale:1.09;--ps-row-y:51%}
+.ps-row-art[data-ps-id="yaqub"]{--ps-row-scale:1.10;--ps-row-y:53%}
+.ps-row-art[data-ps-id="yusuf"]{--ps-row-scale:1.08;--ps-row-y:52%}
+.ps-row-art[data-ps-id="ayyub"]{--ps-row-scale:1.09;--ps-row-y:51%}
+.ps-row-art[data-ps-id="shuayb"]{--ps-row-scale:1.08;--ps-row-y:51%}
+.ps-row-art[data-ps-id="musa"]{--ps-row-scale:1.07;--ps-row-y:57%}
+.ps-row-art[data-ps-id="harun"]{--ps-row-scale:1.08;--ps-row-y:52%}
+.ps-row-art[data-ps-id="dawud"]{--ps-row-scale:1.08;--ps-row-y:50%}
+.ps-row-art[data-ps-id="sulayman"]{--ps-row-scale:1.09;--ps-row-y:53%}
+.ps-row-art[data-ps-id="ilyas"]{--ps-row-scale:1.09;--ps-row-y:54%}
+.ps-row-art[data-ps-id="alyasa"]{--ps-row-scale:1.08;--ps-row-y:50%}
+.ps-row-art[data-ps-id="yunus"]{--ps-row-scale:1.07;--ps-row-y:50%}
+.ps-row-art[data-ps-id="zakariyya"]{--ps-row-scale:1.08;--ps-row-y:51%}
+.ps-row-art[data-ps-id="yahya"]{--ps-row-scale:1.08;--ps-row-y:51%}
+.ps-row-art[data-ps-id="isa"]{--ps-row-scale:1.09;--ps-row-y:47%}
+.ps-row-art[data-ps-id="dhul-kifl"]{--ps-row-scale:1.08;--ps-row-y:50%}
+
+/* Story detail: child-readable text is a hard requirement */
+.ps-summary{
+  color:rgba(255,255,255,.80);
+  font-size:15px;
+  line-height:1.58;
+}
+.ps-meta{gap:6px}
+.ps-pill{
+  padding:6px 9px;
+  font-size:10px;
+}
+.ps-detail-modes{
+  border:1px solid rgba(230,193,114,.11);
+  background:rgba(255,255,255,.025);
+}
+.ps-detail-mode{
+  min-height:36px;
+  font-size:10.5px;
+}
+.ps-detail-mode.active{
+  border-color:rgba(230,193,114,.34);
+  background:linear-gradient(135deg,rgba(230,193,114,.15),rgba(114,201,192,.07));
+  color:#ffe2a0;
+  box-shadow:0 0 14px rgba(230,193,114,.08);
+}
+.ps-read{
+  font-size:19px;
+  line-height:1.76;
+  letter-spacing:.002em;
+}
+.ps-read p{
+  margin:0 0 16px;
+}
+.app[data-age="4–5"] .ps-read{
+  font-size:21px;
+  line-height:1.82;
+}
+.app[data-age="6–8"] .ps-read{
+  font-size:19px;
+  line-height:1.76;
+}
+.app[data-age="9–10"] .ps-read{
+  font-size:18px;
+  line-height:1.72;
+}
+.ps-sources strong{font-size:10.5px}
+.ps-sources div{
+  font-size:12.5px;
+  line-height:1.62;
+}
+.ps-question h4{
+  font-size:19px;
+  line-height:1.34;
+}
+.ps-answer{
+  min-height:54px;
+  padding:12px 13px;
+  font-size:15.5px;
+  line-height:1.36;
+}
+.ps-feedback{font-size:11px}
+.ps-title{font-size:31px}
+.ps-ar{font-size:19px}
+
+/* At small iPhone widths preserve readability instead of shrinking text */
+@media(max-width:390px){
+  .ps-toolbar{padding-left:10px;padding-right:10px}
+  .ps-mode{font-size:10px;padding-left:9px;padding-right:9px}
+  .ps-story-row{
+    grid-template-columns:112px minmax(0,1fr) 29px;
+    min-height:112px;
+    gap:10px;
+    padding-right:9px;
+  }
+  .ps-row-title{font-size:19px}
+  .ps-row-ar{font-size:14px}
+  .ps-featured-title{font-size:28px}
+  .ps-read{font-size:18.5px}
+  .app[data-age="4–5"] .ps-read{font-size:20.5px}
+  .app[data-age="9–10"] .ps-read{font-size:17.5px}
+}
