@@ -52,7 +52,10 @@ function hasValidGateAuth(request, env) {
 
 function isGatedPath(pathname) {
   return pathname === "/kids"
-    || pathname.startsWith("/kids/");
+    || pathname.startsWith("/kids/")
+    || pathname === "/test"
+    || pathname === "/test/"
+    || pathname.startsWith("/test/");
 }
 
 export function gateHiddenSurfaces(request, url, env, mode) {
@@ -62,5 +65,6 @@ export function gateHiddenSurfaces(request, url, env, mode) {
   if (mode === "workers-dev") return unauthorizedGate();
   if (!isGatedPath(pathname)) return null;
   if ((pathname === "/kids" || pathname.startsWith("/kids/")) && isKidsNativeApp(ua)) return null;
+  if ((pathname === "/test/kids" || pathname.startsWith("/test/kids/")) && isKidsNativeApp(ua)) return null;
   return unauthorizedGate();
 }

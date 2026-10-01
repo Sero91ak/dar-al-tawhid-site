@@ -1,5 +1,5 @@
 import { gateHiddenSurfaces } from "./preview-gate.js";
-/* Dar Test (/test) ist ohne Passwort erreichbar. Kids bleibt geschützt. */
+/* Dar Test (/test) ist nur mit Anmeldung erreichbar. Kids bleibt geschützt. */
 function isNativeAppRequest(ua) {
   return /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(String(ua || ""));
 }
@@ -788,6 +788,7 @@ export default {
       headers.set("Cloudflare-CDN-Cache-Control", "no-store");
       headers.set("Pragma", "no-cache");
       headers.set("X-DAR-Test-App", "isolated");
+      headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
       headers.delete("ETag");
       if (request.method === "HEAD") {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
