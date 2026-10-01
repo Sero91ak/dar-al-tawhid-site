@@ -1,7 +1,7 @@
 {
-  "version": "2.9.47",
-  "updatedAt": "2026-10-01T15:58:00+02:00",
-  "deployTrigger": "voice-studio-2.9.47-update-story-pronunciation-repair",
+  "version": "2.9.48",
+  "updatedAt": "2026-10-01T16:02:00+02:00",
+  "deployTrigger": "voice-studio-2.9.48-native-updater-curl-fallback",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v54",
@@ -285,7 +285,10 @@
     "websiteManifestUpdateFallback": true,
     "storyPronunciationSeedValidation": true,
     "germanPossessiveIslamicNameValidation": true,
-    "khadijahHonorificValidation": true
+    "khadijahHonorificValidation": true,
+    "nativeUpdaterCurlFallback": true,
+    "updaterTransportTripleFallback": true,
+    "updaterUrlSessionFailureRecovery": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -574,7 +577,7 @@
   "releaseRef": "beff741fc723cf93182c4d0374ba8e764e64dc6e",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "2.9.47 repariert die Update-Prüfung und die Story-Ausspracheerkennung für Ḥirāʾ, Ḫadīǧah, al-Ḥudaybiyah sowie deutsche Genitivformen wie Ibrāhīms.",
+  "updateRepairReason": "2.9.48 repariert die native Update-Prüfung: GitHub API und Website bleiben Primärquellen; bei URLSession-Fehlern fällt die Mac-App automatisch auf /usr/bin/curl zurück.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -847,13 +850,14 @@
   },
   "updateVisibilityRepair": {
     "forceNewSemanticVersion": true,
-    "previousUiVersion": "2.9.46",
+    "previousUiVersion": "2.9.47",
     "previousBundleVersionPossibly": "2.9.45",
-    "targetVersion": "2.9.47",
+    "targetVersion": "2.9.48",
     "alphabetReviewIncluded": true,
     "prophetStoriesIncluded": true,
     "updateCheckFallbackRepair": true,
-    "prophetStoryPronunciationRepair": true
+    "prophetStoryPronunciationRepair": true,
+    "nativeCurlFallbackRepair": true
   },
   "alphabetFushaStrict": {
     "enabled": true,
