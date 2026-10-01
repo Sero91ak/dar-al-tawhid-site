@@ -603,7 +603,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.42 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.46 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -629,7 +629,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.42</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.46</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
@@ -872,7 +872,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.42 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.46 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
 </div>
 </div>
 
@@ -963,7 +963,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.42")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.46")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -981,7 +981,7 @@ window.darUpdateStateChanged=data=>{
     state.className="update-state";
   }else if(nativeUpdateState==="current"){
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.42")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.46")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     side.textContent="Update erneut prüfen";
