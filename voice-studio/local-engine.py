@@ -5299,10 +5299,24 @@ def _prophet_story_manifest():
     return load_kids_repo_json(
         "prophet-stories.json",
         "kids/data/prophet-stories.json",
-        lambda d:isinstance(d,dict) and len(d.get("items") or [])==25,
+        lambda d:(
+            isinstance(d,dict)
+            and int(d.get("version") or 0)>=4
+            and len(d.get("items") or [])==25
+            and all(
+                str((item or {}).get("voiceScript") or "").strip()
+                and isinstance((item or {}).get("scripts"),dict)
+                and all(str(((item or {}).get("scripts") or {}).get(age) or "").strip() for age in ("4-5","6-8","9-10"))
+                for item in (d.get("items") or [])
+            )
+        ),
     )
 
 def _prophet_story_age_text(item,age):
+    scripts=item.get("scripts") if isinstance(item.get("scripts"),dict) else {}
+    prepared=str(scripts.get(age) or item.get("voiceScript") or scripts.get("6-8") or "").strip()
+    if prepared:
+        return prepared
     name=str(item.get("name") or "")
     if age=="4-5":
         intro=f"Komm, wir hören aufmerksam zu. Jetzt geht es um {name}. Diese Geschichte stammt aus geprüften Qurʾān-Belegen. Wir erzählen sie ruhig und einfach und fügen keine erfundenen Abenteuer hinzu."
