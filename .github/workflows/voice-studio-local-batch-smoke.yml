@@ -109,10 +109,22 @@ jobs:
           slots=[s for s in slots if s]
           assert len(slots)==140, len(slots)
           assert all(s.get("technicalQaPassed") is True for s in slots), "technical QA marker missing"
-          assert all(s.get("linguisticVerified") is False for s in slots), "generated clip incorrectly linguistically approved"
-          assert all(s.get("verified") is False for s in slots), "unreviewed clip is still live"
-          assert d.get("policy",{}).get("linguisticReviewRequired") is True
-          print("Alphabet linguistic review gate OK:",len(slots))
+          for slot in slots:
+              linguistic=slot.get("linguisticVerified") is True
+              live=slot.get("verified") is True
+              assert linguistic==live, "verified and linguisticVerified must move together"
+              if live:
+                  assert slot.get("reviewStatus")=="approved", "live alphabet clip lacks approved linguistic review"
+                  assert slot.get("sourceVoice")=="authorized-owner-voice", "live alphabet clip is not owner voice"
+                  assert slot.get("voiceProfileId")=="serhat-owner-voice-2026", "live alphabet clip has wrong voice profile"
+              else:
+                  assert slot.get("reviewStatus")!="approved", "unverified clip must not be marked approved"
+          policy=d.get("policy",{})
+          assert policy.get("linguisticReviewRequired") is True
+          assert policy.get("technicalQaIsNotPronunciationVerification") is True
+          approved=sum(1 for s in slots if s.get("linguisticVerified") is True)
+          pending=len(slots)-approved
+          print("Alphabet linguistic review gate OK:",len(slots),"approved:",approved,"pending:",pending)
           PY
 
       - name: Validate Harakat extraction before final QA
