@@ -1,10 +1,10 @@
 {
-  "version": "2.9.45",
-  "updatedAt": "2026-10-01T13:00:00+02:00",
-  "deployTrigger": "voice-studio-2.9.45-prophet-name-list-per-push",
+  "version": "2.9.46",
+  "updatedAt": "2026-10-01T13:15:00+02:00",
+  "deployTrigger": "voice-studio-2.9.46-prophet-scripts-ready-one-step-approval",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v53",
+  "cache": "dar-voice-studio-v54",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -861,8 +861,8 @@
     "technicalQaNeverEqualsPronunciationApproval": true
   },
   "prophetStoryVoiceBatch": {
-    "enabled": true,
-    "automaticOnLocalStudioLoad": true,
+    "enabled": false,
+    "automaticOnLocalStudioLoad": false,
     "endpointStart": "/prophet-stories/batch-start",
     "endpointState": "/prophet-stories/batch-state",
     "stories": 25,
@@ -871,13 +871,40 @@
       "6-8",
       "9-10"
     ],
-    "expectedClips": 75,
+    "expectedClips": 25,
     "prosody": "kids_story",
     "engine": "local-serhat-engine",
     "voiceProfileId": "serhat-owner-voice-2026",
     "output": "kids/assets/prophet-story-audio/<prophet>/<age>.m4a",
     "manifest": "kids/data/prophet-stories.json",
     "autoPublishToMain": true,
+    "systemVoiceFallback": false,
+    "mode": "prepared-script-manual-owner-voice",
+    "obsoleteReason": "Die 25 Langtexte sind vorinstalliert; Serhat erzeugt und prüft pro Prophet genau ein Audio, das allen Altersstufen zugeordnet wird."
+  },
+  "prophetStoryVoicePreparation": {
+    "enabled": true,
+    "stories": 25,
+    "source": "25 Prophetengeschichten Voice-Redaktionsfassung 01.10.2026",
+    "textsPreloaded": true,
+    "oneAudioAllAges": true,
+    "ageSlots": [
+      "4-5",
+      "6-8",
+      "9-10"
+    ],
+    "workflow": [
+      "Prophet wählen",
+      "Audio erzeugen",
+      "vollständig anhören",
+      "Aussprache korrigieren/lernen",
+      "Aussprache bestätigen & übernehmen"
+    ],
+    "autoPublishAfterPronunciationConfirmation": true,
+    "prosody": "kids_story",
+    "voiceProfileId": "serhat-owner-voice-2026",
+    "manualTextCopyRequired": false,
+    "manualPushAfterApprovalRequired": false,
     "systemVoiceFallback": false
   }
 }
