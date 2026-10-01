@@ -1,8 +1,17 @@
 
-/* DĀR AL TAWḤĪD Kids · Prophet stories v3 — isolated module */
+.choice.prophets{
+  --art:url("/kids/assets/prophet-stories/muhammad.jpg");
+  --art-pos:center 48%;
+  --wash-a:rgba(8,36,48,.90);
+  --wash-b:rgba(18,70,82,.62);
+  --wash-c:rgba(7,32,42,.80);
+  --glow:rgba(226,189,114,.16);
+  background:linear-gradient(135deg,#163f4e,#1f6a72 62%,#12343f)!important;
+}
+.choice.prophets .icon{background-image:url("/kids/assets/kids-icons/headphones-real-v12.png?v=cut1")!important}
 .ps-wrap{
-  margin:20px 0 0;
-  padding:0 0 128px;
+  margin:8px 0 22px;
+  padding:0;
   position:relative;
 }
 .ps-hero-head{
