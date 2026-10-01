@@ -84,23 +84,73 @@ function renderModeButtons(){
 }
 function renderCards(){
   const grid=$("#psGrid");if(!grid)return;
-  grid.innerHTML=items.map((item,index)=>{
-    const text=buildText(item);
-    const featured=item.id==="muhammad"?" featured":"";
-    return '<button class="ps-card'+featured+'" data-ps-id="'+esc(item.id)+'" type="button" style="--ps-i:'+index+'">'+
-      '<span class="ps-art" data-ps-id="'+esc(item.id)+'"><img src="'+esc(item.cover)+'" alt="" loading="'+(index<5?"eager":"lazy")+'"></span>'+
-      (done(item.id)?'<span class="ps-done" aria-label="Abgeschlossen"></span>':'')+
-      '<span class="ps-card-copy">'+
-        '<span class="ps-badges"><span class="ps-badge ok">QURʾĀN · GEPRÜFT</span>'+(item.disputed?'<span class="ps-badge warn">IKHTILĀF</span>':'')+'</span>'+
-        '<span class="ps-card-title">'+esc(item.name)+(item.id==="muhammad"?" ﷺ":"")+'</span>'+
-        '<span class="ps-card-ar" dir="rtl">'+esc(arabicLine(item))+'</span>'+
-        '<span class="ps-card-foot"><span>'+esc(durationLabel(item,text))+'</span><span>Öffnen ›</span></span>'+
+  const featured=items.find(item=>item.id==="muhammad")||items[0];
+  const rest=items.filter(item=>!featured||item.id!==featured.id);
+  const featuredHtml=featured?(()=>{
+    const text=buildText(featured);
+    return '<button class="ps-featured" data-ps-id="'+esc(featured.id)+'" type="button">'+
+      '<span class="ps-featured-art" data-ps-id="'+esc(featured.id)+'"><img src="'+esc(featured.cover)+'" alt="" loading="eager"></span>'+
+      '<span class="ps-featured-overlay" aria-hidden="true"></span>'+
+      '<span class="ps-featured-copy">'+
+        '<span class="ps-featured-kicker">DER LETZTE PROPHET · QURʾĀN GEPRÜFT</span>'+
+        '<span class="ps-featured-title">'+esc(featured.name)+' ﷺ</span>'+
+        '<span class="ps-featured-ar" dir="rtl">'+esc(arabicLine(featured))+'</span>'+
+        '<span class="ps-featured-meta"><span>'+esc(durationLabel(featured,text))+'</span><span>Geschichte öffnen</span></span>'+
       '</span>'+
+      (done(featured.id)?'<span class="ps-done ps-done-featured" aria-label="Abgeschlossen"></span>':'')+
+    '</button>';
+  })():"";
+  const rowsHtml=rest.map((item,index)=>{
+    const text=buildText(item);
+    const meta=(item.disputed?"IKHTILĀF · ":"QURʾĀN GEPRÜFT · ")+durationLabel(item,text);
+    return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button" style="--ps-row:'+index+'">'+
+      '<span class="ps-row-art" data-ps-id="'+esc(item.id)+'"><img src="'+esc(item.cover)+'" alt="" loading="'+(index<4?"eager":"lazy")+'"></span>'+
+      '<span class="ps-row-copy">'+
+        '<span class="ps-row-meta">'+esc(meta)+'</span>'+
+        '<span class="ps-row-title">'+esc(item.name)+(item.id==="muhammad"?" ﷺ":"")+'</span>'+
+        '<span class="ps-row-ar" dir="rtl">'+esc(arabicLine(item))+'</span>'+
+      '</span>'+
+      '<span class="ps-row-go" aria-hidden="true">›</span>'+
+      (done(item.id)?'<span class="ps-done" aria-label="Abgeschlossen"></span>':'')+
     '</button>';
   }).join("");
+  grid.innerHTML=featuredHtml+
+    '<div class="ps-library-label"><span>Propheten im Qurʾān</span><small>'+rest.length+' Geschichten</small></div>'+
+    '<div class="ps-library-list">'+rowsHtml+'</div>';
   grid.querySelectorAll("[data-ps-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.psId)));
   const doneEl=$("#psDoneCount");if(doneEl)doneEl.textContent=String(doneCount());
   const ageEl=$("#psAgeHero");if(ageEl)ageEl.textContent="Alter "+age();
+}
+function setupFreeStories(view,section,old,title){
+  const storyFeature=view.querySelector(".story-feature");
+  const oldMore=view.querySelector(".story-more-title");
+  const freeList=oldMore&&oldMore.nextElementSibling&&oldMore.nextElementSibling.classList.contains("story-list")?oldMore.nextElementSibling:null;
+  if(!storyFeature&&!freeList)return;
+  const wrap=document.createElement("section");
+  wrap.className="ps-free-wrap";
+  wrap.innerHTML=
+    '<button class="ps-free-toggle" type="button" aria-expanded="false">'+
+      '<span><small>NOCH MEHR ZUM ENTDECKEN</small><strong>Weitere Geschichten</strong></span>'+
+      '<span class="ps-free-count">'+((storyFeature?1:0)+(freeList?freeList.querySelectorAll(".story-row").length:0))+'</span>'+
+      '<span class="ps-free-chevron">⌄</span>'+
+    '</button>'+
+    '<div class="ps-free-panel" hidden></div>';
+  section.insertAdjacentElement("afterend",wrap);
+  const panel=wrap.querySelector(".ps-free-panel");
+  if(storyFeature)panel.appendChild(storyFeature);
+  if(oldMore)oldMore.remove();
+  if(freeList)panel.appendChild(freeList);
+  wrap.querySelector(".ps-free-toggle").addEventListener("click",e=>{
+    const btn=e.currentTarget;
+    const open=btn.getAttribute("aria-expanded")==="true";
+    btn.setAttribute("aria-expanded",open?"false":"true");
+    panel.hidden=open;
+    wrap.classList.toggle("open",!open);
+  });
+  view.querySelectorAll(".gentle-note").forEach(note=>{
+    if(/Authentische Propheten/i.test(note.textContent||""))note.style.display="none";
+  });
+  if(old){old.style.display="none";if(title)title.style.display="none"}
 }
 function ensureUi(){
   const view=$("#view-stories");if(!view||$("#prophetStoriesSection"))return false;
@@ -108,37 +158,34 @@ function ensureUi(){
   const pageHead=view.querySelector(".page-head");
   const old=$("#authenticStoryList");
   const title=old?.previousElementSibling;
-  const storyFeature=view.querySelector(".story-feature");
-  const oldMore=view.querySelector(".story-more-title");
   const section=document.createElement("section");
   section.id="prophetStoriesSection";section.className="ps-wrap";
   section.innerHTML=
-    '<div class="ps-world-head">'+
-      '<div class="ps-world-glow" aria-hidden="true"></div>'+
-      '<div class="ps-world-art" aria-hidden="true">'+
-        '<span class="ps-float ps-float-ark"><img src="/kids/assets/prophet-stories/nuh.jpg" alt=""></span>'+
-        '<span class="ps-float ps-float-kaaba"><img src="/kids/assets/prophet-stories/ibrahim.jpg" alt=""></span>'+
-        '<span class="ps-float ps-float-whale"><img src="/kids/assets/prophet-stories/yunus.jpg" alt=""></span>'+
+    '<div class="ps-library-hero">'+
+      '<div class="ps-library-hero-art" aria-hidden="true">'+
+        '<img class="ps-hero-art-one" src="/kids/assets/prophet-stories/nuh.jpg" alt="">'+
+        '<img class="ps-hero-art-two" src="/kids/assets/prophet-stories/ibrahim.jpg" alt="">'+
+        '<img class="ps-hero-art-three" src="/kids/assets/prophet-stories/yunus.jpg" alt="">'+
       '</div>'+
-      '<div class="ps-world-copy"><div class="ps-kicker">QURʾĀN · GEPRÜFT · KINDGERECHT</div><h2>Geschichten der Propheten</h2><p>Entdecke die Gesandten Allahs – ruhig erzählt, schön bebildert und mit klaren Quellen.</p></div>'+
-      '<div class="ps-head-stats"><span><strong id="psDoneCount">0</strong>/25 gehört</span><span id="psAgeHero">Alter 6–8</span></div>'+
+      '<div class="ps-library-hero-copy">'+
+        '<div class="ps-kicker">QURʾĀN · GEPRÜFT · KINDGERECHT</div>'+
+        '<h2>Geschichten der Propheten</h2>'+
+        '<p>Eine ruhige Bibliothek zum Lesen, Hören und Entdecken.</p>'+
+        '<div class="ps-hero-stats"><span><strong id="psDoneCount">0</strong>/25 gehört</span><span id="psAgeHero">Alter 6–8</span></div>'+
+      '</div>'+
     '</div>'+
-    '<div class="ps-modes" id="psModes"><button class="ps-mode" data-ps-mode="both" type="button">Lesen &amp; Hören</button><button class="ps-mode" data-ps-mode="listen" type="button">Nur Hören</button><button class="ps-mode" data-ps-mode="read" type="button">Nur Lesen</button></div>'+
-    '<div class="ps-grid" id="psGrid"></div>';
+    '<div class="ps-toolbar">'+
+      '<span class="ps-toolbar-label">Modus</span>'+
+      '<div class="ps-modes" id="psModes"><button class="ps-mode" data-ps-mode="both" type="button">Lesen &amp; Hören</button><button class="ps-mode" data-ps-mode="listen" type="button">Hören</button><button class="ps-mode" data-ps-mode="read" type="button">Lesen</button></div>'+
+    '</div>'+
+    '<div id="psGrid"></div>';
   if(pageHead){
     pageHead.hidden=true;
     pageHead.insertAdjacentElement("afterend",section);
   }else{
     view.insertBefore(section,view.firstChild);
   }
-  if(old){old.style.display="none";if(title)title.style.display="none"}
-  if(oldMore)oldMore.style.display="none";
-  if(storyFeature&&!view.querySelector(".ps-free-title")){
-    const freeTitle=document.createElement("div");
-    freeTitle.className="section-title ps-free-title";
-    freeTitle.textContent="Weitere Geschichten";
-    storyFeature.insertAdjacentElement("beforebegin",freeTitle);
-  }
+  setupFreeStories(view,section,old,title);
   section.querySelectorAll("[data-ps-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.psMode)));
 
   const modal=document.createElement("div");
