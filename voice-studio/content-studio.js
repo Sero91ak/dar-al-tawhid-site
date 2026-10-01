@@ -185,6 +185,7 @@ function injectStyles(){
 function navHtml(){
   return `<nav class="content-studio-nav" aria-label="Studio Bereiche und Schnellaktionen">
     <div class="cs-nav-tabs">
+      <button id="csProphetTab" class="cs-tab" type="button">Kids · Propheten</button>
       <button class="cs-tab active" data-cs-kind="story">Kids · Geschichten</button>
       <button class="cs-tab" data-cs-kind="quiz">Kids · Quiz</button>
       <button class="cs-tab" data-cs-kind="game">Kids · Spiele</button>
@@ -291,8 +292,22 @@ function mount(){
 function bind(){
   document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>{
     window.setStudioMode?.("production");
+    q("csProphetTab")?.classList.remove("active");
     switchKind(btn.dataset.csKind);
   }));
+  q("csProphetTab")?.addEventListener("click",()=>{
+    window.setStudioMode?.("production");
+    switchKind("story");
+    document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
+    q("csFreeVoiceTab")?.classList.remove("active");
+    q("csProphetTab").classList.add("active");
+    const box=q("prophetPick");
+    if(box){
+      box.classList.add("focus");
+      box.scrollIntoView({behavior:"smooth",block:"start"});
+      setTimeout(()=>box.classList.remove("focus"),1600);
+    }
+  });
   q("csFreeVoiceTab")?.addEventListener("click",()=>window.setStudioMode?.("free"));
   q("csTitle")?.addEventListener("input",()=>{q("csCoverTitle").textContent=q("csTitle").value||"Neue Geschichte";persistDraft();refreshQa();renderWorkflow()});
   ["csCategory","csTopic","csProphet","csAgeMin","csAgeMax","csModeRead","csModeListen","csSources"].forEach(id=>q(id)?.addEventListener("change",()=>{persistDraft();refreshQa()}));
@@ -417,6 +432,7 @@ function voiceScript(){
 function switchKind(kind){
   persistDraft();studioKind=kind||"story";
   document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.toggle("active",x.dataset.csKind===studioKind));
+  q("csProphetTab")?.classList.remove("active");
   const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
   resetEditorForKind();
   if(studioKind==="story"){title.textContent="Kids-Geschichte produzieren";lead.textContent="Text, Serhat-Stimme, Cover und Altersfreigabe als ein Paket produzieren und direkt in die Kids-App veröffentlichen.";q("styleMode").value="kids_story"}

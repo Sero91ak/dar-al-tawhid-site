@@ -71,11 +71,21 @@ h1{font-size:clamp(26px,2.1vw,40px);line-height:1.02;letter-spacing:-.035em;marg
 .lead{font-size:13px;line-height:1.5;color:var(--muted);max-width:760px}
 .badges{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
 .badge{font-size:10px;font-weight:800;letter-spacing:.04em;padding:6px 9px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#cbd7df;white-space:nowrap}
-.prophet-pick{margin:0 0 12px;padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03)}
+.prophet-pick{margin:0 0 14px;padding:14px 14px 12px;border:1px solid rgba(217,182,111,.32);border-radius:18px;background:linear-gradient(180deg,rgba(217,182,111,.10),rgba(255,255,255,.03));box-shadow:inset 0 1px rgba(255,255,255,.05)}
+.prophet-pick-head{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;justify-content:space-between;margin-bottom:10px}
+.prophet-pick-kicker{font-size:10px;font-weight:900;letter-spacing:.12em;color:var(--gold2);text-transform:uppercase}
+.prophet-pick h2{margin:4px 0 4px;font-size:20px;line-height:1.1}
 .prophet-pick-row{display:flex;flex-wrap:wrap;gap:8px;align-items:end}
-.prophet-pick .cs-field{min-width:140px;flex:1}
+.prophet-pick .cs-field{min-width:120px}
 .prophet-pick select{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line);border-radius:11px;padding:10px 11px;font-size:12px;min-height:40px}
 .prophet-pick .notice{margin-top:8px}
+.prophet-pick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:7px}
+.prophet-pick-card{appearance:none;text-align:left;border:1px solid rgba(255,255,255,.09);background:#071927;color:var(--ink);border-radius:12px;padding:6px;cursor:pointer;min-width:0}
+.prophet-pick-card img{display:block;width:100%;height:58px;object-fit:cover;border-radius:8px;background:#0a2230}
+.prophet-pick-card strong{display:block;margin-top:6px;font-size:11px;line-height:1.2}
+.prophet-pick-card small{display:block;color:var(--soft);font-size:9px;margin-top:2px}
+.prophet-pick-card.active{border-color:rgba(217,182,111,.55);box-shadow:0 0 0 1px rgba(217,182,111,.28)}
+.prophet-pick.focus{outline:2px solid rgba(217,182,111,.55);outline-offset:2px}
 textarea{
   width:100%;height:clamp(330px,48vh,760px);min-height:290px;resize:vertical;
   background:linear-gradient(180deg,#071a29,#071725);color:var(--ink);border:1px solid rgba(255,255,255,.10);
@@ -605,21 +615,25 @@ body.free-voice-mode .mobile-actions{display:none!important}
 
 <div id="mainStudioWorkspace" class="workspace">
 <main class="panel editor-panel">
+  <div class="prophet-pick" id="prophetPick">
+    <div class="prophet-pick-head">
+      <div>
+        <div class="prophet-pick-kicker">Kids · fest vorbereitet</div>
+        <h2>Geschichten der Propheten</h2>
+        <div class="notice" style="margin:0">Prophet antippen · Text schreiben · Audio erzeugen · in Kids pushen. Cover und Quellen sind schon da.</div>
+      </div>
+      <div class="prophet-pick-row">
+        <div class="cs-field" style="flex:0 0 120px"><label for="prophetPickAge">Alter</label><select id="prophetPickAge"><option value="4-5">4–5</option><option value="6-8" selected>6–8</option><option value="9-10">9–10</option></select></div>
+        <button id="prophetPickPush" class="btn primary" type="button" disabled>In Kids-App pushen</button>
+      </div>
+    </div>
+    <select id="prophetPickId" hidden><option value="">— wählen —</option></select>
+    <div id="prophetPickGrid" class="prophet-pick-grid"></div>
+    <div id="prophetPickReady" class="notice">25 Plätze sind vorbereitet. Wähle zuerst Muḥammad ﷺ oder einen anderen Propheten.</div>
+  </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
     <div class="badges"><span class="badge">SERHAT VOICE 2.9.42</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
-  </div>
-
-  <div class="prophet-pick" id="prophetPick">
-    <div class="section-title">Kids · Prophetengeschichte vorbereiten</div>
-    <div class="prophet-pick-row">
-      <div class="cs-field"><label for="prophetPickId">Prophet</label><select id="prophetPickId"><option value="">— wählen —</option></select></div>
-      <div class="cs-field" style="flex:0 0 120px"><label for="prophetPickAge">Alter</label><select id="prophetPickAge"><option value="4-5">4–5</option><option value="6-8" selected>6–8</option><option value="9-10">9–10</option></select></div>
-    </div>
-    <div id="prophetPickReady" class="notice" style="margin-top:8px">Wähle den Propheten. Cover, Name, Quellen und Kids-Platz sind schon vorbereitet. Du schreibst nur den Text, erzeugst Audio und pusht.</div>
-    <div class="prophet-pick-row" style="margin-top:10px">
-      <button id="prophetPickPush" class="btn primary" type="button" disabled>In Kids-App pushen</button>
-    </div>
   </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
@@ -1442,6 +1456,8 @@ function setStudioMode(mode){
   if(nav)nav.style.display="";
   const freeTab=$("#csFreeVoiceTab");
   if(freeTab)freeTab.classList.toggle("active",free);
+  const prophetTab=$("#csProphetTab");
+  if(prophetTab&&free)prophetTab.classList.remove("active");
   const btn=$("#freeVoiceToggleBtn");
   if(btn)btn.textContent=free?"Zur Produktion":"Freie Stimme";
   if(free){
@@ -2081,7 +2097,7 @@ checkHealth({quiet:true}).then(()=>analyzeProsody());
 setInterval(()=>checkHealth({quiet:true}),5000);
 
 (function prophetStoryManualLoader(){
-  const sel=$("#prophetPickId"),age=$("#prophetPickAge"),ta=$("#text"),push=$("#prophetPickPush"),ready=$("#prophetPickReady");
+  const sel=$("#prophetPickId"),age=$("#prophetPickAge"),ta=$("#text"),push=$("#prophetPickPush"),ready=$("#prophetPickReady"),grid=$("#prophetPickGrid");
   if(!sel||!ta||!push)return;
   let pack=[];
   function honor(it){
@@ -2093,19 +2109,34 @@ setInterval(()=>checkHealth({quiet:true}),5000);
   function label(it){
     return (it.name||it.id)+(honor(it)?" "+honor(it):"");
   }
+  function coverSrc(c){
+    const v=String(c||"");
+    if(!v)return"";
+    if(v.indexOf("http")===0)return v;
+    return "https://dar-al-tawhid.de"+v;
+  }
   function fillSelect(){
     const cur=sel.value;
     sel.innerHTML='<option value="">— wählen —</option>'+pack.map(it=>'<option value="'+it.id+'">'+label(it)+'</option>').join("");
     if(cur)sel.value=cur;
+    if(grid){
+      grid.innerHTML=pack.map(it=>'<button class="prophet-pick-card'+(sel.value===it.id?" active":"")+'" type="button" data-ps-pick="'+it.id+'">'+(it.cover?'<img src="'+coverSrc(it.cover)+'" alt="">':"")+'<strong>'+label(it)+'</strong><small>'+(it.nameAr||"")+'</small></button>').join("");
+      grid.querySelectorAll("[data-ps-pick]").forEach(btn=>btn.addEventListener("click",()=>{
+        sel.value=btn.dataset.psPick;
+        prepareSlot();
+        $("#text")?.scrollIntoView({behavior:"smooth",block:"center"});
+      }));
+    }
   }
   let lastId="";
   function prepareSlot(){
     const it=pack.find(x=>x.id===sel.value);
     const key=age.value||"6-8";
+    if(grid)grid.querySelectorAll("[data-ps-pick]").forEach(b=>b.classList.toggle("active",b.dataset.psPick===sel.value));
     if(!it){
       push.disabled=true;
       lastId="";
-      if(ready)ready.textContent="Wähle den Propheten. Cover, Name, Quellen und Kids-Platz sind schon vorbereitet. Du schreibst nur den Text, erzeugst Audio und pusht.";
+      if(ready)ready.textContent="25 Plätze sind vorbereitet. Wähle zuerst Muḥammad ﷺ oder einen anderen Propheten.";
       return;
     }
     const switched=it.id!==lastId;
@@ -2121,7 +2152,7 @@ setInterval(()=>checkHealth({quiet:true}),5000);
     if(cover&&it.cover){
       cover.querySelector("img")?.remove();
       const img=document.createElement("img");
-      img.src=(String(it.cover).indexOf("http")===0?it.cover:("https://dar-al-tawhid.de"+it.cover));
+      img.src=coverSrc(it.cover);
       img.alt=it.name||"";
       cover.prepend(img);
     }
@@ -2176,7 +2207,7 @@ setInterval(()=>checkHealth({quiet:true}),5000);
   loadPack();
 })();
 </script>
-<script src="content-studio.js?v=2911"></script>
+<script src="content-studio.js?v=2912"></script>
 <script src="alphabet-audio-studio.js?v=2929"></script>
 </body>
 </html>
