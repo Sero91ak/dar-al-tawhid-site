@@ -2832,13 +2832,17 @@ def generation_timeout_seconds(text:str,language_id:str):
     forced=str(os.environ.get("DAR_VOICE_SEGMENT_TIMEOUT_SECONDS","")).strip()
     if forced:
         try:
-            return max(20.0,min(180.0,float(forced)))
+            # Auch ein manuell gesetzter Wert darf einen einzelnen Satz nicht
+            # minutenlang blockieren. Rescue bleibt abschnittsweise.
+            return max(20.0,min(75.0,float(forced)))
         except Exception:
             pass
     chars=len(re.sub(r"\s+","",str(text or "")))
     if language_id=="ar":
-        return max(32.0,min(60.0,22.0+chars*0.42))
-    return max(38.0,min(85.0,24.0+chars*0.42))
+        return max(26.0,min(48.0,18.0+chars*0.30))
+    # Vorher durfte ein deutscher 140-Zeichen-Block bis zu ~83 s hängen.
+    # Jetzt greift der Watchdog deutlich früher und rettet nur diesen Abschnitt.
+    return max(30.0,min(55.0,20.0+chars*0.22))
 
 def _mlx_process_main(conn,model_id:str):
     """Persistenter MLX-Worker. Nur dieser Prozess besitzt Modell + Metal-Kontext."""
@@ -3056,6 +3060,7 @@ def _mlx_request(payload:dict,timeout_s:float,heartbeat:bool=True):
                     raise RuntimeError("MLX-Worker wurde während der Synthese beendet.") from e
                 kind=str(msg.get("kind",""))
                 if kind in ("result","warm"):
+                    set_status(segment_elapsed_seconds=int(round(elapsed)))
                     return msg
                 code=str(msg.get("code",""))
                 detail=str(msg.get("error") or "Unbekannter MLX-Fehler.")
@@ -3066,11 +3071,16 @@ def _mlx_request(payload:dict,timeout_s:float,heartbeat:bool=True):
                 raise RuntimeError(detail)
 
             if heartbeat and elapsed>=next_heartbeat:
-                current=int(get_status().get("progress",base_progress) or base_progress)
-                pulse=min(86,max(current,base_progress+min(5,int(elapsed//8))))
+                st=get_status()
+                active=int(st.get("render_active_segment",0) or 0)
+                total=int(st.get("render_total_segments",0) or 0)
+                prefix=f"Abschnitt {active}/{total} · " if active and total else ""
+                # Prozent zeigt nur noch echte abgeschlossene Arbeit. Während
+                # eines laufenden Satzes zeigen wir stattdessen seine Laufzeit.
                 set_status(
-                    progress=pulse,
-                    message=f"Synthese läuft · {int(elapsed)} s · Watchdog aktiv"
+                    progress=max(base_progress,int(st.get("progress",base_progress) or base_progress)),
+                    segment_elapsed_seconds=int(elapsed),
+                    message=f"{prefix}Synthese läuft · {int(elapsed)} s · Watchdog aktiv"
                 )
                 next_heartbeat+=2.0
 
@@ -3110,6 +3120,11 @@ def render_with_mlx(model,text:str,language_id:str,mode:str):
     ref=reference_for_language(language_id)
     p=prosody_settings(mode,language_id,text)
     budget=mlx_token_budget(text,language_id)
+    if language_id=="de" and mode=="kids_story":
+        # Kinder-Langtexte bekommen einen engeren Ausreißer-Deckel. Normale
+        # Satzblöcke liegen deutlich darunter; Token-Runaways werden früher
+        # gerettet, statt den ganzen Auftrag festzuhalten.
+        budget=min(int(budget),300)
     timeout_s=generation_timeout_seconds(text,language_id)
     msg=_mlx_request({
         "op":"render",
@@ -3513,6 +3528,12 @@ def prosody_settings(mode:str,language_id:str,text:str=""):
         # Beweglichkeit verhindert langes Dehnen; Temperatur bleibt kontrolliert.
         exaggeration=max(0.18,min(exaggeration,0.24))
         temperature=min(temperature,0.46)
+        cfg=0.0
+
+    if mode=="kids_story" and not is_ar:
+        # Chatterbox verdoppelt bei cfg_weight > 0 intern den Text-Token-Batch.
+        # Für lange Kinder-Geschichten entfällt dieser doppelte CFG-Pass.
+        # Voice-Conditioning, Temperatur, Exaggeration und QA bleiben erhalten.
         cfg=0.0
 
     if audio_lock_key_for_chunk(text):
@@ -4906,6 +4927,11 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         last_error="",
         prosody_mode=doc_mode,
         last_qa={},
+        render_total_segments=0,
+        render_completed_segments=0,
+        render_active_segment=0,
+        render_cached_segments=0,
+        segment_elapsed_seconds=0,
         message=f"Satzfluss geprüft · {flow_preflight['sentences']} Sätze · Audio wird vorbereitet …"
     )
 
@@ -4952,6 +4978,13 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         outputs=[None]*len(plan)
         qa_segments=[None]*len(plan)
         total=len(plan)
+        set_status(
+            render_total_segments=total,
+            render_completed_segments=0,
+            render_active_segment=0,
+            render_cached_segments=len(preloaded),
+            segment_elapsed_seconds=0
+        )
         if free_mode:
             set_status(
                 progress=6,
@@ -4984,6 +5017,9 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             critical=bool(audio_lock_key) or (lang=="ar" and any(x and x in chunk for x in master_forms))
             set_status(
                 progress=pct,
+                render_active_segment=idx,
+                render_completed_segments=processed_pos-1,
+                segment_elapsed_seconds=0,
                 message=(
                     f"Freie Stimme · {lang_label} · Abschnitt {idx}/{total} …"
                     if free_mode else
@@ -5147,6 +5183,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             completed_pct=8+int((processed_pos/max(1,total))*78)
             set_status(
                 progress=completed_pct,
+                render_completed_segments=processed_pos,
+                segment_elapsed_seconds=0,
                 message=f"{lang_label} · {mode} · Abschnitt {idx}/{total} fertig"
             )
 
@@ -5261,6 +5299,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                 "context_bridge_segments":sum(1 for x in qa_segments if x.get("context_bridge")),
                 "context_bridge_cache_hits":sum(1 for x in qa_segments if x.get("context_bridge_cache")=="hit"),
                 "model_load_skipped":bool(model is None),
+                "kids_story_fast_cfg":bool(doc_mode=="kids_story"),
+                "kids_story_mlx_token_cap":300 if doc_mode=="kids_story" else None,
             },
         }
         set_status(last_qa=qa_summary)
@@ -5277,6 +5317,9 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         set_status(
             render_state="done",
             progress=100,
+            render_active_segment=0,
+            render_completed_segments=total,
+            segment_elapsed_seconds=0,
             message=f"Audio fertig · {doc_mode}",
             last_output=str(out),
             render_finished_at=time.time(),
@@ -5288,6 +5331,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         set_status(
             render_state="error",
             progress=0,
+            render_active_segment=0,
+            segment_elapsed_seconds=0,
             message="Audio-Erzeugung fehlgeschlagen",
             last_error=detail,
             render_finished_at=time.time()

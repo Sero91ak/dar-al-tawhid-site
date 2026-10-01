@@ -1795,9 +1795,19 @@ async function generate({autoRerender=false}={}){
       const st=await getEngineStatus();
       if(!st)return;
       if(st.render_state==="rendering"){
-        const pct=Number(st.progress||0);
-        btns.forEach(b=>b.textContent="Erzeugen "+pct+" %");
-        setMessage(st.message||("Audio wird erzeugt · "+pct+" %"),"warn");
+        const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
+        const total=Math.max(0,Number(st.render_total_segments||0));
+        const completed=Math.max(0,Number(st.render_completed_segments||0));
+        const active=Math.max(0,Number(st.render_active_segment||0));
+        const elapsed=Math.max(0,Number(st.segment_elapsed_seconds||0));
+        const cached=Math.max(0,Number(st.render_cached_segments||0));
+        const label=(total&&active)
+          ?("Audio "+completed+"/"+total+(elapsed?" · "+elapsed+" s":""))
+          :("Erzeugen "+pct+" %");
+        btns.forEach(b=>b.textContent=label);
+        const detail=st.message||("Audio wird erzeugt · "+pct+" %");
+        const cacheHint=cached?(" · "+cached+" bereits bekannt"):"";
+        setMessage(detail+cacheHint,"warn");
       }else if(st.render_state==="error"&&st.last_error){
         setMessage("Renderfehler: "+st.last_error);
       }
