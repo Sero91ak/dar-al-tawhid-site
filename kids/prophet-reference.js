@@ -1,40 +1,34 @@
 (() => {
 "use strict";
 const FIRST=["adam","idris","nuh","hud","salih"];
-const ART={
-  adam:{pos:"38% 50%"},
-  idris:{pos:"42% 50%"},
-  nuh:{pos:"38% 46%",hero:"38% 45%"},
-  hud:{pos:"42% 50%"},
-  salih:{pos:"42% 50%"}
-};
+const POS={adam:"0%",idris:"25%",nuh:"50%",hud:"75%",salih:"100%"};
 let items=[],mode="read";
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function minutes(item){
   const m=Number(item?.voiceProduction?.estimatedMinutes||0);
-  return Math.max(2,Math.min(9,m?Math.round(m):6));
+  if(m>0)return Math.max(2,Math.min(9,Math.round(m)));
+  const text=String(item?.scripts?.["6-8"]||item?.voiceScript||"");
+  return Math.max(2,Math.min(9,Math.ceil((text.match(/\S+/g)||[]).length/105)));
 }
 function ar(item){return [item.nameAr||"",item.id==="muhammad"?"ﷺ":"عليه السلام"].filter(Boolean).join(" ")}
-function img(id){return "/kids/assets/prophet-stories/"+id+".jpg"}
 function sorted(list){
-  const map=new Map((list||[]).map(x=>[x.id,x]));
+  const map=new Map((Array.isArray(list)?list:[]).map(x=>[x.id,x]));
   return FIRST.map(id=>map.get(id)).filter(Boolean);
 }
 function render(){
-  $("#storyList").innerHTML=items.map(item=>{
-    const a=ART[item.id]||{};
-    return '<button class="story" type="button" data-id="'+esc(item.id)+'" style="--img:url(\''+img(item.id)+'\');--pos:'+esc(a.pos||"center")+'">'+
+  $("#storyList").innerHTML=items.map(item=>
+    '<button class="story" type="button" data-id="'+esc(item.id)+'" style="--sprite-pos:'+POS[item.id]+'">'+
       '<span class="story-bg" aria-hidden="true"></span>'+
       '<span class="story-copy">'+
         '<span class="eyebrow">'+(item.id==="adam"?"UNSER ERSTER PROPHET":"UNSER PROPHET")+'</span>'+
         '<h2>'+esc(item.name)+'</h2>'+
-        '<span class="arabic">'+esc(ar(item))+'</span>'+
+        '<span class="arabic" dir="rtl">'+esc(ar(item))+'</span>'+
         '<span class="story-time">◷ &nbsp;ca. '+minutes(item)+' Min.</span>'+
       '</span>'+
-      '<span class="story-go">›</span>'+
-    '</button>';
-  }).join("");
+      '<span class="story-go" aria-hidden="true">›</span>'+
+    '</button>'
+  ).join("");
   document.querySelectorAll(".story").forEach(b=>b.addEventListener("click",()=>openDetail(b.dataset.id)));
 }
 function storyText(item){
@@ -42,11 +36,7 @@ function storyText(item){
   return s||(item?.chapters||[]).join("\n\n");
 }
 function openDetail(id){
-  const item=items.find(x=>x.id===id); if(!item)return;
-  const a=ART[id]||{};
-  const hero=$("#detailHero");
-  hero.style.setProperty("--hero","url('"+img(id)+"')");
-  hero.style.setProperty("--hero-pos",a.hero||a.pos||"center");
+  const item=items.find(x=>x.id===id);if(!item)return;
   $("#detailTitle").textContent=item.name;
   $("#detailArabic").textContent=ar(item);
   $("#detailSummary").textContent=item.summary||"";
@@ -71,6 +61,7 @@ function setMode(next){
 document.addEventListener("click",e=>{const b=e.target.closest("[data-mode]");if(b)setMode(b.dataset.mode)});
 $("#backBtn").addEventListener("click",closeDetail);
 fetch("/kids/data/prophet-stories.json?v="+Date.now(),{cache:"no-store"})
-  .then(r=>r.json()).then(data=>{items=sorted(data.items);render();setMode("read")})
-  .catch(()=>{$("#storyList").innerHTML='<div style="padding:24px">Daten konnten nicht geladen werden.</div>'});
+  .then(r=>{if(!r.ok)throw new Error("data "+r.status);return r.json()})
+  .then(data=>{items=sorted(data.items);render();setMode("read")})
+  .catch(err=>{$("#storyList").innerHTML='<div style="padding:24px">Daten konnten nicht geladen werden.</div>';console.warn(err)});
 })();
