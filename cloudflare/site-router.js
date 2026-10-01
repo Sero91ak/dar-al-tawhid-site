@@ -1,5 +1,5 @@
 import { gateHiddenSurfaces } from "./preview-gate.js";
-/* Dar Test (/test) ist nur mit Anmeldung erreichbar. Kids bleibt geschützt. */
+/* Dar Test (/test) ohne Browser-Anmeldefenster. Kids bleibt geschützt. */
 function isNativeAppRequest(ua) {
   return /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(String(ua || ""));
 }
