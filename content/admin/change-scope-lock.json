@@ -6713,6 +6713,19 @@
         "_redirects"
       ],
       "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
+      "id": "voice-studio-direct-fix-release-2026-10-01",
+      "approvedBy": "user-explicit-voice-studio-direct-fixes-always-live",
+      "reason": "Nutzer: Fehler im privaten DĀR Voice Studio sollen nach erfolgreicher technischer Validierung ohne separate 'push live'-Rückfrage direkt auf main veröffentlicht und als App-Update bereitgestellt werden. Keine Freigabe für Besucher-Push, Gebets-/OneSignal-Spuren oder sonstige Besucher-App-Änderungen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "AGENTS.md",
+        "voice-studio/",
+        ".github/workflows/voice-studio-local-batch-smoke.yml",
+        ".github/workflows/voice-studio-v2-validate.yml"
+      ],
+      "expiresAt": "2027-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
