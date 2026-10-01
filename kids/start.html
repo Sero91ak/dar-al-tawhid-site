@@ -2387,21 +2387,23 @@ html:not([data-view="today"]) .view.active{
 }
 
 
-/* KIDS_CINEMATIC_GLOBAL_V33 — shared visual language for all Kids sections */
+
+/* KIDS_CINEMATIC_GLOBAL_V34 — approved cinematic design language */
 :root{
-  --kids-cine-night:#061a2b;
-  --kids-cine-blue:#0a3450;
-  --kids-cine-blue2:#0d4260;
-  --kids-cine-gold:#f0c96f;
-  --kids-cine-gold2:#ffe099;
-  --kids-cine-cyan:#9edfdc;
-  --kids-cine-line:rgba(112,205,213,.22);
+  --cine-night:#04192b;
+  --cine-deep:#06243a;
+  --cine-blue:#0a3654;
+  --cine-blue2:#0c4864;
+  --cine-gold:#f1ca6c;
+  --cine-gold2:#ffe49a;
+  --cine-cyan:#9fe4dd;
+  --cine-line:rgba(115,209,217,.22);
 }
 .app{
   background:
-    radial-gradient(circle at 88% 6%,rgba(43,121,158,.20),transparent 24%),
-    radial-gradient(circle at 10% 34%,rgba(35,92,117,.16),transparent 31%),
-    linear-gradient(180deg,#061a2b 0%,#082a42 48%,#061e33 100%)!important;
+    radial-gradient(circle at 88% 5%,rgba(51,130,166,.22),transparent 23%),
+    radial-gradient(circle at 12% 29%,rgba(33,92,119,.16),transparent 32%),
+    linear-gradient(180deg,#04192b 0%,#062943 49%,#041d32 100%)!important;
 }
 .app::before{
   content:"";
@@ -2410,127 +2412,189 @@ html:not([data-view="today"]) .view.active{
   left:0;right:0;top:0;
   height:max(58px,env(safe-area-inset-top,0px));
   pointer-events:none;
-  background:linear-gradient(180deg,rgba(4,23,38,.90),rgba(4,23,38,.42) 68%,transparent);
+  background:linear-gradient(180deg,rgba(3,22,37,.92),rgba(3,22,37,.42) 68%,transparent);
 }
-.shell{z-index:2}
+.shell{position:relative;z-index:2}
 .page-head{
   position:relative;
   overflow:hidden;
   margin:4px -16px 18px!important;
-  padding:20px 17px 18px!important;
-  border-top:1px solid rgba(255,255,255,.04);
-  border-bottom:1px solid var(--kids-cine-line);
+  padding:22px 17px 20px!important;
+  border-top:1px solid rgba(255,255,255,.04)!important;
+  border-bottom:1px solid var(--cine-line)!important;
   background:
-    radial-gradient(circle at 88% 18%,rgba(240,201,111,.13),transparent 22%),
-    radial-gradient(circle at 15% 86%,rgba(99,199,197,.10),transparent 31%),
-    linear-gradient(135deg,#0d3850,#08263d);
+    radial-gradient(circle at 86% 16%,rgba(241,202,108,.16),transparent 21%),
+    radial-gradient(circle at 14% 92%,rgba(103,200,198,.12),transparent 30%),
+    linear-gradient(135deg,#0e3c57,#08273f)!important;
+  box-shadow:0 16px 36px rgba(0,0,0,.16)!important;
+}
+.page-head::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.32;
+  background-image:
+    radial-gradient(circle at 9% 15%,#fff4bd 0 1px,transparent 1.5px),
+    radial-gradient(circle at 32% 7%,#fff 0 1px,transparent 1.5px),
+    radial-gradient(circle at 74% 16%,#ffe292 0 1px,transparent 1.5px);
 }
 .page-head::after{
   content:"";
-  position:absolute;left:0;right:0;bottom:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(240,201,111,.56),rgba(118,211,215,.43),transparent);
+  position:absolute;
+  left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(241,202,108,.60),rgba(115,209,217,.46),transparent);
+  box-shadow:0 0 13px rgba(241,202,108,.18);
 }
+.page-head>*{position:relative;z-index:1}
 .page-head .kicker{
-  color:var(--kids-cine-gold2)!important;
+  color:var(--cine-gold2)!important;
   font-size:10px!important;
+  font-weight:950!important;
   letter-spacing:.16em!important;
 }
 .page-head h2{
-  margin:7px 0 7px!important;
-  color:#fff;
-  font-size:clamp(31px,8.2vw,43px)!important;
-  line-height:.96!important;
-  text-shadow:0 4px 20px rgba(0,0,0,.20);
+  margin:8px 0 8px!important;
+  color:#fff!important;
+  font-size:clamp(32px,8.5vw,45px)!important;
+  line-height:.95!important;
+  letter-spacing:-.045em!important;
+  text-shadow:0 4px 22px rgba(0,0,0,.22);
 }
 .page-head p{
   max-width:560px;
-  color:rgba(255,255,255,.78)!important;
+  color:rgba(255,255,255,.80)!important;
   font-size:14px!important;
-  line-height:1.52;
+  line-height:1.53!important;
 }
 .section-title{
   position:relative;
-  margin:23px 0 12px!important;
-  padding:0 0 9px;
+  margin:23px 0 13px!important;
+  padding-bottom:10px!important;
+  color:#fff!important;
   font-size:22px!important;
+  line-height:1.1!important;
 }
 .section-title::after{
   content:"";
   position:absolute;
   left:0;bottom:0;
-  width:82px;height:1px;
-  background:linear-gradient(90deg,var(--kids-cine-gold),rgba(158,223,220,.56),transparent);
-  box-shadow:0 0 11px rgba(240,201,111,.18);
+  width:86px;height:1px;
+  background:linear-gradient(90deg,var(--cine-gold),rgba(159,228,221,.58),transparent);
+  box-shadow:0 0 11px rgba(241,202,108,.18);
 }
-.choice,.quran-hero,.quran-action,.surah-card,.verse-card,.story-feature,.story-row,
-.dua-scene,.dua-meaning,.dua-old-note,.dua-answer,.quiz-scene,.quiz-answer{
-  border-color:rgba(125,210,218,.16)!important;
-  box-shadow:0 14px 32px rgba(0,0,0,.15),inset 0 1px rgba(255,255,255,.025)!important;
+
+/* shared cinematic surfaces */
+.choice,.quran-hero,.quran-action,.surah-card,.verse-card,
+.story-feature,.story-row,.dua-scene,.dua-meaning,.dua-old-note,
+.dua-answer,.quiz-scene,.quiz-answer,.parent-card,.info-card{
+  border-color:rgba(124,210,219,.17)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.17),inset 0 1px rgba(255,255,255,.028)!important;
 }
 .quran-hero{
-  background:
-    radial-gradient(circle at 84% 10%,rgba(240,201,111,.19),transparent 21%),
-    radial-gradient(circle at 12% 92%,rgba(114,201,193,.13),transparent 28%),
-    linear-gradient(140deg,#0f4b59,#176566 58%,#267b73)!important;
-}
-.quran-action{
-  background:linear-gradient(145deg,rgba(14,66,81,.92),rgba(8,44,64,.94))!important;
-}
-.surah-card:nth-child(4n+1){background:linear-gradient(145deg,#246f71,#185368)!important}
-.surah-card:nth-child(4n+2){background:linear-gradient(145deg,#4a5c88,#33466f)!important}
-.surah-card:nth-child(4n+3){background:linear-gradient(145deg,#8a5c5d,#5c4057)!important}
-.surah-card:nth-child(4n+4){background:linear-gradient(145deg,#3d725d,#28564e)!important}
-.verse-card,.story-row,.dua-meaning,.dua-answer,.quiz-answer{
-  background:linear-gradient(135deg,rgba(16,59,76,.72),rgba(9,39,57,.78))!important;
-}
-.story-feature{
-  background:linear-gradient(135deg,rgba(14,60,78,.82),rgba(8,40,59,.90))!important;
-}
-.quiz-scene,.dua-scene{
-  border-radius:28px!important;
   overflow:hidden;
+  background:
+    radial-gradient(circle at 84% 12%,rgba(242,204,112,.20),transparent 21%),
+    radial-gradient(circle at 12% 92%,rgba(113,206,198,.15),transparent 28%),
+    linear-gradient(140deg,#104e61,#17696b 58%,#277f77)!important;
+}
+.quran-action,.story-row,.dua-meaning,.dua-answer,.quiz-answer,.parent-card,.info-card{
+  background:
+    radial-gradient(circle at 86% 12%,rgba(241,202,108,.055),transparent 25%),
+    linear-gradient(135deg,rgba(15,59,77,.78),rgba(8,39,58,.84))!important;
+}
+.surah-card:nth-child(4n+1){background:linear-gradient(145deg,#247375,#18556a)!important}
+.surah-card:nth-child(4n+2){background:linear-gradient(145deg,#4d608d,#344872)!important}
+.surah-card:nth-child(4n+3){background:linear-gradient(145deg,#8d6061,#60435b)!important}
+.surah-card:nth-child(4n+4){background:linear-gradient(145deg,#417661,#29594f)!important}
+.story-feature{
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 84% 15%,rgba(242,204,112,.16),transparent 23%),
+    linear-gradient(135deg,rgba(15,63,82,.88),rgba(8,40,60,.94))!important;
+}
+.dua-scene,.quiz-scene{
+  overflow:hidden!important;
+  border-radius:29px!important;
 }
 .dua-scene{
   background:
-    radial-gradient(circle at 82% 16%,rgba(246,211,128,.17),transparent 22%),
-    linear-gradient(180deg,#15435e,#326a6b 58%,#775c43)!important;
+    radial-gradient(circle at 83% 15%,rgba(248,214,130,.19),transparent 21%),
+    linear-gradient(180deg,#16465f,#34706f 58%,#7e6248)!important;
 }
 .quiz-scene{
   background:
-    radial-gradient(circle at 82% 16%,rgba(247,213,129,.18),transparent 20%),
-    linear-gradient(180deg,#154768,#316d78 55%,#8c6b4b)!important;
+    radial-gradient(circle at 83% 15%,rgba(248,214,130,.19),transparent 21%),
+    linear-gradient(180deg,#164b6c,#34727d 55%,#94704f)!important;
 }
-.primary,.dua-listen,.quiz-next{
-  background:linear-gradient(135deg,#d7ae54,#f0cf7b)!important;
+.primary,.dua-listen,.quiz-next,.cta-primary{
+  border:0!important;
+  background:linear-gradient(135deg,#d8ae51,#f1d07a)!important;
   color:#102538!important;
-  box-shadow:0 8px 20px rgba(0,0,0,.14),0 0 18px rgba(240,201,111,.08);
+  font-weight:950!important;
+  box-shadow:0 9px 22px rgba(0,0,0,.15),0 0 19px rgba(241,202,108,.09)!important;
 }
 .age-tabs{
-  border:1px solid rgba(125,210,218,.12);
-  background:rgba(7,35,53,.56)!important;
+  border:1px solid rgba(124,210,219,.13)!important;
+  background:rgba(6,34,52,.58)!important;
+}
+.age-tabs button{
+  color:rgba(255,255,255,.67)!important;
 }
 .age-tabs button.active{
-  background:linear-gradient(135deg,rgba(240,201,111,.17),rgba(114,201,193,.07))!important;
-  color:var(--kids-cine-gold2)!important;
-  box-shadow:0 0 15px rgba(240,201,111,.08);
+  color:var(--cine-gold2)!important;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,237,174,.17),transparent 64%),
+    linear-gradient(135deg,rgba(241,202,108,.16),rgba(113,206,198,.07))!important;
+  box-shadow:0 0 16px rgba(241,202,108,.09)!important;
 }
+
+/* global child-readable text */
+.view p,.modal p{
+  text-rendering:optimizeLegibility;
+}
+.app[data-age="4–5"] .story-text,
+.app[data-age="4–5"] .lesson-text,
+.app[data-age="4–5"] .dua-meaning,
+.app[data-age="4–5"] .verse-translation{
+  font-size:20px!important;
+  line-height:1.72!important;
+}
+.app[data-age="6–8"] .story-text,
+.app[data-age="6–8"] .lesson-text,
+.app[data-age="6–8"] .dua-meaning,
+.app[data-age="6–8"] .verse-translation{
+  font-size:18px!important;
+  line-height:1.68!important;
+}
+.app[data-age="9–10"] .story-text,
+.app[data-age="9–10"] .lesson-text,
+.app[data-age="9–10"] .dua-meaning,
+.app[data-age="9–10"] .verse-translation{
+  font-size:17px!important;
+  line-height:1.64!important;
+}
+
+/* bottom dock */
 .bottom-nav{
-  bottom:max(8px,env(safe-area-inset-bottom))!important;
+  bottom:max(9px,env(safe-area-inset-bottom))!important;
   width:min(calc(100% - 28px),740px)!important;
   gap:5px!important;
   padding:7px!important;
-  border:1px solid rgba(137,211,220,.24)!important;
-  border-radius:31px!important;
-  background:rgba(4,25,41,.91)!important;
-  box-shadow:0 22px 64px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.035)!important;
-  backdrop-filter:blur(26px)!important;
-  -webkit-backdrop-filter:blur(26px)!important;
+  border:1px solid rgba(137,214,222,.26)!important;
+  border-radius:32px!important;
+  background:
+    radial-gradient(circle at 24% 0%,rgba(241,202,108,.08),transparent 30%),
+    rgba(3,24,40,.92)!important;
+  box-shadow:0 22px 65px rgba(0,0,0,.40),inset 0 1px rgba(255,255,255,.04)!important;
+  backdrop-filter:blur(27px)!important;
+  -webkit-backdrop-filter:blur(27px)!important;
 }
 .nav-btn{
-  min-height:61px;
+  min-height:62px!important;
   border:1px solid transparent!important;
-  border-radius:23px!important;
-  color:rgba(255,255,255,.58)!important;
+  border-radius:24px!important;
+  color:rgba(255,255,255,.60)!important;
 }
 .nav-btn .ico{
   font-size:24px!important;
@@ -2541,27 +2605,31 @@ html:not([data-view="today"]) .view.active{
   font-weight:900!important;
 }
 .nav-btn.active{
-  color:#ffe092!important;
-  border-color:rgba(240,201,111,.34)!important;
+  color:#ffe291!important;
+  border-color:rgba(241,202,108,.34)!important;
   background:
-    radial-gradient(circle at 50% 0%,rgba(255,235,169,.16),transparent 66%),
-    linear-gradient(135deg,rgba(240,201,111,.14),rgba(114,201,193,.06))!important;
-  box-shadow:0 0 20px rgba(240,201,111,.10),inset 0 1px rgba(255,255,255,.05);
+    radial-gradient(circle at 50% 0%,rgba(255,237,174,.18),transparent 66%),
+    linear-gradient(135deg,rgba(241,202,108,.15),rgba(113,206,198,.06))!important;
+  box-shadow:0 0 22px rgba(241,202,108,.11),inset 0 1px rgba(255,255,255,.055)!important;
 }
+
+/* modals / detail pages */
 .modal,.modal-shell{
   background:
-    radial-gradient(circle at 84% 6%,rgba(37,105,138,.18),transparent 23%),
-    linear-gradient(180deg,#061a2b,#06243a 48%,#041a2c)!important;
+    radial-gradient(circle at 84% 6%,rgba(42,113,148,.20),transparent 22%),
+    linear-gradient(180deg,#04192b,#05243a 48%,#031a2d)!important;
 }
 .close-btn{
-  border-color:rgba(240,201,111,.26)!important;
-  background:rgba(8,41,60,.62)!important;
-  color:#ffe09a!important;
+  border-color:rgba(241,202,108,.30)!important;
+  background:rgba(6,39,58,.66)!important;
+  color:#ffe29a!important;
+  box-shadow:0 0 17px rgba(241,202,108,.07)!important;
 }
+
 @media(max-width:430px){
   .page-head{margin-left:-16px!important;margin-right:-16px!important}
   .bottom-nav{width:calc(100% - 28px)!important}
-  .nav-btn{min-height:58px}
+  .nav-btn{min-height:59px!important}
 }
 
 </style>
