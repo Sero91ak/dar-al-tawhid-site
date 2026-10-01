@@ -2,6 +2,7 @@
   --ink:#fff;--gold:#f4d476;--gold2:#ffe5a0;--cyan:#90d7dc;
   --deep:#031828;--panel:#062641;--line:rgba(112,205,214,.22);
   --sprite:url("/kids/assets/prophet-reference-art-sprite.webp?v=1");
+  --sprite-first:url("/kids/assets/prophet-reference-first5.webp?v=1");
 }
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:#020b12;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded","Avenir Next",system-ui,sans-serif}
@@ -53,15 +54,15 @@ button{font:inherit}
 .pr-row:last-child{border-bottom:0}
 .pr-row-bg{
   position:absolute;z-index:0;inset:0;
-  background-image:var(--sprite);
+  background-image:var(--row-sprite,var(--sprite));
   background-repeat:no-repeat;
-  background-size:100% 2500%;
+  background-size:var(--row-size,100% 2500%);
   background-position:center var(--sprite-pos,0%);
   filter:saturate(.94) contrast(1.02) brightness(.66);
 }
 .pr-row-bg::before{
   content:"";position:absolute;z-index:1;left:0;top:0;width:82%;height:100%;
-  background-image:var(--sprite);background-repeat:no-repeat;background-size:100% 2500%;
+  background-image:var(--sprite);background-repeat:no-repeat;background-size:var(--row-size,100% 2500%);
   background-position:left var(--sprite-pos,0%);
   filter:saturate(.99) contrast(1.03) brightness(.96);
 }
@@ -108,7 +109,7 @@ button{font:inherit}
 .pr-detail-scene{
   position:absolute;z-index:0;inset:0;
   background-image:var(--sprite);
-  background-repeat:no-repeat;background-size:100% 2500%;background-position:center var(--sprite-pos,0%);
+  background-repeat:no-repeat;background-size:var(--row-size,100% 2500%);background-position:center var(--sprite-pos,0%);
   filter:brightness(.78) saturate(1.02) contrast(1.06);
   transform:scale(1.01);
 }
