@@ -93,25 +93,114 @@ function looksLikeLongArabicRecitation(text) {
   return (maxRun >= 8 && arabicTokens >= 16) || (arabicRatio >= 0.70 && arabicTokens >= 8);
 }
 
-export async function handleVoiceStudioWebRequest(request, env, cors) {
+export async function handleVoiceStudioWebRequest(request, env, cors, github = {}) {
   const url = new URL(request.url);
   if (!url.pathname.startsWith("/voice-studio/api")) return null;
   const rest = url.pathname.slice("/voice-studio/api".length) || "/";
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const githubGet = github.githubGet;
+  const githubPut = github.githubPut;
+  const base64ToUtf8 = github.base64ToUtf8;
 
   if (request.method === "GET" && rest === "/health") {
     const configured = isVoiceConfigured(env);
+    const githubReady = Boolean(env.GITHUB_TOKEN);
     return json({
-      ok: configured,
+      ok: configured || githubReady,
       service: "dar-voice-studio-cloud",
-      provider: configured ? "ElevenLabs Cloud" : "Cloud Voice nicht konfiguriert",
+      provider: configured ? "Cloud-Stimme + GitHub" : (githubReady ? "GitHub verbunden" : "Cloud Voice nicht konfiguriert"),
       voiceConfigured: configured,
+      githubStorage: githubReady,
+      appUrl: "https://dar-al-tawhid.de/voice-studio/",
       localEngineRequired: false,
       output: "audio/mpeg",
       ownerBatchEnabled: true
-    }, cors, configured ? 200 : 503);
+    }, cors, (configured || githubReady) ? 200 : 503);
   }
 
-  if (request.method === "POST" && rest === "/generate") {
+  if ((request.method === "GET" || request.method === "PUT") && rest === "/workspace") {
+    assertVoiceStudioOrigin(request, env);
+    if (!githubGet || !githubPut || !base64ToUtf8) {
+      return json({ ok: false, error: "GitHub-Speicher ist serverseitig nicht angebunden." }, cors, 503);
+    }
+    const path = "voice-studio/workspace.json";
+    if (request.method === "GET") {
+      try {
+        const file = await githubGet(env, owner, repo, path, branch);
+        if (!file?.content) return json({ ok: true, workspace: { version: 1, text: "", prophetId: "" }, github: true }, cors);
+        const workspace = JSON.parse(base64ToUtf8(file.content));
+        return json({ ok: true, workspace, github: true, sha: file.sha }, cors);
+      } catch (error) {
+        return json({ ok: false, error: error.message || "GitHub-Lesen fehlgeschlagen" }, cors, error.status || 502);
+      }
+    }
+    const body = await request.json().catch(() => ({}));
+    const workspace = {
+      version: 1,
+      updatedAt: new Date().toISOString(),
+      text: String(body.text || "").slice(0, 20000),
+      prophetId: String(body.prophetId || "").slice(0, 80),
+      styleMode: String(body.styleMode || "kids_story").slice(0, 40)
+    };
+    try {
+      const existing = await githubGet(env, owner, repo, path, branch);
+      await githubPut(
+        env,
+        owner,
+        repo,
+        path,
+        JSON.stringify(workspace, null, 2) + "\n",
+        "Voice Studio: Arbeitsstand in GitHub speichern [skip ci]",
+        branch,
+        existing?.sha
+      );
+      return json({ ok: true, saved: true, github: true, updatedAt: workspace.updatedAt }, cors);
+    } catch (error) {
+      return json({ ok: false, error: error.message || "GitHub-Speichern fehlgeschlagen" }, cors, error.status || 502);
+    }
+  }
+
+  if (request.method === "POST" && rest === "/prophet-publish") {
+    assertVoiceStudioOrigin(request, env);
+    if (!githubGet || !githubPut || !base64ToUtf8) {
+      return json({ ok: false, error: "GitHub-Speicher ist serverseitig nicht angebunden." }, cors, 503);
+    }
+    const body = await request.json().catch(() => ({}));
+    const itemId = String(body.id || "").trim();
+    const text = String(body.text || "").trim();
+    if (!itemId) return json({ ok: false, error: "Prophet fehlt." }, cors, 400);
+    if (text.length < 40) return json({ ok: false, error: "Erzähltext ist zu kurz." }, cors, 400);
+    const path = "kids/data/prophet-stories.json";
+    const file = await githubGet(env, owner, repo, path, branch);
+    if (!file?.content) return json({ ok: false, error: "Propheten-Datei nicht gefunden." }, cors, 404);
+    const manifest = JSON.parse(base64ToUtf8(file.content));
+    const items = Array.isArray(manifest.items) ? manifest.items : [];
+    const item = items.find((x) => String(x?.id || "") === itemId);
+    if (!item) return json({ ok: false, error: "Prophet nicht gefunden: " + itemId }, cors, 404);
+    const scripts = item.scripts && typeof item.scripts === "object" ? item.scripts : {};
+    for (const age of ["4-5", "6-8", "9-10"]) scripts[age] = text;
+    item.scripts = scripts;
+    manifest.updatedAt = new Date().toISOString().slice(0, 10);
+    try {
+      await githubPut(
+        env,
+        owner,
+        repo,
+        path,
+        JSON.stringify(manifest, null, 2) + "\n",
+        "Kids: Prophetengeschichte " + (item.name || itemId) + " · Text aus Voice Studio Cloud",
+        branch,
+        file.sha
+      );
+      return json({ ok: true, id: itemId, name: item.name || itemId, ages: ["4-5", "6-8", "9-10"], github: true, pushed: true }, cors);
+    } catch (error) {
+      return json({ ok: false, error: error.message || "GitHub-Push fehlgeschlagen" }, cors, error.status || 502);
+    }
+  }
+
+  if (request.method === "POST" && (rest === "/generate" || rest === "/generate-free")) {
     assertVoiceStudioOrigin(request, env);
     const body = await request.json().catch(() => ({}));
     const original = String(body.text || "").trim();

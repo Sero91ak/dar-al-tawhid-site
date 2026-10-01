@@ -3,6 +3,65 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<script>
+(function(){
+  var KEY="dar_voice_studio_gate_ok";
+  function isInstalledApp(){
+    try{
+      if(window.matchMedia("(display-mode: standalone)").matches)return true;
+      if(window.navigator.standalone===true)return true;
+      if(/DĀRVoiceStudioMac\//.test(navigator.userAgent||""))return true;
+      var host=location.hostname;
+      if(host==="127.0.0.1"||host==="localhost")return true;
+      if(location.port==="8787")return true;
+      if(new URLSearchParams(location.search).get("app")==="1")return true;
+    }catch(e){}
+    return false;
+  }
+  function alreadyOpen(){
+    if(isInstalledApp())return true;
+    try{return localStorage.getItem(KEY)==="1"}catch(e){return false}
+  }
+  if(alreadyOpen()){
+    try{document.documentElement.classList.add("voice-gate-open")}catch(e){}
+    return;
+  }
+  document.documentElement.style.visibility="hidden";
+  function unlock(){
+    try{localStorage.setItem(KEY,"1")}catch(e){}
+    document.documentElement.classList.add("voice-gate-open");
+    var lock=document.getElementById("darVoiceStudioLock");
+    if(lock)lock.remove();
+    document.documentElement.style.visibility="visible";
+    try{document.body.style.visibility="visible"}catch(e){}
+  }
+  function tryOpen(input){
+    var value=String(input&&input.value||"").replace(/\s+/g,"").toLowerCase();
+    if(value==="dawud26"){unlock();return}
+    if(input){input.value="";input.placeholder="Nicht korrekt"}
+  }
+  function mount(){
+    if(document.getElementById("darVoiceStudioLock"))return;
+    var wrap=document.createElement("div");
+    wrap.id="darVoiceStudioLock";
+    wrap.style.cssText="position:fixed;inset:0;z-index:2147483647;background:#0e1411;display:flex;align-items:center;justify-content:center;visibility:visible;padding:24px;";
+    wrap.innerHTML='<form id="darVoiceStudioLockForm" style="width:min(360px,100%);display:grid;gap:12px;color:#F4F1E6;font:600 15px/1.3 system-ui,sans-serif"><div style="font:800 22px/1.1 Georgia,serif">DĀR AL TAWḤĪD</div><div style="opacity:.8">Interner Bereich</div><input id="darVoiceStudioLockInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" style="min-height:46px;border-radius:12px;border:1px solid #3d5146;background:#17211B;color:#F4F1E6;padding:0 12px"><button id="darVoiceStudioLockBtn" type="button" style="min-height:46px;border-radius:999px;border:0;background:#F4F1E6;color:#17211B;font:800 15px system-ui,sans-serif">Öffnen</button></form>';
+    document.documentElement.appendChild(wrap);
+    document.documentElement.style.visibility="visible";
+    var input=document.getElementById("darVoiceStudioLockInput");
+    var btn=document.getElementById("darVoiceStudioLockBtn");
+    var form=document.getElementById("darVoiceStudioLockForm");
+    function go(ev){if(ev){ev.preventDefault();ev.stopPropagation()}tryOpen(input)}
+    if(btn)btn.addEventListener("click",go,true);
+    if(form)form.addEventListener("submit",go,true);
+    if(input)input.addEventListener("keydown",function(ev){if(ev.key==="Enter")go(ev)});
+    setTimeout(function(){try{input.focus()}catch(e){}},30);
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);
+  else mount();
+})();
+</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#071522">
 <meta name="color-scheme" content="dark">
@@ -12,7 +71,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="DĀR Voice Studio">
 <meta name="description" content="Private Sprachproduktion für DĀR AL TAWḤĪD Kids">
-<link rel="manifest" href="manifest.webmanifest?v=12">
+<link rel="manifest" href="manifest.webmanifest?v=14">
 <link rel="apple-touch-icon" href="voice-studio-icon.png?v=299">
 <link rel="icon" type="image/png" href="voice-studio-icon.png?v=299">
 <title>DĀR AL TAWḤĪD – Voice Studio</title>
@@ -55,6 +114,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-vi
 .status{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(255,255,255,.045);padding:9px 12px;border-radius:999px;font-size:12px;white-space:nowrap}
 .dot{width:8px;height:8px;border-radius:50%;background:#687b89}.dot.ok{background:#69c89d;box-shadow:0 0 0 4px rgba(105,200,157,.11)}.dot.bad{background:#df8686}
 .install-btn{display:none}
+html:not(.standalone) .install-btn{display:inline-flex}
 .update-btn{display:none;min-height:36px;padding:8px 11px;border-radius:9px;font-size:10px;font-weight:850;white-space:nowrap}
 .update-btn.available{display:inline-flex;background:linear-gradient(180deg,#d8bd79,#c7a65f);border-color:rgba(240,213,154,.5);color:#071820;box-shadow:0 7px 20px rgba(0,0,0,.16)}
 .update-btn.installing{display:inline-flex;background:rgba(217,182,111,.08);border-color:rgba(217,182,111,.26);color:#ecd59c}
@@ -603,7 +663,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.42 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.47 · GESPERRTER LINK</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -620,7 +680,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <div class="prophet-pick-head">
       <div class="prophet-pick-kicker">Kids · ein Auftrag · alle Altersstufen</div>
       <h2>Geschichten der Propheten</h2>
-      <div class="notice" style="margin:0">Namen wählen · einen Text schreiben · Audio erzeugen · beim Propheten pushen. Lesen &amp; Hören und 4–5 / 6–8 / 9–10 werden automatisch zugeordnet.</div>
+      <div class="notice" style="margin:0">Web-App: dar-al-tawhid.de/voice-studio/ · GitHub speichert den Stand. Namen wählen · einen Text schreiben · Audio erzeugen · Push je Prophet.</div>
     </div>
     <select id="prophetPickId" hidden><option value="">— wählen —</option></select>
     <select id="prophetPickAge" hidden><option value="all" selected>alle</option></select>
@@ -629,7 +689,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.42</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.46</span><span class="badge">GITHUB</span><span class="badge">INSTALLIERBAR</span></div>
   </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
@@ -872,7 +932,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.42 · lokale Produktion · Audio wird nicht in Git gespeichert</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio · Web-App · GitHub-Speicher · dar-al-tawhid.de/voice-studio/</div>
 </div>
 </div>
 
@@ -892,7 +952,70 @@ const IS_ENGINE_ORIGIN=location.port==="8787"&&/^https?:$/.test(location.protoco
 const IS_COMPANION=IS_ENGINE_ORIGIN&&!IS_LOOPBACK;
 const IS_LOCAL=IS_LOOPBACK||IS_ENGINE_ORIGIN;
 const NATIVE_MAC=/DĀRVoiceStudioMac\//.test(navigator.userAgent);
-const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
+const LOCAL_API=IS_LOCAL?"":(location.origin+"/voice-studio/api");
+const CLOUD_API=(location.hostname==="dar-al-tawhid.de"||location.hostname==="www.dar-al-tawhid.de")
+  ?"/voice-studio/api"
+  :"https://dar-al-tawhid.de/voice-studio/api";
+function studioRequest(path,options={}){
+  if(!IS_LOCAL){
+    if(path==="/prophet-stories/publish") path="/prophet-publish";
+    const url="/voice-studio/api"+path;
+    return fetch(url,{...options,mode:"cors",cache:"no-store"});
+  }
+  const url=path;
+  const base={...options,mode:"cors",cache:"no-store"};
+  try{
+    const req=new Request(url,{...base,targetAddressSpace:"loopback"});
+    return fetch(req);
+  }catch(_){
+    return fetch(url,base);
+  }
+}
+function localRequest(path,options={}){return studioRequest(path,options)}
+function cloudWorkspaceRequest(method,body){
+  const opts={method,mode:"cors",cache:"no-store",headers:{"Content-Type":"application/json"}};
+  if(body)opts.body=JSON.stringify(body);
+  return fetch(CLOUD_API+"/workspace",opts);
+}
+let workspaceSaveTimer=null,workspaceHydrated=false,githubSaveState="idle";
+function queueWorkspaceSave(){
+  if(!workspaceHydrated)return;
+  clearTimeout(workspaceSaveTimer);
+  workspaceSaveTimer=setTimeout(saveWorkspaceGithub,900);
+}
+async function saveWorkspaceGithub(){
+  const text=$("#text")?.value||"";
+  const prophetId=$("#prophetPickId")?.value||"";
+  const styleMode=$("#styleMode")?.value||"kids_story";
+  try{localStorage.setItem("dar.voice.workspace.v1",JSON.stringify({text,prophetId,styleMode}))}catch(_){}
+  try{
+    const r=await cloudWorkspaceRequest("PUT",{text,prophetId,styleMode});
+    const d=await r.json().catch(()=>({}));
+    githubSaveState=d.ok?"saved":"error";
+    if($("#engineHelp")&&d.ok)$("#engineHelp").dataset.github="ok";
+  }catch(_){githubSaveState="error"}
+}
+async function loadWorkspaceGithub(){
+  let local=null;
+  try{local=JSON.parse(localStorage.getItem("dar.voice.workspace.v1")||"null")}catch(_){}
+  try{
+    const r=await cloudWorkspaceRequest("GET");
+    const d=await r.json().catch(()=>({}));
+    const ws=d.workspace||{};
+    if(ws.text&&$("#text")&&!$("#text").dataset.userEdited){
+      $("#text").value=ws.text;
+    }else if(local?.text&&$("#text")&&!$("#text").value.trim()){
+      $("#text").value=local.text;
+    }
+    if(ws.prophetId&&$("#prophetPickId"))$("#prophetPickId").value=ws.prophetId;
+    if(ws.styleMode&&$("#styleMode"))$("#styleMode").value=ws.styleMode;
+    workspaceHydrated=true;
+    if(d.ok)githubSaveState="loaded";
+  }catch(_){
+    if(local?.text&&$("#text"))$("#text").value=local.text;
+    workspaceHydrated=true;
+  }
+}
 let nativeUpdateState="idle",nativeLatestVersion="";
 let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let studioMode="production",freeVoiceAudioUrl="",freeVoiceProgressTimer=null;
@@ -906,16 +1029,6 @@ function setMessage(text,type="bad"){
   const el=$("#error");
   el.textContent=text||"";
   el.className=text?(type==="good"?"good":type==="warn"?"warn":"bad"):"";
-}
-function localRequest(path,options={}){
-  const url=LOCAL_API+path;
-  const base={...options,mode:"cors",cache:"no-store"};
-  try{
-    const req=new Request(url,{...base,targetAddressSpace:"loopback"});
-    return fetch(req);
-  }catch(_){
-    return fetch(url,base);
-  }
 }
 function requestAudioOutput(){
   const nativeHandler=window.webkit?.messageHandlers?.darAudioOutput;
@@ -1372,6 +1485,26 @@ async function warmupModel(){
 }
 
 async function checkHealth({quiet=false}={}){
+  if(!IS_LOCAL){
+    try{
+      const r=await fetch("/voice-studio/api/health",{cache:"no-store"});
+      const d=await r.json().catch(()=>({}));
+      engineOK=!!d.ok;
+      modelReady=!!d.ok;
+      $("#engineLabel").textContent=d.ok?(d.githubStorage?"Cloud · GitHub verbunden":"Cloud verbunden"):"Cloud nicht bereit";
+      $("#engineDot").className="dot "+(engineOK?"ok":"bad");
+      $("#qaEngine").textContent=engineOK?"Cloud":"offline";
+      $("#qaEngine").className=engineOK?"good":"warn";
+      if($("#engineHelp"))$("#engineHelp").textContent="Web-App dar-al-tawhid.de/voice-studio/ · Arbeitsstand liegt in GitHub. Auf dem Mac bleibt die Serhat-Engine für lokale Stimme aktiv.";
+      if(!quiet&&engineOK)setMessage("Voice Studio läuft als App mit GitHub-Speicher.","good");
+      return engineOK;
+    }catch(_){
+      engineOK=false;modelReady=false;
+      $("#engineLabel").textContent="Cloud nicht erreichbar";
+      $("#engineDot").className="dot bad";
+      return false;
+    }
+  }
   if(!quiet){
     $("#engineLabel").textContent="Engine wird geprüft …";
     $("#engineDot").className="dot";
@@ -1697,14 +1830,14 @@ async function generateFreeVoice(){
     if(!value)throw Error("Bitte zuerst einen Text eingeben.");
     if(!engineOK){
       const ok=await checkHealth();
-      if(!ok)throw Error("Serhat Engine ist offline.");
+      if(!ok)throw Error(IS_LOCAL?"Serhat Engine ist offline.":"Cloud-App ist nicht erreichbar.");
     }
 
     btn.disabled=true;
     btn.textContent="Vorbereitung …";
-    $("#freeVoiceStatus").textContent="Serhat-Stimme wird vorbereitet …";
+    $("#freeVoiceStatus").textContent=IS_LOCAL?"Serhat-Stimme wird vorbereitet …":"Cloud-Stimme wird vorbereitet …";
     $("#freeVoiceProgress").style.width="1%";
-    await waitForModel([btn]);
+    if(IS_LOCAL)await waitForModel([btn]);
 
     timer=setInterval(async()=>{
       const st=await getEngineStatus();
@@ -1777,18 +1910,24 @@ async function generate({autoRerender=false}={}){
   try{
     if(!engineOK){
       const ok=await checkHealth();
-      if(!ok)throw Error("Serhat Engine ist offline.");
+      if(!ok)throw Error(IS_LOCAL?"Serhat Engine ist offline.":"Cloud-App ist nicht erreichbar.");
     }
 
     const text=$("#text").value.trim();
     if(!text)throw Error("Bitte zuerst einen Text eingeben.");
     const analysis=analyze(text);
 
-    await waitForModel(btns);
-    btns.forEach(b=>b.textContent="Stimme wird erzeugt …");
-    setMessage("Serhat-Stimme wird erzeugt …","warn");
+    if(!IS_LOCAL){
+      btns.forEach(b=>b.textContent="Cloud-Stimme wird erzeugt …");
+      setMessage("Audio wird in der Cloud erzeugt und der Text in GitHub gehalten.","warn");
+    }else{
+      await waitForModel(btns);
+      btns.forEach(b=>b.textContent="Stimme wird erzeugt …");
+      setMessage("Serhat-Stimme wird erzeugt …","warn");
+    }
 
     progressTimer=setInterval(async()=>{
+      if(!IS_LOCAL)return;
       const st=await getEngineStatus();
       if(!st)return;
       if(st.render_state==="rendering"){
@@ -1944,7 +2083,7 @@ $("#learnArabic").addEventListener("input",clearLearningPreview);
 
 try{$("#freeVoiceText").value=localStorage.getItem("dar.voice.freeText.v2")||""}catch(_){}
 updateFreeVoiceCounter();
-$("#text").addEventListener("input",()=>{resetAudioQA();renderAnalysis()});
+$("#text").addEventListener("input",()=>{resetAudioQA();renderAnalysis();$("#text").dataset.userEdited="1";queueWorkspaceSave()});
 $("#styleMode").addEventListener("change",()=>{resetAudioQA();manualAnalyze()});
 $("#analyzeBtn").onclick=manualAnalyze;
 $("#mobileAnalyzeBtn").onclick=manualAnalyze;
@@ -2045,8 +2184,12 @@ for(const b of [$("#analyzeBtn"),$("#mobileAnalyzeBtn")].filter(Boolean)){
 }
 
 const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
+if(isStandalone)document.documentElement.classList.add("standalone");
 const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-if(isIOS&&!isStandalone){$("#installBtn").style.display="inline-flex";$("#installBtn").textContent=IS_COMPANION?"Zum Home-Bildschirm":"Als App nutzen"}
+if(!isStandalone){
+  $("#installBtn").style.display="inline-flex";
+  $("#installBtn").textContent=isIOS?"Zum Home-Bildschirm":"App installieren";
+}
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredInstall=e;$("#installBtn").style.display="inline-flex"});
 $("#installBtn").onclick=async()=>{
   if(deferredInstall){
@@ -2056,9 +2199,13 @@ $("#installBtn").onclick=async()=>{
     $("#installBtn").style.display="none";
     return;
   }
-  if(isIOS)alert("Auf iPhone/iPad: In Safari auf Teilen tippen und anschließend „Zum Home-Bildschirm“ wählen. Danach öffnet Voice Studio wie eine eigene App.");
+  if(isIOS){
+    alert("Safari: Teilen → „Zum Home-Bildschirm“. Danach ist Voice Studio eine eigene App. Der Stand liegt in GitHub: dar-al-tawhid.de/voice-studio/");
+    return;
+  }
+  alert("Chrome/Edge: Installieren in der Adresszeile. Safari am Mac: Ablage → Zum Dock hinzufügen. Link: dar-al-tawhid.de/voice-studio/");
 };
-window.addEventListener("appinstalled",()=>{$("#installBtn").style.display="none"});
+window.addEventListener("appinstalled",()=>{$("#installBtn").style.display="none";document.documentElement.classList.add("standalone")});
 
 if(!IS_LOCAL&&"serviceWorker" in navigator){
   window.addEventListener("load",()=>navigator.serviceWorker.register("sw-v11.js",{scope:"/voice-studio/"}).catch(()=>{}));
@@ -2089,7 +2236,7 @@ if(IS_LOCAL){
   }
 }
 loadLibrary();
-checkHealth({quiet:true}).then(()=>analyzeProsody());
+loadWorkspaceGithub().then(()=>{checkHealth({quiet:true});analyzeProsody();});
 setInterval(()=>checkHealth({quiet:true}),5000);
 
 (function prophetStoryManualLoader(){
@@ -2162,7 +2309,10 @@ setInterval(()=>checkHealth({quiet:true}),5000);
     ta.placeholder="Eine Erzählung für "+label(it)+" · gilt automatisch für 4–5, 6–8 und 9–10";
     if(switched){
       const scripts=it.scripts&&typeof it.scripts==="object"?it.scripts:{};
-      ta.value=String(scripts["6-8"]||scripts["4-5"]||scripts["9-10"]||"");
+      const existing=String(ta.value||"").trim();
+      if(!existing||ta.dataset.userEdited!=="1"){
+        ta.value=String(scripts["6-8"]||scripts["4-5"]||scripts["9-10"]||existing);
+      }
     }
     const title=$("#csTitle");if(title)title.value=it.title||it.name||"";
     const prophet=$("#csProphet");if(prophet)prophet.value=it.id||"";
@@ -2195,6 +2345,8 @@ setInterval(()=>checkHealth({quiet:true}),5000);
         items=d.items||[];
       }
       pack=items.slice().sort((a,b)=>Number(a.displayOrder||99)-Number(b.displayOrder||99));
+      const storedId=$("#prophetPickId").value;
+      if(storedId) lastId=storedId;
       fillList();
     }catch(e){console.warn("[DĀR Voice] Prophet stories library",e)}
   }
