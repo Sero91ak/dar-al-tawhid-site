@@ -56,8 +56,8 @@
 <link rel="stylesheet" href="/assets/dar-app-chrome.css?v=1">
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
-<script src="/test/assets/dar-noble-3d-icons.js?v=1158"></script><!-- DAR_NOBLE_3D_HEAD -->
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1158";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script src="/test/assets/dar-noble-3d-icons.js?v=1159"></script><!-- DAR_NOBLE_3D_HEAD -->
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1159";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1060";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 
 <script>
@@ -10539,7 +10539,7 @@ window.DAR_ANALYTICS_CONFIG={
 <script src="/test/assets/test-update-surface.js?v=3"></script>
 <script src="/assets/fold-split.js?v=4" defer></script>
 <script src="/assets/scholars-index.js?v=589" defer></script>
-<script src="/test/assets/prophets/prophets.js?v=35" defer></script>
+<script src="/test/assets/prophets/prophets.js?v=36" defer></script>
 <script src="/test/assets/dar-quran-audio-pack.js?v=1063" defer></script>
 <script src="/test/assets/dar-quran-player.js?v=981" defer></script>
 <script src="/test/assets/dar-quran-learn-studio.js?v=3" defer></script>
@@ -21091,7 +21091,7 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 </nav>
 </div>
 <script>!function(){try{var n=document.getElementById("bottomNav"),d=document.getElementById("appChromeDock"),q=document.getElementById("quickAccessLayer"),s=document.getElementById("bottomNavSecondary");var isTest=location.pathname.indexOf("/test/")===0||location.pathname==="/test";if(s){if(isTest){s.setAttribute("data-bottom-nav","ilm");s.setAttribute("aria-label","ʿIlm");s.innerHTML='<span class="nav-icon nav-icon--emoji" aria-hidden="true" style="width:36px;height:36px;min-width:36px;min-height:36px;padding:3px;box-sizing:border-box;overflow:hidden;display:grid;place-items:center"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/ilm.png?v=1089" alt="" decoding="sync" fetchpriority="high" style="width:100%;height:100%;object-fit:contain"></span><span>ʿIlm</span>'}else{s.setAttribute("data-bottom-nav","quiz");s.setAttribute("aria-label","Quiz");s.innerHTML='<span class="nav-icon nav-icon--emoji" aria-hidden="true"><img class="dar3d-icon" src="/test/assets/dar-3d-icons/quiz.png?v=1089" alt="" decoding="sync" fetchpriority="high"></span><span>Quiz</span>'}}if(!n||!d)return;if(n.parentElement!==d)d.appendChild(n);if(d.parentElement!==document.body)document.body.appendChild(d);if(q&&q.parentElement!==document.body)document.body.appendChild(q);document.body.classList.add("has-bottom-nav")}catch(e){}}();</script>
-<script src="/test/assets/dar-noble-3d-icons.js?v=1158"></script><!-- DAR_NOBLE_3D_TEST -->
+<script src="/test/assets/dar-noble-3d-icons.js?v=1159"></script><!-- DAR_NOBLE_3D_TEST -->
 <script>document.documentElement.classList.add("dar-test-performance-v1");</script>
 <script>!function(){try{if(!/DarAlTawhid-iOS/i.test(String(navigator.userAgent||"")))return;if(document.documentElement.classList.contains("dar-ios-native-tabs"))return;function show(){try{if(document.documentElement.classList.contains("is-quran-player-route")||document.body.classList.contains("dar-quran-player-open"))return;document.documentElement.classList.remove("dar-soft-booting");var n=document.getElementById("bottomNav");if(!n)return;n.removeAttribute("hidden");n.style.setProperty("display","flex","important");n.style.setProperty("visibility","visible","important");n.style.setProperty("opacity","1","important");n.style.setProperty("pointer-events","auto","important");n.style.setProperty("z-index","80","important");document.body&&document.body.classList.add("has-bottom-nav")}catch(e){}}show();document.addEventListener("DOMContentLoaded",show);setTimeout(show,200);setTimeout(show,800);setTimeout(show,2000)}catch(e){}}();</script>
 <div class="float-actions" id="floatActions" hidden aria-hidden="true" data-mode="disabled">
@@ -27719,7 +27719,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1158";
+const APP_BUILD_ID="app-shell-v1159";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -36488,51 +36488,43 @@ html[data-theme="dar-al-layl"] .header-prayer-hub .header-prayer-name,
 html[data-theme="dar-al-layl"] .header-prayer-hub__status{color:#F1EDE3!important;-webkit-text-fill-color:#F1EDE3!important}
 html[data-theme="dar-al-layl"] .header-prayer-hub .header-prayer-hour{color:#E8D7B3!important;-webkit-text-fill-color:#E8D7B3!important}
 </style>
-<style id="dar-3d-restore-v1158">
-html[data-theme] body.is-home-route #appView .home-v380-quran-hero__mark,
-html[data-theme] body.is-home-route #appView .home-tawhid-entry__icon{
-  display:grid!important;visibility:visible!important;opacity:1!important;
-  position:absolute!important;z-index:4!important;top:50%!important;right:8px!important;left:auto!important;
-  width:76px!important;height:76px!important;margin:0!important;padding:0!important;
-  transform:translateY(-50%)!important;overflow:visible!important;pointer-events:none!important;
-  background:transparent!important;border:0!important;box-shadow:none!important;
+<style id="dar-3d-restore-v1159">
+html .more-feature-row .feature-icon,
+html .feature-card .feature-icon{
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  background-size:32px 32px!important;
 }
-html[data-theme] body.is-home-route #appView .home-v380-quran-hero.home-v380-quran-hero--reading::after{
-  content:""!important;display:block!important;opacity:1!important;z-index:1!important;
-  background:url("/test/assets/dar-3d-icons/quran.png?v=1158") center/contain no-repeat!important;
-}
-html[data-theme] body.is-home-route #appView .home-tawhid-entry.dar-click-glow::after{
-  content:""!important;display:block!important;opacity:1!important;z-index:1!important;
-  background:url("/test/assets/dar-3d-icons/ilm.png?v=1158") center/contain no-repeat!important;
-}
-html[data-theme] body.is-home-route #appView .home-v380-post-preview::after{
-  opacity:1!important;width:64px!important;height:64px!important;
-  background:url("/test/assets/dar-3d-icons/posts.png?v=1158") center/contain no-repeat!important;
-}
-html[data-theme] body.is-home-route #appView .home-v380-lib-card[data-nav="bibliothek"]::after{
-  opacity:1!important;
-  background:url("/test/assets/dar-3d-icons/library.png?v=1158") center/contain no-repeat!important;
-}
-html[data-theme] body.is-home-route #appView .home-v380-lib-card[data-nav="books"]::after{
-  opacity:1!important;
-  background:url("/test/assets/dar-3d-icons/ilm.png?v=1158") center/contain no-repeat!important;
-}
-html img.dar3d-icon{
-  display:block!important;visibility:visible!important;opacity:1!important;
-  width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;
-  object-fit:contain!important;
+html .more-feature-row[data-nav="propheten"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/prophets.png?v=1159")!important}
+html .more-feature-row[data-nav="frauen"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/frauen.png?v=1159")!important}
+html .more-feature-row[data-nav="feed"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/posts.png?v=1159")!important}
+html .more-feature-row[data-nav="ilm"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/ilm.png?v=1159")!important}
+html .more-feature-row[data-nav="quiz"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/quiz.png?v=1159")!important}
+html .more-feature-row[data-nav="topics"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/ilm.png?v=1159")!important}
+html .more-feature-row[data-nav="quran"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/quran.png?v=1159")!important}
+html .more-feature-row[data-nav="quran-player"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/headphones.png?v=1159")!important}
+html .more-feature-row[data-nav="bibliothek"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/library.png?v=1159")!important}
+html .more-feature-row[data-nav="duas"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/dua.png?v=1159")!important}
+html .more-feature-row[data-nav="scholars"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/scholars.png?v=1159")!important}
+html .more-feature-row[data-nav="books"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/library.png?v=1159")!important}
+html .more-feature-row[data-nav="hadith"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/hadith.png?v=1159")!important}
+html .more-feature-row[data-nav="prayer"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/prayer.png?v=1159")!important}
+html .more-feature-row[data-nav="jummah"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/jummah.png?v=1159")!important}
+html .more-feature-row[data-nav="qibla"] .feature-icon{background-image:url("/test/assets/dar-3d-icons/compass.png?v=1159")!important}
+html .more-feature-row .feature-icon img.dar3d-icon,
+html .feature-card .feature-icon img.dar3d-icon{
+  width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;
+  max-width:32px!important;max-height:32px!important;display:block!important;opacity:1!important;
+  object-fit:contain!important;position:relative!important;z-index:1!important;
 }
 html .prophets-row__icon,html .prophets-detail__emoji{
   display:grid!important;place-items:center!important;overflow:hidden!important;
   width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;
 }
 html .prophets-row__icon img.dar3d-icon,html .prophets-detail__emoji img.dar3d-icon{
-  width:100%!important;height:100%!important;object-fit:cover!important;border-radius:50%!important;
+  width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;
+  object-fit:cover!important;border-radius:50%!important;display:block!important;opacity:1!important;
 }
-html #bottomNav .nav-icon,html #bottomNav .nav-icon img.dar3d-icon{
-  display:grid!important;visibility:visible!important;opacity:1!important;
-}
-html #bottomNav .nav-icon img.dar3d-icon{display:block!important;width:100%!important;height:100%!important}
 </style>
 <style id="salbei-elfenbein-contrast-v1151">
 /* Salbei Elfenbein: dunkle Tinte auf hellem Grund, keine Kästen hinter dem Inhalt. */
@@ -36619,39 +36611,4 @@ html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .top-sh
   backdrop-filter:none!important;
 }
 </style>
-<style id="test-refresh-bar-v1152">
-#darTestRefreshBar{
-  position:fixed;z-index:100000;left:0;right:0;
-  bottom:calc(78px + env(safe-area-inset-bottom,0px));
-  display:flex;justify-content:center;pointer-events:none;
-}
-#darTestRefreshBar button{
-  pointer-events:auto;min-height:46px;padding:0 22px;border-radius:999px;
-  border:1px solid #1C2E24;background:#17211B;color:#F7F4EA;
-  font:800 15px/1 system-ui,sans-serif;letter-spacing:.01em;
-  box-shadow:0 10px 24px rgba(23,33,27,.28);
-}
-</style>
-<script>
-(function(){
-  if(String(location.pathname||"").indexOf("/test")!==0)return;
-  function mount(){
-    if(document.getElementById("darTestRefreshBar"))return;
-    var bar=document.createElement("div");
-    bar.id="darTestRefreshBar";
-    var button=document.createElement("button");
-    button.type="button";
-    button.textContent="Aktualisieren";
-    button.setAttribute("aria-label","Test-App aktualisieren");
-    button.onclick=function(){
-      try{if(typeof hardRefreshApp==="function"){hardRefreshApp();return;}}catch(e){}
-      location.reload();
-    };
-    bar.appendChild(button);
-    (document.body||document.documentElement).appendChild(bar);
-  }
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);
-  else mount();
-})();
-</script>
 </html>

@@ -993,7 +993,7 @@
     }
     return (
       '<button type="button" class="prophets-spotlight more-feature-row" data-nav="propheten" data-feature-search="die propheten anbiya quran sunnah ueberlieferungen lernen wissen musa" aria-label="Die Propheten öffnen">' +
-      '<span class="feature-icon prophets-spotlight__icon" aria-hidden="true">' + prophetIconHtml("prophets") + "</span>" +
+      '<span class="feature-icon prophets-spotlight__icon" aria-hidden="true">' + prophetIconHtml("propheten") + "</span>" +
       '<span class="prophets-spotlight__body">' +
       "<h4>Die Propheten <span class=\"feature-badge\">Wissen</span></h4>" +
       '<p><span class="prophets-spotlight__ar-inline" lang="ar" dir="rtl">الأنبياء</span>' +
