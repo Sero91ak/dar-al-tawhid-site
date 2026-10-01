@@ -120,8 +120,22 @@ function closeStory(){
  active=null;
 }
 function preparedText(item,text){
- const honor=item.id==="muhammad"?"صلى الله عليه وسلم":"عليه السلام";let v=String(text);
- v=v.split(item.name+" "+item.honorific).join(item.nameAr+" "+honor);v=v.split(item.name).join(item.nameAr);
+ let v=String(text);
+ items.slice().sort((a,b)=>b.name.length-a.name.length).forEach(p=>{
+   const honor=p.id==="muhammad"?"صلى الله عليه وسلم":"عليه السلام";
+   v=v.split(p.name+" "+p.honorific).join(p.nameAr+" "+honor);
+   v=v.split(p.name).join(p.nameAr);
+ });
+ const fusha=[
+   ["Banū Isrāʾīl","بنو إسرائيل"],["Israʾīliyyāt","إسرائيليات"],["al-Jūdī","الجودي"],
+   ["Tawḥīd","التوحيد"],["Qurʾān","القرآن"],["Firʿawn","فرعون"],["Shayṭān","الشيطان"],
+   ["Ṣalāh","الصلاة"],["Zakāh","الزكاة"],["Duʿāʾ","الدعاء"],["Ṣabr","الصبر"],
+   ["Kaʿbah","الكعبة"],["Tawrāh","التوراة"],["Injīl","الإنجيل"],["Zabūr","الزبور"],
+   ["Madyan","مدين"],["Jālūt","جالوت"],["Ṭuwā","طوى"],["Sabaʾ","سبأ"],
+   ["Baʿl","بعل"],["Thamūd","ثمود"],["ʿĀd","عاد"],["Īmān","الإيمان"],
+   ["Hiǧrah","الهجرة"],["Sīrah","السيرة"],["Maryam","مريم"]
+ ];
+ fusha.forEach(pair=>{v=v.split(pair[0]).join(pair[1])});
  return v.replace(/\s+/g," ").trim();
 }
 async function getVoiceBlob(item,text){
