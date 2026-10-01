@@ -873,3 +873,43 @@ html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route :is(
 ) :is(p,h2,h3,h4,span){
   text-shadow:none!important;
 }
+
+/* v3 · Helle Schrift auf hellem Grund wird dunkel. Kästen hinter dem Inhalt weg. */
+html[data-theme="light"][data-theme-variant="salbei"] body :is(
+  h1,h2,h3,h4,.salam,.intro,.intro strong,.brand-title-refined,.brand-kicker-row small,
+  .isnad-words,.isnad-quote,.isnad-speaker,.statement,.header-prayer-name,.header-prayer-hour,
+  .header-prayer-zone__countdown,.header-prayer-primary,.header-prayer-secondary,
+  .header-prayer-zone__caption,.header-prayer-zone__count-label,.header-prayer-hub__status,
+  .header-prayer-hub__date,.header-prayer-hub__hijri,.header-prayer-hub__clock,.header-prayer-hub__place,
+  .header-prayer-hub__empty,.home-start-title,.home-premium-access__title,.home-tawhid-entry__copy h3,
+  .home-premium-access-card h3,.home-v380-section-title,.home-v380-quran-hero__title,
+  .home-v380-open-row__title,.home-v380-post-title,.home-discover-pdf-title
+){
+  color:#17211B!important;
+  -webkit-text-fill-color:#17211B!important;
+  text-shadow:none!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body :is(
+  .intro,.isnad-source,.header-prayer-hub__date,.header-prayer-hub__hijri,.header-prayer-hub__clock,
+  .header-prayer-hub__place,.home-tawhid-entry__copy p,.home-premium-access-card p,
+  .home-v380-quran-hero__meta,.home-v380-quran-hero__when,.home-v380-open-row__excerpt,
+  .home-v380-post-excerpt,.home-discover-pdf-meta
+){
+  color:#24362B!important;
+  -webkit-text-fill-color:#24362B!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface,
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .top-shell.theme-hero-shell .header.theme-hero-surface::before,
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .top-shell .hero-text,
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route .header-prayer-hub,
+html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route :is(
+  .home-premium-access,.home-tawhid-entry,.home-premium-access-card,.home-premium-mini,
+  .home-v380-quran-hero,.home-v380-open-row,.home-v380-post-preview,.home-discover-pdf-card,.isnad
+){
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border-color:transparent!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
