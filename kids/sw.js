@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v96";
+const CACHE_NAME="dar-al-tawhid-kids-v97";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -12,8 +12,8 @@ const PRECACHE=[
   "/kids/quiz-owner-voice.js?v=1",
   "/kids/data/stories-authentic.json",
   "/kids/data/prophet-stories.json",
-  "/kids/prophet-stories.css?v=1",
-  "/kids/prophet-stories.js?v=1",
+  "/kids/prophet-stories.css?v=2",
+  "/kids/prophet-stories.js?v=2",
   "/kids/data/verified-content.json",
   "/kids/icons/icon-192.png?v=logo28",
   "/kids/icons/icon-512.png?v=logo28",
@@ -94,7 +94,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname==="/kids/version.json"){
+  if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"){
     event.respondWith(networkFirst(request));
     return;
   }
