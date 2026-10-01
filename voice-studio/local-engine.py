@@ -2828,21 +2828,24 @@ def mlx_token_budget(text:str,language_id:str):
     # Backward-compatible interner Alias.
     return generation_token_budget(text,language_id)
 
-def generation_timeout_seconds(text:str,language_id:str):
+def generation_timeout_seconds(text:str,language_id:str,mode:str=""):
     forced=str(os.environ.get("DAR_VOICE_SEGMENT_TIMEOUT_SECONDS","")).strip()
     if forced:
         try:
             # Auch ein manuell gesetzter Wert darf einen einzelnen Satz nicht
             # minutenlang blockieren. Rescue bleibt abschnittsweise.
-            return max(20.0,min(75.0,float(forced)))
+            return max(18.0,min(75.0,float(forced)))
         except Exception:
             pass
     chars=len(re.sub(r"\s+","",str(text or "")))
     if language_id=="ar":
-        return max(26.0,min(48.0,18.0+chars*0.30))
-    # Vorher durfte ein deutscher 140-Zeichen-Block bis zu ~83 s hängen.
-    # Jetzt greift der Watchdog deutlich früher und rettet nur diesen Abschnitt.
-    return max(30.0,min(55.0,20.0+chars*0.22))
+        return max(24.0,min(46.0,17.0+chars*0.28))
+    if mode=="kids_story":
+        # Bei Kinder-Langtexten ist "scheinbar hängt" meist ein einzelner
+        # Sampling-Ausreißer. Nach spätestens ~36 s wird nur dieser Abschnitt
+        # beendet, kleiner geteilt und fortgesetzt.
+        return max(18.0,min(36.0,14.0+chars*0.16))
+    return max(28.0,min(52.0,19.0+chars*0.20))
 
 def _mlx_process_main(conn,model_id:str):
     """Persistenter MLX-Worker. Nur dieser Prozess besitzt Modell + Metal-Kontext."""
@@ -3121,12 +3124,10 @@ def render_with_mlx(model,text:str,language_id:str,mode:str):
     p=prosody_settings(mode,language_id,text)
     budget=mlx_token_budget(text,language_id)
     if language_id=="de" and mode=="kids_story":
-        # Kinder-Geschichten brauchen bei kurzen natürlichen Sätzen genug Reserve,
-        # dürfen bei Ausreißern aber weiterhin nie in einen 1000-Token-Runaway laufen.
-        # 220 vermeidet falsche Token-Limits bei ruhiger Erzählprosodie; 300 bleibt
-        # der harte Deckel für lange Satzblöcke.
-        budget=max(220,min(int(budget),300))
-    timeout_s=generation_timeout_seconds(text,language_id)
+        # Etwas mehr Reserve für zusammenhängende Erzählblöcke, aber weiterhin
+        # deutlich unter dem ungebremsten Upstream-Limit von 1000 Tokens.
+        budget=max(240,min(max(int(budget),int(len(str(text))*1.65)),380))
+    timeout_s=generation_timeout_seconds(text,language_id,mode)
     msg=_mlx_request({
         "op":"render",
         "ref_path":str(ref),
@@ -3369,17 +3370,47 @@ def split_language_segments(text:str):
             merged.append((lang,value))
     return merged
 
-def build_render_plan(text:str):
+def _coalesce_kids_story_plan(plan,max_chars:int=230,max_sentences:int=2):
+    """Reduziert unnötige Modellaufrufe bei langen Kinder-Geschichten.
+
+    Nur direkt benachbarte deutsche Abschnitte werden gebündelt. Arabische
+    Fachbegriffe, Audio-Locks und Sprachwechsel bleiben unangetastet, damit die
+    bestätigte Aussprache exakt erhalten bleibt. Bei einem Fehler kann der
+    gebündelte Block durch die bestehende Rescue-Logik wieder kleiner zerlegt werden.
+    """
+    compact=[]
+    for lang,chunk in plan:
+        value=str(chunk or "").strip()
+        if not value:
+            continue
+        if lang!="de":
+            compact.append((lang,value))
+            continue
+
+        if compact and compact[-1][0]=="de":
+            prev=compact[-1][1]
+            joined=(prev+" "+value).strip()
+            sentence_count=len(re.findall(r"[.!?؟…](?:\s|$)",joined))
+            if len(joined)<=int(max_chars) and sentence_count<=int(max_sentences):
+                compact[-1]=("de",joined)
+                continue
+        compact.append(("de",value))
+    return compact
+
+def build_render_plan(text:str,mode:str=""):
     plan=[]
+    story_mode=(str(mode or "")=="kids_story")
     for kind,value in split_audio_locked_spans(text):
         if kind=="lock":
             plan.append(("ar",value.strip()))
             continue
         for lang,segment in split_language_segments(value):
-            max_chars=90 if lang=="ar" else 140
+            max_chars=96 if lang=="ar" else (210 if story_mode else 140)
             for chunk in split_chunks(segment,max_chars=max_chars):
                 if chunk.strip():
                     plan.append((lang,chunk.strip()))
+    if story_mode:
+        plan=_coalesce_kids_story_plan(plan,max_chars=230,max_sentences=2)
     return plan
 
 def _expand_free_voice_phrase_plan(lang:str,segment:str):
@@ -3890,9 +3921,9 @@ def render_with_model(model,text:str,language_id:str,mode:str="narration"):
     # ohne die restliche Chatterbox-Pipeline oder Voice-Conditioning zu verändern.
     cap=generation_token_budget(text,language_id)
     if language_id=="de" and mode=="kids_story":
-        # Gleiche Reserve wie im MLX-Pfad, damit ein Backend-Wechsel nicht erneut
-        # am zu knappen Ceiling desselben kurzen Erzählsatzes scheitert.
-        cap=max(220,min(int(cap),300))
+        # Gleiche Reserve wie im MLX-Pfad, damit ein einzelner Fallback nicht
+        # erneut am Ceiling desselben Erzählblocks scheitert.
+        cap=max(240,min(max(int(cap),int(len(str(text))*1.65)),380))
     original_inference=getattr(getattr(model,"t3",None),"inference",None)
     state={"tokens":0,"hit":False}
     if original_inference is not None:
@@ -4328,6 +4359,10 @@ def split_rescue_chunks(text:str,force:bool=False):
     min_chars=max(60,int(QA_CONFIG.get("rescueMinChars",90)))
     if not force and len(words)<min_words and len(value)<min_chars:
         return [value]
+
+    sentence_parts=[p.strip() for p in re.split(r"(?<=[.!?؟…])\s+",value) if p.strip()]
+    if len(sentence_parts)>=2 and max(map(len,sentence_parts))<len(value)*0.86:
+        return sentence_parts
 
     parts=[p.strip() for p in re.split(r"(?<=[,،;؛:])\s+",value) if p.strip()]
     if len(parts)>=2 and max(map(len,parts))<len(value)*0.82:
@@ -4903,6 +4938,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         found=phrase_found+learned_found+word_found
     else:
         speak,found=prepare(text)
+
+    doc_mode=resolve_prosody_mode(text,style)
     if free_mode and free_pronunciation:
         synthesis_text,plan,flow_preflight=prepare_flow_text(
             text,speak,build_free_pronunciation_render_plan
@@ -4910,7 +4947,9 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
     elif free_mode:
         synthesis_text,plan,flow_preflight=prepare_flow_text(text,speak,build_free_render_plan)
     else:
-        synthesis_text,plan,flow_preflight=prepare_flow_text(text,speak,build_render_plan)
+        synthesis_text,plan,flow_preflight=prepare_flow_text(
+            text,speak,lambda value: build_render_plan(value,doc_mode)
+        )
 
     if not RENDER_LOCK.acquire(blocking=False):
         raise RuntimeError("Es läuft bereits eine Audio-Erzeugung.")
@@ -4918,8 +4957,6 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
     if not free_mode:
         # Nur der Produktionsbereich verwaltet neue bestätigbare Audio-Locks.
         discard_pending_audio_locks()
-
-    doc_mode=resolve_prosody_mode(text,style)
     master_forms={
         str(r.get("tts_text",""))
         for r in found
@@ -5029,6 +5066,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         execution_order=list(range(total))
 
         for processed_pos,original_idx in enumerate(execution_order,1):
+            restore_primary_after_segment=False
             lang,chunk=plan[original_idx]
             idx=original_idx+1
             pct=8+int(((processed_pos-1)/max(1,total))*78)
@@ -5106,18 +5144,17 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                         metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
                     except Exception as first_error:
                         mlx_recovered=False
-                        if getattr(model,"_dar_backend","torch")=="mlx" and "generation_timeout" in str(first_error):
-                            # Ein einzelner festhängender Satz darf keinen ganzen Langtext
-                            # abbrechen. Der Watchdog hat den Worker bereits hart beendet:
-                            # Metal/MLX frisch starten und genau diesen Abschnitt erneut
-                            # durch die bestehende QA-/Feinsegmentierungs-Rettung schicken.
-                            print("[DĀR Voice] MLX watchdog: restart + segment rescue:",first_error,flush=True)
+                        if getattr(model,"_dar_backend","torch")=="mlx":
+                            # Ein einzelner MLX-Ausreißer darf niemals den ganzen Langtext
+                            # dauerhaft auf das langsamere MPS-Backend ziehen. MLX einmal
+                            # frisch starten und nur denselben Abschnitt erneut versuchen.
+                            print("[DĀR Voice] MLX segment rescue: restart + retry:",first_error,flush=True)
                             set_status(
                                 progress=pct,
                                 message=f"{lang_label} · Watchdog · MLX wird neu gestartet, Abschnitt {idx}/{total} bleibt erhalten …"
                             )
                             try:
-                                _stop_mlx_process("watchdog recovery before segment retry")
+                                _stop_mlx_process("segment recovery before MLX retry")
                                 retry_model=MLXModelAdapter(_start_mlx_process())
                                 segment_started=time.perf_counter()
                                 if bridge_direction and lang=="de" and not audio_lock_key:
@@ -5129,7 +5166,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                                         retry_model,chunk,lang,mode,critical,seed_base=core_seed+313
                                     )
                                 metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
-                                metrics["watchdog_restart"]=True
+                                metrics["mlx_worker_restart"]=True
                                 model=retry_model
                                 mlx_recovered=True
                                 set_status(
@@ -5163,6 +5200,10 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                                     )
                                 metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
                                 metrics["mlx_fallback_after_error"]=type(first_error).__name__
+                                # Dieser Fallback gilt nur für den aktuellen Abschnitt.
+                                # Beim nächsten noch nicht gecachten Abschnitt wird MLX
+                                # automatisch wieder als Primärengine versucht.
+                                restore_primary_after_segment=True
                             elif MODEL_DEVICE=="mps":
                                 print("[DĀR Voice] MPS render failed, retry CPU:",first_error,flush=True)
                                 set_status(
@@ -5209,6 +5250,14 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                 segment_elapsed_seconds=0,
                 message=f"{lang_label} · {mode} · Abschnitt {idx}/{total} fertig"
             )
+            if restore_primary_after_segment and MLX_ENABLED:
+                # Den langsamen MPS-Fallback nicht für alle folgenden Abschnitte
+                # behalten. Bereits erzeugtes Audio bleibt gespeichert; nur das
+                # Modell wird für den nächsten echten Render wieder auf MLX gesetzt.
+                model=None
+                set_status(
+                    message=f"Abschnitt {idx}/{total} gesichert · nächster Abschnitt wieder mit MLX/Metal"
+                )
 
         outputs=[x for x in outputs if x is not None]
         qa_segments=[x for x in qa_segments if x is not None]
@@ -5958,7 +6007,7 @@ class H(BaseHTTPRequestHandler):
                 if not text: raise ValueError("Text fehlt.")
                 prepared,found=prepare(text)
                 mode=resolve_prosody_mode(text,style)
-                plan=build_render_plan(prepared)
+                plan=build_render_plan(prepared,mode)
                 unresolved=detect_unresolved_islamic_terms(text)
                 return self.send_json(200,{
                     "ok":True,
