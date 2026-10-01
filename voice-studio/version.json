@@ -275,8 +275,8 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "beff741fc723cf93182c4d0374ba8e764e64dc6e",
-    "validatedAt": "2026-10-01T15:57:00+02:00",
+    "validatedCommit": "5d2c5eb3d29b0a5c6ec448b6fcf5881fd6de43da",
+    "validatedAt": "2026-10-01T16:15:00+02:00",
     "freeVoiceIsolation": true,
     "mainAppBrandingUnchanged": true,
     "prophetStoryLocalBatchSmoke": true,
@@ -288,7 +288,8 @@
     "khadijahHonorificValidation": true,
     "nativeUpdaterCurlFallback": true,
     "updaterTransportTripleFallback": true,
-    "updaterUrlSessionFailureRecovery": true
+    "updaterUrlSessionFailureRecovery": true,
+    "directUpdaterSelfRepairOnCheckFailure": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -574,7 +575,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "beff741fc723cf93182c4d0374ba8e764e64dc6e",
+  "releaseRef": "5d2c5eb3d29b0a5c6ec448b6fcf5881fd6de43da",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.48 repariert die native Update-Prüfung: GitHub API und Website bleiben Primärquellen; bei URLSession-Fehlern fällt die Mac-App automatisch auf /usr/bin/curl zurück.",
