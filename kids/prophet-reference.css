@@ -6,7 +6,12 @@
   --gold:#f6d36b;
   --text:#f8fcff;
   --muted:#bcecff;
-  --first5:url("/kids/assets/prophet-fullbleed-first5.webp?v=1");
+  --all25:url("/kids/assets/prophet-fullbleed-all25.webp?v=1");
+  --hero1:url("/kids/assets/prophet-fullbleed-heroes-g1.webp?v=1");
+  --hero2:url("/kids/assets/prophet-fullbleed-heroes-g2.webp?v=1");
+  --hero3:url("/kids/assets/prophet-fullbleed-heroes-g3.webp?v=1");
+  --hero4:url("/kids/assets/prophet-fullbleed-heroes-g4.webp?v=1");
+  --hero5:url("/kids/assets/prophet-fullbleed-heroes-g5.webp?v=1");
   --nuhHero:url("/kids/assets/prophet-fullbleed-nuh-hero.webp?v=1");
 }
 *{box-sizing:border-box}
@@ -99,9 +104,9 @@ button{font:inherit;color:inherit}
   position:absolute;
   z-index:0;
   inset:0;
-  background-image:var(--first5);
+  background-image:var(--all25);
   background-repeat:no-repeat;
-  background-size:100% 500%;
+  background-size:100% 2500%;
   background-position:center var(--sprite-pos,0%);
   filter:saturate(1.04) contrast(1.025) brightness(.98);
   transform:scale(1.002);
@@ -366,4 +371,11 @@ button{font:inherit;color:inherit}
   .hero-copy p{font-size:22px}
   .hero-pills{left:64px;right:64px;bottom:24px}
   .reading-card{margin-left:18px;margin-right:18px;font-size:21px}
+}
+
+/* Nūḥ uses the dedicated ark composition from the approved reference. */
+.detail-hero[data-id="nuh"]{
+  background-image:var(--nuhHero);
+  background-size:cover;
+  background-position:center 46%;
 }
