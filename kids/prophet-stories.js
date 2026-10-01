@@ -2,7 +2,7 @@
 "use strict";
 
 const DATA_URL="/kids/data/prophet-stories.json";
-const MODE_KEY="kids.contentMode.v3";
+const MODE_KEY="kids.contentMode.v2";
 const DONE_PREFIX="kids.prophetStory.done.";
 let items=[],active=null,activeText="",playing=false,busy=false;
 const audio=new Audio();
@@ -11,19 +11,13 @@ const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;"
 
 function age(){return String($(".app")?.getAttribute("data-age")||"6–8")}
 function ageKey(){return age().replace("–","-")}
-function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
+function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"both"}catch(_){return"both"}}
 function setMode(v){try{localStorage.setItem(MODE_KEY,v)}catch(_){}renderModeButtons();applyMode()}
-const PROPHET_ORDER=[
-  "adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub",
-  "yusuf","ayyub","shuayb","musa","harun","dhul-kifl","dawud","sulayman",
-  "ilyas","alyasa","yunus","zakariyya","yahya","isa","muhammad"
-];
 function uniqueItems(list){
   const seen=new Set();
-  const order=new Map(PROPHET_ORDER.map((id,index)=>[id,index]));
   return (Array.isArray(list)?list:[])
     .filter(x=>x&&x.id&&!seen.has(x.id)&&(seen.add(x.id),true))
-    .sort((a,b)=>(order.get(a.id)??999)-(order.get(b.id)??999));
+    .sort((a,b)=>Number(a.displayOrder||999)-Number(b.displayOrder||999));
 }
 function honorific(item){
   if(!item)return"";
