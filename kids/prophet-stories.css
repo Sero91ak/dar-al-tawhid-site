@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD Kids — Prophet Stories v9
+/* DĀR AL TAWḤĪD Kids — Prophet Stories v10
    Approved cinematic reference implemented with REAL transparent 3D symbols
    and REAL generated scenic backgrounds. */
 
@@ -714,4 +714,337 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
   .ps-hero{min-height:680px}
   .ps-hero-copy{left:26px;right:26px}
   .ps-body{padding-left:26px;padding-right:26px}
+}
+
+/* ===== APPROVED REFERENCE LOCK v10 ===== */
+/* Exact visual lock to the two approved cinematic reference renders. */
+
+#view-stories.ps-world-view{
+  --gold:#f2c96a;
+  --gold2:#ffe59a;
+  --cyan:#8fd9db;
+  --deep:#031a2d;
+}
+
+/* Opening hero: cinematic, compact, no card feeling */
+.ps-library-hero{
+  min-height:292px;
+  background-position:center 48%;
+  box-shadow:0 14px 34px rgba(0,0,0,.24);
+}
+.ps-library-hero::before{
+  background:
+    linear-gradient(90deg,rgba(3,21,37,.94) 0%,rgba(4,28,46,.72) 39%,rgba(4,28,46,.22) 68%,rgba(4,28,46,.03) 100%),
+    linear-gradient(180deg,rgba(2,16,29,.02),rgba(2,16,29,.08) 64%,rgba(2,16,29,.38));
+}
+.ps-library-hero-copy{
+  width:58%;
+  min-height:292px;
+  padding:20px 0 18px 16px;
+}
+.ps-library-hero h2{margin:7px 0 9px;line-height:.93}
+.ps-library-hero h2 span,
+.ps-library-hero h2 strong{font-size:clamp(37px,9.8vw,55px)}
+.ps-library-hero p{font-size:12.5px;line-height:1.43}
+.ps-hero-stats{margin-top:12px;gap:6px}
+.ps-hero-stats span{min-height:27px;padding:5px 9px;font-size:8.8px}
+.ps-library-hero-art{width:49%;right:-3px}
+.ps-library-hero-art::before{inset:38px -14px 28px 0;opacity:.68}
+.ps-hero-symbol.s-idris{width:88px;height:88px;right:56px;top:18px}
+.ps-hero-symbol.s-adam{width:76px;height:76px;right:89px;top:88px}
+.ps-hero-symbol.s-ibrahim{width:94px;height:94px;right:-3px;top:63px}
+.ps-hero-symbol.s-nuh{width:103px;height:82px;right:68px;top:171px}
+.ps-hero-symbol.s-salih{width:84px;height:84px;right:0;top:159px}
+.ps-hero-symbol.s-hud{width:70px;height:70px;right:-1px;top:220px}
+
+/* Compact pill switcher from the approved render */
+.ps-toolbar{
+  top:max(56px,env(safe-area-inset-top,0px));
+  padding:6px 9px;
+  background:rgba(3,24,41,.975);
+  border-bottom-color:rgba(104,205,214,.22);
+  box-shadow:0 8px 19px rgba(0,0,0,.18);
+}
+.ps-modes{gap:5px}
+.ps-mode,.ps-detail-mode{
+  min-height:40px;
+  font-size:10.5px;
+  letter-spacing:-.01em;
+}
+.ps-mode-icon,
+.ps-pill-icon{
+  width:14px;
+  height:14px;
+  display:inline-block;
+  flex:none;
+  margin-right:6px;
+  background:currentColor;
+  vertical-align:-2px;
+}
+.ps-mode-icon-headphones{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 13a8 8 0 0 1 16 0'/%3E%3Cpath d='M4 13v5a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2'/%3E%3Cpath d='M20 13v5a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 13a8 8 0 0 1 16 0'/%3E%3Cpath d='M4 13v5a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2'/%3E%3Cpath d='M20 13v5a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.ps-mode-icon-book,
+.ps-pill-icon-book{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 5.5A2.5 2.5 0 0 1 5.5 3H11v16H5.5A2.5 2.5 0 0 0 3 21.5z'/%3E%3Cpath d='M21 5.5A2.5 2.5 0 0 0 18.5 3H13v16h5.5a2.5 2.5 0 0 1 2.5 2.5z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 5.5A2.5 2.5 0 0 1 5.5 3H11v16H5.5A2.5 2.5 0 0 0 3 21.5z'/%3E%3Cpath d='M21 5.5A2.5 2.5 0 0 0 18.5 3H13v16h5.5a2.5 2.5 0 0 1 2.5 2.5z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.ps-pill-icon-clock{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.ps-pill-icon-age{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Ccircle cx='12' cy='7' r='3'/%3E%3Cpath d='M5 21c.7-5 3-8 7-8s6.3 3 7 8z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Ccircle cx='12' cy='7' r='3'/%3E%3Cpath d='M5 21c.7-5 3-8 7-8s6.3 3 7 8z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* Approved story list: edge-to-edge scenic strips with floating 3D object */
+.ps-library-list{background:#05243a}
+.ps-story-row{
+  min-height:112px;
+  grid-template-columns:38% minmax(0,1fr) 35px;
+  padding:0 8px 0 0;
+  border-radius:0;
+  background-position:var(--scene-pos,center);
+  background-size:cover;
+}
+.ps-story-row::before{
+  background:
+    linear-gradient(90deg,rgba(3,23,38,.03) 0%,rgba(3,23,38,.07) 31%,rgba(3,23,38,.53) 58%,rgba(3,23,38,.88) 100%),
+    linear-gradient(180deg,rgba(1,14,25,.02),rgba(1,14,25,.16));
+}
+.ps-story-row::after{
+  background:linear-gradient(90deg,rgba(239,199,100,.32),rgba(98,200,210,.25),transparent);
+}
+.ps-row-art::before{display:none}
+.ps-row-art img{
+  left:-4%;
+  top:-2%;
+  width:108%;
+  height:104%;
+  object-position:center;
+  filter:saturate(1.13) contrast(1.03) brightness(1.08) drop-shadow(0 10px 12px rgba(0,0,0,.22));
+}
+.ps-row-copy{padding:11px 0 10px 1px}
+.ps-row-meta{
+  font-size:7.7px;
+  line-height:1.15;
+  letter-spacing:.09em;
+  color:#c1ead8;
+}
+.ps-row-title{
+  margin-top:4px;
+  font-size:21px;
+  line-height:1;
+  letter-spacing:-.035em;
+}
+.ps-row-ar{
+  margin-top:4px;
+  color:#f2dc9d;
+  font-size:13.5px;
+  line-height:1.25;
+}
+.ps-row-go{
+  width:28px;
+  height:28px;
+  font-size:19px;
+  border-color:rgba(245,209,119,.40);
+  background:rgba(4,31,50,.36);
+}
+.ps-done{
+  right:41px;
+  bottom:8px;
+  width:18px;
+  height:18px;
+}
+.ps-done::after{left:5px;top:3px;width:5px;height:8px}
+.ps-story-row[data-ps-id="muhammad"]{--scene-pos:center 58%}
+.ps-story-row[data-ps-id="adam"]{--scene-pos:center 53%}
+.ps-story-row[data-ps-id="idris"]{--scene-pos:center 48%}
+.ps-story-row[data-ps-id="nuh"]{--scene-pos:center 51%}
+.ps-story-row[data-ps-id="hud"]{--scene-pos:center 54%}
+.ps-story-row[data-ps-id="salih"]{--scene-pos:center 55%}
+
+/* Approved detail page: full scenic hero, smaller floating object, text-first composition */
+.ps-modal{
+  background:#031827;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.ps-sheet{
+  width:min(100%,760px);
+  height:100dvh;
+  max-height:100dvh;
+  background:#041f34;
+}
+.ps-top{
+  justify-content:flex-end;
+  padding:calc(9px + env(safe-area-inset-top)) 10px 8px;
+}
+.ps-top-label{display:none}
+.ps-close{
+  width:38px;
+  height:38px;
+  border-color:rgba(245,211,126,.30);
+  background:rgba(3,28,46,.46);
+  font-size:24px;
+  box-shadow:none;
+}
+.ps-hero{
+  min-height:470px;
+  background-position:center;
+  background-size:cover;
+}
+.ps-hero::before{
+  background:
+    linear-gradient(90deg,rgba(3,22,38,.77) 0%,rgba(3,22,38,.53) 38%,rgba(3,22,38,.12) 72%,rgba(3,22,38,.02) 100%),
+    linear-gradient(180deg,rgba(2,16,28,.16) 0%,rgba(2,16,28,.04) 42%,rgba(2,16,28,.63) 100%);
+}
+.ps-detail-glow{display:none}
+.ps-hero>img{
+  right:-2%;
+  top:16px;
+  width:47%;
+  height:178px;
+  object-fit:contain;
+  filter:saturate(1.12) contrast(1.03) brightness(1.08) drop-shadow(0 13px 18px rgba(0,0,0,.23));
+}
+.ps-hero-copy{
+  left:14px;
+  right:14px;
+  top:54px;
+  bottom:13px;
+  display:flex;
+  flex-direction:column;
+}
+.ps-title{
+  max-width:63%;
+  font-size:clamp(38px,10.4vw,50px);
+  line-height:.94;
+  letter-spacing:-.05em;
+  text-shadow:0 4px 18px rgba(0,0,0,.28);
+}
+.ps-ar{
+  margin-top:5px;
+  max-width:68%;
+  color:#f5d36f;
+  font-size:21px;
+  line-height:1.28;
+}
+.ps-summary{
+  margin-top:9px;
+  max-width:78%;
+  color:rgba(255,255,255,.90);
+  font-size:14.5px;
+  line-height:1.44;
+  font-weight:540;
+}
+.ps-meta{
+  margin-top:11px;
+  gap:6px;
+}
+.ps-pill{
+  min-height:31px;
+  padding:6px 9px;
+  border-color:rgba(132,213,221,.24);
+  background:rgba(3,34,53,.53);
+  font-size:9.5px;
+}
+.ps-pill-icon{width:12px;height:12px;margin-right:5px}
+.ps-detail-modes{
+  margin-top:auto;
+  padding:3px;
+  gap:3px;
+  border-color:rgba(123,207,216,.21);
+  background:rgba(3,28,46,.72);
+}
+.ps-detail-mode{
+  min-height:42px;
+  padding:5px 7px;
+  font-size:10px;
+}
+.ps-body{
+  padding:0 14px calc(34px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,#05243a 0%,#041f34 100%);
+}
+.ps-player{
+  margin:12px 0 15px;
+  padding:9px;
+  border-radius:18px;
+}
+.ps-play{min-height:46px;border-radius:14px;font-size:14px}
+.ps-read{
+  font-size:17px;
+  line-height:1.62;
+}
+.ps-read p{padding-bottom:18px}
+.ps-read p+p{padding-top:18px}
+.app[data-age="4–5"] .ps-read{font-size:18.5px;line-height:1.68}
+.app[data-age="6–8"] .ps-read{font-size:17px;line-height:1.62}
+.app[data-age="9–10"] .ps-read{font-size:16.5px;line-height:1.60}
+
+@media(max-width:430px){
+  .ps-library-hero{min-height:270px}
+  .ps-library-hero-copy{min-height:270px;width:59%;padding-left:12px}
+  .ps-library-hero h2 span,.ps-library-hero h2 strong{font-size:34px}
+  .ps-library-hero p{font-size:11.5px}
+  .ps-library-hero-art{width:50%}
+  .ps-toolbar{padding-left:7px;padding-right:7px}
+  .ps-mode{min-height:38px;font-size:9.7px;padding:5px 7px}
+  .ps-mode-icon{width:13px;height:13px;margin-right:4px}
+  .ps-story-row{
+    min-height:104px;
+    grid-template-columns:38% minmax(0,1fr) 31px;
+    padding-right:6px;
+  }
+  .ps-row-copy{padding:9px 0 8px}
+  .ps-row-meta{font-size:7.2px}
+  .ps-row-title{font-size:19.5px}
+  .ps-row-ar{font-size:12.5px}
+  .ps-row-go{width:25px;height:25px;font-size:17px}
+  .ps-done{right:36px;bottom:7px;width:17px;height:17px}
+
+  .ps-hero{min-height:455px}
+  .ps-hero>img{right:-3%;top:14px;width:48%;height:165px}
+  .ps-hero-copy{top:50px;left:12px;right:12px;bottom:11px}
+  .ps-title{font-size:40px;max-width:64%}
+  .ps-ar{font-size:19px}
+  .ps-summary{font-size:13.5px;line-height:1.42;max-width:79%}
+  .ps-meta{margin-top:9px}
+  .ps-pill{min-height:29px;padding:5px 8px;font-size:9px}
+  .ps-detail-mode{min-height:39px;font-size:9.3px}
+  .ps-read{font-size:16.5px}
+  .app[data-age="4–5"] .ps-read{font-size:18px}
+  .app[data-age="9–10"] .ps-read{font-size:16px}
+}
+@media(max-width:375px){
+  .ps-library-hero{min-height:254px}
+  .ps-library-hero-copy{min-height:254px;width:61%}
+  .ps-library-hero h2 span,.ps-library-hero h2 strong{font-size:31px}
+  .ps-mode{font-size:9px}
+  .ps-story-row{min-height:98px;grid-template-columns:37% minmax(0,1fr) 28px}
+  .ps-row-title{font-size:18px}
+  .ps-row-ar{font-size:12px}
+  .ps-hero{min-height:442px}
+  .ps-title{font-size:37px}
+  .ps-summary{font-size:13px}
+}
+@media(min-width:700px){
+  .ps-library-hero{min-height:330px}
+  .ps-library-hero-copy{min-height:330px;width:52%;padding-left:25px}
+  .ps-story-row{
+    min-height:126px;
+    grid-template-columns:31% minmax(0,1fr) 40px;
+    padding-right:20px;
+  }
+  .ps-row-title{font-size:24px}
+  .ps-row-ar{font-size:15px}
+  .ps-sheet{height:min(95dvh,930px)}
+  .ps-hero{min-height:530px}
+  .ps-hero>img{width:42%;height:210px;right:2%;top:22px}
+  .ps-hero-copy{left:24px;right:24px;top:64px;bottom:18px}
+  .ps-title{font-size:50px}
+  .ps-summary{font-size:16px;max-width:68%}
+  .ps-read{font-size:18px}
 }
