@@ -1,0 +1,155 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2926-2950",
+  "series": "2851-2950",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock wurde am tatsächlichen offenen Branch-Ende unter Regel v6 erstellt und vollständig geprüft. Alle Datensätze besitzen eine eindeutige Ṣaḥīḥ-Muslim-Quelle, sharhStatus=verified und einen direkten frühen Šarḥ-Nachweis über al-Māzirī. Unsichere Druckseiten wurden nicht geschätzt. HAD-2947 und HAD-2949 sind als authentische mawqūfe Aṯār typisiert. Eine mögliche Fortsetzung über Muslim 2824 wurde wegen bestehender inhaltlicher Dublette HAD-0228 nicht verwendet.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2926",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2927",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2928",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2929",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2930",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2931",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2932",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2933",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2934",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2935",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2936",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2937",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2938",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2939",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2940",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2941",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2942",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2943",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2944",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2945",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2946",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2947",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "authentic-mawquf-athar-with-earliest-muslim-priority",
+      "note": "recordType=athar; categoryLabel=ĀṮAR; grade=Ṣaḥīḥ mawqūf"
+    },
+    {
+      "id": "HAD-2948",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    },
+    {
+      "id": "HAD-2949",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "authentic-mawquf-athar-with-earliest-muslim-priority",
+      "note": "recordType=athar; categoryLabel=ĀṮAR; grade=Ṣaḥīḥ mawqūf"
+    },
+    {
+      "id": "HAD-2950",
+      "currentSharh": "al-Māzirī",
+      "auditStatus": "earliest-muslim-priority-al-Maziri"
+    }
+  ]
+}
