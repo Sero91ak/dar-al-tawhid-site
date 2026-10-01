@@ -204,7 +204,11 @@ export default {
 
       // DĀR Voice Studio – Cloud Engine für die Produktionsoberfläche.
       if (url.pathname.startsWith("/voice-studio/api")) {
-        const voiceStudioResponse = await handleVoiceStudioWebRequest(request, env, cors);
+        const voiceStudioResponse = await handleVoiceStudioWebRequest(request, env, cors, {
+          githubGet,
+          githubPut,
+          base64ToUtf8
+        });
         if (voiceStudioResponse) return voiceStudioResponse;
       }
 
@@ -2216,7 +2220,7 @@ function corsHeaders(request, env) {
   const allowOrigin = origin.startsWith("http://127.0.0.1") || origin.startsWith("http://localhost") || origin === allowed ? origin || allowed : allowed;
   return {
     "Access-Control-Allow-Origin": allowOrigin,
-    "Access-Control-Allow-Methods": "GET,POST,PATCH,DELETE,OPTIONS",
+    "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Admin-Secret",
     "Access-Control-Max-Age": "86400",
     "Vary": "Origin"
