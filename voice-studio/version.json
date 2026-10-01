@@ -559,7 +559,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "efceded638d87f8962cd6dfa7c3327f7804b4823",
+  "releaseRef": "dfe94b74ca0688ffd0d24f48b116c8b028ae391c",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.40 prüfte den absichtlich dreifach gesprochenen Ḥarakāt-Roh-Render bereits mit der finalen Kurzlaut-QA und stoppte deshalb mit `short_arabic_too_long`, bevor ein einzelner Laut isoliert werden konnte. 2.9.41 trennt Roh- und Final-QA strikt: der dreifache Arbeits-Render wird nur auf harte Wellenform-/Generationsfehler geprüft; danach wird genau ein sauberer Laut isoliert und erst dieser mit der normalen strengen Arabisch-QA, Dauergrenzen und Stilleprüfung bewertet.",
@@ -835,10 +835,11 @@
   },
   "updateVisibilityRepair": {
     "forceNewSemanticVersion": true,
-    "previousUiVersion": "2.9.42",
-    "previousBundleVersionPossibly": "2.9.42",
-    "targetVersion": "2.9.45",
-    "alphabetReviewIncluded": true
+    "previousUiVersion": "2.9.45",
+    "previousBundleVersionPossibly": "2.9.45",
+    "targetVersion": "2.9.46",
+    "alphabetReviewIncluded": true,
+    "prophetStoriesIncluded": true
   },
   "alphabetFushaStrict": {
     "enabled": true,
@@ -905,6 +906,15 @@
     "voiceProfileId": "serhat-owner-voice-2026",
     "manualTextCopyRequired": false,
     "manualPushAfterApprovalRequired": false,
-    "systemVoiceFallback": false
+    "systemVoiceFallback": false,
+    "releaseRef": "dfe94b74ca0688ffd0d24f48b116c8b028ae391c",
+    "validation": {
+      "manifestStories": 25,
+      "manifestVoiceScripts": 25,
+      "manifestAllAgeScripts": 25,
+      "totalWords": 11865,
+      "localEnginePythonCompile": "passed-in-ci",
+      "unrelatedExistingAlphabetChecks": "separate"
+    }
   }
 }
