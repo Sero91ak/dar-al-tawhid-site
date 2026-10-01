@@ -21,7 +21,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.47"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.48"
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -31,7 +31,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.47"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.48"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
         config.userContentController.add(self, name: "darCompanion")
@@ -416,6 +416,78 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         }
     }
 
+    private func checkUpdateWithSystemCurl(
+        userInitiated: Bool,
+        failures: [String]
+    ) {
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            guard let self = self else { return }
+
+            let candidates: [(URL, Bool)] = self.updateManifestSources().map {
+                ($0, $0.host == "api.github.com")
+            }
+            var curlFailures = failures
+
+            for (url, isGitHubAPI) in candidates {
+                let process = Process()
+                process.executableURL = URL(fileURLWithPath: "/usr/bin/curl")
+                var args = [
+                    "-fsSL",
+                    "--connect-timeout", "5",
+                    "--max-time", "15",
+                    "--retry", "2",
+                    "--retry-delay", "1",
+                    "-H", "Cache-Control: no-cache",
+                    "-H", "User-Agent: DAR-Voice-Studio-Updater/2.9.48"
+                ]
+                if isGitHubAPI {
+                    args += ["-H", "Accept: application/vnd.github.raw+json"]
+                } else {
+                    args += ["-H", "Accept: application/json"]
+                }
+                args.append(url.absoluteString)
+                process.arguments = args
+
+                let pipe = Pipe()
+                let errPipe = Pipe()
+                process.standardOutput = pipe
+                process.standardError = errPipe
+
+                do {
+                    try process.run()
+                    process.waitUntilExit()
+                    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+                    if process.terminationStatus == 0,
+                       let object = self.manifestObject(from: data),
+                       object["version"] is String {
+                        self.finishUpdateCheck(with: object, userInitiated: userInitiated)
+                        return
+                    }
+
+                    let errData = errPipe.fileHandleForReading.readDataToEndOfFile()
+                    let errText = String(data: errData, encoding: .utf8)?
+                        .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                    curlFailures.append(
+                        "curl \(url.host ?? "Quelle"): " +
+                        (errText.isEmpty ? "Status \(process.terminationStatus)" : errText)
+                    )
+                } catch {
+                    curlFailures.append(
+                        "curl \(url.host ?? "Quelle"): \(error.localizedDescription)"
+                    )
+                }
+            }
+
+            let detail = curlFailures.suffix(4).joined(separator: " · ")
+            self.publishUpdateState(
+                "error",
+                message: detail.isEmpty
+                    ? "Update-Prüfung derzeit nicht erreichbar."
+                    : "Update-Prüfung derzeit nicht erreichbar. \(detail)"
+            )
+        }
+    }
+
     private func checkUpdateSource(
         _ sources: [URL],
         index: Int,
@@ -423,12 +495,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         failures: [String]
     ) {
         guard index < sources.count else {
-            let detail = failures.suffix(3).joined(separator: " · ")
-            publishUpdateState(
-                "error",
-                message: detail.isEmpty
-                    ? "Update-Prüfung derzeit nicht erreichbar."
-                    : "Update-Prüfung derzeit nicht erreichbar. \(detail)"
+            checkUpdateWithSystemCurl(
+                userInitiated: userInitiated,
+                failures: failures
             )
             return
         }
@@ -438,7 +507,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 7
         request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
-        request.setValue("DAR-Voice-Studio-Updater/2.9.47", forHTTPHeaderField: "User-Agent")
+        request.setValue("DAR-Voice-Studio-Updater/2.9.48", forHTTPHeaderField: "User-Agent")
         if url.host == "api.github.com" {
             request.setValue("application/vnd.github.raw+json", forHTTPHeaderField: "Accept")
         } else {
