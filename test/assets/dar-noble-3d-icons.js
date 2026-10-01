@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1111";
+  const VER="1112";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","topics.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -120,7 +120,12 @@
   function fileFromKind(kind,hint){
     const k=String(kind||"").toLowerCase();
     const h=String(hint||"");
-    if(k==="prophet"||k==="propheten")return "prophets.png";
+    if(k==="prophet"||k==="propheten"){
+      const id=h.toLowerCase().replace(/[^a-z0-9-]/g,"");
+      const story={adam:1,idris:1,nuh:1,ibrahim:1,musa:1,isa:1,muhammad:1};
+      if(story[id])return "prophets/"+id+".jpg";
+      return "prophets.png";
+    }
     if(k==="scholar"||k==="scholars")return fileFromScholarGroup(h);
     if(k==="topic"||k==="post"||k==="series")return fileFromTopic(h)||topicFallback(h);
     if(k==="dua"||k==="duas"||k==="dua-cat")return fileFromTopic(h)||"dua.png";
@@ -157,7 +162,11 @@
         return "ilm.png";
       }
       if(el.classList.contains("scholars-index__mono"))return fileFromScholarGroup(el.getAttribute("data-group")||"");
-      if(el.classList.contains("prophets-row__icon")||el.classList.contains("prophets-detail__emoji")||el.classList.contains("prophets-spotlight__icon"))return "prophets.png";
+      if(el.classList.contains("prophets-spotlight__icon"))return "prophets.png";
+      if(el.classList.contains("prophets-row__icon")||el.classList.contains("prophets-detail__emoji")){
+        const row=el.closest("[data-prophet-id]");
+        return fileFromKind("prophet",(row&&row.getAttribute("data-prophet-id"))||"");
+      }
       if(el.classList.contains("related-compact-icon"))return "posts.png";
       if(el.classList.contains("quiz-quick-icon")){
         const card=el.closest(".quiz-home-quick-card");
