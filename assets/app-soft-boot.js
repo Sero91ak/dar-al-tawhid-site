@@ -379,3 +379,27 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
   else boot();
 })();
+
+/* Shared verified Qurʾān Tadabbur loader for Web App + iOS WebView. */
+(function () {
+  "use strict";
+  if (window.__DAR_QURAN_TADABBUR_SHARED_BOOT_V1) return;
+  window.__DAR_QURAN_TADABBUR_SHARED_BOOT_V1 = true;
+
+  function bootTadabbur() {
+    try {
+      if (document.querySelector('script[src*="quran-tadabbur-shared.js"]')) return;
+      var script = document.createElement("script");
+      script.src = "/assets/quran-tadabbur-shared.js?v=1";
+      script.async = true;
+      script.setAttribute("data-dar-quran-tadabbur", "shared-verified-v1");
+      (document.head || document.documentElement).appendChild(script);
+    } catch (e) {}
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bootTadabbur, { once: true });
+  } else {
+    bootTadabbur();
+  }
+})();
