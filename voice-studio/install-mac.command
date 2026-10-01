@@ -303,11 +303,11 @@ fi
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP="$BACKUPS/$STAMP"
 mkdir -p "$BACKUP"
-for old in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for old in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
 done
 
-for fresh in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for fresh in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   mv "$STAGE/$fresh" "$TARGET/$fresh"
 done
 for optional in watermark-my-logo-full.png app-icon-512.png; do
