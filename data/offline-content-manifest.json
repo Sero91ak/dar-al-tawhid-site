@@ -36,7 +36,8 @@
     "/widgets/shared/widget-bridge.js",
     "/widgets/storage/prayer-cache.js",
     "/widgets/theme/widget-theme.js",
-    "/widgets/fallback/fallback-ui.js"
+    "/widgets/fallback/fallback-ui.js",
+    "/assets/quran-tadabbur-shared.js"
   ],
   "requiredData": [
     "/content/duas/duas.json",
@@ -50,6 +51,8 @@
     "/assets/scholars-index.css",
     "/content/posts/posts-index.json",
     "/content/staging/posts/posts-index.json",
-    "/content/updates/daily.json"
+    "/content/updates/daily.json",
+    "/apple-tv/quran/tadabbur/catalog.json",
+    "/apple-tv/quran/tadabbur/entries-index.json"
   ]
 }
