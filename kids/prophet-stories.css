@@ -375,3 +375,419 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
   .ps-title{font-size:26px}
   .ps-body{padding-left:13px;padding-right:13px}
 }
+
+
+/* Prophet stories v4 visual system */
+#view-stories.ps-world-view{
+  position:relative;
+  isolation:isolate;
+  padding-top:0;
+}
+#view-stories.ps-world-view::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:-18px -16px auto;
+  height:430px;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 16% 9%,rgba(239,207,133,.13),transparent 19%),
+    radial-gradient(circle at 84% 18%,rgba(97,185,199,.12),transparent 24%),
+    linear-gradient(180deg,rgba(15,48,62,.24),transparent 88%);
+}
+#view-stories.ps-world-view::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:-16px;right:-16px;top:118px;height:180px;
+  pointer-events:none;
+  opacity:.38;
+  background:
+    radial-gradient(ellipse at 8% 100%,rgba(167,126,77,.22) 0 30%,transparent 31%),
+    radial-gradient(ellipse at 43% 100%,rgba(206,160,93,.13) 0 36%,transparent 37%),
+    radial-gradient(ellipse at 87% 100%,rgba(133,101,72,.17) 0 32%,transparent 33%);
+}
+.ps-wrap{
+  margin:0;
+  padding:0 0 26px;
+}
+.ps-world-head{
+  position:relative;
+  min-height:176px;
+  overflow:hidden;
+  margin:0 0 10px;
+  padding:18px 16px 14px;
+  border-radius:27px;
+  border:1px solid rgba(255,255,255,.10);
+  background:
+    radial-gradient(circle at 78% 13%,rgba(239,206,128,.20),transparent 20%),
+    radial-gradient(circle at 12% 82%,rgba(88,174,192,.15),transparent 26%),
+    linear-gradient(145deg,#11384a 0%,#0b2937 52%,#081c29 100%);
+  box-shadow:0 18px 44px rgba(0,0,0,.20),inset 0 1px rgba(255,255,255,.04);
+}
+.ps-world-head::before{
+  content:"";
+  position:absolute;inset:0;pointer-events:none;
+  opacity:.34;
+  background-image:
+    radial-gradient(circle at 12% 18%,rgba(255,255,255,.8) 0 1px,transparent 1.4px),
+    radial-gradient(circle at 36% 10%,rgba(255,255,255,.58) 0 1px,transparent 1.4px),
+    radial-gradient(circle at 72% 24%,rgba(255,255,255,.56) 0 1px,transparent 1.4px),
+    radial-gradient(circle at 91% 12%,rgba(255,255,255,.7) 0 1px,transparent 1.4px);
+}
+.ps-world-glow{
+  position:absolute;
+  width:150px;height:150px;
+  right:-46px;top:-45px;
+  border-radius:50%;
+  border:1px solid rgba(241,209,135,.10);
+  box-shadow:0 0 0 24px rgba(241,209,135,.025),0 0 0 48px rgba(241,209,135,.018);
+}
+.ps-world-copy{
+  position:relative;z-index:3;
+  width:min(67%,410px);
+}
+.ps-world-copy .ps-kicker{
+  font-size:8.5px;
+  letter-spacing:.14em;
+}
+.ps-world-copy h2{
+  margin:7px 0 6px;
+  font-size:clamp(24px,7vw,35px);
+  line-height:.98;
+  letter-spacing:-.045em;
+}
+.ps-world-copy p{
+  margin:0;
+  max-width:370px;
+  color:rgba(255,255,255,.68);
+  font-size:11.5px;
+  line-height:1.45;
+}
+.ps-head-stats{
+  position:absolute;z-index:4;
+  left:16px;bottom:14px;
+  display:flex;gap:6px;flex-wrap:wrap;
+}
+.ps-head-stats span{
+  display:inline-flex;align-items:center;gap:3px;
+  min-height:25px;padding:5px 8px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(4,22,31,.50);
+  color:rgba(255,255,255,.72);
+  font-size:8.5px;font-weight:850;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.ps-head-stats strong{color:#f0ce7a;font-size:10px}
+.ps-world-art{
+  position:absolute;z-index:2;
+  right:5px;top:8px;
+  width:42%;height:160px;
+  pointer-events:none;
+}
+.ps-float{
+  position:absolute;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);
+  background:#091c26;
+  box-shadow:0 14px 30px rgba(0,0,0,.24);
+}
+.ps-float img{
+  width:100%;height:100%;display:block;
+  object-fit:cover;
+  filter:saturate(.95) contrast(1.02) brightness(.94);
+}
+.ps-float-ark{
+  width:92px;height:92px;right:50px;top:4px;
+  border-radius:28px;
+  transform:rotate(-5deg);
+}
+.ps-float-kaaba{
+  width:76px;height:76px;right:2px;top:48px;
+  border-radius:23px;
+  transform:rotate(6deg);
+}
+.ps-float-whale{
+  width:62px;height:62px;right:72px;top:92px;
+  border-radius:20px;
+  transform:rotate(4deg);
+  opacity:.94;
+}
+
+.ps-modes{
+  position:sticky;
+  top:calc(var(--safe-top) + 2px);
+  z-index:20;
+  margin:0 -4px 10px;
+  padding:7px 4px;
+  background:linear-gradient(180deg,rgba(7,21,34,.98),rgba(7,21,34,.91) 78%,rgba(7,21,34,0));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.ps-mode{
+  min-height:33px;
+  padding:7px 10px;
+  font-size:9.5px;
+}
+
+.ps-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+.ps-card{
+  border-radius:21px;
+  background:linear-gradient(180deg,#102a38 0%,#0a202b 100%);
+  box-shadow:0 12px 28px rgba(0,0,0,.17),inset 0 1px rgba(255,255,255,.03);
+}
+.ps-card.featured{
+  min-height:150px;
+  grid-template-columns:minmax(120px,.88fr) minmax(0,1.12fr);
+  border-radius:24px;
+}
+.ps-card.featured::after{
+  right:9px;top:9px;
+  font-size:7px;padding:5px 7px;
+}
+.ps-art{
+  aspect-ratio:4/3;
+  background:
+    radial-gradient(circle at 50% 40%,rgba(255,255,255,.05),transparent 46%),
+    #0a1c25;
+}
+.ps-card.featured .ps-art{
+  min-height:150px;
+}
+.ps-art img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:var(--ps-card-x,50%) var(--ps-card-y,50%);
+  transform:scale(var(--ps-card-scale,1.035));
+  filter:saturate(1.01) contrast(1.02) brightness(.96);
+  transition:transform .2s ease;
+}
+.ps-card:active .ps-art img{transform:scale(calc(var(--ps-card-scale,1.035) + .015))}
+.ps-card-copy{
+  min-height:78px;
+  padding:8px 9px 9px;
+}
+.ps-card.featured .ps-card-copy{
+  justify-content:center;
+  padding:28px 12px 12px;
+}
+.ps-badges{margin-bottom:5px}
+.ps-badge{font-size:6.8px;padding:3px 5px}
+.ps-card-title{font-size:14.5px}
+.ps-card.featured .ps-card-title{font-size:22px}
+.ps-card-ar{
+  min-height:16px;
+  margin-top:3px;
+  font-size:12.5px;
+  line-height:1.15;
+}
+.ps-card.featured .ps-card-ar{font-size:15px}
+.ps-card-foot{
+  padding-top:6px;
+  font-size:8.5px;
+}
+
+/* card-specific crop tuning */
+.ps-art[data-ps-id="muhammad"]{--ps-card-y:55%;--ps-card-scale:1.03}
+.ps-art[data-ps-id="adam"]{--ps-card-y:46%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="idris"]{--ps-card-y:45%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="nuh"]{--ps-card-y:51%;--ps-card-scale:1.03}
+.ps-art[data-ps-id="hud"]{--ps-card-y:50%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="salih"]{--ps-card-y:55%;--ps-card-scale:1.03}
+.ps-art[data-ps-id="ibrahim"]{--ps-card-y:53%;--ps-card-scale:1.03}
+.ps-art[data-ps-id="lut"]{--ps-card-y:51%;--ps-card-scale:1.05}
+.ps-art[data-ps-id="ismail"]{--ps-card-y:54%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="ishaq"]{--ps-card-y:50%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="yaqub"]{--ps-card-y:49%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="yusuf"]{--ps-card-y:48%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="ayyub"]{--ps-card-y:50%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="shuayb"]{--ps-card-y:50%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="musa"]{--ps-card-y:59%;--ps-card-scale:1.03}
+.ps-art[data-ps-id="harun"]{--ps-card-y:50%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="dawud"]{--ps-card-y:53%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="sulayman"]{--ps-card-y:48%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="ilyas"]{--ps-card-y:48%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="alyasa"]{--ps-card-y:48%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="yunus"]{--ps-card-y:52%;--ps-card-scale:1.02}
+.ps-art[data-ps-id="zakariyya"]{--ps-card-y:49%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="yahya"]{--ps-card-y:49%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="isa"]{--ps-card-y:43%;--ps-card-scale:1.04}
+.ps-art[data-ps-id="dhul-kifl"]{--ps-card-y:49%;--ps-card-scale:1.04}
+
+.ps-free-title{
+  margin-top:20px;
+  padding-top:2px;
+  color:rgba(255,255,255,.76);
+}
+
+/* Detail page: fixed shell/header, only story content scrolls */
+.ps-sheet{
+  height:100dvh;
+  max-height:100dvh;
+  border:0;
+  border-radius:0;
+}
+.ps-top{
+  position:absolute;
+  transition:background .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.ps-modal.scrolled .ps-top{
+  background:rgba(5,24,33,.95);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  box-shadow:0 8px 24px rgba(0,0,0,.18);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+}
+.ps-scroll{
+  overscroll-behavior:contain;
+  scroll-padding-top:calc(62px + env(safe-area-inset-top));
+}
+.ps-hero{
+  position:relative;
+  height:218px;
+  background:#091b24;
+  isolation:isolate;
+}
+.ps-hero::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:-18px;
+  background-image:
+    linear-gradient(180deg,rgba(5,22,31,.08),rgba(5,22,31,.36)),
+    var(--ps-bg);
+  background-size:cover;
+  background-position:center;
+  filter:blur(17px) saturate(.9);
+  transform:scale(1.10);
+  opacity:.68;
+}
+.ps-hero::after{
+  z-index:2;
+  background:
+    linear-gradient(180deg,rgba(3,14,20,.15),rgba(4,18,25,.04) 34%,rgba(5,25,34,.92) 100%);
+}
+.ps-hero img{
+  position:relative;
+  z-index:1;
+  width:100%;height:100%;
+  object-fit:contain;
+  object-position:center var(--ps-hero-y,49%);
+  padding:20px 54px 20px;
+  transform:scale(var(--ps-hero-scale,1.02));
+  filter:drop-shadow(0 16px 26px rgba(0,0,0,.34));
+}
+.ps-hero[data-ps-id="muhammad"]{--ps-hero-y:55%;--ps-hero-scale:1.02}
+.ps-hero[data-ps-id="nuh"]{--ps-hero-y:50%;--ps-hero-scale:1.04}
+.ps-hero[data-ps-id="musa"]{--ps-hero-y:57%;--ps-hero-scale:1.01}
+.ps-hero[data-ps-id="isa"]{--ps-hero-y:43%;--ps-hero-scale:1.02}
+.ps-hero[data-ps-id="ibrahim"]{--ps-hero-y:52%;--ps-hero-scale:1.02}
+.ps-hero[data-ps-id="yunus"]{--ps-hero-y:50%;--ps-hero-scale:1.03}
+.ps-hero-copy{
+  left:15px;right:15px;bottom:12px;
+}
+.ps-title{
+  max-width:82%;
+  font-size:28px;
+}
+.ps-ar{
+  margin-top:5px;
+  font-size:17px;
+}
+.ps-body{
+  padding:8px 13px calc(26px + env(safe-area-inset-bottom));
+}
+.ps-summary{
+  margin-bottom:9px;
+  font-size:12.5px;
+}
+.ps-meta{margin-bottom:9px}
+.ps-pill{padding:5px 8px;font-size:8.5px}
+.ps-detail-modes{
+  margin-bottom:9px;
+  padding:2px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:15px;
+  background:rgba(255,255,255,.025);
+}
+.ps-detail-mode{
+  flex:1;
+  min-width:max-content;
+  min-height:31px;
+  padding:6px 8px;
+}
+.ps-player{
+  margin-bottom:11px;
+  padding:10px;
+  border-radius:18px;
+}
+.ps-play{
+  min-height:46px;
+  border-radius:14px;
+  font-size:14px;
+}
+.ps-player-note:empty{display:none}
+.ps-read{
+  font-size:14.5px;
+  line-height:1.64;
+}
+.ps-read p{margin-bottom:10px}
+.ps-sources,.ps-question{
+  margin-top:12px;
+  border-radius:18px;
+  padding:12px;
+}
+.ps-question h4{font-size:16px}
+.ps-answer{
+  min-height:47px;
+  border-radius:14px;
+  font-size:12.5px;
+}
+.ps-close{width:42px;height:42px}
+.ps-top-label{font-size:8.5px}
+
+@media(min-width:700px){
+  .ps-wrap{padding-bottom:32px}
+  .ps-world-head{min-height:198px;padding:22px 20px}
+  .ps-world-art{right:10px;top:12px;width:40%;height:176px}
+  .ps-world-copy{width:62%}
+  .ps-head-stats{left:20px;bottom:18px}
+  .ps-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+  .ps-card.featured{min-height:176px;grid-template-columns:.82fr 1.18fr}
+  .ps-card.featured .ps-art{min-height:176px}
+  .ps-card-copy{min-height:80px}
+  .ps-sheet{
+    height:min(92dvh,900px);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:30px;
+    margin-bottom:18px;
+  }
+  .ps-hero{height:246px}
+  .ps-hero img{padding:26px 90px 24px}
+  .ps-body{padding-left:20px;padding-right:20px}
+}
+@media(max-width:390px){
+  .ps-world-head{min-height:166px;padding:15px 13px 13px;border-radius:24px}
+  .ps-world-copy{width:68%}
+  .ps-world-copy h2{font-size:24px}
+  .ps-world-copy p{font-size:10.5px}
+  .ps-world-art{right:0;top:5px;width:42%;height:150px}
+  .ps-float-ark{width:80px;height:80px;right:42px}
+  .ps-float-kaaba{width:67px;height:67px;top:43px}
+  .ps-float-whale{width:54px;height:54px;right:61px;top:86px}
+  .ps-head-stats{left:13px;bottom:12px}
+  .ps-grid{gap:8px}
+  .ps-card{border-radius:19px}
+  .ps-card.featured{min-height:142px;grid-template-columns:112px minmax(0,1fr)}
+  .ps-card.featured .ps-art{min-height:142px}
+  .ps-card-copy{min-height:74px;padding:7px 8px 8px}
+  .ps-card-title{font-size:13.5px}
+  .ps-card.featured .ps-card-title{font-size:20px}
+  .ps-card-ar{font-size:12px}
+  .ps-card-foot{font-size:8px}
+  .ps-hero{height:205px}
+  .ps-hero img{padding:19px 40px 18px}
+  .ps-title{font-size:25px}
+  .ps-ar{font-size:16px}
+}
