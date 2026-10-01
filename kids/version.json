@@ -1,10 +1,10 @@
 {
-  "buildId": "kids-shell-v12-tab98",
-  "label": "KIDS · V0.98",
-  "releasedAt": "2026-10-01T17:06:00.000Z",
-  "note": "V0.98: 3D-Objekte und Szenen neu als ein gemeinsames Cinematic-Layer-System aufgebaut. Hintergrund und Objekt erhalten dieselbe Licht-/Farbkorrektur; Nūḥs Schiff ist wie in der Referenz groß angeschnitten statt als kleines aufgesetztes Icon.",
+  "buildId": "kids-shell-v12-tab99",
+  "label": "KIDS · V0.99",
+  "releasedAt": "2026-10-01T18:52:00.000Z",
+  "note": "V0.99: die misslungene V0.97/V0.98-Prophetenansicht wurde auf die stabilere V0.96-Basis zurückgesetzt. Der exakte Referenz-Neuaufbau erfolgt ab jetzt isoliert und nicht mehr direkt auf der Live-Ansicht.",
   "visualSystem": {
-    "prophetStories": "approved-generated-reference-v12",
+    "prophetStories": "stable-v096-baseline",
     "transparentProphetSymbols": 25,
     "cinematicSceneBackgrounds": 8,
     "noSquareJpgCards": true,
@@ -17,6 +17,8 @@
     "detailComposition": "cropped-cinematic-object",
     "sharedSceneGrade": true,
     "objectStickerEffect": false,
-    "nuhOversizedCroppedVessel": true
+    "nuhOversizedCroppedVessel": true,
+    "referenceRebuildMode": "isolated-preview",
+    "liveExperimentation": false
   }
 }
