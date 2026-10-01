@@ -1,15 +1,19 @@
 {
-  "buildId": "kids-shell-v12-tab96",
-  "label": "KIDS · V0.96",
-  "releasedAt": "2026-10-01T16:44:00.000Z",
-  "note": "V0.96: Prophetengeschichten auf die freigegebenen Cinematic-Referenzen gelockt: kompakte szenische Listenzeilen, frei integrierte transparente 3D-Symbole, reduzierte App-Chrome und kompakte Vollbild-Detailseite.",
+  "buildId": "kids-shell-v12-tab97",
+  "label": "KIDS · V0.97",
+  "releasedAt": "2026-10-01T16:58:00.000Z",
+  "note": "V0.97: Prophetenbereich neu gegen die freigegebenen Referenzbilder gebaut: kein großer Bibliotheks-Hero, chronologische Reihenfolge ab Ādam, kompakte Cinematic-Zeilen mit szenisch integrierten 3D-Objekten und neu proportionierte Detailseite.",
   "visualSystem": {
-    "prophetStories": "cinematic-reference-lock-v10",
+    "prophetStories": "approved-generated-reference-v11",
     "transparentProphetSymbols": 25,
     "cinematicSceneBackgrounds": 8,
     "noSquareJpgCards": true,
     "referenceLocked": true,
     "compactSceneRows": true,
-    "compactFullScreenDetail": true
+    "compactFullScreenDetail": true,
+    "libraryHero": false,
+    "chronologicalOrder": true,
+    "integrated3DObjects": true,
+    "detailComposition": "cropped-cinematic-object"
   }
 }
