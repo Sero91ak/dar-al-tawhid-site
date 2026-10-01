@@ -1,220 +1,172 @@
-/* DĀR AL TAWḤĪD Kids — Prophet Stories v8
-   Cinematic in-app implementation matching the approved visual reference.
-   No visible JPG cards: source art is masked/blended into generated app scenery. */
+/* DĀR AL TAWḤĪD Kids — Prophet Stories v9
+   Approved cinematic UI implemented with real transparent 3D symbols + generated scene backgrounds. */
 
 #view-stories.ps-world-view{
   position:relative;
   isolation:isolate;
   overflow:visible;
-  --gold:#f1ca6c;
-  --gold2:#ffe59a;
-  --cyan:#9fe4dd;
-  --line:rgba(119,212,218,.23);
-  --night:#04192b;
-  --deep:#06243a;
+  --ps-gold:#f1ca70;
+  --ps-gold2:#ffe6a0;
+  --ps-cyan:#9fe1df;
+  --ps-line:rgba(133,211,219,.24);
+  --ps-deep:#041a2b;
 }
 #view-stories.ps-world-view::before{
   content:"";
   position:absolute;
-  z-index:-5;
-  inset:-90px -16px -160px;
+  z-index:-4;
+  inset:-88px -16px -180px;
   pointer-events:none;
   background:
-    radial-gradient(circle at 84% 4%,rgba(44,119,156,.28),transparent 23%),
-    radial-gradient(circle at 15% 28%,rgba(29,89,113,.18),transparent 32%),
-    linear-gradient(180deg,#04192b 0%,#06263e 44%,#041d32 100%);
+    radial-gradient(circle at 85% 5%,rgba(40,111,151,.30),transparent 24%),
+    linear-gradient(180deg,#041a2c 0%,#062942 46%,#041d32 100%);
 }
-#view-stories.ps-world-view::after{
-  content:"";
-  position:absolute;
-  z-index:-4;
-  top:0;left:-16px;right:-16px;height:580px;
-  pointer-events:none;
-  opacity:.5;
-  background-image:
-    radial-gradient(circle at 7% 9%,#fff2b4 0 1px,transparent 1.6px),
-    radial-gradient(circle at 17% 20%,#fff 0 1px,transparent 1.5px),
-    radial-gradient(circle at 33% 7%,#ffd779 0 1px,transparent 1.4px),
-    radial-gradient(circle at 54% 16%,#fff 0 1px,transparent 1.5px),
-    radial-gradient(circle at 72% 8%,#ffe399 0 1px,transparent 1.5px),
-    radial-gradient(circle at 92% 19%,#fff 0 1px,transparent 1.5px);
-}
-
-/* ---------- overview hero ---------- */
 .ps-wrap{
   margin:0 -16px;
-  padding:0 0 26px;
+  padding:0 0 28px;
 }
+
+/* ===== OVERVIEW HERO ===== */
 .ps-library-hero{
   position:relative;
-  min-height:344px;
+  min-height:342px;
   overflow:hidden;
-  border-bottom:1px solid rgba(118,210,218,.28);
-  background:
-    radial-gradient(circle at 83% 17%,rgba(255,209,103,.19),transparent 19%),
-    radial-gradient(circle at 18% 0%,rgba(73,147,183,.24),transparent 25%),
-    linear-gradient(180deg,#0b365a 0%,#0b4365 46%,#092d49 76%,#071f34 100%);
-  box-shadow:0 18px 45px rgba(0,0,0,.22);
+  border-bottom:1px solid rgba(115,207,216,.28);
+  background-image:
+    linear-gradient(90deg,rgba(2,18,32,.14) 0%,rgba(2,18,32,.12) 42%,rgba(2,18,32,.03) 100%),
+    url("/kids/assets/prophet-scenes/library.webp");
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 18px 46px rgba(0,0,0,.26);
 }
 .ps-library-hero::before{
   content:"";
   position:absolute;z-index:1;inset:0;
-  pointer-events:none;
   background:
-    radial-gradient(ellipse at 8% 103%,rgba(5,44,53,.92) 0 25%,transparent 26%),
-    radial-gradient(ellipse at 42% 105%,rgba(13,58,67,.84) 0 33%,transparent 34%),
-    radial-gradient(ellipse at 86% 105%,rgba(82,68,51,.62) 0 30%,transparent 31%),
-    linear-gradient(180deg,transparent 44%,rgba(1,16,29,.10) 55%,rgba(1,16,29,.44) 100%);
+    linear-gradient(90deg,rgba(4,23,37,.62) 0%,rgba(4,23,37,.31) 45%,rgba(4,23,37,.05) 76%),
+    linear-gradient(180deg,rgba(4,21,34,.04),rgba(4,21,34,.03) 62%,rgba(4,21,34,.28));
+  pointer-events:none;
 }
-.ps-hero-night{
-  position:absolute;z-index:2;inset:0;pointer-events:none;
-}
-.ps-hero-night::before{
+.ps-library-hero::after{
   content:"";
-  position:absolute;
-  right:24px;top:17px;
-  width:52px;height:52px;
-  border-radius:50%;
-  background:radial-gradient(circle,#ffe69e 0 6%,#ffd36d 7% 14%,rgba(255,213,109,.12) 15% 42%,transparent 43%);
-  filter:drop-shadow(0 0 18px rgba(255,210,95,.34));
+  position:absolute;z-index:2;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(241,202,112,.64),rgba(120,211,219,.52),transparent);
 }
+.ps-hero-night{position:absolute;inset:0;z-index:2;pointer-events:none}
 .ps-hero-night::after{
   content:"";
-  position:absolute;
-  left:-36px;right:30%;top:10px;height:92px;
-  background:
-    radial-gradient(ellipse at 15% 60%,rgba(145,188,211,.14) 0 24%,transparent 25%),
-    radial-gradient(ellipse at 42% 44%,rgba(145,188,211,.12) 0 28%,transparent 29%),
-    radial-gradient(ellipse at 72% 60%,rgba(145,188,211,.09) 0 24%,transparent 25%);
-  filter:blur(4px);
+  position:absolute;right:3%;top:4%;width:48%;height:72%;
+  background:radial-gradient(circle,rgba(255,213,108,.16),transparent 64%);
+  filter:blur(10px);
 }
 .ps-library-hero-copy{
   position:relative;z-index:8;
   width:59%;
-  min-height:344px;
-  padding:24px 0 20px 17px;
+  min-height:342px;
   display:flex;
   flex-direction:column;
   justify-content:center;
+  padding:22px 0 20px 18px;
 }
 .ps-kicker{
-  color:var(--gold2);
+  color:var(--ps-gold2);
   font-size:10px;
   font-weight:950;
   letter-spacing:.17em;
   text-transform:uppercase;
 }
 .ps-library-hero h2{
-  margin:8px 0 11px;
-  line-height:.92;
+  margin:8px 0 10px;
+  line-height:.91;
   letter-spacing:-.055em;
-  text-shadow:0 6px 26px rgba(0,0,0,.24);
+  text-shadow:0 5px 24px rgba(0,0,0,.28);
 }
 .ps-library-hero h2 span,
 .ps-library-hero h2 strong{
   display:block;
-  font-size:clamp(40px,10.8vw,60px);
+  font-size:clamp(39px,10.5vw,59px);
   font-weight:950;
 }
 .ps-library-hero h2 span{color:#fff}
-.ps-library-hero h2 strong{color:#ffd87d}
+.ps-library-hero h2 strong{color:#ffd982}
 .ps-library-hero p{
   margin:0;
-  max-width:330px;
-  color:rgba(255,255,255,.84);
+  color:rgba(255,255,255,.86);
   font-size:14px;
   line-height:1.48;
-  font-weight:560;
+  font-weight:570;
 }
 .ps-hero-stats{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
+  display:flex;gap:7px;flex-wrap:wrap;
   margin-top:16px;
 }
 .ps-hero-stats span{
   min-height:30px;
-  display:inline-flex;
-  align-items:center;
+  display:inline-flex;align-items:center;
   padding:6px 10px;
-  border:1px solid rgba(255,222,139,.17);
+  border:1px solid rgba(255,225,148,.17);
   border-radius:999px;
   background:rgba(2,19,32,.48);
-  color:rgba(255,255,255,.74);
-  font-size:9.5px;
-  font-weight:850;
+  color:rgba(255,255,255,.75);
+  font-size:9.5px;font-weight:850;
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
 }
-.ps-hero-stats strong{
-  margin-right:3px;
-  color:#ffe08a;
-  font-size:11px;
-}
+.ps-hero-stats strong{color:#ffe18d;font-size:11px;margin-right:3px}
 
-/* integrated 3D collage */
+/* Real transparent 3D collage */
 .ps-library-hero-art{
   position:absolute;z-index:6;
-  top:0;right:-4px;
-  width:52%;height:100%;
+  top:0;right:0;width:51%;height:100%;
   pointer-events:none;
 }
 .ps-library-hero-art::before{
   content:"";
-  position:absolute;
-  inset:40px -25px 18px 0;
+  position:absolute;inset:24px -20px 12px 0;
   background:
-    radial-gradient(circle at 55% 33%,rgba(255,207,95,.18),transparent 24%),
-    radial-gradient(circle at 38% 67%,rgba(100,201,210,.18),transparent 30%);
-  filter:blur(6px);
+    radial-gradient(circle at 45% 35%,rgba(255,212,111,.18),transparent 28%),
+    radial-gradient(circle at 58% 69%,rgba(96,204,211,.14),transparent 33%);
+  filter:blur(7px);
 }
 .ps-hero-symbol{
   position:absolute;
   overflow:visible;
-  filter:drop-shadow(0 13px 22px rgba(0,0,0,.32));
+  filter:drop-shadow(0 14px 22px rgba(0,0,0,.34));
 }
 .ps-hero-symbol img{
   width:100%;height:100%;
-  object-fit:cover;
   display:block;
-  -webkit-mask-image:radial-gradient(ellipse at center,#000 34%,rgba(0,0,0,.97) 50%,rgba(0,0,0,.58) 68%,transparent 84%);
-  mask-image:radial-gradient(ellipse at center,#000 34%,rgba(0,0,0,.97) 50%,rgba(0,0,0,.58) 68%,transparent 84%);
-  filter:saturate(1.12) contrast(1.04) brightness(1.08);
+  object-fit:contain;
+  filter:saturate(1.08) contrast(1.03) brightness(1.06);
 }
-.ps-hero-symbol.s-adam{width:105px;height:105px;right:111px;top:91px}
-.ps-hero-symbol.s-idris{width:120px;height:120px;right:73px;top:15px}
-.ps-hero-symbol.s-nuh{width:130px;height:105px;right:90px;top:196px}
-.ps-hero-symbol.s-hud{width:95px;height:95px;right:-6px;top:236px}
-.ps-hero-symbol.s-salih{width:112px;height:112px;right:-1px;top:171px}
-.ps-hero-symbol.s-ibrahim{width:122px;height:122px;right:-7px;top:65px}
-.ps-hero-symbol.s-adam img{transform:scale(1.06);mix-blend-mode:screen}
-.ps-hero-symbol.s-idris img{transform:scale(1.02);mix-blend-mode:screen}
-.ps-hero-symbol.s-nuh img{transform:scale(1.08);mix-blend-mode:screen}
-.ps-hero-symbol.s-hud img{transform:scale(1.07);mix-blend-mode:screen}
-.ps-hero-symbol.s-salih img{transform:scale(1.06);mix-blend-mode:screen}
-.ps-hero-symbol.s-ibrahim img{transform:scale(1.03)}
+.ps-hero-symbol.s-idris{width:104px;height:104px;right:66px;top:18px}
+.ps-hero-symbol.s-adam{width:91px;height:91px;right:106px;top:93px}
+.ps-hero-symbol.s-ibrahim{width:108px;height:108px;right:-2px;top:70px}
+.ps-hero-symbol.s-nuh{width:119px;height:99px;right:79px;top:190px}
+.ps-hero-symbol.s-salih{width:99px;height:99px;right:1px;top:178px}
+.ps-hero-symbol.s-hud{width:82px;height:82px;right:4px;top:249px}
 
-/* ---------- overview segmented control ---------- */
+/* ===== MODE SWITCH ===== */
 .ps-toolbar{
   position:sticky;
   top:max(58px,env(safe-area-inset-top,0px));
   z-index:30;
   padding:9px 12px;
-  border-bottom:1px solid rgba(109,205,215,.25);
+  border-bottom:1px solid rgba(110,205,214,.24);
   background:rgba(3,24,41,.96);
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
-  box-shadow:0 9px 25px rgba(0,0,0,.20);
+  box-shadow:0 10px 26px rgba(0,0,0,.21);
 }
 .ps-modes{
   width:100%;
   display:grid;
-  grid-template-columns:1.26fr .82fr .82fr;
+  grid-template-columns:1.27fr .82fr .82fr;
   gap:7px;
 }
 .ps-mode,.ps-detail-mode{
   min-height:49px;
-  border:1px solid rgba(143,216,225,.25);
+  border:1px solid rgba(143,216,225,.26);
   border-radius:999px;
   background:rgba(9,44,66,.62);
   color:rgba(255,255,255,.84);
@@ -226,116 +178,82 @@
 .ps-mode span{margin-right:4px;color:#e0edf2}
 .ps-mode.active,.ps-detail-mode.active{
   border-color:#f1cb6d;
-  color:#ffe59a;
+  color:#ffe69e;
   background:
-    radial-gradient(circle at 50% 0%,rgba(255,238,175,.20),transparent 64%),
-    linear-gradient(135deg,rgba(189,142,56,.30),rgba(79,77,47,.34));
-  box-shadow:
-    0 0 0 1px rgba(255,218,126,.10),
-    0 0 24px rgba(239,198,92,.23),
-    inset 0 1px rgba(255,255,255,.08);
+    radial-gradient(circle at 50% 0%,rgba(255,239,178,.20),transparent 65%),
+    linear-gradient(135deg,rgba(190,142,57,.30),rgba(76,76,48,.34));
+  box-shadow:0 0 24px rgba(239,198,92,.22),inset 0 1px rgba(255,255,255,.08);
 }
 
-/* ---------- cinematic full-width story rows ---------- */
-.ps-library-list{
-  position:relative;
-  background:#072840;
-}
+/* ===== FULL-WIDTH STORY BANNERS ===== */
+.ps-library-list{position:relative;background:#072840}
 .ps-story-row{
-  --sky1:#0f5274;
-  --sky2:#092e4b;
-  --land:#164b54;
-  --accent:#f1ca6d;
+  --scene:url("/kids/assets/prophet-scenes/night.webp");
   appearance:none;
   position:relative;
   width:100%;
   min-height:148px;
   display:grid;
-  grid-template-columns:43% minmax(0,1fr) 52px;
+  grid-template-columns:43% minmax(0,1fr) 50px;
   align-items:center;
   overflow:hidden;
-  padding:0 14px 0 0;
+  padding:0 13px 0 0;
   border:0;
-  border-bottom:1px solid rgba(111,207,215,.25);
+  border-bottom:1px solid rgba(112,208,216,.25);
   color:#fff;
   text-align:left;
   cursor:pointer;
-  background:
-    radial-gradient(circle at 18% 35%,rgba(255,215,109,.12),transparent 28%),
-    linear-gradient(90deg,var(--sky1) 0%,var(--sky2) 73%,#08283f 100%);
+  background-image:
+    linear-gradient(90deg,rgba(3,22,36,.02) 0%,rgba(3,22,36,.18) 32%,rgba(3,22,36,.64) 59%,rgba(3,22,36,.86) 100%),
+    var(--scene);
+  background-size:cover;
+  background-position:center;
 }
 .ps-story-row::before{
   content:"";
-  position:absolute;z-index:0;inset:0;
+  position:absolute;z-index:1;inset:0;
   background:
-    radial-gradient(circle at 7% 18%,rgba(255,239,184,.92) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 26% 8%,rgba(255,255,255,.72) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 55% 16%,rgba(255,226,145,.72) 0 1px,transparent 1.5px),
-    radial-gradient(ellipse at 10% 108%,var(--land) 0 26%,transparent 27%),
-    radial-gradient(ellipse at 44% 108%,color-mix(in srgb,var(--land) 78%,#102f3d) 0 34%,transparent 35%),
-    radial-gradient(ellipse at 86% 108%,color-mix(in srgb,var(--land) 66%,#0d2938) 0 28%,transparent 29%);
-  opacity:.88;
+    radial-gradient(circle at 9% 16%,rgba(255,230,158,.78) 0 1px,transparent 1.5px),
+    linear-gradient(180deg,transparent 48%,rgba(2,18,30,.12) 100%);
+  pointer-events:none;
 }
 .ps-story-row::after{
   content:"";
-  position:absolute;z-index:7;
-  left:0;right:0;bottom:0;height:1px;
-  background:linear-gradient(90deg,rgba(239,199,100,.35),rgba(104,208,216,.30),transparent);
+  position:absolute;z-index:8;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,rgba(239,199,100,.36),rgba(104,208,216,.30),transparent);
 }
-.ps-row-scene{
-  position:absolute;z-index:1;inset:0;pointer-events:none;
-}
-.ps-row-scene::before{
-  content:"";
-  position:absolute;
-  right:-9%;bottom:8px;
-  width:56%;height:62%;
-  opacity:.35;
-  background:
-    linear-gradient(154deg,transparent 51%,rgba(13,44,57,.92) 52% 65%,transparent 66%),
-    linear-gradient(25deg,transparent 58%,rgba(17,53,66,.82) 59% 71%,transparent 72%);
-}
+.ps-story-row:active{filter:brightness(1.06)}
+.ps-row-scene{position:absolute;inset:0;z-index:2;pointer-events:none}
 .ps-row-scene::after{
   content:"";
   position:absolute;
-  left:-12%;top:8px;
-  width:60%;height:36px;
-  border-radius:999px;
-  background:rgba(171,211,228,.08);
-  filter:blur(5px);
+  left:3%;top:13%;width:38%;height:74%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,211,106,.15),rgba(90,201,209,.05) 45%,transparent 73%);
+  filter:blur(9px);
 }
 .ps-row-art{
-  position:relative;z-index:3;
+  position:relative;z-index:4;
   align-self:stretch;
   overflow:visible;
 }
-.ps-row-art::before{
-  content:"";
-  position:absolute;
-  left:13%;top:19%;width:72%;height:62%;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(255,208,99,.18),rgba(91,201,210,.08) 45%,transparent 72%);
-  filter:blur(10px);
-}
 .ps-row-art img{
   position:absolute;
-  left:-8%;top:-13%;
-  width:122%;height:126%;
-  object-fit:cover;
-  object-position:var(--img-x,50%) var(--img-y,50%);
-  transform:scale(var(--img-scale,1.04));
-  -webkit-mask-image:radial-gradient(ellipse at 46% 51%,#000 34%,rgba(0,0,0,.98) 51%,rgba(0,0,0,.63) 68%,transparent 84%);
-  mask-image:radial-gradient(ellipse at 46% 51%,#000 34%,rgba(0,0,0,.98) 51%,rgba(0,0,0,.63) 68%,transparent 84%);
-  filter:saturate(1.14) contrast(1.05) brightness(1.07) drop-shadow(0 13px 15px rgba(0,0,0,.20));
+  left:2%;top:7%;
+  width:96%;height:88%;
+  object-fit:contain;
+  transform:scale(var(--symbol-scale,1.06));
+  transform-origin:center;
+  filter:saturate(1.08) contrast(1.03) brightness(1.06) drop-shadow(0 15px 16px rgba(0,0,0,.26));
 }
 .ps-row-copy{
-  position:relative;z-index:4;
+  position:relative;z-index:5;
   min-width:0;
-  padding:18px 0 16px 6px;
+  padding:18px 0 16px 5px;
 }
 .ps-row-meta{
   display:block;
-  color:#b2ead3;
+  color:#b8ead4;
   font-size:9.5px;
   line-height:1.25;
   font-weight:950;
@@ -350,23 +268,23 @@
   line-height:1;
   font-weight:950;
   letter-spacing:-.035em;
-  text-shadow:0 3px 13px rgba(0,0,0,.20);
+  text-shadow:0 3px 13px rgba(0,0,0,.25);
 }
 .ps-row-ar{
   display:block;
   margin-top:8px;
-  color:rgba(255,255,255,.82);
+  color:rgba(255,255,255,.84);
   font:18px/1.35 "Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 .ps-row-go{
-  position:relative;z-index:5;
+  position:relative;z-index:6;
   justify-self:end;
   width:43px;height:43px;
   display:grid;place-items:center;
-  border:1px solid rgba(242,203,109,.42);
+  border:1px solid rgba(242,203,109,.44);
   border-radius:50%;
   background:rgba(6,31,49,.30);
   color:#ffe491;
@@ -375,119 +293,48 @@
   box-shadow:0 0 16px rgba(240,199,97,.09);
 }
 .ps-done{
-  position:absolute;z-index:8;
-  right:55px;bottom:10px;
-  width:22px;height:22px;
-  border-radius:50%;
+  position:absolute;z-index:9;right:54px;bottom:10px;
+  width:22px;height:22px;border-radius:50%;
   background:#4ca777;
   box-shadow:0 6px 14px rgba(0,0,0,.20),inset 0 0 0 2px rgba(255,255,255,.20);
 }
 .ps-done::after{
-  content:"";
-  position:absolute;left:6px;top:4px;width:6px;height:9px;
-  border:solid #fff;border-width:0 2px 2px 0;
-  transform:rotate(42deg);
-}
-.ps-story-row:active{filter:brightness(1.07)}
-
-/* per-story scenic palettes */
-.ps-story-row[data-ps-id="muhammad"]{--sky1:#174e66;--sky2:#0b314e;--land:#315a55;--accent:#efd17a}
-.ps-story-row[data-ps-id="adam"]{--sky1:#17685f;--sky2:#0b3a52;--land:#39724d;--accent:#e7dc72}
-.ps-story-row[data-ps-id="idris"]{--sky1:#3b4f82;--sky2:#0d3455;--land:#314467;--accent:#d8b569}
-.ps-story-row[data-ps-id="nuh"]{--sky1:#137492;--sky2:#0c4165;--land:#17627c;--accent:#9ee9f2}
-.ps-story-row[data-ps-id="hud"]{--sky1:#a76530;--sky2:#193e5d;--land:#9b6337;--accent:#ffd27d}
-.ps-story-row[data-ps-id="salih"]{--sky1:#a7793d;--sky2:#19425f;--land:#9a6e3d;--accent:#f1cd79}
-.ps-story-row[data-ps-id="ibrahim"]{--sky1:#855c32;--sky2:#0d3d5c;--land:#85623c;--accent:#efc45f}
-.ps-story-row[data-ps-id="lut"]{--sky1:#57515e;--sky2:#183e5a;--land:#50484a;--accent:#c8aa82}
-.ps-story-row[data-ps-id="ismail"]{--sky1:#755f40;--sky2:#10405b;--land:#665341;--accent:#d8b97a}
-.ps-story-row[data-ps-id="ishaq"]{--sky1:#9d7047;--sky2:#19455a;--land:#927051;--accent:#e7c58e}
-.ps-story-row[data-ps-id="yaqub"]{--sky1:#755b48;--sky2:#263f5d;--land:#665143;--accent:#c8a684}
-.ps-story-row[data-ps-id="yusuf"]{--sky1:#735a32;--sky2:#193e60;--land:#70593b;--accent:#edc475}
-.ps-story-row[data-ps-id="ayyub"]{--sky1:#3e6d71;--sky2:#163f5f;--land:#38625e;--accent:#88d0d4}
-.ps-story-row[data-ps-id="shuayb"]{--sky1:#7e5e35;--sky2:#153f5a;--land:#70583b;--accent:#d9b45f}
-.ps-story-row[data-ps-id="musa"]{--sky1:#175879;--sky2:#0b3858;--land:#176783;--accent:#79d5ef}
-.ps-story-row[data-ps-id="harun"]{--sky1:#75582f;--sky2:#193b58;--land:#6c5737;--accent:#d5ae59}
-.ps-story-row[data-ps-id="dawud"]{--sky1:#59555f;--sky2:#193f5a;--land:#53545d;--accent:#caa96f}
-.ps-story-row[data-ps-id="sulayman"]{--sky1:#7b5b2b;--sky2:#193e5a;--land:#6d5d35;--accent:#e3bc64}
-.ps-story-row[data-ps-id="ilyas"]{--sky1:#5a5046;--sky2:#163f58;--land:#4e4b43;--accent:#d8bd7c}
-.ps-story-row[data-ps-id="alyasa"]{--sky1:#586a49;--sky2:#15415b;--land:#4c6748;--accent:#a4bb7f}
-.ps-story-row[data-ps-id="yunus"]{--sky1:#175875;--sky2:#0d3958;--land:#17657e;--accent:#7fcfe0}
-.ps-story-row[data-ps-id="zakariyya"]{--sky1:#595461;--sky2:#193e5b;--land:#53505a;--accent:#c5af87}
-.ps-story-row[data-ps-id="yahya"]{--sky1:#4e6965;--sky2:#193e5b;--land:#48635e;--accent:#a9c9c0}
-.ps-story-row[data-ps-id="isa"]{--sky1:#476f7e;--sky2:#193d59;--land:#456771;--accent:#cbd8d1}
-.ps-story-row[data-ps-id="dhul-kifl"]{--sky1:#5d514b;--sky2:#193d59;--land:#564c46;--accent:#c9a779}
-
-/* water rows */
-.ps-story-row[data-ps-id="nuh"]::before,
-.ps-story-row[data-ps-id="musa"]::before,
-.ps-story-row[data-ps-id="yunus"]::before{
-  background:
-    radial-gradient(circle at 7% 18%,rgba(255,239,184,.92) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 28% 8%,rgba(255,255,255,.72) 0 1px,transparent 1.5px),
-    radial-gradient(ellipse at 12% 96%,rgba(76,199,225,.36) 0 21%,transparent 22%),
-    radial-gradient(ellipse at 45% 101%,rgba(60,162,197,.32) 0 28%,transparent 29%),
-    radial-gradient(ellipse at 81% 99%,rgba(48,132,170,.29) 0 24%,transparent 25%);
-}
-/* desert rows */
-.ps-story-row[data-ps-id="hud"]::before,
-.ps-story-row[data-ps-id="salih"]::before,
-.ps-story-row[data-ps-id="ibrahim"]::before,
-.ps-story-row[data-ps-id="ishaq"]::before,
-.ps-story-row[data-ps-id="ismail"]::before{
-  background:
-    radial-gradient(circle at 8% 17%,rgba(255,236,176,.94) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 31% 8%,rgba(255,255,255,.68) 0 1px,transparent 1.5px),
-    radial-gradient(ellipse at 10% 106%,rgba(233,171,93,.75) 0 25%,transparent 26%),
-    radial-gradient(ellipse at 47% 107%,rgba(188,122,66,.72) 0 34%,transparent 35%),
-    radial-gradient(ellipse at 85% 106%,rgba(137,88,55,.64) 0 26%,transparent 27%);
+  content:"";position:absolute;left:6px;top:4px;width:6px;height:9px;
+  border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg);
 }
 
-/* stronger cutout blend for bright-on-dark assets */
-.ps-story-row:not([data-ps-id="ibrahim"]):not([data-ps-id="muhammad"]):not([data-ps-id="dawud"]):not([data-ps-id="lut"]) .ps-row-art img{
-  mix-blend-mode:screen;
-}
-.ps-story-row[data-ps-id="ibrahim"] .ps-row-art img,
-.ps-story-row[data-ps-id="muhammad"] .ps-row-art img,
-.ps-story-row[data-ps-id="dawud"] .ps-row-art img,
-.ps-story-row[data-ps-id="lut"] .ps-row-art img{
-  mix-blend-mode:normal;
-  opacity:.97;
-}
+/* Scene assignments */
+.ps-story-row[data-ps-id="muhammad"]{--scene:url("/kids/assets/prophet-scenes/royal.webp");--symbol-scale:1.04}
+.ps-story-row[data-ps-id="adam"]{--scene:url("/kids/assets/prophet-scenes/garden.webp");--symbol-scale:1.04}
+.ps-story-row[data-ps-id="idris"]{--scene:url("/kids/assets/prophet-scenes/night.webp");--symbol-scale:1.02}
+.ps-story-row[data-ps-id="nuh"]{--scene:url("/kids/assets/prophet-scenes/ocean.webp");--symbol-scale:1.08}
+.ps-story-row[data-ps-id="hud"]{--scene:url("/kids/assets/prophet-scenes/desert.webp");--symbol-scale:1.08}
+.ps-story-row[data-ps-id="salih"]{--scene:url("/kids/assets/prophet-scenes/desert.webp");--symbol-scale:1.06}
+.ps-story-row[data-ps-id="ibrahim"]{--scene:url("/kids/assets/prophet-scenes/desert.webp");--symbol-scale:1.04}
+.ps-story-row[data-ps-id="lut"]{--scene:url("/kids/assets/prophet-scenes/night.webp");--symbol-scale:1.05}
+.ps-story-row[data-ps-id="ismail"]{--scene:url("/kids/assets/prophet-scenes/desert.webp");--symbol-scale:1.05}
+.ps-story-row[data-ps-id="ishaq"]{--scene:url("/kids/assets/prophet-scenes/desert.webp");--symbol-scale:1.05}
+.ps-story-row[data-ps-id="yaqub"]{--scene:url("/kids/assets/prophet-scenes/night.webp");--symbol-scale:1.06}
+.ps-story-row[data-ps-id="yusuf"]{--scene:url("/kids/assets/prophet-scenes/royal.webp");--symbol-scale:1.04}
+.ps-story-row[data-ps-id="ayyub"]{--scene:url("/kids/assets/prophet-scenes/water.webp");--symbol-scale:1.05}
+.ps-story-row[data-ps-id="shuayb"]{--scene:url("/kids/assets/prophet-scenes/desert.webp");--symbol-scale:1.04}
+.ps-story-row[data-ps-id="musa"]{--scene:url("/kids/assets/prophet-scenes/ocean.webp");--symbol-scale:1.06}
+.ps-story-row[data-ps-id="harun"]{--scene:url("/kids/assets/prophet-scenes/mountain.webp");--symbol-scale:1.04}
+.ps-story-row[data-ps-id="dawud"]{--scene:url("/kids/assets/prophet-scenes/mountain.webp");--symbol-scale:1.04}
+.ps-story-row[data-ps-id="sulayman"]{--scene:url("/kids/assets/prophet-scenes/royal.webp");--symbol-scale:1.05}
+.ps-story-row[data-ps-id="ilyas"]{--scene:url("/kids/assets/prophet-scenes/mountain.webp");--symbol-scale:1.05}
+.ps-story-row[data-ps-id="alyasa"]{--scene:url("/kids/assets/prophet-scenes/garden.webp");--symbol-scale:1.04}
+.ps-story-row[data-ps-id="yunus"]{--scene:url("/kids/assets/prophet-scenes/ocean.webp");--symbol-scale:1.06}
+.ps-story-row[data-ps-id="zakariyya"]{--scene:url("/kids/assets/prophet-scenes/night.webp");--symbol-scale:1.04}
+.ps-story-row[data-ps-id="yahya"]{--scene:url("/kids/assets/prophet-scenes/water.webp");--symbol-scale:1.04}
+.ps-story-row[data-ps-id="isa"]{--scene:url("/kids/assets/prophet-scenes/garden.webp");--symbol-scale:1.05}
+.ps-story-row[data-ps-id="dhul-kifl"]{--scene:url("/kids/assets/prophet-scenes/night.webp");--symbol-scale:1.04}
 
-/* icon-specific framing */
-.ps-story-row[data-ps-id="muhammad"] .ps-row-art img{--img-y:53%;--img-scale:1.05}
-.ps-story-row[data-ps-id="adam"] .ps-row-art img{--img-y:50%;--img-scale:1.00}
-.ps-story-row[data-ps-id="idris"] .ps-row-art img{--img-y:50%;--img-scale:1.00}
-.ps-story-row[data-ps-id="nuh"] .ps-row-art img{--img-y:54%;--img-scale:1.06}
-.ps-story-row[data-ps-id="hud"] .ps-row-art img{--img-y:55%;--img-scale:1.05}
-.ps-story-row[data-ps-id="salih"] .ps-row-art img{--img-y:52%;--img-scale:1.03}
-.ps-story-row[data-ps-id="ibrahim"] .ps-row-art img{--img-y:51%;--img-scale:1.00}
-.ps-story-row[data-ps-id="lut"] .ps-row-art img{--img-y:50%;--img-scale:1.03}
-.ps-story-row[data-ps-id="ismail"] .ps-row-art img{--img-y:52%;--img-scale:1.02}
-.ps-story-row[data-ps-id="ishaq"] .ps-row-art img{--img-y:51%;--img-scale:1.02}
-.ps-story-row[data-ps-id="yaqub"] .ps-row-art img{--img-y:53%;--img-scale:1.03}
-.ps-story-row[data-ps-id="yusuf"] .ps-row-art img{--img-y:52%;--img-scale:1.01}
-.ps-story-row[data-ps-id="ayyub"] .ps-row-art img{--img-y:51%;--img-scale:1.03}
-.ps-story-row[data-ps-id="shuayb"] .ps-row-art img{--img-y:51%;--img-scale:1.01}
-.ps-story-row[data-ps-id="musa"] .ps-row-art img{--img-y:57%;--img-scale:1.01}
-.ps-story-row[data-ps-id="harun"] .ps-row-art img{--img-y:52%;--img-scale:1.01}
-.ps-story-row[data-ps-id="dawud"] .ps-row-art img{--img-y:50%;--img-scale:1.01}
-.ps-story-row[data-ps-id="sulayman"] .ps-row-art img{--img-y:53%;--img-scale:1.02}
-.ps-story-row[data-ps-id="ilyas"] .ps-row-art img{--img-y:54%;--img-scale:1.02}
-.ps-story-row[data-ps-id="alyasa"] .ps-row-art img{--img-y:50%;--img-scale:1.01}
-.ps-story-row[data-ps-id="yunus"] .ps-row-art img{--img-y:50%;--img-scale:1.01}
-.ps-story-row[data-ps-id="zakariyya"] .ps-row-art img{--img-y:51%;--img-scale:1.01}
-.ps-story-row[data-ps-id="yahya"] .ps-row-art img{--img-y:51%;--img-scale:1.01}
-.ps-story-row[data-ps-id="isa"] .ps-row-art img{--img-y:47%;--img-scale:1.02}
-.ps-story-row[data-ps-id="dhul-kifl"] .ps-row-art img{--img-y:50%;--img-scale:1.01}
-
-/* ---------- detail view ---------- */
+/* ===== DETAIL PAGE ===== */
 .ps-modal{
   position:fixed;inset:0;z-index:10250;
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-  background:rgba(1,10,17,.91);
+  display:none;align-items:flex-end;justify-content:center;
+  background:rgba(1,10,17,.90);
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
   overscroll-behavior:none;
@@ -496,49 +343,40 @@
 .ps-sheet{
   position:relative;
   width:min(100%,760px);
-  height:100dvh;
-  max-height:100dvh;
-  display:flex;
-  flex-direction:column;
+  height:100dvh;max-height:100dvh;
+  display:flex;flex-direction:column;
   overflow:hidden;
   border:0;
-  background:linear-gradient(180deg,#05253c,#042139 55%,#031a2d);
+  background:linear-gradient(180deg,#06263e,#041d31);
 }
 .ps-top{
-  position:absolute;z-index:30;
+  position:absolute;z-index:20;
   left:0;right:0;top:0;
   display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:calc(11px + env(safe-area-inset-top)) 16px 10px;
+  padding:calc(11px + env(safe-area-inset-top)) 15px 9px;
   pointer-events:none;
-  transition:background .18s ease,border-color .18s ease;
 }
 .ps-modal.scrolled .ps-top{
-  background:rgba(3,23,39,.95);
-  border-bottom:1px solid rgba(110,207,216,.18);
+  background:rgba(4,25,41,.95);
+  border-bottom:1px solid rgba(113,202,209,.18);
   backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
 }
 .ps-top-label{
-  color:#f3cf77;
-  font-size:9px;
-  font-weight:950;
-  letter-spacing:.14em;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  color:#f1cd78;
+  font-size:9px;font-weight:950;letter-spacing:.14em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .ps-close{
   pointer-events:auto;
-  flex:none;
-  width:48px;height:48px;
+  flex:none;width:46px;height:46px;
   display:grid;place-items:center;
-  border:1px solid rgba(241,200,103,.40);
+  border:1px solid rgba(241,198,100,.38);
   border-radius:50%;
-  background:rgba(5,33,51,.72);
-  color:#ffe39a;
-  font-size:29px;
-  line-height:1;
-  box-shadow:0 0 18px rgba(240,198,96,.09);
+  background:rgba(5,34,53,.72);
+  color:#ffe19a;
+  font-size:28px;line-height:1;
+  box-shadow:0 0 18px rgba(240,198,97,.08);
 }
 .ps-scroll{
   flex:1;min-height:0;
@@ -548,108 +386,87 @@
   -webkit-overflow-scrolling:touch;
 }
 .ps-scroll::-webkit-scrollbar{display:none}
-
-/* One cinematic hero that contains image, title, summary, metadata and modes */
 .ps-hero{
-  --hsky1:#0d638d;
-  --hsky2:#073954;
-  --hland:#155a69;
+  --detail-scene:url("/kids/assets/prophet-scenes/night.webp");
   position:relative;
   min-height:650px;
   overflow:hidden;
   isolation:isolate;
-  background:
-    radial-gradient(circle at 84% 28%,rgba(255,210,107,.58),transparent 15%),
-    linear-gradient(180deg,var(--hsky1) 0%,var(--hsky2) 58%,#052942 100%);
+  background-image:
+    linear-gradient(90deg,rgba(3,23,38,.34) 0%,rgba(3,23,38,.15) 48%,rgba(3,23,38,.03) 100%),
+    linear-gradient(180deg,rgba(3,23,38,.05),rgba(3,23,38,.02) 58%,rgba(3,23,38,.72) 100%),
+    var(--detail-scene);
+  background-size:cover;
+  background-position:center;
 }
-.ps-detail-sky{
-  position:absolute;z-index:0;inset:0;pointer-events:none;
-  background:
-    radial-gradient(circle at 9% 15%,rgba(255,255,255,.86) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 22% 7%,rgba(255,228,148,.86) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 56% 15%,rgba(255,255,255,.72) 0 1px,transparent 1.5px),
-    radial-gradient(ellipse at 12% 24%,rgba(179,216,232,.12) 0 25%,transparent 26%),
-    radial-gradient(ellipse at 46% 17%,rgba(179,216,232,.10) 0 28%,transparent 29%);
+.ps-detail-sky{position:absolute;inset:0;z-index:1;pointer-events:none}
+.ps-detail-sky::after{
+  content:"";
+  position:absolute;left:-10%;right:34%;top:48px;height:82px;
+  border-radius:999px;
+  background:rgba(190,220,234,.08);
+  filter:blur(7px);
 }
-.ps-detail-land{
-  position:absolute;z-index:1;left:-10%;right:-10%;top:285px;height:180px;pointer-events:none;
-  background:
-    radial-gradient(ellipse at 12% 100%,var(--hland) 0 27%,transparent 28%),
-    radial-gradient(ellipse at 45% 100%,color-mix(in srgb,var(--hland) 82%,#153341) 0 34%,transparent 35%),
-    radial-gradient(ellipse at 82% 100%,color-mix(in srgb,var(--hland) 70%,#112f3d) 0 27%,transparent 28%);
-  opacity:.84;
-}
+.ps-detail-land{position:absolute;inset:0;z-index:1;pointer-events:none}
 .ps-detail-glow{
   position:absolute;z-index:2;
-  right:5%;top:90px;
-  width:58%;height:260px;
+  right:7%;top:86px;width:57%;height:290px;
   border-radius:50%;
-  background:radial-gradient(circle,rgba(255,215,111,.27),rgba(96,195,205,.09) 40%,transparent 72%);
+  background:radial-gradient(circle,rgba(255,215,111,.24),rgba(96,195,205,.07) 46%,transparent 72%);
   filter:blur(12px);
-  pointer-events:none;
 }
 .ps-hero>img{
-  position:absolute;z-index:4;
-  right:-4%;top:82px;
-  width:74%;height:350px;
-  object-fit:cover;
-  object-position:center var(--hero-y,50%);
-  transform:scale(var(--hero-scale,1.04));
-  -webkit-mask-image:radial-gradient(ellipse at 55% 50%,#000 34%,rgba(0,0,0,.98) 53%,rgba(0,0,0,.63) 70%,transparent 86%);
-  mask-image:radial-gradient(ellipse at 55% 50%,#000 34%,rgba(0,0,0,.98) 53%,rgba(0,0,0,.63) 70%,transparent 86%);
-  filter:saturate(1.16) contrast(1.04) brightness(1.07) drop-shadow(0 18px 25px rgba(0,0,0,.26));
-}
-.ps-hero:not([data-ps-id="ibrahim"]):not([data-ps-id="muhammad"]):not([data-ps-id="dawud"]):not([data-ps-id="lut"])>img{
-  mix-blend-mode:screen;
+  position:absolute;z-index:5;
+  right:-2%;top:70px;
+  width:69%;height:390px;
+  object-fit:contain;
+  transform:scale(var(--detail-scale,1.08));
+  transform-origin:center;
+  filter:saturate(1.08) contrast(1.03) brightness(1.06) drop-shadow(0 20px 26px rgba(0,0,0,.30));
 }
 .ps-hero-copy{
-  position:absolute;z-index:8;
+  position:absolute;z-index:10;
   left:18px;right:18px;bottom:18px;
 }
 .ps-title{
   margin:0;
-  max-width:54%;
+  max-width:57%;
   color:#fff;
-  font-size:clamp(48px,13vw,72px);
+  font-size:clamp(49px,13vw,72px);
   line-height:.92;
   font-weight:950;
   letter-spacing:-.055em;
-  text-shadow:0 5px 22px rgba(0,0,0,.28);
+  text-shadow:0 5px 22px rgba(0,0,0,.30);
 }
 .ps-ar{
   margin-top:7px;
-  max-width:65%;
+  max-width:70%;
   color:#ffd97d;
   font:clamp(24px,7vw,34px)/1.32 "Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;
   text-align:left;
-  text-shadow:0 3px 15px rgba(0,0,0,.20);
+  text-shadow:0 3px 15px rgba(0,0,0,.22);
 }
 .ps-summary{
   margin:12px 0 0;
-  max-width:68%;
-  color:rgba(255,255,255,.90);
+  max-width:74%;
+  color:rgba(255,255,255,.92);
   font-size:17px;
   line-height:1.52;
-  font-weight:540;
+  font-weight:560;
 }
 .ps-meta{
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
+  display:flex;gap:7px;flex-wrap:wrap;
   margin-top:14px;
 }
 .ps-pill{
   min-height:39px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
+  display:inline-flex;align-items:center;justify-content:center;
   padding:8px 12px;
-  border:1px solid rgba(140,214,224,.27);
+  border:1px solid rgba(140,214,224,.28);
   border-radius:999px;
-  background:rgba(5,40,59,.54);
-  color:rgba(255,255,255,.84);
-  font-size:11px;
-  font-weight:850;
+  background:rgba(5,40,59,.55);
+  color:rgba(255,255,255,.85);
+  font-size:11px;font-weight:850;
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
 }
@@ -662,142 +479,66 @@
   padding:4px;
   border:1px solid rgba(127,210,220,.23);
   border-radius:999px;
-  background:rgba(4,31,49,.50);
+  background:rgba(4,31,49,.51);
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
 }
-.ps-detail-mode{
-  min-height:51px;
-  border-color:transparent;
-  background:transparent;
-}
+.ps-detail-mode{min-height:51px;border-color:transparent;background:transparent}
 
-/* detail palettes */
-.ps-hero[data-ps-id="muhammad"]{--hsky1:#17546a;--hsky2:#0b3450;--hland:#315d55}
-.ps-hero[data-ps-id="adam"]{--hsky1:#2d7b73;--hsky2:#1a5260;--hland:#3e7455}
-.ps-hero[data-ps-id="idris"]{--hsky1:#485a8b;--hsky2:#293f68;--hland:#384a68}
-.ps-hero[data-ps-id="nuh"]{--hsky1:#14779b;--hsky2:#0b4b72;--hland:#17677f}
-.ps-hero[data-ps-id="hud"]{--hsky1:#8d613f;--hsky2:#4f5261;--hland:#9b6338}
-.ps-hero[data-ps-id="salih"]{--hsky1:#947243;--hsky2:#4c5565;--hland:#9a723e}
-.ps-hero[data-ps-id="ibrahim"]{--hsky1:#8b633d;--hsky2:#3b5364;--hland:#8e673e}
-.ps-hero[data-ps-id="lut"]{--hsky1:#575866;--hsky2:#34495d;--hland:#514b4e}
-.ps-hero[data-ps-id="ismail"]{--hsky1:#806841;--hsky2:#3f5666;--hland:#725b3d}
-.ps-hero[data-ps-id="ishaq"]{--hsky1:#9a7049;--hsky2:#455d6a;--hland:#927151}
-.ps-hero[data-ps-id="yaqub"]{--hsky1:#76604f;--hsky2:#3e5368;--hland:#665344}
-.ps-hero[data-ps-id="yusuf"]{--hsky1:#806437;--hsky2:#3c566d;--hland:#705a3b}
-.ps-hero[data-ps-id="ayyub"]{--hsky1:#46777b;--hsky2:#315b6c;--hland:#3c6661}
-.ps-hero[data-ps-id="shuayb"]{--hsky1:#80613a;--hsky2:#405668;--hland:#735a3c}
-.ps-hero[data-ps-id="musa"]{--hsky1:#176987;--hsky2:#0d4568;--hland:#176d86}
-.ps-hero[data-ps-id="harun"]{--hsky1:#775c34;--hsky2:#3c5267;--hland:#6e5838}
-.ps-hero[data-ps-id="dawud"]{--hsky1:#5c5964;--hsky2:#3b5165;--hland:#53545d}
-.ps-hero[data-ps-id="sulayman"]{--hsky1:#7d5e31;--hsky2:#3c5367;--hland:#705f38}
-.ps-hero[data-ps-id="ilyas"]{--hsky1:#5d544a;--hsky2:#3c5264;--hland:#504c45}
-.ps-hero[data-ps-id="alyasa"]{--hsky1:#5c704f;--hsky2:#36576a;--hland:#506d4c}
-.ps-hero[data-ps-id="yunus"]{--hsky1:#176882;--hsky2:#0e4568;--hland:#176a83}
-.ps-hero[data-ps-id="zakariyya"]{--hsky1:#5b5664;--hsky2:#3c5268;--hland:#55515b}
-.ps-hero[data-ps-id="yahya"]{--hsky1:#526d6a;--hsky2:#3b5668;--hland:#4b6862}
-.ps-hero[data-ps-id="isa"]{--hsky1:#4b7280;--hsky2:#3b5365;--hland:#486b75}
-.ps-hero[data-ps-id="dhul-kifl"]{--hsky1:#60554f;--hsky2:#3b5165;--hland:#594f49}
+/* Detail scene assignments */
+.ps-hero[data-ps-id="muhammad"]{--detail-scene:url("/kids/assets/prophet-scenes/royal.webp");--detail-scale:1.06}
+.ps-hero[data-ps-id="adam"]{--detail-scene:url("/kids/assets/prophet-scenes/garden.webp");--detail-scale:1.07}
+.ps-hero[data-ps-id="idris"]{--detail-scene:url("/kids/assets/prophet-scenes/night.webp");--detail-scale:1.05}
+.ps-hero[data-ps-id="nuh"]{--detail-scene:url("/kids/assets/prophet-scenes/ocean.webp");--detail-scale:1.13}
+.ps-hero[data-ps-id="hud"]{--detail-scene:url("/kids/assets/prophet-scenes/desert.webp");--detail-scale:1.12}
+.ps-hero[data-ps-id="salih"]{--detail-scene:url("/kids/assets/prophet-scenes/desert.webp");--detail-scale:1.09}
+.ps-hero[data-ps-id="ibrahim"]{--detail-scene:url("/kids/assets/prophet-scenes/desert.webp");--detail-scale:1.07}
+.ps-hero[data-ps-id="lut"]{--detail-scene:url("/kids/assets/prophet-scenes/night.webp");--detail-scale:1.08}
+.ps-hero[data-ps-id="ismail"]{--detail-scene:url("/kids/assets/prophet-scenes/desert.webp");--detail-scale:1.08}
+.ps-hero[data-ps-id="ishaq"]{--detail-scene:url("/kids/assets/prophet-scenes/desert.webp");--detail-scale:1.08}
+.ps-hero[data-ps-id="yaqub"]{--detail-scene:url("/kids/assets/prophet-scenes/night.webp");--detail-scale:1.09}
+.ps-hero[data-ps-id="yusuf"]{--detail-scene:url("/kids/assets/prophet-scenes/royal.webp");--detail-scale:1.08}
+.ps-hero[data-ps-id="ayyub"]{--detail-scene:url("/kids/assets/prophet-scenes/water.webp");--detail-scale:1.08}
+.ps-hero[data-ps-id="shuayb"]{--detail-scene:url("/kids/assets/prophet-scenes/desert.webp");--detail-scale:1.07}
+.ps-hero[data-ps-id="musa"]{--detail-scene:url("/kids/assets/prophet-scenes/ocean.webp");--detail-scale:1.09}
+.ps-hero[data-ps-id="harun"]{--detail-scene:url("/kids/assets/prophet-scenes/mountain.webp");--detail-scale:1.07}
+.ps-hero[data-ps-id="dawud"]{--detail-scene:url("/kids/assets/prophet-scenes/mountain.webp");--detail-scale:1.07}
+.ps-hero[data-ps-id="sulayman"]{--detail-scene:url("/kids/assets/prophet-scenes/royal.webp");--detail-scale:1.08}
+.ps-hero[data-ps-id="ilyas"]{--detail-scene:url("/kids/assets/prophet-scenes/mountain.webp");--detail-scale:1.08}
+.ps-hero[data-ps-id="alyasa"]{--detail-scene:url("/kids/assets/prophet-scenes/garden.webp");--detail-scale:1.07}
+.ps-hero[data-ps-id="yunus"]{--detail-scene:url("/kids/assets/prophet-scenes/ocean.webp");--detail-scale:1.10}
+.ps-hero[data-ps-id="zakariyya"]{--detail-scene:url("/kids/assets/prophet-scenes/night.webp");--detail-scale:1.06}
+.ps-hero[data-ps-id="yahya"]{--detail-scene:url("/kids/assets/prophet-scenes/water.webp");--detail-scale:1.07}
+.ps-hero[data-ps-id="isa"]{--detail-scene:url("/kids/assets/prophet-scenes/garden.webp");--detail-scale:1.08}
+.ps-hero[data-ps-id="dhul-kifl"]{--detail-scene:url("/kids/assets/prophet-scenes/night.webp");--detail-scale:1.06}
 
-/* water detail scenes */
-.ps-hero[data-ps-id="nuh"] .ps-detail-land,
-.ps-hero[data-ps-id="musa"] .ps-detail-land,
-.ps-hero[data-ps-id="yunus"] .ps-detail-land{
-  background:
-    radial-gradient(ellipse at 12% 66%,rgba(86,205,229,.40) 0 22%,transparent 23%),
-    radial-gradient(ellipse at 43% 72%,rgba(66,179,210,.34) 0 27%,transparent 28%),
-    radial-gradient(ellipse at 78% 68%,rgba(54,147,183,.32) 0 25%,transparent 26%);
-  opacity:1;
-}
-/* desert detail scenes */
-.ps-hero[data-ps-id="hud"] .ps-detail-land,
-.ps-hero[data-ps-id="salih"] .ps-detail-land,
-.ps-hero[data-ps-id="ibrahim"] .ps-detail-land,
-.ps-hero[data-ps-id="ishaq"] .ps-detail-land,
-.ps-hero[data-ps-id="ismail"] .ps-detail-land{
-  background:
-    radial-gradient(ellipse at 12% 100%,rgba(232,171,94,.78) 0 25%,transparent 26%),
-    radial-gradient(ellipse at 47% 100%,rgba(190,125,67,.74) 0 33%,transparent 34%),
-    radial-gradient(ellipse at 84% 100%,rgba(139,89,56,.66) 0 26%,transparent 27%);
-}
-
-/* detail framing per icon */
-.ps-hero[data-ps-id="muhammad"]>img{--hero-y:53%;--hero-scale:1.03}
-.ps-hero[data-ps-id="adam"]>img{--hero-y:50%;--hero-scale:1.01}
-.ps-hero[data-ps-id="idris"]>img{--hero-y:50%;--hero-scale:1.01}
-.ps-hero[data-ps-id="nuh"]>img{--hero-y:54%;--hero-scale:1.08}
-.ps-hero[data-ps-id="hud"]>img{--hero-y:55%;--hero-scale:1.07}
-.ps-hero[data-ps-id="salih"]>img{--hero-y:52%;--hero-scale:1.04}
-.ps-hero[data-ps-id="ibrahim"]>img{--hero-y:51%;--hero-scale:1.02}
-.ps-hero[data-ps-id="lut"]>img{--hero-y:50%;--hero-scale:1.04}
-.ps-hero[data-ps-id="ismail"]>img{--hero-y:52%;--hero-scale:1.03}
-.ps-hero[data-ps-id="ishaq"]>img{--hero-y:51%;--hero-scale:1.03}
-.ps-hero[data-ps-id="yaqub"]>img{--hero-y:53%;--hero-scale:1.04}
-.ps-hero[data-ps-id="yusuf"]>img{--hero-y:52%;--hero-scale:1.02}
-.ps-hero[data-ps-id="ayyub"]>img{--hero-y:51%;--hero-scale:1.03}
-.ps-hero[data-ps-id="shuayb"]>img{--hero-y:51%;--hero-scale:1.02}
-.ps-hero[data-ps-id="musa"]>img{--hero-y:57%;--hero-scale:1.02}
-.ps-hero[data-ps-id="harun"]>img{--hero-y:52%;--hero-scale:1.02}
-.ps-hero[data-ps-id="dawud"]>img{--hero-y:50%;--hero-scale:1.02}
-.ps-hero[data-ps-id="sulayman"]>img{--hero-y:53%;--hero-scale:1.03}
-.ps-hero[data-ps-id="ilyas"]>img{--hero-y:54%;--hero-scale:1.03}
-.ps-hero[data-ps-id="alyasa"]>img{--hero-y:50%;--hero-scale:1.02}
-.ps-hero[data-ps-id="yunus"]>img{--hero-y:50%;--hero-scale:1.03}
-.ps-hero[data-ps-id="zakariyya"]>img{--hero-y:51%;--hero-scale:1.02}
-.ps-hero[data-ps-id="yahya"]>img{--hero-y:51%;--hero-scale:1.02}
-.ps-hero[data-ps-id="isa"]>img{--hero-y:47%;--hero-scale:1.03}
-.ps-hero[data-ps-id="dhul-kifl"]>img{--hero-y:50%;--hero-scale:1.02}
-
-/* ---------- body / player / reading ---------- */
-.ps-body{
-  padding:0 18px calc(38px + env(safe-area-inset-bottom));
-  background:
-    radial-gradient(circle at 86% 5%,rgba(31,98,128,.12),transparent 26%),
-    linear-gradient(180deg,#05243a 0%,#041f35 100%);
-}
+/* ===== READING ===== */
+.ps-body{padding:0 18px calc(38px + env(safe-area-inset-bottom))}
 .ps-player{
   margin:16px 0 18px;
   padding:11px;
-  border:1px solid rgba(239,197,95,.18);
+  border:1px solid rgba(239,197,96,.19);
   border-radius:22px;
-  background:linear-gradient(90deg,rgba(239,197,95,.08),rgba(13,65,82,.18));
+  background:linear-gradient(90deg,rgba(239,197,96,.08),rgba(13,64,81,.16));
 }
 .ps-player[hidden],.ps-read[hidden]{display:none!important}
 .ps-play{
-  width:100%;
-  min-height:51px;
-  border:0;
-  border-radius:16px;
-  background:linear-gradient(135deg,#d8ae50,#f1d07b);
+  width:100%;min-height:50px;
+  border:0;border-radius:16px;
+  background:linear-gradient(135deg,#d7ae53,#f0d07b);
   color:#102538;
-  font-size:15px;
-  font-weight:950;
-  box-shadow:0 8px 20px rgba(0,0,0,.14),0 0 18px rgba(240,201,111,.08);
+  font-size:15px;font-weight:950;
 }
-.ps-play:disabled{opacity:.45}
-.ps-progress{
-  height:4px;
-  margin-top:9px;
-  overflow:hidden;
-  border-radius:999px;
-  background:rgba(255,255,255,.08);
-}
-.ps-progress span{
-  display:block;width:0;height:100%;
-  background:#efc96c;
-}
-.ps-player-note{
-  margin-top:6px;
-  color:rgba(255,255,255,.46);
-  font-size:9px;
-}
+.ps-play:disabled{opacity:.46}
+.ps-progress{height:4px;margin-top:9px;overflow:hidden;border-radius:999px;background:rgba(255,255,255,.08)}
+.ps-progress span{display:block;width:0;height:100%;background:#f0ca70}
+.ps-player-note{margin-top:6px;color:rgba(255,255,255,.48);font-size:9px}
 .ps-player-note:empty{display:none}
-
 .ps-read{
   color:#fff;
   font-size:20px;
-  line-height:1.72;
-  letter-spacing:-.004em;
+  line-height:1.70;
+  letter-spacing:-.005em;
 }
 .ps-read p{
   margin:0;
@@ -805,134 +546,89 @@
 }
 .ps-read p+p{
   padding-top:22px;
-  border-top:1px solid rgba(99,199,208,.24);
+  border-top:1px solid rgba(96,196,204,.26);
 }
-.ps-read p:first-child{
-  font-weight:650;
-}
-.app[data-age="4–5"] .ps-read{font-size:22px;line-height:1.80}
-.app[data-age="6–8"] .ps-read{font-size:20px;line-height:1.72}
-.app[data-age="9–10"] .ps-read{font-size:19px;line-height:1.68}
-
+.ps-read p:first-child{font-weight:650}
+.app[data-age="4–5"] .ps-read{font-size:22px;line-height:1.78}
+.app[data-age="6–8"] .ps-read{font-size:20px;line-height:1.70}
+.app[data-age="9–10"] .ps-read{font-size:19px;line-height:1.67}
 .ps-sources,.ps-question{
   margin-top:8px;
   padding:18px 0;
-  border-top:1px solid rgba(98,199,208,.24);
+  border-top:1px solid rgba(96,196,204,.25);
 }
-.ps-sources strong{
-  color:#efc96c;
-  font-size:11px;
-  letter-spacing:.09em;
-}
-.ps-sources div{
-  margin-top:6px;
-  color:rgba(255,255,255,.68);
-  font-size:13px;
-  line-height:1.56;
-}
-.ps-question h4{
-  margin:6px 0 12px;
-  font-size:20px;
-  line-height:1.32;
-}
+.ps-sources strong{color:#f0ca70;font-size:11px;letter-spacing:.09em}
+.ps-sources div{margin-top:6px;color:rgba(255,255,255,.67);font-size:13px;line-height:1.55}
+.ps-question h4{margin:6px 0 12px;font-size:20px;line-height:1.3}
 .ps-answer{
-  display:block;
-  width:100%;
-  min-height:57px;
-  margin:7px 0 0;
-  padding:12px 14px;
+  display:block;width:100%;min-height:56px;
+  margin:7px 0 0;padding:12px 14px;
   border:1px solid rgba(127,207,214,.18);
   border-radius:17px;
-  background:rgba(11,49,68,.52);
-  color:#fff;
-  text-align:left;
-  font-size:15px;
-  font-weight:850;
+  background:rgba(12,50,68,.52);
+  color:#fff;text-align:left;
+  font-size:15px;font-weight:850;
 }
 .ps-answer.good{background:rgba(64,167,112,.18);border-color:rgba(88,211,143,.38)}
 .ps-answer.bad{background:rgba(213,77,77,.15);border-color:rgba(240,105,105,.34)}
 .ps-feedback{min-height:20px;margin-top:8px;color:rgba(255,255,255,.68);font-size:11px;font-weight:850}
 
-html.ps-modal-open,html.ps-modal-open body{
-  overflow:hidden!important;
-  overscroll-behavior:none!important;
-}
-html.ps-modal-open .shell,
-html.ps-modal-open .bottom-nav{
-  pointer-events:none!important;
-}
+html.ps-modal-open,html.ps-modal-open body{overflow:hidden!important;overscroll-behavior:none!important}
+html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!important}
 
-/* ---------- responsive ---------- */
+/* ===== RESPONSIVE ===== */
 @media(max-width:430px){
-  .ps-library-hero{min-height:316px}
-  .ps-library-hero-copy{width:62%;min-height:316px;padding-left:13px}
-  .ps-library-hero h2 span,.ps-library-hero h2 strong{font-size:40px}
+  .ps-library-hero{min-height:312px}
+  .ps-library-hero-copy{width:61%;min-height:312px;padding-left:13px}
+  .ps-library-hero h2 span,.ps-library-hero h2 strong{font-size:38px}
   .ps-library-hero p{font-size:12.5px}
-  .ps-library-hero-art{width:52%}
-  .ps-hero-symbol.s-idris{width:96px;height:96px;right:59px;top:18px}
-  .ps-hero-symbol.s-adam{width:86px;height:86px;right:94px;top:88px}
-  .ps-hero-symbol.s-ibrahim{width:100px;height:100px;right:-8px;top:66px}
-  .ps-hero-symbol.s-nuh{width:108px;height:88px;right:73px;top:174px}
-  .ps-hero-symbol.s-salih{width:94px;height:94px;right:-1px;top:162px}
-  .ps-hero-symbol.s-hud{width:77px;height:77px;right:-6px;top:225px}
-
+  .ps-library-hero-art{width:53%}
+  .ps-hero-symbol.s-idris{width:88px;height:88px;right:55px;top:18px}
+  .ps-hero-symbol.s-adam{width:79px;height:79px;right:90px;top:88px}
+  .ps-hero-symbol.s-ibrahim{width:93px;height:93px;right:-2px;top:66px}
+  .ps-hero-symbol.s-nuh{width:102px;height:84px;right:66px;top:179px}
+  .ps-hero-symbol.s-salih{width:87px;height:87px;right:-1px;top:169px}
+  .ps-hero-symbol.s-hud{width:70px;height:70px;right:4px;top:232px}
   .ps-toolbar{padding-left:8px;padding-right:8px}
   .ps-mode{font-size:11px;padding:6px 8px}
-
-  .ps-story-row{
-    min-height:132px;
-    grid-template-columns:43% minmax(0,1fr) 43px;
-    padding-right:8px;
-  }
-  .ps-row-title{font-size:25px}
-  .ps-row-ar{font-size:16px}
-  .ps-row-meta{font-size:8.2px}
-  .ps-row-go{width:39px;height:39px;font-size:26px}
-
-  .ps-hero{min-height:620px}
-  .ps-hero>img{right:-8%;top:80px;width:82%;height:345px}
-  .ps-hero-copy{left:14px;right:14px;bottom:15px}
+  .ps-story-row{min-height:130px;grid-template-columns:43% minmax(0,1fr) 42px;padding-right:8px}
+  .ps-row-title{font-size:24px}
+  .ps-row-ar{font-size:15px}
+  .ps-row-meta{font-size:8px}
+  .ps-row-go{width:38px;height:38px;font-size:25px}
+  .ps-hero{min-height:590px}
+  .ps-hero>img{right:-5%;top:72px;width:75%;height:340px}
   .ps-title{font-size:52px}
   .ps-ar{font-size:25px}
-  .ps-summary{max-width:73%;font-size:16px}
-  .ps-pill{font-size:10.5px;padding:7px 10px;min-height:37px}
-  .ps-detail-mode{font-size:10.5px}
+  .ps-summary{font-size:16px;max-width:78%}
   .ps-body{padding-left:14px;padding-right:14px}
+  .ps-pill{font-size:10.5px;padding:7px 10px}
+  .ps-detail-mode{font-size:10.5px}
   .ps-read{font-size:19px}
   .app[data-age="4–5"] .ps-read{font-size:21px}
   .app[data-age="9–10"] .ps-read{font-size:18px}
 }
 @media(max-width:375px){
-  .ps-library-hero{min-height:300px}
-  .ps-library-hero-copy{width:65%;min-height:300px}
-  .ps-library-hero h2 span,.ps-library-hero h2 strong{font-size:36px}
-  .ps-mode{font-size:10px}
-  .ps-story-row{grid-template-columns:41% minmax(0,1fr) 39px}
+  .ps-library-hero{min-height:296px}
+  .ps-library-hero-copy{width:64%;min-height:296px}
+  .ps-library-hero h2 span,.ps-library-hero h2 strong{font-size:35px}
+  .ps-story-row{grid-template-columns:41% minmax(0,1fr) 38px}
   .ps-row-title{font-size:22px}
   .ps-row-ar{font-size:14px}
-  .ps-hero{min-height:600px}
-  .ps-title{font-size:48px}
+  .ps-mode{font-size:10px}
+  .ps-hero{min-height:560px}
 }
 @media(min-width:700px){
-  .ps-library-hero{min-height:380px}
-  .ps-library-hero-copy{min-height:380px;padding-left:27px;width:53%}
+  .ps-library-hero{min-height:370px}
+  .ps-library-hero-copy{min-height:370px;padding-left:26px;width:54%}
   .ps-library-hero-art{width:47%}
   .ps-toolbar{padding-left:24px;padding-right:24px}
-  .ps-story-row{
-    min-height:164px;
-    grid-template-columns:34% minmax(0,1fr) 60px;
-    padding-right:25px;
-  }
+  .ps-story-row{min-height:160px;grid-template-columns:34% minmax(0,1fr) 58px;padding-right:24px}
   .ps-row-copy{padding-left:14px}
-  .ps-row-title{font-size:31px}
+  .ps-row-title{font-size:30px}
   .ps-row-ar{font-size:19px}
-  .ps-sheet{
-    height:min(95dvh,960px);
-    margin-bottom:14px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:31px;
-  }
+  .ps-sheet{height:min(94dvh,930px);border-radius:30px;margin-bottom:16px;border:1px solid rgba(255,255,255,.10)}
   .ps-hero{min-height:680px}
-  .ps-hero-copy{left:26px;right:26px}
+  .ps-hero>img{width:62%;right:0}
   .ps-body{padding-left:26px;padding-right:26px}
 }
