@@ -92,6 +92,9 @@ LEARNING_LOCK=threading.Lock()
 ALPHABET_MASTER_LOCK=threading.Lock()
 ALPHABET_BATCH_LOCK=threading.Lock()
 ALPHABET_BATCH_STATE_LOCK=threading.Lock()
+PROPHET_STORY_BATCH_LOCK=threading.Lock()
+PROPHET_STORY_BATCH_STATE_LOCK=threading.Lock()
+PROPHET_STORY_BATCH_STATE={"running":False,"phase":"idle","progress":0,"completed":0,"total":75,"current":"","error":"","repoPublished":False,"repoPublishError":"","startedAt":"","finishedAt":""}
 LEARNING_PREVIEWS={}
 ALPHABET_BATCH_STATE={
     "running":False,
@@ -5252,6 +5255,171 @@ class VoiceHTTPServer(ThreadingHTTPServer):
     allow_reuse_address=True
     daemon_threads=True
 
+
+def _prophet_batch_snapshot():
+    with PROPHET_STORY_BATCH_STATE_LOCK:
+        return dict(PROPHET_STORY_BATCH_STATE)
+
+def _set_prophet_batch_state(**patch):
+    with PROPHET_STORY_BATCH_STATE_LOCK:
+        PROPHET_STORY_BATCH_STATE.update(patch)
+        return dict(PROPHET_STORY_BATCH_STATE)
+
+def _prophet_story_manifest():
+    return load_kids_repo_json(
+        "prophet-stories.json",
+        "kids/data/prophet-stories.json",
+        lambda d:isinstance(d,dict) and len(d.get("items") or [])==25,
+    )
+
+def _prophet_story_age_text(item,age):
+    name=str(item.get("name") or "")
+    if age=="4-5":
+        intro=f"Komm, wir hören aufmerksam zu. Jetzt geht es um {name}. Diese Geschichte stammt aus geprüften Qurʾān-Belegen. Wir erzählen sie ruhig und einfach und fügen keine erfundenen Abenteuer hinzu."
+    elif age=="9-10":
+        intro=f"Bevor wir beginnen, merk dir einen wichtigen Grundsatz: Diese Erzählung über {name} folgt den geprüften Qurʾān-Belegen des DĀR-AL-TAWḤĪD-Prophetenprofils. Wir unterscheiden bewusst zwischen sicherem Wissen und späteren Ausschmückungen. Achte beim Zuhören darauf, welche Entscheidungen, Prüfungen und Lehren der Qurʾān selbst hervorhebt."
+    else:
+        intro=f"Mach es dir bequem und hör aufmerksam zu. Heute geht es um {name}. Die Geschichte ist aus geprüften Qurʾān-Belegen zusammengefasst. Wir bleiben bei dem, was zuverlässig berichtet ist, und machen aus unbekannten Einzelheiten keine erfundenen Abenteuer. Achte besonders darauf, was diese Geschichte über Tawḥīd, Vertrauen, Geduld und Gehorsam gegenüber Allah lehrt."
+    ch=list(item.get("chapters") or [])
+    if age=="4-5" and len(ch)>4:
+        ch=[ch[0],ch[1],ch[max(2,len(ch)-2)],ch[-1]]
+    parts=[intro,*ch]
+    if age=="9-10" and str(item.get("older") or "").strip():
+        parts.append(str(item.get("older")).strip())
+    if item.get("disputed"):
+        outro="Am Ende ist hier besonders wichtig: Dhū l-Kifl wird im Qurʾān lobend genannt. Sein genauer Prophetenstatus wurde von Gelehrten unterschiedlich beurteilt. Darum behaupten wir nicht mehr, als die Quellen sicher tragen. Genau so lernen wir, Wissen ehrlich und sorgfältig weiterzugeben."
+    elif age=="4-5":
+        outro="Jetzt denk noch einmal an den wichtigsten Punkt der Geschichte. Allah kennt Seine Diener, hilft, prüft und führt. Wir lernen aus den Propheten, Allah zu gehorchen, Ihm zu vertrauen und nach einem Fehler wieder zu Ihm zurückzukehren. Gleich kommt eine kleine Frage für dich."
+    elif age=="9-10":
+        outro="Fass die Geschichte noch einmal im Kopf zusammen: Was war der Auftrag dieses Propheten? Welche Prüfung kam vor? Wie zeigte sich Gehorsam gegenüber Allah? Genau diese Fragen helfen, Qurʾān-Geschichten nicht nur zu hören, sondern ihre Botschaft zu verstehen. Die verwendeten Qurʾān-Stellen findest du direkt unter der Erzählung."
+    else:
+        outro="Bevor du zur Frage weitergehst, denk noch einmal an die wichtigsten Punkte. Die Propheten riefen zu Allah, hielten in Prüfungen an der Wahrheit fest und vertrauten auf Seine Führung. Die Geschichte soll nicht nur spannend sein, sondern dir helfen, die Botschaft des Qurʾān zu verstehen. Die genauen Qurʾān-Stellen stehen direkt unter der Erzählung."
+    parts.append(outro)
+    return "\n\n".join(str(x).strip() for x in parts if str(x).strip())
+
+def _publish_prophet_story_pack(ready:Path):
+    repo=ALPHABET_PUBLISH_REPO
+    git=shutil.which("git")
+    if not git:
+        return False,"git fehlt."
+    def rr(args,timeout=180):
+        return run(args,timeout)
+    try:
+        gh=shutil.which("gh")
+        if gh:
+            auth=rr([gh,"auth","status"],30)
+            if auth.returncode==0:
+                rr([gh,"auth","setup-git"],30)
+        if not (repo/".git").exists():
+            if repo.exists(): shutil.rmtree(repo)
+            p=rr([git,"clone","https://github.com/Sero91ak/dar-al-tawhid-site.git",str(repo)],300)
+            if p.returncode!=0:
+                return False,"Git clone fehlgeschlagen: "+(p.stderr or p.stdout)[-500:]
+        rr([git,"-C",str(repo),"fetch","origin","main"],180)
+        rr([git,"-C",str(repo),"checkout","main"],60)
+        rr([git,"-C",str(repo),"reset","--hard","origin/main"],60)
+        src_data=ready/"kids/data/prophet-stories.json"
+        dst_data=repo/"kids/data/prophet-stories.json"
+        dst_data.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copy2(src_data,dst_data)
+        src_audio=ready/"kids/assets/prophet-story-audio"
+        dst_audio=repo/"kids/assets/prophet-story-audio"
+        if dst_audio.exists(): shutil.rmtree(dst_audio)
+        shutil.copytree(src_audio,dst_audio)
+        p=rr([git,"-C",str(repo),"add","kids/data/prophet-stories.json","kids/assets/prophet-story-audio"],60)
+        if p.returncode!=0:
+            return False,"Git staging fehlgeschlagen: "+(p.stderr or p.stdout)[-500:]
+        if rr([git,"-C",str(repo),"diff","--cached","--quiet"],30).returncode==0:
+            return True,"Propheten-Audiopaket ist bereits aktuell."
+        rr([git,"-C",str(repo),"config","user.name","Serhat Abu Malik"],20)
+        rr([git,"-C",str(repo),"config","user.email","73606501+Sero91ak@users.noreply.github.com"],20)
+        p=rr([git,"-C",str(repo),"commit","-m","Kids: install local prophet story voice pack"],120)
+        if p.returncode!=0:
+            return False,"Git commit fehlgeschlagen: "+(p.stderr or p.stdout)[-600:]
+        last=""
+        for attempt in range(1,4):
+            fetch=rr([git,"-C",str(repo),"fetch","origin","main"],180)
+            if fetch.returncode==0:
+                rebase=rr([git,"-C",str(repo),"rebase","origin/main"],180)
+                if rebase.returncode!=0:
+                    rr([git,"-C",str(repo),"rebase","--abort"],30)
+                    return False,"Rebase fehlgeschlagen: "+(rebase.stderr or rebase.stdout)[-600:]
+                push=rr([git,"-C",str(repo),"push","origin","HEAD:main"],300)
+                if push.returncode==0:
+                    return True,"75 Propheten-Audios wurden nach GitHub main übertragen."
+                last=(push.stderr or push.stdout)[-700:]
+            else:
+                last=(fetch.stderr or fetch.stdout)[-700:]
+            if attempt<3: time.sleep(attempt*3)
+        return False,"GitHub-Push fehlgeschlagen: "+last
+    except Exception as e:
+        return False,str(e)
+
+def build_prophet_story_voice_pack():
+    if not PROPHET_STORY_BATCH_LOCK.acquire(blocking=False):
+        return _prophet_batch_snapshot()
+    try:
+        started=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        _set_prophet_batch_state(running=True,phase="preparing",progress=1,completed=0,total=75,current="25 Prophetengeschichten werden vorbereitet …",error="",repoPublished=False,repoPublishError="",startedAt=started,finishedAt="")
+        manifest=_prophet_story_manifest()
+        items=list(manifest.get("items") or [])
+        ages=("4-5","6-8","9-10")
+        build_id="serhat-prophets-local-"+time.strftime("%Y%m%d-%H%M%S")
+        root=VOICE_HOME/"ProphetStoryExport"/(".build-"+uuid.uuid4().hex[:10])
+        ready=VOICE_HOME/"ProphetStoryExport"/"ready"
+        if root.exists(): shutil.rmtree(root)
+        (root/"kids/assets/prophet-story-audio").mkdir(parents=True,exist_ok=True)
+        (root/"kids/data").mkdir(parents=True,exist_ok=True)
+        total=len(items)*len(ages)
+        n=0
+        for item in items:
+            item_audio={}
+            for a in ages:
+                n+=1
+                txt=_prophet_story_age_text(item,a)
+                pct=2+int((n-1)/max(1,total)*91)
+                _set_prophet_batch_state(phase="rendering",progress=pct,completed=n-1,current=f"{n}/{total} · {item.get('name')} · Alter {a}")
+                wav=generate(txt,"","kids_story",free_mode=True,free_pronunciation=True)
+                asset=root/"kids/assets/prophet-story-audio"/str(item.get("id"))/(a+".m4a")
+                _encode_kids_m4a(wav,asset)
+                dur=round(_audio_duration_seconds(asset),3)
+                if dur<20 or asset.stat().st_size<8000:
+                    raise RuntimeError(f"Audio-QA fehlgeschlagen: {item.get('id')}/{a} · {dur}s")
+                item_audio[a]={
+                    "url":f"/kids/assets/prophet-story-audio/{item.get('id')}/{a}.m4a?v={build_id}",
+                    "durationSec":dur,
+                    "bytes":asset.stat().st_size,
+                    "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
+                    "voiceProfile":"kids_story",
+                    "voiceProfileId":"serhat-owner-voice-2026",
+                    "source":"DĀR Voice Studio local engine",
+                    "sourceSpeaker":"Serhat Abu Malik",
+                    "language":"German narration with Arabic/Fuṣḥā terms",
+                    "technicalQaPassed":True,
+                }
+            item["audio"]=item_audio
+        manifest["audioBuild"]={"id":build_id,"engine":"local-serhat-engine","voiceProfile":"kids_story","voiceProfileId":"serhat-owner-voice-2026","clips":total,"ages":list(ages),"technicalQaPassed":True,"generatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z")}
+        manifest["updatedAt"]=time.strftime("%Y-%m-%d")
+        atomic_write_json(root/"kids/data/prophet-stories.json",manifest)
+        if ready.exists(): shutil.rmtree(ready)
+        os.replace(root,ready)
+        _set_prophet_batch_state(phase="publishing",progress=96,completed=total,total=total,current="75 Audios werden in DĀR AL TAWḤĪD Kids veröffentlicht …")
+        ok,msg=_publish_prophet_story_pack(ready)
+        return _set_prophet_batch_state(running=False,phase="complete" if ok else "publish-error",progress=100 if ok else 98,completed=total,total=total,current="Fertig" if ok else "Audio fertig, Push fehlgeschlagen",error="" if ok else msg,repoPublished=bool(ok),repoPublishError="" if ok else msg,repoPublishMessage=msg,startedAt=started,finishedAt=time.strftime("%Y-%m-%dT%H:%M:%S%z"))
+    except Exception as e:
+        return _set_prophet_batch_state(running=False,phase="error",error=str(e),current="Abgebrochen",finishedAt=time.strftime("%Y-%m-%dT%H:%M:%S%z"))
+    finally:
+        PROPHET_STORY_BATCH_LOCK.release()
+
+def start_prophet_story_voice_pack():
+    state=_prophet_batch_snapshot()
+    if state.get("running"): return state
+    t=threading.Thread(target=build_prophet_story_voice_pack,daemon=True,name="dar-prophet-story-batch")
+    t.start()
+    time.sleep(.05)
+    return _prophet_batch_snapshot()
+
+
 class H(BaseHTTPRequestHandler):
     def is_loopback_client(self):
         try:
@@ -5467,6 +5635,8 @@ class H(BaseHTTPRequestHandler):
             self.send_json(200,{"ok":True,**alphabet_master_state()})
         elif p=="/alphabet/batch-state":
             self.send_json(200,{"ok":True,**_alphabet_batch_snapshot()})
+        elif p=="/prophet-stories/batch-state":
+            self.send_json(200,{"ok":True,**_prophet_batch_snapshot()})
         elif p.startswith("/alphabet/master/"):
             name=p.rsplit("/",1)[-1]
             if not re.fullmatch(r"[a-z0-9_-]+\.wav",name):
@@ -5628,6 +5798,13 @@ class H(BaseHTTPRequestHandler):
                 return self.send_json(202,{"ok":True,**state})
             except Exception as e:
                 return self.send_json(500,{"ok":False,"error":str(e),**_alphabet_batch_snapshot()})
+
+        if p=="/prophet-stories/batch-start":
+            try:
+                state=start_prophet_story_voice_pack()
+                return self.send_json(202,{"ok":True,**state})
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e),**_prophet_batch_snapshot()})
 
         if p=="/alphabet/review-approve":
             try:
