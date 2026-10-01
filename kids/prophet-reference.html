@@ -4,41 +4,46 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
-<meta name="theme-color" content="#061d31">
-<title>Propheten · Referenzaufbau</title>
-<link rel="stylesheet" href="/kids/prophet-reference.css?v=4">
+<meta name="theme-color" content="#031421">
+<title>Propheten · Full-Bleed Referenz</title>
+<link rel="stylesheet" href="/kids/prophet-reference.css?v=5">
 </head>
 <body>
-<main class="pr-shell">
-  <section class="pr-list-panel" id="prListView" aria-label="Prophetenübersicht">
-    <div class="pr-modebar" aria-label="Darstellung">
-      <button class="pr-mode" type="button" data-mode="both"><span class="pr-ico pr-headphones"></span>Lesen &amp; Hören</button>
-      <button class="pr-mode" type="button" data-mode="listen"><span class="pr-ico pr-headphones"></span>Hören</button>
-      <button class="pr-mode active" type="button" data-mode="read"><span class="pr-ico pr-book"></span>Lesen</button>
-    </div>
-    <div class="pr-list" id="prList"></div>
+<main class="golden-shell">
+  <section class="golden-list" id="listView" aria-label="Prophetenübersicht">
+    <header class="modebar" aria-label="Darstellung">
+      <button class="mode" data-mode="both" type="button">▣ <span>Lesen &amp; Hören</span></button>
+      <button class="mode" data-mode="listen" type="button">◉ <span>Hören</span></button>
+      <button class="mode active" data-mode="read" type="button">▤ <span>Lesen</span></button>
+    </header>
+    <div id="storyList" class="story-list"></div>
   </section>
 
-  <section class="pr-detail-panel" id="prDetailView" hidden aria-label="Prophetengeschichte">
-    <button class="pr-back" id="prBack" type="button" aria-label="Zurück">‹</button>
-    <div class="pr-detail-hero" id="prDetailHero">
-      <span class="pr-detail-scene" aria-hidden="true"></span>
-      <span class="pr-detail-shade" aria-hidden="true"></span>
-      <div class="pr-detail-copy">
-        <h1 id="prTitle"></h1>
-        <div class="pr-arabic" id="prArabic" dir="rtl"></div>
-        <p class="pr-summary" id="prSummary"></p>
-        <div class="pr-pills" id="prPills"></div>
+  <section class="detail-view" id="detailView" hidden>
+    <div class="detail-hero" id="detailHero">
+      <button class="back" id="backBtn" type="button" aria-label="Zurück">‹</button>
+      <div class="hero-copy">
+        <span class="eyebrow">UNSER PROPHET</span>
+        <h1 id="detailTitle"></h1>
+        <div class="arabic" id="detailArabic" dir="rtl"></div>
+        <p id="detailSummary"></p>
+      </div>
+      <div class="hero-pills">
+        <span>◷ <b id="detailMinutes"></b></span>
+        <span>♙ <b>Alter: 6–8</b></span>
+        <span>▤ <b>Qurʾān · geprüft</b></span>
       </div>
     </div>
-    <div class="pr-detail-modebar" aria-label="Darstellung">
-      <button class="pr-mode" type="button" data-mode="both"><span class="pr-ico pr-headphones"></span>Lesen &amp; Hören</button>
-      <button class="pr-mode" type="button" data-mode="listen"><span class="pr-ico pr-headphones"></span>Hören</button>
-      <button class="pr-mode active" type="button" data-mode="read"><span class="pr-ico pr-book"></span>Lesen</button>
+
+    <div class="detail-modebar modebar">
+      <button class="mode active" data-mode="both" type="button">▤ <span>Lesen &amp; Hören</span></button>
+      <button class="mode" data-mode="listen" type="button">◉ <span>Hören</span></button>
+      <button class="mode" data-mode="read" type="button">▤ <span>Lesen</span></button>
     </div>
-    <div class="pr-reading" id="prReading"></div>
+
+    <article class="reading-card" id="readingCard"></article>
   </section>
 </main>
-<script src="/kids/prophet-reference.js?v=4"></script>
+<script src="/kids/prophet-reference.js?v=5"></script>
 </body>
 </html>
