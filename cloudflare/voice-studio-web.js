@@ -33,7 +33,9 @@ function assertVoiceStudioOrigin(request, env) {
   if (referer && !local) {
     const validReferer =
       referer.startsWith(allowed + "/voice-studio/") ||
-      referer.startsWith("https://www.dar-al-tawhid.de/voice-studio/");
+      referer.startsWith("https://www.dar-al-tawhid.de/voice-studio/") ||
+      referer.startsWith(allowed + "/kids/") ||
+      referer.startsWith("https://www.dar-al-tawhid.de/kids/");
     if (!validReferer) throw httpError("Voice Studio Referer nicht erlaubt", 403);
   }
 }
