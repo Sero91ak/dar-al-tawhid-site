@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-tab1051",
-  "label": "KIDS · V1.05.1",
-  "releasedAt": "2026-10-02T19:18:00.000Z",
-  "note": "V1.05.1: Der stabile V1.05-Geschichtenbereich wurde gezielt veredelt: neuer freundlicher Start-Hero, Bild- und Bedienflächen klar getrennt, größere kindgerechte Touch-Ziele und Muḥammad ﷺ als eigener Ehrenbereich vor der unveränderten chronologischen Prophetenfolge.",
+  "buildId": "kids-shell-v12-tab1052",
+  "label": "KIDS · V1.05.2",
+  "releasedAt": "2026-10-02T20:32:00.000Z",
+  "note": "V1.05.2: Geschichten-Startseite neu geordnet: Titelbereich ohne Hintergrundbild, weichere kindgerechte Typografie, dezente responsive Licht-/Sternbewegung, klar getrennte Bedienflächen und ein eigener Prophetenkarten-Look ohne Startseitenbild-Wiederholung.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v20",
     "storiesHomeAsCategoryHub": true,
@@ -27,13 +27,16 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1051",
+    "serviceWorkerCache": "v1052",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
-    "storyAssetVersion": 20,
+    "storyAssetVersion": 21,
     "muhammadHonorFeature": true,
     "chronologicalOrderAfterMuhammadFeature": true,
-    "storiesHomePolish": "v20"
+    "storiesHomePolish": "v21",
+    "storiesHeaderArtwork": false,
+    "storiesHeaderAmbientMotion": true,
+    "storiesResponsiveLayout": "phone-tablet-desktop"
   }
 }

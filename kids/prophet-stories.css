@@ -2585,3 +2585,366 @@ html.ps-modal-open body{
   .ps-muhammad-card{grid-template-rows:300px auto}
   .ps-muhammad-visual,.ps-muhammad-visual img{min-height:300px}
 }
+
+
+/* ===== STORIES POLISH v21 ===== */
+/* Image-free story header, softer typography, responsive child-first spacing. */
+#view-stories.ps-stories-home{
+  --stories-gold:#f3cf79;
+  --stories-cream:#fff8e8;
+  --stories-mint:#b7eadb;
+  --stories-cyan:#8fdbe1;
+  padding-bottom:calc(32px + env(safe-area-inset-bottom))!important;
+}
+
+/* The Stories title is now its own visual stage — no bitmap/photo behind it. */
+#view-stories.ps-stories-home .page-head{
+  position:relative!important;
+  isolation:isolate;
+  min-height:178px!important;
+  margin:6px 8px 24px!important;
+  padding:23px 22px 24px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(143,219,225,.20)!important;
+  border-radius:30px!important;
+  background:
+    radial-gradient(circle at 84% 18%,rgba(255,224,132,.16),transparent 21%),
+    radial-gradient(circle at 15% 112%,rgba(111,214,205,.16),transparent 38%),
+    linear-gradient(135deg,#0c4056 0%,#082f47 48%,#061f34 100%)!important;
+  box-shadow:
+    0 18px 46px rgba(0,0,0,.18),
+    inset 0 1px rgba(255,255,255,.045)!important;
+}
+#view-stories.ps-stories-home .page-head::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.62;
+  background:
+    radial-gradient(circle at 76% 24%,rgba(255,242,187,.95) 0 1.4px,transparent 2.2px),
+    radial-gradient(circle at 88% 46%,rgba(255,255,255,.80) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 68% 62%,rgba(149,226,224,.80) 0 1.2px,transparent 2px),
+    radial-gradient(circle at 56% 18%,rgba(255,255,255,.55) 0 .8px,transparent 1.6px),
+    radial-gradient(circle at 93% 72%,rgba(255,226,138,.65) 0 1px,transparent 1.8px);
+  animation:storiesTwinkle 6.8s ease-in-out infinite alternate;
+}
+#view-stories.ps-stories-home .page-head::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  width:132px;
+  height:132px;
+  right:-34px;
+  top:-46px;
+  border-radius:50%;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 42% 42%,rgba(255,226,139,.20),rgba(255,226,139,.07) 37%,transparent 66%);
+  box-shadow:0 0 70px rgba(255,211,108,.10);
+  animation:storiesGlow 9s ease-in-out infinite;
+}
+#view-stories.ps-stories-home .page-head>*{position:relative;z-index:2}
+#view-stories.ps-stories-home .page-head .kicker{
+  display:inline-flex!important;
+  align-items:center!important;
+  min-height:31px!important;
+  margin:0 0 11px!important;
+  padding:6px 12px!important;
+  border:1px solid rgba(243,207,121,.42)!important;
+  border-radius:999px!important;
+  background:rgba(4,28,43,.46)!important;
+  color:#ffe6a1!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  letter-spacing:.11em!important;
+  text-shadow:none!important;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+#view-stories.ps-stories-home .page-head h2{
+  max-width:11ch;
+  margin:0 0 9px!important;
+  color:#fff9ec!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(42px,10.8vw,60px)!important;
+  font-weight:700!important;
+  line-height:.96!important;
+  letter-spacing:-.035em!important;
+  text-wrap:balance;
+  text-shadow:0 7px 24px rgba(0,0,0,.22)!important;
+}
+#view-stories.ps-stories-home .page-head p{
+  max-width:36ch!important;
+  margin:0!important;
+  color:rgba(255,250,235,.86)!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:15px!important;
+  font-weight:500!important;
+  line-height:1.45!important;
+  text-shadow:none!important;
+}
+
+/* Prophet category card: unique art on top, all interaction in a separate panel. */
+#view-stories.ps-stories-home .ps-prophet-entry{
+  grid-template-rows:clamp(190px,46vw,286px) auto!important;
+  margin:0 8px 25px!important;
+  border-color:rgba(243,207,121,.30)!important;
+  border-radius:30px!important;
+  background:#082b40!important;
+  box-shadow:0 22px 50px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.045)!important;
+}
+#view-stories.ps-stories-home .ps-entry-visual{
+  min-height:190px!important;
+  background:#082b40!important;
+}
+#view-stories.ps-stories-home .ps-entry-visual::after{
+  background:
+    linear-gradient(180deg,rgba(4,23,36,.00) 44%,rgba(4,23,36,.18) 100%),
+    radial-gradient(circle at 78% 20%,rgba(255,224,132,.08),transparent 30%)!important;
+}
+#view-stories.ps-stories-home .ps-entry-visual img{
+  min-height:190px!important;
+  object-position:center 50%!important;
+  transform:scale(1.006)!important;
+}
+#view-stories.ps-stories-home .ps-entry-panel{
+  min-height:134px!important;
+  padding:19px 18px 20px!important;
+  gap:16px!important;
+  background:
+    radial-gradient(circle at 94% 10%,rgba(243,207,121,.09),transparent 27%),
+    linear-gradient(135deg,#0d4055 0%,#0a334a 52%,#082b41 100%)!important;
+}
+#view-stories.ps-stories-home .ps-entry-kicker,
+#view-stories.ps-stories-home .story-copy .meta{
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-weight:600!important;
+  letter-spacing:.08em!important;
+}
+#view-stories.ps-stories-home .ps-entry-copy strong{
+  max-width:100%;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(27px,7vw,39px)!important;
+  font-weight:600!important;
+  line-height:1.02!important;
+  letter-spacing:-.025em!important;
+  text-wrap:balance;
+  overflow-wrap:normal;
+}
+#view-stories.ps-stories-home .ps-entry-sub{
+  margin-top:8px!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:13.5px!important;
+  font-weight:600!important;
+}
+#view-stories.ps-stories-home .ps-entry-action{
+  min-height:52px!important;
+  padding:0 5px 0 15px!important;
+  border-color:rgba(243,207,121,.42)!important;
+  background:linear-gradient(135deg,rgba(243,207,121,.16),rgba(243,207,121,.06))!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:13px!important;
+  font-weight:600!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.05);
+}
+#view-stories.ps-stories-home .ps-entry-go{
+  width:42px!important;
+  height:42px!important;
+  background:rgba(243,207,121,.14)!important;
+}
+
+/* Free story: cheerful but calmer, with one clear reading area. */
+#view-stories.ps-stories-home .story-feature{
+  margin:0 8px 25px!important;
+  border-radius:30px!important;
+  border-color:rgba(143,219,225,.18)!important;
+  box-shadow:0 22px 48px rgba(0,0,0,.19)!important;
+}
+#view-stories.ps-stories-home .story-scene{
+  height:clamp(214px,55vw,310px)!important;
+}
+#view-stories.ps-stories-home .story-copy{
+  min-height:146px!important;
+  padding:19px 18px 21px!important;
+  grid-template-columns:minmax(0,1fr) 52px!important;
+  column-gap:15px!important;
+  background:
+    radial-gradient(circle at 94% 8%,rgba(243,207,121,.08),transparent 24%),
+    linear-gradient(135deg,#10485d,#0a3449)!important;
+}
+#view-stories.ps-stories-home .story-copy h3{
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(27px,6.8vw,35px)!important;
+  font-weight:600!important;
+  letter-spacing:-.025em!important;
+  line-height:1.03!important;
+}
+#view-stories.ps-stories-home .story-copy p{
+  max-width:42ch!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:14px!important;
+  line-height:1.48!important;
+}
+#view-stories.ps-stories-home .story-copy .story-go{
+  width:50px!important;
+  height:50px!important;
+  border-color:rgba(243,207,121,.24)!important;
+  background:rgba(5,28,41,.38)!important;
+}
+
+/* More stories: clearer rhythm and friendlier rows. */
+#view-stories.ps-stories-home .story-more-title{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  margin:4px 10px 14px!important;
+  padding:0!important;
+  color:#fff8e9!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(26px,6.7vw,32px)!important;
+  font-weight:600!important;
+  letter-spacing:-.02em!important;
+}
+#view-stories.ps-stories-home .story-more-title::after{
+  content:"";
+  flex:1 1 auto;
+  height:1px;
+  min-width:36px;
+  background:linear-gradient(90deg,rgba(243,207,121,.72),rgba(143,219,225,.18),transparent);
+}
+#view-stories.ps-stories-home .story-list{
+  gap:13px!important;
+  margin:0 8px!important;
+}
+#view-stories.ps-stories-home .story-row{
+  min-height:112px!important;
+  padding:15px 16px!important;
+  gap:14px!important;
+  border-radius:26px!important;
+  background:
+    radial-gradient(circle at 9% 18%,rgba(143,219,225,.08),transparent 28%),
+    linear-gradient(135deg,rgba(16,67,87,.93),rgba(8,43,62,.96))!important;
+  border-color:rgba(143,219,225,.17)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.035),0 12px 28px rgba(0,0,0,.08)!important;
+}
+#view-stories.ps-stories-home .story-thumb{
+  width:70px!important;
+  height:70px!important;
+  border-radius:22px!important;
+  background-color:rgba(255,255,255,.045)!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+}
+#view-stories.ps-stories-home .story-row h3{
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:19px!important;
+  font-weight:600!important;
+  letter-spacing:-.01em!important;
+}
+#view-stories.ps-stories-home .story-row .chev{
+  min-width:46px;
+  width:46px;
+  height:46px;
+  margin-left:auto!important;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(143,219,225,.14);
+  background:rgba(3,27,42,.28);
+  color:#ffe4a0!important;
+}
+
+/* Small phones: no crowding, CTA gets its own row. */
+@media(max-width:430px){
+  #view-stories.ps-stories-home .page-head{
+    min-height:168px!important;
+    margin:6px 4px 22px!important;
+    padding:20px 19px 21px!important;
+    border-radius:27px!important;
+  }
+  #view-stories.ps-stories-home .page-head h2{
+    font-size:clamp(40px,11.8vw,52px)!important;
+  }
+  #view-stories.ps-stories-home .page-head p{font-size:14px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry{
+    grid-template-rows:clamp(184px,53vw,220px) auto!important;
+    margin-left:4px!important;
+    margin-right:4px!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-panel{
+    grid-template-columns:1fr!important;
+    gap:13px!important;
+    padding:18px!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-copy strong{
+    font-size:clamp(26px,7.4vw,32px)!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-action{
+    width:100%!important;
+    justify-content:space-between!important;
+    align-self:auto!important;
+  }
+  #view-stories.ps-stories-home .story-feature{
+    margin-left:4px!important;
+    margin-right:4px!important;
+  }
+  #view-stories.ps-stories-home .story-list{
+    margin-left:4px!important;
+    margin-right:4px!important;
+  }
+}
+
+/* Tablets: use the extra width instead of simply stretching phone cards. */
+@media(min-width:700px){
+  #view-stories.ps-stories-home .page-head{
+    min-height:210px!important;
+    margin:10px 0 28px!important;
+    padding:30px 32px!important;
+    border-radius:34px!important;
+  }
+  #view-stories.ps-stories-home .page-head h2{
+    font-size:58px!important;
+  }
+  #view-stories.ps-stories-home .page-head p{
+    font-size:16px!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry{
+    grid-template-rows:280px auto!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-panel{
+    min-height:138px!important;
+    padding:22px 24px!important;
+  }
+  #view-stories.ps-stories-home .story-feature{
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  #view-stories.ps-stories-home .story-scene{
+    height:330px!important;
+  }
+  #view-stories.ps-stories-home .story-list{
+    margin-left:0!important;
+    margin-right:0!important;
+    grid-template-columns:1fr 1fr!important;
+  }
+  #view-stories.ps-stories-home .story-row{
+    min-height:118px!important;
+  }
+}
+
+@keyframes storiesTwinkle{
+  from{opacity:.38;transform:translate3d(0,0,0)}
+  to{opacity:.78;transform:translate3d(-3px,2px,0)}
+}
+@keyframes storiesGlow{
+  0%,100%{transform:scale(1);opacity:.72}
+  50%{transform:scale(1.08);opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-stories.ps-stories-home .page-head::before,
+  #view-stories.ps-stories-home .page-head::after{animation:none!important}
+}
