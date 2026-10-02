@@ -2006,3 +2006,43 @@
     margin-bottom:12px!important;
   }
 }
+
+
+/* REFERENCE_SAFEAREA_HERO_V41
+   Pull the Geschichten artwork behind the status/safe area while preserving the exact
+   screen-to-first-card proportion from the approved reference. */
+html[data-view="stories"]{--r41-story-safe:max(58px,env(safe-area-inset-top,0px))}
+@media(max-width:600px){
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head{
+    margin-top:calc(-1 * var(--r41-story-safe))!important;
+    height:33.6vw!important;
+    min-height:132px!important;
+    max-height:148px!important;
+    padding:calc(var(--r41-story-safe) + 2px) 24px 4px!important;
+    justify-content:flex-start!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head .kicker{
+    min-height:20px!important;
+    font-size:7.8px!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head h2{
+    margin-top:5px!important;
+    font-size:33px!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head h2::after{
+    top:calc(100% + 6px)!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head p{
+    margin-top:13px!important;
+    max-width:84%!important;
+    font-size:10.2px!important;
+    line-height:1.18!important;
+  }
+}
+@media(max-width:380px){
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head{
+    padding-left:20px!important;
+    padding-right:20px!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head h2{font-size:31px!important}
+}
