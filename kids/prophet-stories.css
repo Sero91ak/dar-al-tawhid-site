@@ -1061,9 +1061,12 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
   --ps-line:rgba(71,181,229,.34);
 }
 #view-stories .ps-wrap{
-  width:100%!important;
+  width:100vw!important;
   max-width:none!important;
-  margin:0!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  margin-top:0!important;
+  margin-bottom:0!important;
   padding:0 0 calc(14px + env(safe-area-inset-bottom))!important;
   border:0!important;
   border-radius:0!important;
@@ -1302,8 +1305,8 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
 .ps-hero{
   position:relative!important;
   width:100vw!important;
-  height:clamp(260px,58vw,540px)!important;
-  min-height:260px!important;
+  height:clamp(190px,48vw,520px)!important;
+  min-height:190px!important;
   overflow:hidden!important;
   isolation:isolate!important;
   background:#031725!important;
@@ -1486,7 +1489,7 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
   #view-stories .ps-story-row{height:190px!important;border-radius:26px!important}
   #view-stories .ps-row-copy{left:50%!important;right:76px!important}
   #view-stories .ps-row-go{right:18px!important;width:48px!important;height:48px!important}
-  .ps-hero{height:clamp(360px,55vw,500px)!important;min-height:360px!important}
+  .ps-hero{height:clamp(300px,47vw,480px)!important;min-height:300px!important}
   .ps-hero-copy{left:54%!important;right:34px!important;top:74px!important}
   .ps-hero[data-ps-id="nuh"] .ps-hero-copy{left:38px!important;right:54%!important}
   .ps-title{font-size:72px!important}
@@ -1505,7 +1508,7 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
   }
   #view-stories .ps-story-row{height:220px!important;border-radius:27px!important}
   #view-stories .ps-row-copy{left:49%!important}
-  .ps-hero{height:min(52vw,620px)!important;min-height:470px!important}
+  .ps-hero{height:min(43vw,560px)!important;min-height:390px!important}
   .ps-hero-copy{left:57%!important;right:70px!important;top:88px!important}
   .ps-hero[data-ps-id="nuh"] .ps-hero-copy{left:70px!important;right:57%!important}
   .ps-title{font-size:86px!important}
