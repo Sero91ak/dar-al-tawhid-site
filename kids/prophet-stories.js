@@ -483,6 +483,7 @@ window.DARKidsProphetStories={open:openStory,openLibrary,closeLibrary,stop:stopA
 (()=>{"use strict";
 const A={
  hero:"/kids/assets/story-wow/v22-muhammad-hero.jpg?v=22",
+ birth:"/kids/assets/story-wow/v29-muhammad-birth.jpg?v=29",
  birth:"/kids/assets/story-wow/v30-muhammad-birth.jpg?v=30",
  route:"/kids/assets/story-wow/v22-muhammad-route.jpg?v=22",
  hira:"/kids/assets/story-wow/v22-muhammad-hira.jpg?v=22",
