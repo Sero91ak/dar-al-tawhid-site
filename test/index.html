@@ -21025,7 +21025,7 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 
 
 
-<link rel="stylesheet" id="darHomeKnowledgeV1188Style" href="/test/assets/dar-home-knowledge-library-v1183.css?v=1188">
+<link rel="stylesheet" id="darHomeKnowledgeV1189Style" href="/test/assets/dar-home-knowledge-library-v1183.css?v=1189">
 <body class="has-bottom-nav">
 <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Aktualisieren" style="display:none">
   <span class="new-posts-icon">&#x23F3;</span>
@@ -29868,7 +29868,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <script src="/test/assets/ramadan-series-test.js?v=1"></script>
-<script defer id="darHomeKnowledgeV1188Script" src="/test/assets/dar-home-knowledge-library-v1183.js?v=1188"></script>
+<script defer id="darHomeKnowledgeV1189Script" src="/test/assets/dar-home-knowledge-library-v1183.js?v=1189"></script>
 </body>
 
 <style id="quran-chrome-oval-v545">
@@ -36771,4 +36771,947 @@ html[data-theme] body.is-home-route #appView .home-search-section{display:none!i
 </script>
 
 <script defer src="/assets/quran-tadabbur-shared.js?v=1"></script>
+
+<style id="darHomeKnowledgeV1189Inline">
+/* TEST ONLY · DĀR AL TAWḤĪD · Bibliothek des Wissens v1183
+   Reversibel: diese Ebene verändert nur die Startseite der Dar-Test-App.
+   Leitidee: Tawḥīd zuerst, Edge-to-Edge-Wissensszene, Linien statt Karten/Kapseln. */
+
+body.is-home-route.dar-knowledge-home-v1183{
+  --dkl-scene:url("/assets/feed-backgrounds/auto/mosque/bg-pro-mosque-60.webp");
+  --dkl-hero-ink:#fff7e7;
+  --dkl-hero-muted:rgba(255,247,231,.77);
+  --dkl-hero-label:#e8c978;
+  --dkl-hero-line:rgba(232,201,120,.32);
+  --dkl-paper:rgba(251,244,224,.105);
+  --dkl-paper-line:rgba(232,201,120,.34);
+  --dkl-line:color-mix(in srgb,var(--line,#6f6a5c) 76%,var(--gold2,#c9a34f) 24%);
+  --dkl-line-soft:color-mix(in srgb,var(--line,#6f6a5c) 90%,transparent 10%);
+  --dkl-title:var(--premium-title,var(--text,#f6f1e6));
+  --dkl-copy:var(--premium-body,var(--muted,#a8a197));
+  --dkl-accent:var(--premium-label,var(--gold2,#c9a34f));
+  --dkl-overlay:
+    linear-gradient(90deg,rgba(3,14,12,.965) 0%,rgba(4,28,21,.91) 42%,rgba(4,22,20,.62) 72%,rgba(3,14,13,.38) 100%),
+    linear-gradient(180deg,rgba(2,9,8,.14),rgba(2,10,9,.68));
+}
+
+html[data-theme="royal"] body.is-home-route.dar-knowledge-home-v1183{
+  --dkl-overlay:
+    linear-gradient(90deg,rgba(6,14,35,.97) 0%,rgba(10,29,60,.91) 46%,rgba(13,34,63,.58) 75%,rgba(6,15,34,.36) 100%),
+    linear-gradient(180deg,rgba(6,12,29,.1),rgba(5,12,28,.68));
+}
+html[data-theme="bordeaux"] body.is-home-route.dar-knowledge-home-v1183{
+  --dkl-overlay:
+    linear-gradient(90deg,rgba(39,9,17,.97) 0%,rgba(61,18,28,.91) 46%,rgba(66,25,31,.58) 75%,rgba(35,10,16,.37) 100%),
+    linear-gradient(180deg,rgba(27,6,12,.08),rgba(28,7,13,.67));
+}
+html[data-theme="light"] body.is-home-route.dar-knowledge-home-v1183,
+html[data-theme="soft"] body.is-home-route.dar-knowledge-home-v1183,
+html[data-theme="eisgold"] body.is-home-route.dar-knowledge-home-v1183,
+html[data-theme="salbei"] body.is-home-route.dar-knowledge-home-v1183{
+  --dkl-hero-ink:#17382f;
+  --dkl-hero-muted:rgba(23,56,47,.72);
+  --dkl-hero-label:#8e6b25;
+  --dkl-hero-line:rgba(121,92,38,.27);
+  --dkl-paper:rgba(255,251,239,.72);
+  --dkl-paper-line:rgba(129,96,37,.28);
+  --dkl-overlay:
+    linear-gradient(90deg,rgba(249,245,231,.98) 0%,rgba(242,238,220,.94) 45%,rgba(231,235,216,.73) 74%,rgba(226,232,216,.48) 100%),
+    linear-gradient(180deg,rgba(255,255,255,.12),rgba(227,227,210,.48));
+}
+
+/* Vollflächige Wissensszene */
+body.is-home-route.dar-knowledge-home-v1183 .top-shell.theme-hero-shell{
+  overflow:visible!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .top-shell .header.theme-hero-surface{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  min-height:0!important;
+  border:1px solid var(--dkl-hero-line)!important;
+  border-radius:30px!important;
+  background-image:var(--dkl-overlay),var(--dkl-scene)!important;
+  background-size:cover!important;
+  background-position:center 44%!important;
+  background-repeat:no-repeat!important;
+  box-shadow:0 24px 72px rgba(0,0,0,.2)!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .top-shell .header.theme-hero-surface::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 82% 18%,rgba(238,204,123,.16),transparent 25%),
+    radial-gradient(circle at 18% 12%,rgba(255,255,255,.08),transparent 20%),
+    linear-gradient(180deg,transparent 58%,rgba(0,0,0,.14));
+}
+body.is-home-route.dar-knowledge-home-v1183 .top-shell .header.theme-hero-surface::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:30%;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--bg,#07110e) 70%,transparent));
+}
+
+/* Bestehende Marke bleibt – nur ruhiger */
+body.is-home-route.dar-knowledge-home-v1183 .header-row--brand-only{
+  position:relative!important;
+  z-index:4!important;
+  margin:0!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .brand-main .logo{
+  filter:drop-shadow(0 11px 24px rgba(0,0,0,.24))!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .brand-main .brand-title-refined,
+body.is-home-route.dar-knowledge-home-v1183 .hero-text .salam,
+body.is-home-route.dar-knowledge-home-v1183 .hero-text .intro{
+  color:var(--dkl-hero-ink)!important;
+  -webkit-text-fill-color:var(--dkl-hero-ink)!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .hero-text{
+  position:relative!important;
+  z-index:4!important;
+  max-width:720px!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .hero-text .intro{
+  opacity:.82!important;
+  max-width:640px!important;
+}
+
+/* Hauptszene */
+.dkl-stage{display:none}
+body.is-home-route.dar-knowledge-home-v1183 .dkl-stage{
+  position:relative;
+  z-index:3;
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(250px,.85fr);
+  gap:clamp(22px,4vw,64px);
+  align-items:center;
+  margin:clamp(16px,2vw,25px) 0 0;
+  padding:clamp(8px,1vw,14px) 0 2px;
+}
+.dkl-stage__copy{
+  position:relative;
+  z-index:3;
+  min-width:0;
+  max-width:760px;
+}
+.dkl-stage__eyebrow{
+  display:block;
+  margin:0 0 9px;
+  color:var(--dkl-hero-label);
+  font-size:10px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.19em;
+  text-transform:uppercase;
+}
+.dkl-stage__title{
+  margin:0;
+  color:var(--dkl-hero-ink);
+  font-family:var(--serif,Georgia,serif);
+  font-size:clamp(45px,6.2vw,88px);
+  line-height:.91;
+  font-weight:760;
+  letter-spacing:.01em;
+}
+.dkl-stage__title::after{
+  content:"";
+  display:block;
+  width:min(220px,58%);
+  height:1px;
+  margin-top:14px;
+  background:linear-gradient(90deg,var(--dkl-hero-label),transparent);
+}
+.dkl-stage__lead{
+  max-width:650px;
+  margin:13px 0 0;
+  color:var(--dkl-hero-muted);
+  font-size:clamp(13px,1.65vw,17px);
+  line-height:1.58;
+  font-weight:590;
+}
+.dkl-stage__lead strong{
+  color:var(--dkl-hero-ink);
+  font-weight:820;
+}
+.dkl-stage__links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 19px;
+  margin:18px 0 0;
+}
+.dkl-stage__link{
+  appearance:none;
+  border:0;
+  border-bottom:1px solid var(--dkl-hero-line);
+  border-radius:0;
+  background:transparent;
+  padding:7px 0 6px;
+  color:var(--dkl-hero-ink);
+  font:inherit;
+  font-size:12px;
+  font-weight:790;
+  letter-spacing:.01em;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.dkl-stage__link::after{
+  content:"  →";
+  color:var(--dkl-hero-label);
+}
+.dkl-stage__link:focus-visible{
+  outline:2px solid var(--dkl-hero-label);
+  outline-offset:4px;
+}
+
+/* Bücher wirken in die Szene eingeklebt, nicht wie UI-Karten */
+.dkl-stage__visual{
+  position:relative;
+  min-height:330px;
+  pointer-events:none;
+}
+.dkl-book-stack{
+  position:absolute;
+  inset:0;
+  filter:saturate(.82) contrast(1.04);
+}
+.dkl-book{
+  position:absolute;
+  display:block;
+  width:clamp(128px,13vw,190px);
+  height:auto;
+  border-radius:3px;
+  box-shadow:0 24px 54px rgba(0,0,0,.34);
+  transform-origin:50% 100%;
+  opacity:.95;
+}
+.dkl-book--1{right:4%;bottom:1%;transform:rotate(4.5deg)}
+.dkl-book--2{right:32%;bottom:7%;transform:rotate(-5deg) scale(.91);opacity:.88}
+.dkl-book--3{right:17%;bottom:28%;transform:rotate(1deg) scale(.78);opacity:.76}
+.dkl-stage__visual::before{
+  content:"";
+  position:absolute;
+  z-index:4;
+  inset:0;
+  background:
+    linear-gradient(90deg,var(--dkl-hero-ink) 0,transparent 1px) 14% 22%/1px 62% no-repeat,
+    radial-gradient(circle at 58% 50%,rgba(232,201,120,.13),transparent 36%);
+  opacity:.6;
+}
+.dkl-stage__visual::after{
+  content:"";
+  position:absolute;
+  z-index:5;
+  inset:0;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--dkl-hero-ink) 0%,transparent) 0%,transparent 32%,transparent 72%,rgba(0,0,0,.13) 100%),
+    linear-gradient(180deg,transparent 62%,rgba(0,0,0,.34));
+  pointer-events:none;
+}
+.dkl-visual-label{
+  position:absolute;
+  z-index:6;
+  right:2%;
+  bottom:0;
+  color:var(--dkl-hero-muted);
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.15em;
+}
+
+/* Ibn-Sīrīn-Aussage: Originalinhalt bleibt, nur als eingelassenes Blatt */
+body.is-home-route.dar-knowledge-home-v1183 .dkl-stage__quote{
+  margin-top:23px;
+  max-width:690px;
+}
+body.is-home-route.dar-knowledge-home-v1183 .dkl-isnad{
+  position:relative!important;
+  overflow:visible!important;
+  margin:0!important;
+  padding:18px 22px 17px 25px!important;
+  border:0!important;
+  border-left:1px solid var(--dkl-paper-line)!important;
+  border-radius:2px!important;
+  background:
+    linear-gradient(118deg,var(--dkl-paper),color-mix(in srgb,var(--dkl-paper) 72%,transparent) 72%,transparent)!important;
+  box-shadow:0 18px 48px rgba(0,0,0,.13)!important;
+  transform:rotate(-.18deg);
+  -webkit-backdrop-filter:blur(5px);
+  backdrop-filter:blur(5px);
+}
+body.is-home-route.dar-knowledge-home-v1183 .dkl-isnad::before{
+  content:""!important;
+  position:absolute!important;
+  top:14px!important;
+  bottom:14px!important;
+  left:0!important;
+  width:1px!important;
+  background:linear-gradient(180deg,var(--dkl-hero-label),transparent)!important;
+  opacity:.9!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .dkl-isnad::after{
+  content:"";
+  position:absolute;
+  top:-7px;
+  left:46%;
+  width:70px;
+  height:15px;
+  background:rgba(221,201,157,.13);
+  border:1px solid rgba(245,229,189,.08);
+  transform:rotate(-1.5deg);
+  pointer-events:none;
+}
+body.is-home-route.dar-knowledge-home-v1183 .dkl-isnad :is(.isnad-label,.isnad-speaker){
+  color:var(--dkl-hero-label)!important;
+  -webkit-text-fill-color:var(--dkl-hero-label)!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .dkl-isnad :is(.isnad-quote,.isnad-words){
+  color:var(--dkl-hero-ink)!important;
+  -webkit-text-fill-color:var(--dkl-hero-ink)!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .dkl-isnad .isnad-source{
+  color:var(--dkl-hero-muted)!important;
+  -webkit-text-fill-color:var(--dkl-hero-muted)!important;
+}
+
+/* Gebetsstatus: nur eine elegante Informationszeile, keine große Kapsel */
+body.is-home-route.dar-knowledge-home-v1183 #headerPrayerStatus.header-prayer-hub{
+  position:relative!important;
+  z-index:5!important;
+  margin:18px 0 0!important;
+  padding:12px 0 4px!important;
+  min-height:0!important;
+  border:0!important;
+  border-top:1px solid var(--dkl-hero-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--dkl-hero-ink)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 #headerPrayerStatus :is(.header-prayer-primary,.header-prayer-secondary,.header-prayer-zone__caption,.header-prayer-hub__status){
+  color:var(--dkl-hero-ink)!important;
+  -webkit-text-fill-color:var(--dkl-hero-ink)!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 #headerPrayerStatus :is(.header-prayer-zone__caption,.header-prayer-hub__status){
+  opacity:.68!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 #headerPrayerStatus :is(.header-prayer-countdown,[id*="Countdown"]){
+  color:var(--dkl-hero-label)!important;
+  -webkit-text-fill-color:var(--dkl-hero-label)!important;
+}
+
+/* Doppelte Überschrift "Startseite" verschwindet */
+body.is-home-route.dar-knowledge-home-v1183 .view-head-home{
+  display:none!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 #appView.view{
+  padding-top:clamp(12px,2vw,22px)!important;
+}
+
+/* Hauptbereich: offene Bibliothek, Linien statt Karten */
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-shell{
+  gap:0!important;
+}
+.dkl-section{
+  margin:0;
+  padding:22px 0 20px;
+  border-top:1px solid var(--dkl-line);
+}
+.dkl-section:first-child{border-top:0}
+.dkl-section__head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:4px 18px;
+  align-items:end;
+  margin:0 0 10px;
+}
+.dkl-section__eyebrow{
+  grid-column:1 / -1;
+  color:var(--dkl-accent);
+  font-size:9.5px;
+  line-height:1;
+  font-weight:920;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.dkl-section__title{
+  margin:0;
+  color:var(--dkl-title);
+  font-family:var(--serif,Georgia,serif);
+  font-size:clamp(25px,4.3vw,36px);
+  line-height:1;
+  font-weight:760;
+}
+.dkl-section__meta{
+  margin:0;
+  color:var(--dkl-copy);
+  font-size:11px;
+  line-height:1.35;
+  font-weight:650;
+  text-align:right;
+}
+.dkl-paths{
+  display:grid;
+  grid-template-columns:1fr;
+  border-top:1px solid var(--dkl-line-soft);
+}
+.dkl-path{
+  appearance:none;
+  width:100%;
+  display:grid;
+  grid-template-columns:42px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  min-height:74px;
+  padding:13px 0;
+  border:0;
+  border-bottom:1px solid var(--dkl-line-soft);
+  border-radius:0;
+  background:transparent;
+  color:var(--dkl-title);
+  text-align:left;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.dkl-path__no{
+  align-self:start;
+  padding-top:3px;
+  color:var(--dkl-accent);
+  font-family:var(--serif,Georgia,serif);
+  font-size:12px;
+  line-height:1;
+  font-weight:780;
+}
+.dkl-path__body{
+  display:grid;
+  gap:3px;
+  min-width:0;
+}
+.dkl-path__body strong{
+  color:var(--dkl-title);
+  font-size:14.5px;
+  line-height:1.18;
+  font-weight:850;
+}
+.dkl-path__body span{
+  color:var(--dkl-copy);
+  font-size:11px;
+  line-height:1.35;
+  font-weight:580;
+}
+.dkl-path__go{
+  color:var(--dkl-accent);
+  font-size:17px;
+  line-height:1;
+  transition:transform .16s ease;
+}
+.dkl-path:hover .dkl-path__go,
+.dkl-path:focus-visible .dkl-path__go{transform:translateX(4px)}
+.dkl-path:focus-visible{outline:2px solid color-mix(in srgb,var(--dkl-accent) 72%,transparent);outline-offset:3px}
+
+/* Weiterlesen */
+.dkl-continue{
+  margin:0;
+  padding:18px 0 20px;
+  border-top:1px solid var(--dkl-line);
+}
+.dkl-continue__head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:7px;
+}
+.dkl-continue__head h2{
+  margin:0;
+  color:var(--dkl-title);
+  font-family:var(--serif,Georgia,serif);
+  font-size:clamp(22px,4vw,31px);
+  line-height:1;
+  font-weight:760;
+}
+.dkl-continue__head span{
+  color:var(--dkl-copy);
+  font-size:10px;
+  font-weight:700;
+}
+body.is-home-route.dar-knowledge-home-v1183 .dkl-continue .home-v380-quran-hero{
+  width:100%!important;
+  margin:0!important;
+  padding:13px 0!important;
+  min-height:0!important;
+  border:0!important;
+  border-top:1px solid var(--dkl-line-soft)!important;
+  border-bottom:1px solid var(--dkl-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Bestehende Module in redaktionelle Linien umwandeln */
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-section{
+  margin:0!important;
+  padding:21px 0!important;
+  border-top:1px solid var(--dkl-line)!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-section-head{
+  margin:0 0 8px!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-section-title{
+  color:var(--dkl-title)!important;
+  font-family:var(--serif,Georgia,serif)!important;
+  font-size:clamp(23px,4.1vw,33px)!important;
+  line-height:1!important;
+  font-weight:760!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-section-rule{
+  height:1px!important;
+  margin:0 0 5px!important;
+  background:linear-gradient(90deg,var(--dkl-line),transparent)!important;
+  opacity:1!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 :is(.home-v380-open-row,.home-v380-post-preview,.home-v380-lib-card){
+  width:100%!important;
+  margin:0!important;
+  padding:14px 0!important;
+  border:0!important;
+  border-bottom:1px solid var(--dkl-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 :is(.home-v380-open-row,.home-v380-post-preview,.home-v380-lib-card):first-child{
+  border-top:1px solid var(--dkl-line-soft)!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-open-row__action,
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-post-action,
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-lib-card__foot{
+  color:var(--dkl-accent)!important;
+  font-weight:780!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-post-slider{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:0!important;
+  overflow:visible!important;
+  scroll-snap-type:none!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-lib-grid{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:0!important;
+}
+
+/* Suche ist die eine bewusst geschlossene Interaktionsfläche */
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-search-field{
+  border:1px solid var(--dkl-line)!important;
+  border-radius:12px!important;
+  background:color-mix(in srgb,var(--card,#151a17) 78%,transparent)!important;
+  box-shadow:none!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-filter-chips{
+  margin-top:7px!important;
+  gap:0!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-filter-chip:not([data-home-filter-open="more"]){
+  display:none!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-filter-chip[data-home-filter-open="more"]{
+  margin:0!important;
+  padding:5px 0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--dkl-copy)!important;
+  box-shadow:none!important;
+  font-size:10.5px!important;
+  font-weight:760!important;
+}
+body.is-home-route.dar-knowledge-home-v1183 .home-v380-filter-chip[data-home-filter-open="more"]::before{
+  content:"☷  ";
+  color:var(--dkl-accent);
+}
+
+/* Breite Bibliotheksansicht */
+@media(min-width:820px){
+  .dkl-paths{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:32px;
+  }
+  .dkl-path:nth-child(odd){padding-right:8px}
+  .dkl-path:nth-child(even){padding-left:8px}
+  body.is-home-route.dar-knowledge-home-v1183 .home-v380-post-slider,
+  body.is-home-route.dar-knowledge-home-v1183 .home-v380-lib-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    column-gap:32px!important;
+  }
+}
+
+/* iPhone / Smartphone: echter Edge-to-Edge-Hero */
+@media(max-width:700px){
+  body.is-home-route.dar-knowledge-home-v1183 .top-shell.theme-hero-shell{
+    margin-top:0!important;
+  }
+  body.is-home-route.dar-knowledge-home-v1183 .top-shell .header.theme-hero-surface{
+    width:100vw!important;
+    max-width:none!important;
+    margin-left:calc(50% - 50vw)!important;
+    margin-right:calc(50% - 50vw)!important;
+    padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 18px!important;
+    border-left:0!important;
+    border-right:0!important;
+    border-top:0!important;
+    border-radius:0!important;
+    background-position:59% center!important;
+  }
+  body.is-home-route.dar-knowledge-home-v1183 .dkl-stage{
+    grid-template-columns:1fr;
+    min-height:405px;
+    margin-top:13px;
+    padding-bottom:0;
+  }
+  .dkl-stage__copy{max-width:100%}
+  .dkl-stage__title{font-size:clamp(43px,13vw,61px)}
+  .dkl-stage__lead{max-width:88%;font-size:12.6px;line-height:1.52}
+  .dkl-stage__links{max-width:90%;gap:4px 15px;margin-top:13px}
+  .dkl-stage__link{font-size:11px}
+  .dkl-stage__visual{
+    position:absolute;
+    z-index:-1;
+    top:86px;
+    right:-45px;
+    width:62%;
+    min-height:270px;
+    opacity:.31;
+  }
+  .dkl-book{width:118px}
+  .dkl-book--1{right:2%;bottom:0}
+  .dkl-book--2{right:36%;bottom:5%}
+  .dkl-book--3{display:none}
+  .dkl-visual-label{display:none}
+  body.is-home-route.dar-knowledge-home-v1183 .dkl-stage__quote{
+    max-width:100%;
+    margin-top:17px;
+  }
+  body.is-home-route.dar-knowledge-home-v1183 .dkl-isnad{
+    padding:14px 14px 14px 18px!important;
+    transform:none;
+  }
+  body.is-home-route.dar-knowledge-home-v1183 .dkl-isnad::after{width:54px;left:58%}
+  body.is-home-route.dar-knowledge-home-v1183 #headerPrayerStatus.header-prayer-hub{
+    margin-top:13px!important;
+    padding-top:10px!important;
+  }
+  .dkl-section{padding:18px 0 16px}
+  .dkl-section__head{grid-template-columns:1fr}
+  .dkl-section__meta{text-align:left;font-size:10px}
+  .dkl-path{min-height:68px;grid-template-columns:34px minmax(0,1fr) auto}
+  .dkl-path__body strong{font-size:13.5px}
+  .dkl-path__body span{font-size:10.4px}
+}
+
+/* Wide Screen: Szene nutzt die Fläche statt nur eine schmale Handy-Spalte */
+@media(min-width:1100px){
+  body.is-home-route.dar-knowledge-home-v1183 .top-shell .header.theme-hero-surface{
+    width:calc(100vw - 32px)!important;
+    max-width:none!important;
+    margin-left:calc(50% - 50vw + 16px)!important;
+    margin-right:calc(50% - 50vw + 16px)!important;
+    padding:28px clamp(34px,5vw,86px) 30px!important;
+  }
+  body.is-home-route.dar-knowledge-home-v1183 .dkl-stage{
+    min-height:430px;
+    grid-template-columns:minmax(0,1.12fr) minmax(370px,.88fr);
+  }
+  .dkl-stage__copy{max-width:820px}
+  .dkl-stage__visual{min-height:400px}
+  .dkl-book{width:clamp(160px,12vw,220px)}
+}
+
+@media(prefers-reduced-motion:no-preference){
+  .dkl-book--1{animation:dklFloat1 8s ease-in-out infinite alternate}
+  .dkl-book--2{animation:dklFloat2 10s ease-in-out infinite alternate}
+}
+@keyframes dklFloat1{from{translate:0 0}to{translate:0 -6px}}
+@keyframes dklFloat2{from{translate:0 0}to{translate:2px 5px}}
+@media(prefers-reduced-motion:reduce){
+  .dkl-book,.dkl-path__go{animation:none!important;transition:none!important}
+}
+
+</style>
+<script id="darHomeKnowledgeV1189Inline">
+/* TEST ONLY · DĀR AL TAWḤĪD · Bibliothek des Wissens v1183 */
+(function(){
+  "use strict";
+  if(window.__DAR_HOME_KNOWLEDGE_V1183)return;
+  var p=String(location.pathname||"");
+  if(!(p==="/test"||p.indexOf("/test/")===0))return;
+  window.__DAR_HOME_KNOWLEDGE_V1183=true;
+
+  var originalIsnadParent=null;
+  var originalIsnadNext=null;
+  var observerInstalled=false;
+  var queued=false;
+
+  var paths=[
+    {nav:"topics",no:"01",title:"Tawḥīd & ʿAqīdah",desc:"Grundlagen, Beweise und Aussagen der Salaf."},
+    {nav:"quran",no:"02",title:"Qurʾān & Tafsīr",desc:"Lesen, suchen, verstehen und weiterlernen."},
+    {nav:"hadith",no:"03",title:"Sunnah & Ḥadīṯ",desc:"Authentische Überlieferungen und Hadith-Bibliothek."},
+    {nav:"scholars",no:"04",title:"Ṣaḥābah, Salaf & Gelehrte",desc:"Personen, Überlieferer und klassische Imāme."},
+    {nav:"books",no:"05",title:"Bücher & Quellen",desc:"Geprüfte Werke und Quellenbibliothek."}
+  ];
+
+  function isHome(){
+    try{
+      if(document.body&&document.body.classList.contains("is-home-route"))return true;
+      if(window.currentRoute&&String(window.currentRoute.view||"")==="home")return true;
+      var h=decodeURIComponent(String(location.hash||"")).replace(/^#/,"").split("?")[0];
+      if((!h||h==="home")&&document.querySelector("#appView .home-v380-shell"))return true;
+    }catch(e){}
+    return false;
+  }
+
+  function navTo(nav){
+    try{
+      if(typeof window.navigate==="function"){window.navigate(nav);return}
+      if(typeof navigate==="function"){navigate(nav);return}
+    }catch(e){}
+    location.hash="#"+nav;
+  }
+
+  function bindNav(root){
+    if(!root)return;
+    root.querySelectorAll("[data-dkl-nav]").forEach(function(btn){
+      if(btn.getAttribute("data-dkl-bound")==="1")return;
+      btn.setAttribute("data-dkl-bound","1");
+      btn.addEventListener("click",function(ev){
+        ev.preventDefault();
+        ev.stopPropagation();
+        navTo(btn.getAttribute("data-dkl-nav")||"topics");
+      });
+    });
+  }
+
+  function heroMarkup(){
+    return ''+
+      '<section id="dklKnowledgeStage" class="dkl-stage" aria-label="Bibliothek des Wissens">'+
+        '<div class="dkl-stage__copy">'+
+          '<span class="dkl-stage__eyebrow">Bibliothek des Wissens</span>'+
+          '<h2 class="dkl-stage__title">TAWḤĪD</h2>'+
+          '<p class="dkl-stage__lead"><strong>Das Fundament des Islām.</strong> Wissen aus Qurʾān, authentischer Sunnah und den Überlieferungen der Salaf – geordnet, direkt und ohne Umwege zugänglich.</p>'+
+          '<div class="dkl-stage__links" aria-label="Direkte Wissenszugänge">'+
+            '<button type="button" class="dkl-stage__link" data-dkl-nav="topics">Tawḥīd &amp; ʿAqīdah</button>'+
+            '<button type="button" class="dkl-stage__link" data-dkl-nav="quran">Qurʾān</button>'+
+            '<button type="button" class="dkl-stage__link" data-dkl-nav="hadith">Ḥadīṯ</button>'+
+          '</div>'+
+          '<div id="dklIbnSirinSlot" class="dkl-stage__quote" aria-live="off"></div>'+
+        '</div>'+
+        '<div class="dkl-stage__visual" aria-hidden="true">'+
+          '<div class="dkl-book-stack">'+
+            '<img class="dkl-book dkl-book--1" src="/test/assets/library/covers/qsrc/al-ibanah-ibn-battah.svg" alt="">'+
+            '<img class="dkl-book dkl-book--2" src="/test/assets/library/covers/qsrc/al-uluw-lil-aliyy-al-ghaffar.svg" alt="">'+
+            '<img class="dkl-book dkl-book--3" src="/test/assets/library/covers/qsrc/al-asma-wa-s-sifat.svg" alt="">'+
+          '</div>'+
+          '<span class="dkl-visual-label">QURʾĀN · SUNNAH · SALAF</span>'+
+        '</div>'+
+      '</section>';
+  }
+
+  function ensureHero(){
+    var body=document.body;
+    var top=document.querySelector(".top-shell");
+    var header=top&&top.querySelector(".header");
+    var hero=header&&header.querySelector(".hero-text");
+    if(!body||!top||!header)return;
+
+    body.classList.add("is-home-route","dar-knowledge-home-v1183");
+
+    var stage=header.querySelector("#dklKnowledgeStage");
+    if(!stage){
+      var wrap=document.createElement("div");
+      wrap.innerHTML=heroMarkup();
+      stage=wrap.firstElementChild;
+      if(hero&&hero.parentNode===header)hero.insertAdjacentElement("afterend",stage);
+      else header.appendChild(stage);
+    }
+
+    bindNav(stage);
+
+    var prayer=header.querySelector("#headerPrayerStatus");
+    if(prayer&&stage.nextElementSibling!==prayer){
+      try{stage.insertAdjacentElement("afterend",prayer)}catch(e){}
+    }
+
+    var slot=stage.querySelector("#dklIbnSirinSlot");
+    var isnad=top.querySelector(".isnad");
+    if(slot&&isnad&&isnad.parentNode!==slot){
+      if(!originalIsnadParent){
+        originalIsnadParent=isnad.parentNode;
+        originalIsnadNext=isnad.nextSibling;
+      }
+      isnad.classList.add("dkl-isnad");
+      slot.appendChild(isnad);
+    }
+  }
+
+  function pathMarkup(item){
+    return ''+
+      '<button type="button" class="dkl-path" data-dkl-nav="'+item.nav+'" aria-label="'+item.title+' öffnen">'+
+        '<span class="dkl-path__no" aria-hidden="true">'+item.no+'</span>'+
+        '<span class="dkl-path__body"><strong>'+item.title+'</strong><span>'+item.desc+'</span></span>'+
+        '<span class="dkl-path__go" aria-hidden="true">→</span>'+
+      '</button>';
+  }
+
+  function ensureKnowledgeIndex(shell){
+    var section=shell.querySelector("#dklKnowledgeIndex");
+    if(!section){
+      section=document.createElement("section");
+      section.id="dklKnowledgeIndex";
+      section.className="dkl-section";
+      section.setAttribute("aria-labelledby","dklKnowledgeTitle");
+      section.innerHTML=''+
+        '<div class="dkl-section__head">'+
+          '<span class="dkl-section__eyebrow">Direkter Zugang</span>'+
+          '<h2 id="dklKnowledgeTitle" class="dkl-section__title">Bibliothek des Wissens</h2>'+
+          '<p class="dkl-section__meta">Fünf Wege · ein geordneter Einstieg</p>'+
+        '</div>'+
+        '<div class="dkl-paths">'+paths.map(pathMarkup).join("")+'</div>';
+    }
+    if(shell.firstElementChild!==section)shell.insertBefore(section,shell.firstChild);
+    bindNav(section);
+    return section;
+  }
+
+  function ensureContinue(shell,anchor){
+    var quran=shell.querySelector(".home-v380-quran-hero");
+    if(!quran)return anchor;
+    var section=shell.querySelector("#dklContinue");
+    if(!section){
+      section=document.createElement("section");
+      section.id="dklContinue";
+      section.className="dkl-continue";
+      section.innerHTML='<div class="dkl-continue__head"><h2>Weiterlernen</h2><span>Dein letzter Stand</span></div><div class="dkl-continue__body"></div>';
+    }
+    var body=section.querySelector(".dkl-continue__body");
+    if(body&&quran.parentNode!==body)body.appendChild(quran);
+    if(anchor&&anchor.nextElementSibling!==section)anchor.insertAdjacentElement("afterend",section);
+    return section;
+  }
+
+  function sectionByTitle(shell,id){
+    var title=shell.querySelector("#"+id);
+    return title&&title.closest(".home-v380-section");
+  }
+
+  function renameHomeSections(shell){
+    var map={
+      homeSearchTitle:"Suche im Wissen",
+      homeTodayTitle:"Heute im DĀR",
+      homeLibrariesTitle:"Bibliotheken & Quellen",
+      homeDiscoverTitle:"Neu im Wissen"
+    };
+    Object.keys(map).forEach(function(id){
+      var el=shell.querySelector("#"+id);
+      if(el&&el.textContent!==map[id])el.textContent=map[id];
+    });
+  }
+
+  function placeAfter(node,anchor){
+    if(!node||!anchor||node===anchor)return anchor;
+    if(anchor.nextElementSibling!==node)anchor.insertAdjacentElement("afterend",node);
+    return node;
+  }
+
+  function ensureHomeBody(){
+    var shell=document.querySelector("#appView .home-v380-shell");
+    if(!shell)return;
+    shell.classList.add("dkl-home-shell");
+
+    document.querySelectorAll(".home-premium-quick").forEach(function(el){el.remove()});
+
+    renameHomeSections(shell);
+
+    var anchor=ensureKnowledgeIndex(shell);
+    anchor=ensureContinue(shell,anchor);
+
+    var search=sectionByTitle(shell,"homeSearchTitle");
+    var today=sectionByTitle(shell,"homeTodayTitle");
+    var libraries=sectionByTitle(shell,"homeLibrariesTitle");
+    var discover=sectionByTitle(shell,"homeDiscoverTitle");
+
+    [search,today,libraries,discover].forEach(function(node){
+      if(node)anchor=placeAfter(node,anchor);
+    });
+  }
+
+  function restoreIsnad(){
+    var isnad=document.querySelector(".dkl-isnad");
+    if(!isnad)return;
+    isnad.classList.remove("dkl-isnad");
+    if(originalIsnadParent&&document.documentElement.contains(originalIsnadParent)){
+      try{
+        if(originalIsnadNext&&originalIsnadNext.parentNode===originalIsnadParent)originalIsnadParent.insertBefore(isnad,originalIsnadNext);
+        else originalIsnadParent.appendChild(isnad);
+        return;
+      }catch(e){}
+    }
+    var top=document.querySelector(".top-shell");
+    if(top)top.appendChild(isnad);
+  }
+
+  function restoreNonHome(){
+    if(document.body)document.body.classList.remove("dar-knowledge-home-v1183");
+    restoreIsnad();
+  }
+
+  function sync(){
+    if(!document.body)return;
+    if(!isHome()){restoreNonHome();return}
+    ensureHero();
+    ensureHomeBody();
+  }
+
+  function queueSync(){
+    if(queued)return;
+    queued=true;
+    requestAnimationFrame(function(){
+      queued=false;
+      sync();
+    });
+  }
+
+  function installObservers(){
+    if(observerInstalled)return;
+    observerInstalled=true;
+    var app=document.getElementById("appView");
+    if(app){
+      var appObs=new MutationObserver(queueSync);
+      appObs.observe(app,{childList:true,subtree:true});
+    }
+    if(document.body){
+      var bodyObs=new MutationObserver(queueSync);
+      bodyObs.observe(document.body,{attributes:true,attributeFilter:["class"]});
+    }
+    document.addEventListener("dar:view-rendered",queueSync);
+    window.addEventListener("hashchange",function(){setTimeout(queueSync,0)});
+    window.addEventListener("pageshow",queueSync);
+    queueSync();
+  }
+
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",installObservers,{once:true});
+  else installObservers();
+})();
+
+</script>
 </html>
