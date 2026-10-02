@@ -21120,6 +21120,89 @@ body.is-more-route .view{background:var(--bg)!important}
 @media(prefers-reduced-motion:no-preference){.header.theme-hero-surface::before{animation:darMasterCinema 20s ease-in-out infinite alternate}.dar-area-showcase__object img,.home-line-row__ico img{transition:transform .22s cubic-bezier(.22,1,.36,1),filter .22s ease!important}.dar-area-showcase:active .dar-area-showcase__object img,.home-line-row:active .home-line-row__ico img{transform:scale(.97)!important}}
 @keyframes darMasterCinema{0%{transform:scale(1.025) translate3d(0,0,0)}100%{transform:scale(1.045) translate3d(-.65%,.35%,0)}}
 @media(prefers-reduced-motion:reduce){.header.theme-hero-surface::before{animation:none!important;transform:scale(1.025)!important}}
+
+/* v1169 · Markenachse + Theme-Adaption + ruhiger Cinema-Look */
+.header-row--brand-only .brand{
+  width:min(100%,680px)!important;
+  padding-bottom:9px!important;
+  border-bottom:1px solid color-mix(in srgb,var(--dar-master-line) 70%,transparent)!important;
+}
+.header-row--brand-only .brand-kicker-row{
+  margin:5px 0 0 56px!important;
+  min-height:12px!important;
+  display:flex!important;
+  align-items:center!important;
+}
+.header-row--brand-only .brand-kicker-row small{overflow:visible!important;text-overflow:clip!important}
+html[data-theme="light"] .header.theme-hero-surface::before,
+html[data-theme="soft"] .header.theme-hero-surface::before,
+html[data-theme="eisgold"] .header.theme-hero-surface::before{
+  filter:saturate(.72) contrast(.96) brightness(1.03)!important;
+  opacity:.72!important;
+}
+html[data-theme="light"] .header.theme-hero-surface::after{
+  background:linear-gradient(90deg,rgba(255,252,244,.97) 0%,rgba(255,252,244,.88) 48%,rgba(255,252,244,.48) 100%),linear-gradient(180deg,rgba(255,255,255,.02),rgba(104,83,42,.10))!important;
+}
+html[data-theme="soft"] .header.theme-hero-surface::after{
+  background:linear-gradient(90deg,rgba(255,248,245,.97) 0%,rgba(255,248,245,.88) 48%,rgba(255,248,245,.48) 100%),linear-gradient(180deg,rgba(255,255,255,.02),rgba(98,63,80,.10))!important;
+}
+html[data-theme="eisgold"] .header.theme-hero-surface::after{
+  background:linear-gradient(90deg,rgba(245,251,255,.98) 0%,rgba(232,243,251,.90) 48%,rgba(220,234,246,.52) 100%),linear-gradient(180deg,rgba(255,255,255,.03),rgba(122,92,34,.10))!important;
+}
+html[data-theme="light"] .brand-title.brand-title-refined,
+html[data-theme="soft"] .brand-title.brand-title-refined,
+html[data-theme="eisgold"] .brand-title.brand-title-refined{
+  color:var(--theme-text,var(--text))!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.46)!important;
+}
+html[data-theme="light"] .brand-kicker-row small,
+html[data-theme="soft"] .brand-kicker-row small,
+html[data-theme="eisgold"] .brand-kicker-row small{
+  color:var(--theme-accent,var(--gold2))!important;
+  text-shadow:none!important;
+}
+html[data-theme="light"] .hero-text .salam,
+html[data-theme="soft"] .hero-text .salam,
+html[data-theme="eisgold"] .hero-text .salam{color:var(--theme-text,var(--text))!important;text-shadow:none!important}
+html[data-theme="light"] .hero-text .intro,
+html[data-theme="soft"] .hero-text .intro,
+html[data-theme="eisgold"] .hero-text .intro{color:var(--theme-muted,var(--muted))!important}
+html[data-theme="light"] .header-prayer-hub,
+html[data-theme="soft"] .header-prayer-hub,
+html[data-theme="eisgold"] .header-prayer-hub{
+  background:color-mix(in srgb,var(--bg) 88%,transparent)!important;
+  border-color:color-mix(in srgb,var(--gold2) 24%,var(--line))!important;
+}
+html[data-theme="royal"] .header.theme-hero-surface::after{
+  background:linear-gradient(90deg,rgba(6,17,38,.96) 0%,rgba(8,22,49,.87) 50%,rgba(9,25,55,.42) 100%),linear-gradient(180deg,rgba(2,8,20,.10),rgba(0,0,0,.42))!important;
+}
+html[data-theme="bordeaux"] .header.theme-hero-surface::after{
+  background:linear-gradient(90deg,rgba(30,10,14,.96) 0%,rgba(49,17,24,.87) 50%,rgba(65,21,31,.42) 100%),linear-gradient(180deg,rgba(20,5,9,.10),rgba(0,0,0,.42))!important;
+}
+html[data-theme="emerald"] .header.theme-hero-surface::after,
+html[data-theme="smaragd"] .header.theme-hero-surface::after,
+html[data-theme="aurora"] .header.theme-hero-surface::after{
+  background:linear-gradient(90deg,rgba(4,20,16,.96) 0%,rgba(7,36,29,.86) 50%,rgba(15,65,53,.40) 100%),linear-gradient(180deg,rgba(2,12,9,.08),rgba(0,0,0,.42))!important;
+}
+.dar-editorial-feature{
+  background-position:right center!important;
+  background-size:cover!important;
+}
+.more-feature-row .feature-icon{
+  width:54px!important;height:54px!important;min-width:54px!important;
+  display:grid!important;place-items:center!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+}
+.more-feature-row .feature-icon img{
+  width:50px!important;height:50px!important;object-fit:contain!important;
+  filter:drop-shadow(0 7px 11px rgba(0,0,0,.18))!important;
+}
+.more-feature-row h4{white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
+.more-feature-row p{white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
+@media(max-width:390px){
+  .header-row--brand-only .brand-kicker-row{margin-left:50px!important}
+}
+
 </style>
 <body class="has-bottom-nav">
 <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Aktualisieren" style="display:none">
@@ -21134,8 +21217,8 @@ body.is-more-route .view{background:var(--bg)!important}
     <header class="header theme-hero-surface">
       <div class="header-row header-row--brand-only">
         <div class="brand">
-          <div class="brand-kicker-row"><small>TAWḤĪD · QURʾĀN · SUNNAH · ĀṮĀR</small></div>
           <div class="brand-main"><img class="logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD Logo"><h1 class="brand-title brand-title-refined">DĀR AL TAWḤĪD</h1></div>
+          <div class="brand-kicker-row"><small>TAWḤĪD · QURʾĀN · SUNNAH · ĀṮĀR</small></div>
         </div>
       </div>
       <div id="headerPrayerStatus" class="header-prayer-hub" data-nav="prayer" role="button" tabindex="0" aria-label="Gebetszeiten öffnen"></div>
