@@ -1,10 +1,10 @@
 {
-  "buildId": "kids-shell-v12-tab102",
-  "label": "KIDS · V1.02",
-  "releasedAt": "2026-10-02T07:45:00.000Z",
-  "note": "V1.02: finaler Full-Bleed-Prophetenumbau: 25 einzelne hochauflösende Cinematic-Artworks, echte Viewport-Breite statt schmalem Container, keine Sprites/Sticker, robustes Bild-Fallback, responsive Smartphone/Tablet/Desktop-Darstellung und separates Nūḥ-Hero.",
+  "buildId": "kids-shell-v12-tab104",
+  "label": "KIDS · V1.04",
+  "releasedAt": "2026-10-02T08:40:00.000Z",
+  "note": "V1.04: Premium-Prophetenansicht abgeschlossen: 25 dedizierte 21:9 Detail-Heroes in hoher Auflösung, Nūḥ neu ergänzt, konsistente Full-Bleed-Darstellung, keine sichtbaren Personen/Gesichter, aktualisierte Asset- und Service-Worker-Caches.",
   "visualSystem": {
-    "prophetStories": "cinematic-fullbleed-v16",
+    "prophetStories": "cinematic-fullbleed-v18",
     "chronologicalOrder": true,
     "individualHighResolutionCards": 25,
     "sharedSprite": false,
@@ -17,7 +17,9 @@
     "dedicatedNuhHero": true,
     "robustArtworkFallback": true,
     "legacyProphetStickerMarkup": false,
-    "highResolutionDetailFallback": "4k-card-art",
-    "liveExperimentation": false
+    "highResolutionDetailFallback": "4k-dedicated-hero",
+    "liveExperimentation": false,
+    "premiumDetailHeroes": 25,
+    "detailHeroRatio": "21:9"
   }
 }
