@@ -503,6 +503,14 @@ function patchHome(){
    feature.dataset.r22key="1";feature.tabIndex=0;feature.setAttribute("role","button");
    feature.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();feature.click()}});
  }
+ const legacy=q("#authenticStoryList",view);
+ if(legacy){
+   legacy.style.display="none";
+   const legacyTitle=legacy.previousElementSibling;
+   if(legacyTitle&&legacyTitle.classList.contains("section-title"))legacyTitle.style.display="none";
+   const legacyNote=legacy.nextElementSibling;
+   if(legacyNote&&legacyNote.classList.contains("gentle-note"))legacyNote.style.display="none";
+ }
  const title=q(".story-more-title",view);
  if(title&&!q("#r22StoryAll",title)){
    title.innerHTML='<span class="r22-section-label"><span class="r22-book" aria-hidden="true"></span><strong>Weitere Geschichten</strong><i aria-hidden="true"></i></span><button id="r22StoryAll" class="r22-all" type="button" aria-expanded="false">Alle anzeigen <b aria-hidden="true">→</b></button>';
