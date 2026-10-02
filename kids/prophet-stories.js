@@ -15,14 +15,14 @@ function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=
 function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=21":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
 const MUHAMMAD_EPISODES=[
-  {id:"birth",title:"Seine Geburt in Makkah",meta:"MAKKAH · KINDHEIT",duration:"Ca. 4 Min.",source:"Qurʾān 93:6",subtitle:"Ein besonderes Licht erscheint in der Welt.",summary:"Muḥammad ﷺ wurde in Makkah geboren und wuchs als Waisenkind auf. Allah erinnert ihn im Qurʾān daran, dass Er ihn als Waisen fand und ihm Schutz gab.",art:"/kids/assets/prophet-scenes/night.webp?v=1"},
-  {id:"wahy",title:"Die erste Offenbarung",meta:"MAKKAH · ḤIRĀʾ",duration:"Ca. 5 Min.",source:"Qurʾān 96:1–5",subtitle:"Ein Moment, der alles veränderte.",summary:"In der Höhle Ḥirāʾ begann die Offenbarung. Dort wurden die ersten Verse aus Sūrat al-ʿAlaq offenbart.",art:"/kids/assets/story-wow/muhammad-hira.jpg?v=22"},
-  {id:"hijrah",title:"Die Hiǧrah nach Madīnah",meta:"VERTRAUEN · GEDULD",duration:"Ca. 6 Min.",source:"Qurʾān 9:40",subtitle:"Eine Reise voller Vertrauen.",summary:"Die Auswanderung von Makkah nach Madīnah zeigt Vertrauen auf Allah, Geduld und den Beginn einer neuen Phase für die muslimische Gemeinschaft.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"},
-  {id:"tawhid",title:"Der Ruf zum Tawḥīd",meta:"MAKKAH · DAʿWAH",duration:"ca. 5 Min.",source:"Qurʾān 6:162–163",subtitle:"Allah allein anbeten.",summary:"Er rief die Menschen dazu, Allah allein anzubeten, und blieb trotz Ablehnung und Widerstand standhaft.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=22"},
-  {id:"madinah",title:"Die Gemeinschaft in Madīnah",meta:"LEHREN · GERECHTIGKEIT",duration:"ca. 6 Min.",source:"Qurʾān 33:21",subtitle:"Glaube wird im Alltag sichtbar.",summary:"In Madīnah lehrte der Prophet ﷺ Gottesdienst, Familie, Nachbarschaft, Gerechtigkeit und Verantwortung.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"},
-  {id:"rahmah",title:"Barmherzigkeit für die Welten",meta:"BOTSCHAFT · CHARAKTER",duration:"ca. 5 Min.",source:"Qurʾān 21:107 · 68:4",subtitle:"Barmherzigkeit und edler Charakter.",summary:"Allah beschreibt seine Sendung als Barmherzigkeit für die Welten und lobt seinen großartigen Charakter.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"},
-  {id:"return",title:"Die Rückkehr nach Makkah",meta:"MAKKAH · RÜCKKEHR",duration:"ca. 6 Min.",source:"Qurʾān 48:1 · 110:1–3",subtitle:"Eine Rückkehr nach Jahren der Prüfung.",summary:"Nach Jahren der Prüfung kehrte der Prophet ﷺ mit den Muslimen nach Makkah zurück. Die Kaʿbah wurde von den Götzen gereinigt und Allah allein gewidmet.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=22"},
-  {id:"khatam",title:"Siegel der Propheten",meta:"ABSCHLUSS · BOTSCHAFT",duration:"ca. 4 Min.",source:"Qurʾān 33:40",subtitle:"Nach ihm kommt kein neuer Prophet.",summary:"Muḥammad ﷺ ist das Siegel der Propheten. Seine Botschaft bestätigt die grundlegende Botschaft der Propheten vor ihm: Allah allein anzubeten.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"}
+  {id:"birth",title:"Seine Geburt in Makkah",meta:"MAKKAH · KINDHEIT",duration:"Ca. 4 Min.",source:"Qurʾān 93:6",subtitle:"Ein besonderes Licht erscheint in der Welt.",summary:"Muḥammad ﷺ wurde in Makkah geboren und wuchs als Waisenkind auf. Allah erinnert ihn im Qurʾān daran, dass Er ihn als Waisen fand und ihm Schutz gab.",art:"/kids/assets/story-wow/v30-muhammad-birth.jpg?v=30"},
+  {id:"wahy",title:"Die erste Offenbarung",meta:"MAKKAH · ḤIRĀʾ",duration:"Ca. 5 Min.",source:"Qurʾān 96:1–5",subtitle:"Ein Moment, der alles veränderte.",summary:"In der Höhle Ḥirāʾ begann die Offenbarung. Dort wurden die ersten Verse aus Sūrat al-ʿAlaq offenbart.",art:"/kids/assets/story-wow/v22-muhammad-hira.jpg?v=22"},
+  {id:"hijrah",title:"Die Hiǧrah nach Madīnah",meta:"VERTRAUEN · GEDULD",duration:"Ca. 6 Min.",source:"Qurʾān 9:40",subtitle:"Eine Reise voller Vertrauen.",summary:"Die Auswanderung von Makkah nach Madīnah zeigt Vertrauen auf Allah, Geduld und den Beginn einer neuen Phase für die muslimische Gemeinschaft.",art:"/kids/assets/story-wow/v22-muhammad-route.jpg?v=22"},
+  {id:"tawhid",title:"Der Ruf zum Tawḥīd",meta:"MAKKAH · DAʿWAH",duration:"ca. 5 Min.",source:"Qurʾān 6:162–163",subtitle:"Allah allein anbeten.",summary:"Er rief die Menschen dazu, Allah allein anzubeten, und blieb trotz Ablehnung und Widerstand standhaft.",art:"/kids/assets/story-wow/v22-muhammad-hero.jpg?v=22"},
+  {id:"madinah",title:"Die Gemeinschaft in Madīnah",meta:"LEHREN · GERECHTIGKEIT",duration:"ca. 6 Min.",source:"Qurʾān 33:21",subtitle:"Glaube wird im Alltag sichtbar.",summary:"In Madīnah lehrte der Prophet ﷺ Gottesdienst, Familie, Nachbarschaft, Gerechtigkeit und Verantwortung.",art:"/kids/assets/story-wow/v22-muhammad-madinah.jpg?v=22"},
+  {id:"rahmah",title:"Barmherzigkeit für die Welten",meta:"BOTSCHAFT · CHARAKTER",duration:"ca. 5 Min.",source:"Qurʾān 21:107 · 68:4",subtitle:"Barmherzigkeit und edler Charakter.",summary:"Allah beschreibt seine Sendung als Barmherzigkeit für die Welten und lobt seinen großartigen Charakter.",art:"/kids/assets/story-wow/v22-muhammad-madinah.jpg?v=22"},
+  {id:"return",title:"Die Rückkehr nach Makkah",meta:"MAKKAH · RÜCKKEHR",duration:"ca. 6 Min.",source:"Qurʾān 48:1 · 110:1–3",subtitle:"Eine Rückkehr nach Jahren der Prüfung.",summary:"Nach Jahren der Prüfung kehrte der Prophet ﷺ mit den Muslimen nach Makkah zurück. Die Kaʿbah wurde von den Götzen gereinigt und Allah allein gewidmet.",art:"/kids/assets/story-wow/v22-muhammad-hero.jpg?v=22"},
+  {id:"khatam",title:"Siegel der Propheten",meta:"ABSCHLUSS · BOTSCHAFT",duration:"ca. 4 Min.",source:"Qurʾān 33:40",subtitle:"Nach ihm kommt kein neuer Prophet.",summary:"Muḥammad ﷺ ist das Siegel der Propheten. Seine Botschaft bestätigt die grundlegende Botschaft der Propheten vor ihm: Allah allein anzubeten.",art:"/kids/assets/story-wow/v22-muhammad-madinah.jpg?v=22"}
 ]
 let items=[],active=null,activeText="",playing=false,busy=false;
 const audio=new Audio();
@@ -199,7 +199,7 @@ function ensureUi(){
             '<span class="ps-mh-hero-shade" aria-hidden="true"></span>'+
             '<div class="ps-mh-hero-copy">'+
               '<span class="ps-mh-special-label">★&nbsp;&nbsp;BESONDERER BEREICH</span>'+
-              '<div class="ps-mh-title-line"><h2>Prophet<br>Muḥammad</h2><div class="ps-mh-ar" dir="rtl">ﷺ</div></div>'+
+              '<div class="ps-mh-title-line"><h2>Prophet<br>Muḥammad</h2><div class="ps-mh-ar" dir="rtl">محمد ﷺ</div></div>'+
               '<p class="ps-mh-tagline">Sein Leben. Sein Weg. Seine Botschaft.</p>'+
               '<p class="ps-mh-intro">Eine besondere Sammlung von Geschichten über den letzten Propheten ﷺ – kindgerecht, authentisch und mit wertvollen Lehren für unseren Alltag.</p>'+
             '</div>'+
@@ -495,7 +495,7 @@ function patchHome(){
  const special=q("#psMuhammadHomeEntry",view);
  if(special&&!special.dataset.r22){
    special.dataset.r22="1";
-   special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★&nbsp;&nbsp;BESONDERER BEREICH</span><strong>Prophet<br>Muḥammad</strong><span class="ps-mh-home-ar" dir="rtl">ﷺ</span><span class="ps-mh-home-sub">Sein Leben. Seine Werte. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
+   special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★&nbsp;&nbsp;BESONDERER BEREICH</span><strong>Prophet<br>Muḥammad</strong><span class="ps-mh-home-ar" dir="rtl">محمد ﷺ</span><span class="ps-mh-home-sub">Sein Leben. Seine Werte. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
  }
  const entry=q("#psProphetEntry",view);
  if(entry&&!entry.dataset.r22){
