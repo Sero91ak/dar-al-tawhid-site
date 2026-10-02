@@ -1,4 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v117";\nconst BUILD_ID="kids-shell-v12-tab117";
+const CACHE_NAME="dar-al-tawhid-kids-v107";
+const BUILD_ID="kids-shell-v12-tab117";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -53,6 +54,18 @@ const PRECACHE=[
   "/kids/icons/icon-512.png?v=logo28",
   "/kids/icons/apple-touch-icon.png?v=logo28"
 ];
+
+self.addEventListener("message",function(event){
+  var data=event.data||{};
+  if(data.type!=="HARD_REFRESH")return;
+  event.waitUntil(
+    caches.keys().then(function(keys){
+      return Promise.all(keys.filter(function(key){
+        return key.indexOf("dar-al-tawhid-kids-")===0;
+      }).map(function(key){return caches.delete(key)}));
+    }).then(function(){return self.skipWaiting()})
+  );
+});
 
 self.addEventListener("install",function(event){
   event.waitUntil(

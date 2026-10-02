@@ -3208,10 +3208,18 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
   var pendingKidsBuild="";
+  var SEEN_KEY="darKidsFriendlyUpdateSeenV31";
   function kidsHideUpdate(){
     var layer=document.getElementById("kidsUpdateLayer");
     if(!layer)return;
     layer.classList.remove("is-open");
+    layer.hidden=true;
+  }
+  function kidsWantPreview(){
+    try{
+      if(/(?:^|[?&])demo=update(?:&|$)/.test(String(location.search||""))) return true;
+    }catch(e){}
+    try{ return localStorage.getItem(SEEN_KEY)!=="1"; }catch(e2){ return true; }
   }
   function kidsShowUpdate(title,text,targetBuild){
     pendingKidsBuild=String(targetBuild||KIDS_BUILD_ID);
@@ -3220,17 +3228,22 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
     var p=document.getElementById("kidsUpdateText");
     var btn=document.getElementById("kidsUpdateButton");
     if(!layer||!btn)return;
-    if(h)h.textContent=title||"Etwas Neues ist da";
-    if(p)p.textContent=text||"Tippe auf den goldenen Knopf. Dann lädt deine Kinder-App die neue Version.";
+    if(h)h.textContent=title||"Kids V1.07";
+    if(p)p.textContent=text||"Tippe auf Aktualisieren. Die Kinder-App lädt V1.07 / v31.";
     if(!btn.dataset.bound){
       btn.dataset.bound="1";
-      btn.addEventListener("click",function(){ kidsHardReload(pendingKidsBuild); });
+      btn.addEventListener("click",function(){
+        try{ localStorage.setItem(SEEN_KEY,"1"); }catch(e){}
+        kidsHardReload(pendingKidsBuild);
+      });
     }
     layer.hidden=false;
+    layer.removeAttribute("hidden");
     requestAnimationFrame(function(){ layer.classList.add("is-open"); });
   }
   function kidsHardReload(targetBuild){
     var want=String(targetBuild||KIDS_BUILD_ID);
+    try{ localStorage.setItem(SEEN_KEY,"1"); }catch(e0){}
     if(want===KIDS_BUILD_ID){
       try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,want)}catch(e){}
     }else{
@@ -3247,20 +3260,25 @@ const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
     location.replace(u.toString());
   }
   async function kidsCheckRemoteVersion(){
+    if(kidsWantPreview()){
+      kidsShowUpdate("Kids V1.07 / v31","Tippe auf den goldenen Knopf. Danach ist die Kinder-App wieder auf V1.07.",KIDS_BUILD_ID);
+      return;
+    }
     try{
       var r=await fetch("/kids/version.json?cb="+Date.now(),{cache:"no-store"});
       if(!r.ok)return;
       var j=await r.json();
       var remote=String(j.buildId||"").trim();
       if(remote&&remote!==KIDS_BUILD_ID){
-        kidsShowUpdate("Neue Version verfügbar","Tippe auf Aktualisieren. Danach wird die neue Kids-Version vollständig geladen.",remote);
+        kidsShowUpdate("Neue Version verfügbar","Tippe auf Aktualisieren. Danach wird die Kids-Version vollständig geladen.",remote);
       }else if(remote===KIDS_BUILD_ID){
         try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,KIDS_BUILD_ID)}catch(e){}
         kidsHideUpdate();
       }
     }catch(e){}
   }
-  window.addEventListener("DOMContentLoaded",function(){ kidsCheckRemoteVersion(); });
+  kidsCheckRemoteVersion();
+  window.addEventListener("DOMContentLoaded",kidsCheckRemoteVersion);
   window.addEventListener("focus",kidsCheckRemoteVersion);
   document.addEventListener("visibilitychange",function(){if(!document.hidden)kidsCheckRemoteVersion()});
   setInterval(kidsCheckRemoteVersion,60000);
