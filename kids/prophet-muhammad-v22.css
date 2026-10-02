@@ -4311,3 +4311,381 @@ html[data-view="stories"]{--r41-story-safe:max(58px,env(safe-area-inset-top,0px)
   .ps-mh-nav-icon,.nav-btn .ico{width:27px!important;height:27px!important}
   .ps-mh-bottom-nav button,.nav-btn .lab{font-size:11px!important}
 }
+
+
+/* KIDS_CHILD_FIRST_SPACIOUS_V31
+   Child-first pass after visual review: larger tap areas, fewer tiny 4-across
+   elements, more breathing room, stronger reading sizes. */
+@media(max-width:699px){
+  #view-stories.ps-stories-home{
+    padding-left:0!important;
+    padding-right:0!important;
+    padding-bottom:138px!important;
+  }
+
+  #view-stories.ps-stories-home .page-head{
+    min-height:190px!important;
+    padding:27px 24px 25px!important;
+    margin-bottom:16px!important;
+  }
+  #view-stories.ps-stories-home .page-head .kicker{
+    min-height:38px!important;
+    padding:0 15px!important;
+    font-size:10.5px!important;
+  }
+  #view-stories.ps-stories-home .page-head h2{
+    margin-top:14px!important;
+    font-size:50px!important;
+    max-width:90%!important;
+  }
+  #view-stories.ps-stories-home .page-head p{
+    margin-top:34px!important;
+    max-width:92%!important;
+    font-size:15px!important;
+    line-height:1.38!important;
+  }
+
+  #view-stories.ps-stories-home .ps-muhammad-home,
+  #view-stories.ps-stories-home .ps-prophet-entry,
+  #view-stories.ps-stories-home .story-feature{
+    width:calc(100% - 16px)!important;
+    margin-left:8px!important;
+    margin-right:8px!important;
+  }
+
+  #view-stories.ps-stories-home .ps-muhammad-home{
+    min-height:250px!important;
+    border-radius:30px!important;
+    margin-bottom:20px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-copy{
+    left:24px!important;
+    right:8%!important;
+    top:22px!important;
+    bottom:20px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-kicker{
+    min-height:36px!important;
+    padding:0 14px!important;
+    font-size:10px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-copy strong{
+    margin-top:13px!important;
+    max-width:62%!important;
+    font-size:41px!important;
+    line-height:.92!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-ar{
+    left:53%!important;
+    top:35%!important;
+    font-size:23px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-sub{
+    margin-top:10px!important;
+    max-width:74%!important;
+    font-size:13.5px!important;
+    line-height:1.3!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-cta{
+    min-height:54px!important;
+    padding:0 20px!important;
+    font-size:13.5px!important;
+  }
+
+  #view-stories.ps-stories-home .ps-prophet-entry{
+    min-height:216px!important;
+    border-radius:29px!important;
+    margin-bottom:20px!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy{
+    left:24px!important;
+    right:8%!important;
+    top:23px!important;
+    bottom:20px!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-kicker{
+    font-size:10px!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{
+    margin-top:12px!important;
+    max-width:88%!important;
+    font-size:37px!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-sub{
+    margin-top:9px!important;
+    font-size:13.5px!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-cta{
+    min-height:52px!important;
+    padding:0 19px!important;
+    font-size:13px!important;
+  }
+
+  #view-stories.ps-stories-home .story-feature{
+    border-radius:29px!important;
+    margin-top:10px!important;
+    margin-bottom:22px!important;
+  }
+  #view-stories.ps-stories-home .story-scene{
+    min-height:260px!important;
+  }
+  #view-stories.ps-stories-home .story-copy{
+    min-height:132px!important;
+    padding:18px 23px 20px!important;
+  }
+  #view-stories.ps-stories-home .story-copy .meta{
+    font-size:10.5px!important;
+  }
+  #view-stories.ps-stories-home .story-copy h3{
+    margin:8px 76px 6px 0!important;
+    font-size:32px!important;
+  }
+  #view-stories.ps-stories-home .story-copy p{
+    margin-right:76px!important;
+    font-size:13.5px!important;
+    line-height:1.4!important;
+  }
+  #view-stories.ps-stories-home .story-copy .story-go{
+    right:22px!important;
+    width:58px!important;
+    height:58px!important;
+  }
+
+  #view-stories.ps-stories-home .story-more-title{
+    min-height:60px!important;
+    padding:0 10px!important;
+    margin-bottom:10px!important;
+  }
+  #view-stories.ps-stories-home .r22-section-label strong{
+    font-size:29px!important;
+  }
+  #view-stories.ps-stories-home .r22-book{
+    width:29px!important;
+    height:26px!important;
+  }
+  #view-stories.ps-stories-home .r22-all{
+    min-height:50px!important;
+    font-size:12px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList){
+    gap:14px!important;
+    padding:2px 8px 22px!important;
+    scroll-padding-inline:8px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row{
+    flex:0 0 78vw!important;
+    width:78vw!important;
+    min-height:242px!important;
+    border-radius:24px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-thumb{
+    min-height:154px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row-copy{
+    min-height:88px!important;
+    padding:12px 14px 14px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row h3{
+    font-size:20px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row .meta,
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row .time{
+    font-size:10.5px!important;
+  }
+
+  /* Muḥammad detail: bigger and calmer. */
+  .ps-modal.ps-muhammad-open .ps-close{
+    width:52px!important;
+    height:52px!important;
+  }
+  .ps-mh-hero{
+    min-height:310px!important;
+  }
+  .ps-mh-hero-copy{
+    left:78px!important;
+    right:7%!important;
+    top:44px!important;
+    bottom:24px!important;
+  }
+  .ps-mh-special-label{
+    min-height:36px!important;
+    padding:0 14px!important;
+    font-size:10px!important;
+  }
+  .ps-mh-hero h2{
+    font-size:43px!important;
+    line-height:.92!important;
+  }
+  .ps-mh-ar{
+    font-size:25px!important;
+  }
+  .ps-mh-tagline{
+    margin-top:9px!important;
+    font-size:14px!important;
+  }
+  .ps-mh-intro{
+    max-width:76%!important;
+    font-size:11.7px!important;
+    line-height:1.5!important;
+  }
+
+  .ps-mh-way,
+  .ps-mh-message{
+    min-height:184px!important;
+  }
+  .ps-mh-panel-copy{
+    left:24px!important;
+    right:8%!important;
+  }
+  .ps-mh-line-icon{
+    width:31px!important;
+    height:31px!important;
+  }
+  .ps-mh-panel h3{
+    font-size:31px!important;
+  }
+  .ps-mh-panel p{
+    max-width:62%!important;
+    margin-top:9px!important;
+    font-size:12.2px!important;
+    line-height:1.45!important;
+  }
+  .ps-mh-discover{
+    min-height:52px!important;
+    margin-top:12px!important;
+    padding:0 19px!important;
+    font-size:12.5px!important;
+  }
+
+  /* Four tiny value chips were too cramped: make them a 2×2 learning grid. */
+  .ps-mh-values{
+    min-height:360px!important;
+    padding:22px 20px 24px!important;
+  }
+  .ps-mh-values-head{
+    max-width:76%!important;
+  }
+  .ps-mh-values-head .ps-mh-panel-title h3{
+    font-size:31px!important;
+  }
+  .ps-mh-values-head>p{
+    font-size:12px!important;
+    line-height:1.45!important;
+  }
+  .ps-mh-value-grid{
+    width:100%!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:12px!important;
+    margin-top:20px!important;
+  }
+  .ps-mh-value{
+    min-height:112px!important;
+    padding:13px 8px!important;
+  }
+  .ps-mh-value b{
+    width:38px!important;
+    height:38px!important;
+  }
+  .ps-mh-value strong{
+    margin-top:8px!important;
+    font-size:13px!important;
+  }
+
+  .ps-mh-episodes,
+  .ps-mh-more{
+    padding:20px 0 17px!important;
+  }
+  .ps-mh-section-head{
+    padding:0 20px 14px!important;
+  }
+  .ps-mh-section-title h3{
+    font-size:27px!important;
+  }
+  .ps-mh-section-head p{
+    font-size:11px!important;
+    line-height:1.4!important;
+  }
+  .ps-mh-all{
+    min-height:50px!important;
+    font-size:11.8px!important;
+  }
+  .ps-mh-episode-rail,
+  .ps-mh-more-rail{
+    gap:14px!important;
+    padding:0 14px 14px!important;
+    scroll-padding-inline:14px!important;
+  }
+  .ps-mh-episode,
+  .ps-mh-more-rail .ps-mh-more-card{
+    flex:0 0 78vw!important;
+    min-width:0!important;
+    border-radius:22px!important;
+  }
+  .ps-mh-episode-art{
+    min-height:160px!important;
+  }
+  .ps-mh-time{
+    min-height:28px!important;
+    padding:0 10px!important;
+    font-size:9.5px!important;
+  }
+  .ps-mh-episode-copy{
+    min-height:90px!important;
+    padding:12px 13px 14px!important;
+  }
+  .ps-mh-episode-copy strong{
+    font-size:18px!important;
+    line-height:1.12!important;
+  }
+  .ps-mh-episode-copy small{
+    margin-top:6px!important;
+    font-size:11px!important;
+    line-height:1.3!important;
+  }
+
+  .ps-mh-bottom-nav,
+  .bottom-nav{
+    min-height:78px!important;
+    height:78px!important;
+    padding:8px 9px!important;
+  }
+  .ps-mh-bottom-nav button,
+  .nav-btn{
+    min-height:62px!important;
+    height:62px!important;
+    border-radius:20px!important;
+  }
+  .ps-mh-nav-icon,
+  .nav-btn .ico{
+    width:30px!important;
+    height:30px!important;
+  }
+  .ps-mh-bottom-nav button,
+  .nav-btn .lab{
+    font-size:12px!important;
+  }
+
+  .ps-mh-discover,
+  .ps-mh-all,
+  .r22-all,
+  .ps-mh-episode,
+  .ps-mh-more-card,
+  .ps-muhammad-home,
+  .ps-prophet-entry,
+  .story-feature,
+  .story-row,
+  .nav-btn,
+  .ps-mh-bottom-nav button{
+    touch-action:manipulation!important;
+    -webkit-tap-highlight-color:rgba(255,226,151,.08)!important;
+  }
+}
+
+@media(max-width:380px){
+  #view-stories.ps-stories-home .page-head h2{font-size:44px!important}
+  #view-stories.ps-stories-home .ps-mh-home-copy strong{font-size:36px!important}
+  #view-stories.ps-stories-home .ps-mh-home-ar{left:55%!important;font-size:20px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{font-size:32px!important}
+  .ps-mh-hero h2{font-size:39px!important}
+  .ps-mh-value strong{font-size:12px!important}
+}
