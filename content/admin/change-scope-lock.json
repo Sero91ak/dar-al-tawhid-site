@@ -151,6 +151,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-v106-exact-rollback-2026-10-02",
+      "approvedBy": "user-explicit-kids-rollback-v106-sofort",
+      "reason": "Nutzer verlangt den sofortigen exakten Rollback von DĀR AL TAWḤĪD Kids auf V1.06. Freigabe nur für den historischen Kids-Snapshot, seine Auslieferungsmarker und den notwendigen Release-Guard.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "kids/",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js",
+        "_headers",
+        "scripts/kids-prophet-release-guard.js"
+      ],
+      "expiresAt": "2026-10-03T23:59:00.000Z"
+    },
+    {
       "id": "universal-islamic-content-sync-2026-09-30",
       "approvedBy": "user-explicit-tadabbur-hadith-salaf-sahaba-all-surfaces",
       "reason": "Nutzer verlangt: Tadabbur, Ḥadīṯe, Aussagen der Ṣaḥābah/Tābiʿīn/Salaf und zugehörige geprüfte Inhalte nach Erstellung automatisch in iOS-App, Web-Apps/Website und Apple TV synchronisieren; bestehende UI nicht verändern.",
