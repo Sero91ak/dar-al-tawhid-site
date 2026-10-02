@@ -119,10 +119,7 @@ input{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line
 .notice{font-size:11px;line-height:1.5;color:var(--muted)}
 .term.clickable{cursor:pointer;font-family:inherit}.term.clickable:hover{border-color:rgba(205,176,113,.42);color:#f0d59a}
 .learning-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:8px 0}
-.learning-results{display:grid;gap:6px;max-height:220px;overflow:auto;margin:8px 0}
-.learning-result{width:100%;text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.026);border-radius:9px;padding:9px 10px;cursor:pointer}
-.learning-result.active{border-color:rgba(205,176,113,.55);background:rgba(205,176,113,.07)}
-.learning-result b{display:block;font-size:12px}.learning-result small{display:block;color:var(--muted);font-size:9px;margin-top:3px;line-height:1.35}
+.learning-results{display:grid;grid-template-columns:1fr 1fr;gap:7px;max-height:260px;overflow:auto;margin:8px 0 11px}.learning-result{width:100%;text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.026);border-radius:11px;padding:9px 10px;cursor:pointer;min-width:0}.learning-result:hover{border-color:rgba(205,176,113,.38);background:rgba(205,176,113,.045)}.learning-result.active{border-color:rgba(81,199,143,.58);background:rgba(42,144,96,.10);box-shadow:inset 0 0 0 1px rgba(81,199,143,.08)}.learning-result b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.learning-result .learning-result-tts{display:block;font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:18px;line-height:1.35;margin:3px 0;color:#f4ead3;unicode-bidi:plaintext}.learning-result small{display:block;color:var(--muted);font-size:9px;margin-top:3px;line-height:1.35}.learning-result .play-hint{color:#d9bb77;font-weight:800}.learning-preview-status{font-size:10px;line-height:1.45;min-height:16px;margin:5px 0 7px;color:var(--muted)}.learning-preview-status.busy{color:#f1c77c}.learning-preview-status.good{color:#9bd8ba}.learning-preview-status.bad{color:#ef9d9d}@media(max-width:520px){.learning-results{grid-template-columns:1fr}}
 .learning-arabic{font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:18px!important;text-align:start;unicode-bidi:plaintext}
 .learning-status{font-size:10px;color:var(--muted);line-height:1.45;margin-top:7px}.learning-word-picker{display:flex;flex-wrap:wrap;gap:5px;max-height:170px;overflow:auto;padding:7px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.02);margin:7px 0 10px}.learning-word{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#cbd6dc;border-radius:999px;padding:5px 7px;font:inherit;font-size:9px;cursor:pointer}.learning-word.pending{border-color:rgba(234,104,104,.52);color:#ffb1b1;background:rgba(150,42,42,.13)}.learning-word.done{border-color:rgba(81,199,143,.58);color:#a8ebc9;background:rgba(42,144,96,.14)}
 .learning-player{width:100%;margin:7px 0;height:36px}
@@ -603,7 +600,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.59 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.60 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -652,7 +649,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.59</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.60</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
@@ -759,6 +756,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
       <button id="learnSelectionBtn" class="btn quiet" type="button">Markiertes Wort übernehmen</button>
       <button id="learnSearchBtn" class="btn secondary" type="button">Korrektur suchen</button>
     </div>
+    <div class="section-title" style="margin-top:9px;margin-bottom:3px">Ausspracheformen wählen · anklicken & direkt hören</div>
     <div id="learnResults" class="learning-results"></div>
     <label for="learnArabic">Sprechform / Ausspracheziel · Arabisch oder Deutsch</label>
     <input id="learnArabic" class="learning-arabic" dir="auto" autocomplete="off" spellcheck="false" placeholder="z. B. صَحَابَة oder gewünschte deutsche Sprechform">
@@ -766,6 +764,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
       <button id="learnPreviewBtn" class="btn secondary" type="button">Schnell testen</button>
       <button id="learnConfirmBtn" class="btn primary" type="button" disabled>So merken</button>
     </div>
+    <div id="learnPreviewStatus" class="learning-preview-status">Wähle oben eine Ausspracheform oder bearbeite die Sprechform manuell.</div>
     <div class="learning-actions" style="margin-top:6px">
       <button id="learnVariantBtn" class="btn quiet" type="button">Nächste Variante testen</button>
       <button id="learnResetVariantBtn" class="btn quiet" type="button">Variante 1</button>
@@ -815,7 +814,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
     <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.59</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.60</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash</textarea>
@@ -907,7 +906,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.59 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.60 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
 </div>
 </div>
 
@@ -994,11 +993,10 @@ async function chooseStoryWord(term){
   renderStoryWordList();
   const d=await searchLearning(term);
   const rows=Array.isArray(d?.results)?d.results:[];
-  const strong=rows.length&&Number(rows[0].score||0)>=.96;
-  if(strong||(!rows.length&&!looksIslamicSensitive(term))){
-    await previewLearning();
+  if(rows.length){
+    setMessage("„"+term+"“ ist ausgewählt. Wähle jetzt eine der Ausspracheformen; ein Klick spielt sie direkt als Schnelltest ab.","warn");
   }else{
-    setMessage("„"+term+"“ ist ausgewählt. Bitte passende Sprechform wählen und dann Schnelltest drücken.","warn");
+    setMessage("„"+term+"“ ist ausgewählt. Trage die gewünschte Sprechform ein und drücke Schnell testen.","warn");
   }
 }
 function setMessage(text,type="bad"){
@@ -1062,7 +1060,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.59")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.60")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -1080,7 +1078,7 @@ window.darUpdateStateChanged=data=>{
     state.className="update-state";
   }else if(nativeUpdateState==="current"){
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.59")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.60")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     top.hidden=false;
@@ -1263,21 +1261,43 @@ function renderLearningResults(results){
   learningCandidate=null;
   clearLearningPreview();
   const wrap=$("#learnResults");
-  if(!learningResults.length){wrap.innerHTML='<div class="notice">Keine passende Regel gefunden. Du kannst unten selbst eine Sprechform eintragen oder das sichtbare Wort direkt testen.</div>';return}
+  const status=$("#learnPreviewStatus");
+  if(!learningResults.length){
+    wrap.innerHTML='<div class="notice">Keine Bibliotheksform gefunden. Die sichtbare Schreibweise kann unten manuell getestet werden.</div>';
+    if(status){status.textContent="Keine Kandidaten gefunden · Sprechform manuell eintragen.";status.className="learning-preview-status"}
+    return;
+  }
   wrap.innerHTML=learningResults.map((r,i)=>{
     const pct=Math.round(Number(r.score||0)*100);
-    return '<button type="button" class="learning-result" data-learning-index="'+i+'"><b>'+esc(r.canonical||r.input)+'</b><small>'+esc(r.ttsText||"")+' · '+esc(r.source||"Bibliothek")+' · Treffer '+pct+'%</small></button>';
+    const lang=String(r.ttsLanguage||"")==="ar"?"Fuṣḥā":"Deutsch / Schreibweise";
+    const source=esc(r.source||"Bibliothek");
+    const tts=esc(r.ttsText||r.input||"");
+    const canonical=esc(r.canonical||r.input||"");
+    return '<button type="button" class="learning-result" data-learning-index="'+i+'" title="Anklicken = auswählen und direkt anhören">'+
+      '<b>'+canonical+'</b><span class="learning-result-tts" dir="auto">'+tts+'</span>'+
+      '<small>'+lang+' · '+source+' · '+pct+'% · <span class="play-hint">▶ direkt hören</span></small></button>';
   }).join("");
+  if(status){status.textContent=learningResults.length+" Ausspracheform"+(learningResults.length===1?"":"en")+" verfügbar · eine anklicken.";status.className="learning-preview-status"}
 }
-function selectLearningCandidate(index){
+
+function selectLearningCandidate(index,autoPreview=false){
   const r=learningResults[Number(index)];
   if(!r)return;
   learningCandidate=r;
   clearLearningPreview();
   document.querySelectorAll(".learning-result").forEach((el,i)=>el.classList.toggle("active",i===Number(index)));
   $("#learnArabic").value=r.ttsText||"";
-  setMessage("Korrektur ausgewählt. Jetzt „Schnell testen“ und anhören.","good");
+  learningVariant=0;
+  $("#learnResetVariantBtn").textContent="Variante 1";
+  const status=$("#learnPreviewStatus");
+  if(status){
+    status.textContent="Gewählt: "+String(r.ttsText||r.canonical||"")+" · "+(autoPreview?"Schnelltest startet …":"bereit zum Schnelltest");
+    status.className="learning-preview-status "+(autoPreview?"busy":"");
+  }
+  setMessage("Ausspracheform ausgewählt. "+(autoPreview?"Schnelltest wird direkt erzeugt …":"Jetzt Schnell testen und anhören."),"good");
+  if(autoPreview)previewLearning({fromCandidate:true});
 }
+
 async function searchLearning(termOverride=""){
   const term=String(termOverride||$("#learnTerm").value||"").trim();
   if(!term){setMessage("Bitte zuerst ein falsch ausgesprochenes Wort oder einen Namen auswählen/eintragen.");return null}
@@ -1288,7 +1308,6 @@ async function searchLearning(termOverride=""){
     const d=await r.json().catch(()=>({}));
     if(!r.ok||!d.ok)throw Error(d.error||"Korrektursuche fehlgeschlagen.");
     renderLearningResults(d.results||[]);renderLearningState(d);
-    if((d.results||[]).length&&Number(d.results[0].score||0)>=.96)selectLearningCandidate(0);
     return d;
   }catch(e){setMessage(e.message||String(e));return null}
 }
@@ -1340,11 +1359,16 @@ async function previewLearning(options={}){
   const term=$("#learnTerm").value.trim();
   const tts=$("#learnArabic").value.trim()||(learningCandidate?.ttsText||"")||term;
   if(!term){setMessage("Wort oder Name fehlt.");return}
+  if(!tts){setMessage("Wähle eine Ausspracheform oder trage die Sprechform ein.");return}
   if(nextVariant)learningVariant=Math.min(9,learningVariant+1);
   clearLearningPreview();
   const btn=$("#learnPreviewBtn"),old=btn.textContent;
+  const status=$("#learnPreviewStatus");
   btn.disabled=true;
   btn.textContent="Schnelltest …";
+  if(status){status.textContent="Wird vorbereitet … bei laufender Geschichte wartet nur bis zum Ende des aktuellen sicheren Sprachabschnitts.";status.className="learning-preview-status busy"}
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),120000);
   try{
     const r=await localRequest("/learning/preview",{
       method:"POST",
@@ -1355,13 +1379,15 @@ async function previewLearning(options={}){
         canonical:learningCandidate?.canonical||term,
         language:learningCandidate?.ttsLanguage||"",
         variant:learningVariant
-      })
+      }),
+      signal:controller.signal
     });
     if(!r.ok){
       const d=await r.json().catch(()=>({}));
       throw Error(d.error||"Test-Audio konnte nicht erzeugt werden.");
     }
     const blob=await r.blob();
+    if(!blob.size)throw Error("Schnelltest hat keine Audiodaten geliefert.");
     learningPreviewId=r.headers.get("X-Learning-Preview-Id")||"";
     if(!learningPreviewId)throw Error("Test-ID fehlt.");
     learningPreviewUrl=URL.createObjectURL(blob);
@@ -1371,21 +1397,23 @@ async function previewLearning(options={}){
     $("#learnConfirmBtn").disabled=false;
     $("#learnResetVariantBtn").textContent="Variante "+(learningVariant+1);
     const ms=Number(r.headers.get("X-Learning-Preview-Ms")||0);
-    const mode=r.headers.get("X-Learning-Preview-Mode")||"fast";
+    const mode=r.headers.get("X-Learning-Preview-Mode")||"qa-fast-render";
     await p.play().catch(()=>{});
     const speed=mode==="confirmed-lock"
-      ?"LOCKED-Audio"
+      ?"LOCKED-Audio sofort"
       :mode==="preview-cache"
         ?"Sofort aus Schnellcache"
-        :"Low-Latency erzeugt";
-    setMessage(
-      "Variante "+(learningVariant+1)+" · "+(ms?((ms/1000).toFixed(1)+" s · "):"")+speed+
-      ". Nur bei korrekter Aussprache „So merken“ drücken.",
-      "warn"
-    );
+        :"QA-Schnelltest";
+    if(status){status.textContent="▶ Läuft · Variante "+(learningVariant+1)+(ms?" · "+(ms/1000).toFixed(1)+" s":"")+" · "+speed;status.className="learning-preview-status good"}
+    setMessage("Hör genau hin. Nur wenn die Aussprache stimmt, „So merken“ drücken.","warn");
   }catch(e){
-    setMessage(e.message||String(e));
+    const msg=e?.name==="AbortError"
+      ?"Schnelltest hat nach 120 Sekunden nicht geantwortet. Laufende Story bleibt unverändert; bitte erneut testen."
+      :(e.message||String(e));
+    if(status){status.textContent=msg;status.className="learning-preview-status bad"}
+    setMessage(msg);
   }finally{
+    clearTimeout(timeout);
     btn.disabled=false;
     btn.textContent=old;
   }
@@ -2134,7 +2162,7 @@ $("#termList").addEventListener("click",e=>{
 });
 $("#learnResults").addEventListener("click",e=>{
   const btn=e.target.closest("[data-learning-index]");
-  if(btn)selectLearningCandidate(btn.getAttribute("data-learning-index"));
+  if(btn)selectLearningCandidate(btn.getAttribute("data-learning-index"),true);
 });
 $("#learnSelectionBtn").onclick=takeTextSelection;
 $("#manualSelectionBtn").onclick=takeTextSelection;
@@ -2145,7 +2173,7 @@ $("#learnResetVariantBtn").onclick=()=>{learningVariant=0;$("#learnResetVariantB
 $("#learnConfirmBtn").onclick=confirmLearning;
 $("#learnSyncBtn").onclick=syncLearning;
 $("#learnTerm").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();searchLearning()}});
-$("#learnArabic").addEventListener("input",clearLearningPreview);
+$("#learnArabic").addEventListener("input",()=>{clearLearningPreview();const s=$("#learnPreviewStatus");if(s){s.textContent="Sprechform geändert · Schnelltest erneut starten.";s.className="learning-preview-status"}});
 
 try{$("#freeVoiceText").value=localStorage.getItem("dar.voice.freeText.v2")||""}catch(_){}
 updateFreeVoiceCounter();
