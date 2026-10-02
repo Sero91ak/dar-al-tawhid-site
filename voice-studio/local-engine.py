@@ -54,6 +54,7 @@ PENDING_AUDIO_DIR.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_MANIFEST=MASTER_AUDIO_DIR/"manifest.json"
 LEARNING_HOME=VOICE_HOME/"PronunciationLearning"
 LEARNING_PENDING_DIR=LEARNING_HOME/"pending"
+LEARNING_PREVIEW_CACHE_DIR=LEARNING_HOME/"preview-cache"
 ALPHABET_MASTER_HOME=VOICE_HOME/"AlphabetMasters"
 ALPHABET_MASTER_STATE=ALPHABET_MASTER_HOME/"local-masters.json"
 ALPHABET_EXPORT_HOME=VOICE_HOME/"KidsAppExport"
@@ -75,6 +76,7 @@ RENDER_CACHE_DIR=VOICE_HOME/"RenderCache"/"v3"
 CONTEXT_BRIDGE_CACHE_DIR=RENDER_CACHE_DIR/"context-bridge-v1"
 LEARNING_HOME.mkdir(parents=True,exist_ok=True)
 LEARNING_PENDING_DIR.mkdir(parents=True,exist_ok=True)
+LEARNING_PREVIEW_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 ALPHABET_MASTER_HOME.mkdir(parents=True,exist_ok=True)
 ALPHABET_EXPORT_HOME.mkdir(parents=True,exist_ok=True)
 QUIZ_MASTER_HOME.mkdir(parents=True,exist_ok=True)
@@ -1111,14 +1113,16 @@ def learning_lock_key(term:str,existing_key:str=""):
     digest=hashlib.sha1(normalize_lookup(term).encode("utf-8")).hexdigest()[:12]
     return "learned_"+digest
 
-def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_id:str=""):
+def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_id:str="",variant:int=0):
     term=str(term or "").strip()
     if not term:
         raise ValueError("Wort oder Name fehlt.")
     rule=find_learning_rule(term,tts_text,canonical)
     effective_tts=str(tts_text or (rule or {}).get("tts_text","")).strip()
     if not effective_tts:
-        raise ValueError("Keine Sprechform gefunden. Bitte eine Sprechform eintragen oder einen Bibliothekstreffer wählen.")
+        # Auch normale deutsche Wörter/Namen dürfen manuell gelernt werden.
+        # Ohne Bibliothekstreffer ist der sichtbare Begriff selbst die erste Sprechform.
+        effective_tts=term
 
     requested=str(language_id or (rule or {}).get("tts_language") or "").strip().lower()
     if requested not in ("ar","de"):
@@ -1126,14 +1130,82 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
     if requested=="ar" and not re.search(r"[\u0600-\u06ff]",effective_tts):
         raise ValueError("Für Arabisch muss die Sprechform in arabischer Schrift angegeben werden.")
 
-    model=load_production_model()
+    variant=max(0,min(9,int(variant or 0)))
     preview_id=uuid.uuid4().hex[:16]
     existing_key=str((rule or {}).get("audio_lock_key","")) or str(AUDIO_LOCK_BY_TTS.get(effective_tts,""))
     lock_key=learning_lock_key(term,existing_key)
-    seed=3000+(int(preview_id[:8],16)%800000)
-    wav,metrics=render_segment_with_qa(model,effective_tts,requested,"narration",True,seed_base=seed)
+    mode="kids_lesson" if requested=="ar" else "narration"
+    ref=reference_for_language(requested)
+    signature="|".join([
+        normalize_lookup(term),
+        effective_tts,
+        requested,
+        str(variant),
+        file_signature(ref),
+        "fast-learning-preview-v1",
+    ])
+    cache_key=hashlib.sha256(signature.encode("utf-8")).hexdigest()
+    cache_path=LEARNING_PREVIEW_CACHE_DIR/(cache_key+".wav")
     path=LEARNING_PENDING_DIR/f"{preview_id}.wav"
-    save_wav(path,wav,int(model.sr))
+    preview_mode="fast-render"
+    started=time.perf_counter()
+
+    # Bereits bestätigte Audio-Locks sind die schnellste und sicherste Vorschau.
+    locked=audio_lock_path(lock_key)
+    if variant==0 and locked.exists() and locked.stat().st_size>44:
+        shutil.copy2(locked,path)
+        wav=load_locked_wav(locked,24000)
+        metrics=audio_quality_metrics(wav,24000,effective_tts,requested,mode)
+        preview_mode="confirmed-lock"
+        sample_rate=24000
+    elif cache_path.exists() and cache_path.stat().st_size>44:
+        shutil.copy2(cache_path,path)
+        wav=load_locked_wav(cache_path,24000)
+        metrics=audio_quality_metrics(wav,24000,effective_tts,requested,mode)
+        preview_mode="preview-cache"
+        sample_rate=24000
+    else:
+        # Low-latency: nur das einzelne Wort / die kurze Phrase erzeugen.
+        # Der MLX-Worker bleibt warm; seine Request-Sperre serialisiert diesen
+        # Mini-Render mit dem laufenden Story-Segment, ohne den Batch abzubrechen.
+        model=load_production_model()
+        sample_rate=int(model.sr)
+        import torch
+        seed=3000+(int(preview_id[:8],16)%800000)+variant*977
+        torch.manual_seed(seed)
+        last_error=None
+        wav=None
+        metrics=None
+        for attempt in range(2):
+            try:
+                wav=render_with_model(model,effective_tts,requested,mode)
+                wav=trim_segment_edges(
+                    wav,sample_rate,
+                    aggressive=True,
+                    inline=(requested=="ar" and is_inline_arabic_micro_term(effective_tts))
+                )
+                metrics=audio_quality_metrics(wav,sample_rate,effective_tts,requested,mode)
+                hard={
+                    "empty_audio","non_finite","near_silence","low_peak","clipping","too_short",
+                    "short_arabic_too_long","suspicious_sustained_hold",
+                    "inline_arabic_internal_hold","unexpected_internal_hold","excessive_internal_pause"
+                }
+                blocking=[x for x in (metrics.get("issues") or []) if x in hard]
+                if not blocking:
+                    break
+                last_error=", ".join(blocking)
+                wav=None
+            except Exception as e:
+                last_error=str(e)
+                wav=None
+            if attempt==0:
+                torch.manual_seed(seed+97)
+        if wav is None or metrics is None:
+            raise RuntimeError("Schnelltest verworfen: "+str(last_error or "technische Audio-QA fehlgeschlagen"))
+        save_wav(cache_path,wav,sample_rate)
+        shutil.copy2(cache_path,path)
+
+    elapsed_ms=int(round((time.perf_counter()-started)*1000))
     meta={
         "id":preview_id,
         "term":term,
@@ -1146,19 +1218,25 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
         "required_honorific_key":str((rule or {}).get("required_honorific_key","")),
         "audio_lock_key":lock_key,
         "path":str(path),
-        "sample_rate":int(model.sr),
+        "sample_rate":int(sample_rate),
         "metrics":metrics,
+        "variant":variant,
+        "previewMode":preview_mode,
+        "elapsedMs":elapsed_ms,
         "createdAt":time.time(),
     }
     with LEARNING_LOCK:
-        # Alte Vorschauen aufräumen, damit der Ordner klein bleibt.
+        # Nur alte temporäre Vorschauen löschen. Der persistente Schnellcache bleibt.
         old=list(LEARNING_PREVIEWS.values())
         LEARNING_PREVIEWS.clear()
         LEARNING_PREVIEWS[preview_id]=meta
     for item in old:
         try: Path(item.get("path","")).unlink(missing_ok=True)
         except Exception: pass
-    append_learning_log("preview",term=term,canonical=meta["canonical"],lockKey=lock_key)
+    append_learning_log(
+        "preview",term=term,canonical=meta["canonical"],lockKey=lock_key,
+        previewMode=preview_mode,elapsedMs=elapsed_ms,variant=variant
+    )
     return meta
 
 
@@ -2343,11 +2421,12 @@ def learning_state():
         "masterSahabiyyat":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabiyyah"),
         "masterProphets":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="prophet"),
         "autoSyncHours":24,
-        "learnedTerms":[str(r.get("string_to_replace","")) for r in user_rules[:100]],
+        "learnedTerms":[str(r.get("string_to_replace","")) for r in user_rules[:2000]],
         "learnedCanonicals":list(dict.fromkeys(
             str(r.get("canonical") or r.get("string_to_replace",""))
             for r in user_rules if r.get("voice_lock")=="MASTER"
-        ))[:100],
+        ))[:2000],
+        "confirmedAudioLocks":confirmed_audio_lock_keys(),
         "persistentPath":str(USER_OVERRIDES_FILE),
         "backupPath":str(USER_OVERRIDES_BACKUP),
         "persistent":True,
@@ -5576,6 +5655,43 @@ def _prophet_review_clear(item_id,text):
     data["items"]=rows
     _prophet_review_save(data)
 
+def _prophet_review_refresh():
+    data=_prophet_review_load()
+    rows=list(data.get("items") or [])
+    if not rows:
+        return data
+    try:
+        manifest=_prophet_story_manifest()
+        by_id={str(x.get("id") or ""):x for x in (manifest.get("items") or [])}
+    except Exception:
+        return data
+    refreshed=[]
+    for row in rows:
+        item_id=str((row or {}).get("itemId") or "")
+        item=by_id.get(item_id)
+        if not item:
+            continue
+        ages=tuple((row or {}).get("ages") or ("4-5","6-8","9-10"))
+        text=""
+        for age in ages:
+            candidate=_prophet_story_age_text(item,str(age))
+            if candidate:
+                text=candidate
+                break
+        if not text:
+            continue
+        strict=_prophet_strict_pronunciation_preflight(text)
+        if strict.get("ok"):
+            continue
+        updated=dict(row or {})
+        updated["issues"]=list(strict.get("items") or [])
+        updated["status"]="pending"
+        updated["updatedAt"]=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        refreshed.append(updated)
+    data["items"]=refreshed
+    return _prophet_review_save(data)
+
+
 def _prophet_strict_pronunciation_preflight(text):
     value=str(text or "").strip()
     if not value:
@@ -6674,7 +6790,7 @@ class H(BaseHTTPRequestHandler):
         elif p=="/prophet-stories/completed-audio":
             self.send_json(200,_prophet_completed_audio_snapshot())
         elif p=="/prophet-stories/pronunciation-review":
-            data=_prophet_review_load()
+            data=_prophet_review_refresh()
             pending=[x for x in data.get("items",[]) if str((x or {}).get("status") or "pending")=="pending"]
             self.send_json(200,{
                 "ok":True,
@@ -6844,6 +6960,7 @@ class H(BaseHTTPRequestHandler):
                     str(data.get("ttsText","")),
                     str(data.get("canonical","")),
                     str(data.get("language","")),
+                    int(data.get("variant",0) or 0),
                 )
                 b=Path(meta["path"]).read_bytes()
                 self.send_response(200)
@@ -6851,6 +6968,9 @@ class H(BaseHTTPRequestHandler):
                 self.send_header("Content-Length",str(len(b)))
                 self.send_header("X-Learning-Preview-Id",meta["id"])
                 self.send_header("X-Learning-Lock-Key",meta["audio_lock_key"])
+                self.send_header("X-Learning-Preview-Mode",str(meta.get("previewMode") or "fast"))
+                self.send_header("X-Learning-Preview-Ms",str(int(meta.get("elapsedMs") or 0)))
+                self.send_header("X-Learning-Variant",str(int(meta.get("variant") or 0)))
                 self.cors();self.end_headers();self.wfile.write(b)
                 return
             except Exception as e:
