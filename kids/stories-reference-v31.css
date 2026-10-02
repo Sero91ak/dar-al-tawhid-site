@@ -151,3 +151,61 @@
 }
 #view-stories.ps-stories-home .story-scene::before,
 #view-stories.ps-stories-home .story-scene::after{display:none!important}
+
+
+/* REFERENCE_SAFEAREA_DOCK_V40 — full-bleed top artwork and dock flush to the device edge */
+:root{
+  --r22-serif:ui-serif,"New York",Georgia,"Times New Roman",serif;
+}
+#view-stories.ps-stories-home,
+.ps-muhammad-special{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:geometricPrecision;
+}
+#view-stories.ps-stories-home .ps-mh-home-copy strong,
+#view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong,
+#view-stories.ps-stories-home .story-copy h3,
+.r22-section-label strong,
+.ps-mh-hero h2,
+.ps-mh-panel h3,
+.ps-mh-values-head .ps-mh-panel-title h3,
+.ps-mh-section-title h3,
+.ps-mh-episode-copy strong{
+  font-family:var(--r22-serif)!important;
+  font-kerning:normal!important;
+}
+@media(max-width:600px){
+  /* The approved screen lets the cinematic header continue behind the status bar.
+     Keep the content geometry unchanged by adding the safe inset to the header height. */
+  #view-stories.ps-stories-home .page-head{
+    margin-top:calc(-1 * var(--safe-top))!important;
+    height:calc(28vw + var(--safe-top))!important;
+    min-height:calc(118px + var(--safe-top))!important;
+    max-height:calc(132px + var(--safe-top))!important;
+    padding-top:calc(10px + var(--safe-top))!important;
+  }
+
+  /* Reference dock is attached to the lower screen edge, with the safe area inside it. */
+  .bottom-nav,
+  .ps-mh-bottom-nav{
+    bottom:0!important;
+    min-height:calc(55px + env(safe-area-inset-bottom,0px))!important;
+    height:calc(55px + env(safe-area-inset-bottom,0px))!important;
+    padding-bottom:calc(4px + env(safe-area-inset-bottom,0px))!important;
+    margin-bottom:0!important;
+  }
+  .bottom-nav{
+    border-radius:25px 25px 0 0!important;
+  }
+  .ps-mh-bottom-nav{
+    border-radius:25px 25px 0 0!important;
+  }
+
+  /* Preserve the visible 45px interaction row while safe-area padding grows below it. */
+  .bottom-nav .nav-btn,
+  .ps-mh-bottom-nav button{
+    align-self:start!important;
+    min-height:45px!important;
+    height:45px!important;
+  }
+}
