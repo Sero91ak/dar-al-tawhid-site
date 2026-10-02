@@ -2528,3 +2528,454 @@ html[data-view="stories"]{--r41-story-safe:max(58px,env(safe-area-inset-top,0px)
   .ps-mh-hero h2{font-size:35px!important}
   .ps-mh-intro{max-width:76%!important}
 }
+
+
+/* REFERENCE_EXACTNESS_WINS_V44
+   The approved 864×1536 references are the source of truth.
+   This deliberately overrides the later oversized child-spacing experiment while
+   keeping all controls live and keyboard/touch operable. */
+@media(max-width:600px){
+  html[data-view="stories"] #view-stories.ps-stories-home{
+    padding-bottom:72px!important;
+  }
+
+  /* Geschichten header: ~19% of the reference screen */
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head{
+    box-sizing:border-box!important;
+    height:33.6vw!important;
+    min-height:132px!important;
+    max-height:148px!important;
+    margin-top:calc(-1 * var(--r41-story-safe))!important;
+    margin-bottom:0!important;
+    padding:calc(var(--r41-story-safe) + 2px) 24px 4px!important;
+    justify-content:flex-start!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head .kicker{
+    min-height:20px!important;
+    padding:0 10px!important;
+    gap:7px!important;
+    font-size:7.8px!important;
+    letter-spacing:.12em!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head .kicker::before{
+    width:15px!important;height:13px!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head h2{
+    margin-top:5px!important;
+    font-size:33px!important;
+    line-height:.9!important;
+    letter-spacing:-.045em!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head h2::after{
+    top:calc(100% + 6px)!important;
+    right:-14%!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head p{
+    margin-top:13px!important;
+    max-width:84%!important;
+    font-size:10.2px!important;
+    line-height:1.18!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head::after{
+    left:5.5%!important;right:5.5%!important;bottom:4px!important;
+  }
+
+  /* Home cards: exact relative heights from the approved reference */
+  #view-stories.ps-stories-home .ps-muhammad-home,
+  #view-stories.ps-stories-home .ps-prophet-entry,
+  #view-stories.ps-stories-home .story-feature{
+    width:calc(100% + 14px)!important;
+    margin-left:-7px!important;
+    margin-right:-7px!important;
+  }
+  #view-stories.ps-stories-home .ps-muhammad-home{
+    height:34.2vw!important;
+    min-height:0!important;
+    max-height:154px!important;
+    margin-top:0!important;
+    margin-bottom:10px!important;
+    border-radius:24px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-copy{
+    left:19px!important;right:8%!important;top:12px!important;bottom:11px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-kicker{
+    min-height:22px!important;
+    padding:0 10px!important;
+    font-size:7.4px!important;
+    letter-spacing:.11em!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-copy strong{
+    margin-top:7px!important;
+    max-width:54%!important;
+    font-size:30px!important;
+    line-height:.86!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-ar{
+    left:43%!important;
+    top:34%!important;
+    font-size:18px!important;
+    line-height:1!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-sub{
+    margin-top:6px!important;
+    max-width:65%!important;
+    font-size:9.8px!important;
+    line-height:1.2!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-cta{
+    min-height:31px!important;
+    padding:0 13px!important;
+    gap:12px!important;
+    font-size:9.3px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-cta b{font-size:17px!important}
+
+  #view-stories.ps-stories-home .ps-prophet-entry{
+    height:29.6vw!important;
+    min-height:0!important;
+    max-height:134px!important;
+    margin-bottom:3px!important;
+    border-radius:23px!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy{
+    left:18px!important;right:7%!important;top:14px!important;bottom:13px!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-kicker{
+    font-size:7.1px!important;
+    line-height:1.1!important;
+    letter-spacing:.12em!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{
+    margin-top:7px!important;
+    max-width:78%!important;
+    font-size:27px!important;
+    line-height:.93!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-sub{
+    margin-top:5px!important;
+    font-size:10px!important;
+    line-height:1.15!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-cta{
+    min-height:30px!important;
+    padding:0 13px!important;
+    gap:12px!important;
+    font-size:9.2px!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-cta b{font-size:17px!important}
+
+  /* Featured free story */
+  #view-stories.ps-stories-home .story-feature{
+    margin-top:3px!important;
+    margin-bottom:12px!important;
+    border-radius:23px!important;
+  }
+  #view-stories.ps-stories-home .story-scene{
+    height:35.1vw!important;
+    min-height:0!important;
+    max-height:158px!important;
+  }
+  #view-stories.ps-stories-home .story-copy{
+    height:15.1vw!important;
+    min-height:0!important;
+    max-height:70px!important;
+    padding:8px 18px!important;
+  }
+  #view-stories.ps-stories-home .story-copy .meta{
+    font-size:7.3px!important;
+    line-height:1!important;
+    letter-spacing:.09em!important;
+  }
+  #view-stories.ps-stories-home .story-copy .meta::before{width:14px!important;height:13px!important}
+  #view-stories.ps-stories-home .story-copy h3{
+    margin:4px 58px 2px 0!important;
+    font-size:23px!important;
+    line-height:.95!important;
+  }
+  #view-stories.ps-stories-home .story-copy p{
+    margin-right:58px!important;
+    font-size:9px!important;
+    line-height:1.2!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+  }
+  #view-stories.ps-stories-home .story-copy .story-go{
+    right:18px!important;
+    width:39px!important;height:39px!important;
+    font-size:24px!important;
+  }
+
+  /* Weitere Geschichten: 3-card visual density */
+  #view-stories.ps-stories-home .story-more-title{
+    min-height:38px!important;
+    margin:2px 0 2px!important;
+    padding:0 4px!important;
+  }
+  #view-stories.ps-stories-home .r22-section-label{gap:8px!important}
+  #view-stories.ps-stories-home .r22-section-label strong{font-size:23px!important}
+  #view-stories.ps-stories-home .r22-book{width:22px!important;height:19px!important}
+  #view-stories.ps-stories-home .r22-all{
+    min-height:0!important;
+    padding:8px 2px!important;
+    font-size:9.4px!important;
+  }
+  #view-stories.ps-stories-home .r22-all b{font-size:16px!important;margin-left:5px!important}
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList){
+    gap:8px!important;
+    padding:1px 0 8px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row{
+    flex:0 0 34vw!important;
+    width:34vw!important;
+    height:26vw!important;
+    min-height:0!important;
+    border-radius:16px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-thumb{
+    height:15.4vw!important;
+    min-height:0!important;
+    max-height:70px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row-copy{
+    height:10.6vw!important;
+    min-height:0!important;
+    padding:5px 7px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row h3{
+    font-size:11.5px!important;
+    line-height:1.04!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row .meta,
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row .time{
+    font-size:6.8px!important;
+    line-height:1.12!important;
+  }
+
+  /* Muḥammad detail page */
+  .ps-modal.ps-muhammad-open .ps-close{
+    width:37px!important;height:37px!important;font-size:25px!important;
+  }
+  .ps-mh-hero{
+    height:43vw!important;
+    min-height:0!important;
+    max-height:190px!important;
+  }
+  .ps-mh-hero-copy{
+    left:66px!important;right:6%!important;top:34px!important;bottom:12px!important;
+  }
+  .ps-mh-special-label{
+    min-height:22px!important;
+    padding:0 10px!important;
+    font-size:7.4px!important;
+  }
+  .ps-mh-title-line{gap:8px!important;margin-top:6px!important}
+  .ps-mh-hero h2{
+    font-size:30px!important;
+    line-height:.87!important;
+  }
+  .ps-mh-ar{
+    font-size:19px!important;
+    line-height:1!important;
+    margin-bottom:2px!important;
+  }
+  .ps-mh-tagline{
+    margin-top:5px!important;
+    font-size:10.5px!important;
+    line-height:1.18!important;
+  }
+  .ps-mh-intro{
+    max-width:63%!important;
+    margin-top:6px!important;
+    font-size:8.3px!important;
+    line-height:1.35!important;
+  }
+  .ps-mh-ornament{
+    height:4.2vw!important;
+    min-height:16px!important;
+    max-height:20px!important;
+    grid-template-columns:1fr 36px 1fr!important;
+  }
+  .ps-mh-ornament span{width:13px!important;height:13px!important}
+  .ps-mh-ornament span::before{inset:2px!important}
+  .ps-mh-ornament span::after{width:4px!important;height:4px!important;inset:auto!important}
+
+  .ps-mh-panel{min-height:0!important}
+  .ps-mh-way{height:24.5vw!important;max-height:108px!important}
+  .ps-mh-message{height:27vw!important;max-height:118px!important}
+  .ps-mh-panel-copy{left:19px!important;right:7%!important}
+  .ps-mh-panel-title{gap:8px!important}
+  .ps-mh-line-icon{width:23px!important;height:23px!important}
+  .ps-mh-panel h3{font-size:22px!important}
+  .ps-mh-panel p{
+    max-width:48%!important;
+    margin-top:6px!important;
+    font-size:8.7px!important;
+    line-height:1.32!important;
+  }
+  .ps-mh-discover{
+    min-height:29px!important;
+    margin-top:7px!important;
+    padding:0 13px!important;
+    font-size:8.6px!important;
+  }
+
+  /* Four value medallions must stay in one line like the reference */
+  .ps-mh-values{
+    height:28vw!important;
+    min-height:0!important;
+    max-height:122px!important;
+    padding:13px 19px 10px!important;
+  }
+  .ps-mh-values-head{max-width:43%!important}
+  .ps-mh-values-head .ps-mh-panel-title h3{font-size:21px!important}
+  .ps-mh-values-head>p{
+    margin-top:6px!important;
+    font-size:8.4px!important;
+    line-height:1.28!important;
+  }
+  .ps-mh-value-grid{
+    width:68%!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:5px!important;
+    margin:7px 0 0 auto!important;
+  }
+  .ps-mh-value{
+    height:14.4vw!important;
+    min-height:0!important;
+    max-height:64px!important;
+    padding:5px 3px!important;
+    border-radius:0!important;
+    clip-path:none!important;
+  }
+  .ps-mh-value b{width:23px!important;height:23px!important}
+  .ps-mh-value strong{
+    margin-top:4px!important;
+    font-size:7.6px!important;
+    line-height:1!important;
+  }
+
+  /* Story cards: three visible at once */
+  .ps-mh-episodes{padding:8px 0 6px!important}
+  .ps-mh-more{padding:5px 0 4px!important}
+  .ps-mh-section-head{
+    padding:0 19px 6px!important;
+    gap:8px!important;
+    align-items:flex-end!important;
+  }
+  .ps-mh-section-title{gap:7px!important}
+  .ps-mh-section-title h3{font-size:20px!important}
+  .ps-mh-section-head p{
+    margin-top:3px!important;
+    font-size:7.8px!important;
+    line-height:1.2!important;
+  }
+  .ps-mh-all{
+    min-height:0!important;
+    padding:8px 2px!important;
+    font-size:8.5px!important;
+  }
+  .ps-mh-all b{font-size:15px!important;margin-left:5px!important}
+  .ps-mh-episode-rail,.ps-mh-more-rail{
+    gap:7px!important;
+    padding:0 14px 5px!important;
+  }
+  .ps-mh-episode{
+    flex:0 0 30vw!important;
+    min-width:0!important;
+    min-height:0!important;
+    border-radius:12px!important;
+  }
+  .ps-mh-episode-art{
+    height:12.8vw!important;
+    min-height:0!important;
+    max-height:57px!important;
+  }
+  .ps-mh-time{
+    left:6px!important;bottom:4px!important;
+    min-height:16px!important;
+    padding:0 6px!important;
+    font-size:6.5px!important;
+  }
+  .ps-mh-episode-copy{
+    height:9.4vw!important;
+    min-height:0!important;
+    max-height:43px!important;
+    padding:5px 6px!important;
+  }
+  .ps-mh-episode-copy strong{
+    font-size:10px!important;
+    line-height:1.04!important;
+  }
+  .ps-mh-episode-copy small{
+    margin-top:3px!important;
+    font-size:6.8px!important;
+    line-height:1.15!important;
+  }
+  .ps-mh-more-rail .ps-mh-more-card{
+    flex:0 0 30vw!important;
+    min-width:0!important;
+    min-height:0!important;
+    border-radius:12px!important;
+  }
+
+  /* Dock height/spacing from the reference */
+  .ps-mh-bottom-nav,
+  .bottom-nav{
+    min-height:55px!important;
+    height:55px!important;
+    padding:4px 6px!important;
+  }
+  .ps-mh-bottom-nav{
+    position:fixed!important;
+    left:50%!important;right:auto!important;
+    transform:translateX(-50%)!important;
+    bottom:max(0px,env(safe-area-inset-bottom))!important;
+    width:min(100%,980px)!important;
+    margin:0!important;
+    border-radius:25px 25px 0 0!important;
+  }
+  .bottom-nav{
+    bottom:max(0px,env(safe-area-inset-bottom))!important;
+    width:min(100%,780px)!important;
+    border-radius:25px 25px 0 0!important;
+  }
+  .ps-mh-bottom-nav button,
+  .nav-btn{
+    min-height:45px!important;
+    height:45px!important;
+    border-radius:16px!important;
+    gap:2px!important;
+    font-size:8.8px!important;
+    padding:3px 2px!important;
+  }
+  .ps-mh-nav-icon,
+  .nav-btn .ico{
+    width:22px!important;height:22px!important;
+  }
+  .nav-btn .lab{font-size:8.8px!important}
+}
+
+/* Preserve the ornate silhouette introduced in V38 while V44 controls only dimensions. */
+@media(max-width:600px){
+  .ps-mh-value{
+    -webkit-mask-size:100% 100%!important;
+            mask-size:100% 100%!important;
+    -webkit-mask-repeat:no-repeat!important;
+            mask-repeat:no-repeat!important;
+  }
+}
+
+@media(max-width:380px){
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head{
+    min-height:126px!important;
+    padding-left:20px!important;
+    padding-right:20px!important;
+  }
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head h2{font-size:31px!important}
+  html[data-view="stories"] #view-stories.ps-stories-home .page-head p{font-size:10px!important}
+  #view-stories.ps-stories-home .ps-mh-home-copy strong{font-size:28px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{font-size:25px!important}
+  .ps-mh-hero h2{font-size:28px!important}
+}
