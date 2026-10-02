@@ -1,10 +1,10 @@
 {
-  "version": "2.9.63",
-  "updatedAt": "2026-10-02T16:35:00+02:00",
-  "deployTrigger": "voice-studio-2.9.63-render-starvation-repair",
+  "version": "2.9.64",
+  "updatedAt": "2026-10-02T18:50:00+02:00",
+  "deployTrigger": "voice-studio-2.9.64-disable-auto-batch-and-engine-version-guard",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v56",
+  "cache": "dar-voice-studio-v57",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -275,8 +275,8 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "cb608bb0694fb65f0dfa0bb1fb076962b76cfe11",
-    "validatedAt": "2026-10-02T16:35:00+02:00",
+    "validatedCommit": "6679d0f4ad628f1dd18d5f4bfda604b2a64474f4",
+    "validatedAt": "2026-10-02T18:50:00+02:00",
     "freeVoiceIsolation": true,
     "mainAppBrandingUnchanged": true,
     "prophetStoryLocalBatchSmoke": true,
@@ -297,7 +297,11 @@
     "prophetCheckpointPreserved": true,
     "prophetAutoResumeDisabledByDefault": true,
     "interactiveRenderPriorityGuard": true,
-    "backgroundYieldGuard": true
+    "backgroundYieldGuard": true,
+    "alphabetMastersPreserved": true,
+    "autoBackgroundBatchDisabled": true,
+    "engineVersionHandshake": true,
+    "staleEngineCannotMasqueradeAsReady": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -590,10 +594,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "cb608bb0694fb65f0dfa0bb1fb076962b76cfe11",
+  "releaseRef": "6679d0f4ad628f1dd18d5f4bfda604b2a64474f4",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "2.9.63 behebt die gemeinsame Blockade von Aussprache-Schnelltest, normaler Audio-Erzeugung und Freistimme. Ein unvollständiger Prophetengeschichten-Checkpoint startet beim normalen Studio-Start nicht mehr ungefragt im Hintergrund. Nutzergeklickte Freistimme wird wieder als interaktiver Auftrag priorisiert. Echte Batch-Renderer warten auf Nutzeraufträge und geben den Synthese-Worker an der nächsten sicheren Segmentgrenze frei. Gespeicherte Prophetengeschichten-Checkpoints, bestätigte Aussprache-Locks, Lernstände und bestehende Audios werden nicht gelöscht.",
+  "updateRepairReason": "2.9.64 behebt die tatsächliche Studio-Blockade: Der lokale Alphabet-/Quiz-Gesamtbatch mit bis zu 226 Audiojobs startet beim Öffnen des Voice Studios nicht mehr automatisch, sondern nur noch nach bewusstem Klick. Interaktive Wort-Schnelltests, Freistimme und normale Audio-Erzeugung erhalten Vorrang vor Hintergrundsynthese. Zusätzlich melden App und lokale Engine nun ihre exakte Version und eine veraltete Engine wird beim Start/Update automatisch beendet und durch die installierte Engine-Version ersetzt. Lernstände, bestätigte Aussprache-Audios, Alphabet-Master und Prophetengeschichten bleiben erhalten.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -868,7 +872,7 @@
     "forceNewSemanticVersion": true,
     "previousUiVersion": "2.9.47",
     "previousBundleVersionPossibly": "2.9.45",
-    "targetVersion": "2.9.63",
+    "targetVersion": "2.9.64",
     "alphabetReviewIncluded": true,
     "prophetStoriesIncluded": true,
     "updateCheckFallbackRepair": true,
@@ -932,7 +936,14 @@
     "freeVoiceInteractivePriority": true,
     "interactiveGenerationPriority": true,
     "backgroundBatchYieldsAtSegmentBoundary": true,
-    "pronunciationWorkerStarvationRepair": true
+    "pronunciationWorkerStarvationRepair": true,
+    "alphabetQuizBatchAutoStart": false,
+    "alphabetQuizBatchExplicitClickOnly": true,
+    "pronunciationPriorityOverBackgroundBatch": true,
+    "standardGenerateInteractivePriority": true,
+    "engineVersionHandshake": true,
+    "staleEngineAutoRestart": true,
+    "exactEngineVersionHealthCheck": true
   },
   "alphabetFushaStrict": {
     "enabled": true,
@@ -1015,7 +1026,7 @@
   "validatedCommit": "b88aa1f8002e0eccf1a01a0b2d9ea19e5e3ebe04",
   "validatedAt": "2026-10-02T13:45:00+02:00",
   "validation": {
-    "targetVersion": "2.9.63",
+    "targetVersion": "2.9.64",
     "pronunciationAsyncPreviewQueue": true,
     "pronunciationPreviewStatePolling": true,
     "pronunciationLocalCandidateFallback": true,
@@ -1039,6 +1050,14 @@
     "staleProphetAutoResumeDisabledByDefault": true,
     "freeVoiceClassifiedInteractive": true,
     "backgroundRenderYieldsForInteractiveRequest": true,
-    "pronunciationPreviewNoLongFormQaCascade": true
+    "pronunciationPreviewNoLongFormQaCascade": true,
+    "rootCauseConfirmed": "alphabet-audio-studio auto-started full 140 alphabet + quiz + greeting batch on studio load, monopolizing the shared local synthesis worker",
+    "alphabetBatchDoesNotAutoStart": true,
+    "engineVersion": "2.9.64",
+    "engineHealthExposesVersion": true,
+    "uiRejectsStaleEngineVersion": true,
+    "nativeMacRestartsStaleEngine": true,
+    "installerRequiresMatchingEngineVersion": true,
+    "interactivePriorityGuardAdded": true
   }
 }
