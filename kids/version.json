@@ -2,9 +2,9 @@
   "buildId": "kids-shell-v12-tab121",
   "label": "KIDS · V1.07",
   "releasedAt": "2026-10-02T11:30:00.000Z",
-  "note": "V1.07: Geschichten-Startseite und der besondere Muḥammad-ﷺ-Bereich wurden anhand der bestätigten Referenzbilder pixelnäher verdichtet: neue dedizierte Runway-/Adobe-Bildwelten, exakte mobile Proportionen, Goldlinien und Kartenradien, eigene Dock-Icons, korrekt belegte Schaltflächen sowie verbesserter Offline-Cache für versionierte Bilddateien.",
+  "note": "V1.07: Geschichten-Startseite und der besondere Muḥammad-ﷺ-Bereich wurden anhand der bestätigten Referenzbilder weiter pixelgenau verfeinert: präzisere Ornament-Rosette, Goldlinien, Kartenkanten, Medaillons, Dock-Aktivzustände und sichere mobile Abstände; Bildwelten und Funktionen bleiben vollständig live und offline-fähig.",
   "visualSystem": {
-    "prophetStories": "approved-reference-match-v46",
+    "prophetStories": "approved-reference-match-v47",
     "storiesHomeAsCategoryHub": true,
     "prophetLibraryOwnPage": true,
     "prophetLibraryLargeHeader": false,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v127",
+    "serviceWorkerCache": "v128",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -47,10 +47,11 @@
     "pixelGeometryReference": "864x1536",
     "dockReferenceIcons": true,
     "offlineVersionedAssetMatching": true,
-    "referenceFinishingLayer": 46,
+    "referenceFinishingLayer": 47,
     "referenceCacheCoherent": true,
     "referenceCssNetworkFirst": true,
-    "headerPrecisionLayer": 40
+    "headerPrecisionLayer": 40,
+    "referenceLinework": "v47"
   },
   "updatedAt": "2026-10-02T13:29:00.000Z"
 }
