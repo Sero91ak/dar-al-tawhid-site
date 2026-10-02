@@ -40,3 +40,58 @@
     min-height:42px!important
   }
 }
+
+
+/* REFERENCE_FINAL_V37 — last-loaded precision layer for the approved 864×1536 references */
+#view-stories.ps-stories-home .ps-muhammad-home,
+#view-stories.ps-stories-home .ps-prophet-entry,
+#view-stories.ps-stories-home .story-feature{
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+}
+#view-stories.ps-stories-home .ps-muhammad-home:focus-visible,
+#view-stories.ps-stories-home .ps-prophet-entry:focus-visible,
+#view-stories.ps-stories-home .story-feature:focus-visible,
+#view-stories.ps-stories-home .story-row:focus-visible,
+.ps-mh-discover:focus-visible,.ps-mh-all:focus-visible,.ps-mh-episode:focus-visible,
+.ps-mh-more-card:focus-visible,.ps-mh-bottom-nav button:focus-visible{
+  outline:2px solid #ffe294!important;
+  outline-offset:2px!important
+}
+#view-stories.ps-stories-home .ps-mh-home-kicker,
+.ps-mh-special-label{
+  box-shadow:inset 0 1px rgba(255,255,255,.05),0 0 14px rgba(242,199,79,.08)!important
+}
+#view-stories.ps-stories-home .ps-mh-home-cta,
+#view-stories.ps-stories-home .ps-entry-cta,
+.ps-mh-discover{
+  letter-spacing:.005em!important
+}
+#view-stories.ps-stories-home .story-row[data-story] .story-thumb{
+  background-repeat:no-repeat!important;
+  filter:saturate(1.04) contrast(1.025) brightness(.97)!important
+}
+#view-stories.ps-stories-home .story-row[data-story] .story-thumb::after{
+  background:linear-gradient(180deg,transparent 50%,rgba(2,20,32,.34) 100%)!important
+}
+.ps-mh-panel-art,.ps-mh-hero,.ps-mh-values{
+  image-rendering:auto!important
+}
+.ps-mh-bottom-nav,.bottom-nav{
+  -webkit-backdrop-filter:blur(20px) saturate(1.05)!important;
+  backdrop-filter:blur(20px) saturate(1.05)!important
+}
+@media(max-width:600px){
+  #view-stories.ps-stories-home .story-row[data-story] .story-thumb{
+    background-position:center 50%!important
+  }
+  #view-stories.ps-stories-home .ps-muhammad-home::after{
+    width:63px!important;height:63px!important
+  }
+  #view-stories.ps-stories-home .ps-muhammad-home::before{
+    top:7px!important;right:7px!important;width:26px!important;height:26px!important
+  }
+  .ps-mh-section-title i{
+    opacity:.82!important
+  }
+}
