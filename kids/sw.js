@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v118";
+const CACHE_NAME="dar-al-tawhid-kids-v119";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -14,7 +14,7 @@ const PRECACHE=[
   "/kids/data/prophet-stories.json",
   "/kids/prophet-stories.css?v=21",
   "/kids/prophet-muhammad-v22.css?v=31",
-  "/kids/prophet-stories.js?v=42",
+  "/kids/prophet-stories.js?v=43",
   "/kids/assets/prophet-scenes/library.webp",
   "/kids/assets/prophet-scenes/garden.webp",
   "/kids/assets/prophet-scenes/ocean.webp",
