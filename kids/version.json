@@ -2,9 +2,9 @@
   "buildId": "kids-shell-v12-tab105",
   "label": "KIDS · V1.05",
   "releasedAt": "2026-10-02T09:08:00.000Z",
-  "note": "V1.05: Prophetengeschichten laufen als eigener stabiler Unterbereich mit 25 geprüften Karten und 25 dedizierten 21:9-Detail-Heroes. Build-, Cache-, Router-, Manifest- und Asset-Versionen werden jetzt vor jedem Release automatisch gegengeprüft; inkonsistente oder veraltete Kids-Stände werden gestoppt.",
+  "note": "V1.05 UI-Refresh: Geschichten jetzt im Premium-Widescreen-Stil. Muḥammad ﷺ steht als besonderer Bereich ganz oben und zusätzlich als hervorgehobener erster Eintrag der Prophetenbibliothek. Seine Detailseite besitzt einen eigenen Weg-/Botschaft-/Werte-/Stationen-Aufbau. Die Haupt-Tab-Leiste blieb unverändert.",
   "visualSystem": {
-    "prophetStories": "nested-prophet-library-v19",
+    "prophetStories": "premium-stories-wow-v20",
     "storiesHomeAsCategoryHub": true,
     "prophetLibraryOwnPage": true,
     "prophetLibraryLargeHeader": false,
@@ -27,9 +27,17 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v105",
+    "serviceWorkerCache": "v106",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
-    "releaseConsistencyGuardMode": "dynamic-build-cache-assets"
-  }
+    "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
+    "muhammadFeaturedFirst": true,
+    "muhammadDedicatedSpecialPage": true,
+    "muhammadJourneySections": true,
+    "muhammadValuesForChildren": true,
+    "muhammadEpisodeRail": true,
+    "noArrowOverHeroArt": true,
+    "bottomNavigationChanged": false
+  },
+  "updatedAt": "2026-10-02T09:25:00.000Z"
 }
