@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD Kids — Prophet Stories v10
+/* DĀR AL TAWḤĪD Kids — Prophet Stories v17
    Approved cinematic reference implemented with REAL transparent 3D symbols
    and REAL generated scenic backgrounds. */
 
@@ -1050,7 +1050,7 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
 }
 
 
-/* ===== CINEMATIC FULL-BLEED v15 ===== */
+/* ===== CINEMATIC FULL-BLEED v17 ===== */
 
 /* Live Prophet library: individual high-resolution 21:9 assets, no sprite/sticker system. */
 #view-stories.ps-world-view{
@@ -1517,7 +1517,7 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
 }
 
 
-/* Dedicated v16 heroes are composed with the subject on the right and copy-safe space on the left. */
+/* Dedicated v17 heroes are composed with the subject on the right and copy-safe space on the left. */
 .ps-hero[data-hero-copy="left"]::before{
   background:
     linear-gradient(90deg,
