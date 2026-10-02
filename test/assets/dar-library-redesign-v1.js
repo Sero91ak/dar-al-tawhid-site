@@ -171,3 +171,27 @@
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
   else init();
 })();
+
+/* DAR_LIBRARY_V1179_PERF */
+(function(){
+  "use strict";
+  function syncCinemaState(){
+    var root=document.documentElement;
+    if(!root)return;
+    root.classList.toggle("dar-library-paused",document.hidden===true);
+    var reduce=false;
+    try{reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
+    var saveData=false;
+    try{saveData=!!(navigator.connection&&navigator.connection.saveData)}catch(e){}
+    root.classList.toggle("dar-library-cinema-off",!!(reduce||saveData));
+  }
+  document.addEventListener("visibilitychange",syncCinemaState,{passive:true});
+  try{
+    var mq=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)");
+    if(mq){
+      if(typeof mq.addEventListener==="function")mq.addEventListener("change",syncCinemaState);
+      else if(typeof mq.addListener==="function")mq.addListener(syncCinemaState);
+    }
+  }catch(e){}
+  syncCinemaState();
+})();
