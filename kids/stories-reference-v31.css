@@ -129,3 +129,12 @@
     letter-spacing:-.015em!important
   }
 }
+
+
+/* DETAIL_GEOMETRY_V34 — measured against the approved 864×1536 detail reference */
+@media(max-width:600px){
+  .ps-mh-hero{height:41.2vw!important;min-height:0!important;max-height:none!important}
+  .ps-mh-way{height:22vw!important;min-height:0!important;max-height:none!important}
+  .ps-mh-message{height:27vw!important;min-height:0!important;max-height:none!important}
+  .ps-mh-values{height:27.6vw!important;min-height:0!important;max-height:none!important}
+}
