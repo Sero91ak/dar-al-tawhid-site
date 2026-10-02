@@ -2336,3 +2336,167 @@ html.ps-modal-open body{
   .ps-mh-episode-rail{padding-left:44px!important;padding-right:44px!important}
   .ps-mh-episode-detail{margin-left:44px!important;margin-right:44px!important}.ps-mh-fullstory{padding:38px 44px 20px!important}
 }
+
+
+/* LIBRARY_CHILD_FRIENDLY_V47
+   Prophet library enlarged after user feedback: readable, recognizable, tappable. */
+@media(max-width:600px){
+  .ps-library-nav{
+    min-height:calc(72px + env(safe-area-inset-top))!important;
+    gap:14px!important;
+    padding:env(safe-area-inset-top) 16px 11px!important;
+  }
+  .ps-library-back{
+    width:52px!important;height:52px!important;
+    font-size:34px!important;
+  }
+  .ps-library-nav-copy strong{
+    font-size:20px!important;
+    line-height:1.05!important;
+  }
+  .ps-library-nav-copy span{
+    margin-top:5px!important;
+    font-size:12px!important;
+  }
+  .ps-library-page .ps-toolbar{
+    padding:12px 12px 13px!important;
+  }
+  .ps-library-page .ps-modes{
+    grid-template-columns:1.18fr .82fr .76fr!important;
+    gap:8px!important;
+  }
+  .ps-library-page .ps-mode{
+    height:52px!important;
+    min-height:52px!important;
+    gap:7px!important;
+    padding:0 8px!important;
+    font-size:11.5px!important;
+  }
+  .ps-library-page .ps-mode-icon{
+    width:18px!important;height:18px!important;
+  }
+  .ps-library-page .ps-library-list{
+    gap:12px!important;
+    padding:12px 10px calc(26px + env(safe-area-inset-bottom))!important;
+  }
+  .ps-library-page .ps-muhammad-feature{
+    width:100%!important;
+    height:auto!important;
+    min-height:310px!important;
+    margin:0 0 4px!important;
+    border-radius:28px!important;
+  }
+  .ps-library-page .ps-muhammad-feature-copy{
+    left:22px!important;
+    right:11%!important;
+    top:23px!important;
+    bottom:22px!important;
+  }
+  .ps-library-page .ps-muhammad-feature-kicker{
+    font-size:10px!important;
+    letter-spacing:.11em!important;
+  }
+  .ps-library-page .ps-muhammad-feature-copy strong{
+    margin-top:12px!important;
+    font-size:38px!important;
+    line-height:.92!important;
+  }
+  .ps-library-page .ps-muhammad-feature-sub{
+    margin-top:10px!important;
+    font-size:14px!important;
+    line-height:1.3!important;
+  }
+  .ps-library-page .ps-muhammad-feature-cta{
+    min-height:52px!important;
+    padding:0 18px!important;
+    font-size:13px!important;
+  }
+
+  .ps-library-page .ps-story-row{
+    min-height:190px!important;
+    grid-template-columns:42% minmax(0,1fr) 58px!important;
+    padding-right:10px!important;
+    border:1px solid rgba(83,184,211,.22)!important;
+    border-radius:22px!important;
+    overflow:hidden!important;
+  }
+  .ps-library-page .ps-story-row::after{
+    left:14px!important;
+    right:14px!important;
+  }
+  .ps-library-page .ps-row-copy{
+    padding:22px 0 20px 10px!important;
+  }
+  .ps-library-page .ps-row-meta{
+    font-size:10.5px!important;
+    line-height:1.25!important;
+    letter-spacing:.09em!important;
+  }
+  .ps-library-page .ps-row-title{
+    margin-top:8px!important;
+    font-size:27px!important;
+    line-height:1.02!important;
+  }
+  .ps-library-page .ps-row-ar{
+    margin-top:10px!important;
+    font-size:17px!important;
+    line-height:1.3!important;
+  }
+  .ps-library-page .ps-row-go{
+    width:52px!important;height:52px!important;
+    font-size:31px!important;
+  }
+  .ps-library-page .ps-done{
+    right:62px!important;
+    bottom:13px!important;
+    width:26px!important;height:26px!important;
+  }
+
+  .ps-library-page button:focus-visible{
+    outline:3px solid #ffe59a!important;
+    outline-offset:3px!important;
+  }
+}
+@media(max-width:390px){
+  .ps-library-page .ps-modes{
+    grid-template-columns:1.12fr .82fr .76fr!important;
+    gap:6px!important;
+  }
+  .ps-library-page .ps-mode{
+    font-size:10.5px!important;
+    padding:0 6px!important;
+  }
+  .ps-library-page .ps-story-row{
+    min-height:178px!important;
+    grid-template-columns:40% minmax(0,1fr) 54px!important;
+  }
+  .ps-library-page .ps-row-title{
+    font-size:24px!important;
+  }
+  .ps-library-page .ps-muhammad-feature{
+    min-height:292px!important;
+  }
+}
+@media(min-width:601px) and (max-width:900px){
+  .ps-library-nav{
+    min-height:calc(78px + env(safe-area-inset-top))!important;
+  }
+  .ps-library-back{
+    width:56px!important;height:56px!important;
+  }
+  .ps-library-page .ps-mode{
+    min-height:56px!important;height:56px!important;
+    font-size:14px!important;
+  }
+  .ps-library-page .ps-library-list{
+    gap:14px!important;
+    padding:14px!important;
+  }
+  .ps-library-page .ps-story-row{
+    min-height:220px!important;
+    border-radius:24px!important;
+  }
+  .ps-library-page .ps-row-title{
+    font-size:32px!important;
+  }
+}
