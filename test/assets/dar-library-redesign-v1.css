@@ -689,3 +689,123 @@ body.is-home-route .brand-kicker-row::after{
   }
   body.is-home-route .hero-text{margin-top:auto!important}
 }
+
+
+/* DAR_LIBRARY_V1179_REFINEMENT */
+/* Nutzer-Feinschliff: echtes Markenband, weniger Doppel-Heros, Cinema sparsam.
+   Bottom navigation bleibt absichtlich unangetastet. */
+html.dar-library-redesign-v1 .dar-lib-brandbar__line{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+html.dar-library-redesign-v1 body.is-home-route .top-shell.theme-hero-shell .header{
+  min-height:0!important;
+  justify-content:flex-start!important;
+}
+html.dar-library-redesign-v1 body.is-home-route .header-row--brand-only{order:1!important}
+html.dar-library-redesign-v1 body.is-home-route .brand-main{order:1!important}
+html.dar-library-redesign-v1 body.is-home-route .brand-kicker-row{
+  order:2!important;
+  margin:5px 0 0 63px!important;
+  padding:0!important;
+}
+html.dar-library-redesign-v1 body.is-home-route .brand-kicker-row small{
+  line-height:1.28!important;
+  white-space:normal!important;
+}
+html.dar-library-redesign-v1 body.is-home-route .hero-text{
+  order:2!important;
+  margin-top:10px!important;
+  padding-top:10px!important;
+}
+html.dar-library-redesign-v1 body.is-home-route #headerPrayerStatus.header-prayer-hub{
+  order:3!important;
+  position:relative!important;
+  top:auto!important;
+  right:auto!important;
+  left:auto!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:10px 0 0!important;
+  padding:7px 10px!important;
+  border:1px solid color-mix(in srgb,var(--dar-lib-accent) 24%,var(--line))!important;
+  border-left:1px solid color-mix(in srgb,var(--dar-lib-accent) 24%,var(--line))!important;
+  border-radius:14px!important;
+  background:color-mix(in srgb,var(--bg) 60%,transparent)!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--cream,var(--text)) 10%,transparent)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.05)!important;
+  backdrop-filter:blur(12px) saturate(1.05)!important;
+}
+html.dar-library-redesign-v1 body.is-home-route .top-shell .isnad{
+  padding-top:11px!important;
+  padding-bottom:12px!important;
+}
+html.dar-library-redesign-v1 body.is-home-route .isnad-source{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+html.dar-library-redesign-v1 body.is-home-route .home-v380-open-row.dar-lib-recommended{
+  border-radius:18px!important;
+  box-shadow:none!important;
+}
+html.dar-library-redesign-v1 body.is-home-route .home-v380-open-row.dar-lib-recommended::after{
+  inset:-10% -3% -10% 38%!important;
+  opacity:calc(var(--dar-lib-img-opacity) * .88)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 22%,#000 48%,#000 100%)!important;
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 22%,#000 48%,#000 100%)!important;
+}
+html.dar-library-redesign-v1 body.is-home-route .home-v380-open-row.dar-lib-recommended::before{
+  background:linear-gradient(90deg,color-mix(in srgb,var(--card) 99%,transparent) 0%,color-mix(in srgb,var(--card) 92%,transparent) 44%,color-mix(in srgb,var(--card) 44%,transparent) 72%,transparent 100%)!important;
+}
+html.dar-library-redesign-v1 body.is-more-route .dar-more-library-hero{
+  display:none!important;
+}
+html.dar-library-redesign-v1 body.is-more-route .view-head,
+html.dar-library-redesign-v1 body.is-quiz-route .view-head,
+html.dar-library-redesign-v1 body.is-quran-overview .qov-header{
+  box-shadow:none!important;
+}
+html.dar-library-redesign-v1 body.is-more-route .more-quick-access__chip{
+  background:transparent!important;
+  border-color:transparent!important;
+}
+html.dar-library-redesign-v1 body.is-more-route .more-quick-access__chip:focus-visible,
+html.dar-library-redesign-v1 body.is-more-route .more-quick-access__chip:hover{
+  background:color-mix(in srgb,var(--dar-lib-accent) 8%,transparent)!important;
+  border-color:color-mix(in srgb,var(--dar-lib-accent) 22%,transparent)!important;
+}
+html.dar-library-redesign-v1 body.is-quiz-route .quiz-menu-card,
+html.dar-library-redesign-v1 body.is-more-route .more-feature-row,
+html.dar-library-redesign-v1 body.is-quran-overview .qov-row{
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+html.dar-library-redesign-v1.dar-library-paused body.is-home-route .top-shell.theme-hero-shell .header::before,
+html.dar-library-redesign-v1.dar-library-paused body.is-quiz-route .view-head::before,
+html.dar-library-redesign-v1.dar-library-paused body.is-quran-overview .qov-header::before,
+html.dar-library-redesign-v1.dar-library-paused body.is-more-route .view-head::before,
+html.dar-library-redesign-v1.dar-library-paused body.is-home-route .home-v380-quran-hero::before{
+  animation-play-state:paused!important;
+}
+html.dar-library-redesign-v1.dar-library-cinema-off body.is-home-route .top-shell.theme-hero-shell .header::before,
+html.dar-library-redesign-v1.dar-library-cinema-off body.is-quiz-route .view-head::before,
+html.dar-library-redesign-v1.dar-library-cinema-off body.is-quran-overview .qov-header::before,
+html.dar-library-redesign-v1.dar-library-cinema-off body.is-more-route .view-head::before,
+html.dar-library-redesign-v1.dar-library-cinema-off body.is-home-route .home-v380-quran-hero::before{
+  animation:none!important;
+  transform:none!important;
+  will-change:auto!important;
+}
+@media(max-width:430px){
+  html.dar-library-redesign-v1 body.is-home-route .brand-kicker-row{margin-left:57px!important}
+  html.dar-library-redesign-v1 body.is-home-route .brand-main .brand-title,
+  html.dar-library-redesign-v1 body.is-home-route .brand-main .brand-title-refined{
+    font-size:clamp(23px,6.8vw,31px)!important;
+    letter-spacing:.025em!important;
+  }
+  html.dar-library-redesign-v1 body.is-home-route .hero-text .salam{
+    font-size:clamp(14px,3.7vw,18px)!important;
+  }
+}
