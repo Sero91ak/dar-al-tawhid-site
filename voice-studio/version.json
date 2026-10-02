@@ -1,10 +1,10 @@
 {
-  "version": "2.9.61",
-  "updatedAt": "2026-10-02T13:28:00+02:00",
-  "deployTrigger": "voice-studio-2.9.61-async-pronunciation-page-architecture",
+  "version": "2.9.62",
+  "updatedAt": "2026-10-02T13:45:00+02:00",
+  "deployTrigger": "voice-studio-2.9.62-instant-pronunciation-review",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v54",
+  "cache": "dar-voice-studio-v55",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -275,8 +275,8 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "5ceaecc294ca62a3737b70bad3abc92005e5c462",
-    "validatedAt": "2026-10-02T13:05:00+02:00",
+    "validatedCommit": "b88aa1f8002e0eccf1a01a0b2d9ea19e5e3ebe04",
+    "validatedAt": "2026-10-02T13:45:00+02:00",
     "freeVoiceIsolation": true,
     "mainAppBrandingUnchanged": true,
     "prophetStoryLocalBatchSmoke": true,
@@ -585,10 +585,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "056166ddff536f66b4ffdd4f5df36b29754deed5",
+  "releaseRef": "b88aa1f8002e0eccf1a01a0b2d9ea19e5e3ebe04",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "2.9.61 repariert den blockierenden Aussprache-Schnelltest über eine asynchrone, sichere Audio-Warteschlange und trennt die Studio-Werkzeuge in eigene Arbeitsseiten. Aussprache, Alif–Yāʾ, System/Updates und Freie Stimme stehen getrennt; der relevante Bearbeitungsbereich bleibt jeweils direkt daneben. Die lokale Aussprachebibliothek dient zusätzlich als Fallback, damit Kandidaten auch bei einer gestörten Suchantwort sichtbar bleiben. Laufende oder fertige Prophetengeschichten werden beim Schnelltest nicht überschrieben.",
+  "updateRepairReason": "2.9.62 stellt den schnellen Aussprache-Prüfworkflow wieder her: lokale Ausspracheformen erscheinen sofort ohne Engine-Wartezeit, offene/problematische Wörter stehen prominent oben, fünf Audio-Varianten sind direkt auswählbar und einzeln abspielbar, Einzelwort-Schnelltests nutzen wieder den Low-Latency-Renderer mit persistentem Cache statt der schweren Voll-QA-Kaskade, und ein Schnelltest bricht nach 45 Sekunden klar ab statt minutenlang die Bearbeitung zu blockieren. Bestätigte Audio-Locks und laufende Prophetengeschichten bleiben geschützt.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -863,7 +863,7 @@
     "forceNewSemanticVersion": true,
     "previousUiVersion": "2.9.47",
     "previousBundleVersionPossibly": "2.9.45",
-    "targetVersion": "2.9.60",
+    "targetVersion": "2.9.62",
     "alphabetReviewIncluded": true,
     "prophetStoriesIncluded": true,
     "updateCheckFallbackRepair": true,
@@ -918,7 +918,11 @@
     "prophetNonBlockingFailureQueue": true,
     "prophetInternalCaffeinate": true,
     "prophetAutoResumeAfterEngineRestart": true,
-    "engineKeepAliveSupervisor": true
+    "engineKeepAliveSupervisor": true,
+    "pronunciationImmediateLocalCandidates": true,
+    "pronunciationFiveDirectVariants": true,
+    "pronunciationProminentOpenReviewStrip": true,
+    "pronunciationPreviewHardTimeout45Seconds": true
   },
   "alphabetFushaStrict": {
     "enabled": true,
@@ -998,10 +1002,10 @@
     "offlineManifestPackaged": true,
     "staleLocalManifestAutoRefresh": true
   },
-  "validatedCommit": "056166ddff536f66b4ffdd4f5df36b29754deed5",
-  "validatedAt": "2026-10-02T13:31:00+02:00",
+  "validatedCommit": "b88aa1f8002e0eccf1a01a0b2d9ea19e5e3ebe04",
+  "validatedAt": "2026-10-02T13:45:00+02:00",
   "validation": {
-    "targetVersion": "2.9.61",
+    "targetVersion": "2.9.62",
     "pronunciationAsyncPreviewQueue": true,
     "pronunciationPreviewStatePolling": true,
     "pronunciationLocalCandidateFallback": true,
@@ -1016,6 +1020,10 @@
     "fullVoiceValidateBlockedByUnrelatedKidsCacheGuard": "kids/sw.js missing dar-al-tawhid-kids-v106",
     "focusedUiSyntaxPassed": true,
     "pronunciationAllahCandidateRegressionPassed": true,
-    "pronunciationAllahExpectedArabic": "اللَّه"
+    "pronunciationAllahExpectedArabic": "اللَّه",
+    "pronunciationInstantLocalCandidateRender": true,
+    "pronunciationFiveVariantDirectSelection": true,
+    "pronunciationLowLatencyPreviewRenderer": true,
+    "pronunciationPreviewTimeoutSeconds": 45
   }
 }
