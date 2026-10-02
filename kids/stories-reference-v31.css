@@ -224,3 +224,15 @@
     max-height:76px!important;
   }
 }
+
+
+/* REFERENCE_IMAGE_CROP_V44 — align moon/minarets with the approved mobile crops */
+@media(max-width:600px){
+  #view-stories.ps-stories-home .page-head{
+    justify-content:flex-start!important;
+    background-position:center center,center center,62% 18%!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry{
+    background-position:center center,61% 8%!important;
+  }
+}
