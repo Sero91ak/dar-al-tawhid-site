@@ -92,16 +92,46 @@ function renderModeButtons(){
   const current=mode();
   document.querySelectorAll("[data-ps-mode]").forEach(b=>b.classList.toggle("active",b.dataset.psMode===current));
 }
+function renderMuhammadFeature(){
+  const host=$("#psMuhammadFeature");
+  if(!host)return;
+  const item=items.find(x=>x.id==="muhammad");
+  if(!item){host.innerHTML="";return}
+  const text=buildText(item);
+  const meta="QURʾĀN GEPRÜFT · "+durationLabel(item,text);
+  host.innerHTML=
+    '<button class="ps-muhammad-card" data-ps-id="muhammad" type="button">'+
+      '<span class="ps-muhammad-visual" aria-hidden="true"><img src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" fetchpriority="high"></span>'+
+      '<span class="ps-muhammad-panel">'+
+        '<span class="ps-muhammad-kicker">BESONDERER BEREICH · SIEGEL DER PROPHETEN</span>'+
+        '<span class="ps-muhammad-title">Prophet Muhammad ﷺ</span>'+
+        '<span class="ps-muhammad-ar" dir="rtl">'+esc(arabicLine(item))+'</span>'+
+        '<span class="ps-muhammad-meta">'+esc(meta)+'</span>'+
+        '<span class="ps-muhammad-cta"><span>Geschichte öffnen</span><span class="ps-muhammad-go" aria-hidden="true">›</span></span>'+
+      '</span>'+
+      (done(item.id)?'<span class="ps-done ps-muhammad-done" aria-label="Abgeschlossen"></span>':'')+
+    '</button>';
+  const btn=host.querySelector("[data-ps-id='muhammad']");
+  if(btn)btn.addEventListener("click",()=>openStory("muhammad"));
+  const img=host.querySelector("img");
+  if(img)img.onerror=()=>{
+    const fallback=img.dataset.fallback||"";
+    img.onerror=null;
+    if(fallback)img.src=fallback;
+  };
+}
 function renderCards(){
   const grid=$("#psGrid");if(!grid)return;
-  grid.innerHTML=items.map((item,index)=>{
+  renderMuhammadFeature();
+  const regularItems=items.filter(item=>item.id!=="muhammad");
+  grid.innerHTML=regularItems.map((item,index)=>{
     const text=buildText(item);
     const meta=(item.disputed?"IKHTILĀF · ":"QURʾĀN GEPRÜFT · ")+durationLabel(item,text);
     return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button">'+
       '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" loading="'+(index<4?"eager":"lazy")+'" '+(index<2?'fetchpriority="high"':'')+'>'+
       '<span class="ps-row-copy">'+
         '<span class="ps-row-meta">'+esc(meta)+'</span>'+
-        '<span class="ps-row-title">'+esc(item.name)+(item.id==="muhammad"?" ﷺ":"")+'</span>'+
+        '<span class="ps-row-title">'+esc(item.name)+'</span>'+
         '<span class="ps-row-ar" dir="rtl">'+esc(arabicLine(item))+'</span>'+
       '</span>'+
       '<span class="ps-row-go" aria-hidden="true">›</span>'+
@@ -137,13 +167,15 @@ function prepareStoriesHome(view){
     entry.className="ps-prophet-entry";
     entry.type="button";
     entry.innerHTML=
-      '<span class="ps-entry-shade" aria-hidden="true"></span>'+
-      '<span class="ps-entry-copy">'+
-        '<span class="ps-entry-kicker">EIGENER BEREICH · QURʾĀN GEPRÜFT</span>'+
-        '<strong>Prophetengeschichten</strong>'+
-        '<span class="ps-entry-sub">25 Geschichten · lesen &amp; hören</span>'+
-      '</span>'+
-      '<span class="ps-entry-go" aria-hidden="true">›</span>';
+      '<span class="ps-entry-visual" aria-hidden="true"><img src="/kids/assets/kids-brand/hero-warm-world.png?v=20" alt="" decoding="async"></span>'+
+      '<span class="ps-entry-panel">'+
+        '<span class="ps-entry-copy">'+
+          '<span class="ps-entry-kicker">EIGENER BEREICH · QURʾĀN GEPRÜFT</span>'+
+          '<strong>Prophetengeschichten</strong>'+
+          '<span class="ps-entry-sub">25 Geschichten · lesen &amp; hören</span>'+
+        '</span>'+
+        '<span class="ps-entry-action"><span>Entdecken</span><span class="ps-entry-go" aria-hidden="true">›</span></span>'+
+      '</span>';
     if(pageHead)pageHead.insertAdjacentElement("afterend",entry);
     else view.insertBefore(entry,view.firstChild);
     entry.addEventListener("click",openLibrary);
@@ -190,7 +222,11 @@ function ensureUi(){
         '<button class="ps-mode" data-ps-mode="read" type="button"><span class="ps-mode-icon ps-mode-icon-book" aria-hidden="true"></span>Lesen</button>'+
       '</div>'+
     '</div>'+
-    '<div class="ps-library-scroll" id="psLibraryScroll"><div id="psGrid" class="ps-library-list"></div></div>';
+    '<div class="ps-library-scroll" id="psLibraryScroll">'+
+      '<div id="psMuhammadFeature" class="ps-muhammad-feature"></div>'+
+      '<div class="ps-sequence-head"><span>IN REIHENFOLGE</span><strong>Die Propheten</strong><small>Danach geht es chronologisch von Ādam bis ʿĪsā weiter.</small></div>'+
+      '<div id="psGrid" class="ps-library-list"></div>'+
+    '</div>';
   document.body.appendChild(library);
   library.querySelectorAll("[data-ps-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.psMode)));
   $("#psLibraryBack").addEventListener("click",closeLibrary);
