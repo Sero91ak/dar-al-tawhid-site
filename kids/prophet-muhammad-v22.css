@@ -4689,3 +4689,184 @@ html[data-view="stories"]{--r41-story-safe:max(58px,env(safe-area-inset-top,0px)
   .ps-mh-hero h2{font-size:39px!important}
   .ps-mh-value strong{font-size:12px!important}
 }
+
+
+/* KIDS_CHILD_FIRST_TABLET_V31 — keep iPad/tablet touch targets equally generous. */
+@media(min-width:700px) and (max-width:1100px){
+  .shell:has(#view-stories.active){
+    width:min(100%,1024px)!important;
+    max-width:1024px!important;
+    padding-left:20px!important;
+    padding-right:20px!important;
+    padding-bottom:132px!important;
+  }
+  #view-stories.ps-stories-home .page-head{
+    min-height:300px!important;
+    padding:44px 48px 38px!important;
+  }
+  #view-stories.ps-stories-home .page-head .kicker{
+    min-height:42px!important;
+    padding:0 17px!important;
+    font-size:12px!important;
+  }
+  #view-stories.ps-stories-home .page-head h2{
+    font-size:68px!important;
+  }
+  #view-stories.ps-stories-home .page-head p{
+    max-width:72%!important;
+    font-size:18px!important;
+    line-height:1.4!important;
+  }
+
+  #view-stories.ps-stories-home .ps-muhammad-home{
+    min-height:360px!important;
+    border-radius:36px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-copy{
+    left:42px!important;
+    top:34px!important;
+    bottom:30px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-kicker{
+    min-height:42px!important;
+    padding:0 16px!important;
+    font-size:12px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-copy strong{
+    font-size:58px!important;
+    max-width:52%!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-sub{
+    font-size:17px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-cta{
+    min-height:58px!important;
+    padding:0 24px!important;
+    font-size:16px!important;
+  }
+
+  #view-stories.ps-stories-home .ps-prophet-entry{
+    min-height:300px!important;
+    border-radius:34px!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy{
+    left:42px!important;
+    top:32px!important;
+    bottom:28px!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{
+    font-size:48px!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-sub{
+    font-size:16px!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-cta{
+    min-height:56px!important;
+    padding:0 22px!important;
+    font-size:15px!important;
+  }
+
+  #view-stories.ps-stories-home .story-scene{
+    min-height:380px!important;
+  }
+  #view-stories.ps-stories-home .story-copy{
+    min-height:158px!important;
+    padding:22px 34px 24px!important;
+  }
+  #view-stories.ps-stories-home .story-copy h3{
+    font-size:42px!important;
+  }
+  #view-stories.ps-stories-home .story-copy p{
+    font-size:16px!important;
+  }
+  #view-stories.ps-stories-home .story-copy .story-go{
+    width:64px!important;
+    height:64px!important;
+  }
+
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row{
+    flex-basis:47%!important;
+    min-height:290px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-thumb{
+    min-height:190px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row h3{
+    font-size:22px!important;
+  }
+
+  .ps-mh-hero{
+    min-height:470px!important;
+  }
+  .ps-mh-hero-copy{
+    left:108px!important;
+    top:66px!important;
+  }
+  .ps-mh-hero h2{
+    font-size:62px!important;
+  }
+  .ps-mh-tagline{
+    font-size:18px!important;
+  }
+  .ps-mh-intro{
+    max-width:64%!important;
+    font-size:15px!important;
+  }
+  .ps-mh-panel{
+    min-height:300px!important;
+  }
+  .ps-mh-panel h3{
+    font-size:40px!important;
+  }
+  .ps-mh-panel p{
+    font-size:15px!important;
+    max-width:48%!important;
+  }
+  .ps-mh-discover{
+    min-height:58px!important;
+    padding:0 24px!important;
+    font-size:15px!important;
+  }
+  .ps-mh-values{
+    min-height:330px!important;
+  }
+  .ps-mh-value{
+    min-height:128px!important;
+  }
+  .ps-mh-value strong{
+    font-size:14px!important;
+  }
+  .ps-mh-episode,
+  .ps-mh-more-card{
+    flex-basis:45%!important;
+    min-width:320px!important;
+  }
+  .ps-mh-episode-art{
+    min-height:205px!important;
+  }
+  .ps-mh-episode-copy strong{
+    font-size:20px!important;
+  }
+  .ps-mh-episode-copy small{
+    font-size:13px!important;
+  }
+  .ps-mh-bottom-nav,
+  .bottom-nav{
+    min-height:84px!important;
+    height:84px!important;
+  }
+  .ps-mh-bottom-nav button,
+  .nav-btn{
+    min-height:68px!important;
+    height:68px!important;
+  }
+  .ps-mh-nav-icon,
+  .nav-btn .ico{
+    width:34px!important;
+    height:34px!important;
+  }
+  .ps-mh-bottom-nav button,
+  .nav-btn .lab{
+    font-size:13px!important;
+  }
+}
