@@ -1,10 +1,10 @@
 {
-  "buildId": "kids-shell-v12-tab105",
-  "label": "KIDS · V1.05",
-  "releasedAt": "2026-10-02T09:08:00.000Z",
-  "note": "V1.05: Prophetengeschichten laufen als eigener stabiler Unterbereich mit 25 geprüften Karten und 25 dedizierten 21:9-Detail-Heroes. Build-, Cache-, Router-, Manifest- und Asset-Versionen werden jetzt vor jedem Release automatisch gegengeprüft; inkonsistente oder veraltete Kids-Stände werden gestoppt.",
+  "buildId": "kids-shell-v12-tab1051",
+  "label": "KIDS · V1.05.1",
+  "releasedAt": "2026-10-02T19:18:00.000Z",
+  "note": "V1.05.1: Der stabile V1.05-Geschichtenbereich wurde gezielt veredelt: neuer freundlicher Start-Hero, Bild- und Bedienflächen klar getrennt, größere kindgerechte Touch-Ziele und Muḥammad ﷺ als eigener Ehrenbereich vor der unveränderten chronologischen Prophetenfolge.",
   "visualSystem": {
-    "prophetStories": "nested-prophet-library-v19",
+    "prophetStories": "nested-prophet-library-v20",
     "storiesHomeAsCategoryHub": true,
     "prophetLibraryOwnPage": true,
     "prophetLibraryLargeHeader": false,
@@ -27,9 +27,13 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v105",
+    "serviceWorkerCache": "v1051",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
-    "releaseConsistencyGuardMode": "dynamic-build-cache-assets"
+    "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
+    "storyAssetVersion": 20,
+    "muhammadHonorFeature": true,
+    "chronologicalOrderAfterMuhammadFeature": true,
+    "storiesHomePolish": "v20"
   }
 }
