@@ -760,3 +760,15 @@ body.dar-library-quiz-home .quiz-menu-card b{white-space:nowrap!important;overfl
   .dar-library-feature{padding-right:37%!important}
   body.is-home-route .home-line-tawhid{padding-right:36%!important}
 }
+
+
+/* DAR_LIBRARY_CINEMA_PAUSE_V1170
+   Pause decorative motion when off-screen/backgrounded; no effect on navigation.
+*/
+body.dar-library-cinema-paused.is-home-route .header.theme-hero-surface::before,
+body.dar-library-cinema-paused.dar-library-quiz-home .header.theme-hero-surface::before,
+body.dar-library-cinema-paused.is-quran-overview .header.theme-hero-surface::before,
+body.dar-library-cinema-paused.dar-library-more .header.theme-hero-surface::before,
+body.dar-library-cinema-paused.is-quran-overview .qov-header::before{
+  animation-play-state:paused!important;
+}
