@@ -57,7 +57,7 @@
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
 <script src="/test/assets/dar-noble-3d-icons.js?v=1165"></script><!-- DAR_NOBLE_3D_HEAD -->
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1167";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1168";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1060";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 
 <script>
@@ -21046,6 +21046,7 @@ body.is-more-route .header.theme-hero-surface{--dar-hero-image:url('/test/assets
 .hero-text .intro{max-width:610px!important;margin-top:5px!important;font-size:clamp(12px,3.2vw,14px)!important;line-height:1.52!important;color:color-mix(in srgb,var(--cream) 78%,var(--muted) 22%)!important}
 .hero-text .intro strong{color:var(--gold2)!important}
 body.is-area-route .top-shell .hero-text{display:none!important}
+body.is-area-route .header-prayer-hub{display:none!important}
 body.is-area-route .top-shell .isnad{display:none!important}
 body.is-quran-overview .top-shell{display:block!important}
 body.is-quran-overview .app-bar{display:none!important}
@@ -27842,7 +27843,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1167";
+const APP_BUILD_ID="app-shell-v1168";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28134,6 +28135,7 @@ function updateChrome(route){
   document.body.classList.toggle("image-editor-test-mode",route.view==="image-editor-test");
   document.body.classList.toggle("is-feed-fullscreen",isFeedFull);
   document.body.classList.toggle("is-quiz-route",route.view==="quiz");
+  document.body.classList.toggle("is-more-route",route.view==="more");
   document.body.classList.toggle("is-calendar-route",route.view==="calendar");
   document.body.classList.toggle("is-hadith-route",route.view==="hadith");try{confineHadithLibraryEntry();[0,180,600].forEach(function(ms){setTimeout(function(){try{confineHadithLibraryEntry()}catch(e){}},ms)})}catch(e){}
   document.body.classList.toggle("is-quran-overview",route.view==="quran");
