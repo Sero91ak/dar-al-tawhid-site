@@ -2,7 +2,16 @@
 "use strict";
 
 const DATA_URL="/kids/data/prophet-stories.json";
-const MODE_KEY="kids.contentMode.v2";
+const MODE_KEY="kids.contentMode.v15";
+const PROPHET_ORDER=[
+  "adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub",
+  "yusuf","ayyub","shuayb","musa","harun","dhul-kifl","dawud","sulayman",
+  "ilyas","alyasa","yunus","zakariyya","yahya","isa","muhammad"
+];
+const PROPHET_RANK=new Map(PROPHET_ORDER.map((id,index)=>[id,index]));
+const ART_ROOT="/kids/assets/prophets-v2/";
+function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=15"}
+function heroUrl(item){return item.id==="nuh"?ART_ROOT+"nuh-hero.jpg?v=15":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
 let items=[],active=null,activeText="",playing=false,busy=false;
 const audio=new Audio();
@@ -11,13 +20,13 @@ const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;"
 
 function age(){return String($(".app")?.getAttribute("data-age")||"6–8")}
 function ageKey(){return age().replace("–","-")}
-function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"both"}catch(_){return"both"}}
+function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){try{localStorage.setItem(MODE_KEY,v)}catch(_){}renderModeButtons();applyMode()}
 function uniqueItems(list){
   const seen=new Set();
   return (Array.isArray(list)?list:[])
     .filter(x=>x&&x.id&&!seen.has(x.id)&&(seen.add(x.id),true))
-    .sort((a,b)=>Number(a.displayOrder||999)-Number(b.displayOrder||999));
+    .sort((a,b)=>(PROPHET_RANK.get(a.id)??999)-(PROPHET_RANK.get(b.id)??999));
 }
 function honorific(item){
   if(!item)return"";
@@ -93,9 +102,8 @@ function renderCards(){
   grid.innerHTML=items.map((item,index)=>{
     const text=buildText(item);
     const meta=(item.disputed?"IKHTILĀF · ":"QURʾĀN GEPRÜFT · ")+durationLabel(item,text);
-    return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button" style="--ps-row:'+index+'">'+
-      '<span class="ps-row-scene" aria-hidden="true"></span>'+
-      '<span class="ps-row-art" aria-hidden="true"><img src="'+esc(symbolUrl(item))+'" data-fallback="'+esc(item.cover)+'" alt="" loading="'+(index<6?"eager":"lazy")+'"></span>'+
+    return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button">'+
+      '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" alt="" decoding="async" loading="'+(index<4?"eager":"lazy")+'" '+(index<2?'fetchpriority="high"':'')+'>'+
       '<span class="ps-row-copy">'+
         '<span class="ps-row-meta">'+esc(meta)+'</span>'+
         '<span class="ps-row-title">'+esc(item.name)+(item.id==="muhammad"?" ﷺ":"")+'</span>'+
@@ -106,9 +114,6 @@ function renderCards(){
     '</button>';
   }).join("");
   grid.querySelectorAll("[data-ps-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.psId)));
-  grid.querySelectorAll("img[data-fallback]").forEach(img=>{
-    img.onerror=()=>{img.onerror=null;img.src=img.dataset.fallback||img.src};
-  });
   const doneEl=$("#psDoneCount");if(doneEl)doneEl.textContent=String(doneCount());
   const ageEl=$("#psAgeHero");if(ageEl)ageEl.textContent="Alter "+age();
 }
@@ -219,7 +224,7 @@ function renderActive(){
   if(!active)return;
   activeText=buildText(active);
   const hero=$(".ps-hero");if(hero)hero.setAttribute("data-ps-id",active.id);
-  setImageWithFallback($("#psHero"),active);$("#psHero").alt=active.name;
+  const heroImg=$("#psHero");if(heroImg){heroImg.src=heroUrl(active);heroImg.alt=""}
   $("#psTitle").textContent=active.name+(active.id==="muhammad"?" ﷺ":"");
   $("#psArabic").textContent=arabicLine(active);
   $("#psSummary").textContent=active.summary||"";
