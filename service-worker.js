@@ -297,6 +297,11 @@ function isProphetsCatalogRequest(url) {
   );
 }
 
+function isTadabburDataRequest(url) {
+  const p = url.pathname;
+  return p.indexOf('/apple-tv/quran/tadabbur/') === 0;
+}
+
 function navigationShellKey(url) {
   return url.pathname.startsWith('/test') ? '/test/index.html' : '/index.html';
 }
@@ -569,6 +574,24 @@ self.addEventListener('fetch', (event) => {
 
   // Nach App-Aktualisieren: kurz alles frisch vom Netz laden.
   if (refreshBypassActive()) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Taddabur-Katalog und Batchdaten: immer network-first.
+  // So sehen Web/PWA sowie iOS/iPadOS-WebView neue geprüfte Batches sofort.
+  // Bei Netzfehler bleibt der letzte erfolgreich gecachte Stand als Offline-Fallback verfügbar.
+  if (isTadabburDataRequest(url)) {
     event.respondWith(
       fetch(request, { cache: 'no-store' })
         .then((response) => {
