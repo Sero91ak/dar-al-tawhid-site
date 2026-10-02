@@ -1,424 +1,313 @@
-/* DĀR AL TAWḤĪD Kids — Prophet Stories v10
-   Approved cinematic reference implemented with REAL transparent 3D symbols
-   and REAL generated scenic backgrounds. */
+/* DĀR AL TAWḤĪD Kids — Prophet Stories v20
+   High-resolution full-bleed cinematic artwork.
+   No sprite sheets. No cut-out 3D sticker layers. No forced phone-width container. */
 
 #view-stories.ps-world-view{
+  --ps-bg:#01070d;
+  --ps-panel:#031827;
+  --ps-panel2:#06263d;
+  --ps-gold:#f4d475;
+  --ps-gold2:#ffe7a2;
+  --ps-cyan:#c8efff;
+  --ps-line:rgba(71,181,229,.32);
   position:relative;
   isolation:isolate;
   overflow:visible;
-  --gold:#f2cb6e;
-  --gold2:#ffe69a;
-  --cyan:#9fe5de;
-  --line:rgba(119,212,218,.24);
-  --deep:#031a2d;
-  --night:#041a2c;
 }
 #view-stories.ps-world-view::before{
   content:"";
   position:absolute;
-  z-index:-5;
-  inset:-90px -16px -160px;
+  z-index:-2;
+  inset:-70px -30px -160px;
   background:
-    radial-gradient(circle at 88% 4%,rgba(53,132,170,.28),transparent 24%),
-    linear-gradient(180deg,#03192a 0%,#06253d 46%,#041d31 100%);
+    radial-gradient(circle at 52% -12%,rgba(23,92,139,.24),transparent 36%),
+    linear-gradient(180deg,#010910 0%,#03111d 54%,#01070d 100%);
   pointer-events:none;
 }
 
-/* -------- OVERVIEW HERO -------- */
-.ps-wrap{margin:0 -16px;padding:0 0 26px}
-.ps-library-hero{
+/* -------- FULL-BLEED LIBRARY -------- */
+.ps-wrap{
   position:relative;
-  min-height:350px;
-  overflow:hidden;
-  border-bottom:1px solid rgba(119,212,218,.28);
-  background:
-    linear-gradient(90deg,rgba(4,23,39,.18),rgba(4,23,39,.02)),
-    url("/kids/assets/prophet-scenes/library.webp?v=1") center/cover no-repeat;
-  box-shadow:0 18px 48px rgba(0,0,0,.24);
+  width:100vw;
+  max-width:none;
+  margin-left:calc(50% - 50vw);
+  padding:0 0 18px;
+  overflow-x:clip;
+  background:var(--ps-bg);
 }
-.ps-library-hero::before{
-  content:"";
-  position:absolute;
-  z-index:1;
-  inset:0;
-  background:
-    linear-gradient(90deg,rgba(3,22,38,.96) 0%,rgba(4,27,45,.82) 38%,rgba(4,27,45,.26) 65%,rgba(4,27,45,.08) 100%),
-    linear-gradient(180deg,rgba(2,16,29,.08),rgba(2,16,29,.10) 60%,rgba(2,16,29,.42));
-  pointer-events:none;
-}
-.ps-hero-night{display:none}
-.ps-library-hero-copy{
-  position:relative;
-  z-index:7;
-  width:60%;
-  min-height:350px;
-  padding:24px 0 22px 18px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-.ps-kicker{
-  color:var(--gold2);
-  font-size:10px;
-  font-weight:950;
-  letter-spacing:.17em;
-  text-transform:uppercase;
-}
-.ps-library-hero h2{
-  margin:9px 0 12px;
-  line-height:.91;
-  letter-spacing:-.058em;
-  text-shadow:0 7px 28px rgba(0,0,0,.26);
-}
-.ps-library-hero h2 span,
-.ps-library-hero h2 strong{
-  display:block;
-  font-size:clamp(41px,11vw,61px);
-  font-weight:950;
-}
-.ps-library-hero h2 span{color:#fff}
-.ps-library-hero h2 strong{color:#ffd97e}
-.ps-library-hero p{
-  margin:0;
-  max-width:330px;
-  color:rgba(255,255,255,.86);
-  font-size:14px;
-  line-height:1.5;
-  font-weight:560;
-}
-.ps-hero-stats{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
-.ps-hero-stats span{
-  min-height:30px;
-  display:inline-flex;
-  align-items:center;
-  padding:6px 10px;
-  border:1px solid rgba(255,224,145,.18);
-  border-radius:999px;
-  background:rgba(1,17,29,.50);
-  color:rgba(255,255,255,.76);
-  font-size:9.5px;
-  font-weight:850;
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-}
-.ps-hero-stats strong{margin-right:3px;color:#ffe28f;font-size:11px}
+.ps-library-hero{display:none!important}
 
-/* transparent 3D icon cluster */
-.ps-library-hero-art{
-  position:absolute;
-  z-index:5;
-  top:0;right:-4px;
-  width:51%;height:100%;
-  pointer-events:none;
-}
-.ps-library-hero-art::before{
-  content:"";
-  position:absolute;
-  inset:28px -20px 20px 0;
-  background:
-    radial-gradient(circle at 55% 31%,rgba(255,212,104,.20),transparent 24%),
-    radial-gradient(circle at 41% 69%,rgba(95,201,210,.20),transparent 31%);
-  filter:blur(8px);
-}
-.ps-hero-symbol{
-  position:absolute;
-  overflow:visible;
-  filter:drop-shadow(0 14px 24px rgba(0,0,0,.34));
-}
-.ps-hero-symbol img{
-  display:block;
-  width:100%;height:100%;
-  object-fit:contain;
-  filter:saturate(1.10) contrast(1.02) brightness(1.06);
-}
-.ps-hero-symbol.s-idris{width:112px;height:112px;right:73px;top:20px}
-.ps-hero-symbol.s-adam{width:94px;height:94px;right:115px;top:102px}
-.ps-hero-symbol.s-ibrahim{width:116px;height:116px;right:-4px;top:72px}
-.ps-hero-symbol.s-nuh{width:129px;height:101px;right:87px;top:194px}
-.ps-hero-symbol.s-salih{width:107px;height:107px;right:-1px;top:177px}
-.ps-hero-symbol.s-hud{width:92px;height:92px;right:-5px;top:244px}
-
-/* -------- MODE SWITCH -------- */
 .ps-toolbar{
   position:sticky;
-  top:max(58px,env(safe-area-inset-top,0px));
-  z-index:30;
-  padding:9px 12px;
-  border-bottom:1px solid rgba(109,205,215,.26);
-  background:rgba(3,23,40,.96);
-  backdrop-filter:blur(22px);
-  -webkit-backdrop-filter:blur(22px);
-  box-shadow:0 9px 25px rgba(0,0,0,.20);
+  top:max(56px,env(safe-area-inset-top,0px));
+  z-index:40;
+  width:100%;
+  padding:6px max(8px,env(safe-area-inset-right)) 8px max(8px,env(safe-area-inset-left));
+  border-bottom:1px solid rgba(66,175,227,.26);
+  background:linear-gradient(180deg,rgba(4,30,52,.985),rgba(2,22,38,.985));
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 8px 22px rgba(0,0,0,.18);
 }
-.ps-modes{width:100%;display:grid;grid-template-columns:1.26fr .82fr .82fr;gap:7px}
+.ps-modes{
+  display:grid;
+  grid-template-columns:1.12fr .82fr .72fr;
+  gap:7px;
+  width:100%;
+}
 .ps-mode,.ps-detail-mode{
-  min-height:49px;
-  border:1px solid rgba(143,216,225,.26);
+  min-width:0;
+  height:36px;
+  border:1px solid rgba(58,166,220,.43);
   border-radius:999px;
-  background:rgba(9,44,66,.62);
-  color:rgba(255,255,255,.86);
-  font-size:12px;
-  font-weight:900;
+  background:linear-gradient(180deg,rgba(8,48,81,.92),rgba(3,29,50,.94));
+  color:#edf9ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:0 6px;
+  font-size:clamp(10px,2.55vw,14px);
+  line-height:1;
+  font-weight:850;
   white-space:nowrap;
-  box-shadow:inset 0 1px rgba(255,255,255,.035);
+  box-shadow:inset 0 0 20px rgba(26,109,164,.08);
 }
-.ps-mode span{margin-right:4px;color:#e4f0f4}
 .ps-mode.active,.ps-detail-mode.active{
-  border-color:#f1cb6d;
-  color:#ffe69a;
+  color:#fff1b4;
+  border-color:#f2d36c;
   background:
-    radial-gradient(circle at 50% 0%,rgba(255,239,177,.22),transparent 64%),
-    linear-gradient(135deg,rgba(189,142,56,.31),rgba(78,77,47,.34));
-  box-shadow:
-    0 0 0 1px rgba(255,218,126,.10),
-    0 0 24px rgba(239,198,92,.24),
-    inset 0 1px rgba(255,255,255,.08);
+    radial-gradient(circle at 50% 38%,rgba(248,214,99,.29),transparent 72%),
+    linear-gradient(180deg,rgba(91,80,45,.96),rgba(43,42,34,.96));
+  box-shadow:0 0 20px rgba(246,211,97,.20),inset 0 0 20px rgba(246,211,97,.07);
+}
+.ps-mode-icon,.ps-pill-icon{
+  width:15px;height:15px;
+  display:inline-block;
+  flex:none;
+  margin-right:2px;
+  background:currentColor;
+}
+.ps-mode-icon-headphones{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M4 13a8 8 0 0 1 16 0'/%3E%3Cpath d='M4 13v5a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2'/%3E%3Cpath d='M20 13v5a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M4 13a8 8 0 0 1 16 0'/%3E%3Cpath d='M4 13v5a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2'/%3E%3Cpath d='M20 13v5a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.ps-mode-icon-book,.ps-pill-icon-book{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.1' stroke-linejoin='round'%3E%3Cpath d='M3 5a2 2 0 0 1 2-2h6v16H5a2 2 0 0 0-2 2z'/%3E%3Cpath d='M21 5a2 2 0 0 0-2-2h-6v16h6a2 2 0 0 1 2 2z'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.1' stroke-linejoin='round'%3E%3Cpath d='M3 5a2 2 0 0 1 2-2h6v16H5a2 2 0 0 0-2 2z'/%3E%3Cpath d='M21 5a2 2 0 0 0-2-2h-6v16h6a2 2 0 0 1 2 2z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.ps-pill-icon-clock{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.ps-pill-icon-age{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Ccircle cx='12' cy='7' r='3'/%3E%3Cpath d='M5 21c.7-5 3-8 7-8s6.3 3 7 8z'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Ccircle cx='12' cy='7' r='3'/%3E%3Cpath d='M5 21c.7-5 3-8 7-8s6.3 3 7 8z'/%3E%3C/svg%3E") center/contain no-repeat;
 }
 
-/* -------- STORY ROWS -------- */
-.ps-library-list{position:relative;background:#072840}
+.ps-library-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:5px;
+  width:100%;
+  padding:4px 0 12px;
+  background:#031827;
+}
+
+/* One high-resolution scene spans the whole card. */
 .ps-story-row{
-  --scene:url("/kids/assets/prophet-scenes/night.webp?v=1");
-  --tint1:rgba(6,45,66,.08);
-  --tint2:rgba(4,28,44,.54);
   appearance:none;
   position:relative;
   width:100%;
-  min-height:152px;
-  display:grid;
-  grid-template-columns:43% minmax(0,1fr) 52px;
-  align-items:center;
+  height:clamp(154px,42.857vw,228px);
   overflow:hidden;
-  padding:0 14px 0 0;
-  border:0;
-  border-bottom:1px solid rgba(111,207,215,.25);
+  padding:0;
+  border-top:1px solid rgba(72,178,224,.28);
+  border-bottom:1px solid rgba(72,178,224,.28);
+  border-left:0;
+  border-right:0;
+  border-radius:0;
+  background:#041b2c;
   color:#fff;
   text-align:left;
+  isolation:isolate;
   cursor:pointer;
-  background:
-    linear-gradient(90deg,var(--tint1),var(--tint2)),
-    var(--scene) center/cover no-repeat;
+}
+.ps-row-image{
+  position:absolute;
+  z-index:0;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+  image-rendering:auto;
+  filter:saturate(1.025) contrast(1.018);
+  transform:translateZ(0);
 }
 .ps-story-row::before{
   content:"";
   position:absolute;
-  z-index:0;
+  z-index:1;
   inset:0;
+  pointer-events:none;
   background:
-    linear-gradient(90deg,rgba(3,23,38,.08) 0%,rgba(3,23,38,.11) 34%,rgba(3,23,38,.66) 68%,rgba(3,23,38,.90) 100%),
-    linear-gradient(180deg,rgba(255,255,255,.02),rgba(1,15,27,.14));
+    linear-gradient(90deg,
+      rgba(0,8,15,0) 0%,
+      rgba(0,8,15,0) 33%,
+      rgba(1,15,27,.13) 44%,
+      rgba(1,15,27,.52) 59%,
+      rgba(1,15,27,.86) 76%,
+      rgba(1,15,27,.96) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.01),rgba(0,0,0,.05) 65%,rgba(0,6,12,.16));
 }
 .ps-story-row::after{
   content:"";
   position:absolute;
-  z-index:7;
+  z-index:2;
   left:0;right:0;bottom:0;height:1px;
-  background:linear-gradient(90deg,rgba(239,199,100,.42),rgba(104,208,216,.34),transparent);
-}
-.ps-row-scene{display:none}
-.ps-row-art{
-  position:relative;
-  z-index:3;
-  align-self:stretch;
-  overflow:visible;
-}
-.ps-row-art::before{
-  content:"";
-  position:absolute;
-  left:10%;top:15%;
-  width:76%;height:70%;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(255,211,105,.19),rgba(99,201,210,.08) 46%,transparent 73%);
-  filter:blur(10px);
-}
-.ps-row-art img{
-  position:absolute;
-  left:1%;top:5%;
-  width:98%;height:90%;
-  object-fit:contain;
-  object-position:center;
-  transform:scale(var(--img-scale,1));
-  filter:saturate(1.10) contrast(1.02) brightness(1.05) drop-shadow(0 14px 16px rgba(0,0,0,.24));
+  background:linear-gradient(90deg,rgba(245,211,112,.48),rgba(72,181,229,.22),transparent 92%);
 }
 .ps-row-copy{
-  position:relative;
-  z-index:4;
+  position:absolute;
+  z-index:3;
+  left:52%;
+  right:54px;
+  top:50%;
+  transform:translateY(-50%);
   min-width:0;
-  padding:18px 0 16px 7px;
 }
 .ps-row-meta{
   display:block;
-  color:#b5ecd5;
-  font-size:9.5px;
-  line-height:1.25;
+  color:#c9efff;
+  font-size:clamp(7px,1.65vw,10px);
+  line-height:1.08;
   font-weight:950;
-  letter-spacing:.10em;
+  letter-spacing:.12em;
   text-transform:uppercase;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 .ps-row-title{
   display:block;
-  margin-top:6px;
+  margin-top:5px;
   color:#fff;
-  font-size:28px;
-  line-height:1;
+  font-size:clamp(27px,7vw,39px);
+  line-height:.92;
   font-weight:950;
-  letter-spacing:-.035em;
-  text-shadow:0 3px 13px rgba(0,0,0,.20);
+  letter-spacing:-.047em;
+  text-shadow:0 3px 13px rgba(0,0,0,.54);
 }
 .ps-row-ar{
   display:block;
-  margin-top:8px;
-  color:rgba(255,255,255,.84);
-  font:18px/1.35 "Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;
+  margin-top:3px;
+  color:var(--ps-gold);
+  direction:rtl;
+  text-align:left;
+  font:clamp(17px,4.55vw,26px)/1.08 "Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
 .ps-row-go{
-  position:relative;z-index:5;
-  justify-self:end;
-  width:43px;height:43px;
-  display:grid;place-items:center;
-  border:1px solid rgba(242,203,109,.44);
+  position:absolute;
+  z-index:4;
+  right:10px;
+  top:50%;
+  width:40px;height:40px;
+  transform:translateY(-50%);
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(238,218,154,.50);
   border-radius:50%;
-  background:rgba(6,31,49,.34);
-  color:#ffe491;
-  font-size:29px;
-  font-weight:300;
-  box-shadow:0 0 16px rgba(240,199,97,.10);
+  background:rgba(4,35,57,.48);
+  color:#fff1b3;
+  font-size:31px;
+  font-weight:250;
+  line-height:1;
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
 }
 .ps-done{
-  position:absolute;z-index:8;
-  right:55px;bottom:10px;
-  width:22px;height:22px;
+  position:absolute;
+  z-index:5;
+  right:47px;
+  bottom:9px;
+  width:18px;height:18px;
   border-radius:50%;
   background:#4ca777;
-  box-shadow:0 6px 14px rgba(0,0,0,.20),inset 0 0 0 2px rgba(255,255,255,.20);
+  box-shadow:0 5px 12px rgba(0,0,0,.20),inset 0 0 0 2px rgba(255,255,255,.18);
 }
 .ps-done::after{
   content:"";
-  position:absolute;left:6px;top:4px;width:6px;height:9px;
-  border:solid #fff;border-width:0 2px 2px 0;
+  position:absolute;
+  left:5px;top:3px;
+  width:5px;height:8px;
+  border:solid #fff;
+  border-width:0 2px 2px 0;
   transform:rotate(42deg);
 }
-.ps-story-row:active{filter:brightness(1.07)}
+.ps-story-row:active{filter:brightness(1.04)}
 
-/* Real generated background mapping */
-.ps-story-row[data-ps-id="muhammad"]{--scene:url("/kids/assets/prophet-scenes/night.webp?v=1")}
-.ps-story-row[data-ps-id="adam"]{--scene:url("/kids/assets/prophet-scenes/garden.webp?v=1")}
-.ps-story-row[data-ps-id="idris"]{--scene:url("/kids/assets/prophet-scenes/library.webp?v=1")}
-.ps-story-row[data-ps-id="nuh"]{--scene:url("/kids/assets/prophet-scenes/ocean.webp?v=1")}
-.ps-story-row[data-ps-id="hud"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-story-row[data-ps-id="salih"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-story-row[data-ps-id="ibrahim"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-story-row[data-ps-id="lut"]{--scene:url("/kids/assets/prophet-scenes/night.webp?v=1")}
-.ps-story-row[data-ps-id="ismail"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-story-row[data-ps-id="ishaq"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-story-row[data-ps-id="yaqub"]{--scene:url("/kids/assets/prophet-scenes/mountain.webp?v=1")}
-.ps-story-row[data-ps-id="yusuf"]{--scene:url("/kids/assets/prophet-scenes/royal.webp?v=1")}
-.ps-story-row[data-ps-id="ayyub"]{--scene:url("/kids/assets/prophet-scenes/water.webp?v=1")}
-.ps-story-row[data-ps-id="shuayb"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-story-row[data-ps-id="musa"]{--scene:url("/kids/assets/prophet-scenes/water.webp?v=1")}
-.ps-story-row[data-ps-id="harun"]{--scene:url("/kids/assets/prophet-scenes/mountain.webp?v=1")}
-.ps-story-row[data-ps-id="dawud"]{--scene:url("/kids/assets/prophet-scenes/royal.webp?v=1")}
-.ps-story-row[data-ps-id="sulayman"]{--scene:url("/kids/assets/prophet-scenes/royal.webp?v=1")}
-.ps-story-row[data-ps-id="ilyas"]{--scene:url("/kids/assets/prophet-scenes/mountain.webp?v=1")}
-.ps-story-row[data-ps-id="alyasa"]{--scene:url("/kids/assets/prophet-scenes/garden.webp?v=1")}
-.ps-story-row[data-ps-id="yunus"]{--scene:url("/kids/assets/prophet-scenes/ocean.webp?v=1")}
-.ps-story-row[data-ps-id="zakariyya"]{--scene:url("/kids/assets/prophet-scenes/garden.webp?v=1")}
-.ps-story-row[data-ps-id="yahya"]{--scene:url("/kids/assets/prophet-scenes/water.webp?v=1")}
-.ps-story-row[data-ps-id="isa"]{--scene:url("/kids/assets/prophet-scenes/night.webp?v=1")}
-.ps-story-row[data-ps-id="dhul-kifl"]{--scene:url("/kids/assets/prophet-scenes/mountain.webp?v=1")}
-
-/* icon framing */
-.ps-story-row[data-ps-id="muhammad"] .ps-row-art img{--img-scale:1.00}
-.ps-story-row[data-ps-id="adam"] .ps-row-art img{--img-scale:.94}
-.ps-story-row[data-ps-id="idris"] .ps-row-art img{--img-scale:.94}
-.ps-story-row[data-ps-id="nuh"] .ps-row-art img{--img-scale:1.02}
-.ps-story-row[data-ps-id="hud"] .ps-row-art img{--img-scale:1.00}
-.ps-story-row[data-ps-id="salih"] .ps-row-art img{--img-scale:.96}
-.ps-story-row[data-ps-id="ibrahim"] .ps-row-art img{--img-scale:.96}
-.ps-story-row[data-ps-id="lut"] .ps-row-art img{--img-scale:.95}
-.ps-story-row[data-ps-id="ismail"] .ps-row-art img{--img-scale:.96}
-.ps-story-row[data-ps-id="ishaq"] .ps-row-art img{--img-scale:.96}
-.ps-story-row[data-ps-id="yaqub"] .ps-row-art img{--img-scale:.98}
-.ps-story-row[data-ps-id="yusuf"] .ps-row-art img{--img-scale:.96}
-.ps-story-row[data-ps-id="ayyub"] .ps-row-art img{--img-scale:.96}
-.ps-story-row[data-ps-id="shuayb"] .ps-row-art img{--img-scale:.96}
-.ps-story-row[data-ps-id="musa"] .ps-row-art img{--img-scale:.98}
-.ps-story-row[data-ps-id="harun"] .ps-row-art img{--img-scale:.96}
-.ps-story-row[data-ps-id="dawud"] .ps-row-art img{--img-scale:.95}
-.ps-story-row[data-ps-id="sulayman"] .ps-row-art img{--img-scale:.97}
-.ps-story-row[data-ps-id="ilyas"] .ps-row-art img{--img-scale:.96}
-.ps-story-row[data-ps-id="alyasa"] .ps-row-art img{--img-scale:.95}
-.ps-story-row[data-ps-id="yunus"] .ps-row-art img{--img-scale:.95}
-.ps-story-row[data-ps-id="zakariyya"] .ps-row-art img{--img-scale:.95}
-.ps-story-row[data-ps-id="yahya"] .ps-row-art img{--img-scale:.95}
-.ps-story-row[data-ps-id="isa"] .ps-row-art img{--img-scale:.96}
-.ps-story-row[data-ps-id="dhul-kifl"] .ps-row-art img{--img-scale:.95}
-
-/* -------- DETAIL VIEW -------- */
+/* -------- FULL-VIEW DETAIL -------- */
 .ps-modal{
-  position:fixed;inset:0;z-index:10250;
+  position:fixed;
+  inset:0;
+  z-index:10250;
   display:none;
-  align-items:flex-end;
-  justify-content:center;
-  background:rgba(1,10,17,.91);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  align-items:stretch;
+  justify-content:stretch;
+  background:#01070d;
   overscroll-behavior:none;
 }
 .ps-modal.open{display:flex}
 .ps-sheet{
   position:relative;
-  width:min(100%,760px);
+  width:100vw;
+  max-width:none;
   height:100dvh;
   max-height:100dvh;
+  margin:0;
   display:flex;
   flex-direction:column;
   overflow:hidden;
   border:0;
-  background:linear-gradient(180deg,#05253c,#042139 55%,#031a2d);
+  border-radius:0;
+  background:linear-gradient(180deg,#041f34,#031827 58%,#010d17);
 }
 .ps-top{
-  position:absolute;z-index:30;
-  left:0;right:0;top:0;
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:calc(11px + env(safe-area-inset-top)) 16px 10px;
+  position:absolute;
+  z-index:30;
+  top:0;left:0;right:0;
+  display:flex;
+  justify-content:flex-end;
+  padding:calc(10px + env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) 8px;
   pointer-events:none;
-  transition:background .18s ease,border-color .18s ease;
 }
 .ps-modal.scrolled .ps-top{
-  background:rgba(3,23,39,.95);
-  border-bottom:1px solid rgba(110,207,216,.18);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-}
-.ps-top-label{
-  color:#f3cf77;
-  font-size:9px;
-  font-weight:950;
-  letter-spacing:.14em;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  background:linear-gradient(180deg,rgba(1,15,25,.88),rgba(1,15,25,.12));
 }
 .ps-close{
   pointer-events:auto;
-  flex:none;
-  width:48px;height:48px;
-  display:grid;place-items:center;
-  border:1px solid rgba(241,200,103,.40);
+  width:42px;height:42px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(245,211,126,.34);
   border-radius:50%;
-  background:rgba(5,33,51,.72);
-  color:#ffe39a;
-  font-size:29px;
+  background:rgba(3,28,46,.54);
+  color:#ffe7a2;
+  font-size:27px;
   line-height:1;
-  box-shadow:0 0 18px rgba(240,198,96,.09);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
 }
 .ps-scroll{
-  flex:1;min-height:0;
-  overflow-y:auto;overflow-x:hidden;
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
   scrollbar-width:none;
   overscroll-behavior:contain;
   -webkit-overflow-scrolling:touch;
@@ -426,625 +315,292 @@
 .ps-scroll::-webkit-scrollbar{display:none}
 
 .ps-hero{
-  --scene:url("/kids/assets/prophet-scenes/night.webp?v=1");
   position:relative;
-  min-height:650px;
+  width:100vw;
+  min-height:250px;
+  height:clamp(250px,46vw,520px);
   overflow:hidden;
   isolation:isolate;
-  background:
-    linear-gradient(90deg,rgba(3,24,40,.20),rgba(3,24,40,.02)),
-    var(--scene) center/cover no-repeat;
+  background:#031725;
+}
+.ps-hero-image{
+  position:absolute;
+  z-index:0;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
 }
 .ps-hero::before{
   content:"";
   position:absolute;
-  z-index:0;
+  z-index:1;
   inset:0;
-  background:
-    linear-gradient(90deg,rgba(3,24,40,.84) 0%,rgba(3,24,40,.45) 40%,rgba(3,24,40,.08) 72%,rgba(3,24,40,.04) 100%),
-    linear-gradient(180deg,rgba(3,24,40,.06),rgba(3,24,40,.10) 55%,rgba(3,24,40,.78) 100%);
-}
-.ps-detail-sky,.ps-detail-land{display:none}
-.ps-detail-glow{
-  position:absolute;
-  z-index:2;
-  right:5%;
-  top:92px;
-  width:58%;height:270px;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(255,215,111,.26),rgba(96,195,205,.08) 43%,transparent 72%);
-  filter:blur(12px);
   pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      rgba(0,9,17,0) 0%,
+      rgba(0,9,17,.03) 36%,
+      rgba(0,9,17,.25) 51%,
+      rgba(0,9,17,.67) 70%,
+      rgba(0,9,17,.94) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.02),rgba(1,13,24,.03) 54%,rgba(1,13,24,.68));
 }
-.ps-hero>img{
-  position:absolute;
-  z-index:4;
-  right:-1%;
-  top:84px;
-  width:70%;
-  height:350px;
-  object-fit:contain;
-  transform:scale(var(--hero-scale,1));
-  filter:saturate(1.10) contrast(1.02) brightness(1.05) drop-shadow(0 18px 25px rgba(0,0,0,.28));
+.ps-hero[data-ps-id="nuh"]::before{
+  background:
+    linear-gradient(90deg,
+      rgba(0,9,17,.94) 0%,
+      rgba(0,9,17,.72) 25%,
+      rgba(0,9,17,.34) 44%,
+      rgba(0,9,17,.08) 64%,
+      rgba(0,9,17,0) 82%),
+    linear-gradient(180deg,rgba(0,0,0,.02),rgba(1,13,24,.03) 54%,rgba(1,13,24,.68));
 }
 .ps-hero-copy{
   position:absolute;
-  z-index:8;
-  left:18px;right:18px;bottom:18px;
+  z-index:3;
+  top:62px;
+  left:54%;
+  right:max(20px,env(safe-area-inset-right));
+  min-width:0;
+}
+.ps-hero[data-ps-id="nuh"] .ps-hero-copy{
+  left:max(20px,env(safe-area-inset-left));
+  right:54%;
+}
+.ps-hero-kicker,.ps-question-kicker{
+  color:#c9efff;
+  font-size:clamp(7px,1.65vw,10px);
+  line-height:1;
+  font-weight:950;
+  letter-spacing:.18em;
+  text-transform:uppercase;
 }
 .ps-title{
-  margin:0;
-  max-width:56%;
+  margin:6px 0 3px;
   color:#fff;
-  font-size:clamp(48px,13vw,72px);
-  line-height:.92;
+  font-size:clamp(34px,9vw,76px);
+  line-height:.89;
   font-weight:950;
   letter-spacing:-.055em;
-  text-shadow:0 5px 22px rgba(0,0,0,.28);
+  text-shadow:0 4px 18px rgba(0,0,0,.56);
 }
 .ps-ar{
-  margin-top:7px;
-  max-width:66%;
-  color:#ffd97d;
-  font:clamp(24px,7vw,34px)/1.32 "Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;
+  color:var(--ps-gold);
+  direction:rtl;
   text-align:left;
-  text-shadow:0 3px 15px rgba(0,0,0,.20);
+  font:clamp(20px,5.3vw,40px)/1.10 "Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;
 }
 .ps-summary{
-  margin:12px 0 0;
-  max-width:70%;
-  color:rgba(255,255,255,.91);
-  font-size:17px;
-  line-height:1.52;
-  font-weight:540;
+  margin:10px 0 0;
+  color:#f5f9fb;
+  font-size:clamp(10.5px,2.75vw,18px);
+  line-height:1.38;
+  font-weight:620;
+  text-shadow:0 2px 8px rgba(0,0,0,.66);
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
 }
-.ps-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
+.ps-meta{
+  position:absolute;
+  z-index:4;
+  left:max(10px,env(safe-area-inset-left));
+  right:max(10px,env(safe-area-inset-right));
+  bottom:10px;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:5px;
+}
 .ps-pill{
-  min-height:39px;
-  display:inline-flex;
+  height:34px;
+  min-width:0;
+  display:flex;
   align-items:center;
   justify-content:center;
-  padding:8px 12px;
-  border:1px solid rgba(140,214,224,.27);
+  gap:3px;
+  padding:0 5px;
+  overflow:hidden;
+  border:1px solid rgba(47,163,219,.47);
   border-radius:999px;
-  background:rgba(5,40,59,.58);
-  color:rgba(255,255,255,.85);
-  font-size:11px;
-  font-weight:850;
+  background:rgba(3,31,52,.62);
+  color:#eaf8ff;
+  font-size:clamp(7.5px,2vw,10.5px);
+  font-weight:820;
+  white-space:nowrap;
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
 }
-.ps-pill.warn{color:#ffe39a;border-color:rgba(241,201,103,.31)}
+.ps-pill.warn{
+  display:none;
+}
 .ps-detail-modes{
   display:grid;
-  grid-template-columns:1.27fr .82fr .82fr;
-  gap:4px;
-  margin-top:14px;
-  padding:4px;
-  border:1px solid rgba(127,210,220,.23);
-  border-radius:999px;
-  background:rgba(4,31,49,.54);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
+  grid-template-columns:1.12fr .82fr .72fr;
+  gap:7px;
+  width:100%;
+  padding:7px max(8px,env(safe-area-inset-right)) 8px max(8px,env(safe-area-inset-left));
+  border-top:1px solid rgba(66,175,227,.16);
+  border-bottom:1px solid rgba(66,175,227,.25);
+  background:#041d31;
 }
-.ps-detail-mode{min-height:51px;border-color:transparent;background:transparent}
+.ps-detail-mode{height:36px}
 
-/* real background mapping for detail */
-.ps-hero[data-ps-id="muhammad"]{--scene:url("/kids/assets/prophet-scenes/night.webp?v=1")}
-.ps-hero[data-ps-id="adam"]{--scene:url("/kids/assets/prophet-scenes/garden.webp?v=1")}
-.ps-hero[data-ps-id="idris"]{--scene:url("/kids/assets/prophet-scenes/library.webp?v=1")}
-.ps-hero[data-ps-id="nuh"]{--scene:url("/kids/assets/prophet-scenes/ocean.webp?v=1")}
-.ps-hero[data-ps-id="hud"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-hero[data-ps-id="salih"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-hero[data-ps-id="ibrahim"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-hero[data-ps-id="lut"]{--scene:url("/kids/assets/prophet-scenes/night.webp?v=1")}
-.ps-hero[data-ps-id="ismail"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-hero[data-ps-id="ishaq"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-hero[data-ps-id="yaqub"]{--scene:url("/kids/assets/prophet-scenes/mountain.webp?v=1")}
-.ps-hero[data-ps-id="yusuf"]{--scene:url("/kids/assets/prophet-scenes/royal.webp?v=1")}
-.ps-hero[data-ps-id="ayyub"]{--scene:url("/kids/assets/prophet-scenes/water.webp?v=1")}
-.ps-hero[data-ps-id="shuayb"]{--scene:url("/kids/assets/prophet-scenes/desert.webp?v=1")}
-.ps-hero[data-ps-id="musa"]{--scene:url("/kids/assets/prophet-scenes/water.webp?v=1")}
-.ps-hero[data-ps-id="harun"]{--scene:url("/kids/assets/prophet-scenes/mountain.webp?v=1")}
-.ps-hero[data-ps-id="dawud"]{--scene:url("/kids/assets/prophet-scenes/royal.webp?v=1")}
-.ps-hero[data-ps-id="sulayman"]{--scene:url("/kids/assets/prophet-scenes/royal.webp?v=1")}
-.ps-hero[data-ps-id="ilyas"]{--scene:url("/kids/assets/prophet-scenes/mountain.webp?v=1")}
-.ps-hero[data-ps-id="alyasa"]{--scene:url("/kids/assets/prophet-scenes/garden.webp?v=1")}
-.ps-hero[data-ps-id="yunus"]{--scene:url("/kids/assets/prophet-scenes/ocean.webp?v=1")}
-.ps-hero[data-ps-id="zakariyya"]{--scene:url("/kids/assets/prophet-scenes/garden.webp?v=1")}
-.ps-hero[data-ps-id="yahya"]{--scene:url("/kids/assets/prophet-scenes/water.webp?v=1")}
-.ps-hero[data-ps-id="isa"]{--scene:url("/kids/assets/prophet-scenes/night.webp?v=1")}
-.ps-hero[data-ps-id="dhul-kifl"]{--scene:url("/kids/assets/prophet-scenes/mountain.webp?v=1")}
-
-.ps-hero[data-ps-id="muhammad"]>img{--hero-scale:.98}
-.ps-hero[data-ps-id="adam"]>img{--hero-scale:.93}
-.ps-hero[data-ps-id="idris"]>img{--hero-scale:.93}
-.ps-hero[data-ps-id="nuh"]>img{--hero-scale:1.03}
-.ps-hero[data-ps-id="hud"]>img{--hero-scale:1.00}
-.ps-hero[data-ps-id="salih"]>img{--hero-scale:.96}
-.ps-hero[data-ps-id="ibrahim"]>img{--hero-scale:.96}
-.ps-hero[data-ps-id="lut"]>img{--hero-scale:.95}
-.ps-hero[data-ps-id="ismail"]>img{--hero-scale:.96}
-.ps-hero[data-ps-id="ishaq"]>img{--hero-scale:.96}
-.ps-hero[data-ps-id="yaqub"]>img{--hero-scale:.98}
-.ps-hero[data-ps-id="yusuf"]>img{--hero-scale:.96}
-.ps-hero[data-ps-id="ayyub"]>img{--hero-scale:.96}
-.ps-hero[data-ps-id="shuayb"]>img{--hero-scale:.96}
-.ps-hero[data-ps-id="musa"]>img{--hero-scale:.99}
-.ps-hero[data-ps-id="harun"]>img{--hero-scale:.96}
-.ps-hero[data-ps-id="dawud"]>img{--hero-scale:.95}
-.ps-hero[data-ps-id="sulayman"]>img{--hero-scale:.97}
-.ps-hero[data-ps-id="ilyas"]>img{--hero-scale:.96}
-.ps-hero[data-ps-id="alyasa"]>img{--hero-scale:.95}
-.ps-hero[data-ps-id="yunus"]>img{--hero-scale:.96}
-.ps-hero[data-ps-id="zakariyya"]>img{--hero-scale:.95}
-.ps-hero[data-ps-id="yahya"]>img{--hero-scale:.95}
-.ps-hero[data-ps-id="isa"]>img{--hero-scale:.96}
-.ps-hero[data-ps-id="dhul-kifl"]>img{--hero-scale:.95}
-
-/* -------- READING -------- */
+/* -------- READING / AUDIO -------- */
 .ps-body{
-  padding:0 18px calc(38px + env(safe-area-inset-bottom));
-  background:
-    radial-gradient(circle at 86% 5%,rgba(31,98,128,.12),transparent 26%),
-    linear-gradient(180deg,#05243a 0%,#041f35 100%);
+  width:100%;
+  max-width:920px;
+  margin:0 auto;
+  padding:14px max(14px,env(safe-area-inset-right)) calc(36px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));
 }
 .ps-player{
-  margin:16px 0 18px;
-  padding:11px;
+  margin:0 0 15px;
+  padding:10px;
   border:1px solid rgba(239,197,95,.18);
-  border-radius:22px;
+  border-radius:20px;
   background:linear-gradient(90deg,rgba(239,197,95,.08),rgba(13,65,82,.18));
 }
 .ps-player[hidden],.ps-read[hidden]{display:none!important}
 .ps-play{
-  width:100%;min-height:51px;
-  border:0;border-radius:16px;
+  width:100%;
+  min-height:48px;
+  border:0;
+  border-radius:15px;
   background:linear-gradient(135deg,#d8ae50,#f1d07b);
   color:#102538;
-  font-size:15px;font-weight:950;
+  font-size:14px;
+  font-weight:950;
 }
-.ps-play:disabled{opacity:.45}
-.ps-progress{height:4px;margin-top:9px;overflow:hidden;border-radius:999px;background:rgba(255,255,255,.08)}
+.ps-play:disabled{opacity:.44}
+.ps-progress{
+  height:4px;
+  margin-top:9px;
+  overflow:hidden;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+}
 .ps-progress span{display:block;width:0;height:100%;background:#efc96c}
-.ps-player-note{margin-top:6px;color:rgba(255,255,255,.46);font-size:9px}
+.ps-player-note{margin-top:6px;color:rgba(255,255,255,.50);font-size:9px}
 .ps-player-note:empty{display:none}
 
 .ps-read{
   color:#fff;
-  font-size:20px;
-  line-height:1.72;
+  font-size:18px;
+  line-height:1.68;
   letter-spacing:-.004em;
 }
-.ps-read p{margin:0;padding:0 0 22px}
-.ps-read p+p{padding-top:22px;border-top:1px solid rgba(99,199,208,.24)}
-.ps-read p:first-child{font-weight:650}
-.app[data-age="4–5"] .ps-read{font-size:22px;line-height:1.80}
-.app[data-age="6–8"] .ps-read{font-size:20px;line-height:1.72}
-.app[data-age="9–10"] .ps-read{font-size:19px;line-height:1.68}
+.ps-read p{margin:0;padding:0 0 18px}
+.ps-read p+p{padding-top:18px;border-top:1px solid rgba(99,199,208,.20)}
+.ps-read p:first-child{font-weight:640}
+.app[data-age="4–5"] .ps-read{font-size:20px;line-height:1.74}
+.app[data-age="6–8"] .ps-read{font-size:18px;line-height:1.68}
+.app[data-age="9–10"] .ps-read{font-size:17px;line-height:1.64}
 
-.ps-sources,.ps-question{margin-top:8px;padding:18px 0;border-top:1px solid rgba(98,199,208,.24)}
-.ps-sources strong{color:#efc96c;font-size:11px;letter-spacing:.09em}
-.ps-sources div{margin-top:6px;color:rgba(255,255,255,.68);font-size:13px;line-height:1.56}
-.ps-question h4{margin:6px 0 12px;font-size:20px;line-height:1.32}
+.ps-sources,.ps-question{
+  margin-top:10px;
+  padding:18px 0;
+  border-top:1px solid rgba(98,199,208,.22);
+}
+.ps-sources strong,.ps-question-kicker{
+  color:#efc96c;
+  font-size:10px;
+  letter-spacing:.11em;
+}
+.ps-sources div{
+  margin-top:6px;
+  color:rgba(255,255,255,.68);
+  font-size:12px;
+  line-height:1.55;
+}
+.ps-question h4{margin:7px 0 12px;font-size:19px;line-height:1.32}
 .ps-answer{
-  display:block;width:100%;min-height:57px;
-  margin:7px 0 0;padding:12px 14px;
+  display:block;
+  width:100%;
+  min-height:54px;
+  margin:7px 0 0;
+  padding:12px 14px;
   border:1px solid rgba(127,207,214,.18);
-  border-radius:17px;
+  border-radius:16px;
   background:rgba(11,49,68,.52);
-  color:#fff;text-align:left;font-size:15px;font-weight:850;
+  color:#fff;
+  text-align:left;
+  font-size:14px;
+  font-weight:850;
 }
 .ps-answer.good{background:rgba(64,167,112,.18);border-color:rgba(88,211,143,.38)}
 .ps-answer.bad{background:rgba(213,77,77,.15);border-color:rgba(240,105,105,.34)}
 .ps-feedback{min-height:20px;margin-top:8px;color:rgba(255,255,255,.68);font-size:11px;font-weight:850}
+.ps-error{padding:24px;color:#fff}
 
 html.ps-modal-open,html.ps-modal-open body{overflow:hidden!important;overscroll-behavior:none!important}
 html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!important}
 
 /* -------- RESPONSIVE -------- */
-@media(max-width:430px){
-  .ps-library-hero{min-height:318px}
-  .ps-library-hero-copy{width:62%;min-height:318px;padding-left:13px}
-  .ps-library-hero h2 span,.ps-library-hero h2 strong{font-size:40px}
-  .ps-library-hero p{font-size:12.5px}
-  .ps-library-hero-art{width:52%}
-  .ps-hero-symbol.s-idris{width:96px;height:96px;right:59px;top:18px}
-  .ps-hero-symbol.s-adam{width:84px;height:84px;right:95px;top:91px}
-  .ps-hero-symbol.s-ibrahim{width:99px;height:99px;right:-7px;top:68px}
-  .ps-hero-symbol.s-nuh{width:108px;height:85px;right:73px;top:176px}
-  .ps-hero-symbol.s-salih{width:92px;height:92px;right:-1px;top:165px}
-  .ps-hero-symbol.s-hud{width:77px;height:77px;right:-6px;top:228px}
-  .ps-toolbar{padding-left:8px;padding-right:8px}
-  .ps-mode{font-size:11px;padding:6px 8px}
-
-  .ps-story-row{
-    min-height:136px;
-    grid-template-columns:43% minmax(0,1fr) 43px;
-    padding-right:8px;
-  }
-  .ps-row-title{font-size:25px}
-  .ps-row-ar{font-size:16px}
-  .ps-row-meta{font-size:8.2px}
-  .ps-row-go{width:39px;height:39px;font-size:26px}
-
-  .ps-hero{min-height:620px}
-  .ps-hero>img{right:-3%;top:88px;width:76%;height:335px}
-  .ps-hero-copy{left:14px;right:14px;bottom:15px}
-  .ps-title{font-size:52px}
-  .ps-ar{font-size:25px}
-  .ps-summary{max-width:74%;font-size:16px}
-  .ps-pill{font-size:10.5px;padding:7px 10px;min-height:37px}
-  .ps-detail-mode{font-size:10.5px}
-  .ps-body{padding-left:14px;padding-right:14px}
-  .ps-read{font-size:19px}
-  .app[data-age="4–5"] .ps-read{font-size:21px}
-  .app[data-age="9–10"] .ps-read{font-size:18px}
+@media(max-width:390px){
+  .ps-row-copy{left:50%;right:48px}
+  .ps-row-title{font-size:26px}
+  .ps-row-ar{font-size:16.5px}
+  .ps-hero-copy{left:53%;right:16px;top:59px}
+  .ps-hero[data-ps-id="nuh"] .ps-hero-copy{left:16px;right:53%}
+  .ps-title{font-size:clamp(31px,8.5vw,38px)}
+  .ps-ar{font-size:20px}
 }
-@media(max-width:375px){
-  .ps-library-hero{min-height:300px}
-  .ps-library-hero-copy{width:65%;min-height:300px}
-  .ps-library-hero h2 span,.ps-library-hero h2 strong{font-size:36px}
-  .ps-mode{font-size:10px}
-  .ps-story-row{grid-template-columns:41% minmax(0,1fr) 39px}
-  .ps-row-title{font-size:22px}
-  .ps-row-ar{font-size:14px}
-  .ps-hero{min-height:600px}
-  .ps-title{font-size:48px}
+@media(min-width:520px){
+  .ps-library-list{gap:7px;padding:7px 10px 14px}
+  .ps-story-row{
+    height:clamp(210px,36vw,300px);
+    border:1px solid rgba(72,178,224,.31);
+    border-radius:24px;
+    box-shadow:0 10px 26px rgba(0,0,0,.23);
+  }
 }
 @media(min-width:700px){
-  .ps-library-hero{min-height:380px}
-  .ps-library-hero-copy{min-height:380px;padding-left:27px;width:53%}
-  .ps-library-hero-art{width:47%}
-  .ps-toolbar{padding-left:24px;padding-right:24px}
-  .ps-story-row{
-    min-height:166px;
-    grid-template-columns:34% minmax(0,1fr) 60px;
-    padding-right:25px;
-  }
-  .ps-row-copy{padding-left:14px}
-  .ps-row-title{font-size:31px}
-  .ps-row-ar{font-size:19px}
-  .ps-sheet{
-    height:min(95dvh,960px);
-    margin-bottom:14px;
-    border:1px solid rgba(255,255,255,.10);
-    border-radius:31px;
-  }
-  .ps-hero{min-height:680px}
-  .ps-hero-copy{left:26px;right:26px}
-  .ps-body{padding-left:26px;padding-right:26px}
+  .ps-toolbar{padding:9px 14px 10px}
+  .ps-mode,.ps-detail-mode{height:48px;font-size:15px}
+  .ps-mode-icon,.ps-pill-icon{width:18px;height:18px}
+  .ps-library-list{gap:9px;padding:9px 12px 16px}
+  .ps-story-row{height:clamp(260px,31vw,360px);border-radius:26px}
+  .ps-row-copy{left:53%;right:82px}
+  .ps-row-meta{font-size:10px}
+  .ps-row-title{font-size:40px}
+  .ps-row-ar{font-size:27px}
+  .ps-row-go{right:18px;width:50px;height:50px;font-size:35px}
+  .ps-done{right:74px;bottom:16px;width:21px;height:21px}
+  .ps-hero{height:clamp(360px,46vw,520px);min-height:360px}
+  .ps-hero-copy{top:76px;left:54%;right:42px}
+  .ps-hero[data-ps-id="nuh"] .ps-hero-copy{left:42px;right:54%}
+  .ps-hero-kicker{font-size:11px}
+  .ps-title{font-size:clamp(56px,7.2vw,80px)}
+  .ps-ar{font-size:36px}
+  .ps-summary{font-size:18px;line-height:1.42}
+  .ps-meta{left:38px;right:38px;bottom:20px;gap:10px}
+  .ps-pill{height:48px;font-size:14px}
+  .ps-detail-modes{padding:9px 14px 10px}
+  .ps-body{padding-top:22px;padding-left:28px;padding-right:28px}
+  .ps-read{font-size:20px}
+  .app[data-age="4–5"] .ps-read{font-size:22px}
+  .app[data-age="9–10"] .ps-read{font-size:19px}
 }
-
-/* ===== APPROVED REFERENCE LOCK v10 ===== */
-/* Exact visual lock to the two approved cinematic reference renders. */
-
-#view-stories.ps-world-view{
-  --gold:#f2c96a;
-  --gold2:#ffe59a;
-  --cyan:#8fd9db;
-  --deep:#031a2d;
+@media(min-width:1100px){
+  .ps-library-list{padding-left:16px;padding-right:16px}
+  .ps-story-row{height:360px;border-radius:28px}
+  .ps-row-copy{left:54%;right:105px}
+  .ps-row-title{font-size:45px}
+  .ps-row-ar{font-size:30px}
+  .ps-row-go{right:26px;width:56px;height:56px}
+  .ps-hero{height:min(45vw,580px);min-height:500px}
+  .ps-hero-copy{top:92px;right:70px}
+  .ps-hero[data-ps-id="nuh"] .ps-hero-copy{left:70px;right:55%}
+  .ps-title{font-size:92px}
+  .ps-ar{font-size:48px}
+  .ps-summary{font-size:22px}
+  .ps-meta{left:70px;right:70px;bottom:26px}
+  .ps-pill{height:52px;font-size:15px}
+  .ps-body{font-size:21px}
 }
-
-/* Opening hero: cinematic, compact, no card feeling */
-.ps-library-hero{
-  min-height:292px;
-  background-position:center 48%;
-  box-shadow:0 14px 34px rgba(0,0,0,.24);
-}
-.ps-library-hero::before{
-  background:
-    linear-gradient(90deg,rgba(3,21,37,.94) 0%,rgba(4,28,46,.72) 39%,rgba(4,28,46,.22) 68%,rgba(4,28,46,.03) 100%),
-    linear-gradient(180deg,rgba(2,16,29,.02),rgba(2,16,29,.08) 64%,rgba(2,16,29,.38));
-}
-.ps-library-hero-copy{
-  width:58%;
-  min-height:292px;
-  padding:20px 0 18px 16px;
-}
-.ps-library-hero h2{margin:7px 0 9px;line-height:.93}
-.ps-library-hero h2 span,
-.ps-library-hero h2 strong{font-size:clamp(37px,9.8vw,55px)}
-.ps-library-hero p{font-size:12.5px;line-height:1.43}
-.ps-hero-stats{margin-top:12px;gap:6px}
-.ps-hero-stats span{min-height:27px;padding:5px 9px;font-size:8.8px}
-.ps-library-hero-art{width:49%;right:-3px}
-.ps-library-hero-art::before{inset:38px -14px 28px 0;opacity:.68}
-.ps-hero-symbol.s-idris{width:88px;height:88px;right:56px;top:18px}
-.ps-hero-symbol.s-adam{width:76px;height:76px;right:89px;top:88px}
-.ps-hero-symbol.s-ibrahim{width:94px;height:94px;right:-3px;top:63px}
-.ps-hero-symbol.s-nuh{width:103px;height:82px;right:68px;top:171px}
-.ps-hero-symbol.s-salih{width:84px;height:84px;right:0;top:159px}
-.ps-hero-symbol.s-hud{width:70px;height:70px;right:-1px;top:220px}
-
-/* Compact pill switcher from the approved render */
-.ps-toolbar{
-  top:max(56px,env(safe-area-inset-top,0px));
-  padding:6px 9px;
-  background:rgba(3,24,41,.975);
-  border-bottom-color:rgba(104,205,214,.22);
-  box-shadow:0 8px 19px rgba(0,0,0,.18);
-}
-.ps-modes{gap:5px}
-.ps-mode,.ps-detail-mode{
-  min-height:40px;
-  font-size:10.5px;
-  letter-spacing:-.01em;
-}
-.ps-mode-icon,
-.ps-pill-icon{
-  width:14px;
-  height:14px;
-  display:inline-block;
-  flex:none;
-  margin-right:6px;
-  background:currentColor;
-  vertical-align:-2px;
-}
-.ps-mode-icon-headphones{
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 13a8 8 0 0 1 16 0'/%3E%3Cpath d='M4 13v5a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2'/%3E%3Cpath d='M20 13v5a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E") center/contain no-repeat;
-          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 13a8 8 0 0 1 16 0'/%3E%3Cpath d='M4 13v5a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2'/%3E%3Cpath d='M20 13v5a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E") center/contain no-repeat;
-}
-.ps-mode-icon-book,
-.ps-pill-icon-book{
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 5.5A2.5 2.5 0 0 1 5.5 3H11v16H5.5A2.5 2.5 0 0 0 3 21.5z'/%3E%3Cpath d='M21 5.5A2.5 2.5 0 0 0 18.5 3H13v16h5.5a2.5 2.5 0 0 1 2.5 2.5z'/%3E%3C/svg%3E") center/contain no-repeat;
-          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 5.5A2.5 2.5 0 0 1 5.5 3H11v16H5.5A2.5 2.5 0 0 0 3 21.5z'/%3E%3Cpath d='M21 5.5A2.5 2.5 0 0 0 18.5 3H13v16h5.5a2.5 2.5 0 0 1 2.5 2.5z'/%3E%3C/svg%3E") center/contain no-repeat;
-}
-.ps-pill-icon-clock{
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E") center/contain no-repeat;
-          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='8'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E") center/contain no-repeat;
-}
-.ps-pill-icon-age{
-  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Ccircle cx='12' cy='7' r='3'/%3E%3Cpath d='M5 21c.7-5 3-8 7-8s6.3 3 7 8z'/%3E%3C/svg%3E") center/contain no-repeat;
-          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Ccircle cx='12' cy='7' r='3'/%3E%3Cpath d='M5 21c.7-5 3-8 7-8s6.3 3 7 8z'/%3E%3C/svg%3E") center/contain no-repeat;
-}
-
-/* Approved story list: edge-to-edge scenic strips with floating 3D object */
-.ps-library-list{background:#05243a}
-.ps-story-row{
-  min-height:112px;
-  grid-template-columns:38% minmax(0,1fr) 35px;
-  padding:0 8px 0 0;
-  border-radius:0;
-  background-position:var(--scene-pos,center);
-  background-size:cover;
-}
-.ps-story-row::before{
-  background:
-    linear-gradient(90deg,rgba(3,23,38,.03) 0%,rgba(3,23,38,.07) 31%,rgba(3,23,38,.53) 58%,rgba(3,23,38,.88) 100%),
-    linear-gradient(180deg,rgba(1,14,25,.02),rgba(1,14,25,.16));
-}
-.ps-story-row::after{
-  background:linear-gradient(90deg,rgba(239,199,100,.32),rgba(98,200,210,.25),transparent);
-}
-.ps-row-art::before{display:none}
-.ps-row-art img{
-  left:-4%;
-  top:-2%;
-  width:108%;
-  height:104%;
-  object-position:center;
-  filter:saturate(1.13) contrast(1.03) brightness(1.08) drop-shadow(0 10px 12px rgba(0,0,0,.22));
-}
-.ps-row-copy{padding:11px 0 10px 1px}
-.ps-row-meta{
-  font-size:7.7px;
-  line-height:1.15;
-  letter-spacing:.09em;
-  color:#c1ead8;
-}
-.ps-row-title{
-  margin-top:4px;
-  font-size:21px;
-  line-height:1;
-  letter-spacing:-.035em;
-}
-.ps-row-ar{
-  margin-top:4px;
-  color:#f2dc9d;
-  font-size:13.5px;
-  line-height:1.25;
-}
-.ps-row-go{
-  width:28px;
-  height:28px;
-  font-size:19px;
-  border-color:rgba(245,209,119,.40);
-  background:rgba(4,31,50,.36);
-}
-.ps-done{
-  right:41px;
-  bottom:8px;
-  width:18px;
-  height:18px;
-}
-.ps-done::after{left:5px;top:3px;width:5px;height:8px}
-.ps-story-row[data-ps-id="muhammad"]{--scene-pos:center 58%}
-.ps-story-row[data-ps-id="adam"]{--scene-pos:center 53%}
-.ps-story-row[data-ps-id="idris"]{--scene-pos:center 48%}
-.ps-story-row[data-ps-id="nuh"]{--scene-pos:center 51%}
-.ps-story-row[data-ps-id="hud"]{--scene-pos:center 54%}
-.ps-story-row[data-ps-id="salih"]{--scene-pos:center 55%}
-
-/* Approved detail page: full scenic hero, smaller floating object, text-first composition */
-.ps-modal{
-  background:#031827;
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
-}
-.ps-sheet{
-  width:min(100%,760px);
-  height:100dvh;
-  max-height:100dvh;
-  background:#041f34;
-}
-.ps-top{
-  justify-content:flex-end;
-  padding:calc(9px + env(safe-area-inset-top)) 10px 8px;
-}
-.ps-top-label{display:none}
-.ps-close{
-  width:38px;
-  height:38px;
-  border-color:rgba(245,211,126,.30);
-  background:rgba(3,28,46,.46);
-  font-size:24px;
-  box-shadow:none;
-}
-.ps-hero{
-  min-height:470px;
-  background-position:center;
-  background-size:cover;
-}
-.ps-hero::before{
-  background:
-    linear-gradient(90deg,rgba(3,22,38,.77) 0%,rgba(3,22,38,.53) 38%,rgba(3,22,38,.12) 72%,rgba(3,22,38,.02) 100%),
-    linear-gradient(180deg,rgba(2,16,28,.16) 0%,rgba(2,16,28,.04) 42%,rgba(2,16,28,.63) 100%);
-}
-.ps-detail-glow{display:none}
-.ps-hero>img{
-  right:-2%;
-  top:16px;
-  width:47%;
-  height:178px;
-  object-fit:contain;
-  filter:saturate(1.12) contrast(1.03) brightness(1.08) drop-shadow(0 13px 18px rgba(0,0,0,.23));
-}
-.ps-hero-copy{
-  left:14px;
-  right:14px;
-  top:54px;
-  bottom:13px;
-  display:flex;
-  flex-direction:column;
-}
-.ps-title{
-  max-width:63%;
-  font-size:clamp(38px,10.4vw,50px);
-  line-height:.94;
-  letter-spacing:-.05em;
-  text-shadow:0 4px 18px rgba(0,0,0,.28);
-}
-.ps-ar{
-  margin-top:5px;
-  max-width:68%;
-  color:#f5d36f;
-  font-size:21px;
-  line-height:1.28;
-}
-.ps-summary{
-  margin-top:9px;
-  max-width:78%;
-  color:rgba(255,255,255,.90);
-  font-size:14.5px;
-  line-height:1.44;
-  font-weight:540;
-}
-.ps-meta{
-  margin-top:11px;
-  gap:6px;
-}
-.ps-pill{
-  min-height:31px;
-  padding:6px 9px;
-  border-color:rgba(132,213,221,.24);
-  background:rgba(3,34,53,.53);
-  font-size:9.5px;
-}
-.ps-pill-icon{width:12px;height:12px;margin-right:5px}
-.ps-detail-modes{
-  margin-top:auto;
-  padding:3px;
-  gap:3px;
-  border-color:rgba(123,207,216,.21);
-  background:rgba(3,28,46,.72);
-}
-.ps-detail-mode{
-  min-height:42px;
-  padding:5px 7px;
-  font-size:10px;
-}
-.ps-body{
-  padding:0 14px calc(34px + env(safe-area-inset-bottom));
-  background:linear-gradient(180deg,#05243a 0%,#041f34 100%);
-}
-.ps-player{
-  margin:12px 0 15px;
-  padding:9px;
-  border-radius:18px;
-}
-.ps-play{min-height:46px;border-radius:14px;font-size:14px}
-.ps-read{
-  font-size:17px;
-  line-height:1.62;
-}
-.ps-read p{padding-bottom:18px}
-.ps-read p+p{padding-top:18px}
-.app[data-age="4–5"] .ps-read{font-size:18.5px;line-height:1.68}
-.app[data-age="6–8"] .ps-read{font-size:17px;line-height:1.62}
-.app[data-age="9–10"] .ps-read{font-size:16.5px;line-height:1.60}
-
-@media(max-width:430px){
-  .ps-library-hero{min-height:270px}
-  .ps-library-hero-copy{min-height:270px;width:59%;padding-left:12px}
-  .ps-library-hero h2 span,.ps-library-hero h2 strong{font-size:34px}
-  .ps-library-hero p{font-size:11.5px}
-  .ps-library-hero-art{width:50%}
-  .ps-toolbar{padding-left:7px;padding-right:7px}
-  .ps-mode{min-height:38px;font-size:9.7px;padding:5px 7px}
-  .ps-mode-icon{width:13px;height:13px;margin-right:4px}
-  .ps-story-row{
-    min-height:104px;
-    grid-template-columns:38% minmax(0,1fr) 31px;
-    padding-right:6px;
-  }
-  .ps-row-copy{padding:9px 0 8px}
-  .ps-row-meta{font-size:7.2px}
-  .ps-row-title{font-size:19.5px}
-  .ps-row-ar{font-size:12.5px}
-  .ps-row-go{width:25px;height:25px;font-size:17px}
-  .ps-done{right:36px;bottom:7px;width:17px;height:17px}
-
-  .ps-hero{min-height:455px}
-  .ps-hero>img{right:-3%;top:14px;width:48%;height:165px}
-  .ps-hero-copy{top:50px;left:12px;right:12px;bottom:11px}
-  .ps-title{font-size:40px;max-width:64%}
-  .ps-ar{font-size:19px}
-  .ps-summary{font-size:13.5px;line-height:1.42;max-width:79%}
-  .ps-meta{margin-top:9px}
-  .ps-pill{min-height:29px;padding:5px 8px;font-size:9px}
-  .ps-detail-mode{min-height:39px;font-size:9.3px}
-  .ps-read{font-size:16.5px}
-  .app[data-age="4–5"] .ps-read{font-size:18px}
-  .app[data-age="9–10"] .ps-read{font-size:16px}
-}
-@media(max-width:375px){
-  .ps-library-hero{min-height:254px}
-  .ps-library-hero-copy{min-height:254px;width:61%}
-  .ps-library-hero h2 span,.ps-library-hero h2 strong{font-size:31px}
-  .ps-mode{font-size:9px}
-  .ps-story-row{min-height:98px;grid-template-columns:37% minmax(0,1fr) 28px}
-  .ps-row-title{font-size:18px}
-  .ps-row-ar{font-size:12px}
-  .ps-hero{min-height:442px}
-  .ps-title{font-size:37px}
-  .ps-summary{font-size:13px}
-}
-@media(min-width:700px){
-  .ps-library-hero{min-height:330px}
-  .ps-library-hero-copy{min-height:330px;width:52%;padding-left:25px}
-  .ps-story-row{
-    min-height:126px;
-    grid-template-columns:31% minmax(0,1fr) 40px;
-    padding-right:20px;
-  }
-  .ps-row-title{font-size:24px}
-  .ps-row-ar{font-size:15px}
-  .ps-sheet{height:min(95dvh,930px)}
-  .ps-hero{min-height:530px}
-  .ps-hero>img{width:42%;height:210px;right:2%;top:22px}
-  .ps-hero-copy{left:24px;right:24px;top:64px;bottom:18px}
-  .ps-title{font-size:50px}
-  .ps-summary{font-size:16px;max-width:68%}
-  .ps-read{font-size:18px}
+@media(prefers-reduced-motion:reduce){
+  .ps-story-row{scroll-behavior:auto}
 }
