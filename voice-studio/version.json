@@ -1,7 +1,7 @@
 {
-  "version": "2.9.60",
-  "updatedAt": "2026-10-02T13:05:00+02:00",
-  "deployTrigger": "voice-studio-2.9.60-pronunciation-candidates-preview-repair",
+  "version": "2.9.61",
+  "updatedAt": "2026-10-02T13:28:00+02:00",
+  "deployTrigger": "voice-studio-2.9.61-async-pronunciation-page-architecture",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v54",
@@ -585,10 +585,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "5ceaecc294ca62a3737b70bad3abc92005e5c462",
+  "releaseRef": "80883fda1a12f123a7db2d3a5d2cf0f7a8472641",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "2.9.60 stellt die frühere Auswahl mehrerer Ausspracheformen im Lernbereich wieder her. Für ein ausgewähltes Wort werden Bibliotheks-, Master- und Vergleichsformen wieder als sichtbare Kandidaten angeboten; ein Klick wählt die Form und startet direkt den Schnelltest. Der Schnelltest nutzt wieder den bewährten QA-/Rescue-Renderer statt des fehlerhaften direkten Low-Latency-Pfads, behält aber Cache und Priorisierung gegenüber dem laufenden Story-Batch. Laufende oder fertige Prophetengeschichten werden nicht überschrieben.",
+  "updateRepairReason": "2.9.61 repariert den blockierenden Aussprache-Schnelltest über eine asynchrone, sichere Audio-Warteschlange und trennt die Studio-Werkzeuge in eigene Arbeitsseiten. Aussprache, Alif–Yāʾ, System/Updates und Freie Stimme stehen getrennt; der relevante Bearbeitungsbereich bleibt jeweils direkt daneben. Die lokale Aussprachebibliothek dient zusätzlich als Fallback, damit Kandidaten auch bei einer gestörten Suchantwort sichtbar bleiben. Laufende oder fertige Prophetengeschichten werden beim Schnelltest nicht überschrieben.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -997,5 +997,22 @@
     },
     "offlineManifestPackaged": true,
     "staleLocalManifestAutoRefresh": true
+  },
+  "validatedCommit": "80883fda1a12f123a7db2d3a5d2cf0f7a8472641",
+  "validatedAt": "2026-10-02T13:28:00+02:00",
+  "validation": {
+    "targetVersion": "2.9.61",
+    "pronunciationAsyncPreviewQueue": true,
+    "pronunciationPreviewStatePolling": true,
+    "pronunciationLocalCandidateFallback": true,
+    "pageFocusedStudioArchitecture": true,
+    "pronunciationDedicatedWorkspace": true,
+    "alphabetDedicatedWorkspace": true,
+    "systemDedicatedWorkspace": true,
+    "topUpdateAlwaysAvailable": true,
+    "storyRenderSafePreviewPriority": true,
+    "localBatchSmokePassed": true,
+    "appHealthCheckPassed": true,
+    "fullVoiceValidateBlockedByUnrelatedKidsCacheGuard": "kids/sw.js missing dar-al-tawhid-kids-v106"
   }
 }
