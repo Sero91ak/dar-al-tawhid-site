@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v124";
+const CACHE_NAME="dar-al-tawhid-kids-v125";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -131,7 +131,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"||url.pathname==="/kids/prophet-muhammad-v22.css"){
+  if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"||url.pathname==="/kids/prophet-muhammad-v22.css"||url.pathname==="/kids/stories-reference-v31.css"){
     event.respondWith(networkFirst(request));
     return;
   }
