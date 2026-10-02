@@ -6730,13 +6730,15 @@
     {
       "id": "dar-test-library-redesign-v1-2026-10-02",
       "approvedBy": "user-explicit-dar-test-app-umbau-mit-einwort-rollback",
-      "reason": "Nutzer beauftragt ausdrücklich den kompletten visuellen Umbau nur der DAR Test/Staging-App: kompakter Markenheader mit Original-Logo, Bibliotheks-/Hero-Struktur für Start, Quiz, Qurʾān und Mehr, theme-kompatible Farben, vorhandene Tab-Leiste unverändert. Einwort-Rollback 'zurücksetzen' wurde verlangt.",
+      "reason": "Nutzer beauftragt ausdrücklich den kompletten visuellen Umbau nur der DAR Test/Staging-App sowie dessen sichere öffentliche /test-Auslieferung: kompakter Markenheader mit Original-Logo, Bibliotheks-/Hero-Struktur für Start, Quiz, Qurʾān und Mehr, theme-kompatible Farben, vorhandene Tab-Leiste unverändert. Einwort-Rollback 'zurücksetzen' wurde verlangt.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "test/index.html",
         "test/version.json",
         "test/assets/dar-library-redesign-v1.css",
-        "test/assets/dar-library-redesign-v1.js"
+        "test/assets/dar-library-redesign-v1.js",
+        "wrangler.test.toml",
+        ".github/workflows/deploy-test-app.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     }
