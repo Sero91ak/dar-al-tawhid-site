@@ -1810,3 +1810,14 @@
     transform:none!important;
   }
 }
+
+
+/* REFERENCE_ARABIC_PLACEMENT_V35 */
+@media(max-width:600px){
+  #view-stories.ps-stories-home .ps-mh-home-ar{
+    left:43%!important;
+    top:34%!important;
+    font-size:18px!important;
+    line-height:1!important;
+  }
+}
