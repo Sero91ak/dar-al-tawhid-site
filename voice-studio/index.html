@@ -1110,8 +1110,9 @@ function renderAnalysis(){
       return '<button type="button" class="term clickable '+(done?'done':'open')+'" data-learning-term="'+esc(term)+'" title="'+(done?'Bestätigt und dauerhaft gelernt':'Noch anhören und bestätigen')+'">'+esc(r.canonical||r.string_to_replace)+' · '+label+'</button>';
     }).join("")
     :'<span class="term">Keine Bibliotheksbegriffe erkannt</span>';
-  $("#qaLocked").textContent=lc?"Audio-QA erforderlich":"keine";
-  $("#qaLocked").className=lc?"warn":"good";
+  const openCount=Math.max(0,unique.length-lc);
+  $("#qaLocked").textContent=unique.length?(lc+" bestätigt · "+openCount+" offen"):"keine";
+  $("#qaLocked").className=openCount?"warn":"good";
   updateQA();
 }
 async function analyzeProsody(){
@@ -1322,10 +1323,6 @@ async function confirmLearning(){
   if(!learningPreviewId){setMessage("Zuerst eine neue Aussprache testen und anhören.");return}
   const term=$("#learnTerm").value.trim(),btn=$("#learnConfirmBtn"),old=btn.textContent;
   const currentText=$("#text").value.trim();
-  const rerenderCurrentAudio=!!currentText&&(
-    (!!lastAudio&&currentText===lastGeneratedText)||
-    (!!pendingAutoRerenderText&&currentText===pendingAutoRerenderText)
-  );
   btn.disabled=true;btn.textContent="Wird gelernt …";
   try{
     const r=await localRequest("/learning/confirm",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({previewId:learningPreviewId,term})});
@@ -1339,24 +1336,15 @@ async function confirmLearning(){
     if(typeof window.darReloadStrictProphetReview==="function"){
       await window.darReloadStrictProphetReview().catch(()=>{});
     }
-    if(rerenderCurrentAudio){
-      pendingAutoRerenderText=currentText;
-      const postCorrection=await analyzeProsody();
-      const remaining=Array.isArray(postCorrection?.unresolvedIslamicTerms)?postCorrection.unresolvedIslamicTerms:[];
-      if(remaining.length){
-        resetAudioQA(true);
-        setMessage(
-          "Gespeichert: „"+term+"“. Die alte Audio ist veraltet. Noch "+remaining.length+
-          " ungeklärte Aussprache"+(remaining.length===1?"":"n")+" im Text. Nach der letzten Bestätigung wird derselbe Text automatisch neu erzeugt.",
-          "warn"
-        );
-      }else{
-        setMessage("Gespeichert: „"+term+"“. Alle offenen Aussprachen sind geklärt; derselbe Text wird jetzt automatisch neu erzeugt.","warn");
-        await generate({autoRerender:true});
-      }
-    }else{
-      setMessage("Dauerhaft gespeichert: „"+term+"“ und bekannte Schreibvarianten sind lokal als MASTER gesichert. Diese Aussprache wird künftig automatisch wiederverwendet.","good");
-    }
+    const postCorrection=await analyzeProsody();
+    const remaining=Array.isArray(postCorrection?.unresolvedIslamicTerms)?postCorrection.unresolvedIslamicTerms:[];
+    setMessage(
+      "Dauerhaft gespeichert: „"+term+"“. Bestehende und gerade laufende Audios bleiben unverändert. "+
+      (remaining.length
+        ?remaining.length+" Ausspracheprüfung"+(remaining.length===1?" bleibt":"en bleiben")+" noch offen."
+        :"Die neue LOCKED-Form wird nur bei künftigen oder gezielt neu erzeugten Stellen verwendet."),
+      "good"
+    );
   }catch(e){setMessage(e.message||String(e));btn.disabled=false}
   finally{if(btn)btn.textContent=old}
 }
