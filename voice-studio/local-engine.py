@@ -96,6 +96,12 @@ PROPHET_STORY_BATCH_LOCK=threading.Lock()
 PROPHET_STORY_BATCH_STATE_LOCK=threading.Lock()
 PROPHET_STORY_BATCH_CANCEL=threading.Event()
 PROPHET_STORY_BATCH_STATE={"running":False,"phase":"idle","progress":0,"completed":0,"total":25,"current":"","error":"","repoPublished":False,"repoPublishError":"","startedAt":"","finishedAt":""}
+PROPHET_STORY_HOME=VOICE_HOME/"ProphetStoryExport"
+PROPHET_STORY_WORK=PROPHET_STORY_HOME/"work"
+PROPHET_STORY_READY=PROPHET_STORY_HOME/"ready"
+PROPHET_STORY_CHECKPOINT=PROPHET_STORY_HOME/"checkpoint.json"
+PROPHET_STORY_CAFFEINATE_LOCK=threading.Lock()
+PROPHET_STORY_CAFFEINATE=None
 LEARNING_PREVIEWS={}
 ALPHABET_BATCH_STATE={
     "running":False,
@@ -5511,6 +5517,80 @@ def _set_prophet_batch_state(**patch):
         PROPHET_STORY_BATCH_STATE.update(patch)
         return dict(PROPHET_STORY_BATCH_STATE)
 
+def _prophet_checkpoint_load():
+    data=load_json_file(PROPHET_STORY_CHECKPOINT,{})
+    return data if isinstance(data,dict) else {}
+
+def _prophet_checkpoint_save(data):
+    payload=dict(data or {})
+    payload["updatedAt"]=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    atomic_write_json(PROPHET_STORY_CHECKPOINT,payload)
+    return payload
+
+def _prophet_jobs_signature(grouped):
+    rows=[]
+    for item,group_ages,txt in grouped:
+        rows.append({
+            "id":str(item.get("id") or ""),
+            "ages":list(group_ages),
+            "textSha256":hashlib.sha256(str(txt).encode("utf-8")).hexdigest(),
+        })
+    raw=json.dumps(rows,ensure_ascii=False,sort_keys=True,separators=(",",":")).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()
+
+def _prophet_job_key(item,group_ages,txt):
+    raw="\u241f".join([
+        str(item.get("id") or ""),
+        ",".join(group_ages),
+        hashlib.sha256(str(txt).encode("utf-8")).hexdigest(),
+    ]).encode("utf-8")
+    return hashlib.sha256(raw).hexdigest()[:24]
+
+def _start_prophet_caffeinate():
+    global PROPHET_STORY_CAFFEINATE
+    with PROPHET_STORY_CAFFEINATE_LOCK:
+        if PROPHET_STORY_CAFFEINATE is not None and PROPHET_STORY_CAFFEINATE.poll() is None:
+            return
+        caffeinate="/usr/bin/caffeinate"
+        if not Path(caffeinate).exists():
+            PROPHET_STORY_CAFFEINATE=None
+            return
+        try:
+            # -w bindet den Wachhalter an diese Engine; ein Crash hinterlässt
+            # deshalb niemals einen ewigen caffeinate-Prozess.
+            PROPHET_STORY_CAFFEINATE=subprocess.Popen(
+                [caffeinate,"-i","-m","-w",str(os.getpid())],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                stdin=subprocess.DEVNULL,
+            )
+        except Exception as e:
+            PROPHET_STORY_CAFFEINATE=None
+            print("[DĀR Voice] caffeinate warning",e,flush=True)
+
+def _stop_prophet_caffeinate():
+    global PROPHET_STORY_CAFFEINATE
+    with PROPHET_STORY_CAFFEINATE_LOCK:
+        p=PROPHET_STORY_CAFFEINATE
+        PROPHET_STORY_CAFFEINATE=None
+    if p is not None and p.poll() is None:
+        try: p.terminate()
+        except Exception: pass
+
+def _resume_prophet_story_voice_pack_if_needed():
+    cp=_prophet_checkpoint_load()
+    if not cp.get("active"):
+        return
+    if cp.get("phase") in ("complete","cancelled"):
+        return
+    # Engine darf erst vollständig hochkommen; danach wird exakt derselbe
+    # persistente Job fortgesetzt. Keine Terminal-Schleife nötig.
+    time.sleep(2.0)
+    state=_prophet_batch_snapshot()
+    if not state.get("running"):
+        print("[DĀR Voice] resume persistent prophet-story production",flush=True)
+        start_prophet_story_voice_pack(resume=True)
+
 def _prophet_story_manifest():
     return load_kids_repo_json(
         "prophet-stories.json",
@@ -5606,7 +5686,7 @@ def _publish_prophet_story_pack(ready:Path):
                     return False,"Rebase fehlgeschlagen: "+(rebase.stderr or rebase.stdout)[-600:]
                 push=rr([git,"-C",str(repo),"push","origin","HEAD:main"],300)
                 if push.returncode==0:
-                    return True,"75 Propheten-Audios wurden nach GitHub main übertragen."
+                    return True,"Propheten-Audiopaket wurde nach GitHub main übertragen."
                 last=(push.stderr or push.stdout)[-700:]
             else:
                 last=(fetch.stderr or fetch.stdout)[-700:]
@@ -5615,19 +5695,15 @@ def _publish_prophet_story_pack(ready:Path):
     except Exception as e:
         return False,str(e)
 
-def build_prophet_story_voice_pack():
+def build_prophet_story_voice_pack(resume:bool=False):
     if not PROPHET_STORY_BATCH_LOCK.acquire(blocking=False):
         return _prophet_batch_snapshot()
+    _start_prophet_caffeinate()
     try:
-        started=time.strftime("%Y-%m-%dT%H:%M:%S%z")
-        PROPHET_STORY_BATCH_CANCEL.clear()
         manifest=_prophet_story_manifest()
         items=list(manifest.get("items") or [])
         ages=("4-5","6-8","9-10")
 
-        # Gleicher redaktioneller Text wird exakt einmal gerendert und anschließend
-        # byte-identisch in alle dazugehörigen Alters-Slots kopiert. Sobald sich
-        # Altersfassungen unterscheiden, entstehen automatisch getrennte Jobs.
         grouped=[]
         for item in items:
             by_text={}
@@ -5639,96 +5715,246 @@ def build_prophet_story_voice_pack():
 
         total_jobs=len(grouped)
         total_outputs=len(items)*len(ages)
-        _set_prophet_batch_state(
-            running=True,phase="preparing",progress=1,completed=0,total=total_jobs,
-            current=f"25 Prophetengeschichten · {total_jobs} eindeutige Audiofassungen werden vorbereitet …",
-            error="",repoPublished=False,repoPublishError="",startedAt=started,finishedAt=""
+        signature=_prophet_jobs_signature(grouped)
+        cp=_prophet_checkpoint_load()
+
+        reusable=(
+            bool(cp)
+            and cp.get("signature")==signature
+            and isinstance(cp.get("completedJobs"),dict)
         )
 
-        build_id="serhat-prophets-local-"+time.strftime("%Y%m%d-%H%M%S")
-        root=VOICE_HOME/"ProphetStoryExport"/(".build-"+uuid.uuid4().hex[:10])
-        ready=VOICE_HOME/"ProphetStoryExport"/"ready"
-        if root.exists(): shutil.rmtree(root)
-        (root/"kids/assets/prophet-story-audio").mkdir(parents=True,exist_ok=True)
-        (root/"kids/data").mkdir(parents=True,exist_ok=True)
+        if not reusable:
+            if PROPHET_STORY_WORK.exists():
+                shutil.rmtree(PROPHET_STORY_WORK)
+            (PROPHET_STORY_WORK/"kids/assets/prophet-story-audio").mkdir(parents=True,exist_ok=True)
+            (PROPHET_STORY_WORK/"kids/data").mkdir(parents=True,exist_ok=True)
+            cp={
+                "schemaVersion":2,
+                "signature":signature,
+                "buildId":"serhat-prophets-local-"+time.strftime("%Y%m%d-%H%M%S"),
+                "active":True,
+                "phase":"preparing",
+                "startedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+                "completedJobs":{},
+                "failedJobs":{},
+                "audioByItem":{str(item.get("id")):{} for item in items},
+                "total":total_jobs,
+                "completed":0,
+            }
+            _prophet_checkpoint_save(cp)
+        else:
+            PROPHET_STORY_WORK.mkdir(parents=True,exist_ok=True)
+            (PROPHET_STORY_WORK/"kids/assets/prophet-story-audio").mkdir(parents=True,exist_ok=True)
+            (PROPHET_STORY_WORK/"kids/data").mkdir(parents=True,exist_ok=True)
+            cp["active"]=True
+            cp["phase"]="resuming" if resume else "rendering"
+            cp["total"]=total_jobs
+            cp.setdefault("failedJobs",{})
+            cp.setdefault("audioByItem",{str(item.get("id")):{} for item in items})
+            _prophet_checkpoint_save(cp)
 
-        # Audio-Metadaten pro Prophet sammeln; jede Altersstufe bleibt im Manifest vorhanden.
-        audio_by_item={str(item.get("id")):{} for item in items}
+        started=str(cp.get("startedAt") or time.strftime("%Y-%m-%dT%H:%M:%S%z"))
+        build_id=str(cp.get("buildId") or ("serhat-prophets-local-"+time.strftime("%Y%m%d-%H%M%S")))
+        completed_jobs=dict(cp.get("completedJobs") or {})
+        failed_jobs=dict(cp.get("failedJobs") or {})
+        audio_by_item=dict(cp.get("audioByItem") or {})
+        for item in items:
+            audio_by_item.setdefault(str(item.get("id")),{})
 
+        def asset_ok(item_id,age):
+            p=PROPHET_STORY_WORK/"kids/assets/prophet-story-audio"/item_id/(age+".m4a")
+            return p.exists() and p.stat().st_size>=8000
+
+        # Checkpoint darf nur Jobs als fertig betrachten, deren Audiodateien noch existieren.
+        for key,meta in list(completed_jobs.items()):
+            item_id=str(meta.get("itemId") or "")
+            group_ages=tuple(meta.get("ages") or [])
+            if not item_id or not group_ages or not all(asset_ok(item_id,a) for a in group_ages):
+                completed_jobs.pop(key,None)
+
+        def persist(phase,current="",last_error=""):
+            done=len(completed_jobs)
+            cp.update({
+                "active":True,
+                "phase":phase,
+                "signature":signature,
+                "buildId":build_id,
+                "completedJobs":completed_jobs,
+                "failedJobs":failed_jobs,
+                "audioByItem":audio_by_item,
+                "total":total_jobs,
+                "completed":done,
+                "current":current,
+                "lastError":last_error,
+            })
+            _prophet_checkpoint_save(cp)
+            return done
+
+        PROPHET_STORY_BATCH_CANCEL.clear()
+        done=persist("rendering","Setze Prophetengeschichten-Produktion fort …")
+        _set_prophet_batch_state(
+            running=True,phase="rendering",
+            progress=2+int(done/max(1,total_jobs)*91),
+            completed=done,total=total_jobs,
+            current=f"Fortsetzung · {done}/{total_jobs} bereits dauerhaft gesichert",
+            error="",repoPublished=False,repoPublishError="",
+            startedAt=started,finishedAt=""
+        )
+
+        pending=[]
         for job_idx,(item,group_ages,txt) in enumerate(grouped,1):
-            if PROPHET_STORY_BATCH_CANCEL.is_set():
-                raise RuntimeError("Vom Nutzer gestoppt.")
-
+            key=_prophet_job_key(item,group_ages,txt)
             item_id=str(item.get("id"))
-            age_label="/".join(group_ages)
-            pct=2+int((job_idx-1)/max(1,total_jobs)*91)
-            _set_prophet_batch_state(
-                phase="rendering",progress=pct,completed=job_idx-1,total=total_jobs,
-                current=f"{job_idx}/{total_jobs} · {item.get('name')} · Alter {age_label}"
-            )
+            if key in completed_jobs and all(asset_ok(item_id,a) for a in group_ages):
+                continue
+            pending.append((job_idx,key,item,group_ages,txt))
 
-            # Derselbe Job wird kontrolliert erneut versucht. Bereits erfolgreich
-            # gerenderte Segmente liegen im QA-Cache und werden nicht neu erzeugt.
-            last_error=None
-            wav=None
-            for attempt in range(1,5):
+        # Drei Produktionsrunden: Ein schwieriger Abschnitt blockiert niemals
+        # alle anderen Geschichten. Nach einem lokalen Fehler kommt der nächste Job.
+        max_rounds=3
+        for round_idx in range(1,max_rounds+1):
+            if not pending:
+                break
+            next_pending=[]
+            for job_idx,key,item,group_ages,txt in pending:
                 if PROPHET_STORY_BATCH_CANCEL.is_set():
-                    raise RuntimeError("Vom Nutzer gestoppt.")
-                try:
-                    wav=generate(txt,"","kids_story",free_mode=True,free_pronunciation=True)
-                    last_error=None
-                    break
-                except RuntimeError as e:
-                    last_error=e
-                    detail=str(e)
-                    _set_prophet_batch_state(
-                        phase="rendering",progress=pct,completed=job_idx-1,total=total_jobs,
-                        current=f"{job_idx}/{total_jobs} · {item.get('name')} · QA-Rettung {attempt}/4 · {detail[:120]}"
+                    cp.update({"active":False,"phase":"cancelled"})
+                    _prophet_checkpoint_save(cp)
+                    return _set_prophet_batch_state(
+                        running=False,phase="cancelled",
+                        completed=len(completed_jobs),total=total_jobs,
+                        current="Vom Nutzer gestoppt",error="",
+                        finishedAt=time.strftime("%Y-%m-%dT%H:%M:%S%z")
                     )
-                    # Ein defektes Segment darf nicht den gesamten 25er-Batch neu starten.
-                    if attempt<4:
-                        time.sleep(min(12,attempt*3))
-            if wav is None:
-                raise RuntimeError(
-                    f"{item.get('name')} · Alter {age_label}: "
-                    f"{last_error or 'Audio konnte nicht erzeugt werden.'}"
+
+                item_id=str(item.get("id"))
+                age_label="/".join(group_ages)
+                done=len(completed_jobs)
+                pct=2+int(done/max(1,total_jobs)*91)
+                label=f"{job_idx}/{total_jobs} · {item.get('name')} · Alter {age_label}"
+                persist("rendering",label)
+                _set_prophet_batch_state(
+                    phase="rendering",progress=pct,completed=done,total=total_jobs,
+                    current=label,error=""
                 )
 
-            first_age=group_ages[0]
-            first_asset=root/"kids/assets/prophet-story-audio"/item_id/(first_age+".m4a")
-            _encode_kids_m4a(wav,first_asset)
-            dur=round(_audio_duration_seconds(first_asset),3)
-            if dur<20 or first_asset.stat().st_size<8000:
-                raise RuntimeError(f"Audio-QA fehlgeschlagen: {item_id}/{age_label} · {dur}s")
+                wav=None
+                last_error=None
+                # Lokale Selbstheilung. generate() besitzt zusätzlich Segmentcache,
+                # Watchdog, MLX-Neustart, semantische Teilung und MPS-Fallback.
+                for attempt in range(1,5):
+                    try:
+                        wav=generate(txt,"","kids_story",free_mode=True,free_pronunciation=True)
+                        last_error=None
+                        break
+                    except RuntimeError as e:
+                        last_error=e
+                        detail=str(e)
+                        failed_jobs[key]={
+                            "itemId":item_id,
+                            "name":str(item.get("name") or item_id),
+                            "ages":list(group_ages),
+                            "round":round_idx,
+                            "attempt":attempt,
+                            "error":detail,
+                        }
+                        persist("rendering",label,detail)
+                        _set_prophet_batch_state(
+                            phase="rendering",progress=pct,completed=done,total=total_jobs,
+                            current=f"{label} · lokale Rettung {attempt}/4",
+                            error=""
+                        )
+                        if attempt<4:
+                            time.sleep(min(8,attempt*2))
 
-            base_meta={
-                "durationSec":dur,
-                "bytes":first_asset.stat().st_size,
-                "sha256":hashlib.sha256(first_asset.read_bytes()).hexdigest(),
-                "voiceProfile":"kids_story",
-                "voiceProfileId":"serhat-owner-voice-2026",
-                "source":"DĀR Voice Studio local engine",
-                "sourceSpeaker":"Serhat Abu Malik",
-                "language":"German narration with Arabic/Fuṣḥā terms",
-                "technicalQaPassed":True,
-                "sharedMasterForIdenticalText":len(group_ages)>1,
-            }
+                if wav is None:
+                    next_pending.append((job_idx,key,item,group_ages,txt))
+                    # Nicht blockieren: andere Propheten sofort weiter produzieren.
+                    continue
 
-            for age in group_ages:
-                asset=root/"kids/assets/prophet-story-audio"/item_id/(age+".m4a")
-                if asset!=first_asset:
-                    asset.parent.mkdir(parents=True,exist_ok=True)
-                    shutil.copy2(first_asset,asset)
-                audio_by_item[item_id][age]={
-                    **base_meta,
-                    "url":f"/kids/assets/prophet-story-audio/{item_id}/{age}.m4a?v={build_id}",
+                first_age=group_ages[0]
+                first_asset=PROPHET_STORY_WORK/"kids/assets/prophet-story-audio"/item_id/(first_age+".m4a")
+                _encode_kids_m4a(wav,first_asset)
+                dur=round(_audio_duration_seconds(first_asset),3)
+                if dur<20 or first_asset.stat().st_size<8000:
+                    detail=f"Audio-QA fehlgeschlagen: {item_id}/{age_label} · {dur}s"
+                    failed_jobs[key]={
+                        "itemId":item_id,"name":str(item.get("name") or item_id),
+                        "ages":list(group_ages),"round":round_idx,"attempt":4,"error":detail,
+                    }
+                    persist("rendering",label,detail)
+                    next_pending.append((job_idx,key,item,group_ages,txt))
+                    continue
+
+                base_meta={
+                    "durationSec":dur,
+                    "bytes":first_asset.stat().st_size,
+                    "sha256":hashlib.sha256(first_asset.read_bytes()).hexdigest(),
+                    "voiceProfile":"kids_story",
+                    "voiceProfileId":"serhat-owner-voice-2026",
+                    "source":"DĀR Voice Studio local engine",
+                    "sourceSpeaker":"Serhat Abu Malik",
+                    "language":"German narration with Arabic/Fuṣḥā terms",
+                    "technicalQaPassed":True,
+                    "sharedMasterForIdenticalText":len(group_ages)>1,
                 }
+                for age in group_ages:
+                    asset=PROPHET_STORY_WORK/"kids/assets/prophet-story-audio"/item_id/(age+".m4a")
+                    if asset!=first_asset:
+                        asset.parent.mkdir(parents=True,exist_ok=True)
+                        shutil.copy2(first_asset,asset)
+                    audio_by_item[item_id][age]={
+                        **base_meta,
+                        "url":f"/kids/assets/prophet-story-audio/{item_id}/{age}.m4a?v={build_id}",
+                    }
 
-            _set_prophet_batch_state(
-                phase="rendering",
-                progress=2+int(job_idx/max(1,total_jobs)*91),
-                completed=job_idx,total=total_jobs,
-                current=f"{job_idx}/{total_jobs} · {item.get('name')} · fertig"
+                completed_jobs[key]={
+                    "itemId":item_id,
+                    "name":str(item.get("name") or item_id),
+                    "ages":list(group_ages),
+                    "durationSec":dur,
+                    "sha256":base_meta["sha256"],
+                    "finishedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+                }
+                failed_jobs.pop(key,None)
+                done=persist("rendering",f"{item.get('name')} dauerhaft gesichert")
+                _set_prophet_batch_state(
+                    phase="rendering",
+                    progress=2+int(done/max(1,total_jobs)*91),
+                    completed=done,total=total_jobs,
+                    current=f"{done}/{total_jobs} fertig · {item.get('name')} dauerhaft gesichert",
+                    error=""
+                )
+
+            pending=next_pending
+            if pending and round_idx<max_rounds:
+                persist("retrying",f"{len(pending)} schwierige Audiofassungen kommen in Runde {round_idx+1}")
+                _set_prophet_batch_state(
+                    phase="retrying",
+                    progress=2+int(len(completed_jobs)/max(1,total_jobs)*91),
+                    completed=len(completed_jobs),total=total_jobs,
+                    current=f"{len(pending)} schwierige Audiofassungen · zweite Rettungsrunde",
+                    error=""
+                )
+                _stop_mlx_process("prophet retry round")
+                time.sleep(3)
+
+        if pending:
+            names=[
+                str(item.get("name") or item.get("id"))
+                for _,_,item,_,_ in pending
+            ]
+            detail="Nach drei autonomen Rettungsrunden offen: "+", ".join(names)
+            cp.update({"active":True,"phase":"blocked","lastError":detail})
+            _prophet_checkpoint_save(cp)
+            return _set_prophet_batch_state(
+                running=False,phase="blocked",
+                progress=2+int(len(completed_jobs)/max(1,total_jobs)*91),
+                completed=len(completed_jobs),total=total_jobs,
+                current="Andere Geschichten wurden weiterproduziert; nur problematische Jobs bleiben offen.",
+                error=detail,startedAt=started,
+                finishedAt=time.strftime("%Y-%m-%dT%H:%M:%S%z")
             )
 
         for item in items:
@@ -5743,38 +5969,65 @@ def build_prophet_story_voice_pack():
             "uniqueRenders":total_jobs,
             "ages":list(ages),
             "technicalQaPassed":True,
+            "persistentCheckpoint":True,
             "generatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z")
         }
         manifest["updatedAt"]=time.strftime("%Y-%m-%d")
-        atomic_write_json(root/"kids/data/prophet-stories.json",manifest)
-        if ready.exists(): shutil.rmtree(ready)
-        os.replace(root,ready)
+        atomic_write_json(PROPHET_STORY_WORK/"kids/data/prophet-stories.json",manifest)
+
+        if PROPHET_STORY_READY.exists():
+            shutil.rmtree(PROPHET_STORY_READY)
+        shutil.copytree(PROPHET_STORY_WORK,PROPHET_STORY_READY)
 
         _set_prophet_batch_state(
             phase="publishing",progress=96,completed=total_jobs,total=total_jobs,
-            current=f"{total_outputs} Audio-Slots werden in DĀR AL TAWḤĪD Kids veröffentlicht …"
+            current=f"{total_outputs} Audio-Slots werden veröffentlicht …"
         )
-        ok,msg=_publish_prophet_story_pack(ready)
+        ok,msg=_publish_prophet_story_pack(PROPHET_STORY_READY)
+        cp.update({
+            "active":not bool(ok),
+            "phase":"complete" if ok else "publish-error",
+            "completed":total_jobs,
+            "lastError":"" if ok else msg,
+            "finishedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        })
+        _prophet_checkpoint_save(cp)
         return _set_prophet_batch_state(
             running=False,phase="complete" if ok else "publish-error",
             progress=100 if ok else 98,completed=total_jobs,total=total_jobs,
-            current="Fertig" if ok else "Audio fertig, Push fehlgeschlagen",
+            current="Fertig" if ok else "Audio vollständig fertig; Veröffentlichung wird später erneut versucht.",
             error="" if ok else msg,repoPublished=bool(ok),
             repoPublishError="" if ok else msg,repoPublishMessage=msg,
             startedAt=started,finishedAt=time.strftime("%Y-%m-%dT%H:%M:%S%z")
         )
     except Exception as e:
+        detail=str(e)
+        cp=_prophet_checkpoint_load()
+        cp.update({
+            "active":True,
+            "phase":"interrupted",
+            "lastError":detail,
+        })
+        _prophet_checkpoint_save(cp)
         return _set_prophet_batch_state(
-            running=False,phase="error",error=str(e),current="Abgebrochen",
+            running=False,phase="interrupted",error=detail,
+            current="Unterbrochen · wird beim nächsten Engine-Start automatisch fortgesetzt",
             finishedAt=time.strftime("%Y-%m-%dT%H:%M:%S%z")
         )
     finally:
+        _stop_prophet_caffeinate()
         PROPHET_STORY_BATCH_LOCK.release()
 
-def start_prophet_story_voice_pack():
+def start_prophet_story_voice_pack(resume:bool=False):
     state=_prophet_batch_snapshot()
-    if state.get("running"): return state
-    t=threading.Thread(target=build_prophet_story_voice_pack,daemon=True,name="dar-prophet-story-batch")
+    if state.get("running"):
+        return state
+    t=threading.Thread(
+        target=build_prophet_story_voice_pack,
+        kwargs={"resume":bool(resume)},
+        daemon=True,
+        name="dar-prophet-story-batch"
+    )
     t.start()
     time.sleep(.05)
     return _prophet_batch_snapshot()
@@ -6489,6 +6742,7 @@ def serve_single_instance():
         threading.Thread(target=warm_model,daemon=True).start()
         threading.Thread(target=refresh_online_library_if_stale,daemon=True).start()
         threading.Thread(target=refresh_studio_ui_from_github,daemon=True).start()
+        threading.Thread(target=_resume_prophet_story_voice_pack_if_needed,daemon=True,name="dar-prophet-auto-resume").start()
         server.serve_forever()
     return 0
 
