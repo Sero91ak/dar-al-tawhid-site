@@ -396,3 +396,62 @@
   else boot();
   document.addEventListener("dar:view-rendered",scan);
 })();
+
+
+/* DAR_LIBRARY_ENHANCER_V1170 · Test/Staging only. */
+(function(){
+  "use strict";
+  function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(m){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]})}
+  function routeParts(){
+    var raw="";
+    try{raw=decodeURIComponent(String(location.hash||"#home").replace(/^#/,""))}catch(e){raw=String(location.hash||"#home").replace(/^#/,"")}
+    var p=raw.split("/").filter(Boolean);
+    return{view:p[0]||"home",value:p.slice(1).join("/")};
+  }
+  function syncRouteClasses(){
+    if(!document.body)return;
+    var r=routeParts();
+    document.body.classList.toggle("dar-library-quiz-home",r.view==="quiz"&&(!r.value||r.value==="home"));
+    document.body.classList.toggle("dar-library-more",r.view==="more"&&!r.value);
+  }
+  function insertHomeFeature(){
+    var r=routeParts();
+    if(r.view!=="home")return;
+    var shell=document.querySelector(".home-v380-shell");
+    if(!shell||shell.querySelector(".dar-library-feature"))return;
+    var post=null;
+    try{if(typeof recommendedPost==="function")post=recommendedPost()}catch(e){}
+    var btn=document.createElement("button");
+    btn.type="button";
+    btn.className="dar-library-feature dar-click-glow";
+    if(post&&post.id){
+      btn.setAttribute("data-nav","post");
+      btn.setAttribute("data-value",String(post.id));
+      btn.setAttribute("aria-label","Heute empfohlen lesen: "+String(post.title||"Beitrag"));
+    }else{
+      btn.setAttribute("data-nav","recent");
+      btn.setAttribute("aria-label","Empfohlene Beiträge öffnen");
+    }
+    var title=post&&post.title?post.title:"Heute empfohlen";
+    var meta=[post&&post.category,post&&post.scholar].filter(Boolean).join(" · ")||"Wissen aus Qurʾān, authentischer Sunnah und den Āthār";
+    btn.innerHTML='<span class="dar-library-feature__kicker">Heute empfohlen</span><span class="dar-library-feature__title">'+esc(title)+'</span><span class="dar-library-feature__meta">'+esc(meta)+'</span>';
+    var hero=shell.querySelector(".home-v380-quran-hero");
+    if(hero)hero.insertAdjacentElement("afterend",btn);else shell.prepend(btn);
+  }
+  function markNeutralOrnament(){
+    document.querySelectorAll(".dar-library-feature,.home-line-tawhid,.quiz-menu-card,.qov-header,.more-group").forEach(function(el){
+      el.setAttribute("data-dar-ornament","neutral-no-cross-no-six-point-star");
+    });
+  }
+  function enhance(){syncRouteClasses();insertHomeFeature();markNeutralOrnament()}
+  var timer=0;
+  function schedule(){clearTimeout(timer);timer=setTimeout(enhance,24)}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",enhance,{once:true});else enhance();
+  window.addEventListener("hashchange",schedule,{passive:true});
+  document.addEventListener("dar:view-rendered",schedule);
+  var root=document.getElementById("appView");
+  if(root&&!root.__darLibraryObs){
+    root.__darLibraryObs=new MutationObserver(schedule);
+    root.__darLibraryObs.observe(root,{childList:true,subtree:true});
+  }
+})();
