@@ -1580,3 +1580,31 @@
 /* REFERENCE_SCENES_V30 — dedicated approved scene assets */
 .ps-mh-home-art{background-image:url("/kids/assets/story-wow/v30-muhammad-home.jpg?v=30")!important;background-position:58% 50%!important;background-size:cover!important}
 #view-stories.ps-stories-home .ps-mh-home-art{background-image:url("/kids/assets/story-wow/v30-muhammad-home.jpg?v=30")!important}
+
+
+/* STORY_THUMBNAILS_V32 */
+#view-stories.ps-stories-home .story-row[data-story="water"] .story-thumb{
+  background-image:
+    linear-gradient(180deg,rgba(2,18,30,.02) 0%,rgba(2,18,30,.12) 65%,rgba(2,18,30,.28) 100%),
+    url("/kids/assets/story-wow/v32-story-water.jpg?v=32")!important;
+  background-size:cover!important;
+  background-position:center 48%!important;
+}
+#view-stories.ps-stories-home .story-row[data-story="helper"] .story-thumb{
+  background-image:
+    linear-gradient(180deg,rgba(2,18,30,.02) 0%,rgba(2,18,30,.12) 65%,rgba(2,18,30,.28) 100%),
+    url("/kids/assets/story-wow/v32-story-helper.jpg?v=32")!important;
+  background-size:cover!important;
+  background-position:center 48%!important;
+}
+#view-stories.ps-stories-home .story-row[data-story="kindword"] .story-thumb{
+  background-image:
+    linear-gradient(180deg,rgba(2,18,30,.02) 0%,rgba(2,18,30,.12) 65%,rgba(2,18,30,.28) 100%),
+    url("/kids/assets/story-wow/v32-story-kindword.jpg?v=32")!important;
+  background-size:cover!important;
+  background-position:center 48%!important;
+}
+#view-stories.ps-stories-home .story-row[data-story] .story-thumb::before,
+#view-stories.ps-stories-home .story-row[data-story] .story-thumb::after{
+  display:none!important;
+}
