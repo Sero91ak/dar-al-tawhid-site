@@ -930,7 +930,8 @@ let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pen
 let studioMode="production",freeVoiceAudioUrl="",freeVoiceProgressTimer=null;
 let freeVoiceLearningResults=[],freeVoiceLearningCandidate=null,freeVoiceLearningPreviewId="",freeVoiceLearningPreviewUrl="";
 let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null;
-let learnedCanonicals=new Set(),learnedTerms=new Set();
+let learnedCanonicals=new Set(),learnedTerms=new Set(),confirmedAudioLocks=new Set();
+let manualLearningTerm="",learningVariant=0;
 const $=s=>document.querySelector(s);
 
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
@@ -1086,17 +1087,27 @@ function renderAnalysis(){
     const k=r.canonical||r.string_to_replace;
     if(!seen.has(k)){seen.add(k);unique.push(r)}
   }
+  if(manualLearningTerm){
+    const m=manualLearningTerm.toLocaleLowerCase("de-DE");
+    const exists=unique.some(r=>String(r.string_to_replace||r.canonical||"").toLocaleLowerCase("de-DE")===m);
+    if(!exists)unique.push({canonical:manualLearningTerm,string_to_replace:manualLearningTerm,voice_lock:"MANUAL"});
+  }
   $("#terms").textContent=unique.length;
-  const lc=unique.filter(r=>r.voice_lock==="MASTER"||LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace)).length;
+  const isDone=r=>{
+    const canonical=String(r.canonical||"");
+    const term=String(r.string_to_replace||canonical);
+    const lockKey=String(r.audio_lock_key||r.audioLockKey||"");
+    return learnedCanonicals.has(canonical)||learnedTerms.has(term)||(lockKey&&confirmedAudioLocks.has(lockKey));
+  };
+  const lc=unique.filter(isDone).length;
   $("#locked").textContent=lc;
   $("#termList").innerHTML=unique.length
     ?unique.map(r=>{
-      const master=r.voice_lock==="MASTER";
-      const persisted=learnedCanonicals.has(String(r.canonical||""))||learnedTerms.has(String(r.string_to_replace||""));
-      const l=master||persisted||LOCKED.has(r.canonical)||LOCKED.has(r.string_to_replace);
-      const label=(master||persisted)?"MASTER":(l?"LOCKED":r.voice_lock==="REVIEW"?"REVIEW":"VERIFIED");
+      const done=isDone(r);
       const term=String(r.string_to_replace||r.canonical||"");
-      return '<button type="button" class="term clickable '+(l?'locked':'verified')+'" data-learning-term="'+esc(term)+'" title="Aussprache prüfen / korrigieren">'+esc(r.canonical||r.string_to_replace)+' · '+label+'</button>';
+      const source=r.voice_lock==="MANUAL"?"MANUELL":r.voice_lock==="MASTER"?"MASTER":r.voice_lock==="REVIEW"?"REVIEW":"PRÜFEN";
+      const label=done?"OK":source+" · OFFEN";
+      return '<button type="button" class="term clickable '+(done?'done':'open')+'" data-learning-term="'+esc(term)+'" title="'+(done?'Bestätigt und dauerhaft gelernt':'Noch anhören und bestätigen')+'">'+esc(r.canonical||r.string_to_replace)+' · '+label+'</button>';
     }).join("")
     :'<span class="term">Keine Bibliotheksbegriffe erkannt</span>';
   $("#qaLocked").textContent=lc?"Audio-QA erforderlich":"keine";
@@ -1165,7 +1176,8 @@ function renderLearningState(d={}){
   const synced=d.onlineSyncedAt?(" · online "+String(d.onlineSyncedAt).replace("T"," ").slice(0,16)):"";
   learnedCanonicals=new Set(Array.isArray(d.learnedCanonicals)?d.learnedCanonicals.map(String):[]);
   learnedTerms=new Set(Array.isArray(d.learnedTerms)?d.learnedTerms.map(String):[]);
-  $("#learnState").textContent=learned+" dauerhaft gelernt · lokal gesichert + Backup · "+master+" Master-Einträge ("+
+  confirmedAudioLocks=new Set(Array.isArray(d.confirmedAudioLocks)?d.confirmedAudioLocks.map(String):[]);
+  $("#learnState").textContent=learned+" dauerhaft gelernt · "+confirmedAudioLocks.size+" LOCKED Audio · lokal gesichert + Backup · "+master+" Master-Einträge ("+
     prophets+" Propheten · "+sahaba+" Ṣaḥābah · "+sahabiyyat+" Ṣaḥābiyyāt) · "+online+" Online-Regeln"+synced;
   if($("#text")?.value)renderAnalysis();
 }
