@@ -241,3 +241,37 @@
 .ps-mh-episode,.ps-mh-more-card{border-color:rgba(71,178,209,.42)!important;box-shadow:0 8px 20px rgba(0,0,0,.22)!important}
 .ps-mh-time{box-shadow:inset 0 1px rgba(255,255,255,.05),0 2px 7px rgba(0,0,0,.27)!important}
 @media(max-width:600px){.ps-mh-value{clip-path:polygon(50% 0,81% 7%,97% 27%,100% 63%,87% 89%,50% 100%,13% 89%,0 63%,3% 27%,19% 7%)!important}.ps-mh-ornament span::before{inset:2px!important}}
+
+
+/* REFERENCE_RAIL_DOCK_V45 — measured mobile rail and dock geometry */
+@media(max-width:600px){
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList){
+    width:calc(100% + 6px)!important;
+    margin-left:-3px!important;
+    margin-right:-3px!important;
+    gap:7px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row{
+    flex-basis:31.7vw!important;
+  }
+
+  .bottom-nav .nav-btn,
+  .ps-mh-bottom-nav button{
+    width:calc(100% - 10px)!important;
+    justify-self:center!important;
+    min-height:40px!important;
+    height:40px!important;
+    border-radius:11px!important;
+    gap:2px!important;
+  }
+  .bottom-nav .nav-btn .ico,
+  .ps-mh-nav-icon{
+    width:20px!important;
+    height:20px!important;
+  }
+  .bottom-nav .nav-btn .lab,
+  .ps-mh-bottom-nav button>span:last-child{
+    font-size:10px!important;
+    line-height:1!important;
+  }
+}
