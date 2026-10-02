@@ -20,7 +20,13 @@
   ];
 
   function isHome(){
-    return !!(document.body&&document.body.classList.contains("is-home-route"));
+    try{
+      if(document.body&&document.body.classList.contains("is-home-route"))return true;
+      if(window.currentRoute&&String(window.currentRoute.view||"")==="home")return true;
+      var h=decodeURIComponent(String(location.hash||"")).replace(/^#/,"").split("?")[0];
+      if((!h||h==="home")&&document.querySelector("#appView .home-v380-shell"))return true;
+    }catch(e){}
+    return false;
   }
 
   function navTo(nav){
@@ -76,7 +82,7 @@
     var hero=header&&header.querySelector(".hero-text");
     if(!body||!top||!header)return;
 
-    body.classList.add("dar-knowledge-home-v1183");
+    body.classList.add("is-home-route","dar-knowledge-home-v1183");
 
     var stage=header.querySelector("#dklKnowledgeStage");
     if(!stage){
