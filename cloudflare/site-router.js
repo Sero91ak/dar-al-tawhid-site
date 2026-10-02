@@ -687,7 +687,33 @@ export default {
           target.pathname = "/kids/start";
           target.searchParams.delete("darsw");
           target.searchParams.set("kv", KIDS_BUILD);
-          return Response.redirect(target.toString(), 307);
+          return new Response(null, {
+            status: 307,
+            headers: {
+              "Location": target.toString(),
+              "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+              "CDN-Cache-Control": "no-store",
+              "Cloudflare-CDN-Cache-Control": "no-store",
+              "X-Kids-Build": KIDS_BUILD
+            }
+          });
+        }
+        if ((url.pathname === "/kids/start" || url.pathname === "/kids/start/") &&
+            String(url.searchParams.get("kv") || "") !== KIDS_BUILD) {
+          const target = new URL(request.url);
+          target.pathname = "/kids/start";
+          target.searchParams.delete("darsw");
+          target.searchParams.set("kv", KIDS_BUILD);
+          return new Response(null, {
+            status: 307,
+            headers: {
+              "Location": target.toString(),
+              "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+              "CDN-Cache-Control": "no-store",
+              "Cloudflare-CDN-Cache-Control": "no-store",
+              "X-Kids-Build": KIDS_BUILD
+            }
+          });
         }
         if (url.pathname === "/kids/version.json" || url.pathname === "/kids/version.json/") {
           const headers = kidsHeaders(new Response(""));
