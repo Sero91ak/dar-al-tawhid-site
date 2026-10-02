@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 "use strict";
+// V1.06 redeploy trigger after explicit rollback scope unlock
 
 const fs = require("fs");
 const path = require("path");
