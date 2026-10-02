@@ -123,7 +123,7 @@ input{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line
 .learning-result{width:100%;text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.026);border-radius:9px;padding:9px 10px;cursor:pointer}
 .learning-result.active{border-color:rgba(205,176,113,.55);background:rgba(205,176,113,.07)}
 .learning-result b{display:block;font-size:12px}.learning-result small{display:block;color:var(--muted);font-size:9px;margin-top:3px;line-height:1.35}
-.learning-arabic{font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:18px!important;text-align:right;direction:rtl}
+.learning-arabic{font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:18px!important;text-align:start;unicode-bidi:plaintext}
 .learning-status{font-size:10px;color:var(--muted);line-height:1.45;margin-top:7px}.learning-word-picker{display:flex;flex-wrap:wrap;gap:5px;max-height:170px;overflow:auto;padding:7px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.02);margin:7px 0 10px}.learning-word{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#cbd6dc;border-radius:999px;padding:5px 7px;font:inherit;font-size:9px;cursor:pointer}.learning-word.pending{border-color:rgba(234,104,104,.52);color:#ffb1b1;background:rgba(150,42,42,.13)}.learning-word.done{border-color:rgba(81,199,143,.58);color:#a8ebc9;background:rgba(42,144,96,.14)}
 .learning-player{width:100%;margin:7px 0;height:36px}
 .footer{padding:13px 4px 4px;color:#6f8290;font-size:10px;text-align:center}
@@ -2332,6 +2332,7 @@ setInterval(()=>checkHealth({quiet:true}),5000);
     const live=completedAudio.get(it.id);
     const liveAges=live&&live.ages?Object.keys(live.ages):[];
     const readyAges=AGES.filter(a=>scripts[a]&&audio[a]&&audio[a].url);
+    if(busy.get(it.id)==="generate")return {cls:"busy",text:"wird erzeugt …"};
     if(busy.get(it.id)==="push")return {cls:"busy",text:"lädt …"};
     if(busy.get(it.id)==="error")return {cls:"bad",text:"fehlgeschlagen"};
     if(liveAges.length)return {cls:"good",text:"Audio fertig · anhörbar"};
@@ -2353,12 +2354,17 @@ setInterval(()=>checkHealth({quiet:true}),5000);
         '<button class="prophet-pick-name" type="button" data-ps-pick="'+it.id+'">'+label(it)+'</button>'+
         '<span class="prophet-pick-status '+st.cls+'" data-ps-status="'+it.id+'">'+st.text+'</span>'+
         (playable?'<button class="btn quiet prophet-pick-listen" type="button" data-ps-listen="'+it.id+'">▶ Anhören</button>':'<span></span>')+
+        '<button class="btn secondary prophet-pick-generate" type="button" data-ps-generate="'+it.id+'" '+(busy.get(it.id)==="generate"?"disabled":"")+'>'+(busy.get(it.id)==="generate"?"Läuft":"Erzeugen")+'</button>'+
         '<button class="btn primary prophet-pick-push" type="button" data-ps-push="'+it.id+'" '+(pushing?"disabled":"")+'>'+(pushing?"Lädt":"Übernehmen")+'</button>'+
       '</div>';
     }).join("");
     list.querySelectorAll("[data-ps-pick]").forEach(el=>el.addEventListener("click",()=>{
       sel.value=el.dataset.psPick;
       prepareSlot();
+    }));
+    list.querySelectorAll("[data-ps-generate]").forEach(btn=>btn.addEventListener("click",e=>{
+      e.stopPropagation();
+      generateOne(btn.dataset.psGenerate);
     }));
     list.querySelectorAll("[data-ps-push]").forEach(btn=>btn.addEventListener("click",e=>{
       e.stopPropagation();
@@ -2403,6 +2409,25 @@ setInterval(()=>checkHealth({quiet:true}),5000);
     if(ready)ready.textContent=label(it)+" · Text ist fertig vorbereitet. Jetzt nur Audio erzeugen, vollständig anhören und Aussprache bestätigen.";
     ta.dispatchEvent(new Event("input"));
     ta.focus();
+  }
+  async function generateOne(id){
+    const it=pack.find(x=>x.id===id);
+    if(!it||busy.get(id)==="generate")return;
+    busy.set(id,"generate");
+    sel.value=id;
+    prepareSlot();
+    fillList();
+    setMessage(label(it)+" wird einzeln erzeugt. Ein laufender autonomer Auftrag bleibt bestehen; der Einzelauftrag bekommt nach dem aktuellen sicheren Abschnitt Vorrang.","warn");
+    try{
+      await new Promise(resolve=>setTimeout(resolve,80));
+      await generate();
+      if(lastGeneratedText===ta.value.trim()&&lastAudio){
+        setMessage(label(it)+" · Einzel-Audio ist fertig. Jetzt anhören und Aussprache korrigieren/bestätigen.","good");
+      }
+    }finally{
+      busy.delete(id);
+      fillList();
+    }
   }
   function audioApiUrl(path){
     const base=String(LOCAL_API||"").replace(/\/$/,"");
