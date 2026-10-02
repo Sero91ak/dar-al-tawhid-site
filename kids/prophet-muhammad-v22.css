@@ -3031,3 +3031,606 @@ html[data-view="stories"]{--r41-story-safe:max(58px,env(safe-area-inset-top,0px)
     box-shadow:0 0 13px rgba(242,203,108,.10),inset 0 1px rgba(255,255,255,.04)!important;
   }
 }
+
+
+/* CHILD_FRIENDLY_SPACING_V46
+   User correction: preserve the premium reference styling, but stop compressing
+   controls/text/cards. Mobile targets are now larger, readable and easy to tap. */
+@media(max-width:600px){
+  /* STORIES HOME — more breathing room */
+  #view-stories.ps-stories-home{
+    padding-bottom:132px!important;
+  }
+  #view-stories.ps-stories-home .page-head{
+    height:auto!important;
+    min-height:178px!important;
+    max-height:none!important;
+    margin:-4px -16px 14px!important;
+    padding:28px 22px 24px!important;
+    justify-content:flex-start!important;
+  }
+  #view-stories.ps-stories-home .page-head .kicker{
+    min-height:36px!important;
+    padding:0 14px!important;
+    gap:9px!important;
+    font-size:11px!important;
+    letter-spacing:.11em!important;
+  }
+  #view-stories.ps-stories-home .page-head .kicker::before{
+    width:20px!important;height:18px!important;
+  }
+  #view-stories.ps-stories-home .page-head h2{
+    margin-top:15px!important;
+    max-width:88%!important;
+    font-size:48px!important;
+    line-height:.92!important;
+  }
+  #view-stories.ps-stories-home .page-head h2::after{
+    top:calc(100% + 12px)!important;
+    right:-8%!important;
+    font-size:9px!important;
+  }
+  #view-stories.ps-stories-home .page-head p{
+    margin-top:33px!important;
+    max-width:84%!important;
+    font-size:15px!important;
+    line-height:1.35!important;
+  }
+  #view-stories.ps-stories-home .page-head::after{
+    bottom:8px!important;
+  }
+
+  #view-stories.ps-stories-home .ps-muhammad-home{
+    width:calc(100% + 8px)!important;
+    height:auto!important;
+    min-height:286px!important;
+    max-height:none!important;
+    margin:0 -4px 18px!important;
+    border-radius:29px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-art{
+    background-image:url("/kids/assets/story-wow/v30-muhammad-home.jpg?v=30")!important;
+    background-position:61% 50%!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-copy{
+    left:23px!important;right:8%!important;top:22px!important;bottom:22px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-kicker{
+    min-height:36px!important;
+    padding:0 14px!important;
+    font-size:10.5px!important;
+    letter-spacing:.11em!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-copy strong{
+    margin-top:15px!important;
+    max-width:58%!important;
+    font-size:39px!important;
+    line-height:.9!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-ar{
+    left:51%!important;
+    top:37%!important;
+    font-size:22px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-sub{
+    margin-top:12px!important;
+    max-width:70%!important;
+    font-size:14px!important;
+    line-height:1.28!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-cta{
+    min-height:52px!important;
+    padding:0 20px!important;
+    gap:16px!important;
+    font-size:14px!important;
+    border-radius:999px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-cta b{
+    font-size:24px!important;
+  }
+
+  #view-stories.ps-stories-home .ps-prophet-entry{
+    width:calc(100% + 8px)!important;
+    height:auto!important;
+    min-height:236px!important;
+    max-height:none!important;
+    margin:0 -4px 18px!important;
+    border-radius:28px!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy{
+    left:23px!important;right:8%!important;top:23px!important;bottom:22px!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-kicker{
+    font-size:10px!important;
+    line-height:1.15!important;
+    letter-spacing:.13em!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{
+    margin-top:14px!important;
+    max-width:82%!important;
+    font-size:36px!important;
+    line-height:.96!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-sub{
+    margin-top:10px!important;
+    font-size:14px!important;
+    line-height:1.25!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-cta{
+    min-height:50px!important;
+    padding:0 19px!important;
+    gap:15px!important;
+    font-size:13.5px!important;
+  }
+  #view-stories.ps-stories-home .ps-entry-cta b{
+    font-size:23px!important;
+  }
+
+  #view-stories.ps-stories-home .story-feature{
+    width:calc(100% + 8px)!important;
+    margin:0 -4px 20px!important;
+    border-radius:28px!important;
+  }
+  #view-stories.ps-stories-home .story-scene{
+    height:250px!important;
+    min-height:250px!important;
+    max-height:none!important;
+  }
+  #view-stories.ps-stories-home .story-copy{
+    height:auto!important;
+    min-height:132px!important;
+    max-height:none!important;
+    padding:17px 22px 18px!important;
+  }
+  #view-stories.ps-stories-home .story-copy .meta{
+    font-size:10.5px!important;
+    line-height:1.2!important;
+    letter-spacing:.09em!important;
+  }
+  #view-stories.ps-stories-home .story-copy .meta::before{
+    width:20px!important;height:18px!important;
+  }
+  #view-stories.ps-stories-home .story-copy h3{
+    margin:9px 72px 5px 0!important;
+    font-size:31px!important;
+    line-height:1!important;
+  }
+  #view-stories.ps-stories-home .story-copy p{
+    margin-right:72px!important;
+    font-size:13.5px!important;
+    line-height:1.35!important;
+    white-space:normal!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+  }
+  #view-stories.ps-stories-home .story-copy .story-go{
+    right:22px!important;
+    width:56px!important;height:56px!important;
+    font-size:31px!important;
+  }
+
+  #view-stories.ps-stories-home .story-more-title{
+    min-height:56px!important;
+    margin:8px 0 8px!important;
+    padding:0 2px!important;
+  }
+  #view-stories.ps-stories-home .r22-section-label{
+    gap:10px!important;
+  }
+  #view-stories.ps-stories-home .r22-section-label strong{
+    font-size:28px!important;
+    line-height:1!important;
+  }
+  #view-stories.ps-stories-home .r22-book{
+    width:29px!important;height:25px!important;
+  }
+  #view-stories.ps-stories-home .r22-all{
+    min-height:48px!important;
+    padding:0 4px!important;
+    font-size:12px!important;
+  }
+  #view-stories.ps-stories-home .r22-all b{
+    margin-left:6px!important;
+    font-size:20px!important;
+  }
+
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList){
+    gap:12px!important;
+    padding:4px 0 18px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row{
+    flex:0 0 72vw!important;
+    width:72vw!important;
+    height:auto!important;
+    min-height:224px!important;
+    border-radius:24px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-thumb{
+    height:142px!important;
+    min-height:142px!important;
+    max-height:none!important;
+    background-size:cover!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row-copy{
+    height:auto!important;
+    min-height:82px!important;
+    padding:11px 13px 13px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row h3{
+    font-size:20px!important;
+    line-height:1.05!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row .meta,
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row .time{
+    font-size:10.5px!important;
+    line-height:1.2!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList).r22-expanded{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList).r22-expanded .story-row{
+    width:100%!important;
+    flex-basis:auto!important;
+  }
+
+  /* MUḤAMMAD DETAIL — large readable blocks and 48px+ hit targets */
+  .ps-modal.ps-muhammad-open .ps-scroll{
+    padding-bottom:104px!important;
+  }
+  .ps-modal.ps-muhammad-open .ps-close{
+    width:50px!important;height:50px!important;
+    font-size:31px!important;
+  }
+  .ps-mh-hero{
+    height:auto!important;
+    min-height:354px!important;
+    max-height:none!important;
+  }
+  .ps-mh-hero-copy{
+    left:78px!important;right:7%!important;top:50px!important;bottom:28px!important;
+  }
+  .ps-mh-special-label{
+    min-height:36px!important;
+    padding:0 14px!important;
+    font-size:10.5px!important;
+  }
+  .ps-mh-title-line{
+    gap:11px!important;
+    margin-top:12px!important;
+  }
+  .ps-mh-hero h2{
+    font-size:42px!important;
+    line-height:.9!important;
+  }
+  .ps-mh-ar{
+    font-size:25px!important;
+    margin-bottom:4px!important;
+  }
+  .ps-mh-tagline{
+    margin-top:10px!important;
+    font-size:15px!important;
+    line-height:1.25!important;
+  }
+  .ps-mh-intro{
+    max-width:72%!important;
+    margin-top:10px!important;
+    font-size:12.5px!important;
+    line-height:1.45!important;
+  }
+
+  .ps-mh-ornament{
+    height:34px!important;
+    min-height:34px!important;
+    max-height:none!important;
+    grid-template-columns:1fr 48px 1fr!important;
+  }
+  .ps-mh-ornament span{
+    width:18px!important;height:18px!important;
+  }
+
+  .ps-mh-panel{
+    height:auto!important;
+    min-height:205px!important;
+    max-height:none!important;
+  }
+  .ps-mh-way,.ps-mh-message{
+    height:auto!important;
+    min-height:205px!important;
+    max-height:none!important;
+  }
+  .ps-mh-panel-copy{
+    left:24px!important;right:8%!important;
+  }
+  .ps-mh-panel-title{
+    gap:11px!important;
+  }
+  .ps-mh-line-icon{
+    width:31px!important;height:31px!important;
+  }
+  .ps-mh-panel h3{
+    font-size:30px!important;
+  }
+  .ps-mh-panel p{
+    max-width:59%!important;
+    margin-top:10px!important;
+    font-size:12.5px!important;
+    line-height:1.4!important;
+  }
+  .ps-mh-discover{
+    min-height:50px!important;
+    margin-top:13px!important;
+    padding:0 19px!important;
+    font-size:13px!important;
+  }
+
+  .ps-mh-values{
+    height:auto!important;
+    min-height:330px!important;
+    max-height:none!important;
+    padding:22px 22px 24px!important;
+  }
+  .ps-mh-values-head{
+    max-width:76%!important;
+  }
+  .ps-mh-values-head .ps-mh-panel-title h3{
+    font-size:29px!important;
+  }
+  .ps-mh-values-head>p{
+    margin-top:9px!important;
+    font-size:12.5px!important;
+    line-height:1.4!important;
+  }
+  .ps-mh-value-grid{
+    position:static!important;
+    width:100%!important;
+    margin:20px 0 0!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:12px!important;
+  }
+  .ps-mh-value{
+    height:auto!important;
+    min-height:108px!important;
+    max-height:none!important;
+    padding:13px 8px 12px!important;
+  }
+  .ps-mh-value b{
+    width:36px!important;height:36px!important;
+  }
+  .ps-mh-value strong{
+    margin-top:8px!important;
+    font-size:13px!important;
+    line-height:1.1!important;
+  }
+
+  .ps-mh-episodes{
+    padding:18px 0 12px!important;
+  }
+  .ps-mh-more{
+    padding:12px 0 18px!important;
+  }
+  .ps-mh-section-head{
+    padding:0 22px 12px!important;
+    gap:12px!important;
+    align-items:center!important;
+  }
+  .ps-mh-section-title{
+    gap:10px!important;
+  }
+  .ps-mh-section-title h3{
+    font-size:27px!important;
+  }
+  .ps-mh-section-head p{
+    margin-top:6px!important;
+    font-size:11.5px!important;
+    line-height:1.35!important;
+  }
+  .ps-mh-all{
+    min-height:48px!important;
+    padding:0 3px!important;
+    font-size:12px!important;
+  }
+  .ps-mh-all b{
+    font-size:20px!important;
+    margin-left:6px!important;
+  }
+  .ps-mh-episode-rail,.ps-mh-more-rail{
+    gap:13px!important;
+    padding:0 20px 12px!important;
+  }
+  .ps-mh-episode{
+    flex:0 0 72vw!important;
+    min-width:0!important;
+    min-height:0!important;
+    border-radius:20px!important;
+  }
+  .ps-mh-episode-art{
+    height:158px!important;
+    min-height:158px!important;
+    max-height:none!important;
+  }
+  .ps-mh-time{
+    left:10px!important;bottom:9px!important;
+    min-height:30px!important;
+    padding:0 10px!important;
+    font-size:10px!important;
+  }
+  .ps-mh-episode-copy{
+    height:auto!important;
+    min-height:88px!important;
+    max-height:none!important;
+    padding:12px 13px 13px!important;
+  }
+  .ps-mh-episode-copy strong{
+    font-size:18px!important;
+    line-height:1.08!important;
+  }
+  .ps-mh-episode-copy small{
+    margin-top:6px!important;
+    font-size:11.5px!important;
+    line-height:1.28!important;
+  }
+  .ps-mh-episodes.expanded .ps-mh-episode-rail{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+    overflow:visible!important;
+  }
+  .ps-mh-episodes.expanded .ps-mh-episode{
+    width:100%!important;
+    flex-basis:auto!important;
+  }
+  .ps-mh-more-rail .ps-mh-more-card{
+    flex:0 0 70vw!important;
+    min-width:0!important;
+    min-height:214px!important;
+    border-radius:19px!important;
+  }
+  .ps-mh-more-art{
+    height:142px!important;
+  }
+  .ps-mh-more-copy{
+    min-height:72px!important;
+    padding:10px 12px!important;
+  }
+  .ps-mh-more-copy strong{
+    font-size:17px!important;
+  }
+  .ps-mh-more-copy small{
+    margin-top:5px!important;
+    font-size:11px!important;
+  }
+  .ps-mh-episode-detail{
+    margin:14px 20px 0!important;
+    padding:16px!important;
+    border-radius:18px!important;
+  }
+  .ps-mh-episode-detail span{
+    font-size:10px!important;
+  }
+  .ps-mh-episode-detail h4{
+    margin:7px 0!important;
+    font-size:22px!important;
+  }
+  .ps-mh-episode-detail p{
+    font-size:13px!important;
+    line-height:1.48!important;
+  }
+  .ps-mh-episode-detail strong{
+    margin-top:8px!important;
+    font-size:11px!important;
+  }
+  .ps-mh-full-cta{
+    width:100%!important;
+    min-height:52px!important;
+    margin-top:14px!important;
+    padding:0 18px!important;
+    font-size:13px!important;
+  }
+
+  /* fixed bottom navs: child-sized controls */
+  .bottom-nav,
+  .ps-mh-bottom-nav{
+    min-height:76px!important;
+    height:auto!important;
+    padding:8px 8px calc(8px + env(safe-area-inset-bottom,0px))!important;
+  }
+  .bottom-nav{
+    width:min(calc(100% - 12px),780px)!important;
+    bottom:0!important;
+    border-radius:27px 27px 0 0!important;
+  }
+  .ps-mh-bottom-nav{
+    width:min(calc(100% - 12px),980px)!important;
+    bottom:0!important;
+    border-radius:27px 27px 0 0!important;
+  }
+  .nav-btn,
+  .ps-mh-bottom-nav button{
+    min-height:58px!important;
+    height:58px!important;
+    padding:5px 3px!important;
+    gap:4px!important;
+    border-radius:19px!important;
+  }
+  .nav-btn .ico,
+  .ps-mh-nav-icon{
+    width:28px!important;height:28px!important;
+  }
+  .nav-btn .lab,
+  .ps-mh-bottom-nav button>span:last-child{
+    font-size:11px!important;
+    line-height:1!important;
+  }
+  .nav-btn.active,
+  .ps-mh-bottom-nav button.active{
+    border-width:1px!important;
+  }
+}
+
+@media(max-width:390px){
+  #view-stories.ps-stories-home .page-head{
+    min-height:170px!important;
+    padding-left:19px!important;padding-right:19px!important;
+  }
+  #view-stories.ps-stories-home .page-head h2{
+    font-size:44px!important;
+  }
+  #view-stories.ps-stories-home .ps-muhammad-home{
+    min-height:272px!important;
+  }
+  #view-stories.ps-stories-home .ps-mh-home-copy strong{
+    font-size:36px!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry{
+    min-height:226px!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{
+    font-size:33px!important;
+  }
+  #view-stories.ps-stories-home .story-scene{
+    height:226px!important;
+    min-height:226px!important;
+  }
+  .ps-mh-hero{
+    min-height:336px!important;
+  }
+  .ps-mh-hero h2{
+    font-size:39px!important;
+  }
+  .ps-mh-panel{
+    min-height:194px!important;
+  }
+  .ps-mh-values{
+    min-height:314px!important;
+  }
+  .ps-mh-episode{
+    flex-basis:76vw!important;
+  }
+  .ps-mh-more-rail .ps-mh-more-card{
+    flex-basis:74vw!important;
+  }
+}
+
+/* tablet keeps the same child-friendly hierarchy without becoming oversized */
+@media(min-width:601px) and (max-width:900px){
+  #view-stories.ps-stories-home .page-head{min-height:270px!important}
+  #view-stories.ps-stories-home .ps-muhammad-home{min-height:330px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry{min-height:275px!important}
+  #view-stories.ps-stories-home .story-scene{height:320px!important}
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row{flex-basis:46%!important}
+  .ps-mh-hero{min-height:430px!important}
+  .ps-mh-panel{min-height:245px!important}
+  .ps-mh-values{min-height:280px!important}
+  .ps-mh-value-grid{width:78%!important}
+  .ps-mh-episode{flex-basis:46%!important}
+  .ps-mh-more-card{flex-basis:45%!important}
+}
+
+/* clear keyboard/touch focus for children and accessibility */
+#view-stories button:focus-visible,
+.ps-muhammad-special button:focus-visible{
+  outline:3px solid #ffe59a!important;
+  outline-offset:3px!important;
+}
