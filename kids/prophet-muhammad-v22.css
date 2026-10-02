@@ -363,3 +363,95 @@
   .ps-mh-episode-art{height:58px!important}
   .ps-mh-episode-copy{height:40px!important}
 }
+
+
+/* v25 ornament + icon fidelity */
+.ps-muhammad-special button{
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+}
+.ps-mh-ornament{
+  position:relative!important;
+  display:block!important;
+  overflow:visible!important;
+}
+.ps-mh-ornament::before,
+.ps-mh-ornament::after{
+  content:""!important;
+  position:absolute!important;
+  top:8px!important;
+  width:calc(50% - 16px)!important;
+  height:11px!important;
+  border-top:1px solid rgba(242,203,111,.93)!important;
+  background:none!important;
+  opacity:.96!important;
+}
+.ps-mh-ornament::before{
+  left:0!important;
+  border-radius:0 100% 0 0!important;
+  transform:skewY(1deg)!important;
+}
+.ps-mh-ornament::after{
+  right:0!important;
+  border-radius:100% 0 0 0!important;
+  transform:skewY(-1deg)!important;
+}
+.ps-mh-ornament span{
+  position:absolute!important;
+  z-index:2!important;
+  left:50%!important;
+  top:2px!important;
+  margin-left:-6px!important;
+}
+.ps-mh-way::after,
+.ps-mh-message::after,
+.ps-mh-values::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:5!important;
+  left:-4%!important;
+  right:-4%!important;
+  bottom:-7px!important;
+  height:13px!important;
+  border-top:1px solid rgba(93,199,213,.34)!important;
+  border-radius:50%!important;
+  pointer-events:none!important;
+}
+.ps-mh-way::after{
+  border-top-color:rgba(238,199,104,.42)!important;
+}
+.ps-mh-message::after{
+  border-top-color:rgba(75,184,205,.38)!important;
+}
+.ps-mh-values::after{
+  border-top-color:rgba(238,199,104,.28)!important;
+}
+
+/* Reference: Geschichten uses headphones, Qurʾān uses an open book. */
+.ps-mh-nav-icon-stories{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 13a8 8 0 0 1 16 0'/%3E%3Cpath d='M4 13v5a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2'/%3E%3Cpath d='M20 13v5a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E") center/contain no-repeat!important;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 13a8 8 0 0 1 16 0'/%3E%3Cpath d='M4 13v5a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2'/%3E%3Cpath d='M20 13v5a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2'/%3E%3C/svg%3E") center/contain no-repeat!important;
+}
+.ps-mh-nav-icon-quran{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linejoin='round'%3E%3Cpath d='M3 5c3-1 6-1 9 2v14c-3-3-6-3-9-2z'/%3E%3Cpath d='M21 5c-3-1-6-1-9 2v14c3-3 6-3 9-2z'/%3E%3C/svg%3E") center/contain no-repeat!important;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linejoin='round'%3E%3Cpath d='M3 5c3-1 6-1 9 2v14c-3-3-6-3-9-2z'/%3E%3Cpath d='M21 5c-3-1-6-1-9 2v14c3-3 6-3 9-2z'/%3E%3C/svg%3E") center/contain no-repeat!important;
+}
+.ps-mh-bottom-nav button.active .ps-mh-nav-icon{
+  filter:drop-shadow(0 0 6px rgba(246,207,100,.30))!important;
+}
+.ps-mh-bottom-nav button:active,
+.ps-mh-episode:active,
+.ps-mh-more-card:active,
+.ps-mh-all:active{
+  transform:scale(.985)!important;
+  filter:brightness(1.08)!important;
+}
+@media(prefers-reduced-motion:reduce){
+  .ps-muhammad-special *,
+  .ps-muhammad-special *::before,
+  .ps-muhammad-special *::after{
+    scroll-behavior:auto!important;
+    transition:none!important;
+    animation:none!important;
+  }
+}
