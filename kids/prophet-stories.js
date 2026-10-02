@@ -128,13 +128,15 @@ function prepareStoriesHome(view){
   const pageHead=view.querySelector(".page-head");if(pageHead)pageHead.hidden=false;
   if(!$("#psMuhammadHomeEntry")){
     const special=document.createElement("button");special.id="psMuhammadHomeEntry";special.className="ps-muhammad-home";special.type="button";
-    special.setAttribute("aria-label","Besonderen Bereich über Prophet Muḥammad öffnen");\n    special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★ BESONDERER BEREICH · ḪĀTAM AN-NABIYYĪN</span><strong>Prophet Muḥammad ﷺ</strong><span class="ps-mh-home-sub">Sein Leben. Sein Weg. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
+    special.setAttribute("aria-label","Besonderen Bereich über Prophet Muḥammad öffnen");
+    special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★ BESONDERER BEREICH · ḪĀTAM AN-NABIYYĪN</span><strong>Prophet Muḥammad ﷺ</strong><span class="ps-mh-home-sub">Sein Leben. Sein Weg. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
     if(pageHead)pageHead.insertAdjacentElement("afterend",special);else view.insertBefore(special,view.firstChild);
     special.addEventListener("click",()=>openStory("muhammad"));
   }
   if(!$("#psProphetEntry")){
     const entry=document.createElement("button");entry.id="psProphetEntry";entry.className="ps-prophet-entry";entry.type="button";
-    entry.setAttribute("aria-label","Prophetengeschichten öffnen");\n    entry.innerHTML='<span class="ps-entry-shade" aria-hidden="true"></span><span class="ps-entry-copy"><span class="ps-entry-kicker">EIGENER BEREICH · QURʾĀN GEPRÜFT</span><strong>Prophetengeschichten</strong><span class="ps-entry-sub">25 Geschichten · lesen &amp; hören</span><span class="ps-entry-cta">Jetzt entdecken <b aria-hidden="true">→</b></span></span>';
+    entry.setAttribute("aria-label","Prophetengeschichten öffnen");
+    entry.innerHTML='<span class="ps-entry-shade" aria-hidden="true"></span><span class="ps-entry-copy"><span class="ps-entry-kicker">EIGENER BEREICH · QURʾĀN GEPRÜFT</span><strong>Prophetengeschichten</strong><span class="ps-entry-sub">25 Geschichten · lesen &amp; hören</span><span class="ps-entry-cta">Jetzt entdecken <b aria-hidden="true">→</b></span></span>';
     const special=$("#psMuhammadHomeEntry");if(special)special.insertAdjacentElement("afterend",entry);else if(pageHead)pageHead.insertAdjacentElement("afterend",entry);else view.insertBefore(entry,view.firstChild);
     entry.addEventListener("click",openLibrary);
   }
