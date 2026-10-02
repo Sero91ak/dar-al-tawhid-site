@@ -53,6 +53,8 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 
 | `q/35` | ʿĪsā ibn Maryam, Tawaffī, Rafʿ und Nuzūl | `Qurʾān; Prophet ﷺ; Ibn ʿAbbās; al-Ḥasan al-Baṣrī; aṭ-Ṭabarī; aṭ-Ṭaḥāwī; Ibn Baṭṭah; Abū ʿAmr ad-Dānī` | Ein Quellenlink bündelt alle Einzelbelege und trennt den echten Tafsīr-Ikhtilāf über tawaffī von der metaphorischen Ersatzdeutung. |
 
+| `q/36` | Miʿrāǧ, Ruʾyah und pauschaler Takfīr | `al-Qāḍī ʿIyāḍ; ʿĀʾišah; Ibn ʿAbbās; Ibn Ḥaǧar; Ibn Taymiyyah` | Körperlicher Miʿrāǧ als Mehrheitsposition; echter Ikhtilāf über die Ruʾyah; ʿĀʾišahs Wortlaut enthält keinen ausdrücklichen Takfīr. |
+
 ## Sonderbereiche
 
 - `q/_registry/` ist nur Verwaltung: Nummerierung, Vorlage und Registry.
