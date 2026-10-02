@@ -77,12 +77,6 @@ function buildText(item){
   return parts.join("\n\n").replace(/\s+\n/g,"\n").trim();
 }
 function words(text){return(String(text).match(/\S+/g)||[]).length}
-function symbolUrl(item){return "/kids/assets/prophet-symbols/"+encodeURIComponent(item.id)+".webp"}
-function setImageWithFallback(img,item){
-  if(!img||!item)return;
-  img.onerror=()=>{img.onerror=null;img.src=item.cover};
-  img.src=symbolUrl(item);
-}
 function audioMeta(item){return item&&item.audio&&item.audio[ageKey()]?item.audio[ageKey()]:null}
 function durationLabel(item,text){
   const m=audioMeta(item);
@@ -140,23 +134,6 @@ function ensureUi(){
   const section=document.createElement("section");
   section.id="prophetStoriesSection";section.className="ps-wrap";
   section.innerHTML=
-    '<div class="ps-library-hero">'+
-      '<div class="ps-hero-night" aria-hidden="true"></div>'+
-      '<div class="ps-library-hero-art" aria-hidden="true">'+
-        '<span class="ps-hero-symbol s-adam"><img src="/kids/assets/prophet-symbols/adam.webp" alt=""></span>'+
-        '<span class="ps-hero-symbol s-idris"><img src="/kids/assets/prophet-symbols/idris.webp" alt=""></span>'+
-        '<span class="ps-hero-symbol s-nuh"><img src="/kids/assets/prophet-symbols/nuh.webp" alt=""></span>'+
-        '<span class="ps-hero-symbol s-hud"><img src="/kids/assets/prophet-symbols/hud.webp" alt=""></span>'+
-        '<span class="ps-hero-symbol s-salih"><img src="/kids/assets/prophet-symbols/salih.webp" alt=""></span>'+
-        '<span class="ps-hero-symbol s-ibrahim"><img src="/kids/assets/prophet-symbols/ibrahim.webp" alt=""></span>'+
-      '</div>'+
-      '<div class="ps-library-hero-copy">'+
-        '<div class="ps-kicker">DĀR AL TAWḤĪD KIDS</div>'+
-        '<h2><span>Geschichten</span><strong>der Propheten</strong></h2>'+
-        '<p>Wahre Geschichten. Große Lehren.<br>Für kleine Herzen.</p>'+
-        '<div class="ps-hero-stats"><span><strong id="psDoneCount">0</strong>/25 gehört</span><span id="psAgeHero">Alter 6–8</span></div>'+
-      '</div>'+
-    '</div>'+
     '<div class="ps-toolbar">'+
       '<div class="ps-modes" id="psModes">'+
         '<button class="ps-mode" data-ps-mode="both" type="button"><span class="ps-mode-icon ps-mode-icon-headphones" aria-hidden="true"></span>Lesen &amp; Hören</button>'+
