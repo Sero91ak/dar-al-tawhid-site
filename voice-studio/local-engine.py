@@ -5591,6 +5591,64 @@ def _resume_prophet_story_voice_pack_if_needed():
         print("[DĀR Voice] resume persistent prophet-story production",flush=True)
         start_prophet_story_voice_pack(resume=True)
 
+def _prophet_audio_asset_path(item_id:str,age:str):
+    item_id=str(item_id or "").strip()
+    age=str(age or "").strip()
+    if not re.fullmatch(r"[A-Za-z0-9_-]+",item_id):
+        return None
+    if age not in ("4-5","6-8","9-10"):
+        return None
+    rel=Path("kids/assets/prophet-story-audio")/item_id/(age+".m4a")
+    for root in (PROPHET_STORY_WORK,PROPHET_STORY_READY):
+        p=root/rel
+        if p.exists() and p.is_file() and p.stat().st_size>1024:
+            return p
+    try:
+        repo_path=ALPHABET_PUBLISH_REPO/rel
+        if repo_path.exists() and repo_path.is_file() and repo_path.stat().st_size>1024:
+            return repo_path
+    except Exception:
+        pass
+    return None
+
+def _prophet_completed_audio_snapshot():
+    cp=_prophet_checkpoint_load()
+    completed_jobs=dict(cp.get("completedJobs") or {})
+    items={}
+    for meta in completed_jobs.values():
+        if not isinstance(meta,dict):
+            continue
+        item_id=str(meta.get("itemId") or "").strip()
+        if not item_id:
+            continue
+        entry=items.setdefault(item_id,{
+            "id":item_id,
+            "name":str(meta.get("name") or item_id),
+            "ages":{},
+            "durationSec":float(meta.get("durationSec") or 0),
+            "finishedAt":str(meta.get("finishedAt") or ""),
+        })
+        for age in tuple(meta.get("ages") or ()):
+            p=_prophet_audio_asset_path(item_id,str(age))
+            if p is None:
+                continue
+            entry["ages"][str(age)]={
+                "available":True,
+                "bytes":int(p.stat().st_size),
+                "url":f"/prophet-stories/audio?id={item_id}&age={age}",
+            }
+    ready_items=[x for x in items.values() if x.get("ages")]
+    ready_items.sort(key=lambda x:x.get("finishedAt") or "")
+    return {
+        "ok":True,
+        "items":ready_items,
+        "completed":len(ready_items),
+        "total":int(cp.get("total") or 25),
+        "active":bool(cp.get("active")),
+        "phase":str(cp.get("phase") or "idle"),
+        "updatedAt":str(cp.get("updatedAt") or ""),
+    }
+
 def _prophet_story_manifest():
     return load_kids_repo_json(
         "prophet-stories.json",
@@ -6238,6 +6296,42 @@ class H(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b)
 
+    def send_audio_file(self,path:Path,content_type:str="audio/mp4"):
+        if not path.exists() or not path.is_file():
+            return self.send_json(404,{"ok":False,"error":"Audio noch nicht verfügbar."})
+        size=int(path.stat().st_size)
+        start=0
+        end=max(0,size-1)
+        partial=False
+        raw=str(self.headers.get("Range","") or "").strip()
+        if raw.startswith("bytes="):
+            m=re.match(r"bytes=(\d*)-(\d*)",raw)
+            if m:
+                a,b=m.groups()
+                if a:
+                    start=max(0,min(int(a),end))
+                if b:
+                    end=max(start,min(int(b),end))
+                partial=True
+        length=max(0,end-start+1)
+        self.send_response(206 if partial else 200)
+        self.send_header("Content-Type",content_type)
+        self.send_header("Accept-Ranges","bytes")
+        self.send_header("Content-Length",str(length))
+        if partial:
+            self.send_header("Content-Range",f"bytes {start}-{end}/{size}")
+        self.cors()
+        self.end_headers()
+        with path.open("rb") as fh:
+            fh.seek(start)
+            remaining=length
+            while remaining>0:
+                chunk=fh.read(min(256*1024,remaining))
+                if not chunk:
+                    break
+                self.wfile.write(chunk)
+                remaining-=len(chunk)
+
     def do_GET(self):
         if self.accept_pairing_url():
             return
@@ -6360,6 +6454,19 @@ class H(BaseHTTPRequestHandler):
             self.send_json(200,{"ok":True,**_alphabet_batch_snapshot()})
         elif p=="/prophet-stories/batch-state":
             self.send_json(200,{"ok":True,**_prophet_batch_snapshot()})
+        elif p=="/prophet-stories/completed-audio":
+            self.send_json(200,_prophet_completed_audio_snapshot())
+        elif p=="/prophet-stories/audio":
+            try:
+                query=parse_qs(urlparse(self.path).query)
+                item_id=str((query.get("id") or [""])[0]).strip()
+                age=str((query.get("age") or ["6-8"])[0]).strip()
+                asset=_prophet_audio_asset_path(item_id,age)
+                if asset is None:
+                    return self.send_json(404,{"ok":False,"error":"Diese Geschichte ist noch nicht fertig."})
+                return self.send_audio_file(asset,"audio/mp4")
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e)})
         elif p=="/prophet-stories/library":
             try:
                 man=_prophet_story_manifest()
