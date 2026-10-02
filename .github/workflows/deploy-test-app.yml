@@ -90,36 +90,52 @@ jobs:
         run: node scripts/delete-kids-worker-routes.js
         continue-on-error: true
 
-      - name: Alte dar-al-tawhid.de/test*-Routen des Test-Workers löschen
+      - name: Isolierte Dar-Test-Route /test* sicherstellen
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
         run: |
           export ZONE="${CLOUDFLARE_ZONE_ID:-0e4c0fdfaca4f3fa137de3a67ac8a68b}"
-          curl -sS -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
-            "https://api.cloudflare.com/client/v4/zones/${ZONE}/workers/routes" \
-            | node -e '
-              const {execFileSync} = require("child_process");
-              let d = "";
-              process.stdin.on("data", (c) => { d += c; });
-              process.stdin.on("end", () => {
-                const body = JSON.parse(d || "{}");
-                const routes = (body.result || []).filter((r) =>
-                  String(r.pattern || "").includes("/test") &&
-                  String(r.script || "").includes("dar-al-tawhid-test")
-                );
-                console.log("Test-Worker Live-Routen:", routes.map((r) => r.pattern).join(", ") || "(keine)");
-                for (const route of routes) {
-                  execFileSync("curl", [
-                    "-sS", "-X", "DELETE",
-                    "-H", "Authorization: Bearer " + process.env.CLOUDFLARE_API_TOKEN,
-                    "https://api.cloudflare.com/client/v4/zones/" + process.env.ZONE + "/workers/routes/" + route.id
-                  ], { stdio: "inherit" });
-                  console.log("gelöscht:", route.pattern, route.id);
-                }
-              });
-            '
-        continue-on-error: true
+          export TEST_ROUTE_PATTERN="dar-al-tawhid.de/test*"
+          export TEST_WORKER_SCRIPT="dar-al-tawhid-test"
+          node <<'NODE'
+          const { execFileSync } = require("child_process");
+          const zone = process.env.ZONE;
+          const token = process.env.CLOUDFLARE_API_TOKEN;
+          const pattern = process.env.TEST_ROUTE_PATTERN;
+          const script = process.env.TEST_WORKER_SCRIPT;
+          const api = "https://api.cloudflare.com/client/v4/zones/" + zone + "/workers/routes";
+          function curl(args) {
+            return execFileSync("curl", ["-sS", ...args], { encoding: "utf8" });
+          }
+          function auth() {
+            return ["-H", "Authorization: Bearer " + token];
+          }
+          const listed = JSON.parse(curl([...auth(), api]) || "{}");
+          if (!listed.success) throw new Error("Cloudflare routes listing failed");
+          const exact = (listed.result || []).filter((r) => String(r.pattern || "") === pattern);
+          if (exact.length === 1 && String(exact[0].script || "") === script) {
+            console.log("Test-Route bereits korrekt:", pattern, "→", script);
+            process.exit(0);
+          }
+          for (const route of exact) {
+            const deleted = JSON.parse(curl(["-X", "DELETE", ...auth(), api + "/" + route.id]) || "{}");
+            if (!deleted.success) throw new Error("Alte exakte Test-Route konnte nicht gelöscht werden");
+            console.log("Alte exakte Route entfernt:", route.pattern, route.id);
+          }
+          const created = JSON.parse(curl([
+            "-X", "POST",
+            ...auth(),
+            "-H", "Content-Type: application/json",
+            "--data", JSON.stringify({ pattern, script }),
+            api
+          ]) || "{}");
+          if (!created.success) {
+            console.error(JSON.stringify(created.errors || created));
+            throw new Error("Isolierte Test-Route konnte nicht gesetzt werden");
+          }
+          console.log("Test-Route aktiv:", pattern, "→", script);
+          NODE
 
       - name: Cloudflare-Cache für /test/* leeren
         env:
