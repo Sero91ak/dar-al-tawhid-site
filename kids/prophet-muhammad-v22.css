@@ -1185,3 +1185,99 @@
 }
 @media(min-width:900px){#view-stories.ps-stories-home{max-width:980px!important;margin:0 auto!important}.ps-mh-value-grid{width:60%!important}}
 @media(prefers-reduced-motion:reduce){.ps-muhammad-home{animation:none!important}.ps-mh-episode-rail,.ps-mh-more-rail{scroll-behavior:auto!important}}
+
+
+/* KIDS_CHILD_FIRST_EXPANDED_V32
+   Expanded lists must get easier to read, not denser. */
+@media(max-width:699px){
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList).r22-expanded{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:16px!important;
+    padding:4px 10px 22px!important;
+    overflow:visible!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList).r22-expanded .story-row{
+    width:100%!important;
+    max-width:none!important;
+    min-height:260px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList).r22-expanded .story-thumb{
+    min-height:174px!important;
+  }
+
+  .ps-mh-episodes.expanded .ps-mh-episode-rail{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:16px!important;
+    padding:0 16px 16px!important;
+    overflow:visible!important;
+  }
+  .ps-mh-episodes.expanded .ps-mh-episode{
+    width:100%!important;
+    max-width:none!important;
+    min-height:262px!important;
+  }
+  .ps-mh-episodes.expanded .ps-mh-episode-art{
+    min-height:170px!important;
+  }
+
+  .ps-mh-more-card,
+  .ps-mh-more-rail .ps-mh-more-card{
+    height:auto!important;
+    min-height:244px!important;
+    overflow:hidden!important;
+    border-radius:22px!important;
+  }
+  .ps-mh-more-art{
+    height:auto!important;
+    min-height:158px!important;
+  }
+  .ps-mh-more-copy{
+    min-height:86px!important;
+    padding:12px 13px 14px!important;
+  }
+  .ps-mh-more-copy strong{
+    font-size:17px!important;
+    line-height:1.12!important;
+  }
+  .ps-mh-more-copy small{
+    margin-top:6px!important;
+    font-size:11px!important;
+    line-height:1.3!important;
+  }
+
+  .ps-mh-episode-detail{
+    margin:14px 16px 0!important;
+    padding:16px!important;
+    border-radius:18px!important;
+  }
+  .ps-mh-episode-detail span{
+    font-size:9.5px!important;
+  }
+  .ps-mh-episode-detail h4{
+    margin:7px 0!important;
+    font-size:22px!important;
+  }
+  .ps-mh-episode-detail p{
+    font-size:12px!important;
+    line-height:1.5!important;
+  }
+  .ps-mh-episode-detail strong{
+    margin-top:8px!important;
+    font-size:10px!important;
+  }
+  .ps-mh-full-cta{
+    min-height:52px!important;
+    margin-top:14px!important;
+    padding:0 18px!important;
+    font-size:12px!important;
+  }
+
+  .ps-mh-section-head{
+    align-items:center!important;
+  }
+  .ps-mh-section-title h3{
+    white-space:normal!important;
+  }
+}
