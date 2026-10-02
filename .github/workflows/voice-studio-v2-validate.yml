@@ -370,10 +370,13 @@ jobs:
           label=str(version.get("label") or "").strip()
           if not re.fullmatch(r"kids-shell-v12-tab\d+",build):
               raise SystemExit("Invalid Kids buildId: "+build)
-          m=re.search(r"V0\.(\d+)",label)
+          m=re.search(r"V(\d+)\.(\d+)",label)
           if not m:
               raise SystemExit("Invalid Kids label: "+label)
-          minor=m.group(1)
+          major,minor=m.groups()
+          # Cache-Suffix folgt dem bestehenden Release-Schema:
+          # V0.99 -> v99, V1.05 -> v105.
+          cache_suffix=("" if int(major)==0 else str(int(major)))+minor
 
           required_build_files=[
               "kids/index.html",
@@ -398,7 +401,7 @@ jobs:
                   failures.append(name+" has inconsistent embedded build ids: "+repr(sorted(ids)))
 
           sw=Path("kids/sw.js").read_text(encoding="utf-8")
-          expected_cache="dar-al-tawhid-kids-v"+minor
+          expected_cache="dar-al-tawhid-kids-v"+cache_suffix
           if expected_cache not in sw:
               failures.append("kids/sw.js missing "+expected_cache)
 
