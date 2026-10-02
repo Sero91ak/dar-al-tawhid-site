@@ -1754,3 +1754,516 @@ html[data-theme] body.is-home-route .header-prayer-hub__clock{
   }
 }
 /* /v1128 · STATUS-LEISTE + BREITE HOME-KAPSELN */
+
+
+/* v1200 · DAR TEST LIBRARY REDESIGN MASTER */
+/* Test/Staging only. Bottom navigation intentionally untouched. */
+:root{
+  --dar-redesign-max:1180px;
+  --dar-redesign-gutter:clamp(14px,3.5vw,28px);
+  --dar-redesign-rule:color-mix(in srgb,var(--gold2) 24%,var(--line) 76%);
+  --dar-redesign-glass:color-mix(in srgb,var(--card) 46%,transparent);
+  --dar-redesign-glass-soft:color-mix(in srgb,var(--card) 26%,transparent);
+  --dar-redesign-shadow:0 18px 46px rgba(0,0,0,.18);
+  --dar-redesign-hero-h:clamp(190px,29vw,310px);
+}
+html[data-theme="light"],
+html[data-theme="soft"],
+html[data-theme="eisgold"],
+html[data-theme-variant="salbei"]{
+  --dar-redesign-glass:rgba(255,255,255,.58);
+  --dar-redesign-glass-soft:rgba(255,255,255,.34);
+  --dar-redesign-shadow:0 18px 42px rgba(39,32,22,.10);
+}
+html[data-theme="royal"]{
+  --dar-redesign-glass:rgba(8,27,48,.52);
+  --dar-redesign-glass-soft:rgba(8,27,48,.26);
+}
+html[data-theme="bordeaux"]{
+  --dar-redesign-glass:rgba(74,24,31,.48);
+  --dar-redesign-glass-soft:rgba(74,24,31,.24);
+}
+
+/* ---------- global brand / top composition ---------- */
+html[data-theme] body:not(.is-quran-overview) .top-shell.theme-hero-shell{
+  width:100vw!important;
+  max-width:none!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  border:0!important;
+  border-radius:0!important;
+  overflow:clip!important;
+  isolation:isolate!important;
+  position:relative!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body:not(.is-quran-overview) .top-shell.theme-hero-shell::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-2!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 94%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 78%,transparent) 35%,
+      color-mix(in srgb,var(--bg) 38%,transparent) 68%,
+      color-mix(in srgb,var(--bg) 14%,transparent) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.46)),
+    url("/assets/dar-3d-icons/dar-home-hero-library-4k.png") 65% 48%/cover no-repeat!important;
+  transform:scale(1.025)!important;
+  animation:darLibraryDrift 18s ease-in-out infinite alternate!important;
+}
+html[data-theme] body:not(.is-quran-overview) .top-shell.theme-hero-shell::after{
+  content:""!important;
+  position:absolute!important;
+  inset:auto 0 0!important;
+  height:38%!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--bg) 90%,transparent))!important;
+}
+@keyframes darLibraryDrift{
+  from{transform:scale(1.018) translate3d(0,0,0)}
+  to{transform:scale(1.035) translate3d(-.45%,.25%,0)}
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] body:not(.is-quran-overview) .top-shell.theme-hero-shell::before{animation:none!important;transform:scale(1.02)!important}
+}
+html[data-theme] body:not(.is-quran-overview) .top-shell.theme-hero-shell .header.theme-hero-surface{
+  min-height:var(--dar-redesign-hero-h)!important;
+  width:min(var(--dar-redesign-max),100%)!important;
+  margin:0 auto!important;
+  padding:max(14px,env(safe-area-inset-top,0px)) var(--dar-redesign-gutter) 18px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body:not(.is-quran-overview) .header-row--brand-only{
+  position:relative!important;
+  padding:2px 0 11px!important;
+  margin:0 0 14px!important;
+}
+html[data-theme] body:not(.is-quran-overview) .header-row--brand-only::after{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;right:0!important;bottom:0!important;
+  height:1px!important;
+  background:linear-gradient(90deg,var(--dar-redesign-rule),color-mix(in srgb,var(--gold2) 8%,transparent) 72%,transparent)!important;
+}
+html[data-theme] body:not(.is-quran-overview) .brand-main{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:12px!important;
+  min-width:0!important;
+}
+html[data-theme] body:not(.is-quran-overview) .brand-main .logo{
+  width:clamp(48px,7vw,64px)!important;
+  height:clamp(48px,7vw,64px)!important;
+  flex:0 0 auto!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.28))!important;
+}
+html[data-theme] body:not(.is-quran-overview) .brand-title{
+  font-family:var(--font-display,var(--font-serif))!important;
+  font-size:clamp(23px,4vw,38px)!important;
+  line-height:.98!important;
+  letter-spacing:.055em!important;
+  white-space:nowrap!important;
+  color:var(--premium-title,var(--gold2))!important;
+  text-shadow:0 2px 16px rgba(0,0,0,.22)!important;
+}
+html[data-theme] body:not(.is-quran-overview) .brand-kicker-row{
+  margin:0 0 5px clamp(60px,8.5vw,78px)!important;
+  order:2!important;
+}
+html[data-theme] body:not(.is-quran-overview) .brand-kicker-row small{
+  display:block!important;
+  font-size:clamp(9px,1.7vw,12px)!important;
+  font-weight:760!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+  color:color-mix(in srgb,var(--text) 72%,var(--gold2) 28%)!important;
+  white-space:normal!important;
+}
+html[data-theme] body:not(.is-quran-overview) .hero-text{
+  max-width:min(690px,79vw)!important;
+  padding:0!important;
+  margin-top:10px!important;
+  position:relative!important;
+  z-index:1!important;
+}
+html[data-theme] body:not(.is-quran-overview) .hero-text .salam{
+  font-size:clamp(13px,2.8vw,18px)!important;
+  line-height:1.28!important;
+  font-weight:760!important;
+  color:var(--premium-title,var(--gold2))!important;
+}
+html[data-theme] body:not(.is-quran-overview) .hero-text .intro{
+  max-width:62ch!important;
+  margin-top:7px!important;
+  font-size:clamp(11.5px,2.45vw,15px)!important;
+  line-height:1.48!important;
+  color:color-mix(in srgb,var(--text) 90%,var(--muted) 10%)!important;
+}
+html[data-theme] body:not(.is-quran-overview) .isnad{
+  width:min(var(--dar-redesign-max),100%)!important;
+  margin:0 auto!important;
+  padding:10px var(--dar-redesign-gutter) 13px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:linear-gradient(90deg,var(--dar-redesign-glass-soft),transparent 82%)!important;
+  box-shadow:none!important;
+  position:relative!important;
+}
+html[data-theme] body:not(.is-quran-overview) .isnad::before{
+  content:""!important;
+  position:absolute!important;
+  left:var(--dar-redesign-gutter)!important;
+  top:0!important;
+  width:min(170px,34vw)!important;
+  height:1px!important;
+  background:linear-gradient(90deg,var(--gold2),transparent)!important;
+  opacity:.55!important;
+}
+html[data-theme] body:not(.is-quran-overview) .isnad-label{font-size:9px!important;letter-spacing:.17em!important}
+html[data-theme] body:not(.is-quran-overview) .isnad-quote{font-size:clamp(12px,2.5vw,15px)!important;line-height:1.48!important}
+html[data-theme] body:not(.is-quran-overview) .isnad-source{font-size:10px!important;opacity:.76!important}
+
+/* ---------- edge-to-edge route canvases ---------- */
+html[data-theme] body:is(.is-home-route,.is-quiz-route,.is-quran-overview) #appView.view,
+html[data-theme] body:has(.app-bar.is-more-route) #appView.view{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-quiz-route #appView.view,
+html[data-theme] body:has(.app-bar.is-more-route) #appView.view{
+  padding-left:0!important;
+  padding-right:0!important;
+  background:transparent!important;
+}
+html[data-theme] body.is-quiz-route .view-head,
+html[data-theme] body:has(.app-bar.is-more-route) .view-head{
+  width:min(var(--dar-redesign-max),100%)!important;
+  margin-inline:auto!important;
+  padding-inline:var(--dar-redesign-gutter)!important;
+}
+
+/* ---------- START: editorial, no pasted image cards ---------- */
+html[data-theme] body.is-home-route .home-v380-shell{
+  width:100%!important;
+  max-width:none!important;
+  padding:0 0 calc(var(--bottom-nav-space,92px) + 22px)!important;
+}
+html[data-theme] body.is-home-route #appView .home-line-tawhid,
+html[data-theme] body.is-home-route #appView .home-line-list{
+  width:min(var(--dar-redesign-max),100%)!important;
+  margin-inline:auto!important;
+  padding-inline:var(--dar-redesign-gutter)!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero{
+  width:100vw!important;
+  max-width:none!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  min-height:clamp(118px,21vw,210px)!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  padding:22px max(var(--dar-redesign-gutter),calc((100vw - var(--dar-redesign-max))/2 + var(--dar-redesign-gutter)))!important;
+  overflow:hidden!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 96%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 78%,transparent) 46%,
+      color-mix(in srgb,var(--bg) 20%,transparent) 100%),
+    url("/assets/dar-3d-icons/dar-home-section-quran.png") 75% 50%/cover no-repeat!important;
+}
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  pointer-events:none!important;
+  background:linear-gradient(180deg,transparent 55%,color-mix(in srgb,var(--bg) 82%,transparent))!important;
+  width:auto!important;height:auto!important;
+  transform:none!important;
+}
+html[data-theme] body.is-home-route #appView .home-v380-quran-hero__mark{
+  width:60px!important;height:60px!important;
+  filter:drop-shadow(0 12px 22px rgba(0,0,0,.28))!important;
+}
+html[data-theme] body.is-home-route #appView .home-line-row{
+  min-height:64px!important;
+  border:0!important;
+  border-bottom:1px solid var(--dar-redesign-rule)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-home-route #appView .home-line-row__ico{
+  width:52px!important;height:52px!important;
+  filter:drop-shadow(0 9px 15px rgba(0,0,0,.16))!important;
+}
+
+/* ---------- QUIZ: full-bleed hero + open controls ---------- */
+html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-pro{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0 0 calc(var(--bottom-nav-height,74px) + env(safe-area-inset-bottom,0px) + 24px)!important;
+  gap:0!important;
+}
+html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-pro .quiz-hero{
+  position:relative!important;
+  width:100vw!important;
+  max-width:none!important;
+  min-height:clamp(220px,34vw,350px)!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  padding:clamp(24px,5vw,52px) max(var(--dar-redesign-gutter),calc((100vw - var(--dar-redesign-max))/2 + var(--dar-redesign-gutter)))!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  background:transparent!important;
+  justify-content:center!important;
+}
+html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-pro .quiz-hero::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-2!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 96%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 78%,transparent) 42%,
+      color-mix(in srgb,var(--bg) 30%,transparent) 74%,
+      color-mix(in srgb,var(--bg) 10%,transparent) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.36)),
+    url("/assets/dar-3d-icons/dar-home-section-knowledge.png") 70% 50%/cover no-repeat!important;
+  transform:scale(1.03)!important;
+}
+html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-pro .quiz-hero::after{
+  content:""!important;
+  position:absolute!important;
+  inset:auto 0 0!important;
+  height:38%!important;
+  z-index:-1!important;
+  background:linear-gradient(180deg,transparent,var(--bg))!important;
+}
+html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-pro .quiz-hero h2{
+  max-width:10ch!important;
+  font-family:var(--font-display,var(--font-serif))!important;
+  font-size:clamp(38px,9vw,72px)!important;
+  line-height:.95!important;
+  color:var(--premium-title,var(--gold2))!important;
+}
+html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-pro .quiz-hero p{max-width:38ch!important}
+html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-pro > :not(.quiz-hero){
+  width:min(var(--dar-redesign-max),calc(100% - (2 * var(--dar-redesign-gutter))))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-pro .quiz-card{
+  margin-top:14px!important;
+  padding:14px 0 4px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-quiz-route .quiz-config-grid{
+  border-top:1px solid var(--dar-redesign-rule)!important;
+}
+html[data-theme] body.is-quiz-route .quiz-field{
+  min-height:62px!important;
+  border:0!important;
+  border-bottom:1px solid var(--dar-redesign-rule)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding:10px 4px!important;
+}
+html[data-theme] body.is-quiz-route .quiz-btn{
+  border-radius:14px!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-quiz-route .quiz-menu-grid{
+  gap:0!important;
+  margin-top:10px!important;
+  border-top:1px solid var(--dar-redesign-rule)!important;
+}
+html[data-theme] body.is-quiz-route .quiz-menu-card{
+  border:0!important;
+  border-bottom:1px solid var(--dar-redesign-rule)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  min-height:72px!important;
+}
+
+/* ---------- QURAN: edge-to-edge cinematic header; native controls stay real ---------- */
+html[data-theme] body.is-quran-overview .qov-page{
+  width:100%!important;
+  max-width:none!important;
+  min-height:100dvh!important;
+  background:var(--quran-gradient-page)!important;
+}
+html[data-theme] body.is-quran-overview .qov-main{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+}
+html[data-theme] body.is-quran-overview .qov-header{
+  position:relative!important;
+  width:100vw!important;
+  max-width:none!important;
+  min-height:clamp(205px,30vw,330px)!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  padding:max(16px,env(safe-area-inset-top,0px)) max(var(--dar-redesign-gutter),calc((100vw - var(--dar-redesign-max))/2 + var(--dar-redesign-gutter))) 26px!important;
+  border:0!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-quran-overview .qov-header::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:-2!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 96%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 76%,transparent) 42%,
+      color-mix(in srgb,var(--bg) 22%,transparent) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.38)),
+    url("/assets/dar-3d-icons/dar-home-section-quran.png") 72% 48%/cover no-repeat!important;
+  transform:scale(1.035)!important;
+}
+html[data-theme] body.is-quran-overview .qov-header::after{
+  content:""!important;
+  position:absolute!important;
+  inset:auto 0 0!important;
+  height:42%!important;
+  z-index:-1!important;
+  background:linear-gradient(180deg,transparent,var(--bg))!important;
+}
+html[data-theme] body.is-quran-overview .qov-header-row{
+  width:min(var(--dar-redesign-max),100%)!important;
+  margin:0 auto!important;
+  align-items:flex-start!important;
+}
+html[data-theme] body.is-quran-overview .qov-title-wrap{margin-top:clamp(34px,7vw,76px)!important}
+html[data-theme] body.is-quran-overview .qov-title{
+  font-family:var(--font-display,var(--font-serif))!important;
+  font-size:clamp(42px,9vw,78px)!important;
+  line-height:.94!important;
+  color:var(--premium-title,var(--gold2))!important;
+}
+html[data-theme] body.is-quran-overview .qov-sticky-tools,
+html[data-theme] body.is-quran-overview .qov-resume-stack,
+html[data-theme] body.is-quran-overview .qov-list-head,
+html[data-theme] body.is-quran-overview .qov-surah-list{
+  width:min(var(--dar-redesign-max),calc(100% - (2 * var(--dar-redesign-gutter))))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+html[data-theme] body.is-quran-overview .qov-sticky-tools{
+  background:color-mix(in srgb,var(--bg) 88%,transparent)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.04)!important;
+  backdrop-filter:blur(18px) saturate(1.04)!important;
+  border-bottom:1px solid var(--dar-redesign-rule)!important;
+}
+html[data-theme] body.is-quran-overview :is(.qov-player-launch,.qov-resume-card){
+  border-radius:14px!important;
+  box-shadow:none!important;
+}
+
+/* ---------- MORE: library index, full bleed atmosphere ---------- */
+html[data-theme] body:has(.app-bar.is-more-route) #appView.view{
+  position:relative!important;
+  isolation:isolate!important;
+}
+html[data-theme] body:has(.app-bar.is-more-route) #appView.view::before{
+  content:""!important;
+  display:block!important;
+  width:100vw!important;
+  height:clamp(180px,26vw,290px)!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  margin-bottom:-54px!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 94%,transparent),
+      color-mix(in srgb,var(--bg) 40%,transparent) 62%,
+      color-mix(in srgb,var(--bg) 12%,transparent)),
+    linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.34)),
+    url("/assets/dar-3d-icons/dar-home-hero-library-4k.png") 72% 50%/cover no-repeat!important;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 68%,transparent 100%)!important;
+  mask-image:linear-gradient(180deg,#000 0%,#000 68%,transparent 100%)!important;
+  pointer-events:none!important;
+}
+html[data-theme] body:has(.app-bar.is-more-route) .view-head{
+  position:relative!important;
+  z-index:1!important;
+  margin-top:-104px!important;
+  padding-top:18px!important;
+  min-height:100px!important;
+}
+html[data-theme] body:has(.app-bar.is-more-route) .view-head h2{
+  font-family:var(--font-display,var(--font-serif))!important;
+  font-size:clamp(38px,8vw,66px)!important;
+  line-height:.96!important;
+  color:var(--premium-title,var(--gold2))!important;
+}
+html[data-theme] body:has(.app-bar.is-more-route) :is(.feature-section,.more-quick-access){
+  width:min(var(--dar-redesign-max),calc(100% - (2 * var(--dar-redesign-gutter))))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+html[data-theme] body:has(.app-bar.is-more-route) .feature-section{
+  border:0!important;
+  border-top:1px solid var(--dar-redesign-rule)!important;
+  background:transparent!important;
+}
+html[data-theme] body:has(.app-bar.is-more-route) .more-search{
+  border-radius:13px!important;
+  background:var(--dar-redesign-glass)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  backdrop-filter:blur(14px)!important;
+}
+
+/* ---------- press / usability, but no tab-bar override ---------- */
+html[data-theme] body:is(.is-home-route,.is-quiz-route,.is-quran-overview) #appView button,
+html[data-theme] body:has(.app-bar.is-more-route) #appView button{
+  transition:transform .16s cubic-bezier(.22,1,.36,1),filter .16s ease,background-color .16s ease,border-color .16s ease!important;
+}
+@media(hover:hover){
+  html[data-theme] body:is(.is-home-route,.is-quiz-route,.is-quran-overview) #appView button:hover,
+  html[data-theme] body:has(.app-bar.is-more-route) #appView button:hover{
+    filter:brightness(1.045)!important;
+  }
+}
+html[data-theme] body:is(.is-home-route,.is-quiz-route,.is-quran-overview) #appView button:active,
+html[data-theme] body:has(.app-bar.is-more-route) #appView button:active{
+  transform:scale(.988)!important;
+}
+@media(max-width:520px){
+  html[data-theme] body:not(.is-quran-overview) .top-shell.theme-hero-shell .header.theme-hero-surface{
+    min-height:214px!important;
+  }
+  html[data-theme] body:not(.is-quran-overview) .hero-text{max-width:92%!important}
+  html[data-theme] body:not(.is-quran-overview) .brand-kicker-row small{letter-spacing:.08em!important}
+  html[data-theme] body.is-quiz-route .quiz-shell.quiz-shell-pro .quiz-hero{min-height:240px!important}
+  html[data-theme] body.is-quran-overview .qov-header{min-height:230px!important}
+}
