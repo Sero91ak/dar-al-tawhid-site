@@ -2,7 +2,7 @@
 "use strict";
 
 const DATA_URL="/kids/data/prophet-stories.json";
-const MODE_KEY="kids.contentMode.v17";
+const MODE_KEY="kids.contentMode.v18";
 const PROPHET_ORDER=[
   "adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub",
   "yusuf","ayyub","shuayb","musa","harun","dhul-kifl","dawud","sulayman",
@@ -119,29 +119,70 @@ function renderCards(){
   const doneEl=$("#psDoneCount");if(doneEl)doneEl.textContent=String(doneCount());
   const ageEl=$("#psAgeHero");if(ageEl)ageEl.textContent="Alter "+age();
 }
-function setupFreeStories(view,section,old,title){
-  // Freie pädagogische Geschichten bleiben über ihre bisherigen Einstiegspunkte erreichbar,
-  // konkurrieren aber nicht mehr mit der Prophetenbibliothek auf dieser Hauptseite.
-  const storyFeature=view.querySelector(".story-feature");
-  const oldMore=view.querySelector(".story-more-title");
-  const freeList=oldMore&&oldMore.nextElementSibling&&oldMore.nextElementSibling.classList.contains("story-list")?oldMore.nextElementSibling:null;
-  if(storyFeature)storyFeature.style.display="none";
-  if(oldMore)oldMore.style.display="none";
-  if(freeList)freeList.style.display="none";
+function prepareStoriesHome(view){
+  const old=$("#authenticStoryList");
+  const oldTitle=old?.previousElementSibling;
+  if(old)old.style.display="none";
+  if(oldTitle)oldTitle.style.display="none";
   view.querySelectorAll(".gentle-note").forEach(note=>{
     if(/Authentische Propheten/i.test(note.textContent||""))note.style.display="none";
   });
-  if(old){old.style.display="none";if(title)title.style.display="none"}
+
+  const pageHead=view.querySelector(".page-head");
+  if(pageHead)pageHead.hidden=false;
+
+  if(!$("#psProphetEntry")){
+    const entry=document.createElement("button");
+    entry.id="psProphetEntry";
+    entry.className="ps-prophet-entry";
+    entry.type="button";
+    entry.innerHTML=
+      '<span class="ps-entry-shade" aria-hidden="true"></span>'+
+      '<span class="ps-entry-copy">'+
+        '<span class="ps-entry-kicker">EIGENER BEREICH · QURʾĀN GEPRÜFT</span>'+
+        '<strong>Prophetengeschichten</strong>'+
+        '<span class="ps-entry-sub">25 Geschichten · lesen &amp; hören</span>'+
+      '</span>'+
+      '<span class="ps-entry-go" aria-hidden="true">›</span>';
+    if(pageHead)pageHead.insertAdjacentElement("afterend",entry);
+    else view.insertBefore(entry,view.firstChild);
+    entry.addEventListener("click",openLibrary);
+  }
+}
+function openLibrary(){
+  const page=$("#psLibraryPage");if(!page)return;
+  page.classList.add("open");
+  page.removeAttribute("aria-hidden");
+  document.documentElement.classList.add("ps-library-open");
+  const app=$(".app");
+  if(app){app.setAttribute("inert","");app.setAttribute("aria-hidden","true")}
+  const scroll=$("#psLibraryScroll");if(scroll)scroll.scrollTop=0;
+  setTimeout(()=>$("#psLibraryBack")?.focus(),0);
+}
+function closeLibrary(){
+  if($("#psModal")?.classList.contains("open"))return;
+  const page=$("#psLibraryPage");if(!page)return;
+  page.classList.remove("open");
+  page.setAttribute("aria-hidden","true");
+  document.documentElement.classList.remove("ps-library-open");
+  const app=$(".app");
+  if(app){app.removeAttribute("inert");app.removeAttribute("aria-hidden")}
+  setTimeout(()=>$("#psProphetEntry")?.focus(),0);
 }
 function ensureUi(){
-  const view=$("#view-stories");if(!view||$("#prophetStoriesSection"))return false;
-  view.classList.add("ps-world-view");
-  const pageHead=view.querySelector(".page-head");
-  const old=$("#authenticStoryList");
-  const title=old?.previousElementSibling;
-  const section=document.createElement("section");
-  section.id="prophetStoriesSection";section.className="ps-wrap";
-  section.innerHTML=
+  const view=$("#view-stories");if(!view||$("#psLibraryPage"))return false;
+  view.classList.add("ps-world-view","ps-stories-home");
+  prepareStoriesHome(view);
+
+  const library=document.createElement("section");
+  library.id="psLibraryPage";
+  library.className="ps-library-page";
+  library.setAttribute("aria-hidden","true");
+  library.innerHTML=
+    '<div class="ps-library-nav">'+
+      '<button class="ps-library-back" id="psLibraryBack" type="button" aria-label="Zurück zu Geschichten">‹</button>'+
+      '<div class="ps-library-nav-copy"><strong>Propheten</strong><span>25 geprüfte Geschichten</span></div>'+
+    '</div>'+
     '<div class="ps-toolbar">'+
       '<div class="ps-modes" id="psModes">'+
         '<button class="ps-mode" data-ps-mode="both" type="button"><span class="ps-mode-icon ps-mode-icon-headphones" aria-hidden="true"></span>Lesen &amp; Hören</button>'+
@@ -149,19 +190,16 @@ function ensureUi(){
         '<button class="ps-mode" data-ps-mode="read" type="button"><span class="ps-mode-icon ps-mode-icon-book" aria-hidden="true"></span>Lesen</button>'+
       '</div>'+
     '</div>'+
-    '<div id="psGrid" class="ps-library-list"></div>';
-  if(pageHead){
-    pageHead.hidden=true;
-    pageHead.insertAdjacentElement("afterend",section);
-  }else view.insertBefore(section,view.firstChild);
-  setupFreeStories(view,section,old,title);
-  section.querySelectorAll("[data-ps-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.psMode)));
+    '<div class="ps-library-scroll" id="psLibraryScroll"><div id="psGrid" class="ps-library-list"></div></div>';
+  document.body.appendChild(library);
+  library.querySelectorAll("[data-ps-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.psMode)));
+  $("#psLibraryBack").addEventListener("click",closeLibrary);
 
   const modal=document.createElement("div");
   modal.className="ps-modal";modal.id="psModal";
   modal.innerHTML=
     '<div class="ps-sheet" role="dialog" aria-modal="true" aria-labelledby="psTitle">'+
-      '<div class="ps-top"><span class="ps-top-label">DĀR AL TAWḤĪD KIDS · PROPHETEN</span><button class="ps-close" id="psClose" type="button" aria-label="Schließen">×</button></div>'+
+      '<div class="ps-top"><button class="ps-close" id="psClose" type="button" aria-label="Zurück zu den Propheten">‹</button></div>'+
       '<div class="ps-scroll" id="psScroll">'+
         '<div class="ps-hero">'+
           '<span class="ps-detail-sky" aria-hidden="true"></span>'+
@@ -189,7 +227,11 @@ function ensureUi(){
   $("#psClose").addEventListener("click",closeStory);
   $("#psPlay").addEventListener("click",toggleAudio);
   $("#psScroll").addEventListener("scroll",()=>{$("#psModal")?.classList.toggle("scrolled",$("#psScroll").scrollTop>72)},{passive:true});
-  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#psModal")?.classList.contains("open"))closeStory()});
+  document.addEventListener("keydown",e=>{
+    if(e.key!=="Escape")return;
+    if($("#psModal")?.classList.contains("open"))closeStory();
+    else if($("#psLibraryPage")?.classList.contains("open"))closeLibrary();
+  });
   audio.preload="metadata";
   audio.addEventListener("timeupdate",updateProgress);
   audio.addEventListener("loadedmetadata",updateProgress);
@@ -246,10 +288,23 @@ function renderQuestion(){
 }
 function lockPage(){
   document.documentElement.classList.add("ps-modal-open");
+  const library=$("#psLibraryPage");
+  if(library?.classList.contains("open")){
+    library.setAttribute("inert","");
+    library.setAttribute("aria-hidden","true");
+    return;
+  }
   [".shell",".bottom-nav"].forEach(sel=>{const el=$(sel);if(el){el.setAttribute("inert","");el.setAttribute("aria-hidden","true")}});
 }
 function unlockPage(){
   document.documentElement.classList.remove("ps-modal-open");
+  const library=$("#psLibraryPage");
+  if(library?.classList.contains("open")){
+    library.removeAttribute("inert");
+    library.removeAttribute("aria-hidden");
+    setTimeout(()=>$("#psLibraryBack")?.focus(),0);
+    return;
+  }
   [".shell",".bottom-nav"].forEach(sel=>{const el=$(sel);if(el){el.removeAttribute("inert");el.removeAttribute("aria-hidden")}});
 }
 function openStory(id){
@@ -323,5 +378,5 @@ async function init(){
   }
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
-window.DARKidsProphetStories={open:openStory,stop:stopAudio};
+window.DARKidsProphetStories={open:openStory,openLibrary,closeLibrary,stop:stopAudio};
 })();
