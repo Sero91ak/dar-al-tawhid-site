@@ -95,7 +95,7 @@ ALPHABET_BATCH_STATE_LOCK=threading.Lock()
 PROPHET_STORY_BATCH_LOCK=threading.Lock()
 PROPHET_STORY_BATCH_STATE_LOCK=threading.Lock()
 PROPHET_STORY_BATCH_CANCEL=threading.Event()
-PROPHET_STORY_BATCH_STATE={"running":False,"phase":"idle","progress":0,"completed":0,"total":75,"current":"","error":"","repoPublished":False,"repoPublishError":"","startedAt":"","finishedAt":""}
+PROPHET_STORY_BATCH_STATE={"running":False,"phase":"idle","progress":0,"completed":0,"total":25,"current":"","error":"","repoPublished":False,"repoPublishError":"","startedAt":"","finishedAt":""}
 LEARNING_PREVIEWS={}
 ALPHABET_BATCH_STATE={
     "running":False,
@@ -3125,10 +3125,13 @@ def render_with_mlx(model,text:str,language_id:str,mode:str):
     budget=mlx_token_budget(text,language_id)
     if language_id=="de" and mode=="kids_story":
         # Kinder-Erzählprosodie ist bewusst langsamer und braucht mehr Speech-Tokens
-        # als normale Narration. 380 war bei einzelnen völlig korrekten Sätzen zu
-        # knapp und löste reproduzierbar generation_token_limit aus. Der Watchdog
-        # bleibt die harte Runaway-Bremse; das Token-Ceiling darf deshalb höher sein.
+        # als normale Narration. Der Watchdog bleibt die harte Runaway-Bremse.
         budget=max(360,min(max(int(budget),int(len(str(text))*2.20)),560))
+    elif language_id=="ar" and mode=="kids_story":
+        # Fuṣḥā-Eigennamen dürfen nicht am generischen AR-Deckel von 300 sterben.
+        # Nach dem Listen-Split sind dies kleine Einheiten; etwas Headroom plus
+        # Watchdog verhindert sowohl falsche Limits als auch echte Runaways.
+        budget=max(220,min(max(int(budget),int(len(str(text))*2.40)),380))
     timeout_s=generation_timeout_seconds(text,language_id,mode)
     msg=_mlx_request({
         "op":"render",
@@ -3413,6 +3416,25 @@ def build_render_plan(text:str,mode:str=""):
             continue
         for lang,segment in split_language_segments(value):
             max_chars=96 if lang=="ar" else (190 if story_mode else 140)
+
+            # Arabische Namens-/Begriffslisten in Kinder-Geschichten niemals als
+            # einen einzigen autoregressiven Auftrag senden. Genau Sequenzen wie
+            # "آدَم, نُوح, إِبْرَاهِيم, مُوسَى, عِيسَى" liefen sonst trotz
+            # korrekter Fuṣḥā-Formen in ein generation_token_limit.
+            if story_mode and lang=="ar":
+                raw_parts=[
+                    p.strip()
+                    for p in re.split(r"\s*[,،;؛]\s*",str(segment or ""))
+                    if p.strip()
+                ]
+                if len(raw_parts)>=2:
+                    for part_idx,part in enumerate(raw_parts):
+                        punct="،" if part_idx<len(raw_parts)-1 else ""
+                        for sub in split_chunks(part+punct,max_chars=max_chars):
+                            if sub.strip():
+                                plan.append(("ar",sub.strip()))
+                    continue
+
             for chunk in split_chunks(segment,max_chars=max_chars):
                 clean=chunk.strip()
                 if not clean:
@@ -3943,9 +3965,10 @@ def render_with_model(model,text:str,language_id:str,mode:str="narration"):
     # ohne die restliche Chatterbox-Pipeline oder Voice-Conditioning zu verändern.
     cap=generation_token_budget(text,language_id)
     if language_id=="de" and mode=="kids_story":
-        # Gleiche Headroom-Regel wie im MLX-Pfad. Ein Backend-Fallback darf nicht
-        # am selben künstlich zu knappen Token-Ceiling erneut scheitern.
+        # Gleiche Headroom-Regel wie im MLX-Pfad.
         cap=max(360,min(max(int(cap),int(len(str(text))*2.20)),560))
+    elif language_id=="ar" and mode=="kids_story":
+        cap=max(220,min(max(int(cap),int(len(str(text))*2.40)),380))
     original_inference=getattr(getattr(model,"t3",None),"inference",None)
     state={"tokens":0,"hit":False}
     if original_inference is not None:
@@ -4430,6 +4453,10 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
     attempts=max(1,int(QA_CONFIG.get("maxRenderAttempts",2)))
     if language_id=="de" and mode=="kids_story":
         attempts=max(attempts,3)
+    if language_id=="ar" and mode=="kids_story":
+        # Kurze Fuṣḥā-Namen/Begriffe sind sampling-sensibel. Mehrere Seeds sind
+        # günstiger und sauberer als eine komplette Story oder einen Batch neu zu starten.
+        attempts=max(attempts,5)
     if language_id=="ar" and is_inline_arabic_micro_term(text):
         attempts=max(attempts,int(QA_CONFIG.get("inlineArabicRenderAttempts",4)))
     seed_offset=max(1,int(QA_CONFIG.get("retrySeedOffset",97)))
