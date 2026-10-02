@@ -115,6 +115,9 @@ jobs:
       - name: Post push hang guard (Beitrags-Push darf nicht hängen)
         run: node scripts/post-push-hang-guard.js
 
+      - name: Kids Prophet release guard (Build/Cache/25 Heroes)
+        run: node scripts/kids-prophet-release-guard.js
+
       - name: App health check script
         run: node scripts/app-health-check.js
 

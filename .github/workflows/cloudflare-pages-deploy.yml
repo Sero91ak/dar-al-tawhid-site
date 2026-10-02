@@ -36,6 +36,7 @@ on:
       - scripts/sync-app-build-ids.js
       - scripts/verify-live-deploy.js
       - scripts/purge-cloudflare-cache.js
+      - scripts/kids-prophet-release-guard.js
       - .github/workflows/cloudflare-pages-deploy.yml
 
 permissions:
@@ -343,6 +344,7 @@ jobs:
           GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           node scripts/app-health-check.js
+          node scripts/kids-prophet-release-guard.js
           node scripts/change-scope-lock-guard.js
           node scripts/push-system-guard.js
           node scripts/push-lanes-guard.js
