@@ -26,27 +26,27 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-099` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-108` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4428
-totalVerifiedEntries: 4428
-loadedEntries: 4428
-uniqueVerifiedReferences: 4428
-missingCount: 1808
+entriesCount: 4438
+totalVerifiedEntries: 4438
+loadedEntries: 4438
+uniqueVerifiedReferences: 4438
+missingCount: 1798
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
-firstMissingReference: 2:6
+firstMissingReference: 2:43
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-099.json
-nächster Gap-Fill-Batch: entries-gap-06-100.json
+letzter Gap-Fill-Batch: entries-gap-06-108.json
+nächster Gap-Fill-Batch: entries-gap-06-109.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `238` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `248` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -124,6 +124,15 @@ Danach gibt es keinen weiteren Qurʾān-Vers. Alle weiteren Arbeiten sind aussch
 06-097  1
 06-098  1
 06-099  1
+06-100  1
+06-101  1
+06-102  1
+06-103  1
+06-104  1
+06-105  1
+06-106  2
+06-107  1
+06-108  1
 ```
 
 Die Zahl hinter jedem Batch ist die aktuell registrierte Eintragszahl der Datei.
@@ -211,6 +220,15 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 06-097: 2:161
 06-098: 2:164
 06-099: 2:179
+06-100: 2:155
+06-101: 2:157
+06-102: 2:149
+06-103: 2:6
+06-104: 2:190
+06-105: 2:191
+06-106: 2:247, 2:251
+06-107: 2:38
+06-108: 2:205
 ```
 
 ## Nächste echte Audit-Lücken
@@ -218,17 +236,13 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 Der erste weiterhin fehlende Vers ist:
 
 ```text
-2:6
+2:43
 ```
 
 Der aktuelle nächste 25er-Auditbereich beginnt mit:
 
 ```text
-2:6
-2:36
-2:38
 2:43
-2:48
 2:49
 2:64
 2:82
@@ -246,11 +260,13 @@ Der aktuelle nächste 25er-Auditbereich beginnt mit:
 2:133
 2:145
 2:147
-2:149
 2:151
-2:155
-06-090: 2:175
-06-091: 2:253
+2:162
+2:169
+2:176
+2:186
+2:192
+2:206
 ```
 
 Diese Referenzen sind Arbeitsziele, keine Aufforderung zum künstlichen Füllen. Ein Vers bleibt offen, bis ein konkreter früher Bericht mit belastbarer Zuordnung und ausreichend geprüfter Überlieferungskette vorliegt.
