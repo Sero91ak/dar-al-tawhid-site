@@ -16,5 +16,23 @@
     "title": "Umfassende Bitte um Vergebung",
     "snippet": "O Allah, ich habe mir selbst viel Unrecht getan, und niemand vergibt die Sünden außer Dir. So vergib mir mit einer Vergebung von Dir und erbarme Dich meiner. Du bist wahrlich der Allvergebende, der Barmherzige.",
     "category": "Vergebung & Reue"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 466,
+      "remaining": 433
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 65,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
