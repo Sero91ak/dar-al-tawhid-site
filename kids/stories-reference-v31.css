@@ -281,3 +281,117 @@
 .ps-mh-hero{
   background-position:58% 14%!important;
 }
+
+
+/* REFERENCE_ORNAMENT_LINEWORK_V47
+   Final line/rosette/edge precision from the approved 864×1536 references. */
+.ps-mh-ornament{
+  position:relative!important;
+  grid-template-columns:1fr 42px 1fr!important;
+  filter:drop-shadow(0 0 5px rgba(244,205,104,.12))!important;
+}
+.ps-mh-ornament::before,
+.ps-mh-ornament::after{
+  height:1px!important;
+  opacity:.96!important;
+}
+.ps-mh-ornament::before{
+  background:linear-gradient(90deg,transparent 0%,rgba(241,197,88,.42) 9%,rgba(250,219,130,.96) 74%,rgba(250,219,130,.96) 100%)!important;
+}
+.ps-mh-ornament::after{
+  background:linear-gradient(90deg,rgba(250,219,130,.96) 0%,rgba(250,219,130,.96) 26%,rgba(241,197,88,.42) 91%,transparent 100%)!important;
+}
+.ps-mh-ornament span{
+  width:27px!important;height:27px!important;
+  border:0!important;
+  transform:none!important;
+  box-shadow:none!important;
+  background-color:#f5d477!important;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='black' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M32 4 39 18 54 10 46 25 60 32 46 39 54 54 39 46 32 60 25 46 10 54 18 39 4 32 18 25 10 10 25 18Z'/%3E%3Cpath d='M32 14 38 26 50 32 38 38 32 50 26 38 14 32 26 26Z'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat!important;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='black' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M32 4 39 18 54 10 46 25 60 32 46 39 54 54 39 46 32 60 25 46 10 54 18 39 4 32 18 25 10 10 25 18Z'/%3E%3Cpath d='M32 14 38 26 50 32 38 38 32 50 26 38 14 32 26 26Z'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat!important;
+  filter:drop-shadow(0 0 5px rgba(245,212,119,.30))!important;
+}
+.ps-mh-ornament span::before,
+.ps-mh-ornament span::after{display:none!important}
+
+/* Keep section rules as fine hairlines with the small reference sparkle. */
+.r22-section-label i,
+.ps-mh-section-title i{
+  height:1px!important;
+  opacity:.88!important;
+  background:linear-gradient(90deg,rgba(247,212,118,.92),rgba(247,212,118,.32) 58%,transparent)!important;
+}
+.r22-section-label i::before,
+.ps-mh-section-title i::before{
+  left:-7px!important;
+  font-size:6px!important;
+  color:#f7d879!important;
+  text-shadow:0 0 7px rgba(247,216,121,.28)!important;
+}
+
+/* Reference borders are hairline, warm on the special card and cool on secondary cards. */
+#view-stories.ps-stories-home .ps-muhammad-home{
+  border-width:1px!important;
+  border-color:rgba(255,218,116,.94)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,241,191,.055),
+    0 0 17px rgba(245,193,65,.20),
+    0 13px 29px rgba(0,0,0,.27)!important;
+}
+#view-stories.ps-stories-home .ps-prophet-entry,
+#view-stories.ps-stories-home .story-feature{
+  border-width:1px!important;
+  border-color:rgba(71,177,210,.51)!important;
+}
+.ps-mh-episode,.ps-mh-more-card{
+  border-width:1px!important;
+  border-color:rgba(71,178,209,.46)!important;
+}
+
+/* Prevent the long German value label from touching the medallion edge. */
+.ps-mh-value strong{
+  max-width:88%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+.ps-mh-value-mercy strong{font-size:.9em!important}
+
+/* CTA proportions and arrow baseline from the reference. */
+.ps-mh-home-cta b,.ps-entry-cta b,.ps-mh-all b,.r22-all b{
+  display:inline-block!important;
+  line-height:1!important;
+  transform:translateY(-.5px)!important;
+}
+.ps-mh-discover{
+  box-shadow:inset 0 1px rgba(255,255,255,.045),0 0 11px rgba(244,198,77,.085)!important;
+}
+
+/* Explicit clipping avoids one-pixel seams on iOS during scroll. */
+.ps-mh-hero,.ps-mh-panel,.ps-mh-values,
+#view-stories.ps-stories-home .ps-muhammad-home,
+#view-stories.ps-stories-home .ps-prophet-entry,
+#view-stories.ps-stories-home .story-feature,
+.ps-mh-episode,.ps-mh-more-card{
+  -webkit-background-clip:padding-box!important;
+  background-clip:padding-box!important;
+}
+
+/* Bottom dock active tab: thin gold outline, no oversized fill. */
+.bottom-nav .nav-btn.active,
+.ps-mh-bottom-nav button.active{
+  border:1px solid rgba(247,211,113,.77)!important;
+  background:linear-gradient(180deg,rgba(116,83,28,.105),rgba(5,31,44,.18))!important;
+  box-shadow:inset 0 1px rgba(255,244,201,.055),0 0 18px rgba(240,190,64,.15)!important;
+}
+
+/* Mobile-only micro alignment. */
+@media(max-width:600px){
+  .ps-mh-ornament{grid-template-columns:1fr 34px 1fr!important}
+  .ps-mh-ornament span{width:22px!important;height:22px!important}
+  .ps-mh-section-title .ps-mh-line-icon{transform:translateY(-.5px)!important}
+  .ps-mh-section-head{align-items:center!important}
+  .ps-mh-all,.r22-all{min-height:28px!important}
+  .ps-mh-value-mercy strong{font-size:7px!important}
+  .ps-mh-time{letter-spacing:.005em!important}
+}
