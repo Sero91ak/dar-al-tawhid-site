@@ -99,7 +99,7 @@ textarea:focus{border-color:rgba(217,182,111,.45);box-shadow:0 0 0 4px rgba(217,
 .stat{background:#071927;border:1px solid var(--line);border-radius:15px;padding:11px 12px}.stat b{font-size:21px;display:block;letter-spacing:-.02em}.stat span{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
 .section-title{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:#d7e0e6;font-weight:850;margin:0 0 9px}
 .term-list{display:flex;flex-wrap:wrap;gap:6px;max-height:132px;overflow:auto;padding-right:2px}
-.term{font-size:10px;padding:6px 8px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.045);white-space:nowrap}.term.locked{border-color:rgba(217,182,111,.38);color:#f2d79c;background:rgba(217,182,111,.07)}.term.verified{border-color:rgba(121,190,160,.30);color:#b8e2cf;background:rgba(121,190,160,.05)}
+.term{font-size:10px;padding:6px 8px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.045);white-space:nowrap}.term.locked{border-color:rgba(217,182,111,.38);color:#f2d79c;background:rgba(217,182,111,.07)}.term.verified{border-color:rgba(121,190,160,.30);color:#b8e2cf;background:rgba(121,190,160,.05)}.term.done{border-color:rgba(81,199,143,.58);color:#a8ebc9;background:rgba(42,144,96,.14)}.term.open{border-color:rgba(234,104,104,.52);color:#ffb1b1;background:rgba(150,42,42,.13)}.term-status-legend{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 9px;font-size:9px;color:var(--muted)}.term-status-legend span:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px}.term-status-legend .ok:before{background:#51c78f}.term-status-legend .open:before{background:#ea6868}.manual-selection-bar{display:flex;gap:7px;align-items:center;margin-top:7px}.manual-selection-bar .notice{flex:1;min-width:0}.manual-selection-bar .btn{min-height:34px;padding:7px 10px;font-size:10px;white-space:nowrap}
 .preview-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.36fr);gap:10px;margin-top:15px}
 .preview{white-space:pre-wrap;background:#071927;border:1px solid var(--line);border-radius:15px;padding:13px;min-height:108px;max-height:190px;overflow:auto;color:#dfe7ec;font-size:12px;line-height:1.55}
 .actions-card{border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025);padding:12px;display:flex;flex-direction:column;justify-content:space-between;gap:10px}
@@ -658,6 +658,10 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
     <div id="charCounter" class="counter">0 Zeichen</div>
   </div>
+  <div class="manual-selection-bar">
+    <div id="manualSelectionStatus" class="notice">Beliebiges Wort im Text markieren oder den Cursor in ein Wort setzen.</div>
+    <button id="manualSelectionBtn" class="btn quiet" type="button" disabled>Markiertes Wort prüfen</button>
+  </div>
 
   <div class="stats">
     <div class="stat"><b id="words">0</b><span>Wörter</span></div>
@@ -667,6 +671,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 
   <div class="section-title">Erkannte islamische Begriffe</div>
   <div id="termList" class="term-list"><span class="term">Bibliothek wird geladen …</span></div>
+  <div class="term-status-legend"><span class="ok">grün = bestätigt / LOCKED</span><span class="open">rot = noch prüfen</span></div>
 
   <div class="preview-grid">
     <div>
@@ -744,19 +749,23 @@ body.free-voice-mode .mobile-actions{display:none!important}
 
   <section class="side-section" id="learningSection">
     <div class="side-title">Aussprache lernen</div>
-    <div class="notice">Klicke oben einen erkannten Begriff an oder trage ein Wort/einen Namen ein. Die App sucht zuerst in deinem gelernten Wortschatz, dann online und in der installierten Bibliothek.</div>
+    <div class="notice">Klicke einen roten Begriff an, markiere ein beliebiges Wort im Text oder trage es manuell ein. Erst nach deinem Anhören und „So merken“ gilt es als bestätigt und wird grün.</div>
     <label for="learnTerm" style="margin-top:10px">Falsch ausgesprochenes Wort / Name</label>
     <input id="learnTerm" autocomplete="off" spellcheck="false" placeholder="z. B. Ṣaḥābah, Qurʾān, ʿUmar ibn al-Khaṭṭāb">
     <div class="learning-actions">
-      <button id="learnSelectionBtn" class="btn quiet" type="button">Textauswahl</button>
+      <button id="learnSelectionBtn" class="btn quiet" type="button">Markiertes Wort übernehmen</button>
       <button id="learnSearchBtn" class="btn secondary" type="button">Korrektur suchen</button>
     </div>
     <div id="learnResults" class="learning-results"></div>
     <label for="learnArabic">Arabische Sprechform · nur falls keine passende Korrektur gefunden wird</label>
     <input id="learnArabic" class="learning-arabic" autocomplete="off" spellcheck="false" placeholder="z. B. صَحَابَة">
     <div class="learning-actions">
-      <button id="learnPreviewBtn" class="btn secondary" type="button">Neue Aussprache testen</button>
+      <button id="learnPreviewBtn" class="btn secondary" type="button">Schnell testen</button>
       <button id="learnConfirmBtn" class="btn primary" type="button" disabled>So merken</button>
+    </div>
+    <div class="learning-actions" style="margin-top:6px">
+      <button id="learnVariantBtn" class="btn quiet" type="button">Nächste Variante testen</button>
+      <button id="learnResetVariantBtn" class="btn quiet" type="button">Variante 1</button>
     </div>
     <audio id="learnPlayer" class="learning-player" controls x-webkit-airplay="deny" disableremoteplayback hidden></audio>
     <div class="audio-route-row">
