@@ -97,7 +97,7 @@ function renderCards(){
     const text=buildText(item);
     const meta=(item.disputed?"IKHTILĀF · ":"QURʾĀN GEPRÜFT · ")+durationLabel(item,text);
     return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button">'+
-      '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" alt="" decoding="async" loading="'+(index<4?"eager":"lazy")+'" '+(index<2?'fetchpriority="high"':'')+'>'+
+      '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" loading="'+(index<4?"eager":"lazy")+'" '+(index<2?'fetchpriority="high"':'')+'>'+
       '<span class="ps-row-copy">'+
         '<span class="ps-row-meta">'+esc(meta)+'</span>'+
         '<span class="ps-row-title">'+esc(item.name)+(item.id==="muhammad"?" ﷺ":"")+'</span>'+
@@ -108,6 +108,13 @@ function renderCards(){
     '</button>';
   }).join("");
   grid.querySelectorAll("[data-ps-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.psId)));
+  grid.querySelectorAll("img.ps-row-scene").forEach(img=>{
+    img.onerror=()=>{
+      const fallback=img.dataset.fallback||"";
+      img.onerror=null;
+      if(fallback)img.src=fallback;
+    };
+  });
   const doneEl=$("#psDoneCount");if(doneEl)doneEl.textContent=String(doneCount());
   const ageEl=$("#psAgeHero");if(ageEl)ageEl.textContent="Alter "+age();
 }
@@ -201,7 +208,16 @@ function renderActive(){
   if(!active)return;
   activeText=buildText(active);
   const hero=$(".ps-hero");if(hero)hero.setAttribute("data-ps-id",active.id);
-  const heroImg=$("#psHero");if(heroImg){heroImg.src=heroUrl(active);heroImg.alt=""}
+  const heroImg=$("#psHero");if(heroImg){
+    heroImg.onerror=()=>{
+      heroImg.onerror=null;
+      const card=cardUrl(active);
+      if(heroImg.src!==card)heroImg.src=card;
+      else if(active.cover)heroImg.src=active.cover;
+    };
+    heroImg.src=heroUrl(active);
+    heroImg.alt="";
+  }
   $("#psTitle").textContent=active.name+(active.id==="muhammad"?" ﷺ":"");
   $("#psArabic").textContent=arabicLine(active);
   $("#psSummary").textContent=active.summary||"";
