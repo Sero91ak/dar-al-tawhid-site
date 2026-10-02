@@ -592,6 +592,73 @@ body.free-voice-mode .mobile-actions{display:none!important}
   .free-voice-side{position:relative;top:auto;margin-top:10px}
   .free-textbox textarea{height:46dvh;min-height:300px}
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Voice Studio 2.9.61 · page-focused production architecture
+   Jede Aufgabe hat eine eigene Arbeitsfläche; kein Dashboard-Scroll.
+   ═══════════════════════════════════════════════════════════════ */
+[hidden]{display:none!important}
+.update-btn{display:inline-flex!important;background:rgba(255,255,255,.045);border:1px solid var(--line);color:#cbd7df}
+.update-btn.current{color:#9bd8ba;border-color:rgba(121,190,160,.24);background:rgba(121,190,160,.045)}
+.update-btn.checking{color:#f1c77c;border-color:rgba(217,182,111,.26);background:rgba(217,182,111,.055)}
+.studio-message-bar{position:fixed;z-index:80;left:50%;bottom:max(18px,var(--safe-bottom));transform:translateX(-50%);width:min(720px,calc(100vw - 28px));padding:10px 14px;border:1px solid var(--line);border-radius:13px;background:rgba(4,18,24,.94);box-shadow:0 18px 46px rgba(0,0,0,.32);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);font-size:11px;line-height:1.45;pointer-events:none;opacity:0;transition:opacity .16s ease}
+.studio-message-bar.good,.studio-message-bar.warn,.studio-message-bar.bad{opacity:1}
+.studio-message-bar.good{color:#a8ebc9;border-color:rgba(81,199,143,.28)}
+.studio-message-bar.warn{color:#f1c77c;border-color:rgba(217,182,111,.30)}
+.studio-message-bar.bad{color:#efb0b0;border-color:rgba(234,104,104,.30)}
+.studio-page-workspace{flex:1;min-height:0}
+.studio-focus-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(360px,.72fr);gap:12px;min-height:calc(100dvh - 146px);align-items:stretch}
+.studio-focus-main,.studio-focus-side{min-width:0;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018));border:1px solid var(--line);border-radius:18px;box-shadow:0 20px 56px rgba(0,0,0,.18)}
+.studio-focus-main{padding:22px 24px;overflow:auto}
+.studio-focus-side{padding:20px;position:sticky;top:124px;align-self:start;max-height:calc(100dvh - 142px);overflow:auto}
+.studio-page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--line)}
+.studio-page-head h1{font-size:clamp(25px,2vw,36px);margin:0 0 5px}
+.studio-page-head p{margin:0;color:var(--muted);font-size:12px;line-height:1.5;max-width:72ch}
+.studio-tool-label{font-size:9px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:#8fa4aa;margin-bottom:7px}
+.pronunciation-word-stage{display:grid;gap:14px}
+.pronunciation-term-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:end}
+.pronunciation-term-row .btn{min-height:42px}
+#pronunciationWorkspace .learning-word-picker{max-height:260px;padding:12px;gap:7px;margin:0}
+#pronunciationWorkspace .learning-word{font-size:11px;padding:7px 10px}
+#pronunciationWorkspace .learning-results{grid-template-columns:1fr 1fr;max-height:320px;margin:0}
+#pronunciationWorkspace .learning-result{padding:11px}
+#pronunciationWorkspace .learning-result .learning-result-tts{font-size:21px}
+.pronunciation-editor-card{display:grid;gap:10px}
+.pronunciation-selected{padding:11px 12px;border:1px solid rgba(217,182,111,.20);border-radius:12px;background:rgba(217,182,111,.045)}
+.pronunciation-selected small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.pronunciation-selected b{font-size:18px}
+#pronunciationWorkspace .learning-player{height:42px;margin:2px 0 4px}
+#pronunciationWorkspace .learning-preview-status{padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.022);margin:0}
+#pronunciationWorkspace .learning-actions{margin:0}
+#alphabetWorkspace .side-section,#systemWorkspace .side-section{border:0;margin:0;padding:0}
+.studio-info-stack{display:grid;gap:10px}
+.studio-info-line{padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.022)}
+.studio-info-line b{display:block;font-size:12px;margin-bottom:4px}.studio-info-line span{font-size:10px;line-height:1.5;color:var(--muted)}
+body.studio-page-prophets #csMeta,body.studio-page-prophets #csStructured,body.studio-page-prophets #csPublishSection,body.studio-page-prophets #csLibrarySection{display:none!important}
+body.studio-page-content #prophetPick{display:none!important}
+body.studio-page-content .prophet-review{display:none!important}
+body.studio-page-pronunciation .mobile-actions,body.studio-page-alphabet .mobile-actions,body.studio-page-system .mobile-actions{display:none!important}
+body.studio-page-pronunciation .content-studio-nav .cs-flow,body.studio-page-pronunciation .content-studio-nav .cs-fast-actions,
+body.studio-page-alphabet .content-studio-nav .cs-flow,body.studio-page-alphabet .content-studio-nav .cs-fast-actions,
+body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .content-studio-nav .cs-fast-actions{display:none!important}
+@media(min-width:800px){
+  body.studio-page-prophets,body.studio-page-content,body.studio-page-pronunciation,body.studio-page-alphabet,body.studio-page-system{overflow:hidden}
+  body.studio-page-prophets .shell,body.studio-page-content .shell{height:calc(100dvh - var(--safe-top) - var(--safe-bottom))}
+  body.studio-page-prophets #mainStudioWorkspace,body.studio-page-content #mainStudioWorkspace{overflow:hidden}
+  body.studio-page-prophets .editor-panel,body.studio-page-content .editor-panel{overflow:auto}
+}
+@media(max-width:980px){
+  .studio-focus-layout{grid-template-columns:1fr;min-height:auto}
+  .studio-focus-side{position:relative;top:auto;max-height:none}
+}
+@media(max-width:799px){
+  .studio-focus-main,.studio-focus-side{border-left:0;border-right:0;border-radius:0;padding:17px max(14px,var(--safe-right)) 22px max(14px,var(--safe-left));box-shadow:none}
+  .studio-page-head{display:block}
+  #pronunciationWorkspace .learning-results{grid-template-columns:1fr}
+  .pronunciation-term-row{grid-template-columns:1fr}
+  .update-btn{min-height:34px!important;padding:7px 9px!important}
+}
+
 </style>
 </head>
 <body>
@@ -600,16 +667,17 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.60 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.61 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
     <span id="companionPill" class="companion-pill">Mit Mac verbunden</span>
     <button id="installBtn" class="btn quiet install-btn">App installieren</button>
-    <button id="updateBtn" class="btn update-btn" type="button" hidden>Update</button>
+    <button id="updateBtn" class="btn update-btn current" type="button">Updates</button>
     <div class="status"><span id="engineDot" class="dot"></span><span id="engineLabel">Engine wird geprüft …</span></div>
   </div>
 </header>
+<div id="error" class="studio-message-bar" aria-live="polite"></div>
 
 <div id="mainStudioWorkspace" class="workspace">
 <main class="panel editor-panel">
@@ -649,7 +717,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.60</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.61</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
@@ -743,42 +811,87 @@ body.free-voice-mode .mobile-actions{display:none!important}
       <div class="qa-item"><span>Aussprache bestätigt</span><b id="qaConfirmed" class="warn">nein</b></div>
     </div>
   </section>
+</aside>
+</div>
 
-  <section class="side-section" id="learningSection">
-    <div class="side-title">Aussprache lernen</div>
-    <div class="notice">Klicke einen roten Begriff an, markiere ein beliebiges Wort im Text oder trage es manuell ein. Erst nach deinem Anhören und „So merken“ gilt es als bestätigt und wird grün.</div>
-    <div class="section-title" style="margin-top:10px;margin-bottom:5px">Wörter im aktuellen Text</div>
-    <div class="notice">Jedes Wort ist anklickbar. Grau = noch nicht markiert · Rot = Korrektur offen · Grün = dauerhaft gelernt.</div>
-    <div id="storyWordList" class="learning-word-picker"></div>
-    <label for="learnTerm" style="margin-top:10px">Falsch ausgesprochenes Wort / Name</label>
-    <input id="learnTerm" autocomplete="off" spellcheck="false" placeholder="z. B. Ṣaḥābah, Qurʾān, ʿUmar ibn al-Khaṭṭāb">
-    <div class="learning-actions">
-      <button id="learnSelectionBtn" class="btn quiet" type="button">Markiertes Wort übernehmen</button>
-      <button id="learnSearchBtn" class="btn secondary" type="button">Korrektur suchen</button>
-    </div>
-    <div class="section-title" style="margin-top:9px;margin-bottom:3px">Ausspracheformen wählen · anklicken & direkt hören</div>
-    <div id="learnResults" class="learning-results"></div>
-    <label for="learnArabic">Sprechform / Ausspracheziel · Arabisch oder Deutsch</label>
-    <input id="learnArabic" class="learning-arabic" dir="auto" autocomplete="off" spellcheck="false" placeholder="z. B. صَحَابَة oder gewünschte deutsche Sprechform">
-    <div class="learning-actions">
-      <button id="learnPreviewBtn" class="btn secondary" type="button">Schnell testen</button>
-      <button id="learnConfirmBtn" class="btn primary" type="button" disabled>So merken</button>
-    </div>
-    <div id="learnPreviewStatus" class="learning-preview-status">Wähle oben eine Ausspracheform oder bearbeite die Sprechform manuell.</div>
-    <div class="learning-actions" style="margin-top:6px">
-      <button id="learnVariantBtn" class="btn quiet" type="button">Nächste Variante testen</button>
-      <button id="learnResetVariantBtn" class="btn quiet" type="button">Variante 1</button>
-    </div>
-    <audio id="learnPlayer" class="learning-player" controls x-webkit-airplay="deny" disableremoteplayback hidden></audio>
-    <div class="audio-route-row">
-      <button class="btn quiet audio-route-btn" type="button" data-audio-output-button>Audio-Ausgabe: System</button>
-      <span class="audio-route-hint">AirPods · Bluetooth · Mac-Lautsprecher</span>
-    </div>
-    <button id="learnSyncBtn" class="btn quiet" type="button" style="width:100%">Online-Wortschatz aktualisieren</button>
-    <div id="learnState" class="learning-status">Lernwortschatz wird geladen …</div>
-  </section>
+<section id="pronunciationWorkspace" class="studio-page-workspace" hidden>
+  <div id="learningSection" class="studio-focus-layout">
+    <main class="studio-focus-main">
+      <div class="studio-page-head">
+        <div>
+          <div class="studio-tool-label">Aussprache · Fuṣḥā · Serhat Voice</div>
+          <h1>Aussprache prüfen &amp; lernen</h1>
+          <p>Wort anklicken, vorhandene Sprechform wählen, sofort anhören und erst nach deiner Kontrolle dauerhaft speichern. Rot bleibt offen, Grün ist bestätigt.</p>
+        </div>
+      </div>
+      <div class="pronunciation-word-stage">
+        <div>
+          <div class="section-title">Wörter im aktuellen Text</div>
+          <div class="notice" style="margin-bottom:8px">Grau = noch nicht geprüft · Rot = Korrektur offen · Grün = dauerhaft gelernt.</div>
+          <div id="storyWordList" class="learning-word-picker"></div>
+        </div>
+        <div>
+          <div class="section-title">Falsch ausgesprochenes Wort / Name</div>
+          <div class="pronunciation-term-row">
+            <input id="learnTerm" autocomplete="off" spellcheck="false" placeholder="z. B. Allah, Ṣaḥābah, Qurʾān, ʿUmar ibn al-Khaṭṭāb">
+            <button id="learnSelectionBtn" class="btn quiet" type="button">Textauswahl übernehmen</button>
+          </div>
+          <button id="learnSearchBtn" class="btn secondary" type="button" style="width:100%;margin-top:8px">Ausspracheformen laden</button>
+        </div>
+        <div>
+          <div class="section-title">Ausspracheformen · anklicken zum Anhören</div>
+          <div id="learnResults" class="learning-results"><div class="notice">Wähle links ein Wort. Verfügbare Formen erscheinen hier.</div></div>
+        </div>
+      </div>
+    </main>
+    <aside class="studio-focus-side">
+      <div class="pronunciation-editor-card">
+        <div>
+          <div class="studio-tool-label">Bearbeitung des ausgewählten Wortes</div>
+          <div class="pronunciation-selected"><small>Aktuell</small><b id="learnSelectedLabel">Noch nichts gewählt</b></div>
+        </div>
+        <div>
+          <label for="learnArabic">Sprechform / Ausspracheziel · Arabisch oder Deutsch</label>
+          <input id="learnArabic" class="learning-arabic" dir="auto" autocomplete="off" spellcheck="false" placeholder="z. B. اللَّه oder gewünschte deutsche Sprechform">
+        </div>
+        <button id="learnPreviewBtn" class="btn secondary" type="button">Schnelltest anhören</button>
+        <div id="learnPreviewStatus" class="learning-preview-status">Bereit. Der Schnelltest unterbricht keine laufende Prophetengeschichte.</div>
+        <audio id="learnPlayer" class="learning-player" controls preload="auto" x-webkit-airplay="deny" disableremoteplayback hidden></audio>
+        <div class="learning-actions">
+          <button id="learnVariantBtn" class="btn quiet" type="button">Nächste Variante</button>
+          <button id="learnResetVariantBtn" class="btn quiet" type="button">Variante 1</button>
+        </div>
+        <button id="learnConfirmBtn" class="btn primary" type="button" disabled>So merken · dauerhaft bestätigen</button>
+        <div class="audio-route-row">
+          <button class="btn quiet audio-route-btn" type="button" data-audio-output-button>Audio-Ausgabe: System</button>
+          <span class="audio-route-hint">AirPods · Bluetooth · Mac-Lautsprecher</span>
+        </div>
+        <div style="height:1px;background:var(--line);margin:5px 0"></div>
+        <button id="learnSyncBtn" class="btn quiet" type="button">Wortschatz aktualisieren</button>
+        <div id="learnState" class="learning-status">Lernwortschatz wird geladen …</div>
+      </div>
+    </aside>
+  </div>
+</section>
 
-  <section class="side-section" id="alphabetAudioSection">
+<section id="alphabetWorkspace" class="studio-page-workspace" hidden>
+  <div class="studio-focus-layout">
+    <main class="studio-focus-main">
+      <div class="studio-page-head">
+        <div>
+          <div class="studio-tool-label">Kids · Alif–Yāʾ</div>
+          <h1>Fuṣḥā-Lernstimme</h1>
+          <p>Buchstaben, Ḥarakāt, Beispielwörter, Quiz und Begrüßung werden hier getrennt von Geschichten produziert und sprachlich freigegeben.</p>
+        </div>
+      </div>
+      <div class="studio-info-stack">
+        <div class="studio-info-line"><b>Strengmodus</b><span>Technische QA allein reicht nicht. Jeder Lernclip muss sprachlich korrekt sein, bevor er in Kids verwendet wird.</span></div>
+        <div class="studio-info-line"><b>Keine Vermischung</b><span>Alphabet-Produktion, Prophetengeschichten und freie Stimme bleiben getrennte Arbeitsbereiche.</span></div>
+        <div class="studio-info-line"><b>Direkte Bearbeitung</b><span>Der aktuell gewählte Lernclip und sämtliche dazugehörigen Aktionen stehen rechts zusammen.</span></div>
+      </div>
+    </main>
+    <aside class="studio-focus-side">
+      <section class="side-section" id="alphabetAudioSection">
     <div class="side-title">Alif–Yāʾ · Serhat Lernstimme</div>
     <div class="notice">Fuṣḥā-Strengmodus: Buchstabennamen, Fatḥah, Kasrah, Ḍammah und Beispielwörter werden nach festen Standardarabisch-Zielen erzeugt. Kurze Ḥarakāt werden mehrfach gesprochen, als sauberer Einzellaut isoliert und erneut technisch geprüft. Technische QA bleibt von der sprachlichen Freigabe getrennt.</div>
     <div id="alphabetPackProgress" class="learning-status" style="margin-top:9px">Manifest wird geladen …</div>
@@ -808,13 +921,33 @@ body.free-voice-mode .mobile-actions{display:none!important}
     </div>
     <div id="alphabetPackMessage" class="learning-status" style="margin-top:8px">Sprachliche Prüfung ist jetzt Pflicht. Technische QA allein bestätigt keinen Alphabet-Clip mehr.</div>
   </section>
+    </aside>
+  </div>
+</section>
 
-  <section id="engineSetupSection" class="side-section">
+<section id="systemWorkspace" class="studio-page-workspace" hidden>
+  <div class="studio-focus-layout">
+    <main class="studio-focus-main">
+      <div class="studio-page-head">
+        <div>
+          <div class="studio-tool-label">Voice Studio · System</div>
+          <h1>Engine &amp; Updates</h1>
+          <p>Engine-Zustand, Geräteverbindung und Updates an einer Stelle. Updates bleiben zusätzlich dauerhaft oben erreichbar.</p>
+        </div>
+      </div>
+      <div class="studio-info-stack">
+        <div class="studio-info-line"><b>Updates</b><span>Oben auf „Updates“ klicken: prüfen, installieren und automatisch neu starten – ohne Terminal.</span></div>
+        <div class="studio-info-line"><b>Engine</b><span>Serhat Voice, MLX/Metal und lokale Dienste werden hier geprüft; Produktionsinhalte bleiben davon getrennt.</span></div>
+        <div class="studio-info-line"><b>Geräte</b><span>iPad/iPhone-Companion und Audio-Ausgabe sind eigene Systemfunktionen und stehen nicht mehr zwischen Aussprachewerkzeugen.</span></div>
+      </div>
+    </main>
+    <aside class="studio-focus-side">
+      <section id="engineSetupSection" class="side-section">
     <div class="side-title">Serhat Engine</div>
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
     <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.60</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.61</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash</textarea>
@@ -823,9 +956,10 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <button id="healthBtn" class="btn quiet" style="width:100%;margin-top:8px">Verbindung erneut prüfen</button>
     <div id="engineHelp" class="notice" style="margin-top:9px">Installiert „DĀR Voice Studio“ als eigenständige Mac-App unter Programme. Danach arbeitest du ohne Safari oder Browserleiste; deine vorhandene SerhatVoice-/Chatterbox-Engine wird automatisch verwendet.</div>
   </section>
-  <div id="error" class="bad" style="font-size:11px;line-height:1.5"></div>
-</aside>
-</div>
+    </aside>
+  </div>
+</section>
+
 <section id="freeVoiceWorkspace" class="free-voice-workspace" hidden>
   <main class="panel free-voice-main">
     <div class="free-kicker">Persönlicher Bereich</div>
@@ -906,7 +1040,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.60 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.61 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
 </div>
 </div>
 
@@ -931,7 +1065,7 @@ let nativeUpdateState="idle",nativeLatestVersion="";
 let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let studioMode="production",freeVoiceAudioUrl="",freeVoiceProgressTimer=null;
 let freeVoiceLearningResults=[],freeVoiceLearningCandidate=null,freeVoiceLearningPreviewId="",freeVoiceLearningPreviewUrl="";
-let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null;
+let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null,learningPreviewRequestSerial=0;
 let learnedCanonicals=new Set(),learnedTerms=new Set(),confirmedAudioLocks=new Set();
 let manualLearningTerm="",learningVariant=0;
 let pendingLearningTerms=new Set();
@@ -941,6 +1075,59 @@ const $=s=>document.querySelector(s);
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
 
 function learningNorm(v){return String(v||"").trim().toLocaleLowerCase("de-DE")}
+function learningSearchNorm(v){
+  return String(v||"")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .toLocaleLowerCase("de-DE")
+    .replace(/[ʿʾ’']/g,"")
+    .replace(/š/g,"sh").replace(/ǧ/g,"j").replace(/ḏ/g,"dh").replace(/ṯ/g,"th")
+    .replace(/[^a-z0-9\u0600-\u06ff]+/g," ")
+    .replace(/\s+/g," ").trim();
+}
+function localLearningCandidates(term,limit=12){
+  const q=learningSearchNorm(term);
+  if(!q)return[];
+  const rows=[],seen=new Set();
+  for(const r of (library?.rules||[])){
+    const values=[r.string_to_replace,r.canonical,r.alias].filter(Boolean);
+    const norms=values.map(learningSearchNorm).filter(Boolean);
+    if(!norms.length)continue;
+    let score=0;
+    if(norms.includes(q))score=1;
+    else if(norms.some(v=>(q.length>=3&&v.includes(q))||(v.length>=3&&q.includes(v))))score=.92;
+    else continue;
+    const tts=String(r.tts_text||r.ttsText||"").trim();
+    if(!tts)continue;
+    const canonical=String(r.canonical||r.string_to_replace||term);
+    const lang=String(r.tts_language||(/[\u0600-\u06ff]/.test(tts)?"ar":"de"));
+    const key=[learningSearchNorm(canonical),tts,lang].join("|");
+    if(seen.has(key))continue;
+    seen.add(key);
+    rows.push({
+      source:"Lokale Bibliothek",
+      score,
+      input:String(r.string_to_replace||term),
+      canonical,
+      alias:String(r.alias||""),
+      ttsText:tts,
+      ttsLanguage:lang,
+      category:String(r.category||""),
+      audioLockKey:String(r.audio_lock_key||""),
+      requiredHonorificKey:String(r.required_honorific_key||""),
+      voiceLock:String(r.voice_lock||"")
+    });
+    if(rows.length>=limit)break;
+  }
+  if(!rows.length){
+    rows.push({
+      source:"Manueller Vergleich",score:.25,input:term,canonical:term,alias:term,
+      ttsText:term,ttsLanguage:/[\u0600-\u06ff]/.test(term)?"ar":"de",
+      category:"manual",voiceLock:"REVIEW",requiresReview:true
+    });
+  }
+  return rows;
+}
 function isLearningDoneTerm(term){
   const n=learningNorm(term);
   if(!n)return false;
@@ -989,6 +1176,7 @@ async function chooseStoryWord(term){
   learningVariant=0;
   $("#learnResetVariantBtn").textContent="Variante 1";
   $("#learnTerm").value=term;
+  if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=term;
   renderAnalysis();
   renderStoryWordList();
   const d=await searchLearning(term);
@@ -1050,7 +1238,7 @@ window.darUpdateStateChanged=data=>{
   const state=$("#appUpdateState");
   if(!top||!side||!state)return;
 
-  top.hidden=true;
+  top.hidden=false;
   top.className="btn update-btn";
   top.disabled=false;
   side.disabled=false;
@@ -1060,7 +1248,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.60")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.61")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -1072,13 +1260,18 @@ window.darUpdateStateChanged=data=>{
     state.textContent=d.message||"Update wird installiert. Voice Studio startet anschließend automatisch neu.";
     state.className="update-state warn";
   }else if(nativeUpdateState==="checking"){
+    top.classList.add("checking");
+    top.textContent="Prüfe Updates …";
+    top.disabled=true;
     side.textContent="Update wird geprüft …";
     side.disabled=true;
     state.textContent="Suche nach neuer Voice-Studio-Version …";
     state.className="update-state";
   }else if(nativeUpdateState==="current"){
+    top.classList.add("current");
+    top.textContent="Updates · aktuell";
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.60")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.61")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     top.hidden=false;
@@ -1287,6 +1480,7 @@ function selectLearningCandidate(index,autoPreview=false){
   clearLearningPreview();
   document.querySelectorAll(".learning-result").forEach((el,i)=>el.classList.toggle("active",i===Number(index)));
   $("#learnArabic").value=r.ttsText||"";
+  if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=String(r.canonical||r.input||$("#learnTerm").value||"");
   learningVariant=0;
   $("#learnResetVariantBtn").textContent="Variante 1";
   const status=$("#learnPreviewStatus");
@@ -1302,15 +1496,30 @@ async function searchLearning(termOverride=""){
   const term=String(termOverride||$("#learnTerm").value||"").trim();
   if(!term){setMessage("Bitte zuerst ein falsch ausgesprochenes Wort oder einen Namen auswählen/eintragen.");return null}
   $("#learnTerm").value=term;
+  if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=term;
   clearLearningPreview();
+  let serverData=null;
   try{
-    const r=await localRequest("/learning/search",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({query:term,limit:10})});
+    const r=await localRequest("/learning/search",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({query:term,limit:12})
+    });
     const d=await r.json().catch(()=>({}));
-    if(!r.ok||!d.ok)throw Error(d.error||"Korrektursuche fehlgeschlagen.");
-    renderLearningResults(d.results||[]);renderLearningState(d);
-    return d;
-  }catch(e){setMessage(e.message||String(e));return null}
+    if(r.ok&&d.ok)serverData=d;
+  }catch(_){}
+  let rows=Array.isArray(serverData?.results)?serverData.results:[];
+  if(!rows.length)rows=localLearningCandidates(term,12);
+  renderLearningResults(rows);
+  if(serverData)renderLearningState(serverData);
+  const localOnly=!serverData;
+  const s=$("#learnPreviewStatus");
+  if(s&&localOnly){
+    s.textContent="Lokale Aussprachebibliothek aktiv · "+rows.length+" Form"+(rows.length===1?"":"en")+" verfügbar.";
+    s.className="learning-preview-status good";
+  }
+  return serverData||{ok:true,results:rows,localFallback:true};
 }
+
 function selectedTextWord(){
   const ta=$("#text");
   if(!ta)return"";
@@ -1350,7 +1559,8 @@ function takeTextSelection(){
   learningVariant=0;
   $("#learnResetVariantBtn").textContent="Variante 1";
   $("#learnTerm").value=value;
-  $("#learningSection").scrollIntoView({behavior:"smooth",block:"start"});
+  if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=value;
+  window.setStudioPage?.("pronunciation");
   searchLearning(value);
 }
 
@@ -1362,60 +1572,78 @@ async function previewLearning(options={}){
   if(!tts){setMessage("Wähle eine Ausspracheform oder trage die Sprechform ein.");return}
   if(nextVariant)learningVariant=Math.min(9,learningVariant+1);
   clearLearningPreview();
+  const serial=++learningPreviewRequestSerial;
   const btn=$("#learnPreviewBtn"),old=btn.textContent;
   const status=$("#learnPreviewStatus");
-  btn.disabled=true;
-  btn.textContent="Schnelltest …";
-  if(status){status.textContent="Wird vorbereitet … bei laufender Geschichte wartet nur bis zum Ende des aktuellen sicheren Sprachabschnitts.";status.className="learning-preview-status busy"}
-  const controller=new AbortController();
-  const timeout=setTimeout(()=>controller.abort(),120000);
+  btn.disabled=true;btn.textContent="Schnelltest läuft …";
+  if(status){status.textContent="Schnelltest wird in die sichere Audio-Warteschlange gelegt …";status.className="learning-preview-status busy"}
   try{
-    const r=await localRequest("/learning/preview",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
+    const start=await localRequest("/learning/preview-start",{
+      method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
-        term,
-        ttsText:tts,
-        canonical:learningCandidate?.canonical||term,
+        term,ttsText:tts,canonical:learningCandidate?.canonical||term,
         language:learningCandidate?.ttsLanguage||"",
         variant:learningVariant
-      }),
-      signal:controller.signal
+      })
     });
-    if(!r.ok){
-      const d=await r.json().catch(()=>({}));
-      throw Error(d.error||"Test-Audio konnte nicht erzeugt werden.");
+    const first=await start.json().catch(()=>({}));
+    if(!start.ok||!first.ok){
+      throw Error(first.error||"Schnelltest-Dienst ist nicht bereit. Voice Studio bitte über „Updates“ aktualisieren.");
     }
-    const blob=await r.blob();
+    const jobId=String(first.jobId||"");
+    if(!jobId)throw Error("Schnelltest-Auftrag konnte nicht angelegt werden.");
+    let state=first;
+    const deadline=Date.now()+180000;
+    while(serial===learningPreviewRequestSerial&&Date.now()<deadline){
+      if(state.state==="ready"||state.state==="error")break;
+      if(status){
+        if(state.state==="queued"){
+          status.textContent="Vorgemerkt · die laufende Geschichte bleibt unangetastet. Der Test startet am nächsten sicheren Übergang.";
+        }else{
+          status.textContent=state.message||"Schnelltest wird erzeugt …";
+        }
+        status.className="learning-preview-status busy";
+      }
+      await new Promise(r=>setTimeout(r,350));
+      if(serial!==learningPreviewRequestSerial)return;
+      const sr=await localRequest("/learning/preview-state?id="+encodeURIComponent(jobId),{cache:"no-store"});
+      state=await sr.json().catch(()=>({}));
+      if(!sr.ok&&!state.ok)throw Error(state.error||"Schnelltest-Status nicht erreichbar.");
+    }
+    if(serial!==learningPreviewRequestSerial)return;
+    if(state.state==="error")throw Error(state.error||"Schnelltest fehlgeschlagen.");
+    if(state.state!=="ready")throw Error("Schnelltest hat das Zeitlimit überschritten. Die laufende Produktion wurde nicht beschädigt.");
+
+    const ar=await localRequest("/learning/preview-audio?id="+encodeURIComponent(jobId),{cache:"no-store"});
+    if(!ar.ok){
+      const d=await ar.json().catch(()=>({}));
+      throw Error(d.error||"Schnelltest-Audio konnte nicht geladen werden.");
+    }
+    const blob=await ar.blob();
     if(!blob.size)throw Error("Schnelltest hat keine Audiodaten geliefert.");
-    learningPreviewId=r.headers.get("X-Learning-Preview-Id")||"";
+    learningPreviewId=ar.headers.get("X-Learning-Preview-Id")||String(state.previewId||"");
     if(!learningPreviewId)throw Error("Test-ID fehlt.");
     learningPreviewUrl=URL.createObjectURL(blob);
     const p=$("#learnPlayer");
-    p.src=learningPreviewUrl;
-    p.hidden=false;
+    p.src=learningPreviewUrl;p.hidden=false;
     $("#learnConfirmBtn").disabled=false;
     $("#learnResetVariantBtn").textContent="Variante "+(learningVariant+1);
-    const ms=Number(r.headers.get("X-Learning-Preview-Ms")||0);
-    const mode=r.headers.get("X-Learning-Preview-Mode")||"qa-fast-render";
-    await p.play().catch(()=>{});
-    const speed=mode==="confirmed-lock"
-      ?"LOCKED-Audio sofort"
-      :mode==="preview-cache"
-        ?"Sofort aus Schnellcache"
-        :"QA-Schnelltest";
-    if(status){status.textContent="▶ Läuft · Variante "+(learningVariant+1)+(ms?" · "+(ms/1000).toFixed(1)+" s":"")+" · "+speed;status.className="learning-preview-status good"}
-    setMessage("Hör genau hin. Nur wenn die Aussprache stimmt, „So merken“ drücken.","warn");
+    const ms=Number(ar.headers.get("X-Learning-Preview-Ms")||state.elapsedMs||0);
+    const mode=ar.headers.get("X-Learning-Preview-Mode")||state.previewMode||"qa-fast-render";
+    try{await p.play()}catch(_){}
+    const speed=mode==="confirmed-lock"?"bestätigtes LOCKED-Audio":mode==="preview-cache"?"Schnellcache":"QA-Schnelltest";
+    if(status){
+      status.textContent="▶ Bereit · Variante "+(learningVariant+1)+(ms?" · "+(ms/1000).toFixed(1)+" s":"")+" · "+speed;
+      status.className="learning-preview-status good";
+    }
+    setMessage("Schnelltest bereit. Nur wenn die Aussprache stimmt, „So merken“ drücken.","good");
   }catch(e){
-    const msg=e?.name==="AbortError"
-      ?"Schnelltest hat nach 120 Sekunden nicht geantwortet. Laufende Story bleibt unverändert; bitte erneut testen."
-      :(e.message||String(e));
+    if(serial!==learningPreviewRequestSerial)return;
+    const msg=e.message||String(e);
     if(status){status.textContent=msg;status.className="learning-preview-status bad"}
-    setMessage(msg);
+    setMessage(msg,"bad");
   }finally{
-    clearTimeout(timeout);
-    btn.disabled=false;
-    btn.textContent=old;
+    if(serial===learningPreviewRequestSerial){btn.disabled=false;btn.textContent=old}
   }
 }
 
@@ -1647,26 +1875,46 @@ function updateFreeVoiceCounter(){
   try{localStorage.setItem("dar.voice.freeText.v2",value)}catch(_){}
 }
 
-function setStudioMode(mode){
-  studioMode=mode==="free"?"free":"production";
-  const free=studioMode==="free";
-  $("#mainStudioWorkspace").hidden=free;
-  $("#freeVoiceWorkspace").hidden=!free;
-  document.body.classList.toggle("free-voice-mode",free);
-  const nav=document.querySelector(".content-studio-nav");
-  if(nav)nav.style.display="";
-  const freeTab=$("#csFreeVoiceTab");
-  if(freeTab)freeTab.classList.toggle("active",free);
-  const prophetTab=$("#csProphetTab");
-  if(prophetTab&&free)prophetTab.classList.remove("active");
-  const btn=$("#freeVoiceToggleBtn");
-  if(btn)btn.textContent=free?"Zur Produktion":"Freie Stimme";
-  if(free){
-    updateFreeVoiceCounter();
-    $("#freeVoiceText")?.focus();
-    $("#freeVoiceWorkspace")?.scrollIntoView({block:"start"});
-  }
+let studioPage="content";
+function setStudioPage(page){
+  const allowed=new Set(["prophets","content","pronunciation","alphabet","free","system"]);
+  page=allowed.has(page)?page:"content";
+  studioPage=page;
+  studioMode=page==="free"?"free":"production";
+
+  const main=$("#mainStudioWorkspace"),free=$("#freeVoiceWorkspace");
+  const pronunciation=$("#pronunciationWorkspace"),alphabet=$("#alphabetWorkspace"),system=$("#systemWorkspace");
+  if(main)main.hidden=!(page==="prophets"||page==="content");
+  if(free)free.hidden=page!=="free";
+  if(pronunciation)pronunciation.hidden=page!=="pronunciation";
+  if(alphabet)alphabet.hidden=page!=="alphabet";
+  if(system)system.hidden=page!=="system";
+
+  document.body.classList.remove(
+    "free-voice-mode","studio-page-prophets","studio-page-content",
+    "studio-page-pronunciation","studio-page-alphabet","studio-page-system"
+  );
+  document.body.classList.toggle("free-voice-mode",page==="free");
+  if(page!=="free")document.body.classList.add("studio-page-"+page);
+
+  const map={
+    prophets:"#csProphetTab",pronunciation:"#csPronunciationTab",
+    alphabet:"#csAlphabetTab",free:"#csFreeVoiceTab",system:"#csSystemTab"
+  };
+  ["#csProphetTab","#csPronunciationTab","#csAlphabetTab","#csFreeVoiceTab","#csSystemTab"].forEach(sel=>{
+    const el=$(sel);if(el)el.classList.toggle("active",map[page]===sel);
+  });
+  if(page!=="content")document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
+
+  const freeBtn=$("#freeVoiceToggleBtn");
+  if(freeBtn)freeBtn.textContent=page==="free"?"Zur Produktion":"Freie Stimme";
+  if(page==="free"){updateFreeVoiceCounter();$("#freeVoiceText")?.focus()}
+  if(page==="pronunciation"){renderStoryWordList();$("#learnTerm")?.focus()}
+  if(page==="system"&&NATIVE_MAC)requestNativeUpdate("check");
+  try{localStorage.setItem("dar.voice.studioPage.v1",page)}catch(_){}
 }
+window.setStudioPage=setStudioPage;
+function setStudioMode(mode){setStudioPage(mode==="free"?"free":"content")}
 
 function getFreeVoiceSelection(){
   const ta=$("#freeVoiceText");
@@ -2157,7 +2405,8 @@ $("#termList").addEventListener("click",e=>{
   learningVariant=0;
   $("#learnResetVariantBtn").textContent="Variante 1";
   $("#learnTerm").value=term;
-  $("#learningSection").scrollIntoView({behavior:"smooth",block:"start"});
+  if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=term;
+  window.setStudioPage?.("pronunciation");
   searchLearning(term);
 });
 $("#learnResults").addEventListener("click",e=>{
@@ -2173,7 +2422,7 @@ $("#learnResetVariantBtn").onclick=()=>{learningVariant=0;$("#learnResetVariantB
 $("#learnConfirmBtn").onclick=confirmLearning;
 $("#learnSyncBtn").onclick=syncLearning;
 $("#learnTerm").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();searchLearning()}});
-$("#learnArabic").addEventListener("input",()=>{clearLearningPreview();const s=$("#learnPreviewStatus");if(s){s.textContent="Sprechform geändert · Schnelltest erneut starten.";s.className="learning-preview-status"}});
+$("#learnArabic").addEventListener("input",()=>{learningPreviewRequestSerial++;clearLearningPreview();const s=$("#learnPreviewStatus");if(s){s.textContent="Sprechform geändert · Schnelltest erneut starten.";s.className="learning-preview-status"}});
 
 try{$("#freeVoiceText").value=localStorage.getItem("dar.voice.freeText.v2")||""}catch(_){}
 updateFreeVoiceCounter();
@@ -2188,7 +2437,7 @@ $("#analyzeBtn").onclick=manualAnalyze;
 $("#mobileAnalyzeBtn").onclick=manualAnalyze;
 $("#generateBtn").onclick=generate;
 $("#mobileGenerateBtn").onclick=generate;
-$("#freeVoiceToggleBtn").onclick=()=>setStudioMode(studioMode==="free"?"production":"free");
+$("#freeVoiceToggleBtn").onclick=()=>setStudioPage(studioPage==="free"?"content":"free");
 $("#freeVoiceGenerateBtn").onclick=generateFreeVoice;
 $("#freeVoiceImproveBtn").onclick=openFreeVoicePronunciation;
 $("#freeVoiceLearnPreviewBtn").onclick=previewFreeVoiceLearning;
@@ -2329,6 +2578,11 @@ if(IS_LOCAL){
 loadLibrary();
 checkHealth({quiet:true}).then(()=>analyzeProsody());
 setInterval(()=>checkHealth({quiet:true}),5000);
+setTimeout(()=>{
+  let initial="prophets";
+  try{initial=localStorage.getItem("dar.voice.studioPage.v1")||"prophets"}catch(_){}
+  setStudioPage(initial);
+},120);
 
 (function prophetStoryManualLoader(){
   const sel=$("#prophetPickId"),ta=$("#text"),ready=$("#prophetPickReady"),list=$("#prophetPickList");
@@ -2498,9 +2752,9 @@ setInterval(()=>checkHealth({quiet:true}),5000);
     if(input)input.value=value;
     const arabic=$("#learnArabic");
     if(arabic&&tts)arabic.value=String(tts||"");
-    const section=$("#learningSection");
-    section?.scrollIntoView({behavior:"smooth",block:"start"});
-    setTimeout(()=>searchLearning(value),180);
+    window.setStudioPage?.("pronunciation");
+    if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=value;
+    setTimeout(()=>searchLearning(value),80);
   }
   function renderStrictReview(d){
     const box=$("#prophetStrictReview"),meta=$("#prophetStrictReviewMeta"),list=$("#prophetStrictReviewList"),resume=$("#prophetStrictResumeBtn");
@@ -2724,7 +2978,7 @@ setInterval(()=>checkHealth({quiet:true}),5000);
   },4000);
 })();
 </script>
-<script src="content-studio.js?v=2913"></script>
-<script src="alphabet-audio-studio.js?v=2929"></script>
+<script src="content-studio.js?v=2961"></script>
+<script src="alphabet-audio-studio.js?v=2961"></script>
 </body>
 </html>
