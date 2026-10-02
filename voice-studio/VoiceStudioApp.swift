@@ -21,7 +21,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.63"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.64"
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -31,7 +31,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.63"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.64"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
         config.userContentController.add(self, name: "darCompanion")
@@ -438,7 +438,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
                     "--retry", "2",
                     "--retry-delay", "1",
                     "-H", "Cache-Control: no-cache",
-                    "-H", "User-Agent: DAR-Voice-Studio-Updater/2.9.63"
+                    "-H", "User-Agent: DAR-Voice-Studio-Updater/2.9.64"
                 ]
                 if isGitHubAPI {
                     args += ["-H", "Accept: application/vnd.github.raw+json"]
@@ -507,7 +507,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 7
         request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
-        request.setValue("DAR-Voice-Studio-Updater/2.9.63", forHTTPHeaderField: "User-Agent")
+        request.setValue("DAR-Voice-Studio-Updater/2.9.64", forHTTPHeaderField: "User-Agent")
         if url.host == "api.github.com" {
             request.setValue("application/vnd.github.raw+json", forHTTPHeaderField: "Accept")
         } else {
@@ -869,15 +869,54 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         window.toggleFullScreen(sender)
     }
 
+    private func healthMatchesCurrentEngine(data: Data?, response: URLResponse?, error: Error?) -> Bool {
+        guard error == nil,
+              (response as? HTTPURLResponse)?.statusCode == 200,
+              let data = data,
+              let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let version = object["engine_version"] as? String else {
+            return false
+        }
+        return version == currentVersion
+    }
+
+    private func stopStaleInstalledEngine() {
+        let home = FileManager.default.homeDirectoryForCurrentUser
+        let target = home.appendingPathComponent("Applications/DAR-Voice-Studio/local-engine.py").path
+        let uid = getuid()
+
+        func run(_ executable: String, _ arguments: [String]) {
+            let p = Process()
+            p.executableURL = URL(fileURLWithPath: executable)
+            p.arguments = arguments
+            p.standardOutput = FileHandle.nullDevice
+            p.standardError = FileHandle.nullDevice
+            try? p.run()
+            p.waitUntilExit()
+        }
+
+        run("/bin/launchctl", ["bootout", "gui/\(uid)/com.daraltawhid.voice-engine"])
+        run("/usr/bin/pkill", ["-TERM", "-f", target])
+        usleep(350_000)
+        run("/usr/bin/pkill", ["-KILL", "-f", target])
+    }
+
     private func ensureEngine() {
         var request = URLRequest(url: healthURL)
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 1.0
 
-        URLSession.shared.dataTask(with: request) { [weak self] _, response, error in
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             guard let self = self else { return }
-            let ok = (response as? HTTPURLResponse)?.statusCode == 200 && error == nil
-            if !ok {
+            if self.healthMatchesCurrentEngine(data: data, response: response, error: error) {
+                return
+            }
+
+            // HTTP 200 von einer alten Engine ist kein gesunder Zustand.
+            // Sie muss vollständig beendet werden, sonst belegt sie Port 8787
+            // und die neue Engine kann nie starten.
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.stopStaleInstalledEngine()
                 self.startEngineDirectly()
             }
         }.resume()
@@ -1025,7 +1064,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         if attempt < 3 {
             phase = "Serhat Engine wird verbunden …"
         } else if attempt < 12 {
-            phase = "Lokale Voice-Dienste werden geprüft …"
+            phase = "Engine-Version und lokale Voice-Dienste werden geprüft …"
         } else if attempt < 32 {
             phase = "Serhat Engine startet …"
         } else {
@@ -1037,9 +1076,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 1.5
 
-        URLSession.shared.dataTask(with: request) { [weak self] _, response, error in
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             guard let self = self else { return }
-            let ok = (response as? HTTPURLResponse)?.statusCode == 200 && error == nil
+            let ok = self.healthMatchesCurrentEngine(data: data, response: response, error: error)
             if ok {
                 self.updateLoadingProgress(100, status: "Bereit")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.24) {
