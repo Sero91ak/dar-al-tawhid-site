@@ -940,6 +940,67 @@ try{pendingLearningTerms=new Set(JSON.parse(localStorage.getItem("dar.voice.pend
 const $=s=>document.querySelector(s);
 
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
+
+function learningNorm(v){return String(v||"").trim().toLocaleLowerCase("de-DE")}
+function isLearningDoneTerm(term){
+  const n=learningNorm(term);
+  if(!n)return false;
+  for(const x of learnedTerms){if(learningNorm(x)===n)return true}
+  for(const x of learnedCanonicals){if(learningNorm(x)===n)return true}
+  return false;
+}
+function persistPendingLearningTerms(){
+  try{localStorage.setItem("dar.voice.pendingLearningTerms.v1",JSON.stringify(Array.from(pendingLearningTerms).slice(-500)))}catch(_){}
+}
+function textWordTokens(){
+  const text=String($("#text")?.value||"");
+  const matches=text.match(/[A-Za-zÀ-žĀ-žʿʾḤḥṢṣḌḍṬṭẒẓḎḏṮṯŠšǦǧĠġḪḫ\u0600-\u06FF]+(?:[-’'][A-Za-zÀ-žĀ-žʿʾḤḥṢṣḌḍṬṭẒẓḎḏṮṯŠšǦǧĠġḪḫ\u0600-\u06FF]+)*/g)||[];
+  const out=[],seen=new Set();
+  for(const raw of matches){
+    const word=String(raw||"").trim();
+    const n=learningNorm(word);
+    if(!word||seen.has(n))continue;
+    seen.add(n);out.push(word);
+  }
+  return out;
+}
+function looksIslamicSensitive(term){
+  return /[ʿʾāīūḥṣḍṭẓḏṯšǧġḫĀĪŪḤṢḌṬẒḎṮŠǦĠḪ\u0600-\u06FF]/.test(String(term||""));
+}
+function renderStoryWordList(){
+  const wrap=$("#storyWordList");
+  if(!wrap)return;
+  const words=textWordTokens();
+  if(!words.length){wrap.innerHTML='<span class="notice">Noch kein Text geladen.</span>';return}
+  wrap.innerHTML=words.map(word=>{
+    const done=isLearningDoneTerm(word);
+    const pending=pendingLearningTerms.has(learningNorm(word))||learningNorm(manualLearningTerm)===learningNorm(word);
+    const cls=done?"done":pending?"pending":"";
+    const state=done?" · OK":pending?" · offen":"";
+    return '<button type="button" class="learning-word '+cls+'" data-story-word="'+esc(word)+'">'+esc(word)+state+'</button>';
+  }).join("");
+  wrap.querySelectorAll("[data-story-word]").forEach(btn=>btn.addEventListener("click",()=>chooseStoryWord(btn.dataset.storyWord||"")));
+}
+async function chooseStoryWord(term){
+  term=String(term||"").trim();
+  if(!term)return;
+  manualLearningTerm=term;
+  pendingLearningTerms.add(learningNorm(term));
+  persistPendingLearningTerms();
+  learningVariant=0;
+  $("#learnResetVariantBtn").textContent="Variante 1";
+  $("#learnTerm").value=term;
+  renderAnalysis();
+  renderStoryWordList();
+  const d=await searchLearning(term);
+  const rows=Array.isArray(d?.results)?d.results:[];
+  const strong=rows.length&&Number(rows[0].score||0)>=.96;
+  if(strong||(!rows.length&&!looksIslamicSensitive(term))){
+    await previewLearning();
+  }else{
+    setMessage("„"+term+"“ ist ausgewählt. Bitte passende Sprechform wählen und dann Schnelltest drücken.","warn");
+  }
+}
 function setMessage(text,type="bad"){
   const el=$("#error");
   el.textContent=text||"";
@@ -1118,6 +1179,7 @@ function renderAnalysis(){
   const openCount=Math.max(0,unique.length-lc);
   $("#qaLocked").textContent=unique.length?(lc+" bestätigt · "+openCount+" offen"):"keine";
   $("#qaLocked").className=openCount?"warn":"good";
+  renderStoryWordList();
   updateQA();
 }
 async function analyzeProsody(){
@@ -1186,6 +1248,7 @@ function renderLearningState(d={}){
   $("#learnState").textContent=learned+" dauerhaft gelernt · "+confirmedAudioLocks.size+" LOCKED Audio · lokal gesichert + Backup · "+master+" Master-Einträge ("+
     prophets+" Propheten · "+sahaba+" Ṣaḥābah · "+sahabiyyat+" Ṣaḥābiyyāt) · "+online+" Online-Regeln"+synced;
   if($("#text")?.value)renderAnalysis();
+  renderStoryWordList();
 }
 async function loadLearningState(){
   if(!engineOK){$("#learnState").textContent="Engine starten, um den Lernwortschatz zu verwenden.";return}
