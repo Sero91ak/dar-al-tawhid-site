@@ -106,6 +106,9 @@ PROPHET_STORY_REVIEW_FILE=PROPHET_STORY_HOME/"pronunciation-review.json"
 PROPHET_STORY_CAFFEINATE_LOCK=threading.Lock()
 PROPHET_STORY_CAFFEINATE=None
 LEARNING_PREVIEWS={}
+LEARNING_PREVIEW_JOB_LOCK=threading.Lock()
+LEARNING_PREVIEW_SERIAL_LOCK=threading.Lock()
+LEARNING_PREVIEW_JOBS={}
 ALPHABET_BATCH_STATE={
     "running":False,
     "phase":"idle",
@@ -1261,23 +1264,19 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
         # Low-latency: nur das einzelne Wort / die kurze Phrase erzeugen.
         # Der MLX-Worker bleibt warm; seine Request-Sperre serialisiert diesen
         # Mini-Render mit dem laufenden Story-Segment, ohne den Batch abzubrechen.
-        LEARNING_PREVIEW_WAITING.set()
-        try:
-            model=load_production_model()
-            sample_rate=int(model.sr)
-            seed=3000+(int(preview_id[:8],16)%800000)+variant*977
-            # Bewährter Lernpfad: derselbe QA-/Rescue-Renderer, der vor dem
-            # Low-Latency-Umbau zuverlässig funktionierte. Für ein einzelnes Wort
-            # bleibt er kurz, nutzt aber Stotter-/Pause-/Token-Rettung vollständig.
-            preview_mode_name="narration"
-            wav,metrics=render_segment_with_qa(
-                model,effective_tts,requested,preview_mode_name,True,seed_base=seed
-            )
-            save_wav(cache_path,wav,sample_rate)
-            shutil.copy2(cache_path,path)
-            preview_mode="qa-fast-render"
-        finally:
-            LEARNING_PREVIEW_WAITING.clear()
+        model=load_production_model()
+        sample_rate=int(model.sr)
+        seed=3000+(int(preview_id[:8],16)%800000)+variant*977
+        # Bewährter Lernpfad: derselbe QA-/Rescue-Renderer, der vor dem
+        # Low-Latency-Umbau zuverlässig funktionierte. Der Queue-Wrapper hält
+        # LEARNING_PREVIEW_WAITING über die komplette sichere Warte-/Renderphase.
+        preview_mode_name="narration"
+        wav,metrics=render_segment_with_qa(
+            model,effective_tts,requested,preview_mode_name,True,seed_base=seed
+        )
+        save_wav(cache_path,wav,sample_rate)
+        shutil.copy2(cache_path,path)
+        preview_mode="qa-fast-render"
 
     elapsed_ms=int(round((time.perf_counter()-started)*1000))
     meta={
@@ -1312,6 +1311,104 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
         previewMode=preview_mode,elapsedMs=elapsed_ms,variant=variant
     )
     return meta
+
+
+def _cleanup_learning_preview_jobs():
+    cutoff=time.time()-900
+    with LEARNING_PREVIEW_JOB_LOCK:
+        stale=[
+            key for key,row in LEARNING_PREVIEW_JOBS.items()
+            if float((row or {}).get("createdAt") or 0)<cutoff
+        ]
+        for key in stale:
+            LEARNING_PREVIEW_JOBS.pop(key,None)
+
+def _learning_preview_job_snapshot(job_id:str):
+    with LEARNING_PREVIEW_JOB_LOCK:
+        row=dict(LEARNING_PREVIEW_JOBS.get(str(job_id or "")) or {})
+    if not row:
+        return {"ok":False,"jobId":str(job_id or ""),"state":"missing","error":"Schnelltest-Auftrag nicht gefunden."}
+    # Lokale Dateipfade nie an die UI ausgeben.
+    row.pop("path",None)
+    row.pop("meta",None)
+    return {"ok":True,**row}
+
+def _run_learning_preview_job(job_id:str,payload:dict):
+    with LEARNING_PREVIEW_SERIAL_LOCK:
+        LEARNING_PREVIEW_WAITING.set()
+        try:
+            with LEARNING_PREVIEW_JOB_LOCK:
+                row=LEARNING_PREVIEW_JOBS.get(job_id)
+                if row is not None:
+                    row.update({
+                        "state":"rendering",
+                        "message":"Sicherer Schnelltest wird erzeugt …",
+                        "startedAt":time.time(),
+                    })
+            meta=create_learning_preview(
+                str(payload.get("term","")),
+                str(payload.get("ttsText","")),
+                str(payload.get("canonical","")),
+                str(payload.get("language","")),
+                int(payload.get("variant",0) or 0),
+            )
+            with LEARNING_PREVIEW_JOB_LOCK:
+                row=LEARNING_PREVIEW_JOBS.get(job_id)
+                if row is not None:
+                    row.update({
+                        "state":"ready",
+                        "message":"Schnelltest bereit.",
+                        "previewId":str(meta.get("id") or ""),
+                        "previewMode":str(meta.get("previewMode") or "qa-fast-render"),
+                        "elapsedMs":int(meta.get("elapsedMs") or 0),
+                        "variant":int(meta.get("variant") or 0),
+                        "path":str(meta.get("path") or ""),
+                        "finishedAt":time.time(),
+                        "error":"",
+                    })
+        except Exception as e:
+            with LEARNING_PREVIEW_JOB_LOCK:
+                row=LEARNING_PREVIEW_JOBS.get(job_id)
+                if row is not None:
+                    row.update({
+                        "state":"error",
+                        "message":"Schnelltest fehlgeschlagen.",
+                        "error":str(e),
+                        "finishedAt":time.time(),
+                    })
+        finally:
+            LEARNING_PREVIEW_WAITING.clear()
+
+def start_learning_preview_job(payload:dict):
+    _cleanup_learning_preview_jobs()
+    job_id=uuid.uuid4().hex[:16]
+    term=str((payload or {}).get("term","")).strip()
+    if not term:
+        raise ValueError("Wort oder Name fehlt.")
+    row={
+        "jobId":job_id,
+        "state":"queued",
+        "message":"Schnelltest ist vorgemerkt. Laufende Geschichte bleibt unangetastet.",
+        "term":term,
+        "variant":int((payload or {}).get("variant",0) or 0),
+        "createdAt":time.time(),
+        "startedAt":0,
+        "finishedAt":0,
+        "previewId":"",
+        "previewMode":"",
+        "elapsedMs":0,
+        "error":"",
+    }
+    with LEARNING_PREVIEW_JOB_LOCK:
+        LEARNING_PREVIEW_JOBS[job_id]=row
+    thread=threading.Thread(
+        target=_run_learning_preview_job,
+        args=(job_id,dict(payload or {})),
+        daemon=True,
+        name="dar-learning-preview-"+job_id[:6],
+    )
+    thread.start()
+    return _learning_preview_job_snapshot(job_id)
 
 
 def _alphabet_slot_kind(slot_id:str):
@@ -6784,10 +6881,40 @@ class H(BaseHTTPRequestHandler):
                 "library":LIB.get("counts",{}),
                 "profile":VOICE_PROFILE.get("delivery",{}),
                 "companion_mode":bool(NETWORK_MODE and PAIR_TOKEN),
-                "companion_client":not self.is_loopback_client()
+                "companion_client":not self.is_loopback_client(),
+                "learning_preview_queue":{
+                    "waiting":LEARNING_PREVIEW_WAITING.is_set(),
+                    "jobs":len(LEARNING_PREVIEW_JOBS)
+                }
             })
         elif p=="/status":
             self.send_json(200,{"ok":True,**get_status()})
+        elif p=="/learning/preview-state":
+            qs=parse_qs(urlparse(self.path).query)
+            job_id=str((qs.get("id") or [""])[0])
+            snap=_learning_preview_job_snapshot(job_id)
+            self.send_json(200 if snap.get("ok") else 404,snap)
+        elif p=="/learning/preview-audio":
+            qs=parse_qs(urlparse(self.path).query)
+            job_id=str((qs.get("id") or [""])[0])
+            with LEARNING_PREVIEW_JOB_LOCK:
+                row=dict(LEARNING_PREVIEW_JOBS.get(job_id) or {})
+            if not row:
+                return self.send_json(404,{"ok":False,"error":"Schnelltest-Auftrag nicht gefunden."})
+            if row.get("state")!="ready":
+                return self.send_json(409,{"ok":False,"state":row.get("state"),"error":row.get("error") or "Schnelltest ist noch nicht fertig."})
+            path=Path(str(row.get("path") or ""))
+            if not path.exists() or path.stat().st_size<=44:
+                return self.send_json(410,{"ok":False,"error":"Schnelltest-Audio fehlt."})
+            b=path.read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type","audio/wav")
+            self.send_header("Content-Length",str(len(b)))
+            self.send_header("X-Learning-Preview-Id",str(row.get("previewId") or ""))
+            self.send_header("X-Learning-Preview-Mode",str(row.get("previewMode") or "qa-fast-render"))
+            self.send_header("X-Learning-Preview-Ms",str(int(row.get("elapsedMs") or 0)))
+            self.send_header("X-Learning-Variant",str(int(row.get("variant") or 0)))
+            self.cors();self.end_headers();self.wfile.write(b)
         elif p=="/diagnostics":
             import sys, platform
             try:
@@ -7048,15 +7175,28 @@ class H(BaseHTTPRequestHandler):
             except Exception as e:
                 return self.send_json(502,{"ok":False,"error":"Online-Wortschatz konnte nicht synchronisiert werden: "+str(e),**learning_state()})
 
+        if p=="/learning/preview-start":
+            try:
+                return self.send_json(202,start_learning_preview_job(data))
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e)})
+
         if p=="/learning/preview":
             try:
-                meta=create_learning_preview(
-                    str(data.get("term","")),
-                    str(data.get("ttsText","")),
-                    str(data.get("canonical","")),
-                    str(data.get("language","")),
-                    int(data.get("variant",0) or 0),
-                )
+                # Rückwärtskompatibilität für ältere UI-Versionen. Auch dieser
+                # synchrone Pfad benutzt dieselbe serielle Sicherheitszone.
+                with LEARNING_PREVIEW_SERIAL_LOCK:
+                    LEARNING_PREVIEW_WAITING.set()
+                    try:
+                        meta=create_learning_preview(
+                            str(data.get("term","")),
+                            str(data.get("ttsText","")),
+                            str(data.get("canonical","")),
+                            str(data.get("language","")),
+                            int(data.get("variant",0) or 0),
+                        )
+                    finally:
+                        LEARNING_PREVIEW_WAITING.clear()
                 b=Path(meta["path"]).read_bytes()
                 self.send_response(200)
                 self.send_header("Content-Type","audio/wav")
