@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v128";
+const CACHE_NAME="dar-al-tawhid-kids-v122";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -13,7 +13,7 @@ const PRECACHE=[
   "/kids/data/stories-authentic.json",
   "/kids/data/prophet-stories.json",
   "/kids/prophet-stories.css?v=46",
-  "/kids/prophet-muhammad-v22.css?v=43",
+  "/kids/prophet-muhammad-v22.css?v=44",
   "/kids/prophet-stories.js?v=46",
   "/kids/assets/prophet-scenes/library.webp",
   "/kids/assets/prophet-scenes/garden.webp",
@@ -34,6 +34,8 @@ const PRECACHE=[
   "/kids/assets/story-wow/v22-stories-header.jpg",
   "/kids/assets/story-wow/v22-prophet-library.jpg",
   "/kids/assets/story-wow/v22-coin-story.jpg",
+  "/kids/assets/story-wow/v22-muhammad-birth.jpg",
+  "/kids/assets/story-wow/v22-muhammad-home.jpg",
   "/kids/stories-reference-v31.css?v=47",
   "/kids/assets/story-wow/v30-muhammad-home.jpg",
   "/kids/assets/story-wow/v41-muhammad-home-arch.jpg",
