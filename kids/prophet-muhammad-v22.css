@@ -3634,3 +3634,18 @@ html[data-view="stories"]{--r41-story-safe:max(58px,env(safe-area-inset-top,0px)
   outline:3px solid #ffe59a!important;
   outline-offset:3px!important;
 }
+
+
+/* REFERENCE_ORNAMENT_FIX_V46
+   Re-center the inner diamond after the V44 size reduction. */
+@media(max-width:600px){
+  .ps-mh-ornament span::after{
+    left:50%!important;
+    top:50%!important;
+    right:auto!important;
+    bottom:auto!important;
+    width:4px!important;
+    height:4px!important;
+    transform:translate(-50%,-50%) rotate(45deg)!important;
+  }
+}
