@@ -1191,3 +1191,63 @@
   .ps-mh-value-grid{gap:9px!important}
   .ps-library-page .ps-mode{font-size:11px!important;padding:0 7px!important}
 }
+
+
+/* KIDS_NATIVE_ICONS_AND_EXPANDED_V49 */
+@media(max-width:699px){
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList).r22-expanded{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+    overflow:visible!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList).r22-expanded .story-row{
+    width:100%!important;
+    max-width:none!important;
+    min-height:244px!important;
+  }
+}
+@media(min-width:700px){
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList).r22-expanded{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:18px!important;
+    overflow:visible!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList).r22-expanded .story-row{
+    width:100%!important;
+    max-width:none!important;
+  }
+}
+
+/* Force simple vector-style nav icons so the dock never looks empty. */
+html body .bottom-nav .nav-btn .ico,
+html body .ps-mh-bottom-nav .ps-mh-nav-icon{
+  display:block!important;
+  background-image:none!important;
+  background-color:currentColor!important;
+  background-size:contain!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  filter:none!important;
+}
+html body .bottom-nav .nav-btn[data-target="today"] .ico,
+html body .ps-mh-bottom-nav .ps-mh-nav-icon-sun{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 1.8v2.6M12 19.6v2.6M1.8 12h2.6M19.6 12h2.6M4.8 4.8l1.8 1.8M17.4 17.4l1.8 1.8M19.2 4.8l-1.8 1.8M6.6 17.4l-1.8 1.8'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat!important;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 1.8v2.6M12 19.6v2.6M1.8 12h2.6M19.6 12h2.6M4.8 4.8l1.8 1.8M17.4 17.4l1.8 1.8M19.2 4.8l-1.8 1.8M6.6 17.4l-1.8 1.8'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat!important;
+}
+html body .bottom-nav .nav-btn[data-target="stories"] .ico,
+html body .ps-mh-bottom-nav .ps-mh-nav-icon-stories{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 13a8 8 0 0 1 16 0'/%3E%3Cpath d='M4 13v5a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2ZM20 13v5a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2Z'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat!important;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 13a8 8 0 0 1 16 0'/%3E%3Cpath d='M4 13v5a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2ZM20 13v5a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2Z'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat!important;
+}
+html body .bottom-nav .nav-btn[data-target="quran"] .ico,
+html body .ps-mh-bottom-nav .ps-mh-nav-icon-quran{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath fill='black' d='M2 2.5C5.4 1.1 8.5 1.4 11.2 3v16C8.6 17.4 5.6 17.2 2 18.5v-16Zm20 0v16c-3.6-1.3-6.6-1.1-9.2.5V3c2.7-1.6 5.8-1.9 9.2-.5ZM11.4 3h1.2v16.4h-1.2V3Z'/%3E%3C/svg%3E") center/contain no-repeat!important;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 22'%3E%3Cpath fill='black' d='M2 2.5C5.4 1.1 8.5 1.4 11.2 3v16C8.6 17.4 5.6 17.2 2 18.5v-16Zm20 0v16c-3.6-1.3-6.6-1.1-9.2.5V3c2.7-1.6 5.8-1.9 9.2-.5ZM11.4 3h1.2v16.4h-1.2V3Z'/%3E%3C/svg%3E") center/contain no-repeat!important;
+}
+html body .bottom-nav .nav-btn[data-target="parents"] .ico,
+html body .ps-mh-bottom-nav .ps-mh-nav-icon-parents{
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 24'%3E%3Cpath fill='black' d='M8 3.2a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4Zm12 0a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4ZM14 6.2a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM2 17.3c0-3.5 2.7-6.1 6-6.1 1.2 0 2.3.3 3.2.9-1.8 1.3-3 3.4-3 5.8V21H2v-3.7Zm24 0V21h-6.2v-3.1c0-2.4-1.2-4.5-3-5.8.9-.6 2-.9 3.2-.9 3.3 0 6 2.6 6 6.1ZM10 18c0-2.7 1.8-4.8 4-4.8s4 2.1 4 4.8V22h-8v-4Z'/%3E%3C/svg%3E") center/contain no-repeat!important;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 24'%3E%3Cpath fill='black' d='M8 3.2a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4Zm12 0a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4ZM14 6.2a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM2 17.3c0-3.5 2.7-6.1 6-6.1 1.2 0 2.3.3 3.2.9-1.8 1.3-3 3.4-3 5.8V21H2v-3.7Zm24 0V21h-6.2v-3.1c0-2.4-1.2-4.5-3-5.8.9-.6 2-.9 3.2-.9 3.3 0 6 2.6 6 6.1ZM10 18c0-2.7 1.8-4.8 4-4.8s4 2.1 4 4.8V22h-8v-4Z'/%3E%3C/svg%3E") center/contain no-repeat!important;
+}
