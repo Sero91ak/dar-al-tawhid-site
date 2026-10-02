@@ -100,6 +100,7 @@ PROPHET_STORY_HOME=VOICE_HOME/"ProphetStoryExport"
 PROPHET_STORY_WORK=PROPHET_STORY_HOME/"work"
 PROPHET_STORY_READY=PROPHET_STORY_HOME/"ready"
 PROPHET_STORY_CHECKPOINT=PROPHET_STORY_HOME/"checkpoint.json"
+PROPHET_STORY_REVIEW_FILE=PROPHET_STORY_HOME/"pronunciation-review.json"
 PROPHET_STORY_CAFFEINATE_LOCK=threading.Lock()
 PROPHET_STORY_CAFFEINATE=None
 LEARNING_PREVIEWS={}
@@ -4997,15 +4998,23 @@ def postprocess(src:Path):
 def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free_pronunciation:bool=False):
     # Produktionsmodus bleibt unverändert. Der Bereich "Freie Stimme" nutzt
     # dieselbe Serhat-Engine, aber ohne Kids-/Content-Pflichten und ohne neue Locks.
-    if not free_mode:
+    strict_prophet_story=bool(
+        free_mode and free_pronunciation and str(style or "")=="kids_story"
+    )
+    if not free_mode or strict_prophet_story:
         quran_guard(text)
-        unresolved=detect_unresolved_islamic_terms(text)
-        if unresolved:
-            terms=", ".join(str(x.get("term","")) for x in unresolved[:6])
-            raise ValueError(
-                "Ungeprüfte islamische Namen/Begriffe erkannt: "+terms+
-                ". Bitte zuerst in der Ausspracheanalyse prüfen oder im Lernzentrum bestätigen."
-            )
+        if strict_prophet_story:
+            strict=_prophet_strict_pronunciation_preflight(text)
+            if not strict.get("ok"):
+                raise PronunciationReviewRequired(strict.get("items") or [])
+        else:
+            unresolved=detect_unresolved_islamic_terms(text)
+            if unresolved:
+                terms=", ".join(str(x.get("term","")) for x in unresolved[:6])
+                raise ValueError(
+                    "Ungeprüfte islamische Namen/Begriffe erkannt: "+terms+
+                    ". Bitte zuerst in der Ausspracheanalyse prüfen oder im Lernzentrum bestätigen."
+                )
     if not REF_DE.exists():
         raise RuntimeError("Referenzstimme fehlt: "+str(REF_DE))
 
@@ -5508,6 +5517,129 @@ class VoiceHTTPServer(ThreadingHTTPServer):
     daemon_threads=True
 
 
+class PronunciationReviewRequired(RuntimeError):
+    def __init__(self,items):
+        self.items=list(items or [])
+        labels=[str(x.get("term") or x.get("tts") or "").strip() for x in self.items]
+        labels=[x for x in labels if x]
+        super().__init__("Ausspracheprüfung erforderlich: "+", ".join(labels[:8]))
+
+def _prophet_review_load():
+    data=load_json_file(PROPHET_STORY_REVIEW_FILE,{"schemaVersion":1,"items":[]})
+    if not isinstance(data,dict):
+        data={"schemaVersion":1,"items":[]}
+    if not isinstance(data.get("items"),list):
+        data["items"]=[]
+    return data
+
+def _prophet_review_save(data):
+    payload=dict(data or {})
+    payload["schemaVersion"]=1
+    payload["updatedAt"]=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    atomic_write_json(PROPHET_STORY_REVIEW_FILE,payload)
+    return payload
+
+def _prophet_review_upsert(item_id,name,ages,text,items):
+    data=_prophet_review_load()
+    text_hash=hashlib.sha256(str(text or "").encode("utf-8")).hexdigest()
+    entry={
+        "itemId":str(item_id or ""),
+        "name":str(name or item_id or ""),
+        "ages":list(ages or []),
+        "textSha256":text_hash,
+        "status":"pending",
+        "issues":list(items or []),
+        "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+    }
+    rows=[
+        x for x in data.get("items",[])
+        if not (
+            str((x or {}).get("itemId") or "")==entry["itemId"]
+            and str((x or {}).get("textSha256") or "")==text_hash
+        )
+    ]
+    rows.append(entry)
+    data["items"]=rows
+    _prophet_review_save(data)
+    return entry
+
+def _prophet_review_clear(item_id,text):
+    data=_prophet_review_load()
+    text_hash=hashlib.sha256(str(text or "").encode("utf-8")).hexdigest()
+    rows=[
+        x for x in data.get("items",[])
+        if not (
+            str((x or {}).get("itemId") or "")==str(item_id or "")
+            and str((x or {}).get("textSha256") or "")==text_hash
+        )
+    ]
+    data["items"]=rows
+    _prophet_review_save(data)
+
+def _prophet_strict_pronunciation_preflight(text):
+    value=str(text or "").strip()
+    if not value:
+        return {"ok":False,"items":[{"term":"","reason":"empty-text"}]}
+    prepared,found=prepare(value)
+    confirmed=set(confirmed_audio_lock_keys())
+    issues=[]
+    seen=set()
+
+    def add(term,reason,tts="",lock_key="",suggestions=None):
+        key=(normalize_lookup(term or tts),reason,str(lock_key or ""))
+        if not key[0] or key in seen:
+            return
+        seen.add(key)
+        issues.append({
+            "term":str(term or "").strip(),
+            "tts":str(tts or "").strip(),
+            "reason":str(reason or ""),
+            "audioLockKey":str(lock_key or ""),
+            "suggestions":list(suggestions or []),
+        })
+
+    # Unbekannte islamische Formen dürfen in Prophetenproduktionen nie geraten werden.
+    for row in detect_unresolved_islamic_terms(value,25):
+        add(
+            row.get("term",""),
+            "unknown-islamic-term",
+            suggestions=row.get("suggestions") or []
+        )
+
+    # REVIEW-Regeln sind noch keine endgültig vom Nutzer bestätigten LOCKED-Formen.
+    for r in found:
+        canonical=str(r.get("canonical") or r.get("string_to_replace") or "").strip()
+        tts=str(r.get("tts_text") or "").strip()
+        lock_key=str(r.get("audio_lock_key") or "").strip()
+        voice_lock=str(r.get("voice_lock") or "").strip().upper()
+        if voice_lock=="REVIEW":
+            if not lock_key or lock_key not in confirmed:
+                add(canonical or tts,"review-term-not-locked",tts,lock_key)
+
+    # Jeder tatsächlich arabisch gerenderte Block muss in diesem strengen
+    # Produktionsmodus aus einer bestätigten lokalen Audioform kommen.
+    for lang,chunk in build_render_plan(prepared,"kids_story"):
+        if lang!="ar":
+            continue
+        clean=str(chunk or "").strip().strip(AUDIO_LOCK_EDGE_CHARS)
+        if not clean:
+            continue
+        lock_key=audio_lock_key_for_chunk(clean)
+        if not lock_key or lock_key not in confirmed:
+            add(clean,"arabic-audio-lock-required",clean,lock_key)
+
+    return {
+        "ok":not issues,
+        "prepared":prepared,
+        "items":issues,
+        "counts":{
+            "issues":len(issues),
+            "confirmedAudioLocks":len(confirmed),
+            "learnedRules":int((LIB.get("counts") or {}).get("userLearnedRules",0) or 0),
+            "masterEntries":len(MASTER_ENTRIES),
+        }
+    }
+
 def _prophet_batch_snapshot():
     with PROPHET_STORY_BATCH_STATE_LOCK:
         return dict(PROPHET_STORY_BATCH_STATE)
@@ -5871,6 +6003,7 @@ def build_prophet_story_voice_pack(resume:bool=False):
         # Drei Produktionsrunden: Ein schwieriger Abschnitt blockiert niemals
         # alle anderen Geschichten. Nach einem lokalen Fehler kommt der nächste Job.
         max_rounds=3
+        review_pending=[]
         for round_idx in range(1,max_rounds+1):
             if not pending:
                 break
@@ -5906,6 +6039,31 @@ def build_prophet_story_voice_pack(resume:bool=False):
                         wav=generate(txt,"","kids_story",free_mode=True,free_pronunciation=True)
                         last_error=None
                         break
+                    except PronunciationReviewRequired as e:
+                        last_error=e
+                        detail=str(e)
+                        review_items=list(e.items or [])
+                        failed_jobs[key]={
+                            "itemId":item_id,
+                            "name":str(item.get("name") or item_id),
+                            "ages":list(group_ages),
+                            "round":round_idx,
+                            "attempt":attempt,
+                            "type":"pronunciation-review",
+                            "review":review_items,
+                            "error":detail,
+                        }
+                        _prophet_review_upsert(
+                            item_id,str(item.get("name") or item_id),
+                            group_ages,txt,review_items
+                        )
+                        persist("rendering",label,detail)
+                        _set_prophet_batch_state(
+                            phase="rendering",progress=pct,completed=done,total=total_jobs,
+                            current=f"{label} · Ausspracheprüfung zurückgestellt · andere Geschichten laufen weiter",
+                            error=""
+                        )
+                        break
                     except RuntimeError as e:
                         last_error=e
                         detail=str(e)
@@ -5915,6 +6073,7 @@ def build_prophet_story_voice_pack(resume:bool=False):
                             "ages":list(group_ages),
                             "round":round_idx,
                             "attempt":attempt,
+                            "type":"technical",
                             "error":detail,
                         }
                         persist("rendering",label,detail)
@@ -5927,7 +6086,10 @@ def build_prophet_story_voice_pack(resume:bool=False):
                             time.sleep(min(8,attempt*2))
 
                 if wav is None:
-                    next_pending.append((job_idx,key,item,group_ages,txt))
+                    if isinstance(last_error,PronunciationReviewRequired):
+                        review_pending.append((job_idx,key,item,group_ages,txt))
+                    else:
+                        next_pending.append((job_idx,key,item,group_ages,txt))
                     # Nicht blockieren: andere Propheten sofort weiter produzieren.
                     continue
 
@@ -5976,6 +6138,7 @@ def build_prophet_story_voice_pack(resume:bool=False):
                     "finishedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
                 }
                 failed_jobs.pop(key,None)
+                _prophet_review_clear(item_id,txt)
                 done=persist("rendering",f"{item.get('name')} dauerhaft gesichert")
                 _set_prophet_batch_state(
                     phase="rendering",
@@ -6010,7 +6173,24 @@ def build_prophet_story_voice_pack(resume:bool=False):
                 running=False,phase="blocked",
                 progress=2+int(len(completed_jobs)/max(1,total_jobs)*91),
                 completed=len(completed_jobs),total=total_jobs,
-                current="Andere Geschichten wurden weiterproduziert; nur problematische Jobs bleiben offen.",
+                current="Andere Geschichten wurden weiterproduziert; nur technische Problemjobs bleiben offen.",
+                error=detail,startedAt=started,
+                finishedAt=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+            )
+
+        if review_pending:
+            names=[
+                str(item.get("name") or item.get("id"))
+                for _,_,item,_,_ in review_pending
+            ]
+            detail="Aussprache muss vor der Erzeugung bestätigt werden: "+", ".join(names)
+            cp.update({"active":False,"phase":"review-required","lastError":detail})
+            _prophet_checkpoint_save(cp)
+            return _set_prophet_batch_state(
+                running=False,phase="review-required",
+                progress=2+int(len(completed_jobs)/max(1,total_jobs)*91),
+                completed=len(completed_jobs),total=total_jobs,
+                current="Alle sicheren Geschichten wurden weiterproduziert. Offene Fuṣḥā-/Ausspracheformen warten auf Bestätigung.",
                 error=detail,startedAt=started,
                 finishedAt=time.strftime("%Y-%m-%dT%H:%M:%S%z")
             )
@@ -6456,6 +6636,16 @@ class H(BaseHTTPRequestHandler):
             self.send_json(200,{"ok":True,**_prophet_batch_snapshot()})
         elif p=="/prophet-stories/completed-audio":
             self.send_json(200,_prophet_completed_audio_snapshot())
+        elif p=="/prophet-stories/pronunciation-review":
+            data=_prophet_review_load()
+            pending=[x for x in data.get("items",[]) if str((x or {}).get("status") or "pending")=="pending"]
+            self.send_json(200,{
+                "ok":True,
+                "items":pending,
+                "count":len(pending),
+                "learning":learning_state(),
+                "strictMode":"fusha-audio-lock-required-v1"
+            })
         elif p=="/prophet-stories/audio":
             try:
                 query=parse_qs(urlparse(self.path).query)
@@ -6584,7 +6774,12 @@ class H(BaseHTTPRequestHandler):
                         "sahabiyyat":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabiyyah"),
                         "prophets":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="prophet"),
                     },
-                    "arabicReferenceDedicated":ARABIC_DEDICATED_REFERENCE
+                    "arabicReferenceDedicated":ARABIC_DEDICATED_REFERENCE,
+                    "strictPronunciationState":{
+                        "learnedRules":int((LIB.get("counts") or {}).get("userLearnedRules",0) or 0),
+                        "confirmedAudioLocks":len(confirmed_audio_lock_keys()),
+                        "masterEntries":len(MASTER_ENTRIES)
+                    }
                 })
             except Exception as e:
                 return self.send_json(400,{"ok":False,"error":str(e)})
