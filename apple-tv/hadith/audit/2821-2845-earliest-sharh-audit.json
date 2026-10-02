@@ -1,0 +1,190 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-2821-2845",
+  "series": "2751-2850",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock wurde vollständig geprüft. HAD-2835–2845 enthielten zunächst inhaltliche Wiederholungen bereits vorhandener Absichts-/Belohnungs-Ḥadīṯe und wurden vor Audit-Abschluss ersetzt. Die Ersatzdatensätze verwenden neue authentische Berichte aus Ṣaḥīḥ Muslim 132, 134, 137, 138, 140 und 142. Alle 25 Datensätze besitzen sharhStatus=verified, einen konkreten Šarḥ-Nachweis und den frühen direkten Muslim-Šarḥ von al-Māzirī. Unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "duplicateCorrectionsApplied": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "duplicateCorrections": {
+    "replacedRange": "HAD-2835-2845",
+    "reason": "Wiederholungen bereits vorhandener Absichts-/Belohnungs-Aussagen, insbesondere der Inhalte aus al-Buḫārī 6491 / Muslim 131.",
+    "replacementSources": [
+      "Muslim 132",
+      "Muslim 134",
+      "Muslim 137",
+      "Muslim 138",
+      "Muslim 140",
+      "Muslim 142"
+    ]
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-2821",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 121",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2822",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 121",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2823",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 121",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2824",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 121",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2825",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 122",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2826",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 123a–d",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2827",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 123b–d",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2828",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 124a–b",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2829",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 124a",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2830",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 125",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2831",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 126",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2832",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 126",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2833",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 127a–c",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2834",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 127a–c",
+      "auditStatus": "earliest-muslim-priority"
+    },
+    {
+      "id": "HAD-2835",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 132",
+      "auditStatus": "duplicate-replaced-and-earliest-muslim-sharh-verified"
+    },
+    {
+      "id": "HAD-2836",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 134",
+      "auditStatus": "duplicate-replaced-and-earliest-muslim-sharh-verified"
+    },
+    {
+      "id": "HAD-2837",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 134",
+      "auditStatus": "duplicate-replaced-and-earliest-muslim-sharh-verified"
+    },
+    {
+      "id": "HAD-2838",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 137",
+      "auditStatus": "duplicate-replaced-and-earliest-muslim-sharh-verified"
+    },
+    {
+      "id": "HAD-2839",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 137",
+      "auditStatus": "duplicate-replaced-and-earliest-muslim-sharh-verified"
+    },
+    {
+      "id": "HAD-2840",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 138",
+      "auditStatus": "duplicate-replaced-and-earliest-muslim-sharh-verified"
+    },
+    {
+      "id": "HAD-2841",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 140",
+      "auditStatus": "duplicate-replaced-and-earliest-muslim-sharh-verified"
+    },
+    {
+      "id": "HAD-2842",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 140",
+      "auditStatus": "duplicate-replaced-and-earliest-muslim-sharh-verified"
+    },
+    {
+      "id": "HAD-2843",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 140",
+      "auditStatus": "duplicate-replaced-and-earliest-muslim-sharh-verified"
+    },
+    {
+      "id": "HAD-2844",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 140",
+      "auditStatus": "duplicate-replaced-and-earliest-muslim-sharh-verified"
+    },
+    {
+      "id": "HAD-2845",
+      "currentSharh": "al-Māzirī",
+      "source": "Muslim 142",
+      "auditStatus": "duplicate-replaced-and-earliest-muslim-sharh-verified"
+    }
+  ]
+}
