@@ -6,6 +6,7 @@ on:
     paths:
       - 'voice-studio/local-engine.py'
       - 'voice-studio/alphabet-audio-studio.js'
+      - 'voice-studio/content-studio.js'
       - 'voice-studio/index.html'
       - 'voice-studio/version.json'
       - '.github/workflows/voice-studio-local-batch-smoke.yml'
@@ -24,6 +25,59 @@ jobs:
       - name: Check Alphabet Studio JavaScript
         run: |
           node --check voice-studio/alphabet-audio-studio.js
+
+      - name: Check Content Studio and inline Voice Studio JavaScript
+        run: |
+          node --check voice-studio/content-studio.js
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          scripts=[x for x in re.findall(r'<script(?:\s[^>]*)?>([\s\S]*?)</script>',html,re.I) if x.strip()]
+          if len(scripts)!=1:
+              raise SystemExit(f"expected exactly one inline Voice Studio script, got {len(scripts)}")
+          Path("/tmp/dar-voice-inline.js").write_text(scripts[0],encoding="utf-8")
+          required=[
+              'id="pronunciationWorkspace"',
+              'id="alphabetWorkspace"',
+              'id="systemWorkspace"',
+              '"/learning/preview-start"',
+              '"/learning/preview-state?id="',
+              '"/learning/preview-audio?id="',
+              'function localLearningCandidates',
+              'window.setStudioPage=setStudioPage',
+              'Updates · aktuell',
+          ]
+          missing=[x for x in required if x not in html]
+          if missing:
+              raise SystemExit("focused Voice Studio UI markers missing: "+", ".join(missing))
+          print("Focused Voice Studio UI markers OK")
+          PY
+          node --check /tmp/dar-voice-inline.js
+
+      - name: Validate pronunciation candidate fallback
+        run: |
+          python3 - <<'PY'
+          import importlib.util, os, shutil, tempfile
+          from pathlib import Path
+          root=Path.cwd()
+          tmp=Path(tempfile.mkdtemp(prefix="dar-pronunciation-smoke-"))
+          app=tmp/"studio"; home=tmp/"home"
+          app.mkdir(parents=True); home.mkdir(parents=True)
+          shutil.copy2(root/"data/pronunciation/pronunciation-rules.json",app/"pronunciation-rules.json")
+          shutil.copy2(root/"data/pronunciation/voice-production-profile.json",app/"voice-production-profile.json")
+          shutil.copy2(root/"data/pronunciation/islamic-master-library.json",app/"islamic-master-library.json")
+          os.environ["DAR_VOICE_APP_HOME"]=str(app)
+          os.environ["HOME"]=str(home)
+          spec=importlib.util.spec_from_file_location("dar_voice_candidate_smoke",root/"voice-studio/local-engine.py")
+          mod=importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+          rows=mod.pronunciation_candidates("Allah",12)
+          assert rows, "Allah candidate list empty"
+          assert any(str(r.get("ttsLanguage"))=="ar" and any("\u0600"<=ch<="\u06ff" for ch in str(r.get("ttsText") or "")) for r in rows), rows
+          assert hasattr(mod,"LEARNING_PREVIEW_SERIAL_LOCK")
+          assert hasattr(mod,"start_learning_preview_job")
+          print("Pronunciation candidate fallback OK:",[(r.get("canonical"),r.get("ttsText"),r.get("source")) for r in rows[:4]])
+          PY
 
       - name: Validate repository Kids JSON
         run: |
