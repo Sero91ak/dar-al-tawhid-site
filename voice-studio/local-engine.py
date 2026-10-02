@@ -45,6 +45,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
+ENGINE_VERSION="2.9.64"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_DIR=VOICE_HOME/"MasterPronunciations"
@@ -2428,6 +2429,18 @@ def build_full_local_kids_voice_pack():
                     cache_reused=False
 
             if master_wav is None:
+                # Ein bewusst gestarteter Gesamtbatch darf die interaktive
+                # Arbeit nie blockieren. Zwischen zwei Alphabet-Clips wartet
+                # der Batch, solange Worttest oder Freistimme/Erzeugen aktiv sind.
+                while (
+                    LEARNING_PREVIEW_WAITING.is_set()
+                    or MANUAL_RENDER_WAITING.is_set()
+                    or RENDER_LOCK.locked()
+                ):
+                    _set_alphabet_batch_state(
+                        current="Interaktive Audio-Anfrage hat Vorrang · Batch wartet sicher …"
+                    )
+                    time.sleep(0.05)
                 meta=create_alphabet_voice_preview(text_value,slot_id,0)
                 master=confirm_alphabet_voice_preview(
                     str(meta["id"]),slot_id,letter_id,kind,key,text_value,
@@ -2828,6 +2841,7 @@ def get_status():
     out["honorific_name_variants"]=sum(1 for r in RULES if r.get("required_honorific_key"))
     out["honorific_audio_keys"]=sorted(k for k in HONORIFIC_KEYS if k in HONORIFIC_TTS_BY_KEY)
     out["pronunciation_learning"]=learning_state()
+    out["engine_version"]=ENGINE_VERSION
     out["performance_engine"]="continuous-sentence-flow-v3"
     out["reference_prepares_total"]=MODEL_REFERENCE_PREPARES
     out["reference_cache_hits_total"]=MODEL_REFERENCE_CACHE_HITS
@@ -5341,7 +5355,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
     else:
         # Batch-Läufe starten keinen neuen Render, solange ein Nutzer-Auftrag wartet.
         deadline=time.time()+300.0
-        while MANUAL_RENDER_WAITING.is_set() and time.time()<deadline:
+        while (MANUAL_RENDER_WAITING.is_set() or LEARNING_PREVIEW_WAITING.is_set()) and time.time()<deadline:
             time.sleep(0.05)
         acquired=RENDER_LOCK.acquire(timeout=max(1.0,deadline-time.time()))
         if not acquired:
@@ -5463,8 +5477,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             # sicheren Segmentgrenze frei, sobald der Nutzer Freistimme/Erzeugen
             # angefordert hat. Der Batch behält seinen Checkpoint und kann später
             # exakt dort weiterarbeiten.
-            if background_render and MANUAL_RENDER_WAITING.is_set():
-                raise RuntimeError("Hintergrund-Render pausiert für interaktive Audio-Erzeugung.")
+            if background_render and (MANUAL_RENDER_WAITING.is_set() or LEARNING_PREVIEW_WAITING.is_set()):
+                raise RuntimeError("Hintergrund-Render pausiert für interaktive Audio-Erzeugung oder Aussprache-Schnelltest.")
             if strict_prophet_story and LEARNING_PREVIEW_WAITING.is_set():
                 set_status(message="Aussprache-Schnelltest hat Vorrang · Story wartet zwischen zwei sicheren Segmenten …")
                 preview_deadline=time.time()+75.0
@@ -6917,6 +6931,7 @@ class H(BaseHTTPRequestHandler):
             self.send_json(200,{
                 "ok":ok,
                 "provider":"Chatterbox Multilingual V3",
+                "engine_version":ENGINE_VERSION,
                 "reference_exists":ok,
                 "reference_arabic_dedicated":ARABIC_DEDICATED_REFERENCE,
                 "prosody_mode":st.get("prosody_mode","narration"),
