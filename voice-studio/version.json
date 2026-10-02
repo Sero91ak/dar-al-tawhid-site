@@ -585,7 +585,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "80883fda1a12f123a7db2d3a5d2cf0f7a8472641",
+  "releaseRef": "056166ddff536f66b4ffdd4f5df36b29754deed5",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.61 repariert den blockierenden Aussprache-Schnelltest über eine asynchrone, sichere Audio-Warteschlange und trennt die Studio-Werkzeuge in eigene Arbeitsseiten. Aussprache, Alif–Yāʾ, System/Updates und Freie Stimme stehen getrennt; der relevante Bearbeitungsbereich bleibt jeweils direkt daneben. Die lokale Aussprachebibliothek dient zusätzlich als Fallback, damit Kandidaten auch bei einer gestörten Suchantwort sichtbar bleiben. Laufende oder fertige Prophetengeschichten werden beim Schnelltest nicht überschrieben.",
@@ -998,8 +998,8 @@
     "offlineManifestPackaged": true,
     "staleLocalManifestAutoRefresh": true
   },
-  "validatedCommit": "80883fda1a12f123a7db2d3a5d2cf0f7a8472641",
-  "validatedAt": "2026-10-02T13:28:00+02:00",
+  "validatedCommit": "056166ddff536f66b4ffdd4f5df36b29754deed5",
+  "validatedAt": "2026-10-02T13:31:00+02:00",
   "validation": {
     "targetVersion": "2.9.61",
     "pronunciationAsyncPreviewQueue": true,
@@ -1013,6 +1013,9 @@
     "storyRenderSafePreviewPriority": true,
     "localBatchSmokePassed": true,
     "appHealthCheckPassed": true,
-    "fullVoiceValidateBlockedByUnrelatedKidsCacheGuard": "kids/sw.js missing dar-al-tawhid-kids-v106"
+    "fullVoiceValidateBlockedByUnrelatedKidsCacheGuard": "kids/sw.js missing dar-al-tawhid-kids-v106",
+    "focusedUiSyntaxPassed": true,
+    "pronunciationAllahCandidateRegressionPassed": true,
+    "pronunciationAllahExpectedArabic": "اللَّه"
   }
 }
