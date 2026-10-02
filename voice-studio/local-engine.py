@@ -5325,24 +5325,27 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             text,speak,lambda value: build_render_plan(value,doc_mode)
         )
 
-    manual_priority=not free_mode
+    # 2.9.63: "free_mode" bedeutet NICHT automatisch Hintergrundarbeit.
+    # Ein Klick des Nutzers auf Freistimme ist interaktiv und erhält dieselbe
+    # Priorität wie "Erzeugen". Nur echte Batch-Threads laufen im Hintergrund.
+    render_thread_name=threading.current_thread().name
+    background_render=render_thread_name in ("dar-prophet-story-batch","dar-alphabet-batch")
+    manual_priority=not background_render
     if manual_priority:
         MANUAL_RENDER_WAITING.set()
-        set_status(message="Manuelle Audio-Erzeugung wartet sicher auf den aktuell laufenden Abschnitt …")
-        acquired=RENDER_LOCK.acquire(timeout=300.0)
+        set_status(message="Interaktive Audio-Erzeugung erhält Vorrang …")
+        acquired=RENDER_LOCK.acquire(timeout=75.0)
         MANUAL_RENDER_WAITING.clear()
         if not acquired:
-            raise RuntimeError("Die manuelle Audio-Erzeugung wartet zu lange. Der aktuelle Render läuft weiter; bitte erneut versuchen.")
+            raise RuntimeError("Interaktive Audio-Erzeugung konnte den Render-Worker nicht rechtzeitig übernehmen.")
     else:
-        # Autonome Langläufe geben manuellen Nutzer-Aufträgen Vorrang.
-        # So kann ein Klick auf „Erzeugen“ nach dem aktuellen Story-Job drankommen,
-        # statt mit „Es läuft bereits“ abzubrechen.
+        # Batch-Läufe starten keinen neuen Render, solange ein Nutzer-Auftrag wartet.
         deadline=time.time()+300.0
         while MANUAL_RENDER_WAITING.is_set() and time.time()<deadline:
-            time.sleep(0.08)
+            time.sleep(0.05)
         acquired=RENDER_LOCK.acquire(timeout=max(1.0,deadline-time.time()))
         if not acquired:
-            raise RuntimeError("Audio-Warteschlange ist ausgelastet.")
+            raise RuntimeError("Hintergrund-Audio-Warteschlange ist ausgelastet.")
 
     if not free_mode:
         # Nur der Produktionsbereich verwaltet neue bestätigbare Audio-Locks.
@@ -5456,6 +5459,12 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         execution_order=list(range(total))
 
         for processed_pos,original_idx in enumerate(execution_order,1):
+            # Hintergrundproduktion gibt den Worker spätestens an der nächsten
+            # sicheren Segmentgrenze frei, sobald der Nutzer Freistimme/Erzeugen
+            # angefordert hat. Der Batch behält seinen Checkpoint und kann später
+            # exakt dort weiterarbeiten.
+            if background_render and MANUAL_RENDER_WAITING.is_set():
+                raise RuntimeError("Hintergrund-Render pausiert für interaktive Audio-Erzeugung.")
             if strict_prophet_story and LEARNING_PREVIEW_WAITING.is_set():
                 set_status(message="Aussprache-Schnelltest hat Vorrang · Story wartet zwischen zwei sicheren Segmenten …")
                 preview_deadline=time.time()+75.0
@@ -6049,12 +6058,24 @@ def _resume_prophet_story_voice_pack_if_needed():
         return
     if cp.get("phase") in ("complete","cancelled"):
         return
-    # Engine darf erst vollständig hochkommen; danach wird exakt derselbe
-    # persistente Job fortgesetzt. Keine Terminal-Schleife nötig.
+
+    # 2.9.63 Regression-Fix:
+    # Ein alter/unvollständiger Prophetengeschichten-Checkpoint darf beim normalen
+    # Studio-Start NICHT mehr ungefragt die einzige Synthese-Engine belegen.
+    # Der Fortschritt bleibt vollständig erhalten und kann über den sichtbaren
+    # Batch-Start fortgesetzt werden. Auto-Resume ist nur noch explizit opt-in.
+    if os.environ.get("DAR_VOICE_AUTO_RESUME_PROPHETS","0").strip()!="1":
+        print(
+            "[DĀR Voice] Prophetengeschichten-Checkpoint vorhanden; "
+            "Auto-Resume pausiert, damit Worttest/Freistimme/Erzeugen sofort frei bleiben.",
+            flush=True
+        )
+        return
+
     time.sleep(2.0)
     state=_prophet_batch_snapshot()
     if not state.get("running"):
-        print("[DĀR Voice] resume persistent prophet-story production",flush=True)
+        print("[DĀR Voice] resume persistent prophet-story production (explicit opt-in)",flush=True)
         start_prophet_story_voice_pack(resume=True)
 
 def _prophet_audio_asset_path(item_id:str,age:str):
