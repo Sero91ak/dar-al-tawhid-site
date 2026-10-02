@@ -1773,3 +1773,40 @@
     min-height:72px!important;
   }
 }
+
+
+/* REFERENCE_INTERACTION_MICRODETAIL_V36 */
+.r22-section-label i,.ps-mh-section-title i{position:relative!important}
+.r22-section-label i::before,.ps-mh-section-title i::before{
+  content:"✦"!important;position:absolute!important;left:-9px!important;top:50%!important;
+  transform:translate(-50%,-52%)!important;color:#f4cf72!important;
+  font:700 7px/1 Georgia,serif!important;text-shadow:0 0 8px rgba(244,207,114,.28)!important;
+}
+#view-stories.ps-stories-home button,
+.ps-muhammad-special button{
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+#view-stories.ps-stories-home .ps-muhammad-home:active,
+#view-stories.ps-stories-home .ps-prophet-entry:active,
+#view-stories.ps-stories-home .story-feature:active,
+.ps-mh-discover:active,.ps-mh-episode:active,.ps-mh-more-card:active{
+  transform:scale(.992)!important;
+  filter:brightness(1.045)!important;
+}
+#view-stories.ps-stories-home button:focus-visible,
+.ps-muhammad-special button:focus-visible{
+  outline:2px solid rgba(255,226,145,.95)!important;
+  outline-offset:3px!important;
+}
+.ps-mh-discover,.ps-mh-all,.r22-all,.ps-mh-bottom-nav button{
+  transition:filter .14s ease,transform .14s ease,border-color .14s ease,box-shadow .14s ease!important;
+}
+@media(prefers-reduced-motion:reduce){
+  #view-stories.ps-stories-home .ps-muhammad-home:active,
+  #view-stories.ps-stories-home .ps-prophet-entry:active,
+  #view-stories.ps-stories-home .story-feature:active,
+  .ps-mh-discover:active,.ps-mh-episode:active,.ps-mh-more-card:active{
+    transform:none!important;
+  }
+}
