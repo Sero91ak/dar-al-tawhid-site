@@ -81,7 +81,7 @@ button{font:inherit;color:inherit}
 .story{
   position:relative;
   width:100%;
-  height:clamp(150px,39vw,184px);
+  height:clamp(168px,42.85vw,360px);
   overflow:hidden;
   padding:0;
   border:1px solid rgba(72,178,224,.31);
@@ -339,14 +339,14 @@ button{font:inherit;color:inherit}
   .mode{height:50px;font-size:16px}
   .mode-icon{width:20px;height:20px}
   .story-list{gap:8px;padding:8px max(10px,env(safe-area-inset-right)) 14px max(10px,env(safe-area-inset-left))}
-  .story{height:205px;border-radius:25px}
+  .story{height:clamp(300px,42.85vw,360px);border-radius:25px}
   .story-copy{left:53%;right:78px}
   .eyebrow{font-size:10px}
   .story h2{font-size:40px}
   .story .arabic{font-size:27px}
   .story-time{font-size:14px}
   .story-go{width:50px;height:50px;right:18px;font-size:35px}
-  .detail-hero{height:560px;min-height:560px}
+  .detail-hero{height:clamp(410px,56vw,520px);min-height:410px}
   .hero-copy{left:max(48px,env(safe-area-inset-left));top:104px;width:44%;max-width:640px}
   .hero-copy .eyebrow{font-size:11px}
   .hero-copy h1{font-size:86px}
@@ -359,16 +359,35 @@ button{font:inherit;color:inherit}
 }
 @media(min-width:1100px){
   .story-list{grid-template-columns:1fr;padding-left:16px;padding-right:16px}
-  .story{height:230px;border-radius:27px}
+  .story{height:360px;border-radius:27px}
   .story-copy{left:54%;right:96px}
   .story h2{font-size:44px}
   .story .arabic{font-size:30px}
   .story-go{right:24px;width:54px;height:54px}
-  .detail-hero{height:min(63vh,680px);min-height:600px}
+  .detail-hero{height:min(46vw,560px);min-height:500px}
   .hero-copy{left:70px;top:120px}
   .hero-copy h1{font-size:98px}
   .hero-copy .arabic{font-size:50px}
   .hero-copy p{font-size:23px}
   .hero-pills{left:70px;right:70px;bottom:26px}
   .reading-card{margin-left:18px;margin-right:18px;font-size:21px}
+}
+
+/* V9 full-bleed production calibration */
+.detail-hero[data-id="nuh"] .detail-art{object-position:center center}
+@media(max-width:699px){
+  .hero-copy{top:64px;width:49%;max-width:none}
+  .hero-copy h1{font-size:clamp(40px,11vw,56px)}
+  .hero-copy .arabic{font-size:clamp(21px,5.7vw,30px)}
+  .hero-copy p{
+    margin-top:9px;
+    font-size:clamp(10.5px,2.85vw,14px);
+    line-height:1.33;
+    display:-webkit-box;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .hero-pills{bottom:10px;left:10px;right:10px;gap:5px}
+  .hero-pills span{height:34px;font-size:clamp(7.5px,2vw,10px);gap:3px}
 }
