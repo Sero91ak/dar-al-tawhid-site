@@ -1530,3 +1530,40 @@
   -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 24'%3E%3Cpath fill='black' d='M8 3.2a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4Zm12 0a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4ZM14 6.2a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM2 17.3c0-3.5 2.7-6.1 6-6.1 1.2 0 2.3.3 3.2.9-1.8 1.3-3 3.4-3 5.8V21H2v-3.7Zm24 0V21h-6.2v-3.1c0-2.4-1.2-4.5-3-5.8.9-.6 2-.9 3.2-.9 3.3 0 6 2.6 6 6.1ZM10 18c0-2.7 1.8-4.8 4-4.8s4 2.1 4 4.8V22h-8v-4Z'/%3E%3C/svg%3E") center/contain no-repeat!important;
           mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 24'%3E%3Cpath fill='black' d='M8 3.2a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4Zm12 0a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4ZM14 6.2a3 3 0 1 1 0 6 3 3 0 0 1 0-6ZM2 17.3c0-3.5 2.7-6.1 6-6.1 1.2 0 2.3.3 3.2.9-1.8 1.3-3 3.4-3 5.8V21H2v-3.7Zm24 0V21h-6.2v-3.1c0-2.4-1.2-4.5-3-5.8.9-.6 2-.9 3.2-.9 3.3 0 6 2.6 6 6.1ZM10 18c0-2.7 1.8-4.8 4-4.8s4 2.1 4 4.8V22h-8v-4Z'/%3E%3C/svg%3E") center/contain no-repeat!important;
 }
+
+
+/* REFERENCE_MICRODETAIL_V31 */
+.ps-muhammad-home::before{
+  content:""!important;position:absolute!important;z-index:4!important;pointer-events:none!important;
+  top:-1px!important;right:-1px!important;width:78px!important;height:70px!important;
+  background:linear-gradient(135deg,rgba(255,231,153,.12) 0 34%,rgba(246,197,74,.94) 35% 42%,rgba(246,197,74,.18) 43% 100%)!important;
+  clip-path:polygon(58% 0,100% 0,100% 70%,91% 57%,86% 37%,74% 18%)!important;
+  filter:drop-shadow(-2px 3px 5px rgba(242,192,63,.28))!important;
+}
+.ps-muhammad-home::after{
+  content:""!important;position:absolute!important;z-index:4!important;pointer-events:none!important;
+  top:7px!important;right:7px!important;width:58px!important;height:52px!important;
+  border-top:1px solid rgba(255,238,174,.92)!important;border-right:1px solid rgba(255,238,174,.92)!important;
+  border-radius:0 23px 0 0!important;opacity:.88!important;
+}
+.ps-mh-home-ar,.ps-mh-ar{
+  font-family:"Noto Naskh Arabic","Geeza Pro","Times New Roman",serif!important;
+  font-feature-settings:"liga" 1,"calt" 1!important;
+}
+.ps-modal.ps-muhammad-open .ps-close{
+  position:relative!important;color:transparent!important;font-size:0!important;
+}
+.ps-modal.ps-muhammad-open .ps-close::before{
+  content:"←"!important;color:var(--r22-gold2,#ffe497)!important;
+  font:500 20px/1 system-ui,-apple-system,"Segoe UI",sans-serif!important;
+}
+.ps-mh-section-title::after{
+  content:"✦"!important;color:rgba(245,207,111,.92)!important;font-size:7px!important;line-height:1!important;
+}
+@media(max-width:600px){
+  .ps-muhammad-home::before{width:62px!important;height:56px!important}
+  .ps-muhammad-home::after{width:46px!important;height:42px!important;top:6px!important;right:6px!important}
+  .ps-mh-home-ar{font-size:19px!important}
+  .ps-mh-ar{font-size:19px!important}
+  .ps-mh-section-title::after{font-size:6px!important}
+}
