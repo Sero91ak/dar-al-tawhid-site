@@ -6644,6 +6644,7 @@ class H(BaseHTTPRequestHandler):
                 "items":pending,
                 "count":len(pending),
                 "learning":learning_state(),
+                "confirmedAudioLocks":len(confirmed_audio_lock_keys()),
                 "strictMode":"fusha-audio-lock-required-v1"
             })
         elif p=="/prophet-stories/audio":
