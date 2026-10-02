@@ -395,3 +395,799 @@
   .ps-mh-value-mercy strong{font-size:7px!important}
   .ps-mh-time{letter-spacing:.005em!important}
 }
+
+
+/* KIDS_NATIVE_COLLECTION_V48
+   Native-feeling, child-friendly responsive pass.
+   Goal: fewer poster-like strips, larger tap zones, consistent cards, safe areas,
+   stable iPhone/iPad geometry and one coherent visual system. */
+:root{
+  --kids-native-gutter:16px;
+  --kids-native-gap:16px;
+  --kids-native-radius:26px;
+  --kids-native-radius-sm:20px;
+  --kids-native-hit:48px;
+  --kids-native-bg:#061c2b;
+  --kids-native-card:#0a3047;
+  --kids-native-card-2:#0c3b53;
+  --kids-native-gold:#f3cf72;
+  --kids-native-cream:#fff3d4;
+  --kids-native-copy:#dcebf0;
+  --kids-native-line:rgba(124,198,219,.23);
+  --kids-native-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
+  --kids-native-serif:ui-serif,"New York",Georgia,"Times New Roman",serif;
+}
+
+/* ---------- STORIES HOME ---------- */
+#view-stories.ps-stories-home{
+  overflow:visible!important;
+  padding:0 0 calc(108px + env(safe-area-inset-bottom,0px))!important;
+  background:
+    radial-gradient(circle at 84% 4%,rgba(55,151,187,.12),transparent 28%),
+    linear-gradient(180deg,#071d2c 0%,#08273a 52%,#061927 100%)!important;
+  font-family:var(--kids-native-sans)!important;
+}
+#view-stories.ps-stories-home .page-head{
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:
+    calc(env(safe-area-inset-top,0px) + 22px)
+    var(--kids-native-gutter)
+    28px!important;
+  border:0!important;
+  border-radius:0 0 30px 30px!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.18)!important;
+  background:
+    linear-gradient(90deg,rgba(3,20,31,.95) 0%,rgba(3,22,34,.76) 43%,rgba(3,22,34,.22) 72%,rgba(3,22,34,.04) 100%),
+    linear-gradient(180deg,rgba(3,20,31,.02),rgba(3,20,31,.17) 72%,rgba(5,27,41,.72)),
+    url("/kids/assets/story-wow/v22-stories-header.jpg?v=22") 63% 50%/cover no-repeat!important;
+}
+#view-stories.ps-stories-home .page-head::after{display:none!important}
+#view-stories.ps-stories-home .page-head .kicker{
+  min-height:34px!important;
+  padding:0 13px!important;
+  border:1px solid rgba(244,206,109,.54)!important;
+  background:rgba(7,37,52,.62)!important;
+  box-shadow:none!important;
+  color:#ffe59a!important;
+  font:750 10px/1 var(--kids-native-sans)!important;
+  letter-spacing:.10em!important;
+}
+#view-stories.ps-stories-home .page-head h2{
+  margin:14px 0 0!important;
+  max-width:70%!important;
+  color:#fff8e8!important;
+  font:800 clamp(42px,11vw,58px)/.94 var(--kids-native-sans)!important;
+  letter-spacing:-.045em!important;
+  text-shadow:0 4px 18px rgba(0,0,0,.30)!important;
+}
+#view-stories.ps-stories-home .page-head h2::after{display:none!important}
+#view-stories.ps-stories-home .page-head p{
+  max-width:76%!important;
+  margin:10px 0 0!important;
+  color:#e9f3f6!important;
+  font:550 clamp(13px,3.6vw,16px)/1.42 var(--kids-native-sans)!important;
+}
+
+/* same geometry across all major home cards */
+#view-stories.ps-stories-home .ps-muhammad-home,
+#view-stories.ps-stories-home .ps-prophet-entry,
+#view-stories.ps-stories-home .story-feature{
+  width:calc(100% - (var(--kids-native-gutter) * 2))!important;
+  margin-left:var(--kids-native-gutter)!important;
+  margin-right:var(--kids-native-gutter)!important;
+  border-radius:var(--kids-native-radius)!important;
+  border:1px solid var(--kids-native-line)!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.21)!important;
+  transform:none!important;
+}
+#view-stories.ps-stories-home .ps-muhammad-home{
+  min-height:238px!important;
+  height:auto!important;
+  margin-top:18px!important;
+  margin-bottom:var(--kids-native-gap)!important;
+  border-color:rgba(244,207,111,.54)!important;
+  box-shadow:0 12px 32px rgba(0,0,0,.24),0 0 0 1px rgba(244,207,111,.03)!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-art{
+  background-image:url("/kids/assets/story-wow/v22-muhammad-home.jpg?v=30")!important;
+  background-position:62% 50%!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-shade{
+  background:linear-gradient(90deg,rgba(3,19,31,.96) 0%,rgba(3,20,32,.88) 43%,rgba(3,20,32,.46) 68%,rgba(3,20,32,.08) 100%)!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-copy{
+  left:22px!important;right:18px!important;top:20px!important;bottom:18px!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-kicker{
+  min-height:32px!important;padding:0 12px!important;
+  border-color:rgba(244,207,111,.56)!important;
+  background:rgba(4,29,43,.66)!important;
+  font:750 9px/1 var(--kids-native-sans)!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-copy strong{
+  margin-top:13px!important;
+  max-width:62%!important;
+  color:var(--kids-native-cream)!important;
+  font:700 clamp(37px,9.8vw,50px)/.91 var(--kids-native-serif)!important;
+  letter-spacing:-.035em!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-ar{
+  left:52%!important;top:35%!important;
+  font-size:23px!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-sub{
+  max-width:68%!important;
+  margin-top:9px!important;
+  color:#eef7f9!important;
+  font:600 13px/1.28 var(--kids-native-sans)!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-cta,
+#view-stories.ps-stories-home .ps-entry-cta{
+  min-height:var(--kids-native-hit)!important;
+  height:auto!important;
+  padding:0 18px!important;
+  border-radius:999px!important;
+  font:700 13px/1 var(--kids-native-sans)!important;
+  box-shadow:none!important;
+}
+#view-stories.ps-stories-home .ps-muhammad-home:active,
+#view-stories.ps-stories-home .ps-prophet-entry:active,
+#view-stories.ps-stories-home .story-feature:active{
+  transform:scale(.988)!important;
+  transition:transform .12s ease!important;
+}
+
+#view-stories.ps-stories-home .ps-prophet-entry{
+  min-height:198px!important;
+  height:auto!important;
+  margin-bottom:var(--kids-native-gap)!important;
+  background:
+    linear-gradient(90deg,rgba(3,20,32,.96),rgba(3,23,37,.81) 44%,rgba(3,23,37,.28) 72%,rgba(3,23,37,.04)),
+    url("/kids/assets/story-wow/v22-prophet-library.jpg?v=22") 62% 50%/cover no-repeat!important;
+}
+#view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy{
+  left:22px!important;right:18px!important;top:22px!important;bottom:20px!important;
+}
+#view-stories.ps-stories-home .ps-entry-kicker{
+  color:#c9e6eb!important;
+  font:750 9px/1 var(--kids-native-sans)!important;
+  letter-spacing:.12em!important;
+}
+#view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{
+  margin-top:12px!important;
+  max-width:76%!important;
+  color:var(--kids-native-cream)!important;
+  font:700 clamp(30px,8.1vw,41px)/.95 var(--kids-native-serif)!important;
+}
+#view-stories.ps-stories-home .ps-entry-sub{
+  margin-top:8px!important;
+  font:600 12.5px/1.25 var(--kids-native-sans)!important;
+}
+
+#view-stories.ps-stories-home .story-feature{
+  overflow:hidden!important;
+  margin-top:0!important;
+  margin-bottom:18px!important;
+  background:var(--kids-native-card)!important;
+}
+#view-stories.ps-stories-home .story-scene{
+  min-height:230px!important;
+  height:56vw!important;
+  max-height:285px!important;
+  background-image:
+    linear-gradient(180deg,rgba(3,20,31,0) 60%,rgba(3,20,31,.16)),
+    url("/kids/assets/story-wow/v36-coin-story.jpg?v=39")!important;
+  background-size:cover!important;
+  background-position:center 57%!important;
+}
+#view-stories.ps-stories-home .story-copy{
+  min-height:126px!important;
+  height:auto!important;
+  padding:16px 22px 18px!important;
+  background:linear-gradient(180deg,#0a3c55 0%,#082d43 100%)!important;
+}
+#view-stories.ps-stories-home .story-copy .meta{
+  font:750 9.5px/1.1 var(--kids-native-sans)!important;
+  letter-spacing:.085em!important;
+}
+#view-stories.ps-stories-home .story-copy h3{
+  margin:8px 70px 5px 0!important;
+  color:var(--kids-native-cream)!important;
+  font:700 clamp(28px,7.6vw,37px)/1 var(--kids-native-serif)!important;
+}
+#view-stories.ps-stories-home .story-copy p{
+  margin-right:70px!important;
+  color:#dcebf0!important;
+  font:550 13px/1.38 var(--kids-native-sans)!important;
+  white-space:normal!important;
+}
+#view-stories.ps-stories-home .story-copy .story-go{
+  right:20px!important;
+  width:54px!important;height:54px!important;
+  border-color:rgba(244,207,111,.62)!important;
+  background:rgba(4,30,45,.55)!important;
+  color:#ffe39a!important;
+}
+
+/* horizontal collection view: one big card + peek */
+#view-stories.ps-stories-home .story-more-title{
+  min-height:52px!important;
+  margin:2px 0 8px!important;
+  padding:0 var(--kids-native-gutter)!important;
+}
+#view-stories.ps-stories-home .r22-section-label strong{
+  color:#fff4d7!important;
+  font:700 clamp(24px,6.5vw,31px)/1 var(--kids-native-serif)!important;
+}
+#view-stories.ps-stories-home .r22-book{width:25px!important;height:23px!important}
+#view-stories.ps-stories-home .r22-all{
+  min-height:44px!important;
+  font:700 11.5px/1 var(--kids-native-sans)!important;
+}
+#view-stories.ps-stories-home > .story-list:not(#authenticStoryList){
+  gap:13px!important;
+  padding:0 var(--kids-native-gutter) 20px!important;
+  scroll-padding-inline:var(--kids-native-gutter)!important;
+}
+#view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row{
+  flex:0 0 min(78vw,330px)!important;
+  width:min(78vw,330px)!important;
+  min-height:228px!important;
+  height:auto!important;
+  border-radius:22px!important;
+  border:1px solid var(--kids-native-line)!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.18)!important;
+}
+#view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-thumb{
+  min-height:148px!important;
+  height:44vw!important;
+  max-height:185px!important;
+}
+#view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row-copy{
+  min-height:80px!important;
+  height:auto!important;
+  padding:11px 13px 13px!important;
+}
+#view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row h3{
+  color:#fff3d5!important;
+  font:700 19px/1.08 var(--kids-native-serif)!important;
+}
+#view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row .meta,
+#view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row .time{
+  margin-top:4px!important;
+  font:600 10px/1.2 var(--kids-native-sans)!important;
+}
+
+/* Remove the dead/blank legacy Qurʾān area from the home collection. */
+#view-stories.ps-stories-home #authenticStoryList,
+#view-stories.ps-stories-home .section-title:has(+ #authenticStoryList),
+#view-stories.ps-stories-home #authenticStoryList + .gentle-note{
+  display:none!important;
+}
+
+/* ---------- FLOATING NATIVE TAB BAR ---------- */
+.bottom-nav,
+.ps-mh-bottom-nav{
+  left:50%!important;
+  right:auto!important;
+  bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;
+  transform:translateX(-50%)!important;
+  width:min(calc(100% - 24px),720px)!important;
+  min-height:76px!important;
+  height:76px!important;
+  padding:7px!important;
+  margin:0!important;
+  border:1px solid rgba(143,202,219,.18)!important;
+  border-radius:28px!important;
+  background:rgba(5,25,38,.86)!important;
+  box-shadow:0 18px 45px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.04)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(1.08)!important;
+  backdrop-filter:blur(24px) saturate(1.08)!important;
+}
+.bottom-nav .nav-btn,
+.ps-mh-bottom-nav button{
+  min-height:60px!important;
+  height:60px!important;
+  border-radius:21px!important;
+  gap:4px!important;
+  padding:4px 2px!important;
+  color:rgba(235,245,248,.70)!important;
+  font-family:var(--kids-native-sans)!important;
+}
+.bottom-nav .nav-btn.active,
+.ps-mh-bottom-nav button.active{
+  color:#ffe39a!important;
+  border:1px solid rgba(244,207,111,.60)!important;
+  background:rgba(108,77,23,.18)!important;
+  box-shadow:0 0 20px rgba(243,198,77,.12)!important;
+}
+.bottom-nav .nav-btn .ico,
+.ps-mh-nav-icon{
+  width:27px!important;height:27px!important;
+}
+.bottom-nav .nav-btn .lab,
+.ps-mh-bottom-nav button>span:last-child{
+  font:650 11px/1 var(--kids-native-sans)!important;
+}
+
+/* ---------- MUḤAMMAD SPECIAL: NATIVE STACK, LARGE TOUCH ---------- */
+.ps-modal.ps-muhammad-open{
+  background:var(--kids-native-bg)!important;
+}
+.ps-modal.ps-muhammad-open .ps-sheet,
+.ps-modal.ps-muhammad-open .ps-scroll{
+  width:100%!important;
+  max-width:none!important;
+  background:var(--kids-native-bg)!important;
+}
+.ps-modal.ps-muhammad-open .ps-scroll{
+  padding:0 0 calc(108px + env(safe-area-inset-bottom,0px))!important;
+  scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)!important;
+}
+.ps-modal.ps-muhammad-open .ps-top{
+  position:fixed!important;
+  z-index:500!important;
+  left:14px!important;
+  top:calc(env(safe-area-inset-top,0px) + 10px)!important;
+  width:auto!important;height:auto!important;
+  padding:0!important;
+  pointer-events:none!important;
+  background:transparent!important;
+}
+.ps-modal.ps-muhammad-open .ps-close{
+  pointer-events:auto!important;
+  width:50px!important;height:50px!important;
+  border:1px solid rgba(244,207,111,.52)!important;
+  border-radius:50%!important;
+  background:rgba(4,28,42,.78)!important;
+  box-shadow:0 8px 20px rgba(0,0,0,.22)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  backdrop-filter:blur(14px)!important;
+}
+.ps-mh-hero{
+  min-height:338px!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0 12px 16px!important;
+  border:1px solid rgba(244,207,111,.18)!important;
+  border-radius:0 0 30px 30px!important;
+  overflow:hidden!important;
+  background-position:58% 34%!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.20)!important;
+}
+.ps-mh-hero-copy{
+  left:24px!important;
+  right:20px!important;
+  top:calc(env(safe-area-inset-top,0px) + 78px)!important;
+  bottom:24px!important;
+}
+.ps-mh-special-label{
+  min-height:32px!important;
+  padding:0 12px!important;
+  font:750 9px/1 var(--kids-native-sans)!important;
+  letter-spacing:.10em!important;
+}
+.ps-mh-title-line{gap:10px!important;margin-top:11px!important}
+.ps-mh-hero h2{
+  font:700 clamp(38px,10.2vw,52px)/.91 var(--kids-native-serif)!important;
+  letter-spacing:-.035em!important;
+}
+.ps-mh-ar{font-size:23px!important}
+.ps-mh-tagline{
+  margin-top:9px!important;
+  font:600 13.5px/1.28 var(--kids-native-sans)!important;
+}
+.ps-mh-intro{
+  max-width:70%!important;
+  margin-top:9px!important;
+  font:520 11.5px/1.46 var(--kids-native-sans)!important;
+}
+.ps-mh-ornament{display:none!important}
+
+.ps-mh-panel{
+  min-height:220px!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0 12px 16px!important;
+  border:1px solid var(--kids-native-line)!important;
+  border-radius:26px!important;
+  overflow:hidden!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.18)!important;
+}
+.ps-mh-panel-copy{
+  left:22px!important;right:18px!important;
+  top:50%!important;
+}
+.ps-mh-panel h3{
+  color:#fff3d4!important;
+  font:700 clamp(28px,7.4vw,36px)/1 var(--kids-native-serif)!important;
+}
+.ps-mh-panel p{
+  max-width:58%!important;
+  margin-top:9px!important;
+  font:550 12.5px/1.42 var(--kids-native-sans)!important;
+}
+.ps-mh-discover{
+  min-height:var(--kids-native-hit)!important;
+  margin-top:12px!important;
+  padding:0 18px!important;
+  border-radius:999px!important;
+  font:700 12.5px/1 var(--kids-native-sans)!important;
+}
+
+/* 2 × 2 values on phones — readable, touch-friendly */
+.ps-mh-values{
+  min-height:360px!important;
+  height:auto!important;
+  max-height:none!important;
+  margin:0 12px 16px!important;
+  padding:22px!important;
+  border:1px solid var(--kids-native-line)!important;
+  border-radius:26px!important;
+  overflow:hidden!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.18)!important;
+}
+.ps-mh-values-head{max-width:68%!important}
+.ps-mh-values-head .ps-mh-panel-title h3{
+  font:700 30px/1 var(--kids-native-serif)!important;
+}
+.ps-mh-values-head>p{
+  margin-top:8px!important;
+  font:550 12px/1.4 var(--kids-native-sans)!important;
+}
+.ps-mh-value-grid{
+  width:100%!important;
+  margin:20px 0 0!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+.ps-mh-value{
+  min-height:106px!important;
+  height:auto!important;
+  max-height:none!important;
+  padding:12px 8px!important;
+  border-radius:24px!important;
+  clip-path:none!important;
+}
+.ps-mh-value b{width:34px!important;height:34px!important}
+.ps-mh-value strong{
+  margin-top:8px!important;
+  max-width:100%!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+  font:650 12px/1.12 var(--kids-native-sans)!important;
+}
+.ps-mh-value-mercy strong{font-size:11.5px!important}
+
+/* Episodes and more: one large card with a peek instead of tiny tiles. */
+.ps-mh-episodes,
+.ps-mh-more{
+  margin:0 12px 16px!important;
+  padding:18px 0 18px!important;
+  border:1px solid rgba(124,198,219,.17)!important;
+  border-radius:26px!important;
+  background:linear-gradient(180deg,#082e44,#061d2c)!important;
+  overflow:hidden!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.16)!important;
+}
+.ps-mh-section-head{
+  padding:0 18px 13px!important;
+  gap:10px!important;
+}
+.ps-mh-section-title h3{
+  font:700 clamp(25px,6.7vw,32px)/1 var(--kids-native-serif)!important;
+}
+.ps-mh-section-head p{
+  margin-top:5px!important;
+  font:550 11px/1.38 var(--kids-native-sans)!important;
+}
+.ps-mh-all{
+  min-height:44px!important;
+  padding:0 2px 0 10px!important;
+  font:700 11px/1 var(--kids-native-sans)!important;
+}
+.ps-mh-episode-rail,
+.ps-mh-more-rail{
+  gap:12px!important;
+  padding:0 18px 4px!important;
+  scroll-padding-inline:18px!important;
+}
+.ps-mh-episode,
+.ps-mh-more-card{
+  flex:0 0 min(78vw,330px)!important;
+  min-width:0!important;
+  border:1px solid var(--kids-native-line)!important;
+  border-radius:22px!important;
+  box-shadow:0 9px 22px rgba(0,0,0,.18)!important;
+}
+.ps-mh-episode-art,
+.ps-mh-more-art{
+  height:165px!important;
+  min-height:165px!important;
+  max-height:165px!important;
+}
+.ps-mh-time{
+  left:10px!important;bottom:9px!important;
+  min-height:27px!important;
+  padding:0 9px!important;
+  font:700 9px/1 var(--kids-native-sans)!important;
+}
+.ps-mh-episode-copy,
+.ps-mh-more-copy{
+  min-height:82px!important;
+  height:auto!important;
+  padding:11px 13px 13px!important;
+}
+.ps-mh-episode-copy strong,
+.ps-mh-more-copy strong{
+  font:700 17px/1.08 var(--kids-native-serif)!important;
+}
+.ps-mh-episode-copy small,
+.ps-mh-more-copy small{
+  margin-top:6px!important;
+  font:550 11px/1.28 var(--kids-native-sans)!important;
+}
+.ps-mh-episodes.expanded .ps-mh-episode-rail{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:14px!important;
+}
+.ps-mh-episodes.expanded .ps-mh-episode{
+  width:100%!important;
+  max-width:none!important;
+}
+
+/* ---------- PROPHET LIBRARY: COLLECTION CARDS, NOT POSTER STRIPS ---------- */
+.ps-library-page{
+  background:
+    radial-gradient(circle at 82% 0%,rgba(48,151,193,.16),transparent 29%),
+    linear-gradient(180deg,#051927,#07273a 45%,#051722)!important;
+  font-family:var(--kids-native-sans)!important;
+}
+.ps-library-nav{
+  min-height:calc(76px + env(safe-area-inset-top,0px))!important;
+  align-items:flex-end!important;
+  gap:12px!important;
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 12px!important;
+  border-bottom:1px solid rgba(124,198,219,.14)!important;
+  background:rgba(5,24,37,.90)!important;
+  -webkit-backdrop-filter:blur(22px)!important;
+  backdrop-filter:blur(22px)!important;
+}
+.ps-library-back{
+  width:50px!important;height:50px!important;
+  border-color:rgba(244,207,111,.46)!important;
+  background:rgba(9,41,58,.78)!important;
+  color:#ffe39a!important;
+  font-size:32px!important;
+}
+.ps-library-nav-copy{padding-bottom:3px!important}
+.ps-library-nav-copy strong{
+  font:800 28px/1 var(--kids-native-sans)!important;
+  letter-spacing:-.03em!important;
+}
+.ps-library-nav-copy span{
+  margin-top:5px!important;
+  color:#c9dce2!important;
+  font:600 11px/1.2 var(--kids-native-sans)!important;
+}
+.ps-library-page .ps-toolbar{
+  padding:10px 14px 12px!important;
+  border-bottom:1px solid rgba(124,198,219,.12)!important;
+  background:rgba(6,27,41,.94)!important;
+  box-shadow:none!important;
+}
+.ps-library-page .ps-modes{
+  gap:8px!important;
+  grid-template-columns:1.18fr .82fr .82fr!important;
+}
+.ps-library-page .ps-mode{
+  min-height:52px!important;
+  height:52px!important;
+  padding:0 10px!important;
+  border-radius:18px!important;
+  font:700 12px/1 var(--kids-native-sans)!important;
+}
+.ps-library-page .ps-mode-icon{width:18px!important;height:18px!important}
+
+.ps-library-page .ps-library-list{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:14px!important;
+  padding:16px 16px calc(112px + env(safe-area-inset-bottom,0px))!important;
+  background:transparent!important;
+}
+.ps-muhammad-feature{
+  width:100%!important;
+  height:264px!important;
+  min-height:264px!important;
+  margin:0!important;
+  border-radius:28px!important;
+  border:1px solid rgba(244,207,111,.52)!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.22)!important;
+}
+.ps-story-row{
+  min-height:176px!important;
+  height:176px!important;
+  display:grid!important;
+  grid-template-columns:42% minmax(0,1fr) 52px!important;
+  align-items:stretch!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:1px solid var(--kids-native-line)!important;
+  border-radius:24px!important;
+  background:#0a3047!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.17)!important;
+}
+.ps-story-row::before{
+  background:linear-gradient(90deg,rgba(4,27,41,.02) 0%,rgba(4,27,41,.16) 36%,rgba(4,27,41,.64) 69%,rgba(4,27,41,.82) 100%)!important;
+}
+.ps-story-row::after{display:none!important}
+.ps-row-scene{
+  position:relative!important;
+  z-index:2!important;
+  display:block!important;
+  width:100%!important;height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  grid-column:1!important;
+  grid-row:1!important;
+}
+.ps-row-copy{
+  grid-column:2!important;
+  grid-row:1!important;
+  align-self:center!important;
+  min-width:0!important;
+  padding:18px 8px 18px 16px!important;
+}
+.ps-row-meta{
+  color:#bfe6d8!important;
+  font:750 9px/1.2 var(--kids-native-sans)!important;
+  letter-spacing:.09em!important;
+}
+.ps-row-title{
+  margin-top:8px!important;
+  color:#fff4d7!important;
+  font:700 clamp(27px,7vw,34px)/1 var(--kids-native-serif)!important;
+  letter-spacing:-.03em!important;
+}
+.ps-row-ar{
+  margin-top:8px!important;
+  color:#f1d985!important;
+  font-size:17px!important;
+  line-height:1.25!important;
+}
+.ps-row-go{
+  grid-column:3!important;
+  grid-row:1!important;
+  align-self:center!important;
+  justify-self:center!important;
+  width:48px!important;height:48px!important;
+  border-color:rgba(244,207,111,.48)!important;
+  background:rgba(4,28,42,.54)!important;
+}
+.ps-done{right:58px!important;bottom:12px!important}
+.ps-story-row:active{transform:scale(.992)!important}
+
+/* ---------- TABLET / iPAD ---------- */
+@media(min-width:700px){
+  :root{--kids-native-gutter:22px;--kids-native-gap:20px}
+  #view-stories.ps-stories-home{
+    max-width:1040px!important;
+    margin:0 auto!important;
+  }
+  #view-stories.ps-stories-home .page-head{
+    min-height:330px!important;
+    padding:
+      calc(env(safe-area-inset-top,0px) + 36px)
+      42px
+      34px!important;
+    border-radius:0 0 38px 38px!important;
+  }
+  #view-stories.ps-stories-home .page-head h2{max-width:58%!important;font-size:70px!important}
+  #view-stories.ps-stories-home .page-head p{max-width:55%!important;font-size:18px!important}
+  #view-stories.ps-stories-home .ps-muhammad-home{min-height:330px!important}
+  #view-stories.ps-stories-home .ps-mh-home-copy{left:34px!important;right:32px!important;top:30px!important;bottom:28px!important}
+  #view-stories.ps-stories-home .ps-mh-home-copy strong{font-size:56px!important;max-width:48%!important}
+  #view-stories.ps-stories-home .ps-mh-home-sub{font-size:16px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry{min-height:260px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{font-size:48px!important}
+  #view-stories.ps-stories-home .story-feature{
+    display:grid!important;
+    grid-template-columns:58% 42%!important;
+    min-height:330px!important;
+  }
+  #view-stories.ps-stories-home .story-scene{
+    height:330px!important;
+    min-height:330px!important;
+    max-height:none!important;
+  }
+  #view-stories.ps-stories-home .story-copy{
+    min-height:330px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:center!important;
+    padding:28px!important;
+  }
+  #view-stories.ps-stories-home .story-copy h3{margin-right:0!important;font-size:39px!important}
+  #view-stories.ps-stories-home .story-copy p{margin-right:0!important;font-size:15px!important}
+  #view-stories.ps-stories-home .story-copy .story-go{
+    position:static!important;
+    transform:none!important;
+    margin-top:20px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row{
+    flex-basis:min(42vw,360px)!important;
+    width:min(42vw,360px)!important;
+  }
+
+  .ps-mh-hero{
+    min-height:430px!important;
+    margin-left:auto!important;margin-right:auto!important;
+    width:min(calc(100% - 36px),1000px)!important;
+    border-radius:0 0 34px 34px!important;
+  }
+  .ps-mh-hero-copy{left:54px!important;top:calc(env(safe-area-inset-top,0px) + 86px)!important}
+  .ps-mh-hero h2{font-size:60px!important}
+  .ps-mh-intro{max-width:52%!important;font-size:14px!important}
+  .ps-mh-way,.ps-mh-message,.ps-mh-values,.ps-mh-episodes,.ps-mh-more{
+    width:min(calc(100% - 36px),1000px)!important;
+    margin-left:auto!important;margin-right:auto!important;
+  }
+  .ps-mh-way,.ps-mh-message{min-height:280px!important}
+  .ps-mh-panel h3{font-size:40px!important}
+  .ps-mh-panel p{max-width:45%!important;font-size:15px!important}
+  .ps-mh-values{min-height:300px!important}
+  .ps-mh-value-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  .ps-mh-value{min-height:112px!important}
+  .ps-mh-episode,.ps-mh-more-card{flex-basis:min(42vw,360px)!important}
+  .ps-mh-episode-art,.ps-mh-more-art{height:190px!important;min-height:190px!important;max-height:190px!important}
+
+  .ps-library-page .ps-library-list{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:18px!important;
+    padding:20px 22px calc(112px + env(safe-area-inset-bottom,0px))!important;
+  }
+  .ps-muhammad-feature{
+    grid-column:1/-1!important;
+    height:360px!important;
+  }
+  .ps-story-row{
+    height:270px!important;
+    min-height:270px!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:150px 1fr!important;
+  }
+  .ps-row-scene{
+    grid-column:1!important;
+    grid-row:1!important;
+    width:100%!important;height:150px!important;
+  }
+  .ps-row-copy{
+    grid-column:1!important;
+    grid-row:2!important;
+    padding:14px 60px 16px 16px!important;
+  }
+  .ps-row-title{font-size:30px!important}
+  .ps-row-go{
+    position:absolute!important;
+    right:14px!important;
+    bottom:16px!important;
+    width:50px!important;height:50px!important;
+  }
+}
+
+/* compact phones still keep 44–48 pt controls */
+@media(max-width:375px){
+  #view-stories.ps-stories-home .page-head h2{font-size:40px!important}
+  #view-stories.ps-stories-home .ps-mh-home-copy strong{font-size:35px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{font-size:29px!important}
+  .ps-mh-hero h2{font-size:36px!important}
+  .ps-mh-value-grid{gap:9px!important}
+  .ps-library-page .ps-mode{font-size:11px!important;padding:0 7px!important}
+}
