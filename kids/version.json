@@ -1,10 +1,10 @@
 {
-  "buildId": "kids-shell-v12-tab117",
-  "label": "KIDS · V1.07",
-  "releasedAt": "2026-10-02T11:30:00.000Z",
-  "note": "V1.07: Geschichten-Startseite und der besondere Muḥammad-ﷺ-Bereich wurden anhand der bestätigten Referenzbilder pixelnäher verdichtet: neue dedizierte Runway-/Adobe-Bildwelten, exakte mobile Proportionen, Goldlinien und Kartenradien, eigene Dock-Icons, korrekt belegte Schaltflächen sowie verbesserter Offline-Cache für versionierte Bilddateien.",
+  "buildId": "kids-shell-v12-tab127",
+  "label": "KIDS · V1.08",
+  "releasedAt": "2026-10-02T11:35:00.000Z",
+  "note": "V1.08: Geschichten-Startseite und der besondere Muhammad-Bereich sind auf die bestätigten Referenzbilder verdichtet. Bildwelten, Proportionen, Goldlinien, Karten, Docks und Schaltflächen wurden weiter angeglichen; Cache und Release-Zustand wurden konsistent gemacht.",
   "visualSystem": {
-    "prophetStories": "approved-reference-match-v31",
+    "prophetStories": "approved-reference-assets-v21",
     "storiesHomeAsCategoryHub": true,
     "prophetLibraryOwnPage": true,
     "prophetLibraryLargeHeader": false,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v117",
+    "serviceWorkerCache": "v127",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -41,12 +41,13 @@
     "approvedMockupMatch": true,
     "adobeFireflyHero": true,
     "runwayLowCreditStoryScenes": true,
-    "storyAssetVersion": 31,
+    "storyAssetVersion": 38,
     "muhammadHomeDedicatedArt": "/kids/assets/story-wow/v30-muhammad-home.jpg",
     "muhammadBirthDedicatedArt": "/kids/assets/story-wow/v30-muhammad-birth.jpg",
     "pixelGeometryReference": "864x1536",
     "dockReferenceIcons": true,
-    "offlineVersionedAssetMatching": true
+    "offlineVersionedAssetMatching": true,
+    "referenceFinishingLayer": 38
   },
-  "updatedAt": "2026-10-02T11:30:00.000Z"
+  "updatedAt": "2026-10-02T11:35:00.000Z"
 }
