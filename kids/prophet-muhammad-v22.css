@@ -1903,3 +1903,42 @@
   }
   .bottom-nav::before,.ps-mh-bottom-nav::before{opacity:.095!important}
 }
+
+
+/* REFERENCE_VALUE_MEDALLIONS_V38
+   Curved Islamic medallion silhouette for the four child-value badges. */
+.ps-mh-value{
+  --value-bg:linear-gradient(145deg,#0a6670,#064657);
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  border:0!important;
+  background:#f1cf74!important;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='white' d='M50 1C58 8 66 6 74 9C79 16 88 17 91 26C90 34 97 40 98 50C92 58 95 66 90 74C82 78 82 88 73 91C65 90 59 97 50 99C42 93 34 96 26 91C21 84 12 82 9 74C10 66 3 59 2 50C8 42 5 34 10 26C17 22 18 13 27 9C35 10 41 3 50 1Z'/%3E%3C/svg%3E")!important;
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='white' d='M50 1C58 8 66 6 74 9C79 16 88 17 91 26C90 34 97 40 98 50C92 58 95 66 90 74C82 78 82 88 73 91C65 90 59 97 50 99C42 93 34 96 26 91C21 84 12 82 9 74C10 66 3 59 2 50C8 42 5 34 10 26C17 22 18 13 27 9C35 10 41 3 50 1Z'/%3E%3C/svg%3E")!important;
+  -webkit-mask-size:100% 100%!important;
+          mask-size:100% 100%!important;
+  -webkit-mask-repeat:no-repeat!important;
+          mask-repeat:no-repeat!important;
+  clip-path:none!important;
+}
+.ps-mh-value::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:1.4px!important;
+  background:var(--value-bg)!important;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='white' d='M50 1C58 8 66 6 74 9C79 16 88 17 91 26C90 34 97 40 98 50C92 58 95 66 90 74C82 78 82 88 73 91C65 90 59 97 50 99C42 93 34 96 26 91C21 84 12 82 9 74C10 66 3 59 2 50C8 42 5 34 10 26C17 22 18 13 27 9C35 10 41 3 50 1Z'/%3E%3C/svg%3E")!important;
+          mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='white' d='M50 1C58 8 66 6 74 9C79 16 88 17 91 26C90 34 97 40 98 50C92 58 95 66 90 74C82 78 82 88 73 91C65 90 59 97 50 99C42 93 34 96 26 91C21 84 12 82 9 74C10 66 3 59 2 50C8 42 5 34 10 26C17 22 18 13 27 9C35 10 41 3 50 1Z'/%3E%3C/svg%3E")!important;
+  -webkit-mask-size:100% 100%!important;
+          mask-size:100% 100%!important;
+  -webkit-mask-repeat:no-repeat!important;
+          mask-repeat:no-repeat!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09),inset 0 -10px 22px rgba(0,0,0,.10)!important;
+}
+.ps-mh-value-truth{--value-bg:linear-gradient(145deg,#11727a,#075061)!important}
+.ps-mh-value-mercy{--value-bg:linear-gradient(145deg,#a15b24,#6f361f)!important}
+.ps-mh-value-patience{--value-bg:linear-gradient(145deg,#644889,#38285f)!important}
+.ps-mh-value-trust{--value-bg:linear-gradient(145deg,#5a7c2d,#315622)!important}
+.ps-mh-value b,.ps-mh-value strong{position:relative!important;z-index:1!important}
+.ps-mh-value b{filter:drop-shadow(0 2px 4px rgba(0,0,0,.18))!important}
