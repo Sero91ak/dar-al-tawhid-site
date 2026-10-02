@@ -7,19 +7,24 @@ const ORDER=[
   "ilyas","alyasa","yunus","zakariyya","yahya","isa","muhammad"
 ];
 
-const cardFor=id=>"/kids/assets/prophets-v2/"+id+"-card.jpg?v=13";
+const cardFor=id=>"/kids/assets/prophets-v2/"+id+"-card.jpg?v=14";
 const ART=Object.fromEntries(ORDER.map(id=>[id,{card:cardFor(id)}]));
-ART.nuh.hero="/kids/assets/prophets-v2/nuh-hero.jpg?v=13";
-ART.yusuf.hero="/kids/assets/prophets-v2/yusuf-hero.jpg?v=13";
-ART.yaqub.hero="/kids/assets/prophets-v2/yaqub-hero.jpg?v=13";
-ART.ishaq.hero="/kids/assets/prophets-v2/ishaq-hero.jpg?v=13";
-ART.ismail.hero="/kids/assets/prophets-v2/ismail-hero.jpg?v=13";
-ART.lut.hero="/kids/assets/prophets-v2/lut-hero.jpg?v=13";
-ART.ibrahim.hero="/kids/assets/prophets-v2/ibrahim-hero.jpg?v=13";
-ART.salih.hero="/kids/assets/prophets-v2/salih-hero.jpg?v=13";
-ART.hud.hero="/kids/assets/prophets-v2/hud-hero.jpg?v=13";
-ART.idris.hero="/kids/assets/prophets-v2/idris-hero.jpg?v=13";
-ART.adam.hero="/kids/assets/prophets-v2/adam-hero.jpg?v=13";
+ART.nuh.hero="/kids/assets/prophets-v2/nuh-hero.jpg?v=14";
+ART.yusuf.hero="/kids/assets/prophets-v2/yusuf-hero.jpg?v=14";
+ART.yaqub.hero="/kids/assets/prophets-v2/yaqub-hero.jpg?v=14";
+ART.ishaq.hero="/kids/assets/prophets-v2/ishaq-hero.jpg?v=14";
+ART.ismail.hero="/kids/assets/prophets-v2/ismail-hero.jpg?v=14";
+ART.lut.hero="/kids/assets/prophets-v2/lut-hero.jpg?v=14";
+ART.ibrahim.hero="/kids/assets/prophets-v2/ibrahim-hero.jpg?v=14";
+ART.salih.hero="/kids/assets/prophets-v2/salih-hero.jpg?v=14";
+ART.hud.hero="/kids/assets/prophets-v2/hud-hero.jpg?v=14";
+ART.idris.hero="/kids/assets/prophets-v2/idris-hero.jpg?v=14";
+ART.adam.hero="/kids/assets/prophets-v2/adam-hero.jpg?v=14";
+ART.ayyub.hero="/kids/assets/prophets-v2/ayyub-hero.jpg?v=14";
+ART.shuayb.hero="/kids/assets/prophets-v2/shuayb-hero.jpg?v=14";
+ART.musa.hero="/kids/assets/prophets-v2/musa-hero.jpg?v=14";
+ART.harun.hero="/kids/assets/prophets-v2/harun-hero.jpg?v=14";
+ART["dhul-kifl"].hero="/kids/assets/prophets-v2/dhul-kifl-hero.jpg?v=14";
 
 let items=[],mode="read";
 const $=(s,r=document)=>r.querySelector(s);
@@ -102,7 +107,7 @@ document.addEventListener("click",e=>{
 });
 $("#backBtn").addEventListener("click",closeDetail);
 
-fetch("/kids/data/prophet-stories.json?v=13",{cache:"no-store"})
+fetch("/kids/data/prophet-stories.json?v=14",{cache:"no-store"})
   .then(r=>{if(!r.ok)throw new Error("data "+r.status);return r.json()})
   .then(data=>{
     items=sorted(data.items);
