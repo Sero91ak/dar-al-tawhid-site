@@ -1189,8 +1189,9 @@ async function chooseStoryWord(term){
 }
 function setMessage(text,type="bad"){
   const el=$("#error");
+  if(!el)return;
   el.textContent=text||"";
-  el.className=text?(type==="good"?"good":type==="warn"?"warn":"bad"):"";
+  el.className="studio-message-bar"+(text?(" "+(type==="good"?"good":type==="warn"?"warn":"bad")):"");
 }
 function localRequest(path,options={}){
   const url=LOCAL_API+path;
@@ -1416,7 +1417,6 @@ async function analyzeProsody(){
         requiredHonorificKey:x.requiredHonorificKey||""
       })):[];
       renderLearningResults(suggestions);
-      $("#learningSection").scrollIntoView({behavior:"smooth",block:"nearest"});
     }
     return d;
   }catch(_){return null}
@@ -1517,7 +1517,7 @@ async function searchLearning(termOverride=""){
     s.textContent="Lokale Aussprachebibliothek aktiv · "+rows.length+" Form"+(rows.length===1?"":"en")+" verfügbar.";
     s.className="learning-preview-status good";
   }
-  return serverData||{ok:true,results:rows,localFallback:true};
+  return {...(serverData||{ok:true,localFallback:true}),results:rows};
 }
 
 function selectedTextWord(){
@@ -1880,6 +1880,7 @@ function setStudioPage(page){
   const allowed=new Set(["prophets","content","pronunciation","alphabet","free","system"]);
   page=allowed.has(page)?page:"content";
   studioPage=page;
+  window.studioPage=page;
   studioMode=page==="free"?"free":"production";
 
   const main=$("#mainStudioWorkspace"),free=$("#freeVoiceWorkspace");
