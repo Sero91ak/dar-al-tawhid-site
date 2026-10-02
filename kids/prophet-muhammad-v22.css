@@ -974,3 +974,43 @@
   }
   .ps-mh-ar{font-size:18.5px!important}
 }
+
+
+/* v26 cinematic color/crop pass */
+.ps-mh-discover{
+  min-height:25px!important;
+  height:25px!important;
+}
+
+/* Reference dark teal sampled from the approved render. */
+.ps-mh-episodes,
+.ps-mh-more{
+  background:
+    radial-gradient(circle at 88% 5%,rgba(36,118,150,.11),transparent 27%),
+    linear-gradient(180deg,#021f32 0%,#011c2e 100%)!important;
+}
+.ps-mh-bottom-nav{
+  background:
+    radial-gradient(circle at 50% 0,rgba(239,197,87,.055),transparent 28%),
+    linear-gradient(180deg,rgba(2,31,47,.99),rgba(1,25,39,.997))!important;
+}
+
+/* Thumbnail framing visible in the reference. */
+.ps-mh-episode[data-mh-episode="birth"] .ps-mh-episode-art{
+  background-position:center 55%!important;
+}
+.ps-mh-episode[data-mh-episode="wahy"] .ps-mh-episode-art{
+  background-position:center 48%!important;
+}
+.ps-mh-episode[data-mh-episode="hijrah"] .ps-mh-episode-art{
+  background-position:center 50%!important;
+}
+
+/* Make the cyan card outline quieter; gold remains reserved for actions/selection. */
+.ps-mh-episode,
+.ps-mh-more-card{
+  border-color:rgba(73,169,199,.36)!important;
+}
+.ps-mh-episode.selected{
+  border-color:rgba(247,211,116,.80)!important;
+}
