@@ -464,8 +464,35 @@
       }
     });
   }
+  function setupCinemaPause(){
+    if(!document.body)return;
+    function syncPaused(anyVisible){
+      document.body.classList.toggle("dar-library-cinema-paused",document.hidden||!anyVisible);
+    }
+    var targets=[].slice.call(document.querySelectorAll(".header.theme-hero-surface,.qov-header"));
+    if(!targets.length){syncPaused(false);return}
+    try{
+      if(window.__darLibraryCinemaObs)window.__darLibraryCinemaObs.disconnect();
+      var visible=new Set();
+      window.__darLibraryCinemaObs=new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting&&entry.intersectionRatio>.05)visible.add(entry.target);
+          else visible.delete(entry.target);
+        });
+        syncPaused(visible.size>0);
+      },{threshold:[0,.05,.25]});
+      targets.forEach(function(el){window.__darLibraryCinemaObs.observe(el)});
+      document.removeEventListener("visibilitychange",window.__darLibraryCinemaVisibilityHandler||function(){});
+      window.__darLibraryCinemaVisibilityHandler=function(){
+        if(document.hidden)document.body.classList.add("dar-library-cinema-paused");
+        else schedule();
+      };
+      document.addEventListener("visibilitychange",window.__darLibraryCinemaVisibilityHandler,{passive:true});
+    }catch(e){document.body.classList.remove("dar-library-cinema-paused")}
+  }
+  /* DAR_LIBRARY_CINEMA_PAUSE_V1170 */
   /* DAR_LIBRARY_QUIZ_3D_V1170 */
-  function enhance(){ensureLateCss();syncRouteClasses();insertHomeFeature();enhanceQuizMenu3d();markNeutralOrnament()}
+  function enhance(){ensureLateCss();syncRouteClasses();insertHomeFeature();enhanceQuizMenu3d();markNeutralOrnament();setupCinemaPause()}
   var timer=0;
   function schedule(){clearTimeout(timer);timer=setTimeout(enhance,24)}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",enhance,{once:true});else enhance();
