@@ -209,3 +209,18 @@
     height:45px!important;
   }
 }
+
+
+/* REFERENCE_HOME_GEOMETRY_V41 — measured image/caption split from approved 864×1536 home reference */
+@media(max-width:600px){
+  #view-stories.ps-stories-home .story-scene{
+    height:33.5vw!important;
+    min-height:0!important;
+    max-height:150px!important;
+  }
+  #view-stories.ps-stories-home .story-copy{
+    height:16.8vw!important;
+    min-height:68px!important;
+    max-height:76px!important;
+  }
+}
