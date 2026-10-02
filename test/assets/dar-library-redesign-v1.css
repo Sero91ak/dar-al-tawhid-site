@@ -669,3 +669,22 @@ html.dar-library-redesign-v1 :is(
   body.is-quiz-route .view-head,body.is-quran-overview .qov-header,body.is-more-route .view-head{min-height:150px}
   .dar-lib-hero-object{width:74px;height:74px;right:10px}
 }
+
+/* Header order correction: original logo + DĀR AL TAWḤĪD first, doctrine line underneath. */
+body.is-home-route .brand{display:flex!important;flex-direction:column!important;align-items:flex-start!important}
+body.is-home-route .brand-main{order:1!important}
+body.is-home-route .brand-kicker-row{order:2!important;margin:7px 0 0!important;padding:0 0 9px!important;width:100%!important;position:relative}
+body.is-home-route .brand-kicker-row::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--dar-lib-accent) 46%,transparent),color-mix(in srgb,var(--dar-lib-accent) 18%,transparent) 64%,transparent);
+}
+@media(max-width:520px){
+  body.is-home-route .top-shell.theme-hero-shell .header{justify-content:flex-start!important}
+  body.is-home-route #headerPrayerStatus.header-prayer-hub{
+    position:relative!important;top:auto!important;right:auto!important;width:100%!important;max-width:none!important;
+    margin:11px 0 0!important;padding:7px 0 0!important;
+    border-left:0!important;border-top:1px solid color-mix(in srgb,var(--dar-lib-accent) 28%,transparent)!important;
+    background:transparent!important;backdrop-filter:none!important;
+  }
+  body.is-home-route .hero-text{margin-top:auto!important}
+}
