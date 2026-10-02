@@ -271,6 +271,7 @@ function ensureUi(){
       if(kind==="episode"){jumpMuhammadEpisode(action.dataset.episode);return}
       if(kind==="toggle-all"){toggleMuhammadEpisodes(action);return}
       if(kind==="library"){goMuhammadLibrary();return}
+      if(kind==="full-story"){openMuhammadFullStory();return}
     }
     const episode=e.target.closest("[data-mh-episode]");if(episode)openMuhammadEpisode(episode.dataset.mhEpisode);
   });
@@ -297,7 +298,7 @@ function applyMode(){
 function renderMuhammadSpecial(){
   const rail=$("#psMhEpisodes"),detail=$("#psMhEpisodeDetail"),more=$("#psMhMore"),section=$("#psMhEpisodesSection"),all=section?.querySelector('[data-mh-action="toggle-all"]');
   if(rail)rail.innerHTML=MUHAMMAD_EPISODES.map(ep=>
-    '<button class="ps-mh-episode" type="button" data-mh-episode="'+esc(ep.id)+'">'+
+    '<button class="ps-mh-episode" type="button" data-mh-episode="'+esc(ep.id)+'" aria-label="'+esc(ep.title)+' öffnen">'+
       '<span class="ps-mh-episode-art" style="background-image:url('+esc(ep.art)+')"><span class="ps-mh-time">'+esc(ep.duration||"ca. 5 Min.")+'</span></span>'+
       '<span class="ps-mh-episode-copy"><strong>'+esc(ep.title)+'</strong><small>'+esc(ep.subtitle||ep.meta)+'</small></span>'+
     '</button>'
@@ -320,7 +321,7 @@ function openMuhammadEpisode(id){
   const card=document.querySelector('[data-mh-episode="'+id+'"]');
   document.querySelectorAll(".ps-mh-episode.selected").forEach(el=>el.classList.remove("selected"));
   if(card)card.classList.add("selected");
-  detail.innerHTML='<span>'+esc(ep.meta)+'</span><h4>'+esc(ep.title)+'</h4><p>'+esc(ep.summary)+'</p><strong>'+esc(ep.source)+'</strong>';
+  detail.innerHTML='<span>'+esc(ep.meta)+'</span><h4>'+esc(ep.title)+'</h4><p>'+esc(ep.summary)+'</p><strong>'+esc(ep.source)+'</strong><button class="ps-mh-full-cta" type="button" data-mh-action="full-story">Vollständige Geschichte lesen &amp; hören</button>';
   detail.hidden=false;detail.scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 function jumpMuhammadEpisode(id){
@@ -338,7 +339,17 @@ function goMuhammadLibrary(){
   closeStory();
   setTimeout(()=>$("#psLibraryScroll")?.scrollTo({top:0,behavior:"smooth"}),40);
 }
+function openMuhammadFullStory(){
+  const modal=$("#psModal"),body=$(".ps-body");if(!modal||!body)return;
+  modal.classList.add("ps-mh-full-open");
+  setMode("both");
+  requestAnimationFrame(()=>body.scrollIntoView({behavior:"smooth",block:"start"}));
+}
 function goMuhammadNav(target){
+  if(target==="stories"){
+    const scroll=$("#psScroll");if(scroll)scroll.scrollTo({top:0,behavior:"smooth"});
+    return;
+  }
   closeStory();
   setTimeout(()=>{
     if($("#psLibraryPage")?.classList.contains("open"))closeLibrary();
@@ -348,7 +359,7 @@ function goMuhammadNav(target){
 function renderActive(){
   if(!active)return;activeText=buildText(active);
   const isMuhammad=active.id==="muhammad",modal=$("#psModal"),special=$("#psMuhammadSpecial"),hero=$(".ps-hero");
-  if(modal)modal.classList.toggle("ps-muhammad-open",isMuhammad);if(special)special.hidden=!isMuhammad;
+  if(modal){modal.classList.toggle("ps-muhammad-open",isMuhammad);if(isMuhammad)modal.classList.remove("ps-mh-full-open")}if(special)special.hidden=!isMuhammad;
   if(hero){hero.hidden=isMuhammad;hero.setAttribute("data-ps-id",active.id);hero.setAttribute("data-hero-copy",DEDICATED_HERO.has(active.id)?"left":"right")}
   if(isMuhammad)renderMuhammadSpecial();
   const heroImg=$("#psHero");if(heroImg){heroImg.onerror=()=>{heroImg.onerror=null;const card=cardUrl(active);if(heroImg.src!==card)heroImg.src=card;else if(active.cover)heroImg.src=active.cover;};heroImg.src=heroUrl(active);heroImg.alt="";}
@@ -392,7 +403,7 @@ function openStory(id){
   active=items.find(x=>x.id===id);if(!active)return;
   stopAudio();renderActive();$("#psModal").classList.remove("scrolled");$("#psModal").classList.add("open");lockPage();$("#psScroll").scrollTop=0;$("#psClose")?.focus();
 }
-function closeStory(){stopAudio();$("#psModal")?.classList.remove("open","scrolled");unlockPage();active=null}
+function closeStory(){stopAudio();$("#psModal")?.classList.remove("open","scrolled","ps-muhammad-open","ps-mh-full-open");unlockPage();active=null}
 function resetAudioForActive(){
   stopAudio();
   const meta=audioMeta(active);
