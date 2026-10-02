@@ -46,6 +46,16 @@ if (!visualMatch) {
 }
 const assetVersion = visualMatch[1];
 
+// V1.06 ist ein historischer, damals veröffentlichter Snapshot. Seine sichtbare
+// Release-ID blieb tab106, während die intern cache-gebusteten Story-/SW-Dateien
+// bereits v31/v117 trugen. Beim exakten Rollback darf der Guard diesen bekannten
+// Snapshot nicht auf heutige 1:1-Versionierung umschreiben.
+const exactV106Snapshot = build === "kids-shell-v12-tab106" && label === "KIDS · V1.06";
+const htmlCssVersion = exactV106Snapshot ? "21" : assetVersion;
+const htmlJsVersion = exactV106Snapshot ? "31" : assetVersion;
+const swVersion = exactV106Snapshot ? "117" : buildNumber;
+const prophetArtVersion = exactV106Snapshot ? "21" : assetVersion;
+
 const expectedIds = [
   "adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub",
   "yusuf","ayyub","shuayb","musa","harun","dhul-kifl","dawud","sulayman",
@@ -66,9 +76,9 @@ function assertOnlyCurrentBuild(rel) {
 for (const rel of ["kids/index.html", "kids/start.html", "kids/shell.html"]) {
   const text = read(rel);
   assertOnlyCurrentBuild(rel);
-  requireMatch(text, "/kids/prophet-stories.css?v=" + assetVersion, rel);
-  requireMatch(text, "/kids/prophet-stories.js?v=" + assetVersion, rel);
-  requireMatch(text, "/kids/sw.js?v=" + buildNumber, rel);
+  requireMatch(text, "/kids/prophet-stories.css?v=" + htmlCssVersion, rel);
+  requireMatch(text, "/kids/prophet-stories.js?v=" + htmlJsVersion, rel);
+  requireMatch(text, "/kids/sw.js?v=" + swVersion, rel);
 }
 
 const manifest = read("kids/manifest.webmanifest");
@@ -92,9 +102,9 @@ if (alive !== aliveExpected) error("kids/v12-alive.txt stimmt nicht mit kids/ver
 requireMatch(read("_headers"), "X-Kids-Build: " + build, "_headers");
 
 const sw = read("kids/sw.js");
-requireMatch(sw, 'const CACHE_NAME="dar-al-tawhid-kids-v' + buildNumber + '";', "kids/sw.js");
-requireMatch(sw, "/kids/prophet-stories.css?v=" + assetVersion, "kids/sw.js");
-requireMatch(sw, "/kids/prophet-stories.js?v=" + assetVersion, "kids/sw.js");
+requireMatch(sw, 'const CACHE_NAME="dar-al-tawhid-kids-v' + swVersion + '";', "kids/sw.js");
+requireMatch(sw, "/kids/prophet-stories.css?v=" + htmlCssVersion, "kids/sw.js");
+requireMatch(sw, "/kids/prophet-stories.js?v=" + htmlJsVersion, "kids/sw.js");
 
 const prophetJs = read("kids/prophet-stories.js");
 requireMatch(prophetJs, '-card.jpg?v=' + assetVersion, "kids/prophet-stories.js");
@@ -130,4 +140,4 @@ if (Number(visual.premiumDetailHeroes) !== 25 && Number(visual.dedicatedHighReso
 if (visual.visibleFaces !== false) error("visualSystem.visibleFaces muss false bleiben");
 
 if (failed) process.exit(1);
-console.log("Kids Prophet release guard OK:", build, label, "assets v" + assetVersion, "25 Karten + 25 Heroes");
+console.log("Kids Prophet release guard OK:", build, label, exactV106Snapshot ? "exact-v106-legacy-snapshot" : ("assets v" + assetVersion), "25 Karten + 25 Heroes");
