@@ -195,7 +195,7 @@ function ensureUi(){
       '<div class="ps-scroll" id="psScroll">'+
         '<section class="ps-muhammad-special" id="psMuhammadSpecial" hidden>'+
           '<header class="ps-mh-hero">'+
-            '<img class="ps-mh-hero-art" src="/kids/assets/story-wow/muhammad-hero.jpg?v=22" alt="">'+
+            '<img class="ps-mh-hero-art" src="/kids/assets/story-wow/v22-muhammad-hero.jpg?v=22" alt="">'+
             '<span class="ps-mh-hero-shade" aria-hidden="true"></span>'+
             '<div class="ps-mh-hero-copy">'+
               '<span class="ps-mh-special-label">★&nbsp;&nbsp;BESONDERER BEREICH</span>'+
