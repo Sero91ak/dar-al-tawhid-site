@@ -1261,22 +1261,48 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
         preview_mode="preview-cache"
         sample_rate=24000
     else:
-        # Low-latency: nur das einzelne Wort / die kurze Phrase erzeugen.
-        # Der MLX-Worker bleibt warm; seine Request-Sperre serialisiert diesen
-        # Mini-Render mit dem laufenden Story-Segment, ohne den Batch abzubrechen.
+        # ECHTER Schnelltest: nur das einzelne Wort / die kurze Phrase rendern.
+        # Keine schwere Voll-QA-/Rescue-Kaskade: maximal zwei kurze Seeds,
+        # danach sofort Ergebnis oder klarer Fehler. Das stellt den früheren
+        # 15–30-Sekunden-Prüfworkflow wieder her und hält Varianten vergleichbar.
         model=load_production_model()
         sample_rate=int(model.sr)
+        import torch
         seed=3000+(int(preview_id[:8],16)%800000)+variant*977
-        # Bewährter Lernpfad: derselbe QA-/Rescue-Renderer, der vor dem
-        # Low-Latency-Umbau zuverlässig funktionierte. Der Queue-Wrapper hält
-        # LEARNING_PREVIEW_WAITING über die komplette sichere Warte-/Renderphase.
-        preview_mode_name="narration"
-        wav,metrics=render_segment_with_qa(
-            model,effective_tts,requested,preview_mode_name,True,seed_base=seed
-        )
+        last_error=None
+        wav=None
+        metrics=None
+        hard={
+            "empty_audio","non_finite","near_silence","low_peak","clipping","too_short",
+            "short_arabic_too_long","suspicious_sustained_hold",
+            "inline_arabic_internal_hold","unexpected_internal_hold","excessive_internal_pause"
+        }
+        for attempt in range(2):
+            try:
+                torch.manual_seed(seed+attempt*97)
+                wav=render_with_model(model,effective_tts,requested,mode)
+                wav=trim_segment_edges(
+                    wav,sample_rate,
+                    aggressive=True,
+                    inline=(requested=="ar" and is_inline_arabic_micro_term(effective_tts))
+                )
+                metrics=audio_quality_metrics(wav,sample_rate,effective_tts,requested,mode)
+                blocking=[x for x in (metrics.get("issues") or []) if x in hard]
+                if not blocking:
+                    break
+                last_error=", ".join(blocking)
+                wav=None
+            except Exception as e:
+                last_error=str(e)
+                wav=None
+        if wav is None or metrics is None:
+            raise RuntimeError(
+                "Schnelltest verworfen: "+str(last_error or "technische Kurz-QA fehlgeschlagen")+
+                ". Bitte direkt eine andere Variante testen."
+            )
         save_wav(cache_path,wav,sample_rate)
         shutil.copy2(cache_path,path)
-        preview_mode="qa-fast-render"
+        preview_mode="low-latency-render"
 
     elapsed_ms=int(round((time.perf_counter()-started)*1000))
     meta={
