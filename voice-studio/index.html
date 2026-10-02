@@ -1262,27 +1262,62 @@ function takeTextSelection(){
   searchLearning(value);
 }
 
-async function previewLearning(){
+async function previewLearning(options={}){
+  const nextVariant=!!options.nextVariant;
   const term=$("#learnTerm").value.trim();
-  const tts=$("#learnArabic").value.trim()||(learningCandidate?.ttsText||"");
+  const tts=$("#learnArabic").value.trim()||(learningCandidate?.ttsText||"")||term;
   if(!term){setMessage("Wort oder Name fehlt.");return}
-  if(!tts){setMessage("Wähle eine gefundene Korrektur oder trage die arabische Sprechform ein.");return}
+  if(nextVariant)learningVariant=Math.min(9,learningVariant+1);
   clearLearningPreview();
-  const btn=$("#learnPreviewBtn"),old=btn.textContent;btn.disabled=true;btn.textContent="Erzeuge Test …";
+  const btn=$("#learnPreviewBtn"),old=btn.textContent;
+  btn.disabled=true;
+  btn.textContent="Schnelltest …";
   try{
-    const r=await localRequest("/learning/preview",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({term,ttsText:tts,canonical:learningCandidate?.canonical||term})});
-    if(!r.ok){const d=await r.json().catch(()=>({}));throw Error(d.error||"Test-Audio konnte nicht erzeugt werden.")}
+    const r=await localRequest("/learning/preview",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        term,
+        ttsText:tts,
+        canonical:learningCandidate?.canonical||term,
+        language:learningCandidate?.ttsLanguage||"",
+        variant:learningVariant
+      })
+    });
+    if(!r.ok){
+      const d=await r.json().catch(()=>({}));
+      throw Error(d.error||"Test-Audio konnte nicht erzeugt werden.");
+    }
     const blob=await r.blob();
     learningPreviewId=r.headers.get("X-Learning-Preview-Id")||"";
     if(!learningPreviewId)throw Error("Test-ID fehlt.");
     learningPreviewUrl=URL.createObjectURL(blob);
-    const p=$("#learnPlayer");p.src=learningPreviewUrl;p.hidden=false;
+    const p=$("#learnPlayer");
+    p.src=learningPreviewUrl;
+    p.hidden=false;
     $("#learnConfirmBtn").disabled=false;
+    $("#learnResetVariantBtn").textContent="Variante "+(learningVariant+1);
+    const ms=Number(r.headers.get("X-Learning-Preview-Ms")||0);
+    const mode=r.headers.get("X-Learning-Preview-Mode")||"fast";
     await p.play().catch(()=>{});
-    setMessage("Hör genau hin. Nur wenn die Aussprache stimmt, „So merken“ drücken.","warn");
-  }catch(e){setMessage(e.message||String(e))}
-  finally{btn.disabled=false;btn.textContent=old}
+    const speed=mode==="confirmed-lock"
+      ?"LOCKED-Audio"
+      :mode==="preview-cache"
+        ?"Sofort aus Schnellcache"
+        :"Low-Latency erzeugt";
+    setMessage(
+      "Variante "+(learningVariant+1)+" · "+(ms?((ms/1000).toFixed(1)+" s · "):"")+speed+
+      ". Nur bei korrekter Aussprache „So merken“ drücken.",
+      "warn"
+    );
+  }catch(e){
+    setMessage(e.message||String(e));
+  }finally{
+    btn.disabled=false;
+    btn.textContent=old;
+  }
 }
+
 async function confirmLearning(){
   if(!learningPreviewId){setMessage("Zuerst eine neue Aussprache testen und anhören.");return}
   const term=$("#learnTerm").value.trim(),btn=$("#learnConfirmBtn"),old=btn.textContent;
