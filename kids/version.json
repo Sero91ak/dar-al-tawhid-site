@@ -1,10 +1,10 @@
 {
-  "buildId": "kids-shell-v12-tab106",
-  "label": "KIDS · V1.06",
-  "releasedAt": "2026-10-02T09:44:00.000Z",
-  "note": "V1.06: Die zwei bestätigten Geschichten-Entwürfe wurden direkt in die App übertragen. Geschichten-Startseite im breiten Premium-Stil; Muḥammad ﷺ als erster und eigener besonderer Bereich; eigene Firefly-/Runway-Bildwelten für Hero, Weg, Ḥirāʾ und Madīnah; Detailseite ausführlicher und vollflächig. Haupt-Tab-Leiste unverändert.",
+  "buildId": "kids-shell-v12-tab105",
+  "label": "KIDS · V1.05",
+  "releasedAt": "2026-10-02T09:08:00.000Z",
+  "note": "V1.05: Prophetengeschichten laufen als eigener stabiler Unterbereich mit 25 geprüften Karten und 25 dedizierten 21:9-Detail-Heroes. Build-, Cache-, Router-, Manifest- und Asset-Versionen werden jetzt vor jedem Release automatisch gegengeprüft; inkonsistente oder veraltete Kids-Stände werden gestoppt.",
   "visualSystem": {
-    "prophetStories": "approved-reference-match-v21",
+    "prophetStories": "nested-prophet-library-v19",
     "storiesHomeAsCategoryHub": true,
     "prophetLibraryOwnPage": true,
     "prophetLibraryLargeHeader": false,
@@ -27,21 +27,9 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v106",
+    "serviceWorkerCache": "v105",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
-    "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
-    "muhammadFeaturedFirst": true,
-    "muhammadDedicatedSpecialPage": true,
-    "muhammadJourneySections": true,
-    "muhammadValuesForChildren": true,
-    "muhammadEpisodeRail": true,
-    "noArrowOverHeroArt": true,
-    "bottomNavigationChanged": false,
-    "approvedMockupMatch": true,
-    "adobeFireflyHero": true,
-    "runwayLowCreditStoryScenes": true,
-    "storyAssetVersion": 21
-  },
-  "updatedAt": "2026-10-02T09:44:00.000Z"
+    "releaseConsistencyGuardMode": "dynamic-build-cache-assets"
+  }
 }
