@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1094";
+  const VER="1095";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","topics.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -162,7 +162,12 @@
         return "ilm.png";
       }
       if(el.classList.contains("scholars-index__mono"))return fileFromScholarGroup(el.getAttribute("data-group")||"");
-      if(el.classList.contains("prophets-row__icon")||el.classList.contains("prophets-detail__emoji")||el.classList.contains("prophets-spotlight__icon"))return "prophets.png";
+      if(el.classList.contains("prophets-spotlight__icon"))return "prophets.png";
+      if(el.classList.contains("prophets-row__icon")||el.classList.contains("prophets-detail__emoji")){
+        const row=el.closest("[data-prophet-id],[data-prophet-detail]");
+        const id=(row&&(row.getAttribute("data-prophet-id")||row.getAttribute("data-prophet-detail")))||"";
+        return fileFromKind("prophet",id);
+      }
       if(el.classList.contains("related-compact-icon"))return "posts.png";
       if(el.classList.contains("quiz-quick-icon")){
         const card=el.closest(".quiz-home-quick-card");
