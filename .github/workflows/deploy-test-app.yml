@@ -77,7 +77,7 @@ jobs:
           node scripts/push-system-guard.js
           node scripts/push-lanes-guard.js
 
-      - name: Deploy Dar Test (separat, ohne Live-Domain-Routen)
+      - name: Deploy Dar Test Worker
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -90,36 +90,58 @@ jobs:
         run: node scripts/delete-kids-worker-routes.js
         continue-on-error: true
 
-      - name: Alte dar-al-tawhid.de/test*-Routen des Test-Workers löschen
+      - name: Öffentliche /test*-Route an Dar-Test-Worker binden
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
         run: |
+          set -euo pipefail
           export ZONE="${CLOUDFLARE_ZONE_ID:-0e4c0fdfaca4f3fa137de3a67ac8a68b}"
-          curl -sS -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
-            "https://api.cloudflare.com/client/v4/zones/${ZONE}/workers/routes" \
-            | node -e '
-              const {execFileSync} = require("child_process");
-              let d = "";
-              process.stdin.on("data", (c) => { d += c; });
-              process.stdin.on("end", () => {
-                const body = JSON.parse(d || "{}");
-                const routes = (body.result || []).filter((r) =>
-                  String(r.pattern || "").includes("/test") &&
-                  String(r.script || "").includes("dar-al-tawhid-test")
-                );
-                console.log("Test-Worker Live-Routen:", routes.map((r) => r.pattern).join(", ") || "(keine)");
-                for (const route of routes) {
-                  execFileSync("curl", [
-                    "-sS", "-X", "DELETE",
-                    "-H", "Authorization: Bearer " + process.env.CLOUDFLARE_API_TOKEN,
-                    "https://api.cloudflare.com/client/v4/zones/" + process.env.ZONE + "/workers/routes/" + route.id
-                  ], { stdio: "inherit" });
-                  console.log("gelöscht:", route.pattern, route.id);
-                }
-              });
+          export ROUTE_PATTERN="dar-al-tawhid.de/test*"
+          export ROUTE_SCRIPT="dar-al-tawhid-test"
+
+          curl -fsS -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            "https://api.cloudflare.com/client/v4/zones/${ZONE}/workers/routes" > /tmp/dar-test-routes.json
+
+          ROUTE_ID="$(node -e '
+            const fs=require("fs");
+            const body=JSON.parse(fs.readFileSync("/tmp/dar-test-routes.json","utf8")||"{}");
+            const route=(body.result||[]).find(r=>String(r.pattern||"")===process.env.ROUTE_PATTERN);
+            process.stdout.write(route&&route.id?String(route.id):"");
+          ')"
+          ROUTE_OWNER="$(node -e '
+            const fs=require("fs");
+            const body=JSON.parse(fs.readFileSync("/tmp/dar-test-routes.json","utf8")||"{}");
+            const route=(body.result||[]).find(r=>String(r.pattern||"")===process.env.ROUTE_PATTERN);
+            process.stdout.write(route&&route.script?String(route.script):"");
+          ')"
+
+          if [ -n "${ROUTE_ID}" ] && [ "${ROUTE_OWNER}" = "${ROUTE_SCRIPT}" ]; then
+            echo "Dar-Test-Route bereits korrekt: ${ROUTE_PATTERN} → ${ROUTE_SCRIPT}"
+          else
+            if [ -n "${ROUTE_ID}" ]; then
+              echo "Ersetze falsche Route: ${ROUTE_PATTERN} → ${ROUTE_OWNER:-ohne Script}"
+              curl -fsS -X DELETE \
+                -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+                "https://api.cloudflare.com/client/v4/zones/${ZONE}/workers/routes/${ROUTE_ID}" >/dev/null
+            fi
+
+            curl -fsS -X POST \
+              -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+              -H "Content-Type: application/json" \
+              --data "{\"pattern\":\"${ROUTE_PATTERN}\",\"script\":\"${ROUTE_SCRIPT}\"}" \
+              "https://api.cloudflare.com/client/v4/zones/${ZONE}/workers/routes" > /tmp/dar-test-route-create.json
+
+            node -e '
+              const fs=require("fs");
+              const body=JSON.parse(fs.readFileSync("/tmp/dar-test-route-create.json","utf8")||"{}");
+              if(body.success!==true){
+                console.error("Cloudflare Route konnte nicht erstellt werden:", JSON.stringify(body.errors||body));
+                process.exit(1);
+              }
+              console.log("Dar-Test-Route aktiv:", process.env.ROUTE_PATTERN, "→", process.env.ROUTE_SCRIPT);
             '
-        continue-on-error: true
+          fi
 
       - name: Cloudflare-Cache für /test/* leeren
         env:
