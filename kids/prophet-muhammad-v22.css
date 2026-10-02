@@ -2979,3 +2979,55 @@ html[data-view="stories"]{--r41-story-safe:max(58px,env(safe-area-inset-top,0px)
   #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{font-size:25px!important}
   .ps-mh-hero h2{font-size:28px!important}
 }
+
+
+/* REFERENCE_FINAL_ALIGNMENT_V45
+   Final micro-alignment against the approved mobile references. */
+@media(max-width:600px){
+  /* Four medallions sit on one lower row while the copy stays left. */
+  .ps-mh-values{position:relative!important}
+  .ps-mh-value-grid{
+    position:absolute!important;
+    left:auto!important;
+    right:9px!important;
+    bottom:7px!important;
+    width:68%!important;
+    margin:0!important;
+  }
+
+  /* The reference uses gold pictograms even on inactive dock tabs. */
+  .bottom-nav .nav-btn .ico,
+  .ps-mh-bottom-nav .ps-mh-nav-icon{
+    background-color:#f2d37d!important;
+    color:#f2d37d!important;
+    filter:drop-shadow(0 1px 3px rgba(0,0,0,.24))!important;
+  }
+  .bottom-nav .nav-btn .lab,
+  .ps-mh-bottom-nav button>span:last-child{
+    color:#e8f0f3!important;
+  }
+  .bottom-nav .nav-btn.active .ico,
+  .ps-mh-bottom-nav button.active .ps-mh-nav-icon{
+    background-color:#ffe393!important;
+    color:#ffe393!important;
+    filter:drop-shadow(0 0 5px rgba(243,207,112,.24))!important;
+  }
+  .bottom-nav .nav-btn.active .lab,
+  .ps-mh-bottom-nav button.active>span:last-child{
+    color:#ffe39a!important;
+  }
+
+  /* Keep the section ornament/line visually centered with the title baseline. */
+  .r22-section-label i,
+  .ps-mh-section-title i{
+    transform:translateY(1px)!important;
+  }
+
+  /* Gold outline buttons stay visually thin and luminous, not chunky. */
+  .ps-mh-discover,
+  .ps-mh-home-cta,
+  .ps-entry-cta{
+    border-width:1px!important;
+    box-shadow:0 0 13px rgba(242,203,108,.10),inset 0 1px rgba(255,255,255,.04)!important;
+  }
+}
