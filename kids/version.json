@@ -4,7 +4,7 @@
   "releasedAt": "2026-10-02T11:30:00.000Z",
   "note": "V1.07: Geschichten-Startseite und der besondere Muḥammad-ﷺ-Bereich wurden anhand der bestätigten Referenzbilder pixelnäher verdichtet: neue dedizierte Runway-/Adobe-Bildwelten, exakte mobile Proportionen, Goldlinien und Kartenradien, eigene Dock-Icons, korrekt belegte Schaltflächen sowie verbesserter Offline-Cache für versionierte Bilddateien.",
   "visualSystem": {
-    "prophetStories": "approved-reference-match-v21",
+    "prophetStories": "approved-reference-match-v46",
     "storiesHomeAsCategoryHub": true,
     "prophetLibraryOwnPage": true,
     "prophetLibraryLargeHeader": false,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v117",
+    "serviceWorkerCache": "v124",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -41,12 +41,14 @@
     "approvedMockupMatch": true,
     "adobeFireflyHero": true,
     "runwayLowCreditStoryScenes": true,
-    "storyAssetVersion": 31,
+    "storyAssetVersion": 36,
     "muhammadHomeDedicatedArt": "/kids/assets/story-wow/v30-muhammad-home.jpg",
     "muhammadBirthDedicatedArt": "/kids/assets/story-wow/v30-muhammad-birth.jpg",
     "pixelGeometryReference": "864x1536",
     "dockReferenceIcons": true,
-    "offlineVersionedAssetMatching": true
+    "offlineVersionedAssetMatching": true,
+    "referenceFinishingLayer": 46,
+    "referenceCacheCoherent": true
   },
-  "updatedAt": "2026-10-02T11:30:00.000Z"
+  "updatedAt": "2026-10-02T13:10:00.000Z"
 }
