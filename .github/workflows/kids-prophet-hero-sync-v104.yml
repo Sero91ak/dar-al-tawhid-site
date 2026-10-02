@@ -1,0 +1,99 @@
+name: Kids Prophet Hero Sync v1.04
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/kids-prophet-hero-sync-v104.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-prophet-hero-sync-v104
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Install image tooling
+        run: python -m pip install --quiet pillow
+
+      - name: Download remaining premium Prophet heroes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .hero-sync
+          download() {
+            slug="$1"
+            url="$2"
+            echo "Downloading $slug"
+            curl -L --fail --retry 4 --retry-delay 2 --connect-timeout 20 "$url" -o ".hero-sync/$slug.png"
+          }
+          download 'nuh' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/176fa3da-2217-4044-818e-2b07ac3d27ab/PROPHET_ID_nuh__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_Prophet__0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNDViYjhmYmMyNDQ2NGU2OCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA0OTUzMn0.2xbZ1gjKrmzTuHfHU--b3mB3SH0ZmLT4MYAsVAMx8Rk'
+          download 'lut' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/34fc285a-3275-4978-a733-da8df290d421/PROPHET_ID_lut__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story__P_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYjI5OWNiMTIzYTY2N2UxZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA1NzA0Mn0.iCnS3K0Xo9T6fNHmAm-wxKcyjVDnQmUH4gsjMjUg_MY'
+          download 'ismail' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/6afbafa9-d76b-4a0c-ad3a-e1315e381729/PROPHET_ID_ismail__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiM2IzZmY2NjI3ODA0ZDMwMCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA4NzU4Nn0.ErhRA9W6pODu8wV7nCoV3NSRwXDmtVx4XvvaZL4t4_U'
+          download 'ishaq' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/8cf9815c-5516-47de-85b5-cd43cde840e2/PROPHET_ID_ishaq__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story__0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYWQ1NDY4YTA4YWNmYjllMCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA5NzM3Nn0.hYlNG9tl_EajRkd0pcFz4JS8oGleGQItmKUY_o9QeQ8'
+          download 'yaqub' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/b7b35798-28a2-4ac3-a1cf-0522dd68ce96/PROPHET_ID_yaqub__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story__0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYjNjN2M4YWVhNzAwODI3YyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA2MjcwMn0.MHdR-HHtDRACQi6UMz_KlddGUneN4XJf22SME9_5Odc'
+          download 'yusuf' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/12d495af-ef35-41f0-a099-c139eaba2c61/PROPHET_ID_yusuf__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story__0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDk4NTkxMDc0NTIzNjFhZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAzMTY4N30.FmilXlETcGDU89SpffY8fgFso-G3uHAm5wB0fyV5OAU'
+          download 'ayyub' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/09e83c26-0940-4ae0-a1a3-25f4e8bec0f7/PROPHET_ID_ayyub__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story__0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDdlZTExYWMxYTg3YTNkNiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAyMzUzMn0.00SsSetQ6unPeHkH-Ee_-Y-UAIIgCu0-mtrqqpD4Pzs'
+          download 'shuayb' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/21fbb8bf-0240-4894-87ea-012fd04c4ea1/PROPHET_ID_shuayb__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiN2FhYzY5MDUzYTk0NTY2OSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA1NzAyOX0.bVGKj3PyW4fkKF0OXiVcaQXRSLspfbU4W0gV7vK2O-4'
+          download 'musa' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/6efdbe44-a8af-4ea3-88a2-fc829b87fce3/PROPHET_ID_musa__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story___0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDEyMWQ2Yjg1NzUxNDRiZCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAyMzgwMH0.83xoxXRa0EYSgIb5fiNrKOLg5Iw_-G_9hk2kMCCntU0'
+          download 'harun' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/a0dd6774-2c6e-46a2-a055-7d2f94062f30/PROPHET_ID_harun__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story__0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNjQyODE0ZTU2MzkzNjI2MyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAyNjc4OX0.ZjeExoXjZyhQm06RZmZjMzxOcw7l2GTqR1iRWAgisfk'
+          download 'dhul-kifl' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/248823b6-05e3-4fb8-a3b1-89f7c180394f/PROPHET_ID_dhul_kifl__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_st_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZjAyOGNlZGUwZWU1ZmRiZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTEwMDYzOH0.A9QPHy2y0a4PvUJUGj_V-lyj-hMG4Gotuel0O25tjUM'
+          download 'dawud' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/092a2f36-f179-4039-9beb-c4a0bed59b61/PROPHET_ID_dawud__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story__0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYzZjNzVlYzE2YmFlN2Q4YiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA3MzA4OX0.xoGLoijnwcgh62m3PSnDWXF9AXmgLcHbJn0LiXIKViw'
+          download 'sulayman' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/d28e8c8e-dec7-4888-bb63-1b7a062c4076/PROPHET_ID_sulayman__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_sto_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZWVhZWY1NzBjZGNjNTJhMSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA0ODMwNH0.VyhCh5GBYiMz45Z1B4JVRkuzXwgYccfUsDXgHdP3MU4'
+          download 'ilyas' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/ef743391-3249-4788-ad48-af41165e7aaf/PROPHET_ID_ilyas__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story__0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYTRmOGRjZDUxMDE1NWFjMiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAyMDg4NX0.iuxRiCSm4CZXx4bTvHdrXQUrnIS6hMczT9e2-5eVoDo'
+          download 'alyasa' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/1f65780c-5041-4863-93f7-c96ff4c4342e/PROPHET_ID_alyasa__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMDBiYjUxYzRmN2RjY2JiMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA3OTM2NH0.4pyxJutWXAJjQctTyxqNmAgpmzSVvwRhtEgMe9KKyWE'
+          download 'yunus' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/f2f980c0-eb63-4968-9d90-f2a058f342c3/PROPHET_ID_yunus__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story__0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMjhkMzIwZjhlZTBjYzBhOSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAxNzk3Nn0.4YYLIY1Jz5nkre0Tre_uqldnL5pdw9VnnLq-xXGZ4eg'
+          download 'zakariyya' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/870e824d-7bc7-40d0-89df-490656446e73/PROPHET_ID_zakariyya__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_st_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZmZjMjliYTJiZTM3MWQwNiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA0NjMwNn0.mQtUntkgOxpHU_YvUkYzD7HguWQkfJN7tQu8ZUfRp00'
+          download 'yahya' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/ad68ac7c-5b9e-4f7e-a8b9-1579d9b2c0a8/PROPHET_ID_yahya__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story__0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMDlkMDFhZDhjMGU5ZjUzNyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAyNjkwNH0.NyJmpDhg_En4fi06GmihTSClW9-kf44rRYTcngfuKU4'
+          download 'isa' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/d084417e-dcec-427b-b9df-8f5354e771e0/PROPHET_ID_isa__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_story__P_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMjA1MTA3MTY4N2YzMDhkNiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTA5MzE0Mn0.dlySsClizlSNYevvdvbCdzp_NSJK2K9J1brXzA5bnXQ'
+          download 'muhammad' 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/ed6963dc-5e37-4ebe-b244-24eb4b4af01f/PROPHET_ID_muhammad__Create_a_dedicated_premium_21_9_4K_DETAIL_HERO_from__reference_for_the_same_sto_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZjE2ZDQzNmZlNTEyMzg2ZiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTAyMzM0M30.HKgiofxHpl_U4_jgLkLimkZKi2sTjKJFxF4e2kuFPDU'
+
+      - name: Validate and convert for app
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          targets=["nuh","lut","ismail","ishaq","yaqub","yusuf","ayyub","shuayb","musa","harun","dhul-kifl","dawud","sulayman","ilyas","alyasa","yunus","zakariyya","yahya","isa","muhammad"]
+          src=Path(".hero-sync")
+          out=Path("kids/assets/prophets-v2")
+          out.mkdir(parents=True,exist_ok=True)
+          for slug in targets:
+              p=src/f"{slug}.png"
+              if not p.exists() or p.stat().st_size < 100_000:
+                  raise SystemExit(f"Missing/too-small source: {p}")
+              im=Image.open(p).convert("RGB")
+              w,h=im.size
+              ratio=w/h
+              if w < 1800 or h < 700:
+                  raise SystemExit(f"Resolution too low for {slug}: {w}x{h}")
+              if not (2.20 <= ratio <= 2.45):
+                  raise SystemExit(f"Unexpected aspect ratio for {slug}: {w}x{h} ({ratio:.3f})")
+              dst=out/f"{slug}-hero.jpg"
+              im.save(dst,"JPEG",quality=95,subsampling=0,optimize=True,progressive=True)
+              print(f"{slug}: {w}x{h} -> {dst} ({dst.stat().st_size} bytes)")
+          PY
+
+      - name: Commit premium hero batch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/assets/prophets-v2/*-hero.jpg
+          if git diff --cached --quiet; then
+            echo "Hero assets already current."
+            exit 0
+          fi
+          git commit -m "Kids: finish premium 25-Prophet detail hero rollout"
+          git pull --rebase origin main
+          git push origin HEAD:main
