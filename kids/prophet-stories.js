@@ -11,8 +11,8 @@ const PROPHET_ORDER=[
 const PROPHET_RANK=new Map(PROPHET_ORDER.map((id,index)=>[id,index]));
 const ART_ROOT="/kids/assets/prophets-v2/";
 const DEDICATED_HERO=new Set(PROPHET_ORDER);
-function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=31"}
-function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=31":cardUrl(item)}
+function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=21"}
+function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=21":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
 const MUHAMMAD_EPISODES=[
   {id:"birth",title:"Seine Geburt in Makkah",meta:"MAKKAH · KINDHEIT",duration:"Ca. 4 Min.",source:"Qurʾān 93:6",subtitle:"Ein besonderes Licht erscheint in der Welt.",summary:"Muḥammad ﷺ wurde in Makkah geboren und wuchs als Waisenkind auf. Allah erinnert ihn im Qurʾān daran, dass Er ihn als Waisen fand und ihm Schutz gab.",art:"/kids/assets/story-wow/v30-muhammad-birth.jpg?v=30"},

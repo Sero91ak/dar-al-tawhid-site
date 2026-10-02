@@ -1,6 +1,5 @@
 const CACHE_NAME="dar-al-tawhid-kids-v117";
-const BUILD_ID="kids-shell-v12-tab117";
-const LABEL_CACHE_V107="dar-al-tawhid-kids-v107";
+const LABEL_CACHE_V106="dar-al-tawhid-kids-v106";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -14,8 +13,8 @@ const PRECACHE=[
   "/kids/quiz-owner-voice.js?v=1",
   "/kids/data/stories-authentic.json",
   "/kids/data/prophet-stories.json",
-  "/kids/prophet-stories.css?v=31",
-  "/kids/prophet-muhammad-v22.css?v=34",
+  "/kids/prophet-stories.css?v=21",
+  "/kids/prophet-muhammad-v22.css?v=31",
   "/kids/prophet-stories.js?v=31",
   "/kids/assets/prophet-scenes/library.webp",
   "/kids/assets/prophet-scenes/garden.webp",
@@ -36,13 +35,8 @@ const PRECACHE=[
   "/kids/assets/story-wow/v22-stories-header.jpg",
   "/kids/assets/story-wow/v22-prophet-library.jpg",
   "/kids/assets/story-wow/v22-coin-story.jpg",
-  "/kids/assets/story-wow/v29-muhammad-birth.jpg",
-  "/kids/assets/story-wow/v29-muhammad-home.jpg",
   "/kids/assets/story-wow/v30-muhammad-home.jpg",
   "/kids/assets/story-wow/v30-muhammad-birth.jpg",
-  "/kids/assets/story-wow/v32-story-water.jpg",
-  "/kids/assets/story-wow/v32-story-helper.jpg",
-  "/kids/assets/story-wow/v32-story-kindword.jpg",
   "/kids/assets/prophet-symbols/muhammad.webp",
   "/kids/assets/prophet-symbols/adam.webp",
   "/kids/assets/prophet-symbols/idris.webp",
@@ -55,18 +49,6 @@ const PRECACHE=[
   "/kids/icons/icon-512.png?v=logo28",
   "/kids/icons/apple-touch-icon.png?v=logo28"
 ];
-
-self.addEventListener("message",function(event){
-  var data=event.data||{};
-  if(data.type!=="HARD_REFRESH")return;
-  event.waitUntil(
-    caches.keys().then(function(keys){
-      return Promise.all(keys.filter(function(key){
-        return key.indexOf("dar-al-tawhid-kids-")===0;
-      }).map(function(key){return caches.delete(key)}));
-    }).then(function(){return self.skipWaiting()})
-  );
-});
 
 self.addEventListener("install",function(event){
   event.waitUntil(
@@ -82,23 +64,7 @@ self.addEventListener("activate",function(event){
       return Promise.all(keys.filter(function(key){
         return key.indexOf("dar-al-tawhid-kids-")===0&&key!==CACHE_NAME;
       }).map(function(key){return caches.delete(key)}));
-    }).then(function(){
-      return self.clients.claim();
-    }).then(function(){
-      return self.clients.matchAll({type:"window",includeUncontrolled:true});
-    }).then(function(clients){
-      return Promise.all(clients.map(function(client){
-        try{
-          var u=new URL(client.url);
-          if(u.origin!==self.location.origin||u.pathname.indexOf("/kids")!==0)return Promise.resolve();
-          if(String(u.searchParams.get("kv")||"")===BUILD_ID)return Promise.resolve();
-          var target=new URL("/kids/start",self.location.origin);
-          target.searchParams.set("kv",BUILD_ID);
-          target.searchParams.set("cb",String(Date.now()));
-          return client.navigate(target.toString()).catch(function(){});
-        }catch(e){return Promise.resolve()}
-      }));
-    })
+    }).then(function(){return self.clients.claim()})
   );
 });
 
@@ -158,7 +124,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"||url.pathname==="/kids/prophet-muhammad-v22.css"){
+  if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"){
     event.respondWith(networkFirst(request));
     return;
   }

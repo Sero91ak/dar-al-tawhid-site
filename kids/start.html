@@ -571,13 +571,15 @@ html,body{background:#06131f!important}
   transition:transform 680ms cubic-bezier(.16,.84,.32,1);
   visibility:hidden;
 }
-.kids-update-layer.is-open{
-  display:block!important;
-  visibility:visible!important;
-  pointer-events:auto!important;
-  transform:translate3d(0,0,0)!important;
-  height:auto!important;
-  overflow:visible!important;
+.kids-update-layer.is-open,
+.kids-update-layer{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  transform:none!important;
+  height:0!important;
+  overflow:hidden!important;
+  animation:none!important;
 }
 .kids-update-scene{animation:none!important;will-change:auto!important}
 .kids-update-card{
@@ -2635,8 +2637,8 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/assets/kids-open-v95.css?v=96">
 
 
-<link rel="stylesheet" href="/kids/prophet-stories.css?v=31">
-<link rel="stylesheet" href="/kids/prophet-muhammad-v22.css?v=34">
+<link rel="stylesheet" href="/kids/prophet-stories.css?v=21">
+<link rel="stylesheet" href="/kids/prophet-muhammad-v22.css?v=31">
 </head>
 <body>
 <div class="kids-open" id="kidsLaunch" data-kids-launch="v96">
@@ -2712,7 +2714,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.06</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3191,86 +3193,28 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab117";
+const KIDS_BUILD_ID="kids-shell-v12-tab106";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
-  var pendingKidsBuild="";
-  var SEEN_KEY="darKidsFriendlyUpdateSeenV31";
+  var SEEN_KEY="darKidsFriendlyUpdateSeenV8";
   function kidsHideUpdate(){
     var layer=document.getElementById("kidsUpdateLayer");
     if(!layer)return;
     layer.classList.remove("is-open");
-    layer.hidden=true;
+    layer.setAttribute("hidden","hidden");
   }
-  function kidsWantPreview(){
-    try{
-      if(/(?:^|[?&])demo=update(?:&|$)/.test(String(location.search||""))) return true;
-    }catch(e){}
-    try{ return localStorage.getItem(SEEN_KEY)!=="1"; }catch(e2){ return true; }
+  function kidsWantPreview(){ return false; }
+  function kidsShowUpdate(){ kidsHideUpdate(); }
+  function kidsHardReload(){ kidsHideUpdate(); }
+  function kidsCheckRemoteVersion(){ kidsHideUpdate(); }
+  function kidsBootUpdate(){
+    try{ localStorage.setItem(SEEN_KEY,"1"); }catch(e){}
+    try{ localStorage.setItem(KIDS_BUILD_SEEN_KEY,KIDS_BUILD_ID); }catch(e2){}
+    kidsHideUpdate();
   }
-  function kidsShowUpdate(title,text,targetBuild){
-    pendingKidsBuild=String(targetBuild||KIDS_BUILD_ID);
-    var layer=document.getElementById("kidsUpdateLayer");
-    var h=document.getElementById("kidsUpdateTitle");
-    var p=document.getElementById("kidsUpdateText");
-    var btn=document.getElementById("kidsUpdateButton");
-    if(!layer||!btn)return;
-    if(h)h.textContent=title||"Kids V1.07";
-    if(p)p.textContent=text||"Tippe auf Aktualisieren. Die Kinder-App lädt V1.07 / v31.";
-    if(!btn.dataset.bound){
-      btn.dataset.bound="1";
-      btn.addEventListener("click",function(){
-        try{ localStorage.setItem(SEEN_KEY,"1"); }catch(e){}
-        kidsHardReload(pendingKidsBuild);
-      });
-    }
-    layer.hidden=false;
-    layer.removeAttribute("hidden");
-    requestAnimationFrame(function(){ layer.classList.add("is-open"); });
-  }
-  function kidsHardReload(targetBuild){
-    var want=String(targetBuild||KIDS_BUILD_ID);
-    try{ localStorage.setItem(SEEN_KEY,"1"); }catch(e0){}
-    if(want===KIDS_BUILD_ID){
-      try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,want)}catch(e){}
-    }else{
-      try{localStorage.removeItem(KIDS_BUILD_SEEN_KEY)}catch(e){}
-    }
-    try{
-      if(navigator.serviceWorker&&navigator.serviceWorker.controller){
-        navigator.serviceWorker.controller.postMessage({type:"HARD_REFRESH",buildId:want});
-      }
-    }catch(e){}
-    var u=new URL("/kids/start",location.origin);
-    u.searchParams.set("kv",want);
-    u.searchParams.set("cb",String(Date.now()));
-    location.replace(u.toString());
-  }
-  async function kidsCheckRemoteVersion(){
-    if(kidsWantPreview()){
-      kidsShowUpdate("Kids V1.07 / v31","Tippe auf den goldenen Knopf. Danach ist die Kinder-App wieder auf V1.07.",KIDS_BUILD_ID);
-      return;
-    }
-    try{
-      var r=await fetch("/kids/version.json?cb="+Date.now(),{cache:"no-store"});
-      if(!r.ok)return;
-      var j=await r.json();
-      var remote=String(j.buildId||"").trim();
-      if(remote&&remote!==KIDS_BUILD_ID){
-        kidsShowUpdate("Neue Version verfügbar","Tippe auf Aktualisieren. Danach wird die Kids-Version vollständig geladen.",remote);
-      }else if(remote===KIDS_BUILD_ID){
-        try{localStorage.setItem(KIDS_BUILD_SEEN_KEY,KIDS_BUILD_ID)}catch(e){}
-        kidsHideUpdate();
-      }
-    }catch(e){}
-  }
-  kidsCheckRemoteVersion();
-  window.addEventListener("DOMContentLoaded",kidsCheckRemoteVersion);
-  window.addEventListener("focus",kidsCheckRemoteVersion);
-  document.addEventListener("visibilitychange",function(){if(!document.hidden)kidsCheckRemoteVersion()});
-  setInterval(kidsCheckRemoteVersion,60000);
-  window.addEventListener("pageshow",function(e){if(e.persisted)kidsCheckRemoteVersion()});
+  kidsBootUpdate();
+  window.addEventListener("DOMContentLoaded",kidsBootUpdate);
 })();
 
 (function(){
@@ -6791,7 +6735,7 @@ html.kids-ios-app,html.dar-ios-native-app.kids-ios-app,html.kids-ios-app body{
   -webkit-overflow-scrolling:touch;
   background:#0c2636;
 }
-/* Kids update card stays available in the native iOS shell. */
+html.kids-ios-app .kids-update-layer{display:none!important}
 </style>
 <script src="/kids/prophet-stories.js?v=31"></script>
 </html>
