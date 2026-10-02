@@ -1567,3 +1567,11 @@
   .ps-mh-ar{font-size:19px!important}
   .ps-mh-section-title::after{font-size:6px!important}
 }
+
+
+/* REFERENCE_ASSET_BINDINGS_V30 */
+#view-stories.ps-stories-home .ps-mh-home-art{
+  background-image:url("/kids/assets/story-wow/v29-muhammad-home.jpg?v=30")!important;
+  background-position:58% 50%!important;
+  background-size:cover!important;
+}
