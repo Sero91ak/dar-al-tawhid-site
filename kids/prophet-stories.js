@@ -15,9 +15,9 @@ function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=
 function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=21":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
 const MUHAMMAD_EPISODES=[
-  {id:"birth",title:"Seine Geburt in Makkah",meta:"MAKKAH · KINDHEIT",duration:"ca. 4 Min.",source:"Qurʾān 93:6",subtitle:"In Makkah beginnt seine Geschichte.",summary:"Muḥammad ﷺ wurde in Makkah geboren und wuchs als Waisenkind auf. Allah erinnert ihn im Qurʾān daran, dass Er ihn als Waisen fand und ihm Schutz gab.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=22"},
-  {id:"wahy",title:"Die erste Offenbarung",meta:"MAKKAH · ḤIRĀʾ",duration:"ca. 5 Min.",source:"Qurʾān 96:1–5",subtitle:"Der Moment, der alles veränderte.",summary:"In der Höhle Ḥirāʾ begann die Offenbarung. Dort wurden die ersten Verse aus Sūrat al-ʿAlaq offenbart.",art:"/kids/assets/story-wow/muhammad-hira.jpg?v=22"},
-  {id:"hijrah",title:"Die Hiǧrah nach Madīnah",meta:"VERTRAUEN · GEDULD",duration:"ca. 6 Min.",source:"Qurʾān 9:40",subtitle:"Eine Reise voller Vertrauen.",summary:"Die Auswanderung von Makkah nach Madīnah zeigt Vertrauen auf Allah, Geduld und den Beginn einer neuen Phase für die muslimische Gemeinschaft.",art:"/kids/assets/story-wow/muhammad-route.jpg?v=22"},
+  {id:"birth",title:"Seine Geburt in Makkah",meta:"MAKKAH · KINDHEIT",duration:"Ca. 4 Min.",source:"Qurʾān 93:6",subtitle:"Ein besonderes Licht erscheint in der Welt.",summary:"Muḥammad ﷺ wurde in Makkah geboren und wuchs als Waisenkind auf. Allah erinnert ihn im Qurʾān daran, dass Er ihn als Waisen fand und ihm Schutz gab.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=22"},
+  {id:"wahy",title:"Die erste Offenbarung",meta:"MAKKAH · ḤIRĀʾ",duration:"Ca. 5 Min.",source:"Qurʾān 96:1–5",subtitle:"Der Moment, der alles veränderte.",summary:"In der Höhle Ḥirāʾ begann die Offenbarung. Dort wurden die ersten Verse aus Sūrat al-ʿAlaq offenbart.",art:"/kids/assets/story-wow/muhammad-hira.jpg?v=22"},
+  {id:"hijrah",title:"Die Hiǧrah nach Madīnah",meta:"VERTRAUEN · GEDULD",duration:"Ca. 6 Min.",source:"Qurʾān 9:40",subtitle:"Eine Reise voller Vertrauen.",summary:"Die Auswanderung von Makkah nach Madīnah zeigt Vertrauen auf Allah, Geduld und den Beginn einer neuen Phase für die muslimische Gemeinschaft.",art:"/kids/assets/story-wow/muhammad-route.jpg?v=22"},
   {id:"tawhid",title:"Der Ruf zum Tawḥīd",meta:"MAKKAH · DAʿWAH",duration:"ca. 5 Min.",source:"Qurʾān 6:162–163",subtitle:"Allah allein anbeten.",summary:"Er rief die Menschen dazu, Allah allein anzubeten, und blieb trotz Ablehnung und Widerstand standhaft.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=22"},
   {id:"madinah",title:"Die Gemeinschaft in Madīnah",meta:"LEHREN · GERECHTIGKEIT",duration:"ca. 6 Min.",source:"Qurʾān 33:21",subtitle:"Glaube wird im Alltag sichtbar.",summary:"In Madīnah lehrte der Prophet ﷺ Gottesdienst, Familie, Nachbarschaft, Gerechtigkeit und Verantwortung.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"},
   {id:"rahmah",title:"Barmherzigkeit für die Welten",meta:"BOTSCHAFT · CHARAKTER",duration:"ca. 5 Min.",source:"Qurʾān 21:107 · 68:4",subtitle:"Barmherzigkeit und edler Charakter.",summary:"Allah beschreibt seine Sendung als Barmherzigkeit für die Welten und lobt seinen großartigen Charakter.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"},
@@ -199,7 +199,7 @@ function ensureUi(){
               '<span class="ps-mh-special-label">★&nbsp;&nbsp;BESONDERER BEREICH</span>'+
               '<div class="ps-mh-title-line"><h2>Prophet<br>Muḥammad</h2><div class="ps-mh-ar" dir="rtl">محمد ﷺ</div></div>'+
               '<p class="ps-mh-tagline">Sein Leben. Sein Weg. Seine Botschaft.</p>'+
-              '<p class="ps-mh-intro">Eine besondere Sammlung über den letzten Propheten ﷺ – kindgerecht, authentisch und mit wertvollen Lehren für unseren Alltag.</p>'+
+              '<p class="ps-mh-intro">Eine besondere Sammlung von Geschichten über den letzten Propheten ﷺ – kindgerecht, authentisch und mit wertvollen Lehren für unseren Alltag.</p>'+
             '</div>'+
           '</header>'+
           '<div class="ps-mh-ornament" aria-hidden="true"><span></span></div>'+
@@ -210,7 +210,7 @@ function ensureUi(){
           '</div></section>'+
           '<section class="ps-mh-panel ps-mh-message"><div class="ps-mh-panel-art" aria-hidden="true"></div><div class="ps-mh-panel-copy">'+
             '<div class="ps-mh-panel-title"><span class="ps-mh-line-icon ps-mh-line-icon-book" aria-hidden="true"></span><h3>Seine Botschaft</h3></div>'+
-            '<p>Worte, die Herzen berühren – über Tawḥīd, Barmherzigkeit und eine bessere Welt.</p>'+
+            '<p>Worte, die Herzen berühren – über Glaube, Barmherzigkeit und eine bessere Welt.</p>'+
             '<button class="ps-mh-discover" type="button" data-mh-action="episode" data-episode="tawhid">Die Botschaft entdecken</button>'+
           '</div></section>'+
           '<section class="ps-mh-values">'+
@@ -223,7 +223,7 @@ function ensureUi(){
             '</div>'+
           '</section>'+
           '<section class="ps-mh-episodes" id="psMhEpisodesSection">'+
-            '<div class="ps-mh-section-head"><div><div class="ps-mh-section-title"><span class="ps-mh-line-icon ps-mh-line-icon-book" aria-hidden="true"></span><h3>Geschichten &amp; Hören</h3><i aria-hidden="true"></i></div><p>Entdecke besondere Stationen aus dem Leben des Propheten ﷺ.</p></div><button class="ps-mh-all" type="button" data-mh-action="toggle-all" aria-expanded="false">Alle anzeigen <b aria-hidden="true">→</b></button></div>'+
+            '<div class="ps-mh-section-head"><div><div class="ps-mh-section-title"><span class="ps-mh-line-icon ps-mh-line-icon-book" aria-hidden="true"></span><h3>Geschichten &amp; Hören</h3><i aria-hidden="true"></i></div><p>Entdecke 25 Geschichten über das Leben des Propheten ﷺ.</p></div><button class="ps-mh-all" type="button" data-mh-action="toggle-all" aria-expanded="false">Alle anzeigen <b aria-hidden="true">→</b></button></div>'+
             '<div class="ps-mh-episode-rail" id="psMhEpisodes"></div><article class="ps-mh-episode-detail" id="psMhEpisodeDetail" hidden></article>'+
           '</section>'+
           '<section class="ps-mh-more">'+
