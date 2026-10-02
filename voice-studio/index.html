@@ -77,14 +77,14 @@ h1{font-size:clamp(26px,2.1vw,40px);line-height:1.02;letter-spacing:-.035em;marg
 .prophet-pick h2{margin:3px 0 3px;font-size:16px;line-height:1.15}
 .prophet-pick .notice{margin-top:4px}
 .prophet-pick-list{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.prophet-pick-item{display:grid;grid-template-columns:minmax(0,1fr) 88px 74px 72px;gap:6px;align-items:center;border:1px solid rgba(255,255,255,.08);background:#071927;border-radius:10px;padding:5px 7px;min-width:0}
+.prophet-pick-item{display:grid;grid-template-columns:minmax(0,1fr) 88px 74px 72px 72px;gap:6px;align-items:center;border:1px solid rgba(255,255,255,.08);background:#071927;border-radius:10px;padding:5px 7px;min-width:0}
 .prophet-pick-item.active{border-color:rgba(217,182,111,.5);background:rgba(217,182,111,.08)}
 .prophet-pick-item button.prophet-pick-name{appearance:none;background:transparent;border:0;color:var(--ink);text-align:left;font-size:12px;font-weight:800;padding:2px 0;cursor:pointer;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .prophet-pick-status{font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .prophet-pick-status.busy{color:#f1c77c}
 .prophet-pick-status.good{color:#9bd8ba}
 .prophet-pick-status.bad{color:#ef9d9d}
-.prophet-pick-item .prophet-pick-push,.prophet-pick-item .prophet-pick-listen{min-height:30px;padding:0 8px;font-size:10px;border-radius:8px}
+.prophet-pick-item .prophet-pick-push,.prophet-pick-item .prophet-pick-listen,.prophet-pick-item .prophet-pick-generate{min-height:30px;padding:0 7px;font-size:10px;border-radius:8px}
 .prophet-pick.focus{outline:2px solid rgba(217,182,111,.55);outline-offset:2px}.prophet-review{margin-top:9px;border:1px solid rgba(239,157,157,.24);border-radius:12px;padding:9px;background:rgba(120,25,25,.08)}.prophet-review[hidden]{display:none}.prophet-review-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.prophet-review-term{min-height:30px!important;padding:6px 9px!important;font-size:10px!important}.prophet-review-meta{font-size:10px;color:var(--muted);line-height:1.45}
 @media(max-width:900px){.prophet-pick-list{grid-template-columns:1fr}}
 textarea{
@@ -124,7 +124,7 @@ input{width:100%;background:#071927;color:var(--ink);border:1px solid var(--line
 .learning-result.active{border-color:rgba(205,176,113,.55);background:rgba(205,176,113,.07)}
 .learning-result b{display:block;font-size:12px}.learning-result small{display:block;color:var(--muted);font-size:9px;margin-top:3px;line-height:1.35}
 .learning-arabic{font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:18px!important;text-align:right;direction:rtl}
-.learning-status{font-size:10px;color:var(--muted);line-height:1.45;margin-top:7px}
+.learning-status{font-size:10px;color:var(--muted);line-height:1.45;margin-top:7px}.learning-word-picker{display:flex;flex-wrap:wrap;gap:5px;max-height:170px;overflow:auto;padding:7px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.02);margin:7px 0 10px}.learning-word{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#cbd6dc;border-radius:999px;padding:5px 7px;font:inherit;font-size:9px;cursor:pointer}.learning-word.pending{border-color:rgba(234,104,104,.52);color:#ffb1b1;background:rgba(150,42,42,.13)}.learning-word.done{border-color:rgba(81,199,143,.58);color:#a8ebc9;background:rgba(42,144,96,.14)}
 .learning-player{width:100%;margin:7px 0;height:36px}
 .footer{padding:13px 4px 4px;color:#6f8290;font-size:10px;text-align:center}
 .mobile-actions{display:none}
@@ -750,6 +750,9 @@ body.free-voice-mode .mobile-actions{display:none!important}
   <section class="side-section" id="learningSection">
     <div class="side-title">Aussprache lernen</div>
     <div class="notice">Klicke einen roten Begriff an, markiere ein beliebiges Wort im Text oder trage es manuell ein. Erst nach deinem Anhören und „So merken“ gilt es als bestätigt und wird grün.</div>
+    <div class="section-title" style="margin-top:10px;margin-bottom:5px">Wörter im aktuellen Text</div>
+    <div class="notice">Jedes Wort ist anklickbar. Grau = noch nicht markiert · Rot = Korrektur offen · Grün = dauerhaft gelernt.</div>
+    <div id="storyWordList" class="learning-word-picker"></div>
     <label for="learnTerm" style="margin-top:10px">Falsch ausgesprochenes Wort / Name</label>
     <input id="learnTerm" autocomplete="off" spellcheck="false" placeholder="z. B. Ṣaḥābah, Qurʾān, ʿUmar ibn al-Khaṭṭāb">
     <div class="learning-actions">
@@ -932,6 +935,8 @@ let freeVoiceLearningResults=[],freeVoiceLearningCandidate=null,freeVoiceLearnin
 let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null;
 let learnedCanonicals=new Set(),learnedTerms=new Set(),confirmedAudioLocks=new Set();
 let manualLearningTerm="",learningVariant=0;
+let pendingLearningTerms=new Set();
+try{pendingLearningTerms=new Set(JSON.parse(localStorage.getItem("dar.voice.pendingLearningTerms.v1")||"[]"))}catch(_){}
 const $=s=>document.querySelector(s);
 
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]))}
