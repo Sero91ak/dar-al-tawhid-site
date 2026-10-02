@@ -1515,3 +1515,32 @@ html.ps-modal-open .shell,html.ps-modal-open .bottom-nav{pointer-events:none!imp
   .ps-ar{font-size:42px!important}
   .ps-summary{font-size:21px!important}
 }
+
+
+/* Dedicated v16 heroes are composed with the subject on the right and copy-safe space on the left. */
+.ps-hero[data-hero-copy="left"]::before{
+  background:
+    linear-gradient(90deg,
+      rgba(1,14,25,.90) 0%,
+      rgba(1,14,25,.69) 31%,
+      rgba(1,14,25,.24) 52%,
+      rgba(1,14,25,.04) 72%,
+      rgba(1,14,25,.01) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.02),rgba(2,15,27,.14) 58%,rgba(2,15,27,.66))!important;
+}
+.ps-hero[data-hero-copy="left"] .ps-hero-copy{
+  left:max(18px,env(safe-area-inset-left))!important;
+  right:52%!important;
+}
+@media(min-width:700px){
+  .ps-hero[data-hero-copy="left"] .ps-hero-copy{
+    left:38px!important;
+    right:54%!important;
+  }
+}
+@media(min-width:1100px){
+  .ps-hero[data-hero-copy="left"] .ps-hero-copy{
+    left:70px!important;
+    right:57%!important;
+  }
+}
