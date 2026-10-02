@@ -34,6 +34,13 @@ sleep 1
 pkill -KILL -x DARVoiceStudio >/dev/null 2>&1 || true
 pkill -KILL -x DARVoiceStudioNative >/dev/null 2>&1 || true
 
+# 2.9.55 räumt die früheren Terminal-Autopiloten einmalig auf. Diese alten
+# /tmp-Skripte durften selbstständig Batch-Starts auslösen und würden sonst
+# neben dem neuen persistenten Supervisor weiterlaufen.
+pkill -f '/tmp/dar_propheten_.*\.sh' >/dev/null 2>&1 || true
+pkill -f '/tmp/dar_propheten_autopilot\.sh' >/dev/null 2>&1 || true
+pkill -f 'caffeinate.*dar_propheten' >/dev/null 2>&1 || true
+
 # Die vorhandene App bleibt während Download, Validierung und Engine-Start unangetastet.
 # Erst ein vollständig gebautes und signiertes neues Bundle ersetzt sie atomar.
 mkdir -p "$TARGET" "$VOICE_HOME" "$HOME/Library/LaunchAgents" "$BACKUPS"
