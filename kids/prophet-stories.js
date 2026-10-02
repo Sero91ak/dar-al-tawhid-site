@@ -11,18 +11,18 @@ const PROPHET_ORDER=[
 const PROPHET_RANK=new Map(PROPHET_ORDER.map((id,index)=>[id,index]));
 const ART_ROOT="/kids/assets/prophets-v2/";
 const DEDICATED_HERO=new Set(PROPHET_ORDER);
-function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=46"}
-function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=46":cardUrl(item)}
+function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=21"}
+function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=21":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
 const MUHAMMAD_EPISODES=[
-  {id:"birth",title:"Seine Geburt in Makkah",meta:"MAKKAH · KINDHEIT",duration:"Ca. 4 Min.",source:"Ṣaḥīḥ Muslim 1162 · Qurʾān 93:6",subtitle:"Ein besonderes Licht erscheint in der Welt.",summary:"Der Prophet ﷺ wurde an einem Montag geboren und wuchs als Waisenkind auf. Allah erinnert ihn im Qurʾān daran, dass Er ihn als Waisen fand und ihm Schutz gab.",art:"/kids/assets/story-wow/v30-muhammad-birth.jpg?v=30"},
-  {id:"wahy",title:"Die erste Offenbarung",meta:"MAKKAH · ḤIRĀʾ",duration:"Ca. 5 Min.",source:"Qurʾān 96:1–5",subtitle:"Ein Moment, der alles veränderte.",summary:"In der Höhle Ḥirāʾ begann die Offenbarung. Dort wurden die ersten Verse aus Sūrat al-ʿAlaq offenbart.",art:"/kids/assets/story-wow/v22-muhammad-hira.jpg?v=22"},
-  {id:"hijrah",title:"Die Hijra nach Madinah",meta:"VERTRAUEN · GEDULD",duration:"Ca. 6 Min.",source:"Qurʾān 9:40",subtitle:"Eine Reise voller Vertrauen.",summary:"Die Auswanderung von Makkah nach Madīnah zeigt Vertrauen auf Allah, Geduld und den Beginn einer neuen Phase für die muslimische Gemeinschaft.",art:"/kids/assets/story-wow/v22-muhammad-route.jpg?v=22"},
-  {id:"tawhid",title:"Der Ruf zum Tawḥīd",meta:"MAKKAH · DAʿWAH",duration:"Ca. 5 Min.",source:"Qurʾān 6:162–163",subtitle:"Allah allein anbeten.",summary:"Er rief die Menschen dazu, Allah allein anzubeten, und blieb trotz Ablehnung und Widerstand standhaft.",art:"/kids/assets/story-wow/v22-muhammad-hero.jpg?v=22"},
-  {id:"madinah",title:"Die Gemeinschaft in Madīnah",meta:"LEHREN · GERECHTIGKEIT",duration:"Ca. 6 Min.",source:"Qurʾān 33:21",subtitle:"Glaube wird im Alltag sichtbar.",summary:"In Madīnah lehrte der Prophet ﷺ Gottesdienst, Familie, Nachbarschaft, Gerechtigkeit und Verantwortung.",art:"/kids/assets/story-wow/v22-muhammad-madinah.jpg?v=22"},
-  {id:"rahmah",title:"Barmherzigkeit für die Welten",meta:"BOTSCHAFT · CHARAKTER",duration:"Ca. 5 Min.",source:"Qurʾān 21:107 · 68:4",subtitle:"Barmherzigkeit und edler Charakter.",summary:"Allah beschreibt seine Sendung als Barmherzigkeit für die Welten und lobt seinen großartigen Charakter.",art:"/kids/assets/story-wow/v22-muhammad-madinah.jpg?v=22"},
-  {id:"return",title:"Die Rückkehr nach Makkah",meta:"MAKKAH · RÜCKKEHR",duration:"Ca. 6 Min.",source:"Qurʾān 48:1 · 110:1–3",subtitle:"Eine Rückkehr nach Jahren der Prüfung.",summary:"Nach Jahren der Prüfung kehrte der Prophet ﷺ mit den Muslimen nach Makkah zurück. Die Kaʿbah wurde von den Götzen gereinigt und Allah allein gewidmet.",art:"/kids/assets/story-wow/v22-muhammad-hero.jpg?v=22"},
-  {id:"khatam",title:"Siegel der Propheten",meta:"ABSCHLUSS · BOTSCHAFT",duration:"Ca. 4 Min.",source:"Qurʾān 33:40",subtitle:"Nach ihm kommt kein neuer Prophet.",summary:"Muḥammad ﷺ ist das Siegel der Propheten. Seine Botschaft bestätigt die grundlegende Botschaft der Propheten vor ihm: Allah allein anzubeten.",art:"/kids/assets/story-wow/v22-muhammad-madinah.jpg?v=22"}
+  {id:"birth",title:"Seine Geburt in Makkah",meta:"MAKKAH · KINDHEIT",duration:"Ca. 4 Min.",source:"Qurʾān 93:6",subtitle:"Ein besonderes Licht erscheint in der Welt.",summary:"Muḥammad ﷺ wurde in Makkah geboren und wuchs als Waisenkind auf. Allah erinnert ihn im Qurʾān daran, dass Er ihn als Waisen fand und ihm Schutz gab.",art:"/kids/assets/prophet-scenes/night.webp?v=1"},
+  {id:"wahy",title:"Die erste Offenbarung",meta:"MAKKAH · ḤIRĀʾ",duration:"Ca. 5 Min.",source:"Qurʾān 96:1–5",subtitle:"Ein Moment, der alles veränderte.",summary:"In der Höhle Ḥirāʾ begann die Offenbarung. Dort wurden die ersten Verse aus Sūrat al-ʿAlaq offenbart.",art:"/kids/assets/story-wow/muhammad-hira.jpg?v=22"},
+  {id:"hijrah",title:"Die Hiǧrah nach Madīnah",meta:"VERTRAUEN · GEDULD",duration:"Ca. 6 Min.",source:"Qurʾān 9:40",subtitle:"Eine Reise voller Vertrauen.",summary:"Die Auswanderung von Makkah nach Madīnah zeigt Vertrauen auf Allah, Geduld und den Beginn einer neuen Phase für die muslimische Gemeinschaft.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"},
+  {id:"tawhid",title:"Der Ruf zum Tawḥīd",meta:"MAKKAH · DAʿWAH",duration:"ca. 5 Min.",source:"Qurʾān 6:162–163",subtitle:"Allah allein anbeten.",summary:"Er rief die Menschen dazu, Allah allein anzubeten, und blieb trotz Ablehnung und Widerstand standhaft.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=22"},
+  {id:"madinah",title:"Die Gemeinschaft in Madīnah",meta:"LEHREN · GERECHTIGKEIT",duration:"ca. 6 Min.",source:"Qurʾān 33:21",subtitle:"Glaube wird im Alltag sichtbar.",summary:"In Madīnah lehrte der Prophet ﷺ Gottesdienst, Familie, Nachbarschaft, Gerechtigkeit und Verantwortung.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"},
+  {id:"rahmah",title:"Barmherzigkeit für die Welten",meta:"BOTSCHAFT · CHARAKTER",duration:"ca. 5 Min.",source:"Qurʾān 21:107 · 68:4",subtitle:"Barmherzigkeit und edler Charakter.",summary:"Allah beschreibt seine Sendung als Barmherzigkeit für die Welten und lobt seinen großartigen Charakter.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"},
+  {id:"return",title:"Die Rückkehr nach Makkah",meta:"MAKKAH · RÜCKKEHR",duration:"ca. 6 Min.",source:"Qurʾān 48:1 · 110:1–3",subtitle:"Eine Rückkehr nach Jahren der Prüfung.",summary:"Nach Jahren der Prüfung kehrte der Prophet ﷺ mit den Muslimen nach Makkah zurück. Die Kaʿbah wurde von den Götzen gereinigt und Allah allein gewidmet.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=22"},
+  {id:"khatam",title:"Siegel der Propheten",meta:"ABSCHLUSS · BOTSCHAFT",duration:"ca. 4 Min.",source:"Qurʾān 33:40",subtitle:"Nach ihm kommt kein neuer Prophet.",summary:"Muḥammad ﷺ ist das Siegel der Propheten. Seine Botschaft bestätigt die grundlegende Botschaft der Propheten vor ihm: Allah allein anzubeten.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"}
 ]
 let items=[],active=null,activeText="",playing=false,busy=false;
 const audio=new Audio();
@@ -129,7 +129,7 @@ function prepareStoriesHome(view){
   if(!$("#psMuhammadHomeEntry")){
     const special=document.createElement("button");special.id="psMuhammadHomeEntry";special.className="ps-muhammad-home";special.type="button";
     special.setAttribute("aria-label","Besonderen Bereich über Prophet Muḥammad öffnen");
-    special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★&nbsp;&nbsp;BESONDERER BEREICH</span><strong>Prophet<br>Muhammad</strong><span class="ps-mh-home-ar" dir="rtl">محمد ﷺ</span><span class="ps-mh-home-sub">Sein Leben. Seine Werte. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
+    special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★ BESONDERER BEREICH · ḪĀTAM AN-NABIYYĪN</span><strong>Prophet Muḥammad ﷺ</strong><span class="ps-mh-home-sub">Sein Leben. Sein Weg. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
     if(pageHead)pageHead.insertAdjacentElement("afterend",special);else view.insertBefore(special,view.firstChild);
     special.addEventListener("click",()=>openStory("muhammad"));
   }
@@ -195,11 +195,11 @@ function ensureUi(){
       '<div class="ps-scroll" id="psScroll">'+
         '<section class="ps-muhammad-special" id="psMuhammadSpecial" hidden>'+
           '<header class="ps-mh-hero">'+
-            '<img class="ps-mh-hero-art" src="/kids/assets/story-wow/v22-muhammad-hero.jpg?v=22" alt="">'+
+            '<img class="ps-mh-hero-art" src="/kids/assets/story-wow/muhammad-hero.jpg?v=22" alt="">'+
             '<span class="ps-mh-hero-shade" aria-hidden="true"></span>'+
             '<div class="ps-mh-hero-copy">'+
               '<span class="ps-mh-special-label">★&nbsp;&nbsp;BESONDERER BEREICH</span>'+
-              '<div class="ps-mh-title-line"><h2>Prophet<br>Muhammad</h2><div class="ps-mh-ar" dir="rtl">محمد ﷺ</div></div>'+
+              '<div class="ps-mh-title-line"><h2>Prophet<br>Muḥammad</h2><div class="ps-mh-ar" dir="rtl">محمد ﷺ</div></div>'+
               '<p class="ps-mh-tagline">Sein Leben. Sein Weg. Seine Botschaft.</p>'+
               '<p class="ps-mh-intro">Eine besondere Sammlung von Geschichten über den letzten Propheten ﷺ – kindgerecht, authentisch und mit wertvollen Lehren für unseren Alltag.</p>'+
             '</div>'+
@@ -207,7 +207,7 @@ function ensureUi(){
           '<div class="ps-mh-ornament" aria-hidden="true"><span></span></div>'+
           '<section class="ps-mh-panel ps-mh-way"><div class="ps-mh-panel-art" aria-hidden="true"></div><div class="ps-mh-panel-copy">'+
             '<div class="ps-mh-panel-title"><span class="ps-mh-line-icon ps-mh-line-icon-route" aria-hidden="true"></span><h3>Sein Weg</h3></div>'+
-            '<p>Von Makkah nach Madinah – eine außergewöhnliche Reise voller Vertrauen, Geduld und Licht.</p>'+
+            '<p>Von Makkah nach Madīnah – eine außergewöhnliche Reise voller Vertrauen, Geduld und Licht.</p>'+
             '<button class="ps-mh-discover" type="button" data-mh-action="episode" data-episode="hijrah">Den Weg entdecken</button>'+
           '</div></section>'+
           '<section class="ps-mh-panel ps-mh-message"><div class="ps-mh-panel-art" aria-hidden="true"></div><div class="ps-mh-panel-copy">'+
@@ -338,12 +338,8 @@ function toggleMuhammadEpisodes(button){
   if(button){button.setAttribute("aria-expanded",String(expanded));button.innerHTML=expanded?'Weniger <b aria-hidden="true">↑</b>':'Alle anzeigen <b aria-hidden="true">→</b>';}
 }
 function goMuhammadLibrary(){
-  const alreadyOpen=$("#psLibraryPage")?.classList.contains("open");
   closeStory();
-  setTimeout(()=>{
-    if(!alreadyOpen)openLibrary();
-    setTimeout(()=>$("#psLibraryScroll")?.scrollTo({top:0,behavior:"smooth"}),50);
-  },40);
+  setTimeout(()=>$("#psLibraryScroll")?.scrollTo({top:0,behavior:"smooth"}),40);
 }
 function openMuhammadFullStory(){
   const modal=$("#psModal"),body=$(".ps-body");if(!modal||!body)return;
@@ -352,6 +348,10 @@ function openMuhammadFullStory(){
   requestAnimationFrame(()=>body.scrollIntoView({behavior:"smooth",block:"start"}));
 }
 function goMuhammadNav(target){
+  if(target==="stories"){
+    const scroll=$("#psScroll");if(scroll)scroll.scrollTo({top:0,behavior:"smooth"});
+    return;
+  }
   closeStory();
   setTimeout(()=>{
     if($("#psLibraryPage")?.classList.contains("open"))closeLibrary();
@@ -479,7 +479,6 @@ window.DARKidsProphetStories={open:openStory,openLibrary,closeLibrary,stop:stopA
 (()=>{"use strict";
 const A={
  hero:"/kids/assets/story-wow/v22-muhammad-hero.jpg?v=22",
- birth:"/kids/assets/story-wow/v30-muhammad-birth.jpg?v=30",
  route:"/kids/assets/story-wow/v22-muhammad-route.jpg?v=22",
  hira:"/kids/assets/story-wow/v22-muhammad-hira.jpg?v=22",
  madinah:"/kids/assets/story-wow/v22-muhammad-madinah.jpg?v=22"
@@ -491,7 +490,7 @@ function patchHome(){
  const special=q("#psMuhammadHomeEntry",view);
  if(special&&!special.dataset.r22){
    special.dataset.r22="1";
-   special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★&nbsp;&nbsp;BESONDERER BEREICH</span><strong>Prophet<br>Muhammad</strong><span class="ps-mh-home-ar" dir="rtl">ﷺ</span><span class="ps-mh-home-sub">Sein Leben. Seine Werte. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
+   special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★&nbsp;&nbsp;BESONDERER BEREICH</span><strong>Prophet<br>Muḥammad</strong><span class="ps-mh-home-ar" dir="rtl">محمد ﷺ</span><span class="ps-mh-home-sub">Sein Leben. Seine Werte. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
  }
  const entry=q("#psProphetEntry",view);
  if(entry&&!entry.dataset.r22){
@@ -502,14 +501,6 @@ function patchHome(){
  if(feature&&!feature.dataset.r22key){
    feature.dataset.r22key="1";feature.tabIndex=0;feature.setAttribute("role","button");
    feature.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();feature.click()}});
- }
- const legacy=q("#authenticStoryList",view);
- if(legacy){
-   legacy.style.display="none";
-   const legacyTitle=legacy.previousElementSibling;
-   if(legacyTitle&&legacyTitle.classList.contains("section-title"))legacyTitle.style.display="none";
-   const legacyNote=legacy.nextElementSibling;
-   if(legacyNote&&legacyNote.classList.contains("gentle-note"))legacyNote.style.display="none";
  }
  const title=q(".story-more-title",view);
  if(title&&!q("#r22StoryAll",title)){
@@ -525,7 +516,7 @@ function patchHome(){
 function patchMuhammad(){
  const special=q("#psMuhammadSpecial");if(!special)return;
  const hero=q(".ps-mh-hero-art",special);if(hero&&hero.getAttribute("src")!==A.hero)hero.setAttribute("src",A.hero);
- const ids={birth:A.birth,wahy:A.hira,hijrah:A.madinah,tawhid:A.hero,madinah:A.madinah,rahmah:A.madinah,return:A.hero,khatam:A.madinah};
+ const ids={birth:A.hero,wahy:A.hira,hijrah:A.route,tawhid:A.hero,madinah:A.madinah,rahmah:A.madinah,return:A.hero,khatam:A.madinah};
  for(const [id,url] of Object.entries(ids)){
    const art=q('[data-mh-episode="'+id+'"] .ps-mh-episode-art',special);
    if(art)art.style.setProperty("background-image",'url("'+url+'")',"important");
