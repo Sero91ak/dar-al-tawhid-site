@@ -199,7 +199,7 @@ function ensureUi(){
             '<span class="ps-mh-hero-shade" aria-hidden="true"></span>'+
             '<div class="ps-mh-hero-copy">'+
               '<span class="ps-mh-special-label">★&nbsp;&nbsp;BESONDERER BEREICH</span>'+
-              '<div class="ps-mh-title-line"><h2>Prophet<br>Muḥammad</h2><div class="ps-mh-ar" dir="rtl">محمد ﷺ</div></div>'+
+              '<div class="ps-mh-title-line"><h2>Prophet<br>Muhammad</h2><div class="ps-mh-ar" dir="rtl">محمد ﷺ</div></div>'+
               '<p class="ps-mh-tagline">Sein Leben. Sein Weg. Seine Botschaft.</p>'+
               '<p class="ps-mh-intro">Eine besondere Sammlung von Geschichten über den letzten Propheten ﷺ – kindgerecht, authentisch und mit wertvollen Lehren für unseren Alltag.</p>'+
             '</div>'+
@@ -495,7 +495,7 @@ function patchHome(){
  const special=q("#psMuhammadHomeEntry",view);
  if(special&&!special.dataset.r22){
    special.dataset.r22="1";
-   special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★&nbsp;&nbsp;BESONDERER BEREICH</span><strong>Prophet<br>Muḥammad</strong><span class="ps-mh-home-ar" dir="rtl">محمد ﷺ</span><span class="ps-mh-home-sub">Sein Leben. Seine Werte. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
+   special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★&nbsp;&nbsp;BESONDERER BEREICH</span><strong>Prophet<br>Muhammad</strong><span class="ps-mh-home-ar" dir="rtl">محمد ﷺ</span><span class="ps-mh-home-sub">Sein Leben. Seine Werte. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
  }
  const entry=q("#psProphetEntry",view);
  if(entry&&!entry.dataset.r22){
