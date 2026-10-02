@@ -626,6 +626,15 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <select id="prophetPickAge" hidden><option value="all" selected>alle</option></select>
     <div id="prophetPickList" class="prophet-pick-list"></div>
     <div id="prophetPickReady" class="notice">25 Voice-Texte sind vorbereitet. Offen ist nur noch deine Serhat-Audioerzeugung und Ausspracheprüfung.</div>
+    <div style="display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:10px;align-items:center;margin-top:10px">
+      <button id="prophetBatchStartBtn" class="btn primary" type="button">Alle 25 autonom erzeugen</button>
+      <div>
+        <div id="prophetBatchState" class="notice" style="margin:0">Autonomer Produktionsmanager wird geprüft …</div>
+        <div style="height:6px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:7px">
+          <div id="prophetBatchProgress" style="height:100%;width:0%;background:currentColor;opacity:.72;transition:width .25s ease"></div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
@@ -2250,8 +2259,81 @@ setInterval(()=>checkHealth({quiet:true}),5000);
     if(!id)return false;
     return await pushOne(id);
   };
+  const batchBtn=$("#prophetBatchStartBtn");
+  const batchState=$("#prophetBatchState");
+  const batchProgress=$("#prophetBatchProgress");
+  let lastBatchPhase="";
+  function renderBatchState(st){
+    if(!st||!batchBtn||!batchState)return;
+    const total=Math.max(1,Number(st.total||25));
+    const done=Math.max(0,Number(st.completed||0));
+    const pct=Math.max(0,Math.min(100,Number(st.progress||Math.round(done/total*100))));
+    if(batchProgress)batchProgress.style.width=pct+"%";
+    const phase=String(st.phase||"idle");
+    const current=String(st.current||"").trim();
+    if(st.running){
+      batchBtn.disabled=true;
+      batchBtn.textContent="Produktion läuft · "+done+"/"+total;
+      batchState.textContent=(current||"Prophetengeschichten werden autonom erzeugt.")+" · "+pct+" %";
+      batchState.className="notice";
+    }else if(phase==="complete"){
+      batchBtn.disabled=true;
+      batchBtn.textContent="25/25 fertig";
+      batchState.textContent="Alle Prophetengeschichten sind fertig erzeugt und veröffentlicht.";
+      batchState.className="notice good";
+    }else if(phase==="blocked"){
+      batchBtn.disabled=false;
+      batchBtn.textContent="Offene Stellen weiterbearbeiten";
+      batchState.textContent=(current||"Einige schwierige Stellen warten auf die nächste autonome Rettungsrunde.")+(st.error?" · "+st.error:"");
+      batchState.className="notice warn";
+    }else if(phase==="interrupted"||phase==="publish-error"){
+      batchBtn.disabled=false;
+      batchBtn.textContent="Autonom fortsetzen";
+      batchState.textContent=current||"Der gespeicherte Auftrag kann an derselben Stelle fortgesetzt werden.";
+      batchState.className="notice warn";
+    }else{
+      batchBtn.disabled=false;
+      batchBtn.textContent="Alle 25 autonom erzeugen";
+      batchState.textContent="Ein Start genügt. Danach speichert der Produktionsmanager jeden Fortschritt dauerhaft und setzt nach Engine-Neustarts automatisch fort.";
+      batchState.className="notice";
+    }
+    if(lastBatchPhase!==phase&&phase==="complete")loadPack();
+    lastBatchPhase=phase;
+  }
+  async function pollBatchState(){
+    try{
+      const r=await localRequest("/prophet-stories/batch-state",{cache:"no-store"});
+      if(r&&r.ok)renderBatchState(await r.json());
+    }catch(e){
+      if(batchState){
+        batchState.textContent="Produktionsstatus wird wieder verbunden …";
+        batchState.className="notice warn";
+      }
+    }
+  }
+  if(batchBtn)batchBtn.addEventListener("click",async()=>{
+    batchBtn.disabled=true;
+    batchBtn.textContent="Starte autonomen Auftrag …";
+    try{
+      const r=await localRequest("/prophet-stories/batch-start",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:"{}"
+      });
+      const d=await r.json().catch(()=>({}));
+      if(!r.ok||d.ok===false)throw Error(d.error||"Produktionsmanager konnte nicht gestartet werden.");
+      renderBatchState(d);
+    }catch(e){
+      batchBtn.disabled=false;
+      batchBtn.textContent="Autonom fortsetzen";
+      batchState.textContent=e.message||String(e);
+      batchState.className="notice bad";
+    }
+  });
   sel.addEventListener("change",prepareSlot);
   loadPack();
+  pollBatchState();
+  setInterval(pollBatchState,4000);
 })();
 </script>
 <script src="content-studio.js?v=2913"></script>
