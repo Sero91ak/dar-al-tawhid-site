@@ -1222,19 +1222,46 @@ async function searchLearning(termOverride=""){
     if((d.results||[]).length&&Number(d.results[0].score||0)>=.96)selectLearningCandidate(0);
   }catch(e){setMessage(e.message||String(e))}
 }
-function takeTextSelection(){
+function selectedTextWord(){
   const ta=$("#text");
+  if(!ta)return"";
   let value=ta.value.slice(ta.selectionStart,ta.selectionEnd).trim();
   if(!value){
-    const p=ta.selectionStart||0,left=ta.value.slice(0,p),right=ta.value.slice(p);
-    const a=(left.match(/[^\\s,.!?;:()]+$/)||[""])[0],b=(right.match(/^[^\\s,.!?;:()]+/)||[""])[0];
+    const p=ta.selectionStart||0;
+    const left=ta.value.slice(0,p);
+    const right=ta.value.slice(p);
+    const a=(left.match(/[^\s,.!?;:()\[\]{}«»“”„]+$/)||[""])[0];
+    const b=(right.match(/^[^\s,.!?;:()\[\]{}«»“”„]+/)||[""])[0];
     value=(a+b).trim();
   }
+  return value.replace(/^[\s"'„“«»]+|[\s"'„“«»]+$/g,"").trim();
+}
+function captureManualSelection(){
+  const value=selectedTextWord();
+  const btn=$("#manualSelectionBtn");
+  const status=$("#manualSelectionStatus");
+  if(!value){
+    if(btn)btn.disabled=true;
+    if(status)status.textContent="Beliebiges Wort im Text markieren oder den Cursor in ein Wort setzen.";
+    return"";
+  }
+  manualLearningTerm=value;
+  if(btn)btn.disabled=false;
+  if(status)status.textContent='Ausgewählt: „'+value+'“ · kann unabhängig von der automatischen Erkennung geprüft werden.';
+  renderAnalysis();
+  return value;
+}
+function takeTextSelection(){
+  const value=captureManualSelection()||selectedTextWord();
   if(!value){setMessage("Markiere zuerst das falsch ausgesprochene Wort im Text.");return}
+  manualLearningTerm=value;
+  learningVariant=0;
+  $("#learnResetVariantBtn").textContent="Variante 1";
   $("#learnTerm").value=value;
   $("#learningSection").scrollIntoView({behavior:"smooth",block:"start"});
   searchLearning(value);
 }
+
 async function previewLearning(){
   const term=$("#learnTerm").value.trim();
   const tts=$("#learnArabic").value.trim()||(learningCandidate?.ttsText||"");
