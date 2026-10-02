@@ -627,7 +627,10 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <div id="prophetPickList" class="prophet-pick-list"></div>
     <div id="prophetPickReady" class="notice">25 Voice-Texte sind vorbereitet. Offen ist nur noch deine Serhat-Audioerzeugung und Ausspracheprüfung.</div>
     <div style="display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:10px;align-items:center;margin-top:10px">
-      <button id="prophetBatchStartBtn" class="btn primary" type="button">Alle 25 autonom erzeugen</button>
+      <div style="display:grid;gap:6px">
+        <button id="prophetBatchStartBtn" class="btn primary" type="button">Alle 25 autonom erzeugen</button>
+        <button id="prophetBatchPauseBtn" class="btn quiet" type="button" hidden>Nach aktueller Geschichte sicher pausieren</button>
+      </div>
       <div>
         <div id="prophetBatchState" class="notice" style="margin:0">Autonomer Produktionsmanager wird geprüft …</div>
         <div style="height:6px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:7px">
@@ -2393,6 +2396,8 @@ setInterval(()=>checkHealth({quiet:true}),5000);
     const total=Math.max(1,Number(st.total||25));
     const done=Math.max(0,Number(st.completed||0));
     const pct=Math.max(0,Math.min(100,Number(st.progress||Math.round(done/total*100))));
+    const pauseBtn=$("#prophetBatchPauseBtn");
+    if(pauseBtn)pauseBtn.hidden=!st.running;
     if(batchProgress)batchProgress.style.width=pct+"%";
     const phase=String(st.phase||"idle");
     const current=String(st.current||"").trim();
@@ -2436,6 +2441,22 @@ setInterval(()=>checkHealth({quiet:true}),5000);
       }
     }
   }
+  $("#prophetBatchPauseBtn")?.addEventListener("click",async()=>{
+    const btn=$("#prophetBatchPauseBtn"),old=btn.textContent;
+    btn.disabled=true;btn.textContent="Sichere Pause angefordert …";
+    try{
+      const r=await localRequest("/prophet-stories/batch-stop",{
+        method:"POST",headers:{"Content-Type":"application/json"},body:"{}"
+      });
+      const d=await r.json().catch(()=>({}));
+      if(!r.ok||d.ok===false)throw Error(d.error||"Pause konnte nicht angefordert werden.");
+      $("#prophetBatchState").textContent="Die aktuell laufende Geschichte wird nicht beschädigt. Danach pausiert die Produktion sicher.";
+      $("#prophetBatchState").className="notice warn";
+    }catch(e){
+      setMessage(e.message||String(e));
+      btn.disabled=false;btn.textContent=old;
+    }
+  });
   if(batchBtn)batchBtn.addEventListener("click",async()=>{
     batchBtn.disabled=true;
     batchBtn.textContent="Starte autonomen Auftrag …";
