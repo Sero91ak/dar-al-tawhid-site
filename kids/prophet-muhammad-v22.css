@@ -701,3 +701,129 @@
   .ps-library-page .ps-row-title{font-size:28px!important}
   .ps-library-page .ps-row-ar{font-size:17px!important}
 }
+
+
+/* v27 — Stories home cards aligned with the approved cinematic system */
+#view-stories.ps-stories-home .ps-muhammad-home{
+  min-height:198px!important;
+  margin:12px -5px 14px!important;
+  border:1px solid rgba(247,211,116,.66)!important;
+  border-radius:26px!important;
+  overflow:hidden!important;
+  background:#041725!important;
+  box-shadow:0 16px 36px rgba(0,0,0,.26),0 0 20px rgba(238,193,78,.08)!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-art{
+  background:url("/kids/assets/story-wow/muhammad-hero.jpg?v=22") 62% 50%/cover no-repeat!important;
+  filter:saturate(1.08) contrast(1.05) brightness(.96)!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-shade{
+  background:
+    radial-gradient(circle at 72% 20%,rgba(255,214,116,.13),transparent 25%),
+    linear-gradient(90deg,rgba(2,15,26,.98) 0%,rgba(2,15,26,.90) 40%,rgba(2,15,26,.40) 66%,rgba(2,15,26,.05) 100%),
+    linear-gradient(180deg,transparent 44%,rgba(2,15,26,.58))!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-copy{
+  left:18px!important;
+  right:16%!important;
+  top:17px!important;
+  bottom:15px!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-kicker{
+  min-height:24px!important;
+  padding:0 9px!important;
+  border-color:rgba(247,211,116,.65)!important;
+  background:rgba(4,31,45,.68)!important;
+  color:#ffe4a0!important;
+  font-size:7.6px!important;
+  font-weight:800!important;
+  letter-spacing:.11em!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-copy strong{
+  margin-top:8px!important;
+  max-width:76%!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:29px!important;
+  line-height:.92!important;
+  font-weight:700!important;
+  letter-spacing:-.035em!important;
+  color:#fff3d0!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-sub{
+  margin-top:6px!important;
+  color:#e7f4f8!important;
+  font-size:10.6px!important;
+  font-weight:600!important;
+}
+#view-stories.ps-stories-home .ps-mh-home-cta{
+  min-height:34px!important;
+  margin-top:auto!important;
+  padding:0 14px!important;
+  border-color:rgba(247,210,111,.74)!important;
+  font-size:9.3px!important;
+}
+#view-stories.ps-stories-home .ps-prophet-entry{
+  min-height:164px!important;
+  margin:0 -5px 16px!important;
+  border:1px solid rgba(82,188,213,.40)!important;
+  border-radius:25px!important;
+  background:
+    linear-gradient(90deg,rgba(2,18,31,.97) 0%,rgba(3,27,45,.87) 40%,rgba(3,27,45,.36) 68%,rgba(3,27,45,.05) 100%),
+    linear-gradient(180deg,transparent 43%,rgba(2,20,33,.48)),
+    url("/kids/assets/prophet-scenes/library.webp?v=1") 66% 50%/cover no-repeat!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.22)!important;
+}
+#view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy{
+  left:18px!important;
+  right:20%!important;
+  top:17px!important;
+  bottom:15px!important;
+}
+#view-stories.ps-stories-home .ps-prophet-entry .ps-entry-kicker{
+  color:#bfe7dd!important;
+  font-size:7.4px!important;
+  font-weight:800!important;
+  letter-spacing:.11em!important;
+}
+#view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{
+  margin-top:6px!important;
+  max-width:86%!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:26px!important;
+  line-height:.95!important;
+  font-weight:700!important;
+  letter-spacing:-.03em!important;
+  color:#fff3d0!important;
+}
+#view-stories.ps-stories-home .ps-entry-sub{
+  margin-top:5px!important;
+  color:#dfeff5!important;
+  font-size:9.7px!important;
+  font-weight:600!important;
+}
+#view-stories.ps-stories-home .ps-entry-cta{
+  min-height:32px!important;
+  margin-top:auto!important;
+  padding:0 13px!important;
+  font-size:9px!important;
+}
+#view-stories.ps-stories-home .ps-muhammad-home:focus-visible,
+#view-stories.ps-stories-home .ps-prophet-entry:focus-visible{
+  outline:2px solid #ffe29a!important;
+  outline-offset:3px!important;
+}
+@media(max-width:390px){
+  #view-stories.ps-stories-home .ps-muhammad-home{min-height:188px!important}
+  #view-stories.ps-stories-home .ps-mh-home-copy strong{font-size:27px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry{min-height:154px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{font-size:24px!important}
+}
+@media(min-width:700px){
+  #view-stories.ps-stories-home .ps-muhammad-home{min-height:280px!important}
+  #view-stories.ps-stories-home .ps-mh-home-copy{left:30px!important;right:43%!important;top:26px!important;bottom:23px!important}
+  #view-stories.ps-stories-home .ps-mh-home-copy strong{font-size:43px!important}
+  #view-stories.ps-stories-home .ps-mh-home-sub{font-size:14px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry{min-height:225px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy{left:30px!important;right:45%!important;top:26px!important;bottom:22px!important}
+  #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{font-size:38px!important}
+}
