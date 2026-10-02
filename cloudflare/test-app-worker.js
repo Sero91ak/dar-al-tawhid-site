@@ -158,6 +158,25 @@ async function gradeKidsRecitation(request, env) {
   });
 }
 
+
+const DAR_TEST_HOME_STYLE_V1183 = "/test/assets/dar-home-knowledge-library-v1183.css";
+const DAR_TEST_HOME_SCRIPT_V1183 = "/test/assets/dar-home-knowledge-library-v1183.js";
+
+async function injectDarTestHomeV1183(asset) {
+  const type = String(asset && asset.headers && asset.headers.get("content-type") || "");
+  if (!asset || !asset.ok || !type.includes("text/html")) return asset;
+  let html = await asset.text();
+  const cssTag = '<link rel="stylesheet" href="' + DAR_TEST_HOME_STYLE_V1183 + '">';
+  const jsTag = '<script defer src="' + DAR_TEST_HOME_SCRIPT_V1183 + '"><\/script>';
+  if (!html.includes(DAR_TEST_HOME_STYLE_V1183)) html = html.replace("</head>", cssTag + "\n</head>");
+  if (!html.includes(DAR_TEST_HOME_SCRIPT_V1183)) html = html.replace("</body>", jsTag + "\n</body>");
+  const headers = new Headers(asset.headers);
+  headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+  headers.set("Pragma", "no-cache");
+  headers.delete("Content-Length");
+  return new Response(html, { status: asset.status, statusText: asset.statusText, headers });
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
