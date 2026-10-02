@@ -616,6 +616,18 @@ body.free-voice-mode .mobile-actions{display:none!important}
 .studio-page-head p{margin:0;color:var(--muted);font-size:12px;line-height:1.5;max-width:72ch}
 .studio-tool-label{font-size:9px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:#8fa4aa;margin-bottom:7px}
 .pronunciation-word-stage{display:grid;gap:14px}
+.pronunciation-open-strip{border:1px solid rgba(234,104,104,.34);border-radius:15px;padding:13px 14px;background:linear-gradient(180deg,rgba(150,42,42,.105),rgba(217,182,111,.028));box-shadow:inset 0 0 0 1px rgba(255,255,255,.018)}
+.pronunciation-open-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.pronunciation-open-head b{font-size:14px}.pronunciation-open-count{font-size:10px;font-weight:900;color:#ffb1b1;border:1px solid rgba(234,104,104,.38);border-radius:999px;padding:5px 8px;background:rgba(150,42,42,.12);white-space:nowrap}
+#pronunciationOpenWords.learning-word-picker{max-height:150px;margin:0;background:rgba(7,25,39,.28);border-color:rgba(234,104,104,.20)}
+.learning-word.review{border-color:rgba(217,182,111,.42);color:#efd49a;background:rgba(217,182,111,.08)}
+.learning-variant-panel{display:grid;gap:7px;padding:10px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02)}
+.learning-variant-title{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted)}
+.learning-variant-title b{color:var(--ink);font-size:11px}
+.learning-variant-choices{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.learning-variant-choice{appearance:none;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.035);color:#cbd6dc;min-height:38px;font:inherit;font-size:11px;font-weight:900;cursor:pointer}
+.learning-variant-choice:hover{border-color:rgba(217,182,111,.44);color:#f1d79b}
+.learning-variant-choice.active{border-color:rgba(81,199,143,.62);background:rgba(42,144,96,.13);color:#b9f0d4;box-shadow:inset 0 0 0 1px rgba(81,199,143,.10)}
 .pronunciation-term-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:end}
 .pronunciation-term-row .btn{min-height:42px}
 #pronunciationWorkspace .learning-word-picker{max-height:260px;padding:12px;gap:7px;margin:0}
@@ -667,7 +679,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.61 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.62 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -825,8 +837,18 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
         </div>
       </div>
       <div class="pronunciation-word-stage">
+        <div class="pronunciation-open-strip">
+          <div class="pronunciation-open-head">
+            <div>
+              <div class="studio-tool-label" style="margin-bottom:3px">Direkt prüfen</div>
+              <b>Offene / problematische Wörter</b>
+            </div>
+            <span id="pronunciationOpenCount" class="pronunciation-open-count">0 offen</span>
+          </div>
+          <div id="pronunciationOpenWords" class="learning-word-picker"><span class="notice">Noch kein offenes Wort erkannt.</span></div>
+        </div>
         <div>
-          <div class="section-title">Wörter im aktuellen Text</div>
+          <div class="section-title">Alle Wörter im aktuellen Text</div>
           <div class="notice" style="margin-bottom:8px">Grau = noch nicht geprüft · Rot = Korrektur offen · Grün = dauerhaft gelernt.</div>
           <div id="storyWordList" class="learning-word-picker"></div>
         </div>
@@ -857,9 +879,17 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
         <button id="learnPreviewBtn" class="btn secondary" type="button">Schnelltest anhören</button>
         <div id="learnPreviewStatus" class="learning-preview-status">Bereit. Der Schnelltest unterbricht keine laufende Prophetengeschichte.</div>
         <audio id="learnPlayer" class="learning-player" controls preload="auto" x-webkit-airplay="deny" disableremoteplayback hidden></audio>
-        <div class="learning-actions">
-          <button id="learnVariantBtn" class="btn quiet" type="button">Nächste Variante</button>
-          <button id="learnResetVariantBtn" class="btn quiet" type="button">Variante 1</button>
+        <div class="learning-variant-panel">
+          <div class="learning-variant-title"><b>Audio-Varianten direkt vergleichen</b><span>1–5 · Klick = sofort testen</span></div>
+          <div id="learningVariantChoices" class="learning-variant-choices">
+            <button class="learning-variant-choice active" type="button" data-learning-variant="0">1 ▶</button>
+            <button class="learning-variant-choice" type="button" data-learning-variant="1">2 ▶</button>
+            <button class="learning-variant-choice" type="button" data-learning-variant="2">3 ▶</button>
+            <button class="learning-variant-choice" type="button" data-learning-variant="3">4 ▶</button>
+            <button class="learning-variant-choice" type="button" data-learning-variant="4">5 ▶</button>
+          </div>
+          <button id="learnVariantBtn" type="button" hidden>Nächste Variante</button>
+          <button id="learnResetVariantBtn" type="button" hidden>Variante 1</button>
         </div>
         <button id="learnConfirmBtn" class="btn primary" type="button" disabled>So merken · dauerhaft bestätigen</button>
         <div class="audio-route-row">
@@ -1065,7 +1095,7 @@ let nativeUpdateState="idle",nativeLatestVersion="";
 let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let studioMode="production",freeVoiceAudioUrl="",freeVoiceProgressTimer=null;
 let freeVoiceLearningResults=[],freeVoiceLearningCandidate=null,freeVoiceLearningPreviewId="",freeVoiceLearningPreviewUrl="";
-let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null,learningPreviewRequestSerial=0;
+let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null,learningPreviewRequestSerial=0,learningSearchRequestSerial=0;
 let learnedCanonicals=new Set(),learnedTerms=new Set(),confirmedAudioLocks=new Set();
 let manualLearningTerm="",learningVariant=0;
 let pendingLearningTerms=new Set();
@@ -1153,19 +1183,45 @@ function textWordTokens(){
 function looksIslamicSensitive(term){
   return /[ʿʾāīūḥṣḍṭẓḏṯšǧġḫĀĪŪḤṢḌṬẒḎṮŠǦĠḪ\u0600-\u06FF]/.test(String(term||""));
 }
+function learningWordButton(word,mode="all"){
+  const done=isLearningDoneTerm(word);
+  const pending=pendingLearningTerms.has(learningNorm(word))||learningNorm(manualLearningTerm)===learningNorm(word);
+  const review=!done&&!pending&&looksIslamicSensitive(word);
+  const cls=done?"done":pending?"pending":review?"review":"";
+  const state=done?" · OK":pending?" · offen":review&&mode==="priority"?" · prüfen":"";
+  return '<button type="button" class="learning-word '+cls+'" data-story-word="'+esc(word)+'">'+esc(word)+state+'</button>';
+}
+function bindStoryWordButtons(root){
+  root?.querySelectorAll("[data-story-word]").forEach(btn=>btn.addEventListener("click",()=>chooseStoryWord(btn.dataset.storyWord||"")));
+}
 function renderStoryWordList(){
   const wrap=$("#storyWordList");
+  const priority=$("#pronunciationOpenWords");
+  const count=$("#pronunciationOpenCount");
   if(!wrap)return;
   const words=textWordTokens();
-  if(!words.length){wrap.innerHTML='<span class="notice">Noch kein Text geladen.</span>';return}
-  wrap.innerHTML=words.map(word=>{
-    const done=isLearningDoneTerm(word);
-    const pending=pendingLearningTerms.has(learningNorm(word))||learningNorm(manualLearningTerm)===learningNorm(word);
-    const cls=done?"done":pending?"pending":"";
-    const state=done?" · OK":pending?" · offen":"";
-    return '<button type="button" class="learning-word '+cls+'" data-story-word="'+esc(word)+'">'+esc(word)+state+'</button>';
-  }).join("");
-  wrap.querySelectorAll("[data-story-word]").forEach(btn=>btn.addEventListener("click",()=>chooseStoryWord(btn.dataset.storyWord||"")));
+  if(!words.length){
+    wrap.innerHTML='<span class="notice">Noch kein Text geladen.</span>';
+    if(priority)priority.innerHTML='<span class="notice">Noch kein offenes Wort erkannt.</span>';
+    if(count)count.textContent="0 offen";
+    return;
+  }
+  wrap.innerHTML=words.map(word=>learningWordButton(word,"all")).join("");
+  bindStoryWordButtons(wrap);
+
+  const open=words.filter(word=>{
+    if(isLearningDoneTerm(word))return false;
+    return pendingLearningTerms.has(learningNorm(word))||
+      learningNorm(manualLearningTerm)===learningNorm(word)||
+      looksIslamicSensitive(word);
+  });
+  if(priority){
+    priority.innerHTML=open.length
+      ?open.map(word=>learningWordButton(word,"priority")).join("")
+      :'<span class="notice">Keine offene Ausspracheprüfung im aktuellen Text.</span>';
+    bindStoryWordButtons(priority);
+  }
+  if(count)count.textContent=open.length+" offen";
 }
 async function chooseStoryWord(term){
   term=String(term||"").trim();
@@ -1174,18 +1230,24 @@ async function chooseStoryWord(term){
   pendingLearningTerms.add(learningNorm(term));
   persistPendingLearningTerms();
   learningVariant=0;
+  updateLearningVariantChoices();
   $("#learnResetVariantBtn").textContent="Variante 1";
   $("#learnTerm").value=term;
   if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=term;
+  window.setStudioPage?.("pronunciation");
   renderAnalysis();
   renderStoryWordList();
-  const d=await searchLearning(term);
-  const rows=Array.isArray(d?.results)?d.results:[];
-  if(rows.length){
-    setMessage("„"+term+"“ ist ausgewählt. Wähle jetzt eine der Ausspracheformen; ein Klick spielt sie direkt als Schnelltest ab.","warn");
-  }else{
-    setMessage("„"+term+"“ ist ausgewählt. Trage die gewünschte Sprechform ein und drücke Schnell testen.","warn");
-  }
+
+  // Kein Warten auf die Engine: lokale Sprechformen sind bereits im Browser.
+  const immediate=localLearningCandidates(term,12);
+  renderLearningResults(immediate);
+  setMessage(
+    immediate.length
+      ?"„"+term+"“ ist bereit. Ausspracheform oder Variante 1–5 anklicken und sofort anhören."
+      :"„"+term+"“ ist bereit. Gewünschte Sprechform eintragen und sofort testen.",
+    "warn"
+  );
+  searchLearning(term,{preserveImmediate:true}).catch(()=>{});
 }
 function setMessage(text,type="bad"){
   const el=$("#error");
@@ -1249,7 +1311,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.61")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.62")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -1449,6 +1511,40 @@ async function loadLearningState(){
     if(r.ok&&d.ok)renderLearningState(d);
   }catch(_){$("#learnState").textContent="Lernwortschatz derzeit nicht erreichbar."}
 }
+function learningCandidateKey(r){
+  return [
+    learningSearchNorm(r?.canonical||r?.input||""),
+    String(r?.ttsText||r?.tts_text||r?.input||"").trim(),
+    String(r?.ttsLanguage||r?.tts_language||"").trim().toLowerCase()
+  ].join("|");
+}
+function mergeLearningCandidates(primary,secondary,limit=12){
+  const out=[],seen=new Set();
+  for(const r of [...(primary||[]),...(secondary||[])]){
+    const key=learningCandidateKey(r);
+    if(!key||seen.has(key))continue;
+    seen.add(key);out.push(r);
+    if(out.length>=limit)break;
+  }
+  return out;
+}
+function updateLearningVariantChoices(){
+  document.querySelectorAll("[data-learning-variant]").forEach(btn=>{
+    btn.classList.toggle("active",Number(btn.dataset.learningVariant)===Number(learningVariant));
+  });
+  const legacy=$("#learnResetVariantBtn");
+  if(legacy)legacy.textContent="Variante "+(learningVariant+1);
+}
+function chooseLearningVariant(index){
+  learningVariant=Math.max(0,Math.min(4,Number(index)||0));
+  updateLearningVariantChoices();
+  if(!$("#learnTerm")?.value.trim()){
+    setMessage("Wähle zuerst ein Wort oder einen Namen.");
+    return;
+  }
+  previewLearning({fromVariant:true});
+}
+
 function renderLearningResults(results){
   learningResults=Array.isArray(results)?results:[];
   learningCandidate=null;
@@ -1482,6 +1578,7 @@ function selectLearningCandidate(index,autoPreview=false){
   $("#learnArabic").value=r.ttsText||"";
   if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=String(r.canonical||r.input||$("#learnTerm").value||"");
   learningVariant=0;
+  updateLearningVariantChoices();
   $("#learnResetVariantBtn").textContent="Variante 1";
   const status=$("#learnPreviewStatus");
   if(status){
@@ -1492,12 +1589,25 @@ function selectLearningCandidate(index,autoPreview=false){
   if(autoPreview)previewLearning({fromCandidate:true});
 }
 
-async function searchLearning(termOverride=""){
+async function searchLearning(termOverride="",options={}){
   const term=String(termOverride||$("#learnTerm").value||"").trim();
   if(!term){setMessage("Bitte zuerst ein falsch ausgesprochenes Wort oder einen Namen auswählen/eintragen.");return null}
+  const serial=++learningSearchRequestSerial;
   $("#learnTerm").value=term;
   if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=term;
-  clearLearningPreview();
+
+  // Sofortige Bedienung: lokale Kandidaten rendern, bevor irgendein Request wartet.
+  const localRows=localLearningCandidates(term,12);
+  if(!options.preserveImmediate){
+    clearLearningPreview();
+    renderLearningResults(localRows);
+  }
+  const initialStatus=$("#learnPreviewStatus");
+  if(initialStatus&&!learningCandidate){
+    initialStatus.textContent="Sofort bereit · "+localRows.length+" lokale Form"+(localRows.length===1?"":"en")+" · Engine-Abgleich läuft im Hintergrund.";
+    initialStatus.className="learning-preview-status good";
+  }
+
   let serverData=null;
   try{
     const r=await localRequest("/learning/search",{
@@ -1507,16 +1617,24 @@ async function searchLearning(termOverride=""){
     const d=await r.json().catch(()=>({}));
     if(r.ok&&d.ok)serverData=d;
   }catch(_){}
-  let rows=Array.isArray(serverData?.results)?serverData.results:[];
-  if(!rows.length)rows=localLearningCandidates(term,12);
-  renderLearningResults(rows);
-  if(serverData)renderLearningState(serverData);
-  const localOnly=!serverData;
-  const s=$("#learnPreviewStatus");
-  if(s&&localOnly){
-    s.textContent="Lokale Aussprachebibliothek aktiv · "+rows.length+" Form"+(rows.length===1?"":"en")+" verfügbar.";
-    s.className="learning-preview-status good";
+
+  if(serial!==learningSearchRequestSerial||String($("#learnTerm")?.value||"").trim()!==term){
+    return {ok:true,stale:true,results:localRows};
   }
+  const serverRows=Array.isArray(serverData?.results)?serverData.results:[];
+  const rows=mergeLearningCandidates(localRows,serverRows,12);
+
+  // Niemals eine bereits angeklickte/abspielende Auswahl durch einen späten
+  // Such-Request zurücksetzen. Nur aktualisieren, solange der Nutzer noch nicht gewählt hat.
+  if(!learningCandidate&&!learningPreviewId){
+    renderLearningResults(rows);
+    const status=$("#learnPreviewStatus");
+    if(status){
+      status.textContent=rows.length+" Ausspracheform"+(rows.length===1?"":"en")+" sofort verfügbar · anklicken = direkt hören.";
+      status.className="learning-preview-status good";
+    }
+  }
+  if(serverData)renderLearningState(serverData);
   return {...(serverData||{ok:true,localFallback:true}),results:rows};
 }
 
@@ -1593,7 +1711,7 @@ async function previewLearning(options={}){
     const jobId=String(first.jobId||"");
     if(!jobId)throw Error("Schnelltest-Auftrag konnte nicht angelegt werden.");
     let state=first;
-    const deadline=Date.now()+180000;
+    const deadline=Date.now()+45000;
     while(serial===learningPreviewRequestSerial&&Date.now()<deadline){
       if(state.state==="ready"||state.state==="error")break;
       if(status){
@@ -1612,7 +1730,7 @@ async function previewLearning(options={}){
     }
     if(serial!==learningPreviewRequestSerial)return;
     if(state.state==="error")throw Error(state.error||"Schnelltest fehlgeschlagen.");
-    if(state.state!=="ready")throw Error("Schnelltest hat das Zeitlimit überschritten. Die laufende Produktion wurde nicht beschädigt.");
+    if(state.state!=="ready")throw Error("Schnelltest war nach 45 Sekunden noch nicht bereit. Bitte Variante wechseln oder nach dem aktuellen Audio-Segment erneut testen.");
 
     const ar=await localRequest("/learning/preview-audio?id="+encodeURIComponent(jobId),{cache:"no-store"});
     if(!ar.ok){
@@ -1627,11 +1745,11 @@ async function previewLearning(options={}){
     const p=$("#learnPlayer");
     p.src=learningPreviewUrl;p.hidden=false;
     $("#learnConfirmBtn").disabled=false;
-    $("#learnResetVariantBtn").textContent="Variante "+(learningVariant+1);
+    updateLearningVariantChoices();
     const ms=Number(ar.headers.get("X-Learning-Preview-Ms")||state.elapsedMs||0);
     const mode=ar.headers.get("X-Learning-Preview-Mode")||state.previewMode||"qa-fast-render";
     try{await p.play()}catch(_){}
-    const speed=mode==="confirmed-lock"?"bestätigtes LOCKED-Audio":mode==="preview-cache"?"Schnellcache":"QA-Schnelltest";
+    const speed=mode==="confirmed-lock"?"bestätigtes LOCKED-Audio":mode==="preview-cache"?"Schnellcache":mode==="low-latency-render"?"Direkt-Schnelltest":"QA-Schnelltest";
     if(status){
       status.textContent="▶ Bereit · Variante "+(learningVariant+1)+(ms?" · "+(ms/1000).toFixed(1)+" s":"")+" · "+speed;
       status.className="learning-preview-status good";
@@ -2418,8 +2536,9 @@ $("#learnSelectionBtn").onclick=takeTextSelection;
 $("#manualSelectionBtn").onclick=takeTextSelection;
 $("#learnSearchBtn").onclick=()=>{learningVariant=0;$("#learnResetVariantBtn").textContent="Variante 1";searchLearning()};
 $("#learnPreviewBtn").onclick=()=>previewLearning();
+document.querySelectorAll("[data-learning-variant]").forEach(btn=>btn.addEventListener("click",()=>chooseLearningVariant(btn.dataset.learningVariant)));
 $("#learnVariantBtn").onclick=()=>previewLearning({nextVariant:true});
-$("#learnResetVariantBtn").onclick=()=>{learningVariant=0;$("#learnResetVariantBtn").textContent="Variante 1";previewLearning()};
+$("#learnResetVariantBtn").onclick=()=>{learningVariant=0;updateLearningVariantChoices();previewLearning()};
 $("#learnConfirmBtn").onclick=confirmLearning;
 $("#learnSyncBtn").onclick=syncLearning;
 $("#learnTerm").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();searchLearning()}});
