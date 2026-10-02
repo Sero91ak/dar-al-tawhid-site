@@ -47,7 +47,7 @@
     },
     "tadabbur": {
       "status": "active",
-      "target": "tvOS-only",
+      "target": "shared-tvOS-iOS-iPadOS-web",
       "rootPath": "quran/tadabbur",
       "catalogPath": "quran/tadabbur/catalog.json",
       "schemaPath": "quran/tadabbur/schema.json",
@@ -56,7 +56,9 @@
       "coveragePath": "quran/tadabbur/coverage.json",
       "remoteLoad": true,
       "offlineCache": true,
-      "fallbackRequired": true
+      "fallbackRequired": true,
+      "webAssetPath": "/assets/quran-tadabbur-shared.js",
+      "sharedCanonicalSource": true
     }
   },
   "modules": [

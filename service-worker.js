@@ -55,6 +55,7 @@ const APP_SHELL = [
   '/content/duas/duas.json',
   '/content/quran/surahs.json',
   '/content/quran-athar/de/001.json',
+  '/assets/quran-tadabbur-shared.js',
   '/assets/site-analytics.js'
 ];
 
