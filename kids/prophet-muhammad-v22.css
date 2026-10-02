@@ -1993,3 +1993,16 @@
   #view-stories.ps-stories-home .page-head h2{font-size:33px!important}
   #view-stories.ps-stories-home .page-head p{font-size:10.2px!important}
 }
+
+
+/* REFERENCE_VERTICAL_RHYTHM_V40
+   Match the approved mobile screenshot gaps between the hero, feature cards and story card. */
+@media(max-width:600px){
+  #view-stories.ps-stories-home .page-head{margin-bottom:0!important}
+  #view-stories.ps-stories-home .ps-muhammad-home{margin-top:0!important}
+  #view-stories.ps-stories-home .ps-prophet-entry{margin-bottom:3px!important}
+  #view-stories.ps-stories-home .story-feature{
+    margin-top:3px!important;
+    margin-bottom:12px!important;
+  }
+}
