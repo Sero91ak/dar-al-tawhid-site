@@ -6726,6 +6726,19 @@
         ".github/workflows/voice-studio-v2-validate.yml"
       ],
       "expiresAt": "2027-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-library-redesign-v1-2026-10-02",
+      "approvedBy": "user-explicit-dar-test-app-umbau-mit-einwort-rollback",
+      "reason": "Nutzer beauftragt ausdrücklich den kompletten visuellen Umbau nur der DAR Test/Staging-App: kompakter Markenheader mit Original-Logo, Bibliotheks-/Hero-Struktur für Start, Quiz, Qurʾān und Mehr, theme-kompatible Farben, vorhandene Tab-Leiste unverändert. Einwort-Rollback 'zurücksetzen' wurde verlangt.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/assets/dar-library-redesign-v1.css",
+        "test/assets/dar-library-redesign-v1.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
