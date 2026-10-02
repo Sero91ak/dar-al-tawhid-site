@@ -6741,6 +6741,17 @@
         ".github/workflows/deploy-test-app.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-library-redesign-2026-10-02",
+      "approvedBy": "user-explicit-dar-test-design-redesign-continue",
+      "reason": "Nutzer beauftragt den kompletten visuellen Umbau der Dar-Test-Hauptseiten Start, Quiz, Qurʾān und Mehr: Edge-to-Edge/Oversize, Bibliotheks-Hero, Original-Logo, Theme-Farben beibehalten, bestehende Bottom-Tab-Leiste unverändert. Nur Test/Staging; kein Besucher-Live.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/home-reference-authority-v1115.css",
+        "test/version.json"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
     }
   ],
   "enabled": true
