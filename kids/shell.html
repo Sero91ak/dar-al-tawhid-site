@@ -2637,7 +2637,8 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/assets/kids-open-v95.css?v=95">
 
 
-<link rel="stylesheet" href="/kids/prophet-stories.css?v=19">
+<link rel="stylesheet" href="/kids/prophet-stories.css?v=21">
+<link rel="stylesheet" href="/kids/prophet-muhammad-v22.css?v=34">
 </head>
 <body>
 <div class="kids-open" id="kidsLaunch" data-kids-launch="v95">
@@ -2725,7 +2726,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.05</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.06</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3204,7 +3205,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab105";
+const KIDS_BUILD_ID="kids-shell-v12-tab106";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6649,7 +6650,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=105",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=121",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
@@ -6748,5 +6749,5 @@ html.kids-ios-app,html.dar-ios-native-app.kids-ios-app,html.kids-ios-app body{
 }
 html.kids-ios-app .kids-update-layer{display:none!important}
 </style>
-<script src="/kids/prophet-stories.js?v=19"></script>
+<script src="/kids/prophet-stories.js?v=33"></script>
 </html>
