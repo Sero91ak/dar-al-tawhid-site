@@ -1,14 +1,14 @@
 /* DĀR AL TAWḤĪD Kids — approved stories reference finishing layer v31 */
 #view-stories.ps-stories-home .story-row[data-story="water"] .story-thumb{
-  background-image:url("/kids/assets/story-wow/v30-story-water.jpg?v=31")!important;
+  background-image:url("/kids/assets/story-wow/v32-story-water.jpg?v=33")!important;
   background-size:cover!important;background-position:center 53%!important;background-repeat:no-repeat!important
 }
 #view-stories.ps-stories-home .story-row[data-story="helper"] .story-thumb{
-  background-image:url("/kids/assets/story-wow/v30-story-helper.jpg?v=31")!important;
+  background-image:url("/kids/assets/story-wow/v32-story-helper.jpg?v=33")!important;
   background-size:cover!important;background-position:center 54%!important;background-repeat:no-repeat!important
 }
 #view-stories.ps-stories-home .story-row[data-story="kindword"] .story-thumb{
-  background-image:url("/kids/assets/story-wow/v30-story-kindword.jpg?v=31")!important;
+  background-image:url("/kids/assets/story-wow/v32-story-kindword.jpg?v=33")!important;
   background-size:cover!important;background-position:center 52%!important;background-repeat:no-repeat!important
 }
 #view-stories.ps-stories-home .story-row .story-thumb{
@@ -39,28 +39,4 @@
   #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row-copy{
     min-height:42px!important
   }
-}
-
-
-/* REFERENCE_ORNAMENT_V32 — gold corner/edge details from the approved cards */
-#view-stories.ps-stories-home .ps-muhammad-home::after{
-  content:""!important;position:absolute!important;z-index:3!important;top:-1px!important;right:-1px!important;
-  width:78px!important;height:78px!important;pointer-events:none!important;opacity:.92!important;
-  background:
-    radial-gradient(circle at 100% 0,transparent 0 43px,rgba(247,208,104,.72) 44px 45px,transparent 46px),
-    linear-gradient(135deg,transparent 0 52%,rgba(247,208,104,.40) 52.5% 53.5%,transparent 54%)!important;
-  filter:drop-shadow(0 0 7px rgba(244,196,72,.18))!important
-}
-#view-stories.ps-stories-home .ps-muhammad-home::before{
-  content:""!important;position:absolute!important;z-index:4!important;top:11px!important;right:11px!important;
-  width:28px!important;height:28px!important;border-top:1px solid rgba(247,208,104,.60)!important;border-right:1px solid rgba(247,208,104,.60)!important;
-  border-radius:0 13px 0 0!important;pointer-events:none!important
-}
-#view-stories.ps-stories-home .ps-prophet-entry::after{
-  content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;border-radius:inherit!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 0 22px rgba(48,171,210,.05)!important
-}
-#view-stories.ps-stories-home .story-feature::after{
-  content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;border-radius:inherit!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),inset 0 0 22px rgba(43,162,199,.05)!important
 }
