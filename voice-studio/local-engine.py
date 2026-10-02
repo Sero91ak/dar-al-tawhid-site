@@ -594,6 +594,8 @@ MODEL=None
 MODEL_DEVICE=None
 MODEL_LOCK=threading.Lock()
 RENDER_LOCK=threading.Lock()
+MANUAL_RENDER_WAITING=threading.Event()
+LEARNING_PREVIEW_WAITING=threading.Event()
 STATUS_LOCK=threading.Lock()
 MODEL_ACTIVE_REFERENCE=None
 MODEL_REFERENCE_PREPARES=0
@@ -1168,42 +1170,46 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
         # Low-latency: nur das einzelne Wort / die kurze Phrase erzeugen.
         # Der MLX-Worker bleibt warm; seine Request-Sperre serialisiert diesen
         # Mini-Render mit dem laufenden Story-Segment, ohne den Batch abzubrechen.
-        model=load_production_model()
-        sample_rate=int(model.sr)
-        import torch
-        seed=3000+(int(preview_id[:8],16)%800000)+variant*977
-        torch.manual_seed(seed)
-        last_error=None
-        wav=None
-        metrics=None
-        for attempt in range(2):
-            try:
-                wav=render_with_model(model,effective_tts,requested,mode)
-                wav=trim_segment_edges(
-                    wav,sample_rate,
-                    aggressive=True,
-                    inline=(requested=="ar" and is_inline_arabic_micro_term(effective_tts))
-                )
-                metrics=audio_quality_metrics(wav,sample_rate,effective_tts,requested,mode)
-                hard={
-                    "empty_audio","non_finite","near_silence","low_peak","clipping","too_short",
-                    "short_arabic_too_long","suspicious_sustained_hold",
-                    "inline_arabic_internal_hold","unexpected_internal_hold","excessive_internal_pause"
-                }
-                blocking=[x for x in (metrics.get("issues") or []) if x in hard]
-                if not blocking:
-                    break
-                last_error=", ".join(blocking)
-                wav=None
-            except Exception as e:
-                last_error=str(e)
-                wav=None
-            if attempt==0:
-                torch.manual_seed(seed+97)
-        if wav is None or metrics is None:
-            raise RuntimeError("Schnelltest verworfen: "+str(last_error or "technische Audio-QA fehlgeschlagen"))
-        save_wav(cache_path,wav,sample_rate)
-        shutil.copy2(cache_path,path)
+        LEARNING_PREVIEW_WAITING.set()
+        try:
+            model=load_production_model()
+            sample_rate=int(model.sr)
+            import torch
+            seed=3000+(int(preview_id[:8],16)%800000)+variant*977
+            torch.manual_seed(seed)
+            last_error=None
+            wav=None
+            metrics=None
+            for attempt in range(2):
+                try:
+                    wav=render_with_model(model,effective_tts,requested,mode)
+                    wav=trim_segment_edges(
+                        wav,sample_rate,
+                        aggressive=True,
+                        inline=(requested=="ar" and is_inline_arabic_micro_term(effective_tts))
+                    )
+                    metrics=audio_quality_metrics(wav,sample_rate,effective_tts,requested,mode)
+                    hard={
+                        "empty_audio","non_finite","near_silence","low_peak","clipping","too_short",
+                        "short_arabic_too_long","suspicious_sustained_hold",
+                        "inline_arabic_internal_hold","unexpected_internal_hold","excessive_internal_pause"
+                    }
+                    blocking=[x for x in (metrics.get("issues") or []) if x in hard]
+                    if not blocking:
+                        break
+                    last_error=", ".join(blocking)
+                    wav=None
+                except Exception as e:
+                    last_error=str(e)
+                    wav=None
+                if attempt==0:
+                    torch.manual_seed(seed+97)
+            if wav is None or metrics is None:
+                raise RuntimeError("Schnelltest verworfen: "+str(last_error or "technische Audio-QA fehlgeschlagen"))
+            save_wav(cache_path,wav,sample_rate)
+            shutil.copy2(cache_path,path)
+        finally:
+            LEARNING_PREVIEW_WAITING.clear()
 
     elapsed_ms=int(round((time.perf_counter()-started)*1000))
     meta={
@@ -5128,8 +5134,24 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             text,speak,lambda value: build_render_plan(value,doc_mode)
         )
 
-    if not RENDER_LOCK.acquire(blocking=False):
-        raise RuntimeError("Es läuft bereits eine Audio-Erzeugung.")
+    manual_priority=not free_mode
+    if manual_priority:
+        MANUAL_RENDER_WAITING.set()
+        set_status(message="Manuelle Audio-Erzeugung wartet sicher auf den aktuell laufenden Abschnitt …")
+        acquired=RENDER_LOCK.acquire(timeout=300.0)
+        MANUAL_RENDER_WAITING.clear()
+        if not acquired:
+            raise RuntimeError("Die manuelle Audio-Erzeugung wartet zu lange. Der aktuelle Render läuft weiter; bitte erneut versuchen.")
+    else:
+        # Autonome Langläufe geben manuellen Nutzer-Aufträgen Vorrang.
+        # So kann ein Klick auf „Erzeugen“ nach dem aktuellen Story-Job drankommen,
+        # statt mit „Es läuft bereits“ abzubrechen.
+        deadline=time.time()+300.0
+        while MANUAL_RENDER_WAITING.is_set() and time.time()<deadline:
+            time.sleep(0.08)
+        acquired=RENDER_LOCK.acquire(timeout=max(1.0,deadline-time.time()))
+        if not acquired:
+            raise RuntimeError("Audio-Warteschlange ist ausgelastet.")
 
     if not free_mode:
         # Nur der Produktionsbereich verwaltet neue bestätigbare Audio-Locks.
@@ -5243,6 +5265,11 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         execution_order=list(range(total))
 
         for processed_pos,original_idx in enumerate(execution_order,1):
+            if strict_prophet_story and LEARNING_PREVIEW_WAITING.is_set():
+                set_status(message="Aussprache-Schnelltest hat Vorrang · Story wartet zwischen zwei sicheren Segmenten …")
+                preview_deadline=time.time()+75.0
+                while LEARNING_PREVIEW_WAITING.is_set() and time.time()<preview_deadline:
+                    time.sleep(0.05)
             restore_primary_after_segment=False
             lang,chunk=plan[original_idx]
             idx=original_idx+1
