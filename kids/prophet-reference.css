@@ -76,7 +76,7 @@ button{font:inherit;color:inherit}
   grid-template-columns:1fr;
   gap:6px;
   width:100%;
-  padding:6px max(6px,env(safe-area-inset-right)) 12px max(6px,env(safe-area-inset-left));
+  padding:4px 0 12px;
 }
 .story{
   position:relative;
@@ -84,8 +84,11 @@ button{font:inherit;color:inherit}
   height:clamp(168px,42.85vw,360px);
   overflow:hidden;
   padding:0;
-  border:1px solid rgba(72,178,224,.31);
-  border-radius:22px;
+  border-top:1px solid rgba(72,178,224,.31);
+  border-bottom:1px solid rgba(72,178,224,.31);
+  border-left:0;
+  border-right:0;
+  border-radius:0;
   background:#041b2c;
   box-shadow:0 10px 26px rgba(0,0,0,.27);
   text-align:left;
@@ -103,7 +106,8 @@ button{font:inherit;color:inherit}
   object-position:center center;
   display:block;
   filter:saturate(1.02) contrast(1.015);
-  transform:scale(1.001);
+  transform:translateZ(0);
+  image-rendering:auto;
 }
 .story::before{
   content:"";
@@ -329,7 +333,7 @@ button{font:inherit;color:inherit}
 .reading-card p+p{padding-top:15px;border-top:1px solid rgba(83,178,220,.15)}
 
 @media(max-width:390px){
-  .story-copy{left:49%;right:48px}
+  .story-copy{left:50%;right:48px}
   .story h2{font-size:27px}
   .story .arabic{font-size:17px}
   .hero-copy{width:51%}
@@ -338,8 +342,12 @@ button{font:inherit;color:inherit}
   .modebar{gap:10px;padding:9px max(14px,env(safe-area-inset-right)) 10px max(14px,env(safe-area-inset-left))}
   .mode{height:50px;font-size:16px}
   .mode-icon{width:20px;height:20px}
-  .story-list{gap:8px;padding:8px max(10px,env(safe-area-inset-right)) 14px max(10px,env(safe-area-inset-left))}
-  .story{height:clamp(300px,42.85vw,360px);border-radius:25px}
+  .story-list{gap:8px;padding:8px 12px 14px}
+  .story{
+    height:clamp(300px,42.85vw,360px);
+    border:1px solid rgba(72,178,224,.31);
+    border-radius:25px
+  }
   .story-copy{left:53%;right:78px}
   .eyebrow{font-size:10px}
   .story h2{font-size:40px}
@@ -373,7 +381,7 @@ button{font:inherit;color:inherit}
   .reading-card{margin-left:18px;margin-right:18px;font-size:21px}
 }
 
-/* V9 full-bleed production calibration */
+/* V11 full-bleed production calibration */
 .detail-hero[data-id="nuh"] .detail-art{object-position:center center}
 @media(max-width:699px){
   .hero-copy{top:64px;width:49%;max-width:none}
@@ -392,5 +400,5 @@ button{font:inherit;color:inherit}
   .hero-pills span{height:34px;font-size:clamp(7.5px,2vw,10px);gap:3px}
 }
 
-/* v9: dedicated Nūḥ hero framing */
+/* V11: dedicated Nūḥ hero framing */
 .detail-hero[data-id="nuh"] .detail-art{object-position:center center}
