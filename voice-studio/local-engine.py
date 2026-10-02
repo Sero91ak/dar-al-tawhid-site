@@ -5993,17 +5993,54 @@ def build_prophet_story_voice_pack(resume:bool=False):
         )
 
         pending=[]
+        review_pending=[]
+        # Strenger Vorab-Gate über alle noch offenen Geschichten. Dadurch weiß
+        # der Nutzer sofort, welche Fuṣḥā-/Ausspracheformen noch bestätigt werden
+        # müssen, und keine unsichere Geschichte beginnt überhaupt mit TTS.
         for job_idx,(item,group_ages,txt) in enumerate(grouped,1):
             key=_prophet_job_key(item,group_ages,txt)
             item_id=str(item.get("id"))
             if key in completed_jobs and all(asset_ok(item_id,a) for a in group_ages):
                 continue
+            strict=_prophet_strict_pronunciation_preflight(txt)
+            if not strict.get("ok"):
+                review_items=list(strict.get("items") or [])
+                detail="Ausspracheprüfung erforderlich: "+", ".join(
+                    str(x.get("term") or x.get("tts") or "") for x in review_items[:8]
+                )
+                failed_jobs[key]={
+                    "itemId":item_id,
+                    "name":str(item.get("name") or item_id),
+                    "ages":list(group_ages),
+                    "round":0,
+                    "attempt":0,
+                    "type":"pronunciation-review",
+                    "review":review_items,
+                    "error":detail,
+                }
+                _prophet_review_upsert(
+                    item_id,str(item.get("name") or item_id),
+                    group_ages,txt,review_items
+                )
+                review_pending.append((job_idx,key,item,group_ages,txt))
+                continue
             pending.append((job_idx,key,item,group_ages,txt))
+
+        persist(
+            "preflight",
+            f"{len(pending)} sichere Geschichten · {len(review_pending)} warten auf Ausspracheprüfung"
+        )
+        _set_prophet_batch_state(
+            phase="rendering",
+            progress=2+int(len(completed_jobs)/max(1,total_jobs)*91),
+            completed=len(completed_jobs),total=total_jobs,
+            current=f"Fuṣḥā-Vorprüfung: {len(pending)} sicher · {len(review_pending)} zurückgestellt",
+            error=""
+        )
 
         # Drei Produktionsrunden: Ein schwieriger Abschnitt blockiert niemals
         # alle anderen Geschichten. Nach einem lokalen Fehler kommt der nächste Job.
         max_rounds=3
-        review_pending=[]
         for round_idx in range(1,max_rounds+1):
             if not pending:
                 break
