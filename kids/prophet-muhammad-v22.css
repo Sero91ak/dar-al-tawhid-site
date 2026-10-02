@@ -1942,3 +1942,54 @@
 .ps-mh-value-trust{--value-bg:linear-gradient(145deg,#5a7c2d,#315622)!important}
 .ps-mh-value b,.ps-mh-value strong{position:relative!important;z-index:1!important}
 .ps-mh-value b{filter:drop-shadow(0 2px 4px rgba(0,0,0,.18))!important}
+
+
+/* REFERENCE_HEADER_BALANCE_V39
+   Final mobile top-hero proportion against the approved Geschichten reference. */
+@media(max-width:600px){
+  #view-stories.ps-stories-home .page-head{
+    height:33.6vw!important;
+    min-height:132px!important;
+    max-height:148px!important;
+    margin:-4px -16px 7px!important;
+    padding:11px 24px 11px!important;
+    justify-content:center!important;
+  }
+  #view-stories.ps-stories-home .page-head .kicker{
+    min-height:22px!important;
+    padding:0 10px!important;
+    gap:7px!important;
+    font-size:8.2px!important;
+  }
+  #view-stories.ps-stories-home .page-head h2{
+    margin-top:7px!important;
+    font-size:35px!important;
+    line-height:.9!important;
+  }
+  #view-stories.ps-stories-home .page-head h2::after{
+    top:calc(100% + 8px)!important;
+    right:-14%!important;
+  }
+  #view-stories.ps-stories-home .page-head p{
+    max-width:82%!important;
+    margin-top:19px!important;
+    font-size:10.7px!important;
+    line-height:1.22!important;
+  }
+  #view-stories.ps-stories-home .page-head::after{
+    left:5.5%!important;
+    right:5.5%!important;
+    bottom:4px!important;
+  }
+}
+
+/* keep the title stack visually compact on the narrowest iPhones */
+@media(max-width:380px){
+  #view-stories.ps-stories-home .page-head{
+    min-height:126px!important;
+    padding-left:20px!important;
+    padding-right:20px!important;
+  }
+  #view-stories.ps-stories-home .page-head h2{font-size:33px!important}
+  #view-stories.ps-stories-home .page-head p{font-size:10.2px!important}
+}
