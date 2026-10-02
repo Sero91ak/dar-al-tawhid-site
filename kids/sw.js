@@ -35,7 +35,7 @@ const PRECACHE=[
   "/kids/assets/story-wow/v22-prophet-library.jpg",
   "/kids/assets/story-wow/v22-coin-story.jpg",
   "/kids/assets/story-wow/v29-muhammad-birth.jpg",
-  "/kids/stories-reference-v31.css?v=37",
+  "/kids/stories-reference-v31.css?v=38",
   "/kids/assets/story-wow/v29-muhammad-home.jpg",
   "/kids/assets/story-wow/v30-muhammad-home.jpg",
   "/kids/assets/story-wow/v30-muhammad-birth.jpg",
