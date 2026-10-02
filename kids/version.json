@@ -1,10 +1,10 @@
 {
-  "buildId": "kids-shell-v12-tab121",
-  "label": "KIDS · V1.07",
-  "releasedAt": "2026-10-02T11:30:00.000Z",
-  "note": "V1.07: Geschichten-Startseite und der besondere Muḥammad-ﷺ-Bereich wurden anhand der bestätigten Referenzbilder weiter pixelgenau verfeinert: präzisere Ornament-Rosette, Goldlinien, Kartenkanten, Medaillons, Dock-Aktivzustände und sichere mobile Abstände; Bildwelten und Funktionen bleiben vollständig live und offline-fähig.",
+  "buildId": "kids-shell-v12-tab122",
+  "label": "KIDS · V1.08",
+  "releasedAt": "2026-10-02T15:20:00.000Z",
+  "note": "V1.08: Der Rollback-Stil der unteren Tab-Leiste wurde entfernt. Die Stories-Navigation entspricht wieder der bestätigten Referenz: kompakter Vollbreiten-Dock, sichtbare Gold-Icons, korrekte aktive Geschichten-Fläche und sichere iOS-Abstände.",
   "visualSystem": {
-    "prophetStories": "approved-reference-match-v47",
+    "prophetStories": "approved-reference-match-v35",
     "storiesHomeAsCategoryHub": true,
     "prophetLibraryOwnPage": true,
     "prophetLibraryLargeHeader": false,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v128",
+    "serviceWorkerCache": "v122",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -37,21 +37,21 @@
     "muhammadValuesForChildren": true,
     "muhammadEpisodeRail": true,
     "noArrowOverHeroArt": true,
-    "bottomNavigationChanged": false,
+    "bottomNavigationChanged": true,
     "approvedMockupMatch": true,
     "adobeFireflyHero": true,
     "runwayLowCreditStoryScenes": true,
-    "storyAssetVersion": 36,
+    "storyAssetVersion": 35,
     "muhammadHomeDedicatedArt": "/kids/assets/story-wow/v30-muhammad-home.jpg",
     "muhammadBirthDedicatedArt": "/kids/assets/story-wow/v30-muhammad-birth.jpg",
     "pixelGeometryReference": "864x1536",
     "dockReferenceIcons": true,
     "offlineVersionedAssetMatching": true,
-    "referenceFinishingLayer": 47,
+    "referenceFinishingLayer": 35,
     "referenceCacheCoherent": true,
     "referenceCssNetworkFirst": true,
-    "headerPrecisionLayer": 40,
-    "referenceLinework": "v47"
+    "headerPrecisionLayer": 35,
+    "referenceLinework": "v35"
   },
-  "updatedAt": "2026-10-02T13:29:00.000Z"
+  "updatedAt": "2026-10-02T15:20:00.000Z"
 }
