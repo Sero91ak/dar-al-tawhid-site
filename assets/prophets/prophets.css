@@ -305,10 +305,14 @@ html[data-layout="expanded"] .prophets-rail__back-mobile{
 .prophets-row:active{
   background:radial-gradient(ellipse 96% 86% at 38% 50%,var(--p-wash-strong),transparent 74%);
 }
+.prophets-row__icon img.dar3d-icon,.prophets-detail__emoji img.dar3d-icon{
+  width:100%;height:100%;min-width:0;min-height:0;max-width:100%;max-height:100%;
+  object-fit:cover;object-position:center center;border-radius:50%;display:block;mix-blend-mode:normal;
+}
 .prophets-row__icon{
-  width:38px;height:38px;border-radius:50%;flex:0 0 38px;display:grid;place-items:center;
-  background:radial-gradient(circle at 30% 22%,color-mix(in srgb,var(--gold2) 18%,transparent),transparent 68%);
-  border:1px solid color-mix(in srgb,var(--gold2) 22%,transparent);font-size:17px;line-height:1;box-shadow:none;
+  width:46px;height:46px;border-radius:50%;flex:0 0 46px;display:grid;place-items:center;overflow:hidden;
+  background:radial-gradient(circle at 50% 42%,#4a3034 0%,#2a161c 70%,#1a1014 100%);
+  border:1px solid color-mix(in srgb,var(--gold2) 28%,transparent);font-size:0;line-height:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);
 }
 .prophets-row__body{min-width:0;display:flex;flex-direction:column;gap:2px}
 .prophets-row__titleline{display:flex;align-items:baseline;gap:8px;min-width:0;flex-wrap:wrap}
@@ -604,7 +608,7 @@ body.is-propheten-route .prophets-root{padding-bottom:10px}
   .prophets-stat{padding:8px 6px}
   .prophets-stat b{font-size:1.05rem}
   .prophets-row{padding:11px 10px 11px 8px;gap:10px}
-  .prophets-row__icon{width:36px;height:36px;flex-basis:36px;font-size:16px;border-radius:12px}
+  .prophets-row__icon{width:46px;height:46px;flex-basis:46px;border-radius:50%}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -703,10 +707,10 @@ body.is-propheten-route #appView > .view-head .view-desc{display:none!important}
 
 
 .prophets-detail__emoji{
-  display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;
-  border:1px solid color-mix(in srgb,var(--gold2) 22%,transparent);
-  background:radial-gradient(circle at 30% 22%,color-mix(in srgb,var(--gold2) 16%,transparent),transparent 68%);
-  font-size:18px;line-height:1;flex:0 0 40px;
+  display:inline-grid;place-items:center;width:72px;height:72px;border-radius:50%;overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--gold2) 28%,transparent);
+  background:radial-gradient(circle at 50% 42%,#4a3034 0%,#2a161c 70%,#1a1014 100%);
+  font-size:0;line-height:0;flex:0 0 72px;
 }
 .prophets-detail__head-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
 .prophets-detail__name{flex:1 1 auto;min-width:0}

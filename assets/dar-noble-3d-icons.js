@@ -2,7 +2,7 @@
 (function(){
   if(window.__darNoble3dBoot)return;
   window.__darNoble3dBoot=true;
-  const VER="1111";
+  const VER="1094";
   const FILES=["audio.png","bell.png","calendar.png","compass.png","dua.png","frauen.png","hadith.png","headphones.png","heart.png","home.png","ilm.png","image.png","jummah.png","library.png","lock.png","more.png","mosque.png","news.png","play.png","posts.png","prayer.png","prophets.png","qibla.png","quiz.png","quran.png","ramadan.png","saved.png","scale.png","scholars.png","settings.png","shield.png","spark.png","topics.png","wasiyyah.png","widgets.png","zakat.png"];
   const BASE=(function(){
     try{
@@ -120,7 +120,12 @@
   function fileFromKind(kind,hint){
     const k=String(kind||"").toLowerCase();
     const h=String(hint||"");
-    if(k==="prophet"||k==="propheten")return "prophets.png";
+    if(k==="prophet"||k==="propheten"){
+      const id=h.toLowerCase().replace(/[^a-z0-9-]/g,"");
+      const story={adam:1,idris:1,nuh:1,hud:1,salih:1,ibrahim:1,lut:1,ismail:1,ishaq:1,yaqub:1,yusuf:1,ayyub:1,shuayb:1,musa:1,harun:1,dawud:1,sulayman:1,ilyas:1,alyasa:1,yunus:1,zakariyya:1,yahya:1,isa:1,"dhul-kifl":1,muhammad:1,"yusha-ibn-nun":1,"al-khidr":1,luqman:1,"dhul-qarnayn":1,uzayr:1};
+      if(story[id])return "prophets/"+id+".png";
+      return "prophets.png";
+    }
     if(k==="scholar"||k==="scholars")return fileFromScholarGroup(h);
     if(k==="topic"||k==="post"||k==="series")return fileFromTopic(h)||topicFallback(h);
     if(k==="dua"||k==="duas"||k==="dua-cat")return fileFromTopic(h)||"dua.png";
