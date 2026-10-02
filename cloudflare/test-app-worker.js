@@ -159,17 +159,34 @@ async function gradeKidsRecitation(request, env) {
 }
 
 
-const DAR_TEST_HOME_STYLE_V1183 = "/test/assets/dar-home-knowledge-library-v1183.css";
-const DAR_TEST_HOME_SCRIPT_V1183 = "/test/assets/dar-home-knowledge-library-v1183.js";
+const DAR_TEST_HOME_AUTHORITY_V1191 = "/test/assets/dar-home-visual-authority-v1191.css?v=1191";
 
-async function injectDarTestHomeV1183(asset) {
+async function finalizeDarTestHomeV1191(asset) {
   const type = String(asset && asset.headers && asset.headers.get("content-type") || "");
   if (!asset || !asset.ok || !type.includes("text/html")) return asset;
   let html = await asset.text();
-  const cssTag = '<link rel="stylesheet" href="' + DAR_TEST_HOME_STYLE_V1183 + '">';
-  const jsTag = '<script defer src="' + DAR_TEST_HOME_SCRIPT_V1183 + '"><\/script>';
-  if (!html.includes(DAR_TEST_HOME_STYLE_V1183)) html = html.replace("</head>", cssTag + "\n</head>");
-  if (!html.includes(DAR_TEST_HOME_SCRIPT_V1183)) html = html.replace("</body>", jsTag + "\n</body>");
+
+  // Remove the obsolete floating test refresh bar.
+  html = html.replace(
+    /<style id="test-refresh-bar-v1160">[\s\S]*?<\/style>\s*<script>\s*\(function\(\)\{[\s\S]*?darTestRefreshBar[\s\S]*?<\/script>\s*/m,
+    ""
+  );
+
+  // Remove the old v1183/v1189 inline layer that was rebuilding the white-card UI after v1190.
+  html = html.replace(
+    /<style id="darHomeKnowledgeV1189Inline">[\s\S]*?<\/style>\s*<script id="darHomeKnowledgeV1189Inline">[\s\S]*?<\/script>\s*/m,
+    ""
+  );
+
+  // Never inject or retain the old v1183 external layer.
+  html = html.replace(/<link[^>]+dar-home-knowledge-library-v1183\.css[^>]*>\s*/g, "");
+  html = html.replace(/<script[^>]+dar-home-knowledge-library-v1183\.js[^>]*><\/script>\s*/g, "");
+
+  const authority = '<link rel="stylesheet" id="darHomeVisualAuthorityV1191" href="' + DAR_TEST_HOME_AUTHORITY_V1191 + '">';
+  if (!html.includes("darHomeVisualAuthorityV1191")) {
+    html = html.replace("</html>", authority + "\n</html>");
+  }
+
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
@@ -226,7 +243,7 @@ export default {
     const kidsPath = path === "/test/kids" || path.startsWith("/test/kids/");
     if (kidsPath) return asset;
     if (request.method === "GET" && (path === "/test" || path === "/test/" || path === "/test/index.html")) {
-      return injectDarTestHomeV1183(asset);
+      return finalizeDarTestHomeV1191(asset);
     }
     const bust = /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
