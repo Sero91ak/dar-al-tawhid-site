@@ -1,3 +1,4 @@
+/* Voice Studio 2.9.61 · page-focused navigation */
 (() => {
 "use strict";
 
@@ -91,6 +92,7 @@ function renderWorkflow(){
   });
 }
 function goToWorkflowStep(step){
+  window.setStudioPage?.("content");
   const target={
     text:q("text"),
     audio:q("playerWrap")||q("generate"),
@@ -99,8 +101,7 @@ function goToWorkflowStep(step){
     live:q("csPublishLive")
   }[step];
   if(!target)return;
-  target.scrollIntoView?.({behavior:"smooth",block:"center"});
-  if(["TEXTAREA","INPUT","BUTTON"].includes(target.tagName))setTimeout(()=>target.focus?.({preventScroll:true}),180);
+  if(["TEXTAREA","INPUT","BUTTON"].includes(target.tagName))setTimeout(()=>target.focus?.({preventScroll:true}),60);
 }
 function focusNextProductionAction(){
   const state=qaSnapshot();
@@ -130,7 +131,7 @@ function injectStyles(){
   .content-studio-nav{position:sticky;top:72px;z-index:28;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 4px 9px;background:linear-gradient(180deg,rgba(6,19,24,.98),rgba(6,19,24,.94));border-bottom:1px solid rgba(255,255,255,.07);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
   .content-studio-nav::-webkit-scrollbar{display:none}
   .cs-nav-tabs,.cs-fast-actions{display:flex;align-items:center;gap:6px;min-width:0}
-  .cs-nav-tabs{overflow-x:auto;scrollbar-width:none}.cs-nav-tabs::-webkit-scrollbar{display:none}
+  .cs-nav-tabs{overflow-x:auto;scrollbar-width:none;flex:1}.cs-nav-tabs::-webkit-scrollbar{display:none}
   .cs-fast-actions{margin-left:auto;flex:0 0 auto}
   .cs-fast-actions .btn{min-height:34px;padding:7px 10px;border-radius:10px;font-size:10px;white-space:nowrap}
   .cs-flow{display:flex;align-items:center;gap:4px;min-width:0}
@@ -140,7 +141,7 @@ function injectStyles(){
   .cs-flow-step[data-state="blocked"]{opacity:.48}
   .cs-flow-step:focus-visible{outline:2px solid rgba(217,182,111,.55);outline-offset:1px}
   .cs-fast-actions .primary{box-shadow:none}
-  .cs-tab{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#aab9bd;border-radius:10px;padding:8px 10px;font-size:10px;font-weight:800;white-space:nowrap;cursor:pointer}
+  .cs-tab{border:1px solid var(--line);background:rgba(255,255,255,.026);color:#9fb0b4;border-radius:9px;padding:7px 9px;font-size:9px;font-weight:850;letter-spacing:.01em;white-space:nowrap;cursor:pointer}.cs-tab:hover{border-color:rgba(217,182,111,.25);color:#d6e0e1}
   .cs-tab.active{border-color:rgba(217,182,111,.42);background:rgba(217,182,111,.09);color:#f1d59a}
   .cs-meta{margin:0 0 14px;padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}
   .cs-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
@@ -185,12 +186,15 @@ function injectStyles(){
 function navHtml(){
   return `<nav class="content-studio-nav" aria-label="Studio Bereiche und Schnellaktionen">
     <div class="cs-nav-tabs">
-      <button id="csProphetTab" class="cs-tab" type="button">Kids · Propheten</button>
-      <button class="cs-tab active" data-cs-kind="story">Kids · Geschichten</button>
-      <button class="cs-tab" data-cs-kind="quiz">Kids · Quiz</button>
-      <button class="cs-tab" data-cs-kind="game">Kids · Spiele</button>
+      <button id="csProphetTab" class="cs-tab" type="button">Propheten</button>
+      <button class="cs-tab" data-cs-kind="story">Geschichten</button>
+      <button class="cs-tab" data-cs-kind="quiz">Quiz</button>
+      <button class="cs-tab" data-cs-kind="game">Spiele</button>
       <button class="cs-tab" data-cs-kind="ios">iOS · Inhalte</button>
+      <button id="csPronunciationTab" class="cs-tab" type="button">Aussprache</button>
+      <button id="csAlphabetTab" class="cs-tab" type="button">Alif–Yāʾ</button>
       <button id="csFreeVoiceTab" class="cs-tab" type="button">Freie Stimme</button>
+      <button id="csSystemTab" class="cs-tab" type="button">System</button>
     </div>
     <div class="cs-flow" aria-label="Produktionsweg">
       <button class="cs-flow-step" type="button" data-cs-step="text">Text</button>
@@ -310,27 +314,23 @@ function mount(){
   renderStatus();
   refreshQa();
   loadLibrary();
+  setTimeout(()=>window.setStudioPage?.(window.studioPage||"prophets"),0);
 }
 function bind(){
   document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>{
-    window.setStudioMode?.("production");
-    q("csProphetTab")?.classList.remove("active");
+    window.setStudioPage?.("content");
+    ["csProphetTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
     switchKind(btn.dataset.csKind);
   }));
   q("csProphetTab")?.addEventListener("click",()=>{
-    window.setStudioMode?.("production");
     switchKind("story");
     document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
-    q("csFreeVoiceTab")?.classList.remove("active");
-    q("csProphetTab").classList.add("active");
-    const box=q("prophetPick");
-    if(box){
-      box.classList.add("focus");
-      box.scrollIntoView({behavior:"smooth",block:"start"});
-      setTimeout(()=>box.classList.remove("focus"),1600);
-    }
+    window.setStudioPage?.("prophets");
   });
-  q("csFreeVoiceTab")?.addEventListener("click",()=>window.setStudioMode?.("free"));
+  q("csPronunciationTab")?.addEventListener("click",()=>window.setStudioPage?.("pronunciation"));
+  q("csAlphabetTab")?.addEventListener("click",()=>window.setStudioPage?.("alphabet"));
+  q("csFreeVoiceTab")?.addEventListener("click",()=>window.setStudioPage?.("free"));
+  q("csSystemTab")?.addEventListener("click",()=>window.setStudioPage?.("system"));
   q("csTitle")?.addEventListener("input",()=>{q("csCoverTitle").textContent=q("csTitle").value||"Neue Geschichte";persistDraft();refreshQa();renderWorkflow()});
   ["csCategory","csTopic","csProphet","csAgeMin","csAgeMax","csModeRead","csModeListen","csSources"].forEach(id=>q(id)?.addEventListener("change",()=>{persistDraft();refreshQa()}));
   q("text")?.addEventListener("input",()=>{
@@ -906,6 +906,6 @@ function refreshQa(){
 }
 function paintQa(id,ok,label){const el=q(id);if(!el)return;el.textContent=label;el.className=ok?"good":"warn"}
 
-window.DarContentStudio={mount,fields,loadLibrary,publishTest,publishLive,generateCover,produce,newCurrentItem,copyCurrentText,goToWorkflowStep,focusNextProductionAction};
+window.DarContentStudio={mount,fields,loadLibrary,publishTest,publishLive,generateCover,produce,newCurrentItem,copyCurrentText,goToWorkflowStep,focusNextProductionAction,switchKind};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
 })();
