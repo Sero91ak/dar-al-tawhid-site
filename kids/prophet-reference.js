@@ -1,24 +1,15 @@
 (() => {
 "use strict";
 
-const ORDER=["adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub","yusuf","ayyub","shuayb","musa","harun"];
-const ART={
-  adam:{card:"/kids/assets/prophets-v2/adam-card.jpg?v=11"},
-  idris:{card:"/kids/assets/prophets-v2/idris-card.jpg?v=11"},
-  nuh:{card:"/kids/assets/prophets-v2/nuh-card.jpg?v=11",hero:"/kids/assets/prophets-v2/nuh-hero.jpg?v=11"},
-  hud:{card:"/kids/assets/prophets-v2/hud-card.jpg?v=11"},
-  salih:{card:"/kids/assets/prophets-v2/salih-card.jpg?v=11"},
-  ibrahim:{card:"/kids/assets/prophets-v2/ibrahim-card.jpg?v=11"},
-  lut:{card:"/kids/assets/prophets-v2/lut-card.jpg?v=11"},
-  ismail:{card:"/kids/assets/prophets-v2/ismail-card.jpg?v=11"},
-  ishaq:{card:"/kids/assets/prophets-v2/ishaq-card.jpg?v=11"},
-  yaqub:{card:"/kids/assets/prophets-v2/yaqub-card.jpg?v=11"},
-  yusuf:{card:"/kids/assets/prophets-v2/yusuf-card.jpg?v=11"},
-  ayyub:{card:"/kids/assets/prophets-v2/ayyub-card.jpg?v=11"},
-  shuayb:{card:"/kids/assets/prophets-v2/shuayb-card.jpg?v=11"},
-  musa:{card:"/kids/assets/prophets-v2/musa-card.jpg?v=11"},
-  harun:{card:"/kids/assets/prophets-v2/harun-card.jpg?v=11"}
-};
+const ORDER=[
+  "adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub",
+  "yusuf","ayyub","shuayb","musa","harun","dhul-kifl","dawud","sulayman",
+  "ilyas","alyasa","yunus","zakariyya","yahya","isa","muhammad"
+];
+
+const cardFor=id=>"/kids/assets/prophets-v2/"+id+"-card.jpg?v=11";
+const ART=Object.fromEntries(ORDER.map(id=>[id,{card:cardFor(id)}]));
+ART.nuh.hero="/kids/assets/prophets-v2/nuh-hero.jpg?v=11";
 
 let items=[],mode="read";
 const $=(s,r=document)=>r.querySelector(s);
@@ -30,8 +21,13 @@ function minutes(item){
   const text=String(item?.scripts?.["6-8"]||item?.voiceScript||"");
   return Math.max(2,Math.min(9,Math.ceil((text.match(/\S+/g)||[]).length/105)));
 }
+function honorific(item){
+  if(item.id==="muhammad") return "ﷺ";
+  if(item.disputed) return "";
+  return "عليه السلام";
+}
 function ar(item){
-  return [item.nameAr||"","عليه السلام"].filter(Boolean).join(" ");
+  return [item.nameAr||"",honorific(item)].filter(Boolean).join(" ");
 }
 function sorted(list){
   const map=new Map((Array.isArray(list)?list:[]).map(x=>[x.id,x]));
@@ -40,12 +36,13 @@ function sorted(list){
 function render(){
   $("#storyList").innerHTML=items.map((item,index)=>{
     const src=ART[item.id]?.card||"";
-    const eager=index<2?' loading="eager" fetchpriority="high"':' loading="lazy"';
+    const eager=index<3?' loading="eager" fetchpriority="high"':' loading="lazy"';
+    const label=item.disputed?"ÜBERLIEFERUNG GEPRÜFT":(item.id==="adam"?"UNSER ERSTER PROPHET":"UNSER PROPHET");
     return '<button class="story" type="button" data-id="'+esc(item.id)+'">'+
       '<img class="story-art" src="'+esc(src)+'" alt="" decoding="async"'+eager+'>'+
       '<span class="story-copy">'+
-        '<span class="eyebrow">'+(item.id==="adam"?"UNSER ERSTER PROPHET":"UNSER PROPHET")+'</span>'+
-        '<h2>'+esc(item.name)+'</h2>'+
+        '<span class="eyebrow">'+label+'</span>'+
+        '<h2>'+esc(item.name)+(item.id==="muhammad"?" ﷺ":"")+'</h2>'+
         '<span class="arabic" dir="rtl">'+esc(ar(item))+'</span>'+
         '<span class="story-time">◷ &nbsp;ca. '+minutes(item)+' Min.</span>'+
       '</span>'+
@@ -62,16 +59,17 @@ function openDetail(id){
   const item=items.find(x=>x.id===id);
   if(!item)return;
   const art=ART[id]||{};
-  $("#detailHero").dataset.id=id;
+  const hero=$("#detailHero");
+  hero.dataset.id=id;
   $("#detailArt").src=art.hero||art.card||"";
   $("#detailArt").alt="";
-  $("#detailEyebrow").textContent=id==="adam"?"UNSER ERSTER PROPHET":"UNSER PROPHET";
-  $("#detailTitle").textContent=item.name;
+  $("#detailEyebrow").textContent=item.disputed?"ÜBERLIEFERUNG GEPRÜFT":(id==="adam"?"UNSER ERSTER PROPHET":"UNSER PROPHET");
+  $("#detailTitle").textContent=item.name+(id==="muhammad"?" ﷺ":"");
   $("#detailArabic").textContent=ar(item);
   $("#detailSummary").textContent=item.summary||"";
   $("#detailMinutes").textContent="ca. "+minutes(item)+" Min.";
   const raw=storyText(item);
-  $("#readingCard").innerHTML="<h2>Die Geschichte von "+esc(item.name)+"</h2>"+
+  $("#readingCard").innerHTML="<h2>Die Geschichte von "+esc(item.name)+(id==="muhammad"?" ﷺ":"")+"</h2>"+
     raw.split(/\n{2,}/).filter(Boolean).map(p=>"<p>"+esc(p)+"</p>").join("");
   $("#listView").hidden=true;
   $("#detailView").hidden=false;
@@ -96,9 +94,13 @@ $("#backBtn").addEventListener("click",closeDetail);
 
 fetch("/kids/data/prophet-stories.json?v=11",{cache:"no-store"})
   .then(r=>{if(!r.ok)throw new Error("data "+r.status);return r.json()})
-  .then(data=>{items=sorted(data.items);render();setMode("read")})
+  .then(data=>{
+    items=sorted(data.items);
+    render();
+    setMode("read");
+  })
   .catch(err=>{
     $("#storyList").innerHTML='<div style="padding:24px">Daten konnten nicht geladen werden.</div>';
-    console.warn(err);
+    console.warn("[Prophet reference]",err);
   });
 })();
