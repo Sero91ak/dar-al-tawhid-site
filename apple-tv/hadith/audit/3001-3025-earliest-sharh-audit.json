@@ -1,0 +1,159 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-3001-3025",
+  "series": "2951-3050",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "Der 25er-Unterblock HAD-3001–3025 wurde am tatsächlichen offenen Branch-Ende unter Regel v6 aufgebaut. Er setzt Ṣaḥīḥ Muslim 2852–2864 fort; Muslim 2858 wurde bewusst ausgelassen, weil dieselbe Aussage bereits als HAD-0222 vorhanden ist. Zusätzlich wurden zentrale Formulierungen auf inhaltliche Alt-Dubletten geprüft. Die Priorität al-Māzirī → Qāḍī ʿIyāḍ wurde pro Datensatz geprüft. Wo keine belastbar greifbare frühere clause-spezifische Erklärung gesichert wurde, wird dies dokumentiert und ein direkter klassischer Kommentar von Abū al-ʿAbbās al-Qurṭubī beziehungsweise bei HAD-3008 an-Nawawī verwendet. Unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "semanticDuplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "appleTvScreensaverShowsSharh": true,
+    "perRecordImmediateActivation": true,
+    "blockActivationAllowed": true
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibraryBehindGate",
+    "iosHadithLibraryBehindGate",
+    "androidWebAppAndWebsiteBehindGate"
+  ],
+  "records": [
+    {
+      "id": "HAD-3001",
+      "currentSharh": "Abū al-ʿAbbās al-Qurṭubī",
+      "auditStatus": "direct-classical-after-earlier-priority-check"
+    },
+    {
+      "id": "HAD-3002",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3003",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3004",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3005",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3006",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3007",
+      "currentSharh": "Abū al-ʿAbbās al-Qurṭubī",
+      "auditStatus": "direct-classical-after-earlier-priority-check"
+    },
+    {
+      "id": "HAD-3008",
+      "currentSharh": "an-Nawawī",
+      "auditStatus": "direct-classical-after-earlier-priority-check",
+      "note": "An-Nawawī wird für die konkrete Adab-Erklärung von Muslim 2855 genutzt; frühere Prioritäten wurden geprüft, ohne dass diese clause-spezifische Erklärung ebenso sicher greifbar war."
+    },
+    {
+      "id": "HAD-3009",
+      "currentSharh": "Abū al-ʿAbbās al-Qurṭubī",
+      "auditStatus": "direct-classical-after-earlier-priority-check"
+    },
+    {
+      "id": "HAD-3010",
+      "currentSharh": "Abū al-ʿAbbās al-Qurṭubī",
+      "auditStatus": "direct-classical-after-earlier-priority-check"
+    },
+    {
+      "id": "HAD-3011",
+      "currentSharh": "Abū al-ʿAbbās al-Qurṭubī",
+      "auditStatus": "direct-classical-after-earlier-priority-check"
+    },
+    {
+      "id": "HAD-3012",
+      "currentSharh": "Abū al-ʿAbbās al-Qurṭubī",
+      "auditStatus": "direct-classical-after-earlier-priority-check"
+    },
+    {
+      "id": "HAD-3013",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3014",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3015",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3016",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3017",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check",
+      "note": "Muslim 2860b wird kontextgebunden wiedergegeben; Qāḍī ʿIyāḍs Einordnung der nach dem Propheten ﷺ Abgewichenen ist ausdrücklich berücksichtigt."
+    },
+    {
+      "id": "HAD-3018",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check",
+      "note": "Muslim 2860b wird kontextgebunden wiedergegeben; Qāḍī ʿIyāḍs Einordnung der nach dem Propheten ﷺ Abgewichenen ist ausdrücklich berücksichtigt."
+    },
+    {
+      "id": "HAD-3019",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check",
+      "note": "Muslim 2860b wird kontextgebunden wiedergegeben; Qāḍī ʿIyāḍs Einordnung der nach dem Propheten ﷺ Abgewichenen ist ausdrücklich berücksichtigt."
+    },
+    {
+      "id": "HAD-3020",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check",
+      "note": "Muslim 2860b wird kontextgebunden wiedergegeben; Qāḍī ʿIyāḍs Einordnung der nach dem Propheten ﷺ Abgewichenen ist ausdrücklich berücksichtigt."
+    },
+    {
+      "id": "HAD-3021",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3022",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3023",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3024",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    },
+    {
+      "id": "HAD-3025",
+      "currentSharh": "Qāḍī ʿIyāḍ",
+      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+    }
+  ]
+}

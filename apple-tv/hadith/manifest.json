@@ -5,7 +5,7 @@
   "formatVersion": "1.6",
   "authenticOnly": true,
   "currentSeries": "2951-3050",
-  "nextId": "HAD-3001",
+  "nextId": "HAD-3026",
   "display": {
     "narratorGap": 14,
     "sourceGap": 14,
@@ -24,7 +24,7 @@
     "showSharhSource": true,
     "requireVerifiedSharh": true,
     "activation": "per-record-immediate",
-    "readyThrough": "HAD-3000",
+    "readyThrough": "HAD-3025",
     "layoutRule": "Ḥadīṯ/Āṯar zuerst; darunter Quelle; danach kurzer geprüfter Sharḥ mit Sharḥ-Quelle, kompakt und bildschirmschonerfreundlich. Fertige Einzeldatensätze werden sofort aufgenommen."
   },
   "hadithLibrary": {
@@ -36,7 +36,7 @@
     "showSharhSource": true,
     "requireVerifiedSharh": true,
     "activation": "per-record-immediate-behind-gate",
-    "readyThrough": "HAD-3000"
+    "readyThrough": "HAD-3025"
   },
   "syncPolicy": {
     "path": "sync-policy.json",
