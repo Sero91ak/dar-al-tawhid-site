@@ -2046,3 +2046,16 @@ html[data-view="stories"]{--r41-story-safe:max(58px,env(safe-area-inset-top,0px)
   }
   html[data-view="stories"] #view-stories.ps-stories-home .page-head h2{font-size:31px!important}
 }
+
+
+/* REFERENCE_HOME_ARCH_ASSET_V42
+   Dedicated Muḥammad home artwork now carries the architectural right-edge ornament itself. */
+#view-stories.ps-stories-home .ps-mh-home-art{
+  background-image:url("/kids/assets/story-wow/v41-muhammad-home-arch.jpg?v=42")!important;
+  background-position:58% 50%!important;
+  background-size:cover!important;
+}
+#view-stories.ps-stories-home .ps-muhammad-home::before,
+#view-stories.ps-stories-home .ps-muhammad-home::after{
+  display:none!important;
+}
