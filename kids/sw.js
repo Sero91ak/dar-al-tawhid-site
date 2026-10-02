@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v117";
+const CACHE_NAME="dar-al-tawhid-kids-v111";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -13,8 +13,8 @@ const PRECACHE=[
   "/kids/data/stories-authentic.json",
   "/kids/data/prophet-stories.json",
   "/kids/prophet-stories.css?v=21",
-  "/kids/prophet-muhammad-v22.css?v=33",
-  "/kids/prophet-stories.js?v=28",
+  "/kids/prophet-muhammad-v22.css?v=26",
+  "/kids/prophet-stories.js?v=26",
   "/kids/assets/prophet-scenes/library.webp",
   "/kids/assets/prophet-scenes/garden.webp",
   "/kids/assets/prophet-scenes/ocean.webp",
@@ -27,13 +27,6 @@ const PRECACHE=[
   "/kids/assets/story-wow/muhammad-route.jpg",
   "/kids/assets/story-wow/muhammad-hira.jpg",
   "/kids/assets/story-wow/muhammad-madinah.jpg",
-  "/kids/assets/story-wow/v22-muhammad-hero.jpg",
-  "/kids/assets/story-wow/v22-muhammad-route.jpg",
-  "/kids/assets/story-wow/v22-muhammad-hira.jpg",
-  "/kids/assets/story-wow/v22-muhammad-madinah.jpg",
-  "/kids/assets/story-wow/v22-stories-header.jpg",
-  "/kids/assets/story-wow/v22-prophet-library.jpg",
-  "/kids/assets/story-wow/v22-coin-story.jpg",
   "/kids/assets/prophet-symbols/muhammad.webp",
   "/kids/assets/prophet-symbols/adam.webp",
   "/kids/assets/prophet-symbols/idris.webp",
