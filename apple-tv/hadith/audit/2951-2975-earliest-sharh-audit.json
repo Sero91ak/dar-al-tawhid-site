@@ -5,7 +5,7 @@
   "status": "completed-earliest-sharh-audit",
   "createdAfterRuleChange": true,
   "ruleVersion": 6,
-  "reason": "Der laufende 25er-Unterblock wurde am tatsächlichen offenen Branch-Ende vervollständigt. HAD-2951–2963 waren bereits einzeln mit verified Šarḥ aufgebaut; HAD-2964–2975 wurden aus Ṣaḥīḥ Muslim 2834–2840 ergänzt. Für alle Datensätze ist die Muslim-Priorität al-Māzirī → Qāḍī ʿIyāḍ geprüft bzw. in der vorhandenen verificationNote dokumentiert. Wo keine sicher greifbare clause-spezifische al-Māzirī-Erklärung gesichert wurde, wird der direkte Kommentar von Qāḍī ʿIyāḍ verwendet. Unsichere Druckseiten wurden nicht geschätzt.",
+  "reason": "Der laufende 25er-Unterblock wurde am tatsächlichen offenen Branch-Ende vervollständigt. HAD-2951–2963 waren bereits einzeln mit verified Šarḥ aufgebaut; HAD-2964–2975 wurden aus Ṣaḥīḥ Muslim 2834–2840 ergänzt. Die Muslim-Priorität al-Māzirī → Qāḍī ʿIyāḍ → al-Qurṭubī wurde datensatzbezogen geprüft. HAD-2969 nutzt al-Qurṭubī, weil seine direkte Erklärung der konkreten Klausel »wie das Atmen« in al-Mufhim 7/181 belastbar greifbar ist, während bei den früheren Prioritäten keine ebenso eindeutige direkte Bedeutungs-Erklärung gesichert wurde. Unsichere Druckseiten wurden nicht geschätzt.",
   "completionRequirement": {
     "allRecordsHaveSharh": true,
     "allRecordsUseEarliestAvailableSharhOrJustifiedDirectSharh": true,
@@ -116,8 +116,9 @@
     },
     {
       "id": "HAD-2969",
-      "currentSharh": "Qāḍī ʿIyāḍ",
-      "auditStatus": "earliest-greifbar-after-al-Maziri-check"
+      "currentSharh": "Abū al-ʿAbbās al-Qurṭubī",
+      "auditStatus": "earliest-direct-after-al-Maziri-Qadi-check",
+      "note": "Direkte Erklärung der Klausel »wie das Atmen« in al-Mufhim 7/181; frühere Muslim-Prioritäten geprüft, aber für diese konkrete Bedeutungs-Erklärung nicht ebenso sicher greifbar."
     },
     {
       "id": "HAD-2970",
