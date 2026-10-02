@@ -2,7 +2,7 @@
 "use strict";
 
 const DATA_URL="/kids/data/prophet-stories.json";
-const MODE_KEY="kids.contentMode.v19";
+const MODE_KEY="kids.contentMode.v20";
 const PROPHET_ORDER=[
   "adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub",
   "yusuf","ayyub","shuayb","musa","harun","dhul-kifl","dawud","sulayman",
@@ -11,9 +11,17 @@ const PROPHET_ORDER=[
 const PROPHET_RANK=new Map(PROPHET_ORDER.map((id,index)=>[id,index]));
 const ART_ROOT="/kids/assets/prophets-v2/";
 const DEDICATED_HERO=new Set(PROPHET_ORDER);
-function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=19"}
-function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=19":cardUrl(item)}
+function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=20"}
+function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=20":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
+const MUHAMMAD_EPISODES=[
+  {id:"wahy",title:"Die erste Offenbarung",meta:"MAKKAH · ḤIRĀʾ",source:"Qurʾān 96:1–5",summary:"In der Höhle Ḥirāʾ begann die Offenbarung. Von hier aus begann seine Aufgabe als Gesandter.",art:"/kids/assets/prophet-scenes/mountain.webp?v=20"},
+  {id:"tawhid",title:"Der Ruf zum Tawḥīd",meta:"MAKKAH · DAʿWAH",source:"Qurʾān 21:107",summary:"Er rief die Menschen dazu, Allah allein anzubeten, und blieb trotz Ablehnung standhaft.",art:"/kids/assets/prophet-scenes/night.webp?v=20"},
+  {id:"hijrah",title:"Die Hiǧrah nach Madīnah",meta:"VERTRAUEN · GEDULD",source:"Qurʾān 9:40",summary:"Die Auswanderung zeigt Vertrauen auf Allah, Geduld und einen neuen Anfang für die muslimische Gemeinschaft.",art:"/kids/assets/prophet-scenes/desert.webp?v=20"},
+  {id:"madinah",title:"Die Gemeinschaft in Madīnah",meta:"LEHREN · GERECHTIGKEIT",source:"Qurʾān 33:21",summary:"In Madīnah lehrte er Gottesdienst, Familie, Nachbarschaft, Gerechtigkeit und Verantwortung.",art:"/kids/assets/prophet-scenes/garden.webp?v=20"},
+  {id:"rahmah",title:"Barmherzigkeit für die Welten",meta:"BOTSCHAFT · CHARAKTER",source:"Qurʾān 21:107 · 68:4",summary:"Seine Sendung wird als Barmherzigkeit beschrieben, und Allah lobt seinen großartigen Charakter.",art:"/kids/assets/prophet-scenes/water.webp?v=20"},
+  {id:"khatam",title:"Siegel der Propheten",meta:"ḪĀTAM AN-NABIYYĪN",source:"Qurʾān 33:40",summary:"Muḥammad ﷺ ist das Siegel der Propheten. Nach ihm kommt kein neuer Prophet.",art:"/kids/assets/prophet-scenes/library.webp?v=20"}
+];
 let items=[],active=null,activeText="",playing=false,busy=false;
 const audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
@@ -92,60 +100,40 @@ function renderModeButtons(){
   const current=mode();
   document.querySelectorAll("[data-ps-mode]").forEach(b=>b.classList.toggle("active",b.dataset.psMode===current));
 }
+function storyRowMarkup(item,index){
+  const text=buildText(item);
+  const meta=(item.disputed?"IKHTILĀF · ":"QURʾĀN GEPRÜFT · ")+durationLabel(item,text);
+  return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button">'+
+    '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" loading="'+(index<4?"eager":"lazy")+'">'+
+    '<span class="ps-row-copy"><span class="ps-row-meta">'+esc(meta)+'</span><span class="ps-row-title">'+esc(item.name)+(item.id==="muhammad"?" ﷺ":"")+'</span><span class="ps-row-ar" dir="rtl">'+esc(arabicLine(item))+'</span></span>'+
+    '<span class="ps-row-go" aria-hidden="true">›</span>'+(done(item.id)?'<span class="ps-done" aria-label="Abgeschlossen"></span>':'')+'</button>';
+}
 function renderCards(){
   const grid=$("#psGrid");if(!grid)return;
-  grid.innerHTML=items.map((item,index)=>{
-    const text=buildText(item);
-    const meta=(item.disputed?"IKHTILĀF · ":"QURʾĀN GEPRÜFT · ")+durationLabel(item,text);
-    return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button">'+
-      '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" loading="'+(index<4?"eager":"lazy")+'" '+(index<2?'fetchpriority="high"':'')+'>'+
-      '<span class="ps-row-copy">'+
-        '<span class="ps-row-meta">'+esc(meta)+'</span>'+
-        '<span class="ps-row-title">'+esc(item.name)+(item.id==="muhammad"?" ﷺ":"")+'</span>'+
-        '<span class="ps-row-ar" dir="rtl">'+esc(arabicLine(item))+'</span>'+
-      '</span>'+
-      '<span class="ps-row-go" aria-hidden="true">›</span>'+
-      (done(item.id)?'<span class="ps-done" aria-label="Abgeschlossen"></span>':'')+
-    '</button>';
-  }).join("");
+  const muhammad=items.find(item=>item.id==="muhammad");
+  const rest=items.filter(item=>item.id!=="muhammad");
+  const special=muhammad?'<button class="ps-muhammad-feature" data-ps-id="muhammad" type="button"><img class="ps-muhammad-feature-art" src="'+esc(heroUrl(muhammad))+'" alt="" decoding="async"><span class="ps-muhammad-feature-shade" aria-hidden="true"></span><span class="ps-muhammad-feature-copy"><span class="ps-muhammad-feature-kicker">★ BESONDERER BEREICH · SIEGEL DER PROPHETEN</span><strong>Prophet Muḥammad ﷺ</strong><span class="ps-muhammad-feature-sub">Sein Leben. Sein Weg. Seine Botschaft.</span><span class="ps-muhammad-feature-cta">Besonderen Bereich öffnen <b aria-hidden="true">→</b></span></span></button>':"";
+  grid.innerHTML=special+rest.map((item,index)=>storyRowMarkup(item,index)).join("");
   grid.querySelectorAll("[data-ps-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.psId)));
-  grid.querySelectorAll("img.ps-row-scene").forEach(img=>{
-    img.onerror=()=>{
-      const fallback=img.dataset.fallback||"";
-      img.onerror=null;
-      if(fallback)img.src=fallback;
-    };
-  });
+  grid.querySelectorAll("img.ps-row-scene").forEach(img=>{img.onerror=()=>{const fallback=img.dataset.fallback||"";img.onerror=null;if(fallback)img.src=fallback;}});
   const doneEl=$("#psDoneCount");if(doneEl)doneEl.textContent=String(doneCount());
   const ageEl=$("#psAgeHero");if(ageEl)ageEl.textContent="Alter "+age();
 }
 function prepareStoriesHome(view){
-  const old=$("#authenticStoryList");
-  const oldTitle=old?.previousElementSibling;
-  if(old)old.style.display="none";
-  if(oldTitle)oldTitle.style.display="none";
-  view.querySelectorAll(".gentle-note").forEach(note=>{
-    if(/Authentische Propheten/i.test(note.textContent||""))note.style.display="none";
-  });
-
-  const pageHead=view.querySelector(".page-head");
-  if(pageHead)pageHead.hidden=false;
-
+  const old=$("#authenticStoryList"),oldTitle=old?.previousElementSibling;
+  if(old)old.style.display="none";if(oldTitle)oldTitle.style.display="none";
+  view.querySelectorAll(".gentle-note").forEach(note=>{if(/Authentische Propheten/i.test(note.textContent||""))note.style.display="none"});
+  const pageHead=view.querySelector(".page-head");if(pageHead)pageHead.hidden=false;
+  if(!$("#psMuhammadHomeEntry")){
+    const special=document.createElement("button");special.id="psMuhammadHomeEntry";special.className="ps-muhammad-home";special.type="button";
+    special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★ BESONDERER BEREICH · ḪĀTAM AN-NABIYYĪN</span><strong>Prophet Muḥammad ﷺ</strong><span class="ps-mh-home-sub">Sein Leben. Sein Weg. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
+    if(pageHead)pageHead.insertAdjacentElement("afterend",special);else view.insertBefore(special,view.firstChild);
+    special.addEventListener("click",()=>openStory("muhammad"));
+  }
   if(!$("#psProphetEntry")){
-    const entry=document.createElement("button");
-    entry.id="psProphetEntry";
-    entry.className="ps-prophet-entry";
-    entry.type="button";
-    entry.innerHTML=
-      '<span class="ps-entry-shade" aria-hidden="true"></span>'+
-      '<span class="ps-entry-copy">'+
-        '<span class="ps-entry-kicker">EIGENER BEREICH · QURʾĀN GEPRÜFT</span>'+
-        '<strong>Prophetengeschichten</strong>'+
-        '<span class="ps-entry-sub">25 Geschichten · lesen &amp; hören</span>'+
-      '</span>'+
-      '<span class="ps-entry-go" aria-hidden="true">›</span>';
-    if(pageHead)pageHead.insertAdjacentElement("afterend",entry);
-    else view.insertBefore(entry,view.firstChild);
+    const entry=document.createElement("button");entry.id="psProphetEntry";entry.className="ps-prophet-entry";entry.type="button";
+    entry.innerHTML='<span class="ps-entry-shade" aria-hidden="true"></span><span class="ps-entry-copy"><span class="ps-entry-kicker">EIGENER BEREICH · QURʾĀN GEPRÜFT</span><strong>Prophetengeschichten</strong><span class="ps-entry-sub">25 Geschichten · lesen &amp; hören</span><span class="ps-entry-cta">Jetzt entdecken <b aria-hidden="true">→</b></span></span>';
+    const special=$("#psMuhammadHomeEntry");if(special)special.insertAdjacentElement("afterend",entry);else if(pageHead)pageHead.insertAdjacentElement("afterend",entry);else view.insertBefore(entry,view.firstChild);
     entry.addEventListener("click",openLibrary);
   }
 }
@@ -201,7 +189,7 @@ function ensureUi(){
     '<div class="ps-sheet" role="dialog" aria-modal="true" aria-labelledby="psTitle">'+
       '<div class="ps-top"><button class="ps-close" id="psClose" type="button" aria-label="Zurück zu den Propheten">‹</button></div>'+
       '<div class="ps-scroll" id="psScroll">'+
-        '<div class="ps-hero">'+
+        '<section class="ps-muhammad-special" id="psMuhammadSpecial" hidden><header class="ps-mh-hero"><img class="ps-mh-hero-art" src="/kids/assets/prophets-v2/muhammad-hero.jpg?v=20" alt=""><span class="ps-mh-hero-shade" aria-hidden="true"></span><div class="ps-mh-hero-copy"><span class="ps-mh-special-label">★ BESONDERER BEREICH</span><h2>Prophet<br>Muḥammad ﷺ</h2><div class="ps-mh-ar" dir="rtl">محمد ﷺ</div><p class="ps-mh-tagline">Sein Leben. Sein Weg. Seine Botschaft.</p><p class="ps-mh-intro">Der letzte Prophet und Gesandte. Eine besondere, kindgerechte Reise durch seine Sendung, seinen Charakter und die wichtigsten Stationen seines Lebens.</p><span class="ps-mh-proof">SIEGEL DER PROPHETEN · QURʾĀN 33:40</span></div></header><div class="ps-mh-ornament" aria-hidden="true"><span></span></div><section class="ps-mh-panel ps-mh-way"><div class="ps-mh-panel-art" aria-hidden="true"></div><div class="ps-mh-panel-copy"><span class="ps-mh-panel-kicker">SEIN WEG</span><h3>Von Makkah nach Madīnah</h3><p>Offenbarung, Daʿwah, Geduld, Hiǧrah und der Aufbau einer Gemeinschaft – Schritt für Schritt und ohne erfundene Ausschmückungen.</p><div class="ps-mh-route"><span>Makkah</span><i></i><span>Ḥirāʾ</span><i></i><span>Hiǧrah</span><i></i><span>Madīnah</span><i></i><span>Rückkehr</span></div></div></section><section class="ps-mh-panel ps-mh-message"><div class="ps-mh-panel-art" aria-hidden="true"></div><div class="ps-mh-panel-copy"><span class="ps-mh-panel-kicker">SEINE BOTSCHAFT</span><h3>Allah allein anbeten</h3><p>Er rief zum Tawḥīd, überbrachte den Qurʾān und zeigte durch sein Vorbild, wie Glaube, Barmherzigkeit und Verantwortung im Alltag aussehen.</p><div class="ps-mh-message-pills"><span>Tawḥīd</span><span>Qurʾān</span><span>Vorbild</span><span>Barmherzigkeit</span></div></div></section><section class="ps-mh-values"><div class="ps-mh-values-head"><span>WERTE FÜR KINDER</span><h3>Was wir von ihm lernen</h3><p>Liebe zeigt sich durch Folgen, Lernen und gutes Handeln.</p></div><div class="ps-mh-value-grid"><div class="ps-mh-value"><b>✓</b><strong>Wahrheit</strong><small>Ehrlich bleiben</small></div><div class="ps-mh-value"><b>♡</b><strong>Barmherzigkeit</strong><small>Gütig handeln</small></div><div class="ps-mh-value"><b>⌁</b><strong>Geduld</strong><small>Standhaft bleiben</small></div><div class="ps-mh-value"><b>◇</b><strong>Gerechtigkeit</strong><small>Fair entscheiden</small></div></div></section><section class="ps-mh-episodes"><div class="ps-mh-section-head"><div><span>GESCHICHTEN &amp; HÖREN</span><h3>Seine Geschichte in Stationen</h3></div><p>Tippe eine Station an.</p></div><div class="ps-mh-episode-rail" id="psMhEpisodes"></div><article class="ps-mh-episode-detail" id="psMhEpisodeDetail" hidden></article></section><section class="ps-mh-fullstory"><span>VOLLSTÄNDIGE GESCHICHTE</span><h3>Lesen oder hören</h3><p>Unterhalb beginnt die ausführliche, geprüfte Erzählung mit Hörfunktion, Quellen und einer kleinen Frage.</p></section></section>'+'<div class="ps-hero">'+
           '<span class="ps-detail-sky" aria-hidden="true"></span>'+
           '<span class="ps-detail-land" aria-hidden="true"></span>'+
           '<span class="ps-detail-glow" aria-hidden="true"></span>'+
@@ -227,6 +215,7 @@ function ensureUi(){
   $("#psClose").addEventListener("click",closeStory);
   $("#psPlay").addEventListener("click",toggleAudio);
   $("#psScroll").addEventListener("scroll",()=>{$("#psModal")?.classList.toggle("scrolled",$("#psScroll").scrollTop>72)},{passive:true});
+  modal.addEventListener("click",e=>{const episode=e.target.closest("[data-mh-episode]");if(episode)openMuhammadEpisode(episode.dataset.mhEpisode);});
   document.addEventListener("keydown",e=>{
     if(e.key!=="Escape")return;
     if($("#psModal")?.classList.contains("open"))closeStory();
@@ -247,33 +236,25 @@ function applyMode(){
   read.hidden=m==="listen";
   player.hidden=m==="read";
 }
+function renderMuhammadSpecial(){
+  const rail=$("#psMhEpisodes"),detail=$("#psMhEpisodeDetail");
+  if(rail)rail.innerHTML=MUHAMMAD_EPISODES.map(ep=>'<button class="ps-mh-episode" type="button" data-mh-episode="'+esc(ep.id)+'"><span class="ps-mh-episode-art" style="background-image:url('+esc(ep.art)+')"></span><span class="ps-mh-episode-copy"><small>'+esc(ep.meta)+'</small><strong>'+esc(ep.title)+'</strong><em>'+esc(ep.source)+'</em></span></button>').join("");
+  if(detail){detail.hidden=true;detail.innerHTML="";}
+}
+function openMuhammadEpisode(id){
+  const ep=MUHAMMAD_EPISODES.find(x=>x.id===id),detail=$("#psMhEpisodeDetail");if(!ep||!detail)return;
+  detail.innerHTML='<span>'+esc(ep.meta)+'</span><h4>'+esc(ep.title)+'</h4><p>'+esc(ep.summary)+'</p><strong>'+esc(ep.source)+'</strong>';detail.hidden=false;detail.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
 function renderActive(){
-  if(!active)return;
-  activeText=buildText(active);
-  const hero=$(".ps-hero");if(hero){hero.setAttribute("data-ps-id",active.id);hero.setAttribute("data-hero-copy",DEDICATED_HERO.has(active.id)?"left":"right")}
-  const heroImg=$("#psHero");if(heroImg){
-    heroImg.onerror=()=>{
-      heroImg.onerror=null;
-      const card=cardUrl(active);
-      if(heroImg.src!==card)heroImg.src=card;
-      else if(active.cover)heroImg.src=active.cover;
-    };
-    heroImg.src=heroUrl(active);
-    heroImg.alt="";
-  }
-  $("#psTitle").textContent=active.name+(active.id==="muhammad"?" ﷺ":"");
-  $("#psArabic").textContent=arabicLine(active);
-  $("#psSummary").textContent=active.summary||"";
-  $("#psMeta").innerHTML=
-    '<span class="ps-pill"><span class="ps-pill-icon ps-pill-icon-clock" aria-hidden="true"></span>'+esc(durationLabel(active,activeText))+'</span>'+
-    '<span class="ps-pill"><span class="ps-pill-icon ps-pill-icon-age" aria-hidden="true"></span>Alter '+esc(age())+'</span>'+
-    '<span class="ps-pill"><span class="ps-pill-icon ps-pill-icon-book" aria-hidden="true"></span>Qurʾān · geprüft</span>'+
-    (active.disputed?'<span class="ps-pill warn">Prophetenstatus: Ikhtilāf</span>':'');
-  $("#psRead").innerHTML=activeText.split(/\n{2,}/).map(p=>"<p>"+esc(p)+"</p>").join("");
-  $("#psSources").textContent=(active.sourceRefs||[]).join(" · ");
-  renderQuestion();
-  applyMode();
-  resetAudioForActive();
+  if(!active)return;activeText=buildText(active);
+  const isMuhammad=active.id==="muhammad",modal=$("#psModal"),special=$("#psMuhammadSpecial"),hero=$(".ps-hero");
+  if(modal)modal.classList.toggle("ps-muhammad-open",isMuhammad);if(special)special.hidden=!isMuhammad;
+  if(hero){hero.hidden=isMuhammad;hero.setAttribute("data-ps-id",active.id);hero.setAttribute("data-hero-copy",DEDICATED_HERO.has(active.id)?"left":"right")}
+  if(isMuhammad)renderMuhammadSpecial();
+  const heroImg=$("#psHero");if(heroImg){heroImg.onerror=()=>{heroImg.onerror=null;const card=cardUrl(active);if(heroImg.src!==card)heroImg.src=card;else if(active.cover)heroImg.src=active.cover;};heroImg.src=heroUrl(active);heroImg.alt="";}
+  $("#psTitle").textContent=active.name+(isMuhammad?" ﷺ":"");$("#psArabic").textContent=arabicLine(active);$("#psSummary").textContent=active.summary||"";
+  $("#psMeta").innerHTML='<span class="ps-pill"><span class="ps-pill-icon ps-pill-icon-clock" aria-hidden="true"></span>'+esc(durationLabel(active,activeText))+'</span><span class="ps-pill"><span class="ps-pill-icon ps-pill-icon-age" aria-hidden="true"></span>Alter '+esc(age())+'</span><span class="ps-pill"><span class="ps-pill-icon ps-pill-icon-book" aria-hidden="true"></span>Qurʾān · geprüft</span>'+(active.disputed?'<span class="ps-pill warn">Prophetenstatus: Ikhtilāf</span>':'');
+  $("#psRead").innerHTML=activeText.split(/\n{2,}/).map(p=>"<p>"+esc(p)+"</p>").join("");$("#psSources").textContent=(active.sourceRefs||[]).join(" · ");renderQuestion();applyMode();resetAudioForActive();
 }
 function renderQuestion(){
   const q=$("#psQuestion");if(!q||!active)return;
