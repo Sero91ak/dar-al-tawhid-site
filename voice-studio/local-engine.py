@@ -3393,7 +3393,12 @@ def _coalesce_kids_story_plan(plan,max_chars:int=230,max_sentences:int=2):
             prev=compact[-1][1]
             joined=(prev+" "+value).strip()
             sentence_count=len(re.findall(r"[.!?؟…](?:\s|$)",joined))
-            if len(joined)<=int(max_chars) and sentence_count<=int(max_sentences):
+            punctuation_load=len(re.findall(r"[,;:]",joined))
+            if (
+                len(joined)<=int(max_chars)
+                and sentence_count<=int(max_sentences)
+                and punctuation_load<3
+            ):
                 compact[-1]=("de",joined)
                 continue
         compact.append(("de",value))
@@ -3407,10 +3412,25 @@ def build_render_plan(text:str,mode:str=""):
             plan.append(("ar",value.strip()))
             continue
         for lang,segment in split_language_segments(value):
-            max_chars=96 if lang=="ar" else (210 if story_mode else 140)
+            max_chars=96 if lang=="ar" else (190 if story_mode else 140)
             for chunk in split_chunks(segment,max_chars=max_chars):
-                if chunk.strip():
-                    plan.append((lang,chunk.strip()))
+                clean=chunk.strip()
+                if not clean:
+                    continue
+                if (
+                    story_mode and lang=="de"
+                    and len(clean)>=72
+                    and len(re.findall(r"[,;:]",clean))>=3
+                ):
+                    # Aufzählungsreiche Erzählsätze sind bei Chatterbox besonders
+                    # anfällig für autoregressive Schleifen. Vor der Synthese in
+                    # zwei ausgewogene natürliche Phrasen teilen, statt erst nach
+                    # einem minutenlangen token-limit zu reagieren.
+                    story_parts=split_rescue_chunks(clean,force=True)
+                    if len(story_parts)>1:
+                        plan.extend(("de",part) for part in story_parts if part.strip())
+                        continue
+                plan.append((lang,clean))
     if story_mode:
         plan=_coalesce_kids_story_plan(plan,max_chars=230,max_sentences=2)
     return plan
@@ -4368,7 +4388,26 @@ def split_rescue_chunks(text:str,force:bool=False):
 
     parts=[p.strip() for p in re.split(r"(?<=[,،;؛:])\s+",value) if p.strip()]
     if len(parts)>=2 and max(map(len,parts))<len(value)*0.82:
-        return parts
+        if len(parts)==2:
+            return parts
+        # Aufzählungen nicht in winzige Ein-Wort-Clips zerlegen. Stattdessen an
+        # der Satzmitte in zwei natürliche Phrasenblöcke teilen; bei Bedarf
+        # kann jeder Block rekursiv nochmals geteilt werden.
+        best_cut=1
+        best_score=None
+        for cut in range(1,len(parts)):
+            left=" ".join(parts[:cut]).strip()
+            right=" ".join(parts[cut:]).strip()
+            if not left or not right:
+                continue
+            score=abs(len(left)-len(right))
+            if best_score is None or score<best_score:
+                best_score=score
+                best_cut=cut
+        return [
+            " ".join(parts[:best_cut]).strip(),
+            " ".join(parts[best_cut:]).strip(),
+        ]
 
     # Bevorzugt an einer natürlichen deutschen Konjunktion nahe der Mitte trennen.
     candidates=[m for m in re.finditer(r"\s+(?:und|aber|denn|doch|während|weil|wenn)\s+",value,flags=re.I)]
@@ -4389,6 +4428,8 @@ def split_rescue_chunks(text:str,force:bool=False):
 def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool=False,seed_base:int=2026):
     import torch
     attempts=max(1,int(QA_CONFIG.get("maxRenderAttempts",2)))
+    if language_id=="de" and mode=="kids_story":
+        attempts=max(attempts,3)
     if language_id=="ar" and is_inline_arabic_micro_term(text):
         attempts=max(attempts,int(QA_CONFIG.get("inlineArabicRenderAttempts",4)))
     seed_offset=max(1,int(QA_CONFIG.get("retrySeedOffset",97)))
@@ -4432,6 +4473,11 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
         except GenerationTokenLimitReached as e:
             print(f"[DĀR Voice] bounded generation rescue: {e}",flush=True)
             last=(None,{"issues":["generation_token_limit"],"attempt":attempt+1,"critical":bool(critical),"rescued":False})
+            # Ein Sampling-Ausreißer darf bei einem kurzen, nicht weiter teilbaren
+            # Fragment nicht sofort fatal sein. Mit neuem Seed erneut versuchen;
+            # danach greift wie bisher die rekursive Chunk-Rettung.
+            if attempt+1<attempts:
+                continue
             break
         metrics=audio_quality_metrics(wav,int(model.sr),text,language_id,mode)
         if proactive_pause_repair.get("repaired"):
