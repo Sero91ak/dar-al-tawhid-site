@@ -146,8 +146,17 @@
       try{decorate()}catch(e){console.warn("DAR library redesign:",e)}
     });
   }
+  function ensureLateStylesheet(){
+    if(document.getElementById("darLibraryRedesignLateV1"))return;
+    var link=document.createElement("link");
+    link.id="darLibraryRedesignLateV1";
+    link.rel="stylesheet";
+    link.href="/test/assets/dar-library-redesign-v1.css?v=1177-late";
+    (document.head||document.documentElement).appendChild(link);
+  }
   function init(){
     document.documentElement.classList.add(ROOT_CLASS);
+    ensureLateStylesheet();
     schedule();
     var root=document.getElementById("appView")||document.body;
     if(root&&window.MutationObserver){
