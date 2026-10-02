@@ -517,7 +517,7 @@ function patchHome(){
 function patchMuhammad(){
  const special=q("#psMuhammadSpecial");if(!special)return;
  const hero=q(".ps-mh-hero-art",special);if(hero&&hero.getAttribute("src")!==A.hero)hero.setAttribute("src",A.hero);
- const ids={birth:A.birth,wahy:A.hira,hijrah:A.madinah,tawhid:A.hero,madinah:A.madinah,rahmah:A.madinah,return:A.hero,khatam:A.madinah};
+ const ids={birth:A.birth,wahy:A.hira,hijrah:A.route,tawhid:A.hero,madinah:A.madinah,rahmah:A.madinah,return:A.hero,khatam:A.madinah};
  for(const [id,url] of Object.entries(ids)){
    const art=q('[data-mh-episode="'+id+'"] .ps-mh-episode-art',special);
    if(art)art.style.setProperty("background-image",'url("'+url+'")',"important");
