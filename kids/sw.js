@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v115";
+const CACHE_NAME="dar-al-tawhid-kids-v116";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -79,7 +79,7 @@ function networkFirst(request,fallback){
     }
     return response;
   }).catch(function(){
-    return caches.match(request).then(function(hit){
+    return caches.match(request,{ignoreSearch:true}).then(function(hit){
       if(hit)return hit;
       return fallback?caches.match(fallback):Response.error();
     });
