@@ -3,10 +3,10 @@
   "schemaVersion": "1.3",
   "language": "de",
   "authenticOnly": true,
-  "totalCount": 2935,
+  "totalCount": 2950,
   "currentSeries": "2851-2950",
-  "latestId": "HAD-2935",
-  "nextId": "HAD-2936",
+  "latestId": "HAD-2950",
+  "nextId": "HAD-2951",
   "supportedRecordTypes": [
     "hadith",
     "athar"
@@ -448,22 +448,19 @@
     },
     {
       "id": "2851-2950",
-      "status": "incremental-active",
-      "activation": "per-record-immediate",
-      "count": 85,
+      "count": 100,
       "firstId": "HAD-2851",
-      "lastId": "HAD-2935",
-      "plannedLastId": "HAD-2950",
+      "lastId": "HAD-2950",
       "indexPath": "series/2851-2950/index.json",
       "contentTypes": {
-        "hadith": 85,
-        "athar": 0
+        "hadith": 98,
+        "athar": 2
       },
       "screensaverIncluded": true,
       "showSharh": true,
       "showSharhSource": true,
       "requireVerifiedSharh": true,
-      "readyThrough": "HAD-2935"
+      "readyThrough": "HAD-2950"
     }
   ],
   "xcode": {
