@@ -1,13 +1,18 @@
 (() => {
 "use strict";
 
-const ORDER=["adam","idris","nuh","hud","salih"];
+const ORDER=["adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub"];
 const ART={
-  adam:{card:"/kids/assets/prophets-v2/adam-card.jpg?v=9"},
-  idris:{card:"/kids/assets/prophets-v2/idris-card.jpg?v=9"},
-  nuh:{card:"/kids/assets/prophets-v2/nuh-card.jpg?v=9",hero:"/kids/assets/prophets-v2/nuh-hero.jpg?v=9"},
-  hud:{card:"/kids/assets/prophets-v2/hud-card.jpg?v=9"},
-  salih:{card:"/kids/assets/prophets-v2/salih-card.jpg?v=9"}
+  adam:{card:"/kids/assets/prophets-v2/adam-card.jpg?v=10"},
+  idris:{card:"/kids/assets/prophets-v2/idris-card.jpg?v=10"},
+  nuh:{card:"/kids/assets/prophets-v2/nuh-card.jpg?v=10",hero:"/kids/assets/prophets-v2/nuh-hero.jpg?v=10"},
+  hud:{card:"/kids/assets/prophets-v2/hud-card.jpg?v=10"},
+  salih:{card:"/kids/assets/prophets-v2/salih-card.jpg?v=10"},
+  ibrahim:{card:"/kids/assets/prophets-v2/ibrahim-card.jpg?v=10"},
+  lut:{card:"/kids/assets/prophets-v2/lut-card.jpg?v=10"},
+  ismail:{card:"/kids/assets/prophets-v2/ismail-card.jpg?v=10"},
+  ishaq:{card:"/kids/assets/prophets-v2/ishaq-card.jpg?v=10"},
+  yaqub:{card:"/kids/assets/prophets-v2/yaqub-card.jpg?v=10"}
 };
 
 let items=[],mode="read";
@@ -84,7 +89,7 @@ document.addEventListener("click",e=>{
 });
 $("#backBtn").addEventListener("click",closeDetail);
 
-fetch("/kids/data/prophet-stories.json?v=9",{cache:"no-store"})
+fetch("/kids/data/prophet-stories.json?v=10",{cache:"no-store"})
   .then(r=>{if(!r.ok)throw new Error("data "+r.status);return r.json()})
   .then(data=>{items=sorted(data.items);render();setMode("read")})
   .catch(err=>{
