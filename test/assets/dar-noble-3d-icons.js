@@ -443,7 +443,16 @@
       el.setAttribute("data-dar-ornament","neutral-no-cross-no-six-point-star");
     });
   }
-  function enhance(){syncRouteClasses();insertHomeFeature();markNeutralOrnament()}
+  function ensureLateCss(){
+    if(document.getElementById("darLibraryLateCss1170"))return;
+    var link=document.createElement("link");
+    link.id="darLibraryLateCss1170";
+    link.rel="stylesheet";
+    link.href="/test/assets/dar-noble-3d-icons.css?late=1170";
+    link.setAttribute("data-dar-design","DAR_LIBRARY_LATE_CASCADE_V1170");
+    (document.body||document.documentElement).appendChild(link);
+  }
+  function enhance(){ensureLateCss();syncRouteClasses();insertHomeFeature();markNeutralOrnament()}
   var timer=0;
   function schedule(){clearTimeout(timer);timer=setTimeout(enhance,24)}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",enhance,{once:true});else enhance();
