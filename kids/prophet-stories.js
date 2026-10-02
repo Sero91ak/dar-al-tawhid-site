@@ -486,7 +486,8 @@ const A={
  birth:"/kids/assets/story-wow/v30-muhammad-birth.jpg?v=30",
  route:"/kids/assets/story-wow/v22-muhammad-route.jpg?v=22",
  hira:"/kids/assets/story-wow/v22-muhammad-hira.jpg?v=22",
- madinah:"/kids/assets/story-wow/v22-muhammad-madinah.jpg?v=22"
+ madinah:"/kids/assets/story-wow/v22-muhammad-madinah.jpg?v=22",
+ birth:"/kids/assets/story-wow/v29-muhammad-birth.jpg?v=30"
 };
 let scheduled=false;
 const q=(s,r=document)=>r.querySelector(s);
