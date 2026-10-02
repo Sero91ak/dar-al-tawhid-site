@@ -151,6 +151,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-home-adobe-runway-v1190-2026-10-03",
+      "approvedBy": "user-explicit-startseite-adobe-runway-kreativ-attraktiv",
+      "reason": "Nutzer verlangt die misslungene Erwachsenen-Test-Startseite sofort kreativ und attraktiv neu aufzubauen und ausdrücklich Adobe Firefly sowie Runway zu verwenden; riesige Buchcover/Kapseln entfernen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/index.html",
+        "test/version.json",
+        "test/service-worker.js",
+        "test/assets/dar-home-visual-v1190.css",
+        "test/assets/dar-home-visual-v1190.js",
+        "test/assets/home-v1190/"
+      ],
+      "expiresAt": "2026-10-10T23:59:00.000Z"
+    },
+    {
       "id": "kids-v106-exact-rollback-2026-10-02",
       "approvedBy": "user-explicit-kids-rollback-v106-sofort",
       "reason": "Nutzer verlangt den sofortigen exakten Rollback von DĀR AL TAWḤĪD Kids auf V1.06. Freigabe nur für den historischen Kids-Snapshot, seine Auslieferungsmarker und den notwendigen Release-Guard.",
