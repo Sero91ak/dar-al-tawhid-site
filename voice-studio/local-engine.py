@@ -1056,6 +1056,97 @@ def pronunciation_search(query:str,limit:int=10):
         if len(out)>=max(1,min(25,int(limit))): break
     return out
 
+def pronunciation_candidates(query:str,limit:int=12):
+    """Mehrere hörbare Kandidaten für den Lernbereich.
+    Priorität: bestätigte/lokale Regeln -> Master-Vorschläge -> sichtbare Schreibweise.
+    Die sichtbare Schreibweise ist nur ein Testkandidat und wird nie automatisch freigegeben.
+    """
+    query=str(query or "").strip()
+    if not query:
+        return []
+    out=[];seen=set()
+
+    def add(item):
+        tts=str((item or {}).get("ttsText") or "").strip()
+        canonical=str((item or {}).get("canonical") or query).strip()
+        lang=str((item or {}).get("ttsLanguage") or ("ar" if re.search(r"[\u0600-\u06ff]",tts) else "de")).strip().lower()
+        key=(normalize_lookup(canonical),tts,lang)
+        if not tts or key in seen:
+            return
+        seen.add(key)
+        row=dict(item or {})
+        row["canonical"]=canonical
+        row["ttsText"]=tts
+        row["ttsLanguage"]=lang if lang in ("ar","de") else ("ar" if re.search(r"[\u0600-\u06ff]",tts) else "de")
+        row.setdefault("candidateKind","library")
+        out.append(row)
+
+    for row in pronunciation_search(query,max(25,int(limit or 12))):
+        add(row)
+
+    # Die Master-Library enthält häufig zusätzliche Fuṣḥā-Formen, die nicht als
+    # direkte String-Regel geladen wurden. Diese wieder als auswählbare Kandidaten zeigen.
+    for s in master_suggestions(query,max(8,int(limit or 12))):
+        add({
+            "source":str(s.get("origin") or "Master-Library"),
+            "score":float(s.get("score") or 0),
+            "input":query,
+            "canonical":str(s.get("canonical") or query),
+            "alias":str(s.get("transliteration") or ""),
+            "ttsText":str(s.get("arabic") or ""),
+            "ttsLanguage":"ar",
+            "category":str(s.get("category") or ""),
+            "audioLockKey":"",
+            "requiredHonorificKey":str(s.get("requiredHonorificKey") or ""),
+            "voiceLock":"REVIEW",
+            "candidateKind":"master-suggestion",
+        })
+
+    # Wenn es eine sichere arabische Bibliotheksform gibt, darf der Nutzer zusätzlich
+    # die sichtbare Schreibweise als Vergleich hören. Das ist ein Test, kein Auto-Master.
+    has_ar=any(str(x.get("ttsLanguage") or "")=="ar" for x in out)
+    if has_ar and not re.search(r"[\u0600-\u06ff]",query):
+        add({
+            "source":"Sichtbare Schreibweise",
+            "score":0.5,
+            "input":query,
+            "canonical":query,
+            "alias":query,
+            "ttsText":query,
+            "ttsLanguage":"de",
+            "category":"manual-comparison",
+            "audioLockKey":"",
+            "requiredHonorificKey":"",
+            "voiceLock":"REVIEW",
+            "candidateKind":"visible-comparison",
+            "requiresReview":True,
+        })
+
+    if not out:
+        add({
+            "source":"Manuell",
+            "score":0.25,
+            "input":query,
+            "canonical":query,
+            "alias":query,
+            "ttsText":query,
+            "ttsLanguage":"ar" if re.search(r"[\u0600-\u06ff]",query) else "de",
+            "category":"manual",
+            "audioLockKey":"",
+            "requiredHonorificKey":"",
+            "voiceLock":"REVIEW",
+            "candidateKind":"manual",
+            "requiresReview":True,
+        })
+
+    # Fuṣḥā-/exakte Treffer zuerst, Vergleich/Manuell zuletzt.
+    out.sort(key=lambda x:(
+        0 if str(x.get("ttsLanguage") or "")=="ar" else 1,
+        -float(x.get("score") or 0),
+        1 if x.get("candidateKind") in ("visible-comparison","manual") else 0,
+    ))
+    return out[:max(1,min(25,int(limit or 12)))]
+
 def _download_json(url:str,timeout:int=15):
     req=urllib.request.Request(url,headers={"User-Agent":"DARVoiceStudio/2.7"})
     with urllib.request.urlopen(req,timeout=timeout) as resp:
@@ -1144,7 +1235,7 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
         requested,
         str(variant),
         file_signature(ref),
-        "fast-learning-preview-v1",
+        "fast-learning-preview-v2-qa",
     ])
     cache_key=hashlib.sha256(signature.encode("utf-8")).hexdigest()
     cache_path=LEARNING_PREVIEW_CACHE_DIR/(cache_key+".wav")
@@ -1174,40 +1265,17 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
         try:
             model=load_production_model()
             sample_rate=int(model.sr)
-            import torch
             seed=3000+(int(preview_id[:8],16)%800000)+variant*977
-            torch.manual_seed(seed)
-            last_error=None
-            wav=None
-            metrics=None
-            for attempt in range(2):
-                try:
-                    wav=render_with_model(model,effective_tts,requested,mode)
-                    wav=trim_segment_edges(
-                        wav,sample_rate,
-                        aggressive=True,
-                        inline=(requested=="ar" and is_inline_arabic_micro_term(effective_tts))
-                    )
-                    metrics=audio_quality_metrics(wav,sample_rate,effective_tts,requested,mode)
-                    hard={
-                        "empty_audio","non_finite","near_silence","low_peak","clipping","too_short",
-                        "short_arabic_too_long","suspicious_sustained_hold",
-                        "inline_arabic_internal_hold","unexpected_internal_hold","excessive_internal_pause"
-                    }
-                    blocking=[x for x in (metrics.get("issues") or []) if x in hard]
-                    if not blocking:
-                        break
-                    last_error=", ".join(blocking)
-                    wav=None
-                except Exception as e:
-                    last_error=str(e)
-                    wav=None
-                if attempt==0:
-                    torch.manual_seed(seed+97)
-            if wav is None or metrics is None:
-                raise RuntimeError("Schnelltest verworfen: "+str(last_error or "technische Audio-QA fehlgeschlagen"))
+            # Bewährter Lernpfad: derselbe QA-/Rescue-Renderer, der vor dem
+            # Low-Latency-Umbau zuverlässig funktionierte. Für ein einzelnes Wort
+            # bleibt er kurz, nutzt aber Stotter-/Pause-/Token-Rettung vollständig.
+            preview_mode_name="narration"
+            wav,metrics=render_segment_with_qa(
+                model,effective_tts,requested,preview_mode_name,True,seed_base=seed
+            )
             save_wav(cache_path,wav,sample_rate)
             shutil.copy2(cache_path,path)
+            preview_mode="qa-fast-render"
         finally:
             LEARNING_PREVIEW_WAITING.clear()
 
@@ -6969,7 +7037,7 @@ class H(BaseHTTPRequestHandler):
             try:
                 query=str(data.get("query","")).strip()
                 if not query: raise ValueError("Suchwort fehlt.")
-                return self.send_json(200,{"ok":True,"query":query,"results":pronunciation_search(query,int(data.get("limit",10) or 10)),**learning_state()})
+                return self.send_json(200,{"ok":True,"query":query,"results":pronunciation_candidates(query,int(data.get("limit",12) or 12)),**learning_state()})
             except Exception as e:
                 return self.send_json(400,{"ok":False,"error":str(e)})
 
