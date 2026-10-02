@@ -1,8 +1,8 @@
 {
   "buildId": "kids-shell-v12-tab105",
   "label": "KIDS · V1.05",
-  "releasedAt": "2026-10-02T08:53:00.000Z",
-  "note": "V1.05: Geschichten ist wieder der Kategorien-Hub. Prophetengeschichten öffnen als eigener Unterbereich mit 25 geprüften Einträgen. Alle 25 Karten und alle 25 Detailseiten nutzen eigene hochauflösende Cinematic-Artworks; die Detailansicht zeigt das 21:9-Hero vollständig oben und Titel, Arabisch, Metadaten sowie Modi sauber darunter, ohne Überlagerungen.",
+  "releasedAt": "2026-10-02T08:52:00.000Z",
+  "note": "V1.05: Der Geschichten-Bereich bleibt Kategorien-Hub; Prophetengeschichten öffnen als eigener Unterbereich mit 25 geprüften Einträgen. Alle 25 Karten und 25 dedizierten hochauflösenden Detail-Heroes sind aktiv. Detailseiten sind für iPhone/iPad neu strukturiert: vollständiges 21:9-Bild oben, Titel/Arabisch/Metadaten darunter, keine Überlagerung durch Zurück-Button sowie aktualisierte Asset- und Service-Worker-Caches.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v19",
     "storiesHomeAsCategoryHub": true,
@@ -12,6 +12,7 @@
     "chronologicalOrder": true,
     "individualHighResolutionCards": 25,
     "dedicatedHighResolutionHeroes": 25,
+    "premiumDetailHeroes": 25,
     "sharedSprite": false,
     "stickerLayers": false,
     "visibleFaces": false,
