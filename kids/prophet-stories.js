@@ -129,7 +129,7 @@ function prepareStoriesHome(view){
   if(!$("#psMuhammadHomeEntry")){
     const special=document.createElement("button");special.id="psMuhammadHomeEntry";special.className="ps-muhammad-home";special.type="button";
     special.setAttribute("aria-label","Besonderen Bereich über Prophet Muḥammad öffnen");
-    special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★ BESONDERER BEREICH · ḪĀTAM AN-NABIYYĪN</span><strong>Prophet Muḥammad ﷺ</strong><span class="ps-mh-home-sub">Sein Leben. Sein Weg. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
+    special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★&nbsp;&nbsp;BESONDERER BEREICH</span><strong>Prophet<br>Muhammad</strong><span class="ps-mh-home-ar" dir="rtl">ﷺ</span><span class="ps-mh-home-sub">Sein Leben. Seine Werte. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
     if(pageHead)pageHead.insertAdjacentElement("afterend",special);else view.insertBefore(special,view.firstChild);
     special.addEventListener("click",()=>openStory("muhammad"));
   }
