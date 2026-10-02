@@ -1608,3 +1608,25 @@
 #view-stories.ps-stories-home .story-row[data-story] .story-thumb::after{
   display:none!important;
 }
+
+
+/* REFERENCE_STORY_RAIL_ART_V34
+   Full-bleed scenic thumbnails for the three free stories shown under "Weitere Geschichten". */
+#view-stories.ps-stories-home .story-row[data-story="water"] .story-thumb{
+  background-image:
+    linear-gradient(180deg,transparent 58%,rgba(2,20,32,.25)),
+    url("/kids/assets/story-wow/v32-story-water.jpg?v=34")!important;
+  background-size:cover!important;background-position:51% 52%!important;
+}
+#view-stories.ps-stories-home .story-row[data-story="helper"] .story-thumb{
+  background-image:
+    linear-gradient(180deg,transparent 58%,rgba(2,20,32,.25)),
+    url("/kids/assets/story-wow/v32-story-helper.jpg?v=34")!important;
+  background-size:cover!important;background-position:54% 52%!important;
+}
+#view-stories.ps-stories-home .story-row[data-story="kindword"] .story-thumb{
+  background-image:
+    linear-gradient(180deg,transparent 58%,rgba(2,20,32,.25)),
+    url("/kids/assets/story-wow/v32-story-kindword.jpg?v=34")!important;
+  background-size:cover!important;background-position:54% 51%!important;
+}
