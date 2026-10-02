@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v117";
+const CACHE_NAME="dar-al-tawhid-kids-v117";\nconst BUILD_ID="kids-shell-v12-tab117";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -68,7 +68,23 @@ self.addEventListener("activate",function(event){
       return Promise.all(keys.filter(function(key){
         return key.indexOf("dar-al-tawhid-kids-")===0&&key!==CACHE_NAME;
       }).map(function(key){return caches.delete(key)}));
-    }).then(function(){return self.clients.claim()})
+    }).then(function(){
+      return self.clients.claim();
+    }).then(function(){
+      return self.clients.matchAll({type:"window",includeUncontrolled:true});
+    }).then(function(clients){
+      return Promise.all(clients.map(function(client){
+        try{
+          var u=new URL(client.url);
+          if(u.origin!==self.location.origin||u.pathname.indexOf("/kids")!==0)return Promise.resolve();
+          if(String(u.searchParams.get("kv")||"")===BUILD_ID)return Promise.resolve();
+          var target=new URL("/kids/start",self.location.origin);
+          target.searchParams.set("kv",BUILD_ID);
+          target.searchParams.set("cb",String(Date.now()));
+          return client.navigate(target.toString()).catch(function(){});
+        }catch(e){return Promise.resolve()}
+      }));
+    })
   );
 });
 
