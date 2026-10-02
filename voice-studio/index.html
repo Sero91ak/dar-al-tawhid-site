@@ -760,8 +760,8 @@ body.free-voice-mode .mobile-actions{display:none!important}
       <button id="learnSearchBtn" class="btn secondary" type="button">Korrektur suchen</button>
     </div>
     <div id="learnResults" class="learning-results"></div>
-    <label for="learnArabic">Arabische Sprechform · nur falls keine passende Korrektur gefunden wird</label>
-    <input id="learnArabic" class="learning-arabic" autocomplete="off" spellcheck="false" placeholder="z. B. صَحَابَة">
+    <label for="learnArabic">Sprechform / Ausspracheziel · Arabisch oder Deutsch</label>
+    <input id="learnArabic" class="learning-arabic" dir="auto" autocomplete="off" spellcheck="false" placeholder="z. B. صَحَابَة oder gewünschte deutsche Sprechform">
     <div class="learning-actions">
       <button id="learnPreviewBtn" class="btn secondary" type="button">Schnell testen</button>
       <button id="learnConfirmBtn" class="btn primary" type="button" disabled>So merken</button>
@@ -1263,7 +1263,7 @@ function renderLearningResults(results){
   learningCandidate=null;
   clearLearningPreview();
   const wrap=$("#learnResults");
-  if(!learningResults.length){wrap.innerHTML='<div class="notice">Keine passende Regel gefunden. Du kannst unten eine arabische Sprechform eintragen und testen.</div>';return}
+  if(!learningResults.length){wrap.innerHTML='<div class="notice">Keine passende Regel gefunden. Du kannst unten selbst eine Sprechform eintragen oder das sichtbare Wort direkt testen.</div>';return}
   wrap.innerHTML=learningResults.map((r,i)=>{
     const pct=Math.round(Number(r.score||0)*100);
     return '<button type="button" class="learning-result" data-learning-index="'+i+'"><b>'+esc(r.canonical||r.input)+'</b><small>'+esc(r.ttsText||"")+' · '+esc(r.source||"Bibliothek")+' · Treffer '+pct+'%</small></button>';
@@ -1276,11 +1276,11 @@ function selectLearningCandidate(index){
   clearLearningPreview();
   document.querySelectorAll(".learning-result").forEach((el,i)=>el.classList.toggle("active",i===Number(index)));
   $("#learnArabic").value=r.ttsText||"";
-  setMessage("Korrektur ausgewählt. Jetzt „Neue Aussprache testen“ und anhören.","good");
+  setMessage("Korrektur ausgewählt. Jetzt „Schnell testen“ und anhören.","good");
 }
 async function searchLearning(termOverride=""){
   const term=String(termOverride||$("#learnTerm").value||"").trim();
-  if(!term){setMessage("Bitte zuerst ein falsch ausgesprochenes Wort oder einen Namen auswählen/eintragen.");return}
+  if(!term){setMessage("Bitte zuerst ein falsch ausgesprochenes Wort oder einen Namen auswählen/eintragen.");return null}
   $("#learnTerm").value=term;
   clearLearningPreview();
   try{
@@ -1289,7 +1289,8 @@ async function searchLearning(termOverride=""){
     if(!r.ok||!d.ok)throw Error(d.error||"Korrektursuche fehlgeschlagen.");
     renderLearningResults(d.results||[]);renderLearningState(d);
     if((d.results||[]).length&&Number(d.results[0].score||0)>=.96)selectLearningCandidate(0);
-  }catch(e){setMessage(e.message||String(e))}
+    return d;
+  }catch(e){setMessage(e.message||String(e));return null}
 }
 function selectedTextWord(){
   const ta=$("#text");
@@ -1324,6 +1325,9 @@ function takeTextSelection(){
   const value=captureManualSelection()||selectedTextWord();
   if(!value){setMessage("Markiere zuerst das falsch ausgesprochene Wort im Text.");return}
   manualLearningTerm=value;
+  pendingLearningTerms.add(learningNorm(value));
+  persistPendingLearningTerms();
+  renderStoryWordList();
   learningVariant=0;
   $("#learnResetVariantBtn").textContent="Variante 1";
   $("#learnTerm").value=value;
@@ -1398,8 +1402,11 @@ async function confirmLearning(){
     if(!r.ok||!d.ok)throw Error(d.error||"Aussprache konnte nicht gespeichert werden.");
     clearLearningPreview();renderLearningState(d);
     manualLearningTerm=term;
+    pendingLearningTerms.delete(learningNorm(term));
+    persistPendingLearningTerms();
     await loadLibrary();
     renderAnalysis();
+    renderStoryWordList();
     await searchLearning(term);
     if(typeof window.darReloadStrictProphetReview==="function"){
       await window.darReloadStrictProphetReview().catch(()=>{});
@@ -2116,6 +2123,9 @@ $("#termList").addEventListener("click",e=>{
   if(!btn)return;
   const term=btn.getAttribute("data-learning-term")||"";
   manualLearningTerm=term;
+  pendingLearningTerms.add(learningNorm(term));
+  persistPendingLearningTerms();
+  renderStoryWordList();
   learningVariant=0;
   $("#learnResetVariantBtn").textContent="Variante 1";
   $("#learnTerm").value=term;
