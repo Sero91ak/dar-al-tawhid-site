@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-tab106",
-  "label": "KIDS · V1.06",
-  "releasedAt": "2026-10-02T09:28:00.000Z",
-  "note": "V1.06: Geschichten im Premium-Widescreen-Stil. Muḥammad ﷺ steht als besonderer Bereich ganz oben und zusätzlich als hervorgehobener erster Eintrag der Prophetenbibliothek. Seine Detailseite besitzt einen eigenen Weg-/Botschaft-/Werte-/Stationen-Aufbau. Die Haupt-Tab-Leiste blieb unverändert.",
+  "buildId": "kids-shell-v12-tab105",
+  "label": "KIDS · V1.05",
+  "releasedAt": "2026-10-02T09:08:00.000Z",
+  "note": "V1.05 UI-Refresh: Geschichten im Premium-Widescreen-Stil. Muḥammad ﷺ steht als besonderer Bereich ganz oben und zusätzlich als hervorgehobener erster Eintrag der Prophetenbibliothek. Seine Detailseite besitzt einen eigenen Weg-, Botschaft-, Werte- und Stationen-Aufbau. Die Haupt-Tab-Leiste blieb unverändert.",
   "visualSystem": {
     "prophetStories": "premium-stories-wow-v20",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v106",
+    "serviceWorkerCache": "v105",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -39,5 +39,5 @@
     "noArrowOverHeroArt": true,
     "bottomNavigationChanged": false
   },
-  "updatedAt": "2026-10-02T09:27:00.000Z"
+  "updatedAt": "2026-10-02T09:30:00.000Z"
 }
