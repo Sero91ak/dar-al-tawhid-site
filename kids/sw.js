@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v117";
+const CACHE_NAME="dar-al-tawhid-kids-v105";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -12,9 +12,8 @@ const PRECACHE=[
   "/kids/quiz-owner-voice.js?v=1",
   "/kids/data/stories-authentic.json",
   "/kids/data/prophet-stories.json",
-  "/kids/prophet-stories.css?v=21",
-  "/kids/prophet-muhammad-v22.css?v=31",
-  "/kids/prophet-stories.js?v=31",
+  "/kids/prophet-stories.css?v=19",
+  "/kids/prophet-stories.js?v=19",
   "/kids/assets/prophet-scenes/library.webp",
   "/kids/assets/prophet-scenes/garden.webp",
   "/kids/assets/prophet-scenes/ocean.webp",
@@ -23,19 +22,6 @@ const PRECACHE=[
   "/kids/assets/prophet-scenes/royal.webp",
   "/kids/assets/prophet-scenes/water.webp",
   "/kids/assets/prophet-scenes/night.webp",
-  "/kids/assets/story-wow/muhammad-hero.jpg",
-  "/kids/assets/story-wow/muhammad-route.jpg",
-  "/kids/assets/story-wow/muhammad-hira.jpg",
-  "/kids/assets/story-wow/muhammad-madinah.jpg",
-  "/kids/assets/story-wow/v22-muhammad-hero.jpg",
-  "/kids/assets/story-wow/v22-muhammad-route.jpg",
-  "/kids/assets/story-wow/v22-muhammad-hira.jpg",
-  "/kids/assets/story-wow/v22-muhammad-madinah.jpg",
-  "/kids/assets/story-wow/v22-stories-header.jpg",
-  "/kids/assets/story-wow/v22-prophet-library.jpg",
-  "/kids/assets/story-wow/v22-coin-story.jpg",
-  "/kids/assets/story-wow/v30-muhammad-home.jpg",
-  "/kids/assets/story-wow/v30-muhammad-birth.jpg",
   "/kids/assets/prophet-symbols/muhammad.webp",
   "/kids/assets/prophet-symbols/adam.webp",
   "/kids/assets/prophet-symbols/idris.webp",
@@ -79,14 +65,14 @@ function networkFirst(request,fallback){
     }
     return response;
   }).catch(function(){
-    return caches.match(request,{ignoreSearch:true}).then(function(hit){
+    return caches.match(request).then(function(hit){
       if(hit)return hit;
-      return fallback?caches.match(fallback,{ignoreSearch:true}):Response.error();
+      return fallback?caches.match(fallback):Response.error();
     });
   });
 }
 function cacheFirst(request){
-  return caches.match(request,{ignoreSearch:true}).then(function(hit){
+  return caches.match(request).then(function(hit){
     if(hit)return hit;
     return fetch(request).then(function(response){
       if(response&&(response.ok||response.type==="opaque")){
