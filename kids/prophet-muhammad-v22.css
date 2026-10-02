@@ -455,3 +455,249 @@
     animation:none!important;
   }
 }
+
+
+/* v26 — carry the same premium visual language into the Prophet library */
+.ps-library-page{
+  background:
+    radial-gradient(circle at 86% 0,rgba(54,145,181,.15),transparent 24%),
+    linear-gradient(180deg,#031827 0%,#05243a 58%,#031827 100%)!important;
+}
+.ps-library-nav{
+  position:relative!important;
+  min-height:146px!important;
+  align-items:flex-end!important;
+  padding:0 18px 17px!important;
+  overflow:hidden!important;
+  border-bottom:1px solid rgba(242,203,111,.28)!important;
+  background:
+    linear-gradient(90deg,rgba(2,17,29,.96) 0%,rgba(2,18,30,.79) 43%,rgba(2,18,30,.28) 70%,rgba(2,18,30,.06) 100%),
+    linear-gradient(180deg,rgba(1,14,24,.04),rgba(2,17,29,.45)),
+    url("/kids/assets/prophet-scenes/library.webp?v=1") 66% 46%/cover no-repeat!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.24)!important;
+}
+.ps-library-nav::before{
+  content:"PROPHETENGESCHICHTEN"!important;
+  position:absolute!important;
+  z-index:2!important;
+  left:66px!important;
+  top:calc(env(safe-area-inset-top,0px) + 12px)!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  min-height:25px!important;
+  padding:0 10px!important;
+  border:1px solid rgba(247,211,116,.64)!important;
+  border-radius:999px!important;
+  background:rgba(4,31,45,.68)!important;
+  color:#ffe4a0!important;
+  font-size:7.8px!important;
+  font-weight:800!important;
+  letter-spacing:.13em!important;
+}
+.ps-library-nav::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:2!important;
+  left:18px!important;
+  right:18px!important;
+  bottom:0!important;
+  height:1px!important;
+  background:linear-gradient(90deg,transparent,rgba(242,203,111,.90) 36%,rgba(87,196,215,.55) 66%,transparent)!important;
+}
+.ps-library-back{
+  position:absolute!important;
+  z-index:4!important;
+  left:14px!important;
+  top:calc(env(safe-area-inset-top,0px) + 8px)!important;
+  width:39px!important;
+  height:39px!important;
+  padding:0 0 2px!important;
+  border:1px solid rgba(247,211,116,.68)!important;
+  background:rgba(3,28,43,.70)!important;
+  color:#ffe5a2!important;
+  font-size:27px!important;
+  box-shadow:0 0 18px rgba(236,190,72,.10),inset 0 1px rgba(255,255,255,.04)!important;
+  backdrop-filter:blur(7px)!important;
+  -webkit-backdrop-filter:blur(7px)!important;
+}
+.ps-library-nav-copy{
+  position:relative!important;
+  z-index:3!important;
+  max-width:70%!important;
+  padding:0!important;
+}
+.ps-library-nav-copy strong{
+  display:block!important;
+  color:#fff3d0!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:31px!important;
+  line-height:.94!important;
+  font-weight:700!important;
+  letter-spacing:-.035em!important;
+  text-shadow:0 4px 16px rgba(0,0,0,.36)!important;
+}
+.ps-library-nav-copy span{
+  display:block!important;
+  margin-top:6px!important;
+  color:#e4f2f7!important;
+  font-size:10px!important;
+  line-height:1.25!important;
+  font-weight:600!important;
+}
+.ps-library-page .ps-toolbar{
+  padding:6px 9px 7px!important;
+  border-bottom:1px solid rgba(83,188,211,.20)!important;
+  background:linear-gradient(180deg,rgba(4,31,49,.985),rgba(3,24,40,.99))!important;
+}
+.ps-library-page .ps-modes{
+  gap:5px!important;
+}
+.ps-library-page .ps-mode{
+  height:36px!important;
+  min-height:36px!important;
+  border-color:rgba(84,183,209,.31)!important;
+  background:rgba(5,37,56,.72)!important;
+  color:#e6f2f6!important;
+  font-size:9.6px!important;
+  font-weight:700!important;
+}
+.ps-library-page .ps-mode.active{
+  border-color:rgba(247,210,111,.78)!important;
+  background:linear-gradient(180deg,rgba(100,77,35,.30),rgba(6,37,52,.78))!important;
+  color:#ffe29a!important;
+  box-shadow:0 0 18px rgba(237,191,74,.12),inset 0 1px rgba(255,255,255,.04)!important;
+}
+.ps-library-page .ps-library-list{
+  gap:0!important;
+  padding:0 0 calc(18px + env(safe-area-inset-bottom,0px))!important;
+}
+.ps-library-page .ps-muhammad-feature{
+  width:100%!important;
+  height:198px!important;
+  margin:0!important;
+  border:0!important;
+  border-bottom:1px solid rgba(242,203,111,.30)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.ps-library-page .ps-muhammad-feature-art{
+  object-position:62% 50%!important;
+}
+.ps-library-page .ps-muhammad-feature-shade{
+  background:
+    radial-gradient(circle at 72% 18%,rgba(255,216,123,.12),transparent 27%),
+    linear-gradient(90deg,rgba(2,15,26,.98) 0%,rgba(2,15,26,.90) 38%,rgba(2,15,26,.43) 65%,rgba(2,15,26,.05) 100%),
+    linear-gradient(180deg,transparent 42%,rgba(2,15,26,.56))!important;
+}
+.ps-library-page .ps-muhammad-feature-copy{
+  left:19px!important;
+  right:18%!important;
+  top:19px!important;
+  bottom:16px!important;
+}
+.ps-library-page .ps-muhammad-feature-kicker{
+  font-size:7.7px!important;
+  letter-spacing:.12em!important;
+  color:#ffe39b!important;
+}
+.ps-library-page .ps-muhammad-feature-copy strong{
+  margin-top:8px!important;
+  max-width:75%!important;
+  color:#fff3cf!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:30px!important;
+  line-height:.92!important;
+  letter-spacing:-.035em!important;
+}
+.ps-library-page .ps-muhammad-feature-sub{
+  margin-top:6px!important;
+  color:#e6f4f8!important;
+  font-size:10.5px!important;
+  font-weight:600!important;
+}
+.ps-library-page .ps-muhammad-feature-cta{
+  min-height:34px!important;
+  margin-top:auto!important;
+  padding:0 14px!important;
+  font-size:9.4px!important;
+}
+.ps-library-page .ps-story-row{
+  height:118px!important;
+  min-height:118px!important;
+  border-top:0!important;
+  border-bottom:1px solid rgba(87,190,211,.22)!important;
+  box-shadow:none!important;
+}
+.ps-library-page .ps-story-row::before{
+  background:
+    linear-gradient(90deg,rgba(2,17,29,.05) 0%,rgba(2,17,29,.10) 34%,rgba(2,18,31,.46) 55%,rgba(2,18,31,.86) 100%)!important;
+}
+.ps-library-page .ps-row-copy{
+  left:50%!important;
+  right:49px!important;
+}
+.ps-library-page .ps-row-meta{
+  color:#b8e3d7!important;
+  font-size:7.4px!important;
+  letter-spacing:.10em!important;
+}
+.ps-library-page .ps-row-title{
+  margin-top:4px!important;
+  color:#fff4d4!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:21px!important;
+  line-height:.95!important;
+  font-weight:700!important;
+  letter-spacing:-.03em!important;
+}
+.ps-library-page .ps-row-ar{
+  margin-top:4px!important;
+  color:#f1d77d!important;
+  font-size:13px!important;
+}
+.ps-library-page .ps-row-go{
+  right:11px!important;
+  width:31px!important;
+  height:31px!important;
+  border-color:rgba(247,211,116,.48)!important;
+  background:rgba(4,31,48,.46)!important;
+  color:#ffe29b!important;
+  font-size:21px!important;
+}
+.ps-library-page .ps-done{
+  right:47px!important;
+  bottom:8px!important;
+  width:17px!important;
+  height:17px!important;
+}
+.ps-library-page .ps-done::after{
+  left:5px!important;
+  top:3px!important;
+  width:4px!important;
+  height:7px!important;
+}
+.ps-library-page button:focus-visible{
+  outline:2px solid #ffe29a!important;
+  outline-offset:2px!important;
+}
+@media(max-width:390px){
+  .ps-library-nav{min-height:138px!important}
+  .ps-library-nav-copy strong{font-size:28px!important}
+  .ps-library-page .ps-muhammad-feature{height:188px!important}
+  .ps-library-page .ps-muhammad-feature-copy strong{font-size:27px!important}
+  .ps-library-page .ps-story-row{height:112px!important;min-height:112px!important}
+  .ps-library-page .ps-row-title{font-size:19px!important}
+}
+@media(min-width:700px){
+  .ps-library-nav{min-height:190px!important;padding-left:28px!important;padding-bottom:24px!important}
+  .ps-library-nav::before{left:84px!important}
+  .ps-library-nav-copy strong{font-size:44px!important}
+  .ps-library-nav-copy span{font-size:13px!important}
+  .ps-library-page .ps-muhammad-feature{height:280px!important}
+  .ps-library-page .ps-muhammad-feature-copy{left:32px!important;right:44%!important;top:28px!important;bottom:24px!important}
+  .ps-library-page .ps-muhammad-feature-copy strong{font-size:43px!important}
+  .ps-library-page .ps-story-row{height:150px!important;min-height:150px!important}
+  .ps-library-page .ps-row-copy{left:48%!important;right:64px!important}
+  .ps-library-page .ps-row-title{font-size:28px!important}
+  .ps-library-page .ps-row-ar{font-size:17px!important}
+}
