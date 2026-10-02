@@ -352,10 +352,6 @@ function openMuhammadFullStory(){
   requestAnimationFrame(()=>body.scrollIntoView({behavior:"smooth",block:"start"}));
 }
 function goMuhammadNav(target){
-  if(target==="stories"){
-    const scroll=$("#psScroll");if(scroll)scroll.scrollTo({top:0,behavior:"smooth"});
-    return;
-  }
   closeStory();
   setTimeout(()=>{
     if($("#psLibraryPage")?.classList.contains("open"))closeLibrary();
