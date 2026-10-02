@@ -14,7 +14,7 @@ const PRECACHE=[
   "/kids/data/prophet-stories.json",
   "/kids/prophet-stories.css?v=21",
   "/kids/prophet-muhammad-v22.css?v=33",
-  "/kids/prophet-stories.js?v=33",
+  "/kids/prophet-stories.js?v=32",
   "/kids/assets/prophet-scenes/library.webp",
   "/kids/assets/prophet-scenes/garden.webp",
   "/kids/assets/prophet-scenes/ocean.webp",
@@ -128,7 +128,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"){
+  if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"||url.pathname==="/kids/prophet-muhammad-v22.css"){
     event.respondWith(networkFirst(request));
     return;
   }
