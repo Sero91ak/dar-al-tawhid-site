@@ -338,8 +338,12 @@ function toggleMuhammadEpisodes(button){
   if(button){button.setAttribute("aria-expanded",String(expanded));button.innerHTML=expanded?'Weniger <b aria-hidden="true">↑</b>':'Alle anzeigen <b aria-hidden="true">→</b>';}
 }
 function goMuhammadLibrary(){
+  const alreadyOpen=$("#psLibraryPage")?.classList.contains("open");
   closeStory();
-  setTimeout(()=>$("#psLibraryScroll")?.scrollTo({top:0,behavior:"smooth"}),40);
+  setTimeout(()=>{
+    if(!alreadyOpen)openLibrary();
+    setTimeout(()=>$("#psLibraryScroll")?.scrollTo({top:0,behavior:"smooth"}),50);
+  },40);
 }
 function openMuhammadFullStory(){
   const modal=$("#psModal"),body=$(".ps-body");if(!modal||!body)return;
