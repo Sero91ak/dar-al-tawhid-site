@@ -1717,3 +1717,59 @@
   .ps-mh-ornament span::before{inset:2px!important}
   .ps-mh-ornament span::after{width:4px!important;height:4px!important}
 }
+
+
+/* REFERENCE_TABLET_GEOMETRY_V35
+   Preserve the mobile reference proportions on iPad/tablet instead of allowing
+   legacy large-card rules to become vertically oversized. */
+@media(min-width:601px){
+  #view-stories.ps-stories-home .ps-muhammad-home{
+    min-height:0!important;
+    height:min(266px,calc(35.6vw - 11.4px))!important;
+    max-height:266px!important;
+  }
+  #view-stories.ps-stories-home .ps-prophet-entry{
+    min-height:0!important;
+    height:min(231px,calc(30.9vw - 9.9px))!important;
+    max-height:231px!important;
+  }
+  #view-stories.ps-stories-home .story-scene{
+    height:min(270px,calc(36vw - 11.5px))!important;
+    max-height:270px!important;
+  }
+  #view-stories.ps-stories-home .story-copy{
+    min-height:0!important;
+    height:min(123px,calc(16.4vw - 5.2px))!important;
+    max-height:123px!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-row{
+    flex-basis:min(260px,34.5vw)!important;
+  }
+  #view-stories.ps-stories-home > .story-list:not(#authenticStoryList) .story-thumb{
+    height:min(150px,19.8vw)!important;
+  }
+
+  .ps-mh-hero{
+    min-height:0!important;
+    height:min(402px,41vw)!important;
+    max-height:402px!important;
+  }
+  .ps-mh-way{
+    min-height:0!important;
+    height:min(238px,24.3vw)!important;
+    max-height:238px!important;
+  }
+  .ps-mh-message{
+    min-height:0!important;
+    height:min(255px,26vw)!important;
+    max-height:255px!important;
+  }
+  .ps-mh-values{
+    min-height:0!important;
+    height:min(270px,27.6vw)!important;
+    max-height:270px!important;
+  }
+  .ps-mh-bottom-nav{
+    min-height:72px!important;
+  }
+}
