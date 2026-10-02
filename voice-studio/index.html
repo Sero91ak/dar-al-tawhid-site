@@ -603,7 +603,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.57 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.58 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -652,7 +652,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.57</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.58</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
@@ -812,7 +812,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
     <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.57</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.58</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash</textarea>
@@ -904,7 +904,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.57 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.58 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
 </div>
 </div>
 
@@ -996,7 +996,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.57")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.58")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -1014,7 +1014,7 @@ window.darUpdateStateChanged=data=>{
     state.className="update-state";
   }else if(nativeUpdateState==="current"){
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.57")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.58")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     top.hidden=false;
@@ -1332,8 +1332,13 @@ async function confirmLearning(){
     const d=await r.json().catch(()=>({}));
     if(!r.ok||!d.ok)throw Error(d.error||"Aussprache konnte nicht gespeichert werden.");
     clearLearningPreview();renderLearningState(d);
+    manualLearningTerm=term;
     await loadLibrary();
+    renderAnalysis();
     await searchLearning(term);
+    if(typeof window.darReloadStrictProphetReview==="function"){
+      await window.darReloadStrictProphetReview().catch(()=>{});
+    }
     if(rerenderCurrentAudio){
       pendingAutoRerenderText=currentText;
       const postCorrection=await analyzeProsody();
@@ -2054,6 +2059,9 @@ $("#termList").addEventListener("click",e=>{
   const btn=e.target.closest("[data-learning-term]");
   if(!btn)return;
   const term=btn.getAttribute("data-learning-term")||"";
+  manualLearningTerm=term;
+  learningVariant=0;
+  $("#learnResetVariantBtn").textContent="Variante 1";
   $("#learnTerm").value=term;
   $("#learningSection").scrollIntoView({behavior:"smooth",block:"start"});
   searchLearning(term);
@@ -2063,8 +2071,11 @@ $("#learnResults").addEventListener("click",e=>{
   if(btn)selectLearningCandidate(btn.getAttribute("data-learning-index"));
 });
 $("#learnSelectionBtn").onclick=takeTextSelection;
-$("#learnSearchBtn").onclick=()=>searchLearning();
-$("#learnPreviewBtn").onclick=previewLearning;
+$("#manualSelectionBtn").onclick=takeTextSelection;
+$("#learnSearchBtn").onclick=()=>{learningVariant=0;$("#learnResetVariantBtn").textContent="Variante 1";searchLearning()};
+$("#learnPreviewBtn").onclick=()=>previewLearning();
+$("#learnVariantBtn").onclick=()=>previewLearning({nextVariant:true});
+$("#learnResetVariantBtn").onclick=()=>{learningVariant=0;$("#learnResetVariantBtn").textContent="Variante 1";previewLearning()};
 $("#learnConfirmBtn").onclick=confirmLearning;
 $("#learnSyncBtn").onclick=syncLearning;
 $("#learnTerm").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();searchLearning()}});
@@ -2073,6 +2084,11 @@ $("#learnArabic").addEventListener("input",clearLearningPreview);
 try{$("#freeVoiceText").value=localStorage.getItem("dar.voice.freeText.v2")||""}catch(_){}
 updateFreeVoiceCounter();
 $("#text").addEventListener("input",()=>{resetAudioQA();renderAnalysis()});
+$("#text").addEventListener("select",captureManualSelection);
+$("#text").addEventListener("mouseup",()=>setTimeout(captureManualSelection,0));
+$("#text").addEventListener("keyup",e=>{
+  if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key))captureManualSelection();
+});
 $("#styleMode").addEventListener("change",()=>{resetAudioQA();manualAnalyze()});
 $("#analyzeBtn").onclick=manualAnalyze;
 $("#mobileAnalyzeBtn").onclick=manualAnalyze;
@@ -2423,6 +2439,7 @@ setInterval(()=>checkHealth({quiet:true}),5000);
       console.warn("[DĀR Voice] strict prophet review",e);
     }
   }
+  window.darReloadStrictProphetReview=loadStrictReview;
   async function loadPack(){
     try{
       let items=null;
