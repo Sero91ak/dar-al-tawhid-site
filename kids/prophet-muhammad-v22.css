@@ -1828,3 +1828,8 @@
 #view-stories.ps-stories-home .story-row[data-story="kindword"] .story-thumb{background-image:linear-gradient(180deg,transparent 55%,rgba(2,20,32,.22)),url("/kids/assets/story-wow/v31-story-kindword.jpg?v=31")!important;background-size:cover!important;background-position:center 52%!important}
 #view-stories.ps-stories-home .story-row .story-thumb::before,#view-stories.ps-stories-home .story-row .story-thumb::after{display:none!important}
 .ps-modal.ps-muhammad-open .ps-scroll{padding-bottom:70px!important}
+
+/* REFERENCE_TYPE_FINISH_V32 */
+:root{--r22-serif:Baskerville,"Iowan Old Style","Palatino Linotype",Georgia,"Times New Roman",serif!important}
+.ps-mh-home-copy strong,.ps-prophet-entry .ps-entry-copy strong,#view-stories.ps-stories-home .story-copy h3,.r22-section-label strong,.ps-mh-hero h2,.ps-mh-panel h3,.ps-mh-values-head .ps-mh-panel-title h3,.ps-mh-section-title h3,.ps-mh-episode-copy strong{font-family:var(--r22-serif)!important}
+@media(max-width:600px){#view-stories.ps-stories-home .ps-mh-home-ar{font-size:25px!important;line-height:1!important}.ps-mh-ar{font-size:27px!important;line-height:1!important}}
