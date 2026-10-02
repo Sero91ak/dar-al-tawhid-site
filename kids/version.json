@@ -1,28 +1,24 @@
 {
-  "buildId": "kids-shell-v12-tab105",
-  "label": "KIDS · V1.05",
-  "releasedAt": "2026-10-02T08:50:00.000Z",
-  "note": "V1.05: Geschichten ist wieder der Kategorien-Hub. Prophetengeschichten öffnen jetzt als eigener Unterbereich mit 25 geprüften Einträgen. Der bisherige große Prophetentitel auf der Geschichten-Startseite wurde entfernt. Detailseiten wurden für iPhone/iPad neu strukturiert: 21:9-Bild vollständig oben, Titel/Arabisch/Metadaten darunter, keine Überlagerung durch Zurück-Button, keine abgeschnittenen Pills oder Modus-Schaltflächen.",
+  "buildId": "kids-shell-v12-tab103",
+  "label": "KIDS · V1.03",
+  "releasedAt": "2026-10-02T10:30:00.000Z",
+  "note": "V1.03: Prophetenbereich vollständig auf das neue Full-Bleed-System umgestellt: 25 einzelne hochauflösende Cinematic-Karten plus 25 eigene Detail-Heros, echte Viewport-Breite, keine Sprites oder Sticker-Layer, keine sichtbaren menschlichen Darstellungen und aktualisierte Responsive-/Cache-Architektur.",
   "visualSystem": {
-    "prophetStories": "nested-prophet-library-v19",
-    "storiesHomeAsCategoryHub": true,
-    "prophetLibraryOwnPage": true,
-    "prophetLibraryLargeHeader": false,
-    "prophetEntryImage": "/kids/assets/prophet-scenes/library.webp",
+    "prophetStories": "cinematic-fullbleed-v18",
     "chronologicalOrder": true,
     "individualHighResolutionCards": 25,
+    "dedicatedHighResolutionHeroes": 25,
     "sharedSprite": false,
     "stickerLayers": false,
     "visibleFaces": false,
+    "humanDepictions": false,
     "viewportEdgeToEdge": true,
     "responsivePhone": true,
     "responsiveTablet": true,
     "responsiveDesktop": true,
-    "detailImageFirst": true,
-    "detailHeroRatio": "21:9",
-    "detailCopySeparatedFromImage": true,
-    "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
-    "premiumDetailHeroes": 25
+    "structuredProphetSubpage": true,
+    "serviceWorkerCache": "v103",
+    "liveExperimentation": false
   }
 }
