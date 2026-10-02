@@ -2,7 +2,7 @@
 "use strict";
 
 const DATA_URL="/kids/data/prophet-stories.json";
-const MODE_KEY="kids.contentMode.v20";
+const MODE_KEY="kids.contentMode.v21";
 const PROPHET_ORDER=[
   "adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub",
   "yusuf","ayyub","shuayb","musa","harun","dhul-kifl","dawud","sulayman",
@@ -15,12 +15,12 @@ function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=
 function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=20":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
 const MUHAMMAD_EPISODES=[
-  {id:"wahy",title:"Die erste Offenbarung",meta:"MAKKAH · ḤIRĀʾ",source:"Qurʾān 96:1–5",summary:"In der Höhle Ḥirāʾ begann die Offenbarung. Von hier aus begann seine Aufgabe als Gesandter.",art:"/kids/assets/prophet-scenes/mountain.webp?v=20"},
-  {id:"tawhid",title:"Der Ruf zum Tawḥīd",meta:"MAKKAH · DAʿWAH",source:"Qurʾān 21:107",summary:"Er rief die Menschen dazu, Allah allein anzubeten, und blieb trotz Ablehnung standhaft.",art:"/kids/assets/prophet-scenes/night.webp?v=20"},
-  {id:"hijrah",title:"Die Hiǧrah nach Madīnah",meta:"VERTRAUEN · GEDULD",source:"Qurʾān 9:40",summary:"Die Auswanderung zeigt Vertrauen auf Allah, Geduld und einen neuen Anfang für die muslimische Gemeinschaft.",art:"/kids/assets/prophet-scenes/desert.webp?v=20"},
-  {id:"madinah",title:"Die Gemeinschaft in Madīnah",meta:"LEHREN · GERECHTIGKEIT",source:"Qurʾān 33:21",summary:"In Madīnah lehrte er Gottesdienst, Familie, Nachbarschaft, Gerechtigkeit und Verantwortung.",art:"/kids/assets/prophet-scenes/garden.webp?v=20"},
-  {id:"rahmah",title:"Barmherzigkeit für die Welten",meta:"BOTSCHAFT · CHARAKTER",source:"Qurʾān 21:107 · 68:4",summary:"Seine Sendung wird als Barmherzigkeit beschrieben, und Allah lobt seinen großartigen Charakter.",art:"/kids/assets/prophet-scenes/water.webp?v=20"},
-  {id:"khatam",title:"Siegel der Propheten",meta:"ḪĀTAM AN-NABIYYĪN",source:"Qurʾān 33:40",summary:"Muḥammad ﷺ ist das Siegel der Propheten. Nach ihm kommt kein neuer Prophet.",art:"/kids/assets/prophet-scenes/library.webp?v=20"}
+  {id:"wahy",title:"Die erste Offenbarung",meta:"MAKKAH · ḤIRĀʾ",source:"Qurʾān 96:1–5",summary:"In der Höhle Ḥirāʾ begann die Offenbarung. Von hier aus begann seine Aufgabe als Gesandter.",art:"/kids/assets/story-wow/muhammad-hira.jpg?v=21"},
+  {id:"tawhid",title:"Der Ruf zum Tawḥīd",meta:"MAKKAH · DAʿWAH",source:"Qurʾān 21:107",summary:"Er rief die Menschen dazu, Allah allein anzubeten, und blieb trotz Ablehnung standhaft.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=21"},
+  {id:"hijrah",title:"Die Hiǧrah nach Madīnah",meta:"VERTRAUEN · GEDULD",source:"Qurʾān 9:40",summary:"Die Auswanderung zeigt Vertrauen auf Allah, Geduld und einen neuen Anfang für die muslimische Gemeinschaft.",art:"/kids/assets/story-wow/muhammad-route.jpg?v=21"},
+  {id:"madinah",title:"Die Gemeinschaft in Madīnah",meta:"LEHREN · GERECHTIGKEIT",source:"Qurʾān 33:21",summary:"In Madīnah lehrte er Gottesdienst, Familie, Nachbarschaft, Gerechtigkeit und Verantwortung.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=21"},
+  {id:"rahmah",title:"Barmherzigkeit für die Welten",meta:"BOTSCHAFT · CHARAKTER",source:"Qurʾān 21:107 · 68:4",summary:"Seine Sendung wird als Barmherzigkeit beschrieben, und Allah lobt seinen großartigen Charakter.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=21"},
+  {id:"khatam",title:"Siegel der Propheten",meta:"ḪĀTAM AN-NABIYYĪN",source:"Qurʾān 33:40",summary:"Muḥammad ﷺ ist das Siegel der Propheten. Nach ihm kommt kein neuer Prophet.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=21"}
 ];
 let items=[],active=null,activeText="",playing=false,busy=false;
 const audio=new Audio();

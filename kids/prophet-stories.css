@@ -2141,3 +2141,198 @@ html.ps-modal-open body{
 .ps-mh-episode-detail{margin:12px 18px 0;padding:17px;border:1px solid rgba(244,207,106,.30);border-radius:22px;background:linear-gradient(145deg,rgba(11,52,74,.92),rgba(5,31,48,.96))}.ps-mh-episode-detail span{color:#aedfec;font-size:9px;font-weight:950;letter-spacing:.13em}.ps-mh-episode-detail h4{margin:6px 0;color:#fff2c7;font-family:"Cinzel",Georgia,serif;font-size:23px}.ps-mh-episode-detail p{margin:0;color:#e2f2f7;font-size:13px;line-height:1.55}.ps-mh-episode-detail strong{display:block;margin-top:9px;color:#f0d377;font-size:10px}.ps-mh-fullstory{padding:24px 18px 12px;background:linear-gradient(180deg,#031827,#06243b)}.ps-modal.ps-muhammad-open .ps-body{padding-top:12px!important;background:linear-gradient(180deg,#06243b,#031827)!important}
 @media(max-width:430px){#view-stories.ps-stories-home .page-head{margin-left:-16px!important;margin-right:-16px!important}.ps-muhammad-home,.ps-prophet-entry,#view-stories.ps-stories-home .story-feature{width:calc(100% + 22px)!important;margin-left:-11px!important;margin-right:-11px!important}}
 @media(min-width:700px){.ps-muhammad-home{min-height:360px}.ps-prophet-entry{min-height:300px}.ps-mh-home-copy,.ps-muhammad-feature-copy{left:32px;right:42%}.ps-muhammad-feature{height:390px;margin:12px 18px 8px;width:calc(100% - 36px)}.ps-mh-hero{min-height:560px}.ps-mh-hero-copy{left:46px;right:45%;top:106px}.ps-mh-panel{min-height:400px}.ps-mh-panel-copy{left:46px;right:46%}.ps-mh-values{padding:34px 42px}.ps-mh-value-grid{grid-template-columns:repeat(4,1fr)}.ps-mh-section-head{padding:0 42px 16px}.ps-mh-episode-rail{padding-left:42px;padding-right:42px}.ps-mh-episode{flex-basis:310px}.ps-mh-episode-detail{margin-left:42px;margin-right:42px}.ps-mh-fullstory{padding:32px 42px 15px}}
+
+
+/* ===== STORIES REFERENCE MATCH v21 =====
+   Approved mockup match. Main bottom tab bar is deliberately untouched. */
+:root{--ps-wow-gold:#f0cb72;--ps-wow-cyan:#55c7e7;--ps-wow-cream:#fff3cf}
+#view-stories.ps-stories-home{
+  background:radial-gradient(circle at 84% 5%,rgba(63,184,220,.12),transparent 30%),linear-gradient(180deg,#05263b 0%,#06253a 45%,#031a2a 100%)!important
+}
+#view-stories.ps-stories-home .page-head{
+  min-height:190px!important;margin:-4px -16px 18px!important;padding:27px 22px 25px!important;
+  display:flex!important;flex-direction:column!important;justify-content:flex-end!important;
+  border-bottom:1px solid rgba(89,196,227,.38)!important;
+  background:linear-gradient(90deg,rgba(3,24,39,.98) 0%,rgba(3,24,39,.88) 42%,rgba(3,24,39,.34) 73%,rgba(3,24,39,.05) 100%),linear-gradient(180deg,rgba(3,20,34,.02) 15%,rgba(3,20,34,.82) 100%),url("/kids/assets/story-wow/muhammad-hero.jpg?v=21") 68% 50%/cover no-repeat!important
+}
+#view-stories.ps-stories-home .page-head::after{
+  content:""!important;position:absolute!important;inset:auto 19px 0 19px!important;width:auto!important;height:1px!important;opacity:1!important;
+  background:linear-gradient(90deg,transparent,var(--ps-wow-gold) 38%,var(--ps-wow-cyan) 62%,transparent)!important;-webkit-mask-image:none!important;mask-image:none!important
+}
+#view-stories.ps-stories-home .page-head .kicker{
+  width:max-content!important;min-height:30px!important;padding:0 13px!important;color:#ffe19a!important;border:1px solid rgba(240,203,114,.58)!important;
+  background:rgba(5,33,49,.74)!important;box-shadow:0 0 22px rgba(240,203,114,.08)!important
+}
+#view-stories.ps-stories-home .page-head h2{
+  margin:11px 0 7px!important;max-width:78%!important;font-size:clamp(40px,10.2vw,64px)!important;color:#fff7e2!important;
+  letter-spacing:-.045em!important;text-shadow:0 4px 16px rgba(0,0,0,.35)!important
+}
+#view-stories.ps-stories-home .page-head p{max-width:590px!important;color:#e7f4f8!important;font-weight:650!important;text-shadow:0 2px 8px rgba(0,0,0,.32)!important}
+
+.ps-muhammad-home{
+  min-height:clamp(275px,67vw,390px)!important;margin:17px -5px 18px!important;border-radius:31px!important;
+  border:1px solid rgba(245,205,106,.82)!important;background:#041725!important;
+  box-shadow:0 18px 44px rgba(0,0,0,.31),0 0 0 1px rgba(255,232,160,.06),0 0 25px rgba(240,195,78,.16)!important
+}
+.ps-mh-home-art{background:url("/kids/assets/story-wow/muhammad-hero.jpg?v=21") 67% 50%/cover no-repeat!important;filter:saturate(1.06) contrast(1.05) brightness(.96)!important}
+.ps-mh-home-shade{
+  background:radial-gradient(circle at 75% 24%,rgba(255,216,123,.16),transparent 29%),linear-gradient(90deg,rgba(2,14,24,.98) 0%,rgba(2,15,26,.92) 37%,rgba(2,15,26,.47) 62%,rgba(2,15,26,.06) 100%),linear-gradient(180deg,transparent 45%,rgba(2,15,26,.60) 100%)!important
+}
+.ps-mh-home-copy{left:24px!important;right:15%!important;top:23px!important;bottom:22px!important}
+.ps-mh-home-kicker{min-height:30px!important;padding:0 12px!important;color:#ffe39c!important;border-color:rgba(249,213,118,.68)!important;background:rgba(5,30,43,.72)!important}
+.ps-mh-home-copy strong{
+  margin-top:13px!important;max-width:76%!important;font-family:"Cinzel",Georgia,serif!important;font-size:clamp(35px,9.4vw,60px)!important;
+  line-height:.92!important;letter-spacing:-.045em!important;color:#fff1c6!important;text-shadow:0 4px 18px rgba(0,0,0,.45)!important
+}
+.ps-mh-home-sub{margin-top:9px!important;color:#eef9fc!important;font-size:clamp(13px,3.25vw,18px)!important}
+.ps-mh-home-cta,.ps-entry-cta,.ps-muhammad-feature-cta{
+  min-height:44px!important;padding:0 18px!important;gap:14px!important;border-color:rgba(247,210,110,.78)!important;
+  background:linear-gradient(180deg,rgba(7,41,56,.82),rgba(5,29,45,.80))!important;color:#ffe19a!important;
+  box-shadow:0 0 24px rgba(239,195,82,.12),inset 0 1px rgba(255,255,255,.05)!important
+}
+.ps-prophet-entry{
+  min-height:clamp(225px,53vw,315px)!important;margin-bottom:19px!important;border-radius:30px!important;border:1px solid rgba(74,192,228,.55)!important;
+  background:linear-gradient(90deg,rgba(2,18,31,.96) 0%,rgba(3,27,45,.80) 40%,rgba(3,27,45,.30) 69%,rgba(3,27,45,.03) 100%),linear-gradient(180deg,transparent 45%,rgba(2,20,33,.58)),url("/kids/assets/story-wow/muhammad-route.jpg?v=21") 64% 54%/cover no-repeat!important;
+  box-shadow:0 17px 40px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.05)!important
+}
+.ps-prophet-entry .ps-entry-copy{left:24px!important;right:20%!important;top:24px!important;bottom:20px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important}
+.ps-prophet-entry .ps-entry-copy strong{margin-top:8px!important;max-width:90%!important;color:#fff0c8!important;font-size:clamp(29px,7.45vw,47px)!important}
+.ps-entry-go{display:none!important}
+
+#view-stories.ps-stories-home .story-feature{
+  width:calc(100% + 10px)!important;margin-left:-5px!important;margin-right:-5px!important;border-radius:30px!important;
+  border:1px solid rgba(73,184,217,.43)!important;background:#07344d!important;box-shadow:0 17px 40px rgba(0,0,0,.22)!important
+}
+#view-stories.ps-stories-home .story-scene{height:clamp(220px,52vw,338px)!important}
+#view-stories.ps-stories-home .story-copy{
+  position:relative!important;min-height:132px!important;padding:17px 72px 18px 19px!important;background:linear-gradient(180deg,#0b3d57 0%,#082f47 100%)!important
+}
+#view-stories.ps-stories-home .story-copy .story-go{
+  position:absolute!important;right:17px!important;top:50%!important;transform:translateY(-50%)!important;width:46px!important;height:46px!important;
+  border:1px solid rgba(248,212,114,.66)!important;background:rgba(4,30,46,.83)!important;color:#ffe19c!important;box-shadow:0 0 18px rgba(240,199,88,.08)!important
+}
+#view-stories.ps-stories-home .story-more-title,#view-stories.ps-stories-home .section-title{
+  margin:27px 0 14px!important;display:flex!important;align-items:center!important;gap:10px!important;color:#fff4d6!important;
+  font-size:clamp(24px,6vw,32px)!important;letter-spacing:-.025em!important
+}
+#view-stories.ps-stories-home .story-more-title::after,#view-stories.ps-stories-home .section-title::after{
+  content:""!important;display:block!important;flex:1!important;height:1px!important;background:linear-gradient(90deg,rgba(240,203,114,.82),transparent)!important
+}
+
+.ps-library-page{background:radial-gradient(circle at 84% -3%,rgba(53,178,220,.17),transparent 28%),linear-gradient(180deg,#031522 0%,#05243a 46%,#020e18 100%)!important}
+.ps-muhammad-feature{
+  height:clamp(280px,67vw,390px)!important;margin:12px 12px 11px!important;width:calc(100% - 24px)!important;isolation:isolate!important;
+  border:1px solid rgba(244,207,108,.78)!important;border-radius:30px!important;box-shadow:0 18px 45px rgba(0,0,0,.32),0 0 23px rgba(241,196,77,.12)!important
+}
+.ps-muhammad-feature::before{
+  content:""!important;position:absolute!important;z-index:0!important;inset:0!important;
+  background:url("/kids/assets/story-wow/muhammad-hero.jpg?v=21") 67% 50%/cover no-repeat!important
+}
+.ps-muhammad-feature-art{opacity:0!important}
+.ps-muhammad-feature-shade{
+  background:linear-gradient(90deg,rgba(2,14,24,.98) 0%,rgba(2,14,24,.90) 39%,rgba(2,14,24,.44) 65%,rgba(2,14,24,.04) 100%),linear-gradient(180deg,transparent 48%,rgba(1,13,23,.62))!important
+}
+.ps-muhammad-feature-copy{left:24px!important;right:17%!important;top:24px!important;bottom:22px!important}
+.ps-muhammad-feature-kicker{
+  display:inline-flex!important;align-items:center!important;min-height:29px!important;padding:0 12px!important;
+  border:1px solid rgba(255,219,117,.58)!important;border-radius:999px!important;background:rgba(6,31,45,.66)!important
+}
+.ps-muhammad-feature-copy strong{margin-top:13px!important;max-width:77%!important;font-size:clamp(34px,9vw,58px)!important}
+.ps-story-row{
+  border-radius:23px!important;border:1px solid rgba(83,178,210,.27)!important;background:linear-gradient(135deg,rgba(8,50,73,.86),rgba(5,34,53,.92))!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.16)!important
+}
+.ps-story-row .ps-row-go{
+  position:relative!important;right:auto!important;top:auto!important;flex:0 0 42px!important;width:42px!important;height:42px!important;
+  display:grid!important;place-items:center!important;margin-right:13px!important;border:1px solid rgba(244,207,108,.38)!important;border-radius:50%!important;
+  background:rgba(3,27,43,.78)!important;color:#ffe19a!important;transform:none!important
+}
+
+/* Muḥammad ﷺ dedicated inner page */
+.ps-modal.ps-muhammad-open .ps-scroll{background:#031827!important}
+.ps-modal.ps-muhammad-open .ps-top{
+  background:linear-gradient(180deg,rgba(2,14,24,.72),rgba(2,14,24,0))!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important
+}
+.ps-modal.ps-muhammad-open .ps-close{
+  margin-left:10px!important;margin-top:max(7px,env(safe-area-inset-top))!important;width:45px!important;height:45px!important;
+  border:1px solid rgba(255,226,145,.62)!important;background:rgba(3,27,42,.74)!important;color:#fff2c9!important;box-shadow:0 0 20px rgba(240,203,114,.09)!important
+}
+.ps-mh-hero{min-height:clamp(475px,113vw,690px)!important;isolation:isolate!important}
+.ps-mh-hero::after{
+  content:""!important;position:absolute!important;z-index:0!important;inset:0!important;
+  background:url("/kids/assets/story-wow/muhammad-hero.jpg?v=21") 69% 50%/cover no-repeat!important
+}
+.ps-mh-hero-art{opacity:0!important}
+.ps-mh-hero-shade{
+  background:radial-gradient(circle at 78% 20%,rgba(255,209,97,.14),transparent 27%),linear-gradient(90deg,rgba(1,12,21,.98) 0%,rgba(1,14,24,.94) 34%,rgba(1,14,24,.56) 57%,rgba(1,14,24,.08) 83%),linear-gradient(180deg,rgba(0,0,0,.04) 0%,transparent 48%,#031827 100%)!important
+}
+.ps-mh-hero-copy{
+  left:max(24px,env(safe-area-inset-left))!important;right:14%!important;top:max(92px,calc(env(safe-area-inset-top) + 70px))!important;bottom:35px!important
+}
+.ps-mh-special-label{
+  min-height:30px!important;padding:0 12px!important;border-color:rgba(248,213,119,.68)!important;background:rgba(4,29,43,.68)!important;color:#ffe29a!important
+}
+.ps-mh-hero h2{margin-top:14px!important;max-width:76%!important;font-size:clamp(45px,12vw,80px)!important;line-height:.88!important;letter-spacing:-.05em!important}
+.ps-mh-ar{margin-top:10px!important;color:#f1d370!important}
+.ps-mh-tagline{margin-top:8px!important;font-size:clamp(15px,3.7vw,21px)!important;font-weight:800!important}
+.ps-mh-intro{margin-top:10px!important;max-width:520px!important;color:rgba(237,248,252,.90)!important;line-height:1.55!important}
+.ps-mh-proof{min-height:29px!important;margin-top:auto!important;border-color:rgba(87,192,224,.35)!important;background:rgba(3,29,45,.64)!important}
+.ps-mh-ornament{height:34px!important;background:#031827!important}.ps-mh-ornament span{box-shadow:0 0 14px rgba(240,203,114,.20)!important}
+.ps-mh-panel{min-height:clamp(315px,74vw,470px)!important;border-top:1px solid rgba(92,190,223,.17)!important;border-bottom:1px solid rgba(240,203,114,.15)!important}
+.ps-mh-way .ps-mh-panel-art{background-image:url("/kids/assets/story-wow/muhammad-route.jpg?v=21")!important;background-position:center 54%!important}
+.ps-mh-message .ps-mh-panel-art{background-image:url("/kids/assets/story-wow/muhammad-hira.jpg?v=21")!important;background-position:center 48%!important}
+.ps-mh-panel::before{
+  background:linear-gradient(90deg,rgba(2,17,29,.98) 0%,rgba(2,20,33,.91) 37%,rgba(2,20,33,.54) 63%,rgba(2,20,33,.11) 100%),linear-gradient(180deg,transparent 42%,rgba(2,18,30,.48))!important
+}
+.ps-mh-panel-copy{left:24px!important;right:18%!important}
+.ps-mh-panel-kicker{color:#f4d477!important;font-size:10px!important}
+.ps-mh-panel h3{margin:8px 0 9px!important;max-width:82%!important;font-size:clamp(31px,8vw,50px)!important}
+.ps-mh-panel p{max-width:520px!important;color:#eef8fb!important;line-height:1.58!important}
+.ps-mh-route,.ps-mh-message-pills{gap:7px!important;margin-top:18px!important}
+.ps-mh-route span,.ps-mh-message-pills span{
+  min-height:31px!important;padding:0 11px!important;border-color:rgba(245,209,112,.48)!important;background:rgba(5,34,50,.73)!important
+}
+.ps-mh-values{
+  position:relative!important;padding:31px 20px 33px!important;
+  background:linear-gradient(90deg,rgba(3,22,35,.93),rgba(3,22,35,.68)),linear-gradient(180deg,rgba(3,22,35,.15),rgba(3,22,35,.82)),url("/kids/assets/story-wow/muhammad-madinah.jpg?v=21") center 54%/cover no-repeat!important;
+  border-top:1px solid rgba(86,182,214,.20)!important;border-bottom:1px solid rgba(240,203,114,.16)!important
+}
+.ps-mh-value-grid{gap:10px!important;margin-top:19px!important}
+.ps-mh-value{
+  min-height:118px!important;border-color:rgba(244,207,105,.34)!important;background:linear-gradient(145deg,rgba(8,48,66,.78),rgba(4,29,45,.90))!important;
+  backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important;box-shadow:0 10px 22px rgba(0,0,0,.15),inset 0 1px rgba(255,255,255,.04)!important
+}
+.ps-mh-episodes{
+  padding:30px 0 32px!important;background:radial-gradient(circle at 86% 7%,rgba(53,178,220,.12),transparent 26%),linear-gradient(180deg,#05263d,#031827)!important
+}
+.ps-mh-section-head{padding:0 20px 16px!important}.ps-mh-section-head h3{max-width:82%!important}
+.ps-mh-episode-rail{gap:11px!important;padding:0 20px 12px!important}
+.ps-mh-episode{
+  flex-basis:min(75vw,310px)!important;min-height:260px!important;border-radius:25px!important;border-color:rgba(86,186,218,.35)!important;
+  box-shadow:0 15px 32px rgba(0,0,0,.22)!important
+}
+.ps-mh-episode-art{height:165px!important}.ps-mh-episode-copy{min-height:95px!important;padding:12px 14px 14px!important;background:linear-gradient(180deg,#0a3c57,#062a42)!important}
+.ps-mh-episode-detail{margin:13px 20px 0!important;border-color:rgba(244,207,106,.36)!important}
+.ps-mh-fullstory{padding:30px 20px 17px!important;background:linear-gradient(180deg,#031827,#06253c)!important}
+.ps-modal.ps-muhammad-open .ps-body{padding-top:14px!important;background:linear-gradient(180deg,#06253c,#031827)!important}
+.ps-modal.ps-muhammad-open .ps-player{border-color:rgba(244,207,106,.27)!important;background:linear-gradient(145deg,rgba(8,50,72,.78),rgba(4,30,47,.90))!important}
+.ps-modal.ps-muhammad-open .ps-read p{color:#eaf5f8!important}.ps-modal.ps-muhammad-open .ps-read p+p{border-top-color:rgba(239,202,104,.14)!important}
+@keyframes ps-wow-breathe{
+  0%,100%{box-shadow:0 18px 44px rgba(0,0,0,.31),0 0 21px rgba(240,195,78,.10)}
+  50%{box-shadow:0 18px 44px rgba(0,0,0,.31),0 0 30px rgba(240,195,78,.17)}
+}
+@media(prefers-reduced-motion:no-preference){.ps-muhammad-home{animation:ps-wow-breathe 5.5s ease-in-out infinite}}
+@media(max-width:430px){
+  .ps-mh-home-copy strong{max-width:86%!important}.ps-mh-home-copy{right:11%!important}
+  .ps-prophet-entry .ps-entry-copy{right:12%!important}.ps-mh-hero-copy{right:10%!important}.ps-mh-panel-copy{right:13%!important}
+}
+@media(min-width:700px){
+  #view-stories.ps-stories-home .page-head{min-height:245px!important;padding:34px 34px 30px!important}
+  .ps-muhammad-home{min-height:375px!important}.ps-prophet-entry{min-height:305px!important}
+  .ps-mh-home-copy,.ps-muhammad-feature-copy{left:34px!important;right:43%!important}
+  .ps-mh-hero{min-height:620px!important}.ps-mh-hero-copy{left:48px!important;right:47%!important;top:112px!important}
+  .ps-mh-panel{min-height:430px!important}.ps-mh-panel-copy{left:48px!important;right:47%!important}
+  .ps-mh-values{padding:40px 44px 42px!important}.ps-mh-section-head{padding:0 44px 18px!important}
+  .ps-mh-episode-rail{padding-left:44px!important;padding-right:44px!important}
+  .ps-mh-episode-detail{margin-left:44px!important;margin-right:44px!important}.ps-mh-fullstory{padding:38px 44px 20px!important}
+}
