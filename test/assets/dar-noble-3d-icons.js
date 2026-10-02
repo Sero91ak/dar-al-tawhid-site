@@ -452,7 +452,20 @@
     link.setAttribute("data-dar-design","DAR_LIBRARY_LATE_CASCADE_V1170");
     (document.body||document.documentElement).appendChild(link);
   }
-  function enhance(){ensureLateCss();syncRouteClasses();insertHomeFeature();markNeutralOrnament()}
+  function enhanceQuizMenu3d(){
+    document.querySelectorAll(".quiz-menu-card").forEach(function(card){
+      var slot=card.querySelector(":scope > span:first-child");
+      if(!slot)return;
+      var label=String((card.querySelector("b")||{}).textContent||"");
+      var kind=/fortsetzen/i.test(label)?"play":"quiz";
+      if(typeof window.dar3dIconMarkup==="function"){
+        slot.innerHTML=window.dar3dIconMarkup(kind,label);
+        slot.setAttribute("data-dar-library-3d","1");
+      }
+    });
+  }
+  /* DAR_LIBRARY_QUIZ_3D_V1170 */
+  function enhance(){ensureLateCss();syncRouteClasses();insertHomeFeature();enhanceQuizMenu3d();markNeutralOrnament()}
   var timer=0;
   function schedule(){clearTimeout(timer);timer=setTimeout(enhance,24)}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",enhance,{once:true});else enhance();
