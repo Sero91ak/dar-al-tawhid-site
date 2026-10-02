@@ -50,7 +50,12 @@ function hasValidGateAuth(request, env) {
   return user === gateUser(env) && pass === gatePass(env);
 }
 
+function isDarTestPath(pathname) {
+  return pathname === "/test" || pathname.startsWith("/test/");
+}
+
 function isGatedPath(pathname) {
+  if (isDarTestPath(pathname) && pathname !== "/test/kids" && !pathname.startsWith("/test/kids/")) return false;
   return pathname === "/kids"
     || pathname.startsWith("/kids/")
     || pathname === "/test/kids"
@@ -61,7 +66,8 @@ export function gateHiddenSurfaces(request, url, env, mode) {
   const pathname = url.pathname || "/";
   const ua = request.headers.get("User-Agent") || "";
   if (hasValidGateAuth(request, env)) return null;
-  if (mode === "workers-dev") return unauthorizedGate();
+  if (isDarTestPath(pathname) && pathname !== "/test/kids" && !pathname.startsWith("/test/kids/")) return null;
+  if (mode === "workers-dev" && !isDarTestPath(pathname)) return unauthorizedGate();
   if (!isGatedPath(pathname)) return null;
   if ((pathname === "/kids" || pathname.startsWith("/kids/")) && isKidsNativeApp(ua)) return null;
   if ((pathname === "/test/kids" || pathname.startsWith("/test/kids/")) && isKidsNativeApp(ua)) return null;

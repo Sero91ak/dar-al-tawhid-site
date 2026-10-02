@@ -180,7 +180,7 @@ async function injectDarTestHomeV1183(asset) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const gated = gateHiddenSurfaces(request, url, env, "workers-dev");
+    const gated = gateHiddenSurfaces(request, url, env, "live");
     if (gated) return gated;
 
     if (url.pathname === "/" || url.pathname === "/index.html") {
