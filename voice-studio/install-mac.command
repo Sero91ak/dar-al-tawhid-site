@@ -34,7 +34,7 @@ sleep 1
 pkill -KILL -x DARVoiceStudio >/dev/null 2>&1 || true
 pkill -KILL -x DARVoiceStudioNative >/dev/null 2>&1 || true
 
-# 2.9.63 räumt die früheren Terminal-Autopiloten einmalig auf. Diese alten
+# 2.9.64 räumt die früheren Terminal-Autopiloten einmalig auf. Diese alten
 # /tmp-Skripte durften selbstständig Batch-Starts auslösen und würden sonst
 # neben dem neuen persistenten Supervisor weiterlaufen.
 pkill -f '/tmp/dar_propheten_.*\.sh' >/dev/null 2>&1 || true
@@ -302,7 +302,7 @@ if ! /bin/bash -n "$STAGE/update-mac.command"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.9.63-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-2.9.64-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
@@ -322,7 +322,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
 done
 chmod +x "$TARGET/update-mac.command"
 
-echo "Voice Studio 2.9.63 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.9.64 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -393,10 +393,17 @@ else
   cat "$TARGET/launchctl-bootstrap.log" || true
 fi
 
-# Warten, ob LaunchAgent die Engine erfolgreich hochgebracht hat.
+engine_health_matches_release() {
+  local body
+  body="$(curl -fsS --max-time 1 "http://127.0.0.1:8787/health" 2>/dev/null || true)"
+  [ -n "$body" ] || return 1
+  printf '%s' "$body" | /usr/bin/grep -Eq '"engine_version"[[:space:]]*:[[:space:]]*"2\.9\.64"'
+}
+
+# Warten, ob LaunchAgent EXAKT die installierte Engine 2.9.64 hochgebracht hat.
 ENGINE_OK=0
 for i in $(seq 1 20); do
-  if curl -fsS --max-time 1 "http://127.0.0.1:8787/health" >/dev/null 2>&1; then
+  if engine_health_matches_release; then
     ENGINE_OK=1
     break
   fi
@@ -427,7 +434,7 @@ if [ "$ENGINE_OK" -ne 1 ]; then
   echo $! > "$TARGET/engine.pid"
 
   for i in $(seq 1 40); do
-    if curl -fsS --max-time 1 "http://127.0.0.1:8787/health" >/dev/null 2>&1; then
+    if engine_health_matches_release; then
       ENGINE_OK=1
       break
     fi
@@ -444,7 +451,7 @@ if [ "$ENGINE_OK" -ne 1 ]; then
   exit 1
 fi
 
-echo "Serhat Engine erreichbar: http://127.0.0.1:8787/health"
+echo "Serhat Engine 2.9.64 erreichbar: http://127.0.0.1:8787/health"
 
 # Native macOS-App wird zuerst vollständig in einem separaten Bundle gebaut.
 # Die bisher installierte App bleibt bis nach Build, plist-Lint und Codesign startbar.
@@ -509,6 +516,7 @@ VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
 URL="http://127.0.0.1:8787/studio/"
 HEALTH="http://127.0.0.1:8787/health"
+EXPECTED_ENGINE_VERSION="2.9.64"
 SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
 NATIVE="$SELF_DIR/DARVoiceStudioNative"
 LOG="$TARGET/app-launch.log"
@@ -516,24 +524,36 @@ LOG="$TARGET/app-launch.log"
 mkdir -p "$TARGET"
 touch "$LOG"
 
+engine_is_current() {
+  local body
+  body="$(/usr/bin/curl -fsS --max-time 1 "$HEALTH" 2>/dev/null || true)"
+  [ -n "$body" ] || return 1
+  printf '%s' "$body" | /usr/bin/grep -Eq '"engine_version"[[:space:]]*:[[:space:]]*"'"$EXPECTED_ENGINE_VERSION"'"'
+}
+
 {
   echo ""
   echo "=== $(date '+%Y-%m-%d %H:%M:%S') DĀR Voice Studio start ==="
   echo "Executable: $0"
   echo "Native: $NATIVE"
 
-  if ! /usr/bin/curl -fsS --max-time 1 "$HEALTH" >/dev/null 2>&1; then
-    echo "Engine nicht erreichbar – versuche genau einen LaunchAgent-Start."
+  if ! engine_is_current; then
+    echo "Engine fehlt oder ist veraltet – starte exakt die installierte Version neu."
+    launchctl bootout "gui/$UID/com.daraltawhid.voice-engine" >/dev/null 2>&1 || true
+    pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
+    sleep 1
+    pkill -KILL -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
+    echo "Versuche genau einen LaunchAgent-Start."
     launchctl kickstart -k "gui/$UID/com.daraltawhid.voice-engine" >/dev/null 2>&1 || true
 
     for i in $(seq 1 16); do
-      /usr/bin/curl -fsS --max-time 1 "$HEALTH" >/dev/null 2>&1 && break
+      engine_is_current && break
       sleep 0.4
     done
   fi
 
-  if ! /usr/bin/curl -fsS --max-time 1 "$HEALTH" >/dev/null 2>&1; then
-    echo "LaunchAgent ohne Health – stoppe nur eigene alte Engine und starte einmal direkt."
+  if ! engine_is_current; then
+    echo "LaunchAgent ohne aktuelle Engine-Version – starte einmal direkt."
     launchctl bootout "gui/$UID/com.daraltawhid.voice-engine" >/dev/null 2>&1 || true
     pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
     sleep 1
@@ -553,7 +573,7 @@ touch "$LOG"
     fi
 
     for i in $(seq 1 40); do
-      /usr/bin/curl -fsS --max-time 1 "$HEALTH" >/dev/null 2>&1 && break
+      engine_is_current && break
       sleep 0.5
     done
   fi
@@ -606,8 +626,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.9.63</string>
-  <key>CFBundleShortVersionString</key><string>2.9.63</string>
+  <key>CFBundleVersion</key><string>2.9.64</string>
+  <key>CFBundleShortVersionString</key><string>2.9.64</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon.icns</string>
@@ -630,8 +650,8 @@ cat > "$PLIST" <<'PLIST'
 PLIST
 /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable $BUNDLE_EXECUTABLE" "$PLIST"
 if [ "$BUNDLE_EXECUTABLE" = "DARVoiceStudioNative" ]; then
-  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.63 · Native" "$PLIST" 2>/dev/null || \
-    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.63 · Native'" "$PLIST"
+  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.64 · Native" "$PLIST" 2>/dev/null || \
+    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.64 · Native'" "$PLIST"
 fi
 /usr/bin/plutil -lint "$PLIST" >/dev/null
 
@@ -686,7 +706,7 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.9.63 ist installiert."
+say_status "DĀR Voice Studio 2.9.64 ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
   "$APP/Contents/MacOS/$BUNDLE_EXECUTABLE" >/dev/null 2>&1 &
