@@ -3,11 +3,11 @@
 
 const ORDER=["adam","idris","nuh","hud","salih"];
 const ART={
-  adam:{card:"/kids/assets/prophets-v100/adam-card.jpg?v=8"},
-  idris:{card:"/kids/assets/prophets-v100/idris-card.jpg?v=8"},
-  nuh:{card:"/kids/assets/prophets-v100/nuh-card.jpg?v=8",hero:"/kids/assets/prophets-v100/nuh-hero.jpg?v=8"},
-  hud:{card:"/kids/assets/prophets-v100/hud-card.jpg?v=8"},
-  salih:{card:"/kids/assets/prophets-v100/salih-card.jpg?v=8"}
+  adam:{card:"/kids/assets/prophets-v2/adam-card.jpg?v=9"},
+  idris:{card:"/kids/assets/prophets-v2/idris-card.jpg?v=9"},
+  nuh:{card:"/kids/assets/prophets-v2/nuh-card.jpg?v=9",hero:"/kids/assets/prophets-v2/nuh-hero.jpg?v=9"},
+  hud:{card:"/kids/assets/prophets-v2/hud-card.jpg?v=9"},
+  salih:{card:"/kids/assets/prophets-v2/salih-card.jpg?v=9"}
 };
 
 let items=[],mode="read";
@@ -84,7 +84,7 @@ document.addEventListener("click",e=>{
 });
 $("#backBtn").addEventListener("click",closeDetail);
 
-fetch("/kids/data/prophet-stories.json?v=8",{cache:"no-store"})
+fetch("/kids/data/prophet-stories.json?v=9",{cache:"no-store"})
   .then(r=>{if(!r.ok)throw new Error("data "+r.status);return r.json()})
   .then(data=>{items=sorted(data.items);render();setMode("read")})
   .catch(err=>{
