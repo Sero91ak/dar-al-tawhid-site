@@ -2,10 +2,10 @@
   "project": "DĀR AL TAWḤĪD – Apple TV Qurʾān Tadabbur",
   "schemaVersion": "2.0",
   "language": "de",
-  "target": "tvOS-only",
+  "target": "shared-tvOS-iOS-iPadOS-web",
   "remoteLoad": true,
   "offlineCache": true,
-  "entriesCount": 4428,
+  "entriesCount": 4438,
   "fallback": {
     "enabled": true,
     "text": "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor."
@@ -356,7 +356,16 @@
     "entries-gap-06-096.json",
     "entries-gap-06-097.json",
     "entries-gap-06-098.json",
-    "entries-gap-06-099.json"
+    "entries-gap-06-099.json",
+    "entries-gap-06-100.json",
+    "entries-gap-06-101.json",
+    "entries-gap-06-102.json",
+    "entries-gap-06-103.json",
+    "entries-gap-06-104.json",
+    "entries-gap-06-105.json",
+    "entries-gap-06-106.json",
+    "entries-gap-06-107.json",
+    "entries-gap-06-108.json"
   ],
   "coveragePath": "coverage.json",
   "schemaPath": "schema.json",
@@ -382,5 +391,12 @@
       "isnād ḥasan mawqūf",
       "isnād ṣaḥīḥ bis Überlieferer; Bericht mursal"
     ]
-  }
+  },
+  "clients": [
+    "tvOS",
+    "iOS WebView",
+    "iPadOS WebView",
+    "Web/PWA"
+  ],
+  "webLoaderPath": "/assets/quran-tadabbur-shared.js"
 }
