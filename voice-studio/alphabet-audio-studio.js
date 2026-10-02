@@ -539,19 +539,18 @@ async function startFullBatch(auto=false){
 async function maybeAutoStartFullBatch(){
   if(batchAutoStarted||!isLocalVoiceStudio()||!manifest)return;
   batchAutoStarted=true;
+
+  // 2.9.64: NIEMALS mehr beim Öffnen des Studios automatisch 140/226
+  // Sprachclips erzeugen. Dieser frühere Auto-Start belegte die einzige lokale
+  // Synthese-Engine und ließ Wort-Schnelltest, Freistimme und "Audio erzeugen"
+  // wie eingefroren wirken. Ein Gesamtbatch startet ausschließlich nach dem
+  // bewussten Klick auf den Batch-Button.
   const state=await readBatchState();
   if(state?.running){
+    setMsg("Ein zuvor bewusst gestarteter Alphabet-/Quiz-Batch läuft. Interaktive Sprachaufträge haben Vorrang.","warn");
     beginBatchPolling();
     return;
   }
-  const profile=String(state?.generationProfile||"");
-  if(
-    state?.phase==="complete" &&
-    Number(state?.completed||0)>=226 &&
-    Number(state?.total||0)>=226 &&
-    profile===ALPHABET_GENERATION_PROFILE
-  )return;
-  await startFullBatch(true);
 }
 
 q("alphabetPackReferenceBtn")?.addEventListener("click",playReference);
