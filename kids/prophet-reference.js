@@ -1,18 +1,23 @@
 (() => {
 "use strict";
 
-const ORDER=["adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub"];
+const ORDER=["adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub","yusuf","ayyub","shuayb","musa","harun"];
 const ART={
-  adam:{card:"/kids/assets/prophets-v2/adam-card.jpg?v=10"},
-  idris:{card:"/kids/assets/prophets-v2/idris-card.jpg?v=10"},
-  nuh:{card:"/kids/assets/prophets-v2/nuh-card.jpg?v=10",hero:"/kids/assets/prophets-v2/nuh-hero.jpg?v=10"},
-  hud:{card:"/kids/assets/prophets-v2/hud-card.jpg?v=10"},
-  salih:{card:"/kids/assets/prophets-v2/salih-card.jpg?v=10"},
-  ibrahim:{card:"/kids/assets/prophets-v2/ibrahim-card.jpg?v=10"},
-  lut:{card:"/kids/assets/prophets-v2/lut-card.jpg?v=10"},
-  ismail:{card:"/kids/assets/prophets-v2/ismail-card.jpg?v=10"},
-  ishaq:{card:"/kids/assets/prophets-v2/ishaq-card.jpg?v=10"},
-  yaqub:{card:"/kids/assets/prophets-v2/yaqub-card.jpg?v=10"}
+  adam:{card:"/kids/assets/prophets-v2/adam-card.jpg?v=11"},
+  idris:{card:"/kids/assets/prophets-v2/idris-card.jpg?v=11"},
+  nuh:{card:"/kids/assets/prophets-v2/nuh-card.jpg?v=11",hero:"/kids/assets/prophets-v2/nuh-hero.jpg?v=11"},
+  hud:{card:"/kids/assets/prophets-v2/hud-card.jpg?v=11"},
+  salih:{card:"/kids/assets/prophets-v2/salih-card.jpg?v=11"},
+  ibrahim:{card:"/kids/assets/prophets-v2/ibrahim-card.jpg?v=11"},
+  lut:{card:"/kids/assets/prophets-v2/lut-card.jpg?v=11"},
+  ismail:{card:"/kids/assets/prophets-v2/ismail-card.jpg?v=11"},
+  ishaq:{card:"/kids/assets/prophets-v2/ishaq-card.jpg?v=11"},
+  yaqub:{card:"/kids/assets/prophets-v2/yaqub-card.jpg?v=11"},
+  yusuf:{card:"/kids/assets/prophets-v2/yusuf-card.jpg?v=11"},
+  ayyub:{card:"/kids/assets/prophets-v2/ayyub-card.jpg?v=11"},
+  shuayb:{card:"/kids/assets/prophets-v2/shuayb-card.jpg?v=11"},
+  musa:{card:"/kids/assets/prophets-v2/musa-card.jpg?v=11"},
+  harun:{card:"/kids/assets/prophets-v2/harun-card.jpg?v=11"}
 };
 
 let items=[],mode="read";
@@ -89,7 +94,7 @@ document.addEventListener("click",e=>{
 });
 $("#backBtn").addEventListener("click",closeDetail);
 
-fetch("/kids/data/prophet-stories.json?v=10",{cache:"no-store"})
+fetch("/kids/data/prophet-stories.json?v=11",{cache:"no-store"})
   .then(r=>{if(!r.ok)throw new Error("data "+r.status);return r.json()})
   .then(data=>{items=sorted(data.items);render();setMode("read")})
   .catch(err=>{
