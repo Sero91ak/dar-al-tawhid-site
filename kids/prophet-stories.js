@@ -15,15 +15,13 @@ function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=
 function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=21":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
 const MUHAMMAD_EPISODES=[
-  {id:"birth",title:"Seine Geburt in Makkah",meta:"MAKKAH · KINDHEIT",duration:"Ca. 4 Min.",source:"Qurʾān 93:6",subtitle:"Ein besonderes Licht erscheint in der Welt.",summary:"Muḥammad ﷺ wurde in Makkah geboren und wuchs als Waisenkind auf. Allah erinnert ihn im Qurʾān daran, dass Er ihn als Waisen fand und ihm Schutz gab.",art:"/kids/assets/prophet-scenes/night.webp?v=1"},
-  {id:"wahy",title:"Die erste Offenbarung",meta:"MAKKAH · ḤIRĀʾ",duration:"Ca. 5 Min.",source:"Qurʾān 96:1–5",subtitle:"Ein Moment, der alles veränderte.",summary:"In der Höhle Ḥirāʾ begann die Offenbarung. Dort wurden die ersten Verse aus Sūrat al-ʿAlaq offenbart.",art:"/kids/assets/story-wow/muhammad-hira.jpg?v=22"},
-  {id:"hijrah",title:"Die Hiǧrah nach Madīnah",meta:"VERTRAUEN · GEDULD",duration:"Ca. 6 Min.",source:"Qurʾān 9:40",subtitle:"Eine Reise voller Vertrauen.",summary:"Die Auswanderung von Makkah nach Madīnah zeigt Vertrauen auf Allah, Geduld und den Beginn einer neuen Phase für die muslimische Gemeinschaft.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"},
-  {id:"tawhid",title:"Der Ruf zum Tawḥīd",meta:"MAKKAH · DAʿWAH",duration:"ca. 5 Min.",source:"Qurʾān 6:162–163",subtitle:"Allah allein anbeten.",summary:"Er rief die Menschen dazu, Allah allein anzubeten, und blieb trotz Ablehnung und Widerstand standhaft.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=22"},
-  {id:"madinah",title:"Die Gemeinschaft in Madīnah",meta:"LEHREN · GERECHTIGKEIT",duration:"ca. 6 Min.",source:"Qurʾān 33:21",subtitle:"Glaube wird im Alltag sichtbar.",summary:"In Madīnah lehrte der Prophet ﷺ Gottesdienst, Familie, Nachbarschaft, Gerechtigkeit und Verantwortung.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"},
-  {id:"rahmah",title:"Barmherzigkeit für die Welten",meta:"BOTSCHAFT · CHARAKTER",duration:"ca. 5 Min.",source:"Qurʾān 21:107 · 68:4",subtitle:"Barmherzigkeit und edler Charakter.",summary:"Allah beschreibt seine Sendung als Barmherzigkeit für die Welten und lobt seinen großartigen Charakter.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"},
-  {id:"return",title:"Die Rückkehr nach Makkah",meta:"MAKKAH · RÜCKKEHR",duration:"ca. 6 Min.",source:"Qurʾān 48:1 · 110:1–3",subtitle:"Eine Rückkehr nach Jahren der Prüfung.",summary:"Nach Jahren der Prüfung kehrte der Prophet ﷺ mit den Muslimen nach Makkah zurück. Die Kaʿbah wurde von den Götzen gereinigt und Allah allein gewidmet.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=22"},
-  {id:"khatam",title:"Siegel der Propheten",meta:"ABSCHLUSS · BOTSCHAFT",duration:"ca. 4 Min.",source:"Qurʾān 33:40",subtitle:"Nach ihm kommt kein neuer Prophet.",summary:"Muḥammad ﷺ ist das Siegel der Propheten. Seine Botschaft bestätigt die grundlegende Botschaft der Propheten vor ihm: Allah allein anzubeten.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=22"}
-]
+  {id:"wahy",title:"Die erste Offenbarung",meta:"MAKKAH · ḤIRĀʾ",source:"Qurʾān 96:1–5",summary:"In der Höhle Ḥirāʾ begann die Offenbarung. Von hier aus begann seine Aufgabe als Gesandter.",art:"/kids/assets/story-wow/muhammad-hira.jpg?v=21"},
+  {id:"tawhid",title:"Der Ruf zum Tawḥīd",meta:"MAKKAH · DAʿWAH",source:"Qurʾān 21:107",summary:"Er rief die Menschen dazu, Allah allein anzubeten, und blieb trotz Ablehnung standhaft.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=21"},
+  {id:"hijrah",title:"Die Hiǧrah nach Madīnah",meta:"VERTRAUEN · GEDULD",source:"Qurʾān 9:40",summary:"Die Auswanderung zeigt Vertrauen auf Allah, Geduld und einen neuen Anfang für die muslimische Gemeinschaft.",art:"/kids/assets/story-wow/muhammad-route.jpg?v=21"},
+  {id:"madinah",title:"Die Gemeinschaft in Madīnah",meta:"LEHREN · GERECHTIGKEIT",source:"Qurʾān 33:21",summary:"In Madīnah lehrte er Gottesdienst, Familie, Nachbarschaft, Gerechtigkeit und Verantwortung.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=21"},
+  {id:"rahmah",title:"Barmherzigkeit für die Welten",meta:"BOTSCHAFT · CHARAKTER",source:"Qurʾān 21:107 · 68:4",summary:"Seine Sendung wird als Barmherzigkeit beschrieben, und Allah lobt seinen großartigen Charakter.",art:"/kids/assets/story-wow/muhammad-madinah.jpg?v=21"},
+  {id:"khatam",title:"Siegel der Propheten",meta:"ḪĀTAM AN-NABIYYĪN",source:"Qurʾān 33:40",summary:"Muḥammad ﷺ ist das Siegel der Propheten. Nach ihm kommt kein neuer Prophet.",art:"/kids/assets/story-wow/muhammad-hero.jpg?v=21"}
+];
 let items=[],active=null,activeText="",playing=false,busy=false;
 const audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
@@ -128,14 +126,12 @@ function prepareStoriesHome(view){
   const pageHead=view.querySelector(".page-head");if(pageHead)pageHead.hidden=false;
   if(!$("#psMuhammadHomeEntry")){
     const special=document.createElement("button");special.id="psMuhammadHomeEntry";special.className="ps-muhammad-home";special.type="button";
-    special.setAttribute("aria-label","Besonderen Bereich über Prophet Muḥammad öffnen");
     special.innerHTML='<span class="ps-mh-home-art" aria-hidden="true"></span><span class="ps-mh-home-shade" aria-hidden="true"></span><span class="ps-mh-home-copy"><span class="ps-mh-home-kicker">★ BESONDERER BEREICH · ḪĀTAM AN-NABIYYĪN</span><strong>Prophet Muḥammad ﷺ</strong><span class="ps-mh-home-sub">Sein Leben. Sein Weg. Seine Botschaft.</span><span class="ps-mh-home-cta">Geschichten entdecken <b aria-hidden="true">→</b></span></span>';
     if(pageHead)pageHead.insertAdjacentElement("afterend",special);else view.insertBefore(special,view.firstChild);
     special.addEventListener("click",()=>openStory("muhammad"));
   }
   if(!$("#psProphetEntry")){
     const entry=document.createElement("button");entry.id="psProphetEntry";entry.className="ps-prophet-entry";entry.type="button";
-    entry.setAttribute("aria-label","Prophetengeschichten öffnen");
     entry.innerHTML='<span class="ps-entry-shade" aria-hidden="true"></span><span class="ps-entry-copy"><span class="ps-entry-kicker">EIGENER BEREICH · QURʾĀN GEPRÜFT</span><strong>Prophetengeschichten</strong><span class="ps-entry-sub">25 Geschichten · lesen &amp; hören</span><span class="ps-entry-cta">Jetzt entdecken <b aria-hidden="true">→</b></span></span>';
     const special=$("#psMuhammadHomeEntry");if(special)special.insertAdjacentElement("afterend",entry);else if(pageHead)pageHead.insertAdjacentElement("afterend",entry);else view.insertBefore(entry,view.firstChild);
     entry.addEventListener("click",openLibrary);
@@ -193,52 +189,7 @@ function ensureUi(){
     '<div class="ps-sheet" role="dialog" aria-modal="true" aria-labelledby="psTitle">'+
       '<div class="ps-top"><button class="ps-close" id="psClose" type="button" aria-label="Zurück zu den Propheten">‹</button></div>'+
       '<div class="ps-scroll" id="psScroll">'+
-        '<section class="ps-muhammad-special" id="psMuhammadSpecial" hidden>'+
-          '<header class="ps-mh-hero">'+
-            '<img class="ps-mh-hero-art" src="/kids/assets/story-wow/muhammad-hero.jpg?v=22" alt="">'+
-            '<span class="ps-mh-hero-shade" aria-hidden="true"></span>'+
-            '<div class="ps-mh-hero-copy">'+
-              '<span class="ps-mh-special-label">★&nbsp;&nbsp;BESONDERER BEREICH</span>'+
-              '<div class="ps-mh-title-line"><h2>Prophet<br>Muḥammad</h2><div class="ps-mh-ar" dir="rtl">محمد ﷺ</div></div>'+
-              '<p class="ps-mh-tagline">Sein Leben. Sein Weg. Seine Botschaft.</p>'+
-              '<p class="ps-mh-intro">Eine besondere Sammlung von Geschichten über den letzten Propheten ﷺ – kindgerecht, authentisch und mit wertvollen Lehren für unseren Alltag.</p>'+
-            '</div>'+
-          '</header>'+
-          '<div class="ps-mh-ornament" aria-hidden="true"><span></span></div>'+
-          '<section class="ps-mh-panel ps-mh-way"><div class="ps-mh-panel-art" aria-hidden="true"></div><div class="ps-mh-panel-copy">'+
-            '<div class="ps-mh-panel-title"><span class="ps-mh-line-icon ps-mh-line-icon-route" aria-hidden="true"></span><h3>Sein Weg</h3></div>'+
-            '<p>Von Makkah nach Madīnah – eine außergewöhnliche Reise voller Vertrauen, Geduld und Licht.</p>'+
-            '<button class="ps-mh-discover" type="button" data-mh-action="episode" data-episode="hijrah">Den Weg entdecken</button>'+
-          '</div></section>'+
-          '<section class="ps-mh-panel ps-mh-message"><div class="ps-mh-panel-art" aria-hidden="true"></div><div class="ps-mh-panel-copy">'+
-            '<div class="ps-mh-panel-title"><span class="ps-mh-line-icon ps-mh-line-icon-book" aria-hidden="true"></span><h3>Seine Botschaft</h3></div>'+
-            '<p>Worte, die Herzen berühren – über Glaube, Barmherzigkeit und eine bessere Welt.</p>'+
-            '<button class="ps-mh-discover" type="button" data-mh-action="episode" data-episode="tawhid">Die Botschaft entdecken</button>'+
-          '</div></section>'+
-          '<section class="ps-mh-values">'+
-            '<div class="ps-mh-values-head"><div class="ps-mh-panel-title"><span class="ps-mh-line-icon ps-mh-line-icon-heart" aria-hidden="true"></span><h3>Werte für Kinder</h3></div><p>Zeitlose Werte aus seinem Leben – eine Inspiration für jeden Tag.</p></div>'+
-            '<div class="ps-mh-value-grid">'+
-              '<div class="ps-mh-value ps-mh-value-truth"><b class="ps-mh-value-icon ps-mh-value-icon-leaf" aria-hidden="true"></b><strong>Wahrheit</strong></div>'+
-              '<div class="ps-mh-value ps-mh-value-mercy"><b class="ps-mh-value-icon ps-mh-value-icon-heart" aria-hidden="true"></b><strong>Barmherzigkeit</strong></div>'+
-              '<div class="ps-mh-value ps-mh-value-patience"><b class="ps-mh-value-icon ps-mh-value-icon-mountain" aria-hidden="true"></b><strong>Geduld</strong></div>'+
-              '<div class="ps-mh-value ps-mh-value-trust"><b class="ps-mh-value-icon ps-mh-value-icon-hand" aria-hidden="true"></b><strong>Vertrauen</strong></div>'+
-            '</div>'+
-          '</section>'+
-          '<section class="ps-mh-episodes" id="psMhEpisodesSection">'+
-            '<div class="ps-mh-section-head"><div><div class="ps-mh-section-title"><span class="ps-mh-line-icon ps-mh-line-icon-book" aria-hidden="true"></span><h3>Geschichten &amp; Hören</h3><i aria-hidden="true"></i></div><p>Entdecke 25 Geschichten über das Leben des Propheten ﷺ.</p></div><button class="ps-mh-all" type="button" data-mh-action="toggle-all" aria-expanded="false">Alle anzeigen <b aria-hidden="true">→</b></button></div>'+
-            '<div class="ps-mh-episode-rail" id="psMhEpisodes"></div><article class="ps-mh-episode-detail" id="psMhEpisodeDetail" hidden></article>'+
-          '</section>'+
-          '<section class="ps-mh-more">'+
-            '<div class="ps-mh-section-head"><div><div class="ps-mh-section-title"><span class="ps-mh-line-icon ps-mh-line-icon-book" aria-hidden="true"></span><h3>Weitere Geschichten</h3><i aria-hidden="true"></i></div></div><button class="ps-mh-all" type="button" data-mh-action="library">Alle anzeigen <b aria-hidden="true">→</b></button></div>'+
-            '<div class="ps-mh-more-rail" id="psMhMore"></div>'+
-          '</section>'+
-          '<nav class="ps-mh-bottom-nav" aria-label="Hauptnavigation">'+
-            '<button type="button" data-mh-nav="today"><span class="ps-mh-nav-icon ps-mh-nav-icon-sun" aria-hidden="true"></span><span>Heute</span></button>'+
-            '<button class="active" type="button" data-mh-nav="stories"><span class="ps-mh-nav-icon ps-mh-nav-icon-stories" aria-hidden="true"></span><span>Geschichten</span></button>'+
-            '<button type="button" data-mh-nav="quran"><span class="ps-mh-nav-icon ps-mh-nav-icon-quran" aria-hidden="true"></span><span>Qurʾān</span></button>'+
-            '<button type="button" data-mh-nav="parents"><span class="ps-mh-nav-icon ps-mh-nav-icon-parents" aria-hidden="true"></span><span>Eltern</span></button>'+
-          '</nav>'+
-        '</section>'+'<div class="ps-hero">'+
+        '<section class="ps-muhammad-special" id="psMuhammadSpecial" hidden><header class="ps-mh-hero"><img class="ps-mh-hero-art" src="/kids/assets/prophets-v2/muhammad-hero.jpg?v=21" alt=""><span class="ps-mh-hero-shade" aria-hidden="true"></span><div class="ps-mh-hero-copy"><span class="ps-mh-special-label">★ BESONDERER BEREICH</span><h2>Prophet<br>Muḥammad ﷺ</h2><div class="ps-mh-ar" dir="rtl">محمد ﷺ</div><p class="ps-mh-tagline">Sein Leben. Sein Weg. Seine Botschaft.</p><p class="ps-mh-intro">Der letzte Prophet und Gesandte. Eine besondere, kindgerechte Reise durch seine Sendung, seinen Charakter und die wichtigsten Stationen seines Lebens.</p><span class="ps-mh-proof">SIEGEL DER PROPHETEN · QURʾĀN 33:40</span></div></header><div class="ps-mh-ornament" aria-hidden="true"><span></span></div><section class="ps-mh-panel ps-mh-way"><div class="ps-mh-panel-art" aria-hidden="true"></div><div class="ps-mh-panel-copy"><span class="ps-mh-panel-kicker">SEIN WEG</span><h3>Von Makkah nach Madīnah</h3><p>Offenbarung, Daʿwah, Geduld, Hiǧrah und der Aufbau einer Gemeinschaft – Schritt für Schritt und ohne erfundene Ausschmückungen.</p><div class="ps-mh-route"><span>Makkah</span><i></i><span>Ḥirāʾ</span><i></i><span>Hiǧrah</span><i></i><span>Madīnah</span><i></i><span>Rückkehr</span></div></div></section><section class="ps-mh-panel ps-mh-message"><div class="ps-mh-panel-art" aria-hidden="true"></div><div class="ps-mh-panel-copy"><span class="ps-mh-panel-kicker">SEINE BOTSCHAFT</span><h3>Allah allein anbeten</h3><p>Er rief zum Tawḥīd, überbrachte den Qurʾān und zeigte durch sein Vorbild, wie Glaube, Barmherzigkeit und Verantwortung im Alltag aussehen.</p><div class="ps-mh-message-pills"><span>Tawḥīd</span><span>Qurʾān</span><span>Vorbild</span><span>Barmherzigkeit</span></div></div></section><section class="ps-mh-values"><div class="ps-mh-values-head"><span>WERTE FÜR KINDER</span><h3>Was wir von ihm lernen</h3><p>Liebe zeigt sich durch Folgen, Lernen und gutes Handeln.</p></div><div class="ps-mh-value-grid"><div class="ps-mh-value"><b>✓</b><strong>Wahrheit</strong><small>Ehrlich bleiben</small></div><div class="ps-mh-value"><b>♡</b><strong>Barmherzigkeit</strong><small>Gütig handeln</small></div><div class="ps-mh-value"><b>⌁</b><strong>Geduld</strong><small>Standhaft bleiben</small></div><div class="ps-mh-value"><b>◇</b><strong>Gerechtigkeit</strong><small>Fair entscheiden</small></div></div></section><section class="ps-mh-episodes"><div class="ps-mh-section-head"><div><span>GESCHICHTEN &amp; HÖREN</span><h3>Seine Geschichte in Stationen</h3></div><p>Tippe eine Station an.</p></div><div class="ps-mh-episode-rail" id="psMhEpisodes"></div><article class="ps-mh-episode-detail" id="psMhEpisodeDetail" hidden></article></section><section class="ps-mh-fullstory"><span>VOLLSTÄNDIGE GESCHICHTE</span><h3>Lesen oder hören</h3><p>Unterhalb beginnt die ausführliche, geprüfte Erzählung mit Hörfunktion, Quellen und einer kleinen Frage.</p></section></section>'+'<div class="ps-hero">'+
           '<span class="ps-detail-sky" aria-hidden="true"></span>'+
           '<span class="ps-detail-land" aria-hidden="true"></span>'+
           '<span class="ps-detail-glow" aria-hidden="true"></span>'+
@@ -264,19 +215,7 @@ function ensureUi(){
   $("#psClose").addEventListener("click",closeStory);
   $("#psPlay").addEventListener("click",toggleAudio);
   $("#psScroll").addEventListener("scroll",()=>{$("#psModal")?.classList.toggle("scrolled",$("#psScroll").scrollTop>72)},{passive:true});
-  modal.addEventListener("click",e=>{
-    const open=e.target.closest("[data-ps-open]");if(open){openStory(open.dataset.psOpen);return}
-    const nav=e.target.closest("[data-mh-nav]");if(nav){goMuhammadNav(nav.dataset.mhNav);return}
-    const action=e.target.closest("[data-mh-action]");
-    if(action){
-      const kind=action.dataset.mhAction;
-      if(kind==="episode"){jumpMuhammadEpisode(action.dataset.episode);return}
-      if(kind==="toggle-all"){toggleMuhammadEpisodes(action);return}
-      if(kind==="library"){goMuhammadLibrary();return}
-      if(kind==="full-story"){openMuhammadFullStory();return}
-    }
-    const episode=e.target.closest("[data-mh-episode]");if(episode)openMuhammadEpisode(episode.dataset.mhEpisode);
-  });
+  modal.addEventListener("click",e=>{const episode=e.target.closest("[data-mh-episode]");if(episode)openMuhammadEpisode(episode.dataset.mhEpisode);});
   document.addEventListener("keydown",e=>{
     if(e.key!=="Escape")return;
     if($("#psModal")?.classList.contains("open"))closeStory();
@@ -298,70 +237,18 @@ function applyMode(){
   player.hidden=m==="read";
 }
 function renderMuhammadSpecial(){
-  const rail=$("#psMhEpisodes"),detail=$("#psMhEpisodeDetail"),more=$("#psMhMore"),section=$("#psMhEpisodesSection"),all=section?.querySelector('[data-mh-action="toggle-all"]');
-  if(rail)rail.innerHTML=MUHAMMAD_EPISODES.map(ep=>
-    '<button class="ps-mh-episode" type="button" data-mh-episode="'+esc(ep.id)+'" aria-label="'+esc(ep.title)+' öffnen">'+
-      '<span class="ps-mh-episode-art" style="background-image:url('+esc(ep.art)+')"><span class="ps-mh-time">'+esc(ep.duration||"ca. 5 Min.")+'</span></span>'+
-      '<span class="ps-mh-episode-copy"><strong>'+esc(ep.title)+'</strong><small>'+esc(ep.subtitle||ep.meta)+'</small></span>'+
-    '</button>'
-  ).join("");
-  if(more){
-    const picks=items.filter(item=>item.id!=="muhammad").slice(0,5);
-    more.innerHTML=picks.map(item=>
-      '<button class="ps-mh-more-card" type="button" data-ps-open="'+esc(item.id)+'">'+
-        '<span class="ps-mh-more-art" style="background-image:url('+esc(cardUrl(item))+')"></span>'+
-        '<span class="ps-mh-more-copy"><strong>'+esc(item.name)+'</strong><small>Geschichte entdecken</small></span>'+
-      '</button>'
-    ).join("");
-  }
-  if(section)section.classList.remove("expanded");
-  if(all){all.setAttribute("aria-expanded","false");all.innerHTML='Alle anzeigen <b aria-hidden="true">→</b>';}
+  const rail=$("#psMhEpisodes"),detail=$("#psMhEpisodeDetail");
+  if(rail)rail.innerHTML=MUHAMMAD_EPISODES.map(ep=>'<button class="ps-mh-episode" type="button" data-mh-episode="'+esc(ep.id)+'"><span class="ps-mh-episode-art" style="background-image:url('+esc(ep.art)+')"></span><span class="ps-mh-episode-copy"><small>'+esc(ep.meta)+'</small><strong>'+esc(ep.title)+'</strong><em>'+esc(ep.source)+'</em></span></button>').join("");
   if(detail){detail.hidden=true;detail.innerHTML="";}
 }
 function openMuhammadEpisode(id){
   const ep=MUHAMMAD_EPISODES.find(x=>x.id===id),detail=$("#psMhEpisodeDetail");if(!ep||!detail)return;
-  const card=document.querySelector('[data-mh-episode="'+id+'"]');
-  document.querySelectorAll(".ps-mh-episode.selected").forEach(el=>el.classList.remove("selected"));
-  if(card)card.classList.add("selected");
-  detail.innerHTML='<span>'+esc(ep.meta)+'</span><h4>'+esc(ep.title)+'</h4><p>'+esc(ep.summary)+'</p><strong>'+esc(ep.source)+'</strong><button class="ps-mh-full-cta" type="button" data-mh-action="full-story">Vollständige Geschichte lesen &amp; hören</button>';
-  detail.hidden=false;detail.scrollIntoView({behavior:"smooth",block:"nearest"});
-}
-function jumpMuhammadEpisode(id){
-  const card=document.querySelector('[data-mh-episode="'+id+'"]');
-  if(card)card.scrollIntoView({behavior:"smooth",block:"center",inline:"center"});
-  setTimeout(()=>openMuhammadEpisode(id),220);
-}
-function toggleMuhammadEpisodes(button){
-  const section=$("#psMhEpisodesSection");if(!section)return;
-  const expanded=!section.classList.contains("expanded");
-  section.classList.toggle("expanded",expanded);
-  if(button){button.setAttribute("aria-expanded",String(expanded));button.innerHTML=expanded?'Weniger <b aria-hidden="true">↑</b>':'Alle anzeigen <b aria-hidden="true">→</b>';}
-}
-function goMuhammadLibrary(){
-  closeStory();
-  setTimeout(()=>$("#psLibraryScroll")?.scrollTo({top:0,behavior:"smooth"}),40);
-}
-function openMuhammadFullStory(){
-  const modal=$("#psModal"),body=$(".ps-body");if(!modal||!body)return;
-  modal.classList.add("ps-mh-full-open");
-  setMode("both");
-  requestAnimationFrame(()=>body.scrollIntoView({behavior:"smooth",block:"start"}));
-}
-function goMuhammadNav(target){
-  if(target==="stories"){
-    const scroll=$("#psScroll");if(scroll)scroll.scrollTo({top:0,behavior:"smooth"});
-    return;
-  }
-  closeStory();
-  setTimeout(()=>{
-    if($("#psLibraryPage")?.classList.contains("open"))closeLibrary();
-    setTimeout(()=>document.querySelector('.bottom-nav .nav-btn[data-target="'+target+'"]')?.click(),30);
-  },30);
+  detail.innerHTML='<span>'+esc(ep.meta)+'</span><h4>'+esc(ep.title)+'</h4><p>'+esc(ep.summary)+'</p><strong>'+esc(ep.source)+'</strong>';detail.hidden=false;detail.scrollIntoView({behavior:"smooth",block:"nearest"});
 }
 function renderActive(){
   if(!active)return;activeText=buildText(active);
   const isMuhammad=active.id==="muhammad",modal=$("#psModal"),special=$("#psMuhammadSpecial"),hero=$(".ps-hero");
-  if(modal){modal.classList.toggle("ps-muhammad-open",isMuhammad);if(isMuhammad)modal.classList.remove("ps-mh-full-open")}if(special)special.hidden=!isMuhammad;
+  if(modal)modal.classList.toggle("ps-muhammad-open",isMuhammad);if(special)special.hidden=!isMuhammad;
   if(hero){hero.hidden=isMuhammad;hero.setAttribute("data-ps-id",active.id);hero.setAttribute("data-hero-copy",DEDICATED_HERO.has(active.id)?"left":"right")}
   if(isMuhammad)renderMuhammadSpecial();
   const heroImg=$("#psHero");if(heroImg){heroImg.onerror=()=>{heroImg.onerror=null;const card=cardUrl(active);if(heroImg.src!==card)heroImg.src=card;else if(active.cover)heroImg.src=active.cover;};heroImg.src=heroUrl(active);heroImg.alt="";}
@@ -405,7 +292,7 @@ function openStory(id){
   active=items.find(x=>x.id===id);if(!active)return;
   stopAudio();renderActive();$("#psModal").classList.remove("scrolled");$("#psModal").classList.add("open");lockPage();$("#psScroll").scrollTop=0;$("#psClose")?.focus();
 }
-function closeStory(){stopAudio();$("#psModal")?.classList.remove("open","scrolled","ps-muhammad-open","ps-mh-full-open");unlockPage();active=null}
+function closeStory(){stopAudio();$("#psModal")?.classList.remove("open","scrolled");unlockPage();active=null}
 function resetAudioForActive(){
   stopAudio();
   const meta=audioMeta(active);

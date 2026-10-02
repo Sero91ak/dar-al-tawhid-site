@@ -1,10 +1,10 @@
 {
-  "buildId": "kids-shell-v12-tab122",
-  "label": "KIDS · V1.08",
-  "releasedAt": "2026-10-02T15:20:00.000Z",
-  "note": "V1.08: Der Rollback-Stil der unteren Tab-Leiste wurde entfernt. Die Stories-Navigation entspricht wieder der bestätigten Referenz: kompakter Vollbreiten-Dock, sichtbare Gold-Icons, korrekte aktive Geschichten-Fläche und sichere iOS-Abstände.",
+  "buildId": "kids-shell-v12-tab106",
+  "label": "KIDS · V1.06",
+  "releasedAt": "2026-10-02T09:44:00.000Z",
+  "note": "V1.06: Die zwei bestätigten Geschichten-Entwürfe wurden direkt in die App übertragen. Geschichten-Startseite im breiten Premium-Stil; Muḥammad ﷺ als erster und eigener besonderer Bereich; eigene Firefly-/Runway-Bildwelten für Hero, Weg, Ḥirāʾ und Madīnah; Detailseite ausführlicher und vollflächig. Haupt-Tab-Leiste unverändert.",
   "visualSystem": {
-    "prophetStories": "approved-reference-match-v35",
+    "prophetStories": "approved-reference-match-v21",
     "storiesHomeAsCategoryHub": true,
     "prophetLibraryOwnPage": true,
     "prophetLibraryLargeHeader": false,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v122",
+    "serviceWorkerCache": "v106",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -37,21 +37,11 @@
     "muhammadValuesForChildren": true,
     "muhammadEpisodeRail": true,
     "noArrowOverHeroArt": true,
-    "bottomNavigationChanged": true,
+    "bottomNavigationChanged": false,
     "approvedMockupMatch": true,
     "adobeFireflyHero": true,
     "runwayLowCreditStoryScenes": true,
-    "storyAssetVersion": 35,
-    "muhammadHomeDedicatedArt": "/kids/assets/story-wow/v30-muhammad-home.jpg",
-    "muhammadBirthDedicatedArt": "/kids/assets/story-wow/v30-muhammad-birth.jpg",
-    "pixelGeometryReference": "864x1536",
-    "dockReferenceIcons": true,
-    "offlineVersionedAssetMatching": true,
-    "referenceFinishingLayer": 35,
-    "referenceCacheCoherent": true,
-    "referenceCssNetworkFirst": true,
-    "headerPrecisionLayer": 35,
-    "referenceLinework": "v35"
+    "storyAssetVersion": 21
   },
-  "updatedAt": "2026-10-02T15:20:00.000Z"
+  "updatedAt": "2026-10-02T09:44:00.000Z"
 }
