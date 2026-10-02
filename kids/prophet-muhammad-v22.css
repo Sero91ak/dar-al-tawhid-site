@@ -827,3 +827,150 @@
   #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy{left:30px!important;right:45%!important;top:26px!important;bottom:22px!important}
   #view-stories.ps-stories-home .ps-prophet-entry .ps-entry-copy strong{font-size:38px!important}
 }
+
+
+/* v25 measured reference pass — section heights, icon scale, ornament */
+.ps-mh-way{
+  min-height:97px!important;
+  height:97px!important;
+}
+.ps-mh-message{
+  min-height:117px!important;
+  height:117px!important;
+}
+.ps-mh-values{
+  min-height:119px!important;
+  height:119px!important;
+}
+
+/* Reference uses larger gold outline pictograms beside the two main headings. */
+.ps-mh-panel .ps-mh-line-icon{
+  width:27px!important;
+  height:27px!important;
+  margin-left:0!important;
+}
+.ps-mh-panel-title{gap:7px!important}
+.ps-mh-panel-title h3{line-height:.96!important}
+.ps-mh-way .ps-mh-discover{
+  min-width:119px!important;
+}
+.ps-mh-message .ps-mh-discover{
+  min-width:136px!important;
+}
+
+/* Calligraphic mark sits immediately beside the second title line. */
+.ps-mh-ar{
+  font-size:20.5px!important;
+  line-height:.96!important;
+  transform:translateY(-1px)!important;
+}
+
+/* More faithful central gold knot: layered diamonds + tiny inner core. */
+.ps-mh-ornament{
+  overflow:visible!important;
+}
+.ps-mh-ornament span{
+  width:15px!important;
+  height:15px!important;
+  background:transparent!important;
+  border:1.15px solid #f3cf75!important;
+  box-shadow:
+    0 0 0 3px rgba(242,203,111,.035),
+    0 0 12px rgba(242,203,111,.08)!important;
+}
+.ps-mh-ornament span::before{
+  inset:2px!important;
+  border:1px solid #f3cf75!important;
+  transform:rotate(45deg)!important;
+}
+.ps-mh-ornament span::after{
+  inset:4px!important;
+  border:1px solid #f3cf75!important;
+  transform:rotate(0deg)!important;
+  background:rgba(243,207,117,.08)!important;
+}
+.ps-mh-ornament::before,
+.ps-mh-ornament::after{
+  height:1px!important;
+  filter:drop-shadow(0 0 2px rgba(242,203,111,.18))!important;
+}
+
+/* Values: title icon is intentionally smaller than the route/book pictograms. */
+.ps-mh-values .ps-mh-line-icon{
+  width:23px!important;
+  height:23px!important;
+}
+.ps-mh-values-head .ps-mh-panel-title{gap:8px!important}
+
+/* Story rail headings and lines match the thin reference rule. */
+.ps-mh-section-title i{
+  min-width:28px!important;
+  opacity:.88!important;
+}
+.ps-mh-section-title .ps-mh-line-icon{
+  width:20px!important;
+  height:20px!important;
+}
+
+/* Refine card text and corner treatment. */
+.ps-mh-episode{
+  border-radius:10px!important;
+  overflow:hidden!important;
+}
+.ps-mh-episode-copy strong{
+  letter-spacing:-.012em!important;
+}
+.ps-mh-episode-copy small{
+  color:rgba(235,246,249,.90)!important;
+}
+.ps-mh-time{
+  backdrop-filter:blur(5px)!important;
+  -webkit-backdrop-filter:blur(5px)!important;
+}
+
+/* Bottom bar: preserve the soft top arch and make active field closer to reference. */
+.ps-mh-bottom-nav{
+  border-top-color:rgba(101,204,220,.17)!important;
+  box-shadow:
+    0 -12px 30px rgba(0,0,0,.27),
+    inset 0 1px rgba(255,255,255,.025)!important;
+}
+.ps-mh-bottom-nav button.active{
+  border-color:rgba(249,214,121,.88)!important;
+  box-shadow:
+    0 0 0 1px rgba(249,214,121,.07),
+    0 0 23px rgba(237,191,74,.18),
+    inset 0 1px rgba(255,255,255,.06)!important;
+}
+
+/* Press states: no dead buttons, subtle premium feedback. */
+.ps-mh-episode:active,
+.ps-mh-more-card:active,
+.ps-mh-all:active,
+.ps-mh-bottom-nav button:active{
+  filter:brightness(1.08)!important;
+}
+.ps-mh-episode:active,
+.ps-mh-more-card:active{
+  transform:translateY(1px)!important;
+}
+
+@media(max-width:390px){
+  .ps-mh-way{
+    min-height:97px!important;
+    height:97px!important;
+  }
+  .ps-mh-message{
+    min-height:117px!important;
+    height:117px!important;
+  }
+  .ps-mh-values{
+    min-height:119px!important;
+    height:119px!important;
+  }
+  .ps-mh-panel .ps-mh-line-icon{
+    width:25px!important;
+    height:25px!important;
+  }
+  .ps-mh-ar{font-size:18.5px!important}
+}
