@@ -1,5 +1,6 @@
-const CACHE_NAME="dar-al-tawhid-kids-v107";
+const CACHE_NAME="dar-al-tawhid-kids-v117";
 const BUILD_ID="kids-shell-v12-tab117";
+const LABEL_CACHE_V107="dar-al-tawhid-kids-v107";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
