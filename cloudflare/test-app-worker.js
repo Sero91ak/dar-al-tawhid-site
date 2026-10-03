@@ -179,6 +179,15 @@ async function finalizeDarTestHomeV1193(asset) {
     ""
   );
 
+  // Keep build markers in sync without touching page geometry or route chrome.
+  html = html.replace(/const APP_BUILD_ID="app-shell-v[^"]+"/, 'const APP_BUILD_ID="app-shell-v1199"');
+  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v[^"]+"/, 'window.__DAR_EXPECTED_BUILD="app-shell-v1199"');
+
+  // Cache-bust only the compatibility shim. It is intentionally a visual no-op,
+  // so the established bottom-nav-global-v1120.css regains full authority,
+  // including the original selected inner oval/capsule on every route.
+  html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, 'dar-tab-restore-v1197.css?v=1199-original');
+
   // Remove every superseded Test-home visual authority so only v1193 composes the page.
   html = html.replace(/<link[^>]+dar-home-knowledge-library-v1183\.css[^>]*>\s*/g, "");
   html = html.replace(/<script[^>]+dar-home-knowledge-library-v1183\.js[^>]*><\/script>\s*/g, "");
