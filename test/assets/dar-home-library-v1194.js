@@ -144,59 +144,43 @@ function tuneSearch(){
     }
   });
 }
+function cleanupHomeDuplicates(shell){
+  if(!shell)return;
+
+  // Unwrap the real Qur'an resume row before removing the generated scene.
+  ["dtContinue1194","dtContinue1193"].forEach(function(id){
+    var wrap=shell.querySelector("#"+id);
+    if(!wrap)return;
+    var resume=wrap.querySelector(".home-v380-quran-hero");
+    if(resume)wrap.insertAdjacentElement("beforebegin",resume);
+    wrap.remove();
+  });
+
+  // Remove the duplicated presentation blocks that repeat native Home content.
+  [
+    "dtAccess1194","dtCore1194","dtStudy1194",
+    "dtAccess1193","dtCore1193","dtStudy1193"
+  ].forEach(function(id){
+    var el=shell.querySelector("#"+id);
+    if(el)el.remove();
+  });
+
+  // The library redesign used to inject another recommendation on Home.
+  shell.querySelectorAll('[data-dar-library-recommend="1"]').forEach(function(el){el.remove()});
+
+  // Keep exactly one functional Qur'an resume element.
+  var resumes=Array.prototype.slice.call(shell.querySelectorAll(".home-v380-quran-hero"));
+  resumes.slice(1).forEach(function(el){el.remove()});
+}
+
 function ensureMain(){
   var shell=document.querySelector("#appView .home-v380-shell");
   if(!shell)return;
 
-  var accessSection=shell.querySelector("#dtAccess1194");
-  if(!accessSection){
-    accessSection=document.createElement("section");
-    accessSection.id="dtAccess1194";
-    accessSection.className="dt-main-section dt-access-section";
-    accessSection.innerHTML=
-      '<div class="dt-section-kicker">Direkter Zugang</div>'+
-      '<div class="dt-section-head"><h2>Bibliothek des Wissens</h2><span>Tawḥīd zuerst · danach Qurʾān, Sunnah, Salaf und Quellen</span></div>'+
-      '<div class="dt-access-primary">'+access.slice(0,5).map(accessHtml).join("")+'</div>'+
-      '<div class="dt-secondary-label">Weitere Bereiche</div>'+
-      '<div class="dt-access-secondary">'+access.slice(5).map(accessHtml).join("")+'</div>';
-  }
-  if(shell.firstElementChild!==accessSection)shell.insertBefore(accessSection,shell.firstChild);
-  bind(accessSection);
-
+  cleanupHomeDuplicates(shell);
   tuneSearch();
-  var search=sectionByTitle("homeSearchTitle");
-  var anchor=accessSection;
-  if(search)anchor=placeAfter(search,anchor);
 
-  var quran=shell.querySelector(".home-v380-quran-hero");
-  var cont=shell.querySelector("#dtContinue1194");
-  if(quran){
-    if(!cont){
-      cont=document.createElement("section");
-      cont.id="dtContinue1194";
-      cont.className="dt-study-scene dt-continue";
-      cont.innerHTML='<div class="dt-study-copy"><small>Weiterlernen</small><h2>Dein Lernplatz</h2><p>Setze direkt dort fort, wo du aufgehört hast.</p><div class="dt-continue-body"></div></div>';
-    }
-    var body=cont.querySelector(".dt-continue-body");
-    if(quran.parentNode!==body)body.appendChild(quran);
-    anchor=placeAfter(cont,anchor);
-  }
-
-  var core=shell.querySelector("#dtCore1194");
-  if(!core){
-    core=document.createElement("section");
-    core.id="dtCore1194";
-    core.className="dt-main-section dt-core";
-    core.innerHTML=
-      '<div class="dt-section-kicker">Der Kern</div>'+
-      '<h2>Tawḥīd</h2>'+
-      '<p>Allah in Herrschaft, Anbetung und Namen einzig machen. Nur Ihm gebührt die Anbetung.</p>'+
-      '<button type="button" class="dt-core-link" data-dt-nav="topics">Ausführlich mit Belegen <span aria-hidden="true">→</span></button>';
-  }
-  anchor=placeAfter(core,anchor);
-  bind(core);
-
-
+  // Keep the native Home sections in their original order. Only rename headings.
   var rename={
     homeTodayTitle:"Heute im DĀR",
     homeLibrariesTitle:"Sammlungen & Quellen",
@@ -207,10 +191,9 @@ function ensureMain(){
     if(el)el.textContent=rename[id];
   });
 
-  ["homeTodayTitle","homeLibrariesTitle","homeDiscoverTitle"].forEach(function(id){
-    var sec=sectionByTitle(id);
-    if(sec)anchor=placeAfter(sec,anchor);
-  });
+  // The hero already has a direct search trigger. Do not show a second search surface.
+  var nativeSearch=sectionByTitle("homeSearchTitle");
+  if(nativeSearch)nativeSearch.classList.add("dt-native-search-single");
 
   document.querySelectorAll(
     ".home-header-update-chip,#homeRefreshBtn,.home-refresh-icon-btn--header,.home-refresh-panel,.home-update-row-v416"
