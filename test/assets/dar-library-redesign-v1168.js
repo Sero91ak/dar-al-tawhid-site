@@ -19,15 +19,42 @@
   function ensureAreaBrandbar(){
     var body=document.body;
     if(!body)return;
-    var host=null;
+
+    /* v1213: Qurʾān overview uses its native compact title/header only.
+       Remove the shared DĀR AL TAWḤĪD brand strip if an older render/cache inserted it. */
     if(body.classList.contains("is-quran-overview")){
-      host=document.querySelector(".qov-main");
-    }else if(body.classList.contains("is-quiz-route")||body.classList.contains("is-more-route")){
+      document.querySelectorAll('[data-dar-library-brandbar="1"]').forEach(function(el){el.remove()});
+      return;
+    }
+
+    var host=null;
+    if(body.classList.contains("is-quiz-route")||body.classList.contains("is-more-route")){
       host=document.getElementById("appView");
     }
     if(!host)return;
     if(host.querySelector('[data-dar-library-brandbar="1"]'))return;
     host.insertAdjacentHTML("afterbegin",brandbar());
+  }
+
+  function cleanupLiteralArtifacts(){
+    if(!document.body)return;
+    Array.prototype.slice.call(document.body.childNodes).forEach(function(node){
+      if(!node||node.nodeType!==3)return;
+      var raw=String(node.textContent||"");
+      var trimmed=raw.trim();
+      if(trimmed==="\\n"||trimmed==="\\r\\n"){
+        try{node.remove()}catch(e){if(node.parentNode)node.parentNode.removeChild(node)}
+      }
+    });
+    document.querySelectorAll("#appRoot,#appShell,#appView").forEach(function(host){
+      Array.prototype.slice.call(host.childNodes).forEach(function(node){
+        if(!node||node.nodeType!==3)return;
+        var trimmed=String(node.textContent||"").trim();
+        if(trimmed==="\\n"||trimmed==="\\r\\n"){
+          try{node.remove()}catch(e){if(node.parentNode)node.parentNode.removeChild(node)}
+        }
+      });
+    });
   }
 
   function ensureHomeRecommendation(){
@@ -59,6 +86,7 @@
   }
 
   function mark(){
+    cleanupLiteralArtifacts();
     ensureAreaBrandbar();
     syncGlobalSourceLine();
     // Home v1200: no second recommendation layer on Start.
