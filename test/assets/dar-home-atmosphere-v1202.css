@@ -1529,3 +1529,233 @@ html[data-theme].dar-home-v1194 body.is-home-route .home-line-tawhid{
     height:80px!important;
   }
 }
+
+
+/* v1217 · PRAYER OPEN / ISNAD EMPHASIS / SEAMLESS PAINT BLEND · TEST ONLY
+   Removes glass behind prayer data, adds breathing room around separators,
+   gently strengthens the Ibn Sīrīn quotation and hides the remaining hard seam
+   between the upper and lower background scenes. */
+
+/* Prayer: outline only. No frosted/glass panel behind either row. */
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.header-prayer-hub.dt-prayer-feature{
+  margin-top:17px!important;
+  padding:11px 14px 10px!important;
+  border:1px solid color-mix(in srgb,var(--dt-accent) 30%,var(--dt-rule) 70%)!important;
+  border-radius:14px!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature :is(
+  .header-prayer-hub__main,.header-prayer-hub__status
+){
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__main{
+  padding:3px 6px 10px!important;
+  gap:10px!important;
+  grid-template-columns:minmax(0,1fr) minmax(88px,.74fr) minmax(0,1fr)!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-zone{
+  position:relative!important;
+  min-width:0!important;
+  padding-inline:10px!important;
+  border:0!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-zone + .header-prayer-zone::before{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  top:18%!important;
+  bottom:18%!important;
+  width:1px!important;
+  background:color-mix(in srgb,var(--dt-accent) 22%,transparent)!important;
+  pointer-events:none!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__status{
+  min-height:40px!important;
+  margin:4px 0 0!important;
+  padding:8px 5px 1px!important;
+  gap:0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--dt-accent) 18%,transparent)!important;
+  border-radius:0!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__status>span{
+  position:relative!important;
+  min-height:31px!important;
+  padding:5px 12px!important;
+  border-left:0!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__status>span+span::before{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  top:20%!important;
+  bottom:20%!important;
+  width:1px!important;
+  background:color-mix(in srgb,var(--dt-accent) 18%,transparent)!important;
+  pointer-events:none!important;
+}
+
+/* Ibn Sīrīn: slightly more editorial presence, but still compact. */
+html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad{
+  padding-top:24px!important;
+  padding-bottom:46px!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .dt-isnad .isnad-label{
+  margin-bottom:5px!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .dt-isnad .isnad-speaker{
+  display:block!important;
+  margin-top:4px!important;
+  margin-bottom:2px!important;
+  font-size:clamp(10px,2.2vw,12px)!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .dt-isnad :is(.isnad-quote,.isnad-words){
+  margin-top:9px!important;
+  font-size:clamp(16.5px,3.9vw,21.5px)!important;
+  line-height:1.43!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .dt-isnad .isnad-source{
+  margin-top:7px!important;
+  font-size:clamp(9.7px,2.1vw,10.5px)!important;
+}
+
+/* Seamless background transition:
+   physically overlap the lower atmosphere with the upper scene while keeping
+   content at the same visual position, then add a broad irregular paint wash. */
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view{
+  margin-top:-76px!important;
+  padding-top:76px!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view::before{
+  top:-255px!important;
+  height:clamp(900px,132vw,1120px)!important;
+  -webkit-mask-image:
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0,0,0,.22) 8%,
+      rgba(0,0,0,.58) 18%,
+      #000 34%,
+      #000 72%,
+      rgba(0,0,0,.55) 88%,
+      transparent 100%)!important;
+  mask-image:
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0,0,0,.22) 8%,
+      rgba(0,0,0,.58) 18%,
+      #000 34%,
+      #000 72%,
+      rgba(0,0,0,.55) 88%,
+      transparent 100%)!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad{
+  margin-bottom:-78px!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad::after{
+  left:-8vw!important;
+  right:-8vw!important;
+  bottom:-84px!important;
+  height:190px!important;
+  background:
+    radial-gradient(72% 54% at 12% 14%,color-mix(in srgb,var(--dt-page) 56%,transparent),transparent 72%),
+    radial-gradient(64% 58% at 88% 18%,color-mix(in srgb,var(--dt-page) 42%,transparent),transparent 74%),
+    radial-gradient(46% 56% at 52% 48%,color-mix(in srgb,var(--dt-page) 28%,transparent),transparent 76%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--dt-page) 52%,transparent) 0%,
+      color-mix(in srgb,var(--dt-page) 26%,transparent) 42%,
+      color-mix(in srgb,var(--dt-page) 10%,transparent) 70%,
+      transparent 100%)!important;
+  filter:blur(14px)!important;
+  opacity:.96!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .home-line-tawhid{
+  padding-top:44px!important;
+  border-top:0!important;
+  background:transparent!important;
+  background-image:none!important;
+}
+
+/* Make sure no legacy rule can reintroduce a visible rule exactly at the join. */
+html[data-theme].dar-home-v1194 body.is-home-route :is(
+  .top-shell,.top-shell>.isnad.dt-isnad,#appView.view,.home-line-tawhid
+){
+  border-bottom-color:transparent!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .home-line-tawhid::before{
+  content:""!important;
+  position:absolute!important;
+  pointer-events:none!important;
+  z-index:0!important;
+  left:-5vw!important;
+  right:-5vw!important;
+  top:-64px!important;
+  height:150px!important;
+  background:
+    radial-gradient(70% 68% at 30% 40%,color-mix(in srgb,var(--dt-page) 24%,transparent),transparent 72%),
+    radial-gradient(65% 65% at 78% 36%,color-mix(in srgb,var(--dt-page) 18%,transparent),transparent 75%)!important;
+  filter:blur(12px)!important;
+  opacity:.82!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .home-line-tawhid > *{
+  position:relative!important;
+  z-index:1!important;
+}
+
+@media(max-width:430px){
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #headerPrayerStatus.header-prayer-hub.dt-prayer-feature{
+    padding:9px 9px 8px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #headerPrayerStatus.dt-prayer-feature .header-prayer-hub__main{
+    padding:2px 1px 8px!important;
+    gap:5px!important;
+    grid-template-columns:minmax(0,1fr) minmax(76px,.70fr) minmax(0,1fr)!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #headerPrayerStatus.dt-prayer-feature .header-prayer-zone{
+    padding-inline:5px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #headerPrayerStatus.dt-prayer-feature .header-prayer-hub__status{
+    min-height:38px!important;
+    padding:7px 2px 1px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #headerPrayerStatus.dt-prayer-feature .header-prayer-hub__status>span{
+    min-height:29px!important;
+    padding:4px 5px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad{
+    padding-top:21px!important;
+    padding-bottom:40px!important;
+    margin-bottom:-68px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route #appView.view{
+    margin-top:-66px!important;
+    padding-top:66px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route #appView.view::before{
+    top:-225px!important;
+    height:920px!important;
+  }
+}
