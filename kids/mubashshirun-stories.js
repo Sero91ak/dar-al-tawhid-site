@@ -106,10 +106,10 @@ function ensureUi(){
       '<header class="ms-library-hero">'+
         '<div class="ms-library-kicker">QURʾĀN · AUTHENTISCHE SUNNAH · ṢAḤĀBAH</div>'+
         '<h2>Die zehn Gefährten,<br>denen das Paradies angekündigt wurde</h2>'+
-        '<p>Kindgerecht erzählt, ohne Legenden. Allgemeines Qurʾān-Lob und persönliche Ḥadīṯ-Belege werden sauber getrennt.</p>'+
+
         '<div class="ms-library-stats"><span><b id="msDoneCount">0</b>/10 geschafft</span><span id="msAge">Alter 6–8</span></div>'+
       '</header>'+
-      '<div class="ms-modebar"><button data-ms-mode="both" type="button">Lesen &amp; Hören</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
+
       '<div class="ms-method-note"><strong>Unsere Quellenregel</strong><span>Keine erfundenen Gespräche, keine ausgeschmückten Heldensagen. Wir erzählen nur, was Qurʾān, authentische Sunnah und sichere frühe Berichte tragen.</span></div>'+
       '<div id="msGrid" class="ms-list"></div>'+
     '</div>';
