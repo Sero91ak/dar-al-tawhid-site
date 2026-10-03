@@ -90,7 +90,7 @@ function applyHomeAtmosphereV1204(){
     html.style.setProperty(
       "background-image",
       light
-        ? "linear-gradient(90deg,rgba(249,246,238,.68),rgba(249,246,238,.30)),url('"+heroImg+"')"
+        ? "linear-gradient(90deg,rgba(249,246,238,.44),rgba(249,246,238,.10)),url('"+heroImg+"')"
         : "linear-gradient(90deg,rgba(2,3,2,.58),rgba(2,3,2,.10)),url('"+heroImg+"')",
       "important"
     );
@@ -107,7 +107,7 @@ function applyHomeAtmosphereV1204(){
     top.style.setProperty(
       "background-image",
       light
-        ? "linear-gradient(180deg,rgba(249,246,238,.58) 0%,rgba(249,246,238,.62) 36%,rgba(249,246,238,.84) 78%,rgba(249,246,238,.96) 100%),linear-gradient(90deg,rgba(249,246,238,.74) 0%,rgba(249,246,238,.48) 50%,rgba(249,246,238,.26) 100%),url('"+heroImg+"')"
+        ? "linear-gradient(180deg,rgba(249,246,238,.28) 0%,rgba(249,246,238,.34) 36%,rgba(249,246,238,.62) 78%,rgba(249,246,238,.84) 100%),linear-gradient(90deg,rgba(249,246,238,.50) 0%,rgba(249,246,238,.28) 50%,rgba(249,246,238,.12) 100%),url('"+heroImg+"')"
         : "linear-gradient(180deg,rgba(2,3,2,.10) 0%,rgba(2,3,2,.18) 34%,rgba(2,3,2,.58) 72%,rgba(2,3,2,.98) 100%),linear-gradient(90deg,rgba(2,3,2,.58) 0%,rgba(2,3,2,.28) 48%,rgba(2,3,2,.08) 100%),url('"+heroImg+"')",
       "important"
     );
