@@ -41,7 +41,7 @@ const PRECACHE=[
   "/kids/mubashshirun-stories.js?v=10",
   "/kids/kids-age-typography.css?v=4",
   "/kids/kids-age-typography.js?v=3",
-  "/kids/prophet-stories.css?v=22",
+  "/kids/prophet-stories.css?v=23",
   "/kids/prophet-stories.js?v=23",
   "/kids/assets/prophet-scenes/library.webp",
   "/kids/assets/prophet-scenes/garden.webp",
