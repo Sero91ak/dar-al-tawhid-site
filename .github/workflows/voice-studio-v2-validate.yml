@@ -84,7 +84,8 @@ jobs:
               "CFBundleIconFile",
               "CFBundleIconName",
               "AppIcon.icns",
-              'BUNDLE_EXECUTABLE="DARVoiceStudioNative"',
+              'BUNDLE_EXECUTABLE="DARVoiceStudio"',
+              'single-engine launcher',
               'PlistBuddy -c "Set :CFBundleExecutable $BUNDLE_EXECUTABLE"',
               'killall Dock',
               "2.9.26",
@@ -102,7 +103,7 @@ jobs:
           src=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
           required=[
               'BUNDLE_EXECUTABLE="DARVoiceStudio"',
-              'BUNDLE_EXECUTABLE="DARVoiceStudioNative"',
+              'single-engine launcher',
               'CFBundleIconFile</key><string>AppIcon.icns',
               'CFBundleIconName</key><string>AppIcon',
               'Set :CFBundleExecutable $BUNDLE_EXECUTABLE',
@@ -114,6 +115,32 @@ jobs:
           if missing:
               raise SystemExit("Native Dock icon binding missing: "+", ".join(missing))
           print("Native macOS Dock icon binding OK")
+          PY
+
+      - name: Validate Voice Studio 2.9.68 stability architecture
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
+          swift=Path("voice-studio/VoiceStudioApp.swift").read_text(encoding="utf-8")
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+
+          assert 'BUNDLE_EXECUTABLE="DARVoiceStudio"' in installer
+          assert 'single-engine launcher' in installer
+          assert '<key>KeepAlive</key><true/>' not in installer
+          assert 'launchctl kickstart -k' not in installer
+          assert 'Engine-Start wird der Voice-Studio-App überlassen' in installer
+          assert 'DAR_VOICE_ENGINE_OWNER=launcher' in installer
+
+          assert 'if !userInitiated' not in swift or 'installAvailableUpdate()' not in swift.split('if !userInitiated',1)[-1][:250]
+          assert 'Installation nur nach deinem Klick' in swift
+          assert 'externalEngineOwner' in swift
+
+          assert 'DAR_VOICE_DEV_UI_SYNC' in engine
+          assert 'threading.Thread(target=refresh_studio_ui_from_github' in engine
+          assert 'if os.environ.get("DAR_VOICE_DEV_UI_SYNC","0").strip()=="1"' in engine
+
+          print("Voice Studio 2.9.68 stability architecture OK")
           PY
 
       - name: Validate in-app updater package
