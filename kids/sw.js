@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1060";
+const CACHE_NAME="dar-al-tawhid-kids-v1061";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -27,8 +27,18 @@ const PRECACHE=[
   "/kids/data/stories-authentic.json",
   "/kids/data/prophet-stories.json",
   "/kids/data/mubashshirun-stories.json",
-  "/kids/mubashshirun-stories.css?v=1",
-  "/kids/mubashshirun-stories.js?v=1",
+  "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
+  "/kids/assets/sahaba-mubashshirun/umar.jpg",
+  "/kids/assets/sahaba-mubashshirun/uthman.jpg",
+  "/kids/assets/sahaba-mubashshirun/ali.jpg",
+  "/kids/assets/sahaba-mubashshirun/talha.jpg",
+  "/kids/assets/sahaba-mubashshirun/zubayr.jpg",
+  "/kids/assets/sahaba-mubashshirun/abd-ar-rahman.jpg",
+  "/kids/assets/sahaba-mubashshirun/sad.jpg",
+  "/kids/assets/sahaba-mubashshirun/said.jpg",
+  "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
+  "/kids/mubashshirun-stories.css?v=2",
+  "/kids/mubashshirun-stories.js?v=2",
   "/kids/prophet-stories.css?v=21",
   "/kids/prophet-stories.js?v=21",
   "/kids/assets/prophet-scenes/library.webp",
