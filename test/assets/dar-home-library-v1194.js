@@ -345,6 +345,14 @@ function compactHomeFooter(){
     });
   }
 }
+function cleanupHomeLiteralArtifacts(){
+  if(!isHome()||!document.body)return;
+  Array.prototype.slice.call(document.body.childNodes).forEach(function(node){
+    if(node&&node.nodeType===3&&String(node.textContent||"").trim()==="\\n"){
+      try{node.remove()}catch(e){if(node.parentNode)node.parentNode.removeChild(node)}
+    }
+  });
+}
 function sync(){
   if(!document.documentElement||!document.body)return;
   if(!isHome()){
@@ -357,6 +365,7 @@ function sync(){
     return;
   }
   removeOldLayers();
+  cleanupHomeLiteralArtifacts();
   document.documentElement.classList.add("dar-home-v1194");
   ensureHero();
   ensureMain();
