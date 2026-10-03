@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "updatedAt": "2026-10-03T13:28:00.000Z",
+  "version": 3,
+  "updatedAt": "2026-10-03T14:15:00.000Z",
   "title": "Die zehn al-Mubaššarūn",
   "subtitle": "Die zehn Gefährten, denen das Paradies angekündigt wurde",
   "policy": {
@@ -23,12 +23,14 @@
     "visualDisclaimer": "Szenische Illustrationen sind keine Behauptung über das tatsächliche Aussehen der Gefährten.",
     "directVerificationDomain": "dorar.net",
     "notes": "Direktlinks werden nur dort gesetzt, wo die konkrete Überlieferung geprüft und eindeutig zugeordnet wurde.",
-    "directHadithLinks": "Dorar direct verification links are attached to the core named-person narrations where verified."
+    "directHadithLinks": "Dorar direct verification links are attached to the core named-person narrations where verified.",
+    "hadithGradingNote": "Für die gemeinsame Zehner-Überlieferung wird Jāmiʿ at-Tirmidhī 3748 als Primärbeleg geführt; at-Tirmidhī überliefert dort von al-Buḫārī, dass diese Fassung stärker als die vorherige Überlieferung ist. 3747 bleibt nur ergänzend, nicht als alleiniger Grundbeleg.",
+    "primaryTenHadith": "Jāmiʿ at-Tirmidhī 3748"
   },
   "generalSources": [
     "Qurʾān 9:100",
     "Qurʾān 59:8",
-    "Qurʾān 48:29",
+    "Jāmiʿ at-Tirmidhī 3748",
     "Jāmiʿ at-Tirmidhī 3747"
   ],
   "items": [
@@ -54,9 +56,10 @@
       "lessonOld": "Prüfe bei Sīrah-Geschichten immer: Was steht im Qurʾān? Was erklärt die authentische Sunnah? Was ist späteres Erzählen? Genau diese Trennung schützt vor Legenden.",
       "sourceRefs": [
         "Qurʾān 9:40",
-        "Jāmiʿ at-Tirmidhī 3747",
         "Ṣaḥīḥ al-Buḫārī 4663",
-        "Ṣaḥīḥ al-Buḫārī 3655"
+        "Ṣaḥīḥ al-Buḫārī 3655",
+        "Jāmiʿ at-Tirmidhī 3748",
+        "Jāmiʿ at-Tirmidhī 3747"
       ],
       "honorific": "رضي الله عنه",
       "category": "al-ʿAšarah al-Mubaššarūn",
@@ -130,6 +133,11 @@
       "witnessContext": "Abū Bakr selbst überlieferte die Situation in der Höhle. Außerdem berichtete Ibn ʿUmar, dass die Gefährten zur Lebenszeit des Propheten ﷺ Abū Bakr, dann ʿUmar und dann ʿUṯmān besonders hervorhoben. Das ist wichtig, weil wir hier nicht auf eine späte Legende angewiesen sind, sondern auf Berichte aus der Generation der Ṣaḥābah.",
       "sourceLinks": [
         {
+          "label": "Jāmiʿ at-Tirmidhī 3748",
+          "url": "https://dorar.net/h/TevappoJ?osoul=1",
+          "verification": "Dorar; al-Buḫārī is quoted by at-Tirmidhī as judging this version stronger than the previous report."
+        },
+        {
           "label": "Jāmiʿ at-Tirmidhī 3747",
           "url": "https://dorar.net/h/HYlQbbRd"
         },
@@ -171,9 +179,10 @@
       "sourceRefs": [
         "Qurʾān 9:100",
         "Qurʾān 59:8",
-        "Jāmiʿ at-Tirmidhī 3747",
         "Ṣaḥīḥ al-Buḫārī 3294",
-        "Ṣaḥīḥ al-Buḫārī 3655"
+        "Ṣaḥīḥ al-Buḫārī 3655",
+        "Jāmiʿ at-Tirmidhī 3748",
+        "Jāmiʿ at-Tirmidhī 3747"
       ],
       "honorific": "رضي الله عنه",
       "category": "al-ʿAšarah al-Mubaššarūn",
@@ -247,6 +256,11 @@
       "witnessContext": "Saʿd ibn Abī Waqqāṣ überlieferte den authentischen Bericht, in dem der Prophet ﷺ ʿUmars besondere Festigkeit lobte und sagte, dass der Satan einen anderen Weg nimmt, wenn er ʿUmar auf einem Weg sieht. Ibn ʿUmar überlieferte außerdem die bekannte Reihenfolge Abū Bakr, ʿUmar und ʿUṯmān unter den Gefährten zur Lebenszeit des Propheten ﷺ.",
       "sourceLinks": [
         {
+          "label": "Jāmiʿ at-Tirmidhī 3748",
+          "url": "https://dorar.net/h/TevappoJ?osoul=1",
+          "verification": "Dorar; al-Buḫārī is quoted by at-Tirmidhī as judging this version stronger than the previous report."
+        },
+        {
           "label": "Jāmiʿ at-Tirmidhī 3747",
           "url": "https://dorar.net/h/HYlQbbRd"
         },
@@ -287,10 +301,11 @@
       "lessonOld": "Religiöse Verantwortung zeigt sich auch in sorgfältiger Bewahrung, Ordnung und Dienst an der Gemeinschaft.",
       "sourceRefs": [
         "Qurʾān 9:100",
-        "Jāmiʿ at-Tirmidhī 3747",
         "Ṣaḥīḥ Muslim 2401",
         "Ṣaḥīḥ al-Buḫārī 4987",
-        "Ṣaḥīḥ al-Buḫārī 3655"
+        "Ṣaḥīḥ al-Buḫārī 3655",
+        "Jāmiʿ at-Tirmidhī 3748",
+        "Jāmiʿ at-Tirmidhī 3747"
       ],
       "honorific": "رضي الله عنه",
       "category": "al-ʿAšarah al-Mubaššarūn",
@@ -364,6 +379,11 @@
       "witnessContext": "ʿĀʾišah überlieferte den Bericht über seine besondere Ḥayāʾ. Anas ibn Mālik überlieferte den Bericht über die Muṣḥaf-Abschriften unter ʿUṯmān. So sehen wir zwei Seiten derselben Person: einen zurückhaltenden Charakter und zugleich große öffentliche Verantwortung.",
       "sourceLinks": [
         {
+          "label": "Jāmiʿ at-Tirmidhī 3748",
+          "url": "https://dorar.net/h/TevappoJ?osoul=1",
+          "verification": "Dorar; al-Buḫārī is quoted by at-Tirmidhī as judging this version stronger than the previous report."
+        },
+        {
           "label": "Jāmiʿ at-Tirmidhī 3747",
           "url": "https://dorar.net/h/HYlQbbRd"
         },
@@ -404,10 +424,11 @@
       "lessonOld": "Gerade bei berühmten Persönlichkeiten ist Quellenprüfung wichtig. Liebe zu den Gefährten braucht keine erfundenen Wunder oder Übertreibungen.",
       "sourceRefs": [
         "Qurʾān 9:100",
-        "Jāmiʿ at-Tirmidhī 3747",
         "Ṣaḥīḥ al-Buḫārī 3701",
         "Ṣaḥīḥ al-Buḫārī 3702",
-        "Ṣaḥīḥ al-Buḫārī 3706"
+        "Ṣaḥīḥ al-Buḫārī 3706",
+        "Jāmiʿ at-Tirmidhī 3748",
+        "Jāmiʿ at-Tirmidhī 3747"
       ],
       "honorific": "رضي الله عنه",
       "category": "al-ʿAšarah al-Mubaššarūn",
@@ -481,6 +502,11 @@
       "witnessContext": "Sahl ibn Saʿd und Salamah überlieferten die Fahnen-Episode von Ḫaybar. Saʿd ibn Abī Waqqāṣ überlieferte außerdem, dass der Prophet ﷺ zu ʿAlī sagte, seine Stellung zu ihm sei wie die Stellung Hārūns zu Mūsā, mit der bekannten Ausnahme, dass nach Muḥammad ﷺ kein Prophet kommt. Solche Texte zeigen seinen Rang ohne erfundene Ausschmückung.",
       "sourceLinks": [
         {
+          "label": "Jāmiʿ at-Tirmidhī 3748",
+          "url": "https://dorar.net/h/TevappoJ?osoul=1",
+          "verification": "Dorar; al-Buḫārī is quoted by at-Tirmidhī as judging this version stronger than the previous report."
+        },
+        {
           "label": "Jāmiʿ at-Tirmidhī 3747",
           "url": "https://dorar.net/h/HYlQbbRd"
         },
@@ -525,9 +551,10 @@
       "lessonOld": "Starke Quellen sind wichtiger als spektakuläre Formulierungen. Das macht eine Geschichte zuverlässiger, nicht langweilig.",
       "sourceRefs": [
         "Qurʾān 9:100",
-        "Jāmiʿ at-Tirmidhī 3747",
         "Ṣaḥīḥ al-Buḫārī 3724",
-        "Ṣaḥīḥ al-Buḫārī 4063"
+        "Ṣaḥīḥ al-Buḫārī 4063",
+        "Jāmiʿ at-Tirmidhī 3748",
+        "Jāmiʿ at-Tirmidhī 3747"
       ],
       "honorific": "رضي الله عنه",
       "category": "al-ʿAšarah al-Mubaššarūn",
@@ -601,6 +628,11 @@
       "witnessContext": "Qays ibn Abī Ḥāzim, ein früher Tābiʿī, berichtete, dass er Ṭalḥahs gelähmte Hand selbst gesehen hatte und erklärte, dass sie durch seinen Schutz des Propheten ﷺ bei Uḥud verletzt worden war. Gerade dieser Augenzeugencharakter macht den Bericht für unsere Geschichte besonders wertvoll.",
       "sourceLinks": [
         {
+          "label": "Jāmiʿ at-Tirmidhī 3748",
+          "url": "https://dorar.net/h/TevappoJ?osoul=1",
+          "verification": "Dorar; al-Buḫārī is quoted by at-Tirmidhī as judging this version stronger than the previous report."
+        },
+        {
           "label": "Jāmiʿ at-Tirmidhī 3747",
           "url": "https://dorar.net/h/HYlQbbRd"
         },
@@ -641,10 +673,11 @@
       "lessonOld": "Nicht jede wichtige Aufgabe ist sichtbar. Manchmal ist zuverlässige Information, Beobachtung und Rückmeldung entscheidend.",
       "sourceRefs": [
         "Qurʾān 9:100",
-        "Jāmiʿ at-Tirmidhī 3747",
         "Ṣaḥīḥ al-Buḫārī 3719",
         "Ṣaḥīḥ al-Buḫārī 4113",
-        "Ṣaḥīḥ al-Buḫārī 7261"
+        "Ṣaḥīḥ al-Buḫārī 7261",
+        "Jāmiʿ at-Tirmidhī 3748",
+        "Jāmiʿ at-Tirmidhī 3747"
       ],
       "honorific": "رضي الله عنه",
       "category": "al-ʿAšarah al-Mubaššarūn",
@@ -718,6 +751,11 @@
       "witnessContext": "Ǧābir ibn ʿAbdillāh überlieferte, dass der Prophet ﷺ mehrfach fragte, wer Nachrichten über die gegnerischen Gruppen bringen würde, und az-Zubayr sich jedes Mal meldete. Darauf bezeichnete ihn der Prophet ﷺ als seinen Ḥawārī, seinen besonderen Helfer. Der Bericht steht mehrfach in Ṣaḥīḥ al-Buḫārī.",
       "sourceLinks": [
         {
+          "label": "Jāmiʿ at-Tirmidhī 3748",
+          "url": "https://dorar.net/h/TevappoJ?osoul=1",
+          "verification": "Dorar; al-Buḫārī is quoted by at-Tirmidhī as judging this version stronger than the previous report."
+        },
+        {
           "label": "Jāmiʿ at-Tirmidhī 3747",
           "url": "https://dorar.net/h/HYlQbbRd"
         },
@@ -762,10 +800,11 @@
       "lessonOld": "Ein Muslim misst Erfolg nicht nur am Besitz. Entscheidend sind ḥalāl-Erwerb, Charakter und wie man mit Allahs Gaben umgeht.",
       "sourceRefs": [
         "Qurʾān 59:8",
-        "Jāmiʿ at-Tirmidhī 3747",
         "Ṣaḥīḥ al-Buḫārī 2049",
         "Ṣaḥīḥ al-Buḫārī 3937",
-        "Ṣaḥīḥ al-Buḫārī 5072"
+        "Ṣaḥīḥ al-Buḫārī 5072",
+        "Jāmiʿ at-Tirmidhī 3748",
+        "Jāmiʿ at-Tirmidhī 3747"
       ],
       "honorific": "رضي الله عنه",
       "category": "al-ʿAšarah al-Mubaššarūn",
@@ -839,6 +878,11 @@
       "witnessContext": "Anas ibn Mālik überlieferte die Geschichte der Brüderschaft mit Saʿd ibn ar-Rabīʿ und den Gang zum Markt. Derselbe Bericht zeigt auch, dass der Prophet ﷺ später nach seiner Heirat fragte und ihm eine Walīmah empfahl. Das verbindet Arbeit, Familie und Sunnah in einer sehr alltäglichen, greifbaren Geschichte.",
       "sourceLinks": [
         {
+          "label": "Jāmiʿ at-Tirmidhī 3748",
+          "url": "https://dorar.net/h/TevappoJ?osoul=1",
+          "verification": "Dorar; al-Buḫārī is quoted by at-Tirmidhī as judging this version stronger than the previous report."
+        },
+        {
           "label": "Jāmiʿ at-Tirmidhī 3747",
           "url": "https://dorar.net/h/HYlQbbRd"
         },
@@ -883,9 +927,10 @@
       "lessonOld": "Fähigkeit allein macht niemanden vorbildlich. Entscheidend sind Absicht, Gehorsam und der richtige Einsatz im erlaubten Rahmen.",
       "sourceRefs": [
         "Qurʾān 9:100",
-        "Jāmiʿ at-Tirmidhī 3747",
         "Ṣaḥīḥ al-Buḫārī 4058",
-        "Ṣaḥīḥ al-Buḫārī 4059"
+        "Ṣaḥīḥ al-Buḫārī 4059",
+        "Jāmiʿ at-Tirmidhī 3748",
+        "Jāmiʿ at-Tirmidhī 3747"
       ],
       "honorific": "رضي الله عنه",
       "category": "al-ʿAšarah al-Mubaššarūn",
@@ -959,6 +1004,11 @@
       "witnessContext": "ʿAlī ibn Abī Ṭālib überlieferte, dass er den Propheten ﷺ niemandem außer Saʿd gegenüber die bekannte ehrende Redewendung mit Vater und Mutter sagen hörte. In Ṣaḥīḥ al-Buḫārī wird diese Aussage ausdrücklich mit Saʿds Einsatz am Tag von Uḥud verbunden.",
       "sourceLinks": [
         {
+          "label": "Jāmiʿ at-Tirmidhī 3748",
+          "url": "https://dorar.net/h/TevappoJ?osoul=1",
+          "verification": "Dorar; al-Buḫārī is quoted by at-Tirmidhī as judging this version stronger than the previous report."
+        },
+        {
           "label": "Jāmiʿ at-Tirmidhī 3747",
           "url": "https://dorar.net/h/HYlQbbRd"
         },
@@ -999,9 +1049,9 @@
       "lessonOld": "Quellenkritik bedeutet auch, Grenzen des Wissens zu akzeptieren. Weniger, aber sicherer Inhalt ist besser als eine ausgeschmückte Biographie.",
       "sourceRefs": [
         "Qurʾān 9:100",
-        "Jāmiʿ at-Tirmidhī 3747",
         "Jāmiʿ at-Tirmidhī 3748",
-        "Jāmiʿ at-Tirmidhī 3757"
+        "Jāmiʿ at-Tirmidhī 3757",
+        "Jāmiʿ at-Tirmidhī 3747"
       ],
       "honorific": "رضي الله عنه",
       "category": "al-ʿAšarah al-Mubaššarūn",
@@ -1115,9 +1165,10 @@
       "lessonOld": "Amānah ist ein Grundprinzip für Familie, Arbeit, Wissen und Führung. Wer Vertrauen trägt, muss ehrlich, sorgfältig und verlässlich sein.",
       "sourceRefs": [
         "Qurʾān 9:100",
-        "Jāmiʿ at-Tirmidhī 3747",
         "Ṣaḥīḥ al-Buḫārī 7255",
-        "Ṣaḥīḥ Muslim 2419"
+        "Ṣaḥīḥ Muslim 2419",
+        "Jāmiʿ at-Tirmidhī 3748",
+        "Jāmiʿ at-Tirmidhī 3747"
       ],
       "honorific": "رضي الله عنه",
       "category": "al-ʿAšarah al-Mubaššarūn",
@@ -1190,6 +1241,11 @@
       "visualDisclaimer": "Szenische historische Illustration. Sie beansprucht nicht, das tatsächliche Aussehen des Ṣaḥābī wiederzugeben.",
       "witnessContext": "Anas ibn Mālik überlieferte die Aussage über Abū ʿUbaydahs Amānah. Der Bericht steht in Ṣaḥīḥ al-Buḫārī und eine ausführliche Fassung in Ṣaḥīḥ Muslim. Damit ist sein Kernmerkmal nicht eine spätere Charakterbeschreibung, sondern eine direkte Auszeichnung des Propheten ﷺ.",
       "sourceLinks": [
+        {
+          "label": "Jāmiʿ at-Tirmidhī 3748",
+          "url": "https://dorar.net/h/TevappoJ?osoul=1",
+          "verification": "Dorar; al-Buḫārī is quoted by at-Tirmidhī as judging this version stronger than the previous report."
+        },
         {
           "label": "Jāmiʿ at-Tirmidhī 3747",
           "url": "https://dorar.net/h/HYlQbbRd"
