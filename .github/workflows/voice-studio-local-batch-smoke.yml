@@ -63,14 +63,14 @@ jobs:
           alphabet=Path("voice-studio/alphabet-audio-studio.js").read_text(encoding="utf-8")
           html=Path("voice-studio/index.html").read_text(encoding="utf-8")
 
-          assert 'ENGINE_VERSION="2.9.64"' in engine
+          assert 'ENGINE_VERSION="2.9.65"' in engine
           assert '"engine_version":ENGINE_VERSION' in engine
           assert 'LEARNING_PREVIEW_WAITING.is_set()' in engine
           assert 'MANUAL_RENDER_WAITING.is_set()' in engine
           assert 'RENDER_LOCK.locked()' in engine
           assert 'await startFullBatch(true);' not in alphabet, "Alphabet/Quiz full batch must never auto-start"
           assert 'Gesamtbatch startet ausschließlich nach dem' in alphabet
-          assert 'const APP_VERSION="2.9.64";' in html
+          assert 'const APP_VERSION="2.9.65";' in html
           assert 'runningVersion!==APP_VERSION' in html
           print("Interactive Voice Studio priority guard OK")
           PY
