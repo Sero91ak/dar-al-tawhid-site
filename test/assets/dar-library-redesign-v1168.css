@@ -307,7 +307,7 @@ body.is-quran-overview .qov-resume-card,
 body.is-quran-overview .qov-player-launch{
   border-radius:14px!important;box-shadow:none!important;
 }
-body.is-quran-overview #quranSurahGrid.qov-surah-list{gap:0!important}
+body.is-quran-overview #quranSurahGrid.qov-surah-list{gap:12px!important;row-gap:12px!important}
 body.is-quran-overview .qov-row{min-height:67px!important;padding:9px 2px!important}
 body.is-quran-overview .qov-row::after{background:var(--dar-lib-rule)!important}
 body.is-quran-overview .qov-row:hover,
@@ -407,4 +407,63 @@ html[data-theme="bordeaux"] :is(body.is-home-route .header.theme-hero-surface,bo
   body.is-more-route .more-feature-row:nth-child(odd){border-right:0!important}
   body.is-quiz-route .view-head,body.is-more-route .view-head{padding-right:32%!important}
   .dar-library-brandbar__sub{font-size:9.5px}
+}
+
+
+/* v1201 · restore global source line above all main areas */
+html[data-theme] body .brand-kicker-row small.dar-global-source-line,
+html[data-theme] body .dar-library-brandbar__meta.dar-global-source-line{
+  display:inline-block!important;
+  margin:0!important;
+  padding:0 0 6px!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#d6bd86) 62%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  color:var(--gold2,#d6bd86)!important;
+  -webkit-text-fill-color:var(--gold2,#d6bd86)!important;
+  font-family:var(--font-ui,var(--sans,system-ui,sans-serif))!important;
+  font-size:clamp(9px,2.35vw,11px)!important;
+  line-height:1.25!important;
+  font-weight:850!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+  white-space:normal!important;
+  text-shadow:none!important;
+}
+html[data-theme] body .brand-kicker-row{
+  overflow:visible!important;
+}
+html[data-theme] body .dar-library-brandbar__meta.dar-global-source-line{
+  width:max-content!important;
+  max-width:100%!important;
+}
+@media(max-width:390px){
+  html[data-theme] body .brand-kicker-row small.dar-global-source-line,
+  html[data-theme] body .dar-library-brandbar__meta.dar-global-source-line{
+    font-size:8.6px!important;
+    letter-spacing:.105em!important;
+  }
+}
+
+
+/* QURAN_SURAH_SEPARATION_V1207 · TEST ONLY
+   Restore visible vertical separation between Surah entries/cards. */
+html[data-theme] body.is-quran-overview #quranSurahGrid,
+html[data-theme] body.is-quran-overview #quranSurahGrid.qov-surah-list{
+  row-gap:12px!important;
+  gap:12px!important;
+}
+html[data-theme] body.is-quran-overview #quranSurahGrid > .quran-surah-card,
+html[data-theme] body.is-quran-overview #quranSurahGrid > .qov-row{
+  margin-block:0!important;
+}
+@media(min-width:760px){
+  html[data-theme] body.is-quran-overview #quranSurahGrid,
+  html[data-theme] body.is-quran-overview #quranSurahGrid.qov-surah-list{
+    row-gap:14px!important;
+    gap:14px!important;
+  }
 }

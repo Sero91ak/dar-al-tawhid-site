@@ -1,0 +1,824 @@
+/* DĀR AL TAWḤĪD Kids — global age-adaptive typography v1.06.5
+   Readability goals:
+   - one rounded sans-serif reading face (Fredoka) for Latin/German
+   - Noto Naskh Arabic for Arabic
+   - age profile changes size, line-height, spacing and touch density
+   - no clipping when text grows
+*/
+:root{
+  --kids-reading-font:"Fredoka",-apple-system,BlinkMacSystemFont,"SF Pro Rounded","Avenir Next",Arial,sans-serif;
+  --kids-arabic-font:"Noto Naskh Arabic","Geeza Pro","Traditional Arabic",serif;
+  --kids-body:18.5px;
+  --kids-body-leading:1.64;
+  --kids-small:14.5px;
+  --kids-small-leading:1.52;
+  --kids-meta:13.5px;
+  --kids-button:16.5px;
+  --kids-card-title:21px;
+  --kids-section-title:24px;
+  --kids-page-title:34px;
+  --kids-nav:13px;
+  --kids-touch:56px;
+  --kids-letter:.006em;
+  --kids-word:.018em;
+}
+html[data-kids-age="4-5"]{
+  --kids-body:20px;
+  --kids-body-leading:1.70;
+  --kids-small:16px;
+  --kids-small-leading:1.58;
+  --kids-meta:14.5px;
+  --kids-button:18px;
+  --kids-card-title:23px;
+  --kids-section-title:27px;
+  --kids-page-title:38px;
+  --kids-nav:14px;
+  --kids-touch:62px;
+  --kids-letter:.008em;
+  --kids-word:.025em;
+}
+html[data-kids-age="6-8"]{
+  --kids-body:18.5px;
+  --kids-body-leading:1.64;
+  --kids-small:15px;
+  --kids-small-leading:1.54;
+  --kids-meta:13.75px;
+  --kids-button:17px;
+  --kids-card-title:21.5px;
+  --kids-section-title:25px;
+  --kids-page-title:35px;
+  --kids-nav:13.5px;
+  --kids-touch:58px;
+  --kids-letter:.006em;
+  --kids-word:.02em;
+}
+html[data-kids-age="9-10"]{
+  --kids-body:17.5px;
+  --kids-body-leading:1.60;
+  --kids-small:14.5px;
+  --kids-small-leading:1.50;
+  --kids-meta:13px;
+  --kids-button:16px;
+  --kids-card-title:20px;
+  --kids-section-title:23px;
+  --kids-page-title:33px;
+  --kids-nav:12.75px;
+  --kids-touch:54px;
+  --kids-letter:.004em;
+  --kids-word:.015em;
+}
+
+/* The app is text-first: use one predictable, open sans-serif reading face. */
+body,
+.app,
+.view,
+.modal,
+.modal-shell,
+button,
+input,
+select,
+textarea,
+.ps-library-page,
+.ps-modal,
+.ms-library-page,
+.ms-modal{
+  font-family:var(--kids-reading-font)!important;
+  font-kerning:normal;
+  text-rendering:optimizeLegibility;
+}
+[dir="rtl"],
+.dua-ar,.dua-old-note .ar,
+.surah-card .ar,
+.ps-ar,.ps-row-ar,.ps-muhammad-ar,
+.ms-ar,.ms-row-ar{
+  font-family:var(--kids-arabic-font)!important;
+}
+
+/* Long-form reading text — never below the selected profile size. */
+.story-text,.lesson-text,.verse-translation,
+.dua-meaning,.dua-prompt,
+.story-player-main p,
+.ps-read,.ms-read,
+.kids-join p,
+.view .readable-text,
+.modal .readable-text{
+  font-size:var(--kids-body)!important;
+  line-height:var(--kids-body-leading)!important;
+  letter-spacing:var(--kids-letter)!important;
+  word-spacing:var(--kids-word)!important;
+  font-weight:550!important;
+  overflow-wrap:anywhere;
+  hyphens:auto;
+}
+
+/* Supporting copy that children still need to read. */
+.page-head p,
+.quran-hero p,
+.story-copy p,
+.choice small,
+.quran-action small,
+.surah-card small,
+.verse-card small,
+.full-quran small,
+.resume span,
+.gentle-note,
+.age-help,.parent-note,
+.daily-step .dtxt small,
+.parent-progress-stat span,
+.quiz-help,.quiz-source,.quiz-finish p,
+.dua-tr,.dua-source,
+.ps-entry-sub,.ps-row-meta,.ps-summary,.ps-muhammad-meta,
+.ms-entry-copy span,.ms-row-summary,.ms-row-meta,
+.ms-library-hero p,
+.ms-player p{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+  letter-spacing:var(--kids-letter)!important;
+}
+
+/* Metadata remains secondary, but is no longer microscopic. */
+.page-head .kicker,
+.story-copy .meta,
+.story-row .meta,.story-row .time,.story-verify,.story-source,
+.surah-card .num,
+.dua-verified,
+.daily-head span,
+.ps-entry-kicker,.ps-row-kicker,.ps-sequence-head span,
+.ms-entry-kicker,.ms-row-kicker,.ms-library-kicker,.ms-detail-kicker,.ms-q-kicker,
+.modal-title small{
+  font-size:var(--kids-meta)!important;
+  line-height:1.35!important;
+  letter-spacing:.055em!important;
+}
+.ps-entry-kicker,.ps-row-kicker,.ps-sequence-head span,
+.ms-entry-kicker,.ms-row-kicker,.ms-library-kicker,.ms-detail-kicker,.ms-q-kicker{
+  text-transform:none!important;
+}
+
+/* Titles scale with the selected age profile. */
+.page-head h2{
+  font-size:var(--kids-page-title)!important;
+  line-height:1.06!important;
+  letter-spacing:-.025em!important;
+}
+.section-title{
+  font-size:var(--kids-section-title)!important;
+  line-height:1.15!important;
+}
+.choice strong,
+.story-copy h3,
+.story-row h3,
+.quran-action strong,
+.surah-card strong,
+.verse-card strong,
+.full-quran strong,
+.resume strong,
+.daily-step .dtxt strong,
+.label-row strong,
+.ps-row-title,.ps-muhammad-title,.ps-entry-copy strong,
+.ms-row-title,.ms-entry-copy strong{
+  font-size:var(--kids-card-title)!important;
+  line-height:1.22!important;
+  letter-spacing:-.012em!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+.quran-hero h3{
+  font-size:calc(var(--kids-card-title) + 5px)!important;
+  line-height:1.16!important;
+}
+.quiz-question,.dua-title,.story-player-main h2{
+  line-height:1.18!important;
+}
+.quiz-question{
+  font-size:clamp(calc(var(--kids-card-title) + 5px),7vw,42px)!important;
+}
+.dua-title{
+  font-size:clamp(calc(var(--kids-card-title) + 6px),8vw,42px)!important;
+}
+
+/* Child-facing controls: readable labels + generous targets. */
+.age-tabs button,
+.choice,
+.quran-action,
+.surah-card,
+.verse-card,
+.full-quran,
+.story-row,
+.resume,
+.daily-step,
+.daily-start,
+.quiz-answer,.quiz-next,.quiz-listen,
+.dua-answer,.dua-listen,.dua-next-item,.dua-quran-audio,
+.primary,.cta-primary,
+.story-answer,
+.ps-mode,.ps-detail-mode,.ps-play,.ps-answer,
+.ms-modebar button,.ms-detail-modes button,.ms-play,.ms-question button{
+  font-size:var(--kids-button)!important;
+}
+.age-tabs button,
+.daily-start,
+.quiz-answer,.quiz-next,
+.dua-answer,.dua-listen,.dua-next-item,.dua-quran-audio,
+.primary,.cta-primary,
+.story-answer,
+.ps-mode,.ps-detail-mode,.ps-play,.ps-answer,
+.ms-modebar button,.ms-detail-modes button,.ms-play,.ms-question button{
+  min-height:var(--kids-touch)!important;
+}
+
+/* The bottom dock is part of navigation, not fine print. */
+.nav-btn{
+  min-height:calc(var(--kids-touch) + 8px)!important;
+}
+.nav-btn .lab{
+  font-size:var(--kids-nav)!important;
+  line-height:1.12!important;
+  font-weight:700!important;
+  letter-spacing:.005em!important;
+}
+
+/* Parent age control must itself demonstrate the selected reading scale. */
+.age-tabs button{
+  font-size:var(--kids-button)!important;
+  line-height:1.2!important;
+  font-weight:700!important;
+  padding:12px 7px!important;
+}
+.age-help,.parent-note{
+  font-size:var(--kids-small)!important;
+}
+
+/* Qurʾān Arabic remains comfortably larger than translation/UI copy. */
+.surah-card .ar{
+  font-size:calc(var(--kids-card-title) + 8px)!important;
+  line-height:1.55!important;
+}
+.dua-ar{
+  font-size:clamp(38px,10vw,66px)!important;
+  line-height:1.75!important;
+}
+.ps-ar,.ms-ar{
+  font-size:clamp(28px,6vw,38px)!important;
+  line-height:1.55!important;
+}
+.ps-row-ar,.ms-row-ar{
+  font-size:calc(var(--kids-small) + 6px)!important;
+  line-height:1.45!important;
+}
+
+/* Story libraries rendered outside .app inherit the mirrored html age. */
+.ps-read,.ms-read{
+  max-width:68ch;
+  margin-inline:auto;
+}
+.ps-read p,.ms-read p{
+  margin-bottom:1.05em!important;
+}
+.ps-summary,.ms-detail-hero p{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+}
+.ps-title,.ms-detail-hero h2{
+  font-size:clamp(calc(var(--kids-page-title) - 2px),8vw,56px)!important;
+  line-height:1.04!important;
+}
+.ps-answer,.ms-question button{
+  font-weight:650!important;
+  line-height:1.35!important;
+}
+
+/* Cards expand with text instead of clipping it. */
+.choice,
+.quran-action,
+.surah-card,
+.verse-card,
+.full-quran,
+.story-row,
+.resume,
+.daily-step,
+.quiz-answer,
+.dua-answer,
+.parent-card,
+.info-card,
+.ps-story-row,
+.ms-story-row{
+  height:auto!important;
+}
+.story-row,.verse-card,.resume,.daily-step{
+  min-height:var(--kids-touch)!important;
+}
+.quran-action{min-height:calc(var(--kids-touch) + 58px)!important}
+.surah-card{min-height:calc(var(--kids-touch) + 76px)!important}
+.story-copy{
+  row-gap:4px!important;
+}
+.modal-title strong{
+  font-size:var(--kids-small)!important;
+  white-space:normal!important;
+  line-height:1.25!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+
+/* 4–5: reduce crowded grids; the child sees one clear action at a time. */
+html[data-kids-age="4-5"] .quran-actions{
+  grid-template-columns:1fr!important;
+}
+html[data-kids-age="4-5"] .surah-grid{
+  grid-template-columns:1fr!important;
+}
+html[data-kids-age="4-5"] .parent-progress-grid{
+  grid-template-columns:1fr!important;
+}
+html[data-kids-age="4-5"] .story-copy{
+  padding:19px 20px!important;
+}
+html[data-kids-age="4-5"] .choice{
+  min-height:164px!important;
+}
+
+/* Keep narrow phones readable; don't shrink text just because width is tight. */
+@media(max-width:430px){
+  .shell{padding-left:14px!important;padding-right:14px!important}
+  .story-copy{grid-template-columns:minmax(0,1fr) 42px!important}
+  .quran-actions{gap:11px!important}
+  .nav-btn{padding-inline:2px!important}
+}
+@media(max-width:360px){
+  :root{--kids-nav:12px}
+  .nav-btn .lab{letter-spacing:0!important}
+}
+/* Text must remain usable with OS/browser text enlargement. */
+@supports(font-size:1rem){
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+}
+
+
+/* Compatibility selectors for the existing Kids surfaces. */
+.knowledge-child,.ayah-de,.ayah-tr,.studio-read,.studio-card-copy span,
+.studio-content-summary,.studio-content-meta,.knowledge-source,.knowledge-person,.knowledge-exact{
+  font-family:var(--kids-reading-font)!important;
+}
+.knowledge-child,.ayah-de,.studio-read{
+  font-size:var(--kids-body)!important;
+  line-height:var(--kids-body-leading)!important;
+}
+.ayah-tr,.studio-card-copy span,.studio-content-summary,.studio-content-meta,
+.knowledge-source,.knowledge-person,.knowledge-exact{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+}
+.ayah-ar,.word-coach .coach-word{
+  font-family:var(--kids-arabic-font)!important;
+}
+.ayah-ar{
+  font-size:clamp(42px,10vw,70px)!important;
+  line-height:1.8!important;
+}
+.word-coach .coach-word{
+  font-size:clamp(46px,11vw,76px)!important;
+  line-height:1.55!important;
+}
+.studio-card-copy strong{
+  font-size:var(--kids-card-title)!important;
+  line-height:1.2!important;
+}
+.studio-quiz-answer{
+  font-size:var(--kids-button)!important;
+  min-height:var(--kids-touch)!important;
+}
+
+
+/* High-specificity coverage for legacy inline !important rules.
+   This file is loaded last in the Kids shell so the age profile wins globally. */
+html[data-kids-age] .age-tabs button{
+  font-size:var(--kids-fs-control)!important;
+  min-height:var(--kids-control-min)!important;
+  line-height:1.2!important;
+}
+html[data-kids-age] .age-help,
+html[data-kids-age] .parent-note,
+html[data-kids-age] .parent-progress-stat span{
+  font-size:var(--kids-fs-small)!important;
+  line-height:1.5!important;
+}
+html[data-kids-age] .label-row strong{
+  font-size:var(--kids-fs-control)!important;
+}
+html[data-kids-age] .nav-btn{
+  min-height:var(--kids-control-min)!important;
+}
+html[data-kids-age] .nav-btn .lab{
+  font-size:var(--kids-fs-small)!important;
+  line-height:1.15!important;
+}
+html[data-kids-age] .modal-title strong{
+  font-size:var(--kids-fs-control)!important;
+}
+html[data-kids-age] .modal-title small,
+html[data-kids-age] .dev-note{
+  font-size:var(--kids-fs-small)!important;
+}
+html[data-kids-age] .primary,
+html[data-kids-age] .secondary,
+html[data-kids-age] .big-select,
+html[data-kids-age] .lesson-nav button{
+  font-size:var(--kids-fs-control)!important;
+  min-height:var(--kids-control-min)!important;
+}
+
+/* Qurʾān learning */
+html[data-kids-age] #quranModal .lesson-step{
+  min-height:var(--kids-control-min)!important;
+  font-size:var(--kids-fs-small)!important;
+  line-height:1.25!important;
+  padding:9px 7px!important;
+}
+html[data-kids-age] #quranModal .quran-mini-note{
+  font-size:var(--kids-fs-small)!important;
+  line-height:1.5!important;
+}
+html[data-kids-age] #quranModal .big-play,
+html[data-kids-age] #quranModal .big-speak{
+  min-height:calc(var(--kids-control-min) + 14px)!important;
+  font-size:var(--kids-fs-control)!important;
+}
+html[data-kids-age] #quranModal .lesson-nav button{
+  min-height:var(--kids-control-min)!important;
+  font-size:var(--kids-fs-control)!important;
+}
+html[data-kids-age] #quranModal .ayah-tr{
+  font-size:var(--kids-fs-label)!important;
+}
+html[data-kids-age] #quranModal .ayah-de{
+  font-size:var(--kids-fs-card-copy)!important;
+  line-height:1.58!important;
+}
+html[data-kids-age] #quranModal .ayah-no{
+  font-size:var(--kids-fs-small)!important;
+}
+html[data-kids-age] #quranModal .coach-help{
+  font-size:var(--kids-fs-small)!important;
+}
+html[data-kids-age="4-5"] #quranModal .ayah-ar{font-size:clamp(52px,13vw,80px)!important}
+html[data-kids-age="6-8"] #quranModal .ayah-ar{font-size:clamp(46px,11.5vw,72px)!important}
+html[data-kids-age="9-10"] #quranModal .ayah-ar{font-size:clamp(40px,9.5vw,62px)!important}
+
+/* Alphabet */
+html[data-kids-age] #alphabetModal .lesson-step{
+  min-height:var(--kids-control-min)!important;
+  font-size:var(--kids-fs-small)!important;
+}
+html[data-kids-age] #alphabetModal .ab-name{
+  font-size:var(--kids-fs-card-title)!important;
+}
+html[data-kids-age] #alphabetModal .ab-hint{
+  font-size:var(--kids-fs-card-copy)!important;
+  line-height:1.48!important;
+}
+html[data-kids-age] #alphabetModal .ab-word-de{
+  font-size:calc(var(--kids-fs-card-title) + 2px)!important;
+}
+html[data-kids-age] #alphabetModal .ab-h small,
+html[data-kids-age] #alphabetModal .ab-forms span,
+html[data-kids-age] #alphabetModal .ab-audio-status,
+html[data-kids-age] #alphabetModal .ab-audio-credit{
+  font-size:var(--kids-fs-small)!important;
+  line-height:1.4!important;
+}
+html[data-kids-age] #alphabetModal .ab-nav button{
+  min-height:var(--kids-control-min)!important;
+  font-size:var(--kids-fs-control)!important;
+}
+html[data-kids-age] #alphabetModal .ab-practice-title{
+  font-size:var(--kids-fs-question)!important;
+}
+html[data-kids-age] #alphabetModal .ab-practice-feedback{
+  font-size:var(--kids-fs-control)!important;
+}
+
+/* General content cards and settings injected by separate Kids modules. */
+html[data-kids-age] .studio-new-head h3{
+  font-size:var(--kids-fs-card-title)!important;
+}
+html[data-kids-age] .studio-new-age,
+html[data-kids-age] .studio-badge,
+html[data-kids-age] .studio-content-meta{
+  font-size:var(--kids-fs-small)!important;
+}
+html[data-kids-age] .studio-card-copy strong,
+html[data-kids-age] .studio-story-row strong{
+  font-size:var(--kids-fs-card-title)!important;
+}
+html[data-kids-age] .studio-card-copy span,
+html[data-kids-age] .studio-story-row small{
+  font-size:var(--kids-fs-card-copy)!important;
+}
+html[data-kids-age] .studio-content-title{
+  font-size:var(--kids-fs-page-title)!important;
+}
+html[data-kids-age] .studio-content-summary{
+  font-size:var(--kids-fs-card-copy)!important;
+  line-height:1.55!important;
+}
+html[data-kids-age] .studio-mode-tabs button,
+html[data-kids-age] .studio-pref-buttons button{
+  min-height:var(--kids-control-min)!important;
+  font-size:var(--kids-fs-control)!important;
+}
+
+/* Prevent text clipping when the child profile enlarges typography. */
+html[data-kids-age] .ps-row-copy,
+html[data-kids-age] .ms-row-copy,
+html[data-kids-age] .story-copy,
+html[data-kids-age] .studio-card-copy{
+  min-width:0!important;
+}
+html[data-kids-age] .ps-row-title,
+html[data-kids-age] .ms-row-title,
+html[data-kids-age] .ps-entry-copy strong,
+html[data-kids-age] .ms-entry-copy strong,
+html[data-kids-age] .choice strong{
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+}
+
+
+/* V1.06.6 page-specific age typography overrides */
+/* Override legacy age rules that used stronger selectors and kept 9–10 too small. */
+html[data-kids-age="4-5"] .app[data-age="4–5"] .story-text,
+html[data-kids-age="4-5"] .app[data-age="4–5"] .lesson-text,
+html[data-kids-age="4-5"] .app[data-age="4–5"] .dua-meaning,
+html[data-kids-age="4-5"] .app[data-age="4–5"] .verse-translation,
+html[data-kids-age="6-8"] .app[data-age="6–8"] .story-text,
+html[data-kids-age="6-8"] .app[data-age="6–8"] .lesson-text,
+html[data-kids-age="6-8"] .app[data-age="6–8"] .dua-meaning,
+html[data-kids-age="6-8"] .app[data-age="6–8"] .verse-translation,
+html[data-kids-age="9-10"] .app[data-age="9–10"] .story-text,
+html[data-kids-age="9-10"] .app[data-age="9–10"] .lesson-text,
+html[data-kids-age="9-10"] .app[data-age="9–10"] .dua-meaning,
+html[data-kids-age="9-10"] .app[data-age="9–10"] .verse-translation{
+  font-size:var(--kids-body)!important;
+  line-height:var(--kids-body-leading)!important;
+}
+
+/* TODAY / START — this is the screen where the small text was most visible. */
+#view-today .hero-salam{
+  font-size:var(--kids-small)!important;
+  line-height:1.48!important;
+  max-width:28em!important;
+}
+#view-today .hero-kicker{
+  font-size:var(--kids-meta)!important;
+  line-height:1.25!important;
+  letter-spacing:.055em!important;
+  text-transform:none!important;
+  padding:6px 13px!important;
+}
+#view-today .hero h1{
+  font-size:clamp(calc(var(--kids-page-title) - 5px),7.4vw,var(--kids-page-title))!important;
+  line-height:1.08!important;
+}
+#view-today .hero p{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+  max-width:29em!important;
+}
+#view-today .section-title{
+  font-size:var(--kids-section-title)!important;
+  line-height:1.15!important;
+}
+#view-today .resume strong,
+#view-today .choice strong,
+#view-today .knowledge-card .kcopy strong{
+  font-size:var(--kids-card-title)!important;
+  line-height:1.2!important;
+}
+#view-today .resume span,
+#view-today .choice small,
+#view-today .knowledge-card .kcopy span{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+}
+#view-today .daily-head strong{
+  font-size:calc(var(--kids-card-title) - 2px)!important;
+  line-height:1.2!important;
+}
+#view-today .daily-head span{
+  font-size:var(--kids-meta)!important;
+  line-height:1.35!important;
+}
+#view-today .daily-step .dtxt strong{
+  font-size:var(--kids-button)!important;
+  line-height:1.3!important;
+}
+#view-today .daily-step .dtxt small{
+  font-size:var(--kids-small)!important;
+  line-height:1.45!important;
+}
+#view-today .gentle-note{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+}
+html[data-kids-age="4-5"] #view-today .hero-copy{
+  padding-left:22px!important;padding-right:22px!important;padding-bottom:22px!important;
+}
+html[data-kids-age="4-5"] #view-today .resume,
+html[data-kids-age="4-5"] #view-today .daily-step{
+  padding-top:16px!important;padding-bottom:16px!important;
+}
+
+/* QURʾĀN home + learning surface */
+#view-quran .page-head h2{font-size:var(--kids-page-title)!important;line-height:1.06!important}
+#view-quran .page-head p{font-size:var(--kids-small)!important;line-height:var(--kids-small-leading)!important}
+#view-quran .quran-hero h3{font-size:calc(var(--kids-card-title) + 5px)!important;line-height:1.15!important}
+#view-quran .quran-hero p{font-size:var(--kids-small)!important;line-height:var(--kids-small-leading)!important}
+#quranModal .quran-mini-note{font-size:var(--kids-meta)!important;line-height:1.45!important}
+#quranModal .lesson-step{font-size:var(--kids-button)!important;line-height:1.35!important;min-height:var(--kids-touch)!important}
+#quranModal .big-play,#quranModal .big-speak{
+  font-size:var(--kids-button)!important;
+  min-height:var(--kids-touch)!important;
+}
+#quranModal .ayah-de{font-size:var(--kids-body)!important;line-height:var(--kids-body-leading)!important}
+#quranModal .ayah-tr{font-size:var(--kids-small)!important;line-height:1.55!important}
+#quranModal .ayah-no{font-size:var(--kids-meta)!important}
+
+/* Arabic alphabet: German guidance must grow with age too. */
+#alphabetModal .ab-name{font-size:calc(var(--kids-card-title) - 1px)!important;line-height:1.2!important}
+#alphabetModal .ab-hint{font-size:var(--kids-small)!important;line-height:1.52!important}
+#alphabetModal .ab-word-de{font-size:calc(var(--kids-card-title) + 2px)!important;line-height:1.2!important}
+#alphabetModal .ab-nav button,
+#alphabetModal .ab-h,
+#alphabetModal .ab-practice button{
+  font-size:var(--kids-button)!important;
+  min-height:var(--kids-touch)!important;
+}
+
+/* Parent profile and age settings */
+#view-parent .page-head h2{font-size:var(--kids-page-title)!important}
+#view-parent .page-head p,.age-help,.parent-note{font-size:var(--kids-small)!important;line-height:var(--kids-small-leading)!important}
+#view-parent .label-row strong{font-size:var(--kids-card-title)!important}
+#view-parent .age-tabs button{font-size:var(--kids-button)!important;min-height:var(--kids-touch)!important}
+.parent-progress-stat span{font-size:var(--kids-small)!important;line-height:1.45!important}
+
+/* Story/duʿāʾ/quiz labels and answers */
+.story-row h3{font-size:var(--kids-card-title)!important;line-height:1.22!important}
+.story-row .meta,.story-row .time{font-size:var(--kids-meta)!important;line-height:1.35!important}
+.story-source,.story-verify{font-size:var(--kids-meta)!important;line-height:1.4!important}
+.story-question h3,.dua-question h3{font-size:calc(var(--kids-card-title) + 3px)!important;line-height:1.25!important}
+.story-answer,.dua-answer,.quiz-answer strong{font-size:var(--kids-button)!important;line-height:1.35!important}
+
+/* Never shrink age 9–10 into "adult tiny UI". */
+html[data-kids-age="9-10"] .page-head .kicker,
+html[data-kids-age="9-10"] .story-copy .meta,
+html[data-kids-age="9-10"] .surah-card .num,
+html[data-kids-age="9-10"] .ps-row-kicker,
+html[data-kids-age="9-10"] .ms-row-kicker{
+  font-size:13px!important;
+}
+
+/* Allow Dynamic Type / browser zoom without clipping. */
+#view-today .resume,
+#view-today .daily-journey,
+#view-today .choice,
+.story-row,.quran-action,.surah-card,.verse-card,.full-quran,
+.ps-story-row,.ms-story-row{
+  overflow:visible!important;
+}
+
+/* KIDS_AGE_TYPOGRAPHY_V4 — alias repair + strict child-readable floors.
+   Fixes legacy selectors that referenced undefined --kids-fs-* variables. */
+:root{
+  --kids-fs-body:var(--kids-body);
+  --kids-fs-card-copy:var(--kids-small);
+  --kids-fs-small:var(--kids-meta);
+  --kids-fs-label:var(--kids-small);
+  --kids-fs-control:var(--kids-button);
+  --kids-fs-card-title:var(--kids-card-title);
+  --kids-fs-page-title:var(--kids-page-title);
+  --kids-fs-question:calc(var(--kids-card-title) + 4px);
+  --kids-control-min:var(--kids-touch);
+}
+
+/* Mubaschschirūn / Ṣaḥābah: no tiny card copy or profile labels. */
+html[data-kids-age] .ms-library-hero p,
+html[data-kids-age] .ms-method-note span,
+html[data-kids-age] .ms-row-summary,
+html[data-kids-age] .ms-detail-hero p,
+html[data-kids-age] .ms-profile-grid span,
+html[data-kids-age] .ms-player p,
+html[data-kids-age] .ms-visual-note{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+}
+html[data-kids-age] .ms-library-kicker,
+html[data-kids-age] .ms-row-kicker,
+html[data-kids-age] .ms-row-meta,
+html[data-kids-age] .ms-detail-kicker,
+html[data-kids-age] .ms-profile-grid small,
+html[data-kids-age] .ms-visual-disclaimer,
+html[data-kids-age] .ms-sources>strong,
+html[data-kids-age] .ms-source-link,
+html[data-kids-age] .ms-source-ref,
+html[data-kids-age] .ms-feedback{
+  font-size:var(--kids-meta)!important;
+  line-height:1.42!important;
+}
+html[data-kids-age] .ms-row-title,
+html[data-kids-age] .ms-profile-grid strong{
+  font-size:var(--kids-card-title)!important;
+  line-height:1.24!important;
+}
+html[data-kids-age] .ms-row-ar{
+  font-size:calc(var(--kids-card-title) + 5px)!important;
+  line-height:1.48!important;
+}
+html[data-kids-age] .ms-question h3{
+  font-size:calc(var(--kids-card-title) + 3px)!important;
+  line-height:1.28!important;
+}
+html[data-kids-age] .ms-question button,
+html[data-kids-age] .ms-modebar button,
+html[data-kids-age] .ms-detail-modes button,
+html[data-kids-age] .ms-play{
+  font-size:var(--kids-button)!important;
+  min-height:var(--kids-touch)!important;
+  line-height:1.3!important;
+}
+html[data-kids-age] .ms-story-row{
+  min-height:calc(var(--kids-touch) + 138px)!important;
+  height:auto!important;
+  overflow:hidden!important;
+}
+html[data-kids-age] .ms-row-art{
+  min-height:calc(var(--kids-touch) + 138px)!important;
+}
+html[data-kids-age] .ms-row-copy{
+  padding-top:18px!important;
+  padding-bottom:18px!important;
+  gap:7px!important;
+}
+html[data-kids-age="4-5"] .ms-story-row{
+  grid-template-columns:132px minmax(0,1fr) 30px!important;
+}
+html[data-kids-age="4-5"] .ms-profile-grid section{
+  padding:16px!important;
+}
+html[data-kids-age="4-5"] .ms-body{
+  padding-left:20px!important;
+  padding-right:20px!important;
+}
+html[data-kids-age="4-5"] .ms-source-link,
+html[data-kids-age="4-5"] .ms-source-ref{
+  padding:10px 12px!important;
+}
+
+/* Prophets: keep secondary text aligned with the same global age profile. */
+html[data-kids-age] .ps-row-meta,
+html[data-kids-age] .ps-summary,
+html[data-kids-age] .ps-entry-sub,
+html[data-kids-age] .ps-muhammad-meta,
+html[data-kids-age] .ps-sources div,
+html[data-kids-age] .ps-feedback{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+}
+html[data-kids-age] .ps-row-kicker,
+html[data-kids-age] .ps-entry-kicker,
+html[data-kids-age] .ps-sources strong{
+  font-size:var(--kids-meta)!important;
+  line-height:1.4!important;
+}
+
+/* General fine-print floors: anything the child must read is never 9–11px. */
+html[data-kids-age] .quiz-source,
+html[data-kids-age] .dua-source,
+html[data-kids-age] .story-source,
+html[data-kids-age] .story-verify,
+html[data-kids-age] .quran-mini-note,
+html[data-kids-age] .recording-playback,
+html[data-kids-age] .mic-top,
+html[data-kids-age] .word-coach .coach-kicker,
+html[data-kids-age] .word-coach .coach-help{
+  font-size:var(--kids-meta)!important;
+  line-height:1.45!important;
+}
+
+/* iOS accessibility: allow user text enlargement and never clip enlarged copy. */
+html,body{
+  -webkit-text-size-adjust:100%!important;
+  text-size-adjust:100%!important;
+}
+html[data-kids-age] button,
+html[data-kids-age] .choice,
+html[data-kids-age] .quran-action,
+html[data-kids-age] .surah-card,
+html[data-kids-age] .story-row,
+html[data-kids-age] .ps-story-row,
+html[data-kids-age] .ms-story-row{
+  text-wrap:pretty;
+}
+

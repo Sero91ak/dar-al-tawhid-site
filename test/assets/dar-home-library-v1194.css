@@ -1144,3 +1144,24 @@ html.dar-home-v1194 body.is-home-route :is(
     padding-right:17px!important;
   }
 }
+
+
+/* v1201 · source-line parity with earlier DĀR header */
+html.dar-home-v1194[data-theme] body.is-home-route .top-shell .header .brand-kicker-row small.dar-global-source-line{
+  display:inline-block!important;
+  margin:0!important;
+  padding:0 0 6px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(223,195,121,.48)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#dfc379!important;
+  -webkit-text-fill-color:#dfc379!important;
+  font-size:clamp(9px,2.35vw,11px)!important;
+  line-height:1.25!important;
+  font-weight:850!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+  white-space:normal!important;
+  text-shadow:none!important;
+}

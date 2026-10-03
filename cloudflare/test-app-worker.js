@@ -1,7 +1,7 @@
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v12-quran1059",
-  label: "KIDS · V1.05.9"
+  buildId: "kids-shell-v12-type1067",
+  label: "KIDS · V1.06.7"
 });
 
 function kidsVersionResponse() {
@@ -172,17 +172,26 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/<link[^>]+dar-home-library-v1193\.css[^>]*>\s*/g, "");
   html = html.replace(/<script[^>]+dar-home-library-v1193\.js[^>]*><\/script>\s*/g, "");
 
+  // v1202: existing Adobe/Runway imagery becomes one continuous Home background.
+  // CSS only; no navigation, route or bottom-tab behavior changes.
+  if (!html.includes("dar-home-atmosphere-v1202.css")) {
+    const atmosphereLink = '<link rel="stylesheet" id="darHomeAtmosphereV1209" href="/test/assets/dar-home-atmosphere-v1202.css?v=1209-home-final">\n';
+    if (html.includes("</head>")) html = html.replace("</head>", atmosphereLink + "</head>");
+    else html = html.replace("<body", atmosphereLink + "<body");
+  }
+
   // Keep only the existing v1194 home authority and refresh its assets.
-  html = html.replace(/dar-home-library-v1194\.css\?v=[^"']+/g, "dar-home-library-v1194.css?v=1200-clean");
-  html = html.replace(/dar-home-library-v1194\.js\?v=[^"']+/g, "dar-home-library-v1194.js?v=1200-clean");
-  html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"']+/g, "dar-library-redesign-v1168.js?v=1200-clean");
+  html = html.replace(/dar-home-library-v1194\.css\?v=[^"']+/g, "dar-home-library-v1194.css?v=1209-home-final");
+  html = html.replace(/dar-home-library-v1194\.js\?v=[^"']+/g, "dar-home-library-v1194.js?v=1209-home-final");
+  html = html.replace(/dar-library-redesign-v1168\.css\?v=[^"']+/g, "dar-library-redesign-v1168.css?v=1207-quran-gap");
+  html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"']+/g, "dar-library-redesign-v1168.js?v=1201-source-line");
 
   // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
 
   // Build markers only; no route/page geometry is changed here.
-  html = html.replace(/const APP_BUILD_ID="app-shell-v[^"]+"/, 'const APP_BUILD_ID="app-shell-v1200"');
-  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v[^"]+"/, 'window.__DAR_EXPECTED_BUILD="app-shell-v1200"');
+  html = html.replace(/const APP_BUILD_ID="app-shell-v[^"]+"/, 'const APP_BUILD_ID="app-shell-v1209"');
+  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v[^"]+"/, 'window.__DAR_EXPECTED_BUILD="app-shell-v1209"');
 
   // Remove superseded visual layers that can still be present in older cached HTML.
   html = html.replace(/<link[^>]+dar-home-knowledge-library-v1183\.css[^>]*>\s*/g, "");
@@ -238,7 +247,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v12-quran1059");
+      target.searchParams.set("kv", "kids-shell-v12-type1067");
       return Response.redirect(target.toString(), 301);
     }
 
