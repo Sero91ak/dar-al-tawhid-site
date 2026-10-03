@@ -3,15 +3,7 @@ import Foundation
 enum DarAppShell {
     /// Sicherster Weg: TestFlight und App Store laden dieselbe Live-Seite.
     /// Dar Test bleibt nur im Browser unter /test/ — nie in der nativen App.
-    static var usesStagingWeb: Bool {
-        #if DEBUG
-        return true
-        #else
-        // TestFlight receives Apple's sandbox receipt and should load Dar Test.
-        // App Store production keeps the live visitor shell.
-        return Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
-        #endif
-    }
+    static let usesStagingWeb = false
 
     static let hosts: Set<String> = [
         "dar-al-tawhid.de",
