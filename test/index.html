@@ -60,7 +60,7 @@
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
 <script src="/test/assets/dar-noble-3d-icons.js?v=1165"></script><!-- DAR_NOBLE_3D_HEAD -->
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1210";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1211";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1060";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 
 <script>
@@ -27777,7 +27777,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1210";
+const APP_BUILD_ID="app-shell-v1211";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -37421,39 +37421,33 @@ body.is-home-route.dar-knowledge-home-v1183 .home-v380-filter-chip[data-home-fil
 
 <link rel="stylesheet" id="darHomeLibraryAuthorityV1194Style" href="/test/assets/dar-home-library-v1194.css?v=1205-direct">
 <script defer id="darHomeLibraryAuthorityV1194Script" src="/test/assets/dar-home-library-v1194.js?v=1205-direct"></script>
-<style id="test-update-pop-v1204">
-#darTestUpdatePop{position:fixed;z-index:100000;left:12px;right:12px;top:calc(8px + env(safe-area-inset-top,0px));display:flex;justify-content:center}
-#darTestUpdatePop button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid #1C2E24;background:#17211B;color:#F7F4EA;font:800 15px/1 system-ui,sans-serif;box-shadow:0 10px 24px rgba(23,33,27,.28)}
-</style>
 <script>
 (function(){
   if(String(location.pathname||"").indexOf("/test")!==0)return;
   function num(id){var m=String(id||"").match(/v(\d+)/);return m?parseInt(m[1],10):0}
-  function show(){
-    if(document.getElementById("darTestUpdatePop"))return;
-    var bar=document.createElement("div");
-    bar.id="darTestUpdatePop";
-    var button=document.createElement("button");
-    button.type="button";
-    button.textContent="Aktualisieren";
-    button.setAttribute("aria-label","Test-App aktualisieren");
-    button.onclick=function(){
-      try{if(typeof hardRefreshApp==="function"){hardRefreshApp();return;}}catch(e){}
-      location.reload();
-    };
-    bar.appendChild(button);
-    (document.body||document.documentElement).appendChild(bar);
-  }
   function check(){
-    var local=String(window.__DAR_EXPECTED_BUILD||"");
+    var local=String(window.__DAR_EXPECTED_BUILD||window.APP_BUILD_ID||"");
     fetch("/test/version.json?v="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).then(function(data){
-      var remote=data&&(data.buildId||data.appBuildId)||"";
-      if(remote&&num(remote)>num(local))show();
+      var remote=String(data&&(data.buildId||data.appBuildId)||"");
+      if(!remote||num(remote)<=num(local)){
+        try{if(window.DARGlobalUpdate)window.DARGlobalUpdate.hide();}catch(e){}
+        return;
+      }
+      window.__darRemoteBuildId=remote;
+      if(window.DARGlobalUpdate&&typeof window.DARGlobalUpdate.show==="function"){
+        window.DARGlobalUpdate.show({
+          buildId:remote,
+          localBuild:local,
+          title:"Neue Version verfügbar",
+          text:"Eine neue Version von DĀR AL TAWḤĪD ist bereit.",
+          apply:function(){try{if(typeof hardRefreshApp==="function"){hardRefreshApp();return;}}catch(e){}location.reload();}
+        });
+      }
     }).catch(function(){});
   }
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",check);
-  else check();
-  setInterval(check,60000);
+  function start(){check();setInterval(check,60000);}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);
+  else start();
 })();
 </script>
 </html>
