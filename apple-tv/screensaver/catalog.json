@@ -1,8 +1,9 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Screensaver",
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "contentType": "screensaver",
   "status": "active",
+  "tvosContractVersion": "5-5-5",
   "surfaces": {
     "screensaver": true,
     "appHome": false,
@@ -28,13 +29,19 @@
   "rotationConfigPath": "rotation.json",
   "contentSource": {
     "provider": "HadithScreensaverProvider",
-    "catalogPath": "../hadith/catalog.json",
+    "catalogPath": "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
+    "tadabburCatalogPath": "https://dar-al-tawhid.de/apple-tv/quran/tadabbur/catalog.json",
     "includedRecordTypes": [
       "hadith",
       "athar"
     ],
+    "includedCardKinds": [
+      "hadith",
+      "athar",
+      "quranTad"
+    ],
     "salafStatementsUseRecordType": "athar",
-    "rule": "Alle registrierten Ḥadīṯe und Āṯār erscheinen im Bildschirmschoner. Die Aussage (textMarkdown) ist Pflicht; geprüfter Šarḥ wird kompakt gezeigt, wenn vorhanden."
+    "rule": "Bestehende Karten-Zonen behalten. Ḥadīṯ, Āṯār und Qurʾān+Tadabbur im Beutel 5/5/5. Aussage (textMarkdown) Pflicht; Šarḥ kompakt wenn verified."
   },
   "syncPolicy": {
     "checkOnAppStart": true,

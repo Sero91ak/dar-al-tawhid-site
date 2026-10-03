@@ -8,6 +8,6 @@
       "count": 1
     }
   ],
-  "mergeRule": "Der Bildschirmschoner lädt seinen Remote-Katalog und nutzt rotation.json als Rotationsregel. Die Aussagen kommen aus hadith/catalog.json (recordType hadith und athar).",
+  "mergeRule": "rotation.json steuert shuffleBag und Gewichte 5/5/5 (hadith, athar, quranTad). HAD-Karten aus hadith/catalog.json. quranTad aus quran/tadabbur plus Qurʾān-Reader. defaultModule hadith gilt nur für die Bibliothek.",
   "fallback": "Der Bildschirmschoner-Inhalt ist derzeit nicht verfügbar."
 }
