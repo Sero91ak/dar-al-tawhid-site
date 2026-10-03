@@ -4,7 +4,7 @@
 const DATA_URL="/kids/data/mubashshirun-stories.json";
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.mubashshirunStory.done.";
-let items=[],active=null,activeText="",playing=false,busy=false;
+let items=[],libraryPolicy={},active=null,activeText="",playing=false,busy=false;
 const audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -32,12 +32,21 @@ function renderModeButtons(){
 function sourceHtml(item){
   const refs=Array.isArray(item?.sourceRefs)?item.sourceRefs:[];
   const links=Array.isArray(item?.sourceLinks)?item.sourceLinks:[];
-  return refs.map(ref=>{
+  const story=refs.map(ref=>{
     const hit=links.find(x=>String(x.label||"")===String(ref));
     return hit?.url
       ? '<a class="ms-source-link" href="'+esc(hit.url)+'" target="_blank" rel="noopener">'+esc(ref)+'</a>'
       : '<span class="ms-source-ref">'+esc(ref)+'</span>';
   }).join("");
+  const visualRefs=Array.isArray(item?.visualSourceRefs)?item.visualSourceRefs:[];
+  const clothing=Array.isArray(libraryPolicy?.visualEvidence?.clothingBasis)?libraryPolicy.visualEvidence.clothingBasis:[];
+  const visual=visualRefs.map(ref=>{
+    const hit=clothing.find(x=>String(x.ref||"")===String(ref));
+    return hit?.url
+      ? '<a class="ms-source-link visual" href="'+esc(hit.url)+'" target="_blank" rel="noopener">'+esc(ref)+' · Bildgrundlage</a>'
+      : '<span class="ms-source-ref visual">'+esc(ref)+' · Bildgrundlage</span>';
+  }).join("");
+  return story+(visual?'<div class="ms-visual-source-group"><small>ALLGEMEINE KLEIDUNGSBELEGE · KEIN INDIVIDUELLER PORTRÄTBEWEIS</small>'+visual+'</div>':'');
 }
 function renderCards(){
   const grid=$("#msGrid");if(!grid)return;
@@ -185,7 +194,7 @@ function renderActive(){
   $("#msArabic").textContent=(active.nameAr||"")+" رضي الله عنه";
   $("#msSummary").textContent=active.summary||"";
   $("#msMeta").innerHTML='<span>'+durationLabel(active,activeText)+'</span><span>Alter '+esc(age())+'</span><span>Qurʾān + Sunnah</span>';
-  $("#msVisualDisclaimer").textContent=active.visualDisclaimer||"Szenische historische Illustration; kein Anspruch auf das tatsächliche Aussehen des Ṣaḥābī.";
+  $("#msVisualDisclaimer").textContent=[active.visualDisclaimer||"Szenische historische Illustration; kein Anspruch auf das tatsächliche Aussehen des Ṣaḥābī.",active.visualBasis||""].filter(Boolean).join(" ");
   $("#msTrait").textContent=active.trait||"";
   $("#msLife").textContent=active.lifeContext||active.summary||"";
   $("#msWitness").textContent=active.witnessContext||"Die verwendeten Belege stehen direkt unter der Geschichte.";
@@ -247,6 +256,7 @@ async function init(){
     const r=await fetch(DATA_URL+"?v="+Date.now(),{cache:"no-store"});
     if(!r.ok)throw Error("Mubaschschirūn "+r.status);
     const data=await r.json();
+    libraryPolicy=data.policy&&typeof data.policy==="object"?data.policy:{};
     items=(data.items||[]).slice().sort((a,b)=>Number(a.displayOrder||99)-Number(b.displayOrder||99));
     renderCards();renderModeButtons();
     const app=$(".app");
