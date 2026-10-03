@@ -1,0 +1,356 @@
+/* DĀR AL TAWḤĪD Kids — global age-adaptive typography v1.06.4
+   Readability goals:
+   - one rounded sans-serif reading face (Fredoka) for Latin/German
+   - Noto Naskh Arabic for Arabic
+   - age profile changes size, line-height, spacing and touch density
+   - no clipping when text grows
+*/
+:root{
+  --kids-reading-font:"Fredoka",-apple-system,BlinkMacSystemFont,"SF Pro Rounded","Avenir Next",Arial,sans-serif;
+  --kids-arabic-font:"Noto Naskh Arabic","Geeza Pro","Traditional Arabic",serif;
+  --kids-body:18.5px;
+  --kids-body-leading:1.64;
+  --kids-small:14.5px;
+  --kids-small-leading:1.52;
+  --kids-meta:13.5px;
+  --kids-button:16.5px;
+  --kids-card-title:21px;
+  --kids-section-title:24px;
+  --kids-page-title:34px;
+  --kids-nav:13px;
+  --kids-touch:56px;
+  --kids-letter:.006em;
+  --kids-word:.018em;
+}
+html[data-kids-age="4-5"]{
+  --kids-body:20px;
+  --kids-body-leading:1.70;
+  --kids-small:16px;
+  --kids-small-leading:1.58;
+  --kids-meta:14.5px;
+  --kids-button:18px;
+  --kids-card-title:23px;
+  --kids-section-title:27px;
+  --kids-page-title:38px;
+  --kids-nav:14px;
+  --kids-touch:62px;
+  --kids-letter:.008em;
+  --kids-word:.025em;
+}
+html[data-kids-age="6-8"]{
+  --kids-body:18.5px;
+  --kids-body-leading:1.64;
+  --kids-small:15px;
+  --kids-small-leading:1.54;
+  --kids-meta:13.75px;
+  --kids-button:17px;
+  --kids-card-title:21.5px;
+  --kids-section-title:25px;
+  --kids-page-title:35px;
+  --kids-nav:13.5px;
+  --kids-touch:58px;
+  --kids-letter:.006em;
+  --kids-word:.02em;
+}
+html[data-kids-age="9-10"]{
+  --kids-body:17.5px;
+  --kids-body-leading:1.60;
+  --kids-small:14.5px;
+  --kids-small-leading:1.50;
+  --kids-meta:13px;
+  --kids-button:16px;
+  --kids-card-title:20px;
+  --kids-section-title:23px;
+  --kids-page-title:33px;
+  --kids-nav:12.75px;
+  --kids-touch:54px;
+  --kids-letter:.004em;
+  --kids-word:.015em;
+}
+
+/* The app is text-first: use one predictable, open sans-serif reading face. */
+body,
+.app,
+.view,
+.modal,
+.modal-shell,
+button,
+input,
+select,
+textarea,
+.ps-library-page,
+.ps-modal,
+.ms-library-page,
+.ms-modal{
+  font-family:var(--kids-reading-font)!important;
+  font-kerning:normal;
+  text-rendering:optimizeLegibility;
+}
+[dir="rtl"],
+.dua-ar,.dua-old-note .ar,
+.surah-card .ar,
+.ps-ar,.ps-row-ar,.ps-muhammad-ar,
+.ms-ar,.ms-row-ar{
+  font-family:var(--kids-arabic-font)!important;
+}
+
+/* Long-form reading text — never below the selected profile size. */
+.story-text,.lesson-text,.verse-translation,
+.dua-meaning,.dua-prompt,
+.story-player-main p,
+.ps-read,.ms-read,
+.kids-join p,
+.view .readable-text,
+.modal .readable-text{
+  font-size:var(--kids-body)!important;
+  line-height:var(--kids-body-leading)!important;
+  letter-spacing:var(--kids-letter)!important;
+  word-spacing:var(--kids-word)!important;
+  font-weight:550!important;
+  overflow-wrap:anywhere;
+  hyphens:auto;
+}
+
+/* Supporting copy that children still need to read. */
+.page-head p,
+.quran-hero p,
+.story-copy p,
+.choice small,
+.quran-action small,
+.surah-card small,
+.verse-card small,
+.full-quran small,
+.resume span,
+.gentle-note,
+.age-help,.parent-note,
+.daily-step .dtxt small,
+.parent-progress-stat span,
+.quiz-help,.quiz-source,.quiz-finish p,
+.dua-tr,.dua-source,
+.ps-entry-sub,.ps-row-meta,.ps-summary,.ps-muhammad-meta,
+.ms-entry-copy span,.ms-row-summary,.ms-row-meta,
+.ms-library-hero p,
+.ms-player p{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+  letter-spacing:var(--kids-letter)!important;
+}
+
+/* Metadata remains secondary, but is no longer microscopic. */
+.page-head .kicker,
+.story-copy .meta,
+.story-row .meta,.story-row .time,.story-verify,.story-source,
+.surah-card .num,
+.dua-verified,
+.daily-head span,
+.ps-entry-kicker,.ps-row-kicker,.ps-sequence-head span,
+.ms-entry-kicker,.ms-row-kicker,.ms-library-kicker,.ms-detail-kicker,.ms-q-kicker,
+.modal-title small{
+  font-size:var(--kids-meta)!important;
+  line-height:1.35!important;
+  letter-spacing:.055em!important;
+}
+.ps-entry-kicker,.ps-row-kicker,.ps-sequence-head span,
+.ms-entry-kicker,.ms-row-kicker,.ms-library-kicker,.ms-detail-kicker,.ms-q-kicker{
+  text-transform:none!important;
+}
+
+/* Titles scale with the selected age profile. */
+.page-head h2{
+  font-size:var(--kids-page-title)!important;
+  line-height:1.06!important;
+  letter-spacing:-.025em!important;
+}
+.section-title{
+  font-size:var(--kids-section-title)!important;
+  line-height:1.15!important;
+}
+.choice strong,
+.story-copy h3,
+.story-row h3,
+.quran-action strong,
+.surah-card strong,
+.verse-card strong,
+.full-quran strong,
+.resume strong,
+.daily-step .dtxt strong,
+.label-row strong,
+.ps-row-title,.ps-muhammad-title,.ps-entry-copy strong,
+.ms-row-title,.ms-entry-copy strong{
+  font-size:var(--kids-card-title)!important;
+  line-height:1.22!important;
+  letter-spacing:-.012em!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+.quran-hero h3{
+  font-size:calc(var(--kids-card-title) + 5px)!important;
+  line-height:1.16!important;
+}
+.quiz-question,.dua-title,.story-player-main h2{
+  line-height:1.18!important;
+}
+.quiz-question{
+  font-size:clamp(calc(var(--kids-card-title) + 5px),7vw,42px)!important;
+}
+.dua-title{
+  font-size:clamp(calc(var(--kids-card-title) + 6px),8vw,42px)!important;
+}
+
+/* Child-facing controls: readable labels + generous targets. */
+.age-tabs button,
+.choice,
+.quran-action,
+.surah-card,
+.verse-card,
+.full-quran,
+.story-row,
+.resume,
+.daily-step,
+.daily-start,
+.quiz-answer,.quiz-next,.quiz-listen,
+.dua-answer,.dua-listen,.dua-next-item,.dua-quran-audio,
+.primary,.cta-primary,
+.story-answer,
+.ps-mode,.ps-detail-mode,.ps-play,.ps-answer,
+.ms-modebar button,.ms-detail-modes button,.ms-play,.ms-question button{
+  font-size:var(--kids-button)!important;
+}
+.age-tabs button,
+.daily-start,
+.quiz-answer,.quiz-next,
+.dua-answer,.dua-listen,.dua-next-item,.dua-quran-audio,
+.primary,.cta-primary,
+.story-answer,
+.ps-mode,.ps-detail-mode,.ps-play,.ps-answer,
+.ms-modebar button,.ms-detail-modes button,.ms-play,.ms-question button{
+  min-height:var(--kids-touch)!important;
+}
+
+/* The bottom dock is part of navigation, not fine print. */
+.nav-btn{
+  min-height:calc(var(--kids-touch) + 8px)!important;
+}
+.nav-btn .lab{
+  font-size:var(--kids-nav)!important;
+  line-height:1.12!important;
+  font-weight:700!important;
+  letter-spacing:.005em!important;
+}
+
+/* Parent age control must itself demonstrate the selected reading scale. */
+.age-tabs button{
+  font-size:var(--kids-button)!important;
+  line-height:1.2!important;
+  font-weight:700!important;
+  padding:12px 7px!important;
+}
+.age-help,.parent-note{
+  font-size:var(--kids-small)!important;
+}
+
+/* Qurʾān Arabic remains comfortably larger than translation/UI copy. */
+.surah-card .ar{
+  font-size:calc(var(--kids-card-title) + 8px)!important;
+  line-height:1.55!important;
+}
+.dua-ar{
+  font-size:clamp(38px,10vw,66px)!important;
+  line-height:1.75!important;
+}
+.ps-ar,.ms-ar{
+  font-size:clamp(28px,6vw,38px)!important;
+  line-height:1.55!important;
+}
+.ps-row-ar,.ms-row-ar{
+  font-size:calc(var(--kids-small) + 6px)!important;
+  line-height:1.45!important;
+}
+
+/* Story libraries rendered outside .app inherit the mirrored html age. */
+.ps-read,.ms-read{
+  max-width:68ch;
+  margin-inline:auto;
+}
+.ps-read p,.ms-read p{
+  margin-bottom:1.05em!important;
+}
+.ps-summary,.ms-detail-hero p{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+}
+.ps-title,.ms-detail-hero h2{
+  font-size:clamp(calc(var(--kids-page-title) - 2px),8vw,56px)!important;
+  line-height:1.04!important;
+}
+.ps-answer,.ms-question button{
+  font-weight:650!important;
+  line-height:1.35!important;
+}
+
+/* Cards expand with text instead of clipping it. */
+.choice,
+.quran-action,
+.surah-card,
+.verse-card,
+.full-quran,
+.story-row,
+.resume,
+.daily-step,
+.quiz-answer,
+.dua-answer,
+.parent-card,
+.info-card,
+.ps-story-row,
+.ms-story-row{
+  height:auto!important;
+}
+.story-row,.verse-card,.resume,.daily-step{
+  min-height:var(--kids-touch)!important;
+}
+.quran-action{min-height:calc(var(--kids-touch) + 58px)!important}
+.surah-card{min-height:calc(var(--kids-touch) + 76px)!important}
+.story-copy{
+  row-gap:4px!important;
+}
+.modal-title strong{
+  font-size:var(--kids-small)!important;
+  white-space:normal!important;
+  line-height:1.25!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+
+/* 4–5: reduce crowded grids; the child sees one clear action at a time. */
+html[data-kids-age="4-5"] .quran-actions{
+  grid-template-columns:1fr!important;
+}
+html[data-kids-age="4-5"] .surah-grid{
+  grid-template-columns:1fr!important;
+}
+html[data-kids-age="4-5"] .parent-progress-grid{
+  grid-template-columns:1fr!important;
+}
+html[data-kids-age="4-5"] .story-copy{
+  padding:19px 20px!important;
+}
+html[data-kids-age="4-5"] .choice{
+  min-height:164px!important;
+}
+
+/* Keep narrow phones readable; don't shrink text just because width is tight. */
+@media(max-width:430px){
+  .shell{padding-left:14px!important;padding-right:14px!important}
+  .story-copy{grid-template-columns:minmax(0,1fr) 42px!important}
+  .quran-actions{gap:11px!important}
+  .nav-btn{padding-inline:2px!important}
+}
+@media(max-width:360px){
+  :root{--kids-nav:12px}
+  .nav-btn .lab{letter-spacing:0!important}
+}
+/* Text must remain usable with OS/browser text enlargement. */
+@supports(font-size:1rem){
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+}
