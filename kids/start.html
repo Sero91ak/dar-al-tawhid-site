@@ -2714,7 +2714,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07.4</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.07.5</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3168,7 +3168,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-sahaba1078";
+const KIDS_BUILD_ID="kids-shell-v12-sahaba1079";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6613,7 +6613,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1078",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1079",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
@@ -7451,8 +7451,8 @@ html.kids-ios-app .kids-update-layer{display:none!important}
 }
 /* KIDS_ALPHABET_SPACIOUS_V1057_END */
 
-/* KIDS_HOME_OVAL_CAPSULE_LOCK_V1078
-   Startbereich wieder als echte ovale Kapseln, nicht als Kasten-Karten. */
+/* KIDS_HOME_ROUNDED_CARD_LOCK_V1079
+   Startbereich mit weich abgerundeten Karten wie in den übrigen Kinderbereichen, nicht als Vollkapsel. */
 #view-today .big-choice-grid{
   display:grid!important;
   grid-template-columns:1fr!important;
@@ -7469,8 +7469,8 @@ html.kids-ios-app .kids-update-layer{display:none!important}
   row-gap:4px!important;
   align-items:center!important;
   padding:18px 22px 18px 26px!important;
-  border-radius:999px!important;
-  clip-path:inset(0 round 999px)!important;
+  border-radius:31px!important;
+  clip-path:inset(0 round 31px)!important;
   overflow:hidden!important;
   border:1px solid rgba(255,255,255,.13)!important;
   box-shadow:0 16px 34px rgba(0,0,0,.16)!important;
@@ -7527,6 +7527,8 @@ html.kids-ios-app .kids-update-layer{display:none!important}
   #view-today .big-choice-grid{gap:12px!important}
   #view-today .choice{
     min-height:132px!important;
+    border-radius:27px!important;
+    clip-path:inset(0 round 27px)!important;
     grid-template-columns:50px minmax(0,1fr) 36px!important;
     column-gap:10px!important;
     padding:15px 18px 15px 20px!important;
@@ -7543,6 +7545,8 @@ html.kids-ios-app .kids-update-layer{display:none!important}
   }
   #view-today .choice{
     min-height:158px!important;
+    border-radius:34px!important;
+    clip-path:inset(0 round 34px)!important;
     grid-template-columns:62px minmax(0,1fr) 42px!important;
     padding:20px 24px 20px 28px!important;
   }
