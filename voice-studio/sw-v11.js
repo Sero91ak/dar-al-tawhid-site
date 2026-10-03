@@ -1,8 +1,9 @@
-const CACHE="dar-voice-studio-v36";
+const CACHE="dar-voice-studio-v37";
 const SHELL=[
   "/voice-studio/",
   "/voice-studio/index.html",
-  "/voice-studio/content-studio.js",\n  "/voice-studio/mubashshirun-pack.js",
+  "/voice-studio/content-studio.js",
+  "/voice-studio/mubashshirun-pack.js",
   "/voice-studio/alphabet-audio-studio.js",
   "/voice-studio/manifest.webmanifest",
   "/voice-studio/version.json",
