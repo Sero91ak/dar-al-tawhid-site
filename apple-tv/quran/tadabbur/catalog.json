@@ -6,6 +6,10 @@
   "remoteLoad": true,
   "offlineCache": true,
   "entriesCount": 4454,
+  "contentKind": "quran-tadabbur-for-verse",
+  "notHadithLibrary": true,
+  "doNotHideBecauseSahabiOrSalaf": true,
+  "quranVerseSource": "quran.reader",
   "homeSlot": {
     "enabled": true,
     "surface": "TVHomeView.tadabbur",
@@ -13,6 +17,8 @@
     "showSharhFromHadithLibrary": false,
     "showHadithLibraryRecords": false,
     "showScreensaverRotation": false,
+    "doNotFilterOut": true,
+    "note": "Ein Tadabbur-Datensatz IST oft eine Ṣaḥābī-/Salaf-Aussage oder ein Ḥadīṯ ZUM Vers. Feld reference (z. B. 2:183) ist der Qurʾān-Vers. Arabisch/Deutsch des Verses kommen NICHT aus dieser Datei, sondern aus dem Qurʾān-Reader. Diese Datensätze dürfen im Qurʾān-/Home-Tadabbur-Bereich NICHT ausgeblendet werden.",
     "fields": ["text", "narrator", "generation", "source", "grading"]
   },
   "fallback": {

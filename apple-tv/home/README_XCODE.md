@@ -1,44 +1,51 @@
 # Apple TV Startseite — Slot-Trennung (verbindlich)
 
-## Fehler
+## Xcode-Irrtum (nicht umsetzen)
 
-Auf der Startseite bei den Gebetszeiten steht unter dem Qurʾān-Vers der **Tadabbur-Bereich**.  
-Dort wurden fälschlich **Ḥadīṯe, Salaf-Aussagen aus der Ḥadīṯ-Bibliothek und Šarḥ** gezeigt (`HadithScreensaverProvider` / `hadith/catalog.json`).
+Live-Tadabbur-Dateien enthalten **bewusst** Ṣaḥābī-/Salaf-Aussagen und oft einen Ḥadīṯ **zum Vers**.  
+Das ist kein Fehler und **kein** Grund, sie im Qurʾān-Bereich auszublenden.
 
-Das ist falsch.
+- Der **Qurʾān-Vers** (Arabisch + Deutsch) kommt aus dem Reader (`quran-uthmani` / `de.bubenheim`).
+- Das Tadabbur-JSON liefert **nicht** den Vers, sondern die **Erklärung/Aussage** zu `reference` = `Sūrah:Āyah` (z. B. `2:183`).
+- Eine Filterung „kein getrennter Vers im Tadabbur-JSON → Datensatz verstecken“ macht den Bereich leer („Inhalt derzeit nicht verfügbar“). **Diese Filterung rückgängig machen.**
 
-## Soll
+## Soll (drei getrennte Slots, drei Quellen)
 
 ```
-Gebetszeiten          ← prayer/catalog.json + Standort-API
-Qurʾān-Vers           ← aktueller Vers (Arabisch + Deutsch)
-Tadabbur              ← nur quran/tadabbur, Lookup Sūrah:Āyah
+Gebetszeiten   ← prayer API + Standort
+Qurʾān-Vers    ← Qurʾān-Reader (Arabisch + Deutsch)
+Tadabbur       ← apple-tv/quran/tadabbur  Lookup reference
 ```
-
-## Verboten im Tadabbur-Slot
-
-- `HadithScreensaverProvider`
-- `apple-tv/hadith/catalog.json` / `library-shell.json` / `HAD-XXXX.json`
-- `sharhText` / `sharhScholar` aus der Ḥadīṯ-Bibliothek
-- Screensaver-Rotation
-
-Ḥadīṯ, Āṯār und Šarḥ gehören in **Bibliothek** und **Bildschirmschoner**, nicht unter den Vers auf der Startseite.
-
-## Lookup
 
 ```swift
 let reference = "\(surahNumber):\(ayahNumber)"
-let entry = tadabburStore.entry(for: reference)
+let verseAr = quranReader.arabic(surahNumber, ayahNumber)
+let verseDe = quranReader.german(surahNumber, ayahNumber)
+let tad = tadabburStore.entry(for: reference)
+// tad.text / narrator / generation / source / grading UNTER dem Vers anzeigen
+// NICHT filtern, nur weil generation == Ṣaḥābī oder relation einen Ḥadīṯ nennt
 ```
 
-Anzeige nur: `text`, `narrator`, `generation`, `source`, `grading`.
-
-Kein Treffer:
+Kein Tadabbur-Treffer:
 
 ```text
 Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.
 ```
 
-`defaultModule` in `apple-tv/catalog.json` bleibt `hadith` **nur für den Bibliotheks-Tab**, nicht für `TVHomeView`.
+## Wirklich falsch (das war der alte Bug)
 
-Live-Vertrag: `https://dar-al-tawhid.de/apple-tv/home/catalog.json`
+Ḥadīṯ-**Bibliothek** / Screensaver in den Tadabbur-Slot:
+
+- `HadithScreensaverProvider`
+- `HAD-XXXX.json` / `library-shell.json`
+- `sharhText` aus der Ḥadīṯ-Bibliothek
+
+Das ist eine **andere** Quelle ohne Vers-Lookup.
+
+## Bildschirmschoner — nicht löschen
+
+`HadithScreensaverProvider` bleibt aktiv. Keine Tadabbur-Home-Filterung darauf anwenden. Nicht entfernen.
+
+Leeres „Inhalt derzeit nicht verfügbar“ auf dem **echten Apple TV** ist ein Netzwerk-/Cache-Thema am Gerät, nicht am Simulator. Gerät in Xcode als tvOS-Ziel wählen.
+
+Live: `https://dar-al-tawhid.de/apple-tv/home/catalog.json`

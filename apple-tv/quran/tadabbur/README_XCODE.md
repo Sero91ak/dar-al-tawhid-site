@@ -14,6 +14,7 @@ Nicht gemeint:
 - keine erfundenen Salaf-Zuschreibungen
 - keine automatische thematische Ersatz-Erklärung bei fehlendem Eintrag
 - **kein** Ḥadīṯ-Bibliotheks-/Screensaver-/Šarḥ-Inhalt auf der Apple-TV-Startseite unter dem Vers (siehe `apple-tv/home/README_XCODE.md`)
+- **kein** Ausblenden der Tadabbur-Datensätze, nur weil `generation` Ṣaḥābī/Salaf ist oder der Text ein Ḥadīṯ zum Vers ist. Der Vers selbst kommt aus dem Qurʾān-Reader; `reference` ist der Schlüssel.
 
 ## GitHub-Datenquelle
 

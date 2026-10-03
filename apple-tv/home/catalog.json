@@ -1,7 +1,8 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Startseite",
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "status": "active",
+  "doNotFilterTadabburAsHadithLibrary": true,
   "view": "TVHomeView",
   "liveURL": "https://dar-al-tawhid.de/apple-tv/home/catalog.json",
   "rule": "Bei Gebetszeiten auf der Startseite: oben Gebetszeiten, darunter der aktuelle Qurʾān-Vers, darunter nur Tadabbur zu genau diesem Vers.",
@@ -21,12 +22,14 @@
       "source": "quran.reader",
       "arabicEdition": "quran-uthmani",
       "germanEdition": "de.bubenheim",
-      "fields": ["arabic", "german", "reference"]
+      "fields": ["arabic", "german", "reference"],
+      "note": "Arabisch und Deutsch NUR aus dem Qurʾān-Reader. Niemals tadabbur.text als Vers rendern."
     },
     "tadabbur": {
       "id": "tadabbur",
       "title": "Tadabbur",
       "source": "quran.tadabbur",
+      "doNotFilterOutSahabiOrSalaf": true,
       "catalogPath": "quran/tadabbur/catalog.json",
       "entriesIndexPath": "quran/tadabbur/entries-index.json",
       "lookup": "exact-surah-ayah",
@@ -54,6 +57,8 @@
   },
   "screensaver": {
     "allowedOnHome": false,
-    "note": "HadithScreensaverProvider nur für den tvOS-Bildschirmschoner, niemals für den Tadabbur-Bereich der Startseite."
+    "doNotDelete": true,
+    "keepHadithScreensaverProvider": true,
+    "note": "HadithScreensaverProvider nur für den tvOS-Bildschirmschoner. Nicht löschen, nicht mit Tadabbur-Filter leeren. Niemals für den Tadabbur-Bereich der Startseite."
   }
 }
