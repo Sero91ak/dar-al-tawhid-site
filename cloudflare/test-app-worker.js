@@ -159,9 +159,9 @@ async function gradeKidsRecitation(request, env) {
 }
 
 
-const DAR_TEST_HOME_AUTHORITY_V1191 = "/test/assets/dar-home-visual-authority-v1191.css?v=1191";
+const DAR_TEST_HOME_V1193_CSS = "/test/assets/dar-home-library-v1193.css?v=1193";\nconst DAR_TEST_HOME_V1193_JS = "/test/assets/dar-home-library-v1193.js?v=1193";
 
-async function finalizeDarTestHomeV1191(asset) {
+async function finalizeDarTestHomeV1193(asset) {
   const type = String(asset && asset.headers && asset.headers.get("content-type") || "");
   if (!asset || !asset.ok || !type.includes("text/html")) return asset;
   let html = await asset.text();
@@ -178,13 +178,19 @@ async function finalizeDarTestHomeV1191(asset) {
     ""
   );
 
-  // Never inject or retain the old v1183 external layer.
-  html = html.replace(/<link[^>]+dar-home-knowledge-library-v1183\.css[^>]*>\s*/g, "");
-  html = html.replace(/<script[^>]+dar-home-knowledge-library-v1183\.js[^>]*><\/script>\s*/g, "");
+  // Remove every superseded Test-home visual authority so only v1193 composes the page.
+  html = html.replace(/<link[^>]+dar-home-knowledge-library-v1183\\.css[^>]*>\\s*/g, "");
+  html = html.replace(/<script[^>]+dar-home-knowledge-library-v1183\\.js[^>]*><\\/script>\\s*/g, "");
+  html = html.replace(/<link[^>]+dar-home-visual-authority-v1191\\.css[^>]*>\\s*/g, "");
+  html = html.replace(/<link[^>]+dar-home-visual-v1190\\.css[^>]*>\\s*/g, "");
+  html = html.replace(/<script[^>]+dar-home-visual-v1190\\.js[^>]*><\\/script>\\s*/g, "");
 
-  const authority = '<link rel="stylesheet" id="darHomeVisualAuthorityV1191" href="' + DAR_TEST_HOME_AUTHORITY_V1191 + '">';
-  if (!html.includes("darHomeVisualAuthorityV1191")) {
-    html = html.replace("</html>", authority + "\n</html>");
+  const home1193 =
+    '<link rel="stylesheet" id="darHomeLibraryV1193" href="' + DAR_TEST_HOME_V1193_CSS + '">' +
+    '<script id="darHomeLibraryV1193Js" defer src="' + DAR_TEST_HOME_V1193_JS + '"><\\/script>';
+  if (!html.includes("darHomeLibraryV1193")) {
+    if (html.includes("</body>")) html = html.replace("</body>", home1193 + "\\n</body>");
+    else html = html.replace("</html>", home1193 + "\\n</html>");
   }
 
   const headers = new Headers(asset.headers);
@@ -243,7 +249,7 @@ export default {
     const kidsPath = path === "/test/kids" || path.startsWith("/test/kids/");
     if (kidsPath) return asset;
     if (request.method === "GET" && (path === "/test" || path === "/test/" || path === "/test/index.html")) {
-      return finalizeDarTestHomeV1191(asset);
+      return finalizeDarTestHomeV1193(asset);
     }
     const bust = /\/test\/(index\.html)?$/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
