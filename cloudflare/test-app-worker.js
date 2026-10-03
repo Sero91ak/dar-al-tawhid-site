@@ -175,7 +175,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // v1202: existing Adobe/Runway imagery becomes one continuous Home background.
   // CSS only; no navigation, route or bottom-tab behavior changes.
   if (!html.includes("dar-home-atmosphere-v1202.css")) {
-    html = html.replace("</head>", '<link rel="stylesheet" href="/test/assets/dar-home-atmosphere-v1202.css?v=1202"></head>');
+    html = html.replace("</head>", '<link rel="stylesheet" href="/test/assets/dar-home-atmosphere-v1202.css?v=1203-visible"></head>');
   }
 
   // Keep only the existing v1194 home authority and refresh its assets.
@@ -188,8 +188,8 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
 
   // Build markers only; no route/page geometry is changed here.
-  html = html.replace(/const APP_BUILD_ID="app-shell-v[^"]+"/, 'const APP_BUILD_ID="app-shell-v1202"');
-  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v[^"]+"/, 'window.__DAR_EXPECTED_BUILD="app-shell-v1202"');
+  html = html.replace(/const APP_BUILD_ID="app-shell-v[^"]+"/, 'const APP_BUILD_ID="app-shell-v1203"');
+  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v[^"]+"/, 'window.__DAR_EXPECTED_BUILD="app-shell-v1203"');
 
   // Remove superseded visual layers that can still be present in older cached HTML.
   html = html.replace(/<link[^>]+dar-home-knowledge-library-v1183\.css[^>]*>\s*/g, "");
