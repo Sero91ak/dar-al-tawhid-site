@@ -6174,6 +6174,25 @@ def _prophet_story_manifest():
         ),
     )
 
+def _mubashshirun_story_manifest():
+    return load_kids_repo_json(
+        "mubashshirun-stories.json",
+        "kids/data/mubashshirun-stories.json",
+        lambda d:(
+            isinstance(d,dict)
+            and int(d.get("version") or 0)>=2
+            and len(d.get("items") or [])==10
+            and all(
+                isinstance((item or {}).get("scripts"),dict)
+                and all(
+                    str(((item or {}).get("scripts") or {}).get(age) or "").strip()
+                    for age in ("4-5","6-8","9-10")
+                )
+                for item in (d.get("items") or [])
+            )
+        ),
+    )
+
 def _prophet_story_age_text(item,age):
     scripts=item.get("scripts") if isinstance(item.get("scripts"),dict) else {}
     prepared=str(scripts.get(age) or item.get("voiceScript") or scripts.get("6-8") or "").strip()
@@ -7103,6 +7122,39 @@ class H(BaseHTTPRequestHandler):
                 return self.send_audio_file(asset,"audio/mp4")
             except Exception as e:
                 return self.send_json(500,{"ok":False,"error":str(e)})
+        elif p=="/mubashshirun/library":
+            try:
+                man=_mubashshirun_story_manifest()
+                items=[]
+                for it in list(man.get("items") or []):
+                    items.append({
+                        "id":it.get("id"),
+                        "name":it.get("name"),
+                        "short":it.get("short"),
+                        "nameAr":it.get("nameAr"),
+                        "honorific":it.get("honorific"),
+                        "summary":it.get("summary"),
+                        "trait":it.get("trait"),
+                        "sourceRefs":it.get("sourceRefs") or [],
+                        "sourceLinks":it.get("sourceLinks") or [],
+                        "cover":it.get("cover"),
+                        "hero":it.get("hero"),
+                        "visualDisclaimer":it.get("visualDisclaimer"),
+                        "displayOrder":it.get("displayOrder"),
+                        "scripts":it.get("scripts") if isinstance(it.get("scripts"),dict) else {},
+                        "audio":it.get("audio") if isinstance(it.get("audio"),dict) else {},
+                        "pronunciationTerms":it.get("pronunciationTerms") or [],
+                        "voiceProduction":it.get("voiceProduction") if isinstance(it.get("voiceProduction"),dict) else {},
+                    })
+                self.send_json(200,{
+                    "ok":True,
+                    "count":len(items),
+                    "items":items,
+                    "mode":"manual-studio",
+                    "sourcePolicy":"quran-sahih-sunnah-no-legends"
+                })
+            except Exception as e:
+                self.send_json(500,{"ok":False,"error":str(e)})
         elif p=="/prophet-stories/library":
             try:
                 man=_prophet_story_manifest()
