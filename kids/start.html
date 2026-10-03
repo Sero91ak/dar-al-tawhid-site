@@ -3167,7 +3167,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab1056";
+const KIDS_BUILD_ID="kids-shell-v12-tab1057";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6612,7 +6612,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1056",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1057",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
@@ -7023,6 +7023,432 @@ html.kids-ios-app .kids-update-layer{display:none!important}
   #quranModal .quran-mini-note{display:none!important}
 }
 /* KIDS_QURAN_LESSON_V1056_END */
+/* KIDS_ALPHABET_SPACIOUS_V1057 — large, calm, child-first Alif-Bāʾ */
+#alphabetModal .modal-shell{
+  width:min(100%,920px)!important;
+  max-width:920px!important;
+  padding:
+    calc(max(12px,env(safe-area-inset-top,0px)) + 8px)
+    max(18px,env(safe-area-inset-right,0px))
+    calc(14px + env(safe-area-inset-bottom,0px))
+    max(18px,env(safe-area-inset-left,0px))!important;
+  display:flex!important;
+  flex-direction:column!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 86% 4%,rgba(243,207,115,.12),transparent 24%),
+    radial-gradient(circle at 10% 72%,rgba(92,201,195,.08),transparent 30%),
+    linear-gradient(180deg,#071c2d 0%,#061624 100%)!important;
+}
+#alphabetModal .modal-top{
+  flex:none!important;
+  min-height:58px!important;
+  padding:4px 0 12px!important;
+  gap:14px!important;
+  align-items:center!important;
+}
+#alphabetModal .close-btn{
+  width:50px!important;
+  height:50px!important;
+  flex:0 0 50px!important;
+  border-radius:18px!important;
+  font-size:26px!important;
+  background:rgba(9,44,64,.72)!important;
+  border:1px solid rgba(126,210,219,.24)!important;
+}
+#alphabetModal .modal-title strong{
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(22px,6vw,30px)!important;
+  line-height:1.08!important;
+  font-weight:700!important;
+}
+#alphabetModal .modal-title small{
+  margin-top:4px!important;
+  font-size:12px!important;
+  line-height:1.3!important;
+  color:rgba(255,255,255,.62)!important;
+}
+#alphabetModal .ab-body{
+  flex:1 1 auto!important;
+  width:100%!important;
+  max-width:860px!important;
+  margin:0 auto!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+#alphabetModal .lesson-steps{
+  flex:none!important;
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  gap:8px!important;
+  margin:2px 0 10px!important;
+}
+#alphabetModal .lesson-step{
+  flex:1 1 calc(33.333% - 8px)!important;
+  max-width:190px!important;
+  min-width:88px!important;
+  min-height:46px!important;
+  padding:8px 7px!important;
+  border-radius:17px!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  line-height:1.15!important;
+}
+#alphabetModal .ab-dots{
+  flex:none!important;
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  justify-content:flex-start!important;
+  gap:2px!important;
+  width:100%!important;
+  max-width:720px!important;
+  margin:0 auto!important;
+  padding:2px 0 8px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  overscroll-behavior-x:contain!important;
+  scrollbar-width:none!important;
+}
+#alphabetModal .ab-dots::-webkit-scrollbar{display:none!important}
+#alphabetModal .ab-dot{
+  position:relative!important;
+  flex:0 0 24px!important;
+  width:24px!important;
+  min-width:24px!important;
+  height:24px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  transform:none!important;
+}
+#alphabetModal .ab-dot::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:7px;
+  height:7px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+  transition:transform .2s ease,background .2s ease,box-shadow .2s ease;
+}
+#alphabetModal .ab-dot.on::after{
+  transform:translate(-50%,-50%) scale(1.35);
+  background:#f0cf79;
+  box-shadow:0 0 0 4px rgba(240,207,121,.10);
+}
+#alphabetModal .ab-stage{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  width:100%!important;
+  padding:8px 2px 18px!important;
+  display:block!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+}
+#alphabetModal .ab-pane{
+  display:none!important;
+  width:100%!important;
+  max-width:720px!important;
+  margin:0 auto!important;
+  text-align:center!important;
+}
+#alphabetModal .ab-pane.on{display:block!important}
+#alphabetModal .ab-pic{
+  display:block!important;
+  width:100%!important;
+  max-width:720px!important;
+  height:clamp(190px,38vh,310px)!important;
+  max-height:310px!important;
+  margin:0 auto!important;
+  border-radius:28px!important;
+  object-fit:cover!important;
+  background:#071522!important;
+  box-shadow:0 16px 36px rgba(0,0,0,.20)!important;
+}
+#alphabetModal .ab-letter{
+  margin:16px 0 0!important;
+  font-family:"Noto Naskh Arabic","Geeza Pro",serif!important;
+  font-size:clamp(78px,22vw,122px)!important;
+  line-height:1.08!important;
+  color:#fff8e6!important;
+}
+#alphabetModal .ab-name{
+  margin:7px 0 0!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(21px,5.8vw,28px)!important;
+  font-weight:750!important;
+  line-height:1.1!important;
+  color:#f0cf79!important;
+}
+#alphabetModal .ab-hint{
+  max-width:620px!important;
+  margin:10px auto 0!important;
+  padding:0 8px!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(15px,4.1vw,18px)!important;
+  font-weight:500!important;
+  line-height:1.5!important;
+  color:rgba(255,255,255,.82)!important;
+}
+#alphabetModal .ab-word-de{
+  margin:14px 0 0!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(23px,6.2vw,31px)!important;
+  font-weight:750!important;
+  line-height:1.12!important;
+}
+#alphabetModal .ab-word-ar{
+  margin:9px 0 0!important;
+  font-family:"Noto Naskh Arabic","Geeza Pro",serif!important;
+  font-size:clamp(40px,11vw,60px)!important;
+  line-height:1.45!important;
+  color:#fff8e6!important;
+}
+#alphabetModal .ab-harakat{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  gap:12px!important;
+  width:100%!important;
+  max-width:620px!important;
+  margin:20px auto 0!important;
+}
+#alphabetModal .ab-h{
+  flex:1 1 128px!important;
+  max-width:190px!important;
+  min-width:120px!important;
+  min-height:100px!important;
+  padding:12px 14px!important;
+  border-radius:25px!important;
+  border:1px solid rgba(243,207,115,.20)!important;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(243,207,115,.11),transparent 60%),
+    rgba(255,255,255,.055)!important;
+  color:#fff3cf!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.13)!important;
+}
+#alphabetModal .ab-h b{
+  font-family:"Noto Naskh Arabic","Geeza Pro",serif!important;
+  font-size:42px!important;
+  line-height:1.15!important;
+}
+#alphabetModal .ab-h small{
+  margin-top:4px!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:13px!important;
+  line-height:1.2!important;
+  color:rgba(255,255,255,.78)!important;
+}
+#alphabetModal .ab-forms{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+  width:100%!important;
+  max-width:620px!important;
+  margin:20px auto 0!important;
+}
+#alphabetModal .ab-forms span{
+  min-height:86px!important;
+  padding:12px 10px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border-radius:22px!important;
+  background:rgba(255,255,255,.055)!important;
+  border:1px solid rgba(126,210,219,.14)!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:12px!important;
+  line-height:1.25!important;
+  color:rgba(255,255,255,.70)!important;
+}
+#alphabetModal .ab-forms b{
+  margin-top:5px!important;
+  font-family:"Noto Naskh Arabic","Geeza Pro",serif!important;
+  font-size:34px!important;
+  line-height:1.2!important;
+  color:#fff8e6!important;
+}
+#alphabetModal .ab-practice-title{
+  max-width:620px!important;
+  margin:6px auto 18px!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(22px,6vw,30px)!important;
+  font-weight:750!important;
+  line-height:1.28!important;
+  color:#fff8e6!important;
+}
+#alphabetModal .ab-practice-stimulus{
+  min-height:0!important;
+  margin:0 0 18px!important;
+  font-family:"Noto Naskh Arabic","Geeza Pro",serif!important;
+  font-size:clamp(70px,20vw,104px)!important;
+  line-height:1.08!important;
+  color:#fff8e6!important;
+}
+#alphabetModal .ab-practice-choices{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+  width:100%!important;
+  max-width:620px!important;
+  margin:0 auto!important;
+}
+#alphabetModal .ab-practice-choice{
+  min-height:120px!important;
+  padding:12px!important;
+  border:1px solid rgba(243,207,115,.22)!important;
+  border-radius:26px!important;
+  background:rgba(255,255,255,.055)!important;
+  color:#fff8e6!important;
+  font-family:"Noto Naskh Arabic","Geeza Pro",serif!important;
+  font-size:clamp(52px,14vw,76px)!important;
+  cursor:pointer!important;
+}
+#alphabetModal .ab-practice-choice.ab-practice-latin{
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(23px,6.6vw,34px)!important;
+  font-weight:700!important;
+}
+#alphabetModal .ab-practice-feedback{
+  min-height:32px!important;
+  margin:16px 0 0!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:15px!important;
+  font-weight:750!important;
+  line-height:1.4!important;
+}
+#alphabetModal .ab-complete-mark{
+  width:104px!important;
+  height:104px!important;
+  margin:8px auto 20px!important;
+  font-size:52px!important;
+}
+#alphabetModal .ab-audio-status{
+  flex:none!important;
+  min-height:18px!important;
+  margin:4px 8px 2px!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:11px!important;
+  line-height:1.35!important;
+}
+#alphabetModal .ab-audio-credit{
+  flex:none!important;
+  min-height:0!important;
+  margin:0 8px 4px!important;
+  font-size:9px!important;
+  line-height:1.3!important;
+}
+#alphabetModal .ab-nav{
+  flex:none!important;
+  display:grid!important;
+  grid-template-columns:1fr 1.15fr 1fr!important;
+  gap:10px!important;
+  width:100%!important;
+  max-width:720px!important;
+  margin:0 auto!important;
+  padding:8px 0 max(6px,env(safe-area-inset-bottom,0px))!important;
+}
+#alphabetModal .ab-nav button{
+  min-width:0!important;
+  min-height:58px!important;
+  padding:10px 8px!important;
+  border-radius:20px!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:15px!important;
+  font-weight:750!important;
+  line-height:1.15!important;
+}
+#alphabetModal .ab-play{
+  background:linear-gradient(145deg,#f0d18d,#d8ac59)!important;
+  color:#102030!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.15)!important;
+}
+.app[data-age="4–5"] #alphabetModal .ab-pic{
+  height:clamp(210px,40vh,330px)!important;
+  max-height:330px!important;
+}
+.app[data-age="4–5"] #alphabetModal .ab-letter{
+  font-size:clamp(92px,27vw,132px)!important;
+}
+.app[data-age="4–5"] #alphabetModal .ab-hint{
+  font-size:18px!important;
+}
+.app[data-age="4–5"] #alphabetModal .ab-h{
+  flex-basis:150px!important;
+  min-height:108px!important;
+}
+.app[data-age="4–5"] #alphabetModal .ab-nav button{
+  min-height:64px!important;
+  font-size:17px!important;
+}
+@media(max-width:360px){
+  #alphabetModal .lesson-step{
+    flex-basis:calc(50% - 8px)!important;
+    max-width:none!important;
+  }
+  #alphabetModal .ab-practice-choices{grid-template-columns:1fr!important}
+  #alphabetModal .ab-practice-choice{min-height:108px!important}
+  #alphabetModal .ab-nav{gap:7px!important}
+  #alphabetModal .ab-nav button{font-size:13px!important}
+}
+@media(min-width:700px){
+  #alphabetModal .lesson-steps{
+    flex-wrap:nowrap!important;
+    gap:10px!important;
+    margin-bottom:14px!important;
+  }
+  #alphabetModal .lesson-step{
+    flex:1 1 0!important;
+    max-width:none!important;
+    min-height:50px!important;
+    font-size:12px!important;
+  }
+  #alphabetModal .ab-stage{padding-top:12px!important}
+  #alphabetModal .ab-pic{
+    height:min(35vh,340px)!important;
+    max-height:340px!important;
+  }
+  #alphabetModal .ab-harakat{gap:14px!important}
+  #alphabetModal .ab-h{min-height:110px!important}
+  #alphabetModal .ab-forms{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    max-width:760px!important;
+  }
+  #alphabetModal .ab-practice-choices{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    max-width:720px!important;
+    gap:14px!important;
+  }
+  #alphabetModal .ab-practice-choice{min-height:132px!important}
+  #alphabetModal .ab-nav button{
+    min-height:62px!important;
+    font-size:16px!important;
+  }
+}
+@media(max-height:700px){
+  #alphabetModal .modal-top{min-height:50px!important;padding-bottom:6px!important}
+  #alphabetModal .ab-dots{display:none!important}
+  #alphabetModal .lesson-steps{margin-bottom:6px!important}
+  #alphabetModal .ab-stage{padding-top:3px!important;padding-bottom:8px!important}
+  #alphabetModal .ab-pic{
+    height:min(27vh,190px)!important;
+    max-height:190px!important;
+  }
+  #alphabetModal .ab-letter{margin-top:8px!important}
+  #alphabetModal .ab-hint{margin-top:5px!important}
+  #alphabetModal .ab-nav button{min-height:50px!important}
+}
+/* KIDS_ALPHABET_SPACIOUS_V1057_END */
 </style>
 <script src="/kids/prophet-stories.js?v=21"></script>
 </html>

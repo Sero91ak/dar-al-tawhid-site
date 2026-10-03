@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-tab1056",
-  "label": "KIDS · V1.05.6",
-  "releasedAt": "2026-10-03T00:55:00.000Z",
-  "note": "V1.05.6: Qurʾān-Lernansicht direkt in der App vergrößert und entengt: arabischer Text mit mehr Ruhe, größere Hör-/Sprech-Tasten, klarere drei Lernschritte, sichere Zurück/Weiter-Flächen, großzügiger Mikrofonbereich und eigener Tablet-Modus. Funktionalität unverändert; keine neuen Bildassets.",
+  "buildId": "kids-shell-v12-tab1057",
+  "label": "KIDS · V1.05.7",
+  "releasedAt": "2026-10-03T01:05:00.000Z",
+  "note": "V1.05.7: Alif-Bāʾ-Lernbereich kindgerecht entengt: fünf Lernschritte umbrechen sauber auf Smartphones, größere Bilder/Buchstaben, Ḥarakāt und Formen mit großen Flächen, Übungsantworten maximal zweispaltig auf Handys, deutlich größere Navigation und eigener Tablet-Modus. Lernlogik, Audio und Fortschritt bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1056",
+    "serviceWorkerCache": "v1057",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -55,6 +55,13 @@
     "quranLessonPhoneActions": "stacked",
     "quranLessonTabletActions": "two-column",
     "quranLessonLargeArabic": true,
-    "quranLessonFunctionalityChanged": false
+    "quranLessonFunctionalityChanged": false,
+    "alphabetPolish": "spacious-v1057",
+    "alphabetPhoneSteps": "wrapped-centered",
+    "alphabetPhonePractice": "two-column",
+    "alphabetNarrowPractice": "single-column",
+    "alphabetTabletPractice": "three-column",
+    "alphabetLargeTouchTargets": true,
+    "alphabetFunctionalityChanged": false
   }
 }
