@@ -21,7 +21,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.67"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.68"
+    }
+
+    private var externalEngineOwner: Bool {
+        ProcessInfo.processInfo.environment["DAR_VOICE_ENGINE_OWNER"] == "launcher"
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -31,7 +35,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.67"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.68"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
         config.userContentController.add(self, name: "darCompanion")
@@ -438,7 +442,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
                     "--retry", "2",
                     "--retry-delay", "1",
                     "-H", "Cache-Control: no-cache",
-                    "-H", "User-Agent: DAR-Voice-Studio-Updater/2.9.67"
+                    "-H", "User-Agent: DAR-Voice-Studio-Updater/2.9.68"
                 ]
                 if isGitHubAPI {
                     args += ["-H", "Accept: application/vnd.github.raw+json"]
@@ -507,7 +511,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 7
         request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
-        request.setValue("DAR-Voice-Studio-Updater/2.9.67", forHTTPHeaderField: "User-Agent")
+        request.setValue("DAR-Voice-Studio-Updater/2.9.68", forHTTPHeaderField: "User-Agent")
         if url.host == "api.github.com" {
             request.setValue("application/vnd.github.raw+json", forHTTPHeaderField: "Accept")
         } else {
@@ -902,6 +906,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     }
 
     private func ensureEngine() {
+        // 2.9.68 Stabilitätsmodus: Wenn der Bundle-Launcher die Engine besitzt,
+        // bleibt die native WKWebView-App vollständig passiv. Dadurch gibt es
+        // keinen zweiten Prozessmanager, der dieselbe Engine beendet/neustartet.
+        if externalEngineOwner { return }
+
         var request = URLRequest(url: healthURL)
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 1.0
@@ -1169,7 +1178,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     }
 
     func applicationWillTerminate(_ notification: Notification) {
-        if let p = engineProcess, p.isRunning {
+        if !externalEngineOwner, let p = engineProcess, p.isRunning {
             p.terminate()
         }
         try? engineOutHandle?.close()
