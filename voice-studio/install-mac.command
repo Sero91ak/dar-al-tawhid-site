@@ -440,6 +440,9 @@ VENV="$VOICE_HOME/.venv"
 URL="http://127.0.0.1:8787/studio/"
 HEALTH="http://127.0.0.1:8787/health"
 EXPECTED_ENGINE_VERSION="2.9.68"
+PAIR_TOKEN_FILE="$TARGET/ipad-pairing-token.txt"
+PAIR_TOKEN=""
+[ -s "$PAIR_TOKEN_FILE" ] && PAIR_TOKEN="$(tr -d '\r\n ' < "$PAIR_TOKEN_FILE")"
 SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
 NATIVE="$SELF_DIR/DARVoiceStudioNative"
 LOG="$TARGET/app-launch.log"
@@ -469,6 +472,8 @@ engine_is_current() {
     if [ -x "$VENV/bin/python" ] && [ -f "$TARGET/local-engine.py" ]; then
       /usr/bin/nohup /usr/bin/env \
         DAR_VOICE_APP_HOME="$TARGET" \
+        DAR_VOICE_NETWORK_MODE=1 \
+        DAR_VOICE_PAIR_TOKEN="$PAIR_TOKEN" \
         PYTORCH_ENABLE_MPS_FALLBACK=1 \
         DAR_VOICE_DISABLE_MLX=0 \
         PATH="/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" \
