@@ -1,0 +1,251 @@
+/* DĀR Test · Home atmosphere v1202
+   TEST ONLY. Reuses existing v1194 Adobe/Runway study imagery.
+   Goal: the imagery belongs to the page background, never to a single content card/section.
+   No route logic, navigation logic, or bottom-tab logic is changed.
+*/
+
+html.dar-home-v1194 body.is-home-route{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow-x:hidden!important;
+  background:var(--bg,#050706)!important;
+  background-image:none!important;
+}
+
+/* One continuous page atmosphere: old library/study imagery fades into the app background. */
+html.dar-home-v1194 body.is-home-route::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:-2!important;
+  pointer-events:none!important;
+  inset:0 0 auto 0!important;
+  width:100%!important;
+  height:1450px!important;
+  opacity:.78!important;
+  background:
+    linear-gradient(180deg,
+      rgba(2,3,2,.10) 0%,
+      rgba(2,3,2,.18) 27%,
+      rgba(2,3,2,.48) 56%,
+      rgba(2,3,2,.82) 78%,
+      rgba(2,3,2,.98) 100%
+    ),
+    linear-gradient(90deg,
+      rgba(2,3,2,.60) 0%,
+      rgba(2,3,2,.28) 46%,
+      rgba(2,3,2,.10) 100%
+    ),
+    url("/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1202") 62% 0/cover no-repeat!important;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 68%,rgba(0,0,0,.88) 78%,transparent 100%)!important;
+  mask-image:linear-gradient(to bottom,#000 0%,#000 68%,rgba(0,0,0,.88) 78%,transparent 100%)!important;
+}
+
+/* A second historical study scene continues lower down without becoming a separate block. */
+html.dar-home-v1194 body.is-home-route::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:-1!important;
+  pointer-events:none!important;
+  left:0!important;
+  right:0!important;
+  top:980px!important;
+  height:2450px!important;
+  opacity:.62!important;
+  background:
+    linear-gradient(180deg,
+      rgba(2,3,2,.96) 0%,
+      rgba(2,3,2,.58) 13%,
+      rgba(2,3,2,.34) 35%,
+      rgba(2,3,2,.46) 66%,
+      rgba(2,3,2,.96) 100%
+    ),
+    linear-gradient(90deg,
+      rgba(2,3,2,.66) 0%,
+      rgba(2,3,2,.34) 48%,
+      rgba(2,3,2,.18) 100%
+    ),
+    url("/test/assets/home-v1194/study-runway.jpg?v=1202") 66% 18%/cover no-repeat!important;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 13%,#000 82%,transparent 100%)!important;
+  mask-image:linear-gradient(to bottom,transparent 0%,#000 13%,#000 82%,transparent 100%)!important;
+}
+
+/* The existing hero no longer owns its own pasted-in picture. */
+html.dar-home-v1194 body.is-home-route .top-shell .header.theme-hero-surface{
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* Main content is transparent so the page atmosphere can breathe through it. */
+html.dar-home-v1194 body.is-home-route :is(
+  #appView.view,
+  #appView .home-v380-shell,
+  #appView .home-v380-section,
+  #appView .home-line-list,
+  #appView .home-line-grid
+){
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* Hero direct links: quiet editorial links, not pasted mini-cards. */
+html.dar-home-v1194 body.is-home-route .dt-hero-links{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  gap:2px 18px!important;
+  margin-top:16px!important;
+}
+html.dar-home-v1194 body.is-home-route .dt-hero-links .dt-text-link{
+  min-height:0!important;
+  margin:0!important;
+  padding:6px 0 5px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(223,195,121,.42)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  color:#fff5df!important;
+  -webkit-text-fill-color:#fff5df!important;
+  font-size:10.7px!important;
+  line-height:1.15!important;
+  font-weight:760!important;
+  white-space:nowrap!important;
+}
+
+/* Search stays prominent but visually belongs to the page, not as a heavy card. */
+html.dar-home-v1194 body.is-home-route .dt-hero-search{
+  margin-top:18px!important;
+  border:1px solid rgba(223,195,121,.32)!important;
+  background:rgba(2,3,2,.34)!important;
+  background-image:none!important;
+  box-shadow:0 12px 34px rgba(0,0,0,.16)!important;
+  -webkit-backdrop-filter:blur(2px)!important;
+  backdrop-filter:blur(2px)!important;
+}
+
+/* Prayer and isnad remain open editorial bands over the same continuous backdrop. */
+html.dar-home-v1194 body.is-home-route :is(
+  #headerPrayerStatus,
+  .top-shell>.isnad.dt-isnad
+){
+  background:rgba(2,3,2,.16)!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:blur(1.5px)!important;
+  backdrop-filter:blur(1.5px)!important;
+}
+
+/* Qur'an resume is now an open ruled band. No local photo and no capsule. */
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero{
+  width:auto!important;
+  min-height:126px!important;
+  margin:24px 0!important;
+  padding:22px 2px!important;
+  border:0!important;
+  border-top:1px solid var(--dt-rule-strong)!important;
+  border-bottom:1px solid var(--dt-rule-strong)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero::before,
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero::after{
+  content:none!important;
+  display:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero :is(
+  button,a,.home-v380-quran-hero__body,.home-v380-quran-hero__resume,
+  .home-v380-quran-hero__copy,.home-v380-quran-hero__content
+){
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* Clear hierarchy between editorial chapters while keeping surfaces transparent. */
+html.dar-home-v1194 body.is-home-route .home-line-tawhid{
+  margin-top:10px!important;
+  padding:28px 0 25px!important;
+  border-top:1px solid var(--dt-rule-strong)!important;
+  border-bottom:1px solid var(--dt-rule)!important;
+  background:linear-gradient(90deg,rgba(2,3,2,.18),transparent 72%)!important;
+  box-shadow:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-line-grid{
+  border-top:1px solid var(--dt-rule-strong)!important;
+}
+html.dar-home-v1194 body.is-home-route .home-line-row{
+  background:rgba(2,3,2,.08)!important;
+  border-bottom:1px solid var(--dt-rule)!important;
+  box-shadow:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-line-row:nth-child(odd){
+  background:rgba(2,3,2,.13)!important;
+}
+
+/* Preserve the original floating DĀR bottom navigation exactly as-is. */
+html.dar-home-v1194 body.is-home-route #bottomNav,
+html.dar-home-v1194 body.is-home-route .bottom-nav{
+  z-index:999!important;
+}
+
+/* Wider screens use the already-generated wide Adobe version. */
+@media(min-width:760px){
+  html.dar-home-v1194 body.is-home-route::before{
+    height:1550px!important;
+    background:
+      linear-gradient(180deg,rgba(2,3,2,.10) 0%,rgba(2,3,2,.22) 34%,rgba(2,3,2,.66) 70%,rgba(2,3,2,.98) 100%),
+      linear-gradient(90deg,rgba(2,3,2,.62) 0%,rgba(2,3,2,.24) 50%,rgba(2,3,2,.08) 100%),
+      url("/test/assets/home-v1194/hero-wide-adobe.jpg?v=1202") center top/cover no-repeat!important;
+  }
+  html.dar-home-v1194 body.is-home-route::after{
+    top:1120px!important;
+    height:2600px!important;
+    background-position:center,center,62% 18%!important;
+  }
+}
+
+/* Theme compatibility: imagery remains atmosphere, never a new theme color. */
+html.dar-home-v1194[data-theme="light"] body.is-home-route::before,
+html.dar-home-v1194[data-theme="light"] body.is-home-route::after,
+html.dar-home-v1194[data-theme="soft"] body.is-home-route::before,
+html.dar-home-v1194[data-theme="soft"] body.is-home-route::after{
+  opacity:.22!important;
+  filter:saturate(.52) sepia(.08) brightness(1.12)!important;
+}
+html.dar-home-v1194[data-theme="light"] body.is-home-route :is(
+  #headerPrayerStatus,.top-shell>.isnad.dt-isnad,.home-line-row
+),
+html.dar-home-v1194[data-theme="soft"] body.is-home-route :is(
+  #headerPrayerStatus,.top-shell>.isnad.dt-isnad,.home-line-row
+){
+  background:rgba(255,255,255,.10)!important;
+}
+
+@media(max-width:390px){
+  html.dar-home-v1194 body.is-home-route::before{
+    height:1360px!important;
+    background-position:center,center,66% 0!important;
+  }
+  html.dar-home-v1194 body.is-home-route::after{
+    top:900px!important;
+    height:2380px!important;
+    background-position:center,center,68% 18%!important;
+  }
+  html.dar-home-v1194 body.is-home-route .dt-hero-links{
+    gap:2px 14px!important;
+  }
+  html.dar-home-v1194 body.is-home-route .dt-hero-links .dt-text-link{
+    font-size:10.1px!important;
+  }
+}
