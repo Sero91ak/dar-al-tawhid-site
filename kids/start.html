@@ -2714,7 +2714,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07.9</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.07.10</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3168,7 +3168,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-sahaba1083";
+const KIDS_BUILD_ID="kids-shell-v12-sahaba1084";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6613,7 +6613,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1083",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1084",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
@@ -7593,7 +7593,7 @@ html[data-view="stories"] .shell{
   background-image:
     linear-gradient(90deg,rgba(4,22,35,.90) 0%,rgba(4,22,35,.68) 42%,rgba(4,22,35,.25) 72%,rgba(4,22,35,.08) 100%),
     linear-gradient(180deg,rgba(4,20,33,.08) 0%,rgba(4,20,33,.04) 42%,rgba(4,24,38,.36) 76%,#0c2636 100%),
-    url("https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:48a4667a-2795-4b81-aeba-67f33021f04e")!important;
+    url("https://at.adobe.com/jaPS3uCKdEKCahM6")!important;
   background-size:cover!important;
   background-position:center 52%!important;
   background-repeat:no-repeat!important;
@@ -7783,6 +7783,48 @@ html[data-view="stories"] .shell{
   #view-stories .story-feature{
     margin-top:12px!important;
     margin-bottom:28px!important;
+  }
+}
+
+
+/* KIDS_STORIES_LAYOUT_FINISH_V1084
+   Dauerhafte Bildquelle + sichere Abstände bis zur Bottom-Navigation + Tablet-Breite. */
+#view-stories{
+  padding-bottom:calc(132px + env(safe-area-inset-bottom,0px))!important;
+}
+#view-stories .page-head{
+  background-image:
+    linear-gradient(90deg,rgba(4,22,35,.90) 0%,rgba(4,22,35,.68) 42%,rgba(4,22,35,.25) 72%,rgba(4,22,35,.08) 100%),
+    linear-gradient(180deg,rgba(4,20,33,.08) 0%,rgba(4,20,33,.04) 42%,rgba(4,24,38,.36) 76%,#0c2636 100%),
+    url("https://at.adobe.com/jaPS3uCKdEKCahM6")!important;
+}
+#view-stories > .story-feature,
+#view-stories > .story-more-title,
+#view-stories > .story-list,
+#view-stories > .section-title,
+#view-stories > .gentle-note{
+  max-width:980px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+#view-stories > .story-feature{
+  width:100%!important;
+}
+@media(max-width:390px){
+  #view-stories{
+    padding-bottom:calc(124px + env(safe-area-inset-bottom,0px))!important;
+  }
+}
+@media(min-width:700px){
+  #view-stories{
+    padding-bottom:calc(148px + env(safe-area-inset-bottom,0px))!important;
+  }
+  #view-stories > .story-feature,
+  #view-stories > .story-more-title,
+  #view-stories > .story-list,
+  #view-stories > .section-title,
+  #view-stories > .gentle-note{
+    max-width:920px!important;
   }
 }
 
