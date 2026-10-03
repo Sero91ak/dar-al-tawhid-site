@@ -232,7 +232,7 @@ def load_kids_repo_json(local_name:str,repo_path:str,validator):
 def refresh_studio_ui_from_github():
     files=(
         ("voice-studio/index.html","studio.html",("id=\"prophetPick\"","prophetPickList","Geschichten der Propheten")),
-        ("voice-studio/content-studio.js","content-studio.js",("csProphetTab","ensureProphetUi")),
+        ("voice-studio/content-studio.js","content-studio.js",("csProphetTab","ensureProphetUi")),\n        ("voice-studio/mubashshirun-pack.js","mubashshirun-pack.js",("mubVoicePack","Die zehn Mubaschschirūn")),
     )
     for repo,name,markers in files:
         try:
