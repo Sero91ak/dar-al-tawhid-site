@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1070",
+  "buildId": "kids-shell-v12-sahaba1074",
   "label": "KIDS · V1.07.0",
-  "releasedAt": "2026-10-03T14:44:00.000Z",
-  "note": "V1.07.0: Mubaschschirūn-Seite ruhiger und kindgerechter: übersichtlicher Einstieg, altersgerechter Hinweis zu historischen Lernbildern, Edge-Swipe-Zurück in Bibliothek und Detailansicht sowie Bundle-/Offline-Cache auf v6/v1070 synchronisiert. Inhalte, Quellen und Serhat-Voice-Workflow bleiben unverändert quellengebunden.",
+  "releasedAt": "2026-10-03T18:02:00.000Z",
+  "note": "V1.07.0 Hotfix: Startseite-Kacheln wieder als ovale Kapseln; Build-/Service-Worker-Cache auf v1074 synchronisiert. Inhalte und Funktionen bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1070",
+    "serviceWorkerCache": "v1074",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
