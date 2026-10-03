@@ -151,6 +151,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-home-tabbar-restore-v1195-2026-10-03",
+      "approvedBy": "user-explicit-tab-bereich-zurueck-alte-darstellung-form-funktion",
+      "reason": "Nutzer verlangt: In der Dar-Test-Startseite die bestehende iOS/Web-App-Tab-Leiste exakt in ihrer bisherigen Darstellung, Form und Funktion wiederherstellen. Der neue Home-/Bibliotheks-Umbau darf die Tab-Leiste nicht gestalten oder überschreiben.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/dar-home-library-v1193.css",
+        "test/assets/dar-home-library-v1194.css",
+        "test/index.html",
+        "test/version.json",
+        "cloudflare/test-app-worker.js"
+      ],
+      "expiresAt": "2026-10-10T23:59:00.000Z"
+    },
+    {
       "id": "adult-home-adobe-runway-v1190-2026-10-03",
       "approvedBy": "user-explicit-startseite-adobe-runway-kreativ-attraktiv",
       "reason": "Nutzer verlangt die misslungene Erwachsenen-Test-Startseite sofort kreativ und attraktiv neu aufzubauen und ausdrücklich Adobe Firefly sowie Runway zu verwenden; riesige Buchcover/Kapseln entfernen.",
