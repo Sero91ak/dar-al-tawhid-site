@@ -7,6 +7,7 @@ SITE="https://dar-al-tawhid.de"
 REPO_API="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site"
 RELEASE_MANIFEST_URL="$REPO_API/contents/voice-studio/version.json?ref=main"
 PIN=""
+RELEASE_VERSION=""
 TARGET="$HOME/Applications/DAR-Voice-Studio"
 VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
@@ -100,11 +101,16 @@ resolve_release_ref() {
   fi
 
   PIN="$(/usr/bin/plutil -extract releaseRef raw -o - "$manifest" 2>/dev/null || true)"
+  RELEASE_VERSION="$(/usr/bin/plutil -extract version raw -o - "$manifest" 2>/dev/null || true)"
   if [[ ! "$PIN" =~ ^[0-9a-fA-F]{40}$ ]]; then
     echo "FEHLER: Ungültige oder fehlende validierte Release-Referenz."
     exit 1
   fi
-  echo "Installiere validierten Voice-Studio-Release: $PIN"
+  if [[ ! "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "FEHLER: Ungültige oder fehlende Voice-Studio-Version im Release-Manifest."
+    exit 1
+  fi
+  echo "Installiere validierten Voice-Studio-Release $RELEASE_VERSION: $PIN"
 }
 
 resolve_release_ref
@@ -203,6 +209,14 @@ for required in local-engine.py speech_flow.py studio.html content-studio.js mub
     exit 1
   fi
 done
+
+# Release-Kohärenz: Manifest-Version und gepinnte Engine müssen identisch sein.
+# So kann ein neueres Manifest niemals versehentlich einen alten Release-Pin installieren.
+STAGED_ENGINE_VERSION="$(/usr/bin/sed -n 's/^ENGINE_VERSION="\([^"]*\)".*/\1/p' "$STAGE/local-engine.py" | /usr/bin/head -n 1)"
+if [ "$STAGED_ENGINE_VERSION" != "$RELEASE_VERSION" ]; then
+  echo "FEHLER: Release-Pin passt nicht zum Manifest: Manifest=$RELEASE_VERSION, Engine=$STAGED_ENGINE_VERSION."
+  exit 1
+fi
 
 # Vorhandene Stimmreferenz bevorzugen.
 REF="$VOICE_HOME/Serhat_Adobe_MASTER.wav"
@@ -400,13 +414,14 @@ else
 fi
 
 engine_health_matches_release() {
-  local body
+  local body running_version
   body="$(curl -fsS --max-time 1 "http://127.0.0.1:8787/health" 2>/dev/null || true)"
   [ -n "$body" ] || return 1
-  printf '%s' "$body" | /usr/bin/grep -Eq '"engine_version"[[:space:]]*:[[:space:]]*"2\.9\.67"'
+  running_version="$(printf '%s' "$body" | /usr/bin/sed -n 's/.*"engine_version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')"
+  [ "$running_version" = "$RELEASE_VERSION" ]
 }
 
-# Warten, ob LaunchAgent EXAKT die installierte Engine 2.9.67 hochgebracht hat.
+# Warten, ob LaunchAgent EXAKT die im Manifest angegebene Engine hochgebracht hat.
 ENGINE_OK=0
 for i in $(seq 1 20); do
   if engine_health_matches_release; then
@@ -457,7 +472,7 @@ if [ "$ENGINE_OK" -ne 1 ]; then
   exit 1
 fi
 
-echo "Serhat Engine 2.9.67 erreichbar: http://127.0.0.1:8787/health"
+echo "Serhat Engine $RELEASE_VERSION erreichbar: http://127.0.0.1:8787/health"
 
 # Native macOS-App wird zuerst vollständig in einem separaten Bundle gebaut.
 # Die bisher installierte App bleibt bis nach Build, plist-Lint und Codesign startbar.
