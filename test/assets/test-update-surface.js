@@ -77,19 +77,10 @@
 
   function boot() {
     if (!isTest()) return;
-    fetch("/test/version.json?u=" + Date.now(), { cache: "no-store" })
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (remote) {
-        var id = remote && remote.buildId ? String(remote.buildId) : "";
-        var n = 0;
-        function tick() {
-          if (offer(id)) return;
-          n += 1;
-          if (n < 40) setTimeout(tick, 120);
-        }
-        tick();
-      })
-      .catch(function () {});
+    // DAR Test updates are applied silently. No floating/capsule update CTA on the reading surface.
+    var old=document.getElementById("darTestUpdateOffer");
+    if(old&&old.parentNode)old.parentNode.removeChild(old);
+    try{root.DARGlobalUpdate&&root.DARGlobalUpdate.hide&&root.DARGlobalUpdate.hide()}catch(e){}
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once: true });
