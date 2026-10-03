@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-type1066",
-  "label": "KIDS · V1.06.6",
-  "releasedAt": "2026-10-03T13:35:00.000Z",
-  "note": "V1.06.6: Globale Kids-Typografie endgültig altersabhängig gemacht. Besonders die zuvor zu kleinen Texte auf der Heute-Seite, Qurʾān-Lernseite, Alphabet, Geschichten, Duʿāʾ, Quiz und Elternbereich skalieren nun mit 4–5 / 6–8 / 9–10. Auch 9–10 bleibt bei gut lesbarer Mindestgröße; Karten und Controls wachsen mit.",
+  "buildId": "kids-shell-v12-type1067",
+  "label": "KIDS · V1.06.7",
+  "releasedAt": "2026-10-03T13:28:00.000Z",
+  "note": "V1.06.7: Globale Alters-Typografie repariert. Fehlende Alias-Variablen der V1.06.6 wurden ergänzt; Ṣaḥābah-/Mubaschschirūn-Karten, Profilfelder, Quellen, Hilfetexte und Controls folgen jetzt zuverlässig 4–5 / 6–8 / 9–10 mit lesbaren Mindestgrößen und größeren Touch-Zielen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1066",
+    "serviceWorkerCache": "v1067",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -92,7 +92,7 @@
     "mubashshirunPreparedStoryScripts": 30,
     "mubashshirunUniqueArtworkAssets": true,
     "mubashshirunDuplicateBundleGuard": true,
-    "ageAdaptiveTypography": "v3",
+    "ageAdaptiveTypography": "v4",
     "ageTypographyProfiles": {
       "4-5": {
         "body": "20px",
@@ -143,6 +143,9 @@
     "ageTypographyNoTiny910": true,
     "ageTypographyHomeOverrides": true,
     "ageTypographyQuranOverrides": true,
-    "ageTypographyAlphabetOverrides": true
+    "ageTypographyAlphabetOverrides": true,
+    "ageTypographyAliasRepair": true,
+    "mubashshirunTypographyAgeSynced": true,
+    "mubashshirunNoTinyText": true
   }
 }
