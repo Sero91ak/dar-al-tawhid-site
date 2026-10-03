@@ -873,3 +873,133 @@ html[data-theme="light"][data-theme-variant="salbei"] body.is-home-route :is(
 ) :is(p,h2,h3,h4,span){
   text-shadow:none!important;
 }
+
+
+/* GLOBAL_THEME_CONTRAST_V1211 · TEST ONLY
+   Global contrast authority for every appearance.
+   Light themes use dark readable ink; dark themes use warm light ink. */
+html[data-theme]{
+  --dar-readable-ink:var(--text,#f3ecdd);
+  --dar-readable-muted:var(--muted,#b9b09f);
+  --dar-readable-soft:var(--muted2,var(--muted,#b9b09f));
+  --dar-readable-accent:var(--gold2,var(--accent,#d5ba73));
+}
+html[data-theme="light"]{
+  --dar-readable-ink:#211D18;--dar-readable-muted:#554D43;--dar-readable-soft:#6A6257;--dar-readable-accent:#73572B;
+}
+html[data-theme="light"][data-theme-variant="salbei"],
+html[data-theme="salbei"]{
+  --dar-readable-ink:#17211B;--dar-readable-muted:#48574E;--dar-readable-soft:#617067;--dar-readable-accent:#3F5D4B;
+}
+html[data-theme="soft"]{
+  --dar-readable-ink:#2B2025;--dar-readable-muted:#5E4E55;--dar-readable-soft:#77656D;--dar-readable-accent:#714A5D;
+}
+html[data-theme="eisgold"]{
+  --dar-readable-ink:#142033;--dar-readable-muted:#4D5C6E;--dar-readable-soft:#667487;--dar-readable-accent:#7B6429;
+}
+html[data-theme="dark"]{
+  --dar-readable-ink:#F5EFE3;--dar-readable-muted:#D1C6B2;--dar-readable-soft:#B9B09F;--dar-readable-accent:#E4CD8B;
+}
+html[data-theme="royal"]{
+  --dar-readable-ink:#F7EEDA;--dar-readable-muted:#CEC3AB;--dar-readable-soft:#B5AB96;--dar-readable-accent:#E6CF8B;
+}
+html[data-theme="bordeaux"]{
+  --dar-readable-ink:#F7EDDF;--dar-readable-muted:#D4C1B4;--dar-readable-soft:#BFAAA0;--dar-readable-accent:#D8C08B;
+}
+html[data-theme="dar-al-layl"]{
+  --dar-readable-ink:#F1EDE3;--dar-readable-muted:#C7C9C1;--dar-readable-soft:#ABB0A9;--dar-readable-accent:#D8C18B;
+}
+html[data-theme="aurora"]{
+  --dar-readable-ink:#F2EEE2;--dar-readable-muted:#CAD0C8;--dar-readable-soft:#AEB8B0;--dar-readable-accent:#DEC98F;
+}
+
+/* Major route/read surfaces inherit the correct ink. */
+html[data-theme] body,
+html[data-theme] :is(#appRoot,#appShell,.app,#appView,#appView.view,.view,.article,.post-reader,.topic-collection-page,.frauen-list-page,.women-detail-shell){
+  color:var(--dar-readable-ink)!important;
+}
+html[data-theme] :is(
+  h1,h2,h3,h4,h5,h6,.title,.section-title,.view-title,.profile-title,.book-profile-title,
+  .post-reader-title,.post-reader-title h2,.post-aussage-text,.post-fazit-body,
+  .statement,.statement p,.statement q,.statement blockquote,.statement strong,.statement b,.statement em,
+  [data-post-after-source],.post-reader-cite,.post-reader-cite div,.frauen-row__title,.frauen-row__aussage,
+  .quiz-question,.quran-arabic,.quran-ayah-ar,.quran-verse-ar
+){
+  color:var(--dar-readable-ink)!important;
+  -webkit-text-fill-color:var(--dar-readable-ink)!important;
+  text-shadow:none!important;
+}
+html[data-theme] .post-reader :is(
+  p,li,dd,dt,q,blockquote,.post-aussage-text,.post-fazit-body,.post-reader-cite,[data-post-after-source]
+),
+html[data-theme] .article :is(.statement,.statement p,.statement div,.statement span,.statement strong,.statement em){
+  color:var(--dar-readable-ink)!important;
+  -webkit-text-fill-color:var(--dar-readable-ink)!important;
+}
+html[data-theme] :is(
+  .muted,.sub,.subtitle,.lede,.intro,.view-desc,.description,.desc,.excerpt,.source-preview,.source-note,
+  .helper-text,.form-hint,.settings-note,.profile-desc,.book-desc,.frauen-row__quelle,.post-meta,.meta,.count,
+  .quran-latin,.quran-translit,.ayah-transliteration,.quran-ayah-tr,.quran-tr-line
+){
+  color:var(--dar-readable-muted)!important;
+  -webkit-text-fill-color:var(--dar-readable-muted)!important;
+}
+html[data-theme] :is(
+  .kicker,.eyebrow,.section-kicker,.post-aussage-kicker,.post-key-message h3,.post-reader-cite>b,
+  .source-label,.label,.isnad-label,.daily-label,.recommended-label
+){
+  color:var(--dar-readable-accent)!important;
+  -webkit-text-fill-color:var(--dar-readable-accent)!important;
+}
+html[data-theme] :is(button,.btn,.pill,.action-btn,.back-btn,.home-btn,.collapse-toggle,.advanced-toggle,input,textarea,select){
+  color:var(--dar-readable-ink)!important;
+  -webkit-text-fill-color:var(--dar-readable-ink)!important;
+}
+html[data-theme] :is(input,textarea)::placeholder{
+  color:var(--dar-readable-soft)!important;
+  -webkit-text-fill-color:var(--dar-readable-soft)!important;
+  opacity:1!important;
+}
+
+/* Frauen / Fiqh reader: never pale-on-pale again. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+.post-reader .post-aussage{
+  color:var(--dar-readable-ink)!important;
+  background:color-mix(in srgb,var(--theme-surface-elevated,#fff) 70%,transparent)!important;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+.post-reader .post-aussage :is(.post-aussage-text,p,div,span,strong,em){
+  color:var(--dar-readable-ink)!important;
+  -webkit-text-fill-color:var(--dar-readable-ink)!important;
+  opacity:1!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] .post-reader .post-aussage,
+html[data-theme="salbei"] .post-reader .post-aussage{
+  background:rgba(255,255,255,.50)!important;
+  border-color:rgba(63,93,75,.20)!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] .post-reader .post-fazit-body,
+html[data-theme="salbei"] .post-reader .post-fazit-body{
+  color:#48574E!important;
+  -webkit-text-fill-color:#48574E!important;
+}
+
+/* Light theme containers always export dark semantic tokens. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) :is(
+  .premium-surface,.statement,.post-source-oval,.post-key-message,.source-strong,.post-after-panel,
+  .related-compact-card,.modal,.sheet,.dialog,.popover,[role="dialog"]
+){
+  --theme-surface-elevated-text:var(--dar-readable-ink)!important;
+  --theme-surface-elevated-muted:var(--dar-readable-muted)!important;
+  --theme-surface-elevated-accent:var(--dar-readable-accent)!important;
+}
+
+/* Bottom navigation label contrast only; geometry/material remains untouched. */
+html[data-theme] .bottom-nav-btn{
+  color:var(--dar-readable-soft)!important;
+  -webkit-text-fill-color:var(--dar-readable-soft)!important;
+}
+html[data-theme] .bottom-nav-btn:is(.active,.is-active,[aria-current="page"]){
+  color:var(--dar-readable-ink)!important;
+  -webkit-text-fill-color:var(--dar-readable-ink)!important;
+}
