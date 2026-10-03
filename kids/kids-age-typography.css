@@ -688,3 +688,137 @@ html[data-kids-age="9-10"] .ms-row-kicker{
 .ps-story-row,.ms-story-row{
   overflow:visible!important;
 }
+
+/* KIDS_AGE_TYPOGRAPHY_V4 — alias repair + strict child-readable floors.
+   Fixes legacy selectors that referenced undefined --kids-fs-* variables. */
+:root{
+  --kids-fs-body:var(--kids-body);
+  --kids-fs-card-copy:var(--kids-small);
+  --kids-fs-small:var(--kids-meta);
+  --kids-fs-label:var(--kids-small);
+  --kids-fs-control:var(--kids-button);
+  --kids-fs-card-title:var(--kids-card-title);
+  --kids-fs-page-title:var(--kids-page-title);
+  --kids-fs-question:calc(var(--kids-card-title) + 4px);
+  --kids-control-min:var(--kids-touch);
+}
+
+/* Mubaschschirūn / Ṣaḥābah: no tiny card copy or profile labels. */
+html[data-kids-age] .ms-library-hero p,
+html[data-kids-age] .ms-method-note span,
+html[data-kids-age] .ms-row-summary,
+html[data-kids-age] .ms-detail-hero p,
+html[data-kids-age] .ms-profile-grid span,
+html[data-kids-age] .ms-player p,
+html[data-kids-age] .ms-visual-note{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+}
+html[data-kids-age] .ms-library-kicker,
+html[data-kids-age] .ms-row-kicker,
+html[data-kids-age] .ms-row-meta,
+html[data-kids-age] .ms-detail-kicker,
+html[data-kids-age] .ms-profile-grid small,
+html[data-kids-age] .ms-visual-disclaimer,
+html[data-kids-age] .ms-sources>strong,
+html[data-kids-age] .ms-source-link,
+html[data-kids-age] .ms-source-ref,
+html[data-kids-age] .ms-feedback{
+  font-size:var(--kids-meta)!important;
+  line-height:1.42!important;
+}
+html[data-kids-age] .ms-row-title,
+html[data-kids-age] .ms-profile-grid strong{
+  font-size:var(--kids-card-title)!important;
+  line-height:1.24!important;
+}
+html[data-kids-age] .ms-row-ar{
+  font-size:calc(var(--kids-card-title) + 5px)!important;
+  line-height:1.48!important;
+}
+html[data-kids-age] .ms-question h3{
+  font-size:calc(var(--kids-card-title) + 3px)!important;
+  line-height:1.28!important;
+}
+html[data-kids-age] .ms-question button,
+html[data-kids-age] .ms-modebar button,
+html[data-kids-age] .ms-detail-modes button,
+html[data-kids-age] .ms-play{
+  font-size:var(--kids-button)!important;
+  min-height:var(--kids-touch)!important;
+  line-height:1.3!important;
+}
+html[data-kids-age] .ms-story-row{
+  min-height:calc(var(--kids-touch) + 138px)!important;
+  height:auto!important;
+  overflow:hidden!important;
+}
+html[data-kids-age] .ms-row-art{
+  min-height:calc(var(--kids-touch) + 138px)!important;
+}
+html[data-kids-age] .ms-row-copy{
+  padding-top:18px!important;
+  padding-bottom:18px!important;
+  gap:7px!important;
+}
+html[data-kids-age="4-5"] .ms-story-row{
+  grid-template-columns:132px minmax(0,1fr) 30px!important;
+}
+html[data-kids-age="4-5"] .ms-profile-grid section{
+  padding:16px!important;
+}
+html[data-kids-age="4-5"] .ms-body{
+  padding-left:20px!important;
+  padding-right:20px!important;
+}
+html[data-kids-age="4-5"] .ms-source-link,
+html[data-kids-age="4-5"] .ms-source-ref{
+  padding:10px 12px!important;
+}
+
+/* Prophets: keep secondary text aligned with the same global age profile. */
+html[data-kids-age] .ps-row-meta,
+html[data-kids-age] .ps-summary,
+html[data-kids-age] .ps-entry-sub,
+html[data-kids-age] .ps-muhammad-meta,
+html[data-kids-age] .ps-sources div,
+html[data-kids-age] .ps-feedback{
+  font-size:var(--kids-small)!important;
+  line-height:var(--kids-small-leading)!important;
+}
+html[data-kids-age] .ps-row-kicker,
+html[data-kids-age] .ps-entry-kicker,
+html[data-kids-age] .ps-sources strong{
+  font-size:var(--kids-meta)!important;
+  line-height:1.4!important;
+}
+
+/* General fine-print floors: anything the child must read is never 9–11px. */
+html[data-kids-age] .quiz-source,
+html[data-kids-age] .dua-source,
+html[data-kids-age] .story-source,
+html[data-kids-age] .story-verify,
+html[data-kids-age] .quran-mini-note,
+html[data-kids-age] .recording-playback,
+html[data-kids-age] .mic-top,
+html[data-kids-age] .word-coach .coach-kicker,
+html[data-kids-age] .word-coach .coach-help{
+  font-size:var(--kids-meta)!important;
+  line-height:1.45!important;
+}
+
+/* iOS accessibility: allow user text enlargement and never clip enlarged copy. */
+html,body{
+  -webkit-text-size-adjust:100%!important;
+  text-size-adjust:100%!important;
+}
+html[data-kids-age] button,
+html[data-kids-age] .choice,
+html[data-kids-age] .quran-action,
+html[data-kids-age] .surah-card,
+html[data-kids-age] .story-row,
+html[data-kids-age] .ps-story-row,
+html[data-kids-age] .ms-story-row{
+  text-wrap:pretty;
+}
+
