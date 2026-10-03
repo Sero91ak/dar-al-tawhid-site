@@ -34,7 +34,7 @@ sleep 1
 pkill -KILL -x DARVoiceStudio >/dev/null 2>&1 || true
 pkill -KILL -x DARVoiceStudioNative >/dev/null 2>&1 || true
 
-# 2.9.64 räumt die früheren Terminal-Autopiloten einmalig auf. Diese alten
+# 2.9.65 räumt die früheren Terminal-Autopiloten einmalig auf. Diese alten
 # /tmp-Skripte durften selbstständig Batch-Starts auslösen und würden sonst
 # neben dem neuen persistenten Supervisor weiterlaufen.
 pkill -f '/tmp/dar_propheten_.*\.sh' >/dev/null 2>&1 || true
@@ -181,6 +181,11 @@ if ! normalize_contents_json_file "$STAGE/prophet-stories.json" '"voiceWorkflow"
   echo "FEHLER: Vorbereitete Prophetengeschichten konnten nicht korrekt aus GitHub geladen werden."
   exit 1
 fi
+download_repo_file "kids/data/mubashshirun-stories.json" "$STAGE/mubashshirun-stories.json"
+if ! normalize_contents_json_file "$STAGE/mubashshirun-stories.json" '"al-ʿAšarah al-Mubaššarūn"'; then
+  echo "FEHLER: Mubaschschirūn-Geschichten konnten nicht korrekt aus GitHub geladen werden."
+  exit 1
+fi
 download_repo_file "voice-studio/VoiceStudioApp.swift" "$STAGE/VoiceStudioApp.swift"
 download_repo_file "voice-studio/update-mac.command" "$STAGE/update-mac.command"
 download_repo_file "voice-studio/voice-studio-icon.png" "$STAGE/voice-studio-icon.png"
@@ -192,7 +197,7 @@ download_repo_file "scripts/voice-studio/validate-v2.py" "$STAGE/validate-v2.py"
 download_optional_repo_file "watermark-my-logo-full.png" "$STAGE/watermark-my-logo-full.png"
 download_optional_repo_file "app-icon-512.png" "$STAGE/app-icon-512.png"
 
-for required in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for required in local-engine.py speech_flow.py studio.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
     echo "FEHLER: Update-Datei fehlt oder ist leer: $required"
     exit 1
@@ -303,7 +308,7 @@ if ! /bin/bash -n "$STAGE/update-mac.command"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.9.64-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-2.9.65-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
@@ -311,11 +316,11 @@ fi
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP="$BACKUPS/$STAMP"
 mkdir -p "$BACKUP"
-for old in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for old in local-engine.py speech_flow.py studio.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
 done
 
-for fresh in local-engine.py speech_flow.py studio.html content-studio.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for fresh in local-engine.py speech_flow.py studio.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   mv "$STAGE/$fresh" "$TARGET/$fresh"
 done
 for optional in watermark-my-logo-full.png app-icon-512.png; do
@@ -323,7 +328,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
 done
 chmod +x "$TARGET/update-mac.command"
 
-echo "Voice Studio 2.9.64 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.9.65 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -401,7 +406,7 @@ engine_health_matches_release() {
   printf '%s' "$body" | /usr/bin/grep -Eq '"engine_version"[[:space:]]*:[[:space:]]*"2\.9\.64"'
 }
 
-# Warten, ob LaunchAgent EXAKT die installierte Engine 2.9.64 hochgebracht hat.
+# Warten, ob LaunchAgent EXAKT die installierte Engine 2.9.65 hochgebracht hat.
 ENGINE_OK=0
 for i in $(seq 1 20); do
   if engine_health_matches_release; then
@@ -452,7 +457,7 @@ if [ "$ENGINE_OK" -ne 1 ]; then
   exit 1
 fi
 
-echo "Serhat Engine 2.9.64 erreichbar: http://127.0.0.1:8787/health"
+echo "Serhat Engine 2.9.65 erreichbar: http://127.0.0.1:8787/health"
 
 # Native macOS-App wird zuerst vollständig in einem separaten Bundle gebaut.
 # Die bisher installierte App bleibt bis nach Build, plist-Lint und Codesign startbar.
@@ -517,7 +522,7 @@ VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
 URL="http://127.0.0.1:8787/studio/"
 HEALTH="http://127.0.0.1:8787/health"
-EXPECTED_ENGINE_VERSION="2.9.64"
+EXPECTED_ENGINE_VERSION="2.9.65"
 SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
 NATIVE="$SELF_DIR/DARVoiceStudioNative"
 LOG="$TARGET/app-launch.log"
@@ -627,8 +632,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.9.64</string>
-  <key>CFBundleShortVersionString</key><string>2.9.64</string>
+  <key>CFBundleVersion</key><string>2.9.65</string>
+  <key>CFBundleShortVersionString</key><string>2.9.65</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon.icns</string>
@@ -651,8 +656,8 @@ cat > "$PLIST" <<'PLIST'
 PLIST
 /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable $BUNDLE_EXECUTABLE" "$PLIST"
 if [ "$BUNDLE_EXECUTABLE" = "DARVoiceStudioNative" ]; then
-  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.64 · Native" "$PLIST" 2>/dev/null || \
-    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.64 · Native'" "$PLIST"
+  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.65 · Native" "$PLIST" 2>/dev/null || \
+    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.65 · Native'" "$PLIST"
 fi
 /usr/bin/plutil -lint "$PLIST" >/dev/null
 
@@ -707,7 +712,7 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.9.64 ist installiert."
+say_status "DĀR Voice Studio 2.9.65 ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
   "$APP/Contents/MacOS/$BUNDLE_EXECUTABLE" >/dev/null 2>&1 &
