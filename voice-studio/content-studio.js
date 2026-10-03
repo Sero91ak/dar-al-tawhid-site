@@ -395,6 +395,7 @@ async function loadSahabaPack(){
 function mount(){
   injectStyles();
   ensureProphetUi();
+  ensureSahabaUi();
   if(q("csMeta"))return;
   injectStyles();
   const top=document.querySelector(".topbar");
@@ -412,6 +413,7 @@ function mount(){
   renderStatus();
   refreshQa();
   loadLibrary();
+  loadSahabaPack();
   setTimeout(()=>window.setStudioPage?.(window.studioPage||"prophets"),0);
 }
 function bind(){
@@ -424,6 +426,12 @@ function bind(){
     switchKind("story");
     document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
     window.setStudioPage?.("prophets");
+  });
+  q("csSahabaTab")?.addEventListener("click",()=>{
+    switchKind("story");
+    document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
+    window.setStudioPage?.("sahaba");
+    if(!sahabaPack.length)loadSahabaPack();
   });
   q("csPronunciationTab")?.addEventListener("click",()=>window.setStudioPage?.("pronunciation"));
   q("csAlphabetTab")?.addEventListener("click",()=>window.setStudioPage?.("alphabet"));
