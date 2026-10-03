@@ -395,7 +395,7 @@ jobs:
 
           for name in ("kids/index.html","kids/start.html","kids/shell.html"):
               src=Path(name).read_text(encoding="utf-8")
-              ids=set(re.findall(r'kids-shell-v12-tab\d+',src))
+              ids=set(re.findall(r'kids-shell-v12-(?:tab|type|sahaba)\d+',src))
               if ids != {build}:
                   failures.append(name+" has inconsistent embedded build ids: "+repr(sorted(ids)))
 
