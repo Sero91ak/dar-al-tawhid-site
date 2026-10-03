@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1204",
-  "appBuildId": "app-shell-v1204",
-  "note": "v1204 · Sichtbarer Startseiten-Hintergrund wird jetzt per Home-Runtime direkt auf die echte Top- und Hauptfläche gelegt; nur bestehende Bibliotheks-/Studienbilder, keine neue Struktur, keine Tab-/Funktionsänderung",
-  "updatedAt": "2026-10-03T14:20:00+02:00"
+  "buildId": "app-shell-v1205",
+  "appBuildId": "app-shell-v1205",
+  "note": "v1205 · Home-Atmosphäre jetzt direkt in der Test-App-Shell geladen; Worker-Injektion korrigiert, da der Test-Shell kein geschlossenes </head> hatte. Vorhandene Bibliotheks-/Studienbilder sichtbar, Struktur und Funktionen unverändert.",
+  "updatedAt": "2026-10-03T14:27:00+02:00"
 }
