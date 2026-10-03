@@ -11,7 +11,7 @@
       '<img class="dar-library-brandbar__logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD Logo" decoding="sync">'+
       '<div class="dar-library-brandbar__copy">'+
         '<div class="dar-library-brandbar__title">DĀR AL TAWḤĪD</div>'+
-        '<div class="dar-library-brandbar__meta">Tawḥīd · Qurʾān · Sunnah · Āthār</div>'+
+        '<div class="dar-library-brandbar__meta">Tawḥīd · Qurʾān · Sunnah · Āthār</div><div class="dar-library-brandbar__sub">Wissen aus Qurʾān &amp; Sunnah</div>'+
       '</div>'+
     '</section>';
   }
