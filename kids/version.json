@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-type1067",
-  "label": "KIDS · V1.06.7",
-  "releasedAt": "2026-10-03T13:28:00.000Z",
-  "note": "V1.06.7: Globale Alters-Typografie repariert. Fehlende Alias-Variablen der V1.06.6 wurden ergänzt; Ṣaḥābah-/Mubaschschirūn-Karten, Profilfelder, Quellen, Hilfetexte und Controls folgen jetzt zuverlässig 4–5 / 6–8 / 9–10 mit lesbaren Mindestgrößen und größeren Touch-Zielen.",
+  "buildId": "kids-shell-v12-sahaba1068",
+  "label": "KIDS · V1.06.8",
+  "releasedAt": "2026-10-03T14:30:00.000Z",
+  "note": "V1.06.8: Geschichten erweitert um den eigenen Bereich der zehn al-ʿAšarah al-Mubaššarūn. Zehn quellengeprüfte Ṣaḥābah-Biographien mit drei Altersfassungen, direkten Ḥadīṯ-Nachweisen, Fuṣḥā-Ausspracheprofilen und Voice-Studio-Übergabe. Primärbeleg der Zehner-Überlieferung auf at-Tirmidhī 3748 verstärkt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1067",
+    "serviceWorkerCache": "v1068",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -65,15 +65,11 @@
     "alphabetFunctionalityChanged": false,
     "quranCinematicArtwork": true,
     "quranArtworkFormat": "local-jpeg",
-    "mubashshirunStories": "v4",
+    "mubashshirunStories": "v3-sourced-voice-ready",
     "mubashshirunOwnLibrary": true,
     "mubashshirunStoryCount": 10,
-    "mubashshirunAgeScripts": [
-      "4-5",
-      "6-8",
-      "9-10"
-    ],
-    "mubashshirunVoiceStudio": "dedicated-sahaba-tab-v2",
+    "mubashshirunAgeScripts": 30,
+    "mubashshirunVoiceStudio": true,
     "mubashshirunSourcePolicy": "quran-sahih-sunnah-no-legends",
     "mubashshirunArtworkCount": 10,
     "mubashshirunArtworkMode": "historical-scene-no-face-claim",
@@ -146,6 +142,9 @@
     "ageTypographyAlphabetOverrides": true,
     "ageTypographyAliasRepair": true,
     "mubashshirunTypographyAgeSynced": true,
-    "mubashshirunNoTinyText": true
+    "mubashshirunNoTinyText": true,
+    "mubashshirunOwnPage": true,
+    "mubashshirunCount": 10,
+    "mubashshirunFushaMasterEntries": 10
   }
 }
