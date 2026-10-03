@@ -1,0 +1,214 @@
+/* DAR Test · Tab-Bar Restore v1197
+   Purpose: restore the pre-library-redesign bottom-tab presentation and interaction.
+   Scope: test/staging only. No route, long-press, swipe or quick-access logic is changed.
+*/
+
+html body.has-bottom-nav #appChromeDock.app-chrome-dock{
+  display:contents!important;
+  position:static!important;
+  contain:none!important;
+  transform:none!important;
+  isolation:auto!important;
+  pointer-events:none!important;
+  margin:0!important;
+  padding:0!important;
+  width:auto!important;
+  max-width:none!important;
+}
+
+/* Restore the old floating glass outer capsule. */
+html[data-theme] body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav,
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav,
+html body.has-bottom-nav #appChromeDock #bottomNav.bottom-nav,
+html body.has-bottom-nav #bottomNav.bottom-nav{
+  position:fixed!important;
+  left:50%!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:max(12px,env(safe-area-inset-bottom,0px))!important;
+  transform:translate3d(-50%,0,0)!important;
+  -webkit-transform:translate3d(-50%,0,0)!important;
+  margin:0!important;
+
+  width:min(var(--dar-nav-width,51.25rem),calc(100vw - 2 * max(12px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px),2.4vw)))!important;
+  max-width:min(820px,calc(100vw - 2 * max(12px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px),2.4vw)))!important;
+  min-height:68px!important;
+  height:auto!important;
+  max-height:none!important;
+  padding:6px 6px!important;
+  gap:2px!important;
+
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:stretch!important;
+  justify-content:space-around!important;
+
+  border-radius:999px!important;
+  overflow:visible!important;
+  pointer-events:auto!important;
+  z-index:80!important;
+
+  background:var(--bottom-nav-fill,var(--bottom-nav-bg-glass,rgba(18,15,12,.32)))!important;
+  background-color:var(--bottom-nav-fill,var(--bottom-nav-bg-glass,rgba(18,15,12,.32)))!important;
+  background-image:none!important;
+  border:1px solid var(--bottom-nav-border,rgba(255,255,255,.18))!important;
+  box-shadow:var(--bottom-nav-shadow,0 12px 36px rgba(0,0,0,.22)),inset 0 1px 0 var(--bottom-nav-highlight,rgba(255,255,255,.18))!important;
+  -webkit-backdrop-filter:blur(var(--bottom-nav-blur,18px)) saturate(var(--bottom-nav-saturation,1))!important;
+  backdrop-filter:blur(var(--bottom-nav-blur,18px)) saturate(var(--bottom-nav-saturation,1))!important;
+
+  contain:none!important;
+  isolation:auto!important;
+  transition:
+    width .5s cubic-bezier(.22,1,.36,1),
+    max-width .5s cubic-bezier(.22,1,.36,1),
+    bottom .5s cubic-bezier(.22,1,.36,1)!important;
+}
+
+/* Old tab geometry: the active BUTTON itself is the oval, not an extra oversized overlay. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn{
+  position:relative!important;
+  isolation:isolate!important;
+  flex:1 1 20%!important;
+  width:20%!important;
+  min-width:0!important;
+  max-width:none!important;
+  min-height:56px!important;
+  height:auto!important;
+  margin:0!important;
+  padding:8px 6px!important;
+  gap:2px!important;
+
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+
+  border:0!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  color:var(--bottom-tab-inactive-text)!important;
+  text-shadow:none!important;
+  overflow:visible!important;
+  pointer-events:auto!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn::before{
+  content:none!important;
+  display:none!important;
+  opacity:0!important;
+}
+
+/* Keep the existing 3D tab artwork at the old stable size. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+  width:36px!important;
+  height:36px!important;
+  min-width:36px!important;
+  min-height:36px!important;
+  padding:3px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  display:grid!important;
+  place-items:center!important;
+  color:var(--bottom-tab-inactive-icon)!important;
+  transform:none!important;
+  filter:none!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon{
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  object-fit:contain!important;
+  transform:none!important;
+  filter:none!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon),
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon){
+  position:relative!important;
+  z-index:2!important;
+  margin:0!important;
+  max-width:100%!important;
+  color:inherit!important;
+  font-size:var(--dar-nav-label,11px)!important;
+  line-height:1!important;
+  font-weight:850!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  pointer-events:none!important;
+}
+
+/* Restore the selected oval / soft Plop exactly on the active tab. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(.active,.is-active,[aria-current="page"],.is-pressed,:active),
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(.active,.is-active,[aria-current="page"],.is-pressed,:active){
+  color:var(--bottom-tab-active-text)!important;
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb,var(--bottom-tab-active-bg) 92%,var(--bottom-tab-active-highlight) 8%),
+      color-mix(in srgb,var(--bottom-tab-active-bg) 72%,transparent)
+    )!important;
+  border:1px solid color-mix(in srgb,var(--bottom-tab-active-border) 86%,transparent)!important;
+  box-shadow:
+    0 5px 15px var(--bottom-tab-active-shadow),
+    inset 0 1px 0 var(--bottom-tab-active-highlight)!important;
+  border-radius:999px!important;
+}
+
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(.active,.is-active,[aria-current="page"],.is-pressed,:active) .nav-icon,
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:is(.active,.is-active,[aria-current="page"],.is-pressed,:active) .nav-icon{
+  color:var(--bottom-tab-active-icon)!important;
+}
+
+/* No sticky desktop-hover ghost on touch devices. */
+html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active):not(.is-active):not([aria-current="page"]):not(.is-pressed):not(:active),
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:hover:not(.active):not(.is-active):not([aria-current="page"]):not(.is-pressed):not(:active){
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Keep the pre-existing gentle plop. Long-press/quick-access JS stays untouched. */
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{
+  animation:darTabRestorePlop .4s cubic-bezier(.22,1,.36,1)!important;
+}
+@keyframes darTabRestorePlop{
+  0%{transform:translateY(0) scale(1)}
+  42%{transform:translateY(-2px) scale(1.025)}
+  100%{transform:translateY(0) scale(1)}
+}
+
+html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-pill,
+html body.has-bottom-nav #bottomNav.bottom-nav .dar-tab-plop-pill,
+html body.has-bottom-nav #bottomNav.bottom-nav .dar-tab-loupe-lens,
+#darTabPeek{
+  display:none!important;
+}
+
+@media(max-width:390px){
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav,
+  html body.has-bottom-nav #bottomNav.bottom-nav{
+    width:calc(100% - 28px)!important;
+    min-height:64px!important;
+  }
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn{
+    min-height:54px!important;
+    padding:7px 4px!important;
+  }
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon{
+    width:34px!important;height:34px!important;min-width:34px!important;min-height:34px!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.kid-pop{animation:none!important}
+}
