@@ -1,0 +1,71 @@
+/* DĀR AL TAWḤĪD Kids — al-ʿAšarah al-Mubaššarūn v1
+   Separate sourced Sahabah library. No portrait dependency. */
+#view-stories.ps-world-view{--mb-gold:#e8c56f;--mb-line:rgba(232,197,111,.24);--mb-deep:#061a28}
+.mb-entry{width:100%;min-height:154px;margin:14px 0 0;border:1px solid var(--mb-line);border-radius:30px;padding:0;background:
+  radial-gradient(circle at 82% 22%,rgba(232,197,111,.18),transparent 26%),
+  linear-gradient(145deg,#0b3143 0%,#082537 52%,#071c2b 100%);
+  color:#fff;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;text-align:left;overflow:hidden;
+  box-shadow:0 20px 54px rgba(0,0,0,.22);position:relative}
+.mb-entry:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.08),transparent 42%);pointer-events:none}
+.mb-entry-copy{padding:22px 6px 22px 22px;position:relative;z-index:1}
+.mb-entry-kicker{display:block;font-size:10px;font-weight:950;letter-spacing:.14em;color:#f1d58f;margin-bottom:8px}
+.mb-entry strong{display:block;font-size:clamp(24px,6vw,34px);line-height:1.02;letter-spacing:-.03em}
+.mb-entry-sub{display:block;margin-top:8px;font-size:13px;line-height:1.45;color:rgba(255,255,255,.74);font-weight:700}
+.mb-entry-badge{width:82px;height:82px;margin-right:20px;border-radius:26px;border:1px solid rgba(232,197,111,.34);
+  background:linear-gradient(145deg,rgba(232,197,111,.18),rgba(255,255,255,.04));display:grid;place-items:center;
+  color:#f4d98f;font-size:32px;font-weight:950;box-shadow:inset 0 0 28px rgba(232,197,111,.06)}
+.mb-library-page{position:fixed;z-index:120;inset:0;background:
+  radial-gradient(circle at 78% 8%,rgba(232,197,111,.10),transparent 25%),
+  linear-gradient(165deg,#061724,#0a2c3d 55%,#0b3442);color:#fff;display:none}
+.mb-library-page.open{display:block}
+html.mb-library-open,html.mb-library-open body{overflow:hidden!important;overscroll-behavior:none!important}
+.mb-library-nav{height:calc(66px + env(safe-area-inset-top));padding:calc(12px + env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 10px max(16px,env(safe-area-inset-left));
+  display:flex;align-items:center;gap:13px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(4,20,30,.84);backdrop-filter:blur(18px)}
+.mb-back{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.055);font-size:31px;line-height:1;color:#fff}
+.mb-nav-copy strong{display:block;font-size:18px}.mb-nav-copy span{display:block;margin-top:2px;color:rgba(255,255,255,.55);font-size:11px;font-weight:750}
+.mb-library-scroll{height:calc(100dvh - 66px - env(safe-area-inset-top));overflow:auto;-webkit-overflow-scrolling:touch;padding:18px max(16px,env(safe-area-inset-right)) calc(110px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));overscroll-behavior:contain}
+.mb-library-head{max-width:780px;margin:0 auto 16px;padding:18px 2px 8px}
+.mb-library-head small{font-size:10px;letter-spacing:.14em;color:#f1d58f;font-weight:950}
+.mb-library-head h2{font-size:clamp(30px,7vw,46px);letter-spacing:-.04em;margin:7px 0 6px}
+.mb-library-head p{margin:0;color:rgba(255,255,255,.68);font-size:13px;line-height:1.5;max-width:620px}
+.mb-modes{max-width:780px;margin:0 auto 15px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.mb-mode{min-height:46px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:rgba(255,255,255,.045);color:rgba(255,255,255,.72);font-weight:850;font-size:11px;padding:9px}
+.mb-mode.active{border-color:rgba(232,197,111,.36);background:rgba(232,197,111,.11);color:#f7dfa2}
+.mb-list{max-width:780px;margin:0 auto;display:grid;gap:12px}
+.mb-card{min-height:132px;border:1px solid rgba(255,255,255,.09);border-radius:26px;padding:16px 16px 16px 18px;color:#fff;
+  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.025));display:grid;grid-template-columns:48px minmax(0,1fr) 40px;align-items:center;gap:13px;text-align:left;position:relative;overflow:hidden}
+.mb-card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#f2d689,#b68a42)}
+.mb-card-num{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;border:1px solid rgba(232,197,111,.25);background:rgba(232,197,111,.08);color:#f2d58d;font-weight:950}
+.mb-card-meta{display:block;color:#e7c978;font-size:9px;letter-spacing:.12em;font-weight:950;margin-bottom:5px}
+.mb-card-title{display:block;font-size:22px;line-height:1.05;letter-spacing:-.025em;font-weight:950}
+.mb-card-ar{display:block;direction:rtl;text-align:left;font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;font-size:21px;margin-top:5px;color:rgba(255,255,255,.88)}
+.mb-card-sub{display:block;font-size:11px;color:rgba(255,255,255,.58);margin-top:7px;line-height:1.4}
+.mb-card-go{width:38px;height:38px;border-radius:50%;border:1px solid rgba(232,197,111,.25);display:grid;place-items:center;color:#f1d58d;font-size:24px}
+.mb-modal{position:fixed;z-index:140;inset:0;background:rgba(1,9,15,.78);display:none;align-items:flex-end}
+.mb-modal.open{display:flex}
+.mb-sheet{width:min(100%,840px);max-height:100dvh;height:100dvh;margin:0 auto;background:linear-gradient(180deg,#082335,#061a28);overflow:hidden;position:relative}
+.mb-detail-nav{height:calc(62px + env(safe-area-inset-top));padding:calc(10px + env(safe-area-inset-top)) 16px 8px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(5,22,32,.88);backdrop-filter:blur(18px)}
+.mb-close{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.055);color:#fff;font-size:31px}
+.mb-detail-nav-copy strong{display:block;font-size:15px}.mb-detail-nav-copy span{display:block;font-size:10px;color:rgba(255,255,255,.56);margin-top:2px}
+.mb-scroll{height:calc(100dvh - 62px - env(safe-area-inset-top));overflow:auto;-webkit-overflow-scrolling:touch;padding:0 0 calc(80px + env(safe-area-inset-bottom));overscroll-behavior:contain}
+.mb-hero{padding:24px 18px 20px;background:
+  radial-gradient(circle at 88% 22%,rgba(232,197,111,.17),transparent 28%),
+  linear-gradient(145deg,#0b3344,#082435 60%,#071c2a);border-bottom:1px solid rgba(255,255,255,.08)}
+.mb-hero-inner{max-width:760px;margin:auto}
+.mb-hero-kicker{font-size:9px;letter-spacing:.14em;font-weight:950;color:#edcf82}
+.mb-title{font-size:clamp(34px,8vw,54px);line-height:1.0;letter-spacing:-.045em;margin:8px 0 6px}
+.mb-ar{font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif;direction:rtl;text-align:left;font-size:clamp(25px,6vw,36px);line-height:1.4;color:#fff}
+.mb-summary{font-size:14px;line-height:1.55;color:rgba(255,255,255,.73);margin:10px 0}
+.mb-pills{display:flex;gap:7px;flex-wrap:wrap}.mb-pill{padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);font-size:9px;font-weight:850;color:rgba(255,255,255,.7)}
+.mb-body{max-width:760px;margin:auto;padding:16px 18px 30px}
+.mb-player{padding:13px;border-radius:20px;border:1px solid rgba(232,197,111,.16);background:rgba(232,197,111,.055);margin-bottom:14px}
+.mb-play{width:100%;min-height:48px;border:0;border-radius:15px;background:#e4c36f;color:#102432;font-weight:950}
+.mb-player-note{font-size:10px;line-height:1.45;color:rgba(255,255,255,.55);margin-top:8px}
+.mb-read p{font-size:16px;line-height:1.75;color:rgba(255,255,255,.91);margin:0 0 16px}
+.mb-sources{margin-top:20px;padding:15px;border-radius:19px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035)}
+.mb-sources>strong{font-size:9px;letter-spacing:.14em;color:#e7c978}.mb-sources div{margin-top:8px;font-size:12px;line-height:1.6;color:rgba(255,255,255,.68)}
+.mb-question{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+.mb-question h4{font-size:18px;margin:0 0 10px}.mb-answer{width:100%;min-height:54px;border-radius:16px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);color:#fff;text-align:left;padding:11px 12px;margin:6px 0;font-weight:800}
+.mb-answer.correct{background:rgba(78,184,126,.14);border-color:rgba(78,184,126,.36)}.mb-answer.wrong{background:rgba(213,86,86,.14);border-color:rgba(213,86,86,.34)}
+@media(min-width:720px){.mb-list{grid-template-columns:repeat(2,minmax(0,1fr))}.mb-card{min-height:154px}}
+@media(max-width:430px){.mb-entry{min-height:142px}.mb-entry-badge{width:68px;height:68px;margin-right:14px}.mb-entry strong{font-size:25px}.mb-card{grid-template-columns:42px minmax(0,1fr) 34px}.mb-card-title{font-size:20px}.mb-card-ar{font-size:19px}.mb-modes{gap:5px}.mb-mode{font-size:10px;padding:8px 5px}}
