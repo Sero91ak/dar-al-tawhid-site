@@ -654,10 +654,10 @@ body.studio-page-pronunciation .content-studio-nav .cs-flow,body.studio-page-pro
 body.studio-page-alphabet .content-studio-nav .cs-flow,body.studio-page-alphabet .content-studio-nav .cs-fast-actions,
 body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .content-studio-nav .cs-fast-actions{display:none!important}
 @media(min-width:800px){
-  body.studio-page-prophets,body.studio-page-content,body.studio-page-pronunciation,body.studio-page-alphabet,body.studio-page-system{overflow:hidden}
-  body.studio-page-prophets .shell,body.studio-page-content .shell{height:calc(100dvh - var(--safe-top) - var(--safe-bottom))}
-  body.studio-page-prophets #mainStudioWorkspace,body.studio-page-content #mainStudioWorkspace{overflow:hidden}
-  body.studio-page-prophets .editor-panel,body.studio-page-content .editor-panel{overflow:auto}
+  body.studio-page-prophets,body.studio-page-sahaba,body.studio-page-content,body.studio-page-pronunciation,body.studio-page-alphabet,body.studio-page-system{overflow:hidden}
+  body.studio-page-prophets .shell,body.studio-page-sahaba .shell,body.studio-page-content .shell{height:calc(100dvh - var(--safe-top) - var(--safe-bottom))}
+  body.studio-page-prophets #mainStudioWorkspace,body.studio-page-sahaba #mainStudioWorkspace,body.studio-page-content #mainStudioWorkspace{overflow:hidden}
+  body.studio-page-prophets .editor-panel,body.studio-page-sahaba .editor-panel,body.studio-page-content .editor-panel{overflow:auto}
 }
 @media(max-width:980px){
   .studio-focus-layout{grid-template-columns:1fr;min-height:auto}
@@ -2009,7 +2009,7 @@ function updateFreeVoiceCounter(){
 
 let studioPage="content";
 function setStudioPage(page){
-  const allowed=new Set(["prophets","content","pronunciation","alphabet","free","system"]);
+  const allowed=new Set(["prophets","sahaba","content","pronunciation","alphabet","free","system"]);
   page=allowed.has(page)?page:"content";
   studioPage=page;
   window.studioPage=page;
@@ -2017,7 +2017,7 @@ function setStudioPage(page){
 
   const main=$("#mainStudioWorkspace"),free=$("#freeVoiceWorkspace");
   const pronunciation=$("#pronunciationWorkspace"),alphabet=$("#alphabetWorkspace"),system=$("#systemWorkspace");
-  if(main)main.hidden=!(page==="prophets"||page==="content");
+  if(main)main.hidden=!(page==="prophets"||page==="sahaba"||page==="content");
   if(free)free.hidden=page!=="free";
   if(pronunciation)pronunciation.hidden=page!=="pronunciation";
   if(alphabet)alphabet.hidden=page!=="alphabet";
@@ -2031,10 +2031,10 @@ function setStudioPage(page){
   if(page!=="free")document.body.classList.add("studio-page-"+page);
 
   const map={
-    prophets:"#csProphetTab",pronunciation:"#csPronunciationTab",
+    prophets:"#csProphetTab",sahaba:"#csSahabaTab",pronunciation:"#csPronunciationTab",
     alphabet:"#csAlphabetTab",free:"#csFreeVoiceTab",system:"#csSystemTab"
   };
-  ["#csProphetTab","#csPronunciationTab","#csAlphabetTab","#csFreeVoiceTab","#csSystemTab"].forEach(sel=>{
+  ["#csProphetTab","#csSahabaTab","#csPronunciationTab","#csAlphabetTab","#csFreeVoiceTab","#csSystemTab"].forEach(sel=>{
     const el=$(sel);if(el)el.classList.toggle("active",map[page]===sel);
   });
   if(page!=="content")document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
