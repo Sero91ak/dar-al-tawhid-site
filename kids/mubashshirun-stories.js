@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 
-const DATA_URL="/kids/data/mubashshirun-stories.json";
+const DATA_URL="/kids/data/mubashshirun-stories.json";\nconst ART_ROOT="/kids/assets/sahaba-mubashshirun/";
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.mubashshirunStory.done.";
 let items=[],active=null,activeText="",playing=false,busy=false;
@@ -18,7 +18,7 @@ function durationLabel(t){
   const w=words(t),wpm=age()==="4–5"?78:(age()==="9–10"?96:88);
   return "ca. "+Math.max(4,Math.min(10,Math.round(w/wpm)))+" Min.";
 }
-function audioMeta(item){return item?.audio?.[ageKey()]||null}
+function audioMeta(item){return item?.audio?.[ageKey()]||null}\nfunction artUrl(item){return ART_ROOT+encodeURIComponent(item.id)+".jpg?v=3"}
 function done(id){try{return localStorage.getItem(DONE_PREFIX+id)==="1"}catch(_){return false}}
 function markDone(id){try{localStorage.setItem(DONE_PREFIX+id,"1")}catch(_){}renderCards()}
 function doneCount(){return items.reduce((n,x)=>n+(done(x.id)?1:0),0)}
@@ -177,6 +177,8 @@ function closeStory(){stopAudio();$("#msModal")?.classList.remove("open");unlock
 function renderActive(){
   if(!active)return;
   activeText=textFor(active);
+  const hero=$("#msDetailHero");if(hero)hero.setAttribute("data-ms-id",active.id);
+  const heroArt=$("#msHeroArt");if(heroArt){heroArt.classList.remove("broken");heroArt.onerror=()=>heroArt.classList.add("broken");heroArt.src=artUrl(active)}
   $("#msTitle").textContent=active.name;
   $("#msArabic").textContent=(active.nameAr||"")+" رضي الله عنه";
   $("#msSummary").textContent=active.summary||"";
