@@ -799,3 +799,272 @@ html.dar-home-v1194:is([data-theme="light"],[data-theme="soft"],[data-theme="eis
     padding:8px 2px!important;
   }
 }
+
+
+/* v1210 · HOME RECOMPOSITION + GLOBAL COMPACT FOOTER · TEST ONLY
+   - Qur'an resume sits after the Tawhid core CTA
+   - study scene is a masked page atmosphere, never a cut-in rectangle
+   - Hero uses content height instead of a large dead zone
+   - footers/socials stay compact on every normal Test-App route */
+
+/* 1 · Continuous study atmosphere: full-bleed pseudo layer with a soft lower fade. */
+html.dar-home-v1194 body.is-home-route #appView.view{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:visible!important;
+  background:transparent!important;
+  background-image:none!important;
+}
+html.dar-home-v1194 body.is-home-route #appView.view::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  top:-18px!important;
+  left:50%!important;
+  width:100vw!important;
+  height:clamp(690px,110vw,980px)!important;
+  transform:translateX(-50%)!important;
+  background:
+    linear-gradient(180deg,rgba(2,3,2,.72) 0%,rgba(2,3,2,.30) 13%,rgba(2,3,2,.18) 46%,rgba(2,3,2,.34) 70%,rgba(2,3,2,.92) 96%,rgba(2,3,2,1) 100%),
+    linear-gradient(90deg,rgba(2,3,2,.58) 0%,rgba(2,3,2,.20) 54%,rgba(2,3,2,.08) 100%),
+    url("/test/assets/home-v1194/study-runway.jpg?v=1210") 62% 32%/cover no-repeat!important;
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.90) 0%,#000 7%,#000 68%,rgba(0,0,0,.78) 82%,rgba(0,0,0,.28) 94%,transparent 100%)!important;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.90) 0%,#000 7%,#000 68%,rgba(0,0,0,.78) 82%,rgba(0,0,0,.28) 94%,transparent 100%)!important;
+}
+html.dar-home-v1194 body.is-home-route #appView.view > *{
+  position:relative!important;
+  z-index:1!important;
+}
+html.dar-home-v1194:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"]) body.is-home-route #appView.view::before{
+  opacity:.34!important;
+  filter:saturate(.58) sepia(.06) brightness(1.13)!important;
+  background:
+    linear-gradient(180deg,rgba(249,246,238,.58) 0%,rgba(249,246,238,.28) 18%,rgba(249,246,238,.20) 52%,rgba(249,246,238,.56) 80%,rgba(249,246,238,.94) 100%),
+    linear-gradient(90deg,rgba(249,246,238,.62) 0%,rgba(249,246,238,.26) 58%,rgba(249,246,238,.10) 100%),
+    url("/test/assets/home-v1194/study-runway.jpg?v=1210") 62% 32%/cover no-repeat!important;
+}
+
+/* 2 · Hero: content-driven height. The prayer capsule follows the content, not a fixed empty canvas. */
+html.dar-home-v1194 body.is-home-route .top-shell .header.theme-hero-surface{
+  height:auto!important;
+  min-height:0!important;
+  padding-bottom:132px!important;
+}
+html.dar-home-v1194 body.is-home-route #dtHero1194{
+  margin-top:24px!important;
+}
+html.dar-home-v1194 body.is-home-route .dt-hero-title{
+  margin-top:10px!important;
+}
+html.dar-home-v1194 body.is-home-route .dt-hero-lead{
+  margin-top:11px!important;
+  max-width:520px!important;
+}
+html.dar-home-v1194 body.is-home-route .dt-hero-search-slot{
+  margin-top:11px!important;
+}
+html.dar-home-v1194 body.is-home-route #headerPrayerStatus.header-prayer-hub{
+  bottom:10px!important;
+}
+
+/* 3 · Tawhid core becomes one coherent editorial block, no pasted-image boundary. */
+html.dar-home-v1194 body.is-home-route .home-line-tawhid{
+  margin:0!important;
+  padding:18px 0 12px!important;
+  border-top:0!important;
+  border-bottom:0!important;
+  background:transparent!important;
+  background-image:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-line-tawhid :is(h2,h3,p){
+  max-width:760px!important;
+}
+html.dar-home-v1194 body.is-home-route .home-line-tawhid .dt-core-link,
+html.dar-home-v1194 body.is-home-route .home-line-tawhid :is(a,button)[data-nav="topics"]{
+  margin-top:8px!important;
+}
+
+/* 4 · Qur'an continue: directly AFTER "Ausführlich mit Belegen", one refined line, not a capsule. */
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero.dt-quran-resume-after-core,
+html.dar-home-v1194 body.is-home-route #appView .home-v380-quran-hero.dt-quran-resume-after-core{
+  width:100%!important;
+  min-height:48px!important;
+  height:auto!important;
+  margin:0 0 16px!important;
+  padding:8px 1px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:10px!important;
+  overflow:visible!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--dt-accent) 38%,transparent)!important;
+  border-bottom:1px solid color-mix(in srgb,var(--dt-rule) 78%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__body{
+  width:100%!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.08fr) minmax(130px,.92fr)!important;
+  grid-template-rows:auto auto!important;
+  align-items:center!important;
+  column-gap:12px!important;
+  row-gap:0!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__title{
+  grid-column:1!important;
+  grid-row:1 / span 2!important;
+  margin:0!important;
+  font-size:clamp(15px,3.8vw,20px)!important;
+  line-height:1.05!important;
+  color:var(--dt-ink)!important;
+  -webkit-text-fill-color:var(--dt-ink)!important;
+  text-shadow:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__meta{
+  grid-column:2!important;
+  grid-row:1!important;
+  margin:0!important;
+  font-size:9.2px!important;
+  line-height:1.18!important;
+  color:var(--dt-ink)!important;
+  -webkit-text-fill-color:var(--dt-ink)!important;
+  text-shadow:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__when{
+  grid-column:2!important;
+  grid-row:2!important;
+  margin:1px 0 0!important;
+  font-size:8.4px!important;
+  line-height:1.16!important;
+  color:var(--dt-muted)!important;
+  -webkit-text-fill-color:var(--dt-muted)!important;
+  text-shadow:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__chevron{
+  display:none!important;
+}
+
+/* 5 · Native Home rows compacted slightly: clearer hierarchy, less duplicated visual weight. */
+html.dar-home-v1194 body.is-home-route .home-line-grid{
+  margin-top:0!important;
+}
+html.dar-home-v1194 body.is-home-route .home-line-row{
+  min-height:92px!important;
+  padding-top:12px!important;
+  padding-bottom:12px!important;
+}
+html.dar-home-v1194 body.is-home-route .home-line-row :is(h2,h3,h4,b,strong){
+  line-height:1.08!important;
+}
+html.dar-home-v1194 body.is-home-route .home-line-row p{
+  margin-top:3px!important;
+  line-height:1.28!important;
+}
+
+/* 6 · GLOBAL TEST-APP: remove duplicated bottom reserves and keep footer compact.
+   The fixed bottom tab bar remains untouched. */
+html[data-theme] body.has-bottom-nav:has(.footer){
+  padding-bottom:0!important;
+}
+html[data-theme] body.has-bottom-nav:has(.footer) #appView.view{
+  min-height:0!important;
+  height:auto!important;
+  margin-bottom:0!important;
+  padding-bottom:0!important;
+}
+html[data-theme] body.has-bottom-nav:has(.footer) .footer{
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:14px max(14px,env(safe-area-inset-left,0px)) calc(76px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-right,0px))!important;
+  text-align:center!important;
+}
+html[data-theme] body.has-bottom-nav:has(.footer) .footer-actions{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  width:min(100%,430px)!important;
+  max-width:430px!important;
+  margin:9px auto 0!important;
+}
+html[data-theme] body.has-bottom-nav:has(.footer) .footer-actions :is(
+  .footer-action-btn,.footer-social-link,a,button
+){
+  flex:1 1 0!important;
+  min-width:0!important;
+  max-width:138px!important;
+  min-height:34px!important;
+  margin:0!important;
+  padding:6px 7px!important;
+  font-size:clamp(9px,2.35vw,11px)!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+html[data-theme] body.has-bottom-nav:has(.footer) #footerAppSave,
+html[data-theme] body.has-bottom-nav:has(.footer) .footer-app-save,
+html[data-theme] body.has-bottom-nav:has(.footer) .footer-action-save{
+  display:none!important;
+  visibility:hidden!important;
+  width:0!important;
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.has-bottom-nav:has(.footer) .footer .signature{
+  margin:9px 0 0!important;
+  line-height:1!important;
+}
+html[data-theme] body.has-bottom-nav:has(.footer) .footer strong{
+  margin-bottom:4px!important;
+}
+html[data-theme] body.has-bottom-nav:has(.footer) .footer > :first-child{
+  margin-top:0!important;
+}
+html[data-theme] body.has-bottom-nav:has(.footer) .footer > :last-child{
+  margin-bottom:0!important;
+}
+
+@media(max-width:430px){
+  html.dar-home-v1194 body.is-home-route .top-shell .header.theme-hero-surface{
+    height:auto!important;
+    min-height:0!important;
+    padding-bottom:128px!important;
+  }
+  html.dar-home-v1194 body.is-home-route #dtHero1194{
+    margin-top:20px!important;
+  }
+  html.dar-home-v1194 body.is-home-route #appView.view::before{
+    top:-12px!important;
+    height:760px!important;
+    background-position:center,center,66% 28%!important;
+  }
+  html.dar-home-v1194 body.is-home-route .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__body{
+    grid-template-columns:minmax(0,1fr) minmax(112px,.86fr)!important;
+    column-gap:9px!important;
+  }
+  html[data-theme] body.has-bottom-nav:has(.footer) .footer{
+    padding-top:11px!important;
+    padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))!important;
+  }
+  html[data-theme] body.has-bottom-nav:has(.footer) .footer-actions{
+    gap:5px!important;
+  }
+  html[data-theme] body.has-bottom-nav:has(.footer) .footer-actions :is(.footer-action-btn,.footer-social-link,a,button){
+    min-height:32px!important;
+    padding:5px 5px!important;
+    font-size:9px!important;
+  }
+}
