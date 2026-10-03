@@ -194,7 +194,14 @@ function renderActive(){
   $("#msArabic").textContent=(active.nameAr||"")+" رضي الله عنه";
   $("#msSummary").textContent=active.summary||"";
   $("#msMeta").innerHTML='<span>'+durationLabel(active,activeText)+'</span><span>Alter '+esc(age())+'</span><span>Qurʾān + Sunnah</span>';
-  $("#msVisualDisclaimer").textContent=[active.visualDisclaimer||"Szenische historische Illustration; kein Anspruch auf das tatsächliche Aussehen des Ṣaḥābī.",active.visualBasis||""].filter(Boolean).join(" ");
+  {
+    const vd=$("#msVisualDisclaimer");
+    if(vd){
+      if(age()==="4–5")vd.textContent="Das Bild ist nur eine Lernszene. Wir wissen nicht genau, wie dieser Ṣaḥābī aussah oder welche Kleidung er genau trug.";
+      else if(age()==="6–8")vd.textContent="Historische Lernszene: Aussehen und persönliche Kleidung des Ṣaḥābī werden nicht als sicher behauptet.";
+      else vd.textContent=[active.visualDisclaimer||"Szenische historische Illustration; kein Anspruch auf das tatsächliche Aussehen des Ṣaḥābī.",active.visualBasis||""].filter(Boolean).join(" ");
+    }
+  }
   $("#msTrait").textContent=active.trait||"";
   $("#msLife").textContent=active.lifeContext||active.summary||"";
   $("#msWitness").textContent=active.witnessContext||"Die verwendeten Belege stehen direkt unter der Geschichte.";
