@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1069",
-  "label": "KIDS · V1.06.9",
-  "releasedAt": "2026-10-03T14:38:00.000Z",
-  "note": "V1.06.9: Mubaschschirūn-Bereich vollständig quellen- und Voice-Studio-synchronisiert. Zehn eigene Ṣaḥābah-Geschichten, drei Altersfassungen, direkte Ḥadīṯ-Nachweise, historisch nur angenäherte Bildkleidung mit offengelegter Sunnah-Bildgrundlage und automatischer Serhat-Voice-Übernahme nach Aussprachebestätigung.",
+  "buildId": "kids-shell-v12-sahaba1070",
+  "label": "KIDS · V1.07.0",
+  "releasedAt": "2026-10-03T14:50:00.000Z",
+  "note": "V1.07.0: Mubaschschirūn-Bereich finalisiert: zehn eigene Ṣaḥābah-Geschichten, drei altersgerechte Fassungen, direkte authentische Nachweise, altersgerechte Hinweise zu historischen Illustrationen und vollständige Serhat-Voice-Studio-Übergabe. Keine individuelle Kleidung oder Porträtähnlichkeit wird ohne sicheren Einzelbeleg behauptet.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1069",
+    "serviceWorkerCache": "v1070",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -81,7 +81,7 @@
     "mubashshirunProfilePanels": true,
     "mubashshirunDirectHadithLinks": true,
     "mubashshirunStoryUi": "spacious-scene-cards-v3",
-    "mubashshirunBundleVersion": 5,
+    "mubashshirunBundleVersion": 6,
     "mubashshirunDataVersion": 4,
     "mubashshirunAudioPublishPipeline": true,
     "mubashshirunFuṣḥāReview": true,
@@ -148,6 +148,8 @@
     "mubashshirunFushaMasterEntries": 10,
     "mubashshirunVisualEvidence": "Tirmidhi 1762 + Abu Dawud 4061; no individual wardrobe claim",
     "mubashshirunVoiceStudioVersion": "2.9.66",
-    "mubashshirunAutoPublishAfterPronunciationConfirm": true
+    "mubashshirunAutoPublishAfterPronunciationConfirm": true,
+    "mubashshirunAgeAwareVisualDisclaimer": true,
+    "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03"
   }
 }
