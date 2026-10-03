@@ -52,7 +52,9 @@
 
   function mark(){
     ensureAreaBrandbar();
-    ensureHomeRecommendation();
+    // Home v1200: no second recommendation layer on Start.
+    // Keep the existing native recommendation/content flow authoritative.
+    document.querySelectorAll('[data-dar-library-recommend="1"]').forEach(function(el){el.remove()});
   }
 
   function schedule(){
