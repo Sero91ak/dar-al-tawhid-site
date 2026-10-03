@@ -1,8 +1,8 @@
 {
   "buildId": "kids-shell-v12-mub1062",
   "label": "KIDS · V1.06.2",
-  "releasedAt": "2026-10-03T12:45:00.000Z",
-  "note": "V1.06.2: Der Geschichten-Bereich enthält nun einen eigenständigen Bereich für die zehn al-ʿAšarah al-Mubaššarūn mit zehn altersgerechten, quellengeprüften Ṣaḥābah-Geschichten, eigenständigen Szenenbildern, Profil- und Quellenansicht sowie direkter Vorbereitung im Voice Studio mit Fuṣḥā-Prüfung.",
+  "releasedAt": "2026-10-03T13:18:00.000Z",
+  "note": "V1.06.2: Die zehn al-ʿAšarah al-Mubaššarūn sind als eigener Geschichten-Bereich vollständig eingebunden: 10 quellengeprüfte Ṣaḥābah-Geschichten, drei Altersfassungen, großzügige Szenenkarten, Quellen/Quiz, eigener Voice-Studio-Bereich und lokale Fuṣḥā-Prüfung.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -65,7 +65,7 @@
     "alphabetFunctionalityChanged": false,
     "quranCinematicArtwork": true,
     "quranArtworkFormat": "local-jpeg",
-    "mubashshirunStories": "v2",
+    "mubashshirunStories": "v3",
     "mubashshirunOwnLibrary": true,
     "mubashshirunStoryCount": 10,
     "mubashshirunAgeScripts": [
@@ -73,7 +73,7 @@
       "6-8",
       "9-10"
     ],
-    "mubashshirunVoiceStudio": "dedicated-tab-v2",
+    "mubashshirunVoiceStudio": "dedicated-sahaba-tab-v3",
     "mubashshirunSourcePolicy": "quran-sahih-sunnah-no-legends",
     "mubashshirunArtworkCount": 10,
     "mubashshirunArtworkMode": "historical-scene-no-face-claim",
@@ -83,6 +83,7 @@
       "9-10": "6–8 min"
     },
     "mubashshirunProfilePanels": true,
-    "mubashshirunDirectHadithLinks": true
+    "mubashshirunDirectHadithLinks": true,
+    "mubashshirunStoryUi": "spacious-scene-cards-v3"
   }
 }
