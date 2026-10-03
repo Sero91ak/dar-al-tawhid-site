@@ -1,7 +1,7 @@
 {
   "version": "2.9.65",
-  "updatedAt": "2026-10-03T14:10:00+02:00",
-  "deployTrigger": "voice-studio-2.9.65-mubashshirun-story-pack",
+  "updatedAt": "2026-10-03T14:40:00+02:00",
+  "deployTrigger": "voice-studio-2.9.65-mubashshirun-v3-fusha-publish",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v37",
@@ -178,7 +178,9 @@
       "al-Ḥudaybiyah"
     ],
     "germanPossessiveKnownNameHandling": true,
-    "khadijahHonorific": "radiyallahu_anha"
+    "khadijahHonorific": "radiyallahu_anha",
+    "mubashshirunFushaMasterEntries": 10,
+    "mubashshirunPrimaryHadith": "Jāmiʿ at-Tirmidhī 3748"
   },
   "releaseSafety": {
     "stagedInstaller": true,
@@ -1062,15 +1064,27 @@
   },
   "mubashshirunStories": {
     "enabled": true,
+    "version": 3,
     "count": 10,
     "ages": [
       "4-5",
       "6-8",
       "9-10"
     ],
+    "preparedScripts": 30,
     "source": "/kids/data/mubashshirun-stories.json",
+    "localLibraryEndpoint": "/mubashshirun/library",
+    "publishEndpoint": "/mubashshirun/publish",
     "directEditorLoad": true,
     "directGenerateButton": true,
-    "pronunciationReview": true
+    "directPublishAfterHumanQa": true,
+    "pronunciationReview": true,
+    "fushaMasterEntries": 10,
+    "requiredHonorific": "raḍiya llāhu ʿanhu",
+    "ownerVoice": "Serhat Abu Malik",
+    "prosody": "kids_story",
+    "output": "kids/assets/mubashshirun-story-audio/<sahabi>/<age>.m4a",
+    "systemVoiceFallback": false,
+    "sourcePolicy": "Qurʾān general praise separated from individual authentic Sunnah; no invented dialogue or legends"
   }
 }
