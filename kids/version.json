@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1079",
-  "label": "KIDS · V1.07.5",
-  "releasedAt": "2026-10-03T21:00:00.000Z",
-  "note": "V1.07.5: Startseiten-Auswahl nicht mehr volloval. Karten wieder mit moderaten Rundungen wie die übrigen Kinderbereiche; kleine Smartphones 27px, Smartphones 31px, Tablets 34px.",
+  "buildId": "kids-shell-v12-sahaba1080",
+  "label": "KIDS · V1.07.6",
+  "releasedAt": "2026-10-03T21:12:00.000Z",
+  "note": "V1.07.6: Geschichten-Seite startet jetzt mit einem vollbreiten, nicht eingerahmten Hero statt eines separaten Kopf-Kastens. Neuer thematischer Nacht-/Erzählhintergrund und responsive Typografie für Smartphone und iPad.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1079",
+    "serviceWorkerCache": "v1080",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -157,6 +157,7 @@
     "mubashshirunCardFocalCentering": "subject-aware-responsive-v1",
     "homeChoices": "oval-capsule-restored",
     "homeChoiceLayoutVersion": "v1078",
-    "homeChoiceCards": "rounded-cards-v1079"
+    "homeChoiceCards": "rounded-cards-v1079",
+    "storiesPageHero": "edge-to-edge-adobe-v1080"
   }
 }
