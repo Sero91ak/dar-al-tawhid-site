@@ -11,7 +11,7 @@
       '<img class="dar-library-brandbar__logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD Logo" decoding="sync">'+
       '<div class="dar-library-brandbar__copy">'+
         '<div class="dar-library-brandbar__title">DĀR AL TAWḤĪD</div>'+
-        '<div class="dar-library-brandbar__meta">Tawḥīd · Qurʾān · Sunnah · Āthār</div><div class="dar-library-brandbar__sub">Wissen aus Qurʾān &amp; Sunnah</div>'+
+        '<div class="dar-library-brandbar__meta dar-global-source-line">BEITRÄGE NACH QURʾĀN, SUNNAH &amp; ĀTHĀR</div><div class="dar-library-brandbar__sub">Wissen aus Qurʾān &amp; Sunnah</div>'+
       '</div>'+
     '</section>';
   }
@@ -50,8 +50,17 @@
     }catch(e){}
   }
 
+  function syncGlobalSourceLine(){
+    var text="BEITRÄGE NACH QURʾĀN, SUNNAH & ĀTHĀR";
+    document.querySelectorAll(".brand-kicker-row small,.dar-library-brandbar__meta").forEach(function(el){
+      if(el.textContent!==text)el.textContent=text;
+      el.classList.add("dar-global-source-line");
+    });
+  }
+
   function mark(){
     ensureAreaBrandbar();
+    syncGlobalSourceLine();
     // Home v1200: no second recommendation layer on Start.
     // Keep the existing native recommendation/content flow authoritative.
     document.querySelectorAll('[data-dar-library-recommend="1"]').forEach(function(el){el.remove()});
