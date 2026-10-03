@@ -2726,7 +2726,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07.3</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.07.4</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3180,7 +3180,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-sahaba1077";
+const KIDS_BUILD_ID="kids-shell-v12-sahaba1078";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6625,7 +6625,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1077",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1078",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
@@ -7463,46 +7463,90 @@ html.kids-ios-app .kids-update-layer{display:none!important}
 }
 /* KIDS_ALPHABET_SPACIOUS_V1057_END */
 
-/* KIDS_HOME_OVAL_CAPSULE_RESTORE_V1074 */
+/* KIDS_HOME_OVAL_CAPSULE_LOCK_V1078
+   Startbereich wieder als echte ovale Kapseln, nicht als Kasten-Karten. */
 #view-today .big-choice-grid{
+  display:grid!important;
+  grid-template-columns:1fr!important;
   gap:14px!important;
 }
 #view-today .choice{
+  width:100%!important;
+  min-height:144px!important;
+  height:auto!important;
+  display:grid!important;
+  grid-template-columns:58px minmax(0,1fr) 42px!important;
+  grid-template-rows:auto auto!important;
+  column-gap:14px!important;
+  row-gap:4px!important;
+  align-items:center!important;
+  padding:18px 22px 18px 26px!important;
   border-radius:999px!important;
-  min-height:clamp(138px,22vw,164px)!important;
-  padding:18px 28px 16px 34px!important;
-  border:1px solid rgba(255,255,255,.10)!important;
-  box-shadow:0 16px 34px rgba(0,0,0,.16)!important;
+  clip-path:inset(0 round 999px)!important;
   overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.13)!important;
+  box-shadow:0 16px 34px rgba(0,0,0,.16)!important;
+}
+#view-today .choice::before,
+#view-today .choice::after{
+  border-radius:inherit!important;
 }
 #view-today .choice .icon{
-  width:48px!important;
-  height:48px!important;
-  margin:0 0 10px!important;
+  grid-column:1!important;
+  grid-row:1 / span 2!important;
+  align-self:center!important;
+  justify-self:center!important;
+  width:52px!important;
+  height:52px!important;
+  margin:0!important;
 }
-#view-today .choice strong,
+#view-today .choice strong{
+  grid-column:2!important;
+  grid-row:1!important;
+  align-self:end!important;
+  min-width:0!important;
+  max-width:100%!important;
+  padding:0!important;
+  margin:0!important;
+  font-size:clamp(22px,5.6vw,29px)!important;
+  line-height:1.05!important;
+  overflow-wrap:anywhere!important;
+}
 #view-today .choice small{
-  max-width:78%!important;
-  padding-right:8px!important;
+  grid-column:2!important;
+  grid-row:2!important;
+  align-self:start!important;
+  min-width:0!important;
+  max-width:100%!important;
+  padding:0!important;
+  margin:2px 0 0!important;
+  font-size:clamp(12px,3.25vw,15px)!important;
+  line-height:1.22!important;
+  overflow-wrap:anywhere!important;
 }
 #view-today .choice .arrow{
-  width:38px!important;
-  height:38px!important;
-  margin-right:2px!important;
+  position:static!important;
+  grid-column:3!important;
+  grid-row:1 / span 2!important;
+  align-self:center!important;
+  justify-self:end!important;
+  width:40px!important;
+  height:40px!important;
+  margin:0!important;
+  border-radius:50%!important;
 }
 @media(max-width:380px){
   #view-today .big-choice-grid{gap:12px!important}
   #view-today .choice{
-    min-height:138px!important;
-    padding:16px 24px 14px 28px!important;
+    min-height:132px!important;
+    grid-template-columns:50px minmax(0,1fr) 36px!important;
+    column-gap:10px!important;
+    padding:15px 18px 15px 20px!important;
   }
-  #view-today .choice .icon{
-    width:44px!important;
-    height:44px!important;
-    margin-bottom:9px!important;
-  }
-  #view-today .choice strong,
-  #view-today .choice small{max-width:76%!important}
+  #view-today .choice .icon{width:46px!important;height:46px!important}
+  #view-today .choice strong{font-size:clamp(20px,5.8vw,24px)!important}
+  #view-today .choice small{font-size:12px!important}
+  #view-today .choice .arrow{width:36px!important;height:36px!important}
 }
 @media(min-width:700px){
   #view-today .big-choice-grid{
@@ -7510,23 +7554,23 @@ html.kids-ios-app .kids-update-layer{display:none!important}
     gap:16px!important;
   }
   #view-today .choice{
-    min-height:176px!important;
-    padding:22px 30px 20px 36px!important;
+    min-height:158px!important;
+    grid-template-columns:62px minmax(0,1fr) 42px!important;
+    padding:20px 24px 20px 28px!important;
   }
-  #view-today .choice .icon{
-    width:52px!important;
-    height:52px!important;
-    margin-bottom:12px!important;
-  }
+  #view-today .choice .icon{width:56px!important;height:56px!important}
+  #view-today .choice strong{font-size:clamp(24px,3.2vw,30px)!important}
+  #view-today .choice small{font-size:14px!important}
 }
 @media(min-width:1100px){
   #view-today .big-choice-grid{
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
-    max-width:980px;
-    margin-left:auto;
-    margin-right:auto;
+    max-width:980px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
   }
 }
+
 </style>
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=4">
 <script src="/kids/prophet-stories.js?v=23"></script>
