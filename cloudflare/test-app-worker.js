@@ -159,7 +159,8 @@ async function gradeKidsRecitation(request, env) {
 }
 
 
-const DAR_TEST_HOME_V1193_CSS = "/test/assets/dar-home-library-v1193.css?v=1193";\nconst DAR_TEST_HOME_V1193_JS = "/test/assets/dar-home-library-v1193.js?v=1193";
+const DAR_TEST_HOME_V1193_CSS = "/test/assets/dar-home-library-v1193.css?v=1193";
+const DAR_TEST_HOME_V1193_JS = "/test/assets/dar-home-library-v1193.js?v=1193";
 
 async function finalizeDarTestHomeV1193(asset) {
   const type = String(asset && asset.headers && asset.headers.get("content-type") || "");
