@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "updatedAt": "2026-10-03T14:15:00.000Z",
+  "updatedAt": "2026-10-03T14:22:00.000Z",
   "title": "Die zehn al-Mubaššarūn",
   "subtitle": "Die zehn Gefährten, denen das Paradies angekündigt wurde",
   "policy": {
@@ -92,15 +92,17 @@
       "pronunciationTerms": [
         {
           "canonical": "Abū Bakr aṣ-Ṣiddīq",
-          "ttsText": "أبو بكر الصدّيق",
+          "ttsText": "أَبُو بَكْر الصِّدِّيق",
           "ttsLanguage": "ar",
-          "status": "review-required"
+          "status": "source-verified-text-audio-review",
+          "voiceLock": "REVIEW"
         },
         {
           "canonical": "raḍiya llāhu ʿanhu",
-          "ttsText": "رَضِيَ اللَّهُ عَنْهُ",
+          "ttsText": "رَضِيَ اللهُ عَنْهُ",
           "ttsLanguage": "ar",
-          "status": "verified-text"
+          "status": "verified-text",
+          "voiceLock": "REVIEW"
         }
       ],
       "voiceProduction": {
@@ -124,7 +126,9 @@
             "wordCount": 671,
             "estimatedMinutes": 7.9
           }
-        }
+        },
+        "fushaMasterEntry": true,
+        "pronunciationPolicy": "Arabic name + honorific are segmented and reviewed before publish."
       },
       "lifeContext": "Abū Bakr war nicht nur Begleiter auf der Hiǧrah. Nach dem Tod des Propheten ﷺ wurde er der erste Kalif der Muslime. Damit trug er Verantwortung in einer Zeit, in der viele Menschen erschüttert waren. Seine Aufgabe war, die Gemeinschaft an Qurʾān und Sunnah festzuhalten und nicht zuzulassen, dass der Tod des Propheten ﷺ die Religion in eine andere Richtung verändert.",
       "cover": "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg?v=2",
@@ -215,15 +219,17 @@
       "pronunciationTerms": [
         {
           "canonical": "ʿUmar ibn al-Ḫaṭṭāb",
-          "ttsText": "عمر بن الخطاب",
+          "ttsText": "عُمَر بْن الْخَطَّاب",
           "ttsLanguage": "ar",
-          "status": "review-required"
+          "status": "source-verified-text-audio-review",
+          "voiceLock": "REVIEW"
         },
         {
           "canonical": "raḍiya llāhu ʿanhu",
-          "ttsText": "رَضِيَ اللَّهُ عَنْهُ",
+          "ttsText": "رَضِيَ اللهُ عَنْهُ",
           "ttsLanguage": "ar",
-          "status": "verified-text"
+          "status": "verified-text",
+          "voiceLock": "REVIEW"
         }
       ],
       "voiceProduction": {
@@ -247,7 +253,9 @@
             "wordCount": 607,
             "estimatedMinutes": 7.1
           }
-        }
+        },
+        "fushaMasterEntry": true,
+        "pronunciationPolicy": "Arabic name + honorific are segmented and reviewed before publish."
       },
       "lifeContext": "ʿUmar wurde nach Abū Bakr der zweite Kalif. Er musste Entscheidungen für eine schnell wachsende Gemeinschaft treffen. Für Kinder ist dabei wichtiger als einzelne berühmte Anekdoten: Er war ein Gefährte, der Stärke, Entschlossenheit und Verantwortung miteinander verbinden musste. Der Maßstab blieb Qurʾān und Sunnah, nicht persönliche Laune.",
       "cover": "/kids/assets/sahaba-mubashshirun/umar.jpg?v=2",
@@ -338,15 +346,17 @@
       "pronunciationTerms": [
         {
           "canonical": "ʿUṯmān ibn ʿAffān",
-          "ttsText": "عثمان بن عفان",
+          "ttsText": "عُثْمَان بْن عَفَّان",
           "ttsLanguage": "ar",
-          "status": "review-required"
+          "status": "source-verified-text-audio-review",
+          "voiceLock": "REVIEW"
         },
         {
           "canonical": "raḍiya llāhu ʿanhu",
-          "ttsText": "رَضِيَ اللَّهُ عَنْهُ",
+          "ttsText": "رَضِيَ اللهُ عَنْهُ",
           "ttsLanguage": "ar",
-          "status": "verified-text"
+          "status": "verified-text",
+          "voiceLock": "REVIEW"
         }
       ],
       "voiceProduction": {
@@ -370,7 +380,9 @@
             "wordCount": 564,
             "estimatedMinutes": 6.6
           }
-        }
+        },
+        "fushaMasterEntry": true,
+        "pronunciationPolicy": "Arabic name + honorific are segmented and reviewed before publish."
       },
       "lifeContext": "ʿUṯmān wurde später der dritte Kalif. In seiner Regierungszeit entstand eine große Aufgabe rund um die schriftliche Weitergabe des Qurʾān: Als unterschiedliche Lesesituationen Streit auszulösen drohten, ließ er auf Grundlage der vorhandenen Ṣuḥuf verbindliche Muṣḥaf-Abschriften erstellen und in die Regionen schicken. Ṣaḥīḥ al-Buḫārī überliefert diese Arbeit ausführlich.",
       "cover": "/kids/assets/sahaba-mubashshirun/uthman.jpg?v=2",
@@ -461,15 +473,17 @@
       "pronunciationTerms": [
         {
           "canonical": "ʿAlī ibn Abī Ṭālib",
-          "ttsText": "علي بن أبي طالب",
+          "ttsText": "عَلِيّ بْن أَبِي طَالِب",
           "ttsLanguage": "ar",
-          "status": "review-required"
+          "status": "source-verified-text-audio-review",
+          "voiceLock": "REVIEW"
         },
         {
           "canonical": "raḍiya llāhu ʿanhu",
-          "ttsText": "رَضِيَ اللَّهُ عَنْهُ",
+          "ttsText": "رَضِيَ اللهُ عَنْهُ",
           "ttsLanguage": "ar",
-          "status": "verified-text"
+          "status": "verified-text",
+          "voiceLock": "REVIEW"
         }
       ],
       "voiceProduction": {
@@ -493,7 +507,9 @@
             "wordCount": 575,
             "estimatedMinutes": 6.8
           }
-        }
+        },
+        "fushaMasterEntry": true,
+        "pronunciationPolicy": "Arabic name + honorific are segmented and reviewed before publish."
       },
       "lifeContext": "ʿAlī war ein naher Verwandter des Propheten ﷺ und lebte lange in seiner Nähe. Später wurde er der vierte Kalif. Seine Geschichte enthält viele schwierige Ereignisse, über die später sehr viel erzählt und gestritten wurde. Für die Kinder-App bleiben wir bei klaren, frühen Belegen und machen aus späteren Übertreibungen keine Grundlage.",
       "cover": "/kids/assets/sahaba-mubashshirun/ali.jpg?v=2",
@@ -587,15 +603,17 @@
       "pronunciationTerms": [
         {
           "canonical": "Ṭalḥah ibn ʿUbaydillāh",
-          "ttsText": "طلحة بن عبيد الله",
+          "ttsText": "طَلْحَة بْن عُبَيْدِ الله",
           "ttsLanguage": "ar",
-          "status": "review-required"
+          "status": "source-verified-text-audio-review",
+          "voiceLock": "REVIEW"
         },
         {
           "canonical": "raḍiya llāhu ʿanhu",
-          "ttsText": "رَضِيَ اللَّهُ عَنْهُ",
+          "ttsText": "رَضِيَ اللهُ عَنْهُ",
           "ttsLanguage": "ar",
-          "status": "verified-text"
+          "status": "verified-text",
+          "voiceLock": "REVIEW"
         }
       ],
       "voiceProduction": {
@@ -619,7 +637,9 @@
             "wordCount": 556,
             "estimatedMinutes": 6.5
           }
-        }
+        },
+        "fushaMasterEntry": true,
+        "pronunciationPolicy": "Arabic name + honorific are segmented and reviewed before publish."
       },
       "lifeContext": "Ṭalḥahs Leben zeigt, dass ein Gefährte nicht nur durch Reden bekannt wurde. Bei Uḥud befand sich die muslimische Gemeinschaft in einer gefährlichen Lage. Der sichere Kern der Überlieferung ist einfach und stark: Ṭalḥah schützte den Propheten ﷺ mit seiner Hand und trug davon eine bleibende Verletzung.",
       "cover": "/kids/assets/sahaba-mubashshirun/talha.jpg?v=2",
@@ -710,15 +730,17 @@
       "pronunciationTerms": [
         {
           "canonical": "az-Zubayr ibn al-ʿAwwām",
-          "ttsText": "الزبير بن العوام",
+          "ttsText": "الزُّبَيْر بْن الْعَوَّام",
           "ttsLanguage": "ar",
-          "status": "review-required"
+          "status": "source-verified-text-audio-review",
+          "voiceLock": "REVIEW"
         },
         {
           "canonical": "raḍiya llāhu ʿanhu",
-          "ttsText": "رَضِيَ اللَّهُ عَنْهُ",
+          "ttsText": "رَضِيَ اللهُ عَنْهُ",
           "ttsLanguage": "ar",
-          "status": "verified-text"
+          "status": "verified-text",
+          "voiceLock": "REVIEW"
         }
       ],
       "voiceProduction": {
@@ -742,7 +764,9 @@
             "wordCount": 528,
             "estimatedMinutes": 6.2
           }
-        }
+        },
+        "fushaMasterEntry": true,
+        "pronunciationPolicy": "Arabic name + honorific are segmented and reviewed before publish."
       },
       "lifeContext": "az-Zubayr gehörte zu den frühen Muslimen. In der Grabenschlacht übernahm er wiederholt eine Aufgabe, die nicht einfach nur körperlichen Mut verlangte: Informationen über den Gegner zu beschaffen. Wer so eine Aufgabe übernimmt, muss aufmerksam, zuverlässig und bereit sein, das Ergebnis korrekt zurückzubringen.",
       "cover": "/kids/assets/sahaba-mubashshirun/zubayr.jpg?v=2",
@@ -837,15 +861,17 @@
       "pronunciationTerms": [
         {
           "canonical": "ʿAbd ar-Raḥmān ibn ʿAwf",
-          "ttsText": "عبد الرحمن بن عوف",
+          "ttsText": "عَبْدُ الرَّحْمَن بْن عَوْف",
           "ttsLanguage": "ar",
-          "status": "review-required"
+          "status": "source-verified-text-audio-review",
+          "voiceLock": "REVIEW"
         },
         {
           "canonical": "raḍiya llāhu ʿanhu",
-          "ttsText": "رَضِيَ اللَّهُ عَنْهُ",
+          "ttsText": "رَضِيَ اللهُ عَنْهُ",
           "ttsLanguage": "ar",
-          "status": "verified-text"
+          "status": "verified-text",
+          "voiceLock": "REVIEW"
         }
       ],
       "voiceProduction": {
@@ -869,7 +895,9 @@
             "wordCount": 574,
             "estimatedMinutes": 6.8
           }
-        }
+        },
+        "fushaMasterEntry": true,
+        "pronunciationPolicy": "Arabic name + honorific are segmented and reviewed before publish."
       },
       "lifeContext": "ʿAbd ar-Raḥmān gehörte zu den Muhāǧirūn, die ihre Heimat Makkah verließen. In Madīnah musste er wirtschaftlich neu anfangen. Sein bekannter Satz über den Markt zeigt deshalb mehr als Geschäftssinn: Er wollte nach der Hiǧrah wieder selbstständig arbeiten, obwohl ihm sein Bruder im Islām großzügige Hilfe angeboten hatte.",
       "cover": "/kids/assets/sahaba-mubashshirun/abd-ar-rahman.jpg?v=2",
@@ -963,15 +991,17 @@
       "pronunciationTerms": [
         {
           "canonical": "Saʿd ibn Abī Waqqāṣ",
-          "ttsText": "سعد بن أبي وقاص",
+          "ttsText": "سَعْد بْن أَبِي وَقَّاص",
           "ttsLanguage": "ar",
-          "status": "review-required"
+          "status": "source-verified-text-audio-review",
+          "voiceLock": "REVIEW"
         },
         {
           "canonical": "raḍiya llāhu ʿanhu",
-          "ttsText": "رَضِيَ اللَّهُ عَنْهُ",
+          "ttsText": "رَضِيَ اللهُ عَنْهُ",
           "ttsLanguage": "ar",
-          "status": "verified-text"
+          "status": "verified-text",
+          "voiceLock": "REVIEW"
         }
       ],
       "voiceProduction": {
@@ -995,7 +1025,9 @@
             "wordCount": 555,
             "estimatedMinutes": 6.5
           }
-        }
+        },
+        "fushaMasterEntry": true,
+        "pronunciationPolicy": "Arabic name + honorific are segmented and reviewed before publish."
       },
       "lifeContext": "Saʿd war für seine Fähigkeit mit dem Bogen bekannt. Bei Uḥud wurde diese Fähigkeit in einer konkreten Schutzsituation eingesetzt. Für die Kinder-App erzählen wir das ohne Kampfbilder und ohne Gewalt auszumalen. Entscheidend ist die Lehre: Eine Fähigkeit bekommt ihren Wert dadurch, dass sie im richtigen Rahmen und mit richtiger Absicht eingesetzt wird.",
       "cover": "/kids/assets/sahaba-mubashshirun/sad.jpg?v=2",
@@ -1084,15 +1116,17 @@
       "pronunciationTerms": [
         {
           "canonical": "Saʿīd ibn Zayd",
-          "ttsText": "سعيد بن زيد",
+          "ttsText": "سَعِيد بْن زَيْد",
           "ttsLanguage": "ar",
-          "status": "review-required"
+          "status": "source-verified-text-audio-review",
+          "voiceLock": "REVIEW"
         },
         {
           "canonical": "raḍiya llāhu ʿanhu",
-          "ttsText": "رَضِيَ اللَّهُ عَنْهُ",
+          "ttsText": "رَضِيَ اللهُ عَنْهُ",
           "ttsLanguage": "ar",
-          "status": "verified-text"
+          "status": "verified-text",
+          "voiceLock": "REVIEW"
         }
       ],
       "voiceProduction": {
@@ -1116,7 +1150,9 @@
             "wordCount": 557,
             "estimatedMinutes": 6.6
           }
-        }
+        },
+        "fushaMasterEntry": true,
+        "pronunciationPolicy": "Arabic name + honorific are segmented and reviewed before publish."
       },
       "lifeContext": "Über Saʿīd ibn Zayd sind im Vergleich zu den vier Kalifen weniger allgemein bekannte Einzelgeschichten sicher überliefert. Das ist kein Mangel. Quellenarbeit bedeutet auch, Lücken stehen zu lassen. Sein Name gehört ausdrücklich zu der Gruppe, der das Paradies angekündigt wurde, und das allein ist ein sehr großer Vorzug.",
       "cover": "/kids/assets/sahaba-mubashshirun/said.jpg?v=2",
@@ -1201,15 +1237,17 @@
       "pronunciationTerms": [
         {
           "canonical": "Abū ʿUbaydah ibn al-Ǧarrāḥ",
-          "ttsText": "أبو عبيدة بن الجراح",
+          "ttsText": "أَبُو عُبَيْدَة بْن الْجَرَّاح",
           "ttsLanguage": "ar",
-          "status": "review-required"
+          "status": "source-verified-text-audio-review",
+          "voiceLock": "REVIEW"
         },
         {
           "canonical": "raḍiya llāhu ʿanhu",
-          "ttsText": "رَضِيَ اللَّهُ عَنْهُ",
+          "ttsText": "رَضِيَ اللهُ عَنْهُ",
           "ttsLanguage": "ar",
-          "status": "verified-text"
+          "status": "verified-text",
+          "voiceLock": "REVIEW"
         }
       ],
       "voiceProduction": {
@@ -1233,7 +1271,9 @@
             "wordCount": 541,
             "estimatedMinutes": 6.4
           }
-        }
+        },
+        "fushaMasterEntry": true,
+        "pronunciationPolicy": "Arabic name + honorific are segmented and reviewed before publish."
       },
       "lifeContext": "Abū ʿUbaydah war nicht dafür bekannt, sich selbst in den Mittelpunkt zu stellen. Seine besondere Auszeichnung war Amānah, Vertrauenswürdigkeit. In einer weiteren authentischen Überlieferung baten Menschen aus dem Jemen den Propheten ﷺ um jemanden, der ihnen Sunnah und Islām lehren sollte. Der Prophet ﷺ wählte Abū ʿUbaydah und bezeichnete ihn als den Amīn dieser Ummah.",
       "cover": "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg?v=2",
