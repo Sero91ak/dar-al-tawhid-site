@@ -249,3 +249,104 @@ html.dar-home-v1194[data-theme="soft"] body.is-home-route :is(
     font-size:10.1px!important;
   }
 }
+
+
+/* v1203 · visibility fix: paint atmosphere on the real page surface */
+/* v1202 pseudo-layers sat behind the opaque body paint on iPhone/PWA.
+   v1203 paints the already-generated imagery on the actual Home canvas. */
+html.dar-home-v1194 body.is-home-route{
+  background-color:var(--bg,#050706)!important;
+  background-image:
+    linear-gradient(180deg,
+      rgba(2,3,2,.08) 0%,
+      rgba(2,3,2,.14) 16%,
+      rgba(2,3,2,.32) 34%,
+      rgba(2,3,2,.66) 53%,
+      rgba(2,3,2,.92) 69%,
+      rgba(2,3,2,.98) 100%
+    ),
+    url("/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1203"),
+    linear-gradient(180deg,
+      rgba(2,3,2,.96) 0%,
+      rgba(2,3,2,.46) 14%,
+      rgba(2,3,2,.30) 38%,
+      rgba(2,3,2,.46) 68%,
+      rgba(2,3,2,.97) 100%
+    ),
+    url("/test/assets/home-v1194/study-runway.jpg?v=1203")!important;
+  background-repeat:no-repeat,no-repeat,no-repeat,no-repeat!important;
+  background-position:center 0,62% 0,center 1120px,66% 1120px!important;
+  background-size:100% 1550px,100% 1550px,100% 2350px,100% 2350px!important;
+  background-attachment:scroll!important;
+}
+
+/* Disable the hidden pseudo implementation; it was below the body paint. */
+html.dar-home-v1194 body.is-home-route::before,
+html.dar-home-v1194 body.is-home-route::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Every outer Home wrapper must stay transparent so the continuous page scene is visible. */
+html.dar-home-v1194 body.is-home-route :is(
+  .app,#appRoot,#appShell,.app-shell,.page-shell,.page,.main,main,
+  .top-shell,.top-shell.theme-hero-shell,
+  #appView,#appView.view,.home-v380-shell
+){
+  background-color:transparent!important;
+  background-image:none!important;
+}
+
+/* Keep readable editorial darkness as a soft wash, never as a card or pasted picture. */
+html.dar-home-v1194 body.is-home-route .top-shell{
+  background:linear-gradient(180deg,rgba(2,3,2,.08),rgba(2,3,2,.18) 62%,rgba(2,3,2,.34))!important;
+}
+html.dar-home-v1194 body.is-home-route #appView.view{
+  background:linear-gradient(180deg,rgba(2,3,2,.20),rgba(2,3,2,.08) 28%,rgba(2,3,2,.18) 70%,rgba(2,3,2,.42))!important;
+}
+
+/* Make the first library scene visibly recognizable without hurting text contrast. */
+html.dar-home-v1194 body.is-home-route .top-shell .header.theme-hero-surface{
+  background:linear-gradient(90deg,rgba(2,3,2,.58) 0%,rgba(2,3,2,.26) 52%,rgba(2,3,2,.06) 100%)!important;
+  background-image:linear-gradient(90deg,rgba(2,3,2,.58) 0%,rgba(2,3,2,.26) 52%,rgba(2,3,2,.06) 100%)!important;
+}
+
+/* No local background ownership for resume or content tiles. */
+html.dar-home-v1194 body.is-home-route :is(
+  .home-v380-quran-hero,
+  .home-line-tawhid,
+  .home-line-row,
+  .home-v380-open-row,
+  .home-v380-post-preview,
+  .home-v380-lib-card,
+  .home-v380-popular-row
+){
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-line-tawhid{
+  background-color:rgba(2,3,2,.12)!important;
+}
+html.dar-home-v1194 body.is-home-route .home-line-row{
+  background-color:rgba(2,3,2,.10)!important;
+}
+html.dar-home-v1194 body.is-home-route .home-line-row:nth-child(odd){
+  background-color:rgba(2,3,2,.15)!important;
+}
+
+@media(min-width:760px){
+  html.dar-home-v1194 body.is-home-route{
+    background-image:
+      linear-gradient(180deg,rgba(2,3,2,.06) 0%,rgba(2,3,2,.20) 26%,rgba(2,3,2,.64) 57%,rgba(2,3,2,.96) 100%),
+      url("/test/assets/home-v1194/hero-wide-adobe.jpg?v=1203"),
+      linear-gradient(180deg,rgba(2,3,2,.96) 0%,rgba(2,3,2,.42) 18%,rgba(2,3,2,.34) 54%,rgba(2,3,2,.96) 100%),
+      url("/test/assets/home-v1194/study-runway.jpg?v=1203")!important;
+    background-position:center 0,center 0,center 1250px,center 1250px!important;
+    background-size:100% 1650px,100% 1650px,100% 2500px,100% 2500px!important;
+  }
+}
+
+html.dar-home-v1194[data-theme="light"] body.is-home-route,
+html.dar-home-v1194[data-theme="soft"] body.is-home-route{
+  background-blend-mode:screen,luminosity,screen,luminosity!important;
+}
