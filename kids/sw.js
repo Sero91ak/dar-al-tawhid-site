@@ -37,7 +37,7 @@ const PRECACHE=[
   "/kids/assets/sahaba-mubashshirun/sad.jpg",
   "/kids/assets/sahaba-mubashshirun/said.jpg",
   "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
-  "/kids/mubashshirun-stories.css?v=5",
+  "/kids/mubashshirun-stories.css?v=6",
   "/kids/mubashshirun-stories.js?v=6",
   "/kids/kids-age-typography.css?v=4",
   "/kids/kids-age-typography.js?v=3",
