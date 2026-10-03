@@ -2,298 +2,244 @@
 "use strict";
 
 const DATA_URL="/kids/data/mubashshirun-stories.json";
-const DONE_PREFIX="kids.mubashshirun.done.";
-const MODE_KEY="kids.mubashshirun.mode.v1";
-let items=[],active=null,activeText="",busy=false,playing=false;
+const MODE_KEY="kids.contentMode.v19";
+const DONE_PREFIX="kids.mubashshirunStory.done.";
+let items=[],active=null,activeText="",playing=false,busy=false;
 const audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-
-function age(){return String($(".app")?.getAttribute("data-age")||"6–8")}
-function ageKey(){return age().replace("–","-")}
-function mode(){try{const x=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(x)?x:"both"}catch(_){return"both"}}
-function setMode(v){try{localStorage.setItem(MODE_KEY,v)}catch(_){}applyMode()}
-function done(id){try{return localStorage.getItem(DONE_PREFIX+id)==="1"}catch(_){return false}}
-function markDone(id){if(!id)return;try{localStorage.setItem(DONE_PREFIX+id,"1")}catch(_){}renderList()}
-function doneCount(){return items.reduce((n,x)=>n+(done(x.id)?1:0),0)}
-function scriptFor(item){return String(item?.scripts?.[ageKey()]||item?.scripts?.["6-8"]||"").trim()}
+const age=()=>String($(".app")?.getAttribute("data-age")||"6–8");
+const ageKey=()=>age().replace("–","-");
+function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
+function setMode(v){try{localStorage.setItem(MODE_KEY,v)}catch(_){}renderModeButtons();applyMode()}
+function textFor(item){const k=ageKey(),s=item?.scripts||{};return String(s[k]||s["6-8"]||"").trim()}
+function words(t){return(String(t).match(/\S+/g)||[]).length}
+function durationLabel(t){
+  const w=words(t),wpm=age()==="4–5"?78:(age()==="9–10"?96:88);
+  return "ca. "+Math.max(4,Math.min(10,Math.round(w/wpm)))+" Min.";
+}
 function audioMeta(item){return item?.audio?.[ageKey()]||null}
-function duration(item){
-  const p=item?.voiceProduction?.ageProfiles?.[ageKey()];
-  if(p?.estimatedMinutes)return "ca. "+p.estimatedMinutes+" Min.";
-  const w=(scriptFor(item).match(/\S+/g)||[]).length;
-  return "ca. "+Math.max(3,Math.round(w/95))+" Min.";
+function done(id){try{return localStorage.getItem(DONE_PREFIX+id)==="1"}catch(_){return false}}
+function markDone(id){try{localStorage.setItem(DONE_PREFIX+id,"1")}catch(_){}renderCards()}
+function doneCount(){return items.reduce((n,x)=>n+(done(x.id)?1:0),0)}
+function renderModeButtons(){
+  const m=mode();
+  document.querySelectorAll("[data-ms-mode]").forEach(b=>b.classList.toggle("active",b.dataset.msMode===m));
 }
-function arabic(item){return [item?.nameAr||"",item?.honorific||"رضي الله عنه"].filter(Boolean).join(" ")}
-function sourceType(ref){
-  const r=String(ref||"");
-  if(/^Qurʾān/i.test(r))return"QURʾĀN";
-  if(/Buḫār|Bukh/i.test(r))return"ṢAḤĪḤ AL-BUḪĀRĪ";
-  if(/Muslim/i.test(r))return"ṢAḤĪḤ MUSLIM";
-  if(/Tirm/i.test(r))return"JĀMIʿ AT-TIRMIDHĪ";
-  return"QUELLE";
+function sourceHtml(item){
+  const refs=Array.isArray(item?.sourceRefs)?item.sourceRefs:[];
+  const links=Array.isArray(item?.sourceLinks)?item.sourceLinks:[];
+  return refs.map(ref=>{
+    const hit=links.find(x=>String(x.label||"")===String(ref));
+    return hit?.url
+      ? '<a class="ms-source-link" href="'+esc(hit.url)+'" target="_blank" rel="noopener">'+esc(ref)+'</a>'
+      : '<span class="ms-source-ref">'+esc(ref)+'</span>';
+  }).join("");
 }
-
-function ensureHub(){
-  const view=$("#view-stories");
-  const prophet=$("#psProphetEntry");
-  if(!view||!prophet)return false;
-  if($("#msSahabaEntry"))return true;
-
-  let hub=$("#msStoryHub");
-  if(!hub){
-    hub=document.createElement("div");
-    hub.id="msStoryHub";
-    hub.className="ms-story-hub";
-    prophet.parentNode.insertBefore(hub,prophet);
-    hub.appendChild(prophet);
-  }
-
-  const entry=document.createElement("button");
-  entry.id="msSahabaEntry";
-  entry.className="ms-entry";
-  entry.type="button";
-  entry.innerHTML=
-    '<span class="ms-entry-art" aria-hidden="true">'+
-      '<span class="ms-entry-stars"></span>'+
-      '<span class="ms-entry-ten">10</span>'+
-      '<span class="ms-entry-arch"></span>'+
-    '</span>'+
-    '<span class="ms-entry-panel">'+
-      '<span class="ms-entry-kicker">EIGENER BEREICH · QURʾĀN &amp; AUTHENTISCHE SUNNAH</span>'+
-      '<strong>Die zehn al-Mubaššarūn</strong>'+
-      '<span class="ms-entry-sub">10 Ṣaḥābah · ihre Geschichten, Vorzüge &amp; Lehren</span>'+
-      '<span class="ms-entry-action">Entdecken <b aria-hidden="true">›</b></span>'+
-    '</span>';
-  hub.appendChild(entry);
-  entry.addEventListener("click",openLibrary);
-  return true;
-}
-
-function ensureUi(){
-  if($("#msLibraryPage"))return true;
-  const page=document.createElement("section");
-  page.id="msLibraryPage";
-  page.className="ms-library";
-  page.setAttribute("aria-hidden","true");
-  page.innerHTML=
-    '<div class="ms-library-shell">'+
-      '<header class="ms-library-head">'+
-        '<button id="msLibraryBack" class="ms-back" type="button" aria-label="Zurück zu Geschichten">‹</button>'+
-        '<div class="ms-library-title"><span>ṢAḤĀBAH · DIE ZEHN</span><strong>al-ʿAšarah al-Mubaššarūn</strong><small>Die zehn Gefährten, denen das Paradies angekündigt wurde</small></div>'+
-      '</header>'+
-      '<div class="ms-library-toolbar">'+
-        '<div class="ms-age"><span id="msAgeLabel">Alter '+esc(age())+'</span><span>Quellengeprüfte Erzähltexte</span></div>'+
-        '<div class="ms-modes">'+
-          '<button data-ms-mode="both" type="button">Lesen &amp; Hören</button>'+
-          '<button data-ms-mode="listen" type="button">Hören</button>'+
-          '<button data-ms-mode="read" type="button">Lesen</button>'+
-        '</div>'+
-      '</div>'+
-      '<div class="ms-intro">'+
-        '<div><span class="ms-intro-kicker">WAS BEDEUTET DAS?</span><h2>Zehn Gefährten mit einer besonderen frohen Botschaft</h2><p>Der Qurʾān lobt die frühen Gläubigen und Gefährten. Die konkrete Liste dieser zehn Männer kennen wir aus der authentischen Sunnah. In jeder Geschichte trennen wir deshalb Qurʾān, Ḥadīṯ und spätere Berichte sauber voneinander.</p></div>'+
-        '<div class="ms-intro-proof"><strong>10</strong><span>Geschichten</span><small>ohne erfundene Abenteuer</small></div>'+
-      '</div>'+
-      '<div class="ms-progress-line"><span id="msDoneCount">0</span> von 10 abgeschlossen</div>'+
-      '<div id="msGrid" class="ms-grid"></div>'+
-    '</div>'+
-    '<section id="msDetail" class="ms-detail" aria-hidden="true">'+
-      '<div class="ms-detail-shell">'+
-        '<header class="ms-detail-head"><button id="msDetailBack" class="ms-back" type="button" aria-label="Zurück zur Übersicht">‹</button><div><span id="msDetailKicker">ṢAḤĀBĪ</span><strong id="msDetailName"></strong></div></header>'+
-        '<div class="ms-detail-hero">'+
-          '<div class="ms-detail-visual"><img id="msDetailArt" src="" alt="" decoding="async"><span class="ms-detail-number" id="msDetailNumber"></span></div>'+
-          '<div class="ms-detail-copy"><div class="ms-detail-ar" id="msDetailArabic" dir="rtl"></div><h2 id="msDetailTitle"></h2><p id="msDetailSummary"></p><div id="msDetailMeta" class="ms-detail-meta"></div><small id="msVisualNote" class="ms-visual-note"></small></div>'+
-        '</div>'+
-        '<div class="ms-detail-modes ms-modes"><button data-ms-mode="both" type="button">Lesen &amp; Hören</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
-        '<div id="msPlayer" class="ms-player"><button id="msPlay" type="button">Hören</button><div class="ms-audio-track"><span id="msProgress"></span></div><small id="msVoiceNote"></small></div>'+
-        '<article id="msRead" class="ms-read"></article>'+
-        '<section class="ms-sources"><span>QUELLEN · GEPRÜFT</span><div id="msSources"></div><p>Allgemeines Qurʾān-Lob und persönliche Ḥadīṯ-Belege werden bewusst getrennt.</p></section>'+
-        '<section id="msQuestion" class="ms-question"></section>'+
-      '</div>'+
-    '</section>';
-  document.body.appendChild(page);
-
-  $("#msLibraryBack").addEventListener("click",closeLibrary);
-  $("#msDetailBack").addEventListener("click",closeDetail);
-  $("#msPlay").addEventListener("click",toggleAudio);
-  page.querySelectorAll("[data-ms-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.msMode)));
-  document.addEventListener("keydown",e=>{
-    if(e.key!=="Escape")return;
-    if($("#msDetail")?.classList.contains("open"))closeDetail();
-    else if($("#msLibraryPage")?.classList.contains("open"))closeLibrary();
-  });
-  audio.preload="metadata";
-  audio.addEventListener("timeupdate",updateProgress);
-  audio.addEventListener("loadedmetadata",updateProgress);
-  audio.addEventListener("play",()=>{playing=true;updatePlay()});
-  audio.addEventListener("pause",()=>{playing=false;updatePlay()});
-  audio.addEventListener("ended",()=>{playing=false;markDone(active?.id);updatePlay();if($("#msVoiceNote"))$("#msVoiceNote").textContent="Geschichte vollständig angehört."});
-  return true;
-}
-
-function lockBackground(){
-  document.documentElement.classList.add("ms-library-open");
-  const app=$(".app");
-  if(app){app.setAttribute("inert","");app.setAttribute("aria-hidden","true")}
-}
-function unlockBackground(){
-  document.documentElement.classList.remove("ms-library-open");
-  const app=$(".app");
-  if(app){app.removeAttribute("inert");app.removeAttribute("aria-hidden")}
-}
-function openLibrary(){
-  ensureUi();
-  const page=$("#msLibraryPage");if(!page)return;
-  page.classList.add("open");page.removeAttribute("aria-hidden");lockBackground();
-  page.scrollTop=0;renderList();applyMode();
-  setTimeout(()=>$("#msLibraryBack")?.focus(),0);
-}
-function closeLibrary(){
-  stopAudio();closeDetail(true);
-  const page=$("#msLibraryPage");if(!page)return;
-  page.classList.remove("open");page.setAttribute("aria-hidden","true");unlockBackground();
-  setTimeout(()=>$("#msSahabaEntry")?.focus(),0);
-}
-function openDetail(id){
-  active=items.find(x=>x.id===id)||null;if(!active)return;
-  stopAudio();renderDetail();
-  const d=$("#msDetail");d.classList.add("open");d.removeAttribute("aria-hidden");
-  d.scrollTop=0;setTimeout(()=>$("#msDetailBack")?.focus(),0);
-}
-function closeDetail(silent=false){
-  stopAudio();
-  const d=$("#msDetail");if(d){d.classList.remove("open");d.setAttribute("aria-hidden","true")}
-  const prev=active?.id;active=null;
-  if(!silent&&prev)setTimeout(()=>$("[data-ms-id='"+CSS.escape(prev)+"']")?.focus(),0);
-}
-
-function renderList(){
+function renderCards(){
   const grid=$("#msGrid");if(!grid)return;
-  grid.innerHTML=items.map((item,i)=>{
-    const src=(item.sourceRefs||[]).filter(x=>!/Tirmidhī 3747/.test(x));
-    const art=String(item.cover||item.hero||"");
-    return '<button class="ms-card" data-ms-id="'+esc(item.id)+'" type="button">'+
-      '<span class="ms-card-visual">'+
-        (art?'<img class="ms-card-art" src="'+esc(art)+'" alt="" decoding="async" loading="'+(i<3?"eager":"lazy")+'">':'')+
-        '<span class="ms-card-shade" aria-hidden="true"></span>'+
-        '<span class="ms-card-top"><span class="ms-card-index">'+String(i+1).padStart(2,"0")+'</span><span class="ms-card-proof">'+esc(sourceType(src[0]||item.sourceRefs?.[0]||""))+'</span></span>'+
+  grid.innerHTML=items.map((item,index)=>{
+    const t=textFor(item);
+    return '<button class="ms-story-row" type="button" data-ms-id="'+esc(item.id)+'">'+
+      '<span class="ms-rank" aria-hidden="true">'+String(index+1).padStart(2,"0")+'</span>'+
+      '<span class="ms-row-copy">'+
+        '<span class="ms-row-kicker">ṢAḤĀBĪ · GEPRÜFTE QUELLEN</span>'+
+        '<strong class="ms-row-title">'+esc(item.name)+'</strong>'+
+        '<span class="ms-row-ar" dir="rtl">'+esc(item.nameAr||"")+' رضي الله عنه</span>'+
+        '<span class="ms-row-summary">'+esc(item.summary||"")+'</span>'+
+        '<span class="ms-row-meta">'+durationLabel(t)+' · Alter '+esc(age())+'</span>'+
       '</span>'+
-      '<span class="ms-card-body">'+
-        '<span class="ms-card-ar" dir="rtl">'+esc(item.nameAr||"")+'</span>'+
-        '<strong>'+esc(item.name)+'</strong>'+
-        '<span class="ms-card-summary">'+esc(item.summary||"")+'</span>'+
-        '<span class="ms-card-foot"><span>'+esc(duration(item))+' · Alter '+esc(age())+'</span><b aria-hidden="true">›</b></span>'+
-      '</span>'+
-      (done(item.id)?'<span class="ms-card-done">✓</span>':'')+
+      '<span class="ms-row-go" aria-hidden="true">›</span>'+
+      (done(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':'')+
     '</button>';
   }).join("");
-  grid.querySelectorAll("[data-ms-id]").forEach(b=>b.addEventListener("click",()=>openDetail(b.dataset.msId)));
-  grid.querySelectorAll("img.ms-card-art").forEach(img=>img.addEventListener("error",()=>{img.closest(".ms-card-visual")?.classList.add("no-art");img.remove()},{once:true}));
-  if($("#msDoneCount"))$("#msDoneCount").textContent=String(doneCount());
-  if($("#msAgeLabel"))$("#msAgeLabel").textContent="Alter "+age();
+  grid.querySelectorAll("[data-ms-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.msId)));
+  const dc=$("#msDoneCount");if(dc)dc.textContent=String(doneCount());
+  const ag=$("#msAge");if(ag)ag.textContent="Alter "+age();
 }
+function insertEntry(view){
+  if($("#msEntry"))return;
+  const entry=document.createElement("button");
+  entry.id="msEntry"; entry.className="ms-entry"; entry.type="button";
+  entry.innerHTML=
+    '<span class="ms-entry-art" aria-hidden="true"><span class="ms-entry-arch"></span><span class="ms-entry-stars">'+
+    Array.from({length:10},(_,i)=>'<i style="--i:'+i+'"></i>').join("")+
+    '</span></span>'+
+    '<span class="ms-entry-copy">'+
+      '<span class="ms-entry-kicker">EIGENER BEREICH · SUNNAH GEPRÜFT</span>'+
+      '<strong>Die zehn Mubaschschirūn</strong>'+
+      '<span>10 Ṣaḥābah · ihre Geschichten · lesen &amp; hören</span>'+
+    '</span>'+
+    '<span class="ms-entry-action">Entdecken <b aria-hidden="true">›</b></span>';
+  const prophet=$("#psProphetEntry");
+  if(prophet)prophet.insertAdjacentElement("afterend",entry);
+  else view.querySelector(".page-head")?.insertAdjacentElement("afterend",entry);
+  entry.addEventListener("click",openLibrary);
+}
+function ensureUi(){
+  const view=$("#view-stories");if(!view||$("#msLibraryPage"))return false;
+  insertEntry(view);
 
-function renderDetail(){
+  const page=document.createElement("section");
+  page.id="msLibraryPage"; page.className="ms-library-page"; page.setAttribute("aria-hidden","true");
+  page.innerHTML=
+    '<div class="ms-library-nav">'+
+      '<button id="msBack" class="ms-back" type="button" aria-label="Zurück zu Geschichten">‹</button>'+
+      '<div><strong>Die zehn Mubaschschirūn</strong><span>al-ʿAšarah al-Mubaššarūn · 10 Gefährten</span></div>'+
+    '</div>'+
+    '<div class="ms-library-scroll" id="msLibraryScroll">'+
+      '<header class="ms-library-hero">'+
+        '<div class="ms-library-kicker">QURʾĀN · AUTHENTISCHE SUNNAH · ṢAḤĀBAH</div>'+
+        '<h2>Die zehn Gefährten,<br>denen das Paradies angekündigt wurde</h2>'+
+        '<p>Kindgerecht erzählt, ohne Legenden. Allgemeines Qurʾān-Lob und persönliche Ḥadīṯ-Belege werden sauber getrennt.</p>'+
+        '<div class="ms-library-stats"><span><b id="msDoneCount">0</b>/10 geschafft</span><span id="msAge">Alter 6–8</span></div>'+
+      '</header>'+
+      '<div class="ms-modebar"><button data-ms-mode="both" type="button">Lesen &amp; Hören</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
+      '<div class="ms-method-note"><strong>Unsere Quellenregel</strong><span>Keine erfundenen Gespräche, keine ausgeschmückten Heldensagen. Wir erzählen nur, was Qurʾān, authentische Sunnah und sichere frühe Berichte tragen.</span></div>'+
+      '<div id="msGrid" class="ms-list"></div>'+
+    '</div>';
+  document.body.appendChild(page);
+  $("#msBack").addEventListener("click",closeLibrary);
+  page.querySelectorAll("[data-ms-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.msMode)));
+
+  const modal=document.createElement("div");
+  modal.id="msModal"; modal.className="ms-modal";
+  modal.innerHTML=
+    '<div class="ms-sheet" role="dialog" aria-modal="true" aria-labelledby="msTitle">'+
+      '<button id="msClose" class="ms-close" type="button" aria-label="Zurück">‹</button>'+
+      '<div class="ms-scroll" id="msScroll">'+
+        '<header class="ms-detail-hero">'+
+          '<div class="ms-detail-mark" aria-hidden="true"><span></span></div>'+
+          '<div class="ms-detail-kicker">ṢAḤĀBĪ · AL-ʿAŠARAH AL-MUBAŠŠARŪN</div>'+
+          '<h2 id="msTitle"></h2><div id="msArabic" class="ms-ar" dir="rtl"></div>'+
+          '<p id="msSummary"></p><div id="msMeta" class="ms-meta"></div>'+
+          '<div class="ms-detail-modes"><button data-ms-mode="both" type="button">Lesen &amp; Hören</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
+        '</header>'+
+        '<div class="ms-body">'+
+          '<section id="msPlayer" class="ms-player"><button id="msPlay" class="ms-play" type="button">Hören</button><div class="ms-progress"><span id="msProgress"></span></div><p id="msVoiceNote"></p></section>'+
+          '<article id="msRead" class="ms-read"></article>'+
+          '<section class="ms-sources"><strong>GEPRÜFTE QUELLEN</strong><div id="msSources"></div></section>'+
+          '<section id="msQuestion" class="ms-question"></section>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  document.body.appendChild(modal);
+  $("#msClose").addEventListener("click",closeStory);
+  $("#msPlay").addEventListener("click",toggleAudio);
+  modal.querySelectorAll("[data-ms-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.msMode)));
+  audio.preload="metadata";
+  audio.addEventListener("timeupdate",updateProgress);
+  audio.addEventListener("ended",()=>{playing=false;updatePlayButton();markDone(active?.id||"")});
+  document.addEventListener("keydown",e=>{
+    if(e.key!=="Escape")return;
+    if($("#msModal")?.classList.contains("open"))closeStory();
+    else if($("#msLibraryPage")?.classList.contains("open"))closeLibrary();
+  });
+  return true;
+}
+function openLibrary(){
+  const p=$("#msLibraryPage");if(!p)return;
+  p.classList.add("open");p.removeAttribute("aria-hidden");
+  document.documentElement.classList.add("ms-library-open");
+  const app=$(".app");if(app){app.setAttribute("inert","");app.setAttribute("aria-hidden","true")}
+  $("#msLibraryScroll").scrollTop=0;renderCards();renderModeButtons();
+}
+function closeLibrary(){
+  if($("#msModal")?.classList.contains("open"))return;
+  const p=$("#msLibraryPage");if(!p)return;
+  p.classList.remove("open");p.setAttribute("aria-hidden","true");
+  document.documentElement.classList.remove("ms-library-open");
+  const app=$(".app");if(app){app.removeAttribute("inert");app.removeAttribute("aria-hidden")}
+  setTimeout(()=>$("#msEntry")?.focus(),0);
+}
+function lockLibrary(){
+  const p=$("#msLibraryPage");if(p){p.setAttribute("inert","");p.setAttribute("aria-hidden","true")}
+  document.documentElement.classList.add("ms-modal-open");
+}
+function unlockLibrary(){
+  const p=$("#msLibraryPage");if(p?.classList.contains("open")){p.removeAttribute("inert");p.removeAttribute("aria-hidden")}
+  document.documentElement.classList.remove("ms-modal-open");
+}
+function openStory(id){
+  active=items.find(x=>x.id===id);if(!active)return;
+  stopAudio();renderActive();
+  $("#msModal").classList.add("open");lockLibrary();$("#msScroll").scrollTop=0;$("#msClose").focus();
+}
+function closeStory(){stopAudio();$("#msModal")?.classList.remove("open");unlockLibrary();active=null}
+function renderActive(){
   if(!active)return;
-  activeText=scriptFor(active);
-  $("#msDetailKicker").textContent="ṢAḤĀBĪ · "+String(active.displayOrder||"").padStart(2,"0")+" / 10";
-  $("#msDetailName").textContent=active.name;
-  $("#msDetailNumber").textContent=String(active.displayOrder||"");
-  const art=$("#msDetailArt");
-  if(art){
-    art.style.display="block";
-    art.src=active.hero||active.cover||"";
-    art.onerror=()=>{art.style.display="none"};
-  }
-  const vn=$("#msVisualNote");if(vn)vn.textContent=active.visualDisclaimer||"";
-  $("#msDetailArabic").textContent=arabic(active);
-  $("#msDetailTitle").textContent=active.name;
-  $("#msDetailSummary").textContent=active.summary||"";
-  $("#msDetailMeta").innerHTML=
-    '<span>'+esc(duration(active))+'</span>'+
-    '<span>Alter '+esc(age())+'</span>'+
-    '<span>Qurʾān + Sunnah</span>'+
-    '<span>Fuṣḥā geprüft</span>';
-  $("#msRead").innerHTML=activeText.split(/\n{2,}/).map(p=>"<p>"+esc(p)+"</p>").join("");
-  $("#msSources").innerHTML=(active.sourceRefs||[]).map(ref=>'<div class="ms-source-row"><span>'+esc(sourceType(ref))+'</span><strong>'+esc(ref)+'</strong></div>').join("");
-  renderQuestion();resetAudio();applyMode();
+  activeText=textFor(active);
+  $("#msTitle").textContent=active.name;
+  $("#msArabic").textContent=(active.nameAr||"")+" رضي الله عنه";
+  $("#msSummary").textContent=active.summary||"";
+  $("#msMeta").innerHTML='<span>'+durationLabel(activeText)+'</span><span>Alter '+esc(age())+'</span><span>Qurʾān + Sunnah</span>';
+  $("#msRead").innerHTML=activeText.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join("");
+  $("#msSources").innerHTML=sourceHtml(active);
+  renderQuestion();applyMode();resetAudio();
 }
 function renderQuestion(){
   const q=$("#msQuestion");if(!q||!active)return;
-  q.innerHTML='<span>HAST DU GUT AUFGEPASST?</span><h3>'+esc(active.question||"")+'</h3>'+
+  q.innerHTML='<div class="ms-q-kicker">HAST DU GUT AUFGEPASST?</div><h3>'+esc(active.question||"")+'</h3>'+
     (active.answers||[]).map((a,i)=>'<button type="button" data-ms-answer="'+i+'">'+esc(a)+'</button>').join("")+
-    '<div id="msFeedback" class="ms-feedback"></div>';
+    '<p id="msFeedback" class="ms-feedback"></p>';
   q.querySelectorAll("[data-ms-answer]").forEach(b=>b.addEventListener("click",()=>{
-    const ok=Number(b.dataset.msAnswer)===Number(active.correct||0);
-    b.classList.add(ok?"good":"bad");
-    $("#msFeedback").textContent=ok?"Richtig. Gut aufgepasst.":"Lies oder hör den Abschnitt noch einmal.";
-    if(ok)markDone(active.id); else setTimeout(()=>b.classList.remove("bad"),900);
+    const good=Number(b.dataset.msAnswer)===Number(active.correct||0);
+    b.classList.add(good?"good":"bad");
+    $("#msFeedback").textContent=good?"Richtig. Gut aufgepasst.":"Lies oder hör die Geschichte noch einmal in Ruhe.";
+    if(good)markDone(active.id);
+    else setTimeout(()=>b.classList.remove("bad"),900);
   }));
 }
 function applyMode(){
-  const m=mode();
-  document.querySelectorAll("[data-ms-mode]").forEach(b=>b.classList.toggle("active",b.dataset.msMode===m));
-  const read=$("#msRead"),player=$("#msPlayer");
-  if(read)read.hidden=m==="listen";
-  if(player)player.hidden=m==="read";
+  const m=mode();renderModeButtons();
+  if($("#msRead"))$("#msRead").hidden=m==="listen";
+  if($("#msPlayer"))$("#msPlayer").hidden=m==="read";
 }
 function resetAudio(){
   stopAudio();
-  const meta=audioMeta(active);
-  const note=$("#msVoiceNote");
+  const meta=audioMeta(active),note=$("#msVoiceNote");
   if(meta?.url){
-    audio.src=meta.url;
-    if(note)note.textContent="Serhat Voice · geprüfte Aussprache";
+    audio.src=meta.url; audio.preload="metadata";
+    if(note)note.textContent="Serhat-Stimme · geprüfte Fuṣḥā-Aussprache";
   }else{
     audio.removeAttribute("src");
-    if(note)note.textContent="Voice-Audio ist vorbereitet und wird im DĀR AL TAWḤĪD Voice Studio erzeugt.";
+    if(note)note.textContent="Lesetext ist fertig. Serhat-Audio wird im Voice Studio erzeugt und nach Ausspracheprüfung freigeschaltet.";
   }
-  if($("#msProgress"))$("#msProgress").style.width="0";
-  updatePlay();
+  $("#msProgress").style.width="0";updatePlayButton();
 }
-function updateProgress(){
-  if(!$("#msProgress"))return;
-  $("#msProgress").style.width=(audio.duration?Math.min(100,audio.currentTime/audio.duration*100):0)+"%";
-}
-function updatePlay(){
+function updatePlayButton(){
   const b=$("#msPlay");if(!b)return;
   const meta=audioMeta(active);
   b.disabled=busy||!meta?.url;
   b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiterhören":"Hören");
 }
+function updateProgress(){
+  if($("#msProgress"))$("#msProgress").style.width=(audio.duration?Math.min(100,audio.currentTime/audio.duration*100):0)+"%";
+}
 async function toggleAudio(){
-  const meta=audioMeta(active);if(!active||busy||!meta?.url)return;
-  if(playing){audio.pause();return}
-  try{busy=true;updatePlay();if(!audio.src)audio.src=meta.url;await audio.play();playing=true}
-  catch(_){if($("#msVoiceNote"))$("#msVoiceNote").textContent="Audio konnte gerade nicht geladen werden."}
-  finally{busy=false;updatePlay()}
+  if(!active||busy)return;
+  const meta=audioMeta(active);if(!meta?.url)return;
+  if(playing){audio.pause();playing=false;updatePlayButton();return}
+  try{busy=true;updatePlayButton();if(!audio.src)audio.src=meta.url;await audio.play();playing=true}
+  catch(_){playing=false;if($("#msVoiceNote"))$("#msVoiceNote").textContent="Audio ist gerade nicht verfügbar."}
+  finally{busy=false;updatePlayButton()}
 }
-function stopAudio(){
-  try{audio.pause();audio.currentTime=0;audio.removeAttribute("src");audio.load()}catch(_){}
-  busy=false;playing=false;updatePlay();
-}
-
-async function load(){
+function stopAudio(){try{audio.pause();audio.currentTime=0;audio.removeAttribute("src");audio.load()}catch(_){}playing=false;busy=false;updatePlayButton()}
+async function init(){
+  if(!ensureUi())return;
   try{
     const r=await fetch(DATA_URL+"?v="+Date.now(),{cache:"no-store"});
-    if(!r.ok)throw new Error("Mubashshirun "+r.status);
-    const d=await r.json();
-    items=(Array.isArray(d.items)?d.items:[]).slice().sort((a,b)=>Number(a.displayOrder||99)-Number(b.displayOrder||99));
-    renderList();
+    if(!r.ok)throw Error("Mubaschschirūn "+r.status);
+    const data=await r.json();
+    items=(data.items||[]).slice().sort((a,b)=>Number(a.displayOrder||99)-Number(b.displayOrder||99));
+    renderCards();renderModeButtons();
+    const app=$(".app");
+    if(app&&"MutationObserver" in window)new MutationObserver(()=>{renderCards();if(active)renderActive()}).observe(app,{attributes:true,attributeFilter:["data-age"]});
   }catch(err){
     console.warn("[DĀR Kids Mubashshirun]",err);
-    const grid=$("#msGrid");if(grid)grid.innerHTML='<div class="ms-load-error">Die Ṣaḥābah-Geschichten konnten gerade nicht geladen werden.</div>';
+    const g=$("#msGrid");if(g)g.innerHTML='<div class="ms-load-error">Die Geschichten konnten gerade nicht geladen werden.</div>';
   }
 }
-function boot(){
-  let tries=0;
-  const wait=()=>{
-    tries++;
-    if(ensureHub()){ensureUi();load();const app=$(".app");if(app&&"MutationObserver" in window)new MutationObserver(()=>{renderList();if(active)renderDetail()}).observe(app,{attributes:true,attributeFilter:["data-age"]});return}
-    if(tries<50)setTimeout(wait,100);
-  };
-  wait();
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-window.DARKidsMubashshirun={openLibrary,closeLibrary,open:openDetail,stop:stopAudio};
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(init,0),{once:true});else setTimeout(init,0);
+window.DARKidsMubashshirun={open:openStory,openLibrary,closeLibrary,stop:stopAudio};
 })();
