@@ -407,10 +407,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         latestKnownVersion = latest
         updateAvailable = isVersion(latest, newerThan: currentVersion)
         if updateAvailable {
-            publishUpdateState("available", latest: latest, message: "Update verfügbar")
-            if !userInitiated {
-                DispatchQueue.main.async { [weak self] in self?.installAvailableUpdate() }
-            }
+            // 2.9.68 Stabilitätsmodus:
+            // Beim App-Start nur anzeigen, NIEMALS automatisch installieren.
+            // Ein automatischer Installationsstart beendet die laufende App und
+            // konnte bei einem Installerproblem einen scheinbaren Crash-Loop erzeugen.
+            publishUpdateState("available", latest: latest, message: "Update verfügbar · Installation nur nach deinem Klick")
         } else {
             publishUpdateState(
                 "current",
