@@ -95,31 +95,34 @@
     "ageAdaptiveTypography": "v3",
     "ageTypographyProfiles": {
       "4-5": {
-        "body": "21px",
-        "support": "14–17px",
+        "body": "20px",
+        "support": "16px",
+        "meta": "14.5px",
         "control": "18px",
-        "cardTitle": "24px",
-        "pageTitle": "40px",
-        "touch": "58px"
+        "cardTitle": "23px",
+        "pageTitle": "38px",
+        "touch": "62px"
       },
       "6-8": {
-        "body": "18px",
-        "support": "12–15px",
-        "control": "16px",
-        "cardTitle": "21px",
-        "pageTitle": "36px",
-        "touch": "52px"
+        "body": "18.5px",
+        "support": "15px",
+        "meta": "13.75px",
+        "control": "17px",
+        "cardTitle": "21.5px",
+        "pageTitle": "35px",
+        "touch": "58px"
       },
       "9-10": {
-        "body": "17px",
-        "support": "11–14px",
-        "control": "15px",
+        "body": "17.5px",
+        "support": "14.5px",
+        "meta": "13px",
+        "control": "16px",
         "cardTitle": "20px",
-        "pageTitle": "34px",
-        "touch": "50px"
+        "pageTitle": "33px",
+        "touch": "54px"
       }
     },
-    "kidsReadingFont": "SF Pro Text / Avenir Next / system sans-serif",
+    "kidsReadingFont": "Fredoka / SF Pro Rounded / system sans-serif fallback",
     "kidsArabicFont": "Noto Naskh Arabic / Geeza Pro",
     "typographyAgeSync": true,
     "typographyNoClip": true,
