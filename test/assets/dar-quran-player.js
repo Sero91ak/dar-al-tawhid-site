@@ -3959,20 +3959,25 @@
       var next = nextPrayer(now);
       adhanLog("next prayer", next || "tomorrow");
       if (!prayerData || !prayerData.times) return;
+      if (window.__DAR_ADHAN_ACTIVE === true) return;
       var nowMin = toMinutes(now.time);
       var keys = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
       for (var i = 0; i < keys.length; i += 1) {
         var row = prayerData.times[keys[i]];
         var late = row ? nowMin - toMinutes(row.time) : -1;
-        if (!row || late < 0 || late > 2) continue;
+        if (!row || late < 0 || late > 5) continue;
         var triggerKey = now.date + ":" + keys[i];
-        if (lastTriggerKey === triggerKey) return;
-        lastTriggerKey = triggerKey;
         try {
           if (localStorage.getItem("darAppleTvLastAdhanV1") === triggerKey) return;
-          localStorage.setItem("darAppleTvLastAdhanV1", triggerKey);
-        } catch (eDedupe) {}
-        await playAdhan(keys[i], "scheduler");
+        } catch (eDedupeRead) {}
+        if (lastTriggerKey === triggerKey) return;
+        var played = await playAdhan(keys[i], "scheduler");
+        if (played) {
+          lastTriggerKey = triggerKey;
+          try { localStorage.setItem("darAppleTvLastAdhanV1", triggerKey); } catch (eDedupe) {}
+        } else {
+          adhanLog("scheduler will retry", triggerKey);
+        }
         return;
       }
     }
@@ -4006,7 +4011,7 @@
     adhanLog("scheduler started");
     Promise.all([loadAdhanCatalog(), refreshPrayerTimes(true)]).then(function () {
       schedulerTick();
-      if (!scheduler) scheduler = setInterval(schedulerTick, 30000);
+      if (!scheduler) scheduler = setInterval(schedulerTick, 10000);
       setTimeout(cacheAdhanOffline, 30000);
     });
     window.addEventListener("focus", function () { refreshPrayerTimes(true).then(schedulerTick); });
