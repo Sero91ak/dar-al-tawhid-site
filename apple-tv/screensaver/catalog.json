@@ -3,6 +3,12 @@
   "schemaVersion": "1.0",
   "contentType": "screensaver",
   "status": "active",
+  "surfaces": {
+    "screensaver": true,
+    "appHome": false,
+    "appHomeTadabburSlot": false
+  },
+  "notForAppHome": true,
   "target": [
     "tvOS",
     "iOS",

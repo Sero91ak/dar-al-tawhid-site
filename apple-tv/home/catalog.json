@@ -1,0 +1,59 @@
+{
+  "project": "DĀR AL TAWḤĪD – Apple TV Startseite",
+  "schemaVersion": "1.0",
+  "status": "active",
+  "view": "TVHomeView",
+  "liveURL": "https://dar-al-tawhid.de/apple-tv/home/catalog.json",
+  "rule": "Bei Gebetszeiten auf der Startseite: oben Gebetszeiten, darunter der aktuelle Qurʾān-Vers, darunter nur Tadabbur zu genau diesem Vers.",
+  "layout": ["prayerTimes", "quranVerse", "tadabbur"],
+  "slots": {
+    "prayerTimes": {
+      "id": "prayerTimes",
+      "title": "Gebetszeiten",
+      "source": "prayer",
+      "catalogPath": "prayer/catalog.json",
+      "timesURL": "https://dar-al-tawhid.de/api/prayer/times",
+      "useUserLocation": true
+    },
+    "quranVerse": {
+      "id": "quranVerse",
+      "title": "Qurʾān-Vers",
+      "source": "quran.reader",
+      "arabicEdition": "quran-uthmani",
+      "germanEdition": "de.bubenheim",
+      "fields": ["arabic", "german", "reference"]
+    },
+    "tadabbur": {
+      "id": "tadabbur",
+      "title": "Tadabbur",
+      "source": "quran.tadabbur",
+      "catalogPath": "quran/tadabbur/catalog.json",
+      "entriesIndexPath": "quran/tadabbur/entries-index.json",
+      "lookup": "exact-surah-ayah",
+      "referenceFormat": "Sūrah:Āyah",
+      "fields": ["text", "narrator", "generation", "source", "grading"],
+      "fallback": "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.",
+      "forbiddenSources": [
+        "hadith",
+        "hadith/catalog.json",
+        "hadith/library-shell.json",
+        "screensaver",
+        "HadithScreensaverProvider",
+        "sharhText",
+        "sharh"
+      ]
+    }
+  },
+  "forbidden": {
+    "homeTadabburSlot": [
+      "Ḥadīṯ-Bibliothek (HAD-XXXX)",
+      "Āṯār/Salaf aus dem Ḥadīṯ-Katalog ohne Vers-Referenz",
+      "Šarḥ aus hadith records",
+      "Screensaver-Rotation"
+    ]
+  },
+  "screensaver": {
+    "allowedOnHome": false,
+    "note": "HadithScreensaverProvider nur für den tvOS-Bildschirmschoner, niemals für den Tadabbur-Bereich der Startseite."
+  }
+}

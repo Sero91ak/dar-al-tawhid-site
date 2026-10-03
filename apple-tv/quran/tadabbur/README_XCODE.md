@@ -13,6 +13,7 @@ Nicht gemeint:
 - keine KI-Erzeugung von Tadabbur-Texten
 - keine erfundenen Salaf-Zuschreibungen
 - keine automatische thematische Ersatz-Erklärung bei fehlendem Eintrag
+- **kein** Ḥadīṯ-Bibliotheks-/Screensaver-/Šarḥ-Inhalt auf der Apple-TV-Startseite unter dem Vers (siehe `apple-tv/home/README_XCODE.md`)
 
 ## GitHub-Datenquelle
 

@@ -1,8 +1,18 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Content",
-  "schemaVersion": "1.7",
+  "schemaVersion": "1.8",
   "language": "de",
   "defaultModule": "hadith",
+  "defaultModuleScope": "library-tab-only",
+  "home": {
+    "enabled": true,
+    "status": "active",
+    "catalogPath": "home/catalog.json",
+    "view": "TVHomeView",
+    "rule": "Startseite bei Gebetszeiten: Gebetszeiten + aktueller Qurʾān-Vers + Tadabbur zu genau diesem Vers. Niemals Ḥadīṯ-Bibliothek, Screensaver-Rotation oder Šarḥ in den Tadabbur-Bereich.",
+    "remoteLoad": true,
+    "offlineCache": true
+  },
   "remoteContentSync": {
     "enabled": true,
     "rule": "Live-Quelle dar-al-tawhid.de/apple-tv liefert catalog.json und Indexdateien; Xcode kennt keine festen Inhaltsgrenzen.",

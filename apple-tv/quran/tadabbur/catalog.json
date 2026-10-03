@@ -6,6 +6,15 @@
   "remoteLoad": true,
   "offlineCache": true,
   "entriesCount": 4454,
+  "homeSlot": {
+    "enabled": true,
+    "surface": "TVHomeView.tadabbur",
+    "lookup": "exact-surah-ayah",
+    "showSharhFromHadithLibrary": false,
+    "showHadithLibraryRecords": false,
+    "showScreensaverRotation": false,
+    "fields": ["text", "narrator", "generation", "source", "grading"]
+  },
   "fallback": {
     "enabled": true,
     "text": "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor."
