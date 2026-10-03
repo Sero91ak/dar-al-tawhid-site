@@ -257,10 +257,9 @@ jobs:
           installer_required=[
               'PAIR_TOKEN_FILE="$TARGET/ipad-pairing-token.txt"',
               'uuidgen',
-              'DAR_VOICE_NETWORK_MODE</key><string>1',
-              'DAR_VOICE_PAIR_TOKEN</key><string>$PAIR_TOKEN',
               'DAR_VOICE_NETWORK_MODE=1',
               'DAR_VOICE_PAIR_TOKEN="$PAIR_TOKEN"',
+              'single-engine launcher',
           ]
           html_required=[
               'const IS_ENGINE_ORIGIN=',
