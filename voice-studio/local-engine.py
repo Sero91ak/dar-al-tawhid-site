@@ -238,6 +238,7 @@ def refresh_studio_ui_from_github():
         ("voice-studio/index.html","studio.html",("id=\"prophetPick\"","prophetPickList","Geschichten der Propheten")),
         ("voice-studio/content-studio.js","content-studio.js",("csProphetTab","ensureProphetUi")),
         ("voice-studio/mubashshirun-pack.js","mubashshirun-pack.js",("mubVoicePack","Die zehn Mubaschschirūn")),
+        ("kids/data/mubashshirun-stories.json","mubashshirun-stories.json",("\"version\": 2","\"al-ʿAšarah al-Mubaššarūn\"")),
     )
     for repo,name,markers in files:
         try:
