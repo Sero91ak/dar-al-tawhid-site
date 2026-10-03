@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v12-quran1059",
   "label": "KIDS · V1.05.9",
   "releasedAt": "2026-10-03T05:05:00.000Z",
-  "note": "V1.05.9: Die vereinfachten Sūrah-Fallbackgrafiken wurden vollständig durch die zuvor erzeugten hochwertigen, filmisch-detaillierten Runway-Motive ersetzt. Zehn lokale JPG-Assets, sauberer Karten-Crop und Offline-Precache; keine Funktionsänderung.",
+  "note": "V1.05.9: Die flachen SVG-Sūrahbilder wurden vollständig verworfen. Alle zehn Sūrah-Karten verwenden jetzt die tatsächlich erzeugten hochwertigen, cineastischen Runway-Bildassets als lokale App-Dateien; Layout und Qurʾān-Funktionen bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -62,6 +62,8 @@
     "alphabetNarrowPractice": "single-column",
     "alphabetTabletPractice": "three-column",
     "alphabetLargeTouchTargets": true,
-    "alphabetFunctionalityChanged": false
+    "alphabetFunctionalityChanged": false,
+    "quranCinematicArtwork": true,
+    "quranArtworkFormat": "local-jpeg"
   }
 }
