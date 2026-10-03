@@ -902,72 +902,9 @@ html.dar-home-v1194 body.is-home-route .footer :is(a,button){
 }
 html.dar-home-v1194 body.is-home-route #footerAppSave{display:none!important}
 
-/* Bottom navigation: a stable reading rail, not a floating capsule. */
-html.dar-home-v1194 body.is-home-route.has-bottom-nav #bottomNav.bottom-nav,
-html.dar-home-v1194 body.is-home-route.has-bottom-nav #appChromeDock #bottomNav.bottom-nav{
-  left:0!important;
-  right:0!important;
-  bottom:0!important;
-  width:100%!important;
-  max-width:none!important;
-  height:74px!important;
-  min-height:74px!important;
-  margin:0!important;
-  padding:5px max(8px,env(safe-area-inset-left)) calc(5px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-right))!important;
-  gap:0!important;
-  border:0!important;
-  border-top:1px solid var(--dt-rule)!important;
-  border-radius:0!important;
-  background:var(--dt-nav-bg)!important;
-  background-image:none!important;
-  box-shadow:none!important;
-  -webkit-backdrop-filter:blur(18px) saturate(1.04)!important;
-  backdrop-filter:blur(18px) saturate(1.04)!important;
-}
-html.dar-home-v1194 body.is-home-route.has-bottom-nav #bottomNav .bottom-nav-btn{
-  height:62px!important;
-  min-height:62px!important;
-  margin:0!important;
-  padding:4px 2px!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  color:color-mix(in srgb,var(--dt-nav-text) 65%,transparent)!important;
-}
-html.dar-home-v1194 body.is-home-route.has-bottom-nav #bottomNav .bottom-nav-btn::before{
-  left:50%!important;
-  top:auto!important;
-  bottom:0!important;
-  width:24px!important;
-  height:2px!important;
-  max-width:24px!important;
-  max-height:2px!important;
-  border:0!important;
-  border-radius:0!important;
-  background:var(--dt-accent)!important;
-  box-shadow:none!important;
-  opacity:0!important;
-  transform:translateX(-50%)!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
-}
-html.dar-home-v1194 body.is-home-route.has-bottom-nav #bottomNav .bottom-nav-btn:is(.active,.is-pressed)::before{
-  opacity:1!important;
-  transform:translateX(-50%)!important;
-  background:var(--dt-accent)!important;
-  box-shadow:none!important;
-}
-html.dar-home-v1194 body.is-home-route.has-bottom-nav #bottomNav .bottom-nav-btn:is(.active,.is-pressed){
-  color:var(--dt-nav-text)!important;
-  border-radius:0!important;
-}
-html.dar-home-v1194 body.is-home-route.has-bottom-nav #bottomNav .bottom-nav-btn .nav-icon{
-  width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important;
-}
-html.dar-home-v1194 body.is-home-route.has-bottom-nav #bottomNav .bottom-nav-btn:is(.active,.is-pressed) .nav-icon{
-  width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;
-}
+/* Bottom navigation is intentionally NOT styled by the Home Library layer.
+   The existing DĀR tab bar (appearance, active oval/plop, quick access and
+   native/web behaviour) remains authoritative on the Start page. */
 
 /* Ensure Salbei labels are never pale-on-ivory. */
 html.dar-home-v1194[data-theme="light"][data-theme-variant="salbei"] body.is-home-route #appView :is(
