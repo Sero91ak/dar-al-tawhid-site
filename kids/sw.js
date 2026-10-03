@@ -42,6 +42,7 @@ const PRECACHE=[
   "/kids/kids-age-typography.css?v=4",
   "/kids/kids-age-typography.js?v=3",
   "/kids/prophet-stories.css?v=23",
+  "/kids/stories-final-v1088.css?v=1088",
   "/kids/prophet-stories.js?v=23",
   "/kids/assets/prophet-scenes/library.webp",
   "/kids/assets/prophet-scenes/garden.webp",
@@ -138,7 +139,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"||url.pathname==="/kids/mubashshirun-stories.js"||url.pathname==="/kids/mubashshirun-stories.css"){
+  if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"||url.pathname==="/kids/stories-final-v1088.css"||url.pathname==="/kids/mubashshirun-stories.js"||url.pathname==="/kids/mubashshirun-stories.css"){
     event.respondWith(networkFirst(request));
     return;
   }
