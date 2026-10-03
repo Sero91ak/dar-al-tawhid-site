@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v12-type1065",
   "label": "KIDS · V1.06.5",
   "releasedAt": "2026-10-03T13:25:00.000Z",
-  "note": "V1.06.5: Globale kindgerechte Typografie: Schriftgröße, Zeilenhöhe, Abstände und Touch-Ziele folgen jetzt automatisch dem gewählten Alter 4–5 / 6–8 / 9–10. Fredoka wird als gut lesbare runde Sans-Serif für Kindertexte genutzt, Noto Naskh Arabic bleibt für Arabisch. Kleine 9–10-Jahre-Texte wurden deutlich angehoben; Karten wachsen mit dem Text statt ihn zu quetschen.",
+  "note": "V1.06.5: Globale altersabhängige Typografie für die gesamte Kids App. Beim Wechsel zwischen 4–5, 6–8 und 9–10 Jahren ändern sich Schriftgrößen, Zeilenhöhe, Lesebreite, Abstände und Touch-Ziele automatisch. Fredoka wird für kindgerechte UI-Titel und Bedienelemente genutzt, fortlaufende Lesetexte bleiben in einer ruhigen System-Sans-Serif, Arabisch in Noto Naskh Arabic/Geeza Pro. Karten und Modale wachsen mit dem Text statt ihn zu quetschen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -95,34 +95,35 @@
     "ageAdaptiveTypography": "v2",
     "ageTypographyProfiles": {
       "4-5": {
-        "body": "20px",
-        "support": "16px",
+        "body": "21px",
+        "support": "14–17px",
         "control": "18px",
-        "cardTitle": "23px",
-        "pageTitle": "38px",
-        "touch": "62px"
-      },
-      "6-8": {
-        "body": "18.5px",
-        "support": "15px",
-        "control": "17px",
-        "cardTitle": "21.5px",
-        "pageTitle": "35px",
+        "cardTitle": "24px",
+        "pageTitle": "40px",
         "touch": "58px"
       },
-      "9-10": {
-        "body": "17.5px",
-        "support": "14.5px",
+      "6-8": {
+        "body": "18px",
+        "support": "12–15px",
         "control": "16px",
+        "cardTitle": "21px",
+        "pageTitle": "36px",
+        "touch": "52px"
+      },
+      "9-10": {
+        "body": "17px",
+        "support": "11–14px",
+        "control": "15px",
         "cardTitle": "20px",
-        "pageTitle": "33px",
-        "touch": "54px"
+        "pageTitle": "34px",
+        "touch": "50px"
       }
     },
-    "kidsReadingFont": "Fredoka",
-    "kidsArabicFont": "Noto Naskh Arabic",
+    "kidsReadingFont": "SF Pro Text / Avenir Next / system sans-serif",
+    "kidsArabicFont": "Noto Naskh Arabic / Geeza Pro",
     "typographyAgeSync": true,
     "typographyNoClip": true,
-    "typographyTextResizeCompatible": true
+    "typographyTextResizeCompatible": true,
+    "kidsUiFont": "Fredoka"
   }
 }
