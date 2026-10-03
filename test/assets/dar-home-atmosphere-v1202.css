@@ -2085,3 +2085,182 @@ html[data-theme].dar-home-v1194 body.is-home-route
     line-height:14px!important;
   }
 }
+
+
+/* v1219 · QURAN RESUME REFERENCE-SIZE MATCH · TEST ONLY
+   Proportions are taken from the supplied reference: card bbox ~1236×164 inside 1320px.
+   Keeps the current transparent/light theme treatment, but matches the compact mass,
+   icon scale, typography and internal spacing of the reference. */
+
+html[data-theme].dar-home-v1194 body.is-home-route
+#appView .home-v380-quran-hero.dt-quran-resume-after-core{
+  width:auto!important;
+  max-width:none!important;
+  min-width:0!important;
+  height:clamp(52px,12.42vw,68px)!important;
+  min-height:clamp(52px,12.42vw,68px)!important;
+  max-height:68px!important;
+  margin:7px clamp(12px,3.18vw,18px) 12px!important;
+  padding:0 clamp(12px,3.25vw,18px)!important;
+
+  display:grid!important;
+  grid-template-columns:clamp(30px,7.1vw,38px) minmax(0,1fr) minmax(128px,1.25fr)!important;
+  align-items:center!important;
+  column-gap:clamp(8px,2.2vw,13px)!important;
+
+  border:1px solid color-mix(in srgb,var(--dt-accent) 29%,var(--dt-rule) 71%)!important;
+  border-radius:clamp(16px,4.15vw,22px)!important;
+
+  background:
+    linear-gradient(108deg,
+      color-mix(in srgb,var(--dt-page) 15%,transparent),
+      color-mix(in srgb,var(--dt-page) 7%,transparent) 58%,
+      color-mix(in srgb,var(--dt-accent) 4%,transparent)
+    )!important;
+  box-shadow:
+    0 5px 14px color-mix(in srgb,#000 4%,transparent),
+    inset 0 1px 0 color-mix(in srgb,#fff 7%,transparent)!important;
+
+  -webkit-backdrop-filter:blur(1.5px) saturate(.96)!important;
+  backdrop-filter:blur(1.5px) saturate(.96)!important;
+  overflow:hidden!important;
+}
+
+/* very subtle inner light; never adds extra size */
+html[data-theme].dar-home-v1194 body.is-home-route
+#appView .home-v380-quran-hero.dt-quran-resume-after-core::before{
+  inset:1px!important;
+  border-radius:inherit!important;
+  background:
+    linear-gradient(110deg,
+      color-mix(in srgb,#fff 4%,transparent),
+      transparent 36%,
+      transparent 78%,
+      color-mix(in srgb,var(--dt-accent) 3%,transparent)
+    )!important;
+}
+
+/* Reference icon scale: roughly 42% of card height. */
+html[data-theme].dar-home-v1194 body.is-home-route
+#appView .home-v380-quran-hero.dt-quran-resume-after-core .dt-quran-resume-icon{
+  width:clamp(28px,6.65vw,36px)!important;
+  height:clamp(28px,6.65vw,36px)!important;
+  min-width:clamp(28px,6.65vw,36px)!important;
+  min-height:clamp(28px,6.65vw,36px)!important;
+  margin:0!important;
+  padding:0!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#appView .home-v380-quran-hero.dt-quran-resume-after-core .dt-quran-resume-icon img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 3px 4px color-mix(in srgb,#000 14%,transparent))!important;
+}
+
+/* Middle title: same compact visual weight as the reference. */
+html[data-theme].dar-home-v1194 body.is-home-route
+#appView .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__body{
+  display:flex!important;
+  align-items:center!important;
+  min-width:0!important;
+  width:auto!important;
+  height:100%!important;
+  margin:0!important;
+  padding:0!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#appView .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__title{
+  margin:0!important;
+  padding:0!important;
+  font-size:clamp(15px,3.95vw,18px)!important;
+  line-height:1!important;
+  font-weight:700!important;
+  letter-spacing:-.015em!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+
+/* Right information block matches reference density. */
+html[data-theme].dar-home-v1194 body.is-home-route
+#appView .home-v380-quran-hero.dt-quran-resume-after-core .dt-quran-resume-info{
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:flex-end!important;
+  min-width:0!important;
+  width:100%!important;
+  height:100%!important;
+  gap:2px!important;
+  margin:0!important;
+  padding:0!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#appView .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__meta{
+  margin:0!important;
+  padding:0!important;
+  font-size:clamp(9px,2.34vw,10.6px)!important;
+  line-height:1.03!important;
+  font-weight:760!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  text-align:right!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#appView .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__when{
+  margin:0!important;
+  padding:0!important;
+  font-size:clamp(8.2px,2.03vw,9.4px)!important;
+  line-height:1.02!important;
+  font-weight:650!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  text-align:right!important;
+}
+
+/* Remove every old helper/kicker so the card cannot grow again. */
+html[data-theme].dar-home-v1194 body.is-home-route
+#appView .home-v380-quran-hero.dt-quran-resume-after-core :is(
+  .home-v380-kicker,
+  .home-v380-quran-hero__chevron,
+  .home-v380-quran-hero__mark
+){
+  display:none!important;
+}
+
+/* Narrow phones: preserve the same reference aspect rather than allowing a tall card. */
+@media(max-width:430px){
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #appView .home-v380-quran-hero.dt-quran-resume-after-core{
+    height:clamp(52px,12.42vw,56px)!important;
+    min-height:clamp(52px,12.42vw,56px)!important;
+    max-height:56px!important;
+    margin-inline:clamp(12px,3.18vw,14px)!important;
+    padding-inline:clamp(11px,3vw,13px)!important;
+    grid-template-columns:30px minmax(0,1fr) minmax(116px,1.18fr)!important;
+    column-gap:8px!important;
+    border-radius:17px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #appView .home-v380-quran-hero.dt-quran-resume-after-core .dt-quran-resume-icon{
+    width:29px!important;
+    height:29px!important;
+    min-width:29px!important;
+    min-height:29px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #appView .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__title{
+    font-size:15px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #appView .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__meta{
+    font-size:9px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #appView .home-v380-quran-hero.dt-quran-resume-after-core .home-v380-quran-hero__when{
+    font-size:8.2px!important;
+  }
+}
