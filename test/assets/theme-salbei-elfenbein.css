@@ -1003,3 +1003,26 @@ html[data-theme] .bottom-nav-btn:is(.active,.is-active,[aria-current="page"]){
   color:var(--dar-readable-ink)!important;
   -webkit-text-fill-color:var(--dar-readable-ink)!important;
 }
+
+
+/* v1211 semantic-token bridge: legacy modules automatically inherit the contrast authority. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]),
+html[data-theme="light"][data-theme-variant="salbei"],
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"]){
+  --text:var(--dar-readable-ink)!important;
+  --cream:var(--dar-readable-ink)!important;
+  --ink:var(--dar-readable-ink)!important;
+  --premium-title:var(--dar-readable-ink)!important;
+  --premium-body:var(--dar-readable-muted)!important;
+  --theme-text:var(--dar-readable-ink)!important;
+  --theme-muted:var(--dar-readable-muted)!important;
+  --theme-surface-elevated-text:var(--dar-readable-ink)!important;
+  --theme-surface-elevated-muted:var(--dar-readable-muted)!important;
+  --theme-surface-elevated-label:var(--dar-readable-accent)!important;
+  --cat-ink:var(--dar-readable-ink)!important;
+  --slide-title:var(--dar-readable-ink)!important;
+  --slide-text:var(--dar-readable-ink)!important;
+  --slide-explanation:var(--dar-readable-muted)!important;
+  --theme-feed-panel-text:var(--dar-readable-ink)!important;
+  --theme-feed-shade-text:var(--dar-readable-muted)!important;
+}
