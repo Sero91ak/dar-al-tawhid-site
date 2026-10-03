@@ -1,19 +1,21 @@
 {
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.2",
   "mode": "shuffleBag",
   "persistProgress": true,
   "storage": "applicationSupport",
+  "keepExistingCardZones": true,
   "contentSource": {
     "provider": "HadithScreensaverProvider",
-    "catalogPath": "hadith/catalog.json",
-    "includedRecordTypes": [
-      "hadith",
-      "athar"
-    ],
+    "catalogPath": "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
+    "includedRecordTypes": ["hadith", "athar"],
+    "includedCardKinds": ["hadith", "athar", "quranTad"],
     "salafStatementsUseRecordType": "athar",
     "requireVerifiedSharh": false,
     "showStatementAlways": true,
-    "rule": "Alle registrierten Ḥadīṯe, Āṯār und Salaf-Aussagen erscheinen im Bildschirmschoner."
+    "tadabburCatalogPath": "https://dar-al-tawhid.de/apple-tv/quran/tadabbur/catalog.json",
+    "quranArabicEdition": "quran-uthmani",
+    "quranGermanEdition": "de.bubenheim",
+    "rule": "Bildschirmschoner: bestehende Zonen Z1–Z5. Karten hadith, athar und quranTad wechseln sich ab. Qurʾān-Vers plus Tadabbur bleiben zusätzlich auf der Startseite bei den Gebetszeiten."
   },
   "cyclePolicy": {
     "showEveryItemBeforeRepeat": true,
@@ -26,14 +28,32 @@
   "batchBuildPolicy": {
     "stepSize": 100,
     "twentyBlockPattern": true,
-    "rule": "Neue Apple-TV-Bildschirmschoner-Inhalte werden in 100er-Schritten gebaut; innerhalb jedes 100er-Schritts werden 20er-Blöcke für Ḥadīṯ, Āṯār, Ṣaḥābah- und Salaf-Aussagen verwendet."
+    "rule": "Neue Ḥadīṯ/Āṯār-Inhalte in 100er-Schritten; Loader hat keine feste Obergrenze."
   },
   "futureModuleMixing": {
     "enabled": true,
     "strategy": "weightedRoundRobin",
     "weights": {
       "hadith": 5,
-      "athar": 5
+      "athar": 5,
+      "quranTad": 5
+    }
+  },
+  "display": {
+    "keepZones": ["Z1", "Z2", "Z3", "Z4", "Z5"],
+    "narratorGap": 14,
+    "sourceGap": 14,
+    "speakerAndHadithSameBlock": true,
+    "markdownEmphasis": true,
+    "dynamicTypeLabel": true,
+    "sharhMode": "compact",
+    "fadeSeconds": 0.8,
+    "duration": {
+      "baseSeconds": 16,
+      "secondsPerWord": 0.35,
+      "sharhBonusSeconds": 6,
+      "minSeconds": 18,
+      "maxSeconds": 40
     }
   }
 }

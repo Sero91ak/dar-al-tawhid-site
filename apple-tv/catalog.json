@@ -1,9 +1,11 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Content",
-  "schemaVersion": "1.8",
+  "schemaVersion": "1.9",
   "language": "de",
   "defaultModule": "hadith",
   "defaultModuleScope": "library-tab-only",
+  "defaultModuleDoesNotControlScreensaver": true,
+  "defaultModuleDoesNotControlHomeTadabbur": true,
   "home": {
     "enabled": true,
     "status": "active",
@@ -31,7 +33,16 @@
     "rotationConfigPath": "screensaver/rotation.json",
     "remoteLoad": true,
     "offlineCache": true,
-    "fallbackRequired": true
+    "fallbackRequired": true,
+    "keepExistingCardZones": true,
+    "mix": {
+      "strategy": "weightedRoundRobin",
+      "weights": {
+        "hadith": 5,
+        "athar": 5,
+        "quranTad": 5
+      }
+    }
   },
   "quran": {
     "reader": {
