@@ -74,40 +74,61 @@ function removeOldLayers(){
 function applyHomeAtmosphereV1204(){
   if(!isHome())return;
   var html=document.documentElement;
+  var theme=String(html.getAttribute("data-theme")||"").toLowerCase();
+  var light=(theme==="light"||theme==="soft"||theme==="eisgold");
   var body=document.body;
   var top=document.querySelector(".top-shell");
   var header=top&&top.querySelector(".header");
   var view=document.getElementById("appView");
-  var theme=String(html.getAttribute("data-theme")||"").toLowerCase();
-  var light=(theme==="light"||theme==="soft"||theme==="eisgold");
   var page=(body&&getComputedStyle(body).getPropertyValue("--dt-page").trim())||(light?"#f5f1e7":"#050706");
-
-  /* v1214: CSS owns the full-bleed atmosphere.
-     Remove all old inline image layers so no picture can look pasted/cut. */
-  html.classList.add("dar-home-atmosphere-v1214");
-  html.style.setProperty("background-color",page,"important");
-  html.style.removeProperty("background-image");
-  html.style.removeProperty("background-repeat");
-  html.style.removeProperty("background-size");
-  html.style.removeProperty("background-position");
-
-  [body,top,header,view].forEach(function(el){
-    if(!el)return;
-    el.style.removeProperty("background");
-    el.style.removeProperty("background-image");
-    el.style.removeProperty("background-repeat");
-    el.style.removeProperty("background-size");
-    el.style.removeProperty("background-position");
-    el.style.removeProperty("background-attachment");
-    el.style.removeProperty("filter");
-    if(el===body)el.style.setProperty("background-color",page,"important");
-    else el.style.setProperty("background-color","transparent","important");
-  });
-
+  var heroImg=window.matchMedia&&window.matchMedia("(min-width:760px)").matches
+    ? "/test/assets/home-v1194/hero-wide-adobe.jpg?v=1206"
+    : "/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1206";
+  var studyImg="/test/assets/home-v1194/study-runway.jpg?v=1206";
+  if(html){
+    html.style.setProperty("background-color",page,"important");
+    html.style.setProperty(
+      "background-image",
+      light
+        ? "linear-gradient(90deg,rgba(249,246,238,.44),rgba(249,246,238,.10)),url('"+heroImg+"')"
+        : "linear-gradient(90deg,rgba(2,3,2,.58),rgba(2,3,2,.10)),url('"+heroImg+"')",
+      "important"
+    );
+    html.style.setProperty("background-repeat","no-repeat","important");
+    html.style.setProperty("background-size","cover","important");
+    html.style.setProperty("background-position","62% top","important");
+  }
+  if(body){
+    body.style.setProperty("background-color",page,"important");
+    body.style.setProperty("background-image","none","important");
+  }
+  if(top){
+    top.style.setProperty("background-color",page,"important");
+    top.style.setProperty(
+      "background-image",
+      light
+        ? "linear-gradient(180deg,rgba(249,246,238,.28) 0%,rgba(249,246,238,.34) 36%,rgba(249,246,238,.62) 78%,rgba(249,246,238,.84) 100%),linear-gradient(90deg,rgba(249,246,238,.50) 0%,rgba(249,246,238,.28) 50%,rgba(249,246,238,.12) 100%),url('"+heroImg+"')"
+        : "linear-gradient(180deg,rgba(2,3,2,.10) 0%,rgba(2,3,2,.18) 34%,rgba(2,3,2,.58) 72%,rgba(2,3,2,.98) 100%),linear-gradient(90deg,rgba(2,3,2,.58) 0%,rgba(2,3,2,.28) 48%,rgba(2,3,2,.08) 100%),url('"+heroImg+"')",
+      "important"
+    );
+    top.style.setProperty("background-repeat","no-repeat","important");
+    top.style.setProperty("background-size","100% 100%,100% 100%,cover","important");
+    top.style.setProperty("background-position","center,center,62% 32%","important");
+  }
+  if(header){
+    header.style.setProperty("background","transparent","important");
+    header.style.setProperty("background-image","none","important");
+  }
+  if(view){
+    view.style.setProperty("background-color","transparent","important");
+    view.style.setProperty("background-image","none","important");
+    view.style.removeProperty("background-repeat");
+    view.style.removeProperty("background-size");
+    view.style.removeProperty("background-position");
+  }
   document.querySelectorAll("#appView .home-v380-shell,#appView .home-v380-section,#appView .home-line-list,#appView .home-line-grid,.top-shell .header").forEach(function(el){
     el.style.setProperty("background-color","transparent","important");
-    el.style.setProperty("background-image","none","important");
-    el.style.setProperty("box-shadow","none","important");
+    if(!el.classList.contains("header"))el.style.setProperty("background-image","none","important");
   });
 }
 function ensureHero(){
@@ -340,7 +361,7 @@ function cleanupHomeLiteralArtifacts(){
 function sync(){
   if(!document.documentElement||!document.body)return;
   if(!isHome()){
-    document.documentElement.classList.remove("dar-home-v1194","dar-home-atmosphere-v1214");
+    document.documentElement.classList.remove("dar-home-v1194");
     document.documentElement.style.removeProperty("background-color");
     document.documentElement.style.removeProperty("background-image");
     document.documentElement.style.removeProperty("background-repeat");
