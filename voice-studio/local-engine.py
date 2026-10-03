@@ -45,7 +45,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.65"
+ENGINE_VERSION="2.9.66"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_DIR=VOICE_HOME/"MasterPronunciations"
@@ -238,7 +238,7 @@ def refresh_studio_ui_from_github():
         ("voice-studio/index.html","studio.html",("id=\"prophetPick\"","prophetPickList","Geschichten der Propheten")),
         ("voice-studio/content-studio.js","content-studio.js",("csProphetTab","ensureProphetUi")),
         ("voice-studio/mubashshirun-pack.js","mubashshirun-pack.js",("mubVoicePack","Die zehn Mubaschschirūn")),
-        ("kids/data/mubashshirun-stories.json","mubashshirun-stories.json",("\"version\": 3","\"al-ʿAšarah al-Mubaššarūn\"")),
+        ("kids/data/mubashshirun-stories.json","mubashshirun-stories.json",("\"version\": 4","\"al-ʿAšarah al-Mubaššarūn\"")),
     )
     for repo,name,markers in files:
         try:
