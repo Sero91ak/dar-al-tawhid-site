@@ -63,6 +63,12 @@ const expectedIds = [
   "ilyas","alyasa","yunus","zakariyya","yahya","isa","muhammad"
 ];
 
+const expectedMubashshirunIds = [
+  "abu-bakr","umar","uthman","ali","talha","zubayr","abd-ar-rahman","sad","said","abu-ubaydah"
+];
+const mubBundleVersion = String(Number(visual.mubashshirunBundleVersion || 0) || "");
+const mubDataVersion = Number(visual.mubashshirunDataVersion || 0);
+
 function assertOnlyCurrentBuild(rel) {
   const text = read(rel);
   const refs = uniqueMatches(text, /kids-shell-v12-tab\d+/g);
@@ -80,6 +86,10 @@ for (const rel of ["kids/index.html", "kids/start.html", "kids/shell.html"]) {
   requireMatch(text, "/kids/prophet-stories.css?v=" + htmlCssVersion, rel);
   requireMatch(text, "/kids/prophet-stories.js?v=" + htmlJsVersion, rel);
   requireMatch(text, "/kids/sw.js?v=" + swVersion, rel);
+  if (mubBundleVersion) {
+    requireMatch(text, "/kids/mubashshirun-stories.css?v=" + mubBundleVersion, rel);
+    requireMatch(text, "/kids/mubashshirun-stories.js?v=" + mubBundleVersion, rel);
+  }
 }
 
 const manifest = read("kids/manifest.webmanifest");
@@ -106,6 +116,11 @@ const sw = read("kids/sw.js");
 requireMatch(sw, 'const CACHE_NAME="dar-al-tawhid-kids-v' + swVersion + '";', "kids/sw.js");
 requireMatch(sw, "/kids/prophet-stories.css?v=" + htmlCssVersion, "kids/sw.js");
 requireMatch(sw, "/kids/prophet-stories.js?v=" + htmlJsVersion, "kids/sw.js");
+if (mubBundleVersion) {
+  requireMatch(sw, "/kids/mubashshirun-stories.css?v=" + mubBundleVersion, "kids/sw.js");
+  requireMatch(sw, "/kids/mubashshirun-stories.js?v=" + mubBundleVersion, "kids/sw.js");
+  requireMatch(sw, "/kids/data/mubashshirun-stories.json", "kids/sw.js");
+}
 
 const prophetJs = read("kids/prophet-stories.js");
 requireMatch(prophetJs, '-card.jpg?v=' + assetVersion, "kids/prophet-stories.js");
@@ -139,6 +154,33 @@ if (Number(visual.premiumDetailHeroes) !== 25 && Number(visual.dedicatedHighReso
   error("visualSystem muss 25 dedizierte Detail-Heroes ausweisen");
 }
 if (visual.visibleFaces !== false) error("visualSystem.visibleFaces muss false bleiben");
+
+if (mubDataVersion) {
+  let mub;
+  try {
+    mub = JSON.parse(read("kids/data/mubashshirun-stories.json"));
+  } catch (err) {
+    error("Mubaschschirūn-Daten ungültig: " + err.message);
+  }
+  if (mub) {
+    if (Number(mub.version || 0) !== mubDataVersion) {
+      error("Mubaschschirūn-Datenversion stimmt nicht mit visualSystem überein");
+    }
+    const rows = Array.isArray(mub.items) ? mub.items : [];
+    if (rows.length !== 10) error("Erwartet 10 Mubaschschirūn-Geschichten, gefunden " + rows.length);
+    const ids = rows.map(x => String(x && x.id || ""));
+    for (const id of expectedMubashshirunIds) {
+      if (!ids.includes(id)) error("Mubaschschirūn-Geschichte fehlt: " + id);
+      const item = rows.find(x => String(x && x.id || "") === id) || {};
+      for (const age of ["4-5","6-8","9-10"]) {
+        if (!String((item.scripts || {})[age] || "").trim()) error(id + " Text fehlt für Alter " + age);
+      }
+      const rel = "kids/assets/sahaba-mubashshirun/" + id + ".jpg";
+      if (!exists(rel)) error("Ṣaḥābah-Asset fehlt: " + rel);
+      else if (size(rel) < 50000) error("Ṣaḥābah-Asset ist verdächtig klein: " + rel + " (" + size(rel) + " Bytes)");
+    }
+  }
+}
 
 if (failed) process.exit(1);
 console.log("Kids Prophet release guard OK:", build, label, exactV106Snapshot ? "exact-v106-legacy-snapshot" : ("assets v" + assetVersion), "25 Karten + 25 Heroes");
