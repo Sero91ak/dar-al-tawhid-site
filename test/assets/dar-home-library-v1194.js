@@ -71,6 +71,48 @@ function removeOldLayers(){
   if(document.body)document.body.classList.remove("dar-knowledge-home-v1183");
   document.documentElement.classList.remove("dar-home-v1190","dar-home-v1192");
 }
+function applyHomeAtmosphereV1204(){
+  if(!isHome())return;
+  var body=document.body;
+  var top=document.querySelector(".top-shell");
+  var header=top&&top.querySelector(".header");
+  var view=document.getElementById("appView");
+  if(body){
+    body.style.setProperty("background-color","#050706","important");
+    body.style.setProperty("background-image","none","important");
+  }
+  if(top){
+    top.style.setProperty("background-color","#050706","important");
+    top.style.setProperty(
+      "background-image",
+      "linear-gradient(180deg,rgba(2,3,2,.10) 0%,rgba(2,3,2,.18) 34%,rgba(2,3,2,.58) 72%,rgba(2,3,2,.98) 100%),linear-gradient(90deg,rgba(2,3,2,.58) 0%,rgba(2,3,2,.28) 48%,rgba(2,3,2,.08) 100%),url('/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1204')",
+      "important"
+    );
+    top.style.setProperty("background-repeat","no-repeat","important");
+    top.style.setProperty("background-size","100% 100%,100% 100%,cover","important");
+    top.style.setProperty("background-position","center,center,62% 32%","important");
+  }
+  if(header){
+    header.style.setProperty("background","transparent","important");
+    header.style.setProperty("background-image","none","important");
+  }
+  if(view){
+    view.style.setProperty("background-color","#050706","important");
+    view.style.setProperty(
+      "background-image",
+      "linear-gradient(180deg,rgba(2,3,2,.96) 0%,rgba(2,3,2,.44) 12%,rgba(2,3,2,.24) 35%,rgba(2,3,2,.34) 70%,rgba(2,3,2,.96) 100%),linear-gradient(90deg,rgba(2,3,2,.62) 0%,rgba(2,3,2,.30) 52%,rgba(2,3,2,.16) 100%),url('/test/assets/home-v1194/study-runway.jpg?v=1204')",
+      "important"
+    );
+    view.style.setProperty("background-repeat","no-repeat","important");
+    view.style.setProperty("background-size","100% 100%,100% 100%,100% auto","important");
+    view.style.setProperty("background-position","center,center,center top","important");
+  }
+  document.querySelectorAll("#appView .home-v380-shell,#appView .home-v380-section,#appView .home-line-list,#appView .home-line-grid,.top-shell .header").forEach(function(el){
+    el.style.setProperty("background-color","transparent","important");
+    if(!el.classList.contains("header"))el.style.setProperty("background-image","none","important");
+  });
+}
+
 function ensureHero(){
   var top=document.querySelector(".top-shell");
   var header=top&&top.querySelector(".header");
@@ -209,6 +251,7 @@ function sync(){
   document.documentElement.classList.add("dar-home-v1194");
   ensureHero();
   ensureMain();
+  applyHomeAtmosphereV1204();
 }
 function queue(){
   if(queued)return;
