@@ -20,6 +20,7 @@ LABEL="com.daraltawhid.voice-engine"
 STAGE="$TARGET/.update-stage-$$"
 BACKUPS="$TARGET/backups"
 PAIR_TOKEN_FILE="$TARGET/ipad-pairing-token.txt"
+USE_ARCHIVE_ONLY=0
 
 cleanup_stage() {
   rm -rf "$STAGE" >/dev/null 2>&1 || true
@@ -35,7 +36,7 @@ sleep 1
 pkill -KILL -x DARVoiceStudio >/dev/null 2>&1 || true
 pkill -KILL -x DARVoiceStudioNative >/dev/null 2>&1 || true
 
-# 2.9.67 räumt die früheren Terminal-Autopiloten einmalig auf. Diese alten
+# 2.9.68 räumt die früheren Terminal-Autopiloten einmalig auf. Diese alten
 # /tmp-Skripte durften selbstständig Batch-Starts auslösen und würden sonst
 # neben dem neuen persistenten Supervisor weiterlaufen.
 pkill -f '/tmp/dar_propheten_.*\.sh' >/dev/null 2>&1 || true
@@ -120,12 +121,16 @@ download_repo_file() {
   local out="$2"
   local release_zip="$STAGE/release-$PIN.zip"
 
-  if curl -fsSL --retry 2 --retry-delay 1 \
-    -H "Accept: application/vnd.github.raw+json" \
-    -H "User-Agent: DAR-Voice-Studio-Installer" \
-    "$REPO_API/contents/$path?ref=$PIN" \
-    -o "$out"; then
-    return 0
+  if [ "$USE_ARCHIVE_ONLY" -eq 0 ]; then
+    if curl -fsSL --retry 2 --retry-delay 1 \
+      -H "Accept: application/vnd.github.raw+json" \
+      -H "User-Agent: DAR-Voice-Studio-Installer" \
+      "$REPO_API/contents/$path?ref=$PIN" \
+      -o "$out"; then
+      return 0
+    fi
+    echo "GitHub Contents API blockiert/rate-limited – wechsle einmalig auf Repository-Archiv."
+    USE_ARCHIVE_ONLY=1
   fi
 
   ensure_archive "$PIN" "$release_zip"
@@ -322,7 +327,7 @@ if ! /bin/bash -n "$STAGE/update-mac.command"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.9.67-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-2.9.68-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
@@ -342,7 +347,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
 done
 chmod +x "$TARGET/update-mac.command"
 
-echo "Voice Studio 2.9.67 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio 2.9.68 Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -358,123 +363,18 @@ if [ -z "$FFMPEG_BIN" ]; then
   done
 fi
 
-# Vorherige Engine/LaunchAgent-Reste sauber lösen.
-pkill -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
+# 2.9.68 Stabilitätsmodus: Der Installer startet KEINE Engine mehr.
+# Er räumt nur alte Prozessmanager auf. Die App selbst besitzt beim Öffnen
+# genau einen Launcher, der die lokale Engine kontrolliert startet.
+pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
+sleep 0.4
+pkill -KILL -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
 launchctl bootout "gui/$UID/$LABEL" >/dev/null 2>&1 || true
 launchctl bootout "gui/$UID" "$LAUNCH" >/dev/null 2>&1 || true
 launchctl remove "$LABEL" >/dev/null 2>&1 || true
-sleep 1
+rm -f "$LAUNCH" >/dev/null 2>&1 || true
 
-# LaunchAgent: lokale Serhat-Engine beim Login starten. Ein launchctl-Fehler
-# darf die App-Installation niemals mehr abbrechen.
-cat > "$LAUNCH" <<PLIST
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>Label</key><string>$LABEL</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>$VENV/bin/python</string>
-    <string>$TARGET/local-engine.py</string>
-  </array>
-  <key>WorkingDirectory</key><string>$TARGET</string>
-  <key>EnvironmentVariables</key>
-  <dict>
-    <key>DAR_VOICE_APP_HOME</key><string>$TARGET</string>
-    <key>SERHAT_VOICE_REF</key><string>$REF</string>
-    <key>SERHAT_VOICE_REF_AR</key><string>$AR_REF</string>
-    <key>PYTORCH_ENABLE_MPS_FALLBACK</key><string>1</string>
-    <key>DAR_VOICE_DISABLE_MLX</key><string>0</string>
-    <key>DAR_VOICE_NETWORK_MODE</key><string>1</string>
-    <key>DAR_VOICE_PAIR_TOKEN</key><string>$PAIR_TOKEN</string>
-    <key>PATH</key><string>/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
-    <key>DAR_FFMPEG_BIN</key><string>$FFMPEG_BIN</string>
-  </dict>
-  <key>RunAtLoad</key><true/>
-  <key>KeepAlive</key><true/>
-  <key>StandardOutPath</key><string>$TARGET/engine.log</string>
-  <key>StandardErrorPath</key><string>$TARGET/engine-error.log</string>
-</dict>
-</plist>
-PLIST
-
-/usr/bin/plutil -lint "$LAUNCH" >/dev/null
-chmod 600 "$LAUNCH"
-
-LAUNCH_OK=0
-: > "$TARGET/launchctl-bootstrap.log"
-if launchctl bootstrap "gui/$UID" "$LAUNCH" 2>"$TARGET/launchctl-bootstrap.log"; then
-  launchctl enable "gui/$UID/$LABEL" >/dev/null 2>&1 || true
-  # RunAtLoad startet die Engine bereits. Kein kickstart -k mehr:
-  # dieser Aufruf konnte auf manchen Macs minutenlang blockieren und die
-  # komplette Installation nach erfolgreicher Validierung festhalten.
-  LAUNCH_OK=1
-else
-  echo "Hinweis: macOS launchctl bootstrap wurde abgelehnt. Die Engine wird direkt gestartet."
-  cat "$TARGET/launchctl-bootstrap.log" || true
-fi
-
-engine_health_matches_release() {
-  local body running_version
-  body="$(curl -fsS --max-time 1 "http://127.0.0.1:8787/health" 2>/dev/null || true)"
-  [ -n "$body" ] || return 1
-  running_version="$(printf '%s' "$body" | /usr/bin/sed -n 's/.*"engine_version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')"
-  [ "$running_version" = "$RELEASE_VERSION" ]
-}
-
-# Warten, ob LaunchAgent EXAKT die im Manifest angegebene Engine hochgebracht hat.
-ENGINE_OK=0
-for i in $(seq 1 20); do
-  if engine_health_matches_release; then
-    ENGINE_OK=1
-    break
-  fi
-  sleep 0.5
-done
-
-# Robuster Fallback: LaunchAgent zuerst vollständig aus dem Spiel nehmen,
-# damit nie LaunchAgent + Direktstart gleichzeitig um Port 8787 konkurrieren.
-if [ "$ENGINE_OK" -ne 1 ]; then
-  echo "LaunchAgent antwortet nicht – wechsle auf genau einen Direktstart …"
-  launchctl bootout "gui/$UID/$LABEL" >/dev/null 2>&1 || true
-  launchctl bootout "gui/$UID" "$LAUNCH" >/dev/null 2>&1 || true
-  launchctl remove "$LABEL" >/dev/null 2>&1 || true
-  pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
-  sleep 1
-  pkill -KILL -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
-
-  nohup env \
-    DAR_VOICE_APP_HOME="$TARGET" \
-    SERHAT_VOICE_REF="$REF" \
-    SERHAT_VOICE_REF_AR="$AR_REF" \
-    PYTORCH_ENABLE_MPS_FALLBACK=1 \
-    DAR_VOICE_DISABLE_MLX=0 \
-    DAR_VOICE_NETWORK_MODE=1 \
-    DAR_VOICE_PAIR_TOKEN="$PAIR_TOKEN" \
-    "$VENV/bin/python" "$TARGET/local-engine.py" \
-    >>"$TARGET/engine.log" 2>>"$TARGET/engine-error.log" </dev/null &
-  echo $! > "$TARGET/engine.pid"
-
-  for i in $(seq 1 40); do
-    if engine_health_matches_release; then
-      ENGINE_OK=1
-      break
-    fi
-    sleep 0.5
-  done
-fi
-
-if [ "$ENGINE_OK" -ne 1 ]; then
-  echo "FEHLER: Serhat Engine konnte nicht gestartet werden."
-  echo "---- engine-error.log ----"
-  tail -n 80 "$TARGET/engine-error.log" 2>/dev/null || true
-  echo "---- engine.log ----"
-  tail -n 80 "$TARGET/engine.log" 2>/dev/null || true
-  exit 1
-fi
-
-echo "Serhat Engine $RELEASE_VERSION erreichbar: http://127.0.0.1:8787/health"
+echo "Engine-Start wird der Voice-Studio-App überlassen · kein LaunchAgent/KeepAlive."
 
 # Native macOS-App wird zuerst vollständig in einem separaten Bundle gebaut.
 # Die bisher installierte App bleibt bis nach Build, plist-Lint und Codesign startbar.
@@ -539,7 +439,7 @@ VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
 URL="http://127.0.0.1:8787/studio/"
 HEALTH="http://127.0.0.1:8787/health"
-EXPECTED_ENGINE_VERSION="2.9.67"
+EXPECTED_ENGINE_VERSION="2.9.68"
 SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
 NATIVE="$SELF_DIR/DARVoiceStudioNative"
 LOG="$TARGET/app-launch.log"
@@ -561,19 +461,9 @@ engine_is_current() {
   echo "Native: $NATIVE"
 
   if ! engine_is_current; then
-    echo "Engine fehlt oder ist veraltet – starte exakt die installierte Version neu."
-    launchctl bootout "gui/$UID/com.daraltawhid.voice-engine" >/dev/null 2>&1 || true
+    echo "Engine fehlt/veraltet – starte genau eine lokale Engine."
     pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
-    sleep 1
-    pkill -KILL -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
-    echo "Starte die lokale Engine direkt; kein blockierendes launchctl kickstart mehr."
-  fi
-
-  if ! engine_is_current; then
-    echo "Starte aktuelle Engine einmal direkt."
-    launchctl bootout "gui/$UID/com.daraltawhid.voice-engine" >/dev/null 2>&1 || true
-    pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
-    sleep 1
+    sleep 0.4
     pkill -KILL -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
 
     if [ -x "$VENV/bin/python" ] && [ -f "$TARGET/local-engine.py" ]; then
@@ -596,6 +486,14 @@ engine_is_current() {
   fi
 
 
+  if engine_is_current; then
+    export DAR_VOICE_ENGINE_OWNER=launcher
+    echo "Serhat Engine bereit · Launcher bleibt alleiniger Engine-Besitzer."
+  else
+    unset DAR_VOICE_ENGINE_OWNER
+    echo "Engine-Health noch nicht bereit · native App übernimmt einmalige Recovery."
+  fi
+
   if [ -x "$NATIVE" ]; then
     echo "Starte native WKWebView-App."
     exec "$NATIVE"
@@ -617,11 +515,10 @@ APPSTART
 chmod +x "$MACOS/DARVoiceStudio"
 [ -f "$MACOS/DARVoiceStudioNative" ] && chmod +x "$MACOS/DARVoiceStudioNative" || true
 
+# 2.9.68: Der Shell-Launcher ist IMMER der Bundle-Einstieg.
+# Er stellt zuerst genau eine gesunde Engine her und übergibt erst dann an Swift.
 BUNDLE_EXECUTABLE="DARVoiceStudio"
-if [ "$BUILD_OK" -eq 1 ] && [ -x "$MACOS/DARVoiceStudioNative" ]; then
-  BUNDLE_EXECUTABLE="DARVoiceStudioNative"
-fi
-echo "macOS Bundle-Executable: $BUNDLE_EXECUTABLE"
+echo "macOS Bundle-Executable: $BUNDLE_EXECUTABLE · single-engine launcher"
 
 # App-Icon aus dem eigenen Voice-Studio-Logo erzeugen.
 if [ -s "$TARGET/voice-studio-icon.png" ]; then
@@ -643,8 +540,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.9.67</string>
-  <key>CFBundleShortVersionString</key><string>2.9.67</string>
+  <key>CFBundleVersion</key><string>2.9.68</string>
+  <key>CFBundleShortVersionString</key><string>2.9.68</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon.icns</string>
@@ -666,10 +563,8 @@ cat > "$PLIST" <<'PLIST'
 </plist>
 PLIST
 /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable $BUNDLE_EXECUTABLE" "$PLIST"
-if [ "$BUNDLE_EXECUTABLE" = "DARVoiceStudioNative" ]; then
-  /usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.67 · Native" "$PLIST" 2>/dev/null || \
-    /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.67 · Native'" "$PLIST"
-fi
+/usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.68 · Stable Single Engine" "$PLIST" 2>/dev/null || \
+  /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.68 · Stable Single Engine'" "$PLIST"
 /usr/bin/plutil -lint "$PLIST" >/dev/null
 
 if [ ! -s "$RESOURCES/VoiceStudioIcon.png" ]; then
@@ -723,7 +618,7 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.9.67 ist installiert."
+say_status "DĀR Voice Studio 2.9.68 ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
   "$APP/Contents/MacOS/$BUNDLE_EXECUTABLE" >/dev/null 2>&1 &
