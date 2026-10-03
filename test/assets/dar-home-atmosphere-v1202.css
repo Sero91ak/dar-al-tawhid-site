@@ -1759,3 +1759,329 @@ html[data-theme].dar-home-v1194 body.is-home-route .home-line-tawhid > *{
     height:920px!important;
   }
 }
+
+
+/* v1218 · LOWER IMAGE RESET + COMPACT PRAYER GRID + PAINTED SEAM · TEST ONLY
+   The study image is moved back DOWN. It no longer invades the Ibn-Sirin block.
+   A separate feathered paint wash blends both backgrounds without a hard line.
+   Prayer rows are shorter, cleaner and fully readable without glass. */
+
+/* 1 · Lower study image: down again, no layout pull-up. */
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view{
+  position:relative!important;
+  isolation:isolate!important;
+  margin-top:0!important;
+  padding-top:0!important;
+  overflow:visible!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view::before{
+  top:-104px!important;
+  height:clamp(790px,118vw,980px)!important;
+  opacity:.78!important;
+  -webkit-mask-image:
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0,0,0,.08) 8%,
+      rgba(0,0,0,.30) 17%,
+      rgba(0,0,0,.66) 29%,
+      #000 42%,
+      #000 73%,
+      rgba(0,0,0,.58) 88%,
+      transparent 100%)!important;
+  mask-image:
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0,0,0,.08) 8%,
+      rgba(0,0,0,.30) 17%,
+      rgba(0,0,0,.66) 29%,
+      #000 42%,
+      #000 73%,
+      rgba(0,0,0,.58) 88%,
+      transparent 100%)!important;
+}
+
+/* A dedicated irregular "paint wash" sits across the join.
+   It does not move either image; it only dissolves the boundary. */
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  left:-7vw!important;
+  right:-7vw!important;
+  top:-118px!important;
+  height:220px!important;
+  background:
+    radial-gradient(72% 58% at 12% 48%,
+      color-mix(in srgb,var(--dt-page) 34%,transparent),
+      transparent 72%),
+    radial-gradient(66% 64% at 88% 36%,
+      color-mix(in srgb,var(--dt-page) 28%,transparent),
+      transparent 74%),
+    radial-gradient(54% 60% at 51% 60%,
+      color-mix(in srgb,var(--dt-page) 18%,transparent),
+      transparent 78%),
+    linear-gradient(180deg,
+      transparent 0%,
+      color-mix(in srgb,var(--dt-page) 18%,transparent) 28%,
+      color-mix(in srgb,var(--dt-page) 25%,transparent) 52%,
+      color-mix(in srgb,var(--dt-page) 10%,transparent) 76%,
+      transparent 100%)!important;
+  filter:blur(18px)!important;
+  opacity:.86!important;
+  -webkit-mask-image:
+    linear-gradient(to bottom,transparent 0%,#000 24%,#000 76%,transparent 100%)!important;
+  mask-image:
+    linear-gradient(to bottom,transparent 0%,#000 24%,#000 76%,transparent 100%)!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view > *{
+  position:relative!important;
+  z-index:1!important;
+}
+
+/* Reset the aggressive v1217 overlap on the Isnad/Tawhid junction. */
+html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad{
+  margin-bottom:0!important;
+  padding-bottom:34px!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad::after{
+  left:-6vw!important;
+  right:-6vw!important;
+  bottom:-58px!important;
+  height:128px!important;
+  background:
+    radial-gradient(70% 62% at 18% 24%,
+      color-mix(in srgb,var(--dt-page) 34%,transparent),
+      transparent 72%),
+    radial-gradient(64% 58% at 80% 26%,
+      color-mix(in srgb,var(--dt-page) 26%,transparent),
+      transparent 74%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--dt-page) 28%,transparent) 0%,
+      color-mix(in srgb,var(--dt-page) 14%,transparent) 48%,
+      transparent 100%)!important;
+  filter:blur(12px)!important;
+  opacity:.82!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .home-line-tawhid{
+  padding-top:28px!important;
+  border-top:0!important;
+  background:transparent!important;
+  background-image:none!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route .home-line-tawhid::before{
+  top:-42px!important;
+  height:98px!important;
+  opacity:.54!important;
+  filter:blur(14px)!important;
+}
+
+/* 2 · Prayer times: compact open outline, no glass, more breathing room around rules. */
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.header-prayer-hub.dt-prayer-feature{
+  margin-top:14px!important;
+  padding:7px 11px 6px!important;
+  min-height:0!important;
+  border:1px solid color-mix(in srgb,var(--dt-accent) 28%,var(--dt-rule) 72%)!important;
+  border-radius:13px!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature :is(
+  .header-prayer-hub__main,.header-prayer-hub__status
+){
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+/* Main prayer row */
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__main{
+  min-height:46px!important;
+  padding:2px 4px 7px!important;
+  gap:7px!important;
+  grid-template-columns:minmax(0,1fr) minmax(80px,.68fr) minmax(0,1fr)!important;
+  align-items:center!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-zone{
+  position:relative!important;
+  min-width:0!important;
+  min-height:42px!important;
+  padding:3px 10px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  border:0!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-zone + .header-prayer-zone::before{
+  content:""!important;
+  position:absolute!important;
+  left:-4px!important;
+  top:25%!important;
+  bottom:25%!important;
+  width:1px!important;
+  background:color-mix(in srgb,var(--dt-accent) 18%,transparent)!important;
+  pointer-events:none!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature :is(
+  .header-prayer-name,.header-prayer-zone__countdown
+){
+  line-height:1.02!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature :is(
+  .header-prayer-zone__caption,.header-prayer-zone__count-label
+){
+  margin-top:2px!important;
+  line-height:1.05!important;
+}
+
+/* Status row: one clean baseline with readable icons and short separators. */
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__status{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,1.18fr) minmax(0,.92fr) minmax(0,1.05fr)!important;
+  align-items:center!important;
+  min-height:34px!important;
+  margin:1px 0 0!important;
+  padding:7px 2px 0!important;
+  gap:0!important;
+  border:0!important;
+  border-radius:0!important;
+  overflow:visible!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__status::before{
+  content:""!important;
+  position:absolute!important;
+  left:2px!important;
+  right:2px!important;
+  top:0!important;
+  height:1px!important;
+  background:color-mix(in srgb,var(--dt-accent) 17%,transparent)!important;
+  pointer-events:none!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__status>span{
+  position:relative!important;
+  min-width:0!important;
+  min-height:27px!important;
+  padding:3px 8px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  border:0!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  line-height:1.08!important;
+  font-size:clamp(8.9px,1.08vw,10.7px)!important;
+  font-weight:760!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__status>span+span::before{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  top:25%!important;
+  bottom:25%!important;
+  width:1px!important;
+  background:color-mix(in srgb,var(--dt-accent) 16%,transparent)!important;
+  pointer-events:none!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__ico{
+  flex:0 0 auto!important;
+  min-width:15px!important;
+  width:15px!important;
+  min-height:15px!important;
+  height:15px!important;
+  display:inline-grid!important;
+  place-items:center!important;
+  font-size:13px!important;
+  line-height:15px!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__date{
+  justify-content:flex-start!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature .header-prayer-hub__place{
+  justify-content:flex-end!important;
+  max-width:none!important;
+}
+html[data-theme].dar-home-v1194 body.is-home-route
+#headerPrayerStatus.dt-prayer-feature :is(
+  .header-prayer-hub__hijri,.header-prayer-hub__clock
+){
+  justify-content:center!important;
+}
+
+@media(max-width:430px){
+  html[data-theme].dar-home-v1194 body.is-home-route #appView.view::before{
+    top:-90px!important;
+    height:760px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route #appView.view::after{
+    top:-104px!important;
+    height:190px!important;
+    filter:blur(15px)!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad{
+    padding-bottom:30px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #headerPrayerStatus.header-prayer-hub.dt-prayer-feature{
+    margin-top:12px!important;
+    padding:6px 7px 5px!important;
+    border-radius:12px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #headerPrayerStatus.dt-prayer-feature .header-prayer-hub__main{
+    min-height:43px!important;
+    padding:1px 1px 6px!important;
+    gap:4px!important;
+    grid-template-columns:minmax(0,1fr) minmax(72px,.66fr) minmax(0,1fr)!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #headerPrayerStatus.dt-prayer-feature .header-prayer-zone{
+    min-height:39px!important;
+    padding:2px 5px!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #headerPrayerStatus.dt-prayer-feature .header-prayer-hub__status{
+    grid-template-columns:minmax(0,1.04fr) minmax(0,1.18fr) minmax(0,.90fr) minmax(0,1.04fr)!important;
+    min-height:32px!important;
+    padding:6px 1px 0!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #headerPrayerStatus.dt-prayer-feature .header-prayer-hub__status>span{
+    min-height:25px!important;
+    padding:2px 4px!important;
+    gap:3px!important;
+    font-size:clamp(8px,1.98vw,9.2px)!important;
+  }
+  html[data-theme].dar-home-v1194 body.is-home-route
+  #headerPrayerStatus.dt-prayer-feature .header-prayer-hub__ico{
+    min-width:14px!important;
+    width:14px!important;
+    min-height:14px!important;
+    height:14px!important;
+    font-size:12px!important;
+    line-height:14px!important;
+  }
+}
