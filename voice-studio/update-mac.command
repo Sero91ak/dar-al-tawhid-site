@@ -29,7 +29,7 @@ fetch_installer() {
   log "Transport 1/3: GitHub Contents API"
   if /usr/bin/curl -fsSL --connect-timeout 5 --max-time 30 --retry 3 --retry-delay 1 \
       -H "Accept: application/vnd.github.raw+json" \
-      -H "User-Agent: DAR-Voice-Studio-Updater/2.9.67" \
+      -H "User-Agent: DAR-Voice-Studio-Updater/2.9.68" \
       "$REMOTE_INSTALLER" -o "$TMP_PART" >>"$LOG" 2>&1 \
       && [ -s "$TMP_PART" ] \
       && /usr/bin/head -n 1 "$TMP_PART" | /usr/bin/grep -q '^#!/bin/bash'; then
@@ -41,7 +41,7 @@ fetch_installer() {
   log "Transport 2/3: Website"
   if /usr/bin/curl -fsSL --connect-timeout 5 --max-time 30 --retry 2 --retry-delay 1 \
       -H "Cache-Control: no-cache" \
-      -H "User-Agent: DAR-Voice-Studio-Updater/2.9.67" \
+      -H "User-Agent: DAR-Voice-Studio-Updater/2.9.68" \
       "$SITE_INSTALLER?update=$(date +%s)" -o "$TMP_PART" >>"$LOG" 2>&1 \
       && [ -s "$TMP_PART" ] \
       && /usr/bin/head -n 1 "$TMP_PART" | /usr/bin/grep -q '^#!/bin/bash'; then
@@ -52,7 +52,7 @@ fetch_installer() {
   rm -f "$TMP_PART"
   log "Transport 3/3: GitHub Repository-Archiv"
   if /usr/bin/curl -fL --connect-timeout 5 --max-time 60 --retry 3 --retry-delay 1 \
-      -H "User-Agent: DAR-Voice-Studio-Updater/2.9.67" \
+      -H "User-Agent: DAR-Voice-Studio-Updater/2.9.68" \
       "$CODELOAD" -o "$ARCHIVE" >>"$LOG" 2>&1 \
       && /usr/bin/unzip -p "$ARCHIVE" "dar-al-tawhid-site-main/voice-studio/install-mac.command" >"$TMP_PART" 2>>"$LOG" \
       && [ -s "$TMP_PART" ] \
