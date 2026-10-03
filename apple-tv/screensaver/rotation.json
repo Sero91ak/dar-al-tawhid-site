@@ -1,21 +1,39 @@
 {
-  "schemaVersion": "1.0",
-  "mode": "persistent-shuffled-cycle",
+  "schemaVersion": "1.1",
+  "mode": "shuffleBag",
   "persistProgress": true,
-  "storage": "application-support",
+  "storage": "applicationSupport",
+  "contentSource": {
+    "provider": "HadithScreensaverProvider",
+    "catalogPath": "hadith/catalog.json",
+    "includedRecordTypes": [
+      "hadith",
+      "athar"
+    ],
+    "salafStatementsUseRecordType": "athar",
+    "requireVerifiedSharh": false,
+    "showStatementAlways": true,
+    "rule": "Alle registrierten Ḥadīṯe, Āṯār und Salaf-Aussagen erscheinen im Bildschirmschoner."
+  },
   "cyclePolicy": {
     "showEveryItemBeforeRepeat": true,
     "shuffleEachCycle": true,
-    "crossCycleCooldownCount": 5,
+    "crossCycleCooldownCount": 20,
     "preventImmediateRepeat": true,
     "newItemsPolicy": "appendToRemainingAndReshuffle",
-    "removedItemsPolicy": "removeFromQueue"
+    "removedItemsPolicy": "dropFromState"
+  },
+  "batchBuildPolicy": {
+    "stepSize": 100,
+    "twentyBlockPattern": true,
+    "rule": "Neue Apple-TV-Bildschirmschoner-Inhalte werden in 100er-Schritten gebaut; innerhalb jedes 100er-Schritts werden 20er-Blöcke für Ḥadīṯ, Āṯār, Ṣaḥābah- und Salaf-Aussagen verwendet."
   },
   "futureModuleMixing": {
-    "enabled": false,
-    "strategy": "weighted",
+    "enabled": true,
+    "strategy": "weightedRoundRobin",
     "weights": {
-      "hadith": 1
+      "hadith": 5,
+      "athar": 5
     }
   }
 }

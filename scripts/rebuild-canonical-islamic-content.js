@@ -84,8 +84,11 @@ function rebuildHadith() {
     writeJson(path.join(dir, "index.json"), index, false);
     seriesMeta.push({
       id: dirName,
-      label: firstId && lastId ? firstId + " bis " + lastId : dirName,
+      count: files.length,
+      firstId: firstId,
+      lastId: lastId,
       indexPath: "series/" + dirName + "/index.json",
+      label: firstId && lastId ? firstId + " bis " + lastId : dirName,
       publishedFrom: firstId,
       publishedTo: lastId,
       publishedCount: files.length,
@@ -104,9 +107,11 @@ function rebuildHadith() {
     project: "DĀR AL TAWḤĪD – Apple TV Ḥadīṯ & Āṯār",
     language: "de",
     encoding: "UTF-8",
-    schemaVersion: "1.4",
+    schemaVersion: "1.3",
     sourceOfTruth: "/apple-tv/hadith/",
     liveURL: "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
+    authenticOnly: true,
+    supportedRecordTypes: ["hadith", "athar"],
     totalCount: allRecords.length,
     publishedCount: allRecords.length,
     hadithCount: typeCounts.hadith,
@@ -115,6 +120,18 @@ function rebuildHadith() {
     latestId: latest,
     latestPublishedId: latest,
     nextId: latestN ? padHad(latestN + 1) : "HAD-0001",
+    screensaver: {
+      enabled: true,
+      provider: "HadithScreensaverProvider",
+      rotationConfigPath: "../screensaver/rotation.json",
+      includedRecordTypes: ["hadith", "athar"],
+      salafStatementsUseRecordType: "athar",
+      showSharh: true,
+      showSharhSource: true,
+      requireVerifiedSharh: false,
+      showStatementAlways: true,
+      activation: "per-record-immediate"
+    },
     policy: {
       authenticOnly: true,
       requireVerifiedSharh: false,
@@ -148,6 +165,16 @@ function rebuildHadith() {
   manifest.syncPolicy = manifest.syncPolicy || {};
   manifest.syncPolicy.sourceOfTruth = "apple-tv/hadith/";
   manifest.syncPolicy.liveURL = "https://dar-al-tawhid.de/apple-tv/hadith/";
+  manifest.screensaver = manifest.screensaver || {};
+  manifest.screensaver.enabled = true;
+  manifest.screensaver.includeHadith = true;
+  manifest.screensaver.includeAthar = true;
+  manifest.screensaver.salafAsAthar = true;
+  manifest.screensaver.rotationMode = "shuffleBag";
+  manifest.screensaver.showSharh = true;
+  manifest.screensaver.showSharhMode = "compact";
+  manifest.screensaver.requireVerifiedSharh = false;
+  manifest.screensaver.readyThrough = latest;
   writeJson(manifestPath, manifest, true);
 
   writeJson(path.join(HADITH_ROOT, "library-shell.json"), { records: allRecords }, false);
@@ -172,6 +199,20 @@ function rebuildHadith() {
     rebuiltAt: new Date().toISOString()
   };
   writeJson(path.join(HADITH_ROOT, "sync-status.json"), stamp, true);
+
+  const ssDir = path.join(ROOT, "apple-tv", "screensaver");
+  if (fs.existsSync(path.join(ssDir, "catalog.json"))) {
+    const ss = JSON.parse(fs.readFileSync(path.join(ssDir, "catalog.json"), "utf8"));
+    ss.contentVersion = allRecords.length;
+    ss.entriesCount = allRecords.length;
+    ss.lastUpdated = stamp.rebuiltAt;
+    writeJson(path.join(ssDir, "catalog.json"), ss, true);
+  }
+  if (fs.existsSync(path.join(ssDir, "entries-index.json"))) {
+    const idx = JSON.parse(fs.readFileSync(path.join(ssDir, "entries-index.json"), "utf8"));
+    idx.totalVerifiedEntries = allRecords.length;
+    writeJson(path.join(ssDir, "entries-index.json"), idx, true);
+  }
 
   const loaderVersion = "2.0.0+" + latest + "+tad" + tadCount;
   ["assets/hadith-library-data.js", "test/assets/hadith-library-data.js"].forEach(function (rel) {

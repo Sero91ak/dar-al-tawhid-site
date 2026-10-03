@@ -1,11 +1,27 @@
 {
   "project": "DĀR AL TAWḤĪD – Apple TV Content",
-  "schemaVersion": "1.5",
+  "schemaVersion": "1.7",
   "language": "de",
   "defaultModule": "hadith",
+  "remoteContentSync": {
+    "enabled": true,
+    "rule": "Live-Quelle dar-al-tawhid.de/apple-tv liefert catalog.json und Indexdateien; Xcode kennt keine festen Inhaltsgrenzen.",
+    "checkOnAppStart": true,
+    "checkOnForeground": true,
+    "checkOnAppleTVWake": true,
+    "minimumRefreshIntervalHours": 6,
+    "offlineCache": true,
+    "atomicCacheActivation": true,
+    "keepLastGoodCacheOnError": true
+  },
   "screensaver": {
     "enabled": true,
-    "rotationConfigPath": "screensaver/rotation.json"
+    "status": "active",
+    "catalogPath": "screensaver/catalog.json",
+    "rotationConfigPath": "screensaver/rotation.json",
+    "remoteLoad": true,
+    "offlineCache": true,
+    "fallbackRequired": true
   },
   "quran": {
     "reader": {
