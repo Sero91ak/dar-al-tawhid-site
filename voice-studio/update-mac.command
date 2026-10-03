@@ -92,7 +92,7 @@ LOG="$2"
 
   code=$?
   echo "UPDATE-FEHLER: Installer beendet mit Code $code"
-  /usr/bin/osascript -e 'display notification "Update fehlgeschlagen. Die vorhandene Voice-Studio-App wird wieder geöffnet. Details: update.log" with title "DĀR Voice Studio"' >/dev/null 2>&1 || true
+  /usr/bin/osascript -e 'display notification "Update fehlgeschlagen. Voice Studio wurde nicht ersetzt; die vorhandene App wird wieder geöffnet. Details: update.log" with title "DĀR Voice Studio"' >/dev/null 2>&1 || true
 
   # Ein fehlgeschlagenes Update darf den Nutzer niemals mit einer beendeten App
   # zurücklassen. Der Installer tauscht das App-Bundle erst nach Validierung aus;
