@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-mub1063",
-  "label": "KIDS · V1.06.3",
-  "releasedAt": "2026-10-03T13:35:00.000Z",
-  "note": "V1.06.3: Der Bereich der zehn al-ʿAšarah al-Mubaššarūn ist vollständig in Geschichten und Voice Studio eingebunden: 10 quellengeprüfte Ṣaḥābah-Geschichten, drei Altersfassungen, eigenständige Szenenbilder, Profil- und Quellenansicht, Quiz, Fuṣḥā-Prüfung und direkter Serhat-Audio-Publish nach Kids.",
+  "buildId": "kids-shell-v12-mub1064",
+  "label": "KIDS · V1.06.4",
+  "releasedAt": "2026-10-03T13:12:00.000Z",
+  "note": "V1.06.4: Ṣaḥābah-/Mubaschschirūn-Bereich technisch bereinigt und produktionsfertig: genau ein CSS/JS-Bundle pro Kids-Seite, 10 unterschiedliche Szenenbilder, 30 altersabhängige Lesetexte (4–5 / 6–8 / 9–10), direkte Ḥadīṯ-Nachweise, Profilkarten und Quiz. Im Voice Studio gibt es den eigenen Ṣaḥābah-Tab mit Text laden, Fuṣḥā-Prüfung, Serhat-Audio erzeugen und geprüfte Altersfassung direkt nach Kids veröffentlichen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1063",
+    "serviceWorkerCache": "v1064",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -73,7 +73,7 @@
       "6-8",
       "9-10"
     ],
-    "mubashshirunVoiceStudio": "dedicated-sahaba-tab-v4",
+    "mubashshirunVoiceStudio": "dedicated-sahaba-tab-v2",
     "mubashshirunSourcePolicy": "quran-sahih-sunnah-no-legends",
     "mubashshirunArtworkCount": 10,
     "mubashshirunArtworkMode": "historical-scene-no-face-claim",
@@ -88,6 +88,9 @@
     "mubashshirunBundleVersion": 4,
     "mubashshirunDataVersion": 2,
     "mubashshirunAudioPublishPipeline": true,
-    "mubashshirunFuṣḥāReview": true
+    "mubashshirunFuṣḥāReview": true,
+    "mubashshirunPreparedStoryScripts": 30,
+    "mubashshirunUniqueArtworkAssets": true,
+    "mubashshirunDuplicateBundleGuard": true
   }
 }
