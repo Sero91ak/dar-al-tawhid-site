@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD – central verified Ḥadīṯ data bridge
- * Source of truth: /apple-tv/hadith/ (dar-al-tawhid.de, then GitHub main).
- * Used by Test App and prepared live/iOS Ḥadīṯ library.
+ * Source of truth: /apple-tv/hadith/ on dar-al-tawhid.de (same tree for Web, iOS, Android, Apple TV).
+ * Used by Test App, live WebView and Apple TV catalog/screensaver.
  */
 (function () {
   "use strict";
@@ -228,6 +228,6 @@
     hasVerifiedSharh: hasVerifiedSharh,
     sourceCatalog: RAW_CATALOG,
     sourceRoot: RAW_ROOT,
-    version: "2.0.0"
+    version: "2.0.0+HAD-3050+tad4454"
   };
 })();

@@ -19,7 +19,7 @@ Nicht gemeint:
 Raw-Basis:
 
 ```text
-https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/apple-tv-hadith-staging/apple-tv/quran/tadabbur/
+https://dar-al-tawhid.de/apple-tv/quran/tadabbur/
 ```
 
 Zentraler Einstieg:
@@ -39,9 +39,9 @@ Der Index listet alle geprüften Datendateien. Xcode darf nicht nur `entries.jso
 Aktueller registrierter Stand:
 
 ```text
-entriesCount: 5102
-totalVerifiedEntries: 5102
-letzter Batch: entries-batch-05z-116.json
+entriesCount: 4454
+totalVerifiedEntries: 4454
+letzter Batch: entries-gap-06-117.json
 letzter Vers im aktuellen Durchgang: 114:6
 ```
 

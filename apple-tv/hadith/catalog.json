@@ -2,13 +2,17 @@
   "project": "DĀR AL TAWḤĪD – Apple TV Ḥadīṯ & Āṯār",
   "language": "de",
   "encoding": "UTF-8",
-  "schemaVersion": "1.3",
+  "schemaVersion": "1.4",
   "sourceOfTruth": "/apple-tv/hadith/",
-  "totalCount": 197,
-  "publishedCount": 197,
-  "currentSeries": "251-300",
-  "latestPublishedId": "HAD-0259",
-  "nextId": "HAD-0264",
+  "liveURL": "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
+  "totalCount": 3050,
+  "publishedCount": 3050,
+  "hadithCount": 2165,
+  "atharCount": 885,
+  "currentSeries": "2951-3050",
+  "latestId": "HAD-3050",
+  "latestPublishedId": "HAD-3050",
+  "nextId": "HAD-3051",
   "policy": {
     "authenticOnly": true,
     "requireVerifiedSharh": false,
@@ -19,7 +23,8 @@
       "missing",
       "needs-review"
     ],
-    "hadithLibraryIncludesOpenSharh": true
+    "hadithLibraryIncludesOpenSharh": true,
+    "singleSourceForWebIosAndroidAppleTv": true
   },
   "series": [
     {
@@ -28,11 +33,8 @@
       "indexPath": "series/001-050/index.json",
       "publishedFrom": "HAD-0001",
       "publishedTo": "HAD-0050",
-      "publishedCount": 48,
-      "skipped": [
-        "HAD-0023",
-        "HAD-0039"
-      ]
+      "publishedCount": 50,
+      "skipped": []
     },
     {
       "id": "051-100",
@@ -47,106 +49,289 @@
       "id": "101-150",
       "label": "HAD-0101 bis HAD-0150",
       "indexPath": "series/101-150/index.json",
-      "publishedFrom": "HAD-0102",
-      "publishedTo": "HAD-0148",
-      "publishedCount": 36,
-      "skipped": [
-        "HAD-0101",
-        "HAD-0104",
-        "HAD-0105",
-        "HAD-0106",
-        "HAD-0108",
-        "HAD-0109",
-        "HAD-0117",
-        "HAD-0119",
-        "HAD-0123",
-        "HAD-0124",
-        "HAD-0136",
-        "HAD-0139",
-        "HAD-0149",
-        "HAD-0150"
-      ]
+      "publishedFrom": "HAD-0101",
+      "publishedTo": "HAD-0150",
+      "publishedCount": 50,
+      "skipped": []
     },
     {
       "id": "151-200",
       "label": "HAD-0151 bis HAD-0200",
       "indexPath": "series/151-200/index.json",
       "publishedFrom": "HAD-0151",
-      "publishedTo": "HAD-0187",
-      "publishedCount": 32,
-      "skipped": [
-        "HAD-0154",
-        "HAD-0171",
-        "HAD-0181",
-        "HAD-0184",
-        "HAD-0186",
-        "HAD-0188",
-        "HAD-0189",
-        "HAD-0190",
-        "HAD-0191",
-        "HAD-0192",
-        "HAD-0193",
-        "HAD-0194",
-        "HAD-0195",
-        "HAD-0196",
-        "HAD-0197",
-        "HAD-0198",
-        "HAD-0199",
-        "HAD-0200"
-      ]
+      "publishedTo": "HAD-0200",
+      "publishedCount": 50,
+      "skipped": []
     },
     {
       "id": "201-250",
       "label": "HAD-0201 bis HAD-0250",
       "indexPath": "series/201-250/index.json",
       "publishedFrom": "HAD-0201",
-      "publishedTo": "HAD-0248",
-      "publishedCount": 25,
-      "skipped": [
-        "HAD-0202",
-        "HAD-0203",
-        "HAD-0206",
-        "HAD-0207",
-        "HAD-0209",
-        "HAD-0210",
-        "HAD-0212",
-        "HAD-0213",
-        "HAD-0214",
-        "HAD-0215",
-        "HAD-0216",
-        "HAD-0217",
-        "HAD-0219",
-        "HAD-0223",
-        "HAD-0225",
-        "HAD-0226",
-        "HAD-0227",
-        "HAD-0238",
-        "HAD-0242",
-        "HAD-0244",
-        "HAD-0245",
-        "HAD-0246",
-        "HAD-0247",
-        "HAD-0249",
-        "HAD-0250"
-      ]
+      "publishedTo": "HAD-0250",
+      "publishedCount": 50,
+      "skipped": []
     },
     {
       "id": "251-300",
       "label": "HAD-0251 bis HAD-0300",
       "indexPath": "series/251-300/index.json",
       "publishedFrom": "HAD-0251",
-      "publishedTo": "HAD-0259",
-      "publishedCount": 6,
-      "skipped": [
-        "HAD-0252",
-        "HAD-0255",
-        "HAD-0256",
-        "HAD-0260",
-        "HAD-0261",
-        "HAD-0262",
-        "HAD-0263"
-      ]
+      "publishedTo": "HAD-0300",
+      "publishedCount": 50,
+      "skipped": []
+    },
+    {
+      "id": "301-350",
+      "label": "HAD-0301 bis HAD-0350",
+      "indexPath": "series/301-350/index.json",
+      "publishedFrom": "HAD-0301",
+      "publishedTo": "HAD-0350",
+      "publishedCount": 50,
+      "skipped": []
+    },
+    {
+      "id": "351-450",
+      "label": "HAD-0351 bis HAD-0450",
+      "indexPath": "series/351-450/index.json",
+      "publishedFrom": "HAD-0351",
+      "publishedTo": "HAD-0450",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "451-550",
+      "label": "HAD-0451 bis HAD-0550",
+      "indexPath": "series/451-550/index.json",
+      "publishedFrom": "HAD-0451",
+      "publishedTo": "HAD-0550",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "551-650",
+      "label": "HAD-0551 bis HAD-0650",
+      "indexPath": "series/551-650/index.json",
+      "publishedFrom": "HAD-0551",
+      "publishedTo": "HAD-0650",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "651-750",
+      "label": "HAD-0651 bis HAD-0750",
+      "indexPath": "series/651-750/index.json",
+      "publishedFrom": "HAD-0651",
+      "publishedTo": "HAD-0750",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "751-850",
+      "label": "HAD-0751 bis HAD-0850",
+      "indexPath": "series/751-850/index.json",
+      "publishedFrom": "HAD-0751",
+      "publishedTo": "HAD-0850",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "851-950",
+      "label": "HAD-0851 bis HAD-0950",
+      "indexPath": "series/851-950/index.json",
+      "publishedFrom": "HAD-0851",
+      "publishedTo": "HAD-0950",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "951-1050",
+      "label": "HAD-0951 bis HAD-1050",
+      "indexPath": "series/951-1050/index.json",
+      "publishedFrom": "HAD-0951",
+      "publishedTo": "HAD-1050",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "1051-1150",
+      "label": "HAD-1051 bis HAD-1150",
+      "indexPath": "series/1051-1150/index.json",
+      "publishedFrom": "HAD-1051",
+      "publishedTo": "HAD-1150",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "1151-1250",
+      "label": "HAD-1151 bis HAD-1250",
+      "indexPath": "series/1151-1250/index.json",
+      "publishedFrom": "HAD-1151",
+      "publishedTo": "HAD-1250",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "1251-1350",
+      "label": "HAD-1251 bis HAD-1350",
+      "indexPath": "series/1251-1350/index.json",
+      "publishedFrom": "HAD-1251",
+      "publishedTo": "HAD-1350",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "1351-1450",
+      "label": "HAD-1351 bis HAD-1450",
+      "indexPath": "series/1351-1450/index.json",
+      "publishedFrom": "HAD-1351",
+      "publishedTo": "HAD-1450",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "1451-1550",
+      "label": "HAD-1451 bis HAD-1550",
+      "indexPath": "series/1451-1550/index.json",
+      "publishedFrom": "HAD-1451",
+      "publishedTo": "HAD-1550",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "1551-1650",
+      "label": "HAD-1551 bis HAD-1650",
+      "indexPath": "series/1551-1650/index.json",
+      "publishedFrom": "HAD-1551",
+      "publishedTo": "HAD-1650",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "1651-1750",
+      "label": "HAD-1651 bis HAD-1750",
+      "indexPath": "series/1651-1750/index.json",
+      "publishedFrom": "HAD-1651",
+      "publishedTo": "HAD-1750",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "1751-1850",
+      "label": "HAD-1751 bis HAD-1850",
+      "indexPath": "series/1751-1850/index.json",
+      "publishedFrom": "HAD-1751",
+      "publishedTo": "HAD-1850",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "1851-1950",
+      "label": "HAD-1851 bis HAD-1950",
+      "indexPath": "series/1851-1950/index.json",
+      "publishedFrom": "HAD-1851",
+      "publishedTo": "HAD-1950",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "1951-2050",
+      "label": "HAD-1951 bis HAD-2050",
+      "indexPath": "series/1951-2050/index.json",
+      "publishedFrom": "HAD-1951",
+      "publishedTo": "HAD-2050",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "2051-2150",
+      "label": "HAD-2051 bis HAD-2150",
+      "indexPath": "series/2051-2150/index.json",
+      "publishedFrom": "HAD-2051",
+      "publishedTo": "HAD-2150",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "2151-2250",
+      "label": "HAD-2151 bis HAD-2250",
+      "indexPath": "series/2151-2250/index.json",
+      "publishedFrom": "HAD-2151",
+      "publishedTo": "HAD-2250",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "2251-2350",
+      "label": "HAD-2251 bis HAD-2350",
+      "indexPath": "series/2251-2350/index.json",
+      "publishedFrom": "HAD-2251",
+      "publishedTo": "HAD-2350",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "2351-2450",
+      "label": "HAD-2351 bis HAD-2450",
+      "indexPath": "series/2351-2450/index.json",
+      "publishedFrom": "HAD-2351",
+      "publishedTo": "HAD-2450",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "2451-2550",
+      "label": "HAD-2451 bis HAD-2550",
+      "indexPath": "series/2451-2550/index.json",
+      "publishedFrom": "HAD-2451",
+      "publishedTo": "HAD-2550",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "2551-2650",
+      "label": "HAD-2551 bis HAD-2650",
+      "indexPath": "series/2551-2650/index.json",
+      "publishedFrom": "HAD-2551",
+      "publishedTo": "HAD-2650",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "2651-2750",
+      "label": "HAD-2651 bis HAD-2750",
+      "indexPath": "series/2651-2750/index.json",
+      "publishedFrom": "HAD-2651",
+      "publishedTo": "HAD-2750",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "2751-2850",
+      "label": "HAD-2751 bis HAD-2850",
+      "indexPath": "series/2751-2850/index.json",
+      "publishedFrom": "HAD-2751",
+      "publishedTo": "HAD-2850",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "2851-2950",
+      "label": "HAD-2851 bis HAD-2950",
+      "indexPath": "series/2851-2950/index.json",
+      "publishedFrom": "HAD-2851",
+      "publishedTo": "HAD-2950",
+      "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "2951-3050",
+      "label": "HAD-2951 bis HAD-3050",
+      "indexPath": "series/2951-3050/index.json",
+      "publishedFrom": "HAD-2951",
+      "publishedTo": "HAD-3050",
+      "publishedCount": 100,
+      "skipped": []
     }
-  ],
-  "latestId": "HAD-0259"
+  ]
 }

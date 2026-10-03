@@ -1,7 +1,7 @@
 # Qurʾān Tadabbur – Gap-Fill Status
 
 Status: verbindliche Fortsetzung nach Abschluss des fortlaufenden Verslaufs  
-Branch: `apple-tv-hadith-staging`  
+Branch: `main` (Live für Web, iOS, Android, Apple TV)  
 Letzter Voll-Audit: 24.09.2026
 
 ## Aktueller auditfester Stand
@@ -26,15 +26,15 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-112` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-117` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4445
-totalVerifiedEntries: 4445
-loadedEntries: 4445
-uniqueVerifiedReferences: 4445
-missingCount: 1791
+entriesCount: 4454
+totalVerifiedEntries: 4454
+loadedEntries: 4454
+uniqueVerifiedReferences: 4454
+missingCount: 1782
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
@@ -42,11 +42,11 @@ firstMissingReference: 2:43
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-112.json
-nächster Gap-Fill-Batch: entries-gap-06-113.json
+letzter Gap-Fill-Batch: entries-gap-06-117.json
+nächster Gap-Fill-Batch: entries-gap-06-118.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `255` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `264` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -137,6 +137,11 @@ Danach gibt es keinen weiteren Qurʾān-Vers. Alle weiteren Arbeiten sind aussch
 06-110  3
 06-111  2
 06-112  1
+06-113  3
+06-114  2
+06-115  2
+06-116  1
+06-117  1
 ```
 
 Die Zahl hinter jedem Batch ist die aktuell registrierte Eintragszahl der Datei.
@@ -237,6 +242,11 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 06-110: 2:226, 2:227, 2:245
 06-111: 2:248, 2:257
 06-112: 2:206
+06-113: 2:268, 2:275, 2:280
+06-114: 3:19, 3:34
+06-115: 3:33, 3:37
+06-116: 3:44
+06-117: 3:85
 ```
 
 ## Nächste echte Audit-Lücken
