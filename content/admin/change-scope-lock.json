@@ -128,6 +128,7 @@
     "cloudflare/test-app-worker.js",
     "apple-tv/quran/audio/catalog.json",
     "apple-tv/catalog.json",
+    "apple-tv/home/",
     "apple-tv/prayer/",
     "assets/dar-quran-player.css",
     "test/assets/dar-quran-player.css"
@@ -150,6 +151,19 @@
     "AGENTS.md"
   ],
   "unlockedScopes": [
+    {
+      "id": "apple-tv-home-tadabbur-slot-2026-10-03",
+      "approvedBy": "user-explicit-startseite-gebetszeiten-quran-tadabbur-nicht-hadith-sharh",
+      "reason": "Nutzer: Apple-TV-Startseite bei Gebetszeiten zeigt Qurʾān-Vers und Tadabbur-Bereich; dort dürfen keine Ḥadīṯe, Salaf-Bibliotheksaussagen oder Šarḥ erscheinen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "apple-tv/catalog.json",
+        "apple-tv/home/",
+        "apple-tv/screensaver/catalog.json",
+        "apple-tv/quran/tadabbur/catalog.json"
+      ],
+      "expiresAt": "2027-12-31T23:59:00.000Z"
+    },
     {
       "id": "canonical-islamic-content-live-deploy-2026-10-03",
       "approvedBy": "user-explicit-sobald-github-neue-aussagen-direkt-live-apps",
