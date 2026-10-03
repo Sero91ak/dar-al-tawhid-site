@@ -1,6 +1,6 @@
 {
   "version": "2.9.67",
-  "updatedAt": "2026-10-03T21:47:00+02:00",
+  "updatedAt": "2026-10-03T21:52:00+02:00",
   "deployTrigger": "voice-studio-2.9.67-post-install-abort-repair",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -277,8 +277,8 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "2972f278aa6be0b0bb04e717a1fb2234e26fcfb6",
-    "validatedAt": "2026-10-03T21:47:00+02:00",
+    "validatedCommit": "eab372ee67e1eaec0dd14f797aaf0cfd69625204",
+    "validatedAt": "2026-10-03T21:52:00+02:00",
     "freeVoiceIsolation": true,
     "mainAppBrandingUnchanged": true,
     "prophetStoryLocalBatchSmoke": true,
@@ -307,7 +307,8 @@
     "releaseRefPinnedToRepairCommit": true,
     "manifestEngineVersionCoherenceGuard": true,
     "updaterReopensPreviousAppOnFailure": true,
-    "postInstallAbortRepair": true
+    "postInstallAbortRepair": true,
+    "noBlockingLaunchctlKickstart": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -600,10 +601,10 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "2972f278aa6be0b0bb04e717a1fb2234e26fcfb6",
+  "releaseRef": "eab372ee67e1eaec0dd14f797aaf0cfd69625204",
   "releaseChannel": "main",
   "updateRepair": true,
-  "updateRepairReason": "2.9.67 behebt den Installationsabbruch nach Voice-Studio-Updates. Ursache waren ein 2.9.66-Manifest mit altem 2.9.64-releaseRef sowie eine separat hart codierte Engine-Versionsprüfung, die bei Versionswechseln auseinanderlaufen konnte. Der Installer liest die erwartete Version nun direkt aus dem Manifest, prüft vor der Installation die Kohärenz zwischen Manifest und gepinnter Engine und akzeptiert nur exakt diese laufende Engine. Bei einem fehlgeschlagenen Update öffnet der Updater automatisch die vorhandene App wieder.",
+  "updateRepairReason": "2.9.67 Recovery-Fix: Nach erfolgreicher Validierung konnte macOS bei 'launchctl kickstart -k' hängen bleiben. Dieser blockierende Aufruf wurde aus Installer und App-Launcher entfernt. Nach launchctl bootstrap übernimmt RunAtLoad; falls die Engine nicht gesund startet, wird kontrolliert direkt gestartet. Zusätzlich bleiben Manifest-/Engine-Kohärenzprüfung und automatisches Wiederöffnen der bisherigen App bei Fehlern aktiv.",
   "updateFailureLog": "~/Applications/DAR-Voice-Studio/update.log",
   "updateFailureVisible": true,
   "updatePreservesPreviousApp": true,
@@ -1070,11 +1071,14 @@
     "nativeMacRestartsStaleEngine": true,
     "installerRequiresMatchingEngineVersion": true,
     "interactivePriorityGuardAdded": true,
-    "manifestReleaseRef": "2972f278aa6be0b0bb04e717a1fb2234e26fcfb6",
+    "manifestReleaseRef": "eab372ee67e1eaec0dd14f797aaf0cfd69625204",
     "installerManifestVersionGuard": true,
     "dynamicEngineVersionHandshake": true,
     "staleHardcodedEngineVersionRemoved": true,
-    "updaterFailureRecovery": true
+    "updaterFailureRecovery": true,
+    "launchctlKickstartRemoved": true,
+    "runAtLoadPrimaryEngineStart": true,
+    "directEngineFallbackWithoutKickstart": true
   },
   "mubashshirunStories": {
     "enabled": true,
