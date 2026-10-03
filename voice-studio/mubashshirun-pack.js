@@ -11,7 +11,7 @@ const URLS=[
 function injectStyle(){
   if($("#mubVoicePackStyle"))return;
   const st=document.createElement("style");st.id="mubVoicePackStyle";
-  st.textContent=\`
+  st.textContent=`
   #mubVoicePack{display:none;margin:0 0 16px;border:1px solid rgba(217,182,111,.18);border-radius:16px;background:linear-gradient(145deg,rgba(217,182,111,.045),rgba(255,255,255,.016));padding:14px}
   body.studio-page-sahaba #mubVoicePack{display:block}
   body.studio-page-sahaba #prophetPick{display:none!important}
@@ -35,7 +35,7 @@ function injectStyle(){
   #mubVoicePack .mvp-ready{font-size:9px;line-height:1.45;color:#9bd8ba}
   body.studio-page-sahaba .heading-row h1:after{content:" · Ṣaḥābah";color:#d9b66f}
   @media(max-width:720px){#mubVoicePack .mvp-grid{grid-template-columns:1fr}#mubVoicePack .mvp-head{display:grid}.mvp-actions{grid-template-columns:1fr!important}}
-  \`;
+  `;
   document.head.appendChild(st);
 }
 function ensureTab(){
