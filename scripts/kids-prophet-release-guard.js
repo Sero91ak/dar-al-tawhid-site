@@ -46,14 +46,15 @@ if (!visualMatch) {
   process.exit(1);
 }
 const assetVersion = visualMatch[1];
+const prophetBundleVersion = String(Number(visual.prophetStoriesBundleVersion || 0) || assetVersion);
 
 // V1.06 ist ein historischer, damals veröffentlichter Snapshot. Seine sichtbare
 // Release-ID blieb tab106, während die intern cache-gebusteten Story-/SW-Dateien
 // bereits v31/v117 trugen. Beim exakten Rollback darf der Guard diesen bekannten
 // Snapshot nicht auf heutige 1:1-Versionierung umschreiben.
 const exactV106Snapshot = build === "kids-shell-v12-tab106" && label === "KIDS · V1.06";
-const htmlCssVersion = exactV106Snapshot ? "21" : assetVersion;
-const htmlJsVersion = exactV106Snapshot ? "31" : assetVersion;
+const htmlCssVersion = exactV106Snapshot ? "21" : prophetBundleVersion;
+const htmlJsVersion = exactV106Snapshot ? "31" : prophetBundleVersion;
 const swVersion = exactV106Snapshot ? "117" : buildNumber;
 const prophetArtVersion = exactV106Snapshot ? "21" : assetVersion;
 
