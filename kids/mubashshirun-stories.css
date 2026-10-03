@@ -67,3 +67,61 @@ html.ms-library-open,html.ms-modal-open{overflow:hidden!important}
   .ms-list{grid-template-columns:1fr 1fr}.ms-story-row{min-height:174px}.ms-library-scroll{padding-top:22px}.ms-entry{min-height:190px}
 }
 @media(prefers-reduced-motion:no-preference){.ms-entry,.ms-story-row{transition:transform .18s ease,border-color .18s ease}.ms-story-row:hover{transform:translateY(-2px);border-color:rgba(239,203,121,.25)}}
+
+
+/* Mubashshirun v2 — card/detail scene artwork, spacious and touch-friendly */
+.ms-story-row{
+  min-height:0!important;
+  grid-template-columns:minmax(132px,38%) minmax(0,1fr) 36px!important;
+  padding:0!important;
+  gap:0!important;
+  align-items:stretch!important;
+}
+.ms-story-row:before{display:none!important}
+.ms-row-art{
+  position:relative;display:block;min-height:184px;overflow:hidden;
+  background:radial-gradient(circle at 55% 32%,rgba(239,203,121,.18),transparent 26%),linear-gradient(160deg,#061827,#0a3344 62%,#123a43)
+}
+.ms-row-art img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center 48%;display:block;filter:saturate(.93) contrast(1.025) brightness(.91)}
+.ms-row-art-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,16,26,.03) 45%,rgba(6,31,44,.28) 78%,rgba(6,31,44,.68) 100%),linear-gradient(180deg,transparent 54%,rgba(3,18,29,.42));pointer-events:none}
+.ms-row-art .ms-rank{
+  position:absolute;left:13px;top:13px;z-index:2;width:42px;height:42px;border-radius:14px!important;
+  background:rgba(3,18,28,.68)!important;backdrop-filter:blur(9px);font-size:15px!important
+}
+.ms-row-copy{padding:18px 12px 18px 18px!important;align-content:center}
+.ms-row-go{align-self:center;padding-right:9px}
+.ms-done{right:11px!important;top:11px!important;z-index:3}
+.ms-row-summary{font-size:12px!important;line-height:1.5!important}
+.ms-row-title{font-size:21px!important}
+.ms-row-ar{font-size:22px!important}
+.ms-detail-hero{
+  min-height:520px!important;
+  display:flex!important;flex-direction:column;justify-content:flex-end;
+  padding:max(92px,calc(76px + env(safe-area-inset-top))) max(20px,calc((100vw - 780px)/2)) 34px!important;
+  background:#071c2b!important
+}
+.ms-hero-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 44%;display:block;filter:saturate(.94) contrast(1.03) brightness(.88)}
+.ms-hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,12,20,.05) 16%,rgba(3,16,25,.12) 40%,rgba(4,20,31,.76) 72%,#071c2b 100%);pointer-events:none}
+.ms-detail-mark,.ms-detail-kicker,.ms-detail-hero h2,.ms-ar,.ms-detail-hero p,.ms-meta,.ms-visual-note{position:relative;z-index:1}
+.ms-visual-note{display:block;margin-top:12px;max-width:680px;color:rgba(255,255,255,.48);font-size:10px;line-height:1.45}
+@media(max-width:620px){
+  .ms-story-row{grid-template-columns:124px minmax(0,1fr) 28px!important}
+  .ms-row-art{min-height:190px}
+  .ms-row-copy{padding:16px 8px 16px 14px!important}
+  .ms-row-kicker{font-size:8px!important}
+  .ms-row-title{font-size:18px!important}
+  .ms-row-ar{font-size:19px!important}
+  .ms-row-summary{font-size:10.5px!important;line-height:1.42!important}
+  .ms-row-meta{font-size:9px!important}
+  .ms-row-go{font-size:29px!important}
+  .ms-detail-hero{min-height:500px!important;padding-bottom:28px!important}
+  .ms-hero-art{object-position:center 42%}
+}
+@media(min-width:760px){
+  .ms-list{grid-template-columns:1fr!important}
+  .ms-story-row{min-height:220px!important;grid-template-columns:minmax(210px,34%) minmax(0,1fr) 44px!important}
+  .ms-row-art{min-height:220px}
+  .ms-row-copy{padding:24px!important}
+  .ms-row-title{font-size:25px!important}
+  .ms-row-summary{font-size:13px!important;max-width:560px}
+}
