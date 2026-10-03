@@ -136,14 +136,9 @@ function ensureUi(){
       '<div><strong>Die zehn Mubaschschirūn</strong><span>al-ʿAšarah al-Mubaššarūn · 10 Gefährten</span></div>'+
     '</div>'+
     '<div class="ms-library-scroll" id="msLibraryScroll">'+
-      '<header class="ms-library-hero">'+
-        '<div class="ms-library-kicker">QURʾĀN · AUTHENTISCHE SUNNAH · ṢAḤĀBAH</div>'+
-        '<h2>Die zehn Gefährten,<br>denen das Paradies angekündigt wurde</h2>'+
 
-        '<div class="ms-library-stats"><span><b id="msDoneCount">0</b>/10 geschafft</span><span id="msAge">Alter 6–8</span></div>'+
-      '</header>'+
 
-      '<div class="ms-method-note"><strong>Unsere Quellenregel</strong><span>Keine erfundenen Gespräche, keine ausgeschmückten Heldensagen. Wir erzählen nur, was Qurʾān, authentische Sunnah und sichere frühe Berichte tragen.</span></div>'+
+
       '<div id="msGrid" class="ms-list"></div>'+
     '</div>';
   document.body.appendChild(page);
