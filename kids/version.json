@@ -1,8 +1,8 @@
 {
   "buildId": "kids-shell-v12-sahaba1070",
   "label": "KIDS · V1.07.0",
-  "releasedAt": "2026-10-03T14:50:00.000Z",
-  "note": "V1.07.0: Mubaschschirūn-Bereich finalisiert: zehn eigene Ṣaḥābah-Geschichten, drei altersgerechte Fassungen, direkte authentische Nachweise, altersgerechte Hinweise zu historischen Illustrationen und vollständige Serhat-Voice-Studio-Übergabe. Keine individuelle Kleidung oder Porträtähnlichkeit wird ohne sicheren Einzelbeleg behauptet.",
+  "releasedAt": "2026-10-03T14:44:00.000Z",
+  "note": "V1.07.0: Mubaschschirūn-Seite ruhiger und kindgerechter: übersichtlicher Einstieg, altersgerechter Hinweis zu historischen Lernbildern, Edge-Swipe-Zurück in Bibliothek und Detailansicht sowie Bundle-/Offline-Cache auf v6/v1070 synchronisiert. Inhalte, Quellen und Serhat-Voice-Workflow bleiben unverändert quellengebunden.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -80,7 +80,7 @@
     },
     "mubashshirunProfilePanels": true,
     "mubashshirunDirectHadithLinks": true,
-    "mubashshirunStoryUi": "spacious-scene-cards-v3",
+    "mubashshirunStoryUi": "spacious-scene-cards-v4",
     "mubashshirunBundleVersion": 6,
     "mubashshirunDataVersion": 4,
     "mubashshirunAudioPublishPipeline": true,
@@ -150,6 +150,7 @@
     "mubashshirunVoiceStudioVersion": "2.9.66",
     "mubashshirunAutoPublishAfterPronunciationConfirm": true,
     "mubashshirunAgeAwareVisualDisclaimer": true,
-    "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03"
+    "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03",
+    "mubashshirunSwipeBack": true
   }
 }
