@@ -2714,7 +2714,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07.6</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.07.7</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3168,7 +3168,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-sahaba1080";
+const KIDS_BUILD_ID="kids-shell-v12-sahaba1081";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6613,7 +6613,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1080",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1081",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
@@ -7692,6 +7692,136 @@ html[data-view="stories"] .shell{
     font-size:20px!important;
   }
 }
+
+/* KIDS_STORIES_HERO_V1081 — Geschichten startet als eigene vollflächige Seitenbühne, nicht als Kasten */
+html[data-view="stories"] .shell{
+  padding-top:0!important;
+}
+#view-stories .page-head{
+  position:relative!important;
+  isolation:isolate!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  width:100vw!important;
+  max-width:100vw!important;
+  min-height:clamp(330px,72vw,470px)!important;
+  margin:0 calc(50% - 50vw) 28px!important;
+  padding:
+    max(88px,calc(env(safe-area-inset-top,0px) + 30px))
+    max(24px,calc(env(safe-area-inset-right,0px) + 20px))
+    36px
+    max(24px,calc(env(safe-area-inset-left,0px) + 20px))!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background-color:#071f32!important;
+  background-image:
+    linear-gradient(90deg,rgba(4,24,38,.92) 0%,rgba(4,24,38,.72) 42%,rgba(4,24,38,.22) 72%,rgba(4,24,38,.10) 100%),
+    linear-gradient(180deg,rgba(4,20,33,.18) 0%,rgba(4,20,33,.06) 45%,rgba(4,24,38,.56) 80%,#0c2636 100%),
+    url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/5087f390-0b0a-4fd0-8511-09c6aa4bca47/Single_standalone_wide_background_image_for_a_premium_children_s_Islamic_storytelling_app_hero__No_t_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMTMyZGU1MjdkNmU4Y2I0MSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTE3OTY4N30.oeDb40YQT1b7OGiLtS7Cvz-u8TCRIBma_uYLgD4StmU")!important;
+  background-size:cover!important;
+  background-position:center 50%!important;
+  background-repeat:no-repeat!important;
+}
+#view-stories .page-head::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  opacity:1!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 80% 21%,rgba(255,225,151,.16),transparent 20%),
+    linear-gradient(180deg,transparent 58%,rgba(7,28,43,.18) 76%,#0c2636 100%)!important;
+}
+#view-stories .page-head::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  left:0!important;
+  right:0!important;
+  top:auto!important;
+  bottom:0!important;
+  height:54px!important;
+  background:linear-gradient(180deg,transparent,#0c2636)!important;
+  box-shadow:none!important;
+}
+#view-stories .page-head>*{
+  position:relative!important;
+  z-index:1!important;
+  max-width:min(720px,84vw)!important;
+}
+#view-stories .page-head .kicker{
+  align-self:flex-start!important;
+  display:inline-flex!important;
+  min-height:40px!important;
+  align-items:center!important;
+  padding:0 18px!important;
+  border:1px solid rgba(241,202,108,.62)!important;
+  border-radius:999px!important;
+  background:rgba(4,25,39,.48)!important;
+  color:#ffe49a!important;
+  font-size:clamp(10px,2.5vw,13px)!important;
+  letter-spacing:.15em!important;
+  backdrop-filter:blur(4px)!important;
+  -webkit-backdrop-filter:blur(4px)!important;
+}
+#view-stories .page-head h2{
+  margin:18px 0 10px!important;
+  color:#fff8e7!important;
+  font-size:clamp(50px,13vw,72px)!important;
+  line-height:.92!important;
+  letter-spacing:-.045em!important;
+  text-shadow:0 5px 24px rgba(0,0,0,.34)!important;
+}
+#view-stories .page-head p{
+  margin:0!important;
+  max-width:560px!important;
+  color:rgba(255,255,255,.86)!important;
+  font-size:clamp(15px,4vw,20px)!important;
+  line-height:1.42!important;
+  text-shadow:0 3px 14px rgba(0,0,0,.38)!important;
+}
+#view-stories .story-feature{
+  margin-top:0!important;
+}
+@media(max-width:390px){
+  #view-stories .page-head{
+    min-height:315px!important;
+    padding-top:max(82px,calc(env(safe-area-inset-top,0px) + 26px))!important;
+    padding-bottom:30px!important;
+    background-position:56% 50%!important;
+  }
+  #view-stories .page-head h2{
+    font-size:clamp(45px,14vw,57px)!important;
+  }
+  #view-stories .page-head p{
+    font-size:14px!important;
+    max-width:86vw!important;
+  }
+}
+@media(min-width:700px){
+  #view-stories .page-head{
+    min-height:500px!important;
+    padding:
+      max(104px,calc(env(safe-area-inset-top,0px) + 38px))
+      max(42px,calc(env(safe-area-inset-right,0px) + 28px))
+      54px
+      max(42px,calc(env(safe-area-inset-left,0px) + 28px))!important;
+    margin-bottom:34px!important;
+    background-position:center 48%!important;
+  }
+  #view-stories .page-head h2{
+    font-size:clamp(64px,8vw,88px)!important;
+  }
+  #view-stories .page-head p{
+    font-size:20px!important;
+    max-width:660px!important;
+  }
+}
+
 </style>
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=4">
 <script src="/kids/prophet-stories.js?v=23"></script>
