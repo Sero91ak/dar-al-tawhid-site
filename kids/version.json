@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-tab1052",
-  "label": "KIDS · V1.05.2",
-  "releasedAt": "2026-10-02T20:32:00.000Z",
-  "note": "V1.05.2: Geschichten-Startseite neu geordnet: Titelbereich ohne Hintergrundbild, weichere kindgerechte Typografie, dezente responsive Licht-/Sternbewegung, klar getrennte Bedienflächen und ein eigener Prophetenkarten-Look ohne Startseitenbild-Wiederholung.",
+  "buildId": "kids-shell-v12-tab1053",
+  "label": "KIDS · V1.05.3",
+  "releasedAt": "2026-10-03T00:10:00.000Z",
+  "note": "V1.05.3: Qurʾān-Startseite neu aufgebaut: eigenständige Adobe-/Runway-Bildwelten für Qurʾān-Reise, Alif-Bāʾ, kurze Sūrah und Lernverse; größere kindgerechte Bedienflächen; saubere Bild-/Texttrennung; responsive Edge-to-Edge-Geometrie für iPhone/iPad/Desktop; reduzierte, lesbare Typografie und sichere Dock-Abstände.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1052",
+    "serviceWorkerCache": "v1053",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -37,6 +37,12 @@
     "storiesHomePolish": "v21",
     "storiesHeaderArtwork": false,
     "storiesHeaderAmbientMotion": true,
-    "storiesResponsiveLayout": "phone-tablet-desktop"
+    "storiesResponsiveLayout": "phone-tablet-desktop",
+    "quranHomePolish": "edge-v1053",
+    "quranArtVersion": 1053,
+    "quranGeneratedArtwork": 4,
+    "quranImageTextSeparated": true,
+    "quranResponsiveLayout": "phone-tablet-desktop",
+    "quranReducedMotionAware": true
   }
 }
