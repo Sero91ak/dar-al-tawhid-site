@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1081";
+const CACHE_NAME="dar-al-tawhid-kids-v1082";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
