@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1068",
-  "label": "KIDS · V1.06.8",
-  "releasedAt": "2026-10-03T14:30:00.000Z",
-  "note": "V1.06.8: Geschichten erweitert um den eigenen Bereich der zehn al-ʿAšarah al-Mubaššarūn. Zehn quellengeprüfte Ṣaḥābah-Biographien mit drei Altersfassungen, direkten Ḥadīṯ-Nachweisen, Fuṣḥā-Ausspracheprofilen und Voice-Studio-Übergabe. Primärbeleg der Zehner-Überlieferung auf at-Tirmidhī 3748 verstärkt.",
+  "buildId": "kids-shell-v12-sahaba1069",
+  "label": "KIDS · V1.06.9",
+  "releasedAt": "2026-10-03T14:38:00.000Z",
+  "note": "V1.06.9: Mubaschschirūn-Bereich vollständig quellen- und Voice-Studio-synchronisiert. Zehn eigene Ṣaḥābah-Geschichten, drei Altersfassungen, direkte Ḥadīṯ-Nachweise, historisch nur angenäherte Bildkleidung mit offengelegter Sunnah-Bildgrundlage und automatischer Serhat-Voice-Übernahme nach Aussprachebestätigung.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1068",
+    "serviceWorkerCache": "v1069",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -65,7 +65,7 @@
     "alphabetFunctionalityChanged": false,
     "quranCinematicArtwork": true,
     "quranArtworkFormat": "local-jpeg",
-    "mubashshirunStories": "v3-sourced-voice-ready",
+    "mubashshirunStories": "v4-sourced-voice-ready",
     "mubashshirunOwnLibrary": true,
     "mubashshirunStoryCount": 10,
     "mubashshirunAgeScripts": 30,
@@ -81,8 +81,8 @@
     "mubashshirunProfilePanels": true,
     "mubashshirunDirectHadithLinks": true,
     "mubashshirunStoryUi": "spacious-scene-cards-v3",
-    "mubashshirunBundleVersion": 4,
-    "mubashshirunDataVersion": 2,
+    "mubashshirunBundleVersion": 5,
+    "mubashshirunDataVersion": 4,
     "mubashshirunAudioPublishPipeline": true,
     "mubashshirunFuṣḥāReview": true,
     "mubashshirunPreparedStoryScripts": 30,
@@ -145,6 +145,9 @@
     "mubashshirunNoTinyText": true,
     "mubashshirunOwnPage": true,
     "mubashshirunCount": 10,
-    "mubashshirunFushaMasterEntries": 10
+    "mubashshirunFushaMasterEntries": 10,
+    "mubashshirunVisualEvidence": "Tirmidhi 1762 + Abu Dawud 4061; no individual wardrobe claim",
+    "mubashshirunVoiceStudioVersion": "2.9.66",
+    "mubashshirunAutoPublishAfterPronunciationConfirm": true
   }
 }
