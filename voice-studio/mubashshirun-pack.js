@@ -102,9 +102,13 @@ function render(){
   $("#mvpPublish")?.addEventListener("click",publishCurrent);
 }
 async function publishCurrent(){
-  const it=current();if(!it)return;
+  const it=current();if(!it)return false;
   const btn=$("#mvpPublish"),status=$("#mvpReady"),text=String($("#text")?.value||"").trim();
-  if(!text){if(status)status.textContent="Zuerst den Text laden und Audio erzeugen.";return}
+  if(!text){if(status)status.textContent="Zuerst den Text laden und Audio erzeugen.";return false}
+  if(typeof window.darVoiceQaIsConfirmed==="function"&&!window.darVoiceQaIsConfirmed()){
+    if(status)status.textContent="Audio zuerst vollständig anhören und über „Aussprache bestätigen & übernehmen“ freigeben. Erst danach wird diese Altersfassung in Kids veröffentlicht.";
+    return false;
+  }
   const old=btn?.textContent||"";
   if(btn){btn.disabled=true;btn.textContent="Übernehme …"}
   if(status)status.textContent="Geprüftes Serhat-Audio wird der gewählten Altersfassung zugeordnet und in Kids veröffentlicht …";
@@ -119,8 +123,10 @@ async function publishCurrent(){
     if(!it.audio||typeof it.audio!=="object")it.audio={};
     it.audio[state.age]={...(it.audio[state.age]||{}),url:d.url||"",durationSec:d.durationSec||0,status:"ready"};
     render();
+    return true;
   }catch(e){
     if(status)status.textContent=e.message||String(e);
+    return false;
   }finally{
     if(btn){btn.disabled=false;btn.textContent=old}
   }
@@ -162,5 +168,5 @@ function bind(){
 }
 function boot(){bind();load()}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(boot,120),{once:true});else setTimeout(boot,120);
-window.mubVoicePack={open:openPack,close:closePack,load,loadSelected,state};
+window.mubVoicePack={open:openPack,close:closePack,load,loadSelected,publishCurrent,state};
 })();
