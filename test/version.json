@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1214",
-  "appBuildId": "app-shell-v1214",
-  "note": "v1214 · Test-Startseite über alle Erscheinungsbilder vollständig Edge-to-Edge: Hero-Hintergrund beginnt oberhalb der Safe-Area, keine abgeschnittene obere Fläche. Hero- und Studienbild überlappen mit weicher Crossfade-/Maskenlogik statt sichtbarer Bildkante. Alte parallele Inline-Bildlayer entfernt. Qurʾān-Weiterlesen unter dem Tawḥīd-Kern jetzt als sehr schmale transparente Editorial-Zeile ohne Oval, Blur, Bild oder abgeschnittene Metadaten.",
-  "updatedAt": "2026-10-03T16:36:00+02:00"
+  "buildId": "app-shell-v1215",
+  "appBuildId": "app-shell-v1215",
+  "note": "v1215 · v1214 Home-Umbau zurückgenommen. Edge-to-Edge bedeutet jetzt ausschließlich: das vorhandene obere Hero-Bild wird 260px nach oben oversize erweitert, damit beim iOS-Pull-down keine helle Fläche erscheint. Kein Hintergrund wird nach unten verlängert. Alte Home-Höhen und Footer-Fluss wiederhergestellt. Studienbild bleibt nur als begrenzte, weich auslaufende Content-Atmosphäre. Qurʾān-Weiterlesen bleibt kompakt als transparente Editorial-Zeile.",
+  "updatedAt": "2026-10-03T16:49:00+02:00"
 }
