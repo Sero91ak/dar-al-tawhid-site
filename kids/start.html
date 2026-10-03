@@ -2714,7 +2714,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07.11</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.07.12</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3168,7 +3168,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-sahaba1085";
+const KIDS_BUILD_ID="kids-shell-v12-sahaba1086";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6613,7 +6613,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1085",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1086",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
@@ -7957,6 +7957,83 @@ html[data-view="stories"] .shell{
   #view-stories .page-head p{
     font-size:20px!important;
     max-width:650px!important;
+  }
+}
+
+
+/* KIDS_STORIES_BOTTOM_NAV_V1086
+   Geschichten: klarer Abstand zum unteren Navigationsbereich + eigenes ruhiges Story-Hintergrundbild. */
+html[data-view="stories"] #view-stories{
+  padding-bottom:calc(178px + env(safe-area-inset-bottom,0px))!important;
+}
+html[data-view="stories"] #view-stories > :last-child{
+  margin-bottom:30px!important;
+}
+html[data-view="stories"] .bottom-nav{
+  bottom:max(12px,env(safe-area-inset-bottom,0px))!important;
+  min-height:88px!important;
+  padding:10px 9px calc(10px + env(safe-area-inset-bottom,0px))!important;
+  border-radius:30px!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  background-color:#071c2c!important;
+  background-image:
+    linear-gradient(180deg,rgba(5,20,32,.62),rgba(5,20,32,.88)),
+    linear-gradient(90deg,rgba(6,25,38,.72),rgba(8,37,52,.50),rgba(6,25,38,.76)),
+    url("https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:3ef7a69f-3bbd-461c-8f65-6c35e2eb6e13")!important;
+  background-size:cover!important;
+  background-position:center 58%!important;
+  background-repeat:no-repeat!important;
+  border:1px solid rgba(241,202,108,.18)!important;
+  box-shadow:
+    0 20px 48px rgba(0,0,0,.38),
+    0 -1px 0 rgba(255,255,255,.025) inset!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html[data-view="stories"] .bottom-nav::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 20% 14%,rgba(241,202,108,.07),transparent 22%),
+    radial-gradient(circle at 80% 18%,rgba(115,209,217,.06),transparent 24%)!important;
+}
+html[data-view="stories"] .bottom-nav .nav-btn{
+  position:relative!important;
+  z-index:1!important;
+  min-height:64px!important;
+  border-radius:21px!important;
+}
+html[data-view="stories"] .bottom-nav .nav-btn.active{
+  background:linear-gradient(145deg,rgba(241,202,108,.18),rgba(115,209,217,.07))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.035)!important;
+}
+@media(max-width:390px){
+  html[data-view="stories"] #view-stories{
+    padding-bottom:calc(164px + env(safe-area-inset-bottom,0px))!important;
+  }
+  html[data-view="stories"] #view-stories > :last-child{
+    margin-bottom:24px!important;
+  }
+  html[data-view="stories"] .bottom-nav{
+    min-height:82px!important;
+    border-radius:27px!important;
+  }
+}
+@media(min-width:700px){
+  html[data-view="stories"] #view-stories{
+    padding-bottom:calc(194px + env(safe-area-inset-bottom,0px))!important;
+  }
+  html[data-view="stories"] #view-stories > :last-child{
+    margin-bottom:36px!important;
+  }
+  html[data-view="stories"] .bottom-nav{
+    bottom:max(16px,env(safe-area-inset-bottom,0px))!important;
+    min-height:94px!important;
+    border-radius:32px!important;
   }
 }
 
