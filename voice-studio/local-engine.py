@@ -6814,6 +6814,135 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str):
 
 
 
+def publish_manual_mubashshirun_story(item_id:str,age:str,text:str):
+    item_id=str(item_id or "").strip()
+    age=str(age or "").strip()
+    text=str(text or "").strip()
+    ages=("4-5","6-8","9-10")
+    if age not in ages:
+        raise ValueError("Alter muss 4-5, 6-8 oder 9-10 sein.")
+    if not item_id:
+        raise ValueError("Ṣaḥābī fehlt.")
+    if len(text)<80:
+        raise ValueError("Erzähltext ist zu kurz.")
+
+    st=get_status()
+    src=Path(str(st.get("last_output") or ""))
+    if not src.exists() or src.stat().st_size<=44:
+        raise ValueError("Zuerst Audio erzeugen und vollständig prüfen.")
+
+    git=shutil.which("git")
+    if not git:
+        raise RuntimeError("git fehlt.")
+    repo=ALPHABET_PUBLISH_REPO
+    def rr(args,timeout=180):
+        return run(args,timeout)
+
+    gh=shutil.which("gh")
+    if gh:
+        auth=rr([gh,"auth","status"],30)
+        if auth.returncode==0:
+            rr([gh,"auth","setup-git"],30)
+
+    if not (repo/".git").exists():
+        if repo.exists():
+            shutil.rmtree(repo)
+        p=rr([git,"clone","https://github.com/Sero91ak/dar-al-tawhid-site.git",str(repo)],300)
+        if p.returncode!=0:
+            raise RuntimeError("Git clone fehlgeschlagen: "+(p.stderr or p.stdout)[-500:])
+
+    rr([git,"-C",str(repo),"fetch","origin","main"],180)
+    rr([git,"-C",str(repo),"checkout","main"],60)
+    rr([git,"-C",str(repo),"reset","--hard","origin/main"],60)
+
+    data_path=repo/"kids/data/mubashshirun-stories.json"
+    if not data_path.exists():
+        raise RuntimeError("Mubaschschirūn-Datendatei fehlt im Kids-Repository.")
+    manifest=json.loads(data_path.read_text(encoding="utf-8"))
+    items=list(manifest.get("items") or [])
+    item=next((x for x in items if str(x.get("id") or "")==item_id),None)
+    if not item:
+        raise ValueError("Ṣaḥābī nicht gefunden: "+item_id)
+
+    asset=repo/"kids/assets/mubashshirun-story-audio"/item_id/(age+".m4a")
+    _encode_kids_m4a(src,asset)
+    dur=round(_audio_duration_seconds(asset),3)
+    if dur<30 or asset.stat().st_size<8000:
+        raise RuntimeError("Audio-QA fehlgeschlagen: Geschichte ist zu kurz oder leer.")
+
+    stamp=time.strftime("%Y%m%d-%H%M%S")
+    scripts=item.get("scripts") if isinstance(item.get("scripts"),dict) else {}
+    audio=item.get("audio") if isinstance(item.get("audio"),dict) else {}
+    scripts[age]=text
+    audio[age]={
+        "status":"ready",
+        "durationSec":dur,
+        "bytes":asset.stat().st_size,
+        "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
+        "voiceProfile":"kids_story",
+        "voiceProfileId":"serhat-owner-voice-2026",
+        "source":"DĀR Voice Studio local engine",
+        "sourceSpeaker":"Serhat Abu Malik",
+        "age":age,
+        "modes":["read","listen"],
+        "technicalQaPassed":True,
+        "pronunciationReviewRequired":True,
+        "publishedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "url":f"/kids/assets/mubashshirun-story-audio/{item_id}/{age}.m4a?v={stamp}",
+    }
+    item["scripts"]=scripts
+    item["audio"]=audio
+    vp=item.get("voiceProduction") if isinstance(item.get("voiceProduction"),dict) else {}
+    published=sorted({a for a in ages if isinstance(audio.get(a),dict) and str(audio[a].get("url") or "").strip()})
+    vp["publishedAges"]=published
+    vp["status"]="audio-complete" if len(published)==3 else "audio-partial"
+    vp["lastPublishedAt"]=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    item["voiceProduction"]=vp
+    manifest["updatedAt"]=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    atomic_write_json(data_path,manifest)
+
+    rel_asset=str(asset.relative_to(repo))
+    p=rr([git,"-C",str(repo),"add","kids/data/mubashshirun-stories.json",rel_asset],60)
+    if p.returncode!=0:
+        raise RuntimeError("Git staging fehlgeschlagen.")
+
+    if rr([git,"-C",str(repo),"diff","--cached","--quiet"],30).returncode==0:
+        return {
+            "ok":True,"unchanged":True,"id":item_id,"age":age,
+            "url":audio[age]["url"],"durationSec":dur,"publishedAges":published
+        }
+
+    rr([git,"-C",str(repo),"config","user.name","Serhat Abu Malik"],20)
+    rr([git,"-C",str(repo),"config","user.email","73606501+Sero91ak@users.noreply.github.com"],20)
+    name=str(item.get("name") or item_id)
+    msg=f"Kids: Ṣaḥābah-Geschichte {name} · Alter {age} · Serhat Voice"
+    p=rr([git,"-C",str(repo),"commit","-m",msg],120)
+    if p.returncode!=0:
+        raise RuntimeError("Git commit fehlgeschlagen: "+(p.stderr or p.stdout)[-600:])
+
+    last=""
+    for attempt in range(1,4):
+        fetch=rr([git,"-C",str(repo),"fetch","origin","main"],180)
+        if fetch.returncode==0:
+            rebase=rr([git,"-C",str(repo),"rebase","origin/main"],180)
+            if rebase.returncode!=0:
+                rr([git,"-C",str(repo),"rebase","--abort"],30)
+                raise RuntimeError("Rebase fehlgeschlagen.")
+            push=rr([git,"-C",str(repo),"push","origin","HEAD:main"],300)
+            if push.returncode==0:
+                return {
+                    "ok":True,"id":item_id,"name":name,"age":age,
+                    "url":audio[age]["url"],"durationSec":dur,
+                    "publishedAges":published,"pushed":True
+                }
+            last=(push.stderr or push.stdout)[-700:]
+        else:
+            last=(fetch.stderr or fetch.stdout)[-700:]
+        if attempt<3:
+            time.sleep(attempt*3)
+    raise RuntimeError("GitHub-Push fehlgeschlagen: "+last)
+
+
 class H(BaseHTTPRequestHandler):
     def is_loopback_client(self):
         try:
@@ -7371,6 +7500,16 @@ class H(BaseHTTPRequestHandler):
                 return self.send_json(202,{"ok":True,**state})
             except Exception as e:
                 return self.send_json(500,{"ok":False,"error":str(e),**_prophet_batch_snapshot()})
+        if p=="/mubashshirun/publish":
+            try:
+                result=publish_manual_mubashshirun_story(
+                    str(data.get("id") or ""),
+                    str(data.get("age") or ""),
+                    str(data.get("text") or "")
+                )
+                return self.send_json(200,result)
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e)})
         if p=="/prophet-stories/batch-stop":
             PROPHET_STORY_BATCH_CANCEL.set()
             return self.send_json(200,{"ok":True,"stopRequested":True,**_prophet_batch_snapshot()})
