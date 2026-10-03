@@ -157,7 +157,12 @@ function ensureHero(){
   bind(hero);
 
   var prayer=document.getElementById("headerPrayerStatus");
-  if(prayer&&prayer.parentNode!==header)header.appendChild(prayer);
+  if(prayer){
+    prayer.classList.add("dt-prayer-feature");
+    if(prayer.parentNode!==header||hero.nextElementSibling!==prayer){
+      hero.insertAdjacentElement("afterend",prayer);
+    }
+  }
 
   var isnad=top.querySelector(".isnad")||document.querySelector(".isnad");
   if(isnad){
@@ -264,7 +269,41 @@ function placeQuranResumeAfterCore(shell){
   var resume=shell.querySelector(".home-v380-quran-hero");
   var core=shell.querySelector(".home-line-tawhid");
   if(!resume||!core)return;
+
   resume.classList.add("dt-quran-resume-after-core");
+
+  /* v1216: compact reading card with its own 3D Qur'an icon and
+     a dedicated metadata column. Safe to run after every Home rerender. */
+  var body=resume.querySelector(".home-v380-quran-hero__body");
+  if(body){
+    var kicker=body.querySelector(".home-v380-kicker");
+    if(kicker)kicker.remove();
+
+    var icon=resume.querySelector(".dt-quran-resume-icon");
+    if(!icon){
+      icon=document.createElement("span");
+      icon.className="dt-quran-resume-icon";
+      icon.setAttribute("aria-hidden","true");
+      icon.innerHTML='<img src="/test/assets/dar-3d-icons/quran.png?v=1216" alt="">';
+      resume.insertBefore(icon,resume.firstChild);
+    }
+
+    var info=resume.querySelector(".dt-quran-resume-info");
+    if(!info){
+      info=document.createElement("span");
+      info.className="dt-quran-resume-info";
+      resume.appendChild(info);
+    }
+
+    var meta=resume.querySelector(".home-v380-quran-hero__meta");
+    var when=resume.querySelector(".home-v380-quran-hero__when");
+    if(meta&&meta.parentNode!==info)info.appendChild(meta);
+    if(when&&when.parentNode!==info)info.appendChild(when);
+  }
+
+  var chevron=resume.querySelector(".home-v380-quran-hero__chevron");
+  if(chevron)chevron.style.setProperty("display","none","important");
+
   if(core.nextElementSibling!==resume)core.insertAdjacentElement("afterend",resume);
 }
 function ensureMain(){
