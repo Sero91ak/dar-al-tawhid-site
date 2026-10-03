@@ -406,7 +406,9 @@ LAUNCH_OK=0
 : > "$TARGET/launchctl-bootstrap.log"
 if launchctl bootstrap "gui/$UID" "$LAUNCH" 2>"$TARGET/launchctl-bootstrap.log"; then
   launchctl enable "gui/$UID/$LABEL" >/dev/null 2>&1 || true
-  launchctl kickstart -k "gui/$UID/$LABEL" >/dev/null 2>&1 || true
+  # RunAtLoad startet die Engine bereits. Kein kickstart -k mehr:
+  # dieser Aufruf konnte auf manchen Macs minutenlang blockieren und die
+  # komplette Installation nach erfolgreicher Validierung festhalten.
   LAUNCH_OK=1
 else
   echo "Hinweis: macOS launchctl bootstrap wurde abgelehnt. Die Engine wird direkt gestartet."
@@ -564,17 +566,11 @@ engine_is_current() {
     pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
     sleep 1
     pkill -KILL -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
-    echo "Versuche genau einen LaunchAgent-Start."
-    launchctl kickstart -k "gui/$UID/com.daraltawhid.voice-engine" >/dev/null 2>&1 || true
-
-    for i in $(seq 1 16); do
-      engine_is_current && break
-      sleep 0.4
-    done
+    echo "Starte die lokale Engine direkt; kein blockierendes launchctl kickstart mehr."
   fi
 
   if ! engine_is_current; then
-    echo "LaunchAgent ohne aktuelle Engine-Version – starte einmal direkt."
+    echo "Starte aktuelle Engine einmal direkt."
     launchctl bootout "gui/$UID/com.daraltawhid.voice-engine" >/dev/null 2>&1 || true
     pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
     sleep 1
