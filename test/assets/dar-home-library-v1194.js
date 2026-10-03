@@ -85,6 +85,19 @@ function applyHomeAtmosphereV1204(){
     ? "/test/assets/home-v1194/hero-wide-adobe.jpg?v=1206"
     : "/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1206";
   var studyImg="/test/assets/home-v1194/study-runway.jpg?v=1206";
+  if(html){
+    html.style.setProperty("background-color",page,"important");
+    html.style.setProperty(
+      "background-image",
+      light
+        ? "linear-gradient(90deg,rgba(249,246,238,.68),rgba(249,246,238,.30)),url('"+heroImg+"')"
+        : "linear-gradient(90deg,rgba(2,3,2,.58),rgba(2,3,2,.10)),url('"+heroImg+"')",
+      "important"
+    );
+    html.style.setProperty("background-repeat","no-repeat","important");
+    html.style.setProperty("background-size","cover","important");
+    html.style.setProperty("background-position","62% top","important");
+  }
   if(body){
     body.style.setProperty("background-color",page,"important");
     body.style.setProperty("background-image","none","important");
@@ -140,10 +153,7 @@ function ensureHero(){
       '<h1 class="dt-hero-title"><strong>TAWḤĪD</strong><span>Das Fundament allen Wissens.</span></h1>'+
       '<p class="dt-hero-lead">Qurʾān, authentische Sunnah und die Überlieferungen der Salaf – geordnet, nachvollziehbar und direkt zugänglich.</p>'+
 
-      '<button type="button" class="dt-hero-search" data-dt-scroll="homeSearchTitle" aria-label="Wissen durchsuchen">'+
-        '<img src="/test/assets/dar-3d-icons/ilm.png?v=1194" alt="" aria-hidden="true">'+
-        '<span>Qurʾān, Ḥadīṯ, Gelehrte und Themen durchsuchen</span><b aria-hidden="true">→</b>'+
-      '</button>';
+      '<div class="dt-hero-search-slot" aria-label="Schnellsuche im Wissen"></div>';
     var brand=header.querySelector(".header-row--brand-only");
     if(brand)brand.insertAdjacentElement("afterend",hero);
     else header.appendChild(hero);
@@ -177,6 +187,32 @@ function placeAfter(node,anchor){
   if(!node||!anchor||node===anchor)return anchor;
   if(anchor.nextElementSibling!==node)anchor.insertAdjacentElement("afterend",node);
   return node;
+}
+function ensureFunctionalHeroSearch(){
+  if(!isHome())return;
+  var hero=document.getElementById("dtHero1194");
+  var nativeSearch=sectionByTitle("homeSearchTitle");
+  if(!hero||!nativeSearch)return;
+  var slot=hero.querySelector(".dt-hero-search-slot");
+  if(!slot){
+    slot=document.createElement("div");
+    slot.className="dt-hero-search-slot";
+    slot.setAttribute("aria-label","Schnellsuche im Wissen");
+    hero.appendChild(slot);
+  }
+  var stale=hero.querySelector(".dt-hero-search");
+  if(stale)stale.remove();
+  var field=nativeSearch.querySelector(".home-v380-search-field");
+  if(field&&field.parentNode!==slot)slot.appendChild(field);
+  if(field){
+    field.classList.add("dt-hero-native-search");
+    var input=field.querySelector("#homeSearchInput");
+    if(input){
+      input.setAttribute("placeholder","Qurʾān, Ḥadīṯ, Gelehrte und Themen durchsuchen");
+      input.setAttribute("aria-label","Schnellsuche: Qurʾān, Ḥadīṯ, Gelehrte und Themen durchsuchen");
+    }
+  }
+  nativeSearch.classList.add("dt-native-search-relocated");
 }
 function tuneSearch(){
   var title=document.getElementById("homeSearchTitle");
@@ -229,6 +265,7 @@ function ensureMain(){
 
   cleanupHomeDuplicates(shell);
   tuneSearch();
+  ensureFunctionalHeroSearch();
 
   // Keep the native Home sections in their original order. Only rename headings.
   var rename={
@@ -258,7 +295,12 @@ function compactHomeFooter(){
     if(!el)return;
     el.style.setProperty("min-height","0","important");
     el.style.setProperty("height","auto","important");
+    el.style.setProperty("max-height","none","important");
   });
+  if(view){
+    view.style.setProperty("padding-bottom","8px","important");
+    view.style.setProperty("margin-bottom","0","important");
+  }
   if(shell){
     shell.style.setProperty("padding-bottom","0","important");
     Array.prototype.forEach.call(shell.children,function(el){
@@ -301,6 +343,11 @@ function sync(){
   if(!document.documentElement||!document.body)return;
   if(!isHome()){
     document.documentElement.classList.remove("dar-home-v1194");
+    document.documentElement.style.removeProperty("background-color");
+    document.documentElement.style.removeProperty("background-image");
+    document.documentElement.style.removeProperty("background-repeat");
+    document.documentElement.style.removeProperty("background-size");
+    document.documentElement.style.removeProperty("background-position");
     return;
   }
   removeOldLayers();
