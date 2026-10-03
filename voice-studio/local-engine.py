@@ -6900,6 +6900,8 @@ def publish_manual_mubashshirun_story(item_id:str,age:str,text:str):
     item["voiceProduction"]=vp
     manifest["updatedAt"]=time.strftime("%Y-%m-%dT%H:%M:%S%z")
     atomic_write_json(data_path,manifest)
+    # Keep the local Voice-Studio library in sync immediately after a publish.
+    atomic_write_json(APP_HOME/"mubashshirun-stories.json",manifest)
 
     rel_asset=str(asset.relative_to(repo))
     p=rr([git,"-C",str(repo),"add","kids/data/mubashshirun-stories.json",rel_asset],60)
