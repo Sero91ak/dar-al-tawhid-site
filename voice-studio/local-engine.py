@@ -45,7 +45,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.67"
+ENGINE_VERSION="2.9.68"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_DIR=VOICE_HOME/"MasterPronunciations"
@@ -7693,7 +7693,12 @@ def serve_single_instance():
         # Modell und Online-Wortschatz erst nach erfolgreichem exklusivem Bind vorladen.
         threading.Thread(target=warm_model,daemon=True).start()
         threading.Thread(target=refresh_online_library_if_stale,daemon=True).start()
-        threading.Thread(target=refresh_studio_ui_from_github,daemon=True).start()
+        # 2.9.68 Stabilitätsmodus: Eine installierte Release-Version darf sich
+        # während des Starts niemals einzelne UI-Dateien von GitHub/main
+        # überschreiben. Das erzeugte zuvor Mischversionen zwischen UI und Engine.
+        # Nur explizites Entwickler-Opt-in erlaubt diesen Sync noch.
+        if os.environ.get("DAR_VOICE_DEV_UI_SYNC","0").strip()=="1":
+            threading.Thread(target=refresh_studio_ui_from_github,daemon=True).start()
         threading.Thread(target=_resume_prophet_story_voice_pack_if_needed,daemon=True,name="dar-prophet-auto-resume").start()
         server.serve_forever()
     return 0
