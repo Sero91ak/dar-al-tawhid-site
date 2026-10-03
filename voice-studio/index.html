@@ -1095,6 +1095,7 @@ const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
 let nativeUpdateState="idle",nativeLatestVersion="";
 let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let studioMode="production",freeVoiceAudioUrl="",freeVoiceProgressTimer=null;
+window.darVoiceQaIsConfirmed=()=>Boolean(qaConfirmed&&lastAudio&&lastGeneratedText===String($("#text")?.value||"").trim());
 let freeVoiceLearningResults=[],freeVoiceLearningCandidate=null,freeVoiceLearningPreviewId="",freeVoiceLearningPreviewUrl="";
 let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null,learningPreviewRequestSerial=0,learningSearchRequestSerial=0;
 let learnedCanonicals=new Set(),learnedTerms=new Set(),confirmedAudioLocks=new Set();
@@ -2517,6 +2518,14 @@ async function confirmQA(){
       setMessage("Aussprache bestätigt und Prophetengeschichte automatisch in Kids übernommen.","good");
       return;
     }
+    const mubState=window.mubVoicePack?.state;
+    if(mubState?.visible&&mubState?.selected&&typeof window.mubVoicePack?.publishCurrent==="function"){
+      setMessage("Aussprache bestätigt. Die fertige Mubaschschirūn-Geschichte wird jetzt automatisch in Kids übernommen …","warn");
+      const published=await window.mubVoicePack.publishCurrent();
+      if(!published)return;
+      setMessage("Aussprache bestätigt und Ṣaḥābah-Geschichte automatisch in Kids übernommen.","good");
+      return;
+    }
     setMessage(justLocked
       ?("Aussprache bestätigt. "+d.confirmed.length+" Kern-Audio-Segment(e) wurden dauerhaft lokal gesperrt.")
       :"Aussprache bestätigt. Bereits gespeicherte Kern-Audio-Locks bleiben unverändert.","good");
@@ -3114,6 +3123,6 @@ setTimeout(()=>{
 </script>
 <script src="content-studio.js?v=2962"></script>
 <script src="alphabet-audio-studio.js?v=2929"></script>
-<script src="mubashshirun-pack.js?v=4"></script>
+<script src="mubashshirun-pack.js?v=5"></script>
 </body>
 </html>
