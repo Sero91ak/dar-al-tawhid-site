@@ -2,127 +2,136 @@
 "use strict";
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-let pack=[];
-const selectedAge=new Map();
-function ageLabel(k){return k==="4-5"?"4–5":k==="9-10"?"9–10":"6–8"}
-function minutes(item,age){
-  const p=item?.voiceProduction?.ageProfiles?.[age];
-  if(p?.estimatedMinutes)return p.estimatedMinutes+" Min.";
-  const t=String(item?.scripts?.[age]||"");
-  return Math.max(4,Math.round((t.match(/\S+/g)||[]).length/85))+" Min.";
-}
-function setText(item,age,autoGenerate){
-  const ta=$("#text"); if(!ta||!item)return;
-  const text=String(item?.scripts?.[age]||"").trim(); if(!text)return;
-  selectedAge.set(item.id,age);
-  const row=document.querySelector('.mub-voice-row[data-id="'+CSS.escape(item.id)+'"]');
-  row?.querySelectorAll("[data-age]").forEach(b=>b.classList.toggle("active",b.dataset.age===age));
-  ta.value=text;
-  ta.dispatchEvent(new Event("input",{bubbles:true}));
-  const style=$("#styleMode"); if(style){style.value="kids_story";style.dispatchEvent(new Event("change",{bubbles:true}))}
-  try{localStorage.setItem("dar.voice.mubashshirun.selection.v2",JSON.stringify({id:item.id,age}))}catch(_){}
-  const msg=$("#mubVoiceState");
-  const words=(text.match(/\S+/g)||[]).length;
-  if(msg)msg.textContent=item.name+" · Alter "+ageLabel(age)+" · "+words+" Wörter · ca. "+minutes(item,age)+" geladen. Fuṣḥā-Strengprüfung läuft über die bestehende Voice-Engine.";
-  $("#analyzeBtn")?.click();
-  ta.focus();
-  if(autoGenerate)setTimeout(()=>$("#generateBtn")?.click(),220);
-}
-function render(host){
-  host.innerHTML=
-    '<div class="mub-voice-head"><div><small>KIDS · ṢAḤĀBAH · EIGENER BEREICH</small><h3>Die zehn al-Mubaššarūn</h3><p>10 quellengeprüfte Geschichten · 4–5 / 6–8 / 9–10 · Fuṣḥā-Strengprüfung · Serhat Voice.</p></div><span class="mub-voice-count">10</span></div>'+
-    '<div id="mubVoiceState" class="notice">Ṣaḥābī und Altersfassung wählen. Der fertige Text wird direkt in den Erzählungs-Editor geladen.</div>'+
-    '<div class="mub-voice-list">'+pack.map((it,i)=>{
-      const defaultAge=selectedAge.get(it.id)||"6-8";
-      return '<div class="mub-voice-row" data-id="'+esc(it.id)+'">'+
-        '<div class="mub-voice-copy"><b>'+(i+1)+'. '+esc(it.name)+'</b><span dir="rtl">'+esc(it.nameAr||"")+' رضي الله عنه</span><small>'+esc(it.summary||"")+'</small><em>4–5: '+esc(minutes(it,"4-5"))+' · 6–8: '+esc(minutes(it,"6-8"))+' · 9–10: '+esc(minutes(it,"9-10"))+'</em></div>'+
-        '<div class="mub-voice-actions">'+
-          '<div class="mub-age-set"><button type="button" data-age="4-5" class="'+(defaultAge==="4-5"?"active":"")+'">4–5</button><button type="button" data-age="6-8" class="'+(defaultAge==="6-8"?"active":"")+'">6–8</button><button type="button" data-age="9-10" class="'+(defaultAge==="9-10"?"active":"")+'">9–10</button></div>'+
-          '<button type="button" class="produce" data-produce>Gewählte Fassung als Audio erzeugen</button>'+
-        '</div>'+
-      '</div>';
-    }).join("")+'</div>';
-  host.querySelectorAll(".mub-voice-row").forEach(row=>{
-    const item=pack.find(x=>x.id===row.dataset.id);
-    row.querySelectorAll("[data-age]").forEach(b=>b.addEventListener("click",()=>setText(item,b.dataset.age,false)));
-    row.querySelector("[data-produce]")?.addEventListener("click",()=>setText(item,selectedAge.get(item.id)||"6-8",true));
-  });
-}
+const state={items:[],selected:"",age:"6-8",visible:false};
+const URLS=[
+  "/mubashshirun/library?cb="+Date.now(),
+  "https://dar-al-tawhid.de/kids/data/mubashshirun-stories.json?cb="+Date.now(),
+  "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/kids/data/mubashshirun-stories.json?cb="+Date.now()
+];
 function injectStyle(){
-  if($("#mubVoiceStyle"))return;
-  const style=document.createElement("style");style.id="mubVoiceStyle";
-  style.textContent=`
-#mubVoicePack{padding:17px;border:1px solid rgba(217,182,111,.20);border-radius:16px;background:rgba(217,182,111,.035)}
-#mubVoicePack[hidden]{display:none!important}
-.mub-voice-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:10px}.mub-voice-head small{display:block;color:#d9b66f;font-size:9px;letter-spacing:.12em;font-weight:900}.mub-voice-head h3{margin:3px 0 5px;font-size:22px}.mub-voice-head p{margin:0;color:var(--muted);font-size:10px;line-height:1.45}.mub-voice-count{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;border:1px solid rgba(217,182,111,.24);color:#e3c27d;font-weight:900;background:rgba(217,182,111,.06)}
-.mub-voice-list{display:grid;gap:8px;margin-top:11px}.mub-voice-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,auto);gap:12px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.018)}
-.mub-voice-copy b{display:block;font-size:12px}.mub-voice-copy span{display:block;font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:16px;margin-top:2px;color:#eef2f4}.mub-voice-copy small{display:block;color:var(--muted);font-size:9px;line-height:1.4;margin-top:3px}.mub-voice-copy em{display:block;color:#d8bd79;font-style:normal;font-size:8px;margin-top:5px}
-.mub-voice-actions{display:grid;gap:6px}.mub-age-set{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.mub-voice-actions button{border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.035);color:#d6e0e6;padding:8px 9px;font-size:9px;font-weight:800;cursor:pointer}.mub-voice-actions [data-age].active{border-color:rgba(217,182,111,.42);background:rgba(217,182,111,.10);color:#f2d796}.mub-voice-actions button.produce{border-color:rgba(217,182,111,.28);background:rgba(217,182,111,.09);color:#efd296;min-height:36px}
-body.studio-page-mubashshirun #prophetPick{display:none!important}
-body.studio-page-mubashshirun #mubVoicePack{display:block!important}
-@media(max-width:760px){.mub-voice-row{grid-template-columns:1fr}.mub-voice-head p{max-width:260px}}
-`;
-  document.head.appendChild(style);
-}
-function deactivate(){
-  document.body.classList.remove("studio-page-mubashshirun");
-  const host=$("#mubVoicePack");if(host)host.hidden=true;
-}
-function activate(){
-  window.setStudioPage?.("prophets");
-  setTimeout(()=>{
-    document.body.classList.add("studio-page-mubashshirun");
-    $("#csProphetTab")?.classList.remove("active");
-    $("#csMubashshirunTab")?.classList.add("active");
-    const host=$("#mubVoicePack");if(host)host.hidden=false;
-    $("#prophetPick")?.setAttribute("aria-hidden","true");
-  },0);
+  if($("#mubVoicePackStyle"))return;
+  const st=document.createElement("style");st.id="mubVoicePackStyle";
+  st.textContent=\`
+  #mubVoicePack{display:none;margin:0 0 16px;border:1px solid rgba(217,182,111,.18);border-radius:16px;background:linear-gradient(145deg,rgba(217,182,111,.045),rgba(255,255,255,.016));padding:14px}
+  body.studio-page-sahaba #mubVoicePack{display:block}
+  body.studio-page-sahaba #prophetPick{display:none!important}
+  #mubVoicePack .mvp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:11px}
+  #mubVoicePack .mvp-kicker{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#d9b66f;font-weight:900}
+  #mubVoicePack h2{margin:4px 0 3px;font-size:21px}
+  #mubVoicePack .mvp-sub{font-size:10px;color:var(--muted);line-height:1.45}
+  #mubVoicePack .mvp-age{display:flex;gap:5px;flex-wrap:wrap}
+  #mubVoicePack .mvp-age button{border:1px solid var(--line);background:rgba(255,255,255,.025);color:#b8c7ca;border-radius:999px;padding:7px 9px;font-size:9px;font-weight:900}
+  #mubVoicePack .mvp-age button.active{border-color:rgba(217,182,111,.36);background:rgba(217,182,111,.08);color:#efd69a}
+  #mubVoicePack .mvp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  #mubVoicePack .mvp-item{border:1px solid var(--line);background:rgba(255,255,255,.022);border-radius:12px;padding:10px;text-align:left;color:#e8eeee;cursor:pointer}
+  #mubVoicePack .mvp-item.active{border-color:rgba(217,182,111,.42);background:rgba(217,182,111,.055)}
+  #mubVoicePack .mvp-item small{display:block;font-size:8px;color:#86aba8;letter-spacing:.08em;font-weight:900;margin-bottom:3px}
+  #mubVoicePack .mvp-item b{display:block;font-size:11px;line-height:1.25}
+  #mubVoicePack .mvp-item span{display:block;font-size:9px;color:#83979b;margin-top:4px;line-height:1.35}
+  #mubVoicePack .mvp-selected{margin-top:10px;padding:11px;border:1px solid rgba(255,255,255,.06);border-radius:12px;background:rgba(0,0,0,.11);display:grid;gap:7px}
+  #mubVoicePack .mvp-selected strong{font-size:12px}.mvp-source{font-size:9px;color:#819498;line-height:1.45}
+  #mubVoicePack .mvp-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  #mubVoicePack .mvp-actions button{min-height:40px}
+  #mubVoicePack .mvp-ready{font-size:9px;line-height:1.45;color:#9bd8ba}
+  body.studio-page-sahaba .heading-row h1:after{content:" · Ṣaḥābah";color:#d9b66f}
+  @media(max-width:720px){#mubVoicePack .mvp-grid{grid-template-columns:1fr}#mubVoicePack .mvp-head{display:grid}.mvp-actions{grid-template-columns:1fr!important}}
+  \`;
+  document.head.appendChild(st);
 }
 function ensureTab(){
-  if($("#csMubashshirunTab"))return;
-  const p=$("#csProphetTab");if(!p)return;
-  const b=document.createElement("button");
-  b.id="csMubashshirunTab";b.className="cs-tab";b.type="button";b.textContent="10 Ṣaḥābah";
-  p.insertAdjacentElement("afterend",b);
-  b.addEventListener("click",activate);
-  p.addEventListener("click",()=>{deactivate();$("#prophetPick")?.removeAttribute("aria-hidden")});
-  document.querySelectorAll("[data-cs-kind],#csPronunciationTab,#csAlphabetTab,#csFreeVoiceTab,#csSystemTab").forEach(x=>x.addEventListener("click",()=>{deactivate();$("#prophetPick")?.removeAttribute("aria-hidden")}));
+  const tabs=$(".cs-nav-tabs");if(!tabs)return null;
+  let btn=$("#csSahabaTab");
+  if(!btn){
+    btn=document.createElement("button");btn.id="csSahabaTab";btn.className="cs-tab";btn.type="button";btn.textContent="Ṣaḥābah · 10";
+    $("#csProphetTab")?.insertAdjacentElement("afterend",btn);
+  }
+  return btn;
+}
+function ensurePanel(){
+  const host=$(".editor-panel");if(!host||$("#mubVoicePack"))return;
+  const p=document.createElement("section");p.id="mubVoicePack";
+  p.innerHTML=
+    '<div class="mvp-head"><div><div class="mvp-kicker">Kids · al-ʿAšarah al-Mubaššarūn</div><h2>Die zehn Mubaschschirūn</h2><div class="mvp-sub">Quellengeprüfte Texte sind fertig vorbereitet. Ṣaḥābī wählen · Altersfassung laden · Fuṣḥā prüfen · Serhat-Audio erzeugen.</div></div>'+
+    '<div class="mvp-age"><button type="button" data-mvp-age="4-5">4–5</button><button type="button" data-mvp-age="6-8" class="active">6–8</button><button type="button" data-mvp-age="9-10">9–10</button></div></div>'+
+    '<div id="mvpGrid" class="mvp-grid"><div class="notice">Lade 10 Ṣaḥābah …</div></div>'+
+    '<div id="mvpSelected" class="mvp-selected" hidden></div>';
+  const anchor=$("#prophetPick")||$(".heading-row");
+  if(anchor)anchor.insertAdjacentElement("beforebegin",p);else host.prepend(p);
+  p.querySelectorAll("[data-mvp-age]").forEach(b=>b.addEventListener("click",()=>{state.age=b.dataset.mvpAge;render();loadSelected(false)}));
+}
+function setVisible(on){
+  state.visible=!!on;
+  document.body.classList.toggle("studio-page-sahaba",state.visible);
+  const panel=$("#mubVoicePack");if(panel)panel.style.display=state.visible?"block":"none";
+  const p=$("#prophetPick");if(p)p.hidden=state.visible;
+  $("#csSahabaTab")?.classList.toggle("active",state.visible);
+  if(state.visible)$("#csProphetTab")?.classList.remove("active");
+}
+function openPack(){
+  window.setStudioPage?.("prophets");
+  setVisible(true);
+  if(!state.items.length)load();
+  setTimeout(()=>$("#mubVoicePack")?.scrollIntoView({block:"start",behavior:"smooth"}),20);
+}
+function closePack(){setVisible(false)}
+function scriptFor(item){return String(item?.scripts?.[state.age]||item?.scripts?.["6-8"]||"").trim()}
+function current(){return state.items.find(x=>x.id===state.selected)||null}
+function render(){
+  ensurePanel();
+  document.querySelectorAll("[data-mvp-age]").forEach(b=>b.classList.toggle("active",b.dataset.mvpAge===state.age));
+  const g=$("#mvpGrid");if(!g)return;
+  g.innerHTML=state.items.map((x,i)=>
+    '<button class="mvp-item '+(x.id===state.selected?"active":"")+'" type="button" data-mvp-id="'+esc(x.id)+'">'+
+      '<small>'+(i+1)+'/10 · ṢAḤĀBĪ</small><b>'+esc(x.name)+'</b><span>'+esc(x.summary||"")+'</span></button>'
+  ).join("");
+  g.querySelectorAll("[data-mvp-id]").forEach(b=>b.addEventListener("click",()=>{state.selected=b.dataset.mvpId;render();loadSelected(false)}));
+  const it=current(),box=$("#mvpSelected");
+  if(!it){box.hidden=true;return}
+  box.hidden=false;
+  box.innerHTML=
+    '<strong>'+esc(it.name)+' · '+(state.age==="4-5"?"4–5 Jahre":state.age==="9-10"?"9–10 Jahre":"6–8 Jahre")+'</strong>'+
+    '<div class="mvp-source">'+esc((it.sourceRefs||[]).join(" · "))+'</div>'+
+    '<div class="mvp-actions"><button id="mvpLoad" class="btn secondary" type="button">Text in Voice laden</button><button id="mvpGenerate" class="btn primary" type="button">Laden &amp; Audio erzeugen</button></div>'+
+    '<div class="mvp-ready">Fuṣḥā-Begriffe und رضي الله عنه laufen anschließend durch dieselbe strenge Ausspracheprüfung wie die Prophetengeschichten.</div>';
+  $("#mvpLoad")?.addEventListener("click",()=>loadSelected(true));
+  $("#mvpGenerate")?.addEventListener("click",async()=>{loadSelected(true);await new Promise(r=>setTimeout(r,80));$("#generateBtn")?.click()});
+}
+function loadSelected(focus=true){
+  const it=current();if(!it)return;
+  const ta=$("#text"),style=$("#styleMode");
+  if(ta){ta.value=scriptFor(it);ta.dispatchEvent(new Event("input",{bubbles:true}));if(focus)ta.focus()}
+  if(style)style.value="kids_story";
+  const title=$("#csTitle");if(title){title.value=it.name+" – Geschichte";title.dispatchEvent(new Event("input",{bubbles:true}))}
+  const cat=$("#csCategory");if(cat)cat.value="Ṣaḥābah · al-ʿAšarah al-Mubaššarūn";
+  const topic=$("#csTopic");if(topic)topic.value="Ṣaḥābah · authentische Sunnah";
+  const person=$("#csProphet");if(person)person.value=it.id;
+  const src=$("#csSources");if(src)src.value=(it.sourceRefs||[]).join("\\n");
+  $("#analyzeBtn")?.click();
 }
 async function load(){
-  const prophet=$("#prophetPick");if(!prophet)return;
-  injectStyle();ensureTab();
-  let host=$("#mubVoicePack");
-  if(!host){
-    host=document.createElement("section");host.id="mubVoicePack";host.hidden=true;
-    prophet.insertAdjacentElement("afterend",host);
-  }
-  host.innerHTML='<div class="notice">Mubaschschirūn-Texte werden geladen …</div>';
-  const urls=[
-    "https://dar-al-tawhid.de/kids/data/mubashshirun-stories.json?cb="+Date.now(),
-    "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/kids/data/mubashshirun-stories.json?cb="+Date.now()
-  ];
-  for(const url of urls){
+  let last=null;
+  for(const url of URLS){
     try{
-      const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;
+      const r=await fetch(url,{cache:"no-store"});
+      if(!r.ok)throw Error("HTTP "+r.status);
       const d=await r.json();
-      if(Array.isArray(d.items)&&d.items.length===10){
-        pack=d.items.slice().sort((a,b)=>Number(a.displayOrder||99)-Number(b.displayOrder||99));
-        try{
-          const saved=JSON.parse(localStorage.getItem("dar.voice.mubashshirun.selection.v2")||"null");
-          if(saved?.id&&saved?.age)selectedAge.set(saved.id,saved.age);
-        }catch(_){}
-        render(host);return;
-      }
-    }catch(_){}
+      const arr=Array.isArray(d.items)?d.items:[];
+      if(arr.length!==10)throw Error("Erwartet 10 Ṣaḥābah, erhalten "+arr.length);
+      state.items=arr.slice().sort((a,b)=>Number(a.displayOrder||99)-Number(b.displayOrder||99));
+      if(!state.selected)state.selected=state.items[0]?.id||"";
+      render();return;
+    }catch(e){last=e}
   }
-  host.innerHTML='<div class="notice warn">Mubaschschirūn-Bibliothek konnte nicht geladen werden.</div>';
+  const g=$("#mvpGrid");if(g)g.innerHTML='<div class="notice bad">Ṣaḥābah-Paket konnte nicht geladen werden: '+esc(last?.message||"unbekannt")+'</div>';
 }
-function boot(){
-  let n=0;const t=setInterval(()=>{
-    n++;
-    if($("#prophetPick")&&$("#csProphetTab")){clearInterval(t);load()}
-    else if(n>160)clearInterval(t);
-  },100);
+function bind(){
+  injectStyle();ensurePanel();
+  const btn=ensureTab();
+  btn?.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openPack()});
+  $("#csProphetTab")?.addEventListener("click",()=>closePack());
+  document.querySelectorAll("[data-cs-kind],#csPronunciationTab,#csAlphabetTab,#csFreeVoiceTab,#csSystemTab").forEach(x=>x.addEventListener("click",()=>closePack()));
 }
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
+function boot(){bind();load()}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(boot,120),{once:true});else setTimeout(boot,120);
+window.mubVoicePack={open:openPack,close:closePack,load,loadSelected,state};
 })();
