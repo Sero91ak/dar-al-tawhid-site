@@ -1064,7 +1064,7 @@
   },
   "mubashshirunStories": {
     "enabled": true,
-    "version": 3,
+    "version": 4,
     "count": 10,
     "ages": [
       "4-5",
@@ -1085,7 +1085,8 @@
     "prosody": "kids_story",
     "output": "kids/assets/mubashshirun-story-audio/<sahabi>/<age>.m4a",
     "systemVoiceFallback": false,
-    "sourcePolicy": "Qurʾān general praise separated from individual authentic Sunnah; no invented dialogue or legends"
+    "sourcePolicy": "Qurʾān general praise separated from individual authentic Sunnah; no invented dialogue or legends",
+    "sourceDataVersion": 4
   },
   "mubashshirun": {
     "enabled": true,
