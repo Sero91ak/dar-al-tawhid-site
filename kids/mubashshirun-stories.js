@@ -112,6 +112,7 @@ function insertEntry(view){
   const entry=document.createElement("button");
   entry.id="msEntry"; entry.className="ms-entry"; entry.type="button";
   entry.innerHTML=
+    '<span class="ms-entry-bg" aria-hidden="true"><img src="https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/c84e31d6-418b-4df9-8534-f86123a7fc3f/Single_standalone_wide_background_image_for_a_premium_Islamic_kids_app_category_card_about_the_ten_S_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzFkZGE3OTU1NjAyZjdjNCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIwNjE2NX0.ym1kj7WQqPB2oU6E-g4GDdyaGDZ3q1iA90Yw7Lsp1oI" alt="" decoding="async" loading="eager"></span>'+
     '<span class="ms-entry-art" aria-hidden="true"><span class="ms-entry-arch"></span><span class="ms-entry-stars">'+
     Array.from({length:10},(_,i)=>'<i style="--i:'+i+'"></i>').join("")+
     '</span></span>'+
