@@ -39,9 +39,13 @@ function sourceHtml(item){
 function renderCards(){
   const grid=$("#msGrid");if(!grid)return;
   grid.innerHTML=items.map((item,index)=>{
-    const t=textFor(item);
+    const t=textFor(item),art=String(item.cover||item.hero||"");
     return '<button class="ms-story-row" type="button" data-ms-id="'+esc(item.id)+'">'+
-      '<span class="ms-rank" aria-hidden="true">'+String(index+1).padStart(2,"0")+'</span>'+
+      '<span class="ms-row-art">'+
+        (art?'<img src="'+esc(art)+'" alt="" decoding="async" loading="'+(index<3?"eager":"lazy")+'">':'')+
+        '<span class="ms-row-art-shade" aria-hidden="true"></span>'+
+        '<span class="ms-rank" aria-hidden="true">'+String(index+1).padStart(2,"0")+'</span>'+
+      '</span>'+
       '<span class="ms-row-copy">'+
         '<span class="ms-row-kicker">ṢAḤĀBĪ · GEPRÜFTE QUELLEN</span>'+
         '<strong class="ms-row-title">'+esc(item.name)+'</strong>'+
@@ -54,9 +58,11 @@ function renderCards(){
     '</button>';
   }).join("");
   grid.querySelectorAll("[data-ms-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.msId)));
+  grid.querySelectorAll(".ms-row-art img").forEach(img=>img.addEventListener("error",()=>{img.closest(".ms-row-art")?.classList.add("no-art");img.remove()},{once:true}));
   const dc=$("#msDoneCount");if(dc)dc.textContent=String(doneCount());
   const ag=$("#msAge");if(ag)ag.textContent="Alter "+age();
 }
+
 function insertEntry(view){
   if($("#msEntry"))return;
   const entry=document.createElement("button");
@@ -109,10 +115,12 @@ function ensureUi(){
       '<button id="msClose" class="ms-close" type="button" aria-label="Zurück">‹</button>'+
       '<div class="ms-scroll" id="msScroll">'+
         '<header class="ms-detail-hero">'+
+          '<img id="msHeroArt" class="ms-hero-art" src="" alt="" decoding="async">'+
+          '<span class="ms-hero-shade" aria-hidden="true"></span>'+
           '<div class="ms-detail-mark" aria-hidden="true"><span></span></div>'+
           '<div class="ms-detail-kicker">ṢAḤĀBĪ · AL-ʿAŠARAH AL-MUBAŠŠARŪN</div>'+
           '<h2 id="msTitle"></h2><div id="msArabic" class="ms-ar" dir="rtl"></div>'+
-          '<p id="msSummary"></p><div id="msMeta" class="ms-meta"></div>'+
+          '<p id="msSummary"></p><div id="msMeta" class="ms-meta"></div><small id="msVisualNote" class="ms-visual-note"></small>'+
           '<div class="ms-detail-modes"><button data-ms-mode="both" type="button">Lesen &amp; Hören</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
         '</header>'+
         '<div class="ms-body">'+
@@ -172,6 +180,13 @@ function renderActive(){
   $("#msTitle").textContent=active.name;
   $("#msArabic").textContent=(active.nameAr||"")+" رضي الله عنه";
   $("#msSummary").textContent=active.summary||"";
+  const hero=$("#msHeroArt");
+  if(hero){
+    hero.style.display="block";
+    hero.src=active.hero||active.cover||"";
+    hero.onerror=()=>{hero.style.display="none"};
+  }
+  const visualNote=$("#msVisualNote");if(visualNote)visualNote.textContent=active.visualDisclaimer||"";
   $("#msMeta").innerHTML='<span>'+durationLabel(activeText)+'</span><span>Alter '+esc(age())+'</span><span>Qurʾān + Sunnah</span>';
   $("#msRead").innerHTML=activeText.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join("");
   $("#msSources").innerHTML=sourceHtml(active);
