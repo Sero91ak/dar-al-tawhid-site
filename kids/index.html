@@ -2726,7 +2726,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07.12</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.07.13</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3180,7 +3180,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-sahaba1086";
+const KIDS_BUILD_ID="kids-shell-v12-sahaba1087";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6625,7 +6625,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1086",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1087",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
