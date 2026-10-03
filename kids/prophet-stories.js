@@ -167,7 +167,7 @@ function prepareStoriesHome(view){
     entry.className="ps-prophet-entry";
     entry.type="button";
     entry.innerHTML=
-      '<span class="ps-entry-visual" aria-hidden="true"><img src="/kids/assets/prophet-scenes/library.webp?v=21" alt="" decoding="async"></span>'+
+      '<span class="ps-entry-visual" aria-hidden="true"><img src="https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:a96ba75e-9374-4152-ad7c-8ed692bc3a1e" alt="" decoding="async" fetchpriority="high"></span>'+
       '<span class="ps-entry-panel">'+
         '<span class="ps-entry-copy">'+
           '<span class="ps-entry-kicker">EIGENER BEREICH · QURʾĀN GEPRÜFT</span>'+
