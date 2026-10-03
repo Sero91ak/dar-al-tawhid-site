@@ -11,8 +11,8 @@ const PROPHET_ORDER=[
 const PROPHET_RANK=new Map(PROPHET_ORDER.map((id,index)=>[id,index]));
 const ART_ROOT="/kids/assets/prophets-v2/";
 const DEDICATED_HERO=new Set(PROPHET_ORDER);
-function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=21"}
-function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=21":cardUrl(item)}
+function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=22"}
+function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=22":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
 let items=[],active=null,activeText="",playing=false,busy=false;
 const audio=new Audio();
