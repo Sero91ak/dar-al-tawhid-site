@@ -6625,7 +6625,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1073",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1074",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
@@ -7462,6 +7462,71 @@ html.kids-ios-app .kids-update-layer{display:none!important}
   #alphabetModal .ab-nav button{min-height:50px!important}
 }
 /* KIDS_ALPHABET_SPACIOUS_V1057_END */
+
+/* KIDS_HOME_OVAL_CAPSULE_RESTORE_V1074 */
+#view-today .big-choice-grid{
+  gap:14px!important;
+}
+#view-today .choice{
+  border-radius:999px!important;
+  min-height:clamp(138px,22vw,164px)!important;
+  padding:18px 28px 16px 34px!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+  box-shadow:0 16px 34px rgba(0,0,0,.16)!important;
+  overflow:hidden!important;
+}
+#view-today .choice .icon{
+  width:48px!important;
+  height:48px!important;
+  margin:0 0 10px!important;
+}
+#view-today .choice strong,
+#view-today .choice small{
+  max-width:78%!important;
+  padding-right:8px!important;
+}
+#view-today .choice .arrow{
+  width:38px!important;
+  height:38px!important;
+  margin-right:2px!important;
+}
+@media(max-width:380px){
+  #view-today .big-choice-grid{gap:12px!important}
+  #view-today .choice{
+    min-height:138px!important;
+    padding:16px 24px 14px 28px!important;
+  }
+  #view-today .choice .icon{
+    width:44px!important;
+    height:44px!important;
+    margin-bottom:9px!important;
+  }
+  #view-today .choice strong,
+  #view-today .choice small{max-width:76%!important}
+}
+@media(min-width:700px){
+  #view-today .big-choice-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:16px!important;
+  }
+  #view-today .choice{
+    min-height:176px!important;
+    padding:22px 30px 20px 36px!important;
+  }
+  #view-today .choice .icon{
+    width:52px!important;
+    height:52px!important;
+    margin-bottom:12px!important;
+  }
+}
+@media(min-width:1100px){
+  #view-today .big-choice-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    max-width:980px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
 </style>
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=4">
 <script src="/kids/prophet-stories.js?v=21"></script>
