@@ -1,6 +1,6 @@
 {
-  "version": 3,
-  "updatedAt": "2026-10-03T14:22:00.000Z",
+  "version": 4,
+  "updatedAt": "2026-10-03T14:42:00.000Z",
   "title": "Die zehn al-Mubaššarūn",
   "subtitle": "Die zehn Gefährten, denen das Paradies angekündigt wurde",
   "policy": {
@@ -24,8 +24,24 @@
     "directVerificationDomain": "dorar.net",
     "notes": "Direktlinks werden nur dort gesetzt, wo die konkrete Überlieferung geprüft und eindeutig zugeordnet wurde.",
     "directHadithLinks": "Dorar direct verification links are attached to the core named-person narrations where verified.",
-    "hadithGradingNote": "Für die gemeinsame Zehner-Überlieferung wird Jāmiʿ at-Tirmidhī 3748 als Primärbeleg geführt; at-Tirmidhī überliefert dort von al-Buḫārī, dass diese Fassung stärker als die vorherige Überlieferung ist. 3747 bleibt nur ergänzend, nicht als alleiniger Grundbeleg.",
-    "primaryTenHadith": "Jāmiʿ at-Tirmidhī 3748"
+    "hadithGradingNote": "Jāmiʿ at-Tirmidhī 3748 wird als Primärbeleg geführt: at-Tirmidhī überliefert dort von Muḥammad al-Buḫārī, dass diese Fassung stärker als die vorherige ist; bei Dorar ist sie außerdem als ṣaḥīḥ ausgewiesen. 3747 bleibt als ergänzende Namensfassung sichtbar.",
+    "primaryTenHadith": "Jāmiʿ at-Tirmidhī 3748",
+    "visualEvidence": {
+      "principle": "Die Illustration ist nur eine historische Lernszene. Für keinen der zehn Gefährten wird ein exaktes Aussehen oder eine individuell belegte Garderobe behauptet.",
+      "clothingBasis": [
+        {
+          "ref": "Jāmiʿ at-Tirmidhī 1762",
+          "point": "Der qamīṣ gehörte zu den überlieferten Kleidungsformen und wird als dem Propheten ﷺ besonders lieb beschrieben.",
+          "url": "https://dorar.net/h/8ZbioLj7"
+        },
+        {
+          "ref": "Sunan Abī Dāwūd 4061",
+          "point": "Weiße Kleidung wird in der Sunnah ausdrücklich empfohlen.",
+          "url": "https://dorar.net/h/0lbkfCMc?osoul=1"
+        }
+      ],
+      "application": "Die Bildkleidung bleibt deshalb schlicht, frühislamisch plausibel und ohne moderne oder Fantasy-Elemente. Individuelle Farben, Schnitte oder Ausrüstung werden nicht als historisch sicher ausgegeben."
+    }
   },
   "generalSources": [
     "Qurʾān 9:100",
@@ -158,7 +174,12 @@
         "4-5": "4–5 Min.",
         "6-8": "5–7 Min.",
         "9-10": "7–10 Min."
-      }
+      },
+      "visualBasis": "Die Szene zeigt keine behauptete Porträtähnlichkeit. Kleidung und Umgebung sind nur historisch angenähert: schlichte qamīṣ-/Übergewand-Formen, bedeckende Kleidung und zeittypische Materialien; keine moderne oder Fantasy-Kleidung. Individuelle Kleidung dieses Ṣaḥābī ist nicht durch einen sicheren Einzelbericht festgelegt.",
+      "visualSourceRefs": [
+        "Jāmiʿ at-Tirmidhī 1762",
+        "Sunan Abī Dāwūd 4061"
+      ]
     },
     {
       "id": "umar",
@@ -285,7 +306,12 @@
         "4-5": "4–5 Min.",
         "6-8": "5–7 Min.",
         "9-10": "7–10 Min."
-      }
+      },
+      "visualBasis": "Die Szene zeigt keine behauptete Porträtähnlichkeit. Kleidung und Umgebung sind nur historisch angenähert: schlichte qamīṣ-/Übergewand-Formen, bedeckende Kleidung und zeittypische Materialien; keine moderne oder Fantasy-Kleidung. Individuelle Kleidung dieses Ṣaḥābī ist nicht durch einen sicheren Einzelbericht festgelegt.",
+      "visualSourceRefs": [
+        "Jāmiʿ at-Tirmidhī 1762",
+        "Sunan Abī Dāwūd 4061"
+      ]
     },
     {
       "id": "uthman",
@@ -412,7 +438,12 @@
         "4-5": "4–5 Min.",
         "6-8": "5–7 Min.",
         "9-10": "7–10 Min."
-      }
+      },
+      "visualBasis": "Die Szene zeigt keine behauptete Porträtähnlichkeit. Kleidung und Umgebung sind nur historisch angenähert: schlichte qamīṣ-/Übergewand-Formen, bedeckende Kleidung und zeittypische Materialien; keine moderne oder Fantasy-Kleidung. Individuelle Kleidung dieses Ṣaḥābī ist nicht durch einen sicheren Einzelbericht festgelegt.",
+      "visualSourceRefs": [
+        "Jāmiʿ at-Tirmidhī 1762",
+        "Sunan Abī Dāwūd 4061"
+      ]
     },
     {
       "id": "ali",
@@ -543,7 +574,12 @@
         "4-5": "4–5 Min.",
         "6-8": "5–7 Min.",
         "9-10": "7–10 Min."
-      }
+      },
+      "visualBasis": "Die Szene zeigt keine behauptete Porträtähnlichkeit. Kleidung und Umgebung sind nur historisch angenähert: schlichte qamīṣ-/Übergewand-Formen, bedeckende Kleidung und zeittypische Materialien; keine moderne oder Fantasy-Kleidung. Individuelle Kleidung dieses Ṣaḥābī ist nicht durch einen sicheren Einzelbericht festgelegt.",
+      "visualSourceRefs": [
+        "Jāmiʿ at-Tirmidhī 1762",
+        "Sunan Abī Dāwūd 4061"
+      ]
     },
     {
       "id": "talha",
@@ -669,7 +705,12 @@
         "4-5": "4–5 Min.",
         "6-8": "5–7 Min.",
         "9-10": "7–10 Min."
-      }
+      },
+      "visualBasis": "Die Szene zeigt keine behauptete Porträtähnlichkeit. Kleidung und Umgebung sind nur historisch angenähert: schlichte qamīṣ-/Übergewand-Formen, bedeckende Kleidung und zeittypische Materialien; keine moderne oder Fantasy-Kleidung. Individuelle Kleidung dieses Ṣaḥābī ist nicht durch einen sicheren Einzelbericht festgelegt.",
+      "visualSourceRefs": [
+        "Jāmiʿ at-Tirmidhī 1762",
+        "Sunan Abī Dāwūd 4061"
+      ]
     },
     {
       "id": "zubayr",
@@ -800,7 +841,12 @@
         "4-5": "4–5 Min.",
         "6-8": "5–7 Min.",
         "9-10": "7–10 Min."
-      }
+      },
+      "visualBasis": "Die Szene zeigt keine behauptete Porträtähnlichkeit. Kleidung und Umgebung sind nur historisch angenähert: schlichte qamīṣ-/Übergewand-Formen, bedeckende Kleidung und zeittypische Materialien; keine moderne oder Fantasy-Kleidung. Individuelle Kleidung dieses Ṣaḥābī ist nicht durch einen sicheren Einzelbericht festgelegt.",
+      "visualSourceRefs": [
+        "Jāmiʿ at-Tirmidhī 1762",
+        "Sunan Abī Dāwūd 4061"
+      ]
     },
     {
       "id": "abd-ar-rahman",
@@ -931,7 +977,12 @@
         "4-5": "4–5 Min.",
         "6-8": "5–7 Min.",
         "9-10": "7–10 Min."
-      }
+      },
+      "visualBasis": "Die Szene zeigt keine behauptete Porträtähnlichkeit. Kleidung und Umgebung sind nur historisch angenähert: schlichte qamīṣ-/Übergewand-Formen, bedeckende Kleidung und zeittypische Materialien; keine moderne oder Fantasy-Kleidung. Individuelle Kleidung dieses Ṣaḥābī ist nicht durch einen sicheren Einzelbericht festgelegt.",
+      "visualSourceRefs": [
+        "Jāmiʿ at-Tirmidhī 1762",
+        "Sunan Abī Dāwūd 4061"
+      ]
     },
     {
       "id": "sad",
@@ -1057,7 +1108,12 @@
         "4-5": "4–5 Min.",
         "6-8": "5–7 Min.",
         "9-10": "7–10 Min."
-      }
+      },
+      "visualBasis": "Die Szene zeigt keine behauptete Porträtähnlichkeit. Kleidung und Umgebung sind nur historisch angenähert: schlichte qamīṣ-/Übergewand-Formen, bedeckende Kleidung und zeittypische Materialien; keine moderne oder Fantasy-Kleidung. Individuelle Kleidung dieses Ṣaḥābī ist nicht durch einen sicheren Einzelbericht festgelegt.",
+      "visualSourceRefs": [
+        "Jāmiʿ at-Tirmidhī 1762",
+        "Sunan Abī Dāwūd 4061"
+      ]
     },
     {
       "id": "said",
@@ -1177,7 +1233,12 @@
         "4-5": "4–5 Min.",
         "6-8": "5–7 Min.",
         "9-10": "7–10 Min."
-      }
+      },
+      "visualBasis": "Die Szene zeigt keine behauptete Porträtähnlichkeit. Kleidung und Umgebung sind nur historisch angenähert: schlichte qamīṣ-/Übergewand-Formen, bedeckende Kleidung und zeittypische Materialien; keine moderne oder Fantasy-Kleidung. Individuelle Kleidung dieses Ṣaḥābī ist nicht durch einen sicheren Einzelbericht festgelegt.",
+      "visualSourceRefs": [
+        "Jāmiʿ at-Tirmidhī 1762",
+        "Sunan Abī Dāwūd 4061"
+      ]
     },
     {
       "id": "abu-ubaydah",
@@ -1303,7 +1364,12 @@
         "4-5": "4–5 Min.",
         "6-8": "5–7 Min.",
         "9-10": "7–10 Min."
-      }
+      },
+      "visualBasis": "Die Szene zeigt keine behauptete Porträtähnlichkeit. Kleidung und Umgebung sind nur historisch angenähert: schlichte qamīṣ-/Übergewand-Formen, bedeckende Kleidung und zeittypische Materialien; keine moderne oder Fantasy-Kleidung. Individuelle Kleidung dieses Ṣaḥābī ist nicht durch einen sicheren Einzelbericht festgelegt.",
+      "visualSourceRefs": [
+        "Jāmiʿ at-Tirmidhī 1762",
+        "Sunan Abī Dāwūd 4061"
+      ]
     }
   ],
   "voiceWorkflow": {
