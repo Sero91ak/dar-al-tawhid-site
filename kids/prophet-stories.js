@@ -2,6 +2,15 @@
 "use strict";
 
 const DATA_URL="/kids/data/prophet-stories.json";
+const STORIES_FINAL_CSS="/kids/stories-final-v1088.css?v=1088";
+(function installStoriesFinalCss(){
+  if(document.querySelector('link[data-kids-stories-final="1088"]'))return;
+  const link=document.createElement("link");
+  link.rel="stylesheet";
+  link.href=STORIES_FINAL_CSS;
+  link.dataset.kidsStoriesFinal="1088";
+  document.head.appendChild(link);
+})();
 const MODE_KEY="kids.contentMode.v19";
 const PROPHET_ORDER=[
   "adam","idris","nuh","hud","salih","ibrahim","lut","ismail","ishaq","yaqub",
