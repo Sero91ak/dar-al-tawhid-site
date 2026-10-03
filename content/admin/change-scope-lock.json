@@ -151,6 +151,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "canonical-islamic-content-live-deploy-2026-10-03",
+      "approvedBy": "user-explicit-sobald-github-neue-aussagen-direkt-live-apps",
+      "reason": "Nutzer-Regel: Sobald neue geprüfte Ḥadīṯe, Āṯār/Salaf oder Tadabbur in GitHub liegen, sofort live in Website, Web-App, iOS, Android und Apple TV ausrollen. Kein Feed, keine OneSignal-Spur.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/canonical-islamic-content-live.yml",
+        "apple-tv/hadith/",
+        "apple-tv/quran/tadabbur/",
+        "apple-tv/catalog.json",
+        "apple-tv/screensaver/",
+        "scripts/rebuild-canonical-islamic-content.js",
+        "scripts/validate-canonical-content.js",
+        "scripts/cf-pages-build.js"
+      ],
+      "expiresAt": "2027-12-31T23:59:00.000Z"
+    },
+    {
       "id": "test-home-tabbar-restore-v1195-2026-10-03",
       "approvedBy": "user-explicit-tab-bereich-zurueck-alte-darstellung-form-funktion",
       "reason": "Nutzer verlangt: In der Dar-Test-Startseite die bestehende iOS/Web-App-Tab-Leiste exakt in ihrer bisherigen Darstellung, Form und Funktion wiederherstellen. Der neue Home-/Bibliotheks-Umbau darf die Tab-Leiste nicht gestalten oder überschreiben.",

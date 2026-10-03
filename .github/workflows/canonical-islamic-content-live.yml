@@ -1,0 +1,88 @@
+name: Live Ḥadīṯ Tadabbur Āṯār
+
+# Sobald geprüfte Ḥadīṯ-, Āṯār-/Salaf- oder Tadabbur-Dateien auf main liegen,
+# sofort denselben Stand in Website, Web-App, iOS, Android-WebApp und Apple TV
+# ausrollen. Kein Feed, keine OneSignal-Spur.
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - apple-tv/hadith/**
+      - apple-tv/quran/tadabbur/**
+      - apple-tv/catalog.json
+      - apple-tv/screensaver/**
+      - content/quran-athar/de/**
+      - data/hadith-library/**
+      - data/quran-search-index.json
+      - scripts/rebuild-canonical-islamic-content.js
+      - scripts/validate-canonical-content.js
+      - .github/workflows/canonical-islamic-content-live.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-al-tawhid-visitor-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy-canonical-content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Immer neuesten main-Stand deployen
+        shell: bash
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+          echo "Deploy HEAD: $(git rev-parse HEAD)"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Kataloge aus Dateien neu aufbauen
+        run: |
+          node scripts/rebuild-canonical-islamic-content.js
+          node scripts/validate-canonical-content.js
+
+      - name: Test-App Staging aus test-library-canonical übernehmen
+        run: |
+          git fetch origin test-library-canonical
+          node scripts/overlay-test-staging-from-branch.js
+          node scripts/app-stability-repair.js
+          git checkout "${GITHUB_SHA}" -- scripts/patch-test-canonical-library.js scripts/cf-pages-build.js
+
+      - name: Build + Build-IDs synchronisieren
+        run: npm run build
+
+      - name: Canonical-Inhalt prüfen
+        run: node scripts/validate-canonical-content.js
+
+      - name: Deploy statische App (Workers Static Assets)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Cloudflare CDN Cache leeren
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
+          SITE_URL: "https://dar-al-tawhid.de"
+          CLOUDFLARE_DEV_MODE: "1"
+          PURGE_SCOPE: "visitor"
+        run: node scripts/purge-cloudflare-cache.js
+        continue-on-error: true
