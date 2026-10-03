@@ -180,18 +180,18 @@ async function finalizeDarTestHomeV1193(asset) {
   );
 
   // Remove every superseded Test-home visual authority so only v1193 composes the page.
-  html = html.replace(/<link[^>]+dar-home-knowledge-library-v1183\\.css[^>]*>\\s*/g, "");
-  html = html.replace(/<script[^>]+dar-home-knowledge-library-v1183\\.js[^>]*><\\/script>\\s*/g, "");
-  html = html.replace(/<link[^>]+dar-home-visual-authority-v1191\\.css[^>]*>\\s*/g, "");
-  html = html.replace(/<link[^>]+dar-home-visual-v1190\\.css[^>]*>\\s*/g, "");
-  html = html.replace(/<script[^>]+dar-home-visual-v1190\\.js[^>]*><\\/script>\\s*/g, "");
+  html = html.replace(/<link[^>]+dar-home-knowledge-library-v1183\.css[^>]*>\s*/g, "");
+  html = html.replace(/<script[^>]+dar-home-knowledge-library-v1183\.js[^>]*><\/script>\s*/g, "");
+  html = html.replace(/<link[^>]+dar-home-visual-authority-v1191\.css[^>]*>\s*/g, "");
+  html = html.replace(/<link[^>]+dar-home-visual-v1190\.css[^>]*>\s*/g, "");
+  html = html.replace(/<script[^>]+dar-home-visual-v1190\.js[^>]*><\/script>\s*/g, "");
 
   const home1193 =
     '<link rel="stylesheet" id="darHomeLibraryV1193" href="' + DAR_TEST_HOME_V1193_CSS + '">' +
-    '<script id="darHomeLibraryV1193Js" defer src="' + DAR_TEST_HOME_V1193_JS + '"><\\/script>';
+    '<script id="darHomeLibraryV1193Js" defer src="' + DAR_TEST_HOME_V1193_JS + '"></script>';
   if (!html.includes("darHomeLibraryV1193")) {
-    if (html.includes("</body>")) html = html.replace("</body>", home1193 + "\\n</body>");
-    else html = html.replace("</html>", home1193 + "\\n</html>");
+    if (html.includes("</body>")) html = html.replace("</body>", home1193 + "\n</body>");
+    else html = html.replace("</html>", home1193 + "\n</html>");
   }
 
   const headers = new Headers(asset.headers);
