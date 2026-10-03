@@ -2726,7 +2726,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07.8</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.07.9</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3180,7 +3180,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-sahaba1082";
+const KIDS_BUILD_ID="kids-shell-v12-sahaba1083";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6625,7 +6625,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1082",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1083",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
@@ -7715,6 +7715,88 @@ html[data-view="stories"] .shell{
   }
 }
 
+
+
+/* KIDS_STORIES_HERO_REFINEMENT_V1083
+   Kein Badge-Kasten: ruhige Editorial-Zeile, klare Bühne, sauberer Übergang zum Inhalt. */
+#view-stories .page-head .kicker{
+  position:relative!important;
+  align-self:flex-start!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  width:auto!important;
+  min-height:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  color:#ffe49a!important;
+  font-size:clamp(10px,2.35vw,12px)!important;
+  font-weight:950!important;
+  letter-spacing:.17em!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.34)!important;
+}
+#view-stories .page-head .kicker::after{
+  content:""!important;
+  display:block!important;
+  width:clamp(52px,13vw,96px)!important;
+  height:1px!important;
+  flex:none!important;
+  background:linear-gradient(90deg,rgba(241,202,108,.88),rgba(159,228,221,.42),transparent)!important;
+  box-shadow:0 0 10px rgba(241,202,108,.20)!important;
+}
+#view-stories .page-head h2{
+  max-width:min(760px,88vw)!important;
+}
+#view-stories .page-head p{
+  max-width:590px!important;
+}
+#view-stories .story-feature{
+  margin-top:8px!important;
+  margin-bottom:22px!important;
+}
+#view-stories .story-feature::before{
+  content:""!important;
+  position:absolute!important;
+  left:18px!important;
+  right:18px!important;
+  top:-17px!important;
+  height:1px!important;
+  background:linear-gradient(90deg,transparent,rgba(241,202,108,.40),rgba(115,209,217,.26),transparent)!important;
+  pointer-events:none!important;
+}
+#view-stories .story-feature{
+  position:relative!important;
+}
+@media(max-width:390px){
+  #view-stories .page-head .kicker{
+    font-size:10px!important;
+    letter-spacing:.14em!important;
+    gap:9px!important;
+  }
+  #view-stories .page-head .kicker::after{
+    width:46px!important;
+  }
+  #view-stories .story-feature{
+    margin-top:4px!important;
+  }
+}
+@media(min-width:700px){
+  #view-stories .page-head .kicker{
+    font-size:13px!important;
+    gap:15px!important;
+  }
+  #view-stories .page-head .kicker::after{
+    width:118px!important;
+  }
+  #view-stories .story-feature{
+    margin-top:12px!important;
+    margin-bottom:28px!important;
+  }
+}
 
 </style>
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=4">
