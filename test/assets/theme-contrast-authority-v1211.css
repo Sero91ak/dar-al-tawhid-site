@@ -1,0 +1,235 @@
+/* DĀR AL TAWḤĪD · TEST ONLY · Global Theme Contrast Authority v1211
+   One semantic foreground system for every appearance.
+   Light surfaces -> dark readable text. Dark surfaces -> warm light readable text.
+   Loaded last by the Test Worker so old hard-coded theme colours cannot wash out content. */
+
+html[data-theme]{
+  --dar-readable-ink:var(--text,#f3ecdd);
+  --dar-readable-muted:var(--muted,#b9b09f);
+  --dar-readable-soft:var(--muted2,var(--muted,#b9b09f));
+  --dar-readable-accent:var(--gold2,var(--accent,#d5ba73));
+  --dar-readable-line:var(--line,rgba(213,186,115,.24));
+}
+
+/* LIGHT APPEARANCES */
+html[data-theme="light"]{
+  --dar-readable-ink:#211d18;
+  --dar-readable-muted:#554d43;
+  --dar-readable-soft:#6a6257;
+  --dar-readable-accent:#73572b;
+  --dar-readable-line:rgba(92,76,49,.23);
+}
+html[data-theme="light"][data-theme-variant="salbei"],
+html[data-theme="salbei"]{
+  --dar-readable-ink:#17211B;
+  --dar-readable-muted:#48574E;
+  --dar-readable-soft:#617067;
+  --dar-readable-accent:#3F5D4B;
+  --dar-readable-line:rgba(63,93,75,.24);
+}
+html[data-theme="soft"]{
+  --dar-readable-ink:#2B2025;
+  --dar-readable-muted:#5E4E55;
+  --dar-readable-soft:#77656D;
+  --dar-readable-accent:#714A5D;
+  --dar-readable-line:rgba(113,74,93,.22);
+}
+html[data-theme="eisgold"]{
+  --dar-readable-ink:#142033;
+  --dar-readable-muted:#4D5C6E;
+  --dar-readable-soft:#667487;
+  --dar-readable-accent:#7B6429;
+  --dar-readable-line:rgba(123,100,41,.24);
+}
+
+/* DARK APPEARANCES */
+html[data-theme="dark"]{
+  --dar-readable-ink:#F5EFE3;
+  --dar-readable-muted:#D1C6B2;
+  --dar-readable-soft:#B9B09F;
+  --dar-readable-accent:#E4CD8B;
+  --dar-readable-line:rgba(228,205,139,.23);
+}
+html[data-theme="royal"]{
+  --dar-readable-ink:#F7EEDA;
+  --dar-readable-muted:#CEC3AB;
+  --dar-readable-soft:#B5AB96;
+  --dar-readable-accent:#E6CF8B;
+  --dar-readable-line:rgba(230,207,139,.24);
+}
+html[data-theme="bordeaux"]{
+  --dar-readable-ink:#F7EDDF;
+  --dar-readable-muted:#D4C1B4;
+  --dar-readable-soft:#BFAAA0;
+  --dar-readable-accent:#D8C08B;
+  --dar-readable-line:rgba(216,192,139,.24);
+}
+html[data-theme="dar-al-layl"]{
+  --dar-readable-ink:#F1EDE3;
+  --dar-readable-muted:#C7C9C1;
+  --dar-readable-soft:#ABB0A9;
+  --dar-readable-accent:#D8C18B;
+  --dar-readable-line:rgba(216,193,139,.22);
+}
+html[data-theme="aurora"]{
+  --dar-readable-ink:#F2EEE2;
+  --dar-readable-muted:#CAD0C8;
+  --dar-readable-soft:#AEB8B0;
+  --dar-readable-accent:#DEC98F;
+  --dar-readable-line:rgba(222,201,143,.22);
+}
+
+/* Base inheritance: routes and major reading surfaces always start from the correct foreground. */
+html[data-theme] body,
+html[data-theme] :is(
+  #appRoot,#appShell,.app,#appView,#appView.view,.view,.article,.post-reader,
+  .topic-collection-page,.women-detail-shell,.frauen-list-page,.library-shell,
+  .hadith-shell-pro,.account-panel,.settings-section,.overview-panel
+){
+  color:var(--dar-readable-ink)!important;
+}
+
+/* Primary text. Covers headings plus hard-coded pale/white reader copy. */
+html[data-theme] :is(
+  h1,h2,h3,h4,h5,h6,
+  .title,.section-title,.view-title,.overview-title,.profile-title,.book-profile-title,
+  .post-reader-title,.post-reader-title h2,.post-aussage-text,.post-fazit-body,
+  .statement,.statement p,.statement q,.statement blockquote,
+  .statement strong,.statement b,.statement em,.statement i,
+  [data-post-after-source],.post-reader-cite,.post-reader-cite div,
+  .frauen-row__title,.frauen-row__aussage,.quiz-question,
+  .quran-arabic,.quran-ayah-ar,.quran-verse-ar
+){
+  color:var(--dar-readable-ink)!important;
+  -webkit-text-fill-color:var(--dar-readable-ink)!important;
+  text-shadow:none!important;
+}
+
+/* Reader/detail pages are the highest-risk place for invisible text. */
+html[data-theme] .post-reader :is(
+  p,li,dd,dt,q,blockquote,
+  .post-aussage-text,.post-fazit-body,.post-reader-cite,
+  [data-post-after-source],.source-text,.answer,.answer-text
+),
+html[data-theme] .article :is(
+  .statement,.statement p,.statement div,.statement span,.statement strong,.statement em
+){
+  color:var(--dar-readable-ink)!important;
+  -webkit-text-fill-color:var(--dar-readable-ink)!important;
+}
+
+/* Secondary copy remains visibly subordinate but still passes visual readability. */
+html[data-theme] :is(
+  .muted,.sub,.subtitle,.lede,.intro,.view-desc,.description,.desc,.excerpt,
+  .source-preview,.source-note,.helper-text,.form-hint,.settings-note,
+  .profile-desc,.book-desc,.frauen-row__quelle,.post-meta,.meta,.count,
+  .quran-latin,.quran-translit,.ayah-transliteration,.quran-ayah-tr,.quran-tr-line
+){
+  color:var(--dar-readable-muted)!important;
+  -webkit-text-fill-color:var(--dar-readable-muted)!important;
+}
+
+/* Semantic labels/accent text. */
+html[data-theme] :is(
+  .kicker,.eyebrow,.section-kicker,.post-aussage-kicker,
+  .post-key-message h3,.post-reader-cite>b,.source-label,.label,
+  .isnad-label,.daily-label,.recommended-label
+){
+  color:var(--dar-readable-accent)!important;
+  -webkit-text-fill-color:var(--dar-readable-accent)!important;
+}
+
+/* Controls: no light text on light inputs and no dark text on dark controls. */
+html[data-theme] :is(
+  button,.btn,.pill,.action-btn,.back-btn,.home-btn,.collapse-toggle,.advanced-toggle,
+  input,textarea,select,.search,.search-input,.filter-select
+){
+  color:var(--dar-readable-ink)!important;
+  -webkit-text-fill-color:var(--dar-readable-ink)!important;
+}
+html[data-theme] :is(input,textarea,.search-input)::placeholder{
+  color:var(--dar-readable-soft)!important;
+  -webkit-text-fill-color:var(--dar-readable-soft)!important;
+  opacity:1!important;
+}
+
+/* Links stay theme-accented but readable. */
+html[data-theme] :is(
+  .post-reader a,.article a,.source-link,.direct-link,.post-after-links a,
+  .home-v380-quran-hero__chevron
+){
+  color:var(--dar-readable-accent)!important;
+  -webkit-text-fill-color:var(--dar-readable-accent)!important;
+}
+
+/* Specific Frauen / Fiqh detail correction from the supplied screenshot. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+.post-reader .post-aussage{
+  color:var(--dar-readable-ink)!important;
+  background:color-mix(in srgb,var(--theme-surface-elevated,#fff) 72%,transparent)!important;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+.post-reader .post-aussage :is(.post-aussage-text,p,div,span,strong,em){
+  color:var(--dar-readable-ink)!important;
+  -webkit-text-fill-color:var(--dar-readable-ink)!important;
+  opacity:1!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] .post-reader .post-aussage,
+html[data-theme="salbei"] .post-reader .post-aussage{
+  background:rgba(255,255,255,.54)!important;
+  border-color:rgba(63,93,75,.20)!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] .post-reader :is(
+  .post-source-oval,.post-key-message
+),
+html[data-theme="salbei"] .post-reader :is(.post-source-oval,.post-key-message){
+  color:#17211B!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] .post-reader .post-fazit-body,
+html[data-theme="salbei"] .post-reader .post-fazit-body{
+  color:#48574E!important;
+  -webkit-text-fill-color:#48574E!important;
+}
+
+/* Light themes: preserve transparent elegance while text remains dark. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) :is(
+  .premium-surface,.statement,.post-source-oval,.post-key-message,.source-strong,
+  .post-after-panel,.related-compact-card,.modal,.sheet,.dialog,.popover,[role="dialog"]
+){
+  --theme-surface-elevated-text:var(--dar-readable-ink)!important;
+  --theme-surface-elevated-muted:var(--dar-readable-muted)!important;
+  --theme-surface-elevated-accent:var(--dar-readable-accent)!important;
+}
+
+/* Dark themes: force warm light ink where legacy modules still carry dark inline colours. */
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"])
+:is(
+  .statement,.post-reader,.post-source-oval,.post-key-message,.source-strong,
+  .post-after-panel,.related-compact-card
+) :is(p,div,span,strong,b,em,i,h1,h2,h3,h4){
+  color:inherit!important;
+  -webkit-text-fill-color:currentColor!important;
+}
+
+/* Bottom navigation label contrast without changing the glass/material geometry. */
+html[data-theme] .bottom-nav-btn{
+  color:var(--dar-readable-soft)!important;
+  -webkit-text-fill-color:var(--dar-readable-soft)!important;
+}
+html[data-theme] .bottom-nav-btn:is(.active,.is-active,[aria-current="page"]){
+  color:var(--dar-readable-ink)!important;
+  -webkit-text-fill-color:var(--dar-readable-ink)!important;
+}
+
+/* Keep decorative/social brand colours intact. */
+html[data-theme] :is(.footer-social-link,.social-link,.share-btn.tg,.share-btn.wa,.share-btn.ig) svg,
+html[data-theme] :is(.footer-social-link,.social-link,.share-btn.tg,.share-btn.wa,.share-btn.ig) img{
+  -webkit-text-fill-color:initial!important;
+}
+
+/* Accessibility guard: reduced transparency must not reduce text contrast. */
+@media (prefers-reduced-transparency: reduce){
+  html[data-theme] :is(.statement,.post-source-oval,.post-key-message,.premium-surface){
+    background-color:var(--card,var(--theme-surface,#fff))!important;
+  }
+}
