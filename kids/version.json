@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1084",
-  "label": "KIDS · V1.07.10",
-  "releasedAt": "2026-10-03T21:20:00.000Z",
-  "note": "V1.07.10: Geschichten-Startbild auf dauerhafte Adobe-Rendition umgestellt. Zusätzlicher Abstand zur Bottom-Navigation und saubere Inhaltsbreite auf iPad/Tablet.",
+  "buildId": "kids-shell-v12-sahaba1085",
+  "label": "KIDS · V1.07.11",
+  "releasedAt": "2026-10-03T22:12:00.000Z",
+  "note": "V1.07.11: Geschichten-Kopf erneut fest als Edge-to-Edge-Seitenbühne verankert. Kein Kartenrahmen, kein oberer Leerblock, Hintergrundbild vollflächig bis zur Safe Area; responsive auf Smartphone und iPad.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1084",
+    "serviceWorkerCache": "v1085",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -159,7 +159,7 @@
     "homeChoiceLayoutVersion": "v1078",
     "homeChoiceCards": "rounded-cards-v1079",
     "storiesPageHero": "edge-to-edge-adobe-v1082",
-    "storiesHero": "edge-to-edge-adobe-stable-v1084",
+    "storiesHero": "edge-to-edge-fixed-v1085",
     "storiesBottomNavClearance": "v1084"
   }
 }
