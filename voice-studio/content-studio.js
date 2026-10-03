@@ -186,7 +186,7 @@ function injectStyles(){
 function navHtml(){
   return `<nav class="content-studio-nav" aria-label="Studio Bereiche und Schnellaktionen">
     <div class="cs-nav-tabs">
-      <button id="csProphetTab" class="cs-tab" type="button">Propheten</button>
+      <button id="csProphetTab" class="cs-tab" type="button">Propheten</button>\n      <button id="csSahabaTab" class="cs-tab" type="button">Ṣaḥābah · 10</button>
       <button class="cs-tab" data-cs-kind="story">Geschichten</button>
       <button class="cs-tab" data-cs-kind="quiz">Quiz</button>
       <button class="cs-tab" data-cs-kind="game">Spiele</button>
@@ -294,6 +294,104 @@ function ensureProphetUi(){
   const box=q("prophetPick");
   if(box && editor.firstChild!==box) editor.insertBefore(box,editor.firstChild);
 }
+
+let sahabaPack=[],sahabaSelectedId="",sahabaAge="6-8";
+function sahabaPickHtml(){
+  return `<div class="prophet-pick sahaba-pick" id="sahabaPick">
+    <div class="prophet-pick-head">
+      <div class="prophet-pick-kicker">Kids · Ṣaḥābah · Quellengeprüft</div>
+      <h2>Die zehn al-Mubaššarūn</h2>
+      <div class="notice" style="margin:0">Zehn Gefährten · drei Altersfassungen pro Geschichte · Fuṣḥā-Namen vorbereitet. Geschichte wählen, Alter wählen und direkt mit Serhat Voice erzeugen.</div>
+    </div>
+    <div class="sahaba-age-tabs" id="sahabaAgeTabs">
+      <button type="button" data-sahaba-age="4-5">4–5</button>
+      <button type="button" data-sahaba-age="6-8" class="active">6–8</button>
+      <button type="button" data-sahaba-age="9-10">9–10</button>
+    </div>
+    <div id="sahabaPickList" class="sahaba-pick-list"></div>
+    <div id="sahabaPickReady" class="notice">10 Geschichten · 30 Voice-Texte. Namen und raḍiya llāhu ʿanhu werden über die Aussprachebibliothek geprüft.</div>
+  </div>`;
+}
+function ensureSahabaUi(){
+  const editor=document.querySelector(".editor-panel");
+  if(!editor)return;
+  if(!q("sahabaStudioStyles")){
+    const st=document.createElement("style");st.id="sahabaStudioStyles";st.textContent=`
+      .sahaba-pick{border-color:rgba(106,205,199,.26);background:linear-gradient(180deg,rgba(60,155,151,.07),rgba(217,182,111,.035))}
+      .sahaba-age-tabs{display:flex;gap:6px;margin:8px 0}
+      .sahaba-age-tabs button{appearance:none;min-height:34px;padding:6px 11px;border-radius:9px;border:1px solid rgba(255,255,255,.09);background:#071927;color:#aebdc1;font-size:10px;font-weight:900;cursor:pointer}
+      .sahaba-age-tabs button.active{border-color:rgba(217,182,111,.46);background:rgba(217,182,111,.09);color:#f1d59a}
+      .sahaba-pick-list{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+      .sahaba-pick-item{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:54px;border:1px solid rgba(255,255,255,.08);background:#071927;border-radius:11px;padding:6px 8px}
+      .sahaba-pick-item.active{border-color:rgba(106,205,199,.42);background:rgba(60,155,151,.075)}
+      .sahaba-pick-num{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;border:1px solid rgba(217,182,111,.20);color:#e9c97e;font:800 12px Georgia,serif}
+      .sahaba-pick-name{appearance:none;border:0;background:transparent;color:#edf2f2;text-align:left;cursor:pointer;min-width:0;padding:0}
+      .sahaba-pick-name b{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .sahaba-pick-name small{display:block;color:#81969b;font-size:8px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .sahaba-pick-load{min-height:30px;padding:0 8px!important;font-size:9px!important;border-radius:8px!important}
+      @media(max-width:900px){.sahaba-pick-list{grid-template-columns:1fr}}
+    `;document.head.appendChild(st);
+  }
+  if(!q("sahabaPick")) editor.insertAdjacentHTML("afterbegin",sahabaPickHtml());
+  const box=q("sahabaPick"),prophet=q("prophetPick");
+  if(box&&prophet?.parentNode===editor)editor.insertBefore(box,prophet.nextSibling);
+  q("sahabaAgeTabs")?.querySelectorAll("[data-sahaba-age]").forEach(btn=>btn.addEventListener("click",()=>{
+    sahabaAge=btn.dataset.sahabaAge;
+    q("sahabaAgeTabs").querySelectorAll("[data-sahaba-age]").forEach(x=>x.classList.toggle("active",x===btn));
+    renderSahabaPick();
+    if(sahabaSelectedId)loadSahabaScript(sahabaSelectedId);
+  }));
+}
+function sahabaAgeLabel(){
+  return sahabaAge==="4-5"?"4–5":sahabaAge==="9-10"?"9–10":"6–8";
+}
+function renderSahabaPick(){
+  const host=q("sahabaPickList");if(!host)return;
+  if(!sahabaPack.length){host.innerHTML='<div class="notice">Ṣaḥābah-Bibliothek wird geladen …</div>';return}
+  host.innerHTML=sahabaPack.map((it,i)=>{
+    const profile=it?.voiceProduction?.ageProfiles?.[sahabaAge]||{};
+    const mins=profile.estimatedMinutes?profile.estimatedMinutes+" Min.":"Text bereit";
+    return '<div class="sahaba-pick-item '+(it.id===sahabaSelectedId?'active':'')+'">'+
+      '<span class="sahaba-pick-num">'+String(i+1).padStart(2,"0")+'</span>'+
+      '<button type="button" class="sahaba-pick-name" data-sahaba-id="'+esc(it.id)+'"><b>'+esc(it.name)+'</b><small>'+esc(it.nameAr||"")+' · '+esc(mins)+' · Alter '+esc(sahabaAgeLabel())+'</small></button>'+
+      '<button type="button" class="btn quiet sahaba-pick-load" data-sahaba-load="'+esc(it.id)+'">Text laden</button>'+
+    '</div>';
+  }).join("");
+  host.querySelectorAll("[data-sahaba-id],[data-sahaba-load]").forEach(btn=>btn.addEventListener("click",()=>loadSahabaScript(btn.dataset.sahabaId||btn.dataset.sahabaLoad)));
+}
+function loadSahabaScript(id){
+  const it=sahabaPack.find(x=>x.id===id);if(!it)return;
+  sahabaSelectedId=id;renderSahabaPick();
+  const text=String(it?.scripts?.[sahabaAge]||it?.scripts?.["6-8"]||"").trim();
+  const ta=q("text");if(ta){ta.value=text;ta.dispatchEvent(new Event("input",{bubbles:true}));ta.focus()}
+  if(q("styleMode"))q("styleMode").value="kids_story";
+  if(q("csTitle"))q("csTitle").value=it.name+" · Die zehn al-Mubaššarūn";
+  if(q("csCoverTitle"))q("csCoverTitle").textContent=it.name;
+  if(q("csCategory"))q("csCategory").value="Ṣaḥābah · al-ʿAšarah al-Mubaššarūn";
+  if(q("csTopic"))q("csTopic").value="Sīrah der Ṣaḥābah · authentische Sunnah";
+  if(q("csProphet"))q("csProphet").value=it.id;
+  if(q("csAgeMin"))q("csAgeMin").value=sahabaAge==="4-5"?"4":sahabaAge==="9-10"?"9":"6";
+  if(q("csAgeMax"))q("csAgeMax").value=sahabaAge==="4-5"?"5":sahabaAge==="9-10"?"10":"8";
+  if(q("csSources"))q("csSources").value=(it.sourceRefs||[]).join("\n");
+  const ready=q("sahabaPickReady");
+  if(ready)ready.textContent=it.name+" · Alter "+sahabaAgeLabel()+" · Voice-Text geladen · "+((it.sourceRefs||[]).length)+" Quellenangaben · jetzt Aussprache prüfen und Audio erzeugen.";
+  try{window.renderAnalysis?.()}catch(_){}
+}
+async function loadSahabaPack(){
+  const urls=[
+    "https://dar-al-tawhid.de/kids/data/mubashshirun-stories.json?cb="+Date.now(),
+    "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/kids/data/mubashshirun-stories.json?cb="+Date.now()
+  ];
+  for(const url of urls){
+    try{
+      const r=await fetch(url,{cache:"no-store"});if(!r.ok)continue;
+      const d=await r.json();
+      if(Array.isArray(d.items)&&d.items.length===10){sahabaPack=d.items.slice().sort((a,b)=>Number(a.displayOrder||99)-Number(b.displayOrder||99));renderSahabaPick();return true}
+    }catch(_){}
+  }
+  if(q("sahabaPickList"))q("sahabaPickList").innerHTML='<div class="notice">Ṣaḥābah-Bibliothek konnte gerade nicht geladen werden.</div>';
+  return false;
+}
 function mount(){
   injectStyles();
   ensureProphetUi();
@@ -319,7 +417,7 @@ function mount(){
 function bind(){
   document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>{
     window.setStudioPage?.("content");
-    ["csProphetTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
+    ["csProphetTab","csSahabaTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
     switchKind(btn.dataset.csKind);
   }));
   q("csProphetTab")?.addEventListener("click",()=>{
