@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1219",
-  "appBuildId": "app-shell-v1219",
-  "note": "v1219 · Qurʾān-Weiterlesen in der Test-App exakt auf die kompakte Referenzproportion gebracht: ca. 93,6% Breite und 12,4vw Höhe mit Referenz-Rundung, kleinerem 3D-Qurʾān, kompakter Titelgröße und dichterem rechten Fortschrittsblock. Aktuelle transparente Theme-Optik bleibt erhalten; nur Masse, Proportion, Schrift- und Icon-Skalierung wurden an Bild 2 angepasst.",
-  "updatedAt": "2026-10-03T23:06:00+02:00"
+  "buildId": "app-shell-v1220",
+  "appBuildId": "app-shell-v1220",
+  "note": "v1220 · Force-Deploy des bereits eingebauten v1219 Qurʾān-Weiterlesen-Layouts. Keine neue Geometrieänderung: kompakte Referenzgröße bleibt bestehen; Worker-, Asset- und PWA-Cache-Keys wurden vollständig erneuert, damit die Test-App sicher die aktuelle Version lädt.",
+  "updatedAt": "2026-10-03T23:10:00+02:00"
 }
