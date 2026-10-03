@@ -37445,7 +37445,7 @@ body.is-home-route.dar-knowledge-home-v1183 .home-v380-filter-chip[data-home-fil
       }
     }).catch(function(){});
   }
-  function start(){check();setInterval(check,60000);}
+  function start(){check();setInterval(function(){check();},60000);}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);
   else start();
 })();
