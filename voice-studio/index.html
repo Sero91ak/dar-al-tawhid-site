@@ -2510,20 +2510,20 @@ async function confirmQA(){
       $("#qaCoreLock").className="good";
     }
     const justLocked=Array.isArray(d.confirmed)&&d.confirmed.length;
-    const selectedProphet=$("#prophetPickId")?.value||"";
-    if(selectedProphet&&typeof window.darPublishCurrentProphetStory==="function"){
-      setMessage("Aussprache bestätigt. Die fertige Prophetengeschichte wird jetzt automatisch in Kids übernommen …","warn");
-      const published=await window.darPublishCurrentProphetStory();
-      if(!published)return;
-      setMessage("Aussprache bestätigt und Prophetengeschichte automatisch in Kids übernommen.","good");
-      return;
-    }
     const mubState=window.mubVoicePack?.state;
     if(mubState?.visible&&mubState?.selected&&typeof window.mubVoicePack?.publishCurrent==="function"){
       setMessage("Aussprache bestätigt. Die fertige Mubaschschirūn-Geschichte wird jetzt automatisch in Kids übernommen …","warn");
       const published=await window.mubVoicePack.publishCurrent();
       if(!published)return;
       setMessage("Aussprache bestätigt und Ṣaḥābah-Geschichte automatisch in Kids übernommen.","good");
+      return;
+    }
+    const selectedProphet=$("#prophetPickId")?.value||"";
+    if(selectedProphet&&typeof window.darPublishCurrentProphetStory==="function"){
+      setMessage("Aussprache bestätigt. Die fertige Prophetengeschichte wird jetzt automatisch in Kids übernommen …","warn");
+      const published=await window.darPublishCurrentProphetStory();
+      if(!published)return;
+      setMessage("Aussprache bestätigt und Prophetengeschichte automatisch in Kids übernommen.","good");
       return;
     }
     setMessage(justLocked
