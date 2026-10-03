@@ -238,7 +238,7 @@ def refresh_studio_ui_from_github():
         ("voice-studio/index.html","studio.html",("id=\"prophetPick\"","prophetPickList","Geschichten der Propheten")),
         ("voice-studio/content-studio.js","content-studio.js",("csProphetTab","ensureProphetUi")),
         ("voice-studio/mubashshirun-pack.js","mubashshirun-pack.js",("mubVoicePack","Die zehn Mubaschschirūn")),
-        ("kids/data/mubashshirun-stories.json","mubashshirun-stories.json",("\"version\": 2","\"al-ʿAšarah al-Mubaššarūn\"")),
+        ("kids/data/mubashshirun-stories.json","mubashshirun-stories.json",("\"version\": 3","\"al-ʿAšarah al-Mubaššarūn\"")),
     )
     for repo,name,markers in files:
         try:
@@ -276,31 +276,6 @@ def load_quiz_manifest():
         "quiz-kids.json",
         "kids/data/quiz-kids.json",
         lambda d:isinstance(d,dict) and len(d.get("items") or [])>0,
-    )
-
-def load_mubashshirun_manifest():
-    """Load the ten al-ʿAšarah al-Mubaššarūn Kids stories for Voice Studio.
-
-    The manifest is self-healed from the Kids repository like the existing
-    prophet/quiz manifests. It deliberately requires all ten entries and all
-    three prepared age scripts so Voice Studio never renders a partial pack.
-    """
-    return load_kids_repo_json(
-        "mubashshirun-stories.json",
-        "kids/data/mubashshirun-stories.json",
-        lambda d:(
-            isinstance(d,dict)
-            and len(d.get("items") or [])==10
-            and all(
-                str((item or {}).get("id") or "").strip()
-                and isinstance((item or {}).get("scripts"),dict)
-                and all(
-                    str(((item or {}).get("scripts") or {}).get(age) or "").strip()
-                    for age in ("4-5","6-8","9-10")
-                )
-                for item in (d.get("items") or [])
-            )
-        ),
     )
 
 def normalize_lookup(value:str):
@@ -6206,7 +6181,7 @@ def _mubashshirun_story_manifest():
         "kids/data/mubashshirun-stories.json",
         lambda d:(
             isinstance(d,dict)
-            and int(d.get("version") or 0)>=2
+            and int(d.get("version") or 0)>=3
             and len(d.get("items") or [])==10
             and all(
                 isinstance((item or {}).get("scripts"),dict)
