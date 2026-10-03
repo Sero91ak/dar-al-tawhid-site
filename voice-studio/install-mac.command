@@ -163,7 +163,8 @@ normalize_contents_json_file() {
 download_repo_file "voice-studio/local-engine.py" "$STAGE/local-engine.py"
 download_repo_file "voice-studio/speech_flow.py" "$STAGE/speech_flow.py"
 download_repo_file "voice-studio/index.html" "$STAGE/studio.html"
-download_repo_file "voice-studio/content-studio.js" "$STAGE/content-studio.js"\ndownload_repo_file "voice-studio/mubashshirun-pack.js" "$STAGE/mubashshirun-pack.js"
+download_repo_file "voice-studio/content-studio.js" "$STAGE/content-studio.js"
+download_repo_file "voice-studio/mubashshirun-pack.js" "$STAGE/mubashshirun-pack.js"
 download_repo_file "voice-studio/alphabet-audio-studio.js" "$STAGE/alphabet-audio-studio.js"
 download_repo_file "kids/data/alphabet-audio.json" "$STAGE/alphabet-audio.json"
 if ! normalize_contents_json_file "$STAGE/alphabet-audio.json" '"letters"'; then
