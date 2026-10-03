@@ -1,10 +1,10 @@
 {
-  "version": "2.9.65",
-  "updatedAt": "2026-10-03T14:40:00+02:00",
-  "deployTrigger": "voice-studio-2.9.65-mubashshirun-v3-fusha-publish",
+  "version": "2.9.66",
+  "updatedAt": "2026-10-03T16:36:00+02:00",
+  "deployTrigger": "voice-studio-2.9.66-mubashshirun-v4-source-visual-sync",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v37",
+  "cache": "dar-voice-studio-v38",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -1086,5 +1086,15 @@
     "output": "kids/assets/mubashshirun-story-audio/<sahabi>/<age>.m4a",
     "systemVoiceFallback": false,
     "sourcePolicy": "Qurʾān general praise separated from individual authentic Sunnah; no invented dialogue or legends"
+  },
+  "mubashshirun": {
+    "enabled": true,
+    "items": 10,
+    "ageScripts": 30,
+    "dataVersion": 4,
+    "bundleVersion": 5,
+    "sourcePolicy": "Qurʾān + authentic Sunnah + source-separated",
+    "visualEvidencePolicy": "historical approximation only; no claimed portrait or individually attested wardrobe",
+    "publishFlow": "generate → listen → confirm pronunciation → auto publish selected age to Kids"
   }
 }
