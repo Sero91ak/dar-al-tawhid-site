@@ -29,4 +29,25 @@
   }
   lockViewport();
   document.addEventListener("DOMContentLoaded",lockViewport);
+  /* live v1099 · source-line text only */
+  var sourceLineText="BEITRÄGE NACH QURʾĀN, SUNNAH & ĀTHĀR";
+  function syncSourceLine(){
+    try{
+      document.querySelectorAll(".brand-kicker-row small,.dar-library-brandbar__meta").forEach(function(el){
+        if(el&&el.textContent!==sourceLineText)el.textContent=sourceLineText;
+      });
+    }catch(e){}
+  }
+  function scheduleSourceLine(){
+    syncSourceLine();
+    setTimeout(syncSourceLine,80);
+    setTimeout(syncSourceLine,360);
+  }
+  document.addEventListener("DOMContentLoaded",scheduleSourceLine);
+  window.addEventListener("hashchange",scheduleSourceLine);
+  window.addEventListener("pageshow",scheduleSourceLine);
+  document.addEventListener("dar:view-rendered",scheduleSourceLine);
+  try{
+    new MutationObserver(function(){scheduleSourceLine()}).observe(document.documentElement,{childList:true,subtree:true});
+  }catch(e){}
 })();
