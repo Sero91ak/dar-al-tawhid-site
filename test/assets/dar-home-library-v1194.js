@@ -73,19 +73,29 @@ function removeOldLayers(){
 }
 function applyHomeAtmosphereV1204(){
   if(!isHome())return;
+  var html=document.documentElement;
+  var theme=String(html.getAttribute("data-theme")||"").toLowerCase();
+  var light=(theme==="light"||theme==="soft"||theme==="eisgold");
   var body=document.body;
   var top=document.querySelector(".top-shell");
   var header=top&&top.querySelector(".header");
   var view=document.getElementById("appView");
+  var page=(body&&getComputedStyle(body).getPropertyValue("--dt-page").trim())||(light?"#f5f1e7":"#050706");
+  var heroImg=window.matchMedia&&window.matchMedia("(min-width:760px)").matches
+    ? "/test/assets/home-v1194/hero-wide-adobe.jpg?v=1206"
+    : "/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1206";
+  var studyImg="/test/assets/home-v1194/study-runway.jpg?v=1206";
   if(body){
-    body.style.setProperty("background-color","#050706","important");
+    body.style.setProperty("background-color",page,"important");
     body.style.setProperty("background-image","none","important");
   }
   if(top){
-    top.style.setProperty("background-color","#050706","important");
+    top.style.setProperty("background-color",page,"important");
     top.style.setProperty(
       "background-image",
-      "linear-gradient(180deg,rgba(2,3,2,.10) 0%,rgba(2,3,2,.18) 34%,rgba(2,3,2,.58) 72%,rgba(2,3,2,.98) 100%),linear-gradient(90deg,rgba(2,3,2,.58) 0%,rgba(2,3,2,.28) 48%,rgba(2,3,2,.08) 100%),url('/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1204')",
+      light
+        ? "linear-gradient(180deg,rgba(249,246,238,.58) 0%,rgba(249,246,238,.62) 36%,rgba(249,246,238,.84) 78%,rgba(249,246,238,.96) 100%),linear-gradient(90deg,rgba(249,246,238,.74) 0%,rgba(249,246,238,.48) 50%,rgba(249,246,238,.26) 100%),url('"+heroImg+"')"
+        : "linear-gradient(180deg,rgba(2,3,2,.10) 0%,rgba(2,3,2,.18) 34%,rgba(2,3,2,.58) 72%,rgba(2,3,2,.98) 100%),linear-gradient(90deg,rgba(2,3,2,.58) 0%,rgba(2,3,2,.28) 48%,rgba(2,3,2,.08) 100%),url('"+heroImg+"')",
       "important"
     );
     top.style.setProperty("background-repeat","no-repeat","important");
@@ -97,10 +107,12 @@ function applyHomeAtmosphereV1204(){
     header.style.setProperty("background-image","none","important");
   }
   if(view){
-    view.style.setProperty("background-color","#050706","important");
+    view.style.setProperty("background-color",page,"important");
     view.style.setProperty(
       "background-image",
-      "linear-gradient(180deg,rgba(2,3,2,.96) 0%,rgba(2,3,2,.44) 12%,rgba(2,3,2,.24) 35%,rgba(2,3,2,.34) 70%,rgba(2,3,2,.96) 100%),linear-gradient(90deg,rgba(2,3,2,.62) 0%,rgba(2,3,2,.30) 52%,rgba(2,3,2,.16) 100%),url('/test/assets/home-v1194/study-runway.jpg?v=1204')",
+      light
+        ? "linear-gradient(180deg,rgba(249,246,238,.94) 0%,rgba(249,246,238,.68) 14%,rgba(249,246,238,.56) 38%,rgba(249,246,238,.72) 72%,rgba(249,246,238,.96) 100%),linear-gradient(90deg,rgba(249,246,238,.72) 0%,rgba(249,246,238,.50) 52%,rgba(249,246,238,.34) 100%),url('"+studyImg+"')"
+        : "linear-gradient(180deg,rgba(2,3,2,.96) 0%,rgba(2,3,2,.44) 12%,rgba(2,3,2,.24) 35%,rgba(2,3,2,.34) 70%,rgba(2,3,2,.96) 100%),linear-gradient(90deg,rgba(2,3,2,.62) 0%,rgba(2,3,2,.30) 52%,rgba(2,3,2,.16) 100%),url('"+studyImg+"')",
       "important"
     );
     view.style.setProperty("background-repeat","no-repeat","important");
@@ -112,7 +124,6 @@ function applyHomeAtmosphereV1204(){
     if(!el.classList.contains("header"))el.style.setProperty("background-image","none","important");
   });
 }
-
 function ensureHero(){
   var top=document.querySelector(".top-shell");
   var header=top&&top.querySelector(".header");
@@ -128,12 +139,7 @@ function ensureHero(){
       '<div class="dt-hero-kicker">Bibliothek des Wissens</div>'+
       '<h1 class="dt-hero-title"><strong>TAWḤĪD</strong><span>Das Fundament allen Wissens.</span></h1>'+
       '<p class="dt-hero-lead">Qurʾān, authentische Sunnah und die Überlieferungen der Salaf – geordnet, nachvollziehbar und direkt zugänglich.</p>'+
-      '<nav class="dt-hero-links" aria-label="Direkte Wissenszugänge">'+
-        '<button type="button" class="dt-text-link" data-dt-nav="topics">Tawḥīd &amp; ʿAqīdah</button>'+
-        '<button type="button" class="dt-text-link" data-dt-nav="quran">Qurʾān</button>'+
-        '<button type="button" class="dt-text-link" data-dt-nav="hadith">Sunnah &amp; Ḥadīṯ</button>'+
-        '<button type="button" class="dt-text-link" data-dt-nav="books">Quellen</button>'+
-      '</nav>'+
+
       '<button type="button" class="dt-hero-search" data-dt-scroll="homeSearchTitle" aria-label="Wissen durchsuchen">'+
         '<img src="/test/assets/dar-3d-icons/ilm.png?v=1194" alt="" aria-hidden="true">'+
         '<span>Qurʾān, Ḥadīṯ, Gelehrte und Themen durchsuchen</span><b aria-hidden="true">→</b>'+
@@ -142,6 +148,8 @@ function ensureHero(){
     if(brand)brand.insertAdjacentElement("afterend",hero);
     else header.appendChild(hero);
   }
+  var staleLinks=hero.querySelector(".dt-hero-links");
+  if(staleLinks)staleLinks.remove();
   bind(hero);
 
   var prayer=document.getElementById("headerPrayerStatus");
@@ -241,6 +249,54 @@ function ensureMain(){
     ".home-header-update-chip,#homeRefreshBtn,.home-refresh-icon-btn--header,.home-refresh-panel,.home-update-row-v416"
   ).forEach(function(el){el.style.setProperty("display","none","important")});
 }
+function compactHomeFooter(){
+  if(!isHome())return;
+  var footer=document.querySelector(".footer");
+  var view=document.getElementById("appView");
+  var shell=document.querySelector("#appView .home-v380-shell");
+  [view,shell].forEach(function(el){
+    if(!el)return;
+    el.style.setProperty("min-height","0","important");
+    el.style.setProperty("height","auto","important");
+  });
+  if(shell){
+    shell.style.setProperty("padding-bottom","0","important");
+    Array.prototype.forEach.call(shell.children,function(el){
+      if(!el||!el.matches||!el.matches(".home-v380-section"))return;
+      var hasControls=!!el.querySelector("a,button,input,select,textarea,[data-dt-nav],[data-quran-continue]");
+      var hasText=String(el.textContent||"").replace(/\s+/g,"").length>0;
+      if(!hasControls&&!hasText)el.style.setProperty("display","none","important");
+    });
+  }
+  if(!footer)return;
+  footer.style.setProperty("margin-top","0","important");
+  footer.style.setProperty("text-align","center","important");
+  footer.style.setProperty("align-items","center","important");
+  footer.style.setProperty("justify-items","center","important");
+  var links=Array.prototype.slice.call(footer.querySelectorAll("a,button")).filter(function(el){
+    var hay=((el.textContent||"")+" "+(el.getAttribute("href")||"")+" "+(el.getAttribute("aria-label")||"")).toLowerCase();
+    return /telegram|whatsapp|instagram/.test(hay);
+  });
+  if(links.length>=2){
+    var group=links[0].parentElement;
+    while(group&&group!==footer&&!links.every(function(el){return group.contains(el)}))group=group.parentElement;
+    if(!group)group=footer;
+    group.style.setProperty("display","flex","important");
+    group.style.setProperty("flex-wrap","wrap","important");
+    group.style.setProperty("align-items","center","important");
+    group.style.setProperty("justify-content","center","important");
+    group.style.setProperty("gap","10px 26px","important");
+    group.style.setProperty("width","100%","important");
+    group.style.setProperty("margin-left","auto","important");
+    group.style.setProperty("margin-right","auto","important");
+    group.style.setProperty("text-align","center","important");
+    links.forEach(function(el){
+      el.style.setProperty("margin-left","0","important");
+      el.style.setProperty("margin-right","0","important");
+      el.style.setProperty("text-align","center","important");
+    });
+  }
+}
 function sync(){
   if(!document.documentElement||!document.body)return;
   if(!isHome()){
@@ -252,6 +308,7 @@ function sync(){
   ensureHero();
   ensureMain();
   applyHomeAtmosphereV1204();
+  compactHomeFooter();
 }
 function queue(){
   if(queued)return;
@@ -264,6 +321,7 @@ function observe(){
   var app=document.getElementById("appView");
   if(app)new MutationObserver(queue).observe(app,{childList:true,subtree:true});
   new MutationObserver(queue).observe(document.body,{attributes:true,attributeFilter:["class"]});
+  new MutationObserver(queue).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme","data-theme-variant"]});
   window.addEventListener("hashchange",queue);
   window.addEventListener("pageshow",queue);
   document.addEventListener("dar:view-rendered",queue);
