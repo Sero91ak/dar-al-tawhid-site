@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1193';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1194';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -165,6 +165,11 @@ const APP_SHELL = [
   '/test/assets/home-v1193/hero-study-runway.jpg',
   '/test/assets/home-v1193/library-study-runway.jpg',
   '/test/assets/theme-salbei-elfenbein.css',
+  '/test/assets/dar-home-library-v1194.css',
+  '/test/assets/dar-home-library-v1194.js',
+  '/test/assets/home-v1194/hero-mobile-adobe.jpg',
+  '/test/assets/home-v1194/hero-wide-adobe.jpg',
+  '/test/assets/home-v1194/study-runway.jpg',
   '/test/assets/home-premium-start-v1101.css',
   '/test/assets/home-smart-v1104.css',
   '/test/assets/home-reference-authority-v1115.css',
