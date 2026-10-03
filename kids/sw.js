@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1057";
+const CACHE_NAME="dar-al-tawhid-kids-v1058";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
@@ -6,6 +6,16 @@ const PRECACHE=[
   "/kids/assets/kids-art/quran-alphabet-v1053.jpg",
   "/kids/assets/kids-art/quran-surahs-v1053.jpg",
   "/kids/assets/kids-art/quran-verses-v1053.jpg",
+  "/kids/assets/kids-art/surah-001-al-fatihah-v12.svg",
+  "/kids/assets/kids-art/surah-112-al-ikhlas-v12.svg",
+  "/kids/assets/kids-art/surah-113-al-falaq-v12.svg",
+  "/kids/assets/kids-art/surah-114-an-nas-v12.svg",
+  "/kids/assets/kids-art/surah-108-al-kawthar-v12.svg",
+  "/kids/assets/kids-art/surah-103-al-asr-v12.svg",
+  "/kids/assets/kids-art/surah-105-al-fil-v12.svg",
+  "/kids/assets/kids-art/surah-106-quraysh-v12.svg",
+  "/kids/assets/kids-art/surah-109-al-kafirun-v12.svg",
+  "/kids/assets/kids-art/surah-110-an-nasr-v12.svg",
   "/kids/assets/kids-art/hero-entdecke.png",
   "/kids/assets/kids-art/home-journey-v11-clean2.jpg",
   "/kids/data/alphabet-kids.json",
