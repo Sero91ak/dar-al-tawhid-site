@@ -4,7 +4,7 @@
 const DATA_URL="/kids/data/mubashshirun-stories.json";
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.mubashshirunStory.done.";
-let items=[],libraryPolicy={},active=null,activeText="",playing=false,busy=false;
+let items=[],libraryPolicy={},active=null,activeText="",playing=false,busy=false,coverResizeObserver=null;
 const audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -25,7 +25,33 @@ function done(id){try{return localStorage.getItem(DONE_PREFIX+id)==="1"}catch(_)
 function markDone(id){try{localStorage.setItem(DONE_PREFIX+id,"1")}catch(_){}renderCards()}
 function doneCount(){return items.reduce((n,x)=>n+(done(x.id)?1:0),0)}
 function art(item,kind="cover"){return String(item?.[kind]||item?.cover||"").trim()}
-function coverPos(item){return String(item?.coverPosition||"50% 50%").trim()}
+function coverFocusX(item){
+  const raw=Number(item?.coverFocusX);
+  return Number.isFinite(raw)?Math.max(0,Math.min(100,raw))/100:.5;
+}
+function applyCoverFocus(img,item){
+  if(!img||!item)return;
+  const focus=coverFocusX(item);
+  const position=()=>{
+    const iw=img.naturalWidth||0,ih=img.naturalHeight||0;
+    const box=img.parentElement,cw=box?.clientWidth||img.clientWidth||0,ch=box?.clientHeight||img.clientHeight||0;
+    if(!iw||!ih||!cw||!ch){img.style.objectPosition="50% 50%";return}
+    const scale=Math.max(cw/iw,ch/ih),rw=iw*scale;
+    if(rw<=cw+1){img.style.objectPosition="50% 50%";return}
+    const p=(cw*.5-focus*rw)/(cw-rw);
+    const pct=Math.max(0,Math.min(1,p))*100;
+    img.style.objectPosition=pct.toFixed(2)+"% 50%";
+  };
+  if(img.complete&&img.naturalWidth)position();
+  else img.addEventListener("load",position,{once:true});
+  requestAnimationFrame(position);
+}
+function applyAllCoverFocus(){
+  document.querySelectorAll(".ms-row-visual img[data-ms-cover-id]").forEach(img=>{
+    const item=items.find(x=>x.id===img.dataset.msCoverId);
+    if(item)applyCoverFocus(img,item);
+  });
+}
 function heroPos(item){return String(item?.heroPosition||"50% 50%").trim()}
 function installSwipeBack(el,onBack){
   if(!el||el.dataset.swipeBackReady==="1")return;
@@ -89,7 +115,7 @@ function renderCards(){
     const t=textFor(item),src=art(item);
     return '<button class="ms-story-row" type="button" data-ms-id="'+esc(item.id)+'">'+
       '<span class="ms-row-visual" aria-hidden="true">'+
-        (src?'<img src="'+esc(src)+'" alt="" style="object-position:'+esc(coverPos(item))+'" decoding="async" loading="'+(index<4?"eager":"lazy")+'">':'')+
+        (src?'<img src="'+esc(src)+'" alt="" data-ms-cover-id="'+esc(item.id)+'" decoding="async" loading="'+(index<4?"eager":"lazy")+'">':'')+
         '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span>'+
       '</span>'+
       '<span class="ms-row-copy">'+
@@ -103,6 +129,10 @@ function renderCards(){
       (done(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':'')+
     '</button>';
   }).join("");
+  grid.querySelectorAll(".ms-row-visual img[data-ms-cover-id]").forEach(img=>{
+    const item=items.find(x=>x.id===img.dataset.msCoverId);
+    if(item)applyCoverFocus(img,item);
+  });
   grid.querySelectorAll("[data-ms-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.msId)));
   const dc=$("#msDoneCount");if(dc)dc.textContent=String(doneCount());
   const ag=$("#msAge");if(ag)ag.textContent="Alter "+age();
@@ -145,6 +175,12 @@ function ensureUi(){
       '<div id="msGrid" class="ms-list"></div>'+
     '</div>';
   document.body.appendChild(page);
+  const coverGrid=$("#msGrid");
+  if(coverGrid&&"ResizeObserver" in window){
+    coverResizeObserver?.disconnect();
+    coverResizeObserver=new ResizeObserver(()=>applyAllCoverFocus());
+    coverResizeObserver.observe(coverGrid);
+  }
   $("#msBack").addEventListener("click",closeLibrary);
   installSwipeBack($("#msLibraryScroll"),closeLibrary);
   page.querySelectorAll("[data-ms-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.msMode)));

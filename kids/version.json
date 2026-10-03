@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1075",
-  "label": "KIDS · V1.07.1",
-  "releasedAt": "2026-10-03T18:00:00.000Z",
-  "note": "V1.07.1: Geschichten-Startseite responsive korrigiert; Buttons und Texte überlappen nicht mehr auf kleinen/großen Smartphones oder Tablets. Neue thematisch passende Hintergründe für Propheten- und Mubaschschirūn-Bereich; klare Trennung zum folgenden Bereich.",
+  "buildId": "kids-shell-v12-sahaba1076",
+  "label": "KIDS · V1.07.2",
+  "releasedAt": "2026-10-03T18:09:00.000Z",
+  "note": "V1.07.2: Ṣaḥābah-Kartenbilder erhalten eine motivbezogene Fokus-Zentrierung. Die Hauptfigur wird je Bild automatisch auf die Kartenmitte ausgerichtet, auch wenn sich Kartenhöhe und Seitenverhältnis auf Smartphone oder Tablet ändern.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1075",
+    "serviceWorkerCache": "v1076",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -153,6 +153,7 @@
     "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03",
     "mubashshirunSwipeBack": true,
     "prophetStoriesBundleVersion": 22,
-    "storyCategoryBackgrounds": "prophets-adobe-v22+sahabah-runway-v10"
+    "storyCategoryBackgrounds": "prophets-adobe-v22+sahabah-runway-v10",
+    "mubashshirunCardFocalCentering": "subject-aware-responsive-v1"
   }
 }
