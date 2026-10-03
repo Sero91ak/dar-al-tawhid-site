@@ -368,15 +368,14 @@ jobs:
           version=json.loads(Path("kids/version.json").read_text(encoding="utf-8"))
           build=str(version.get("buildId") or "").strip()
           label=str(version.get("label") or "").strip()
-          if not re.fullmatch(r"kids-shell-v12-tab\d+",build):
+          build_match=re.fullmatch(r"kids-shell-v12-(?:tab|type|sahaba)(\d+)",build)
+          if not build_match:
               raise SystemExit("Invalid Kids buildId: "+build)
-          m=re.search(r"V(\d+)\.(\d+)",label)
-          if not m:
+          if not re.search(r"V\d+\.\d+(?:\.\d+)?",label):
               raise SystemExit("Invalid Kids label: "+label)
-          major,minor=m.groups()
-          # Cache-Suffix folgt dem bestehenden Release-Schema:
-          # V0.99 -> v99, V1.05 -> v105.
-          cache_suffix=("" if int(major)==0 else str(int(major)))+minor
+          # Der Cache folgt der kanonischen numerischen Build-Suffix-ID.
+          # Damit bleiben historische tab/type-Builds und aktuelle sahaba-Builds konsistent.
+          cache_suffix=build_match.group(1)
 
           required_build_files=[
               "kids/index.html",
