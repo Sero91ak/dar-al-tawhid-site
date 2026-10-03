@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-mub1061",
-  "label": "KIDS · V1.06.1",
-  "releasedAt": "2026-10-03T12:58:00.000Z",
-  "note": "V1.06.1: Der neue Bereich für die zehn al-ʿAšarah al-Mubaššarūn wurde erweitert: 10 quellengeprüfte Ṣaḥābah-Geschichten mit längeren altersgerechten Fassungen, eigenständigen Szenenbildern, sichtbarer Quellenmethodik und eigenem Voice-Studio-Tab für Fuṣḥā-Prüfung und Serhat-Audio.",
+  "buildId": "kids-shell-v12-mub1062",
+  "label": "KIDS · V1.06.2",
+  "releasedAt": "2026-10-03T12:45:00.000Z",
+  "note": "V1.06.2: Der Geschichten-Bereich enthält nun einen eigenständigen Bereich für die zehn al-ʿAšarah al-Mubaššarūn mit zehn altersgerechten, quellengeprüften Ṣaḥābah-Geschichten, eigenständigen Szenenbildern, Profil- und Quellenansicht sowie direkter Vorbereitung im Voice Studio mit Fuṣḥā-Prüfung.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1061",
+    "serviceWorkerCache": "v1062",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -81,6 +81,8 @@
       "4-5": "4–5 min",
       "6-8": "5–7 min",
       "9-10": "6–8 min"
-    }
+    },
+    "mubashshirunProfilePanels": true,
+    "mubashshirunDirectHadithLinks": true
   }
 }
