@@ -278,6 +278,31 @@ def load_quiz_manifest():
         lambda d:isinstance(d,dict) and len(d.get("items") or [])>0,
     )
 
+def load_mubashshirun_manifest():
+    """Load the ten al-ʿAšarah al-Mubaššarūn Kids stories for Voice Studio.
+
+    The manifest is self-healed from the Kids repository like the existing
+    prophet/quiz manifests. It deliberately requires all ten entries and all
+    three prepared age scripts so Voice Studio never renders a partial pack.
+    """
+    return load_kids_repo_json(
+        "mubashshirun-stories.json",
+        "kids/data/mubashshirun-stories.json",
+        lambda d:(
+            isinstance(d,dict)
+            and len(d.get("items") or [])==10
+            and all(
+                str((item or {}).get("id") or "").strip()
+                and isinstance((item or {}).get("scripts"),dict)
+                and all(
+                    str(((item or {}).get("scripts") or {}).get(age) or "").strip()
+                    for age in ("4-5","6-8","9-10")
+                )
+                for item in (d.get("items") or [])
+            )
+        ),
+    )
+
 def normalize_lookup(value:str):
     text=unicodedata.normalize("NFKD",str(value or "").casefold())
     text="".join(ch for ch in text if not unicodedata.combining(ch))
