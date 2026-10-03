@@ -134,19 +134,16 @@ def load_json_file(path:Path,default):
                 return json.loads(raw)
             except json.JSONDecodeError:
                 # 2.9.26–2.9.32 konnten bei atomaren JSON-Schreibvorgängen
-                # versehentlich die zwei Literalzeichen "\
-" hinter ein
+                # versehentlich die zwei Literalzeichen "\n" hinter ein
                 # ansonsten gültiges JSON setzen. Diesen exakt bekannten Altfall
                 # einmalig reparieren; sonst niemals Daten stillschweigend ändern.
                 repaired=raw
                 changed=False
-                while repaired.endswith("\
-"):
+                while repaired.endswith("\\n"):
                     repaired=repaired[:-2]
                     changed=True
                 if changed:
-                    repaired=repaired.rstrip()+"
-"
+                    repaired=repaired.rstrip()+"\n"
                     parsed=json.loads(repaired)
                     try:
                         path.write_text(repaired,encoding="utf-8")
@@ -174,8 +171,7 @@ def atomic_write_json(path:Path,data):
     # Prozess-eigene Tempdatei verhindert Cache-Kollisionen bei parallelen Starts.
     tmp=path.with_name(path.name+f".tmp.{os.getpid()}.{uuid.uuid4().hex[:8]}")
     try:
-        tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"
-",encoding="utf-8")
+        tmp.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         os.replace(tmp,path)
     finally:
         try: tmp.unlink(missing_ok=True)
@@ -290,8 +286,7 @@ def append_learning_log(event:str,**payload):
     record={"at":time.strftime("%Y-%m-%dT%H:%M:%S%z"),"event":event,**payload}
     try:
         with LEARNING_LOG.open("a",encoding="utf-8") as fh:
-            fh.write(json.dumps(record,ensure_ascii=False)+"\
-")
+            fh.write(json.dumps(record,ensure_ascii=False)+"\n")
     except Exception as e:
         print("[DĀR Voice] learning log warning",e,flush=True)
 
@@ -841,8 +836,7 @@ def confirm_pending_audio_locks():
             "confirmed":{key:{"file":audio_lock_path(key).name,"label":AUDIO_LOCK_LABELS.get(key,key)} for key in confirmed_audio_lock_keys()},
         }
         tmp=MASTER_AUDIO_MANIFEST.with_suffix(".tmp.json")
-        tmp.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"
-",encoding="utf-8")
+        tmp.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         os.replace(tmp,MASTER_AUDIO_MANIFEST)
     with AUDIO_LOCK_STATE_LOCK:
         for p in PENDING_AUDIO_LOCKS.values():
@@ -6221,8 +6215,7 @@ def _prophet_story_age_text(item,age):
     else:
         outro="Bevor du zur Frage weitergehst, denk noch einmal an die wichtigsten Punkte. Die Propheten riefen zu Allah, hielten in Prüfungen an der Wahrheit fest und vertrauten auf Seine Führung. Die Geschichte soll nicht nur spannend sein, sondern dir helfen, die Botschaft des Qurʾān zu verstehen. Die genauen Qurʾān-Stellen stehen direkt unter der Erzählung."
     parts.append(outro)
-    return "\n
-".join(str(x).strip() for x in parts if str(x).strip())
+    return "\n".join(str(x).strip() for x in parts if str(x).strip())
 
 def _publish_prophet_story_pack(ready:Path):
     repo=ALPHABET_PUBLISH_REPO
