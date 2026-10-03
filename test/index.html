@@ -10,7 +10,7 @@
 <script src="/assets/dar-app-chrome.js?v=1"></script>
 
 <script src="/test/assets/dar-noble-3d-icons.js?v=1165"></script><!-- DAR_NOBLE_3D_HEAD -->
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1198";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1197";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1060";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 
 <script>
@@ -20980,107 +20980,6 @@ html body .post-reader-main .post-source-oval.post-source-module .post-after-lin
 
 <link rel="stylesheet" href="/test/assets/dar-library-redesign-v1168.css?v=1196">
 <script defer src="/test/assets/dar-library-redesign-v1168.js?v=1196"></script>
-
-<style id="primary-tab-header-parity-v1198">
-/* Haupt-Tabseiten behalten wieder dieselbe große Marken-/Hero-Kopfzone wie Start.
-   Nur Test/Staging. Bestehende Bottom-Tab-Leiste und ihre Funktionen bleiben unverändert. */
-body.is-primary-tab-root .top-shell,
-body.is-primary-tab-root .top-shell.theme-hero-shell{
-  display:block!important;
-  margin-bottom:4px!important;
-}
-body.is-primary-tab-root .app-bar{display:none!important}
-html[data-theme] body.is-primary-tab-root{
-  padding-left:0!important;
-  padding-right:0!important;
-  padding-top:0!important;
-}
-html[data-theme] body.is-primary-tab-root .top-shell,
-html[data-theme] body.is-primary-tab-root .top-shell.theme-hero-shell,
-html[data-theme] body.is-primary-tab-root .header,
-html[data-theme] body.is-primary-tab-root .header.theme-hero-surface,
-html[data-theme] body.is-primary-tab-root .theme-hero-surface,
-html[data-theme] body.is-primary-tab-root .hero-text,
-html[data-theme] body.is-primary-tab-root .isnad{
-  margin-left:0!important;
-  margin-right:0!important;
-  border-left:0!important;
-  border-right:0!important;
-  border-radius:0!important;
-  box-shadow:none!important;
-  clip-path:none!important;
-  outline:none!important;
-  background:var(--dar-edge-fill)!important;
-  background-color:var(--dar-edge-fill)!important;
-  background-image:none!important;
-  filter:none!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-}
-html[data-theme] body.is-primary-tab-root .top-shell.theme-hero-shell{padding:0!important}
-html[data-theme] body.is-primary-tab-root .header{
-  padding-top:max(14px,calc(env(safe-area-inset-top,0px) + 10px),calc(var(--dar-native-safe-top,0px) + 10px))!important;
-  padding-left:max(14px,env(safe-area-inset-left,0px))!important;
-  padding-right:max(14px,env(safe-area-inset-right,0px))!important;
-}
-html[data-theme] body.is-primary-tab-root .hero-text,
-html[data-theme] body.is-primary-tab-root .top-shell.theme-hero-shell .hero-text{
-  border:0!important;
-  border-top:0!important;
-  margin-top:10px!important;
-  padding-top:12px!important;
-  max-width:100%!important;
-}
-html[data-theme] body.is-primary-tab-root .isnad,
-html[data-theme] body.is-primary-tab-root .top-shell.theme-hero-shell .isnad{
-  border:0!important;
-  border-top:0!important;
-  margin-top:8px!important;
-  padding-top:12px!important;
-}
-body.is-primary-tab-root .top-shell.theme-hero-shell .header-prayer-hub{
-  padding-bottom:clamp(9px,2.1vw,12px)!important;
-}
-body.is-primary-tab-root .top-shell.theme-hero-shell .header-prayer-hub__status{
-  margin-top:clamp(6px,1.4vw,8px)!important;
-  padding-top:clamp(12px,2.8vw,16px)!important;
-  padding-bottom:clamp(4px,1.1vw,7px)!important;
-  min-height:clamp(28px,6.5vw,36px)!important;
-  box-sizing:border-box!important;
-  font-size:clamp(11.2px,2.75vw,13.6px)!important;
-  font-weight:800!important;
-  line-height:1.25!important;
-}
-body.is-primary-tab-root #appView.view{padding-top:6px!important}
-body.is-primary-tab-root .view-head{
-  padding:0 0 6px!important;
-  margin-bottom:8px!important;
-  border-bottom:0!important;
-}
-body.is-primary-tab-root .view-head .eyebrow{
-  font-size:8px!important;
-  letter-spacing:.16em!important;
-  margin-bottom:4px!important;
-}
-body.is-primary-tab-root .view-head h2{
-  font-size:clamp(28px,6.8vw,40px)!important;
-  font-weight:800!important;
-  line-height:1.02!important;
-  letter-spacing:.012em!important;
-}
-body.is-primary-tab-root .view-desc{
-  font-size:12.5px!important;
-  line-height:1.5!important;
-  margin-top:6px!important;
-}
-@media(max-width:430px){
-  body.is-primary-tab-root .top-shell.theme-hero-shell .header-prayer-hub__status{
-    font-size:clamp(10.2px,2.45vw,12.2px)!important;
-    padding-top:clamp(10px,2.4vw,14px)!important;
-  }
-}
-</style>
-
 <body class="has-bottom-nav">
 <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Aktualisieren" style="display:none">
   <span class="new-posts-icon">&#x23F3;</span>
@@ -28106,15 +28005,9 @@ function updateChrome(route){
   const isMore=route.view==="more";
   const isIlm=route.view==="ilm";
   const isPost=route.view==="post";
-  const isPrimaryTabRoot=
-    (route.view==="topics"&&!route.value)||
-    (route.view==="recent"&&!route.value)||
-    (route.view==="quiz"&&(!route.value||String(route.value).toLowerCase()==="home"))||
-    (route.view==="more"&&!route.value);
   if(!isIlm)rememberIlmReturnRoute(route,window.scrollY||0);
   document.body.classList.toggle("is-home-route",isHome);
   document.body.classList.toggle("is-area-route",!isHome);
-  document.body.classList.toggle("is-primary-tab-root",isPrimaryTabRoot);
   document.body.classList.toggle("is-ilm-chat-route",isIlm);
   document.body.classList.toggle("is-propheten-route",route.view==="propheten");
   document.body.classList.toggle("is-frauen-route",route.view==="frauen");
@@ -28170,13 +28063,6 @@ function updateChrome(route){
     return;
   }
   if(isHome){
-    backBtn.classList.remove("show");
-    if(homeBtn)homeBtn.classList.remove("show");
-    if(appBar)appBar.classList.add("is-home");
-    if(crumb){crumb.textContent="";crumb.classList.add("is-hidden")}
-    return;
-  }
-  if(isPrimaryTabRoot){
     backBtn.classList.remove("show");
     if(homeBtn)homeBtn.classList.remove("show");
     if(appBar)appBar.classList.add("is-home");
