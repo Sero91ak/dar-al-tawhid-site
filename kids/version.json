@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-mub1064",
-  "label": "KIDS · V1.06.4",
-  "releasedAt": "2026-10-03T13:12:00.000Z",
-  "note": "V1.06.4: Ṣaḥābah-/Mubaschschirūn-Bereich technisch bereinigt und produktionsfertig: genau ein CSS/JS-Bundle pro Kids-Seite, 10 unterschiedliche Szenenbilder, 30 altersabhängige Lesetexte (4–5 / 6–8 / 9–10), direkte Ḥadīṯ-Nachweise, Profilkarten und Quiz. Im Voice Studio gibt es den eigenen Ṣaḥābah-Tab mit Text laden, Fuṣḥā-Prüfung, Serhat-Audio erzeugen und geprüfte Altersfassung direkt nach Kids veröffentlichen.",
+  "buildId": "kids-shell-v12-type1065",
+  "label": "KIDS · V1.06.5",
+  "releasedAt": "2026-10-03T13:25:00.000Z",
+  "note": "V1.06.5: Globale kindgerechte Typografie: Schriftgröße, Zeilenhöhe, Abstände und Touch-Ziele folgen jetzt automatisch dem gewählten Alter 4–5 / 6–8 / 9–10. Fredoka wird als gut lesbare runde Sans-Serif für Kindertexte genutzt, Noto Naskh Arabic bleibt für Arabisch. Kleine 9–10-Jahre-Texte wurden deutlich angehoben; Karten wachsen mit dem Text statt ihn zu quetschen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1064",
+    "serviceWorkerCache": "v1065",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -91,6 +91,38 @@
     "mubashshirunFuṣḥāReview": true,
     "mubashshirunPreparedStoryScripts": 30,
     "mubashshirunUniqueArtworkAssets": true,
-    "mubashshirunDuplicateBundleGuard": true
+    "mubashshirunDuplicateBundleGuard": true,
+    "ageAdaptiveTypography": "v2",
+    "ageTypographyProfiles": {
+      "4-5": {
+        "body": "20px",
+        "support": "16px",
+        "control": "18px",
+        "cardTitle": "23px",
+        "pageTitle": "38px",
+        "touch": "62px"
+      },
+      "6-8": {
+        "body": "18.5px",
+        "support": "15px",
+        "control": "17px",
+        "cardTitle": "21.5px",
+        "pageTitle": "35px",
+        "touch": "58px"
+      },
+      "9-10": {
+        "body": "17.5px",
+        "support": "14.5px",
+        "control": "16px",
+        "cardTitle": "20px",
+        "pageTitle": "33px",
+        "touch": "54px"
+      }
+    },
+    "kidsReadingFont": "Fredoka",
+    "kidsArabicFont": "Noto Naskh Arabic",
+    "typographyAgeSync": true,
+    "typographyNoClip": true,
+    "typographyTextResizeCompatible": true
   }
 }
