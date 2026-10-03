@@ -120,17 +120,11 @@ function applyHomeAtmosphereV1204(){
     header.style.setProperty("background-image","none","important");
   }
   if(view){
-    view.style.setProperty("background-color",page,"important");
-    view.style.setProperty(
-      "background-image",
-      light
-        ? "linear-gradient(180deg,rgba(249,246,238,.94) 0%,rgba(249,246,238,.68) 14%,rgba(249,246,238,.56) 38%,rgba(249,246,238,.72) 72%,rgba(249,246,238,.96) 100%),linear-gradient(90deg,rgba(249,246,238,.72) 0%,rgba(249,246,238,.50) 52%,rgba(249,246,238,.34) 100%),url('"+studyImg+"')"
-        : "linear-gradient(180deg,rgba(2,3,2,.96) 0%,rgba(2,3,2,.44) 12%,rgba(2,3,2,.24) 35%,rgba(2,3,2,.34) 70%,rgba(2,3,2,.96) 100%),linear-gradient(90deg,rgba(2,3,2,.62) 0%,rgba(2,3,2,.30) 52%,rgba(2,3,2,.16) 100%),url('"+studyImg+"')",
-      "important"
-    );
-    view.style.setProperty("background-repeat","no-repeat","important");
-    view.style.setProperty("background-size","100% 100%,100% 100%,100% auto","important");
-    view.style.setProperty("background-position","center,center,center top","important");
+    view.style.setProperty("background-color","transparent","important");
+    view.style.setProperty("background-image","none","important");
+    view.style.removeProperty("background-repeat");
+    view.style.removeProperty("background-size");
+    view.style.removeProperty("background-position");
   }
   document.querySelectorAll("#appView .home-v380-shell,#appView .home-v380-section,#appView .home-line-list,#appView .home-line-grid,.top-shell .header").forEach(function(el){
     el.style.setProperty("background-color","transparent","important");
@@ -265,11 +259,20 @@ function cleanupHomeDuplicates(shell){
   resumes.slice(1).forEach(function(el){el.remove()});
 }
 
+function placeQuranResumeAfterCore(shell){
+  if(!shell)return;
+  var resume=shell.querySelector(".home-v380-quran-hero");
+  var core=shell.querySelector(".home-line-tawhid");
+  if(!resume||!core)return;
+  resume.classList.add("dt-quran-resume-after-core");
+  if(core.nextElementSibling!==resume)core.insertAdjacentElement("afterend",resume);
+}
 function ensureMain(){
   var shell=document.querySelector("#appView .home-v380-shell");
   if(!shell)return;
 
   cleanupHomeDuplicates(shell);
+  placeQuranResumeAfterCore(shell);
   tuneSearch();
   ensureFunctionalHeroSearch();
 
@@ -330,10 +333,10 @@ function compactHomeFooter(){
     while(group&&group!==footer&&!links.every(function(el){return group.contains(el)}))group=group.parentElement;
     if(!group)group=footer;
     group.style.setProperty("display","flex","important");
-    group.style.setProperty("flex-wrap","wrap","important");
+    group.style.setProperty("flex-wrap","nowrap","important");
     group.style.setProperty("align-items","center","important");
     group.style.setProperty("justify-content","center","important");
-    group.style.setProperty("gap","10px 26px","important");
+    group.style.setProperty("gap","6px 10px","important");
     group.style.setProperty("width","100%","important");
     group.style.setProperty("margin-left","auto","important");
     group.style.setProperty("margin-right","auto","important");
@@ -342,6 +345,8 @@ function compactHomeFooter(){
       el.style.setProperty("margin-left","0","important");
       el.style.setProperty("margin-right","0","important");
       el.style.setProperty("text-align","center","important");
+      el.style.setProperty("flex","1 1 0","important");
+      el.style.setProperty("min-width","0","important");
     });
   }
 }
