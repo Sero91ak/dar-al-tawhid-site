@@ -1,8 +1,8 @@
 {
   "buildId": "kids-shell-v12-sahaba1087",
   "label": "KIDS · V1.07.13",
-  "releasedAt": "2026-10-03T21:19:00.000Z",
-  "note": "V1.07.13: Vollständiger Live-Publish des aktuellen Kinder-App-Stands mit neuem Cache. Enthalten sind die zuletzt eingespielten Geschichten-/Propheten-Änderungen, Ṣaḥābah-Bildfokussierung, aktuelle responsive Darstellung und alle bereits auf main vorhandenen Kids-Fixes.",
+  "releasedAt": "2026-10-03T23:18:00.000Z",
+  "note": "V1.07.13: Geschichten-Seite vollflächig oben integriert; Story-Bottom-Navigation getrennt; aktueller App-Stand mit Cache v1087 synchronisiert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -159,8 +159,8 @@
     "homeChoiceLayoutVersion": "v1078",
     "homeChoiceCards": "rounded-cards-v1079",
     "storiesPageHero": "edge-to-edge-adobe-v1082",
-    "storiesHero": "edge-to-edge-fixed-v1085",
+    "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1084",
-    "storiesBottomNav": "story-background-separated-v1086"
+    "storiesBottomNav": "separated-background-v1086"
   }
 }
