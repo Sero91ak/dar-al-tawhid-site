@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-quran1059",
-  "label": "KIDS · V1.05.9",
-  "releasedAt": "2026-10-03T05:05:00.000Z",
-  "note": "V1.05.9: Die flachen SVG-Sūrahbilder wurden vollständig verworfen. Alle zehn Sūrah-Karten verwenden jetzt die tatsächlich erzeugten hochwertigen, cineastischen Runway-Bildassets als lokale App-Dateien; Layout und Qurʾān-Funktionen bleiben unverändert.",
+  "buildId": "kids-shell-v12-mub1060",
+  "label": "KIDS · V1.06.0",
+  "releasedAt": "2026-10-03T12:20:00.000Z",
+  "note": "V1.06.0: Neuer eigener Geschichten-Bereich für die zehn al-ʿAšarah al-Mubaššarūn. Zehn quellengeprüfte Ṣaḥābah-Geschichten mit altersabhängigen Erzähltexten, Quellen, Quiz und Voice-Studio-Vorbereitung.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v21",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1059",
+    "serviceWorkerCache": "v1060",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -64,6 +64,16 @@
     "alphabetLargeTouchTargets": true,
     "alphabetFunctionalityChanged": false,
     "quranCinematicArtwork": true,
-    "quranArtworkFormat": "local-jpeg"
+    "quranArtworkFormat": "local-jpeg",
+    "mubashshirunStories": "v1",
+    "mubashshirunOwnLibrary": true,
+    "mubashshirunStoryCount": 10,
+    "mubashshirunAgeScripts": [
+      "4-5",
+      "6-8",
+      "9-10"
+    ],
+    "mubashshirunVoiceStudio": true,
+    "mubashshirunSourcePolicy": "quran-sahih-sunnah-no-legends"
   }
 }
