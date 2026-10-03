@@ -25,6 +25,39 @@ function done(id){try{return localStorage.getItem(DONE_PREFIX+id)==="1"}catch(_)
 function markDone(id){try{localStorage.setItem(DONE_PREFIX+id,"1")}catch(_){}renderCards()}
 function doneCount(){return items.reduce((n,x)=>n+(done(x.id)?1:0),0)}
 function art(item,kind="cover"){return String(item?.[kind]||item?.cover||"").trim()}
+function installSwipeBack(el,onBack){
+  if(!el||el.dataset.swipeBackReady==="1")return;
+  el.dataset.swipeBackReady="1";
+  el.style.touchAction="pan-y";
+  let startX=0,startY=0,lastX=0,startT=0,tracking=false,claimed=false;
+  const reset=()=>{tracking=false;claimed=false;startX=startY=lastX=startT=0};
+  el.addEventListener("pointerdown",e=>{
+    if(e.pointerType==="mouse"&&e.button!==0)return;
+    const edge=Math.max(34,Math.min(56,window.innerWidth*.11));
+    if(e.clientX>edge)return;
+    startX=lastX=e.clientX;startY=e.clientY;startT=performance.now();tracking=true;claimed=false;
+  },{passive:true});
+  el.addEventListener("pointermove",e=>{
+    if(!tracking)return;
+    const dx=e.clientX-startX,dy=Math.abs(e.clientY-startY);
+    lastX=e.clientX;
+    if(!claimed&&dx>12&&dx>dy*1.25)claimed=true;
+    if(claimed&&dx<0)reset();
+  },{passive:true});
+  const finish=e=>{
+    if(!tracking)return;
+    const dx=(e.clientX??lastX)-startX,dy=Math.abs((e.clientY??startY)-startY);
+    const dt=Math.max(1,performance.now()-startT),vx=dx/dt;
+    const shouldBack=claimed&&dx>Math.min(110,window.innerWidth*.22)&&dx>dy*1.35&&(vx>.18||dx>150);
+    reset();
+    if(shouldBack){
+      try{navigator.vibrate?.(10)}catch(_){}
+      onBack();
+    }
+  };
+  el.addEventListener("pointerup",finish,{passive:true});
+  el.addEventListener("pointercancel",reset,{passive:true});
+}
 function renderModeButtons(){
   const m=mode();
   document.querySelectorAll("[data-ms-mode]").forEach(b=>b.classList.toggle("active",b.dataset.msMode===m));
@@ -115,6 +148,7 @@ function ensureUi(){
     '</div>';
   document.body.appendChild(page);
   $("#msBack").addEventListener("click",closeLibrary);
+  installSwipeBack($("#msLibraryScroll"),closeLibrary);
   page.querySelectorAll("[data-ms-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.msMode)));
 
   const modal=document.createElement("div");
@@ -145,6 +179,7 @@ function ensureUi(){
     '</div>';
   document.body.appendChild(modal);
   $("#msClose").addEventListener("click",closeStory);
+  installSwipeBack($("#msScroll"),closeStory);
   $("#msPlay").addEventListener("click",toggleAudio);
   modal.querySelectorAll("[data-ms-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.msMode)));
   audio.preload="metadata";
