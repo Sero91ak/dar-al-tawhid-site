@@ -8,6 +8,10 @@ const URLS=[
   "https://dar-al-tawhid.de/kids/data/mubashshirun-stories.json?cb="+Date.now(),
   "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/kids/data/mubashshirun-stories.json?cb="+Date.now()
 ];
+async function engineRequest(path,options={}){
+  if(typeof window.localRequest==="function")return window.localRequest(path,options);
+  return fetch(path,options);
+}
 function injectStyle(){
   if($("#mubVoicePackStyle"))return;
   const st=document.createElement("style");st.id="mubVoicePackStyle";
@@ -30,7 +34,7 @@ function injectStyle(){
   #mubVoicePack .mvp-item span{display:block;font-size:9px;color:#83979b;margin-top:4px;line-height:1.35}
   #mubVoicePack .mvp-selected{margin-top:10px;padding:11px;border:1px solid rgba(255,255,255,.06);border-radius:12px;background:rgba(0,0,0,.11);display:grid;gap:7px}
   #mubVoicePack .mvp-selected strong{font-size:12px}.mvp-source{font-size:9px;color:#819498;line-height:1.45}
-  #mubVoicePack .mvp-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  #mubVoicePack .mvp-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
   #mubVoicePack .mvp-actions button{min-height:40px}
   #mubVoicePack .mvp-ready{font-size:9px;line-height:1.45;color:#9bd8ba}
   body.studio-page-sahaba .heading-row h1:after{content:" · Ṣaḥābah";color:#d9b66f}
@@ -91,10 +95,35 @@ function render(){
   box.innerHTML=
     '<strong>'+esc(it.name)+' · '+(state.age==="4-5"?"4–5 Jahre":state.age==="9-10"?"9–10 Jahre":"6–8 Jahre")+'</strong>'+
     '<div class="mvp-source">'+esc((it.sourceRefs||[]).join(" · "))+'</div>'+
-    '<div class="mvp-actions"><button id="mvpLoad" class="btn secondary" type="button">Text in Voice laden</button><button id="mvpGenerate" class="btn primary" type="button">Laden &amp; Audio erzeugen</button></div>'+
-    '<div class="mvp-ready">Fuṣḥā-Begriffe und رضي الله عنه laufen anschließend durch dieselbe strenge Ausspracheprüfung wie die Prophetengeschichten.</div>';
+    '<div class="mvp-actions"><button id="mvpLoad" class="btn secondary" type="button">Text in Voice laden</button><button id="mvpGenerate" class="btn primary" type="button">Laden &amp; Audio erzeugen</button><button id="mvpPublish" class="btn secondary" type="button">Geprüft in Kids übernehmen</button></div>'+
+    '<div id="mvpReady" class="mvp-ready">Fuṣḥā-Begriffe und رضي الله عنه laufen anschließend durch dieselbe strenge Ausspracheprüfung wie die Prophetengeschichten.</div>';
   $("#mvpLoad")?.addEventListener("click",()=>loadSelected(true));
   $("#mvpGenerate")?.addEventListener("click",async()=>{loadSelected(true);await new Promise(r=>setTimeout(r,80));$("#generateBtn")?.click()});
+  $("#mvpPublish")?.addEventListener("click",publishCurrent);
+}
+async function publishCurrent(){
+  const it=current();if(!it)return;
+  const btn=$("#mvpPublish"),status=$("#mvpReady"),text=String($("#text")?.value||"").trim();
+  if(!text){if(status)status.textContent="Zuerst den Text laden und Audio erzeugen.";return}
+  const old=btn?.textContent||"";
+  if(btn){btn.disabled=true;btn.textContent="Übernehme …"}
+  if(status)status.textContent="Geprüftes Serhat-Audio wird der gewählten Altersfassung zugeordnet und in Kids veröffentlicht …";
+  try{
+    const r=await engineRequest("/mubashshirun/publish",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({id:it.id,age:state.age,text})
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||d.ok===false)throw Error(d.error||"Übernahme fehlgeschlagen.");
+    if(status)status.textContent=it.name+" · Alter "+state.age+" ist mit Serhat-Audio in Kids übernommen. "+(d.durationSec?("Dauer: "+Math.round(Number(d.durationSec)/60)+" Min."):"");
+    if(!it.audio||typeof it.audio!=="object")it.audio={};
+    it.audio[state.age]={...(it.audio[state.age]||{}),url:d.url||"",durationSec:d.durationSec||0,status:"ready"};
+    render();
+  }catch(e){
+    if(status)status.textContent=e.message||String(e);
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent=old}
+  }
 }
 function loadSelected(focus=true){
   const it=current();if(!it)return;
