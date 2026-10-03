@@ -2849,17 +2849,17 @@ html:not([data-view="today"]) .view.active{
       <div class="page-head quran-page-head">
         <div class="kicker">HÖREN · MITSPRECHEN · LERNEN</div>
         <h2>Mein Qurʾān</h2>
-        <p>Eine Sūrah antippen, zuhören und in deinem Tempo weiterlernen.</p>
+        <p>Kein kompliziertes Menü. Eine Sūrah antippen und loslegen.</p>
       </div>
       <div class="quran-hero">
         <div class="quran-hero-stage" aria-hidden="true"></div>
         <div class="quran-hero-copy">
-          <div class="quran-hero-eyebrow">DEIN LERNWEG</div>
+          <div class="quran-hero-eyebrow">DEINE QURʾĀN-REISE</div>
           <h3>Deine Qurʾān-Reise</h3>
           <p>Höre eine Āyah, sprich danach selbst mit und gehe weiter, wenn du bereit bist.</p>
         </div>
         <div class="quran-actions">
-          <button class="quran-action" id="quickLearn112"><div class="qa-icon"></div><strong>Mitsprechen</strong><small>Starte mit al-Iḫlāṣ</small></button>
+          <button class="quran-action" id="quickLearn112"><div class="qa-icon"></div><strong>Mitrezitieren</strong><small>Starte mit al-Iḫlāṣ</small></button>
           <button class="quran-action" id="resumeQuran"><div class="qa-icon"></div><strong>Weiterlernen</strong><small id="resumeQuranText">dein letzter Vers</small></button>
         </div>
       </div>
@@ -3167,7 +3167,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-tab1053";
+const KIDS_BUILD_ID="kids-shell-v12-tab1054";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -3542,7 +3542,7 @@ function renderKidsSurahs(){
     var card=document.createElement("button");
     card.className="surah-card";
     card.dataset.surah=String(s.id);
-    card.innerHTML='<div class="num">SŪRAH '+s.id+'</div><div class="ar" data-surah-ar="'+s.id+'">…</div><strong>'+s.label+'</strong><small>'+s.hint+' · antippen & loslegen</small>';
+    card.innerHTML='<div class="num">SŪRAH '+s.id+'</div><div class="ar" data-surah-ar="'+s.id+'">…</div><strong>'+s.label+'</strong><small>'+s.hint+' · antippen & loslegen</small><span class="surah-go" aria-hidden="true">›</span>';
     card.addEventListener("click",function(){openSurah(s.id,0,"learn")});
     grid.appendChild(card);
   });
@@ -6612,7 +6612,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1053",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1054",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
@@ -6711,66 +6711,70 @@ html.kids-ios-app,html.dar-ios-native-app.kids-ios-app,html.kids-ios-app body{
 }
 html.kids-ios-app .kids-update-layer{display:none!important}
 
-/* KIDS_QURAN_EDGE_V1053 — responsive, child-first Qurʾān home */
-#view-quran{--q-gold:#f3cf73;--q-ink:#f8fbff;--q-muted:rgba(238,247,251,.72);--q-line:rgba(126,210,219,.18);padding-bottom:34px!important}
-#view-quran .quran-page-head{margin-top:0!important;margin-bottom:18px!important;padding:24px max(18px,env(safe-area-inset-left)) 22px!important;border-radius:0 0 26px 26px!important;background:radial-gradient(circle at 88% 18%,rgba(243,207,115,.16),transparent 22%),radial-gradient(circle at 10% 90%,rgba(93,201,195,.12),transparent 30%),linear-gradient(145deg,#0b3d57,#08273f 74%)!important}
-#view-quran .quran-page-head .kicker{display:inline-flex!important;align-items:center;min-height:34px;padding:0 14px;border:1px solid rgba(243,207,115,.28);border-radius:999px;background:rgba(4,28,42,.34);color:#ffe49a!important;font-size:10px!important;letter-spacing:.17em!important}
-#view-quran .quran-page-head h2{margin:13px 0 8px!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(38px,10vw,58px)!important;font-weight:700!important;line-height:.94!important;letter-spacing:-.045em!important}
-#view-quran .quran-page-head p{max-width:680px!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(15px,3.8vw,18px)!important;font-weight:500!important;line-height:1.45!important;color:rgba(255,255,255,.78)!important}
-#view-quran .quran-hero{display:grid!important;grid-template-columns:1fr;gap:0!important;padding:0!important;min-height:0!important;border:1px solid var(--q-line)!important;border-radius:30px!important;overflow:hidden!important;background:#08263a!important;box-shadow:0 22px 52px rgba(0,0,0,.22)!important}
+/* KIDS_QURAN_EDGE_V1054 — spacious, child-first, real responsive hierarchy */
+#view-quran{--q-gold:#f3cf73;--q-gold-soft:#ffe39a;--q-ink:#f8fbff;--q-muted:rgba(238,247,251,.72);--q-line:rgba(126,210,219,.20);--q-card:#0a2a3f;--q-card-2:#0d3449;padding:0 0 calc(164px + env(safe-area-inset-bottom,0px))!important}
+#view-quran .quran-page-head{position:relative;isolation:isolate;margin-top:0!important;margin-bottom:22px!important;padding:26px max(20px,env(safe-area-inset-left)) 25px!important;border-radius:0 0 30px 30px!important;overflow:hidden!important;background:radial-gradient(circle at 88% 18%,rgba(243,207,115,.13),transparent 23%),radial-gradient(circle at 11% 86%,rgba(93,201,195,.11),transparent 31%),linear-gradient(145deg,#0b3d57 0%,#082a42 72%,#071f33 100%)!important;border-bottom:1px solid rgba(126,210,219,.18)!important}
+#view-quran .quran-page-head::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;background:radial-gradient(circle at 78% 23%,rgba(255,230,160,.34) 0 1px,transparent 2px),radial-gradient(circle at 87% 47%,rgba(255,255,255,.22) 0 1px,transparent 2px),radial-gradient(circle at 71% 67%,rgba(126,210,219,.24) 0 1px,transparent 2px)}
+#view-quran .quran-page-head .kicker{display:inline-flex!important;align-items:center;min-height:36px;padding:0 15px;border:1px solid rgba(243,207,115,.30);border-radius:999px;background:rgba(4,28,42,.36);color:var(--q-gold-soft)!important;font-size:10px!important;letter-spacing:.17em!important;white-space:nowrap}
+#view-quran .quran-page-head h2{margin:15px 0 9px!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(40px,10.5vw,62px)!important;font-weight:700!important;line-height:.96!important;letter-spacing:-.045em!important}
+#view-quran .quran-page-head p{margin:0!important;max-width:720px!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(15px,4vw,19px)!important;font-weight:500!important;line-height:1.5!important;color:rgba(255,255,255,.79)!important}
+#view-quran .quran-hero{display:grid!important;grid-template-columns:1fr!important;gap:0!important;padding:0!important;min-height:0!important;margin:0!important;overflow:hidden!important;border:1px solid var(--q-line)!important;border-radius:30px!important;background:var(--q-card)!important;box-shadow:0 22px 52px rgba(0,0,0,.22)!important}
 #view-quran .quran-hero::before,#view-quran .quran-hero::after{display:none!important}
-#view-quran .quran-hero-stage{position:relative;min-height:clamp(210px,55vw,390px);overflow:hidden;background:#0b3145}
-#view-quran .quran-hero-stage::before{content:"";position:absolute;inset:-2px;background:url("/kids/assets/kids-art/quran-home-v1053.jpg") center/cover no-repeat;transform:scale(1.018);filter:saturate(1.03) contrast(1.015) brightness(.95)}
-#view-quran .quran-hero-stage::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,20,31,.02),rgba(4,20,31,.06) 68%,rgba(4,20,31,.18));pointer-events:none}
-#view-quran .quran-hero-copy{padding:18px 18px 8px;background:radial-gradient(circle at 92% 0%,rgba(243,207,115,.08),transparent 28%),linear-gradient(180deg,#0b3045,#09273a)}
-#view-quran .quran-hero-eyebrow{margin-bottom:7px;color:#9fdbd6;font-size:10px;font-weight:950;letter-spacing:.16em}
-#view-quran .quran-hero h3{margin:0 0 6px!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(28px,7.5vw,42px)!important;line-height:1!important;letter-spacing:-.035em!important;text-shadow:none!important}
-#view-quran .quran-hero p{margin:0!important;max-width:680px!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(14px,3.6vw,17px)!important;font-weight:500!important;line-height:1.5!important;color:var(--q-muted)!important;text-shadow:none!important}
-#view-quran .quran-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin:0!important;padding:14px 16px 16px!important;background:#09273a}
-#view-quran .quran-action{min-height:100px!important;padding:14px!important;border-radius:22px!important;display:grid!important;grid-template-columns:42px minmax(0,1fr)!important;grid-template-rows:auto auto!important;column-gap:10px!important;align-items:center!important;text-align:left!important;background:radial-gradient(circle at 84% 8%,rgba(243,207,115,.09),transparent 28%),linear-gradient(145deg,rgba(17,66,84,.96),rgba(8,43,63,.96))!important;border:1px solid rgba(126,210,219,.18)!important;box-shadow:inset 0 1px rgba(255,255,255,.035),0 10px 22px rgba(0,0,0,.14)!important}
-#view-quran .quran-action .qa-icon{grid-row:1 / span 2!important;width:42px!important;height:42px!important;margin:0!important;align-self:center}
-#view-quran .quran-action strong{align-self:end;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(16px,4.4vw,20px)!important;line-height:1.08!important;font-weight:650!important}
-#view-quran .quran-action small{align-self:start;margin-top:4px!important;color:rgba(255,255,255,.66)!important;font-size:11px!important;line-height:1.32!important}
-#view-quran .alphabet-entry{margin-top:18px!important;min-height:150px!important;padding:0!important;display:grid!important;grid-template-columns:minmax(118px,38%) minmax(0,1fr) 44px!important;align-items:stretch!important;gap:0!important;overflow:hidden!important;border-radius:28px!important;background:#0d3449!important;border:1px solid var(--q-line)!important}
-#view-quran .alphabet-entry-art{display:block;min-height:150px;background:linear-gradient(90deg,transparent 72%,rgba(9,42,60,.30)),url("/kids/assets/kids-art/quran-alphabet-v1053.jpg") center/cover no-repeat}
-#view-quran .alphabet-entry-copy{min-width:0;padding:18px 10px 17px 17px;align-self:center}
-#view-quran .entry-kicker{display:block;margin-bottom:6px;color:#9bd9d3;font-size:9px;font-weight:950;letter-spacing:.14em}
-#view-quran .alphabet-entry strong{font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(20px,5.5vw,28px)!important;line-height:1.05!important;font-weight:650!important}
-#view-quran .alphabet-entry small{margin-top:6px!important;font-size:12px!important;line-height:1.38!important;color:rgba(255,255,255,.67)!important}
-#view-quran .alphabet-entry .fgo{margin:0!important;align-self:center;justify-self:center;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#ffe39a!important;background:rgba(3,26,40,.42);border:1px solid rgba(243,207,115,.18)}
+#view-quran .quran-hero-stage{position:relative;min-height:clamp(184px,49vw,330px);overflow:hidden;background:#0b3145}
+#view-quran .quran-hero-stage::before{content:"";position:absolute;inset:-2px;background:url("/kids/assets/kids-art/quran-home-v1053.jpg") center 48%/cover no-repeat;transform:scale(1.012);filter:saturate(.92) contrast(1.02) brightness(.88)}
+#view-quran .quran-hero-stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(4,20,31,0),rgba(4,20,31,.06) 66%,rgba(4,20,31,.28))}
+#view-quran .quran-hero-copy{padding:22px 20px 17px!important;background:radial-gradient(circle at 92% 0%,rgba(243,207,115,.08),transparent 28%),linear-gradient(180deg,#0b3045,#09273a)}
+#view-quran .quran-hero-eyebrow{margin-bottom:8px;color:#a5ddd8;font-size:10px;font-weight:950;letter-spacing:.16em}
+#view-quran .quran-hero h3{margin:0 0 8px!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(30px,7.8vw,44px)!important;line-height:1!important;letter-spacing:-.035em!important;text-shadow:none!important}
+#view-quran .quran-hero p{margin:0!important;max-width:720px!important;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;font-size:clamp(15px,3.8vw,18px)!important;font-weight:520!important;line-height:1.55!important;color:var(--q-muted)!important;text-shadow:none!important}
+#view-quran .quran-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;margin:0!important;padding:0 18px 18px!important;background:#09273a!important}
+#view-quran .quran-action{min-height:116px!important;padding:17px 16px!important;border-radius:24px!important;display:grid!important;grid-template-columns:48px minmax(0,1fr)!important;grid-template-rows:auto auto!important;column-gap:12px!important;align-items:center!important;text-align:left!important;background:radial-gradient(circle at 88% 8%,rgba(243,207,115,.09),transparent 29%),linear-gradient(145deg,rgba(18,71,89,.98),rgba(8,43,63,.98))!important;border:1px solid rgba(126,210,219,.20)!important;box-shadow:inset 0 1px rgba(255,255,255,.04),0 12px 26px rgba(0,0,0,.15)!important}
+#view-quran .quran-action .qa-icon{grid-row:1 / span 2!important;width:48px!important;height:48px!important;margin:0!important;align-self:center}
+#view-quran .quran-action strong{align-self:end;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(17px,4.5vw,21px)!important;line-height:1.1!important;font-weight:650!important}
+#view-quran .quran-action small{align-self:start;margin-top:5px!important;color:rgba(255,255,255,.68)!important;font-size:12px!important;line-height:1.35!important}
+#view-quran .alphabet-entry{margin-top:20px!important;min-height:132px!important;padding:12px!important;display:grid!important;grid-template-columns:100px minmax(0,1fr) 46px!important;align-items:center!important;gap:14px!important;overflow:hidden!important;border-radius:28px!important;background:radial-gradient(circle at 8% 50%,rgba(93,201,195,.10),transparent 32%),linear-gradient(145deg,#0d3449,#0a2b41)!important;border:1px solid var(--q-line)!important;box-shadow:0 14px 34px rgba(0,0,0,.16)!important}
+#view-quran .alphabet-entry-art{display:block!important;width:100%!important;height:106px!important;min-height:106px!important;border-radius:21px!important;background:linear-gradient(180deg,rgba(5,27,39,.02),rgba(5,27,39,.16)),url("/kids/assets/kids-art/quran-alphabet-v1053.jpg") center/cover no-repeat!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+#view-quran .alphabet-entry-copy{min-width:0;padding:5px 0!important;align-self:center}
+#view-quran .entry-kicker{display:block;margin-bottom:7px;color:#9bd9d3;font-size:9px;font-weight:950;letter-spacing:.14em}
+#view-quran .alphabet-entry strong{font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(21px,5.6vw,29px)!important;line-height:1.06!important;font-weight:650!important}
+#view-quran .alphabet-entry small{display:block;margin-top:7px!important;font-size:12px!important;line-height:1.42!important;color:rgba(255,255,255,.68)!important}
+#view-quran .alphabet-entry .fgo{margin:0!important;align-self:center;justify-self:center;width:42px!important;height:42px!important;border-radius:50%;display:grid;place-items:center;color:var(--q-gold-soft)!important;background:rgba(3,26,40,.48);border:1px solid rgba(243,207,115,.24);font-size:26px!important}
 #view-quran .alphabet-entry .ficon{display:none!important}
-#view-quran .quran-section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:30px 0 13px}
+#view-quran .quran-section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:38px 2px 16px!important}
 #view-quran .quran-section-head>div{min-width:0}
-#view-quran .quran-section-head .section-title{margin:0!important;padding-bottom:8px!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(25px,6.2vw,34px)!important;font-weight:650!important;letter-spacing:-.03em!important}
-#view-quran .quran-section-head p{margin:7px 0 0!important;color:rgba(255,255,255,.60)!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:12px!important;line-height:1.4!important}
-#view-quran .quran-section-chip{flex:none;min-height:32px;padding:0 11px;display:inline-flex;align-items:center;border-radius:999px;color:#ffe39a;font-size:9px;font-weight:900;letter-spacing:.06em;border:1px solid rgba(243,207,115,.22);background:rgba(243,207,115,.07)}
-#view-quran .surah-banner,#view-quran .verse-banner{position:relative;overflow:hidden;width:100%;border-radius:28px!important;border:1px solid var(--q-line)!important;box-shadow:0 16px 38px rgba(0,0,0,.18)!important}
-#view-quran .surah-banner{height:clamp(150px,38vw,250px)!important;margin:0 0 16px!important;background:linear-gradient(180deg,rgba(5,27,39,.02),rgba(5,27,39,.10) 68%,rgba(5,27,39,.24)),url("/kids/assets/kids-art/quran-surahs-v1053.jpg") center/cover no-repeat!important}
-#view-quran .verse-banner{height:clamp(138px,34vw,220px);margin:0 0 14px;background:linear-gradient(90deg,rgba(5,27,39,.08),rgba(5,27,39,.02) 58%,rgba(5,27,39,.10)),url("/kids/assets/kids-art/quran-verses-v1053.jpg") center/cover no-repeat}
-#view-quran .surah-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;padding-top:0!important}
+#view-quran .quran-section-head .section-title{margin:0!important;padding:0!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(28px,7vw,38px)!important;font-weight:650!important;line-height:1.04!important;letter-spacing:-.03em!important}
+#view-quran .quran-section-head p{margin:8px 0 0!important;color:rgba(255,255,255,.61)!important;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;font-size:13px!important;line-height:1.42!important}
+#view-quran .quran-section-chip{flex:none;min-height:34px;padding:0 12px;display:inline-flex;align-items:center;border-radius:999px;color:var(--q-gold-soft);font-size:9px;font-weight:900;letter-spacing:.07em;border:1px solid rgba(243,207,115,.24);background:rgba(243,207,115,.07)}
+#view-quran .surah-banner,#view-quran .verse-banner{display:none!important}
+#view-quran .surah-grid{display:grid!important;grid-template-columns:1fr!important;gap:14px!important;padding:0!important}
 #view-quran .surah-grid::before{display:none!important}
-#view-quran .surah-card{min-height:0!important;aspect-ratio:1/.92;padding:15px!important;border-radius:25px!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;text-align:left!important;overflow:hidden!important;border:1px solid rgba(255,255,255,.13)!important}
-#view-quran .surah-card::after{background:linear-gradient(180deg,rgba(2,16,27,.06) 18%,rgba(2,16,27,.24) 56%,rgba(2,16,27,.88) 100%)!important}
-#view-quran .surah-card .num{position:absolute!important;left:14px;top:13px;font-size:9px!important;letter-spacing:.13em!important;color:rgba(255,255,255,.77)!important}
-#view-quran .surah-card .ar{margin:0 0 auto auto!important;max-width:80%!important;font-size:clamp(26px,7vw,38px)!important;line-height:1.25!important}
-#view-quran .surah-card strong{margin-top:12px!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(18px,4.8vw,24px)!important;line-height:1.08!important}
-#view-quran .surah-card small{margin-top:5px!important;font-size:10.5px!important;line-height:1.3!important;color:rgba(255,255,255,.72)!important}
-#view-quran .verse-strip{display:grid!important;grid-template-columns:1fr!important;gap:11px!important}
-#view-quran .verse-card{min-height:96px!important;padding:15px 14px!important;gap:13px!important;border-radius:23px!important;background:radial-gradient(circle at 90% 0%,rgba(243,207,115,.07),transparent 30%),linear-gradient(135deg,rgba(17,67,84,.78),rgba(7,42,62,.86))!important;border:1px solid var(--q-line)!important}
-#view-quran .verse-card strong{font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(16px,4.5vw,20px)!important;line-height:1.14!important}
-#view-quran .verse-card small{margin-top:5px!important;font-size:11px!important;color:rgba(255,255,255,.62)!important}
-#view-quran .full-quran-listen{margin-top:14px!important;min-height:94px!important;padding:15px 16px!important;border-radius:25px!important;background:radial-gradient(circle at 86% 0%,rgba(243,207,115,.10),transparent 30%),linear-gradient(135deg,#174d61,#0b344d)!important;border:1px solid var(--q-line)!important}
-#view-quran .full-quran-listen strong{font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(18px,5vw,23px)!important;font-weight:650!important}
-#view-quran .full-quran-listen small{font-size:11.5px!important}
-#view-quran .gentle-note{margin:20px 8px 0!important;padding:0 0 10px!important;color:rgba(255,255,255,.46)!important;font-size:12px!important;line-height:1.5!important}
-@media (prefers-reduced-motion:no-preference){#view-quran.active .quran-hero-stage::before{animation:quranHeroBreath 18s ease-in-out infinite alternate}#view-quran.active .quran-page-head::before{animation:quranStars 8s ease-in-out infinite alternate}}
-@keyframes quranHeroBreath{from{transform:scale(1.018) translate3d(0,0,0)}to{transform:scale(1.045) translate3d(-.7%,.3%,0)}}
-@keyframes quranStars{from{opacity:.22}to{opacity:.42}}
-@media(max-width:699px){#view-quran .quran-page-head{margin-left:calc(0px - max(16px,env(safe-area-inset-left)))!important;margin-right:calc(0px - max(16px,env(safe-area-inset-right)))!important}#view-quran .quran-hero{margin-left:-6px!important;margin-right:-6px!important}}
-@media(max-width:360px){#view-quran .quran-actions{grid-template-columns:1fr!important}#view-quran .alphabet-entry{grid-template-columns:108px minmax(0,1fr) 38px!important}#view-quran .alphabet-entry-copy{padding-left:13px}#view-quran .quran-section-chip{display:none}}
-@media(min-width:700px){#view-quran .quran-page-head{margin-left:calc(0px - max(22px,env(safe-area-inset-left)))!important;margin-right:calc(0px - max(22px,env(safe-area-inset-right)))!important;padding:32px max(30px,env(safe-area-inset-left)) 30px!important;border-radius:0 0 34px 34px!important}#view-quran .quran-hero{grid-template-columns:minmax(0,1.35fr) minmax(320px,.85fr)!important;grid-template-rows:auto 1fr!important;border-radius:34px!important}#view-quran .quran-hero-stage{grid-column:1;grid-row:1/span 2;min-height:390px}#view-quran .quran-hero-copy{grid-column:2;grid-row:1;padding:30px 28px 12px!important;display:flex;flex-direction:column;justify-content:end}#view-quran .quran-actions{grid-column:2;grid-row:2;grid-template-columns:1fr!important;align-content:start;padding:14px 24px 24px!important}#view-quran .quran-action{min-height:92px!important}#view-quran .alphabet-entry{grid-template-columns:minmax(260px,34%) minmax(0,1fr) 56px!important;min-height:190px!important}#view-quran .alphabet-entry-art{min-height:190px}#view-quran .alphabet-entry-copy{padding:24px 18px 24px 24px}#view-quran .surah-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}#view-quran .surah-card{aspect-ratio:1/.88}#view-quran .verse-strip{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}#view-quran .verse-card{min-height:128px!important;align-items:flex-start!important}}
-@media(min-width:1100px){#view-quran .surah-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}#view-quran .quran-hero-stage{min-height:430px}}
-/* KIDS_QURAN_EDGE_V1053_END */
+#view-quran .surah-card{position:relative!important;min-height:172px!important;aspect-ratio:auto!important;padding:48px 62px 18px calc(42% + 18px)!important;border-radius:28px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:stretch!important;text-align:left!important;overflow:hidden!important;border:1px solid rgba(126,210,219,.20)!important;background:#08283c!important;box-shadow:0 15px 34px rgba(0,0,0,.18)!important}
+#view-quran .surah-card::before{content:""!important;display:block!important;position:absolute!important;z-index:0!important;inset:0 auto 0 0!important;width:42%!important;height:100%!important;background-image:var(--art)!important;background-size:cover!important;background-position:var(--art-pos,center)!important;background-repeat:no-repeat!important;transform:scale(1.012)!important;filter:saturate(.94) contrast(1.01) brightness(.90)!important;opacity:1!important}
+#view-quran .surah-card::after{content:""!important;display:block!important;position:absolute!important;inset:0!important;z-index:1!important;pointer-events:none!important;background:linear-gradient(90deg,rgba(4,22,34,.05) 0%,rgba(4,22,34,.14) 34%,rgba(8,40,60,.92) 44%,#08283c 54%,#08283c 100%)!important}
+#view-quran .surah-card .num,#view-quran .surah-card .ar,#view-quran .surah-card strong,#view-quran .surah-card small,#view-quran .surah-card .surah-go{position:relative!important;z-index:3!important;text-shadow:none!important}
+#view-quran .surah-card .num{position:absolute!important;left:calc(42% + 18px)!important;top:17px!important;right:58px!important;font-size:10px!important;line-height:1!important;letter-spacing:.13em!important;color:rgba(255,255,255,.72)!important}
+#view-quran .surah-card .ar{margin:0 0 5px!important;max-width:100%!important;align-self:stretch!important;text-align:right!important;font-family:"Noto Naskh Arabic","Geeza Pro",serif!important;font-size:clamp(29px,7.4vw,38px)!important;line-height:1.18!important;color:#fff!important}
+#view-quran .surah-card strong{margin:0!important;font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(21px,5.6vw,28px)!important;line-height:1.08!important;font-weight:650!important}
+#view-quran .surah-card small{margin-top:7px!important;max-width:100%!important;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;font-size:12px!important;line-height:1.35!important;color:rgba(255,255,255,.69)!important}
+#view-quran .surah-card .surah-go{position:absolute!important;right:14px!important;top:50%!important;transform:translateY(-50%)!important;width:42px!important;height:42px!important;display:grid!important;place-items:center!important;border-radius:50%!important;color:var(--q-gold-soft)!important;background:rgba(3,25,39,.62)!important;border:1px solid rgba(243,207,115,.28)!important;font-size:28px!important;line-height:1!important}
+#view-quran .verse-strip{display:grid!important;grid-template-columns:1fr!important;gap:13px!important}
+#view-quran .verse-card{position:relative!important;min-height:116px!important;padding:18px 56px 18px 18px!important;gap:15px!important;border-radius:26px!important;background:radial-gradient(circle at 90% 0%,rgba(243,207,115,.07),transparent 30%),linear-gradient(135deg,rgba(17,67,84,.88),rgba(7,42,62,.95))!important;border:1px solid var(--q-line)!important;box-shadow:0 13px 30px rgba(0,0,0,.15)!important}
+#view-quran .verse-card::after{content:"›";position:absolute;right:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;display:grid;place-items:center;border-radius:50%;color:var(--q-gold-soft);border:1px solid rgba(243,207,115,.22);background:rgba(3,26,40,.42);font-size:26px}
+#view-quran .verse-card .verse-badge{width:56px!important;height:56px!important;flex:0 0 56px!important}
+#view-quran .verse-card strong{font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(18px,4.8vw,23px)!important;line-height:1.16!important}
+#view-quran .verse-card small{margin-top:6px!important;font-size:12px!important;color:rgba(255,255,255,.64)!important}
+#view-quran .full-quran-listen{margin-top:16px!important;min-height:112px!important;padding:18px 58px 18px 18px!important;border-radius:28px!important;background:radial-gradient(circle at 86% 0%,rgba(243,207,115,.10),transparent 30%),linear-gradient(135deg,#174d61,#0b344d)!important;border:1px solid var(--q-line)!important;box-shadow:0 14px 34px rgba(0,0,0,.16)!important}
+#view-quran .full-quran-listen .ficon{width:58px!important;height:58px!important}
+#view-quran .full-quran-listen strong{font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(19px,5vw,25px)!important;font-weight:650!important;line-height:1.12!important}
+#view-quran .full-quran-listen small{margin-top:6px!important;font-size:12px!important;line-height:1.38!important}
+#view-quran .gentle-note{margin:22px 10px 0!important;padding:0!important;color:rgba(255,255,255,.48)!important;font-size:12.5px!important;line-height:1.55!important}
+@media(max-width:430px){#view-quran .quran-page-head{margin-left:calc(0px - max(16px,env(safe-area-inset-left)))!important;margin-right:calc(0px - max(16px,env(safe-area-inset-right)))!important}#view-quran .quran-hero{margin-left:-6px!important;margin-right:-6px!important}#view-quran .quran-section-chip{display:none!important}}
+@media(max-width:390px){#view-quran .quran-actions{grid-template-columns:1fr!important}#view-quran .quran-action{min-height:94px!important}#view-quran .alphabet-entry{grid-template-columns:86px minmax(0,1fr) 40px!important;gap:11px!important;padding:10px!important}#view-quran .alphabet-entry-art{height:94px!important;min-height:94px!important}#view-quran .entry-kicker{display:none!important}#view-quran .surah-card{min-height:166px!important;padding-left:calc(39% + 15px)!important;padding-right:56px!important}#view-quran .surah-card::before{width:39%!important}#view-quran .surah-card .num{left:calc(39% + 15px)!important}}
+@media(min-width:700px){#view-quran{padding-bottom:calc(172px + env(safe-area-inset-bottom,0px))!important}#view-quran .quran-page-head{margin-left:calc(0px - max(22px,env(safe-area-inset-left)))!important;margin-right:calc(0px - max(22px,env(safe-area-inset-right)))!important;padding:34px max(32px,env(safe-area-inset-left)) 32px!important;border-radius:0 0 36px 36px!important}#view-quran .quran-hero{grid-template-columns:minmax(0,1.25fr) minmax(330px,.9fr)!important;grid-template-rows:auto 1fr!important;border-radius:36px!important}#view-quran .quran-hero-stage{grid-column:1;grid-row:1/span 2;min-height:410px}#view-quran .quran-hero-copy{grid-column:2;grid-row:1;padding:34px 30px 16px!important;display:flex;flex-direction:column;justify-content:end}#view-quran .quran-actions{grid-column:2;grid-row:2;grid-template-columns:1fr!important;align-content:start;padding:0 28px 28px!important}#view-quran .quran-action{min-height:96px!important}#view-quran .alphabet-entry{grid-template-columns:148px minmax(0,1fr) 54px!important;min-height:160px!important;padding:14px!important}#view-quran .alphabet-entry-art{height:132px!important;min-height:132px!important}#view-quran .surah-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}#view-quran .surah-card{min-height:184px!important}#view-quran .verse-strip{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}#view-quran .verse-card{min-height:142px!important;align-items:flex-start!important}}
+@media(min-width:1180px){#view-quran .surah-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}#view-quran .quran-hero-stage{min-height:440px}}
+@media(prefers-reduced-motion:no-preference){#view-quran.active .quran-hero-stage::before{animation:quranHeroBreathV1054 20s ease-in-out infinite alternate}}
+@keyframes quranHeroBreathV1054{from{transform:scale(1.012) translate3d(0,0,0)}to{transform:scale(1.026) translate3d(-.25%,.15%,0)}}
+/* KIDS_QURAN_EDGE_V1054_END */
 </style>
 <script src="/kids/prophet-stories.js?v=21"></script>
 </html>
