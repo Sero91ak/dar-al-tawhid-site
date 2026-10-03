@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1077",
-  "label": "KIDS · V1.07.3",
-  "releasedAt": "2026-10-03T18:43:00.000Z",
-  "note": "V1.07.3: Der Einstieg zu den Prophetengeschichten nutzt jetzt ein neu erzeugtes, realistisch-cineastisches Wüsten-/Oasenmotiv statt der bisherigen flachen Illustration. Keine Personen, kein Text im Bild; responsiver Zuschnitt bleibt auf Smartphone und Tablet erhalten.",
+  "buildId": "kids-shell-v12-sahaba1078",
+  "label": "KIDS · V1.07.4",
+  "releasedAt": "2026-10-03T18:49:58.328Z",
+  "note": "V1.07.4: Startbereich „Was möchtest du machen?“ wieder als echte ovale Kapseln statt Kasten-Karten. Bilder, Texte und Funktionen bleiben erhalten; Layout für kleine/große Smartphones und Tablets abgesichert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1077",
+    "serviceWorkerCache": "v1078",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -154,6 +154,8 @@
     "mubashshirunSwipeBack": true,
     "prophetStoriesBundleVersion": 23,
     "storyCategoryBackgrounds": "prophets-adobe-v22+sahabah-runway-v10",
-    "mubashshirunCardFocalCentering": "subject-aware-responsive-v1"
+    "mubashshirunCardFocalCentering": "subject-aware-responsive-v1",
+    "homeChoices": "oval-capsule-restored",
+    "homeChoiceLayoutVersion": "v1078"
   }
 }
