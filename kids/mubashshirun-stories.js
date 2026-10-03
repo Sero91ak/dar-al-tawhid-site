@@ -101,8 +101,8 @@ function ensureUi(){
       '<div class="ms-detail-shell">'+
         '<header class="ms-detail-head"><button id="msDetailBack" class="ms-back" type="button" aria-label="Zurück zur Übersicht">‹</button><div><span id="msDetailKicker">ṢAḤĀBĪ</span><strong id="msDetailName"></strong></div></header>'+
         '<div class="ms-detail-hero">'+
-          '<div class="ms-detail-number" id="msDetailNumber"></div>'+
-          '<div class="ms-detail-copy"><div class="ms-detail-ar" id="msDetailArabic" dir="rtl"></div><h2 id="msDetailTitle"></h2><p id="msDetailSummary"></p><div id="msDetailMeta" class="ms-detail-meta"></div></div>'+
+          '<div class="ms-detail-visual"><img id="msDetailArt" src="" alt="" decoding="async"><span class="ms-detail-number" id="msDetailNumber"></span></div>'+
+          '<div class="ms-detail-copy"><div class="ms-detail-ar" id="msDetailArabic" dir="rtl"></div><h2 id="msDetailTitle"></h2><p id="msDetailSummary"></p><div id="msDetailMeta" class="ms-detail-meta"></div><small id="msVisualNote" class="ms-visual-note"></small></div>'+
         '</div>'+
         '<div class="ms-detail-modes ms-modes"><button data-ms-mode="both" type="button">Lesen &amp; Hören</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
         '<div id="msPlayer" class="ms-player"><button id="msPlay" type="button">Hören</button><div class="ms-audio-track"><span id="msProgress"></span></div><small id="msVoiceNote"></small></div>'+
@@ -171,16 +171,24 @@ function renderList(){
   const grid=$("#msGrid");if(!grid)return;
   grid.innerHTML=items.map((item,i)=>{
     const src=(item.sourceRefs||[]).filter(x=>!/Tirmidhī 3747/.test(x));
+    const art=String(item.cover||item.hero||"");
     return '<button class="ms-card" data-ms-id="'+esc(item.id)+'" type="button">'+
-      '<span class="ms-card-top"><span class="ms-card-index">'+String(i+1).padStart(2,"0")+'</span><span class="ms-card-proof">'+esc(sourceType(src[0]||item.sourceRefs?.[0]||""))+'</span></span>'+
-      '<span class="ms-card-ar" dir="rtl">'+esc(item.nameAr||"")+'</span>'+
-      '<strong>'+esc(item.name)+'</strong>'+
-      '<span class="ms-card-summary">'+esc(item.summary||"")+'</span>'+
-      '<span class="ms-card-foot"><span>'+esc(duration(item))+' · Alter '+esc(age())+'</span><b aria-hidden="true">›</b></span>'+
+      '<span class="ms-card-visual">'+
+        (art?'<img class="ms-card-art" src="'+esc(art)+'" alt="" decoding="async" loading="'+(i<3?"eager":"lazy")+'">':'')+
+        '<span class="ms-card-shade" aria-hidden="true"></span>'+
+        '<span class="ms-card-top"><span class="ms-card-index">'+String(i+1).padStart(2,"0")+'</span><span class="ms-card-proof">'+esc(sourceType(src[0]||item.sourceRefs?.[0]||""))+'</span></span>'+
+      '</span>'+
+      '<span class="ms-card-body">'+
+        '<span class="ms-card-ar" dir="rtl">'+esc(item.nameAr||"")+'</span>'+
+        '<strong>'+esc(item.name)+'</strong>'+
+        '<span class="ms-card-summary">'+esc(item.summary||"")+'</span>'+
+        '<span class="ms-card-foot"><span>'+esc(duration(item))+' · Alter '+esc(age())+'</span><b aria-hidden="true">›</b></span>'+
+      '</span>'+
       (done(item.id)?'<span class="ms-card-done">✓</span>':'')+
     '</button>';
   }).join("");
   grid.querySelectorAll("[data-ms-id]").forEach(b=>b.addEventListener("click",()=>openDetail(b.dataset.msId)));
+  grid.querySelectorAll("img.ms-card-art").forEach(img=>img.addEventListener("error",()=>{img.closest(".ms-card-visual")?.classList.add("no-art");img.remove()},{once:true}));
   if($("#msDoneCount"))$("#msDoneCount").textContent=String(doneCount());
   if($("#msAgeLabel"))$("#msAgeLabel").textContent="Alter "+age();
 }
@@ -191,6 +199,13 @@ function renderDetail(){
   $("#msDetailKicker").textContent="ṢAḤĀBĪ · "+String(active.displayOrder||"").padStart(2,"0")+" / 10";
   $("#msDetailName").textContent=active.name;
   $("#msDetailNumber").textContent=String(active.displayOrder||"");
+  const art=$("#msDetailArt");
+  if(art){
+    art.style.display="block";
+    art.src=active.hero||active.cover||"";
+    art.onerror=()=>{art.style.display="none"};
+  }
+  const vn=$("#msVisualNote");if(vn)vn.textContent=active.visualDisclaimer||"";
   $("#msDetailArabic").textContent=arabic(active);
   $("#msDetailTitle").textContent=active.name;
   $("#msDetailSummary").textContent=active.summary||"";
