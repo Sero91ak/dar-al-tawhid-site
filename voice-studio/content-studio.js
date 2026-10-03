@@ -187,6 +187,7 @@ function navHtml(){
   return `<nav class="content-studio-nav" aria-label="Studio Bereiche und Schnellaktionen">
     <div class="cs-nav-tabs">
       <button id="csProphetTab" class="cs-tab" type="button">Propheten</button>
+      <button id="csSahabaTab" class="cs-tab" type="button">Ṣaḥābah · 10</button>
       <button class="cs-tab" data-cs-kind="story">Geschichten</button>
       <button class="cs-tab" data-cs-kind="quiz">Quiz</button>
       <button class="cs-tab" data-cs-kind="game">Spiele</button>
