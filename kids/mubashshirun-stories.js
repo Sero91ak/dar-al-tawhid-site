@@ -25,6 +25,8 @@ function done(id){try{return localStorage.getItem(DONE_PREFIX+id)==="1"}catch(_)
 function markDone(id){try{localStorage.setItem(DONE_PREFIX+id,"1")}catch(_){}renderCards()}
 function doneCount(){return items.reduce((n,x)=>n+(done(x.id)?1:0),0)}
 function art(item,kind="cover"){return String(item?.[kind]||item?.cover||"").trim()}
+function coverPos(item){return String(item?.coverPosition||"50% 50%").trim()}
+function heroPos(item){return String(item?.heroPosition||"50% 50%").trim()}
 function installSwipeBack(el,onBack){
   if(!el||el.dataset.swipeBackReady==="1")return;
   el.dataset.swipeBackReady="1";
@@ -87,7 +89,7 @@ function renderCards(){
     const t=textFor(item),src=art(item);
     return '<button class="ms-story-row" type="button" data-ms-id="'+esc(item.id)+'">'+
       '<span class="ms-row-visual" aria-hidden="true">'+
-        (src?'<img src="'+esc(src)+'" alt="" decoding="async" loading="'+(index<4?"eager":"lazy")+'">':'')+
+        (src?'<img src="'+esc(src)+'" alt="" style="object-position:'+esc(coverPos(item))+'" decoding="async" loading="'+(index<4?"eager":"lazy")+'">':'')+
         '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span>'+
       '</span>'+
       '<span class="ms-row-copy">'+
@@ -219,7 +221,7 @@ function closeStory(){stopAudio();$("#msModal")?.classList.remove("open");unlock
 function renderActive(){
   if(!active)return;
   activeText=textFor(active);
-  const hero=$("#msHero");if(hero){hero.src=art(active,"hero");hero.onerror=()=>{hero.onerror=null;hero.src=art(active,"cover")}}
+  const hero=$("#msHero");if(hero){hero.src=art(active,"hero");hero.style.objectPosition=heroPos(active);hero.onerror=()=>{hero.onerror=null;hero.src=art(active,"cover")}}
   $("#msTitle").textContent=active.name;
   $("#msArabic").textContent=(active.nameAr||"")+" رضي الله عنه";
   $("#msSummary").textContent=active.summary||"";
