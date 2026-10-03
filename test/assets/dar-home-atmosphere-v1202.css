@@ -837,12 +837,12 @@ html.dar-home-v1194 body.is-home-route #appView.view > *{
   z-index:1!important;
 }
 html.dar-home-v1194:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"]) body.is-home-route #appView.view::before{
-  opacity:.34!important;
-  filter:saturate(.58) sepia(.06) brightness(1.13)!important;
+  opacity:.66!important;
+  filter:saturate(.72) sepia(.04) contrast(.96) brightness(1.03)!important;
   background:
-    linear-gradient(180deg,rgba(249,246,238,.58) 0%,rgba(249,246,238,.28) 18%,rgba(249,246,238,.20) 52%,rgba(249,246,238,.56) 80%,rgba(249,246,238,.94) 100%),
-    linear-gradient(90deg,rgba(249,246,238,.62) 0%,rgba(249,246,238,.26) 58%,rgba(249,246,238,.10) 100%),
-    url("/test/assets/home-v1194/study-runway.jpg?v=1210") 62% 32%/cover no-repeat!important;
+    linear-gradient(180deg,rgba(249,246,238,.34) 0%,rgba(249,246,238,.14) 18%,rgba(249,246,238,.09) 52%,rgba(249,246,238,.30) 80%,rgba(249,246,238,.78) 100%),
+    linear-gradient(90deg,rgba(249,246,238,.34) 0%,rgba(249,246,238,.13) 58%,rgba(249,246,238,.05) 100%),
+    url("/test/assets/home-v1194/study-runway.jpg?v=1211") 62% 32%/cover no-repeat!important;
 }
 
 /* 2 · Hero: content-driven height. The prayer capsule follows the content, not a fixed empty canvas. */
