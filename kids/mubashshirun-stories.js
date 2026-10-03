@@ -114,7 +114,7 @@ function ensureUi(){
     '<div class="ms-sheet" role="dialog" aria-modal="true" aria-labelledby="msTitle">'+
       '<button id="msClose" class="ms-close" type="button" aria-label="Zurück">‹</button>'+
       '<div class="ms-scroll" id="msScroll">'+
-        '<header class="ms-detail-hero">'+
+        '<header class="ms-detail-hero" id="msDetailHero">'+
           '<img id="msHero" class="ms-detail-image" src="" alt="" decoding="async">'+
           '<span class="ms-detail-shade" aria-hidden="true"></span>'+
           '<div class="ms-detail-copy">'+
