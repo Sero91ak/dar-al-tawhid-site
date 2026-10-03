@@ -12,6 +12,7 @@ function apply(){
   const raw=app?.getAttribute("data-age")||"6–8";
   const age=normalizedAge(raw);
   if(ROOT.dataset.kidsAge!==age)ROOT.dataset.kidsAge=age;
+  if(document.body)document.body.dataset.kidsAge=age;
   ROOT.style.setProperty("--kids-current-age",'"'+age+'"');
   window.dispatchEvent(new CustomEvent("darkids:typography-age",{detail:{age,raw}}));
 }
@@ -24,8 +25,10 @@ function boot(){
     }).observe(app,{attributes:true,attributeFilter:["data-age"]});
   }
   document.addEventListener("click",e=>{
-    if(e.target.closest?.("[data-age],[data-set-age],.age-btn,.profile-age button"))setTimeout(apply,0);
+    if(e.target.closest?.("[data-age],[data-set-age],[data-join-age],.age-btn,.age-tabs button,.profile-age button"))setTimeout(apply,0);
   },true);
+  addEventListener("pageshow",apply,{passive:true});
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)apply()},{passive:true});
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 window.DARKidsTypography={sync:apply,get age(){return ROOT.dataset.kidsAge||"6-8"}};
