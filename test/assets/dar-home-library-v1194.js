@@ -202,8 +202,14 @@ function ensureFunctionalHeroSearch(){
   }
   var stale=hero.querySelector(".dt-hero-search");
   if(stale)stale.remove();
+  var existing=slot.querySelector(".home-v380-search-field");
   var field=nativeSearch.querySelector(".home-v380-search-field");
-  if(field&&field.parentNode!==slot)slot.appendChild(field);
+  if(field){
+    if(existing&&existing!==field)existing.remove();
+    if(field.parentNode!==slot)slot.appendChild(field);
+  }else{
+    field=existing;
+  }
   if(field){
     field.classList.add("dt-hero-native-search");
     var input=field.querySelector("#homeSearchInput");
