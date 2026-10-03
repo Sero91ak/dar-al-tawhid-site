@@ -392,3 +392,19 @@ html[data-theme="bordeaux"] :is(body.is-home-route .header.theme-hero-surface,bo
   body.is-quiz-route .view-head,body.is-more-route .view-head{padding-right:38%!important}
   body.is-quran-overview .qov-header{min-height:160px!important}
 }
+
+
+/* v1196 refinement: second brand line + small-screen breathing room */
+.dar-library-brandbar__sub{
+  font-family:var(--font-ui,var(--sans,system-ui,sans-serif));
+  font-size:10.5px;font-weight:650;line-height:1.2;color:color-mix(in srgb,var(--muted) 88%,var(--gold2) 12%);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+@media(max-width:390px){
+  body.is-quiz-route .quiz-menu-grid{grid-template-columns:1fr!important}
+  body.is-quiz-route .quiz-menu-card:nth-child(odd){border-right:0!important}
+  body.is-more-route .more-group-grid{grid-template-columns:1fr!important}
+  body.is-more-route .more-feature-row:nth-child(odd){border-right:0!important}
+  body.is-quiz-route .view-head,body.is-more-route .view-head{padding-right:32%!important}
+  .dar-library-brandbar__sub{font-size:9.5px}
+}
