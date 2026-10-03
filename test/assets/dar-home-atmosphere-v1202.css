@@ -350,3 +350,199 @@ html.dar-home-v1194[data-theme="light"] body.is-home-route,
 html.dar-home-v1194[data-theme="soft"] body.is-home-route{
   background-blend-mode:screen,luminosity,screen,luminosity!important;
 }
+
+
+/* v1206 · Home precision polish
+   - remove redundant Hero pseudo-tags
+   - compact Qur'an resume without covering the study scene
+   - thin transparent prayer capsule
+   - collapse empty Home height before footer
+   - center footer social actions
+   - adapt foregrounds to light/dark appearances
+*/
+html.dar-home-v1194 body.is-home-route .dt-hero-links{
+  display:none!important;
+}
+
+/* Keep the Home flow content-sized: no artificial blank field before the footer. */
+html.dar-home-v1194 body.is-home-route #appView.view,
+html.dar-home-v1194 body.is-home-route #appView .home-v380-shell{
+  min-height:0!important;
+  height:auto!important;
+}
+html.dar-home-v1194 body.is-home-route #appView .home-v380-shell{
+  padding-bottom:0!important;
+}
+html.dar-home-v1194 body.is-home-route #appView .home-v380-section:empty{
+  display:none!important;
+}
+html.dar-home-v1194 body.is-home-route .footer{
+  margin-top:0!important;
+  padding-top:18px!important;
+  text-align:center!important;
+  align-items:center!important;
+  justify-items:center!important;
+}
+html.dar-home-v1194 body.is-home-route .footer :is(
+  .social-links,.social-row,.social-grid,.footer-social,.footer-socials,
+  .footer-social-row,.footer-social-links,.footer-links
+){
+  width:100%!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  justify-content:center!important;
+  align-items:center!important;
+  text-align:center!important;
+}
+
+/* Prayer times: a complete, thin, lightly rounded transparent capsule.
+   No theme-colour fill; the Hero image remains visible through it. */
+html.dar-home-v1194 body.is-home-route #headerPrayerStatus.header-prayer-hub{
+  left:20px!important;
+  right:20px!important;
+  bottom:12px!important;
+  padding:7px 10px 8px!important;
+  border:1px solid rgba(229,205,148,.36)!important;
+  border-radius:17px!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:0 6px 22px rgba(0,0,0,.10)!important;
+  -webkit-backdrop-filter:blur(4px) saturate(.92)!important;
+  backdrop-filter:blur(4px) saturate(.92)!important;
+}
+html.dar-home-v1194 body.is-home-route #headerPrayerStatus .header-prayer-hub__main{
+  gap:6px!important;
+  background:transparent!important;
+  background-color:transparent!important;
+}
+
+/* Qur'an resume: compact glass-outline row instead of a large image/card. */
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero{
+  width:100%!important;
+  min-height:82px!important;
+  margin:14px 0 18px!important;
+  padding:12px 15px!important;
+  border:1px solid var(--dt-rule-strong)!important;
+  border-radius:18px!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.08)!important;
+  -webkit-backdrop-filter:blur(4px) saturate(.92)!important;
+  backdrop-filter:blur(4px) saturate(.92)!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero :is(
+  .home-v380-quran-hero__body,
+  .home-v380-quran-hero__resume,
+  .home-v380-quran-hero__copy,
+  .home-v380-quran-hero__content
+){
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero__body{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.18fr) minmax(132px,.82fr)!important;
+  grid-template-rows:auto auto!important;
+  column-gap:14px!important;
+  row-gap:2px!important;
+  align-items:center!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero .home-v380-kicker{
+  display:none!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero__title{
+  grid-column:1!important;
+  grid-row:1 / span 2!important;
+  align-self:center!important;
+  margin:0!important;
+  color:var(--dt-ink)!important;
+  -webkit-text-fill-color:var(--dt-ink)!important;
+  text-shadow:none!important;
+  font-size:clamp(19px,4.8vw,26px)!important;
+  line-height:1.08!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero__meta{
+  grid-column:2!important;
+  grid-row:1!important;
+  margin:0!important;
+  color:var(--dt-ink)!important;
+  -webkit-text-fill-color:var(--dt-ink)!important;
+  text-shadow:none!important;
+  font-size:10.5px!important;
+  line-height:1.28!important;
+  text-align:left!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero__when{
+  grid-column:2!important;
+  grid-row:2!important;
+  margin:1px 0 0!important;
+  color:var(--dt-muted)!important;
+  -webkit-text-fill-color:var(--dt-muted)!important;
+  text-shadow:none!important;
+  font-size:9.5px!important;
+  line-height:1.25!important;
+  text-align:left!important;
+}
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero__chevron{
+  color:var(--dt-accent)!important;
+  -webkit-text-fill-color:var(--dt-accent)!important;
+}
+
+/* Light appearances: the photographed atmosphere is softly washed by JS;
+   therefore every Hero foreground becomes dark. Dark appearances keep light ink. */
+html.dar-home-v1194:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"]) body.is-home-route :is(
+  .brand-main .brand-title-refined,
+  .brand-kicker-row small,
+  .dt-hero-kicker,
+  .dt-hero-title strong,
+  .dt-hero-title span,
+  .dt-hero-lead,
+  .dt-hero-search,
+  .dt-hero-search span,
+  #headerPrayerStatus *,
+  .top-shell>.isnad.dt-isnad,
+  .top-shell>.isnad.dt-isnad *
+){
+  color:var(--dt-ink)!important;
+  -webkit-text-fill-color:var(--dt-ink)!important;
+  text-shadow:none!important;
+}
+html.dar-home-v1194:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"]) body.is-home-route .dt-hero-search{
+  border-color:var(--dt-rule-strong)!important;
+}
+html.dar-home-v1194:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"]) body.is-home-route #headerPrayerStatus.header-prayer-hub{
+  border-color:rgba(66,55,39,.26)!important;
+  box-shadow:0 6px 20px rgba(58,47,31,.06)!important;
+}
+html.dar-home-v1194:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"]) body.is-home-route #headerPrayerStatus .header-prayer-hour{
+  color:var(--dt-accent)!important;
+  -webkit-text-fill-color:var(--dt-accent)!important;
+}
+
+@media(max-width:390px){
+  html.dar-home-v1194 body.is-home-route .home-v380-quran-hero{
+    margin-left:0!important;
+    margin-right:0!important;
+    padding:11px 13px!important;
+    border-radius:16px!important;
+  }
+  html.dar-home-v1194 body.is-home-route .home-v380-quran-hero__body{
+    grid-template-columns:minmax(0,1.08fr) minmax(118px,.92fr)!important;
+    column-gap:10px!important;
+  }
+  html.dar-home-v1194 body.is-home-route #headerPrayerStatus.header-prayer-hub{
+    left:17px!important;
+    right:17px!important;
+    padding-left:8px!important;
+    padding-right:8px!important;
+  }
+}
