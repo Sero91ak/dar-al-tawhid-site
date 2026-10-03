@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1074",
-  "label": "KIDS · V1.07.0",
-  "releasedAt": "2026-10-03T18:02:00.000Z",
-  "note": "V1.07.0 Hotfix: Startseite-Kacheln wieder als ovale Kapseln; Build-/Service-Worker-Cache auf v1074 synchronisiert. Inhalte und Funktionen bleiben unverändert.",
+  "buildId": "kids-shell-v12-sahaba1075",
+  "label": "KIDS · V1.07.1",
+  "releasedAt": "2026-10-03T18:00:00.000Z",
+  "note": "V1.07.1: Geschichten-Startseite responsive korrigiert; Buttons und Texte überlappen nicht mehr auf kleinen/großen Smartphones oder Tablets. Neue thematisch passende Hintergründe für Propheten- und Mubaschschirūn-Bereich; klare Trennung zum folgenden Bereich.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1074",
+    "serviceWorkerCache": "v1075",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -37,7 +37,7 @@
     "storiesHomePolish": "v22",
     "storiesHeaderArtwork": false,
     "storiesHeaderAmbientMotion": true,
-    "storiesResponsiveLayout": "phone-tablet-desktop",
+    "storiesResponsiveLayout": "phone-tablet-desktop-v22",
     "quranHomePolish": "spacious-edge-v1055",
     "quranArtVersion": 1059,
     "quranGeneratedArtwork": 10,
@@ -80,7 +80,7 @@
     },
     "mubashshirunProfilePanels": true,
     "mubashshirunDirectHadithLinks": true,
-    "mubashshirunStoryUi": "spacious-scene-cards-v4",
+    "mubashshirunStoryUi": "responsive-background-card-v10",
     "mubashshirunBundleVersion": 10,
     "mubashshirunDataVersion": 4,
     "mubashshirunAudioPublishPipeline": true,
@@ -151,6 +151,8 @@
     "mubashshirunAutoPublishAfterPronunciationConfirm": true,
     "mubashshirunAgeAwareVisualDisclaimer": true,
     "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03",
-    "mubashshirunSwipeBack": true
+    "mubashshirunSwipeBack": true,
+    "prophetStoriesBundleVersion": 22,
+    "storyCategoryBackgrounds": "prophets-adobe-v22+sahabah-runway-v10"
   }
 }
