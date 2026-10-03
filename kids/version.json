@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1082",
-  "label": "KIDS · V1.07.8",
-  "releasedAt": "2026-10-03T21:14:00.000Z",
-  "note": "V1.07.8: Geschichten-Kopfbereich als vollflächige Seitenbühne statt Kasten; neues thematisches Nacht-/Erzählmotiv direkt integriert und responsiv für Smartphone und iPad.",
+  "buildId": "kids-shell-v12-sahaba1083",
+  "label": "KIDS · V1.07.9",
+  "releasedAt": "2026-10-03T21:22:00.000Z",
+  "note": "V1.07.9: Geschichten-Kopf weiter verfeinert: kein Badge-/Kasten-Look mehr, sondern ruhige Goldzeile mit feiner Linie; klarerer Abstand und Übergang zur ersten Geschichte.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1082",
+    "serviceWorkerCache": "v1083",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -159,6 +159,6 @@
     "homeChoiceLayoutVersion": "v1078",
     "homeChoiceCards": "rounded-cards-v1079",
     "storiesPageHero": "edge-to-edge-adobe-v1082",
-    "storiesHero": "edge-to-edge-runway-v1081"
+    "storiesHero": "edge-to-edge-editorial-v1083"
   }
 }
