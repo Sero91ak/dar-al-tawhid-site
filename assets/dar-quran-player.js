@@ -1,6 +1,6 @@
 (function () {
   "use strict";
-    var PLAYER_BUILD = 981;
+    var PLAYER_BUILD = 982;
   /* LEARN_PLAYER_ONLY: Besucher-Web ohne Voll-Player. Test-App, iOS-App und Apple TV: Voll-Player. */
   function isOfficialIosApp() {
     try {
@@ -3710,9 +3710,116 @@
         while (out.childNodes.length > 18) out.removeChild(out.lastChild);
       }
     }
-    function berlinParts(date) {
+    function readSavedPrayerSettings() {
+      if (typeof window.getPrayerSettings === "function") {
+        try { return window.getPrayerSettings() || {}; } catch (eGs) {}
+      }
+      try {
+        return JSON.parse(localStorage.getItem("darPrayerSettingsV1") || "null") || {};
+      } catch (eSaved) { return {}; }
+    }
+    function coordsFrom(obj) {
+      if (!obj) return null;
+      var lat = Number(obj.lat != null ? obj.lat : obj.latitude);
+      var lon = Number(obj.lon != null ? obj.lon : obj.longitude);
+      if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+      return { lat: lat, lon: lon };
+    }
+    function locationFingerprint(loc) {
+      if (!loc) return "";
+      return [Number(loc.lat).toFixed(4), Number(loc.lon).toFixed(4), loc.tz || "", loc.angle, loc.asr].join("|");
+    }
+    function resolveAdhanPrayerLocation() {
+      var saved = readSavedPrayerSettings();
+      var native = null;
+      try { native = window.DAR_NATIVE_LOCATION || null; } catch (eNat) { native = null; }
+      var fromNative = coordsFrom(native);
+      var fromSaved = coordsFrom(saved);
+      var granted = saved.locationGranted === true || saved.locationGranted === "true" || !!fromNative;
+      if (!granted && fromSaved && String(saved.city || "").toLowerCase() === "rheinbach") fromSaved = null;
+      var coords = fromNative || (granted ? fromSaved : null);
+      if (!coords) return null;
+      var tz = String((native && (native.timeZone || native.tz)) || saved.timeZone || saved.tz || "").trim();
+      if (!tz) {
+        try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""; } catch (eTz) { tz = ""; }
+      }
+      if (!tz) tz = "Europe/Berlin";
+      var angle = Number(saved.angle);
+      var asr = Number(saved.asrFactor != null ? saved.asrFactor : saved.asr);
+      return {
+        lat: coords.lat,
+        lon: coords.lon,
+        tz: tz,
+        angle: Number.isFinite(angle) && angle > 0 ? angle : 12,
+        asr: Number.isFinite(asr) && asr > 0 ? asr : 1,
+        city: String((native && native.city) || saved.city || "").trim()
+      };
+    }
+    function requestNativeLocationHint() {
+      try {
+        var handlers = window.webkit && window.webkit.messageHandlers;
+        if (!handlers) return;
+        ["darNativeLocation", "darRequestLocation", "darNative"].forEach(function (name) {
+          if (handlers[name] && typeof handlers[name].postMessage === "function") {
+            try { handlers[name].postMessage({ type: "location" }); } catch (ePost) {}
+          }
+        });
+      } catch (eHint) {}
+    }
+    function geoPermissionAlreadyGranted() {
+      return new Promise(function (resolve) {
+        try {
+          if (!navigator.permissions || typeof navigator.permissions.query !== "function") {
+            resolve(true);
+            return;
+          }
+          navigator.permissions.query({ name: "geolocation" }).then(function (st) {
+            resolve(st && st.state === "granted");
+          }, function () { resolve(false); });
+        } catch (ePerm) { resolve(false); }
+      });
+    }
+    function readBrowserPositionIfGranted() {
+      return geoPermissionAlreadyGranted().then(function (ok) {
+        if (!ok || !navigator.geolocation) return null;
+        return new Promise(function (resolve) {
+          var done = false;
+          function finish(val) { if (done) return; done = true; resolve(val); }
+          try {
+            navigator.geolocation.getCurrentPosition(function (pos) {
+              var lat = Number(pos && pos.coords && pos.coords.latitude);
+              var lon = Number(pos && pos.coords && pos.coords.longitude);
+              finish(Number.isFinite(lat) && Number.isFinite(lon) ? { lat: lat, lon: lon } : null);
+            }, function () { finish(null); }, { enableHighAccuracy: false, timeout: 8000, maximumAge: 30 * 60 * 1000 });
+          } catch (eGeo) { finish(null); }
+        });
+      });
+    }
+    function resolveAdhanPrayerLocationAsync() {
+      var loc = resolveAdhanPrayerLocation();
+      if (loc) return Promise.resolve(loc);
+      requestNativeLocationHint();
+      return readBrowserPositionIfGranted().then(function (geo) {
+        if (!geo) return resolveAdhanPrayerLocation();
+        var tz = "Europe/Berlin";
+        try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || tz; } catch (eTz2) {}
+        var saved = readSavedPrayerSettings();
+        var angle = Number(saved.angle);
+        var asr = Number(saved.asrFactor != null ? saved.asrFactor : saved.asr);
+        return {
+          lat: geo.lat,
+          lon: geo.lon,
+          tz: tz,
+          angle: Number.isFinite(angle) && angle > 0 ? angle : 12,
+          asr: Number.isFinite(asr) && asr > 0 ? asr : 1,
+          city: String(saved.city || "").trim()
+        };
+      });
+    }
+    function localParts(date, timeZone) {
+      var tz = timeZone || (resolveAdhanPrayerLocation() && resolveAdhanPrayerLocation().tz) || "Europe/Berlin";
       var parts = new Intl.DateTimeFormat("sv-SE", {
-        timeZone: "Europe/Berlin",
+        timeZone: tz,
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
@@ -3724,10 +3831,12 @@
       parts.forEach(function (p) { if (p.type !== "literal") out[p.type] = p.value; });
       return {
         date: out.year + "-" + out.month + "-" + out.day,
-        time: out.hour + ":" + out.minute
+        time: out.hour + ":" + out.minute,
+        tz: tz
       };
     }
     var DAYS_KEY = "darAppleTvPrayerTimesDaysV1";
+    var LOC_KEY = "darAppleTvPrayerLocationV1";
     function readPrayerDays() {
       try {
         var days = JSON.parse(localStorage.getItem(DAYS_KEY) || "{}");
@@ -3752,10 +3861,30 @@
       try { return JSON.parse(localStorage.getItem("darAppleTvPrayerTimesV1") || "null"); } catch (eRead) { return null; }
     }
     function fetchPrayerDay(date) {
-      return fetch("/api/prayer/times?lat=50.6256&lon=6.9491&date=" + encodeURIComponent(date), { cache: "no-store" }).then(function (res) {
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        return res.json();
+      return resolveAdhanPrayerLocationAsync().then(function (loc) {
+        if (!loc) throw new Error("no location");
+        var q = "/api/prayer/times?lat=" + encodeURIComponent(String(loc.lat)) +
+          "&lon=" + encodeURIComponent(String(loc.lon)) +
+          "&tz=" + encodeURIComponent(loc.tz) +
+          "&angle=" + encodeURIComponent(String(loc.angle)) +
+          "&asr=" + encodeURIComponent(String(loc.asr));
+        if (date) q += "&date=" + encodeURIComponent(date);
+        return fetch(q, { cache: "no-store" }).then(function (res) {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          return res.json();
+        });
       });
+    }
+    var lastFetchedLoc = "";
+    function applyLocationChange(loc) {
+      var fp = locationFingerprint(loc);
+      if (!fp || fp === lastFetchedLoc) return false;
+      lastFetchedLoc = fp;
+      loadedDate = "";
+      prefetchedFor = "";
+      prayerData = null;
+      try { localStorage.setItem(LOC_KEY, fp); } catch (eLoc) {}
+      return true;
     }
     var prefetchedFor = "";
     function prefetchPrayerDays(today) {
@@ -3775,11 +3904,19 @@
       chain.then(function () { adhanLog("prayer times cached offline", Object.keys(readPrayerDays()).length + " days"); });
     }
     async function refreshPrayerTimes(force) {
-      var now = berlinParts();
+      var loc = await resolveAdhanPrayerLocationAsync();
+      if (!loc) {
+        adhanLog("prayer times waiting for location");
+        requestNativeLocationHint();
+        return null;
+      }
+      applyLocationChange(loc);
+      var now = localParts(null, loc.tz);
       if (!force && loadedDate === now.date && prayerData) return prayerData;
       loadedDate = now.date;
       try {
         var data = storePrayerData(await fetchPrayerDay(now.date), now.date);
+        adhanLog("prayer times for location", { city: loc.city || "", lat: loc.lat, lon: loc.lon, tz: loc.tz, date: now.date });
         setTimeout(function () { prefetchPrayerDays(now.date); }, 5000);
         return data;
       } catch (err) {
@@ -3953,8 +4090,13 @@
     }
     var lastTriggerKey = "";
     async function schedulerTick() {
-      var now = berlinParts();
-      adhanLog("current time", now.time);
+      var loc = await resolveAdhanPrayerLocationAsync();
+      if (!loc) {
+        adhanLog("scheduler skipped", "no location");
+        return;
+      }
+      var now = localParts(null, loc.tz);
+      adhanLog("current time", now.time + " " + now.tz);
       await refreshPrayerTimes(loadedDate !== now.date);
       var next = nextPrayer(now);
       adhanLog("next prayer", next || "tomorrow");
@@ -3998,7 +4140,7 @@
       refresh: function () { return refreshPrayerTimes(true); },
       stop: function () { finishAdhan("manual stop"); },
       cacheOffline: cacheAdhanOffline,
-      state: function () { return { active: window.__DAR_ADHAN_ACTIVE === true, date: loadedDate, times: prayerData && prayerData.times }; }
+      state: function () { return { active: window.__DAR_ADHAN_ACTIVE === true, date: loadedDate, times: prayerData && prayerData.times, location: resolveAdhanPrayerLocation() }; }
     };
     if (debug) {
       var panel = document.createElement("aside");
@@ -4017,6 +4159,15 @@
     window.addEventListener("focus", function () { refreshPrayerTimes(true).then(schedulerTick); });
     document.addEventListener("visibilitychange", function () {
       if (document.visibilityState === "visible") refreshPrayerTimes(true).then(schedulerTick);
+    });
+    window.addEventListener("darNativeLocationUpdated", function () {
+      lastFetchedLoc = "";
+      refreshPrayerTimes(true).then(schedulerTick);
+    });
+    window.addEventListener("storage", function (ev) {
+      if (ev && ev.key && ev.key !== "darPrayerSettingsV1") return;
+      lastFetchedLoc = "";
+      refreshPrayerTimes(true).then(schedulerTick);
     });
   }
 
