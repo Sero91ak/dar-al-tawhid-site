@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "id": "DAR_KIDS_QUIZ_V1",
   "namespace": "dar-kids-quiz",
-  "version": 10,
+  "version": 11,
   "updatedAt": "2026-10-04",
   "separateFromAdultQuiz": true,
   "adultQuizDependency": false,
@@ -9212,32 +9212,32 @@
       "ageBand": "7-8",
       "ageMin": 7,
       "ageMax": 8,
-      "scene": "spark",
-      "category": "Aḫlāq",
-      "topic": "Taqwā",
-      "question": "Was macht einen Menschen bei Allah besonders geehrt?",
+      "scene": "star",
+      "category": "Ākhirah",
+      "topic": "Zur Vergebung und zum Paradies eilen",
+      "question": "Wozu sollen Gläubige nach Qurʾān 3:133 eilen?",
       "answers": [
         {
           "id": "a1",
-          "label": "Taqwā",
+          "label": "Zur Vergebung Allahs und zum Paradies",
           "correct": true
         },
         {
           "id": "a2",
-          "label": "Geld",
+          "label": "Zu Streit und Hochmut",
           "correct": false
         },
         {
           "id": "a3",
-          "label": "Familienname",
+          "label": "Nur zu weltlichem Besitz",
           "correct": false
         }
       ],
       "success": "Richtig. Sehr gut!",
       "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
-      "explanation": "Allah nennt Taqwā als Maßstab besonderer Ehre bei Ihm.",
+      "explanation": "Allah ruft die Gläubigen dazu auf, zu Seiner Vergebung und zu einem Paradies zu eilen, das für die Gottesfürchtigen bereitet ist.",
       "sourceType": "Qurʾān",
-      "source": "Qurʾān 49:13",
+      "source": "Qurʾān 3:133",
       "status": "published",
       "reviewStatus": "approved",
       "verification": "approved"
@@ -10220,32 +10220,32 @@
       "ageBand": "9-10",
       "ageMin": 9,
       "ageMax": 10,
-      "scene": "coin",
-      "category": "Aḫlāq",
-      "topic": "Vermögen anderer",
-      "question": "Was verbietet Qurʾān 2:188?",
+      "scene": "star",
+      "category": "Īmān",
+      "topic": "Standhaft bei Allah",
+      "question": "Welche frohe Botschaft nennt Qurʾān 41:30 für standhafte Gläubige?",
       "answers": [
         {
           "id": "a1",
-          "label": "Vermögen anderer unrechtmäßig zu nehmen",
+          "label": "Die Engel beruhigen sie und verkünden ihnen das Paradies",
           "correct": true
         },
         {
           "id": "a2",
-          "label": "Erlaubten Handel",
+          "label": "Sie brauchen keine guten Taten mehr",
           "correct": false
         },
         {
           "id": "a3",
-          "label": "Ṣadaqah",
+          "label": "Sie werden vor jeder Prüfung im Leben bewahrt",
           "correct": false
         }
       ],
       "success": "Richtig. Sehr gut!",
       "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
-      "explanation": "Allah verbietet unrechtmäßigen Vermögensverzehr und Bestechung zur Aneignung fremden Rechts.",
+      "explanation": "Wer sagt: Unser Herr ist Allah, und dann standhaft bleibt, dem bringen die Engel Trost und die frohe Botschaft des Paradieses.",
       "sourceType": "Qurʾān",
-      "source": "Qurʾān 2:188",
+      "source": "Qurʾān 41:30",
       "status": "published",
       "reviewStatus": "approved",
       "verification": "approved"
