@@ -745,16 +745,18 @@ export default {
           target.pathname = "/kids/start";
           target.searchParams.delete("darsw");
           target.searchParams.set("kv", KIDS_BUILD);
-          return new Response(null, {
-            status: 307,
-            headers: {
-              "Location": target.toString(),
-              "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
-              "CDN-Cache-Control": "no-store",
-              "Cloudflare-CDN-Cache-Control": "no-store",
-              "X-Kids-Build": KIDS_BUILD
-            }
-          });
+          if (target.pathname !== url.pathname || target.search !== url.search) {
+            return new Response(null, {
+              status: 307,
+              headers: {
+                "Location": target.pathname + target.search,
+                "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+                "CDN-Cache-Control": "no-store",
+                "Cloudflare-CDN-Cache-Control": "no-store",
+                "X-Kids-Build": KIDS_BUILD
+              }
+            });
+          }
         }
         if (url.pathname === "/kids/version.json" || url.pathname === "/kids/version.json/") {
           const headers = kidsHeaders(new Response(""));
@@ -773,17 +775,50 @@ export default {
 
         const pretty = {
           "/kids/start": "/kids/start.html",
+          "/kids/start/": "/kids/start.html",
+          "/kids/start.html": "/kids/start.html",
           "/kids/index": "/kids/index.html",
-          "/kids/shell": "/kids/shell.html"
+          "/kids/index.html": "/kids/index.html",
+          "/kids/shell": "/kids/shell.html",
+          "/kids/shell.html": "/kids/shell.html"
         };
-        let assetRequest = request;
-        if (pretty[url.pathname]) {
-          const prettyUrl = new URL(request.url);
-          prettyUrl.pathname = pretty[url.pathname];
-          assetRequest = new Request(prettyUrl.toString(), request);
+        async function fetchKidsPage() {
+          const paths = [];
+          const seen = new Set();
+          function add(p) {
+            if (!p || seen.has(p)) return;
+            seen.add(p);
+            paths.push(p);
+          }
+          if (url.pathname.endsWith(".html")) {
+            add(url.pathname.replace(/\.html$/, ""));
+            add(url.pathname);
+          } else {
+            add(url.pathname.replace(/\/$/, "") || url.pathname);
+            add(pretty[url.pathname]);
+          }
+          let last = null;
+          for (const pathname of paths) {
+            const pageUrl = new URL(request.url);
+            pageUrl.pathname = pathname;
+            const assetResponse = await env.ASSETS.fetch(new Request(pageUrl.toString(), request));
+            last = assetResponse;
+            if (assetResponse && assetResponse.status === 200) return assetResponse;
+            if (assetResponse && assetResponse.status >= 300 && assetResponse.status < 400) {
+              const loc = assetResponse.headers.get("Location") || "";
+              try {
+                const next = new URL(loc, pageUrl);
+                if (next.origin === pageUrl.origin) {
+                  if (next.pathname.endsWith(".html")) add(next.pathname.replace(/\.html$/, ""));
+                  else add(next.pathname);
+                }
+              } catch (eLoc) {}
+            }
+          }
+          return last && last.status === 200 ? last : null;
         }
-        let assetResponse = await env.ASSETS.fetch(assetRequest);
-        if (!assetResponse || assetResponse.status >= 400) {
+        let assetResponse = await fetchKidsPage();
+        if (!assetResponse || assetResponse.status >= 300) {
           try {
             assetResponse = await fetchKidsMirror(url.pathname, url.search);
           } catch (mirrorErr) {}
