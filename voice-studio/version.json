@@ -1699,7 +1699,9 @@
     "ownerAccessCookie": "DARVOICE_CLOUD",
     "ownerAccessCookiePath": "/voice-studio/api/engine",
     "ownerAccessHeaderFallback": "X-DAR-Voice-Access",
-    "browserDoesNotPersistAccessCode": true
+    "browserDoesNotPersistAccessCode": true,
+    "visitorDeployRetry": "2026-10-04T18:02:00+02:00",
+    "visitorDeployReason": "voice-cloud-pwa-route-after-build-guard-repair"
   },
   "releaseRefPolicy": "immutable 2.9.95 hotfix commit; engine/UI/native/updater aligned; cloud PWA contract preserved"
 }
