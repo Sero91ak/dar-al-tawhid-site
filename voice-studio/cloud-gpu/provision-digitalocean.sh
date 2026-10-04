@@ -32,11 +32,11 @@ echo "  Tag:    $TAG"
 
 ACCOUNT_JSON="$(doctl account get --output json 2>/dev/null || true)"
 if [[ -n "$ACCOUNT_JSON" ]]; then
-  python3 - "$MODE" <<'PY' <<<"$ACCOUNT_JSON"
-import json, sys
+  ACCOUNT_JSON="$ACCOUNT_JSON" python3 - "$MODE" <<'PY'
+import json, os, sys
 mode=sys.argv[1]
 try:
-    raw=json.load(sys.stdin)
+    raw=json.loads(os.environ.get("ACCOUNT_JSON","{}"))
     account=(raw[0] if isinstance(raw,list) and raw else raw) or {}
 except Exception:
     account={}
@@ -58,10 +58,10 @@ if [[ -z "$REGIONS_JSON" ]]; then
   exit 4
 fi
 
-if ! python3 - "$REGION" "$SIZE" <<'PY' <<<"$REGIONS_JSON"
-import json, sys
+if ! REGIONS_JSON="$REGIONS_JSON" python3 - "$REGION" "$SIZE" <<'PY'
+import json, os, sys
 region, size=sys.argv[1:3]
-rows=json.load(sys.stdin)
+rows=json.loads(os.environ.get("REGIONS_JSON","[]"))
 match=next((r for r in rows if str(r.get("slug") or "")==region),None)
 if not match:
     print(f"FEHLER: Region '{region}' ist für dieses Konto nicht verfügbar.", file=sys.stderr)
