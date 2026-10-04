@@ -1,4 +1,4 @@
-/* Voice Studio 2.9.97 · fast Kids audio/content workflow */
+/* Voice Studio 2.9.98 · trusted lexicon + fast Kids audio/content workflow */
 (() => {
 "use strict";
 
@@ -1324,8 +1324,9 @@ function inventoryKey(item){
   const title=String(item?.title||item?.id||"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
   return title.replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||String(item?.id||"");
 }
-function inventoryKindLabel(kind){
-  return kind==="quiz"?"Quiz":kind==="game"?"Spiel":kind==="lesson"?"iOS-Inhalt":"Geschichte";
+function inventoryKindLabel(item){
+  const k=studioKindForItem(item||{});
+  return k==="quiz"?"Quiz":k==="game"?"Spiel":k==="dua"?"Duʿāʾ":k==="narration"?"Erzählung":k==="ios"?"iOS-Inhalt":"Geschichte";
 }
 async function fetchLegacyKidsInventory(){
   const urls=[];
@@ -1400,7 +1401,7 @@ function renderInventory(){
     const open=source?'<button type="button" class="cs-inventory-item editable" data-cs-inventory="'+escapeHtml(id)+'" data-cs-source="'+source+'">':'<div class="cs-inventory-item">';
     const close=source?'</button>':'</div>';
     const editHint=source==='live'?' · anklicken zum Bearbeiten':source==='staging'?' · Arbeitsversion öffnen':source==='legacy'?' · anklicken zum Übernehmen':'';
-    return open+'<b>'+escapeHtml(row.title||active.id)+'</b><span class="cs-inventory-meta">'+escapeHtml(inventoryKindLabel(active.kind||"story"))+' · '+escapeHtml(age)+' · Text '+(textOk?"✓":"–")+' · Audio '+(audioOk?"✓":"–")+' · Cover '+(coverOk?"✓":"–")+escapeHtml(editHint)+'</span><span class="cs-inventory-chips">'+chips.join("")+'</span>'+close;
+    return open+'<b>'+escapeHtml(row.title||active.id)+'</b><span class="cs-inventory-meta">'+escapeHtml(inventoryKindLabel(active))+' · '+escapeHtml(age)+' · Text '+(textOk?"✓":"–")+' · Audio '+(audioOk?"✓":"–")+' · Cover '+(coverOk?"✓":"–")+escapeHtml(editHint)+'</span><span class="cs-inventory-chips">'+chips.join("")+'</span>'+close;
   }).join("");
 }
 async function loadLibrary(force=false){
