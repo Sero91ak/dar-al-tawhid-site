@@ -1,7 +1,7 @@
 {
   "version": "2.9.76",
-  "updatedAt": "2026-10-04T03:29:00+02:00",
-  "deployTrigger": "voice-studio-2.9.76-mobile-ios-ipad-production",
+  "updatedAt": "2026-10-04T03:31:00+02:00",
+  "deployTrigger": "voice-studio-2.9.76-mobile-ios-ipad-green-release",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v47",
@@ -300,8 +300,8 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "5fc055282661576a673071347a4d1625172c2cfb",
-    "validatedAt": "2026-10-04T02:28:00+02:00",
+    "validatedCommit": "718a6e3d1e7912dc1728688011ccfb198531b83a",
+    "validatedAt": "2026-10-04T03:31:00+02:00",
     "freeVoiceIsolation": true,
     "mainAppBrandingUnchanged": true,
     "prophetStoryLocalBatchSmoke": true,
@@ -351,7 +351,10 @@
     "storyReferenceUploadRegistrationValidation": true,
     "storyReferenceAudioFingerprintValidation": true,
     "storyReferenceBootstrapNonBlocking": true,
-    "voice274ValidatorPassed": true
+    "voice274ValidatorPassed": true,
+    "mobileIPhoneIPadReleaseValidated": true,
+    "mobilePairTokenExcludedFromPwaStartUrl": true,
+    "mobileAudioPathTraversalGuard": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -676,7 +679,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "eb41a626be18ade3d064f9a7c5de4f1526697f06",
+  "releaseRef": "718a6e3d1e7912dc1728688011ccfb198531b83a",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1158,7 +1161,7 @@
     "nativeMacRestartsStaleEngine": true,
     "installerRequiresMatchingEngineVersion": true,
     "interactivePriorityGuardAdded": true,
-    "manifestReleaseRef": "3e6764076a8fb91440f61aa317cdab85d2533e7c",
+    "manifestReleaseRef": "718a6e3d1e7912dc1728688011ccfb198531b83a",
     "installerManifestVersionGuard": true,
     "dynamicEngineVersionHandshake": true,
     "staleHardcodedEngineVersionRemoved": true,
@@ -1198,11 +1201,13 @@
     "storyReferenceLearningStateVisible": true,
     "storyReferenceInstallerPackaging": true,
     "storyReferenceCiValidationPassed": true,
-    "validatedImplementationRef": "3411ea220d5f21bdd764cfb6b12786b0f9c4975b",
+    "validatedImplementationRef": "718a6e3d1e7912dc1728688011ccfb198531b83a",
     "fullVoiceValidatePassed": true,
-    "mobileReleaseCandidateRef": "d88b5f44bdc337455eea742bfdd15deec8027588",
-    "globalCanonicalGuardBlockedByUnrelatedKidsAssetVersionGuard": true,
-    "globalCanonicalGuardNote": "Voice-spezifische Smoke/Validate/Health-Prüfungen sind grün; der globale Guard erwartet ältere Kids-Asset-Versionen und ist nicht Teil der Voice-Mobile-Laufzeit."
+    "mobileReleaseCandidateRef": "718a6e3d1e7912dc1728688011ccfb198531b83a",
+    "globalCanonicalGuardBlockedByUnrelatedKidsAssetVersionGuard": false,
+    "globalCanonicalGuardNote": "Aktueller 2.9.76-Gesamtstand: Smoke, Validate, Health, Canonical Guard und native Mac-Audio-Route bestanden.",
+    "canonicalGuardPassed": true,
+    "nativeMacAudioRoutePassed": true
   },
   "mubashshirunStories": {
     "enabled": true,
@@ -1289,13 +1294,17 @@
     "networkRequirement": "same-wifi-with-mac-engine",
     "design": "original-dar-mobile-ui-inspired-by-modern-mobile-voice-workflows",
     "smokeValidated": true,
-    "releaseRef": "265d16750ecdd5e88efd144f2f2572dfea2272fa",
+    "releaseRef": "718a6e3d1e7912dc1728688011ccfb198531b83a",
     "version": "2.9.76",
     "pwaStartUrl": "/mobile/",
     "pairTokenStoredInHttpOnlyCookie": true,
     "pairTokenExcludedFromInstalledStartUrl": true,
     "audioPathTraversalGuard": true,
-    "candidateConfirmationBoundToPreview": true
+    "candidateConfirmationBoundToPreview": true,
+    "fullValidatePassed": true,
+    "healthPassed": true,
+    "canonicalGuardPassed": true,
+    "nativeMacAudioRoutePassed": true
   },
   "mobile": {
     "enabled": true,
