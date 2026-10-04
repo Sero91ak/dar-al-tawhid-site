@@ -54,6 +54,32 @@ jobs:
           print("Focused Voice Studio UI markers OK")
           PY
           node --check /tmp/dar-voice-inline.js
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          html=Path("voice-studio/mobile.html").read_text(encoding="utf-8")
+          scripts=[x for x in re.findall(r'<script(?:\s[^>]*)?>([\s\S]*?)</script>',html,re.I) if x.strip()]
+          if len(scripts)!=1:
+              raise SystemExit(f"expected exactly one inline mobile script, got {len(scripts)}")
+          Path("/tmp/dar-voice-mobile-inline.js").write_text(scripts[0],encoding="utf-8")
+          required=[
+              'data-screen="create"',
+              'data-screen="history"',
+              'data-screen="pronunciation"',
+              'data-screen="settings"',
+              '"/analyze"',
+              '"/generate"',
+              '"/learning/search"',
+              '"/learning/preview-start"',
+              '"/learning/confirm"',
+              '"/mobile/history"',
+          ]
+          missing=[x for x in required if x not in html]
+          if missing:
+              raise SystemExit("mobile Voice markers missing: "+", ".join(missing))
+          print("Mobile Voice surface markers OK")
+          PY
+          node --check /tmp/dar-voice-mobile-inline.js
 
       - name: Guard interactive Voice Studio priority
         run: |
