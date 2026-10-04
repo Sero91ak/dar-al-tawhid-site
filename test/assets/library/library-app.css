@@ -2160,3 +2160,19 @@ html[data-theme] .lib-page[data-library-root] .lib-hero-kicker{
   color:var(--dar-readable-accent,var(--dar-lib-base-gold))!important;
   -webkit-text-fill-color:var(--dar-readable-accent,var(--dar-lib-base-gold))!important;
 }
+
+
+/* DAR_LIBRARY_LIGHT_THEME_BADGE_FIX_V1224 */
+html[data-theme] .lib-page[data-library-root] .lib-badge{
+  color:var(--dar-readable-ink,var(--dar-lib-base-text))!important;
+  -webkit-text-fill-color:var(--dar-readable-ink,var(--dar-lib-base-text))!important;
+  background:color-mix(in srgb,var(--dar-lib-base-card) 92%,transparent)!important;
+  border:1px solid var(--dar-readable-line,var(--dar-lib-base-line))!important;
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+}
+
+html[data-theme] .lib-detail .lib-stats-live-item span{
+  color:var(--dar-readable-ink,var(--dar-lib-base-text))!important;
+  -webkit-text-fill-color:var(--dar-readable-ink,var(--dar-lib-base-text))!important;
+}
