@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v15-quiz-reward1095",
-  "label": "KIDS · V1.07.21",
-  "releasedAt": "2026-10-04T08:55:00Z",
-  "note": "Kids-Quiz 001–100 bleibt vollständig vom normalen DĀR-Quiz getrennt. Drei lokal gebündelte, altersgerechte Quiz-Bildwelten, responsive Modalführung, Quellen/Erklärungen, audio-first für 4–6 und altersabhängige Erfolgsanimation mit Reduced-Motion-Schutz.",
+  "buildId": "kids-shell-v16-quiz100-reward1095",
+  "label": "KIDS · V1.07.22",
+  "releasedAt": "2026-10-04T09:02:00Z",
+  "note": "DĀR AL TAWḤĪD Kids Quiz umfasst jetzt 100 eigenständige, altersgerechte und quellengebundene Fragen (001–100), vollständig getrennt vom normalen DĀR/iOS-Quiz. Drei lokal/offline gebündelte Bildwelten passen sich an 4–6, 7–8 und 9–10 an; responsive Touch-UX, Quellen/Erklärungen, audio-first für 4–6 und altersabhängige Erfolgsanimation bleiben aktiv.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -267,7 +267,7 @@
     "kidsQuizManifestNetworkFirst": true,
     "kidsQuizReleaseGuard": true,
     "quizVisualSystem": {
-      "version": "age-adaptive-realistic-v3",
+      "version": "age-adaptive-realistic-v4",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
       "questionCount": 100,
@@ -293,7 +293,19 @@
         "/kids/assets/quiz-scenes/quiz-9-10.svg?v=20261004-real1"
       ],
       "ageAdaptiveRewardMotion": true,
-      "reducedMotionSafe": true
+      "reducedMotionSafe": true,
+      "batches": [
+        "001-050",
+        "051-100"
+      ],
+      "distribution": {
+        "4-6": 36,
+        "7-8": 32,
+        "9-10": 32
+      },
+      "manifestDrivenArtwork": true,
+      "sourcePolicy": "Qurʾān + authentische Ṣaḥīḥ-Sunnah; Quellen pro Frage",
+      "secondBatchHadithCrossCheck": "dorar.net"
     }
   },
   "updatedAt": "2026-10-04"
