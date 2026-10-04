@@ -54,3 +54,31 @@ html.kids-follow-reader-open{overflow:hidden!important}
   .kfr-close span{display:none}
   .kfr-close{width:48px;min-width:48px;padding:0}
 }
+
+
+/* preschool audio-only v4 */
+.kids-follow-reader.audio-only .kfr-read{display:none!important}
+.kids-follow-reader.audio-only .kfr-sheet{
+  max-height:min(54dvh,520px)!important;
+}
+.kids-follow-reader.audio-only .kfr-controls{
+  padding-bottom:24px!important;
+}
+.kids-follow-reader.audio-only .kfr-help{
+  text-align:center;
+  font-size:14px;
+  line-height:1.45;
+  color:rgba(255,255,255,.72);
+}
+.kids-follow-reader.audio-only .kfr-play{
+  min-height:62px;
+  font-size:17px;
+}
+.kids-follow-reader.audio-only .kfr-restart{
+  min-height:54px;
+}
+@media(max-width:620px){
+  .kids-follow-reader.audio-only .kfr-sheet{
+    max-height:min(58dvh,500px)!important;
+  }
+}
