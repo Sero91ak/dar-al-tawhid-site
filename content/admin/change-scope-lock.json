@@ -152,6 +152,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "voice-cloud-deploy-verify-2026-10-04",
+      "approvedBy": "user-explicit-mach-weiter-voice-cloud",
+      "reason": "Nutzer hat die fortlaufende Umsetzung der DĀR Voice Cloud-App ausdrücklich mit „Mach weiter“ beauftragt. Freigabe nur für die Voice-Cloud-Deploy-Verifikation: öffentlicher Desktop-Webauftritt und native App-Shell werden getrennt geprüft; Voice-, Zakat-, Push- und sonstige Anwendungslogik wird nicht abgeschwächt.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "scripts/verify-live-deploy.js"
+      ],
+      "expiresAt": "2026-11-04T23:59:00.000Z"
+    },
+    {
       "id": "test-qibla-redesign-2026-10-04",
       "approvedBy": "user-explicit-komplette-app-langsam-weiterarbeiten",
       "reason": "Fortlaufender Nutzerauftrag zur visuellen Modernisierung der Dar-Test-App. Dieser Schritt betrifft ausschließlich die Qiblah-Seite: historisches vormodernes Hero-Motiv, Theme-Kompatibilität, klarer größerer Kompass und offene Daten-/Werkzeugstruktur. Sensor-, Standort-, Richtungs- und Berechnungslogik bleiben unverändert.",
