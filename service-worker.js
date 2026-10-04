@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1104';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1105';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -60,13 +60,13 @@ const APP_SHELL = [
   '/kids/assets/prophet-scenes/royal.webp',
   '/kids/assets/prophet-scenes/garden.webp',
   '/kids/assets/prophet-scenes/water.webp',
-  '/kids/assets/prophet-scenes/ocean.webp'
+  '/kids/assets/prophet-scenes/ocean.webp',
   '/kids/assets/sahaba-mubashshirun/abu-bakr.jpg',
   '/kids/assets/sahaba-mubashshirun/umar.jpg',
   '/kids/assets/sahaba-mubashshirun/uthman.jpg',
   '/kids/assets/sahaba-mubashshirun/ali.jpg',
   '/kids/assets/sahaba-mubashshirun/talha.jpg',
-  '/kids/assets/sahaba-mubashshirun/zubayr.jpg'
+  '/kids/assets/sahaba-mubashshirun/zubayr.jpg',
   '/kids/assets/sahaba-mubashshirun/sad.jpg',
   '/kids/assets/sahaba-mubashshirun/said.jpg',
   '/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg',
