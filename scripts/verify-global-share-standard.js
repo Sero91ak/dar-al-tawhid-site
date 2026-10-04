@@ -48,7 +48,7 @@ if (!fs.existsSync(globalShare)) {
   failures.push("assets/dar-global-share-v1225.js fehlt");
 } else {
   const code = fs.readFileSync(globalShare, "utf8");
-  for (const token of ["adaptiveBodyLayout", "stripUiLabel", 'fillText("AUSSAGE"', 'fillText("QUELLE"', 'fillText("Laden im"']) {
+  for (const token of ["adaptiveBodyLayout", "stripUiLabel", 'fillText("AUSSAGE"', 'fillText("QUELLE"', "app-store-badge-de-official.svg"]) {
     if (!code.includes(token)) failures.push("Global-Share: Pflichtstandard fehlt: " + token);
   }
 }
@@ -64,7 +64,7 @@ if (fs.existsSync(liveFeed) && fs.existsSync(testFeed)) {
 const frauen = path.join(root, "test/assets/frauen/frauen-fiqh.js");
 if (fs.existsSync(frauen)) {
   const code = fs.readFileSync(frauen, "utf8");
-  for (const token of ["frauenAdaptiveBodyLayout", 'fillText("AUSSAGE"', 'fillText("QUELLE"', 'fillText("Laden im"']) {
+  for (const token of ["frauenAdaptiveBodyLayout", 'fillText("AUSSAGE"', 'fillText("QUELLE"', "app-store-badge-de-official.svg"]) {
     if (!code.includes(token)) failures.push("Frauen-App Share-Standard fehlt: " + token);
   }
 }
@@ -75,4 +75,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("GLOBAL SHARE STANDARD: OK · adaptive Typografie, saubere Labels und App-Store-Badge geprüft.");
+console.log("GLOBAL SHARE STANDARD: OK · adaptive Typografie, saubere Labels und offizielles App-Store-Badge geprüft.");
