@@ -201,6 +201,7 @@ download_repo_file "voice-studio/VoiceStudioApp.swift" "$STAGE/VoiceStudioApp.sw
 download_repo_file "voice-studio/update-mac.command" "$STAGE/update-mac.command"
 download_repo_file "voice-studio/voice-studio-icon.png" "$STAGE/voice-studio-icon.png"
 download_repo_file "data/pronunciation/pronunciation-rules.json" "$STAGE/pronunciation-rules.json"
+download_repo_file "data/pronunciation/story-reference-muhammad-2026-10-04.json" "$STAGE/story-reference-muhammad-2026-10-04.json"
 download_repo_file "data/pronunciation/DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls" "$STAGE/DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls"
 download_repo_file "data/pronunciation/voice-production-profile.json" "$STAGE/voice-production-profile.json"
 download_repo_file "data/pronunciation/islamic-master-library.json" "$STAGE/islamic-master-library.json"
@@ -209,7 +210,7 @@ download_repo_file "scripts/voice-studio/validate-v2.py" "$STAGE/validate-v2.py"
 download_optional_repo_file "watermark-my-logo-full.png" "$STAGE/watermark-my-logo-full.png"
 download_optional_repo_file "app-icon-512.png" "$STAGE/app-icon-512.png"
 
-for required in local-engine.py speech_flow.py studio.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for required in local-engine.py speech_flow.py studio.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json story-reference-muhammad-2026-10-04.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
     echo "FEHLER: Update-Datei fehlt oder ist leer: $required"
     exit 1
@@ -336,7 +337,7 @@ fi
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP="$BACKUPS/$STAMP"
 mkdir -p "$BACKUP"
-for old in local-engine.py speech_flow.py studio.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for old in local-engine.py speech_flow.py studio.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json story-reference-muhammad-2026-10-04.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
 done
 
