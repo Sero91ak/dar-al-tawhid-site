@@ -152,6 +152,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-prayer-overview-v1254-2026-10-04",
+      "approvedBy": "user-explicit-komplette-app-langsam-weiterarbeiten",
+      "reason": "Nutzer hat die fortlaufende Modernisierung der kompletten Dar-Test-App beauftragt. Dieser Scope betrifft ausschließlich die geöffnete Gebetszeiten-Übersichtsseite: historischer Hero, Theme-Kompatibilität und Layout/Lesbarkeit. Gebetsberechnung, Standort, Qibla- und Push-Logik bleiben unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/prayer-v1254.css",
+        "cloudflare/test-app-worker.js"
+      ],
+      "expiresAt": "2026-11-04T23:59:00.000Z"
+    },
+    {
       "id": "test-quran-learning-redesign-2026-10-04",
       "approvedBy": "user-explicit-komplette-app-langsam-weiterarbeiten",
       "reason": "Nutzer beauftragt fortlaufend die langsame Modernisierung der kompletten Test-App nach dem neuen DĀR-AL-TAWḤĪD-Standard. Dieser Schritt betrifft nur die Qurʾān-Lernstudio-Darstellung: historisches vormodernes Motiv, Theme-Kompatibilität, Full-Screen-Lernfläche und bessere Lesbarkeit. Audio-, Mikrofon-, Auswertungs- und Lernlogik bleiben unverändert.",
