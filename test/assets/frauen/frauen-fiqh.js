@@ -3641,63 +3641,6 @@
     });
   }
 
-  function frauenShareHash(value) {
-    var s = String(value || "");
-    var h = 2166136261;
-    for (var i = 0; i < s.length; i++) {
-      h ^= s.charCodeAt(i);
-      h += (h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24);
-    }
-    return Math.abs(h >>> 0);
-  }
-
-  function frauenShareScenePool(abschnitt) {
-    var common = [
-      "/kids/assets/prophet-scenes/library.webp",
-      "/kids/assets/prophet-scenes/desert.webp",
-      "/kids/assets/prophet-scenes/mountain.webp",
-      "/kids/assets/prophet-scenes/night.webp",
-      "/kids/assets/prophet-scenes/royal.webp",
-      "/kids/assets/prophet-scenes/garden.webp",
-      "/kids/assets/prophet-scenes/water.webp",
-      "/kids/assets/prophet-scenes/ocean.webp"
-    ];
-    var study = [
-      "/test/assets/home-v1194/study-runway.jpg",
-      "/test/assets/home-v1194/hero-mobile-adobe.jpg",
-      "/kids/assets/prophet-scenes/library.webp",
-      "/kids/assets/prophet-scenes/royal.webp",
-      "/kids/assets/prophet-scenes/night.webp"
-    ];
-    var travel = [
-      "/kids/assets/prophet-scenes/desert.webp",
-      "/kids/assets/prophet-scenes/mountain.webp",
-      "/kids/assets/prophet-scenes/night.webp",
-      "/kids/assets/prophet-scenes/royal.webp"
-    ];
-    var life = [
-      "/kids/assets/prophet-scenes/garden.webp",
-      "/kids/assets/prophet-scenes/water.webp",
-      "/kids/assets/prophet-scenes/library.webp",
-      "/test/assets/home-v1194/hero-mobile-adobe.jpg"
-    ];
-    var id = String(abschnitt || "");
-    if (/fiqh|wissen|geprueft|bidah|adab|dawah|tawhid|dhikr/.test(id)) return study;
-    if (/hajj|reise|moschee|ramadan|qiyam|itikaf|jana|tod|trauer|ruqyah/.test(id)) return travel;
-    if (/ehe|kinder|toechter|nifas|maedchen|familie|verwandt|privat/.test(id)) return life;
-    return common;
-  }
-
-  function frauenNextShareScene(abschnitt, e) {
-    var pool = frauenShareScenePool(abschnitt);
-    var key = "darFrauenShareSceneV2";
-    var seq = 0;
-    try { seq = Number(localStorage.getItem(key) || 0) || 0; } catch (err) {}
-    var seed = frauenShareHash(abschnitt + "|" + (e && e.kennung || "") + "|" + seq);
-    try { localStorage.setItem(key, String(seq + 1)); } catch (err2) {}
-    return pool[seed % pool.length];
-  }
-
   function frauenRoundRect(ctx, x, y, w, h, r) {
     var rr = Math.min(r, w / 2, h / 2);
     ctx.beginPath();
@@ -3707,15 +3650,6 @@
     ctx.arcTo(x, y + h, x, y, rr);
     ctx.arcTo(x, y, x + w, y, rr);
     ctx.closePath();
-  }
-
-  /* FRAUEN_SHARE_VISUAL_V1239 · Apple-provided German App Store badge, unmodified */
-  async function frauenDrawStoreBadge(ctx, x, y, h) {
-    try {
-      var badge = await frauenLoadImage("/assets/app-store-badge-de-official.svg?v=share-v1239");
-      var w = h * 2.9916;
-      ctx.drawImage(badge, x - w, y, w, h);
-    } catch (eBadge) {}
   }
 
   function frauenDrawCover(ctx, img, W, H, shift) {
@@ -3728,6 +3662,49 @@
     ctx.drawImage(img, sx, sy, dw, dh);
   }
 
+  var FRAUEN_SHARE_IMAGE_API = "https://dar-admin-publisher.sero91ak.workers.dev/api/share-image/background";
+
+  async function frauenFreshShareBackground(abschnitt, e) {
+    var controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    var timer = setTimeout(function () { try { if (controller) controller.abort(); } catch (err) {} }, 45000);
+    try {
+      var res = await fetch(FRAUEN_SHARE_IMAGE_API, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-store",
+        credentials: "omit",
+        headers: { "Content-Type": "application/json", "Accept": "image/avif,image/webp,image/png,image/jpeg" },
+        body: JSON.stringify({
+          title: String(titelVon(e) || bereichKicker(abschnitt) || "Frauen im Islam").trim(),
+          body: String(aussageVon(e) || "").trim(),
+          category: String(bereichKicker(abschnitt) || "Frauen im Islam").trim(),
+          source: String(quelleText(e) || "").trim()
+        }),
+        signal: controller ? controller.signal : undefined
+      });
+      if (!res.ok) {
+        var msg = "Neues Bild konnte nicht erzeugt werden.";
+        try {
+          var problem = await res.json();
+          if (problem && problem.error) msg = String(problem.error);
+        } catch (e2) {}
+        throw new Error(msg);
+      }
+      var blob = await res.blob();
+      if (!blob || !/^image\//i.test(blob.type || "")) throw new Error("Bildgenerator lieferte kein gültiges Bild.");
+      var objectUrl = URL.createObjectURL(blob);
+      try {
+        var img = await frauenLoadImage(objectUrl);
+        return { image: img, objectUrl: objectUrl };
+      } catch (e3) {
+        URL.revokeObjectURL(objectUrl);
+        throw e3;
+      }
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
   async function frauenImageFiles(abschnitt, e) {
     var W = 1080, H = 1350, margin = 78, contentW = W - margin * 2;
     var canvas = document.createElement("canvas");
@@ -3736,12 +3713,8 @@
     var ctx = canvas.getContext("2d");
     if (!ctx) return [];
 
-    var imagePath = frauenNextShareScene(abschnitt, e);
-    var bg = null;
-    try { bg = await frauenLoadImage(imagePath); } catch (err) {}
-    if (!bg) {
-      try { bg = await frauenLoadImage("/test/assets/home-v1194/study-runway.jpg"); } catch (fallbackErr) {}
-    }
+    var fresh = await frauenFreshShareBackground(abschnitt, e);
+    var bg = fresh.image;
     try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e0) {}
 
     var title = String(titelVon(e) || bereichKicker(abschnitt) || "Frauen im Islam").trim();
@@ -3752,7 +3725,7 @@
     ctx.font = "600 " + titleSize + "px Georgia, serif";
     var titleLines = frauenWrapCanvas(ctx, title, contentW).slice(0, 3);
     var bodyStart = 188 + titleLines.length * (titleSize + 11) + 34;
-    var bodyBottom = 985;
+    var bodyBottom = 1100;
     var bodyLayout = frauenAdaptiveBodyLayout(ctx, body, contentW - 92, Math.max(300, bodyBottom - bodyStart - 30));
     var bodySize = bodyLayout.size;
     var bodyLine = bodyLayout.lineHeight;
@@ -3841,7 +3814,7 @@
         ctx.textAlign = "left";
       }
 
-      var panelY = 1030, panelH = 126;
+      var panelY = 1130, panelH = 160;
       frauenRoundRect(ctx, margin, panelY, contentW, panelH, 22);
       ctx.fillStyle = "rgba(4,15,15,.70)";
       ctx.fill();
@@ -3855,29 +3828,21 @@
 
       ctx.fillStyle = "rgba(255,248,232,.82)";
       ctx.font = "500 17px Arial, sans-serif";
-      var sourceLines = frauenWrapCanvas(ctx, source, contentW - 44).slice(0, 2);
-      var sy = panelY + 55;
+      var sourceLines = frauenWrapCanvas(ctx, source, contentW - 44).slice(0, 3);
+      var sy = panelY + 59;
       sourceLines.forEach(function (line) {
         ctx.fillText(line, margin + 22, sy);
-        sy += 25;
+        sy += 27;
       });
-
-      ctx.fillStyle = "rgba(255,248,232,.70)";
-      ctx.font = "600 15px Arial, sans-serif";
-      ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah", margin + 22, panelY + 111);
-
-      ctx.fillStyle = "#efd89f";
-      ctx.font = "700 20px Arial, sans-serif";
-      ctx.fillText("dar-al-tawhid.de", margin, H - 60);
-      await frauenDrawStoreBadge(ctx, W - margin, H - 94, 62);
 
       var blob = await frauenCanvasBlob(canvas);
       if (blob) files.push(new File([blob], "dar-al-tawhid-bildbeitrag-" + (p + 1) + ".png", { type: "image/png" }));
     }
+    try { URL.revokeObjectURL(fresh.objectUrl); } catch (cleanupErr) {}
     return files;
   }
 
-  /* FRAUEN_SHARE_NATIVE_V1225 */
+  /* FRAUEN_SHARE_NATIVE_V1246 */
   function frauenBlobDataUrl(blob) {
     return new Promise(function (resolve, reject) {
       try {
