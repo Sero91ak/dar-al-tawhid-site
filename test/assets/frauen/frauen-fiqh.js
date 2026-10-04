@@ -1608,6 +1608,7 @@
   function parseValue(value) {
     var v = String(value || "").replace(/^\/+|\/+$/g, "");
     if (!v) return { page: "hub", abschnitt: "", kennung: "" };
+    if (v.indexOf("group/") === 0) return { page: "group", abschnitt: "group", kennung: v.slice(6) };
     if (v === "fiqh") return { page: "list", abschnitt: "fiqh", kennung: "" };
     if (v.indexOf("fiqh/") === 0) return { page: "detail", abschnitt: "fiqh", kennung: v.slice(5) };
     if (v === "sahabiyyat") return { page: "list", abschnitt: "sahabiyyat", kennung: "" };
@@ -2337,6 +2338,228 @@
     ];
   }
 
+
+  /* v1221 · Frauen-Wissensbibliothek
+     Neue Navigationshierarchie nur für Übersichtsseiten:
+     Hub → Wissenswelt → bestehender Bereich → bestehende Aussage.
+     Die eigentliche Aussage-/Leseseite bleibt unverändert. */
+  var FRAUEN_LIBRARY_GROUPS = [
+    {
+      id: "din",
+      nr: "01",
+      title: "Grundlagen des Dīn",
+      kicker: "ʿAqīdah · ʿIbādah",
+      desc: "Tawḥīd, Īmān, Dhikr, Reue und die Grundlagen eines rechtschaffenen Lebens.",
+      icon: "topics.png",
+      areas: [TAWHID_SLUG, MUSLIMAH_SLUG, DHIKR_SLUG, REUE_SLUG, TAWBAH_SLUG, REUESCHUTZ_SLUG, MUHASABA_SLUG]
+    },
+    {
+      id: "fiqh",
+      nr: "02",
+      title: "Fiqh der Frauen",
+      kicker: "Pflichtwissen · Alltag",
+      desc: "Reinigung, Gebet, Fasten, Kleidung, Nikāḥ, ʿIddah, Ḥajj und häufige Fragen.",
+      icon: "scale.png",
+      areas: ["fiqh", REINIGUNG_SLUG, HIJAB_SLUG, NIKAH_SLUG, IDDAH_SLUG, ZINAH_SLUG, HAJJ_SLUG, RAMADAN_SLUG, QIYAM_SLUG, ITIKAF_SLUG, FAQ_SLUG]
+    },
+    {
+      id: "generationen",
+      nr: "03",
+      title: "Frauen der ersten Generationen",
+      kicker: "Ṣaḥābiyyāt · Salaf",
+      desc: "Mütter der Gläubigen, Ṣaḥābiyyāt, Tābiʿiyyāt und geprüfte Berichte der frühen Generationen.",
+      icon: "scholars.png",
+      areas: [MUETTER_SLUG, "sahabiyyat", "tabiiyyat", SALAF_SLUG, KURZ_SLUG]
+    },
+    {
+      id: "familie",
+      nr: "04",
+      title: "Ehe, Familie & Erziehung",
+      kicker: "Haus · Familie",
+      desc: "Ehe, Kinder, Töchter, Verwandtschaft, Gerechtigkeit und der gute Umgang im Haus.",
+      icon: "home.png",
+      areas: [EHE_SLUG, KINDER_SLUG, TOECHTER_SLUG, VERWANDT_SLUG, GERECHT_SLUG, PRIVAT_SLUG]
+    },
+    {
+      id: "wissen",
+      nr: "05",
+      title: "Wissen, Adab & Daʿwah",
+      kicker: "Lernen · Weitergeben",
+      desc: "Wissen lernen, Quellen prüfen, Adab bewahren und das Gute mit Belegen weitergeben.",
+      icon: "ilm.png",
+      areas: [WISSEN_SLUG, GEPRUEFT_SLUG, BIDAHQ_SLUG, ADAB_SLUG, DAWAH_SLUG, SADAQAH_SLUG, DIENST_SLUG]
+    },
+    {
+      id: "alltag",
+      nr: "06",
+      title: "Alltag & Schutz",
+      kicker: "Grenzen · Bewahrung",
+      desc: "Moschee, Nicht-Maḥārim, Reise, Öffentlichkeit, Medien, Ruqyah und Prüfung im Alltag.",
+      icon: "shield.png",
+      areas: [MOSCHEE_SLUG, UMGANG_SLUG, REISE_SLUG, ARBEIT_SLUG, MEDIEN_SLUG, RUQYAH_SLUG, KRANKHEIT_SLUG]
+    },
+    {
+      id: "lebensphasen",
+      nr: "07",
+      title: "Besondere Zeiten & Lebensabschnitte",
+      kicker: "Lebensphasen · Ṣabr",
+      desc: "Schwangerschaft, Stillzeit, Nifās, Pubertät sowie geprüfte Inhalte zu Tod, Janāzah und Trauer.",
+      icon: "ramadan.png",
+      areas: [NIFAS_SLUG, MAEDCHEN_SLUG, TOD_SLUG, TRAUER_SLUG, JANAIZ_SLUG, JANAZAH_SLUG]
+    }
+  ];
+
+  function libraryGroupById(id) {
+    return FRAUEN_LIBRARY_GROUPS.find(function (g) { return g.id === id; }) || null;
+  }
+
+  function libraryAreaById(id) {
+    return hubAreas().find(function (a) { return a.id === id; }) || null;
+  }
+
+  function libraryOwnerGroup(id) {
+    return FRAUEN_LIBRARY_GROUPS.find(function (g) { return g.areas.indexOf(id) !== -1; }) || null;
+  }
+
+  function libraryVisibleCount(group) {
+    return (group && group.areas ? group.areas : []).reduce(function (sum, id) {
+      return sum + countSichtbare(id);
+    }, 0);
+  }
+
+  function libraryTotalVisibleCount() {
+    return FRAUEN_LIBRARY_GROUPS.reduce(function (sum, group) {
+      return sum + libraryVisibleCount(group);
+    }, 0);
+  }
+
+  function libraryIcon(name) {
+    return '<img src="/test/assets/dar-3d-icons/' + esc(name || "ilm.png") + '" alt="" loading="lazy" decoding="async">';
+  }
+
+  function libraryHero(title, subtitle, mode, backValue, eyebrow, statLeft, statRight) {
+    var back = backValue != null
+      ? '<button type="button" class="frauen-library-back" data-nav="frauen" data-value="' + esc(backValue) + '" aria-label="Zurück"><span aria-hidden="true">‹</span><b>Zurück</b></button>'
+      : "";
+    return (
+      '<section class="frauen-library-hero frauen-library-hero--' + esc(mode || "hub") + '">' +
+        '<div class="frauen-library-hero__shade" aria-hidden="true"></div>' +
+        '<div class="frauen-library-hero__content">' +
+          back +
+          '<p class="frauen-library-hero__eyebrow">' + esc(eyebrow || "DĀR AL TAWḤĪD · WISSENSBIBLIOTHEK") + '</p>' +
+          '<h2>' + esc(title) + '</h2>' +
+          '<p class="frauen-library-hero__subtitle">' + esc(subtitle || "") + '</p>' +
+          '<div class="frauen-library-hero__stats">' +
+            (statLeft ? '<span>' + esc(statLeft) + '</span>' : "") +
+            (statRight ? '<span>' + esc(statRight) + '</span>' : "") +
+          '</div>' +
+        '</div>' +
+      '</section>'
+    );
+  }
+
+  function libraryGroupCard(group) {
+    var count = libraryVisibleCount(group);
+    return (
+      '<article class="frauen-library-card frauen-library-card--' + esc(group.id) + '" data-nav="frauen" data-value="group/' + esc(group.id) + '">' +
+        '<span class="frauen-library-card__nr" aria-hidden="true">' + esc(group.nr) + '</span>' +
+        '<span class="frauen-library-card__icon" aria-hidden="true">' + libraryIcon(group.icon) + '</span>' +
+        '<div class="frauen-library-card__copy">' +
+          '<p class="frauen-library-card__kicker">' + esc(group.kicker) + '</p>' +
+          '<h3>' + esc(group.title) + '</h3>' +
+          '<p class="frauen-library-card__desc">' + esc(group.desc) + '</p>' +
+          '<p class="frauen-library-card__meta">' + group.areas.length + ' Kapitel' + (count ? ' · ' + count + ' geprüfte Inhalte' : '') + '</p>' +
+        '</div>' +
+        '<span class="frauen-library-card__arrow" aria-hidden="true">›</span>' +
+      '</article>'
+    );
+  }
+
+  function areaFallbackLede(area) {
+    var map = {
+      fiqh: "Geprüfte Grundlagen zu den wichtigsten Rechtsfragen für Frauen.",
+      sahabiyyat: "Geprüfte Berichte über Frauen aus der Generation der Ṣaḥābah.",
+      tabiiyyat: "Geprüfte Berichte über Frauen aus der Generation nach den Ṣaḥābah.",
+      "muetter-der-glaeubigen": "Wissen und geprüfte Berichte über die Mütter der Gläubigen.",
+      "ehe-familie": "Grundlagen zu Ehe, Verantwortung, Rechten und Familie.",
+      "hijab-schamhaftigkeit": "Grundlagen zu Bedeckung, Adab und Schamhaftigkeit.",
+      "wissen-lernen": "Wissen suchen, richtig fragen und mit Adab lernen.",
+      "fragen-antworten": "Kurze, geprüfte Antworten mit Quelle und Direktnachweis.",
+      "gepruefte-kurzberichte": "Kurze belegte Berichte aus dem Leben rechtschaffener Frauen.",
+      "frauen-der-salaf": "Geprüfte Aussagen und Berichte über Frauen der frühen Generationen."
+    };
+    return area.lede || map[area.id] || "Geprüfte Inhalte mit Quelle und Direktnachweis.";
+  }
+
+  function libraryAreaIcon(area) {
+    if (!area) return "ilm.png";
+    var id = String(area.id || "");
+    if (/fiqh|reinigung|nikah|iddah|zinah|hijab|hajj|ramadan|qiyam|itikaf/.test(id)) return "scale.png";
+    if (/sahab|tabi|muetter|salaf|kurz/.test(id)) return "scholars.png";
+    if (/ehe|kinder|toechter|verwandt|privat|gerecht/.test(id)) return "home.png";
+    if (/wissen|geprueft|bidah|adab|dawah|sadaqah|dienst/.test(id)) return "ilm.png";
+    if (/moschee|umgang|reise|arbeit|medien|ruqyah|krankheit/.test(id)) return "shield.png";
+    if (/nifas|maedchen|tod|trauer|janaiz|janazah/.test(id)) return "ramadan.png";
+    return "frauen.png";
+  }
+
+  function libraryAreaCard(area, idx) {
+    var n = area.id ? countSichtbare(area.id) : 0;
+    var pending = !!area.pending || n === 0;
+    var nav = pending ? "" : ' data-nav="frauen" data-value="' + esc(area.id) + '"';
+    return (
+      '<article class="frauen-library-area-card' + (pending ? " is-pending" : "") + '"' + nav + '>' +
+        '<span class="frauen-library-area-card__nr" aria-hidden="true">' + String(idx + 1).padStart(2, "0") + '</span>' +
+        '<span class="frauen-library-area-card__icon" aria-hidden="true">' + libraryIcon(libraryAreaIcon(area)) + '</span>' +
+        '<div class="frauen-library-area-card__copy">' +
+          '<h3>' + esc(area.title) + '</h3>' +
+          '<p>' + esc(areaFallbackLede(area)) + '</p>' +
+          '<span class="frauen-library-area-card__meta">' + (pending ? "In Prüfung" : n + (n === 1 ? " geprüfter Inhalt" : " geprüfte Inhalte")) + '</span>' +
+        '</div>' +
+        '<span class="frauen-library-area-card__arrow" aria-hidden="true">' + (pending ? "·" : "›") + '</span>' +
+      '</article>'
+    );
+  }
+
+  function renderLibraryGroup(groupId) {
+    var group = libraryGroupById(groupId);
+    if (!group) return '<p class="frauen-empty">Dieser Bereich ist nicht verfügbar.</p>';
+    var areas = group.areas.map(libraryAreaById).filter(Boolean);
+    var total = libraryVisibleCount(group);
+    return (
+      '<div class="frauen-library-shell frauen-library-group">' +
+        libraryHero(
+          group.title,
+          group.desc,
+          "group frauen-library-hero--tone-" + group.id,
+          "",
+          group.kicker,
+          group.areas.length + " Kapitel",
+          total ? total + " geprüfte Inhalte" : "Quellen werden geprüft"
+        ) +
+        '<div class="frauen-library-section-head"><div><span>Kapitel</span><h3>Wähle deinen Bereich</h3></div><p>Erst im nächsten Schritt erscheinen die einzelnen Aussagen.</p></div>' +
+        '<section class="frauen-library-area-grid" aria-label="' + esc(group.title) + '">' +
+          areas.map(function (a, idx) { return libraryAreaCard(a, idx); }).join("") +
+        '</section>' +
+      '</div>'
+    );
+  }
+
+  function renderSectionHero(abschnitt) {
+    var owner = libraryOwnerGroup(abschnitt);
+    var meta = pageMeta(abschnitt);
+    var count = countSichtbare(abschnitt);
+    return libraryHero(
+      meta.title || bereichKicker(abschnitt),
+      meta.subtitle || "Geprüfte Inhalte mit Quelle und Direktnachweis.",
+      "section " + (owner ? "frauen-library-hero--tone-" + owner.id : "frauen-library-hero--tone-fiqh"),
+      owner ? "group/" + owner.id : "",
+      owner ? owner.title : "Frauen im Islam",
+      count ? count + (count === 1 ? " geprüfter Inhalt" : " geprüfte Inhalte") : "In Prüfung",
+      "Quelle & Direktnachweis"
+    );
+  }
+
   function hubRow(area) {
     var n = area.id ? countSichtbare(area.id) : 0;
     var leer = !!area.pending || n === 0;
@@ -2505,42 +2728,41 @@
   }
 
   function renderHub() {
-    var areas = hubAreas();
-    var themen = [{ id: "alle", label: "Alle" }].concat(
-      areas
-        .filter(function (a) {
-          return a.id;
-        })
-        .map(function (a) {
-          return { id: a.id, label: a.title };
-        })
-    );
     var q = currentQ("hub");
-    var thema = currentThema("hub");
     var treffer = q || pickSprecher || pickBuch ? sucheUeberall(q) : [];
-    var liste = q || pickSprecher || pickBuch
-      ? treffer.length
-        ? '<section class="post-grid topic-collection frauen-post-list">' +
-          treffer
-            .map(function (t) {
-              return listCard(t.e, t.abschnitt);
-            })
-            .join("") +
-          "</section>"
-        : '<p class="frauen-empty">Keine passende Aussage.</p>'
-      : '<section class="category-cluster">' +
-        '<div class="topics-theme-grid grid-list frauen-fiqh-list" aria-label="Hauptbereiche">' +
-        areas
-          .map(function (a) {
-            return hubRow(a);
-          })
-          .join("") +
-        "</div></section>";
+    var hero = libraryHero(
+      "Frauen im Islam",
+      "Qurʾān · Sunnah · Fiqh · Frauen der ersten Generationen",
+      "hub",
+      null,
+      "DĀR AL TAWḤĪD · WISSENSBIBLIOTHEK",
+      "7 Wissenswelten",
+      libraryTotalVisibleCount() + " geprüfte Inhalte"
+    );
+    var search = searchPanel("hub", [{ id: "alle", label: "Alle" }], q, "alle", "Thema, Aussage, Person oder Werk suchen");
+    if (q || pickSprecher || pickBuch) {
+      return (
+        '<div class="frauen-library-shell frauen-library-hub is-searching">' +
+          hero +
+          '<div class="frauen-library-search-wrap">' + search + '</div>' +
+          '<div class="frauen-library-section-head"><div><span>Suche</span><h3>' + treffer.length + ' Treffer</h3></div><p>Geprüfte Aussagen aus allen Frauenbereichen.</p></div>' +
+          (treffer.length
+            ? '<section class="post-grid topic-collection frauen-post-list">' +
+                treffer.map(function (t) { return listCard(t.e, t.abschnitt); }).join("") +
+              '</section>'
+            : '<p class="frauen-empty">Keine passende Aussage.</p>') +
+        '</div>'
+      );
+    }
     return (
-      '<div class="topics-hub frauen-hub">' +
-      searchPanel("hub", themen, q, thema, "Suche nach Beitrag, Duʿāʾ, Thema, Gelehrten, Buch") +
-      liste +
-      "</div>"
+      '<div class="frauen-library-shell frauen-library-hub">' +
+        hero +
+        '<div class="frauen-library-search-wrap">' + search + '</div>' +
+        '<div class="frauen-library-section-head"><div><span>Bibliothek</span><h3>Wissen geordnet nach Lebensbereichen</h3></div><p>Die bisherigen Einzelbereiche bleiben erhalten, sind aber klarer zusammengefasst.</p></div>' +
+        '<section class="frauen-library-grid" aria-label="Wissenswelten für Frauen">' +
+          FRAUEN_LIBRARY_GROUPS.map(libraryGroupCard).join("") +
+        '</section>' +
+      '</div>'
     );
   }
 
@@ -3056,10 +3278,12 @@
           : abschnitt === "sahabiyyat"
             ? '<p class="lede">Kurze geprüfte Berichte über Frauen der Ṣaḥābah – mit Quelle und Direktnachweis.</p>'
             : '<p class="lede">Nur geprüfte Aussagen mit Direktnachweis. Die volle Aussage öffnet sich nach dem Tippen.</p>';
+    var sectionHero = renderSectionHero(abschnitt);
     return (
-      '<div class="topic-collection-page frauen-list-page">' +
+      '<div class="topic-collection-page frauen-list-page frauen-library-list">' +
+      sectionHero +
       hint +
-      filterBlock(abschnitt, themen, q, thema) +
+      '<div class="frauen-library-list-controls">' + filterBlock(abschnitt, themen, q, thema) + '</div>' +
       (items.length
         ? '<section class="post-grid topic-collection frauen-post-list" aria-label="Aussagen">' +
           items.map(function (e) {
@@ -3224,6 +3448,12 @@
 
   function pageMeta(value) {
     var parsed = parseValue(value);
+    if (parsed.page === "group") {
+      var group = libraryGroupById(parsed.kennung);
+      return group
+        ? { title: group.title, subtitle: group.desc }
+        : { title: "Frauen im Islam", subtitle: "Geprüfte Wissensbereiche." };
+    }
     if (parsed.abschnitt === SALAF_SLUG && parsed.page === "list") {
       return {
         title: "Frauen der Salaf",
@@ -3634,6 +3864,7 @@
   function render(value) {
     var parsed = parseValue(value);
     currentAbschnitt = parsed.abschnitt || "hub";
+    try { document.body.setAttribute("data-frauen-view", parsed.page || "hub"); } catch (err) {}
     if (
       !fiqhCache ||
       !sahabCache ||
@@ -3681,6 +3912,7 @@
     if (parsed.page === "hub") {
       return renderHub();
     }
+    if (parsed.page === "group") return renderLibraryGroup(parsed.kennung);
     if (parsed.page === "detail") return renderDetail(parsed.abschnitt, parsed.kennung);
     return renderList(parsed.abschnitt);
   }
