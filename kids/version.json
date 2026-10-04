@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1087",
-  "label": "KIDS · V1.07.13",
-  "releasedAt": "2026-10-03T23:18:00.000Z",
-  "note": "V1.07.13: Geschichten-Seite vollflächig oben integriert; Story-Bottom-Navigation getrennt; aktueller App-Stand mit Cache v1087 synchronisiert.",
+  "buildId": "kids-shell-v12-sahaba1089",
+  "label": "KIDS · V1.07.14",
+  "releasedAt": "2026-10-04T00:08:00.000Z",
+  "note": "V1.07.14: Geschichten mit Audio erhalten ein gemeinsames kindgerechtes Mitlese-Fenster. Beim Abspielen öffnet sich eine responsive Bottom-Sheet-Ansicht mit Play/Pause, Fortschritt, Zeit und automatisch folgendem Textabschnitt; manuelles Scrollen bleibt möglich. Aktiv für Propheten- und Ṣaḥābah-Geschichten und als wiederverwendbares System für künftige Text+Audio-Bereiche.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1087",
+    "serviceWorkerCache": "v1089",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -80,8 +80,8 @@
     },
     "mubashshirunProfilePanels": true,
     "mubashshirunDirectHadithLinks": true,
-    "mubashshirunStoryUi": "responsive-background-card-v10",
-    "mubashshirunBundleVersion": 10,
+    "mubashshirunStoryUi": "responsive-follow-reader-v11",
+    "mubashshirunBundleVersion": 11,
     "mubashshirunDataVersion": 4,
     "mubashshirunAudioPublishPipeline": true,
     "mubashshirunFuṣḥāReview": true,
@@ -152,7 +152,7 @@
     "mubashshirunAgeAwareVisualDisclaimer": true,
     "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03",
     "mubashshirunSwipeBack": true,
-    "prophetStoriesBundleVersion": 23,
+    "prophetStoriesBundleVersion": 24,
     "storyCategoryBackgrounds": "prophets-adobe-v22+sahabah-runway-v10",
     "mubashshirunCardFocalCentering": "subject-aware-responsive-v1",
     "homeChoices": "oval-capsule-restored",
@@ -161,6 +161,9 @@
     "storiesPageHero": "edge-to-edge-adobe-v1082",
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1084",
-    "storiesBottomNav": "separated-background-v1086"
+    "storiesBottomNav": "separated-background-v1086",
+    "storyFollowReader": "v1",
+    "storyFollowReaderMode": "responsive-bottom-sheet-auto-paragraph-follow",
+    "storyFollowReaderReusable": true
   }
 }
