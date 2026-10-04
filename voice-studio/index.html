@@ -2156,15 +2156,44 @@ async function startDesktopGenerationJob(kind,payload,text=""){
   persistDesktopGenerationJob(d.jobId,kind,text);
   return d;
 }
-async function waitDesktopGenerationJob(jobId,timeoutMs=30*60*1000){
+async function waitDesktopGenerationJob(jobId,timeoutMs=30*60*1000,onProgress=null){
   const deadline=Date.now()+Math.max(60000,Number(timeoutMs)||0);
   while(Date.now()<deadline){
     const d=await getDesktopGenerationJob(jobId);
+    if(d.render&&typeof onProgress==="function")onProgress(d.render,d);
     if(d.state==="ready")return d;
     if(d.state==="error")throw Error(d.error||"Audio-Erzeugung fehlgeschlagen.");
-    await new Promise(r=>setTimeout(r,280));
+    await new Promise(r=>setTimeout(r,180));
   }
   throw Error("Audio-Auftrag hat das Zeitlimit überschritten.");
+}
+function applyDesktopRenderProgress(kind,jobId,st,buttons=[]){
+  if(!st)return;
+  const statusJob=String(st.render_job_id||"").trim();
+  if(statusJob&&jobId&&statusJob!==jobId)return;
+  const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
+  const total=Math.max(0,Number(st.render_total_segments||0));
+  const completed=Math.max(0,Number(st.render_completed_segments||0));
+  const active=Math.max(0,Number(st.render_active_segment||0));
+  const elapsed=Math.max(0,Number(st.segment_elapsed_seconds||0));
+  const cached=Math.max(0,Number(st.render_cached_segments||0));
+  const chunkMode=st.render_preview_ready&&updateChunkStream(kind,st);
+  const label=(total&&active)
+    ?("Abschnitt "+active+"/"+total+(elapsed?" · "+elapsed+" s":""))
+    :("Erzeugen "+pct+" %");
+  (Array.isArray(buttons)?buttons:[buttons]).filter(Boolean).forEach(b=>b.textContent=label);
+  if(kind==="free"){
+    $("#freeVoiceProgress").style.width=pct+"%";
+    $("#freeVoiceDot").className="dot "+(st.render_state==="error"?"bad":"ok");
+    $("#freeVoiceStatus").textContent=st.message||("Audio wird erzeugt · "+pct+" %");
+  }else if(st.render_state==="error"&&st.last_error){
+    setMessage("Renderfehler: "+st.last_error);
+  }else{
+    const doneHint=(total&&active)?(" · "+completed+" fertig"):"";
+    const cacheHint=cached?(" · "+cached+" bereits bekannt"):"";
+    const liveHint=chunkMode?" · Live-Audio läuft":"";
+    setMessage((st.message||("Audio wird erzeugt · "+pct+" %"))+doneHint+cacheHint+liveHint,"warn");
+  }
 }
 function desktopGenerationAudioUrl(job){
   const name=String(job?.outputName||"").trim();
