@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "id": "DAR_KIDS_QUIZ_V1",
   "namespace": "dar-kids-quiz",
-  "version": 18,
+  "version": 19,
   "updatedAt": "2026-10-04",
   "separateFromAdultQuiz": true,
   "adultQuizDependency": false,
@@ -44,7 +44,7 @@
       "Ṣaḥīḥ al-Bukhārī",
       "Ṣaḥīḥ Muslim"
     ],
-    "note": "DĀR AL TAWḤĪD Kids ist technisch und redaktionell vom normalen DĀR-Quiz getrennt. Aktuell 550 eigenständige, altersgeprüfte Kids-Fragen."
+    "note": "DĀR AL TAWḤĪD Kids ist technisch und redaktionell vom normalen DĀR-Quiz getrennt. Aktuell 600 eigenständige, altersgeprüfte Kids-Fragen."
   },
   "voice": {
     "speaker": "Serhat Abu Malik",
@@ -56,10 +56,10 @@
     "futureItems": "Neue freigegebene Kids-Fragen werden vom Voice Studio automatisch in den Owner-Voice-Batch aufgenommen."
   },
   "counts": {
-    "total": 550,
-    "4-6": 198,
-    "7-8": 176,
-    "9-10": 176
+    "total": 600,
+    "4-6": 216,
+    "7-8": 192,
+    "9-10": 192
   },
   "items": [
     {
@@ -18868,6 +18868,1716 @@
       "explanation": "Der Prophet ﷺ nannte unter anderem gutes Reden, Hilfe, Schritte zum Gebet und das Entfernen von Schaden als Ṣadaqah.",
       "sourceType": "Ṣaḥīḥ Ḥadīth",
       "source": "Ṣaḥīḥ al-Bukhārī 2989; Ṣaḥīḥ Muslim 1009",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-551",
+      "number": 551,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "star",
+      "category": "Schöpfung",
+      "topic": "Augen",
+      "question": "Hat Allah uns zwei Augen gegeben?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah erinnert den Menschen daran, dass Er ihm zwei Augen gegeben hat.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 90:8",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-552",
+      "number": 552,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "speech",
+      "category": "Schöpfung",
+      "topic": "Zunge und Lippen",
+      "question": "Hat Allah uns eine Zunge und zwei Lippen gegeben?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah nennt die Zunge und die zwei Lippen als Seine Gaben.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 90:9",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-553",
+      "number": 553,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "help",
+      "category": "Rechtleitung",
+      "topic": "Zwei Wege",
+      "question": "Hat Allah dem Menschen die zwei Wege gezeigt?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah zeigt dem Menschen den Weg des Guten und den Weg des Schlechten.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 90:10",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-554",
+      "number": 554,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "heart",
+      "category": "Aḫlāq",
+      "topic": "Familie und Bedürftige",
+      "question": "Ist es gut, Eltern, Verwandten und Bedürftigen zu helfen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah nennt Eltern, Verwandte, Waisen, Bedürftige und Reisende als Empfänger guter Ausgaben.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:215",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-555",
+      "number": 555,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "spark",
+      "category": "Aḫlāq",
+      "topic": "Gute Taten",
+      "question": "Sollen wir uns bei guten Taten beeilen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah ruft dazu auf, miteinander zu guten Taten zu eilen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:148",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-556",
+      "number": 556,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "droplet",
+      "category": "Schöpfung",
+      "topic": "Regen",
+      "question": "Kann Allah Regen senden?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah sendet Regen herab und breitet Seine Barmherzigkeit aus.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 42:28",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-557",
+      "number": 557,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "food",
+      "category": "Schöpfung",
+      "topic": "Pflanzen und Früchte",
+      "question": "Lässt Allah Pflanzen und Früchte wachsen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah lässt durch Wasser Pflanzen, Körner und Früchte wachsen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 6:99",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-558",
+      "number": 558,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "star",
+      "category": "Schöpfung",
+      "topic": "Sterne",
+      "question": "Hat Allah Sterne gemacht, damit Menschen sich orientieren können?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah nennt die Sterne als Zeichen, mit denen Menschen sich in der Dunkelheit orientieren.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 6:97",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-559",
+      "number": 559,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "moon",
+      "category": "Schöpfung",
+      "topic": "Nacht, Sonne und Mond",
+      "question": "Hat Allah die Nacht zur Ruhe und Sonne und Mond zur Berechnung gemacht?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah machte die Nacht zur Ruhe und Sonne und Mond zur Berechnung.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 6:96",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-560",
+      "number": 560,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "droplet",
+      "category": "Dankbarkeit",
+      "topic": "Trinkwasser",
+      "question": "Ist unser Trinkwasser eine Gabe von Allah?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah erinnert uns an das Wasser, das wir trinken, und dass Er es herabsendet.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 56:68–70",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-561",
+      "number": 561,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "heart",
+      "category": "Schöpfung",
+      "topic": "Tiere",
+      "question": "Sind Tiere Gemeinschaften, die Allah kennt?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah sagt, dass Tiere und Vögel Gemeinschaften sind.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 6:38",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-562",
+      "number": 562,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "spark",
+      "category": "Aḫlāq",
+      "topic": "Lohn guter Taten",
+      "question": "Belohnt Allah eine gute Tat vielfach?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Wer mit einer guten Tat kommt, erhält nach dem Vers zehnfachen Lohn.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 6:160",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-563",
+      "number": 563,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "heart",
+      "category": "Dankbarkeit",
+      "topic": "Allahs Gaben",
+      "question": "Kommt jede Gabe, die wir haben, von Allah?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah sagt, dass jede Gabe, die wir haben, von Ihm ist.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:53",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-564",
+      "number": 564,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "food",
+      "category": "Tawakkul",
+      "topic": "Versorgung",
+      "question": "Versorgt Allah Menschen und Tiere?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah versorgt viele Geschöpfe, auch solche, die ihre Versorgung nicht selbst tragen können.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 29:60",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-565",
+      "number": 565,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "help",
+      "category": "Tawakkul",
+      "topic": "Versorgung aller Geschöpfe",
+      "question": "Kennt Allah die Versorgung jedes Lebewesens?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah kennt jedes Lebewesen und seine Versorgung.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 11:6",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-566",
+      "number": 566,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "spark",
+      "category": "Tawbah",
+      "topic": "Gute Taten",
+      "question": "Können gute Taten schlechte Taten auslöschen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah lehrt, dass gute Taten schlechte Taten fortnehmen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 11:114",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-567",
+      "number": 567,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "heart",
+      "category": "Aḫlāq",
+      "topic": "Verzeihen",
+      "question": "Ist Verzeihen und Nachsehen etwas Gutes?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah ruft zum Verzeihen und Nachsehen auf und erinnert an Seine Vergebung.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 24:22",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-568",
+      "number": 568,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "moon",
+      "category": "Dhikr",
+      "topic": "Nicht ablenken lassen",
+      "question": "Sollen Dinge, die wir besitzen, uns von Allahs Gedenken abhalten?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Nein",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Ja",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah warnt davor, dass Besitz und Familie vom Gedenken Allahs ablenken.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 63:9",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-569",
+      "number": 569,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "book",
+      "category": "Qurʾān",
+      "topic": "Erste Offenbarung",
+      "question": "Mit welchem Befehl beginnt Sūrat al-ʿAlaq?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Lies im Namen deines Herrn",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Schweige für immer",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Sammle Besitz",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Die Sūrah beginnt mit dem Befehl zu lesen im Namen des Herrn, der erschaffen hat.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 96:1",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-570",
+      "number": 570,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "library",
+      "category": "Wissen",
+      "topic": "Allah lehrt",
+      "question": "Was lehrt Qurʾān 96:3–5 über Wissen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allah lehrt den Menschen, was er nicht wusste",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Wissen ist nur für wenige Menschen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Schreiben ist ohne Nutzen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah nennt Sich den Großzügigsten und erinnert daran, dass Er durch die Schreibfeder lehrt.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 96:3–5",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-571",
+      "number": 571,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "star",
+      "category": "Schöpfung",
+      "topic": "Schöpfung und Rechtleitung",
+      "question": "Was antwortete Mūsā عليه السلام über seinen Herrn?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Er gab jedem Ding seine Gestalt und leitete es",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Er erschuf nichts",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Er kennt nur Menschen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Mūsā sagte, ihr Herr sei Derjenige, der jedem Ding seine Schöpfung gab und es dann leitete.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 20:50",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-572",
+      "number": 572,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "spark",
+      "category": "Schöpfung",
+      "topic": "Erschaffen und leiten",
+      "question": "Was nennt Sūrat al-Aʿlā über Allah?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Er erschuf, ordnete, bestimmte und leitete",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Er braucht Hilfe",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Er vergisst Seine Schöpfung",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah beschreibt Sich als Den, der erschafft, formt, bestimmt und leitet.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 87:1–3",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-573",
+      "number": 573,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "mosque",
+      "category": "Tawḥīd",
+      "topic": "Alles für Allah",
+      "question": "Für wen sind Gebet, Opfer, Leben und Tod des Muslims?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Für Allah allein",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Für die Meinung anderer Menschen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Für Ruhm",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah befiehlt dem Propheten ﷺ zu sagen, dass Gebet, Opfer, Leben und Tod Allah gehören.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 6:162–163",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-574",
+      "number": 574,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "mosque",
+      "category": "Tawḥīd",
+      "topic": "Aufrichtige Anbetung",
+      "question": "Wie sollen wir Allah dienen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Aufrichtig und nur Ihm",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur wenn andere zuschauen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Mit Partnern neben Ihm",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah befiehlt aufrichtige Anbetung für Ihn allein.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 39:11–14",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-575",
+      "number": 575,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "moon",
+      "category": "Dhikr",
+      "topic": "Allah gedenken",
+      "question": "Was verbindet Qurʾān 73:8?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allahs Namen gedenken und sich Ihm hingeben",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Andere Menschen anrufen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Das Gebet vergessen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Vers befiehlt, Allahs Namen zu gedenken und sich Ihm ganz zuzuwenden.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 73:8",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-576",
+      "number": 576,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "star",
+      "category": "Īmān",
+      "topic": "Allahs Wissen",
+      "question": "Was weiß Allah nach Qurʾān 57:4?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Was in die Erde eingeht und aus ihr herauskommt sowie was vom Himmel kommt und hinaufsteigt",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur Dinge am Tag",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur das, was Menschen laut sagen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allahs Wissen umfasst, was in die Erde eintritt, aus ihr kommt, vom Himmel herabkommt und hinaufsteigt.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 57:4",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-577",
+      "number": 577,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "spark",
+      "category": "Schöpfung",
+      "topic": "Zeichen Allahs",
+      "question": "Wo zeigt Allah Seine Zeichen nach Qurʾān 41:53?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Am Horizont und in den Menschen selbst",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur in einem einzigen Land",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur in Büchern von Menschen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah kündigt Zeichen am Horizont und in den Menschen selbst an.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 41:53",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-578",
+      "number": 578,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "heart",
+      "category": "Schöpfung",
+      "topic": "Paare",
+      "question": "Was sagt Qurʾān 51:49 über die Schöpfung?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allah erschuf von den Dingen Paare",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Alles entstand ohne Schöpfer",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nichts hat Ordnung",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah erinnert daran, dass Er von den Dingen Paare erschuf.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 51:49",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-579",
+      "number": 579,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "help",
+      "category": "Aḫlāq",
+      "topic": "Waisen und Arme",
+      "question": "Was tadelt Sūrat al-Faǧr?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Waisen nicht zu ehren und nicht zum Speisen der Armen anzuspornen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Einen Gast zu ehren",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Wissen zu lernen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Die Sūrah tadelt, Waisen nicht zu ehren und andere nicht zum Speisen Bedürftiger anzuspornen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 89:17–18",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-580",
+      "number": 580,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "help",
+      "category": "Aḫlāq",
+      "topic": "Kleine Hilfe",
+      "question": "Was kritisiert Sūrat al-Māʿūn am Ende?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Selbst kleine hilfreiche Dinge zurückzuhalten",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Jemandem etwas Nützliches zu leihen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Gutes zu tun",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Die Sūrah warnt unter anderem davor, selbst kleine Hilfeleistungen zurückzuhalten.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 107:7",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-581",
+      "number": 581,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "heart",
+      "category": "Aḫlāq",
+      "topic": "Verzeihen",
+      "question": "Welche Haltung lehrt Qurʾān 24:22?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Verzeihen und nachsehen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Jeden Fehler für immer nachtragen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Menschen beleidigen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah ruft zum Verzeihen und Nachsehen auf und erinnert an den Wunsch nach Seiner Vergebung.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 24:22",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-582",
+      "number": 582,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "moon",
+      "category": "Dhikr",
+      "topic": "Nicht ablenken lassen",
+      "question": "Wovor warnt Qurʾān 63:9?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Dass Besitz und Familie vom Gedenken Allahs ablenken",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Dass man seine Familie gut behandelt",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Dass man arbeitet",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Besitz und Kinder dürfen den Gläubigen nicht vom Gedenken Allahs ablenken.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 63:9",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-583",
+      "number": 583,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "coin",
+      "category": "Ṣadaqah",
+      "topic": "Rechtzeitig geben",
+      "question": "Wann sollen wir von Allahs Versorgung ausgeben?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Bevor der Tod kommt und keine Zeit mehr bleibt",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Erst wenn gar nichts mehr möglich ist",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur wenn andere uns loben",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah ruft dazu auf, rechtzeitig von Seiner Versorgung auszugeben.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 63:10",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-584",
+      "number": 584,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "spark",
+      "category": "Aḫlāq",
+      "topic": "Sich bemühen",
+      "question": "Was lehrt Qurʾān 53:39 über das Bemühen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Der Mensch erhält, wofür er sich bemüht",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Bemühen ist immer nutzlos",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur andere tragen Verantwortung",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Vers erinnert den Menschen an die Bedeutung seines eigenen Bemühens.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 53:39",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-585",
+      "number": 585,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "heart",
+      "category": "Adab",
+      "topic": "Recht der Mutter",
+      "question": "Wer hat nach dem Ḥadīṯ besonders viel Recht auf gute Begleitung?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Die Mutter, dann die Mutter, dann die Mutter, dann der Vater",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur Freunde",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur Menschen mit viel Besitz",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Prophet ﷺ nannte dreimal die Mutter und danach den Vater als besonders berechtigt auf gute Begleitung.",
+      "sourceType": "Ṣaḥīḥ Ḥadīth",
+      "source": "Ṣaḥīḥ al-Bukhārī 5971; Ṣaḥīḥ Muslim 2548",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-586",
+      "number": 586,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "help",
+      "category": "Iḥsān",
+      "topic": "Waisen betreuen",
+      "question": "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Nähe zum Propheten ﷺ im Paradies",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur weltlichen Ruhm",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Keine besondere Belohnung",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Prophet ﷺ sagte, dass er und der Betreuer eines Waisenkindes im Paradies eng beieinander sein werden.",
+      "sourceType": "Ṣaḥīḥ Ḥadīth",
+      "source": "Ṣaḥīḥ al-Bukhārī 6005",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-587",
+      "number": 587,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "spark",
+      "category": "Daʿwah",
+      "topic": "Zum Guten führen",
+      "question": "Welchen Lohn hat jemand, der einen anderen zu einer guten Tat führt?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Einen Lohn wie derjenige, der die gute Tat ausführt",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Überhaupt keinen Lohn",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur dann Lohn, wenn niemand die Tat ausführt",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Prophet ﷺ lehrte, dass derjenige, der auf Gutes hinweist, einen Lohn wie der Ausführende erhält.",
+      "sourceType": "Ṣaḥīḥ Ḥadīth",
+      "source": "Ṣaḥīḥ Muslim 1893",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-588",
+      "number": 588,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "heart",
+      "category": "Iḥsān",
+      "topic": "Iḥsān in allem",
+      "question": "Welche umfassende Regel lehrt Ṣaḥīḥ Muslim 1955?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allah hat Iḥsān in allen Dingen vorgeschrieben",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Iḥsān gilt nur beim Gebet",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Gutes Verhalten ist unwichtig",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Ḥadīṯ lehrt, dass Iḥsān und gutes, sorgfältiges Handeln alle Lebensbereiche umfasst.",
+      "sourceType": "Ṣaḥīḥ Ḥadīth",
+      "source": "Ṣaḥīḥ Muslim 1955",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-589",
+      "number": 589,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "mosque",
+      "category": "Ṣalāh",
+      "topic": "Jumuʿah",
+      "question": "Was sollen Gläubige tun, wenn am Freitag zum Gebet gerufen wird?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Zum Gedenken Allahs eilen und den Handel lassen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Den Gebetsruf ignorieren",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur weiterarbeiten",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Qurʾān 62:9 befiehlt, beim Ruf zum Freitagsgebet zum Gedenken Allahs zu eilen und Handel ruhen zu lassen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 62:9",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-590",
+      "number": 590,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "mosque",
+      "category": "Dhikr",
+      "topic": "Nach der Jumuʿah",
+      "question": "Was erlaubt und empfiehlt Qurʾān 62:10 nach dem Gebet?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Sich auf der Erde zu verteilen, Allahs Gunst zu suchen und Ihn viel zu gedenken",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Alle Arbeit für immer zu beenden",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Allah nur in der Moschee zu gedenken",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Nach dem Gebet dürfen die Gläubigen ihrer Arbeit nachgehen und Allahs Gunst suchen, während sie Ihn viel gedenken.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 62:10",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-591",
+      "number": 591,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "spark",
+      "category": "Īmān",
+      "topic": "Zu guten Taten eilen",
+      "question": "Wie beschreibt Qurʾān 23:57–61 rechtschaffene Gläubige?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Sie fürchten ihren Herrn, glauben an Seine Zeichen und eilen zu guten Taten",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Sie fühlen sich vor Allah sicher und vernachlässigen Taten",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Sie suchen nur weltlichen Ruhm",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Die Verse nennen Gottesfurcht, Glauben, reinen Tawḥīd und das Eilen zu guten Taten.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 23:57–61",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-592",
+      "number": 592,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "heart",
+      "category": "Īmān",
+      "topic": "Eigenschaften der Gläubigen",
+      "question": "Welche Wirkung haben Allahs Verse nach Qurʾān 8:2 auf Gläubige?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ihr Īmān nimmt zu",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Ihr Īmān verschwindet",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Sie werden vom Gebet abgehalten",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Die Verse beschreiben Gläubige, deren Herzen bei Allahs Gedenken bewegt werden und deren Īmān durch Seine Verse zunimmt.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 8:2–4",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-593",
+      "number": 593,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "moon",
+      "category": "Tazkiyyah",
+      "topic": "Demütige Herzen",
+      "question": "Wozu ruft Qurʾān 57:16 die Gläubigen auf?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Dass ihre Herzen beim Gedenken Allahs und der Wahrheit demütig werden",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Dass ihre Herzen hart bleiben",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Dass sie die Offenbarung vergessen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah ruft die Gläubigen zu demütigen Herzen beim Gedenken an Ihn und bei der offenbarten Wahrheit auf.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 57:16",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-594",
+      "number": 594,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "book",
+      "category": "Qurʾān",
+      "topic": "Wirkung des Qurʾān",
+      "question": "Wie beschreibt Qurʾān 39:23 die Wirkung der Offenbarung?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Haut und Herzen reagieren darauf und werden weich beim Gedenken Allahs",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Sie hat keine Wirkung auf Herzen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Sie dient nur der Unterhaltung",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah beschreibt den Qurʾān als die beste Rede, bei der sich die Haut der Gottesfürchtigen bewegt und ihre Haut und Herzen danach weich werden.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 39:23",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-595",
+      "number": 595,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "heart",
+      "category": "Tawakkul",
+      "topic": "Nicht verzweifeln",
+      "question": "Was lehrte Yaʿqūb عليه السلام seine Söhne über Allahs Erleichterung?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Nicht an Allahs Erleichterung zu verzweifeln",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Jede Hoffnung aufzugeben",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur auf Menschen zu vertrauen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Yaʿqūb عليه السلام befahl seinen Söhnen, zu suchen und nicht an Allahs Erleichterung zu verzweifeln.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 12:87",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-596",
+      "number": 596,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "star",
+      "category": "Īmān",
+      "topic": "Prüfungen und Herz",
+      "question": "Was lehrt Qurʾān 64:11 über eine Prüfung, die einen Menschen trifft?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Sie geschieht mit Allahs Erlaubnis, und Glaube an Allah führt das Herz",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Sie geschieht außerhalb von Allahs Wissen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Der Gläubige darf jede Hoffnung verlieren",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Vers verbindet Prüfungen mit Allahs Erlaubnis und der Rechtleitung des Herzens durch Īmān.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 64:11",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-597",
+      "number": 597,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "heart",
+      "category": "Ṣabr",
+      "topic": "Bei Unglück",
+      "question": "Was sagen geduldige Gläubige bei einem Unglück nach Qurʾān 2:156?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Wir gehören Allah und zu Ihm kehren wir zurück",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Wir gehören nur uns selbst",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Es gibt keine Rückkehr zu Allah",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah lobt diejenigen, die bei einem Unglück ihre Zugehörigkeit zu Ihm und ihre Rückkehr zu Ihm bekennen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:156",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-598",
+      "number": 598,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "spark",
+      "category": "Dīn",
+      "topic": "Allahs Religion unterstützen",
+      "question": "Welche Verheißung nennt Qurʾān 47:7?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Wer Allahs Sache unterstützt, dem hilft Allah und festigt seine Schritte",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Allah hilft nur ohne jede Handlung",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Gute Taten schwächen den Gläubigen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah verheißt den Gläubigen Hilfe und Festigkeit, wenn sie Seine Religion unterstützen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 47:7",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-599",
+      "number": 599,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "speech",
+      "category": "Sunnah",
+      "topic": "Hören und gehorchen",
+      "question": "Wie antworten Gläubige, wenn sie zu Allah und Seinem Gesandten gerufen werden, damit zwischen ihnen entschieden wird?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Wir hören und gehorchen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Wir hören nur, wenn es uns gefällt",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Wir lehnen jede Entscheidung ab",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Qurʾān 24:51 beschreibt die Antwort der Gläubigen mit Hören und Gehorchen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 24:51",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-600",
+      "number": 600,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "heart",
+      "category": "Sunnah",
+      "topic": "Liebe zu Allah und Folgen des Propheten",
+      "question": "Was ist nach Qurʾān 3:31 ein Zeichen wahrer Liebe zu Allah?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Dem Propheten ﷺ zu folgen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Die Sunnah zu verlassen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur über Liebe zu sprechen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah befiehlt dem Propheten ﷺ zu sagen: Wer Allah liebt, soll ihm folgen; dann liebt und vergibt Allah.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 3:31",
       "status": "published",
       "reviewStatus": "approved",
       "verification": "approved"
