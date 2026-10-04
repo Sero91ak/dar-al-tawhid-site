@@ -3221,7 +3221,7 @@
       }).catch(function (err) {
         if (err && err.name === 'AbortError') return;
         console.error(err);
-        showToast('Neues Bild konnte nicht erzeugt werden. Bitte kurz warten und erneut versuchen.');
+        showToast(err && err.message ? String(err.message).slice(0, 180) : 'Neues Bild konnte nicht erzeugt werden. Bitte kurz warten und erneut versuchen.');
       }).finally(function () {
         btn.classList.remove('is-loading');
       });
