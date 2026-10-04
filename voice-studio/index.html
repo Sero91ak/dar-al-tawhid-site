@@ -2603,7 +2603,7 @@ function clearFreeVoiceLearningPreview(){
   freeVoiceLearningPreviewId="";
   $("#freeVoiceLearnConfirmBtn").disabled=true;
   const p=$("#freeVoiceLearnPlayer");
-  if(freeVoiceLearningPreviewUrl){URL.revokeObjectURL(freeVoiceLearningPreviewUrl);freeVoiceLearningPreviewUrl=""}
+  if(freeVoiceLearningPreviewUrl){revokeObjectUrlIfNeeded(freeVoiceLearningPreviewUrl);freeVoiceLearningPreviewUrl=""}
   if(p){p.pause();p.removeAttribute("src");p.hidden=true}
 }
 
@@ -2628,8 +2628,9 @@ function renderFreeVoiceLearningResults(results){
     wrap.querySelectorAll(".free-learn-result").forEach((el,j)=>el.classList.toggle("active",j===i));
     $("#freeVoiceLearnSpeech").value=item.ttsText||"";
     $("#freeVoiceLearnLanguage").value=item.ttsLanguage==="de"?"de":"ar";
-    $("#freeVoiceLearnStatus").textContent="Treffer gewählt. Jetzt Test anhören.";
+    $("#freeVoiceLearnStatus").textContent="Treffer gewählt · Schnelltest startet …";
     clearFreeVoiceLearningPreview();
+    previewFreeVoiceLearning().catch(()=>{});
   }));
 }
 
@@ -2692,29 +2693,48 @@ async function previewFreeVoiceLearning(){
   }
   clearFreeVoiceLearningPreview();
   const btn=$("#freeVoiceLearnPreviewBtn"),old=btn.textContent;
-  btn.disabled=true;btn.textContent="Erzeuge Test …";
+  btn.disabled=true;btn.textContent="Schnelltest …";
+  $("#freeVoiceLearnStatus").textContent="Schnelltest wird vorbereitet …";
   try{
-    const r=await localRequest("/learning/preview",{
+    const start=await localRequest("/learning/preview-start",{
       method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
         term,
         ttsText:speech,
         canonical:freeVoiceLearningCandidate?.canonical||term,
-        language
+        language,
+        variant:0
       })
     });
-    if(!r.ok){
-      const d=await r.json().catch(()=>({}));
-      throw Error(d.error||"Test-Audio konnte nicht erzeugt werden.");
+    const first=await start.json().catch(()=>({}));
+    if(!start.ok||!first.ok)throw Error(first.error||"Schnelltest konnte nicht gestartet werden.");
+    const jobId=String(first.jobId||"");
+    if(!jobId)throw Error("Schnelltest-Auftrag fehlt.");
+
+    let snap=first;
+    const deadline=Date.now()+45000;
+    while(Date.now()<deadline&&!["ready","error"].includes(String(snap.state||""))){
+      $("#freeVoiceLearnStatus").textContent=snap.state==="queued"
+        ?"Schnelltest vorgemerkt …"
+        :(snap.message||"Schnelltest wird erzeugt …");
+      await new Promise(r=>setTimeout(r,180));
+      const sr=await localRequest("/learning/preview-state?id="+encodeURIComponent(jobId),{cache:"no-store"});
+      snap=await sr.json().catch(()=>({}));
+      if(!sr.ok&&!snap.ok)throw Error(snap.error||"Schnelltest-Status nicht erreichbar.");
     }
-    const blob=await r.blob();
-    freeVoiceLearningPreviewId=r.headers.get("X-Learning-Preview-Id")||"";
+    if(snap.state==="error")throw Error(snap.error||"Schnelltest fehlgeschlagen.");
+    if(snap.state!=="ready")throw Error("Schnelltest war nach 45 Sekunden noch nicht bereit.");
+
+    freeVoiceLearningPreviewId=String(snap.previewId||"");
     if(!freeVoiceLearningPreviewId)throw Error("Test-ID fehlt.");
-    freeVoiceLearningPreviewUrl=URL.createObjectURL(blob);
+    freeVoiceLearningPreviewUrl=LOCAL_API+"/learning/preview-audio?id="+encodeURIComponent(jobId);
     const p=$("#freeVoiceLearnPlayer");
     p.src=freeVoiceLearningPreviewUrl;p.hidden=false;
     $("#freeVoiceLearnConfirmBtn").disabled=false;
-    $("#freeVoiceLearnStatus").textContent="Genau anhören. Wenn es stimmt, „So merken“ drücken.";
+    const ms=Math.max(0,Number(snap.elapsedMs||0));
+    const mode=String(snap.previewMode||"");
+    const speed=mode==="confirmed-lock"?"Master-Audio":mode==="preview-cache"?"Schnellcache":"Direkt-Schnelltest";
+    $("#freeVoiceLearnStatus").textContent="▶ Bereit"+(ms?" · "+(ms/1000).toFixed(1)+" s":"")+" · "+speed+" · nur bei korrekter Aussprache speichern.";
     await p.play().catch(()=>{});
   }catch(e){
     $("#freeVoiceLearnStatus").textContent=e.message||String(e);
