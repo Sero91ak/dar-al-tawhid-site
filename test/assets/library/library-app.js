@@ -810,6 +810,7 @@
           <h2>${esc(pub.title)}</h2>
           ${pub.subtitle ? `<p class="lib-detail-sub">${esc(pub.subtitle)}</p>` : ""}
           ${pub.description ? `<p class="lib-detail-desc">${esc(pub.description)}</p>` : ""}
+          ${pub.editor ? `<p class="lib-detail-editor">Herausgegeben von ${esc(pub.editor)}</p>` : ""}
           ${topMeta.length ? `<div class="lib-detail-topmeta">${topMeta.map((item) => `<span>${esc(item)}</span>`).join("")}</div>` : ""}
         </div>
       </div>
@@ -828,7 +829,7 @@
       <div class="lib-meta-grid lib-meta-grid-compact" aria-label="Werkdaten">
         <div class="lib-meta-item"><b>Kategorie</b><span>${esc(pub.category || "—")}</span></div>
         <div class="lib-meta-item"><b>Thema</b><span>${esc(pub.topic || "—")}</span></div>
-        <div class="lib-meta-item"><b>Sprache</b><span>${esc(pub.language || "—")}</span></div>
+        <div class="lib-meta-item"><b>Dateigröße</b><span>${esc(pub.fileSize || "—")}</span></div>
         <div class="lib-meta-item"><b>Version</b><span>${esc(pub.version || "—")}</span></div>
         <div class="lib-meta-item"><b>Aktualisiert</b><span>${esc(formatDate(pub.updatedAt))}</span></div>
         <div class="lib-meta-item"><b>Lesefortschritt</b><span>${progress && progress.lastPage ? `Seite ${progress.lastPage}${progress.totalPages ? ` von ${progress.totalPages}` : ""}` : pub.pageCount ? `0 von ${pub.pageCount}` : "Noch nicht begonnen"}</span></div>
