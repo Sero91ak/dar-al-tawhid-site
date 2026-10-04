@@ -297,15 +297,20 @@ function ensureUi(){
   audio.addEventListener("pause",()=>{playing=false;updatePlayButton()});
   followReader=window.DARKidsFollowReader?.create({
     id:"prophet-story",audio,
-    getContent:()=>({
-      key:active?("prophet:"+active.id+":"+ageKey()):"prophet:story",
-      title:active?(active.name+(active.id==="muhammad"?" ﷺ":"")):"Geschichte",
-      subtitle:"Prophetengeschichte · Alter "+age(),
-      album:"DĀR AL TAWḤĪD Kids · Propheten",
-      text:activeText,
-      artwork:active?heroUrl(active):"",
-      deepLink:active?("#stories/prophet/"+encodeURIComponent(active.id)):"#stories"
-    }),
+    getContent:()=>{
+      const meta=audioMeta(active)||{};
+      return{
+        key:active?("prophet:"+active.id+":"+ageKey()):"prophet:story",
+        title:active?(active.name+(active.id==="muhammad"?" ﷺ":"")):"Geschichte",
+        subtitle:"Prophetengeschichte · Alter "+age(),
+        album:"DĀR AL TAWḤĪD Kids · Propheten",
+        text:activeText,
+        artwork:active?heroUrl(active):"",
+        deepLink:active?("#stories/prophet/"+encodeURIComponent(active.id)):"#stories",
+        timings:meta.timings||meta.paragraphTimings||meta.cues||[],
+        syncPoints:meta.syncPoints||meta.syncAnchors||[]
+      };
+    },
     toggleAudio,
     disabled:()=>!audioMeta(active)?.url
   })||null;
@@ -321,7 +326,15 @@ function applyMode(){
 function renderActive(){
   if(!active)return;
   activeText=buildText(active);
-  followReader?.setContent({title:active.name+(active.id==="muhammad"?" ﷺ":""),text:activeText});
+  {
+    const meta=audioMeta(active)||{};
+    followReader?.setContent({
+      title:active.name+(active.id==="muhammad"?" ﷺ":""),
+      text:activeText,
+      timings:meta.timings||meta.paragraphTimings||meta.cues||[],
+      syncPoints:meta.syncPoints||meta.syncAnchors||[]
+    });
+  }
   const hero=$(".ps-hero");if(hero){hero.setAttribute("data-ps-id",active.id);hero.setAttribute("data-hero-copy",DEDICATED_HERO.has(active.id)?"left":"right")}
   const heroImg=$("#psHero");if(heroImg){
     heroImg.onerror=()=>{
