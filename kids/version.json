@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v12-sahaba1093",
   "label": "KIDS · V1.07.18",
   "releasedAt": "2026-10-04T00:52:24.534Z",
-  "note": "Hörbuch-Player V2: Wiedergabeposition bleibt pro Geschichte und Altersstufe erhalten; sichtbarer Minuten-/Sekunden-Zähler, antippbare Fortschrittsleiste, wiederöffnbarer Mitlese-Fokusmodus, automatisches Text-Following sowie iOS/Media-Session-Titel und Geschichtenbild für Now Playing/Lock Screen.",
+  "note": "Hörbuch-Player V3: native iOS-Now-Playing-Bridge für TAWḤĪD KIDS. AVAudioSession-Hintergrundwiedergabe, Sperrbildschirm/Dynamic-Island-Metadaten mit Geschichtenbild, Titel, Laufzeit und native Play/Pause/15s/Seek-Steuerung; Wiedergabeposition bleibt pro Geschichte erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -162,7 +162,7 @@
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1084",
     "storiesBottomNav": "separated-background-v1086",
-    "storyFollowReader": "v2",
+    "storyFollowReader": "v3",
     "storyFollowReaderMode": "audiobook-resume-focus-reader-v2",
     "storyFollowReaderReusable": true,
     "sectionEntryHeroes": "edge-to-edge-compact-v1094",
@@ -198,7 +198,19 @@
     "storyFollowReaderZIndex": 30050,
     "contentStudioStoryAudiobook": "v2",
     "sectionHeroCompactHeightPhone": "300–380px",
-    "sectionHeroCompactHeightTablet": "390–460px"
+    "sectionHeroCompactHeightTablet": "390–460px",
+    "storyAudioNativeIOSBridge": true,
+    "storyAudioNativeIOSBundle": "de.daraltawhid.kids",
+    "storyAudioNativeNowPlaying": true,
+    "storyAudioNativeRemoteControls": [
+      "play",
+      "pause",
+      "skipBackward15",
+      "skipForward15",
+      "seek"
+    ],
+    "storyAudioNativeArtwork": true,
+    "storyAudioBackgroundMode": "audio"
   },
   "updatedAt": "2026-10-04T02:45:00+02:00"
 }
