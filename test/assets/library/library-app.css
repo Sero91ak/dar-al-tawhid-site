@@ -1188,7 +1188,7 @@ html[data-theme="bordeaux"]{
   content:"";
   position:absolute;
   inset:0;
-  z-index:-1;
+  z-index:0;
   opacity:.9;
   background:
     linear-gradient(180deg,transparent 46%,color-mix(in srgb,var(--bg) 36%,transparent)),
@@ -1198,7 +1198,7 @@ html[data-theme="bordeaux"]{
 
 .lib-hero-topic-art{
   position:absolute;
-  z-index:0;
+  z-index:1;
   top:-10%;
   right:-4%;
   width:min(43%,360px);
@@ -1621,14 +1621,14 @@ html[data-theme="eisgold"] .lib-portal-art{
   content:"";
   position:absolute;
   inset:0;
-  z-index:-1;
+  z-index:0;
   pointer-events:none;
   background:radial-gradient(circle at 22% 12%,color-mix(in srgb,var(--gold2) 11%,transparent),transparent 40%);
 }
 
 .lib-detail-backdrop{
   position:absolute;
-  z-index:0;
+  z-index:1;
   top:-8%;
   right:-7%;
   width:min(54%,420px);
