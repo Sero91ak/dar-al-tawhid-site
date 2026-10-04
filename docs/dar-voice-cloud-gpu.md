@@ -24,6 +24,18 @@ Der Browser sieht weder die GPU-Origin noch deren Auth-Token.
 - Der Engine-Port kann über `DAR_VOICE_PORT` bzw. `PORT` gesetzt werden.
 - Die bereits vorhandene Remote-Authentifizierung der Engine wird wiederverwendet.
 
+## Fertiges GPU-Containerpaket
+
+Das Repo enthält jetzt unter `voice-studio/cloud-gpu/` einen providerneutralen NVIDIA-CUDA-Container.
+
+Build aus dem Repository-Root:
+
+```bash
+docker build -f voice-studio/cloud-gpu/Dockerfile -t dar-voice-gpu .
+```
+
+Der persistente private Voice-State wird als Volume nach `/root/SerhatVoice` gemountet. Dort liegen insbesondere die Referenz-Audios und die lernenden Aussprache-/Renderdaten. Der Container startet nur, wenn ein Pair-Token vorhanden ist und CUDA wirklich sichtbar ist; damit kann ein versehentlich gestarteter CPU-Dienst nicht unbemerkt produktiv gehen.
+
 ## GPU-Host – erforderliche Umgebungsvariablen
 
 ```
@@ -59,4 +71,4 @@ wrangler secret put DAR_VOICE_GPU_TOKEN
 
 ## Noch offen
 
-Die Software-Seite ist GPU-ready. Für echten Always-on-Betrieb fehlt nur noch ein provisionierter externer GPU-Host samt URL/Token und den privaten Voice-Dateien. Cloudflare Workers selbst führen das TTS-Modell nicht aus.
+Die Software-Seite einschließlich CUDA-Container, Cloudflare-Gateway und PWA-Routing ist GPU-ready. Für echten Always-on-Betrieb fehlt nur noch ein provisionierter externer GPU-Host samt HTTPS-URL/Token und den privaten Voice-Dateien. Cloudflare Workers selbst führen das TTS-Modell nicht aus.
