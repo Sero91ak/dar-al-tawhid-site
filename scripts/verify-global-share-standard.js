@@ -24,9 +24,18 @@ function need(rel, src, token) {
 function forbid(rel, src, token) {
   if (src && src.includes(token)) failures.push(rel + ": alter Share-Standard noch aktiv: " + token);
 }
+function syntax(rel, src) {
+  if (!src) return;
+  try {
+    new Function(src);
+  } catch (err) {
+    failures.push(rel + ": JavaScript-Syntaxfehler: " + String(err && err.message || err));
+  }
+}
 
 const globalRel = "assets/dar-global-share-v1225.js";
 const globalShare = file(globalRel);
+syntax(globalRel, globalShare);
 for (const token of [
   "/api/share-image/background",
   "generateFreshBackground",
@@ -51,6 +60,8 @@ const liveRel = "assets/premium-feed-app.js";
 const testRel = "test/assets/premium-feed-app.js";
 const liveFeed = file(liveRel);
 const testFeed = file(testRel);
+syntax(liveRel, liveFeed);
+syntax(testRel, testFeed);
 for (const [rel, src] of [[liveRel, liveFeed], [testRel, testFeed]]) {
   need(rel, src, "/api/share-image/background");
   need(rel, src, "feedShareFreshImage");
@@ -64,6 +75,7 @@ if (liveFeed && testFeed && liveFeed !== testFeed) failures.push("Live/Test Prem
 
 const frauenRel = "test/assets/frauen/frauen-fiqh.js";
 const frauen = file(frauenRel);
+syntax(frauenRel, frauen);
 for (const token of [
   "/api/share-image/background",
   "frauenFreshShareBackground",
