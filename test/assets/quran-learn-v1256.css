@@ -1,0 +1,323 @@
+/* DĀR AL TAWḤĪD · Qurʾān Lernen · Test-only v1256
+   Full-screen, theme-aware, historical atmosphere only around the learning surface. */
+html.dql-open{
+  --dqlx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/1e53d019-0184-44a8-9014-b430362d0f7c/025032b9-3603-40ef-84e4-b6098ff1bb7c/Single_wide_cinematic_app_background_for_a_Qur_an_learning_s.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzUwYjVjZjQ3NzE0YWM3NCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIyNDU2NH0.Cf2abOUPwZmv1S1VC2BELvXRLDLG1aFkTf4XuqPgBBc");
+  --dqlx-bg:var(--bg);
+  --dqlx-card:var(--card,var(--panel,var(--bg)));
+  --dqlx-text:var(--text,var(--cream));
+  --dqlx-muted:var(--muted);
+  --dqlx-accent:var(--gold2);
+  --dqlx-line:color-mix(in srgb,var(--gold2) 18%,var(--line2));
+  --dqlx-line-soft:color-mix(in srgb,var(--gold2) 10%,var(--line2));
+  --dqlx-surface:color-mix(in srgb,var(--card,var(--bg)) 74%,transparent);
+  --dqlx-surface-strong:color-mix(in srgb,var(--card,var(--bg)) 92%,transparent);
+  --dqlx-overlay-a:color-mix(in srgb,var(--bg) 92%,transparent);
+  --dqlx-overlay-b:color-mix(in srgb,var(--bg) 74%,transparent);
+  --dqlx-overlay-c:color-mix(in srgb,var(--bg) 52%,transparent);
+}
+
+html[data-theme="light"].dql-open,
+html[data-theme="soft"].dql-open,
+html[data-theme="salbei"].dql-open,
+html[data-theme="eisgold"].dql-open{
+  --dqlx-overlay-a:color-mix(in srgb,var(--bg) 96%,transparent);
+  --dqlx-overlay-b:color-mix(in srgb,var(--bg) 88%,transparent);
+  --dqlx-overlay-c:color-mix(in srgb,var(--bg) 72%,transparent);
+  --dqlx-surface:color-mix(in srgb,var(--card,var(--bg)) 90%,transparent);
+  --dqlx-surface-strong:color-mix(in srgb,var(--card,var(--bg)) 98%,transparent);
+}
+
+html[data-theme="royal"].dql-open,
+html[data-theme="dark"].dql-open,
+html[data-theme="dar-al-layl"].dql-open,
+html[data-theme="bordeaux"].dql-open,
+html[data-theme="aurora"].dql-open{
+  --dqlx-overlay-a:color-mix(in srgb,var(--bg) 88%,transparent);
+  --dqlx-overlay-b:color-mix(in srgb,var(--bg) 64%,transparent);
+  --dqlx-overlay-c:color-mix(in srgb,var(--bg) 38%,transparent);
+  --dqlx-surface:color-mix(in srgb,var(--card,var(--bg)) 60%,transparent);
+  --dqlx-surface-strong:color-mix(in srgb,var(--card,var(--bg)) 82%,transparent);
+}
+
+#dqlRoot{
+  position:fixed!important;
+  inset:0!important;
+  z-index:7600!important;
+  align-items:stretch!important;
+  justify-content:stretch!important;
+  padding:0!important;
+  background:
+    linear-gradient(180deg,
+      var(--dqlx-overlay-a) 0%,
+      var(--dqlx-overlay-b) 46%,
+      var(--dqlx-overlay-c) 100%),
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--dqlx-bg) 16%,transparent),
+      transparent 62%),
+    var(--dqlx-art) 79% 48%/cover no-repeat!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+#dqlRoot::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 82% 14%,color-mix(in srgb,var(--dqlx-accent) 10%,transparent),transparent 38%),
+    linear-gradient(180deg,transparent 48%,color-mix(in srgb,var(--dqlx-bg) 24%,transparent) 100%);
+}
+
+#dqlRoot > *{
+  position:relative;
+  z-index:1;
+}
+
+#dqlRoot .dql-shell{
+  width:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  height:100%!important;
+  min-height:100%!important;
+  margin:0!important;
+  gap:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+
+#dqlRoot .dql-head{
+  min-height:calc(78px + env(safe-area-inset-top,0px))!important;
+  padding:
+    calc(11px + env(safe-area-inset-top,0px))
+    max(14px,env(safe-area-inset-right,0px))
+    10px
+    max(14px,env(safe-area-inset-left,0px))!important;
+  display:grid!important;
+  grid-template-columns:46px minmax(0,1fr) 42px 42px!important;
+  gap:8px!important;
+  align-items:center!important;
+  border:0!important;
+  border-bottom:1px solid var(--dqlx-line)!important;
+  background:color-mix(in srgb,var(--dqlx-bg) 74%,transparent)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.04)!important;
+  backdrop-filter:blur(14px) saturate(1.04)!important;
+}
+
+#dqlRoot .dql-head button{
+  min-width:42px!important;
+  min-height:42px!important;
+  width:42px!important;
+  height:42px!important;
+  padding:0!important;
+  border:1px solid var(--dqlx-line)!important;
+  border-radius:13px!important;
+  background:var(--dqlx-surface)!important;
+  color:var(--dqlx-text)!important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--dqlx-text) 5%,transparent),
+    0 5px 14px color-mix(in srgb,var(--dqlx-bg) 22%,transparent)!important;
+}
+
+#dqlRoot .dql-meta{
+  min-width:0!important;
+  text-align:center!important;
+}
+
+#dqlRoot .dql-meta b{
+  color:var(--dqlx-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(1.16rem,4.6vw,1.5rem)!important;
+  line-height:1!important;
+  font-weight:650!important;
+}
+
+#dqlRoot .dql-meta small{
+  margin-top:4px!important;
+  color:var(--dqlx-muted)!important;
+  font-size:.65rem!important;
+  line-height:1.2!important;
+  letter-spacing:.03em!important;
+}
+
+#dqlRoot .dql-prog{
+  width:min(760px,calc(100% - 28px))!important;
+  height:3px!important;
+  margin:12px auto 0!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--dqlx-text) 10%,transparent)!important;
+}
+#dqlRoot .dql-prog > i{
+  background:linear-gradient(90deg,var(--dqlx-accent),color-mix(in srgb,var(--dqlx-accent) 55%,var(--dqlx-text)))!important;
+}
+
+#dqlRoot .dql-body{
+  flex:1!important;
+  min-height:0!important;
+  width:min(820px,calc(100% - 24px))!important;
+  margin:14px auto 0!important;
+  padding:22px 18px 20px!important;
+  overflow:auto!important;
+  border:1px solid var(--dqlx-line)!important;
+  border-radius:20px!important;
+  background:var(--dqlx-surface-strong)!important;
+  box-shadow:
+    0 16px 34px color-mix(in srgb,var(--dqlx-bg) 26%,transparent),
+    inset 0 1px 0 color-mix(in srgb,var(--dqlx-text) 4%,transparent)!important;
+  -webkit-backdrop-filter:blur(14px) saturate(1.02)!important;
+  backdrop-filter:blur(14px) saturate(1.02)!important;
+}
+
+#dqlRoot .dql-ar{
+  color:var(--dqlx-text)!important;
+  font-size:clamp(2rem,7vw,2.8rem)!important;
+  line-height:1.95!important;
+}
+#dqlRoot .dql-ar.long{font-size:clamp(1.65rem,5.9vw,2.2rem)!important}
+
+#dqlRoot .dql-lat,
+#dqlRoot .dql-de{
+  margin-top:14px!important;
+  padding-top:12px!important;
+  border-top:1px solid var(--dqlx-line-soft)!important;
+  color:var(--dqlx-muted)!important;
+  font-size:clamp(.86rem,3vw,.98rem)!important;
+  line-height:1.55!important;
+}
+
+#dqlRoot .dql-de{
+  color:var(--dqlx-text)!important;
+  font-weight:560!important;
+}
+
+#dqlRoot .dql-status{
+  margin-top:14px!important;
+  color:var(--dqlx-muted)!important;
+  font-size:.76rem!important;
+  line-height:1.45!important;
+}
+#dqlRoot .dql-status.is-err{color:#c85b54!important}
+#dqlRoot .dql-status.is-ok{color:#5c9f68!important}
+
+#dqlRoot .dql-mic{
+  margin-top:14px!important;
+  padding:11px 12px!important;
+  border:1px solid var(--dqlx-line)!important;
+  border-radius:14px!important;
+  background:color-mix(in srgb,var(--dqlx-accent) 4%,transparent)!important;
+}
+#dqlRoot .dql-mic-top{color:var(--dqlx-muted)!important}
+#dqlRoot .dql-meter{
+  background:color-mix(in srgb,var(--dqlx-text) 10%,transparent)!important;
+}
+#dqlRoot .dql-meter > i{
+  background:linear-gradient(90deg,color-mix(in srgb,var(--dqlx-accent) 68%,#6ca77a),var(--dqlx-accent))!important;
+}
+
+#dqlRoot .dql-actions,
+#dqlRoot .dql-after,
+#dqlRoot .dql-nav{
+  width:min(820px,calc(100% - 24px))!important;
+  margin:0 auto!important;
+}
+
+#dqlRoot .dql-actions{
+  padding:12px 0 8px!important;
+  gap:8px!important;
+}
+#dqlRoot .dql-nav{
+  padding:0 0 calc(12px + env(safe-area-inset-bottom,0px))!important;
+  gap:8px!important;
+}
+#dqlRoot .dql-after{
+  padding:0 0 8px!important;
+}
+
+#dqlRoot .dql-actions button,
+#dqlRoot .dql-nav button,
+#dqlRoot .dql-after button{
+  min-height:48px!important;
+  border:1px solid var(--dqlx-line)!important;
+  border-radius:14px!important;
+  background:var(--dqlx-surface)!important;
+  color:var(--dqlx-text)!important;
+  box-shadow:none!important;
+  font-weight:760!important;
+  letter-spacing:.03em!important;
+}
+
+#dqlRoot .dql-actions .dql-listen.is-on{
+  background:color-mix(in srgb,var(--dqlx-accent) 16%,var(--dqlx-surface))!important;
+}
+#dqlRoot .dql-actions .dql-speak.is-on{
+  background:color-mix(in srgb,#a84f55 22%,var(--dqlx-surface))!important;
+  border-color:color-mix(in srgb,#a84f55 38%,var(--dqlx-line))!important;
+}
+#dqlRoot .dql-after .dql-done{
+  background:color-mix(in srgb,#679a6e 18%,var(--dqlx-surface))!important;
+  border-color:color-mix(in srgb,#679a6e 34%,var(--dqlx-line))!important;
+}
+
+#dqlRoot .dql-word.is-ok{
+  background:color-mix(in srgb,#64a66f 18%,transparent)!important;
+  color:var(--dqlx-text)!important;
+}
+#dqlRoot .dql-word.is-near{
+  background:color-mix(in srgb,#c99550 20%,transparent)!important;
+  color:var(--dqlx-text)!important;
+}
+#dqlRoot .dql-word.is-bad{
+  background:color-mix(in srgb,#b65a54 20%,transparent)!important;
+  color:var(--dqlx-text)!important;
+}
+#dqlRoot .dql-word.is-now{
+  background:color-mix(in srgb,var(--dqlx-accent) 14%,transparent)!important;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--dqlx-accent) 35%,transparent)!important;
+}
+
+@media(max-width:599px){
+  #dqlRoot{
+    background-position:center,center,82% 48%!important;
+  }
+  #dqlRoot .dql-body{
+    width:calc(100% - 20px)!important;
+    margin-top:10px!important;
+    padding:18px 14px 16px!important;
+    border-radius:17px!important;
+  }
+  #dqlRoot .dql-actions,
+  #dqlRoot .dql-after,
+  #dqlRoot .dql-nav{
+    width:calc(100% - 20px)!important;
+  }
+}
+
+@media(max-height:720px){
+  #dqlRoot .dql-head{
+    min-height:calc(70px + env(safe-area-inset-top,0px))!important;
+  }
+  #dqlRoot .dql-body{
+    margin-top:8px!important;
+    padding-top:14px!important;
+    padding-bottom:12px!important;
+  }
+  #dqlRoot .dql-ar{font-size:clamp(1.7rem,6vw,2.25rem)!important}
+  #dqlRoot .dql-actions button,
+  #dqlRoot .dql-nav button,
+  #dqlRoot .dql-after button{min-height:44px!important}
+}
+
+@media(min-width:760px){
+  #dqlRoot .dql-body{
+    margin-top:18px!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #dqlRoot .dql-prog > i,
+  #dqlRoot .dql-word{transition:none!important}
+}
