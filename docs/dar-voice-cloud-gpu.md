@@ -61,12 +61,12 @@ wrangler secret put DAR_VOICE_WEB_TOKEN
 
 `DAR_VOICE_GPU_ORIGIN` ist die HTTPS-Origin des GPU-Hosts.  
 `DAR_VOICE_GPU_TOKEN` muss exakt dem `DAR_VOICE_PAIR_TOKEN` des GPU-Hosts entsprechen.  
-`DAR_VOICE_WEB_TOKEN` ist ein **separater** privater Zugangscode für die installierte Voice-PWA. Er wird nie an den GPU-Host weitergegeben.
+`DAR_VOICE_WEB_TOKEN` ist ein **separater** privater Zugangscode für die installierte Voice-PWA. Er wird nie an den GPU-Host weitergegeben. Der Code wird nur beim ersten Entsperren an Cloudflare übermittelt; danach setzt der Worker eine `HttpOnly`-/`Secure`-/`SameSite=Strict`-Session. Der Code selbst wird nicht im Browser gespeichert.
 
 ## Sicherheitsmodell
 
 - GPU-Origin und GPU-Token bleiben ausschließlich serverseitig in Cloudflare.
-- Die Cloud-PWA ist zusätzlich mit einem eigenen `DAR_VOICE_WEB_TOKEN` geschützt und arbeitet fail-closed, wenn dieses Secret fehlt.
+- Die Cloud-PWA ist zusätzlich mit einem eigenen `DAR_VOICE_WEB_TOKEN` geschützt, tauscht ihn gegen eine 30-Tage-`HttpOnly`-Session und arbeitet fail-closed, wenn das Secret fehlt.
 - Browserzugriffe werden auf die DĀR-Weboberflächen begrenzt.
 - Cloudflare entfernt Browser-Cookies/Admin-Secrets vor dem Upstream-Aufruf.
 - Der GPU-Host akzeptiert Remote-Zugriffe nur mit dem Voice-Token.
