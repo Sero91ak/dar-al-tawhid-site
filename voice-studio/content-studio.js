@@ -1,4 +1,4 @@
-/* Voice Studio 2.9.84 · selectable Kids quiz catalog */
+/* Voice Studio 2.9.96 · fast Kids audio/content workflow */
 (() => {
 "use strict";
 
@@ -15,6 +15,7 @@ let coverFile=null;
 let coverRemoteUrl="";
 let coverAsset=null;
 let audioAsset=null;
+let audioAssetText="";
 let directAudioFile=null;
 let directAudioAlignment=null;
 let directAudioText="";
@@ -274,8 +275,9 @@ function qaSnapshot(){
   const same=!!lastAudio&&lastGeneratedText===script;
   const ownerAudio=directAudioReadyForCurrentText();
   const cover=!!(coverFile||coverRemoteUrl||coverAsset?.url);
-  const audio=!q("csModeListen")?.checked||ownerAudio||same||!!audioAsset?.url;
-  const pron=!q("csModeListen")?.checked||ownerAudio||Boolean(qaConfirmed&&same)||Boolean(audioAsset?.url&&contentId);
+  const boundAsset=!!audioAsset?.url&&(!audioAssetText||audioAssetText===script);
+  const audio=!q("csModeListen")?.checked||ownerAudio||same||boundAsset;
+  const pron=!q("csModeListen")?.checked||ownerAudio||Boolean(qaConfirmed&&same)||Boolean(boundAsset&&contentId);
   const title=!!String(q("csTitle")?.value||"").trim();
   return{text:!!text,title,cover,audio,pron,test:stagingPublished,live:productionPhase==="live-published"};
 }
@@ -583,8 +585,13 @@ function bind(){
     }
     if(directAudioFile&&directAudioText!==voiceScript()){
       resetDirectAudioSelection();
-      audioAsset=null;
+      audioAsset=null;audioAssetText="";
       stagingPublished=false;
+    }
+    if(audioAsset?.url&&audioAssetText&&audioAssetText!==voiceScript()){
+      audioAsset=null;audioAssetText="";
+      stagingPublished=false;
+      if(productionPhase!=="draft")setProductionPhase("draft");
     }
     persistDraft();refreshQa();
   });
@@ -856,7 +863,7 @@ function resetEditorForKind(){
   if(studioKind==="quiz"){q("csAgeMin").value="7";q("csAgeMax").value="8"}else{q("csAgeMin").value="6";q("csAgeMax").value="10"}
   q("csModeRead").checked=true;q("csModeListen").checked=true;
   q("csCategory").value=studioKind==="quiz"?"Quiz · geprüft":studioKind==="game"?"Spiel":studioKind==="ios"?"iOS · Inhalt":studioKind==="dua"?"Duʿāʾ · geprüft":studioKind==="narration"?"Erzählung · geprüft":"Qurʾān · geprüft";
-  coverFile=null;coverRemoteUrl="";coverAsset=null;audioAsset=null;resetDirectAudioSelection();quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
+  coverFile=null;coverRemoteUrl="";coverAsset=null;audioAsset=null;audioAssetText="";resetDirectAudioSelection();quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
   legacyQuestion={};legacyClaimIds=[];legacyTags=[];
   q("csCover")?.querySelector("img")?.remove();q("csCoverTitle").textContent="Neuer Inhalt";
 }
@@ -1017,7 +1024,7 @@ async function handleDirectAudioFile(file){
     const player=q("csDirectAudioPlayer");if(player){player.src=directAudioObjectUrl;player.hidden=false}
     if(q("csAudioFileName"))q("csAudioFileName").textContent=file.name+" · "+Math.max(1,Math.round(file.size/1024))+" KB";
     q("csAudioDrop")?.classList.add("ready");if(q("csAudioClear"))q("csAudioClear").hidden=false;
-    audioAsset=null;stagingPublished=false;if(productionPhase!=="draft")setProductionPhase("draft");
+    audioAsset=null;audioAssetText="";stagingPublished=false;if(productionPhase!=="draft")setProductionPhase("draft");
     setStudioMessage("Fertige Audio ist dem aktuellen Text zugeordnet. Keine neue Sprachgenerierung nötig.","good");
     refreshQa();
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
@@ -1107,7 +1114,7 @@ async function compactAudioBlob(){
 }
 async function uploadAudio(){
   const script=voiceScript();
-  if(audioAsset?.url&&Array.isArray(audioAsset?.timings)&&audioAsset.timings.length)return audioAsset;
+  if(audioAsset?.url&&audioAssetText===script&&Array.isArray(audioAsset?.timings)&&audioAsset.timings.length)return audioAsset;
   const id=await ensureId();
   const manual=directAudioReadyForCurrentText();
   const blob=manual?directAudioFile:await compactAudioBlob();
@@ -1131,6 +1138,7 @@ async function uploadAudio(){
     alignmentLoss:alignment?.alignmentLoss??null,
     ownerApproved:manual
   };
+  audioAssetText=script;
   try{audioAsset.durationSec=await getAudioDuration(blob)}catch{}
   return audioAsset;
 }
@@ -1385,7 +1393,7 @@ async function loadLegacyForEdit(id){
   legacyQuestion=x.question&&typeof x.question==="object"?x.question:{};
   legacyClaimIds=Array.isArray(x.claimIds)?[...x.claimIds]:[];
   legacyTags=["legacy-kids",x.id?("legacy-id:"+x.id):""].filter(Boolean);
-  coverAsset=null;audioAsset=null;coverFile=null;coverRemoteUrl="";
+  coverAsset=null;audioAsset=null;audioAssetText="";coverFile=null;coverRemoteUrl="";resetDirectAudioSelection();
   quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
   q("csCover")?.querySelector("img")?.remove();
   q("csCoverTitle").textContent=x.title||"Inhalt";
@@ -1422,6 +1430,7 @@ async function loadLiveForEdit(id){
   legacyTags=Array.isArray(x.tags)?[...x.tags]:[];
   coverAsset=x.cover?.url?x.cover:null;
   audioAsset=x.audio?.url?x.audio:null;
+  audioAssetText=String(x.text||"").trim();
   quizDraft=Array.isArray(x.quiz?.questions)?x.quiz.questions:[];
   gameDraft=x.game&&typeof x.game==="object"?x.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
   coverFile=null;
@@ -1451,7 +1460,7 @@ async function loadRemoteItem(id){
     legacyQuestion=x.question&&typeof x.question==="object"?x.question:{};
     legacyClaimIds=Array.isArray(x.claimIds)?[...x.claimIds]:[];
     legacyTags=Array.isArray(x.tags)?[...x.tags]:[];
-    coverAsset=x.cover?.url?x.cover:null;audioAsset=x.audio?.url?x.audio:null;
+    coverAsset=x.cover?.url?x.cover:null;audioAsset=x.audio?.url?x.audio:null;audioAssetText=String(x.text||"").trim();
     quizDraft=Array.isArray(x.quiz?.questions)?x.quiz.questions:[];gameDraft=x.game&&typeof x.game==="object"?x.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
     coverFile=null;coverRemoteUrl="";resetDirectAudioSelection();if(coverAsset?.url)renderCover(coverAsset.url);q("csCoverTitle").textContent=x.title||"Inhalt";
     renderKindEditor();if(typeof renderAnalysis==="function")renderAnalysis();renderStatus();refreshQa();setStudioMessage("Staging-Paket geladen.","good");setTimeout(()=>goToWorkflowStep("text"),80);
@@ -1462,8 +1471,9 @@ function refreshQa(){
   captureStructuredEditor();
   const text=String(q("text")?.value||"").trim(),script=voiceScript(),same=!!lastAudio&&lastGeneratedText===script,ownerAudio=directAudioReadyForCurrentText();
   const cover=!!(coverFile||coverRemoteUrl||coverAsset?.url);
-  const audio=!q("csModeListen")?.checked||ownerAudio||same||!!audioAsset?.url;
-  const pron=!q("csModeListen")?.checked||ownerAudio||Boolean(qaConfirmed&&same)||Boolean(audioAsset?.url&&contentId);
+  const boundAsset=!!audioAsset?.url&&(!audioAssetText||audioAssetText===script);
+  const audio=!q("csModeListen")?.checked||ownerAudio||same||boundAsset;
+  const pron=!q("csModeListen")?.checked||ownerAudio||Boolean(qaConfirmed&&same)||Boolean(boundAsset&&contentId);
   const quizOk=quizDraft.length>0&&quizDraft.every(x=>String(x.question||"").trim()&&(x.answers||[]).filter(a=>String(a.label||"").trim()).length>=2&&(x.answers||[]).filter(a=>a.correct).length===1);
   const gameOk=Boolean(String(gameDraft.instructions||"").trim());
   const contentOk=studioKind==="quiz"?quizOk:studioKind==="game"?gameOk:Boolean(text);
