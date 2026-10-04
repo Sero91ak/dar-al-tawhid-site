@@ -2457,13 +2457,13 @@
     ].filter(Boolean).join(" ").toLowerCase();
 
     var map = {
-      din: "/test/assets/frauen/library-v1223/01-grundlagen-din.jpg",
-      fiqh: "/test/assets/frauen/library-v1223/02-fiqh-frauen.jpg",
-      generationen: "/test/assets/frauen/library-v1223/03-erste-generationen.jpg",
-      familie: "/test/assets/frauen/library-v1223/04-familie-erziehung.jpg",
-      wissen: "/test/assets/frauen/library-v1223/05-wissen-adab-dawah.jpg",
-      alltag: "/test/assets/frauen/library-v1223/06-alltag-schutz.jpg",
-      lebensphasen: "/test/assets/frauen/library-v1223/07-lebensphasen.jpg"
+      din: "/test/assets/frauen/library-v1224/01-grundlagen-din.jpg",
+      fiqh: "/test/assets/frauen/library-v1224/02-fiqh-frauen.jpg",
+      generationen: "/test/assets/frauen/library-v1224/03-erste-generationen.jpg",
+      familie: "/test/assets/frauen/library-v1224/04-familie-erziehung.jpg",
+      wissen: "/test/assets/frauen/library-v1224/05-wissen-adab-dawah.jpg",
+      alltag: "/test/assets/frauen/library-v1224/06-alltag-schutz.jpg",
+      lebensphasen: "/test/assets/frauen/library-v1224/07-lebensphasen.jpg"
     };
     if (map[id]) return map[id];
 
@@ -2486,7 +2486,7 @@
       area && area.desc
     ].filter(Boolean).join(" ").toLowerCase();
 
-    var base = "/test/assets/frauen/library-v1223/";
+    var base = "/test/assets/frauen/library-v1224/";
     if (/muetter|mütter|sahab|tabi|salaf|kurz|erste-generation/.test(key)) return base + "03-erste-generationen.jpg";
     if (/dienst|pflege|hilfeleistung/.test(key)) return base + "03-erste-generationen.jpg";
     if (/reise|umgang|arbeit|medien|ruqyah|krankheit|moschee|gemeinschaft|nicht-mah|nicht-maḥ/.test(key)) return base + "06-alltag-schutz.jpg";
