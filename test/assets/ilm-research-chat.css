@@ -1532,3 +1532,85 @@ body.is-ilm-chat-route .ilm-welcome-path:focus-visible{
     border-bottom:0;
   }
 }
+
+
+/* DAR_ILM_HISTORIC_EMBED_V1239
+   Historically grounded 9th–10th c. study motif, embedded only in the empty ʿIlm welcome. */
+body.is-ilm-chat-route{
+  --ilm-history-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/01d04c45-a858-48c7-a52e-652dbcb0d754/7654f1a3-5d42-4bf8-83e4-4549bda7c9c7/Single_wide_cinematic_background_for_an_Islamic_knowledge_ap.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDczYTM5OTdiN2Y2MGVmNSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI0Njg3MX0.W9Dpzx3kGl3A5o7UmterQxQBERmhcybC8RpyNXFQZN0");
+  --ilm-history-opacity:.095;
+}
+
+html[data-theme="royal"] body.is-ilm-chat-route,
+html[data-theme="dark"] body.is-ilm-chat-route,
+html[data-theme="dar-al-layl"] body.is-ilm-chat-route,
+html[data-theme="bordeaux"] body.is-ilm-chat-route,
+html[data-theme="aurora"] body.is-ilm-chat-route{
+  --ilm-history-opacity:.13;
+}
+
+html[data-theme="light"] body.is-ilm-chat-route,
+html[data-theme="soft"] body.is-ilm-chat-route,
+html[data-theme="eisgold"] body.is-ilm-chat-route,
+html[data-theme="salbei"] body.is-ilm-chat-route{
+  --ilm-history-opacity:.085;
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  top:-12%;
+  right:-8%;
+  width:min(62%,560px);
+  height:128%;
+  pointer-events:none;
+  background:var(--ilm-history-art) 72% center/cover no-repeat;
+  opacity:var(--ilm-history-opacity);
+  filter:saturate(.7) contrast(.92);
+  transform:scale(1.04);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.42) 28%,#000 78%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.42) 28%,#000 78%);
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--ilm-page-bg) 26%,transparent) 0%,
+      transparent 58%),
+    linear-gradient(180deg,
+      transparent 0%,
+      color-mix(in srgb,var(--ilm-page-bg) 10%,transparent) 100%);
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro > *{
+  position:relative;
+  z-index:2;
+}
+
+@media(max-width:599px){
+  body.is-ilm-chat-route .ilm-welcome-intro::before{
+    width:68%;
+    right:-16%;
+    opacity:calc(var(--ilm-history-opacity) * .9);
+    background-position:74% center;
+  }
+}
+
+@media(min-width:760px){
+  body.is-ilm-chat-route .ilm-welcome-intro::before{
+    width:min(50%,620px);
+    right:0;
+  }
+}
