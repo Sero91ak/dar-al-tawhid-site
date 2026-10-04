@@ -522,3 +522,214 @@ body.is-ilm-chat-route .ilm-welcome-prompts .ilm-starter-chip:active span{
     transition:none;
   }
 }
+
+
+/* DAR_ILM_ACTIVE_CHAT_HERO_V1233
+   Active conversation surface: visible theme-aware embedded knowledge hero. */
+body.is-ilm-chat-route .ilm-chat-header{
+  position:sticky!important;
+  top:0!important;
+  z-index:48!important;
+  min-height:118px!important;
+  display:grid!important;
+  grid-template-columns:56px minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:14px!important;
+  padding:
+    calc(12px + env(safe-area-inset-top,0px))
+    max(16px,env(safe-area-inset-right,0px))
+    14px
+    max(16px,env(safe-area-inset-left,0px))!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  border:0!important;
+  border-bottom:1px solid var(--ilm-hero-rule)!important;
+  background:
+    linear-gradient(90deg,
+      var(--ilm-hero-left) 0%,
+      var(--ilm-hero-mid) 48%,
+      var(--ilm-hero-right) 82%,
+      color-mix(in srgb,var(--ilm-page-bg) 5%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--ilm-page-bg) 7%,transparent),
+      color-mix(in srgb,var(--ilm-page-bg) 22%,transparent)),
+    var(--ilm-hero-image) 76% 46%/cover no-repeat!important;
+  box-shadow:
+    0 14px 34px color-mix(in srgb,var(--ilm-page-bg) 55%,transparent),
+    inset 0 -1px 0 color-mix(in srgb,var(--ilm-accent) 10%,transparent)!important;
+}
+
+body.is-ilm-chat-route .ilm-chat-header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--ilm-page-bg) 16%,transparent),
+      transparent 62%),
+    radial-gradient(circle at 78% 8%,
+      color-mix(in srgb,var(--ilm-accent) 13%,transparent),
+      transparent 42%);
+}
+
+body.is-ilm-chat-route .ilm-chat-header > *{
+  position:relative;
+  z-index:1;
+}
+
+body.is-ilm-chat-route .ilm-header-title{
+  min-width:0!important;
+  display:grid!important;
+  justify-items:center!important;
+  gap:3px!important;
+  text-align:center!important;
+}
+
+body.is-ilm-chat-route .ilm-header-title b{
+  margin:0!important;
+  font-family:var(--ilm-serif)!important;
+  font-size:clamp(1.35rem,5vw,1.72rem)!important;
+  line-height:1!important;
+  font-weight:650!important;
+  letter-spacing:.01em!important;
+  color:var(--ilm-primary-text)!important;
+  text-shadow:0 2px 16px color-mix(in srgb,var(--ilm-page-bg) 44%,transparent);
+}
+
+body.is-ilm-chat-route .ilm-header-title span{
+  margin:0!important;
+  color:var(--ilm-primary-text)!important;
+  font-size:.68rem!important;
+  line-height:1.15!important;
+  font-weight:850!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+  opacity:.88;
+  text-shadow:0 1px 10px color-mix(in srgb,var(--ilm-page-bg) 42%,transparent);
+}
+
+body.is-ilm-chat-route .ilm-header-title::after{
+  content:"Qurʾān · Sunnah · Salaf";
+  margin-top:2px;
+  color:var(--ilm-accent);
+  font-size:.58rem;
+  line-height:1;
+  font-weight:780;
+  letter-spacing:.07em;
+  white-space:nowrap;
+}
+
+body.is-ilm-chat-route .ilm-icon-btn{
+  width:48px!important;
+  min-width:48px!important;
+  height:48px!important;
+  min-height:48px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid var(--ilm-hero-rule)!important;
+  border-radius:14px!important;
+  background:var(--ilm-hero-chip)!important;
+  color:var(--ilm-primary-text)!important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--ilm-primary-text) 7%,transparent),
+    0 7px 18px color-mix(in srgb,var(--ilm-page-bg) 34%,transparent)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(1.06)!important;
+  backdrop-filter:blur(12px) saturate(1.06)!important;
+}
+
+body.is-ilm-chat-route .ilm-header-actions{
+  display:flex!important;
+  align-items:center!important;
+  gap:9px!important;
+}
+
+body.is-ilm-chat-route .ilm-message-list{
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--ilm-page-bg) 96%,transparent) 0%,
+      var(--ilm-page-bg) 180px)!important;
+}
+
+body.is-ilm-chat-route .ilm-message-inner{
+  padding-top:24px!important;
+}
+
+html[data-theme="light"] body.is-ilm-chat-route .ilm-chat-header,
+html[data-theme="soft"] body.is-ilm-chat-route .ilm-chat-header,
+html[data-theme="eisgold"] body.is-ilm-chat-route .ilm-chat-header{
+  box-shadow:
+    0 13px 28px rgba(43,36,25,.10),
+    inset 0 -1px 0 color-mix(in srgb,var(--ilm-accent) 13%,transparent)!important;
+}
+
+html[data-theme="salbei"] body.is-ilm-chat-route .ilm-chat-header{
+  box-shadow:
+    0 13px 28px rgba(35,52,40,.10),
+    inset 0 -1px 0 rgba(63,93,75,.16)!important;
+}
+
+@media(max-width:430px){
+  body.is-ilm-chat-route .ilm-chat-header{
+    min-height:112px!important;
+    grid-template-columns:50px minmax(0,1fr) auto!important;
+    gap:9px!important;
+    padding-left:12px!important;
+    padding-right:12px!important;
+    background-position:center,center,79% 46%!important;
+  }
+  body.is-ilm-chat-route .ilm-icon-btn{
+    width:46px!important;
+    min-width:46px!important;
+    height:46px!important;
+    min-height:46px!important;
+  }
+  body.is-ilm-chat-route .ilm-header-actions{
+    gap:7px!important;
+  }
+  body.is-ilm-chat-route .ilm-header-title b{
+    font-size:clamp(1.18rem,5.2vw,1.48rem)!important;
+  }
+  body.is-ilm-chat-route .ilm-header-title span{
+    font-size:.62rem!important;
+  }
+  body.is-ilm-chat-route .ilm-header-title::after{
+    font-size:.54rem;
+  }
+}
+
+@media(max-width:360px){
+  body.is-ilm-chat-route .ilm-chat-header{
+    grid-template-columns:44px minmax(0,1fr) auto!important;
+    gap:7px!important;
+  }
+  body.is-ilm-chat-route .ilm-icon-btn{
+    width:42px!important;
+    min-width:42px!important;
+    height:42px!important;
+    min-height:42px!important;
+  }
+  body.is-ilm-chat-route .ilm-header-actions{
+    gap:5px!important;
+  }
+  body.is-ilm-chat-route .ilm-header-title::after{
+    display:none;
+  }
+}
+
+@media(min-width:760px){
+  body.is-ilm-chat-route .ilm-chat-header{
+    min-height:128px!important;
+    padding-left:max(24px,env(safe-area-inset-left,0px))!important;
+    padding-right:max(24px,env(safe-area-inset-right,0px))!important;
+    background-position:center,center,74% 44%!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  body.is-ilm-chat-route .ilm-chat-header,
+  body.is-ilm-chat-route .ilm-icon-btn{
+    transition:none!important;
+  }
+}
