@@ -1680,17 +1680,28 @@ function renderPronunciationCatalog(){
     '<span dir="auto">'+esc(r.ttsText||r.alias||"")+'</span>'+
     '<small>'+esc(r.source||"Bibliothek")+(r.confirmed?" · MASTER ✓":" · ▶ anhören")+'</small></button>'
   ).join(""):'<div class="notice">Keine passenden Wörter gefunden.</div>';
-  wrap.querySelectorAll("[data-pron-catalog-index]").forEach(btn=>btn.addEventListener("click",()=>{
-    const row=pronCatalogRows[Number(btn.dataset.pronCatalogIndex)];
-    if(!row)return;
-    const term=String(row.canonical||row.input||"").trim();
-    manualLearningTerm=term;
-    learningVariant=0;
-    $("#learnTerm").value=term;
-    if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=term;
-    renderLearningResults([row]);
-    selectLearningCandidate(0,true);
-  }));
+  wrap.querySelectorAll("[data-pron-catalog-index]").forEach(btn=>{
+    const rowFor=()=>pronCatalogRows[Number(btn.dataset.pronCatalogIndex)];
+    const warm=()=>{
+      const row=rowFor();if(!row)return;
+      const term=String(row.canonical||row.input||"").trim();
+      if(term)prefetchLearningCandidate(row,term);
+    };
+    btn.addEventListener("pointerenter",warm,{passive:true});
+    btn.addEventListener("pointerdown",warm,{passive:true});
+    btn.addEventListener("focus",warm,{passive:true});
+    btn.addEventListener("click",()=>{
+      const row=rowFor();
+      if(!row)return;
+      const term=String(row.canonical||row.input||"").trim();
+      manualLearningTerm=term;
+      learningVariant=0;
+      $("#learnTerm").value=term;
+      if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=term;
+      renderLearningResults([row]);
+      selectLearningCandidate(0,true);
+    });
+  });
   more.hidden=pronCatalogRows.length>=pronCatalogTotal;
   more.disabled=false;
 }
