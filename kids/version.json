@@ -173,7 +173,7 @@
     "quranPageHero": "edge-to-edge-compact-v1094",
     "parentsPageHero": "edge-to-edge-compact-v1094",
     "sectionHeroAssets": {
-      "stories": "/kids/assets/kids-art/section-stories-v1090.jpg",
+      "stories": "/kids/assets/kids-art/section-stories-v1094.jpg",
       "quran": "/kids/assets/kids-art/section-quran-v1090.jpg",
       "parents": "/kids/assets/kids-art/section-parents-v1090.jpg"
     },
@@ -196,7 +196,9 @@
     "storyFollowReaderAutoOpen": true,
     "storyFollowReaderReopenButton": true,
     "storyFollowReaderZIndex": 30050,
-    "contentStudioStoryAudiobook": "v2"
+    "contentStudioStoryAudiobook": "v2",
+    "sectionHeroCompactHeightPhone": "300–380px",
+    "sectionHeroCompactHeightTablet": "390–460px"
   },
   "updatedAt": "2026-10-04T02:45:00+02:00"
-}\n
+}
