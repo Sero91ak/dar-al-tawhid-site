@@ -2897,6 +2897,27 @@
     return { title: title, body: body, source: source, category: category };
   }
 
+  function feedShareHistoricalFallback(scene) {
+    var prompt = feedSharePromptData(scene);
+    var hay = String((prompt.category || '') + ' ' + (prompt.title || '') + ' ' + (prompt.body || '')).toLowerCase();
+    var scored = FEED_HISTORICAL_STATIC.slice().map(function (item, idx) {
+      var score = 0;
+      if (item.category && hay.indexOf(String(item.category).toLowerCase()) >= 0) score += 6;
+      (item.tags || []).forEach(function (tag) { if (hay.indexOf(String(tag).toLowerCase()) >= 0) score += 3; });
+      return { item: item, score: score, idx: idx };
+    }).sort(function (a, b) { return b.score - a.score || a.idx - b.idx; });
+    return (async function () {
+      var last = null;
+      for (var i = 0; i < scored.length; i++) {
+        try {
+          var img = await feedShareLoadImg(scored[i].item.src + '?share-fallback=v1247');
+          return { image: img, objectUrl: '' };
+        } catch (e) { last = e; }
+      }
+      throw last || new Error('Kein historischer Ersatzhintergrund verfügbar.');
+    })();
+  }
+
   async function feedShareFreshImage(scene) {
     var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
     var timer = setTimeout(function () { try { if (controller) controller.abort(); } catch (e) {} }, 45000);
@@ -2925,6 +2946,9 @@
         URL.revokeObjectURL(objectUrl);
         throw e3;
       }
+    } catch (generatorError) {
+      try { console.warn('[dar-premium-feed] AI share unavailable; historical fallback active', generatorError); } catch (_e) {}
+      return feedShareHistoricalFallback(scene);
     } finally {
       clearTimeout(timer);
     }
