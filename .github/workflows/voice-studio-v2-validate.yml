@@ -476,8 +476,8 @@ jobs:
               errors.append("Kids quiz namespace missing")
           if quiz.get("adultQuizDependency") is not False:
               errors.append("Kids quiz must be independent from adult quiz")
-          if len(items)<300:
-              errors.append(f"Kids quiz must contain at least 300 questions, got {len(items)}")
+          if len(items)<350:
+              errors.append(f"Kids quiz must contain at least 350 questions, got {len(items)}")
           if "canonicalQuizId" in quiz_path.read_text(encoding="utf-8"):
               errors.append("adult canonicalQuizId coupling returned")
 
@@ -508,7 +508,7 @@ jobs:
               if not str(item.get("source") or "").strip():
                   errors.append(qid+" source missing")
 
-          minimum={"4-6":108,"7-8":96,"9-10":96}
+          minimum={"4-6":126,"7-8":112,"9-10":112}
           for band,count in minimum.items():
               if band_counts.get(band,0)<count:
                   errors.append(f"{band} needs at least {count} questions, got {band_counts.get(band,0)}")
