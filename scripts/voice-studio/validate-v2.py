@@ -519,7 +519,7 @@ def main():
         if required not in studio_source: fail("content studio workflow marker missing: "+required)
 
     engine_source=Path(engine_path).read_text(encoding="utf-8")
-    for required in ("KNOWN_RULE_ALIAS_INDEX","knownRuleAliases","max-master-pls-v1","fastKnownPath","default_mode","story_reference_matches_text",'"dua":"dua"','"narration":"narration"','/content-audio/reference',"manual-owner-content-upload"):
+    for required in ("KNOWN_RULE_ALIAS_INDEX","knownRuleAliases","max-master-pls-v2-trusted","fastKnownPath","default_mode","story_reference_matches_text",'"dua":"dua"','"narration":"narration"','/content-audio/reference',"manual-owner-content-upload"):
         if required not in engine_source: fail("fast-known pronunciation marker missing: "+required)
     for required in ('/content-audio/reference','same-origin Cloud GPU gateway',"registerDirectAudioLearning"):
         if required not in studio_source: fail("direct owner reference/cloud marker missing: "+required)
