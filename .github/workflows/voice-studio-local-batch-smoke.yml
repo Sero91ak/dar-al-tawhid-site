@@ -8,6 +8,9 @@ on:
       - 'voice-studio/alphabet-audio-studio.js'
       - 'voice-studio/content-studio.js'
       - 'voice-studio/index.html'
+      - 'voice-studio/mobile.html'
+      - 'voice-studio/VoiceStudioApp.swift'
+      - 'voice-studio/install-mac.command'
       - 'voice-studio/version.json'
       - '.github/workflows/voice-studio-local-batch-smoke.yml'
   workflow_dispatch:
@@ -73,6 +76,9 @@ jobs:
               '"/learning/preview-start"',
               '"/learning/confirm"',
               '"/mobile/history"',
+              'data-preview=',
+              'dataset.previewId',
+              'Zum Home-Bildschirm',
           ]
           missing=[x for x in required if x not in html]
           if missing:
@@ -101,6 +107,15 @@ jobs:
           assert 'Gesamtbatch startet ausschließlich nach dem' in alphabet
           assert f'const APP_VERSION="{expected}";' in html
           assert 'runningVersion!==APP_VERSION' in html
+          mobile=Path("voice-studio/mobile.html").read_text(encoding="utf-8")
+          native=Path("voice-studio/VoiceStudioApp.swift").read_text(encoding="utf-8")
+          installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
+          assert '"/mobile","/mobile/","/mobile/index.html"' in engine
+          assert 'p=="/mobile/history"' in engine
+          assert 'p=="/mobile/audio"' in engine
+          assert 'components.path = "/mobile/"' in native
+          assert 'voice-studio/mobile.html' in installer
+          assert expected in mobile
           print("Interactive Voice Studio priority guard OK:",expected)
           PY
 
