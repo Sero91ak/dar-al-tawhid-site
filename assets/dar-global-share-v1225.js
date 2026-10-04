@@ -403,6 +403,8 @@
     });
   }
   document.addEventListener("click",function(ev){
+    var frauenOwned=ev.target&&ev.target.closest?ev.target.closest("[data-frauen-share]"):null;
+    if(frauenOwned)return; // Frauenbereich besitzt seine Share-Aktionen exklusiv (women-historical Profil).
     var wa=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-wa]"):null;
     if(wa){
       ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
