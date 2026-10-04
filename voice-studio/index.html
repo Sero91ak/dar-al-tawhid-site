@@ -1208,7 +1208,9 @@ const IS_ENGINE_ORIGIN=location.port==="8787"&&/^https?:$/.test(location.protoco
 const IS_COMPANION=IS_ENGINE_ORIGIN&&!IS_LOOPBACK;
 const IS_LOCAL=IS_LOOPBACK||IS_ENGINE_ORIGIN;
 const NATIVE_MAC=/DĀRVoiceStudioMac\//.test(navigator.userAgent);
-const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
+const REMOTE_ENGINE_API="https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/engine";
+const CLOUD_ENGINE_MODE=!IS_LOCAL;
+const LOCAL_API=IS_LOCAL?"":REMOTE_ENGINE_API;
 let nativeUpdateState="idle",nativeLatestVersion="";
 let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let studioMode="production",freeVoiceAudioUrl="",freeVoiceProgressTimer=null,freeVoiceLivePreviewName="",freeVoiceLivePreviewGeneration=0,mainLivePreviewName="",mainLivePreviewGeneration=0;
@@ -2067,7 +2069,7 @@ function updateEngineUI(data){
   $("#engineLabel").textContent=engineVersionMismatch
     ?("Engine "+(engineVersion||"alt")+" · Neustart nötig")
     :!engineOK
-    ?"Engine nicht gestartet"
+    ?(CLOUD_ENGINE_MODE?"Cloud Engine nicht verbunden":"Engine nicht gestartet")
     :loading?"Stimm-Modell wird geladen …"
     :modelReady?(IS_COMPANION?"Serhat Engine bereit · iPad":"Serhat Engine bereit")
     :modelError?"Stimm-Modell Fehler"
