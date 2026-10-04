@@ -208,7 +208,7 @@
       var audio=document.createElement("button");
       var state=voiceState(q);
       audio.type="button";
-      audio.className="quiz-library-audio voice-"+state;
+      audio.className="quiz-library-audio "+(state==="missing"?"voice-missing":state==="loading"?"voice-loading":"voice-ready");
       if(state==="ready"){
         audio.setAttribute("aria-label","Frage "+q.number+" mit Serhat-Stimme hören");
         audio.innerHTML='<span aria-hidden="true">▶</span><small>Hören</small>';
