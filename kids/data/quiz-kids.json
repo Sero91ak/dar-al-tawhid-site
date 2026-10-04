@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "id": "DAR_KIDS_QUIZ_V1",
   "namespace": "dar-kids-quiz",
-  "version": 21,
+  "version": 22,
   "updatedAt": "2026-10-04",
   "separateFromAdultQuiz": true,
   "adultQuizDependency": false,
@@ -22317,7 +22317,7 @@
         "tone": "refined-knowledge"
       }
     },
-    "topicArtworkVersion": "topic-realistic-v1",
+    "topicArtworkVersion": "topic-realistic-v2",
     "topicFamilies": {
       "creation": {
         "url": "/kids/assets/quiz-scenes/topic-creation.svg?v=20261004-topic1",
@@ -22353,6 +22353,26 @@
         "url": "/kids/assets/quiz-scenes/topic-charity.svg?v=20261004-topic1",
         "position": "50% 52%",
         "tone": "generosity-trust"
+      },
+      "prophets": {
+        "url": "/kids/assets/quiz-scenes/topic-prophets.svg?v=20261004-topic2",
+        "position": "50% 50%",
+        "tone": "prophetic-history"
+      },
+      "tawhid": {
+        "url": "/kids/assets/quiz-scenes/topic-tawhid.svg?v=20261004-topic2",
+        "position": "50% 50%",
+        "tone": "oneness-wonder"
+      },
+      "iman": {
+        "url": "/kids/assets/quiz-scenes/topic-iman.svg?v=20261004-topic2",
+        "position": "50% 50%",
+        "tone": "faith-hope"
+      },
+      "akhlaq": {
+        "url": "/kids/assets/quiz-scenes/topic-akhlaq.svg?v=20261004-topic2",
+        "position": "50% 52%",
+        "tone": "character-kindness"
       }
     },
     "sceneMap": {
@@ -22381,20 +22401,20 @@
       "Ṣawm": "salah",
       "Ḥaǧǧ": "salah",
       "Adab": "adab",
-      "Aḫlāq": "adab",
-      "Iḥsān": "adab",
-      "Dankbarkeit": "adab",
+      "Aḫlāq": "akhlaq",
+      "Iḥsān": "akhlaq",
+      "Dankbarkeit": "akhlaq",
       "Daʿwah": "adab",
-      "Tazkiyyah": "adab",
+      "Tazkiyyah": "akhlaq",
       "Duʿāʾ": "dua",
       "Dhikr": "dua",
-      "Īmān": "dua",
-      "Tawḥīd": "dua",
-      "Tawakkul": "dua",
-      "Tawbah": "dua",
-      "Taqwā": "dua",
-      "Ṣabr": "dua",
-      "Ākhirah": "dua",
+      "Īmān": "iman",
+      "Tawḥīd": "tawhid",
+      "Tawakkul": "tawhid",
+      "Tawbah": "iman",
+      "Taqwā": "iman",
+      "Ṣabr": "akhlaq",
+      "Ākhirah": "iman",
       "Rechtleitung": "dua",
       "Ṣadaqah": "charity",
       "Zakāh": "charity"
@@ -22415,6 +22435,49 @@
         "density": "compact",
         "hero": "compact"
       }
+    },
+    "priorityCategoryMap": {
+      "Tawḥīd": "tawhid",
+      "Tawakkul": "tawhid",
+      "Īmān": "iman",
+      "Ākhirah": "iman",
+      "Tawbah": "iman",
+      "Taqwā": "iman",
+      "Aḫlāq": "akhlaq",
+      "Iḥsān": "akhlaq",
+      "Dankbarkeit": "akhlaq",
+      "Tazkiyyah": "akhlaq",
+      "Ṣabr": "akhlaq"
+    },
+    "topicKeywords": {
+      "prophets": [
+        "Ādam",
+        "Nūḥ",
+        "Hūd",
+        "Ṣāliḥ",
+        "Ibrāhīm",
+        "Ismāʿīl",
+        "Isḥāq",
+        "Yaʿqūb",
+        "Yūsuf",
+        "Ayyūb",
+        "Shuʿayb",
+        "Mūsā",
+        "Hārūn",
+        "Dāwūd",
+        "Sulaymān",
+        "Ilyās",
+        "al-Yasaʿ",
+        "Yūnus",
+        "Zakariyyā",
+        "Yaḥyā",
+        "ʿĪsā",
+        "Maryam",
+        "Luqmān",
+        "Dhul-Kifl",
+        "Prophet Muḥammad",
+        "Gefährten der Höhle"
+      ]
     }
   }
 }
