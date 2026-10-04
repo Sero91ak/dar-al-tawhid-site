@@ -44,7 +44,9 @@ permissions:
 
 concurrency:
   group: dar-al-tawhid-visitor-deploy
-  cancel-in-progress: true
+  # Laufenden Live-Deploy nicht bei jedem parallelen Voice/Kids-Push abbrechen.
+  # GitHub hält weiterhin höchstens einen aktuellen Pending-Run; danach gewinnt der neueste Stand.
+  cancel-in-progress: false
 
 jobs:
   classify:
