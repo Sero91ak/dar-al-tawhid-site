@@ -7,6 +7,7 @@ const CACHE_KEY = "kids.studioContent.cache.v1";
 const REFRESH_MS = 60000;
 
 let state = { items: [], fetchedAt: 0, openId: "", mode: readMode(), busy: false };
+let studioStoryReader = null;
 
 function esc(v) {
   return String(v == null ? "" : v).replace(/[&<>"']/g, c => ({
@@ -131,7 +132,7 @@ function injectStyles() {
   .studio-content-title{font-size:27px;line-height:1.08;margin:17px 0 5px}.studio-content-meta{font-size:10px;color:var(--gold);font-weight:900}
   .studio-content-summary{color:var(--muted);font-size:13px;line-height:1.5;margin:8px 0 14px}
   .studio-mode-tabs{display:flex;gap:8px;margin:10px 0 14px}.studio-mode-tabs button{flex:1;min-height:44px;border-radius:15px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.05);color:var(--ink);font-weight:900}.studio-mode-tabs button.active{background:var(--gold);color:#11252c;border-color:transparent}
-  .studio-audio{width:100%;margin:3px 0 15px}.studio-read{white-space:pre-wrap;font-size:16px;line-height:1.75;color:rgba(255,255,255,.91);padding:6px 0 20px}
+  .studio-audio{width:100%;margin:3px 0 15px}.studio-story-player{padding:13px;border:1px solid rgba(255,255,255,.08);border-radius:20px;background:rgba(255,255,255,.035);margin:4px 0 14px}.studio-story-play{width:100%;min-height:54px;border:0;border-radius:17px;background:var(--gold);color:#10262e;font-weight:950;font-size:15px}.studio-story-progress{height:8px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden;margin-top:10px;cursor:pointer}.studio-story-progress span{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#7ed0c6,#e8c779)}.studio-read{white-space:pre-wrap;font-size:16px;line-height:1.75;color:rgba(255,255,255,.91);padding:6px 0 20px}
   .studio-quiz-q{border-top:1px solid rgba(255,255,255,.08);padding:14px 0}.studio-quiz-q h4{margin:0 0 9px;font-size:16px}.studio-quiz-answer{width:100%;text-align:left;margin:5px 0;padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);color:var(--ink)}
   .studio-quiz-answer.correct{border-color:rgba(107,211,150,.5);background:rgba(107,211,150,.12)}.studio-quiz-answer.wrong{border-color:rgba(236,120,120,.5);background:rgba(236,120,120,.12)}
   .studio-content-mode-settings{margin:16px 0;padding:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035);border-radius:22px}.studio-content-mode-settings h3{margin:0 0 4px;font-size:16px}.studio-content-mode-settings p{margin:0 0 10px;color:var(--muted);font-size:11px}
@@ -162,11 +163,18 @@ function setBackgroundInert(on) {
 function closeModal() {
   const modal = document.getElementById("studioContentModal");
   if (!modal) return;
+  studioStoryReader?.persist(true);
+  studioStoryReader?.close();
+  studioStoryReader = null;
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden","true");
   setBackgroundInert(false);
   const audio = modal.querySelector("audio");
   try { audio?.pause(); } catch (_) {}
+  try{
+    const u=new URL(location.href);
+    if(u.searchParams.has("content")){u.searchParams.delete("content");history.replaceState(history.state||{},"",u.pathname+(u.search||"")+(u.hash||""))}
+  }catch(_){}
   state.openId = "";
 }
 function allowedModes(item) {
@@ -210,6 +218,10 @@ function openItem(id) {
     '<div id="studioContentPayload"></div>';
   const payload = document.getElementById("studioContentPayload");
   function paint(mode) {
+    studioStoryReader?.persist(true);
+    studioStoryReader?.close();
+    studioStoryReader = null;
+    try { payload.querySelector("audio")?.pause(); } catch (_) {}
     initial = mode;
     body.querySelectorAll("[data-studio-mode]").forEach(b => b.classList.toggle("active", b.dataset.studioMode === mode));
     if (item.kind === "quiz") {
@@ -224,12 +236,76 @@ function openItem(id) {
       return;
     }
     if (mode === "listen" && modes.listen) {
-      payload.innerHTML = '<audio class="studio-audio" controls playsinline preload="metadata" src="'+esc(abs(item.audio.url))+'"></audio>' +
-        (modes.read ? '<div class="studio-content-summary">Du kannst oben jederzeit auf „Lesen“ wechseln.</div>' : "");
+      payload.innerHTML =
+        '<div class="studio-story-player">'+
+          '<button type="button" class="studio-story-play">Hören &amp; mitlesen</button>'+
+          '<audio class="studio-audio" playsinline preload="metadata" src="'+esc(abs(item.audio.url))+'" hidden></audio>'+
+          '<div class="studio-story-progress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div>'+
+          '<div class="studio-story-time"><strong>0:00</strong><span>0:00</span></div>'+
+          '<button type="button" class="studio-follow-open">Mitlesen öffnen</button>'+
+        '</div>'+
+        (modes.read ? '<div class="studio-content-summary">Der Mitlese-Modus folgt der Stimme automatisch. Du kannst jederzeit auf „Lesen“ wechseln.</div>' : "");
       const audio = payload.querySelector("audio");
+      const play = payload.querySelector(".studio-story-play");
+      const progress = payload.querySelector(".studio-story-progress");
+      const fill = progress?.querySelector("span");
+      const current = payload.querySelector(".studio-story-time strong");
+      const total = payload.querySelector(".studio-story-time span");
+      const fmt = v => window.DARKidsFollowReader?.formatTime ? window.DARKidsFollowReader.formatTime(v) : Math.floor((Number(v)||0)/60)+":"+String(Math.floor((Number(v)||0)%60)).padStart(2,"0");
+      const sync = () => {
+        if(!audio)return;
+        const d=Number(audio.duration)||0,c=Number(audio.currentTime)||0;
+        if(fill)fill.style.width=(d?Math.min(100,c/d*100):0)+"%";
+        if(current)current.textContent=fmt(c);
+        if(total)total.textContent=fmt(d);
+        if(play)play.textContent=!audio.paused&&!audio.ended?"Pause":(c>0&&!audio.ended?"Weiterhören":"Hören & mitlesen");
+      };
+      const toggle = async () => {
+        if(!audio)return;
+        if(!audio.paused&&!audio.ended){audio.pause();return}
+        if(audio.ended)try{audio.currentTime=0}catch(_){}
+        studioStoryReader?.restore();
+        try{await audio.play()}catch(_){}
+      };
+      studioStoryReader=window.DARKidsFollowReader?.create({
+        id:"studio-story-"+String(item.id||"story"),
+        audio,
+        getContent:()=>({
+          key:"studio:"+String(item.id||"story")+":"+ageGroup().label,
+          title:String(item.title||"Geschichte"),
+          subtitle:String(item.category||"Kinder-Geschichte")+" · Alter "+ageGroup().label,
+          album:"DĀR AL TAWḤĪD Kids · Hörbuch",
+          text:String(item.text||""),
+          artwork:cover,
+          deepLink:""
+        }),
+        toggleAudio:toggle,
+        disabled:()=>!String(item?.audio?.url||"").trim()
+      })||null;
+      play?.addEventListener("click",toggle);
+      payload.querySelector(".studio-follow-open")?.addEventListener("click",()=>studioStoryReader?.open());
+      audio?.addEventListener("loadedmetadata",()=>{studioStoryReader?.restore();sync()});
+      audio?.addEventListener("timeupdate",sync);
+      audio?.addEventListener("play",sync);
+      audio?.addEventListener("pause",sync);
       audio?.addEventListener("ended", () => {
+        sync();
         try { localStorage.setItem("kids.story."+item.id, "1"); } catch (_) {}
       });
+      progress?.addEventListener("click",e=>{
+        const r=progress.getBoundingClientRect(),d=Number(audio?.duration)||0;
+        if(!r.width||!d)return;
+        try{audio.currentTime=Math.max(0,Math.min(d,((e.clientX-r.left)/r.width)*d))}catch(_){}
+        studioStoryReader?.persist(true);sync();
+      });
+      progress?.addEventListener("keydown",e=>{
+        if(e.key!=="ArrowLeft"&&e.key!=="ArrowRight")return;
+        e.preventDefault();
+        const d=Number(audio?.duration)||0;if(!d)return;
+        try{audio.currentTime=Math.max(0,Math.min(d,(Number(audio.currentTime)||0)+(e.key==="ArrowLeft"?-15:15)))}catch(_){}
+        studioStoryReader?.persist(true);sync();
+      });
+      sync();
     } else {
       payload.innerHTML = '<div class="studio-read">'+esc(item.text || "").replace(/\n/g,"<br>")+'</div>';
     }
@@ -241,6 +317,11 @@ function openItem(id) {
   modal.setAttribute("aria-hidden","false");
   setBackgroundInert(true);
   state.openId = item.id;
+  try{
+    const u=new URL(location.href);
+    u.searchParams.set("content",String(item.id||""));
+    history.replaceState(history.state||{},"",u.pathname+(u.search||"")+(u.hash||""));
+  }catch(_){}
 }
 function bindQuiz(item) {
   const payload = document.getElementById("studioContentPayload");
