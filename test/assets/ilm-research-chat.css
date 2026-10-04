@@ -733,3 +733,38 @@ html[data-theme="salbei"] body.is-ilm-chat-route .ilm-chat-header{
     transition:none!important;
   }
 }
+
+
+/* Complete ʿIlm theme token coverage */
+html[data-theme="salbei"] body.is-ilm-chat-route,
+html[data-theme="light"][data-theme-variant="salbei"] body.is-ilm-chat-route{
+  --ilm-page-bg:#f4f6f0;
+  --ilm-header-bg:#f7f9f4;
+  --ilm-composer-bg:#ffffff;
+  --ilm-primary-text:#17211b;
+  --ilm-secondary-text:#48574e;
+  --ilm-accent:#3f5d4b;
+  --ilm-gold:#607b68;
+  --ilm-line:rgba(63,93,75,.23);
+  --ilm-hero-left:rgba(244,246,240,.92);
+  --ilm-hero-mid:rgba(244,246,240,.69);
+  --ilm-hero-right:rgba(244,246,240,.31);
+  --ilm-hero-chip:rgba(247,249,244,.70);
+  --ilm-hero-rule:rgba(63,93,75,.25);
+}
+
+html[data-theme="aurora"] body.is-ilm-chat-route{
+  --ilm-page-bg:#10251f;
+  --ilm-header-bg:#17362e;
+  --ilm-composer-bg:#18372f;
+  --ilm-primary-text:#f1ecdf;
+  --ilm-secondary-text:#c1b9aa;
+  --ilm-accent:#e7d59d;
+  --ilm-gold:#d9bf76;
+  --ilm-line:rgba(231,213,157,.23);
+  --ilm-hero-left:rgba(16,37,31,.88);
+  --ilm-hero-mid:rgba(16,37,31,.58);
+  --ilm-hero-right:rgba(16,37,31,.15);
+  --ilm-hero-chip:rgba(23,54,46,.54);
+  --ilm-hero-rule:rgba(231,213,157,.27);
+}
