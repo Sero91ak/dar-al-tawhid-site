@@ -3677,7 +3677,8 @@
           title: String(titelVon(e) || bereichKicker(abschnitt) || "Frauen im Islam").trim(),
           body: String(aussageVon(e) || "").trim(),
           category: String(bereichKicker(abschnitt) || "Frauen im Islam").trim(),
-          source: String(quelleText(e) || "").trim()
+          source: String(quelleText(e) || "").trim(),
+          profile: "women-historical"
         }),
         signal: controller ? controller.signal : undefined
       });
