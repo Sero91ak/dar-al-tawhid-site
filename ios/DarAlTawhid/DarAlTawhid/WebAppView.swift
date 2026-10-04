@@ -75,6 +75,7 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darPushExternalId")
         userContentController.add(context.coordinator, name: "darAppIcon")
         userContentController.add(context.coordinator, name: "darQuranNowPlaying")
+        userContentController.add(context.coordinator, name: "darShareImage")
         let deviceId = DarPushNotifications.deviceId()
         let escapedDevice = deviceId
             .replacingOccurrences(of: "\\", with: "\\\\")
@@ -1062,7 +1063,42 @@ struct WebAppView: UIViewRepresentable {
             systemVolumeSlider?.value = clamped
         }
 
+        // DAR_SHARE_IMAGE_V1225
+        @MainActor
+        private func shareImageFromWeb(_ body: [String: Any]) {
+            guard let raw = body["dataUrl"] as? String,
+                  let comma = raw.firstIndex(of: ",") else { return }
+            let encoded = String(raw[raw.index(after: comma)...])
+            guard let data = Data(base64Encoded: encoded),
+                  let image = UIImage(data: data),
+                  let presenter = topViewController() else { return }
+            let title = (body["title"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+            var items: [Any] = [image]
+            let caption = [title, "dar-al-tawhid.de"].compactMap { value -> String? in
+                guard let value, !value.isEmpty else { return nil }
+                return value
+            }.joined(separator: "\n")
+            if !caption.isEmpty { items.append(caption) }
+            let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            if let popover = controller.popoverPresentationController {
+                popover.sourceView = presenter.view
+                popover.sourceRect = CGRect(
+                    x: presenter.view.bounds.midX,
+                    y: presenter.view.bounds.maxY - 40,
+                    width: 1,
+                    height: 1
+                )
+                popover.permittedArrowDirections = []
+            }
+            presenter.present(controller, animated: true)
+        }
+
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            if message.name == "darShareImage" {
+                let body = message.body as? [String: Any] ?? [:]
+                Task { @MainActor in self.shareImageFromWeb(body) }
+                return
+            }
             if message.name == "darPushTest" {
                 let body = message.body as? [String: Any] ?? [:]
                 DarPushNotifications.showTest(
