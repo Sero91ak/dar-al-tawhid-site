@@ -1,0 +1,146 @@
+/* DĀR AL TAWḤĪD · Book detail · test-only v1252 */
+.topic-collection-page:has(.book-profile-box){
+  --bookd-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/c4fe42ac-254f-4be7-bf6b-b58306eacd6d/aec651b6-86e5-4013-b576-e6a0f59643d1/Single_wide_cinematic_app_background_for_an_Islamic_classica.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDNmYWFjNDFjNjBkNzBhOCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI2ODY3M30.ICAJZM_Lzym3huVoLh1vyzUSMKWrRKnYkfOgNbQOw90");
+  --bookd-left:color-mix(in srgb,var(--bg) 91%,transparent);
+  --bookd-mid:color-mix(in srgb,var(--bg) 62%,transparent);
+  --bookd-right:color-mix(in srgb,var(--bg) 14%,transparent);
+  --bookd-line:color-mix(in srgb,var(--gold2) 20%,var(--line2));
+  --bookd-soft:color-mix(in srgb,var(--card) 76%,transparent);
+}
+html[data-theme="light"] .topic-collection-page:has(.book-profile-box),
+html[data-theme="soft"] .topic-collection-page:has(.book-profile-box),
+html[data-theme="salbei"] .topic-collection-page:has(.book-profile-box),
+html[data-theme="eisgold"] .topic-collection-page:has(.book-profile-box){
+  --bookd-left:color-mix(in srgb,var(--bg) 95%,transparent);
+  --bookd-mid:color-mix(in srgb,var(--bg) 73%,transparent);
+  --bookd-right:color-mix(in srgb,var(--bg) 34%,transparent);
+  --bookd-soft:color-mix(in srgb,var(--card) 90%,transparent);
+}
+html[data-theme="royal"] .topic-collection-page:has(.book-profile-box),
+html[data-theme="dark"] .topic-collection-page:has(.book-profile-box),
+html[data-theme="dar-al-layl"] .topic-collection-page:has(.book-profile-box),
+html[data-theme="bordeaux"] .topic-collection-page:has(.book-profile-box),
+html[data-theme="aurora"] .topic-collection-page:has(.book-profile-box){
+  --bookd-left:color-mix(in srgb,var(--bg) 86%,transparent);
+  --bookd-mid:color-mix(in srgb,var(--bg) 54%,transparent);
+  --bookd-right:color-mix(in srgb,var(--bg) 9%,transparent);
+  --bookd-soft:color-mix(in srgb,var(--card) 62%,transparent);
+}
+
+.topic-collection-page:has(.book-profile-box){
+  width:100%!important;
+  max-width:none!important;
+}
+
+.topic-collection-page:has(.book-profile-box) > .view-head{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  width:100vw!important;
+  min-height:clamp(220px,46vw,300px)!important;
+  margin:0 0 18px calc(50% - 50vw)!important;
+  padding:
+    clamp(26px,5vw,38px)
+    max(20px,calc((100vw - 1180px)/2))
+    clamp(23px,4.5vw,34px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  align-items:flex-start!important;
+  border:0!important;
+  border-radius:0 0 26px 26px!important;
+  background:
+    linear-gradient(90deg,var(--bookd-left) 0%,var(--bookd-mid) 45%,var(--bookd-right) 82%,color-mix(in srgb,var(--bg) 4%,transparent) 100%),
+    linear-gradient(180deg,color-mix(in srgb,var(--bg) 4%,transparent),transparent 50%,color-mix(in srgb,var(--bg) 22%,transparent)),
+    var(--bookd-art) 78% 46%/cover no-repeat!important;
+  box-shadow:0 18px 40px color-mix(in srgb,var(--bg) 64%,transparent),inset 0 -1px 0 var(--bookd-line)!important;
+}
+.topic-collection-page:has(.book-profile-box) > .view-head::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 18%,transparent),transparent 64%),
+             radial-gradient(circle at 84% 14%,color-mix(in srgb,var(--gold2) 9%,transparent),transparent 42%);
+}
+.topic-collection-page:has(.book-profile-box) > .view-head > *{position:relative;z-index:1;width:min(680px,88%)}
+.topic-collection-page:has(.book-profile-box) > .view-head .eyebrow{
+  margin:0 0 8px!important;color:var(--gold2)!important;font-size:.65rem!important;font-weight:850!important;letter-spacing:.12em!important
+}
+.topic-collection-page:has(.book-profile-box) > .view-head h2{
+  margin:0!important;font-family:var(--font-display,var(--serif))!important;font-size:clamp(2rem,8.3vw,3.7rem)!important;line-height:.96!important;font-weight:620!important;color:var(--text)!important;text-wrap:balance!important;text-shadow:0 2px 16px color-mix(in srgb,var(--bg) 38%,transparent)!important
+}
+.topic-collection-page:has(.book-profile-box) > .view-head .view-desc{
+  margin:10px 0 0!important;max-width:40rem!important;color:var(--text)!important;font-size:clamp(.84rem,2.9vw,.98rem)!important;line-height:1.48!important;font-weight:560!important;text-shadow:0 1px 10px color-mix(in srgb,var(--bg) 38%,transparent)!important
+}
+
+.topic-collection-page:has(.book-profile-box) .book-profile-box{
+  width:min(900px,calc(100% - 24px))!important;
+  margin:0 auto 26px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.topic-collection-page:has(.book-profile-box) .book-profile-title{
+  margin:0!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(1.8rem,6.6vw,2.6rem)!important;
+  line-height:1!important;
+  font-weight:620!important;
+  color:var(--text)!important;
+  text-wrap:balance!important;
+}
+.topic-collection-page:has(.book-profile-box) .book-desc{
+  margin:14px 0 0!important;
+  max-width:48rem!important;
+  color:var(--muted)!important;
+  font-size:.9rem!important;
+  line-height:1.6!important;
+}
+.topic-collection-page:has(.book-profile-box) .book-meta-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:0!important;
+  margin:22px 0 0!important;
+  border-top:1px solid var(--bookd-line)!important;
+  border-bottom:1px solid var(--bookd-line)!important;
+}
+.topic-collection-page:has(.book-profile-box) .book-meta{
+  min-height:70px!important;
+  padding:12px 12px 11px!important;
+  border:0!important;
+  border-right:1px solid var(--bookd-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--text)!important;
+  box-shadow:none!important;
+}
+.topic-collection-page:has(.book-profile-box) .book-meta:first-child{padding-left:2px!important}
+.topic-collection-page:has(.book-profile-box) .book-meta:last-child{border-right:0!important}
+.topic-collection-page:has(.book-profile-box) .book-meta b{
+  display:block!important;margin:0 0 5px!important;color:var(--muted)!important;font-size:.62rem!important;font-weight:820!important;letter-spacing:.08em!important;text-transform:uppercase!important
+}
+.topic-collection-page:has(.book-profile-box) > .post-grid{
+  width:min(980px,calc(100% - 24px))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+@media(max-width:599px){
+  .topic-collection-page:has(.book-profile-box) > .view-head{
+    min-height:238px!important;
+    padding:25px 18px 23px!important;
+    background-position:center,center,80% 46%!important;
+  }
+  .topic-collection-page:has(.book-profile-box) > .view-head > *{width:min(100%,89%)!important}
+  .topic-collection-page:has(.book-profile-box) .book-profile-box,
+  .topic-collection-page:has(.book-profile-box) > .post-grid{width:calc(100% - 20px)!important}
+  .topic-collection-page:has(.book-profile-box) .book-meta-grid{grid-template-columns:1fr!important}
+  .topic-collection-page:has(.book-profile-box) .book-meta{
+    border-right:0!important;border-bottom:1px solid var(--bookd-line)!important;padding-left:2px!important
+  }
+  .topic-collection-page:has(.book-profile-box) .book-meta:last-child{border-bottom:0!important}
+}
+@media(min-width:760px){
+  .topic-collection-page:has(.book-profile-box) > .view-head > *{width:min(680px,62%)!important}
+  .topic-collection-page:has(.book-profile-box) > .view-head{min-height:290px!important;background-position:center,center,74% 44%!important}
+}
