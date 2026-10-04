@@ -183,6 +183,8 @@ jobs:
           DAR_VOICE_GPU_ORIGIN: ${{ secrets.DAR_VOICE_GPU_ORIGIN }}
           DAR_VOICE_GPU_TOKEN: ${{ secrets.DAR_VOICE_GPU_TOKEN }}
           DAR_VOICE_WEB_TOKEN: ${{ secrets.DAR_VOICE_WEB_TOKEN }}
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          FAL_API_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           : > "$RUNNER_TEMP/missing-core-secrets.txt"
           SECRETS_JSON="$RUNNER_TEMP/core-secrets.json"
@@ -209,7 +211,8 @@ jobs:
             TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID),
             DAR_VOICE_GPU_ORIGIN: pick(process.env.DAR_VOICE_GPU_ORIGIN),
             DAR_VOICE_GPU_TOKEN: pick(process.env.DAR_VOICE_GPU_TOKEN),
-            DAR_VOICE_WEB_TOKEN: pick(process.env.DAR_VOICE_WEB_TOKEN)
+            DAR_VOICE_WEB_TOKEN: pick(process.env.DAR_VOICE_WEB_TOKEN),
+            FAL_KEY: pick(process.env.FAL_KEY, process.env.FAL_API_KEY)
           };
           const payload = {};
           const miss = [];
@@ -296,6 +299,12 @@ jobs:
               else
                 echo "::warning::hasOneSignalKey=false – ONESIGNAL_API_KEY_NEW in GitHub Actions Secrets setzen"
               fi
+              if printf '%s' "$HEALTH" | grep -q '"videoStudioFal":true'; then
+                echo "FAL/Bildgenerator aktiv"
+              else
+                echo "::error::videoStudioFal=false – FAL_KEY/FAL_API_KEY fehlt; Bildbeiträge können nicht generiert werden"
+                exit 1
+              fi
               exit 0
             fi
             sleep 12
@@ -317,6 +326,8 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          FAL_API_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           sleep 40
           HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
@@ -354,7 +365,8 @@ jobs:
                 ONESIGNAL_API_KEY_NEW: pick(process.env.ONESIGNAL_API_KEY_NEW, process.env.ONESIGNAL_API_KEY),
                 TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN),
                 ELEVENLABS_API_KEY: pick(process.env.ELEVENLABS_API_KEY),
-                ELEVENLABS_VOICE_ID: pick(process.env.ELEVENLABS_VOICE_ID)
+                ELEVENLABS_VOICE_ID: pick(process.env.ELEVENLABS_VOICE_ID),
+                FAL_KEY: pick(process.env.FAL_KEY, process.env.FAL_API_KEY)
               };
               const clean = {};
               for (const [k, v] of Object.entries(payload)) if (v) clean[k] = v;
@@ -606,6 +618,8 @@ jobs:
           DAR_VOICE_GPU_ORIGIN: ${{ secrets.DAR_VOICE_GPU_ORIGIN }}
           DAR_VOICE_GPU_TOKEN: ${{ secrets.DAR_VOICE_GPU_TOKEN }}
           DAR_VOICE_WEB_TOKEN: ${{ secrets.DAR_VOICE_WEB_TOKEN }}
+          FAL_KEY: ${{ secrets.FAL_KEY }}
+          FAL_API_KEY: ${{ secrets.FAL_API_KEY }}
         run: |
           : > "$RUNNER_TEMP/missing-core-secrets-final.txt"
           SECRETS_JSON="$RUNNER_TEMP/core-secrets-final.json"
@@ -632,7 +646,8 @@ jobs:
             TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID),
             DAR_VOICE_GPU_ORIGIN: pick(process.env.DAR_VOICE_GPU_ORIGIN),
             DAR_VOICE_GPU_TOKEN: pick(process.env.DAR_VOICE_GPU_TOKEN),
-            DAR_VOICE_WEB_TOKEN: pick(process.env.DAR_VOICE_WEB_TOKEN)
+            DAR_VOICE_WEB_TOKEN: pick(process.env.DAR_VOICE_WEB_TOKEN),
+            FAL_KEY: pick(process.env.FAL_KEY, process.env.FAL_API_KEY)
           };
           const payload = {};
           const miss = [];
