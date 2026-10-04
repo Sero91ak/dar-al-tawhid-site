@@ -314,7 +314,13 @@
       "sourcePolicy": "Qurʾān + authentische Ṣaḥīḥ-Sunnah; Quellen pro Frage",
       "secondBatchHadithCrossCheck": "dorar.net",
       "fourthBatchHadithCrossCheck": "dorar.net",
-      "duplicateQuestionGuard": true
+      "duplicateQuestionGuard": true,
+      "packSize": 50,
+      "packDistribution": {
+        "4-6": 18,
+        "7-8": 16,
+        "9-10": 16
+      }
     },
     "kidsQuizContentRevision": "001-250"
   },
