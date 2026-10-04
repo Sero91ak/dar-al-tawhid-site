@@ -196,7 +196,7 @@
     "storyFollowReaderAutoOpen": true,
     "storyFollowReaderReopenButton": true,
     "storyFollowReaderZIndex": 30050,
-    "contentStudioStoryAudiobook": "v4-exact-alignment",
+    "contentStudioStoryAudiobook": "v5-forced-alignment-with-silence-aware-fallback",
     "sectionHeroCompactHeightPhone": "286–345px",
     "sectionHeroCompactHeightTablet": "350–410px",
     "storyAudioNativeIOSBridge": true,
@@ -219,13 +219,17 @@
     "storyReadAlongMinimumAge": "6–8",
     "storyFollowReaderTimestampAware": true,
     "storyFollowReaderForcedAlignment": "elevenlabs-forced-alignment-v1",
-    "storyFollowReaderFallback": "calibrated-weighted-timeline",
+    "storyFollowReaderFallback": "silence-aware-dynamic-paragraph-v1",
     "storyFollowReaderAllFutureStudioStories": true,
     "sectionHeroArtDirection": "photorealistic-prophet-sahaba-aligned",
     "storyPreschoolAdultReadAlong": true,
     "storyPreschoolPrimaryAction": "Hören",
     "storyPreschoolSecondaryAction": "Mitlesen",
-    "storyPreschoolSecondaryAudience": "Erwachsene Begleitperson"
+    "storyPreschoolSecondaryAudience": "Erwachsene Begleitperson",
+    "storyFollowReaderCurrentMuhammadSync": "silence-aware-dynamic-paragraph-v1",
+    "storyFollowReaderCurrentMuhammadParagraphs": 23,
+    "storyFollowReaderCloudAlignmentOptional": true,
+    "storyFollowReaderBrowserFallback": "browser-silence-aware-paragraph-v1"
   },
   "updatedAt": "2026-10-04"
 }
