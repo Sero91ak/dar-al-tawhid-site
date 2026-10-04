@@ -451,7 +451,7 @@ function setBatchUi(state){
     btn.disabled=running;
     btn.textContent=running
       ?"Fuṣḥā-Paket wird neu erzeugt …"
-      :"Fuṣḥā-Kids-Sprachpaket erzeugen";
+      :"Fuṣḥā-Alphabet + Quiz erzeugen";
   }
   if(!line)return;
 
@@ -476,7 +476,7 @@ function setBatchUi(state){
     const published=Boolean(state?.repoPublished);
     const publishMsg=String(state?.repoPublishMessage||state?.repoPublishError||"").trim();
     line.textContent=published
-      ?"Fertig: Fuṣḥā-Alphabet + Quiz + Begrüßung · Alphabet, Quiz, Duʿāʾ-Erklärungen, Wissens-Audio, Kurzgeschichten und Begrüßung wurden mit deiner Serhat-Stimme erzeugt und direkt in die Kids-App übertragen."
+      ?"Fertig: Fuṣḥā-Alphabet, Quiz und Begrüßung wurden mit deiner Serhat-Stimme erzeugt und direkt in die Kids-App übertragen. Duʿāʾ, Wissen und Kurzgeschichten laufen separat über den automatischen Kids-Voice-Sync."
       :"Audio-Paket vollständig erzeugt. "+(publishMsg||"Der automatische GitHub-Push ist auf diesem Mac noch nicht angemeldet.");
     line.style.color=published?"var(--green)":"var(--amber)";
     return;
@@ -528,7 +528,7 @@ async function startFullBatch(auto=false){
     if(!r.ok||d?.ok===false)throw Error(d?.error||"Komplettes Serhat-Paket konnte nicht gestartet werden.");
     setBatchUi(d);
     setMsg(
-      "Fuṣḥā-Neuerzeugung läuft: Alle 140 Alphabet-Kandidaten werden mit der aktuellen Strenglogik neu erstellt; alte Kandidaten aus früheren Engines werden nicht wiederverwendet. Quiz, Duʿāʾ-Erklärungen, Wissens-Audio, Kurzgeschichten und Begrüßung bleiben im Kids-Sprachpaket enthalten.",
+      "Fuṣḥā-Neuerzeugung läuft: Alle 140 Alphabet-Kandidaten werden mit der aktuellen Strenglogik neu erstellt; alte Kandidaten aus früheren Engines werden nicht wiederverwendet. Quiz und Begrüßung bleiben in diesem Paket. Duʿāʾ, Wissen und Kurzgeschichten werden unabhängig davon automatisch vom Kids-Voice-Sync ergänzt.",
       "good"
     );
     beginBatchPolling();
@@ -540,14 +540,14 @@ async function maybeAutoStartFullBatch(){
   if(batchAutoStarted||!isLocalVoiceStudio()||!manifest)return;
   batchAutoStarted=true;
 
-  // 2.9.64: NIEMALS mehr beim Öffnen des Studios automatisch 140 plus dynamische Kids-Sprachinhalte
+  // 2.9.64: NIEMALS mehr beim Öffnen des Studios automatisch 140/226
   // Sprachclips erzeugen. Dieser frühere Auto-Start belegte die einzige lokale
   // Synthese-Engine und ließ Wort-Schnelltest, Freistimme und "Audio erzeugen"
   // wie eingefroren wirken. Ein Gesamtbatch startet ausschließlich nach dem
   // bewussten Klick auf den Batch-Button.
   const state=await readBatchState();
   if(state?.running){
-    setMsg("Ein zuvor bewusst gestarteter Kids-Sprachpaket-Batch läuft. Interaktive Sprachaufträge haben Vorrang.","warn");
+    setMsg("Ein zuvor bewusst gestarteter Alphabet-/Quiz-Batch läuft. Interaktive Sprachaufträge haben Vorrang.","warn");
     beginBatchPolling();
     return;
   }
