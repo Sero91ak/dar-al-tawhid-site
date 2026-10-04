@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "kind": "prophet",
+  "status": "owner-approved-reference",
+  "textRole": "exact-source-text-for-audio",
+  "language": "de-DE",
+  "embeddedRegister": "Arabic/Fuṣḥā Islamic terminology",
+  "prosodyMode": "kids_story",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "id": "idris-story-owner-reference-2026-10-04",
+  "itemId": "idris",
+  "title": "Idrīs · bestätigtes Audio-Text-Referenzpaar",
+  "sourceText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nNicht über jeden Propheten ist eine lange Abfolge von Ereignissen überliefert. Bei Idrīs, Friede sei mit ihm, ist die Geschichte kurz. Aber gerade das macht sie besonders. Wir lernen, bei dem zu bleiben, was Allah uns sicher mitgeteilt hat.\n\nAllah nennt Idrīs einen wahrhaftigen Mann und einen Propheten. Wahrhaftigkeit bedeutet mehr als nur nicht zu lügen. Ein wahrhaftiger Mensch meint es ernst mit seinem Glauben. Seine Worte und seine Taten passen zusammen. Er verspricht nicht leichtfertig, und er macht die Wahrheit nicht davon abhängig, ob andere Menschen sie angenehm finden.\n\nAllah lobt Idrīs außerdem zusammen mit anderen standhaften und rechtschaffenen Dienern. Das zeigt uns, dass sein Leben von Geduld und Gehorsam geprägt war.\n\nWie seine Stadt hieß, wie sein Haus aussah, welchen Beruf er hatte oder welche langen Gespräche er mit seinem Volk führte, wissen wir nicht sicher. Solche Dinge dürfen wir nicht erfinden und dann so erzählen, als wären sie Offenbarung.\n\nÜber Idrīs erfahren wir noch etwas Besonderes. Allah sagt, dass Er ihn zu einem hohen Ort erhob. Viele Jahre später sah der Prophet Muhammad, Allahs Segen und Frieden auf ihm, Idrīs während der Himmelsreise im vierten Himmel. So wissen wir, dass Idrīs bei Allah eine ehrenvolle Stellung hatte.\n\nFür Kinder ist diese kurze Geschichte vielleicht zuerst überraschend. Man erwartet Abenteuer, Reisen und viele Namen. Aber die Geschichte von Idrīs lehrt uns etwas anderes. Ein Mensch braucht nicht berühmt zu sein, damit Allah ihn ehrt.\n\nManchmal sind es zwei Eigenschaften, die mehr sagen als hundert erfundene Einzelheiten. Wahrhaftig und standhaft.\n\nVielleicht stehst du einmal vor einer Situation, in der die Wahrheit schwer ist. Vielleicht hast du etwas kaputt gemacht und könntest es verstecken. Vielleicht versprechen Freunde etwas, das nicht richtig ist. Dann erinnere dich an Idrīs. Allah bezeichnete ihn als wahrhaftig. Das ist ein gewaltiges Lob.\n\nUnd noch etwas. Wenn Allah über einen Propheten nur wenig erzählt, ist auch das eine Lektion. Wir sagen nicht mehr als wir wissen. Wir achten die Propheten, ohne Geschichten über sie zu erfinden. So bleibt das, was wir lernen, sauber und zuverlässig.\n\nIdrīs war ein Prophet Allahs. Er war wahrhaftig. Er gehörte zu den standhaften Rechtschaffenen. Und Allah erhob ihn zu einer hohen Stellung.\n\nDas Wenige, das wir sicher wissen, reicht aus, um uns zu zeigen, wie wertvoll Wahrheit, Geduld und Aufrichtigkeit bei Allah sind.\n\nUnd Allah weiß es am besten.\n\nMöge Allah euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+  "sourceAudio": {
+    "filename": "Prophet Idris Geschichte .mp3",
+    "bytes": 2818100,
+    "sha256": "ffd834a2e64a98731603940ff6a0d758e0a5e1eac0f424468836c22acc4818d1",
+    "durationSec": 175.073,
+    "format": "mp3",
+    "ownerConfirmedPair": true
+  },
+  "pronunciationProfile": {
+    "description": "Freigegebene deutsche Kinder-Erzählstimme des Eigentümers. Wortwahl, Rhythmus und Aussprache dieser Aufnahme werden als dauerhaftes Referenzkorpus gespeichert; kein automatisches Modellgewichts-Finetuning.",
+    "spokenExpansions": [],
+    "trustedTerms": [
+      "Idrīs",
+      "Muhammad",
+      "Īmān",
+      "al-Firdaws al-Aʿlā",
+      "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh"
+    ]
+  },
+  "runtimePolicy": {
+    "persistLocally": true,
+    "exactTextAudioReuse": true,
+    "incrementalRerenderForEditedText": true,
+    "reuseExistingPronunciationLocks": true,
+    "modelWeightFineTuning": false,
+    "bootstrapFromProphetManifestAudio": true,
+    "allowedRemoteHosts": [
+      "dar-al-tawhid.de",
+      "www.dar-al-tawhid.de",
+      "storage.googleapis.com"
+    ]
+  },
+  "localCandidates": [
+    "~/SerhatVoice/KidsAppPublishRepo/kids/assets/prophet-story-audio/idris/story.mp3",
+    "~/SerhatVoice/ProphetStoryExport/ready/idris.mp3",
+    "~/SerhatVoice/VoiceStudioOutput/Prophet Idris Geschichte .mp3"
+  ],
+  "createdAt": "2026-10-04T17:12:00+02:00"
+}
