@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v13-quiz1094",
-  "label": "KIDS · V1.07.19",
-  "releasedAt": "2026-10-04T08:45:00Z",
-  "note": "Eigenständiger DĀR AL TAWḤĪD Kids-Quizbereich mit 50 geprüften Fragen, eigenen IDs und Altersstufen 4–6, 7–8 und 9–10. Altersgerechte Quiz-Bildwelten, responsive Touch-Oberfläche, Quellenanzeige und Serhat-Owner-Voice-Pipeline sind integriert; keine Abhängigkeit vom normalen 700er-Quiz.",
+  "buildId": "kids-shell-v14-quiz1095",
+  "label": "KIDS · V1.07.20",
+  "releasedAt": "2026-10-04T08:44:59.154Z",
+  "note": "Quiz-Bereich mit drei realistischen, altersabhängigen lokalen Bildwelten für 4–6, 7–8 und 9–10 Jahre. Audio-first für die Jüngsten, responsive Touch-Oberfläche, Offline/PWA-Precache und Serhat-Owner-Voice bleiben vollständig erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1094",
+    "serviceWorkerCache": "v1095",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -267,7 +267,7 @@
     "kidsQuizManifestNetworkFirst": true,
     "kidsQuizReleaseGuard": true,
     "quizVisualSystem": {
-      "version": "age-adaptive-v1",
+      "version": "age-adaptive-realistic-v2",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
       "questionCount": 50,
@@ -277,7 +277,7 @@
         "9-10"
       ],
       "ageAdaptiveArtwork": true,
-      "artworkProvider": "Adobe Creative Cloud",
+      "artworkProvider": "Adobe + Runway · lokal gebündelt",
       "artworkOfflineCache": true,
       "responsivePhone": true,
       "responsiveTablet": true,
@@ -285,7 +285,13 @@
       "youngAgeAudioFirst": true,
       "ownerVoiceAutoBatch": true,
       "ownerVoiceProfileId": "serhat-owner-voice-2026",
-      "systemTtsFallbackAllowed": false
+      "systemTtsFallbackAllowed": false,
+      "artworkHotlinkDependency": false,
+      "localArtworkAssets": [
+        "/kids/assets/quiz-scenes/quiz-4-6.svg?v=20261004-real1",
+        "/kids/assets/quiz-scenes/quiz-7-8.svg?v=20261004-real1",
+        "/kids/assets/quiz-scenes/quiz-9-10.svg?v=20261004-real1"
+      ]
     }
   },
   "updatedAt": "2026-10-04"
