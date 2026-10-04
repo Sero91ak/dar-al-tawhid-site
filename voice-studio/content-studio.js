@@ -1,4 +1,4 @@
-/* Voice Studio 2.9.103 · Ṣaḥābah texts + direct audio file workspace */
+/* Voice Studio 2.9.104 · Ṣaḥābah texts + direct audio file workspace */
 (() => {
 "use strict";
 
