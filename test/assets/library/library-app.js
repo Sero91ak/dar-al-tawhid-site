@@ -789,9 +789,19 @@
 
   function relatedHtml(pub, list) {
     const ids = pub.relatedPublicationIds || [];
-    const related = ids.map((id) => list.find((p) => p.id === id)).filter(Boolean);
+    let related = ids.map((id) => list.find((p) => p.id === id)).filter(Boolean);
+    let title = "Ähnliche Veröffentlichungen";
+    if (!related.length) {
+      related = sortLibraryByDate(
+        visiblePublications(list).filter((item) =>
+          item.id !== pub.id &&
+          ((pub.category && item.category === pub.category) || (pub.topic && item.topic === pub.topic))
+        )
+      ).slice(0, 4);
+      title = "Weitere aus diesem Themenbereich";
+    }
     if (!related.length) return "";
-    return `<section class="lib-panel"><h3>Ähnliche Veröffentlichungen</h3><div class="lib-grid">${related.map((p) => cardHtml(p)).join("")}</div></section>`;
+    return `<section class="lib-panel lib-related-panel"><h3>${esc(title)}</h3><div class="lib-grid">${related.map((p) => cardHtml(p)).join("")}</div></section>`;
   }
 
   function renderBibliothekDetail(slug, offlineIds) {
