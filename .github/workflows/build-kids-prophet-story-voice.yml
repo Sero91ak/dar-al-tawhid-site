@@ -54,7 +54,7 @@ jobs:
           set -euo pipefail
           python3 - <<'PY'
           from __future__ import annotations
-          import hashlib, json, os, pathlib, subprocess, time, urllib.request
+          import base64, hashlib, json, os, pathlib, subprocess, time, urllib.request
 
           ROOT=pathlib.Path(".")
           DATA=ROOT/"kids/data/prophet-stories.json"
@@ -105,12 +105,19 @@ jobs:
                   return ch
               return [ch[0],ch[1],ch[max(2,len(ch)-2)],ch[-1]]
 
-          def story_text(item,age):
+          def story_paragraphs(item,age):
+              scripts=item.get("scripts") or {}
+              custom=str(scripts.get(age) or "").strip()
+              if custom:
+                  return [p.strip() for p in custom.split("\n\n") if p.strip()]
               parts=[age_intro(item,age),*chapters(item,age)]
               if age=="9-10" and item.get("older"):
                   parts.append(item["older"])
               parts.append(age_outro(item,age))
-              return "\n\n".join(p.strip() for p in parts if str(p).strip()).strip()
+              return [str(p).strip() for p in parts if str(p).strip()]
+
+          def story_text(item,age):
+              return "\n\n".join(story_paragraphs(item,age)).strip()
 
           def prepared_text(item,text):
               value=text
@@ -126,27 +133,73 @@ jobs:
                   value=value.replace(src,dst)
               return " ".join(value.split())
 
-          def synth(original,prepared,target):
+          def prepare_story(item,paragraphs):
+              prepared_parts=[prepared_text(item,p) for p in paragraphs]
+              offsets=[]
+              cursor=0
+              for index,part in enumerate(prepared_parts):
+                  offsets.append(cursor)
+                  cursor+=len(part)
+                  if index<len(prepared_parts)-1:
+                      cursor+=1
+              return " ".join(prepared_parts),offsets
+
+          def ffprobe_duration(path):
+              return float(subprocess.check_output([
+                  "ffprobe","-v","error","-show_entries","format=duration",
+                  "-of","default=nw=1:nk=1",str(path)
+              ],text=True).strip())
+
+          def paragraph_timings(payload,offsets,source_duration,output_duration):
+              alignment=payload.get("alignment") or payload.get("normalizedAlignment") or {}
+              starts=list(alignment.get("character_start_times_seconds") or [])
+              ends=list(alignment.get("character_end_times_seconds") or [])
+              chars=list(alignment.get("characters") or [])
+              if not starts or len(starts)!=len(chars):
+                  raise RuntimeError("ElevenLabs character alignment missing or inconsistent")
+              scale=(output_duration/source_duration) if source_duration>0 and output_duration>0 else 1.0
+              cue_starts=[]
+              for index,offset in enumerate(offsets):
+                  if index==0:
+                      cue_starts.append(0.0)
+                      continue
+                  pos=max(0,min(len(starts)-1,int(offset)))
+                  while pos<len(chars)-1 and str(chars[pos]).isspace():
+                      pos+=1
+                  cue_starts.append(max(0.0,float(starts[pos])*scale))
+              cues=[]
+              for index,start in enumerate(cue_starts):
+                  end=cue_starts[index+1] if index+1<len(cue_starts) else output_duration
+                  cues.append({
+                      "paragraphIndex":index,
+                      "start":round(max(0.0,start),3),
+                      "end":round(max(start,end),3)
+                  })
+              return cues
+
+          def synth(original,prepared,paragraph_offsets,target):
               target.parent.mkdir(parents=True,exist_ok=True)
               last=None
               for attempt in range(1,5):
                   body=json.dumps({"text":original,"prepared":prepared,"profile":"kids_story"},ensure_ascii=False).encode("utf-8")
                   req=urllib.request.Request(
-                      API+"/generate",data=body,method="POST",
+                      API+"/generate-with-timings",data=body,method="POST",
                       headers={
                           "Origin":ORIGIN,"Referer":REFERER,
-                          "Content-Type":"application/json","Accept":"audio/mpeg",
+                          "Content-Type":"application/json","Accept":"application/json",
                           "X-Admin-Secret":SECRET,
-                          "User-Agent":"DAR-Kids-Prophet-Story-Voice/1"
+                          "User-Agent":"DAR-Kids-Prophet-Story-Voice/2"
                       }
                   )
                   tmp=pathlib.Path("/tmp")/(target.stem+f"-{attempt}.mp3")
                   try:
-                      with urllib.request.urlopen(req,timeout=180) as response:
-                          raw=response.read()
+                      with urllib.request.urlopen(req,timeout=240) as response:
+                          payload=json.loads(response.read().decode("utf-8"))
+                      raw=base64.b64decode(str(payload.get("audioBase64") or ""),validate=True)
                       if len(raw)<5000:
                           raise RuntimeError(f"Voice response too small: {len(raw)}")
                       tmp.write_bytes(raw)
+                      source_dur=ffprobe_duration(tmp)
                       subprocess.run([
                           "ffmpeg","-hide_banner","-loglevel","error","-y",
                           "-i",str(tmp),
@@ -154,15 +207,20 @@ jobs:
                           "-ac","1","-ar","48000","-c:a","aac","-b:a","96k",
                           "-movflags","+faststart",str(target)
                       ],check=True)
-                      dur=float(subprocess.check_output([
-                          "ffprobe","-v","error","-show_entries","format=duration",
-                          "-of","default=nw=1:nk=1",str(target)
-                      ],text=True).strip())
+                      dur=ffprobe_duration(target)
                       size=target.stat().st_size
                       if size<8000 or dur<25 or dur>540:
                           raise RuntimeError(f"Implausible audio: duration={dur:.2f}s size={size}")
+                      timings=paragraph_timings(payload,paragraph_offsets,source_dur,dur)
+                      if len(timings)!=len(paragraph_offsets):
+                          raise RuntimeError("Incomplete paragraph timing map")
                       sha=hashlib.sha256(target.read_bytes()).hexdigest()
-                      return {"durationSec":round(dur,3),"bytes":size,"sha256":sha}
+                      return {
+                          "durationSec":round(dur,3),
+                          "bytes":size,
+                          "sha256":sha,
+                          "timings":timings
+                      }
                   except Exception as exc:
                       last=exc
                       target.unlink(missing_ok=True)
@@ -176,12 +234,13 @@ jobs:
               audio_meta={}
               for age in AGES:
                   counter+=1
-                  original=story_text(item,age)
-                  prepared=prepared_text(item,original)
+                  paragraphs=story_paragraphs(item,age)
+                  original="\n\n".join(paragraphs)
+                  prepared,paragraph_offsets=prepare_story(item,paragraphs)
                   if len(prepared)>4900:
                       raise RuntimeError(f"{item['id']}/{age}: prepared text too long ({len(prepared)})")
                   target=OUT/item["id"]/(age+".m4a")
-                  qa=synth(original,prepared,target)
+                  qa=synth(original,prepared,paragraph_offsets,target)
                   url=f"/kids/assets/prophet-story-audio/{item['id']}/{age}.m4a?v={STAMP}"
                   audio_meta[age]={
                       "url":url,
@@ -194,7 +253,9 @@ jobs:
                       "sourceSpeaker":"Serhat Abu Malik",
                       "language":"German narration with Arabic/Fuṣḥā terms",
                       "generatedAt":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),
-                      "technicalQaPassed":True
+                      "technicalQaPassed":True,
+                      "timings":qa["timings"],
+                      "syncMode":"elevenlabs-character-alignment-v1"
                   }
                   print(f"[{counter}/{total}] {item['id']} {age}: {qa['durationSec']}s {qa['bytes']} bytes")
               item["audio"]=audio_meta
@@ -206,6 +267,7 @@ jobs:
               "clips":total,
               "ages":list(AGES),
               "technicalQaPassed":True,
+              "timingMode":"elevenlabs-character-alignment-v1",
               "generatedAt":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
           }
           doc["updatedAt"]=time.strftime("%Y-%m-%d",time.gmtime())
@@ -230,6 +292,11 @@ jobs:
                       missing.append(f"{item.get('id')}/{age}")
                   if m.get("technicalQaPassed") is not True:
                       missing.append(f"{item.get('id')}/{age}:qa")
+                  timings=m.get("timings") or []
+                  if not timings or len(timings)<2:
+                      missing.append(f"{item.get('id')}/{age}:timings")
+                  elif any(float(timings[i].get("start",0))>float(timings[i+1].get("start",0)) for i in range(len(timings)-1)):
+                      missing.append(f"{item.get('id')}/{age}:timing-order")
           if missing:
               raise SystemExit("Incomplete prophet story audio:\n- "+"\n- ".join(missing))
           assert len(d.get("items") or [])==25
