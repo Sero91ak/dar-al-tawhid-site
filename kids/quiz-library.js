@@ -209,7 +209,7 @@
   if(typeof originalFetch==="function"){
     window.fetchKidsQuiz=function(){
       var p=originalFetch.apply(this,arguments);
-      return Promise.resolve(p).then(function(result){setTimeout(refreshSummary,0);return result});
+      return Promise.resolve(p).then(function(result){setTimeout(function(){refreshSummary();if(mode==="library")renderLibrary()},0);return result});
     };
   }
 
