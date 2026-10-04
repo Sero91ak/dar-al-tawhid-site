@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: kids-quiz-owner-voice
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
