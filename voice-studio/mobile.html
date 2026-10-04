@@ -428,20 +428,38 @@ let catalogSearchTimer=0;
 $("#wordSearch").addEventListener("input",()=>{clearTimeout(catalogSearchTimer);catalogSearchTimer=setTimeout(()=>loadCatalog(true),220)});
 
 function openWord(word){$("#wordSearch").value=word;go("pronunciation");searchWord(word)}
+function pronunciationPreviewPayload(row,term){
+  return {
+    term:String(term||"").trim(),
+    ttsText:row?.ttsText||row?.alias||term,
+    canonical:row?.canonical||term,
+    language:row?.ttsLanguage||"de",
+    variant:0
+  };
+}
+function prefetchCandidate(row,term){
+  term=String(term||"").trim();
+  if(!row||!term||state.generating)return;
+  api("/learning/preview-start",{
+    method:"POST",body:JSON.stringify(pronunciationPreviewPayload(row,term))
+  }).catch(()=>{});
+}
+
 async function searchWord(force){
   const q=String(force||$("#wordSearch").value).trim();if(!q)return toast("Wort eingeben.");const box=$("#wordResults");box.innerHTML='<div class="empty">Suche Varianten …</div>';
   try{const r=await api("/learning/search",{method:"POST",body:JSON.stringify({query:q,limit:12})});const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Suche fehlgeschlagen");const rows=d.results||[];if(!rows.length){box.innerHTML='<div class="empty">Keine Variante gefunden.</div>';return}
   box.innerHTML=rows.map((x,i)=>'<div class="card candidate"><div class="candidate-main"><strong>'+esc(x.canonical||q)+'</strong><div class="arabic">'+esc(x.ttsText||x.alias||"")+'</div><div class="meta">'+esc(x.source||"Bibliothek")+' · '+esc(x.ttsLanguage||"")+'</div><div class="candidate-actions"><button data-preview="'+i+'">Anhören</button><button class="confirm" data-confirm="'+i+'" disabled>Als Master bestätigen</button></div></div></div>').join("");
-  $$("[data-preview]").forEach(b=>b.onclick=()=>previewCandidate(rows[Number(b.dataset.preview)],q,b));$$("[data-confirm]").forEach(b=>b.onclick=()=>confirmCandidate(q,b))}
+  $("[data-preview]").forEach(b=>b.onclick=()=>previewCandidate(rows[Number(b.dataset.preview)],q,b));$("[data-confirm]").forEach(b=>b.onclick=()=>confirmCandidate(q,b));
+  // Der wahrscheinlichste Treffer wird nach einer expliziten Suche leise
+  // vorgewärmt. Beim Tippen auf „Anhören“ wird derselbe Server-Job übernommen.
+  setTimeout(()=>prefetchCandidate(rows[0],q),90)}
   catch(e){box.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}
 }
 $("#wordSearchBtn").onclick=()=>{$("#wordSearch").value.trim()?searchWord():loadCatalog(true)};$("#wordSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){$("#wordSearch").value.trim()?searchWord():loadCatalog(true)}});
 async function previewCandidate(row,term,btn){
   btn.disabled=true;btn.textContent="Erzeuge …";state.previewTerm=term;
   try{
-    const r=await api("/learning/preview-start",{method:"POST",body:JSON.stringify({
-      term,ttsText:row.ttsText||row.alias||term,canonical:row.canonical||term,language:row.ttsLanguage||"de",variant:0
-    })});
+    const r=await api("/learning/preview-start",{method:"POST",body:JSON.stringify(pronunciationPreviewPayload(row,term))});
     const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Schnelltest fehlgeschlagen");
     let snap=d;
     for(let i=0;i<80&&!["ready","error"].includes(snap.state);i++){
