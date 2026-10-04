@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "id": "DAR_KIDS_QUIZ_V1",
   "namespace": "dar-kids-quiz",
-  "version": 14,
+  "version": 15,
   "updatedAt": "2026-10-04",
   "separateFromAdultQuiz": true,
   "adultQuizDependency": false,
@@ -13280,32 +13280,32 @@
       "ageBand": "9-10",
       "ageMin": 9,
       "ageMax": 10,
-      "scene": "speech",
-      "category": "Wissen",
-      "topic": "Behauptungen ohne Wissen",
-      "question": "Was verbietet Qurʾān 17:36?",
+      "scene": "book",
+      "category": "Qurʾān",
+      "topic": "Über den Qurʾān nachdenken",
+      "question": "Warum wurde das gesegnete Buch nach Qurʾān 38:29 herabgesandt?",
       "answers": [
         {
           "id": "a1",
-          "label": "Etwas zu verfolgen, worüber man kein Wissen hat",
+          "label": "Damit Menschen über seine Āyāt nachdenken und sich erinnern",
           "correct": true
         },
         {
           "id": "a2",
-          "label": "Fragen zu stellen",
+          "label": "Damit es ungelesen bleibt",
           "correct": false
         },
         {
           "id": "a3",
-          "label": "Beweise zu suchen",
+          "label": "Nur als Schmuck",
           "correct": false
         }
       ],
       "success": "Richtig. Sehr gut!",
       "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
-      "explanation": "Der Vers macht Gehör, Blick und Herz für unbelegte Behauptungen verantwortlich.",
+      "explanation": "Allah beschreibt den Qurʾān als gesegnetes Buch, damit über seine Āyāt nachgedacht wird und Menschen mit Verstand sich erinnern.",
       "sourceType": "Qurʾān",
-      "source": "Qurʾān 17:36",
+      "source": "Qurʾān 38:29",
       "status": "published",
       "reviewStatus": "approved",
       "verification": "approved"
