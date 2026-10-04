@@ -68,6 +68,11 @@ execFileSync(process.execPath, [path.join(__dirname, "validate-canonical-content
   stdio: "inherit"
 });
 
+execFileSync(process.execPath, [path.join(__dirname, "verify-global-share-standard.js")], {
+  cwd: root,
+  stdio: "inherit"
+});
+
 console.log('CF Pages: kanonischer Bücher-/Autorenindex geprüft und erstellt.');
 console.log('CF Pages: Besucher-App mit geprüfter Quellenbibliothek verbunden.');
 console.log('CF Pages: Qurʾān-Suchindex aus geprüftem Taddabur-Katalog neu erstellt.');
