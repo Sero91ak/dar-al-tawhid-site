@@ -5,10 +5,6 @@ const path = require("path");
 
 const root = path.resolve(__dirname, "..");
 const failures = [];
-const obsoleteShareLibrary = path.join(root, "data/share-background-library.json");
-if (fs.existsSync(obsoleteShareLibrary)) {
-  failures.push("data/share-background-library.json darf nicht mehr existieren");
-}
 
 function file(rel) {
   const abs = path.join(root, rel);
@@ -22,7 +18,7 @@ function need(rel, src, token) {
   if (src && !src.includes(token)) failures.push(rel + ": Pflichtstandard fehlt: " + token);
 }
 function forbid(rel, src, token) {
-  if (src && src.includes(token)) failures.push(rel + ": alter Share-Standard noch aktiv: " + token);
+  if (src && src.includes(token)) failures.push(rel + ": verbotener Bildbeitrag-Standard aktiv: " + token);
 }
 function syntax(rel, src) {
   if (!src) return;
@@ -33,14 +29,24 @@ function syntax(rel, src) {
   }
 }
 
+const obsoleteShareLibrary = path.join(root, "data/share-background-library.json");
+if (fs.existsSync(obsoleteShareLibrary)) {
+  failures.push("data/share-background-library.json darf nicht mehr existieren");
+}
+
+const forbiddenAiModule = path.join(root, "cloudflare/share-image.js");
+if (fs.existsSync(forbiddenAiModule)) {
+  failures.push("cloudflare/share-image.js darf nicht existieren: KI-Bildgenerierung für Bildbeiträge ist dauerhaft deaktiviert");
+}
+
 const globalRel = "assets/dar-global-share-v1225.js";
 const globalShare = file(globalRel);
 syntax(globalRel, globalShare);
 for (const token of [
-  "/api/share-image/background",
-  "generateFreshBackground",
-  "historicalFallbackBackground",
-  "HISTORICAL_SHARE_FALLBACKS",
+  "GENERAL_SHARE_IMAGE_POOL",
+  "generalPoolBackground",
+  "randomIndex",
+  "share-pool=v1250",
   "adaptiveBodyLayout",
   "stripUiLabel",
   'fillText("AUSSAGE"',
@@ -49,12 +55,18 @@ for (const token of [
   "[data-image-dua-open]",
   "[data-image-ayah-open]",
   "[data-image-hadith-open]"
-]) {
-  need(globalRel, globalShare, token);
-}
-for (const token of ["GENERIC_SCENES", "share-background-library", "Folgt für mehr Wissen aus Qurʾān & Sunnah", "app-store-badge-de-official.svg"]) {
-  forbid(globalRel, globalShare, token);
-}
+]) need(globalRel, globalShare, token);
+for (const token of [
+  "/api/share-image/background",
+  "generateFreshBackground",
+  "fetch(SHARE_IMAGE_API",
+  "cloudflare-workers-ai",
+  "fal-ai/",
+  "GENERIC_SCENES",
+  "share-background-library",
+  "Folgt für mehr Wissen aus Qurʾān & Sunnah",
+  "app-store-badge-de-official.svg"
+]) forbid(globalRel, globalShare, token);
 
 const liveRel = "assets/premium-feed-app.js";
 const testRel = "test/assets/premium-feed-app.js";
@@ -63,56 +75,71 @@ const testFeed = file(testRel);
 syntax(liveRel, liveFeed);
 syntax(testRel, testFeed);
 for (const [rel, src] of [[liveRel, liveFeed], [testRel, testFeed]]) {
-  need(rel, src, "/api/share-image/background");
-  need(rel, src, "feedShareFreshImage");
-  need(rel, src, "shareFreshPostFeedItem");
-  forbid(rel, src, "shareOriginalFeedImage");
-  forbid(rel, src, "data-original-image");
-  forbid(rel, src, "data-feed-preview-image");
-  forbid(rel, src, "feedShareBrandFooter");
+  for (const token of [
+    "FEED_HISTORICAL_STATIC",
+    "feedSharePoolImage",
+    "feedShareRandomIndex",
+    "share-pool=v1250",
+    "shareFreshPostFeedItem"
+  ]) need(rel, src, token);
+  for (const token of [
+    "/api/share-image/background",
+    "SHARE_IMAGE_API",
+    "feedShareFreshImage",
+    "fetch(SHARE_IMAGE_API",
+    "shareOriginalFeedImage",
+    "data-original-image",
+    "data-feed-preview-image",
+    "feedShareBrandFooter"
+  ]) forbid(rel, src, token);
 }
-if (liveFeed && testFeed && liveFeed !== testFeed) failures.push("Live/Test Premium-Feed-Renderer sind nicht identisch");
+if (liveFeed && testFeed && liveFeed !== testFeed) {
+  failures.push("Live/Test Premium-Feed-Renderer sind nicht identisch");
+}
 
 const frauenRel = "test/assets/frauen/frauen-fiqh.js";
 const frauen = file(frauenRel);
 syntax(frauenRel, frauen);
 for (const token of [
-  "/api/share-image/background",
-  "frauenFreshShareBackground",
-  "frauenHistoricalFallback",
-  "FRAUEN_SHARE_FALLBACKS",
-  'profile: "women-historical"',
+  "FRAUEN_SHARE_IMAGE_POOL",
+  "frauenRandomPoolBackground",
+  "frauenShareRandomIndex",
+  "share-pool=v1250",
   'data-frauen-share="image"',
   "frauenAdaptiveBodyLayout",
   'fillText("AUSSAGE"',
   'fillText("QUELLE"'
-]) {
-  need(frauenRel, frauen, token);
-}
-for (const token of ["frauenNextShareScene", 'ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah"', "app-store-badge-de-official.svg"]) {
-  forbid(frauenRel, frauen, token);
-}
+]) need(frauenRel, frauen, token);
+for (const token of [
+  "/api/share-image/background",
+  "FRAUEN_SHARE_IMAGE_API",
+  "frauenFreshShareBackground",
+  "fetch(FRAUEN_SHARE_IMAGE_API",
+  'profile: "women-historical"',
+  "cloudflare-workers-ai",
+  "fal-ai/",
+  "frauenNextShareScene",
+  'ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah"',
+  "app-store-badge-de-official.svg"
+]) forbid(frauenRel, frauen, token);
 
-const workerRel = "cloudflare/share-image.js";
+const workerRel = "cloudflare/worker.js";
 const worker = file(workerRel);
 for (const token of [
-  "completely new, unique",
-  "randomSeed",
-  "Cache-Control",
-  "STANDARD DĀR SHARE PROFILE",
-  "1000–1400 years ago",
-  "WOMEN SECTION PROFILE",
-  'profile === "women-historical"',
-  "cloudflare-workers-ai",
-  "no people",
-  "no App Store badge"
-]) {
-  need(workerRel, worker, token);
-}
+  'shareImageMode: "curated-pool-only"',
+  "shareImageAi: false",
+  'url.pathname === "/api/share-image/background"',
+  "KI-Bildgenerierung für Bildbeiträge ist dauerhaft deaktiviert.",
+  "}, cors, 410)"
+]) need(workerRel, worker, token);
+for (const token of [
+  "handleShareImageBackground",
+  'from "./share-image.js"'
+]) forbid(workerRel, worker, token);
 
 if (failures.length) {
   console.error("GLOBAL SHARE STANDARD: FEHLER");
   failures.forEach((msg) => console.error(" - " + msg));
   process.exit(1);
 }
-console.log("GLOBAL SHARE STANDARD: OK · fresh AI image per share, no reused app artwork, no legacy promo footer.");
+console.log("GLOBAL SHARE STANDARD: OK · curated local image pools only · random selection · AI generation disabled.");
