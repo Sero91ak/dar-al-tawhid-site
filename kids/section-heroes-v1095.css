@@ -334,7 +334,7 @@ body .app #view-stories.view > .page-head.page-head{
   background-image:
     linear-gradient(90deg,rgba(3,18,29,.88) 0%,rgba(3,18,29,.63) 39%,rgba(3,18,29,.18) 72%,rgba(3,18,29,.04) 100%),
     linear-gradient(180deg,rgba(3,18,29,.02) 0%,rgba(3,18,29,.03) 48%,rgba(5,27,42,.26) 72%,#0c2636 100%),
-    url("/kids/assets/kids-art/section-stories-v1095.jpg?v=1095-real1")!important;
+    url("/kids/assets/kids-art/section-stories-v1096.jpg?v=1096-real2")!important;
   background-position:58% 50%!important;
 }
 body .app #view-quran.view > .page-head.page-head{
@@ -348,7 +348,7 @@ body .app #view-parents.view > .page-head.page-head{
   background-image:
     linear-gradient(90deg,rgba(3,18,29,.91) 0%,rgba(3,18,29,.62) 42%,rgba(3,18,29,.18) 72%,rgba(3,18,29,.04) 100%),
     linear-gradient(180deg,rgba(3,18,29,.01) 0%,rgba(3,18,29,.03) 48%,rgba(4,24,38,.29) 74%,#0c2636 100%),
-    url("/kids/assets/kids-art/section-parents-v1095.jpg?v=1095-real1")!important;
+    url("/kids/assets/kids-art/section-parents-v1096.jpg?v=1096-real2")!important;
   background-position:62% 50%!important;
 }
 
@@ -502,7 +502,7 @@ body .app #view-parents.view > .parent-card:first-of-type{
 
 
 
-/* KIDS_SECTION_HERO_REALISM_V1095
+/* KIDS_SECTION_HERO_REALISM_V1096
    Fotorealistische Geschichten-/Eltern-Motive im selben ruhigen Premium-Niveau
    wie die Propheten-/Ṣaḥābah-Bereiche; kompaktere Bühne ohne Stretching. */
 body .app #view-stories.view > .page-head.page-head{
@@ -510,4 +510,13 @@ body .app #view-stories.view > .page-head.page-head{
 }
 body .app #view-parents.view > .page-head.page-head{
   background-position:62% 50%!important;
+}
+
+
+/* KIDS_SECTION_HERO_REALISM_REFINED_V1096 */
+body .app #view-stories.view > .page-head.page-head{
+  background-position:56% 48%!important;
+}
+body .app #view-parents.view > .page-head.page-head{
+  background-position:58% 48%!important;
 }
