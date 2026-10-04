@@ -27,15 +27,9 @@ cleanup_stage() {
 }
 trap cleanup_stage EXIT
 
-# Vor einem Update muss die bereits laufende App wirklich beendet werden.
-# Sonst aktiviert macOS am Ende nur die alte Binary erneut.
-osascript -e 'tell application id "de.dar-al-tawhid.voice-studio" to quit' >/dev/null 2>&1 || true
-pkill -TERM -x DARVoiceStudio >/dev/null 2>&1 || true
-pkill -TERM -x DARVoiceStudioNative >/dev/null 2>&1 || true
-sleep 1
-pkill -KILL -x DARVoiceStudio >/dev/null 2>&1 || true
-pkill -KILL -x DARVoiceStudioNative >/dev/null 2>&1 || true
-
+# Die laufende App bleibt während Download, Regressionstest und Bundle-Build geöffnet.
+# Erst wenn der neue Release vollständig gebaut und geprüft ist, wird sie für den
+# atomaren Austausch kurz beendet. So wirkt ein fehlgeschlagenes Update nie wie ein Crash.
 # 2.9.68 räumt die früheren Terminal-Autopiloten einmalig auf. Diese alten
 # /tmp-Skripte durften selbstständig Batch-Starts auslösen und würden sonst
 # neben dem neuen persistenten Supervisor weiterlaufen.
@@ -371,23 +365,7 @@ if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$S
   exit 1
 fi
 
-# Erst nach bestandener Prüfung sichern und atomar übernehmen.
-STAMP="$(date +%Y%m%d-%H%M%S)"
-BACKUP="$BACKUPS/$STAMP"
-mkdir -p "$BACKUP"
-for old in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json quiz-audio.json owner-voice-audio.json dua-kids.json stories-authentic.json short-stories-voice.json verified-content.json kids-content-index.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json story-reference-muhammad-2026-10-04.json story-reference-adam-2026-10-04.json story-reference-idris-2026-10-04.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
-  [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
-done
-
-for fresh in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json quiz-audio.json owner-voice-audio.json dua-kids.json stories-authentic.json short-stories-voice.json verified-content.json kids-content-index.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json story-reference-muhammad-2026-10-04.json story-reference-adam-2026-10-04.json story-reference-idris-2026-10-04.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
-  mv "$STAGE/$fresh" "$TARGET/$fresh"
-done
-for optional in watermark-my-logo-full.png app-icon-512.png; do
-  [ -s "$STAGE/$optional" ] && mv "$STAGE/$optional" "$TARGET/$optional" || true
-done
-chmod +x "$TARGET/update-mac.command"
-
-echo "Voice Studio $RELEASE_VERSION Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio $RELEASE_VERSION Vorprüfung bestanden · Bundle wird isoliert gebaut."
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -403,19 +381,6 @@ if [ -z "$FFMPEG_BIN" ]; then
   done
 fi
 
-# 2.9.68 Stabilitätsmodus: Der Installer startet KEINE Engine mehr.
-# Er räumt nur alte Prozessmanager auf. Die App selbst besitzt beim Öffnen
-# genau einen Launcher, der die lokale Engine kontrolliert startet.
-pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
-sleep 0.4
-pkill -KILL -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
-launchctl bootout "gui/$UID/$LABEL" >/dev/null 2>&1 || true
-launchctl bootout "gui/$UID" "$LAUNCH" >/dev/null 2>&1 || true
-launchctl remove "$LABEL" >/dev/null 2>&1 || true
-rm -f "$LAUNCH" >/dev/null 2>&1 || true
-
-echo "Engine-Start wird der Voice-Studio-App überlassen · kein LaunchAgent/KeepAlive."
-
 # Native macOS-App wird zuerst vollständig in einem separaten Bundle gebaut.
 # Die bisher installierte App bleibt bis nach Build, plist-Lint und Codesign startbar.
 APP_BUILD="$TARGET/.DĀR Voice Studio.app.build"
@@ -425,7 +390,7 @@ MACOS="$APP_BUILD/Contents/MacOS"
 RESOURCES="$APP_BUILD/Contents/Resources"
 PLIST="$APP_BUILD/Contents/Info.plist"
 mkdir -p "$MACOS" "$RESOURCES"
-cp "$TARGET/voice-studio-icon.png" "$RESOURCES/VoiceStudioIcon.png"
+cp "$STAGE/voice-studio-icon.png" "$RESOURCES/VoiceStudioIcon.png"
 
 # Native macOS-App: versionierte Swift-Quelle wurde oben atomar aus dem Repository installiert.
 # Dadurch kann die echte Mac-App separat kompiliert und in CI geprüft werden.
@@ -444,7 +409,7 @@ if [ -n "$SWIFTC" ] && [ -n "$SDK_PATH" ]; then
   echo "Swift: $SWIFTC"
   echo "SDK:   $SDK_PATH"
   echo "Target: ${ARCH}-apple-macosx${DEPLOY_TARGET}"
-  if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$SWIFTC"       -sdk "$SDK_PATH"       -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"       "$TARGET/VoiceStudioApp.swift"       -o "$MACOS/DARVoiceStudioNative"       -framework Cocoa       -framework WebKit       -framework CoreAudio       -framework CoreImage; then
+  if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$SWIFTC"       -sdk "$SDK_PATH"       -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"       "$STAGE/VoiceStudioApp.swift"       -o "$MACOS/DARVoiceStudioNative"       -framework Cocoa       -framework WebKit       -framework CoreAudio       -framework CoreImage; then
     BUILD_OK=1
   fi
 fi
@@ -456,7 +421,7 @@ if [ "$BUILD_OK" -ne 1 ] && [ -d "/Applications/Xcode.app/Contents/Developer" ];
   XSDK="$(DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcrun --sdk macosx --show-sdk-path 2>/dev/null || true)"
   if [ -n "$XSWIFTC" ] && [ -n "$XSDK" ]; then
     echo "Erster Swift-Build fehlgeschlagen – versuche vollständiges Xcode …"
-    if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$XSWIFTC"         -sdk "$XSDK"         -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"         "$TARGET/VoiceStudioApp.swift"         -o "$MACOS/DARVoiceStudioNative"         -framework Cocoa         -framework WebKit         -framework CoreAudio         -framework CoreImage; then
+    if MACOSX_DEPLOYMENT_TARGET="$DEPLOY_TARGET" "$XSWIFTC"         -sdk "$XSDK"         -target "${ARCH}-apple-macosx${DEPLOY_TARGET}"         "$STAGE/VoiceStudioApp.swift"         -o "$MACOS/DARVoiceStudioNative"         -framework Cocoa         -framework WebKit         -framework CoreAudio         -framework CoreImage; then
       BUILD_OK=1
     fi
   fi
@@ -567,13 +532,13 @@ BUNDLE_EXECUTABLE="DARVoiceStudio"
 echo "macOS Bundle-Executable: $BUNDLE_EXECUTABLE · single-engine launcher"
 
 # App-Icon aus dem eigenen Voice-Studio-Logo erzeugen.
-if [ -s "$TARGET/voice-studio-icon.png" ]; then
+if [ -s "$STAGE/voice-studio-icon.png" ]; then
   ICONSET="$TARGET/AppIcon.iconset"
   rm -rf "$ICONSET"
   mkdir -p "$ICONSET"
   for spec in "16 icon_16x16.png" "32 icon_16x16@2x.png" "32 icon_32x32.png" "64 icon_32x32@2x.png" "128 icon_128x128.png" "256 icon_128x128@2x.png" "256 icon_256x256.png" "512 icon_256x256@2x.png" "512 icon_512x512.png" "1024 icon_512x512@2x.png"; do
     set -- $spec
-    sips -z "$1" "$1" "$TARGET/voice-studio-icon.png" --out "$ICONSET/$2" >/dev/null 2>&1 || true
+    sips -z "$1" "$1" "$STAGE/voice-studio-icon.png" --out "$ICONSET/$2" >/dev/null 2>&1 || true
   done
   iconutil -c icns "$ICONSET" -o "$RESOURCES/AppIcon.icns" >/dev/null 2>&1 || true
 fi
@@ -642,16 +607,68 @@ if command -v codesign >/dev/null 2>&1; then
   }
 fi
 
-# Erst jetzt die alte App austauschen. Bei einem mv-Fehler wird sie wiederhergestellt.
+# Erst NACH erfolgreichem Bundle-Build und Codesign wird der laufende Release angehalten.
+# Bis hierhin blieb die vorhandene App vollständig benutzbar.
+osascript -e 'tell application id "de.dar-al-tawhid.voice-studio" to quit' >/dev/null 2>&1 || true
+pkill -TERM -x DARVoiceStudio >/dev/null 2>&1 || true
+pkill -TERM -x DARVoiceStudioNative >/dev/null 2>&1 || true
+sleep 0.6
+pkill -KILL -x DARVoiceStudio >/dev/null 2>&1 || true
+pkill -KILL -x DARVoiceStudioNative >/dev/null 2>&1 || true
+
+# Genau eine Engine darf den Port besitzen; alte Prozessmanager erst jetzt entfernen.
+pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
+sleep 0.25
+pkill -KILL -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
+launchctl bootout "gui/$UID/$LABEL" >/dev/null 2>&1 || true
+launchctl bootout "gui/$UID" "$LAUNCH" >/dev/null 2>&1 || true
+launchctl remove "$LABEL" >/dev/null 2>&1 || true
+rm -f "$LAUNCH" >/dev/null 2>&1 || true
+
+# Runtime-Dateien und App-Bundle werden in derselben Commit-Phase umgeschaltet.
+STAMP="$(date +%Y%m%d-%H%M%S)"
+BACKUP="$BACKUPS/$STAMP"
+mkdir -p "$BACKUP"
+RUNTIME_FILES="local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json quiz-audio.json owner-voice-audio.json dua-kids.json stories-authentic.json short-stories-voice.json verified-content.json kids-content-index.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json story-reference-muhammad-2026-10-04.json story-reference-adam-2026-10-04.json story-reference-idris-2026-10-04.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py"
+
+for old in $RUNTIME_FILES; do
+  [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
+done
+
+RUNTIME_SWITCH_OK=1
+for fresh in $RUNTIME_FILES; do
+  if ! mv "$STAGE/$fresh" "$TARGET/$fresh"; then
+    RUNTIME_SWITCH_OK=0
+    break
+  fi
+done
+if [ "$RUNTIME_SWITCH_OK" -ne 1 ]; then
+  echo "FEHLER: Runtime-Dateien konnten nicht atomar aktiviert werden – stelle vorherigen Stand wieder her."
+  for old in $RUNTIME_FILES; do
+    [ -f "$BACKUP/$old" ] && cp "$BACKUP/$old" "$TARGET/$old" || true
+  done
+  /usr/bin/open "$APP" >/dev/null 2>&1 || true
+  exit 1
+fi
+for optional in watermark-my-logo-full.png app-icon-512.png; do
+  [ -s "$STAGE/$optional" ] && mv "$STAGE/$optional" "$TARGET/$optional" || true
+done
+chmod +x "$TARGET/update-mac.command"
+
+# Erst jetzt die alte App austauschen. Bei einem mv-Fehler werden Bundle UND Runtime restauriert.
 if [ -d "$APP" ]; then
   mv "$APP" "$APP_PREVIOUS"
 fi
 if mv "$APP_BUILD" "$APP"; then
   rm -rf "$APP_PREVIOUS"
 else
-  echo "FEHLER: Neues App-Bundle konnte nicht aktiviert werden."
+  echo "FEHLER: Neues App-Bundle konnte nicht aktiviert werden – stelle vorherigen Stand wieder her."
   rm -rf "$APP"
   [ -d "$APP_PREVIOUS" ] && mv "$APP_PREVIOUS" "$APP"
+  for old in $RUNTIME_FILES; do
+    [ -f "$BACKUP/$old" ] && cp "$BACKUP/$old" "$TARGET/$old" || true
+  done
+  /usr/bin/open "$APP" >/dev/null 2>&1 || true
   exit 1
 fi
 
