@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.90"
+ENGINE_VERSION="2.9.91"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -4256,7 +4256,50 @@ def _mobile_history_records():
     data=load_json_file(MOBILE_HISTORY_META,{"schemaVersion":1,"items":[]})
     return list((data or {}).get("items") or [])
 
-def record_mobile_generation(path:Path,text:str,style:str,free_mode:bool=False):
+def generation_request_signature(text:str,style:str="auto",free_mode:bool=False,free_pronunciation:bool=False):
+    """Exakter Cache-Schlüssel für einen interaktiven Voice-Auftrag.
+
+    Engine-Version, Referenzstimme und lokale Lernregeln gehören zum Schlüssel.
+    Sobald sich Aussprachelernen, Voice-Referenz oder Renderer ändert, wird eine
+    ältere Audio deshalb niemals fälschlich als aktuelles Ergebnis wiederverwendet.
+    """
+    payload={
+        "engine":ENGINE_VERSION,
+        "text":str(text or "").strip(),
+        "style":str(style or "auto").strip() or "auto",
+        "freeMode":bool(free_mode),
+        "pronunciationLibrary":bool(free_pronunciation),
+        "referenceDe":file_signature(REF_DE),
+        "referenceAr":file_signature(REF_AR),
+        "userLearning":file_signature(USER_OVERRIDES_FILE),
+    }
+    return hashlib.sha256(
+        json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(",",":")).encode("utf-8")
+    ).hexdigest()
+
+def find_generation_history_cache(signature:str):
+    sig=str(signature or "").strip()
+    if not sig:
+        return None
+    for row in _mobile_history_records():
+        if str((row or {}).get("signature") or "")!=sig:
+            continue
+        name=Path(str((row or {}).get("name") or "")).name
+        if not name or name!=str((row or {}).get("name") or "") or not name.lower().endswith(".wav"):
+            continue
+        candidate=OUTPUT/name
+        try:
+            if candidate.exists() and candidate.is_file() and candidate.stat().st_size>44:
+                return {
+                    "name":name,
+                    "bytes":int(candidate.stat().st_size),
+                    "createdAt":float((row or {}).get("createdAt") or candidate.stat().st_mtime),
+                }
+        except Exception:
+            continue
+    return None
+
+def record_mobile_generation(path:Path,text:str,style:str,free_mode:bool=False,generation_signature:str=""):
     """Lokale Verlaufsmetadaten für iPhone/iPad; Audio bleibt in VoiceStudioOutput."""
     try:
         p=Path(path)
@@ -4273,10 +4316,12 @@ def record_mobile_generation(path:Path,text:str,style:str,free_mode:bool=False):
             "text":value[:600],
             "style":str(style or "auto"),
             "freeMode":bool(free_mode),
+            "signature":str(generation_signature or ""),
+            "engineVersion":ENGINE_VERSION,
             "createdAt":now,
         })
         atomic_write_json(MOBILE_HISTORY_META,{
-            "schemaVersion":1,
+            "schemaVersion":2,
             "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
             "items":rows[:240],
         })
@@ -4381,7 +4426,12 @@ def _generation_job_worker(job_id:str,payload:dict):
             preflight_checked=bool(payload.get("_serverPreflightChecked",False)),
             preflight_found=payload.get("_serverFound")
         )
-        record_mobile_generation(out,text,style,free_mode)
+        with GENERATION_JOB_LOCK:
+            current_signature=str((GENERATION_JOBS.get(job_id) or {}).get("signature") or "")
+        record_mobile_generation(
+            out,text,style,free_mode,
+            generation_signature=current_signature
+        )
         st=Path(out).stat()
         with GENERATION_JOB_LOCK:
             row=GENERATION_JOBS.get(job_id)
@@ -4410,15 +4460,11 @@ def start_generation_job(data:dict,free_mode:bool=False):
         raise ValueError("Text fehlt.")
     style=str((data or {}).get("style") or "auto").strip() or "auto"
     free_pronunciation=bool((data or {}).get("pronunciationLibrary",False))
-    signature=hashlib.sha256(
-        json.dumps({
-            "text":text,
-            "prepared":str((data or {}).get("prepared") or ""),
-            "style":style,
-            "freeMode":bool(free_mode),
-            "pronunciationLibrary":free_pronunciation,
-        },ensure_ascii=False,sort_keys=True,separators=(",",":")).encode("utf-8")
-    ).hexdigest()
+    signature=generation_request_signature(
+        text,style,
+        free_mode=bool(free_mode),
+        free_pronunciation=free_pronunciation
+    )
     server_prepared=""
     server_found=[]
     if not free_mode:
@@ -4430,6 +4476,35 @@ def start_generation_job(data:dict,free_mode:bool=False):
         if unresolved:
             raise PronunciationReviewRequired(unresolved)
         server_prepared,server_found=prepare(text)
+
+    # 2.9.91 · Exact-repeat fast path:
+    # Ein identischer, mit derselben Engine/Referenz/Lernrevision bereits
+    # erzeugter Auftrag ist sofort fertig. Kein Modellstart, kein Join und kein
+    # erneutes Mastering. Besonders beim wiederholten Testen auf iPhone/Mac
+    # fühlt sich "Erzeugen" dadurch wie eine native Sofortaktion an.
+    cached=find_generation_history_cache(signature)
+    if cached:
+        job_id=uuid.uuid4().hex[:20]
+        with GENERATION_JOB_LOCK:
+            GENERATION_JOBS[job_id]={
+                "jobId":job_id,
+                "state":"ready",
+                "signature":signature,
+                "style":style,
+                "freeMode":bool(free_mode),
+                "createdAt":time.time(),
+                "startedAt":time.time(),
+                "finishedAt":time.time(),
+                "outputName":str(cached["name"]),
+                "outputBytes":int(cached["bytes"]),
+                "error":"",
+                "reused":True,
+                "reuseType":"exact-history-cache",
+            }
+        return {
+            "ok":True,"jobId":job_id,"state":"ready",
+            "reused":True,"reuseType":"exact-history-cache"
+        }
 
     with GENERATION_JOB_LOCK:
         active=[
@@ -5180,25 +5255,71 @@ def load_model(force_device=None):
             traceback.print_exc()
             raise
 
+def _idle_voice_maintenance():
+    """Teure Nebenarbeit erst ausführen, wenn kein Nutzer auf Audio wartet."""
+    try:
+        # Der deutsche Hauptpfad ist bereits warm. Arabische Referenz und
+        # Cache-Pflege warten auf ein echtes Leerlaufen der interaktiven Engine.
+        for _ in range(60):
+            time.sleep(2.0)
+            if (
+                not RENDER_LOCK.locked()
+                and not MANUAL_RENDER_WAITING.is_set()
+                and not LEARNING_PREVIEW_WAITING.is_set()
+            ):
+                break
+        else:
+            return
+
+        if ARABIC_DEDICATED_REFERENCE:
+            try:
+                ref=reference_for_language("ar")
+                p=prosody_settings("narration","ar","تجربة")
+                if MLX_ENABLED and _mlx_process_alive():
+                    _mlx_request({
+                        "op":"warm",
+                        "ref_path":str(ref),
+                        "exaggeration":float(p["exaggeration"]),
+                    },timeout_s=75.0,heartbeat=False)
+                elif MODEL is not None:
+                    prepare_reference_if_needed(MODEL,"ar",p["exaggeration"])
+            except Exception as e:
+                print("[DĀR Voice] deferred Arabic warmup warning:",e,flush=True)
+
+        # Cache-Aufräumen ist reine Wartung und darf den ersten Render niemals
+        # durch Dateisystem-Scans verzögern.
+        if (
+            not RENDER_LOCK.locked()
+            and not MANUAL_RENDER_WAITING.is_set()
+            and not LEARNING_PREVIEW_WAITING.is_set()
+        ):
+            cleanup_render_cache()
+    except Exception as e:
+        print("[DĀR Voice] idle maintenance warning:",e,flush=True)
+
 def warm_model():
     try:
         model=load_production_model()
+        # 2.9.91: Cold-start optimiert. Nur die deutsche Hauptreferenz wird
+        # sofort konditioniert. Alles Weitere läuft später im Leerlauf.
         if getattr(model,"_dar_backend","torch")=="mlx":
-            # Modell + Referenzkonditionierung im überwachten Prozess vorwärmen.
-            for lang,probe in (("de","Warmup"),("ar","تجربة")):
-                ref=reference_for_language(lang)
-                p=prosody_settings("narration",lang,probe)
-                _mlx_request({
-                    "op":"warm",
-                    "ref_path":str(ref),
-                    "exaggeration":float(p["exaggeration"]),
-                },timeout_s=75.0,heartbeat=False)
+            ref=reference_for_language("de")
+            p=prosody_settings("narration","de","Warmup")
+            _mlx_request({
+                "op":"warm",
+                "ref_path":str(ref),
+                "exaggeration":float(p["exaggeration"]),
+            },timeout_s=75.0,heartbeat=False)
         else:
-            prepare_reference_if_needed(model,"de",prosody_settings("narration","de","Warmup")["exaggeration"])
-            if REF_AR.exists() and file_signature(REF_AR)!=file_signature(REF_DE):
-                prepare_reference_if_needed(model,"ar",prosody_settings("narration","ar","تجربة")["exaggeration"])
-            prepare_reference_if_needed(model,"de",prosody_settings("narration","de","Warmup")["exaggeration"])
-        cleanup_render_cache()
+            prepare_reference_if_needed(
+                model,"de",
+                prosody_settings("narration","de","Warmup")["exaggeration"]
+            )
+        threading.Thread(
+            target=_idle_voice_maintenance,
+            daemon=True,
+            name="dar-voice-idle-maintenance"
+        ).start()
     except Exception as e:
         print("[DĀR Voice] MLX/Voice warmup warning:",e,flush=True)
 
