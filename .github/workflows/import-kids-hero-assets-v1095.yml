@@ -75,18 +75,17 @@ jobs:
 
           const storyCssPath = "kids/stories-final-v1088.css";
           let storyCss = fs.readFileSync(storyCssPath, "utf8");
-          storyCss = storyCss.replace(
-            /url\\("https:\\/\\/at\\.adobe\\.com\\/jaPS3uCKdEKCahM6"\\)!important;/g,
+          storyCss = storyCss.replaceAll(
+            'url("https://at.adobe.com/jaPS3uCKdEKCahM6")!important;',
             'url("/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3")!important;'
           );
           fs.writeFileSync(storyCssPath, storyCss);
 
           for (const p of ["kids/index.html","kids/start.html","kids/shell.html"]) {
             let html = fs.readFileSync(p, "utf8");
-            html = html.replace(
-              /\\/kids\\/section-heroes-v1095\\.css\\?v=[^"'<>\\s]+/g,
-              "/kids/section-heroes-v1095.css?v=1097-real3"
-            );
+            html = html
+              .replaceAll("/kids/section-heroes-v1095.css?v=1096-real2", "/kids/section-heroes-v1095.css?v=1097-real3")
+              .replaceAll("/kids/section-heroes-v1095.css?v=1097-real3", "/kids/section-heroes-v1095.css?v=1097-real3");
             if (!html.includes("/kids/section-heroes-v1095.css?v=1097-real3")) {
               throw new Error(p + ": section hero stylesheet not wired");
             }
@@ -96,9 +95,11 @@ jobs:
           const swPath = "kids/sw.js";
           let sw = fs.readFileSync(swPath, "utf8");
           sw = sw
-            .replace(/\\/kids\\/section-heroes-v1095\\.css\\?v=[^"\\n]+/g, "/kids/section-heroes-v1095.css?v=1097-real3")
-            .replace(/\\/kids\\/assets\\/kids-art\\/section-stories-v\\d+\\.(?:jpg|png)(?:\\?v=[^"\\n]+)?/g, "/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3")
-            .replace(/\\/kids\\/assets\\/kids-art\\/section-parents-v\\d+\\.(?:jpg|png)(?:\\?v=[^"\\n]+)?/g, "/kids/assets/kids-art/section-parents-v1097.png?v=1097-real3");
+            .replaceAll("/kids/section-heroes-v1095.css?v=1096-real2", "/kids/section-heroes-v1095.css?v=1097-real3")
+            .replaceAll("/kids/assets/kids-art/section-stories-v1096.jpg?v=1096-real2", "/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3")
+            .replaceAll("/kids/assets/kids-art/section-parents-v1096.jpg?v=1096-real2", "/kids/assets/kids-art/section-parents-v1097.png?v=1097-real3")
+            .replaceAll("/kids/assets/kids-art/section-stories-v1094.jpg?v=1094-compact1", "/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3")
+            .replaceAll("/kids/assets/kids-art/section-parents-v1090.jpg?v=1090", "/kids/assets/kids-art/section-parents-v1097.png?v=1097-real3");
           fs.writeFileSync(swPath, sw);
 
           if (!heroCss.includes("section-stories-v1097.png") || !heroCss.includes("section-parents-v1097.png")) {
