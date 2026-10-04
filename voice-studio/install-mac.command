@@ -79,7 +79,16 @@ extract_from_archive() {
   local ref="$2"
   local path="$3"
   local out="$4"
-  /usr/bin/unzip -p "$zip" "dar-al-tawhid-site-$ref/$path" > "$out"
+  local root=""
+
+  # GitHub/Codeload kann bei Branches und Commit-SHAs unterschiedliche
+  # Top-Level-Verzeichnisnamen verwenden. Niemals den Ordnernamen erraten.
+  root="$(/usr/bin/unzip -Z1 "$zip" 2>/dev/null | /usr/bin/head -n 1 | /usr/bin/cut -d/ -f1)"
+  if [ -z "$root" ]; then
+    echo "FEHLER: Release-Archiv enthält kein lesbares Stammverzeichnis."
+    return 1
+  fi
+  /usr/bin/unzip -p "$zip" "$root/$path" > "$out"
   [ -s "$out" ]
 }
 
@@ -110,10 +119,17 @@ resolve_release_ref() {
 
 resolve_release_ref
 
+# Stabiler Update-Transport: Nach Auflösung des validierten Release-Pins wird
+# genau EIN gepinntes Repository-Archiv geladen. Dadurch gibt es weder 20–30
+# GitHub-Contents-Requests pro Update noch Rate-Limit-Mischstände.
+USE_ARCHIVE_ONLY=1
+RELEASE_ARCHIVE="$STAGE/release-$PIN.zip"
+ensure_archive "$PIN" "$RELEASE_ARCHIVE"
+
 download_repo_file() {
   local path="$1"
   local out="$2"
-  local release_zip="$STAGE/release-$PIN.zip"
+  local release_zip="$RELEASE_ARCHIVE"
 
   if [ "$USE_ARCHIVE_ONLY" -eq 0 ]; then
     if curl -fsSL --retry 2 --retry-delay 1 \
