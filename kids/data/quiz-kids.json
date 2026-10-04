@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "id": "DAR_KIDS_QUIZ_V1",
   "namespace": "dar-kids-quiz",
-  "version": 20,
+  "version": 21,
   "updatedAt": "2026-10-04",
   "separateFromAdultQuiz": true,
   "adultQuizDependency": false,
@@ -22298,7 +22298,7 @@
   ],
   "artwork": {
     "source": "DĀR AL TAWḤĪD local generated artwork",
-    "delivery": "age-adaptive-quiz-scene-local",
+    "delivery": "age-and-topic-adaptive-quiz-scene-local",
     "offlineCache": "service-worker-precache",
     "ageBands": {
       "4-6": {
@@ -22315,6 +22315,105 @@
         "url": "/kids/assets/quiz-scenes/quiz-9-10.svg?v=20261004-real1",
         "position": "50% 48%",
         "tone": "refined-knowledge"
+      }
+    },
+    "topicArtworkVersion": "topic-realistic-v1",
+    "topicFamilies": {
+      "creation": {
+        "url": "/kids/assets/quiz-scenes/topic-creation.svg?v=20261004-topic1",
+        "position": "50% 50%",
+        "tone": "wonder-nature"
+      },
+      "quran": {
+        "url": "/kids/assets/quiz-scenes/topic-quran.svg?v=20261004-topic1",
+        "position": "50% 50%",
+        "tone": "knowledge-library"
+      },
+      "home": {
+        "url": "/kids/assets/quiz-scenes/topic-home.svg?v=20261004-topic1",
+        "position": "50% 52%",
+        "tone": "warm-home"
+      },
+      "salah": {
+        "url": "/kids/assets/quiz-scenes/topic-salah.svg?v=20261004-topic1",
+        "position": "50% 52%",
+        "tone": "prayer-water"
+      },
+      "adab": {
+        "url": "/kids/assets/quiz-scenes/topic-adab.svg?v=20261004-topic1",
+        "position": "50% 52%",
+        "tone": "kindness-garden"
+      },
+      "dua": {
+        "url": "/kids/assets/quiz-scenes/topic-dua.svg?v=20261004-topic1",
+        "position": "50% 50%",
+        "tone": "calm-night"
+      },
+      "charity": {
+        "url": "/kids/assets/quiz-scenes/topic-charity.svg?v=20261004-topic1",
+        "position": "50% 52%",
+        "tone": "generosity-trust"
+      }
+    },
+    "sceneMap": {
+      "home": "home",
+      "food": "home",
+      "mosque": "salah",
+      "droplet": "salah",
+      "coin": "charity",
+      "lock": "charity",
+      "book": "quran",
+      "library": "quran",
+      "speech": "adab",
+      "heart": "adab",
+      "help": "adab",
+      "moon": "dua"
+    },
+    "categoryMap": {
+      "Schöpfung": "creation",
+      "Qurʾān": "quran",
+      "Wissen": "quran",
+      "Sunnah": "quran",
+      "Islam": "quran",
+      "Dīn": "quran",
+      "Ṣalāh": "salah",
+      "Fiqh": "salah",
+      "Ṣawm": "salah",
+      "Ḥaǧǧ": "salah",
+      "Adab": "adab",
+      "Aḫlāq": "adab",
+      "Iḥsān": "adab",
+      "Dankbarkeit": "adab",
+      "Daʿwah": "adab",
+      "Tazkiyyah": "adab",
+      "Duʿāʾ": "dua",
+      "Dhikr": "dua",
+      "Īmān": "dua",
+      "Tawḥīd": "dua",
+      "Tawakkul": "dua",
+      "Tawbah": "dua",
+      "Taqwā": "dua",
+      "Ṣabr": "dua",
+      "Ākhirah": "dua",
+      "Rechtleitung": "dua",
+      "Ṣadaqah": "charity",
+      "Zakāh": "charity"
+    },
+    "agePresentation": {
+      "4-6": {
+        "overlay": "bright",
+        "density": "simple",
+        "hero": "large"
+      },
+      "7-8": {
+        "overlay": "balanced",
+        "density": "playful",
+        "hero": "medium"
+      },
+      "9-10": {
+        "overlay": "refined",
+        "density": "compact",
+        "hero": "compact"
       }
     }
   }
