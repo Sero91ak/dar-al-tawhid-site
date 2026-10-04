@@ -609,6 +609,7 @@ export default {
     const kidsRecitationGrade =
       url.pathname === "/kids/api/recitation/grade" ||
       url.pathname === "/test/kids/api/recitation/grade";
+    const voiceAliasPath = url.pathname === "/voice" || url.pathname === "/voice/";
     const voicePath = url.pathname === "/voice-studio" || url.pathname.startsWith("/voice-studio/");
     const legacyVoicePath = url.pathname === "/test/voice-studio" || url.pathname.startsWith("/test/voice-studio/");
 
@@ -621,6 +622,13 @@ export default {
       const suffix = url.pathname.slice("/test/voice-studio".length);
       target.pathname = "/voice-studio" + (suffix || "/");
       return Response.redirect(target.toString(), 301);
+    }
+
+    if ((request.method === "GET" || request.method === "HEAD") && voiceAliasPath) {
+      const target = new URL(request.url);
+      target.pathname = "/voice-studio/";
+      target.searchParams.set("app", "1");
+      return Response.redirect(target.toString(), 308);
     }
 
     if ((request.method === "GET" || request.method === "HEAD") && url.pathname === "/voice-studio") {
