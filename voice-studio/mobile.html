@@ -135,7 +135,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <div id="toast" class="toast"></div>
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const state={health:null,analysis:null,audioBlob:null,audioUrl:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,generating:false};
+const state={health:null,analysis:null,audioBlob:null,audioUrl:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -215,36 +215,41 @@ async function loadHistory(){
 function catalogCard(x,i){
   const term=String(x.canonical||x.input||"").trim();
   const master=!!x.confirmed;
-  return '<div class="card candidate"><div class="candidate-main"><strong>'+esc(term)+'</strong><div class="arabic">'+esc(x.ttsText||x.alias||"")+'</div><div class="meta">'+esc(x.source||"Bibliothek")+' · '+esc(x.ttsLanguage||"")+(master?' · Master ✓':'')+'</div><div class="catalog-actions"><button data-catalog-preview="'+i+'">Anhören</button><button class="confirm" data-catalog-confirm="'+i+'" '+(master?'disabled':'disabled')+'>'+(master?'Master ✓':'Als Master bestätigen')+'</button></div></div></div>';
+  return '<div class="card candidate"><div class="candidate-main"><strong>'+esc(term)+'</strong><div class="arabic">'+esc(x.ttsText||x.alias||"")+'</div><div class="meta">'+esc(x.source||"Bibliothek")+' · '+esc(x.ttsLanguage||"")+(master?' · Master ✓':'')+'</div><div class="catalog-actions"><button data-catalog-preview="'+i+'">Anhören</button><button class="confirm" data-catalog-confirm="'+i+'" disabled>'+(master?'Master ✓':'Als Master bestätigen')+'</button></div></div></div>';
 }
-function bindCatalogRows(rows){
-  $$("[data-catalog-preview]").forEach(b=>b.onclick=()=>previewCandidate(rows[Number(b.dataset.catalogPreview)],String(rows[Number(b.dataset.catalogPreview)]?.canonical||""),b));
-  $$("[data-catalog-confirm]").forEach(b=>b.onclick=()=>confirmCandidate(String(rows[Number(b.dataset.catalogConfirm)]?.canonical||""),b));
+function bindCatalogRows(){
+  $$("[data-catalog-preview]").forEach(b=>b.onclick=()=>{
+    const row=state.catalogRows[Number(b.dataset.catalogPreview)];
+    if(row)previewCandidate(row,String(row.canonical||row.input||""),b);
+  });
+  $$("[data-catalog-confirm]").forEach(b=>b.onclick=()=>{
+    const row=state.catalogRows[Number(b.dataset.catalogConfirm)];
+    if(row)confirmCandidate(String(row.canonical||row.input||""),b);
+  });
 }
 async function loadCatalog(reset=true){
   const q=String($("#wordSearch").value||"").trim();
-  if(reset){state.catalogOffset=0;state.catalogQuery=q;$("#wordResults").innerHTML='<div class="empty">Wortliste wird geladen …</div>'}
-  const offset=reset?0:state.catalogOffset;
+  if(reset){
+    state.catalogOffset=0;state.catalogQuery=q;state.catalogRows=[];
+    $("#wordResults").innerHTML='<div class="empty">Wortliste wird geladen …</div>';
+  }
+  const offset=state.catalogOffset;
   try{
     const r=await api("/learning/catalog?q="+encodeURIComponent(q)+"&offset="+offset+"&limit=60");
     const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Wortliste nicht verfügbar");
-    const rows=d.items||[];state.catalogTotal=Number(d.total||0);state.catalogOffset=offset+rows.length;
+    const rows=d.items||[];
+    state.catalogRows=state.catalogRows.concat(rows);
+    state.catalogTotal=Number(d.total||0);state.catalogOffset=offset+rows.length;
     $("#catalogCount").textContent=state.catalogTotal.toLocaleString("de-DE")+" Wörter";
-    const html=rows.map(catalogCard).join("")||'<div class="empty">'+(q?'Keine passenden Wörter gefunden.':'Keine Wörter verfügbar.')+'</div>';
-    if(reset)$("#wordResults").innerHTML=html;else $("#wordResults").insertAdjacentHTML("beforeend",html);
+    $("#wordResults").innerHTML=state.catalogRows.length
+      ?state.catalogRows.map(catalogCard).join("")
+      :'<div class="empty">'+(q?'Keine passenden Wörter gefunden.':'Keine Wörter verfügbar.')+'</div>';
     $("#catalogMore").hidden=!d.hasMore;$("#catalogMore").disabled=false;
-    bindCatalogRows(rows);
-    if(!reset){
-      const all=[...$("#wordResults").querySelectorAll("[data-catalog-preview]")];
-      const base=all.length-rows.length;
-      rows.forEach((row,j)=>{
-        const p=all[base+j];if(!p)return;
-        p.onclick=()=>previewCandidate(row,String(row.canonical||""),p);
-        const c=p.closest(".candidate")?.querySelector("[data-catalog-confirm]");
-        if(c)c.onclick=()=>confirmCandidate(String(row.canonical||""),c);
-      });
-    }
-  }catch(e){if(reset)$("#wordResults").innerHTML='<div class="empty">'+esc(e.message)+'</div>';$("#catalogCount").textContent="Fehler"}
+    bindCatalogRows();
+  }catch(e){
+    if(reset)$("#wordResults").innerHTML='<div class="empty">'+esc(e.message)+'</div>';
+    $("#catalogCount").textContent="Fehler";
+  }
 }
 $("#catalogMore").onclick=()=>{$("#catalogMore").disabled=true;loadCatalog(false)};
 let catalogSearchTimer=0;
