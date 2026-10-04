@@ -768,3 +768,268 @@ html[data-theme="aurora"] body.is-ilm-chat-route{
   --ilm-hero-chip:rgba(23,54,46,.54);
   --ilm-hero-rule:rgba(231,213,157,.27);
 }
+
+
+/* DAR_ILM_MAJLIS_CANOPY_V1233
+   Active ʿIlm chat: edge-to-edge, image-free Majlis canopy. */
+body.is-ilm-chat-route{
+  --ilm-canopy-a:color-mix(in srgb,var(--ilm-header-bg) 96%,var(--ilm-page-bg));
+  --ilm-canopy-b:color-mix(in srgb,var(--ilm-header-bg) 78%,var(--ilm-accent) 6%);
+  --ilm-canopy-c:color-mix(in srgb,var(--ilm-page-bg) 92%,var(--ilm-accent) 8%);
+  --ilm-canopy-line:color-mix(in srgb,var(--ilm-accent) 19%,transparent);
+  --ilm-canopy-glow:color-mix(in srgb,var(--ilm-accent) 14%,transparent);
+}
+
+body.is-ilm-chat-route .ilm-chat-shell{
+  width:100vw!important;
+  max-width:none!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  border-radius:0!important;
+  overflow:visible!important;
+}
+
+body.is-ilm-chat-route .ilm-chat-header{
+  width:100vw!important;
+  max-width:none!important;
+  min-height:122px!important;
+  margin:0!important;
+  padding:
+    calc(13px + env(safe-area-inset-top,0px))
+    max(18px,env(safe-area-inset-right,0px))
+    15px
+    max(18px,env(safe-area-inset-left,0px))!important;
+  grid-template-columns:52px minmax(0,1fr) auto!important;
+  gap:12px!important;
+  border-radius:0!important;
+  border:0!important;
+  border-bottom:1px solid var(--ilm-canopy-line)!important;
+  background:
+    radial-gradient(ellipse 44% 105% at 84% 6%,var(--ilm-canopy-glow),transparent 70%),
+    radial-gradient(ellipse 38% 94% at 14% 0%,color-mix(in srgb,var(--ilm-accent) 7%,transparent),transparent 72%),
+    linear-gradient(118deg,var(--ilm-canopy-a) 0%,var(--ilm-canopy-b) 54%,var(--ilm-canopy-c) 100%)!important;
+  box-shadow:
+    0 16px 36px color-mix(in srgb,var(--ilm-page-bg) 52%,transparent),
+    inset 0 -1px 0 color-mix(in srgb,var(--ilm-primary-text) 4%,transparent)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+body.is-ilm-chat-route .ilm-chat-header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.8;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 47px,
+      color-mix(in srgb,var(--ilm-accent) 4%,transparent) 48px,
+      transparent 49px 96px
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb,var(--ilm-primary-text) 2%,transparent),
+      transparent 36%,
+      color-mix(in srgb,var(--ilm-page-bg) 8%,transparent)
+    );
+}
+
+body.is-ilm-chat-route .ilm-chat-header::after{
+  content:"";
+  position:absolute;
+  left:max(18px,env(safe-area-inset-left,0px));
+  right:max(18px,env(safe-area-inset-right,0px));
+  bottom:0;
+  z-index:1;
+  height:1px;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--ilm-canopy-line) 16%,var(--ilm-canopy-line) 84%,transparent);
+}
+
+body.is-ilm-chat-route .ilm-chat-header > *{
+  position:relative;
+  z-index:2;
+}
+
+body.is-ilm-chat-route .ilm-header-title{
+  display:grid!important;
+  justify-items:center!important;
+  align-content:center!important;
+  gap:4px!important;
+  min-width:0!important;
+  text-align:center!important;
+}
+
+body.is-ilm-chat-route .ilm-header-title b{
+  margin:0!important;
+  font-family:var(--ilm-serif)!important;
+  font-size:clamp(1.7rem,6.3vw,2.25rem)!important;
+  line-height:.95!important;
+  font-weight:620!important;
+  letter-spacing:.008em!important;
+  color:var(--ilm-primary-text)!important;
+  text-shadow:none!important;
+}
+
+body.is-ilm-chat-route .ilm-header-title span{
+  margin:0!important;
+  font-size:.67rem!important;
+  line-height:1.1!important;
+  font-weight:850!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+  color:var(--ilm-accent)!important;
+  opacity:.94!important;
+  text-shadow:none!important;
+}
+
+body.is-ilm-chat-route .ilm-header-title::after{
+  content:"";
+  width:44px;
+  height:1px;
+  margin-top:3px;
+  background:linear-gradient(90deg,transparent,var(--ilm-accent),transparent);
+  opacity:.72;
+}
+
+body.is-ilm-chat-route .ilm-icon-btn{
+  width:46px!important;
+  min-width:46px!important;
+  height:46px!important;
+  min-height:46px!important;
+  border:1px solid color-mix(in srgb,var(--ilm-accent) 18%,transparent)!important;
+  border-radius:15px!important;
+  background:color-mix(in srgb,var(--ilm-header-bg) 38%,transparent)!important;
+  color:var(--ilm-primary-text)!important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--ilm-primary-text) 5%,transparent),
+    0 6px 14px color-mix(in srgb,var(--ilm-page-bg) 22%,transparent)!important;
+  -webkit-backdrop-filter:blur(10px) saturate(1.04)!important;
+  backdrop-filter:blur(10px) saturate(1.04)!important;
+}
+
+body.is-ilm-chat-route .ilm-header-actions{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+}
+
+body.is-ilm-chat-route .ilm-message-list{
+  width:100%!important;
+  max-width:none!important;
+  background:var(--ilm-page-bg)!important;
+}
+
+body.is-ilm-chat-route .ilm-message-inner{
+  width:min(860px,calc(100% - 28px))!important;
+  margin:0 auto!important;
+  padding-top:24px!important;
+}
+
+html[data-theme="light"] body.is-ilm-chat-route{
+  --ilm-canopy-a:#f7f2e8;
+  --ilm-canopy-b:#f0eadf;
+  --ilm-canopy-c:#ece7dd;
+  --ilm-canopy-line:rgba(154,122,62,.19);
+  --ilm-canopy-glow:rgba(154,122,62,.10);
+}
+html[data-theme="salbei"] body.is-ilm-chat-route,
+html[data-theme="light"][data-theme-variant="salbei"] body.is-ilm-chat-route{
+  --ilm-canopy-a:#f4f7f1;
+  --ilm-canopy-b:#edf2eb;
+  --ilm-canopy-c:#e8eee8;
+  --ilm-canopy-line:rgba(63,93,75,.18);
+  --ilm-canopy-glow:rgba(63,93,75,.10);
+}
+html[data-theme="soft"] body.is-ilm-chat-route{
+  --ilm-canopy-a:#f4e9e5;
+  --ilm-canopy-b:#efe2df;
+  --ilm-canopy-c:#eadedb;
+}
+html[data-theme="eisgold"] body.is-ilm-chat-route{
+  --ilm-canopy-a:#f1f8fb;
+  --ilm-canopy-b:#e8f2f7;
+  --ilm-canopy-c:#e2edf3;
+}
+html[data-theme="royal"] body.is-ilm-chat-route{
+  --ilm-canopy-a:#0b1d36;
+  --ilm-canopy-b:#0c2442;
+  --ilm-canopy-c:#07162c;
+}
+html[data-theme="bordeaux"] body.is-ilm-chat-route{
+  --ilm-canopy-a:#241113;
+  --ilm-canopy-b:#2b1518;
+  --ilm-canopy-c:#160b0d;
+}
+html[data-theme="dar-al-layl"] body.is-ilm-chat-route{
+  --ilm-canopy-a:#0a1b14;
+  --ilm-canopy-b:#10261c;
+  --ilm-canopy-c:#06110d;
+}
+html[data-theme="dark"] body.is-ilm-chat-route{
+  --ilm-canopy-a:#111611;
+  --ilm-canopy-b:#171d17;
+  --ilm-canopy-c:#070907;
+}
+html[data-theme="aurora"] body.is-ilm-chat-route{
+  --ilm-canopy-a:#18372f;
+  --ilm-canopy-b:#1b4036;
+  --ilm-canopy-c:#10251f;
+}
+
+@media(max-width:430px){
+  body.is-ilm-chat-route .ilm-chat-header{
+    min-height:118px!important;
+    grid-template-columns:46px minmax(0,1fr) auto!important;
+    gap:9px!important;
+    padding-left:12px!important;
+    padding-right:12px!important;
+  }
+  body.is-ilm-chat-route .ilm-icon-btn{
+    width:44px!important;
+    min-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    border-radius:14px!important;
+  }
+  body.is-ilm-chat-route .ilm-header-actions{gap:6px!important}
+  body.is-ilm-chat-route .ilm-header-title b{
+    font-size:clamp(1.48rem,6vw,1.85rem)!important;
+  }
+  body.is-ilm-chat-route .ilm-message-inner{
+    width:calc(100% - 20px)!important;
+  }
+}
+
+@media(max-width:360px){
+  body.is-ilm-chat-route .ilm-chat-header{
+    grid-template-columns:42px minmax(0,1fr) auto!important;
+    gap:6px!important;
+  }
+  body.is-ilm-chat-route .ilm-icon-btn{
+    width:40px!important;
+    min-width:40px!important;
+    height:40px!important;
+    min-height:40px!important;
+  }
+  body.is-ilm-chat-route .ilm-header-title span{
+    font-size:.59rem!important;
+  }
+}
+
+@media(min-width:760px){
+  body.is-ilm-chat-route .ilm-chat-header{
+    min-height:128px!important;
+    padding-left:max(28px,env(safe-area-inset-left,0px))!important;
+    padding-right:max(28px,env(safe-area-inset-right,0px))!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  body.is-ilm-chat-route .ilm-icon-btn{
+    transition:none!important;
+  }
+}
