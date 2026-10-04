@@ -299,10 +299,12 @@ jobs:
               else
                 echo "::warning::hasOneSignalKey=false – ONESIGNAL_API_KEY_NEW in GitHub Actions Secrets setzen"
               fi
-              if printf '%s' "$HEALTH" | grep -q '"videoStudioFal":true'; then
-                echo "FAL/Bildgenerator aktiv"
+              if printf '%s' "$HEALTH" | grep -q '"shareImageAi":true'; then
+                echo "Cloudflare Workers AI Bildgenerator aktiv"
+              elif printf '%s' "$HEALTH" | grep -q '"videoStudioFal":true'; then
+                echo "FAL Bildgenerator als Fallback aktiv"
               else
-                echo "::error::videoStudioFal=false – FAL_KEY/FAL_API_KEY fehlt; Bildbeiträge können nicht generiert werden"
+                echo "::error::Kein Bildgenerator aktiv – weder Workers AI noch FAL"
                 exit 1
               fi
               exit 0
