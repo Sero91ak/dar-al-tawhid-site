@@ -75,10 +75,20 @@ export async function probeElevenAuth(env) {
   }
 }
 
+function decodeBase64Bytes(value) {
+  const raw = String(value || "").replace(/\s+/g, "");
+  if (!raw) return new Uint8Array();
+  const binary = atob(raw);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+
 export async function synthesizeDarVoice(env, text, options = {}) {
   const key = elevenKey(env);
   const voiceId = darVoiceId(env);
   const profile = String(options?.profile || "").trim().toLowerCase();
+  const withTimings = options?.timestamps === true;
   if (!key || !voiceId) {
     return {
       ok: false,
@@ -89,12 +99,15 @@ export async function synthesizeDarVoice(env, text, options = {}) {
   const script = String(text || "").trim();
   if (!script) return { ok: false, reason: "Kein Sprachtext" };
 
-  const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}`, {
+  const endpoint = withTimings
+    ? `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}/with-timestamps`
+    : `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}`;
+  const res = await fetch(endpoint, {
     method: "POST",
     headers: {
       "xi-api-key": key,
       "Content-Type": "application/json",
-      Accept: "audio/mpeg"
+      Accept: withTimings ? "application/json" : "audio/mpeg"
     },
     body: JSON.stringify({
       text: script,
@@ -133,6 +146,30 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     const errText = await res.text().catch(() => "");
     return { ok: false, reason: `ElevenLabs HTTP ${res.status}: ${errText.slice(0, 180)}` };
   }
+  if (withTimings) {
+    const payload = await res.json().catch(() => null);
+    const audioBase64 = String(payload?.audio_base64 || "").trim();
+    if (!audioBase64) {
+      return { ok: false, reason: "ElevenLabs lieferte keine Audio-Daten für die Timing-Erzeugung." };
+    }
+    const bytes = decodeBase64Bytes(audioBase64);
+    if (!bytes.byteLength) {
+      return { ok: false, reason: "ElevenLabs Timing-Audio konnte nicht dekodiert werden." };
+    }
+    return {
+      ok: true,
+      bytes,
+      audioBase64,
+      alignment: payload?.alignment || null,
+      normalizedAlignment: payload?.normalized_alignment || null,
+      contentType: "audio/mpeg",
+      voiceId,
+      chars: script.length,
+      timestamps: true,
+      estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
+    };
+  }
+
   const bytes = await res.arrayBuffer();
   return {
     ok: true,
@@ -140,6 +177,7 @@ export async function synthesizeDarVoice(env, text, options = {}) {
     contentType: "audio/mpeg",
     voiceId,
     chars: script.length,
+    timestamps: false,
     estimatedCostEur: Number(((script.length / 1000) * 0.18).toFixed(4))
   };
 }
