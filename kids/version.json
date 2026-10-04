@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v38-quiz650-never-empty1105",
-  "label": "KIDS · V1.07.44",
-  "releasedAt": "2026-10-04T11:30:00Z",
-  "note": "Quiz-Live-Hotfix: 650 Kids-Fragen sind vorhanden. PWA-/Service-Worker-Build v1105 erzwingt die aktuelle Never-Empty-Quiz-Shell auf installierten iPhone/iPad-Versionen; der Besucher-Deploy bleibt auf dem geprüften Trigger-Commit.",
+  "buildId": "kids-shell-v39-quiz650-voice-visual1106",
+  "label": "KIDS · V1.07.45",
+  "releasedAt": "2026-10-04T14:00:00Z",
+  "note": "Kids-Quiz v1106: Alterskopf und Tabs synchronisiert, 650er-Katalog lädt race-sicher statt mit 0-Fragen-Zwischenstand, Quizrunde kompakter, neue altersadaptive lokale Quizbilder eingebaut; vollständiger Serhat-Owner-Voice-Build für alle 650 Fragen gestartet.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1105",
+    "serviceWorkerCache": "v1106",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -267,7 +267,7 @@
     "kidsQuizManifestNetworkFirst": true,
     "kidsQuizReleaseGuard": true,
     "quizVisualSystem": {
-      "version": "age-adaptive-realistic-v18",
+      "version": "age-adaptive-realistic-v19",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
       "questionCount": 650,
@@ -303,7 +303,11 @@
         "/kids/assets/quiz-scenes/topic-iman.svg?v=20261004-topic2",
         "/kids/assets/quiz-scenes/topic-akhlaq.svg?v=20261004-topic2",
         "/kids/assets/quiz-scenes/topic-patience.svg?v=20261004-topic3",
-        "/kids/assets/quiz-scenes/topic-justice.svg?v=20261004-topic3"
+        "/kids/assets/quiz-scenes/topic-justice.svg?v=20261004-topic3",
+        "/kids/assets/quiz-scenes/quiz-4-6-v2.png?v=20261004-v2",
+        "/kids/assets/quiz-scenes/quiz-7-8-v2.png?v=20261004-v2",
+        "/kids/assets/quiz-scenes/quiz-9-10-v2.png?v=20261004-v2",
+        "/kids/assets/quiz-scenes/topic-creation-v2.png?v=20261004-v2"
       ],
       "ageAdaptiveRewardMotion": true,
       "reducedMotionSafe": true,
@@ -347,11 +351,11 @@
       "fullQuestionCatalogOwnerVoice": true,
       "shortQuizRoundsPreserved": true,
       "noNewQuestionsInThisRelease": true,
-      "catalogAssetVersion": 8,
+      "catalogAssetVersion": 9,
       "latestContentPack": "601-650",
       "questionGenerationPaused": true,
       "questionGenerationCap": 650,
-      "topicArtworkVersion": "topic-realistic-v3",
+      "topicArtworkVersion": "topic-realistic-v4",
       "topicArtworkFamilies": [
         "creation",
         "quran",
@@ -403,7 +407,7 @@
     "kidsQuizNeverEmpty": true,
     "kidsQuizInstalledEntryPointsSynced": true,
     "kidsQuizLegacyCanonicalRuntimeRemoved": true,
-    "kidsQuizPwaRecovery": "v1105",
+    "kidsQuizPwaRecovery": "v1106",
     "kidsQuizStaleShellBlocked": true
   },
   "updatedAt": "2026-10-04"
