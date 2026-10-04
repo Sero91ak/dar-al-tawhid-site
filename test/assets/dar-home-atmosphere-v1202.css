@@ -36,7 +36,7 @@ html.dar-home-v1194 body.is-home-route::before{
       rgba(2,3,2,.28) 46%,
       rgba(2,3,2,.10) 100%
     ),
-    url("/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1202") 62% 0/cover no-repeat!important;
+    url("/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1238-home") 62% 0/cover no-repeat!important;
   -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 68%,rgba(0,0,0,.88) 78%,transparent 100%)!important;
   mask-image:linear-gradient(to bottom,#000 0%,#000 68%,rgba(0,0,0,.88) 78%,transparent 100%)!important;
 }
@@ -66,7 +66,7 @@ html.dar-home-v1194 body.is-home-route::after{
       rgba(2,3,2,.34) 48%,
       rgba(2,3,2,.18) 100%
     ),
-    url("/test/assets/home-v1194/study-runway.jpg?v=1202") 66% 18%/cover no-repeat!important;
+    url("/test/assets/home-v1194/study-runway.jpg?v=1238-home") 66% 18%/cover no-repeat!important;
   -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 13%,#000 82%,transparent 100%)!important;
   mask-image:linear-gradient(to bottom,transparent 0%,#000 13%,#000 82%,transparent 100%)!important;
 }
@@ -206,7 +206,7 @@ html.dar-home-v1194 body.is-home-route .bottom-nav{
     background:
       linear-gradient(180deg,rgba(2,3,2,.10) 0%,rgba(2,3,2,.22) 34%,rgba(2,3,2,.66) 70%,rgba(2,3,2,.98) 100%),
       linear-gradient(90deg,rgba(2,3,2,.62) 0%,rgba(2,3,2,.24) 50%,rgba(2,3,2,.08) 100%),
-      url("/test/assets/home-v1194/hero-wide-adobe.jpg?v=1202") center top/cover no-repeat!important;
+      url("/test/assets/home-v1194/hero-wide-adobe.jpg?v=1238-home") center top/cover no-repeat!important;
   }
   html.dar-home-v1194 body.is-home-route::after{
     top:1120px!important;
@@ -265,7 +265,7 @@ html.dar-home-v1194 body.is-home-route{
       rgba(2,3,2,.92) 69%,
       rgba(2,3,2,.98) 100%
     ),
-    url("/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1203"),
+    url("/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1238-home"),
     linear-gradient(180deg,
       rgba(2,3,2,.96) 0%,
       rgba(2,3,2,.46) 14%,
@@ -273,7 +273,7 @@ html.dar-home-v1194 body.is-home-route{
       rgba(2,3,2,.46) 68%,
       rgba(2,3,2,.97) 100%
     ),
-    url("/test/assets/home-v1194/study-runway.jpg?v=1203")!important;
+    url("/test/assets/home-v1194/study-runway.jpg?v=1238-home")!important;
   background-repeat:no-repeat,no-repeat,no-repeat,no-repeat!important;
   background-position:center 0,62% 0,center 1120px,66% 1120px!important;
   background-size:100% 1550px,100% 1550px,100% 2350px,100% 2350px!important;
@@ -338,9 +338,9 @@ html.dar-home-v1194 body.is-home-route .home-line-row:nth-child(odd){
   html.dar-home-v1194 body.is-home-route{
     background-image:
       linear-gradient(180deg,rgba(2,3,2,.06) 0%,rgba(2,3,2,.20) 26%,rgba(2,3,2,.64) 57%,rgba(2,3,2,.96) 100%),
-      url("/test/assets/home-v1194/hero-wide-adobe.jpg?v=1203"),
+      url("/test/assets/home-v1194/hero-wide-adobe.jpg?v=1238-home"),
       linear-gradient(180deg,rgba(2,3,2,.96) 0%,rgba(2,3,2,.42) 18%,rgba(2,3,2,.34) 54%,rgba(2,3,2,.96) 100%),
-      url("/test/assets/home-v1194/study-runway.jpg?v=1203")!important;
+      url("/test/assets/home-v1194/study-runway.jpg?v=1238-home")!important;
     background-position:center 0,center 0,center 1250px,center 1250px!important;
     background-size:100% 1650px,100% 1650px,100% 2500px,100% 2500px!important;
   }
@@ -828,7 +828,7 @@ html.dar-home-v1194 body.is-home-route #appView.view::before{
   background:
     linear-gradient(180deg,rgba(2,3,2,.72) 0%,rgba(2,3,2,.30) 13%,rgba(2,3,2,.18) 46%,rgba(2,3,2,.34) 70%,rgba(2,3,2,.92) 96%,rgba(2,3,2,1) 100%),
     linear-gradient(90deg,rgba(2,3,2,.58) 0%,rgba(2,3,2,.20) 54%,rgba(2,3,2,.08) 100%),
-    url("/test/assets/home-v1194/study-runway.jpg?v=1210") 62% 32%/cover no-repeat!important;
+    url("/test/assets/home-v1194/study-runway.jpg?v=1238-home") 62% 32%/cover no-repeat!important;
   -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.90) 0%,#000 7%,#000 68%,rgba(0,0,0,.78) 82%,rgba(0,0,0,.28) 94%,transparent 100%)!important;
   mask-image:linear-gradient(to bottom,rgba(0,0,0,.90) 0%,#000 7%,#000 68%,rgba(0,0,0,.78) 82%,rgba(0,0,0,.28) 94%,transparent 100%)!important;
 }
@@ -842,7 +842,7 @@ html.dar-home-v1194:is([data-theme="light"],[data-theme="soft"],[data-theme="eis
   background:
     linear-gradient(180deg,rgba(249,246,238,.34) 0%,rgba(249,246,238,.14) 18%,rgba(249,246,238,.09) 52%,rgba(249,246,238,.30) 80%,rgba(249,246,238,.78) 100%),
     linear-gradient(90deg,rgba(249,246,238,.34) 0%,rgba(249,246,238,.13) 58%,rgba(249,246,238,.05) 100%),
-    url("/test/assets/home-v1194/study-runway.jpg?v=1211") 62% 32%/cover no-repeat!important;
+    url("/test/assets/home-v1194/study-runway.jpg?v=1238-home") 62% 32%/cover no-repeat!important;
 }
 
 /* 2 · Hero: content-driven height. The prayer capsule follows the content, not a fixed empty canvas. */
