@@ -17,10 +17,10 @@ function loadMasterLock() {
   return JSON.parse(fs.readFileSync(lockPath, "utf8"));
 }
 
-async function fetchText(url) {
+async function fetchText(url, extraHeaders = {}) {
   const res = await fetch(url, {
     cache: "no-store",
-    headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
+    headers: { "Cache-Control": "no-cache", Pragma: "no-cache", ...extraHeaders }
   });
   if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
   return res.text();
@@ -34,9 +34,14 @@ async function checkBuildSyncParity() {
   let visitorOk = true;
   let testOk = true;
 
-  // Besucher-App: immer gegen Live-Root prüfen, außer Scope=test
+  // Browser-Root ist absichtlich die öffentliche Website. Die kanonische
+  // Besucher-App-Shell wird für native DĀR Clients ausgeliefert und muss daher
+  // mit derselben nativen User-Agent-Spur geprüft werden wie im Deploy-Verifier.
   if (scope === "both" || scope === "visitor") {
-    const visitorHtml = await fetchText(`${SITE_URL}/index.html?v=${bust}`);
+    const visitorHtml = await fetchText(
+      `${SITE_URL}/index.html?v=${bust}`,
+      { "User-Agent": "DarAlTawhid-iOS/ParityCheck" }
+    );
     visitorOk = visitorHtml.includes(visitorBuild);
   }
 
