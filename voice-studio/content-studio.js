@@ -1,4 +1,4 @@
-/* Voice Studio 2.9.78 · page-focused navigation */
+/* Voice Studio 2.9.84 · selectable Kids quiz catalog */
 (() => {
 "use strict";
 
@@ -19,6 +19,8 @@ let contentStatus="draft";
 let productionPhase="draft";
 let productionError="";
 let quizDraft=[];
+let quizCatalogState={items:[],total:0,counts:{},voice:{},loaded:false,loading:false,error:""};
+let quizCatalogSelectedId="";
 let gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
 let legacyQuestion={};
 let legacyClaimIds=[];
@@ -360,6 +362,25 @@ function injectStyles(){
   .cs-question{padding:12px;border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(0,0,0,.12);margin:8px 0}
   .cs-question-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.cs-question-head b{font-size:11px}.cs-question-head button{border:0;background:transparent;color:#df8686;cursor:pointer;font-size:11px}
   .cs-answer-grid,.cs-inline-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.cs-add{width:100%;margin-top:8px}
+  .cs-quiz-catalog{margin:0 0 14px;padding:13px;border:1px solid rgba(217,182,111,.18);border-radius:14px;background:linear-gradient(180deg,rgba(217,182,111,.035),rgba(255,255,255,.012))}
+  .cs-quiz-catalog-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:9px}.cs-quiz-catalog-head h3{margin:0!important}.cs-quiz-catalog-head small{display:block;color:#7f9499;font-size:9px;line-height:1.4;margin-top:3px}
+  .cs-quiz-catalog-count{font-size:10px;font-weight:900;color:#f0d59a;white-space:nowrap;padding:5px 8px;border:1px solid rgba(217,182,111,.22);border-radius:999px}
+  .cs-quiz-catalog-toolbar{display:grid;grid-template-columns:minmax(180px,1.6fr) minmax(110px,.7fr) minmax(120px,.8fr) auto;gap:7px;margin-bottom:8px}
+  .cs-quiz-catalog-toolbar input,.cs-quiz-catalog-toolbar select{min-width:0;border:1px solid var(--line);background:rgba(1,14,19,.62);color:#e9eeee;border-radius:9px;padding:8px 9px;min-height:38px}
+  .cs-quiz-catalog-summary{font-size:9px;color:#809397;line-height:1.45;margin:0 0 8px}
+  .cs-quiz-catalog-layout{display:grid;grid-template-columns:minmax(270px,.9fr) minmax(0,1.15fr);gap:9px;min-height:300px}
+  .cs-quiz-catalog-list{display:grid;gap:6px;max-height:430px;overflow:auto;padding-right:2px;align-content:start}
+  .cs-quiz-catalog-item{appearance:none;width:100%;text-align:left;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.022);color:#e7eeee;padding:9px 10px;cursor:pointer}
+  .cs-quiz-catalog-item:hover{border-color:rgba(217,182,111,.34);background:rgba(217,182,111,.04)}.cs-quiz-catalog-item.active{border-color:rgba(217,182,111,.58);background:rgba(217,182,111,.08)}
+  .cs-quiz-catalog-item-head{display:flex;align-items:center;gap:6px;font-size:8px;font-weight:900;color:#91a3a7;text-transform:uppercase;letter-spacing:.04em}.cs-quiz-catalog-item-head .voice{margin-left:auto}
+  .cs-quiz-catalog-item b{display:block;font-size:11px;line-height:1.35;margin-top:5px}
+  .cs-voice-published{color:#92ddb8}.cs-voice-local{color:#f0d18f}.cs-voice-missing{color:#e99797}
+  .cs-quiz-detail{border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(0,0,0,.10);padding:12px;min-width:0}
+  .cs-quiz-detail h4{font-size:15px;line-height:1.35;margin:2px 0 8px}.cs-quiz-detail-meta{font-size:9px;color:#8ea0a4;margin-bottom:9px}.cs-quiz-detail-source{font-size:9px;color:#d7c18d;margin-top:9px;line-height:1.45}
+  .cs-quiz-answer-preview{display:grid;gap:5px}.cs-quiz-answer-preview div{padding:7px 9px;border:1px solid var(--line);border-radius:9px;font-size:10px}.cs-quiz-answer-preview div.correct{border-color:rgba(81,199,143,.34);color:#a9e5c7;background:rgba(81,199,143,.05)}
+  .cs-quiz-detail-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.cs-quiz-detail-actions .btn{min-height:36px;font-size:10px}
+  #csQuizCatalogPlayer{width:100%;height:38px;margin-top:9px}
+  @media(max-width:900px){.cs-quiz-catalog-toolbar{grid-template-columns:1fr 1fr}.cs-quiz-catalog-toolbar input{grid-column:1/-1}.cs-quiz-catalog-layout{grid-template-columns:1fr}.cs-quiz-catalog-list{max-height:280px}}
   .cs-inventory-toolbar{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center;margin-bottom:8px}
   .cs-inventory-toolbar input{min-width:0;border:1px solid var(--line);background:rgba(1,14,19,.62);color:#e9eeee;border-radius:9px;padding:9px 10px}
   .cs-inventory-toolbar .btn{min-width:40px;min-height:38px}
@@ -616,6 +637,165 @@ function setQuizAgeBand(band){
   if(q("csAgeMin"))q("csAgeMin").value=String(range[0]);
   if(q("csAgeMax"))q("csAgeMax").value=String(range[1]);
 }
+function quizVoiceStateLabel(state){
+  if(state==="published")return"Audio live";
+  if(state==="local")return"Audio lokal";
+  return"Audio fehlt";
+}
+function quizVoiceStateClass(state){
+  return state==="published"?"cs-voice-published":state==="local"?"cs-voice-local":"cs-voice-missing";
+}
+function quizCatalogHtml(){
+  return '<div class="cs-quiz-catalog" id="csQuizCatalog">'+
+    '<div class="cs-quiz-catalog-head"><div><h3>Quiz-Fragenübersicht</h3><small>Jede Kids-Frage einzeln auswählen, Quelle prüfen und Serhat-Audio testen.</small></div><span id="csQuizCatalogCount" class="cs-quiz-catalog-count">lädt …</span></div>'+
+    '<div class="cs-quiz-catalog-toolbar">'+
+      '<input id="csQuizCatalogSearch" type="search" placeholder="Nr., Frage, Thema oder Quelle suchen …">'+
+      '<select id="csQuizCatalogAge"><option value="">Alle Altersstufen</option><option value="4-6">4–6 Jahre</option><option value="7-8">7–8 Jahre</option><option value="9-10">9–10 Jahre</option></select>'+
+      '<select id="csQuizCatalogVoice"><option value="">Alle Voice-Status</option><option value="published">Audio live</option><option value="local">Audio nur lokal</option><option value="missing">Audio fehlt</option></select>'+
+      '<button id="csQuizCatalogSync" class="btn quiet" type="button">Fehlende Stimmen syncen</button>'+
+    '</div>'+
+    '<div id="csQuizCatalogSummary" class="cs-quiz-catalog-summary">Quizbestand wird geladen …</div>'+
+    '<div class="cs-quiz-catalog-layout"><div id="csQuizCatalogList" class="cs-quiz-catalog-list"></div><div id="csQuizCatalogDetail" class="cs-quiz-detail">Frage auswählen …</div></div>'+
+  '</div>';
+}
+async function loadQuizCatalog(force=false){
+  if(quizCatalogState.loading)return;
+  if(quizCatalogState.loaded&&!force){renderQuizCatalog();return}
+  quizCatalogState.loading=true;quizCatalogState.error="";
+  renderQuizCatalog();
+  try{
+    const r=await fetch("/kids-quiz/catalog?cb="+Date.now(),{cache:"no-store"});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||d.ok===false)throw Error(d.error||"Quizbestand konnte nicht geladen werden.");
+    quizCatalogState={...d,loaded:true,loading:false,error:""};
+    if(!quizCatalogSelectedId&&d.items?.length)quizCatalogSelectedId=d.items[0].id;
+  }catch(e){
+    quizCatalogState={...quizCatalogState,loaded:false,loading:false,error:e.message||String(e)};
+  }
+  renderQuizCatalog();
+}
+function filteredQuizCatalog(){
+  const search=String(q("csQuizCatalogSearch")?.value||"").trim().toLowerCase();
+  const age=String(q("csQuizCatalogAge")?.value||"");
+  const voice=String(q("csQuizCatalogVoice")?.value||"");
+  return (quizCatalogState.items||[]).filter(item=>{
+    if(age&&item.ageBand!==age)return false;
+    if(voice&&item.voiceState!==voice)return false;
+    if(!search)return true;
+    const hay=[item.number,item.id,item.category,item.topic,item.question,item.source].join(" ").toLowerCase();
+    return hay.includes(search);
+  });
+}
+function renderQuizCatalog(){
+  const list=q("csQuizCatalogList"),detail=q("csQuizCatalogDetail"),summary=q("csQuizCatalogSummary"),count=q("csQuizCatalogCount");
+  if(!list||!detail||!summary||!count)return;
+  if(quizCatalogState.loading){
+    count.textContent="lädt …";summary.textContent="Quizbestand und Voice-Status werden frisch geladen …";list.innerHTML="";detail.textContent="Bitte kurz warten …";return;
+  }
+  if(quizCatalogState.error){
+    count.textContent="Fehler";summary.textContent=quizCatalogState.error;list.innerHTML='<button class="btn quiet" id="csQuizCatalogRetry" type="button">Erneut laden</button>';detail.textContent="";q("csQuizCatalogRetry")?.addEventListener("click",()=>loadQuizCatalog(true));return;
+  }
+  const all=quizCatalogState.items||[];
+  const rows=filteredQuizCatalog();
+  const v=quizCatalogState.voice||{};
+  count.textContent=String(quizCatalogState.total||all.length)+" Fragen";
+  summary.textContent=rows.length+" angezeigt · Audio live "+Number(v.published||0)+" · nur lokal "+Number(v.local||0)+" · fehlt "+Number(v.missing||0);
+  if(!rows.length){
+    list.innerHTML='<div class="notice">Keine Frage passt zu diesem Filter.</div>';detail.textContent="Filter ändern oder Suche leeren.";return;
+  }
+  if(!rows.some(x=>x.id===quizCatalogSelectedId))quizCatalogSelectedId=rows[0].id;
+  list.innerHTML=rows.map(item=>
+    '<button type="button" class="cs-quiz-catalog-item '+(item.id===quizCatalogSelectedId?"active":"")+'" data-cs-quiz-id="'+escapeHtml(item.id)+'">'+
+      '<span class="cs-quiz-catalog-item-head">#'+String(item.number).padStart(3,"0")+' · '+escapeHtml(item.ageBand)+' · '+escapeHtml(item.category)+'<span class="voice '+quizVoiceStateClass(item.voiceState)+'">'+quizVoiceStateLabel(item.voiceState)+'</span></span>'+
+      '<b>'+escapeHtml(item.question)+'</b>'+
+    '</button>'
+  ).join("");
+  renderQuizCatalogDetail();
+}
+function selectedQuizCatalogItem(){
+  return (quizCatalogState.items||[]).find(x=>x.id===quizCatalogSelectedId)||null;
+}
+function renderQuizCatalogDetail(){
+  const box=q("csQuizCatalogDetail"),item=selectedQuizCatalogItem();if(!box)return;
+  if(!item){box.textContent="Frage auswählen …";return}
+  const answers=(item.answers||[]).map((a,i)=>'<div class="'+(a.correct?"correct":"")+'">'+String.fromCharCode(65+i)+' · '+escapeHtml(a.label||"")+(a.correct?" · richtig":"")+'</div>').join("");
+  box.innerHTML=
+    '<div class="cs-quiz-detail-meta">#'+String(item.number).padStart(3,"0")+' · '+escapeHtml(item.ageBand)+' · '+escapeHtml(item.category)+' · <span class="'+quizVoiceStateClass(item.voiceState)+'">'+quizVoiceStateLabel(item.voiceState)+'</span></div>'+
+    '<h4>'+escapeHtml(item.question)+'</h4>'+
+    '<div class="cs-quiz-answer-preview">'+answers+'</div>'+
+    (item.explanation?'<div class="notice" style="margin-top:9px">'+escapeHtml(item.explanation)+'</div>':"")+
+    '<div class="cs-quiz-detail-source"><b>Quelle:</b> '+escapeHtml(item.source||"—")+'</div>'+
+    '<audio id="csQuizCatalogPlayer" controls preload="none" x-webkit-airplay="deny" disableremoteplayback '+(item.audioUrl?"":"hidden")+'></audio>'+
+    '<div class="cs-quiz-detail-actions">'+
+      '<button class="btn secondary" type="button" data-cs-quiz-action="play" '+(item.audioUrl?"":"disabled")+'>Serhat-Audio hören</button>'+
+      '<button class="btn quiet" type="button" data-cs-quiz-action="render">'+(item.voiceState==="missing"?"Audio erzeugen":"Audio lokal neu erzeugen")+'</button>'+
+      '<button class="btn quiet" type="button" data-cs-quiz-action="edit">In Editor übernehmen</button>'+
+    '</div>';
+}
+function bindQuizCatalogUi(){
+  q("csQuizCatalogSearch")?.addEventListener("input",renderQuizCatalog);
+  q("csQuizCatalogAge")?.addEventListener("change",renderQuizCatalog);
+  q("csQuizCatalogVoice")?.addEventListener("change",renderQuizCatalog);
+  q("csQuizCatalogSync")?.addEventListener("click",syncQuizCatalogVoice);
+  q("csQuizCatalogList")?.addEventListener("click",e=>{
+    const btn=e.target.closest?.("[data-cs-quiz-id]");if(!btn)return;
+    quizCatalogSelectedId=btn.dataset.csQuizId||"";renderQuizCatalog();
+  });
+  q("csQuizCatalogDetail")?.addEventListener("click",e=>{
+    const btn=e.target.closest?.("[data-cs-quiz-action]");if(!btn)return;
+    const action=btn.dataset.csQuizAction;
+    if(action==="play")playSelectedQuizAudio();
+    else if(action==="render")renderSelectedQuizAudio(btn);
+    else if(action==="edit")useSelectedQuizInEditor();
+  });
+}
+function playSelectedQuizAudio(){
+  const item=selectedQuizCatalogItem(),player=q("csQuizCatalogPlayer");if(!item||!player||!item.audioUrl)return;
+  player.hidden=false;player.src=item.audioUrl+(item.audioUrl.includes("?")?"&":"?")+"cb="+Date.now();player.play().catch(()=>{});
+}
+async function renderSelectedQuizAudio(btn){
+  const item=selectedQuizCatalogItem();if(!item||!btn)return;
+  const old=btn.textContent;btn.disabled=true;btn.textContent="Serhat erzeugt …";
+  try{
+    const r=await fetch("/kids-quiz/render-one",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:item.id}),cache:"no-store"});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||d.ok===false)throw Error(d.error||"Audio konnte nicht erzeugt werden.");
+    quizCatalogSelectedId=item.id;
+    await loadQuizCatalog(true);
+    setStudioMessage("Frage #"+item.number+" ist lokal mit deiner Serhat-Stimme bereit. Der nächste Kids-Voice-Sync kann sie direkt veröffentlichen.","good");
+    setTimeout(playSelectedQuizAudio,80);
+  }catch(e){setStudioMessage(e.message||String(e),"bad")}
+  finally{btn.disabled=false;btn.textContent=old}
+}
+async function syncQuizCatalogVoice(){
+  const btn=q("csQuizCatalogSync");if(!btn)return;
+  const old=btn.textContent;btn.disabled=true;btn.textContent="Sync startet …";
+  try{
+    const r=await fetch("/kids-voice/sync-start",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}",cache:"no-store"});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||d.ok===false)throw Error(d.error||"Kids-Voice-Sync konnte nicht gestartet werden.");
+    setStudioMessage("Kids-Voice-Sync läuft. Fehlende Quiz-Audios werden im Hintergrund ergänzt und anschließend in die Kids-App übertragen.","good");
+    setTimeout(()=>loadQuizCatalog(true),2200);
+  }catch(e){setStudioMessage(e.message||String(e),"bad")}
+  finally{btn.disabled=false;btn.textContent=old}
+}
+function useSelectedQuizInEditor(){
+  const item=selectedQuizCatalogItem();if(!item)return;
+  setQuizAgeBand(item.ageBand);
+  if(q("csTitle"))q("csTitle").value="Quiz #"+String(item.number).padStart(3,"0")+" · "+(item.topic||item.category||"");
+  if(q("csTopic"))q("csTopic").value=item.topic||"";
+  if(q("csCategory"))q("csCategory").value=item.category||"Quiz · geprüft";
+  if(q("csSources"))q("csSources").value=item.source||"";
+  quizDraft=[{
+    question:item.question||"",
+    answers:(item.answers||[]).map(a=>({label:a.label||"",correct:!!a.correct})),
+    success:item.success||"Richtig. Sehr gut!",
+    retry:item.retry||"Noch nicht. Hör gut zu und versuch es noch einmal.",
+    explanation:item.explanation||""
+  }];
+  renderKindEditor();persistDraft();refreshQa();
+  setStudioMessage("Frage #"+item.number+" wurde in den Editor übernommen.","good");
+}
 function blankQuizQuestion(){return{question:"",answers:[{label:"",correct:true},{label:"",correct:false}],success:"Richtig.",retry:"Versuche es noch einmal.",explanation:""}}
 function setProductionPhase(phase,error=""){productionPhase=phase||"draft";productionError=error||"";renderStatus()}
 function resetEditorForKind(){
@@ -632,13 +812,14 @@ function renderKindEditor(){
   if(studioKind==="quiz"){
     wrap.hidden=false;if(!quizDraft.length)quizDraft=[blankQuizQuestion()];
     const currentBand=quizBandForRange(q("csAgeMin")?.value,q("csAgeMax")?.value);
-    body.innerHTML="<h3>Quiz-Aufbau</h3><div class=\"cs-field\" style=\"margin-bottom:10px\"><label for=\"csQuizAgeBand\">Quiz-Altersstufe</label><select id=\"csQuizAgeBand\"><option value=\"4-6\" "+(currentBand==="4-6"?"selected":"")+">4–6 Jahre</option><option value=\"7-8\" "+(currentBand==="7-8"?"selected":"")+">7–8 Jahre</option><option value=\"9-10\" "+(currentBand==="9-10"?"selected":"")+">9–10 Jahre</option></select></div>"+quizDraft.map((item,i)=>{
+    body.innerHTML=quizCatalogHtml()+"<h3>Quiz-Aufbau</h3><div class=\"cs-field\" style=\"margin-bottom:10px\"><label for=\"csQuizAgeBand\">Quiz-Altersstufe</label><select id=\"csQuizAgeBand\"><option value=\"4-6\" "+(currentBand==="4-6"?"selected":"")+">4–6 Jahre</option><option value=\"7-8\" "+(currentBand==="7-8"?"selected":"")+">7–8 Jahre</option><option value=\"9-10\" "+(currentBand==="9-10"?"selected":"")+">9–10 Jahre</option></select></div>"+quizDraft.map((item,i)=>{
       const answers=Array.isArray(item.answers)?item.answers:[];
       const opts=[0,1,2,3].map(ai=>"<option value=\""+ai+"\" "+(answers[ai]?.correct?"selected":"")+">"+String.fromCharCode(65+ai)+"</option>").join("");
       const ans=[0,1,2,3].map(ai=>{const a=answers[ai]||{};return "<div class=\"cs-field\"><label>Antwort "+String.fromCharCode(65+ai)+"</label><input data-q-answer=\""+ai+"\" data-q-index=\""+i+"\" value=\""+escapeHtml(a.label||"")+"\"></div>"}).join("");
       return "<div class=\"cs-question\" data-cs-question=\""+i+"\"><div class=\"cs-question-head\"><b>Frage "+(i+1)+"</b><button type=\"button\" data-cs-remove-question=\""+i+"\">Entfernen</button></div><div class=\"cs-field\"><label>Frage</label><input data-q-field=\"question\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.question||"")+"\"></div><div class=\"cs-answer-grid\">"+ans+"</div><div class=\"cs-inline-grid\" style=\"margin-top:8px\"><div class=\"cs-field\"><label>Richtige Antwort</label><select data-q-field=\"correctIndex\" data-q-index=\""+i+"\">"+opts+"</select></div><div class=\"cs-field\"><label>Erfolg</label><input data-q-field=\"success\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.success||"Richtig.")+"\"></div></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Nochmal versuchen</label><input data-q-field=\"retry\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.retry||"Versuche es noch einmal.")+"\"></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Kurze Erklärung nach richtiger Antwort</label><input data-q-field=\"explanation\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.explanation||"")+"\"></div></div>";
     }).join("")+"<button class=\"btn quiet cs-add\" type=\"button\" data-cs-add-question>+ Frage hinzufügen</button>";
     q("csQuizAgeBand")?.addEventListener("change",e=>{setQuizAgeBand(e.target.value);persistDraft();refreshQa()});
+    setTimeout(()=>{bindQuizCatalogUi();loadQuizCatalog();},0);
   }else if(studioKind==="game"){
     wrap.hidden=false;
     body.innerHTML="<h3>Spiel-Aufbau</h3><div class=\"cs-inline-grid\"><div class=\"cs-field\"><label>Spieltyp</label><select id=\"csGameType\"><option value=\"choice\">Auswahlspiel</option><option value=\"listen\">Hörspiel</option><option value=\"memory\">Merkspiel</option><option value=\"sequence\">Reihenfolge</option></select></div><div class=\"cs-field\"><label>Kurzbeschreibung</label><input id=\"csGameSummary\" value=\""+escapeHtml(gameDraft.summary||"")+"\"></div></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Anleitung</label><textarea id=\"csGameInstructions\">"+escapeHtml(gameDraft.instructions||"")+"</textarea></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Serhat-Sprachbausteine · eine Zeile pro Satz</label><textarea id=\"csGameVoiceCues\" placeholder=\"Sehr gut!&#10;Versuche es noch einmal.\">"+escapeHtml((gameDraft.voiceCues||[]).join("\\n"))+"</textarea></div>";
