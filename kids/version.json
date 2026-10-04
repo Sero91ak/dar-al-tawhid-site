@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v18-quiz200-reward1095",
+  "buildId": "kids-shell-v18-quiz250-reward1095",
   "label": "KIDS · V1.07.24",
   "releasedAt": "2026-10-04T09:00:00Z",
-  "note": "DĀR AL TAWḤĪD Kids Quiz umfasst jetzt 250 eigenständige, altersgerechte und quellengebundene Fragen (001–250), vollständig getrennt vom normalen DĀR/iOS-Quiz. Alterslogik, Quellen/Erklärungen, audio-first für 4–6 und Serhat-Owner-Voice-Autosync bleiben aktiv.",
+  "note": "DĀR AL TAWḤĪD Kids Quiz umfasst jetzt 250 eigenständige, altersgerechte und quellengebundene Fragen (001–250), vollständig getrennt vom normalen DĀR/iOS-Quiz. Die drei realistischen, lokal/offline gebündelten Bildwelten passen sich an 4–6, 7–8 und 9–10 an; responsive Touch-UX, Quellen/Erklärungen, audio-first für 4–6, Serhat-Owner-Voice und altersabhängige Erfolgsanimation bleiben aktiv.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -267,7 +267,7 @@
     "kidsQuizManifestNetworkFirst": true,
     "kidsQuizReleaseGuard": true,
     "quizVisualSystem": {
-      "version": "age-adaptive-realistic-v4",
+      "version": "age-adaptive-realistic-v5",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
       "questionCount": 250,
