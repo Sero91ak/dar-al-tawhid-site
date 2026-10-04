@@ -45,7 +45,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.68"
+ENGINE_VERSION="2.9.69"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_DIR=VOICE_HOME/"MasterPronunciations"
@@ -1914,6 +1914,41 @@ def _encode_kids_m4a(src:Path,dst:Path):
         raise RuntimeError("Kids-App-Audio konnte nicht erstellt werden. "+(p.stderr or "")[-800:])
     os.replace(tmp,dst)
     return dst
+
+def _install_story_audio_upload(data_url:str,original_name:str=""):
+    """Nimmt eine vom Besitzer ausgewählte Story-Audiodatei sicher lokal entgegen.
+
+    Die Quelldatei bleibt nur bis zur Veröffentlichung im temporären Output-Ordner.
+    In die Kids-App gelangt ausschließlich die normalisierte AAC/M4A-Ausgabe.
+    """
+    value=str(data_url or "").strip()
+    m=re.match(r"^data:(audio/[A-Za-z0-9.+-]+);base64,(.+)$",value,re.S)
+    if not m:
+        raise ValueError("Die gewählte Datei ist kein gültiges Audio.")
+    mime=m.group(1).lower()
+    allowed={
+        "audio/wav":".wav","audio/x-wav":".wav","audio/wave":".wav","audio/vnd.wave":".wav",
+        "audio/mp4":".m4a","audio/m4a":".m4a","audio/x-m4a":".m4a",
+        "audio/aac":".aac","audio/x-aac":".aac",
+        "audio/mpeg":".mp3","audio/mp3":".mp3"
+    }
+    if mime not in allowed:
+        raise ValueError("Audioformat nicht erlaubt. Verwende WAV, M4A/AAC oder MP3.")
+    try:
+        payload=base64.b64decode(m.group(2),validate=True)
+    except Exception as e:
+        raise ValueError("Die Audiodatei ist beschädigt.") from e
+    if len(payload)<1024:
+        raise ValueError("Die Audiodatei ist leer oder zu klein.")
+    if len(payload)>64*1024*1024:
+        raise ValueError("Die Audiodatei ist größer als 64 MB.")
+    upload=OUTPUT/f"story_audio_upload_{uuid.uuid4().hex[:12]}{allowed[mime]}"
+    upload.write_bytes(payload)
+    return upload,{
+        "filename":str(original_name or upload.name),
+        "mime":mime,
+        "bytes":len(payload),
+    }
 
 def _slot_asset_name(kind:str,key:str):
     return (key if kind=="harakat" else kind)+".m4a"
@@ -6697,7 +6732,7 @@ def start_prophet_story_voice_pack(resume:bool=False):
     time.sleep(.05)
     return _prophet_batch_snapshot()
 
-def publish_manual_prophet_story(item_id:str,age:str,text:str):
+def publish_manual_prophet_story(item_id:str,age:str,text:str,source_path:Path|None=None,source_name:str=""):
     item_id=str(item_id or "").strip()
     requested=str(age or "all").strip()
     text=str(text or "").strip()
@@ -6713,9 +6748,10 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str):
     if len(text)<40:
         raise ValueError("Erzähltext ist zu kurz.")
     st=get_status()
-    src=Path(str(st.get("last_output") or ""))
+    src=Path(source_path) if source_path else Path(str(st.get("last_output") or ""))
+    manual_upload=bool(source_path)
     if not src.exists() or src.stat().st_size<=44:
-        raise ValueError("Zuerst Audio erzeugen und anhören.")
+        raise ValueError("Zuerst Audio erzeugen oder eine Audiodatei hochladen.")
     git=shutil.which("git")
     if not git:
         raise RuntimeError("git fehlt.")
@@ -6757,9 +6793,11 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str):
         "sha256":hashlib.sha256(first_asset.read_bytes()).hexdigest(),
         "voiceProfile":"kids_story",
         "voiceProfileId":"serhat-owner-voice-2026",
-        "source":"DĀR Voice Studio local engine",
+        "source":"DĀR Voice Studio manual owner-audio upload" if manual_upload else "DĀR Voice Studio local engine",
         "sourceSpeaker":"Serhat Abu Malik",
+        "sourceFile":str(source_name or src.name),
         "manual":True,
+        "manualUpload":manual_upload,
         "allAges":requested in ("","all","auto","*"),
         "modes":["read","listen"],
         "technicalQaPassed":True,
@@ -6774,9 +6812,14 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str):
         audio[a]={**meta,"url":f"/kids/assets/prophet-story-audio/{item_id}/{a}.m4a?v={stamp}"}
         rels.append(str(asset.relative_to(repo)))
     item["scripts"]=scripts
+    if len(target_ages)==3:
+        item["voiceScript"]=text
     item["audio"]=audio
     manifest["updatedAt"]=time.strftime("%Y-%m-%d")
     atomic_write_json(data_path,manifest)
+    # Lokale Bibliothek sofort synchron halten, damit derselbe Text/Audio-Status
+    # nach Reload der Voice App erhalten bleibt und nicht aus einem alten Cache kommt.
+    atomic_write_json(APP_HOME/"prophet-stories.json",manifest)
     p=rr([git,"-C",str(repo),"add","kids/data/prophet-stories.json",*rels],60)
     if p.returncode!=0:
         raise RuntimeError("Git staging fehlgeschlagen.")
@@ -6808,7 +6851,7 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str):
 
 
 
-def publish_manual_mubashshirun_story(item_id:str,age:str,text:str):
+def publish_manual_mubashshirun_story(item_id:str,age:str,text:str,source_path:Path|None=None,source_name:str=""):
     item_id=str(item_id or "").strip()
     age=str(age or "").strip()
     text=str(text or "").strip()
@@ -6821,9 +6864,10 @@ def publish_manual_mubashshirun_story(item_id:str,age:str,text:str):
         raise ValueError("Erzähltext ist zu kurz.")
 
     st=get_status()
-    src=Path(str(st.get("last_output") or ""))
+    src=Path(source_path) if source_path else Path(str(st.get("last_output") or ""))
+    manual_upload=bool(source_path)
     if not src.exists() or src.stat().st_size<=44:
-        raise ValueError("Zuerst Audio erzeugen und vollständig prüfen.")
+        raise ValueError("Zuerst Audio erzeugen oder eine Audiodatei hochladen.")
 
     git=shutil.which("git")
     if not git:
@@ -6875,8 +6919,10 @@ def publish_manual_mubashshirun_story(item_id:str,age:str,text:str):
         "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
         "voiceProfile":"kids_story",
         "voiceProfileId":"serhat-owner-voice-2026",
-        "source":"DĀR Voice Studio local engine",
+        "source":"DĀR Voice Studio manual owner-audio upload" if manual_upload else "DĀR Voice Studio local engine",
         "sourceSpeaker":"Serhat Abu Malik",
+        "sourceFile":str(source_name or src.name),
+        "manualUpload":manual_upload,
         "age":age,
         "modes":["read","listen"],
         "technicalQaPassed":True,
@@ -7344,8 +7390,51 @@ class H(BaseHTTPRequestHandler):
         n=int(self.headers.get("Content-Length","0") or 0)
         if p=="/arabic-reference" and n>46*1024*1024:
             return self.send_json(413,{"ok":False,"error":"Arabische Referenzdatei ist zu groß."})
+        if p=="/story-media/upload" and n>90*1024*1024:
+            return self.send_json(413,{"ok":False,"error":"Story-Audiodatei ist zu groß. Maximal 64 MB Audio hochladen."})
         try:data=json.loads(self.rfile.read(n) or b"{}")
         except Exception:return self.send_json(400,{"error":"Ungültiges JSON"})
+
+        if p=="/story-media/upload":
+            upload=None
+            try:
+                kind=str(data.get("kind") or "").strip().lower()
+                item_id=str(data.get("id") or "").strip()
+                age=str(data.get("age") or "").strip()
+                text=str(data.get("text") or "").strip()
+                filename=str(data.get("filename") or "").strip()
+                upload,info=_install_story_audio_upload(
+                    str(data.get("dataUrl") or ""),
+                    filename
+                )
+                if kind=="prophet":
+                    result=publish_manual_prophet_story(
+                        item_id,age or "all",text,
+                        source_path=upload,source_name=info["filename"]
+                    )
+                elif kind in ("sahabi","ṣaḥābī","mubashshirun"):
+                    result=publish_manual_mubashshirun_story(
+                        item_id,age,text,
+                        source_path=upload,source_name=info["filename"]
+                    )
+                else:
+                    raise ValueError("Story-Typ muss Prophet oder Ṣaḥābī sein.")
+                result["upload"]={
+                    "filename":info["filename"],
+                    "bytes":info["bytes"],
+                    "mime":info["mime"],
+                }
+                return self.send_json(200,result)
+            except ValueError as e:
+                return self.send_json(422,{"ok":False,"error":str(e)})
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e)})
+            finally:
+                try:
+                    if upload is not None:
+                        Path(upload).unlink(missing_ok=True)
+                except Exception:
+                    pass
 
         if p=="/warmup":
             st=get_status()
