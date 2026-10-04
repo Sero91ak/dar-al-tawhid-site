@@ -8926,6 +8926,9 @@ class H(BaseHTTPRequestHandler):
             "/mobile/voice-studio-icon.png",
             "/mobile/apple-touch-icon.png",
             "/mobile/apple-touch-icon-precomposed.png",
+            "/apple-touch-icon.png",
+            "/apple-touch-icon-precomposed.png",
+            "/favicon.png",
         }
         if not self.remote_authorized() and p not in public_mobile_assets:
             return self.reject_remote()
@@ -9032,6 +9035,9 @@ class H(BaseHTTPRequestHandler):
             "/mobile/voice-studio-icon.png",
             "/mobile/apple-touch-icon.png",
             "/mobile/apple-touch-icon-precomposed.png",
+            "/apple-touch-icon.png",
+            "/apple-touch-icon-precomposed.png",
+            "/favicon.png",
         ):
             self.send_file(APP_HOME/"voice-studio-icon.png","image/png")
         elif p=="/mobile/manifest.webmanifest":
@@ -9046,8 +9052,8 @@ class H(BaseHTTPRequestHandler):
                 "theme_color":"#f7f7f5",
                 "orientation":"any",
                 "icons":[
-                    {"src":"/mobile/apple-touch-icon.png?v=2980","sizes":"256x256","type":"image/png","purpose":"any"},
-                    {"src":"/mobile/voice-studio-icon.png?v=2980","sizes":"256x256","type":"image/png","purpose":"maskable"}
+                    {"src":"/mobile/apple-touch-icon.png?v=2990","sizes":"256x256","type":"image/png","purpose":"any"},
+                    {"src":"/mobile/voice-studio-icon.png?v=2990","sizes":"256x256","type":"image/png","purpose":"maskable"}
                 ]
             })
         elif p=="/mobile/history":
