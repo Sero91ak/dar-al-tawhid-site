@@ -14,9 +14,9 @@ function syncStoryTextStandard(){
   return next;
 }
 const URLS=[
-  "/mubashshirun/library?cb="+Date.now(),
+  "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/kids/data/mubashshirun-stories.json?cb="+Date.now(),
   "https://dar-al-tawhid.de/kids/data/mubashshirun-stories.json?cb="+Date.now(),
-  "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/kids/data/mubashshirun-stories.json?cb="+Date.now()
+  "/mubashshirun/library?cb="+Date.now()
 ];
 async function engineRequest(path,options={}){
   if(typeof window.localRequest==="function")return window.localRequest(path,options);
@@ -65,7 +65,7 @@ function ensurePanel(){
   const host=$(".editor-panel");if(!host||$("#mubVoicePack"))return;
   const p=document.createElement("section");p.id="mubVoicePack";
   p.innerHTML=
-    '<div class="mvp-head"><div><div class="mvp-kicker">Kids · al-ʿAšarah al-Mubaššarūn</div><h2>Die zehn Mubaschschirūn</h2><div class="mvp-sub">Quellengeprüfte Texte sind fertig vorbereitet. Ṣaḥābī wählen · Altersfassung laden · Fuṣḥā prüfen · Serhat-Audio erzeugen.</div></div>'+
+    '<div class="mvp-head"><div><div class="mvp-kicker">Kids · al-ʿAšarah al-Mubaššarūn</div><h2>Die zehn Mubaschschirūn</h2><div class="mvp-sub">Neue Lebensgeschichten sind fertig vorbereitet. Ṣaḥābī wählen · Altersfassung laden · Fuṣḥā prüfen · Serhat-Audio neu erzeugen.</div></div>'+
     '<div class="mvp-age"><button type="button" data-mvp-age="4-5">4–5</button><button type="button" data-mvp-age="6-8" class="active">6–8</button><button type="button" data-mvp-age="9-10">9–10</button></div></div>'+
     '<div id="mvpGrid" class="mvp-grid"><div class="notice">Lade 10 Ṣaḥābah …</div></div>'+
     '<div id="mvpSelected" class="mvp-selected" hidden></div>'+
