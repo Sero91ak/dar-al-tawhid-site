@@ -1022,7 +1022,10 @@ function directReferenceKind(){
   return"story";
 }
 function localReferenceLearningAvailable(){
-  try{return typeof localRequest==="function"&&typeof IS_LOCAL!=="undefined"&&Boolean(IS_LOCAL)}catch(_){return false}
+  // localRequest routes either straight to the Mac engine or through the authenticated
+  // same-origin Cloud GPU gateway. Owner audio/text memory therefore works on Mac,
+  // iPhone and iPad without requiring a local IP connection.
+  try{return typeof localRequest==="function"}catch(_){return false}
 }
 async function registerDirectAudioLearning(){
   if(!directAudioReadyForCurrentText()||!localReferenceLearningAvailable())return null;
