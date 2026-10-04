@@ -476,7 +476,7 @@ function setBatchUi(state){
     const published=Boolean(state?.repoPublished);
     const publishMsg=String(state?.repoPublishMessage||state?.repoPublishError||"").trim();
     line.textContent=published
-      ?"Fertig: Fuṣḥā-Alphabet, Quiz und Begrüßung wurden mit deiner Serhat-Stimme erzeugt und direkt in die Kids-App übertragen. Duʿāʾ, Wissen und Kurzgeschichten laufen separat über den automatischen Kids-Voice-Sync."
+      ?"Fertig: Alphabet + Quiz + Begrüßung wurden mit deiner Serhat-Stimme erzeugt und direkt in die Kids-App übertragen. Duʿāʾ, Wissen und Kurzgeschichten laufen separat über den automatischen Kids-Voice-Sync."
       :"Audio-Paket vollständig erzeugt. "+(publishMsg||"Der automatische GitHub-Push ist auf diesem Mac noch nicht angemeldet.");
     line.style.color=published?"var(--green)":"var(--amber)";
     return;
