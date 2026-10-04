@@ -199,8 +199,8 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/library-app\.css(?:\?v=[^"']*)?/g, "library-app.css?v=1227-hero-depth");
   html = html.replace(/library-app\.js(?:\?v=[^"']*)?/g, "library-app.js?v=1227-library");
   // DAR_ILM_START_PHASE1_CACHE
-  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-active-v1233b");
-  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-active-v1233b");
+  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-canopy-v1233c");
+  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-canopy-v1233c");
 
   // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
