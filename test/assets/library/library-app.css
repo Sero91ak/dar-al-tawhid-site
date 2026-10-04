@@ -2347,3 +2347,160 @@ html[data-theme="dar-al-layl"]{
     min-height:340px;
   }
 }
+
+
+/* DAR_LIBRARY_EDITORIAL_RESPACE_V1245 */
+.lib-page[data-library-root] .lib-hero{
+  min-height:clamp(248px,48vw,340px);
+  align-items:center;
+  padding:clamp(26px,5.6vw,42px);
+  background:
+    linear-gradient(90deg,
+      var(--dar-lib-hero-overlay-start) 0%,
+      color-mix(in srgb,var(--dar-lib-hero-overlay-mid) 94%,transparent) 40%,
+      color-mix(in srgb,var(--dar-lib-hero-overlay-end) 76%,transparent) 64%,
+      color-mix(in srgb,var(--bg) 14%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 10%,transparent),
+      color-mix(in srgb,var(--bg) 34%,transparent)),
+    var(--dar-lib-cinema-image) 84% center/cover no-repeat;
+  border-radius:0 0 28px 28px;
+}
+.lib-page[data-library-root] .lib-hero-inner{
+  width:min(58%,590px);
+  max-width:590px;
+}
+.lib-page[data-library-root] .lib-hero h2{
+  font-size:clamp(2rem,7.8vw,3.35rem);
+  line-height:.96;
+  margin-bottom:7px;
+}
+.lib-page[data-library-root] .lib-hero-lead{
+  font-family:var(--font-display,var(--serif,Georgia,serif));
+  font-size:clamp(1.28rem,5vw,1.9rem);
+  line-height:1.02;
+  font-weight:720;
+  color:var(--text);
+  margin-bottom:9px;
+}
+.lib-page[data-library-root] .lib-hero-note{
+  max-width:31rem;
+  line-height:1.48;
+}
+.lib-page[data-library-root] .lib-hero-stats{
+  gap:8px;
+  margin-top:16px;
+}
+.lib-page[data-library-root] .lib-hero-stat{
+  min-height:32px;
+  padding:5px 11px;
+  font-size:.71rem;
+}
+.lib-page[data-library-root] .lib-toolbar{
+  margin-top:16px;
+  margin-bottom:24px;
+  padding:10px;
+  gap:10px;
+}
+.lib-page[data-library-root] .lib-section{
+  margin-bottom:34px;
+}
+.lib-page[data-library-root] .lib-section-head,
+.lib-portals-head{
+  margin-bottom:16px;
+}
+.lib-page[data-library-root] .lib-section-head h3,
+.lib-portals-head h3{
+  font-size:clamp(1.18rem,4.6vw,1.52rem);
+}
+.lib-page[data-library-root] .lib-shelf-row{
+  gap:17px;
+  padding-bottom:14px;
+}
+.lib-page[data-library-root] .lib-shelf-row .lib-card{
+  flex:0 0 clamp(146px,42vw,188px);
+}
+.lib-portals{
+  margin:8px 0 38px;
+}
+.lib-portals-head-main{
+  gap:16px;
+}
+.lib-portals-head p{
+  font-size:.76rem;
+}
+.lib-portal-grid{
+  gap:12px;
+  border-top:0;
+}
+.lib-portal{
+  min-height:96px;
+  padding:18px 18px 16px!important;
+  border:1px solid var(--dar-lib-rule-soft)!important;
+  border-radius:18px;
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--card) 84%,transparent),
+      color-mix(in srgb,var(--panel) 70%,transparent));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--text) 5%,transparent),
+    0 10px 24px color-mix(in srgb,var(--bg) 72%,transparent);
+}
+.lib-portal:hover,
+.lib-portal:focus-visible{
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--gold2) 7%,var(--card)),
+      color-mix(in srgb,var(--panel) 78%,transparent));
+}
+.lib-portal-art{
+  width:48%;
+  opacity:.075;
+}
+.lib-portal-name{
+  font-size:clamp(1rem,4vw,1.18rem);
+  line-height:1.18;
+}
+.lib-portal-count{
+  align-self:end;
+  font-size:.74rem;
+}
+@media(max-width:520px){
+  .lib-page[data-library-root] .lib-hero{
+    min-height:300px;
+    padding:26px 22px 24px;
+    background:
+      linear-gradient(90deg,
+        var(--dar-lib-hero-overlay-start) 0%,
+        color-mix(in srgb,var(--dar-lib-hero-overlay-mid) 94%,transparent) 49%,
+        color-mix(in srgb,var(--dar-lib-hero-overlay-end) 58%,transparent) 72%,
+        color-mix(in srgb,var(--bg) 6%,transparent) 100%),
+      var(--dar-lib-cinema-image) 88% center/cover no-repeat;
+  }
+  .lib-page[data-library-root] .lib-hero-inner{
+    width:64%;
+  }
+  .lib-page[data-library-root] .lib-hero-stats{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .lib-page[data-library-root] .lib-hero-stat{
+    min-width:0;
+  }
+  .lib-portal-grid{
+    grid-template-columns:1fr;
+  }
+  .lib-portal{
+    min-height:88px;
+  }
+}
+@media(min-width:700px){
+  .lib-portal-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(min-width:1100px){
+  .lib-portal-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+}
