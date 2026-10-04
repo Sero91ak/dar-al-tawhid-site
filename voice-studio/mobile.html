@@ -137,10 +137,29 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",finalAudioName:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],wordResultSerial:0,generating:false};
+const LOCAL_ENGINE_HOST=location.port==="8787"||location.hostname==="127.0.0.1"||location.hostname==="localhost"||/^192\.168\./.test(location.hostname)||/^10\./.test(location.hostname)||/^172\.(1[6-9]|2\d|3[01])\./.test(location.hostname);
+const REMOTE_ENGINE_API="/voice-studio/api/engine";
+const API_BASE=LOCAL_ENGINE_HOST?"":REMOTE_ENGINE_API;
+const apiUrl=path=>API_BASE+path;
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-async function api(path,opts={}){return fetch(path,{credentials:"include",cache:"no-store",...opts,headers:{"Content-Type":"application/json",...(opts.headers||{})}})}
+function askCloudAccessToken(){if(LOCAL_ENGINE_HOST)return "";return String(window.prompt("DĀR Voice Zugangscode","")||"").trim()}
+async function establishCloudAccess(code){
+  const token=String(code||"").trim();
+  if(LOCAL_ENGINE_HOST||!token)return false;
+  const response=await fetch("/voice-studio/api/access",{method:"POST",credentials:"include",cache:"no-store",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:token})});
+  return response.ok;
+}
+async function api(path,opts={},retried=false){
+  const headers={"Content-Type":"application/json",...(opts.headers||{})};
+  const response=await fetch(apiUrl(path),{credentials:"include",cache:"no-store",...opts,headers});
+  if(!LOCAL_ENGINE_HOST&&response.status===401&&!retried){
+    const token=askCloudAccessToken();
+    if(token&&await establishCloudAccess(token))return api(path,opts,true);
+  }
+  return response;
+}
 async function health(){
   try{
     const r=await api("/health");const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"offline");
@@ -252,7 +271,7 @@ async function playLiveChunk(index){
   state.liveStreamActive=true;
   state.livePreviewName=String(row.name||"");
   const prefetched=state.liveChunkUrls.get(state.livePreviewName)||await prefetchLiveChunk(index);
-  audio.src=prefetched||("/mobile/audio?name="+encodeURIComponent(state.livePreviewName));
+  audio.src=prefetched||apiUrl("/mobile/audio?name="+encodeURIComponent(state.livePreviewName));
   $("#player").classList.add("show");
   $(".player-title").textContent=index===0?"Sofort-Vorschau":"Live-Audio";
   $("#playerMeta").textContent="Abschnitt "+(index+1)+" · Rest wird parallel weiter erzeugt";
@@ -359,7 +378,7 @@ async function waitGenerationJob(jobId,onProgress){
 async function applyGenerationJobResult(job,useLibrary,{autoplayIfShort=true}={}){
   const outputName=String(job?.outputName||"").trim();
   if(!outputName)throw Error("Fertige Audiodatei fehlt.");
-  const finalUrl="/mobile/audio?name="+encodeURIComponent(outputName);
+  const finalUrl=apiUrl("/mobile/audio?name="+encodeURIComponent(outputName));
   if(job?.render)activateLivePreview(job.render);
   revokeIfBlob(state.audioUrl);
   state.audioBlob=null;state.audioUrl=finalUrl;state.finalAudioName=outputName;state.finalReady=true;

@@ -1,5 +1,6 @@
 // owner-voice-config-recovery-20261004
 import { elevenKey, isVoiceConfigured, synthesizeDarVoice } from "./video-studio/voice.js";
+import { darVoiceGpuConfigured, darVoiceGpuPublicStatus, darVoiceWebAccessConfigured, darVoiceWebAuthorized, darVoiceWebCodeAuthorized, darVoiceWebSessionCookie, proxyDarVoiceGpuRequest } from "./voice-studio-gpu-gateway.js";
 
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX_REQUESTS = 8;
@@ -28,17 +29,21 @@ function assertVoiceStudioOrigin(request, env) {
   const referer = String(request.headers.get("Referer") || "").trim();
   const allowed = String(env.ALLOWED_ORIGIN || "https://dar-al-tawhid.de").replace(/\/$/, "");
   const local = /^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/i.test(origin);
-  const validOrigin = origin === allowed || origin === "https://www.dar-al-tawhid.de" || local;
+  const validReferer =
+    !referer ||
+    referer.startsWith(allowed + "/voice-studio/") ||
+    referer.startsWith("https://www.dar-al-tawhid.de/voice-studio/") ||
+    referer.startsWith(allowed + "/voice/") ||
+    referer.startsWith("https://www.dar-al-tawhid.de/voice/") ||
+    referer.startsWith(allowed + "/kids/") ||
+    referer.startsWith("https://www.dar-al-tawhid.de/kids/");
+  const validOrigin =
+    origin === allowed ||
+    origin === "https://www.dar-al-tawhid.de" ||
+    local ||
+    (!origin && Boolean(referer) && validReferer);
   if (!validOrigin) throw httpError("Voice Studio Anfrage nicht erlaubt", 403);
-
-  if (referer && !local) {
-    const validReferer =
-      referer.startsWith(allowed + "/voice-studio/") ||
-      referer.startsWith("https://www.dar-al-tawhid.de/voice-studio/") ||
-      referer.startsWith(allowed + "/kids/") ||
-      referer.startsWith("https://www.dar-al-tawhid.de/kids/");
-    if (!validReferer) throw httpError("Voice Studio Referer nicht erlaubt", 403);
-  }
+  if (referer && !local && !validReferer) throw httpError("Voice Studio Referer nicht erlaubt", 403);
 }
 
 function isOwnerAutomationAuthorized(request, env) {
@@ -200,15 +205,64 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
   if (!url.pathname.startsWith("/voice-studio/api")) return null;
   const rest = url.pathname.slice("/voice-studio/api".length) || "/";
 
+  if (request.method === "POST" && rest === "/access") {
+    assertVoiceStudioOrigin(request, env);
+    if (!darVoiceWebAccessConfigured(env)) {
+      return json({
+        ok: false,
+        error: "DĀR Voice Cloud-Zugang ist serverseitig noch nicht aktiviert.",
+        accessSetupRequired: true
+      }, cors, 503);
+    }
+    const body = await request.json().catch(() => ({}));
+    const code = String(body.code || request.headers.get("X-DAR-Voice-Access") || "").trim();
+    if (!darVoiceWebCodeAuthorized(code, env)) {
+      return json({ ok: false, error: "DĀR Voice Zugangscode ist nicht korrekt.", accessRequired: true }, cors, 401);
+    }
+    const cookie = await darVoiceWebSessionCookie(env);
+    return new Response(JSON.stringify({ ok: true, session: "httpOnly", expiresInSeconds: 2592000 }), {
+      status: 200,
+      headers: {
+        ...cors,
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "no-store, max-age=0",
+        "Set-Cookie": cookie
+      }
+    });
+  }
+
+  if (rest === "/engine" || rest.startsWith("/engine/")) {
+    assertVoiceStudioOrigin(request, env);
+    if (!darVoiceWebAccessConfigured(env)) {
+      return json({
+        ok: false,
+        error: "DĀR Voice Cloud-Zugang ist serverseitig noch nicht aktiviert.",
+        accessSetupRequired: true
+      }, cors, 503);
+    }
+    if (!(await darVoiceWebAuthorized(request, env))) {
+      return json({
+        ok: false,
+        error: "DĀR Voice Zugangscode erforderlich.",
+        accessRequired: true
+      }, cors, 401);
+    }
+    const enginePath = rest.slice("/engine".length) || "/";
+    return proxyDarVoiceGpuRequest(request, env, cors, enginePath);
+  }
+
   if (request.method === "GET" && rest === "/health") {
-    const configured = isVoiceConfigured(env);
+    const gpu = darVoiceGpuPublicStatus(env);
+    const elevenConfigured = isVoiceConfigured(env);
+    const configured = darVoiceGpuConfigured(env) || elevenConfigured;
     return json({
       ok: configured,
       service: "dar-voice-studio-cloud",
-      provider: configured ? "ElevenLabs Cloud" : "Cloud Voice nicht konfiguriert",
+      provider: gpu.configured ? "DĀR Voice Remote GPU" : (elevenConfigured ? "ElevenLabs Cloud" : "Cloud Voice nicht konfiguriert"),
       voiceConfigured: configured,
+      remoteGpu: gpu,
       localEngineRequired: false,
-      output: "audio/mpeg",
+      output: gpu.configured ? "engine-native" : "audio/mpeg",
       ownerBatchEnabled: true,
       storyAlignment: "elevenlabs-forced-alignment-v1"
     }, cors, configured ? 200 : 503);

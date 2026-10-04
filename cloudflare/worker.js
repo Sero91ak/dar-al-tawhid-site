@@ -199,6 +199,9 @@ export default {
           videoStudioShotstack: Boolean(String(env.SHOTSTACK_API_KEY || "").trim()),
           videoStudioSigning: Boolean(String(env.VIDEO_STUDIO_SIGNING_SECRET || "").trim()),
           videoStudioShotstackHost: String(env.SHOTSTACK_HOST || "https://api.shotstack.io/edit/stage"),
+          voiceGpuOriginConfigured: Boolean(String(env.DAR_VOICE_GPU_ORIGIN || "").trim()),
+          voiceGpuTokenConfigured: Boolean(String(env.DAR_VOICE_GPU_TOKEN || "").trim()),
+          voiceWebAccessConfigured: Boolean(String(env.DAR_VOICE_WEB_TOKEN || "").trim()),
           scheduler: "ready"
         }, cors);
       }
@@ -2224,7 +2227,7 @@ function corsHeaders(request, env) {
   return {
     "Access-Control-Allow-Origin": allowOrigin,
     "Access-Control-Allow-Methods": "GET,POST,PATCH,DELETE,OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Admin-Secret",
+    "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Admin-Secret,X-DAR-Voice-Access",
     "Access-Control-Max-Age": "86400",
     "Vary": "Origin"
   };
