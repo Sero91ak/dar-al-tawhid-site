@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v30-quiz650-catalog1097",
+  "buildId": "kids-shell-v30-quiz650-topics-catalog1097",
   "label": "KIDS · V1.07.36",
-  "releasedAt": "2026-10-04T10:02:00Z",
-  "note": "Der eingefrorene Kids-Quizbestand mit 650 Fragen bleibt unverändert. Der vollständige Fragenkatalog ist jetzt auf iPhone und iPad leichter: zunächst werden nur 40 Treffer gerendert und weitere Fragen schrittweise nachgeladen; Suche berücksichtigt auch Quellen, und jede Frage zeigt den Status der Serhat-Owner-Voice ohne Systemstimmen-Fallback. Die sieben realistischen Themenbildwelten und die altersgerechte Quizdarstellung bleiben aktiv.",
+  "releasedAt": "2026-10-04T10:04:00Z",
+  "note": "DĀR AL TAWḤĪD Kids Quiz: 650 eigenständige Fragen bleiben eingefroren und vollständig testbar. Zusätzlich wechseln sieben realistische, lokal/offline gebündelte Themenbildwelten automatisch nach Frage, Szene und Kategorie. Der Vollkatalog lädt jetzt inkrementell in 40er-Schritten und zeigt den Serhat-Owner-Voice-Status, während die kurze altersgerechte Quizrunde erhalten bleibt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -364,7 +364,10 @@
       "catalogLoadMoreStep": 40,
       "catalogOwnerVoiceStatus": true,
       "catalogSearchIncludesSource": true,
-      "catalogYoungAudioPrimary": true
+      "catalogYoungAudioPrimary": true,
+      "catalogLoadMore": true,
+      "catalogContentVisibilityOptimization": true,
+      "catalogVoiceMissingState": true
     },
     "kidsQuizContentRevision": "001-650",
     "kidsQuizGenerationPaused": true,
