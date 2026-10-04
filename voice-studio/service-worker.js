@@ -1,4 +1,4 @@
-const CACHE="dar-voice-studio-v17";
+const CACHE="dar-voice-studio-v19";
 const SHELL=[
   "/voice-studio/",
   "/voice-studio/index.html",
@@ -34,9 +34,15 @@ self.addEventListener("fetch",event=>{
   const url=new URL(req.url);
   if(url.origin!==location.origin) return;
 
+  if(url.pathname==="/voice-studio/api"||url.pathname.startsWith("/voice-studio/api/")){
+    event.respondWith(fetch(req,{cache:"no-store"}));
+    return;
+  }
+
   const fresh =
     url.pathname==="/voice-studio/" ||
     url.pathname==="/voice-studio/index.html" ||
+    url.pathname==="/voice-studio/manifest.webmanifest" ||
     url.pathname==="/voice-studio/version.json" ||
     url.pathname==="/voice-studio/service-worker.js" ||
     url.pathname==="/voice-studio/install-mac.command" ||
