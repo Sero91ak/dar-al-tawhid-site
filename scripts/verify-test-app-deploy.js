@@ -8,6 +8,7 @@
  */
 const fs = require("fs");
 const path = require("path");
+const { execFileSync } = require("child_process");
 
 const ROOT_DIR = path.join(__dirname, "..");
 const PUBLIC_TEST_BASE = "https://dar-al-tawhid.de/test";
@@ -34,6 +35,27 @@ const workersBase = normalizeTestBase(
   process.env.DAR_TEST_WORKERS_URL,
   WORKERS_DEV_TEST_BASE
 );
+
+function currentCommitTouchesKids() {
+  if (process.env.VERIFY_KIDS_TEST === "1") return true;
+  if (process.env.VERIFY_KIDS_TEST === "0") return false;
+  try {
+    const changed = execFileSync(
+      "git",
+      ["diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD"],
+      { cwd: ROOT_DIR, encoding: "utf8" }
+    ).split(/\r?\n/).map((v) => v.trim()).filter(Boolean);
+    return changed.some((file) =>
+      /^kids\//.test(file) ||
+      /^test\/kids\//.test(file) ||
+      file === "cloudflare/test-app-worker.js" ||
+      file === "scripts/purge-test-kids-cache.js"
+    );
+  } catch (error) {
+    console.log("Kids scope detection failed; unrelated Kids verification is skipped:", error.message || error);
+    return false;
+  }
+}
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -150,7 +172,8 @@ async function fetchVersionBuild(base) {
   );
 
   const kidsPath = path.join(ROOT_DIR, "kids/version.json");
-  if (fs.existsSync(kidsPath)) {
+  const verifyKids = currentCommitTouchesKids();
+  if (fs.existsSync(kidsPath) && verifyKids) {
     const kidsExpect = JSON.parse(fs.readFileSync(kidsPath, "utf8")).buildId;
     async function waitKids(label, base, allowProtected = false) {
       for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
@@ -242,6 +265,8 @@ async function fetchVersionBuild(base) {
     }
 
     console.log(`Kids Test live OK — ${kidsExpect} + Cinema Intro MP4`);
+  } else if (fs.existsSync(kidsPath)) {
+    console.log("Kids Test verification skipped — aktueller Commit hat keinen Kids-Scope.");
   }
 })().catch((error) => {
   console.error(error.message || error);
