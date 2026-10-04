@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "build": "node scripts/cf-pages-build.js",
-    "sync-build-ids": "node scripts/sync-app-build-ids.js"
+    "sync-build-ids": "node scripts/sync-app-build-ids.js",
+    "verify-share": "node scripts/verify-global-share-design.js"
   },
   "devDependencies": {
     "wrangler": "^4.86.0"
