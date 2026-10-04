@@ -7128,7 +7128,12 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         model=None
         render_sr=24000
         preloaded={}
-        for pre_idx,(pre_lang,pre_chunk) in enumerate(plan):
+        # Interaktiv zählt "time to first audio" stärker als ein vollständiger
+        # Vorab-Scan der gesamten 5–8-Minuten-Produktion. Die ersten vier
+        # Abschnitte werden vorgeprüft; alle weiteren Cache-/Lock-Treffer werden
+        # ohnehin direkt beim jeweiligen Segment on-demand erkannt.
+        preload_scan=plan[:min(len(plan),4)] if interactive_fast else plan
+        for pre_idx,(pre_lang,pre_chunk) in enumerate(preload_scan):
             pre_mode=resolve_segment_prosody(pre_chunk,doc_mode,style)
             pre_lock=lock_key_for(pre_chunk)
             pre_lock_path=audio_lock_path(pre_lock) if pre_lock else None
