@@ -46,7 +46,10 @@ REF=REF_DE
 NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
-PORT=8787
+try:
+    PORT=int(os.environ.get("DAR_VOICE_PORT",os.environ.get("PORT","8787")) or 8787)
+except Exception:
+    PORT=8787
 ENGINE_VERSION="2.9.94"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
