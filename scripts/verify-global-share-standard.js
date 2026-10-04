@@ -27,7 +27,20 @@ function forbid(rel, src, token) {
 
 const globalRel = "assets/dar-global-share-v1225.js";
 const globalShare = file(globalRel);
-for (const token of ["/api/share-image/background", "generateFreshBackground", "adaptiveBodyLayout", "stripUiLabel", 'fillText("AUSSAGE"', 'fillText("QUELLE"']) {
+for (const token of [
+  "/api/share-image/background",
+  "generateFreshBackground",
+  "historicalFallbackBackground",
+  "HISTORICAL_SHARE_FALLBACKS",
+  "adaptiveBodyLayout",
+  "stripUiLabel",
+  'fillText("AUSSAGE"',
+  'fillText("QUELLE"',
+  "[data-image-post-open]",
+  "[data-image-dua-open]",
+  "[data-image-ayah-open]",
+  "[data-image-hadith-open]"
+]) {
   need(globalRel, globalShare, token);
 }
 for (const token of ["GENERIC_SCENES", "share-background-library", "Folgt für mehr Wissen aus Qurʾān & Sunnah", "app-store-badge-de-official.svg"]) {
@@ -51,7 +64,17 @@ if (liveFeed && testFeed && liveFeed !== testFeed) failures.push("Live/Test Prem
 
 const frauenRel = "test/assets/frauen/frauen-fiqh.js";
 const frauen = file(frauenRel);
-for (const token of ["/api/share-image/background", "frauenFreshShareBackground", "frauenAdaptiveBodyLayout", 'fillText("AUSSAGE"', 'fillText("QUELLE"']) {
+for (const token of [
+  "/api/share-image/background",
+  "frauenFreshShareBackground",
+  "frauenHistoricalFallback",
+  "FRAUEN_SHARE_FALLBACKS",
+  'profile: "women-historical"',
+  'data-frauen-share="image"',
+  "frauenAdaptiveBodyLayout",
+  'fillText("AUSSAGE"',
+  'fillText("QUELLE"'
+]) {
   need(frauenRel, frauen, token);
 }
 for (const token of ["frauenNextShareScene", 'ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah"', "app-store-badge-de-official.svg"]) {
@@ -60,7 +83,18 @@ for (const token of ["frauenNextShareScene", 'ctx.fillText("Folgt für mehr Wiss
 
 const workerRel = "cloudflare/share-image.js";
 const worker = file(workerRel);
-for (const token of ["completely new, unique", "randomSeed", "Cache-Control", "no people", "no App Store badge"]) {
+for (const token of [
+  "completely new, unique",
+  "randomSeed",
+  "Cache-Control",
+  "STANDARD DĀR SHARE PROFILE",
+  "1000–1400 years ago",
+  "WOMEN SECTION PROFILE",
+  'profile === "women-historical"',
+  "cloudflare-workers-ai",
+  "no people",
+  "no App Store badge"
+]) {
   need(workerRel, worker, token);
 }
 
