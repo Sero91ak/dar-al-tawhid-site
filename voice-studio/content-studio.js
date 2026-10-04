@@ -1587,7 +1587,8 @@ async function loadLegacyForEdit(id){
   const x=inventoryState.legacy.find(i=>i.id===id);
   if(!x){setStudioMessage("BESTAND-Inhalt wurde nicht gefunden.","bad");return}
   studioKind=studioKindForItem(x);
-  contentId=x.id||"";
+  existingStoryTarget=x.existingStory?{...x.existingStory,title:x.title||"",existingAudio:x.existingAudio||null}:null;
+  contentId=existingStoryTarget?"":(x.id||"");
   savedRevision=0;
   contentStatus="draft";
   stagingPublished=false;
@@ -1610,7 +1611,7 @@ async function loadLegacyForEdit(id){
   legacyQuestion=x.question&&typeof x.question==="object"?x.question:{};
   legacyClaimIds=Array.isArray(x.claimIds)?[...x.claimIds]:[];
   legacyTags=Array.isArray(x.tags)?[...x.tags]:["legacy-kids",x.id?("legacy-id:"+x.id):""].filter(Boolean);
-  coverAsset=x.cover?.url?x.cover:null;audioAsset=x.audio?.url?x.audio:null;audioAssetText=String(x.text||"").trim();coverFile=null;coverRemoteUrl="";resetDirectAudioSelection();
+  coverAsset=x.cover?.url?x.cover:null;audioAsset=existingStoryTarget?null:(x.audio?.url?x.audio:null);audioAssetText=existingStoryTarget?"":String(x.text||"").trim();coverFile=null;coverRemoteUrl="";resetDirectAudioSelection();
   quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
   q("csCover")?.querySelector("img")?.remove();
   if(coverAsset?.url)renderCover(coverAsset.url);
@@ -1619,14 +1620,16 @@ async function loadLegacyForEdit(id){
   if(typeof renderAnalysis==="function")renderAnalysis();
   renderStatus();refreshQa();persistDraft();
   setStudioMessage(
-    (studioKind==="dua"?"Duʿāʾ":studioKind==="narration"?"Erzählung":"Geschichte")+
-    " aus dem vorhandenen Kids-Bestand geöffnet. Text ist sofort bereit: Audio erzeugen oder fertige MP3/M4A hochladen → direkt Kids veröffentlichen.",
+    existingStoryTarget
+      ?((existingStoryTarget.kind==="prophet"?"Propheten-Geschichte":"Ṣaḥābah-Geschichte")+" · Alter "+existingStoryTarget.age.replace("-","–")+" geöffnet. Exakter vorhandener Text ist bereit: Audio erzeugen oder fertige MP3/M4A hochladen → direkt in den bestehenden Kids-Bereich.")
+      :((studioKind==="dua"?"Duʿāʾ":studioKind==="narration"?"Erzählung":"Geschichte")+" aus dem vorhandenen Kids-Bestand geöffnet. Text ist sofort bereit: Audio erzeugen oder fertige MP3/M4A hochladen → direkt Kids veröffentlichen."),
     "good"
   );
   setTimeout(()=>goToWorkflowStep("text"),80);
 }
 
 async function loadLiveForEdit(id){
+  existingStoryTarget=null;
   const x=inventoryState.live.find(i=>i.id===id);
   if(!x){setStudioMessage("Live-Inhalt wurde nicht gefunden.","bad");return}
   studioKind=studioKindForItem(x);
@@ -1671,6 +1674,7 @@ async function loadLiveForEdit(id){
 }
 
 async function loadRemoteItem(id){
+  existingStoryTarget=null;
   try{
     const d=await adminApi("/api/admin/kids-content?staging=1",{method:"GET"});
     const x=(d.index?.items||[]).find(i=>i.id===id);if(!x)return;
