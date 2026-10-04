@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v16-quiz100-reward1095",
-  "label": "KIDS · V1.07.22",
-  "releasedAt": "2026-10-04T09:02:00Z",
-  "note": "DĀR AL TAWḤĪD Kids Quiz umfasst jetzt 100 eigenständige, altersgerechte und quellengebundene Fragen (001–100), vollständig getrennt vom normalen DĀR/iOS-Quiz. Drei lokal/offline gebündelte Bildwelten passen sich an 4–6, 7–8 und 9–10 an; responsive Touch-UX, Quellen/Erklärungen, audio-first für 4–6 und altersabhängige Erfolgsanimation bleiben aktiv.",
+  "buildId": "kids-shell-v17-quiz150-reward1095",
+  "label": "KIDS · V1.07.23",
+  "releasedAt": "2026-10-04T08:54:00Z",
+  "note": "DĀR AL TAWḤĪD Kids Quiz umfasst jetzt 150 eigenständige, altersgerechte und quellengebundene Fragen (001–150), vollständig getrennt vom normalen DĀR/iOS-Quiz. Drei lokal/offline gebündelte realistische Bildwelten passen sich an 4–6, 7–8 und 9–10 an; responsive Touch-UX, Quellen/Erklärungen, audio-first für 4–6, Serhat-Owner-Voice und altersabhängige Erfolgsanimation bleiben aktiv.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -247,16 +247,16 @@
     "storyAudioSignedPreviewDependency": false,
     "kidsQuizSystem": "independent-v1",
     "kidsQuizAdultDependency": false,
-    "kidsQuizQuestionCount": 100,
+    "kidsQuizQuestionCount": 150,
     "kidsQuizAgeBands": [
       "4-6",
       "7-8",
       "9-10"
     ],
     "kidsQuizDistribution": {
-      "4-6": 36,
-      "7-8": 32,
-      "9-10": 32
+      "4-6": 54,
+      "7-8": 48,
+      "9-10": 48
     },
     "kidsQuizAudioFirstBand": "4-6",
     "kidsQuizAgeAdaptiveUx": "v1",
@@ -270,7 +270,7 @@
       "version": "age-adaptive-realistic-v4",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
-      "questionCount": 100,
+      "questionCount": 150,
       "ageBands": [
         "4-6",
         "7-8",
@@ -296,12 +296,13 @@
       "reducedMotionSafe": true,
       "batches": [
         "001-050",
-        "051-100"
+        "051-100",
+        "101-150"
       ],
       "distribution": {
-        "4-6": 36,
-        "7-8": 32,
-        "9-10": 32
+        "4-6": 54,
+        "7-8": 48,
+        "9-10": 48
       },
       "manifestDrivenArtwork": true,
       "sourcePolicy": "Qurʾān + authentische Ṣaḥīḥ-Sunnah; Quellen pro Frage",
