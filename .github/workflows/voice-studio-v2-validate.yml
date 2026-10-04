@@ -462,8 +462,8 @@ jobs:
               errors.append("Kids quiz namespace missing")
           if quiz.get("adultQuizDependency") is not False:
               errors.append("Kids quiz must be independent from adult quiz")
-          if len(items)<50:
-              errors.append(f"Kids quiz must contain at least 50 questions, got {len(items)}")
+          if len(items)<100:
+              errors.append(f"Kids quiz must contain at least 100 questions, got {len(items)}")
           if "canonicalQuizId" in quiz_path.read_text(encoding="utf-8"):
               errors.append("adult canonicalQuizId coupling returned")
 
@@ -494,10 +494,16 @@ jobs:
               if not str(item.get("source") or "").strip():
                   errors.append(qid+" source missing")
 
-          minimum={"4-6":18,"7-8":16,"9-10":16}
+          minimum={"4-6":36,"7-8":32,"9-10":32}
           for band,count in minimum.items():
               if band_counts.get(band,0)<count:
                   errors.append(f"{band} needs at least {count} questions, got {band_counts.get(band,0)}")
+          declared=quiz.get("counts") or {}
+          if int(declared.get("total") or 0)!=len(items):
+              errors.append("Kids quiz declared total does not match items")
+          for band,count in band_counts.items():
+              if int(declared.get(band) or 0)!=count:
+                  errors.append(f"Kids quiz declared count mismatch for {band}")
 
           runtime_required=[
               'data-quiz-age="4-6"',
