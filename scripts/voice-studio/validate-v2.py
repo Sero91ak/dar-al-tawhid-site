@@ -99,21 +99,27 @@ def main():
     if not master_path.exists():
         fail("islamic-master-library.json missing next to pronunciation-rules.json")
     master=load(master_path)
-    story_ref_path=Path(pron).with_name("story-reference-muhammad-2026-10-04.json")
-    if not story_ref_path.exists():
-        fail("Muhammad story reference seed missing next to pronunciation-rules.json")
-    story_ref=load(story_ref_path)
-    if int(story_ref.get("schemaVersion",0))!=1:
-        fail("story reference schemaVersion must be 1")
-    if str(story_ref.get("itemId",""))!="muhammad":
-        fail("story reference itemId must be muhammad")
-    if len(str(story_ref.get("sourceText","")).strip())<1000:
-        fail("story reference sourceText is incomplete")
-    source_audio=story_ref.get("sourceAudio") or {}
-    if str(source_audio.get("sha256",""))!="d6d7c21c76211def9e1fc6ae1acae0de92b830907218715418eeef3df6b2ad1c":
-        fail("story reference source audio fingerprint changed")
-    if not bool((story_ref.get("runtimePolicy") or {}).get("exactTextAudioReuse")):
-        fail("story reference exact-text reuse policy missing")
+    story_refs={
+        "muhammad":("story-reference-muhammad-2026-10-04.json","d6d7c21c76211def9e1fc6ae1acae0de92b830907218715418eeef3df6b2ad1c",1000),
+        "adam":("story-reference-adam-2026-10-04.json","f1e9870c8b182f1d7a564020d26ae02ba1c2750a0ec2ade27efc205499818e19",2500),
+        "idris":("story-reference-idris-2026-10-04.json","ffd834a2e64a98731603940ff6a0d758e0a5e1eac0f424468836c22acc4818d1",2000),
+    }
+    for item_id,(filename,expected_sha,min_chars) in story_refs.items():
+        story_ref_path=Path(pron).with_name(filename)
+        if not story_ref_path.exists():
+            fail(f"{item_id} story reference seed missing next to pronunciation-rules.json")
+        story_ref=load(story_ref_path)
+        if int(story_ref.get("schemaVersion",0))!=1:
+            fail(f"{item_id} story reference schemaVersion must be 1")
+        if str(story_ref.get("itemId",""))!=item_id:
+            fail(f"story reference itemId must be {item_id}")
+        if len(str(story_ref.get("sourceText","")).strip())<min_chars:
+            fail(f"{item_id} story reference sourceText is incomplete")
+        source_audio=story_ref.get("sourceAudio") or {}
+        if str(source_audio.get("sha256",""))!=expected_sha:
+            fail(f"{item_id} story reference source audio fingerprint changed")
+        if not bool((story_ref.get("runtimePolicy") or {}).get("exactTextAudioReuse")):
+            fail(f"{item_id} story reference exact-text reuse policy missing")
     master_entries=master.get("entries") or []
     rules=lib.get("rules") or []
     if len(rules)<3700: fail(f"too few pronunciation rules: {len(rules)}")
