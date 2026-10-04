@@ -17,6 +17,9 @@
     "/kids/assets/prophet-scenes/garden.webp",
     "/kids/assets/prophet-scenes/water.webp",
     "/kids/assets/prophet-scenes/ocean.webp",
+    "/kids/assets/kids-cinema/runtime/scene-1.webp",
+    "/kids/assets/kids-cinema/runtime/scene-2.webp",
+    "/kids/assets/kids-cinema/runtime/scene-3.webp",
     "/assets/post-templates/bibliothek-braun.jpg",
     "/assets/post-templates/nachtblau-buecher.jpg",
     "/assets/post-templates/gruen-moschee.jpg",
@@ -133,9 +136,9 @@
       "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
       "/kids/assets/sahaba-mubashshirun/abd-ar-rahman.jpg"
     ];
-    var makkah=["/kids/assets/prophet-scenes/desert.webp","/kids/assets/prophet-scenes/mountain.webp","/assets/post-templates/sand-buecher.jpg","/kids/assets/prophet-scenes/royal.webp"];
-    var madinah=["/kids/assets/prophet-scenes/garden.webp","/kids/assets/prophet-scenes/royal.webp","/assets/post-templates/gruen-moschee.jpg","/assets/post-templates/olive-mihrab.jpg"];
-    var ilm=["/kids/assets/prophet-scenes/library.webp","/assets/post-templates/bibliothek-braun.jpg","/assets/post-templates/nachtblau-buecher.jpg","/assets/post-templates/buecher-teal.jpg","/kids/assets/prophet-scenes/night.webp"];
+    var makkah=["/kids/assets/prophet-scenes/desert.webp","/kids/assets/prophet-scenes/mountain.webp","/assets/post-templates/sand-buecher.jpg","/kids/assets/prophet-scenes/royal.webp","/kids/assets/kids-cinema/runtime/scene-1.webp"];
+    var madinah=["/kids/assets/prophet-scenes/garden.webp","/kids/assets/prophet-scenes/royal.webp","/assets/post-templates/gruen-moschee.jpg","/assets/post-templates/olive-mihrab.jpg","/kids/assets/kids-cinema/runtime/scene-2.webp"];
+    var ilm=["/kids/assets/prophet-scenes/library.webp","/assets/post-templates/bibliothek-braun.jpg","/assets/post-templates/nachtblau-buecher.jpg","/assets/post-templates/buecher-teal.jpg","/kids/assets/prophet-scenes/night.webp","/kids/assets/kids-cinema/runtime/scene-3.webp"];
     var quran=["/assets/post-templates/buecher-teal.jpg","/assets/post-templates/nachtblau-buecher.jpg","/kids/assets/prophet-scenes/night.webp","/kids/assets/prophet-scenes/library.webp"];
     var dua=["/kids/assets/prophet-scenes/night.webp","/kids/assets/prophet-scenes/garden.webp","/assets/post-templates/nacht-mond.jpg","/assets/post-templates/olive-mihrab.jpg"];
     var family=["/kids/assets/prophet-scenes/garden.webp","/kids/assets/prophet-scenes/water.webp","/assets/post-templates/olive-mihrab.jpg","/kids/assets/prophet-scenes/library.webp"];
@@ -149,7 +152,7 @@
     else if(/duʿā|dua|dhikr|adhkār|adhkar/.test(hay))pool=dua;
     else if(/ehe|nikāḥ|nikah|familie|kinder|töchter|toechter|schwangerschaft|stillzeit|nifās|nifas/.test(hay))pool=family;
     else if(/ʿilm|ilm|wissen|fiqh|ḥadī|hadith|sunnah|quelle|gelehrt/.test(hay))pool=ilm;
-    var key="darGlobalShareSceneV1230",seq=0;try{seq=Number(localStorage.getItem(key)||0)||0;localStorage.setItem(key,String(seq+1))}catch(e){}
+    var key="darGlobalShareSceneV1231",seq=0;try{seq=Number(localStorage.getItem(key)||0)||0;localStorage.setItem(key,String(seq+1))}catch(e){}
     return pool[(hash(hay+"|"+seq))%pool.length];
   }
   function splitBody(ctx,body,bodySize,maxW,maxH){
@@ -346,5 +349,5 @@
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
   function boot(){enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-  window.DARGlobalShare={version:"1230",createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
+  window.DARGlobalShare={version:"1231",createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
 })();
