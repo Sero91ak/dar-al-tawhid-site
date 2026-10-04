@@ -107,7 +107,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.82</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.83</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -136,7 +136,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <div id="toast" class="toast"></div>
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
+const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,finalReady:false,previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -176,7 +176,58 @@ async function analyzeText(force=false){
 }
 $("#analyzeBtn").onclick=()=>analyzeText(true);
 
+function resetLiveStream(){
+  state.livePreviewName="";state.livePreviewDuration=0;state.livePreviewGeneration=0;
+  state.liveChunks=[];state.liveChunkCursor=0;state.liveStreamActive=false;state.finalReady=false;
+}
+function installFinalAudio({autoplay=false}={}){
+  if(!state.audioUrl)return;
+  const audio=$("#audio");
+  state.liveStreamActive=false;
+  audio.src=state.audioUrl;
+  $("#player").classList.add("show");
+  $(".player-title").textContent="Audio fertig";
+  $("#playerMeta").textContent="Vollständige Serhat-Voice-Audio · bereit";
+  if(autoplay)audio.play().catch(()=>{});
+}
+function playLiveChunk(index){
+  const row=state.liveChunks[index];if(!row)return false;
+  const audio=$("#audio");
+  state.liveChunkCursor=index;
+  state.liveStreamActive=true;
+  state.livePreviewName=String(row.name||"");
+  audio.src="/mobile/audio?name="+encodeURIComponent(state.livePreviewName);
+  $("#player").classList.add("show");
+  $(".player-title").textContent=index===0?"Sofort-Vorschau":"Live-Audio";
+  $("#playerMeta").textContent="Abschnitt "+(index+1)+" · Rest wird parallel weiter erzeugt";
+  audio.play().catch(()=>{});
+  return true;
+}
+function pumpLiveChunks(){
+  if(state.liveStreamActive)return;
+  if(state.liveChunkCursor<state.liveChunks.length){
+    playLiveChunk(state.liveChunkCursor);
+    return;
+  }
+  if(state.finalReady&&state.audioUrl)installFinalAudio({autoplay:false});
+}
 function activateLivePreview(st){
+  const chunks=Array.isArray(st?.render_preview_chunks)?st.render_preview_chunks:[];
+  if(st?.render_preview_mode==="incremental-chunks-v1"&&chunks.length){
+    const seen=new Set(state.liveChunks.map(x=>String(x?.name||"")));
+    for(const row of chunks.sort((a,b)=>Number(a?.sequence||0)-Number(b?.sequence||0))){
+      const name=String(row?.name||"").trim();
+      if(name&&!seen.has(name)){state.liveChunks.push(row);seen.add(name)}
+    }
+    state.livePreviewDuration=Math.max(0,Number(st?.render_preview_duration_seconds||0));
+    state.livePreviewGeneration=state.liveChunks.length;
+    const sec=state.livePreviewDuration;
+    $("#player").classList.add("show");
+    $("#playerMeta").textContent="Schon anhören · "+state.liveChunks.length+" Abschnitt"+(state.liveChunks.length===1?"":"e")+(sec?" · "+sec.toFixed(1)+" s bereit":"")+" · Rest läuft";
+    pumpLiveChunks();
+    return;
+  }
+  // Rückwärtskompatibilität für Engines vor 2.9.83.
   const name=String(st?.render_preview_name||"").trim();
   const generation=Math.max(0,Number(st?.render_preview_generation||0));
   if(!name||name===state.livePreviewName||(generation&&generation<=state.livePreviewGeneration))return;
@@ -184,22 +235,24 @@ function activateLivePreview(st){
   const carryTime=state.livePreviewName&&Number.isFinite(audio.currentTime)?Math.max(0,audio.currentTime):0;
   const wasPlaying=!audio.paused;
   const wasEnded=!!audio.ended||(Number.isFinite(audio.duration)&&audio.duration>0&&carryTime>=Math.max(0,audio.duration-.2));
-  const liveUrl="/mobile/audio?name="+encodeURIComponent(name);
-  const segments=Math.max(1,Number(st?.render_preview_segments||1));
-  const sec=Math.max(0,Number(st?.render_preview_duration_seconds||0));
-  state.livePreviewName=name;
-  state.livePreviewDuration=sec;
-  state.livePreviewGeneration=generation||state.livePreviewGeneration+1;
-  audio.src=liveUrl;
-  $("#player").classList.add("show");
-  $(".player-title").textContent=state.livePreviewGeneration>1?"Live-Vorschau":"Sofort-Vorschau";
-  $("#playerMeta").textContent="Schon anhören · "+segments+" Abschnitt"+(segments===1?"":"e")+(sec?" · "+sec.toFixed(1)+" s":"")+" · Rest wird weiter erzeugt";
-  const resume=()=>{
-    if(carryTime>0&&Number.isFinite(audio.duration))audio.currentTime=Math.min(carryTime,Math.max(0,audio.duration-.12));
-    if(wasPlaying||wasEnded||carryTime===0)audio.play().catch(()=>{});
-  };
+  state.livePreviewName=name;state.livePreviewGeneration=generation||state.livePreviewGeneration+1;
+  audio.src="/mobile/audio?name="+encodeURIComponent(name);
+  $("#player").classList.add("show");$(".player-title").textContent="Sofort-Vorschau";
+  const resume=()=>{if(carryTime>0&&Number.isFinite(audio.duration))audio.currentTime=Math.min(carryTime,Math.max(0,audio.duration-.12));if(wasPlaying||wasEnded||carryTime===0)audio.play().catch(()=>{})};
   if(audio.readyState>=1)resume();else audio.addEventListener("loadedmetadata",resume,{once:true});
 }
+$("#audio").addEventListener("ended",()=>{
+  if(!state.liveStreamActive)return;
+  state.liveStreamActive=false;
+  state.liveChunkCursor+=1;
+  if(state.liveChunkCursor<state.liveChunks.length){pumpLiveChunks();return}
+  if(state.generating){
+    $(".player-title").textContent="Live-Audio";
+    $("#playerMeta").textContent="Nächster Abschnitt wird erzeugt …";
+    return;
+  }
+  if(state.finalReady)installFinalAudio({autoplay:false});
+});
 
 async function generate(){
   if(!await health())return toast("Mac-Engine nicht erreichbar.");const text=$("#text").value.trim();if(!text)return toast("Bitte Text eingeben.");
@@ -209,7 +262,9 @@ async function generate(){
   if(useLibrary&&(analyzed.unresolvedIslamicTerms||[]).length){
     $("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";toast("Erst die markierten Wörter prüfen.");return
   }
-  $("#generateBtn").textContent="Erzeuge …";state.generating=true;state.livePreviewName="";state.livePreviewDuration=0;state.livePreviewGeneration=0;
+  $("#generateBtn").textContent="Erzeuge …";state.generating=true;resetLiveStream();
+  if(state.audioUrl){URL.revokeObjectURL(state.audioUrl);state.audioUrl=""}
+  state.audioBlob=null;
   let progressBusy=false;
   const progressTimer=setInterval(async()=>{
     if(!state.generating||progressBusy)return;
@@ -232,24 +287,20 @@ async function generate(){
     const r=await api(endpoint,{method:"POST",body:JSON.stringify(payload)});
     if(!r.ok){let d={};try{d=await r.json()}catch{};throw Error(d.error||"Audioerzeugung fehlgeschlagen")}
     const blob=await r.blob();
-    const player=$("#audio");
-    const carryTime=state.livePreviewName&&Number.isFinite(player.currentTime)?Math.max(0,player.currentTime):0;
-    const wasPlaying=!player.paused;
-    const wasEnded=!!player.ended||(Number.isFinite(player.duration)&&player.duration>0&&carryTime>=Math.max(0,player.duration-.2));
     if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);
-    state.audioBlob=blob;state.audioUrl=URL.createObjectURL(blob);
-    player.src=state.audioUrl;$("#player").classList.add("show");
-    $(".player-title").textContent="Audio fertig";
-    $("#playerMeta").textContent="Serhat Voice · "+($("#style").selectedOptions[0]?.textContent||"Auto")+(useLibrary?" · Aussprache aktiv":" · frei");
-    const resume=()=>{
-      if(carryTime>0&&Number.isFinite(player.duration))player.currentTime=Math.min(carryTime,Math.max(0,player.duration-.15));
-      if(wasPlaying||wasEnded||carryTime===0)player.play().catch(()=>{});
-    };
-    if(player.readyState>=1)resume();else player.addEventListener("loadedmetadata",resume,{once:true});
-    state.livePreviewName="";state.livePreviewDuration=0;state.livePreviewGeneration=0;
+    state.audioBlob=blob;state.audioUrl=URL.createObjectURL(blob);state.finalReady=true;
+    // Wenn bereits Live-Chunks laufen, werden sie nicht unterbrochen. Nach dem
+    // letzten Chunk wechselt der Player auf die vollständige WAV. Bei kurzen
+    // Texten ohne Live-Chunk startet die fertige Audio sofort.
+    if(!state.liveStreamActive&&state.liveChunkCursor>=state.liveChunks.length){
+      installFinalAudio({autoplay:state.liveChunks.length===0});
+    }else{
+      $(".player-title").textContent="Audio fertig · Live-Wiedergabe läuft";
+      $("#playerMeta").textContent="Vollständige WAV ist bereit · laufende Vorschau wird nicht unterbrochen";
+    }
     toast("Audio ist fertig.");loadHistory();
   }catch(e){toast(e.message)}
-  finally{state.generating=false;clearInterval(progressTimer);$("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen"}
+  finally{state.generating=false;clearInterval(progressTimer);if(!state.liveStreamActive)pumpLiveChunks();$("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen"}
 }
 $("#generateBtn").onclick=generate;$("#closePlayer").onclick=()=>$("#player").classList.remove("show");
 $("#saveBtn").onclick=()=>{
@@ -266,7 +317,7 @@ async function loadHistory(){
   const box=$("#historyList");box.innerHTML='<div class="empty">Verlauf wird geladen …</div>';
   try{const r=await api("/mobile/history");const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Verlauf nicht verfügbar");const items=d.items||[];if(!items.length){box.innerHTML='<div class="empty">Noch keine Audios vorhanden.</div>';return}
   box.innerHTML=items.map(x=>'<div class="card history-item"><button class="playdot" data-audio="'+encodeURIComponent(x.name)+'">▶</button><div class="hist-main"><div class="hist-name">'+esc(x.title||x.label||x.name)+'</div>'+(x.text?'<div class="hist-text">'+esc(x.text)+'</div>':'')+'<div class="hist-meta">'+esc(x.styleLabel||"Auto")+' · '+esc(x.createdLabel||"")+' · '+esc(x.sizeLabel||"")+'</div></div><button class="iconbtn" data-open="'+encodeURIComponent(x.name)+'">↗</button></div>').join("");
-  $$("[data-audio]").forEach(b=>b.onclick=()=>{state.livePreviewName="";const u="/mobile/audio?name="+b.dataset.audio;$("#audio").src=u;$("#player").classList.add("show");$(".player-title").textContent="Verlauf";$("#playerMeta").textContent="Gespeicherte Audio";go("create");$("#audio").play().catch(()=>{})});$$("[data-open]").forEach(b=>b.onclick=()=>window.open("/mobile/audio?name="+b.dataset.open,"_blank"))}
+  $("[data-audio]").forEach(b=>b.onclick=()=>{resetLiveStream();state.finalReady=false;const u="/mobile/audio?name="+b.dataset.audio;$("#audio").src=u;$("#player").classList.add("show");$(".player-title").textContent="Verlauf";$("#playerMeta").textContent="Gespeicherte Audio";go("create");$("#audio").play().catch(()=>{})});$$("[data-open]").forEach(b=>b.onclick=()=>window.open("/mobile/audio?name="+b.dataset.open,"_blank"))}
   catch(e){box.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}
 }
 function catalogCard(x,i){
