@@ -46,7 +46,7 @@ const frauen = file(frauenRel);
 for (const token of ["/api/share-image/background", "frauenFreshShareBackground", "frauenAdaptiveBodyLayout", 'fillText("AUSSAGE"', 'fillText("QUELLE"']) {
   need(frauenRel, frauen, token);
 }
-for (const token of ["frauenNextShareScene", "Folgt für mehr Wissen aus Qurʾān & Sunnah", "app-store-badge-de-official.svg"]) {
+for (const token of ["frauenNextShareScene", 'ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah"', "app-store-badge-de-official.svg"]) {
   forbid(frauenRel, frauen, token);
 }
 
