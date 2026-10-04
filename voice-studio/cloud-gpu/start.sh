@@ -3,6 +3,11 @@ set -euo pipefail
 
 : "${DAR_VOICE_PAIR_TOKEN:?DAR_VOICE_PAIR_TOKEN muss als Secret gesetzt sein}"
 
+if [[ "$DAR_VOICE_PAIR_TOKEN" == "replace-with-long-random-token" || ${#DAR_VOICE_PAIR_TOKEN} -lt 32 ]]; then
+  echo "FEHLER: Unsicheres DAR_VOICE_PAIR_TOKEN abgelehnt." >&2
+  exit 63
+fi
+
 export DAR_VOICE_NETWORK_MODE=1
 export DAR_VOICE_DEVICE="${DAR_VOICE_DEVICE:-cuda}"
 export DAR_VOICE_PORT="${DAR_VOICE_PORT:-${PORT:-8787}}"
