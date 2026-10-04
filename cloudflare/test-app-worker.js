@@ -176,18 +176,25 @@ async function finalizeDarTestHomeV1193(asset) {
   // v1202: existing Adobe/Runway imagery becomes one continuous Home background.
   // CSS only; no navigation, route or bottom-tab behavior changes.
   if (!html.includes("dar-home-atmosphere-v1202.css")) {
-    const atmosphereLink = '<link rel="stylesheet" id="darHomeAtmosphereV1224" href="/test/assets/dar-home-atmosphere-v1202.css?v=1238-home">\n';
+    const atmosphereLink = '<link rel="stylesheet" id="darHomeAtmosphereV1224" href="/test/assets/dar-home-atmosphere-v1202.css?v=1239-home">\n';
     if (html.includes("</head>")) html = html.replace("</head>", atmosphereLink + "</head>");
     else html = html.replace("<body", atmosphereLink + "<body");
   }
 
-  // v1238: start loading both Home scenes before layout JS runs.
+  // v1239: mark the Test Home authority synchronously so the already-loaded CSS can paint immediately.
+  if (!html.includes("darHomeEarlyClassV1239")) {
+    const earlyHomeClass = '<script id="darHomeEarlyClassV1239">document.documentElement.classList.add("dar-home-v1194")<\/script>\n';
+    if (html.includes("</head>")) html = html.replace("</head>", earlyHomeClass + "</head>");
+    else html = html.replace("<body", earlyHomeClass + "<body");
+  }
+
+  // v1239: start loading both Home scenes before layout JS runs.
   // The URLs are exactly the same cache keys used by CSS/JS, so no duplicate image transfer occurs.
-  if (!html.includes("darHomeHeroMobilePreloadV1238")) {
+  if (!html.includes("darHomeHeroMobilePreloadV1239")) {
     const homePreloads =
-      '<link rel="preload" id="darHomeHeroMobilePreloadV1238" as="image" href="/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1238-home" media="(max-width:759px)" fetchpriority="high">\n' +
-      '<link rel="preload" id="darHomeHeroWidePreloadV1238" as="image" href="/test/assets/home-v1194/hero-wide-adobe.jpg?v=1238-home" media="(min-width:760px)" fetchpriority="high">\n' +
-      '<link rel="preload" id="darHomeStudyPreloadV1238" as="image" href="/test/assets/home-v1194/study-runway.jpg?v=1238-home" fetchpriority="high">\n';
+      '<link rel="preload" id="darHomeHeroMobilePreloadV1239" as="image" href="/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1239-home" media="(max-width:759px)" fetchpriority="high">\n' +
+      '<link rel="preload" id="darHomeHeroWidePreloadV1239" as="image" href="/test/assets/home-v1194/hero-wide-adobe.jpg?v=1239-home" media="(min-width:760px)" fetchpriority="high">\n' +
+      '<link rel="preload" id="darHomeStudyPreloadV1239" as="image" href="/test/assets/home-v1194/study-runway.jpg?v=1239-home" fetchpriority="high">\n';
     if (html.includes("</head>")) html = html.replace("</head>", homePreloads + "</head>");
     else html = html.replace("<body", homePreloads + "<body");
   }
@@ -201,8 +208,8 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // Keep only the existing v1194 home authority and refresh its assets.
-  html = html.replace(/dar-home-library-v1194\.css\?v=[^"']+/g, "dar-home-library-v1194.css?v=1238-home");
-  html = html.replace(/dar-home-library-v1194\.js\?v=[^"']+/g, "dar-home-library-v1194.js?v=1238-home");
+  html = html.replace(/dar-home-library-v1194\.css\?v=[^"']+/g, "dar-home-library-v1194.css?v=1239-home");
+  html = html.replace(/dar-home-library-v1194\.js\?v=[^"']+/g, "dar-home-library-v1194.js?v=1239-home");
   html = html.replace(/dar-library-redesign-v1168\.css\?v=[^"']+/g, "dar-library-redesign-v1168.css?v=1213-quran-native");
   html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"']+/g, "dar-library-redesign-v1168.js?v=1213-quran-native");
 
@@ -217,8 +224,8 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
 
   // Build markers only; no route/page geometry is changed here.
-  html = html.replace(/const APP_BUILD_ID="app-shell-v1238"]+"/, 'const APP_BUILD_ID="app-shell-v1238"');
-  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v[^"]+"/, 'window.__DAR_EXPECTED_BUILD="app-shell-v1238"');
+  html = html.replace(/const APP_BUILD_ID="app-shell-v1239"]+"/, 'const APP_BUILD_ID="app-shell-v1239"');
+  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v[^"]+"/, 'window.__DAR_EXPECTED_BUILD="app-shell-v1239"');
 
   // Remove superseded visual layers that can still be present in older cached HTML.
   html = html.replace(/<link[^>]+dar-home-knowledge-library-v1183\.css[^>]*>\s*/g, "");
