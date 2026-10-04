@@ -476,8 +476,10 @@ jobs:
               errors.append("Kids quiz namespace missing")
           if quiz.get("adultQuizDependency") is not False:
               errors.append("Kids quiz must be independent from adult quiz")
-          if len(items)<400:
-              errors.append(f"Kids quiz must contain at least 400 questions, got {len(items)}")
+          total=len(items)
+          if total<50 or total%50!=0:
+              errors.append(f"Kids quiz must grow in complete 50-question packs, got {total}")
+          packs=total//50 if total>=50 else 0
           if "canonicalQuizId" in quiz_path.read_text(encoding="utf-8"):
               errors.append("adult canonicalQuizId coupling returned")
 
@@ -508,10 +510,19 @@ jobs:
               if not str(item.get("source") or "").strip():
                   errors.append(qid+" source missing")
 
-          minimum={"4-6":144,"7-8":128,"9-10":128}
-          for band,count in minimum.items():
-              if band_counts.get(band,0)<count:
-                  errors.append(f"{band} needs at least {count} questions, got {band_counts.get(band,0)}")
+          expected_counts={"4-6":18*packs,"7-8":16*packs,"9-10":16*packs}
+          for band,count in expected_counts.items():
+              if band_counts.get(band,0)!=count:
+                  errors.append(f"{band} must have {count} questions for {packs} complete packs, got {band_counts.get(band,0)}")
+
+          normalized_questions={}
+          for item in items:
+              question=" ".join(str(item.get("question") or "").strip().lower().split())
+              number=item.get("number")
+              if question in normalized_questions:
+                  errors.append(f"duplicate Kids quiz question: {normalized_questions[question]} and {number}: {item.get('question')}")
+              elif question:
+                  normalized_questions[question]=number
           declared=quiz.get("counts") or {}
           if int(declared.get("total") or 0)!=len(items):
               errors.append("Kids quiz declared total does not match items")
