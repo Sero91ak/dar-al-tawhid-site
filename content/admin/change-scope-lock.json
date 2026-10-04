@@ -152,6 +152,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-v1097-realistic-hero-import-2026-10-04",
+      "approvedBy": "user-explicit-kids-realistic-images-adobe-runway-weiter",
+      "reason": "Nutzer verlangt die Kids-Geschichten-/Propheten-/Ṣaḥābah-Bereiche mit besseren, realistischeren passenden Bildern direkt in der App weiterzubauen. Der einmalige Import-Workflow darf dafür die bereits erlaubten Kids-Assets einspielen und sich anschließend entfernen.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/import-kids-hero-assets-v1095.yml",
+        "kids/"
+      ],
+      "expiresAt": "2026-10-11T23:59:00.000Z"
+    },
+    {
       "id": "apple-tv-home-tadabbur-slot-2026-10-03",
       "approvedBy": "user-explicit-startseite-gebetszeiten-quran-tadabbur-nicht-hadith-sharh",
       "reason": "Nutzer: Apple-TV-Startseite bei Gebetszeiten zeigt Qurʾān-Vers und Tadabbur-Bereich; dort dürfen keine Ḥadīṯe, Salaf-Bibliotheksaussagen oder Šarḥ erscheinen.",
