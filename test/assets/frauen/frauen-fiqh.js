@@ -3662,13 +3662,16 @@
   }
 
   var FRAUEN_SHARE_IMAGE_POOL = [
-    "/test/assets/frauen/library-v1224/01-grundlagen-din.jpg",
-    "/test/assets/frauen/library-v1224/02-fiqh-frauen.jpg",
-    "/test/assets/frauen/library-v1224/03-erste-generationen.jpg",
-    "/test/assets/frauen/library-v1224/04-familie-erziehung.jpg",
-    "/test/assets/frauen/library-v1224/05-wissen-adab-dawah.jpg",
-    "/test/assets/frauen/library-v1224/06-alltag-schutz.jpg",
-    "/test/assets/frauen/library-v1224/07-lebensphasen.jpg"
+    "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/1fe59965-948a-44c7-a26b-4572566997dc/7th_century_Hijaz_historical_reconstruction__Modestly_dressed_adult_woman_strictly_from_behind__face_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZTIxZGM0YTIxNDE1Y2U2ZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI4MTY5OH0.5-RaAXQp4HKeDgffaJY3mrK90dUO-0hyF-RCgKGUEc0",
+    "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/5e64694b-78d3-4041-b432-1522decec4e9/7th_century_Hijaz_oasis_historical_reconstruction__Modestly_dressed_adult_woman_strictly_from_behind_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzY1MTNiM2FlMTg5NDU5NSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMyNjI2Nn0.HJV59YtqfBRi2A3OvioVwwel1jnxfDe3DoCy3QYuDOU",
+    "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/b6d71a53-4eea-438d-b82e-555b2fe31055/7th_century_Hijaz_learning_scene__Three_modestly_dressed_adult_women_seated_on_woven_reed_mats_in_a__0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMzA0YWI2OWFmYzFjZGU0NyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI3NDc3OH0.ZTdKdVdVhlXu-Ho3kuau-1DdX5v9V9UYGsmj_Oc_c_k",
+    "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/1dbc64e4-c3dc-454d-a4a5-ddf5fbe4c716/7th_century_Hijaz_household_textile_work__Modestly_dressed_adult_woman_fully_back_facing__face_unsee_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYTIyMDRjMjYzNjY1YzE2MiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMxMjAzOH0.xc5YygTGxrlBTjgNjV9dNm2w1MvFA1nG7wTcQmxFGtQ",
+    "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/9ea16731-37a7-4f99-ae37-913a296ee115/7th_century_Hijaz_open_air_market__Modestly_dressed_adult_woman_strictly_from_behind__face_unseen__w_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYmI3ZWRiYjY1NTQ5YmYyMCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI0Njc3NH0.RV2g9V4T7UzkJOaCl6-QJu_aDQ32atZM6lKhSyTjayo",
+    "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/e56062f8-c4aa-46bf-a5a8-e05615687202/7th_century_Hijaz_charity_scene__Modestly_dressed_adult_woman_from_behind__face_unseen__handing_a_ba_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiOWQ2MDlhMjNmNTM3MjIwNiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMwMTAyN30.j5Cxc1Gx-h3MW3AtmxMrbqMjdaJt8mw1VPvU-0gitDg",
+    "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/d55af82e-36b4-4e27-8515-a14f4fe72a96/7th_century_Hijaz_travel_preparation__Modestly_dressed_adult_woman_from_behind__face_unseen__securin_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMzBkOGVlNWU4MzQ2MzY0OSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI2Mzk2Nn0.pJnGs_xObUccIkL5pItjqhB52-awYnMS1byZwzi5pI4",
+    "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/7ae6fd64-bb48-48d6-90ae-0029729d38c5/7th_century_Arabian_field_support_scene__non_graphic__Modestly_dressed_adult_woman_strictly_from_beh_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNWMxN2M4YTVhZTRmNWZhMCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMwMjU2NX0.X-w_JIbwf52IZ7GTC9vKE9DPYwu-eT5uk_BjdNUt7TI",
+    "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/94fe8387-13d3-4f3c-a645-6a2ac2c62431/7th_century_Arabian_defensive_camp_scene__non_graphic__Modestly_dressed_adult_woman_strictly_from_be_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYWMxYWY1OTJmZmU5ZjQwMiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI5MTE1NH0.DaYfv_7dht7510Ey0pIIf3Vbekp9L46NlhyXjoPio8I",
+    "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/60781d6a-711d-4791-8fcb-8b2637c79823/7th_century_Hijaz_evening_household_scene__Modestly_dressed_adult_woman_strictly_from_behind__face_u_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNmJhYWQyZWQ0Y2FhZjhhYyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMyMzYyOX0.eA7fkTjh9RqYOCNU30ygP3_m8zYto1miB4xyUBxLuKA"
   ];
   var FRAUEN_SHARE_LAST_IMAGE = "";
 
@@ -3694,7 +3697,7 @@
     for (var i = 0; i < FRAUEN_SHARE_IMAGE_POOL.length; i++) {
       var src = FRAUEN_SHARE_IMAGE_POOL[(start + i) % FRAUEN_SHARE_IMAGE_POOL.length];
       try {
-        var img = await frauenLoadImage(src + "?share-pool=v1250");
+        var img = await frauenLoadImage(src);
         FRAUEN_SHARE_LAST_IMAGE = src;
         return { image: img, objectUrl: "" };
       } catch (err) { last = err; }
@@ -3868,15 +3871,19 @@
     }
     if (files.length) {
       try {
-        if (navigator.canShare && navigator.canShare({ files: files }) && navigator.share) {
-          if (instagramIntent) frauenToast("Im Teilen-Menü Instagram auswählen");
-          await navigator.share({ title: payload.title, text: "DĀR AL TAWḤĪD", files: files });
-          return true;
-        }
-        if (navigator.canShare && navigator.canShare({ files: [files[0]] }) && navigator.share) {
-          if (instagramIntent) frauenToast("Im Teilen-Menü Instagram auswählen");
-          await navigator.share({ title: payload.title, text: "DĀR AL TAWḤĪD", files: [files[0]] });
-          return true;
+        if (navigator.share) {
+          var imageFiles = files.slice();
+          var sharePayload = { files: imageFiles };
+          if (!navigator.canShare || navigator.canShare(sharePayload)) {
+            if (instagramIntent) frauenToast("Teilen-Menü öffnen · Instagram auswählen");
+            await navigator.share(sharePayload);
+            return true;
+          }
+          if (imageFiles[0] && (!navigator.canShare || navigator.canShare({ files: [imageFiles[0]] }))) {
+            if (instagramIntent) frauenToast("Teilen-Menü öffnen · Instagram auswählen");
+            await navigator.share({ files: [imageFiles[0]] });
+            return true;
+          }
         }
       } catch (err2) {
         if (err2 && err2.name === "AbortError") return true;
@@ -3895,19 +3902,15 @@
         }
       } catch (nativeErr) {}
       try {
-        var blobUrl = URL.createObjectURL(files[0]);
-        var link = document.createElement("a");
-        link.href = blobUrl;
-        link.download = "dar-al-tawhid-bildbeitrag.png";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        setTimeout(function () { try { URL.revokeObjectURL(blobUrl); } catch (e3) {} }, 60000);
-        frauenToast("Bild erstellt – PNG liegt zum Teilen bereit");
-        return true;
-      } catch (e4) {}
+        if (navigator.share) {
+          await navigator.share({ files: [files[0]] });
+          return true;
+        }
+      } catch (e4) {
+        if (e4 && e4.name === "AbortError") return true;
+      }
     }
-    frauenToast("Bildbeitrag konnte nicht geteilt werden.");
+    frauenToast("Direktes Bild-Teilen wird auf diesem Gerät nicht unterstützt.");
     return false;
   }
 
