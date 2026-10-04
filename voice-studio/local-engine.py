@@ -363,6 +363,7 @@ def load_max_master_pls(path:Path):
                 "voice_lock":"REVIEW",
                 "qa_tier":"seed",
                 "source":"DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls",
+                "requires_boundary":True,
             })
         print(f"[DĀR Voice] MAX-MASTER-PLS geladen: {len(out)} Schreib-/Sprechvarianten.",flush=True)
         return out
@@ -3112,6 +3113,22 @@ def apply_profile_fixed_phrases(text:str):
         })
     return value,found
 
+def pronunciation_rule_boundary_ok(text:str,pos:int,needle:str):
+    """Verhindert, dass PLS-Kurzbegriffe mitten in normalen Wörtern feuern."""
+    value=str(text or "")
+    needle=str(needle or "")
+    if not needle:
+        return False
+    end=pos+len(needle)
+    lexical_extra="ʿʾ'’"
+    def lexical(ch:str):
+        return bool(ch) and (ch.isalnum() or ch in lexical_extra)
+    if pos>0 and lexical(value[pos-1]) and lexical(needle[0]):
+        return False
+    if end<len(value) and lexical(value[end]) and lexical(needle[-1]):
+        return False
+    return True
+
 def prepare(text:str):
     pos=0;out=[];found=[]
     while pos<len(text):
@@ -3119,6 +3136,8 @@ def prepare(text:str):
         for r in RULES:
             needle=str(r.get("string_to_replace",""))
             if needle and text.startswith(needle,pos):
+                if r.get("requires_boundary") and not pronunciation_rule_boundary_ok(text,pos,needle):
+                    continue
                 hit=r;break
         if not hit:
             out.append(text[pos]);pos+=1;continue
