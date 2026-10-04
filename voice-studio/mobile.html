@@ -107,7 +107,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.88</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.89</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -136,7 +136,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <div id="toast" class="toast"></div>
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
+const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",finalAudioName:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -176,13 +176,16 @@ async function analyzeText(force=false){
 }
 $("#analyzeBtn").onclick=()=>analyzeText(true);
 
+function revokeIfBlob(url){
+  if(String(url||"").startsWith("blob:")){try{URL.revokeObjectURL(url)}catch(_){}}
+}
 function clearLiveChunkUrl(name){
   const key=String(name||"");const url=state.liveChunkUrls.get(key);
-  if(url){try{URL.revokeObjectURL(url)}catch(_){}state.liveChunkUrls.delete(key)}
+  if(url){revokeIfBlob(url);state.liveChunkUrls.delete(key)}
   state.liveChunkFetches.delete(key);
 }
 function resetLiveStream(){
-  for(const url of state.liveChunkUrls.values()){try{URL.revokeObjectURL(url)}catch(_){}}
+  for(const url of state.liveChunkUrls.values())revokeIfBlob(url)
   state.liveChunkUrls.clear();state.liveChunkFetches.clear();state.liveChunkEpoch+=1;
   state.livePreviewName="";state.livePreviewDuration=0;state.livePreviewGeneration=0;
   state.liveChunks=[];state.liveChunkCursor=0;state.liveStreamActive=false;state.finalReady=false;
@@ -257,7 +260,7 @@ function activateLivePreview(st){
     pumpLiveChunks();
     return;
   }
-  // Rückwärtskompatibilität für Engines vor 2.9.88.
+  // Rückwärtskompatibilität für Engines vor 2.9.89.
   const name=String(st?.render_preview_name||"").trim();
   const generation=Math.max(0,Number(st?.render_preview_generation||0));
   if(!name||name===state.livePreviewName||(generation&&generation<=state.livePreviewGeneration))return;
@@ -327,21 +330,19 @@ function startRenderProgressPolling(jobId){
       if(st.message){$("#analysis").classList.add("show");$("#analysisState").textContent=pct?pct+"%":"läuft";$("#analysisBody").textContent=st.message}
     }catch(_){}
     finally{busy=false}
-  },320);
+  },220);
 }
 async function applyGenerationJobResult(job,useLibrary,{autoplayIfShort=true}={}){
   const outputName=String(job?.outputName||"").trim();
   if(!outputName)throw Error("Fertige Audiodatei fehlt.");
-  const r=await api("/mobile/audio?name="+encodeURIComponent(outputName));
-  if(!r.ok)throw Error("Fertige Audiodatei konnte nicht geladen werden.");
-  const blob=await r.blob();
+  const finalUrl="/mobile/audio?name="+encodeURIComponent(outputName);
   try{
     const sr=await api("/render-status");const ss=await sr.json();
     const statusJob=String(ss?.render_job_id||"").trim();
     if(ss?.render_preview_ready&&(!statusJob||statusJob===String(job?.jobId||state.activeJobId||"")))activateLivePreview(ss);
   }catch(_){}
-  if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);
-  state.audioBlob=blob;state.audioUrl=URL.createObjectURL(blob);state.finalReady=true;
+  revokeIfBlob(state.audioUrl);
+  state.audioBlob=null;state.audioUrl=finalUrl;state.finalAudioName=outputName;state.finalReady=true;
   if(!state.liveStreamActive&&state.liveChunkCursor>=state.liveChunks.length){
     installFinalAudio({autoplay:autoplayIfShort&&state.liveChunks.length===0});
   }else{
@@ -383,7 +384,7 @@ async function generate(){
     $("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";toast("Erst die markierten Wörter prüfen.");return
   }
   resetLiveStream();
-  if(state.audioUrl){URL.revokeObjectURL(state.audioUrl);state.audioUrl=""}
+  revokeIfBlob(state.audioUrl);state.audioUrl="";state.finalAudioName="";
   state.audioBlob=null;
   try{
     const endpoint=useLibrary?"/generate-start":"/generate-free-start";
@@ -406,10 +407,18 @@ $("#saveBtn").onclick=()=>{
   if(u)window.open(u,"_blank");
 };
 $("#shareBtn").onclick=async()=>{
-  if(!state.audioBlob){toast("Teilen ist verfügbar, sobald die vollständige Audio fertig ist.");return}
-  const file=new File([state.audioBlob],"dar-serhat-voice.wav",{type:"audio/wav"});
-  if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:"DĀR Voice"})}catch{}}
-  else window.open(state.audioUrl,"_blank");
+  if(!state.audioUrl||!state.finalReady){toast("Teilen ist verfügbar, sobald die vollständige Audio fertig ist.");return}
+  try{
+    if(!state.audioBlob){
+      toast("Audio wird für Teilen vorbereitet …");
+      const r=await api(state.audioUrl);
+      if(!r.ok)throw Error("Audio konnte nicht geladen werden.");
+      state.audioBlob=await r.blob();
+    }
+    const file=new File([state.audioBlob],"dar-serhat-voice.wav",{type:"audio/wav"});
+    if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:"DĀR Voice"})}catch{}}
+    else window.open(state.audioUrl,"_blank");
+  }catch(e){toast(e.message||String(e))}
 };
 async function loadHistory(){
   const box=$("#historyList");box.innerHTML='<div class="empty">Verlauf wird geladen …</div>';
@@ -421,16 +430,36 @@ async function loadHistory(){
 function catalogCard(x,i){
   const term=String(x.canonical||x.input||"").trim();
   const master=!!x.confirmed;
-  return '<div class="card candidate"><div class="candidate-main"><strong>'+esc(term)+'</strong><div class="arabic">'+esc(x.ttsText||x.alias||"")+'</div><div class="meta">'+esc(x.source||"Bibliothek")+' · '+esc(x.ttsLanguage||"")+(master?' · Master ✓':'')+'</div><div class="catalog-actions"><button data-catalog-preview="'+i+'">Anhören</button><button class="confirm" data-catalog-confirm="'+i+'" disabled>'+(master?'Master ✓':'Als Master bestätigen')+'</button></div></div></div>';
+  return '<div class="card candidate" data-catalog-card="'+i+'" role="button" tabindex="0"><div class="candidate-main"><strong>'+esc(term)+'</strong><div class="arabic">'+esc(x.ttsText||x.alias||"")+'</div><div class="meta">'+esc(x.source||"Bibliothek")+' · '+esc(x.ttsLanguage||"")+(master?' · Master ✓':'')+'</div><div class="catalog-actions"><button data-catalog-preview="'+i+'">Anhören</button><button class="confirm" data-catalog-confirm="'+i+'" disabled>'+(master?'Master ✓':'Als Master bestätigen')+'</button></div></div></div>';
 }
 function bindCatalogRows(){
-  $$("[data-catalog-preview]").forEach(b=>b.onclick=()=>{
-    const row=state.catalogRows[Number(b.dataset.catalogPreview)];
-    if(row)previewCandidate(row,String(row.canonical||row.input||""),b);
+  $("[data-catalog-preview]").forEach(b=>{
+    const warm=()=>{
+      const row=state.catalogRows[Number(b.dataset.catalogPreview)];
+      if(row)prefetchCandidate(row,String(row.canonical||row.input||""));
+    };
+    b.addEventListener("pointerdown",warm,{passive:true});
+    b.addEventListener("focus",warm,{passive:true});
+    b.onclick=()=>{
+      const row=state.catalogRows[Number(b.dataset.catalogPreview)];
+      if(row)previewCandidate(row,String(row.canonical||row.input||""),b);
+    };
   });
-  $$("[data-catalog-confirm]").forEach(b=>b.onclick=()=>{
+  $("[data-catalog-confirm]").forEach(b=>b.onclick=()=>{
     const row=state.catalogRows[Number(b.dataset.catalogConfirm)];
     if(row)confirmCandidate(String(row.canonical||row.input||""),b);
+  });
+  $("[data-catalog-card]").forEach(card=>{
+    const open=()=>{
+      const i=Number(card.dataset.catalogCard),row=state.catalogRows[i],btn=card.querySelector("[data-catalog-preview]");
+      if(row&&btn)previewCandidate(row,String(row.canonical||row.input||""),btn);
+    };
+    card.addEventListener("pointerdown",()=>{
+      const row=state.catalogRows[Number(card.dataset.catalogCard)];
+      if(row)prefetchCandidate(row,String(row.canonical||row.input||""));
+    },{passive:true});
+    card.addEventListener("click",e=>{if(!e.target.closest("button"))open()});
+    card.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&!e.target.closest("button")){e.preventDefault();open()}});
   });
 }
 async function loadCatalog(reset=true){
