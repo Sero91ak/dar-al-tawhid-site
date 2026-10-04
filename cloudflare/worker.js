@@ -196,6 +196,7 @@ export default {
           videoStudioR2: Boolean(env.VIDEO_STUDIO_R2 || env.VIDEO_STUDIO_BUCKET),
           shareImageAi: Boolean(env.AI && typeof env.AI.run === "function"),
           videoStudioFal: Boolean(String(env.FAL_KEY || env.FAL_API_KEY || "").trim()),
+          shareImageAi: Boolean(env.AI && typeof env.AI.run === "function"),
           videoStudioVoice: Boolean(String(env.ELEVENLABS_API_KEY || "").trim() && String(env.ELEVENLABS_VOICE_ID || env.DAR_MALE_VOICE_ID || "").trim()),
           videoStudioShotstack: Boolean(String(env.SHOTSTACK_API_KEY || "").trim()),
           videoStudioSigning: Boolean(String(env.VIDEO_STUDIO_SIGNING_SECRET || "").trim()),
