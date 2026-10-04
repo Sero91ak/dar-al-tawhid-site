@@ -73,7 +73,7 @@ KIDS_OWNER_VOICE_SYNC_LOCK=threading.Lock()
 KIDS_OWNER_VOICE_STATE_LOCK=threading.Lock()
 KIDS_OWNER_VOICE_STATE={
     "running":False,"phase":"idle","progress":0,"completed":0,"total":0,
-    "current":"","error":"","generated":0,"missing":0,
+    "current":"","error":"","generated":0,"missing":0,"failed":0,"failedItems":[],
     "repoPublished":False,"repoPublishError":"","repoPublishMessage":"",
     "startedAt":"","finishedAt":""
 }
@@ -2880,7 +2880,7 @@ def _kids_owner_voice_add_question(rows,q,age_key,scope,source_id):
         else:
             choices=" ".join(f"Antwort {i+1}: {label}." for i,label in enumerate(labels))
             prompt=(question+" "+choices).strip()
-        _kids_owner_voice_add(rows,prompt,"kids_lesson",scope,source_id)
+        _kids_owner_voice_add(rows,prompt,"question",scope,source_id)
     _kids_owner_voice_add(rows,q.get("success"),"kids_lesson",scope,source_id)
     _kids_owner_voice_add(rows,q.get("retry"),"kids_lesson",scope,source_id)
 
@@ -3110,7 +3110,7 @@ def build_kids_owner_voice_sync():
         started=time.strftime("%Y-%m-%dT%H:%M:%S%z")
         _set_kids_owner_voice_state(
             running=True,phase="scan",progress=1,completed=0,total=0,current="Kids-Inhalte werden auf neue Voice-Texte geprüft …",
-            error="",generated=0,missing=0,repoPublished=False,repoPublishError="",repoPublishMessage="",
+            error="",generated=0,missing=0,failed=0,failedItems=[],repoPublished=False,repoPublishError="",repoPublishMessage="",
             startedAt=started,finishedAt=""
         )
 
@@ -3149,33 +3149,52 @@ def build_kids_owner_voice_sync():
         (build_root/"kids/data").mkdir(parents=True,exist_ok=True)
 
         generated_count=0
+        failures=[]
         for index,row in enumerate(missing,1):
             pct=3+int((index-1)/max(1,len(missing))*90)
             _set_kids_owner_voice_state(
                 phase="generate",progress=min(93,pct),completed=index-1,
                 current=f"Kids-Stimme {index}/{len(missing)} · {row['key'][:74]}"
             )
-            master,metrics=_generate_kids_owner_voice_master(row["text"],row["mode"])
-            digest=hashlib.sha1(row["key"].encode("utf-8")).hexdigest()[:20]
-            asset=build_root/"kids/assets/kids-owner-voice"/(digest+".m4a")
-            _encode_kids_m4a(master,asset)
-            entries[row["key"]]={
-                "url":f"/kids/assets/kids-owner-voice/{asset.name}?v={build_id}",
-                "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
-                "durationSeconds":round(_audio_duration_seconds(asset),3),
-                "voiceProfileId":"serhat-owner-voice-2026",
-                "speaker":"Serhat Abu Malik",
-                "engine":"local-serhat-engine",
-                "sourceVoice":"authorized-owner-voice",
-                "sourceType":"local-owner-generated",
-                "mode":row["mode"],
-                "scopes":row["scopes"],
-                "sourceIds":row["sourceIds"],
-                "qaBy":"local-serhat-engine-auto-qa",
-                "qaMetrics":metrics,
-            }
-            generated_count+=1
-            _set_kids_owner_voice_state(generated=generated_count,completed=index)
+            try:
+                master,metrics=_generate_kids_owner_voice_master(row["text"],row["mode"])
+                digest=hashlib.sha1(row["key"].encode("utf-8")).hexdigest()[:20]
+                asset=build_root/"kids/assets/kids-owner-voice"/(digest+".m4a")
+                _encode_kids_m4a(master,asset)
+                entries[row["key"]]={
+                    "url":f"/kids/assets/kids-owner-voice/{asset.name}?v={build_id}",
+                    "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
+                    "durationSeconds":round(_audio_duration_seconds(asset),3),
+                    "voiceProfileId":"serhat-owner-voice-2026",
+                    "speaker":"Serhat Abu Malik",
+                    "engine":"local-serhat-engine",
+                    "sourceVoice":"authorized-owner-voice",
+                    "sourceType":"local-owner-generated",
+                    "mode":row["mode"],
+                    "scopes":row["scopes"],
+                    "sourceIds":row["sourceIds"],
+                    "qaBy":"local-serhat-engine-auto-qa",
+                    "qaMetrics":metrics,
+                }
+                generated_count+=1
+            except Exception as item_error:
+                failure={
+                    "text":row["key"][:160],
+                    "mode":row["mode"],
+                    "scopes":row["scopes"],
+                    "sourceIds":row["sourceIds"],
+                    "error":str(item_error)[:500],
+                }
+                failures.append(failure)
+                print(
+                    "[DĀR Voice] Kids-Voice-Eintrag offen für nächsten Lauf:",
+                    row["key"][:100],item_error,flush=True
+                )
+            _set_kids_owner_voice_state(
+                generated=generated_count,failed=len(failures),
+                failedItems=failures[-20:],completed=index,
+                missing=max(0,len(missing)-generated_count)
+            )
 
         output={
             "schemaVersion":2,
@@ -3207,8 +3226,11 @@ def build_kids_owner_voice_sync():
             "counts":{
                 "requiredTexts":len(rows),
                 "generatedThisRun":generated_count,
+                "failedThisRun":len(failures),
+                "remainingMissing":len(failures),
                 "totalEntries":len(entries)
-            }
+            },
+            "pendingFailures":failures[-50:]
         }
         atomic_write_json(build_root/"kids/data/owner-voice-audio.json",output)
 
@@ -3220,10 +3242,22 @@ def build_kids_owner_voice_sync():
         )
         published,message=_prepare_kids_owner_voice_publish(ready)
         finished=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        remaining=len(failures)
+        if not published:
+            phase="publish-error"
+            current="Audio fertig · Veröffentlichung prüfen"
+        elif remaining:
+            phase="partial"
+            current=f"{generated_count} neue Audios veröffentlicht · {remaining} Einträge bleiben für den nächsten Lauf offen"
+        else:
+            phase="complete"
+            current="Kids-Owner-Voice ist vollständig aktuell."
         return _set_kids_owner_voice_state(
-            running=False,phase="complete" if published else "publish-error",
-            progress=100,completed=len(rows),total=len(rows),current="Fertig" if published else "Audio fertig · Veröffentlichung prüfen",
-            error="",generated=generated_count,missing=0,repoPublished=bool(published),
+            running=False,phase=phase,
+            progress=100,completed=len(rows),total=len(rows),current=current,
+            error="",generated=generated_count,missing=remaining,
+            failed=remaining,failedItems=failures[-20:],
+            repoPublished=bool(published),
             repoPublishError="" if published else message,repoPublishMessage=message,
             startedAt=started,finishedAt=finished
         )
