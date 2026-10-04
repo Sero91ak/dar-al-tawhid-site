@@ -111,8 +111,9 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
     }, cors, configured ? 200 : 503);
   }
 
-  if (request.method === "POST" && rest === "/generate") {
+  if (request.method === "POST" && (rest === "/generate" || rest === "/generate-with-timings")) {
     assertVoiceStudioOrigin(request, env);
+    const includeTimings = rest === "/generate-with-timings";
     const body = await request.json().catch(() => ({}));
     const original = String(body.text || "").trim();
     const prepared = String(body.prepared || original).trim();
@@ -138,13 +139,25 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
 
     const ownerAutomation = isOwnerAutomationAuthorized(request, env);
     if (!ownerAutomation) assertVoiceRateLimit(request, prepared.length);
-    const result = await synthesizeDarVoice(env, prepared, { profile });
+    const result = await synthesizeDarVoice(env, prepared, { profile, timestamps: includeTimings });
     if (!result.ok) {
       return json({
         ok: false,
         error: result.reason || "Audio konnte nicht erzeugt werden.",
         setupRequired: Boolean(result.setupRequired)
       }, cors, result.setupRequired ? 503 : 502);
+    }
+
+    if (includeTimings) {
+      return json({
+        ok: true,
+        audioBase64: result.audioBase64 || "",
+        alignment: result.alignment || null,
+        normalizedAlignment: result.normalizedAlignment || null,
+        contentType: result.contentType || "audio/mpeg",
+        chars: result.chars || prepared.length,
+        timingMode: "elevenlabs-character-alignment-v1"
+      }, cors, 200);
     }
 
     return new Response(result.bytes, {
