@@ -2728,7 +2728,6 @@ async function confirmFreeVoiceLearning(){
 async function generateFreeVoice(){
   const btn=$("#freeVoiceGenerateBtn");
   const old=btn.textContent;
-  let timer=null;
   let activeJobId="";
   try{
     const value=$("#freeVoiceText").value.trim();
@@ -2745,38 +2744,6 @@ async function generateFreeVoice(){
     $("#freeVoiceProgress").style.width="1%";
     // Der interaktive Auftrag startet sofort. Das Modell wärmt parallel im
     // Engine-Prozess; die UI wartet nicht mehr vor dem eigentlichen Job.
-    timer=setInterval(async()=>{
-      const st=await getRenderStatus();
-      if(!st||!activeJobId)return;
-      const statusJob=String(st.render_job_id||"").trim();
-      if(statusJob&&statusJob!==activeJobId)return;
-      const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
-      $("#freeVoiceProgress").style.width=pct+"%";
-      $("#freeVoiceStatus").textContent=st.message||("Audio wird erzeugt · "+pct+" %");
-      $("#freeVoiceDot").className="dot "+(st.render_state==="error"?"bad":"ok");
-      btn.textContent="Erzeugen "+pct+" %";
-      const chunkMode=st.render_preview_ready&&updateChunkStream("free",st);
-      const liveName=String(st.render_preview_name||"");
-      const liveGeneration=Math.max(0,Number(st.render_preview_generation||0));
-      if(!chunkMode&&st.render_preview_ready&&liveName&&liveName!==freeVoiceLivePreviewName&&(!liveGeneration||liveGeneration>freeVoiceLivePreviewGeneration)){
-        const p=$("#freeVoicePlayer");
-        const carryTime=freeVoiceLivePreviewName&&Number.isFinite(p.currentTime)?Math.max(0,p.currentTime):0;
-        const wasPlaying=!p.paused;
-        const wasEnded=!!p.ended||(Number.isFinite(p.duration)&&p.duration>0&&carryTime>=Math.max(0,p.duration-.2));
-        freeVoiceLivePreviewName=liveName;
-        freeVoiceLivePreviewGeneration=liveGeneration||freeVoiceLivePreviewGeneration+1;
-        p.src=LOCAL_API+"/mobile/audio?name="+encodeURIComponent(liveName);
-        $("#freeVoicePlayerWrap").hidden=false;
-        $("#freeVoiceWavLink").removeAttribute("href");
-        $("#freeVoiceWavLink").textContent=(freeVoiceLivePreviewGeneration>1?"Live-Vorschau":"Sofort-Vorschau")+" · vollständige WAV folgt";
-        const resumeLive=()=>{
-          if(carryTime>0&&Number.isFinite(p.duration))p.currentTime=Math.min(carryTime,Math.max(0,p.duration-.12));
-          if(wasPlaying||wasEnded||carryTime===0)p.play().catch(()=>{});
-        };
-        if(p.readyState>=1)resumeLive();else p.addEventListener("loadedmetadata",resumeLive,{once:true});
-      }
-    },320);
-
     const started=await startDesktopGenerationJob("free",{
       text:value,
       style:$("#freeVoiceStyle").value,
@@ -2785,12 +2752,13 @@ async function generateFreeVoice(){
     },value);
     activeJobId=String(started.jobId||"");
     btn.textContent=started.reused?"Laufenden Auftrag öffnen …":"Audio läuft …";
-    const job=await waitDesktopGenerationJob(started.jobId);
+    const job=await waitDesktopGenerationJob(
+      started.jobId,30*60*1000,
+      st=>applyDesktopRenderProgress("free",activeJobId,st,[btn])
+    );
     const finalUrl=desktopGenerationAudioUrl(job);
     clearDesktopGenerationJob(started.jobId);
-    const freeFinalRenderStatus=await getRenderStatus();
-    const freeStatusJob=String(freeFinalRenderStatus?.render_job_id||"").trim();
-    if(freeFinalRenderStatus?.render_preview_ready&&(!freeStatusJob||freeStatusJob===activeJobId))updateChunkStream("free",freeFinalRenderStatus);
+    if(job?.render)applyDesktopRenderProgress("free",activeJobId,job.render,[btn]);
     const freePlayer=$("#freeVoicePlayer");
     if(freeVoiceAudioUrl)revokeObjectUrlIfNeeded(freeVoiceAudioUrl);
     freeVoiceAudioUrl=finalUrl;
@@ -2816,7 +2784,6 @@ async function generateFreeVoice(){
     $("#freeVoiceStatus").textContent=msg;
     $("#freeVoiceProgress").style.width="0%";
   }finally{
-    if(timer)clearInterval(timer);
     btn.disabled=false;
     btn.textContent=old;
     checkHealth({quiet:true});
@@ -2830,7 +2797,6 @@ async function generate({autoRerender=false}={}){
   btns.forEach(b=>{b.disabled=true;b.textContent="Vorbereitung …"});
   mainLivePreviewName="";mainLivePreviewGeneration=0;resetChunkStream("main");
   setMessage("");
-  let progressTimer=null;
   let activeJobId="";
 
   try{
@@ -2849,65 +2815,19 @@ async function generate({autoRerender=false}={}){
     btns.forEach(b=>b.textContent="Stimme wird erzeugt …");
     setMessage("Serhat-Stimme wird erzeugt …","warn");
 
-    progressTimer=setInterval(async()=>{
-      const st=await getRenderStatus();
-      if(!st||!activeJobId)return;
-      const statusJob=String(st.render_job_id||"").trim();
-      if(statusJob&&statusJob!==activeJobId)return;
-      if(st.render_state==="rendering"){
-        const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
-        const total=Math.max(0,Number(st.render_total_segments||0));
-        const completed=Math.max(0,Number(st.render_completed_segments||0));
-        const active=Math.max(0,Number(st.render_active_segment||0));
-        const elapsed=Math.max(0,Number(st.segment_elapsed_seconds||0));
-        const cached=Math.max(0,Number(st.render_cached_segments||0));
-        const label=(total&&active)
-          ?("Abschnitt "+active+"/"+total+(elapsed?" · "+elapsed+" s":""))
-          :("Erzeugen "+pct+" %");
-        btns.forEach(b=>b.textContent=label);
-        const detail=st.message||("Audio wird erzeugt · "+pct+" %");
-        const doneHint=(total&&active)?(" · "+completed+" fertig"):"";
-        const cacheHint=cached?(" · "+cached+" bereits bekannt"):"";
-        const chunkMode=st.render_preview_ready&&updateChunkStream("main",st);
-        const liveName=String(st.render_preview_name||"");
-        const liveGeneration=Math.max(0,Number(st.render_preview_generation||0));
-        if(!chunkMode&&st.render_preview_ready&&liveName&&liveName!==mainLivePreviewName&&(!liveGeneration||liveGeneration>mainLivePreviewGeneration)){
-          const p=$("#player");
-          const carryTime=mainLivePreviewName&&Number.isFinite(p.currentTime)?Math.max(0,p.currentTime):0;
-          const wasPlaying=!p.paused;
-          const wasEnded=!!p.ended||(Number.isFinite(p.duration)&&p.duration>0&&carryTime>=Math.max(0,p.duration-.2));
-          mainLivePreviewName=liveName;
-          mainLivePreviewGeneration=liveGeneration||mainLivePreviewGeneration+1;
-          p.src=LOCAL_API+"/mobile/audio?name="+encodeURIComponent(liveName);
-          $("#playerWrap").hidden=false;
-          $("#wavLink").removeAttribute("href");
-          $("#wavLink").textContent=(mainLivePreviewGeneration>1?"Live-Vorschau":"Sofort-Vorschau")+" · vollständige WAV folgt";
-          if($("#qaConfirmBtn"))$("#qaConfirmBtn").disabled=true;
-          const resumeLive=()=>{
-            if(carryTime>0&&Number.isFinite(p.duration))p.currentTime=Math.min(carryTime,Math.max(0,p.duration-.12));
-            if(wasPlaying||wasEnded||carryTime===0)p.play().catch(()=>{});
-          };
-          if(p.readyState>=1)resumeLive();else p.addEventListener("loadedmetadata",resumeLive,{once:true});
-        }
-        setMessage(detail+doneHint+cacheHint+(mainLivePreviewName?" · Vorschau läuft bereits":""),
-          "warn");
-      }else if(st.render_state==="error"&&st.last_error){
-        setMessage("Renderfehler: "+st.last_error);
-      }
-    },320);
-
     const started=await startDesktopGenerationJob("main",{
       text,prepared:analysis.prepared,voice:"Serhat",format:"wav",
       style:$("#styleMode").value,interactiveFast:true
     },text);
     activeJobId=String(started.jobId||"");
     btns.forEach(b=>b.textContent=started.reused?"Laufenden Auftrag öffnen …":"Audio läuft …");
-    const job=await waitDesktopGenerationJob(started.jobId);
+    const job=await waitDesktopGenerationJob(
+      started.jobId,30*60*1000,
+      st=>applyDesktopRenderProgress("main",activeJobId,st,btns)
+    );
     const finalUrl=desktopGenerationAudioUrl(job);
     clearDesktopGenerationJob(started.jobId);
-    const mainFinalRenderStatus=await getRenderStatus();
-    const mainStatusJob=String(mainFinalRenderStatus?.render_job_id||"").trim();
-    if(mainFinalRenderStatus?.render_preview_ready&&(!mainStatusJob||mainStatusJob===activeJobId))updateChunkStream("main",mainFinalRenderStatus);
+    if(job?.render)applyDesktopRenderProgress("main",activeJobId,job.render,btns);
 
     const p=$("#player");
     const url=finalUrl;
@@ -2971,7 +2891,6 @@ async function generate({autoRerender=false}={}){
       :(e.message||String(e));
     setMessage(msg);
   }finally{
-    if(progressTimer)clearInterval(progressTimer);
     btns.forEach((b,i)=>{b.disabled=false;b.textContent=old[i]});
     checkHealth({quiet:true});
   }
