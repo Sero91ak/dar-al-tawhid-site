@@ -198,6 +198,9 @@ export default {
           videoStudioShotstack: Boolean(String(env.SHOTSTACK_API_KEY || "").trim()),
           videoStudioSigning: Boolean(String(env.VIDEO_STUDIO_SIGNING_SECRET || "").trim()),
           videoStudioShotstackHost: String(env.SHOTSTACK_HOST || "https://api.shotstack.io/edit/stage"),
+          voiceGpuOriginConfigured: Boolean(String(env.DAR_VOICE_GPU_ORIGIN || "").trim()),
+          voiceGpuTokenConfigured: Boolean(String(env.DAR_VOICE_GPU_TOKEN || "").trim()),
+          voiceWebAccessConfigured: Boolean(String(env.DAR_VOICE_WEB_TOKEN || "").trim()),
           scheduler: "ready"
         }, cors);
       }
