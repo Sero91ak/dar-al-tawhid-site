@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Themenübersicht · Test-only v1242 */
 body.is-topics-route{
-  --topics-hero-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/77cbd911-b381-4e46-ba7d-5e6e04f7ba33/6f2305e4-e3a7-4e6d-86c8-32b2fd0cb1cf/Single_wide_cinematic_background_for_an_Islamic_knowledge_to.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYmIwOGI4MzQyNzUxN2U3NiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI4MDQzNn0.hdkSCd9_mFOcxdSOzpKAa3NTpSvq5_EW9AXb68aJp_E");
+  --topics-hero-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/bfd550e8-69d5-4bfa-a339-e2a148476515/Use_the_uploaded_image_only_as_the_visual_style_reference__Create_one_standalone_wide_cinematic_3D_a_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiOWEwMjExOTBjY2FlZWFlMiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI3OTYzMn0.SNJzrd5Sd-njkBOivTSDulNVYPfD3EA8tkhWl-VMoB4");
   --topics-hero-left:color-mix(in srgb,var(--bg) 91%,transparent);
   --topics-hero-mid:color-mix(in srgb,var(--bg) 62%,transparent);
   --topics-hero-right:color-mix(in srgb,var(--bg) 16%,transparent);
@@ -410,4 +410,21 @@ body.is-topic-route .topic-collection-page .post-row__title{
   body.is-topic-route .topic-collection-page > .topic-collection{
     width:calc(100% - 20px)!important;
   }
+}
+
+
+/* DAR_TOPICS_CGI_STYLE_RULE_V1252 */
+body.is-topics-route .topics-hub__hero,
+body.is-topics-route .topics-hub > .view-head{
+  background:
+    linear-gradient(90deg,
+      var(--topics-hero-left) 0%,
+      var(--topics-hero-mid) 46%,
+      var(--topics-hero-right) 82%,
+      color-mix(in srgb,var(--bg) 5%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 4%,transparent),
+      transparent 48%,
+      color-mix(in srgb,var(--bg) 18%,transparent)),
+    var(--topics-hero-art) 78% 46%/cover no-repeat!important;
 }
