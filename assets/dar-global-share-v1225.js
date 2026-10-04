@@ -1,7 +1,7 @@
 (function(){
   "use strict";
-  if(window.__DAR_GLOBAL_SHARE_V1228)return;
-  window.__DAR_GLOBAL_SHARE_V1228=true;
+  if(window.__DAR_GLOBAL_SHARE_V1230)return;
+  window.__DAR_GLOBAL_SHARE_V1230=true;
 
   var APP_STORE_URL="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
   var APP_STORE_ICON="/assets/app-store-icon-fixed.svg?v=share-v1225";
@@ -109,7 +109,7 @@
     }else{
       body=text(first(root,".post-aussage-text,.post-reader .statement,.statement,.post-slide.is-active .post-slide-quote,.post-slide-quote,.quran-ayah-de,.quran-ayah-ar"));
     }
-    var source=text(first(root,"[data-post-after-source],.post-source-main,.post-reader-cite,.source-text,.post-after-source,.dua-source,.quran-ayah-ref"));
+    var source=text(first(root,"[data-post-after-source],.post-source-main,.post-reader-cite,.hadith-source-line,.source-text,.post-after-source,.dua-source,.quran-ayah-ref,.frauen-source-card"));
     if(!source){var srcPanel=first(root,".source-area-panel,.post-source,.frauen-source-card");source=text(srcPanel)}
     if(!title)title=category||"DĀR AL TAWḤĪD";
     if(!body){
@@ -136,12 +136,20 @@
     var makkah=["/kids/assets/prophet-scenes/desert.webp","/kids/assets/prophet-scenes/mountain.webp","/assets/post-templates/sand-buecher.jpg","/kids/assets/prophet-scenes/royal.webp"];
     var madinah=["/kids/assets/prophet-scenes/garden.webp","/kids/assets/prophet-scenes/royal.webp","/assets/post-templates/gruen-moschee.jpg","/assets/post-templates/olive-mihrab.jpg"];
     var ilm=["/kids/assets/prophet-scenes/library.webp","/assets/post-templates/bibliothek-braun.jpg","/assets/post-templates/nachtblau-buecher.jpg","/assets/post-templates/buecher-teal.jpg","/kids/assets/prophet-scenes/night.webp"];
+    var quran=["/assets/post-templates/buecher-teal.jpg","/assets/post-templates/nachtblau-buecher.jpg","/kids/assets/prophet-scenes/night.webp","/kids/assets/prophet-scenes/library.webp"];
+    var dua=["/kids/assets/prophet-scenes/night.webp","/kids/assets/prophet-scenes/garden.webp","/assets/post-templates/nacht-mond.jpg","/assets/post-templates/olive-mihrab.jpg"];
+    var family=["/kids/assets/prophet-scenes/garden.webp","/kids/assets/prophet-scenes/water.webp","/assets/post-templates/olive-mihrab.jpg","/kids/assets/prophet-scenes/library.webp"];
+    var ramadan=["/kids/assets/prophet-scenes/night.webp","/assets/post-templates/nacht-mond.jpg","/assets/post-templates/gruen-moschee.jpg","/kids/assets/prophet-scenes/royal.webp"];
     var pool=GENERIC_SCENES;
     if(/ṣaḥāb|sahab|salaf|gefährten|gefaehrten/.test(hay))pool=sahabaAny;
     else if(/makkah|mekka|ḥajj|hajj|ʿumrah|umrah|kaʿba|kaaba/.test(hay))pool=makkah;
     else if(/madīnah|madinah|medina|masjid|moschee/.test(hay))pool=madinah;
+    else if(/ramaḍān|ramadan|qiyām|qiyam|iʿtikāf|itikaf/.test(hay))pool=ramadan;
+    else if(/qurʾān|quran|āyah|ayah|sūrah|surah/.test(hay))pool=quran;
+    else if(/duʿā|dua|dhikr|adhkār|adhkar/.test(hay))pool=dua;
+    else if(/ehe|nikāḥ|nikah|familie|kinder|töchter|toechter|schwangerschaft|stillzeit|nifās|nifas/.test(hay))pool=family;
     else if(/ʿilm|ilm|wissen|fiqh|ḥadī|hadith|sunnah|quelle|gelehrt/.test(hay))pool=ilm;
-    var key="darGlobalShareSceneV1228",seq=0;try{seq=Number(localStorage.getItem(key)||0)||0;localStorage.setItem(key,String(seq+1))}catch(e){}
+    var key="darGlobalShareSceneV1230",seq=0;try{seq=Number(localStorage.getItem(key)||0)||0;localStorage.setItem(key,String(seq+1))}catch(e){}
     return pool[(hash(hay+"|"+seq))%pool.length];
   }
   function splitBody(ctx,body,bodySize,maxW,maxH){
@@ -208,7 +216,7 @@
     if(instagram)toast("Bildbeitrag erstellt · im Teilen-Menü Instagram auswählen");
     try{
       if(navigator.share){
-        var payload={files:files,title:data.title+" · DĀR AL TAWḤĪD",text:"DĀR AL TAWḤĪD · "+SITE};
+        var payload={files:files,title:data.title+" · DĀR AL TAWḤĪD",text:"DĀR AL TAWḤĪD · "+SITE+"\nApp Store: "+APP_STORE_URL};
         if(!navigator.canShare||navigator.canShare({files:files})){await navigator.share(payload);return true}
         if(!navigator.canShare||navigator.canShare({files:[files[0]]})){await navigator.share({files:[files[0]],title:payload.title,text:payload.text});return true}
       }
@@ -233,7 +241,7 @@
           filename:files[0].name,
           filenames:files.map(function(f){return f.name}),
           title:data.title+" · DĀR AL TAWḤĪD",
-          text:"dar-al-tawhid.de"
+          text:"dar-al-tawhid.de\nApp Store: "+APP_STORE_URL
         });
         return true;
       }
@@ -272,6 +280,7 @@
     if(clean(data.body))lines.push(clean(data.body));
     if(clean(data.source))lines.push("Quelle: "+trimSource(data.source));
     lines.push(SITE);
+    lines.push("App Store: "+APP_STORE_URL);
     return {title:(clean(data.title)||"DĀR AL TAWḤĪD")+" · DĀR AL TAWḤĪD",text:lines.join("\n\n"),url:data.url||location.href};
   }
   async function nativeTextShare(data){
@@ -337,5 +346,5 @@
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
   function boot(){enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-  window.DARGlobalShare={version:"1229",createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
+  window.DARGlobalShare={version:"1230",createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
 })();
