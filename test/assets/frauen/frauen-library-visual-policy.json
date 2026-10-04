@@ -1,0 +1,29 @@
+{
+  "version": "v1224",
+  "scope": "frauen-library",
+  "placement": {
+    "text": "left",
+    "image": "right",
+    "transition": "soft-gradient",
+    "icon": "keep-small-glass-badge-at-image-edge"
+  },
+  "historical_style": {
+    "period": "approximately 7th-10th century Islamic world",
+    "look": "historical cinematic illustration; realistic atmosphere without portrait-like photorealism",
+    "architecture": "period-plausible mud-brick, stone, palms, textiles, parchment, clay and wood",
+    "forbidden": [
+      "visible faces",
+      "open hair",
+      "portrait-like identifiable people",
+      "modern clothing",
+      "modern buildings",
+      "modern objects",
+      "readable generated text or calligraphy",
+      "fantasy armor",
+      "fantasy architecture"
+    ],
+    "women": "fully covered; shown from behind, fully veiled, distant or otherwise without visible facial features"
+  },
+  "generation_rule": "When a new Frauen library group or area is added and no bespoke visual exists, generate and commit a matching historical visual before release. Do not silently reuse an unrelated motif.",
+  "responsive_rule": "Preserve left-aligned readable text and a clearly visible right-side image on phone, tablet and desktop."
+}
