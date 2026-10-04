@@ -4155,6 +4155,7 @@ STATUS={
     "render_first_audio_priority":False,
     "render_first_audio_ms":0,
     "render_first_audio_target_chars":0,
+    "render_job_id":"",
 }
 
 def set_status(**updates):
@@ -4178,6 +4179,7 @@ def render_status_snapshot():
         "render_preview_duration_seconds","render_preview_generation","render_preview_complete",
         "render_preview_chunks","render_preview_chunk_count","render_preview_mode",
         "render_first_audio_priority","render_first_audio_ms","render_first_audio_target_chars",
+        "render_job_id",
     )
     return {key:st.get(key) for key in keys}
 
@@ -4312,7 +4314,8 @@ def _generation_job_worker(job_id:str,payload:dict):
             text,prepared,style,
             free_mode=free_mode,
             free_pronunciation=free_pronunciation,
-            interactive_fast=bool(payload.get("interactiveFast",True))
+            interactive_fast=bool(payload.get("interactiveFast",True)),
+            job_id=job_id
         )
         record_mobile_generation(out,text,style,free_mode)
         st=Path(out).stat()
@@ -6900,7 +6903,7 @@ def postprocess(src:Path,fast:bool=False):
         print("[DĀR Voice] ffmpeg fallback:",p.stderr[-1200:],flush=True)
     return src
 
-def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free_pronunciation:bool=False,interactive_fast:bool=False):
+def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free_pronunciation:bool=False,interactive_fast:bool=False,job_id:str=""):
     # Produktionsmodus bleibt unverändert. Der Bereich "Freie Stimme" nutzt
     # dieselbe Serhat-Engine, aber ohne Kids-/Content-Pflichten und ohne neue Locks.
     strict_prophet_story=bool(
@@ -7110,6 +7113,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         render_first_audio_priority=bool(interactive_fast and len(plan)>1),
         render_first_audio_ms=0,
         render_first_audio_target_chars=96 if interactive_fast and len(plan)>1 else 0,
+        render_job_id=str(job_id or ""),
         render_total_segments=0,
         render_completed_segments=0,
         render_active_segment=0,
