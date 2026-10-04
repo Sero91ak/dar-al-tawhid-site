@@ -33,6 +33,7 @@ let legacyTags=[];
 let inventoryState={legacy:[],staging:[],live:[]};
 let existingStoryTarget=null;
 let busy=false;
+let inventoryFilter="";
 
 function q(id){return document.getElementById(id)}
 const KIDS_STORY_STANDARD_VERSION="kids-story-greeting-closing-v1";
@@ -420,6 +421,7 @@ function navHtml(){
       <button id="csPronunciationTab" class="cs-tab" type="button">Aussprache</button>
       <button id="csProphetTab" class="cs-tab" type="button">Propheten</button>
       <button id="csSahabaTab" class="cs-tab" type="button">Ṣaḥābah · 10</button>
+      <button id="csAudioFilesTab" class="cs-tab" type="button">Audio-Dateien</button>
       <button class="cs-tab" data-cs-kind="story">Geschichten</button>
       <button class="cs-tab" data-cs-kind="dua">Duʿāʾ</button>
       <button class="cs-tab" data-cs-kind="narration">Erzählungen</button>
@@ -474,8 +476,8 @@ function publishHtml(){
       <button id="csCoverChoose" class="btn quiet" type="button">Bild hineinladen</button>
     </div>
     <div id="csAudioDrop" class="cs-audio-drop" tabindex="0">
-      <div class="cs-audio-drop-head"><b>Fertige Audio direkt zum Text</b><span id="csAudioFileName">MP3 · M4A · WAV · AAC</span></div>
-      <div class="notice">Text öffnen → fertige Datei hineinziehen. Die Datei wird dem aktuellen Text zugeordnet, synchronisiert und kann ohne erneute Sprachgenerierung veröffentlicht werden.</div>
+      <div class="cs-audio-drop-head"><b>Audio-Dateien hochladen</b><span id="csAudioFileName">MP3 · M4A · WAV · AAC</span></div>
+      <div class="notice"><b>Klicken oder Drag & Drop:</b> Zuerst einen vorhandenen Text öffnen. Danach die fertige Audiodatei hier anklicken/auswählen oder direkt aus dem Finder hineinziehen. Audio und Text werden exakt miteinander verknüpft.</div>
       <input id="csAudioFile" type="file" accept="audio/mpeg,audio/mp4,audio/x-m4a,audio/aac,audio/wav,audio/x-wav" hidden>
       <div class="cs-audio-drop-actions">
         <button id="csAudioChoose" class="btn secondary" type="button">Audio auswählen</button>
@@ -572,14 +574,42 @@ function mount(){
 }
 function bind(){
   document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>{
+    inventoryFilter="";
     window.setStudioPage?.("content");
-    ["csProphetTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
+    ["csProphetTab","csSahabaTab","csAudioFilesTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
     switchKind(btn.dataset.csKind);
   }));
   q("csProphetTab")?.addEventListener("click",()=>{
+    inventoryFilter="";
     switchKind("story");
     document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
+    q("csSahabaTab")?.classList.remove("active");
+    q("csAudioFilesTab")?.classList.remove("active");
     window.setStudioPage?.("prophets");
+  });
+  q("csSahabaTab")?.addEventListener("click",async()=>{
+    inventoryFilter="sahaba";
+    switchKind("story");
+    window.setStudioPage?.("content");
+    document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
+    ["csProphetTab","csAudioFilesTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
+    q("csSahabaTab")?.classList.add("active");
+    const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
+    if(title)title.textContent="Ṣaḥābah-Geschichten";
+    if(lead)lead.textContent="Einen Ṣaḥābī und eine Altersfassung anklicken. Der vollständige vorhandene Text wird direkt ins Voice-Studio geladen; danach Audio anklicken oder aus dem Finder hineinziehen.";
+    await loadLibrary(true);
+    q("csLibrarySection")?.scrollIntoView?.({behavior:"smooth",block:"start"});
+  });
+  q("csAudioFilesTab")?.addEventListener("click",()=>{
+    window.setStudioPage?.("content");
+    document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
+    ["csProphetTab","csSahabaTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
+    q("csAudioFilesTab")?.classList.add("active");
+    const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
+    if(title)title.textContent="Audio-Dateien";
+    if(lead)lead.textContent="Vorhandenen Text öffnen oder einfügen. Danach MP3, M4A, AAC oder WAV per Klick auswählen oder direkt aus dem Finder in die Upload-Zone ziehen.";
+    setTimeout(()=>q("csAudioDrop")?.scrollIntoView?.({behavior:"smooth",block:"center"}),80);
+    setTimeout(()=>q("csAudioDrop")?.focus?.(),140);
   });
   q("csPronunciationTab")?.addEventListener("click",()=>window.setStudioPage?.("pronunciation"));
   q("csAlphabetTab")?.addEventListener("click",()=>window.setStudioPage?.("alphabet"));
@@ -919,6 +949,8 @@ function switchKind(kind){
   persistDraft();existingStoryTarget=null;studioKind=kind||"story";
   document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.toggle("active",x.dataset.csKind===studioKind));
   q("csProphetTab")?.classList.remove("active");
+  q("csSahabaTab")?.classList.remove("active");
+  q("csAudioFilesTab")?.classList.remove("active");
   const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
   resetEditorForKind();
   if(studioKind==="story"){title.textContent="Kids-Geschichten";lead.textContent="Vorhandenen Text öffnen oder neuen Text schreiben · Stimme erzeugen oder fertige Audio direkt hochladen · anschließend in Kids veröffentlichen.";q("styleMode").value="kids_story"}
@@ -1606,6 +1638,8 @@ function renderInventory(){
   const rows=all.filter(row=>{
     const item=row.staging||row.live||row.legacy||{};
     const itemStudioKind=studioKindForItem(item);
+    const tags=Array.isArray(item.tags)?item.tags.map(String):[];
+    if(inventoryFilter==="sahaba"&&!tags.includes("existing-story:mubashshirun"))return false;
     const sectionMatch=studioKind==="ios"
       ?item.appTarget==="ios"
       :studioKind==="dua"
@@ -1623,7 +1657,9 @@ function renderInventory(){
     if(!term)return true;
     return [row.title,item.prophetId,item.category,item.kind,item.topic,(item.tags||[]).join(" ")].join(" ").toLowerCase().includes(term);
   });
-  if(summary)summary.textContent="Bestand "+inventoryState.legacy.length+" · Studio intern/Test "+inventoryState.staging.length+" · Studio live "+inventoryState.live.length+" · zusammen "+all.length;
+  if(summary)summary.textContent=inventoryFilter==="sahaba"
+    ?("Ṣaḥābah-Texte · "+rows.length+" Altersfassungen · anklicken → Text + Audio-Upload")
+    :("Bestand "+inventoryState.legacy.length+" · Studio intern/Test "+inventoryState.staging.length+" · Studio live "+inventoryState.live.length+" · zusammen "+all.length);
   if(!rows.length){box.innerHTML='<div class="notice">Keine passenden Inhalte gefunden.</div>';return}
   box.innerHTML=rows.map(row=>{
     const active=row.staging||row.live||row.legacy||{};
@@ -1707,6 +1743,11 @@ async function loadLegacyForEdit(id){
     "good"
   );
   setTimeout(()=>goToWorkflowStep("text"),80);
+  if(existingStoryTarget?.kind==="mubashshirun"){
+    inventoryFilter="sahaba";
+    q("csSahabaTab")?.classList.add("active");
+    setTimeout(()=>q("csAudioDrop")?.scrollIntoView?.({behavior:"smooth",block:"center"}),260);
+  }
 }
 
 async function loadLiveForEdit(id){
