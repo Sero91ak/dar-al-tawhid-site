@@ -214,3 +214,89 @@ html[data-view="parents"] .shell{padding-top:0!important}
 @media(prefers-reduced-motion:reduce){
   #view-stories > .page-head,#view-quran > .page-head,#view-parents > .page-head{animation:none!important}
 }
+
+
+/* KIDS_SECTION_HEROES_LATE_CASCADE_FIX_V1091
+   Muss gegen ältere Inline-Regeln am Dokumentende gewinnen. */
+html[data-view="stories"] body .app #view-stories > .page-head.page-head,
+html[data-view="quran"] body .app #view-quran > .page-head.page-head,
+html[data-view="parents"] body .app #view-parents > .page-head.page-head{
+  position:relative!important;
+  isolation:isolate!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  width:100vw!important;
+  max-width:100vw!important;
+  min-height:clamp(430px,54dvh,620px)!important;
+  margin:0 calc(50% - 50vw) 30px!important;
+  padding:max(96px,calc(env(safe-area-inset-top,0px) + 38px))
+          max(24px,calc(env(safe-area-inset-right,0px) + 22px))
+          42px
+          max(24px,calc(env(safe-area-inset-left,0px) + 22px))!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+}
+html[data-view="stories"] body .app #view-stories > .page-head.page-head{
+  background-image:
+    linear-gradient(90deg,rgba(3,18,29,.93) 0%,rgba(3,18,29,.72) 39%,rgba(3,18,29,.28) 70%,rgba(3,18,29,.08) 100%),
+    linear-gradient(180deg,rgba(4,20,33,.05) 0%,rgba(4,20,33,.04) 43%,rgba(4,24,38,.30) 72%,#0c2636 100%),
+    url("/kids/assets/kids-art/section-stories-v1090.jpg?v=1091-hotfix1")!important;
+  background-position:center 50%!important;
+}
+html[data-view="quran"] body .app #view-quran > .page-head.page-head{
+  background-image:
+    linear-gradient(90deg,rgba(2,18,31,.94) 0%,rgba(2,18,31,.73) 40%,rgba(2,18,31,.30) 70%,rgba(2,18,31,.08) 100%),
+    linear-gradient(180deg,rgba(3,19,31,.04) 0%,rgba(3,19,31,.06) 42%,rgba(4,24,38,.32) 73%,#0c2636 100%),
+    url("/kids/assets/kids-art/section-quran-v1090.jpg?v=1091-hotfix1")!important;
+  background-position:center 53%!important;
+}
+html[data-view="parents"] body .app #view-parents > .page-head.page-head{
+  background-image:
+    linear-gradient(90deg,rgba(3,18,29,.94) 0%,rgba(3,18,29,.70) 43%,rgba(3,18,29,.30) 72%,rgba(3,18,29,.10) 100%),
+    linear-gradient(180deg,rgba(3,18,29,.04) 0%,rgba(3,18,29,.04) 42%,rgba(4,24,38,.34) 74%,#0c2636 100%),
+    url("/kids/assets/kids-art/section-parents-v1090.jpg?v=1091-hotfix1")!important;
+  background-position:center 50%!important;
+}
+html[data-view="stories"] body .app #view-stories > .page-head.page-head .kicker,
+html[data-view="quran"] body .app #view-quran > .page-head.page-head .kicker,
+html[data-view="parents"] body .app #view-parents > .page-head.page-head .kicker{
+  align-self:flex-start!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  width:auto!important;
+  min-height:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+@media(max-width:390px){
+  html[data-view="stories"] body .app #view-stories > .page-head.page-head,
+  html[data-view="quran"] body .app #view-quran > .page-head.page-head,
+  html[data-view="parents"] body .app #view-parents > .page-head.page-head{
+    min-height:390px!important;
+    margin-bottom:25px!important;
+    padding:max(86px,calc(env(safe-area-inset-top,0px) + 31px)) 20px 34px 20px!important;
+  }
+}
+@media(min-width:700px){
+  html[data-view="stories"] body .app #view-stories > .page-head.page-head,
+  html[data-view="quran"] body .app #view-quran > .page-head.page-head,
+  html[data-view="parents"] body .app #view-parents > .page-head.page-head{
+    min-height:560px!important;
+    margin-bottom:38px!important;
+    padding:max(112px,calc(env(safe-area-inset-top,0px) + 44px))
+            max(46px,calc(env(safe-area-inset-right,0px) + 32px))
+            58px
+            max(46px,calc(env(safe-area-inset-left,0px) + 32px))!important;
+  }
+}
