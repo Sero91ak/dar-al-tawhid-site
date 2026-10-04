@@ -1527,6 +1527,364 @@
       font-size:11px!important;
     }
 
+  
+    /* WASIYYAH EDGE-TO-EDGE RESPONSIVE V13 · 2026-10-04 */
+
+    /* Die Wasiyyah nutzt die echte Gerätebreite. Keine Desktop-Spalte im Smartphone. */
+    .page,
+    body:not(.wa-chat-active):not(.wa-summary-active) .page{
+      width:100%!important;
+      max-width:none!important;
+      margin:0!important;
+      padding-left:max(8px,env(safe-area-inset-left))!important;
+      padding-right:max(8px,env(safe-area-inset-right))!important;
+    }
+    .wa-topbar{
+      padding-left:clamp(4px,1vw,14px)!important;
+      padding-right:clamp(4px,1vw,14px)!important;
+    }
+
+    /* Top-Level-Flächen füllen die Breite; Schatten nur noch sehr zurückhaltend. */
+    .panel{
+      width:100%!important;
+      max-width:none!important;
+      box-shadow:0 12px 38px rgba(35,29,17,.08)!important;
+    }
+
+    /* Chat: keine Kapsel in Kapsel. */
+    body.wa-chat-active .workspace{
+      width:100%!important;
+      max-width:none!important;
+      border-radius:20px!important;
+      box-shadow:0 10px 32px rgba(32,26,16,.07)!important;
+    }
+    body.wa-chat-active .chat-card{
+      background:transparent!important;
+    }
+
+    /* Zusammenfassung ist jetzt eine eigene, offene Arbeitsseite. */
+    body.wa-summary-active{
+      overflow-x:hidden!important;
+      background:
+        radial-gradient(circle at 8% 0%,color-mix(in srgb,var(--gold) 10%,transparent),transparent 25%),
+        linear-gradient(180deg,color-mix(in srgb,var(--paper) 98%,#fff),var(--bg))!important;
+    }
+    body.wa-summary-active .page{
+      width:100%!important;
+      max-width:none!important;
+      margin:0!important;
+      padding-top:calc(8px + env(safe-area-inset-top))!important;
+      padding-left:max(8px,env(safe-area-inset-left))!important;
+      padding-right:max(8px,env(safe-area-inset-right))!important;
+      padding-bottom:calc(28px + env(safe-area-inset-bottom))!important;
+    }
+    body.wa-summary-active #summaryPanel{
+      width:100%!important;
+      max-width:none!important;
+      margin:0!important;
+      padding:clamp(14px,2.2vw,28px)!important;
+      border:0!important;
+      border-radius:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+      overflow:visible!important;
+    }
+    body.wa-summary-active #summaryPanel>.head{
+      display:grid!important;
+      grid-template-columns:minmax(0,1fr) auto!important;
+      align-items:end!important;
+      gap:10px 18px!important;
+      padding:0 0 16px!important;
+      margin:0!important;
+      border-bottom:1px solid var(--wa-surface-line)!important;
+    }
+    body.wa-summary-active #summaryPanel>.head .kicker{
+      margin-bottom:5px!important;
+    }
+    body.wa-summary-active #summaryPanel>.head h2{
+      margin:0!important;
+      max-width:900px;
+      font-family:Georgia,"Times New Roman",serif!important;
+      font-size:clamp(29px,4vw,52px)!important;
+      line-height:1.02!important;
+      letter-spacing:-.035em!important;
+      text-wrap:balance;
+    }
+    body.wa-summary-active #summaryPanel>.head>.btn{
+      min-height:38px!important;
+      padding:7px 0 6px!important;
+      border:0!important;
+      border-bottom:1px solid var(--wa-surface-line)!important;
+      border-radius:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+      color:var(--ink)!important;
+      font-size:12px!important;
+    }
+    body.wa-summary-active #summaryPanel>.head>.btn::before{
+      content:"← ";
+      color:var(--gold);
+    }
+
+    /* iPad/Desktop: volle Breite in zwei sinnvoll gewichteten Spalten. */
+    body.wa-summary-active .summary-grid{
+      display:grid!important;
+      grid-template-columns:minmax(260px,.34fr) minmax(0,.66fr)!important;
+      gap:clamp(16px,2vw,30px)!important;
+      align-items:start!important;
+      width:100%!important;
+      max-width:none!important;
+      margin-top:20px!important;
+    }
+
+    /* Innere Boxen werden offene Abschnitte statt weiterer Kapseln. */
+    body.wa-summary-active .summary-grid>.box{
+      width:100%!important;
+      min-width:0!important;
+      padding:0!important;
+      border:0!important;
+      border-radius:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+    }
+    body.wa-summary-active .summary-data{
+      margin:0!important;
+      padding-right:clamp(10px,1.8vw,28px)!important;
+      border-right:1px solid var(--wa-surface-line)!important;
+    }
+    body.wa-summary-active .summary-data>h3,
+    body.wa-summary-active .editor-box>h3{
+      margin:0 0 12px!important;
+      color:var(--ink)!important;
+      font-family:Georgia,"Times New Roman",serif!important;
+      font-size:clamp(20px,2.2vw,28px)!important;
+      font-weight:700!important;
+      letter-spacing:-.015em!important;
+    }
+
+    body.wa-summary-active .row{
+      padding:11px 0!important;
+      border-bottom:1px solid color-mix(in srgb,var(--line) 72%,transparent)!important;
+    }
+    body.wa-summary-active .row b{
+      margin-bottom:4px!important;
+      font-size:13px!important;
+      line-height:1.28!important;
+    }
+    body.wa-summary-active .row span{
+      font-size:12px!important;
+      line-height:1.5!important;
+    }
+    .wa-summary-empty{
+      display:grid;
+      gap:5px;
+      padding:14px 0 16px;
+      border-top:1px solid var(--wa-surface-line);
+      border-bottom:1px solid var(--wa-surface-line);
+    }
+    .wa-summary-empty strong{
+      color:var(--ink);
+      font-size:14px;
+    }
+    .wa-summary-empty span{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    body.wa-summary-active .wa-summary-reviewbar{
+      display:grid!important;
+      grid-template-columns:minmax(0,1fr) auto!important;
+      align-items:center!important;
+      gap:12px!important;
+      padding:0 0 13px!important;
+      margin:0 0 14px!important;
+    }
+    body.wa-summary-active .wa-summary-reviewbar strong{
+      font-size:19px!important;
+    }
+    body.wa-summary-active .wa-edit-toggle{
+      min-height:34px!important;
+      padding:6px 10px!important;
+      border-radius:10px!important;
+      box-shadow:none!important;
+    }
+
+    /* Vorlagen als flaches Segment statt drei großer Kapseln. */
+    body.wa-summary-active .pdf-template-control{
+      margin:0 0 14px!important;
+      gap:7px!important;
+    }
+    body.wa-summary-active .wa-template-picks{
+      display:grid!important;
+      grid-template-columns:repeat(3,minmax(0,1fr))!important;
+      gap:0!important;
+      border-top:1px solid var(--wa-surface-line)!important;
+      border-bottom:1px solid var(--wa-surface-line)!important;
+    }
+    body.wa-summary-active .wa-template-pick{
+      display:block!important;
+      min-height:48px!important;
+      padding:10px 12px!important;
+      border:0!important;
+      border-right:1px solid var(--wa-surface-line)!important;
+      border-radius:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+      text-align:center!important;
+      font-size:11px!important;
+      line-height:1.25!important;
+    }
+    body.wa-summary-active .wa-template-pick:last-child{
+      border-right:0!important;
+    }
+    body.wa-summary-active .wa-template-pick::before{
+      width:15px!important;
+      height:19px!important;
+      margin:0 auto 5px!important;
+    }
+    body.wa-summary-active .wa-template-pick.is-active{
+      background:color-mix(in srgb,var(--gold) 9%,transparent)!important;
+      box-shadow:inset 0 -2px 0 var(--gold)!important;
+    }
+
+    /* Dokumentvorschau nutzt die gesamte rechte Spalte. */
+    body.wa-summary-active .editor-box .print-document{
+      width:100%!important;
+      max-width:none!important;
+      margin:0!important;
+      border-radius:12px!important;
+      box-shadow:0 8px 24px rgba(35,27,15,.06)!important;
+    }
+    body.wa-summary-active .editor-box #finalEditor{
+      width:100%!important;
+      max-width:none!important;
+    }
+    body.wa-summary-active .pdf-result{
+      border-radius:12px!important;
+      box-shadow:none!important;
+    }
+    body.wa-summary-active .actions{
+      display:grid!important;
+      grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr)!important;
+      gap:9px!important;
+      width:100%!important;
+      margin-top:14px!important;
+    }
+    body.wa-summary-active .actions .btn{
+      width:100%!important;
+      min-height:48px!important;
+      border-radius:14px!important;
+    }
+
+    /* Tablet landscape: echte Widescreen-Ausnutzung. */
+    @media(min-width:900px){
+      .page{
+        padding-left:max(14px,env(safe-area-inset-left))!important;
+        padding-right:max(14px,env(safe-area-inset-right))!important;
+      }
+      body.wa-chat-active .workspace{
+        grid-template-columns:minmax(220px,18vw) minmax(0,1fr)!important;
+      }
+    }
+
+    /* Phones + iPad portrait: fast full bleed, ohne verschachtelte Karten. */
+    @media(max-width:899px){
+      .page,
+      body:not(.wa-chat-active):not(.wa-summary-active) .page,
+      body.wa-summary-active .page{
+        padding-left:max(4px,env(safe-area-inset-left))!important;
+        padding-right:max(4px,env(safe-area-inset-right))!important;
+      }
+      .wa-topbar{
+        padding-left:9px!important;
+        padding-right:9px!important;
+      }
+
+      body.wa-chat-active .workspace{
+        border-left:0!important;
+        border-right:0!important;
+        border-radius:16px!important;
+      }
+
+      body.wa-summary-active #summaryPanel{
+        padding:15px 10px 18px!important;
+      }
+      body.wa-summary-active #summaryPanel>.head{
+        grid-template-columns:1fr!important;
+        align-items:start!important;
+        gap:8px!important;
+      }
+      body.wa-summary-active #summaryPanel>.head h2{
+        font-size:clamp(30px,8vw,42px)!important;
+        max-width:660px!important;
+      }
+      body.wa-summary-active #summaryPanel>.head>.btn{
+        width:max-content!important;
+        justify-self:start!important;
+      }
+      body.wa-summary-active .summary-grid{
+        display:block!important;
+        width:100%!important;
+        margin-top:16px!important;
+      }
+      body.wa-summary-active .summary-data{
+        padding:0 0 15px!important;
+        margin:0 0 18px!important;
+        border-right:0!important;
+        border-bottom:1px solid var(--wa-surface-line)!important;
+      }
+
+      /* Keine lange leere Checkliste im Testmodus. */
+      body.wa-summary-active .summary-data>h3{
+        margin-bottom:8px!important;
+      }
+
+      body.wa-summary-active .editor-box{
+        width:100%!important;
+      }
+      body.wa-summary-active .wa-template-picks{
+        width:100%!important;
+      }
+      body.wa-summary-active .wa-template-pick{
+        padding:9px 5px!important;
+        font-size:10px!important;
+      }
+      body.wa-summary-active .editor-box .print-document{
+        padding:18px 14px!important;
+        border-left:0!important;
+        border-right:0!important;
+        border-radius:8px!important;
+      }
+      body.wa-summary-active .actions{
+        grid-template-columns:1fr!important;
+      }
+    }
+
+    @media(max-width:430px){
+      .page,
+      body:not(.wa-chat-active):not(.wa-summary-active) .page,
+      body.wa-summary-active .page{
+        padding-left:max(2px,env(safe-area-inset-left))!important;
+        padding-right:max(2px,env(safe-area-inset-right))!important;
+      }
+      body.wa-summary-active #summaryPanel{
+        padding-left:8px!important;
+        padding-right:8px!important;
+      }
+      body.wa-summary-active #summaryPanel>.head h2{
+        font-size:clamp(29px,9.2vw,38px)!important;
+      }
+      body.wa-summary-active .wa-summary-reviewbar{
+        grid-template-columns:1fr auto!important;
+      }
+      body.wa-summary-active .wa-template-pick{
+        min-height:46px!important;
+        padding-inline:3px!important;
+        font-size:9.5px!important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1739,8 +2097,8 @@
     function load(){const raw=localStorage.getItem(STORAGE_KEY);if(!raw){toast("Kein lokaler Entwurf gefunden.");return}try{state={...emptyDraft(),...JSON.parse(raw)};showPanel("chat");renderProgress();renderMessages();const p=current();$("#phaseKicker").textContent="Schritt "+(state.phaseIndex+1)+" von "+phases.length;$("#phaseTitle").textContent=p[1];stabilizeChatViewport();toast("Entwurf geladen.")}catch(e){toast("Entwurf konnte nicht geladen werden.")}}
     function clearDraft(){if(!confirm("Lokalen Wasiyyah-Entwurf wirklich löschen?"))return;localStorage.removeItem(STORAGE_KEY);state=emptyDraft();$("#chatMessages").innerHTML="";renderProgress();showPanel("start");toast("Entwurf gelöscht.")}
     function finalText(){const flags=state.reviewFlags.length?state.reviewFlags.map((f,i)=>(i+1)+". "+f).join("\n"):"Keine besonderen Prüfhinweise erfasst.";return "ISLAMISCHE WASIYYAH-ERKLÄRUNG\n\nDiese Erklärung wurde als islamische Wasiyyah vorbereitet. Sie dient der Klärung meiner Wünsche, meiner Schulden, Amānāt, Ansprechpartner und islamischen Anweisungen. Für staatliche Wirksamkeit sind die jeweiligen gesetzlichen Formen separat zu beachten.\n\n1. PERSÖNLICHE ANGABEN\n\n"+(state.personal||"Keine Angaben erfasst.")+"\n\n2. GLAUBE UND GRUNDLAGE\n\n"+(state.faithDeclaration||"Ich bezeuge, dass es keinen anbetungswürdigen Gott gibt außer Allāh und dass Muḥammad ﷺ Sein Diener und Gesandter ist. Ich wünsche, dass meine Angelegenheiten nach Qurʾān, authentischer Sunnah und dem Verständnis der frühen Muslime geregelt werden.")+"\n\n3. FAMILIE UND MÖGLICHE ERBEN\n\n"+(state.family||"Keine Angaben erfasst.")+"\n\nHinweis: Die endgültige Farāʾiḍ-Verteilung hängt von den tatsächlich lebenden Erben zum Todeszeitpunkt ab.\n\n4. SCHULDEN UND OFFENE RECHTE\n\n"+(state.debts||"Keine bekannten Schulden oder offenen Rechte erfasst.")+"\n\n5. AMĀNĀT UND ANVERTRAUTE DINGE\n\n"+(state.amanat||"Keine bekannten Amānāt erfasst.")+"\n\n6. VERMÖGEN UND WICHTIGE DOKUMENTE\n\n"+(state.assets||"Keine Angaben erfasst.")+"\n\n7. ZAKĀH UND RELIGIÖSE PFLICHTEN\n\n"+(state.religiousObligations||"Keine Angaben erfasst.")+"\n\n8. WASIYYAH BIS MAXIMAL EIN DRITTEL\n\n"+(state.bequests||"Keine besondere Wasiyyah erfasst.")+"\n\n9. JANĀZAH NACH SUNNAH\n\n"+(state.janazah||"Ich wünsche Ghusl, Kafan, Ṣalāt al-Janāzah und Beerdigung auf einem muslimischen Grabfeld, soweit möglich.")+"\n\n10. NICHT GEWÜNSCHTE NEUERUNGEN UND ZEREMONIEN\n\n"+(state.bidahRestrictions||"Ich wünsche ausdrücklich, dass alles nach Qurʾān, authentischer Sunnah und dem Verständnis der frühen Muslime erfolgt. Ich lehne Schirk, Bidʿah, unbelegte religiöse Zeremonien, übertriebenes Trauern, Musik, Klagegeschrei, Grab-Bauten, Kuppeln, Bilder, Statuen und jede Handlung ab, die dem Tauḥīd und der Sunnah widerspricht.")+"\n\n11. KINDER / VORMUNDSCHAFT / PRIVATE WÜNSCHE\n\n"+(state.guardianship||"Keine Angaben erfasst.")+"\n\n12. ANSPRECHPARTNER / WASIYY\n\n"+(state.contacts||"Keine Angaben erfasst.")+"\n\n13. PRIVATE HINWEISE AN ANGEHÖRIGE\n\n"+(state.privateNotes||"Ich bitte meine Angehörigen, mit Taqwā, Ruhe und Gerechtigkeit zu handeln, Streit zu vermeiden und bei Unsicherheit fachkundige Menschen von Ahl al-Sunnah zu fragen.")+"\n\n14. PRÜFHINWEISE\n\n"+flags+"\n\n15. QUELLEN-KURZHINWEIS\n\n- Qurʾān 4:11-12: Erbanteile und Reihenfolge nach Wasiyyah/Schuld.\n- Ṣaḥīḥ al-Bukhārī 2738: Wasiyyah nicht aufschieben.\n- Ṣaḥīḥ al-Bukhārī 2742: Ein Drittel, und ein Drittel ist viel.\n- Sunan Abī Dāwūd 2870: Keine Wasiyyah für einen Erben.\n- Ṣaḥīḥ al-Bukhārī 6732: Farāʾiḍ den Berechtigten geben.\n- Ṣaḥīḥ al-Bukhārī 6764: Unterschied der Religion als Erbhindernis.\n- Jāmiʿ at-Tirmidhī 1078: Ernst der Schulden.\n- Ṣaḥīḥ Muslim 970a und 969a: Regeln zu Gräbern und Verbot von Übertreibung.\n- Ṣaḥīḥ al-Bukhārī 1294: Warnung vor Jāhiliyyah-Trauerritualen.\n\nOrt: ______________________________\n\nDatum: ____ / ____ / _____________\n\nUnterschrift: _______________________"}
-    function renderSummary(){const rows=[["Persönliche Angaben",state.personal],["Glaube & Grundlage",state.faithDeclaration],["Familie",state.family],["Schulden",state.debts],["Amānāt",state.amanat],["Vermögen",state.assets],["Religiöse Pflichten",state.religiousObligations],["Wasiyyah",state.bequests],["Janāzah",state.janazah],["Keine Bidʿah/Zeremonien",state.bidahRestrictions],["Kinder/Vormundschaft",state.guardianship],["Ansprechpartner",state.contacts],["Private Hinweise",state.privateNotes],["Prüfhinweise",state.reviewFlags.join("\n")]];const box=$("#summaryData");box.innerHTML="";rows.forEach(r=>{const div=document.createElement("div");div.className="row";div.innerHTML="<b>"+esc(r[0])+"</b><span>"+esc(r[1]||"—")+"</span>";box.appendChild(div)});const filled=rows.slice(0,13).filter(r=>String(r[1]||"").trim()).length;const complete=$("#summaryCompleteness");if(complete)complete.textContent=filled+" von 13 Bereichen mit eigenen Angaben · vor PDF bitte prüfen."}
-    function showSummary(){state.finalText=finalText();renderSummary();$("#finalEditor").value=state.finalText;buildPrintDocument(state.finalText);setAppMode("summary");panels.start.classList.add("hidden");panels.evidence.classList.add("hidden");panels.chat.classList.remove("hidden");panels.summary.classList.remove("hidden");requestAnimationFrame(()=>panels.summary.scrollIntoView({behavior:"smooth",block:"start"}))}
+    function renderSummary(){const rows=[["Persönliche Angaben",state.personal],["Glaube & Grundlage",state.faithDeclaration],["Familie",state.family],["Schulden",state.debts],["Amānāt",state.amanat],["Vermögen",state.assets],["Religiöse Pflichten",state.religiousObligations],["Wasiyyah",state.bequests],["Janāzah",state.janazah],["Keine Bidʿah/Zeremonien",state.bidahRestrictions],["Kinder/Vormundschaft",state.guardianship],["Ansprechpartner",state.contacts],["Private Hinweise",state.privateNotes],["Prüfhinweise",state.reviewFlags.join("\n")]];const box=$("#summaryData");box.innerHTML="";const visible=rows.filter(r=>String(r[1]||"").trim());if(!visible.length){const empty=document.createElement("div");empty.className="wa-summary-empty";empty.innerHTML="<strong>Noch keine eigenen Angaben</strong><span>Im Testmodus kannst du die PDF trotzdem prüfen. Sobald du Antworten einträgst, erscheinen sie hier kompakt.</span>";box.appendChild(empty)}else{visible.forEach(r=>{const div=document.createElement("div");div.className="row";div.innerHTML="<b>"+esc(r[0])+"</b><span>"+esc(r[1])+"</span>";box.appendChild(div)})}const filled=rows.slice(0,13).filter(r=>String(r[1]||"").trim()).length;const complete=$("#summaryCompleteness");if(complete)complete.textContent=filled+" von 13 Bereichen mit eigenen Angaben · vor PDF bitte prüfen."}
+    function showSummary(){state.finalText=finalText();renderSummary();$("#finalEditor").value=state.finalText;buildPrintDocument(state.finalText);showPanel("summary");resetDocumentScroll();requestAnimationFrame(()=>{resetDocumentScroll();panels.summary.scrollIntoView({behavior:"auto",block:"start"})})}
     function resetDocumentScroll(){try{window.scrollTo(0,0)}catch(e){}try{if(document.scrollingElement)document.scrollingElement.scrollTop=0}catch(e){}}
     function scrollChatToBottom(behavior="auto"){const box=$("#chatMessages");if(!box)return;requestAnimationFrame(()=>box.scrollTo({top:box.scrollHeight,behavior}))}
     function syncVisualViewport(){const vv=window.visualViewport;const h=vv?vv.height:window.innerHeight;const top=vv?vv.offsetTop:0;document.documentElement.style.setProperty("--wa-vv-height",Math.max(320,Math.round(h))+"px");document.documentElement.style.setProperty("--wa-vv-top",Math.max(0,Math.round(top))+"px")}
