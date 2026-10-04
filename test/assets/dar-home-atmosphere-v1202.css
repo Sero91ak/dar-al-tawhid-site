@@ -2293,5 +2293,10 @@ html.dar-home-v1194 body.is-home-route #appView .home-v380-quran-hero{
   backdrop-filter:none!important;
 }
 html.dar-home-v1194 body.is-home-route .footer{
-  display:none!important;
+  display:block!important;
+  visibility:visible!important;
+  height:auto!important;
+  overflow:visible!important;
+  margin-top:0!important;
+  padding-top:18px!important;
 }
