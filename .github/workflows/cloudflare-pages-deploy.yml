@@ -35,7 +35,6 @@ on:
       - scripts/cf-pages-build.js
       - scripts/sync-app-build-ids.js
       - scripts/verify-live-deploy.js
-      - scripts/app-live-parity-check.js
       - scripts/purge-cloudflare-cache.js
       - scripts/kids-prophet-release-guard.js
       - .github/workflows/cloudflare-pages-deploy.yml
