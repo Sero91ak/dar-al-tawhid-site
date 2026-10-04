@@ -205,7 +205,7 @@ async function generate(){
     if(!state.generating||progressBusy)return;
     progressBusy=true;
     try{
-      const rr=await api("/status");const st=await rr.json();
+      const rr=await api("/render-status");const st=await rr.json();
       const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
       const done=Number(st.render_completed_segments||0),total=Number(st.render_total_segments||0);
       $("#generateBtn").textContent=pct>0?("Erzeuge "+pct+"%"+(total?" · "+done+"/"+total:"")):"Erzeuge …";
