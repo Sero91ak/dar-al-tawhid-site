@@ -2984,21 +2984,124 @@ def _kids_owner_voice_add(rows,value,mode,scope,source_id=""):
         row["mode"]="kids_story"
         row["text"]=original
 
-def _kids_owner_voice_add_question(rows,q,age_key,scope,source_id):
+def _kids_quiz_prompt(q,age_key=""):
     if not isinstance(q,dict):
-        return
+        return ""
     question=str(q.get("question") or "").strip()
+    if not question:
+        return ""
     answers=list(q.get("answers") or [])
     labels=[str((a or {}).get("label") or "").strip() for a in answers]
     labels=[x for x in labels if x]
-    if question:
-        lower=[x.casefold() for x in labels]
-        age_value=str(age_key or "").strip()
-        if age_value in {"4–5","4-5","4–6","4-6"} and len(lower)==2 and "ja" in lower and "nein" in lower:
-            prompt=(question+" Ja oder Nein?").strip()
-        else:
-            choices=" ".join(f"Antwort {i+1}: {label}." for i,label in enumerate(labels))
-            prompt=(question+" "+choices).strip()
+    lower=[x.casefold() for x in labels]
+    age_value=str(age_key or q.get("ageBand") or "").strip()
+    if age_value in {"4–5","4-5","4–6","4-6"} and len(lower)==2 and "ja" in lower and "nein" in lower:
+        return (question+" Ja oder Nein?").strip()
+    choices=" ".join(f"Antwort {i+1}: {label}." for i,label in enumerate(labels))
+    return (question+" "+choices).strip()
+
+def _kids_quiz_master_for_prompt(prompt):
+    key=_kids_owner_voice_key(prompt)
+    digest=hashlib.sha1(("question"+"\0"+key).encode("utf-8")).hexdigest()[:24]
+    return KIDS_OWNER_VOICE_MASTER_HOME/(digest+".wav")
+
+def load_quiz_audio_manifest_fresh():
+    return load_fresh_kids_repo_json(
+        "quiz-audio.json","kids/data/quiz-audio.json",
+        lambda d:isinstance(d,dict) and isinstance(d.get("entries"),dict),
+    )
+
+def _kids_quiz_catalog():
+    quiz=load_fresh_kids_repo_json(
+        "quiz-kids.json","kids/data/quiz-kids.json",
+        lambda d:isinstance(d,dict) and isinstance(d.get("items"),list) and len(d.get("items") or [])>0,
+    )
+    owner=load_owner_voice_manifest_fresh()
+    legacy=load_quiz_audio_manifest_fresh()
+    owner_entries=dict(owner.get("entries") or {})
+    legacy_entries=dict(legacy.get("entries") or {})
+    items=[]
+    voice_counts={"published":0,"local":0,"missing":0}
+    age_counts={}
+    for row in (quiz.get("items") or []):
+        if not isinstance(row,dict):
+            continue
+        item_id=str(row.get("id") or "").strip()
+        age_band=str(row.get("ageBand") or "").strip()
+        prompt=_kids_quiz_prompt(row,age_band)
+        key=_kids_owner_voice_key(prompt)
+        entry=owner_entries.get(key) or legacy_entries.get(key) or {}
+        master=_kids_quiz_master_for_prompt(prompt) if prompt else None
+        published=bool((entry or {}).get("url"))
+        local=bool(master and master.exists() and master.stat().st_size>1024)
+        state="published" if published else ("local" if local else "missing")
+        voice_counts[state]=voice_counts.get(state,0)+1
+        age_counts[age_band]=age_counts.get(age_band,0)+1
+        items.append({
+            "id":item_id,
+            "number":int(row.get("number") or 0),
+            "ageBand":age_band,
+            "category":str(row.get("category") or ""),
+            "topic":str(row.get("topic") or ""),
+            "question":str(row.get("question") or ""),
+            "answers":list(row.get("answers") or []),
+            "success":str(row.get("success") or ""),
+            "retry":str(row.get("retry") or ""),
+            "explanation":str(row.get("explanation") or ""),
+            "sourceType":str(row.get("sourceType") or ""),
+            "source":str(row.get("source") or ""),
+            "voicePrompt":prompt,
+            "voiceState":state,
+            "voiceDurationSeconds":float((entry or {}).get("durationSeconds") or 0),
+            "audioUrl":("/kids-quiz/audio?id="+item_id) if (published or local) else "",
+        })
+    items.sort(key=lambda x:(int(x.get("number") or 0),str(x.get("id") or "")))
+    return {
+        "ok":True,
+        "version":quiz.get("version"),
+        "total":len(items),
+        "counts":age_counts,
+        "voice":voice_counts,
+        "items":items,
+    }
+
+def _kids_quiz_item_by_id(item_id):
+    wanted=str(item_id or "").strip()
+    if not wanted:
+        raise ValueError("Quiz-ID fehlt.")
+    quiz=load_fresh_kids_repo_json(
+        "quiz-kids.json","kids/data/quiz-kids.json",
+        lambda d:isinstance(d,dict) and isinstance(d.get("items"),list) and len(d.get("items") or [])>0,
+    )
+    for row in (quiz.get("items") or []):
+        if str((row or {}).get("id") or "").strip()==wanted:
+            return row
+    raise ValueError("Quizfrage nicht gefunden: "+wanted)
+
+def _kids_quiz_render_one(item_id):
+    row=_kids_quiz_item_by_id(item_id)
+    prompt=_kids_quiz_prompt(row,row.get("ageBand"))
+    if not prompt:
+        raise ValueError("Quizfrage hat keinen Sprechtext.")
+    master,metrics=_generate_kids_owner_voice_master(prompt,"question")
+    return {
+        "ok":True,
+        "id":str(row.get("id") or ""),
+        "number":int(row.get("number") or 0),
+        "question":str(row.get("question") or ""),
+        "voicePrompt":prompt,
+        "voiceState":"local",
+        "audioUrl":"/kids-quiz/audio?id="+str(row.get("id") or ""),
+        "metrics":metrics,
+        "cachedMaster":str(master),
+        "publishHint":"Der nächste Kids-Voice-Sync übernimmt diesen lokalen Master ohne erneute Aussprache-Erzeugung.",
+    }
+
+def _kids_owner_voice_add_question(rows,q,age_key,scope,source_id):
+    if not isinstance(q,dict):
+        return
+    prompt=_kids_quiz_prompt(q,age_key)
+    if prompt:
         _kids_owner_voice_add(rows,prompt,"question",scope,source_id)
     _kids_owner_voice_add(rows,q.get("success"),"kids_lesson",scope,source_id)
     _kids_owner_voice_add(rows,q.get("retry"),"kids_lesson",scope,source_id)
@@ -8772,6 +8875,38 @@ class H(BaseHTTPRequestHandler):
             self.send_json(200,{"ok":True,**alphabet_master_state()})
         elif p=="/kids-voice/sync-state":
             return self.send_json(200,{"ok":True,**_kids_owner_voice_snapshot()})
+        elif p=="/kids-quiz/catalog":
+            try:
+                return self.send_json(200,_kids_quiz_catalog())
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e)})
+        elif p=="/kids-quiz/audio":
+            try:
+                qs=parse_qs(urlparse(self.path).query)
+                item_id=str((qs.get("id") or [""])[0]).strip()
+                row=_kids_quiz_item_by_id(item_id)
+                prompt=_kids_quiz_prompt(row,row.get("ageBand"))
+                master=_kids_quiz_master_for_prompt(prompt)
+                if master.exists() and master.stat().st_size>1024:
+                    return self.send_audio_file(master,"audio/wav")
+                owner=load_owner_voice_manifest_fresh()
+                legacy=load_quiz_audio_manifest_fresh()
+                key=_kids_owner_voice_key(prompt)
+                entry=(owner.get("entries") or {}).get(key) or (legacy.get("entries") or {}).get(key) or {}
+                remote=str(entry.get("url") or "").strip()
+                if remote:
+                    location=remote if remote.startswith(("http://","https://")) else "https://dar-al-tawhid.de"+remote
+                    self.send_response(302)
+                    self.send_header("Location",location)
+                    self.send_header("Cache-Control","no-store")
+                    self.cors()
+                    self.end_headers()
+                    return
+                return self.send_json(404,{"ok":False,"error":"Für diese Quizfrage ist noch kein Serhat-Audio vorhanden."})
+            except ValueError as e:
+                return self.send_json(404,{"ok":False,"error":str(e)})
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e)})
         elif p=="/alphabet/batch-state":
             self.send_json(200,{"ok":True,**_alphabet_batch_snapshot()})
         elif p=="/prophet-stories/batch-state":
@@ -9104,6 +9239,14 @@ class H(BaseHTTPRequestHandler):
                 return self.send_json(202,{"ok":True,**state})
             except Exception as e:
                 return self.send_json(500,{"ok":False,"error":str(e),**_kids_owner_voice_snapshot()})
+
+        if p=="/kids-quiz/render-one":
+            try:
+                return self.send_json(200,_kids_quiz_render_one(str(data.get("id") or "")))
+            except ValueError as e:
+                return self.send_json(404,{"ok":False,"error":str(e)})
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e)})
 
         if p=="/alphabet/batch-start":
             try:
