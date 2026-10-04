@@ -59,7 +59,11 @@
         "storyTextStandard": "kids-story-greeting-closing-v1",
         "audioRefreshRequired": true,
         "referenceMemoryId": "muhammad-story-owner-reference-2026-10-04",
-        "referenceCorpus": "owner-approved-audio-text-pair"
+        "referenceCorpus": "owner-approved-audio-text-pair",
+        "followReaderSync": "silence-aware-dynamic-paragraph-v1",
+        "followReaderParagraphs": 23,
+        "followReaderSyncMode": "silence-aware-dynamic-paragraph-v1",
+        "followReaderSyncedAt": "2026-10-04T01:44:08Z"
       },
       "audio": {
         "4-5": {
@@ -72,15 +76,128 @@
           "allAges": true,
           "publishedAt": "2026-10-04T00:20:00.000Z",
           "directPlaybackTest": true,
-          "syncPoints": [
+          "referenceMemoryId": "muhammad-story-owner-reference-2026-10-04",
+          "referenceSeed": "/data/pronunciation/story-reference-muhammad-2026-10-04.json",
+          "timings": [
             {
-              "time": 60.3,
-              "paragraph": 4
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.069
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.069,
+              "end": 19.737
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 19.737,
+              "end": 34.998
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 34.998,
+              "end": 61.467
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 61.467,
+              "end": 76.754
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 76.754,
+              "end": 90.03
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 90.03,
+              "end": 100.952
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 100.952,
+              "end": 116.958
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 116.958,
+              "end": 147.751
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 147.751,
+              "end": 163.786
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 163.786,
+              "end": 184.246
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 184.246,
+              "end": 199.748
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 199.748,
+              "end": 218.99
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 218.99,
+              "end": 234.067
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 234.067,
+              "end": 244.829
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 244.829,
+              "end": 263.377
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 263.377,
+              "end": 277.893
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 277.893,
+              "end": 302.815
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 302.815,
+              "end": 321.022
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 321.022,
+              "end": 334.137
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 334.137,
+              "end": 337.114
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 337.114,
+              "end": 347.262
+            },
+            {
+              "paragraphIndex": 22,
+              "start": 347.262,
+              "end": 349.675
             }
           ],
-          "syncCalibration": "voice-anchor-v1",
-          "referenceMemoryId": "muhammad-story-owner-reference-2026-10-04",
-          "referenceSeed": "/data/pronunciation/story-reference-muhammad-2026-10-04.json"
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "alignmentGeneratedAt": "2026-10-04T01:44:08Z"
         },
         "6-8": {
           "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/content_asset/O3VW8ri9skXPX6c0P1nS/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261004%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261004T004015Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=74dc92e792eaf890200d90a2ed333fa0ab2679a3761600c2a05fca3d37afc38c7ee28518988970f6a3131d48cca71c5ae5c69588bdb762e2340539f8f6c2d043707c56a9d234e778b9f21ae6bcf79b19cd1a3bb5eb44d8916804f1ddcf8b43dd538e08b91aebcac6981833e55e3a79619ea5798d4cc50770bd9023dacae3edfc37ddb8dec73d05ea871fcea477e4038439c5a569d19c0f3e889ab15cb97646da497be0a65db5df2543ab13655ca390b4ba7619ea7da6c59002e99008efaf46b8497dc45df39774ff9ca041d6c9a67eedd6cb5e19edfb493b156229171afb6cbcbcb2930ec1708a716891fbe50ab1bf62f91ae441e6a89408de34eb0fc6e36fac",
@@ -92,15 +209,128 @@
           "allAges": true,
           "publishedAt": "2026-10-04T00:20:00.000Z",
           "directPlaybackTest": true,
-          "syncPoints": [
+          "referenceMemoryId": "muhammad-story-owner-reference-2026-10-04",
+          "referenceSeed": "/data/pronunciation/story-reference-muhammad-2026-10-04.json",
+          "timings": [
             {
-              "time": 60.3,
-              "paragraph": 4
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.069
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.069,
+              "end": 19.737
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 19.737,
+              "end": 34.998
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 34.998,
+              "end": 61.467
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 61.467,
+              "end": 76.754
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 76.754,
+              "end": 90.03
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 90.03,
+              "end": 100.952
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 100.952,
+              "end": 116.958
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 116.958,
+              "end": 147.751
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 147.751,
+              "end": 163.786
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 163.786,
+              "end": 184.246
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 184.246,
+              "end": 199.748
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 199.748,
+              "end": 218.99
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 218.99,
+              "end": 234.067
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 234.067,
+              "end": 244.829
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 244.829,
+              "end": 263.377
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 263.377,
+              "end": 277.893
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 277.893,
+              "end": 302.815
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 302.815,
+              "end": 321.022
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 321.022,
+              "end": 334.137
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 334.137,
+              "end": 337.114
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 337.114,
+              "end": 347.262
+            },
+            {
+              "paragraphIndex": 22,
+              "start": 347.262,
+              "end": 349.675
             }
           ],
-          "syncCalibration": "voice-anchor-v1",
-          "referenceMemoryId": "muhammad-story-owner-reference-2026-10-04",
-          "referenceSeed": "/data/pronunciation/story-reference-muhammad-2026-10-04.json"
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "alignmentGeneratedAt": "2026-10-04T01:44:08Z"
         },
         "9-10": {
           "url": "https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/content_asset/O3VW8ri9skXPX6c0P1nS/asset_preview.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261004%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261004T004015Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=74dc92e792eaf890200d90a2ed333fa0ab2679a3761600c2a05fca3d37afc38c7ee28518988970f6a3131d48cca71c5ae5c69588bdb762e2340539f8f6c2d043707c56a9d234e778b9f21ae6bcf79b19cd1a3bb5eb44d8916804f1ddcf8b43dd538e08b91aebcac6981833e55e3a79619ea5798d4cc50770bd9023dacae3edfc37ddb8dec73d05ea871fcea477e4038439c5a569d19c0f3e889ab15cb97646da497be0a65db5df2543ab13655ca390b4ba7619ea7da6c59002e99008efaf46b8497dc45df39774ff9ca041d6c9a67eedd6cb5e19edfb493b156229171afb6cbcbcb2930ec1708a716891fbe50ab1bf62f91ae441e6a89408de34eb0fc6e36fac",
@@ -112,15 +342,128 @@
           "allAges": true,
           "publishedAt": "2026-10-04T00:20:00.000Z",
           "directPlaybackTest": true,
-          "syncPoints": [
+          "referenceMemoryId": "muhammad-story-owner-reference-2026-10-04",
+          "referenceSeed": "/data/pronunciation/story-reference-muhammad-2026-10-04.json",
+          "timings": [
             {
-              "time": 60.3,
-              "paragraph": 4
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.069
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.069,
+              "end": 19.737
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 19.737,
+              "end": 34.998
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 34.998,
+              "end": 61.467
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 61.467,
+              "end": 76.754
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 76.754,
+              "end": 90.03
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 90.03,
+              "end": 100.952
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 100.952,
+              "end": 116.958
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 116.958,
+              "end": 147.751
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 147.751,
+              "end": 163.786
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 163.786,
+              "end": 184.246
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 184.246,
+              "end": 199.748
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 199.748,
+              "end": 218.99
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 218.99,
+              "end": 234.067
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 234.067,
+              "end": 244.829
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 244.829,
+              "end": 263.377
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 263.377,
+              "end": 277.893
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 277.893,
+              "end": 302.815
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 302.815,
+              "end": 321.022
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 321.022,
+              "end": 334.137
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 334.137,
+              "end": 337.114
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 337.114,
+              "end": 347.262
+            },
+            {
+              "paragraphIndex": 22,
+              "start": 347.262,
+              "end": 349.675
             }
           ],
-          "syncCalibration": "voice-anchor-v1",
-          "referenceMemoryId": "muhammad-story-owner-reference-2026-10-04",
-          "referenceSeed": "/data/pronunciation/story-reference-muhammad-2026-10-04.json"
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "alignmentGeneratedAt": "2026-10-04T01:44:08Z"
         }
       },
       "referenceMemory": {
