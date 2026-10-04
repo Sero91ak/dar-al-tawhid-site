@@ -4009,6 +4009,24 @@ def set_status(**updates):
     with STATUS_LOCK:
         STATUS.update(updates)
 
+def render_status_snapshot():
+    """Kompakter Polling-Status für Mac/iPhone während eines laufenden Renders.
+
+    /status enthält zusätzlich große Learning-/Lock-Daten. Für die 0,5–0,9-s-
+    Fortschrittsabfrage werden nur diese kleinen Renderfelder serialisiert.
+    """
+    with STATUS_LOCK:
+        st=dict(STATUS)
+    keys=(
+        "render_state","progress","message","last_error","last_output",
+        "render_started_at","render_finished_at","prosody_mode",
+        "render_total_segments","render_completed_segments","render_active_segment",
+        "render_cached_segments","segment_elapsed_seconds",
+        "render_preview_name","render_preview_ready","render_preview_segments",
+        "render_preview_duration_seconds","render_preview_complete",
+    )
+    return {key:st.get(key) for key in keys}
+
 def cleanup_progressive_previews(max_age_seconds:int=1800):
     """Entfernt nur alte temporäre Sofort-Vorschauen; fertige Audios bleiben unberührt."""
     cutoff=time.time()-max(60,int(max_age_seconds or 1800))
@@ -8528,6 +8546,8 @@ class H(BaseHTTPRequestHandler):
                     "jobs":len(LEARNING_PREVIEW_JOBS)
                 }
             })
+        elif p=="/render-status":
+            self.send_json(200,{"ok":True,**render_status_snapshot()})
         elif p=="/status":
             self.send_json(200,{"ok":True,**get_status()})
         elif p=="/learning/preview-state":
