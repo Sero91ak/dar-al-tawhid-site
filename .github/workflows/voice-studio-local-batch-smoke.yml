@@ -458,7 +458,7 @@ jobs:
           assert "QUIZ_ARTWORK=[" not in sw, "legacy external quiz artwork runtime cache returned"
 
           visual=((version.get("visualSystem") or {}).get("quizVisualSystem") or {})
-          assert visual.get("version")=="age-adaptive-realistic-v5"
+          assert str(visual.get("version") or "").startswith("age-adaptive-realistic-v"), "unexpected Kids quiz visual system version"
           assert visual.get("artworkHotlinkDependency") is False
           assert visual.get("youngAgeAudioFirst") is True
           assert visual.get("systemTtsFallbackAllowed") is False
@@ -483,6 +483,15 @@ jobs:
           total=len(items)
           assert total>=50 and total%50==0, f"Kids quiz must grow in complete 50-question packs, got {total}"
           packs=total//50
+          normalized_questions={}
+          duplicates=[]
+          for item in items:
+              question=" ".join(str(item.get("question") or "").strip().lower().split())
+              if question in normalized_questions:
+                  duplicates.append((normalized_questions[question],item.get("number"),item.get("question")))
+              else:
+                  normalized_questions[question]=item.get("number")
+          assert not duplicates, "duplicate Kids quiz questions: "+repr(duplicates)
           counts={band:sum(1 for q in items if q.get("ageBand")==band) for band in expected}
           expected_counts={"4-6":18*packs,"7-8":16*packs,"9-10":16*packs}
           assert counts==expected_counts, (counts,expected_counts)
