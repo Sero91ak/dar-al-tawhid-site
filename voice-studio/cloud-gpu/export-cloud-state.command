@@ -16,12 +16,27 @@ if [[ ! -s "$SRC/Serhat_Adobe_MASTER.wav" && ! -s "$SRC/Serhat_FINAL_REF.wav" ]]
 fi
 
 ITEMS=()
-for item in   Serhat_Adobe_MASTER.wav   Serhat_FINAL_REF.wav   Serhat_AR_MASTER.wav   PronunciationLearning   MasterPronunciations   AlphabetMasters; do
+for item in \
+  Serhat_Adobe_MASTER.wav \
+  Serhat_FINAL_REF.wav \
+  Serhat_AR_MASTER.wav \
+  PronunciationLearning \
+  MasterPronunciations \
+  AlphabetMasters \
+  QuizMasters \
+  KidsOwnerVoiceMasters; do
   [[ -e "$SRC/$item" ]] && ITEMS+=("$item")
 done
 
 if [[ "${DAR_VOICE_INCLUDE_HISTORY:-0}" == "1" ]]; then
   [[ -d "$SRC/VoiceStudioOutput" ]] && ITEMS+=("VoiceStudioOutput")
+fi
+if [[ "${DAR_VOICE_INCLUDE_EXPORTS:-0}" == "1" ]]; then
+  [[ -d "$SRC/KidsAppExport" ]] && ITEMS+=("KidsAppExport")
+  [[ -d "$SRC/KidsOwnerVoiceExport" ]] && ITEMS+=("KidsOwnerVoiceExport")
+fi
+if [[ "${DAR_VOICE_INCLUDE_RENDER_CACHE:-0}" == "1" ]]; then
+  [[ -d "$SRC/RenderCache" ]] && ITEMS+=("RenderCache")
 fi
 
 if [[ "${#ITEMS[@]}" -eq 0 ]]; then
