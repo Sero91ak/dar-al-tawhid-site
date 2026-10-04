@@ -54,3 +54,5 @@ crons = ["*/5 * * * *"]
 #   wrangler secret put SHOTSTACK_API_KEY
 #   wrangler secret put VIDEO_STUDIO_SIGNING_SECRET
 #   wrangler secret put VIDEO_STUDIO_TEST_TOKEN   (nur Staging-Autotest)
+#   wrangler secret put DAR_VOICE_GPU_ORIGIN     (https://<gpu-host>)
+#   wrangler secret put DAR_VOICE_GPU_TOKEN      (Bearer-Token für den privaten GPU-Host)
