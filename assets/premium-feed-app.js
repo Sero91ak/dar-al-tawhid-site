@@ -2802,11 +2802,22 @@
     return { srcW: srcW, srcH: srcH, outW: outW, outH: outH, scale: outW / srcW };
   }
 
+  /* FEED_SHARE_VISUAL_V1226 */
   function feedShareShade(ctx, w, h) {
+    var lift = ctx.createLinearGradient(0, 0, w, h);
+    lift.addColorStop(0, 'rgba(255,246,222,0.08)');
+    lift.addColorStop(0.55, 'rgba(255,242,214,0.03)');
+    lift.addColorStop(1, 'rgba(255,235,196,0.01)');
+    ctx.save();
+    ctx.globalCompositeOperation = 'screen';
+    ctx.fillStyle = lift;
+    ctx.fillRect(0, 0, w, h);
+    ctx.restore();
+
     var g = ctx.createLinearGradient(0, 0, 0, h);
-    g.addColorStop(0, 'rgba(0,0,0,0.22)');
-    g.addColorStop(0.55, 'rgba(0,0,0,0.42)');
-    g.addColorStop(1, 'rgba(0,0,0,0.58)');
+    g.addColorStop(0, 'rgba(0,0,0,0.10)');
+    g.addColorStop(0.55, 'rgba(0,0,0,0.24)');
+    g.addColorStop(1, 'rgba(0,0,0,0.38)');
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
   }
@@ -2833,6 +2844,9 @@
     root.querySelectorAll('.sf-brand-chip,.sf-scene-badge').forEach(function (el) {
       el.style.backdropFilter = 'none';
       el.style.webkitBackdropFilter = 'none';
+    });
+    root.querySelectorAll('.sf-brand-signature').forEach(function (el) {
+      el.remove();
     });
     Array.prototype.forEach.call(root.querySelectorAll('img'), function (img) {
       try {
@@ -2948,29 +2962,30 @@
   function feedShareBrandFooter(ctx, dims) {
     var w = dims.outW, h = dims.outH;
     var s = Math.max(.72, w / 1080);
-    var footerH = Math.round(92 * s);
+    var footerH = Math.round(96 * s);
     var y0 = h - footerH;
-    var g = ctx.createLinearGradient(0, y0 - Math.round(34 * s), 0, h);
+    var g = ctx.createLinearGradient(0, y0 - Math.round(26 * s), 0, h);
     g.addColorStop(0, "rgba(5,12,12,0)");
-    g.addColorStop(.34, "rgba(5,12,12,.52)");
-    g.addColorStop(1, "rgba(4,10,10,.86)");
+    g.addColorStop(.34, "rgba(5,12,12,.38)");
+    g.addColorStop(1, "rgba(4,10,10,.76)");
     ctx.fillStyle = g;
-    ctx.fillRect(0, y0 - Math.round(34 * s), w, footerH + Math.round(34 * s));
+    ctx.fillRect(0, y0 - Math.round(26 * s), w, footerH + Math.round(26 * s));
 
     var pad = Math.round(34 * s);
     ctx.textBaseline = "middle";
     ctx.textAlign = "left";
-    ctx.fillStyle = "#efd89f";
+    ctx.fillStyle = "#f2d99b";
     ctx.font = "700 " + Math.round(18 * s) + "px Arial, sans-serif";
-    ctx.fillText("dar-al-tawhid.de", pad, h - Math.round(39 * s));
+    ctx.fillText("dar-al-tawhid.de", pad, h - Math.round(38 * s));
 
-    ctx.fillStyle = "rgba(255,248,232,.70)";
+    ctx.fillStyle = "rgba(255,248,232,.78)";
     ctx.font = "600 " + Math.round(11 * s) + "px Arial, sans-serif";
     ctx.fillText("DĀR AL TAWḤĪD · Qurʾān & Sunnah", pad, h - Math.round(18 * s));
 
-    var bw = Math.round(192 * s), bh = Math.round(44 * s);
-    var bx = w - pad - bw, by = h - Math.round(58 * s);
+    var bw = Math.round(205 * s), bh = Math.round(48 * s);
+    var bx = w - pad - bw, by = h - Math.round(62 * s);
     var r = Math.round(12 * s);
+
     ctx.beginPath();
     ctx.moveTo(bx + r, by);
     ctx.arcTo(bx + bw, by, bx + bw, by + bh, r);
@@ -2978,32 +2993,46 @@
     ctx.arcTo(bx, by + bh, bx, by, r);
     ctx.arcTo(bx, by, bx + bw, by, r);
     ctx.closePath();
-    ctx.fillStyle = "rgba(8,15,15,.62)";
+    ctx.fillStyle = "rgba(5,9,10,.86)";
     ctx.fill();
-    ctx.strokeStyle = "rgba(239,216,159,.38)";
-    ctx.lineWidth = Math.max(1, 1.2 * s);
+    ctx.strokeStyle = "rgba(255,255,255,.20)";
+    ctx.lineWidth = Math.max(1, 1.1 * s);
     ctx.stroke();
 
-    var cx = bx + Math.round(23 * s), cy = by + bh / 2;
+    var icon = Math.round(36 * s);
+    var ix = bx + Math.round(7 * s), iy = by + (bh - icon) / 2;
+    var ir = Math.round(9 * s);
     ctx.beginPath();
-    ctx.arc(cx, cy, Math.round(12 * s), 0, Math.PI * 2);
-    ctx.strokeStyle = "#efd89f";
-    ctx.lineWidth = Math.max(1, 1.4 * s);
-    ctx.stroke();
+    ctx.moveTo(ix + ir, iy);
+    ctx.arcTo(ix + icon, iy, ix + icon, iy + icon, ir);
+    ctx.arcTo(ix + icon, iy + icon, ix, iy + icon, ir);
+    ctx.arcTo(ix, iy + icon, ix, iy, ir);
+    ctx.arcTo(ix, iy, ix + icon, iy, ir);
+    ctx.closePath();
+    var blue = ctx.createLinearGradient(ix, iy, ix, iy + icon);
+    blue.addColorStop(0, "#38a8ff");
+    blue.addColorStop(1, "#0a78e8");
+    ctx.fillStyle = blue;
+    ctx.fill();
+
+    var cx = ix + icon / 2, cy = iy + icon / 2;
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = Math.max(2.3, 2.8 * s);
+    ctx.lineCap = "round";
     ctx.beginPath();
-    ctx.moveTo(cx - 6*s, cy + 5*s);
-    ctx.lineTo(cx, cy - 7*s);
-    ctx.lineTo(cx + 6*s, cy + 5*s);
-    ctx.moveTo(cx - 8*s, cy + 1*s);
-    ctx.lineTo(cx + 8*s, cy + 1*s);
+    ctx.moveTo(cx - icon*.19, cy + icon*.22);
+    ctx.lineTo(cx, cy - icon*.20);
+    ctx.lineTo(cx + icon*.19, cy + icon*.22);
+    ctx.moveTo(cx - icon*.27, cy + icon*.08);
+    ctx.lineTo(cx + icon*.27, cy + icon*.08);
     ctx.stroke();
 
-    ctx.fillStyle = "#fff8e8";
-    ctx.font = "700 " + Math.round(11 * s) + "px Arial, sans-serif";
-    ctx.fillText("DĀR AL TAWḤĪD", bx + Math.round(43 * s), by + Math.round(16 * s));
-    ctx.fillStyle = "rgba(255,248,232,.72)";
-    ctx.font = "600 " + Math.round(10 * s) + "px Arial, sans-serif";
-    ctx.fillText("Im App Store", bx + Math.round(43 * s), by + Math.round(31 * s));
+    ctx.fillStyle = "rgba(255,255,255,.78)";
+    ctx.font = "600 " + Math.round(8.5 * s) + "px Arial, sans-serif";
+    ctx.fillText("Download on the", ix + icon + Math.round(8*s), by + Math.round(15*s));
+    ctx.fillStyle = "#fff";
+    ctx.font = "700 " + Math.round(15.5 * s) + "px Arial, sans-serif";
+    ctx.fillText("App Store", ix + icon + Math.round(8*s), by + Math.round(34*s));
     ctx.textBaseline = "alphabetic";
   }
 
