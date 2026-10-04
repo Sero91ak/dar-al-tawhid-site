@@ -1,4 +1,4 @@
-/* Voice Studio 2.9.76 · page-focused navigation */
+/* Voice Studio 2.9.77 · page-focused navigation */
 (() => {
 "use strict";
 
