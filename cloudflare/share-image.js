@@ -41,14 +41,22 @@ export function buildFreshShareImagePrompt(input = {}) {
     "Keep the result dignified, scholarly and historical rather than decorative, romanticized, fashion-oriented or modern."
   ] : [];
 
+  const standardHistoricalDirection = womenHistorical ? [] : [
+    "STANDARD DĀR SHARE PROFILE: whenever the subject is shown through architecture, objects, learning spaces, travel, towns or daily life, the visual world must be historically plausible for roughly 1000–1400 years ago, especially the early Islamic centuries (about 7th–11th century).",
+    "Use period-appropriate clay, mud-brick or stone architecture, simple arches, palm-wood or carved wooden doors, woven mats, wool and linen textiles, leather, brass or clay oil lamps, parchment, ink pots, wooden book stands, wells, courtyards, caravan rests, desert roads and old scholarly rooms. Nothing should look Ottoman-modern, Gulf-modern, contemporary or fantasy.",
+    "Timeless natural backgrounds are equally valid when they fit the statement: desert, mountains, rocky valleys, sky, clouds, sea, palms, gardens, dawn, dusk or night landscapes. Nature must remain realistic and free of modern traces.",
+    "Do not copy the women-section palette or domestic-women composition. The standard profile may use deep night blue, dark green, sand, stone, warm amber and restrained antique-gold light depending on the topic."
+  ];
+
   return [
     "Create a completely new, unique photorealistic 4:5 background image for a premium Islamic educational quote card.",
     "This is a fresh generation for this single share action, not a recreation of an existing app image, stock photo, template, or previously generated scene.",
     "DĀR AL TAWḤĪD visual language: noble, quiet, historically plausible, refined, cinematic realism, natural materials, elegant depth.",
     ...womenDirection,
+    ...standardHistoricalDirection,
     womenHistorical
       ? "Build the scene specifically for the women-section topic and do not recycle the visual language of the normal feed, Qurʾān, library, kids, or generic share backgrounds."
-      : "Build the scene from the meaning of the supplied topic. Prefer architecture, an empty study space, manuscripts/books with unreadable or blank surfaces, desert, mountains, sky, garden, mosque details, arches, lamps appropriate to the historical atmosphere, or other non-figurative objects that fit the subject.",
+      : "Build the scene from the meaning of the supplied topic. Prefer historically plausible early-Islamic architecture and objects or a timeless natural landscape. Use empty study spaces, manuscripts/books with unreadable or blank surfaces, desert, mountains, sky, sea, gardens, old mosque details, arches and period lamps only when they fit the subject.",
     "Composition: important visual interest toward the outer edges; preserve calm negative space through the center and upper-middle for later typography. Avoid visual clutter behind text.",
     prophetRelated
       ? "PROPHET TOPIC: depict no prophet or human representation whatsoever; use only empty historically fitting places, landscapes, architecture, and objects."
