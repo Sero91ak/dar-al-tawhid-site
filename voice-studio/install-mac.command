@@ -3,6 +3,13 @@
 # 2.9.42 rollout compatibility for the existing CI validator only: 2.9.26 · CFBundleShortVersionString</key><string>2.9.26
 set -euo pipefail
 
+CURRENT_STEP="start"
+step() {
+  CURRENT_STEP="$1"
+  printf '[UPDATE] %s\n' "$CURRENT_STEP"
+}
+trap 'code=$?; printf "[UPDATE-ABBRUCH] Schritt=%s Zeile=%s Code=%s\n" "$CURRENT_STEP" "$LINENO" "$code"; exit "$code"' ERR
+
 SITE="https://dar-al-tawhid.de"
 REPO_API="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site"
 RELEASE_MANIFEST_URL="$REPO_API/contents/voice-studio/version.json?ref=main"
@@ -117,6 +124,7 @@ resolve_release_ref() {
   echo "Installiere validierten Voice-Studio-Release $RELEASE_VERSION: $PIN"
 }
 
+step "Release-Pin auflösen"
 resolve_release_ref
 
 # Stabiler Update-Transport: Nach Auflösung des validierten Release-Pins wird
@@ -124,6 +132,7 @@ resolve_release_ref
 # GitHub-Contents-Requests pro Update noch Rate-Limit-Mischstände.
 USE_ARCHIVE_ONLY=1
 RELEASE_ARCHIVE="$STAGE/release-$PIN.zip"
+step "Gepinntes Release-Archiv laden"
 ensure_archive "$PIN" "$RELEASE_ARCHIVE"
 
 download_repo_file() {
@@ -365,6 +374,7 @@ PYMLX
   fi
 fi
 
+step "Voice-Regressionsprüfung"
 # STRENGE VORPRÜFUNG: Erst Syntax und komplette Voice-2.0-Regression prüfen.
 # Bis hier wurde an der funktionierenden Installation noch nichts ersetzt.
 if ! "$PY" -m py_compile "$STAGE/local-engine.py" "$STAGE/speech_flow.py"; then
@@ -397,6 +407,7 @@ if [ -z "$FFMPEG_BIN" ]; then
   done
 fi
 
+step "Mac-App-Bundle bauen"
 # Native macOS-App wird zuerst vollständig in einem separaten Bundle gebaut.
 # Die bisher installierte App bleibt bis nach Build, plist-Lint und Codesign startbar.
 APP_BUILD="$TARGET/.DĀR Voice Studio.app.build"
@@ -623,6 +634,7 @@ if command -v codesign >/dev/null 2>&1; then
   }
 fi
 
+step "Atomaren Austausch vorbereiten"
 # Erst NACH erfolgreichem Bundle-Build und Codesign wird der laufende Release angehalten.
 # Bis hierhin blieb die vorhandene App vollständig benutzbar.
 osascript -e 'tell application id "de.dar-al-tawhid.voice-studio" to quit' >/dev/null 2>&1 || true
@@ -688,6 +700,7 @@ else
   exit 1
 fi
 
+step "LaunchServices registrieren"
 # Alte LaunchServices-Zuordnung entfernen und die frisch gebaute App registrieren.
 LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
 "$LSREGISTER" -u "$APP" >/dev/null 2>&1 || true
