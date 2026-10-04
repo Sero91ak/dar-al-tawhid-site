@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v14-quiz1095",
-  "label": "KIDS · V1.07.20",
-  "releasedAt": "2026-10-04T08:44:59.154Z",
-  "note": "Quiz-Bereich mit drei realistischen, altersabhängigen lokalen Bildwelten für 4–6, 7–8 und 9–10 Jahre. Audio-first für die Jüngsten, responsive Touch-Oberfläche, Offline/PWA-Precache und Serhat-Owner-Voice bleiben vollständig erhalten.",
+  "buildId": "kids-shell-v15-quiz-reward1095",
+  "label": "KIDS · V1.07.21",
+  "releasedAt": "2026-10-04T08:55:00Z",
+  "note": "Kids-Quiz 001–050 bleibt vollständig vom normalen DĀR-Quiz getrennt. Drei lokal gebündelte, altersgerechte Quiz-Bildwelten, responsive Modalführung, Quellen/Erklärungen, audio-first für 4–6 und altersabhängige Erfolgsanimation mit Reduced-Motion-Schutz.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -267,7 +267,7 @@
     "kidsQuizManifestNetworkFirst": true,
     "kidsQuizReleaseGuard": true,
     "quizVisualSystem": {
-      "version": "age-adaptive-realistic-v2",
+      "version": "age-adaptive-realistic-v3",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
       "questionCount": 50,
@@ -277,7 +277,7 @@
         "9-10"
       ],
       "ageAdaptiveArtwork": true,
-      "artworkProvider": "Adobe + Runway · lokal gebündelt",
+      "artworkProvider": "lokal gebündelte DĀR Quiz-Szenen",
       "artworkOfflineCache": true,
       "responsivePhone": true,
       "responsiveTablet": true,
@@ -291,7 +291,9 @@
         "/kids/assets/quiz-scenes/quiz-4-6.svg?v=20261004-real1",
         "/kids/assets/quiz-scenes/quiz-7-8.svg?v=20261004-real1",
         "/kids/assets/quiz-scenes/quiz-9-10.svg?v=20261004-real1"
-      ]
+      ],
+      "ageAdaptiveRewardMotion": true,
+      "reducedMotionSafe": true
     }
   },
   "updatedAt": "2026-10-04"
