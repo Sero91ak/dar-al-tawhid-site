@@ -1325,28 +1325,106 @@ async function publishLive(){
 
 function inventoryKey(item){
   const title=String(item?.title||item?.id||"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
-  return title.replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||String(item?.id||"");
+  const slug=title.replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||String(item?.id||"");
+  return studioKindForItem(item||{})+":"+slug;
 }
 function inventoryKindLabel(item){
   const k=studioKindForItem(item||{});
   return k==="quiz"?"Quiz":k==="game"?"Spiel":k==="dua"?"Duʿāʾ":k==="narration"?"Erzählung":k==="ios"?"iOS-Inhalt":"Geschichte";
 }
-async function fetchLegacyKidsInventory(){
+async function fetchExistingKidsJson(path){
+  const clean=String(path||"").replace(/^\/+/, "");
   const urls=[];
   try{
-    if(location.hostname==="dar-al-tawhid.de"||location.hostname.endsWith(".dar-al-tawhid.de"))urls.push("/kids/data/stories-authentic.json?cb="+Date.now());
+    if(location.hostname==="dar-al-tawhid.de"||location.hostname.endsWith(".dar-al-tawhid.de"))urls.push("/"+clean+"?cb="+Date.now());
   }catch{}
-  urls.push("https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/kids/data/stories-authentic.json?cb="+Date.now());
+  urls.push("https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/"+clean+"?cb="+Date.now());
   let lastError=null;
   for(const url of urls){
     try{
       const r=await fetch(url,{cache:"no-store",mode:"cors"});
       if(!r.ok)throw Error("HTTP "+r.status);
-      const d=await r.json();
-      return Array.isArray(d?.items)?d.items.filter(x=>x?.verification==="approved"):[];
+      return await r.json();
     }catch(e){lastError=e}
   }
-  throw lastError||Error("Bestehender Kids-Bestand nicht erreichbar");
+  throw lastError||Error("Kids-Bestand nicht erreichbar: "+clean);
+}
+function legacyQuestionByAges(question,ageMin,ageMax){
+  if(!question||typeof question!=="object"||!String(question.question||"").trim())return {};
+  const out={};
+  if(Number(ageMin||4)<=5&&Number(ageMax||10)>=4)out["4–5"]={...question};
+  if(Number(ageMin||4)<=8&&Number(ageMax||10)>=6)out["6–8"]={...question};
+  if(Number(ageMin||4)<=10&&Number(ageMax||10)>=9)out["9–10"]={...question};
+  return out;
+}
+function normalizeLegacyStory(item){
+  if(!item||item.verification!=="approved")return null;
+  return{
+    ...item,
+    kind:"story",appTarget:"kids",
+    modes:{read:true,listen:true},
+    tags:["legacy-kids","legacy-story","legacy-id:"+String(item.id||"")],
+    verification:"approved"
+  };
+}
+function normalizeLegacyDua(item){
+  if(!item||item.verification!=="verified")return null;
+  const ageMin=Number(item.ageMin||4),ageMax=Number(item.ageMax||10);
+  const text=[String(item.childPrompt||"").trim(),String(item.meaning||"").trim()].filter(Boolean).join("\n\n");
+  if(!text)return null;
+  return{
+    id:"legacy-"+String(item.id||item.canonicalId||"dua"),
+    kind:"lesson",appTarget:"kids",
+    ageMin,ageMax,
+    title:String(item.title||"Duʿāʾ"),
+    category:"Duʿāʾ · geprüft",
+    topic:String(item.scene||item.type||"Duʿāʾ"),
+    text,
+    sourceRefs:[String(item.source||"").trim()].filter(Boolean),
+    question:legacyQuestionByAges(item.quiz,ageMin,ageMax),
+    claimIds:[],
+    tags:["studio:dua","legacy-kids","legacy-dua","legacy-id:"+String(item.id||""),"canonical-id:"+String(item.canonicalId||"")].filter(Boolean),
+    modes:{read:true,listen:true},
+    verification:"verified",
+    legacySource:item
+  };
+}
+function normalizeLegacyNarration(item){
+  if(!item||!String(item.text||"").trim())return null;
+  return{
+    id:"legacy-narration-"+String(item.id||"story"),
+    kind:"story",appTarget:"kids",
+    ageMin:4,ageMax:10,
+    title:String(item.title||"Erzählung"),
+    category:"Adab · Erzählung",
+    topic:"Erzählung",
+    text:String(item.text||"").trim(),
+    sourceRefs:[],
+    question:item.question&&typeof item.question==="object"?item.question:{},
+    claimIds:[],
+    tags:["studio:narration","legacy-kids","legacy-narration","legacy-id:"+String(item.id||"")],
+    modes:{read:true,listen:true},
+    verification:"prepared"
+  };
+}
+async function fetchLegacyKidsInventory(){
+  const results=await Promise.allSettled([
+    fetchExistingKidsJson("kids/data/stories-authentic.json"),
+    fetchExistingKidsJson("kids/data/dua-kids.json"),
+    fetchExistingKidsJson("kids/data/short-stories-voice.json")
+  ]);
+  const stories=results[0].status==="fulfilled"&&Array.isArray(results[0].value?.items)
+    ?results[0].value.items.map(normalizeLegacyStory).filter(Boolean):[];
+  const duas=results[1].status==="fulfilled"&&Array.isArray(results[1].value?.items)
+    ?results[1].value.items.map(normalizeLegacyDua).filter(Boolean):[];
+  const narrations=results[2].status==="fulfilled"&&Array.isArray(results[2].value?.items)
+    ?results[2].value.items.map(normalizeLegacyNarration).filter(Boolean):[];
+  const all=[...stories,...duas,...narrations];
+  if(!all.length){
+    const failed=results.filter(x=>x.status==="rejected").map(x=>x.reason?.message||String(x.reason||"")).filter(Boolean);
+    throw Error(failed.join(" · ")||"Bestehender Kids-Bestand ist leer.");
+  }
+  return all;
 }
 function mergedInventory(){
   const map=new Map();
@@ -1431,7 +1509,7 @@ async function loadLibrary(force=false){
 async function loadLegacyForEdit(id){
   const x=inventoryState.legacy.find(i=>i.id===id);
   if(!x){setStudioMessage("BESTAND-Inhalt wurde nicht gefunden.","bad");return}
-  studioKind="story";
+  studioKind=studioKindForItem(x);
   contentId=x.id||"";
   savedRevision=0;
   contentStatus="draft";
@@ -1439,30 +1517,35 @@ async function loadLegacyForEdit(id){
   productionPhase="draft";
   productionError="";
   document.querySelectorAll("[data-cs-kind]").forEach(b=>b.classList.toggle("active",b.dataset.csKind===studioKind));
-  q("styleMode").value="kids_story";
+  q("styleMode").value=studioKind==="dua"?"dua":studioKind==="narration"?"narration":"kids_story";
   q("csPublishTest").textContent="In Test-Kids veröffentlichen";
   q("csPublishLive").textContent="Live veröffentlichen";
   q("csTitle").value=x.title||"";
-  q("csCategory").value=x.category||"Qurʾān · geprüft";
-  q("csTopic").value=x.scene||"";
+  q("csCategory").value=x.category||(studioKind==="dua"?"Duʿāʾ · geprüft":studioKind==="narration"?"Adab · Erzählung":"Qurʾān · geprüft");
+  q("csTopic").value=x.topic||x.scene||"";
   q("csProphet").value=x.prophetId||"";
   q("csAgeMin").value=String(x.ageMin||4);
   q("csAgeMax").value=String(x.ageMax||10);
-  q("csModeRead").checked=true;
-  q("csModeListen").checked=true;
+  q("csModeRead").checked=x.modes?.read!==false;
+  q("csModeListen").checked=x.modes?.listen!==false;
   q("csSources").value=(x.sourceRefs||[]).join("\n");
   q("text").value=x.text||"";
   legacyQuestion=x.question&&typeof x.question==="object"?x.question:{};
   legacyClaimIds=Array.isArray(x.claimIds)?[...x.claimIds]:[];
-  legacyTags=["legacy-kids",x.id?("legacy-id:"+x.id):""].filter(Boolean);
-  coverAsset=null;audioAsset=null;audioAssetText="";coverFile=null;coverRemoteUrl="";resetDirectAudioSelection();
+  legacyTags=Array.isArray(x.tags)?[...x.tags]:["legacy-kids",x.id?("legacy-id:"+x.id):""].filter(Boolean);
+  coverAsset=x.cover?.url?x.cover:null;audioAsset=x.audio?.url?x.audio:null;audioAssetText=String(x.text||"").trim();coverFile=null;coverRemoteUrl="";resetDirectAudioSelection();
   quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
   q("csCover")?.querySelector("img")?.remove();
+  if(coverAsset?.url)renderCover(coverAsset.url);
   q("csCoverTitle").textContent=x.title||"Inhalt";
   renderKindEditor();
   if(typeof renderAnalysis==="function")renderAnalysis();
   renderStatus();refreshQa();persistDraft();
-  setStudioMessage("BESTAND-Inhalt übernommen. Original bleibt unverändert. Text, Alter, Prophet, Quellen und vorhandene Quizfragen sind im Studio-Arbeitsentwurf erhalten. Jetzt Cover/Serhat-Audio vorbereiten und zuerst in Test-Kids veröffentlichen.","good");
+  setStudioMessage(
+    (studioKind==="dua"?"Duʿāʾ":studioKind==="narration"?"Erzählung":"Geschichte")+
+    " aus dem vorhandenen Kids-Bestand geöffnet. Text ist sofort bereit: Audio erzeugen oder fertige MP3/M4A hochladen → direkt Kids veröffentlichen.",
+    "good"
+  );
   setTimeout(()=>goToWorkflowStep("text"),80);
 }
 
