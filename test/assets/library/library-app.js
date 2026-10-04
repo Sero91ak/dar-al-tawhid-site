@@ -689,9 +689,12 @@
     const rows = CATEGORIES
       .filter((cat) => cat !== "Alle")
       .map((cat) => {
-        const count = (all || []).filter((pub) => matchesCategory(pub, cat)).length;
+        const items = (all || []).filter((pub) => matchesCategory(pub, cat));
+        const count = items.length;
         if (!count) return "";
+        const art = items[0] ? (coverSources(items[0]).small || coverSources(items[0]).medium || "") : "";
         return `<button class="lib-portal" type="button" data-library-cat="${esc(cat)}" aria-label="${esc(cat)}, ${count} Veröffentlichungen">
+          ${art ? `<span class="lib-portal-art" aria-hidden="true"><img src="${esc(art)}" alt="" loading="lazy" decoding="async"></span>` : ""}
           <span class="lib-portal-name">${esc(cat)}</span>
           <span class="lib-portal-count">${count}</span>
         </button>`;
@@ -740,6 +743,9 @@
     const categoryCount = new Set(all.map((p) => String(p.category || "").trim()).filter(Boolean)).size;
     const offlineCount = all.filter((p) => canOffline(p)).length;
     const categoryView = !uiState.query && uiState.category !== "Alle";
+    const categoryHeroArt = categoryView && filtered[0]
+      ? (coverSources(filtered[0]).medium || coverSources(filtered[0]).small || "")
+      : "";
     const heroTitle = categoryView ? uiState.category : "DĀR AL TAWḤĪD Bibliothek";
     const heroLead = categoryView
       ? `Veröffentlichungen im Bereich ${uiState.category}`
@@ -753,6 +759,7 @@
 
     return `<section class="lib-page" data-library-root data-library-category-view="${categoryView ? esc(uiState.category) : ""}">
       <header class="lib-hero" aria-label="Bibliothekskopf">
+        ${categoryHeroArt ? `<div class="lib-hero-topic-art" aria-hidden="true"><img src="${esc(categoryHeroArt)}" alt="" loading="eager" decoding="async"></div>` : ""}
         <div class="lib-hero-inner">
           ${categoryView ? '<p class="lib-hero-kicker">DĀR AL TAWḤĪD Bibliothek</p>' : ""}
           <h2>${esc(heroTitle)}</h2>
