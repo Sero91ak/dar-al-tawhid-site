@@ -3709,50 +3709,13 @@
     ctx.closePath();
   }
 
-  /* FRAUEN_SHARE_VISUAL_V1237 */
-  function frauenDrawAppleMark(ctx, x, y, size) {
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.scale(size / 100, size / 100);
-    ctx.fillStyle = "#fff";
-    ctx.beginPath();
-    ctx.moveTo(52,25);
-    ctx.bezierCurveTo(58,17,67,12,75,12);
-    ctx.bezierCurveTo(76,21,72,29,65,34);
-    ctx.bezierCurveTo(58,39,52,37,52,37);
-    ctx.bezierCurveTo(43,36,35,42,30,50);
-    ctx.bezierCurveTo(20,67,28,91,40,99);
-    ctx.bezierCurveTo(46,103,52,97,59,97);
-    ctx.bezierCurveTo(66,97,71,103,78,99);
-    ctx.bezierCurveTo(88,93,94,82,97,73);
-    ctx.bezierCurveTo(83,68,80,48,94,40);
-    ctx.bezierCurveTo(86,30,74,28,66,31);
-    ctx.bezierCurveTo(60,33,56,35,52,35);
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function frauenDrawStoreBadge(ctx, x, y, w, h) {
-    ctx.save();
-    frauenRoundRect(ctx, x, y, w, h, 16);
-    ctx.fillStyle = "rgba(0,0,0,.92)";
-    ctx.fill();
-    ctx.strokeStyle = "rgba(255,255,255,.42)";
-    ctx.lineWidth = 1.15;
-    ctx.stroke();
-
-    frauenDrawAppleMark(ctx, x + 14, y + 13, 37);
-
-    ctx.textAlign = "left";
-    ctx.textBaseline = "alphabetic";
-    ctx.fillStyle = "rgba(255,255,255,.86)";
-    ctx.font = "500 10px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
-    ctx.fillText("Laden im", x + 62, y + 21);
-    ctx.fillStyle = "#fff";
-    ctx.font = "650 20px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
-    ctx.fillText("App Store", x + 62, y + 44);
-    ctx.restore();
+  /* FRAUEN_SHARE_VISUAL_V1239 · Apple-provided German App Store badge, unmodified */
+  async function frauenDrawStoreBadge(ctx, x, y, h) {
+    try {
+      var badge = await frauenLoadImage("/assets/app-store-badge-de-official.svg?v=share-v1239");
+      var w = h * 2.9916;
+      ctx.drawImage(badge, x - w, y, w, h);
+    } catch (eBadge) {}
   }
 
   function frauenDrawCover(ctx, img, W, H, shift) {
@@ -3906,7 +3869,7 @@
       ctx.fillStyle = "#efd89f";
       ctx.font = "700 20px Arial, sans-serif";
       ctx.fillText("dar-al-tawhid.de", margin, H - 60);
-      frauenDrawStoreBadge(ctx, W - margin - 270, H - 92, 270, 62);
+      await frauenDrawStoreBadge(ctx, W - margin, H - 94, 62);
 
       var blob = await frauenCanvasBlob(canvas);
       if (blob) files.push(new File([blob], "dar-al-tawhid-bildbeitrag-" + (p + 1) + ".png", { type: "image/png" }));
