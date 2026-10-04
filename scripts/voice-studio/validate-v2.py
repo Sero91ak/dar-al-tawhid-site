@@ -514,12 +514,12 @@ def main():
         "effectiveKind()","effectiveTarget()","quizDraft","gameDraft","checkpointPackage","productionPhase",
         "generateCover({internal:true})","sendPush:effectiveTarget()===\"kids\"",
         'data-cs-kind="dua"','data-cs-kind="narration"',"handleDirectAudioFile","publishDirectKids",
-        "manual-owner-upload","audioAssetText","directAudioReadyForCurrentText"
+        "manual-owner-upload","registerDirectAudioLearning","localReferenceLearningAvailable","audioAssetText","directAudioReadyForCurrentText"
     ):
         if required not in studio_source: fail("content studio workflow marker missing: "+required)
 
     engine_source=Path(engine_path).read_text(encoding="utf-8")
-    for required in ("KNOWN_RULE_ALIAS_INDEX","knownRuleAliases","max-master-pls-v1","fastKnownPath"):
+    for required in ("KNOWN_RULE_ALIAS_INDEX","knownRuleAliases","max-master-pls-v1","fastKnownPath","directReferenceKind","prosodyMode","story_reference_matches_text"):
         if required not in engine_source: fail("fast-known pronunciation marker missing: "+required)
 
     integration_paths=[]
