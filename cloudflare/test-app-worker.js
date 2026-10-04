@@ -257,7 +257,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
 // DAR_MORE_V1241
   if (!/more-v1241\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/more-v1241.css?v=1241"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/more-v1241.css?v=1250"><\/head>');
   }
 
   // DAR_ILM_SCHOLAR_PROFILE_V1253
