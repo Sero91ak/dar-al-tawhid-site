@@ -1,7 +1,7 @@
 {
   "version": "2.9.90",
-  "updatedAt": "2026-10-04T13:40:00+02:00",
-  "deployTrigger": "voice-studio-2.9.90-instant-start-one-poll-live-audio-candidate",
+  "updatedAt": "2026-10-04T13:48:00+02:00",
+  "deployTrigger": "voice-studio-2.9.90-instant-start-one-poll-mobile-mac-green",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v60",
@@ -754,7 +754,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "32e9c296e0894aec795c712473f4911bddaf984c",
+  "releaseRef": "51c6b6829dd6b1c5e99f2de0b5a4d47f68be07e9",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1301,7 +1301,12 @@
     "mobilePronunciationCatalog": true,
     "desktopPronunciationCatalog": true,
     "interactiveFastRender": true,
-    "pronunciationShortPreviewFastPath": true
+    "pronunciationShortPreviewFastPath": true,
+    "voiceFullValidatePassed": true,
+    "voiceNativeMacAudioRoutePassed": true,
+    "voiceCoreSmokeStepsPassed": true,
+    "repositoryWideSmokeBlockedByUnrelatedKidsQuizArtworkCheck": true,
+    "repositoryWideHealthGuardBlockedByUnrelatedAppBuildVersionDrift": true
   },
   "mubashshirunStories": {
     "enabled": true,
@@ -1388,17 +1393,17 @@
     "networkRequirement": "same-wifi-with-mac-engine",
     "design": "original-dar-mobile-ui-inspired-by-modern-mobile-voice-workflows",
     "smokeValidated": false,
-    "releaseRef": "32e9c296e0894aec795c712473f4911bddaf984c",
+    "releaseRef": "51c6b6829dd6b1c5e99f2de0b5a4d47f68be07e9",
     "version": "2.9.90",
     "pwaStartUrl": "/mobile/",
     "pairTokenStoredInHttpOnlyCookie": true,
     "pairTokenExcludedFromInstalledStartUrl": true,
     "audioPathTraversalGuard": true,
     "candidateConfirmationBoundToPreview": true,
-    "fullValidatePassed": false,
+    "fullValidatePassed": true,
     "healthPassed": false,
     "canonicalGuardPassed": false,
-    "nativeMacAudioRoutePassed": false,
+    "nativeMacAudioRoutePassed": true,
     "pronunciationCatalog": "/learning/catalog",
     "fullPronunciationLibraryBrowse": true,
     "appleTouchIcon": true,
@@ -1474,7 +1479,8 @@
       "kidsStory": 80,
       "default": 72
     },
-    "progressiveIncrementalChunks": true
+    "progressiveIncrementalChunks": true,
+    "voiceCoreSmokeStepsPassed": true
   },
   "mobile": {
     "enabled": true,
@@ -1570,7 +1576,10 @@
     "jobStatusEndpoint": "/generate-job",
     "renderStatusEmbeddedInJob": true,
     "serverSidePronunciationPreflight": true,
-    "progressiveChunks": true
+    "progressiveChunks": true,
+    "mobileConsolidatedPolling": true,
+    "desktopConsolidatedPolling": true,
+    "pollIntervalMs": 180
   },
   "macDirectFinalAudioStreaming": true,
   "macFinalWavBlobDownloadRemoved": true,
