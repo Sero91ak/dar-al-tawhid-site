@@ -6942,6 +6942,15 @@
         ".github/workflows/voice-studio-v2-validate.yml"
       ],
       "expiresAt": "2027-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "bild-beitrag-templates-delete-2026-10-04",
+      "approvedBy": "user-explicit-remove-bild-beitrag",
+      "reason": "Nutzer: Bild-Beitrag global aus den Apps entfernen und die dafür gespeicherten Vorlagenbilder löschen.",
+      "paths": [
+        "assets/post-templates/"
+      ],
+      "expiresAt": "2026-10-06T23:59:00.000Z"
     }
   ],
   "enabled": true
