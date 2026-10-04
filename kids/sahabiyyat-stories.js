@@ -132,7 +132,7 @@ function renderCards(){
         '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span>'+
       '</span>'+
       '<span class="ms-row-copy">'+
-        '<span class="ms-row-kicker">ṢAḤĀBĪ · LEBENSGESCHICHTE</span>'+
+        '<span class="ms-row-kicker">ṢAḤĀBIYYAH · QUELLENGEPRÜFTE GESCHICHTE</span>'+
         '<strong class="ms-row-title">'+esc(item.name)+'</strong>'+
         '<span class="ms-row-ar" dir="rtl">'+esc(item.nameAr||"")+' رضي الله عنها</span>'+
         '<span class="ms-row-summary">'+esc(item.summary||"")+'</span>'+
@@ -159,12 +159,12 @@ function insertEntry(view){
   entry.innerHTML=
     '<span class="ms-entry-bg" aria-hidden="true"><img src="https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:56158735-9dc2-469e-8746-ecb7d6d156b8" alt="" decoding="async" loading="eager"></span>'+
     '<span class="ms-entry-art" aria-hidden="true"><span class="ms-entry-arch"></span><span class="ms-entry-stars">'+
-    Array.from({length:10},(_,i)=>'<i style="--i:'+i+'"></i>').join("")+
+    Array.from({length:14},(_,i)=>'<i style="--i:'+i+'"></i>').join("")+
     '</span></span>'+
     '<span class="ms-entry-copy">'+
-      '<span class="ms-entry-kicker">DIE ZEHN GEFÄHRTEN · IHRE GESCHICHTEN</span>'+
+      '<span class="ms-entry-kicker">ṢAḤĀBIYYĀT · FRAUEN DER ERSTEN GENERATION</span>'+
       '<strong>Ṣaḥābiyyāt</strong>'+
-      '<span>'+(isAudioOnlyAge()?'10 Ṣaḥābah · Hörgeschichten':'14 Ṣaḥābiyyāt · ihre Geschichten · lesen &amp; hören')+'</span>'+
+      '<span>'+(isAudioOnlyAge()?'14 Ṣaḥābiyyāt · Hörgeschichten':'14 Ṣaḥābiyyāt · ihre Geschichten · lesen &amp; hören')+'</span>'+
     '</span>'+
     '<span class="ms-entry-action">Entdecken <b aria-hidden="true">›</b></span>';
   const sahaba=$("#msEntry");
@@ -183,7 +183,7 @@ function ensureUi(){
   page.innerHTML=
     '<div class="ms-library-nav">'+
       '<button id="syBack" class="ms-back" type="button" aria-label="Zurück zu Geschichten">‹</button>'+
-      '<div><strong>Die zehn Mubaschschirūn</strong><span>Frauen der ersten Generation · 14 Geschichten</span></div>'+
+      '<div><strong>Ṣaḥābiyyāt</strong><span>Frauen der ersten Generation · 14 Geschichten</span></div>'+
     '</div>'+
     '<div class="ms-library-scroll" id="syLibraryScroll">'+
 
@@ -220,7 +220,7 @@ function ensureUi(){
         '<div class="ms-body">'+
           '<div id="syVisualDisclaimer" class="ms-visual-disclaimer"></div>'+
           '<div class="ms-detail-modes"><button data-sy-mode="both" type="button">Lesen &amp; Hören</button><button data-sy-mode="listen" type="button">Hören</button><button data-sy-mode="read" type="button">Lesen</button></div>'+
-          '<div class="ms-profile-grid"><section><small>WAS ZEICHNETE SIE AUS?</small><strong id="syTrait"></strong></section><section><small>SEIN LEBENSWEG</small><span id="syLife"></span></section><section><small>WICHTIGER MOMENT</small><span id="syWitness"></span></section></div>'+
+          '<div class="ms-profile-grid"><section><small>WAS ZEICHNETE SIE AUS?</small><strong id="syTrait"></strong></section><section><small>IHRE GESCHICHTE &amp; ZEIT</small><span id="syLife"></span></section><section><small>QUELLENKONTEXT</small><span id="syWitness"></span></section></div>'+
           '<section id="syPlayer" class="ms-player"><button id="syPlay" class="ms-play" type="button">Hören</button><div class="ms-progress" id="syProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="syProgress"></span></div><div class="ms-player-time"><strong id="syTimeCurrent">0:00</strong><span id="syTimeTotal">0:00</span></div><button class="ms-follow-open" id="syFollowOpen" type="button">Mitlesen</button><p id="syVoiceNote"></p></section>'+
           '<article id="syRead" class="ms-read"></article>'+
           '<section class="ms-sources"><strong>GEPRÜFTE QUELLEN</strong><div id="sySources"></div></section>'+
