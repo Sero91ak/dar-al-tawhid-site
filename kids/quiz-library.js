@@ -148,6 +148,10 @@
     if(typeof window.quizPrompt!=="function"||typeof owner.has!=="function")return"missing";
     return owner.has(window.quizPrompt(q))?"ready":"missing";
   }
+  function rowArtwork(q){
+    if(typeof window.quizArtworkForBand!=="function")return{url:"",position:"50% 50%",family:"age"};
+    try{return window.quizArtworkForBand(q)||{url:"",position:"50% 50%",family:"age"}}catch(_){return{url:"",position:"50% 50%",family:"age"}}
+  }
   function scheduleVoiceRefresh(){
     clearTimeout(voiceRefreshTimer);
     voiceRefreshTimer=setTimeout(function(){
@@ -171,6 +175,15 @@
     var waitingForVoice=false;
     shown.forEach(function(q){
       var row=document.createElement("div");row.className="quiz-library-row";
+      var art=rowArtwork(q);
+      if(art.url){
+        row.style.setProperty("--quiz-row-art",'url("'+String(art.url).replace(/"/g,"%22")+'")');
+        row.style.setProperty("--quiz-row-pos",String(art.position||"50% 50%"));
+        row.setAttribute("data-quiz-family",String(art.family||"age"));
+      }
+      var thumb=document.createElement("span");
+      thumb.className="quiz-library-thumb";
+      thumb.setAttribute("aria-hidden","true");
       var open=document.createElement("button");open.type="button";open.className="quiz-library-open";
       open.innerHTML=
         '<span class="quiz-library-topline"><span class="quiz-library-num">#'+String(q.number).padStart(3,"0")+'</span><span class="quiz-library-cat">'+escapeHtml(q.category||"Quiz")+'</span><span class="quiz-library-state">'+escapeHtml(stateLabel(q))+'</span></span>'+
@@ -195,7 +208,7 @@
         audio.innerHTML='<span aria-hidden="true">…</span><small>'+(state==="loading"?"Lädt":"Bald")+'</small>';
         if(state==="loading")waitingForVoice=true;
       }
-      row.appendChild(open);row.appendChild(audio);frag.appendChild(row);
+      row.appendChild(thumb);row.appendChild(open);row.appendChild(audio);frag.appendChild(row);
     });
     list.appendChild(frag);
     if(more){
