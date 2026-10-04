@@ -2194,3 +2194,156 @@ html[data-theme] .lib-detail .lib-stats-live-item span{
     gap:18px 14px;
   }
 }
+
+
+/* DAR_LIBRARY_HERO_DEPTH_V1227
+   Stronger embedded imagery while keeping text contrast theme-owned. */
+:root{
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--dar-lib-base-bg) 86%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--dar-lib-base-bg) 58%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--dar-lib-base-bg) 18%,transparent);
+  --dar-lib-hero-stat-surface:color-mix(in srgb,var(--dar-lib-base-card) 62%,transparent);
+  --dar-lib-hero-stat-border:color-mix(in srgb,var(--dar-lib-base-gold) 38%,var(--dar-lib-base-line));
+}
+
+html[data-theme="light"]{
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 90%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 68%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 34%,transparent);
+  --dar-lib-hero-stat-surface:color-mix(in srgb,var(--card) 70%,transparent);
+}
+html[data-theme="soft"]{
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 89%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 66%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 32%,transparent);
+  --dar-lib-hero-stat-surface:color-mix(in srgb,var(--card) 68%,transparent);
+}
+html[data-theme="salbei"]{
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 88%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 64%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 30%,transparent);
+  --dar-lib-hero-stat-surface:color-mix(in srgb,var(--card) 66%,transparent);
+}
+html[data-theme="eisgold"]{
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 89%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 66%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 32%,transparent);
+  --dar-lib-hero-stat-surface:color-mix(in srgb,var(--card) 66%,transparent);
+}
+html[data-theme="aurora"]{
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 86%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 58%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 20%,transparent);
+  --dar-lib-hero-stat-surface:color-mix(in srgb,var(--card) 58%,transparent);
+}
+html[data-theme="bordeaux"]{
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 87%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 60%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 22%,transparent);
+  --dar-lib-hero-stat-surface:color-mix(in srgb,var(--card) 56%,transparent);
+}
+html[data-theme="royal"],
+html[data-theme="dark"],
+html[data-theme="dar-al-layl"]{
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 84%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 54%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 16%,transparent);
+  --dar-lib-hero-stat-surface:color-mix(in srgb,var(--card) 50%,transparent);
+}
+
+.lib-page[data-library-root] .lib-hero{
+  min-height:clamp(245px,52vw,335px);
+  background:
+    linear-gradient(90deg,
+      var(--dar-lib-hero-overlay-start) 0%,
+      var(--dar-lib-hero-overlay-mid) 43%,
+      var(--dar-lib-hero-overlay-end) 78%,
+      color-mix(in srgb,var(--dar-lib-base-bg) 5%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--dar-lib-base-bg) 4%,transparent) 0%,
+      transparent 48%,
+      color-mix(in srgb,var(--dar-lib-base-bg) 23%,transparent) 100%),
+    var(--dar-lib-cinema-image) 78% 48%/cover no-repeat;
+  box-shadow:
+    0 20px 46px color-mix(in srgb,var(--dar-lib-base-bg) 72%,transparent),
+    inset 0 -1px 0 color-mix(in srgb,var(--dar-lib-base-gold) 14%,transparent);
+}
+
+.lib-page[data-library-root] .lib-hero::before{
+  opacity:1;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--dar-lib-base-bg) 20%,transparent) 0%,
+      color-mix(in srgb,var(--dar-lib-base-bg) 8%,transparent) 34%,
+      transparent 66%),
+    linear-gradient(180deg,
+      transparent 58%,
+      color-mix(in srgb,var(--dar-lib-base-bg) 18%,transparent) 100%),
+    radial-gradient(circle at 84% 18%,
+      color-mix(in srgb,var(--dar-lib-base-gold) 11%,transparent),
+      transparent 40%);
+}
+
+.lib-page[data-library-root] .lib-hero-inner{
+  width:min(650px,86%);
+}
+
+.lib-page[data-library-root] .lib-hero h2{
+  text-shadow:
+    0 2px 16px color-mix(in srgb,var(--dar-lib-base-bg) 42%,transparent),
+    0 1px 1px color-mix(in srgb,var(--dar-lib-base-bg) 36%,transparent);
+}
+
+.lib-page[data-library-root] .lib-hero-lead,
+.lib-page[data-library-root] .lib-hero-note{
+  text-shadow:0 1px 10px color-mix(in srgb,var(--dar-lib-base-bg) 42%,transparent);
+}
+
+.lib-page[data-library-root] .lib-hero-stat{
+  border-color:var(--dar-lib-hero-stat-border);
+  background:var(--dar-lib-hero-stat-surface);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--dar-lib-base-text) 7%,transparent),
+    0 5px 14px color-mix(in srgb,var(--dar-lib-base-bg) 34%,transparent);
+  -webkit-backdrop-filter:blur(12px) saturate(1.06);
+  backdrop-filter:blur(12px) saturate(1.06);
+}
+
+.lib-detail .lib-detail-hero{
+  background:
+    linear-gradient(90deg,
+      var(--dar-lib-hero-overlay-start) 0%,
+      var(--dar-lib-hero-overlay-mid) 45%,
+      var(--dar-lib-hero-overlay-end) 80%,
+      color-mix(in srgb,var(--dar-lib-base-bg) 5%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--dar-lib-base-bg) 4%,transparent),
+      color-mix(in srgb,var(--dar-lib-base-bg) 20%,transparent)),
+    var(--dar-lib-cinema-image) 78% 48%/cover no-repeat;
+}
+
+@media(max-width:599px){
+  .lib-page[data-library-root] .lib-hero{
+    min-height:250px;
+    padding:24px 20px 26px;
+    background-position:center,center,80% 48%;
+  }
+  .lib-page[data-library-root] .lib-hero-inner{
+    width:min(100%,88%);
+  }
+}
+
+@media(min-width:720px){
+  .lib-page[data-library-root] .lib-hero-inner{
+    width:min(650px,64%);
+  }
+  .lib-page[data-library-root] .lib-hero{
+    background-position:center,center,76% 46%;
+  }
+}
+
+@media(min-width:1200px){
+  .lib-page[data-library-root] .lib-hero{
+    min-height:340px;
+  }
+}
