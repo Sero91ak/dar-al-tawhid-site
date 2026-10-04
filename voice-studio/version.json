@@ -1,7 +1,7 @@
 {
   "version": "2.9.95",
-  "updatedAt": "2026-10-04T17:49:00+02:00",
-  "deployTrigger": "voice-studio-2.9.95-install-pin-fixed",
+  "updatedAt": "2026-10-04T17:52:00+02:00",
+  "deployTrigger": "voice-studio-2.9.95-install-pin-fixed-cloud-contract",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v64",
@@ -799,7 +799,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "aa4347f587ee43e9d7ff5907884faf350419539b",
+  "releaseRef": "ffb1864ce45a690597250fc2bf8557a55a4d98b7",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1701,5 +1701,5 @@
     "ownerAccessHeaderFallback": "X-DAR-Voice-Access",
     "browserDoesNotPersistAccessCode": true
   },
-  "releaseRefPolicy": "immutable validated commit containing engine/UI/native/updater/cache hotfix"
+  "releaseRefPolicy": "immutable 2.9.95 hotfix commit; engine/UI/native/updater aligned; cloud PWA contract preserved"
 }
