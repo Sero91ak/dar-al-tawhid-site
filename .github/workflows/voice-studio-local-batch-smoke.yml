@@ -458,7 +458,7 @@ jobs:
           assert "QUIZ_ARTWORK=[" not in sw, "legacy external quiz artwork runtime cache returned"
 
           visual=((version.get("visualSystem") or {}).get("quizVisualSystem") or {})
-          assert visual.get("version")=="age-adaptive-realistic-v4"
+          assert visual.get("version")=="age-adaptive-realistic-v5"
           assert visual.get("artworkHotlinkDependency") is False
           assert visual.get("youngAgeAudioFirst") is True
           assert visual.get("systemTtsFallbackAllowed") is False
