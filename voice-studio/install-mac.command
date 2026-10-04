@@ -90,7 +90,7 @@ extract_from_archive() {
 
   # GitHub/Codeload kann bei Branches und Commit-SHAs unterschiedliche
   # Top-Level-Verzeichnisnamen verwenden. Niemals den Ordnernamen erraten.
-  root="$(/usr/bin/unzip -Z1 "$zip" 2>/dev/null | /usr/bin/head -n 1 | /usr/bin/cut -d/ -f1)"
+  root="$(/usr/bin/unzip -Z1 "$zip" 2>/dev/null | /usr/bin/awk -F/ 'NR==1{root=$1} END{print root}')"
   if [ -z "$root" ]; then
     echo "FEHLER: Release-Archiv enthält kein lesbares Stammverzeichnis."
     return 1
@@ -276,7 +276,7 @@ done
 
 # Release-Kohärenz: Manifest-Version und gepinnte Engine müssen identisch sein.
 # So kann ein neueres Manifest niemals versehentlich einen alten Release-Pin installieren.
-STAGED_ENGINE_VERSION="$(/usr/bin/sed -n 's/^ENGINE_VERSION="\([^"]*\)".*/\1/p' "$STAGE/local-engine.py" | /usr/bin/head -n 1)"
+STAGED_ENGINE_VERSION="$(/usr/bin/awk -F'"' '/^ENGINE_VERSION="/ {print $2; found=1} END{if(!found) exit 0}' "$STAGE/local-engine.py")"
 if [ "$STAGED_ENGINE_VERSION" != "$RELEASE_VERSION" ]; then
   echo "FEHLER: Release-Pin passt nicht zum Manifest: Manifest=$RELEASE_VERSION, Engine=$STAGED_ENGINE_VERSION."
   exit 1
@@ -471,7 +471,7 @@ VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
 URL="http://127.0.0.1:8787/studio/"
 HEALTH="http://127.0.0.1:8787/health"
-EXPECTED_ENGINE_VERSION="$(/usr/bin/sed -n 's/^ENGINE_VERSION="\([^"]*\)".*/\1/p' "$TARGET/local-engine.py" | /usr/bin/head -n 1)"
+EXPECTED_ENGINE_VERSION="$(/usr/bin/awk -F'"' '/^ENGINE_VERSION="/ {print $2}' "$TARGET/local-engine.py")"
 [ -n "$EXPECTED_ENGINE_VERSION" ] || EXPECTED_ENGINE_VERSION="unknown"
 PAIR_TOKEN_FILE="$TARGET/ipad-pairing-token.txt"
 PAIR_TOKEN=""
