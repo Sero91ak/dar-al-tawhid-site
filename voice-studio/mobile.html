@@ -518,7 +518,7 @@ async function loadCatalog(reset=true){
 }
 $("#catalogMore").onclick=()=>{$("#catalogMore").disabled=true;loadCatalog(false)};
 let catalogSearchTimer=0;
-$("#wordSearch").addEventListener("input",()=>{clearTimeout(catalogSearchTimer);catalogSearchTimer=setTimeout(()=>loadCatalog(true),220)});
+$("#wordSearch").addEventListener("input",()=>{clearTimeout(catalogSearchTimer);catalogSearchTimer=setTimeout(()=>loadCatalog(true),120)});
 
 function openWord(word){$("#wordSearch").value=word;go("pronunciation");searchWord(word)}
 function pronunciationPreviewPayload(row,term){
