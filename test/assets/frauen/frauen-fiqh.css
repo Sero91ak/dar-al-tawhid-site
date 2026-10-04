@@ -2567,3 +2567,139 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-re
     filter:saturate(.84) contrast(1) sepia(.06);
   }
 }
+
+
+/* v1223 · Frauen-Bibliothek: neue Motive links + Themen-Heroes */
+
+/* Die Bildfläche sitzt bewusst links. Text bleibt rechts in einer ruhigen,
+   hellen Lesefläche; Nummer und 3D-Icon dürfen als Glas-Overlay auf dem Motiv stehen. */
+.frauen-library-card.has-visual::after,
+.frauen-library-area-card.has-visual::after{
+  left:0!important;
+  right:auto!important;
+  background-image:
+    linear-gradient(90deg,
+      transparent 0%,
+      color-mix(in srgb,var(--card) 12%,transparent) 22%,
+      color-mix(in srgb,var(--card) 68%,transparent) 62%,
+      color-mix(in srgb,var(--card) 96%,transparent) 86%,
+      var(--card) 100%),
+    linear-gradient(180deg,rgba(4,14,13,.03),rgba(4,14,13,.16)),
+    var(--frauen-card-img)!important;
+  background-position:center!important;
+  filter:saturate(.86) contrast(.98) sepia(.035)!important;
+}
+
+.frauen-library-card.has-visual::after{
+  width:47%!important;
+  opacity:.92!important;
+}
+.frauen-library-area-card.has-visual::after{
+  width:44%!important;
+  opacity:.82!important;
+}
+
+.frauen-library-card.has-visual .frauen-library-card__nr,
+.frauen-library-area-card.has-visual .frauen-library-area-card__nr{
+  justify-self:start;
+  width:max-content;
+  min-width:30px;
+  padding:5px 7px 4px;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 25%,transparent);
+  border-radius:999px;
+  background:color-mix(in srgb,var(--card) 76%,transparent);
+  color:color-mix(in srgb,var(--gold2,var(--gold,#b89655)) 82%,var(--ink) 18%);
+  box-shadow:0 5px 16px rgba(5,18,16,.08);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.frauen-library-card.has-visual .frauen-library-card__icon,
+.frauen-library-area-card.has-visual .frauen-library-area-card__icon{
+  background:color-mix(in srgb,var(--card) 88%,transparent)!important;
+  border-color:color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 31%,transparent)!important;
+  box-shadow:0 9px 24px rgba(5,18,16,.12)!important;
+}
+
+.frauen-library-card.has-visual .frauen-library-card__copy,
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+  text-shadow:0 1px 0 color-mix(in srgb,var(--card) 52%,transparent);
+}
+
+/* Generationen bleibt etwas bildstärker, aber ebenfalls links. */
+.frauen-library-card--generationen.has-visual::after{
+  width:50%!important;
+  opacity:.96!important;
+  background-position:center 46%!important;
+}
+
+/* Spezifische historische Motive für die großen Wissenswelten und ihre Hero-Seiten. */
+.frauen-library-hero--tone-din{
+  --frauen-hero-img:url("/test/assets/frauen/library-v1223/01-grundlagen-din.jpg")!important;
+}
+.frauen-library-hero--tone-fiqh{
+  --frauen-hero-img:url("/test/assets/frauen/library-v1223/02-fiqh-frauen.jpg")!important;
+}
+.frauen-library-hero--tone-generationen{
+  --frauen-hero-img:url("/test/assets/frauen/library-v1223/03-erste-generationen.jpg")!important;
+}
+.frauen-library-hero--tone-familie{
+  --frauen-hero-img:url("/test/assets/frauen/library-v1223/04-familie-erziehung.jpg")!important;
+}
+.frauen-library-hero--tone-wissen{
+  --frauen-hero-img:url("/test/assets/frauen/library-v1223/05-wissen-adab-dawah.jpg")!important;
+}
+.frauen-library-hero--tone-alltag{
+  --frauen-hero-img:url("/test/assets/frauen/library-v1223/06-alltag-schutz.jpg")!important;
+}
+.frauen-library-hero--tone-lebensphasen{
+  --frauen-hero-img:url("/test/assets/frauen/library-v1223/07-lebensphasen.jpg")!important;
+}
+
+.frauen-library-hero--tone-din,
+.frauen-library-hero--tone-fiqh,
+.frauen-library-hero--tone-generationen,
+.frauen-library-hero--tone-familie,
+.frauen-library-hero--tone-wissen,
+.frauen-library-hero--tone-alltag,
+.frauen-library-hero--tone-lebensphasen{
+  background-position:center 48%!important;
+  background-size:cover!important;
+}
+
+@media (max-width:760px){
+  .frauen-library-card.has-visual::after{
+    width:48%!important;
+    opacity:.88!important;
+    background-image:
+      linear-gradient(90deg,
+        transparent 0%,
+        color-mix(in srgb,var(--card) 18%,transparent) 25%,
+        color-mix(in srgb,var(--card) 74%,transparent) 64%,
+        color-mix(in srgb,var(--card) 97%,transparent) 88%,
+        var(--card) 100%),
+      linear-gradient(180deg,rgba(4,14,13,.03),rgba(4,14,13,.18)),
+      var(--frauen-card-img)!important;
+  }
+  .frauen-library-area-card.has-visual::after{
+    width:46%!important;
+    opacity:.76!important;
+  }
+  .frauen-library-card--generationen.has-visual::after{
+    width:51%!important;
+    opacity:.93!important;
+  }
+}
+
+@media (max-width:430px){
+  .frauen-library-card.has-visual::after{
+    width:49%!important;
+  }
+  .frauen-library-area-card.has-visual::after{
+    width:47%!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__nr,
+  .frauen-library-area-card.has-visual .frauen-library-area-card__nr{
+    padding:4px 6px 3px;
+  }
+}
