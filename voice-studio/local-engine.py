@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 import base64, concurrent.futures, difflib, gc, hashlib, importlib.util, json, os, platform, re, shutil, subprocess, sys, threading, time, traceback, unicodedata, urllib.request, uuid
+import xml.etree.ElementTree as ET
 import multiprocessing as mp
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -18,6 +19,7 @@ os.environ.setdefault("PYTORCH_ENABLE_MPS_FALLBACK", "1")
 APP_HOME=Path(os.environ.get("DAR_VOICE_APP_HOME",str(Path.home()/"Applications"/"DAR-Voice-Studio"))).expanduser()
 PRON=APP_HOME/"pronunciation-rules.json"
 PROFILE=APP_HOME/"voice-production-profile.json"
+PLS_MASTER=APP_HOME/"DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls"
 VOICE_HOME=Path.home()/"SerhatVoice"
 
 def first_existing(paths):
@@ -45,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.72"
+ENGINE_VERSION="2.9.73"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_DIR=VOICE_HOME/"MasterPronunciations"
@@ -327,9 +329,62 @@ def validate_master_library(data):
         good.append(e)
     return good
 
+def load_max_master_pls(path:Path):
+    """Lädt das große PLS-Aussprachelexikon als vorinstallierten Fallback.
+
+    Bereits kuratierte Voice-Studio-Regeln behalten Vorrang. Die PLS-Einträge
+    liefern zusätzliche bekannte Schreibweisen und Sprechformen, ohne lokale
+    menschlich bestätigte MASTER-Regeln zu überschreiben.
+    """
+    if not path.exists():
+        print("[DĀR Voice] MAX-MASTER-PLS fehlt – starte mit bestehender Bibliothek.",flush=True)
+        return []
+    try:
+        root=ET.parse(path).getroot()
+        ns={"p":"http://www.w3.org/2005/01/pronunciation-lexicon"}
+        out=[]
+        seen=set()
+        for lexeme in root.findall("p:lexeme",ns):
+            grapheme=str(lexeme.findtext("p:grapheme",default="",namespaces=ns) or "").strip()
+            alias=str(lexeme.findtext("p:alias",default="",namespaces=ns) or "").strip()
+            if not grapheme or not alias:
+                continue
+            norm=normalize_lookup(grapheme)
+            if not norm or norm in seen:
+                continue
+            seen.add(norm)
+            out.append({
+                "category":"MAX MASTER PLS",
+                "canonical":grapheme,
+                "string_to_replace":grapheme,
+                "alias":alias,
+                "tts_text":alias,
+                "tts_language":"de",
+                "tts_strategy":"max-master-pls-v1",
+                "voice_lock":"REVIEW",
+                "qa_tier":"seed",
+                "source":"DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls",
+            })
+        print(f"[DĀR Voice] MAX-MASTER-PLS geladen: {len(out)} eindeutige Sprechformen.",flush=True)
+        return out
+    except Exception as e:
+        print("[DĀR Voice] MAX-MASTER-PLS konnte nicht geladen werden:",e,flush=True)
+        return []
+
 BASE_LIB=json.load(PRON.open(encoding="utf-8"))
 VOICE_PROFILE=json.load(PROFILE.open(encoding="utf-8"))
-BASE_RULES=list(BASE_LIB.get("rules",[]))
+_BASE_RULES=list(BASE_LIB.get("rules",[]))
+MAX_MASTER_PLS_RULES=load_max_master_pls(PLS_MASTER)
+_BASE_RULE_NORMALIZED={
+    normalize_lookup(r.get("string_to_replace",""))
+    for r in _BASE_RULES
+    if normalize_lookup(r.get("string_to_replace",""))
+}
+MAX_MASTER_PLS_FALLBACK_RULES=[
+    r for r in MAX_MASTER_PLS_RULES
+    if normalize_lookup(r.get("string_to_replace","")) not in _BASE_RULE_NORMALIZED
+]
+BASE_RULES=_BASE_RULES+MAX_MASTER_PLS_FALLBACK_RULES
 
 def load_persistent_user_overrides():
     primary=load_json_file(USER_OVERRIDES_FILE,{"schemaVersion":1,"rules":[]})
@@ -558,6 +613,8 @@ def rebuild_runtime_rules():
     counts["rules"]=len(RULES)
     counts["userLearnedRules"]=len(user_rules)
     counts["onlineSearchRules"]=len(ONLINE_RULES)
+    counts["maxMasterPlsRules"]=len(MAX_MASTER_PLS_RULES)
+    counts["maxMasterPlsFallbackRules"]=len(MAX_MASTER_PLS_FALLBACK_RULES)
     counts["masterEntries"]=len(MASTER_ENTRIES)
     counts["masterAutoRules"]=len(MASTER_RULES)
     counts["masterSahaba"]=sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabi")
