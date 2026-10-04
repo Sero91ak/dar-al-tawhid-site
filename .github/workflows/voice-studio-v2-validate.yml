@@ -452,6 +452,8 @@ jobs:
           quiz=json.loads(quiz_path.read_text(encoding="utf-8"))
           kids=Path("kids/index.html").read_text(encoding="utf-8")
           engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          studio=Path("voice-studio/content-studio.js").read_text(encoding="utf-8")
+          admin=Path("cloudflare/kids-content-admin.js").read_text(encoding="utf-8")
           sw=Path("kids/sw.js").read_text(encoding="utf-8")
 
           errors=[]
@@ -508,6 +510,9 @@ jobs:
               'DARKidsOwnerVoice.play',
               'Audio wird vorbereitet',
               'dar-kids-owner-voice-missing',
+              'function normalizeStudioQuizItems',
+              '"/content/kids/content-index.json',
+              'studioContentId',
           ]
           for x in runtime_required:
               if x not in kids:
@@ -521,10 +526,35 @@ jobs:
               'def build_kids_owner_voice_sync',
               'name="dar-kids-owner-voice-auto"',
               'if p=="/kids-voice/sync-start"',
+              'quiz_age_bands.append("4-6")',
+              'quiz_age_bands.append("7-8")',
+              'quiz_age_bands.append("9-10")',
           ]
           for x in engine_required:
               if x not in engine:
                   errors.append("Voice engine missing "+x)
+
+          studio_required=[
+              'id="csQuizAgeBand"',
+              'function quizBandForRange',
+              'function setQuizAgeBand',
+              'explanation:',
+              'triggerKidsOwnerVoiceSync',
+              'ageBand:studioKind==="quiz"',
+          ]
+          for x in studio_required:
+              if x not in studio:
+                  errors.append("Content Studio quiz bridge missing "+x)
+
+          admin_required=[
+              'Kids-Quiz braucht exakt eine Altersstufe: 4–6, 7–8 oder 9–10',
+              'Kids-Quiz braucht mindestens eine konkrete Quelle',
+              '4–6 braucht genau zwei einfache Antworten',
+              'explanation: clean(q?.explanation',
+          ]
+          for x in admin_required:
+              if x not in admin:
+                  errors.append("Kids content admin quiz guard missing "+x)
 
           sw_required=[
               'url.pathname==="/kids/data/quiz-kids.json"',
