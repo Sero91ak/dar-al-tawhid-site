@@ -1363,6 +1363,7 @@ function normalizeLegacyStory(item){
     ...item,
     kind:"story",appTarget:"kids",
     modes:{read:true,listen:true},
+    cover:{url:"/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",source:"existing-kids-art",type:"cover"},
     tags:["legacy-kids","legacy-story","legacy-id:"+String(item.id||"")],
     verification:"approved"
   };
@@ -1385,6 +1386,7 @@ function normalizeLegacyDua(item){
     claimIds:[],
     tags:["studio:dua","legacy-kids","legacy-dua","legacy-id:"+String(item.id||""),"canonical-id:"+String(item.canonicalId||"")].filter(Boolean),
     modes:{read:true,listen:true},
+    cover:{url:"/kids/assets/quiz-scenes/topic-dua.svg?v=20261004-topic1",source:"existing-kids-art",type:"cover"},
     verification:"verified",
     legacySource:item
   };
@@ -1404,6 +1406,7 @@ function normalizeLegacyNarration(item){
     claimIds:[],
     tags:["studio:narration","legacy-kids","legacy-narration","legacy-id:"+String(item.id||"")],
     modes:{read:true,listen:true},
+    cover:{url:"/kids/assets/quiz-scenes/topic-adab.svg?v=20261004-topic1",source:"existing-kids-art",type:"cover"},
     verification:"prepared"
   };
 }
