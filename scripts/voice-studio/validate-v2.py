@@ -521,6 +521,14 @@ def main():
     engine_source=Path(engine_path).read_text(encoding="utf-8")
     for required in ("KNOWN_RULE_ALIAS_INDEX","knownRuleAliases","max-master-pls-v1","fastKnownPath","default_mode","story_reference_matches_text",'"dua":"dua"','"narration":"narration"','/content-audio/reference',"manual-owner-content-upload"):
         if required not in engine_source: fail("fast-known pronunciation marker missing: "+required)
+    for required in ('/content-audio/reference','same-origin Cloud GPU gateway',"registerDirectAudioLearning"):
+        if required not in studio_source: fail("direct owner reference/cloud marker missing: "+required)
+
+    mobile_html=root/"voice-studio/mobile.html"
+    if mobile_html.exists():
+        mobile_source=mobile_html.read_text(encoding="utf-8")
+        for required in ('data-content-kind="story"','data-content-kind="dua"','data-content-kind="narration"',"contentStudioUrl","/voice-studio/?cloud=1&kind="):
+            if required not in mobile_source: fail("mobile content shortcut marker missing: "+required)
 
     integration_paths=[]
     kids_admin_js=root/"cloudflare/kids-content-admin.js"
@@ -530,7 +538,7 @@ def main():
         feed_source=kids_feed_js.read_text(encoding="utf-8")
         for required in ("normalizeQuiz","normalizeGame","normalizeProduction","test-published","live-published","genau eine richtige Antwort nötig"):
             if required not in admin_source: fail("kids content server marker missing: "+required)
-        for required in ("studioNewSection","openDeepLink","data-studio-content","renderQuiz","renderGame","studio-audio"):
+        for required in ("studioNewSection","openDeepLink","data-studio-content","renderQuiz","renderGame","studio-audio","studioDuaSection","studioNarrationSection","sectionKind",'studio:dua','studio:narration'):
             if required not in feed_source: fail("kids content feed marker missing: "+required)
         integration_paths.extend((kids_admin_js,kids_feed_js))
 
