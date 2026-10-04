@@ -1,0 +1,272 @@
+/* DĀR AL TAWḤĪD · Jumuʿah / Freitag · Test-only v1258 */
+#appView.view:has(.jummah-hub-page){
+  --jfx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/9c40e8c5-bac1-4f25-aebe-53c8691339e3/f239e7f3-421d-4c44-beb3-54f2ae460f85/Single_wide_cinematic_app_background_for_a_Jumu_ah_Friday_se.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiODBkMTQxOWUwZjE4NWNlZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIzMjY3MH0.PzQCuo7Q6537MKdFZliobMzQdVm8vdH1HacobteX-Gw");
+  --jfx-bg:var(--bg);
+  --jfx-text:var(--text,var(--cream));
+  --jfx-muted:var(--muted);
+  --jfx-accent:var(--gold2);
+  --jfx-line:color-mix(in srgb,var(--gold2) 18%,var(--line2));
+  --jfx-line-soft:color-mix(in srgb,var(--gold2) 10%,var(--line2));
+  --jfx-surface:color-mix(in srgb,var(--card,var(--bg)) 72%,transparent);
+  --jfx-surface-strong:color-mix(in srgb,var(--card,var(--bg)) 90%,transparent);
+  --jfx-left:color-mix(in srgb,var(--bg) 91%,transparent);
+  --jfx-mid:color-mix(in srgb,var(--bg) 62%,transparent);
+  --jfx-right:color-mix(in srgb,var(--bg) 15%,transparent);
+  width:100%!important;
+  max-width:none!important;
+  background:var(--jfx-bg)!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="light"] #appView.view:has(.jummah-hub-page),
+html[data-theme="soft"] #appView.view:has(.jummah-hub-page),
+html[data-theme="salbei"] #appView.view:has(.jummah-hub-page),
+html[data-theme="eisgold"] #appView.view:has(.jummah-hub-page){
+  --jfx-left:color-mix(in srgb,var(--bg) 95%,transparent);
+  --jfx-mid:color-mix(in srgb,var(--bg) 74%,transparent);
+  --jfx-right:color-mix(in srgb,var(--bg) 35%,transparent);
+  --jfx-surface:color-mix(in srgb,var(--card,var(--bg)) 88%,transparent);
+  --jfx-surface-strong:color-mix(in srgb,var(--card,var(--bg)) 97%,transparent);
+}
+html[data-theme="royal"] #appView.view:has(.jummah-hub-page),
+html[data-theme="dark"] #appView.view:has(.jummah-hub-page),
+html[data-theme="dar-al-layl"] #appView.view:has(.jummah-hub-page),
+html[data-theme="bordeaux"] #appView.view:has(.jummah-hub-page),
+html[data-theme="aurora"] #appView.view:has(.jummah-hub-page){
+  --jfx-left:color-mix(in srgb,var(--bg) 86%,transparent);
+  --jfx-mid:color-mix(in srgb,var(--bg) 54%,transparent);
+  --jfx-right:color-mix(in srgb,var(--bg) 10%,transparent);
+  --jfx-surface:color-mix(in srgb,var(--card,var(--bg)) 60%,transparent);
+  --jfx-surface-strong:color-mix(in srgb,var(--card,var(--bg)) 80%,transparent);
+}
+
+#appView.view:has(.jummah-hub-page) > .view-head{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  width:100vw!important;
+  min-height:clamp(238px,49vw,320px)!important;
+  margin:0 0 18px calc(50% - 50vw)!important;
+  padding:
+    clamp(28px,6vw,42px)
+    max(20px,calc((100vw - 1180px)/2))
+    clamp(24px,5vw,36px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  align-items:flex-start!important;
+  border:0!important;
+  border-radius:0 0 26px 26px!important;
+  background:
+    linear-gradient(90deg,var(--jfx-left) 0%,var(--jfx-mid) 44%,var(--jfx-right) 82%,color-mix(in srgb,var(--bg) 4%,transparent) 100%),
+    linear-gradient(180deg,color-mix(in srgb,var(--bg) 5%,transparent),transparent 48%,color-mix(in srgb,var(--bg) 22%,transparent)),
+    var(--jfx-art) 78% 46%/cover no-repeat!important;
+  box-shadow:0 20px 44px color-mix(in srgb,var(--bg) 64%,transparent),inset 0 -1px 0 var(--jfx-line)!important;
+}
+#appView.view:has(.jummah-hub-page) > .view-head::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--bg) 18%,transparent),transparent 64%),
+    radial-gradient(circle at 84% 15%,color-mix(in srgb,var(--gold2) 10%,transparent),transparent 42%);
+}
+#appView.view:has(.jummah-hub-page) > .view-head > *{
+  position:relative;
+  z-index:1;
+  width:min(650px,86%);
+}
+#appView.view:has(.jummah-hub-page) > .view-head .eyebrow{
+  margin:0 0 8px!important;
+  color:var(--jfx-accent)!important;
+  font-size:.66rem!important;
+  font-weight:850!important;
+  letter-spacing:.12em!important;
+}
+#appView.view:has(.jummah-hub-page) > .view-head h2{
+  margin:0!important;
+  color:var(--jfx-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(2.25rem,9vw,4rem)!important;
+  line-height:.95!important;
+  font-weight:620!important;
+  text-shadow:0 2px 16px color-mix(in srgb,var(--bg) 38%,transparent)!important;
+}
+#appView.view:has(.jummah-hub-page) > .view-head .view-desc{
+  margin:10px 0 0!important;
+  max-width:36rem!important;
+  color:var(--jfx-text)!important;
+  font-size:clamp(.86rem,3vw,1rem)!important;
+  line-height:1.48!important;
+  font-weight:570!important;
+  text-shadow:0 1px 10px color-mix(in srgb,var(--bg) 38%,transparent)!important;
+}
+
+#appView.view:has(.jummah-hub-page) .jummah-hub-page{
+  width:min(900px,calc(100% - 24px))!important;
+  margin:0 auto calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 28px)!important;
+  padding:0!important;
+  background:transparent!important;
+}
+
+#appView.view:has(.jummah-hub-page) .dar-jf-detail{
+  display:grid!important;
+  gap:0!important;
+  background:transparent!important;
+}
+
+#appView.view:has(.jummah-hub-page) .dar-jf-section{
+  margin:0!important;
+  padding:19px 0 20px!important;
+  border:0!important;
+  border-bottom:1px solid var(--jfx-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+#appView.view:has(.jummah-hub-page) .dar-jf-section:first-child{
+  padding-top:4px!important;
+}
+
+#appView.view:has(.jummah-hub-page) .dar-jf-kicker{
+  margin:0 0 7px!important;
+  color:var(--jfx-accent)!important;
+  font-size:.64rem!important;
+  line-height:1.1!important;
+  font-weight:850!important;
+  letter-spacing:.12em!important;
+}
+
+#appView.view:has(.jummah-hub-page) .dar-jf-section h2,
+#appView.view:has(.jummah-hub-page) .dar-jf-section h3{
+  margin:0 0 8px!important;
+  font-family:var(--font-display,var(--serif))!important;
+  color:var(--jfx-text)!important;
+  line-height:1.05!important;
+  font-weight:640!important;
+}
+#appView.view:has(.jummah-hub-page) .dar-jf-section h2{font-size:clamp(1.65rem,6vw,2.25rem)!important}
+#appView.view:has(.jummah-hub-page) .dar-jf-section h3{font-size:clamp(1.25rem,4.7vw,1.55rem)!important}
+
+#appView.view:has(.jummah-hub-page) .dar-jf-detail-lead,
+#appView.view:has(.jummah-hub-page) .dar-jf-section p{
+  color:var(--jfx-text)!important;
+  font-size:.9rem!important;
+  line-height:1.58!important;
+}
+
+#appView.view:has(.jummah-hub-page) .dar-jf-facts{
+  margin-top:14px!important;
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:0!important;
+  border-top:1px solid var(--jfx-line)!important;
+  border-bottom:1px solid var(--jfx-line)!important;
+}
+#appView.view:has(.jummah-hub-page) .dar-jf-fact{
+  min-height:68px!important;
+  padding:11px 10px!important;
+  border:0!important;
+  border-right:1px solid var(--jfx-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+#appView.view:has(.jummah-hub-page) .dar-jf-fact:last-child{border-right:0!important}
+#appView.view:has(.jummah-hub-page) .dar-jf-fact span{
+  color:var(--jfx-muted)!important;
+  font-size:.62rem!important;
+  font-weight:800!important;
+  letter-spacing:.08em!important;
+}
+#appView.view:has(.jummah-hub-page) .dar-jf-fact b{
+  margin-top:4px!important;
+  color:var(--jfx-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:1.1rem!important;
+}
+
+#appView.view:has(.jummah-hub-page) .jummah-push-panel{
+  margin:18px 0 0!important;
+  padding:15px 0 0!important;
+  border:0!important;
+  border-top:1px solid var(--jfx-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#appView.view:has(.jummah-hub-page) .jummah-push-panel h4{
+  display:block!important;
+  margin:0 0 10px!important;
+  font-family:var(--font-display,var(--serif))!important;
+  color:var(--jfx-text)!important;
+  font-size:1.05rem!important;
+  font-weight:640!important;
+}
+
+#appView.view:has(.jummah-hub-page) .prayer-settings-grid{
+  gap:8px!important;
+}
+#appView.view:has(.jummah-hub-page) .jummah-push-panel .prayer-action-btn,
+#appView.view:has(.jummah-hub-page) .jummah-push-panel .filter-select,
+#appView.view:has(.jummah-hub-page) .jummah-push-panel .field{
+  min-height:44px!important;
+  border:1px solid var(--jfx-line)!important;
+  border-radius:13px!important;
+  background:var(--jfx-surface)!important;
+  color:var(--jfx-text)!important;
+  box-shadow:none!important;
+}
+
+#appView.view:has(.jummah-hub-page) .jummah-hub-meta,
+#appView.view:has(.jummah-hub-page) .jummah-hub-nav{
+  margin-top:14px!important;
+}
+#appView.view:has(.jummah-hub-page) .jummah-hub-nav{
+  padding-top:14px!important;
+  border-top:1px solid var(--jfx-line)!important;
+}
+#appView.view:has(.jummah-hub-page) .jummah-hub-nav .prayer-action-btn{
+  min-width:min(62%,240px)!important;
+  min-height:44px!important;
+  border:1px solid var(--jfx-line)!important;
+  border-radius:14px!important;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--jfx-accent) 12%,var(--jfx-surface)),var(--jfx-surface))!important;
+  color:var(--jfx-text)!important;
+}
+
+#appView.view:has(.jummah-hub-page) .dar-jf-status,
+#appView.view:has(.jummah-hub-page) .dar-jf-warn{
+  margin:14px 0!important;
+  padding:12px 0!important;
+  border:0!important;
+  border-top:1px solid var(--jfx-line)!important;
+  border-bottom:1px solid var(--jfx-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--jfx-muted)!important;
+}
+
+@media(max-width:599px){
+  #appView.view:has(.jummah-hub-page) > .view-head{
+    min-height:250px!important;
+    padding:26px 18px 24px!important;
+    background-position:center,center,80% 46%!important;
+  }
+  #appView.view:has(.jummah-hub-page) > .view-head > *{width:min(100%,88%)!important}
+  #appView.view:has(.jummah-hub-page) .jummah-hub-page{width:calc(100% - 20px)!important}
+}
+
+@media(min-width:760px){
+  #appView.view:has(.jummah-hub-page) > .view-head{
+    min-height:300px!important;
+    background-position:center,center,74% 44%!important;
+  }
+  #appView.view:has(.jummah-hub-page) > .view-head > *{width:min(650px,60%)!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  #appView.view:has(.jummah-hub-page) *{scroll-behavior:auto!important}
+}
