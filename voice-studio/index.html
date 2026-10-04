@@ -2333,6 +2333,12 @@ function updateChunkStream(kind,st){
   }
   prefetchChunkStream(kind,s.cursor);
   prefetchChunkStream(kind,s.cursor+1);
+  const firstMs=Math.max(0,Number(st?.render_first_audio_ms||0));
+  if(firstMs&&s.cursor===0){
+    const latency=(firstMs/1000).toFixed(1)+" s";
+    if(kind==="free")$("#freeVoiceStatus").textContent="Erstes Audio nach "+latency+" · Rest wird weiter erzeugt …";
+    else setMessage("Erstes Audio nach "+latency+" · Rest wird weiter erzeugt …","warn");
+  }
   pumpChunkStream(kind);
   return true;
 }
