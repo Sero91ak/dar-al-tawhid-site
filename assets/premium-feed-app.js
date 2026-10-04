@@ -20,7 +20,6 @@
   var FEED_SHARE_BUSY = Object.create(null);
   var FEED_SHARE_IO = null;
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
-  var SHARE_IMAGE_API = FEED_API_ORIGIN + '/api/share-image/background';
   /* Full-bleed feed (iOS parity): no letterbox column caps */
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 0;
@@ -2879,83 +2878,39 @@
     });
   }
 
-  function feedSharePromptData(scene) {
-    function pick(selectors) {
-      var el = null;
-      try { el = scene.querySelector(selectors); } catch (e) {}
-      return String(el && (el.innerText || el.textContent) || '').replace(/\s+/g, ' ').trim();
-    }
-    var title = pick('.sf-post__title,.sf-title,.sf-quote-title,h1,h2,h3');
-    var body = pick('.sf-post__quote,.sf-quote-text,.sf-quote,.feed-quote,.sf-post__body,.sf-post__copy');
-    var source = pick('.sf-quote-source,.feed-source,.feed-quote-source,.sf-source');
-    var category = pick('.sf-post__kicker,.sf-kicker,.sf-label,.sf-post__category');
-    if (!body) {
-      body = String(scene.innerText || scene.textContent || '')
-        .replace(/@dar_at_tawhid|@dar_al_tauhid|by Serhat Abu Malik|dar-al-tawhid\.de/gi, ' ')
-        .replace(/\s+/g, ' ').trim().slice(0, 1200);
-    }
-    return { title: title, body: body, source: source, category: category };
-  }
+  var FEED_SHARE_LAST_POOL_ID = '';
 
-  function feedShareHistoricalFallback(scene) {
-    var prompt = feedSharePromptData(scene);
-    var hay = String((prompt.category || '') + ' ' + (prompt.title || '') + ' ' + (prompt.body || '')).toLowerCase();
-    var scored = FEED_HISTORICAL_STATIC.slice().map(function (item, idx) {
-      var score = 0;
-      if (item.category && hay.indexOf(String(item.category).toLowerCase()) >= 0) score += 6;
-      (item.tags || []).forEach(function (tag) { if (hay.indexOf(String(tag).toLowerCase()) >= 0) score += 3; });
-      return { item: item, score: score, idx: idx };
-    }).sort(function (a, b) { return b.score - a.score || a.idx - b.idx; });
-    return (async function () {
-      var last = null;
-      for (var i = 0; i < scored.length; i++) {
-        try {
-          var img = await feedShareLoadImg(scored[i].item.src + '?share-fallback=v1247');
-          return { image: img, objectUrl: '' };
-        } catch (e) { last = e; }
-      }
-      throw last || new Error('Kein historischer Ersatzhintergrund verfügbar.');
-    })();
-  }
-
-  async function feedShareFreshImage(scene) {
-    var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-    var timer = setTimeout(function () { try { if (controller) controller.abort(); } catch (e) {} }, 45000);
+  function feedShareRandomIndex(len) {
+    if (!len) return 0;
     try {
-      var res = await fetch(SHARE_IMAGE_API, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-store',
-        credentials: 'omit',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'image/avif,image/webp,image/png,image/jpeg' },
-        body: JSON.stringify(feedSharePromptData(scene)),
-        signal: controller ? controller.signal : undefined
-      });
-      if (!res.ok) {
-        var msg = 'Neues Bild konnte nicht erzeugt werden.';
-        try { var problem = await res.json(); if (problem && problem.error) msg = String(problem.error); } catch (e2) {}
-        throw new Error(msg);
+      if (global.crypto && typeof global.crypto.getRandomValues === 'function') {
+        var a = new Uint32Array(1);
+        global.crypto.getRandomValues(a);
+        return a[0] % len;
       }
-      var blob = await res.blob();
-      if (!blob || !/^image\//i.test(blob.type || '')) throw new Error('Bildgenerator lieferte kein gültiges Bild.');
-      var objectUrl = URL.createObjectURL(blob);
+    } catch (e) {}
+    return Math.floor(Math.random() * len);
+  }
+
+  async function feedSharePoolImage() {
+    var pool = FEED_HISTORICAL_STATIC.filter(function (item) { return isFeedBgSafe(item); });
+    if (!pool.length) throw new Error('Kein freigegebener Bildpool verfügbar.');
+    var start = feedShareRandomIndex(pool.length);
+    if (pool.length > 1 && String(pool[start].id || '') === FEED_SHARE_LAST_POOL_ID) start = (start + 1) % pool.length;
+    var last = null;
+    for (var i = 0; i < pool.length; i++) {
+      var item = pool[(start + i) % pool.length];
       try {
-        var img = await feedShareLoadImg(objectUrl);
-        return { image: img, objectUrl: objectUrl };
-      } catch (e3) {
-        URL.revokeObjectURL(objectUrl);
-        throw e3;
-      }
-    } catch (generatorError) {
-      try { console.warn('[dar-premium-feed] AI share unavailable; historical fallback active', generatorError); } catch (_e) {}
-      return feedShareHistoricalFallback(scene);
-    } finally {
-      clearTimeout(timer);
+        var img = await feedShareLoadImg(item.src + '?share-pool=v1250');
+        FEED_SHARE_LAST_POOL_ID = String(item.id || item.src || '');
+        return { image: img, objectUrl: '' };
+      } catch (err) { last = err; }
     }
+    throw last || new Error('Kein freigegebenes Hintergrundbild konnte geladen werden.');
   }
 
   async function feedSharePaintBg(ctx, scene, dims) {
-    var fresh = await feedShareFreshImage(scene);
+    var fresh = await feedSharePoolImage();
     try {
       ctx.fillStyle = '#1a1814';
       ctx.fillRect(0, 0, dims.outW, dims.outH);
