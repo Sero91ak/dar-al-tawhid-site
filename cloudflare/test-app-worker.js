@@ -260,6 +260,11 @@ async function finalizeDarTestHomeV1193(asset) {
     html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/more-v1241.css?v=1241"><\/head>');
   }
 
+  // DAR_ILM_SCHOLAR_PROFILE_V1253
+  if (!/ilm-scholar-profile-v1253\.css/.test(html)) {
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholar-profile-v1253.css?v=1253"><\/head>');
+  }
+
 // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
 
