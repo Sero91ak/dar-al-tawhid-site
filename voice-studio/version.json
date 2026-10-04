@@ -679,7 +679,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "43a9f1bfe502030891301e7e88fbdd9e9dfad8d3",
+  "releaseRef": "8b0a04c40ba6a624d2e5ca75640c6ba3b37ad287",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1161,7 +1161,7 @@
     "nativeMacRestartsStaleEngine": true,
     "installerRequiresMatchingEngineVersion": true,
     "interactivePriorityGuardAdded": true,
-    "manifestReleaseRef": "43a9f1bfe502030891301e7e88fbdd9e9dfad8d3",
+    "manifestReleaseRef": "8b0a04c40ba6a624d2e5ca75640c6ba3b37ad287",
     "installerManifestVersionGuard": true,
     "dynamicEngineVersionHandshake": true,
     "staleHardcodedEngineVersionRemoved": true,
@@ -1201,9 +1201,9 @@
     "storyReferenceLearningStateVisible": true,
     "storyReferenceInstallerPackaging": true,
     "storyReferenceCiValidationPassed": true,
-    "validatedImplementationRef": "43a9f1bfe502030891301e7e88fbdd9e9dfad8d3",
+    "validatedImplementationRef": "8b0a04c40ba6a624d2e5ca75640c6ba3b37ad287",
     "fullVoiceValidatePassed": true,
-    "mobileReleaseCandidateRef": "43a9f1bfe502030891301e7e88fbdd9e9dfad8d3",
+    "mobileReleaseCandidateRef": "8b0a04c40ba6a624d2e5ca75640c6ba3b37ad287",
     "globalCanonicalGuardBlockedByUnrelatedKidsAssetVersionGuard": false,
     "globalCanonicalGuardNote": "Aktueller 2.9.77-Gesamtstand: Smoke, Validate, Health, Canonical Guard und native Mac-Audio-Route bestanden.",
     "canonicalGuardPassed": true,
@@ -1213,7 +1213,9 @@
     "kidsOwnerVoiceNoSystemTtsFallback": true,
     "kidsOwnerVoiceQuranSynthesisBlocked": true,
     "kidsOwnerVoiceInteractivePriority": true,
-    "kidsOwnerVoiceFirstLocalRenderPending": true
+    "kidsOwnerVoiceFirstLocalRenderPending": true,
+    "kidsOwnerVoicePublishedContentStudioDiscovery": true,
+    "kidsOwnerVoiceGameVoiceCues": true
   },
   "mubashshirunStories": {
     "enabled": true,
@@ -1347,14 +1349,19 @@
       "kids/data/dua-kids.json",
       "kids/data/stories-authentic.json",
       "kids/data/short-stories-voice.json",
-      "kids/data/verified-content.json"
+      "kids/data/verified-content.json",
+      "content/kids/content-index.json"
     ],
     "includes": [
       "quiz",
       "dua-explanations",
       "short-stories",
       "story-quiz",
-      "knowledge-explanations"
+      "knowledge-explanations",
+      "published-content-studio-stories",
+      "published-content-studio-quizzes",
+      "published-game-instructions",
+      "published-game-voice-cues"
     ],
     "systemTtsFallback": false,
     "syntheticQuranRecitation": false,
