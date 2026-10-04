@@ -311,7 +311,15 @@ jobs:
           print("timing count",len(d.get("timings") or []))
           PY
 
-      - name: Install exact paragraph timings in manifest
+      - name: Pin current audiobook as permanent Kids asset
+        run: |
+          set -euo pipefail
+          mkdir -p kids/assets/prophet-story-audio/muhammad
+          cp /tmp/muhammad-current.mp3 kids/assets/prophet-story-audio/muhammad/story.mp3
+          test "$(stat -c%s kids/assets/prophet-story-audio/muhammad/story.mp3)" -gt 100000
+          sha256sum kids/assets/prophet-story-audio/muhammad/story.mp3
+
+      - name: Install synchronized paragraph timings in manifest
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -342,6 +350,11 @@ jobs:
               meta["syncMode"]=str(a.get("syncMode") or "elevenlabs-forced-alignment-v1")
               meta["alignmentLoss"]=a.get("alignmentLoss")
               meta["alignmentGeneratedAt"]=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
+              meta["url"]="/kids/assets/prophet-story-audio/muhammad/story.mp3?v=20261004-owner1"
+              meta["source"]="owner-approved-repo-permanent-audio"
+              meta["permanentAsset"]=True
+              meta["signedPreviewUrlReplaced"]=True
+              meta["allAges"]=True
               meta.pop("syncPoints",None)
               meta.pop("syncCalibration",None)
           vp=item.setdefault("voiceProduction",{})
@@ -352,19 +365,19 @@ jobs:
           vp["followReaderSyncedAt"]=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
           d["updatedAt"]=time.strftime("%Y-%m-%d",time.gmtime())
           p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-          print("Installed exact timings:",len(timings))
+          print("Installed synchronized timings:",len(timings))
           PY
 
-      - name: Commit exact follow-reader timings
+      - name: Commit permanent audiobook and synchronized reader data
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add kids/data/prophet-stories.json
+          git add kids/data/prophet-stories.json kids/assets/prophet-story-audio/muhammad/story.mp3
           if git diff --cached --quiet; then
-            echo "Exact timings already current."
+            echo "Permanent audiobook and timings already current."
             exit 0
           fi
-          git commit -m "Kids: exact Muhammad audiobook follow-reader timing"
+          git commit -m "Kids: pin Muhammad audiobook and synchronized follow-reader"
           git pull --rebase origin main
           git push origin HEAD:main
