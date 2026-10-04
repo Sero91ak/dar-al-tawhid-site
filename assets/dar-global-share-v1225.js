@@ -1,66 +1,11 @@
 (function(){
   "use strict";
-  if(window.__DAR_GLOBAL_SHARE_V1240)return;
-  window.__DAR_GLOBAL_SHARE_V1240=true;
+  if(window.__DAR_GLOBAL_SHARE_V1246)return;
+  window.__DAR_GLOBAL_SHARE_V1246=true;
 
-  var APP_STORE_URL="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
-  var APP_STORE_BADGE="/assets/app-store-badge-de-official.svg?v=share-v1239";
   var SITE="dar-al-tawhid.de";
+  var SHARE_IMAGE_API="https://dar-admin-publisher.sero91ak.workers.dev/api/share-image/background";
   var W=1080,H=1350;
-  var SHARE_SCENE_MANIFEST="/data/share-background-library.json";
-  var REGISTERED_SCENES=[];
-
-  var GENERIC_SCENES=[
-    "/kids/assets/prophet-scenes/library.webp",
-    "/kids/assets/prophet-scenes/desert.webp",
-    "/kids/assets/prophet-scenes/mountain.webp",
-    "/kids/assets/prophet-scenes/night.webp",
-    "/kids/assets/prophet-scenes/royal.webp",
-    "/kids/assets/prophet-scenes/garden.webp",
-    "/kids/assets/prophet-scenes/water.webp",
-    "/kids/assets/prophet-scenes/ocean.webp",
-    "/kids/assets/kids-cinema/runtime/scene-1.webp",
-    "/kids/assets/kids-cinema/runtime/scene-2.webp",
-    "/kids/assets/kids-cinema/runtime/scene-3.webp",
-    "/assets/post-templates/bibliothek-braun.jpg",
-    "/assets/post-templates/nachtblau-buecher.jpg",
-    "/assets/post-templates/gruen-moschee.jpg",
-    "/assets/post-templates/sand-buecher.jpg",
-    "/assets/post-templates/olive-mihrab.jpg",
-    "/assets/post-templates/nacht-mond.jpg",
-    "/assets/post-templates/petrol-pflanze.jpg",
-    "/assets/post-templates/buecher-teal.jpg",
-    "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
-    "/kids/assets/sahaba-mubashshirun/umar.jpg",
-    "/kids/assets/sahaba-mubashshirun/uthman.jpg",
-    "/kids/assets/sahaba-mubashshirun/ali.jpg",
-    "/kids/assets/sahaba-mubashshirun/talha.jpg",
-    "/kids/assets/sahaba-mubashshirun/zubayr.jpg",
-    "/kids/assets/sahaba-mubashshirun/sad.jpg",
-    "/kids/assets/sahaba-mubashshirun/said.jpg",
-    "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
-    "/kids/assets/sahaba-mubashshirun/abd-ar-rahman.jpg"
-  ];
-  var SAHABA_SCENES={
-    "abu bakr":"/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
-    "abū bakr":"/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
-    "umar":"/kids/assets/sahaba-mubashshirun/umar.jpg",
-    "ʿumar":"/kids/assets/sahaba-mubashshirun/umar.jpg",
-    "uthman":"/kids/assets/sahaba-mubashshirun/uthman.jpg",
-    "ʿuthman":"/kids/assets/sahaba-mubashshirun/uthman.jpg",
-    "ali":"/kids/assets/sahaba-mubashshirun/ali.jpg",
-    "ʿali":"/kids/assets/sahaba-mubashshirun/ali.jpg",
-    "talha":"/kids/assets/sahaba-mubashshirun/talha.jpg",
-    "zubayr":"/kids/assets/sahaba-mubashshirun/zubayr.jpg",
-    "saʿd":"/kids/assets/sahaba-mubashshirun/sad.jpg",
-    "sa'd":"/kids/assets/sahaba-mubashshirun/sad.jpg",
-    "saʿid":"/kids/assets/sahaba-mubashshirun/said.jpg",
-    "sa'id":"/kids/assets/sahaba-mubashshirun/said.jpg",
-    "abu ubaydah":"/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
-    "abū ʿubaydah":"/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
-    "abd ar-rahman":"/kids/assets/sahaba-mubashshirun/abd-ar-rahman.jpg",
-    "ʿabd ar-raḥman":"/kids/assets/sahaba-mubashshirun/abd-ar-rahman.jpg"
-  };
 
   function clean(s){return String(s||"").replace(/\s+/g," ").trim()}
   function stripUiLabel(value,kind){
@@ -69,31 +14,8 @@
     if(kind==="source")return s.replace(/^(?:QUELLE|SOURCE|NACHWEISE?)\s*[:·–—-]?\s*/i,"").trim();
     return s;
   }
-  /* GLOBAL_SHARE_MANIFEST_V1232 */
-  function registerSceneItems(items){
-    (Array.isArray(items)?items:[]).forEach(function(item){
-      var src=clean(item&&item.src);if(!src)return;
-      var tags=Array.isArray(item.tags)?item.tags.map(function(x){return clean(x).toLowerCase()}).filter(Boolean):[];
-      if(!REGISTERED_SCENES.some(function(x){return x.src===src}))REGISTERED_SCENES.push({src:src,tags:tags});
-      if(GENERIC_SCENES.indexOf(src)<0)GENERIC_SCENES.push(src);
-    });
-  }
-  function loadSceneManifest(){
-    return fetch(SHARE_SCENE_MANIFEST,{cache:"no-store"})
-      .then(function(r){if(!r.ok)throw new Error("manifest "+r.status);return r.json()})
-      .then(function(data){registerSceneItems(data&&data.items);return REGISTERED_SCENES})
-      .catch(function(){return REGISTERED_SCENES});
-  }
-  function manifestScenesFor(tags){
-    tags=(Array.isArray(tags)?tags:[]).map(function(x){return clean(x).toLowerCase()}).filter(Boolean);
-    if(!tags.length)return[];
-    return REGISTERED_SCENES.filter(function(item){
-      return item.tags.some(function(tag){return tags.indexOf(tag)>=0});
-    }).map(function(item){return item.src});
-  }
   function text(el){return el?clean(el.innerText||el.textContent||""):""}
   function first(root,sel){try{return root&&root.querySelector?root.querySelector(sel):null}catch(e){return null}}
-  function hash(s){s=String(s||"");var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h+=(h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24)}return Math.abs(h>>>0)}
   function toast(msg){
     var old=document.querySelector(".dar-global-share-toast");if(old)old.remove();
     var n=document.createElement("div");n.className="dar-global-share-toast";n.textContent=msg;document.body.appendChild(n);
@@ -159,51 +81,38 @@
     }
     return {kind:String(route||"post"),category:category||"Wissen",title:title,body:body,source:trimSource(source||"Quelle siehe Beitrag in der App."),url:location.href};
   }
-  function sceneFor(data){
-    var hay=(data.title+" "+data.body+" "+data.category).toLowerCase();
-    var exact=null;Object.keys(SAHABA_SCENES).some(function(k){if(hay.indexOf(k)>=0){exact=SAHABA_SCENES[k];return true}return false});
-    if(exact)return exact;
-    var sahabaAny=[
-      "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
-      "/kids/assets/sahaba-mubashshirun/umar.jpg",
-      "/kids/assets/sahaba-mubashshirun/uthman.jpg",
-      "/kids/assets/sahaba-mubashshirun/ali.jpg",
-      "/kids/assets/sahaba-mubashshirun/talha.jpg",
-      "/kids/assets/sahaba-mubashshirun/zubayr.jpg",
-      "/kids/assets/sahaba-mubashshirun/sad.jpg",
-      "/kids/assets/sahaba-mubashshirun/said.jpg",
-      "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
-      "/kids/assets/sahaba-mubashshirun/abd-ar-rahman.jpg"
-    ];
-    var makkah=["/kids/assets/prophet-scenes/desert.webp","/kids/assets/prophet-scenes/mountain.webp","/assets/post-templates/sand-buecher.jpg","/kids/assets/prophet-scenes/royal.webp","/kids/assets/kids-cinema/runtime/scene-1.webp"];
-    var madinah=["/kids/assets/prophet-scenes/garden.webp","/kids/assets/prophet-scenes/royal.webp","/assets/post-templates/gruen-moschee.jpg","/assets/post-templates/olive-mihrab.jpg","/kids/assets/kids-cinema/runtime/scene-2.webp"];
-    var ilm=["/kids/assets/prophet-scenes/library.webp","/assets/post-templates/bibliothek-braun.jpg","/assets/post-templates/nachtblau-buecher.jpg","/assets/post-templates/buecher-teal.jpg","/kids/assets/prophet-scenes/night.webp","/kids/assets/kids-cinema/runtime/scene-3.webp"];
-    var quran=["/assets/post-templates/buecher-teal.jpg","/assets/post-templates/nachtblau-buecher.jpg","/kids/assets/prophet-scenes/night.webp","/kids/assets/prophet-scenes/library.webp"];
-    var dua=["/kids/assets/prophet-scenes/night.webp","/kids/assets/prophet-scenes/garden.webp","/assets/post-templates/nacht-mond.jpg","/assets/post-templates/olive-mihrab.jpg"];
-    var family=["/kids/assets/prophet-scenes/garden.webp","/kids/assets/prophet-scenes/water.webp","/assets/post-templates/olive-mihrab.jpg","/kids/assets/prophet-scenes/library.webp"];
-    var ramadan=["/kids/assets/prophet-scenes/night.webp","/assets/post-templates/nacht-mond.jpg","/assets/post-templates/gruen-moschee.jpg","/kids/assets/prophet-scenes/royal.webp"];
-    var extra=[];
-    if(/ṣaḥāb|sahab|salaf|gefährten|gefaehrten/.test(hay))extra=manifestScenesFor(["sahaba","salaf","historical"]);
-    else if(/makkah|mekka|ḥajj|hajj|ʿumrah|umrah|kaʿba|kaaba/.test(hay))extra=manifestScenesFor(["makkah","hajj","desert","hijaz"]);
-    else if(/madīnah|madinah|medina|masjid|moschee/.test(hay))extra=manifestScenesFor(["madinah","mosque","palms"]);
-    else if(/ramaḍān|ramadan|qiyām|qiyam|iʿtikāf|itikaf/.test(hay))extra=manifestScenesFor(["ramadan","night","mosque"]);
-    else if(/qurʾān|quran|āyah|ayah|sūrah|surah/.test(hay))extra=manifestScenesFor(["quran","night","wissen"]);
-    else if(/duʿā|dua|dhikr|adhkār|adhkar/.test(hay))extra=manifestScenesFor(["dua","night","calm"]);
-    else if(/ehe|nikāḥ|nikah|familie|kinder|töchter|toechter|schwangerschaft|stillzeit|nifās|nifas/.test(hay))extra=manifestScenesFor(["family","garden","calm"]);
-    else if(/ʿilm|ilm|wissen|fiqh|ḥadī|hadith|sunnah|quelle|gelehrt/.test(hay))extra=manifestScenesFor(["wissen","fiqh","hadith","library"]);
-    var pool=GENERIC_SCENES;
-    if(/ṣaḥāb|sahab|salaf|gefährten|gefaehrten/.test(hay))pool=sahabaAny;
-    else if(/makkah|mekka|ḥajj|hajj|ʿumrah|umrah|kaʿba|kaaba/.test(hay))pool=makkah;
-    else if(/madīnah|madinah|medina|masjid|moschee/.test(hay))pool=madinah;
-    else if(/ramaḍān|ramadan|qiyām|qiyam|iʿtikāf|itikaf/.test(hay))pool=ramadan;
-    else if(/qurʾān|quran|āyah|ayah|sūrah|surah/.test(hay))pool=quran;
-    else if(/duʿā|dua|dhikr|adhkār|adhkar/.test(hay))pool=dua;
-    else if(/ehe|nikāḥ|nikah|familie|kinder|töchter|toechter|schwangerschaft|stillzeit|nifās|nifas/.test(hay))pool=family;
-    else if(/ʿilm|ilm|wissen|fiqh|ḥadī|hadith|sunnah|quelle|gelehrt/.test(hay))pool=ilm;
-    if(extra.length)pool=Array.from(new Set(extra.concat(pool)));
-    var key="darGlobalShareSceneV1232",seq=0;try{seq=Number(localStorage.getItem(key)||0)||0;localStorage.setItem(key,String(seq+1))}catch(e){}
-    return pool[(hash(hay+"|"+seq))%pool.length];
+  async function generateFreshBackground(data){
+    var controller=typeof AbortController!=="undefined"?new AbortController():null;
+    var timer=setTimeout(function(){try{if(controller)controller.abort()}catch(e){}},45000);
+    try{
+      var res=await fetch(SHARE_IMAGE_API,{
+        method:"POST",
+        mode:"cors",
+        cache:"no-store",
+        credentials:"omit",
+        headers:{"Content-Type":"application/json","Accept":"image/avif,image/webp,image/png,image/jpeg"},
+        body:JSON.stringify({
+          title:clean(data&&data.title),
+          body:clean(data&&data.body),
+          category:clean(data&&data.category),
+          source:trimSource(data&&data.source)
+        }),
+        signal:controller?controller.signal:undefined
+      });
+      if(!res.ok){
+        var msg="Neues Bild konnte nicht erzeugt werden.";
+        try{var problem=await res.json();if(problem&&problem.error)msg=clean(problem.error)}catch(e2){}
+        throw new Error(msg);
+      }
+      var blob=await res.blob();
+      if(!blob||!/^image\//i.test(blob.type||""))throw new Error("Bildgenerator lieferte kein gültiges Bild.");
+      var objectUrl=URL.createObjectURL(blob);
+      var image=await loadImage(objectUrl);
+      setTimeout(function(){try{URL.revokeObjectURL(objectUrl)}catch(e3){}},60000);
+      return image;
+    }finally{clearTimeout(timer)}
   }
+
   function adaptiveBodyLayout(ctx,body,maxW,maxH){
     body=stripUiLabel(body||"","body");
     var len=body.length;
@@ -224,17 +133,10 @@
     for(var i=0;i<lines.length;i+=per)pages.push(lines.slice(i,i+per));
     return {size:chosen,lineHeight:lh,pages:pages.length?pages:[[]]};
   }
-  /* GLOBAL_SHARE_VISUAL_V1239 · Apple-provided German App Store badge, unmodified */
-  async function drawBadge(ctx){
-    try{
-      var badge=await loadImage(APP_STORE_BADGE);
-      ctx.drawImage(badge,W-76-250,H-125,250,83);
-    }catch(e){}
-  }
   async function renderFiles(data){
     var canvas=document.createElement("canvas");canvas.width=W;canvas.height=H;var ctx=canvas.getContext("2d");if(!ctx)return[];
     try{if(document.fonts&&document.fonts.ready)await document.fonts.ready}catch(e){}
-    var bg=null;try{bg=await loadImage(sceneFor(data))}catch(e2){try{bg=await loadImage(GENERIC_SCENES[0])}catch(e3){}}
+    var bg=await generateFreshBackground(data);
     var margin=76,contentW=W-margin*2;
     data.body=stripUiLabel(data.body||data.title,"body");
     data.source=stripUiLabel(data.source||"Quelle siehe Beitrag in der App.","source");
@@ -244,7 +146,7 @@
     var titleLines=wrap(ctx,data.title,contentW).slice(0,3);
     var titleBottom=150+titleLines.length*Math.round(titleSize*1.14);
     var bodyTop=titleBottom+48;
-    var bodyBottom=982;
+    var bodyBottom=1100;
     var bodyTextMaxH=Math.max(300,bodyBottom-bodyTop-104);
     var bodyLayout=adaptiveBodyLayout(ctx,data.body,contentW-92,bodyTextMaxH);
     var pages=bodyLayout.pages;
@@ -324,7 +226,7 @@
         ctx.textAlign="left";
       }
 
-      var sy=1018,sh=132;
+      var sy=1130,sh=160;
       roundRect(ctx,margin,sy,contentW,sh,20);
       ctx.fillStyle="rgba(3,14,15,.76)";
       ctx.fill();
@@ -333,19 +235,11 @@
       ctx.stroke();
       ctx.fillStyle="#f2d99b";
       ctx.font="800 15px Arial, sans-serif";
-      ctx.fillText("QUELLE",margin+22,sy+27);
+      ctx.fillText("QUELLE",margin+22,sy+29);
       ctx.fillStyle="rgba(255,250,238,.96)";
       ctx.font="550 18px Arial, sans-serif";
-      var sl=wrap(ctx,trimSource(data.source),contentW-44).slice(0,2),sly=sy+55;
-      sl.forEach(function(line){ctx.fillText(line,margin+22,sly);sly+=26});
-      ctx.fillStyle="rgba(255,249,235,.80)";
-      ctx.font="650 13px Arial, sans-serif";
-      ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah",margin+22,sy+115);
-
-      ctx.fillStyle="#f2d99b";
-      ctx.font="700 19px Arial, sans-serif";
-      ctx.fillText(SITE,margin,H-52);
-      await drawBadge(ctx);
+      var sl=wrap(ctx,trimSource(data.source),contentW-44).slice(0,3),sly=sy+59;
+      sl.forEach(function(line){ctx.fillText(line,margin+22,sly);sly+=27});
 
       var blob=await new Promise(function(resolve){canvas.toBlob(resolve,"image/png",.97)});
       if(blob)files.push(new File([blob],"dar-al-tawhid-bildbeitrag-"+(p+1)+".png",{type:"image/png"}));
@@ -357,7 +251,7 @@
     if(instagram)toast("Bildbeitrag erstellt · im Teilen-Menü Instagram auswählen");
     try{
       if(navigator.share){
-        var payload={files:files,title:data.title+" · DĀR AL TAWḤĪD",text:"DĀR AL TAWḤĪD · "+SITE+"\nApp Store: "+APP_STORE_URL};
+        var payload={files:files,title:data.title+" · DĀR AL TAWḤĪD",text:"DĀR AL TAWḤĪD · "+SITE};
         if(!navigator.canShare||navigator.canShare({files:files})){await navigator.share(payload);return true}
         if(!navigator.canShare||navigator.canShare({files:[files[0]]})){await navigator.share({files:[files[0]],title:payload.title,text:payload.text});return true}
       }
@@ -382,7 +276,7 @@
           filename:files[0].name,
           filenames:files.map(function(f){return f.name}),
           title:data.title+" · DĀR AL TAWḤĪD",
-          text:"dar-al-tawhid.de\nApp Store: "+APP_STORE_URL
+          text:SITE
         });
         return true;
       }
@@ -421,7 +315,6 @@
     if(clean(data.body))lines.push(clean(data.body));
     if(clean(data.source))lines.push("Quelle: "+trimSource(data.source));
     lines.push(SITE);
-    lines.push("App Store: "+APP_STORE_URL);
     return {title:(clean(data.title)||"DĀR AL TAWḤĪD")+" · DĀR AL TAWḤĪD",text:lines.join("\n\n"),url:data.url||location.href};
   }
   async function nativeTextShare(data){
@@ -511,7 +404,7 @@
     }
   },true);
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
-  function boot(){loadSceneManifest().finally(function(){enhance(document)});try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
+  function boot(){enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-  window.DARGlobalShare={version:"1240",registerScenes:registerSceneItems,createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
+  window.DARGlobalShare={version:"1246",createAndShare:createAndShare,renderFiles:renderFiles,site:SITE,freshImageApi:SHARE_IMAGE_API};
 })();
