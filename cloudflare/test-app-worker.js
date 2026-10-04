@@ -236,12 +236,12 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
 // DAR_ILM_START_PHASE1_CACHE
-  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-historic-v1239");
+  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-cgi-v1252");
   html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-compact-v1239");
 
     // DAR_ILM_SCHOLARS_V1240
   if (!/ilm-scholars-v1240\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholars-v1240.css?v=1250"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholars-v1240.css?v=scholars-cgi-v1252"><\/head>');
   }
 
     // DAR_ILM_TOPICS_V1242
