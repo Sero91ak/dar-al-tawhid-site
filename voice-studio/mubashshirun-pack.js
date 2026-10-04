@@ -133,12 +133,19 @@ async function uploadCurrent(file){
   state.uploading=true;render();
   if($("#mvpReady"))$("#mvpReady").textContent=it.name+" · Audio-Datei und aktueller Text werden Alter "+state.age+" fest zugeordnet …";
   try{
+    if(typeof window.darVoiceAlignStoryFile!=="function")throw Error("Die exakte Mitlese-Synchronisierung ist noch nicht geladen.");
+    if($("#mvpReady"))$("#mvpReady").textContent=it.name+" · Audio wird wortgenau mit dem Story-Text synchronisiert …";
+    const alignment=await window.darVoiceAlignStoryFile(file,text);
+    if(!Array.isArray(alignment?.timings)||!alignment.timings.length)throw Error("Keine Mitlese-Zeitstempel erhalten.");
     const dataUrl=await fileAsDataUrl(file);
     const r=await engineRequest("/story-media/upload",{
       method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
         kind:"sahabi",id:it.id,age:state.age,text,
-        filename:file.name||"story-audio",dataUrl
+        filename:file.name||"story-audio",dataUrl,
+        timings:alignment.timings,
+        syncMode:alignment.syncMode||"elevenlabs-forced-alignment-v1",
+        alignmentLoss:alignment.alignmentLoss
       })
     });
     const d=await r.json().catch(()=>({}));
@@ -168,9 +175,18 @@ async function publishCurrent(){
   if(btn){btn.disabled=true;btn.textContent="Übernehme …"}
   if(status)status.textContent="Geprüftes Serhat-Audio wird der gewählten Altersfassung zugeordnet und in Kids veröffentlicht …";
   try{
+    if(typeof window.darVoiceAlignCurrentStory!=="function")throw Error("Die exakte Mitlese-Synchronisierung ist noch nicht geladen.");
+    if(status)status.textContent="Audio und Story-Text werden jetzt wortgenau für das automatische Mitlesen ausgerichtet …";
+    const alignment=await window.darVoiceAlignCurrentStory(text);
+    if(!Array.isArray(alignment?.timings)||!alignment.timings.length)throw Error("Keine Mitlese-Zeitstempel erhalten.");
     const r=await engineRequest("/mubashshirun/publish",{
       method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({id:it.id,age:state.age,text})
+      body:JSON.stringify({
+        id:it.id,age:state.age,text,
+        timings:alignment.timings,
+        syncMode:alignment.syncMode||"elevenlabs-forced-alignment-v1",
+        alignmentLoss:alignment.alignmentLoss
+      })
     });
     const d=await r.json().catch(()=>({}));
     if(!r.ok||d.ok===false)throw Error(d.error||"Übernahme fehlgeschlagen.");
