@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#f7f7f5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="DĀR Voice">
+<link rel="manifest" href="/mobile/manifest.webmanifest">
+<title>DĀR Voice</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f7f7f5;--card:#fff;--ink:#111;--muted:#777773;--line:#e8e8e4;
+  --soft:#efefec;--accent:#111;--good:#17784a;--warn:#9a5a00;--bad:#b42318;
+  --r:20px;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
+body{overscroll-behavior-y:none}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.app{min-height:100dvh;max-width:980px;margin:0 auto;padding:calc(var(--safe-top) + 8px) 0 calc(82px + var(--safe-bottom));background:var(--bg)}
+.top{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 93%,transparent);backdrop-filter:blur(18px);z-index:20;border-bottom:1px solid color-mix(in srgb,var(--line) 65%,transparent)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.02em}
+.logo{width:28px;height:28px;border-radius:50%;background:#101b20;display:grid;place-items:center;overflow:hidden}
+.logo img{width:100%;height:100%;object-fit:cover}
+.online{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:12px}
+.dot{width:7px;height:7px;border-radius:50%;background:#aaa}.dot.ok{background:#20a464}.dot.bad{background:#d13d32}
+.iconbtn{border:0;background:transparent;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ink)}
+.iconbtn:active{background:var(--soft)}
+main{padding:0 16px 20px}
+.screen{display:none}.screen.active{display:block}
+.hero{padding:20px 2px 8px}
+.kicker{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+h1{font-size:31px;line-height:1.04;letter-spacing:-.045em;margin:8px 0 5px}
+.sub{font-size:14px;line-height:1.45;color:var(--muted)}
+.editor{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 7px 22px rgba(0,0,0,.035)}
+textarea{width:100%;border:0;outline:0;resize:none;background:transparent;color:var(--ink);font-size:20px;line-height:1.45;min-height:42dvh;padding:22px 20px 8px}
+textarea::placeholder{color:#aaa9a4}
+.editor-foot{padding:12px 14px 14px}
+.quick{display:flex;gap:8px;overflow-x:auto;padding:2px 0 11px;scrollbar-width:none}.quick::-webkit-scrollbar{display:none}
+.pill{white-space:nowrap;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 11px;font-size:12px;color:#4f4f4b}
+.control-row{display:flex;align-items:center;gap:8px}
+.voice{flex:1;min-width:0;border:1px solid var(--line);background:#fff;border-radius:14px;height:48px;padding:0 12px;display:flex;align-items:center;gap:10px;text-align:left}
+.avatar{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f1dca3,#35544f 62%,#132823);flex:0 0 auto}
+.voice-copy{min-width:0;flex:1}.voice-name{font-size:13px;font-weight:700}.voice-desc{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.settings-btn{width:48px;height:48px;border:1px solid var(--line);background:#fff;border-radius:14px;font-size:18px}
+.generate{height:48px;border:0;background:#111;color:#fff;border-radius:14px;padding:0 18px;font-weight:800;min-width:104px}
+.generate[disabled]{opacity:.45}
+.secondary{height:44px;border:1px solid var(--line);background:#fff;color:#111;border-radius:13px;padding:0 14px;font-weight:700}
+.analysis{margin-top:12px;display:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}
+.analysis.show{display:block}
+.analysis-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}.analysis-title{font-weight:800;font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:7px 9px;font-size:12px}
+.chip.warn{border-color:#efc48e;background:#fff6e8;color:#88520a}
+.player{display:none;margin-top:12px;background:#111;color:#fff;border-radius:20px;padding:15px}.player.show{display:block}
+.player-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.player-title{font-weight:800}.player small{color:#c7c7c3}
+audio{width:100%}
+.player-actions{display:flex;gap:8px;margin-top:10px}.player-actions button{flex:1;height:40px;border-radius:12px;border:1px solid #333;background:#1b1b1b;color:#fff}
+.section-title{font-size:21px;font-weight:850;letter-spacing:-.03em;margin:20px 2px 10px}
+.searchbar{display:flex;gap:8px}.searchbar input{flex:1;height:48px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:0 14px;outline:0}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:9px}
+.candidate{display:flex;align-items:flex-start;gap:12px}.candidate-main{min-width:0;flex:1}.candidate strong{display:block;font-size:14px}.candidate .arabic{font-size:19px;line-height:1.35;margin-top:3px}.meta{font-size:11px;color:var(--muted);margin-top:4px}.candidate-actions{display:flex;gap:7px;margin-top:10px}.candidate-actions button{height:36px;border-radius:11px;border:1px solid var(--line);background:#fff;padding:0 11px;font-weight:700}.candidate-actions .confirm{background:#111;color:#fff;border-color:#111}
+.empty{padding:34px 10px;text-align:center;color:var(--muted);font-size:14px}
+.history-item{display:flex;align-items:center;gap:12px}.playdot{width:42px;height:42px;border-radius:50%;border:0;background:#111;color:#fff;display:grid;place-items:center;font-size:15px}.hist-main{min-width:0;flex:1}.hist-name{font-weight:750;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hist-meta{font-size:11px;color:var(--muted);margin-top:3px}
+.setting-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}.setting-row:last-child{border-bottom:0}.setting-label{font-weight:700;font-size:14px}.setting-note{font-size:11px;color:var(--muted);margin-top:3px}
+.badge{font-size:11px;padding:6px 8px;border-radius:999px;background:var(--soft);color:#555}.badge.good{background:#e9f7ef;color:var(--good)}
+.tabbar{position:fixed;left:0;right:0;bottom:0;height:calc(68px + var(--safe-bottom));padding-bottom:var(--safe-bottom);background:rgba(250,250,248,.94);backdrop-filter:blur(22px);border-top:1px solid var(--line);display:flex;z-index:50}
+.tabbar .inner{width:min(980px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.tab{border:0;background:transparent;color:#8b8b86;font-size:10px;font-weight:700;display:grid;place-items:center;align-content:center;gap:4px}.tab svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:2}.tab.active{color:#111}
+.sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:80;display:none}.sheet-backdrop.show{display:block}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:24px 24px 0 0;padding:10px 18px calc(20px + var(--safe-bottom));max-height:75dvh;overflow:auto}
+.handle{width:38px;height:5px;border-radius:999px;background:#d6d6d2;margin:0 auto 16px}
+.option{padding:14px 0;border-bottom:1px solid var(--line)}.option:last-child{border-bottom:0}.option label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}.option select{width:100%;height:44px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:0 12px}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:14px}.switch input{width:46px;height:28px}
+.toast{position:fixed;left:50%;bottom:calc(84px + var(--safe-bottom));transform:translateX(-50%) translateY(12px);background:#111;color:#fff;border-radius:13px;padding:10px 13px;font-size:12px;opacity:0;pointer-events:none;transition:.2s;z-index:100;max-width:calc(100vw - 34px);text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(min-width:740px){
+  main{padding:0 28px 30px}.app{border-left:1px solid var(--line);border-right:1px solid var(--line)}
+  .create-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.7fr);gap:16px;align-items:start}
+  textarea{min-height:58dvh}.analysis{margin-top:0}.player{margin-top:12px}
+}
+@media(prefers-color-scheme:dark){
+  body.auto-dark{--bg:#10110f;--card:#191a18;--ink:#f5f5f2;--muted:#999991;--line:#2d2e2a;--soft:#242522;--accent:#f5f5f2;color-scheme:dark}
+  body.auto-dark .voice,body.auto-dark .settings-btn,body.auto-dark .secondary,body.auto-dark .searchbar input,body.auto-dark .card,body.auto-dark .candidate-actions button{background:var(--card);color:var(--ink)}
+  body.auto-dark .generate,body.auto-dark .playdot,body.auto-dark .candidate-actions .confirm{background:#f5f5f2;color:#111}
+  body.auto-dark .tabbar{background:rgba(18,19,17,.94)}
+  body.auto-dark .tab.active{color:#fff}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand"><span class="logo"><img src="/mobile/voice-studio-icon.png" alt=""></span><span>DĀR Voice</span></div>
+    <div class="online"><span id="dot" class="dot"></span><span id="engineText">Verbinde …</span></div>
+    <button class="iconbtn" id="refreshBtn" aria-label="Aktualisieren">↻</button>
+  </header>
+
+  <main>
+    <section class="screen active" data-screen="create">
+      <div class="hero"><div class="kicker">Serhat Voice</div><h1>Text in Stimme verwandeln</h1><div class="sub">Schreiben, Aussprache prüfen, erzeugen und direkt anhören.</div></div>
+      <div class="create-grid">
+        <div>
+          <div class="editor">
+            <textarea id="text" placeholder="Hier Text eingeben …" spellcheck="true"></textarea>
+            <div class="editor-foot">
+              <div class="quick">
+                <button class="pill" data-prompt="Erzähle ruhig und warm: ">Erzählung</button>
+                <button class="pill" data-prompt="Erkläre kindgerecht und freundlich: ">Kinder</button>
+                <button class="pill" data-prompt="Sprich sachlich und klar: ">Sachlich</button>
+                <button class="pill" id="analyzeBtn">Aussprache prüfen</button>
+              </div>
+              <div class="control-row">
+                <button class="voice" id="voiceBtn"><span class="avatar"></span><span class="voice-copy"><span class="voice-name">Serhat Abu Malik</span><span class="voice-desc">Eigene Stimme · Deutsch + Fuṣḥā</span></span><span>›</span></button>
+                <button class="settings-btn" id="settingsBtn" aria-label="Einstellungen">⌘</button>
+                <button class="generate" id="generateBtn">Erzeugen</button>
+              </div>
+            </div>
+          </div>
+          <div id="player" class="player">
+            <div class="player-top"><div><div class="player-title">Neue Audio</div><small id="playerMeta">Serhat Voice</small></div><button class="iconbtn" id="closePlayer" style="color:#fff">×</button></div>
+            <audio id="audio" controls playsinline></audio>
+            <div class="player-actions"><button id="shareBtn">Teilen</button><button id="saveBtn">Datei öffnen</button></div>
+          </div>
+        </div>
+        <div id="analysis" class="analysis">
+          <div class="analysis-head"><div class="analysis-title">Ausspracheanalyse</div><span id="analysisState" class="badge">bereit</span></div>
+          <div id="analysisBody" class="sub">Noch keine Analyse.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="history">
+      <div class="hero"><div class="kicker">Bibliothek</div><h1>Verlauf</h1><div class="sub">Zuletzt erzeugte Audios auf deinem Mac.</div></div>
+      <div id="historyList"><div class="empty">Verlauf wird geladen …</div></div>
+    </section>
+
+    <section class="screen" data-screen="pronunciation">
+      <div class="hero"><div class="kicker">Aussprache</div><h1>Wörter prüfen & lernen</h1><div class="sub">Fehlerhafte oder neue Begriffe suchen, Varianten anhören und als Master bestätigen.</div></div>
+      <div class="searchbar"><input id="wordSearch" placeholder="z. B. Tawḥīd, Ṣaḥābah, Fuṣḥā"><button class="generate" id="wordSearchBtn">Suchen</button></div>
+      <div id="wordResults" style="margin-top:12px"><div class="empty">Suche einen Begriff oder tippe in der Analyse auf ein unbekanntes Wort.</div></div>
+      <audio id="previewAudio" controls playsinline style="display:none;margin-top:12px"></audio>
+    </section>
+
+    <section class="screen" data-screen="settings">
+      <div class="hero"><div class="kicker">DĀR Voice</div><h1>Einstellungen</h1><div class="sub">Engine, Modell und mobile Verbindung.</div></div>
+      <div class="card">
+        <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
+        <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
+        <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
+        <div class="setting-row"><div><div class="setting-label">Darstellung</div><div class="setting-note">System-Hell/Dunkel automatisch übernehmen</div></div><span class="badge good">Auto</span></div>
+      </div>
+      <div class="card">
+        <div class="setting-row"><div><div class="setting-label">Mobile Kopplung</div><div class="setting-note">Dieser Link ist an deinen Mac und Kopplungsschlüssel gebunden.</div></div><span class="badge good">sicher</span></div>
+        <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.75</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<nav class="tabbar"><div class="inner">
+  <button class="tab active" data-tab="create"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg><span>Erstellen</span></button>
+  <button class="tab" data-tab="history"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v6h6"/></svg><span>Verlauf</span></button>
+  <button class="tab" data-tab="pronunciation"><svg viewBox="0 0 24 24"><path d="M5 9v6M9 6v12M13 3v18M17 7v10M21 10v4"/></svg><span>Aussprache</span></button>
+  <button class="tab" data-tab="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21H9.6v-.1A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3V9.6h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.1A1.7 1.7 0 0 0 15 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.4.28.78.48 1.1.55H21v4h-.1c-.52.03-.9.22-1.5.45Z"/></svg><span>Mehr</span></button>
+</div></nav>
+
+<div id="sheetBackdrop" class="sheet-backdrop"><div class="sheet">
+  <div class="handle"></div>
+  <div class="section-title" style="margin-top:0">Voice-Einstellungen</div>
+  <div class="option"><label for="style">Sprechstil</label><select id="style">
+    <option value="auto">Automatisch</option><option value="narration">Erzählung</option><option value="kids_story">Kinder-Geschichte</option><option value="kids_lesson">Kinder-Unterricht</option><option value="teaching">Unterricht</option><option value="gentle">Sanft</option><option value="serious">Ernst</option><option value="question">Frage</option><option value="dua">Duʿāʾ</option>
+  </select></div>
+  <div class="option switch"><div><strong>Aussprachebibliothek</strong><div class="meta">Bestätigte Wörter und MAX-MASTER verwenden</div></div><input id="pronToggle" type="checkbox" checked></div>
+  <div class="option"><button class="generate" id="sheetDone" style="width:100%">Fertig</button></div>
+</div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const state={health:null,analysis:null,audioBlob:null,audioUrl:"",previewId:"",previewTerm:""};
+document.body.classList.add("auto-dark");
+
+function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
+async function api(path,opts={}){
+  const res=await fetch(path,{credentials:"include",cache:"no-store",...opts,headers:{"Content-Type":"application/json",...(opts.headers||{})}});
+  return res;
+}
+async function health(){
+  try{
+    const r=await api("/health"); const d=await r.json(); if(!r.ok||!d.ok)throw Error(d.error||"offline");
+    state.health=d; $("#dot").className="dot ok"; $("#engineText").textContent=d.model_state==="ready"?"Bereit":d.model_state==="loading"?"Lädt …":"Verbunden";
+    $("#healthBadge").textContent=d.model_state==="ready"?"bereit":"verbunden";$("#healthBadge").className="badge good";
+    $("#healthNote").textContent="Engine "+(d.engine_version||"")+" · "+(d.model_state||"");
+    const lib=d.library||{};const rules=Number(lib.rules||0);const pls=Number(lib.maxMasterPlsRules||0);
+    $("#libraryBadge").textContent=(rules||pls||0).toLocaleString("de-DE");
+    $("#libraryNote").textContent=(pls?pls.toLocaleString("de-DE")+" MAX-MASTER · ":"")+(rules?rules.toLocaleString("de-DE")+" Laufzeitregeln":"Bibliothek geladen");
+    $("#arabicBadge").textContent=d.reference_arabic_dedicated?"AR MASTER":"DE Fallback";$("#arabicBadge").className=d.reference_arabic_dedicated?"badge good":"badge";
+    return true;
+  }catch(e){
+    $("#dot").className="dot bad";$("#engineText").textContent="Mac nicht erreichbar";$("#healthBadge").textContent="offline";$("#healthNote").textContent="Mac und iPhone/iPad müssen im selben WLAN sein.";
+    return false;
+  }
+}
+function go(name){
+  $$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));
+  $$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));
+  if(name==="history")loadHistory(); if(name==="settings")health();
+  scrollTo({top:0,behavior:"instant"});
+}
+$$(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));
+$("#refreshBtn").onclick=()=>{health(); if($(".screen.active")?.dataset.screen==="history")loadHistory()};
+$$("[data-prompt]").forEach(b=>b.onclick=()=>{const t=$("#text");if(!t.value.trim())t.value=b.dataset.prompt;t.focus()});
+
+async function analyzeText({jump=true}={}){
+  const text=$("#text").value.trim(); if(!text){toast("Bitte zuerst Text eingeben.");return null}
+  $("#analysis").classList.add("show");$("#analysisState").textContent="prüft …";$("#analysisBody").innerHTML='<div class="sub">Begriffe und Aussprache werden geprüft …</div>';
+  try{
+    const r=await api("/analyze",{method:"POST",body:JSON.stringify({text,style:$("#style").value})}); const d=await r.json(); if(!r.ok||!d.ok)throw Error(d.error||"Analyse fehlgeschlagen");
+    state.analysis=d; const unresolved=d.unresolvedIslamicTerms||[]; const review=d.reviewTerms||[]; const masters=d.masterTerms||[];
+    if(unresolved.length){
+      $("#analysisState").textContent=unresolved.length+" prüfen";$("#analysisState").className="badge";
+      $("#analysisBody").innerHTML='<div class="sub" style="margin-bottom:8px">Diese Begriffe brauchen eine Ausspracheprüfung:</div><div class="chips">'+unresolved.map(x=>'<button class="chip warn" data-word="'+esc(x.term)+'">'+esc(x.term)+'</button>').join("")+'</div>';
+      $$("[data-word]").forEach(b=>b.onclick=()=>openWord(b.dataset.word));
+    }else{
+      $("#analysisState").textContent="bereit";$("#analysisState").className="badge good";
+      $("#analysisBody").innerHTML='<div class="sub">Keine ungeprüften Begriffe gefunden.</div>'+(masters.length||review.length?'<div class="chips" style="margin-top:8px">'+masters.slice(0,8).map(x=>'<span class="chip">'+esc(x)+'</span>').join("")+review.slice(0,6).map(x=>'<span class="chip">'+esc(x)+'</span>').join("")+'</div>':"");
+    }
+    return d;
+  }catch(e){$("#analysisState").textContent="Fehler";$("#analysisBody").textContent=e.message;toast(e.message);return null}
+}
+$("#analyzeBtn").onclick=()=>analyzeText();
+
+async function generate(){
+  if(!await health())return toast("Mac-Engine nicht erreichbar.");
+  const text=$("#text").value.trim(); if(!text)return toast("Bitte Text eingeben.");
+  $("#generateBtn").disabled=true;$("#generateBtn").textContent="Prüfe …";
+  const a=await analyzeText({jump:false});
+  if(!a){$("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";return}
+  if((a.unresolvedIslamicTerms||[]).length){
+    $("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";toast("Erst die markierten Wörter prüfen.");return;
+  }
+  $("#generateBtn").textContent="Erzeuge …";
+  try{
+    const r=await api("/generate",{method:"POST",body:JSON.stringify({text,prepared:a.prepared||"",style:$("#style").value})});
+    if(!r.ok){let d={};try{d=await r.json()}catch{};throw Error(d.error||"Audioerzeugung fehlgeschlagen")}
+    const blob=await r.blob(); if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);state.audioBlob=blob;state.audioUrl=URL.createObjectURL(blob);
+    $("#audio").src=state.audioUrl;$("#player").classList.add("show");$("#playerMeta").textContent="Serhat Voice · "+($("#style").selectedOptions[0]?.textContent||"Auto");
+    $("#audio").play().catch(()=>{});toast("Audio ist fertig.");loadHistory();
+  }catch(e){toast(e.message)}
+  finally{$("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen"}
+}
+$("#generateBtn").onclick=generate;
+$("#closePlayer").onclick=()=>$("#player").classList.remove("show");
+$("#saveBtn").onclick=()=>{if(state.audioUrl)window.open(state.audioUrl,"_blank")};
+$("#shareBtn").onclick=async()=>{
+  if(!state.audioBlob)return;
+  const file=new File([state.audioBlob],"dar-serhat-voice.wav",{type:"audio/wav"});
+  if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:"DĀR Voice"})}catch{}}
+  else window.open(state.audioUrl,"_blank");
+};
+
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+async function loadHistory(){
+  const box=$("#historyList");box.innerHTML='<div class="empty">Verlauf wird geladen …</div>';
+  try{
+    const r=await api("/mobile/history");const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Verlauf nicht verfügbar");
+    const items=d.items||[]; if(!items.length){box.innerHTML='<div class="empty">Noch keine Audios vorhanden.</div>';return}
+    box.innerHTML=items.map(x=>'<div class="card history-item"><button class="playdot" data-audio="'+encodeURIComponent(x.name)+'">▶</button><div class="hist-main"><div class="hist-name">'+esc(x.label||x.name)+'</div><div class="hist-meta">'+esc(x.createdLabel||"")+' · '+esc(x.sizeLabel||"")+'</div></div><button class="iconbtn" data-open="'+encodeURIComponent(x.name)+'">↗</button></div>').join("");
+    $$("[data-audio]").forEach(b=>b.onclick=()=>{const u="/mobile/audio?name="+b.dataset.audio;$("#audio").src=u;$("#player").classList.add("show");$("#playerMeta").textContent="Verlauf";go("create");$("#audio").play().catch(()=>{})});
+    $$("[data-open]").forEach(b=>b.onclick=()=>window.open("/mobile/audio?name="+b.dataset.open,"_blank"));
+  }catch(e){box.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}
+}
+
+function openWord(word){go("pronunciation");$("#wordSearch").value=word;searchWord(word)}
+async function searchWord(force){
+  const q=String(force||$("#wordSearch").value).trim();if(!q)return toast("Wort eingeben.");
+  const box=$("#wordResults");box.innerHTML='<div class="empty">Suche Varianten …</div>';
+  try{
+    const r=await api("/learning/search",{method:"POST",body:JSON.stringify({query:q,limit:12})});const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Suche fehlgeschlagen");
+    const rows=d.results||[]; if(!rows.length){box.innerHTML='<div class="empty">Keine Variante gefunden.</div>';return}
+    box.innerHTML=rows.map((x,i)=>'<div class="card candidate"><div class="candidate-main"><strong>'+esc(x.canonical||q)+'</strong><div class="arabic">'+esc(x.ttsText||x.alias||"")+'</div><div class="meta">'+esc(x.source||"Bibliothek")+' · '+esc(x.ttsLanguage||"")+'</div><div class="candidate-actions"><button data-preview="'+i+'">Anhören</button><button class="confirm" data-confirm="'+i+'" disabled>Als Master bestätigen</button></div></div></div>').join("");
+    $$("[data-preview]").forEach(b=>b.onclick=()=>previewCandidate(rows[Number(b.dataset.preview)],q,b));
+    $$("[data-confirm]").forEach(b=>b.onclick=()=>confirmCandidate(q,b));
+  }catch(e){box.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}
+}
+$("#wordSearchBtn").onclick=()=>searchWord();
+$("#wordSearch").addEventListener("keydown",e=>{if(e.key==="Enter")searchWord()});
+
+async function previewCandidate(row,term,btn){
+  btn.disabled=true;btn.textContent="Erzeuge …";state.previewId="";state.previewTerm=term;
+  try{
+    const r=await api("/learning/preview-start",{method:"POST",body:JSON.stringify({term,ttsText:row.ttsText||row.alias||term,canonical:row.canonical||term,language:row.ttsLanguage||"de",variant:0})});
+    const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Schnelltest fehlgeschlagen");
+    let snap=d;
+    for(let i=0;i<80 && !["ready","error"].includes(snap.state);i++){await new Promise(x=>setTimeout(x,400));const rr=await api("/learning/preview-state?id="+encodeURIComponent(d.jobId));snap=await rr.json()}
+    if(snap.state!=="ready")throw Error(snap.error||"Schnelltest nicht bereit");
+    state.previewId=snap.previewId;const a=$("#previewAudio");a.src="/learning/preview-audio?id="+encodeURIComponent(snap.jobId);a.style.display="block";await a.play().catch(()=>{});
+    const card=btn.closest(".candidate");card.querySelector("[data-confirm]").disabled=false;toast("Schnelltest bereit.");
+  }catch(e){toast(e.message)}
+  finally{btn.disabled=false;btn.textContent="Anhören"}
+}
+async function confirmCandidate(term,btn){
+  if(!state.previewId)return toast("Bitte diese Variante zuerst anhören.");
+  btn.disabled=true;btn.textContent="Speichert …";
+  try{
+    const r=await api("/learning/confirm",{method:"POST",body:JSON.stringify({previewId:state.previewId,term})});const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Bestätigung fehlgeschlagen");
+    btn.textContent="Master ✓";toast(term+" wurde gelernt.");await health();
+  }catch(e){btn.disabled=false;btn.textContent="Als Master bestätigen";toast(e.message)}
+}
+
+function openSheet(){$("#sheetBackdrop").classList.add("show")}
+function closeSheet(){$("#sheetBackdrop").classList.remove("show")}
+$("#settingsBtn").onclick=openSheet;$("#voiceBtn").onclick=openSheet;$("#sheetDone").onclick=closeSheet;
+$("#sheetBackdrop").addEventListener("click",e=>{if(e.target.id==="sheetBackdrop")closeSheet()});
+
+health();setInterval(health,10000);
+</script>
+</body>
+</html>
