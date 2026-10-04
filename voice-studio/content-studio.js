@@ -1021,7 +1021,7 @@ async function registerDirectAudioLearning(){
   const id=contentId||("studio-"+Date.now());
   const ageMin=Math.max(4,Number(q("csAgeMin")?.value||4));
   const ageMax=Math.max(ageMin,Number(q("csAgeMax")?.value||10));
-  const res=await localRequest("/story-media/upload",{
+  const res=await localRequest("/content-audio/reference",{
     method:"POST",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
