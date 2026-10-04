@@ -249,6 +249,48 @@
     catch(e){console.error("DAR global image share",e);toast("Bildbeitrag konnte nicht erstellt werden.");return false}
     finally{if(trigger){trigger.dataset.darShareBusy="0";trigger.classList.remove("is-busy")}}
   }
+  /* GLOBAL_SHARE_ACTIONS_V1227 · einheitliche Share-Aktionen in Besucher- und Test-App */
+  function shareSvg(kind){
+    if(kind==="wa")return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.84 9.84 0 0 0-8.46 14.86L2 22l5.3-1.39A9.98 9.98 0 1 0 12.04 2Zm0 17.96a8.1 8.1 0 0 1-4.12-1.13l-.3-.18-3.15.83.84-3.07-.2-.31a8.06 8.06 0 1 1 6.93 3.86Zm4.43-6.04c-.24-.12-1.43-.71-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.95-1.2-.72-.64-1.2-1.43-1.35-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.43-.59 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28Z"/></svg>';
+    if(kind==="tg")return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.65 3.25 18.5 20.1c-.24 1.19-.88 1.48-1.78.92l-4.8-3.54-2.32 2.23c-.26.26-.47.47-.97.47l.35-4.89 8.9-8.04c.39-.35-.08-.54-.6-.19L6.28 14l-4.74-1.48c-1.03-.32-1.05-1.03.21-1.52L20.28 3.86c.86-.32 1.61.19 1.37 1.39Z"/></svg>';
+    if(kind==="ig")return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm5 3.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4Zm0 2.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.3-2.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg>';
+    if(kind==="native")return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0-11 4 4m-4-4L8 7M5 11v8h14v-8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM7 15l3-3 2 2 3-4 2 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8" cy="9" r="1.2"/></svg>';
+  }
+  function actionButton(kind,label,attr){
+    var b=document.createElement("button");
+    b.type="button";
+    b.className="share-btn dar-global-share-action dar-global-share-"+kind;
+    b.setAttribute(attr||("data-dar-global-"+kind),"1");
+    b.innerHTML='<span class="dar-global-share-icon">'+shareSvg(kind)+'</span><span>'+label+'</span>';
+    return b;
+  }
+  function sharePayload(data){
+    data=data||{};
+    var lines=["DĀR AL TAWḤĪD"];
+    if(clean(data.title))lines.push(clean(data.title));
+    if(clean(data.body))lines.push(clean(data.body));
+    if(clean(data.source))lines.push("Quelle: "+trimSource(data.source));
+    lines.push(SITE);
+    return {title:(clean(data.title)||"DĀR AL TAWḤĪD")+" · DĀR AL TAWḤĪD",text:lines.join("\n\n"),url:data.url||location.href};
+  }
+  async function nativeTextShare(data){
+    var p=sharePayload(data);
+    if(navigator.share){
+      try{await navigator.share({title:p.title,text:p.text,url:p.url});return true}catch(e){if(e&&e.name==="AbortError")return true}
+    }
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(p.text+"\n\n"+p.url);toast("Text und Link kopiert");return true}}catch(e2){}
+    return false;
+  }
+  function panelHas(panel,kind){
+    if(kind==="wa")return !!panel.querySelector('[data-dar-global-wa],a[href*="wa.me"],a[href*="whatsapp"],.share-btn.wa');
+    if(kind==="tg")return !!panel.querySelector('[data-dar-global-tg],a[href*="t.me/share"],.share-btn.tg');
+    if(kind==="ig")return !!panel.querySelector('[data-dar-global-ig],[data-share-instagram],[data-frauen-share="ig"],.share-btn.ig');
+    if(kind==="native")return !!panel.querySelector('[data-dar-global-native],[data-share-native],[data-frauen-share="native"],.share-btn.native');
+    if(kind==="image")return !!panel.querySelector('[data-image-post-open],[data-image-dua-open],[data-image-ayah-open],[data-image-hadith-open],[data-dar-global-image],[data-frauen-share="image"]');
+    return false;
+  }
+
   function imageButton(){
     var b=document.createElement("button");b.type="button";b.className="share-btn image-post dar-global-image-btn";b.setAttribute("data-dar-global-image","1");
     b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9" r="1.5" fill="currentColor"/><path d="M6.5 16l3.4-3.4 2.6 2.5 2.1-2.2 3.1 3.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Bildbeitrag</span>';
@@ -256,12 +298,34 @@
   }
   function enhance(root){
     (root||document).querySelectorAll(".share-panel").forEach(function(panel){
-      if(panel.dataset.darGlobalShareEnhanced==="1")return;panel.dataset.darGlobalShareEnhanced="1";
-      var holder=panel.querySelector(".share-flat-v410,.post-after-share")||panel;
-      if(!panel.querySelector("[data-image-post-open],[data-image-dua-open],[data-image-ayah-open],[data-dar-global-image]"))holder.appendChild(imageButton());
+      var holder=panel.querySelector(".share-flat-v410,.post-after-share,.frauen-share-primary")||panel;
+      if(!panelHas(panel,"wa"))holder.appendChild(actionButton("wa","WhatsApp","data-dar-global-wa"));
+      if(!panelHas(panel,"tg"))holder.appendChild(actionButton("tg","Telegram","data-dar-global-tg"));
+      if(!panelHas(panel,"ig"))holder.appendChild(actionButton("ig","Instagram","data-dar-global-ig"));
+      if(!panelHas(panel,"native"))holder.appendChild(actionButton("native","Teilen","data-dar-global-native"));
+      if(!panelHas(panel,"image"))holder.appendChild(imageButton());
+      panel.dataset.darGlobalShareEnhanced="1";
     });
   }
   document.addEventListener("click",function(ev){
+    var wa=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-wa]"):null;
+    if(wa){
+      ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
+      var wd=ctxFromDom(wa),wp=sharePayload(wd);window.open("https://wa.me/?text="+encodeURIComponent(wp.text+"\n\n"+wp.url),"_blank","noopener,noreferrer");return;
+    }
+    var tg=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-tg]"):null;
+    if(tg){
+      ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
+      var td=ctxFromDom(tg),tp=sharePayload(td);window.open("https://t.me/share/url?url="+encodeURIComponent(tp.url)+"&text="+encodeURIComponent(tp.text),"_blank","noopener,noreferrer");return;
+    }
+    var nt=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-native]"):null;
+    if(nt){
+      ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();nativeTextShare(ctxFromDom(nt));return;
+    }
+    var gi=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-ig]"):null;
+    if(gi){
+      ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();createAndShare(gi,true);return;
+    }
     var t=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-image],[data-image-post-open],[data-image-dua-open],[data-image-ayah-open],[data-image-hadith-open],[data-frauen-share=\"image\"]"):null;
     if(t){ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();createAndShare(t,false);return}
     var ig=ev.target&&ev.target.closest?ev.target.closest("[data-share-instagram],[data-frauen-share=\"ig\"]"):null;
@@ -273,5 +337,5 @@
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
   function boot(){enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-  window.DARGlobalShare={version:"1228",createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
+  window.DARGlobalShare={version:"1229",createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
 })();
