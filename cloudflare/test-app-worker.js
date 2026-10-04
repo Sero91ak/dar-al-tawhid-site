@@ -172,11 +172,11 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/<link[^>]+dar-home-library-v1193\.css[^>]*>\s*/g, "");
   html = html.replace(/<script[^>]+dar-home-library-v1193\.js[^>]*><\/script>\s*/g, "");
 
-  // FORCE_TEST_DEPLOY_V1220
+  // FORCE_TEST_DEPLOY_V1224
   // v1202: existing Adobe/Runway imagery becomes one continuous Home background.
   // CSS only; no navigation, route or bottom-tab behavior changes.
   if (!html.includes("dar-home-atmosphere-v1202.css")) {
-    const atmosphereLink = '<link rel="stylesheet" id="darHomeAtmosphereV1220" href="/test/assets/dar-home-atmosphere-v1202.css?v=1220-force-deploy">\n';
+    const atmosphereLink = '<link rel="stylesheet" id="darHomeAtmosphereV1224" href="/test/assets/dar-home-atmosphere-v1202.css?v=1224-library">\n';
     if (html.includes("</head>")) html = html.replace("</head>", atmosphereLink + "</head>");
     else html = html.replace("<body", atmosphereLink + "<body");
   }
@@ -190,17 +190,21 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // Keep only the existing v1194 home authority and refresh its assets.
-  html = html.replace(/dar-home-library-v1194\.css\?v=[^"']+/g, "dar-home-library-v1194.css?v=1220-force-deploy");
-  html = html.replace(/dar-home-library-v1194\.js\?v=[^"']+/g, "dar-home-library-v1194.js?v=1220-force-deploy");
+  html = html.replace(/dar-home-library-v1194\.css\?v=[^"']+/g, "dar-home-library-v1194.css?v=1224-library");
+  html = html.replace(/dar-home-library-v1194\.js\?v=[^"']+/g, "dar-home-library-v1194.js?v=1224-library");
   html = html.replace(/dar-library-redesign-v1168\.css\?v=[^"']+/g, "dar-library-redesign-v1168.css?v=1213-quran-native");
   html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"']+/g, "dar-library-redesign-v1168.js?v=1213-quran-native");
+
+  // v1224 library redesign: force the current Test library presentation assets.
+  html = html.replace(/library-app\.css(?:\?v=[^"']*)?/g, "library-app.css?v=1224-classic");
+  html = html.replace(/library-app\.js(?:\?v=[^"']*)?/g, "library-app.js?v=1224-classic");
 
   // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
 
   // Build markers only; no route/page geometry is changed here.
-  html = html.replace(/const APP_BUILD_ID="app-shell-v[^"]+"/, 'const APP_BUILD_ID="app-shell-v1220"');
-  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v[^"]+"/, 'window.__DAR_EXPECTED_BUILD="app-shell-v1220"');
+  html = html.replace(/const APP_BUILD_ID="app-shell-v[^"]+"/, 'const APP_BUILD_ID="app-shell-v1224"');
+  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v[^"]+"/, 'window.__DAR_EXPECTED_BUILD="app-shell-v1224"');
 
   // Remove superseded visual layers that can still be present in older cached HTML.
   html = html.replace(/<link[^>]+dar-home-knowledge-library-v1183\.css[^>]*>\s*/g, "");
