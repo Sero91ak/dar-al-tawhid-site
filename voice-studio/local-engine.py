@@ -321,9 +321,9 @@ def load_verified_content_manifest():
 
 def load_kids_owner_voice_sources():
     return load_kids_repo_json(
-        "kids-owner-voice-sources.json",
-        "voice-studio/kids-owner-voice-sources.json",
-        lambda d:isinstance(d,dict) and isinstance(d.get("legacyShortStories"),list),
+        "short-stories-voice.json",
+        "kids/data/short-stories-voice.json",
+        lambda d:isinstance(d,dict) and isinstance(d.get("items"),list),
     )
 
 def load_fresh_kids_repo_json(local_name:str,repo_path:str,validator):
@@ -2633,9 +2633,10 @@ def _kids_owner_voice_units(quiz_data=None,dua_data=None,story_data=None,extra_d
             add(q.get("success"),"kids_lesson","story:success")
             add(q.get("retry"),"kids_lesson","story:retry")
 
-    for item in ((extra_data or {}).get("legacyShortStories") or []):
+    for item in ((extra_data or {}).get("items") or []):
         add((item or {}).get("text"),"kids_story","story:legacy")
-        for age_key,q in (((item or {}).get("questions") or {}).items()):
+        questions=(item or {}).get("question") or (item or {}).get("questions") or {}
+        for age_key,q in questions.items():
             q=q or {}
             for prompt in _owner_voice_question_prompts(q.get("question"),q.get("answers") or []):
                 add(prompt,"question","story:question:"+str(age_key))
@@ -3339,7 +3340,7 @@ def _build_kids_owner_voice_pack(dua_data,story_data,extra_data,verified_data,bu
         "counts":{
             "duaItems":len((dua_data or {}).get("items") or []),
             "authenticStories":len((story_data or {}).get("items") or []),
-            "legacyShortStories":len((extra_data or {}).get("legacyShortStories") or []),
+            "legacyShortStories":len((extra_data or {}).get("items") or []),
             "knowledgeLessons":sum(len((verified_data or {}).get(k) or []) for k in ("hadithLessons","earlyLessons")),
             "uniqueSpokenTexts":len(entries),
         }
