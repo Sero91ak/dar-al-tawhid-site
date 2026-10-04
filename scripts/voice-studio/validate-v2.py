@@ -178,6 +178,43 @@ def main():
     missing=required_modes-modes
     if missing: fail("missing prosody modes: "+", ".join(sorted(missing)))
     if int(prof.get("schemaVersion",0))<8: fail("voice profile schemaVersion must be >=8")
+    pronunciation_cfg=prof.get("pronunciation") or {}
+    phrase_components=list(pronunciation_cfg.get("fixedPhraseComponents") or [])
+    if len(phrase_components)<50:
+        fail(f"too few trusted phrase components: {len(phrase_components)}")
+    component_ids={str(x.get("id") or "") for x in phrase_components}
+    required_components={
+        "salam_as_salamu","salam_alaykum","salam_rahmatullahi","salam_barakatuh",
+        "salawat_full","tasbih_full","radiya_anhu","prophet_salam_male",
+        "core_quran","core_tawhid","core_aqidah","core_fiqh","core_makkah","core_madinah"
+    }
+    missing_components=required_components-component_ids
+    if missing_components:
+        fail("trusted phrase components missing: "+", ".join(sorted(missing_components)))
+    component_by_id={str(x.get("id") or ""):x for x in phrase_components}
+    expected_component_tts={
+        "salam_as_salamu":"السَّلَامُ",
+        "salam_alaykum":"عَلَيْكُمْ",
+        "salam_rahmatullahi":"رَحْمَتُ اللَّهِ",
+        "salam_barakatuh":"بَرَكَاتُهُ",
+        "salawat_full":"صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+        "tasbih_full":"سُبْحَانَهُ وَتَعَالَى",
+        "radiya_anhu":"عَنْهُ",
+    }
+    for cid,expected_tts in expected_component_tts.items():
+        item=component_by_id.get(cid) or {}
+        if str(item.get("tts_text") or "")!=expected_tts:
+            fail(f"trusted phrase component has wrong TTS target: {cid}")
+        if not list(item.get("forms") or []):
+            fail(f"trusted phrase component has no forms: {cid}")
+    expansion_policy=pronunciation_cfg.get("componentExpansionPolicy") or {}
+    for flag in (
+        "enabled","exactPhraseBeforeComponent","exactComponentBeforeFuzzy",
+        "deriveTokenAlignedComponentsFromMaxMaster","deriveOnlyConsistentTokenAliases",
+        "distinctiveIslamicTokensOnly","blockAmbiguousComponentAliases","neverOverrideUserMaster"
+    ):
+        if not expansion_policy.get(flag):
+            fail("component expansion policy missing: "+flag)
     qa=prof.get("qualityAssurance") or {}
     if int(qa.get("maxRenderAttempts",0))<2: fail("QA maxRenderAttempts must be >=2")
     if not 450<=int(qa.get("maxInternalSilenceMsWithPunctuation",0))<=900: fail("QA punctuation-pause guard invalid")
@@ -431,9 +468,9 @@ def main():
     if "carrier_not_exposed" not in bridge_render_src:
         fail("contextual carrier must never reach output")
     functions={n.name for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))}
-    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","derive_master_entries_from_rules","build_master_library","master_rules_from_entries","master_suggestions","known_master_form_or_german_inflection","detect_unresolved_islamic_terms","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale","file_signature","render_cache_key","load_render_cache","save_render_cache","cleanup_render_cache","reference_for_language","prepare_reference_if_needed","generation_token_budget","generation_timeout_seconds","_mlx_process_main","_start_mlx_process","_stop_mlx_process","load_mlx_model","load_production_model","render_with_mlx","is_inline_arabic_micro_term","repair_internal_pause","legacy_render_cache_keys","flow_boundary_strength","learned_canonical_forms","save_user_override_group","load_persistent_user_overrides","_persist_user_override_data","migrate_existing_user_override_groups","learning_audio_backup_path","contextual_bridge_direction","context_bridge_cache_key","load_context_bridge_cache","save_context_bridge_cache","render_context_bridge","_crop_context_bridge_audio","_find_context_separator","normalize_story_reference_text","story_reference_text_sha256","register_story_reference_pair","story_reference_state","story_reference_matches_text","bootstrap_story_reference_seed"}:
+    for required in {"resolve_segment_prosody","split_rescue_chunks","audio_quality_metrics","render_segment_with_qa","join_rendered_segments","audio_lock_key_for_chunk","split_audio_locked_spans","discard_pending_audio_locks","stage_pending_audio_locks","confirm_pending_audio_locks","load_locked_wav","source_has_honorific","rebuild_runtime_rules","derive_master_entries_from_rules","build_master_library","master_rules_from_entries","master_suggestions","known_master_form_or_german_inflection","detect_unresolved_islamic_terms","pronunciation_search","sync_online_pronunciation_library","create_learning_preview","confirm_learning_preview","save_user_override","learning_state","online_sync_is_stale","refresh_online_library_if_stale","file_signature","render_cache_key","load_render_cache","save_render_cache","cleanup_render_cache","reference_for_language","prepare_reference_if_needed","generation_token_budget","generation_timeout_seconds","_mlx_process_main","_start_mlx_process","_stop_mlx_process","load_mlx_model","load_production_model","render_with_mlx","is_inline_arabic_micro_term","repair_internal_pause","legacy_render_cache_keys","flow_boundary_strength","learned_canonical_forms","save_user_override_group","load_persistent_user_overrides","_persist_user_override_data","migrate_existing_user_override_groups","learning_audio_backup_path","contextual_bridge_direction","context_bridge_cache_key","load_context_bridge_cache","save_context_bridge_cache","render_context_bridge","_crop_context_bridge_audio","_find_context_separator","normalize_story_reference_text","story_reference_text_sha256","register_story_reference_pair","story_reference_state","story_reference_matches_text","bootstrap_story_reference_seed","build_profile_component_rules","derive_max_master_component_rules"}:
         if required not in functions: fail(f"engine missing production function: {required}")
-    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","MASTER_LIBRARY_CACHE","MASTER_LIBRARY_URL","islamic-master-library.json","unresolvedIslamicTerms","librarySuggestions","Ungeprüfte islamische Namen/Begriffe erkannt","user_rules+BASE_RULES+MASTER_RULES","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","continuous-sentence-flow-v3","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend","unnatural_final_internal_pause","execution_order=list(range(total))","Flow-aware Chunking","inline_arabic_internal_hold","inlineArabicRenderAttempts","inlineArabicSilenceThresholdRelative","cache-only-fast-path","Stimm-Modell wird nicht geladen","cache_reused_without_resynthesis","pause auto-repair","automaticTightJoinCrossfadeMs","strong_lexical_boundary","boundary_strength","flow_boundary_strength","USER_OVERRIDES_BACKUP","user-overrides.latest.json","learned_group_id","savedForms","persistentPath","backupPath","LEARNING_CONFIRMED_AUDIO_DIR","audio_lock_restore_from_backup","override_group_migration","migrate_existing_user_override_groups","CONTEXT_BRIDGE_CACHE_DIR","context-bridge-v1","carrier_not_exposed","context_bridge_direction","context_bridge_cache_hits","STORY_REFERENCE_HOME","STORY_REFERENCE_STATE","story-reference-muhammad-2026-10-04.json","story_reference_registered","reference-audio-exact-text-fast-path","dar-story-reference-bootstrap","storyReferenceMemory"}:
+    for marker in {"excessive_internal_pause","suspicious_sustained_hold","speech_rate_too_slow","generation_timeout","MLX_PROCESS_LOCK=threading.RLock()","MLX worker stopped","Watchdog aktiv","/confirm-core-audio","audio_lock_pending","session_audio_locks","required_honorific_key","honorificPolicyEnabled","/learning/search","/learning/sync","/learning/preview","/learning/confirm","USER_OVERRIDES_FILE","ONLINE_LIBRARY_CACHE","MASTER_LIBRARY_CACHE","MASTER_LIBRARY_URL","islamic-master-library.json","unresolvedIslamicTerms","librarySuggestions","Ungeprüfte islamische Namen/Begriffe erkannt","user_rules+BASE_RULES+MASTER_RULES","CONFIRMED_WAV","autoSyncHours","AUDIO_LOCK_STATE_LOCK=threading.RLock()","PENDING_AUDIO_LOCKS={}","PENDING_AUDIO_RENDER_ID=\"\"","MODEL_CONDITIONAL_CACHE={}","RENDER_CACHE_DIR","continuous-sentence-flow-v3","mlx-community/chatterbox-multilingual-v3","GenerationTokenLimitReached","GenerationTimeoutReached","max_new_tokens","production_backend","unnatural_final_internal_pause","execution_order=list(range(total))","Flow-aware Chunking","inline_arabic_internal_hold","inlineArabicRenderAttempts","inlineArabicSilenceThresholdRelative","cache-only-fast-path","Stimm-Modell wird nicht geladen","cache_reused_without_resynthesis","pause auto-repair","automaticTightJoinCrossfadeMs","strong_lexical_boundary","boundary_strength","flow_boundary_strength","USER_OVERRIDES_BACKUP","user-overrides.latest.json","learned_group_id","savedForms","persistentPath","backupPath","LEARNING_CONFIRMED_AUDIO_DIR","audio_lock_restore_from_backup","override_group_migration","migrate_existing_user_override_groups","CONTEXT_BRIDGE_CACHE_DIR","context-bridge-v1","carrier_not_exposed","context_bridge_direction","context_bridge_cache_hits","STORY_REFERENCE_HOME","STORY_REFERENCE_STATE","story-reference-muhammad-2026-10-04.json","story_reference_registered","reference-audio-exact-text-fast-path","dar-story-reference-bootstrap","storyReferenceMemory","profile-fixed-component-v1","max-master-token-component-v1","PROFILE_COMPONENT_RULES","MAX_MASTER_COMPONENT_RULES"}:
         if marker not in engine_source: fail(f"engine missing QA/audio-lock marker: {marker}")
     unresolved_src=ast.get_source_segment(engine_source,next((n for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.name=="known_master_form_or_german_inflection"),None)) or ""
     if (
