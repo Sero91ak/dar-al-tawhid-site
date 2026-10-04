@@ -1,7 +1,7 @@
 {
-  "version": "2.9.71",
-  "updatedAt": "2026-10-04T02:28:00+02:00",
-  "deployTrigger": "voice-studio-2.9.71-prophet-upload-layout",
+  "version": "2.9.72",
+  "updatedAt": "2026-10-04T02:38:00+02:00",
+  "deployTrigger": "voice-studio-2.9.72-kids-story-standard",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v43",
@@ -1186,5 +1186,24 @@
   "updateAutoInstallOnLaunch": false,
   "engineProcessPolicy": "single-owner-launcher",
   "engineLaunchAgentEnabled": false,
-  "runtimeUiGitHubSync": false
+  "runtimeUiGitHubSync": false,
+  "kidsStoryTextStandard": {
+    "version": "kids-story-greeting-closing-v1",
+    "intro": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.",
+    "closingSequence": [
+      "Und الله weiß es am besten.",
+      "Möge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.",
+      "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh."
+    ],
+    "appliesTo": [
+      "kids_story",
+      "Prophetengeschichten",
+      "Mubaschschirūn-Geschichten",
+      "Kids-Geschichten"
+    ],
+    "excludes": [
+      "Qurʾān-Rezitation",
+      "wörtliche Quellenzitate"
+    ]
+  }
 }
