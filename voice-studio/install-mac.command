@@ -377,7 +377,7 @@ for old in local-engine.py speech_flow.py studio.html mobile.html content-studio
   [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
 done
 
-for fresh in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json owner-voice-audio.json dua-kids.json stories-authentic.json short-stories-voice.json verified-content.json kids-content-index.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for fresh in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json quiz-audio.json owner-voice-audio.json dua-kids.json stories-authentic.json short-stories-voice.json verified-content.json kids-content-index.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   mv "$STAGE/$fresh" "$TARGET/$fresh"
 done
 for optional in watermark-my-logo-full.png app-icon-512.png; do
