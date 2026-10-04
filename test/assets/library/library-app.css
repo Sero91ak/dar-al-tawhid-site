@@ -1542,6 +1542,45 @@ html[data-theme="bordeaux"]{
   background:radial-gradient(circle at 22% 12%,color-mix(in srgb,var(--gold2) 11%,transparent),transparent 40%);
 }
 
+.lib-detail-backdrop{
+  position:absolute;
+  z-index:0;
+  top:-8%;
+  right:-7%;
+  width:min(54%,420px);
+  height:116%;
+  opacity:.16;
+  overflow:hidden;
+  pointer-events:none;
+  filter:blur(7px) saturate(.78) contrast(.94);
+  transform:scale(1.08);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.55) 28%,#000 62%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.55) 28%,#000 62%);
+}
+
+.lib-detail-backdrop img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+
+html[data-theme="light"] .lib-detail-backdrop,
+html[data-theme="soft"] .lib-detail-backdrop,
+html[data-theme="salbei"] .lib-detail-backdrop,
+html[data-theme="eisgold"] .lib-detail-backdrop{
+  opacity:.1;
+  filter:blur(9px) saturate(.62) contrast(.9);
+}
+
+html[data-theme="dark"] .lib-detail-backdrop,
+html[data-theme="dar-al-layl"] .lib-detail-backdrop,
+html[data-theme="royal"] .lib-detail-backdrop,
+html[data-theme="bordeaux"] .lib-detail-backdrop{
+  opacity:.18;
+}
+
 .lib-detail .lib-detail-cover{
   width:100%;
   max-width:190px;
