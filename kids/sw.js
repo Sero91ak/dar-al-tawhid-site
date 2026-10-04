@@ -47,7 +47,7 @@ const PRECACHE=[
   "/kids/story-follow-reader.js?v=1",
   "/kids/kids-age-typography.css?v=4",
   "/kids/kids-age-typography.js?v=3",
-  "/kids/prophet-stories.css?v=24",
+  "/kids/prophet-stories.css?v=25",
   "/kids/stories-final-v1088.css?v=1088",
   "/kids/prophet-stories.js?v=25",
   "/kids/assets/prophet-scenes/library.webp",
