@@ -2958,7 +2958,7 @@
     }
   }
 
-  /* FEED_SHARE_BRAND_V1224 · Besucher/Test: nur Bildexport veredelt. */
+  /* FEED_SHARE_BRAND_V1237 · Besucher/Test: nur Bildexport veredelt. */
   function feedShareBrandFooter(ctx, dims) {
     var w = dims.outW, h = dims.outH;
     var s = Math.max(.72, w / 1080);
@@ -2999,40 +2999,36 @@
     ctx.lineWidth = Math.max(1, 1.1 * s);
     ctx.stroke();
 
-    var icon = Math.round(36 * s);
-    var ix = bx + Math.round(7 * s), iy = by + (bh - icon) / 2;
-    var ir = Math.round(9 * s);
-    ctx.beginPath();
-    ctx.moveTo(ix + ir, iy);
-    ctx.arcTo(ix + icon, iy, ix + icon, iy + icon, ir);
-    ctx.arcTo(ix + icon, iy + icon, ix, iy + icon, ir);
-    ctx.arcTo(ix, iy + icon, ix, iy, ir);
-    ctx.arcTo(ix, iy, ix + icon, iy, ir);
-    ctx.closePath();
-    var blue = ctx.createLinearGradient(ix, iy, ix, iy + icon);
-    blue.addColorStop(0, "#38a8ff");
-    blue.addColorStop(1, "#0a78e8");
-    ctx.fillStyle = blue;
-    ctx.fill();
-
-    var cx = ix + icon / 2, cy = iy + icon / 2;
-    ctx.strokeStyle = "#fff";
-    ctx.lineWidth = Math.max(2.3, 2.8 * s);
-    ctx.lineCap = "round";
-    ctx.beginPath();
-    ctx.moveTo(cx - icon*.19, cy + icon*.22);
-    ctx.lineTo(cx, cy - icon*.20);
-    ctx.lineTo(cx + icon*.19, cy + icon*.22);
-    ctx.moveTo(cx - icon*.27, cy + icon*.08);
-    ctx.lineTo(cx + icon*.27, cy + icon*.08);
-    ctx.stroke();
-
-    ctx.fillStyle = "rgba(255,255,255,.78)";
-    ctx.font = "600 " + Math.round(8.5 * s) + "px Arial, sans-serif";
-    ctx.fillText("Download on the", ix + icon + Math.round(8*s), by + Math.round(15*s));
+    var mark = Math.round(31 * s);
+    var mx = bx + Math.round(11 * s), my = by + Math.round(9 * s);
+    ctx.save();
+    ctx.translate(mx,my);
+    ctx.scale(mark/100,mark/100);
     ctx.fillStyle = "#fff";
-    ctx.font = "700 " + Math.round(15.5 * s) + "px Arial, sans-serif";
-    ctx.fillText("App Store", ix + icon + Math.round(8*s), by + Math.round(34*s));
+    ctx.beginPath();
+    ctx.moveTo(52,25);
+    ctx.bezierCurveTo(58,17,67,12,75,12);
+    ctx.bezierCurveTo(76,21,72,29,65,34);
+    ctx.bezierCurveTo(58,39,52,37,52,37);
+    ctx.bezierCurveTo(43,36,35,42,30,50);
+    ctx.bezierCurveTo(20,67,28,91,40,99);
+    ctx.bezierCurveTo(46,103,52,97,59,97);
+    ctx.bezierCurveTo(66,97,71,103,78,99);
+    ctx.bezierCurveTo(88,93,94,82,97,73);
+    ctx.bezierCurveTo(83,68,80,48,94,40);
+    ctx.bezierCurveTo(86,30,74,28,66,31);
+    ctx.bezierCurveTo(60,33,56,35,52,35);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+
+    var tx = bx + Math.round(52 * s);
+    ctx.fillStyle = "rgba(255,255,255,.84)";
+    ctx.font = "500 " + Math.round(8.5 * s) + "px Arial, sans-serif";
+    ctx.fillText("Laden im", tx, by + Math.round(15*s));
+    ctx.fillStyle = "#fff";
+    ctx.font = "650 " + Math.round(15.5 * s) + "px Arial, sans-serif";
+    ctx.fillText("App Store", tx, by + Math.round(34*s));
     ctx.textBaseline = "alphabetic";
   }
 
