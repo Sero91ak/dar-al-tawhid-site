@@ -16,5 +16,23 @@
     "title": "Schutz vor dem Übel eigener Taten",
     "snippet": "O Allah, ich suche Zuflucht bei Dir vor dem Übel dessen, was ich getan habe, und vor dem Übel dessen, was ich noch nicht getan habe.",
     "category": "Schutz vor Taten"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 466,
+      "remaining": 432
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 64,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
