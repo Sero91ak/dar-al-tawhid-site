@@ -2369,3 +2369,41 @@ html[data-theme] body.is-frauen-route[data-frauen-view="hub"] .frauen-library-gr
     font-size:12.3px!important;
   }
 }
+
+
+/* ==========================================================================
+   FRAUEN_HERO_FORCE_LIGHT_V1236
+   Letzte Kontrast-Sicherung für alle Frauen-Heroansichten.
+   ========================================================================== */
+html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-readable="true"]::before{
+  z-index:1!important;
+  background:
+    linear-gradient(90deg,rgba(2,13,13,.96) 0%,rgba(3,15,14,.91) 36%,rgba(3,16,15,.68) 60%,rgba(3,16,15,.24) 84%,rgba(3,16,15,.06) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.04) 0%,rgba(0,0,0,.12) 53%,rgba(2,11,11,.70) 100%)!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-readable="true"] .frauen-library-hero__content{
+  z-index:3!important;
+  opacity:1!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-readable="true"] .frauen-library-hero__eyebrow{
+  color:#f0d896!important;
+  -webkit-text-fill-color:#f0d896!important;
+  opacity:1!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-readable="true"] h2{
+  color:#fffaf0!important;
+  -webkit-text-fill-color:#fffaf0!important;
+  opacity:1!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-readable="true"] .frauen-library-hero__subtitle{
+  color:rgba(255,250,240,.98)!important;
+  -webkit-text-fill-color:rgba(255,250,240,.98)!important;
+  opacity:1!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-readable="true"] .frauen-library-hero__stats span{
+  color:#fff1c8!important;
+  -webkit-text-fill-color:#fff1c8!important;
+  opacity:1!important;
+}
