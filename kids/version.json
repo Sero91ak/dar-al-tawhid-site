@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v31-quiz650-topics-catalog1098",
-  "label": "KIDS · V1.07.37",
-  "releasedAt": "2026-10-04T10:08:00Z",
-  "note": "DĀR AL TAWḤĪD Kids Quiz: 650 Fragen bleiben eingefroren und vollständig testbar. Sieben realistische Themenbildwelten wechseln automatisch nach Frage, Szene und Kategorie. Im Vollkatalog erscheinen jetzt altersgerecht kleine Themenbilder: bei 4–6 im großen Hör-Button, bei 7–8 und 9–10 als schlankes Thumbnail. Katalog v3 lädt weiterhin inkrementell und zeigt den Serhat-Owner-Voice-Status.",
+  "buildId": "kids-shell-v32-quiz650-topics-catalog1099",
+  "label": "KIDS · V1.07.38",
+  "releasedAt": "2026-10-04T10:11:00Z",
+  "note": "DĀR AL TAWḤĪD Kids Quiz: 650 Fragen bleiben eingefroren und vollständig testbar. Sieben realistische Themenbildwelten wechseln automatisch nach Frage, Szene und Kategorie. Der Vollkatalog nutzt altersgerechte Themen-Thumbnails und sein großes Hero-Bild reagiert jetzt direkt auf den gewählten Themenfilter. Katalog v4 lädt inkrementell und zeigt weiterhin den Serhat-Owner-Voice-Status.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1098",
+    "serviceWorkerCache": "v1099",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -341,7 +341,7 @@
       "fullQuestionCatalogOwnerVoice": true,
       "shortQuizRoundsPreserved": true,
       "noNewQuestionsInThisRelease": true,
-      "catalogAssetVersion": 3,
+      "catalogAssetVersion": 4,
       "latestContentPack": "601-650",
       "questionGenerationPaused": true,
       "questionGenerationCap": 650,
@@ -370,7 +370,8 @@
       "catalogVoiceMissingState": true,
       "catalogTopicThumbnails": true,
       "catalogYoungAudioArtwork": true,
-      "catalogOlderTopicThumbnail": true
+      "catalogOlderTopicThumbnail": true,
+      "catalogReactiveTopicHero": true
     },
     "kidsQuizContentRevision": "001-650",
     "kidsQuizGenerationPaused": true,
