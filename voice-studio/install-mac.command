@@ -487,7 +487,11 @@ engine_is_current() {
   local body
   body="$(/usr/bin/curl -fsS --max-time 1 "$HEALTH" 2>/dev/null || true)"
   [ -n "$body" ] || return 1
-  printf '%s' "$body" | /usr/bin/grep -Eq '"engine_version"[[:space:]]*:[[:space:]]*"'"$EXPECTED_ENGINE_VERSION"'"'
+  printf '%s' "$body" | /usr/bin/grep -Eq '"engine_version"[[:space:]]*:[[:space:]]*"'"$EXPECTED_ENGINE_VERSION"'"' || return 1
+  # Eine nur auf 127.0.0.1 gebundene Engine ist für Mac zwar gesund, aber für
+  # iPhone/iPad unbrauchbar. Der Launcher akzeptiert deshalb nur den aktuellen
+  # Release MIT aktivem, token-geschütztem Companion-Modus.
+  printf '%s' "$body" | /usr/bin/grep -Eq '"companion_mode"[[:space:]]*:[[:space:]]*true'
 }
 
 {
