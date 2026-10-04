@@ -244,7 +244,28 @@
     "storyAudioPinnedAsset": "/kids/assets/prophet-story-audio/muhammad/story.mp3?v=20261004-owner1",
     "storyAudioPinnedSha256": "5b673686e294fe059b8149180e847ca3d5591dfc480ea28766f635e5b9e7b5f2",
     "storyAudioPinnedCommit": "217c38e5aa133f7fa409692eaad9b93e9f2bb3aa",
-    "storyAudioSignedPreviewDependency": false
+    "storyAudioSignedPreviewDependency": false,
+    "kidsQuizSystem": "independent-v1",
+    "kidsQuizAdultDependency": false,
+    "kidsQuizQuestionCount": 50,
+    "kidsQuizAgeBands": [
+      "4-6",
+      "7-8",
+      "9-10"
+    ],
+    "kidsQuizDistribution": {
+      "4-6": 18,
+      "7-8": 16,
+      "9-10": 16
+    },
+    "kidsQuizAudioFirstBand": "4-6",
+    "kidsQuizAgeAdaptiveUx": "v1",
+    "kidsQuizOwnerVoiceProfile": "serhat-owner-voice-2026",
+    "kidsQuizOwnerVoiceAutoSync": true,
+    "kidsQuizOwnerVoiceImmediateAfterLivePublish": true,
+    "kidsQuizMissingAudioState": true,
+    "kidsQuizManifestNetworkFirst": true,
+    "kidsQuizReleaseGuard": true
   },
   "updatedAt": "2026-10-04"
 }
