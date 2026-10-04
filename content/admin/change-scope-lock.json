@@ -152,6 +152,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-qibla-redesign-2026-10-04",
+      "approvedBy": "user-explicit-komplette-app-langsam-weiterarbeiten",
+      "reason": "Fortlaufender Nutzerauftrag zur visuellen Modernisierung der Dar-Test-App. Dieser Schritt betrifft ausschließlich die Qiblah-Seite: historisches vormodernes Hero-Motiv, Theme-Kompatibilität, klarer größerer Kompass und offene Daten-/Werkzeugstruktur. Sensor-, Standort-, Richtungs- und Berechnungslogik bleiben unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/qibla-v1259.css",
+        "cloudflare/test-app-worker.js"
+      ],
+      "expiresAt": "2026-11-04T23:59:00.000Z"
+    },
+    {
       "id": "test-jummah-redesign-2026-10-04",
       "approvedBy": "user-explicit-komplette-app-langsam-weiterarbeiten",
       "reason": "Fortlaufender Nutzerauftrag zur visuellen Modernisierung der Dar-Test-App. Dieser Schritt betrifft nur die Jumuʿah-/Freitagsseite: historisches vormodernes Hero-Motiv, Theme-Kompatibilität, offene Editorial-Abschnitte und bessere Responsive-Hierarchie. Freitagslogik, Zeitfenster, Push und Inhalte bleiben unverändert.",
