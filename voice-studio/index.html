@@ -3034,6 +3034,10 @@ setTimeout(()=>{
     busy.set(id,"upload");fillList();
     setMessage(label(it)+" · Audio-Datei und aktueller Text werden fest miteinander verknüpft …","warn");
     try{
+      if(typeof window.darVoiceAlignStoryFile!=="function")throw Error("Die exakte Mitlese-Synchronisierung ist noch nicht geladen.");
+      setMessage(label(it)+" · Audio wird wortgenau mit dem Story-Text synchronisiert …","warn");
+      const alignment=await window.darVoiceAlignStoryFile(file,text);
+      if(!Array.isArray(alignment?.timings)||!alignment.timings.length)throw Error("Keine Mitlese-Zeitstempel erhalten.");
       const dataUrl=await fileAsDataUrl(file);
       const r=await localRequest("/story-media/upload",{
         method:"POST",
@@ -3041,7 +3045,10 @@ setTimeout(()=>{
         body:JSON.stringify({
           kind:"prophet",id:it.id,age:"all",text,
           filename:file.name||"story-audio",
-          dataUrl
+          dataUrl,
+          timings:alignment.timings,
+          syncMode:alignment.syncMode||"elevenlabs-forced-alignment-v1",
+          alignmentLoss:alignment.alignmentLoss
         })
       });
       const d=await r.json().catch(()=>({}));
@@ -3238,10 +3245,19 @@ setTimeout(()=>{
     busy.set(id,"push");fillList();
     setMessage(label(it)+" wird in die Kids-App geschrieben …","warn");
     try{
+      if(typeof window.darVoiceAlignCurrentStory!=="function")throw Error("Die exakte Mitlese-Synchronisierung ist noch nicht geladen.");
+      setMessage(label(it)+" · aktuelle Audio wird exakt mit den Absätzen ausgerichtet …","warn");
+      const alignment=await window.darVoiceAlignCurrentStory(text);
+      if(!Array.isArray(alignment?.timings)||!alignment.timings.length)throw Error("Keine Mitlese-Zeitstempel erhalten.");
       const r=await localRequest("/prophet-stories/publish",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({id:it.id,age:"all",text})
+        body:JSON.stringify({
+          id:it.id,age:"all",text,
+          timings:alignment.timings,
+          syncMode:alignment.syncMode||"elevenlabs-forced-alignment-v1",
+          alignmentLoss:alignment.alignmentLoss
+        })
       });
       const d=await r.json().catch(()=>({}));
       if(!r.ok||d.ok===false)throw Error(d.error||"Push fehlgeschlagen");
