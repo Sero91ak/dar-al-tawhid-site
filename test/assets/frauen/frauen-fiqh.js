@@ -3613,6 +3613,28 @@
     return out;
   }
 
+  function frauenAdaptiveBodyLayout(ctx, body, maxW, maxH) {
+    body = String(body || "").replace(/^(?:AUSSAGE|STATEMENT)\s*[:·–—-]?\s*/i, "").trim();
+    var len = body.length;
+    var maxSize = len <= 90 ? 72 : len <= 180 ? 64 : len <= 320 ? 56 : len <= 520 ? 49 : len <= 760 ? 44 : 40;
+    var minSize = len <= 180 ? 52 : len <= 420 ? 42 : 34;
+    var chosen = maxSize, lines = [], lineHeight = Math.round(maxSize * 1.34);
+    for (var size = maxSize; size >= minSize; size -= 2) {
+      ctx.font = "400 " + size + "px Georgia, serif";
+      var candidate = frauenWrapCanvas(ctx, body, maxW);
+      var candidateLine = Math.round(size * 1.34);
+      chosen = size;
+      lines = candidate;
+      lineHeight = candidateLine;
+      if (candidate.length * candidateLine <= maxH) break;
+    }
+    var perPage = Math.max(4, Math.floor(maxH / lineHeight));
+    var pages = [];
+    for (var i = 0; i < lines.length; i += perPage) pages.push(lines.slice(i, i + perPage));
+    if (!pages.length) pages = [[]];
+    return { size: chosen, lineHeight: lineHeight, pages: pages };
+  }
+
   function frauenCanvasBlob(canvas) {
     return new Promise(function (resolve) {
       canvas.toBlob(function (blob) { resolve(blob); }, "image/png", 0.96);
@@ -3687,44 +3709,49 @@
     ctx.closePath();
   }
 
-  /* FRAUEN_SHARE_VISUAL_V1226 */
+  /* FRAUEN_SHARE_VISUAL_V1237 */
+  function frauenDrawAppleMark(ctx, x, y, size) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(size / 100, size / 100);
+    ctx.fillStyle = "#fff";
+    ctx.beginPath();
+    ctx.moveTo(52,25);
+    ctx.bezierCurveTo(58,17,67,12,75,12);
+    ctx.bezierCurveTo(76,21,72,29,65,34);
+    ctx.bezierCurveTo(58,39,52,37,52,37);
+    ctx.bezierCurveTo(43,36,35,42,30,50);
+    ctx.bezierCurveTo(20,67,28,91,40,99);
+    ctx.bezierCurveTo(46,103,52,97,59,97);
+    ctx.bezierCurveTo(66,97,71,103,78,99);
+    ctx.bezierCurveTo(88,93,94,82,97,73);
+    ctx.bezierCurveTo(83,68,80,48,94,40);
+    ctx.bezierCurveTo(86,30,74,28,66,31);
+    ctx.bezierCurveTo(60,33,56,35,52,35);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
   function frauenDrawStoreBadge(ctx, x, y, w, h) {
     ctx.save();
     frauenRoundRect(ctx, x, y, w, h, 16);
-    ctx.fillStyle = "rgba(4,8,10,.88)";
+    ctx.fillStyle = "rgba(0,0,0,.92)";
     ctx.fill();
-    ctx.strokeStyle = "rgba(255,255,255,.22)";
-    ctx.lineWidth = 1.25;
+    ctx.strokeStyle = "rgba(255,255,255,.42)";
+    ctx.lineWidth = 1.15;
     ctx.stroke();
 
-    var iconSize = Math.min(h - 12, 48);
-    var ix = x + 8, iy = y + (h - iconSize) / 2;
-    frauenRoundRect(ctx, ix, iy, iconSize, iconSize, 11);
-    var blue = ctx.createLinearGradient(ix, iy, ix, iy + iconSize);
-    blue.addColorStop(0, "#38a8ff");
-    blue.addColorStop(1, "#0a78e8");
-    ctx.fillStyle = blue;
-    ctx.fill();
-
-    var cx = ix + iconSize / 2, cy = iy + iconSize / 2;
-    ctx.strokeStyle = "#fff";
-    ctx.lineWidth = Math.max(3, iconSize * .075);
-    ctx.lineCap = "round";
-    ctx.beginPath();
-    ctx.moveTo(cx - iconSize * .19, cy + iconSize * .22);
-    ctx.lineTo(cx, cy - iconSize * .20);
-    ctx.lineTo(cx + iconSize * .19, cy + iconSize * .22);
-    ctx.moveTo(cx - iconSize * .27, cy + iconSize * .08);
-    ctx.lineTo(cx + iconSize * .27, cy + iconSize * .08);
-    ctx.stroke();
+    frauenDrawAppleMark(ctx, x + 14, y + 13, 37);
 
     ctx.textAlign = "left";
-    ctx.fillStyle = "rgba(255,255,255,.78)";
-    ctx.font = "600 10px Arial, sans-serif";
-    ctx.fillText("Download on the", ix + iconSize + 10, y + 20);
+    ctx.textBaseline = "alphabetic";
+    ctx.fillStyle = "rgba(255,255,255,.86)";
+    ctx.font = "500 10px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+    ctx.fillText("Laden im", x + 62, y + 21);
     ctx.fillStyle = "#fff";
-    ctx.font = "700 20px Arial, sans-serif";
-    ctx.fillText("App Store", ix + iconSize + 10, y + 42);
+    ctx.font = "650 20px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+    ctx.fillText("App Store", x + 62, y + 44);
     ctx.restore();
   }
 
@@ -3755,25 +3782,18 @@
     try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e0) {}
 
     var title = String(titelVon(e) || bereichKicker(abschnitt) || "Frauen im Islam").trim();
-    var body = String(aussageVon(e) || "").trim();
-    var source = String(quelleText(e) || "").trim();
+    var body = String(aussageVon(e) || "").replace(/^(?:AUSSAGE|STATEMENT)\s*[:·–—-]?\s*/i, "").trim();
+    var source = String(quelleText(e) || "").replace(/^(?:QUELLE|SOURCE)\s*[:·–—-]?\s*/i, "").trim();
     var titleSize = title.length > 86 ? 41 : title.length > 52 ? 46 : 52;
-    var bodySize = body.length > 880 ? 34 : body.length > 620 ? 36 : 39;
-    var bodyLine = bodySize + 15;
 
     ctx.font = "600 " + titleSize + "px Georgia, serif";
     var titleLines = frauenWrapCanvas(ctx, title, contentW).slice(0, 3);
     var bodyStart = 188 + titleLines.length * (titleSize + 11) + 34;
     var bodyBottom = 985;
-    var linesPerPage = Math.max(7, Math.floor((bodyBottom - bodyStart) / bodyLine));
-
-    ctx.font = "400 " + bodySize + "px Georgia, serif";
-    var bodyLines = frauenWrapCanvas(ctx, body, contentW - 16);
-    var pages = [];
-    for (var bi = 0; bi < bodyLines.length; bi += linesPerPage) {
-      pages.push(bodyLines.slice(bi, bi + linesPerPage));
-    }
-    if (!pages.length) pages = [[]];
+    var bodyLayout = frauenAdaptiveBodyLayout(ctx, body, contentW - 92, Math.max(300, bodyBottom - bodyStart - 30));
+    var bodySize = bodyLayout.size;
+    var bodyLine = bodyLayout.lineHeight;
+    var pages = bodyLayout.pages;
     if (pages.length > 8) {
       pages = pages.slice(0, 8);
       pages[7].push("…");
@@ -3824,20 +3844,39 @@
       });
 
       y += 23;
-      ctx.strokeStyle = "rgba(239,216,159,.56)";
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.moveTo(margin - 18, y - 9);
-      ctx.lineTo(margin - 18, Math.min(bodyBottom, y + pages[p].length * bodyLine - 13));
+      var statementCardY = y - 10;
+      var statementTextH = pages[p].length * bodyLine;
+      var statementCardH = Math.min(bodyBottom - statementCardY, Math.max(250, statementTextH + 128));
+      frauenRoundRect(ctx, margin - 18, statementCardY, contentW + 36, statementCardH, 26);
+      ctx.fillStyle = "rgba(2,13,14,.26)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(239,216,159,.16)";
+      ctx.lineWidth = 1.1;
       ctx.stroke();
 
+      ctx.fillStyle = "#efd89f";
+      ctx.font = "800 15px Arial, sans-serif";
+      ctx.fillText("AUSSAGE", margin + 18, statementCardY + 39);
+
+      var quoteY = statementCardY + 92;
+      if (statementTextH + 128 < statementCardH) {
+        quoteY += Math.round((statementCardH - (statementTextH + 128)) / 2);
+      }
       ctx.fillStyle = "#fffaf0";
       ctx.font = "400 " + bodySize + "px Georgia, serif";
       pages[p].forEach(function (line) {
-        if (!line) { y += Math.round(bodyLine * .58); return; }
-        ctx.fillText(line, margin, y);
-        y += bodyLine;
+        if (!line) { quoteY += Math.round(bodyLine * .58); return; }
+        ctx.fillText(line, margin + 18, quoteY);
+        quoteY += bodyLine;
       });
+
+      if (pages.length > 1) {
+        ctx.fillStyle = "rgba(255,249,235,.68)";
+        ctx.font = "650 13px Arial, sans-serif";
+        ctx.textAlign = "right";
+        ctx.fillText((p + 1) + " / " + pages.length, W - margin - 18, statementCardY + statementCardH - 22);
+        ctx.textAlign = "left";
+      }
 
       var panelY = 1030, panelH = 126;
       frauenRoundRect(ctx, margin, panelY, contentW, panelH, 22);
@@ -3849,11 +3888,11 @@
 
       ctx.fillStyle = "#e9cf91";
       ctx.font = "800 16px Arial, sans-serif";
-      ctx.fillText(String(bereichKicker(abschnitt) || "Frauen im Islam").toUpperCase(), margin + 22, panelY + 29);
+      ctx.fillText("QUELLE", margin + 22, panelY + 29);
 
       ctx.fillStyle = "rgba(255,248,232,.82)";
       ctx.font = "500 17px Arial, sans-serif";
-      var sourceLines = frauenWrapCanvas(ctx, "Quelle: " + source, contentW - 44).slice(0, 2);
+      var sourceLines = frauenWrapCanvas(ctx, source, contentW - 44).slice(0, 2);
       var sy = panelY + 55;
       sourceLines.forEach(function (line) {
         ctx.fillText(line, margin + 22, sy);
