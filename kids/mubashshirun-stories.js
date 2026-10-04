@@ -246,16 +246,21 @@ function ensureUi(){
   });
   followReader=window.DARKidsFollowReader?.create({
     id:"sahaba-story",audio,
-    getContent:()=>({
-      key:active?("sahabi:"+active.id+":"+ageKey()):"sahabi:story",
-      title:active?active.name:"Geschichte",
-      subtitle:"Ṣaḥābah-Geschichte · Alter "+age(),
-      album:"DĀR AL TAWḤĪD Kids · Mubaschschirūn",
-      text:activeText,
-      artwork:active?art(active,"hero"):"",
-      deepLink:active?("#stories/sahabi/"+encodeURIComponent(active.id)):"#stories",
-      audioOnly:isAudioOnlyAge()
-    }),
+    getContent:()=>{
+      const meta=audioMeta(active)||{};
+      return{
+        key:active?("sahabi:"+active.id+":"+ageKey()):"sahabi:story",
+        title:active?active.name:"Geschichte",
+        subtitle:"Ṣaḥābah-Geschichte · Alter "+age(),
+        album:"DĀR AL TAWḤĪD Kids · Mubaschschirūn",
+        text:activeText,
+        artwork:active?art(active,"hero"):"",
+        deepLink:active?("#stories/sahabi/"+encodeURIComponent(active.id)):"#stories",
+        audioOnly:isAudioOnlyAge(),
+        timings:meta.timings||meta.paragraphTimings||meta.cues||[],
+        syncPoints:meta.syncPoints||meta.syncAnchors||[]
+      };
+    },
     toggleAudio,
     disabled:()=>!audioMeta(active)?.url
   })||null;
@@ -293,7 +298,16 @@ function closeStory(){followReader?.close();stopAudio();$("#msModal")?.classList
 function renderActive(){
   if(!active)return;
   activeText=textFor(active);
-  followReader?.setContent({title:active.name,text:activeText,audioOnly:isAudioOnlyAge()});
+  {
+    const meta=audioMeta(active)||{};
+    followReader?.setContent({
+      title:active.name,
+      text:activeText,
+      audioOnly:isAudioOnlyAge(),
+      timings:meta.timings||meta.paragraphTimings||meta.cues||[],
+      syncPoints:meta.syncPoints||meta.syncAnchors||[]
+    });
+  }
   const hero=$("#msHero");if(hero){hero.src=art(active,"hero");hero.style.objectPosition=heroPos(active);hero.onerror=()=>{hero.onerror=null;hero.src=art(active,"cover")}}
   $("#msTitle").textContent=active.name;
   $("#msArabic").textContent=(active.nameAr||"")+" رضي الله عنه";
