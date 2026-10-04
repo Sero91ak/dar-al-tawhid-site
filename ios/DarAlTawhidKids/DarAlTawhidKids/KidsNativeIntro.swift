@@ -2,12 +2,17 @@ import AVFoundation
 import SwiftUI
 import UIKit
 
+extension Notification.Name {
+    static let kidsIntroDidFinish = Notification.Name("KidsIntroDidFinish")
+}
+
 final class KidsNativeIntroController: ObservableObject {
     @Published var isVisible = true
 
     let player: AVPlayer
     private var hideWork: DispatchWorkItem?
     private var endedObserver: NSObjectProtocol?
+    private var timeObserver: Any?
     private var didStart = false
 
     init() {
@@ -30,30 +35,51 @@ final class KidsNativeIntroController: ObservableObject {
 
         endedObserver = NotificationCenter.default.addObserver(
             forName: .AVPlayerItemDidPlayToEndTime,
-            object: player.currentItem,
+            object: nil,
             queue: .main
-        ) { [weak self] _ in
-            self?.finish()
+        ) { [weak self] note in
+            guard let self else { return }
+            if note.object as? AVPlayerItem === self.player.currentItem || self.player.currentItem == nil {
+                self.finish()
+            }
+        }
+
+        timeObserver = player.addPeriodicTimeObserver(
+            forInterval: CMTime(seconds: 0.25, preferredTimescale: 600),
+            queue: .main
+        ) { [weak self] time in
+            guard let self, self.isVisible else { return }
+            guard let item = self.player.currentItem else { return }
+            let duration = item.duration.seconds
+            let current = time.seconds
+            if duration.isFinite, duration > 0, current >= duration - 0.35 {
+                self.finish()
+            }
         }
 
         let work = DispatchWorkItem { [weak self] in
             self?.finish()
         }
         hideWork = work
-        DispatchQueue.main.asyncAfter(deadline: .now() + 18, execute: work)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 14, execute: work)
     }
 
     func finish() {
         guard isVisible else { return }
         hideWork?.cancel()
+        if let timeObserver {
+            player.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
+        }
         player.pause()
-        withAnimation(.easeInOut(duration: 0.55)) {
+        withAnimation(.easeInOut(duration: 0.28)) {
             isVisible = false
         }
         if let endedObserver {
             NotificationCenter.default.removeObserver(endedObserver)
         }
         endedObserver = nil
+        NotificationCenter.default.post(name: .kidsIntroDidFinish, object: nil)
     }
 }
 

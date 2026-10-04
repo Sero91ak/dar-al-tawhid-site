@@ -8,7 +8,8 @@
   overflow:hidden;
 }
 html.kids-ios-app #kidsLaunch,
-html.dar-ios-native-app #kidsLaunch{display:none!important}
+html.dar-ios-native-app #kidsLaunch,
+#kidsLaunch.is-ending{display:none!important;pointer-events:none!important;opacity:0!important}
 .kids-open__film{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   background:#07131e;z-index:1;

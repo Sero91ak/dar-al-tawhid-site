@@ -71,6 +71,21 @@ struct KidsWebAppView: UIViewRepresentable {
                 name: UIApplication.didBecomeActiveNotification,
                 object: nil
             )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(introDidFinish),
+                name: .kidsIntroDidFinish,
+                object: nil
+            )
+        }
+
+        @objc private func introDidFinish() {
+            guard let webView else { return }
+            webView.alpha = 1
+            let path = webView.url?.path.lowercased() ?? ""
+            if path.isEmpty || webView.url?.scheme == "about" {
+                loadKidsHome(in: webView)
+            }
         }
 
         deinit {
