@@ -21,6 +21,7 @@ jobs:
     env:
       VOICE_API: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
 
     steps:
       - name: Checkout main
@@ -63,11 +64,22 @@ jobs:
             "$URL" -o /tmp/muhammad-current.mp3
           test "$(stat -c%s /tmp/muhammad-current.mp3)" -gt 100000
 
-      - name: Wait for alignment API and force-align current audio
+      - name: Ensure audio analysis tools
+        run: |
+          set -euo pipefail
+          command -v ffmpeg >/dev/null 2>&1 || {
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg >/dev/null
+          }
+          ffmpeg -version | head -1
+
+      - name: Align current audio to all 23 story paragraphs
         run: |
           set -euo pipefail
           ok=0
-          for attempt in $(seq 1 30); do
+
+          # 1) Bevorzugt: serverseitige ElevenLabs Forced Alignment API.
+          for attempt in $(seq 1 6); do
             code="$(curl -sS -o /tmp/alignment.json -w '%{http_code}' \
               -X POST "$VOICE_API/align-story" \
               -H "Origin: https://dar-al-tawhid.de" \
@@ -76,14 +88,6 @@ jobs:
               -H "Accept: application/json" \
               -F "file=@/tmp/muhammad-current.mp3;type=audio/mpeg" \
               --form-string "text=$(cat /tmp/muhammad-story.txt)" || true)"
-            python3 - <<'PY' || true
-          import json
-          try:
-              d=json.load(open("/tmp/alignment.json"))
-              print({k:d.get(k) for k in ("ok","syncMode","alignmentLoss","alignedWords","alignedCharacters","error")})
-          except Exception:
-              pass
-          PY
             if [ "$code" = "200" ] && python3 - <<'PY'
           import json,sys
           d=json.load(open("/tmp/alignment.json"))
@@ -91,12 +95,221 @@ jobs:
           PY
             then
               ok=1
+              echo "Forced alignment via DĀR Voice API erfolgreich."
               break
             fi
-            echo "Alignment API not ready yet (attempt $attempt, HTTP $code)"
-            sleep 10
+            echo "DĀR Voice alignment attempt $attempt: HTTP $code"
+            sleep 5
           done
-          test "$ok" = "1" || { echo "::error::Exact alignment did not complete"; cat /tmp/alignment.json; exit 1; }
+
+          # 2) Falls der Worker-Key noch nicht gesetzt ist, den vorhandenen GitHub-Secret-Key direkt nutzen.
+          if [ "$ok" != "1" ] && [ -n "${ELEVENLABS_API_KEY:-}" ]; then
+            echo "Versuche ElevenLabs Forced Alignment direkt aus GitHub Actions …"
+            direct_code="$(curl -sS -o /tmp/eleven-alignment-raw.json -w '%{http_code}' \
+              -X POST "https://api.elevenlabs.io/v1/forced-alignment" \
+              -H "xi-api-key: $ELEVENLABS_API_KEY" \
+              -F "file=@/tmp/muhammad-current.mp3;type=audio/mpeg" \
+              --form-string "text=$(cat /tmp/muhammad-story.txt)" || true)"
+            if [ "$direct_code" = "200" ]; then
+              python3 - <<'PY'
+          import json,math
+          from pathlib import Path
+
+          text=Path("/tmp/muhammad-story.txt").read_text(encoding="utf-8").strip()
+          raw=json.loads(Path("/tmp/eleven-alignment-raw.json").read_text(encoding="utf-8"))
+          chars=raw.get("characters") or []
+          paragraphs=[x.strip() for x in text.split("\n\n") if x.strip()]
+          joined="".join(str(x.get("text","")) for x in chars)
+
+          starts=[]
+          cursor=0
+          for idx,p in enumerate(paragraphs):
+              probe=p[:min(80,len(p))]
+              hit=joined.find(probe,cursor)
+              if hit<0:
+                  ratio=text.find(p)/max(1,len(text))
+                  hit=max(0,min(len(chars)-1,round(ratio*max(0,len(chars)-1))))
+              while hit<len(chars)-1 and not str(chars[hit].get("text","")).strip():
+                  hit+=1
+              cursor=max(cursor,hit)
+              st=float(chars[hit].get("start") or 0)
+              starts.append(max(0.0,st))
+
+          last=chars[-1] if chars else {}
+          duration=float(last.get("end") or 0)
+          timings=[]
+          for i,st in enumerate(starts):
+              en=starts[i+1] if i+1<len(starts) else duration
+              timings.append({"paragraphIndex":i,"start":round(st,3),"end":round(max(st,en),3)})
+          if len(timings)!=len(paragraphs) or not timings:
+              raise SystemExit("direct forced alignment produced invalid timing count")
+          out={
+              "ok":True,
+              "timings":timings,
+              "alignmentLoss":raw.get("loss"),
+              "alignedWords":len(raw.get("words") or []),
+              "alignedCharacters":len(chars),
+              "syncMode":"elevenlabs-forced-alignment-v1"
+          }
+          Path("/tmp/alignment.json").write_text(json.dumps(out,ensure_ascii=False),encoding="utf-8")
+          print("Direct forced alignment paragraphs:",len(timings))
+          PY
+              ok=1
+            else
+              echo "Direktes ElevenLabs Forced Alignment: HTTP $direct_code"
+              cat /tmp/eleven-alignment-raw.json 2>/dev/null || true
+            fi
+          fi
+
+          # 3) Garantierter Fallback ohne Cloud-Key: echte Sprechpausen im vorhandenen Audio erkennen
+          #    und die 22 Absatzgrenzen per dynamischer Zuordnung auf diese Pausen legen.
+          if [ "$ok" != "1" ]; then
+            echo "Kein Forced-Alignment-Key verfügbar – verwende audio-basierte Pausenerkennung."
+            ffmpeg -hide_banner -nostats -i /tmp/muhammad-current.mp3 \
+              -af "silencedetect=noise=-38dB:d=0.16" -f null - 2> /tmp/silence.log || true
+
+            python3 - <<'PY'
+          import json,math,re,subprocess
+          from pathlib import Path
+
+          text=Path("/tmp/muhammad-story.txt").read_text(encoding="utf-8").strip()
+          paragraphs=[x.strip() for x in re.split(r"\n\s*\n",text) if x.strip()]
+          if len(paragraphs)<2:
+              raise SystemExit("not enough paragraphs")
+
+          duration=float(subprocess.check_output([
+              "ffprobe","-v","error","-show_entries","format=duration",
+              "-of","default=noprint_wrappers=1:nokey=1","/tmp/muhammad-current.mp3"
+          ],text=True).strip())
+
+          log=Path("/tmp/silence.log").read_text(encoding="utf-8",errors="ignore")
+          starts=[float(x) for x in re.findall(r"silence_start: ([0-9.]+)",log)]
+          ends=[float(x) for x in re.findall(r"silence_end: ([0-9.]+)",log)]
+          pairs=[]
+          for i,en in enumerate(ends):
+              st=starts[i] if i<len(starts) else max(0,en-.2)
+              dur=max(0.0,en-st)
+              if 0.6<en<duration-0.6:
+                  pairs.append((en,dur))
+          # Deduplizieren sehr nahe Pausen.
+          ded=[]
+          for t,d in sorted(pairs):
+              if ded and t-ded[-1][0]<0.12:
+                  if d>ded[-1][1]: ded[-1]=(t,d)
+              else:
+                  ded.append((t,d))
+          pairs=ded
+
+          weights=[]
+          for p in paragraphs:
+              spoken=re.sub(r"[^A-Za-zÀ-žĀ-žʿʾḤḥṢṣḌḍṬṭẒẓḎḏṮṯŠšǦǧĠġḪḫ0-9]+"," ",p)
+              words=[w for w in spoken.split() if w]
+              weights.append(max(1.0,len(words)+0.08*len(p)))
+          total=sum(weights)
+          cum=[]
+          s=0.0
+          for w in weights[:-1]:
+              s+=w
+              cum.append(s/total)
+
+          # Vorhandener manuell geprüfter Anker: Absatz 5 beginnt bei 60.3 s.
+          anchor_boundary=4
+          anchor_time=60.3
+          anchor_ratio=cum[anchor_boundary-1] if anchor_boundary-1<len(cum) else None
+          expected=[]
+          for i,r in enumerate(cum, start=1):
+              if anchor_ratio and i<=anchor_boundary:
+                  t=anchor_time*(r/anchor_ratio)
+              elif anchor_ratio and i>anchor_boundary:
+                  t=anchor_time+(duration-anchor_time)*((r-anchor_ratio)/(1-anchor_ratio))
+              else:
+                  t=duration*r
+              expected.append(max(.5,min(duration-.5,t)))
+
+          # Falls zu wenig Pausen erkannt wurden, erwartete Grenzen als schwache Kandidaten ergänzen.
+          candidates=[{"t":t,"sil":d,"real":True} for t,d in pairs]
+          for t in expected:
+              if not any(abs(x["t"]-t)<0.35 for x in candidates):
+                  candidates.append({"t":t,"sil":0.0,"real":False})
+          candidates=sorted(candidates,key=lambda x:x["t"])
+
+          B=len(expected); N=len(candidates)
+          inf=10**18
+          prev=[inf]*N
+          back=[[-1]*N for _ in range(B)]
+
+          def local_cost(b,j):
+              t=candidates[j]["t"]; exp=expected[b]
+              left=0 if b==0 else expected[b-1]
+              right=duration if b==B-1 else expected[b+1]
+              scale=max(2.0,0.45*min(exp-left,right-exp))
+              drift=((t-exp)/scale)**2
+              pause_bonus=min(1.8,candidates[j]["sil"])*0.75
+              fake_penalty=1.7 if not candidates[j]["real"] else 0.0
+              return drift+fake_penalty-pause_bonus
+
+          # Erste Grenze.
+          for j,x in enumerate(candidates):
+              if x["t"]>0.6:
+                  prev[j]=local_cost(0,j)
+
+          min_gap=0.45
+          for b in range(1,B):
+              cur=[inf]*N
+              best=inf; best_j=-1; k=0
+              for j,x in enumerate(candidates):
+                  limit=x["t"]-min_gap
+                  while k<j and candidates[k]["t"]<=limit:
+                      if prev[k]<best:
+                          best=prev[k]; best_j=k
+                      k+=1
+                  if best_j>=0:
+                      cur[j]=best+local_cost(b,j)
+                      back[b][j]=best_j
+              prev=cur
+
+          end_j=min(range(N),key=lambda j:prev[j]) if N else -1
+          if end_j<0 or not math.isfinite(prev[end_j]) or prev[end_j]>=inf/2:
+              boundaries=expected
+              quality="weighted-audio-duration-fallback"
+          else:
+              idx=[end_j]
+              for b in range(B-1,0,-1):
+                  idx.append(back[b][idx[-1]])
+              idx=list(reversed(idx))
+              boundaries=[candidates[j]["t"] for j in idx]
+              quality="silence-aware-dynamic-paragraph-v1"
+
+          points=[0.0]+boundaries+[duration]
+          timings=[]
+          for i in range(len(paragraphs)):
+              st=max(0.0,points[i]); en=max(st,points[i+1])
+              timings.append({"paragraphIndex":i,"start":round(st,3),"end":round(en,3)})
+
+          out={
+              "ok":True,
+              "timings":timings,
+              "alignmentLoss":None,
+              "alignedWords":sum(len(p.split()) for p in paragraphs),
+              "alignedCharacters":len(text),
+              "syncMode":quality,
+              "detectedSilences":len(pairs),
+              "durationSec":round(duration,3)
+          }
+          Path("/tmp/alignment.json").write_text(json.dumps(out,ensure_ascii=False),encoding="utf-8")
+          print("Audio-based alignment:",quality,"paragraphs",len(timings),"silences",len(pairs))
+          print("Starts:",[x["start"] for x in timings])
+          PY
+            ok=1
+          fi
+
+          test "$ok" = "1"
+          python3 - <<'PY'
+          import json
+          d=json.load(open("/tmp/alignment.json"))
+          print({k:d.get(k) for k in ("ok","syncMode","alignmentLoss","alignedWords","alignedCharacters","detectedSilences","durationSec")})
+          print("timing count",len(d.get("timings") or []))
+          PY
 
       - name: Install exact paragraph timings in manifest
         run: |
@@ -132,8 +345,10 @@ jobs:
               meta.pop("syncPoints",None)
               meta.pop("syncCalibration",None)
           vp=item.setdefault("voiceProduction",{})
-          vp["followReaderSync"]="exact-forced-alignment"
+          mode=str(a.get("syncMode") or "unknown")
+          vp["followReaderSync"]="exact-forced-alignment" if mode.startswith("elevenlabs-forced-alignment") else mode
           vp["followReaderParagraphs"]=len(timings)
+          vp["followReaderSyncMode"]=str(a.get("syncMode") or "unknown")
           vp["followReaderSyncedAt"]=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
           d["updatedAt"]=time.strftime("%Y-%m-%d",time.gmtime())
           p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
