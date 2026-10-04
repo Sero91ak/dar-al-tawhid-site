@@ -275,7 +275,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // DAR_ILM_TOPIC_DETAIL_V1254
   if (!/ilm-topic-detail-v1254\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-topic-detail-v1254.css?v=1250"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-topic-detail-v1254.css?v=topic-detail-cgi-v1254"><\/head>');
   }
 
   // DAR_ILM_POST_READER_V1255
