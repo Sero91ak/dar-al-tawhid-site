@@ -150,10 +150,10 @@
     for(var i=0;i<lines.length;i+=per)pages.push(lines.slice(i,i+per));return pages.length?pages:[[]];
   }
   async function drawBadge(ctx){
-    var x=730,y=1250,w=280,h=62;
+    var x=700,y=1238,w=310,h=72;
     roundRect(ctx,x,y,w,h,15);ctx.fillStyle="rgba(7,12,12,.62)";ctx.fill();ctx.strokeStyle="rgba(236,211,148,.48)";ctx.lineWidth=1.5;ctx.stroke();
     var icon=null;try{icon=await loadImage(APP_STORE_ICON)}catch(e){}
-    if(icon){ctx.save();roundRect(ctx,x+10,y+8,46,46,11);ctx.clip();ctx.drawImage(icon,x+10,y+8,46,46);ctx.restore()}
+    if(icon){ctx.save();roundRect(ctx,x+10,y+10,52,52,12);ctx.clip();ctx.drawImage(icon,x+10,y+10,52,52);ctx.restore()}
     else{ctx.fillStyle="#f0d797";ctx.font="700 28px Arial";ctx.fillText("A",x+22,y+40)}
     ctx.fillStyle="#fff9e9";ctx.font="700 14px Arial, sans-serif";ctx.fillText("DĀR AL TAWḤĪD",x+66,y+26);
     ctx.fillStyle="rgba(255,249,233,.77)";ctx.font="600 12px Arial, sans-serif";ctx.fillText("Im App Store",x+66,y+45);
@@ -183,7 +183,7 @@
 
       var y=158;ctx.fillStyle="#fff8e9";ctx.font="650 "+titleSize+"px Georgia, 'Times New Roman', serif";
       titleLines.forEach(function(line){ctx.fillText(line,margin,y);y+=Math.round(titleSize*1.14)});
-      ctx.strokeStyle="rgba(239,216,159,.50)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(margin,y+8);ctx.lineTo(margin+170,y+8);ctx.stroke();
+      ctx.strokeStyle="rgba(239,216,159,.62)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(margin,y+8);ctx.lineTo(margin+210,y+8);ctx.stroke();
       y+=54;
 
       ctx.font="400 "+bodySize+"px Georgia, 'Times New Roman', serif";ctx.fillStyle="#fffaf0";var lh=Math.round(bodySize*1.42);
