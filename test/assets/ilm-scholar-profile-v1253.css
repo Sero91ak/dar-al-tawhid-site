@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Scholar profile detail · Test-only v1253 */
 body.is-scholar-route{
-  --schp-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/cccc3402-6520-4ba8-badd-f5e102e22731/e1951e05-33d3-4c51-a81e-92fe7e49ad5f/Single_wide_cinematic_mobile_app_background_for_an_individua.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMWI0M2VmMTZhZTVhNjc1ZiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI4MDE1MH0.t8NruHNUFpMD2TMVqg63Rcj2xDvjBR_jGbx7PIqzbjY");
+  --schp-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/ae37dcf4-549a-4a33-892a-0e0a40cc8135/Use_the_uploaded_image_only_as_the_visual_style_reference__Create_one_standalone_wide_cinematic_3D_a_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYTcxMTFkNjFhNGFmNWZhMiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI1OTEwNX0.BmxODoPbFiwTXEXXKb-8tApeY25QdQoErRgHY4OH9ZA");
   --schp-left:color-mix(in srgb,var(--bg) 92%,transparent);
   --schp-mid:color-mix(in srgb,var(--bg) 64%,transparent);
   --schp-right:color-mix(in srgb,var(--bg) 18%,transparent);
@@ -288,4 +288,20 @@ body.is-scholar-route .topic-collection-page > .post-grid::before{
   body.is-scholar-route .profile-box--scholar .scholar-rel__body .dua-row{
     transition:none!important;
   }
+}
+
+
+/* DAR_SCHOLAR_PROFILE_CGI_STYLE_RULE_V1254 */
+body.is-scholar-route .topic-collection-page > .view-head{
+  background:
+    linear-gradient(90deg,
+      var(--schp-left) 0%,
+      var(--schp-mid) 45%,
+      var(--schp-right) 82%,
+      color-mix(in srgb,var(--bg) 4%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 4%,transparent),
+      transparent 48%,
+      color-mix(in srgb,var(--bg) 20%,transparent)),
+    var(--schp-art) 78% 46%/cover no-repeat!important;
 }
