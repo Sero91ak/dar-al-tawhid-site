@@ -285,6 +285,16 @@ var(--quiz-art,linear-gradient(180deg,#315c78 0%,#5a8f8a 48%,#ba8b5f 100%));back
 #quizModal[data-quiz-band="4-6"] .quiz-scene-symbol{width:56px;height:56px;border-radius:18px;font-size:31px}
 #quizModal[data-quiz-band="4-6"] .quiz-scene-top{justify-content:flex-end}
 #quizModal[data-quiz-band="4-6"] .quiz-scene-top .quiz-scene-chip:first-child{display:none}
+#quizModal[data-quiz-band="4-6"] .quiz-scene:before{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(5,15,24,.03) 42%,rgba(5,15,24,.38) 100%)}
+#quizModal[data-quiz-band="7-8"] .quiz-scene:before{background:linear-gradient(180deg,rgba(5,15,24,.02),rgba(5,15,24,.08) 40%,rgba(5,15,24,.46) 100%)}
+#quizModal[data-quiz-band="9-10"] .quiz-scene:before{background:linear-gradient(180deg,rgba(5,15,24,.08),rgba(5,15,24,.13) 42%,rgba(5,15,24,.58) 100%)}
+.quiz-scene[data-quiz-family="creation"] .quiz-scene-symbol{background:rgba(13,55,45,.46)}
+.quiz-scene[data-quiz-family="quran"] .quiz-scene-symbol{background:rgba(48,34,20,.50)}
+.quiz-scene[data-quiz-family="salah"] .quiz-scene-symbol{background:rgba(14,50,62,.49)}
+.quiz-scene[data-quiz-family="adab"] .quiz-scene-symbol{background:rgba(47,55,34,.46)}
+.quiz-scene[data-quiz-family="dua"] .quiz-scene-symbol{background:rgba(20,32,68,.49)}
+.quiz-scene[data-quiz-family="charity"] .quiz-scene-symbol{background:rgba(69,46,27,.49)}
+.quiz-scene[data-quiz-family="home"] .quiz-scene-symbol{background:rgba(68,49,32,.48)}
 #quizModal[data-quiz-band="9-10"] .quiz-scene-symbol{width:43px;height:43px;border-radius:14px;font-size:24px}
 .quiz-answer.wrong{animation:quizWrongShake .24s ease}
 @keyframes quizWrongShake{0%,100%{transform:translateX(0)}28%{transform:translateX(-4px)}58%{transform:translateX(4px)}82%{transform:translateX(-2px)}}
@@ -3381,6 +3391,7 @@ var storyQuestions={
 var kidsQuizPool=[];
 var kidsQuizLoaded=false;
 var kidsQuizArtwork={};
+var kidsQuizTopicArtwork={families:{},categoryMap:{},sceneMap:{}};
 
 var kidsSurahs=[
   {id:1,label:"al-Fātiḥah",hint:"7 Āyāt"},
@@ -6109,7 +6120,13 @@ function fetchKidsQuiz(){
     .then(function(parts){
       var data=parts[0],studioData=parts[1];
       if(!data||data.namespace!=="dar-kids-quiz"||data.adultQuizDependency!==false)throw new Error("kids-quiz-namespace");
-      kidsQuizArtwork=data.artwork&&data.artwork.ageBands?data.artwork.ageBands:{};
+      var artwork=data.artwork||{};
+      kidsQuizArtwork=artwork.ageBands||{};
+      kidsQuizTopicArtwork={
+        families:artwork.topicFamilies||{},
+        categoryMap:artwork.categoryMap||{},
+        sceneMap:artwork.sceneMap||{}
+      };
       var items=Array.isArray(data.items)?data.items:[];
       var baseItems=items.filter(function(q){
         return q &&
@@ -6127,9 +6144,24 @@ function fetchKidsQuiz(){
       return [];
     });
 }
-function quizArtworkForBand(){
-  var row=kidsQuizArtwork[currentKidsQuizAgeBand()]||{};
-  return {url:String(row.url||""),position:String(row.position||"50% 50%")};
+function quizArtworkForBand(question){
+  var band=currentKidsQuizAgeBand();
+  var base=kidsQuizArtwork[band]||{};
+  var family="";
+  var q=question||{};
+  var scene=String(q.scene||"");
+  var category=String(q.category||"");
+  var sceneMap=kidsQuizTopicArtwork.sceneMap||{};
+  var categoryMap=kidsQuizTopicArtwork.categoryMap||{};
+  var families=kidsQuizTopicArtwork.families||{};
+  if(scene&&sceneMap[scene])family=String(sceneMap[scene]);
+  if(!family&&category&&categoryMap[category])family=String(categoryMap[category]);
+  var row=family&&families[family]?families[family]:base;
+  return {
+    url:String(row.url||base.url||""),
+    position:String(row.position||base.position||"50% 50%"),
+    family:family||"age"
+  };
 }
 function quizText(value){
   return String(value==null?"":value).replace(/[&<>"]/g,function(ch){
@@ -6203,7 +6235,7 @@ function renderQuizQuestion(){
   var help=band==="4-6"?"":(band==="9-10"?"Wähle die beste Antwort.":"Hör zu und tippe auf deine Antwort.");
   var kicker=band==="4-6"?String(q.category||"Quiz"):String(q.category||"Quiz")+" · "+(currentQuizIndex+1)+"/"+currentQuiz.length;
   var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";
-  var art=quizArtworkForBand();
+  var art=quizArtworkForBand(q);
   document.getElementById("quizBody").innerHTML=
     '<div id="quizScene" class="quiz-scene" aria-hidden="true">'+
       '<div class="quiz-scene-top"><span class="quiz-scene-chip">'+quizText(q.category||"Quiz")+'</span><span class="quiz-scene-chip quiz-scene-count">Frage '+(currentQuizIndex+1)+' · '+currentQuiz.length+'</span></div>'+
@@ -6222,6 +6254,7 @@ function renderQuizQuestion(){
   if(scene&&art.url){
     scene.style.setProperty("--quiz-art",'url("'+art.url.replace(/"/g,"%22")+'")');
     scene.style.setProperty("--quiz-art-position",art.position);
+    scene.setAttribute("data-quiz-family",art.family||"age");
   }else if(scene){
     scene.classList.add("no-art");
   }
