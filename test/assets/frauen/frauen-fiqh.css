@@ -3401,3 +3401,192 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-re
   .frauen-library-card.has-visual .frauen-library-card__copy h3{font-size:17.5px!important}
   .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{font-size:16px!important}
 }
+
+
+/* v1227 · Lesbarkeit zuerst: vollständige horizontale Texte */
+/*
+  Verbindlich für Haupt- und Unterkarten:
+  Keine Ellipsen, kein Line-Clamp, keine Wortzerlegung durch zu schmale Spalten.
+  Das historische Motiv bleibt full-bleed; die linke Lesefläche ist nur ein Overlay.
+*/
+.frauen-library-card.has-visual{
+  --frauen-text-w:69%!important;
+  padding:13px 52px 12px 16px!important;
+}
+.frauen-library-area-card.has-visual{
+  --frauen-text-w:70%!important;
+  padding:12px 50px 11px 15px!important;
+}
+
+/* Etwas stärkere ruhige Lesefläche links, ohne sichtbare Bildkante. */
+.frauen-library-card.has-visual::after,
+.frauen-library-area-card.has-visual::after{
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--card) 100%,transparent) 0%,
+      color-mix(in srgb,var(--card) 99%,transparent) 30%,
+      color-mix(in srgb,var(--card) 96%,transparent) 43%,
+      color-mix(in srgb,var(--card) 84%,transparent) 54%,
+      color-mix(in srgb,var(--card) 58%,transparent) 65%,
+      color-mix(in srgb,var(--card) 28%,transparent) 75%,
+      color-mix(in srgb,var(--card) 8%,transparent) 84%,
+      transparent 93%),
+    linear-gradient(180deg,color-mix(in srgb,var(--card) 4%,transparent),rgba(7,17,15,.07))!important;
+}
+
+/* Textcontainer breit genug halten; keine künstliche Verkürzung. */
+.frauen-library-card.has-visual .frauen-library-card__copy,
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+  width:var(--frauen-text-w)!important;
+  max-width:var(--frauen-text-w)!important;
+  overflow:visible!important;
+}
+
+.frauen-library-card.has-visual .frauen-library-card__copy h3,
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy h3,
+.frauen-library-card.has-visual .frauen-library-card__desc,
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy > p,
+.frauen-library-card.has-visual .frauen-library-card__meta,
+.frauen-library-area-card.has-visual .frauen-library-area-card__meta{
+  display:block!important;
+  max-width:100%!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  hyphens:none!important;
+  -webkit-line-clamp:unset!important;
+  -webkit-box-orient:initial!important;
+}
+
+/* Haupttitel: normale horizontale Wortgruppen, maximal natürlicher Umbruch. */
+.frauen-library-card.has-visual .frauen-library-card__copy h3{
+  font-size:clamp(18px,4.8vw,23px)!important;
+  line-height:1.08!important;
+  letter-spacing:-.012em!important;
+  margin-top:1px!important;
+}
+
+/* Unterbereiche ebenfalls horizontal lesbar statt Wort-für-Wort-Spalte. */
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+  font-size:clamp(16.5px,4.35vw,20px)!important;
+  line-height:1.1!important;
+  padding-left:44px!important;
+}
+
+/* Vollständige Beschreibung; kleinere Typografie statt Abschneiden. */
+.frauen-library-card.has-visual .frauen-library-card__desc{
+  margin-top:5px!important;
+  font-size:clamp(10.7px,2.8vw,12px)!important;
+  line-height:1.28!important;
+}
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{
+  margin-top:5px!important;
+  font-size:clamp(10.5px,2.75vw,11.8px)!important;
+  line-height:1.27!important;
+}
+
+.frauen-library-card.has-visual .frauen-library-card__meta,
+.frauen-library-area-card.has-visual .frauen-library-area-card__meta{
+  margin-top:5px!important;
+  font-size:10px!important;
+  line-height:1.18!important;
+}
+
+/* Nummer + Kicker kompakt, damit Titelbreite nicht verloren geht. */
+.frauen-library-card.has-visual .frauen-library-card__nr,
+.frauen-library-area-card.has-visual .frauen-library-area-card__nr{
+  top:11px!important;
+  left:13px!important;
+  min-width:29px!important;
+  height:22px!important;
+  padding:0 6px!important;
+  font-size:8.8px!important;
+}
+.frauen-library-card.has-visual .frauen-library-card__kicker{
+  min-height:22px!important;
+  padding-left:42px!important;
+  font-size:8.3px!important;
+  line-height:1.15!important;
+}
+
+/* Bildfokus weiter rechts, damit Text nicht optisch mit Personen/Objekten kollidiert. */
+.frauen-library-card.has-visual,
+.frauen-library-area-card.has-visual{
+  background-position:62% center!important;
+}
+.frauen-library-card--generationen.has-visual{
+  background-position:64% center!important;
+}
+
+/* iPhone / schmale Displays: Text bleibt vollständig, Karte darf für Inhalt minimal wachsen. */
+@media (max-width:760px){
+  .frauen-library-card.has-visual{
+    --frauen-text-w:68%!important;
+    aspect-ratio:21 / 9!important;
+    min-height:158px!important;
+    height:auto!important;
+    padding:11px 45px 10px 13px!important;
+  }
+  .frauen-library-area-card.has-visual{
+    --frauen-text-w:69%!important;
+    aspect-ratio:21 / 8.8!important;
+    min-height:150px!important;
+    height:auto!important;
+    padding:10px 43px 9px 12px!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__copy h3{
+    font-size:clamp(17px,4.9vw,20px)!important;
+    line-height:1.08!important;
+  }
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+    font-size:clamp(15.5px,4.35vw,18.5px)!important;
+    line-height:1.1!important;
+    padding-left:40px!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__desc{
+    font-size:clamp(10.2px,2.7vw,11.3px)!important;
+    line-height:1.25!important;
+  }
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{
+    font-size:clamp(10px,2.65vw,11px)!important;
+    line-height:1.24!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__meta,
+  .frauen-library-area-card.has-visual .frauen-library-area-card__meta{
+    font-size:9.6px!important;
+    line-height:1.16!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__arrow,
+  .frauen-library-area-card.has-visual .frauen-library-area-card__arrow{
+    right:8px!important;
+    width:32px!important;
+    height:32px!important;
+    font-size:21px!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__nr,
+  .frauen-library-area-card.has-visual .frauen-library-area-card__nr{
+    top:9px!important;
+    left:11px!important;
+    min-width:27px!important;
+    height:21px!important;
+    padding:0 5px!important;
+    font-size:8.4px!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__kicker{
+    min-height:21px!important;
+    padding-left:39px!important;
+    font-size:8px!important;
+  }
+}
+
+/* Sehr schmale Geräte: lieber 1-2px kleinere Schrift als Inhalte abschneiden. */
+@media (max-width:390px){
+  .frauen-library-card.has-visual{--frauen-text-w:70%!important}
+  .frauen-library-area-card.has-visual{--frauen-text-w:71%!important}
+  .frauen-library-card.has-visual .frauen-library-card__copy h3{font-size:16.5px!important}
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{font-size:15px!important}
+  .frauen-library-card.has-visual .frauen-library-card__desc,
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{font-size:9.8px!important}
+}
