@@ -39,6 +39,7 @@ const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;"
 
 function age(){return String($(".app")?.getAttribute("data-age")||"6–8")}
 function ageKey(){return age().replace("–","-")}
+function isAudioOnlyAge(){return age()==="4–5"}
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){try{localStorage.setItem(MODE_KEY,v)}catch(_){}renderModeButtons();applyMode()}
 function uniqueItems(list){
@@ -107,7 +108,10 @@ function doneCount(){return items.reduce((n,item)=>n+(done(item.id)?1:0),0)}
 function markDone(id){if(!id)return;try{localStorage.setItem(DONE_PREFIX+id,"1")}catch(_){}renderCards()}
 
 function renderModeButtons(){
-  const current=mode();
+  const audioOnly=isAudioOnlyAge();
+  const detailModes=document.querySelector(".ps-detail-modes");
+  if(detailModes)detailModes.hidden=audioOnly;
+  const current=audioOnly?"listen":mode();
   document.querySelectorAll("[data-ps-mode]").forEach(b=>b.classList.toggle("active",b.dataset.psMode===current));
 }
 function renderMuhammadFeature(){
@@ -166,6 +170,8 @@ function renderCards(){
   });
   const doneEl=$("#psDoneCount");if(doneEl)doneEl.textContent=String(doneCount());
   const ageEl=$("#psAgeHero");if(ageEl)ageEl.textContent="Alter "+age();
+  const entrySub=$("#psProphetEntry .ps-entry-sub");
+  if(entrySub)entrySub.textContent=isAudioOnlyAge()?"25 Hörgeschichten":"25 Geschichten · lesen & hören";
 }
 function prepareStoriesHome(view){
   const old=$("#authenticStoryList");
@@ -190,7 +196,7 @@ function prepareStoriesHome(view){
         '<span class="ps-entry-copy">'+
           '<span class="ps-entry-kicker">EIGENER BEREICH · QURʾĀN GEPRÜFT</span>'+
           '<strong>Prophetengeschichten</strong>'+
-          '<span class="ps-entry-sub">25 Geschichten · lesen &amp; hören</span>'+
+          '<span class="ps-entry-sub">'+(isAudioOnlyAge()?'25 Hörgeschichten':'25 Geschichten · lesen &amp; hören')+'</span>'+
         '</span>'+
         '<span class="ps-entry-action"><span>Entdecken</span><span class="ps-entry-go" aria-hidden="true">›</span></span>'+
       '</span>';
@@ -308,7 +314,8 @@ function ensureUi(){
         artwork:active?heroUrl(active):"",
         deepLink:active?("#stories/prophet/"+encodeURIComponent(active.id)):"#stories",
         timings:meta.timings||meta.paragraphTimings||meta.cues||[],
-        syncPoints:meta.syncPoints||meta.syncAnchors||[]
+        syncPoints:meta.syncPoints||meta.syncAnchors||[],
+        audioOnly:isAudioOnlyAge()
       };
     },
     toggleAudio,
@@ -317,11 +324,19 @@ function ensureUi(){
   return true;
 }
 function applyMode(){
-  const m=mode(),read=$("#psRead"),player=$("#psPlayer");
+  const read=$("#psRead"),player=$("#psPlayer"),follow=$("#psFollowOpen");
   renderModeButtons();
   if(!read||!player)return;
+  if(isAudioOnlyAge()){
+    read.hidden=true;
+    player.hidden=false;
+    if(follow){follow.hidden=false;follow.textContent="Hörbuch öffnen";follow.setAttribute("aria-label","Hörbuch-Player öffnen")}
+    return;
+  }
+  const m=mode();
   read.hidden=m==="listen";
   player.hidden=m==="read";
+  if(follow){follow.hidden=false;follow.textContent="Mitlesen öffnen";follow.setAttribute("aria-label","Mitlesen öffnen")}
 }
 function renderActive(){
   if(!active)return;
@@ -332,7 +347,8 @@ function renderActive(){
       title:active.name+(active.id==="muhammad"?" ﷺ":""),
       text:activeText,
       timings:meta.timings||meta.paragraphTimings||meta.cues||[],
-      syncPoints:meta.syncPoints||meta.syncAnchors||[]
+      syncPoints:meta.syncPoints||meta.syncAnchors||[],
+      audioOnly:isAudioOnlyAge()
     });
   }
   const hero=$(".ps-hero");if(hero){hero.setAttribute("data-ps-id",active.id);hero.setAttribute("data-hero-copy",DEDICATED_HERO.has(active.id)?"left":"right")}
@@ -407,7 +423,7 @@ function resetAudioForActive(){
     if(note)note.textContent="";
   }else{
     audio.removeAttribute("src");
-    if(note)note.textContent="Die Geschichte kann gelesen werden.";
+    if(note)note.textContent=isAudioOnlyAge()?"Das Hörbuch ist gerade nicht verfügbar.":"Die Geschichte kann gelesen werden.";
   }
   if($("#psProgress"))$("#psProgress").style.width="0";
   if($("#psTimeCurrent"))$("#psTimeCurrent").textContent="0:00";
@@ -447,7 +463,7 @@ function updatePlayButton(){
   b.disabled=busy||!meta?.url;
   if(playing)b.textContent="Pause";
   else if(audio.currentTime>0&&!audio.ended)b.textContent="Weiterhören";
-  else b.textContent="Hören & mitlesen";
+  else b.textContent=isAudioOnlyAge()?"Hörbuch starten":"Hören & mitlesen";
 }
 async function toggleAudio(){
   if(!active||busy)return;
@@ -463,7 +479,7 @@ async function toggleAudio(){
     busy=false;playing=true;updatePlayButton();
   }catch(err){
     busy=false;playing=false;updatePlayButton();
-    const note=$("#psVoiceNote");if(note)note.textContent="Die Geschichte kann gelesen werden.";
+    const note=$("#psVoiceNote");if(note)note.textContent=isAudioOnlyAge()?"Das Hörbuch ist gerade nicht verfügbar.":"Die Geschichte kann gelesen werden.";
   }
 }
 function stopAudio(){
