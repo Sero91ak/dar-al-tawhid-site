@@ -154,10 +154,11 @@
     {
       "id": "voice-cloud-deploy-verify-2026-10-04",
       "approvedBy": "user-explicit-mach-weiter-voice-cloud",
-      "reason": "Nutzer hat die fortlaufende Umsetzung der DĀR Voice Cloud-App ausdrücklich mit „Mach weiter“ beauftragt. Freigabe nur für die Voice-Cloud-Deploy-Verifikation: öffentlicher Desktop-Webauftritt und native App-Shell werden getrennt geprüft; Voice-, Zakat-, Push- und sonstige Anwendungslogik wird nicht abgeschwächt.",
+      "reason": "Nutzer hat die fortlaufende Umsetzung der DĀR Voice Cloud-App ausdrücklich mit „Mach weiter“ beauftragt. Freigabe nur für die Voice-Cloud-Deploy-Verifikation: öffentlicher Desktop-Webauftritt und native App-Shell werden getrennt geprüft, einschließlich zentralem Live-Paritätscheck; Voice-, Zakat-, Push- und sonstige Anwendungslogik wird nicht abgeschwächt.",
       "paths": [
         "content/admin/change-scope-lock.json",
-        "scripts/verify-live-deploy.js"
+        "scripts/verify-live-deploy.js",
+        "scripts/app-live-parity-check.js"
       ],
       "expiresAt": "2026-11-04T23:59:00.000Z"
     },
