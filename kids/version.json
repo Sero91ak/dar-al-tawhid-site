@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v27-quiz650-library1096",
-  "label": "KIDS · V1.07.33",
-  "releasedAt": "2026-10-04T09:52:00Z",
-  "note": "DĀR AL TAWḤĪD Kids Quiz umfasst jetzt 650 eigenständige, altersgerechte und quellengebundene Fragen (001–650). Der vollständige Fragenkatalog mit Altersstufen, Suche, Themenfilter, direktem Testen und Serhat-Owner-Voice bleibt aktiv; die kurzen Quizrunden, die drei realistischen lokalen Altersbildwelten und audio-first für 4–6 bleiben unverändert.",
+  "buildId": "kids-shell-v28-quiz650-library1096",
+  "label": "KIDS · V1.07.34",
+  "releasedAt": "2026-10-04T09:53:00Z",
+  "note": "Der vorhandene DĀR AL TAWḤĪD Kids Quizbestand von 650 Fragen ist jetzt vollständig in der Kinder-App sichtbar und direkt testbar. Die kurze altersgerechte Quizrunde bleibt erhalten; zusätzlich stehen alle Fragen nach Altersstufe mit Suche, Themenfilter, direktem Öffnen und Serhat-Owner-Voice bereit. Die weitere Fragengenerierung ist pausiert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -333,11 +333,15 @@
       "fullQuestionCatalogDirectTest": true,
       "fullQuestionCatalogOwnerVoice": true,
       "shortQuizRoundsPreserved": true,
-      "noNewQuestionsInThisRelease": false,
+      "noNewQuestionsInThisRelease": true,
       "catalogAssetVersion": 1,
-      "latestContentPack": "601-650"
+      "latestContentPack": "601-650",
+      "questionGenerationPaused": true,
+      "questionGenerationCap": 650
     },
-    "kidsQuizContentRevision": "001-650"
+    "kidsQuizContentRevision": "001-650",
+    "kidsQuizGenerationPaused": true,
+    "kidsQuizGenerationCap": 650
   },
   "updatedAt": "2026-10-04"
 }
