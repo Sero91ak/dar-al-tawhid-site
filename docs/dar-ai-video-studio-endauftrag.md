@@ -24,7 +24,7 @@ Autonomes DAR-Premium-Video: **bewegter DAR-Bildbeitrag** mit Stimme, Atmosphär
 - DAR AL TAWḤĪD  
 - Eigenes Wasserzeichen-Logo  
 - CTA: „Folgt für mehr Wissen aus Qurʾān & Sunnah“  
-- Social: Telegram `@dar_al_tauhid` · Website `dar-al-tauhid.de` · Instagram `@dar_at_tawhid`  
+- Social: Telegram `@dar_al_tauhid` · Website `dar-al-tawhid.de` · Instagram `@dar_at_tawhid`  
 - Credit: `by Serhat Abu Malik`  
 - **Kein** Shotstack-/fal-/Stage-Logo in der Endfassung
 
