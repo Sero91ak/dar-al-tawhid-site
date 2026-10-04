@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.74"
+ENGINE_VERSION="2.9.75"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_DIR=VOICE_HOME/"MasterPronunciations"
@@ -3250,6 +3250,32 @@ STATUS={
 def set_status(**updates):
     with STATUS_LOCK:
         STATUS.update(updates)
+
+def mobile_history_snapshot(limit:int=60):
+    items=[]
+    try:
+        files=sorted(
+            [p for p in OUTPUT.glob("*.wav") if p.is_file() and p.stat().st_size>44],
+            key=lambda p:p.stat().st_mtime,
+            reverse=True
+        )
+        for p in files[:max(1,min(120,int(limit or 60)))]:
+            st=p.stat()
+            created=time.localtime(st.st_mtime)
+            label=p.stem
+            label=re.sub(r"^dar_voice_(?:reference_)?","",label)
+            label=re.sub(r"[_-]+"," ",label).strip() or "DĀR Voice Audio"
+            items.append({
+                "name":p.name,
+                "label":label,
+                "size":int(st.st_size),
+                "sizeLabel":f"{st.st_size/1024/1024:.1f} MB" if st.st_size>=1024*1024 else f"{max(1,int(st.st_size/1024))} KB",
+                "createdAt":int(st.st_mtime),
+                "createdLabel":time.strftime("%d.%m.%Y · %H:%M",created),
+            })
+    except Exception as e:
+        return {"ok":False,"error":str(e),"items":[]}
+    return {"ok":True,"items":items,"count":len(items)}
 
 def get_status():
     with STATUS_LOCK:
@@ -7473,14 +7499,15 @@ class H(BaseHTTPRequestHandler):
         if self.is_loopback_client() or not NETWORK_MODE or not PAIR_TOKEN:
             return False
         parsed=urlparse(self.path)
-        if parsed.path not in ("/","/studio","/studio/","/studio/index.html"):
+        if parsed.path not in ("/","/studio","/studio/","/studio/index.html","/mobile","/mobile/","/mobile/index.html"):
             return False
         query=parse_qs(parsed.query)
         supplied=str((query.get("pair") or [""])[0]).strip()
         if not self.token_matches(supplied):
             return False
+        target="/mobile/" if parsed.path.startswith("/mobile") else "/studio/"
         self.send_response(302)
-        self.send_header("Location","/studio/")
+        self.send_header("Location",target)
         self.send_header(
             "Set-Cookie",
             "DARVOICE_PAIR="+PAIR_TOKEN+"; Path=/; Max-Age=31536000; SameSite=Strict; HttpOnly"
@@ -7670,6 +7697,37 @@ class H(BaseHTTPRequestHandler):
             })
         elif p in ("/studio","/studio/","/studio/index.html"):
             self.send_file(APP_HOME/"studio.html","text/html; charset=utf-8")
+        elif p in ("/mobile","/mobile/","/mobile/index.html"):
+            self.send_file(APP_HOME/"mobile.html","text/html; charset=utf-8")
+        elif p=="/mobile/voice-studio-icon.png":
+            self.send_file(APP_HOME/"voice-studio-icon.png","image/png")
+        elif p=="/mobile/manifest.webmanifest":
+            self.send_json(200,{
+                "name":"DĀR AL TAWḤĪD Voice",
+                "short_name":"DĀR Voice",
+                "id":"/mobile/",
+                "start_url":"/mobile/?pair="+PAIR_TOKEN if PAIR_TOKEN else "/mobile/",
+                "scope":"/mobile/",
+                "display":"standalone",
+                "background_color":"#f7f7f5",
+                "theme_color":"#f7f7f5",
+                "orientation":"any",
+                "icons":[
+                    {"src":"/mobile/voice-studio-icon.png","sizes":"256x256","type":"image/png","purpose":"any"},
+                    {"src":"/mobile/voice-studio-icon.png","sizes":"256x256","type":"image/png","purpose":"maskable"}
+                ]
+            })
+        elif p=="/mobile/history":
+            self.send_json(200,mobile_history_snapshot(60))
+        elif p=="/mobile/audio":
+            qs=parse_qs(urlparse(self.path).query)
+            name=Path(str((qs.get("name") or [""])[0])).name
+            if not name.lower().endswith(".wav"):
+                return self.send_json(400,{"ok":False,"error":"Ungültige Audiodatei."})
+            candidate=OUTPUT/name
+            if not candidate.exists() or candidate.parent.resolve()!=OUTPUT.resolve():
+                return self.send_json(404,{"ok":False,"error":"Audio nicht gefunden."})
+            self.send_audio_file(candidate,"audio/wav")
         elif p=="/studio/content-studio.js":
             self.send_file(APP_HOME/"content-studio.js","application/javascript; charset=utf-8")
         elif p=="/studio/alphabet-audio-studio.js":
@@ -8145,6 +8203,7 @@ class H(BaseHTTPRequestHandler):
                 self.send_header("Content-Type","audio/wav")
                 self.send_header("Content-Length",str(len(b)))
                 self.send_header("Content-Disposition",'inline; filename="dar-serhat-voice.wav"')
+                self.send_header("X-DAR-Output-Name",out.name)
                 self.cors();self.end_headers();self.wfile.write(b)
             except RuntimeError as e:
                 status=409 if "bereits" in str(e) else 500
