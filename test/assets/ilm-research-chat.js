@@ -242,18 +242,30 @@
     var oldWelcome = window.renderIlmWelcomeState;
     window.renderIlmWelcomeState = function () {
       return (
-        '<div class="ilm-welcome"><section class="ilm-welcome-card">' +
-          "<h2>ʿIlm</h2>" +
-          "<p>As-salāmu ʿalaykum. Frage nach Qurʾān, Sunnah, Ṣaḥābah und den frühen Imāmen. Die Antwort bleibt an den geprüften Quellen.</p>" +
-          '<div class="ilm-starter-chips">' +
-            [
-              "Was ist Īmān?",
-              "Was sagte der Prophet ﷺ über Īmān?",
-              "Gibt es dazu einen Ijmāʿ?"
-            ].map(function (p) {
-              return '<button class="ilm-starter-chip" type="button" data-ilm-starter="' + esc(p) + '">' + esc(p) + "</button>";
-            }).join("") +
-          "</div></section></div>"
+        '<div class="ilm-welcome ilm-welcome--phase1">' +
+          '<section class="ilm-welcome-card ilm-welcome-hero">' +
+            '<div class="ilm-welcome-hero-copy">' +
+              '<p class="ilm-welcome-kicker">DĀR AL TAWḤĪD · WISSENSBEREICH</p>' +
+              '<h2>ʿIlm</h2>' +
+              '<p class="ilm-welcome-lead">Frage nach Qurʾān, Sunnah, Ṣaḥābah und den frühen Imāmen. Antworten bleiben an den geprüften Quellen.</p>' +
+              '<div class="ilm-welcome-trust" aria-label="Quellenrahmen">' +
+                '<span>Qurʾān</span><span>Sunnah</span><span>Salaf</span>' +
+              '</div>' +
+            '</div>' +
+          '</section>' +
+          '<section class="ilm-welcome-prompts" aria-label="Fragevorschläge">' +
+            '<div class="ilm-welcome-prompts-head"><h3>Frage stellen</h3><span>Geprüfte Quellen</span></div>' +
+            '<div class="ilm-starter-chips">' +
+              [
+                "Was ist Īmān?",
+                "Was sagte der Prophet ﷺ über Īmān?",
+                "Gibt es dazu einen Ijmāʿ?"
+              ].map(function (p) {
+                return '<button class="ilm-starter-chip" type="button" data-ilm-starter="' + esc(p) + '">' + esc(p) + '<span aria-hidden="true">→</span></button>';
+              }).join("") +
+            '</div>' +
+          '</section>' +
+        '</div>'
       );
     };
 
