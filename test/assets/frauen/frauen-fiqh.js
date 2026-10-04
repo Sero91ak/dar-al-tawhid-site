@@ -3533,7 +3533,6 @@
     if (body) text += "\n\n" + body;
     if (lehre) text += "\n\nLehre / Nutzen:\n" + lehre;
     if (quelle) text += "\n\nQuelle: " + quelle;
-    text += "\n\nFolgt für mehr Wissen aus Qurʾān & Sunnah";
     return {
       title: title + " · DĀR AL TAWḤĪD",
       text: text,
