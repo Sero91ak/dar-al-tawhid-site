@@ -50,7 +50,7 @@ try:
     PORT=int(os.environ.get("DAR_VOICE_PORT",os.environ.get("PORT","8787")) or 8787)
 except Exception:
     PORT=8787
-ENGINE_VERSION="2.9.96"
+ENGINE_VERSION="2.9.97"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -2532,6 +2532,22 @@ def register_story_reference_pair(
         raise ValueError("Referenz-Audio fehlt.")
 
     seed=_story_reference_seed(item_id)
+    normalized_kind=str(kind or "story").strip().lower()
+    default_mode={
+        "dua":"dua",
+        "duʿāʾ":"dua",
+        "du'a":"dua",
+        "narration":"narration",
+        "erzählung":"narration",
+        "erzaehlung":"narration",
+        "content":"narration",
+        "lesson":"teaching",
+        "story":"kids_story",
+        "prophet":"kids_story",
+        "sahabi":"kids_story",
+        "ṣaḥābī":"kids_story",
+        "mubashshirun":"kids_story",
+    }.get(normalized_kind,"kids_story")
     ref_id=str(reference_id or seed.get("id") or "").strip()
     if not ref_id:
         raw="|".join([str(kind or "story"),str(item_id or ""),story_reference_text_sha256(value)])
@@ -2551,10 +2567,10 @@ def register_story_reference_pair(
     trusted=list(((seed.get("pronunciationProfile") or {}).get("trustedTerms") or []))
     record={
         "id":ref_id,
-        "kind":str(kind or "story"),
+        "kind":normalized_kind,
         "itemId":str(item_id or ""),
         "age":str(age or "all"),
-        "prosodyMode":str(seed.get("prosodyMode") or "kids_story"),
+        "prosodyMode":str(seed.get("prosodyMode") or default_mode),
         "language":str(seed.get("language") or "de-DE"),
         "voiceProfileId":str(seed.get("voiceProfileId") or "serhat-owner-voice-2026"),
         "textSha256":story_reference_text_sha256(value),
@@ -2625,13 +2641,15 @@ def story_reference_state():
     }
 
 def story_reference_matches_text(text:str,mode:str=""):
-    if str(mode or "")!="kids_story":
+    requested=str(mode or "").strip()
+    if requested not in ("kids_story","dua","narration","teaching"):
         return None
     target=story_reference_text_sha256(text)
     with STORY_REFERENCE_LOCK:
         refs=list((_story_reference_load().get("references") or []))
     for row in reversed(refs):
-        if str(row.get("prosodyMode") or "kids_story")!="kids_story":
+        row_mode=str(row.get("prosodyMode") or "kids_story").strip()
+        if row_mode!=requested:
             continue
         if str(row.get("textSha256") or "")!=target:
             continue
@@ -9705,8 +9723,21 @@ class H(BaseHTTPRequestHandler):
                         timings=data.get("timings"),
                         sync_mode=str(data.get("syncMode") or "")
                     )
+                elif kind in ("story","dua","duʿāʾ","du'a","narration","erzählung","erzaehlung","content","lesson"):
+                    # Allgemeines Content Studio: Die fertige Eigentümer-Audio wird
+                    # bewusst nur als private Audio/Text-Referenz gelernt. Die Live-
+                    # Veröffentlichung in Kids läuft weiterhin über den geschützten
+                    # Content-Worker und wird hier nicht doppelt ausgelöst.
+                    result={
+                        "ok":True,
+                        "registered":True,
+                        "kind":kind,
+                        "id":item_id,
+                        "age":age or "all",
+                        "prosodyMode":str(reference.get("prosodyMode") or ""),
+                    }
                 else:
-                    raise ValueError("Story-Typ muss Prophet oder Ṣaḥābī sein.")
+                    raise ValueError("Unbekannter Story-/Content-Typ.")
                 result["upload"]={
                     "filename":info["filename"],
                     "bytes":info["bytes"],
