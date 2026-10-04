@@ -288,12 +288,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Immer neuesten main-Stand deployen
+      - name: Trigger-Commit unverändert deployen
         shell: bash
         run: |
-          git fetch origin main
-          git reset --hard origin/main
-          echo "Deploy HEAD: $(git rev-parse HEAD)"
+          CURRENT="$(git rev-parse HEAD)"
+          if [ "$CURRENT" != "$GITHUB_SHA" ]; then
+            echo "::error::Checkout ist nicht der auslösende Commit: $CURRENT statt $GITHUB_SHA"
+            exit 1
+          fi
+          echo "Deploy HEAD: $CURRENT"
+          echo "Der Deploy bleibt absichtlich auf dem geprüften Trigger-Commit; kein spätes origin/main-Reset."
 
       - uses: actions/setup-node@v4
         with:
