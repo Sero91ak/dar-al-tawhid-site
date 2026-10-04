@@ -93,6 +93,107 @@ function looksLikeLongArabicRecitation(text) {
   return (maxRun >= 8 && arabicTokens >= 16) || (arabicRatio >= 0.70 && arabicTokens >= 8);
 }
 
+function splitStoryParagraphsWithOffsets(text) {
+  const value = String(text || "");
+  const rows = [];
+  const re = /(?:^|\n\s*\n)([^\n](?:[\s\S]*?))(?=\n\s*\n|$)/g;
+  let match;
+  while ((match = re.exec(value))) {
+    const raw = String(match[1] || "");
+    const trimmed = raw.trim();
+    if (!trimmed) continue;
+    const local = raw.indexOf(trimmed);
+    rows.push({
+      text: trimmed,
+      startOffset: Math.max(0, match.index + (match[0].length - raw.length) + Math.max(0, local))
+    });
+  }
+  if (!rows.length && value.trim()) {
+    rows.push({ text: value.trim(), startOffset: value.indexOf(value.trim()) });
+  }
+  return rows;
+}
+
+function paragraphTimingsFromForcedAlignment(text, characters) {
+  const paragraphs = splitStoryParagraphsWithOffsets(text);
+  const chars = Array.isArray(characters) ? characters : [];
+  if (!paragraphs.length || !chars.length) return [];
+
+  const joined = chars.map((row) => String(row?.text ?? "")).join("");
+  const direct = joined === String(text || "");
+  let cursor = 0;
+  const starts = paragraphs.map((paragraph, index) => {
+    let charIndex = -1;
+    if (direct) {
+      charIndex = Math.max(0, Math.min(chars.length - 1, paragraph.startOffset));
+    } else {
+      const probe = paragraph.text.slice(0, Math.min(80, paragraph.text.length));
+      const hit = joined.indexOf(probe, cursor);
+      if (hit >= 0) charIndex = hit;
+      else {
+        const ratio = paragraph.startOffset / Math.max(1, String(text || "").length);
+        charIndex = Math.max(0, Math.min(chars.length - 1, Math.round(ratio * (chars.length - 1))));
+      }
+    }
+    while (charIndex < chars.length - 1 && /^\s*$/.test(String(chars[charIndex]?.text ?? ""))) charIndex += 1;
+    cursor = Math.max(cursor, charIndex);
+    const start = Number(chars[charIndex]?.start);
+    return {
+      paragraphIndex: index,
+      start: Number.isFinite(start) ? Math.max(0, start) : 0,
+      charIndex
+    };
+  });
+
+  return starts.map((row, index) => {
+    const next = starts[index + 1];
+    let end;
+    if (next) {
+      end = next.start;
+    } else {
+      const last = chars[chars.length - 1] || {};
+      const lastEnd = Number(last.end);
+      end = Number.isFinite(lastEnd) ? Math.max(row.start, lastEnd) : row.start;
+    }
+    return {
+      paragraphIndex: row.paragraphIndex,
+      start: Number(row.start.toFixed(3)),
+      end: Number(Math.max(row.start, end).toFixed(3))
+    };
+  });
+}
+
+async function alignStoryAudio(env, file, text) {
+  const key = String(env.ELEVENLABS_API_KEY || env.ELEVEN_API_KEY || "").trim();
+  if (!key) throw httpError("ElevenLabs API-Key fehlt für die Mitlese-Synchronisierung.", 503);
+  if (!(file instanceof File) && !(file instanceof Blob)) throw httpError("Audiodatei fehlt.", 400);
+  if (!String(text || "").trim()) throw httpError("Story-Text fehlt.", 400);
+  if (file.size > 64 * 1024 * 1024) throw httpError("Audiodatei ist größer als 64 MB.", 413);
+
+  const form = new FormData();
+  form.append("file", file, String(file.name || "story-audio"));
+  form.append("text", String(text));
+
+  const res = await fetch("https://api.elevenlabs.io/v1/forced-alignment", {
+    method: "POST",
+    headers: { "xi-api-key": key },
+    body: form
+  });
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "");
+    throw httpError("Mitlese-Synchronisierung fehlgeschlagen: " + (detail || ("HTTP " + res.status)).slice(0, 300), res.status === 422 ? 422 : 502);
+  }
+  const payload = await res.json();
+  const timings = paragraphTimingsFromForcedAlignment(text, payload?.characters || []);
+  if (!timings.length) throw httpError("Keine gültigen Absatz-Zeitstempel erhalten.", 502);
+  return {
+    timings,
+    loss: Number.isFinite(Number(payload?.loss)) ? Number(payload.loss) : null,
+    words: Array.isArray(payload?.words) ? payload.words.length : 0,
+    characters: Array.isArray(payload?.characters) ? payload.characters.length : 0
+  };
+}
+
 export async function handleVoiceStudioWebRequest(request, env, cors) {
   const url = new URL(request.url);
   if (!url.pathname.startsWith("/voice-studio/api")) return null;
@@ -109,6 +210,32 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
       output: "audio/mpeg",
       ownerBatchEnabled: true
     }, cors, configured ? 200 : 503);
+  }
+
+  if (request.method === "POST" && rest === "/align-story") {
+    assertVoiceStudioOrigin(request, env);
+    if (!isOwnerAutomationAuthorized(request, env)) {
+      return json({ ok: false, error: "Owner-Freigabe für Story-Synchronisierung fehlt." }, cors, 401);
+    }
+    if (!isVoiceConfigured(env)) {
+      return json({ ok: false, error: "ElevenLabs ist serverseitig nicht verbunden.", setupRequired: true }, cors, 503);
+    }
+    try {
+      const form = await request.formData();
+      const file = form.get("file");
+      const text = String(form.get("text") || "").trim();
+      const result = await alignStoryAudio(env, file, text);
+      return json({
+        ok: true,
+        timings: result.timings,
+        alignmentLoss: result.loss,
+        alignedWords: result.words,
+        alignedCharacters: result.characters,
+        syncMode: "elevenlabs-forced-alignment-v1"
+      }, cors, 200);
+    } catch (error) {
+      return json({ ok: false, error: error?.message || String(error) }, cors, Number(error?.status || 500));
+    }
   }
 
   if (request.method === "POST" && (rest === "/generate" || rest === "/generate-with-timings")) {
