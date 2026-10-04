@@ -3683,8 +3683,8 @@
     var title = String(titelVon(e) || bereichKicker(abschnitt) || "Frauen im Islam").trim();
     var body = String(aussageVon(e) || "").trim();
     var source = String(quelleText(e) || "").trim();
-    var titleSize = title.length > 86 ? 38 : title.length > 52 ? 42 : 47;
-    var bodySize = body.length > 880 ? 31 : body.length > 620 ? 33 : 36;
+    var titleSize = title.length > 86 ? 41 : title.length > 52 ? 46 : 52;
+    var bodySize = body.length > 880 ? 34 : body.length > 620 ? 36 : 39;
     var bodyLine = bodySize + 15;
 
     ctx.font = "600 " + titleSize + "px Georgia, serif";
@@ -3795,18 +3795,30 @@
       ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah", margin + 22, panelY + 127);
 
       ctx.fillStyle = "#efd89f";
-      ctx.font = "700 18px Arial, sans-serif";
-      ctx.fillText("dar-al-tawhid.de", margin, H - 66);
-      ctx.fillStyle = "rgba(255,248,232,.66)";
-      ctx.font = "500 13px Arial, sans-serif";
-      ctx.fillText("by Serhat Abu Malik", margin, H - 43);
+      ctx.font = "700 20px Arial, sans-serif";
+      ctx.fillText("dar-al-tawhid.de", margin, H - 72);
+      ctx.fillStyle = "rgba(255,248,232,.80)";
+      ctx.font = "600 14px Arial, sans-serif";
+      ctx.fillText("by Serhat Abu Malik", margin, H - 48);
 
-      frauenDrawStoreBadge(ctx, W - margin - 245, H - 88, 245, 53);
+      frauenDrawStoreBadge(ctx, W - margin - 270, H - 98, 270, 62);
 
       var blob = await frauenCanvasBlob(canvas);
       if (blob) files.push(new File([blob], "dar-al-tawhid-bildbeitrag-" + (p + 1) + ".png", { type: "image/png" }));
     }
     return files;
+  }
+
+  /* FRAUEN_SHARE_NATIVE_V1225 */
+  function frauenBlobDataUrl(blob) {
+    return new Promise(function (resolve, reject) {
+      try {
+        var reader = new FileReader();
+        reader.onload = function () { resolve(String(reader.result || "")); };
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      } catch (err) { reject(err); }
+    });
   }
 
   async function frauenShareImage(abschnitt, e, instagramIntent) {
@@ -3830,10 +3842,28 @@
         if (err2 && err2.name === "AbortError") return true;
       }
       try {
+        var handler = window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darShareImage;
+        if (handler && typeof handler.postMessage === "function") {
+          var dataUrl = await frauenBlobDataUrl(files[0]);
+          if (instagramIntent) frauenToast("Im Teilen-Menü Instagram auswählen");
+          handler.postMessage({
+            dataUrl: dataUrl,
+            filename: "dar-al-tawhid-bildbeitrag.png",
+            title: payload.title
+          });
+          return true;
+        }
+      } catch (nativeErr) {}
+      try {
         var blobUrl = URL.createObjectURL(files[0]);
-        window.open(blobUrl, "_blank", "noopener");
+        var link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = "dar-al-tawhid-bildbeitrag.png";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
         setTimeout(function () { try { URL.revokeObjectURL(blobUrl); } catch (e3) {} }, 60000);
-        frauenToast("Bild geöffnet – zum Teilen speichern oder weiterleiten");
+        frauenToast("Bild erstellt – PNG liegt zum Teilen bereit");
         return true;
       } catch (e4) {}
     }
