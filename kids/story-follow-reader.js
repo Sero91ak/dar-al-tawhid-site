@@ -38,6 +38,7 @@ function progressStorageKey(value){return PROGRESS_PREFIX+normalizeKey(value)}
 function create(options){
   if(!options||!options.id||!options.audio)return null;
   const audio=options.audio,id=String(options.id).replace(/[^a-z0-9_-]/gi,"-");
+  try{audio.setAttribute("playsinline","");audio.setAttribute("webkit-playsinline","");audio.preload="metadata"}catch(_){}
   const prior=document.getElementById("kidsFollowReader-"+id);
   if(prior)prior.remove();
 
@@ -55,7 +56,7 @@ function create(options){
         '<button class="kfr-play" type="button">Abspielen</button>'+
         '<button class="kfr-restart" type="button" aria-label="Geschichte von vorn starten">Von vorn</button>'+
         '<div class="kfr-time"><span class="kfr-current">0:00</span><span class="kfr-time-sep">/</span><span class="kfr-total">0:00</span></div>'+
-        '<button class="kfr-progress" type="button" aria-label="Wiedergabeposition ändern"><span></span></button>'+
+        '<button class="kfr-progress" type="button" role="slider" aria-label="Wiedergabeposition ändern"><span></span></button>'+
         '<div class="kfr-help">Der aktuelle Abschnitt wird hervorgehoben und folgt der Stimme automatisch. Du kannst jederzeit selbst scrollen.</div>'+
       '</div>'+
       '<div class="kfr-read" tabindex="0" aria-label="Text zum Mitlesen"></div>'+
@@ -204,6 +205,7 @@ function create(options){
     }
     mark(paragraphIndex(ratio),!!forceScroll);
     updatePlay();
+    try{navigator.mediaSession.playbackState="playing"}catch(_){}
     updatePositionState();
   }
   function mediaArtwork(c){
@@ -217,6 +219,7 @@ function create(options){
     const safe=(name,handler)=>{try{navigator.mediaSession.setActionHandler(name,handler)}catch(_){}};
     safe("play",()=>{Promise.resolve(audio.play()).catch(()=>{})});
     safe("pause",()=>audio.pause());
+    safe("stop",()=>{persist(true);audio.pause()});
     safe("seekbackward",details=>{const amount=Number(details?.seekOffset)||15;try{audio.currentTime=Math.max(0,(Number(audio.currentTime)||0)-amount)}catch(_){}});
     safe("seekforward",details=>{const amount=Number(details?.seekOffset)||15;const d=Number(audio.duration)||Infinity;try{audio.currentTime=Math.min(d,(Number(audio.currentTime)||0)+amount)}catch(_){}});
     safe("seekto",details=>{if(Number.isFinite(Number(details?.seekTime)))try{audio.currentTime=Math.max(0,Math.min(Number(audio.duration)||Number(details.seekTime),Number(details.seekTime)))}catch(_){}});
@@ -289,8 +292,8 @@ function create(options){
   audio.addEventListener("canplay",()=>{restore();sync(false)},{passive:true});
   audio.addEventListener("durationchange",()=>sync(false));
   audio.addEventListener("play",()=>{activateMediaSession();if(options.autoOpen!==false&&!isOpen())open();updatePlay()});
-  audio.addEventListener("pause",()=>{persist(true);updatePlay()});
-  audio.addEventListener("ended",()=>{const key=storyKey();if(key)safeRemove(progressStorageKey(key));sync(true)});
+  audio.addEventListener("pause",()=>{persist(true);try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="paused"}catch(_){}updatePlay()});
+  audio.addEventListener("ended",()=>{const key=storyKey();if(key)safeRemove(progressStorageKey(key));try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="none"}catch(_){}sync(true)});
   audio.addEventListener("seeking",()=>sync(false));
   audio.addEventListener("seeked",()=>{sync(true);persist(true)});
   window.addEventListener("pagehide",()=>persist(true));
