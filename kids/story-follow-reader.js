@@ -1,9 +1,10 @@
 (() => {
 "use strict";
 
-/* DĀR AL TAWḤĪD Kids — shared audiobook / follow reader v2
+/* DĀR AL TAWḤĪD Kids — shared audiobook / follow reader v3
    - persistent per-story progress
-   - child-friendly focus reader with live paragraph following
+   - timestamp-aware paragraph following with calibrated fallback
+   - child-friendly focus reader with automatic voice-follow scrolling
    - Media Session metadata + artwork + lock-screen controls
    - seek / resume / restart support
 */
@@ -84,7 +85,7 @@ function create(options){
   const progressEl=root.querySelector(".kfr-progress span");
   const currentEl=root.querySelector(".kfr-current");
   const totalEl=root.querySelector(".kfr-total");
-  let paragraphs=[],weights=[],totalWeight=0,lastIndex=-1,manualUntil=0;
+  let paragraphs=[],weights=[],totalWeight=0,timingCues=[],syncPoints=[],lastIndex=-1,manualUntil=0;
   let currentContent={},restoredToken="",lastPersistAt=0,mediaSessionActive=false;
 
   function content(){
@@ -95,8 +96,39 @@ function create(options){
     const c=value&&typeof value==="object"?value:{};
     return normalizeKey(c.key||[id,c.title||"story",c.age||""].filter(Boolean).join(":"));
   }
+  function normalizeTimingCues(raw){
+    if(!Array.isArray(raw)||!paragraphs.length)return[];
+    const list=[];
+    raw.forEach((entry,order)=>{
+      if(entry==null)return;
+      let start,end,index;
+      if(typeof entry==="number"){
+        start=Number(entry);index=order;
+      }else if(typeof entry==="object"){
+        start=Number(entry.start??entry.startSec??entry.time??entry.from);
+        end=Number(entry.end??entry.endSec??entry.to);
+        index=Number(entry.paragraphIndex??entry.paragraph??entry.index??order);
+      }
+      if(!Number.isFinite(start)||!Number.isInteger(index)||index<0||index>=paragraphs.length)return;
+      list.push({start:Math.max(0,start),end:Number.isFinite(end)?Math.max(start,end):null,index});
+    });
+    list.sort((a,b)=>a.start-b.start||a.index-b.index);
+    return list;
+  }
+  function normalizeSyncPoints(raw){
+    if(!Array.isArray(raw)||!paragraphs.length)return[];
+    return raw.map(entry=>{
+      if(!entry||typeof entry!=="object")return null;
+      const time=Number(entry.time??entry.start??entry.startSec);
+      const paragraph=Number(entry.paragraph??entry.paragraphIndex??entry.index);
+      if(!Number.isFinite(time)||!Number.isInteger(paragraph)||paragraph<0||paragraph>=paragraphs.length)return null;
+      return{time:Math.max(0,time),paragraph};
+    }).filter(Boolean).sort((a,b)=>a.time-b.time||a.paragraph-b.paragraph);
+  }
   function setContent(value){
-    const c=value&&typeof value==="object"?value:content();
+    const incoming=value&&typeof value==="object"?value:content();
+    const base=content();
+    const c=Object.assign({},base&&typeof base==="object"?base:{},incoming);
     const prevKey=storyKey(currentContent);
     currentContent=c;
     const nextKey=storyKey(c);
@@ -106,15 +138,51 @@ function create(options){
     paragraphs=splitParagraphs(c.text||"");
     weights=paragraphs.map(p=>Math.max(1,(p.match(/\S+/g)||[]).length));
     totalWeight=weights.reduce((n,w)=>n+w,0)||1;
+    timingCues=normalizeTimingCues(c.timings||c.paragraphTimings||c.cues||[]);
+    syncPoints=normalizeSyncPoints(c.syncPoints||c.syncAnchors||[]);
+    root.dataset.syncMode=timingCues.length?"timestamps":(syncPoints.length?"calibrated":"estimated");
     readEl.innerHTML=paragraphs.map((p,i)=>'<p data-kfr-index="'+i+'">'+esc(p)+'</p>').join("");
     lastIndex=-1;
     sync(true);
   }
-  function paragraphIndex(ratio){
-    if(!paragraphs.length)return-1;
-    const target=Math.max(0,Math.min(1,ratio))*totalWeight;
+  function cumulativeWeightBefore(index){
     let sum=0;
-    for(let i=0;i<weights.length;i++){sum+=weights[i];if(target<=sum)return i}
+    for(let i=0;i<Math.max(0,Math.min(index,weights.length));i++)sum+=weights[i];
+    return sum;
+  }
+  function paragraphIndexFromTimings(current){
+    if(!timingCues.length)return-1;
+    let chosen=timingCues[0];
+    for(let i=0;i<timingCues.length;i++){
+      const cue=timingCues[i];
+      if(current+0.04<cue.start)break;
+      chosen=cue;
+      if(Number.isFinite(cue.end)&&current<=cue.end+0.04)break;
+    }
+    return chosen.index;
+  }
+  function calibratedTargetWeight(current,duration){
+    const anchors=[{time:0,weight:0}]
+      .concat(syncPoints.map(p=>({time:p.time,weight:cumulativeWeightBefore(p.paragraph)})))
+      .concat([{time:Math.max(0,duration),weight:totalWeight}])
+      .filter((p,i,a)=>Number.isFinite(p.time)&&Number.isFinite(p.weight)&&(!i||p.time>=a[i-1].time));
+    if(anchors.length<2||duration<=0)return Math.max(0,Math.min(1,current/Math.max(1,duration)))*totalWeight;
+    const t=Math.max(0,Math.min(duration,current));
+    let left=anchors[0],right=anchors[anchors.length-1];
+    for(let i=1;i<anchors.length;i++){
+      if(t<=anchors[i].time){left=anchors[i-1];right=anchors[i];break}
+    }
+    const span=Math.max(.001,right.time-left.time);
+    const r=Math.max(0,Math.min(1,(t-left.time)/span));
+    return left.weight+(right.weight-left.weight)*r;
+  }
+  function paragraphIndexAtTime(current,duration){
+    if(!paragraphs.length)return-1;
+    const timed=paragraphIndexFromTimings(current);
+    if(timed>=0)return timed;
+    const target=calibratedTargetWeight(current,duration);
+    let sum=0;
+    for(let i=0;i<weights.length;i++){sum+=weights[i];if(target<sum||i===weights.length-1)return i}
     return paragraphs.length-1;
   }
   function mark(index,forceScroll){
@@ -214,7 +282,7 @@ function create(options){
       progressButton.setAttribute("aria-valuenow",String(Math.max(0,Math.round(current))));
       progressButton.setAttribute("aria-valuetext",formatTime(current)+" von "+formatTime(duration));
     }
-    mark(paragraphIndex(ratio),!!forceScroll);
+    mark(paragraphIndexAtTime(current,duration),!!forceScroll);
     updatePlay();
     try{navigator.mediaSession.playbackState="playing"}catch(_){}
     updatePositionState();
@@ -345,5 +413,5 @@ function create(options){
     getSavedProgress:readProgress
   };
 }
-window.DARKidsFollowReader={version:2,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
+window.DARKidsFollowReader={version:3,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
 })();
