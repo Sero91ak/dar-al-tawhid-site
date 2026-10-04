@@ -33,8 +33,14 @@ set +a
 : "${DAR_VOICE_PAIR_TOKEN:?DAR_VOICE_PAIR_TOKEN fehlt in .env}"
 
 DATA="${DAR_VOICE_DATA_DIR:-/var/lib/dar-voice}"
-sudo mkdir -p "$DATA"
-sudo chmod 700 "$DATA"
+if [[ "$(id -u)" -eq 0 ]]; then
+  mkdir -p "$DATA"
+  chmod 700 "$DATA"
+else
+  sudo mkdir -p "$DATA"
+  sudo chmod 700 "$DATA"
+fi
+chmod 600 .env
 
 if [[ ! -s "$DATA/Serhat_Adobe_MASTER.wav" ]]; then
   echo "STOPP: Private Voice-Referenz fehlt: $DATA/Serhat_Adobe_MASTER.wav" >&2
