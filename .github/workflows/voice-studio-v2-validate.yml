@@ -467,7 +467,7 @@ jobs:
           if 'audioAsset=null;' not in src or 'stagingPublished=false;' not in src:
               raise SystemExit("Text edits must invalidate stale production assets/status")
           engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
-          for marker in ("KNOWN_RULE_ALIAS_INDEX","knownRuleAliases","max-master-pls-v1","fastKnownPath"):
+          for marker in ("KNOWN_RULE_ALIAS_INDEX","knownRuleAliases","max-master-pls-v2-trusted","fastKnownPath"):
               if marker not in engine:
                   raise SystemExit("Fast-known pronunciation marker missing: "+marker)
           print("Zero-detour Content Studio workflow + fast-known pronunciation OK")
