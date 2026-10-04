@@ -295,6 +295,10 @@ var(--quiz-art,linear-gradient(180deg,#315c78 0%,#5a8f8a 48%,#ba8b5f 100%));back
 .quiz-scene[data-quiz-family="dua"] .quiz-scene-symbol{background:rgba(20,32,68,.49)}
 .quiz-scene[data-quiz-family="charity"] .quiz-scene-symbol{background:rgba(69,46,27,.49)}
 .quiz-scene[data-quiz-family="home"] .quiz-scene-symbol{background:rgba(68,49,32,.48)}
+.quiz-scene[data-quiz-family="prophets"] .quiz-scene-symbol{background:rgba(62,43,24,.50)}
+.quiz-scene[data-quiz-family="tawhid"] .quiz-scene-symbol{background:rgba(17,39,67,.51)}
+.quiz-scene[data-quiz-family="iman"] .quiz-scene-symbol{background:rgba(22,61,58,.49)}
+.quiz-scene[data-quiz-family="akhlaq"] .quiz-scene-symbol{background:rgba(49,63,38,.48)}
 #quizModal[data-quiz-band="9-10"] .quiz-scene-symbol{width:43px;height:43px;border-radius:14px;font-size:24px}
 .quiz-answer.wrong{animation:quizWrongShake .24s ease}
 @keyframes quizWrongShake{0%,100%{transform:translateX(0)}28%{transform:translateX(-4px)}58%{transform:translateX(4px)}82%{transform:translateX(-2px)}}
@@ -3391,7 +3395,7 @@ var storyQuestions={
 var kidsQuizPool=[];
 var kidsQuizLoaded=false;
 var kidsQuizArtwork={};
-var kidsQuizTopicArtwork={families:{},categoryMap:{},sceneMap:{}};
+var kidsQuizTopicArtwork={families:{},categoryMap:{},sceneMap:{},priorityCategoryMap:{},topicKeywords:{}};
 
 var kidsSurahs=[
   {id:1,label:"al-Fātiḥah",hint:"7 Āyāt"},
@@ -6125,7 +6129,9 @@ function fetchKidsQuiz(){
       kidsQuizTopicArtwork={
         families:artwork.topicFamilies||{},
         categoryMap:artwork.categoryMap||{},
-        sceneMap:artwork.sceneMap||{}
+        sceneMap:artwork.sceneMap||{},
+        priorityCategoryMap:artwork.priorityCategoryMap||{},
+        topicKeywords:artwork.topicKeywords||{}
       };
       var items=Array.isArray(data.items)?data.items:[];
       var baseItems=items.filter(function(q){
@@ -6151,10 +6157,23 @@ function quizArtworkForBand(question){
   var q=question||{};
   var scene=String(q.scene||"");
   var category=String(q.category||"");
+  var topic=String(q.topic||"");
   var sceneMap=kidsQuizTopicArtwork.sceneMap||{};
   var categoryMap=kidsQuizTopicArtwork.categoryMap||{};
+  var priorityCategoryMap=kidsQuizTopicArtwork.priorityCategoryMap||{};
+  var topicKeywords=kidsQuizTopicArtwork.topicKeywords||{};
   var families=kidsQuizTopicArtwork.families||{};
-  if(scene&&sceneMap[scene])family=String(sceneMap[scene]);
+  var topicLower=topic.toLocaleLowerCase("de-DE");
+  Object.keys(topicKeywords).some(function(name){
+    var words=Array.isArray(topicKeywords[name])?topicKeywords[name]:[];
+    var matched=words.some(function(word){
+      return topicLower.indexOf(String(word||"").toLocaleLowerCase("de-DE"))>=0;
+    });
+    if(matched&&families[name]){family=name;return true}
+    return false;
+  });
+  if(!family&&category&&priorityCategoryMap[category])family=String(priorityCategoryMap[category]);
+  if(!family&&scene&&sceneMap[scene])family=String(sceneMap[scene]);
   if(!family&&category&&categoryMap[category])family=String(categoryMap[category]);
   var row=family&&families[family]?families[family]:base;
   return {
