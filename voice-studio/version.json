@@ -833,7 +833,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "89565a44b861b9fec767ce2f6cb4d8ccb1dcaf81",
+  "releaseRef": "b8b4f4c09c0977ee14f27a2c798cdcd45818850c",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1280,8 +1280,8 @@
     "offlineManifestPackaged": true,
     "staleLocalManifestAutoRefresh": true
   },
-  "validatedCommit": "89565a44b861b9fec767ce2f6cb4d8ccb1dcaf81",
-  "validatedAt": "2026-10-04T22:51:00+02:00",
+  "validatedCommit": "b8b4f4c09c0977ee14f27a2c798cdcd45818850c",
+  "validatedAt": "2026-10-04T23:11:00+02:00",
   "validation": {
     "targetVersion": "2.9.104",
     "pronunciationAsyncPreviewQueue": true,
@@ -1755,7 +1755,7 @@
     "visitorDeployRetry": "2026-10-04T18:02:00+02:00",
     "visitorDeployReason": "voice-cloud-pwa-route-after-build-guard-repair"
   },
-  "releaseRefPolicy": "immutable 2.9.103 content-refresh commit; engine/UI/Sahaba v5 bundle aligned",
+  "releaseRefPolicy": "immutable 2.9.104 single-master Sahaba content commit; engine/UI/story master aligned",
   "knownRuleFastPath": true,
   "maxMasterPlsExactMatchesSkipUnknownReview": true,
   "directContentAudioUpload": true,
