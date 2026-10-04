@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "id": "DAR_KIDS_QUIZ_V1",
   "namespace": "dar-kids-quiz",
-  "version": 22,
+  "version": 23,
   "updatedAt": "2026-10-04",
   "separateFromAdultQuiz": true,
   "adultQuizDependency": false,
@@ -22317,7 +22317,7 @@
         "tone": "refined-knowledge"
       }
     },
-    "topicArtworkVersion": "topic-realistic-v2",
+    "topicArtworkVersion": "topic-realistic-v3",
     "topicFamilies": {
       "creation": {
         "url": "/kids/assets/quiz-scenes/topic-creation.svg?v=20261004-topic1",
@@ -22373,6 +22373,16 @@
         "url": "/kids/assets/quiz-scenes/topic-akhlaq.svg?v=20261004-topic2",
         "position": "50% 52%",
         "tone": "character-kindness"
+      },
+      "patience": {
+        "url": "/kids/assets/quiz-scenes/topic-patience.svg?v=20261004-topic3",
+        "position": "50% 50%",
+        "tone": "patience-mercy"
+      },
+      "justice": {
+        "url": "/kids/assets/quiz-scenes/topic-justice.svg?v=20261004-topic3",
+        "position": "50% 50%",
+        "tone": "justice-trust"
       }
     },
     "sceneMap": {
@@ -22477,6 +22487,37 @@
         "Dhul-Kifl",
         "Prophet Muḥammad",
         "Gefährten der Höhle"
+      ],
+      "patience": [
+        "Geduld",
+        "Ṣabr",
+        "Verzeih",
+        "Vergebung",
+        "Barmherzig",
+        "Zorn",
+        "Versöhnung",
+        "Schlechtes mit Besserem",
+        "Brüderlichkeit",
+        "Konflikt",
+        "Einheit statt Spaltung",
+        "Dem Bruder helfen",
+        "Zusammenarbeit"
+      ],
+      "justice": [
+        "Gerecht",
+        "Amānah",
+        "Wahrhaft",
+        "Maß und Gewicht",
+        "Fair messen",
+        "Zeugnis",
+        "Vertrag",
+        "Versprechen",
+        "Verpflichtung",
+        "Bestechung",
+        "Betrug",
+        "Vermögen anderer",
+        "Rechte anderer",
+        "Anvertraut"
       ]
     }
   }
