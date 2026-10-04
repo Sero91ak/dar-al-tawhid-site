@@ -1126,7 +1126,7 @@ body.is-library-reader-route .float-actions {
   --dar-lib-glass-strong:color-mix(in srgb,var(--dar-lib-base-card) 88%,transparent);
   --dar-lib-rule:color-mix(in srgb,var(--dar-lib-base-gold) 24%,var(--dar-lib-base-line));
   --dar-lib-rule-soft:color-mix(in srgb,var(--dar-lib-base-gold) 14%,var(--dar-lib-base-line));
-  --dar-lib-title:var(--premium-title,var(--dar-lib-base-gold));
+  --dar-lib-title:var(--dar-readable-accent,var(--premium-title,var(--dar-lib-base-gold)));
   --dar-lib-shadow:0 18px 42px color-mix(in srgb,var(--dar-lib-base-bg) 72%,transparent);
 }
 
@@ -2121,4 +2121,42 @@ html[data-theme="dark"]{
 .lib-detail[data-library-category] .lib-detail-copy{
   position:relative;
   z-index:2;
+}
+
+
+/* DAR_LIBRARY_CONTRAST_AUTHORITY_BRIDGE_V1224 */
+/* Loaded-before contrast authority bridge: use semantic theme colours with enough specificity. */
+html[data-theme] .lib-page[data-library-root] .lib-hero h2,
+html[data-theme] .lib-page[data-library-root] .lib-section-head h3,
+html[data-theme] .lib-page[data-library-root] .lib-portals-head h3,
+html[data-theme] .lib-detail .lib-detail-hero h2,
+html[data-theme] .lib-detail .lib-panel h3{
+  color:var(--dar-lib-title)!important;
+  -webkit-text-fill-color:var(--dar-lib-title)!important;
+}
+
+html[data-theme] .lib-page[data-library-root] :is(
+  .lib-hero-lead,.lib-card-body h4,.lib-portal-name,.lib-meta-item span
+),
+html[data-theme] .lib-detail :is(
+  .lib-detail-sub,.lib-detail-desc,.lib-meta-item span,.lib-panel p,.lib-panel li
+){
+  color:var(--dar-readable-ink,var(--dar-lib-base-text))!important;
+  -webkit-text-fill-color:var(--dar-readable-ink,var(--dar-lib-base-text))!important;
+}
+
+html[data-theme] .lib-page[data-library-root] :is(
+  .lib-hero-note,.lib-section-count,.lib-card-meta-line,.lib-card-date,.lib-portal-count
+),
+html[data-theme] .lib-detail :is(
+  .lib-detail-editor,.lib-detail-topmeta,.lib-meta-item b,.lib-actions-row-secondary .lib-btn
+){
+  color:var(--dar-readable-muted,var(--dar-lib-base-muted))!important;
+  -webkit-text-fill-color:var(--dar-readable-muted,var(--dar-lib-base-muted))!important;
+}
+
+html[data-theme] .lib-detail .lib-detail-kicker,
+html[data-theme] .lib-page[data-library-root] .lib-hero-kicker{
+  color:var(--dar-readable-accent,var(--dar-lib-base-gold))!important;
+  -webkit-text-fill-color:var(--dar-readable-accent,var(--dar-lib-base-gold))!important;
 }
