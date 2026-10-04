@@ -47,9 +47,10 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.75"
+ENGINE_VERSION="2.9.76"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
+MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
 MASTER_AUDIO_DIR=VOICE_HOME/"MasterPronunciations"
 PENDING_AUDIO_DIR=MASTER_AUDIO_DIR/"pending"
 MASTER_AUDIO_DIR.mkdir(parents=True,exist_ok=True)
@@ -3298,26 +3299,71 @@ def set_status(**updates):
     with STATUS_LOCK:
         STATUS.update(updates)
 
+def _mobile_history_records():
+    data=load_json_file(MOBILE_HISTORY_META,{"schemaVersion":1,"items":[]})
+    return list((data or {}).get("items") or [])
+
+def record_mobile_generation(path:Path,text:str,style:str,free_mode:bool=False):
+    """Lokale Verlaufsmetadaten für iPhone/iPad; Audio bleibt in VoiceStudioOutput."""
+    try:
+        p=Path(path)
+        value=" ".join(str(text or "").split())
+        title=value[:72]+("…" if len(value)>72 else "")
+        now=time.time()
+        rows=[
+            x for x in _mobile_history_records()
+            if str((x or {}).get("name") or "")!=p.name
+        ]
+        rows.insert(0,{
+            "name":p.name,
+            "title":title or "DĀR Voice Audio",
+            "text":value[:600],
+            "style":str(style or "auto"),
+            "freeMode":bool(free_mode),
+            "createdAt":now,
+        })
+        atomic_write_json(MOBILE_HISTORY_META,{
+            "schemaVersion":1,
+            "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+            "items":rows[:240],
+        })
+    except Exception as e:
+        print("[DĀR Voice] mobile history metadata warning",e,flush=True)
+
 def mobile_history_snapshot(limit:int=60):
     items=[]
     try:
+        meta={str((x or {}).get("name") or ""):dict(x or {}) for x in _mobile_history_records()}
         files=sorted(
             [p for p in OUTPUT.glob("*.wav") if p.is_file() and p.stat().st_size>44],
             key=lambda p:p.stat().st_mtime,
             reverse=True
         )
+        style_labels={
+            "auto":"Auto","narration":"Erzählung","kids_story":"Kinder-Geschichte",
+            "kids_lesson":"Kinder-Unterricht","teaching":"Unterricht","gentle":"Sanft",
+            "serious":"Ernst","question":"Frage","list":"Aufzählung","dua":"Duʿāʾ",
+        }
         for p in files[:max(1,min(120,int(limit or 60)))]:
             st=p.stat()
-            created=time.localtime(st.st_mtime)
-            label=p.stem
-            label=re.sub(r"^dar_voice_(?:reference_)?","",label)
-            label=re.sub(r"[_-]+"," ",label).strip() or "DĀR Voice Audio"
+            row=meta.get(p.name,{})
+            created_ts=float(row.get("createdAt") or st.st_mtime)
+            created=time.localtime(created_ts)
+            fallback=p.stem
+            fallback=re.sub(r"^dar_voice_(?:reference_)?","",fallback)
+            fallback=re.sub(r"[_-]+"," ",fallback).strip() or "DĀR Voice Audio"
+            style=str(row.get("style") or "auto")
             items.append({
                 "name":p.name,
-                "label":label,
+                "label":str(row.get("title") or fallback),
+                "title":str(row.get("title") or fallback),
+                "text":str(row.get("text") or ""),
+                "style":style,
+                "styleLabel":style_labels.get(style,style),
+                "freeMode":bool(row.get("freeMode")),
                 "size":int(st.st_size),
                 "sizeLabel":f"{st.st_size/1024/1024:.1f} MB" if st.st_size>=1024*1024 else f"{max(1,int(st.st_size/1024))} KB",
-                "createdAt":int(st.st_mtime),
+                "createdAt":int(created_ts),
                 "createdLabel":time.strftime("%d.%m.%Y · %H:%M",created),
             })
     except Exception as e:
@@ -8265,6 +8311,7 @@ class H(BaseHTTPRequestHandler):
                     free_mode=free_mode,
                     free_pronunciation=free_pronunciation
                 )
+                record_mobile_generation(out,text,style,free_mode)
                 b=out.read_bytes()
                 self.send_response(200)
                 self.send_header("Content-Type","audio/wav")
