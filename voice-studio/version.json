@@ -539,7 +539,11 @@
     "interactiveUnconfirmedArabicAlias": true,
     "confirmedAudioMasterNeverFlattened": true,
     "interactiveQaSinglePassForNoncriticalGerman": true,
-    "extremeFastGoal": "minimize full-file wall time while keeping first audio sub-second when warm"
+    "extremeFastGoal": "minimize full-file wall time while keeping first audio sub-second when warm",
+    "remoteCudaReady": true,
+    "remoteGatewayStreaming": true,
+    "remoteKeepsAsyncJobs": true,
+    "remoteKeepsIncrementalChunks": true
   },
   "contentStudio": {
     "enabled": true,
@@ -1668,5 +1672,33 @@
   "macVoiceStudio": {
     "autoPronunciationAnalyzeAfterPaste": true,
     "pronunciationCatalogPrefetchOnHoverTouch": true
+  },
+  "cloudVoiceApp": {
+    "enabled": true,
+    "publicEntry": "/voice/",
+    "canonicalSurface": "/voice-studio/?app=1&cloud=1",
+    "transport": "cloudflare-gateway",
+    "gateway": "https://dar-al-tawhid.de/voice-studio/api/engine",
+    "localIpRequired": false,
+    "providerNeutral": true,
+    "externalGpuHostRequired": true,
+    "upstreamAuth": "X-DAR-Voice-Token",
+    "remoteEngineDevice": "cuda",
+    "remoteEngineUsesExistingApi": true,
+    "localStudioCompatibilityPreserved": true,
+    "status": "gateway-ready-host-not-provisioned",
+    "sameOrigin": true,
+    "workerOriginHiddenFromClient": true,
+    "ownerAccessRequired": true,
+    "ownerAccessHeader": "X-DAR-Voice-Access",
+    "ownerAccessStorage": "httpOnly-cookie",
+    "upstreamTokenNeverExposedToBrowser": true,
+    "failClosedWithoutWebToken": true,
+    "ownerAccessExchange": "/voice-studio/api/access",
+    "ownerAccessSession": "HttpOnly Secure SameSite=Strict cookie",
+    "ownerAccessCookie": "DARVOICE_CLOUD",
+    "ownerAccessCookiePath": "/voice-studio/api/engine",
+    "ownerAccessHeaderFallback": "X-DAR-Voice-Access",
+    "browserDoesNotPersistAccessCode": true
   }
 }
