@@ -273,6 +273,8 @@ function isFeedAssetRequest(url) {
   return url.pathname === '/assets/premium-feed-app.js'
     || url.pathname === '/assets/focus-feed-app.js'
     || url.pathname === '/assets/html2canvas.min.js'
+    || url.pathname === '/assets/dar-global-share-v1225.js'
+    || url.pathname === '/assets/dar-global-share-v1225.css'
     || url.pathname.startsWith('/assets/posts/');
 }
 
