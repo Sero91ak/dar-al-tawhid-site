@@ -216,12 +216,12 @@ export default {
 
       // Bildbeitrag-KI dauerhaft deaktiviert: Besucher- und Test-App verwenden ausschließlich kuratierte lokale Bildpools.
       if (url.pathname === "/api/share-image/background") {
-        return jsonResponse({
+        return json({
           ok: false,
           disabled: true,
           mode: "curated-pool-only",
           error: "KI-Bildgenerierung für Bildbeiträge ist dauerhaft deaktiviert."
-        }, 410, cors);
+        }, cors, 410);
       }
 
       // DAR KI-Video-Studio (Admin only; approve = no visitor push)
