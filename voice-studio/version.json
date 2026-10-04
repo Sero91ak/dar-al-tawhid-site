@@ -1674,6 +1674,11 @@
     "localStudioCompatibilityPreserved": true,
     "status": "gateway-ready-host-not-provisioned",
     "sameOrigin": true,
-    "workerOriginHiddenFromClient": true
+    "workerOriginHiddenFromClient": true,
+    "ownerAccessRequired": true,
+    "ownerAccessHeader": "X-DAR-Voice-Access",
+    "ownerAccessStorage": "dar.voice.cloud.access.v1",
+    "upstreamTokenNeverExposedToBrowser": true,
+    "failClosedWithoutWebToken": true
   }
 }
