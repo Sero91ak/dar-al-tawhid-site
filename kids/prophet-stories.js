@@ -23,7 +23,7 @@ const DEDICATED_HERO=new Set(PROPHET_ORDER);
 function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=22"}
 function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=22":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
-let items=[],active=null,activeText="",playing=false,busy=false;
+let items=[],active=null,activeText="",playing=false,busy=false,followReader=null;
 const audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -283,6 +283,12 @@ function ensureUi(){
   audio.addEventListener("ended",()=>{playing=false;updatePlayButton();markDone(active?.id||"");if($("#psVoiceNote"))$("#psVoiceNote").textContent="Geschichte vollständig angehört."});
   audio.addEventListener("play",()=>{playing=true;updatePlayButton()});
   audio.addEventListener("pause",()=>{playing=false;updatePlayButton()});
+  followReader=window.DARKidsFollowReader?.create({
+    id:"prophet-story",audio,
+    getContent:()=>({title:active?(active.name+(active.id==="muhammad"?" ﷺ":"")):"Geschichte",text:activeText}),
+    toggleAudio,
+    disabled:()=>!audioMeta(active)?.url
+  })||null;
   return true;
 }
 function applyMode(){
@@ -295,6 +301,7 @@ function applyMode(){
 function renderActive(){
   if(!active)return;
   activeText=buildText(active);
+  followReader?.setContent({title:active.name+(active.id==="muhammad"?" ﷺ":""),text:activeText});
   const hero=$(".ps-hero");if(hero){hero.setAttribute("data-ps-id",active.id);hero.setAttribute("data-hero-copy",DEDICATED_HERO.has(active.id)?"left":"right")}
   const heroImg=$("#psHero");if(heroImg){
     heroImg.onerror=()=>{
@@ -356,7 +363,7 @@ function openStory(id){
   active=items.find(x=>x.id===id);if(!active)return;
   stopAudio();renderActive();$("#psModal").classList.remove("scrolled");$("#psModal").classList.add("open");lockPage();$("#psScroll").scrollTop=0;$("#psClose")?.focus();
 }
-function closeStory(){stopAudio();$("#psModal")?.classList.remove("open","scrolled");unlockPage();active=null}
+function closeStory(){followReader?.close();stopAudio();$("#psModal")?.classList.remove("open","scrolled");unlockPage();active=null}
 function resetAudioForActive(){
   stopAudio();
   const meta=audioMeta(active);
