@@ -67,6 +67,7 @@ jobs:
           grep -q 'gpu-4000adax1-20gb' voice-studio/cloud-gpu/provision-digitalocean.sh
           grep -q 'gpu-h100x1-base' voice-studio/cloud-gpu/provision-digitalocean.sh
           python -m py_compile voice-studio/local-engine.py
+          python -m py_compile voice-studio/cloud-gpu/benchmark.py
           grep -q 'FROM pytorch/pytorch:' voice-studio/cloud-gpu/Dockerfile
           grep -q 'gpus: all' voice-studio/cloud-gpu/docker-compose.yml
           grep -q 'reverse_proxy voice:8787' voice-studio/cloud-gpu/Caddyfile
