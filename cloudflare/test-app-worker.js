@@ -249,9 +249,28 @@ async function finalizeDarTestHomeV1193(asset) {
     html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-topics-v1242.css?v=topics-cgi-v1252"><\/head>');
   }
 
+
+  // DAR_HADITH_DIRECT_V1261: critical Hadith visual authority inline in Test HTML.
+  // This avoids any stale external stylesheet/cache path in the installed Test app.
+  if (!html.includes("darHadithCgiCriticalV1261")) {
+    const hadithCritical = '<style id="darHadithCgiCriticalV1261">' +
+      'body.is-hadith-route .hadith-hub{max-width:none!important;width:100%!important}' +
+      'body.is-hadith-route .hadith-hub>.view-head{position:relative!important;isolation:isolate!important;overflow:hidden!important;width:100vw!important;min-height:clamp(285px,58vw,380px)!important;margin:0 0 18px calc(50% - 50vw)!important;padding:34px max(20px,calc((100vw - 1180px)/2)) 30px!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;align-items:flex-start!important;border:0!important;border-radius:0 0 30px 30px!important;background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 94%,transparent) 0%,color-mix(in srgb,var(--bg) 70%,transparent) 36%,color-mix(in srgb,var(--bg) 18%,transparent) 75%,color-mix(in srgb,var(--bg) 4%,transparent) 100%),linear-gradient(180deg,color-mix(in srgb,var(--bg) 6%,transparent),transparent 43%,color-mix(in srgb,var(--bg) 35%,transparent)),url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/b6c33971-7f4e-4472-b7c8-032316f0b280/Single_standalone_wide_cinematic_historical_CGI_scene_for_an_Islamic_hadith_library_interface__set_r_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYjZkYzBjZmY3ZDAzZTM4NCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMxNDU1OX0.EVtMGOwaX7h6cNVBkJHZ4qM6DwBlEPbAD4uBaOP4_MU") 78% 48%/cover no-repeat,url(/test/assets/ilm/ilm-historical-majlis-v1234.jpg) center/cover no-repeat!important;box-shadow:0 22px 52px color-mix(in srgb,var(--bg) 68%,transparent),inset 0 -1px 0 color-mix(in srgb,var(--gold2) 24%,var(--line2))!important}' +
+      'body.is-hadith-route .hadith-hub>.view-head:before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;pointer-events:none!important;background:radial-gradient(circle at 82% 18%,color-mix(in srgb,var(--gold2) 13%,transparent),transparent 36%)!important}' +
+      'body.is-hadith-route .hadith-hub>.view-head>*{position:relative!important;z-index:2!important;width:min(660px,88%)!important}' +
+      'body.is-hadith-route .hadith-hub>.view-head h2{font-family:var(--font-display,var(--serif))!important;font-size:clamp(2.3rem,9.2vw,4.2rem)!important;line-height:.94!important;font-weight:620!important;color:var(--text)!important;text-shadow:0 3px 18px color-mix(in srgb,var(--bg) 55%,transparent)!important}' +
+      'body.is-hadith-route .hadith-hub>.main-search,body.is-hadith-route .hadith-hub>.dua-hub__label,body.is-hadith-route .hadith-hub>.dua-theme-grid{width:min(980px,calc(100% - 24px))!important;margin-left:auto!important;margin-right:auto!important}' +
+      'body.is-hadith-route .hadith-hub>.dua-theme-grid{display:flex!important;flex-direction:column!important;gap:0!important}' +
+      'body.is-hadith-route .hadith-hub>.dua-theme-grid .dua-theme-card{border:0!important;border-bottom:1px solid color-mix(in srgb,var(--gold2) 20%,var(--line2))!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:12px 2px!important;min-height:68px!important}' +
+      '@media(max-width:599px){body.is-hadith-route .hadith-hub>.view-head{min-height:300px!important;padding:30px 18px 28px!important;background-position:center,center,76% 50%,center!important}body.is-hadith-route .hadith-hub>.view-head>*{width:min(100%,91%)!important}}' +
+      '</style>\\n';
+    if (html.includes("</head>")) html = html.replace("</head>", hadithCritical + "</head>");
+    else html = html.replace("<body", hadithCritical + "<body");
+  }
+
   // DAR_ILM_HADITH_V1243
   if (!/ilm-hadith-v1243\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-hadith-v1243.css?v=hadith-cgi-v1260"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-hadith-v1243.css?v=hadith-direct-v1261"><\/head>');
   }
 
   // DAR_ILM_DUA_V1244
