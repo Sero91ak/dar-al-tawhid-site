@@ -6,6 +6,29 @@
   var SITE="dar-al-tawhid.de";
   var SHARE_IMAGE_API="https://dar-admin-publisher.sero91ak.workers.dev/api/share-image/background";
   var W=1080,H=1350;
+  var HISTORICAL_SHARE_FALLBACKS=[
+    "/kids/assets/prophet-scenes/library.webp",
+    "/kids/assets/prophet-scenes/desert.webp",
+    "/kids/assets/prophet-scenes/mountain.webp",
+    "/kids/assets/prophet-scenes/night.webp",
+    "/kids/assets/prophet-scenes/royal.webp",
+    "/kids/assets/prophet-scenes/garden.webp"
+  ];
+  function shareStableIndex(data,len){
+    var s=clean((data&&data.category)+" "+(data&&data.title)+" "+(data&&data.body)),h=2166136261;
+    for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}
+    return len?Math.abs(h>>>0)%len:0;
+  }
+  async function historicalFallbackBackground(data){
+    if(!HISTORICAL_SHARE_FALLBACKS.length)throw new Error("Kein historischer Ersatzhintergrund verfügbar.");
+    var start=shareStableIndex(data,HISTORICAL_SHARE_FALLBACKS.length);
+    var last=null;
+    for(var i=0;i<HISTORICAL_SHARE_FALLBACKS.length;i++){
+      var src=HISTORICAL_SHARE_FALLBACKS[(start+i)%HISTORICAL_SHARE_FALLBACKS.length];
+      try{return await loadImage(src+"?share-fallback=v1247")}catch(e){last=e}
+    }
+    throw last||new Error("Historischer Ersatzhintergrund konnte nicht geladen werden.");
+  }
 
   function clean(s){return String(s||"").replace(/\s+/g," ").trim()}
   function stripUiLabel(value,kind){
@@ -110,6 +133,9 @@
       var image=await loadImage(objectUrl);
       setTimeout(function(){try{URL.revokeObjectURL(objectUrl)}catch(e3){}},60000);
       return image;
+    }catch(generatorError){
+      try{console.warn("DAR share AI unavailable; historical fallback active",generatorError)}catch(e4){}
+      return historicalFallbackBackground(data);
     }finally{clearTimeout(timer)}
   }
 
