@@ -49,7 +49,18 @@ const APP_SHELL = [
   '/apple-tv/quran/tadabbur/entries-index.json',
   '/assets/quran-tadabbur-shared.js',
   '/assets/bottom-nav-global-v1075.css',
-  '/assets/site-analytics.js',\n  '/assets/dar-global-share-v1225.js',\n  '/assets/dar-global-share-v1225.css',\n  '/assets/app-store-icon-fixed.svg',\n  '/kids/assets/prophet-scenes/library.webp',\n  '/kids/assets/prophet-scenes/desert.webp',\n  '/kids/assets/prophet-scenes/mountain.webp',\n  '/kids/assets/prophet-scenes/night.webp',\n  '/kids/assets/prophet-scenes/royal.webp',\n  '/kids/assets/prophet-scenes/garden.webp',\n  '/kids/assets/prophet-scenes/water.webp',\n  '/kids/assets/prophet-scenes/ocean.webp'
+  '/assets/site-analytics.js',
+  '/assets/dar-global-share-v1225.js',
+  '/assets/dar-global-share-v1225.css',
+  '/assets/app-store-icon-fixed.svg',
+  '/kids/assets/prophet-scenes/library.webp',
+  '/kids/assets/prophet-scenes/desert.webp',
+  '/kids/assets/prophet-scenes/mountain.webp',
+  '/kids/assets/prophet-scenes/night.webp',
+  '/kids/assets/prophet-scenes/royal.webp',
+  '/kids/assets/prophet-scenes/garden.webp',
+  '/kids/assets/prophet-scenes/water.webp',
+  '/kids/assets/prophet-scenes/ocean.webp'
 ];
 
 let bypassPostCacheUntil = 0;
