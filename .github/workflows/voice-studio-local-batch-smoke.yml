@@ -518,6 +518,10 @@ jobs:
           assert visual.get("fullQuestionCatalogOwnerVoice") is True
           assert visual.get("shortQuizRoundsPreserved") is True
           assert visual.get("noNewQuestionsInThisRelease") is True
+          assert visual.get("questionGenerationPaused") is True
+          assert int(visual.get("questionGenerationCap") or 0)==650
+          assert (version.get("visualSystem") or {}).get("kidsQuizGenerationPaused") is True
+          assert int((version.get("visualSystem") or {}).get("kidsQuizGenerationCap") or 0)==650
 
           ui_markers=[
               'data-quiz-band',
@@ -561,6 +565,11 @@ jobs:
 
           items=quiz.get("items") or []
           total=len(items)
+          policy=quiz.get("policy") or {}
+          assert policy.get("generationPaused") is True, "Kids quiz generation must remain paused"
+          cap=int(policy.get("maxQuestionCount") or 0)
+          assert cap==650, f"unexpected frozen Kids quiz cap: {cap}"
+          assert total==cap, f"frozen Kids quiz catalog must stay at {cap}, got {total}"
           assert total>=50 and total%50==0, f"Kids quiz must grow in complete 50-question packs, got {total}"
           packs=total//50
           normalized_questions={}
