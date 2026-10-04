@@ -1876,5 +1876,17 @@
       "Makkah",
       "Madīnah"
     ]
+  },
+  "sahabiyyatKidsIntegration": {
+    "enabled": true,
+    "kidsManifest": "/kids/data/sahabiyyat-stories.json",
+    "women": 14,
+    "ageSlots": 42,
+    "directOwnerAudio": true,
+    "directKidsPublish": true,
+    "storyKind": "sahabiyyat",
+    "assetRoot": "/kids/assets/sahabiyyat-story-audio/",
+    "singleMasterStory": true,
+    "uiTab": "Ṣaḥābiyyāt · 14"
   }
 }
