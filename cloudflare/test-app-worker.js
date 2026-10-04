@@ -270,7 +270,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // DAR_ILM_SCHOLAR_PROFILE_V1253
   if (!/ilm-scholar-profile-v1253\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholar-profile-v1253.css?v=1250"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholar-profile-v1253.css?v=scholar-profile-cgi-v1254"><\/head>');
   }
 
   // DAR_ILM_TOPIC_DETAIL_V1254
@@ -285,7 +285,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // DAR_ILM_SCHOLAR_DETAIL_V1251
   if (!/ilm-scholar-detail-v1251\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholar-detail-v1251.css?v=1250"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholar-detail-v1251.css?v=scholar-detail-cgi-v1254"><\/head>');
   }
 
   // DAR_ILM_BOOK_DETAIL_V1252
