@@ -1200,47 +1200,98 @@ def combined_search_rules():
     return out
 
 def pronunciation_search(query:str,limit:int=10):
+    """Niedriglatenz-Suche über den bereits im RAM aufgebauten Wortindex.
+
+    Exakte/Teiltreffer brauchen kein teures SequenceMatcher über tausende Regeln.
+    Fuzzy-Vergleich läuft nur noch auf einer kleinen, plausiblen Kandidatenmenge.
+    """
     q=normalize_lookup(query)
     if not q:
         return []
-    scored=[]
-    for source,r in combined_search_rules():
+    limit=max(1,min(25,int(limit or 10)))
+    rows=_pronunciation_catalog_rows()
+    priority={"gelernt":0,"installiert":1,"master":2,"online":3}
+    ranked=[]
+    fuzzy=[]
+
+    for row in rows:
         values=[
-            str(r.get("string_to_replace","")),
-            str(r.get("canonical","")),
-            str(r.get("alias","")),
+            normalize_lookup(row.get("input","")),
+            normalize_lookup(row.get("canonical","")),
+            normalize_lookup(row.get("alias","")),
+            normalize_lookup(row.get("ttsText","")),
         ]
-        norm=[normalize_lookup(v) for v in values if v]
-        if not norm:
+        values=[v for v in values if v]
+        if not values:
             continue
-        score=max(difflib.SequenceMatcher(None,q,v).ratio() for v in norm)
-        if any(v==q for v in norm): score=1.0
-        elif any(q in v or v in q for v in norm if min(len(q),len(v))>=4): score=max(score,0.92)
-        if score<0.48:
+
+        if any(v==q for v in values):
+            score=1.0
+        elif any(v.startswith(q) or q.startswith(v) for v in values if min(len(q),len(v))>=3):
+            score=0.96
+        elif any(q in v or v in q for v in values if min(len(q),len(v))>=4):
+            score=0.92
+        else:
+            # Nur ähnliche Längen/Anfänge für den teureren Fuzzy-Pfad vormerken.
+            # Transliteration/Diakritika sind bereits durch normalize_lookup reduziert.
+            q0=q[:1]
+            plausible=[
+                v for v in values
+                if v[:1]==q0 and abs(len(v)-len(q))<=max(5,int(max(len(v),len(q))*.45))
+            ]
+            if plausible:
+                fuzzy.append((row,plausible))
             continue
-        priority={"gelernt":0,"installiert":1,"master":2,"online":3}.get(source,4)
-        scored.append((score,priority,source,r))
-    scored.sort(key=lambda x:(-x[0],x[1],-len(str(x[3].get("string_to_replace","")))))
+
+        ranked.append((
+            score,
+            priority.get(str(row.get("source") or ""),4),
+            row
+        ))
+
+    # Nur wenn exakte/Teiltreffer nicht reichen, wenige plausible Formen fuzzy prüfen.
+    if len(ranked)<limit:
+        for row,values in fuzzy[:700]:
+            score=max(difflib.SequenceMatcher(None,q,v).ratio() for v in values)
+            if score<0.48:
+                continue
+            ranked.append((
+                score,
+                priority.get(str(row.get("source") or ""),4),
+                row
+            ))
+
+    ranked.sort(key=lambda x:(
+        -float(x[0]),
+        int(x[1]),
+        -len(str(x[2].get("input") or x[2].get("canonical") or ""))
+    ))
     out=[];seen=set()
-    for score,_,source,r in scored:
-        key=(str(r.get("canonical") or r.get("string_to_replace")),str(r.get("tts_text","")))
-        if key in seen: continue
+    for score,_,row in ranked:
+        key=(
+            normalize_lookup(row.get("canonical","")),
+            str(row.get("ttsText") or ""),
+            str(row.get("ttsLanguage") or "")
+        )
+        if key in seen:
+            continue
         seen.add(key)
         out.append({
-            "source":source,
+            "source":str(row.get("source") or ""),
             "score":round(float(score),3),
-            "input":str(r.get("string_to_replace","")),
-            "canonical":str(r.get("canonical") or r.get("string_to_replace","")),
-            "alias":str(r.get("alias","")),
-            "ttsText":str(r.get("tts_text","")),
-            "ttsLanguage":str(r.get("tts_language") or ("ar" if re.search(r"[\u0600-\u06ff]",str(r.get("tts_text",""))) else "de")),
-            "ipa":str(r.get("ipa","")),
-            "category":str(r.get("category","")),
-            "audioLockKey":str(r.get("audio_lock_key","")),
-            "requiredHonorificKey":str(r.get("required_honorific_key","")),
-            "voiceLock":str(r.get("voice_lock","")),
+            "input":str(row.get("input") or ""),
+            "canonical":str(row.get("canonical") or row.get("input") or ""),
+            "alias":str(row.get("alias") or ""),
+            "ttsText":str(row.get("ttsText") or ""),
+            "ttsLanguage":str(row.get("ttsLanguage") or "de"),
+            "ipa":str(row.get("ipa") or ""),
+            "category":str(row.get("category") or ""),
+            "audioLockKey":str(row.get("audioLockKey") or ""),
+            "requiredHonorificKey":str(row.get("requiredHonorificKey") or ""),
+            "voiceLock":str(row.get("voiceLock") or ""),
         })
-        if len(out)>=max(1,min(25,int(limit))): break
+        if len(out)>=limit:
+            break
     return out
 
 def pronunciation_candidates(query:str,limit:int=12):
@@ -1371,7 +1422,9 @@ def _pronunciation_catalog_rows():
             "ttsText":tts,
             "ttsLanguage":lang if lang in ("ar","de") else "de",
             "category":str(r.get("category") or ""),
+            "ipa":str(r.get("ipa") or ""),
             "audioLockKey":lock_key,
+            "requiredHonorificKey":str(r.get("required_honorific_key") or ""),
             "voiceLock":str(r.get("voice_lock") or ""),
             "confirmed":bool(
                 str(r.get("voice_lock") or "").upper()=="MASTER"
