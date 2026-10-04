@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1093",
-  "label": "KIDS · V1.07.18",
-  "releasedAt": "2026-10-04T00:52:24.534Z",
-  "note": "Altersgerechter Hörbuchmodus: Für 4–5 Jahre werden Geschichten ausschließlich als Hörbuch dargestellt. Kein Lesetext, keine Lesen-/Mitlesen-Modi; stattdessen eigener großer Fokus-Hörbuchplayer mit Fortschritt, Pause/Weiterhören, Resume und nativer iOS-Steuerung. Ab 6–8 bleibt der intelligente Mitlese-Modus aktiv.",
+  "buildId": "kids-shell-v13-follow-sync1094",
+  "label": "KIDS · V1.07.19",
+  "releasedAt": "2026-10-04",
+  "note": "Intelligentes Mitlesen aktualisiert: Audio und Lesetext verwenden jetzt Absatz-Zeitstempel. Der aktive Abschnitt folgt der tatsächlich gesprochenen Stelle und scrollt automatisch mit. Der Workflow ist für Propheten-, Ṣaḥābah- und künftig aus dem Content Studio veröffentlichte Hörtexte vorbereitet.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1093",
+    "serviceWorkerCache": "v1094",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -81,7 +81,7 @@
     "mubashshirunProfilePanels": true,
     "mubashshirunDirectHadithLinks": true,
     "mubashshirunStoryUi": "responsive-follow-reader-v11",
-    "mubashshirunBundleVersion": 14,
+    "mubashshirunBundleVersion": 15,
     "mubashshirunDataVersion": 4,
     "mubashshirunAudioPublishPipeline": true,
     "mubashshirunFuṣḥāReview": true,
@@ -152,7 +152,7 @@
     "mubashshirunAgeAwareVisualDisclaimer": true,
     "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03",
     "mubashshirunSwipeBack": true,
-    "prophetStoriesBundleVersion": 27,
+    "prophetStoriesBundleVersion": 28,
     "storyCategoryBackgrounds": "prophets-adobe-v22+sahabah-runway-v10",
     "mubashshirunCardFocalCentering": "subject-aware-responsive-v1",
     "homeChoices": "oval-capsule-restored",
@@ -162,8 +162,8 @@
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1084",
     "storiesBottomNav": "separated-background-v1086",
-    "storyFollowReader": "v4",
-    "storyFollowReaderMode": "audiobook-resume-focus-reader-v2",
+    "storyFollowReader": "v5",
+    "storyFollowReaderMode": "timestamp-aware-auto-scroll-v3",
     "storyFollowReaderReusable": true,
     "sectionEntryHeroes": "edge-to-edge-compact-v1094",
     "sectionHeroArtworkFormat": "local-jpeg",
@@ -196,7 +196,7 @@
     "storyFollowReaderAutoOpen": true,
     "storyFollowReaderReopenButton": true,
     "storyFollowReaderZIndex": 30050,
-    "contentStudioStoryAudiobook": "v3-preschool-aware",
+    "contentStudioStoryAudiobook": "v4-exact-alignment",
     "sectionHeroCompactHeightPhone": "300–380px",
     "sectionHeroCompactHeightTablet": "390–460px",
     "storyAudioNativeIOSBridge": true,
@@ -216,7 +216,11 @@
     "storyPreschoolReadingHidden": true,
     "storyPreschoolReadAlongHidden": true,
     "storyPreschoolPlayer": "focus-audiobook",
-    "storyReadAlongMinimumAge": "6–8"
+    "storyReadAlongMinimumAge": "6–8",
+    "storyFollowReaderTimestampAware": true,
+    "storyFollowReaderForcedAlignment": "elevenlabs-forced-alignment-v1",
+    "storyFollowReaderFallback": "calibrated-weighted-timeline",
+    "storyFollowReaderAllFutureStudioStories": true
   },
-  "updatedAt": "2026-10-04T02:45:00+02:00"
+  "updatedAt": "2026-10-04"
 }
