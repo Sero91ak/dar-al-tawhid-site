@@ -2407,3 +2407,163 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-re
   -webkit-text-fill-color:#fff1c8!important;
   opacity:1!important;
 }
+
+
+/* v1222 · Frauen-Bibliothek historische Motivflächen */
+.frauen-library-card.has-visual,
+.frauen-library-area-card.has-visual{
+  isolation:isolate;
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--card) 98%,#fff 2%) 0%,
+      color-mix(in srgb,var(--card) 95%,var(--bg) 5%) 52%,
+      color-mix(in srgb,var(--bg) 90%,var(--card) 10%) 100%)!important;
+}
+
+.frauen-library-card.has-visual::after,
+.frauen-library-area-card.has-visual::after{
+  content:"";
+  position:absolute;
+  z-index:0;
+  top:0;
+  right:0;
+  bottom:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--card) 100%,transparent) 0%,
+      color-mix(in srgb,var(--card) 91%,transparent) 18%,
+      color-mix(in srgb,var(--card) 46%,transparent) 55%,
+      transparent 100%),
+    linear-gradient(180deg,rgba(4,14,13,.02),rgba(4,14,13,.18)),
+    var(--frauen-card-img);
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  filter:saturate(.78) contrast(.96) sepia(.08);
+  opacity:.80;
+  transform:scale(1.015);
+}
+
+.frauen-library-card.has-visual::after{
+  width:49%;
+}
+
+.frauen-library-area-card.has-visual::after{
+  width:45%;
+  opacity:.70;
+}
+
+.frauen-library-card.has-visual > *,
+.frauen-library-area-card.has-visual > *{
+  position:relative;
+  z-index:2;
+}
+
+.frauen-library-card.has-visual .frauen-library-card__icon,
+.frauen-library-area-card.has-visual .frauen-library-area-card__icon{
+  background:color-mix(in srgb,var(--card) 83%,transparent);
+  border-color:color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 28%,transparent);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  box-shadow:0 8px 22px rgba(6,20,18,.10);
+}
+
+.frauen-library-card.has-visual .frauen-library-card__arrow,
+.frauen-library-area-card.has-visual .frauen-library-area-card__arrow{
+  background:color-mix(in srgb,var(--card) 82%,transparent);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.frauen-library-card--generationen.has-visual::after{
+  width:57%;
+  opacity:.91;
+  background-position:center 47%;
+  filter:saturate(.72) contrast(.98) sepia(.12);
+}
+
+.frauen-library-card--generationen.has-visual{
+  border-color:color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 38%,var(--line) 62%);
+  box-shadow:
+    0 16px 38px color-mix(in srgb,#3d2814 15%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.09);
+}
+
+/* Frühgenerationen bekommen dieselbe historische Bildsprache bis in die Kapitel. */
+.frauen-library-area-card[data-value="muetter-der-glaeubigen"]::after,
+.frauen-library-area-card[data-value="sahabiyyat"]::after,
+.frauen-library-area-card[data-value="tabiiyyat"]::after,
+.frauen-library-area-card[data-value="frauen-der-salaf"]::after,
+.frauen-library-area-card[data-value="gepruefte-kurzberichte"]::after{
+  width:52%;
+  opacity:.84;
+  filter:saturate(.72) contrast(.98) sepia(.12);
+}
+
+/* Dienst/Pflege/Hilfeleistung: rauere historische Landschaft statt moderner Symbolik. */
+.frauen-library-area-card[data-value="dienst-pflege-hilfeleistung"]::after{
+  width:55%;
+  opacity:.84;
+  filter:saturate(.66) contrast(1.02) sepia(.16);
+}
+
+/* Hero der frühen Generationen übernimmt die historische Erzählwelt. */
+.frauen-library-hero--tone-generationen{
+  --frauen-hero-img:url("/kids/assets/kids-art/section-stories-v1096.jpg")!important;
+  background-position:center 46%!important;
+}
+.frauen-library-hero--tone-generationen::before{
+  background:
+    linear-gradient(90deg,rgba(22,14,8,.93) 0%,rgba(25,16,9,.80) 36%,rgba(24,15,8,.41) 66%,rgba(20,13,7,.12) 100%),
+    linear-gradient(180deg,rgba(9,6,3,.04) 0%,rgba(17,10,5,.18) 48%,rgba(18,11,6,.88) 100%)!important;
+}
+.frauen-library-hero--tone-generationen .frauen-library-hero__shade{
+  background:
+    radial-gradient(circle at 80% 26%,rgba(224,179,98,.12),transparent 28%),
+    radial-gradient(circle at 18% 84%,rgba(112,66,31,.24),transparent 34%)!important;
+}
+
+@media (max-width:760px){
+  .frauen-library-card.has-visual::after{
+    width:52%;
+    opacity:.66;
+    background-image:
+      linear-gradient(90deg,
+        color-mix(in srgb,var(--card) 100%,transparent) 0%,
+        color-mix(in srgb,var(--card) 94%,transparent) 24%,
+        color-mix(in srgb,var(--card) 58%,transparent) 60%,
+        transparent 100%),
+      linear-gradient(180deg,rgba(4,14,13,.02),rgba(4,14,13,.20)),
+      var(--frauen-card-img);
+  }
+  .frauen-library-area-card.has-visual::after{
+    width:49%;
+    opacity:.57;
+  }
+  .frauen-library-card--generationen.has-visual::after{
+    width:58%;
+    opacity:.78;
+  }
+  .frauen-library-area-card[data-value="muetter-der-glaeubigen"]::after,
+  .frauen-library-area-card[data-value="sahabiyyat"]::after,
+  .frauen-library-area-card[data-value="tabiiyyat"]::after,
+  .frauen-library-area-card[data-value="frauen-der-salaf"]::after,
+  .frauen-library-area-card[data-value="gepruefte-kurzberichte"]::after,
+  .frauen-library-area-card[data-value="dienst-pflege-hilfeleistung"]::after{
+    width:51%;
+    opacity:.66;
+  }
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .frauen-library-card.has-visual::after,
+  .frauen-library-area-card.has-visual::after{
+    transition:transform .28s ease,opacity .28s ease,filter .28s ease;
+  }
+  .frauen-library-card.has-visual:hover::after,
+  .frauen-library-area-card.has-visual:not(.is-pending):hover::after{
+    transform:scale(1.045);
+    filter:saturate(.84) contrast(1) sepia(.06);
+  }
+}
