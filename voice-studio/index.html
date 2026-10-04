@@ -1589,11 +1589,12 @@ function clearLearningPreview(){
 function renderLearningState(d={}){
   const learned=Number(d.learned||0),online=Number(d.onlineRules||0),master=Number(d.masterEntries||0);
   const prophets=Number(d.masterProphets||0),sahaba=Number(d.masterSahaba||0),sahabiyyat=Number(d.masterSahabiyyat||0);
+  const storyRefs=Number(d?.storyReferenceMemory?.count||0);
   const synced=d.onlineSyncedAt?(" · online "+String(d.onlineSyncedAt).replace("T"," ").slice(0,16)):"";
   learnedCanonicals=new Set(Array.isArray(d.learnedCanonicals)?d.learnedCanonicals.map(String):[]);
   learnedTerms=new Set(Array.isArray(d.learnedTerms)?d.learnedTerms.map(String):[]);
   confirmedAudioLocks=new Set(Array.isArray(d.confirmedAudioLocks)?d.confirmedAudioLocks.map(String):[]);
-  $("#learnState").textContent=learned+" dauerhaft gelernt · "+confirmedAudioLocks.size+" LOCKED Audio · lokal gesichert + Backup · "+master+" Master-Einträge ("+
+  $("#learnState").textContent=learned+" dauerhaft gelernt · "+confirmedAudioLocks.size+" LOCKED Audio · "+storyRefs+" Story-Referenz"+(storyRefs===1?"":"en")+" · lokal gesichert + Backup · "+master+" Master-Einträge ("+
     prophets+" Propheten · "+sahaba+" Ṣaḥābah · "+sahabiyyat+" Ṣaḥābiyyāt) · "+online+" Online-Regeln"+synced;
   if($("#text")?.value)renderAnalysis();
   renderStoryWordList();
@@ -2557,8 +2558,10 @@ async function generate({autoRerender=false}={}){
       const sec=Number(perf.render_seconds||0);
       const hits=Number(perf.segment_cache_hits||0);
       const misses=Number(perf.segment_cache_misses||0);
-      const backend=perf.backend==="mlx"?"MLX":"Fallback";
-      $("#qaSpeed").textContent=backend+" · "+(sec?sec.toFixed(1)+" s · ":"")+(hits+" Cache / "+misses+" neu");
+      const backend=perf.backend==="mlx"?"MLX":perf.backend==="reference-audio"?"Referenz-Audio":"Fallback";
+      $("#qaSpeed").textContent=perf.backend==="reference-audio"
+        ?"Referenz-Audio · sofort wiederverwendet · kein Modellstart"
+        :backend+" · "+(sec?sec.toFixed(1)+" s · ":"")+(hits+" Cache / "+misses+" neu");
       $("#qaSpeed").className="good";
     }
     setMessage("Audio fertig. Satzfluss und technische QA sind geprüft; bitte jetzt besonders die Kernbegriffe anhören und erst dann bestätigen.","good");
