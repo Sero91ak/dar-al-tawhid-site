@@ -2,6 +2,7 @@
 /**
  * Live-Verifikation mit CDN-Retries nach Deploy.
  * Voice-Cloud: öffentliche Website und native App-Shell werden getrennt geprüft.
+ * Voice-Cloud-Parität v2: zentraler Live-Paritätscheck nutzt ebenfalls die native App-Shell.
  * Nutzbar für Besucher-App, Test-App und Quellenbibliothek.
  */
 const fs = require("fs");
