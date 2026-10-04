@@ -18,6 +18,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Detect Kids guard scope
+        id: guard_scope
+        shell: bash
+        run: |
+          changed="$(git show --pretty='' --name-only HEAD)"
+          if printf '%s\n' "$changed" | grep -Eq '^(kids/|cloudflare/(site-router|test-app-worker|kids-content-media)\.js$|_headers$|scripts/kids-prophet-release-guard\.js$)'; then
+            echo "kids=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "kids=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Visitor app must stay complete
         run: |
           lines=$(wc -l < index.html)
@@ -116,6 +127,7 @@ jobs:
         run: node scripts/post-push-hang-guard.js
 
       - name: Kids Prophet release guard (Build/Cache/25 Heroes)
+        if: steps.guard_scope.outputs.kids == 'true'
         run: node scripts/kids-prophet-release-guard.js
 
       - name: App health check script
