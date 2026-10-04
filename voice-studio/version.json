@@ -1,10 +1,10 @@
 {
-  "version": "2.9.86",
-  "updatedAt": "2026-10-04T11:35:00+02:00",
-  "deployTrigger": "voice-studio-2.9.86-resilient-async-mobile-mac-first-audio-final",
+  "version": "2.9.88",
+  "updatedAt": "2026-10-04T12:49:00+02:00",
+  "deployTrigger": "voice-studio-2.9.88-first-audio-96ms-instrumented-candidate",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v56",
+  "cache": "dar-voice-studio-v58",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -190,7 +190,7 @@
     "maxMasterPlsExactVariantsPreserved": true,
     "maxMasterPlsConflictPolicy": "exact-existing-curated-rule-wins; remaining PLS spelling variants preload",
     "maxMasterPlsWordBoundaryGuard": true,
-    "appEngineVersionHandshake": "2.9.86",
+    "appEngineVersionHandshake": "2.9.88",
     "smokeTestManifestVersionDynamic": true,
     "storyReferenceMemory": true,
     "storyReferenceSeed": "story-reference-muhammad-2026-10-04.json",
@@ -1389,7 +1389,7 @@
     "design": "original-dar-mobile-ui-inspired-by-modern-mobile-voice-workflows",
     "smokeValidated": true,
     "releaseRef": "21cb6c927d1865b5a17d81c9a01aaed5cb7b310e",
-    "version": "2.9.86",
+    "version": "2.9.88",
     "pwaStartUrl": "/mobile/",
     "pairTokenStoredInHttpOnlyCookie": true,
     "pairTokenExcludedFromInstalledStartUrl": true,
@@ -1418,7 +1418,7 @@
     "progressivePlaybackHandoffToFinal": true,
     "progressivePlaybackKeepsPosition": true,
     "runtimeStyleSelectorFixed": true,
-    "validationNote": "Voice 2.9.86 final green: resilient async mobile jobs, reload recovery, incremental live audio chunks, corrected querySelectorAll bindings, pronunciation preview job reuse/prefetch, smoke/guard/health green; full validate and native Mac route green on the same Voice implementation.",
+    "validationNote": "2.9.88 candidate: first German interactive block is micro-split for faster first audible chunk while remaining long-form blocks stay coalesced; incremental chunk playback continues on iPhone/iPad and Mac.",
     "pronunciationCatalogMemoryCache": true,
     "renderStatusEndpoint": "/render-status",
     "compactRenderPolling": true,
@@ -1427,8 +1427,8 @@
     "progressivePreviewRefreshSeconds": 0,
     "firstAudioPriority": true,
     "firstAudioHeadChars": {
-      "default": 105,
-      "kidsStory": 118
+      "default": 96,
+      "kidsStory": 96
     },
     "rollingPreviewAutoContinuesAfterBufferEnd": true,
     "renderStatusPollMs": 320,
@@ -1457,7 +1457,9 @@
     "resumeGenerationAfterReload": true,
     "pronunciationCandidatePrefetch": true,
     "macPronunciationCandidatePrefetch": true,
-    "selectorRegressionGuard": true
+    "selectorRegressionGuard": true,
+    "firstAudioLatencyMetric": "render_first_audio_ms",
+    "firstAudioLatencyVisibleOnMobile": true
   },
   "mobile": {
     "enabled": true,
@@ -1536,5 +1538,14 @@
     "nativeMacAudioRoute": true,
     "interactiveVoiceGuard": true,
     "note": "Voice-specific checks passed. Current repository-wide failures are in unrelated Kids/app guards."
+  },
+  "interactiveGeneration": {
+    "asyncJobs": true,
+    "firstAudioPriority": true,
+    "firstAudioTargetChars": 96,
+    "firstAudioLatencyMetric": "render_first_audio_ms",
+    "incrementalChunks": true,
+    "chunkMode": "incremental-chunks-v1",
+    "finalMasterHandoff": true
   }
 }
