@@ -42,7 +42,7 @@ for (const file of files) {
     failures.push(r + ": selbst gezeichneter App-Store-Badge gefunden; nur offizielles Apple-Badge erlaubt");
   }
 
-  if (/App Store/i.test(code) && !/app-store-badge-de-official\.svg/.test(code)) {
+  if (/App Store/i.test(code) && !/app-store-badge-de-official\.svg/.test(code) && !/SHARE_IMAGE_API|generateFreshBackground|feedShareFreshImage/.test(code)) {
     failures.push(r + ": Bild-Share verweist auf App Store, aber nicht auf das offizielle globale Badge");
   }
 
@@ -57,8 +57,11 @@ if (!fs.existsSync(globalShare)) {
   failures.push("assets/dar-global-share-v1225.js fehlt");
 } else {
   const code = fs.readFileSync(globalShare, "utf8");
-  for (const token of ["adaptiveBodyLayout", "stripUiLabel", 'fillText("AUSSAGE"', 'fillText("QUELLE"', "app-store-badge-de-official.svg"]) {
+  for (const token of ["adaptiveBodyLayout", "stripUiLabel", 'fillText("AUSSAGE"', 'fillText("QUELLE"', "generateFreshBackground", "/api/share-image/background"]) {
     if (!code.includes(token)) failures.push("Global-Share: Pflichtstandard fehlt: " + token);
+  }
+  for (const token of ["SHARE_SCENE_MANIFEST", "GENERIC_SCENES", "SAHABA_SCENES", "sceneFor(", "Folgt für mehr Wissen aus Qurʾān & Sunnah"]) {
+    if (code.includes(token)) failures.push("Global-Share: alte Bild-/Promo-Logik darf nicht aktiv sein: " + token);
   }
 }
 
@@ -68,6 +71,11 @@ if (fs.existsSync(liveFeed) && fs.existsSync(testFeed)) {
   const live = fs.readFileSync(liveFeed, "utf8");
   const test = fs.readFileSync(testFeed, "utf8");
   if (live !== test) failures.push("Live/Test Premium-Feed-Renderer sind nicht identisch");
+  for (const [name, code] of [["Live", live], ["Test", test]]) {
+    if (!/SHARE_IMAGE_API/.test(code) || !/feedShareFreshImage\(/.test(code)) failures.push(name + "-Feed: frische KI-Bildgenerierung fehlt");
+    if (/await\s+feedShareBrandFooter\(/.test(code)) failures.push(name + "-Feed: alter Promo-Footer ist noch aktiv");
+    if (!/\.sf-scene-brand,.sf-scene-badge/.test(code)) failures.push(name + "-Feed: Social-Strip wird beim Export nicht entfernt");
+  }
 }
 
 const frauen = path.join(root, "test/assets/frauen/frauen-fiqh.js");
@@ -84,4 +92,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log("GLOBAL SHARE STANDARD: OK · adaptive Typografie, saubere Labels und offizielles App-Store-Badge geprüft.");
+console.log("GLOBAL SHARE STANDARD: OK · frische KI-Bilder, adaptive Typografie und exportbereinigte Share-Karten geprüft.");
