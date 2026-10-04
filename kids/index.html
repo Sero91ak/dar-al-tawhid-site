@@ -159,6 +159,9 @@ button{color:inherit}
 .choice.dua{background:linear-gradient(135deg,#7d89c5,#6a68a7)}
 .choice.quiz{background:linear-gradient(135deg,#d09958,#a96f45)}
 .quiz-stage{flex:1;display:flex;flex-direction:column;min-height:0;padding-top:10px}
+.quiz-age-pick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:1px 0 8px;padding:4px;border:1px solid rgba(255,255,255,.09);border-radius:18px;background:rgba(255,255,255,.035)}
+.quiz-age-pick button{min-height:38px;border:0;border-radius:14px;background:transparent;color:var(--muted);font-size:12px;font-weight:950;cursor:pointer}
+.quiz-age-pick button.active{background:rgba(226,189,114,.17);color:#ffe7ad;box-shadow:inset 0 0 0 1px rgba(226,189,114,.22)}
 .quiz-progress{display:flex;gap:6px;justify-content:center;margin:8px 0 14px}
 .quiz-progress span{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14)}
 .quiz-progress span.done{background:#58ca8c}
@@ -2997,6 +3000,11 @@ html:not([data-view="today"]) .view.active{
         <div class="top-spacer"></div>
       </div>
       <div id="quizStage" class="quiz-stage">
+        <div id="quizAgePick" class="quiz-age-pick" aria-label="Quiz-Altersstufe">
+          <button type="button" data-quiz-age="4-6">4–6</button>
+          <button type="button" data-quiz-age="7-8">7–8</button>
+          <button type="button" data-quiz-age="9-10">9–10</button>
+        </div>
         <div id="quizProgress" class="quiz-progress"></div>
         <div id="quizBody">
           <div id="quizScene" class="quiz-scene"><div id="quizSceneSymbol" class="quiz-scene-symbol"></div></div>
@@ -5736,6 +5744,36 @@ function quizSpeak(text){
     window.DARKidsOwnerVoice.play(String(text||""),{source:"kids-ui"});
   }
 }
+var kidsQuizAgeBand="";
+function defaultKidsQuizAgeBand(){
+  if(age==="4–5")return"4-6";
+  if(age==="9–10")return"9-10";
+  return"7-8";
+}
+function currentKidsQuizAgeBand(){
+  if(kidsQuizAgeBand)return kidsQuizAgeBand;
+  var saved="";
+  try{saved=String(localStorage.getItem("kids.quiz.ageBand")||"")}catch(e){}
+  kidsQuizAgeBand=["4-6","7-8","9-10"].indexOf(saved)>=0?saved:defaultKidsQuizAgeBand();
+  return kidsQuizAgeBand;
+}
+function renderKidsQuizAgePicker(){
+  var selected=currentKidsQuizAgeBand();
+  document.querySelectorAll("#quizAgePick [data-quiz-age]").forEach(function(btn){
+    btn.classList.toggle("active",btn.getAttribute("data-quiz-age")===selected);
+  });
+}
+function setKidsQuizAgeBand(value,restart){
+  value=String(value||"");
+  if(["4-6","7-8","9-10"].indexOf(value)<0)return;
+  kidsQuizAgeBand=value;
+  try{localStorage.setItem("kids.quiz.ageBand",value)}catch(e){}
+  renderKidsQuizAgePicker();
+  if(restart&&kidsQuizLoaded&&document.getElementById("quizModal").classList.contains("open"))beginQuizSession();
+}
+document.querySelectorAll("#quizAgePick [data-quiz-age]").forEach(function(btn){
+  btn.addEventListener("click",function(){setKidsQuizAgeBand(btn.getAttribute("data-quiz-age"),true)});
+});
 function isYesNoAnswers(answers){
   var labels=(answers||[]).map(function(a){return String(a.label||"").trim().toLowerCase()});
   return labels.length===2&&labels.indexOf("ja")>=0&&labels.indexOf("nein")>=0;
@@ -5747,7 +5785,7 @@ function spokenChoices(q){
 }
 function quizPrompt(q){
   if(!q)return"";
-  if(age==="4–5"&&isYesNoAnswers(q.answers))return q.question+" Ja oder Nein?";
+  if(currentKidsQuizAgeBand()==="4-6"&&isYesNoAnswers(q.answers))return q.question+" Ja oder Nein?";
   return q.question+" "+spokenChoices(q);
 }
 function storyQuestionPrompt(q){
@@ -5756,11 +5794,12 @@ function storyQuestionPrompt(q){
   return q.question+" "+spokenChoices(q);
 }
 function quizAgeRange(){
-  if(age==="4–5")return{min:4,max:5,limit:3};
-  if(age==="6–8")return{min:6,max:8,limit:4};
-  return{min:9,max:10,limit:5};
+  var band=currentKidsQuizAgeBand();
+  if(band==="4-6")return{id:"4-6",min:4,max:6,limit:3,label:"4–6 Jahre · hören & tippen"};
+  if(band==="7-8")return{id:"7-8",min:7,max:8,limit:4,label:"7–8 Jahre · geprüfte Fragen"};
+  return{id:"9-10",min:9,max:10,limit:5,label:"9–10 Jahre · geprüft & vertieft"};
 }
-var QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v2.";
+var QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v3.";
 function quizProgressDefault(){
   return {stage:"new",attempts:0,reviewPasses:0,wrong:0,lapses:0,dueAt:0,lastSeenAt:0,lastMistakeAt:0,consecutiveFirstTry:0};
 }
@@ -5848,8 +5887,9 @@ function quizBankForAge(){
   var now=Date.now();
   var pool=kidsQuizPool.filter(function(q){
     return q.verification==="approved" &&
-      q.canonicalStatus==="published" &&
-      q.canonicalReviewStatus==="approved" &&
+      q.status==="published" &&
+      q.reviewStatus==="approved" &&
+      q.ageBand===r.id &&
       Number(q.ageMin)<=r.min &&
       Number(q.ageMax)>=r.max;
   });
@@ -5866,12 +5906,14 @@ function fetchKidsQuiz(){
   return fetch("/kids/data/quiz-kids.json?v="+Date.now(),{cache:"no-store"})
     .then(function(r){if(!r.ok)throw new Error("quiz-data");return r.json()})
     .then(function(data){
+      if(!data||data.namespace!=="dar-kids-quiz"||data.adultQuizDependency!==false)throw new Error("kids-quiz-namespace");
       var items=Array.isArray(data.items)?data.items:[];
       kidsQuizPool=items.filter(function(q){
         return q &&
           q.verification==="approved" &&
-          q.canonicalStatus==="published" &&
-          q.canonicalReviewStatus==="approved";
+          q.status==="published" &&
+          q.reviewStatus==="approved" &&
+          /^kids-quiz-\d{3}$/.test(String(q.id||""));
       });
       kidsQuizLoaded=true;
       return kidsQuizPool;
@@ -5883,7 +5925,7 @@ function fetchKidsQuiz(){
 }
 function answerIcon(answer,index){
   var label=String(answer&&answer.label||"").toLowerCase();
-  if(age==="4–5"){
+  if(currentKidsQuizAgeBand()==="4-6"){
     if(label==="ja")return"✓";
     if(label==="nein")return"✕";
   }
@@ -5905,13 +5947,14 @@ function openQuiz(){
   beginQuizSession();
 }
 function beginQuizSession(){
+  renderKidsQuizAgePicker();
   currentQuiz=quizBankForAge();
   currentQuizIndex=0;
   quizCorrectCount=0;
   quizLocked=false;
   quizQuestionHadError=false;
   document.getElementById("quizModal").classList.add("open");
-  document.getElementById("quizAgeLabel").textContent=age==="4–5"?"4–5 Jahre · hören & tippen":(age==="6–8"?"6–8 Jahre · geprüfte Fragen":"9–10 Jahre · geprüft & vertieft");
+  document.getElementById("quizAgeLabel").textContent=quizAgeRange().label;
   if(!currentQuiz.length){
     document.getElementById("quizProgress").innerHTML="";
     document.getElementById("quizBody").innerHTML='<div class="quiz-finish"><div class="star"></div><h3>Für jetzt geschafft</h3><p>Keine geprüfte Wiederholung ist gerade fällig. Komm später wieder.</p></div>';
@@ -5939,7 +5982,7 @@ function renderQuizQuestion(){
     '<div id="quizScene" class="quiz-scene"><div id="quizSceneSymbol" class="quiz-scene-symbol">'+kidsIconMarkup(kidsIconName(q.scene,"star"),"scene-icon")+'</div></div>'+
     '<button id="quizListen" class="quiz-listen"> Frage noch einmal hören</button>'+
     '<div id="quizQuestion" class="quiz-question">'+q.question+'</div>'+
-    '<div id="quizHelp" class="quiz-help">'+(age==="4–5"?"":"Hör zu und tippe auf deine Antwort.")+'</div>'+
+    '<div id="quizHelp" class="quiz-help">'+(currentKidsQuizAgeBand()==="4-6"?"":"Hör zu und tippe auf deine Antwort.")+'</div>'+
     '<div id="quizAnswers" class="quiz-answers"></div>'+
     '<div id="quizFeedback" class="quiz-feedback"></div>'+
     '<div id="quizSource" class="quiz-source"></div>'+
