@@ -24,6 +24,10 @@ body{overscroll-behavior:none}.app{height:100dvh;min-height:0;max-width:980px;ma
 .iconbtn{border:0;background:transparent;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ink)}.iconbtn:active{background:var(--soft)}
 main{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0 16px 30px;scrollbar-width:none}main::-webkit-scrollbar{display:none}.screen{display:none}.screen.active{display:block}.hero{padding:20px 2px 8px}.kicker{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
 h1{font-size:31px;line-height:1.04;letter-spacing:-.045em;margin:8px 0 5px}.sub{font-size:14px;line-height:1.45;color:var(--muted)}
+.content-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:8px 0 12px}
+.content-shortcut{min-width:0;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:17px;padding:12px 10px;text-align:left}
+.content-shortcut b{display:block;font-size:13px;line-height:1.15}.content-shortcut span{display:block;margin-top:4px;color:var(--muted);font-size:10px;line-height:1.3}
+.content-shortcut:active{transform:scale(.985)}
 .editor{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 7px 22px rgba(0,0,0,.035)}
 textarea{display:block;width:100%;border:0;outline:0;resize:none;background:transparent;color:var(--ink);font-size:20px;line-height:1.45;min-height:40dvh;padding:22px 20px 12px;overflow:auto}textarea::placeholder{color:#aaa9a4}.editor-foot{padding:12px 14px 14px;border-top:1px solid rgba(0,0,0,.025)}
 .quick{display:flex;gap:8px;overflow-x:auto;padding:2px 0 11px;scrollbar-width:none}.quick::-webkit-scrollbar{display:none}.pill{white-space:nowrap;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 11px;font-size:12px;color:#4f4f4b}.pill.active{background:#111;color:#fff;border-color:#111}
@@ -58,6 +62,11 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <main>
 <section class="screen active" data-screen="create">
   <div class="hero"><div class="kicker">Serhat Voice</div><h1>Text in Stimme verwandeln</h1><div class="sub">Schreiben, Aussprache prüfen, erzeugen und direkt anhören.</div></div>
+  <div class="content-shortcuts" aria-label="Kids Content Schnellzugriff">
+    <button class="content-shortcut" type="button" data-content-kind="story"><b>Geschichten</b><span>Text → Stimme → Kids</span></button>
+    <button class="content-shortcut" type="button" data-content-kind="dua"><b>Duʿāʾ</b><span>Audio direkt zuordnen</span></button>
+    <button class="content-shortcut" type="button" data-content-kind="narration"><b>Erzählungen</b><span>Kurzer Veröffentlichungsweg</span></button>
+  </div>
   <div class="create-grid">
     <div>
       <div class="editor">
@@ -107,7 +116,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.95</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.97</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -141,6 +150,12 @@ const LOCAL_ENGINE_HOST=location.port==="8787"||location.hostname==="127.0.0.1"|
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const API_BASE=LOCAL_ENGINE_HOST?"":REMOTE_ENGINE_API;
 const apiUrl=path=>API_BASE+path;
+function contentStudioUrl(kind){
+  const k=["story","dua","narration"].includes(String(kind||""))?String(kind):"story";
+  return LOCAL_ENGINE_HOST
+    ?"/studio/?kind="+encodeURIComponent(k)
+    :"/voice-studio/?cloud=1&kind="+encodeURIComponent(k);
+}
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -172,7 +187,9 @@ async function health(){
   }catch(e){$("#dot").className="dot bad";$("#engineText").textContent=LOCAL_ENGINE_HOST?"Lokale Engine nicht erreichbar":"Cloud Engine nicht verbunden";$("#healthBadge").textContent="offline";$("#healthNote").textContent=LOCAL_ENGINE_HOST?"Lokale Engine starten.":"DĀR Voice Cloud ist noch nicht vollständig mit dem GPU-Host verbunden.";return false}
 }
 function go(name,opts={}){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="pronunciation"&&!opts.skipCatalog)loadCatalog(true);if(name==="settings")health();document.querySelector("main")?.scrollTo({top:0,behavior:"instant"})}
-$$(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));$("#refreshBtn").onclick=()=>{health();if($(".screen.active")?.dataset.screen==="history")loadHistory()};
+$(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));
+$("[data-content-kind]").forEach(b=>b.onclick=()=>{location.href=contentStudioUrl(b.dataset.contentKind)});
+$("#refreshBtn").onclick=()=>{health();if($(".screen.active")?.dataset.screen==="history")loadHistory()};
 function syncStylePills(){
   $$("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===$("#style").value));
 }
