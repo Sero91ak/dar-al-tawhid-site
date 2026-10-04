@@ -236,6 +236,7 @@
   }
   function renderLibrary(){
     ensureUi();mode="library";directQuestion=false;visibleLimit=PAGE_SIZE;updateModeButtons();
+    if(typeof window.renderKidsQuizAgePicker==="function")window.renderKidsQuizAgePicker();
     var modal=byId("quizModal"),panel=byId("quizLibraryPanel"),back=byId("quizLibraryBack");
     if(modal)modal.classList.add("quiz-library-mode");
     if(panel)panel.classList.add("show");
@@ -250,6 +251,7 @@
   function showLibrary(){renderLibrary()}
   function showPlay(){
     ensureUi();mode="play";directQuestion=false;updateModeButtons();
+    if(typeof window.renderKidsQuizAgePicker==="function")window.renderKidsQuizAgePicker();
     var modal=byId("quizModal"),panel=byId("quizLibraryPanel"),back=byId("quizLibraryBack");
     if(modal)modal.classList.remove("quiz-library-mode");
     if(panel)panel.classList.remove("show");
@@ -294,9 +296,20 @@
   function init(){
     ensureUi();
     var openBtn=byId("openQuizButton");
-    if(openBtn)openBtn.addEventListener("click",function(){setTimeout(refreshSummary,80)});
-    setTimeout(refreshSummary,400);
+    if(openBtn)openBtn.addEventListener("click",function(){setTimeout(function(){refreshSummary();if(mode==="library")renderLibrary()},80)});
+    var attempts=0;
+    (function waitForQuizData(){
+      refreshSummary();
+      if(canonicalItems().length>0)return;
+      attempts++;
+      if(attempts<24)setTimeout(waitForQuizData,250);
+    })();
   }
+  window.addEventListener("dar-kids-quiz-loaded",function(){
+    refreshSummary();
+    if(typeof window.renderKidsQuizAgePicker==="function")window.renderKidsQuizAgePicker();
+    if(mode==="library")renderLibrary();
+  });
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
   else init();
 })();
