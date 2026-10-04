@@ -1303,3 +1303,411 @@ body.is-frauen-route[data-frauen-view="list"] #appView{
     transition:none!important;
   }
 }
+
+
+/* ==========================================================================
+   FRAUEN_LIBRARY_POLISH_V1222
+   Full-bleed Hero, hellere Bildwirkung, theme-native Karten/Suche, mehr Luft.
+   ========================================================================== */
+
+body.is-frauen-route{
+  --fw-page:var(--bg,#0b1717);
+  --fw-ink:var(--ink,#f2eadc);
+  --fw-muted:var(--muted,#b8b0a3);
+  --fw-accent:var(--gold2,var(--gold,#d3ba79));
+  --fw-line:color-mix(in srgb,var(--fw-accent) 23%,transparent);
+  --fw-card:color-mix(in srgb,var(--card,#102322) 94%,transparent);
+  --fw-card-2:color-mix(in srgb,var(--bg,#081514) 92%,var(--card,#102322) 8%);
+  --fw-search:color-mix(in srgb,var(--card,#102322) 88%,transparent);
+  --fw-shadow:0 10px 28px rgba(3,15,16,.16);
+  --fw-hero-left:rgba(3,18,21,.72);
+  --fw-hero-mid:rgba(3,18,21,.44);
+  --fw-hero-right:rgba(3,18,21,.08);
+  --fw-hero-bottom:rgba(3,18,21,.56);
+}
+html[data-theme="light"] body.is-frauen-route{
+  --fw-page:#f5f1e7;
+  --fw-ink:#28221b;
+  --fw-muted:#655a4d;
+  --fw-accent:#88652f;
+  --fw-line:rgba(136,101,47,.22);
+  --fw-card:rgba(250,247,239,.94);
+  --fw-card-2:rgba(243,238,226,.88);
+  --fw-search:rgba(250,248,242,.90);
+  --fw-shadow:0 9px 24px rgba(62,49,29,.08);
+  --fw-hero-left:rgba(18,22,17,.66);
+  --fw-hero-mid:rgba(26,30,22,.38);
+  --fw-hero-right:rgba(22,25,18,.05);
+  --fw-hero-bottom:rgba(18,22,17,.46);
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-frauen-route{
+  --fw-page:#f4f6f0;
+  --fw-ink:#17211b;
+  --fw-muted:#465047;
+  --fw-accent:#496553;
+  --fw-line:rgba(73,101,83,.22);
+  --fw-card:rgba(248,250,245,.94);
+  --fw-card-2:rgba(237,242,235,.91);
+  --fw-search:rgba(247,250,245,.90);
+  --fw-shadow:0 9px 24px rgba(24,48,35,.08);
+  --fw-hero-left:rgba(10,31,22,.66);
+  --fw-hero-mid:rgba(24,54,39,.39);
+  --fw-hero-right:rgba(27,59,43,.05);
+  --fw-hero-bottom:rgba(10,31,22,.47);
+}
+html[data-theme="soft"] body.is-frauen-route{
+  --fw-page:#f2e8e2;
+  --fw-ink:#2d2026;
+  --fw-muted:#66545b;
+  --fw-accent:#835d6c;
+  --fw-line:rgba(131,93,108,.22);
+  --fw-card:rgba(249,241,237,.94);
+  --fw-card-2:rgba(239,226,222,.90);
+  --fw-search:rgba(249,242,238,.90);
+  --fw-shadow:0 9px 24px rgba(72,39,51,.08);
+  --fw-hero-left:rgba(40,17,27,.67);
+  --fw-hero-mid:rgba(77,45,58,.40);
+  --fw-hero-right:rgba(77,45,58,.05);
+  --fw-hero-bottom:rgba(40,17,27,.47);
+}
+html[data-theme="royal"] body.is-frauen-route{
+  --fw-page:#07152a;
+  --fw-ink:#f6ecd7;
+  --fw-muted:#c1b7a3;
+  --fw-accent:#e2ca86;
+  --fw-line:rgba(226,202,134,.22);
+  --fw-card:rgba(12,31,55,.90);
+  --fw-card-2:rgba(7,21,42,.94);
+  --fw-search:rgba(9,28,49,.88);
+  --fw-shadow:0 12px 30px rgba(1,8,22,.22);
+  --fw-hero-left:rgba(4,12,28,.70);
+  --fw-hero-mid:rgba(10,32,58,.42);
+  --fw-hero-right:rgba(10,32,58,.07);
+  --fw-hero-bottom:rgba(4,12,28,.55);
+}
+html[data-theme="bordeaux"] body.is-frauen-route{
+  --fw-page:#291116;
+  --fw-ink:#f3e8d9;
+  --fw-muted:#c7b5aa;
+  --fw-accent:#d8bf88;
+  --fw-line:rgba(216,191,136,.22);
+  --fw-card:rgba(52,23,29,.91);
+  --fw-card-2:rgba(41,17,22,.94);
+  --fw-search:rgba(48,21,27,.88);
+  --fw-shadow:0 12px 30px rgba(22,5,9,.22);
+  --fw-hero-left:rgba(34,9,14,.70);
+  --fw-hero-mid:rgba(76,27,36,.42);
+  --fw-hero-right:rgba(76,27,36,.07);
+  --fw-hero-bottom:rgba(34,9,14,.55);
+}
+html[data-theme="dar-al-layl"] body.is-frauen-route{
+  --fw-page:#070a08;
+  --fw-ink:#eeeae0;
+  --fw-muted:#b8bbb3;
+  --fw-accent:#ccb77f;
+  --fw-line:rgba(204,183,127,.18);
+  --fw-card:rgba(18,23,20,.92);
+  --fw-card-2:rgba(8,12,10,.95);
+  --fw-search:rgba(14,20,17,.89);
+  --fw-shadow:0 13px 32px rgba(0,0,0,.25);
+  --fw-hero-left:rgba(2,7,5,.68);
+  --fw-hero-mid:rgba(13,26,19,.41);
+  --fw-hero-right:rgba(13,26,19,.06);
+  --fw-hero-bottom:rgba(2,7,5,.53);
+}
+html[data-theme="eisgold"] body.is-frauen-route{
+  --fw-page:#f0f7fb;
+  --fw-ink:#111417;
+  --fw-muted:#465158;
+  --fw-accent:#98772d;
+  --fw-line:rgba(152,119,45,.22);
+  --fw-card:rgba(248,252,254,.95);
+  --fw-card-2:rgba(235,244,249,.91);
+  --fw-search:rgba(247,252,254,.91);
+  --fw-shadow:0 9px 24px rgba(31,54,68,.08);
+  --fw-hero-left:rgba(15,25,31,.66);
+  --fw-hero-mid:rgba(40,58,65,.39);
+  --fw-hero-right:rgba(40,58,65,.05);
+  --fw-hero-bottom:rgba(15,25,31,.46);
+}
+html[data-theme="aurora"] body.is-frauen-route{
+  --fw-page:#10251f;
+  --fw-ink:#f1ecdf;
+  --fw-muted:#c1b9aa;
+  --fw-accent:#dec98f;
+  --fw-line:rgba(222,201,143,.20);
+  --fw-card:rgba(19,48,40,.89);
+  --fw-card-2:rgba(11,34,28,.94);
+  --fw-search:rgba(16,43,35,.88);
+  --fw-shadow:0 12px 30px rgba(3,19,15,.22);
+  --fw-hero-left:rgba(5,24,19,.68);
+  --fw-hero-mid:rgba(21,61,50,.41);
+  --fw-hero-right:rgba(21,61,50,.06);
+  --fw-hero-bottom:rgba(5,24,19,.52);
+}
+
+body.is-frauen-route[data-frauen-view="hub"] .frauen-library-shell,
+body.is-frauen-route[data-frauen-view="group"] .frauen-library-shell,
+body.is-frauen-route[data-frauen-view="list"] .frauen-library-shell{
+  width:min(1180px,100%)!important;
+  max-width:1180px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  padding-bottom:calc(154px + env(safe-area-inset-bottom,0px))!important;
+  color:var(--fw-ink)!important;
+}
+
+body.is-frauen-route[data-frauen-view="hub"] .frauen-library-hero,
+body.is-frauen-route[data-frauen-view="group"] .frauen-library-hero,
+body.is-frauen-route[data-frauen-view="list"] .frauen-library-hero{
+  width:100vw!important;
+  max-width:none!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+  margin-top:0!important;
+  border-top:0!important;
+  border-left:0!important;
+  border-right:0!important;
+  border-radius:0 0 30px 30px!important;
+  box-shadow:0 16px 38px rgba(8,19,18,.10)!important;
+}
+
+body.is-frauen-route .frauen-library-hero::before{
+  background:
+    linear-gradient(90deg,var(--fw-hero-left) 0%,var(--fw-hero-mid) 45%,var(--fw-hero-right) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.015) 0%,rgba(0,0,0,.035) 52%,var(--fw-hero-bottom) 100%)!important;
+}
+body.is-frauen-route .frauen-library-hero__shade{
+  background:
+    radial-gradient(circle at 80% 24%,rgba(255,238,194,.13),transparent 32%),
+    linear-gradient(180deg,rgba(255,255,255,.025),transparent 42%)!important;
+}
+body.is-frauen-route .frauen-library-hero__content{
+  padding-left:max(24px,calc((100vw - min(1180px,100vw)) / 2 + 24px))!important;
+  padding-right:24px!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.32)!important;
+}
+body.is-frauen-route .frauen-library-hero h2{
+  color:#fff9ec!important;
+  -webkit-text-fill-color:#fff9ec!important;
+}
+body.is-frauen-route .frauen-library-hero__eyebrow{
+  color:#efd69a!important;
+  -webkit-text-fill-color:#efd69a!important;
+}
+body.is-frauen-route .frauen-library-hero__subtitle{
+  color:rgba(255,249,236,.90)!important;
+  -webkit-text-fill-color:rgba(255,249,236,.90)!important;
+}
+body.is-frauen-route .frauen-library-hero__stats span,
+body.is-frauen-route .frauen-library-back{
+  background:rgba(12,23,21,.34)!important;
+  border-color:rgba(238,215,156,.30)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+
+body.is-frauen-route .frauen-library-search-wrap,
+body.is-frauen-route .frauen-library-list-controls{
+  width:min(880px,calc(100% - 24px))!important;
+}
+body.is-frauen-route .frauen-library-search-wrap{
+  margin-top:-31px!important;
+  margin-bottom:27px!important;
+}
+body.is-frauen-route .frauen-library-search-wrap .search-input-shell,
+body.is-frauen-route .frauen-library-list-controls .search-input-shell{
+  min-height:56px!important;
+  border-radius:18px!important;
+  border:1px solid var(--fw-line)!important;
+  background:var(--fw-search)!important;
+  box-shadow:0 10px 24px rgba(4,16,15,.09),inset 0 1px 0 rgba(255,255,255,.12)!important;
+  color:var(--fw-ink)!important;
+}
+body.is-frauen-route .frauen-library-search-wrap .search-input-field,
+body.is-frauen-route .frauen-library-list-controls .search-input-field{
+  color:var(--fw-ink)!important;
+  -webkit-text-fill-color:var(--fw-ink)!important;
+  font-weight:640!important;
+}
+body.is-frauen-route .frauen-library-search-wrap .search-input-field::placeholder,
+body.is-frauen-route .frauen-library-list-controls .search-input-field::placeholder{
+  color:color-mix(in srgb,var(--fw-muted) 78%,transparent)!important;
+  -webkit-text-fill-color:color-mix(in srgb,var(--fw-muted) 78%,transparent)!important;
+}
+body.is-frauen-route .frauen-library-search-wrap .search-input-icon,
+body.is-frauen-route .frauen-library-list-controls .search-input-icon{
+  color:var(--fw-accent)!important;
+}
+
+body.is-frauen-route .frauen-library-section-head{
+  padding-left:6px;
+  padding-right:6px;
+}
+body.is-frauen-route .frauen-library-section-head span,
+body.is-frauen-route .frauen-library-card__kicker{
+  color:var(--fw-accent)!important;
+  -webkit-text-fill-color:var(--fw-accent)!important;
+}
+body.is-frauen-route .frauen-library-section-head h3,
+body.is-frauen-route .frauen-library-card__copy h3,
+body.is-frauen-route .frauen-library-area-card__copy h3{
+  color:var(--fw-ink)!important;
+  -webkit-text-fill-color:var(--fw-ink)!important;
+}
+body.is-frauen-route .frauen-library-section-head > p,
+body.is-frauen-route .frauen-library-card__desc,
+body.is-frauen-route .frauen-library-area-card__copy > p{
+  color:var(--fw-muted)!important;
+  -webkit-text-fill-color:var(--fw-muted)!important;
+}
+
+body.is-frauen-route .frauen-library-grid,
+body.is-frauen-route .frauen-library-area-grid{
+  padding-left:4px;
+  padding-right:4px;
+}
+body.is-frauen-route .frauen-library-card,
+body.is-frauen-route .frauen-library-area-card{
+  display:grid!important;
+  visibility:visible!important;
+  opacity:1!important;
+  border-color:var(--fw-line)!important;
+  background:
+    radial-gradient(circle at 93% 8%,color-mix(in srgb,var(--fw-accent) 7%,transparent),transparent 34%),
+    linear-gradient(145deg,var(--fw-card),var(--fw-card-2))!important;
+  box-shadow:var(--fw-shadow),inset 0 1px 0 rgba(255,255,255,.07)!important;
+  color:var(--fw-ink)!important;
+}
+body.is-frauen-route .frauen-library-card::before,
+body.is-frauen-route .frauen-library-area-card::before{
+  width:1px!important;
+  top:20%!important;
+  bottom:20%!important;
+  background:linear-gradient(180deg,transparent,var(--fw-accent),transparent)!important;
+  opacity:.72!important;
+}
+body.is-frauen-route .frauen-library-card__icon,
+body.is-frauen-route .frauen-library-area-card__icon{
+  border-color:color-mix(in srgb,var(--fw-accent) 20%,transparent)!important;
+  background:color-mix(in srgb,var(--fw-accent) 5%,transparent)!important;
+}
+body.is-frauen-route .frauen-library-card__nr,
+body.is-frauen-route .frauen-library-area-card__nr,
+body.is-frauen-route .frauen-library-card__meta,
+body.is-frauen-route .frauen-library-area-card__meta,
+body.is-frauen-route .frauen-library-card__arrow,
+body.is-frauen-route .frauen-library-area-card__arrow{
+  color:color-mix(in srgb,var(--fw-accent) 82%,var(--fw-muted) 18%)!important;
+  -webkit-text-fill-color:color-mix(in srgb,var(--fw-accent) 82%,var(--fw-muted) 18%)!important;
+}
+body.is-frauen-route .frauen-library-card__arrow,
+body.is-frauen-route .frauen-library-area-card__arrow{
+  border-color:color-mix(in srgb,var(--fw-accent) 24%,transparent)!important;
+  background:color-mix(in srgb,var(--fw-accent) 4%,transparent)!important;
+}
+body.is-frauen-route .frauen-library-card__meta,
+body.is-frauen-route .frauen-library-area-card__meta{
+  font-weight:680!important;
+}
+body.is-frauen-route .frauen-library-card--alltag{
+  display:grid!important;
+}
+
+body.is-frauen-route .frauen-library-list > .frauen-hint{
+  border-radius:16px!important;
+  background:color-mix(in srgb,var(--fw-accent) 4%,transparent)!important;
+  box-shadow:inset 0 0 0 1px var(--fw-line)!important;
+}
+body.is-frauen-route .frauen-library-list > .frauen-hint p{
+  color:var(--fw-muted)!important;
+}
+
+/* Helle Themes: warm/soft statt hartweiß. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"]) body.is-frauen-route
+:is(.frauen-library-card,.frauen-library-area-card,.frauen-library-search-wrap .search-input-shell,.frauen-library-list-controls .search-input-shell){
+  backdrop-filter:blur(13px) saturate(1.02)!important;
+  -webkit-backdrop-filter:blur(13px) saturate(1.02)!important;
+}
+
+/* Dunkle Themes: keine grauweißen Fremdflächen. */
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"]) body.is-frauen-route
+:is(.frauen-library-card,.frauen-library-area-card){
+  box-shadow:var(--fw-shadow),inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+
+/* Bottom-Navigation darf den letzten Wissensbereich nicht überdecken. */
+body.is-frauen-route[data-frauen-view="hub"] .frauen-library-grid,
+body.is-frauen-route[data-frauen-view="group"] .frauen-library-area-grid,
+body.is-frauen-route[data-frauen-view="list"] .frauen-post-list{
+  margin-bottom:18px!important;
+}
+
+@media (max-width:760px){
+  body.is-frauen-route[data-frauen-view="hub"] .frauen-library-hero,
+  body.is-frauen-route[data-frauen-view="group"] .frauen-library-hero,
+  body.is-frauen-route[data-frauen-view="list"] .frauen-library-hero{
+    min-height:342px!important;
+    border-radius:0 0 27px 27px!important;
+    background-position:center 45%!important;
+  }
+  body.is-frauen-route[data-frauen-view="group"] .frauen-library-hero,
+  body.is-frauen-route[data-frauen-view="list"] .frauen-library-hero{
+    min-height:292px!important;
+  }
+  body.is-frauen-route .frauen-library-hero::before{
+    background:
+      linear-gradient(90deg,var(--fw-hero-left) 0%,var(--fw-hero-mid) 53%,var(--fw-hero-right) 100%),
+      linear-gradient(180deg,rgba(0,0,0,.01) 0%,rgba(0,0,0,.025) 48%,var(--fw-hero-bottom) 100%)!important;
+  }
+  body.is-frauen-route .frauen-library-hero__content{
+    width:min(92%,650px)!important;
+    padding-left:max(20px,env(safe-area-inset-left,0px))!important;
+    padding-right:max(20px,env(safe-area-inset-right,0px))!important;
+    padding-bottom:30px!important;
+  }
+  body.is-frauen-route .frauen-library-search-wrap{
+    width:calc(100% - 20px)!important;
+    margin-top:-28px!important;
+  }
+  body.is-frauen-route .frauen-library-list-controls{
+    width:calc(100% - 20px)!important;
+    margin-top:-30px!important;
+  }
+  body.is-frauen-route .frauen-library-grid,
+  body.is-frauen-route .frauen-library-area-grid{
+    padding-left:2px!important;
+    padding-right:2px!important;
+    gap:12px!important;
+  }
+  body.is-frauen-route .frauen-library-card{
+    min-height:142px!important;
+    border-radius:20px!important;
+    padding:16px 14px!important;
+  }
+  body.is-frauen-route .frauen-library-area-card{
+    border-radius:18px!important;
+  }
+  body.is-frauen-route .frauen-library-card__copy h3{
+    font-size:19px!important;
+    line-height:1.18!important;
+  }
+  body.is-frauen-route .frauen-library-card__desc{
+    font-size:12px!important;
+    line-height:1.46!important;
+  }
+}
+
+@media (max-width:420px){
+  body.is-frauen-route .frauen-library-card{
+    grid-template-columns:28px 46px minmax(0,1fr) 23px!important;
+    gap:9px!important;
+    padding:14px 11px!important;
+  }
+  body.is-frauen-route .frauen-library-card__copy h3{
+    font-size:18px!important;
+  }
+  body.is-frauen-route .frauen-library-card__kicker{
+    font-size:8.8px!important;
+    letter-spacing:.12em!important;
+  }
+}
