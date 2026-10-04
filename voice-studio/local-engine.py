@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.76"
+ENGINE_VERSION="2.9.77"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -66,6 +66,17 @@ ALPHABET_BATCH_STATE_FILE=ALPHABET_EXPORT_HOME/"batch-state.json"
 ALPHABET_PUBLISH_REPO=VOICE_HOME/"KidsAppPublishRepo"
 ALPHABET_GENERATION_PROFILE="fusha-strict-v2"
 QUIZ_MASTER_HOME=VOICE_HOME/"QuizMasters"
+KIDS_OWNER_VOICE_MASTER_HOME=VOICE_HOME/"KidsOwnerVoiceMasters"
+KIDS_OWNER_VOICE_EXPORT_HOME=VOICE_HOME/"KidsOwnerVoiceExport"
+KIDS_OWNER_VOICE_PUBLISH_REPO=VOICE_HOME/"KidsOwnerVoicePublishRepo"
+KIDS_OWNER_VOICE_SYNC_LOCK=threading.Lock()
+KIDS_OWNER_VOICE_STATE_LOCK=threading.Lock()
+KIDS_OWNER_VOICE_STATE={
+    "running":False,"phase":"idle","progress":0,"completed":0,"total":0,
+    "current":"","error":"","generated":0,"missing":0,
+    "repoPublished":False,"repoPublishError":"","repoPublishMessage":"",
+    "startedAt":"","finishedAt":""
+}
 USER_OVERRIDES_FILE=LEARNING_HOME/"user-overrides.json"
 USER_OVERRIDES_BACKUP_DIR=LEARNING_HOME/"backups"
 USER_OVERRIDES_BACKUP=USER_OVERRIDES_BACKUP_DIR/"user-overrides.latest.json"
@@ -88,6 +99,8 @@ LEARNING_PREVIEW_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 ALPHABET_MASTER_HOME.mkdir(parents=True,exist_ok=True)
 ALPHABET_EXPORT_HOME.mkdir(parents=True,exist_ok=True)
 QUIZ_MASTER_HOME.mkdir(parents=True,exist_ok=True)
+KIDS_OWNER_VOICE_MASTER_HOME.mkdir(parents=True,exist_ok=True)
+KIDS_OWNER_VOICE_EXPORT_HOME.mkdir(parents=True,exist_ok=True)
 RENDER_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 CONTEXT_BRIDGE_CACHE_DIR.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_URL=os.environ.get(
@@ -280,6 +293,66 @@ def load_quiz_manifest():
         "quiz-kids.json",
         "kids/data/quiz-kids.json",
         lambda d:isinstance(d,dict) and len(d.get("items") or [])>0,
+    )
+
+def load_fresh_kids_repo_json(local_name:str,repo_path:str,validator):
+    """Lädt Kids-Inhalte frisch von main; bei Netzfehler bleibt die installierte Kopie nutzbar."""
+    url="https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/"+repo_path+"?ref=main"
+    try:
+        req=urllib.request.Request(
+            url,
+            headers={
+                "Accept":"application/vnd.github.raw+json",
+                "User-Agent":"DAR-Voice-Studio-Kids-Owner-Voice-Sync/1",
+                "Cache-Control":"no-cache",
+            },
+        )
+        with urllib.request.urlopen(req,timeout=25) as response:
+            raw=response.read()
+        try:
+            remote=json.loads(raw.decode("utf-8"))
+        except Exception:
+            remote=None
+        if isinstance(remote,dict) and isinstance(remote.get("content"),str):
+            decoded=base64.b64decode(re.sub(r"\s+","",remote["content"]))
+            remote=json.loads(decoded.decode("utf-8"))
+        elif not isinstance(remote,dict):
+            remote=json.loads(raw.decode("utf-8"))
+        if validator(remote):
+            atomic_write_json(APP_HOME/local_name,remote)
+            return remote
+    except Exception as e:
+        print("[DĀR Voice] Kids-Voice-Quelle konnte nicht frisch geladen werden:",repo_path,e,flush=True)
+    return load_kids_repo_json(local_name,repo_path,validator)
+
+def load_owner_voice_manifest_fresh():
+    return load_fresh_kids_repo_json(
+        "owner-voice-audio.json","kids/data/owner-voice-audio.json",
+        lambda d:isinstance(d,dict) and isinstance(d.get("entries"),dict),
+    )
+
+def load_dua_manifest_fresh():
+    return load_fresh_kids_repo_json(
+        "dua-kids.json","kids/data/dua-kids.json",
+        lambda d:isinstance(d,dict) and isinstance(d.get("items"),list),
+    )
+
+def load_authentic_stories_fresh():
+    return load_fresh_kids_repo_json(
+        "stories-authentic.json","kids/data/stories-authentic.json",
+        lambda d:isinstance(d,dict) and isinstance(d.get("items"),list),
+    )
+
+def load_short_stories_voice_fresh():
+    return load_fresh_kids_repo_json(
+        "short-stories-voice.json","kids/data/short-stories-voice.json",
+        lambda d:isinstance(d,dict) and isinstance(d.get("items"),list),
+    )
+
+def load_verified_content_fresh():
+    return load_fresh_kids_repo_json(
+        "verified-content.json","kids/data/verified-content.json",
+        lambda d:isinstance(d,dict) and any(isinstance(d.get(k),list) for k in ("duas","hadithLessons","earlyLessons")),
     )
 
 def normalize_lookup(value:str):
@@ -2721,6 +2794,369 @@ def _build_quiz_owner_voice_pack(quiz_data,build_root:Path,build_id:str,start_in
     }
     atomic_write_json(build_root/"kids/data/quiz-audio.json",manifest)
     return manifest
+
+
+def _kids_owner_voice_snapshot():
+    with KIDS_OWNER_VOICE_STATE_LOCK:
+        return dict(KIDS_OWNER_VOICE_STATE)
+
+def _set_kids_owner_voice_state(**updates):
+    with KIDS_OWNER_VOICE_STATE_LOCK:
+        KIDS_OWNER_VOICE_STATE.update(updates)
+        return dict(KIDS_OWNER_VOICE_STATE)
+
+def _kids_owner_voice_key(value):
+    return re.sub(r"\s+"," ",str(value or "")).strip()
+
+def _kids_owner_voice_add(rows,value,mode,scope,source_id=""):
+    original=str(value or "").strip()
+    key=_kids_owner_voice_key(original)
+    if not key:
+        return
+    row=rows.get(key)
+    if row is None:
+        rows[key]={
+            "text":original,
+            "key":key,
+            "mode":str(mode or "kids_lesson"),
+            "scopes":[str(scope or "kids")],
+            "sourceIds":[str(source_id)] if source_id else [],
+        }
+        return
+    if scope and str(scope) not in row["scopes"]:
+        row["scopes"].append(str(scope))
+    if source_id and str(source_id) not in row["sourceIds"]:
+        row["sourceIds"].append(str(source_id))
+    if row.get("mode")!="kids_story" and str(mode)=="kids_story":
+        row["mode"]="kids_story"
+        row["text"]=original
+
+def _kids_owner_voice_add_question(rows,q,age_key,scope,source_id):
+    if not isinstance(q,dict):
+        return
+    question=str(q.get("question") or "").strip()
+    answers=list(q.get("answers") or [])
+    labels=[str((a or {}).get("label") or "").strip() for a in answers]
+    labels=[x for x in labels if x]
+    if question:
+        lower=[x.casefold() for x in labels]
+        if str(age_key)=="4–5" and len(lower)==2 and "ja" in lower and "nein" in lower:
+            prompt=(question+" Ja oder Nein?").strip()
+        else:
+            choices=" ".join(f"Antwort {i+1}: {label}." for i,label in enumerate(labels))
+            prompt=(question+" "+choices).strip()
+        _kids_owner_voice_add(rows,prompt,"kids_lesson",scope,source_id)
+    _kids_owner_voice_add(rows,q.get("success"),"kids_lesson",scope,source_id)
+    _kids_owner_voice_add(rows,q.get("retry"),"kids_lesson",scope,source_id)
+
+def _kids_owner_voice_rows(quiz_data,dua_data,story_data,short_story_data,verified_data):
+    rows={}
+    for value in _quiz_voice_texts(quiz_data):
+        _kids_owner_voice_add(rows,value,"kids_lesson","quiz","quiz")
+    _kids_owner_voice_add(rows,"Richtig. Sehr gut.","kids_lesson","feedback","shared")
+    _kids_owner_voice_add(rows,"Noch nicht. Hör die Erklärung noch einmal.","kids_lesson","feedback","shared")
+
+    for item in (dua_data.get("items") or []):
+        if str(item.get("verification") or "")!="verified":
+            continue
+        item_id=str(item.get("id") or "")
+        explanation=(str(item.get("childPrompt") or "").strip()+" "+str(item.get("meaning") or "").strip()).strip()
+        _kids_owner_voice_add(rows,explanation,"dua","dua",item_id)
+        q=item.get("quiz") or {}
+        if isinstance(q,dict):
+            # Heute wird die Erklärung automatisch vorgelesen; die Frage liegt
+            # ebenfalls im Pack, damit künftige UI-Schritte keine neue Pipeline brauchen.
+            for age_key in ("4–5","6–8","9–10"):
+                _kids_owner_voice_add_question(rows,q,age_key,"dua-quiz",item_id)
+
+    for source,scope in ((short_story_data,"short-story"),(story_data,"authentic-story")):
+        for item in (source.get("items") or []):
+            if scope=="authentic-story" and str(item.get("verification") or "")!="approved":
+                continue
+            item_id=str(item.get("id") or "")
+            _kids_owner_voice_add(rows,item.get("text"),"kids_story",scope,item_id)
+            bank=item.get("question") or {}
+            if isinstance(bank,dict):
+                for age_key,q in bank.items():
+                    _kids_owner_voice_add_question(rows,q,age_key,scope+"-quiz",item_id)
+
+    for group in ("duas","hadithLessons","earlyLessons"):
+        for item in (verified_data.get(group) or []):
+            if str(item.get("verificationStatus") or "")!="verified":
+                continue
+            item_id=str(item.get("id") or item.get("canonicalId") or "")
+            expl=str(item.get("childExplanation") or "").strip()
+            if expl:
+                _kids_owner_voice_add(rows,expl,"kids_lesson","knowledge",item_id)
+                person=str(item.get("person") or "").strip()
+                if person:
+                    _kids_owner_voice_add(rows,expl+". "+person+".","kids_lesson","knowledge",item_id)
+
+    return list(rows.values())
+
+def _generate_kids_owner_voice_master(text_value:str,mode:str):
+    original=str(text_value or "").strip()
+    key=_kids_owner_voice_key(original)
+    if not key:
+        raise RuntimeError("Kids-Voice-Text ist leer.")
+    digest=hashlib.sha1((str(mode)+"\0"+key).encode("utf-8")).hexdigest()[:24]
+    master=KIDS_OWNER_VOICE_MASTER_HOME/(digest+".wav")
+    if master.exists() and master.stat().st_size>1024:
+        try:
+            wav=load_locked_wav(master,24000)
+            metrics=audio_quality_metrics(wav,24000,key,"de",str(mode or "kids_lesson"))
+            hard={"empty_audio","non_finite","near_silence","low_peak","clipping"}
+            if not any(x in hard for x in (metrics.get("issues") or [])):
+                metrics["kids_owner_master_cache"]="hit"
+                return master,metrics
+        except Exception:
+            pass
+
+    while LEARNING_PREVIEW_WAITING.is_set() or MANUAL_RENDER_WAITING.is_set() or RENDER_LOCK.locked():
+        _set_kids_owner_voice_state(current="Interaktive Stimme hat Vorrang · Kids-Voice-Sync wartet …")
+        time.sleep(0.08)
+
+    generated=generate(
+        original,"",str(mode or "kids_lesson"),
+        free_mode=True,free_pronunciation=True
+    )
+    tmp=master.with_suffix(".tmp.wav")
+    shutil.copy2(generated,tmp)
+    os.replace(tmp,master)
+    wav=load_locked_wav(master,24000)
+    metrics=audio_quality_metrics(wav,24000,key,"de",str(mode or "kids_lesson"))
+    hard={"empty_audio","non_finite","near_silence","low_peak","clipping"}
+    found=[x for x in (metrics.get("issues") or []) if x in hard]
+    if found:
+        master.unlink(missing_ok=True)
+        raise RuntimeError("Kids-Voice-Master-QA fehlgeschlagen: "+", ".join(found))
+    metrics["kids_owner_master_cache"]="write"
+    return master,metrics
+
+def _prepare_kids_owner_voice_publish(export_ready:Path):
+    git=shutil.which("git")
+    if not git:
+        return False,"git ist auf diesem Mac nicht verfügbar."
+    repo=KIDS_OWNER_VOICE_PUBLISH_REPO
+    env=dict(os.environ)
+    env["GIT_TERMINAL_PROMPT"]="0"
+
+    def run(args,timeout=180):
+        return subprocess.run(args,capture_output=True,text=True,env=env,timeout=timeout)
+
+    try:
+        if not (repo/".git").exists():
+            if repo.exists():
+                shutil.rmtree(repo)
+            p=run([git,"clone","--depth","1","https://github.com/Sero91ak/dar-al-tawhid-site.git",str(repo)],300)
+            if p.returncode!=0:
+                return False,"Repository konnte nicht vorbereitet werden: "+(p.stderr or p.stdout)[-600:]
+        else:
+            p=run([git,"-C",str(repo),"fetch","origin","main"],180)
+            if p.returncode!=0:
+                return False,"Repository-Update fehlgeschlagen: "+(p.stderr or p.stdout)[-600:]
+            p=run([git,"-C",str(repo),"reset","--hard","origin/main"],60)
+            if p.returncode!=0:
+                return False,"Repository konnte nicht auf main gesetzt werden."
+
+        src_manifest=export_ready/"kids/data/owner-voice-audio.json"
+        dst_manifest=repo/"kids/data/owner-voice-audio.json"
+        dst_manifest.parent.mkdir(parents=True,exist_ok=True)
+        shutil.copy2(src_manifest,dst_manifest)
+
+        src_audio=export_ready/"kids/assets/kids-owner-voice"
+        dst_audio=repo/"kids/assets/kids-owner-voice"
+        dst_audio.mkdir(parents=True,exist_ok=True)
+        if src_audio.exists():
+            for src in src_audio.glob("*.m4a"):
+                shutil.copy2(src,dst_audio/src.name)
+
+        p=run([git,"-C",str(repo),"add","kids/data/owner-voice-audio.json","kids/assets/kids-owner-voice"],60)
+        if p.returncode!=0:
+            return False,"Git staging fehlgeschlagen: "+(p.stderr or p.stdout)[-500:]
+        diff=run([git,"-C",str(repo),"diff","--cached","--quiet"],30)
+        if diff.returncode==0:
+            return True,"Kids-Owner-Voice ist bereits aktuell."
+
+        run([git,"-C",str(repo),"config","user.name","Serhat Abu Malik"],20)
+        run([git,"-C",str(repo),"config","user.email","73606501+Sero91ak@users.noreply.github.com"],20)
+        p=run([git,"-C",str(repo),"commit","-m","Kids: sync local Serhat owner voice content"],120)
+        if p.returncode!=0:
+            return False,"Git commit fehlgeschlagen: "+(p.stderr or p.stdout)[-600:]
+
+        gh=shutil.which("gh")
+        if gh:
+            auth=run([gh,"auth","status"],30)
+            if auth.returncode==0:
+                run([gh,"auth","setup-git"],30)
+
+        last_push=""
+        for attempt in range(1,4):
+            fetch=run([git,"-C",str(repo),"fetch","origin","main"],180)
+            if fetch.returncode!=0:
+                last_push=(fetch.stderr or fetch.stdout)[-700:]
+            else:
+                rebase=run([git,"-C",str(repo),"rebase","origin/main"],180)
+                if rebase.returncode!=0:
+                    run([git,"-C",str(repo),"rebase","--abort"],30)
+                    return False,"Kids-Voice-Paket konnte nicht konfliktfrei auf main gesetzt werden: "+(rebase.stderr or rebase.stdout)[-700:]
+                push=run([git,"-C",str(repo),"push","origin","HEAD:main"],300)
+                if push.returncode==0:
+                    return True,"Kids-Owner-Voice wurde nach GitHub main übertragen."
+                last_push=(push.stderr or push.stdout)[-700:]
+                low=last_push.lower()
+                if not any(code in low for code in ("500","502","503","504","internal server error")):
+                    break
+            if attempt<3:
+                time.sleep(attempt*3)
+        return False,"Kids-Voice-Paket ist lokal fertig; GitHub-Push fehlgeschlagen: "+last_push
+    except Exception as e:
+        return False,str(e)
+
+def build_kids_owner_voice_sync():
+    if not KIDS_OWNER_VOICE_SYNC_LOCK.acquire(blocking=False):
+        return _kids_owner_voice_snapshot()
+    try:
+        started=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        _set_kids_owner_voice_state(
+            running=True,phase="scan",progress=1,completed=0,total=0,current="Kids-Inhalte werden auf neue Voice-Texte geprüft …",
+            error="",generated=0,missing=0,repoPublished=False,repoPublishError="",repoPublishMessage="",
+            startedAt=started,finishedAt=""
+        )
+
+        quiz_data=load_fresh_kids_repo_json(
+            "quiz-kids.json","kids/data/quiz-kids.json",
+            lambda d:isinstance(d,dict) and isinstance(d.get("items"),list) and len(d.get("items") or [])>0,
+        )
+        dua_data=load_dua_manifest_fresh()
+        story_data=load_authentic_stories_fresh()
+        short_story_data=load_short_stories_voice_fresh()
+        verified_data=load_verified_content_fresh()
+        manifest=load_owner_voice_manifest_fresh()
+        entries=dict(manifest.get("entries") or {})
+
+        rows=_kids_owner_voice_rows(quiz_data,dua_data,story_data,short_story_data,verified_data)
+        missing=[row for row in rows if not (entries.get(row["key"]) or {}).get("url")]
+        _set_kids_owner_voice_state(total=len(rows),missing=len(missing),current=f"{len(rows)} Sprechtexte geprüft · {len(missing)} neu")
+
+        if not missing:
+            finished=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+            return _set_kids_owner_voice_state(
+                running=False,phase="complete",progress=100,completed=len(rows),total=len(rows),
+                current="Kids-Owner-Voice ist vollständig aktuell.",error="",generated=0,missing=0,
+                startedAt=started,finishedAt=finished
+            )
+
+        build_id="serhat-kids-"+time.strftime("%Y%m%d-%H%M%S")
+        build_root=KIDS_OWNER_VOICE_EXPORT_HOME/(".build-"+uuid.uuid4().hex[:10])
+        ready=KIDS_OWNER_VOICE_EXPORT_HOME/"ready"
+        if build_root.exists():
+            shutil.rmtree(build_root)
+        (build_root/"kids/assets/kids-owner-voice").mkdir(parents=True,exist_ok=True)
+        (build_root/"kids/data").mkdir(parents=True,exist_ok=True)
+
+        generated_count=0
+        for index,row in enumerate(missing,1):
+            pct=3+int((index-1)/max(1,len(missing))*90)
+            _set_kids_owner_voice_state(
+                phase="generate",progress=min(93,pct),completed=index-1,
+                current=f"Kids-Stimme {index}/{len(missing)} · {row['key'][:74]}"
+            )
+            master,metrics=_generate_kids_owner_voice_master(row["text"],row["mode"])
+            digest=hashlib.sha1(row["key"].encode("utf-8")).hexdigest()[:20]
+            asset=build_root/"kids/assets/kids-owner-voice"/(digest+".m4a")
+            _encode_kids_m4a(master,asset)
+            entries[row["key"]]={
+                "url":f"/kids/assets/kids-owner-voice/{asset.name}?v={build_id}",
+                "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
+                "durationSeconds":round(_audio_duration_seconds(asset),3),
+                "voiceProfileId":"serhat-owner-voice-2026",
+                "speaker":"Serhat Abu Malik",
+                "engine":"local-serhat-engine",
+                "sourceVoice":"authorized-owner-voice",
+                "sourceType":"local-owner-generated",
+                "mode":row["mode"],
+                "scopes":row["scopes"],
+                "sourceIds":row["sourceIds"],
+                "qaBy":"local-serhat-engine-auto-qa",
+                "qaMetrics":metrics,
+            }
+            generated_count+=1
+            _set_kids_owner_voice_state(generated=generated_count,completed=index)
+
+        output={
+            "schemaVersion":1,
+            "id":"KIDS_OWNER_VOICE_V1",
+            "buildId":build_id,
+            "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+            "voiceProfileId":"serhat-owner-voice-2026",
+            "speaker":"Serhat Abu Malik",
+            "engine":"local-serhat-engine",
+            "provider":"self-produced",
+            "systemTtsFallbackAllowed":False,
+            "syntheticQuranRecitationAllowed":False,
+            "pronunciationLibrary":"local-master-plus-user-confirmed-overrides",
+            "autoDiscovery":True,
+            "autoDiscoverySources":[
+                "kids/data/quiz-kids.json","kids/data/dua-kids.json",
+                "kids/data/stories-authentic.json","kids/data/short-stories-voice.json",
+                "kids/data/verified-content.json"
+            ],
+            "entries":entries,
+            "counts":{
+                "requiredTexts":len(rows),
+                "generatedThisRun":generated_count,
+                "totalEntries":len(entries)
+            }
+        }
+        atomic_write_json(build_root/"kids/data/owner-voice-audio.json",output)
+
+        if ready.exists():
+            shutil.rmtree(ready)
+        os.replace(build_root,ready)
+        _set_kids_owner_voice_state(
+            phase="publishing",progress=96,current="Fertige M4A-Dateien werden in die Kids-App übernommen …"
+        )
+        published,message=_prepare_kids_owner_voice_publish(ready)
+        finished=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        return _set_kids_owner_voice_state(
+            running=False,phase="complete" if published else "publish-error",
+            progress=100,completed=len(rows),total=len(rows),current="Fertig" if published else "Audio fertig · Veröffentlichung prüfen",
+            error="",generated=generated_count,missing=0,repoPublished=bool(published),
+            repoPublishError="" if published else message,repoPublishMessage=message,
+            startedAt=started,finishedAt=finished
+        )
+    except Exception as e:
+        finished=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        return _set_kids_owner_voice_state(
+            running=False,phase="error",error=str(e),current="Kids-Voice-Sync abgebrochen",
+            finishedAt=finished
+        )
+    finally:
+        KIDS_OWNER_VOICE_SYNC_LOCK.release()
+
+def start_kids_owner_voice_sync():
+    state=_kids_owner_voice_snapshot()
+    if state.get("running"):
+        return state
+    thread=threading.Thread(
+        target=build_kids_owner_voice_sync,daemon=True,name="dar-kids-owner-voice-sync"
+    )
+    thread.start()
+    time.sleep(0.04)
+    return _kids_owner_voice_snapshot()
+
+def _kids_owner_voice_auto_loop():
+    # Kein alter Vollbatch: nur fehlende Kids-Sprechtexte. Interaktive Erzeugung
+    # bleibt durch die Wait-Guards vor jedem neuen Master vorrangig.
+    time.sleep(12)
+    while True:
+        try:
+            if not _kids_owner_voice_snapshot().get("running"):
+                start_kids_owner_voice_sync()
+        except Exception as e:
+            print("[DĀR Voice] automatischer Kids-Voice-Sync:",e,flush=True)
+        time.sleep(1800)
 
 def _prepare_publish_repo(export_ready:Path):
     git=shutil.which("git")
@@ -7885,7 +8321,9 @@ class H(BaseHTTPRequestHandler):
             self.send_json(200,{"ok":True,**learning_state()})
         elif p=="/alphabet/state":
             self.send_json(200,{"ok":True,**alphabet_master_state()})
-        elif p=="/alphabet/batch-state":
+        elif p=="/kids-voice/sync-state":
+            return self.send_json(200,{"ok":True,**_kids_owner_voice_snapshot()})
+        if p=="/alphabet/batch-state":
             self.send_json(200,{"ok":True,**_alphabet_batch_snapshot()})
         elif p=="/prophet-stories/batch-state":
             self.send_json(200,{"ok":True,**_prophet_batch_snapshot()})
@@ -8211,6 +8649,13 @@ class H(BaseHTTPRequestHandler):
             except Exception as e:
                 return self.send_json(400,{"ok":False,"error":str(e),"status":get_status()})
 
+        if p=="/kids-voice/sync-start":
+            try:
+                state=start_kids_owner_voice_sync()
+                return self.send_json(202,{"ok":True,**state})
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e),**_kids_owner_voice_snapshot()})
+
         if p=="/alphabet/batch-start":
             try:
                 state=start_full_local_kids_voice_pack()
@@ -8438,6 +8883,7 @@ def serve_single_instance():
         # Modell und Online-Wortschatz erst nach erfolgreichem exklusivem Bind vorladen.
         threading.Thread(target=warm_model,daemon=True).start()
         threading.Thread(target=refresh_online_library_if_stale,daemon=True).start()
+        threading.Thread(target=_kids_owner_voice_auto_loop,daemon=True,name="dar-kids-owner-voice-auto").start()
         # 2.9.68 Stabilitätsmodus: Eine installierte Release-Version darf sich
         # während des Starts niemals einzelne UI-Dateien von GitHub/main
         # überschreiben. Das erzeugte zuvor Mischversionen zwischen UI und Engine.
