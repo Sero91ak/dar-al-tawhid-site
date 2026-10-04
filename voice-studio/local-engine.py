@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.73"
+ENGINE_VERSION="2.9.74"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_DIR=VOICE_HOME/"MasterPronunciations"
@@ -71,6 +71,10 @@ USER_OVERRIDES_BACKUP=USER_OVERRIDES_BACKUP_DIR/"user-overrides.latest.json"
 USER_OVERRIDES_BACKUP_DIR.mkdir(parents=True,exist_ok=True)
 LEARNING_CONFIRMED_AUDIO_DIR=LEARNING_HOME/"confirmed-audio"
 LEARNING_CONFIRMED_AUDIO_DIR.mkdir(parents=True,exist_ok=True)
+STORY_REFERENCE_HOME=LEARNING_HOME/"story-references"
+STORY_REFERENCE_STATE=STORY_REFERENCE_HOME/"state.json"
+STORY_REFERENCE_SEED=APP_HOME/"story-reference-muhammad-2026-10-04.json"
+STORY_REFERENCE_HOME.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_CACHE=LEARNING_HOME/"online-library.json"
 MASTER_LIBRARY_CACHE=LEARNING_HOME/"islamic-master-library.json"
 MASTER_LIBRARY_SEED=APP_HOME/"islamic-master-library.json"
@@ -94,6 +98,7 @@ MASTER_LIBRARY_URL=os.environ.get(
     "https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/data/pronunciation/islamic-master-library.json"
 )
 LEARNING_LOCK=threading.Lock()
+STORY_REFERENCE_LOCK=threading.RLock()
 ALPHABET_MASTER_LOCK=threading.Lock()
 ALPHABET_BATCH_LOCK=threading.Lock()
 ALPHABET_BATCH_STATE_LOCK=threading.Lock()
@@ -2007,6 +2012,332 @@ def _install_story_audio_upload(data_url:str,original_name:str=""):
         "bytes":len(payload),
     }
 
+
+def normalize_story_reference_text(text:str):
+    """Stable text identity for a confirmed long-form audio/text pair.
+
+    Formatting-only whitespace changes do not invalidate the pair, while every
+    actual word/punctuation change creates a new hash and falls back to the
+    normal incremental segment renderer.
+    """
+    value=unicodedata.normalize("NFC",str(text or ""))
+    value=value.replace("\r\n","\n").replace("\r","\n")
+    return re.sub(r"\s+"," ",value).strip()
+
+def story_reference_text_sha256(text:str):
+    return hashlib.sha256(
+        normalize_story_reference_text(text).encode("utf-8")
+    ).hexdigest()
+
+def _story_reference_file_sha256(path:Path):
+    h=hashlib.sha256()
+    with Path(path).open("rb") as fh:
+        while True:
+            block=fh.read(1024*1024)
+            if not block:
+                break
+            h.update(block)
+    return h.hexdigest()
+
+def _story_reference_load():
+    data=load_json_file(STORY_REFERENCE_STATE,{"schemaVersion":1,"references":[]})
+    if not isinstance(data,dict):
+        data={"schemaVersion":1,"references":[]}
+    refs=data.get("references")
+    if not isinstance(refs,list):
+        refs=[]
+    data["schemaVersion"]=1
+    data["references"]=refs
+    return data
+
+def _story_reference_save(data):
+    payload=dict(data or {})
+    payload["schemaVersion"]=1
+    payload["updatedAt"]=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    atomic_write_json(STORY_REFERENCE_STATE,payload)
+    return payload
+
+def _story_reference_seed(item_id:str=""):
+    seed=load_json_file(STORY_REFERENCE_SEED,{})
+    if not isinstance(seed,dict):
+        return {}
+    if item_id and str(seed.get("itemId") or "")!=str(item_id):
+        return {}
+    return seed
+
+def _story_reference_to_wav(src:Path,dst:Path):
+    src=Path(src)
+    dst=Path(dst)
+    if not src.exists() or src.stat().st_size<=1024:
+        raise ValueError("Referenz-Audio fehlt oder ist leer.")
+    dst.parent.mkdir(parents=True,exist_ok=True)
+    ffmpeg=find_ffmpeg()
+    if not ffmpeg:
+        if src.suffix.lower()==".wav":
+            shutil.copy2(src,dst)
+            return dst
+        raise RuntimeError("ffmpeg fehlt – Referenz-Audio kann nicht normalisiert werden.")
+    tmp=dst.with_name(dst.stem+f".tmp.{os.getpid()}.{uuid.uuid4().hex[:8]}.wav")
+    try:
+        p=subprocess.run([
+            ffmpeg,"-y","-v","error","-i",str(src),
+            "-vn","-ac","1","-ar","24000","-c:a","pcm_s16le",str(tmp)
+        ],capture_output=True,text=True,timeout=180)
+        if p.returncode!=0 or not tmp.exists() or tmp.stat().st_size<=1024:
+            raise RuntimeError(
+                "Referenz-Audio konnte nicht in 24-kHz-WAV normalisiert werden. "
+                +(p.stderr or "")[-600:]
+            )
+        os.replace(tmp,dst)
+        return dst
+    finally:
+        try: tmp.unlink(missing_ok=True)
+        except Exception: pass
+
+def register_story_reference_pair(
+    kind:str,item_id:str,text:str,audio_path:Path,source_name:str="",
+    age:str="all",source:str="manual-owner-upload",reference_id:str=""
+):
+    """Persist a human-approved story audio + exact source text locally.
+
+    This is deliberately a reference/corpus memory, not model-weight fine-tuning.
+    It survives app updates under ~/SerhatVoice/PronunciationLearning.
+    """
+    value=str(text or "").strip()
+    if len(value)<40:
+        raise ValueError("Referenztext ist zu kurz.")
+    src=Path(audio_path)
+    if not src.exists() or src.stat().st_size<=1024:
+        raise ValueError("Referenz-Audio fehlt.")
+
+    seed=_story_reference_seed(item_id)
+    ref_id=str(reference_id or seed.get("id") or "").strip()
+    if not ref_id:
+        raw="|".join([str(kind or "story"),str(item_id or ""),story_reference_text_sha256(value)])
+        ref_id="story-"+hashlib.sha256(raw.encode("utf-8")).hexdigest()[:20]
+    safe=re.sub(r"[^A-Za-z0-9._-]+","-",ref_id).strip("-") or "story-reference"
+    wav_path=STORY_REFERENCE_HOME/(safe+".wav")
+    transcript_path=STORY_REFERENCE_HOME/(safe+".txt")
+
+    source_sha=_story_reference_file_sha256(src)
+    expected_sha=str(((seed.get("sourceAudio") or {}).get("sha256") or "")).strip()
+    source_match=(not expected_sha) or hmac.compare_digest(source_sha,expected_sha)
+    _story_reference_to_wav(src,wav_path)
+    transcript_path.write_text(value+"\n",encoding="utf-8")
+
+    duration=round(_audio_duration_seconds(wav_path),3)
+    now=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    trusted=list(((seed.get("pronunciationProfile") or {}).get("trustedTerms") or []))
+    record={
+        "id":ref_id,
+        "kind":str(kind or "story"),
+        "itemId":str(item_id or ""),
+        "age":str(age or "all"),
+        "prosodyMode":str(seed.get("prosodyMode") or "kids_story"),
+        "language":str(seed.get("language") or "de-DE"),
+        "voiceProfileId":str(seed.get("voiceProfileId") or "serhat-owner-voice-2026"),
+        "textSha256":story_reference_text_sha256(value),
+        "textChars":len(value),
+        "transcriptPath":str(transcript_path),
+        "audioPath":str(wav_path),
+        "audioSha256":_story_reference_file_sha256(wav_path),
+        "sourceAudioSha256":source_sha,
+        "expectedSourceAudioSha256":expected_sha,
+        "sourceAudioHashMatched":bool(source_match),
+        "sourceFilename":str(source_name or src.name),
+        "source":str(source or "manual-owner-upload"),
+        "durationSec":duration,
+        "trustedTerms":trusted,
+        "exactTextAudioReuse":True,
+        "incrementalRerenderForEditedText":True,
+        "modelWeightFineTuning":False,
+        "registeredAt":now,
+    }
+
+    with STORY_REFERENCE_LOCK:
+        state=_story_reference_load()
+        refs=[
+            dict(x) for x in (state.get("references") or [])
+            if isinstance(x,dict) and str(x.get("id") or "")!=ref_id
+        ]
+        refs.append(record)
+        state["references"]=refs
+        _story_reference_save(state)
+
+    append_learning_log(
+        "story_reference_registered",
+        referenceId=ref_id,itemId=str(item_id or ""),
+        textSha256=record["textSha256"],
+        audioSha256=record["audioSha256"],
+        sourceAudioHashMatched=bool(source_match),
+        durationSec=duration,
+    )
+    return record
+
+def _story_reference_record_ready(record):
+    try:
+        path=Path(str((record or {}).get("audioPath") or "")).expanduser()
+        return path.exists() and path.stat().st_size>1024
+    except Exception:
+        return False
+
+def story_reference_state():
+    with STORY_REFERENCE_LOCK:
+        state=_story_reference_load()
+    ready=[x for x in (state.get("references") or []) if _story_reference_record_ready(x)]
+    terms=[]
+    for row in ready:
+        for term in (row.get("trustedTerms") or []):
+            value=str(term or "").strip()
+            if value and value not in terms:
+                terms.append(value)
+    return {
+        "count":len(ready),
+        "ready":bool(ready),
+        "referenceIds":[str(x.get("id") or "") for x in ready],
+        "itemIds":[str(x.get("itemId") or "") for x in ready],
+        "trustedTerms":terms[:200],
+        "statePath":str(STORY_REFERENCE_STATE),
+        "exactTextAudioReuse":True,
+        "incrementalRerenderForEditedText":True,
+        "modelWeightFineTuning":False,
+    }
+
+def story_reference_matches_text(text:str,mode:str=""):
+    if str(mode or "")!="kids_story":
+        return None
+    target=story_reference_text_sha256(text)
+    with STORY_REFERENCE_LOCK:
+        refs=list((_story_reference_load().get("references") or []))
+    for row in reversed(refs):
+        if str(row.get("prosodyMode") or "kids_story")!="kids_story":
+            continue
+        if str(row.get("textSha256") or "")!=target:
+            continue
+        if _story_reference_record_ready(row):
+            return dict(row)
+    return None
+
+def _story_reference_bootstrap_download(url:str,seed:dict):
+    parsed=urlparse(str(url or ""))
+    allowed={str(x).lower() for x in ((seed.get("runtimePolicy") or {}).get("allowedRemoteHosts") or [])}
+    if parsed.scheme!="https" or not parsed.hostname or parsed.hostname.lower() not in allowed:
+        raise ValueError("Remote-Referenzhost ist nicht freigegeben.")
+    suffix=Path(parsed.path).suffix.lower()
+    if suffix not in (".mp3",".m4a",".aac",".wav"):
+        suffix=".mp3"
+    dst=STORY_REFERENCE_HOME/(f"bootstrap-{uuid.uuid4().hex[:10]}{suffix}")
+    req=urllib.request.Request(
+        url,
+        headers={
+            "User-Agent":"DAR-Voice-Studio-Story-Reference/1",
+            "Accept":"audio/*",
+            "Cache-Control":"no-cache",
+        }
+    )
+    try:
+        with urllib.request.urlopen(req,timeout=35) as response:
+            total=0
+            with dst.open("wb") as fh:
+                while True:
+                    block=response.read(1024*1024)
+                    if not block:
+                        break
+                    total+=len(block)
+                    if total>70*1024*1024:
+                        raise ValueError("Remote-Referenz ist größer als 70 MB.")
+                    fh.write(block)
+        if not dst.exists() or dst.stat().st_size<=1024:
+            raise ValueError("Remote-Referenz ist leer.")
+        expected=str(((seed.get("sourceAudio") or {}).get("sha256") or "")).strip()
+        if expected and not hmac.compare_digest(_story_reference_file_sha256(dst),expected):
+            raise ValueError("Remote-Audio stimmt nicht mit dem bestätigten Audio-Hash überein.")
+        return dst
+    except Exception:
+        try: dst.unlink(missing_ok=True)
+        except Exception: pass
+        raise
+
+def bootstrap_story_reference_seed():
+    """Best-effort bootstrap of the already approved Muḥammad recording.
+
+    Runs in a background thread and never blocks app launch or model startup.
+    """
+    seed=_story_reference_seed()
+    if not seed:
+        return {"ok":False,"reason":"seed-missing"}
+    ref_id=str(seed.get("id") or "").strip()
+    existing=story_reference_state()
+    if ref_id and ref_id in (existing.get("referenceIds") or []):
+        return {"ok":True,"reused":True,"id":ref_id}
+
+    text=str(seed.get("sourceText") or "").strip()
+    if len(text)<40:
+        return {"ok":False,"reason":"seed-text-missing"}
+
+    for raw in (seed.get("localCandidates") or []):
+        candidate=Path(os.path.expanduser(str(raw or "")))
+        if candidate.exists() and candidate.stat().st_size>1024:
+            try:
+                record=register_story_reference_pair(
+                    str(seed.get("kind") or "prophet"),
+                    str(seed.get("itemId") or "muhammad"),
+                    text,candidate,
+                    source_name=str(((seed.get("sourceAudio") or {}).get("filename") or candidate.name)),
+                    age="all",source="bootstrap-local-owner-audio",
+                    reference_id=ref_id,
+                )
+                return {"ok":True,"source":"local","id":record["id"]}
+            except Exception as e:
+                print("[DĀR Voice] story reference local bootstrap warning",e,flush=True)
+
+    if not bool((seed.get("runtimePolicy") or {}).get("bootstrapFromProphetManifestAudio")):
+        return {"ok":False,"reason":"no-local-reference"}
+
+    manifest=load_json_file(APP_HOME/"prophet-stories.json",{})
+    item=next((
+        x for x in (manifest.get("items") or [])
+        if str((x or {}).get("id") or "")==str(seed.get("itemId") or "")
+    ),None)
+    if not isinstance(item,dict):
+        return {"ok":False,"reason":"story-item-missing"}
+
+    urls=[]
+    for age,row in ((item.get("audio") or {}).items()):
+        if not isinstance(row,dict):
+            continue
+        url=str(row.get("url") or "").strip()
+        if url.startswith("https://") and url not in urls:
+            urls.append(url)
+
+    for url in urls:
+        tmp=None
+        try:
+            tmp=_story_reference_bootstrap_download(url,seed)
+            record=register_story_reference_pair(
+                str(seed.get("kind") or "prophet"),
+                str(seed.get("itemId") or "muhammad"),
+                text,tmp,
+                source_name=str(((seed.get("sourceAudio") or {}).get("filename") or tmp.name)),
+                age="all",source="bootstrap-story-manifest-owner-audio",
+                reference_id=ref_id,
+            )
+            return {"ok":True,"source":"story-manifest","id":record["id"]}
+        except Exception as e:
+            print("[DĀR Voice] story reference remote bootstrap skipped:",e,flush=True)
+        finally:
+            try:
+                if tmp is not None: Path(tmp).unlink(missing_ok=True)
+            except Exception:
+                pass
+
+    append_learning_log(
+        "story_reference_bootstrap_pending",
+        referenceId=ref_id,itemId=str(seed.get("itemId") or "")
+    )
+    return {"ok":False,"reason":"audio-not-yet-local"}
+
+
 def _slot_asset_name(kind:str,key:str):
     return (key if kind=="harakat" else kind)+".m4a"
 
@@ -2731,6 +3062,7 @@ def learning_state():
             for r in user_rules if r.get("voice_lock")=="MASTER"
         ))[:2000],
         "confirmedAudioLocks":confirmed_audio_lock_keys(),
+        "storyReferenceMemory":story_reference_state(),
         "persistentPath":str(USER_OVERRIDES_FILE),
         "backupPath":str(USER_OVERRIDES_BACKUP),
         "persistent":True,
@@ -5432,6 +5764,50 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         speak,found=prepare(text)
 
     doc_mode=resolve_prosody_mode(text,style)
+
+    # Human-approved long-form reference: exact same source text is served
+    # immediately from the persistent local corpus. No model load, no TTS and
+    # no render lock are needed. Any actual edit automatically misses this hash
+    # and continues through the existing segment-level incremental renderer.
+    exact_reference=None if free_mode else story_reference_matches_text(text,doc_mode)
+    if exact_reference:
+        src=Path(str(exact_reference.get("audioPath") or "")).expanduser()
+        out=OUTPUT/f"dar_voice_reference_{uuid.uuid4().hex[:10]}.wav"
+        shutil.copy2(src,out)
+        qa_summary={
+            "mode":doc_mode,
+            "reference_audio_exact_text":True,
+            "reference_id":str(exact_reference.get("id") or ""),
+            "reference_text_sha256":str(exact_reference.get("textSha256") or ""),
+            "reference_audio_sha256":str(exact_reference.get("audioSha256") or ""),
+            "durationSec":float(exact_reference.get("durationSec") or 0),
+            "performance":{
+                "render_seconds":0.0,
+                "segments":0,
+                "segment_cache_hits":0,
+                "segment_cache_misses":0,
+                "execution_strategy":"reference-audio-exact-text-fast-path",
+                "backend":"reference-audio",
+                "fast_reused_segments":1,
+                "model_load_skipped":True,
+            },
+        }
+        set_status(
+            render_state="done",progress=100,
+            render_started_at=time.time(),render_finished_at=time.time(),
+            render_total_segments=0,render_completed_segments=0,
+            render_active_segment=0,render_cached_segments=1,
+            segment_elapsed_seconds=0,prosody_mode=doc_mode,
+            message="Bestätigte Audio-Text-Referenz sofort wiederverwendet",
+            last_output=str(out),last_qa=qa_summary,last_error=""
+        )
+        append_learning_log(
+            "story_reference_exact_reuse",
+            referenceId=str(exact_reference.get("id") or ""),
+            textSha256=str(exact_reference.get("textSha256") or "")
+        )
+        return out
+
     if free_mode and free_pronunciation:
         if doc_mode=="kids_story":
             # Prophetengeschichten nutzen weiterhin die bestätigte
@@ -7491,6 +7867,12 @@ class H(BaseHTTPRequestHandler):
                     str(data.get("dataUrl") or ""),
                     filename
                 )
+                reference=register_story_reference_pair(
+                    kind,item_id,text,upload,
+                    source_name=info["filename"],
+                    age=age or "all",
+                    source="manual-owner-story-upload",
+                )
                 if kind=="prophet":
                     result=publish_manual_prophet_story(
                         item_id,age or "all",text,
@@ -7507,6 +7889,15 @@ class H(BaseHTTPRequestHandler):
                     "filename":info["filename"],
                     "bytes":info["bytes"],
                     "mime":info["mime"],
+                }
+                result["referenceMemory"]={
+                    "id":str(reference.get("id") or ""),
+                    "textSha256":str(reference.get("textSha256") or ""),
+                    "audioSha256":str(reference.get("audioSha256") or ""),
+                    "durationSec":float(reference.get("durationSec") or 0),
+                    "persistent":True,
+                    "exactTextAudioReuse":True,
+                    "incrementalRerenderForEditedText":True,
                 }
                 return self.send_json(200,result)
             except ValueError as e:
@@ -7863,6 +8254,13 @@ def serve_single_instance():
         raise last_error if last_error is not None else OSError("Port 8787 konnte nicht gebunden werden.")
 
     with server:
+        # Bestätigte Audio-Text-Paare werden rein lokal/IO-basiert im Hintergrund
+        # registriert. Das blockiert weder UI noch Modell-Warmup.
+        threading.Thread(
+            target=bootstrap_story_reference_seed,
+            daemon=True,
+            name="dar-story-reference-bootstrap"
+        ).start()
         # Modell und Online-Wortschatz erst nach erfolgreichem exklusivem Bind vorladen.
         threading.Thread(target=warm_model,daemon=True).start()
         threading.Thread(target=refresh_online_library_if_stale,daemon=True).start()
