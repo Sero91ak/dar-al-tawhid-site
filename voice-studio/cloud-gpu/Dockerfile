@@ -1,4 +1,4 @@
-# DĀR Voice 2.9.93 – provider-neutral NVIDIA GPU runtime
+# DĀR Voice 2.9.95 – provider-neutral NVIDIA GPU runtime
 # Build from repository root:
 #   docker build -f voice-studio/cloud-gpu/Dockerfile -t dar-voice-gpu .
 FROM pytorch/pytorch:2.6.0-cuda12.4-cudnn9-runtime
@@ -44,6 +44,8 @@ COPY content/kids/content-index.json ./kids-content-index.json
 
 COPY data/pronunciation/pronunciation-rules.json ./pronunciation-rules.json
 COPY data/pronunciation/story-reference-muhammad-2026-10-04.json ./story-reference-muhammad-2026-10-04.json
+COPY data/pronunciation/story-reference-adam-2026-10-04.json ./story-reference-adam-2026-10-04.json
+COPY data/pronunciation/story-reference-idris-2026-10-04.json ./story-reference-idris-2026-10-04.json
 COPY data/pronunciation/DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls ./DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls
 COPY data/pronunciation/voice-production-profile.json ./voice-production-profile.json
 COPY data/pronunciation/islamic-master-library.json ./islamic-master-library.json
