@@ -1208,7 +1208,7 @@ const IS_ENGINE_ORIGIN=location.port==="8787"&&/^https?:$/.test(location.protoco
 const IS_COMPANION=IS_ENGINE_ORIGIN&&!IS_LOOPBACK;
 const IS_LOCAL=IS_LOOPBACK||IS_ENGINE_ORIGIN;
 const NATIVE_MAC=/DĀRVoiceStudioMac\//.test(navigator.userAgent);
-const REMOTE_ENGINE_API="https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/engine";
+const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const CLOUD_ENGINE_MODE=!IS_LOCAL&&new URLSearchParams(location.search).get("cloud")==="1";
 const LOCAL_API=IS_LOCAL?"":(CLOUD_ENGINE_MODE?REMOTE_ENGINE_API:"http://127.0.0.1:8787");
 let nativeUpdateState="idle",nativeLatestVersion="";
