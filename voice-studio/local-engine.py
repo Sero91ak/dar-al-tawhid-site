@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.80"
+ENGINE_VERSION="2.9.81"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -4002,6 +4002,7 @@ STATUS={
     "render_preview_ready":False,
     "render_preview_segments":0,
     "render_preview_duration_seconds":0.0,
+    "render_preview_generation":0,
     "render_preview_complete":False,
 }
 
@@ -4023,7 +4024,7 @@ def render_status_snapshot():
         "render_total_segments","render_completed_segments","render_active_segment",
         "render_cached_segments","segment_elapsed_seconds",
         "render_preview_name","render_preview_ready","render_preview_segments",
-        "render_preview_duration_seconds","render_preview_complete",
+        "render_preview_duration_seconds","render_preview_generation","render_preview_complete",
     )
     return {key:st.get(key) for key in keys}
 
@@ -6764,6 +6765,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         render_preview_ready=False,
         render_preview_segments=0,
         render_preview_duration_seconds=0.0,
+        render_preview_generation=0,
         render_preview_complete=False,
         render_total_segments=0,
         render_completed_segments=0,
@@ -6831,6 +6833,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         render_id=uuid.uuid4().hex[:12]
         cleanup_progressive_previews()
         progressive_preview_path=None
+        progressive_preview_seconds=0.0
+        progressive_preview_generation=0
         session_audio_locks={}
         new_audio_lock_candidates={}
         render_started_perf=time.perf_counter()
@@ -7036,24 +7040,36 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             }
             outputs[original_idx]=(wav.detach().float().cpu(),lang,chunk,mode,metrics)
 
-            # Interaktive Langtexte: Sobald genug Anfangsaudio vorhanden ist,
-            # eine kleine stabile WAV-Vorschau bereitstellen. Die eigentliche
-            # Synthese läuft im selben Render weiter. Dadurch kann iPhone/iPad
-            # oder Mac schon zuhören, bevor die vollständige Datei fertig ist.
-            if interactive_fast and total>1 and progressive_preview_path is None:
+            # Interaktive Langtexte: Erstes hörbares Audio so früh wie möglich
+            # bereitstellen und die Vorschau danach rollend verlängern. Jede neue
+            # Datei enthält wieder den vollständigen Anfang bis zum aktuellen
+            # Segment. iPhone/iPad und Mac können deshalb beim Dateiwechel ihre
+            # aktuelle Wiedergabeposition übernehmen, während die Rest-Synthese
+            # unverändert weiterläuft.
+            if interactive_fast and total>1:
                 prefix=[x for x in outputs[:processed_pos] if x is not None]
                 prefix_is_contiguous=(len(prefix)==processed_pos)
                 prefix_seconds=sum(
                     float(item[0].shape[-1])/max(1,int(render_sr))
                     for item in prefix
                 ) if prefix_is_contiguous else 0.0
-                if prefix_is_contiguous and (prefix_seconds>=1.8 or processed_pos>=2):
+                preview_due=bool(
+                    prefix_is_contiguous
+                    and (prefix_seconds>=1.8 or processed_pos>=2)
+                    and (
+                        progressive_preview_path is None
+                        or prefix_seconds-progressive_preview_seconds>=8.0
+                    )
+                )
+                if preview_due:
                     try:
                         preview_wav=join_rendered_segments(prefix,int(render_sr))
-                        candidate=OUTPUT/f"dar_voice_live_{render_id}.wav"
+                        candidate=OUTPUT/f"dar_voice_live_{render_id}_{processed_pos}.wav"
                         save_wav(candidate,preview_wav,int(render_sr))
                         if candidate.exists() and candidate.stat().st_size>44:
                             progressive_preview_path=candidate
+                            progressive_preview_seconds=float(prefix_seconds)
+                            progressive_preview_generation+=1
                             set_status(
                                 render_preview_name=candidate.name,
                                 render_preview_ready=True,
@@ -7061,13 +7077,14 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                                 render_preview_duration_seconds=round(
                                     float(preview_wav.shape[-1])/max(1,int(render_sr)),2
                                 ),
+                                render_preview_generation=progressive_preview_generation,
                                 message=(
-                                    f"Sofort-Vorschau bereit · {processed_pos}/{total} "
+                                    f"Live-Vorschau erweitert · {processed_pos}/{total} "
                                     "Abschnitte · Rest wird weiter erzeugt …"
                                 )
                             )
                     except Exception as preview_error:
-                        print("[DĀR Voice] progressive preview warning:",preview_error,flush=True)
+                        print("[DĀR Voice] rolling progressive preview warning:",preview_error,flush=True)
 
             completed_pct=8+int((processed_pos/max(1,total))*78)
             set_status(
