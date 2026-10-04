@@ -78,6 +78,27 @@ jobs:
           grep -q 'story-reference-idris-2026-10-04.json' voice-studio/cloud-gpu/Dockerfile
           grep -q 'COPY app-icon-512.png ./app-icon-512.png' voice-studio/cloud-gpu/Dockerfile
           grep -q 'COPY watermark-my-logo-full.png ./watermark-my-logo-full.png' voice-studio/cloud-gpu/Dockerfile
+          tmp_doctl="$(mktemp -d)"
+          cat > "$tmp_doctl/doctl" <<'SH'
+          #!/usr/bin/env bash
+          set -e
+          case "$*" in
+            "account get --output json")
+              printf '%s\n' '[{"status":"active","droplet_limit":3}]'
+              ;;
+            "compute region list --output json")
+              printf '%s\n' '[{"slug":"tor1","sizes":["gpu-h100x1-80gb"],"available":true}]'
+              ;;
+            *)
+              echo "unexpected fake doctl call: $*" >&2
+              exit 9
+              ;;
+          esac
+          SH
+          chmod +x "$tmp_doctl/doctl"
+          PATH="$tmp_doctl:$PATH" DO_REGION=tor1 DO_GPU_SIZE=gpu-h100x1-80gb \
+            bash voice-studio/cloud-gpu/provision-digitalocean.sh
+          rm -rf "$tmp_doctl"
           python - <<'PY'
           from pathlib import Path
           import json
