@@ -37,3 +37,11 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 ## Schutz
 
 `scripts/kids-design-guard.js` prüft diese Marker in CI über `scripts/app-health-check.js`.
+
+## Bereichs-Header – Bildbühnen
+
+- Die Startansichten **Geschichten**, **Mein Qurʾān** und **Eltern** beginnen mit einer vollflächigen, thematisch passenden Bildbühne bis an den Viewport-Rand.
+- Der Seitentitel liegt direkt auf dem Bild mit dunklem Lesbarkeitsverlauf; das Bild blendet unten ohne harte Kante in die Nachtblau-Fläche über.
+- Für diese Bereichs-Header gibt es **keinen separaten Karten-/Kapselbau** und **keine Kicker-Pill**. Der Kicker ist eine ruhige goldene Editorial-Zeile mit feiner Linie.
+- background-size: cover und ein pro Motiv gesetzter Fokus sind Pflicht; Smartphone und Tablet bekommen eigene Höhen/Abstände.
+- Die Regel betrifft nur die Bereichs-Header. Die Hauptnavigation **Heute · Geschichten · Qurʾān · Eltern** bleibt ausdrücklich die ovale schwebende Glas-Kapsel.
