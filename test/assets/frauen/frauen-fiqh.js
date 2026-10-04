@@ -3620,37 +3620,44 @@
     ctx.closePath();
   }
 
+  /* FRAUEN_SHARE_VISUAL_V1226 */
   function frauenDrawStoreBadge(ctx, x, y, w, h) {
     ctx.save();
-    frauenRoundRect(ctx, x, y, w, h, 14);
-    ctx.fillStyle = "rgba(7,12,12,.58)";
+    frauenRoundRect(ctx, x, y, w, h, 16);
+    ctx.fillStyle = "rgba(4,8,10,.88)";
     ctx.fill();
-    ctx.strokeStyle = "rgba(237,214,157,.42)";
-    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "rgba(255,255,255,.22)";
+    ctx.lineWidth = 1.25;
     ctx.stroke();
 
-    var cx = x + 27, cy = y + h / 2, r = 15;
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(240,216,154,.12)";
+    var iconSize = Math.min(h - 12, 48);
+    var ix = x + 8, iy = y + (h - iconSize) / 2;
+    frauenRoundRect(ctx, ix, iy, iconSize, iconSize, 11);
+    var blue = ctx.createLinearGradient(ix, iy, ix, iy + iconSize);
+    blue.addColorStop(0, "#38a8ff");
+    blue.addColorStop(1, "#0a78e8");
+    ctx.fillStyle = blue;
     ctx.fill();
-    ctx.strokeStyle = "#efd89f";
-    ctx.lineWidth = 1.6;
-    ctx.stroke();
+
+    var cx = ix + iconSize / 2, cy = iy + iconSize / 2;
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = Math.max(3, iconSize * .075);
+    ctx.lineCap = "round";
     ctx.beginPath();
-    ctx.moveTo(cx - 7, cy + 7);
-    ctx.lineTo(cx, cy - 8);
-    ctx.lineTo(cx + 7, cy + 7);
-    ctx.moveTo(cx - 10, cy + 2);
-    ctx.lineTo(cx + 10, cy + 2);
+    ctx.moveTo(cx - iconSize * .19, cy + iconSize * .22);
+    ctx.lineTo(cx, cy - iconSize * .20);
+    ctx.lineTo(cx + iconSize * .19, cy + iconSize * .22);
+    ctx.moveTo(cx - iconSize * .27, cy + iconSize * .08);
+    ctx.lineTo(cx + iconSize * .27, cy + iconSize * .08);
     ctx.stroke();
 
-    ctx.fillStyle = "#fff8e8";
-    ctx.font = "700 14px Arial, sans-serif";
-    ctx.fillText("DĀR AL TAWḤĪD", x + 50, y + 20);
-    ctx.fillStyle = "rgba(255,248,232,.76)";
-    ctx.font = "600 12px Arial, sans-serif";
-    ctx.fillText("Im App Store", x + 50, y + 38);
+    ctx.textAlign = "left";
+    ctx.fillStyle = "rgba(255,255,255,.78)";
+    ctx.font = "600 10px Arial, sans-serif";
+    ctx.fillText("Download on the", ix + iconSize + 10, y + 20);
+    ctx.fillStyle = "#fff";
+    ctx.font = "700 20px Arial, sans-serif";
+    ctx.fillText("App Store", ix + iconSize + 10, y + 42);
     ctx.restore();
   }
 
@@ -3716,14 +3723,14 @@
       }
 
       var wash = ctx.createLinearGradient(0, 0, W, H);
-      wash.addColorStop(0, "rgba(3,15,15,.92)");
-      wash.addColorStop(.50, "rgba(5,21,19,.78)");
-      wash.addColorStop(1, "rgba(8,18,17,.68)");
+      wash.addColorStop(0, "rgba(3,15,15,.68)");
+      wash.addColorStop(.50, "rgba(5,21,19,.48)");
+      wash.addColorStop(1, "rgba(8,18,17,.42)");
       ctx.fillStyle = wash;
       ctx.fillRect(0, 0, W, H);
 
       var glow = ctx.createRadialGradient(W * .78, H * .18, 20, W * .78, H * .18, W * .62);
-      glow.addColorStop(0, "rgba(228,196,119,.09)");
+      glow.addColorStop(0, "rgba(255,220,140,.14)");
       glow.addColorStop(1, "rgba(228,196,119,0)");
       ctx.fillStyle = glow;
       ctx.fillRect(0, 0, W, H);
@@ -3739,10 +3746,6 @@
       ctx.lineTo(W - margin, 104);
       ctx.stroke();
 
-      ctx.textAlign = "right";
-      ctx.fillStyle = "rgba(239,216,159,.80)";
-      ctx.font = "700 17px Arial, sans-serif";
-      ctx.fillText(String(p + 1).padStart(2, "0") + " / " + String(pages.length).padStart(2, "0"), W - margin, 76);
       ctx.textAlign = "left";
 
       var y = 162;
@@ -3769,9 +3772,9 @@
         y += bodyLine;
       });
 
-      var panelY = 1028, panelH = 145;
+      var panelY = 1030, panelH = 126;
       frauenRoundRect(ctx, margin, panelY, contentW, panelH, 22);
-      ctx.fillStyle = "rgba(4,15,15,.58)";
+      ctx.fillStyle = "rgba(4,15,15,.70)";
       ctx.fill();
       ctx.strokeStyle = "rgba(239,216,159,.22)";
       ctx.lineWidth = 1.2;
@@ -3782,9 +3785,9 @@
       ctx.fillText(String(bereichKicker(abschnitt) || "Frauen im Islam").toUpperCase(), margin + 22, panelY + 29);
 
       ctx.fillStyle = "rgba(255,248,232,.82)";
-      ctx.font = "400 17px Arial, sans-serif";
+      ctx.font = "500 17px Arial, sans-serif";
       var sourceLines = frauenWrapCanvas(ctx, "Quelle: " + source, contentW - 44).slice(0, 2);
-      var sy = panelY + 58;
+      var sy = panelY + 55;
       sourceLines.forEach(function (line) {
         ctx.fillText(line, margin + 22, sy);
         sy += 25;
@@ -3792,16 +3795,12 @@
 
       ctx.fillStyle = "rgba(255,248,232,.70)";
       ctx.font = "600 15px Arial, sans-serif";
-      ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah", margin + 22, panelY + 127);
+      ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah", margin + 22, panelY + 111);
 
       ctx.fillStyle = "#efd89f";
       ctx.font = "700 20px Arial, sans-serif";
-      ctx.fillText("dar-al-tawhid.de", margin, H - 72);
-      ctx.fillStyle = "rgba(255,248,232,.80)";
-      ctx.font = "600 14px Arial, sans-serif";
-      ctx.fillText("by Serhat Abu Malik", margin, H - 48);
-
-      frauenDrawStoreBadge(ctx, W - margin - 270, H - 98, 270, 62);
+      ctx.fillText("dar-al-tawhid.de", margin, H - 60);
+      frauenDrawStoreBadge(ctx, W - margin - 270, H - 92, 270, 62);
 
       var blob = await frauenCanvasBlob(canvas);
       if (blob) files.push(new File([blob], "dar-al-tawhid-bildbeitrag-" + (p + 1) + ".png", { type: "image/png" }));
