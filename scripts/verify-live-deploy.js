@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
  * Live-Verifikation mit CDN-Retries nach Deploy.
+ * Voice-Cloud: öffentliche Website und native App-Shell werden getrennt geprüft.
  * Nutzbar für Besucher-App, Test-App und Quellenbibliothek.
  */
 const fs = require("fs");
