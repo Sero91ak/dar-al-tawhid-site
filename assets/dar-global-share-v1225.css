@@ -83,3 +83,26 @@ html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-t
   .share-panel .post-after-share,
   .share-panel .frauen-share-primary{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
+
+
+/* GLOBAL_SHARE_INJECTED_PANEL_V1232 */
+.prophets-detail>.dar-global-injected-panel{
+  margin:24px 0 8px!important;
+  padding:14px!important;
+  border-radius:20px!important;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d8bd75)) 22%,var(--line,var(--line2)) 78%)!important;
+  background:
+    radial-gradient(circle at 14% 0%,color-mix(in srgb,var(--gold2,var(--gold,#d8bd75)) 7%,transparent),transparent 38%),
+    color-mix(in srgb,var(--card,var(--bg)) 94%,transparent)!important;
+  box-shadow:0 10px 28px rgba(4,15,16,.09),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+.prophets-detail>.dar-global-injected-panel .share-panel-title{
+  margin:0 0 10px!important;
+  font-family:var(--serif)!important;
+  font-size:17px!important;
+  font-weight:650!important;
+  color:var(--ink)!important;
+}
+@media(max-width:520px){
+  .prophets-detail>.dar-global-injected-panel{margin-top:18px!important;padding:11px!important;border-radius:17px!important}
+}
