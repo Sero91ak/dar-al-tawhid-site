@@ -429,3 +429,10 @@ jobs:
         run: |
           node scripts/verify-live-deploy.js
           node scripts/app-live-parity-check.js
+          SHARE_JS="$RUNNER_TEMP/dar-global-share-live.js"
+          status="$(curl -sS -L --retry 3 --retry-delay 2 --max-time 30 -o "$SHARE_JS" -w '%{http_code}' "https://dar-al-tawhid.de/assets/dar-global-share-v1225.js?cb=${GITHUB_SHA}")"
+          test "$status" = "200" || { echo "::error::Live Bildbeitrag-Renderer HTTP $status"; exit 1; }
+          node --check "$SHARE_JS"
+          grep -F -q 'BILDBEITRAG_HISTORICAL_REPAIR_V1247' "$SHARE_JS" || { echo "::error::Historischer Bildbeitrag-Fix live nicht aktiv"; exit 1; }
+          grep -F -q 'HISTORICAL_SHARE_FALLBACKS' "$SHARE_JS" || { echo "::error::Historischer Bildbeitrag-Fallback live fehlt"; exit 1; }
+          echo "Live Bildbeitrag-Renderer: Syntax + historischer Fix OK"
