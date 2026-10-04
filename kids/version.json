@@ -240,7 +240,11 @@
     "storyPreschoolAdultReadAlongShortcut": false,
     "storyAudioPermanentLocalAsset": true,
     "storyAudioRangeSafeServiceWorker": true,
-    "storyAudioRangeStrategy": "direct-network-range-response"
+    "storyAudioRangeStrategy": "direct-network-range-response",
+    "storyAudioPinnedAsset": "/kids/assets/prophet-story-audio/muhammad/story.mp3?v=20261004-owner1",
+    "storyAudioPinnedSha256": "5b673686e294fe059b8149180e847ca3d5591dfc480ea28766f635e5b9e7b5f2",
+    "storyAudioPinnedCommit": "217c38e5aa133f7fa409692eaad9b93e9f2bb3aa",
+    "storyAudioSignedPreviewDependency": false
   },
   "updatedAt": "2026-10-04"
 }
