@@ -28309,7 +28309,7 @@ function updateChrome(route){
   document.body.classList.toggle("is-feed-fullscreen",isFeedFull);
   document.body.classList.toggle("is-quiz-route",route.view==="quiz");
   document.body.classList.toggle("is-calendar-route",route.view==="calendar");
-  document.body.classList.toggle("is-hadith-route",route.view==="hadith");try{confineHadithLibraryEntry();[0,180,600].forEach(function(ms){setTimeout(function(){try{confineHadithLibraryEntry()}catch(e){}},ms)})}catch(e){}
+  document.body.classList.toggle("is-hadith-route",route.view==="hadith");const hadithDepth=route.view==="hadith"?String(route.value||"").split("/").filter(Boolean).length:0;document.body.classList.toggle("is-hadith-root-route",route.view==="hadith"&&hadithDepth===0);document.body.classList.toggle("is-hadith-nested-route",route.view==="hadith"&&hadithDepth>0);try{confineHadithLibraryEntry();[0,180,600].forEach(function(ms){setTimeout(function(){try{confineHadithLibraryEntry()}catch(e){}},ms)})}catch(e){}
   document.body.classList.toggle("is-quran-overview",route.view==="quran");
   document.body.classList.toggle("is-quran-reader-route",route.view==="quran-surah");
   document.body.classList.toggle("is-quran-player-route",route.view==="quran-player");
