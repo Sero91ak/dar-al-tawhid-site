@@ -270,6 +270,11 @@ async function finalizeDarTestHomeV1193(asset) {
     html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-topic-detail-v1254.css?v=1254"><\/head>');
   }
 
+  // DAR_ILM_POST_READER_V1255
+  if (!/ilm-post-reader-v1255\.css/.test(html)) {
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-post-reader-v1255.css?v=1255"><\/head>');
+  }
+
 // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
 
