@@ -1,34 +1,45 @@
 (function(){
   "use strict";
-  /* BILDBEITRAG_HISTORICAL_REPAIR_V1247 · global historic + women-exclusive ownership */
+  /* BILDBEITRAG_CURATED_POOL_V1250 · AI disabled · curated random pool + women-exclusive ownership */
   if(window.__DAR_GLOBAL_SHARE_V1246)return;
   window.__DAR_GLOBAL_SHARE_V1246=true;
 
   var SITE="dar-al-tawhid.de";
-  var SHARE_IMAGE_API="https://dar-admin-publisher.sero91ak.workers.dev/api/share-image/background";
   var W=1080,H=1350;
-  var HISTORICAL_SHARE_FALLBACKS=[
+  var GENERAL_SHARE_IMAGE_POOL=[
     "/kids/assets/prophet-scenes/library.webp",
     "/kids/assets/prophet-scenes/desert.webp",
     "/kids/assets/prophet-scenes/mountain.webp",
     "/kids/assets/prophet-scenes/night.webp",
     "/kids/assets/prophet-scenes/royal.webp",
-    "/kids/assets/prophet-scenes/garden.webp"
+    "/kids/assets/prophet-scenes/garden.webp",
+    "/kids/assets/prophet-scenes/ocean.webp",
+    "/kids/assets/prophet-scenes/water.webp"
   ];
-  function shareStableIndex(data,len){
-    var s=clean((data&&data.category)+" "+(data&&data.title)+" "+(data&&data.body)),h=2166136261;
-    for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}
-    return len?Math.abs(h>>>0)%len:0;
+  var lastGeneralShareImage="";
+  function randomIndex(len){
+    if(!len)return 0;
+    try{
+      if(window.crypto&&window.crypto.getRandomValues){
+        var a=new Uint32Array(1);window.crypto.getRandomValues(a);return a[0]%len;
+      }
+    }catch(e){}
+    return Math.floor(Math.random()*len);
   }
-  async function historicalFallbackBackground(data){
-    if(!HISTORICAL_SHARE_FALLBACKS.length)throw new Error("Kein historischer Ersatzhintergrund verfügbar.");
-    var start=shareStableIndex(data,HISTORICAL_SHARE_FALLBACKS.length);
+  async function generalPoolBackground(){
+    if(!GENERAL_SHARE_IMAGE_POOL.length)throw new Error("Kein freigegebener Bildpool verfügbar.");
+    var start=randomIndex(GENERAL_SHARE_IMAGE_POOL.length);
+    if(GENERAL_SHARE_IMAGE_POOL.length>1&&GENERAL_SHARE_IMAGE_POOL[start]===lastGeneralShareImage)start=(start+1)%GENERAL_SHARE_IMAGE_POOL.length;
     var last=null;
-    for(var i=0;i<HISTORICAL_SHARE_FALLBACKS.length;i++){
-      var src=HISTORICAL_SHARE_FALLBACKS[(start+i)%HISTORICAL_SHARE_FALLBACKS.length];
-      try{return await loadImage(src+"?share-fallback=v1247")}catch(e){last=e}
+    for(var i=0;i<GENERAL_SHARE_IMAGE_POOL.length;i++){
+      var src=GENERAL_SHARE_IMAGE_POOL[(start+i)%GENERAL_SHARE_IMAGE_POOL.length];
+      try{
+        var image=await loadImage(src+"?share-pool=v1250");
+        lastGeneralShareImage=src;
+        return image;
+      }catch(e){last=e}
     }
-    throw last||new Error("Historischer Ersatzhintergrund konnte nicht geladen werden.");
+    throw last||new Error("Kein freigegebenes Hintergrundbild konnte geladen werden.");
   }
 
   function clean(s){return String(s||"").replace(/\s+/g," ").trim()}
@@ -105,40 +116,7 @@
     }
     return {kind:String(route||"post"),category:category||"Wissen",title:title,body:body,source:trimSource(source||"Quelle siehe Beitrag in der App."),url:location.href};
   }
-  async function generateFreshBackground(data){
-    var controller=typeof AbortController!=="undefined"?new AbortController():null;
-    var timer=setTimeout(function(){try{if(controller)controller.abort()}catch(e){}},45000);
-    try{
-      var res=await fetch(SHARE_IMAGE_API,{
-        method:"POST",
-        mode:"cors",
-        cache:"no-store",
-        credentials:"omit",
-        headers:{"Content-Type":"application/json","Accept":"image/avif,image/webp,image/png,image/jpeg"},
-        body:JSON.stringify({
-          title:clean(data&&data.title),
-          body:clean(data&&data.body),
-          category:clean(data&&data.category),
-          source:trimSource(data&&data.source)
-        }),
-        signal:controller?controller.signal:undefined
-      });
-      if(!res.ok){
-        var msg="Neues Bild konnte nicht erzeugt werden.";
-        try{var problem=await res.json();if(problem&&problem.error)msg=clean(problem.error)}catch(e2){}
-        throw new Error(msg);
-      }
-      var blob=await res.blob();
-      if(!blob||!/^image\//i.test(blob.type||""))throw new Error("Bildgenerator lieferte kein gültiges Bild.");
-      var objectUrl=URL.createObjectURL(blob);
-      var image=await loadImage(objectUrl);
-      setTimeout(function(){try{URL.revokeObjectURL(objectUrl)}catch(e3){}},60000);
-      return image;
-    }catch(generatorError){
-      try{console.warn("DAR share AI unavailable; historical fallback active",generatorError)}catch(e4){}
-      return historicalFallbackBackground(data);
-    }finally{clearTimeout(timer)}
-  }
+
 
   function adaptiveBodyLayout(ctx,body,maxW,maxH){
     body=stripUiLabel(body||"","body");
@@ -163,7 +141,7 @@
   async function renderFiles(data){
     var canvas=document.createElement("canvas");canvas.width=W;canvas.height=H;var ctx=canvas.getContext("2d");if(!ctx)return[];
     try{if(document.fonts&&document.fonts.ready)await document.fonts.ready}catch(e){}
-    var bg=await generateFreshBackground(data);
+    var bg=await generalPoolBackground();
     var margin=76,contentW=W-margin*2;
     data.body=stripUiLabel(data.body||data.title,"body");
     data.source=stripUiLabel(data.source||"Quelle siehe Beitrag in der App.","source");
