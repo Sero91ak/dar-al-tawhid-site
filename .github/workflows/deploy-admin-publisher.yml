@@ -180,6 +180,9 @@ jobs:
           TELEGRAM_CHANNEL_USERNAME: ${{ secrets.TELEGRAM_CHANNEL_USERNAME }}
           TELEGRAM_TOPICS_CHAT_ID: ${{ secrets.TELEGRAM_TOPICS_CHAT_ID }}
           TELEGRAM_FORUM_CHAT_ID: ${{ secrets.TELEGRAM_FORUM_CHAT_ID }}
+          DAR_VOICE_GPU_ORIGIN: ${{ secrets.DAR_VOICE_GPU_ORIGIN }}
+          DAR_VOICE_GPU_TOKEN: ${{ secrets.DAR_VOICE_GPU_TOKEN }}
+          DAR_VOICE_WEB_TOKEN: ${{ secrets.DAR_VOICE_WEB_TOKEN }}
         run: |
           : > "$RUNNER_TEMP/missing-core-secrets.txt"
           SECRETS_JSON="$RUNNER_TEMP/core-secrets.json"
@@ -203,7 +206,10 @@ jobs:
             ELEVENLABS_VOICE_ID: pick(process.env.ELEVENLABS_VOICE_ID),
             TELEGRAM_CHANNEL_ID: pick(process.env.TELEGRAM_CHANNEL_ID),
             TELEGRAM_CHANNEL_USERNAME: pick(process.env.TELEGRAM_CHANNEL_USERNAME),
-            TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID)
+            TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID),
+            DAR_VOICE_GPU_ORIGIN: pick(process.env.DAR_VOICE_GPU_ORIGIN),
+            DAR_VOICE_GPU_TOKEN: pick(process.env.DAR_VOICE_GPU_TOKEN),
+            DAR_VOICE_WEB_TOKEN: pick(process.env.DAR_VOICE_WEB_TOKEN)
           };
           const payload = {};
           const miss = [];
@@ -597,6 +603,9 @@ jobs:
           TELEGRAM_CHANNEL_USERNAME: ${{ secrets.TELEGRAM_CHANNEL_USERNAME }}
           TELEGRAM_TOPICS_CHAT_ID: ${{ secrets.TELEGRAM_TOPICS_CHAT_ID }}
           TELEGRAM_FORUM_CHAT_ID: ${{ secrets.TELEGRAM_FORUM_CHAT_ID }}
+          DAR_VOICE_GPU_ORIGIN: ${{ secrets.DAR_VOICE_GPU_ORIGIN }}
+          DAR_VOICE_GPU_TOKEN: ${{ secrets.DAR_VOICE_GPU_TOKEN }}
+          DAR_VOICE_WEB_TOKEN: ${{ secrets.DAR_VOICE_WEB_TOKEN }}
         run: |
           : > "$RUNNER_TEMP/missing-core-secrets-final.txt"
           SECRETS_JSON="$RUNNER_TEMP/core-secrets-final.json"
@@ -620,7 +629,10 @@ jobs:
             ELEVENLABS_VOICE_ID: pick(process.env.ELEVENLABS_VOICE_ID),
             TELEGRAM_CHANNEL_ID: pick(process.env.TELEGRAM_CHANNEL_ID),
             TELEGRAM_CHANNEL_USERNAME: pick(process.env.TELEGRAM_CHANNEL_USERNAME),
-            TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID)
+            TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID),
+            DAR_VOICE_GPU_ORIGIN: pick(process.env.DAR_VOICE_GPU_ORIGIN),
+            DAR_VOICE_GPU_TOKEN: pick(process.env.DAR_VOICE_GPU_TOKEN),
+            DAR_VOICE_WEB_TOKEN: pick(process.env.DAR_VOICE_WEB_TOKEN)
           };
           const payload = {};
           const miss = [];
