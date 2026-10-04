@@ -136,7 +136,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <div id="toast" class="toast"></div>
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
+const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -176,9 +176,35 @@ async function analyzeText(force=false){
 }
 $("#analyzeBtn").onclick=()=>analyzeText(true);
 
+function clearLiveChunkUrl(name){
+  const key=String(name||"");const url=state.liveChunkUrls.get(key);
+  if(url){try{URL.revokeObjectURL(url)}catch(_){}state.liveChunkUrls.delete(key)}
+  state.liveChunkFetches.delete(key);
+}
 function resetLiveStream(){
+  for(const url of state.liveChunkUrls.values()){try{URL.revokeObjectURL(url)}catch(_){}}
+  state.liveChunkUrls.clear();state.liveChunkFetches.clear();state.liveChunkEpoch+=1;
   state.livePreviewName="";state.livePreviewDuration=0;state.livePreviewGeneration=0;
   state.liveChunks=[];state.liveChunkCursor=0;state.liveStreamActive=false;state.finalReady=false;
+}
+async function prefetchLiveChunk(index){
+  const row=state.liveChunks[index];if(!row)return "";
+  const name=String(row.name||"").trim();if(!name)return "";
+  if(state.liveChunkUrls.has(name))return state.liveChunkUrls.get(name);
+  if(state.liveChunkFetches.has(name))return state.liveChunkFetches.get(name);
+  const epoch=state.liveChunkEpoch;
+  const job=(async()=>{
+    try{
+      const r=await api("/mobile/audio?name="+encodeURIComponent(name));
+      if(!r.ok)throw Error("Live-Audio nicht verfügbar");
+      const blob=await r.blob();
+      if(epoch!==state.liveChunkEpoch)return "";
+      const url=URL.createObjectURL(blob);state.liveChunkUrls.set(name,url);return url;
+    }catch(_){return ""}
+    finally{state.liveChunkFetches.delete(name)}
+  })();
+  state.liveChunkFetches.set(name,job);
+  return job;
 }
 function installFinalAudio({autoplay=false}={}){
   if(!state.audioUrl)return;
@@ -190,16 +216,18 @@ function installFinalAudio({autoplay=false}={}){
   $("#playerMeta").textContent="Vollständige Serhat-Voice-Audio · bereit";
   if(autoplay)audio.play().catch(()=>{});
 }
-function playLiveChunk(index){
+async function playLiveChunk(index){
   const row=state.liveChunks[index];if(!row)return false;
   const audio=$("#audio");
   state.liveChunkCursor=index;
   state.liveStreamActive=true;
   state.livePreviewName=String(row.name||"");
-  audio.src="/mobile/audio?name="+encodeURIComponent(state.livePreviewName);
+  const prefetched=state.liveChunkUrls.get(state.livePreviewName)||await prefetchLiveChunk(index);
+  audio.src=prefetched||("/mobile/audio?name="+encodeURIComponent(state.livePreviewName));
   $("#player").classList.add("show");
   $(".player-title").textContent=index===0?"Sofort-Vorschau":"Live-Audio";
   $("#playerMeta").textContent="Abschnitt "+(index+1)+" · Rest wird parallel weiter erzeugt";
+  prefetchLiveChunk(index+1);
   audio.play().catch(()=>{});
   return true;
 }
@@ -221,6 +249,8 @@ function activateLivePreview(st){
     }
     state.livePreviewDuration=Math.max(0,Number(st?.render_preview_duration_seconds||0));
     state.livePreviewGeneration=state.liveChunks.length;
+    prefetchLiveChunk(state.liveChunkCursor);
+    prefetchLiveChunk(state.liveChunkCursor+1);
     const sec=state.livePreviewDuration;
     $("#player").classList.add("show");
     $("#playerMeta").textContent="Schon anhören · "+state.liveChunks.length+" Abschnitt"+(state.liveChunks.length===1?"":"e")+(sec?" · "+sec.toFixed(1)+" s bereit":"")+" · Rest läuft";
@@ -243,6 +273,7 @@ function activateLivePreview(st){
 }
 $("#audio").addEventListener("ended",()=>{
   if(!state.liveStreamActive)return;
+  clearLiveChunkUrl(state.livePreviewName);
   state.liveStreamActive=false;
   state.liveChunkCursor+=1;
   if(state.liveChunkCursor<state.liveChunks.length){pumpLiveChunks();return}
