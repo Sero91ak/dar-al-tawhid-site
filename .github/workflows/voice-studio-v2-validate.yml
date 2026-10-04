@@ -243,7 +243,7 @@ jobs:
           assert 'single-engine launcher' in installer
           assert '<key>KeepAlive</key><true/>' not in installer
           assert 'launchctl kickstart -k' not in installer
-          assert 'Engine-Start wird der Voice-Studio-App überlassen' in installer
+          assert 'Launcher bleibt alleiniger Engine-Besitzer.' in installer
           assert 'DAR_VOICE_ENGINE_OWNER=launcher' in installer
 
           assert 'if !userInitiated' not in swift or 'installAvailableUpdate()' not in swift.split('if !userInitiated',1)[-1][:250]
