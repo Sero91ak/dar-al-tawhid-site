@@ -26,22 +26,37 @@ export function buildFreshShareImagePrompt(input = {}) {
   const category = clean(input.category, 80);
   const body = clean(input.body || input.text, 420);
   const source = clean(input.source, 140);
+  const profile = clean(input.profile, 60).toLowerCase();
   const statement = { speaker: "", de: body, topic: category || title, source };
   const prophetRelated = isProphetRelatedStatement(statement);
+  const womenHistorical = profile === "women-historical";
 
   const topicHint = [category, title, body].filter(Boolean).join(" · ");
+  const womenDirection = womenHistorical ? [
+    "WOMEN SECTION PROFILE: the image must look clearly different from the normal DĀR share artwork and belong visually to the historical women section.",
+    "Use a historically plausible early-Islamic-era atmosphere, roughly 7th–9th century Arabia and nearby Muslim lands: clay or stone courtyard architecture, carved wooden screens, woven textiles, linen, leather, brass or clay lamps, reed mats, wooden chests, ink pots, parchment, book stands, palm gardens, wells, travel tents, simple domestic scholarly spaces.",
+    "Choose the scene from the subject: knowledge/fiqh -> private study room or women’s teaching corner; marriage/family -> refined historical courtyard/home objects; modesty/hijab -> layered period textiles, doorway, screen or travel cloak; biographies/history -> historically plausible courtyard, desert camp, caravan rest or learning setting.",
+    "A single anonymous historical Muslim woman may appear only when it strengthens the scene: fully modest period clothing, seen from behind or far side profile, face completely hidden or outside frame, no identifiable facial features, no glamour pose, no modern abaya fashion styling. Never portray a named woman as an identifiable likeness.",
+    "Use a distinct women-section palette: warm ivory, muted olive, deep burgundy, dusty rose-brown, dark emerald and restrained antique gold; avoid the standard generic night-blue-only look.",
+    "Keep the result dignified, scholarly and historical rather than decorative, romanticized, fashion-oriented or modern."
+  ] : [];
+
   return [
     "Create a completely new, unique photorealistic 4:5 background image for a premium Islamic educational quote card.",
     "This is a fresh generation for this single share action, not a recreation of an existing app image, stock photo, template, or previously generated scene.",
-    "DĀR AL TAWḤĪD visual language: noble, quiet, historically plausible, refined dark emerald or deep night-blue atmosphere with restrained warm gold light, cinematic realism, natural materials, elegant depth.",
-    "Build the scene from the meaning of the supplied topic. Prefer architecture, an empty study space, manuscripts/books with unreadable or blank surfaces, desert, mountains, sky, garden, mosque details, arches, lamps appropriate to the historical atmosphere, or other non-figurative objects that fit the subject.",
+    "DĀR AL TAWḤĪD visual language: noble, quiet, historically plausible, refined, cinematic realism, natural materials, elegant depth.",
+    ...womenDirection,
+    womenHistorical
+      ? "Build the scene specifically for the women-section topic and do not recycle the visual language of the normal feed, Qurʾān, library, kids, or generic share backgrounds."
+      : "Build the scene from the meaning of the supplied topic. Prefer architecture, an empty study space, manuscripts/books with unreadable or blank surfaces, desert, mountains, sky, garden, mosque details, arches, lamps appropriate to the historical atmosphere, or other non-figurative objects that fit the subject.",
     "Composition: important visual interest toward the outer edges; preserve calm negative space through the center and upper-middle for later typography. Avoid visual clutter behind text.",
-    "ABSOLUTE: no people, no human figures, no faces, no silhouettes, no hands, no body parts, no portraits, no named historical person.",
     prophetRelated
       ? "PROPHET TOPIC: depict no prophet or human representation whatsoever; use only empty historically fitting places, landscapes, architecture, and objects."
-      : "Even when the topic names a Companion, scholar, woman, child, or family member, do not depict a person; communicate the theme only through place, light, architecture, nature, and objects.",
+      : womenHistorical
+        ? "Never depict a named Companion woman, Mother of the Believers, scholar, or historical woman as a recognizable portrait. If a female figure is used, she must remain anonymous and facially unidentifiable."
+        : "ABSOLUTE: no people, no human figures, no faces, no silhouettes, no hands, no body parts, no portraits, no named historical person.",
     "ABSOLUTE: no written text, no letters, no readable Arabic, no calligraphy, no Qur'an verse, no invented writing on books or manuscripts, no logos, no watermarks, no social-media icons, no UI, no App Store badge.",
-    "No modern electronics, cars, plastic, neon, fantasy architecture, collage, illustration, cartoon, oversaturated HDR, distorted books, or fake script.",
+    "No modern electronics, cars, plastic, neon, fantasy architecture, collage, illustration, cartoon, oversaturated HDR, distorted books, fake script, contemporary fashion photography, studio portrait lighting, or modern interiors.",
     "The final image itself must contain only the visual scene. Typography and branding are applied later by the app.",
     "Subject context: " + (topicHint || "Islamic knowledge and learning")
   ].join(" ");
@@ -121,7 +136,8 @@ export async function handleShareImageBackground(request, env, cors) {
       title,
       body,
       category: clean(input.category, 120),
-      source: clean(input.source, 260)
+      source: clean(input.source, 260),
+      profile: clean(input.profile, 60)
     });
 
     const imageResponse = await fetch(generated.url, {
@@ -138,6 +154,7 @@ export async function handleShareImageBackground(request, env, cors) {
     headers.set("CDN-Cache-Control", "no-store");
     headers.set("Cloudflare-CDN-Cache-Control", "no-store");
     headers.set("X-DAR-Share-Image", "fresh-ai-v1");
+    headers.set("X-DAR-Share-Profile", clean(input.profile, 60) || "default");
     headers.set("X-DAR-Share-Seed", String(generated.seed));
     return new Response(imageResponse.body, { status: 200, headers });
   } catch (error) {
