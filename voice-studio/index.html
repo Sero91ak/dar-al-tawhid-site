@@ -678,7 +678,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   Voice Studio 2.9.95 · page-focused production architecture
+   Voice Studio 2.9.96 · page-focused production architecture
    Jede Aufgabe hat eine eigene Arbeitsfläche; kein Dashboard-Scroll.
    ═══════════════════════════════════════════════════════════════ */
 [hidden]{display:none!important}
@@ -775,7 +775,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.95 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.96 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -834,7 +834,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.95</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.96</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
@@ -853,7 +853,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 
   <div class="section-title">Erkannte islamische Begriffe</div>
   <div id="termList" class="term-list"><span class="term">Bibliothek wird geladen …</span></div>
-  <div class="term-status-legend"><span class="ok">grün = bestätigt / LOCKED</span><span class="open">rot = noch prüfen</span></div>
+  <div class="term-status-legend"><span class="ok">grün = bekannt / gelernt / LOCKED</span><span class="open">rot = noch prüfen</span></div>
 
   <div class="preview-grid">
     <div>
@@ -1094,7 +1094,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
     <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.95</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.96</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash</textarea>
@@ -1187,7 +1187,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.95 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.96 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
 </div>
 </div>
 
@@ -1197,7 +1197,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 </div>
 
 <script>
-const APP_VERSION="2.9.95";
+const APP_VERSION="2.9.96";
 const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
 const PROSODY_LABELS={
   auto:"Auto",narration:"Erzählung",kids_story:"Kinder-Geschichte",kids_lesson:"Kinder-Unterricht",
@@ -1212,7 +1212,7 @@ const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const CLOUD_ENGINE_MODE=!IS_LOCAL&&new URLSearchParams(location.search).get("cloud")==="1";
 const LOCAL_API=IS_LOCAL?"":(CLOUD_ENGINE_MODE?REMOTE_ENGINE_API:"http://127.0.0.1:8787");
 let nativeUpdateState="idle",nativeLatestVersion="";
-let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
+let library={rules:[]},buckets=new Map(),fastKnownLibraryTerms=new Set(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let studioMode="production",freeVoiceAudioUrl="",freeVoiceProgressTimer=null,freeVoiceLivePreviewName="",freeVoiceLivePreviewGeneration=0,mainLivePreviewName="",mainLivePreviewGeneration=0;
 window.darVoiceQaIsConfirmed=()=>Boolean(qaConfirmed&&lastAudio&&lastGeneratedText===String($("#text")?.value||"").trim());
 let freeVoiceLearningResults=[],freeVoiceLearningCandidate=null,freeVoiceLearningPreviewId="",freeVoiceLearningPreviewUrl="";
@@ -1281,9 +1281,28 @@ function localLearningCandidates(term,limit=12){
   }
   return rows;
 }
+function isFastKnownLibraryRule(rule){
+  if(!rule)return false;
+  const strategy=String(rule.tts_strategy||rule.ttsStrategy||"");
+  const category=String(rule.category||"");
+  const lock=String(rule.voice_lock||rule.voiceLock||"");
+  return lock==="MASTER"||strategy==="max-master-pls-v1"||strategy==="verified-islamic-master-library-v1"||category==="MAX MASTER PLS";
+}
+function rebuildFastKnownLibraryTerms(){
+  fastKnownLibraryTerms=new Set();
+  for(const rule of (library?.rules||[])){
+    if(!isFastKnownLibraryRule(rule))continue;
+    for(const value of [rule.string_to_replace,rule.canonical,rule.alias]){
+      const n=learningNorm(value);
+      if(n)fastKnownLibraryTerms.add(n);
+    }
+  }
+}
 function isLearningDoneTerm(term){
   const n=learningNorm(term);
   if(!n)return false;
+  if(fastKnownLibraryTerms.has(n))return true;
+  if(n.length>4&&n.endsWith("s")&&fastKnownLibraryTerms.has(n.slice(0,-1)))return true;
   for(const x of learnedTerms){if(learningNorm(x)===n)return true}
   for(const x of learnedCanonicals){if(learningNorm(x)===n)return true}
   return false;
@@ -1461,7 +1480,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.95")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.96")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -1484,7 +1503,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("current");
     top.textContent="Updates · aktuell";
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.95")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.96")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     top.hidden=false;
@@ -1570,7 +1589,7 @@ function renderAnalysis(){
     const canonical=String(r.canonical||"");
     const term=String(r.string_to_replace||canonical);
     const lockKey=String(r.audio_lock_key||r.audioLockKey||"");
-    return learnedCanonicals.has(canonical)||learnedTerms.has(term)||(lockKey&&confirmedAudioLocks.has(lockKey));
+    return isFastKnownLibraryRule(r)||isLearningDoneTerm(term)||isLearningDoneTerm(canonical)||(lockKey&&confirmedAudioLocks.has(lockKey));
   };
   const lc=unique.filter(isDone).length;
   $("#locked").textContent=lc;
@@ -1579,7 +1598,7 @@ function renderAnalysis(){
       const done=isDone(r);
       const term=String(r.string_to_replace||r.canonical||"");
       const source=r.voice_lock==="MANUAL"?"MANUELL":r.voice_lock==="MASTER"?"MASTER":r.voice_lock==="REVIEW"?"REVIEW":"PRÜFEN";
-      const label=done?"OK":source+" · OFFEN";
+      const label=done?(isFastKnownLibraryRule(r)?"BIBLIOTHEK ✓":"OK"):source+" · OFFEN";
       return '<button type="button" class="term clickable '+(done?'done':'open')+'" data-learning-term="'+esc(term)+'" title="'+(done?'Bestätigt und dauerhaft gelernt':'Noch anhören und bestätigen')+'">'+esc(r.canonical||r.string_to_replace)+' · '+label+'</button>';
     }).join("")
     :'<span class="term">Keine Bibliotheksbegriffe erkannt</span>';
@@ -2072,6 +2091,7 @@ async function loadLibrary(){
       :await fetch("/data/pronunciation/pronunciation-rules.json",{cache:"no-store"});
     if(!r.ok)throw Error("HTTP "+r.status);
     library=await r.json();
+    rebuildFastKnownLibraryTerms();
     buckets=buildBuckets(library.rules||[]);
     const canon=library.counts?.canonicalTerms||"?";
     const rules=library.counts?.rules||"?";
@@ -3850,7 +3870,7 @@ setTimeout(()=>{
   },4000);
 })();
 </script>
-<script src="content-studio.js?v=2984-quizcatalog1"></script>
+<script src="content-studio.js?v=2996-fastkids1"></script>
 <script src="alphabet-audio-studio.js?v=2929"></script>
 <script src="mubashshirun-pack.js?v=7"></script>
 </body>
