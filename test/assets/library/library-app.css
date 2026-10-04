@@ -2504,3 +2504,76 @@ html[data-theme="dar-al-layl"]{
     grid-template-columns:repeat(4,minmax(0,1fr));
   }
 }
+
+
+/* DAR_LIBRARY_COMPACT_SHELVES_HERO_V1248 */
+:root{
+  --dar-lib-cinema-image:url("https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:e21a6753-593c-459f-9d59-49a79455f6cd");
+}
+.lib-page[data-library-root] .lib-hero{
+  min-height:clamp(300px,58vw,440px);
+  width:100vw;
+  max-width:none;
+  margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
+  border-radius:0;
+  padding-left:max(24px,calc((100vw - min(1180px,calc(100vw - 32px)))/2 + 16px));
+  padding-right:max(24px,calc((100vw - min(1180px,calc(100vw - 32px)))/2 + 16px));
+  background:
+    linear-gradient(90deg,
+      var(--dar-lib-hero-overlay-start) 0%,
+      color-mix(in srgb,var(--dar-lib-hero-overlay-mid) 90%,transparent) 38%,
+      color-mix(in srgb,var(--dar-lib-hero-overlay-end) 60%,transparent) 64%,
+      transparent 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 8%,transparent),
+      color-mix(in srgb,var(--bg) 26%,transparent)),
+    var(--dar-lib-cinema-image) center/cover no-repeat;
+}
+.lib-page[data-library-root] .lib-hero-inner{width:min(54%,620px);max-width:620px}
+.lib-portals{margin:4px 0 28px}
+.lib-portal-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.lib-portal{
+  min-height:72px;
+  padding:12px 14px!important;
+  border-radius:14px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:10px;
+}
+.lib-portal-name{
+  font-size:clamp(.94rem,3.6vw,1.08rem);
+  line-height:1.15;
+}
+.lib-portal-count{align-self:center;font-size:.72rem}
+.lib-portal-art{width:42%;opacity:.06}
+@media(max-width:520px){
+  .lib-page[data-library-root] .lib-hero{
+    min-height:340px;
+    padding-top:28px;
+    padding-bottom:30px;
+    background-position:center;
+  }
+  .lib-page[data-library-root] .lib-hero-inner{width:min(72%,560px)}
+  .lib-portals-head{margin-bottom:12px}
+  .lib-portals-head-main{align-items:baseline}
+  .lib-portal-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .lib-portal{
+    min-height:68px;
+    padding:11px 12px!important;
+    border-radius:13px;
+  }
+  .lib-portal-name{font-size:.92rem}
+}
+@media(max-width:360px){
+  .lib-portal-grid{grid-template-columns:1fr}
+}
+@media(min-width:760px){
+  .lib-portal-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .lib-portal{min-height:78px}
+}
