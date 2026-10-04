@@ -679,13 +679,27 @@ async function compactAudioBlob(){
   return await r.blob();
 }
 async function uploadAudio(){
-  if(audioAsset?.url&&lastGeneratedText===String(q("text")?.value||"").trim())return audioAsset;
+  if(audioAsset?.url&&lastGeneratedText===String(q("text")?.value||"").trim()&&Array.isArray(audioAsset?.timings)&&audioAsset.timings.length)return audioAsset;
   const id=await ensureId();
   const blob=await compactAudioBlob();
+  const storyText=String(q("text")?.value||"").trim();
+  let alignment=null;
+  if(storyText){
+    setStudioMessage("Audio wird exakt mit dem Lesetext synchronisiert …","warn");
+    const file=new File([blob],"serhat-story.m4a",{type:blob.type||"audio/mp4"});
+    alignment=await alignStoryFile(file,storyText);
+    if(!Array.isArray(alignment?.timings)||!alignment.timings.length)throw Error("Keine Mitlese-Zeitstempel erhalten.");
+  }
   const d=await adminApi("/api/admin/kids-content/media",{method:"POST",body:JSON.stringify({
     id,role:"audio",staging:true,dataUrl:await blobToDataUrl(blob),originalName:"serhat-story.m4a",source:"serhat-mlx-master"
   })});
-  audioAsset={...d.asset,codec:"aac-72k-mono"};
+  audioAsset={
+    ...d.asset,
+    codec:"aac-72k-mono",
+    timings:alignment?.timings||[],
+    syncMode:alignment?.syncMode||"",
+    alignmentLoss:alignment?.alignmentLoss??null
+  };
   try{audioAsset.durationSec=await getAudioDuration(blob)}catch{}
   return audioAsset;
 }
