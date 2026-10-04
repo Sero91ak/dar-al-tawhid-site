@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.82"
+ENGINE_VERSION="2.9.83"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -4004,6 +4004,9 @@ STATUS={
     "render_preview_duration_seconds":0.0,
     "render_preview_generation":0,
     "render_preview_complete":False,
+    "render_preview_chunks":[],
+    "render_preview_chunk_count":0,
+    "render_preview_mode":"",
     "render_first_audio_priority":False,
 }
 
@@ -4026,6 +4029,7 @@ def render_status_snapshot():
         "render_cached_segments","segment_elapsed_seconds",
         "render_preview_name","render_preview_ready","render_preview_segments",
         "render_preview_duration_seconds","render_preview_generation","render_preview_complete",
+        "render_preview_chunks","render_preview_chunk_count","render_preview_mode",
         "render_first_audio_priority",
     )
     return {key:st.get(key) for key in keys}
@@ -6798,6 +6802,9 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         render_preview_duration_seconds=0.0,
         render_preview_generation=0,
         render_preview_complete=False,
+        render_preview_chunks=[],
+        render_preview_chunk_count=0,
+        render_preview_mode="incremental-chunks-v1" if interactive_fast and len(plan)>1 else "",
         render_first_audio_priority=bool(interactive_fast and len(plan)>1),
         render_total_segments=0,
         render_completed_segments=0,
@@ -6867,6 +6874,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         progressive_preview_path=None
         progressive_preview_seconds=0.0
         progressive_preview_generation=0
+        progressive_preview_chunks=[]
         session_audio_locks={}
         new_audio_lock_candidates={}
         render_started_perf=time.perf_counter()
@@ -7072,51 +7080,51 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             }
             outputs[original_idx]=(wav.detach().float().cpu(),lang,chunk,mode,metrics)
 
-            # Interaktive Langtexte: Erstes hörbares Audio so früh wie möglich
-            # bereitstellen und die Vorschau danach rollend verlängern. Jede neue
-            # Datei enthält wieder den vollständigen Anfang bis zum aktuellen
-            # Segment. iPhone/iPad und Mac können deshalb beim Dateiwechel ihre
-            # aktuelle Wiedergabeposition übernehmen, während die Rest-Synthese
-            # unverändert weiterläuft.
+            # 2.9.83 · echtes inkrementelles Preview-Queueing:
+            # Jeder bereits technisch geprüfte Abschnitt wird genau einmal als
+            # kleine WAV-Datei bereitgestellt. Dadurch entfällt das frühere
+            # wiederholte Neu-Zusammenfügen des gesamten Prefixes (O(n²)-I/O bei
+            # langen Geschichten). iPhone/iPad und Mac können die fertigen
+            # Abschnitte nacheinander abspielen, während die Rest-Synthese läuft.
             if interactive_fast and total>1:
-                prefix=[x for x in outputs[:processed_pos] if x is not None]
-                prefix_is_contiguous=(len(prefix)==processed_pos)
-                prefix_seconds=sum(
-                    float(item[0].shape[-1])/max(1,int(render_sr))
-                    for item in prefix
-                ) if prefix_is_contiguous else 0.0
-                preview_due=bool(
-                    prefix_is_contiguous
-                    and (prefix_seconds>=1.8 or processed_pos>=2)
-                    and (
-                        progressive_preview_path is None
-                        or prefix_seconds-progressive_preview_seconds>=8.0
-                    )
-                )
-                if preview_due:
-                    try:
-                        preview_wav=join_rendered_segments(prefix,int(render_sr))
-                        candidate=OUTPUT/f"dar_voice_live_{render_id}_{processed_pos}.wav"
-                        save_wav(candidate,preview_wav,int(render_sr))
-                        if candidate.exists() and candidate.stat().st_size>44:
+                try:
+                    preview_wav=wav.detach().float().cpu()
+                    candidate=OUTPUT/f"dar_voice_live_{render_id}_chunk_{processed_pos}.wav"
+                    save_wav(candidate,preview_wav,int(render_sr))
+                    if candidate.exists() and candidate.stat().st_size>44:
+                        duration_seconds=round(
+                            float(preview_wav.shape[-1])/max(1,int(render_sr)),3
+                        )
+                        progressive_preview_chunks.append({
+                            "sequence":processed_pos,
+                            "name":candidate.name,
+                            "durationSeconds":duration_seconds,
+                            "language":lang,
+                        })
+                        progressive_preview_seconds+=float(duration_seconds)
+                        progressive_preview_generation+=1
+                        # Rückwärtskompatibel bleibt render_preview_name auf dem
+                        # allerersten Chunk stehen. Neue 2.9.83-UIs benutzen die
+                        # komplette render_preview_chunks-Liste und wechseln nicht
+                        # mehr ständig auf größer werdende Dateien.
+                        if progressive_preview_path is None:
                             progressive_preview_path=candidate
-                            progressive_preview_seconds=float(prefix_seconds)
-                            progressive_preview_generation+=1
-                            set_status(
-                                render_preview_name=candidate.name,
-                                render_preview_ready=True,
-                                render_preview_segments=processed_pos,
-                                render_preview_duration_seconds=round(
-                                    float(preview_wav.shape[-1])/max(1,int(render_sr)),2
-                                ),
-                                render_preview_generation=progressive_preview_generation,
-                                message=(
-                                    f"Live-Vorschau erweitert · {processed_pos}/{total} "
-                                    "Abschnitte · Rest wird weiter erzeugt …"
-                                )
+                        set_status(
+                            render_preview_name=progressive_preview_path.name,
+                            render_preview_ready=True,
+                            render_preview_segments=processed_pos,
+                            render_preview_duration_seconds=round(progressive_preview_seconds,2),
+                            render_preview_generation=1,
+                            render_preview_chunks=list(progressive_preview_chunks),
+                            render_preview_chunk_count=len(progressive_preview_chunks),
+                            render_preview_mode="incremental-chunks-v1",
+                            message=(
+                                f"Sofort-Audio bereit · {processed_pos}/{total} "
+                                "Abschnitte · Rest wird weiter erzeugt …"
                             )
-                    except Exception as preview_error:
-                        print("[DĀR Voice] rolling progressive preview warning:",preview_error,flush=True)
+                        )
+                except Exception as preview_error:
+                    print("[DĀR Voice] incremental progressive preview warning:",preview_error,flush=True)
 
             completed_pct=8+int((processed_pos/max(1,total))*78)
             set_status(
@@ -7270,6 +7278,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             last_output=str(out),
             render_finished_at=time.time(),
             render_preview_complete=True,
+            render_preview_chunk_count=len(progressive_preview_chunks),
+            render_preview_mode="incremental-chunks-v1" if progressive_preview_chunks else "",
             last_error=""
         )
         return out
