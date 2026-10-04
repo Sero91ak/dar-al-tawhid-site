@@ -200,6 +200,25 @@ var(--quiz-art,linear-gradient(180deg,#315c78 0%,#5a8f8a 48%,#ba8b5f 100%));back
 .quiz-next.show{display:block}
 .quiz-finish{text-align:center;padding:26px 10px}
 @keyframes quizCorrectPop{0%{transform:scale(.985)}65%{transform:scale(1.018)}100%{transform:scale(1)}}
+.quiz-reward-burst{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+.quiz-reward-burst span{position:absolute;left:50%;top:62%;font-size:22px;line-height:1;color:#ffe09a;text-shadow:0 3px 12px rgba(0,0,0,.28);opacity:0;animation:quizStarBurst .78s cubic-bezier(.2,.75,.2,1) forwards}
+.quiz-reward-burst span:nth-child(1){--x:-92px;--y:-78px;animation-delay:.00s}
+.quiz-reward-burst span:nth-child(2){--x:-48px;--y:-116px;animation-delay:.04s}
+.quiz-reward-burst span:nth-child(3){--x:0px;--y:-96px;animation-delay:.02s}
+.quiz-reward-burst span:nth-child(4){--x:48px;--y:-120px;animation-delay:.06s}
+.quiz-reward-burst span:nth-child(5){--x:92px;--y:-74px;animation-delay:.01s}
+@keyframes quizStarBurst{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.35) rotate(-12deg)}
+  24%{opacity:1}
+  72%{opacity:1;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.08) rotate(7deg)}
+  100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y) - 12px)) scale(.82)}
+}
+#quizModal[data-quiz-band="4-6"] .quiz-reward-burst span{font-size:30px}
+#quizModal[data-quiz-band="9-10"] .quiz-reward-burst span{font-size:17px;animation-duration:.58s}
+@media(prefers-reduced-motion:reduce){
+  .quiz-reward-burst{display:none!important}
+  .quiz-answer.correct{animation:none!important}
+}
 #quizModal[data-quiz-band="4-6"] .quiz-scene{min-height:210px;border-radius:34px}
 #quizModal[data-quiz-band="4-6"] .quiz-scene-symbol{width:66px;height:66px;border-radius:22px;font-size:38px}
 #quizModal[data-quiz-band="4-6"] .quiz-listen{min-height:48px;padding:12px 18px;font-size:14px}
@@ -295,7 +314,8 @@ var(--quiz-art,linear-gradient(180deg,#315c78 0%,#5a8f8a 48%,#ba8b5f 100%));back
 }
 .quiz-finish .star{font-size:68px;margin-bottom:10px}
 .quiz-finish h3{font-size:30px;margin:0 0 8px}
-.quiz-finish p{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 20px}
+.quiz-finish p{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 10px}
+.quiz-finish-reward{margin:0 auto 20px;color:#ffe09a;font-size:20px;letter-spacing:.16em;text-shadow:0 3px 14px rgba(226,189,114,.22)}
 .app[data-age="4–5"] .quiz-question{font-size:clamp(30px,9vw,42px)}
 .app[data-age="4–5"] .quiz-answer{min-height:92px}
 .app[data-age="4–5"] .quiz-answer strong{font-size:21px}
@@ -6225,6 +6245,18 @@ function renderQuizQuestion(){
     quizSpeak(quizPrompt(q),{quizPrompt:true,source:"kids-quiz-question"});
   },250);
 }
+function quizRewardBurst(){
+  var scene=document.getElementById("quizScene");
+  if(!scene||window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  var old=scene.querySelector(".quiz-reward-burst");
+  if(old)old.remove();
+  var burst=document.createElement("div");
+  burst.className="quiz-reward-burst";
+  burst.setAttribute("aria-hidden","true");
+  burst.innerHTML="<span>★</span><span>✦</span><span>★</span><span>✦</span><span>★</span>";
+  scene.appendChild(burst);
+  setTimeout(function(){if(burst&&burst.parentNode)burst.remove()},950);
+}
 function chooseQuizAnswer(index,button){
   if(quizLocked)return;
   var q=currentQuiz[currentQuizIndex];
@@ -6234,6 +6266,7 @@ function chooseQuizAnswer(index,button){
     quizLocked=true;
     quizCorrectCount++;
     button.classList.add("correct");
+    quizRewardBurst();
     document.getElementById("quizFeedback").className="quiz-feedback good";
     document.getElementById("quizFeedback").textContent="✓ "+q.success;
     var explanation=document.getElementById("quizExplanation");
@@ -6271,8 +6304,9 @@ function renderQuizFinish(){
   updateParentProgress();
   document.getElementById("quizProgress").innerHTML="";
   document.getElementById("quizBody").innerHTML=
-    '<div class="quiz-finish"><div class="star"></div><h3>Quiz geschafft!</h3>'+
+    '<div class="quiz-finish"><div class="star">★</div><h3>Quiz geschafft!</h3>'+
     '<p>Du hast '+quizCorrectCount+' von '+currentQuiz.length+' Fragen richtig gelöst.</p>'+
+    '<div class="quiz-finish-reward" aria-hidden="true">'+Array(Math.max(1,Math.min(5,quizCorrectCount))).fill("★").join(" ")+'</div>'+
     '<button id="quizAgain" class="primary">Noch einmal spielen</button></div>';
   document.getElementById("quizAgain").addEventListener("click",openQuiz);
   markDailyDone("quiz");
