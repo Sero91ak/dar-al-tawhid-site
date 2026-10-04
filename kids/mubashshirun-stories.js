@@ -2,6 +2,15 @@
 "use strict";
 
 const DATA_URL="/kids/data/mubashshirun-stories.json";
+const KIDS_STORY_INTRO="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.";
+const KIDS_STORY_OUTRO="Und الله weiß es am besten.\n\nMöge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
+function normalizeKidsStoryText(value){
+  let text=String(value||"").trim();
+  if(!text)return"";
+  if(!text.startsWith(KIDS_STORY_INTRO))text=KIDS_STORY_INTRO+"\n\n"+text;
+  if(!text.endsWith(KIDS_STORY_OUTRO))text=text+"\n\n"+KIDS_STORY_OUTRO;
+  return text;
+}
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.mubashshirunStory.done.";
 let items=[],libraryPolicy={},active=null,activeText="",playing=false,busy=false,coverResizeObserver=null,followReader=null;
@@ -12,7 +21,7 @@ const age=()=>String($(".app")?.getAttribute("data-age")||"6–8");
 const ageKey=()=>age().replace("–","-");
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){try{localStorage.setItem(MODE_KEY,v)}catch(_){}renderModeButtons();applyMode()}
-function textFor(item){const k=ageKey(),s=item?.scripts||{};return String(s[k]||s["6-8"]||"").trim()}
+function textFor(item){const k=ageKey(),s=item?.scripts||{};return normalizeKidsStoryText(String(s[k]||s["6-8"]||"").trim())}
 function words(t){return(String(t).match(/\S+/g)||[]).length}
 function durationLabel(item,t){
   const target=item?.durationTargets?.[ageKey()];
