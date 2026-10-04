@@ -129,7 +129,7 @@ jobs:
           assert 'RENDER_LOCK.locked()' in engine
           assert '"requestKey":request_key' in engine
           job_start=engine[engine.index("def start_generation_job"):engine.index("def get_status",engine.index("def start_generation_job"))]
-          assert job_start.index("find_generation_history_cache(signature)") < job_start.index("detect_unresolved_islamic_terms(text)"), "exact-repeat cache must precede expensive pronunciation preflight"
+          assert job_start.index("find_generation_history_cache(signature)") < job_start.index("preflight=prepare_analysis_preflight(text)"), "exact-repeat cache must precede expensive pronunciation preflight"
           generate_body=engine[engine.index("def generate("):engine.index("class VoiceHTTPServer",engine.index("def generate("))]
           assert 'first_audio_target=64' in generate_body
           assert 'max_first_chars=68 if doc_mode=="kids_story" else 60' in generate_body
