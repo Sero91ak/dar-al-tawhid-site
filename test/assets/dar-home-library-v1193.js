@@ -13,7 +13,7 @@ var access=[
   {nav:"prophets",icon:"prophets.png",title:"Die Propheten",desc:"Qurʾān & authentische Sunnah"},
   {nav:"frauen",icon:"frauen.png",title:"Frauen im Islam",desc:"Fiqh, Ṣaḥābiyyāt & Wissen"},
   {nav:"dua",icon:"dua.png",title:"Duʿāʾ & Adab",desc:"Qurʾān & Sunnah"},
-  {nav:"hadith",icon:"hadith.png",title:"Ḥadīṯ-Bibliothek",desc:"Authentische Überlieferungen"},
+  {nav:"hadith",icon:"hadith.png",title:"Ḥadīṯ",desc:"Authentische Überlieferungen"},
   {nav:"prayer",icon:"prayer.png",title:"Gebetszeiten",desc:"Zeiten & Erinnerungen"},
   {nav:"quran",icon:"quran.png",title:"Qurʾān",desc:"114 Suren, Suche & Lesen"},
   {nav:"quiz",icon:"quiz.png",title:"Dīn-Quiz",desc:"Wissen prüfen"},
