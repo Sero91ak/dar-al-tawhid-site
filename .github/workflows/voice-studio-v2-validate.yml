@@ -12,6 +12,8 @@ on:
       - "kids/**"
       - "cloudflare/kids-content-media.js"
       - "cloudflare/worker.js"
+      - "cloudflare/voice-studio-web.js"
+      - "cloudflare/voice-studio-gpu-gateway.js"
       - "cloudflare/site-router.js"
       - "cloudflare/test-app-worker.js"
       - "wrangler.test.toml"
@@ -29,6 +31,8 @@ on:
       - "kids/**"
       - "cloudflare/kids-content-media.js"
       - "cloudflare/worker.js"
+      - "cloudflare/voice-studio-web.js"
+      - "cloudflare/voice-studio-gpu-gateway.js"
       - "cloudflare/site-router.js"
       - "cloudflare/test-app-worker.js"
       - "wrangler.test.toml"
@@ -49,6 +53,87 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      - name: Validate cloud GPU bridge
+        run: |
+          node --check cloudflare/voice-studio-gpu-gateway.js
+          node --check cloudflare/voice-studio-web.js
+          bash -n voice-studio/cloud-gpu/start.sh
+          bash -n voice-studio/cloud-gpu/bootstrap.sh
+          bash -n voice-studio/cloud-gpu/export-cloud-state.command
+          bash -n voice-studio/cloud-gpu/import-cloud-state.sh
+          bash -n voice-studio/cloud-gpu/smoke.sh
+          bash -n voice-studio/cloud-gpu/provision-digitalocean.sh
+          grep -q 'gpu-4000adax1-20gb' voice-studio/cloud-gpu/provision-digitalocean.sh
+          grep -q 'gpu-h100x1-base' voice-studio/cloud-gpu/provision-digitalocean.sh
+          python -m py_compile voice-studio/local-engine.py
+          python -m py_compile voice-studio/cloud-gpu/benchmark.py
+          grep -q 'FROM pytorch/pytorch:' voice-studio/cloud-gpu/Dockerfile
+          grep -q 'gpus: all' voice-studio/cloud-gpu/docker-compose.yml
+          grep -q 'reverse_proxy voice:8787' voice-studio/cloud-gpu/Caddyfile
+          grep -q 'chatterbox-tts' voice-studio/cloud-gpu/Dockerfile
+          grep -q 'DAR_VOICE_DEVICE=cuda' voice-studio/cloud-gpu/Dockerfile
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          gateway=Path("cloudflare/voice-studio-gpu-gateway.js").read_text(encoding="utf-8")
+          web=Path("cloudflare/voice-studio-web.js").read_text(encoding="utf-8")
+          html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          router=Path("cloudflare/site-router.js").read_text(encoding="utf-8")
+          manifest=json.loads(Path("voice-studio/version.json").read_text(encoding="utf-8"))
+          pwa=json.loads(Path("voice-studio/manifest.webmanifest").read_text(encoding="utf-8"))
+          sw=Path("voice-studio/sw-v11.js").read_text(encoding="utf-8")
+
+          required_engine=[
+              'torch.cuda.is_available()',
+              'DAR_VOICE_DEVICE',
+              'DAR_VOICE_PORT',
+              'DAR_VOICE_NETWORK_MODE',
+              'DAR_VOICE_PAIR_TOKEN',
+          ]
+          missing=[x for x in required_engine if x not in engine]
+          if missing:
+              raise SystemExit("Remote CUDA engine markers missing: "+", ".join(missing))
+
+          required_gateway=[
+              'DAR_VOICE_GPU_ORIGIN',
+              'DAR_VOICE_GPU_TOKEN',
+              'DAR_VOICE_WEB_TOKEN',
+              'X-DAR-Voice-Token',
+              'X-DAR-Voice-Access',
+              'X-DAR-Voice-Transport',
+          ]
+          missing=[x for x in required_gateway if x not in gateway]
+          if missing:
+              raise SystemExit("Cloud GPU gateway markers missing: "+", ".join(missing))
+
+          if 'rest === "/engine" || rest.startsWith("/engine/")' not in web:
+              raise SystemExit("Voice web worker does not route /engine to remote GPU")
+          if 'REMOTE_ENGINE_API="/voice-studio/api/engine"' not in html:
+              raise SystemExit("Public Voice PWA same-origin engine endpoint missing")
+          if '/voice-studio/api/access' not in html or 'establishCloudAccess' not in html:
+              raise SystemExit("Public Voice PWA owner-access exchange missing")
+          if 'DARVOICE_CLOUD' not in gateway or 'HttpOnly' not in gateway or 'SameSite=Strict' not in gateway:
+              raise SystemExit("Cloud Voice HttpOnly session cookie missing")
+          if 'dar.voice.cloud.access.v1' in html:
+              raise SystemExit("Cloud access code must not be persisted in localStorage")
+          if 'const VOICE_API_ORIGIN = "https://dar-admin-publisher.sero91ak.workers.dev";' not in router or 'proxyVoiceApi(request, url)' not in router:
+              raise SystemExit("Public site router does not proxy Voice API to admin gateway")
+          if 'target.searchParams.set("cloud", "1")' not in router:
+              raise SystemExit("/voice shortcut does not activate cloud mode")
+          cloud=manifest.get("cloudVoiceApp") or {}
+          if not cloud.get("enabled") or cloud.get("localIpRequired") is not False:
+              raise SystemExit("version.json cloudVoiceApp contract missing")
+          if pwa.get("start_url") != "/voice-studio/?app=1&cloud=1":
+              raise SystemExit("Installed Voice PWA does not reopen in cloud mode")
+          if 'const CACHE="dar-voice-studio-v51";' not in sw:
+              raise SystemExit("Voice PWA cache was not bumped for cloud manifest")
+          if 'url.pathname.startsWith("/voice-studio/api/")' not in sw or 'cache:"no-store"' not in sw:
+              raise SystemExit("Private Voice API must bypass Service Worker cache")
+          print("DĀR Voice cloud GPU bridge OK")
+          PY
 
       - name: Validate Mac installer shell syntax
         run: |
