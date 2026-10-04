@@ -218,8 +218,8 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
     if (!isOwnerAutomationAuthorized(request, env)) {
       return json({ ok: false, error: "Owner-Freigabe für Story-Synchronisierung fehlt." }, cors, 401);
     }
-    if (!isVoiceConfigured(env)) {
-      return json({ ok: false, error: "ElevenLabs ist serverseitig nicht verbunden.", setupRequired: true }, cors, 503);
+    if (!elevenKey(env)) {
+      return json({ ok: false, error: "ElevenLabs API-Key fehlt serverseitig für die Mitlese-Synchronisierung.", setupRequired: true }, cors, 503);
     }
     try {
       const form = await request.formData();
