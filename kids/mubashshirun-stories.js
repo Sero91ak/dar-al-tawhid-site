@@ -96,7 +96,10 @@ function installSwipeBack(el,onBack){
   el.addEventListener("pointercancel",reset,{passive:true});
 }
 function renderModeButtons(){
-  const m=mode();
+  const audioOnly=isAudioOnlyAge();
+  const detailModes=document.querySelector(".ms-detail-modes");
+  if(detailModes)detailModes.hidden=audioOnly;
+  const m=audioOnly?"listen":mode();
   document.querySelectorAll("[data-ms-mode]").forEach(b=>b.classList.toggle("active",b.dataset.msMode===m));
 }
 function sourceHtml(item){
@@ -145,6 +148,8 @@ function renderCards(){
   grid.querySelectorAll("[data-ms-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.msId)));
   const dc=$("#msDoneCount");if(dc)dc.textContent=String(doneCount());
   const ag=$("#msAge");if(ag)ag.textContent="Alter "+age();
+  const entryCopy=$("#msEntry .ms-entry-copy > span:last-child");
+  if(entryCopy)entryCopy.textContent=isAudioOnlyAge()?"10 Ṣaḥābah · Hörgeschichten":"10 Ṣaḥābah · ihre Geschichten · lesen & hören";
 }
 function insertEntry(view){
   if($("#msEntry"))return;
@@ -158,7 +163,7 @@ function insertEntry(view){
     '<span class="ms-entry-copy">'+
       '<span class="ms-entry-kicker">EIGENER BEREICH · SUNNAH GEPRÜFT</span>'+
       '<strong>Die zehn Mubaschschirūn</strong>'+
-      '<span>10 Ṣaḥābah · ihre Geschichten · lesen &amp; hören</span>'+
+      '<span>'+(isAudioOnlyAge()?'10 Ṣaḥābah · Hörgeschichten':'10 Ṣaḥābah · ihre Geschichten · lesen &amp; hören')+'</span>'+
     '</span>'+
     '<span class="ms-entry-action">Entdecken <b aria-hidden="true">›</b></span>';
   const prophet=$("#psProphetEntry");
@@ -248,7 +253,8 @@ function ensureUi(){
       album:"DĀR AL TAWḤĪD Kids · Mubaschschirūn",
       text:activeText,
       artwork:active?art(active,"hero"):"",
-      deepLink:active?("#stories/sahabi/"+encodeURIComponent(active.id)):"#stories"
+      deepLink:active?("#stories/sahabi/"+encodeURIComponent(active.id)):"#stories",
+      audioOnly:isAudioOnlyAge()
     }),
     toggleAudio,
     disabled:()=>!audioMeta(active)?.url
@@ -287,7 +293,7 @@ function closeStory(){followReader?.close();stopAudio();$("#msModal")?.classList
 function renderActive(){
   if(!active)return;
   activeText=textFor(active);
-  followReader?.setContent({title:active.name,text:activeText});
+  followReader?.setContent({title:active.name,text:activeText,audioOnly:isAudioOnlyAge()});
   const hero=$("#msHero");if(hero){hero.src=art(active,"hero");hero.style.objectPosition=heroPos(active);hero.onerror=()=>{hero.onerror=null;hero.src=art(active,"cover")}}
   $("#msTitle").textContent=active.name;
   $("#msArabic").textContent=(active.nameAr||"")+" رضي الله عنه";
@@ -322,9 +328,18 @@ function renderQuestion(){
   }));
 }
 function applyMode(){
-  const m=mode();renderModeButtons();
-  if($("#msRead"))$("#msRead").hidden=m==="listen";
-  if($("#msPlayer"))$("#msPlayer").hidden=m==="read";
+  renderModeButtons();
+  const read=$("#msRead"),player=$("#msPlayer"),follow=$("#msFollowOpen");
+  if(isAudioOnlyAge()){
+    if(read)read.hidden=true;
+    if(player)player.hidden=false;
+    if(follow){follow.hidden=false;follow.textContent="Hörbuch öffnen";follow.setAttribute("aria-label","Hörbuch-Player öffnen")}
+    return;
+  }
+  const m=mode();
+  if(read)read.hidden=m==="listen";
+  if(player)player.hidden=m==="read";
+  if(follow){follow.hidden=false;follow.textContent="Mitlesen öffnen";follow.setAttribute("aria-label","Mitlesen öffnen")}
 }
 function resetAudio(){
   stopAudio();
@@ -334,7 +349,7 @@ function resetAudio(){
     if(note)note.textContent="Serhat-Stimme · geprüfte Fuṣḥā-Aussprache";
   }else{
     audio.removeAttribute("src");
-    if(note)note.textContent="Der Lesetext ist vollständig. Serhat-Audio wird erst nach der Ausspracheprüfung im Voice Studio freigeschaltet.";
+    if(note)note.textContent=isAudioOnlyAge()?"Das Hörbuch wird nach der Ausspracheprüfung freigeschaltet.":"Der Lesetext ist vollständig. Serhat-Audio wird erst nach der Ausspracheprüfung im Voice Studio freigeschaltet.";
   }
   if($("#msProgress"))$("#msProgress").style.width="0";
   if($("#msTimeCurrent"))$("#msTimeCurrent").textContent="0:00";
@@ -345,7 +360,7 @@ function updatePlayButton(){
   const b=$("#msPlay");if(!b)return;
   const meta=audioMeta(active);
   b.disabled=busy||!meta?.url;
-  b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiterhören":"Hören & mitlesen");
+  b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiterhören":(isAudioOnlyAge()?"Hörbuch starten":"Hören & mitlesen"));
 }
 function storyTime(v){return window.DARKidsFollowReader?.formatTime?window.DARKidsFollowReader.formatTime(v):Math.floor((Number(v)||0)/60)+":"+String(Math.floor((Number(v)||0)%60)).padStart(2,"0")}
 function updateProgress(){
