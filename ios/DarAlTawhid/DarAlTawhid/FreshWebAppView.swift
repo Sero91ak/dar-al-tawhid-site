@@ -362,22 +362,37 @@ struct WebAppView: UIViewRepresentable {
         }
 
         // DAR_SHARE_IMAGE_V1225
+        // DAR_SHARE_IMAGE_MULTI_V1226
         @MainActor
         private func shareImageFromWeb(_ body: [String: Any]) {
-            guard let raw = body["dataUrl"] as? String,
-                  let comma = raw.firstIndex(of: ",") else { return }
-            let encoded = String(raw[raw.index(after: comma)...])
-            guard let data = Data(base64Encoded: encoded),
-                  let image = UIImage(data: data) else { return }
+            var rawValues: [String] = []
+            if let arr = body["dataUrls"] as? [String], !arr.isEmpty {
+                rawValues = arr
+            } else if let raw = body["dataUrl"] as? String, !raw.isEmpty {
+                rawValues = [raw]
+            }
+
+            var images: [UIImage] = []
+            for raw in rawValues {
+                guard let comma = raw.firstIndex(of: ",") else { continue }
+                let encoded = String(raw[raw.index(after: comma)...])
+                guard let data = Data(base64Encoded: encoded),
+                      let image = UIImage(data: data) else { continue }
+                images.append(image)
+            }
+            guard !images.isEmpty else { return }
 
             let title = (body["title"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
-            let caption = [title, "dar-al-tawhid.de"].compactMap { value -> String? in
+            let explicitText = (body["text"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+            let caption = [title, explicitText, "dar-al-tawhid.de"].compactMap { value -> String? in
                 guard let value, !value.isEmpty else { return nil }
                 return value
+            }.reduce(into: [String]()) { out, value in
+                if !out.contains(value) { out.append(value) }
             }.joined(separator: "\n")
 
             guard let presenter = topPresenter() else { return }
-            var items: [Any] = [image]
+            var items: [Any] = images
             if !caption.isEmpty { items.append(caption) }
             let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
             if let popover = controller.popoverPresentationController {
