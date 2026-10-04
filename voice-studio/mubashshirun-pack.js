@@ -2,7 +2,7 @@
 "use strict";
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const state={items:[],selected:"",age:"6-8",visible:false};
+const state={items:[],selected:"",age:"6-8",visible:false,uploading:false};
 const URLS=[
   "/mubashshirun/library?cb="+Date.now(),
   "https://dar-al-tawhid.de/kids/data/mubashshirun-stories.json?cb="+Date.now(),
@@ -34,7 +34,7 @@ function injectStyle(){
   #mubVoicePack .mvp-item span{display:block;font-size:9px;color:#83979b;margin-top:4px;line-height:1.35}
   #mubVoicePack .mvp-selected{margin-top:10px;padding:11px;border:1px solid rgba(255,255,255,.06);border-radius:12px;background:rgba(0,0,0,.11);display:grid;gap:7px}
   #mubVoicePack .mvp-selected strong{font-size:12px}.mvp-source{font-size:9px;color:#819498;line-height:1.45}
-  #mubVoicePack .mvp-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  #mubVoicePack .mvp-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
   #mubVoicePack .mvp-actions button{min-height:40px}
   #mubVoicePack .mvp-ready{font-size:9px;line-height:1.45;color:#9bd8ba}
   body.studio-page-sahaba .heading-row h1:after{content:" · Ṣaḥābah";color:#d9b66f}
@@ -58,7 +58,8 @@ function ensurePanel(){
     '<div class="mvp-head"><div><div class="mvp-kicker">Kids · al-ʿAšarah al-Mubaššarūn</div><h2>Die zehn Mubaschschirūn</h2><div class="mvp-sub">Quellengeprüfte Texte sind fertig vorbereitet. Ṣaḥābī wählen · Altersfassung laden · Fuṣḥā prüfen · Serhat-Audio erzeugen.</div></div>'+
     '<div class="mvp-age"><button type="button" data-mvp-age="4-5">4–5</button><button type="button" data-mvp-age="6-8" class="active">6–8</button><button type="button" data-mvp-age="9-10">9–10</button></div></div>'+
     '<div id="mvpGrid" class="mvp-grid"><div class="notice">Lade 10 Ṣaḥābah …</div></div>'+
-    '<div id="mvpSelected" class="mvp-selected" hidden></div>';
+    '<div id="mvpSelected" class="mvp-selected" hidden></div>'+
+    '<input id="mvpAudioUploadInput" type="file" accept=".wav,.mp3,.m4a,.aac,audio/wav,audio/mpeg,audio/mp4,audio/aac" hidden>';
   const anchor=$("#prophetPick")||$(".heading-row");
   if(anchor)anchor.insertAdjacentElement("beforebegin",p);else host.prepend(p);
   p.querySelectorAll("[data-mvp-age]").forEach(b=>b.addEventListener("click",()=>{state.age=b.dataset.mvpAge;render();loadSelected(false)}));
@@ -95,11 +96,55 @@ function render(){
   box.innerHTML=
     '<strong>'+esc(it.name)+' · '+(state.age==="4-5"?"4–5 Jahre":state.age==="9-10"?"9–10 Jahre":"6–8 Jahre")+'</strong>'+
     '<div class="mvp-source">'+esc((it.sourceRefs||[]).join(" · "))+'</div>'+
-    '<div class="mvp-actions"><button id="mvpLoad" class="btn secondary" type="button">Text in Voice laden</button><button id="mvpGenerate" class="btn primary" type="button">Laden &amp; Audio erzeugen</button><button id="mvpPublish" class="btn secondary" type="button">Geprüft in Kids übernehmen</button></div>'+
-    '<div id="mvpReady" class="mvp-ready">Fuṣḥā-Begriffe und رضي الله عنه laufen anschließend durch dieselbe strenge Ausspracheprüfung wie die Prophetengeschichten.</div>';
+    '<div class="mvp-actions"><button id="mvpLoad" class="btn secondary" type="button">Text in Voice laden</button><button id="mvpUpload" class="btn secondary" type="button">'+(state.uploading?'Datei wird geladen …':'Audio-Datei hochladen')+'</button><button id="mvpGenerate" class="btn primary" type="button">Laden &amp; Audio erzeugen</button><button id="mvpPublish" class="btn secondary" type="button">Geprüft in Kids übernehmen</button></div>'+
+    '<div id="mvpReady" class="mvp-ready">Der Story-Text ist im großen Textfeld direkt bearbeitbar. „Audio-Datei hochladen“ verbindet genau diesen Text mit '+esc(it.name)+' · Alter '+esc(state.age)+'.</div>';
   $("#mvpLoad")?.addEventListener("click",()=>loadSelected(true));
+  $("#mvpUpload")?.addEventListener("click",()=>{
+    const input=$("#mvpAudioUploadInput");
+    if(input){input.value="";input.click()}
+  });
   $("#mvpGenerate")?.addEventListener("click",async()=>{loadSelected(true);await new Promise(r=>setTimeout(r,80));$("#generateBtn")?.click()});
   $("#mvpPublish")?.addEventListener("click",publishCurrent);
+}
+function fileAsDataUrl(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(String(reader.result||""));
+    reader.onerror=()=>reject(new Error("Audiodatei konnte nicht gelesen werden."));
+    reader.readAsDataURL(file);
+  });
+}
+async function uploadCurrent(file){
+  const it=current();if(!it||!file)return false;
+  const text=String($("#text")?.value||"").trim();
+  const status=$("#mvpReady");
+  if(text.length<80){if(status)status.textContent="Der Story-Text ist zu kurz. Text zuerst bearbeiten oder laden.";return false}
+  if(Number(file.size||0)>64*1024*1024){if(status)status.textContent="Die Audiodatei ist größer als 64 MB.";return false}
+  state.uploading=true;render();
+  if($("#mvpReady"))$("#mvpReady").textContent=it.name+" · Audio-Datei und aktueller Text werden Alter "+state.age+" fest zugeordnet …";
+  try{
+    const dataUrl=await fileAsDataUrl(file);
+    const r=await engineRequest("/story-media/upload",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        kind:"sahabi",id:it.id,age:state.age,text,
+        filename:file.name||"story-audio",dataUrl
+      })
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||d.ok===false)throw Error(d.error||"Audio-Upload fehlgeschlagen.");
+    if(!it.scripts||typeof it.scripts!=="object")it.scripts={};
+    if(!it.audio||typeof it.audio!=="object")it.audio={};
+    it.scripts[state.age]=text;
+    it.audio[state.age]={...(it.audio[state.age]||{}),url:d.url||"",durationSec:d.durationSec||0,status:"ready",manualUpload:true};
+    state.uploading=false;render();
+    if($("#mvpReady"))$("#mvpReady").textContent=it.name+" · Alter "+state.age+" ist mit der hochgeladenen Stimme und dem aktuellen Text in Kids übernommen.";
+    return true;
+  }catch(e){
+    state.uploading=false;render();
+    if($("#mvpReady"))$("#mvpReady").textContent=e.message||String(e);
+    return false;
+  }
 }
 async function publishCurrent(){
   const it=current();if(!it)return false;
@@ -161,6 +206,10 @@ async function load(){
 }
 function bind(){
   injectStyle();ensurePanel();
+  $("#mvpAudioUploadInput")?.addEventListener("change",e=>{
+    const file=e.target.files&&e.target.files[0];
+    if(file)uploadCurrent(file);
+  });
   const btn=ensureTab();
   btn?.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();openPack()});
   $("#csProphetTab")?.addEventListener("click",()=>closePack());
@@ -168,5 +217,5 @@ function bind(){
 }
 function boot(){bind();load()}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(boot,120),{once:true});else setTimeout(boot,120);
-window.mubVoicePack={open:openPack,close:closePack,load,loadSelected,publishCurrent,state};
+window.mubVoicePack={open:openPack,close:closePack,load,loadSelected,publishCurrent,uploadCurrent,state};
 })();
