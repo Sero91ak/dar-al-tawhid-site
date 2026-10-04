@@ -154,12 +154,13 @@
     {
       "id": "test-library-classic-cinematic-v1224-2026-10-04",
       "approvedBy": "user-explicit-bibliothek-klassisch-edel-theme-kompatibel-leg-los",
-      "reason": "Nutzer beauftragt ausdrücklich den optischen Umbau der DĀR AL TAWḤĪD PDF-Bibliothek in Dar Test/Staging: klassischer Bibliotheks-Hero, größere lesbare Buchdarstellung, Themenregale, hochwertige Detailseite vor dem PDF und Kompatibilität mit allen bestehenden Erscheinungsbildern. Reader-/Offline-/Push-Logik bleibt unverändert.",
+      "reason": "Nutzer beauftragt ausdrücklich den optischen Umbau der DĀR AL TAWḤĪD PDF-Bibliothek in Dar Test/Staging: klassischer Bibliotheks-Hero, größere lesbare Buchdarstellung, Themenregale, hochwertige Detailseite vor dem PDF und Kompatibilität mit allen bestehenden Erscheinungsbildern. Reader-/Offline-/Push-Logik bleibt unverändert. Zusätzlich ist die Test-Worker-Build-ID-Festverdrahtung freigegeben, soweit sie nur zur synchronen Auslieferung dieses Dar-Test-Stands auf die bereits gesetzte test/version.json-Version angepasst wird.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "test/assets/library/library-app.css",
         "test/assets/library/library-app.js",
-        "test/version.json"
+        "test/version.json",
+        "cloudflare/test-app-worker.js"
       ],
       "expiresAt": "2026-11-04T23:59:00.000Z"
     },
