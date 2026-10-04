@@ -176,8 +176,11 @@ radial-gradient(ellipse at 88% 100%,#dfba7f 0 27%,transparent 28%)}
 .quiz-scene-symbol{font-size:72px;position:relative;z-index:2;filter:drop-shadow(0 10px 16px rgba(0,0,0,.18))}
 .quiz-listen{margin:14px auto 0;border:0;border-radius:999px;padding:10px 14px;background:rgba(226,189,114,.14);color:#ffe6ac;font-weight:900;font-size:12px;cursor:pointer}
 .quiz-listen[disabled]{cursor:default;opacity:.72;background:rgba(255,255,255,.07);color:var(--muted)}
-.quiz-question{text-align:center;font-size:clamp(24px,7vw,36px);line-height:1.18;font-weight:950;letter-spacing:-.03em;margin:18px auto 10px;max-width:580px}
+.quiz-kicker{text-align:center;margin:13px auto 0;font-size:11px;line-height:1.2;font-weight:950;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.quiz-question{text-align:center;font-size:clamp(24px,7vw,36px);line-height:1.18;font-weight:950;letter-spacing:-.03em;margin:7px auto 10px;max-width:580px}
 .quiz-help{text-align:center;color:var(--muted);font-size:12px;margin-bottom:14px}
+.quiz-explanation{display:none;margin:9px auto 3px;max-width:560px;border-radius:17px;padding:11px 13px;background:rgba(82,196,132,.08);border:1px solid rgba(82,196,132,.18);color:rgba(255,255,255,.88);font-size:13px;line-height:1.48;text-align:center}
+.quiz-explanation.show{display:block}
 .quiz-answers{display:grid;gap:10px}
 .quiz-answer{min-height:76px;border-radius:22px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.065);display:flex;align-items:center;gap:14px;text-align:left;padding:13px 15px;cursor:pointer;transition:transform .14s ease,background .14s ease,border .14s ease}
 .quiz-answer:active{transform:scale(.985)}
@@ -198,7 +201,9 @@ radial-gradient(ellipse at 88% 100%,#dfba7f 0 27%,transparent 28%)}
 #quizModal[data-quiz-band="4-6"] .quiz-scene{min-height:210px;border-radius:34px}
 #quizModal[data-quiz-band="4-6"] .quiz-scene-symbol{font-size:86px}
 #quizModal[data-quiz-band="4-6"] .quiz-listen{min-height:48px;padding:12px 18px;font-size:14px}
-#quizModal[data-quiz-band="4-6"] .quiz-question{font-size:clamp(31px,9vw,43px);margin-top:15px}
+#quizModal[data-quiz-band="4-6"] .quiz-kicker{font-size:12px;margin-top:12px}
+#quizModal[data-quiz-band="4-6"] .quiz-question{font-size:clamp(31px,9vw,43px);margin-top:7px}
+#quizModal[data-quiz-band="4-6"] .quiz-explanation{font-size:15px;line-height:1.5}
 #quizModal[data-quiz-band="4-6"] .quiz-answer{min-height:94px;border-radius:27px;padding:15px 16px}
 #quizModal[data-quiz-band="4-6"] .quiz-answer .ans-icon{width:58px;height:58px;border-radius:19px;font-size:28px}
 #quizModal[data-quiz-band="4-6"] .quiz-answer strong{font-size:21px;line-height:1.2}
@@ -6039,13 +6044,16 @@ function renderQuizQuestion(){
   renderQuizProgress();
   var band=currentKidsQuizAgeBand();
   var help=band==="4-6"?"":(band==="9-10"?"Wähle die beste Antwort.":"Hör zu und tippe auf deine Antwort.");
+  var kicker=band==="4-6"?String(q.category||"Quiz"):String(q.category||"Quiz")+" · "+(currentQuizIndex+1)+"/"+currentQuiz.length;
   document.getElementById("quizBody").innerHTML=
     '<div id="quizScene" class="quiz-scene" aria-hidden="true"><div id="quizSceneSymbol" class="quiz-scene-symbol">'+kidsIconMarkup(kidsIconName(q.scene,"star"),"scene-icon")+'</div></div>'+
     '<button id="quizListen" class="quiz-listen" type="button"> Frage noch einmal hören</button>'+
+    '<div class="quiz-kicker">'+kicker+'</div>'+
     '<div id="quizQuestion" class="quiz-question">'+q.question+'</div>'+
     '<div id="quizHelp" class="quiz-help">'+help+'</div>'+
     '<div id="quizAnswers" class="quiz-answers" role="group" aria-label="Antworten"></div>'+
     '<div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>'+
+    '<div id="quizExplanation" class="quiz-explanation"></div>'+
     '<div id="quizSource" class="quiz-source"></div>'+
     '<button id="quizNext" class="quiz-next" type="button">Weiter ›</button>';
   var answers=document.getElementById("quizAnswers");
@@ -6078,6 +6086,11 @@ function chooseQuizAnswer(index,button){
     button.classList.add("correct");
     document.getElementById("quizFeedback").className="quiz-feedback good";
     document.getElementById("quizFeedback").textContent="✓ "+q.success;
+    var explanation=document.getElementById("quizExplanation");
+    if(explanation&&q.explanation){
+      explanation.textContent=String(q.explanation);
+      explanation.classList.add("show");
+    }
     var src=document.getElementById("quizSource");
     if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
     document.getElementById("quizNext").classList.add("show");
