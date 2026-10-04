@@ -14,7 +14,8 @@ struct WebAppView: UIViewRepresentable {
         "darPushSettings",
         "darPushTest",
         "darAppIcon",
-        "darHaptic"
+        "darHaptic",
+        "darShareImage"
     ]
 
     func makeCoordinator() -> Coordinator {
@@ -360,6 +361,59 @@ struct WebAppView: UIViewRepresentable {
             DarNativePermissions.shared.decideGeolocation(decisionHandler)
         }
 
+        // DAR_SHARE_IMAGE_V1225
+        @MainActor
+        private func shareImageFromWeb(_ body: [String: Any]) {
+            guard let raw = body["dataUrl"] as? String,
+                  let comma = raw.firstIndex(of: ",") else { return }
+            let encoded = String(raw[raw.index(after: comma)...])
+            guard let data = Data(base64Encoded: encoded),
+                  let image = UIImage(data: data) else { return }
+
+            let title = (body["title"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+            let caption = [title, "dar-al-tawhid.de"].compactMap { value -> String? in
+                guard let value, !value.isEmpty else { return nil }
+                return value
+            }.joined(separator: "\n")
+
+            guard let presenter = topPresenter() else { return }
+            var items: [Any] = [image]
+            if !caption.isEmpty { items.append(caption) }
+            let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            if let popover = controller.popoverPresentationController {
+                popover.sourceView = presenter.view
+                popover.sourceRect = CGRect(
+                    x: presenter.view.bounds.midX,
+                    y: presenter.view.bounds.maxY - 40,
+                    width: 1,
+                    height: 1
+                )
+                popover.permittedArrowDirections = []
+            }
+            presenter.present(controller, animated: true)
+        }
+
+        @MainActor
+        private func topPresenter(base: UIViewController? = nil) -> UIViewController? {
+            let root = base
+                ?? host?.window?.rootViewController
+                ?? UIApplication.shared.connectedScenes
+                    .compactMap { $0 as? UIWindowScene }
+                    .flatMap { $0.windows }
+                    .first(where: \.isKeyWindow)?
+                    .rootViewController
+            if let nav = root as? UINavigationController {
+                return topPresenter(base: nav.visibleViewController)
+            }
+            if let tab = root as? UITabBarController, let selected = tab.selectedViewController {
+                return topPresenter(base: selected)
+            }
+            if let presented = root?.presentedViewController {
+                return topPresenter(base: presented)
+            }
+            return root
+        }
+
         func userContentController(
             _ userContentController: WKUserContentController,
             didReceive message: WKScriptMessage
@@ -382,6 +436,8 @@ struct WebAppView: UIViewRepresentable {
                 DarAppIcons.set(body["name"] as? String ?? body["id"] as? String ?? "")
             case "darHaptic":
                 DarHaptics.play(raw: body["style"] as? String ?? "light")
+            case "darShareImage":
+                Task { @MainActor in self.shareImageFromWeb(body) }
             default:
                 break
             }
