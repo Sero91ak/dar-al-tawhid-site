@@ -1664,7 +1664,7 @@
     "publicEntry": "/voice/",
     "canonicalSurface": "/voice-studio/?app=1&cloud=1",
     "transport": "cloudflare-gateway",
-    "gateway": "https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/engine",
+    "gateway": "https://dar-al-tawhid.de/voice-studio/api/engine",
     "localIpRequired": false,
     "providerNeutral": true,
     "externalGpuHostRequired": true,
@@ -1672,6 +1672,8 @@
     "remoteEngineDevice": "cuda",
     "remoteEngineUsesExistingApi": true,
     "localStudioCompatibilityPreserved": true,
-    "status": "gateway-ready-host-not-provisioned"
+    "status": "gateway-ready-host-not-provisioned",
+    "sameOrigin": true,
+    "workerOriginHiddenFromClient": true
   }
 }
