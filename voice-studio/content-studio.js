@@ -31,6 +31,7 @@ let legacyQuestion={};
 let legacyClaimIds=[];
 let legacyTags=[];
 let inventoryState={legacy:[],staging:[],live:[]};
+let existingStoryTarget=null;
 let busy=false;
 
 function q(id){return document.getElementById(id)}
@@ -1410,11 +1411,80 @@ function normalizeLegacyNarration(item){
     verification:"prepared"
   };
 }
+
+function ageRangeForStoryBand(age){
+  const a=String(age||"").replace(/[–—]/g,"-");
+  return a==="4-5"?[4,5]:a==="6-8"?[6,8]:a==="9-10"?[9,10]:[4,10];
+}
+function legacyQuizFromStory(item){
+  const question=String(item?.question||"").trim();
+  const answers=Array.isArray(item?.answers)?item.answers:[];
+  const correct=Math.max(0,Number(item?.correct||0));
+  if(!question||answers.length<2)return{};
+  return{
+    question,
+    answers:answers.map((label,index)=>({label:String(label||""),correct:index===correct})),
+    success:"Richtig.",
+    retry:"Hör die Geschichte noch einmal aufmerksam."
+  };
+}
+function normalizeExistingProphetStories(item){
+  if(!item||!String(item.id||"").trim())return[];
+  const scripts=item.scripts&&typeof item.scripts==="object"?item.scripts:{};
+  const quiz=legacyQuizFromStory(item);
+  return["4-5","6-8","9-10"].map(age=>{
+    const text=String(scripts[age]||item.voiceScript||"").trim();
+    if(!text)return null;
+    const range=ageRangeForStoryBand(age);
+    return{
+      id:"existing-prophet-"+String(item.id)+"-"+age,
+      kind:"story",appTarget:"kids",ageMin:range[0],ageMax:range[1],
+      title:String(item.storyTitle||item.title||item.name||item.id)+" · "+age.replace("-","–")+" Jahre",
+      category:"Propheten · Geschichte",topic:String(item.name||item.id),
+      prophetId:String(item.id||""),text,
+      sourceRefs:Array.isArray(item.sourceRefs)?item.sourceRefs:[],
+      question:Object.keys(quiz).length?{[age.replace("-","–")]:quiz}:{},
+      claimIds:[],tags:["legacy-kids","legacy-existing-story","existing-story:prophet","legacy-id:"+String(item.id)],
+      modes:{read:true,listen:true},
+      cover:item.cover?{url:String(item.cover),source:"existing-kids-art",type:"cover"}:{url:"/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",source:"existing-kids-art",type:"cover"},
+      existingAudio:item.audio?.[age]||null,
+      existingStory:{kind:"prophet",itemId:String(item.id),age},
+      verification:"approved"
+    };
+  }).filter(Boolean);
+}
+function normalizeExistingMubashshirunStories(item){
+  if(!item||!String(item.id||"").trim())return[];
+  const scripts=item.scripts&&typeof item.scripts==="object"?item.scripts:{};
+  const quiz=legacyQuizFromStory(item);
+  return["4-5","6-8","9-10"].map(age=>{
+    const text=String(scripts[age]||"").trim();
+    if(!text)return null;
+    const range=ageRangeForStoryBand(age);
+    return{
+      id:"existing-mubashshirun-"+String(item.id)+"-"+age,
+      kind:"story",appTarget:"kids",ageMin:range[0],ageMax:range[1],
+      title:String(item.name||item.short||item.id)+" · "+age.replace("-","–")+" Jahre",
+      category:"Ṣaḥābah · Geschichte",topic:String(item.trait||item.category||"Ṣaḥābah"),
+      text,
+      sourceRefs:Array.isArray(item.sourceRefs)?item.sourceRefs:[],
+      question:Object.keys(quiz).length?{[age.replace("-","–")]:quiz}:{},
+      claimIds:[],tags:["legacy-kids","legacy-existing-story","existing-story:mubashshirun","legacy-id:"+String(item.id)],
+      modes:{read:true,listen:true},
+      cover:item.cover?{url:String(item.cover),source:"existing-kids-art",type:"cover"}:{url:"/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",source:"existing-kids-art",type:"cover"},
+      existingAudio:item.audio?.[age]||null,
+      existingStory:{kind:"mubashshirun",itemId:String(item.id),age},
+      verification:"approved"
+    };
+  }).filter(Boolean);
+}
 async function fetchLegacyKidsInventory(){
   const results=await Promise.allSettled([
     fetchExistingKidsJson("kids/data/stories-authentic.json"),
     fetchExistingKidsJson("kids/data/dua-kids.json"),
-    fetchExistingKidsJson("kids/data/short-stories-voice.json")
+    fetchExistingKidsJson("kids/data/short-stories-voice.json"),
+    fetchExistingKidsJson("kids/data/prophet-stories.json"),
+    fetchExistingKidsJson("kids/data/mubashshirun-stories.json")
   ]);
   const stories=results[0].status==="fulfilled"&&Array.isArray(results[0].value?.items)
     ?results[0].value.items.map(normalizeLegacyStory).filter(Boolean):[];
@@ -1422,7 +1492,11 @@ async function fetchLegacyKidsInventory(){
     ?results[1].value.items.map(normalizeLegacyDua).filter(Boolean):[];
   const narrations=results[2].status==="fulfilled"&&Array.isArray(results[2].value?.items)
     ?results[2].value.items.map(normalizeLegacyNarration).filter(Boolean):[];
-  const all=[...stories,...duas,...narrations];
+  const prophets=results[3].status==="fulfilled"&&Array.isArray(results[3].value?.items)
+    ?results[3].value.items.flatMap(normalizeExistingProphetStories):[];
+  const mubashshirun=results[4].status==="fulfilled"&&Array.isArray(results[4].value?.items)
+    ?results[4].value.items.flatMap(normalizeExistingMubashshirunStories):[];
+  const all=[...prophets,...mubashshirun,...stories,...duas,...narrations];
   if(!all.length){
     const failed=results.filter(x=>x.status==="rejected").map(x=>x.reason?.message||String(x.reason||"")).filter(Boolean);
     throw Error(failed.join(" · ")||"Bestehender Kids-Bestand ist leer.");
