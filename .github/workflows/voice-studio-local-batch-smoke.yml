@@ -48,6 +48,7 @@ jobs:
               '"/learning/preview-state?id="',
               '"/learning/preview-audio?id="',
               'function localLearningCandidates',
+              'function prefetchLearningCandidate',
               'window.setStudioPage=setStudioPage',
               'Updates · aktuell',
           ]
@@ -114,6 +115,8 @@ jobs:
           assert 'LEARNING_PREVIEW_WAITING.is_set()' in engine
           assert 'MANUAL_RENDER_WAITING.is_set()' in engine
           assert 'RENDER_LOCK.locked()' in engine
+          assert '"requestKey":request_key' in engine
+          assert 'snap["reused"]=True' in engine
           assert 'await startFullBatch(true);' not in alphabet, "Alphabet/Quiz full batch must never auto-start"
           assert 'Gesamtbatch startet ausschließlich nach dem' in alphabet
           assert f'const APP_VERSION="{expected}";' in html
