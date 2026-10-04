@@ -1190,6 +1190,16 @@ html[data-theme="bordeaux"]{
   z-index:2;
 }
 
+.lib-page[data-library-root] .lib-hero-kicker{
+  margin:0 0 7px;
+  color:var(--muted);
+  font-size:.66rem;
+  line-height:1.2;
+  font-weight:850;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
 .lib-page[data-library-root] .lib-hero h2{
   margin:0 0 8px;
   font-family:var(--font-display,var(--serif,Georgia,serif));
