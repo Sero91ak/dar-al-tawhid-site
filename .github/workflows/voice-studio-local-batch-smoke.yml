@@ -475,6 +475,9 @@ jobs:
           missing=[m for m in ui_markers if m not in kids]
           assert not missing, "Kids quiz UI markers missing: "+", ".join(missing)
           assert "SpeechSynthesisUtterance" not in Path("kids/owner-voice.js").read_text(encoding="utf-8")
+          assert 'background-image:url("/kids/assets/quiz-scenes/' not in kids, "quiz artwork must stay manifest-driven, not duplicated in CSS"
+          assert 'var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";' in kids
+          assert '#quizModal[data-quiz-band="4-6"] .quiz-scene-top .quiz-scene-chip:first-child{display:none}' in kids
 
           items=quiz.get("items") or []
           assert len(items)==50, f"expected 50 Kids quiz questions, got {len(items)}"
