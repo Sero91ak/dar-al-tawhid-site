@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.87"
+ENGINE_VERSION="2.9.88"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -4153,6 +4153,8 @@ STATUS={
     "render_preview_chunk_count":0,
     "render_preview_mode":"",
     "render_first_audio_priority":False,
+    "render_first_audio_ms":0,
+    "render_first_audio_target_chars":0,
 }
 
 def set_status(**updates):
@@ -4175,7 +4177,7 @@ def render_status_snapshot():
         "render_preview_name","render_preview_ready","render_preview_segments",
         "render_preview_duration_seconds","render_preview_generation","render_preview_complete",
         "render_preview_chunks","render_preview_chunk_count","render_preview_mode",
-        "render_first_audio_priority",
+        "render_first_audio_priority","render_first_audio_ms","render_first_audio_target_chars",
     )
     return {key:st.get(key) for key in keys}
 
@@ -7005,6 +7007,39 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         plan=_coalesce_kids_story_plan(
             plan,max_chars=fast_chars,max_sentences=fast_sentences
         )
+
+        # 2.9.88 · First-Audio-Latency:
+        # Der erste normale deutsche Renderblock wird bewusst kleiner gehalten,
+        # damit iPhone/iPad/Mac deutlich früher etwas Hörbares bekommen. Nur der
+        # erste Block wird geteilt; der Rest bleibt groß/coalesced für hohen
+        # Gesamtdurchsatz. Audio-Locks und Arabisch werden niemals zerschnitten.
+        first_audio_target=96
+        for first_idx,(first_lang,first_chunk) in enumerate(plan[:3]):
+            if first_lang!="de" or audio_lock_key_for_chunk(first_chunk):
+                continue
+            value=str(first_chunk or "").strip()
+            if len(value)<=118:
+                break
+            cut=0
+            sentence_cuts=[
+                m.end() for m in re.finditer(r"(?<=[.!?…])\s+",value)
+                if 52<=m.end()<=132
+            ]
+            if sentence_cuts:
+                cut=min(sentence_cuts,key=lambda x:abs(x-first_audio_target))
+            else:
+                word_cuts=[
+                    m.start() for m in re.finditer(r"\s+",value)
+                    if 68<=m.start()<=124
+                ]
+                if word_cuts:
+                    cut=min(word_cuts,key=lambda x:abs(x-first_audio_target))
+            if cut:
+                head=value[:cut].strip()
+                tail=value[cut:].strip()
+                if len(head)>=45 and len(tail)>=24:
+                    plan=plan[:first_idx]+[(first_lang,head),(first_lang,tail)]+plan[first_idx+1:]
+            break
         plan=prioritize_interactive_first_audio(
             plan,max_first_chars=96 if doc_mode=="kids_story" else 84
         )
@@ -7073,6 +7108,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         render_preview_chunk_count=0,
         render_preview_mode="incremental-chunks-v1" if interactive_fast and len(plan)>1 else "",
         render_first_audio_priority=bool(interactive_fast and len(plan)>1),
+        render_first_audio_ms=0,
+        render_first_audio_target_chars=96 if interactive_fast and len(plan)>1 else 0,
         render_total_segments=0,
         render_completed_segments=0,
         render_active_segment=0,
@@ -7370,6 +7407,9 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                         })
                         progressive_preview_seconds+=float(duration_seconds)
                         progressive_preview_generation+=1
+                        first_audio_ms=0
+                        if progressive_preview_generation==1:
+                            first_audio_ms=int(round((time.perf_counter()-render_started_perf)*1000))
                         # Rückwärtskompatibel bleibt render_preview_name auf dem
                         # allerersten Chunk stehen. Neue 2.9.83-UIs benutzen die
                         # komplette render_preview_chunks-Liste und wechseln nicht
@@ -7385,6 +7425,10 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                             render_preview_chunks=list(progressive_preview_chunks),
                             render_preview_chunk_count=len(progressive_preview_chunks),
                             render_preview_mode="incremental-chunks-v1",
+                            render_first_audio_ms=(
+                                first_audio_ms if first_audio_ms
+                                else int(get_status().get("render_first_audio_ms",0) or 0)
+                            ),
                             message=(
                                 f"Sofort-Audio bereit · {processed_pos}/{total} "
                                 "Abschnitte · Rest wird weiter erzeugt …"
