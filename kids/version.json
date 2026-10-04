@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v41-sahabiyyat1108",
-  "label": "KIDS · V1.07.47",
-  "releasedAt": "2026-10-05T01:46:00+02:00",
-  "note": "Kids v1108: eigener Ṣaḥābiyyāt-Bereich parallel zu Propheten und Ṣaḥābah; 14 quellengeprüfte Geschichten, eigene historische Bildszenen ohne Porträtanspruch, Single-Master-Erzählungen für alle Altersstufen, Audio-/Mitlese-Logik und Direktquellen.",
+  "buildId": "kids-shell-v42-sahabiyyat1112",
+  "label": "KIDS · V1.07.48",
+  "releasedAt": "2026-10-05T01:58:00+02:00",
+  "note": "Kids v1112: eigener Ṣaḥābiyyāt-Bereich im Geschichten-Hub, parallel zu Propheten und Ṣaḥābah. 14 quellengeprüfte Geschichten, individuelle historische Adobe-Szenen ohne Porträtanspruch, identische vollständige Master-Erzählung in allen Altersstufen, 4–5 audio-first, Hören/Mitlesen/Quellen/Quiz vorbereitet.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1108",
+    "serviceWorkerCache": "v1112",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -419,7 +419,9 @@
     "sahabiyyatOwnLibrary": true,
     "sahabiyyatVerifiedStories": 14,
     "sahabiyyatNoPortraits": true,
-    "sahabiyyatSingleMasterStory": true
+    "sahabiyyatSingleMasterStory": true,
+    "sahabiyyatArtworkPolicy": "historical-environment-only-no-portrait",
+    "sahabiyyatBundleVersion": 2
   },
   "updatedAt": "2026-10-04"
 }
