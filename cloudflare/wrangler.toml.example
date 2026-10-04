@@ -17,3 +17,4 @@ ALLOWED_ORIGIN = "https://dar-al-tawhid.de"
 # wrangler secret put PIXABAY_API_KEY
 # wrangler secret put DAR_VOICE_GPU_ORIGIN
 # wrangler secret put DAR_VOICE_GPU_TOKEN
+# wrangler secret put DAR_VOICE_WEB_TOKEN
