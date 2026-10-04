@@ -88,8 +88,10 @@ for (const base of roots) {
     if (known.has(rel)) continue;
     const src = fs.readFileSync(abs, "utf8");
     const isImageShareRenderer =
-      /canvas\.toBlob/.test(src) &&
-      /(bildbeitrag|share.*image|image.*share|navigator\.share)/i.test(src);
+      /navigator\.share/.test(src) ||
+      (/canvas\.toBlob/.test(src) &&
+       /new File\(\[blob\]/.test(src) &&
+       /(bildbeitrag|share)/i.test(src));
     if (!isImageShareRenderer) continue;
     const delegatesGlobal = /DARGlobalShare/.test(src);
     const usesOfficial = src.includes(OFFICIAL_BADGE);
