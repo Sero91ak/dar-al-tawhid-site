@@ -1104,18 +1104,30 @@ body.is-library-reader-route .float-actions {
 }
 
 
+/* DAR_LIBRARY_THEME_FALLBACKS_V1224 */
+:root{
+  --dar-lib-base-bg:var(--bg,#0c0b09);
+  --dar-lib-base-card:var(--card,var(--panel,#15120f));
+  --dar-lib-base-panel:var(--panel,var(--card,#15120f));
+  --dar-lib-base-text:var(--text,#f4ecd8);
+  --dar-lib-base-muted:var(--muted,#b8ad91);
+  --dar-lib-base-muted2:var(--muted2,var(--muted,#a89d83));
+  --dar-lib-base-line:var(--line2,var(--line,rgba(255,255,255,.12)));
+  --dar-lib-base-gold:var(--gold2,var(--accent2,#c8a85b));
+}
+
 /* DAR_LIBRARY_CLASSIC_CINEMATIC_V1224 */
 :root{
   --dar-lib-cinema-image:url("/test/assets/home-v1190/library-mobile-runway.jpg");
-  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 96%,transparent);
-  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 78%,transparent);
-  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 42%,transparent);
-  --dar-lib-glass:color-mix(in srgb,var(--card) 72%,transparent);
-  --dar-lib-glass-strong:color-mix(in srgb,var(--card) 88%,transparent);
-  --dar-lib-rule:color-mix(in srgb,var(--gold2) 24%,var(--line2));
-  --dar-lib-rule-soft:color-mix(in srgb,var(--gold2) 14%,var(--line2));
-  --dar-lib-title:var(--premium-title,var(--gold2));
-  --dar-lib-shadow:0 18px 42px color-mix(in srgb,var(--bg) 72%,transparent);
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--dar-lib-base-bg) 96%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--dar-lib-base-bg) 78%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--dar-lib-base-bg) 42%,transparent);
+  --dar-lib-glass:color-mix(in srgb,var(--dar-lib-base-card) 72%,transparent);
+  --dar-lib-glass-strong:color-mix(in srgb,var(--dar-lib-base-card) 88%,transparent);
+  --dar-lib-rule:color-mix(in srgb,var(--dar-lib-base-gold) 24%,var(--dar-lib-base-line));
+  --dar-lib-rule-soft:color-mix(in srgb,var(--dar-lib-base-gold) 14%,var(--dar-lib-base-line));
+  --dar-lib-title:var(--premium-title,var(--dar-lib-base-gold));
+  --dar-lib-shadow:0 18px 42px color-mix(in srgb,var(--dar-lib-base-bg) 72%,transparent);
 }
 
 html[data-theme="light"],
