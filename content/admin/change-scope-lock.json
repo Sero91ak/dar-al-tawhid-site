@@ -152,6 +152,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-library-classic-cinematic-v1224-2026-10-04",
+      "approvedBy": "user-explicit-bibliothek-klassisch-edel-theme-kompatibel-leg-los",
+      "reason": "Nutzer beauftragt ausdrücklich den optischen Umbau der DĀR AL TAWḤĪD PDF-Bibliothek in Dar Test/Staging: klassischer Bibliotheks-Hero, größere lesbare Buchdarstellung, Themenregale, hochwertige Detailseite vor dem PDF und Kompatibilität mit allen bestehenden Erscheinungsbildern. Reader-/Offline-/Push-Logik bleibt unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/library/library-app.css",
+        "test/assets/library/library-app.js",
+        "test/version.json"
+      ],
+      "expiresAt": "2026-11-04T23:59:00.000Z"
+    },
+    {
       "id": "kids-muhammad-audiobook-permanent-sync-2026-10-04",
       "approvedBy": "user-explicit-story-audio-kids-voice-workflow-weiter",
       "reason": "Nutzer verlangt die Muḥammad ﷺ Hörgeschichte und den synchronisierten Mitlese-Workflow dauerhaft in der Kids-App. Der aktuelle signierte Preview-Link muss vor Ablauf als permanentes Kids-Audio gesichert und mit den Absatz-Zeitstempeln gekoppelt werden.",
