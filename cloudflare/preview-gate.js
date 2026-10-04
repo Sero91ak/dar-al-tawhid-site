@@ -54,7 +54,12 @@ function isDarTestPath(pathname) {
   return pathname === "/test" || pathname.startsWith("/test/");
 }
 
+function isKidsAssetPath(pathname) {
+  return pathname.startsWith("/kids/assets/") || pathname.startsWith("/test/kids/assets/");
+}
+
 function isGatedPath(pathname) {
+  if (isKidsAssetPath(pathname)) return false;
   if (isDarTestPath(pathname) && pathname !== "/test/kids" && !pathname.startsWith("/test/kids/")) return false;
   return pathname === "/kids"
     || pathname.startsWith("/kids/")
@@ -66,6 +71,7 @@ export function gateHiddenSurfaces(request, url, env, mode) {
   const pathname = url.pathname || "/";
   const ua = request.headers.get("User-Agent") || "";
   if (hasValidGateAuth(request, env)) return null;
+  if (isKidsAssetPath(pathname)) return null;
   if (isDarTestPath(pathname) && pathname !== "/test/kids" && !pathname.startsWith("/test/kids/")) return null;
   if (mode === "workers-dev" && !isDarTestPath(pathname)) return unauthorizedGate();
   if (!isGatedPath(pathname)) return null;
