@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v32-quiz650-topics-catalog1099",
-  "label": "KIDS · V1.07.38",
-  "releasedAt": "2026-10-04T10:11:00Z",
-  "note": "DĀR AL TAWḤĪD Kids Quiz: 650 Fragen bleiben eingefroren und vollständig testbar. Sieben realistische Themenbildwelten wechseln automatisch nach Frage, Szene und Kategorie. Der Vollkatalog nutzt altersgerechte Themen-Thumbnails und sein großes Hero-Bild reagiert jetzt direkt auf den gewählten Themenfilter. Katalog v4 lädt inkrementell und zeigt weiterhin den Serhat-Owner-Voice-Status.",
+  "buildId": "kids-shell-v33-quiz650-topics-catalog1100",
+  "label": "KIDS · V1.07.39",
+  "releasedAt": "2026-10-04T10:26:00Z",
+  "note": "DĀR AL TAWḤĪD Kids Quiz: 650 geprüfte Fragen bleiben eingefroren und vollständig testbar. Die Bildlogik wurde auf 11 lokal/offline gebündelte realistische Themenwelten erweitert: Propheten/Qurʾān-Geschichten, Tawḥīd, Īmān/Ākhirah und Aḫlāq/Iḥsān sind nun zusätzlich eigenständig geroutet. Altersabhängige Dichte, reaktiver Katalog-Hero und Serhat-Owner-Voice bleiben erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1099",
+    "serviceWorkerCache": "v1100",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -267,7 +267,7 @@
     "kidsQuizManifestNetworkFirst": true,
     "kidsQuizReleaseGuard": true,
     "quizVisualSystem": {
-      "version": "age-adaptive-realistic-v14",
+      "version": "age-adaptive-realistic-v15",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
       "questionCount": 650,
@@ -297,7 +297,11 @@
         "/kids/assets/quiz-scenes/topic-salah.svg?v=20261004-topic1",
         "/kids/assets/quiz-scenes/topic-adab.svg?v=20261004-topic1",
         "/kids/assets/quiz-scenes/topic-dua.svg?v=20261004-topic1",
-        "/kids/assets/quiz-scenes/topic-charity.svg?v=20261004-topic1"
+        "/kids/assets/quiz-scenes/topic-charity.svg?v=20261004-topic1",
+        "/kids/assets/quiz-scenes/topic-prophets.svg?v=20261004-topic2",
+        "/kids/assets/quiz-scenes/topic-tawhid.svg?v=20261004-topic2",
+        "/kids/assets/quiz-scenes/topic-iman.svg?v=20261004-topic2",
+        "/kids/assets/quiz-scenes/topic-akhlaq.svg?v=20261004-topic2"
       ],
       "ageAdaptiveRewardMotion": true,
       "reducedMotionSafe": true,
@@ -341,11 +345,11 @@
       "fullQuestionCatalogOwnerVoice": true,
       "shortQuizRoundsPreserved": true,
       "noNewQuestionsInThisRelease": true,
-      "catalogAssetVersion": 4,
+      "catalogAssetVersion": 5,
       "latestContentPack": "601-650",
       "questionGenerationPaused": true,
       "questionGenerationCap": 650,
-      "topicArtworkVersion": "topic-realistic-v1",
+      "topicArtworkVersion": "topic-realistic-v2",
       "topicArtworkFamilies": [
         "creation",
         "quran",
@@ -353,9 +357,13 @@
         "salah",
         "adab",
         "dua",
-        "charity"
+        "charity",
+        "prophets",
+        "tawhid",
+        "iman",
+        "akhlaq"
       ],
-      "topicArtworkCount": 7,
+      "topicArtworkCount": 11,
       "topicArtworkCategoryRouting": true,
       "topicArtworkSceneRouting": true,
       "ageToneAdaptive": true,
@@ -371,7 +379,10 @@
       "catalogTopicThumbnails": true,
       "catalogYoungAudioArtwork": true,
       "catalogOlderTopicThumbnail": true,
-      "catalogReactiveTopicHero": true
+      "catalogReactiveTopicHero": true,
+      "topicArtworkPriorityCategoryRouting": true,
+      "topicArtworkProphetKeywordRouting": true,
+      "topicArtworkFineGrainedSemanticRouting": true
     },
     "kidsQuizContentRevision": "001-650",
     "kidsQuizGenerationPaused": true,
