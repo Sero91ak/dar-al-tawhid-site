@@ -192,7 +192,7 @@ function showPronunciationIssues(items){
   $("#analysisBody").innerHTML=rows.length
     ?'<div class="sub" style="margin-bottom:8px">Diese Begriffe brauchen eine Ausspracheprüfung:</div><div class="chips">'+rows.map(x=>'<button class="chip warn" data-server-word="'+esc(x.term||x.tts||"")+'">'+esc(x.term||x.tts||"Begriff")+'</button>').join("")+'</div>'
     :'<div class="sub">Ausspracheprüfung erforderlich.</div>';
-  $("[data-server-word]").forEach(b=>b.onclick=()=>openWord(b.dataset.serverWord));
+  $$("[data-server-word]").forEach(b=>b.onclick=()=>openWord(b.dataset.serverWord));
 }
 
 async function warmVoiceEngine(){
@@ -462,7 +462,7 @@ function catalogCard(x,i){
   return '<div class="card candidate" data-catalog-card="'+i+'" role="button" tabindex="0"><div class="candidate-main"><strong>'+esc(term)+'</strong><div class="arabic">'+esc(x.ttsText||x.alias||"")+'</div><div class="meta">'+esc(x.source||"Bibliothek")+' · '+esc(x.ttsLanguage||"")+(master?' · Master ✓':'')+'</div><div class="catalog-actions"><button data-catalog-preview="'+i+'">Anhören</button><button class="confirm" data-catalog-confirm="'+i+'" disabled>'+(master?'Master ✓':'Als Master bestätigen')+'</button></div></div></div>';
 }
 function bindCatalogRows(){
-  $("[data-catalog-preview]").forEach(b=>{
+  $$("[data-catalog-preview]").forEach(b=>{
     const warm=()=>{
       const row=state.catalogRows[Number(b.dataset.catalogPreview)];
       if(row)prefetchCandidate(row,String(row.canonical||row.input||""));
@@ -474,11 +474,11 @@ function bindCatalogRows(){
       if(row)previewCandidate(row,String(row.canonical||row.input||""),b);
     };
   });
-  $("[data-catalog-confirm]").forEach(b=>b.onclick=()=>{
+  $$("[data-catalog-confirm]").forEach(b=>b.onclick=()=>{
     const row=state.catalogRows[Number(b.dataset.catalogConfirm)];
     if(row)confirmCandidate(String(row.canonical||row.input||""),b);
   });
-  $("[data-catalog-card]").forEach(card=>{
+  $$("[data-catalog-card]").forEach(card=>{
     const open=()=>{
       const i=Number(card.dataset.catalogCard),row=state.catalogRows[i],btn=card.querySelector("[data-catalog-preview]");
       if(row&&btn)previewCandidate(row,String(row.canonical||row.input||""),btn);
