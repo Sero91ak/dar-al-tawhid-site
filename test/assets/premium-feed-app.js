@@ -47,6 +47,14 @@
   };
   var FEED_GITHUB_RAW_ROOT = 'https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main';
   var FEED_BG_POOL = [];
+  var FEED_HISTORICAL_STATIC = [
+    {id:'hist-library',src:'/kids/assets/prophet-scenes/library.webp',category:'knowledge',tags:['bücher','ilm','hadith','sunnah'],status:'active',active:true,approved:true,securityStatus:'approved',isIslamicallySafe:true,allowedFor:['feed'],containsHumans:false,containsFaces:false,containsBodyParts:false,containsNudity:false,containsAnimals:false,containsBirds:false,containsWildlife:false,containsPets:false,containsInsects:false,containsFish:false,containsWatermark:false,containsLogo:false,containsTextOverlay:false,containsCross:false,containsChurch:false,isLowQuality:false,isBlurred:false,isTooBusy:false},
+    {id:'hist-desert',src:'/kids/assets/prophet-scenes/desert.webp',category:'tawhid',tags:['wüste','hijaz','makkah','aqidah'],status:'active',active:true,approved:true,securityStatus:'approved',isIslamicallySafe:true,allowedFor:['feed'],containsHumans:false,containsFaces:false,containsBodyParts:false,containsNudity:false,containsAnimals:false,containsBirds:false,containsWildlife:false,containsPets:false,containsInsects:false,containsFish:false,containsWatermark:false,containsLogo:false,containsTextOverlay:false,containsCross:false,containsChurch:false,isLowQuality:false,isBlurred:false,isTooBusy:false},
+    {id:'hist-mountain',src:'/kids/assets/prophet-scenes/mountain.webp',category:'akhirah',tags:['berge','hijaz','abend','sabr'],status:'active',active:true,approved:true,securityStatus:'approved',isIslamicallySafe:true,allowedFor:['feed'],containsHumans:false,containsFaces:false,containsBodyParts:false,containsNudity:false,containsAnimals:false,containsBirds:false,containsWildlife:false,containsPets:false,containsInsects:false,containsFish:false,containsWatermark:false,containsLogo:false,containsTextOverlay:false,containsCross:false,containsChurch:false,isLowQuality:false,isBlurred:false,isTooBusy:false},
+    {id:'hist-night',src:'/kids/assets/prophet-scenes/night.webp',category:'dua',tags:['nacht','hijaz','ruhe','dua'],status:'active',active:true,approved:true,securityStatus:'approved',isIslamicallySafe:true,allowedFor:['feed'],containsHumans:false,containsFaces:false,containsBodyParts:false,containsNudity:false,containsAnimals:false,containsBirds:false,containsWildlife:false,containsPets:false,containsInsects:false,containsFish:false,containsWatermark:false,containsLogo:false,containsTextOverlay:false,containsCross:false,containsChurch:false,isLowQuality:false,isBlurred:false,isTooBusy:false},
+    {id:'hist-royal',src:'/kids/assets/prophet-scenes/royal.webp',category:'knowledge',tags:['arkaden','bücher','gold','ilm'],status:'active',active:true,approved:true,securityStatus:'approved',isIslamicallySafe:true,allowedFor:['feed'],containsHumans:false,containsFaces:false,containsBodyParts:false,containsNudity:false,containsAnimals:false,containsBirds:false,containsWildlife:false,containsPets:false,containsInsects:false,containsFish:false,containsWatermark:false,containsLogo:false,containsTextOverlay:false,containsCross:false,containsChurch:false,isLowQuality:false,isBlurred:false,isTooBusy:false},
+    {id:'hist-garden',src:'/kids/assets/prophet-scenes/garden.webp',category:'dua',tags:['palmen','madinah','garten','ruhe'],status:'active',active:true,approved:true,securityStatus:'approved',isIslamicallySafe:true,allowedFor:['feed'],containsHumans:false,containsFaces:false,containsBodyParts:false,containsNudity:false,containsAnimals:false,containsBirds:false,containsWildlife:false,containsPets:false,containsInsects:false,containsFish:false,containsWatermark:false,containsLogo:false,containsTextOverlay:false,containsCross:false,containsChurch:false,isLowQuality:false,isBlurred:false,isTooBusy:false}
+  ];
   var FEED_BG_CACHE_VER = 0;
   var FEED_BG_RECENT = [];
   var FEED_BG_RECENT_MAX = 15;
@@ -3015,16 +3023,52 @@
     return new File([blob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
   }
 
-  async function feedSharePresent(file, feedItemId) {
-    if (
-      global.navigator &&
-      global.navigator.share &&
-      global.navigator.canShare &&
-      global.navigator.canShare({ files: [file] })
-    ) {
-      await global.navigator.share({ files: [file] });
-      return;
+  /* FEED_NATIVE_SHARE_V1225 */
+  function feedShareFileDataUrl(file) {
+    return new Promise(function (resolve, reject) {
+      try {
+        var reader = new FileReader();
+        reader.onload = function () { resolve(String(reader.result || '')); };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      } catch (e) { reject(e); }
+    });
+  }
+
+  async function feedShareNativeBridge(file, title) {
+    try {
+      var handler = global.webkit && global.webkit.messageHandlers && global.webkit.messageHandlers.darShareImage;
+      if (!handler || typeof handler.postMessage !== 'function') return false;
+      var dataUrl = await feedShareFileDataUrl(file);
+      handler.postMessage({
+        dataUrl: dataUrl,
+        filename: file.name || 'dar-al-tawhid-bildbeitrag.png',
+        title: title || 'DĀR AL TAWḤĪD Bildbeitrag'
+      });
+      return true;
+    } catch (e) {
+      return false;
     }
+  }
+
+  async function feedSharePresent(file, feedItemId) {
+    if (global.navigator && global.navigator.share) {
+      try {
+        if (!global.navigator.canShare || global.navigator.canShare({ files: [file] })) {
+          await global.navigator.share({
+            files: [file],
+            title: 'DĀR AL TAWḤĪD Bildbeitrag',
+            text: 'dar-al-tawhid.de'
+          });
+          return;
+        }
+      } catch (eShare) {
+        if (eShare && eShare.name === 'AbortError') return;
+      }
+    }
+
+    if (await feedShareNativeBridge(file, 'DĀR AL TAWḤĪD Bildbeitrag')) return;
+
     var url = URL.createObjectURL(file);
     var a = document.createElement('a');
     a.href = url;
@@ -3032,8 +3076,8 @@
     document.body.appendChild(a);
     a.click();
     a.remove();
-    setTimeout(function () { URL.revokeObjectURL(url); }, 3000);
-    showToast('Teilen als Bild wird hier nicht unterstützt. Das Bild wurde gespeichert.');
+    setTimeout(function () { URL.revokeObjectURL(url); }, 30000);
+    showToast('Bild wurde erstellt. Falls kein Teilen-Menü geöffnet wurde, liegt die PNG-Datei zum Teilen bereit.');
   }
 
   function feedShareWarm(feedItemId) {
@@ -3216,22 +3260,23 @@
       var fileName = createSafeFileName(title, extension);
       var mime = blob.type || ('image/' + (extension === 'jpg' ? 'jpeg' : extension));
       var file = new File([blob], fileName, { type: mime });
-      if (global.navigator.share && global.navigator.canShare && global.navigator.canShare({ files: [file] })) {
-        await global.navigator.share({ files: [file] });
-        if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-        return true;
-      }
       if (global.navigator.share) {
         try {
-          await global.navigator.share({ title: title, files: [file] });
-          if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-          return true;
+          if (!global.navigator.canShare || global.navigator.canShare({ files: [file] })) {
+            await global.navigator.share({ title: title, text: 'dar-al-tawhid.de', files: [file] });
+            if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
+            return true;
+          }
         } catch (eShare) {
           if (eShare && eShare.name === 'AbortError') return false;
         }
       }
+      if (await feedShareNativeBridge(file, title)) {
+        if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
+        return true;
+      }
       downloadFeedBlob(blob, fileName);
-      showToast('Bild gespeichert — du kannst es jetzt in deiner Galerie teilen.');
+      showToast('Bild erstellt — falls kein Teilen-Menü geöffnet wurde, liegt die Datei zum Teilen bereit.');
       if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
       return true;
     } catch (error) {
