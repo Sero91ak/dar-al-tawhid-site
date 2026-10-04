@@ -2173,6 +2173,71 @@ async function fetchDesktopGenerationBlob(job){
   return blob;
 }
 
+async function restoreDesktopGenerationJob(){
+  let saved=null;
+  try{saved=JSON.parse(localStorage.getItem(DESKTOP_GENERATION_KEY)||"null")}catch(_){}
+  const jobId=String(saved?.jobId||"").trim(),kind=saved?.kind==="free"?"free":"main";
+  if(!jobId)return;
+  let poll=null;
+  const button=kind==="free"?$("#freeVoiceGenerateBtn"):$("#generateBtn");
+  try{
+    const initial=await getDesktopGenerationJob(jobId);
+    if(initial.state==="error"){clearDesktopGenerationJob(jobId);return}
+    if(button){button.disabled=true;button.textContent="Laufende Audio …"}
+    resetChunkStream(kind);
+    if(kind==="free"){
+      $("#freeVoicePlayerWrap").hidden=false;
+      $("#freeVoiceStatus").textContent="Laufende Audio wird wieder verbunden …";
+    }else{
+      $("#playerWrap").hidden=false;
+      setMessage("Laufende Audio wird wieder verbunden …","warn");
+    }
+    poll=setInterval(async()=>{
+      const st=await getRenderStatus();
+      if(!st)return;
+      if(st.render_preview_ready)updateChunkStream(kind,st);
+      const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
+      if(button)button.textContent="Erzeugen "+pct+" %";
+      if(kind==="free"){
+        $("#freeVoiceProgress").style.width=pct+"%";
+        $("#freeVoiceStatus").textContent=st.message||("Audio wird fortgesetzt · "+pct+" %");
+      }else if(st.message){
+        setMessage(st.message,"warn");
+      }
+    },420);
+    const job=initial.state==="ready"?initial:await waitDesktopGenerationJob(jobId);
+    const blob=await fetchDesktopGenerationBlob(job);
+    const url=URL.createObjectURL(blob);
+    clearDesktopGenerationJob(jobId);
+    if(kind==="free"){
+      if(freeVoiceAudioUrl)URL.revokeObjectURL(freeVoiceAudioUrl);
+      freeVoiceAudioUrl=url;
+      setChunkFinal("free",url);
+      $("#freeVoiceWavLink").href=url;$("#freeVoiceWavLink").textContent="WAV speichern";
+      $("#freeVoicePlayerWrap").hidden=false;$("#freeVoiceProgress").style.width="100%";
+      $("#freeVoiceStatus").textContent="Audio vollständig fertig.";
+      if(!liveChunkStreams.free.chunks.length){$("#freeVoicePlayer").src=url}
+    }else{
+      lastAudio=url;lastGeneratedText=String(saved?.text||"");
+      setChunkFinal("main",url);
+      $("#playerWrap").hidden=false;$("#wavLink").href=url;$("#wavLink").download="dar-serhat-voice.wav";$("#wavLink").textContent="WAV speichern";
+      if(!liveChunkStreams.main.chunks.length)$("#player").src=url;
+      if($("#qaConfirmBtn"))$("#qaConfirmBtn").disabled=false;
+      updateQA();setMessage("Audio vollständig fertig.","good");
+    }
+  }catch(e){
+    try{
+      const snap=await getDesktopGenerationJob(jobId);
+      if(snap.state==="error")clearDesktopGenerationJob(jobId);
+    }catch(_){}
+    if(kind==="free")$("#freeVoiceStatus").textContent=e.message||String(e);
+    else setMessage(e.message||String(e));
+  }finally{
+    if(poll)clearInterval(poll);
+    if(button){button.disabled=false;button.textContent=kind==="free"?"Freie Stimme erzeugen":"Audio erzeugen"}
+  }
+}
+
 const liveChunkStreams={
   free:{chunks:[],seen:new Set(),cursor:0,active:false,finalUrl:""},
   main:{chunks:[],seen:new Set(),cursor:0,active:false,finalUrl:""},
@@ -3083,7 +3148,10 @@ if(IS_LOCAL){
   }
 }
 loadLibrary();
-checkHealth({quiet:true}).then(()=>analyzeProsody());
+checkHealth({quiet:true}).then(ok=>{
+  analyzeProsody();
+  if(ok)restoreDesktopGenerationJob().catch(()=>{});
+});
 setInterval(()=>checkHealth({quiet:true}),5000);
 setTimeout(()=>{
   let initial="free";
