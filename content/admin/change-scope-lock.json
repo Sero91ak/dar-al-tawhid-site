@@ -152,6 +152,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-jummah-redesign-2026-10-04",
+      "approvedBy": "user-explicit-komplette-app-langsam-weiterarbeiten",
+      "reason": "Fortlaufender Nutzerauftrag zur visuellen Modernisierung der Dar-Test-App. Dieser Schritt betrifft nur die Jumuʿah-/Freitagsseite: historisches vormodernes Hero-Motiv, Theme-Kompatibilität, offene Editorial-Abschnitte und bessere Responsive-Hierarchie. Freitagslogik, Zeitfenster, Push und Inhalte bleiben unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/jummah-v1258.css",
+        "cloudflare/test-app-worker.js"
+      ],
+      "expiresAt": "2026-11-04T23:59:00.000Z"
+    },
+    {
       "id": "test-adult-quiz-redesign-2026-10-04",
       "approvedBy": "user-explicit-komplette-app-langsam-weiterarbeiten",
       "reason": "Fortlaufender Nutzerauftrag zur Modernisierung der kompletten Dar-Test-App. Dieser Schritt betrifft ausschließlich die Erwachsenen-Quiz-Startseite: historisches vormodernes Hero-Motiv, Theme-Kompatibilität, weniger Kartenbau und bessere Responsive-Hierarchie. Quizfragen, Bewertung, Statistik und Quizlogik bleiben unverändert.",
