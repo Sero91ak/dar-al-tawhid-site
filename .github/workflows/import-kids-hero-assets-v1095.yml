@@ -1,4 +1,4 @@
-name: Import Kids Hero Assets V1095
+name: Import Kids Hero Assets V1097
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: kids-hero-assets-v1095
+  group: kids-hero-assets-v1097
   cancel-in-progress: true
 
 jobs:
@@ -34,46 +34,60 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p kids/assets/kids-art
-          curl --fail --location --retry 5 --retry-all-errors "$STORY_URL" -o kids/assets/kids-art/section-stories-v1095.png
-          curl --fail --location --retry 5 --retry-all-errors "$PARENTS_URL" -o kids/assets/kids-art/section-parents-v1095.png
-          test -s kids/assets/kids-art/section-stories-v1095.png
-          test -s kids/assets/kids-art/section-parents-v1095.png
-          file kids/assets/kids-art/section-stories-v1095.png
-          file kids/assets/kids-art/section-parents-v1095.png
+          curl --fail --location --retry 5 --retry-all-errors "$STORY_URL" -o kids/assets/kids-art/section-stories-v1097.png
+          curl --fail --location --retry 5 --retry-all-errors "$PARENTS_URL" -o kids/assets/kids-art/section-parents-v1097.png
+          test -s kids/assets/kids-art/section-stories-v1097.png
+          test -s kids/assets/kids-art/section-parents-v1097.png
+          file kids/assets/kids-art/section-stories-v1097.png
+          file kids/assets/kids-art/section-parents-v1097.png
 
       - name: Wire artwork into Kids app
         run: |
           node <<'NODE'
           const fs = require("fs");
 
-          const cssPath = "kids/section-heroes-v1090.css";
-          let css = fs.readFileSync(cssPath, "utf8");
-          css = css
-            .replace(/url\("\/kids\/assets\/kids-art\/section-stories-v1094\.jpg\?v=[^"]+"\)!important;/g,
-              'url("/kids/assets/kids-art/section-stories-v1095.png?v=1095-realistic1")!important;')
-            .replace(/url\("\/kids\/assets\/kids-art\/section-parents-v1090\.jpg\?v=[^"]+"\)!important;/g,
-              'url("/kids/assets/kids-art/section-parents-v1095.png?v=1095-realistic1")!important;')
-            .replace(
-              'linear-gradient(90deg,rgba(3,18,29,.88) 0%,rgba(3,18,29,.63) 39%,rgba(3,18,29,.18) 72%,rgba(3,18,29,.04) 100%),',
-              'linear-gradient(90deg,rgba(3,18,29,.80) 0%,rgba(3,18,29,.52) 40%,rgba(3,18,29,.12) 73%,rgba(3,18,29,.02) 100%),'
-            )
-            .replace(
-              'linear-gradient(90deg,rgba(3,18,29,.91) 0%,rgba(3,18,29,.62) 42%,rgba(3,18,29,.18) 72%,rgba(3,18,29,.04) 100%),',
-              'linear-gradient(90deg,rgba(3,18,29,.84) 0%,rgba(3,18,29,.55) 42%,rgba(3,18,29,.13) 73%,rgba(3,18,29,.02) 100%),'
-            );
-          if (!css.includes("section-stories-v1095.png") || !css.includes("section-parents-v1095.png")) {
-            throw new Error("Hero asset rewrite failed");
+          const heroCssPath = "kids/section-heroes-v1095.css";
+          let heroCss = fs.readFileSync(heroCssPath, "utf8");
+          const marker = "KIDS_SECTION_HERO_REALISM_V1097";
+          if (!heroCss.includes(marker)) {
+            heroCss += `
+          
+/* KIDS_SECTION_HERO_REALISM_V1097
+   Fotorealistische, ruhige Bereichsbilder passend zu Propheten/Ṣaḥābah. */
+body .app #view-stories.view > .page-head.page-head{
+  background-image:
+    linear-gradient(90deg,rgba(3,18,29,.74) 0%,rgba(3,18,29,.42) 41%,rgba(3,18,29,.10) 72%,rgba(3,18,29,.02) 100%),
+    linear-gradient(180deg,rgba(3,18,29,.01) 0%,rgba(3,18,29,.02) 48%,rgba(5,27,42,.20) 73%,#0c2636 100%),
+    url("/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3")!important;
+  background-position:center 49%!important;
+}
+body .app #view-parents.view > .page-head.page-head{
+  background-image:
+    linear-gradient(90deg,rgba(3,18,29,.76) 0%,rgba(3,18,29,.44) 42%,rgba(3,18,29,.11) 73%,rgba(3,18,29,.02) 100%),
+    linear-gradient(180deg,rgba(3,18,29,.01) 0%,rgba(3,18,29,.02) 49%,rgba(4,24,38,.21) 74%,#0c2636 100%),
+    url("/kids/assets/kids-art/section-parents-v1097.png?v=1097-real3")!important;
+  background-position:center 48%!important;
+}
+`;
           }
-          fs.writeFileSync(cssPath, css);
+          fs.writeFileSync(heroCssPath, heroCss);
+
+          const storyCssPath = "kids/stories-final-v1088.css";
+          let storyCss = fs.readFileSync(storyCssPath, "utf8");
+          storyCss = storyCss.replace(
+            /url\("https:\/\/at\.adobe\.com\/jaPS3uCKdEKCahM6"\)!important;/g,
+            'url("/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3")!important;'
+          );
+          fs.writeFileSync(storyCssPath, storyCss);
 
           for (const p of ["kids/index.html","kids/start.html","kids/shell.html"]) {
             let html = fs.readFileSync(p, "utf8");
-            html = html.replaceAll(
-              "/kids/section-heroes-v1090.css?v=1094-compact1",
-              "/kids/section-heroes-v1090.css?v=1095-realistic1"
+            html = html.replace(
+              /\/kids\/section-heroes-v1095\.css\?v=[^"'<>\s]+/g,
+              "/kids/section-heroes-v1095.css?v=1097-real3"
             );
-            if (!html.includes("/kids/section-heroes-v1090.css?v=1095-realistic1")) {
-              throw new Error(p + ": CSS cache-bust rewrite failed");
+            if (!html.includes("/kids/section-heroes-v1095.css?v=1097-real3")) {
+              throw new Error(p + ": section hero stylesheet not wired");
             }
             fs.writeFileSync(p, html);
           }
@@ -81,10 +95,14 @@ jobs:
           const swPath = "kids/sw.js";
           let sw = fs.readFileSync(swPath, "utf8");
           sw = sw
-            .replaceAll("/kids/section-heroes-v1090.css?v=1094-compact1", "/kids/section-heroes-v1090.css?v=1095-realistic1")
-            .replaceAll("/kids/assets/kids-art/section-stories-v1094.jpg", "/kids/assets/kids-art/section-stories-v1095.png")
-            .replaceAll("/kids/assets/kids-art/section-parents-v1090.jpg", "/kids/assets/kids-art/section-parents-v1095.png");
+            .replace(/\/kids\/section-heroes-v1095\.css\?v=[^"\n]+/g, "/kids/section-heroes-v1095.css?v=1097-real3")
+            .replace(/\/kids\/assets\/kids-art\/section-stories-v\d+\.(?:jpg|png)(?:\?v=[^"\n]+)?/g, "/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3")
+            .replace(/\/kids\/assets\/kids-art\/section-parents-v\d+\.(?:jpg|png)(?:\?v=[^"\n]+)?/g, "/kids/assets/kids-art/section-parents-v1097.png?v=1097-real3");
           fs.writeFileSync(swPath, sw);
+
+          if (!heroCss.includes("section-stories-v1097.png") || !heroCss.includes("section-parents-v1097.png")) {
+            throw new Error("V1097 hero URLs missing");
+          }
           NODE
 
       - name: Commit app change and remove one-shot importer
@@ -93,7 +111,7 @@ jobs:
           git config user.name "DAR AL TAWḤĪD App Bot"
           git config user.email "actions@users.noreply.github.com"
           git rm .github/workflows/import-kids-hero-assets-v1095.yml
-          git add kids/assets/kids-art/section-stories-v1095.png                   kids/assets/kids-art/section-parents-v1095.png                   kids/section-heroes-v1090.css                   kids/index.html kids/start.html kids/shell.html kids/sw.js
-          git commit -m "Kids: realistische Geschichten- und Eltern-Heroes"
+          git add kids/assets/kids-art/section-stories-v1097.png                   kids/assets/kids-art/section-parents-v1097.png                   kids/section-heroes-v1095.css                   kids/stories-final-v1088.css                   kids/index.html kids/start.html kids/shell.html kids/sw.js
+          git commit -m "Kids: realistische Geschichten- und Eltern-Heroes V1097"
           git pull --rebase origin main
           git push origin HEAD:main
