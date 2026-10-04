@@ -9324,7 +9324,7 @@ class H(BaseHTTPRequestHandler):
         supplied=str((query.get("pair") or [""])[0]).strip()
         if not self.token_matches(supplied):
             return False
-        target="/mobile/" if parsed.path.startswith("/mobile") else "/studio/"
+        target=("/mobile/#pair="+PAIR_TOKEN) if parsed.path.startswith("/mobile") else ("/studio/#pair="+PAIR_TOKEN)
         self.send_response(302)
         self.send_header("Location",target)
         self.send_header(
@@ -9427,10 +9427,23 @@ class H(BaseHTTPRequestHandler):
         # Dokument-Requests. Nur diese statischen, geheimnisfreien Assets sind
         # deshalb ohne Pair-Cookie lesbar; Voice-/Audio-/Statusdaten bleiben geschützt.
         public_mobile_assets={
+            # App-Shell darf ohne Cookie laden, damit iOS Home-Screen/WebClip nach
+            # einem Neustart seinen lokal gespeicherten Pairing-Token verwenden kann.
+            # Sämtliche Engine-/Audio-/Status-/Write-Endpunkte bleiben weiter geschützt.
+            "/mobile",
+            "/mobile/",
+            "/mobile/index.html",
             "/mobile/manifest.webmanifest",
             "/mobile/voice-studio-icon.png",
             "/mobile/apple-touch-icon.png",
             "/mobile/apple-touch-icon-precomposed.png",
+            "/studio",
+            "/studio/",
+            "/studio/index.html",
+            "/studio/content-studio.js",
+            "/studio/alphabet-audio-studio.js",
+            "/studio/voice-studio-icon.png",
+            "/studio/manifest.webmanifest",
             "/apple-touch-icon.png",
             "/apple-touch-icon-precomposed.png",
             "/favicon.png",
@@ -9804,6 +9817,35 @@ class H(BaseHTTPRequestHandler):
             return self.send_json(413,{"ok":False,"error":"Referenz-Audiodatei ist zu groß. Maximal 64 MB Audio hochladen."})
         try:data=json.loads(self.rfile.read(n) or b"{}")
         except Exception:return self.send_json(400,{"error":"Ungültiges JSON"})
+
+        if p=="/mobile/update":
+            helper=APP_HOME/"update-mac.command"
+            log=APP_HOME/"update.log"
+            if not helper.exists():
+                return self.send_json(503,{
+                    "ok":False,
+                    "error":"Update-Helper fehlt auf dem Mac. Voice Studio am Mac einmal aktualisieren."
+                })
+            try:
+                log.parent.mkdir(parents=True,exist_ok=True)
+                with log.open("ab",buffering=0) as fh:
+                    subprocess.Popen(
+                        ["/bin/bash",str(helper)],
+                        cwd=str(APP_HOME),
+                        stdin=subprocess.DEVNULL,
+                        stdout=fh,
+                        stderr=fh,
+                        start_new_session=True,
+                        close_fds=True,
+                    )
+                return self.send_json(202,{
+                    "ok":True,
+                    "state":"installing",
+                    "engine_version":ENGINE_VERSION,
+                    "message":"Update wurde am Mac gestartet. Die Smartphone-App verbindet sich danach automatisch neu."
+                })
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":"Update konnte nicht gestartet werden: "+str(e)})
 
         if p=="/content-audio/reference":
             upload=None
