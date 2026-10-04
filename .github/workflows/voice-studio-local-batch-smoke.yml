@@ -128,6 +128,12 @@ jobs:
           assert 'MANUAL_RENDER_WAITING.is_set()' in engine
           assert 'RENDER_LOCK.locked()' in engine
           assert '"requestKey":request_key' in engine
+          job_start=engine[engine.index("def start_generation_job"):engine.index("def get_status",engine.index("def start_generation_job"))]
+          assert job_start.index("find_generation_history_cache(signature)") < job_start.index("detect_unresolved_islamic_terms(text)"), "exact-repeat cache must precede expensive pronunciation preflight"
+          generate_body=engine[engine.index("def generate("):engine.index("class VoiceHTTPServer",engine.index("def generate("))]
+          assert 'first_audio_target=64' in generate_body
+          assert 'max_first_chars=68 if doc_mode=="kids_story" else 60' in generate_body
+          assert 'preload_scan=plan[:min(len(plan),2)] if interactive_fast else plan' in generate_body
           assert 'snap["reused"]=True' in engine
           assert 'if p in ("/generate-start","/generate-free-start")' in engine
           assert 'p=="/generate-job"' in engine
