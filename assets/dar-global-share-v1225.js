@@ -1,7 +1,7 @@
 (function(){
   "use strict";
-  if(window.__DAR_GLOBAL_SHARE_V1225)return;
-  window.__DAR_GLOBAL_SHARE_V1225=true;
+  if(window.__DAR_GLOBAL_SHARE_V1228)return;
+  window.__DAR_GLOBAL_SHARE_V1228=true;
 
   var APP_STORE_URL="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
   var APP_STORE_ICON="/assets/app-store-icon-fixed.svg?v=share-v1225";
@@ -24,7 +24,17 @@
     "/assets/post-templates/olive-mihrab.jpg",
     "/assets/post-templates/nacht-mond.jpg",
     "/assets/post-templates/petrol-pflanze.jpg",
-    "/assets/post-templates/buecher-teal.jpg"
+    "/assets/post-templates/buecher-teal.jpg",
+    "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
+    "/kids/assets/sahaba-mubashshirun/umar.jpg",
+    "/kids/assets/sahaba-mubashshirun/uthman.jpg",
+    "/kids/assets/sahaba-mubashshirun/ali.jpg",
+    "/kids/assets/sahaba-mubashshirun/talha.jpg",
+    "/kids/assets/sahaba-mubashshirun/zubayr.jpg",
+    "/kids/assets/sahaba-mubashshirun/sad.jpg",
+    "/kids/assets/sahaba-mubashshirun/said.jpg",
+    "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
+    "/kids/assets/sahaba-mubashshirun/abd-ar-rahman.jpg"
   ];
   var SAHABA_SCENES={
     "abu bakr":"/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
@@ -131,7 +141,7 @@
     else if(/makkah|mekka|ḥajj|hajj|ʿumrah|umrah|kaʿba|kaaba/.test(hay))pool=makkah;
     else if(/madīnah|madinah|medina|masjid|moschee/.test(hay))pool=madinah;
     else if(/ʿilm|ilm|wissen|fiqh|ḥadī|hadith|sunnah|quelle|gelehrt/.test(hay))pool=ilm;
-    var key="darGlobalShareSceneV1225",seq=0;try{seq=Number(localStorage.getItem(key)||0)||0;localStorage.setItem(key,String(seq+1))}catch(e){}
+    var key="darGlobalShareSceneV1228",seq=0;try{seq=Number(localStorage.getItem(key)||0)||0;localStorage.setItem(key,String(seq+1))}catch(e){}
     return pool[(hash(hay+"|"+seq))%pool.length];
   }
   function splitBody(ctx,body,bodySize,maxW,maxH){
@@ -158,7 +168,7 @@
     var titleLines=wrap(ctx,data.title,contentW).slice(0,3);
     var titleBottom=150+titleLines.length*Math.round(titleSize*1.14);
     var bodyTop=titleBottom+54,bodyBottom=960,bodyH=bodyBottom-bodyTop;
-    var bodySize=data.body.length>900?31:data.body.length>620?34:38;
+    var bodySize=data.body.length>900?34:data.body.length>620?38:42;
     var pages=splitBody(ctx,data.body||data.title,bodySize,contentW-18,bodyH);
     if(pages.length>8){pages=pages.slice(0,8);pages[7].push("…")}
     var files=[];
@@ -233,7 +243,7 @@
     });
   }
   document.addEventListener("click",function(ev){
-    var t=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-image],[data-image-post-open],[data-image-dua-open],[data-image-ayah-open],[data-frauen-share=\"image\"]"):null;
+    var t=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-image],[data-image-post-open],[data-image-dua-open],[data-image-ayah-open],[data-image-hadith-open],[data-frauen-share=\"image\"]"):null;
     if(t){ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();createAndShare(t,false);return}
     var ig=ev.target&&ev.target.closest?ev.target.closest("[data-share-instagram],[data-frauen-share=\"ig\"]"):null;
     if(ig){
@@ -244,5 +254,5 @@
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
   function boot(){enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-  window.DARGlobalShare={createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
+  window.DARGlobalShare={version:"1228",createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
 })();
