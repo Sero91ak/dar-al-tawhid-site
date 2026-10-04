@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1090",
-  "label": "KIDS · V1.07.15",
-  "releasedAt": "2026-10-04T00:22:15.922Z",
-  "note": "V1.07.15: Geschichten, Mein Qurʾān und Eltern starten jetzt mit vollflächigen, thematisch erzeugten Hero-Bildern statt separater Header-Kapseln. Die Bildbühnen sind direkt mit dem Seitenhintergrund verbunden, blenden sauber in Nachtblau aus und bleiben auf iPhone und iPad responsiv; Navigation und Inhalte darunter bleiben unverändert.",
+  "buildId": "kids-shell-v12-sahaba1091",
+  "label": "KIDS · V1.07.16",
+  "releasedAt": "2026-10-04T00:28:00.000Z",
+  "note": "V1.07.16: Die hochgeladene Muḥammad-Prophetengeschichte ist für alle drei Altersstufen als Test-Audio zugeordnet. Der Live-Build und Service-Worker-Cache wurden neu veröffentlicht, damit Hören & Mitlesen sofort den aktuellen Audio-Stand lädt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1090",
+    "serviceWorkerCache": "v1091",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -176,6 +176,12 @@
       "stories": "/kids/assets/kids-art/section-stories-v1090.jpg",
       "quran": "/kids/assets/kids-art/section-quran-v1090.jpg",
       "parents": "/kids/assets/kids-art/section-parents-v1090.jpg"
-    }
+    },
+    "muhammadStoryAudioTest": true,
+    "muhammadStoryAudioAges": [
+      "4-5",
+      "6-8",
+      "9-10"
+    ]
   }
 }
