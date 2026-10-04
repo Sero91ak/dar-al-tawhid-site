@@ -107,7 +107,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.89</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.90</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -175,6 +175,32 @@ async function analyzeText(force=false){
   }catch(e){$("#analysisState").textContent="Fehler";$("#analysisBody").textContent=e.message;toast(e.message);return null}
 }
 $("#analyzeBtn").onclick=()=>analyzeText(true);
+
+function showPronunciationIssues(items){
+  const rows=Array.isArray(items)?items:[];
+  state.analysis={
+    ok:false,
+    unresolvedIslamicTerms:rows,
+    reviewTerms:[],
+    masterTerms:[]
+  };
+  state.analysisText=$("#text").value.trim();
+  state.analysisStyle=$("#style").value;
+  $("#analysis").classList.add("show");
+  $("#analysisState").textContent=rows.length?rows.length+" prüfen":"Prüfung";
+  $("#analysisState").className="badge";
+  $("#analysisBody").innerHTML=rows.length
+    ?'<div class="sub" style="margin-bottom:8px">Diese Begriffe brauchen eine Ausspracheprüfung:</div><div class="chips">'+rows.map(x=>'<button class="chip warn" data-server-word="'+esc(x.term||x.tts||"")+'">'+esc(x.term||x.tts||"Begriff")+'</button>').join("")+'</div>'
+    :'<div class="sub">Ausspracheprüfung erforderlich.</div>';
+  $("[data-server-word]").forEach(b=>b.onclick=()=>openWord(b.dataset.serverWord));
+}
+
+async function warmVoiceEngine(){
+  try{
+    if(state.health?.model_state==="ready")return;
+    await api("/warmup",{method:"POST",body:"{}"});
+  }catch(_){}
+}
 
 function revokeIfBlob(url){
   if(String(url||"").startsWith("blob:")){try{URL.revokeObjectURL(url)}catch(_){}}
@@ -260,7 +286,7 @@ function activateLivePreview(st){
     pumpLiveChunks();
     return;
   }
-  // Rückwärtskompatibilität für Engines vor 2.9.89.
+  // Rückwärtskompatibilität für Engines vor 2.9.90.
   const name=String(st?.render_preview_name||"").trim();
   const generation=Math.max(0,Number(st?.render_preview_generation||0));
   if(!name||name===state.livePreviewName||(generation&&generation<=state.livePreviewGeneration))return;
@@ -304,33 +330,30 @@ async function getGenerationJob(jobId){
   if(!r.ok||!d.ok)throw Error(d.error||"Audio-Auftrag nicht gefunden.");
   return d;
 }
-async function waitGenerationJob(jobId){
+function applyRenderProgress(st,jobId){
+  if(!st)return;
+  const statusJob=String(st?.render_job_id||"").trim();
+  if(statusJob&&jobId&&statusJob!==jobId)return;
+  const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
+  const done=Number(st.render_completed_segments||0),total=Number(st.render_total_segments||0);
+  $("#generateBtn").textContent=pct>0?("Erzeuge "+pct+"%"+(total?" · "+done+"/"+total:"")):"Erzeuge …";
+  if(st.render_preview_ready)activateLivePreview(st);
+  if(st.message){
+    $("#analysis").classList.add("show");
+    $("#analysisState").textContent=pct?pct+"%":"läuft";
+    $("#analysisBody").textContent=st.message;
+  }
+}
+async function waitGenerationJob(jobId,onProgress){
   const deadline=Date.now()+30*60*1000;
   while(Date.now()<deadline){
     const d=await getGenerationJob(jobId);
+    if(d.render&&typeof onProgress==="function")onProgress(d.render);
     if(d.state==="ready")return d;
     if(d.state==="error")throw Error(d.error||"Audioerzeugung fehlgeschlagen");
-    await new Promise(r=>setTimeout(r,320));
+    await new Promise(r=>setTimeout(r,180));
   }
   throw Error("Audio-Auftrag hat das Zeitlimit überschritten.");
-}
-function startRenderProgressPolling(jobId){
-  let busy=false;
-  return setInterval(async()=>{
-    if(!state.generating||busy)return;
-    busy=true;
-    try{
-      const rr=await api("/render-status");const st=await rr.json();
-      const statusJob=String(st?.render_job_id||"").trim();
-      if(statusJob&&jobId&&statusJob!==jobId)return;
-      const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
-      const done=Number(st.render_completed_segments||0),total=Number(st.render_total_segments||0);
-      $("#generateBtn").textContent=pct>0?("Erzeuge "+pct+"%"+(total?" · "+done+"/"+total:"")):"Erzeuge …";
-      if(st.render_preview_ready)activateLivePreview(st);
-      if(st.message){$("#analysis").classList.add("show");$("#analysisState").textContent=pct?pct+"%":"läuft";$("#analysisBody").textContent=st.message}
-    }catch(_){}
-    finally{busy=false}
-  },220);
 }
 async function applyGenerationJobResult(job,useLibrary,{autoplayIfShort=true}={}){
   const outputName=String(job?.outputName||"").trim();
@@ -355,9 +378,8 @@ async function applyGenerationJobResult(job,useLibrary,{autoplayIfShort=true}={}
 async function monitorGenerationJob(jobId,useLibrary,{resumed=false}={}){
   state.activeJobId=jobId;state.generating=true;
   $("#generateBtn").disabled=true;$("#generateBtn").textContent=resumed?"Fortsetzen …":"Erzeuge …";
-  const progressTimer=startRenderProgressPolling(jobId);
   try{
-    const job=await waitGenerationJob(jobId);
+    const job=await waitGenerationJob(jobId,st=>applyRenderProgress(st,jobId));
     await applyGenerationJobResult(job,useLibrary,{autoplayIfShort:!resumed});
   }catch(e){
     toast(e.message||String(e));
@@ -366,7 +388,7 @@ async function monitorGenerationJob(jobId,useLibrary,{resumed=false}={}){
       if(snap.state==="error")clearGenerationJob();
     }catch(_){}
   }finally{
-    state.generating=false;clearInterval(progressTimer);
+    state.generating=false;
     if(!state.liveStreamActive)pumpLiveChunks();
     $("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";
   }
@@ -376,24 +398,32 @@ async function generate(){
   if(state.generating)return;
   const text=$("#text").value.trim();if(!text)return toast("Bitte Text eingeben.");
   const useLibrary=!!$("#pronToggle").checked;
-  $("#generateBtn").disabled=true;$("#generateBtn").textContent="Prüfe …";
-  const [healthy,analyzed]=await Promise.all([health(),analyzeText()]);
-  if(!healthy){$("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";return toast("Mac-Engine nicht erreichbar.")}
-  if(!analyzed){$("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";return}
-  if(useLibrary&&(analyzed.unresolvedIslamicTerms||[]).length){
-    $("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";toast("Erst die markierten Wörter prüfen.");return
+  const style=$("#style").value;
+  const cached=state.analysis&&state.analysisText===text&&state.analysisStyle===style?state.analysis:null;
+  if(useLibrary&&cached&&(cached.unresolvedIslamicTerms||[]).length){
+    showPronunciationIssues(cached.unresolvedIslamicTerms);
+    return toast("Erst die markierten Wörter prüfen.");
   }
+  $("#generateBtn").disabled=true;$("#generateBtn").textContent="Starte …";
   resetLiveStream();
   revokeIfBlob(state.audioUrl);state.audioUrl="";state.finalAudioName="";
   state.audioBlob=null;
   try{
     const endpoint=useLibrary?"/generate-start":"/generate-free-start";
     const payload=useLibrary
-      ?{text,prepared:analyzed.prepared||"",style:$("#style").value,interactiveFast:true}
-      :{text,prepared:"",style:$("#style").value,pronunciationLibrary:false,interactiveFast:true};
+      ?{text,style,interactiveFast:true}
+      :{text,style,pronunciationLibrary:false,interactiveFast:true};
     const r=await api(endpoint,{method:"POST",body:JSON.stringify(payload)});
     const d=await r.json().catch(()=>({}));
+    if(r.status===422&&Array.isArray(d.items)){
+      showPronunciationIssues(d.items);
+      throw Error("Erst die markierten Wörter prüfen.");
+    }
     if(!r.ok||!d.ok)throw Error(d.error||"Audioerzeugung konnte nicht gestartet werden.");
+    $("#analysis").classList.add("show");
+    $("#analysisState").textContent="läuft";
+    $("#analysisState").className="badge good";
+    $("#analysisBody").textContent="Engine gestartet · erste hörbare Audio wird vorbereitet …";
     persistGenerationJob(d.jobId,useLibrary);
     await monitorGenerationJob(d.jobId,useLibrary);
   }catch(e){
@@ -570,7 +600,7 @@ $("#text").addEventListener("input",()=>{
   draftTimer=setTimeout(()=>{try{localStorage.setItem("dar.voice.mobile.draft",$("#text").value)}catch(_){}},180);
 });
 syncStylePills();
-health();setInterval(health,10000);
+health().then(ok=>{if(ok)warmVoiceEngine()});setInterval(health,10000);
 setTimeout(async()=>{
   const saved=savedGenerationJob();
   const jobId=String(saved?.jobId||"").trim();
