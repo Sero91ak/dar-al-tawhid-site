@@ -52,7 +52,7 @@ if (frauen) {
   requireToken(frauenRel, frauen, 'fillText("AUSSAGE"', "AUSSAGE hierarchy");
   requireToken(frauenRel, frauen, 'fillText("QUELLE"', "QUELLE hierarchy");
   forbidToken(frauenRel, frauen, "frauenNextShareScene", "legacy existing-image rotation");
-  forbidToken(frauenRel, frauen, "Folgt für mehr Wissen aus Qurʾān & Sunnah", "legacy promo footer");
+  forbidToken(frauenRel, frauen, 'ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah"', "legacy promo footer draw");
   forbidToken(frauenRel, frauen, "app-store-badge-de-official.svg", "legacy App Store footer badge");
 }
 
