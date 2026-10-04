@@ -775,7 +775,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.104 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.105 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -1187,7 +1187,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.104 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.105 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
 </div>
 </div>
 
@@ -1197,7 +1197,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 </div>
 
 <script>
-const APP_VERSION="2.9.104";
+const APP_VERSION="2.9.105";
 const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
 const PROSODY_LABELS={
   auto:"Auto",narration:"Erzählung",kids_story:"Kinder-Geschichte",kids_lesson:"Kinder-Unterricht",
@@ -1211,6 +1211,24 @@ const NATIVE_MAC=/DĀRVoiceStudioMac\//.test(navigator.userAgent);
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const CLOUD_ENGINE_MODE=!IS_LOCAL&&new URLSearchParams(location.search).get("cloud")==="1";
 const LOCAL_API=IS_LOCAL?"":(CLOUD_ENGINE_MODE?REMOTE_ENGINE_API:"http://127.0.0.1:8787");
+const LOCAL_PAIR_KEY="dar.voice.mobilePairToken.v1";
+function captureCompanionPairToken(){
+  if(!IS_COMPANION)return "";
+  let token="";
+  try{
+    const hash=String(location.hash||"").replace(/^#/,"");
+    const params=new URLSearchParams(hash);
+    token=String(params.get("pair")||"").trim();
+    if(token){
+      localStorage.setItem(LOCAL_PAIR_KEY,token);
+      history.replaceState(null,"",location.pathname+location.search);
+    }else{
+      token=String(localStorage.getItem(LOCAL_PAIR_KEY)||"").trim();
+    }
+  }catch(_){}
+  return token;
+}
+let COMPANION_PAIR_TOKEN=captureCompanionPairToken();
 let nativeUpdateState="idle",nativeLatestVersion="";
 let library={rules:[]},buckets=new Map(),fastKnownLibraryTerms=new Set(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let studioMode="production",freeVoiceAudioUrl="",freeVoiceProgressTimer=null,freeVoiceLivePreviewName="",freeVoiceLivePreviewGeneration=0,mainLivePreviewName="",mainLivePreviewGeneration=0;
@@ -1416,10 +1434,13 @@ async function establishCloudAccess(code){
 async function localRequest(path,options={},retried=false){
   const url=LOCAL_API+path;
   const headers=new Headers(options.headers||{});
-  const base={...options,headers,mode:"cors",cache:"no-store",credentials:CLOUD_ENGINE_MODE?"include":options.credentials};
+  if(IS_COMPANION&&COMPANION_PAIR_TOKEN)headers.set("X-DAR-Voice-Token",COMPANION_PAIR_TOKEN);
+  const base={...options,headers,mode:"cors",cache:"no-store",credentials:(CLOUD_ENGINE_MODE||IS_COMPANION)?"include":options.credentials};
   let response;
   try{
-    if(CLOUD_ENGINE_MODE){
+    if(CLOUD_ENGINE_MODE||IS_COMPANION){
+      // Companion requests are same-origin LAN requests. Marking them as
+      // targetAddressSpace=loopback makes iOS/WebKit reject a healthy Mac engine.
       response=await fetch(url,base);
     }else{
       const req=new Request(url,{...base,targetAddressSpace:"loopback"});
@@ -1427,6 +1448,10 @@ async function localRequest(path,options={},retried=false){
     }
   }catch(_){
     response=await fetch(url,base);
+  }
+  if(IS_COMPANION&&response.status===403&&!retried){
+    COMPANION_PAIR_TOKEN=captureCompanionPairToken();
+    if(COMPANION_PAIR_TOKEN)return localRequest(path,options,true);
   }
   if(CLOUD_ENGINE_MODE&&response.status===401&&!retried){
     const token=askCloudAccessToken();
@@ -3276,9 +3301,9 @@ if(IS_LOCAL){
     }else if(IS_COMPANION){
       $("#companionBtn").style.display="none";
       $("#installEngineBtn").style.display="none";
-      $("#appUpdateState").textContent="Companion-Modus · Updates werden am Mac installiert";
+      $("#appUpdateState").textContent="Companion verbunden · Smartphone-Updates: DĀR Voice → System → App-Update";
       $("#appUpdateState").className="update-state good";
-      $("#engineHelp").textContent="iPad/iPhone Companion · Voice Engine, Aussprachelernen und Produktion laufen auf deinem gekoppelten Mac.";
+      $("#engineHelp").textContent="iPad/iPhone Companion · dauerhaft gekoppelt. QR-Code nur für die erste Verbindung; danach Updates direkt in der Smartphone-App unter System.";
       $("#companionPill").style.display="inline-flex";
     }else{
       $("#companionBtn").style.display="none";
