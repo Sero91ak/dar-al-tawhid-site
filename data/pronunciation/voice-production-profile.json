@@ -793,7 +793,7 @@
     "manualStoryUploadAutoRegistersReferencePair": true
   },
   "productionRenderer": {
-    "primaryAppleSilicon": "mlx-community/chatterbox-multilingual-v3",
+    "primaryAppleSilicon": "mlx-community/chatterbox-4bit",
     "framework": "mlx-audio",
     "languages": [
       "de",
@@ -841,6 +841,16 @@
     "contextBridgeAllGermanArabicBoundaries": true,
     "contextBridgeLeadIn": true,
     "contextBridgeFollowOn": true,
-    "contextBridgeCache": true
+    "contextBridgeCache": true,
+    "qualityAppleSilicon": "mlx-community/chatterbox-multilingual-v3",
+    "quantizationBits": 4,
+    "interactiveExtremeFast": true,
+    "interactiveGermanChunkMaxChars": 430,
+    "interactiveKidsStoryChunkMaxChars": 390,
+    "interactiveGermanMaxNewTokens": 900,
+    "interactiveArabicMaxNewTokens": 420,
+    "interactiveUnconfirmedArabicAlias": true,
+    "confirmedAudioMasterNeverFlattened": true,
+    "fastModelCanBeOverriddenByEnv": true
   }
 }
