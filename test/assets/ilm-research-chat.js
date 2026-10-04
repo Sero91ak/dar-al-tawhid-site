@@ -271,6 +271,15 @@
               }).join("") +
             '</div>' +
           '</section>' +
+          '<section class="ilm-welcome-paths" aria-label="Wissenswege">' +
+            '<div class="ilm-welcome-paths-head"><h3>Wissenswege</h3><span>Weiter vertiefen</span></div>' +
+            '<div class="ilm-welcome-path-grid">' +
+              '<button type="button" class="ilm-welcome-path" data-nav="scholars"><span><b>Gelehrte</b><small>Frühe Imāme und Überlieferer</small></span><i aria-hidden="true">→</i></button>' +
+              '<button type="button" class="ilm-welcome-path" data-nav="topics"><span><b>Themen</b><small>ʿAqīdah, Tawḥīd und Manhaj</small></span><i aria-hidden="true">→</i></button>' +
+              '<button type="button" class="ilm-welcome-path" data-nav="hadith"><span><b>Ḥadīṯ</b><small>Sammlungen und Überlieferungen</small></span><i aria-hidden="true">→</i></button>' +
+              '<button type="button" class="ilm-welcome-path" data-nav="bibliothek"><span><b>Bibliothek</b><small>PDFs, Abhandlungen und Quellen</small></span><i aria-hidden="true">→</i></button>' +
+            '</div>' +
+          '</section>' +
         '</div>'
       );
     };
