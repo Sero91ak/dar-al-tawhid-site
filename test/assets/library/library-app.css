@@ -1184,6 +1184,37 @@ html[data-theme="bordeaux"]{
   pointer-events:none;
 }
 
+.lib-hero-topic-art{
+  position:absolute;
+  z-index:0;
+  top:-10%;
+  right:-4%;
+  width:min(43%,360px);
+  height:120%;
+  opacity:.12;
+  overflow:hidden;
+  pointer-events:none;
+  transform:rotate(2deg) scale(1.04);
+  filter:blur(2px) saturate(.74) contrast(.96);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.5) 30%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.5) 30%,#000 100%);
+}
+
+.lib-hero-topic-art img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+
+html[data-theme="light"] .lib-hero-topic-art,
+html[data-theme="soft"] .lib-hero-topic-art,
+html[data-theme="salbei"] .lib-hero-topic-art,
+html[data-theme="eisgold"] .lib-hero-topic-art{
+  opacity:.075;
+}
+
 .lib-page[data-library-root] .lib-hero-inner{
   width:min(650px,92%);
   position:relative;
@@ -1464,7 +1495,38 @@ html[data-theme="bordeaux"]{
   border-top:1px solid var(--dar-lib-rule);
 }
 
+.lib-portal-art{
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  width:42%;
+  overflow:hidden;
+  opacity:.11;
+  pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.45) 34%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.45) 34%,#000 100%);
+}
+
+.lib-portal-art img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  filter:saturate(.72) contrast(.94);
+}
+
+html[data-theme="light"] .lib-portal-art,
+html[data-theme="soft"] .lib-portal-art,
+html[data-theme="salbei"] .lib-portal-art,
+html[data-theme="eisgold"] .lib-portal-art{
+  opacity:.075;
+}
+
 .lib-portal{
+  position:relative;
+  overflow:hidden;
   min-width:0;
   min-height:62px;
   display:grid;
