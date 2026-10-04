@@ -502,12 +502,43 @@ jobs:
               assert asset.exists() and asset.stat().st_size>50000, f"{band} realistic artwork missing or unexpectedly tiny"
               assert url in sw, f"{band} artwork missing from PWA precache"
 
-          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1096"' in sw
+          topic_expected={
+              "creation":"/kids/assets/quiz-scenes/topic-creation.svg?v=20261004-topic1",
+              "quran":"/kids/assets/quiz-scenes/topic-quran.svg?v=20261004-topic1",
+              "home":"/kids/assets/quiz-scenes/topic-home.svg?v=20261004-topic1",
+              "salah":"/kids/assets/quiz-scenes/topic-salah.svg?v=20261004-topic1",
+              "adab":"/kids/assets/quiz-scenes/topic-adab.svg?v=20261004-topic1",
+              "dua":"/kids/assets/quiz-scenes/topic-dua.svg?v=20261004-topic1",
+              "charity":"/kids/assets/quiz-scenes/topic-charity.svg?v=20261004-topic1",
+          }
+          topic_families=((quiz.get("artwork") or {}).get("topicFamilies") or {})
+          assert set(topic_families)==set(topic_expected), "quiz topic artwork families drifted"
+          for family,url in topic_expected.items():
+              assert topic_families[family].get("url")==url, f"{family} topic artwork URL drifted"
+              assert not str(topic_families[family].get("url","")).startswith(("http://","https://")), f"{family} topic artwork hotlink detected"
+              rel=url.split("?",1)[0].lstrip("/")
+              asset=Path(rel)
+              assert asset.exists() and asset.stat().st_size>50000, f"{family} topic artwork missing or unexpectedly tiny"
+              assert url in sw, f"{family} topic artwork missing from PWA precache"
+
+          scene_map=((quiz.get("artwork") or {}).get("sceneMap") or {})
+          category_map=((quiz.get("artwork") or {}).get("categoryMap") or {})
+          for key in ("home","food","mosque","droplet","coin","lock","book","library","speech","heart","help","moon"):
+              assert key in scene_map, "scene-to-artwork routing missing: "+key
+          for key in ("Schöpfung","Qurʾān","Wissen","Ṣalāh","Adab","Aḫlāq","Duʿāʾ","Īmān","Tawḥīd","Ṣadaqah","Zakāh"):
+              assert key in category_map, "category-to-artwork routing missing: "+key
+
+          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1097"' in sw
           assert "QUIZ_ARTWORK=[" not in sw, "legacy external quiz artwork runtime cache returned"
 
           visual=((version.get("visualSystem") or {}).get("quizVisualSystem") or {})
           assert str(visual.get("version") or "").startswith("age-adaptive-realistic-v"), "unexpected Kids quiz visual system version"
           assert visual.get("artworkHotlinkDependency") is False
+          assert visual.get("topicArtworkVersion")=="topic-realistic-v1"
+          assert int(visual.get("topicArtworkCount") or 0)==7
+          assert visual.get("topicArtworkCategoryRouting") is True
+          assert visual.get("topicArtworkSceneRouting") is True
+          assert visual.get("ageToneAdaptive") is True
           assert visual.get("youngAgeAudioFirst") is True
           assert visual.get("systemTtsFallbackAllowed") is False
           assert visual.get("fullQuestionCatalog") is True
@@ -526,6 +557,9 @@ jobs:
           ui_markers=[
               'data-quiz-band',
               'quizArtworkForBand',
+              'kidsQuizTopicArtwork',
+              'data-quiz-family',
+              'quizArtworkForBand(q)',
               'quiz-yes-no',
               '@keyframes quizWrongShake',
               '@media(max-width:430px)',
