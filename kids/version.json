@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v25-quiz600-reward1095",
-  "label": "KIDS · V1.07.31",
-  "releasedAt": "2026-10-04T09:41:30Z",
-  "note": "DĀR AL TAWḤĪD Kids Quiz umfasst jetzt 600 eigenständige, altersgerechte und quellengebundene Fragen (001–600), vollständig getrennt vom normalen DĀR/iOS-Quiz. Die drei realistischen, lokal/offline gebündelten Bildwelten bleiben altersabhängig für 4–6, 7–8 und 9–10; responsive Touch-UX, Quellen/Erklärungen, audio-first für 4–6, Serhat-Owner-Voice und altersabhängige Erfolgsanimation bleiben aktiv.",
+  "buildId": "kids-shell-v26-quiz600-library1096",
+  "label": "KIDS · V1.07.32",
+  "releasedAt": "2026-10-04T09:50:00Z",
+  "note": "DĀR AL TAWḤĪD Kids Quiz zeigt jetzt den vollständigen vorhandenen Bestand von 600 eigenständigen, altersgerechten und quellengebundenen Fragen direkt in der App. Neben den kurzen Quizrunden gibt es eine vollständige Fragenübersicht mit Altersstufen, Suche, Themenfilter, direktem Testen und Serhat-Owner-Voice; es wurden für diesen Release keine neuen Fragen erzeugt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1095",
+    "serviceWorkerCache": "v1096",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -324,7 +324,16 @@
         "7-8": 16,
         "9-10": 16
       },
-      "latestBatchHadithCrossCheck": "dorar.net"
+      "latestBatchHadithCrossCheck": "dorar.net",
+      "fullQuestionCatalog": true,
+      "fullQuestionCatalogMode": "visible-in-app",
+      "fullQuestionCatalogSearch": true,
+      "fullQuestionCatalogCategoryFilter": true,
+      "fullQuestionCatalogDirectTest": true,
+      "fullQuestionCatalogOwnerVoice": true,
+      "shortQuizRoundsPreserved": true,
+      "noNewQuestionsInThisRelease": true,
+      "catalogAssetVersion": 1
     },
     "kidsQuizContentRevision": "001-500"
   },
