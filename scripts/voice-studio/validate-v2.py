@@ -309,12 +309,18 @@ def main():
 
     renderer=prof.get("productionRenderer") or {}
     if renderer.get("framework")!="mlx-audio": fail("MLX production renderer policy missing")
-    if renderer.get("primaryAppleSilicon")!="mlx-community/chatterbox-multilingual-v3": fail("wrong MLX model policy")
-    if int(renderer.get("germanChunkMaxChars",0))>140: fail("German chunk ceiling too high")
-    if int(renderer.get("arabicChunkMaxChars",0))>90: fail("Arabic chunk ceiling too high")
-    if int(renderer.get("germanMaxNewTokens",0))>360: fail("German token ceiling too high")
-    if int(renderer.get("arabicMaxNewTokens",0))>300: fail("Arabic token ceiling too high")
-    for flag in ("voiceCloning","boundedGeneration","tokenCeilingRescue","preservePronunciationRules","preserveConfirmedAudioLocks","preserveHonorificPolicy","preserveTechnicalQa","preserveAntiStutterQa","preserveAntiHoldQa","phraseAwareChunking","renderInOriginalTextOrder","generalBoundaryFlowBridge","noHardWordBoundaryChunking","lazyModelLoad","skipModelWhenAllSegmentsKnown","verifiedSentenceFastReuse","backendIndependentVerifiedCache","autoRepairModeratePause","lexicalBridgeEnabled","functionWordArabicBinding","automaticBoundaryClassification","structuralNotWordSpecific","automaticTightJoin","noGapOnUnpunctuatedBoundary","preserveLearnedPronunciationAcrossUpdates","userLearnedMasterPriority","contextualCoarticulation","contextBridgeAllGermanArabicBoundaries","contextBridgeLeadIn","contextBridgeFollowOn","contextBridgeCache"):
+    if renderer.get("primaryAppleSilicon")!="mlx-community/chatterbox-4bit": fail("wrong Extreme-Fast MLX model policy")
+    if renderer.get("qualityAppleSilicon")!="mlx-community/chatterbox-multilingual-v3": fail("V3 quality fallback policy missing")
+    if int(renderer.get("quantizationBits",0))!=4: fail("Extreme-Fast renderer must be 4-bit")
+    if int(renderer.get("germanChunkMaxChars",0))>140: fail("quality German chunk ceiling too high")
+    if int(renderer.get("arabicChunkMaxChars",0))>90: fail("quality Arabic chunk ceiling too high")
+    if int(renderer.get("germanMaxNewTokens",0))>360: fail("quality German token ceiling too high")
+    if int(renderer.get("arabicMaxNewTokens",0))>300: fail("quality Arabic token ceiling too high")
+    if not (300 <= int(renderer.get("interactiveGermanChunkMaxChars",0)) <= 460): fail("Extreme-Fast German chunk window invalid")
+    if not (280 <= int(renderer.get("interactiveKidsStoryChunkMaxChars",0)) <= 420): fail("Extreme-Fast kids-story chunk window invalid")
+    if not (700 <= int(renderer.get("interactiveGermanMaxNewTokens",0)) <= 960): fail("Extreme-Fast German token window invalid")
+    if not (340 <= int(renderer.get("interactiveArabicMaxNewTokens",0)) <= 460): fail("Extreme-Fast Arabic token window invalid")
+    for flag in ("voiceCloning","boundedGeneration","tokenCeilingRescue","preservePronunciationRules","preserveConfirmedAudioLocks","preserveHonorificPolicy","preserveTechnicalQa","preserveAntiStutterQa","preserveAntiHoldQa","phraseAwareChunking","renderInOriginalTextOrder","generalBoundaryFlowBridge","noHardWordBoundaryChunking","lazyModelLoad","skipModelWhenAllSegmentsKnown","verifiedSentenceFastReuse","backendIndependentVerifiedCache","autoRepairModeratePause","lexicalBridgeEnabled","functionWordArabicBinding","automaticBoundaryClassification","structuralNotWordSpecific","automaticTightJoin","noGapOnUnpunctuatedBoundary","preserveLearnedPronunciationAcrossUpdates","userLearnedMasterPriority","contextualCoarticulation","contextBridgeAllGermanArabicBoundaries","contextBridgeLeadIn","contextBridgeFollowOn","contextBridgeCache","interactiveExtremeFast","interactiveUnconfirmedArabicAlias","confirmedAudioMasterNeverFlattened","fastModelCanBeOverriddenByEnv"):
         if not renderer.get(flag): fail("production renderer policy missing: "+flag)
     if renderer.get("flowArchitecture")!="continuous-sentence-flow-v3":
         fail("continuous sentence-flow architecture identity missing")
