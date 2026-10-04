@@ -16,6 +16,9 @@ SHOTSTACK_HOST = "https://api.shotstack.io/edit/stage"
 SHOTSTACK_PROD_HOST = "https://api.shotstack.io/edit/v1"
 VIDEO_STUDIO_PUBLIC_BASE = "https://dar-admin-publisher.sero91ak.workers.dev"
 
+[ai]
+binding = "AI"
+
 [[durable_objects.bindings]]
 name = "PRAYER_STATUS_STORE"
 class_name = "PrayerStatusStore"
