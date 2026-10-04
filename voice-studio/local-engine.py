@@ -7006,7 +7006,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             plan,max_chars=fast_chars,max_sentences=fast_sentences
         )
         plan=prioritize_interactive_first_audio(
-            plan,max_first_chars=118 if doc_mode=="kids_story" else 105
+            plan,max_first_chars=96 if doc_mode=="kids_story" else 84
         )
 
     # 2.9.63: "free_mode" bedeutet NICHT automatisch Hintergrundarbeit.
