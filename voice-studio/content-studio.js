@@ -1057,7 +1057,7 @@ async function handleDirectAudioFile(file){
   if(!script){setStudioMessage("Öffne oder füge zuerst den fertigen Text ein. Danach kann die Audio exakt diesem Inhalt zugeordnet werden.","warn");return}
   const ext=String(file.name||"").toLowerCase().split(".").pop();
   if(!String(file.type||"").startsWith("audio/")&&!["mp3","m4a","aac","wav"].includes(ext)){setStudioMessage("Bitte MP3, M4A, AAC oder WAV verwenden.","bad");return}
-  if(file.size>55*1024*1024){setStudioMessage("Die Audiodatei ist größer als 55 MB. Bitte als MP3/M4A komprimieren.","bad");return}
+  if(file.size>30*1024*1024){setStudioMessage("Die Audiodatei ist größer als 30 MB. Bitte als MP3/M4A komprimieren, damit Upload und Kids-Publish sicher durchlaufen.","bad");return}
   setStudioMessage("Audio wird dem geöffneten Text zugeordnet und für Mitlesen synchronisiert …","warn");
   try{
     const alignment=await alignStoryFile(file,script);
