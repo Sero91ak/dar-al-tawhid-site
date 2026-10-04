@@ -134,18 +134,503 @@
     body.wa-keyboard .messages{padding-bottom:72px!important}
     @media(max-width:700px){body.wa-chat-active .page{height:100svh!important;height:100dvh!important}body.wa-chat-active .chat-card{padding-bottom:8px!important}body.wa-chat-active .messages{padding-bottom:6px!important}body.wa-chat-active #chatForm{flex:0 0 auto!important}body.wa-keyboard .messages{padding-bottom:72px!important}}
     @media print{html,body{background:#fffaf0!important;color:#1b241f!important;overflow:visible!important}.page{padding:0!important;width:100%!important;max-width:none!important}.header,.hero,.evidence,.workspace,.head,.actions,.toast,.summary-data,#finalEditor,.editor-box>h3{display:none!important}.summary{display:block!important;margin:0!important;padding:0!important;background:transparent!important;color:#1b241f!important;border:0!important;border-radius:0!important;box-shadow:none!important}.summary:before{display:none!important}.summary-grid{display:block!important;margin:0!important}.editor-box{display:block!important;background:transparent!important;border:0!important;padding:0!important}.print-document{display:block!important;width:100%!important;margin:0!important;padding:0!important;background:#fffaf0!important;color:#1b241f!important;font-family:Georgia,'Times New Roman',serif!important;font-size:10.8pt!important;line-height:1.48!important}.print-cover{break-after:avoid;page-break-after:auto;margin:0 0 8mm;padding:7mm 0 5mm;border-bottom:1.6pt solid #b99543;text-align:center}.print-brand{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:10pt;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#806326}.print-title{margin:4mm 0 2mm;font-size:21pt;line-height:1.15;color:#17342f}.print-subtitle{margin:0 auto;max-width:125mm;color:#5d5140;font-size:10pt;line-height:1.45}.print-meta{display:flex;justify-content:space-between;gap:8mm;margin-top:5mm;padding-top:3mm;border-top:1px solid rgba(185,149,67,.42);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:8pt;color:#7b6d55}.print-section{break-inside:avoid;page-break-inside:avoid;margin:0 0 5.2mm;padding:0 0 4.2mm;border-bottom:1px solid rgba(185,149,67,.22)}.print-section h2{margin:0 0 2.4mm;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:10.6pt;letter-spacing:.055em;text-transform:uppercase;color:#17342f}.print-section p{margin:0 0 2.6mm;color:#1b241f;font-size:10.8pt;line-height:1.48}.print-section p:last-child{margin-bottom:0}.print-signature{display:grid;grid-template-columns:1fr 1fr;gap:12mm;margin-top:9mm;break-inside:avoid}.print-line{padding-top:10mm;border-top:1px solid #7b6d55;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:8.5pt;color:#5d5140}.print-note{margin-top:6mm;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:8pt;line-height:1.42;color:#75674f}.print-sources{font-size:9.2pt}.print-sources p{font-size:9.2pt;line-height:1.42}.print-watermark{position:fixed;right:0;bottom:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:7.5pt;color:#a89568} @page{size:A4;margin:13mm 14mm 14mm}}
+  
+    /* WASIYYAH EXPERIENCE V8 · 2026-10-04 */
+    :root{
+      --wa-scene:url("/assets/dar-3d-icons/dar-home-hero-library-4k.png");
+      --wa-hero-ink:#fff7e7;
+      --wa-hero-muted:rgba(255,247,231,.78);
+      --wa-hero-accent:#e7c978;
+      --wa-hero-line:rgba(231,201,120,.30);
+      --wa-surface:color-mix(in srgb,var(--paper) 91%,transparent);
+      --wa-surface-soft:color-mix(in srgb,var(--paper) 70%,transparent);
+      --wa-surface-line:color-mix(in srgb,var(--gold) 38%,transparent);
+      --wa-hero-overlay:
+        linear-gradient(90deg,rgba(5,18,16,.96) 0%,rgba(7,30,25,.88) 44%,rgba(7,27,24,.54) 72%,rgba(4,15,14,.30) 100%),
+        linear-gradient(180deg,rgba(3,10,9,.08),rgba(3,11,10,.70));
+    }
+    html[data-wa-theme=royal]{
+      --wa-hero-overlay:
+        linear-gradient(90deg,rgba(5,14,34,.97) 0%,rgba(10,29,60,.90) 44%,rgba(12,34,63,.56) 72%,rgba(5,15,34,.31) 100%),
+        linear-gradient(180deg,rgba(6,12,28,.08),rgba(5,12,28,.72));
+    }
+    html[data-wa-theme=bordeaux]{
+      --wa-hero-overlay:
+        linear-gradient(90deg,rgba(39,9,17,.97) 0%,rgba(61,18,28,.91) 44%,rgba(66,25,31,.56) 72%,rgba(35,10,16,.31) 100%),
+        linear-gradient(180deg,rgba(27,6,12,.08),rgba(28,7,13,.70));
+    }
+    html[data-wa-theme=green]{
+      --wa-hero-overlay:
+        linear-gradient(90deg,rgba(4,24,18,.97) 0%,rgba(10,48,37,.90) 44%,rgba(16,67,51,.55) 72%,rgba(4,25,18,.31) 100%),
+        linear-gradient(180deg,rgba(4,18,14,.08),rgba(4,22,16,.70));
+    }
+    html[data-wa-theme=soft]{
+      --wa-hero-ink:#fff9eb;
+      --wa-hero-muted:rgba(255,249,235,.82);
+      --wa-hero-accent:#ecd49a;
+    }
+
+    body:not(.wa-chat-active):not(.wa-summary-active){
+      background:
+        radial-gradient(circle at 10% 0%,color-mix(in srgb,var(--gold) 13%,transparent),transparent 30%),
+        linear-gradient(180deg,color-mix(in srgb,var(--paper) 98%,#fff) 0%,var(--bg) 100%)!important;
+    }
+    body:not(.wa-chat-active):not(.wa-summary-active) .page{
+      width:min(100%,1220px);
+      padding-top:calc(8px + env(safe-area-inset-top));
+    }
+
+    .wa-topbar{
+      align-items:center!important;
+      min-height:48px;
+      margin-bottom:10px!important;
+    }
+    .wa-topbar .back{
+      width:42px;
+      height:42px;
+      min-height:42px;
+      padding:0!important;
+      display:grid;
+      place-items:center;
+      font-size:0!important;
+      border-radius:999px;
+      background:var(--wa-surface-soft);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+    }
+    .wa-topbar .back::before{
+      content:"‹";
+      font-size:29px;
+      line-height:1;
+      font-weight:500;
+      transform:translateX(-1px);
+    }
+    .wa-topbar__brand{
+      min-width:0;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .wa-topbar__brand img{
+      width:34px;
+      height:34px;
+      object-fit:contain;
+      filter:drop-shadow(0 8px 18px rgba(0,0,0,.14));
+    }
+    .wa-topbar__brand-text{
+      display:grid;
+      gap:1px;
+    }
+    .wa-topbar__brand strong{
+      color:var(--ink);
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:16px;
+      letter-spacing:.13em;
+      font-weight:700;
+    }
+    .wa-topbar__brand span{
+      color:var(--muted);
+      font-size:11px;
+      font-weight:750;
+      letter-spacing:.03em;
+    }
+
+    .wa-start-shell{
+      border-radius:32px!important;
+      overflow:hidden!important;
+      background:transparent!important;
+      border:1px solid var(--wa-surface-line)!important;
+      box-shadow:0 28px 86px rgba(24,20,12,.16)!important;
+    }
+    .wa-start-hero{
+      position:relative;
+      isolation:isolate;
+      min-height:430px;
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);
+      align-items:end;
+      gap:32px;
+      padding:clamp(30px,5vw,58px);
+      background-image:var(--wa-hero-overlay),var(--wa-scene);
+      background-size:cover;
+      background-position:center 45%;
+      background-repeat:no-repeat;
+    }
+    .wa-start-hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:
+        radial-gradient(circle at 82% 18%,rgba(239,211,141,.16),transparent 25%),
+        linear-gradient(180deg,transparent 58%,rgba(0,0,0,.18));
+      pointer-events:none;
+    }
+    .wa-start-copy{
+      position:relative;
+      z-index:2;
+      max-width:700px;
+    }
+    .wa-start-copy .kicker{
+      color:var(--wa-hero-accent)!important;
+      margin-bottom:10px;
+      letter-spacing:.19em;
+      font-size:10px;
+    }
+    .wa-start-copy h2{
+      margin:0;
+      color:var(--wa-hero-ink);
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(40px,6vw,76px);
+      line-height:.98;
+      letter-spacing:-.035em;
+      text-wrap:balance;
+    }
+    .wa-start-copy h2::after{
+      content:"";
+      display:block;
+      width:min(190px,46%);
+      height:1px;
+      margin-top:16px;
+      background:linear-gradient(90deg,var(--wa-hero-accent),transparent);
+    }
+    .wa-start-copy .wa-start-lead{
+      max-width:610px;
+      margin:15px 0 0;
+      color:var(--wa-hero-muted)!important;
+      font-size:clamp(15px,1.8vw,19px);
+      line-height:1.55;
+      font-weight:560;
+    }
+    .wa-start-actions{
+      align-self:end;
+      display:grid;
+      gap:10px;
+      max-width:360px;
+      justify-self:end;
+      width:100%;
+    }
+    .wa-start-actions .btn{
+      min-height:52px;
+      border-radius:18px;
+      padding:13px 16px;
+      font-size:14px;
+      text-align:left;
+      justify-content:flex-start;
+    }
+    .wa-start-actions .primary{
+      position:relative;
+      background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 76%,#f6df9d),color-mix(in srgb,var(--gold) 88%,#8d6a26))!important;
+      color:#15271f!important;
+      box-shadow:0 16px 42px rgba(0,0,0,.22)!important;
+    }
+    .wa-start-actions .primary::after,
+    .wa-start-actions .secondary::after{
+      content:"→";
+      float:right;
+      font-size:18px;
+      opacity:.8;
+    }
+    .wa-start-actions .secondary{
+      color:var(--wa-hero-ink)!important;
+      border-color:var(--wa-hero-line)!important;
+      background:rgba(9,22,20,.34)!important;
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+    }
+
+    .wa-start-body{
+      padding:clamp(22px,4vw,38px);
+      background:
+        linear-gradient(135deg,var(--wa-surface),color-mix(in srgb,var(--bg) 82%,transparent));
+    }
+    .wa-start-body__head{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      align-items:end;
+      gap:10px 20px;
+      padding-bottom:16px;
+      border-bottom:1px solid var(--wa-surface-line);
+    }
+    .wa-start-body__head .kicker{
+      grid-column:1/-1;
+      margin-bottom:0;
+    }
+    .wa-start-body__head h3{
+      margin:0;
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:clamp(25px,3vw,34px);
+      font-weight:700;
+      letter-spacing:-.02em;
+    }
+    .wa-step-count{
+      color:var(--gold);
+      font-weight:900;
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .wa-start-body__intro{
+      margin:10px 0 0;
+      max-width:720px;
+      font-size:14px;
+      line-height:1.55;
+    }
+    .wa-start-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:0;
+      margin-top:14px;
+      border-top:1px solid var(--wa-surface-line);
+      border-bottom:1px solid var(--wa-surface-line);
+    }
+    .wa-start-topic{
+      min-width:0;
+      padding:16px 18px 15px;
+      border-right:1px solid var(--wa-surface-line);
+      background:transparent;
+    }
+    .wa-start-topic:last-child{border-right:0}
+    .wa-start-topic b{
+      display:block;
+      color:var(--ink);
+      font-size:14px;
+      line-height:1.25;
+      margin-bottom:4px;
+    }
+    .wa-start-topic span{
+      display:block;
+      color:var(--muted);
+      font-size:11.5px;
+      line-height:1.4;
+    }
+    .wa-start-topic::before{
+      content:attr(data-n);
+      display:block;
+      margin-bottom:9px;
+      color:var(--gold);
+      font:900 10px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      letter-spacing:.14em;
+    }
+    .wa-start-footer{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      align-items:center;
+      gap:14px;
+      margin-top:18px;
+      padding:0 2px;
+    }
+    .wa-start-privacy{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      min-width:0;
+    }
+    .wa-start-privacy__icon{
+      width:38px;height:38px;flex:0 0 38px;
+      display:grid;place-items:center;
+      border:1px solid var(--wa-surface-line);
+      border-radius:999px;
+      color:var(--gold);
+      font-weight:950;
+    }
+    .wa-start-privacy strong{display:block;color:var(--ink);font-size:13px}
+    .wa-start-privacy span{display:block;color:var(--muted);font-size:11.5px;line-height:1.4;margin-top:2px}
+    .wa-start-footer .wa-link-btn{
+      appearance:none;
+      border:0;
+      border-bottom:1px solid var(--wa-surface-line);
+      border-radius:0;
+      background:transparent;
+      color:var(--ink);
+      padding:8px 0 6px;
+      font:800 12px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      cursor:pointer;
+    }
+
+    .wa-progress-compact{
+      display:grid;
+      gap:8px;
+      margin-bottom:13px;
+    }
+    .wa-progress-compact__row{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .wa-progress-compact__row strong{font-size:14px;color:var(--ink)}
+    .wa-progress-compact__row span{font-size:11px;color:var(--muted);font-weight:800}
+    .wa-progress-track{
+      height:3px;
+      border-radius:999px;
+      background:color-mix(in srgb,var(--line) 44%,transparent);
+      overflow:hidden;
+    }
+    .wa-progress-track span{
+      display:block;
+      width:0;
+      height:100%;
+      border-radius:inherit;
+      background:linear-gradient(90deg,var(--gold),color-mix(in srgb,var(--gold) 65%,var(--teal2)));
+      transition:width .24s ease;
+    }
+    .wa-progress-toggle{
+      appearance:none;
+      border:0;
+      background:transparent;
+      color:var(--gold);
+      padding:0;
+      font:850 11px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      text-align:left;
+      cursor:pointer;
+    }
+
+    .evidence{
+      background:var(--wa-surface)!important;
+      box-shadow:none!important;
+    }
+    .evidence-grid{
+      grid-template-columns:1fr!important;
+      gap:0!important;
+      margin-top:12px!important;
+      border-top:1px solid var(--wa-surface-line);
+    }
+    .evidence-item{
+      border:0!important;
+      border-bottom:1px solid var(--wa-surface-line)!important;
+      border-radius:0!important;
+      background:transparent!important;
+      padding:15px 2px!important;
+    }
+    .evidence-item p:last-child{margin-bottom:0}
+    .evidence-item strong{font-family:Georgia,"Times New Roman",serif;font-size:17px}
+
+    .summary{
+      border-radius:28px!important;
+      background:var(--wa-surface)!important;
+    }
+    .summary .editor-box{
+      background:linear-gradient(180deg,color-mix(in srgb,var(--paper) 88%,transparent),color-mix(in srgb,var(--bg) 70%,transparent));
+      border-color:var(--wa-surface-line);
+    }
+    #finalEditor{
+      font-family:Georgia,"Times New Roman",serif!important;
+      line-height:1.65!important;
+      background:color-mix(in srgb,var(--paper) 94%,transparent)!important;
+      border-radius:16px!important;
+    }
+
+    @media(max-width:900px){
+      .wa-start-hero{grid-template-columns:1fr;min-height:500px;align-content:end}
+      .wa-start-actions{justify-self:start;max-width:100%;grid-template-columns:1fr 1fr}
+      .wa-start-actions .primary{grid-column:1/-1}
+      .wa-start-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .wa-start-topic:nth-child(2){border-right:0}
+      .wa-start-topic:nth-child(-n+2){border-bottom:1px solid var(--wa-surface-line)}
+    }
+
+    @media(max-width:700px){
+      body:not(.wa-chat-active):not(.wa-summary-active) .page{padding-left:8px!important;padding-right:8px!important}
+      .wa-topbar{padding:0 2px;margin-bottom:7px!important}
+      .wa-topbar__brand img{width:30px;height:30px}
+      .wa-topbar__brand strong{font-size:14px;letter-spacing:.10em}
+      .wa-topbar__brand span{font-size:10px}
+      .wa-start-shell{border-radius:24px!important}
+      .wa-start-hero{
+        min-height:500px;
+        padding:26px 18px 20px;
+        background-position:61% 44%;
+      }
+      .wa-start-copy h2{font-size:clamp(38px,11vw,58px)}
+      .wa-start-copy .wa-start-lead{font-size:15px;max-width:330px}
+      .wa-start-actions{grid-template-columns:1fr 1fr;gap:8px}
+      .wa-start-actions .btn{min-height:48px;border-radius:16px;padding:11px 12px;font-size:12px}
+      .wa-start-actions .primary{font-size:14px}
+      .wa-start-body{padding:19px 16px 17px}
+      .wa-start-body__head{grid-template-columns:1fr auto}
+      .wa-start-body__head h3{font-size:25px}
+      .wa-start-body__intro{font-size:13px}
+      .wa-start-grid{grid-template-columns:1fr 1fr}
+      .wa-start-topic{padding:14px 12px}
+      .wa-start-topic b{font-size:13px}
+      .wa-start-topic span{font-size:10.5px}
+      .wa-start-footer{grid-template-columns:1fr}
+      .wa-start-footer .wa-link-btn{justify-self:start}
+
+      body.wa-chat-active .progress{padding:10px 11px!important}
+      body.wa-chat-active .progress > .kicker{display:none}
+      body.wa-chat-active .progress ol{display:none!important}
+      body.wa-chat-active.wa-progress-open .progress ol{
+        display:flex!important;
+        margin-top:10px!important;
+        padding-bottom:4px!important;
+      }
+      body.wa-chat-active.wa-progress-open .progress li{
+        min-width:150px!important;
+        max-width:185px!important;
+        width:auto!important;
+        height:auto!important;
+        padding:10px 12px!important;
+        display:block!important;
+        font-size:12px!important;
+        border-radius:14px!important;
+      }
+      body.wa-chat-active .wa-progress-compact{margin:0}
+      body.wa-chat-active .privacy{display:none!important}
+    }
+
+    @media(max-width:390px){
+      .wa-start-hero{min-height:520px;padding-left:15px;padding-right:15px}
+      .wa-start-actions{grid-template-columns:1fr}
+      .wa-start-actions .primary{grid-column:auto}
+      .wa-start-grid{grid-template-columns:1fr}
+      .wa-start-topic{border-right:0!important;border-bottom:1px solid var(--wa-surface-line)!important}
+      .wa-start-topic:last-child{border-bottom:0!important}
+    }
+
   </style>
 </head>
 <body>
   <main class="page">
-    <header class="header">
-      <button class="btn back" type="button" data-action="app-back">← Zurück</button>
-      <div><p class="kicker">DAR AL TAWḤID · ISLAMISCHES TESTAMENT</p><h1>Wasiyyah-Assistent</h1><p>Offizieller Assistent zur strukturierten Erstellung einer islamischen Wasiyyah-Erklärung.</p></div>
+    <header class="header wa-topbar">
+      <button class="btn back" type="button" data-action="app-back" aria-label="Zurück">← Zurück</button>
+      <div class="wa-topbar__brand">
+        <img src="/test/assets/dar-3d-icons/wasiyyah.png" alt="" aria-hidden="true">
+        <div class="wa-topbar__brand-text"><strong>DAR AL TAWḤĪD</strong><span>Islamische Waṣiyyah</span></div>
+      </div>
     </header>
 
-    <section class="panel hero" id="startPanel">
-      <div><p class="kicker">Islamisches Testament</p><h2>Strukturierter Assistent mit Pflichtprüfung, Quellen und PDF-Ausgabe</h2><p>Der Assistent fragt alle wichtigen Punkte ab: Schulden, Amānāt, Familie, Wasiyyah bis 1/3, Janāzah nach Sunnah und Ablehnung unbelegter Zeremonien.</p><p>Fehlende Pflichtangaben werden erkannt, bevor der Assistent weitergeht. Der Entwurf ist klar strukturiert und für die abschließende Prüfung vorbereitet.</p></div>
-      <div class="hero-actions"><button class="btn primary" type="button" data-action="start-chat">Wasiyyah beginnen</button><button class="btn secondary" type="button" data-action="show-evidence">Beweise & Hinweise</button><button class="btn secondary" type="button" data-action="load-draft">Entwurf fortsetzen</button></div>
+    <section class="panel wa-start-shell" id="startPanel">
+      <div class="wa-start-hero">
+        <div class="wa-start-copy">
+          <p class="kicker">Islamisches Testament</p>
+          <h2>Waṣiyyah-Assistent</h2>
+          <p class="wa-start-lead">Ordne deine Angelegenheiten verantwortungsvoll, klar und würdevoll nach Qurʾān und authentischer Sunnah.</p>
+        </div>
+        <div class="wa-start-actions">
+          <button class="btn primary" type="button" data-action="start-chat">Waṣiyyah erstellen</button>
+          <button class="btn secondary" type="button" data-action="load-draft">Entwurf fortsetzen</button>
+          <button class="btn secondary" type="button" data-action="show-evidence">Beweise & Regeln</button>
+        </div>
+      </div>
+      <div class="wa-start-body">
+        <div class="wa-start-body__head">
+          <p class="kicker">Der geführte Assistent</p>
+          <h3>In 15 Schritten zu deiner Waṣiyyah</h3>
+          <span class="wa-step-count">15 Schritte</span>
+        </div>
+        <p class="wa-start-body__intro">Die bestehende Pflichtprüfung bleibt erhalten. Du wirst Schritt für Schritt durch die wichtigen Bereiche geführt und erhältst am Ende einen bearbeitbaren PDF-Entwurf.</p>
+        <div class="wa-start-grid" aria-label="Beispiele aus dem Ablauf">
+          <div class="wa-start-topic" data-n="01"><b>Persönliche Angaben</b><span>Grunddaten und Ort der Erstellung.</span></div>
+          <div class="wa-start-topic" data-n="03"><b>Familie & Erben</b><span>Familienstand und mögliche Erben.</span></div>
+          <div class="wa-start-topic" data-n="04"><b>Schulden & Rechte</b><span>Offene Rechte und Verpflichtungen.</span></div>
+          <div class="wa-start-topic" data-n="09"><b>Janāzah</b><span>Wünsche nach Qurʾān und Sunnah.</span></div>
+        </div>
+        <div class="wa-start-footer">
+          <div class="wa-start-privacy"><span class="wa-start-privacy__icon">✓</span><div><strong>Privat auf deinem Gerät</strong><span>Entwürfe werden lokal gespeichert und können jederzeit gelöscht werden.</span></div></div>
+          <button class="wa-link-btn" type="button" data-action="show-evidence">Beweise & Grundregeln ansehen →</button>
+        </div>
+      </div>
     </section>
 
     <section class="panel evidence hidden" id="evidencePanel">
@@ -154,7 +639,16 @@
     </section>
 
     <section class="panel workspace hidden" id="chatPanel">
-      <aside class="progress"><p class="kicker">Fortschritt</p><ol id="progressList"></ol><div class="privacy"><strong>Datenschutz</strong><p>Keine öffentliche Speicherung. Lokale Speicherung nur auf diesem Gerät. Daten können jederzeit gelöscht werden.</p><button class="btn danger" type="button" data-action="clear-draft">Entwurf löschen</button></div></aside>
+      <aside class="progress">
+        <p class="kicker">Fortschritt</p>
+        <div class="wa-progress-compact">
+          <div class="wa-progress-compact__row"><strong id="compactPhaseTitle">Einführung</strong><span id="compactPhaseCount">Schritt 1 von 15</span></div>
+          <div class="wa-progress-track" aria-hidden="true"><span id="compactProgressFill"></span></div>
+          <button class="wa-progress-toggle" type="button" data-action="toggle-progress-details">Alle Schritte anzeigen</button>
+        </div>
+        <ol id="progressList"></ol>
+        <div class="privacy"><strong>Datenschutz</strong><p>Keine öffentliche Speicherung. Lokale Speicherung nur auf diesem Gerät. Daten können jederzeit gelöscht werden.</p><button class="btn danger" type="button" data-action="clear-draft">Entwurf löschen</button></div>
+      </aside>
       <section class="chat-card">
         <div class="toolbar"><div><p class="kicker" id="phaseKicker">Phase</p><h2 id="phaseTitle">Wasiyyah-Assistent</h2></div><div class="toolbar-actions"><button class="btn secondary" type="button" data-action="save-draft">Speichern</button><button class="btn secondary" type="button" data-action="show-summary">Zusammenfassung</button></div></div>
         <div id="chatMessages" class="messages" aria-live="polite"></div>
@@ -253,7 +747,7 @@
     async function createPdfBlob(payload){let lastError=null;for(const endpoint of PDF_SERVICE_ENDPOINTS){try{const res=await fetch(endpoint,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload)});if(!res.ok)throw new Error("PDF-Service "+endpoint+" antwortet mit "+res.status);const blob=await res.blob();if(!blob||blob.size<1000)throw new Error("PDF leer");return blob}catch(e){lastError=e}}throw lastError||new Error("PDF-Service nicht erreichbar")}
     async function openPdfRender(){const payload=pdfPayload();storePdfPayload(payload);const root=$("#pdfResult");if(root){root.classList.add("show");root.innerHTML="<p>PDF wird erstellt ...</p>"}try{const blob=await createPdfBlob(payload);showPdfResult(blob)}catch(e){if(root){root.classList.add("show");root.innerHTML="<p>PDF konnte gerade nicht erstellt werden. Es wird keine große Vorschau-Seite mehr geöffnet. Bitte kurz warten und erneut auf PDF erstellen tippen.</p>"}fallbackPdfPreview(payload)}}
     function renderEvidence(){const root=$("#evidenceList");root.innerHTML="";KNOWLEDGE.forEach(([title,answer,source])=>{const div=document.createElement("article");div.className="evidence-item";div.innerHTML="<strong>"+esc(title)+"</strong><p>"+esc(answer)+"</p><p><b>Quelle:</b> "+esc(source)+"</p>";root.appendChild(div)})}
-    function renderProgress(){const root=$("#progressList");root.innerHTML="";phases.forEach((p,i)=>{const li=document.createElement("li");li.textContent=(i+1)+". "+p[1];if(i===state.phaseIndex)li.classList.add("active");if(i<state.phaseIndex)li.classList.add("done");root.appendChild(li)})}
+    function renderProgress(){const root=$("#progressList");root.innerHTML="";phases.forEach((p,i)=>{const li=document.createElement("li");li.textContent=(i+1)+". "+p[1];if(i===state.phaseIndex)li.classList.add("active");if(i<state.phaseIndex)li.classList.add("done");root.appendChild(li)});const currentPhase=phases[state.phaseIndex]||phases[0];const title=$("#compactPhaseTitle");const count=$("#compactPhaseCount");const fill=$("#compactProgressFill");if(title)title.textContent=currentPhase[1];if(count)count.textContent="Schritt "+(state.phaseIndex+1)+" von "+phases.length;if(fill)fill.style.width=Math.max(3,((state.phaseIndex+1)/phases.length)*100)+"%"}
     function addMessage(role,text,source){state.history.push({role,text,source:source||"",ts:Date.now()});renderMessages()}
     function renderMessages(){const box=$("#chatMessages");box.innerHTML="";state.history.forEach(m=>{const div=document.createElement("div");div.className="msg "+m.role;div.textContent=m.text;if(m.source){const s=document.createElement("span");s.className="source";s.textContent="Quelle/Hinweis: "+m.source;div.appendChild(s)}box.appendChild(div)});box.scrollTop=box.scrollHeight}
     function current(){return phases[state.phaseIndex]||phases[phases.length-1]}
@@ -275,7 +769,7 @@
     function setupKeyboardDock(){const input=$("#chatInput");if(!input)return;input.addEventListener("input",resizeChatInput);input.addEventListener("focus",()=>{setKeyboardDock(true);resizeChatInput()});input.addEventListener("blur",()=>setTimeout(()=>setKeyboardDock(false),180));if(window.visualViewport){window.visualViewport.addEventListener("resize",()=>{if(document.body.classList.contains("wa-keyboard"))updateKeyboardDock()});window.visualViewport.addEventListener("scroll",()=>{if(document.body.classList.contains("wa-keyboard"))updateKeyboardDock()})}}
     function start(){state=emptyDraft();showPanel("chat");renderProgress();ask()}
     $("#chatForm").addEventListener("submit",e=>{e.preventDefault();const input=$("#chatInput");const answer=input.value.trim();if(!answer){toast("Bitte zuerst eine Antwort eingeben.");return}input.value="";resizeChatInput();handle(answer);requestAnimationFrame(()=>{const box=$("#chatMessages");if(box)box.scrollTop=box.scrollHeight;updateKeyboardDock();input.focus()})});
-    document.addEventListener("click",e=>{const action=e.target.closest("[data-action]")?.dataset.action;if(!action)return;if(action==="start-chat")start();if(action==="show-evidence"){renderEvidence();panels.evidence.classList.remove("hidden")}if(action==="hide-evidence")panels.evidence.classList.add("hidden");if(action==="load-draft")load();if(action==="save-draft")save(true);if(action==="clear-draft")clearDraft();if(action==="show-summary")showSummary();if(action==="back-to-chat")showPanel("chat");if(action==="regenerate-final"){state.finalText=finalText();$("#finalEditor").value=state.finalText;buildPrintDocument(state.finalText);toast("Entwurf neu erzeugt.")}if(action==="print-pdf")openPdfRender();if(action==="previous-question"){if(state.phaseIndex>0){state.phaseIndex--;ask();save(false)}}if(action==="app-back")location.href=(location.pathname.indexOf("/test/")===0?"/test/#more":"/#more")});
+    document.addEventListener("click",e=>{const action=e.target.closest("[data-action]")?.dataset.action;if(!action)return;if(action==="start-chat")start();if(action==="show-evidence"){renderEvidence();panels.evidence.classList.remove("hidden")}if(action==="hide-evidence")panels.evidence.classList.add("hidden");if(action==="load-draft")load();if(action==="save-draft")save(true);if(action==="clear-draft")clearDraft();if(action==="show-summary")showSummary();if(action==="back-to-chat")showPanel("chat");if(action==="regenerate-final"){state.finalText=finalText();$("#finalEditor").value=state.finalText;buildPrintDocument(state.finalText);toast("Entwurf neu erzeugt.")}if(action==="print-pdf")openPdfRender();if(action==="previous-question"){if(state.phaseIndex>0){state.phaseIndex--;ask();save(false)}}if(action==="toggle-progress-details"){document.body.classList.toggle("wa-progress-open");const b=e.target.closest("[data-action='toggle-progress-details']");if(b)b.textContent=document.body.classList.contains("wa-progress-open")?"Schritte ausblenden":"Alle Schritte anzeigen"}if(action==="app-back")location.href=(location.pathname.indexOf("/test/")===0?"/test/#more":"/#more")});
     $("#finalEditor").addEventListener("input",e=>buildPrintDocument(e.target.value));
     applyTheme();
     setupKeyboardDock();
