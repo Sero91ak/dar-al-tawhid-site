@@ -14,6 +14,7 @@ const CORE_PRECACHE=[
   "/kids/data/stories-authentic.json",
   "/kids/data/prophet-stories.json",
   "/kids/data/mubashshirun-stories.json",
+  "/kids/data/sahabiyyat-stories.json",
   "/kids/data/dua-kids.json",
   "/kids/data/verified-content.json",
   "/kids/data/alphabet-kids.json",
