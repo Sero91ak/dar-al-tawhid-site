@@ -41,6 +41,7 @@ self.addEventListener("fetch",event=>{
     url.pathname==="/voice-studio/content-studio.js" ||
     url.pathname==="/voice-studio/mubashshirun-pack.js" ||
     url.pathname==="/voice-studio/alphabet-audio-studio.js" ||
+    url.pathname==="/voice-studio/manifest.webmanifest" ||
     url.pathname==="/voice-studio/version.json" ||
     url.pathname==="/voice-studio/voice-studio-icon.png" ||
     url.pathname==="/voice-studio/service-worker.js" ||
