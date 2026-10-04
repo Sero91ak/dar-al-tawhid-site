@@ -1700,16 +1700,53 @@ def _run_learning_preview_job(job_id:str,payload:dict):
 
 def start_learning_preview_job(payload:dict):
     _cleanup_learning_preview_jobs()
-    job_id=uuid.uuid4().hex[:16]
-    term=str((payload or {}).get("term","")).strip()
+    payload=dict(payload or {})
+    term=str(payload.get("term","")).strip()
     if not term:
         raise ValueError("Wort oder Name fehlt.")
+
+    # Identische Schnelltests werden fünf Minuten lang wiederverwendet. Mobile
+    # und Mac dürfen deshalb den wahrscheinlichsten Kandidaten schon nach der
+    # Suche leise vorladen; der anschließende Klick hängt sich an denselben Job,
+    # statt die Serhat-Engine ein zweites Mal rechnen zu lassen.
+    variant=max(0,min(9,int(payload.get("variant",0) or 0)))
+    request_key=hashlib.sha256("\u241f".join([
+        normalize_lookup(term),
+        str(payload.get("ttsText","")).strip(),
+        str(payload.get("canonical","")).strip(),
+        str(payload.get("language","")).strip().lower(),
+        str(variant),
+    ]).encode("utf-8")).hexdigest()[:24]
+    reuse_id=""
+    now=time.time()
+    with LEARNING_PREVIEW_JOB_LOCK:
+        for existing_id,existing in LEARNING_PREVIEW_JOBS.items():
+            if str((existing or {}).get("requestKey") or "")!=request_key:
+                continue
+            if now-float((existing or {}).get("createdAt") or 0)>300:
+                continue
+            state=str((existing or {}).get("state") or "")
+            if state not in ("queued","rendering","ready"):
+                continue
+            if state=="ready":
+                p=Path(str((existing or {}).get("path") or ""))
+                if not p.exists() or p.stat().st_size<=44:
+                    continue
+            reuse_id=str(existing_id)
+            break
+    if reuse_id:
+        snap=_learning_preview_job_snapshot(reuse_id)
+        snap["reused"]=True
+        return snap
+
+    job_id=uuid.uuid4().hex[:16]
     row={
         "jobId":job_id,
+        "requestKey":request_key,
         "state":"queued",
         "message":"Schnelltest ist vorgemerkt. Laufende Geschichte bleibt unangetastet.",
         "term":term,
-        "variant":int((payload or {}).get("variant",0) or 0),
+        "variant":variant,
         "createdAt":time.time(),
         "startedAt":0,
         "finishedAt":0,
@@ -1722,12 +1759,14 @@ def start_learning_preview_job(payload:dict):
         LEARNING_PREVIEW_JOBS[job_id]=row
     thread=threading.Thread(
         target=_run_learning_preview_job,
-        args=(job_id,dict(payload or {})),
+        args=(job_id,payload),
         daemon=True,
         name="dar-learning-preview-"+job_id[:6],
     )
     thread.start()
-    return _learning_preview_job_snapshot(job_id)
+    snap=_learning_preview_job_snapshot(job_id)
+    snap["reused"]=False
+    return snap
 
 
 def _alphabet_slot_kind(slot_id:str):
