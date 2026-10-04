@@ -154,7 +154,7 @@
     {
       "id": "test-ilm-start-phase1-2026-10-04",
       "approvedBy": "user-explicit-komplette-app-langsam-beginnen-ilm",
-      "reason": "Nutzer hat nach dem Voll-Audit ausdrücklich beauftragt, langsam mit der Modernisierung der kompletten DĀR-AL-TAWḤĪD-Test-App zu beginnen. Phase 1 betrifft ausschließlich die ʿIlm-Einstiegs-/Willkommensansicht: neuer theme-kompatibler Wissens-Hero, bessere Hierarchie und Lesbarkeit. Chatlogik, Quellenlogik und andere App-Bereiche bleiben unverändert. Historische ʿIlm-Bildwelt (frühe islamische Jahrhunderte, keine modernen Objekte) darf als App-Asset importiert und dezent eingebettet werden. Fortsetzung auf ausdrücklichen Nutzerauftrag: Gelehrten-Index als nächster ʿIlm-Unterbereich darf test-only visuell modernisiert werden; Profile selbst bleiben unverändert.",
+      "reason": "Nutzer hat nach dem Voll-Audit ausdrücklich beauftragt, langsam mit der Modernisierung der kompletten DĀR-AL-TAWḤĪD-Test-App zu beginnen. Phase 1 betrifft ausschließlich die ʿIlm-Einstiegs-/Willkommensansicht: neuer theme-kompatibler Wissens-Hero, bessere Hierarchie und Lesbarkeit. Chatlogik, Quellenlogik und andere App-Bereiche bleiben unverändert. Historische ʿIlm-Bildwelt (frühe islamische Jahrhunderte, keine modernen Objekte) darf als App-Asset importiert und dezent eingebettet werden. Fortsetzung auf ausdrücklichen Nutzerauftrag: Gelehrten-Index als nächster ʿIlm-Unterbereich darf test-only visuell modernisiert werden; Profile selbst bleiben unverändert. Zusätzlich ist auf ausdrücklichen Nutzerauftrag die test-only Mehr-Startseite als nächster Hauptbereich freigegeben; Unterseiten bleiben unverändert.",
       "paths": [
         "content/admin/change-scope-lock.json",
         "test/assets/ilm-research-chat.css",
@@ -162,7 +162,8 @@
         "cloudflare/test-app-worker.js",
         ".github/workflows/import-ilm-historical-art.yml",
         "test/assets/ilm/ilm-historical-majlis-v1234.jpg",
-        "test/assets/ilm-scholars-v1240.css"
+        "test/assets/ilm-scholars-v1240.css",
+        "test/assets/more-v1241.css"
       ],
       "expiresAt": "2026-11-04T23:59:00.000Z"
     },
