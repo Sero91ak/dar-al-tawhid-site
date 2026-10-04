@@ -24,6 +24,20 @@
   } catch (__darPublicGateErr) {}
   if (window.__darSoftBootInstalled) return;
   window.__darSoftBootInstalled = true;
+  try {
+    if (sessionStorage.getItem("darSkipSoftBootOnce") === "1") {
+      sessionStorage.removeItem("darSkipSoftBootOnce");
+      window.__darSoftBootLocked = true;
+      window.__darAppBootPainted = true;
+      if (document.documentElement) {
+        document.documentElement.classList.remove("dar-soft-booting");
+        document.documentElement.style.removeProperty("background-color");
+        document.documentElement.style.removeProperty("background");
+        document.documentElement.style.removeProperty("background-image");
+      }
+      return;
+    }
+  } catch (__darReturnBootErr) {}
 
   var OVERLAY_ID = "dar-soft-boot";
   var MAX_FAKE = 0.94;
