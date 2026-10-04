@@ -85,7 +85,11 @@ jobs:
               '$$("[data-style]").forEach',
               '$$("[data-audio]").forEach',
               '$$("[data-preview]").forEach',
-              '$$("[data-confirm]").forEach',
+              '$("[data-confirm]").forEach',
+              '$("[data-server-word]").forEach',
+              '$("[data-catalog-preview]").forEach',
+              '$("[data-catalog-confirm]").forEach',
+              '$("[data-catalog-card]").forEach',
               'showPronunciationIssues',
               'waitGenerationJob(jobId,st=>applyRenderProgress(st,jobId))',
               'prefetchCandidate',
@@ -97,7 +101,7 @@ jobs:
               raise SystemExit("mobile Voice markers missing: "+", ".join(missing))
           if "$$"+"$(" in html:
               raise SystemExit("mobile Voice contains accidental triple-dollar selector helper")
-          bad_plural=re.findall(r'(?<!\$)\$\("\[data-(?:style|audio|preview|confirm)[^"]*\]"\)\.forEach',html)
+          bad_plural=re.findall(r'(?<!\$)\$\("\[data-[^"]+\]"\)\.forEach',html)
           if bad_plural:
               raise SystemExit("mobile Voice plural selector incorrectly uses querySelector: "+", ".join(bad_plural))
           print("Mobile Voice surface markers OK")
