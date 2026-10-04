@@ -3001,34 +3001,18 @@ def _kids_owner_voice_rows(quiz_data,dua_data,story_data,short_story_data,verifi
     return list(rows.values())
 
 def _generate_kids_owner_voice_master(text_value:str,mode:str):
-    original=str(text_value or "").strip()
-    key=_kids_owner_voice_key(original)
-    if not key:
+    """Auto-Sync nutzt exakt denselben Master-Cache und Renderer wie der manuelle Kids-Vollbatch."""
+    value=_kids_owner_voice_key(text_value)
+    voice_mode=str(mode or "kids_lesson")
+    if not value:
         raise RuntimeError("Kids-Voice-Text ist leer.")
-    digest=hashlib.sha1((str(mode)+"\0"+key).encode("utf-8")).hexdigest()[:24]
-    master=KIDS_OWNER_VOICE_MASTER_HOME/(digest+".wav")
-    if master.exists() and master.stat().st_size>1024:
-        try:
-            wav=load_locked_wav(master,24000)
-            metrics=audio_quality_metrics(wav,24000,key,"de",str(mode or "kids_lesson"))
-            hard={"empty_audio","non_finite","near_silence","low_peak","clipping"}
-            if not any(x in hard for x in (metrics.get("issues") or [])):
-                metrics["kids_owner_master_cache"]="hit"
-                return master,metrics
-        except Exception:
-            pass
-
-    while LEARNING_PREVIEW_WAITING.is_set() or MANUAL_RENDER_WAITING.is_set() or RENDER_LOCK.locked():
-        _set_kids_owner_voice_state(current="Interaktive Stimme hat Vorrang · Kids-Voice-Sync wartet …")
-        time.sleep(0.08)
 
     while True:
+        while LEARNING_PREVIEW_WAITING.is_set() or MANUAL_RENDER_WAITING.is_set() or RENDER_LOCK.locked():
+            _set_kids_owner_voice_state(current="Interaktive Stimme hat Vorrang · Kids-Voice-Sync wartet …")
+            time.sleep(0.08)
         try:
-            generated=generate(
-                original,"",str(mode or "kids_lesson"),
-                free_mode=True,free_pronunciation=True
-            )
-            break
+            return _generate_quiz_voice_master(value,voice_mode)
         except RuntimeError as e:
             if "Hintergrund-Render pausiert für interaktive Audio-Erzeugung" not in str(e):
                 raise
@@ -3036,18 +3020,7 @@ def _generate_kids_owner_voice_master(text_value:str,mode:str):
             while MANUAL_RENDER_WAITING.is_set() or LEARNING_PREVIEW_WAITING.is_set() or RENDER_LOCK.locked():
                 time.sleep(0.08)
             time.sleep(0.12)
-    tmp=master.with_suffix(".tmp.wav")
-    shutil.copy2(generated,tmp)
-    os.replace(tmp,master)
-    wav=load_locked_wav(master,24000)
-    metrics=audio_quality_metrics(wav,24000,key,"de",str(mode or "kids_lesson"))
-    hard={"empty_audio","non_finite","near_silence","low_peak","clipping"}
-    found=[x for x in (metrics.get("issues") or []) if x in hard]
-    if found:
-        master.unlink(missing_ok=True)
-        raise RuntimeError("Kids-Voice-Master-QA fehlgeschlagen: "+", ".join(found))
-    metrics["kids_owner_master_cache"]="write"
-    return master,metrics
+
 
 def _prepare_kids_owner_voice_publish(export_ready:Path):
     git=shutil.which("git")
@@ -3151,7 +3124,26 @@ def build_kids_owner_voice_sync():
         manifest=load_owner_voice_manifest_fresh()
         entries=dict(manifest.get("entries") or {})
 
-        rows=_kids_owner_voice_rows(quiz_data,dua_data,story_data,short_story_data,verified_data)
+        canonical_units=_kids_owner_voice_units(
+            quiz_data=quiz_data,
+            dua_data=dua_data,
+            story_data=story_data,
+            extra_data=short_story_data,
+            verified_data=verified_data,
+        )
+        rows=[]
+        for unit in canonical_units:
+            key=_kids_owner_voice_key((unit or {}).get("text"))
+            if not key:
+                continue
+            context=str((unit or {}).get("context") or "kids")
+            rows.append({
+                "text":key,
+                "key":key,
+                "mode":str((unit or {}).get("mode") or "kids_lesson"),
+                "scopes":[x for x in context.split("|") if x] or ["kids"],
+                "sourceIds":[],
+            })
         missing=[row for row in rows if not (entries.get(row["key"]) or {}).get("url")]
         _set_kids_owner_voice_state(total=len(rows),missing=len(missing),current=f"{len(rows)} Sprechtexte geprüft · {len(missing)} neu")
 
@@ -3201,16 +3193,24 @@ def build_kids_owner_voice_sync():
             _set_kids_owner_voice_state(generated=generated_count,completed=index)
 
         output={
-            "schemaVersion":1,
-            "id":"KIDS_OWNER_VOICE_V1",
+            "schemaVersion":2,
+            "id":"KIDS_OWNER_VOICE_V2",
             "buildId":build_id,
             "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
             "voiceProfileId":"serhat-owner-voice-2026",
             "speaker":"Serhat Abu Malik",
             "engine":"local-serhat-engine",
             "provider":"self-produced",
+            "manualPerClipApprovalRequired":False,
+            "technicalQaRequired":True,
             "systemTtsFallbackAllowed":False,
             "syntheticQuranRecitationAllowed":False,
+            "security":{
+                "publicContainsRenderedAudioOnly":True,
+                "voiceReferencePublished":False,
+                "modelWeightsPublished":False,
+                "pronunciationPrivateStatePublished":False,
+            },
             "pronunciationLibrary":"local-master-plus-user-confirmed-overrides",
             "autoDiscovery":True,
             "autoDiscoverySources":[
