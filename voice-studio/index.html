@@ -1210,6 +1210,7 @@ const IS_LOCAL=IS_LOOPBACK||IS_ENGINE_ORIGIN;
 const NATIVE_MAC=/DĀRVoiceStudioMac\//.test(navigator.userAgent);
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const CLOUD_ENGINE_MODE=!IS_LOCAL&&new URLSearchParams(location.search).get("cloud")==="1";
+const CLOUD_ACCESS_STORAGE_KEY="dar.voice.cloud.access.v1";
 const LOCAL_API=IS_LOCAL?"":(CLOUD_ENGINE_MODE?REMOTE_ENGINE_API:"http://127.0.0.1:8787");
 let nativeUpdateState="idle",nativeLatestVersion="";
 let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
@@ -1378,15 +1379,49 @@ function setMessage(text,type="bad"){
   el.textContent=text||"";
   el.className="studio-message-bar"+(text?(" "+(type==="good"?"good":type==="warn"?"warn":"bad")):"");
 }
-function localRequest(path,options={}){
-  const url=LOCAL_API+path;
-  const base={...options,mode:"cors",cache:"no-store"};
+function cloudAccessToken(){
+  if(!CLOUD_ENGINE_MODE)return "";
+  try{return String(localStorage.getItem(CLOUD_ACCESS_STORAGE_KEY)||"").trim()}catch(_){return ""}
+}
+function saveCloudAccessToken(value){
+  if(!CLOUD_ENGINE_MODE)return;
+  const token=String(value||"").trim();
   try{
-    const req=new Request(url,{...base,targetAddressSpace:"loopback"});
-    return fetch(req);
-  }catch(_){
-    return fetch(url,base);
+    if(token)localStorage.setItem(CLOUD_ACCESS_STORAGE_KEY,token);
+    else localStorage.removeItem(CLOUD_ACCESS_STORAGE_KEY);
+  }catch(_){}
+}
+function askCloudAccessToken(){
+  if(!CLOUD_ENGINE_MODE)return "";
+  const value=window.prompt("DĀR Voice Zugangscode","");
+  const token=String(value||"").trim();
+  if(token)saveCloudAccessToken(token);
+  return token;
+}
+async function localRequest(path,options={},retried=false){
+  const url=LOCAL_API+path;
+  const headers=new Headers(options.headers||{});
+  if(CLOUD_ENGINE_MODE){
+    const token=cloudAccessToken();
+    if(token)headers.set("X-DAR-Voice-Access",token);
   }
+  const base={...options,headers,mode:"cors",cache:"no-store"};
+  let response;
+  try{
+    if(CLOUD_ENGINE_MODE){
+      response=await fetch(url,base);
+    }else{
+      const req=new Request(url,{...base,targetAddressSpace:"loopback"});
+      response=await fetch(req);
+    }
+  }catch(_){
+    response=await fetch(url,base);
+  }
+  if(CLOUD_ENGINE_MODE&&response.status===401&&!retried){
+    const token=askCloudAccessToken();
+    if(token)return localRequest(path,options,true);
+  }
+  return response;
 }
 function requestAudioOutput(){
   const nativeHandler=window.webkit?.messageHandlers?.darAudioOutput;
@@ -2443,7 +2478,7 @@ async function checkHealth({quiet=false}={}){
     return true;
   }catch(_){
     updateEngineUI({ok:false});
-    if(!quiet)setMessage("Serhat Engine ist noch nicht gestartet.","warn");
+    if(!quiet)setMessage(CLOUD_ENGINE_MODE?"DĀR Voice Cloud ist noch nicht verbunden oder der Zugangscode fehlt.":"Serhat Engine ist noch nicht gestartet.","warn");
     return false;
   }
 }
