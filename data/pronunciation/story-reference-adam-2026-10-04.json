@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "kind": "prophet",
+  "status": "owner-approved-reference",
+  "textRole": "exact-source-text-for-audio",
+  "language": "de-DE",
+  "embeddedRegister": "Arabic/Fuṣḥā Islamic terminology",
+  "prosodyMode": "kids_story",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "id": "adam-story-owner-reference-2026-10-04",
+  "itemId": "adam",
+  "title": "Adam · bestätigtes Audio-Text-Referenzpaar",
+  "sourceText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nStell dir eine Zeit vor, in der noch kein Mensch auf der Erde lebte. Keine Städte, keine Häuser und keine Kinder, die spielten. Allah hatte die Himmel und die Erde erschaffen, und dann begann die Geschichte der Menschen mit einem Mann: Adam, Friede sei mit ihm.\n\nAllah erschuf Adam aus Erde und Lehm. Er gab ihm eine besondere Stellung und lehrte ihn Wissen. Allah lehrte Adam die Namen. Damit zeigte Allah, dass Wissen eine große Gabe ist. Die Engel wussten nur das, was Allah sie gelehrt hatte. Adam durfte das aussprechen, was Allah ihn gelehrt hatte.\n\nDann befahl Allah den Engeln, sich vor Adam niederzuwerfen. Es war kein Gottesdienst für Adam, sondern ein Gehorsam gegenüber Allah. Die Engel gehorchten. Doch Iblīs weigerte sich. Er war hochmütig. Er meinte, er sei besser als Adam, weil er aus Feuer erschaffen worden war und Adam aus Lehm. Aber Hochmut macht blind. Iblīs vergaß, dass nicht das Material eines Geschöpfes entscheidet, wer besser ist. Entscheidend ist der Gehorsam gegenüber Allah.\n\nAllah ließ Adam und seine Frau im Paradies wohnen. Sie durften dort von den guten Dingen essen. Nur einem bestimmten Baum sollten sie sich nicht nähern. Iblīs aber wollte ihnen schaden. Er flüsterte ihnen falsche Versprechen ein und versuchte, den verbotenen Baum schön erscheinen zu lassen. Schließlich aßen Adam und seine Frau davon.\n\nSofort erkannten sie, dass sie einen Fehler gemacht hatten. Und hier lernen wir etwas sehr Wichtiges über Adam. Er blieb nicht stolz bei seinem Fehler. Er suchte nicht nach einer Ausrede. Er wandte sich an Allah und bereute. Allah nahm seine Reue an und leitete ihn recht.\n\nDann begann das Leben der Menschen auf der Erde. Allah ließ Adam und seine Frau hinabgehen. Die Erde sollte für die Menschen ein Aufenthaltsort sein. Hier würden sie leben, arbeiten, Familien haben, geprüft werden und schließlich zu Allah zurückkehren. Zugleich versprach Allah, den Menschen Rechtleitung zu senden. Wer dieser Rechtleitung folgt, braucht sich vor dem endgültigen Ausgang nicht zu fürchten.\n\nAdam wusste nun aus eigener Erfahrung, wie gefährlich die Einflüsterungen des Satans sind. Er wusste aber auch, wie groß die Barmherzigkeit Allahs ist. Ein Mensch kann einen Fehler machen. Entscheidend ist, ob er hochmütig bleibt wie Iblīs oder ob er bereut und zu Allah zurückkehrt wie Adam.\n\nDen Namen des Baumes und viele später ausgeschmückte Einzelheiten kennen wir nicht sicher. Das ist wichtig. Wir brauchen keine erfundenen Details, damit diese Geschichte stark ist. Ihr Kern ist klar genug. Allah erschuf den Menschen, gab ihm Wissen und Verantwortung, warnte ihn vor dem Satan und öffnete ihm die Tür der Reue.\n\nAdam wurde zum Vater der Menschheit. Jeder Mensch, ganz gleich in welchem Land er geboren wird oder welche Sprache er spricht, gehört zur Menschheitsfamilie, die mit Adam begann. Deshalb ist Hochmut wegen Herkunft oder Aussehen besonders unsinnig. Unser Anfang erinnert uns daran, dass wir Geschöpfe Allahs sind.\n\nWenn du also die Geschichte von Adam hörst, dann merke dir drei Dinge. Wissen ist ein Geschenk. Hochmut ist gefährlich. Und wenn du einen Fehler machst, dann kehre ehrlich zu Allah zurück.\n\nDie Geschichte des ersten Menschen beginnt nicht damit, dass ein Mensch niemals einen Fehler macht. Sie zeigt uns, wie ein gläubiger Mensch nach einem Fehler wieder den richtigen Weg findet.\n\nUnd Allah weiß es am besten.\n\nMöge Allah euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+  "sourceAudio": {
+    "filename": "Prophet Adam Geschichte .mp3",
+    "bytes": 3691217,
+    "sha256": "f1e9870c8b182f1d7a564020d26ae02ba1c2750a0ec2ade27efc205499818e19",
+    "durationSec": 229.642,
+    "format": "mp3",
+    "ownerConfirmedPair": true
+  },
+  "pronunciationProfile": {
+    "description": "Freigegebene deutsche Kinder-Erzählstimme des Eigentümers. Wortwahl, Rhythmus und Aussprache dieser Aufnahme werden als dauerhaftes Referenzkorpus gespeichert; kein automatisches Modellgewichts-Finetuning.",
+    "spokenExpansions": [],
+    "trustedTerms": [
+      "Adam",
+      "Iblīs",
+      "Īmān",
+      "al-Firdaws al-Aʿlā",
+      "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh"
+    ]
+  },
+  "runtimePolicy": {
+    "persistLocally": true,
+    "exactTextAudioReuse": true,
+    "incrementalRerenderForEditedText": true,
+    "reuseExistingPronunciationLocks": true,
+    "modelWeightFineTuning": false,
+    "bootstrapFromProphetManifestAudio": true,
+    "allowedRemoteHosts": [
+      "dar-al-tawhid.de",
+      "www.dar-al-tawhid.de",
+      "storage.googleapis.com"
+    ]
+  },
+  "localCandidates": [
+    "~/SerhatVoice/KidsAppPublishRepo/kids/assets/prophet-story-audio/adam/story.mp3",
+    "~/SerhatVoice/ProphetStoryExport/ready/adam.mp3",
+    "~/SerhatVoice/VoiceStudioOutput/Prophet Adam Geschichte .mp3"
+  ],
+  "createdAt": "2026-10-04T17:12:00+02:00"
+}
