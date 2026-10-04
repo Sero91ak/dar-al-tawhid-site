@@ -2958,8 +2958,8 @@
     }
   }
 
-  /* FEED_SHARE_BRAND_V1237 · Besucher/Test: nur Bildexport veredelt. */
-  function feedShareBrandFooter(ctx, dims) {
+  /* FEED_SHARE_BRAND_V1239 · Apple-provided German App Store badge, unmodified. */
+  async function feedShareBrandFooter(ctx, dims) {
     var w = dims.outW, h = dims.outH;
     var s = Math.max(.72, w / 1080);
     var footerH = Math.round(96 * s);
@@ -2982,53 +2982,21 @@
     ctx.font = "600 " + Math.round(11 * s) + "px Arial, sans-serif";
     ctx.fillText("DĀR AL TAWḤĪD · Qurʾān & Sunnah", pad, h - Math.round(18 * s));
 
-    var bw = Math.round(205 * s), bh = Math.round(48 * s);
-    var bx = w - pad - bw, by = h - Math.round(62 * s);
-    var r = Math.round(12 * s);
+    try {
+      var badge = await new Promise(function (resolve, reject) {
+        var img = new Image();
+        img.decoding = "async";
+        img.onload = function () { resolve(img); };
+        img.onerror = reject;
+        img.src = "/assets/app-store-badge-de-official.svg?v=share-v1239";
+      });
+      var bh = Math.round(48 * s);
+      var bw = Math.round(bh * 2.9916);
+      var bx = w - pad - bw;
+      var by = h - Math.round(63 * s);
+      ctx.drawImage(badge, bx, by, bw, bh);
+    } catch (eBadge) {}
 
-    ctx.beginPath();
-    ctx.moveTo(bx + r, by);
-    ctx.arcTo(bx + bw, by, bx + bw, by + bh, r);
-    ctx.arcTo(bx + bw, by + bh, bx, by + bh, r);
-    ctx.arcTo(bx, by + bh, bx, by, r);
-    ctx.arcTo(bx, by, bx + bw, by, r);
-    ctx.closePath();
-    ctx.fillStyle = "rgba(5,9,10,.86)";
-    ctx.fill();
-    ctx.strokeStyle = "rgba(255,255,255,.20)";
-    ctx.lineWidth = Math.max(1, 1.1 * s);
-    ctx.stroke();
-
-    var mark = Math.round(31 * s);
-    var mx = bx + Math.round(11 * s), my = by + Math.round(9 * s);
-    ctx.save();
-    ctx.translate(mx,my);
-    ctx.scale(mark/100,mark/100);
-    ctx.fillStyle = "#fff";
-    ctx.beginPath();
-    ctx.moveTo(52,25);
-    ctx.bezierCurveTo(58,17,67,12,75,12);
-    ctx.bezierCurveTo(76,21,72,29,65,34);
-    ctx.bezierCurveTo(58,39,52,37,52,37);
-    ctx.bezierCurveTo(43,36,35,42,30,50);
-    ctx.bezierCurveTo(20,67,28,91,40,99);
-    ctx.bezierCurveTo(46,103,52,97,59,97);
-    ctx.bezierCurveTo(66,97,71,103,78,99);
-    ctx.bezierCurveTo(88,93,94,82,97,73);
-    ctx.bezierCurveTo(83,68,80,48,94,40);
-    ctx.bezierCurveTo(86,30,74,28,66,31);
-    ctx.bezierCurveTo(60,33,56,35,52,35);
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-
-    var tx = bx + Math.round(52 * s);
-    ctx.fillStyle = "rgba(255,255,255,.84)";
-    ctx.font = "500 " + Math.round(8.5 * s) + "px Arial, sans-serif";
-    ctx.fillText("Laden im", tx, by + Math.round(15*s));
-    ctx.fillStyle = "#fff";
-    ctx.font = "650 " + Math.round(15.5 * s) + "px Arial, sans-serif";
-    ctx.fillText("App Store", tx, by + Math.round(34*s));
     ctx.textBaseline = "alphabetic";
   }
 
@@ -3043,7 +3011,7 @@
     if (!ctx) throw new Error('Canvas nicht verfügbar');
     await feedSharePaintBg(ctx, scene, dims);
     await feedSharePaintFg(ctx, scene, dims);
-    feedShareBrandFooter(ctx, dims);
+    await feedShareBrandFooter(ctx, dims);
     var blob = await feedShareCanvasBlob(canvas);
     return new File([blob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
   }
