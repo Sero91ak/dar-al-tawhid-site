@@ -154,9 +154,9 @@ async function health(){
 function go(name){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="pronunciation")loadCatalog(true);if(name==="settings")health();document.querySelector("main")?.scrollTo({top:0,behavior:"instant"})}
 $$(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));$("#refreshBtn").onclick=()=>{health();if($(".screen.active")?.dataset.screen==="history")loadHistory()};
 function syncStylePills(){
-  $$("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===$("#style").value));
+  $$$("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===$("#style").value));
 }
-$$("[data-style]").forEach(b=>b.onclick=()=>{
+$$$("[data-style]").forEach(b=>b.onclick=()=>{
   $("#style").value=b.dataset.style;
   try{localStorage.setItem("dar.voice.mobile.style",b.dataset.style)}catch(_){}
   state.analysis=null;syncStylePills();toast("Stil: "+b.textContent)
@@ -169,7 +169,7 @@ async function analyzeText(force=false){
   try{
     const r=await api("/analyze",{method:"POST",body:JSON.stringify({text,style:$("#style").value})});const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Analyse fehlgeschlagen");state.analysis=d;state.analysisText=text;state.analysisStyle=style;
     const unresolved=d.unresolvedIslamicTerms||[],review=d.reviewTerms||[],masters=d.masterTerms||[];
-    if(unresolved.length){$("#analysisState").textContent=unresolved.length+" prüfen";$("#analysisState").className="badge";$("#analysisBody").innerHTML='<div class="sub" style="margin-bottom:8px">Diese Begriffe brauchen eine Ausspracheprüfung:</div><div class="chips">'+unresolved.map(x=>'<button class="chip warn" data-word="'+esc(x.term)+'">'+esc(x.term)+'</button>').join("")+'</div>';$$("[data-word]").forEach(b=>b.onclick=()=>openWord(b.dataset.word))}
+    if(unresolved.length){$("#analysisState").textContent=unresolved.length+" prüfen";$("#analysisState").className="badge";$("#analysisBody").innerHTML='<div class="sub" style="margin-bottom:8px">Diese Begriffe brauchen eine Ausspracheprüfung:</div><div class="chips">'+unresolved.map(x=>'<button class="chip warn" data-word="'+esc(x.term)+'">'+esc(x.term)+'</button>').join("")+'</div>';$$$("[data-word]").forEach(b=>b.onclick=()=>openWord(b.dataset.word))}
     else{$("#analysisState").textContent="bereit";$("#analysisState").className="badge good";$("#analysisBody").innerHTML='<div class="sub">Keine ungeprüften Begriffe gefunden.</div>'+(masters.length||review.length?'<div class="chips" style="margin-top:8px">'+masters.slice(0,8).map(x=>'<span class="chip">'+esc(x)+'</span>').join("")+review.slice(0,6).map(x=>'<span class="chip">'+esc(x)+'</span>').join("")+'</div>':"")}
     return d;
   }catch(e){$("#analysisState").textContent="Fehler";$("#analysisBody").textContent=e.message;toast(e.message);return null}
@@ -381,7 +381,7 @@ async function loadHistory(){
   const box=$("#historyList");box.innerHTML='<div class="empty">Verlauf wird geladen …</div>';
   try{const r=await api("/mobile/history");const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Verlauf nicht verfügbar");const items=d.items||[];if(!items.length){box.innerHTML='<div class="empty">Noch keine Audios vorhanden.</div>';return}
   box.innerHTML=items.map(x=>'<div class="card history-item"><button class="playdot" data-audio="'+encodeURIComponent(x.name)+'">▶</button><div class="hist-main"><div class="hist-name">'+esc(x.title||x.label||x.name)+'</div>'+(x.text?'<div class="hist-text">'+esc(x.text)+'</div>':'')+'<div class="hist-meta">'+esc(x.styleLabel||"Auto")+' · '+esc(x.createdLabel||"")+' · '+esc(x.sizeLabel||"")+'</div></div><button class="iconbtn" data-open="'+encodeURIComponent(x.name)+'">↗</button></div>').join("");
-  $$("[data-audio]").forEach(b=>b.onclick=()=>{resetLiveStream();state.finalReady=false;const u="/mobile/audio?name="+b.dataset.audio;$("#audio").src=u;$("#player").classList.add("show");$(".player-title").textContent="Verlauf";$("#playerMeta").textContent="Gespeicherte Audio";go("create");$("#audio").play().catch(()=>{})});$$("[data-open]").forEach(b=>b.onclick=()=>window.open("/mobile/audio?name="+b.dataset.open,"_blank"))}
+  $$$("[data-audio]").forEach(b=>b.onclick=()=>{resetLiveStream();state.finalReady=false;const u="/mobile/audio?name="+b.dataset.audio;$("#audio").src=u;$("#player").classList.add("show");$(".player-title").textContent="Verlauf";$("#playerMeta").textContent="Gespeicherte Audio";go("create");$("#audio").play().catch(()=>{})});$$$("[data-open]").forEach(b=>b.onclick=()=>window.open("/mobile/audio?name="+b.dataset.open,"_blank"))}
   catch(e){box.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}
 }
 function catalogCard(x,i){
@@ -390,11 +390,11 @@ function catalogCard(x,i){
   return '<div class="card candidate"><div class="candidate-main"><strong>'+esc(term)+'</strong><div class="arabic">'+esc(x.ttsText||x.alias||"")+'</div><div class="meta">'+esc(x.source||"Bibliothek")+' · '+esc(x.ttsLanguage||"")+(master?' · Master ✓':'')+'</div><div class="catalog-actions"><button data-catalog-preview="'+i+'">Anhören</button><button class="confirm" data-catalog-confirm="'+i+'" disabled>'+(master?'Master ✓':'Als Master bestätigen')+'</button></div></div></div>';
 }
 function bindCatalogRows(){
-  $$("[data-catalog-preview]").forEach(b=>b.onclick=()=>{
+  $$$("[data-catalog-preview]").forEach(b=>b.onclick=()=>{
     const row=state.catalogRows[Number(b.dataset.catalogPreview)];
     if(row)previewCandidate(row,String(row.canonical||row.input||""),b);
   });
-  $$("[data-catalog-confirm]").forEach(b=>b.onclick=()=>{
+  $$$("[data-catalog-confirm]").forEach(b=>b.onclick=()=>{
     const row=state.catalogRows[Number(b.dataset.catalogConfirm)];
     if(row)confirmCandidate(String(row.canonical||row.input||""),b);
   });
@@ -449,7 +449,7 @@ async function searchWord(force){
   const q=String(force||$("#wordSearch").value).trim();if(!q)return toast("Wort eingeben.");const box=$("#wordResults");box.innerHTML='<div class="empty">Suche Varianten …</div>';
   try{const r=await api("/learning/search",{method:"POST",body:JSON.stringify({query:q,limit:12})});const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Suche fehlgeschlagen");const rows=d.results||[];if(!rows.length){box.innerHTML='<div class="empty">Keine Variante gefunden.</div>';return}
   box.innerHTML=rows.map((x,i)=>'<div class="card candidate"><div class="candidate-main"><strong>'+esc(x.canonical||q)+'</strong><div class="arabic">'+esc(x.ttsText||x.alias||"")+'</div><div class="meta">'+esc(x.source||"Bibliothek")+' · '+esc(x.ttsLanguage||"")+'</div><div class="candidate-actions"><button data-preview="'+i+'">Anhören</button><button class="confirm" data-confirm="'+i+'" disabled>Als Master bestätigen</button></div></div></div>').join("");
-  $("[data-preview]").forEach(b=>b.onclick=()=>previewCandidate(rows[Number(b.dataset.preview)],q,b));$("[data-confirm]").forEach(b=>b.onclick=()=>confirmCandidate(q,b));
+  $$("[data-preview]").forEach(b=>b.onclick=()=>previewCandidate(rows[Number(b.dataset.preview)],q,b));$$("[data-confirm]").forEach(b=>b.onclick=()=>confirmCandidate(q,b));
   // Der wahrscheinlichste Treffer wird nach einer expliziten Suche leise
   // vorgewärmt. Beim Tippen auf „Anhören“ wird derselbe Server-Job übernommen.
   setTimeout(()=>prefetchCandidate(rows[0],q),90)}
