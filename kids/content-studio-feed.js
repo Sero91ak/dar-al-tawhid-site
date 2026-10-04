@@ -54,9 +54,19 @@ function itemFitsProfile(item) {
 function relevantItems() {
   return state.items.filter(itemFitsProfile);
 }
-function kindLabel(kind) {
-  return ({story:"Geschichte",quiz:"Quiz",game:"Spiel",lesson:"Lernen"})[kind] || "Inhalt";
+function sectionKind(item) {
+  const tags=Array.isArray(item?.tags)?item.tags.map(String):[];
+  const hay=[item?.category,item?.topic,...tags].join(" ").toLocaleLowerCase("de-DE");
+  if(tags.includes("studio:dua")||/du[ʿ'’]?a|bittgebet/.test(hay))return"dua";
+  if(tags.includes("studio:narration")||/erzähl|erzaehl|narration/.test(hay))return"narration";
+  if(item?.kind==="story")return"story";
+  return String(item?.kind||"content");
 }
+function kindLabel(kind) {
+  return ({story:"Geschichte",quiz:"Quiz",game:"Spiel",lesson:"Lernen",dua:"Duʿāʾ",narration:"Erzählung"})[kind] || "Inhalt";
+}
+function itemKindLabel(item){return kindLabel(sectionKind(item))}
+
 function durationLabel(item) {
   const sec = Number(item?.audio?.durationSec || 0);
   if (!sec) return "";
@@ -357,12 +367,12 @@ function bindQuiz(item) {
 }
 function cardHtml(item) {
   const cover = abs(item?.cover?.url);
-  const meta = [kindLabel(item.kind), durationLabel(item), modeLabels(item)].filter(Boolean).join(" · ");
+  const meta = [itemKindLabel(item), durationLabel(item), modeLabels(item)].filter(Boolean).join(" · ");
   return '<button type="button" class="studio-content-card" data-studio-content="'+esc(item.id)+'">'+
     (cover ? '<img src="'+esc(cover)+'" alt="" loading="lazy">' : "")+
     '<span class="studio-card-copy"><span class="studio-card-badges">'+
     (item.isNew ? '<span class="studio-badge new">NEU</span>' : "")+
-    '<span class="studio-badge">'+esc(kindLabel(item.kind))+'</span></span>'+
+    '<span class="studio-badge">'+esc(itemKindLabel(item))+'</span></span>'+
     '<strong>'+esc(item.title)+'</strong><span>'+esc(meta || summaryText(item))+'</span></span></button>';
 }
 function rowHtml(item) {
@@ -389,7 +399,21 @@ function ensureStoriesSection() {
   section.id = "studioStorySection";
   section.className = "studio-new-section";
   section.innerHTML = '<div class="studio-new-head"><div><small>DĀR CONTENT STUDIO</small><h3>Neue geprüfte Geschichten</h3></div></div><div id="studioStoryList" class="studio-story-list"></div>';
-  if (head?.parentNode) head.insertAdjacentElement("afterend", section); else view.prepend(section);
+  const narration = document.createElement("section");
+  narration.id = "studioNarrationSection";
+  narration.className = "studio-new-section";
+  narration.innerHTML = '<div class="studio-new-head"><div><small>HÖREN & VERSTEHEN</small><h3>Erzählungen</h3></div></div><div id="studioNarrationList" class="studio-story-list"></div>';
+  const dua = document.createElement("section");
+  dua.id = "studioDuaSection";
+  dua.className = "studio-new-section";
+  dua.innerHTML = '<div class="studio-new-head"><div><small>DUʿĀʾ</small><h3>Hören & lernen</h3></div></div><div id="studioDuaList" class="studio-story-list"></div>';
+  if (head?.parentNode) {
+    head.insertAdjacentElement("afterend", section);
+    section.insertAdjacentElement("afterend", narration);
+    narration.insertAdjacentElement("afterend", dua);
+  } else {
+    view.prepend(dua);view.prepend(narration);view.prepend(section);
+  }
 }
 function ensureParentPreference() {
   const view = document.getElementById("view-parents");
@@ -427,11 +451,21 @@ function renderAll() {
   if (grid) grid.innerHTML = fresh.length ? fresh.map(cardHtml).join("") : '<div class="studio-content-empty">Für dieses Profil gibt es gerade keinen neuen Studio-Inhalt.</div>';
   if (section) section.hidden = !fresh.length;
 
-  const stories = items.filter(x => x.kind === "story").slice(0, 30);
+  const stories = items.filter(x => sectionKind(x) === "story").slice(0, 30);
+  const narrations = items.filter(x => sectionKind(x) === "narration").slice(0, 30);
+  const duas = items.filter(x => sectionKind(x) === "dua").slice(0, 30);
   const list = document.getElementById("studioStoryList");
+  const narrationList = document.getElementById("studioNarrationList");
+  const duaList = document.getElementById("studioDuaList");
   const storySection = document.getElementById("studioStorySection");
+  const narrationSection = document.getElementById("studioNarrationSection");
+  const duaSection = document.getElementById("studioDuaSection");
   if (list) list.innerHTML = stories.length ? stories.map(rowHtml).join("") : '<div class="studio-content-empty">Noch keine neue Studio-Geschichte für diese Altersstufe.</div>';
+  if (narrationList) narrationList.innerHTML = narrations.length ? narrations.map(rowHtml).join("") : '<div class="studio-content-empty">Noch keine neue Erzählung für diese Altersstufe.</div>';
+  if (duaList) duaList.innerHTML = duas.length ? duas.map(rowHtml).join("") : '<div class="studio-content-empty">Noch kein neues Duʿāʾ-Audio für diese Altersstufe.</div>';
   if (storySection) storySection.hidden = !stories.length;
+  if (narrationSection) narrationSection.hidden = !narrations.length;
+  if (duaSection) duaSection.hidden = !duas.length;
 
   document.querySelectorAll("[data-studio-content]").forEach(btn => {
     if (btn.dataset.studioBound === "1") return;
@@ -445,7 +479,7 @@ function openDeepLink() {
   if (!id || state.openId === id) return;
   const item = state.items.find(x => x.id === id);
   if (!item || !itemFitsProfile(item)) return;
-  const target = item.kind === "story" ? "stories" : "today";
+  const target = ["story","narration","dua"].includes(sectionKind(item)) ? "stories" : "today";
   document.querySelector('.nav-btn[data-target="'+target+'"]')?.click();
   setTimeout(() => openItem(id), 80);
 }
