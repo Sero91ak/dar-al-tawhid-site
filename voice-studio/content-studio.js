@@ -47,7 +47,7 @@ function normalizeKidsStoryText(value){
 }
 function syncKidsStoryStandard(){
   const ta=q("text");
-  if(!ta||q("styleMode")?.value!=="kids_story")return false;
+  if(!ta||existingStoryTarget||q("styleMode")?.value!=="kids_story")return false;
   const next=normalizeKidsStoryText(ta.value);
   if(!next||next===String(ta.value||"").trim())return false;
   ta.value=next;
@@ -656,7 +656,7 @@ function bind(){
 }
 function newCurrentItem(){
   persistDraft();
-  contentId="";savedRevision=0;stagingPublished=false;contentStatus="draft";
+  existingStoryTarget=null;contentId="";savedRevision=0;stagingPublished=false;contentStatus="draft";
   setProductionPhase("draft");productionError="";
   resetEditorForKind();
   renderKindEditor();
@@ -913,10 +913,10 @@ function voiceScript(){
   if(studioKind==="quiz")return quizDraft.map(item=>[item.question,...(item.answers||[]).map(a=>a.label),item.success,item.retry].filter(Boolean).join(". ")).filter(Boolean).join("\n\n");
   if(studioKind==="game")return [gameDraft.instructions,...(gameDraft.voiceCues||[])].filter(Boolean).join("\n\n");
   const text=String(q("text")?.value||"").trim();
-  return studioKind==="story"?normalizeKidsStoryText(text):text;
+  return studioKind==="story"&&!existingStoryTarget?normalizeKidsStoryText(text):text;
 }
 function switchKind(kind){
-  persistDraft();studioKind=kind||"story";
+  persistDraft();existingStoryTarget=null;studioKind=kind||"story";
   document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.toggle("active",x.dataset.csKind===studioKind));
   q("csProphetTab")?.classList.remove("active");
   const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
@@ -942,7 +942,7 @@ function saveConnection(){
 function fields(){
   captureStructuredEditor();
   let text=String(q("text")?.value||"").trim();
-  if(studioKind==="story")text=normalizeKidsStoryText(text);
+  if(studioKind==="story"&&!existingStoryTarget)text=normalizeKidsStoryText(text);
   return{
     id:contentId,
     kind:effectiveKind(),
