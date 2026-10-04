@@ -1,0 +1,343 @@
+/* DĀR AL TAWḤĪD · Qurʾān reader · Test-only v1251
+   Reading-first. Historical imagery is confined to chrome, never behind āyāt. */
+body.is-quran-reader-route{
+  --qrcx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/aebea3d9-9142-4917-90d7-8b2a3ec34926/e8998705-b906-41bc-a65c-a14641cfa453/Single_wide_cinematic_app_background_for_a_Qur_an_overview__.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYzEwNjczNDEwNWFiNDk4NyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIyNTQwOX0.PoNZ1pWhRx5i2o8rab-XqHhVkJ860ajJVakpmkCa7BE");
+  --qrcx-chrome-a:color-mix(in srgb,var(--bg) 94%,transparent);
+  --qrcx-chrome-b:color-mix(in srgb,var(--bg) 78%,transparent);
+  --qrcx-line:color-mix(in srgb,var(--gold2) 18%,var(--line2));
+  --qrcx-line-soft:color-mix(in srgb,var(--gold2) 10%,var(--line2));
+  --qrcx-surface:color-mix(in srgb,var(--card) 76%,transparent);
+  --qrcx-surface-strong:color-mix(in srgb,var(--card) 90%,transparent);
+  --qrcx-reader-max:840px;
+}
+html[data-theme="light"] body.is-quran-reader-route,
+html[data-theme="soft"] body.is-quran-reader-route,
+html[data-theme="salbei"] body.is-quran-reader-route,
+html[data-theme="eisgold"] body.is-quran-reader-route{
+  --qrcx-chrome-a:color-mix(in srgb,var(--bg) 98%,transparent);
+  --qrcx-chrome-b:color-mix(in srgb,var(--bg) 89%,transparent);
+  --qrcx-surface:color-mix(in srgb,var(--card) 90%,transparent);
+  --qrcx-surface-strong:color-mix(in srgb,var(--card) 97%,transparent);
+}
+html[data-theme="royal"] body.is-quran-reader-route,
+html[data-theme="dark"] body.is-quran-reader-route,
+html[data-theme="dar-al-layl"] body.is-quran-reader-route,
+html[data-theme="bordeaux"] body.is-quran-reader-route,
+html[data-theme="aurora"] body.is-quran-reader-route{
+  --qrcx-chrome-a:color-mix(in srgb,var(--bg) 91%,transparent);
+  --qrcx-chrome-b:color-mix(in srgb,var(--bg) 72%,transparent);
+  --qrcx-surface:color-mix(in srgb,var(--card) 62%,transparent);
+  --qrcx-surface-strong:color-mix(in srgb,var(--card) 80%,transparent);
+}
+
+/* Full-width app shell, restrained reading column */
+body.is-quran-reader-route #appView.view,
+body.is-quran-reader-route .qrc-page{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  background:var(--bg)!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+
+body.is-quran-reader-route .qrc-body{
+  width:min(var(--qrcx-reader-max),calc(100% - 24px))!important;
+  margin:0 auto!important;
+  padding:
+    0
+    0
+    calc(112px + env(safe-area-inset-bottom,0px))!important;
+  background:transparent!important;
+}
+
+/* Fixed chrome: subtle historical manuscript atmosphere only here */
+body.is-quran-reader-route .qrc-chrome{
+  min-height:calc(86px + env(safe-area-inset-top,0px))!important;
+  padding-top:max(7px,env(safe-area-inset-top,0px))!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  border-bottom:1px solid var(--qrcx-line)!important;
+  background:
+    linear-gradient(90deg,
+      var(--qrcx-chrome-a) 0%,
+      var(--qrcx-chrome-b) 68%,
+      color-mix(in srgb,var(--bg) 68%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 4%,transparent),
+      color-mix(in srgb,var(--bg) 18%,transparent)),
+    var(--qrcx-art) 86% 50%/cover no-repeat!important;
+  box-shadow:
+    0 10px 28px color-mix(in srgb,var(--bg) 60%,transparent),
+    inset 0 -1px 0 color-mix(in srgb,var(--gold2) 7%,transparent)!important;
+}
+
+body.is-quran-reader-route .qrc-chrome::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  height:auto!important;
+  bottom:auto!important;
+  z-index:0!important;
+  opacity:1!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 18%,transparent),
+      transparent 70%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 8%,transparent),
+      transparent 58%)!important;
+}
+body.is-quran-reader-route .qrc-chrome::after{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  top:auto!important;
+  height:1px!important;
+  z-index:1!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,transparent,var(--qrcx-line) 12%,var(--qrcx-line) 88%,transparent)!important;
+}
+
+body.is-quran-reader-route .qrc-chrome-main,
+body.is-quran-reader-route .qrc-chrome-sub{
+  position:relative!important;
+  z-index:2!important;
+  width:min(940px,100%)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+body.is-quran-reader-route .qrc-chrome-main{
+  grid-template-columns:46px minmax(0,1fr) auto!important;
+  gap:8px!important;
+  padding:7px 12px 4px!important;
+}
+body.is-quran-reader-route .qrc-chrome-sub{
+  padding:0 14px 9px!important;
+  color:var(--muted)!important;
+  font-size:.64rem!important;
+  letter-spacing:.025em!important;
+}
+
+body.is-quran-reader-route .qrc-icon-btn{
+  width:44px!important;
+  height:44px!important;
+  border:1px solid var(--qrcx-line)!important;
+  border-radius:14px!important;
+  background:var(--qrcx-surface)!important;
+  color:var(--text)!important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb,var(--text) 5%,transparent),
+    0 5px 14px color-mix(in srgb,var(--bg) 20%,transparent)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+  backdrop-filter:blur(10px)!important;
+}
+body.is-quran-reader-route .qrc-icon-btn:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--gold2) 28%,transparent)!important;
+  outline-offset:2px!important;
+}
+
+body.is-quran-reader-route .qrc-title-btn{
+  min-height:44px!important;
+  padding:4px 8px!important;
+  color:var(--text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(1.22rem,5vw,1.65rem)!important;
+  line-height:1!important;
+  font-weight:650!important;
+}
+body.is-quran-reader-route .qrc-chevron{color:var(--gold2)!important;opacity:.8!important}
+body.is-quran-reader-route .qrc-chrome-spacer{
+  height:calc(88px + env(safe-area-inset-top,0px))!important;
+}
+
+/* Ayāt remain open, paper-like, image-free */
+body.is-quran-reader-route .qrc-body .quran-ayah,
+body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--noble,
+body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--page{
+  margin:0!important;
+  padding:24px 0 20px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--page::after,
+body.is-quran-reader-route .qrc-body .quran-ayah.quran-ayah--noble::after{
+  left:0!important;
+  right:0!important;
+  bottom:0!important;
+  height:1px!important;
+  background:linear-gradient(90deg,transparent 0%,var(--qrcx-line-soft) 10%,var(--qrcx-line) 50%,var(--qrcx-line-soft) 90%,transparent 100%)!important;
+  opacity:.92!important;
+}
+
+body.is-quran-reader-route .qrc-body .quran-ayah--page .quran-ayah-ar,
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-ar{
+  margin:0!important;
+  padding:0!important;
+  color:var(--quran-arabic-text)!important;
+  font-size:clamp(2rem,7vw,var(--quran-arabic-size,34px))!important;
+  line-height:1.9!important;
+}
+
+body.is-quran-reader-route .qrc-body .quran-ayah--page .quran-ayah-tr-wrap,
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-tr-wrap{
+  margin:16px 0 0!important;
+  padding:13px 0 0!important;
+  border-top:1px solid var(--qrcx-line-soft)!important;
+}
+
+body.is-quran-reader-route .qrc-body .quran-ayah--page .quran-ayah-tr,
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-tr{
+  color:var(--muted)!important;
+  font-size:clamp(.92rem,3.4vw,var(--quran-trans-size,1.08rem))!important;
+  line-height:1.6!important;
+  font-weight:520!important;
+}
+
+body.is-quran-reader-route .qrc-body .quran-ayah--page .quran-ayah-de,
+body.is-quran-reader-route .qrc-body .quran-ayah--noble .quran-ayah-de{
+  margin-top:10px!important;
+  color:var(--text)!important;
+  font-size:clamp(.96rem,3.5vw,var(--quran-de-size,1.1rem))!important;
+  line-height:1.62!important;
+  font-weight:580!important;
+}
+
+body.is-quran-reader-route .quran-ayah-ref{
+  margin-top:9px!important;
+}
+body.is-quran-reader-route .quran-ayah-ref-code{
+  color:var(--muted)!important;
+  font-size:.64rem!important;
+  letter-spacing:.08em!important;
+}
+
+/* Per-ayah actions recede */
+body.is-quran-reader-route .quran-ayah-actions-row{
+  justify-content:flex-end!important;
+  gap:4px!important;
+  margin-top:8px!important;
+}
+body.is-quran-reader-route .quran-ayah-action-btn,
+body.is-quran-reader-route .quran-ayah-actions-row--compact .quran-ayah-action-btn{
+  min-width:40px!important;
+  min-height:40px!important;
+  padding:0 7px!important;
+  border:1px solid transparent!important;
+  border-radius:11px!important;
+  background:transparent!important;
+  color:var(--muted)!important;
+  box-shadow:none!important;
+}
+body.is-quran-reader-route .quran-ayah-action-btn:hover,
+body.is-quran-reader-route .quran-ayah-action-btn:focus-visible{
+  border-color:var(--qrcx-line-soft)!important;
+  background:color-mix(in srgb,var(--gold2) 5%,transparent)!important;
+  color:var(--text)!important;
+  outline:none!important;
+}
+
+/* Bottom context bar */
+body.is-quran-reader-route .qrc-context-bar{
+  width:min(760px,calc(100% - 24px))!important;
+  left:50%!important;
+  right:auto!important;
+  transform:translate(-50%,6px)!important;
+  margin:0!important;
+  height:48px!important;
+  padding:0 7px 0 13px!important;
+  border:1px solid var(--qrcx-line)!important;
+  border-bottom:0!important;
+  border-radius:17px 17px 0 0!important;
+  background:var(--qrcx-surface-strong)!important;
+  box-shadow:0 -8px 24px color-mix(in srgb,var(--bg) 24%,transparent)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  backdrop-filter:blur(14px)!important;
+}
+body.is-quran-reader-route .qrc-context-bar.is-visible{
+  transform:translate(-50%,0)!important;
+}
+body.is-quran-reader-route .qrc-context-pos{
+  color:var(--text)!important;
+  font-size:.69rem!important;
+  font-weight:760!important;
+}
+body.is-quran-reader-route .qrc-context-btn{
+  width:40px!important;
+  height:40px!important;
+  border-radius:11px!important;
+  color:var(--muted)!important;
+}
+body.is-quran-reader-route .qrc-context-btn:active,
+body.is-quran-reader-route .qrc-context-btn:focus-visible{
+  background:color-mix(in srgb,var(--gold2) 6%,transparent)!important;
+  color:var(--text)!important;
+}
+
+body.is-quran-reader-route .qrc-footer-nav{
+  width:min(var(--qrcx-reader-max),100%)!important;
+  margin:20px auto 4px!important;
+  gap:0!important;
+  border-top:1px solid var(--qrcx-line)!important;
+}
+body.is-quran-reader-route .qrc-footer-nav button{
+  min-height:52px!important;
+  border:0!important;
+  border-bottom:1px solid var(--qrcx-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--text)!important;
+  box-shadow:none!important;
+}
+body.is-quran-reader-route .qrc-footer-nav button+button{
+  border-left:1px solid var(--qrcx-line-soft)!important;
+}
+
+@media(max-width:599px){
+  body.is-quran-reader-route .qrc-body{
+    width:calc(100% - 20px)!important;
+  }
+  body.is-quran-reader-route .qrc-chrome{
+    background-position:center,center,88% 50%!important;
+  }
+  body.is-quran-reader-route .qrc-chrome-main{
+    grid-template-columns:44px minmax(0,1fr) auto!important;
+    padding-left:10px!important;
+    padding-right:10px!important;
+  }
+  body.is-quran-reader-route .qrc-icon-btn{
+    width:42px!important;
+    height:42px!important;
+  }
+  body.is-quran-reader-route .qrc-title-btn{
+    font-size:clamp(1.08rem,5.4vw,1.42rem)!important;
+  }
+  body.is-quran-reader-route .qrc-context-bar{
+    width:calc(100% - 20px)!important;
+  }
+}
+
+@media(min-width:760px){
+  body.is-quran-reader-route .qrc-chrome{
+    background-position:center,center,80% 48%!important;
+  }
+  body.is-quran-reader-route .qrc-body{
+    width:min(var(--qrcx-reader-max),calc(100% - 48px))!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  body.is-quran-reader-route .qrc-chrome,
+  body.is-quran-reader-route .qrc-context-bar,
+  body.is-quran-reader-route .quran-ayah-action-btn{transition:none!important}
+}
