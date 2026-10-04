@@ -76,23 +76,163 @@ async function adminApi(path,opt={}){
   return data;
 }
 
+async function browserStoryAlignment(file,text){
+  const story=String(text||"").trim();
+  const paragraphs=story.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
+  if(!file||paragraphs.length<1)throw Error("Story-Audio oder Absätze fehlen.");
+
+  const weights=paragraphs.map(p=>{
+    const words=(p.match(/[A-Za-zÀ-žĀ-žʿʾḤḥṢṣḌḍṬṭẒẓḎḏṮṯŠšǦǧĠġḪḫ0-9]+/g)||[]).length;
+    return Math.max(1,words+.08*p.length);
+  });
+  const totalWeight=weights.reduce((a,b)=>a+b,0);
+
+  async function metadataDuration(){
+    return await new Promise((resolve,reject)=>{
+      const a=document.createElement("audio"),url=URL.createObjectURL(file);
+      a.preload="metadata";
+      a.onloadedmetadata=()=>{const d=Number(a.duration||0);URL.revokeObjectURL(url);d>0?resolve(d):reject(Error("Audiodauer fehlt."))};
+      a.onerror=()=>{URL.revokeObjectURL(url);reject(Error("Audio konnte nicht analysiert werden."))};
+      a.src=url;
+    });
+  }
+  function weighted(duration,mode="browser-weighted-timeline-v1"){
+    let acc=0;
+    const starts=[0];
+    for(let i=0;i<weights.length-1;i++){acc+=weights[i];starts.push(duration*(acc/totalWeight))}
+    return {
+      ok:true,
+      timings:starts.map((st,i)=>({paragraphIndex:i,start:Number(st.toFixed(3)),end:Number((i+1<starts.length?starts[i+1]:duration).toFixed(3))})),
+      syncMode:mode,
+      alignmentLoss:null,
+      alignedWords:paragraphs.reduce((n,p)=>n+(p.match(/\S+/g)||[]).length,0),
+      alignedCharacters:story.length
+    };
+  }
+
+  let ctx=null;
+  try{
+    const AudioCtx=window.AudioContext||window.webkitAudioContext;
+    if(!AudioCtx)throw Error("WebAudio nicht verfügbar.");
+    ctx=new AudioCtx();
+    const buf=await file.arrayBuffer();
+    const audio=await ctx.decodeAudioData(buf.slice(0));
+    const duration=Number(audio.duration||0);
+    if(!(duration>0))throw Error("Ungültige Audiodauer.");
+    if(paragraphs.length===1)return weighted(duration,"browser-single-paragraph-v1");
+
+    const ch=audio.getChannelData(0),sr=audio.sampleRate;
+    const frame=Math.max(128,Math.round(sr*.025));
+    const rms=[];
+    for(let pos=0;pos<ch.length;pos+=frame){
+      let sum=0,n=0;
+      const end=Math.min(ch.length,pos+frame);
+      for(let i=pos;i<end;i+=2){const v=ch[i];sum+=v*v;n++}
+      rms.push(Math.sqrt(sum/Math.max(1,n)));
+    }
+    const sorted=rms.slice().sort((a,b)=>a-b);
+    const q=p=>sorted[Math.min(sorted.length-1,Math.max(0,Math.floor((sorted.length-1)*p)))]||0;
+    const low=q(.12),high=q(.82);
+    const threshold=Math.max(.0008,Math.min(high*.22,low+(high-low)*.16));
+
+    const silences=[];
+    let open=-1;
+    for(let i=0;i<rms.length;i++){
+      const quiet=rms[i]<=threshold;
+      if(quiet&&open<0)open=i;
+      if((!quiet||i===rms.length-1)&&open>=0){
+        const stop=quiet&&i===rms.length-1?i+1:i;
+        const dur=(stop-open)*frame/sr;
+        if(dur>=.14){
+          const endSec=Math.min(duration,stop*frame/sr);
+          if(endSec>.45&&endSec<duration-.45)silences.push({t:endSec,sil:dur,real:true});
+        }
+        open=-1;
+      }
+    }
+
+    const expected=[];
+    let acc=0;
+    for(let i=0;i<weights.length-1;i++){acc+=weights[i];expected.push(duration*(acc/totalWeight))}
+    const candidates=silences.slice();
+    for(const t of expected){
+      if(!candidates.some(x=>Math.abs(x.t-t)<.28))candidates.push({t,sil:0,real:false});
+    }
+    candidates.sort((a,b)=>a.t-b.t);
+
+    const B=expected.length,N=candidates.length,INF=1e18,minGap=.35;
+    let prev=new Array(N).fill(INF);
+    const back=Array.from({length:B},()=>new Array(N).fill(-1));
+    const cost=(b,j)=>{
+      const t=candidates[j].t,exp=expected[b];
+      const left=b?expected[b-1]:0,right=b===B-1?duration:expected[b+1];
+      const scale=Math.max(1.6,.45*Math.min(exp-left,right-exp));
+      const drift=((t-exp)/scale)**2;
+      const bonus=Math.min(1.8,candidates[j].sil)*.72;
+      return drift+(candidates[j].real?0:1.55)-bonus;
+    };
+    for(let j=0;j<N;j++)if(candidates[j].t>.4)prev[j]=cost(0,j);
+    for(let b=1;b<B;b++){
+      const cur=new Array(N).fill(INF);
+      let best=INF,bestJ=-1,k=0;
+      for(let j=0;j<N;j++){
+        const limit=candidates[j].t-minGap;
+        while(k<j&&candidates[k].t<=limit){if(prev[k]<best){best=prev[k];bestJ=k}k++}
+        if(bestJ>=0){cur[j]=best+cost(b,j);back[b][j]=bestJ}
+      }
+      prev=cur;
+    }
+    let endJ=-1,best=INF;
+    for(let j=0;j<N;j++)if(prev[j]<best){best=prev[j];endJ=j}
+    if(endJ<0||!Number.isFinite(best))return weighted(duration);
+
+    const ids=[endJ];
+    for(let b=B-1;b>0;b--){const p=back[b][ids[ids.length-1]];if(p<0)return weighted(duration);ids.push(p)}
+    ids.reverse();
+    const boundaries=ids.map(j=>candidates[j].t);
+    const points=[0,...boundaries,duration];
+    return {
+      ok:true,
+      timings:paragraphs.map((_,i)=>({paragraphIndex:i,start:Number(points[i].toFixed(3)),end:Number(points[i+1].toFixed(3))})),
+      syncMode:"browser-silence-aware-paragraph-v1",
+      alignmentLoss:null,
+      alignedWords:paragraphs.reduce((n,p)=>n+(p.match(/\S+/g)||[]).length,0),
+      alignedCharacters:story.length,
+      detectedSilences:silences.length
+    };
+  }catch(e){
+    const duration=await metadataDuration();
+    return weighted(duration);
+  }finally{
+    try{await ctx?.close?.()}catch(_){}
+  }
+}
+
 async function alignStoryFile(file,text){
   if(!file)throw Error("Audiodatei fehlt.");
   const story=String(text||"").trim();
   if(!story)throw Error("Story-Text fehlt.");
   const secret=workerSecret();
-  if(!secret)throw Error("Admin-Secret fehlt für die exakte Mitlese-Synchronisierung.");
-  const form=new FormData();
-  form.append("file",file,file.name||"story-audio");
-  form.append("text",story);
-  const res=await fetch(workerBase()+"/voice-studio/api/align-story",{
-    method:"POST",cache:"no-store",credentials:"omit",
-    headers:{Accept:"application/json","X-Admin-Secret":secret},
-    body:form
-  });
-  const data=await res.json().catch(()=>({}));
-  if(!res.ok||data?.ok===false)throw Error(data?.error||("Mitlese-Synchronisierung "+res.status));
-  return data;
+  if(secret){
+    try{
+      const form=new FormData();
+      form.append("file",file,file.name||"story-audio");
+      form.append("text",story);
+      const res=await fetch(workerBase()+"/voice-studio/api/align-story",{
+        method:"POST",cache:"no-store",credentials:"omit",
+        headers:{Accept:"application/json","X-Admin-Secret":secret},
+        body:form
+      });
+      const data=await res.json().catch(()=>({}));
+      if(res.ok&&data?.ok!==false&&Array.isArray(data?.timings)&&data.timings.length)return data;
+      console.warn("[DĀR Voice] Cloud alignment fallback:",data?.error||res.status);
+    }catch(e){
+      console.warn("[DĀR Voice] Cloud alignment unavailable:",e);
+    }
+  }
+  const fallback=await browserStoryAlignment(file,story);
+  if(!Array.isArray(fallback?.timings)||!fallback.timings.length)throw Error("Mitlese-Synchronisierung konnte nicht erzeugt werden.");
+  return fallback;
 }
 
 window.darVoiceAlignStoryFile=alignStoryFile;
