@@ -116,11 +116,21 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.104</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.105</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
-      <div><div class="setting-label">Als iPhone/iPad-App öffnen</div><div class="setting-note">Safari → Teilen → Zum Home-Bildschirm. Danach startet DĀR Voice ohne Browserleiste.</div></div>
+      <div>
+        <div class="setting-label">App-Update</div>
+        <div class="setting-note" id="mobileUpdateNote">Prüft den aktuellen Voice-Studio-Stand …</div>
+      </div>
+      <span id="mobileUpdateBadge" class="badge">prüft</span>
+    </div>
+    <button id="mobileUpdateBtn" class="generate" style="width:100%;height:46px">Nach Updates suchen</button>
+  </div>
+  <div class="card">
+    <div class="setting-row">
+      <div><div class="setting-label">Als iPhone/iPad-App öffnen</div><div class="setting-note">QR-Code nur bei der ersten Kopplung. Danach bleibt dieses Gerät gekoppelt; Updates laufen direkt hier in der App.</div></div>
       <span id="standaloneBadge" class="badge">Web</span>
     </div>
     <button id="installHelpBtn" class="secondary" style="width:100%">Installationsschritte anzeigen</button>
@@ -146,15 +156,36 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",finalAudioName:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],wordResultSerial:0,generating:false};
+const MOBILE_APP_VERSION="2.9.105";
 const LOCAL_ENGINE_HOST=location.port==="8787"||location.hostname==="127.0.0.1"||location.hostname==="localhost"||/^192\.168\./.test(location.hostname)||/^10\./.test(location.hostname)||/^172\.(1[6-9]|2\d|3[01])\./.test(location.hostname);
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const API_BASE=LOCAL_ENGINE_HOST?"":REMOTE_ENGINE_API;
 const apiUrl=path=>API_BASE+path;
+const LOCAL_PAIR_KEY="dar.voice.mobilePairToken.v1";
+function captureLocalPairToken(){
+  if(!LOCAL_ENGINE_HOST)return "";
+  let token="";
+  try{
+    const hash=String(location.hash||"").replace(/^#/,"");
+    const params=new URLSearchParams(hash);
+    token=String(params.get("pair")||"").trim();
+    if(token){
+      localStorage.setItem(LOCAL_PAIR_KEY,token);
+      history.replaceState(null,"",location.pathname+location.search);
+    }else{
+      token=String(localStorage.getItem(LOCAL_PAIR_KEY)||"").trim();
+    }
+  }catch(_){}
+  return token;
+}
+let LOCAL_PAIR_TOKEN=captureLocalPairToken();
 function contentStudioUrl(kind){
   const k=["story","dua","narration"].includes(String(kind||""))?String(kind):"story";
-  return LOCAL_ENGINE_HOST
-    ?"/studio/?kind="+encodeURIComponent(k)
-    :"/voice-studio/?cloud=1&kind="+encodeURIComponent(k);
+  if(LOCAL_ENGINE_HOST){
+    const base="/studio/?kind="+encodeURIComponent(k);
+    return LOCAL_PAIR_TOKEN?base+"#pair="+encodeURIComponent(LOCAL_PAIR_TOKEN):base;
+  }
+  return "/voice-studio/?cloud=1&kind="+encodeURIComponent(k);
 }
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
@@ -168,7 +199,12 @@ async function establishCloudAccess(code){
 }
 async function api(path,opts={},retried=false){
   const headers={"Content-Type":"application/json",...(opts.headers||{})};
+  if(LOCAL_ENGINE_HOST&&LOCAL_PAIR_TOKEN)headers["X-DAR-Voice-Token"]=LOCAL_PAIR_TOKEN;
   const response=await fetch(apiUrl(path),{credentials:"include",cache:"no-store",...opts,headers});
+  if(LOCAL_ENGINE_HOST&&response.status===403&&!retried){
+    LOCAL_PAIR_TOKEN=captureLocalPairToken();
+    if(LOCAL_PAIR_TOKEN)return api(path,opts,true);
+  }
   if(!LOCAL_ENGINE_HOST&&response.status===401&&!retried){
     const token=askCloudAccessToken();
     if(token&&await establishCloudAccess(token))return api(path,opts,true);
@@ -184,9 +220,96 @@ async function health(){
     const lib=d.library||{};const total=Number(lib.rules||0)||Number(lib.totalRules||0)||Number(lib.maxMasterPlsRules||0)||0;
     $("#libraryBadge").textContent=total?total.toLocaleString("de-DE"):"aktiv";$("#libraryNote").textContent=(Number(lib.maxMasterPlsRules||0)?Number(lib.maxMasterPlsRules).toLocaleString("de-DE")+" MAX-MASTER · ":"")+"Laufzeitbibliothek aktiv";
     $("#arabicBadge").textContent=d.reference_arabic_dedicated?"AR MASTER":"DE Fallback";$("#arabicBadge").className=d.reference_arabic_dedicated?"badge good":"badge";return true;
-  }catch(e){$("#dot").className="dot bad";$("#engineText").textContent=LOCAL_ENGINE_HOST?"Lokale Engine nicht erreichbar":"Cloud Engine nicht verbunden";$("#healthBadge").textContent="offline";$("#healthNote").textContent=LOCAL_ENGINE_HOST?"Lokale Engine starten.":"DĀR Voice Cloud ist noch nicht vollständig mit dem GPU-Host verbunden.";return false}
+  }catch(e){$("#dot").className="dot bad";const pairMissing=LOCAL_ENGINE_HOST&&!LOCAL_PAIR_TOKEN;$("#engineText").textContent=pairMissing?"Kopplung fehlt":(LOCAL_ENGINE_HOST?"Mac-Engine nicht erreichbar":"Cloud Engine nicht verbunden");$("#healthBadge").textContent="offline";$("#healthNote").textContent=pairMissing?"Einmal den QR-Code am Mac öffnen. Danach bleibt dieses Gerät gekoppelt.":(LOCAL_ENGINE_HOST?"Mac und iPhone/iPad müssen im selben WLAN sein und Voice Studio am Mac muss laufen.":"DĀR Voice Cloud ist noch nicht verbunden.");return false}
 }
-function go(name,opts={}){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="pronunciation"&&!opts.skipCatalog)loadCatalog(true);if(name==="settings")health();document.querySelector("main")?.scrollTo({top:0,behavior:"instant"})}
+let mobileLatestVersion="";
+function versionParts(v){return String(v||"").split(".").map(x=>parseInt(x,10)||0)}
+function versionNewer(a,b){
+  const x=versionParts(a),y=versionParts(b),n=Math.max(x.length,y.length);
+  for(let i=0;i<n;i++){const l=x[i]||0,r=y[i]||0;if(l!==r)return l>r}
+  return false;
+}
+async function checkMobileUpdate(showToast=true){
+  const btn=$("#mobileUpdateBtn"),badge=$("#mobileUpdateBadge"),note=$("#mobileUpdateNote");
+  if(btn){btn.disabled=true;btn.textContent="Prüfe Update …"}
+  try{
+    let data=null;
+    if(LOCAL_ENGINE_HOST){
+      const r=await api("/mobile/release");
+      data=await r.json().catch(()=>({}));
+      if(!r.ok||!data.ok)throw Error(data.error||"Update-Prüfung fehlgeschlagen");
+    }else{
+      const r=await fetch("/voice-studio/version.json?mobile_update="+Date.now(),{cache:"no-store",credentials:"include"});
+      const manifest=await r.json().catch(()=>({}));
+      if(!r.ok)throw Error("Update-Datei nicht erreichbar");
+      const latest=String(manifest.version||MOBILE_APP_VERSION);
+      data={ok:true,current:MOBILE_APP_VERSION,latest,updateAvailable:versionNewer(latest,MOBILE_APP_VERSION)};
+    }
+    mobileLatestVersion=String(data.latest||MOBILE_APP_VERSION);
+    const available=Boolean(data.updateAvailable)||versionNewer(mobileLatestVersion,MOBILE_APP_VERSION);
+    if(badge){badge.textContent=available?"Update "+mobileLatestVersion:"aktuell";badge.className=available?"badge":"badge good"}
+    if(note)note.textContent=available
+      ?("Aktuell "+MOBILE_APP_VERSION+" · neu "+mobileLatestVersion+" · direkt hier installieren.")
+      :("DĀR Voice "+MOBILE_APP_VERSION+" ist aktuell.");
+    if(btn){btn.disabled=false;btn.textContent=available?"Update "+mobileLatestVersion+" installieren":"Erneut prüfen";btn.dataset.updateAvailable=available?"1":"0"}
+    if(showToast)toast(available?"Update "+mobileLatestVersion+" verfügbar.":"DĀR Voice ist aktuell.");
+    return available;
+  }catch(e){
+    if(badge){badge.textContent="Fehler";badge.className="badge"}
+    if(note)note.textContent=e.message||"Update konnte nicht geprüft werden.";
+    if(btn){btn.disabled=false;btn.textContent="Update erneut prüfen";btn.dataset.updateAvailable="0"}
+    if(showToast)toast(e.message||"Update-Prüfung fehlgeschlagen.");
+    return false;
+  }
+}
+async function installMobileUpdate(){
+  const btn=$("#mobileUpdateBtn"),badge=$("#mobileUpdateBadge"),note=$("#mobileUpdateNote");
+  const available=btn?.dataset.updateAvailable==="1"||await checkMobileUpdate(false);
+  if(!available){await checkMobileUpdate(true);return}
+  if(btn){btn.disabled=true;btn.textContent="Update wird gestartet …"}
+  if(badge){badge.textContent="läuft";badge.className="badge"}
+  try{
+    if(LOCAL_ENGINE_HOST){
+      const r=await api("/mobile/update",{method:"POST",body:"{}"});
+      const d=await r.json().catch(()=>({}));
+      if(!r.ok||!d.ok)throw Error(d.error||"Update konnte am Mac nicht gestartet werden.");
+      if(note)note.textContent="Update läuft am Mac. DĀR Voice verbindet sich nach dem Neustart automatisch wieder.";
+      toast("Update gestartet · Verbindung kommt automatisch zurück.");
+      const target=mobileLatestVersion;
+      const started=Date.now();
+      const poll=async()=>{
+        if(Date.now()-started>180000){
+          if(btn){btn.disabled=false;btn.textContent="Verbindung erneut prüfen"}
+          if(note)note.textContent="Update wurde gestartet. Falls die Engine noch neu startet, Verbindung erneut prüfen.";
+          return;
+        }
+        try{
+          const rr=await api("/health");
+          const dd=await rr.json().catch(()=>({}));
+          if(rr.ok&&dd.ok&&(!target||String(dd.engine_version||"")===target)){location.reload();return}
+        }catch(_){}
+        setTimeout(poll,1800);
+      };
+      setTimeout(poll,2500);
+      return;
+    }
+    if("serviceWorker" in navigator){
+      const regs=await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(r=>r.update().catch(()=>{})));
+    }
+    if("caches" in window){
+      const keys=await caches.keys();
+      await Promise.all(keys.filter(k=>k.startsWith("dar-voice-studio-")).map(k=>caches.delete(k)));
+    }
+    location.reload();
+  }catch(e){
+    if(btn){btn.disabled=false;btn.textContent="Update erneut versuchen"}
+    if(badge){badge.textContent="Fehler";badge.className="badge"}
+    if(note)note.textContent=e.message||"Update konnte nicht gestartet werden.";
+    toast(e.message||"Update fehlgeschlagen.");
+  }
+}
+function go(name,opts={}){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="pronunciation"&&!opts.skipCatalog)loadCatalog(true);if(name==="settings"){health();checkMobileUpdate(false)}document.querySelector("main")?.scrollTo({top:0,behavior:"instant"})}
 $(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));
 $("[data-content-kind]").forEach(b=>b.onclick=()=>{location.href=contentStudioUrl(b.dataset.contentKind)});
 $("#refreshBtn").onclick=()=>{health();if($(".screen.active")?.dataset.screen==="history")loadHistory()};
@@ -630,7 +753,8 @@ function openSheet(){$("#sheetBackdrop").classList.add("show")}function closeShe
 $("#settingsBtn").onclick=openSheet;$("#voiceBtn").onclick=openSheet;$("#sheetDone").onclick=closeSheet;$("#sheetBackdrop").addEventListener("click",e=>{if(e.target.id==="sheetBackdrop")closeSheet()});
 const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
 $("#standaloneBadge").textContent=isStandalone?"App":"Web";$("#standaloneBadge").className=isStandalone?"badge good":"badge";
-$("#installHelpBtn").onclick=()=>toast(isStandalone?"DĀR Voice läuft bereits als Home-Bildschirm-App.":"Safari: Teilen → Zum Home-Bildschirm.");
+$("#installHelpBtn").onclick=()=>toast(isStandalone?"DĀR Voice läuft bereits als Home-Bildschirm-App. Updates findest du unter System → App-Update.":"Safari: Teilen → Zum Home-Bildschirm. QR-Code brauchst du nur für die erste Kopplung.");
+$("#mobileUpdateBtn").onclick=installMobileUpdate;
 try{
   const draft=localStorage.getItem("dar.voice.mobile.draft");if(draft)$("#text").value=draft;
   const savedStyle=localStorage.getItem("dar.voice.mobile.style");if(savedStyle&&[...$("#style").options].some(o=>o.value===savedStyle))$("#style").value=savedStyle;
@@ -649,7 +773,7 @@ $("#text").addEventListener("paste",()=>{
   },320);
 });
 syncStylePills();
-health().then(ok=>{if(ok)warmVoiceEngine()});setInterval(health,10000);
+health().then(ok=>{if(ok)warmVoiceEngine()});checkMobileUpdate(false);setInterval(health,10000);
 setTimeout(async()=>{
   const saved=savedGenerationJob();
   const jobId=String(saved?.jobId||"").trim();
