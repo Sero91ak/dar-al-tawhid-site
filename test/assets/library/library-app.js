@@ -676,6 +676,41 @@
     </div>`;
   }
 
+  // DAR_LIBRARY_CLASSIC_CINEMATIC_V1224
+  function sortLibraryByDate(list) {
+    return [...(list || [])].sort((a, b) => {
+      const left = String(a?.updatedAt || a?.publishedAt || "");
+      const right = String(b?.updatedAt || b?.publishedAt || "");
+      return right.localeCompare(left);
+    });
+  }
+
+  function renderLibraryCategoryPortals(all) {
+    const rows = CATEGORIES
+      .filter((cat) => cat !== "Alle")
+      .map((cat) => {
+        const count = (all || []).filter((pub) => matchesCategory(pub, cat)).length;
+        if (!count) return "";
+        return `<button class="lib-portal" type="button" data-library-cat="${esc(cat)}" aria-label="${esc(cat)}, ${count} Veröffentlichungen">
+          <span class="lib-portal-name">${esc(cat)}</span>
+          <span class="lib-portal-count">${count}</span>
+        </button>`;
+      })
+      .filter(Boolean)
+      .join("");
+    if (!rows) return "";
+    return `<section class="lib-portals" aria-label="Themenregale">
+      <div class="lib-portals-head">
+        <div class="lib-portals-head-main">
+          <h3>Themenregale</h3>
+          <p>Nach Bereich öffnen</p>
+        </div>
+        <div class="lib-portals-line" aria-hidden="true"></div>
+      </div>
+      <div class="lib-portal-grid">${rows}</div>
+    </section>`;
+  }
+
   function renderBibliothekMain(offlineIds) {
     const all = visiblePublications(catalog.publications || []);
     const filtered = filteredPublications(all);
@@ -683,10 +718,27 @@
     const countLabel = publicationCountLabel(filtered.length, isFiltered);
     const catButtons = renderCategoryPicker();
     const cards = filtered.map((p) => cardHtml(p, offlineIds)).join("");
-    const sections = cards
-      ? sectionHtml(listSectionTitle(), countLabel, cards)
-      : renderEmptyState();
     const hasSearch = Boolean(uiState.query);
+
+    let sections = "";
+    if (isFiltered) {
+      sections = cards
+        ? sectionHtml(listSectionTitle(), countLabel, cards)
+        : renderEmptyState();
+    } else {
+      const recent = getRecentlyRead(all).slice(0, 6);
+      const newest = sortLibraryByDate(all).slice(0, 8);
+      const recentCards = recent.map((p) => compactCardHtml(p, offlineIds)).join("");
+      const newestCards = newest.map((p) => compactCardHtml(p, offlineIds)).join("");
+      sections =
+        (recentCards ? sectionHtml("Weiterlesen", publicationCountLabel(recent.length, false), recentCards, "shelf") : "") +
+        (newestCards ? sectionHtml("Neu im Regal", publicationCountLabel(newest.length, false), newestCards, "shelf") : "") +
+        renderLibraryCategoryPortals(all) +
+        (cards ? sectionHtml("Alle Veröffentlichungen", publicationCountLabel(all.length, false), cards) : renderEmptyState());
+    }
+
+    const categoryCount = new Set(all.map((p) => String(p.category || "").trim()).filter(Boolean)).size;
+    const offlineCount = all.filter((p) => canOffline(p)).length;
 
     return `<section class="lib-page" data-library-root>
       <header class="lib-hero" aria-label="Bibliothekskopf">
@@ -695,13 +747,18 @@
           <p class="lib-hero-lead">Bücher, Abhandlungen und Themenhefte von Serhat Abu Malik</p>
           <p class="lib-hero-note is-short">Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān und Sunnah.</p>
           <p class="lib-hero-note is-full">Ausführliche Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān, Sunnah und dem Verständnis der Salaf.</p>
+          <div class="lib-hero-stats" aria-label="Bibliotheksübersicht">
+            <span class="lib-hero-stat">${all.length} Veröffentlichungen</span>
+            <span class="lib-hero-stat">${categoryCount} Themenbereiche</span>
+            ${offlineCount ? '<span class="lib-hero-stat">Offline lesbar</span>' : ""}
+          </div>
         </div>
         <div class="lib-hero-line" aria-hidden="true"></div>
       </header>
       <div class="lib-toolbar${uiState.catOpen ? " is-cat-open" : ""}">
         <div class="lib-search-wrap">
           <label class="visually-hidden" for="librarySearch">Bücher und Themen durchsuchen</label>
-          <input id="librarySearch" class="lib-search" type="search" placeholder="Bücher und Themen durchsuchen" autocomplete="off" enterkeyhint="search" value="${esc(uiState.query)}">
+          <input id="librarySearch" class="lib-search" type="search" placeholder="Bibliothek durchsuchen" autocomplete="off" enterkeyhint="search" value="${esc(uiState.query)}">
           <button class="lib-search-clear${hasSearch ? " is-visible" : ""}" type="button" data-library-search-clear aria-label="Suche löschen"${hasSearch ? "" : " hidden"}>×</button>
         </div>
         <div class="lib-cats">${catButtons}</div>
@@ -736,19 +793,26 @@
 
     const toc = (pub.tableOfContents || []);
     const sources = pub.sources || [];
+    const topMeta = [
+      pub.pageCount && Number(pub.pageCount) > 0 ? `${pub.pageCount} Seiten` : "",
+      pub.language || "",
+      pub.version ? `Version ${pub.version}` : "",
+      statusLabel(pub)
+    ].filter(Boolean);
 
-    return `<section class="lib-page lib-detail" data-library-detail="${esc(pub.slug)}">
+    return `<section class="lib-page lib-detail" data-library-detail="${esc(pub.slug)}" data-library-category="${esc(pub.category || "")}">
       <div class="lib-detail-hero lib-detail-hero-compact">
         <div class="lib-detail-cover">${coverHtml(pub)}</div>
         <div class="lib-detail-copy">
-          ${pub.transliteratedTitle ? `<p class="lib-detail-kicker">${esc(pub.transliteratedTitle)}</p>` : ""}
+          <p class="lib-detail-kicker">${esc(pub.category || pub.transliteratedTitle || "DĀR AL TAWḤĪD")}</p>
           <h2>${esc(pub.title)}</h2>
           ${pub.subtitle ? `<p class="lib-detail-sub">${esc(pub.subtitle)}</p>` : ""}
           ${pub.description ? `<p class="lib-detail-desc">${esc(pub.description)}</p>` : ""}
+          ${topMeta.length ? `<div class="lib-detail-topmeta">${topMeta.map((item) => `<span>${esc(item)}</span>`).join("")}</div>` : ""}
         </div>
       </div>
       ${preparing ? `<div class="lib-status-note" role="status">Veröffentlichung wird vorbereitet</div>` : ""}
-      <div class="lib-actions lib-actions-compact">
+      <div class="lib-actions lib-actions-compact" aria-label="Aktionen">
         <div class="lib-actions-row">
           <button class="lib-btn lib-btn-primary" type="button" data-library-read="${esc(pub.slug)}" ${readEnabled ? "" : "disabled"}>${readLabel}</button>
           <button class="lib-btn" type="button" data-library-download="${esc(pub.slug)}" ${downloadEnabled ? "" : "disabled"}>PDF</button>
@@ -759,19 +823,19 @@
           ${offline && offlineEnabled ? `<button class="lib-btn lib-btn-ghost" type="button" data-library-offline-remove="${esc(pub.slug)}">Offline entfernen</button>` : ""}
         </div>
       </div>
-      <div class="lib-meta-grid lib-meta-grid-compact">
+      <div class="lib-meta-grid lib-meta-grid-compact" aria-label="Werkdaten">
         <div class="lib-meta-item"><b>Kategorie</b><span>${esc(pub.category || "—")}</span></div>
         <div class="lib-meta-item"><b>Thema</b><span>${esc(pub.topic || "—")}</span></div>
         <div class="lib-meta-item"><b>Sprache</b><span>${esc(pub.language || "—")}</span></div>
-        <div class="lib-meta-item"><b>Dateigröße</b><span>${esc(pub.fileSize || "—")}</span></div>
+        <div class="lib-meta-item"><b>Version</b><span>${esc(pub.version || "—")}</span></div>
         <div class="lib-meta-item"><b>Aktualisiert</b><span>${esc(formatDate(pub.updatedAt))}</span></div>
         <div class="lib-meta-item"><b>Lesefortschritt</b><span>${progress && progress.lastPage ? `Seite ${progress.lastPage}${progress.totalPages ? ` von ${progress.totalPages}` : ""}` : pub.pageCount ? `0 von ${pub.pageCount}` : "Noch nicht begonnen"}</span></div>
       </div>
-      ${renderLibraryStatsPanel(pub.id)}
       ${toc.length ? `<section class="lib-panel"><h3>Inhaltsverzeichnis</h3><ul>${toc.map((item) => `<li>${esc(item.title || item)}</li>`).join("")}</ul></section>` : ""}
       ${pub.about ? `<section class="lib-panel"><h3>Über diese Veröffentlichung</h3><p>${esc(pub.about)}</p></section>` : ""}
-      ${sources.length ? `<section class="lib-panel"><h3>Verwendete Quellen</h3><ul>${sources.map((s) => `<li>${esc(typeof s === "string" ? s : s.title || s.name || "")}</li>`).join("")}</ul></section>` : ""}
+      ${sources.length ? `<section class="lib-panel"><h3>Verwendete Quellen</h3><ul>${sources.map((source) => `<li>${esc(typeof source === "string" ? source : source.title || source.name || "")}</li>`).join("")}</ul></section>` : ""}
       ${relatedHtml(pub, list)}
+      ${renderLibraryStatsPanel(pub.id)}
     </section>`;
   }
 
