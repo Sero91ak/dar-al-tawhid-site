@@ -158,20 +158,20 @@
     "homeChoices": "oval-capsule-restored",
     "homeChoiceLayoutVersion": "v1078",
     "homeChoiceCards": "rounded-cards-v1079",
-    "storiesPageHero": "edge-to-edge-realistic-v1097",
+    "storiesPageHero": "photoreal-hijaz-environment-v1097",
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1084",
     "storiesBottomNav": "separated-background-v1086",
     "storyFollowReader": "v5",
     "storyFollowReaderMode": "timestamp-aware-auto-scroll-v3",
     "storyFollowReaderReusable": true,
-    "sectionEntryHeroes": "realistic-responsive-v1097",
+    "sectionEntryHeroes": "edge-to-edge-compact-photoreal-v1097",
     "sectionHeroArtworkFormat": "local-png-jpeg",
     "sectionHeroNoDetachedHeaderCard": true,
     "sectionHeroNoKickerCapsule": true,
     "sectionHeroResponsive": "compact-phone-tablet-desktop-v1096",
     "quranPageHero": "edge-to-edge-compact-v1094",
-    "parentsPageHero": "edge-to-edge-realistic-v1097",
+    "parentsPageHero": "photoreal-parent-study-v1097",
     "sectionHeroAssets": {
       "stories": "/kids/assets/kids-art/section-stories-v1097.png",
       "quran": "/kids/assets/kids-art/section-quran-v1090.jpg",
@@ -231,7 +231,11 @@
     "storyFollowReaderCloudAlignmentOptional": true,
     "storyFollowReaderBrowserFallback": "browser-silence-aware-paragraph-v1",
     "sectionHeroRealisticArtwork": true,
-    "sectionHeroGeneratedPipeline": "Adobe/Runway-import-v1097"
+    "sectionHeroGeneratedPipeline": "Adobe/Runway-import-v1097",
+    "sectionHeroCacheBust": "1097-real3",
+    "sectionHeroLocalPermanentAssets": true,
+    "sectionHeroRealismRelease": "v1097",
+    "parentsHeroDecorativeCrescent": false
   },
   "updatedAt": "2026-10-04"
 }
