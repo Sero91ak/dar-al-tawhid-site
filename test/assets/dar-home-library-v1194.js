@@ -12,7 +12,7 @@ var observed=false;
 var access=[
   {nav:"topics",icon:"topics.png",title:"Tawḥīd & ʿAqīdah",desc:"Grundlagen, Beweise und Aussagen der Salaf."},
   {nav:"quran",icon:"quran.png",title:"Qurʾān & Tafsīr",desc:"Lesen, suchen, verstehen und weiterlernen."},
-  {nav:"hadith",icon:"hadith.png",title:"Sunnah & Ḥadīṯ",desc:"Authentische Überlieferungen und Ḥadīṯ-Bibliothek."},
+  {nav:"hadith",icon:"hadith.png",title:"Ḥadīṯ-Bibliothek",desc:"Authentische Überlieferungen"},
   {nav:"scholars",icon:"scholars.png",title:"Ṣaḥābah, Salaf & Gelehrte",desc:"Überlieferer, frühe Imāme und ihre Werke."},
   {nav:"books",icon:"library.png",title:"Bücher & Quellen",desc:"Geprüfte Werke, Fundstellen und Veröffentlichungen."},
   {nav:"prophets",icon:"prophets.png",title:"Die Propheten",desc:"Qurʾān & authentische Sunnah"},
@@ -235,6 +235,25 @@ function tuneSearch(){
     }
   });
 }
+function tuneHomeKnowledgeGridV1236(){
+  if(!isHome())return;
+  var scope=document.getElementById("appView")||document;
+  var hadithNodes=scope.querySelectorAll(
+    '.home-line-row[data-nav="hadith"],.home-line-row[data-dt-nav="hadith"],[data-nav="hadith"].home-line-row,[data-dt-nav="hadith"].home-line-row,'+
+    '#dtAccess1193 [data-dt-nav="hadith"],#dtAccess1194 [data-dt-nav="hadith"]'
+  );
+  hadithNodes.forEach(function(row){
+    var title=row.querySelector(".home-line-row__title,.dt-access-copy>b,h2,h3,h4,b,strong");
+    if(title)title.textContent="Ḥadīṯ-Bibliothek";
+    var meta=row.querySelector(".home-line-row__meta,.home-line-row__desc,.dt-access-copy>span,p,small");
+    if(meta)meta.textContent="Authentische Überlieferungen";
+    row.setAttribute("aria-label","Ḥadīṯ-Bibliothek öffnen");
+    row.classList.add("dt-hadith-library-entry");
+  });
+  scope.querySelectorAll(".home-line-grid,.home-line-list").forEach(function(el){
+    el.classList.add("dt-home-nav-polished");
+  });
+}
 function cleanupHomeDuplicates(shell){
   if(!shell)return;
 
@@ -311,6 +330,7 @@ function ensureMain(){
   if(!shell)return;
 
   cleanupHomeDuplicates(shell);
+  tuneHomeKnowledgeGridV1236();
   placeQuranResumeAfterCore(shell);
   tuneSearch();
   ensureFunctionalHeroSearch();
