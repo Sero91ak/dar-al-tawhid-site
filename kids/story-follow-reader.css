@@ -1,0 +1,29 @@
+/* DĀR AL TAWḤĪD Kids — shared story follow-along reader v1 */
+.kids-follow-reader{display:none;position:fixed;z-index:280;inset:0;align-items:flex-end;justify-content:center;padding:0;background:rgba(2,13,21,.66);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.kids-follow-reader.open{display:flex}
+.kfr-sheet{width:min(820px,100%);max-height:min(76dvh,760px);display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(239,203,121,.24);border-bottom:0;border-radius:30px 30px 0 0;background:linear-gradient(180deg,#0a2b3a 0%,#071d2a 100%);box-shadow:0 -24px 70px rgba(0,0,0,.36);color:#f7f2e9;padding-bottom:env(safe-area-inset-bottom)}
+.kfr-head{position:relative;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:18px 18px 10px;border-bottom:1px solid rgba(255,255,255,.07)}
+.kfr-head-copy{min-width:0;display:grid;gap:2px}.kfr-kicker{font-size:11px;line-height:1.2;letter-spacing:.12em;font-weight:950;color:#86d3cc}.kfr-title{font-size:clamp(19px,4.7vw,27px);line-height:1.15;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kfr-close{width:46px;height:46px;border:1px solid rgba(239,203,121,.25);border-radius:50%;background:rgba(255,255,255,.06);color:#f3d487;font-size:25px;display:grid;place-items:center;cursor:pointer}
+.kfr-controls{padding:10px 18px 12px;display:grid;grid-template-columns:auto 1fr;gap:10px 13px;align-items:center;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.018)}
+.kfr-play{min-width:112px;min-height:50px;border:0;border-radius:17px;background:#e8c779;color:#0d2732;font-size:15px;font-weight:950;padding:0 18px;cursor:pointer}
+.kfr-play:disabled{opacity:.38}.kfr-time{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:850;color:rgba(255,255,255,.60)}
+.kfr-progress{grid-column:1/-1;height:7px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden}.kfr-progress>span{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#7ed0c6,#e8c779)}
+.kfr-help{grid-column:1/-1;font-size:12px;line-height:1.35;color:rgba(255,255,255,.54);font-weight:750}
+.kfr-read{overflow:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:16px 18px 34px;scroll-padding-block:38%}
+.kfr-read p{margin:0 0 13px;padding:13px 14px;border-radius:16px;border:1px solid transparent;font-size:var(--kids-body,18px);line-height:1.62;color:rgba(248,246,240,.76);transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease}
+.kfr-read p.active{color:#fff;background:rgba(126,208,198,.095);border-color:rgba(126,208,198,.20);transform:translateZ(0)}
+.kfr-read p.past{color:rgba(248,246,240,.48)}
+html.kids-follow-reader-open{overflow:hidden!important}
+@media(max-width:620px){
+  .kfr-sheet{max-height:78dvh;border-radius:26px 26px 0 0}
+  .kfr-head{padding:15px 15px 9px}.kfr-controls{padding:9px 15px 11px}
+  .kfr-read{padding:14px 14px 28px}.kfr-read p{padding:12px 12px;margin-bottom:10px}
+  .kfr-play{min-width:104px;min-height:54px}
+}
+@media(min-width:760px){
+  .kids-follow-reader{padding:24px;align-items:center}
+  .kfr-sheet{max-height:min(72dvh,760px);border-bottom:1px solid rgba(239,203,121,.24);border-radius:30px}
+  .kfr-read{padding:20px 24px 34px}.kfr-read p{font-size:max(var(--kids-body,18px),18px)}
+}
+@media(prefers-reduced-motion:reduce){.kfr-read p{transition:none}}
