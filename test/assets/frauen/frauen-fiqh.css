@@ -1711,3 +1711,368 @@ body.is-frauen-route[data-frauen-view="list"] .frauen-post-list{
     letter-spacing:.12em!important;
   }
 }
+
+
+/* ==========================================================================
+   FRAUEN_SHARE_POLISH_V1223
+   Kontrastfester Hero + professionelle Share-Fläche auf Aussage-/Detailseiten.
+   ========================================================================== */
+
+/* Hero-Lesbarkeit hat Vorrang vor Theme-Foreground-Regeln. */
+html[data-theme] body.is-frauen-route .frauen-library-hero .frauen-library-hero__content{
+  opacity:1!important;
+  filter:none!important;
+  mix-blend-mode:normal!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero :is(
+  h1,h2,h3,.frauen-library-hero__title
+){
+  color:#fffaf0!important;
+  -webkit-text-fill-color:#fffaf0!important;
+  opacity:1!important;
+  text-shadow:0 2px 13px rgba(0,0,0,.62)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero .frauen-library-hero__subtitle{
+  color:rgba(255,250,240,.94)!important;
+  -webkit-text-fill-color:rgba(255,250,240,.94)!important;
+  opacity:1!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.58)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero .frauen-library-hero__eyebrow{
+  color:#f2d99b!important;
+  -webkit-text-fill-color:#f2d99b!important;
+  opacity:1!important;
+  text-shadow:0 1px 9px rgba(0,0,0,.68)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero .frauen-library-hero__stats span{
+  color:#f8e9c1!important;
+  -webkit-text-fill-color:#f8e9c1!important;
+  opacity:1!important;
+  background:rgba(4,18,17,.54)!important;
+  border-color:rgba(241,215,153,.44)!important;
+  text-shadow:0 1px 7px rgba(0,0,0,.55)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero .frauen-library-back,
+html[data-theme] body.is-frauen-route .frauen-library-hero .frauen-library-back *{
+  color:#fff8e8!important;
+  -webkit-text-fill-color:#fff8e8!important;
+  opacity:1!important;
+}
+
+/* Mehr Kontrast nur in der Textzone; Bild rechts bleibt sichtbar. */
+html[data-theme] body.is-frauen-route .frauen-library-hero::before{
+  background:
+    linear-gradient(90deg,rgba(3,15,16,.84) 0%,rgba(3,17,17,.72) 30%,rgba(3,18,18,.46) 57%,rgba(3,18,18,.11) 82%,rgba(3,18,18,.03) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.02) 0%,rgba(0,0,0,.05) 56%,rgba(2,13,14,.57) 100%)!important;
+}
+html[data-theme="royal"] body.is-frauen-route .frauen-library-hero::before{
+  background:
+    linear-gradient(90deg,rgba(3,10,25,.85) 0%,rgba(5,20,39,.71) 31%,rgba(8,29,53,.43) 58%,rgba(8,29,53,.09) 84%,rgba(8,29,53,.02) 100%),
+    linear-gradient(180deg,transparent 0%,rgba(3,10,25,.53) 100%)!important;
+}
+html[data-theme="bordeaux"] body.is-frauen-route .frauen-library-hero::before{
+  background:
+    linear-gradient(90deg,rgba(29,7,11,.85) 0%,rgba(54,17,25,.72) 31%,rgba(76,27,36,.43) 58%,rgba(76,27,36,.09) 84%,rgba(76,27,36,.02) 100%),
+    linear-gradient(180deg,transparent 0%,rgba(29,7,11,.54) 100%)!important;
+}
+html[data-theme="dar-al-layl"] body.is-frauen-route .frauen-library-hero::before{
+  background:
+    linear-gradient(90deg,rgba(2,6,4,.88) 0%,rgba(8,17,12,.73) 31%,rgba(13,27,19,.45) 58%,rgba(13,27,19,.09) 84%,rgba(13,27,19,.02) 100%),
+    linear-gradient(180deg,transparent 0%,rgba(2,6,4,.58) 100%)!important;
+}
+
+/* Detailseite: share panel */
+body.is-frauen-route[data-frauen-view="detail"] .article.post-reader{
+  padding-bottom:calc(150px + env(safe-area-inset-bottom,0px))!important;
+}
+
+.frauen-share-panel{
+  position:relative;
+  overflow:hidden;
+  margin:20px 0 14px!important;
+  padding:15px 14px 13px!important;
+  border:1px solid var(--theme-share-btn-border,var(--cat-line-soft,var(--line)))!important;
+  border-radius:22px!important;
+  background:var(--theme-share-panel-bg,
+    radial-gradient(circle at 16% 0%,color-mix(in srgb,var(--gold2) 9%,transparent),transparent 42%),
+    linear-gradient(145deg,color-mix(in srgb,var(--card) 94%,transparent),color-mix(in srgb,var(--bg) 93%,transparent)))!important;
+  box-shadow:
+    0 10px 26px rgba(4,14,15,.10),
+    inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+.frauen-share-panel::before{
+  content:"";
+  position:absolute;
+  left:14px;
+  right:14px;
+  top:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--gold2,var(--gold,#d9bf79)) 56%,transparent),transparent);
+}
+.frauen-share-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+  margin:0 2px 12px;
+}
+.frauen-share-head span{
+  display:block;
+  margin-bottom:3px;
+  color:var(--theme-surface-elevated-label,var(--gold2,var(--gold)))!important;
+  -webkit-text-fill-color:var(--theme-surface-elevated-label,var(--gold2,var(--gold)))!important;
+  font-size:8.8px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.frauen-share-head h3{
+  margin:0!important;
+  color:var(--theme-surface-elevated-text,var(--ink))!important;
+  -webkit-text-fill-color:var(--theme-surface-elevated-text,var(--ink))!important;
+  font-family:var(--serif)!important;
+  font-size:20px!important;
+  line-height:1.12!important;
+  font-weight:650!important;
+}
+.frauen-share-head > p{
+  margin:0;
+  color:var(--theme-surface-elevated-muted,var(--muted))!important;
+  -webkit-text-fill-color:var(--theme-surface-elevated-muted,var(--muted))!important;
+  font-size:10.5px;
+  line-height:1.3;
+  text-align:right;
+}
+
+.frauen-share-primary{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+.frauen-share-btn{
+  appearance:none;
+  -webkit-appearance:none;
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  min-width:0;
+  min-height:78px!important;
+  padding:9px 5px 8px!important;
+  border:1px solid var(--theme-share-btn-border,var(--line))!important;
+  border-radius:16px!important;
+  background:var(--theme-share-btn-bg,color-mix(in srgb,var(--card) 92%,transparent))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06)!important;
+  cursor:pointer;
+  transition:transform .16s ease,filter .16s ease;
+}
+.frauen-share-btn:active,
+.frauen-share-tool:active{
+  transform:scale(.97);
+}
+.frauen-share-btn.is-busy,
+.frauen-share-tool.is-busy{
+  opacity:.66!important;
+  pointer-events:none!important;
+}
+.frauen-share-btn b{
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:inherit!important;
+  -webkit-text-fill-color:currentColor!important;
+  font-size:10.2px!important;
+  line-height:1!important;
+  font-weight:800!important;
+}
+.frauen-share-icon{
+  display:grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  border-radius:12px;
+  background:color-mix(in srgb,currentColor 8%,transparent);
+}
+.frauen-share-icon svg{
+  width:22px;
+  height:22px;
+  fill:currentColor;
+  color:inherit;
+}
+
+/* Brandfarben: nur die eigentlichen Markenbuttons. */
+html[data-theme] body.is-frauen-route .frauen-share-btn.wa{
+  color:#18884a!important;
+  -webkit-text-fill-color:#18884a!important;
+  border-color:rgba(37,211,102,.27)!important;
+  background:linear-gradient(145deg,rgba(37,211,102,.115),var(--theme-share-btn-bg,transparent))!important;
+}
+html[data-theme] body.is-frauen-route .frauen-share-btn.tg{
+  color:#218ac3!important;
+  -webkit-text-fill-color:#218ac3!important;
+  border-color:rgba(42,171,238,.28)!important;
+  background:linear-gradient(145deg,rgba(42,171,238,.11),var(--theme-share-btn-bg,transparent))!important;
+}
+html[data-theme] body.is-frauen-route .frauen-share-btn.ig{
+  color:#b73570!important;
+  -webkit-text-fill-color:#b73570!important;
+  border-color:rgba(214,41,118,.25)!important;
+  background:linear-gradient(145deg,rgba(214,41,118,.09),var(--theme-share-btn-bg,transparent))!important;
+}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"])
+body.is-frauen-route .frauen-share-btn.wa{
+  color:#8ee7ad!important;
+  -webkit-text-fill-color:#8ee7ad!important;
+}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"])
+body.is-frauen-route .frauen-share-btn.tg{
+  color:#9fdcff!important;
+  -webkit-text-fill-color:#9fdcff!important;
+}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"])
+body.is-frauen-route .frauen-share-btn.ig{
+  color:#ffacd2!important;
+  -webkit-text-fill-color:#ffacd2!important;
+}
+
+.frauen-share-tools{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:7px;
+  margin-top:8px;
+}
+.frauen-share-tool{
+  appearance:none;
+  -webkit-appearance:none;
+  display:grid!important;
+  grid-template-columns:22px minmax(0,1fr);
+  align-items:center;
+  gap:7px;
+  min-width:0;
+  min-height:42px!important;
+  padding:8px 9px!important;
+  border:1px solid color-mix(in srgb,var(--theme-share-btn-border,var(--line)) 88%,transparent)!important;
+  border-radius:13px!important;
+  background:color-mix(in srgb,var(--theme-share-btn-bg,var(--card)) 74%,transparent)!important;
+  color:var(--theme-share-btn-text,var(--ink))!important;
+  -webkit-text-fill-color:var(--theme-share-btn-text,var(--ink))!important;
+  cursor:pointer;
+}
+.frauen-share-tool span{
+  display:grid;
+  place-items:center;
+  width:22px;
+  height:22px;
+  color:var(--theme-surface-elevated-label,var(--gold2,var(--gold)))!important;
+}
+.frauen-share-tool svg{
+  width:19px;
+  height:19px;
+  fill:currentColor;
+}
+.frauen-share-tool b{
+  min-width:0;
+  color:inherit!important;
+  -webkit-text-fill-color:currentColor!important;
+  font-size:10px!important;
+  line-height:1.15!important;
+  font-weight:760!important;
+}
+.frauen-share-tool--image{
+  border-color:color-mix(in srgb,var(--gold2,var(--gold)) 34%,transparent)!important;
+  background:linear-gradient(145deg,color-mix(in srgb,var(--gold2,var(--gold)) 10%,transparent),color-mix(in srgb,var(--theme-share-btn-bg,var(--card)) 76%,transparent))!important;
+}
+.frauen-share-note{
+  margin:9px 2px 0!important;
+  color:var(--theme-surface-elevated-muted,var(--muted))!important;
+  -webkit-text-fill-color:var(--theme-surface-elevated-muted,var(--muted))!important;
+  font-size:9.4px!important;
+  line-height:1.4!important;
+}
+
+.frauen-share-toast{
+  position:fixed;
+  left:50%;
+  bottom:calc(104px + env(safe-area-inset-bottom,0px));
+  z-index:99999;
+  max-width:min(88vw,420px);
+  padding:10px 14px;
+  border:1px solid rgba(238,211,144,.25);
+  border-radius:999px;
+  background:rgba(8,18,17,.94);
+  color:#fff5df!important;
+  -webkit-text-fill-color:#fff5df!important;
+  box-shadow:0 16px 40px rgba(0,0,0,.28);
+  font-size:11.5px;
+  font-weight:760;
+  opacity:0;
+  transform:translate(-50%,12px);
+  pointer-events:none;
+  transition:opacity .2s ease,transform .2s ease;
+}
+.frauen-share-toast.is-visible{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+@media (max-width:420px){
+  .frauen-share-panel{
+    padding:13px 11px 12px!important;
+    border-radius:19px!important;
+  }
+  .frauen-share-head{
+    margin-left:1px;
+    margin-right:1px;
+  }
+  .frauen-share-head h3{
+    font-size:18px!important;
+  }
+  .frauen-share-head > p{
+    display:none;
+  }
+  .frauen-share-primary{
+    gap:6px;
+  }
+  .frauen-share-btn{
+    min-height:72px!important;
+    border-radius:14px!important;
+  }
+  .frauen-share-icon{
+    width:33px;
+    height:33px;
+  }
+  .frauen-share-icon svg{
+    width:20px;
+    height:20px;
+  }
+  .frauen-share-btn b{
+    font-size:9.2px!important;
+  }
+  .frauen-share-tools{
+    gap:6px;
+  }
+  .frauen-share-tool{
+    grid-template-columns:19px minmax(0,1fr);
+    gap:5px;
+    min-height:40px!important;
+    padding:7px 7px!important;
+  }
+  .frauen-share-tool b{
+    font-size:9px!important;
+  }
+  .frauen-share-tool span,
+  .frauen-share-tool svg{
+    width:18px;
+    height:18px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .frauen-share-btn,
+  .frauen-share-tool,
+  .frauen-share-toast{
+    transition:none!important;
+  }
+}
