@@ -134,6 +134,12 @@ jobs:
           assert 'first_audio_target=64' in generate_body
           assert 'max_first_chars=68 if doc_mode=="kids_story" else 60' in generate_body
           assert 'preload_scan=plan[:min(len(plan),2)] if interactive_fast else plan' in generate_body
+          assert "def prepare_analysis_preflight" in engine
+          assert "ANALYSIS_PREFLIGHT_CACHE_MAX=24" in engine
+          assert 'preflight=prepare_analysis_preflight(text)' in job_start
+          analyze_route=engine[engine.index('if p=="/analyze"'):engine.index('if p=="/learning/search"')]
+          assert 'prepare_analysis_preflight(text)' in analyze_route
+          assert '"analysisCacheHit":bool(preflight.get("cacheHit"))' in analyze_route
           assert 'snap["reused"]=True' in engine
           assert 'if p in ("/generate-start","/generate-free-start")' in engine
           assert 'p=="/generate-job"' in engine
