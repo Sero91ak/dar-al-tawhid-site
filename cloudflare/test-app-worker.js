@@ -299,12 +299,12 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // DAR_PRAYER_V1254
-  if (!/jummah-v1258\\.css/.test(html)) {
-    html = html.replace(/<\\/head>/i, '<link rel="stylesheet" href="/test/assets/jummah-v1258.css?v=1258"><\\/head>');
+  if (!/jummah-v1258\.css/.test(html)) {
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/jummah-v1258.css?v=1258"><\/head>');
   }
 
-  if (!/qibla-v1259\\.css/.test(html)) {
-    html = html.replace(/<\\/head>/i, '<link rel="stylesheet" href="/test/assets/qibla-v1259.css?v=1259"><\\/head>');
+  if (!/qibla-v1259\.css/.test(html)) {
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/qibla-v1259.css?v=1259"><\/head>');
   }
 
   if (!/prayer-v1254\.css/.test(html)) {
