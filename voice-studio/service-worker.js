@@ -1,4 +1,4 @@
-const CACHE="dar-voice-studio-v18";
+const CACHE="dar-voice-studio-v19";
 const SHELL=[
   "/voice-studio/",
   "/voice-studio/index.html",
@@ -33,6 +33,11 @@ self.addEventListener("fetch",event=>{
   if(req.method!=="GET") return;
   const url=new URL(req.url);
   if(url.origin!==location.origin) return;
+
+  if(url.pathname==="/voice-studio/api"||url.pathname.startsWith("/voice-studio/api/")){
+    event.respondWith(fetch(req,{cache:"no-store"}));
+    return;
+  }
 
   const fresh =
     url.pathname==="/voice-studio/" ||
