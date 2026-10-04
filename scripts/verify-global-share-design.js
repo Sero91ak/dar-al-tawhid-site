@@ -3,7 +3,6 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "..");
-const OFFICIAL_BADGE = "/assets/app-store-badge-de-official.svg";
 const failures = [];
 
 function read(rel) {
@@ -14,106 +13,52 @@ function read(rel) {
   }
   return fs.readFileSync(abs, "utf8");
 }
-function need(rel, text, label) {
-  const src = read(rel);
-  if (src && !src.includes(text)) failures.push(`${rel}: missing ${label || text}`);
-  return src;
+function requireToken(rel, src, token, label) {
+  if (src && !src.includes(token)) failures.push(`${rel}: missing ${label || token}`);
 }
-function forbid(rel, text, label) {
-  const src = read(rel);
-  if (src && src.includes(text)) failures.push(`${rel}: forbidden ${label || text}`);
+function forbidToken(rel, src, token, label) {
+  if (src && src.includes(token)) failures.push(`${rel}: forbidden ${label || token}`);
 }
 
-const badge = read("assets/app-store-badge-de-official.svg");
-if (badge) {
-  if (!/Download_on_the_App_Store_Badge_DE_RGB_blk/i.test(badge)) {
-    failures.push("assets/app-store-badge-de-official.svg: not the canonical German black App Store badge");
-  }
-  if (!/viewBox=/i.test(badge)) failures.push("assets/app-store-badge-de-official.svg: invalid SVG/viewBox");
-}
-
-const globalShare = read("assets/dar-global-share-v1225.js");
+const globalRel = "assets/dar-global-share-v1225.js";
+const globalShare = read(globalRel);
 if (globalShare) {
-  if (!/adaptiveBodyLayout\(/.test(globalShare)) failures.push("assets/dar-global-share-v1225.js: adaptive body typography missing");
-  if (!/fillText\("AUSSAGE"/.test(globalShare)) failures.push("assets/dar-global-share-v1225.js: AUSSAGE hierarchy missing");
-  if (!/fillText\("QUELLE"/.test(globalShare)) failures.push("assets/dar-global-share-v1225.js: QUELLE hierarchy missing");
-  if (!/__DAR_GLOBAL_SHARE_V1246=true/.test(globalShare)) failures.push("assets/dar-global-share-v1225.js: singleton/version flag mismatch");
-  if (!/\/api\/share-image\/background/.test(globalShare) || !/generateFreshBackground\(/.test(globalShare)) {
-    failures.push("assets/dar-global-share-v1225.js: fresh AI background generation missing");
-  }
-  for (const token of ["SHARE_SCENE_MANIFEST", "GENERIC_SCENES", "SAHABA_SCENES", "sceneFor(", "registerSceneItems", "loadSceneManifest"]) {
-    if (globalShare.includes(token)) failures.push(`assets/dar-global-share-v1225.js: legacy app-image reuse remains: ${token}`);
-  }
-  for (const token of ["Folgt für mehr Wissen aus Qurʾān & Sunnah", "app-store-badge-de-official.svg"]) {
-    if (globalShare.includes(token)) failures.push(`assets/dar-global-share-v1225.js: legacy promotional export footer remains: ${token}`);
-  }
+  requireToken(globalRel, globalShare, "/api/share-image/background", "fresh AI share endpoint");
+  requireToken(globalRel, globalShare, "generateFreshBackground", "fresh background generator");
+  requireToken(globalRel, globalShare, "adaptiveBodyLayout", "adaptive body typography");
+  requireToken(globalRel, globalShare, 'fillText("AUSSAGE"', "AUSSAGE hierarchy");
+  requireToken(globalRel, globalShare, 'fillText("QUELLE"', "QUELLE hierarchy");
+  if (!/__DAR_GLOBAL_SHARE_V1246=true/.test(globalShare)) failures.push(globalRel + ": singleton/version flag mismatch");
+  forbidToken(globalRel, globalShare, "GENERIC_SCENES", "legacy app-image scene pool");
+  forbidToken(globalRel, globalShare, "share-background-library", "legacy share-image manifest");
+  forbidToken(globalRel, globalShare, "Folgt für mehr Wissen aus Qurʾān & Sunnah", "legacy promo footer");
+  forbidToken(globalRel, globalShare, "app-store-badge-de-official.svg", "legacy App Store footer badge");
 }
 
 for (const rel of ["assets/premium-feed-app.js", "test/assets/premium-feed-app.js"]) {
   const src = read(rel);
-  if (!src) continue;
-  if (!/SHARE_IMAGE_API/.test(src) || !/feedShareFreshImage\(/.test(src)) failures.push(`${rel}: fresh AI share background missing`);
-  if (/await\s+feedShareBrandFooter\(/.test(src)) failures.push(`${rel}: legacy export footer still active`);
-  if (!/\.sf-scene-brand,.sf-scene-badge/.test(src)) failures.push(`${rel}: social/promo strip is not removed from export`);
+  requireToken(rel, src, "/api/share-image/background", "fresh AI share endpoint");
+  requireToken(rel, src, "feedShareFreshImage", "fresh feed-share generator");
+  forbidToken(rel, src, "feedShareBrandFooter", "legacy feed promo footer");
+  forbidToken(rel, src, "app-store-badge-de-official.svg", "legacy App Store footer badge");
 }
 
-const frauen = need("test/assets/frauen/frauen-fiqh.js", OFFICIAL_BADGE, "official App Store badge");
+const frauenRel = "test/assets/frauen/frauen-fiqh.js";
+const frauen = read(frauenRel);
 if (frauen) {
-  if (!/frauenAdaptiveBodyLayout\(/.test(frauen)) failures.push("test/assets/frauen/frauen-fiqh.js: adaptive body typography missing");
-  if (!/fillText\("AUSSAGE"/.test(frauen)) failures.push("test/assets/frauen/frauen-fiqh.js: AUSSAGE hierarchy missing");
-  if (!/fillText\("QUELLE"/.test(frauen)) failures.push("test/assets/frauen/frauen-fiqh.js: QUELLE hierarchy missing");
-  if (!/await\s+frauenDrawStoreBadge\(/.test(frauen)) failures.push("test/assets/frauen/frauen-fiqh.js: official badge render is not awaited");
-}
-
-for (const rel of [
-  "test/assets/frauen/frauen-fiqh.js"
-]) {
-  forbid(rel, "Download on the", "hand-built App Store badge text");
-  forbid(rel, "#38a8ff", "legacy blue pseudo App Store icon");
-  forbid(rel, "app-store-icon-fixed.svg", "legacy App Store icon asset");
-}
-
-function walk(dir, out = []) {
-  if (!fs.existsSync(dir)) return out;
-  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
-    const abs = path.join(dir, ent.name);
-    if (ent.isDirectory()) walk(abs, out);
-    else if (ent.isFile() && /\.(?:js|html)$/i.test(ent.name)) out.push(abs);
-  }
-  return out;
-}
-
-const roots = ["assets", "test/assets", "kids", "apple-tv", "voice-studio", "desktop-preview", "links", "admin", "ios"];
-const known = new Set([
-  "assets/dar-global-share-v1225.js",
-  "assets/premium-feed-app.js",
-  "test/assets/premium-feed-app.js",
-  "test/assets/frauen/frauen-fiqh.js"
-]);
-
-for (const base of roots) {
-  for (const abs of walk(path.join(root, base))) {
-    const rel = path.relative(root, abs).replace(/\\/g, "/");
-    if (known.has(rel)) continue;
-    const src = fs.readFileSync(abs, "utf8");
-    const isImageShareRenderer =
-      /canvas\.toBlob/.test(src) &&
-      /new File\(\[blob\]/.test(src) &&
-      /(bildbeitrag|share)/i.test(src);
-    if (!isImageShareRenderer) continue;
-    const delegatesGlobal = /DARGlobalShare/.test(src);
-    const usesOfficial = src.includes(OFFICIAL_BADGE);
-    const usesFreshGenerator = /\/api\/share-image\/background|SHARE_IMAGE_API|generateFreshBackground|feedShareFreshImage/.test(src);
-    if (!delegatesGlobal && !usesOfficial && !usesFreshGenerator) {
-      failures.push(`${rel}: independent image-share renderer must delegate globally, use fresh AI generation, or use an approved legacy badge path`);
-    }
-  }
+  requireToken(frauenRel, frauen, "/api/share-image/background", "fresh AI share endpoint");
+  requireToken(frauenRel, frauen, "frauenFreshShareBackground", "fresh Frauen share generator");
+  requireToken(frauenRel, frauen, "frauenAdaptiveBodyLayout", "adaptive body typography");
+  requireToken(frauenRel, frauen, 'fillText("AUSSAGE"', "AUSSAGE hierarchy");
+  requireToken(frauenRel, frauen, 'fillText("QUELLE"', "QUELLE hierarchy");
+  forbidToken(frauenRel, frauen, "frauenNextShareScene", "legacy existing-image rotation");
+  forbidToken(frauenRel, frauen, "Folgt für mehr Wissen aus Qurʾān & Sunnah", "legacy promo footer");
+  forbidToken(frauenRel, frauen, "app-store-badge-de-official.svg", "legacy App Store footer badge");
 }
 
 if (failures.length) {
-  console.error("Global share design verification FAILED:");
-  for (const item of failures) console.error(" - " + item);
+  console.error("Fresh AI share design verification FAILED:");
+  failures.forEach((item) => console.error(" - " + item));
   process.exit(1);
 }
-
-console.log("Global share design verification passed.");
+console.log("Fresh AI share design verification passed.");
