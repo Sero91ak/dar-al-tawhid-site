@@ -1,0 +1,34 @@
+name: Import Ilm Historical Art
+
+on:
+  push:
+    paths:
+      - ".github/workflows/import-ilm-historical-art.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download historical Ilm asset
+        run: |
+          mkdir -p test/assets/ilm
+          curl -L --fail --retry 3 --retry-delay 2 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/01d04c45-a858-48c7-a52e-652dbcb0d754/7654f1a3-5d42-4bf8-83e4-4549bda7c9c7/Single_wide_cinematic_background_for_an_Islamic_knowledge_ap.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDczYTM5OTdiN2Y2MGVmNSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI0Njg3MX0.W9Dpzx3kGl3A5o7UmterQxQBERmhcybC8RpyNXFQZN0' -o test/assets/ilm/ilm-historical-majlis-v1234.jpg
+          test -s test/assets/ilm/ilm-historical-majlis-v1234.jpg
+          file test/assets/ilm/ilm-historical-majlis-v1234.jpg
+      - name: Commit asset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add test/assets/ilm/ilm-historical-majlis-v1234.jpg
+          if git diff --cached --quiet; then
+            echo "Asset already present"
+            exit 0
+          fi
+          git commit -m "add historical Ilm majlis background asset"
+          git push
