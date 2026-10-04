@@ -94,6 +94,18 @@ jobs:
           missing=[x for x in required if x not in html]
           if missing:
               raise SystemExit("mobile Voice markers missing: "+", ".join(missing))
+          plural_helper=re.search(
+              r'const \$=s=>document\.querySelector\(s\),\s*\2=s=>\[\.\.\.document\.querySelectorAll\(s\)\]',
+              html
+          )
+          if not plural_helper:
+              raise SystemExit("mobile Voice plural selector helper missing")
+          for selector in ("style","audio","preview","confirm"):
+              pattern=r'\2\("\[data-'+selector+r'[^"]*\]"\)\.forEach'
+              if not re.search(pattern,html):
+                  raise SystemExit("mobile Voice querySelectorAll binding missing for data-"+selector)
+          if re.search(r'\3\(',html):
+              raise SystemExit("mobile Voice contains accidental triple-dollar selector helper")
           if "$$$(" in html:
               raise SystemExit("mobile Voice contains undefined $$$ selector helper")
           bad_plural=re.findall(r'(?<!\$)\$\("\[data-(?:style|audio|preview|confirm)[^"]*\]"\)\.forEach',html)
