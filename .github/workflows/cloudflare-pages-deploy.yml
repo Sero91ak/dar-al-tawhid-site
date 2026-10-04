@@ -259,7 +259,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Vollständigen Desktop-Beitragsindex erzeugen
         run: node scripts/build-desktop-posts-index.js
@@ -301,7 +301,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Install dependencies
         run: npm install
