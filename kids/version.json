@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v41-studio-sections1108",
+  "buildId": "kids-shell-v41-sahabiyyat1108",
   "label": "KIDS · V1.07.47",
-  "releasedAt": "2026-10-04T20:02:00Z",
-  "note": "v1108: Voice-Studio-Kurzweg für Geschichten, Duʿāʾ und Erzählungen; direkte Eigentümer-Audio/Text-Zuordnung, getrennte Kids-Bereiche und Audio-First für 4–5 Jahre. Cache-/Shell-Versionen synchronisiert.",
+  "releasedAt": "2026-10-05T01:46:00+02:00",
+  "note": "Kids v1108: eigener Ṣaḥābiyyāt-Bereich parallel zu Propheten und Ṣaḥābah; 14 quellengeprüfte Geschichten, eigene historische Bildszenen ohne Porträtanspruch, Single-Master-Erzählungen für alle Altersstufen, Audio-/Mitlese-Logik und Direktquellen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -415,7 +415,11 @@
       "Erzählungen",
       "Duʿāʾ"
     ],
-    "preschoolAudioFirst": true
+    "preschoolAudioFirst": true,
+    "sahabiyyatOwnLibrary": true,
+    "sahabiyyatVerifiedStories": 14,
+    "sahabiyyatNoPortraits": true,
+    "sahabiyyatSingleMasterStory": true
   },
   "updatedAt": "2026-10-04"
 }
