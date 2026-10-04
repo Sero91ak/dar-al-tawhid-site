@@ -166,6 +166,8 @@ jobs:
           ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
           ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
           TELEGRAM_CHANNEL_USERNAME: ${{ secrets.TELEGRAM_CHANNEL_USERNAME }}
           TELEGRAM_TOPICS_CHAT_ID: ${{ secrets.TELEGRAM_TOPICS_CHAT_ID }}
@@ -189,6 +191,8 @@ jobs:
             ADMIN_PUBLISH_SECRET: pick(process.env.ADMIN_PUBLISH_SECRET),
             ONESIGNAL_API_KEY_NEW: pick(process.env.ONESIGNAL_API_KEY_NEW, process.env.ONESIGNAL_API_KEY),
             TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN),
+            ELEVENLABS_API_KEY: pick(process.env.ELEVENLABS_API_KEY),
+            ELEVENLABS_VOICE_ID: pick(process.env.ELEVENLABS_VOICE_ID),
             TELEGRAM_CHANNEL_ID: pick(process.env.TELEGRAM_CHANNEL_ID),
             TELEGRAM_CHANNEL_USERNAME: pick(process.env.TELEGRAM_CHANNEL_USERNAME),
             TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID)
@@ -297,6 +301,8 @@ jobs:
           ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
           ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
         run: |
           sleep 40
           HEALTH="$(curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true)"
@@ -332,7 +338,9 @@ jobs:
                 GITHUB_TOKEN: pick(process.env.WORKER_GITHUB_TOKEN, process.env.DAR_GITHUB_TOKEN, process.env.REPO_GITHUB_TOKEN),
                 ADMIN_PUBLISH_SECRET: pick(process.env.ADMIN_PUBLISH_SECRET),
                 ONESIGNAL_API_KEY_NEW: pick(process.env.ONESIGNAL_API_KEY_NEW, process.env.ONESIGNAL_API_KEY),
-                TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN)
+                TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN),
+                ELEVENLABS_API_KEY: pick(process.env.ELEVENLABS_API_KEY),
+                ELEVENLABS_VOICE_ID: pick(process.env.ELEVENLABS_VOICE_ID)
               };
               const clean = {};
               for (const [k, v] of Object.entries(payload)) if (v) clean[k] = v;
@@ -575,6 +583,8 @@ jobs:
           ONESIGNAL_API_KEY_NEW: ${{ secrets.ONESIGNAL_API_KEY_NEW }}
           ONESIGNAL_API_KEY: ${{ secrets.ONESIGNAL_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
           TELEGRAM_CHANNEL_USERNAME: ${{ secrets.TELEGRAM_CHANNEL_USERNAME }}
           TELEGRAM_TOPICS_CHAT_ID: ${{ secrets.TELEGRAM_TOPICS_CHAT_ID }}
@@ -598,6 +608,8 @@ jobs:
             ADMIN_PUBLISH_SECRET: pick(process.env.ADMIN_PUBLISH_SECRET),
             ONESIGNAL_API_KEY_NEW: pick(process.env.ONESIGNAL_API_KEY_NEW, process.env.ONESIGNAL_API_KEY),
             TELEGRAM_BOT_TOKEN: pick(process.env.TELEGRAM_BOT_TOKEN),
+            ELEVENLABS_API_KEY: pick(process.env.ELEVENLABS_API_KEY),
+            ELEVENLABS_VOICE_ID: pick(process.env.ELEVENLABS_VOICE_ID),
             TELEGRAM_CHANNEL_ID: pick(process.env.TELEGRAM_CHANNEL_ID),
             TELEGRAM_CHANNEL_USERNAME: pick(process.env.TELEGRAM_CHANNEL_USERNAME),
             TELEGRAM_TOPICS_CHAT_ID: pick(process.env.TELEGRAM_TOPICS_CHAT_ID, process.env.TELEGRAM_FORUM_CHAT_ID)
