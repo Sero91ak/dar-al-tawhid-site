@@ -10,6 +10,7 @@ on:
       - cloudflare/worker.js
       - cloudflare/kids-content-*.js
       - cloudflare/voice-studio-web.js
+      - cloudflare/voice-studio-gpu-gateway.js
       - cloudflare/ilm-research.js
       - cloudflare/wrangler.toml
       - cloudflare/prayer-push-*.js
@@ -66,6 +67,8 @@ jobs:
           node --check kids-content-admin.js
           node --check kids-content-push.js
           node --check kids-content-media.js
+          node --check voice-studio-gpu-gateway.js
+          node --check voice-studio-web.js
           node --check worker.js
 
       - name: Prayer push integrity guard
