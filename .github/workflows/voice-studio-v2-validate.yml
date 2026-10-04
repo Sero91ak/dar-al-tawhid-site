@@ -64,7 +64,7 @@ jobs:
           bash -n voice-studio/cloud-gpu/import-cloud-state.sh
           bash -n voice-studio/cloud-gpu/smoke.sh
           bash -n voice-studio/cloud-gpu/provision-digitalocean.sh
-          grep -q 'gpu-4000adax1-20gb' voice-studio/cloud-gpu/provision-digitalocean.sh
+          grep -q 'gpu-6000adax1-48gb' voice-studio/cloud-gpu/provision-digitalocean.sh
           grep -q 'gpu-h100x1-base' voice-studio/cloud-gpu/provision-digitalocean.sh
           python -m py_compile voice-studio/local-engine.py
           python -m py_compile voice-studio/cloud-gpu/benchmark.py
