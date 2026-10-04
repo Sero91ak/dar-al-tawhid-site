@@ -558,7 +558,16 @@ function mount(){
   renderStatus();
   refreshQa();
   loadLibrary();
-  setTimeout(()=>window.setStudioPage?.(window.studioPage||"prophets"),0);
+  setTimeout(()=>{
+    let requested="";
+    try{requested=String(new URLSearchParams(location.search).get("kind")||"").trim().toLowerCase()}catch{}
+    if(["story","dua","narration","quiz","game","ios"].includes(requested)){
+      window.setStudioPage?.("content");
+      switchKind(requested);
+      return;
+    }
+    window.setStudioPage?.(window.studioPage||"prophets");
+  },0);
 }
 function bind(){
   document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>{
