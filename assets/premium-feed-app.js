@@ -20,6 +20,7 @@
   var FEED_SHARE_BUSY = Object.create(null);
   var FEED_SHARE_IO = null;
   var FEED_API_ORIGIN = 'https://dar-admin-publisher.sero91ak.workers.dev';
+  var SHARE_IMAGE_API = FEED_API_ORIGIN + '/api/share-image/background';
   /* Full-bleed feed (iOS parity): no letterbox column caps */
   var FEED_COL_PHONE = 0;
   var FEED_COL_FOLD = 0;
@@ -2841,11 +2842,7 @@
       el.style.border = '1px solid rgba(230,200,130,0.28)';
       el.style.boxShadow = '0 18px 55px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.08)';
     });
-    root.querySelectorAll('.sf-brand-chip,.sf-scene-badge').forEach(function (el) {
-      el.style.backdropFilter = 'none';
-      el.style.webkitBackdropFilter = 'none';
-    });
-    root.querySelectorAll('.sf-brand-signature').forEach(function (el) {
+    root.querySelectorAll('.sf-scene-brand,.sf-scene-badge,.sf-brand-chip,.sf-brand-signature').forEach(function (el) {
       el.remove();
     });
     Array.prototype.forEach.call(root.querySelectorAll('img'), function (img) {
@@ -2853,9 +2850,7 @@
         var src = img.currentSrc || img.getAttribute('src') || img.src || '';
         if (!src) return;
         if (src.indexOf('/') === 0) src = new URL(src, global.location.origin).href;
-        if (/^https?:\/\//i.test(src) && src.indexOf(global.location.origin) !== 0) {
-          img.crossOrigin = 'anonymous';
-        }
+        if (/^https?:\/\//i.test(src) && src.indexOf(global.location.origin) !== 0) img.crossOrigin = 'anonymous';
       } catch (e) {}
     });
   }
@@ -2880,47 +2875,67 @@
     });
   }
 
+  function feedSharePromptData(scene) {
+    function pick(selectors) {
+      var el = null;
+      try { el = scene.querySelector(selectors); } catch (e) {}
+      return String(el && (el.innerText || el.textContent) || '').replace(/\s+/g, ' ').trim();
+    }
+    var title = pick('.sf-post__title,.sf-title,.sf-quote-title,h1,h2,h3');
+    var body = pick('.sf-post__quote,.sf-quote-text,.sf-quote,.feed-quote,.sf-post__body,.sf-post__copy');
+    var source = pick('.sf-quote-source,.feed-source,.feed-quote-source,.sf-source');
+    var category = pick('.sf-post__kicker,.sf-kicker,.sf-label,.sf-post__category');
+    if (!body) {
+      body = String(scene.innerText || scene.textContent || '')
+        .replace(/@dar_at_tawhid|@dar_al_tauhid|by Serhat Abu Malik|dar-al-tawhid\.de/gi, ' ')
+        .replace(/\s+/g, ' ').trim().slice(0, 1200);
+    }
+    return { title: title, body: body, source: source, category: category };
+  }
+
+  async function feedShareFreshImage(scene) {
+    var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = setTimeout(function () { try { if (controller) controller.abort(); } catch (e) {} }, 45000);
+    try {
+      var res = await fetch(SHARE_IMAGE_API, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-store',
+        credentials: 'omit',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'image/avif,image/webp,image/png,image/jpeg' },
+        body: JSON.stringify(feedSharePromptData(scene)),
+        signal: controller ? controller.signal : undefined
+      });
+      if (!res.ok) {
+        var msg = 'Neues Bild konnte nicht erzeugt werden.';
+        try { var problem = await res.json(); if (problem && problem.error) msg = String(problem.error); } catch (e2) {}
+        throw new Error(msg);
+      }
+      var blob = await res.blob();
+      if (!blob || !/^image\//i.test(blob.type || '')) throw new Error('Bildgenerator lieferte kein gültiges Bild.');
+      var objectUrl = URL.createObjectURL(blob);
+      try {
+        var img = await feedShareLoadImg(objectUrl);
+        return { image: img, objectUrl: objectUrl };
+      } catch (e3) {
+        URL.revokeObjectURL(objectUrl);
+        throw e3;
+      }
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
   async function feedSharePaintBg(ctx, scene, dims) {
-    var photo = scene.querySelector('.sf-post__bg--photo');
-    var gradEl = scene.querySelector('.sf-post__bg--grad');
-    var bgSrc = photo && photo.getAttribute('data-sf-bg-src');
-    if (bgSrc) {
-      try {
-        var img = await Promise.race([
-          feedShareLoadImg(bgSrc),
-          new Promise(function (_, rej) { setTimeout(function () { rej(new Error('bg-timeout')); }, 3500); })
-        ]);
-        ctx.fillStyle = '#1a1814';
-        ctx.fillRect(0, 0, dims.outW, dims.outH);
-        feedShareDrawCover(ctx, img, dims.outW, dims.outH);
-      } catch (eBg) {
-        ctx.fillStyle = '#1a1814';
-        ctx.fillRect(0, 0, dims.outW, dims.outH);
-      }
-    } else if (gradEl) {
-      var gclone = gradEl.cloneNode(true);
-      gclone.style.cssText = 'position:absolute;inset:0;width:' + dims.srcW + 'px;height:' + dims.srcH + 'px;';
-      var ghost = feedShareOffscreen(gclone, dims.srcW, dims.srcH);
-      try {
-        var h2c = await feedShareLoadH2c();
-        var gcv = await h2c(gclone, {
-          scale: dims.scale,
-          width: dims.srcW,
-          height: dims.srcH,
-          backgroundColor: '#1a1814',
-          logging: false,
-          useCORS: true,
-          allowTaint: false
-        });
-        ctx.drawImage(gcv, 0, 0, dims.outW, dims.outH);
-      } finally {
-        try { ghost.remove(); } catch (eG) {}
-      }
-    } else {
+    var fresh = await feedShareFreshImage(scene);
+    try {
       ctx.fillStyle = '#1a1814';
       ctx.fillRect(0, 0, dims.outW, dims.outH);
+      feedShareDrawCover(ctx, fresh.image, dims.outW, dims.outH);
+      feedShareShade(ctx, dims.outW, dims.outH);
+    } finally {
+      try { URL.revokeObjectURL(fresh.objectUrl); } catch (e) {}
     }
-    feedShareShade(ctx, dims.outW, dims.outH);
   }
 
   async function feedSharePaintFg(ctx, scene, dims) {
@@ -2958,48 +2973,6 @@
     }
   }
 
-  /* FEED_SHARE_BRAND_V1239 · Apple-provided German App Store badge, unmodified. */
-  async function feedShareBrandFooter(ctx, dims) {
-    var w = dims.outW, h = dims.outH;
-    var s = Math.max(.72, w / 1080);
-    var footerH = Math.round(96 * s);
-    var y0 = h - footerH;
-    var g = ctx.createLinearGradient(0, y0 - Math.round(26 * s), 0, h);
-    g.addColorStop(0, "rgba(5,12,12,0)");
-    g.addColorStop(.34, "rgba(5,12,12,.38)");
-    g.addColorStop(1, "rgba(4,10,10,.76)");
-    ctx.fillStyle = g;
-    ctx.fillRect(0, y0 - Math.round(26 * s), w, footerH + Math.round(26 * s));
-
-    var pad = Math.round(34 * s);
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "left";
-    ctx.fillStyle = "#f2d99b";
-    ctx.font = "700 " + Math.round(18 * s) + "px Arial, sans-serif";
-    ctx.fillText("dar-al-tawhid.de", pad, h - Math.round(38 * s));
-
-    ctx.fillStyle = "rgba(255,248,232,.78)";
-    ctx.font = "600 " + Math.round(11 * s) + "px Arial, sans-serif";
-    ctx.fillText("DĀR AL TAWḤĪD · Qurʾān & Sunnah", pad, h - Math.round(18 * s));
-
-    try {
-      var badge = await new Promise(function (resolve, reject) {
-        var img = new Image();
-        img.decoding = "async";
-        img.onload = function () { resolve(img); };
-        img.onerror = reject;
-        img.src = "/assets/app-store-badge-de-official.svg?v=share-v1239";
-      });
-      var bh = Math.round(48 * s);
-      var bw = Math.round(bh * 2.9916);
-      var bx = w - pad - bw;
-      var by = h - Math.round(63 * s);
-      ctx.drawImage(badge, bx, by, bw, bh);
-    } catch (eBadge) {}
-
-    ctx.textBaseline = "alphabetic";
-  }
-
   async function feedShareBuild(card, feedItemId) {
     var scene = card && card.querySelector('.sf-post__scene');
     if (!scene) throw new Error('Kein Feed-Bildbereich');
@@ -3011,7 +2984,6 @@
     if (!ctx) throw new Error('Canvas nicht verfügbar');
     await feedSharePaintBg(ctx, scene, dims);
     await feedSharePaintFg(ctx, scene, dims);
-    await feedShareBrandFooter(ctx, dims);
     var blob = await feedShareCanvasBlob(canvas);
     return new File([blob], 'dar-al-tawhid-feed-' + feedItemId + '.png', { type: 'image/png' });
   }
@@ -3073,15 +3045,8 @@
     showToast('Bild wurde erstellt. Falls kein Teilen-Menü geöffnet wurde, liegt die PNG-Datei zum Teilen bereit.');
   }
 
-  function feedShareWarm(feedItemId) {
-    if (!feedItemId || FEED_SHARE_CACHE[feedItemId] || FEED_SHARE_WARMING[feedItemId]) return;
-    var card = document.querySelector('[data-feed-card-id="' + feedItemId + '"]');
-    if (!card) return;
-    FEED_SHARE_WARMING[feedItemId] = true;
-    feedShareBuild(card, feedItemId)
-      .then(function (file) { FEED_SHARE_CACHE[feedItemId] = file; })
-      .catch(function () {})
-      .finally(function () { delete FEED_SHARE_WARMING[feedItemId]; });
+  function feedShareWarm(_feedItemId) {
+    // Deliberately empty: image generation starts only after an explicit share tap.
   }
 
   function feedShareWarmVisible(root) {
@@ -3140,15 +3105,10 @@
     try {
       var card = document.querySelector('[data-feed-card-id="' + feedItemId + '"]');
       if (!card) throw new Error('card-missing');
-      var file = FEED_SHARE_CACHE[feedItemId];
-      if (!file) {
-        file = await feedShareBuild(card, feedItemId);
-        FEED_SHARE_CACHE[feedItemId] = file;
-      }
+      var file = await feedShareBuild(card, feedItemId);
       await feedSharePresent(file, feedItemId);
     } catch (err) {
       if (err && err.name === 'AbortError') return;
-      delete FEED_SHARE_CACHE[feedItemId];
       showToast('Bild konnte nicht geteilt werden. Bitte kurz warten und erneut versuchen.');
     } finally {
       setFeedShareLoading(feedItemId, false);
