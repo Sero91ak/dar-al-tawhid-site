@@ -3675,6 +3675,9 @@
     var imagePath = frauenNextShareScene(abschnitt, e);
     var bg = null;
     try { bg = await frauenLoadImage(imagePath); } catch (err) {}
+    if (!bg) {
+      try { bg = await frauenLoadImage("/test/assets/home-v1194/study-runway.jpg"); } catch (fallbackErr) {}
+    }
     try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e0) {}
 
     var title = String(titelVon(e) || bereichKicker(abschnitt) || "Frauen im Islam").trim();
