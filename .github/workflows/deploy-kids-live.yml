@@ -74,9 +74,9 @@ jobs:
           ok=0
           for attempt in $(seq 1 12); do
             cb="$(date +%s)-$attempt"
-            curl -fsS --max-time 25 "https://dar-al-tawhid.de/kids/version.json?cb=$cb" -o /tmp/kids-version.json || true
-            curl -fsS --max-time 25 "https://dar-al-tawhid.de/kids/data/quiz-kids.json?cb=$cb" -o /tmp/kids-quiz.json || true
-            curl -fsS --max-time 25 "https://dar-al-tawhid.de/kids/start?kv=$EXPECT&cb=$cb" -o /tmp/kids-start.html || true
+            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/version.json?cb=$cb" -o /tmp/kids-version.json || true
+            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/quiz-kids.json?cb=$cb" -o /tmp/kids-quiz.json || true
+            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/start?kv=$EXPECT&cb=$cb" -o /tmp/kids-start.html || true
             if grep -F -q "$EXPECT" /tmp/kids-version.json 2>/dev/null &&
                grep -F -q '4–6 Jahre · hören & tippen' /tmp/kids-start.html 2>/dev/null &&
                ! grep -F -q 'Keine geprüfte Wiederholung ist gerade fällig' /tmp/kids-start.html 2>/dev/null &&
