@@ -3835,3 +3835,272 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-re
     font-size:15px!important;
   }
 }
+
+
+/* v1229 · FORCE FIX: Theme-Grid überschreiben, Full-bleed + lesbarer Text */
+/*
+  Ursache des sichtbaren Fehlers:
+  ältere Theme-Regeln mit body.is-frauen-route + !important hielten die Karten
+  weiterhin im 4-spaltigen Grid. Dadurch fiel der Copy-Block effektiv in eine
+  ~46px-Spalte und die Bild-Hintergründe wurden vom Theme-Shorthand überschrieben.
+  Diese Regeln haben bewusst höhere Spezifität und setzen die visuelle Karte final.
+*/
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+  box-sizing:border-box!important;
+  position:relative!important;
+  display:block!important;
+  grid-template-columns:none!important;
+  grid-template-rows:none!important;
+  grid-auto-flow:row!important;
+  gap:0!important;
+  width:100%!important;
+  min-width:0!important;
+  height:auto!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  background-color:var(--fw-card,var(--card))!important;
+  background-image:var(--frauen-card-img)!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:right center!important;
+  color:var(--fw-ink,var(--ink))!important;
+}
+
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual{
+  aspect-ratio:21 / 9!important;
+  min-height:164px!important;
+  padding:12px 46px 11px 14px!important;
+  border-radius:21px!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+  aspect-ratio:21 / 8.8!important;
+  min-height:154px!important;
+  padding:11px 44px 10px 13px!important;
+  border-radius:20px!important;
+}
+
+/* Kein Split: ein einziges Bild über die ganze Karte; links nur Lesbarkeitsverlauf. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual::after,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:0!important;
+  width:auto!important;
+  height:auto!important;
+  opacity:1!important;
+  transform:none!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--fw-card,var(--card)) 100%,transparent) 0%,
+      color-mix(in srgb,var(--fw-card,var(--card)) 99%,transparent) 27%,
+      color-mix(in srgb,var(--fw-card,var(--card)) 95%,transparent) 40%,
+      color-mix(in srgb,var(--fw-card,var(--card)) 78%,transparent) 52%,
+      color-mix(in srgb,var(--fw-card,var(--card)) 47%,transparent) 64%,
+      color-mix(in srgb,var(--fw-card,var(--card)) 18%,transparent) 75%,
+      color-mix(in srgb,var(--fw-card,var(--card)) 4%,transparent) 84%,
+      transparent 91%)!important;
+  filter:none!important;
+}
+
+/* Alte dekorative linke Linie aus der Grid-Version abschalten. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual::before,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual::before{
+  display:none!important;
+}
+
+/* Copy bekommt echte horizontale Breite, unabhängig von früheren Grid-Spalten. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__copy{
+  position:relative!important;
+  z-index:3!important;
+  display:block!important;
+  grid-column:auto!important;
+  width:68%!important;
+  max-width:68%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+  text-align:left!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+  position:relative!important;
+  z-index:3!important;
+  display:block!important;
+  grid-column:auto!important;
+  width:70%!important;
+  max-width:70%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+  text-align:left!important;
+}
+
+/* Titel/Fließtext immer vollständig und normal horizontal lesbar. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__copy h3,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3,
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__desc,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p,
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__meta,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__meta{
+  display:block!important;
+  position:relative!important;
+  width:auto!important;
+  max-width:100%!important;
+  min-width:0!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  hyphens:none!important;
+  -webkit-line-clamp:unset!important;
+  -webkit-box-orient:initial!important;
+  text-align:left!important;
+}
+
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__copy h3{
+  margin:1px 0 0!important;
+  font-size:20px!important;
+  line-height:1.09!important;
+  letter-spacing:-.012em!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+  margin:0!important;
+  min-height:22px!important;
+  padding-left:42px!important;
+  font-size:18px!important;
+  line-height:1.10!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__desc{
+  margin:6px 0 0!important;
+  font-size:11.4px!important;
+  line-height:1.30!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{
+  margin:6px 0 0!important;
+  font-size:11.1px!important;
+  line-height:1.29!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__meta,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__meta{
+  margin:6px 0 0!important;
+  font-size:10.2px!important;
+  line-height:1.18!important;
+}
+
+/* Nummer/Kicker kompakt links oben. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__nr,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__nr{
+  position:absolute!important;
+  z-index:5!important;
+  top:10px!important;
+  left:12px!important;
+  min-width:29px!important;
+  width:auto!important;
+  height:22px!important;
+  padding:0 6px!important;
+  margin:0!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  font-size:8.6px!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__kicker{
+  min-height:22px!important;
+  margin:0 0 4px!important;
+  padding-left:42px!important;
+  font-size:8.4px!important;
+  line-height:1.15!important;
+  letter-spacing:.11em!important;
+}
+
+/* Alte 3D-Kachel bleibt weg; Pfeil sitzt direkt auf dem Motiv. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__icon,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__icon{
+  display:none!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__arrow,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__arrow{
+  position:absolute!important;
+  z-index:6!important;
+  right:9px!important;
+  top:50%!important;
+  left:auto!important;
+  bottom:auto!important;
+  transform:translateY(-50%)!important;
+  width:34px!important;
+  height:34px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:999px!important;
+  font-size:22px!important;
+}
+
+/* Mobile Feinabstimmung ohne erneuten Grid-Rückfall. */
+@media (max-width:430px){
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual{
+    display:block!important;
+    grid-template-columns:none!important;
+    gap:0!important;
+    min-height:166px!important;
+    aspect-ratio:21 / 9.4!important;
+    padding:11px 42px 10px 12px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+    display:block!important;
+    grid-template-columns:none!important;
+    gap:0!important;
+    min-height:156px!important;
+    aspect-ratio:21 / 9.2!important;
+    padding:10px 40px 9px 11px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__copy{
+    width:70%!important;
+    max-width:70%!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+    width:72%!important;
+    max-width:72%!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__copy h3{
+    font-size:18.5px!important;
+    line-height:1.08!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+    font-size:16.7px!important;
+    line-height:1.10!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__desc{
+    font-size:10.8px!important;
+    line-height:1.27!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{
+    font-size:10.5px!important;
+    line-height:1.26!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__meta,
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__meta{
+    font-size:9.7px!important;
+    line-height:1.16!important;
+  }
+}
+
+@media (max-width:360px){
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual,
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+    aspect-ratio:auto!important;
+    min-height:168px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__copy{
+    width:72%!important;
+    max-width:72%!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+    width:74%!important;
+    max-width:74%!important;
+  }
+}
