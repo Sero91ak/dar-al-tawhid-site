@@ -269,7 +269,7 @@ function ensureUi(){
           '</div>'+
         '</div>'+
         '<div class="ps-body">'+
-          '<div class="ps-player" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören &amp; mitlesen</button></div><div class="ps-progress"><span id="psProgress"></span></div><div class="ps-player-note" id="psVoiceNote"></div></div>'+
+          '<div class="ps-player" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören &amp; mitlesen</button></div><div class="ps-progress" id="psProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="psProgress"></span></div><div class="ps-player-time"><strong id="psTimeCurrent">0:00</strong><span id="psTimeTotal">0:00</span></div><button class="ps-follow-open" id="psFollowOpen" type="button">Mitlesen öffnen</button><div class="ps-player-note" id="psVoiceNote"></div></div>'+
           '<article class="ps-read" id="psRead"></article>'+
           '<div class="ps-sources"><strong>QUELLEN</strong><div id="psSources"></div></div>'+
           '<div class="ps-question" id="psQuestion"></div>'+
@@ -280,6 +280,9 @@ function ensureUi(){
   modal.querySelectorAll("[data-ps-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.psMode)));
   $("#psClose").addEventListener("click",closeStory);
   $("#psPlay").addEventListener("click",toggleAudio);
+  $("#psFollowOpen")?.addEventListener("click",()=>followReader?.open());
+  $("#psProgressTrack")?.addEventListener("click",seekFromProgress);
+  $("#psProgressTrack")?.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();seekBy(e.key==="ArrowLeft"?-15:15)}});
   $("#psScroll").addEventListener("scroll",()=>{$("#psModal")?.classList.toggle("scrolled",$("#psScroll").scrollTop>72)},{passive:true});
   document.addEventListener("keydown",e=>{
     if(e.key!=="Escape")return;
@@ -288,13 +291,21 @@ function ensureUi(){
   });
   audio.preload="metadata";
   audio.addEventListener("timeupdate",updateProgress);
-  audio.addEventListener("loadedmetadata",updateProgress);
+  audio.addEventListener("loadedmetadata",()=>{followReader?.restore();updateProgress()});
   audio.addEventListener("ended",()=>{playing=false;updatePlayButton();markDone(active?.id||"");if($("#psVoiceNote"))$("#psVoiceNote").textContent="Geschichte vollständig angehört."});
   audio.addEventListener("play",()=>{playing=true;updatePlayButton()});
   audio.addEventListener("pause",()=>{playing=false;updatePlayButton()});
   followReader=window.DARKidsFollowReader?.create({
     id:"prophet-story",audio,
-    getContent:()=>({title:active?(active.name+(active.id==="muhammad"?" ﷺ":"")):"Geschichte",text:activeText}),
+    getContent:()=>({
+      key:active?("prophet:"+active.id+":"+ageKey()):"prophet:story",
+      title:active?(active.name+(active.id==="muhammad"?" ﷺ":"")):"Geschichte",
+      subtitle:"Prophetengeschichte · Alter "+age(),
+      album:"DĀR AL TAWḤĪD Kids · Propheten",
+      text:activeText,
+      artwork:active?heroUrl(active):"",
+      deepLink:active?("#stories/prophet/"+encodeURIComponent(active.id)):"#stories"
+    }),
     toggleAudio,
     disabled:()=>!audioMeta(active)?.url
   })||null;
@@ -372,7 +383,7 @@ function openStory(id){
   active=items.find(x=>x.id===id);if(!active)return;
   stopAudio();renderActive();$("#psModal").classList.remove("scrolled");$("#psModal").classList.add("open");lockPage();$("#psScroll").scrollTop=0;$("#psClose")?.focus();
 }
-function closeStory(){followReader?.close();stopAudio();$("#psModal")?.classList.remove("open","scrolled");unlockPage();active=null}
+function closeStory(){followReader?.close();stopAudio();$("#psModal")?.classList.remove("open","scrolled");unlockPage();clearStoryDeepLink("prophet");active=null}
 function resetAudioForActive(){
   stopAudio();
   const meta=audioMeta(active);
@@ -385,12 +396,37 @@ function resetAudioForActive(){
     audio.removeAttribute("src");
     if(note)note.textContent="Die Geschichte kann gelesen werden.";
   }
-  $("#psProgress").style.width="0";
+  if($("#psProgress"))$("#psProgress").style.width="0";
+  if($("#psTimeCurrent"))$("#psTimeCurrent").textContent="0:00";
+  if($("#psTimeTotal"))$("#psTimeTotal").textContent="0:00";
   updatePlayButton();
 }
+function storyTime(v){return window.DARKidsFollowReader?.formatTime?window.DARKidsFollowReader.formatTime(v):Math.floor((Number(v)||0)/60)+":"+String(Math.floor((Number(v)||0)%60)).padStart(2,"0")}
 function updateProgress(){
-  const p=audio.duration?Math.min(100,audio.currentTime/audio.duration*100):0;
+  const duration=Number(audio.duration)||0,current=Number(audio.currentTime)||0;
+  const p=duration?Math.min(100,current/duration*100):0;
   if($("#psProgress"))$("#psProgress").style.width=p+"%";
+  if($("#psTimeCurrent"))$("#psTimeCurrent").textContent=storyTime(current);
+  if($("#psTimeTotal"))$("#psTimeTotal").textContent=storyTime(duration);
+  const track=$("#psProgressTrack");
+  if(track){track.setAttribute("aria-valuemin","0");track.setAttribute("aria-valuemax",String(Math.max(0,Math.round(duration))));track.setAttribute("aria-valuenow",String(Math.max(0,Math.round(current))));track.setAttribute("aria-valuetext",storyTime(current)+" von "+storyTime(duration))}
+}
+function seekBy(delta){
+  if(!Number(audio.duration))return;
+  try{audio.currentTime=Math.max(0,Math.min(audio.duration,(Number(audio.currentTime)||0)+Number(delta||0)))}catch(_){}
+  updateProgress();followReader?.persist(true);
+}
+function seekFromProgress(e){
+  const track=$("#psProgressTrack");if(!track||!Number(audio.duration))return;
+  const rect=track.getBoundingClientRect();if(!rect.width)return;
+  try{audio.currentTime=Math.max(0,Math.min(audio.duration,((e.clientX-rect.left)/rect.width)*audio.duration))}catch(_){}
+  updateProgress();followReader?.persist(true);
+}
+function clearStoryDeepLink(kind){
+  try{
+    const raw=String(location.hash||"");
+    if(raw.indexOf("#stories/"+kind+"/")===0)history.replaceState(history.state||{},"",location.pathname+(location.search||"")+"#stories");
+  }catch(_){}
 }
 function updatePlayButton(){
   const b=$("#psPlay");if(!b)return;
@@ -408,6 +444,8 @@ async function toggleAudio(){
   try{
     busy=true;updatePlayButton();
     if(!audio.src)audio.src=meta.url;
+    if(audio.ended)try{audio.currentTime=0}catch(_){}
+    followReader?.restore();
     await audio.play();
     busy=false;playing=true;updatePlayButton();
   }catch(err){
@@ -416,10 +454,11 @@ async function toggleAudio(){
   }
 }
 function stopAudio(){
-  try{audio.pause();audio.currentTime=0}catch(_){}
+  followReader?.persist(true);
+  try{audio.pause()}catch(_){}
   playing=false;busy=false;
   try{audio.removeAttribute("src");audio.load()}catch(_){}
-  updatePlayButton();
+  updatePlayButton();updateProgress();
 }
 async function init(){
   if(!ensureUi())return;
@@ -429,6 +468,11 @@ async function init(){
     const data=await r.json();
     items=uniqueItems(data.items);
     renderCards();renderModeButtons();
+    try{
+      const m=String(location.hash||"").match(/^#stories\/prophet\/([^/?#]+)/i);
+      const id=m?decodeURIComponent(m[1]||""):"";
+      if(id&&items.some(x=>x.id===id)){openLibrary();setTimeout(()=>openStory(id),0)}
+    }catch(_){};
     const app=$(".app");
     if(app&&"MutationObserver" in window){
       new MutationObserver(()=>{renderCards();if(active){renderActive()}}).observe(app,{attributes:true,attributeFilter:["data-age"]});
