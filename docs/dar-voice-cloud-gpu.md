@@ -56,19 +56,49 @@ Im Worker `dar-admin-publisher`:
 ```
 wrangler secret put DAR_VOICE_GPU_ORIGIN
 wrangler secret put DAR_VOICE_GPU_TOKEN
+wrangler secret put DAR_VOICE_WEB_TOKEN
 ```
 
 `DAR_VOICE_GPU_ORIGIN` ist die HTTPS-Origin des GPU-Hosts.  
-`DAR_VOICE_GPU_TOKEN` muss exakt dem `DAR_VOICE_PAIR_TOKEN` des GPU-Hosts entsprechen.
+`DAR_VOICE_GPU_TOKEN` muss exakt dem `DAR_VOICE_PAIR_TOKEN` des GPU-Hosts entsprechen.  
+`DAR_VOICE_WEB_TOKEN` ist ein **separater** privater Zugangscode für die installierte Voice-PWA. Er wird nie an den GPU-Host weitergegeben.
 
 ## Sicherheitsmodell
 
-- Provider-Token bleibt ausschließlich serverseitig in Cloudflare.
+- GPU-Origin und GPU-Token bleiben ausschließlich serverseitig in Cloudflare.
+- Die Cloud-PWA ist zusätzlich mit einem eigenen `DAR_VOICE_WEB_TOKEN` geschützt und arbeitet fail-closed, wenn dieses Secret fehlt.
 - Browserzugriffe werden auf die DĀR-Weboberflächen begrenzt.
 - Cloudflare entfernt Browser-Cookies/Admin-Secrets vor dem Upstream-Aufruf.
 - Der GPU-Host akzeptiert Remote-Zugriffe nur mit dem Voice-Token.
 - Referenz-Audio und Lernzustand bleiben private Serverdaten.
 
+## Always-on-Stack
+
+Unter `voice-studio/cloud-gpu/` liegen zusätzlich:
+
+- `docker-compose.yml` – Voice-Container + Caddy-TLS-Proxy.
+- `Caddyfile` – HTTPS und Streaming-Reverse-Proxy.
+- `.env.example` – Domain, Pair-Token, Datenpfade und Autowarm.
+- `bootstrap.sh` – prüft NVIDIA/Docker, private Referenzdatei, baut und startet den Stack.
+- `export-cloud-state.command` – erstellt auf dem bisherigen Mac ein privates Migrationspaket aus Referenz-Audios, Lernwortschatz und bestätigten Audio-Locks.
+- `import-cloud-state.sh` – importiert dieses Paket auf den GPU-Host.
+
+Der Hugging-Face-Modellcache wird getrennt persistent gemountet. Nach einem Host-/Container-Neustart wird das CUDA-Modell automatisch vorgewärmt, damit der erste echte Nutzerauftrag nicht erst das Modell laden muss.
+
+## DigitalOcean-Pfad
+
+Für den ersten produktiven Host ist ein NVIDIA GPU Droplet mit AI/ML-ready Image vorgesehen. Dieses Image bringt NVIDIA-Treiber/CUDA und den NVIDIA Container Toolkit bereits mit; unser Stack benötigt anschließend nur Repository, private Voice-Daten, Domain und Secrets.
+
+Ablauf:
+
+1. NVIDIA GPU Droplet erstellen.
+2. Eine nur für den Origin bestimmte DNS-Adresse (z. B. `voice-gpu.dar-al-tawhid.de`) auf den Server zeigen lassen.
+3. Repo auf den Host holen und `voice-studio/cloud-gpu/.env.example` nach `.env` kopieren.
+4. Das Mac-Migrationspaket erzeugen und mit `import-cloud-state.sh` importieren.
+5. `bootstrap.sh` starten; Caddy stellt HTTPS bereit und die Engine lädt CUDA + Voice-Referenz vor.
+6. Die HTTPS-Origin und Tokens als Cloudflare-Secrets setzen.
+7. `https://dar-al-tawhid.de/voice/` öffnen, privaten Voice-Zugangscode einmalig eingeben und PWA installieren.
+
 ## Noch offen
 
-Die Software-Seite einschließlich CUDA-Container, Cloudflare-Gateway und PWA-Routing ist GPU-ready. Für echten Always-on-Betrieb fehlt nur noch ein provisionierter externer GPU-Host samt HTTPS-URL/Token und den privaten Voice-Dateien. Cloudflare Workers selbst führen das TTS-Modell nicht aus.
+Die Software-Seite einschließlich CUDA-Container, TLS-Stack, Cloudflare-Gateway, Owner-Zugang und PWA-Routing ist vorbereitet. Für echten Always-on-Betrieb fehlt nur noch das **Anlegen des externen GPU-Servers**, die DNS-Origin und das sichere Übertragen der privaten Voice-Daten/Secrets. Cloudflare Workers selbst führen das TTS-Modell nicht aus.
