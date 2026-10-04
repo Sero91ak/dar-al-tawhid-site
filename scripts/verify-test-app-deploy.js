@@ -152,7 +152,7 @@ async function fetchVersionBuild(base) {
   const kidsPath = path.join(ROOT_DIR, "kids/version.json");
   if (fs.existsSync(kidsPath)) {
     const kidsExpect = JSON.parse(fs.readFileSync(kidsPath, "utf8")).buildId;
-    async function waitKids(label, base) {
+    async function waitKids(label, base, allowProtected = false) {
       for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
         const url = `${base}/kids/version.json?v=${Date.now()}`;
         const { status, text, cf } = await fetchText(url);
@@ -162,17 +162,19 @@ async function fetchVersionBuild(base) {
         } catch (e) {
           buildId = "";
         }
+        const protectedRoute = allowProtected && (status === 401 || status === 403);
         const ok = status === 200 && buildId === kidsExpect;
         console.log(
-          `${label} kids: ${url} -> ${status} cf=${cf} buildId=${buildId || "?"} expect=${kidsExpect} ok=${ok} (attempt ${attempt}/${ATTEMPTS})`
+          `${label} kids: ${url} -> ${status} cf=${cf} buildId=${buildId || "?"} expect=${kidsExpect} ok=${ok} protected=${protectedRoute} (attempt ${attempt}/${ATTEMPTS})`
         );
+        if (protectedRoute) return "protected";
         if (ok) return true;
         if (attempt < ATTEMPTS) await sleep(DELAY_MS);
       }
       return false;
     }
-    const kidsPub = await waitKids("public", publicBase);
-    const kidsDev = await waitKids("workers.dev", workersBase);
+    const kidsPub = await waitKids("public", publicBase, true);
+    const kidsDev = await waitKids("workers.dev", workersBase, false);
     if (!kidsPub || !kidsDev) {
       throw new Error(
         `Kids Test Cache noch alt (expect ${kidsExpect}). public=${kidsPub} workers.dev=${kidsDev}`
@@ -229,7 +231,9 @@ async function fetchVersionBuild(base) {
       return videoOk;
     }
 
-    const cinemaPub = await verifyKidsCinema("public", publicBase);
+    const cinemaPub = kidsPub === "protected"
+      ? (console.log("public kids route is access-protected; cinema verification uses workers.dev mirror"), true)
+      : await verifyKidsCinema("public", publicBase);
     const cinemaDev = await verifyKidsCinema("workers.dev", workersBase);
     if (!cinemaPub || !cinemaDev) {
       throw new Error(
