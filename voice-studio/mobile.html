@@ -291,6 +291,13 @@ async function generate(){
     const r=await api(endpoint,{method:"POST",body:JSON.stringify(payload)});
     if(!r.ok){let d={};try{d=await r.json()}catch{};throw Error(d.error||"Audioerzeugung fehlgeschlagen")}
     const blob=await r.blob();
+    // Letzten Render-Status einmal synchron einlesen, bevor das schnelle Polling
+    // stoppt. So gehen keine unmittelbar vor dem finalen Response fertigen
+    // Live-Chunks verloren.
+    try{
+      const sr=await api("/render-status");const ss=await sr.json();
+      if(ss?.render_preview_ready)activateLivePreview(ss);
+    }catch(_){}
     if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);
     state.audioBlob=blob;state.audioUrl=URL.createObjectURL(blob);state.finalReady=true;
     // Wenn bereits Live-Chunks laufen, werden sie nicht unterbrochen. Nach dem
