@@ -103,6 +103,7 @@ import {
 export { PrayerStatusStore } from "./prayer-status-store.js";
 export { VideoStudioStore } from "./video-studio/job-store.js";
 import { handleVideoStudioRequest, resumeStuckVideoStudioJobs } from "./video-studio/index.js";
+import { handleShareImageBackground } from "./share-image.js";
 import { handleVoiceStudioWebRequest } from "./voice-studio-web.js";
 import {
   readLibraryCatalog,
@@ -206,6 +207,12 @@ export default {
       if (url.pathname.startsWith("/voice-studio/api")) {
         const voiceStudioResponse = await handleVoiceStudioWebRequest(request, env, cors);
         if (voiceStudioResponse) return voiceStudioResponse;
+      }
+
+      // Öffentlicher Bildbeitrag-Hintergrund: immer frisch generiert, nie aus App-Assets.
+      if (url.pathname === "/api/share-image/background") {
+        const shareImageResponse = await handleShareImageBackground(request, env, cors);
+        if (shareImageResponse) return shareImageResponse;
       }
 
       // DAR KI-Video-Studio (Admin only; approve = no visitor push)
