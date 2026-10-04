@@ -237,7 +237,10 @@
     "sectionHeroRealismRelease": "v1097",
     "parentsHeroDecorativeCrescent": false,
     "storyPreschoolFollowReaderButtonHidden": true,
-    "storyPreschoolAdultReadAlongShortcut": false
+    "storyPreschoolAdultReadAlongShortcut": false,
+    "storyAudioPermanentLocalAsset": true,
+    "storyAudioRangeSafeServiceWorker": true,
+    "storyAudioRangeStrategy": "direct-network-range-response"
   },
   "updatedAt": "2026-10-04"
 }
