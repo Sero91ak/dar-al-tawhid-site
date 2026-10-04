@@ -1,10 +1,10 @@
 {
-  "version": "2.9.75",
+  "version": "2.9.76",
   "updatedAt": "2026-10-04T03:36:00+02:00",
-  "deployTrigger": "voice-studio-2.9.75-mobile-ios-ipad-surface",
+  "deployTrigger": "voice-studio-2.9.76-mobile-ios-ipad-production",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v46",
+  "cache": "dar-voice-studio-v47",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -190,7 +190,7 @@
     "maxMasterPlsExactVariantsPreserved": true,
     "maxMasterPlsConflictPolicy": "exact-existing-curated-rule-wins; remaining PLS spelling variants preload",
     "maxMasterPlsWordBoundaryGuard": true,
-    "appEngineVersionHandshake": "2.9.73",
+    "appEngineVersionHandshake": "2.9.76",
     "smokeTestManifestVersionDynamic": true,
     "storyReferenceMemory": true,
     "storyReferenceSeed": "story-reference-muhammad-2026-10-04.json",
@@ -676,7 +676,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "265d16750ecdd5e88efd144f2f2572dfea2272fa",
+  "releaseRef": "eb41a626be18ade3d064f9a7c5de4f1526697f06",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1126,7 +1126,7 @@
   "validatedCommit": "3411ea220d5f21bdd764cfb6b12786b0f9c4975b",
   "validatedAt": "2026-10-04T03:14:00+02:00",
   "validation": {
-    "targetVersion": "2.9.75",
+    "targetVersion": "2.9.76",
     "pronunciationAsyncPreviewQueue": true,
     "pronunciationPreviewStatePolling": true,
     "pronunciationLocalCandidateFallback": true,
@@ -1287,5 +1287,25 @@
     "design": "original-dar-mobile-ui-inspired-by-modern-mobile-voice-workflows",
     "smokeValidated": true,
     "releaseRef": "265d16750ecdd5e88efd144f2f2572dfea2272fa"
+  },
+  "mobile": {
+    "enabled": true,
+    "route": "/mobile/",
+    "pairing": "secure-local-wifi-token",
+    "installMode": "iOS/iPadOS Add to Home Screen",
+    "tabs": [
+      "create",
+      "history",
+      "pronunciation",
+      "settings"
+    ],
+    "audioGeneration": true,
+    "audioHistory": true,
+    "pronunciationSearch": true,
+    "pronunciationPreview": true,
+    "pronunciationMasterConfirmation": true,
+    "unresolvedTermDetection": true,
+    "maxMasterAvailable": true,
+    "responsiveIPhoneIPad": true
   }
 }
