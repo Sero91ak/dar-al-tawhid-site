@@ -739,17 +739,29 @@
 
     const categoryCount = new Set(all.map((p) => String(p.category || "").trim()).filter(Boolean)).size;
     const offlineCount = all.filter((p) => canOffline(p)).length;
+    const categoryView = !uiState.query && uiState.category !== "Alle";
+    const heroTitle = categoryView ? uiState.category : "DĀR AL TAWḤĪD Bibliothek";
+    const heroLead = categoryView
+      ? `Veröffentlichungen im Bereich ${uiState.category}`
+      : "Bücher, Abhandlungen und Themenhefte von Serhat Abu Malik";
+    const heroShort = categoryView
+      ? `${filtered.length} ${filtered.length === 1 ? "Veröffentlichung" : "Veröffentlichungen"} in diesem Themenregal.`
+      : "Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān und Sunnah.";
+    const heroFull = categoryView
+      ? `Dieses Themenregal bündelt die vorhandenen Veröffentlichungen zu ${uiState.category}.`
+      : "Ausführliche Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān, Sunnah und dem Verständnis der Salaf.";
 
-    return `<section class="lib-page" data-library-root>
+    return `<section class="lib-page" data-library-root data-library-category-view="${categoryView ? esc(uiState.category) : ""}">
       <header class="lib-hero" aria-label="Bibliothekskopf">
         <div class="lib-hero-inner">
-          <h2>DĀR AL TAWḤĪD Bibliothek</h2>
-          <p class="lib-hero-lead">Bücher, Abhandlungen und Themenhefte von Serhat Abu Malik</p>
-          <p class="lib-hero-note is-short">Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān und Sunnah.</p>
-          <p class="lib-hero-note is-full">Ausführliche Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān, Sunnah und dem Verständnis der Salaf.</p>
+          ${categoryView ? '<p class="lib-hero-kicker">DĀR AL TAWḤĪD Bibliothek</p>' : ""}
+          <h2>${esc(heroTitle)}</h2>
+          <p class="lib-hero-lead">${esc(heroLead)}</p>
+          <p class="lib-hero-note is-short">${esc(heroShort)}</p>
+          <p class="lib-hero-note is-full">${esc(heroFull)}</p>
           <div class="lib-hero-stats" aria-label="Bibliotheksübersicht">
-            <span class="lib-hero-stat">${all.length} Veröffentlichungen</span>
-            <span class="lib-hero-stat">${categoryCount} Themenbereiche</span>
+            <span class="lib-hero-stat">${categoryView ? filtered.length : all.length} Veröffentlichungen</span>
+            ${categoryView ? `<span class="lib-hero-stat">${esc(uiState.category)}</span>` : `<span class="lib-hero-stat">${categoryCount} Themenbereiche</span>`}
             ${offlineCount ? '<span class="lib-hero-stat">Offline lesbar</span>' : ""}
           </div>
         </div>
