@@ -1,3 +1,4 @@
+// owner-voice-config-recovery-20261004
 import { elevenKey, isVoiceConfigured, synthesizeDarVoice } from "./video-studio/voice.js";
 
 const RATE_WINDOW_MS = 10 * 60 * 1000;
