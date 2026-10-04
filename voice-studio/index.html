@@ -2239,9 +2239,34 @@ async function restoreDesktopGenerationJob(){
 }
 
 const liveChunkStreams={
-  free:{chunks:[],seen:new Set(),cursor:0,active:false,finalUrl:""},
-  main:{chunks:[],seen:new Set(),cursor:0,active:false,finalUrl:""},
+  free:{chunks:[],seen:new Set(),cursor:0,active:false,finalUrl:"",urls:new Map(),fetches:new Map(),epoch:0,currentName:""},
+  main:{chunks:[],seen:new Set(),cursor:0,active:false,finalUrl:"",urls:new Map(),fetches:new Map(),epoch:0,currentName:""},
 };
+function releaseChunkStreamUrl(kind,name){
+  const s=liveChunkStreams[kind],key=String(name||"");if(!s||!key)return;
+  const url=s.urls.get(key);
+  if(url){try{URL.revokeObjectURL(url)}catch(_){}s.urls.delete(key)}
+  s.fetches.delete(key);
+}
+async function prefetchChunkStream(kind,index){
+  const s=liveChunkStreams[kind];if(!s)return "";
+  const row=s.chunks[index],name=String(row?.name||"").trim();if(!name)return "";
+  if(s.urls.has(name))return s.urls.get(name);
+  if(s.fetches.has(name))return s.fetches.get(name);
+  const epoch=s.epoch;
+  const job=(async()=>{
+    try{
+      const r=await localRequest("/mobile/audio?name="+encodeURIComponent(name));
+      if(!r.ok)throw Error("Live-Audio nicht verfügbar");
+      const blob=await r.blob();
+      if(epoch!==s.epoch)return "";
+      const url=URL.createObjectURL(blob);s.urls.set(name,url);return url;
+    }catch(_){return ""}
+    finally{s.fetches.delete(name)}
+  })();
+  s.fetches.set(name,job);
+  return job;
+}
 function chunkStreamConfig(kind){
   return kind==="free"
     ?{player:$("#freeVoicePlayer"),wrap:$("#freeVoicePlayerWrap"),link:$("#freeVoiceWavLink")}
@@ -2249,6 +2274,8 @@ function chunkStreamConfig(kind){
 }
 function resetChunkStream(kind){
   const s=liveChunkStreams[kind];if(!s)return;
+  for(const url of s.urls.values()){try{URL.revokeObjectURL(url)}catch(_){}}
+  s.urls.clear();s.fetches.clear();s.epoch+=1;s.currentName="";
   s.chunks=[];s.seen=new Set();s.cursor=0;s.active=false;s.finalUrl="";
   const {player}=chunkStreamConfig(kind);
   if(player&&!player.dataset.darChunkQueueBound){
@@ -2256,7 +2283,8 @@ function resetChunkStream(kind){
     player.addEventListener("ended",()=>{
       const row=liveChunkStreams[kind];
       if(!row?.active)return;
-      row.active=false;row.cursor+=1;
+      releaseChunkStreamUrl(kind,row.currentName);
+      row.currentName="";row.active=false;row.cursor+=1;
       if(row.cursor<row.chunks.length){pumpChunkStream(kind);return}
       if(row.finalUrl){
         player.src=row.finalUrl;
@@ -2270,7 +2298,7 @@ function resetChunkStream(kind){
     });
   }
 }
-function pumpChunkStream(kind){
+async function pumpChunkStream(kind){
   const s=liveChunkStreams[kind],cfg=chunkStreamConfig(kind);
   if(!s||!cfg.player||s.active)return;
   if(s.cursor>=s.chunks.length){
@@ -2279,10 +2307,13 @@ function pumpChunkStream(kind){
   }
   const row=s.chunks[s.cursor],name=String(row?.name||"").trim();
   if(!name)return;
-  s.active=true;
-  cfg.player.src=LOCAL_API+"/mobile/audio?name="+encodeURIComponent(name);
+  s.active=true;s.currentName=name;
+  const prefetched=s.urls.get(name)||await prefetchChunkStream(kind,s.cursor);
+  if(!s.active||s.currentName!==name)return;
+  cfg.player.src=prefetched||(LOCAL_API+"/mobile/audio?name="+encodeURIComponent(name));
   if(cfg.wrap)cfg.wrap.hidden=false;
   if(cfg.link){cfg.link.removeAttribute("href");cfg.link.textContent="Live-Audio · vollständige WAV folgt"}
+  prefetchChunkStream(kind,s.cursor+1);
   if(kind==="free"){
     $("#freeVoiceStatus").textContent="Sofort-Audio · Abschnitt "+(s.cursor+1)+" · Rest wird weiter erzeugt …";
   }else{
@@ -2300,6 +2331,8 @@ function updateChunkStream(kind,st){
     const name=String(row?.name||"").trim();
     if(name&&!s.seen.has(name)){s.seen.add(name);s.chunks.push(row)}
   }
+  prefetchChunkStream(kind,s.cursor);
+  prefetchChunkStream(kind,s.cursor+1);
   pumpChunkStream(kind);
   return true;
 }
