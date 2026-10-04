@@ -421,6 +421,7 @@ function navHtml(){
       <button id="csPronunciationTab" class="cs-tab" type="button">Aussprache</button>
       <button id="csProphetTab" class="cs-tab" type="button">Propheten</button>
       <button id="csSahabaTab" class="cs-tab" type="button">Ṣaḥābah · 10</button>
+      <button id="csSahabiyyatTab" class="cs-tab" type="button">Ṣaḥābiyyāt · 14</button>
       <button id="csAudioFilesTab" class="cs-tab" type="button">Audio-Dateien</button>
       <button class="cs-tab" data-cs-kind="story">Geschichten</button>
       <button class="cs-tab" data-cs-kind="dua">Duʿāʾ</button>
@@ -576,7 +577,7 @@ function bind(){
   document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>{
     inventoryFilter="";
     window.setStudioPage?.("content");
-    ["csProphetTab","csSahabaTab","csAudioFilesTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
+    ["csProphetTab","csSahabaTab","csSahabiyyatTab","csAudioFilesTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
     switchKind(btn.dataset.csKind);
   }));
   q("csProphetTab")?.addEventListener("click",()=>{
@@ -584,6 +585,7 @@ function bind(){
     switchKind("story");
     document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
     q("csSahabaTab")?.classList.remove("active");
+  q("csSahabiyyatTab")?.classList.remove("active");
     q("csAudioFilesTab")?.classList.remove("active");
     window.setStudioPage?.("prophets");
   });
@@ -592,7 +594,7 @@ function bind(){
     switchKind("story");
     window.setStudioPage?.("content");
     document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
-    ["csProphetTab","csAudioFilesTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
+    ["csProphetTab","csSahabiyyatTab","csAudioFilesTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
     q("csSahabaTab")?.classList.add("active");
     const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
     if(title)title.textContent="Ṣaḥābah-Geschichten";
@@ -600,10 +602,23 @@ function bind(){
     await loadLibrary(true);
     q("csLibrarySection")?.scrollIntoView?.({behavior:"smooth",block:"start"});
   });
+  q("csSahabiyyatTab")?.addEventListener("click",async()=>{
+    inventoryFilter="sahabiyyat";
+    switchKind("story");
+    window.setStudioPage?.("content");
+    document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
+    ["csProphetTab","csSahabaTab","csAudioFilesTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
+    q("csSahabiyyatTab")?.classList.add("active");
+    const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
+    if(title)title.textContent="Ṣaḥābiyyāt-Geschichten";
+    if(lead)lead.textContent="Eine Ṣaḥābiyyah und eine Altersfassung anklicken. Der vollständige vorhandene Mastertext wird direkt ins Voice-Studio geladen; danach Audio erzeugen oder MP3/M4A hineinziehen und direkt in Kids veröffentlichen.";
+    await loadLibrary(true);
+    q("csLibrarySection")?.scrollIntoView?.({behavior:"smooth",block:"start"});
+  });
   q("csAudioFilesTab")?.addEventListener("click",()=>{
     window.setStudioPage?.("content");
     document.querySelectorAll("[data-cs-kind]").forEach(x=>x.classList.remove("active"));
-    ["csProphetTab","csSahabaTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
+    ["csProphetTab","csSahabaTab","csSahabiyyatTab","csPronunciationTab","csAlphabetTab","csFreeVoiceTab","csSystemTab"].forEach(id=>q(id)?.classList.remove("active"));
     q("csAudioFilesTab")?.classList.add("active");
     const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
     if(title)title.textContent="Audio-Dateien";
@@ -1261,6 +1276,9 @@ async function saveDraftRemote(withAssets){
   finally{busy=false;refreshQa()}
 }
 
+function existingStoryKindLabel(kind){
+  return kind==="prophet"?"Propheten-Geschichte":kind==="sahabiyyat"?"Ṣaḥābiyyāt-Geschichte":"Ṣaḥābah-Geschichte";
+}
 async function publishExistingStoryAudioDirect(){
   if(busy||!existingStoryTarget)return null;
   if(!workerSecret()){setStudioMessage("Admin-Verbindung fehlt. Einmal verbinden, danach bleibt der Direktweg verfügbar.","warn");return null}
@@ -1272,7 +1290,7 @@ async function publishExistingStoryAudioDirect(){
     setStudioMessage("Zuerst fertige MP3/M4A hochladen oder Audio mit deiner Stimme erzeugen und einmal bestätigen.","warn");
     return null;
   }
-  if(!confirm((existingStoryTarget.kind==="prophet"?"Propheten-Geschichte":"Ṣaḥābah-Geschichte")+" · "+existingStoryTarget.age.replace("-","–")+" jetzt mit dieser Audio direkt im bestehenden Kids-Bereich aktualisieren?"))return null;
+  if(!confirm(existingStoryKindLabel(existingStoryTarget.kind)+" · "+existingStoryTarget.age.replace("-","–")+" jetzt mit dieser Audio direkt im bestehenden Kids-Bereich aktualisieren?"))return null;
   busy=true;renderStatus();
   setStudioMessage("Direktweg läuft: exakter Text → Audio → bestehender Kids-Bereich …","warn");
   try{
@@ -1309,7 +1327,7 @@ async function publishExistingStoryAudioDirect(){
     existingStoryTarget={...existingStoryTarget,existingAudio:result.asset||null};
     setProductionPhase("live-published");
     setStudioMessage(
-      (existingStoryTarget.kind==="prophet"?"Propheten-Geschichte":"Ṣaḥābah-Geschichte")+
+      existingStoryKindLabel(existingStoryTarget.kind)+
       " · "+existingStoryTarget.age.replace("-","–")+" aktualisiert. Audio und Mitlese-Zeiten sind direkt im bestehenden Kids-Bereich gespeichert.",
       "good"
     );
@@ -1591,13 +1609,39 @@ function normalizeExistingMubashshirunStories(item){
     };
   }).filter(Boolean);
 }
+function normalizeExistingSahabiyyatStories(item){
+  if(!item||!String(item.id||"").trim())return[];
+  const scripts=item.scripts&&typeof item.scripts==="object"?item.scripts:{};
+  const quiz=legacyQuizFromStory(item);
+  return["4-5","6-8","9-10"].map(age=>{
+    const text=String(scripts[age]||"").trim();
+    if(!text)return null;
+    const range=ageRangeForStoryBand(age);
+    return{
+      id:"existing-sahabiyyat-"+String(item.id)+"-"+age,
+      kind:"story",appTarget:"kids",ageMin:range[0],ageMax:range[1],
+      title:String(item.name||item.short||item.id)+" · "+age.replace("-","–")+" Jahre",
+      category:"Ṣaḥābiyyāt · Geschichte",topic:String(item.trait||item.category||"Ṣaḥābiyyāt"),
+      text,
+      sourceRefs:Array.isArray(item.sourceRefs)?item.sourceRefs:[],
+      question:Object.keys(quiz).length?{[age.replace("-","–")]:quiz}:{},
+      claimIds:[],tags:["legacy-kids","legacy-existing-story","existing-story:sahabiyyat","legacy-id:"+String(item.id)],
+      modes:{read:true,listen:true},
+      cover:item.cover?{url:String(item.cover),source:"existing-kids-art",type:"cover"}:{url:"/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",source:"existing-kids-art",type:"cover"},
+      existingAudio:item.audio?.[age]||null,
+      existingStory:{kind:"sahabiyyat",itemId:String(item.id),age},
+      verification:"approved"
+    };
+  }).filter(Boolean);
+}
 async function fetchLegacyKidsInventory(){
   const results=await Promise.allSettled([
     fetchExistingKidsJson("kids/data/stories-authentic.json"),
     fetchExistingKidsJson("kids/data/dua-kids.json"),
     fetchExistingKidsJson("kids/data/short-stories-voice.json"),
     fetchExistingKidsJson("kids/data/prophet-stories.json"),
-    fetchExistingKidsJson("kids/data/mubashshirun-stories.json")
+    fetchExistingKidsJson("kids/data/mubashshirun-stories.json"),
+    fetchExistingKidsJson("kids/data/sahabiyyat-stories.json")
   ]);
   const stories=results[0].status==="fulfilled"&&Array.isArray(results[0].value?.items)
     ?results[0].value.items.map(normalizeLegacyStory).filter(Boolean):[];
@@ -1609,7 +1653,9 @@ async function fetchLegacyKidsInventory(){
     ?results[3].value.items.flatMap(normalizeExistingProphetStories):[];
   const mubashshirun=results[4].status==="fulfilled"&&Array.isArray(results[4].value?.items)
     ?results[4].value.items.flatMap(normalizeExistingMubashshirunStories):[];
-  const all=[...prophets,...mubashshirun,...stories,...duas,...narrations];
+  const sahabiyyat=results[5].status==="fulfilled"&&Array.isArray(results[5].value?.items)
+    ?results[5].value.items.flatMap(normalizeExistingSahabiyyatStories):[];
+  const all=[...prophets,...mubashshirun,...sahabiyyat,...stories,...duas,...narrations];
   if(!all.length){
     const failed=results.filter(x=>x.status==="rejected").map(x=>x.reason?.message||String(x.reason||"")).filter(Boolean);
     throw Error(failed.join(" · ")||"Bestehender Kids-Bestand ist leer.");
@@ -1640,6 +1686,7 @@ function renderInventory(){
     const itemStudioKind=studioKindForItem(item);
     const tags=Array.isArray(item.tags)?item.tags.map(String):[];
     if(inventoryFilter==="sahaba"&&!tags.includes("existing-story:mubashshirun"))return false;
+    if(inventoryFilter==="sahabiyyat"&&!tags.includes("existing-story:sahabiyyat"))return false;
     const sectionMatch=studioKind==="ios"
       ?item.appTarget==="ios"
       :studioKind==="dua"
@@ -1659,7 +1706,9 @@ function renderInventory(){
   });
   if(summary)summary.textContent=inventoryFilter==="sahaba"
     ?("Ṣaḥābah-Texte · "+rows.length+" Altersfassungen · anklicken → Text + Audio-Upload")
-    :("Bestand "+inventoryState.legacy.length+" · Studio intern/Test "+inventoryState.staging.length+" · Studio live "+inventoryState.live.length+" · zusammen "+all.length);
+    :inventoryFilter==="sahabiyyat"
+      ?("Ṣaḥābiyyāt-Texte · "+rows.length+" Altersfassungen · anklicken → Text + Audio-Upload")
+      :("Bestand "+inventoryState.legacy.length+" · Studio intern/Test "+inventoryState.staging.length+" · Studio live "+inventoryState.live.length+" · zusammen "+all.length);
   if(!rows.length){box.innerHTML='<div class="notice">Keine passenden Inhalte gefunden.</div>';return}
   box.innerHTML=rows.map(row=>{
     const active=row.staging||row.live||row.legacy||{};
@@ -1738,7 +1787,7 @@ async function loadLegacyForEdit(id){
   renderStatus();refreshQa();persistDraft();
   setStudioMessage(
     existingStoryTarget
-      ?((existingStoryTarget.kind==="prophet"?"Propheten-Geschichte":"Ṣaḥābah-Geschichte")+" · Alter "+existingStoryTarget.age.replace("-","–")+" geöffnet. Exakter vorhandener Text ist bereit: Audio erzeugen oder fertige MP3/M4A hochladen → direkt in den bestehenden Kids-Bereich.")
+      ?(existingStoryKindLabel(existingStoryTarget.kind)+" · Alter "+existingStoryTarget.age.replace("-","–")+" geöffnet. Exakter vorhandener Text ist bereit: Audio erzeugen oder fertige MP3/M4A hochladen → direkt in den bestehenden Kids-Bereich.")
       :((studioKind==="dua"?"Duʿāʾ":studioKind==="narration"?"Erzählung":"Geschichte")+" aus dem vorhandenen Kids-Bestand geöffnet. Text ist sofort bereit: Audio erzeugen oder fertige MP3/M4A hochladen → direkt Kids veröffentlichen."),
     "good"
   );
@@ -1746,6 +1795,12 @@ async function loadLegacyForEdit(id){
   if(existingStoryTarget?.kind==="mubashshirun"){
     inventoryFilter="sahaba";
     q("csSahabaTab")?.classList.add("active");
+    q("csSahabiyyatTab")?.classList.remove("active");
+    setTimeout(()=>q("csAudioDrop")?.scrollIntoView?.({behavior:"smooth",block:"center"}),260);
+  }else if(existingStoryTarget?.kind==="sahabiyyat"){
+    inventoryFilter="sahabiyyat";
+    q("csSahabiyyatTab")?.classList.add("active");
+    q("csSahabaTab")?.classList.remove("active");
     setTimeout(()=>q("csAudioDrop")?.scrollIntoView?.({behavior:"smooth",block:"center"}),260);
   }
 }
