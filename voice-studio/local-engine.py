@@ -3021,10 +3021,20 @@ def _generate_kids_owner_voice_master(text_value:str,mode:str):
         _set_kids_owner_voice_state(current="Interaktive Stimme hat Vorrang · Kids-Voice-Sync wartet …")
         time.sleep(0.08)
 
-    generated=generate(
-        original,"",str(mode or "kids_lesson"),
-        free_mode=True,free_pronunciation=True
-    )
+    while True:
+        try:
+            generated=generate(
+                original,"",str(mode or "kids_lesson"),
+                free_mode=True,free_pronunciation=True
+            )
+            break
+        except RuntimeError as e:
+            if "Hintergrund-Render pausiert für interaktive Audio-Erzeugung" not in str(e):
+                raise
+            _set_kids_owner_voice_state(current="Kids-Voice-Sync pausiert · Freistimme/Worttest hat Vorrang …")
+            while MANUAL_RENDER_WAITING.is_set() or LEARNING_PREVIEW_WAITING.is_set() or RENDER_LOCK.locked():
+                time.sleep(0.08)
+            time.sleep(0.12)
     tmp=master.with_suffix(".tmp.wav")
     shutil.copy2(generated,tmp)
     os.replace(tmp,master)
@@ -6587,7 +6597,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
     # Ein Klick des Nutzers auf Freistimme ist interaktiv und erhält dieselbe
     # Priorität wie "Erzeugen". Nur echte Batch-Threads laufen im Hintergrund.
     render_thread_name=threading.current_thread().name
-    background_render=render_thread_name in ("dar-prophet-story-batch","dar-alphabet-batch")
+    background_render=render_thread_name in ("dar-prophet-story-batch","dar-alphabet-batch","dar-kids-owner-voice-sync")
     manual_priority=not background_render
     if manual_priority:
         MANUAL_RENDER_WAITING.set()
