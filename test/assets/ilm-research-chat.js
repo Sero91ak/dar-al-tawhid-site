@@ -241,27 +241,33 @@
 
     var oldWelcome = window.renderIlmWelcomeState;
     window.renderIlmWelcomeState = function () {
+      var prompts = [
+        ["Was ist Tawḥīd?", "Grundlage"],
+        ["Was ist Īmān?", "ʿAqīdah"],
+        ["Was sagte der Prophet ﷺ über Īmān?", "Sunnah"],
+        ["Gibt es dazu einen Ijmāʿ?", "Beweise"]
+      ];
       return (
-        '<div class="ilm-welcome ilm-welcome--phase1">' +
-          '<section class="ilm-welcome-card ilm-welcome-hero">' +
-            '<div class="ilm-welcome-hero-copy">' +
-              '<p class="ilm-welcome-kicker">DĀR AL TAWḤĪD · WISSENSBEREICH</p>' +
-              '<h2>ʿIlm</h2>' +
-              '<p class="ilm-welcome-lead">Frage nach Qurʾān, Sunnah, Ṣaḥābah und den frühen Imāmen. Antworten bleiben an den geprüften Quellen.</p>' +
-              '<div class="ilm-welcome-trust" aria-label="Quellenrahmen">' +
-                '<span>Qurʾān</span><span>Sunnah</span><span>Salaf</span>' +
-              '</div>' +
+        '<div class="ilm-welcome ilm-welcome--majlis">' +
+          '<section class="ilm-welcome-intro" aria-label="ʿIlm Wissensbereich">' +
+            '<p class="ilm-welcome-kicker">DĀR AL TAWḤĪD · WISSENSBEREICH</p>' +
+            '<h2>Frage mit Belegen</h2>' +
+            '<p class="ilm-welcome-lead">Qurʾān, authentische Sunnah und Aussagen der frühen Generationen – klar geordnet und mit überprüfbaren Fundstellen.</p>' +
+            '<div class="ilm-welcome-trust" aria-label="Quellenrahmen">' +
+              '<span>Qurʾān</span><span>Sunnah</span><span>Salaf</span>' +
             '</div>' +
           '</section>' +
           '<section class="ilm-welcome-prompts" aria-label="Fragevorschläge">' +
-            '<div class="ilm-welcome-prompts-head"><h3>Frage stellen</h3><span>Geprüfte Quellen</span></div>' +
+            '<div class="ilm-welcome-prompts-head">' +
+              '<div><h3>Frage stellen</h3><p>Wähle einen Einstieg oder schreibe unten deine eigene Frage.</p></div>' +
+              '<span>Geprüfte Quellen</span>' +
+            '</div>' +
             '<div class="ilm-starter-chips">' +
-              [
-                "Was ist Īmān?",
-                "Was sagte der Prophet ﷺ über Īmān?",
-                "Gibt es dazu einen Ijmāʿ?"
-              ].map(function (p) {
-                return '<button class="ilm-starter-chip" type="button" data-ilm-starter="' + esc(p) + '">' + esc(p) + '<span aria-hidden="true">→</span></button>';
+              prompts.map(function (item) {
+                return '<button class="ilm-starter-chip" type="button" data-ilm-starter="' + esc(item[0]) + '">' +
+                  '<span class="ilm-starter-copy"><b>' + esc(item[0]) + '</b><small>' + esc(item[1]) + '</small></span>' +
+                  '<span class="ilm-starter-arrow" aria-hidden="true">→</span>' +
+                '</button>';
               }).join("") +
             '</div>' +
           '</section>' +
