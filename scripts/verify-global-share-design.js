@@ -32,17 +32,29 @@ if (badge) {
   if (!/viewBox=/i.test(badge)) failures.push("assets/app-store-badge-de-official.svg: invalid SVG/viewBox");
 }
 
-const globalShare = need("assets/dar-global-share-v1225.js", OFFICIAL_BADGE, "official App Store badge");
+const globalShare = read("assets/dar-global-share-v1225.js");
 if (globalShare) {
   if (!/adaptiveBodyLayout\(/.test(globalShare)) failures.push("assets/dar-global-share-v1225.js: adaptive body typography missing");
   if (!/fillText\("AUSSAGE"/.test(globalShare)) failures.push("assets/dar-global-share-v1225.js: AUSSAGE hierarchy missing");
   if (!/fillText\("QUELLE"/.test(globalShare)) failures.push("assets/dar-global-share-v1225.js: QUELLE hierarchy missing");
-  if (!/__DAR_GLOBAL_SHARE_V1240=true/.test(globalShare)) failures.push("assets/dar-global-share-v1225.js: singleton/version flag mismatch");
+  if (!/__DAR_GLOBAL_SHARE_V1246=true/.test(globalShare)) failures.push("assets/dar-global-share-v1225.js: singleton/version flag mismatch");
+  if (!/\/api\/share-image\/background/.test(globalShare) || !/generateFreshBackground\(/.test(globalShare)) {
+    failures.push("assets/dar-global-share-v1225.js: fresh AI background generation missing");
+  }
+  for (const token of ["SHARE_SCENE_MANIFEST", "GENERIC_SCENES", "SAHABA_SCENES", "sceneFor(", "registerSceneItems", "loadSceneManifest"]) {
+    if (globalShare.includes(token)) failures.push(`assets/dar-global-share-v1225.js: legacy app-image reuse remains: ${token}`);
+  }
+  for (const token of ["Folgt für mehr Wissen aus Qurʾān & Sunnah", "app-store-badge-de-official.svg"]) {
+    if (globalShare.includes(token)) failures.push(`assets/dar-global-share-v1225.js: legacy promotional export footer remains: ${token}`);
+  }
 }
 
 for (const rel of ["assets/premium-feed-app.js", "test/assets/premium-feed-app.js"]) {
-  const src = need(rel, OFFICIAL_BADGE, "official App Store badge");
-  if (src && !/await\s+feedShareBrandFooter\(/.test(src)) failures.push(`${rel}: share footer must await badge rendering`);
+  const src = read(rel);
+  if (!src) continue;
+  if (!/SHARE_IMAGE_API/.test(src) || !/feedShareFreshImage\(/.test(src)) failures.push(`${rel}: fresh AI share background missing`);
+  if (/await\s+feedShareBrandFooter\(/.test(src)) failures.push(`${rel}: legacy export footer still active`);
+  if (!/\.sf-scene-brand,.sf-scene-badge/.test(src)) failures.push(`${rel}: social/promo strip is not removed from export`);
 }
 
 const frauen = need("test/assets/frauen/frauen-fiqh.js", OFFICIAL_BADGE, "official App Store badge");
@@ -54,9 +66,6 @@ if (frauen) {
 }
 
 for (const rel of [
-  "assets/dar-global-share-v1225.js",
-  "assets/premium-feed-app.js",
-  "test/assets/premium-feed-app.js",
   "test/assets/frauen/frauen-fiqh.js"
 ]) {
   forbid(rel, "Download on the", "hand-built App Store badge text");
@@ -94,8 +103,9 @@ for (const base of roots) {
     if (!isImageShareRenderer) continue;
     const delegatesGlobal = /DARGlobalShare/.test(src);
     const usesOfficial = src.includes(OFFICIAL_BADGE);
-    if (!delegatesGlobal && !usesOfficial) {
-      failures.push(`${rel}: independent image-share renderer must use DARGlobalShare or the official App Store badge`);
+    const usesFreshGenerator = /\/api\/share-image\/background|SHARE_IMAGE_API|generateFreshBackground|feedShareFreshImage/.test(src);
+    if (!delegatesGlobal && !usesOfficial && !usesFreshGenerator) {
+      failures.push(`${rel}: independent image-share renderer must delegate globally, use fresh AI generation, or use an approved legacy badge path`);
     }
   }
 }
