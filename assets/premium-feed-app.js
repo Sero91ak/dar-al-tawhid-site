@@ -1170,8 +1170,6 @@
 
   function postFeedBarHtml(item, liked) {
     var postUrl = item.postUrl || ('/#post/' + encodeURIComponent(item.postId || ''));
-    var preview = item.image || '';
-    var orig = item.originalImage || preview || '';
     var parts = feedBarStatsParts(item.postId);
     var statsHtml = parts.length
       ? '<span class="sf-bar-stats">' + parts.join(' · ') + '</span>'
@@ -1181,7 +1179,7 @@
       '<div class="sf-post__bar feed-bar">' +
         '<button type="button" class="sf-act sf-like' + (liked ? ' is-liked' : '') + '" data-pf-like="' + esc(item.uid) + '" aria-label="Gefällt mir"><span aria-hidden="true">' + (liked ? '♥' : '♡') + '</span></button>' +
         (item.shareEnabled !== false ?
-          '<button type="button" class="sf-act sf-share feed-share-button share-image-btn" data-post-id="' + esc(item.postId || '') + '" data-original-image="' + esc(orig) + '" data-feed-preview-image="' + esc(preview) + '" data-post-url="' + esc(postUrl) + '" data-post-title="' + esc(item.title || '') + '" aria-label="Bild teilen"><span aria-hidden="true">↗</span></button>' :
+          '<button type="button" class="sf-act sf-share feed-share-button share-image-btn" data-post-id="' + esc(item.postId || '') + '" data-post-url="' + esc(postUrl) + '" data-post-title="' + esc(item.title || '') + '" aria-label="Neues Bild erzeugen und teilen"><span aria-hidden="true">↗</span></button>' :
           '') +
         statsHtml +
         readBtn +
@@ -1964,6 +1962,12 @@
           type: 'postFeed',
           title: p.title || 'Beitrag',
           category: normCat(p.category),
+          preview: postPreview(p),
+          statement: postStatementText(p),
+          source: p.source || '',
+          sourceDetail: postSourceDetail(p),
+          scholar: p.scholar || p.author || '',
+          book: p.book || '',
           image: preview,
           originalImage: original,
           alt: meta.alt || ('Bildbeitrag zu: ' + (p.title || 'Beitrag')),
@@ -3116,135 +3120,58 @@
     }
   }
 
-  function getExtensionFromMime(mime) {
-    if (mime === 'image/png') return 'png';
-    if (mime === 'image/webp') return 'webp';
-    return 'jpg';
-  }
+  async function shareFreshPostFeedItem(item) {
+    if (!item) throw new Error('post-feed-item-missing');
+    var renderer = global.DARGlobalShare && global.DARGlobalShare.renderFiles;
+    if (typeof renderer !== 'function') {
+      throw new Error('fresh-share-renderer-unavailable');
+    }
 
-  function createSafeFileName(title, extension) {
-    var cleanTitle = String(title || '')
-      .toLowerCase()
-      .replace(/[^a-z0-9äöüß\- ]/gi, '')
-      .replace(/\s+/g, '-')
-      .slice(0, 80);
-    return (cleanTitle || 'dar-al-tawhid-bildbeitrag') + '.' + extension;
-  }
+    var files = await renderer({
+      kind: 'post',
+      category: item.category || 'Wissen',
+      title: item.title || 'DĀR AL TAWḤĪD',
+      body: item.statement || item.preview || item.title || '',
+      source: item.sourceDetail || item.source || 'Quelle siehe Beitrag in der App.',
+      url: item.postUrl || global.location.href
+    });
+    files = Array.isArray(files) ? files.filter(Boolean) : [];
+    if (!files.length) throw new Error('fresh-share-file-missing');
 
-  function downloadFeedBlob(blob, fileName) {
-    try {
-      var url = URL.createObjectURL(blob);
+    if (global.navigator && global.navigator.share) {
+      try {
+        if (!global.navigator.canShare || global.navigator.canShare({ files: files })) {
+          await global.navigator.share({
+            title: item.title || 'DĀR AL TAWḤĪD Bildbeitrag',
+            text: 'dar-al-tawhid.de',
+            files: files
+          });
+          if (item.postId && typeof global.trackPostShare === 'function') global.trackPostShare(item.postId);
+          return true;
+        }
+      } catch (eShare) {
+        if (eShare && eShare.name === 'AbortError') return false;
+      }
+    }
+
+    if (files.length === 1 && await feedShareNativeBridge(files[0], item.title || 'DĀR AL TAWḤĪD Bildbeitrag')) {
+      if (item.postId && typeof global.trackPostShare === 'function') global.trackPostShare(item.postId);
+      return true;
+    }
+
+    files.forEach(function (file, idx) {
+      var url = URL.createObjectURL(file);
       var a = document.createElement('a');
       a.href = url;
-      a.download = fileName;
-      a.rel = 'noopener';
+      a.download = file.name || ('dar-al-tawhid-bildbeitrag-' + (idx + 1) + '.png');
       document.body.appendChild(a);
       a.click();
       a.remove();
-      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
-    } catch (e) {}
-  }
-
-  function feedShareImageCandidates(original, preview) {
-    var urls = [];
-    var add = function (u) {
-      u = String(u || '').trim();
-      if (!u || urls.indexOf(u) >= 0) return;
-      urls.push(u);
-    };
-    add(original);
-    add(preview);
-    urls.slice().forEach(function (u) {
-      add(u.replace(/\.jpe?g(\?.*)?$/i, '.png$1'));
-      add(u.replace(/\.png(\?.*)?$/i, '.jpg$1'));
-      add(u.replace(/feed-original(\.[a-z0-9]+)?(\?.*)?$/i, 'feed-preview$1$2'));
-      add(u.replace(/feed-preview(\.[a-z0-9]+)?(\?.*)?$/i, 'feed-original$1$2'));
+      setTimeout(function () { URL.revokeObjectURL(url); }, 30000);
     });
-    return urls;
-  }
-
-  async function fetchFeedImageBlobFromCandidates(urls) {
-    var lastErr = null;
-    for (var i = 0; i < urls.length; i++) {
-      try {
-        return await fetchFeedImageBlob(urls[i]);
-      } catch (e) {
-        lastErr = e;
-      }
-    }
-    throw lastErr || new Error('img-load');
-  }
-
-  async function fetchFeedImageBlob(imageUrl) {
-    var abs = feedShareAbsUrl(imageUrl);
-    if (!abs) throw new Error('img-src');
-    try {
-      var response = await fetch(abs, { cache: 'no-store', credentials: 'same-origin' });
-      if (response.ok) return await response.blob();
-    } catch (eFetch) {}
-    var img = await feedShareLoadImg(imageUrl);
-    var canvas = document.createElement('canvas');
-    canvas.width = Math.max(1, img.naturalWidth || img.width || 1);
-    canvas.height = Math.max(1, img.naturalHeight || img.height || 1);
-    var ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    return new Promise(function (resolve, reject) {
-      canvas.toBlob(function (blob) {
-        if (blob) resolve(blob);
-        else reject(new Error('blob-fail'));
-      }, 'image/png');
-    });
-  }
-
-  async function shareOriginalFeedImage(opts) {
-    var postUrl = opts && opts.postUrl;
-    var postId = opts && opts.postId;
-    var title = (opts && opts.title) || 'DĀR AL TAWḤĪD';
-    var urls = Array.isArray(opts && opts.imageUrls) && opts.imageUrls.length
-      ? opts.imageUrls.slice()
-      : feedShareImageCandidates(opts && opts.imageUrl, opts && opts.previewUrl);
-    if (!urls.length) {
-      showToast('Kein Bild zum Teilen gefunden.');
-      return false;
-    }
-    try {
-      var blob = await fetchFeedImageBlobFromCandidates(urls);
-      var extension = getExtensionFromMime(blob.type);
-      var fileName = createSafeFileName(title, extension);
-      var mime = blob.type || ('image/' + (extension === 'jpg' ? 'jpeg' : extension));
-      var file = new File([blob], fileName, { type: mime });
-      if (global.navigator.share) {
-        try {
-          if (!global.navigator.canShare || global.navigator.canShare({ files: [file] })) {
-            await global.navigator.share({ title: title, text: 'dar-al-tawhid.de', files: [file] });
-            if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-            return true;
-          }
-        } catch (eShare) {
-          if (eShare && eShare.name === 'AbortError') return false;
-        }
-      }
-      if (await feedShareNativeBridge(file, title)) {
-        if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-        return true;
-      }
-      downloadFeedBlob(blob, fileName);
-      showToast('Bild erstellt — falls kein Teilen-Menü geöffnet wurde, liegt die Datei zum Teilen bereit.');
-      if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-      return true;
-    } catch (error) {
-      if (error && error.name === 'AbortError') return false;
-      console.error(error);
-      try {
-        downloadFeedBlob(await fetchFeedImageBlobFromCandidates(urls), createSafeFileName(title, 'png'));
-        showToast('Bild gespeichert — du kannst es jetzt teilen.');
-        if (postId && typeof global.trackPostShare === 'function') global.trackPostShare(postId);
-        return true;
-      } catch (e2) {
-        showToast('Bild konnte nicht geteilt werden.');
-        return false;
-      }
-    }
+    showToast('Neuer Bildbeitrag wurde erzeugt. Falls kein Teilen-Menü geöffnet wurde, liegt die PNG-Datei bereit.');
+    if (item.postId && typeof global.trackPostShare === 'function') global.trackPostShare(item.postId);
+    return true;
   }
 
   function feedShareOnClick(event) {
@@ -3281,20 +3208,20 @@
       ev.stopPropagation();
       if (btn.classList.contains('is-loading')) return;
       btn.classList.add('is-loading');
-      var postId = btn.getAttribute('data-post-id');
-      var urls = feedShareImageCandidates(
-        btn.getAttribute('data-original-image'),
-        btn.getAttribute('data-feed-preview-image')
-      );
-      shareOriginalFeedImage({
-        imageUrls: urls,
-        postId: postId,
-        postUrl: btn.getAttribute('data-post-url'),
-        title: btn.getAttribute('data-post-title') || 'DĀR AL TAWḤĪD'
-      }).then(function (shared) {
+
+      var postId = String(btn.getAttribute('data-post-id') || '');
+      var item = state.visible.find(function (entry) {
+        return entry && entry.type === 'postFeed' && String(entry.postId || '') === postId;
+      });
+
+      shareFreshPostFeedItem(item).then(function (shared) {
         if (shared) {
           global.setTimeout(function () { refreshFeedStatsSoon(feed.closest('.sf-app') ? feed : global.document.getElementById(MOUNT_ID)); }, 3000);
         }
+      }).catch(function (err) {
+        if (err && err.name === 'AbortError') return;
+        console.error(err);
+        showToast('Neues Bild konnte nicht erzeugt werden. Bitte kurz warten und erneut versuchen.');
       }).finally(function () {
         btn.classList.remove('is-loading');
       });
