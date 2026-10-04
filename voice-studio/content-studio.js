@@ -1,4 +1,4 @@
-/* Voice Studio 2.9.68 · page-focused navigation */
+/* Voice Studio 2.9.72 · page-focused navigation */
 (() => {
 "use strict";
 
@@ -27,6 +27,31 @@ let inventoryState={legacy:[],staging:[],live:[]};
 let busy=false;
 
 function q(id){return document.getElementById(id)}
+const KIDS_STORY_STANDARD_VERSION="kids-story-greeting-closing-v1";
+const KIDS_STORY_INTRO="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.";
+const KIDS_STORY_OUTRO="Und الله weiß es am besten.\n\nMöge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
+function normalizeKidsStoryText(value){
+  let text=String(value||"").trim();
+  if(!text)return "";
+  if(!text.startsWith(KIDS_STORY_INTRO))text=KIDS_STORY_INTRO+"\n\n"+text;
+  if(!text.endsWith(KIDS_STORY_OUTRO))text=text+"\n\n"+KIDS_STORY_OUTRO;
+  return text;
+}
+function syncKidsStoryStandard(){
+  const ta=q("text");
+  if(!ta||q("styleMode")?.value!=="kids_story")return false;
+  const next=normalizeKidsStoryText(ta.value);
+  if(!next||next===String(ta.value||"").trim())return false;
+  ta.value=next;
+  ta.dispatchEvent(new Event("input",{bubbles:true}));
+  return true;
+}
+window.normalizeKidsStoryText=normalizeKidsStoryText;
+window.KIDS_STORY_STANDARD_VERSION=KIDS_STORY_STANDARD_VERSION;
+document.addEventListener("click",event=>{
+  const id=event.target?.id||"";
+  if(["generateBtn","analyzeBtn","csProduce","csQuickProduce","csSave","csPublishTest","csPublishLive"].includes(id))syncKidsStoryStandard();
+},true);
 function escapeHtml(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
 function workerBase(){
   try{return String(localStorage.getItem(WORKER_URL_KEY)||WORKER_DEFAULT).replace(/\/publish\/?$/,"").replace(/\/$/,"")}
@@ -451,7 +476,8 @@ function voiceScript(){
   captureStructuredEditor();
   if(studioKind==="quiz")return quizDraft.map(item=>[item.question,...(item.answers||[]).map(a=>a.label),item.success,item.retry].filter(Boolean).join(". ")).filter(Boolean).join("\n\n");
   if(studioKind==="game")return [gameDraft.instructions,...(gameDraft.voiceCues||[])].filter(Boolean).join("\n\n");
-  return String(q("text")?.value||"").trim();
+  const text=String(q("text")?.value||"").trim();
+  return studioKind==="story"?normalizeKidsStoryText(text):text;
 }
 function switchKind(kind){
   persistDraft();studioKind=kind||"story";
@@ -476,7 +502,8 @@ function saveConnection(){
 }
 function fields(){
   captureStructuredEditor();
-  const text=String(q("text")?.value||"").trim();
+  let text=String(q("text")?.value||"").trim();
+  if(studioKind==="story")text=normalizeKidsStoryText(text);
   return{
     id:contentId,
     kind:effectiveKind(),
@@ -568,6 +595,7 @@ async function generateCover({internal=false}={}){
 }
 async function produce(){
   if(busy)return;
+  if(studioKind==="story")syncKidsStoryStandard();
   captureStructuredEditor();
   busy=true;setProductionPhase("producing");setStudioMessage("Produktion läuft parallel: Stimme, Cover und Paket werden vorbereitet …","warn");
   try{
