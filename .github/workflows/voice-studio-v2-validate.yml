@@ -347,7 +347,19 @@ jobs:
           print("Zero-detour Content Studio workflow OK")
           PY
 
+      - name: Detect Kids validation scope
+        id: validation_scope
+        shell: bash
+        run: |
+          changed="$(git show --pretty='' --name-only HEAD)"
+          if printf '%s\n' "$changed" | grep -Eq '^(kids/|cloudflare/(kids-content-media|worker|site-router|test-app-worker)\.js$|wrangler\.test\.toml$|scripts/test-app-health-check\.js$|_headers$)'; then
+            echo "kids=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "kids=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Validate Kids recitation grading route
+        if: steps.validation_scope.outputs.kids == 'true'
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -386,6 +398,7 @@ jobs:
           PY
 
       - name: Validate Kids release coherence
+        if: steps.validation_scope.outputs.kids == 'true'
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -443,6 +456,7 @@ jobs:
           PY
 
       - name: Validate independent Kids quiz
+        if: steps.validation_scope.outputs.kids == 'true'
         run: |
           python - <<'PY'
           import json, re
