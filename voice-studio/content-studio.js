@@ -1144,6 +1144,31 @@ async function compactAudioBlob(){
   if(!r.ok){const d=await r.json().catch(()=>({}));throw Error(d.error||"App-Audio konnte nicht vorbereitet werden.")}
   return await r.blob();
 }
+async function registerOwnerAudioMemory({id,text,file,dataUrl}={}){
+  if(!file||!dataUrl||!String(text||"").trim())return null;
+  const kind=studioKind==="dua"?"dua":studioKind==="narration"?"narration":"story";
+  try{
+    const r=await localRequest("/content-audio/reference",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        kind,
+        id:String(id||contentId||""),
+        age:String(q("csAgeMin")?.value||4)+"-"+String(q("csAgeMax")?.value||10),
+        text:String(text||"").trim(),
+        filename:file.name||"serhat-owner-audio",
+        dataUrl
+      })
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||d.ok===false)throw Error(d.error||"Audio-Text-Lernspeicher nicht erreichbar.");
+    if(d.learning&&typeof renderLearningState==="function")renderLearningState(d.learning);
+    return d;
+  }catch(e){
+    console.warn("[DĀR Voice] Owner-Audio-Referenz konnte nicht gespeichert werden:",e);
+    return null;
+  }
+}
 async function uploadAudio(){
   const script=voiceScript();
   if(audioAsset?.url&&audioAssetText===script&&Array.isArray(audioAsset?.timings)&&audioAsset.timings.length)return audioAsset;
@@ -1159,9 +1184,13 @@ async function uploadAudio(){
     alignment=await alignStoryFile(file,storyText);
     if(!Array.isArray(alignment?.timings)||!alignment.timings.length)throw Error("Keine Mitlese-Zeitstempel erhalten.");
   }
+  const dataUrl=await blobToDataUrl(blob);
   const d=await adminApi("/api/admin/kids-content/media",{method:"POST",body:JSON.stringify({
-    id,role:"audio",staging:true,dataUrl:await blobToDataUrl(blob),originalName:uploadName,source:manual?"manual-owner-upload":"serhat-mlx-master"
+    id,role:"audio",staging:true,dataUrl,originalName:uploadName,source:manual?"manual-owner-upload":"serhat-mlx-master"
   })});
+  if(manual){
+    void registerOwnerAudioMemory({id,text:storyText,file:directAudioFile,dataUrl});
+  }
   audioAsset={
     ...d.asset,
     codec:manual?"owner-upload":"aac-72k-mono",
