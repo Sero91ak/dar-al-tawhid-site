@@ -37,13 +37,19 @@ function ageGroup() {
   if (age === "9–10") return { label: age, min: 9, max: 10 };
   return { label: "6–8", min: 6, max: 8 };
 }
+function isAudioOnlyAge(){ return ageGroup().label === "4–5"; }
 function itemFitsProfile(item) {
   const r = ageGroup();
   if (Number(item?.ageMin || 0) > r.min || Number(item?.ageMax || 99) < r.max) return false;
   const modes = item?.modes || {};
+  const published=item?.status === "published" && (item?.appTarget === "kids" || item?.appTarget === "both");
+  if(!published)return false;
+  if(r.label==="4–5" && item?.kind==="story"){
+    return modes.listen !== false && !!String(item?.audio?.url || "").trim();
+  }
   if (state.mode === "listen" && modes.listen === false) return false;
   if (state.mode === "read" && modes.read === false) return false;
-  return item?.status === "published" && (item?.appTarget === "kids" || item?.appTarget === "both");
+  return true;
 }
 function relevantItems() {
   return state.items.filter(itemFitsProfile);
@@ -59,8 +65,8 @@ function durationLabel(item) {
 }
 function modeLabels(item) {
   const out = [];
-  if (item?.modes?.listen !== false && item?.audio?.url) out.push("Hören");
-  if (item?.modes?.read !== false && item?.text) out.push("Lesen");
+  if (item?.modes?.listen !== false && item?.audio?.url) out.push(isAudioOnlyAge()&&item?.kind==="story"?"Hörbuch":"Hören");
+  if (!isAudioOnlyAge() && item?.modes?.read !== false && item?.text) out.push("Lesen");
   return out.join(" · ");
 }
 function summaryText(item) {
@@ -180,6 +186,7 @@ function closeModal() {
 function allowedModes(item) {
   const read = item?.modes?.read !== false && !!String(item?.text || "").trim();
   const listen = item?.modes?.listen !== false && !!String(item?.audio?.url || "").trim();
+  if(isAudioOnlyAge() && item?.kind==="story")return {read:false,listen};
   if (state.mode === "read") return { read, listen: false };
   if (state.mode === "listen") return { read: false, listen };
   return { read, listen };
@@ -238,13 +245,15 @@ function openItem(id) {
     if (mode === "listen" && modes.listen) {
       payload.innerHTML =
         '<div class="studio-story-player">'+
-          '<button type="button" class="studio-story-play">Hören &amp; mitlesen</button>'+
+          '<button type="button" class="studio-story-play">'+(isAudioOnlyAge()?'Hörbuch starten':'Hören &amp; mitlesen')+'</button>'+
           '<audio class="studio-audio" playsinline preload="metadata" src="'+esc(abs(item.audio.url))+'" hidden></audio>'+
           '<div class="studio-story-progress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div>'+
           '<div class="studio-story-time"><strong>0:00</strong><span>0:00</span></div>'+
-          '<button type="button" class="studio-follow-open">Mitlesen öffnen</button>'+
+          '<button type="button" class="studio-follow-open">'+(isAudioOnlyAge()?'Hörbuch öffnen':'Mitlesen öffnen')+'</button>'+
         '</div>'+
-        (modes.read ? '<div class="studio-content-summary">Der Mitlese-Modus folgt der Stimme automatisch. Du kannst jederzeit auf „Lesen“ wechseln.</div>' : "");
+        (isAudioOnlyAge()
+          ? '<div class="studio-content-summary">Hörbuchmodus für 4–5 Jahre · der Fortschritt wird automatisch gespeichert.</div>'
+          : (modes.read ? '<div class="studio-content-summary">Der Mitlese-Modus folgt der Stimme automatisch. Du kannst jederzeit auf „Lesen“ wechseln.</div>' : ""));
       const audio = payload.querySelector("audio");
       const play = payload.querySelector(".studio-story-play");
       const progress = payload.querySelector(".studio-story-progress");
@@ -258,7 +267,7 @@ function openItem(id) {
         if(fill)fill.style.width=(d?Math.min(100,c/d*100):0)+"%";
         if(current)current.textContent=fmt(c);
         if(total)total.textContent=fmt(d);
-        if(play)play.textContent=!audio.paused&&!audio.ended?"Pause":(c>0&&!audio.ended?"Weiterhören":"Hören & mitlesen");
+        if(play)play.textContent=!audio.paused&&!audio.ended?"Pause":(c>0&&!audio.ended?"Weiterhören":(isAudioOnlyAge()?"Hörbuch starten":"Hören & mitlesen"));
       };
       const toggle = async () => {
         if(!audio)return;
@@ -277,7 +286,8 @@ function openItem(id) {
           album:"DĀR AL TAWḤĪD Kids · Hörbuch",
           text:String(item.text||""),
           artwork:cover,
-          deepLink:""
+          deepLink:"",
+          audioOnly:isAudioOnlyAge()
         }),
         toggleAudio:toggle,
         disabled:()=>!String(item?.audio?.url||"").trim()
@@ -382,7 +392,7 @@ function ensureParentPreference() {
   const box = document.createElement("section");
   box.id = "studioContentPreferences";
   box.className = "studio-content-mode-settings";
-  box.innerHTML = '<h3>Geschichten anzeigen</h3><p>Lege für dieses Kinderprofil fest, ob neue Studio-Inhalte zum Lesen, Hören oder in beiden Formen gezeigt werden.</p><div class="studio-pref-buttons"><button type="button" data-pref="both">Lesen & Hören</button><button type="button" data-pref="listen">Nur Hören</button><button type="button" data-pref="read">Nur Lesen</button></div>';
+  box.innerHTML = '<h3>Geschichten anzeigen</h3><p>Lege für dieses Kinderprofil fest, ob neue Studio-Inhalte zum Lesen, Hören oder in beiden Formen gezeigt werden. Für 4–5 Jahre laufen Geschichten automatisch nur als Hörbuch.</p><div class="studio-pref-buttons"><button type="button" data-pref="both">Lesen & Hören</button><button type="button" data-pref="listen">Nur Hören</button><button type="button" data-pref="read">Nur Lesen</button></div>';
   view.appendChild(box);
   box.querySelectorAll("[data-pref]").forEach(btn => btn.addEventListener("click", () => writeMode(btn.dataset.pref)));
 }
