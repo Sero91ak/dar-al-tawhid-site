@@ -1,10 +1,10 @@
 {
-  "version": "2.9.79",
-  "updatedAt": "2026-10-04T10:27:00+02:00",
-  "deployTrigger": "voice-studio-2.9.79-fast-ios-icon-native-polish-green",
+  "version": "2.9.80",
+  "updatedAt": "2026-10-04T10:34:00+02:00",
+  "deployTrigger": "voice-studio-2.9.80-progressive-first-audio-candidate",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v50",
+  "cache": "dar-voice-studio-v51",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -190,7 +190,7 @@
     "maxMasterPlsExactVariantsPreserved": true,
     "maxMasterPlsConflictPolicy": "exact-existing-curated-rule-wins; remaining PLS spelling variants preload",
     "maxMasterPlsWordBoundaryGuard": true,
-    "appEngineVersionHandshake": "2.9.79",
+    "appEngineVersionHandshake": "2.9.80",
     "smokeTestManifestVersionDynamic": true,
     "storyReferenceMemory": true,
     "storyReferenceSeed": "story-reference-muhammad-2026-10-04.json",
@@ -441,7 +441,13 @@
     "lowLatencyPronunciationPreview": true,
     "lowLatencyPronunciationPreviewBackend": "MLX short-token path with cache/lock first",
     "fullAudioStreamingAvailable": false,
-    "streamingNote": "Current Chatterbox Multilingual V3 MLX backend does not expose true model streaming; UI shows real segment progress while local render completes."
+    "streamingNote": "Chatterbox Multilingual V3 MLX exposes no token/audio streaming API. DĀR Voice 2.9.80 therefore publishes the first stable rendered prefix immediately while the complete WAV continues locally.",
+    "progressiveFirstAudioPreview": true,
+    "progressiveFirstAudioMinSeconds": 1.8,
+    "progressiveFirstAudioMaxInitialSegments": 2,
+    "progressiveFirstAudioWhileFullRenderContinues": true,
+    "progressivePreviewExcludedFromHistory": true,
+    "progressivePreviewRetentionMinutes": 30
   },
   "contentStudio": {
     "enabled": true,
@@ -1332,7 +1338,7 @@
     "design": "original-dar-mobile-ui-inspired-by-modern-mobile-voice-workflows",
     "smokeValidated": true,
     "releaseRef": "8564728a9a15bb5fa720677fded498ee06c5450b",
-    "version": "2.9.79",
+    "version": "2.9.80",
     "pwaStartUrl": "/mobile/",
     "pairTokenStoredInHttpOnlyCookie": true,
     "pairTokenExcludedFromInstalledStartUrl": true,
@@ -1356,7 +1362,11 @@
     "catalogPreviewConfirmFixed": true,
     "draftPersistence": true,
     "stylePersistence": true,
-    "cachedPronunciationAnalysis": true
+    "cachedPronunciationAnalysis": true,
+    "progressiveFirstAudioPlayback": true,
+    "progressivePlaybackHandoffToFinal": true,
+    "progressivePlaybackKeepsPosition": true,
+    "runtimeStyleSelectorFixed": true
   },
   "mobile": {
     "enabled": true,
