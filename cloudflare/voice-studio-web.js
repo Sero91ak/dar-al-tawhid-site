@@ -1,4 +1,4 @@
-import { isVoiceConfigured, synthesizeDarVoice } from "./video-studio/voice.js";
+import { elevenKey, isVoiceConfigured, synthesizeDarVoice } from "./video-studio/voice.js";
 
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX_REQUESTS = 8;
@@ -164,7 +164,7 @@ function paragraphTimingsFromForcedAlignment(text, characters) {
 }
 
 async function alignStoryAudio(env, file, text) {
-  const key = String(env.ELEVENLABS_API_KEY || env.ELEVEN_API_KEY || "").trim();
+  const key = elevenKey(env);
   if (!key) throw httpError("ElevenLabs API-Key fehlt für die Mitlese-Synchronisierung.", 503);
   if (!(file instanceof File) && !(file instanceof Blob)) throw httpError("Audiodatei fehlt.", 400);
   if (!String(text || "").trim()) throw httpError("Story-Text fehlt.", 400);
