@@ -387,12 +387,18 @@ jobs:
               '"dua"',
               "failedItems",
               "pendingFailures",
+              "def _kids_quiz_catalog",
+              "def _kids_quiz_prompt",
+              '/kids-quiz/catalog',
+              '/kids-quiz/audio',
+              '/kids-quiz/render-one',
           ]
           missing=[m for m in engine_required if m not in engine]
           assert not missing, "Kids owner voice engine markers missing: "+", ".join(missing)
 
           for source in (
               "kids/data/quiz-kids.json",
+              "kids/data/quiz-audio.json",
               "kids/data/dua-kids.json",
               "kids/data/stories-authentic.json",
               "kids/data/short-stories-voice.json",
@@ -426,6 +432,28 @@ jobs:
           assert cfg.get("publicArtifactsOnly") is True
           assert cfg.get("voiceReferenceStaysLocal") is True
           assert cfg.get("interactiveRequestsKeepPriority") is True
+
+          studio=Path("voice-studio/content-studio.js").read_text(encoding="utf-8")
+          studio_required=[
+              "Quiz-Fragenübersicht",
+              "csQuizCatalogSearch",
+              "csQuizCatalogAge",
+              "csQuizCatalogVoice",
+              "/kids-quiz/catalog",
+              "/kids-quiz/render-one",
+              "Fehlende Stimmen syncen",
+              "Serhat-Audio hören",
+              "In Editor übernehmen",
+          ]
+          missing=[m for m in studio_required if m not in studio]
+          assert not missing, "Voice Studio Kids quiz catalog markers missing: "+", ".join(missing)
+
+          installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
+          assert 'kids/data/quiz-audio.json' in installer
+          assert 'quiz-audio.json owner-voice-audio.json' in installer
+
+          quiz=json.loads(Path("kids/data/quiz-kids.json").read_text(encoding="utf-8"))
+          assert len(quiz.get("items") or [])>=500, "Voice Studio quiz catalog must expose the current 500+ Kids questions"
 
           print("Unified Kids owner voice architecture OK")
           PY
