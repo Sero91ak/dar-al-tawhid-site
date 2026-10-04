@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v12-sahaba1093",
   "label": "KIDS · V1.07.18",
   "releasedAt": "2026-10-04T00:52:24.534Z",
-  "note": "V1.07.18: Geschichten hat jetzt ein eigenes sichtbares Hintergrundmotiv; Geschichten, Mein Qurʾān und Eltern wurden deutlich kompakter aufgebaut, damit Bild, Titel und erster Inhalt auf Smartphone und Tablet schneller zusammen sichtbar sind. Die bereits veröffentlichten Muḥammad-Audio- und Story-Bundle-Aktualisierungen bleiben vollständig erhalten.",
+  "note": "Hörbuch-Player V2: Wiedergabeposition bleibt pro Geschichte und Altersstufe erhalten; sichtbarer Minuten-/Sekunden-Zähler, antippbare Fortschrittsleiste, wiederöffnbarer Mitlese-Fokusmodus, automatisches Text-Following sowie iOS/Media-Session-Titel und Geschichtenbild für Now Playing/Lock Screen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -81,7 +81,7 @@
     "mubashshirunProfilePanels": true,
     "mubashshirunDirectHadithLinks": true,
     "mubashshirunStoryUi": "responsive-follow-reader-v11",
-    "mubashshirunBundleVersion": 12,
+    "mubashshirunBundleVersion": 13,
     "mubashshirunDataVersion": 4,
     "mubashshirunAudioPublishPipeline": true,
     "mubashshirunFuṣḥāReview": true,
@@ -152,7 +152,7 @@
     "mubashshirunAgeAwareVisualDisclaimer": true,
     "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03",
     "mubashshirunSwipeBack": true,
-    "prophetStoriesBundleVersion": 25,
+    "prophetStoriesBundleVersion": 26,
     "storyCategoryBackgrounds": "prophets-adobe-v22+sahabah-runway-v10",
     "mubashshirunCardFocalCentering": "subject-aware-responsive-v1",
     "homeChoices": "oval-capsule-restored",
@@ -162,8 +162,8 @@
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1084",
     "storiesBottomNav": "separated-background-v1086",
-    "storyFollowReader": "v1",
-    "storyFollowReaderMode": "responsive-bottom-sheet-auto-paragraph-follow",
+    "storyFollowReader": "v2",
+    "storyFollowReaderMode": "audiobook-resume-focus-reader-v2",
     "storyFollowReaderReusable": true,
     "sectionEntryHeroes": "edge-to-edge-compact-v1094",
     "sectionHeroArtworkFormat": "local-jpeg",
@@ -183,6 +183,20 @@
       "6-8",
       "9-10"
     ],
-    "muhammadStoryAudioPlayback": "direct-test-v2"
-  }
-}
+    "muhammadStoryAudioPlayback": "direct-test-v2",
+    "storyAudioResume": true,
+    "storyAudioResumeScope": "per-story-per-age",
+    "storyAudioTimer": "mm:ss-current-total",
+    "storyAudioSeekableProgress": true,
+    "storyAudioPagehidePersistence": true,
+    "storyAudioMediaSession": true,
+    "storyAudioLockScreenMetadata": true,
+    "storyAudioArtworkNowPlaying": true,
+    "storyAudioDeepLinkResume": true,
+    "storyFollowReaderAutoOpen": true,
+    "storyFollowReaderReopenButton": true,
+    "storyFollowReaderZIndex": 30050,
+    "contentStudioStoryAudiobook": "v2"
+  },
+  "updatedAt": "2026-10-04T02:45:00+02:00"
+}\n
