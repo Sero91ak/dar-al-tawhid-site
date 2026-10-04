@@ -78,6 +78,9 @@ jobs:
               '"/mobile/history"',
               'data-preview=',
               'dataset.previewId',
+              '$("[data-audio]").forEach',
+              'Promise.all([health(),analyzeText()])',
+              'incremental-chunks-v1',
               'Zum Home-Bildschirm',
           ]
           missing=[x for x in required if x not in html]
