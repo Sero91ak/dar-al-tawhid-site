@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v37-quiz650-never-empty1104",
-  "label": "KIDS · V1.07.43",
-  "releasedAt": "2026-10-04T11:10:00Z",
-  "note": "Quiz-Hotfix: installierte Kids-Einstiegspunkte sind mit dem aktuellen 650er-Kids-Quiz synchronisiert. Die alte canonicalStatus/canonicalReviewStatus-Abhängigkeit ist aus Start/Shell entfernt. Fällige und neue Fragen haben Vorrang; freie Übungsfragen füllen die Runde auf, damit der Quizbereich nicht leer endet. 4–6 wird korrekt angezeigt.",
+  "buildId": "kids-shell-v38-quiz650-never-empty1105",
+  "label": "KIDS · V1.07.44",
+  "releasedAt": "2026-10-04T11:30:00Z",
+  "note": "Quiz-Live-Hotfix: 650 Kids-Fragen sind vorhanden. PWA-/Service-Worker-Build v1105 erzwingt die aktuelle Never-Empty-Quiz-Shell auf installierten iPhone/iPad-Versionen; der Besucher-Deploy bleibt auf dem geprüften Trigger-Commit.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1104",
+    "serviceWorkerCache": "v1105",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -402,7 +402,9 @@
     "kidsQuizGenerationCap": 650,
     "kidsQuizNeverEmpty": true,
     "kidsQuizInstalledEntryPointsSynced": true,
-    "kidsQuizLegacyCanonicalRuntimeRemoved": true
+    "kidsQuizLegacyCanonicalRuntimeRemoved": true,
+    "kidsQuizPwaRecovery": "v1105",
+    "kidsQuizStaleShellBlocked": true
   },
   "updatedAt": "2026-10-04"
 }
