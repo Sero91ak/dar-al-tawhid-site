@@ -386,6 +386,12 @@ def load_verified_content_fresh():
         lambda d:isinstance(d,dict) and any(isinstance(d.get(k),list) for k in ("duas","hadithLessons","earlyLessons")),
     )
 
+def load_live_kids_content_fresh():
+    return load_fresh_kids_repo_json(
+        "kids-content-index.json","content/kids/content-index.json",
+        lambda d:isinstance(d,dict) and isinstance(d.get("items"),list),
+    )
+
 def normalize_lookup(value:str):
     text=unicodedata.normalize("NFKD",str(value or "").casefold())
     text="".join(ch for ch in text if not unicodedata.combining(ch))
@@ -2878,7 +2884,7 @@ def _kids_owner_voice_add_question(rows,q,age_key,scope,source_id):
     _kids_owner_voice_add(rows,q.get("success"),"kids_lesson",scope,source_id)
     _kids_owner_voice_add(rows,q.get("retry"),"kids_lesson",scope,source_id)
 
-def _kids_owner_voice_rows(quiz_data,dua_data,story_data,short_story_data,verified_data):
+def _kids_owner_voice_rows(quiz_data,dua_data,story_data,short_story_data,verified_data,studio_data=None):
     rows={}
     for value in _quiz_voice_texts(quiz_data):
         _kids_owner_voice_add(rows,value,"kids_lesson","quiz","quiz")
@@ -2921,28 +2927,100 @@ def _kids_owner_voice_rows(quiz_data,dua_data,story_data,short_story_data,verifi
                 if person:
                     _kids_owner_voice_add(rows,expl+". "+person+".","kids_lesson","knowledge",item_id)
 
+    # Zukünftige über das Kids-Content-Studio veröffentlichte Inhalte:
+    # Geschichten/Lektionen, Quizfragen sowie Spiel-Anweisungen und voiceCues.
+    for item in ((studio_data or {}).get("items") or []):
+        if str((item or {}).get("status") or "")!="published":
+            continue
+        if str((item or {}).get("appTarget") or "kids") not in ("","kids"):
+            continue
+        item_id=str((item or {}).get("id") or "")
+        kind=str((item or {}).get("kind") or "").strip()
+        if kind in ("story","lesson"):
+            _kids_owner_voice_add(
+                rows,(item or {}).get("text"),
+                "kids_story" if kind=="story" else "kids_lesson",
+                "studio-"+kind,item_id
+            )
+
+        bank=(item or {}).get("question") or {}
+        if isinstance(bank,dict):
+            for age_key,q in bank.items():
+                _kids_owner_voice_add_question(rows,q,age_key,"studio-question",item_id)
+
+        quiz=(item or {}).get("quiz") or {}
+        questions=(quiz or {}).get("questions") or []
+        if isinstance(questions,list):
+            for q in questions:
+                _kids_owner_voice_add_question(rows,q,"studio","studio-quiz",item_id)
+
+        game=(item or {}).get("game") or {}
+        if isinstance(game,dict):
+            _kids_owner_voice_add(rows,game.get("instructions"),"kids_lesson","studio-game-instructions",item_id)
+            for cue in (game.get("voiceCues") or []):
+                _kids_owner_voice_add(rows,cue,"kids_lesson","studio-game-cue",item_id)
+
     return list(rows.values())
 
 def _generate_kids_owner_voice_master(text_value:str,mode:str):
-    """Auto-Sync nutzt exakt denselben Master-Cache und Renderer wie der manuelle Kids-Vollbatch."""
+    """Separater dynamischer Kids-Renderer; blockiert den manuellen Alphabet-/Quiz-Batch nicht."""
     value=_kids_owner_voice_key(text_value)
     voice_mode=str(mode or "kids_lesson")
     if not value:
         raise RuntimeError("Kids-Voice-Text ist leer.")
+    digest=hashlib.sha1((voice_mode+"\0"+value).encode("utf-8")).hexdigest()[:24]
+    master=KIDS_OWNER_VOICE_MASTER_HOME/(digest+".wav")
 
-    while True:
-        while LEARNING_PREVIEW_WAITING.is_set() or MANUAL_RENDER_WAITING.is_set() or RENDER_LOCK.locked():
-            _set_kids_owner_voice_state(current="Interaktive Stimme hat Vorrang · Kids-Voice-Sync wartet …")
-            time.sleep(0.08)
+    if master.exists() and master.stat().st_size>1024:
         try:
-            return _generate_quiz_voice_master(value,voice_mode)
-        except RuntimeError as e:
-            if "Hintergrund-Render pausiert für interaktive Audio-Erzeugung" not in str(e):
-                raise
-            _set_kids_owner_voice_state(current="Kids-Voice-Sync pausiert · Freistimme/Worttest hat Vorrang …")
-            while MANUAL_RENDER_WAITING.is_set() or LEARNING_PREVIEW_WAITING.is_set() or RENDER_LOCK.locked():
+            wav=load_locked_wav(master,24000)
+            metrics=audio_quality_metrics(wav,24000,value,"de",voice_mode)
+            hard={"empty_audio","non_finite","near_silence","low_peak","clipping"}
+            if not any(x in hard for x in (metrics.get("issues") or [])):
+                metrics["kids_owner_master_cache"]="hit"
+                return master,metrics
+        except Exception:
+            pass
+
+    parts=_quiz_bounded_parts(value,48)
+    if not parts:
+        raise RuntimeError("Kids-Voice-Text konnte nicht in sichere Sprachblöcke zerlegt werden.")
+    rendered=[]
+    for part in parts:
+        queue=[part]
+        while queue:
+            piece=queue.pop(0)
+            while LEARNING_PREVIEW_WAITING.is_set() or MANUAL_RENDER_WAITING.is_set() or RENDER_LOCK.locked():
+                _set_kids_owner_voice_state(current="Interaktive Stimme hat Vorrang · Kids-Voice-Sync wartet …")
                 time.sleep(0.08)
-            time.sleep(0.12)
+            try:
+                path=generate(piece,"",voice_mode,free_mode=True,free_pronunciation=True)
+                rendered.append((Path(path),piece))
+            except RuntimeError as e:
+                message=str(e)
+                if "Hintergrund-Render pausiert für interaktive Audio-Erzeugung" in message:
+                    _set_kids_owner_voice_state(current="Kids-Voice-Sync pausiert · Freistimme/Worttest hat Vorrang …")
+                    while MANUAL_RENDER_WAITING.is_set() or LEARNING_PREVIEW_WAITING.is_set() or RENDER_LOCK.locked():
+                        time.sleep(0.08)
+                    queue.insert(0,piece)
+                    time.sleep(0.12)
+                    continue
+                if (
+                    ("generation_token_limit" in message or "generation_timeout" in message)
+                    and len(piece)>24
+                ):
+                    rescue=_quiz_bounded_parts(piece,max(24,min(34,len(piece)//2+4)))
+                    if len(rescue)>1:
+                        queue=rescue+queue
+                        continue
+                raise
+
+    joined,sr,metrics=_quiz_join_paths(rendered,value,voice_mode)
+    tmp=master.with_suffix(".tmp.wav")
+    save_wav(tmp,joined,sr)
+    os.replace(tmp,master)
+    metrics["kids_owner_master_cache"]="write"
+    return master,metrics
 
 
 def _prepare_kids_owner_voice_publish(export_ready:Path):
@@ -3044,29 +3122,13 @@ def build_kids_owner_voice_sync():
         story_data=load_authentic_stories_fresh()
         short_story_data=load_short_stories_voice_fresh()
         verified_data=load_verified_content_fresh()
+        studio_data=load_live_kids_content_fresh()
         manifest=load_owner_voice_manifest_fresh()
         entries=dict(manifest.get("entries") or {})
 
-        canonical_units=_kids_owner_voice_units(
-            quiz_data=quiz_data,
-            dua_data=dua_data,
-            story_data=story_data,
-            extra_data=short_story_data,
-            verified_data=verified_data,
+        rows=_kids_owner_voice_rows(
+            quiz_data,dua_data,story_data,short_story_data,verified_data,studio_data
         )
-        rows=[]
-        for unit in canonical_units:
-            key=_kids_owner_voice_key((unit or {}).get("text"))
-            if not key:
-                continue
-            context=str((unit or {}).get("context") or "kids")
-            rows.append({
-                "text":key,
-                "key":key,
-                "mode":str((unit or {}).get("mode") or "kids_lesson"),
-                "scopes":[x for x in context.split("|") if x] or ["kids"],
-                "sourceIds":[],
-            })
         missing=[row for row in rows if not (entries.get(row["key"]) or {}).get("url")]
         _set_kids_owner_voice_state(total=len(rows),missing=len(missing),current=f"{len(rows)} Sprechtexte geprüft · {len(missing)} neu")
 
@@ -3139,7 +3201,7 @@ def build_kids_owner_voice_sync():
             "autoDiscoverySources":[
                 "kids/data/quiz-kids.json","kids/data/dua-kids.json",
                 "kids/data/stories-authentic.json","kids/data/short-stories-voice.json",
-                "kids/data/verified-content.json"
+                "kids/data/verified-content.json","content/kids/content-index.json"
             ],
             "entries":entries,
             "counts":{
