@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1099";
+const CACHE_NAME="dar-al-tawhid-kids-v1100";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/section-heroes-v1095.css?v=1097-real3",
@@ -31,6 +31,10 @@ const PRECACHE=[
   "/kids/assets/quiz-scenes/topic-adab.svg?v=20261004-topic1",
   "/kids/assets/quiz-scenes/topic-dua.svg?v=20261004-topic1",
   "/kids/assets/quiz-scenes/topic-charity.svg?v=20261004-topic1",
+  "/kids/assets/quiz-scenes/topic-prophets.svg?v=20261004-topic2",
+  "/kids/assets/quiz-scenes/topic-tawhid.svg?v=20261004-topic2",
+  "/kids/assets/quiz-scenes/topic-iman.svg?v=20261004-topic2",
+  "/kids/assets/quiz-scenes/topic-akhlaq.svg?v=20261004-topic2",
   "/kids/assets/kids-art/home-journey-v11-clean2.jpg",
   "/kids/data/alphabet-kids.json",
   "/kids/data/alphabet-audio.json",
