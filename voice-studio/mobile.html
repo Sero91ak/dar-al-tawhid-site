@@ -107,7 +107,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.80</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.81</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -136,7 +136,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <div id="toast" class="toast"></div>
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",livePreviewName:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
+const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -178,17 +178,26 @@ $("#analyzeBtn").onclick=()=>analyzeText(true);
 
 function activateLivePreview(st){
   const name=String(st?.render_preview_name||"").trim();
-  if(!name||name===state.livePreviewName)return;
-  state.livePreviewName=name;
+  const generation=Math.max(0,Number(st?.render_preview_generation||0));
+  if(!name||name===state.livePreviewName||(generation&&generation<=state.livePreviewGeneration))return;
   const audio=$("#audio");
+  const carryTime=state.livePreviewName&&Number.isFinite(audio.currentTime)?Math.max(0,audio.currentTime):0;
+  const wasPlaying=!audio.paused;
   const liveUrl="/mobile/audio?name="+encodeURIComponent(name);
   const segments=Math.max(1,Number(st?.render_preview_segments||1));
   const sec=Math.max(0,Number(st?.render_preview_duration_seconds||0));
+  state.livePreviewName=name;
+  state.livePreviewDuration=sec;
+  state.livePreviewGeneration=generation||state.livePreviewGeneration+1;
   audio.src=liveUrl;
   $("#player").classList.add("show");
-  $(".player-title").textContent="Sofort-Vorschau";
+  $(".player-title").textContent=state.livePreviewGeneration>1?"Live-Vorschau":"Sofort-Vorschau";
   $("#playerMeta").textContent="Schon anhören · "+segments+" Abschnitt"+(segments===1?"":"e")+(sec?" · "+sec.toFixed(1)+" s":"")+" · Rest wird weiter erzeugt";
-  audio.play().catch(()=>{});
+  const resume=()=>{
+    if(carryTime>0&&Number.isFinite(audio.duration))audio.currentTime=Math.min(carryTime,Math.max(0,audio.duration-.12));
+    if(wasPlaying||carryTime===0)audio.play().catch(()=>{});
+  };
+  if(audio.readyState>=1)resume();else audio.addEventListener("loadedmetadata",resume,{once:true});
 }
 
 async function generate(){
@@ -199,7 +208,7 @@ async function generate(){
   if(useLibrary&&(analyzed.unresolvedIslamicTerms||[]).length){
     $("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";toast("Erst die markierten Wörter prüfen.");return
   }
-  $("#generateBtn").textContent="Erzeuge …";state.generating=true;state.livePreviewName="";
+  $("#generateBtn").textContent="Erzeuge …";state.generating=true;state.livePreviewName="";state.livePreviewDuration=0;state.livePreviewGeneration=0;
   let progressBusy=false;
   const progressTimer=setInterval(async()=>{
     if(!state.generating||progressBusy)return;
@@ -235,7 +244,7 @@ async function generate(){
       if(wasPlaying||carryTime===0)player.play().catch(()=>{});
     };
     if(player.readyState>=1)resume();else player.addEventListener("loadedmetadata",resume,{once:true});
-    state.livePreviewName="";
+    state.livePreviewName="";state.livePreviewDuration=0;state.livePreviewGeneration=0;
     toast("Audio ist fertig.");loadHistory();
   }catch(e){toast(e.message)}
   finally{state.generating=false;clearInterval(progressTimer);$("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen"}
