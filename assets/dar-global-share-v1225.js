@@ -151,7 +151,9 @@
     }
     var source=text(first(root,"[data-post-after-source],.post-source-main,.post-reader-cite,.hadith-source-line,.prophets-source-panel__meta,.prophets-source-actions,.source-text,.post-after-source,.dua-source,.quran-ayah-ref,.frauen-source-card"));
     if(!source){var srcPanel=first(root,".source-area-panel,.post-source,.frauen-source-card");source=text(srcPanel)}
-    body=stripUiLabel(body,"body");\n    source=stripUiLabel(source,"source");\n    if(!title)title=category||"DĀR AL TAWḤĪD";
+    body=stripUiLabel(body,"body");
+    source=stripUiLabel(source,"source");
+    if(!title)title=category||"DĀR AL TAWḤĪD";
     if(!body){
       var share=trigger&&trigger.closest&&trigger.closest(".share-panel");if(share){var t=trigger.getAttribute("data-share-text")||"";try{t=decodeURIComponent(t)}catch(e){}body=clean(t)}
     }
