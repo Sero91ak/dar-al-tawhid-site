@@ -484,6 +484,8 @@ jobs:
           kids=Path("kids/index.html").read_text(encoding="utf-8")
           sw=Path("kids/sw.js").read_text(encoding="utf-8")
           version=json.loads(Path("kids/version.json").read_text(encoding="utf-8"))
+          catalog_js=Path("kids/quiz-library.js").read_text(encoding="utf-8")
+          catalog_css=Path("kids/quiz-library.css").read_text(encoding="utf-8")
 
           expected={
               "4-6":"/kids/assets/quiz-scenes/quiz-4-6.svg?v=20261004-real1",
@@ -500,7 +502,7 @@ jobs:
               assert asset.exists() and asset.stat().st_size>50000, f"{band} realistic artwork missing or unexpectedly tiny"
               assert url in sw, f"{band} artwork missing from PWA precache"
 
-          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1095"' in sw
+          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1096"' in sw
           assert "QUIZ_ARTWORK=[" not in sw, "legacy external quiz artwork runtime cache returned"
 
           visual=((version.get("visualSystem") or {}).get("quizVisualSystem") or {})
@@ -508,6 +510,14 @@ jobs:
           assert visual.get("artworkHotlinkDependency") is False
           assert visual.get("youngAgeAudioFirst") is True
           assert visual.get("systemTtsFallbackAllowed") is False
+          assert visual.get("fullQuestionCatalog") is True
+          assert visual.get("fullQuestionCatalogMode")=="visible-in-app"
+          assert visual.get("fullQuestionCatalogSearch") is True
+          assert visual.get("fullQuestionCatalogCategoryFilter") is True
+          assert visual.get("fullQuestionCatalogDirectTest") is True
+          assert visual.get("fullQuestionCatalogOwnerVoice") is True
+          assert visual.get("shortQuizRoundsPreserved") is True
+          assert visual.get("noNewQuestionsInThisRelease") is True
 
           ui_markers=[
               'data-quiz-band',
@@ -524,6 +534,30 @@ jobs:
           assert 'background-image:url("/kids/assets/quiz-scenes/' not in kids, "quiz artwork must stay manifest-driven, not duplicated in CSS"
           assert 'var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";' in kids
           assert '#quizModal[data-quiz-band="4-6"] .quiz-scene-top .quiz-scene-chip:first-child{display:none}' in kids
+          assert '/kids/quiz-library.css?v=1' in kids
+          assert '/kids/quiz-library.js?v=1' in kids
+          assert '/kids/quiz-library.css?v=1' in sw
+          assert '/kids/quiz-library.js?v=1' in sw
+          for marker in (
+              "quizLibraryToolbar",
+              "quizModeLibrary",
+              "Alle Fragen",
+              "canonicalItems",
+              "renderLibrary",
+              "openQuestion",
+              "quizSpeak",
+              "quizPrompt",
+          ):
+              assert marker in catalog_js, "full Kids quiz catalog marker missing: "+marker
+          for marker in (
+              ".quiz-library-toolbar",
+              ".quiz-library-panel",
+              ".quiz-library-list",
+              ".quiz-library-row",
+              "@media(max-width:430px)",
+              "@media(min-width:700px)",
+          ):
+              assert marker in catalog_css, "full Kids quiz catalog style missing: "+marker
 
           items=quiz.get("items") or []
           total=len(items)
