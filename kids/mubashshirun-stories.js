@@ -213,7 +213,7 @@ function ensureUi(){
           '<div id="msVisualDisclaimer" class="ms-visual-disclaimer"></div>'+
           '<div class="ms-detail-modes"><button data-ms-mode="both" type="button">Lesen &amp; Hören</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
           '<div class="ms-profile-grid"><section><small>WIE WAR ER?</small><strong id="msTrait"></strong></section><section><small>SEINE AUFGABE &amp; ZEIT</small><span id="msLife"></span></section><section><small>WER BERICHTET?</small><span id="msWitness"></span></section></div>'+
-          '<section id="msPlayer" class="ms-player"><button id="msPlay" class="ms-play" type="button">Hören &amp; mitlesen</button><div class="ms-progress"><span id="msProgress"></span></div><p id="msVoiceNote"></p></section>'+
+          '<section id="msPlayer" class="ms-player"><button id="msPlay" class="ms-play" type="button">Hören &amp; mitlesen</button><div class="ms-progress" id="msProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="msProgress"></span></div><div class="ms-player-time"><strong id="msTimeCurrent">0:00</strong><span id="msTimeTotal">0:00</span></div><button class="ms-follow-open" id="msFollowOpen" type="button">Mitlesen öffnen</button><p id="msVoiceNote"></p></section>'+
           '<article id="msRead" class="ms-read"></article>'+
           '<section class="ms-sources"><strong>GEPRÜFTE QUELLEN</strong><div id="msSources"></div></section>'+
           '<section id="msQuestion" class="ms-question"></section>'+
@@ -224,9 +224,15 @@ function ensureUi(){
   $("#msClose").addEventListener("click",closeStory);
   installSwipeBack($("#msScroll"),closeStory);
   $("#msPlay").addEventListener("click",toggleAudio);
+  $("#msFollowOpen")?.addEventListener("click",()=>followReader?.open());
+  $("#msProgressTrack")?.addEventListener("click",seekFromProgress);
+  $("#msProgressTrack")?.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();seekBy(e.key==="ArrowLeft"?-15:15)}});
   modal.querySelectorAll("[data-ms-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.msMode)));
   audio.preload="metadata";
   audio.addEventListener("timeupdate",updateProgress);
+  audio.addEventListener("loadedmetadata",()=>{followReader?.restore();updateProgress()});
+  audio.addEventListener("play",()=>{playing=true;updatePlayButton()});
+  audio.addEventListener("pause",()=>{playing=false;updatePlayButton()});
   audio.addEventListener("ended",()=>{playing=false;updatePlayButton();markDone(active?.id||"")});
   document.addEventListener("keydown",e=>{
     if(e.key!=="Escape")return;
@@ -235,7 +241,15 @@ function ensureUi(){
   });
   followReader=window.DARKidsFollowReader?.create({
     id:"sahaba-story",audio,
-    getContent:()=>({title:active?active.name:"Geschichte",text:activeText}),
+    getContent:()=>({
+      key:active?("sahabi:"+active.id+":"+ageKey()):"sahabi:story",
+      title:active?active.name:"Geschichte",
+      subtitle:"Ṣaḥābah-Geschichte · Alter "+age(),
+      album:"DĀR AL TAWḤĪD Kids · Mubaschschirūn",
+      text:activeText,
+      artwork:active?art(active,"hero"):"",
+      deepLink:active?("#stories/sahabi/"+encodeURIComponent(active.id)):"#stories"
+    }),
     toggleAudio,
     disabled:()=>!audioMeta(active)?.url
   })||null;
@@ -269,7 +283,7 @@ function openStory(id){
   stopAudio();renderActive();
   $("#msModal").classList.add("open");lockLibrary();$("#msScroll").scrollTop=0;$("#msClose").focus();
 }
-function closeStory(){followReader?.close();stopAudio();$("#msModal")?.classList.remove("open");unlockLibrary();active=null}
+function closeStory(){followReader?.close();stopAudio();$("#msModal")?.classList.remove("open");unlockLibrary();clearStoryDeepLink("sahabi");active=null}
 function renderActive(){
   if(!active)return;
   activeText=textFor(active);
@@ -322,7 +336,10 @@ function resetAudio(){
     audio.removeAttribute("src");
     if(note)note.textContent="Der Lesetext ist vollständig. Serhat-Audio wird erst nach der Ausspracheprüfung im Voice Studio freigeschaltet.";
   }
-  $("#msProgress").style.width="0";updatePlayButton();
+  if($("#msProgress"))$("#msProgress").style.width="0";
+  if($("#msTimeCurrent"))$("#msTimeCurrent").textContent="0:00";
+  if($("#msTimeTotal"))$("#msTimeTotal").textContent="0:00";
+  updatePlayButton();
 }
 function updatePlayButton(){
   const b=$("#msPlay");if(!b)return;
@@ -330,18 +347,41 @@ function updatePlayButton(){
   b.disabled=busy||!meta?.url;
   b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiterhören":"Hören & mitlesen");
 }
+function storyTime(v){return window.DARKidsFollowReader?.formatTime?window.DARKidsFollowReader.formatTime(v):Math.floor((Number(v)||0)/60)+":"+String(Math.floor((Number(v)||0)%60)).padStart(2,"0")}
 function updateProgress(){
-  if($("#msProgress"))$("#msProgress").style.width=(audio.duration?Math.min(100,audio.currentTime/audio.duration*100):0)+"%";
+  const duration=Number(audio.duration)||0,current=Number(audio.currentTime)||0;
+  if($("#msProgress"))$("#msProgress").style.width=(duration?Math.min(100,current/duration*100):0)+"%";
+  if($("#msTimeCurrent"))$("#msTimeCurrent").textContent=storyTime(current);
+  if($("#msTimeTotal"))$("#msTimeTotal").textContent=storyTime(duration);
+  const track=$("#msProgressTrack");
+  if(track){track.setAttribute("aria-valuemin","0");track.setAttribute("aria-valuemax",String(Math.max(0,Math.round(duration))));track.setAttribute("aria-valuenow",String(Math.max(0,Math.round(current))));track.setAttribute("aria-valuetext",storyTime(current)+" von "+storyTime(duration))}
+}
+function seekBy(delta){
+  if(!Number(audio.duration))return;
+  try{audio.currentTime=Math.max(0,Math.min(audio.duration,(Number(audio.currentTime)||0)+Number(delta||0)))}catch(_){}
+  updateProgress();followReader?.persist(true);
+}
+function seekFromProgress(e){
+  const track=$("#msProgressTrack");if(!track||!Number(audio.duration))return;
+  const rect=track.getBoundingClientRect();if(!rect.width)return;
+  try{audio.currentTime=Math.max(0,Math.min(audio.duration,((e.clientX-rect.left)/rect.width)*audio.duration))}catch(_){}
+  updateProgress();followReader?.persist(true);
+}
+function clearStoryDeepLink(kind){
+  try{
+    const raw=String(location.hash||"");
+    if(raw.indexOf("#stories/"+kind+"/")===0)history.replaceState(history.state||{},"",location.pathname+(location.search||"")+"#stories");
+  }catch(_){}
 }
 async function toggleAudio(){
   if(!active||busy)return;
   const meta=audioMeta(active);if(!meta?.url)return;
   if(playing){audio.pause();playing=false;updatePlayButton();return}
-  try{busy=true;updatePlayButton();if(!audio.src)audio.src=meta.url;await audio.play();playing=true}
+  try{busy=true;updatePlayButton();if(!audio.src)audio.src=meta.url;if(audio.ended)try{audio.currentTime=0}catch(_){}followReader?.restore();await audio.play();playing=true}
   catch(_){playing=false;if($("#msVoiceNote"))$("#msVoiceNote").textContent="Audio ist gerade nicht verfügbar."}
   finally{busy=false;updatePlayButton()}
 }
-function stopAudio(){try{audio.pause();audio.currentTime=0;audio.removeAttribute("src");audio.load()}catch(_){}playing=false;busy=false;updatePlayButton()}
+function stopAudio(){followReader?.persist(true);try{audio.pause();audio.removeAttribute("src");audio.load()}catch(_){}playing=false;busy=false;updatePlayButton();updateProgress()}
 async function init(){
   if(!ensureUi())return;
   try{
@@ -351,6 +391,11 @@ async function init(){
     libraryPolicy=data.policy&&typeof data.policy==="object"?data.policy:{};
     items=(data.items||[]).slice().sort((a,b)=>Number(a.displayOrder||99)-Number(b.displayOrder||99));
     renderCards();renderModeButtons();
+    try{
+      const m=String(location.hash||"").match(/^#stories\/sahabi\/([^/?#]+)/i);
+      const id=m?decodeURIComponent(m[1]||""):"";
+      if(id&&items.some(x=>x.id===id)){openLibrary();setTimeout(()=>openStory(id),0)}
+    }catch(_){};
     const app=$(".app");
     if(app&&"MutationObserver" in window)new MutationObserver(()=>{renderCards();if(active)renderActive()}).observe(app,{attributes:true,attributeFilter:["data-age"]});
   }catch(err){
