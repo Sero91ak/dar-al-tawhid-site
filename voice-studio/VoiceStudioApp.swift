@@ -314,6 +314,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         return preferredLAN ?? otherLAN ?? fallback
     }
 
+    private func companionPairingHost() -> String? {
+        // Bevorzugt einen stabilen Bonjour-Namen statt einer wechselnden WLAN-IP.
+        // Falls macOS keinen brauchbaren Hostnamen liefert, bleibt die erprobte
+        // lokale IPv4-Ermittlung als sicherer Fallback erhalten.
+        let rawNames = [
+            Host.current().localizedName,
+            ProcessInfo.processInfo.hostName
+        ].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
+
+        for raw in rawNames {
+            guard !raw.isEmpty else { continue }
+            var host = raw
+            if host.hasSuffix(".") { host.removeLast() }
+            if host.hasSuffix(".local") { return host }
+            if !host.contains(" ") && !host.contains("/") {
+                return host + ".local"
+            }
+        }
+        return localIPv4Address()
+    }
+
     private func companionPairingURL() -> String? {
         guard let host = companionPairingHost(),
               let token = companionToken() else { return nil }
