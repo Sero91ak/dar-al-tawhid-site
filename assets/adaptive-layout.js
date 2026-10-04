@@ -31,9 +31,19 @@
     );
     var vvW = vv && vv.width ? Math.round(vv.width) : 0;
     var vvH = vv && vv.height ? Math.round(vv.height) : 0;
-    var w = Math.max(vvW, clientW, innerW) || vvW || clientW || innerW || 0;
-    var h = vvH || clientH || innerH || 0;
-    if (!h) h = Math.max(clientH, innerH) || 0;
+    /* iOS/PWA orientation fix: visualViewport can keep the previous landscape
+       width for a few frames. Never use max(), otherwise one stale source
+       keeps the whole app in the old breakpoint after rotating back. */
+    var w = clientW || innerW || vvW || 0;
+    var h = clientH || innerH || vvH || 0;
+    if (vvW > 0 && vvH > 0 && clientW > 0 && clientH > 0) {
+      var vvLandscape = vvW >= vvH;
+      var clientLandscape = clientW >= clientH;
+      if (vvLandscape === clientLandscape) {
+        w = vvW;
+        h = vvH;
+      }
+    }
     var offsetTop = vv && typeof vv.offsetTop === "number" ? vv.offsetTop : 0;
     return { width: w, height: h, offsetTop: offsetTop };
   }
@@ -228,17 +238,17 @@
 
   function scheduleOrientBurst() {
     clearOrientTimers();
-    [0, 90, 180].forEach(function (ms) {
+    [0, 80, 180, 320, 650, 1000].forEach(function (ms) {
       orientTimers.push(
         setTimeout(function () {
-          applyLayout(false);
+          applyLayout(true);
         }, ms)
       );
     });
     orientTimers.push(
       setTimeout(function () {
         applyNavLayout(currentMode, { forceWidth: true });
-      }, 520)
+      }, 1100)
     );
   }
 
