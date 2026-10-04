@@ -1,4 +1,4 @@
-/* Voice Studio 2.9.98 · trusted lexicon + fast Kids audio/content workflow */
+/* Voice Studio 2.9.99 · trusted lexicon + fast Kids audio/content workflow */
 (() => {
 "use strict";
 
