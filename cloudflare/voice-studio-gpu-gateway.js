@@ -23,6 +23,29 @@ function upstreamToken(env) {
   return String(env.DAR_VOICE_GPU_TOKEN || "").trim();
 }
 
+function webAccessToken(env) {
+  return String(env.DAR_VOICE_WEB_TOKEN || "").trim();
+}
+
+function constantTimeEqual(a, b) {
+  const left = String(a || "");
+  const right = String(b || "");
+  if (!left || !right || left.length !== right.length) return false;
+  let diff = 0;
+  for (let i = 0; i < left.length; i += 1) diff |= left.charCodeAt(i) ^ right.charCodeAt(i);
+  return diff === 0;
+}
+
+export function darVoiceWebAccessConfigured(env) {
+  return Boolean(webAccessToken(env));
+}
+
+export function darVoiceWebAuthorized(request, env) {
+  const expected = webAccessToken(env);
+  const supplied = String(request.headers.get("X-DAR-Voice-Access") || "").trim();
+  return Boolean(expected && supplied && constantTimeEqual(supplied, expected));
+}
+
 export function darVoiceGpuConfigured(env) {
   return Boolean(normalizedOrigin(env));
 }
@@ -32,6 +55,7 @@ export function darVoiceGpuPublicStatus(env) {
   return {
     configured: Boolean(origin),
     authenticatedUpstream: Boolean(upstreamToken(env)),
+    webAccessProtected: Boolean(webAccessToken(env)),
     transport: "cloudflare-gateway",
     mode: "remote-gpu",
     localIpRequired: false
@@ -58,6 +82,8 @@ function copyUpstreamHeaders(request, env) {
     "x-forwarded-host",
     "x-forwarded-proto",
     "x-admin-secret",
+    "x-dar-voice-access",
+    "authorization",
     "origin",
     "referer"
   ]) headers.delete(key);
