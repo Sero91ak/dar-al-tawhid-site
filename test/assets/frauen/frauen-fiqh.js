@@ -3449,8 +3449,9 @@
 
   function frauenShareUrl(abschnitt, kennung) {
     try {
+      if (String(location.hash || "").indexOf("/frauen/") !== -1) return location.href;
       var base = location.origin + location.pathname;
-      return base + "#/frauen/" + encodeURIComponent(abschnitt) + "/" + encodeURIComponent(kennung);
+      return base + "#/frauen/" + abschnitt + "/" + kennung;
     } catch (e) {
       return location.href;
     }
