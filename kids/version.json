@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v26-quiz600-library1096",
-  "label": "KIDS · V1.07.32",
-  "releasedAt": "2026-10-04T09:50:00Z",
-  "note": "DĀR AL TAWḤĪD Kids Quiz zeigt jetzt den vollständigen vorhandenen Bestand von 600 eigenständigen, altersgerechten und quellengebundenen Fragen direkt in der App. Neben den kurzen Quizrunden gibt es eine vollständige Fragenübersicht mit Altersstufen, Suche, Themenfilter, direktem Testen und Serhat-Owner-Voice; es wurden für diesen Release keine neuen Fragen erzeugt.",
+  "buildId": "kids-shell-v27-quiz650-library1096",
+  "label": "KIDS · V1.07.33",
+  "releasedAt": "2026-10-04T09:52:00Z",
+  "note": "DĀR AL TAWḤĪD Kids Quiz umfasst jetzt 650 eigenständige, altersgerechte und quellengebundene Fragen (001–650). Der vollständige Fragenkatalog mit Altersstufen, Suche, Themenfilter, direktem Testen und Serhat-Owner-Voice bleibt aktiv; die kurzen Quizrunden, die drei realistischen lokalen Altersbildwelten und audio-first für 4–6 bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -247,16 +247,16 @@
     "storyAudioSignedPreviewDependency": false,
     "kidsQuizSystem": "independent-v1",
     "kidsQuizAdultDependency": false,
-    "kidsQuizQuestionCount": 600,
+    "kidsQuizQuestionCount": 650,
     "kidsQuizAgeBands": [
       "4-6",
       "7-8",
       "9-10"
     ],
     "kidsQuizDistribution": {
-      "4-6": 216,
-      "7-8": 192,
-      "9-10": 192
+      "4-6": 234,
+      "7-8": 208,
+      "9-10": 208
     },
     "kidsQuizAudioFirstBand": "4-6",
     "kidsQuizAgeAdaptiveUx": "v1",
@@ -267,10 +267,10 @@
     "kidsQuizManifestNetworkFirst": true,
     "kidsQuizReleaseGuard": true,
     "quizVisualSystem": {
-      "version": "age-adaptive-realistic-v12",
+      "version": "age-adaptive-realistic-v13",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
-      "questionCount": 600,
+      "questionCount": 650,
       "ageBands": [
         "4-6",
         "7-8",
@@ -306,12 +306,13 @@
         "401-450",
         "451-500",
         "501-550",
-        "551-600"
+        "551-600",
+        "601-650"
       ],
       "distribution": {
-        "4-6": 216,
-        "7-8": 192,
-        "9-10": 192
+        "4-6": 234,
+        "7-8": 208,
+        "9-10": 208
       },
       "manifestDrivenArtwork": true,
       "sourcePolicy": "Qurʾān + authentische Ṣaḥīḥ-Sunnah; Quellen pro Frage",
@@ -332,10 +333,11 @@
       "fullQuestionCatalogDirectTest": true,
       "fullQuestionCatalogOwnerVoice": true,
       "shortQuizRoundsPreserved": true,
-      "noNewQuestionsInThisRelease": true,
-      "catalogAssetVersion": 1
+      "noNewQuestionsInThisRelease": false,
+      "catalogAssetVersion": 1,
+      "latestContentPack": "601-650"
     },
-    "kidsQuizContentRevision": "001-500"
+    "kidsQuizContentRevision": "001-650"
   },
   "updatedAt": "2026-10-04"
 }
