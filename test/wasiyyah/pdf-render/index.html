@@ -394,9 +394,14 @@
     const PLACEHOLDERS=[
       "keine angaben erfasst.",
       "keine angaben erfasst",
+      "keine bekannten schulden oder offenen rechte erfasst.",
+      "keine bekannten amānāt erfasst.",
+      "keine besondere wasiyyah erfasst.",
       "keine besonderen prüfhinweise erfasst.",
       "keine besonderen prüfhinweise erfasst"
     ];
+    const DEFAULT_PRIVATE_NOTE="Ich bitte meine Angehörigen, mit Taqwā, Ruhe und Gerechtigkeit zu handeln, Streit zu vermeiden und bei Unsicherheit fachkundige Menschen von Ahl al-Sunnah zu fragen.";
+    const FARAID_NOTE="Die endgültige Farāʾiḍ-Verteilung hängt von den tatsächlich lebenden Erben zum Todeszeitpunkt ab.";
 
     const $=s=>document.querySelector(s);
     function clean(v){return String(v||"").replace(/\r/g,"").trim()}
@@ -490,10 +495,17 @@
       if(!sections.length)sections=stateSections(state);
       else{
         sections=sections.filter(s=>s.number>=1&&s.number<=14);
-        const hasFar=sections.some(s=>s.number===3);
-        if(hasFar&&!sections.some(s=>s.number===3.1)){
-          const idx=sections.findIndex(s=>s.number===3);
-          sections.splice(idx+1,0,{number:3.1,title:"Hinweis zur Farāʾiḍ-Prüfung",body:"Die endgültige Farāʾiḍ-Verteilung hängt von den tatsächlich lebenden Erben zum Todeszeitpunkt ab."});
+        sections=sections.filter(s=>!(s.number===13&&!clean(state.privateNotes)&&clean(s.body)===DEFAULT_PRIVATE_NOTE));
+        const idx=sections.findIndex(s=>s.number===3);
+        if(idx>=0){
+          sections[idx].body=clean(sections[idx].body)
+            .replace(/^Hinweis:\s*/i,"")
+            .replace(FARAID_NOTE,"")
+            .replace(/\n{3,}/g,"\n\n")
+            .trim();
+          if(!isPlaceholder(sections[idx].body)){
+            sections.splice(idx+1,0,{number:3.1,title:"Hinweis zur Farāʾiḍ-Prüfung",body:FARAID_NOTE});
+          }
         }
       }
       return{
@@ -675,6 +687,7 @@
         return;
       }
       const data=documentData(payload);
+      document.title="Islamische Waṣiyyah – "+(data.name&&data.name!=="Nicht angegeben"?data.name:"DAR AL TAWḤID");
       paginate(data);
       fitScreen();
       try{if(document.fonts&&document.fonts.ready)await document.fonts.ready}catch(e){}
