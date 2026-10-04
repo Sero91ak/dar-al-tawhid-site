@@ -12,7 +12,7 @@ var observed=false;
 var access=[
   {nav:"topics",icon:"topics.png",title:"Tawḥīd & ʿAqīdah",desc:"Grundlagen, Beweise und Aussagen der Salaf."},
   {nav:"quran",icon:"quran.png",title:"Qurʾān & Tafsīr",desc:"Lesen, suchen, verstehen und weiterlernen."},
-  {nav:"hadith",icon:"hadith.png",title:"Sunnah & Ḥadīṯ",desc:"Authentische Überlieferungen und Ḥadīṯ-Bibliothek."},
+  {nav:"hadith",icon:"hadith.png",title:"Ḥadīṯ-Bibliothek",desc:"Authentische Überlieferungen"},
   {nav:"scholars",icon:"scholars.png",title:"Ṣaḥābah, Salaf & Gelehrte",desc:"Überlieferer, frühe Imāme und ihre Werke."},
   {nav:"books",icon:"library.png",title:"Bücher & Quellen",desc:"Geprüfte Werke, Fundstellen und Veröffentlichungen."},
   {nav:"prophets",icon:"prophets.png",title:"Die Propheten",desc:"Qurʾān & authentische Sunnah"},
@@ -235,6 +235,48 @@ function tuneSearch(){
     }
   });
 }
+function ensureHomeKnowledgeGridStyleV1236(){
+  if(document.getElementById("dtHomeKnowledgeGridStyleV1236"))return;
+  var style=document.createElement("style");
+  style.id="dtHomeKnowledgeGridStyleV1236";
+  style.textContent=[
+    'html.dar-home-v1194 body.is-home-route #appView :is(.home-line-grid,.home-line-list).dt-home-nav-polished{position:relative!important;isolation:isolate!important;margin-top:0!important;margin-bottom:8px!important;background:linear-gradient(180deg,color-mix(in srgb,var(--dt-page) 34%,transparent) 0%,color-mix(in srgb,var(--dt-page) 46%,transparent) 52%,color-mix(in srgb,var(--dt-page) 58%,transparent) 100%)!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView :is(.home-line-grid,.home-line-list).dt-home-nav-polished::before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;pointer-events:none!important;background:linear-gradient(90deg,color-mix(in srgb,var(--dt-page) 18%,transparent),transparent 42%,color-mix(in srgb,var(--dt-page) 15%,transparent))!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView :is(.home-line-grid,.home-line-list).dt-home-nav-polished>*{position:relative!important;z-index:1!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView .home-line-row{min-height:92px!important;padding:12px 14px!important;background:color-mix(in srgb,var(--dt-page) 9%,transparent)!important;box-shadow:none!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView .home-line-row:nth-child(odd){background:color-mix(in srgb,var(--dt-page) 15%,transparent)!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico{width:48px!important;min-width:48px!important;height:48px!important;display:grid!important;place-items:center!important;margin:0 10px 0 0!important;padding:0!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img,html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img.dar3d-icon{width:40px!important;height:40px!important;max-width:40px!important;max-height:40px!important;object-fit:contain!important;object-position:center!important;margin:0!important;filter:drop-shadow(0 5px 7px color-mix(in srgb,#000 13%,transparent))!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView .home-line-row :is(.home-line-row__title,h2,h3,h4,b,strong,a){text-decoration:none!important;text-decoration-line:none!important;border-bottom:0!important;box-shadow:none!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView .home-line-row p{margin-top:4px!important;line-height:1.24!important;opacity:.84!important;}',
+    'html.dar-home-v1194 body.is-home-route .footer{min-height:0!important;margin-top:0!important;padding-top:10px!important;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))!important;row-gap:6px!important;}',
+    'html.dar-home-v1194 body.is-home-route .footer :is(h1,h2,h3,p){margin-top:3px!important;margin-bottom:3px!important;}',
+    'html.dar-home-v1194 body.is-home-route .footer .footer-actions{margin-top:6px!important;margin-bottom:4px!important;}',
+    'html.dar-home-v1194 body.is-home-route .footer :is(.footer-sign,.brand-sign,.signature,.footer-signature){margin-top:7px!important;margin-bottom:0!important;}',
+    '@media(max-width:430px){html.dar-home-v1194 body.is-home-route #appView .home-line-row{min-height:88px!important;padding:11px 10px!important;}html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico{width:44px!important;min-width:44px!important;height:44px!important;margin-right:8px!important;}html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img,html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img.dar3d-icon{width:37px!important;height:37px!important;max-width:37px!important;max-height:37px!important;}}'
+  ].join("");
+  document.head.appendChild(style);
+}
+function tuneHomeKnowledgeGridV1236(){
+  if(!isHome())return;
+  ensureHomeKnowledgeGridStyleV1236();
+  var scope=document.getElementById("appView")||document;
+  scope.querySelectorAll(".home-line-grid,.home-line-list").forEach(function(el){
+    el.classList.add("dt-home-nav-polished");
+  });
+  var hadithNodes=scope.querySelectorAll(
+    '.home-line-row[data-nav="hadith"],.home-line-row[data-dt-nav="hadith"],[data-nav="hadith"].home-line-row,[data-dt-nav="hadith"].home-line-row,'+
+    '#dtAccess1193 [data-dt-nav="hadith"],#dtAccess1194 [data-dt-nav="hadith"]'
+  );
+  hadithNodes.forEach(function(row){
+    var title=row.querySelector(".home-line-row__title,.dt-access-copy>b,h2,h3,h4,b,strong");
+    if(title)title.textContent="Ḥadīṯ-Bibliothek";
+    var meta=row.querySelector(".home-line-row__meta,.home-line-row__desc,.dt-access-copy>span,p,small");
+    if(meta)meta.textContent="Authentische Überlieferungen";
+    row.setAttribute("aria-label","Ḥadīṯ-Bibliothek öffnen");
+    row.classList.add("dt-hadith-library-entry");
+  });
+}
 function cleanupHomeDuplicates(shell){
   if(!shell)return;
 
@@ -311,6 +353,7 @@ function ensureMain(){
   if(!shell)return;
 
   cleanupHomeDuplicates(shell);
+  tuneHomeKnowledgeGridV1236();
   placeQuranResumeAfterCore(shell);
   tuneSearch();
   ensureFunctionalHeroSearch();
