@@ -63,6 +63,12 @@
   };
 
   function clean(s){return String(s||"").replace(/\s+/g," ").trim()}
+  function stripUiLabel(value,kind){
+    var s=clean(value);
+    if(kind==="body")return s.replace(/^(?:AUSSAGE|STATEMENT)\s*[:·–—-]?\s*/i,"").trim();
+    if(kind==="source")return s.replace(/^(?:QUELLE|SOURCE|NACHWEISE?)\s*[:·–—-]?\s*/i,"").trim();
+    return s;
+  }
   /* GLOBAL_SHARE_MANIFEST_V1232 */
   function registerSceneItems(items){
     (Array.isArray(items)?items:[]).forEach(function(item){
