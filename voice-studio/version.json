@@ -1,10 +1,10 @@
 {
-  "version": "2.9.102",
-  "updatedAt": "2026-10-04T22:18:00+02:00",
-  "deployTrigger": "voice-studio-2.9.102-sahaba-audio-workspace",
+  "version": "2.9.103",
+  "updatedAt": "2026-10-04T22:50:00+02:00",
+  "deployTrigger": "voice-studio-2.9.103-sahaba-biography-refresh",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v70",
+  "cache": "dar-voice-studio-v71",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-contents-api",
-  "engineVersion": "2.9.102",
+  "engineVersion": "2.9.103",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -1392,7 +1392,7 @@
   },
   "mubashshirunStories": {
     "enabled": true,
-    "version": 4,
+    "version": 5,
     "count": 10,
     "ages": [
       "4-5",
@@ -1414,24 +1414,27 @@
     "output": "kids/assets/mubashshirun-story-audio/<sahabi>/<age>.m4a",
     "systemVoiceFallback": false,
     "sourcePolicy": "Qurʾān general praise separated from individual authentic Sunnah; no invented dialogue or legends",
-    "sourceDataVersion": 4
+    "sourceDataVersion": 5,
+    "storyTextStandard": "kids-story-biography-v2",
+    "audioRefreshRequired": true
   },
   "mubashshirun": {
     "enabled": true,
     "items": 10,
     "ageScripts": 30,
-    "dataVersion": 4,
-    "bundleVersion": 5,
+    "dataVersion": 5,
+    "bundleVersion": 8,
     "sourcePolicy": "Qurʾān + authentic Sunnah + source-separated",
     "visualEvidencePolicy": "historical approximation only; no claimed portrait or individually attested wardrobe",
-    "publishFlow": "generate → listen → confirm pronunciation → auto publish selected age to Kids"
+    "publishFlow": "load refreshed biography → generate new audio → listen → confirm pronunciation → publish selected age to Kids",
+    "storyTextStandard": "kids-story-biography-v2"
   },
   "updateAutoInstallOnLaunch": false,
   "engineProcessPolicy": "single-owner-launcher",
   "engineLaunchAgentEnabled": false,
   "runtimeUiGitHubSync": false,
   "kidsStoryTextStandard": {
-    "version": "kids-story-greeting-closing-v1",
+    "version": "kids-story-biography-v2",
     "intro": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.",
     "closingSequence": [
       "Und الله weiß es am besten.",
@@ -1447,7 +1450,8 @@
     "excludes": [
       "Qurʾān-Rezitation",
       "wörtliche Quellenzitate"
-    ]
+    ],
+    "sourceMetaOutsideNarration": true
   },
   "mobileVoiceApp": {
     "enabled": true,
@@ -1657,7 +1661,7 @@
     "validatedRef": "da9792bbdf58c1bb7284381dab7bdd7a4ab90aa0"
   },
   "validationNote": "2.9.93 Voice-green: 4-bit MLX Extreme Fast, indexed pronunciation matching, larger long-form blocks, exact confirmed audio masters preserved. Repository-wide failures are unrelated Kids/app-shell guards.",
-  "releaseStatus": "voice-green",
+  "releaseStatus": "voice-green-content-refresh",
   "releaseChecks": {
     "smoke": "voice-core-passed; repository-wide blocked by unrelated Kids quiz artwork guard",
     "validate": "passed",
