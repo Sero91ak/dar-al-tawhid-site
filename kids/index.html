@@ -4967,6 +4967,7 @@ function renderDua(){
     quranBtn.addEventListener("click",function(){
       if(duaAudioPlaying){stopDuaAudio();quranBtn.textContent=" Qurʾān hören";return}
       try{speech.cancel()}catch(e){}
+      try{if(window.DARKidsOwnerVoice)window.DARKidsOwnerVoice.stop()}catch(e){}
       playDuaQuran(d.quranRefs,0);
     });
   }
@@ -5730,11 +5731,10 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
 })();
 
 function quizSpeak(text){
-  if(!("speechSynthesis" in window))return;
-  try{speech.cancel()}catch(e){}
-  var u=new SpeechSynthesisUtterance(String(text||""));
-  u.lang="de-DE";u.rate=age==="4–5"?.82:.88;u.pitch=.96;
-  speech.speak(u);
+  try{if(speech)speech.cancel()}catch(e){}
+  if(window.DARKidsOwnerVoice&&typeof window.DARKidsOwnerVoice.play==="function"){
+    window.DARKidsOwnerVoice.play(String(text||""),{source:"kids-ui"});
+  }
 }
 function isYesNoAnswers(answers){
   var labels=(answers||[]).map(function(a){return String(a.label||"").trim().toLowerCase()});
@@ -6100,29 +6100,40 @@ function resetStorySpeechUi(){
 }
 function stopSpeech(){
   storyManualStop=true;
-  if(speech)speech.cancel();
+  try{if(window.DARKidsOwnerVoice)window.DARKidsOwnerVoice.stop()}catch(e){}
+  try{if(speech)speech.cancel()}catch(e){}
   resetStorySpeechUi();
   setTimeout(function(){storyManualStop=false},180);
 }
 document.getElementById("storyPlay").addEventListener("click",function(){
-  if(!("speechSynthesis" in window)){alert("Auf diesem Gerät ist die Vorschau-Stimme nicht verfügbar.");return}
   if(speaking){stopSpeech();return}
   var s=storyData(currentStoryKey);
-  var u=new SpeechSynthesisUtterance(s.text);
+  var button=this;
   storyManualStop=false;
-  u.lang="de-DE";u.rate=.87;u.pitch=.94;
-  u.onend=function(){
-    resetStorySpeechUi();
-    if(storyManualStop)return;
-    setTimeout(function(){
-      if(document.getElementById("storyModal").classList.contains("open"))renderStoryQuestion();
-    },420);
-  };
-  u.onerror=function(){resetStorySpeechUi()};
   speaking=true;
-  this.textContent="■ Stopp";
+  button.textContent="■ Stopp";
   document.getElementById("storyWave").textContent="≋≋";
-  speech.speak(u);
+  kidsNowPlaying(s.title||"Geschichte","DĀR AL TAWḤĪD Kids");
+  var ok=!!(window.DARKidsOwnerVoice&&window.DARKidsOwnerVoice.play(s.text,{
+    source:"short-story:"+currentStoryKey,
+    onended:function(){
+      resetStorySpeechUi();
+      if(storyManualStop)return;
+      setTimeout(function(){
+        if(document.getElementById("storyModal").classList.contains("open"))renderStoryQuestion();
+      },420);
+    },
+    onerror:function(){
+      resetStorySpeechUi();
+      button.textContent="Audio wird vorbereitet";
+      setTimeout(resetStorySpeechUi,1200);
+    }
+  }));
+  if(!ok){
+    resetStorySpeechUi();
+    button.textContent="Audio wird vorbereitet";
+    setTimeout(resetStorySpeechUi,1200);
+  }
 });
 function renderStoryQuestion(){
   var story=storyData(currentStoryKey);
@@ -6178,9 +6189,9 @@ document.querySelectorAll("[data-close]").forEach(function(b){
   b.addEventListener("click",function(){
     var type=b.dataset.close;
     if(type==="story"){stopSpeech();document.getElementById("storyModal").classList.remove("open")}
-    if(type==="knowledge"){try{speech.cancel()}catch(e){} document.getElementById("knowledgeModal").classList.remove("open")}
-    if(type==="dua"){try{speech.cancel()}catch(e){} stopDuaAudio();document.getElementById("duaModal").classList.remove("open")}
-    if(type==="quiz"){try{speech.cancel()}catch(e){} document.getElementById("quizModal").classList.remove("open")}
+    if(type==="knowledge"){try{speech.cancel()}catch(e){} try{if(window.DARKidsOwnerVoice)window.DARKidsOwnerVoice.stop()}catch(e){} document.getElementById("knowledgeModal").classList.remove("open")}
+    if(type==="dua"){try{speech.cancel()}catch(e){} try{if(window.DARKidsOwnerVoice)window.DARKidsOwnerVoice.stop()}catch(e){} stopDuaAudio();document.getElementById("duaModal").classList.remove("open")}
+    if(type==="quiz"){try{speech.cancel()}catch(e){} try{if(window.DARKidsOwnerVoice)window.DARKidsOwnerVoice.stop()}catch(e){} document.getElementById("quizModal").classList.remove("open")}
     if(type==="quran"){stopQuran();releaseMicStream();document.getElementById("quranModal").classList.remove("open")}
     if(type==="fullquran"){document.getElementById("fullQuranModal").classList.remove("open")}
     if(type==="alphabet"){try{speech.cancel()}catch(e){} if(window.stopKidsAlphabetAudio)window.stopKidsAlphabetAudio();document.getElementById("alphabetModal").classList.remove("open")}
@@ -6624,12 +6635,12 @@ fetchCatalog();
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio4"></script>
-<script src="/kids/quiz-owner-voice.js?v=1"></script>
+<script src="/kids/owner-voice.js?v=1"></script>
 <script>
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1093-audio3",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1094-owner-voice",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
