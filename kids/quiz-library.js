@@ -111,13 +111,17 @@
   function setHero(){
     var hero=byId("quizLibraryHero"),count=byId("quizLibraryHeroCount"),age=byId("quizLibraryHeroAge");
     var items=bandItems(),band=typeof window.currentKidsQuizAgeBand==="function"?window.currentKidsQuizAgeBand():"7-8";
-    if(count)count.textContent=items.length+" Fragen";
-    if(age)age.textContent=(band==="4-6"?"4–6 Jahre":band==="7-8"?"7–8 Jahre":"9–10 Jahre")+" · vollständig eingebaut";
+    var filtered=category==="all"?items:items.filter(function(q){return String(q.category||"")===category});
+    var ageLabel=band==="4-6"?"4–6 Jahre":band==="7-8"?"7–8 Jahre":"9–10 Jahre";
+    if(count)count.textContent=filtered.length+" Fragen";
+    if(age)age.textContent=category==="all"?ageLabel+" · vollständig eingebaut":ageLabel+" · "+category;
     if(hero&&typeof window.quizArtworkForBand==="function"){
-      var art=window.quizArtworkForBand()||{};
+      var art=category==="all"?window.quizArtworkForBand():window.quizArtworkForBand({category:category,scene:""});
+      art=art||{};
       if(art.url){
         hero.style.backgroundImage='linear-gradient(180deg,rgba(3,14,23,.03),rgba(3,14,23,.10)),url("'+String(art.url).replace(/"/g,"%22")+'")';
         hero.style.backgroundPosition=art.position||"50% 50%";
+        hero.setAttribute("data-quiz-family",String(art.family||"age"));
       }
     }
   }
@@ -131,7 +135,7 @@
       var b=document.createElement("button");b.type="button";
       b.className=category===cat?"active":"";
       b.textContent=cat==="all"?"Alle Themen":cat;
-      b.addEventListener("click",function(){category=cat;visibleLimit=PAGE_SIZE;renderCategories();renderList()});
+      b.addEventListener("click",function(){category=cat;visibleLimit=PAGE_SIZE;renderCategories();setHero();renderList()});
       box.appendChild(b);
     });
   }
