@@ -70,6 +70,27 @@ export function buildFreshShareImagePrompt(input = {}) {
   ].join(" ");
 }
 
+function buildWorkersAiSharePrompt(input = {}) {
+  const profile = clean(input.profile, 60).toLowerCase();
+  const womenHistorical = profile === "women-historical";
+  const subject = clean(
+    [input.category, input.title, input.body || input.text].filter(Boolean).join(" · "),
+    700
+  );
+  return [
+    "SUBJECT: " + (subject || "Islamic knowledge and learning") + ".",
+    "Create one new unique photorealistic 4:5 premium Islamic educational background.",
+    womenHistorical
+      ? "WOMEN SECTION: clearly separate visual identity; historically plausible early-Islamic atmosphere, roughly 7th–9th century Arabia or nearby Muslim lands. Use clay/stone courtyards, carved wooden screens, woven textiles, linen, leather, brass or clay lamps, reed mats, wooden chests, ink pots, parchment, book stands, palm gardens, wells or travel tents. A single anonymous Muslim woman may appear only if useful: fully modest period clothing, face completely hidden or outside frame, never a named historical likeness."
+      : "STANDARD DĀR PROFILE: historically plausible visual world roughly 1000–1400 years ago, especially 7th–11th century. Use clay, mud-brick or stone architecture, simple arches, palm-wood doors, woven mats, wool/linen, leather, brass/clay oil lamps, parchment, ink pots, wooden book stands, wells, courtyards, caravan rests, desert roads or old scholarly rooms. Timeless realistic nature is also valid: desert, mountains, rocky valleys, sky, sea, palms, gardens, dawn, dusk or night.",
+    womenHistorical
+      ? "Palette: warm ivory, muted olive, deep burgundy, dusty rose-brown, dark emerald, restrained antique gold. No modern fashion styling."
+      : "Palette may use night blue, dark green, sand, stone, warm amber and restrained antique-gold light. No people, faces, silhouettes, hands or body parts.",
+    "Keep calm negative space through center and upper-middle for later typography.",
+    "No written text, letters, Arabic writing, calligraphy, logos, watermarks, UI, App Store badge, modern electronics, cars, plastic, neon, contemporary interiors, fantasy architecture, collage, illustration or cartoon."
+  ].join(" ").slice(0, 2000);
+}
+
 function base64Bytes(value) {
   const raw = atob(String(value || ""));
   const out = new Uint8Array(raw.length);
@@ -79,7 +100,7 @@ function base64Bytes(value) {
 
 async function generateWorkersAiShareImage(env, input) {
   if (!env?.AI || typeof env.AI.run !== "function") return null;
-  const prompt = buildFreshShareImagePrompt(input).slice(0, 2048);
+  const prompt = buildWorkersAiSharePrompt(input);
   const seed = randomSeed();
   const result = await env.AI.run("@cf/bytedance/stable-diffusion-xl-lightning", {
     prompt,
