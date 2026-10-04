@@ -26800,75 +26800,58 @@ async function imageEditorLoadAppStoreIcon(){if(imageEditorAppStoreIcon)return i
 /* GLOBAL_SHARE_VISUAL_V1226 */
 function imageEditorDrawAppStoreBadge(ctx,x,y,w,h){
   ctx.save();
-  imageEditorRoundRect(ctx,x,y,w,h,16);
-  ctx.fillStyle="rgba(4,8,10,.88)";
-  ctx.fill();
-  ctx.strokeStyle="rgba(255,255,255,.22)";
-  ctx.lineWidth=1.25;
-  ctx.stroke();
-
-  const iconSize=Math.min(h-12,48);
-  const ix=x+8,iy=y+(h-iconSize)/2;
-  imageEditorRoundRect(ctx,ix,iy,iconSize,iconSize,11);
-  const blue=ctx.createLinearGradient(ix,iy,ix,iy+iconSize);
-  blue.addColorStop(0,"#38a8ff");
-  blue.addColorStop(1,"#0a78e8");
-  ctx.fillStyle=blue;
-  ctx.fill();
-
-  const cx=ix+iconSize/2,cy=iy+iconSize/2;
-  ctx.strokeStyle="#fff";
-  ctx.lineWidth=Math.max(3,iconSize*.075);
-  ctx.lineCap="round";
-  ctx.beginPath();
-  ctx.moveTo(cx-iconSize*.19,cy+iconSize*.22);
-  ctx.lineTo(cx,cy-iconSize*.20);
-  ctx.lineTo(cx+iconSize*.19,cy+iconSize*.22);
-  ctx.moveTo(cx-iconSize*.27,cy+iconSize*.08);
-  ctx.lineTo(cx+iconSize*.27,cy+iconSize*.08);
-  ctx.stroke();
-
-  ctx.textAlign="left";
-  ctx.textBaseline="alphabetic";
+  imageEditorRoundRect(ctx,x,y,w,h,15);
+  ctx.fillStyle="rgba(2,6,8,.84)";ctx.fill();
+  ctx.strokeStyle="rgba(255,255,255,.34)";ctx.lineWidth=1.3;ctx.stroke();
+  if(imageEditorAppStoreIcon){
+    ctx.save();
+    const iconSize=h-16;
+    imageEditorRoundRect(ctx,x+9,y+8,iconSize,iconSize,11);
+    ctx.clip();
+    ctx.drawImage(imageEditorAppStoreIcon,x+9,y+8,iconSize,iconSize);
+    ctx.restore();
+  }
+  ctx.textAlign="left";ctx.textBaseline="alphabetic";
   ctx.fillStyle="rgba(255,255,255,.78)";
-  ctx.font="600 10px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
-  ctx.fillText("Download on the",ix+iconSize+10,y+20);
+  ctx.font="500 10px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+  ctx.fillText("Laden im",x+h+2,y+19);
   ctx.fillStyle="#fff";
-  ctx.font="700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
-  ctx.fillText("App Store",ix+iconSize+10,y+42);
+  ctx.font="700 18px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+  ctx.fillText("App Store",x+h+2,y+41);
   ctx.restore();
 }
+/* IMAGE_SHARE_VISUAL_V1235 */
 function imageEditorDrawPremiumChrome(ctx){
   const W=IMAGE_EDITOR_CANVAS_W,H=IMAGE_EDITOR_CANVAS_H;
 
   ctx.save();
   ctx.globalCompositeOperation="screen";
   const lift=ctx.createLinearGradient(0,0,W,H);
-  lift.addColorStop(0,"rgba(255,246,220,.10)");
-  lift.addColorStop(.55,"rgba(255,244,214,.045)");
-  lift.addColorStop(1,"rgba(255,232,190,.025)");
+  lift.addColorStop(0,"rgba(255,248,224,.13)");
+  lift.addColorStop(.55,"rgba(255,244,214,.065)");
+  lift.addColorStop(1,"rgba(255,232,190,.035)");
   ctx.fillStyle=lift;
   ctx.fillRect(0,0,W,H);
   ctx.restore();
 
   const top=ctx.createLinearGradient(0,0,0,300);
-  top.addColorStop(0,"rgba(3,13,14,.58)");
-  top.addColorStop(.72,"rgba(3,13,14,.18)");
+  top.addColorStop(0,"rgba(3,13,14,.46)");
+  top.addColorStop(.72,"rgba(3,13,14,.13)");
   top.addColorStop(1,"rgba(3,13,14,0)");
   ctx.fillStyle=top;
   ctx.fillRect(0,0,W,310);
 
   const mid=ctx.createLinearGradient(0,245,0,1000);
-  mid.addColorStop(0,"rgba(4,15,16,.08)");
-  mid.addColorStop(.38,"rgba(4,15,16,.18)");
-  mid.addColorStop(1,"rgba(4,15,16,.14)");
+  mid.addColorStop(0,"rgba(4,15,16,.04)");
+  mid.addColorStop(.38,"rgba(4,15,16,.12)");
+  mid.addColorStop(1,"rgba(4,15,16,.08)");
   ctx.fillStyle=mid;
   ctx.fillRect(40,245,W-80,750);
 
   const foot=ctx.createLinearGradient(0,1110,0,H);
-  foot.addColorStop(0,"rgba(3,12,13,.04)");
-  foot.addColorStop(.35,"rgba(3,12,13,.54)");
-  foot.addColorStop(1,"rgba(3,12,13,.83)");
+  foot.addColorStop(0,"rgba(3,12,13,.02)");
+  foot.addColorStop(.35,"rgba(3,12,13,.36)");
+  foot.addColorStop(1,"rgba(3,12,13,.62)");
   ctx.fillStyle=foot;
   ctx.fillRect(0,1090,W,H-1090);
 
@@ -26896,12 +26879,12 @@ function imageEditorDrawPremiumChrome(ctx){
     }
     ctx.textAlign="left";
     ctx.fillStyle="#fff9ec";
-    ctx.shadowColor="rgba(0,0,0,.52)";
-    ctx.shadowBlur=10;
+    ctx.shadowColor="rgba(0,0,0,.48)";
+    ctx.shadowBlur=9;
     let y=box.y+size;
     lines.slice(0,2).forEach(line=>{ctx.fillText(line,box.x,y);y+=size*1.08});
     ctx.shadowBlur=0;
-    ctx.strokeStyle="rgba(239,216,159,.52)";
+    ctx.strokeStyle="rgba(239,216,159,.54)";
     ctx.lineWidth=1.5;
     ctx.beginPath();
     ctx.moveTo(78,258);
@@ -26909,32 +26892,32 @@ function imageEditorDrawPremiumChrome(ctx){
     ctx.stroke();
   }
 
-  imageEditorRoundRect(ctx,66,1012,W-132,122,20);
-  ctx.fillStyle="rgba(4,15,16,.68)";
+  imageEditorRoundRect(ctx,72,1018,W-144,126,20);
+  ctx.fillStyle="rgba(4,15,16,.54)";
   ctx.fill();
-  ctx.strokeStyle="rgba(239,216,159,.34)";
+  ctx.strokeStyle="rgba(239,216,159,.30)";
   ctx.lineWidth=1.2;
   ctx.stroke();
 
   ctx.textAlign="left";
   ctx.fillStyle="#f3d99b";
   ctx.font="800 16px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
-  ctx.fillText("QUELLE",88,1040);
+  ctx.fillText("QUELLE",96,1046);
 
   ctx.fillStyle="rgba(255,249,236,.82)";
   ctx.font="600 14px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
-  ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah",88,1113);
+  ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah",78,1192);
 
   ctx.fillStyle="#f3d99b";
   ctx.font="700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
-  ctx.fillText("dar-al-tawhid.de",78,1288);
+  ctx.fillText("dar-al-tawhid.de",78,1290);
 
-  imageEditorDrawAppStoreBadge(ctx,W-78-270,1237,270,62);
+  imageEditorDrawAppStoreBadge(ctx,W-78-270,1233,270,62);
   ctx.textAlign="left";
   ctx.shadowBlur=0;
 }
 function drawImageEditorPremiumBlock(ctx,block,text,box){if(!String(text||"").trim())return{ok:true,metrics:null,guideRect:null,clamped:{x:0,y:0}};const font=imageEditorFontCss(block==="source"?"source":imageEditorState.font);const size=imageEditorBlockSize(block);const align=block==="source"?"left":(imageEditorState.align||"left");const min=block==="source"?12:18;const chosen=imageEditorState.color||"#fff7df";const dark=/^(#2d251c|#111111|#173226|#102b44|#4b1616|#344028|#153d3c|#5a342d|#132d4f|#3b2515)$/i.test(chosen);const color=block==="source"?"#fff5df":(dark?"#fff9ec":chosen);return drawImageEditorSimpleText(ctx,text,box,{font,color,size,lineHeight:block==="source"?1.22:Math.max(1.30,imageEditorState.lineHeight||1.30),align,offsetX:0,offsetY:0,minSize:min})}
-async function renderImageEditorCanvas(){const canvas=$("imageEditorCanvas");if(!canvas)return;imageEditorEnsurePremiumState();await imageEditorLoadAppStoreIcon();const t=imageTemplateById(imageEditorState.templateId);const ctx=canvas.getContext("2d");let templateDrawn=false;try{if(document.fonts?.ready)await document.fonts.ready;const img=await loadImageEditorTemplate(t.src);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.lastTemplateImg=img;imageEditorState.templateReady=true;imageEditorState.templateLoadFailed=false;templateDrawn=true}catch(e){if(imageEditorState.lastTemplateImg){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(imageEditorState.lastTemplateImg,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.templateReady=true}else{ctx.clearRect(0,0,canvas.width,canvas.height);imageEditorState.templateReady=false}imageEditorState.templateLoadFailed=true}if(templateDrawn||imageEditorState.lastTemplateImg){imageEditorDrawPremiumChrome(ctx);imageEditorEnforceAutoLayout({maxBodySize:imageEditorState.fontSize});imageEditorState.blockMetrics={};imageEditorState.blockGuideRects={};imageEditorState.blockTextTooLong={};IMAGE_EDITOR_PREMIUM_BLOCKS.forEach(b=>{const text=imageEditorBlockText(b.id);const result=drawImageEditorPremiumBlock(ctx,b.id,text,imageEditorBlockBox(b.id));imageEditorState.blockMetrics[b.id]=result.metrics||{blockW:result.blockW||0,blockH:result.blockH||0};imageEditorState.blockGuideRects[b.id]=result.guideRect||null;if(b.id==="body"){imageEditorState.mainMetrics=result.metrics||null;imageEditorState.mainGuideRect=result.guideRect||null}else if(b.id==="source"){imageEditorState.sourceMetrics=result.metrics||null;imageEditorState.sourceGuideRect=result.guideRect||null}});applyImageEditorLayoutFeedback()}else{setImageEditorWarning("Vorlage konnte nicht geladen werden. Bitte erneut versuchen.",true);updateImageEditorGuides();updateImageEditorExportButtons()}}
+async function renderImageEditorCanvas(){const canvas=$("imageEditorCanvas");if(!canvas)return;imageEditorEnsurePremiumState();await imageEditorLoadAppStoreIcon();const t=imageTemplateById(imageEditorState.templateId);const ctx=canvas.getContext("2d");let templateDrawn=false;try{if(document.fonts?.ready)await document.fonts.ready;const img=await loadImageEditorTemplate(t.src);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();try{ctx.filter="saturate(1.12) contrast(1.03) brightness(1.08)"}catch(e){}ctx.drawImage(img,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);ctx.restore();imageEditorState.lastTemplateImg=img;imageEditorState.templateReady=true;imageEditorState.templateLoadFailed=false;templateDrawn=true}catch(e){if(imageEditorState.lastTemplateImg){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(imageEditorState.lastTemplateImg,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.templateReady=true}else{ctx.clearRect(0,0,canvas.width,canvas.height);imageEditorState.templateReady=false}imageEditorState.templateLoadFailed=true}if(templateDrawn||imageEditorState.lastTemplateImg){imageEditorDrawPremiumChrome(ctx);imageEditorEnforceAutoLayout({maxBodySize:imageEditorState.fontSize});imageEditorState.blockMetrics={};imageEditorState.blockGuideRects={};imageEditorState.blockTextTooLong={};IMAGE_EDITOR_PREMIUM_BLOCKS.forEach(b=>{const text=imageEditorBlockText(b.id);const result=drawImageEditorPremiumBlock(ctx,b.id,text,imageEditorBlockBox(b.id));imageEditorState.blockMetrics[b.id]=result.metrics||{blockW:result.blockW||0,blockH:result.blockH||0};imageEditorState.blockGuideRects[b.id]=result.guideRect||null;if(b.id==="body"){imageEditorState.mainMetrics=result.metrics||null;imageEditorState.mainGuideRect=result.guideRect||null}else if(b.id==="source"){imageEditorState.sourceMetrics=result.metrics||null;imageEditorState.sourceGuideRect=result.guideRect||null}});applyImageEditorLayoutFeedback()}else{setImageEditorWarning("Vorlage konnte nicht geladen werden. Bitte erneut versuchen.",true);updateImageEditorGuides();updateImageEditorExportButtons()}}
 function applyImageEditorClampedOffset(){}
 function imageEditorMoveActive(block,startOff,dxC,dyC){const safe=imageEditorSafeBoxFor(block);const sc=imageEditorState.blockScales?.[block]||{w:1,h:1};const w=Math.max(80,Math.min(safe.w,safe.w*(Number(sc.w)||1))),h=Math.max(50,Math.min(safe.h,safe.h*(Number(sc.h)||1)));const maxX=Math.max(0,(safe.w-w)/2),maxY=Math.max(0,(safe.h-h)/2);let nx=Math.max(-maxX,Math.min(maxX,startOff.x+dxC)),ny=Math.max(-maxY,Math.min(maxY,startOff.y+dyC));const SNAP=14,cx=safe.x+(safe.w-w)/2+nx+w/2,cy=safe.y+(safe.h-h)/2+ny+h/2;const snapGuides={h:false,v:false};if(Math.abs(cx-IMAGE_EDITOR_CANVAS_W/2)<=SNAP){nx+=IMAGE_EDITOR_CANVAS_W/2-cx;snapGuides.v=true;snapGuides.vx=IMAGE_EDITOR_CANVAS_W/2}if(Math.abs(cy-IMAGE_EDITOR_CANVAS_H/2)<=SNAP){ny+=IMAGE_EDITOR_CANVAS_H/2-cy;snapGuides.h=true;snapGuides.hy=IMAGE_EDITOR_CANVAS_H/2}const safeCx=safe.x+safe.w/2,safeCy=safe.y+safe.h/2;if(Math.abs(safe.x+(safe.w-w)/2+nx+w/2-safeCx)<=SNAP){nx=0;snapGuides.v=true;snapGuides.vx=safeCx}if(Math.abs(safe.y+(safe.h-h)/2+ny+h/2-safeCy)<=SNAP){ny=0;snapGuides.h=true;snapGuides.hy=safeCy}nx=Math.max(-maxX,Math.min(maxX,nx));ny=Math.max(-maxY,Math.min(maxY,ny));imageEditorState.snapGuides=snapGuides;setImageEditorBlockOffsets(block,nx,ny)}
 function imageEditorApplyResize(block,startBox,edge,dxC,dyC){const safe=imageEditorSafeBoxFor(block);let left=startBox.x,top=startBox.y,right=startBox.x+startBox.w,bottom=startBox.y+startBox.h;if(edge.indexOf("e")>=0)right=startBox.x+startBox.w+dxC;if(edge.indexOf("w")>=0)left=startBox.x+dxC;if(edge.indexOf("s")>=0)bottom=startBox.y+startBox.h+dyC;if(edge.indexOf("n")>=0)top=startBox.y+dyC;left=Math.max(safe.x,left);top=Math.max(safe.y,top);right=Math.min(safe.x+safe.w,right);bottom=Math.min(safe.y+safe.h,bottom);const minW=170,minH=72;if(right-left<minW){if(edge.indexOf("w")>=0)left=right-minW;else right=left+minW}if(bottom-top<minH){if(edge.indexOf("n")>=0)top=bottom-minH;else bottom=top+minH}const w=Math.max(minW,right-left),h=Math.max(minH,bottom-top);const scW=Math.max(0.2,Math.min(1,w/safe.w)),scH=Math.max(0.2,Math.min(1,h/safe.h));imageEditorState.blockScales[block]={w:scW,h:scH};const offX=left-(safe.x+(safe.w-safe.w*scW)/2);const offY=top-(safe.y+(safe.h-safe.h*scH)/2);setImageEditorBlockOffsets(block,offX,offY)}
