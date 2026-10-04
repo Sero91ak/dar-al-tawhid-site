@@ -21,7 +21,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.74"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.75"
     }
 
     private var externalEngineOwner: Bool {
@@ -295,7 +295,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         components.scheme = "http"
         components.host = ip
         components.port = 8787
-        components.path = "/studio/"
+        components.path = "/mobile/"
         components.queryItems = [URLQueryItem(name: "pair", value: token)]
         return components.url?.absoluteString
     }
@@ -317,7 +317,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     @objc private func showCompanionPairing(_ sender: Any?) {
         let alert = NSAlert()
         alert.alertStyle = .informational
-        alert.messageText = "iPad / iPhone mit Voice Studio verbinden"
+        alert.messageText = "DĀR Voice auf iPad / iPhone öffnen"
 
         guard let url = companionPairingURL() else {
             alert.informativeText = "Keine lokale WLAN-Adresse oder kein Kopplungsschlüssel verfügbar. Verbinde den Mac mit demselben WLAN wie dein iPad/iPhone und starte Voice Studio erneut."
