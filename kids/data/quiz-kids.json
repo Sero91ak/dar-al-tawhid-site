@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "id": "DAR_KIDS_QUIZ_V1",
   "namespace": "dar-kids-quiz",
-  "version": 8,
+  "version": 9,
   "updatedAt": "2026-10-04",
   "separateFromAdultQuiz": true,
   "adultQuizDependency": false,
@@ -7373,27 +7373,27 @@
       "ageBand": "4-6",
       "ageMin": 4,
       "ageMax": 6,
-      "scene": "speech",
+      "scene": "home",
       "category": "Adab",
-      "topic": "Nicht lästern",
-      "question": "Dürfen wir hinter dem Rücken schlecht über andere reden?",
+      "topic": "Salām beim Eintreten",
+      "question": "Sagen wir Salām, wenn wir ein Haus betreten?",
       "answers": [
         {
           "id": "a1",
-          "label": "Nein",
+          "label": "Ja",
           "correct": true
         },
         {
           "id": "a2",
-          "label": "Ja",
+          "label": "Nein",
           "correct": false
         }
       ],
       "success": "Richtig. Sehr gut!",
       "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
-      "explanation": "Allah verbietet üble Nachrede.",
+      "explanation": "Allah lehrt, beim Betreten von Häusern mit einem guten und gesegneten Gruß zu grüßen.",
       "sourceType": "Qurʾān",
-      "source": "Qurʾān 49:12",
+      "source": "Qurʾān 24:61",
       "status": "published",
       "reviewStatus": "approved",
       "verification": "approved"
