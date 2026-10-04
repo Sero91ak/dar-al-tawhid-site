@@ -68,6 +68,11 @@ execFileSync(process.execPath, [path.join(__dirname, "validate-canonical-content
   stdio: "inherit"
 });
 
+execFileSync(process.execPath, [path.join(__dirname, "verify-global-share-design.js")], {
+  cwd: root,
+  stdio: "inherit"
+});
+
 execFileSync(process.execPath, [path.join(__dirname, "verify-global-share-standard.js")], {
   cwd: root,
   stdio: "inherit"
