@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD Kids · full quiz catalog v1 */
+/* DĀR AL TAWḤĪD Kids · full quiz catalog v2 */
 .quiz-library-toolbar{
   display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;
   margin:2px 0 10px;padding:10px 11px;border:1px solid rgba(255,255,255,.09);
@@ -63,21 +63,42 @@
 .quiz-library-question{display:block;font-size:14px;line-height:1.35;font-weight:900;letter-spacing:-.01em}
 .quiz-library-audio{
   border:0;border-left:1px solid rgba(255,255,255,.075);background:rgba(226,189,114,.065);
-  color:#f7d98f;font-size:19px;font-weight:900;cursor:pointer
+  color:#f7d98f;font-size:19px;font-weight:900;cursor:pointer;display:grid;place-items:center;align-content:center;gap:2px;
+  min-width:48px;transition:background .14s ease,opacity .14s ease
 }
-.quiz-library-audio:active,.quiz-library-open:active{background:rgba(255,255,255,.075)}
+.quiz-library-audio small{display:none;font-size:8px;line-height:1;font-weight:950;letter-spacing:.02em}
+.quiz-library-audio.voice-ready{background:linear-gradient(180deg,rgba(226,189,114,.11),rgba(226,189,114,.055))}
+.quiz-library-audio.voice-loading,.quiz-library-audio.voice-missing{color:var(--soft);background:rgba(255,255,255,.025)}
+.quiz-library-audio[disabled]{cursor:default;opacity:.62}
+.quiz-library-audio:active:not([disabled]),.quiz-library-open:active{background:rgba(255,255,255,.075)}
+.quiz-library-more{
+  display:none;width:100%;min-height:48px;margin:10px 0 2px;border:1px solid rgba(226,189,114,.20);border-radius:17px;
+  background:rgba(226,189,114,.09);color:#f6d994;font-size:12px;font-weight:950;cursor:pointer
+}
+.quiz-library-more.show{display:block}
 .quiz-library-empty{text-align:center;padding:34px 20px;color:var(--muted);font-size:13px;line-height:1.5}
 #quizModal.quiz-library-mode .quiz-progress,#quizModal.quiz-library-mode #quizBody{display:none!important}
 #quizModal.quiz-library-mode .quiz-library-toolbar{margin-bottom:8px}
 #quizModal[data-quiz-band="4-6"] .quiz-library-question{font-size:17px;line-height:1.3}
-#quizModal[data-quiz-band="4-6"] .quiz-library-row{grid-template-columns:minmax(0,1fr) 58px;border-radius:21px}
-#quizModal[data-quiz-band="4-6"] .quiz-library-audio{font-size:23px}
+#quizModal[data-quiz-band="4-6"] .quiz-library-row{grid-template-columns:68px minmax(0,1fr);border-radius:21px;min-height:82px}
+#quizModal[data-quiz-band="4-6"] .quiz-library-open{grid-column:2;grid-row:1;padding:13px 14px 13px 11px}
+#quizModal[data-quiz-band="4-6"] .quiz-library-audio{
+  grid-column:1;grid-row:1;border-left:0;border-right:1px solid rgba(255,255,255,.075);font-size:24px;min-width:68px
+}
+#quizModal[data-quiz-band="4-6"] .quiz-library-audio small{display:block;font-size:9px}
 #quizModal[data-quiz-band="4-6"] .quiz-library-state{display:none}
+#quizModal[data-quiz-band="4-6"] .quiz-library-meta span{display:none}
+#quizModal[data-quiz-band="7-8"] .quiz-library-row{min-height:72px}
 #quizModal[data-quiz-band="9-10"] .quiz-library-question{font-size:13px}
+#quizModal[data-quiz-band="9-10"] .quiz-library-row{min-height:64px}
 @media(max-width:430px){
   .quiz-library-toolbar{grid-template-columns:1fr;gap:8px}
   .quiz-library-modes{display:grid;grid-template-columns:1fr 1fr}
   .quiz-library-modes button{min-height:38px}
+  .quiz-library-hero{height:122px;border-radius:22px}
+  .quiz-library-tools{padding-bottom:8px}
+  .quiz-library-search{min-height:44px}
+  .quiz-library-row{content-visibility:auto;contain-intrinsic-size:78px}
 }
 @media(min-width:700px){
   .quiz-library-list{grid-template-columns:repeat(2,minmax(0,1fr))}
