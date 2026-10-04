@@ -311,13 +311,15 @@ async function waitGenerationJob(jobId){
   }
   throw Error("Audio-Auftrag hat das Zeitlimit überschritten.");
 }
-function startRenderProgressPolling(){
+function startRenderProgressPolling(jobId){
   let busy=false;
   return setInterval(async()=>{
     if(!state.generating||busy)return;
     busy=true;
     try{
       const rr=await api("/render-status");const st=await rr.json();
+      const statusJob=String(st?.render_job_id||"").trim();
+      if(statusJob&&jobId&&statusJob!==jobId)return;
       const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
       const done=Number(st.render_completed_segments||0),total=Number(st.render_total_segments||0);
       $("#generateBtn").textContent=pct>0?("Erzeuge "+pct+"%"+(total?" · "+done+"/"+total:"")):"Erzeuge …";
@@ -335,7 +337,8 @@ async function applyGenerationJobResult(job,useLibrary,{autoplayIfShort=true}={}
   const blob=await r.blob();
   try{
     const sr=await api("/render-status");const ss=await sr.json();
-    if(ss?.render_preview_ready)activateLivePreview(ss);
+    const statusJob=String(ss?.render_job_id||"").trim();
+    if(ss?.render_preview_ready&&(!statusJob||statusJob===String(job?.jobId||state.activeJobId||"")))activateLivePreview(ss);
   }catch(_){}
   if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);
   state.audioBlob=blob;state.audioUrl=URL.createObjectURL(blob);state.finalReady=true;
@@ -351,7 +354,7 @@ async function applyGenerationJobResult(job,useLibrary,{autoplayIfShort=true}={}
 async function monitorGenerationJob(jobId,useLibrary,{resumed=false}={}){
   state.activeJobId=jobId;state.generating=true;
   $("#generateBtn").disabled=true;$("#generateBtn").textContent=resumed?"Fortsetzen …":"Erzeuge …";
-  const progressTimer=startRenderProgressPolling();
+  const progressTimer=startRenderProgressPolling(jobId);
   try{
     const job=await waitGenerationJob(jobId);
     await applyGenerationJobResult(job,useLibrary,{autoplayIfShort:!resumed});
