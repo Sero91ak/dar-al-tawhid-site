@@ -93,6 +93,9 @@ jobs:
               'showPronunciationIssues',
               'waitGenerationJob(jobId,st=>applyRenderProgress(st,jobId))',
               'prefetchCandidate',
+              'wordResultSerial',
+              'go("pronunciation",{skipCatalog:true})',
+              'requestSerial!==state.wordResultSerial',
               'incremental-chunks-v1',
               'Zum Home-Bildschirm',
           ]
