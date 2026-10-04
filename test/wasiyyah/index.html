@@ -1716,8 +1716,8 @@
       const root=$("#pdfResult");
       if(root){root.classList.add("show");root.innerHTML="<p>Die textbasierte A4-Ausgabe wird geöffnet. Text bleibt markierbar, durchsuchbar und sauber druckbar.</p>"}
       const target=location.pathname.indexOf("/test/")===0?"/test/wasiyyah/pdf-render/?print=1":"/wasiyyah/pdf-render/?print=1";
-      const opened=window.open(target,"_blank","noopener");
-      if(!opened)location.href=target;
+      const opened=window.open(target,"_blank");
+      if(opened){try{opened.opener=null}catch(e){}}else location.href=target;
     }
     function renderEvidence(){const root=$("#evidenceList");root.innerHTML="";KNOWLEDGE.forEach(([title,answer,source])=>{const div=document.createElement("article");div.className="evidence-item";div.innerHTML="<strong>"+esc(title)+"</strong><p>"+esc(answer)+"</p><p><b>Quelle:</b> "+esc(source)+"</p>";root.appendChild(div)})}
     function renderProgress(){const root=$("#progressList");root.innerHTML="";phases.forEach((p,i)=>{const li=document.createElement("li");li.textContent=(i+1)+". "+p[1];if(i===state.phaseIndex)li.classList.add("active");if(i<state.phaseIndex)li.classList.add("done");root.appendChild(li)});const currentPhase=phases[state.phaseIndex]||phases[0];const title=$("#compactPhaseTitle");const count=$("#compactPhaseCount");const fill=$("#compactProgressFill");if(title)title.textContent=currentPhase[1];if(count)count.textContent="Schritt "+(state.phaseIndex+1)+" von "+phases.length;if(fill)fill.style.width=Math.max(3,((state.phaseIndex+1)/phases.length)*100)+"%"}
