@@ -12,7 +12,6 @@ on:
       - cloudflare/voice-studio-web.js
       - cloudflare/voice-studio-gpu-gateway.js
       - cloudflare/ilm-research.js
-      - cloudflare/share-image.js
       - cloudflare/wrangler.toml
       - cloudflare/prayer-push-*.js
       - cloudflare/prayer-status-store.js
@@ -299,12 +298,11 @@ jobs:
               else
                 echo "::warning::hasOneSignalKey=false – ONESIGNAL_API_KEY_NEW in GitHub Actions Secrets setzen"
               fi
-              if printf '%s' "$HEALTH" | grep -q '"shareImageAi":true'; then
-                echo "Cloudflare Workers AI Bildgenerator aktiv"
-              elif printf '%s' "$HEALTH" | grep -q '"videoStudioFal":true'; then
-                echo "FAL Bildgenerator als Fallback aktiv"
+              if printf '%s' "$HEALTH" | grep -q '"shareImageMode":"curated-pool-only"' \
+                && printf '%s' "$HEALTH" | grep -q '"shareImageAi":false'; then
+                echo "Bildbeitrag: kuratierte lokale Pools aktiv · KI deaktiviert"
               else
-                echo "::error::Kein Bildgenerator aktiv – weder Workers AI noch FAL"
+                echo "::error::Bildbeitrag-Sicherheitsmodus fehlt – KI muss deaktiviert und curated-pool-only aktiv sein"
                 exit 1
               fi
               exit 0
@@ -314,49 +312,25 @@ jobs:
           echo "::error::Worker-Binding nach Deploy nicht aktiv ( /health nicht ok )"
           exit 1
 
-      - name: Bildbeitrag End-to-End Smoke Test
+      - name: Bildbeitrag KI-Sperre verifizieren
         shell: bash
         run: |
           set -euo pipefail
           API="https://dar-admin-publisher.sero91ak.workers.dev/api/share-image/background"
-          smoke_image() {
-            local profile="$1"
-            local payload="$2"
-            local label="$3"
-            local headers="$RUNNER_TEMP/share-${profile}.headers"
-            local body="$RUNNER_TEMP/share-${profile}.img"
-            local ok=0
-            for attempt in 1 2 3; do
-              rm -f "$headers" "$body"
-              code="$(curl -sS --max-time 55 -D "$headers" -o "$body" -w '%{http_code}' \
-                -X POST "$API" \
-                -H 'Content-Type: application/json' \
-                -H 'Accept: image/avif,image/webp,image/png,image/jpeg' \
-                --data "$payload" || true)"
-              ctype="$(awk 'BEGIN{IGNORECASE=1}/^content-type:/{gsub(/\r/,""); print $2; exit}' "$headers" 2>/dev/null || true)"
-              provider="$(awk 'BEGIN{IGNORECASE=1}/^x-dar-share-provider:/{gsub(/\r/,""); print $2; exit}' "$headers" 2>/dev/null || true)"
-              share_profile="$(awk 'BEGIN{IGNORECASE=1}/^x-dar-share-profile:/{gsub(/\r/,""); print $2; exit}' "$headers" 2>/dev/null || true)"
-              size="$(wc -c < "$body" 2>/dev/null || echo 0)"
-              echo "$label Versuch $attempt: HTTP=$code type=$ctype provider=$provider profile=$share_profile bytes=$size"
-              if [ "$code" = "200" ] && printf '%s' "$ctype" | grep -qi '^image/' && [ "$size" -gt 10000 ]; then
-                if [ "$profile" = "women-historical" ] && [ "$share_profile" != "women-historical" ]; then
-                  echo "::warning::$label lieferte unerwartetes Profil '$share_profile'"
-                else
-                  ok=1
-                  break
-                fi
-              fi
-              sleep $((attempt * 3))
-            done
-            if [ "$ok" -ne 1 ]; then
-              echo "::error::$label konnte kein gültiges Bild erzeugen"
-              [ -f "$body" ] && head -c 500 "$body" || true
-              exit 1
-            fi
-          }
-          smoke_image "default" '{"title":"Wissen der Salaf","category":"Wissen","body":"Eine geprüfte Aussage über Wissen, Sunnah und Standhaftigkeit.","source":"DĀR AL TAWḤĪD"}' "Standard-Bildbeitrag"
-          smoke_image "women-historical" '{"profile":"women-historical","title":"Wissen und Lernen","category":"Frauen · Wissen","body":"Eine geprüfte Aussage über Wissen und Lernen der frühen muslimischen Frauen.","source":"DĀR AL TAWḤĪD"}' "Frauen-Bildbeitrag"
-          echo "Bildbeitrag End-to-End OK"
+          BODY="$RUNNER_TEMP/share-image-disabled.json"
+          CODE="$(curl -sS --max-time 20 -o "$BODY" -w '%{http_code}' \
+            -X POST "$API" \
+            -H 'Content-Type: application/json' \
+            --data '{"title":"Test"}' || true)"
+          echo "Bildbeitrag-KI-Sperre: HTTP=$CODE"
+          cat "$BODY" || true
+          if [ "$CODE" != "410" ] \
+            || ! grep -q '"disabled":true' "$BODY" \
+            || ! grep -q '"mode":"curated-pool-only"' "$BODY"; then
+            echo "::error::KI-Bildgenerierung für Bildbeiträge ist nicht vollständig gesperrt"
+            exit 1
+          fi
+          echo "Bildbeitrag KI-Sperre OK"
 
       - name: Delayed health recheck (Overwrite-Schutz)
         continue-on-error: true
