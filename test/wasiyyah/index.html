@@ -588,6 +588,209 @@
       .wa-start-topic:last-child{border-bottom:0!important}
     }
 
+  
+    /* WASIYYAH DOCUMENT REVIEW V9 · 2026-10-04 */
+    .wa-summary-reviewbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin:0 0 14px;
+      padding:0 0 12px;
+      border-bottom:1px solid var(--wa-surface-line);
+    }
+    .wa-summary-reviewbar strong{
+      display:block;
+      color:var(--ink);
+      font-family:Georgia,"Times New Roman",serif;
+      font-size:18px;
+      line-height:1.2;
+    }
+    .wa-summary-reviewbar span{
+      display:block;
+      margin-top:3px;
+      color:var(--muted);
+      font-size:11px;
+      font-weight:750;
+    }
+    .wa-edit-toggle{
+      appearance:none;
+      border:1px solid var(--wa-surface-line);
+      border-radius:999px;
+      background:transparent;
+      color:var(--ink);
+      min-height:36px;
+      padding:8px 13px;
+      font:850 11px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      cursor:pointer;
+    }
+    .pdf-template-control>label{margin-bottom:2px}
+    .pdf-template-control select{
+      position:absolute!important;
+      width:1px!important;height:1px!important;
+      opacity:0!important;pointer-events:none!important;
+    }
+    .wa-template-picks{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:8px;
+    }
+    .wa-template-pick{
+      appearance:none;
+      min-width:0;
+      min-height:58px;
+      padding:10px 10px;
+      border:1px solid var(--wa-surface-line);
+      border-radius:14px;
+      background:color-mix(in srgb,var(--paper) 70%,transparent);
+      color:var(--ink);
+      text-align:left;
+      cursor:pointer;
+      font:800 11px/1.25 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      transition:border-color .18s ease,transform .18s ease,background .18s ease;
+    }
+    .wa-template-pick::before{
+      content:"";
+      display:block;
+      width:20px;height:26px;
+      margin-bottom:7px;
+      border:1px solid currentColor;
+      border-radius:3px;
+      opacity:.68;
+      box-shadow:inset 0 -8px 0 color-mix(in srgb,currentColor 7%,transparent);
+    }
+    .wa-template-pick[data-template="royal-blue"]::before{color:#b58b3d;background:#fffaf0}
+    .wa-template-pick[data-template="sand-olive"]::before{color:#66765c;background:#eee4cc}
+    .wa-template-pick[data-template="bordeaux"]::before{color:#7f3447;background:#fff5e9}
+    .wa-template-pick.is-active{
+      border-color:color-mix(in srgb,var(--gold) 78%,transparent);
+      background:color-mix(in srgb,var(--gold) 10%,var(--paper));
+      box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 9%,transparent);
+    }
+
+    .editor-box .print-document{
+      display:block!important;
+      width:100%;
+      margin:12px 0 0;
+      padding:clamp(18px,3vw,30px);
+      border:1px solid var(--wa-surface-line);
+      border-radius:18px;
+      background:#fffaf0;
+      color:#1c2a24;
+      box-shadow:0 16px 38px rgba(35,27,15,.08);
+      font-family:Georgia,"Times New Roman",serif;
+    }
+    .editor-box .print-cover{
+      margin:0 0 22px;
+      padding:0 0 18px;
+      border-bottom:1px solid rgba(181,139,61,.38);
+      text-align:left;
+    }
+    .editor-box .print-brand{
+      color:#8a6828;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      font-size:9px;
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .editor-box .print-title{
+      margin:7px 0 6px;
+      color:#17342f;
+      font-size:clamp(25px,3vw,34px);
+      line-height:1.1;
+      font-weight:700;
+    }
+    .editor-box .print-subtitle{
+      margin:0;
+      max-width:720px;
+      color:#665b49;
+      font-size:12px;
+      line-height:1.52;
+    }
+    .editor-box .print-meta{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap:8px;
+      margin-top:13px;
+      padding-top:10px;
+      border-top:1px solid rgba(181,139,61,.18);
+      color:#89785d;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      font-size:9px;
+    }
+    .editor-box .print-section{
+      margin:0;
+      padding:15px 0;
+      border-bottom:1px solid rgba(181,139,61,.18);
+    }
+    .editor-box .print-section:last-of-type{border-bottom:0}
+    .editor-box .print-section h2{
+      margin:0 0 8px;
+      color:#17342f;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      font-size:10px;
+      line-height:1.3;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .editor-box .print-section p{
+      margin:0 0 7px;
+      color:#28332e;
+      font-size:12px;
+      line-height:1.58;
+    }
+    .editor-box .print-section p:last-child{margin-bottom:0}
+    .editor-box .print-signature{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+      margin-top:18px;
+    }
+    .editor-box .print-line{
+      padding-top:22px;
+      border-top:1px solid #8b806e;
+      color:#716756;
+      font:700 9px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    .editor-box .print-note{
+      margin-top:13px!important;
+      color:#7b705e!important;
+      font:500 9px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+    }
+    .editor-box .print-watermark{
+      margin-top:16px;
+      color:#a79470;
+      text-align:right;
+      font:800 8px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    .editor-box #finalEditor{
+      display:none;
+      margin-top:12px;
+      min-height:560px!important;
+    }
+    .editor-box.wa-editor-open #finalEditor{display:block}
+    .editor-box.wa-editor-open .print-document{display:none!important}
+    .editor-box.wa-editor-open .wa-edit-toggle{background:color-mix(in srgb,var(--gold) 10%,var(--paper))}
+
+    @media(max-width:700px){
+      .wa-summary-reviewbar{align-items:flex-start}
+      .wa-template-picks{grid-template-columns:1fr}
+      .wa-template-pick{
+        display:grid;
+        grid-template-columns:26px 1fr;
+        align-items:center;
+        gap:9px;
+        min-height:48px;
+      }
+      .wa-template-pick::before{margin:0}
+      .editor-box .print-document{padding:17px 15px;border-radius:15px}
+      .editor-box .print-title{font-size:27px}
+      .editor-box .print-section p{font-size:11.5px}
+    }
+
   </style>
 </head>
 <body>
@@ -658,7 +861,7 @@
 
     <section class="panel summary hidden" id="summaryPanel">
       <div class="head"><div><p class="kicker">Prüfung</p><h2>Zusammenfassung & bearbeitbarer Entwurf</h2></div><button class="btn secondary" type="button" data-action="back-to-chat">Zurück zum Chat</button></div>
-      <div class="summary-grid"><div class="box summary-data"><h3>Erfasste Angaben</h3><div id="summaryData"></div></div><div class="box editor-box"><h3>Wasiyyah-Entwurf</h3><div class="pdf-template-control"><label for="pdfTemplateSelect">PDF-Vorlage</label><select id="pdfTemplateSelect"><option value="royal-blue">Elfenbein & Gold</option><option value="sand-olive">Sand & Olive</option><option value="bordeaux">Creme & Bordeaux-Akzent</option></select></div><textarea id="finalEditor" rows="24"></textarea><article id="printDocument" class="print-document" aria-hidden="true"></article><div id="pdfResult" class="pdf-result" aria-live="polite"></div><div class="actions"><button class="btn secondary" type="button" data-action="regenerate-final">Neu aus Angaben erzeugen</button><button class="btn primary" type="button" data-action="print-pdf">PDF erstellen</button></div></div></div>
+      <div class="summary-grid"><div class="box summary-data"><h3>Erfasste Angaben</h3><div id="summaryData"></div></div><div class="box editor-box"><h3>Wasiyyah-Entwurf</h3><div class="wa-summary-reviewbar"><div><strong>Dokumentvorschau</strong><span id="summaryCompleteness">Angaben prüfen und anschließend PDF erstellen.</span></div><button class="wa-edit-toggle" type="button" data-action="toggle-final-editor">Bearbeiten</button></div><div class="pdf-template-control"><label for="pdfTemplateSelect">PDF-Vorlage</label><select id="pdfTemplateSelect" aria-label="PDF-Vorlage"><option value="royal-blue">Elfenbein & Gold</option><option value="sand-olive">Sand & Olive</option><option value="bordeaux">Creme & Bordeaux-Akzent</option></select><div class="wa-template-picks" aria-label="PDF-Vorlage wählen"><button type="button" class="wa-template-pick" data-template="royal-blue">Elfenbein & Gold</button><button type="button" class="wa-template-pick" data-template="sand-olive">Sand & Olive</button><button type="button" class="wa-template-pick" data-template="bordeaux">Creme & Bordeaux</button></div></div><article id="printDocument" class="print-document" aria-live="polite"></article><textarea id="finalEditor" rows="24" aria-label="Waṣiyyah-Entwurf bearbeiten"></textarea><div id="pdfResult" class="pdf-result" aria-live="polite"></div><div class="actions"><button class="btn secondary" type="button" data-action="regenerate-final">Neu aus Angaben erzeugen</button><button class="btn primary" type="button" data-action="print-pdf">PDF erstellen</button></div></div></div>
     </section>
     <div id="toast" class="toast"></div>
   </main>
@@ -736,7 +939,8 @@
     function sectionTitle(line){return /^\d+\.\s+/.test(line)||/^(ISLAMISCHE WASIYYAH-ERKLÄRUNG|Ort:|Datum:|Unterschrift:)/i.test(line)}
     function buildPrintDocument(text){const root=$("#printDocument");if(!root)return;const lines=String(text||"").replace(/\r/g,"").split("\n");const sections=[];let current=null;for(const raw of lines){const line=raw.trim();if(!line)continue;if(line==="ISLAMISCHE WASIYYAH-ERKLÄRUNG")continue;if(sectionTitle(line)){if(current)sections.push(current);current={title:line,body:[]}}else{if(!current)current={title:"Wasiyyah-Erklärung",body:[]};current.body.push(line)}}if(current)sections.push(current);const now=new Date().toLocaleDateString("de-DE");const parts=[];parts.push('<header class="print-cover"><div class="print-brand">DAR AL TAWḤID · Islamische Wasiyyah-Erklärung</div><h1 class="print-title">Wasiyyah-Entwurf</h1><p class="print-subtitle">Islamische Erklärung zur geordneten Festhaltung von Schulden, Amānāt, Ansprechpartnern, Janāzah-Wünschen und persönlichen Hinweisen.</p><div class="print-meta"><span>Erstellt am '+escPlain(now)+'</span><span>dar-al-tawhid.de</span></div></header>');sections.forEach(sec=>{const isSources=/QUELLEN/i.test(sec.title);const isSignature=/^(Ort:|Datum:|Unterschrift:)/i.test(sec.title);if(isSignature)return;parts.push('<section class="print-section '+(isSources?'print-sources':'')+'"><h2>'+escPlain(sec.title)+'</h2>'+sec.body.map(p=>'<p>'+escPlain(p)+'</p>').join('')+'</section>')});parts.push('<section class="print-section"><h2>Ort, Datum und Unterschrift</h2><div class="print-signature"><div class="print-line">Ort / Datum</div><div class="print-line">Unterschrift</div></div><p class="print-note">Hinweis: Diese islamische Wasiyyah-Erklärung ersetzt keine staatliche Rechtsberatung und keine gesetzliche Formprüfung.</p></section><div class="print-watermark">DAR AL TAWḤID · dar-al-tawhid.de</div>');root.innerHTML=parts.join("")}
     function selectedPdfTemplate(){return localStorage.getItem("wasiyyahPdfTemplate")||"royal-blue"}
-    function setupPdfTemplate(){const select=$("#pdfTemplateSelect");if(!select)return;select.value=selectedPdfTemplate();select.addEventListener("change",()=>localStorage.setItem("wasiyyahPdfTemplate",select.value))}
+    function syncPdfTemplatePicks(){const selected=selectedPdfTemplate();document.querySelectorAll(".wa-template-pick").forEach(btn=>btn.classList.toggle("is-active",btn.dataset.template===selected))}
+    function setupPdfTemplate(){const select=$("#pdfTemplateSelect");if(!select)return;select.value=selectedPdfTemplate();syncPdfTemplatePicks();select.addEventListener("change",()=>{localStorage.setItem("wasiyyahPdfTemplate",select.value);syncPdfTemplatePicks()});document.querySelectorAll(".wa-template-pick").forEach(btn=>btn.addEventListener("click",()=>{select.value=btn.dataset.template;localStorage.setItem("wasiyyahPdfTemplate",select.value);syncPdfTemplatePicks()}))}
     let pdfBlobUrl="";
     function pdfPayload(){state.finalText=$("#finalEditor").value||state.finalText||finalText();buildPrintDocument(state.finalText);save(false);return{template:selectedPdfTemplate(),finalText:state.finalText,state,createdDate:new Date().toLocaleDateString("de-DE")}}
     function storePdfPayload(payload){try{const raw=JSON.stringify(payload);sessionStorage.setItem("wasiyyahPdfPayload",raw);localStorage.setItem("wasiyyahPdfPayload",raw)}catch(e){}}
@@ -761,7 +965,7 @@
     function load(){const raw=localStorage.getItem(STORAGE_KEY);if(!raw){toast("Kein lokaler Entwurf gefunden.");return}try{state={...emptyDraft(),...JSON.parse(raw)};showPanel("chat");renderProgress();renderMessages();const p=current();$("#phaseKicker").textContent="Phase "+(state.phaseIndex+1)+" von "+phases.length;$("#phaseTitle").textContent=p[1];toast("Entwurf geladen.")}catch(e){toast("Entwurf konnte nicht geladen werden.")}}
     function clearDraft(){if(!confirm("Lokalen Wasiyyah-Entwurf wirklich löschen?"))return;localStorage.removeItem(STORAGE_KEY);state=emptyDraft();$("#chatMessages").innerHTML="";renderProgress();showPanel("start");toast("Entwurf gelöscht.")}
     function finalText(){const flags=state.reviewFlags.length?state.reviewFlags.map((f,i)=>(i+1)+". "+f).join("\n"):"Keine besonderen Prüfhinweise erfasst.";return "ISLAMISCHE WASIYYAH-ERKLÄRUNG\n\nDiese Erklärung wurde als islamische Wasiyyah vorbereitet. Sie dient der Klärung meiner Wünsche, meiner Schulden, Amānāt, Ansprechpartner und islamischen Anweisungen. Für staatliche Wirksamkeit sind die jeweiligen gesetzlichen Formen separat zu beachten.\n\n1. PERSÖNLICHE ANGABEN\n\n"+(state.personal||"Keine Angaben erfasst.")+"\n\n2. GLAUBE UND GRUNDLAGE\n\n"+(state.faithDeclaration||"Ich bezeuge, dass es keinen anbetungswürdigen Gott gibt außer Allāh und dass Muḥammad ﷺ Sein Diener und Gesandter ist. Ich wünsche, dass meine Angelegenheiten nach Qurʾān, authentischer Sunnah und dem Verständnis der frühen Muslime geregelt werden.")+"\n\n3. FAMILIE UND MÖGLICHE ERBEN\n\n"+(state.family||"Keine Angaben erfasst.")+"\n\nHinweis: Die endgültige Farāʾiḍ-Verteilung hängt von den tatsächlich lebenden Erben zum Todeszeitpunkt ab.\n\n4. SCHULDEN UND OFFENE RECHTE\n\n"+(state.debts||"Keine bekannten Schulden oder offenen Rechte erfasst.")+"\n\n5. AMĀNĀT UND ANVERTRAUTE DINGE\n\n"+(state.amanat||"Keine bekannten Amānāt erfasst.")+"\n\n6. VERMÖGEN UND WICHTIGE DOKUMENTE\n\n"+(state.assets||"Keine Angaben erfasst.")+"\n\n7. ZAKĀH UND RELIGIÖSE PFLICHTEN\n\n"+(state.religiousObligations||"Keine Angaben erfasst.")+"\n\n8. WASIYYAH BIS MAXIMAL EIN DRITTEL\n\n"+(state.bequests||"Keine besondere Wasiyyah erfasst.")+"\n\n9. JANĀZAH NACH SUNNAH\n\n"+(state.janazah||"Ich wünsche Ghusl, Kafan, Ṣalāt al-Janāzah und Beerdigung auf einem muslimischen Grabfeld, soweit möglich.")+"\n\n10. NICHT GEWÜNSCHTE NEUERUNGEN UND ZEREMONIEN\n\n"+(state.bidahRestrictions||"Ich wünsche ausdrücklich, dass alles nach Qurʾān, authentischer Sunnah und dem Verständnis der frühen Muslime erfolgt. Ich lehne Schirk, Bidʿah, unbelegte religiöse Zeremonien, übertriebenes Trauern, Musik, Klagegeschrei, Grab-Bauten, Kuppeln, Bilder, Statuen und jede Handlung ab, die dem Tauḥīd und der Sunnah widerspricht.")+"\n\n11. KINDER / VORMUNDSCHAFT / PRIVATE WÜNSCHE\n\n"+(state.guardianship||"Keine Angaben erfasst.")+"\n\n12. ANSPRECHPARTNER / WASIYY\n\n"+(state.contacts||"Keine Angaben erfasst.")+"\n\n13. PRIVATE HINWEISE AN ANGEHÖRIGE\n\n"+(state.privateNotes||"Ich bitte meine Angehörigen, mit Taqwā, Ruhe und Gerechtigkeit zu handeln, Streit zu vermeiden und bei Unsicherheit fachkundige Menschen von Ahl al-Sunnah zu fragen.")+"\n\n14. PRÜFHINWEISE\n\n"+flags+"\n\n15. QUELLEN-KURZHINWEIS\n\n- Qurʾān 4:11-12: Erbanteile und Reihenfolge nach Wasiyyah/Schuld.\n- Ṣaḥīḥ al-Bukhārī 2738: Wasiyyah nicht aufschieben.\n- Ṣaḥīḥ al-Bukhārī 2742: Ein Drittel, und ein Drittel ist viel.\n- Sunan Abī Dāwūd 2870: Keine Wasiyyah für einen Erben.\n- Ṣaḥīḥ al-Bukhārī 6732: Farāʾiḍ den Berechtigten geben.\n- Ṣaḥīḥ al-Bukhārī 6764: Unterschied der Religion als Erbhindernis.\n- Jāmiʿ at-Tirmidhī 1078: Ernst der Schulden.\n- Ṣaḥīḥ Muslim 970a und 969a: Regeln zu Gräbern und Verbot von Übertreibung.\n- Ṣaḥīḥ al-Bukhārī 1294: Warnung vor Jāhiliyyah-Trauerritualen.\n\nOrt: ______________________________\n\nDatum: ____ / ____ / _____________\n\nUnterschrift: _______________________"}
-    function renderSummary(){const rows=[["Persönliche Angaben",state.personal],["Glaube & Grundlage",state.faithDeclaration],["Familie",state.family],["Schulden",state.debts],["Amānāt",state.amanat],["Vermögen",state.assets],["Religiöse Pflichten",state.religiousObligations],["Wasiyyah",state.bequests],["Janāzah",state.janazah],["Keine Bidʿah/Zeremonien",state.bidahRestrictions],["Kinder/Vormundschaft",state.guardianship],["Ansprechpartner",state.contacts],["Private Hinweise",state.privateNotes],["Prüfhinweise",state.reviewFlags.join("\n")]];const box=$("#summaryData");box.innerHTML="";rows.forEach(r=>{const div=document.createElement("div");div.className="row";div.innerHTML="<b>"+esc(r[0])+"</b><span>"+esc(r[1]||"—")+"</span>";box.appendChild(div)})}
+    function renderSummary(){const rows=[["Persönliche Angaben",state.personal],["Glaube & Grundlage",state.faithDeclaration],["Familie",state.family],["Schulden",state.debts],["Amānāt",state.amanat],["Vermögen",state.assets],["Religiöse Pflichten",state.religiousObligations],["Wasiyyah",state.bequests],["Janāzah",state.janazah],["Keine Bidʿah/Zeremonien",state.bidahRestrictions],["Kinder/Vormundschaft",state.guardianship],["Ansprechpartner",state.contacts],["Private Hinweise",state.privateNotes],["Prüfhinweise",state.reviewFlags.join("\n")]];const box=$("#summaryData");box.innerHTML="";rows.forEach(r=>{const div=document.createElement("div");div.className="row";div.innerHTML="<b>"+esc(r[0])+"</b><span>"+esc(r[1]||"—")+"</span>";box.appendChild(div)});const filled=rows.slice(0,13).filter(r=>String(r[1]||"").trim()).length;const complete=$("#summaryCompleteness");if(complete)complete.textContent=filled+" von 13 Bereichen mit eigenen Angaben · vor PDF bitte prüfen."}
     function showSummary(){state.finalText=finalText();renderSummary();$("#finalEditor").value=state.finalText;buildPrintDocument(state.finalText);setAppMode("summary");panels.start.classList.add("hidden");panels.evidence.classList.add("hidden");panels.chat.classList.remove("hidden");panels.summary.classList.remove("hidden");requestAnimationFrame(()=>panels.summary.scrollIntoView({behavior:"smooth",block:"start"}))}
     function setKeyboardDock(open){document.body.classList.toggle("wa-keyboard",open);if(open)updateKeyboardDock()}
     function updateKeyboardDock(){const vv=window.visualViewport;if(!vv){document.documentElement.style.setProperty("--wa-keyboard-bottom","0px");return}const keyboard=Math.max(0,window.innerHeight-vv.height-vv.offsetTop);document.documentElement.style.setProperty("--wa-keyboard-bottom",Math.round(keyboard)+"px")}
@@ -769,7 +973,7 @@
     function setupKeyboardDock(){const input=$("#chatInput");if(!input)return;input.addEventListener("input",resizeChatInput);input.addEventListener("focus",()=>{setKeyboardDock(true);resizeChatInput()});input.addEventListener("blur",()=>setTimeout(()=>setKeyboardDock(false),180));if(window.visualViewport){window.visualViewport.addEventListener("resize",()=>{if(document.body.classList.contains("wa-keyboard"))updateKeyboardDock()});window.visualViewport.addEventListener("scroll",()=>{if(document.body.classList.contains("wa-keyboard"))updateKeyboardDock()})}}
     function start(){state=emptyDraft();showPanel("chat");renderProgress();ask()}
     $("#chatForm").addEventListener("submit",e=>{e.preventDefault();const input=$("#chatInput");const answer=input.value.trim();if(!answer){toast("Bitte zuerst eine Antwort eingeben.");return}input.value="";resizeChatInput();handle(answer);requestAnimationFrame(()=>{const box=$("#chatMessages");if(box)box.scrollTop=box.scrollHeight;updateKeyboardDock();input.focus()})});
-    document.addEventListener("click",e=>{const action=e.target.closest("[data-action]")?.dataset.action;if(!action)return;if(action==="start-chat")start();if(action==="show-evidence"){renderEvidence();panels.evidence.classList.remove("hidden")}if(action==="hide-evidence")panels.evidence.classList.add("hidden");if(action==="load-draft")load();if(action==="save-draft")save(true);if(action==="clear-draft")clearDraft();if(action==="show-summary")showSummary();if(action==="back-to-chat")showPanel("chat");if(action==="regenerate-final"){state.finalText=finalText();$("#finalEditor").value=state.finalText;buildPrintDocument(state.finalText);toast("Entwurf neu erzeugt.")}if(action==="print-pdf")openPdfRender();if(action==="previous-question"){if(state.phaseIndex>0){state.phaseIndex--;ask();save(false)}}if(action==="toggle-progress-details"){document.body.classList.toggle("wa-progress-open");const b=e.target.closest("[data-action='toggle-progress-details']");if(b)b.textContent=document.body.classList.contains("wa-progress-open")?"Schritte ausblenden":"Alle Schritte anzeigen"}if(action==="app-back")location.href=(location.pathname.indexOf("/test/")===0?"/test/#more":"/#more")});
+    document.addEventListener("click",e=>{const action=e.target.closest("[data-action]")?.dataset.action;if(!action)return;if(action==="start-chat")start();if(action==="show-evidence"){renderEvidence();panels.evidence.classList.remove("hidden")}if(action==="hide-evidence")panels.evidence.classList.add("hidden");if(action==="load-draft")load();if(action==="save-draft")save(true);if(action==="clear-draft")clearDraft();if(action==="show-summary")showSummary();if(action==="back-to-chat")showPanel("chat");if(action==="regenerate-final"){state.finalText=finalText();$("#finalEditor").value=state.finalText;buildPrintDocument(state.finalText);toast("Entwurf neu erzeugt.")}if(action==="print-pdf")openPdfRender();if(action==="previous-question"){if(state.phaseIndex>0){state.phaseIndex--;ask();save(false)}}if(action==="toggle-progress-details"){document.body.classList.toggle("wa-progress-open");const b=e.target.closest("[data-action='toggle-progress-details']");if(b)b.textContent=document.body.classList.contains("wa-progress-open")?"Schritte ausblenden":"Alle Schritte anzeigen"}if(action==="toggle-final-editor"){const box=e.target.closest(".editor-box");if(box){box.classList.toggle("wa-editor-open");const b=e.target.closest("[data-action='toggle-final-editor']");if(b)b.textContent=box.classList.contains("wa-editor-open")?"Vorschau":"Bearbeiten"}}if(action==="app-back")location.href=(location.pathname.indexOf("/test/")===0?"/test/#more":"/#more")});
     $("#finalEditor").addEventListener("input",e=>buildPrintDocument(e.target.value));
     applyTheme();
     setupKeyboardDock();
