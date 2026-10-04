@@ -1106,7 +1106,7 @@ body.is-library-reader-route .float-actions {
 
 /* DAR_LIBRARY_CLASSIC_CINEMATIC_V1224 */
 :root{
-  --dar-lib-cinema-image:url("/assets/dar-3d-icons/dar-home-hero-library-4k.png");
+  --dar-lib-cinema-image:url("/test/assets/home-v1190/library-mobile-runway.jpg");
   --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 96%,transparent);
   --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 78%,transparent);
   --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 42%,transparent);
@@ -1787,4 +1787,12 @@ html[data-theme="light"] .lib-detail .lib-detail-hero{
 @media(prefers-reduced-motion:reduce){
   .lib-page[data-library-root] .lib-hero,
   .lib-detail .lib-detail-hero{animation:none}
+}
+
+
+/* DAR_LIBRARY_WIDE_IMAGE_V1220 */
+@media(min-width:720px){
+  :root{
+    --dar-lib-cinema-image:url("/test/assets/home-v1193/library-study-runway.jpg");
+  }
 }
