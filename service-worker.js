@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1101';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1102';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -49,7 +49,7 @@ const APP_SHELL = [
   '/apple-tv/quran/tadabbur/entries-index.json',
   '/assets/quran-tadabbur-shared.js',
   '/assets/bottom-nav-global-v1075.css',
-  '/assets/site-analytics.js'
+  '/assets/site-analytics.js',\n  '/assets/dar-global-share-v1225.js',\n  '/assets/dar-global-share-v1225.css',\n  '/assets/app-store-icon-fixed.svg',\n  '/kids/assets/prophet-scenes/library.webp',\n  '/kids/assets/prophet-scenes/desert.webp',\n  '/kids/assets/prophet-scenes/mountain.webp',\n  '/kids/assets/prophet-scenes/night.webp',\n  '/kids/assets/prophet-scenes/royal.webp',\n  '/kids/assets/prophet-scenes/garden.webp',\n  '/kids/assets/prophet-scenes/water.webp',\n  '/kids/assets/prophet-scenes/ocean.webp'
 ];
 
 let bypassPostCacheUntil = 0;
