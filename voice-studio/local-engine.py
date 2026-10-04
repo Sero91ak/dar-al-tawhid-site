@@ -5325,12 +5325,22 @@ def load_model(force_device=None):
         try:
             import torch
             from chatterbox.mtl_tts import ChatterboxMultilingualTTS
+            if str(target).startswith("cuda"):
+                try:
+                    torch.backends.cuda.matmul.allow_tf32=True
+                    torch.backends.cudnn.allow_tf32=True
+                    torch.set_float32_matmul_precision("high")
+                except Exception as e:
+                    print("[DĀR Voice] CUDA TF32 setup warning:",e,flush=True)
             # Beim Gerätewechsel altes Modell freigeben.
             if MODEL is not None:
                 MODEL=None
                 gc.collect()
                 if torch.backends.mps.is_available():
                     try: torch.mps.empty_cache()
+                    except Exception: pass
+                if torch.cuda.is_available():
+                    try: torch.cuda.empty_cache()
                     except Exception: pass
 
             # Offizieller Chatterbox-Mac-Workaround: torch.load braucht auf
@@ -5364,6 +5374,7 @@ def load_model(force_device=None):
                 model_device=target,
                 model_loaded_at=time.time(),
                 message=f"Chatterbox V3 auf {target.upper()} bereit",
+                cuda_tf32=bool(str(target).startswith("cuda")),
                 last_error=""
             )
             return MODEL
