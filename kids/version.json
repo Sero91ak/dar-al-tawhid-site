@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v29-quiz650-topics1097",
-  "label": "KIDS · V1.07.35",
-  "releasedAt": "2026-10-04T09:55:00Z",
-  "note": "Der eingefrorene DĀR AL TAWḤĪD Kids Quizbestand mit 650 Fragen nutzt jetzt zusätzlich sieben realistische, lokal/offline gebündelte Themenbildwelten. Die Bildauswahl richtet sich automatisch nach Frage, Szene und Kategorie; 4–6 bleibt heller und einfacher, 7–8 spielerisch und 9–10 ruhiger und kompakter. Serhat-Owner-Voice, Vollkatalog, Quellen und die kurze Quizrunde bleiben unverändert.",
+  "buildId": "kids-shell-v30-quiz650-catalog1097",
+  "label": "KIDS · V1.07.36",
+  "releasedAt": "2026-10-04T10:02:00Z",
+  "note": "Der eingefrorene Kids-Quizbestand mit 650 Fragen bleibt unverändert. Der vollständige Fragenkatalog ist jetzt auf iPhone und iPad leichter: zunächst werden nur 40 Treffer gerendert und weitere Fragen schrittweise nachgeladen; Suche berücksichtigt auch Quellen, und jede Frage zeigt den Status der Serhat-Owner-Voice ohne Systemstimmen-Fallback. Die sieben realistischen Themenbildwelten und die altersgerechte Quizdarstellung bleiben aktiv.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -341,7 +341,7 @@
       "fullQuestionCatalogOwnerVoice": true,
       "shortQuizRoundsPreserved": true,
       "noNewQuestionsInThisRelease": true,
-      "catalogAssetVersion": 1,
+      "catalogAssetVersion": 2,
       "latestContentPack": "601-650",
       "questionGenerationPaused": true,
       "questionGenerationCap": 650,
@@ -358,7 +358,13 @@
       "topicArtworkCount": 7,
       "topicArtworkCategoryRouting": true,
       "topicArtworkSceneRouting": true,
-      "ageToneAdaptive": true
+      "ageToneAdaptive": true,
+      "catalogIncrementalRender": true,
+      "catalogInitialRenderCount": 40,
+      "catalogLoadMoreStep": 40,
+      "catalogOwnerVoiceStatus": true,
+      "catalogSearchIncludesSource": true,
+      "catalogYoungAudioPrimary": true
     },
     "kidsQuizContentRevision": "001-650",
     "kidsQuizGenerationPaused": true,
