@@ -5,7 +5,7 @@ const path = require("path");
 
 const root = path.resolve(__dirname, "..");
 const failures = [];
-
+const obsoleteShareLibrary = path.join(root, "data/share-background-library.json");\nif (fs.existsSync(obsoleteShareLibrary)) failures.push("data/share-background-library.json darf nicht mehr existieren");\n
 function file(rel) {
   const abs = path.join(root, rel);
   if (!fs.existsSync(abs)) {
