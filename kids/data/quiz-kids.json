@@ -1774,26 +1774,23 @@
     }
   ],
   "artwork": {
-    "source": "Adobe Creative Cloud",
-    "delivery": "age-adaptive-quiz-scene",
-    "offlineCache": "service-worker-runtime-cache",
+    "source": "DĀR AL TAWḤĪD local generated artwork",
+    "delivery": "age-adaptive-quiz-scene-local",
+    "offlineCache": "service-worker-precache",
     "ageBands": {
       "4-6": {
-        "assetId": "urn:aaid:sc:EU:8fd2faa3-ffe4-4668-a140-31f89f32d3b4",
-        "url": "https://at.adobe.com/62urgjkDHYmk61s8",
-        "position": "50% 50%",
+        "url": "/kids/assets/quiz-scenes/quiz-4-6.svg?v=20261004-real1",
+        "position": "50% 54%",
         "tone": "playful-bright"
       },
       "7-8": {
-        "assetId": "urn:aaid:sc:EU:ba9b65f3-99ae-4252-9571-68e71a7245c5",
-        "url": "https://at.adobe.com/K94NwM0Yll96pYe9",
+        "url": "/kids/assets/quiz-scenes/quiz-7-8.svg?v=20261004-real1",
         "position": "50% 50%",
         "tone": "adventure-learning"
       },
       "9-10": {
-        "assetId": "urn:aaid:sc:EU:eafb8ab1-ce12-4757-a656-3b3ced748327",
-        "url": "https://at.adobe.com/elwjcTvNki8uj6KG",
-        "position": "50% 50%",
+        "url": "/kids/assets/quiz-scenes/quiz-9-10.svg?v=20261004-real1",
+        "position": "50% 48%",
         "tone": "refined-knowledge"
       }
     }
