@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.84"
+ENGINE_VERSION="2.9.85"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -131,6 +131,9 @@ LEARNING_PREVIEWS={}
 LEARNING_PREVIEW_JOB_LOCK=threading.Lock()
 LEARNING_PREVIEW_SERIAL_LOCK=threading.Lock()
 LEARNING_PREVIEW_JOBS={}
+GENERATION_JOB_LOCK=threading.Lock()
+GENERATION_JOBS={}
+GENERATION_JOB_TTL_SECONDS=2*60*60
 ALPHABET_BATCH_STATE={
     "running":False,
     "phase":"idle",
@@ -4225,6 +4228,128 @@ def mobile_history_snapshot(limit:int=60):
     except Exception as e:
         return {"ok":False,"error":str(e),"items":[]}
     return {"ok":True,"items":items,"count":len(items)}
+
+def cleanup_generation_jobs():
+    cutoff=time.time()-GENERATION_JOB_TTL_SECONDS
+    with GENERATION_JOB_LOCK:
+        stale=[
+            job_id for job_id,row in GENERATION_JOBS.items()
+            if str((row or {}).get("state") or "") in ("ready","error")
+            and float((row or {}).get("finishedAt") or 0)<cutoff
+        ]
+        for job_id in stale:
+            GENERATION_JOBS.pop(job_id,None)
+
+def generation_job_snapshot(job_id:str):
+    job_id=str(job_id or "").strip()
+    if not job_id:
+        return {"ok":False,"error":"Audio-Auftrag fehlt."}
+    cleanup_generation_jobs()
+    with GENERATION_JOB_LOCK:
+        row=dict(GENERATION_JOBS.get(job_id) or {})
+    if not row:
+        return {"ok":False,"error":"Audio-Auftrag nicht gefunden."}
+    # Niemals lokale absolute Dateipfade an Companion-Geräte ausgeben.
+    row.pop("outputPath",None)
+    row["ok"]=True
+    return row
+
+def _generation_job_worker(job_id:str,payload:dict):
+    with GENERATION_JOB_LOCK:
+        row=GENERATION_JOBS.get(job_id)
+        if not row:
+            return
+        row["state"]="rendering"
+        row["startedAt"]=time.time()
+    text=str(payload.get("text") or "").strip()
+    prepared=str(payload.get("prepared") or "").strip()
+    style=str(payload.get("style") or "auto").strip() or "auto"
+    free_mode=bool(payload.get("freeMode"))
+    free_pronunciation=bool(payload.get("pronunciationLibrary",False))
+    try:
+        out=generate(
+            text,prepared,style,
+            free_mode=free_mode,
+            free_pronunciation=free_pronunciation,
+            interactive_fast=bool(payload.get("interactiveFast",True))
+        )
+        record_mobile_generation(out,text,style,free_mode)
+        st=Path(out).stat()
+        with GENERATION_JOB_LOCK:
+            row=GENERATION_JOBS.get(job_id)
+            if row is not None:
+                row.update({
+                    "state":"ready",
+                    "outputName":Path(out).name,
+                    "outputBytes":int(st.st_size),
+                    "finishedAt":time.time(),
+                    "error":"",
+                })
+    except Exception as e:
+        with GENERATION_JOB_LOCK:
+            row=GENERATION_JOBS.get(job_id)
+            if row is not None:
+                row.update({
+                    "state":"error",
+                    "finishedAt":time.time(),
+                    "error":f"{type(e).__name__}: {e}",
+                })
+
+def start_generation_job(data:dict,free_mode:bool=False):
+    cleanup_generation_jobs()
+    text=str((data or {}).get("text") or "").strip()
+    if not text:
+        raise ValueError("Text fehlt.")
+    style=str((data or {}).get("style") or "auto").strip() or "auto"
+    free_pronunciation=bool((data or {}).get("pronunciationLibrary",False))
+    signature=hashlib.sha256(
+        json.dumps({
+            "text":text,
+            "prepared":str((data or {}).get("prepared") or ""),
+            "style":style,
+            "freeMode":bool(free_mode),
+            "pronunciationLibrary":free_pronunciation,
+        },ensure_ascii=False,sort_keys=True,separators=(",",":")).encode("utf-8")
+    ).hexdigest()
+    with GENERATION_JOB_LOCK:
+        active=[
+            (job_id,row) for job_id,row in GENERATION_JOBS.items()
+            if str((row or {}).get("state") or "") in ("queued","rendering")
+        ]
+        for existing_id,row in active:
+            if str((row or {}).get("signature") or "")==signature:
+                return {
+                    "ok":True,"jobId":existing_id,
+                    "state":str(row.get("state") or "queued"),
+                    "reused":True,
+                }
+        if active:
+            raise RuntimeError("Eine interaktive Audio-Erzeugung läuft bereits.")
+        job_id=uuid.uuid4().hex[:20]
+        GENERATION_JOBS[job_id]={
+            "jobId":job_id,
+            "state":"queued",
+            "signature":signature,
+            "style":style,
+            "freeMode":bool(free_mode),
+            "createdAt":time.time(),
+            "startedAt":0,
+            "finishedAt":0,
+            "outputName":"",
+            "outputBytes":0,
+            "error":"",
+        }
+    payload=dict(data or {})
+    payload["text"]=text
+    payload["style"]=style
+    payload["freeMode"]=bool(free_mode)
+    threading.Thread(
+        target=_generation_job_worker,
+        args=(job_id,payload),
+        daemon=True,
+        name="dar-interactive-generate-"+job_id[:8],
+    ).start()
+    return {"ok":True,"jobId":job_id,"state":"queued","reused":False}
 
 def get_status():
     with STATUS_LOCK:
@@ -8710,6 +8835,10 @@ class H(BaseHTTPRequestHandler):
             })
         elif p=="/render-status":
             self.send_json(200,{"ok":True,**render_status_snapshot()})
+        elif p=="/generate-job":
+            qs=parse_qs(urlparse(self.path).query)
+            snap=generation_job_snapshot(str((qs.get("id") or [""])[0]))
+            self.send_json(200 if snap.get("ok") else 404,snap)
         elif p=="/status":
             self.send_json(200,{"ok":True,**get_status()})
         elif p=="/learning/preview-state":
@@ -9335,6 +9464,15 @@ class H(BaseHTTPRequestHandler):
                 return self.send_json(422,{"ok":False,"error":str(e),"status":get_status()})
             except Exception as e:
                 return self.send_json(500,{"ok":False,"error":str(e),"status":get_status()})
+
+        if p in ("/generate-start","/generate-free-start"):
+            try:
+                result=start_generation_job(data,free_mode=(p=="/generate-free-start"))
+                return self.send_json(202,result)
+            except RuntimeError as e:
+                return self.send_json(409,{"ok":False,"error":str(e)})
+            except Exception as e:
+                return self.send_json(400,{"ok":False,"error":str(e)})
 
         if p in ("/generate","/generate-free"):
             try:
