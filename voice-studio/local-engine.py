@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.81"
+ENGINE_VERSION="2.9.82"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -4004,6 +4004,7 @@ STATUS={
     "render_preview_duration_seconds":0.0,
     "render_preview_generation":0,
     "render_preview_complete":False,
+    "render_first_audio_priority":False,
 }
 
 def set_status(**updates):
@@ -4025,6 +4026,7 @@ def render_status_snapshot():
         "render_cached_segments","segment_elapsed_seconds",
         "render_preview_name","render_preview_ready","render_preview_segments",
         "render_preview_duration_seconds","render_preview_generation","render_preview_complete",
+        "render_first_audio_priority",
     )
     return {key:st.get(key) for key in keys}
 
@@ -5013,6 +5015,31 @@ def _coalesce_kids_story_plan(plan,max_chars:int=230,max_sentences:int=2):
                 continue
         compact.append(("de",value))
     return compact
+
+def prioritize_interactive_first_audio(plan,max_first_chars:int=110):
+    """Interaktive Langtexte liefern bewusst einen kurzen ersten DE-Block.
+
+    Das Gesamtaudio bleibt identisch aufgebaut, aber der erste hörbare Abschnitt
+    soll deutlich früher verfügbar sein. Nur der bereits gebündelte erste
+    deutsche Block wird einmal geteilt; der Rest wird wieder zu einem sicheren
+    Folgeblock zusammengezogen. Arabische Blöcke/Audio-Locks bleiben unangetastet.
+    """
+    rows=list(plan or [])
+    if len(rows)<=1:
+        return rows
+    lang,chunk=rows[0]
+    value=str(chunk or "").strip()
+    limit=max(72,min(140,int(max_first_chars or 110)))
+    if lang!="de" or len(value)<=limit:
+        return rows
+    parts=split_chunks(value,max_chars=limit)
+    if len(parts)<=1:
+        return rows
+    head=str(parts[0] or "").strip()
+    tail=" ".join(str(x or "").strip() for x in parts[1:] if str(x or "").strip()).strip()
+    if not head or not tail:
+        return rows
+    return [("de",head),("de",tail),*rows[1:]]
 
 def build_render_plan(text:str,mode:str=""):
     plan=[]
@@ -6698,13 +6725,17 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             text,speak,lambda value: build_render_plan(value,doc_mode)
         )
 
-    # 2.9.78 Interactive Fast Path: weniger Modellaufrufe, arabische
-    # LOCKED-Formen und Sprachgrenzen bleiben unangetastet.
+    # 2.9.82 Interactive Fast Path: weniger Modellaufrufe, aber ein bewusst
+    # kurzer Startblock für frühes hörbares Audio. Arabische LOCKED-Formen und
+    # Sprachgrenzen bleiben unangetastet.
     if interactive_fast and len(plan)>1:
         fast_chars=280 if doc_mode=="kids_story" else 225
         fast_sentences=3 if doc_mode=="kids_story" else 2
         plan=_coalesce_kids_story_plan(
             plan,max_chars=fast_chars,max_sentences=fast_sentences
+        )
+        plan=prioritize_interactive_first_audio(
+            plan,max_first_chars=118 if doc_mode=="kids_story" else 105
         )
 
     # 2.9.63: "free_mode" bedeutet NICHT automatisch Hintergrundarbeit.
@@ -6767,6 +6798,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         render_preview_duration_seconds=0.0,
         render_preview_generation=0,
         render_preview_complete=False,
+        render_first_audio_priority=bool(interactive_fast and len(plan)>1),
         render_total_segments=0,
         render_completed_segments=0,
         render_active_segment=0,
