@@ -1,4 +1,4 @@
-/* Voice Studio 2.9.96 · fast Kids audio/content workflow */
+/* Voice Studio 2.9.97 · fast Kids audio/content workflow */
 (() => {
 "use strict";
 
@@ -1007,6 +1007,38 @@ function resetDirectAudioSelection(){
 function directAudioReadyForCurrentText(){
   return !!directAudioFile&&!!directAudioAlignment&&directAudioText===voiceScript();
 }
+function directReferenceKind(){
+  if(studioKind==="dua")return"dua";
+  if(studioKind==="narration")return"narration";
+  return"story";
+}
+function localReferenceLearningAvailable(){
+  try{return typeof localRequest==="function"&&typeof IS_LOCAL!=="undefined"&&Boolean(IS_LOCAL)}catch(_){return false}
+}
+async function registerDirectAudioLearning(){
+  if(!directAudioReadyForCurrentText()||!localReferenceLearningAvailable())return null;
+  const dataUrl=await blobToDataUrl(directAudioFile);
+  const id=contentId||("studio-"+Date.now());
+  const ageMin=Math.max(4,Number(q("csAgeMin")?.value||4));
+  const ageMax=Math.max(ageMin,Number(q("csAgeMax")?.value||10));
+  const res=await localRequest("/story-media/upload",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      kind:directReferenceKind(),
+      id,
+      age:ageMin+"-"+ageMax,
+      text:voiceScript(),
+      filename:directAudioFile.name||"serhat-owner-audio",
+      dataUrl,
+      timings:directAudioAlignment?.timings||[],
+      syncMode:directAudioAlignment?.syncMode||""
+    })
+  });
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok||data?.ok===false)throw Error(data?.error||"Audio/Text-Referenz konnte lokal nicht gelernt werden.");
+  return data;
+}
 async function handleDirectAudioFile(file){
   if(!file)return;
   const script=voiceScript();
@@ -1203,6 +1235,13 @@ async function publishDirectKids(){
     const pub=await adminApi("/api/admin/kids-content/publish",{method:"POST",body:JSON.stringify({id:contentId,live:true,sendPush:false,triggerDeploy:true})});
     contentStatus="published";stagingPublished=true;setProductionPhase("live-published");renderStatus();
     setStudioMessage("Live in Kids veröffentlicht. Datei, Text und Mitlese-Synchronisierung sind als ein Paket verbunden.","good");
+    if(directAudioReadyForCurrentText()&&localReferenceLearningAvailable()){
+      registerDirectAudioLearning().then(()=>{
+        console.info("[DĀR Voice] Eigentümer-Audio/Text-Referenz dauerhaft gelernt.");
+      }).catch(e=>{
+        console.warn("[DĀR Voice] Referenzlernen im Hintergrund fehlgeschlagen:",e);
+      });
+    }
     triggerKidsOwnerVoiceSync();
     await loadLibrary(true);
     return pub;
@@ -1491,6 +1530,6 @@ function refreshQa(){
 }
 function paintQa(id,ok,label){const el=q(id);if(!el)return;el.textContent=label;el.className=ok?"good":"warn"}
 
-window.DarContentStudio={mount,fields,loadLibrary,publishTest,publishLive,publishDirectKids,handleDirectAudioFile,generateCover,produce,newCurrentItem,copyCurrentText,goToWorkflowStep,focusNextProductionAction,switchKind};
+window.DarContentStudio={mount,fields,loadLibrary,publishTest,publishLive,publishDirectKids,handleDirectAudioFile,registerDirectAudioLearning,generateCover,produce,newCurrentItem,copyCurrentText,goToWorkflowStep,focusNextProductionAction,switchKind};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
 })();
