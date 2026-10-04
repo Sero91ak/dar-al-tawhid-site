@@ -29,6 +29,8 @@ COPY voice-studio/content-studio.js ./content-studio.js
 COPY voice-studio/mubashshirun-pack.js ./mubashshirun-pack.js
 COPY voice-studio/alphabet-audio-studio.js ./alphabet-audio-studio.js
 COPY voice-studio/voice-studio-icon.png ./voice-studio-icon.png
+COPY app-icon-512.png ./app-icon-512.png
+COPY watermark-my-logo-full.png ./watermark-my-logo-full.png
 
 COPY kids/data/alphabet-audio.json ./alphabet-audio.json
 COPY kids/data/quiz-kids.json ./quiz-kids.json
