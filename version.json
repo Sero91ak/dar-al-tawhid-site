@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1109",
-  "appBuildId": "app-shell-v1109",
-  "note": "v1109 · Besucher-App: globale Share-Engine nochmals erweitert. Auch Propheten-Detailseiten erhalten automatisch WhatsApp, Telegram, Instagram, natives Teilen und Bildbeitrag. Hintergrundmotive werden zusätzlich über eine zentrale lokale Bibliothek registriert, sodass neue freigegebene Bildbeitrag-Motive künftig ohne Umbau der Share-Logik eingebunden werden können. Historische Ṣaḥābah-/Hijaz-/Makkah-/Madīnah-/Bibliotheksmotive rotieren thematisch; Bildexport bleibt 1080×1350 mit Titel, Aussage, Quelle, dar-al-tawhid.de, by Serhat Abu Malik und App-Store-Badge.",
-  "updatedAt": "2026-10-04T14:12:00+02:00"
+  "buildId": "app-shell-v1110",
+  "appBuildId": "app-shell-v1110",
+  "note": "v1110 · Besucher-App: globale Teilen-/Bildbeitrag-Architektur abgeschlossen. Die zentrale Hintergrundbibliothek wird beim Service-Worker-Install automatisch gelesen und alle registrierten historischen Motive werden für Offline-Nutzung gecacht. Propheten-Detailseiten erhalten ebenfalls die professionelle Teilen-Schicht; neue freigegebene Bildhintergründe können künftig zentral registriert werden, ohne die Share-Engine umzubauen.",
+  "updatedAt": "2026-10-04T14:16:00+02:00"
 }
