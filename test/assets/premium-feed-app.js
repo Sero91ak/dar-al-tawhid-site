@@ -3123,7 +3123,9 @@
   async function shareFreshPostFeedItem(item) {
     if (!item) throw new Error('post-feed-item-missing');
     var renderer = global.DARGlobalShare && global.DARGlobalShare.renderFiles;
-    if (typeof renderer !== 'function') throw new Error('fresh-share-renderer-unavailable');
+    if (typeof renderer !== 'function') {
+      throw new Error('fresh-share-renderer-unavailable');
+    }
 
     var files = await renderer({
       kind: 'post',
