@@ -50,7 +50,7 @@ try:
     PORT=int(os.environ.get("DAR_VOICE_PORT",os.environ.get("PORT","8787")) or 8787)
 except Exception:
     PORT=8787
-ENGINE_VERSION="2.9.106"
+ENGINE_VERSION="2.9.107"
 
 def version_tuple(value):
     parts=[]
@@ -516,6 +516,139 @@ BASE_LIB=json.load(PRON.open(encoding="utf-8"))
 VOICE_PROFILE=json.load(PROFILE.open(encoding="utf-8"))
 _BASE_RULES=list(BASE_LIB.get("rules",[]))
 MAX_MASTER_PLS_RULES=load_max_master_pls(PLS_MASTER)
+
+def build_profile_component_rules(profile):
+    """Explizite sichere Teilformen aus bekannten Phrasen als echte Regeln laden.
+
+    Beispiel: Eine bestätigte Gesamtphrase wie
+    "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh" bedeutet auch, dass
+    "Raḥmatullāhi" und "Barakātuh" einzeln nicht erneut als unbekannt gelten.
+    Nutzerbestätigte MASTER-Regeln behalten trotzdem immer Vorrang.
+    """
+    out=[]
+    seen=set()
+    items=list(((profile or {}).get("pronunciation") or {}).get("fixedPhraseComponents") or [])
+    for raw in items:
+        item=dict(raw or {})
+        canonical=str(item.get("canonical") or "").strip()
+        tts=str(item.get("tts_text") or "").strip()
+        lang=str(item.get("tts_language") or ("ar" if re.search(r"[\u0600-\u06ff]",tts) else "de")).strip().lower()
+        if not canonical or not tts:
+            continue
+        forms=list(dict.fromkeys(
+            [canonical]+[str(x or "").strip() for x in (item.get("forms") or []) if str(x or "").strip()]
+        ))
+        for form in forms:
+            norm=normalize_lookup(form)
+            if not norm or norm in seen:
+                continue
+            seen.add(norm)
+            out.append({
+                "category":str(item.get("category") or "PROFILE COMPONENT"),
+                "canonical":canonical,
+                "string_to_replace":form,
+                "alias":canonical,
+                "tts_text":tts,
+                "tts_language":lang if lang in ("ar","de") else ("ar" if re.search(r"[\u0600-\u06ff]",tts) else "de"),
+                "tts_strategy":"profile-fixed-component-v1",
+                "voice_lock":"MASTER",
+                "qa_tier":"installed-curated",
+                "source":"voice-production-profile.fixedPhraseComponents",
+                "trusted_seed":True,
+                "requires_boundary":True,
+                "component_id":str(item.get("id") or ""),
+            })
+    return out
+
+_COMPONENT_EDGE_CHARS=" \t\r\n.,،;؛:!?؟…·()[]{}«»\"“”„‘’"
+_COMPONENT_STOPWORDS={
+    "wa","und","oder","aber","der","die","das","den","dem","des","ein","eine","einer","eines",
+    "im","in","am","an","auf","aus","bei","mit","von","zu","zum","zur","fur","für","ist","sind",
+    "al","as","at","ar","az","ad","an","ash","ath","ibn","bin","bint"
+}
+_COMPONENT_DISTINCTIVE_RE=re.compile(r"[ʿʾāīūḥṣḍṭẓḏṯšǧġḫĀĪŪḤṢḌṬẒḎṮŠǦĠḪ\u0600-\u06ff]")
+
+def _component_tokens(value):
+    tokens=[]
+    for raw in re.findall(r"\S+",str(value or "")):
+        token=str(raw or "").strip(_COMPONENT_EDGE_CHARS)
+        if token:
+            tokens.append(token)
+    return tokens
+
+def derive_max_master_component_rules(rules,blocked_norms=None):
+    """Sichere Einzelkomponenten aus dem 8.5k-Phrase-Master ableiten.
+
+    Nur tokenweise 1:1 ausgerichtete PLS-Paare werden verwendet. Ein Token wird
+    ausschließlich übernommen, wenn alle Vorkommen im Master dieselbe
+    normalisierte Aussprache liefern. Mehrdeutige Komponenten werden verworfen.
+    """
+    blocked=set(blocked_norms or ())
+    candidates={}
+    for parent in rules or []:
+        source=str((parent or {}).get("string_to_replace") or "").strip()
+        alias=str((parent or {}).get("tts_text") or (parent or {}).get("alias") or "").strip()
+        src_tokens=_component_tokens(source)
+        alias_tokens=_component_tokens(alias)
+        if len(src_tokens)<2 or len(src_tokens)>12 or len(src_tokens)!=len(alias_tokens):
+            continue
+        for src,spoken in zip(src_tokens,alias_tokens):
+            norm=normalize_lookup(src)
+            spoken_norm=normalize_lookup(spoken)
+            if not norm or not spoken_norm or norm in blocked or norm in _COMPONENT_STOPWORDS:
+                continue
+            # Plain-ASCII-Kernbegriffe kommen über fixedPhraseComponents bzw.
+            # exakte PLS-Regeln. Automatisch leiten wir nur islamisch markante
+            # Transliteration/Arabisch-Komponenten ab.
+            if not _COMPONENT_DISTINCTIVE_RE.search(src):
+                continue
+            row=candidates.setdefault(norm,{"spoken":set(),"forms":set(),"aliases":{}})
+            row["spoken"].add(spoken_norm)
+            row["forms"].add(src)
+            row["aliases"].setdefault(spoken_norm,spoken)
+
+    out=[]
+    for norm,row in candidates.items():
+        if len(row["spoken"])!=1:
+            continue
+        spoken_norm=next(iter(row["spoken"]))
+        spoken=str(row["aliases"].get(spoken_norm) or "").strip()
+        if not spoken:
+            continue
+        for form in sorted(row["forms"],key=lambda x:(-len(x),x)):
+            out.append({
+                "category":"MAX MASTER COMPONENT",
+                "canonical":form,
+                "string_to_replace":form,
+                "alias":spoken,
+                "tts_text":spoken,
+                "tts_language":"de",
+                "tts_strategy":"max-master-token-component-v1",
+                "voice_lock":"MASTER",
+                "qa_tier":"installed-curated",
+                "source":"DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls",
+                "trusted_seed":True,
+                "requires_boundary":True,
+                "derived_component":True,
+            })
+    return out
+
+PROFILE_COMPONENT_RULES=build_profile_component_rules(VOICE_PROFILE)
+
+_BASE_RULE_NORMS={
+    normalize_lookup(str(r.get("string_to_replace","")).strip())
+    for r in _BASE_RULES
+    if str(r.get("string_to_replace","")).strip()
+}
+_PROFILE_COMPONENT_NORMS={
+    normalize_lookup(str(r.get("string_to_replace","")).strip())
+    for r in PROFILE_COMPONENT_RULES
+    if str(r.get("string_to_replace","")).strip()
+}
+MAX_MASTER_COMPONENT_RULES=derive_max_master_component_rules(
+    MAX_MASTER_PLS_RULES,
+    _BASE_RULE_NORMS|_PROFILE_COMPONENT_NORMS,
+)
 _BASE_RULE_EXACT={
     str(r.get("string_to_replace","")).strip()
     for r in _BASE_RULES
@@ -524,8 +657,9 @@ _BASE_RULE_EXACT={
 MAX_MASTER_PLS_FALLBACK_RULES=[
     r for r in MAX_MASTER_PLS_RULES
     if str(r.get("string_to_replace","")).strip() not in _BASE_RULE_EXACT
+    and normalize_lookup(str(r.get("string_to_replace","")).strip()) not in _PROFILE_COMPONENT_NORMS
 ]
-BASE_RULES=_BASE_RULES+MAX_MASTER_PLS_FALLBACK_RULES
+BASE_RULES=_BASE_RULES+PROFILE_COMPONENT_RULES+MAX_MASTER_COMPONENT_RULES+MAX_MASTER_PLS_FALLBACK_RULES
 
 def load_persistent_user_overrides():
     primary=load_json_file(USER_OVERRIDES_FILE,{"schemaVersion":1,"rules":[]})
@@ -786,6 +920,8 @@ def rebuild_runtime_rules():
     counts["onlineSearchRules"]=len(ONLINE_RULES)
     counts["maxMasterPlsRules"]=len(MAX_MASTER_PLS_RULES)
     counts["maxMasterPlsFallbackRules"]=len(MAX_MASTER_PLS_FALLBACK_RULES)
+    counts["profileComponentRules"]=len(PROFILE_COMPONENT_RULES)
+    counts["maxMasterComponentRules"]=len(MAX_MASTER_COMPONENT_RULES)
     counts["knownRuleAliases"]=len(KNOWN_RULE_ALIAS_INDEX)
     counts["masterEntries"]=len(MASTER_ENTRIES)
     counts["masterAutoRules"]=len(MASTER_RULES)
