@@ -1,5 +1,5 @@
 (function(){
-  "use strict";
+  "use strict";\n  /* BILDBEITRAG_HISTORICAL_REPAIR_V1247 · global historic + women-exclusive ownership */
   if(window.__DAR_GLOBAL_SHARE_V1246)return;
   window.__DAR_GLOBAL_SHARE_V1246=true;
 
