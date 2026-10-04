@@ -11,7 +11,7 @@ export function elevenKey(env) {
 }
 
 export function darVoiceId(env) {
-  return String(env.ELEVENLABS_VOICE_ID || env.DAR_MALE_VOICE_ID || "")
+  return String(env.ELEVENLABS_VOICE_ID || env.DAR_MALE_VOICE_ID || "DkU7j9uO4ZEtLD2iRZSH")
     .trim()
     .replace(/^["']+|["']+$/g, "")
     .replace(/\s+/g, "");
