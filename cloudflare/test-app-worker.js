@@ -230,6 +230,11 @@ async function finalizeDarTestHomeV1193(asset) {
     html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-topics-v1242.css?v=1242"><\/head>');
   }
 
+  // DAR_ILM_HADITH_V1243
+  if (!/ilm-hadith-v1243\.css/.test(html)) {
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-hadith-v1243.css?v=1243"><\/head>');
+  }
+
 // DAR_MORE_V1241
   if (!/more-v1241\.css/.test(html)) {
     html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/more-v1241.css?v=1241"><\/head>');
