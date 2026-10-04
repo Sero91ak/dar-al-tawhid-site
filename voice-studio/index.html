@@ -2137,11 +2137,13 @@ function updateEngineUI(data){
   modelReady=engineOK&&data?.model_state==="ready";
   const loading=engineOK&&data?.model_state==="loading";
   const modelError=engineOK&&data?.model_state==="error";
+  const voiceReferenceReady=data?.voice_reference_ready!==false&&data?.reference_exists!==false;
 
   $("#engineLabel").textContent=engineVersionMismatch
     ?("Engine "+(engineVersion||"alt")+" · Neustart nötig")
     :!engineOK
     ?(CLOUD_ENGINE_MODE?"Cloud Engine nicht verbunden":"Engine nicht gestartet")
+    :!voiceReferenceReady?"Engine verbunden · Stimm-Referenz fehlt"
     :loading?"Stimm-Modell wird geladen …"
     :modelReady?(IS_COMPANION?"Serhat Engine bereit · iPad":"Serhat Engine bereit")
     :modelError?"Stimm-Modell Fehler"
@@ -2183,7 +2185,9 @@ function updateEngineUI(data){
   if(engineOK&&data?.pronunciation_learning)renderLearningState(data.pronunciation_learning);
   else if(engineOK)loadLearningState();
 
-  if(modelError&&data?.last_error){
+  if(!voiceReferenceReady&&engineOK){
+    $("#engineHelp").textContent="Engine-Verbindung steht. Die Serhat-Stimmreferenz fehlt am Mac: "+String(data?.reference_path||"~/SerhatVoice/Serhat_FINAL_REF.wav");
+  }else if(modelError&&data?.last_error){
     $("#engineHelp").textContent="Modellfehler: "+data.last_error;
   }else if(modelReady){
     const perf=data?.performance_engine||"";
