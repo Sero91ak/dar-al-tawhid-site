@@ -442,6 +442,105 @@ jobs:
           print("Kids release coherent",build,label,expected_cache)
           PY
 
+      - name: Validate independent Kids quiz
+        run: |
+          python - <<'PY'
+          import json, re
+          from pathlib import Path
+
+          quiz_path=Path("kids/data/quiz-kids.json")
+          quiz=json.loads(quiz_path.read_text(encoding="utf-8"))
+          kids=Path("kids/index.html").read_text(encoding="utf-8")
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          sw=Path("kids/sw.js").read_text(encoding="utf-8")
+
+          errors=[]
+          items=quiz.get("items") or []
+          if quiz.get("namespace")!="dar-kids-quiz":
+              errors.append("Kids quiz namespace missing")
+          if quiz.get("adultQuizDependency") is not False:
+              errors.append("Kids quiz must be independent from adult quiz")
+          if len(items)<50:
+              errors.append(f"Kids quiz must contain at least 50 questions, got {len(items)}")
+          if "canonicalQuizId" in quiz_path.read_text(encoding="utf-8"):
+              errors.append("adult canonicalQuizId coupling returned")
+
+          ids=set()
+          band_counts={"4-6":0,"7-8":0,"9-10":0}
+          expected_ranges={"4-6":(4,6),"7-8":(7,8),"9-10":(9,10)}
+          for item in items:
+              qid=str(item.get("id") or "")
+              if not re.fullmatch(r"kids-quiz-\d{3}",qid):
+                  errors.append("invalid Kids quiz id: "+qid)
+              if qid in ids:
+                  errors.append("duplicate Kids quiz id: "+qid)
+              ids.add(qid)
+              band=str(item.get("ageBand") or "")
+              if band not in expected_ranges:
+                  errors.append(qid+" invalid ageBand "+band)
+              else:
+                  band_counts[band]+=1
+                  if (int(item.get("ageMin") or 0),int(item.get("ageMax") or 0))!=expected_ranges[band]:
+                      errors.append(qid+" age range does not match "+band)
+              if item.get("status")!="published" or item.get("reviewStatus")!="approved" or item.get("verification")!="approved":
+                  errors.append(qid+" is not fully approved/published")
+              answers=item.get("answers") or []
+              if len(answers)<2 or sum(1 for a in answers if a.get("correct") is True)!=1:
+                  errors.append(qid+" must have exactly one correct answer")
+              if not str(item.get("question") or "").strip():
+                  errors.append(qid+" question missing")
+              if not str(item.get("source") or "").strip():
+                  errors.append(qid+" source missing")
+
+          minimum={"4-6":18,"7-8":16,"9-10":16}
+          for band,count in minimum.items():
+              if band_counts.get(band,0)<count:
+                  errors.append(f"{band} needs at least {count} questions, got {band_counts.get(band,0)}")
+
+          runtime_required=[
+              'data-quiz-age="4-6"',
+              'data-quiz-age="7-8"',
+              'data-quiz-age="9-10"',
+              'q.status==="published"',
+              'q.reviewStatus==="approved"',
+              'data.namespace!=="dar-kids-quiz"',
+              'data.adultQuizDependency!==false',
+              'DARKidsOwnerVoice.play',
+              'Audio wird vorbereitet',
+              'dar-kids-owner-voice-missing',
+          ]
+          for x in runtime_required:
+              if x not in kids:
+                  errors.append("Kids runtime missing "+x)
+          if "q.canonicalStatus" in kids or "q.canonicalReviewStatus" in kids:
+              errors.append("adult quiz approval fields returned to Kids runtime")
+
+          engine_required=[
+              'def _quiz_voice_texts',
+              'age_band=="4-6"',
+              'def build_kids_owner_voice_sync',
+              'name="dar-kids-owner-voice-auto"',
+              'if p=="/kids-voice/sync-start"',
+          ]
+          for x in engine_required:
+              if x not in engine:
+                  errors.append("Voice engine missing "+x)
+
+          sw_required=[
+              'url.pathname==="/kids/data/quiz-kids.json"',
+              'url.pathname==="/kids/data/quiz-audio.json"',
+              'url.pathname==="/kids/data/owner-voice-audio.json"',
+              'event.respondWith(networkFirst(request))',
+          ]
+          for x in sw_required:
+              if x not in sw:
+                  errors.append("Service worker quiz freshness missing "+x)
+
+          if errors:
+              raise SystemExit("Independent Kids quiz validation failed:\n- "+"\n- ".join(errors))
+          print("Independent Kids quiz OK",len(items),band_counts)
+          PY
+
       - name: Validate strict Alif-Ba audio workflow
         run: |
           python - <<'PY'
