@@ -154,9 +154,9 @@ async function health(){
 function go(name){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="pronunciation")loadCatalog(true);if(name==="settings")health();document.querySelector("main")?.scrollTo({top:0,behavior:"instant"})}
 $$(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));$("#refreshBtn").onclick=()=>{health();if($(".screen.active")?.dataset.screen==="history")loadHistory()};
 function syncStylePills(){
-  $("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===$("#style").value));
+  $$("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===$("#style").value));
 }
-$("[data-style]").forEach(b=>b.onclick=()=>{
+$$("[data-style]").forEach(b=>b.onclick=()=>{
   $("#style").value=b.dataset.style;
   try{localStorage.setItem("dar.voice.mobile.style",b.dataset.style)}catch(_){}
   state.analysis=null;syncStylePills();toast("Stil: "+b.textContent)
