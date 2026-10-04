@@ -22,7 +22,7 @@ const ageKey=()=>age().replace("–","-");
 function isAudioOnlyAge(){return age()==="4–5"}
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){try{localStorage.setItem(MODE_KEY,v)}catch(_){}renderModeButtons();applyMode()}
-function textFor(item){const k=ageKey(),s=item?.scripts||{};return normalizeKidsStoryText(String(s[k]||s["6-8"]||"").trim())}
+function textFor(item){const s=item?.scripts||{};return normalizeKidsStoryText(String(s["9-10"]||s["6-8"]||s["4-5"]||"").trim())}
 function words(t){return(String(t).match(/\S+/g)||[]).length}
 function durationLabel(item,t){
   const target=item?.durationTargets?.[ageKey()];
@@ -422,7 +422,7 @@ function stopAudio(){followReader?.persist(true);try{audio.pause();audio.removeA
 async function init(){
   if(!ensureUi())return;
   try{
-    const r=await fetch(DATA_URL+"?v=17",{cache:"no-store"});
+    const r=await fetch(DATA_URL+"?v=18",{cache:"no-store"});
     if(!r.ok)throw Error("Mubaschschirūn "+r.status);
     const data=await r.json();
     libraryPolicy=data.policy&&typeof data.policy==="object"?data.policy:{};
