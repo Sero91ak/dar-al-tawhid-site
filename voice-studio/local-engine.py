@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.92"
+ENGINE_VERSION="2.9.93"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -91,7 +91,7 @@ ONLINE_LIBRARY_CACHE=LEARNING_HOME/"online-library.json"
 MASTER_LIBRARY_CACHE=LEARNING_HOME/"islamic-master-library.json"
 MASTER_LIBRARY_SEED=APP_HOME/"islamic-master-library.json"
 LEARNING_LOG=LEARNING_HOME/"learning-log.jsonl"
-RENDER_CACHE_DIR=VOICE_HOME/"RenderCache"/"v3"
+RENDER_CACHE_DIR=VOICE_HOME/"RenderCache"/"fast4-v1"
 CONTEXT_BRIDGE_CACHE_DIR=RENDER_CACHE_DIR/"context-bridge-v1"
 LEARNING_HOME.mkdir(parents=True,exist_ok=True)
 LEARNING_PENDING_DIR.mkdir(parents=True,exist_ok=True)
@@ -800,7 +800,12 @@ RENDER_CACHE_MAX_BYTES=2*1024*1024*1024
 # der festhängt, kann aus einem Python-Thread nicht sicher abgebrochen werden.
 # Der Elternprozess kann diesen Worker dagegen hart beenden und sauber neu starten.
 MLX_MODEL_ERROR=""
-MLX_MODEL_ID=os.environ.get("DAR_VOICE_MLX_MODEL","mlx-community/chatterbox-multilingual-v3")
+# 2.9.93 Extreme Fast: das quantisierte 4-bit-Modell ist auf Apple Silicon
+# der Standard. Der große Multilingual-V3-Renderer bleibt als Qualitätsmodell
+# verfügbar und kann per DAR_VOICE_MLX_MODEL erzwungen werden.
+MLX_PRIMARY_MODEL_ID="mlx-community/chatterbox-4bit"
+MLX_QUALITY_MODEL_ID="mlx-community/chatterbox-multilingual-v3"
+MLX_MODEL_ID=os.environ.get("DAR_VOICE_MLX_MODEL",MLX_PRIMARY_MODEL_ID)
 MLX_ENABLED=os.environ.get("DAR_VOICE_DISABLE_MLX","0")!="1" and platform.machine().lower()=="arm64"
 ACTIVE_BACKEND="mlx" if MLX_ENABLED and importlib.util.find_spec("mlx_audio") is not None else "torch"
 MLX_PROCESS_LOCK=threading.RLock()
@@ -4572,8 +4577,13 @@ def start_generation_job(data:dict,free_mode:bool=False):
         unresolved=list(preflight.get("unresolved") or [])
         if unresolved:
             raise PronunciationReviewRequired(unresolved)
-        server_prepared=str(preflight.get("prepared") or "")
-        server_found=list(preflight.get("found") or [])
+        if bool((data or {}).get("interactiveFast",True)):
+            # Unbekannt-/Qurʾān-Prüfung stammt aus dem Cache; nur die viel leichtere
+            # Sprechform wird für Extreme Fast neu aufgebaut.
+            server_prepared,server_found=prepare(text,interactive_fast=True)
+        else:
+            server_prepared=str(preflight.get("prepared") or "")
+            server_found=list(preflight.get("found") or [])
 
     with GENERATION_JOB_LOCK:
         active=[
@@ -4636,7 +4646,7 @@ def get_status():
     out["honorific_audio_keys"]=sorted(k for k in HONORIFIC_KEYS if k in HONORIFIC_TTS_BY_KEY)
     out["pronunciation_learning"]=learning_state()
     out["engine_version"]=ENGINE_VERSION
-    out["performance_engine"]="continuous-sentence-flow-v3"
+    out["performance_engine"]="extreme-fast-mlx-4bit-v1"
     out["reference_prepares_total"]=MODEL_REFERENCE_PREPARES
     out["reference_cache_hits_total"]=MODEL_REFERENCE_CACHE_HITS
     out["render_cache"]=dict(RENDER_CACHE_STATS)
@@ -4646,6 +4656,9 @@ def get_status():
         out["model_device"]="mlx-metal"
     out["mlx_enabled"]=bool(MLX_ENABLED)
     out["mlx_model"]=MLX_MODEL_ID if MLX_ENABLED else None
+    out["mlx_primary_model"]=MLX_PRIMARY_MODEL_ID if MLX_ENABLED else None
+    out["mlx_quality_model"]=MLX_QUALITY_MODEL_ID if MLX_ENABLED else None
+    out["interactive_extreme_fast"]=True
     out["mlx_error"]=MLX_MODEL_ERROR
     out["mlx_worker_supervised"]=True
     out["mlx_worker_pid"]=int(MLX_PROCESS.pid) if MLX_PROCESS is not None and MLX_PROCESS.is_alive() else None
@@ -4829,7 +4842,29 @@ def pronunciation_rule_boundary_ok(text:str,pos:int,needle:str):
         return False
     return True
 
-def prepare(text:str):
+def interactive_fast_rule_form(rule,default_form:str=""):
+    """Extreme-Fast-Sprechform ohne Verlust bestätigter Audio-Master."""
+    r=dict(rule or {})
+    tts=str(r.get("tts_text") or r.get("alias") or default_form or "").strip()
+    if not tts or not re.search(r"[\u0600-\u06ff]",tts):
+        return tts or str(default_form or "")
+    key=str(r.get("audio_lock_key") or AUDIO_LOCK_BY_TTS.get(tts,"")).strip()
+    if key:
+        try:
+            locked=audio_lock_path(key)
+            if locked.exists() and locked.stat().st_size>44:
+                return tts
+        except Exception:
+            pass
+    # Noch nicht als Audio bestätigte arabische Bibliotheksformen bleiben im
+    # deutschen Satz. Dadurch entfallen dutzende DE↔AR-Modellwechsel.
+    for field in ("alias","canonical","string_to_replace"):
+        candidate=str(r.get(field) or "").strip()
+        if candidate and re.search(r"[A-Za-zÀ-ÖØ-öø-ÿʿʾ]",candidate) and not re.search(r"[\u0600-\u06ff]",candidate):
+            return candidate
+    return tts
+
+def prepare(text:str,interactive_fast:bool=False):
     pos=0;out=[];found=[]
     while pos<len(text):
         hit=None
@@ -4843,8 +4878,13 @@ def prepare(text:str):
             out.append(text[pos]);pos+=1;continue
 
         needle=str(hit.get("string_to_replace",""))
-        out.append(str(hit.get("tts_text") or hit.get("alias") or needle))
-        found.append(hit)
+        default_spoken=str(hit.get("tts_text") or hit.get("alias") or needle)
+        spoken=interactive_fast_rule_form(hit,needle) if interactive_fast else default_spoken
+        out.append(spoken)
+        found_hit=dict(hit)
+        if interactive_fast and spoken!=default_spoken:
+            found_hit["interactive_fast_spoken_form"]=spoken
+        found.append(found_hit)
         next_pos=pos+len(needle)
 
         required_key=str(hit.get("required_honorific_key",""))
@@ -4853,14 +4893,18 @@ def prepare(text:str):
             explicit=source_honorific_match(text,next_pos,required_key)
             if honorific_tts:
                 honorific_rule=HONORIFIC_RULE_BY_KEY.get(required_key)
+                honorific_spoken=(
+                    interactive_fast_rule_form(honorific_rule,honorific_tts)
+                    if interactive_fast and honorific_rule else honorific_tts
+                )
                 if explicit:
                     prefix=str(explicit.get("prefix",""))
-                    out.append((prefix if prefix else " ")+honorific_tts)
+                    out.append((prefix if prefix else " ")+honorific_spoken)
                     next_pos=int(explicit["end"])
                     if honorific_rule:
                         found.append(honorific_rule)
                 else:
-                    out.append(" "+honorific_tts)
+                    out.append(" "+honorific_spoken)
                     if honorific_rule:
                         found.append(honorific_rule)
 
@@ -4925,13 +4969,12 @@ def generation_token_budget(text:str,language_id:str):
     value=str(text or "").strip()
     chars=len(re.sub(r"\s+","",value))
     words=max(1,len(re.findall(r"\S+",value)))
-    # 25 speech tokens ≈ 1 s Audio. Für 140 DE-/90 AR-Zeichen reicht diese
-    # Reserve komfortabel für natürliche Sprechgeschwindigkeit, verhindert aber
-    # den 1000-token runaway des Upstream-Modells.
-    budget=int(90 + chars*1.55 + words*2.0)
+    # Größere deutsche Long-Form-Blöcke brauchen Headroom, sonst erzeugt das
+    # alte 360er-Limit einen teuren Retry/Rescue statt schneller fertig zu werden.
+    budget=int(92 + chars*1.62 + words*2.1)
     if language_id=="ar":
-        return max(150,min(300,budget))
-    return max(165,min(360,budget))
+        return max(150,min(340,budget))
+    return max(165,min(900,budget))
 
 def mlx_token_budget(text:str,language_id:str):
     # Backward-compatible interner Alias.
@@ -5233,14 +5276,9 @@ def render_with_mlx(model,text:str,language_id:str,mode:str):
     p=prosody_settings(mode,language_id,text)
     budget=mlx_token_budget(text,language_id)
     if language_id=="de" and mode=="kids_story":
-        # Kinder-Erzählprosodie ist bewusst langsamer und braucht mehr Speech-Tokens
-        # als normale Narration. Der Watchdog bleibt die harte Runaway-Bremse.
-        budget=max(360,min(max(int(budget),int(len(str(text))*2.20)),560))
+        budget=max(360,min(max(int(budget),int(len(str(text))*2.05)),920))
     elif language_id=="ar" and mode=="kids_story":
-        # Fuṣḥā-Eigennamen dürfen nicht am generischen AR-Deckel von 300 sterben.
-        # Nach dem Listen-Split sind dies kleine Einheiten; etwas Headroom plus
-        # Watchdog verhindert sowohl falsche Limits als auch echte Runaways.
-        budget=max(220,min(max(int(budget),int(len(str(text))*2.40)),380))
+        budget=max(220,min(max(int(budget),int(len(str(text))*2.30)),420))
     timeout_s=generation_timeout_seconds(text,language_id,mode)
     msg=_mlx_request({
         "op":"render",
@@ -6628,17 +6666,18 @@ def split_rescue_chunks(text:str,force:bool=False):
         return [" ".join(words[:mid])," ".join(words[mid:])]
     return [value]
 
-def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool=False,seed_base:int=2026):
+def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool=False,seed_base:int=2026,interactive_fast:bool=False):
     import torch
     attempts=max(1,int(QA_CONFIG.get("maxRenderAttempts",2)))
     if language_id=="de" and mode=="kids_story":
         attempts=max(attempts,3)
     if language_id=="ar" and mode=="kids_story":
-        # Kurze Fuṣḥā-Namen/Begriffe sind sampling-sensibel. Mehrere Seeds sind
-        # günstiger und sauberer als eine komplette Story oder einen Batch neu zu starten.
         attempts=max(attempts,5)
     if language_id=="ar" and is_inline_arabic_micro_term(text):
         attempts=max(attempts,int(QA_CONFIG.get("inlineArabicRenderAttempts",4)))
+    if interactive_fast:
+        # Statt denselben langen Satz 3–5× neu zu rechnen, sofort Rescue/Split.
+        attempts=2 if (critical or language_id=="ar") else 1
     seed_offset=max(1,int(QA_CONFIG.get("retrySeedOffset",97)))
     seed_base=max(1,int(seed_base))
     last=None
@@ -6742,7 +6781,8 @@ def render_segment_with_qa(model,text:str,language_id:str,mode:str,critical:bool
                     # terminieren deterministisch und fallen dann ggf. ans Backend-Fallback.
                     sub,subm=render_segment_with_qa(
                         model,part,language_id,mode,False,
-                        seed_base=seed_base+(attempts+part_idx+1)*seed_offset
+                        seed_base=seed_base+(attempts+part_idx+1)*seed_offset,
+                        interactive_fast=interactive_fast
                     )
                 except RuntimeError:
                     rescued=[]
@@ -7203,14 +7243,14 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
     elif free_mode and free_pronunciation:
         phrase_text,phrase_found=apply_profile_fixed_phrases(text)
         learned_text,learned_found=apply_user_learned_overrides(phrase_text)
-        speak,word_found=prepare(learned_text)
+        speak,word_found=prepare(learned_text,interactive_fast=interactive_fast)
         found=phrase_found+learned_found+word_found
     else:
         if preflight_checked and str(prepared or "").strip():
             speak=str(prepared).strip()
             found=list(preflight_found or [])
         else:
-            speak,found=prepare(text)
+            speak,found=prepare(text,interactive_fast=interactive_fast)
 
     doc_mode=resolve_prosody_mode(text,style)
 
@@ -7280,8 +7320,10 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
     # kurzer Startblock für frühes hörbares Audio. Arabische LOCKED-Formen und
     # Sprachgrenzen bleiben unangetastet.
     if interactive_fast and len(plan)>1:
-        fast_chars=280 if doc_mode=="kids_story" else 225
-        fast_sentences=3 if doc_mode=="kids_story" else 2
+        # Kurzer erster TTFA-Block bleibt; danach große Satzgruppen für maximalen
+        # Durchsatz statt hunderter sequentieller Modellaufrufe.
+        fast_chars=390 if doc_mode=="kids_story" else 430
+        fast_sentences=5 if doc_mode=="kids_story" else 6
         plan=_coalesce_kids_story_plan(
             plan,max_chars=fast_chars,max_sentences=fast_sentences
         )
@@ -7570,7 +7612,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                             )
                         else:
                             wav,metrics=render_segment_with_qa(
-                                model,chunk,lang,mode,critical,seed_base=core_seed
+                                model,chunk,lang,mode,critical,seed_base=core_seed,
+                                interactive_fast=interactive_fast
                             )
                         metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
                     except Exception as first_error:
@@ -7594,7 +7637,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                                     )
                                 else:
                                     wav,metrics=render_segment_with_qa(
-                                        retry_model,chunk,lang,mode,critical,seed_base=core_seed+313
+                                        retry_model,chunk,lang,mode,critical,seed_base=core_seed+313,
+                                        interactive_fast=interactive_fast
                                     )
                                 metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
                                 metrics["mlx_worker_restart"]=True
@@ -7627,7 +7671,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                                     )
                                 else:
                                     wav,metrics=render_segment_with_qa(
-                                        model,chunk,lang,mode,critical,seed_base=core_seed
+                                        model,chunk,lang,mode,critical,seed_base=core_seed,
+                                        interactive_fast=interactive_fast
                                     )
                                 metrics["render_seconds"]=round(time.perf_counter()-segment_started,3)
                                 metrics["mlx_fallback_after_error"]=type(first_error).__name__
@@ -7648,7 +7693,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                                     )
                                 else:
                                     wav,metrics=render_segment_with_qa(
-                                        model,chunk,lang,mode,critical,seed_base=core_seed
+                                        model,chunk,lang,mode,critical,seed_base=core_seed,
+                                        interactive_fast=interactive_fast
                                     )
                             else:
                                 raise
