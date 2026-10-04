@@ -1216,6 +1216,7 @@ window.darVoiceQaIsConfirmed=()=>Boolean(qaConfirmed&&lastAudio&&lastGeneratedTe
 let freeVoiceLearningResults=[],freeVoiceLearningCandidate=null,freeVoiceLearningPreviewId="",freeVoiceLearningPreviewUrl="";
 let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null,learningPreviewRequestSerial=0,learningSearchRequestSerial=0;
 let pronCatalogRows=[],pronCatalogOffset=0,pronCatalogTotal=0,pronCatalogQuery="",pronCatalogTimer=null;
+let learningPrefetchTimer=null;
 let learnedCanonicals=new Set(),learnedTerms=new Set(),confirmedAudioLocks=new Set();
 let manualLearningTerm="",learningVariant=0;
 let pendingLearningTerms=new Set();
@@ -1735,6 +1736,31 @@ function renderLearningResults(results){
   if(status){status.textContent=learningResults.length+" Ausspracheform"+(learningResults.length===1?"":"en")+" verfügbar · eine anklicken.";status.className="learning-preview-status"}
 }
 
+function prefetchLearningCandidate(row,term){
+  clearTimeout(learningPrefetchTimer);
+  term=String(term||"").trim();
+  if(!row||!term)return;
+  learningPrefetchTimer=setTimeout(async()=>{
+    try{
+      // Nie eine laufende eigentliche Audio-Produktion wegen eines bloßen
+      // Vorladens unterbrechen. Im Leerlauf wird Kandidat 1 schon vorbereitet,
+      // bevor der Nutzer auf „Anhören“ klickt.
+      const render=await getRenderStatus();
+      if(render?.render_state==="rendering")return;
+      await localRequest("/learning/preview-start",{
+        method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          term,
+          ttsText:row.ttsText||row.alias||term,
+          canonical:row.canonical||term,
+          language:row.ttsLanguage||"",
+          variant:0
+        })
+      });
+    }catch(_){}
+  },110);
+}
+
 function selectLearningCandidate(index,autoPreview=false){
   const r=learningResults[Number(index)];
   if(!r)return;
@@ -1768,6 +1794,7 @@ async function searchLearning(termOverride="",options={}){
     clearLearningPreview();
     renderLearningResults(localRows);
   }
+  if(localRows.length)prefetchLearningCandidate(localRows[0],term);
   const initialStatus=$("#learnPreviewStatus");
   if(initialStatus&&!learningCandidate){
     initialStatus.textContent="Sofort bereit · "+localRows.length+" lokale Form"+(localRows.length===1?"":"en")+" · Engine-Abgleich läuft im Hintergrund.";
