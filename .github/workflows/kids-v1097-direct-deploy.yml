@@ -1,0 +1,126 @@
+name: Kids V1097 Direct Live Deploy
+
+on:
+  push:
+    paths:
+      - ".github/workflows/kids-v1097-direct-deploy.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v1097-direct-live-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Use latest main
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+          echo "Deploying $(git rev-parse HEAD)"
+          test -s kids/assets/kids-art/section-stories-v1097.png
+          test -s kids/assets/kids-art/section-parents-v1097.png
+          grep -q "KIDS_SECTION_HERO_REALISM_V1097" kids/section-heroes-v1095.css
+          grep -q "section-heroes-v1095.css?v=1097-real3" kids/index.html
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Prepare staging overlay
+        run: |
+          git fetch origin test-library-canonical
+          node scripts/overlay-test-staging-from-branch.js
+          node scripts/app-stability-repair.js
+          git checkout origin/main -- scripts/patch-test-canonical-library.js scripts/cf-pages-build.js
+
+      - name: Build
+        run: |
+          npm run build
+          node scripts/build-desktop-posts-index.js
+
+      - name: Keep visitor service worker on live build
+        run: |
+          node <<'NODE'
+          const fs=require("fs");
+          const build=String(JSON.parse(fs.readFileSync("version.json","utf8")).buildId||"");
+          const m=build.match(/^app-shell-v(\d+)$/);
+          if(!m) throw new Error("invalid visitor buildId: "+build);
+          const next="const CACHE_VERSION = 'dar-al-tawhid-offline-light-v"+m[1]+"';";
+          let sw=fs.readFileSync("service-worker.js","utf8");
+          const p=/const CACHE_VERSION = ['"]dar-al-tawhid-offline-light-[^'"]+['"];?/;
+          if(!p.test(sw)) throw new Error("visitor CACHE_VERSION missing");
+          sw=sw.replace(p,next);
+          fs.writeFileSync("service-worker.js",sw);
+          NODE
+
+      - name: Verify app before live deploy
+        env:
+          CHANGE_SCOPE_LOCK_COMMIT_ONLY: "1"
+          GITHUB_COMMIT_MESSAGE: "Kids V1097 direct live deploy"
+        run: |
+          node scripts/app-health-check.js
+          node scripts/kids-prophet-release-guard.js
+          node scripts/push-system-guard.js
+          node scripts/push-lanes-guard.js
+          node scripts/version-update-guard.js
+          node scripts/app-stability-guard.js
+
+      - name: Deploy visitor static assets
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Purge visitor CDN cache
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CLOUDFLARE_GLOBAL_API_KEY: ${{ secrets.CLOUDFLARE_GLOBAL_API_KEY }}
+          SITE_URL: "https://dar-al-tawhid.de"
+          CLOUDFLARE_DEV_MODE: "1"
+          PURGE_SCOPE: "visitor"
+        run: node scripts/purge-cloudflare-cache.js
+        continue-on-error: true
+
+      - name: Verify V1097 live assets
+        run: |
+          set -euo pipefail
+          for n in 1 2 3 4 5 6; do
+            cb="$(date +%s)-$n"
+            css="$(curl -fsS "https://dar-al-tawhid.de/kids/section-heroes-v1095.css?v=1097-real3&cb=$cb" || true)"
+            story_code="$(curl -sS -o /tmp/story.png -w "%{http_code}" "https://dar-al-tawhid.de/kids/assets/kids-art/section-stories-v1097.png?cb=$cb" || true)"
+            parents_code="$(curl -sS -o /tmp/parents.png -w "%{http_code}" "https://dar-al-tawhid.de/kids/assets/kids-art/section-parents-v1097.png?cb=$cb" || true)"
+            if printf "%s" "$css" | grep -q "KIDS_SECTION_HERO_REALISM_V1097" && [ "$story_code" = "200" ] && [ "$parents_code" = "200" ]; then
+              echo "V1097 hero assets live"
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "::error::V1097 hero assets not yet live"
+          exit 1
+
+      - name: Remove one-shot deploy workflow
+        if: success()
+        run: |
+          git config user.name "DAR AL TAWḤĪD App Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git fetch origin main
+          git reset --hard origin/main
+          git rm .github/workflows/kids-v1097-direct-deploy.yml
+          git commit -m "Remove V1097 direct deploy workflow [skip ci]"
+          git push origin HEAD:main
