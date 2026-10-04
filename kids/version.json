@@ -158,24 +158,24 @@
     "homeChoices": "oval-capsule-restored",
     "homeChoiceLayoutVersion": "v1078",
     "homeChoiceCards": "rounded-cards-v1079",
-    "storiesPageHero": "edge-to-edge-local-v1094",
+    "storiesPageHero": "photoreal-hijaz-environment-v1095",
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1084",
     "storiesBottomNav": "separated-background-v1086",
     "storyFollowReader": "v5",
     "storyFollowReaderMode": "timestamp-aware-auto-scroll-v3",
     "storyFollowReaderReusable": true,
-    "sectionEntryHeroes": "edge-to-edge-compact-v1094",
+    "sectionEntryHeroes": "edge-to-edge-compact-photoreal-v1095",
     "sectionHeroArtworkFormat": "local-jpeg",
     "sectionHeroNoDetachedHeaderCard": true,
     "sectionHeroNoKickerCapsule": true,
-    "sectionHeroResponsive": "compact-phone-tablet-desktop",
+    "sectionHeroResponsive": "compact-phone-tablet-desktop-v1095",
     "quranPageHero": "edge-to-edge-compact-v1094",
-    "parentsPageHero": "edge-to-edge-compact-v1094",
+    "parentsPageHero": "photoreal-parent-study-v1095",
     "sectionHeroAssets": {
-      "stories": "/kids/assets/kids-art/section-stories-v1094.jpg",
+      "stories": "/kids/assets/kids-art/section-stories-v1095.jpg",
       "quran": "/kids/assets/kids-art/section-quran-v1090.jpg",
-      "parents": "/kids/assets/kids-art/section-parents-v1090.jpg"
+      "parents": "/kids/assets/kids-art/section-parents-v1095.jpg"
     },
     "muhammadStoryAudioTest": true,
     "muhammadStoryAudioAges": [
@@ -197,8 +197,8 @@
     "storyFollowReaderReopenButton": true,
     "storyFollowReaderZIndex": 30050,
     "contentStudioStoryAudiobook": "v4-exact-alignment",
-    "sectionHeroCompactHeightPhone": "300–380px",
-    "sectionHeroCompactHeightTablet": "390–460px",
+    "sectionHeroCompactHeightPhone": "286–345px",
+    "sectionHeroCompactHeightTablet": "350–410px",
     "storyAudioNativeIOSBridge": true,
     "storyAudioNativeIOSBundle": "de.daraltawhid.kids",
     "storyAudioNativeNowPlaying": true,
@@ -220,7 +220,8 @@
     "storyFollowReaderTimestampAware": true,
     "storyFollowReaderForcedAlignment": "elevenlabs-forced-alignment-v1",
     "storyFollowReaderFallback": "calibrated-weighted-timeline",
-    "storyFollowReaderAllFutureStudioStories": true
+    "storyFollowReaderAllFutureStudioStories": true,
+    "sectionHeroArtDirection": "photorealistic-prophet-sahaba-aligned"
   },
   "updatedAt": "2026-10-04"
 }
