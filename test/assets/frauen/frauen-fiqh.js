@@ -2441,29 +2441,61 @@
      Historische, ruhige Motivflächen pro Wissenswelt/Kapitel. Die Pfade nutzen
      bereits vorhandene App-Assets; neue Frauen-/Ṣaḥābiyyāt-Master können später
      unter denselben Slots ausgetauscht werden, ohne die Navigation anzufassen. */
-  function libraryGroupVisual(id) {
+  /* v1223 · Historische Frauen-Bibliothek
+     Jede Wissenswelt bekommt ein eigenes lokal versioniertes Motiv.
+     Neue Bereiche werden zusätzlich über ID + Titel + Beschreibung automatisch
+     einer passenden historischen Bildwelt zugeordnet, damit keine neue Karte
+     ohne visuelle Zuordnung erscheint. */
+  function libraryGroupVisual(groupOrId) {
+    var group = typeof groupOrId === "object" && groupOrId ? groupOrId : null;
+    var id = group ? String(group.id || "") : String(groupOrId || "");
+    var key = [
+      id,
+      group && group.title,
+      group && group.kicker,
+      group && group.desc
+    ].filter(Boolean).join(" ").toLowerCase();
+
     var map = {
-      din: "/test/assets/home-v1194/study-runway.jpg",
-      fiqh: "/kids/assets/kids-art/knowledge-courtyard-v11.jpg",
-      generationen: "/kids/assets/kids-art/section-stories-v1096.jpg",
-      familie: "/kids/assets/kids-art/section-stories-v1095.jpg",
-      wissen: "/kids/assets/prophet-scenes/library.webp",
-      alltag: "/kids/assets/prophet-scenes/desert.webp",
-      lebensphasen: "/kids/assets/prophet-scenes/garden.webp"
+      din: "/test/assets/frauen/library-v1223/01-grundlagen-din.jpg",
+      fiqh: "/test/assets/frauen/library-v1223/02-fiqh-frauen.jpg",
+      generationen: "/test/assets/frauen/library-v1223/03-erste-generationen.jpg",
+      familie: "/test/assets/frauen/library-v1223/04-familie-erziehung.jpg",
+      wissen: "/test/assets/frauen/library-v1223/05-wissen-adab-dawah.jpg",
+      alltag: "/test/assets/frauen/library-v1223/06-alltag-schutz.jpg",
+      lebensphasen: "/test/assets/frauen/library-v1223/07-lebensphasen.jpg"
     };
-    return map[id] || "";
+    if (map[id]) return map[id];
+
+    if (/sahab|salaf|tabi|generation|mütter|muetter/.test(key)) return map.generationen;
+    if (/famil|ehe|erzieh|kind|tochter|töchter|haus/.test(key)) return map.familie;
+    if (/wissen|adab|da.?wah|lernen|lehren|quelle/.test(key)) return map.wissen;
+    if (/alltag|schutz|reise|moschee|öffentlich|oeffentlich|medien|ruqyah|krank/.test(key)) return map.alltag;
+    if (/schwanger|still|nif|pubert|tod|trauer|janaz|lebensphase/.test(key)) return map.lebensphasen;
+    if (/fiqh|reinigung|gebet|fasten|kleidung|hijab|nikah|iddah|hajj|umrah/.test(key)) return map.fiqh;
+    return map.din;
   }
 
-  function libraryAreaVisual(id) {
-    id = String(id || "");
-    if (/muetter|sahab|tabi|salaf|kurz/.test(id)) return "/kids/assets/kids-art/section-stories-v1096.jpg";
-    if (/dienst|reise|krankheit|ruqyah/.test(id)) return "/kids/assets/prophet-scenes/mountain.webp";
-    if (/fiqh|reinigung|nikah|iddah|zinah|hijab|hajj|ramadan|qiyam|itikaf|nifas|maedchen/.test(id)) return "/kids/assets/kids-art/knowledge-courtyard-v11.jpg";
-    if (/ehe|kinder|toechter|verwandt|privat|gerecht/.test(id)) return "/kids/assets/kids-art/section-stories-v1095.jpg";
-    if (/wissen|geprueft|bidah|adab|dawah|sadaqah/.test(id)) return "/kids/assets/prophet-scenes/library.webp";
-    if (/moschee|umgang|arbeit|medien|tod|trauer|janaiz|janazah/.test(id)) return "/kids/assets/prophet-scenes/desert.webp";
-    if (/tawhid|muslimah|dhikr|reue|tawbah|muhasaba/.test(id)) return "/test/assets/home-v1194/study-runway.jpg";
-    return "/kids/assets/kids-art/section-stories-v1096.jpg";
+  function libraryAreaVisual(areaOrId) {
+    var area = typeof areaOrId === "object" && areaOrId ? areaOrId : null;
+    var id = area ? String(area.id || "") : String(areaOrId || "");
+    var key = [
+      id,
+      area && area.title,
+      area && area.lede,
+      area && area.desc
+    ].filter(Boolean).join(" ").toLowerCase();
+
+    var base = "/test/assets/frauen/library-v1223/";
+    if (/muetter|mütter|sahab|tabi|salaf|kurz|erste-generation/.test(key)) return base + "03-erste-generationen.jpg";
+    if (/dienst|pflege|hilfeleistung/.test(key)) return base + "03-erste-generationen.jpg";
+    if (/reise|umgang|arbeit|medien|ruqyah|krankheit|moschee|gemeinschaft|nicht-mah|nicht-maḥ/.test(key)) return base + "06-alltag-schutz.jpg";
+    if (/fiqh|reinigung|hijab|scham|nikah|iddah|zinah|hajj|umrah|ramadan|qiyam|itikaf|faq|gebet|fasten|kleidung/.test(key)) return base + "02-fiqh-frauen.jpg";
+    if (/ehe|kinder|toechter|töchter|verwandt|gerecht|privat|famil|erzieh/.test(key)) return base + "04-familie-erziehung.jpg";
+    if (/wissen|geprueft|geprüft|bidah|adab|dawah|da.?wah|sadaqah|lernen|lehren/.test(key)) return base + "05-wissen-adab-dawah.jpg";
+    if (/nifas|nifās|maedchen|mädchen|tod|trauer|janaiz|janazah|janāzah|schwanger|still|pubert/.test(key)) return base + "07-lebensphasen.jpg";
+    if (/tawhid|tawḥīd|muslimah|dhikr|reue|tawbah|muhasaba|iman|īmān|aqid|ʿaq/.test(key)) return base + "01-grundlagen-din.jpg";
+    return base + "01-grundlagen-din.jpg";
   }
 
   function libraryVisualStyle(url) {
@@ -2493,7 +2525,7 @@
 
   function libraryGroupCard(group) {
     var count = libraryVisibleCount(group);
-    var visual = libraryGroupVisual(group.id);
+    var visual = libraryGroupVisual(group);
     return (
       '<article class="frauen-library-card frauen-library-card--' + esc(group.id) + (visual ? ' has-visual' : '') + '" data-nav="frauen" data-value="group/' + esc(group.id) + '"' + libraryVisualStyle(visual) + '>' +
         '<span class="frauen-library-card__nr" aria-hidden="true">' + esc(group.nr) + '</span>' +
@@ -2540,7 +2572,7 @@
   function libraryAreaCard(area, idx) {
     var n = area.id ? countSichtbare(area.id) : 0;
     var pending = !!area.pending || n === 0;
-    var visual = libraryAreaVisual(area.id);
+    var visual = libraryAreaVisual(area);
     var nav = pending ? "" : ' data-nav="frauen" data-value="' + esc(area.id) + '"';
     return (
       '<article class="frauen-library-area-card' + (pending ? " is-pending" : "") + (visual ? " has-visual" : "") + '"' + nav + libraryVisualStyle(visual) + '>' +
