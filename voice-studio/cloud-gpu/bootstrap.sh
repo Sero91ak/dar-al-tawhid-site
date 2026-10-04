@@ -33,11 +33,12 @@ set +a
 : "${DAR_VOICE_PAIR_TOKEN:?DAR_VOICE_PAIR_TOKEN fehlt in .env}"
 
 DATA="${DAR_VOICE_DATA_DIR:-/var/lib/dar-voice}"
+MODEL_CACHE="${DAR_VOICE_MODEL_CACHE_DIR:-/var/cache/dar-voice-hf}"
 if [[ "$(id -u)" -eq 0 ]]; then
-  mkdir -p "$DATA"
+  mkdir -p "$DATA" "$MODEL_CACHE"
   chmod 700 "$DATA"
 else
-  sudo mkdir -p "$DATA"
+  sudo mkdir -p "$DATA" "$MODEL_CACHE"
   sudo chmod 700 "$DATA"
 fi
 chmod 600 .env
