@@ -65,7 +65,7 @@ function durationLabel(item) {
 }
 function modeLabels(item) {
   const out = [];
-  if (item?.modes?.listen !== false && item?.audio?.url) out.push(isAudioOnlyAge()&&item?.kind==="story"?"Hörbuch":"Hören");
+  if (item?.modes?.listen !== false && item?.audio?.url) out.push("Hören");
   if (!isAudioOnlyAge() && item?.modes?.read !== false && item?.text) out.push("Lesen");
   return out.join(" · ");
 }
@@ -221,7 +221,7 @@ function openItem(id) {
     '<div class="studio-content-meta">'+esc(kindLabel(item.kind))+' · '+esc(item.category || "Kids")+' · '+Number(item.ageMin)+'–'+Number(item.ageMax)+' Jahre</div>'+
     '<h2 id="studioContentTitle" class="studio-content-title">'+esc(item.title)+'</h2>'+
     (summaryText(item) ? '<div class="studio-content-summary">'+esc(summaryText(item))+'</div>' : "")+
-    ((modes.read && modes.listen) ? '<div class="studio-mode-tabs"><button type="button" data-studio-mode="listen">Hören</button><button type="button" data-studio-mode="read">Lesen</button></div>' : "")+
+    ((!isAudioOnlyAge() && modes.read && modes.listen) ? '<div class="studio-mode-tabs"><button type="button" data-studio-mode="listen">Hören</button><button type="button" data-studio-mode="read">Lesen</button></div>' : "")+
     '<div id="studioContentPayload"></div>';
   const payload = document.getElementById("studioContentPayload");
   function paint(mode) {
@@ -245,14 +245,14 @@ function openItem(id) {
     if (mode === "listen" && modes.listen) {
       payload.innerHTML =
         '<div class="studio-story-player">'+
-          '<button type="button" class="studio-story-play">'+(isAudioOnlyAge()?'Hörbuch starten':'Hören &amp; mitlesen')+'</button>'+
+          '<button type="button" class="studio-story-play">'+(isAudioOnlyAge()?'Hören':'Hören &amp; mitlesen')+'</button>'+
           '<audio class="studio-audio" playsinline preload="metadata" src="'+esc(abs(item.audio.url))+'" hidden></audio>'+
           '<div class="studio-story-progress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div>'+
           '<div class="studio-story-time"><strong>0:00</strong><span>0:00</span></div>'+
-          '<button type="button" class="studio-follow-open">'+(isAudioOnlyAge()?'Hörbuch öffnen':'Mitlesen öffnen')+'</button>'+
+          '<button type="button" class="studio-follow-open">'+(isAudioOnlyAge()?'Mitlesen':'Mitlesen öffnen')+'</button>'+
         '</div>'+
         (isAudioOnlyAge()
-          ? '<div class="studio-content-summary">Hörbuchmodus für 4–5 Jahre · der Fortschritt wird automatisch gespeichert.</div>'
+          ? '<div class="studio-content-summary">Für 4–5 Jahre startet die Geschichte im Hörmodus. „Mitlesen“ öffnet den Text zusätzlich als Begleitansicht für Erwachsene.</div>'
           : (modes.read ? '<div class="studio-content-summary">Der Mitlese-Modus folgt der Stimme automatisch. Du kannst jederzeit auf „Lesen“ wechseln.</div>' : ""));
       const audio = payload.querySelector("audio");
       const play = payload.querySelector(".studio-story-play");
@@ -267,7 +267,7 @@ function openItem(id) {
         if(fill)fill.style.width=(d?Math.min(100,c/d*100):0)+"%";
         if(current)current.textContent=fmt(c);
         if(total)total.textContent=fmt(d);
-        if(play)play.textContent=!audio.paused&&!audio.ended?"Pause":(c>0&&!audio.ended?"Weiterhören":(isAudioOnlyAge()?"Hörbuch starten":"Hören & mitlesen"));
+        if(play)play.textContent=!audio.paused&&!audio.ended?"Pause":(c>0&&!audio.ended?"Weiterhören":(isAudioOnlyAge()?"Hören":"Hören & mitlesen"));
       };
       const toggle = async () => {
         if(!audio)return;
@@ -295,7 +295,10 @@ function openItem(id) {
         disabled:()=>!String(item?.audio?.url||"").trim()
       })||null;
       play?.addEventListener("click",toggle);
-      payload.querySelector(".studio-follow-open")?.addEventListener("click",()=>studioStoryReader?.open());
+      payload.querySelector(".studio-follow-open")?.addEventListener("click",()=>{
+        if(isAudioOnlyAge()&&typeof studioStoryReader?.openReadAlong==="function")studioStoryReader.openReadAlong();
+        else studioStoryReader?.open();
+      });
       audio?.addEventListener("loadedmetadata",()=>{studioStoryReader?.restore();sync()});
       audio?.addEventListener("timeupdate",sync);
       audio?.addEventListener("play",sync);
@@ -402,6 +405,16 @@ function renderAll() {
   ensureTodaySection();
   ensureStoriesSection();
   ensureParentPreference();
+  const prefBox=document.getElementById("studioContentPreferences");
+  if(prefBox){
+    const preschool=isAudioOnlyAge();
+    const hint=prefBox.querySelector("p");
+    const controls=prefBox.querySelector(".studio-pref-buttons");
+    if(hint)hint.textContent=preschool
+      ?"Alter 4–5: Geschichten werden kindgerecht primär zum Hören gezeigt. Mitlesen bleibt als separate Begleitansicht für Erwachsene verfügbar."
+      :"Lege für dieses Kinderprofil fest, ob neue Studio-Inhalte zum Lesen, Hören oder in beiden Formen gezeigt werden.";
+    if(controls)controls.hidden=preschool;
+  }
   const group = ageGroup();
   const newAge = document.getElementById("studioNewAge");
   if (newAge) newAge.textContent = group.label + " Jahre";
