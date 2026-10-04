@@ -1559,20 +1559,23 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
         last_error=None
         wav=None
         metrics=None
+        # Ein Schnelltest ist eine *menschlich anzuhörende* Kandidatenprobe,
+        # keine automatische Freigabe. Darum blockieren hier nur technische
+        # Defekte bzw. offensichtlich pathologische Ausreißer. Moderate Pausen/
+        # Holds bleiben in den Metriken sichtbar und werden vom Nutzer beim
+        # Anhören bewertet; sie lösen keinen langsamen Vollrender mehr aus.
         hard={
             "empty_audio","non_finite","near_silence","low_peak","clipping","too_short",
-            "short_arabic_too_long","suspicious_sustained_hold",
-            "inline_arabic_internal_hold","unexpected_internal_hold","excessive_internal_pause"
+            "short_arabic_too_long","suspicious_sustained_hold"
         }
         for attempt in range(2):
             try:
                 torch.manual_seed(seed+attempt*97)
-                # Erster Versuch nutzt den Low-Latency-Kurzpfad; nur bei
-                # technischer QA-Ablehnung fällt Versuch 2 auf Normalrender zurück.
-                wav=(
-                    render_learning_preview_fast(model,effective_tts,requested,mode)
-                    if attempt==0 else
-                    render_with_model(model,effective_tts,requested,mode)
+                # Beide Versuche bleiben im Low-Latency-Kurzpfad. Ein zweiter
+                # Seed rettet Sampling-Ausreißer, ohne den deutlich langsameren
+                # normalen Long-Form-Renderer für ein einzelnes Wort zu starten.
+                wav=render_learning_preview_fast(
+                    model,effective_tts,requested,mode
                 )
                 wav=trim_segment_edges(
                     wav,sample_rate,
