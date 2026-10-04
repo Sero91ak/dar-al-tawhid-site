@@ -1,8 +1,8 @@
 (function(){
   "use strict";
   /* BILDBEITRAG_CURATED_POOL_V1250 · AI disabled · curated random pool + women-exclusive ownership */
-  if(window.__DAR_GLOBAL_SHARE_V1246)return;
-  window.__DAR_GLOBAL_SHARE_V1246=true;
+  if(window.__DAR_GLOBAL_SHARE_V1250)return;
+  window.__DAR_GLOBAL_SHARE_V1250=true;
 
   var SITE="dar-al-tawhid.de";
   var W=1080,H=1350;
