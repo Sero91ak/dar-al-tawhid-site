@@ -1,4 +1,5 @@
 const CACHE_NAME="dar-al-tawhid-kids-v1105";
+const KIDS_BUILD_ID="kids-shell-v38-quiz650-never-empty1105";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/section-heroes-v1095.css?v=1097-real3",
@@ -105,7 +106,26 @@ self.addEventListener("activate",function(event){
       return Promise.all(keys.filter(function(key){
         return key.indexOf("dar-al-tawhid-kids-")===0&&key!==CACHE_NAME;
       }).map(function(key){return caches.delete(key)}));
-    }).then(function(){return self.clients.claim()})
+    }).then(function(){
+      return self.clients.claim();
+    }).then(function(){
+      return self.clients.matchAll({type:"window",includeUncontrolled:true});
+    }).then(function(clients){
+      return Promise.all(clients.map(function(client){
+        try{
+          var u=new URL(client.url);
+          if(u.origin!==self.location.origin||u.pathname.indexOf("/kids/")!==0)return Promise.resolve();
+          if(u.searchParams.get("kv")===KIDS_BUILD_ID&&u.searchParams.get("sw")==="1105")return Promise.resolve();
+          u.pathname="/kids/start";
+          u.search="";
+          u.searchParams.set("kv",KIDS_BUILD_ID);
+          u.searchParams.set("sw","1105");
+          u.searchParams.set("cb",String(Date.now()));
+          if(typeof client.navigate==="function")return client.navigate(u.toString()).catch(function(){});
+        }catch(e){}
+        return Promise.resolve();
+      }));
+    })
   );
 });
 
