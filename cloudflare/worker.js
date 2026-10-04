@@ -65,6 +65,7 @@ import {
 import {
   persistKidsContentMedia,
   promoteKidsContentMedia,
+  publishExistingKidsStoryAudio,
   readKidsAlphabetAudioManifest,
   verifyKidsAlphabetAudioSlot,
   verifyKidsAlphabetExternalAudioSlot,
@@ -510,6 +511,28 @@ export default {
         const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
         try {
           return json(await persistKidsContentMedia(env, input, helpers), cors);
+        } catch (error) {
+          return json({ ok: false, error: error?.message || String(error) }, cors, error?.status || 400);
+        }
+      }
+
+      if (url.pathname === "/api/admin/kids-existing-story/audio" && request.method === "POST") {
+        assertConfigured(env);
+        assertAuthorized(request, env);
+        const input = await request.json().catch(() => ({}));
+        const helpers = { githubGet, githubPut, githubCommitBatch, base64ToUtf8 };
+        try {
+          const result = await publishExistingKidsStoryAudio(env, input, helpers);
+          if (result?.commitSha && input?.triggerDeploy !== false) {
+            ctx.waitUntil(triggerSiteDeployWorkflow(
+              env,
+              "kids-existing-story-audio:" + String(result.storyKind || "") + ":" + String(result.itemId || "") + ":" + String(result.age || "")
+            ));
+          }
+          return json({
+            ...result,
+            deploy: { triggered: input?.triggerDeploy !== false && Boolean(result?.commitSha) }
+          }, cors);
         } catch (error) {
           return json({ ok: false, error: error?.message || String(error) }, cors, error?.status || 400);
         }
