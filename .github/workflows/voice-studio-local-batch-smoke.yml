@@ -523,6 +523,8 @@ jobs:
               "tawhid":"/kids/assets/quiz-scenes/topic-tawhid.svg?v=20261004-topic2",
               "iman":"/kids/assets/quiz-scenes/topic-iman.svg?v=20261004-topic2",
               "akhlaq":"/kids/assets/quiz-scenes/topic-akhlaq.svg?v=20261004-topic2",
+              "patience":"/kids/assets/quiz-scenes/topic-patience.svg?v=20261004-topic3",
+              "justice":"/kids/assets/quiz-scenes/topic-justice.svg?v=20261004-topic3",
           }
           topic_families=((quiz.get("artwork") or {}).get("topicFamilies") or {})
           assert set(topic_families)==set(topic_expected), "quiz topic artwork families drifted"
@@ -549,20 +551,24 @@ jobs:
           }.items():
               assert priority_category_map.get(key)==family, "priority category routing drifted: "+key
           assert "prophets" in topic_keywords and len(topic_keywords["prophets"])>=20, "prophet topic keyword routing missing"
+          assert "patience" in topic_keywords and len(topic_keywords["patience"])>=10, "patience topic keyword routing missing"
+          assert "justice" in topic_keywords and len(topic_keywords["justice"])>=10, "justice topic keyword routing missing"
 
-          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1100"' in sw
+          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1101"' in sw
           assert "QUIZ_ARTWORK=[" not in sw, "legacy external quiz artwork runtime cache returned"
 
           visual=((version.get("visualSystem") or {}).get("quizVisualSystem") or {})
           assert str(visual.get("version") or "").startswith("age-adaptive-realistic-v"), "unexpected Kids quiz visual system version"
           assert visual.get("artworkHotlinkDependency") is False
-          assert visual.get("topicArtworkVersion")=="topic-realistic-v2"
-          assert int(visual.get("topicArtworkCount") or 0)==11
+          assert visual.get("topicArtworkVersion")=="topic-realistic-v3"
+          assert int(visual.get("topicArtworkCount") or 0)==13
           assert visual.get("topicArtworkCategoryRouting") is True
           assert visual.get("topicArtworkSceneRouting") is True
           assert visual.get("topicArtworkPriorityCategoryRouting") is True
           assert visual.get("topicArtworkProphetKeywordRouting") is True
           assert visual.get("topicArtworkFineGrainedSemanticRouting") is True
+          assert visual.get("topicArtworkPatienceRouting") is True
+          assert visual.get("topicArtworkJusticeRouting") is True
           assert visual.get("ageToneAdaptive") is True
           assert visual.get("youngAgeAudioFirst") is True
           assert visual.get("systemTtsFallbackAllowed") is False
@@ -574,7 +580,7 @@ jobs:
           assert visual.get("fullQuestionCatalogOwnerVoice") is True
           assert visual.get("shortQuizRoundsPreserved") is True
           assert visual.get("noNewQuestionsInThisRelease") is True
-          assert int(visual.get("catalogAssetVersion") or 0)>=5
+          assert int(visual.get("catalogAssetVersion") or 0)>=6
           assert visual.get("catalogIncrementalRender") is True
           assert int(visual.get("catalogInitialRenderCount") or 0)==40
           assert visual.get("catalogOwnerVoiceStatus") is True
