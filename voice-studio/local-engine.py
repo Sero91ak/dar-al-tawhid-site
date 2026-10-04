@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.89"
+ENGINE_VERSION="2.9.90"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -4297,6 +4297,12 @@ def generation_job_snapshot(job_id:str):
         return {"ok":False,"error":"Audio-Auftrag nicht gefunden."}
     # Niemals lokale absolute Dateipfade an Companion-Geräte ausgeben.
     row.pop("outputPath",None)
+    # 2.9.90: Job + Renderfortschritt in EINER Antwort. iPhone/iPad müssen
+    # während der Erzeugung nicht mehr parallel /generate-job und /render-status
+    # abfragen. Das reduziert WLAN-Roundtrips und macht Live-Audio ruhiger.
+    render=render_status_snapshot()
+    if str(render.get("render_job_id") or "")==job_id:
+        row["render"]=render
     row["ok"]=True
     return row
 
@@ -4318,7 +4324,9 @@ def _generation_job_worker(job_id:str,payload:dict):
             free_mode=free_mode,
             free_pronunciation=free_pronunciation,
             interactive_fast=bool(payload.get("interactiveFast",True)),
-            job_id=job_id
+            job_id=job_id,
+            preflight_checked=bool(payload.get("_serverPreflightChecked",False)),
+            preflight_found=payload.get("_serverFound")
         )
         record_mobile_generation(out,text,style,free_mode)
         st=Path(out).stat()
@@ -4358,6 +4366,18 @@ def start_generation_job(data:dict,free_mode:bool=False):
             "pronunciationLibrary":free_pronunciation,
         },ensure_ascii=False,sort_keys=True,separators=(",",":")).encode("utf-8")
     ).hexdigest()
+    server_prepared=""
+    server_found=[]
+    if not free_mode:
+        # Derselbe Guard wie im Produktionsrenderer, aber VOR dem Thread-Start.
+        # Dadurch bekommt die App unbekannte islamische Begriffe sofort zurück,
+        # ohne erst einen separaten /analyze-Roundtrip abzuwarten.
+        quran_guard(text)
+        unresolved=detect_unresolved_islamic_terms(text)
+        if unresolved:
+            raise PronunciationReviewRequired(unresolved)
+        server_prepared,server_found=prepare(text)
+
     with GENERATION_JOB_LOCK:
         active=[
             (job_id,row) for job_id,row in GENERATION_JOBS.items()
@@ -4390,6 +4410,10 @@ def start_generation_job(data:dict,free_mode:bool=False):
     payload["text"]=text
     payload["style"]=style
     payload["freeMode"]=bool(free_mode)
+    if not free_mode:
+        payload["prepared"]=server_prepared
+        payload["_serverPreflightChecked"]=True
+        payload["_serverFound"]=server_found
     threading.Thread(
         target=_generation_job_worker,
         args=(job_id,payload),
@@ -6906,26 +6930,27 @@ def postprocess(src:Path,fast:bool=False):
         print("[DĀR Voice] ffmpeg fallback:",p.stderr[-1200:],flush=True)
     return src
 
-def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free_pronunciation:bool=False,interactive_fast:bool=False,job_id:str=""):
+def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free_pronunciation:bool=False,interactive_fast:bool=False,job_id:str="",preflight_checked:bool=False,preflight_found=None):
     # Produktionsmodus bleibt unverändert. Der Bereich "Freie Stimme" nutzt
     # dieselbe Serhat-Engine, aber ohne Kids-/Content-Pflichten und ohne neue Locks.
     strict_prophet_story=bool(
         free_mode and free_pronunciation and str(style or "")=="kids_story"
     )
     if not free_mode or strict_prophet_story:
-        quran_guard(text)
-        if strict_prophet_story:
-            strict=_prophet_strict_pronunciation_preflight(text)
-            if not strict.get("ok"):
-                raise PronunciationReviewRequired(strict.get("items") or [])
-        else:
-            unresolved=detect_unresolved_islamic_terms(text)
-            if unresolved:
-                terms=", ".join(str(x.get("term","")) for x in unresolved[:6])
-                raise ValueError(
-                    "Ungeprüfte islamische Namen/Begriffe erkannt: "+terms+
-                    ". Bitte zuerst in der Ausspracheanalyse prüfen oder im Lernzentrum bestätigen."
-                )
+        if not preflight_checked:
+            quran_guard(text)
+            if strict_prophet_story:
+                strict=_prophet_strict_pronunciation_preflight(text)
+                if not strict.get("ok"):
+                    raise PronunciationReviewRequired(strict.get("items") or [])
+            else:
+                unresolved=detect_unresolved_islamic_terms(text)
+                if unresolved:
+                    terms=", ".join(str(x.get("term","")) for x in unresolved[:6])
+                    raise ValueError(
+                        "Ungeprüfte islamische Namen/Begriffe erkannt: "+terms+
+                        ". Bitte zuerst in der Ausspracheanalyse prüfen oder im Lernzentrum bestätigen."
+                    )
     if not REF_DE.exists():
         raise RuntimeError("Referenzstimme fehlt: "+str(REF_DE))
 
@@ -6938,7 +6963,11 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         speak,word_found=prepare(learned_text)
         found=phrase_found+learned_found+word_found
     else:
-        speak,found=prepare(text)
+        if preflight_checked and str(prepared or "").strip():
+            speak=str(prepared).strip()
+            found=list(preflight_found or [])
+        else:
+            speak,found=prepare(text)
 
     doc_mode=resolve_prosody_mode(text,style)
 
@@ -7019,7 +7048,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         # damit iPhone/iPad/Mac deutlich früher etwas Hörbares bekommen. Nur der
         # erste Block wird geteilt; der Rest bleibt groß/coalesced für hohen
         # Gesamtdurchsatz. Audio-Locks und Arabisch werden niemals zerschnitten.
-        first_audio_target=96
+        first_audio_target=80
         for first_idx,(first_lang,first_chunk) in enumerate(plan[:3]):
             if first_lang!="de" or audio_lock_key_for_chunk(first_chunk):
                 continue
@@ -7047,7 +7076,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                     plan=plan[:first_idx]+[(first_lang,head),(first_lang,tail)]+plan[first_idx+1:]
             break
         plan=prioritize_interactive_first_audio(
-            plan,max_first_chars=96 if doc_mode=="kids_story" else 84
+            plan,max_first_chars=80 if doc_mode=="kids_story" else 72
         )
 
     # 2.9.63: "free_mode" bedeutet NICHT automatisch Hintergrundarbeit.
@@ -7115,7 +7144,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         render_preview_mode="incremental-chunks-v1" if interactive_fast and len(plan)>1 else "",
         render_first_audio_priority=bool(interactive_fast and len(plan)>1),
         render_first_audio_ms=0,
-        render_first_audio_target_chars=96 if interactive_fast and len(plan)>1 else 0,
+        render_first_audio_target_chars=(80 if doc_mode=="kids_story" else 72) if interactive_fast and len(plan)>1 else 0,
         render_job_id=str(job_id or ""),
         render_total_segments=0,
         render_completed_segments=0,
@@ -9564,6 +9593,12 @@ class H(BaseHTTPRequestHandler):
             try:
                 result=start_generation_job(data,free_mode=(p=="/generate-free-start"))
                 return self.send_json(202,result)
+            except PronunciationReviewRequired as e:
+                return self.send_json(422,{
+                    "ok":False,
+                    "error":"Ausspracheprüfung erforderlich.",
+                    "items":list(e.items or [])
+                })
             except RuntimeError as e:
                 return self.send_json(409,{"ok":False,"error":str(e)})
             except Exception as e:
