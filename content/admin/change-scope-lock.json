@@ -152,6 +152,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-adult-quiz-redesign-2026-10-04",
+      "approvedBy": "user-explicit-komplette-app-langsam-weiterarbeiten",
+      "reason": "Fortlaufender Nutzerauftrag zur Modernisierung der kompletten Dar-Test-App. Dieser Schritt betrifft ausschließlich die Erwachsenen-Quiz-Startseite: historisches vormodernes Hero-Motiv, Theme-Kompatibilität, weniger Kartenbau und bessere Responsive-Hierarchie. Quizfragen, Bewertung, Statistik und Quizlogik bleiben unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/quiz-overview-v1257.css",
+        "cloudflare/test-app-worker.js"
+      ],
+      "expiresAt": "2026-11-04T23:59:00.000Z"
+    },
+    {
       "id": "test-prayer-overview-v1254-2026-10-04",
       "approvedBy": "user-explicit-komplette-app-langsam-weiterarbeiten",
       "reason": "Nutzer hat die fortlaufende Modernisierung der kompletten Dar-Test-App beauftragt. Dieser Scope betrifft ausschließlich die geöffnete Gebetszeiten-Übersichtsseite: historischer Hero, Theme-Kompatibilität und Layout/Lesbarkeit. Gebetsberechnung, Standort, Qibla- und Push-Logik bleiben unverändert.",
