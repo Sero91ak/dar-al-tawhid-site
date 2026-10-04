@@ -285,6 +285,11 @@ async function finalizeDarTestHomeV1193(asset) {
     html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-book-detail-v1252.css?v=1250"><\/head>');
   }
 
+  // DAR_MORE_V1253
+  if (!/more-v1253\.css/.test(html)) {
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/more-v1253.css?v=1253"><\/head>');
+  }
+
 // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
 
