@@ -3859,7 +3859,7 @@
       files = await frauenImageFiles(abschnitt, e);
     } catch (err) {
       try { console.error("DAR Frauen Bildbeitrag", err); } catch (_err) {}
-      frauenToast(err && err.message ? String(err.message).slice(0, 180) : "Bildgenerator derzeit nicht verfügbar");
+      frauenToast(err && err.message ? String(err.message).slice(0, 180) : "Bildbeitrag konnte aus dem freigegebenen Frauen-Bildpool nicht erstellt werden");
       return false;
     }
     if (!files.length) {
