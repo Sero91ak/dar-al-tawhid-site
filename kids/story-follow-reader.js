@@ -77,6 +77,8 @@ function create(options){
 
   const titleEl=root.querySelector(".kfr-title");
   const subtitleEl=root.querySelector(".kfr-subtitle");
+  const kickerEl=root.querySelector(".kfr-kicker");
+  const helpEl=root.querySelector(".kfr-help");
   const playEl=root.querySelector(".kfr-play");
   const restartEl=root.querySelector(".kfr-restart");
   const closeEl=root.querySelector(".kfr-close");
@@ -133,9 +135,17 @@ function create(options){
     currentContent=c;
     const nextKey=storyKey(c);
     if(prevKey!==nextKey)restoredToken="";
+    const audioOnly=!!c.audioOnly;
+    root.classList.toggle("audio-only",audioOnly);
+    root.dataset.readerMode=audioOnly?"audio":"read-along";
     if(titleEl)titleEl.textContent=String(c.title||"Geschichte");
     if(subtitleEl)subtitleEl.textContent=String(c.subtitle||c.album||"DĀR AL TAWḤĪD Kids");
-    paragraphs=splitParagraphs(c.text||"");
+    if(kickerEl)kickerEl.textContent=audioOnly?"HÖRBUCH":"HÖRBUCH · MITLESEN";
+    if(helpEl)helpEl.textContent=audioOnly
+      ?"Dein Hörbuch merkt sich automatisch, wo du aufgehört hast."
+      :"Der aktuelle Abschnitt wird hervorgehoben und folgt der Stimme automatisch. Du kannst jederzeit selbst scrollen.";
+    readEl.setAttribute("aria-hidden",audioOnly?"true":"false");
+    paragraphs=audioOnly?[]:splitParagraphs(c.text||"");
     weights=paragraphs.map(p=>Math.max(1,(p.match(/\S+/g)||[]).length));
     totalWeight=weights.reduce((n,w)=>n+w,0)||1;
     timingCues=normalizeTimingCues(c.timings||c.paragraphTimings||c.cues||[]);
@@ -262,7 +272,7 @@ function create(options){
     if(!audio.paused&&!audio.ended)playEl.textContent="Pause";
     else if(audio.currentTime>0&&!audio.ended)playEl.textContent="Weiterhören";
     else if(audio.ended)playEl.textContent="Nochmal";
-    else playEl.textContent="Abspielen";
+    else playEl.textContent=root.classList.contains("audio-only")?"Hörbuch starten":"Abspielen";
   }
   function updatePositionState(){
     if(!mediaSessionActive||!("mediaSession" in navigator)||typeof navigator.mediaSession.setPositionState!=="function")return;
@@ -282,7 +292,7 @@ function create(options){
       progressButton.setAttribute("aria-valuenow",String(Math.max(0,Math.round(current))));
       progressButton.setAttribute("aria-valuetext",formatTime(current)+" von "+formatTime(duration));
     }
-    mark(paragraphIndexAtTime(current,duration),!!forceScroll);
+    if(!root.classList.contains("audio-only"))mark(paragraphIndexAtTime(current,duration),!!forceScroll);
     updatePlay();
     try{navigator.mediaSession.playbackState="playing"}catch(_){}
     updatePositionState();
@@ -367,6 +377,7 @@ function create(options){
     if(c.text!=null)setContent(c);
     root.classList.add("open");
     root.removeAttribute("aria-hidden");
+    root.querySelector(".kfr-sheet")?.setAttribute("aria-label",root.classList.contains("audio-only")?"Hörbuch-Player":"Geschichte mitlesen");
     document.documentElement.classList.add("kids-follow-reader-open");
     sync(true);
     setTimeout(()=>playEl?.focus(),0);
@@ -413,5 +424,5 @@ function create(options){
     getSavedProgress:readProgress
   };
 }
-window.DARKidsFollowReader={version:3,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
+window.DARKidsFollowReader={version:4,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
 })();
