@@ -1835,3 +1835,32 @@ html[data-theme="light"] .lib-detail .lib-detail-hero{
     --dar-lib-cinema-image:url("/test/assets/home-v1193/library-study-runway.jpg");
   }
 }
+
+
+/* DAR_LIBRARY_ADAPTIVE_OVERRIDE_V1220
+   Overrides only the global adaptive .lib-grid rule for the PDF library. */
+html[data-layout="compact"] .lib-page[data-library-root] .lib-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+
+html[data-layout="medium"] .lib-page[data-library-root] .lib-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:22px 18px!important;
+}
+
+html[data-layout="expanded"] .lib-page[data-library-root] .lib-grid{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:24px 20px!important;
+}
+
+@media(min-width:1440px){
+  html[data-layout="expanded"] .lib-page[data-library-root] .lib-grid{
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  }
+}
+
+@media(max-width:360px){
+  html[data-layout="compact"] .lib-page[data-library-root] .lib-grid{
+    gap:16px 10px!important;
+  }
+}
