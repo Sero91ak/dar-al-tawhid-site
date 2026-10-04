@@ -87,6 +87,90 @@ h1{font-size:clamp(26px,2.1vw,40px);line-height:1.02;letter-spacing:-.035em;marg
 .prophet-pick-item .prophet-pick-push,.prophet-pick-item .prophet-pick-listen,.prophet-pick-item .prophet-pick-upload,.prophet-pick-item .prophet-pick-generate{min-height:30px;padding:0 7px;font-size:10px;border-radius:8px}
 .prophet-pick.focus{outline:2px solid rgba(217,182,111,.55);outline-offset:2px}.prophet-review{margin-top:9px;border:1px solid rgba(239,157,157,.24);border-radius:12px;padding:9px;background:rgba(120,25,25,.08)}.prophet-review[hidden]{display:none}.prophet-review-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.prophet-review-term{min-height:30px!important;padding:6px 9px!important;font-size:10px!important}.prophet-review-meta{font-size:10px;color:var(--muted);line-height:1.45}
 @media(max-width:900px){.prophet-pick-list{grid-template-columns:1fr}}
+
+/* 2.9.71 · Prophetenübersicht wieder lesbar + klarer Datei-Upload */
+.prophet-pick-list{grid-template-columns:1fr;gap:8px}
+.prophet-pick-item{
+  grid-template-columns:minmax(220px,1.35fr) minmax(150px,.78fr) 102px 112px 96px 112px;
+  gap:8px;
+  min-height:56px;
+  padding:8px 10px;
+  border-radius:12px;
+}
+.prophet-pick-item button.prophet-pick-name{
+  font-size:14px;
+  line-height:1.25;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+  word-break:normal;
+}
+.prophet-pick-status{
+  font-size:10px;
+  line-height:1.25;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+}
+.prophet-pick-item .prophet-pick-push,
+.prophet-pick-item .prophet-pick-listen,
+.prophet-pick-item .prophet-pick-upload,
+.prophet-pick-item .prophet-pick-generate{
+  min-height:38px;
+  padding:7px 9px;
+  font-size:11px;
+  border-radius:9px;
+  white-space:nowrap;
+}
+.prophet-audio-drop{
+  margin:10px 0 8px;
+  padding:14px 16px;
+  border:1px dashed rgba(217,182,111,.52);
+  border-radius:14px;
+  background:linear-gradient(180deg,rgba(217,182,111,.08),rgba(7,25,39,.88));
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px 14px;
+  align-items:center;
+  transition:border-color .15s ease,background .15s ease,transform .15s ease;
+}
+.prophet-audio-drop.is-empty{opacity:.72}
+.prophet-audio-drop.is-dragging{
+  border-color:#f2d79c;
+  background:rgba(217,182,111,.15);
+  transform:translateY(-1px);
+}
+.prophet-audio-drop-copy{min-width:0}
+.prophet-audio-drop-kicker{
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--gold2);
+}
+.prophet-audio-drop strong{display:block;margin-top:3px;font-size:14px;line-height:1.3}
+.prophet-audio-drop span{display:block;margin-top:3px;font-size:10px;line-height:1.45;color:var(--muted)}
+.prophet-audio-file{grid-column:1/-1;font-size:10px;color:#b9d9c9;min-height:14px}
+.prophet-audio-drop .btn{min-height:38px;padding:8px 12px;font-size:11px}
+@media(min-width:2050px){
+  .prophet-pick-list{grid-template-columns:1fr 1fr}
+  .prophet-pick-item{
+    grid-template-columns:minmax(180px,1fr) minmax(120px,.7fr) 90px 104px 90px 104px;
+  }
+}
+@media(max-width:1180px){
+  .prophet-pick-item{
+    grid-template-columns:minmax(180px,1fr) 138px 96px 106px 92px 106px;
+  }
+}
+@media(max-width:860px){
+  .prophet-pick-item{grid-template-columns:1fr 1fr}
+  .prophet-pick-item .prophet-pick-name,
+  .prophet-pick-status{grid-column:1/-1}
+  .prophet-pick-item .btn{width:100%}
+  .prophet-audio-drop{grid-template-columns:1fr}
+  .prophet-audio-drop .btn{width:100%}
+}
 textarea{
   width:100%;height:clamp(330px,48vh,760px);min-height:290px;resize:vertical;
   background:linear-gradient(180deg,#071a29,#071725);color:var(--ink);border:1px solid rgba(255,255,255,.10);
@@ -679,7 +763,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.70 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.71 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -702,7 +786,16 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
     <select id="prophetPickId" hidden><option value="">— wählen —</option></select>
     <select id="prophetPickAge" hidden><option value="all" selected>alle</option></select>
     <div id="prophetPickList" class="prophet-pick-list"></div>
-    <div id="prophetPickReady" class="notice">25 Voice-Texte sind vorbereitet. Offen ist nur noch deine Serhat-Audioerzeugung und Ausspracheprüfung.</div>
+    <div id="prophetAudioDropZone" class="prophet-audio-drop is-empty" aria-live="polite">
+      <div class="prophet-audio-drop-copy">
+        <div class="prophet-audio-drop-kicker">Eigene fertige Stimme</div>
+        <strong id="prophetAudioDropTitle">Prophet auswählen</strong>
+        <span id="prophetAudioDropHint">Danach Audio aus dem Finder hier hineinziehen oder über „Datei wählen“ auswählen. WAV, MP3, M4A und AAC werden unterstützt.</span>
+      </div>
+      <button id="prophetAudioBrowseBtn" class="btn secondary" type="button" disabled>Datei wählen</button>
+      <div id="prophetAudioFilename" class="prophet-audio-file"></div>
+    </div>
+    <div id="prophetPickReady" class="notice">25 Voice-Texte sind vorbereitet. Du kannst Audio erzeugen oder eine fertige ElevenLabs-/WAV-/MP3-/M4A-Datei direkt der ausgewählten Geschichte zuordnen.</div>
     <div style="display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:10px;align-items:center;margin-top:10px">
       <div style="display:grid;gap:6px">
         <button id="prophetBatchStartBtn" class="btn primary" type="button">Alle 25 autonom erzeugen</button>
@@ -2729,6 +2822,7 @@ setTimeout(()=>{
 
 (function prophetStoryManualLoader(){
   const sel=$("#prophetPickId"),ta=$("#text"),ready=$("#prophetPickReady"),list=$("#prophetPickList");
+  const dropZone=$("#prophetAudioDropZone"),dropTitle=$("#prophetAudioDropTitle"),dropHint=$("#prophetAudioDropHint"),dropFile=$("#prophetAudioFilename"),browseBtn=$("#prophetAudioBrowseBtn");
   if(!sel||!ta||!list)return;
   const AGES=["4-5","6-8","9-10"];
   let pack=[];
@@ -2739,8 +2833,14 @@ setTimeout(()=>{
   const uploadInput=document.createElement("input");
   uploadInput.type="file";
   uploadInput.accept=".wav,.mp3,.m4a,.aac,audio/wav,audio/mpeg,audio/mp4,audio/aac";
-  uploadInput.hidden=true;
   uploadInput.setAttribute("aria-hidden","true");
+  uploadInput.tabIndex=-1;
+  uploadInput.style.position="fixed";
+  uploadInput.style.left="-10000px";
+  uploadInput.style.top="-10000px";
+  uploadInput.style.width="1px";
+  uploadInput.style.height="1px";
+  uploadInput.style.opacity="0";
   document.body.appendChild(uploadInput);
   let uploadTargetId="";
   function honor(it){
@@ -2757,6 +2857,35 @@ setTimeout(()=>{
     if(!v)return"";
     if(v.indexOf("http")===0)return v;
     return "https://dar-al-tawhid.de"+v;
+  }
+  function updateUploadZone(it,fileName=""){
+    if(!dropZone)return;
+    const active=!!it;
+    dropZone.classList.toggle("is-empty",!active);
+    if(dropTitle)dropTitle.textContent=active?(label(it)+" · Audio hochladen"):"Prophet auswählen";
+    if(dropHint)dropHint.textContent=active
+      ?"Ziehe die fertige Audiodatei hier hinein oder öffne den Finder. Der aktuell sichtbare Story-Text wird exakt mit "+label(it)+" verknüpft."
+      :"Danach Audio aus dem Finder hier hineinziehen oder über „Datei wählen“ auswählen. WAV, MP3, M4A und AAC werden unterstützt.";
+    if(browseBtn)browseBtn.disabled=!active;
+    if(dropFile)dropFile.textContent=fileName?("Ausgewählt: "+fileName):"";
+  }
+  function openUploadPicker(id){
+    const it=pack.find(x=>x.id===id);
+    if(!it){
+      setMessage("Zuerst einen Propheten auswählen.","warn");
+      return;
+    }
+    sel.value=id;
+    prepareSlot();
+    uploadTargetId=id;
+    uploadInput.value="";
+    try{
+      if(typeof uploadInput.showPicker==="function"){
+        uploadInput.showPicker();
+        return;
+      }
+    }catch(_){}
+    uploadInput.click();
   }
   function slotInfo(it){
     const scripts=it&&it.scripts&&typeof it.scripts==="object"?it.scripts:{};
@@ -2800,12 +2929,22 @@ setTimeout(()=>{
     }));
     list.querySelectorAll("[data-ps-upload]").forEach(btn=>btn.addEventListener("click",e=>{
       e.stopPropagation();
-      sel.value=btn.dataset.psUpload;
-      prepareSlot();
-      uploadTargetId=btn.dataset.psUpload;
-      uploadInput.value="";
-      uploadInput.click();
+      openUploadPicker(btn.dataset.psUpload);
     }));
+    list.querySelectorAll(".prophet-pick-item").forEach(row=>{
+      row.addEventListener("dragover",e=>{e.preventDefault();row.classList.add("active")});
+      row.addEventListener("dragleave",()=>{if(row.dataset.psPick!==sel.value)row.classList.remove("active")});
+      row.addEventListener("drop",e=>{
+        e.preventDefault();
+        const id=row.dataset.psPick;
+        const file=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0];
+        if(!id||!file)return;
+        sel.value=id;
+        prepareSlot();
+        updateUploadZone(pack.find(x=>x.id===id),file.name||"");
+        uploadProphetAudio(id,file);
+      });
+    });
     list.querySelectorAll("[data-ps-generate]").forEach(btn=>btn.addEventListener("click",e=>{
       e.stopPropagation();
       generateOne(btn.dataset.psGenerate);
@@ -2827,7 +2966,8 @@ setTimeout(()=>{
     fillList();
     if(!it){
       lastId="";
-      if(ready)ready.textContent="Namen wählen, einen Text schreiben, Audio erzeugen, dann den Push-Button dieses Propheten.";
+      updateUploadZone(null);
+      if(ready)ready.textContent="Prophet auswählen. Danach Text bearbeiten und entweder Audio erzeugen oder eine fertige Audiodatei hochladen.";
       return;
     }
     const switched=it.id!==lastId;
@@ -2850,7 +2990,8 @@ setTimeout(()=>{
       img.alt=it.name||"";
       cover.prepend(img);
     }
-    if(ready)ready.textContent=label(it)+" · Text ist direkt bearbeitbar. „Audio-Datei“ ordnet die gewählte Aufnahme und den aktuell sichtbaren Text fest diesem Propheten zu.";
+    updateUploadZone(it);
+    if(ready)ready.textContent=label(it)+" · Text ist direkt bearbeitbar. „Datei wählen“ oder Drag-and-drop ordnet die fertige Aufnahme und den aktuell sichtbaren Text fest diesem Propheten zu.";
     ta.dispatchEvent(new Event("input"));
     ta.focus();
   }
@@ -2910,7 +3051,8 @@ setTimeout(()=>{
       });
       it.voiceScript=text;it.scripts=scripts;it.audio=audio;
       busy.delete(id);fillList();
-      setMessage(label(it)+" · Audiodatei hochgeladen. Text und Stimme sind jetzt derselben Geschichte zugeordnet.","good");
+      updateUploadZone(it,file.name||"Audiodatei");
+      setMessage(label(it)+" · "+(file.name||"Audiodatei")+" hochgeladen. Text und Stimme sind jetzt derselben Geschichte zugeordnet.","good");
       return true;
     }catch(e){
       busy.set(id,"error");fillList();
@@ -2922,7 +3064,38 @@ setTimeout(()=>{
     const id=uploadTargetId;
     const file=uploadInput.files&&uploadInput.files[0];
     uploadTargetId="";
-    if(id&&file)uploadProphetAudio(id,file);
+    if(id&&file){
+      updateUploadZone(pack.find(x=>x.id===id),file.name||"");
+      uploadProphetAudio(id,file);
+    }
+  });
+  browseBtn?.addEventListener("click",e=>{
+    e.preventDefault();
+    e.stopPropagation();
+    openUploadPicker(sel.value);
+  });
+  dropZone?.addEventListener("click",e=>{
+    if(e.target===browseBtn||browseBtn?.contains(e.target))return;
+    if(sel.value)openUploadPicker(sel.value);
+  });
+  ["dragenter","dragover"].forEach(type=>dropZone?.addEventListener(type,e=>{
+    e.preventDefault();
+    if(sel.value)dropZone.classList.add("is-dragging");
+  }));
+  ["dragleave","dragend"].forEach(type=>dropZone?.addEventListener(type,()=>dropZone.classList.remove("is-dragging")));
+  dropZone?.addEventListener("drop",e=>{
+    e.preventDefault();
+    dropZone.classList.remove("is-dragging");
+    const id=sel.value;
+    const file=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0];
+    if(!id){
+      setMessage("Zuerst den Propheten auswählen, zu dem die Audiodatei gehört.","warn");
+      return;
+    }
+    if(file){
+      updateUploadZone(pack.find(x=>x.id===id),file.name||"");
+      uploadProphetAudio(id,file);
+    }
   });
   function audioApiUrl(path){
     const base=String(LOCAL_API||"").replace(/\/$/,"");
