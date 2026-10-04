@@ -283,26 +283,17 @@ if [ "$STAGED_ENGINE_VERSION" != "$RELEASE_VERSION" ]; then
 fi
 
 # Vorhandene Stimmreferenz bevorzugen.
+# WICHTIG: Ein App-/Engine-Update darf niemals an einer fehlenden WAV-Datei hängen
+# oder im Hintergrund einen Dateiauswahldialog öffnen. Die Engine startet auch ohne
+# Referenz und meldet diesen Zustand separat; die Referenz kann anschließend gezielt
+# wiederhergestellt werden, ohne die Software-Aktualisierung zu blockieren.
 REF="$VOICE_HOME/Serhat_Adobe_MASTER.wav"
 if [ ! -f "$REF" ]; then
   ALT="$VOICE_HOME/Serhat_FINAL_REF.wav"
   if [ -f "$ALT" ]; then
     REF="$ALT"
   else
-    PICKED="$(/usr/bin/osascript <<'APPLESCRIPT'
-try
-  set f to choose file with prompt "Wähle deine bereinigte Serhat-Stimmreferenz (WAV/Audio)."
-  POSIX path of f
-on error
-  return ""
-end try
-APPLESCRIPT
-)"
-    if [ -z "$PICKED" ]; then
-      /usr/bin/osascript -e 'display dialog "Keine Stimmreferenz ausgewählt. Die Einrichtung wurde abgebrochen." buttons {"OK"} default button 1 with icon caution'
-      exit 1
-    fi
-    cp "$PICKED" "$VOICE_HOME/Serhat_Adobe_MASTER.wav"
+    echo "HINWEIS: Serhat-Stimmreferenz fehlt. Update wird trotzdem vollständig installiert."
     REF="$VOICE_HOME/Serhat_Adobe_MASTER.wav"
   fi
 fi
