@@ -50,7 +50,7 @@ try:
     PORT=int(os.environ.get("DAR_VOICE_PORT",os.environ.get("PORT","8787")) or 8787)
 except Exception:
     PORT=8787
-ENGINE_VERSION="2.9.99"
+ENGINE_VERSION="2.9.100"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
