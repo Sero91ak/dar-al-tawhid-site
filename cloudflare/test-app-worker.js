@@ -242,17 +242,17 @@ async function finalizeDarTestHomeV1193(asset) {
 
     // DAR_ILM_TOPICS_V1242
   if (!/ilm-topics-v1242\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-topics-v1242.css?v=1242"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-topics-v1242.css?v=1250"><\/head>');
   }
 
   // DAR_ILM_HADITH_V1243
   if (!/ilm-hadith-v1243\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-hadith-v1243.css?v=1243"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-hadith-v1243.css?v=1250"><\/head>');
   }
 
   // DAR_ILM_DUA_V1244
   if (!/ilm-dua-v1244\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-dua-v1244.css?v=1244"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-dua-v1244.css?v=1250"><\/head>');
   }
 
 // DAR_MORE_V1241
@@ -262,27 +262,27 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // DAR_ILM_SCHOLAR_PROFILE_V1253
   if (!/ilm-scholar-profile-v1253\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholar-profile-v1253.css?v=1253"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholar-profile-v1253.css?v=1250"><\/head>');
   }
 
   // DAR_ILM_TOPIC_DETAIL_V1254
   if (!/ilm-topic-detail-v1254\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-topic-detail-v1254.css?v=1254"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-topic-detail-v1254.css?v=1250"><\/head>');
   }
 
   // DAR_ILM_POST_READER_V1255
   if (!/ilm-post-reader-v1255\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-post-reader-v1255.css?v=1255"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-post-reader-v1255.css?v=1250"><\/head>');
   }
 
   // DAR_ILM_SCHOLAR_DETAIL_V1251
   if (!/ilm-scholar-detail-v1251\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholar-detail-v1251.css?v=1251"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholar-detail-v1251.css?v=1250"><\/head>');
   }
 
   // DAR_ILM_BOOK_DETAIL_V1252
   if (!/ilm-book-detail-v1252\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-book-detail-v1252.css?v=1252"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-book-detail-v1252.css?v=1250"><\/head>');
   }
 
 // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
