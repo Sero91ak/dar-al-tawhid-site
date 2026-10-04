@@ -2672,10 +2672,14 @@ def _quiz_voice_texts(quiz_data):
             f"Antwort {i+1}: {label}."
             for i,label in enumerate(labels) if label
         ).strip()
-        add((question+" "+spoken).strip())
         lower=[x.casefold() for x in labels]
-        if len(lower)==2 and "ja" in lower and "nein" in lower:
+        age_band=str(item.get("ageBand") or "").strip()
+        # Das jüngste Kids-Band hört kurze Ja/Nein-Fragen ohne doppelte
+        # Antwort-Aufzählung. Ältere Bänder hören alle Optionen.
+        if age_band=="4-6" and len(lower)==2 and "ja" in lower and "nein" in lower:
             add((question+" Ja oder Nein?").strip())
+        else:
+            add((question+" "+spoken).strip())
         add(item.get("success"))
         add(item.get("retry"))
     add("Sehr gut. Du hast das Quiz geschafft.")
