@@ -164,7 +164,8 @@ async function health(){
   try{
     const r=await api("/health");const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"offline");
     state.health=d;$("#dot").className="dot ok";$("#engineText").textContent=d.model_state==="ready"?"Bereit":d.model_state==="loading"?"Lädt …":"Verbunden";
-    $("#healthBadge").textContent=d.model_state==="ready"?"bereit":"verbunden";$("#healthBadge").className="badge good";$("#healthNote").textContent="Engine "+(d.engine_version||"")+" · "+(d.interactive_extreme_fast?"Extreme Fast · ":"")+(d.model_state||"");
+    const device=String(d.model_device||"").toUpperCase();const cloudGpu=!LOCAL_ENGINE_HOST&&device.startsWith("CUDA");
+    $("#healthBadge").textContent=d.model_state==="ready"?(cloudGpu?"GPU bereit":"bereit"):"verbunden";$("#healthBadge").className="badge good";$("#healthNote").textContent="Engine "+(d.engine_version||"")+" · "+(cloudGpu?"CUDA GPU · ":(d.interactive_extreme_fast?"Extreme Fast · ":""))+(d.model_state||"");
     const lib=d.library||{};const total=Number(lib.rules||0)||Number(lib.totalRules||0)||Number(lib.maxMasterPlsRules||0)||0;
     $("#libraryBadge").textContent=total?total.toLocaleString("de-DE"):"aktiv";$("#libraryNote").textContent=(Number(lib.maxMasterPlsRules||0)?Number(lib.maxMasterPlsRules).toLocaleString("de-DE")+" MAX-MASTER · ":"")+"Laufzeitbibliothek aktiv";
     $("#arabicBadge").textContent=d.reference_arabic_dedicated?"AR MASTER":"DE Fallback";$("#arabicBadge").className=d.reference_arabic_dedicated?"badge good":"badge";return true;
