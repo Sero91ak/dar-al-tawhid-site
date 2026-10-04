@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v12-sahaba1093",
   "label": "KIDS · V1.07.18",
   "releasedAt": "2026-10-04T01:40:57.208Z",
-  "note": "Geschichten und Eltern verwenden jetzt neu erzeugte fotorealistische Premium-Motive mit natürlicheren Materialien, Licht und Tiefe – passend zur Bildsprache der Propheten- und Ṣaḥābah-Bereiche. Das kompakte Header-Layout bleibt erhalten.",
+  "note": "Alterslogik der Geschichten angepasst: Für 4–5 Jahre ist „Hören“ die primäre Aktion. Eigenständige Lesen-/Lesen-&-Hören-Modi werden ausgeblendet; „Mitlesen“ bleibt separat als Begleitansicht für Erwachsene verfügbar. Ab 6 Jahren bleiben die regulären Lese-/Hörmodi erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -211,17 +211,21 @@
     ],
     "storyAudioNativeArtwork": true,
     "storyAudioBackgroundMode": "audio",
-    "storyPreschoolMode": "audio-only",
+    "storyPreschoolMode": "audio-first-with-optional-adult-readalong",
     "storyPreschoolAge": "4–5",
     "storyPreschoolReadingHidden": true,
-    "storyPreschoolReadAlongHidden": true,
+    "storyPreschoolReadAlongHidden": false,
     "storyPreschoolPlayer": "focus-audiobook",
     "storyReadAlongMinimumAge": "6–8",
     "storyFollowReaderTimestampAware": true,
     "storyFollowReaderForcedAlignment": "elevenlabs-forced-alignment-v1",
     "storyFollowReaderFallback": "calibrated-weighted-timeline",
     "storyFollowReaderAllFutureStudioStories": true,
-    "sectionHeroArtDirection": "photorealistic-prophet-sahaba-aligned"
+    "sectionHeroArtDirection": "photorealistic-prophet-sahaba-aligned",
+    "storyPreschoolAdultReadAlong": true,
+    "storyPreschoolPrimaryAction": "Hören",
+    "storyPreschoolSecondaryAction": "Mitlesen",
+    "storyPreschoolSecondaryAudience": "Erwachsene Begleitperson"
   },
   "updatedAt": "2026-10-04"
 }
