@@ -36,8 +36,8 @@ export const DAR_VIDEO_PROFILE = Object.freeze({
     followLine: "Folgt für mehr Wissen aus Qurʾān & Sunnah",
     telegram: "@dar_al_tauhid",
     telegramUrl: "https://t.me/dar_al_tauhid",
-    website: "dar-al-tauhid.de",
-    websiteUrl: "https://dar-al-tauhid.de",
+    website: "dar-al-tawhid.de",
+    websiteUrl: "https://dar-al-tawhid.de",
     instagram: "@dar_at_tawhid",
     instagramUrl: "https://www.instagram.com/dar_at_tawhid",
     credit: "by Serhat Abu Malik"
