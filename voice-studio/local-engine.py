@@ -7807,7 +7807,7 @@ class H(BaseHTTPRequestHandler):
                 "name":"DĀR AL TAWḤĪD Voice",
                 "short_name":"DĀR Voice",
                 "id":"/mobile/",
-                "start_url":"/mobile/?pair="+PAIR_TOKEN if PAIR_TOKEN else "/mobile/",
+                "start_url":"/mobile/",
                 "scope":"/mobile/",
                 "display":"standalone",
                 "background_color":"#f7f7f5",
@@ -7822,8 +7822,9 @@ class H(BaseHTTPRequestHandler):
             self.send_json(200,mobile_history_snapshot(60))
         elif p=="/mobile/audio":
             qs=parse_qs(urlparse(self.path).query)
-            name=Path(str((qs.get("name") or [""])[0])).name
-            if not name.lower().endswith(".wav"):
+            raw_name=str((qs.get("name") or [""])[0]).strip()
+            name=Path(raw_name).name
+            if not raw_name or name!=raw_name or not name.lower().endswith(".wav"):
                 return self.send_json(400,{"ok":False,"error":"Ungültige Audiodatei."})
             candidate=OUTPUT/name
             if not candidate.exists() or candidate.parent.resolve()!=OUTPUT.resolve():
