@@ -422,7 +422,7 @@ function stopAudio(){followReader?.persist(true);try{audio.pause();audio.removeA
 async function init(){
   if(!ensureUi())return;
   try{
-    const r=await fetch(DATA_URL+"?v="+Date.now(),{cache:"no-store"});
+    const r=await fetch(DATA_URL+"?v=15",{cache:"force-cache"});
     if(!r.ok)throw Error("Mubaschschirūn "+r.status);
     const data=await r.json();
     libraryPolicy=data.policy&&typeof data.policy==="object"?data.policy:{};

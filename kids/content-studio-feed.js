@@ -86,8 +86,8 @@ async function refresh(force = false) {
   if (!force && Date.now() - state.fetchedAt < 15000) return;
   state.busy = true;
   try {
-    const url = API_BASE + "/api/kids/content?staging=1&appTarget=kids&cb=" + Date.now();
-    const res = await fetch(url, { cache: "no-store", credentials: "omit" });
+    const url = API_BASE + "/api/kids/content?staging=1&appTarget=kids";
+    const res = await fetch(url, { cache: "force-cache", credentials: "omit" });
     if (!res.ok) throw new Error("Kids-Content " + res.status);
     const data = await res.json();
     state.items = Array.isArray(data?.items) ? data.items : [];
@@ -463,10 +463,10 @@ function boot() {
   loadCached();
   renderAll();
   observeProfile();
-  refresh(true);
+  var later=function(){refresh(false)};
+  if("requestIdleCallback" in window)requestIdleCallback(later,{timeout:8000});
+  else setTimeout(later,2500);
   document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
-  window.addEventListener("focus", () => refresh());
-  setInterval(() => { if (!document.hidden) refresh(); }, REFRESH_MS);
 }
 window.DarKidsStudioContent = { refresh, open: openItem, get items(){ return state.items.slice(); } };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, { once:true });

@@ -81,17 +81,11 @@
     var queued=pending;
     pending=null;
     if(queued)playNow(queued.text,queued.options);
-    try{
-      Object.keys(manifest.entries).slice(0,8).forEach(function(k){
-        var url=manifest.entries[k]&&manifest.entries[k].url;
-        if(url){var a=new Audio();a.preload="metadata";a.src=url}
-      });
-    }catch(e){}
   }
 
   Promise.all([
-    fetch("/kids/data/owner-voice-audio.json?v="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
-    fetch("/kids/data/quiz-audio.json?v="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
+    fetch("/kids/data/owner-voice-audio.json?v=1",{cache:"force-cache"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
+    fetch("/kids/data/quiz-audio.json?v=1",{cache:"force-cache"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
   ]).then(function(parts){
     merge(parts[1]);
     merge(parts[0]);

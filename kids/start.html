@@ -3543,7 +3543,7 @@ function renderAuthenticStories(){
   });
 }
 function fetchAuthenticStories(){
-  return fetch("/kids/data/stories-authentic.json?v="+Date.now(),{cache:"no-store"})
+  return fetch("/kids/data/stories-authentic.json?v=1107",{cache:"force-cache"})
     .then(function(r){if(!r.ok)throw new Error("story-data");return r.json()})
     .then(function(data){
       authenticStories=Array.isArray(data.items)?data.items.filter(function(s){return s.verification==="approved"}):[];
@@ -4874,7 +4874,7 @@ function renderKnowledgeModal(){
   document.getElementById("knowledgeSource").textContent=item.source||"";
 }
 function fetchVerifiedKnowledge(){
-  return fetch("/kids/data/verified-content.json?v="+Date.now(),{cache:"no-store"})
+  return fetch("/kids/data/verified-content.json?v=1107",{cache:"force-cache"})
     .then(function(r){if(!r.ok)throw new Error("verified-content");return r.json()})
     .then(function(data){
       var hadith=Array.isArray(data.hadithLessons)?data.hadithLessons:[];
@@ -4914,7 +4914,7 @@ function duaDailyIndex(list){
   return seed%list.length;
 }
 function fetchKidsDuas(){
-  return fetch("/kids/data/dua-kids.json?v="+Date.now(),{cache:"no-store"})
+  return fetch("/kids/data/dua-kids.json?v=1107",{cache:"force-cache"})
     .then(function(r){if(!r.ok)throw new Error("dua-data");return r.json()})
     .then(function(data){
       kidsDuas=Array.isArray(data.items)?data.items.filter(function(x){return x.verification==="verified"}):[];
@@ -5854,8 +5854,8 @@ document.getElementById("openDuaButton").addEventListener("click",function(){
   };
   window.openAlphabet=openAlphabet;
   Promise.all([
-    fetch("/kids/data/alphabet-kids.json?v=8",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
-    fetch("/kids/data/alphabet-audio.json?v=6",{cache:"no-store"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
+    fetch("/kids/data/alphabet-kids.json?v=8",{cache:"force-cache"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
+    fetch("/kids/data/alphabet-audio.json?v=6",{cache:"force-cache"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
   ]).then(function(result){
     var data=result[0],audioData=result[1];
     letters=(data&&data.letters)||[];
@@ -6132,10 +6132,9 @@ function normalizeStudioQuizItems(data){
   return out;
 }
 function fetchKidsQuiz(){
-  var stamp=Date.now();
-  var base=fetch("/kids/data/quiz-kids.json?v="+stamp,{cache:"no-store"})
+  var base=fetch("/kids/data/quiz-kids.json?v=1107",{cache:"force-cache"})
     .then(function(r){if(!r.ok)throw new Error("quiz-data");return r.json()});
-  var studio=fetch("/content/kids/content-index.json?v="+stamp,{cache:"no-store"})
+  var studio=fetch("/content/kids/content-index.json?v=1107",{cache:"force-cache"})
     .then(function(r){return r.ok?r.json():{items:[]}})
     .catch(function(){return{items:[]}});
   return Promise.all([base,studio])
@@ -6652,10 +6651,10 @@ updateMinutes();
 updateResume();
 updateParentProgress();
 fetchKidsDuas();
-fetchKidsQuiz();
 fetchAuthenticStories();
 fetchVerifiedKnowledge();
-fetchCatalog();
+var laterKids=function(){fetchKidsQuiz();fetchCatalog();};
+if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000});else setTimeout(laterKids,1800);
 })();
 </script>
 
@@ -7047,7 +7046,7 @@ fetchCatalog();
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?cb="+Date.now(),{cache:"no-store"})
+    fetch("/kids/version.json?v=1107",{cache:"force-cache"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
@@ -8419,7 +8418,7 @@ html[data-view="stories"] .bottom-nav{
   background-image:
     linear-gradient(180deg,rgba(5,20,32,.62),rgba(5,20,32,.88)),
     linear-gradient(90deg,rgba(6,25,38,.72),rgba(8,37,52,.50),rgba(6,25,38,.76)),
-    url("https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:3ef7a69f-3bbd-461c-8f65-6c35e2eb6e13")!important;
+    url("/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3")!important;
   background-size:cover!important;
   background-position:center 58%!important;
   background-repeat:no-repeat!important;

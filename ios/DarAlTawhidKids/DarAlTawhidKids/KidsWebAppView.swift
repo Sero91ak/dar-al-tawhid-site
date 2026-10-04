@@ -99,7 +99,7 @@ struct KidsWebAppView: UIViewRepresentable {
             webView.load(
                 URLRequest(
                     url: KidsAppShell.launchURL,
-                    cachePolicy: .reloadIgnoringLocalCacheData,
+                    cachePolicy: .returnCacheDataElseLoad,
                     timeoutInterval: 30
                 )
             )
@@ -291,7 +291,7 @@ struct KidsWebAppView: UIViewRepresentable {
                 webView.load(
                     URLRequest(
                         url: KidsAppShell.inAppURL(from: url),
-                        cachePolicy: .reloadIgnoringLocalCacheData,
+                        cachePolicy: .returnCacheDataElseLoad,
                         timeoutInterval: 30
                     )
                 )
@@ -330,7 +330,7 @@ struct KidsWebAppView: UIViewRepresentable {
                 webView.load(
                     URLRequest(
                         url: KidsAppShell.inAppURL(from: url),
-                        cachePolicy: .reloadIgnoringLocalCacheData,
+                        cachePolicy: .returnCacheDataElseLoad,
                         timeoutInterval: 30
                     )
                 )

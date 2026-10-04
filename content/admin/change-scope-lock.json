@@ -152,6 +152,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-offline-instant-open-2026-10-04",
+      "approvedBy": "user-explicit-kinder-app-offline-ratzfatz-alles-bereit",
+      "reason": "Kids-App muss beim Öffnen sofort stehen: Offline-First, kein Netz-Sturm, Bilder und Startseite aus Cache.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "kids/",
+        "ios/DarAlTawhidKids/"
+      ],
+      "expiresAt": "2026-11-04T23:59:00.000Z"
+    },
+    {
       "id": "kids-start-redirect-loop-2026-10-04",
       "approvedBy": "user-explicit-kinder-kids-app-oeffnet-sich-nicht-nach-video",
       "reason": "Kids-App bleibt nach dem Intro-Video leer, weil /kids/start in einer 307-Schleife hängt. Router liefert die Startseite als Dokument aus, ohne die HTML-Datei wieder auf denselben Pfad umzuleiten.",

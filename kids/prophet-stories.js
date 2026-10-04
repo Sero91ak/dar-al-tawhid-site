@@ -154,7 +154,7 @@ function renderCards(){
     const text=buildText(item);
     const meta=(item.disputed?"IKHTILĀF · ":"QURʾĀN GEPRÜFT · ")+durationLabel(item,text);
     return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button">'+
-      '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" loading="'+(index<4?"eager":"lazy")+'" '+(index<2?'fetchpriority="high"':'')+'>'+
+      '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" loading="lazy">'+
       '<span class="ps-row-copy">'+
         '<span class="ps-row-meta">'+esc(meta)+'</span>'+
         '<span class="ps-row-title">'+esc(item.name)+'</span>'+
@@ -195,7 +195,7 @@ function prepareStoriesHome(view){
     entry.className="ps-prophet-entry";
     entry.type="button";
     entry.innerHTML=
-      '<span class="ps-entry-visual" aria-hidden="true"><img src="https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:7af2226e-a73d-4751-aadd-537b16785852" alt="" decoding="async" fetchpriority="high"></span>'+
+      '<span class="ps-entry-visual" aria-hidden="true"><img src="/kids/assets/prophets-v2/muhammad-card.jpg?v=22" alt="" decoding="async" loading="lazy"></span>'+
       '<span class="ps-entry-panel">'+
         '<span class="ps-entry-copy">'+
           '<span class="ps-entry-kicker">EIGENER BEREICH · QURʾĀN GEPRÜFT</span>'+
@@ -503,7 +503,7 @@ function stopAudio(){
 async function init(){
   if(!ensureUi())return;
   try{
-    const r=await fetch(DATA_URL+"?v="+Date.now(),{cache:"no-store"});
+    const r=await fetch(DATA_URL+"?v=28",{cache:"force-cache"});
     if(!r.ok)throw new Error("Propheten-Geschichten "+r.status);
     const data=await r.json();
     items=uniqueItems(data.items);

@@ -49,16 +49,12 @@
     if(typeof originalQuizSpeak==="function")return originalQuizSpeak(text);
   };
 
-  fetch("/kids/data/quiz-audio.json?v="+Date.now(),{cache:"no-store"})
+  fetch("/kids/data/quiz-audio.json?v=1",{cache:"force-cache"})
     .then(function(r){return r.ok?r.json():null})
     .then(function(d){
       if(d&&d.entries){
         manifest=d;
         ready=true;
-        try{
-          var urls=Object.keys(d.entries).slice(0,6).map(function(k){return d.entries[k]&&d.entries[k].url}).filter(Boolean);
-          urls.forEach(function(url){var a=new Audio();a.preload="metadata";a.src=url});
-        }catch(e){}
       }
     })
     .catch(function(){ready=false});
