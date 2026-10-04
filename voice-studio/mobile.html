@@ -139,12 +139,28 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",finalAudioName:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],wordResultSerial:0,generating:false};
 const LOCAL_ENGINE_HOST=location.port==="8787"||location.hostname==="127.0.0.1"||location.hostname==="localhost"||/^192\.168\./.test(location.hostname)||/^10\./.test(location.hostname)||/^172\.(1[6-9]|2\d|3[01])\./.test(location.hostname);
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
+const CLOUD_ACCESS_STORAGE_KEY="dar.voice.cloud.access.v1";
 const API_BASE=LOCAL_ENGINE_HOST?"":REMOTE_ENGINE_API;
 const apiUrl=path=>API_BASE+path;
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-async function api(path,opts={}){return fetch(apiUrl(path),{credentials:LOCAL_ENGINE_HOST?"include":"omit",cache:"no-store",...opts,headers:{"Content-Type":"application/json",...(opts.headers||{})}})}
+function cloudAccessToken(){if(LOCAL_ENGINE_HOST)return "";try{return String(localStorage.getItem(CLOUD_ACCESS_STORAGE_KEY)||"").trim()}catch(_){return ""}}
+function saveCloudAccessToken(value){if(LOCAL_ENGINE_HOST)return;const token=String(value||"").trim();try{if(token)localStorage.setItem(CLOUD_ACCESS_STORAGE_KEY,token);else localStorage.removeItem(CLOUD_ACCESS_STORAGE_KEY)}catch(_){}}
+function askCloudAccessToken(){if(LOCAL_ENGINE_HOST)return "";const value=window.prompt("DĀR Voice Zugangscode","");const token=String(value||"").trim();if(token)saveCloudAccessToken(token);return token}
+async function api(path,opts={},retried=false){
+  const headers={"Content-Type":"application/json",...(opts.headers||{})};
+  if(!LOCAL_ENGINE_HOST){
+    const token=cloudAccessToken();
+    if(token)headers["X-DAR-Voice-Access"]=token;
+  }
+  const response=await fetch(apiUrl(path),{credentials:LOCAL_ENGINE_HOST?"include":"omit",cache:"no-store",...opts,headers});
+  if(!LOCAL_ENGINE_HOST&&response.status===401&&!retried){
+    const token=askCloudAccessToken();
+    if(token)return api(path,opts,true);
+  }
+  return response;
+}
 async function health(){
   try{
     const r=await api("/health");const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"offline");
