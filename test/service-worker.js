@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1240';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1241';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -84,6 +84,13 @@ const APP_SHELL = [
   '/test/assets/fold-split.css',
   '/test/assets/frauen/frauen-fiqh.js',
   '/test/assets/frauen/frauen-fiqh.css',
+  '/test/assets/frauen/library-v1224/01-grundlagen-din.jpg',
+  '/test/assets/frauen/library-v1224/02-fiqh-frauen.jpg',
+  '/test/assets/frauen/library-v1224/03-erste-generationen.jpg',
+  '/test/assets/frauen/library-v1224/04-familie-erziehung.jpg',
+  '/test/assets/frauen/library-v1224/05-wissen-adab-dawah.jpg',
+  '/test/assets/frauen/library-v1224/06-alltag-schutz.jpg',
+  '/test/assets/frauen/library-v1224/07-lebensphasen.jpg',
   '/test/data/frauen-fiqh.json',
   '/test/data/frauen-sahabiyyat.json',
   '/test/data/frauen-tabiiyyat.json',

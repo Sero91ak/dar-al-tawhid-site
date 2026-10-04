@@ -2499,7 +2499,7 @@
   }
 
   function libraryVisualStyle(url) {
-    return url ? ' style="--frauen-card-img:url(' + esc(url) + ')"' : "";
+    return url ? ' style="--frauen-card-img:url(&quot;' + esc(url) + '&quot;)"' : "";
   }
 
   function libraryHero(title, subtitle, mode, backValue, eyebrow, statLeft, statRight) {

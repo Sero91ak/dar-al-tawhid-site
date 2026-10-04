@@ -3590,3 +3590,248 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-re
   .frauen-library-card.has-visual .frauen-library-card__desc,
   .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{font-size:9.8px!important}
 }
+
+
+/* v1228 · Frauen-Bibliothek: lesbare Propheten-Row-Geometrie */
+/*
+  Endkorrektur nach echter iPhone-Prüfung:
+  - Full-bleed Hintergrund bleibt wie bei Propheten.
+  - Kein Split.
+  - Text bekommt reale Pixelbreite aus der Kartenbreite, nicht Prozent einer bereits
+    durch Padding verkleinerten Content-Box.
+  - Bild bleibt rechts sichtbar und beginnt weich unter dem Text.
+*/
+.frauen-library-card.has-visual,
+.frauen-library-area-card.has-visual{
+  box-sizing:border-box!important;
+  display:block!important;
+  position:relative!important;
+  width:100%!important;
+  min-width:0!important;
+  overflow:hidden!important;
+  background-color:var(--card)!important;
+  background-image:var(--frauen-card-img)!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:right center!important;
+}
+
+.frauen-library-card.has-visual{
+  aspect-ratio:21 / 9.7!important;
+  min-height:148px!important;
+  padding:11px 42px 10px 13px!important;
+}
+.frauen-library-area-card.has-visual{
+  aspect-ratio:21 / 9.5!important;
+  min-height:144px!important;
+  padding:10px 40px 9px 12px!important;
+}
+
+/* Propheten-Prinzip: Motiv über die ganze Karte; nur Lesbarkeits-Overlay darüber. */
+.frauen-library-card.has-visual::after,
+.frauen-library-area-card.has-visual::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:0!important;
+  width:auto!important;
+  height:auto!important;
+  opacity:1!important;
+  transform:none!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--card) 100%,transparent) 0%,
+      color-mix(in srgb,var(--card) 100%,transparent) 28%,
+      color-mix(in srgb,var(--card) 96%,transparent) 40%,
+      color-mix(in srgb,var(--card) 80%,transparent) 52%,
+      color-mix(in srgb,var(--card) 52%,transparent) 62%,
+      color-mix(in srgb,var(--card) 22%,transparent) 71%,
+      color-mix(in srgb,var(--card) 6%,transparent) 78%,
+      transparent 84%)!important;
+  filter:none!important;
+}
+
+/* Reale nutzbare Textbreite: fast die ganze Karte; Bild darf weich darunter beginnen. */
+.frauen-library-card.has-visual .frauen-library-card__copy{
+  box-sizing:border-box!important;
+  display:block!important;
+  width:calc(100% - 22px)!important;
+  max-width:calc(100% - 22px)!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0 72px 0 0!important;
+  overflow:visible!important;
+  text-align:left!important;
+}
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+  box-sizing:border-box!important;
+  display:block!important;
+  width:calc(100% - 18px)!important;
+  max-width:calc(100% - 18px)!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0 68px 0 0!important;
+  overflow:visible!important;
+  text-align:left!important;
+}
+
+/* Nummer/Kicker belegen nur eine kleine Kopfzeile. */
+.frauen-library-card.has-visual .frauen-library-card__nr,
+.frauen-library-area-card.has-visual .frauen-library-area-card__nr{
+  position:absolute!important;
+  z-index:5!important;
+  top:10px!important;
+  left:12px!important;
+  min-width:27px!important;
+  height:21px!important;
+  padding:0 5px!important;
+  margin:0!important;
+  font-size:8.5px!important;
+  line-height:19px!important;
+}
+.frauen-library-card.has-visual .frauen-library-card__kicker{
+  min-height:21px!important;
+  margin:0 0 4px!important;
+  padding-left:39px!important;
+  font-size:8.1px!important;
+  line-height:1.15!important;
+  white-space:normal!important;
+}
+
+/* Überschriften horizontal, ausgewogen und vollständig. */
+.frauen-library-card.has-visual .frauen-library-card__copy h3,
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+  display:block!important;
+  width:auto!important;
+  max-width:100%!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+  word-break:keep-all!important;
+  overflow-wrap:normal!important;
+  hyphens:none!important;
+  text-wrap:balance;
+}
+.frauen-library-card.has-visual .frauen-library-card__copy h3{
+  margin:0!important;
+  font-size:17.5px!important;
+  line-height:1.08!important;
+  letter-spacing:-.01em!important;
+}
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+  margin:0!important;
+  min-height:21px!important;
+  padding-left:39px!important;
+  font-size:15.8px!important;
+  line-height:1.1!important;
+}
+
+/* Nichts mehr abschneiden. */
+.frauen-library-card.has-visual .frauen-library-card__desc,
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy > p,
+.frauen-library-card.has-visual .frauen-library-card__meta,
+.frauen-library-area-card.has-visual .frauen-library-area-card__meta{
+  display:block!important;
+  width:auto!important;
+  max-width:100%!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+  word-break:normal!important;
+  overflow-wrap:break-word!important;
+  hyphens:none!important;
+  -webkit-line-clamp:unset!important;
+  -webkit-box-orient:initial!important;
+}
+.frauen-library-card.has-visual .frauen-library-card__desc{
+  margin:5px 0 0!important;
+  font-size:10.2px!important;
+  line-height:1.23!important;
+}
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{
+  margin:5px 0 0!important;
+  font-size:9.9px!important;
+  line-height:1.22!important;
+}
+.frauen-library-card.has-visual .frauen-library-card__meta,
+.frauen-library-area-card.has-visual .frauen-library-area-card__meta{
+  margin:5px 0 0!important;
+  font-size:9.4px!important;
+  line-height:1.15!important;
+}
+
+/* 3D-Icon bleibt entfernt; Pfeil wie bei Propheten über dem Motiv. */
+.frauen-library-card.has-visual .frauen-library-card__icon,
+.frauen-library-area-card.has-visual .frauen-library-area-card__icon{
+  display:none!important;
+}
+.frauen-library-card.has-visual .frauen-library-card__arrow,
+.frauen-library-area-card.has-visual .frauen-library-area-card__arrow{
+  position:absolute!important;
+  z-index:6!important;
+  right:8px!important;
+  top:50%!important;
+  left:auto!important;
+  bottom:auto!important;
+  transform:translateY(-50%)!important;
+  width:31px!important;
+  height:31px!important;
+  font-size:21px!important;
+}
+
+/* Auf größeren Geräten darf die Typografie wachsen; Geometrie bleibt gleich. */
+@media (min-width:430px){
+  .frauen-library-card.has-visual{
+    aspect-ratio:21 / 9!important;
+    min-height:0!important;
+    padding:13px 48px 12px 16px!important;
+  }
+  .frauen-library-area-card.has-visual{
+    aspect-ratio:21 / 8.8!important;
+    min-height:0!important;
+    padding:12px 46px 11px 15px!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__copy{
+    padding-right:92px!important;
+  }
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+    padding-right:86px!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__copy h3{
+    font-size:20px!important;
+  }
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+    font-size:18px!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__desc{
+    font-size:11.2px!important;
+  }
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{
+    font-size:10.9px!important;
+  }
+}
+
+/* Sehr kleine iPhones: minimale Höhenreserve statt abgeschnittener Inhalte. */
+@media (max-width:360px){
+  .frauen-library-card.has-visual{
+    min-height:154px!important;
+    aspect-ratio:auto!important;
+  }
+  .frauen-library-area-card.has-visual{
+    min-height:150px!important;
+    aspect-ratio:auto!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__copy{
+    padding-right:58px!important;
+  }
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+    padding-right:54px!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__copy h3{
+    font-size:16.5px!important;
+  }
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+    font-size:15px!important;
+  }
+}
