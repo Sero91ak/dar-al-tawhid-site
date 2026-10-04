@@ -94,6 +94,8 @@ jobs:
           missing=[x for x in required if x not in html]
           if missing:
               raise SystemExit("mobile Voice markers missing: "+", ".join(missing))
+          if "$$(" in html:
+              raise SystemExit("mobile Voice contains accidental $$ selector helper")
           bad_plural=re.findall(r'(?<!\$)\$\("\[data-(?:style|audio|preview|confirm)[^"]*\]"\)\.forEach',html)
           if bad_plural:
               raise SystemExit("mobile Voice plural selector incorrectly uses querySelector: "+", ".join(bad_plural))
