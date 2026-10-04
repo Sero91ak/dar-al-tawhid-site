@@ -713,3 +713,593 @@ body.is-frauen-route .topics-theme-card .frauen-open-btn,
 body.is-frauen-route .frauen-post-row .frauen-open-btn{
   display:none;
 }
+
+
+/* ==========================================================================
+   FRAUEN_LIBRARY_V1221
+   Erwachsene Wissensbibliothek: Hub → Wissenswelt → Kapitel → Aussagen.
+   Detail-/Leseseite bewusst nicht umgebaut.
+   ========================================================================== */
+
+body.is-frauen-route[data-frauen-view="hub"] #appView > .view-head,
+body.is-frauen-route[data-frauen-view="group"] #appView > .view-head,
+body.is-frauen-route[data-frauen-view="list"] #appView > .view-head{
+  display:none!important;
+}
+
+body.is-frauen-route[data-frauen-view="hub"] #appView,
+body.is-frauen-route[data-frauen-view="group"] #appView,
+body.is-frauen-route[data-frauen-view="list"] #appView{
+  padding-top:0!important;
+}
+
+.frauen-library-shell{
+  width:min(1180px,100%);
+  margin:0 auto;
+  padding:2px 0 30px;
+}
+
+.frauen-library-hero{
+  --frauen-hero-img:url("/test/assets/home-v1194/study-runway.jpg");
+  position:relative;
+  isolation:isolate;
+  min-height:clamp(280px,39vw,420px);
+  margin:0 0 18px;
+  overflow:hidden;
+  border-radius:30px;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d7bd7b)) 30%,transparent);
+  background-image:var(--frauen-hero-img);
+  background-size:cover;
+  background-position:center 48%;
+  box-shadow:
+    0 24px 70px rgba(4,17,20,.22),
+    inset 0 0 0 1px rgba(255,255,255,.04);
+}
+
+.frauen-library-hero--group,
+.frauen-library-hero--section{
+  --frauen-hero-img:url("/test/assets/home-v1194/hero-wide-adobe.jpg");
+  min-height:clamp(238px,31vw,340px);
+}
+
+.frauen-library-hero--tone-din,
+.frauen-library-hero--tone-wissen{
+  --frauen-hero-img:url("/test/assets/home-v1194/study-runway.jpg");
+  background-position:center 50%;
+}
+.frauen-library-hero--tone-generationen,
+.frauen-library-hero--tone-familie{
+  --frauen-hero-img:url("/test/assets/home-v1194/hero-wide-adobe.jpg");
+  background-position:center 43%;
+}
+.frauen-library-hero--tone-fiqh,
+.frauen-library-hero--tone-lebensphasen{
+  --frauen-hero-img:url("/test/assets/home-v1194/hero-wide-adobe.jpg");
+  background-position:62% 50%;
+}
+.frauen-library-hero--tone-alltag{
+  --frauen-hero-img:url("/test/assets/home-v1194/study-runway.jpg");
+  background-position:58% 54%;
+}
+
+.frauen-library-hero::before,
+.frauen-library-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+.frauen-library-hero::before{
+  z-index:0;
+  background:
+    linear-gradient(90deg,rgba(3,19,24,.94) 0%,rgba(3,19,24,.80) 34%,rgba(3,19,24,.42) 63%,rgba(3,19,24,.12) 100%),
+    linear-gradient(180deg,rgba(1,8,12,.06) 0%,rgba(2,14,18,.18) 54%,rgba(2,16,19,.88) 100%);
+}
+.frauen-library-hero::after{
+  z-index:0;
+  inset:auto 7% 0 7%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,#e5c77e 75%,transparent),transparent);
+  opacity:.7;
+}
+.frauen-library-hero__shade{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    radial-gradient(circle at 78% 30%,rgba(221,184,99,.11),transparent 26%),
+    radial-gradient(circle at 18% 80%,rgba(18,75,69,.24),transparent 32%);
+}
+.frauen-library-hero__content{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  min-height:inherit;
+  width:min(760px,82%);
+  padding:clamp(28px,4vw,48px);
+  color:#fff8e9;
+  text-shadow:0 2px 18px rgba(0,0,0,.44);
+}
+.frauen-library-hero__eyebrow{
+  margin:0 0 9px;
+  color:#e9cf8c;
+  font-size:10.5px;
+  font-weight:850;
+  letter-spacing:.19em;
+  text-transform:uppercase;
+}
+.frauen-library-hero h2{
+  margin:0;
+  max-width:760px;
+  color:#fff9eb!important;
+  font-family:var(--serif);
+  font-size:clamp(34px,6vw,62px);
+  font-weight:620;
+  letter-spacing:-.025em;
+  line-height:.99;
+}
+.frauen-library-hero--section h2,
+.frauen-library-hero--group h2{
+  font-size:clamp(30px,5vw,50px);
+}
+.frauen-library-hero__subtitle{
+  max-width:660px;
+  margin:13px 0 0;
+  color:rgba(255,248,233,.87)!important;
+  font-size:clamp(14px,2vw,17px);
+  line-height:1.55;
+}
+.frauen-library-hero__stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:17px;
+}
+.frauen-library-hero__stats span{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:6px 11px;
+  border-radius:999px;
+  border:1px solid rgba(232,207,142,.30);
+  background:rgba(4,24,27,.46);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+  color:#f4e6bf;
+  font-size:11px;
+  font-weight:750;
+  letter-spacing:.025em;
+}
+.frauen-library-back{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  width:max-content;
+  min-height:36px;
+  margin:0 0 auto;
+  padding:6px 12px 6px 9px;
+  border:1px solid rgba(236,215,158,.28);
+  border-radius:999px;
+  background:rgba(4,24,27,.43);
+  color:#fff8e9;
+  font:inherit;
+  cursor:pointer;
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+}
+.frauen-library-back span{
+  font-size:24px;
+  font-weight:400;
+  line-height:.7;
+}
+.frauen-library-back b{
+  font-size:11px;
+  letter-spacing:.05em;
+}
+
+.frauen-library-search-wrap{
+  position:relative;
+  z-index:4;
+  width:min(920px,calc(100% - 28px));
+  margin:-39px auto 24px;
+}
+.frauen-library-search-wrap .frauen-search-pro,
+.frauen-library-list-controls .frauen-search-pro{
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.frauen-library-search-wrap .frauen-direct-pick,
+.frauen-library-list-controls .frauen-direct-pick{
+  display:none!important;
+}
+.frauen-library-search-wrap .search-input-shell,
+.frauen-library-list-controls .search-input-shell{
+  min-height:58px!important;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d9bf79)) 44%,transparent)!important;
+  border-radius:20px!important;
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--card,#102c2b) 92%,transparent),color-mix(in srgb,var(--bg,#081d20) 90%,transparent))!important;
+  box-shadow:0 17px 42px rgba(2,16,19,.17),inset 0 1px 0 rgba(255,255,255,.06)!important;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.frauen-library-search-wrap .search-input-field,
+.frauen-library-list-controls .search-input-field{
+  min-height:56px!important;
+  font-size:15px!important;
+}
+.frauen-library-search-wrap .search-input-icon,
+.frauen-library-list-controls .search-input-icon{
+  width:20px!important;
+  height:20px!important;
+}
+
+.frauen-library-section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:22px;
+  margin:22px 2px 15px;
+}
+.frauen-library-section-head span{
+  display:block;
+  margin-bottom:4px;
+  color:var(--gold2,var(--gold,#b79552));
+  font-size:9.5px;
+  font-weight:900;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.frauen-library-section-head h3{
+  margin:0;
+  color:var(--cat-ink,var(--ink));
+  font-family:var(--serif);
+  font-size:clamp(22px,3vw,29px);
+  font-weight:650;
+  line-height:1.12;
+}
+.frauen-library-section-head > p{
+  max-width:430px;
+  margin:0;
+  color:var(--muted);
+  font-size:12.5px;
+  line-height:1.5;
+  text-align:right;
+}
+
+.frauen-library-grid,
+.frauen-library-area-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:13px;
+}
+
+.frauen-library-card,
+.frauen-library-area-card{
+  position:relative;
+  display:grid;
+  align-items:center;
+  gap:14px;
+  width:100%;
+  overflow:hidden;
+  cursor:pointer;
+  color:inherit;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 22%,var(--line) 78%);
+  background:
+    radial-gradient(circle at 92% 18%,color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 9%,transparent),transparent 31%),
+    linear-gradient(145deg,color-mix(in srgb,var(--card) 96%,#fff 4%),color-mix(in srgb,var(--bg) 88%,var(--card) 12%));
+  box-shadow:
+    0 13px 32px color-mix(in srgb,#061819 13%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.07);
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.frauen-library-card{
+  grid-template-columns:52px 62px minmax(0,1fr) 30px;
+  min-height:168px;
+  padding:20px 18px 19px;
+  border-radius:25px;
+}
+.frauen-library-area-card{
+  grid-template-columns:40px 54px minmax(0,1fr) 28px;
+  min-height:128px;
+  padding:16px 15px;
+  border-radius:21px;
+}
+.frauen-library-card::before,
+.frauen-library-area-card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:16%;
+  bottom:16%;
+  width:2px;
+  border-radius:99px;
+  background:linear-gradient(180deg,transparent,var(--gold2,var(--gold,#d5bd80)),transparent);
+  opacity:.72;
+}
+.frauen-library-card:hover,
+.frauen-library-card:focus-within,
+.frauen-library-area-card:not(.is-pending):hover,
+.frauen-library-area-card:not(.is-pending):focus-within{
+  transform:translateY(-2px);
+  border-color:color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 46%,var(--line) 54%);
+  box-shadow:0 18px 42px color-mix(in srgb,#061819 19%,transparent),inset 0 1px 0 rgba(255,255,255,.09);
+}
+.frauen-library-card__nr,
+.frauen-library-area-card__nr{
+  align-self:start;
+  color:color-mix(in srgb,var(--gold2,var(--gold,#b89655)) 78%,var(--muted) 22%);
+  font-family:var(--serif);
+  font-size:12px;
+  font-weight:750;
+  letter-spacing:.11em;
+}
+.frauen-library-card__icon,
+.frauen-library-area-card__icon{
+  display:grid;
+  place-items:center;
+  border-radius:18px;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 20%,transparent);
+  background:color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 6%,transparent);
+}
+.frauen-library-card__icon{
+  width:62px;
+  height:62px;
+}
+.frauen-library-area-card__icon{
+  width:52px;
+  height:52px;
+  border-radius:16px;
+}
+.frauen-library-card__icon img,
+.frauen-library-area-card__icon img{
+  display:block;
+  width:72%;
+  height:72%;
+  object-fit:contain;
+  filter:drop-shadow(0 6px 9px rgba(0,0,0,.12));
+}
+.frauen-library-card__kicker{
+  margin:0 0 4px;
+  color:var(--gold2,var(--gold,#b99651));
+  font-size:9.5px;
+  font-weight:850;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.frauen-library-card__copy h3,
+.frauen-library-area-card__copy h3{
+  margin:0;
+  color:var(--cat-ink,var(--ink));
+  font-family:var(--serif);
+  font-weight:650;
+  line-height:1.16;
+}
+.frauen-library-card__copy h3{font-size:21px}
+.frauen-library-area-card__copy h3{font-size:18px}
+.frauen-library-card__desc,
+.frauen-library-area-card__copy > p{
+  margin:7px 0 0;
+  color:var(--muted);
+  line-height:1.48;
+}
+.frauen-library-card__desc{font-size:12.5px}
+.frauen-library-area-card__copy > p{font-size:12px}
+.frauen-library-card__meta,
+.frauen-library-area-card__meta{
+  display:block;
+  margin:8px 0 0;
+  color:color-mix(in srgb,var(--gold2,var(--gold,#b99651)) 72%,var(--muted) 28%);
+  font-size:10.5px;
+  font-weight:750;
+  letter-spacing:.025em;
+}
+.frauen-library-card__arrow,
+.frauen-library-area-card__arrow{
+  display:grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 24%,transparent);
+  color:var(--gold2,var(--gold,#b99651));
+  font-family:var(--serif);
+  font-size:25px;
+  line-height:1;
+}
+.frauen-library-area-card.is-pending{
+  cursor:default;
+  opacity:.58;
+  filter:saturate(.72);
+}
+
+.frauen-library-list > .frauen-library-hero{
+  margin-bottom:20px;
+}
+.frauen-library-list-controls{
+  position:relative;
+  z-index:3;
+  margin:-42px auto 22px;
+  width:min(880px,calc(100% - 30px));
+}
+.frauen-library-list > .frauen-hint{
+  width:min(880px,calc(100% - 12px));
+  margin:0 auto 15px!important;
+}
+.frauen-library-list .frauen-post-list{
+  width:min(920px,100%);
+  margin-left:auto;
+  margin-right:auto;
+}
+.frauen-library-list .frauen-statement-card{
+  border-radius:20px!important;
+  padding:14px 16px!important;
+}
+
+@media (min-width:1100px){
+  .frauen-library-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .frauen-library-card:first-child{
+    grid-column:span 2;
+  }
+  .frauen-library-card:first-child .frauen-library-card__copy h3{
+    font-size:24px;
+  }
+  .frauen-library-area-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media (max-width:760px){
+  .frauen-library-shell{
+    padding-bottom:22px;
+  }
+  .frauen-library-hero{
+    --frauen-hero-img:url("/test/assets/home-v1194/hero-mobile-adobe.jpg");
+    min-height:330px;
+    margin-left:-2px;
+    margin-right:-2px;
+    border-radius:0 0 28px 28px;
+    background-position:center 46%;
+  }
+  .frauen-library-hero--group,
+  .frauen-library-hero--section{
+    min-height:286px;
+  }
+  .frauen-library-hero::before{
+    background:
+      linear-gradient(90deg,rgba(3,18,23,.90) 0%,rgba(3,18,23,.73) 52%,rgba(3,18,23,.28) 100%),
+      linear-gradient(180deg,rgba(1,8,12,.03) 0%,rgba(2,14,18,.16) 45%,rgba(2,16,19,.90) 100%);
+  }
+  .frauen-library-hero__content{
+    width:94%;
+    padding:23px 21px 29px;
+  }
+  .frauen-library-hero h2{
+    font-size:clamp(34px,10vw,46px);
+  }
+  .frauen-library-hero--section h2,
+  .frauen-library-hero--group h2{
+    font-size:clamp(29px,8.2vw,39px);
+  }
+  .frauen-library-search-wrap{
+    width:calc(100% - 20px);
+    margin-top:-31px;
+  }
+  .frauen-library-section-head{
+    display:block;
+    margin:18px 5px 13px;
+  }
+  .frauen-library-section-head > p{
+    margin-top:7px;
+    max-width:none;
+    text-align:left;
+  }
+  .frauen-library-grid,
+  .frauen-library-area-grid{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .frauen-library-card{
+    grid-template-columns:35px 54px minmax(0,1fr) 26px;
+    min-height:138px;
+    padding:16px 13px;
+    gap:11px;
+    border-radius:21px;
+  }
+  .frauen-library-card__icon{
+    width:52px;
+    height:52px;
+    border-radius:16px;
+  }
+  .frauen-library-card__copy h3{
+    font-size:19px;
+  }
+  .frauen-library-card__desc{
+    font-size:11.8px;
+  }
+  .frauen-library-area-card{
+    grid-template-columns:30px 48px minmax(0,1fr) 25px;
+    min-height:116px;
+    padding:13px 11px;
+    gap:9px;
+  }
+  .frauen-library-area-card__icon{
+    width:46px;
+    height:46px;
+  }
+  .frauen-library-area-card__copy h3{
+    font-size:16.5px;
+  }
+  .frauen-library-list-controls{
+    width:calc(100% - 20px);
+    margin-top:-34px;
+  }
+}
+
+@media (max-width:420px){
+  .frauen-library-hero__content{
+    width:100%;
+    padding-left:17px;
+    padding-right:17px;
+  }
+  .frauen-library-hero__stats{
+    gap:6px;
+  }
+  .frauen-library-hero__stats span{
+    min-height:28px;
+    padding:5px 9px;
+    font-size:10px;
+  }
+  .frauen-library-card{
+    grid-template-columns:31px 48px minmax(0,1fr) 24px;
+    gap:8px;
+    padding:14px 10px;
+  }
+  .frauen-library-card__icon{
+    width:46px;
+    height:46px;
+  }
+  .frauen-library-card__copy h3{
+    font-size:17.5px;
+  }
+  .frauen-library-card__desc{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden;
+  }
+  .frauen-library-area-card{
+    grid-template-columns:26px 44px minmax(0,1fr) 22px;
+    gap:7px;
+    padding:12px 9px;
+  }
+  .frauen-library-area-card__icon{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+  }
+  .frauen-library-area-card__copy h3{
+    font-size:15.8px;
+  }
+  .frauen-library-area-card__copy > p{
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+    overflow:hidden;
+    font-size:11px;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .frauen-library-card,
+  .frauen-library-area-card{
+    transition:none!important;
+  }
+}
