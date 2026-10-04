@@ -1710,12 +1710,17 @@
     function openPdfRender(){
       const issues=pdfReadinessIssues();
       lastPdfIssues=issues;
-      if(issues.length){renderPdfReadiness(issues);toast("Pflichtangaben fehlen noch.");return}
+      const isTest=location.pathname.indexOf("/test/")===0;
+      if(issues.length&&!isTest){renderPdfReadiness(issues);toast("Pflichtangaben fehlen noch.");return}
       const payload=pdfPayload();
+      if(isTest&&issues.length){
+        payload.testMode=true;
+        payload.state.reviewFlags=[...(payload.state.reviewFlags||[]),"TESTMODUS: PDF-Ausgabe ohne vollständige Eingaben. Nicht als fertige Waṣiyyah verwenden."];
+      }
       storePdfPayload(payload);
       const root=$("#pdfResult");
-      if(root){root.classList.add("show");root.innerHTML="<p>Die textbasierte A4-Ausgabe wird geöffnet. Text bleibt markierbar, durchsuchbar und sauber druckbar.</p>"}
-      const target=location.pathname.indexOf("/test/")===0?"/test/wasiyyah/pdf-render/?print=1":"/wasiyyah/pdf-render/?print=1";
+      if(root){root.classList.add("show");root.innerHTML=isTest&&issues.length?"<p>Testmodus: PDF wird ohne Pflichtangaben geöffnet. Es werden keine Eingaben verlangt.</p>":"<p>Die textbasierte A4-Ausgabe wird geöffnet. Text bleibt markierbar, durchsuchbar und sauber druckbar.</p>"}
+      const target=isTest?"/test/wasiyyah/pdf-render/?print=1&test=1":"/wasiyyah/pdf-render/?print=1";
       const opened=window.open(target,"_blank");
       if(opened){try{opened.opener=null}catch(e){}}else location.href=target;
     }
