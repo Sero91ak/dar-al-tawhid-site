@@ -19,12 +19,17 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function fetchStatus(url) {
+async function fetchStatus(url, extraHeaders = {}) {
   const res = await fetch(url, {
     cache: "no-store",
-    headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
+    headers: { "Cache-Control": "no-cache", Pragma: "no-cache", ...extraHeaders }
   });
-  return { status: res.status, text: await res.text(), cf: res.headers.get("cf-cache-status") || "n/a" };
+  return {
+    status: res.status,
+    text: await res.text(),
+    cf: res.headers.get("cf-cache-status") || "n/a",
+    surface: res.headers.get("x-dar-surface") || ""
+  };
 }
 
 async function waitForStatus(url, expected = 200) {
@@ -37,12 +42,12 @@ async function waitForStatus(url, expected = 200) {
   return false;
 }
 
-async function waitForHtmlIncludes(url, needles) {
+async function waitForHtmlIncludes(url, needles, extraHeaders = {}) {
   for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
-    const { status, text, cf } = await fetchStatus(url);
+    const { status, text, cf, surface } = await fetchStatus(url, extraHeaders);
     const ok = status === 200 && needles.every((needle) => text.includes(needle));
     console.log(
-      `verify: ${url} -> ${status} (cf=${cf}, attempt ${attempt}/${ATTEMPTS}, html=${ok ? "ok" : "pending"})`
+      `verify: ${url} -> ${status} (cf=${cf}, surface=${surface || "n/a"}, attempt ${attempt}/${ATTEMPTS}, html=${ok ? "ok" : "pending"})`
     );
     if (ok) return true;
     if (attempt < ATTEMPTS) await sleep(DELAY_MS);
@@ -75,10 +80,20 @@ async function main() {
   if (mode === "visitor" || mode === "all") {
     const visitorBuild = process.env.EXPECT_BUILD || readBuildId("version.json");
     const expectZakat = Number(process.env.EXPECT_ZAKAT_VERSION || 18);
-    let visitorOk = await waitForHtmlIncludes(`${SITE_URL}/`, [visitorBuild]);
-    if (!visitorOk) visitorOk = await waitForHtmlIncludes(`${SITE_URL}/index.html`, [visitorBuild]);
+    const nativeHeaders = { "User-Agent": "DarAlTawhid-iOS/DeployVerify" };
 
-    const { text } = await fetchStatus(`${SITE_URL}/`);
+    // Browser root intentionally serves the public desktop website, while the
+    // installed/native app receives the canonical app shell. Validate both.
+    const publicWebsiteOk = await waitForHtmlIncludes(`${SITE_URL}/`, [
+      "DĀR AL TAWḤĪD",
+      "desktop-overhaul"
+    ]);
+    let visitorOk = await waitForHtmlIncludes(`${SITE_URL}/`, [visitorBuild], nativeHeaders);
+    if (!visitorOk) {
+      visitorOk = await waitForHtmlIncludes(`${SITE_URL}/index.html`, [visitorBuild], nativeHeaders);
+    }
+
+    const { text } = await fetchStatus(`${SITE_URL}/`, nativeHeaders);
     const zakatMatch = text.match(/zakat-app\.js\?v=(\d+)/);
     const zakatVer = zakatMatch ? Number(zakatMatch[1]) : 0;
 
@@ -94,14 +109,14 @@ async function main() {
       200
     );
 
-    if (!visitorOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
+    if (!publicWebsiteOk || !visitorOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (build=${visitorBuild}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
+        `verify: Besucher-App fehlgeschlagen (public=${publicWebsiteOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {
       console.log(
-        `verify: Besucher-App live OK (${visitorBuild}, zakat>=v${expectZakat}, Voice Studio + Aussprachebibliothek OK)`
+        `verify: Besucher-App live OK (public website + native ${visitorBuild}, zakat>=v${expectZakat}, Voice Studio + Aussprachebibliothek OK)`
       );
     }
   }
