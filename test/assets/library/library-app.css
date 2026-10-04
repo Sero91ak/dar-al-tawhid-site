@@ -2577,3 +2577,61 @@ html[data-theme="dar-al-layl"]{
   .lib-portal-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
   .lib-portal{min-height:78px}
 }
+
+
+/* DAR_LIBRARY_RESPONSIVE_HERO_V1249
+   Hero behaves like the other app areas: embedded full-width scene, no side-cut poster. */
+:root{
+  --dar-lib-cinema-image:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/bf6eec28-bad9-444e-96b1-d0bd11904658/Photorealistic_historical_Islamic_manuscript_library_interior__approximately_10th_11th_century__Abso_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiODM5MDlkMzRhOTY5ZTRlZCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI3NjcyNH0.RqeiQkRznAZsdXSwDu2plvX4B7TQHXn33__bXRCi5z8");
+}
+.lib-page[data-library-root] .lib-hero{
+  width:auto;
+  max-width:none;
+  min-height:clamp(270px,44vw,390px);
+  margin:0 0 18px;
+  margin-inline:0;
+  border-radius:0 0 26px 26px;
+  padding:clamp(24px,5vw,38px);
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 91%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 76%,transparent) 32%,
+      color-mix(in srgb,var(--bg) 43%,transparent) 57%,
+      color-mix(in srgb,var(--bg) 10%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 8%,transparent),
+      color-mix(in srgb,var(--bg) 25%,transparent)),
+    var(--dar-lib-cinema-image) center center/cover no-repeat;
+}
+.lib-page[data-library-root] .lib-hero-inner{
+  width:min(58%,610px);
+  max-width:610px;
+}
+@media(max-width:520px){
+  .lib-page[data-library-root] .lib-hero{
+    min-height:300px;
+    margin-inline:0;
+    border-radius:0 0 22px 22px;
+    padding:24px 22px 22px;
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb,var(--bg) 94%,transparent) 0%,
+        color-mix(in srgb,var(--bg) 82%,transparent) 39%,
+        color-mix(in srgb,var(--bg) 48%,transparent) 67%,
+        color-mix(in srgb,var(--bg) 12%,transparent) 100%),
+      linear-gradient(180deg,transparent 58%,color-mix(in srgb,var(--bg) 25%,transparent)),
+      var(--dar-lib-cinema-image) 58% center/cover no-repeat;
+  }
+  .lib-page[data-library-root] .lib-hero-inner{
+    width:min(70%,520px);
+  }
+  .lib-page[data-library-root] .lib-hero h2{
+    font-size:clamp(1.82rem,8vw,2.5rem);
+  }
+}
+@media(min-width:700px){
+  .lib-page[data-library-root] .lib-hero{
+    border-radius:0 0 30px 30px;
+    background-position:center 48%;
+  }
+}
