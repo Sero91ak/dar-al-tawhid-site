@@ -25,5 +25,7 @@
     "women": "fully covered; shown from behind, fully veiled, distant or otherwise without visible facial features"
   },
   "generation_rule": "When a new Frauen library group or area is added and no bespoke visual exists, generate and commit a matching historical visual before release. Do not silently reuse an unrelated motif.",
-  "responsive_rule": "Preserve left-aligned readable text and a clearly visible right-side image on phone, tablet and desktop."
+  "responsive_rule": "Preserve left-aligned readable text and a clearly visible right-side image on phone, tablet and desktop.",
+  "readability_rule": "All visible card text must remain fully readable on phone, tablet and desktop. Never use ellipsis, line-clamp, word-by-word narrow columns or hidden overflow to make a card fit; reduce typography slightly or allow minimal vertical growth instead.",
+  "card_layout_rule": "Use one full-bleed background image with a soft readability overlay; no visible left/right split. Keep normal horizontal word flow and preserve complete titles, descriptions and metadata."
 }
