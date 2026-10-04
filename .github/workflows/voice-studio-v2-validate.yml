@@ -76,6 +76,8 @@ jobs:
           grep -q 'story-reference-muhammad-2026-10-04.json' voice-studio/cloud-gpu/Dockerfile
           grep -q 'story-reference-adam-2026-10-04.json' voice-studio/cloud-gpu/Dockerfile
           grep -q 'story-reference-idris-2026-10-04.json' voice-studio/cloud-gpu/Dockerfile
+          grep -q 'COPY app-icon-512.png ./app-icon-512.png' voice-studio/cloud-gpu/Dockerfile
+          grep -q 'COPY watermark-my-logo-full.png ./watermark-my-logo-full.png' voice-studio/cloud-gpu/Dockerfile
           python - <<'PY'
           from pathlib import Path
           import json
