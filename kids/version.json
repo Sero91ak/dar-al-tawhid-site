@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v35-quiz650-topics-catalog1102",
-  "label": "KIDS · V1.07.41",
-  "releasedAt": "2026-10-04T10:31:30Z",
-  "note": "DĀR AL TAWḤĪD Kids Quiz: 650 geprüfte Fragen bleiben eingefroren. Der Katalog zeigt Themen jetzt als altersabhängig große visuelle Karten mit den lokalen realistischen Quiz-Bildwelten: groß und deutlich für 4–6, spielerisch für 7–8 und kompakter für 9–10. Die 13 Themenwelten, der reaktive Hero und Serhat-Owner-Voice bleiben vollständig erhalten.",
+  "buildId": "kids-shell-v36-quiz650-topics-catalog1103",
+  "label": "KIDS · V1.07.42",
+  "releasedAt": "2026-10-04T10:33:00Z",
+  "note": "DĀR AL TAWḤĪD Kids Quiz: 650 geprüfte Fragen bleiben eingefroren. 13 realistische lokale Themenwelten sind aktiv; die Themenauswahl im Vollkatalog ist jetzt selbst bildbasiert und altersabhängig skaliert. Beschriftungen sitzen browserstabil im unteren Bildbereich. Für 4–6 bleiben Hören und große Touchflächen im Vordergrund, 7–8 bleibt spielerisch, 9–10 kompakter. Serhat-Owner-Voice bleibt unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1102",
+    "serviceWorkerCache": "v1103",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -267,7 +267,7 @@
     "kidsQuizManifestNetworkFirst": true,
     "kidsQuizReleaseGuard": true,
     "quizVisualSystem": {
-      "version": "age-adaptive-realistic-v17",
+      "version": "age-adaptive-realistic-v18",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
       "questionCount": 650,
@@ -347,7 +347,7 @@
       "fullQuestionCatalogOwnerVoice": true,
       "shortQuizRoundsPreserved": true,
       "noNewQuestionsInThisRelease": true,
-      "catalogAssetVersion": 7,
+      "catalogAssetVersion": 8,
       "latestContentPack": "601-650",
       "questionGenerationPaused": true,
       "questionGenerationCap": 650,
@@ -391,7 +391,8 @@
       "topicArtworkJusticeRouting": true,
       "catalogVisualTopicCards": true,
       "catalogVisualTopicCardsAgeAdaptive": true,
-      "catalogVisualTopicCardsAssetVersion": 5
+      "catalogVisualTopicCardsAssetVersion": 6,
+      "catalogVisualTopicCardsLabelPlacement": "bottom-stable"
     },
     "kidsQuizContentRevision": "001-650",
     "kidsQuizGenerationPaused": true,
