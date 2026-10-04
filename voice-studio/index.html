@@ -88,7 +88,7 @@ h1{font-size:clamp(26px,2.1vw,40px);line-height:1.02;letter-spacing:-.035em;marg
 .prophet-pick.focus{outline:2px solid rgba(217,182,111,.55);outline-offset:2px}.prophet-review{margin-top:9px;border:1px solid rgba(239,157,157,.24);border-radius:12px;padding:9px;background:rgba(120,25,25,.08)}.prophet-review[hidden]{display:none}.prophet-review-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.prophet-review-term{min-height:30px!important;padding:6px 9px!important;font-size:10px!important}.prophet-review-meta{font-size:10px;color:var(--muted);line-height:1.45}
 @media(max-width:900px){.prophet-pick-list{grid-template-columns:1fr}}
 
-/* 2.9.77 · Prophetenübersicht wieder lesbar + klarer Datei-Upload */
+/* 2.9.78 · Prophetenübersicht wieder lesbar + klarer Datei-Upload */
 .prophet-pick-list{grid-template-columns:1fr;gap:8px}
 .prophet-pick-item{
   grid-template-columns:minmax(220px,1.35fr) minmax(150px,.78fr) 102px 112px 96px 112px;
@@ -678,7 +678,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   Voice Studio 2.9.77 · page-focused production architecture
+   Voice Studio 2.9.78 · page-focused production architecture
    Jede Aufgabe hat eine eigene Arbeitsfläche; kein Dashboard-Scroll.
    ═══════════════════════════════════════════════════════════════ */
 [hidden]{display:none!important}
@@ -717,6 +717,17 @@ body.free-voice-mode .mobile-actions{display:none!important}
 #pronunciationWorkspace .learning-word-picker{max-height:260px;padding:12px;gap:7px;margin:0}
 #pronunciationWorkspace .learning-word{font-size:11px;padding:7px 10px}
 #pronunciationWorkspace .learning-results{grid-template-columns:1fr 1fr;max-height:320px;margin:0}
+.pronunciation-catalog{display:grid;gap:8px;padding:12px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.018)}
+.pronunciation-catalog-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center}
+.pronunciation-catalog-head input{min-height:40px}
+.pronunciation-catalog-count{font-size:10px;color:var(--muted);white-space:nowrap}
+.pronunciation-catalog-list{display:grid;grid-template-columns:1fr 1fr;gap:7px;max-height:360px;overflow:auto;padding-right:2px}
+.pronunciation-catalog-item{appearance:none;width:100%;text-align:left;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025);color:var(--ink);padding:9px 10px;cursor:pointer;min-width:0}
+.pronunciation-catalog-item:hover{border-color:rgba(217,182,111,.42);background:rgba(217,182,111,.05)}
+.pronunciation-catalog-item b{display:block;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pronunciation-catalog-item span{display:block;font-family:"Geeza Pro","Noto Naskh Arabic",serif;font-size:16px;line-height:1.3;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pronunciation-catalog-item small{display:block;font-size:9px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#pronCatalogMore{width:100%;min-height:38px}
 #pronunciationWorkspace .learning-result{padding:11px}
 #pronunciationWorkspace .learning-result .learning-result-tts{font-size:21px}
 .pronunciation-editor-card{display:grid;gap:10px}
@@ -748,6 +759,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
   .studio-focus-side{position:relative;top:auto;max-height:none}
 }
 @media(max-width:799px){
+  .pronunciation-catalog-list{grid-template-columns:1fr}
   .studio-focus-main,.studio-focus-side{border-left:0;border-right:0;border-radius:0;padding:17px max(14px,var(--safe-right)) 22px max(14px,var(--safe-left));box-shadow:none}
   .studio-page-head{display:block}
   #pronunciationWorkspace .learning-results{grid-template-columns:1fr}
@@ -763,7 +775,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.77 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.78 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -822,7 +834,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.77</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.78</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
@@ -944,6 +956,18 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
           <div class="section-title">Alle Wörter im aktuellen Text</div>
           <div class="notice" style="margin-bottom:8px">Grau = noch nicht geprüft · Rot = Korrektur offen · Grün = dauerhaft gelernt.</div>
           <div id="storyWordList" class="learning-word-picker"></div>
+        </div>
+        <div class="pronunciation-catalog">
+          <div>
+            <div class="section-title" style="margin:0 0 4px">Gesamte Aussprachebibliothek</div>
+            <div class="notice">Alle installierten und angelernten Wörter. Ein Wort anklicken = auswählen und direkt als Schnelltest anhören.</div>
+          </div>
+          <div class="pronunciation-catalog-head">
+            <input id="pronCatalogSearch" type="search" autocomplete="off" spellcheck="false" placeholder="Bibliothek filtern …">
+            <span id="pronCatalogCount" class="pronunciation-catalog-count">lädt …</span>
+          </div>
+          <div id="pronCatalogList" class="pronunciation-catalog-list"><div class="notice">Bibliothek wird geladen …</div></div>
+          <button id="pronCatalogMore" class="btn quiet" type="button" hidden>Weitere Wörter laden</button>
         </div>
         <div>
           <div class="section-title">Falsch ausgesprochenes Wort / Name</div>
@@ -1070,7 +1094,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
     <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.77</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.78</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash</textarea>
@@ -1163,7 +1187,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.77 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.78 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
 </div>
 </div>
 
@@ -1173,7 +1197,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 </div>
 
 <script>
-const APP_VERSION="2.9.77";
+const APP_VERSION="2.9.78";
 const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
 const PROSODY_LABELS={
   auto:"Auto",narration:"Erzählung",kids_story:"Kinder-Geschichte",kids_lesson:"Kinder-Unterricht",
@@ -1191,6 +1215,7 @@ let studioMode="production",freeVoiceAudioUrl="",freeVoiceProgressTimer=null;
 window.darVoiceQaIsConfirmed=()=>Boolean(qaConfirmed&&lastAudio&&lastGeneratedText===String($("#text")?.value||"").trim());
 let freeVoiceLearningResults=[],freeVoiceLearningCandidate=null,freeVoiceLearningPreviewId="",freeVoiceLearningPreviewUrl="";
 let learningResults=[],learningCandidate=null,learningPreviewId="",learningPreviewUrl=null,learningPreviewRequestSerial=0,learningSearchRequestSerial=0;
+let pronCatalogRows=[],pronCatalogOffset=0,pronCatalogTotal=0,pronCatalogQuery="",pronCatalogTimer=null;
 let learnedCanonicals=new Set(),learnedTerms=new Set(),confirmedAudioLocks=new Set();
 let manualLearningTerm="",learningVariant=0;
 let pendingLearningTerms=new Set();
@@ -1406,7 +1431,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.77")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.78")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -1429,7 +1454,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("current");
     top.textContent="Updates · aktuell";
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.77")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.78")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     top.hidden=false;
@@ -1639,6 +1664,51 @@ function chooseLearningVariant(index){
     return;
   }
   previewLearning({fromVariant:true});
+}
+
+function renderPronunciationCatalog(){
+  const wrap=$("#pronCatalogList"),count=$("#pronCatalogCount"),more=$("#pronCatalogMore");
+  if(!wrap)return;
+  count.textContent=pronCatalogTotal.toLocaleString("de-DE")+" Wörter";
+  wrap.innerHTML=pronCatalogRows.length?pronCatalogRows.map((r,i)=>
+    '<button type="button" class="pronunciation-catalog-item" data-pron-catalog-index="'+i+'">'+
+    '<b>'+esc(r.canonical||r.input||"Wort")+'</b>'+
+    '<span dir="auto">'+esc(r.ttsText||r.alias||"")+'</span>'+
+    '<small>'+esc(r.source||"Bibliothek")+(r.confirmed?" · MASTER ✓":" · ▶ anhören")+'</small></button>'
+  ).join(""):'<div class="notice">Keine passenden Wörter gefunden.</div>';
+  wrap.querySelectorAll("[data-pron-catalog-index]").forEach(btn=>btn.addEventListener("click",()=>{
+    const row=pronCatalogRows[Number(btn.dataset.pronCatalogIndex)];
+    if(!row)return;
+    const term=String(row.canonical||row.input||"").trim();
+    manualLearningTerm=term;
+    learningVariant=0;
+    $("#learnTerm").value=term;
+    if($("#learnSelectedLabel"))$("#learnSelectedLabel").textContent=term;
+    renderLearningResults([row]);
+    selectLearningCandidate(0,true);
+  }));
+  more.hidden=pronCatalogRows.length>=pronCatalogTotal;
+  more.disabled=false;
+}
+async function loadPronunciationCatalog(reset=true){
+  const q=String($("#pronCatalogSearch")?.value||"").trim();
+  if(reset){
+    pronCatalogQuery=q;pronCatalogOffset=0;pronCatalogRows=[];
+    if($("#pronCatalogList"))$("#pronCatalogList").innerHTML='<div class="notice">Bibliothek wird geladen …</div>';
+  }
+  try{
+    const r=await localRequest("/learning/catalog?q="+encodeURIComponent(q)+"&offset="+pronCatalogOffset+"&limit=80");
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.ok)throw Error(d.error||"Aussprachebibliothek nicht erreichbar.");
+    const rows=Array.isArray(d.items)?d.items:[];
+    pronCatalogRows=pronCatalogRows.concat(rows);
+    pronCatalogOffset+=rows.length;
+    pronCatalogTotal=Number(d.total||pronCatalogRows.length);
+    renderPronunciationCatalog();
+  }catch(e){
+    if($("#pronCatalogList"))$("#pronCatalogList").innerHTML='<div class="notice">'+esc(e.message||String(e))+'</div>';
+    if($("#pronCatalogCount"))$("#pronCatalogCount").textContent="Fehler";
+  }
 }
 
 function renderLearningResults(results){
@@ -2137,7 +2207,7 @@ function setStudioPage(page){
   const freeBtn=$("#freeVoiceToggleBtn");
   if(freeBtn)freeBtn.textContent=page==="free"?"Zur Produktion":"Freie Stimme";
   if(page==="free"){updateFreeVoiceCounter();$("#freeVoiceText")?.focus()}
-  if(page==="pronunciation"){renderStoryWordList();$("#learnTerm")?.focus()}
+  if(page==="pronunciation"){renderStoryWordList();loadPronunciationCatalog(true);$("#learnTerm")?.focus()}
   if(page==="system"&&NATIVE_MAC)requestNativeUpdate("check");
   try{localStorage.setItem("dar.voice.studioPage.v1",page)}catch(_){}
 }
@@ -2407,7 +2477,8 @@ async function generateFreeVoice(){
         body:JSON.stringify({
           text:value,
           style:$("#freeVoiceStyle").value,
-          pronunciationLibrary:$("#freeVoicePronunciation").checked
+          pronunciationLibrary:$("#freeVoicePronunciation").checked,
+          interactiveFast:true
         }),
         signal:controller.signal
       });
@@ -2499,7 +2570,7 @@ async function generate({autoRerender=false}={}){
       r=await localRequest("/generate",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({text,prepared:analysis.prepared,voice:"Serhat",format:"wav",style:$("#styleMode").value}),
+        body:JSON.stringify({text,prepared:analysis.prepared,voice:"Serhat",format:"wav",style:$("#styleMode").value,interactiveFast:true}),
         signal:controller.signal
       });
     }finally{
@@ -2653,6 +2724,8 @@ $("#learnResults").addEventListener("click",e=>{
 });
 $("#learnSelectionBtn").onclick=takeTextSelection;
 $("#manualSelectionBtn").onclick=takeTextSelection;
+$("#pronCatalogMore").onclick=()=>{$("#pronCatalogMore").disabled=true;loadPronunciationCatalog(false)};
+$("#pronCatalogSearch").addEventListener("input",()=>{clearTimeout(pronCatalogTimer);pronCatalogTimer=setTimeout(()=>loadPronunciationCatalog(true),180)});
 $("#learnSearchBtn").onclick=()=>{learningVariant=0;$("#learnResetVariantBtn").textContent="Variante 1";searchLearning()};
 $("#learnPreviewBtn").onclick=()=>previewLearning();
 document.querySelectorAll("[data-learning-variant]").forEach(btn=>btn.addEventListener("click",()=>chooseLearningVariant(btn.dataset.learningVariant)));
@@ -2818,8 +2891,8 @@ loadLibrary();
 checkHealth({quiet:true}).then(()=>analyzeProsody());
 setInterval(()=>checkHealth({quiet:true}),5000);
 setTimeout(()=>{
-  let initial="prophets";
-  try{initial=localStorage.getItem("dar.voice.studioPage.v1")||"prophets"}catch(_){}
+  let initial="free";
+  try{initial=localStorage.getItem("dar.voice.studioPage.v1")||"free"}catch(_){}
   setStudioPage(initial);
 },120);
 
