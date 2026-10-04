@@ -3174,3 +3174,230 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-hero[data-hero-re
     font-size:10.5px!important;
   }
 }
+
+
+/* v1226 · Frauen-Bibliothek: Prophet-Row-Prinzip, Full-bleed Motiv */
+.frauen-library-card.has-visual,
+.frauen-library-area-card.has-visual{
+  --frauen-text-w:58%;
+  display:block!important;
+  position:relative!important;
+  isolation:isolate!important;
+  width:100%!important;
+  min-height:0!important;
+  aspect-ratio:21 / 9!important;
+  overflow:hidden!important;
+  padding:14px 54px 13px 18px!important;
+  border-radius:22px!important;
+  background:var(--frauen-card-img) center/cover no-repeat!important;
+}
+.frauen-library-area-card.has-visual{
+  --frauen-text-w:59%;
+  aspect-ratio:21 / 8.6!important;
+}
+.frauen-library-card.has-visual::after,
+.frauen-library-area-card.has-visual::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:0!important;
+  width:auto!important;
+  height:auto!important;
+  opacity:1!important;
+  transform:none!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--card) 99%,transparent) 0%,
+      color-mix(in srgb,var(--card) 98%,transparent) 24%,
+      color-mix(in srgb,var(--card) 92%,transparent) 38%,
+      color-mix(in srgb,var(--card) 72%,transparent) 50%,
+      color-mix(in srgb,var(--card) 38%,transparent) 63%,
+      color-mix(in srgb,var(--card) 12%,transparent) 75%,
+      transparent 88%),
+    linear-gradient(180deg,color-mix(in srgb,var(--card) 5%,transparent),rgba(7,17,15,.07))!important;
+  filter:none!important;
+}
+.frauen-library-card.has-visual > *,
+.frauen-library-area-card.has-visual > *{
+  position:relative;
+  z-index:2;
+}
+.frauen-library-card.has-visual .frauen-library-card__copy,
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+  width:var(--frauen-text-w)!important;
+  max-width:var(--frauen-text-w)!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:left!important;
+  text-shadow:0 1px 0 color-mix(in srgb,var(--card) 75%,transparent);
+}
+.frauen-library-card.has-visual .frauen-library-card__nr,
+.frauen-library-area-card.has-visual .frauen-library-area-card__nr{
+  position:absolute!important;
+  z-index:4!important;
+  top:13px!important;
+  left:16px!important;
+  min-width:32px!important;
+  height:25px!important;
+  margin:0!important;
+  padding:0 7px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--card) 90%,transparent)!important;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 24%,var(--line) 76%)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  box-shadow:0 5px 14px rgba(5,18,16,.07)!important;
+}
+.frauen-library-card.has-visual .frauen-library-card__kicker{
+  min-height:25px!important;
+  margin:0 0 4px!important;
+  padding-left:47px!important;
+  font-size:9px!important;
+  line-height:1.18!important;
+}
+.frauen-library-card.has-visual .frauen-library-card__copy h3{
+  margin:0!important;
+  max-width:100%!important;
+  font-size:clamp(20px,5vw,25px)!important;
+  line-height:1.06!important;
+  letter-spacing:-.014em!important;
+}
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+  margin:0!important;
+  padding-left:47px!important;
+  min-height:25px!important;
+  max-width:100%!important;
+  font-size:clamp(18px,4.5vw,22px)!important;
+  line-height:1.08!important;
+}
+.frauen-library-card.has-visual .frauen-library-card__desc,
+.frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{
+  margin:6px 0 0!important;
+  max-width:100%!important;
+  font-size:clamp(11px,3vw,12.5px)!important;
+  line-height:1.34!important;
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  overflow:hidden!important;
+  -webkit-line-clamp:3!important;
+}
+.frauen-library-card.has-visual .frauen-library-card__meta,
+.frauen-library-area-card.has-visual .frauen-library-area-card__meta{
+  display:block!important;
+  margin:6px 0 0!important;
+  max-width:100%!important;
+  font-size:10.5px!important;
+  line-height:1.18!important;
+}
+.frauen-library-card.has-visual .frauen-library-card__icon,
+.frauen-library-area-card.has-visual .frauen-library-area-card__icon{
+  display:none!important;
+}
+.frauen-library-card.has-visual .frauen-library-card__arrow,
+.frauen-library-area-card.has-visual .frauen-library-area-card__arrow{
+  position:absolute!important;
+  z-index:5!important;
+  right:13px!important;
+  top:50%!important;
+  left:auto!important;
+  bottom:auto!important;
+  transform:translateY(-50%)!important;
+  width:40px!important;
+  height:40px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--card) 78%,transparent)!important;
+  border:1px solid color-mix(in srgb,var(--gold2,var(--gold,#d5bd80)) 34%,transparent)!important;
+  box-shadow:0 7px 20px rgba(4,17,16,.12)!important;
+  backdrop-filter:blur(9px)!important;
+  -webkit-backdrop-filter:blur(9px)!important;
+}
+.frauen-library-card--generationen.has-visual{
+  --frauen-text-w:57%;
+  background-position:58% center!important;
+}
+@media (min-width:761px){
+  .frauen-library-card.has-visual{--frauen-text-w:61%}
+  .frauen-library-area-card.has-visual{--frauen-text-w:62%}
+}
+@media (max-width:760px){
+  .frauen-library-card.has-visual{
+    --frauen-text-w:57%;
+    aspect-ratio:21 / 9!important;
+    padding:12px 49px 11px 14px!important;
+    border-radius:20px!important;
+  }
+  .frauen-library-area-card.has-visual{
+    --frauen-text-w:58%;
+    aspect-ratio:21 / 8.8!important;
+    padding:11px 47px 10px 13px!important;
+    border-radius:19px!important;
+  }
+  .frauen-library-card.has-visual::after,
+  .frauen-library-area-card.has-visual::after{
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb,var(--card) 99%,transparent) 0%,
+        color-mix(in srgb,var(--card) 98%,transparent) 22%,
+        color-mix(in srgb,var(--card) 91%,transparent) 38%,
+        color-mix(in srgb,var(--card) 70%,transparent) 51%,
+        color-mix(in srgb,var(--card) 34%,transparent) 65%,
+        color-mix(in srgb,var(--card) 9%,transparent) 78%,
+        transparent 90%),
+      linear-gradient(180deg,color-mix(in srgb,var(--card) 4%,transparent),rgba(7,17,15,.08))!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__nr,
+  .frauen-library-area-card.has-visual .frauen-library-area-card__nr{
+    top:11px!important;
+    left:13px!important;
+    min-width:30px!important;
+    height:23px!important;
+    padding:0 6px!important;
+    font-size:9px!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__kicker{
+    min-height:23px!important;
+    padding-left:43px!important;
+    font-size:8.4px!important;
+  }
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+    min-height:23px!important;
+    padding-left:43px!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__copy h3{
+    font-size:clamp(18px,5.2vw,22px)!important;
+  }
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+    font-size:clamp(16.5px,4.7vw,20px)!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__desc,
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{
+    margin-top:5px!important;
+    font-size:clamp(10.6px,2.95vw,11.8px)!important;
+    line-height:1.29!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__meta,
+  .frauen-library-area-card.has-visual .frauen-library-area-card__meta{
+    margin-top:4px!important;
+    font-size:9.8px!important;
+  }
+  .frauen-library-card.has-visual .frauen-library-card__arrow,
+  .frauen-library-area-card.has-visual .frauen-library-area-card__arrow{
+    right:9px!important;
+    width:34px!important;
+    height:34px!important;
+    font-size:23px!important;
+  }
+}
+@media (max-width:390px){
+  .frauen-library-card.has-visual{--frauen-text-w:56%}
+  .frauen-library-area-card.has-visual{--frauen-text-w:57%}
+  .frauen-library-card.has-visual .frauen-library-card__copy h3{font-size:17.5px!important}
+  .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{font-size:16px!important}
+}
