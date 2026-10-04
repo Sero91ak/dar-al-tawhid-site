@@ -4,6 +4,10 @@
   var category="all";
   var query="";
   var directQuestion=false;
+  var PAGE_SIZE=40;
+  var visibleLimit=PAGE_SIZE;
+  var searchTimer=0;
+  var voiceRefreshTimer=0;
   var originalFinish=window.renderQuizFinish;
 
   function byId(id){return document.getElementById(id)}
@@ -63,18 +67,28 @@
         '<input id="quizLibrarySearch" class="quiz-library-search" type="search" inputmode="search" autocomplete="off" placeholder="Frage, Thema oder Nummer suchen" aria-label="Quizfragen suchen">'+
         '<div id="quizLibraryCategories" class="quiz-library-categories" aria-label="Themen"></div>'+
       '</div>'+
-      '<div class="quiz-library-meta"><strong id="quizLibraryResultCount"></strong><span>Antippen = direkt testen</span></div>'+
-      '<div id="quizLibraryList" class="quiz-library-list"></div>';
+      '<div class="quiz-library-meta"><strong id="quizLibraryResultCount"></strong><span id="quizLibraryMetaHint">Antippen = direkt testen</span></div>'+
+      '<div id="quizLibraryList" class="quiz-library-list"></div>'+
+      '<button id="quizLibraryMore" class="quiz-library-more" type="button">Weitere Fragen anzeigen</button>';
     back.insertAdjacentElement("afterend",panel);
 
     byId("quizModePlay").addEventListener("click",showPlay);
     byId("quizModeLibrary").addEventListener("click",showLibrary);
     back.addEventListener("click",showLibrary);
-    byId("quizLibrarySearch").addEventListener("input",function(){query=this.value||"";renderList()});
+    byId("quizLibrarySearch").addEventListener("input",function(){
+      query=this.value||"";
+      visibleLimit=PAGE_SIZE;
+      clearTimeout(searchTimer);
+      searchTimer=setTimeout(renderList,90);
+    });
+    byId("quizLibraryMore").addEventListener("click",function(){
+      visibleLimit+=PAGE_SIZE;
+      renderList();
+    });
 
     document.querySelectorAll("#quizAgePick [data-quiz-age]").forEach(function(btn){
       btn.addEventListener("click",function(){
-        category="all";query="";
+        category="all";query="";visibleLimit=PAGE_SIZE;
         var s=byId("quizLibrarySearch");if(s)s.value="";
         setTimeout(function(){refreshSummary();if(mode==="library")renderLibrary()},0);
       });
@@ -117,7 +131,7 @@
       var b=document.createElement("button");b.type="button";
       b.className=category===cat?"active":"";
       b.textContent=cat==="all"?"Alle Themen":cat;
-      b.addEventListener("click",function(){category=cat;renderCategories();renderList()});
+      b.addEventListener("click",function(){category=cat;visibleLimit=PAGE_SIZE;renderCategories();renderList()});
       box.appendChild(b);
     });
   }
@@ -125,39 +139,75 @@
     if(category!=="all"&&String(q.category||"")!==category)return false;
     var needle=String(query||"").trim().toLowerCase();
     if(!needle)return true;
-    var hay=[q.number,q.question,q.topic,q.category].join(" ").toLowerCase();
+    var hay=[q.number,q.question,q.topic,q.category,q.source,q.sourceType].join(" ").toLowerCase();
     return hay.indexOf(needle)>=0;
   }
+  function voiceState(q){
+    var owner=window.DARKidsOwnerVoice;
+    if(!owner||typeof owner.isReady!=="function"||!owner.isReady())return"loading";
+    if(typeof window.quizPrompt!=="function"||typeof owner.has!=="function")return"missing";
+    return owner.has(window.quizPrompt(q))?"ready":"missing";
+  }
+  function scheduleVoiceRefresh(){
+    clearTimeout(voiceRefreshTimer);
+    voiceRefreshTimer=setTimeout(function(){
+      if(mode==="library"&&!directQuestion)renderList();
+    },650);
+  }
   function renderList(){
-    var list=byId("quizLibraryList"),meta=byId("quizLibraryResultCount");if(!list)return;
-    var items=bandItems().filter(matches);
-    if(meta)meta.textContent=items.length+" von "+bandItems().length;
+    var list=byId("quizLibraryList"),meta=byId("quizLibraryResultCount"),more=byId("quizLibraryMore"),hint=byId("quizLibraryMetaHint");if(!list)return;
+    var allBand=bandItems();
+    var items=allBand.filter(matches);
+    var shown=items.slice(0,visibleLimit);
+    if(meta)meta.textContent=items.length+" Treffer · "+shown.length+" angezeigt";
+    if(hint)hint.textContent=items.length<allBand.length?"Suche/Filter aktiv":"Antippen = direkt testen";
     list.innerHTML="";
     if(!items.length){
+      if(more)more.classList.remove("show");
       list.innerHTML='<div class="quiz-library-empty">Keine Frage passt zu dieser Suche.</div>';
       return;
     }
     var frag=document.createDocumentFragment();
-    items.forEach(function(q){
+    var waitingForVoice=false;
+    shown.forEach(function(q){
       var row=document.createElement("div");row.className="quiz-library-row";
       var open=document.createElement("button");open.type="button";open.className="quiz-library-open";
       open.innerHTML=
         '<span class="quiz-library-topline"><span class="quiz-library-num">#'+String(q.number).padStart(3,"0")+'</span><span class="quiz-library-cat">'+escapeHtml(q.category||"Quiz")+'</span><span class="quiz-library-state">'+escapeHtml(stateLabel(q))+'</span></span>'+
         '<span class="quiz-library-question">'+escapeHtml(q.question)+'</span>';
       open.addEventListener("click",function(){openQuestion(q)});
-      var audio=document.createElement("button");audio.type="button";audio.className="quiz-library-audio";
-      audio.setAttribute("aria-label","Frage "+q.number+" hören");audio.textContent="▶";
-      audio.addEventListener("click",function(){
-        if(typeof window.quizSpeak==="function"&&typeof window.quizPrompt==="function"){
-          window.quizSpeak(window.quizPrompt(q),{quizPrompt:true,source:"kids-quiz-library"});
-        }
-      });
+
+      var audio=document.createElement("button");
+      var state=voiceState(q);
+      audio.type="button";
+      audio.className="quiz-library-audio voice-"+state;
+      if(state==="ready"){
+        audio.setAttribute("aria-label","Frage "+q.number+" mit Serhat-Stimme hören");
+        audio.innerHTML='<span aria-hidden="true">▶</span><small>Hören</small>';
+        audio.addEventListener("click",function(){
+          if(typeof window.quizSpeak==="function"&&typeof window.quizPrompt==="function"){
+            window.quizSpeak(window.quizPrompt(q),{quizPrompt:true,source:"kids-quiz-library"});
+          }
+        });
+      }else{
+        audio.disabled=true;
+        audio.setAttribute("aria-label",state==="loading"?"Stimme wird geladen":"Audio wird vorbereitet");
+        audio.innerHTML='<span aria-hidden="true">…</span><small>'+(state==="loading"?"Lädt":"Bald")+'</small>';
+        if(state==="loading")waitingForVoice=true;
+      }
       row.appendChild(open);row.appendChild(audio);frag.appendChild(row);
     });
     list.appendChild(frag);
+    if(more){
+      var remaining=Math.max(0,items.length-shown.length);
+      more.classList.toggle("show",remaining>0);
+      more.textContent=remaining>0?"Weitere "+Math.min(PAGE_SIZE,remaining)+" Fragen anzeigen":"";
+      more.setAttribute("aria-hidden",remaining>0?"false":"true");
+    }
+    if(waitingForVoice)scheduleVoiceRefresh();
   }
   function renderLibrary(){
-    ensureUi();mode="library";directQuestion=false;updateModeButtons();
+    ensureUi();mode="library";directQuestion=false;visibleLimit=PAGE_SIZE;updateModeButtons();
     var modal=byId("quizModal"),panel=byId("quizLibraryPanel"),back=byId("quizLibraryBack");
     if(modal)modal.classList.add("quiz-library-mode");
     if(panel)panel.classList.add("show");
