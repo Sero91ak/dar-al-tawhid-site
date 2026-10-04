@@ -427,3 +427,60 @@ jobs:
           print("Unified Kids owner voice architecture OK")
           PY
 
+
+      - name: Validate realistic age-adaptive Kids quiz artwork
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          quiz=json.loads(Path("kids/data/quiz-kids.json").read_text(encoding="utf-8"))
+          kids=Path("kids/index.html").read_text(encoding="utf-8")
+          sw=Path("kids/sw.js").read_text(encoding="utf-8")
+          version=json.loads(Path("kids/version.json").read_text(encoding="utf-8"))
+
+          expected={
+              "4-6":"/kids/assets/quiz-scenes/quiz-4-6.svg?v=20261004-real1",
+              "7-8":"/kids/assets/quiz-scenes/quiz-7-8.svg?v=20261004-real1",
+              "9-10":"/kids/assets/quiz-scenes/quiz-9-10.svg?v=20261004-real1",
+          }
+          artwork=((quiz.get("artwork") or {}).get("ageBands") or {})
+          assert set(artwork)==set(expected), "quiz artwork age bands drifted"
+          for band,url in expected.items():
+              assert artwork[band].get("url")==url, f"{band} artwork URL is not pinned locally"
+              assert not str(artwork[band].get("url","")).startswith(("http://","https://")), f"{band} artwork hotlink detected"
+              rel=url.split("?",1)[0].lstrip("/")
+              asset=Path(rel)
+              assert asset.exists() and asset.stat().st_size>50000, f"{band} realistic artwork missing or unexpectedly tiny"
+              assert url in sw, f"{band} artwork missing from PWA precache"
+
+          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1095"' in sw
+          assert "QUIZ_ARTWORK=[" not in sw, "legacy external quiz artwork runtime cache returned"
+
+          visual=((version.get("visualSystem") or {}).get("quizVisualSystem") or {})
+          assert visual.get("version")=="age-adaptive-realistic-v2"
+          assert visual.get("artworkHotlinkDependency") is False
+          assert visual.get("youngAgeAudioFirst") is True
+          assert visual.get("systemTtsFallbackAllowed") is False
+
+          ui_markers=[
+              'data-quiz-band',
+              'quizArtworkForBand',
+              'quiz-yes-no',
+              '@keyframes quizWrongShake',
+              '@media(max-width:430px)',
+              '@media(min-width:768px)',
+              'DARKidsOwnerVoice',
+          ]
+          missing=[m for m in ui_markers if m not in kids]
+          assert not missing, "Kids quiz UI markers missing: "+", ".join(missing)
+          assert "SpeechSynthesisUtterance" not in Path("kids/owner-voice.js").read_text(encoding="utf-8")
+
+          items=quiz.get("items") or []
+          assert len(items)==50, f"expected 50 Kids quiz questions, got {len(items)}"
+          counts={band:sum(1 for q in items if q.get("ageBand")==band) for band in expected}
+          assert counts=={"4-6":18,"7-8":16,"9-10":16}, counts
+
+          print("Realistic age-adaptive Kids quiz artwork OK:",counts)
+          PY
+
