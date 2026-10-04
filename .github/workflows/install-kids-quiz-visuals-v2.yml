@@ -1,0 +1,100 @@
+name: Install Kids Quiz Visuals V2
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/install-kids-quiz-visuals-v2.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-quiz-visuals-v2
+  cancel-in-progress: false
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Download generated quiz artwork
+        run: |
+          set -euo pipefail
+          mkdir -p kids/assets/quiz-scenes
+          curl -L --fail --retry 3 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:87859793-398b-4329-bc06-028972272abf' -o kids/assets/quiz-scenes/quiz-4-6-v2.png
+          curl -L --fail --retry 3 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:29311430-eadc-431f-90e8-3c5e17b9d3c2' -o kids/assets/quiz-scenes/quiz-7-8-v2.png
+          curl -L --fail --retry 3 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:651871ed-8679-422c-8252-08211015ccfc' -o kids/assets/quiz-scenes/quiz-9-10-v2.png
+          curl -L --fail --retry 3 'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:a71d3b87-311b-4f03-bcc6-4495a4a675cc' -o kids/assets/quiz-scenes/topic-creation-v2.png
+          python3 - <<'PY'
+          from pathlib import Path
+          files=[
+              Path("kids/assets/quiz-scenes/quiz-4-6-v2.png"),
+              Path("kids/assets/quiz-scenes/quiz-7-8-v2.png"),
+              Path("kids/assets/quiz-scenes/quiz-9-10-v2.png"),
+              Path("kids/assets/quiz-scenes/topic-creation-v2.png"),
+          ]
+          for p in files:
+              if not p.exists() or p.stat().st_size<50000:
+                  raise SystemExit(f"Invalid visual: {p}")
+              if p.read_bytes()[:8]!=b"\x89PNG\r\n\x1a\n":
+                  raise SystemExit(f"Not PNG: {p}")
+              print(p,p.stat().st_size)
+          PY
+
+      - name: Wire local artwork into quiz manifest
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("kids/data/quiz-kids.json")
+          d=json.loads(p.read_text(encoding="utf-8"))
+          art=d.setdefault("artwork",{})
+          bands=art.setdefault("ageBands",{})
+          bands.setdefault("4-6",{})["url"]="/kids/assets/quiz-scenes/quiz-4-6-v2.png?v=20261004-v2"
+          bands.setdefault("7-8",{})["url"]="/kids/assets/quiz-scenes/quiz-7-8-v2.png?v=20261004-v2"
+          bands.setdefault("9-10",{})["url"]="/kids/assets/quiz-scenes/quiz-9-10-v2.png?v=20261004-v2"
+          fam=art.setdefault("topicFamilies",{})
+          fam.setdefault("creation",{})["url"]="/kids/assets/quiz-scenes/topic-creation-v2.png?v=20261004-v2"
+          art["source"]="DĀR AL TAWḤĪD generated local artwork"
+          art["delivery"]="age-and-topic-adaptive-local-v2"
+          art["topicArtworkVersion"]="topic-realistic-v4"
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          PY
+
+      - name: Precache new local visuals
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("kids/sw.js")
+          s=p.read_text(encoding="utf-8")
+          marker='  "/kids/assets/quiz-scenes/quiz-4-6.svg?v=20261004-real1",'
+          new=[
+              '  "/kids/assets/quiz-scenes/quiz-4-6-v2.png?v=20261004-v2",',
+              '  "/kids/assets/quiz-scenes/quiz-7-8-v2.png?v=20261004-v2",',
+              '  "/kids/assets/quiz-scenes/quiz-9-10-v2.png?v=20261004-v2",',
+              '  "/kids/assets/quiz-scenes/topic-creation-v2.png?v=20261004-v2",',
+          ]
+          if marker not in s:
+              raise SystemExit("SW quiz visual anchor missing")
+          for row in reversed(new):
+              if row not in s:
+                  s=s.replace(marker,marker+"\n"+row,1)
+          p.write_text(s,encoding="utf-8")
+          PY
+
+      - name: Commit permanent local quiz artwork
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/assets/quiz-scenes/quiz-4-6-v2.png kids/assets/quiz-scenes/quiz-7-8-v2.png kids/assets/quiz-scenes/quiz-9-10-v2.png kids/assets/quiz-scenes/topic-creation-v2.png kids/data/quiz-kids.json kids/sw.js
+          git diff --cached --quiet && exit 0
+          git commit -m "Kids: install age-adaptive quiz visuals v2"
+          git pull --rebase origin main
+          git push origin HEAD:main
