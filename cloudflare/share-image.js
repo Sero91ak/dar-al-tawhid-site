@@ -70,12 +70,42 @@ export function buildFreshShareImagePrompt(input = {}) {
   ].join(" ");
 }
 
-async function generateFreshShareImage(env, input) {
-  if (!falKey(env)) {
-    const err = new Error("Bildgenerator ist derzeit nicht konfiguriert.");
-    err.status = 503;
-    throw err;
+function base64Bytes(value) {
+  const raw = atob(String(value || ""));
+  const out = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i += 1) out[i] = raw.charCodeAt(i);
+  return out;
+}
+
+async function generateWorkersAiShareImage(env, input) {
+  if (!env?.AI || typeof env.AI.run !== "function") return null;
+  const prompt = buildFreshShareImagePrompt(input).slice(0, 2048);
+  const seed = randomSeed();
+  const result = await env.AI.run("@cf/bytedance/stable-diffusion-xl-lightning", {
+    prompt,
+    negative_prompt: "text, letters, Arabic writing, calligraphy, logo, watermark, UI, modern electronics, cars, plastic, neon, contemporary fashion, visible face, portrait, hands, body parts, fantasy architecture, distorted books",
+    width: 1024,
+    height: 1280,
+    num_steps: 8,
+    guidance: 7.5,
+    seed
+  });
+
+  if (result instanceof ReadableStream) {
+    const bytes = new Uint8Array(await new Response(result).arrayBuffer());
+    if (!bytes.length) throw new Error("Cloudflare Workers AI lieferte ein leeres Bild.");
+    return { bytes, contentType: "image/png", seed, provider: "cloudflare-workers-ai" };
   }
+  if (result?.image) {
+    const bytes = base64Bytes(result.image);
+    if (!bytes.length) throw new Error("Cloudflare Workers AI lieferte ein leeres Bild.");
+    return { bytes, contentType: "image/jpeg", seed, provider: "cloudflare-workers-ai" };
+  }
+  throw new Error("Cloudflare Workers AI lieferte kein gültiges Bild.");
+}
+
+async function generateFalShareImage(env, input) {
+  if (!falKey(env)) return null;
 
   const prompt = buildFreshShareImagePrompt(input);
   const seed = randomSeed();
@@ -126,6 +156,42 @@ async function generateFreshShareImage(env, input) {
   throw err;
 }
 
+async function generateFreshShareImage(env, input) {
+  let workersAiError = null;
+  if (env?.AI && typeof env.AI.run === "function") {
+    try {
+      return await generateWorkersAiShareImage(env, input);
+    } catch (error) {
+      workersAiError = error;
+    }
+  }
+
+  if (falKey(env)) {
+    try {
+      const fallback = await generateFalShareImage(env, input);
+      if (fallback) return { ...fallback, provider: "fal" };
+    } catch (falError) {
+      const err = new Error(
+        "Bildgenerierung fehlgeschlagen (Cloudflare AI: " +
+        clean(workersAiError?.message || "nicht verfügbar", 120) +
+        "; FAL: " +
+        clean(falError?.message || falError, 120) +
+        ")."
+      );
+      err.status = Number(falError?.status || 0) || 502;
+      throw err;
+    }
+  }
+
+  const err = new Error(
+    workersAiError
+      ? "Cloudflare Bildgenerator ist verbunden, konnte aber kein Bild erzeugen: " + clean(workersAiError?.message || workersAiError, 180)
+      : "Bildgenerator ist derzeit nicht konfiguriert."
+  );
+  err.status = 503;
+  throw err;
+}
+
 export async function handleShareImageBackground(request, env, cors) {
   if (request.method !== "POST") {
     return json({ ok: false, error: "POST required" }, cors, 405);
@@ -148,23 +214,30 @@ export async function handleShareImageBackground(request, env, cors) {
       profile: clean(input.profile, 60)
     });
 
-    const imageResponse = await fetch(generated.url, {
-      headers: { Accept: "image/avif,image/webp,image/png,image/jpeg,*/*" },
-      cf: { cacheTtl: 0, cacheEverything: false }
-    });
-    if (!imageResponse.ok) {
-      throw new Error("Generiertes Bild konnte nicht geladen werden.");
+    let imageBody = generated.bytes || null;
+    let contentType = generated.contentType || "image/jpeg";
+    if (!imageBody) {
+      const imageResponse = await fetch(generated.url, {
+        headers: { Accept: "image/avif,image/webp,image/png,image/jpeg,*/*" },
+        cf: { cacheTtl: 0, cacheEverything: false }
+      });
+      if (!imageResponse.ok) {
+        throw new Error("Generiertes Bild konnte nicht geladen werden.");
+      }
+      imageBody = imageResponse.body;
+      contentType = imageResponse.headers.get("content-type") || "image/jpeg";
     }
 
     const headers = new Headers(cors || {});
-    headers.set("Content-Type", imageResponse.headers.get("content-type") || "image/jpeg");
+    headers.set("Content-Type", contentType);
     headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
     headers.set("CDN-Cache-Control", "no-store");
     headers.set("Cloudflare-CDN-Cache-Control", "no-store");
     headers.set("X-DAR-Share-Image", "fresh-ai-v1");
     headers.set("X-DAR-Share-Profile", clean(input.profile, 60) || "default");
     headers.set("X-DAR-Share-Seed", String(generated.seed));
-    return new Response(imageResponse.body, { status: 200, headers });
+    headers.set("X-DAR-Share-Provider", generated.provider || (generated.bytes ? "cloudflare-workers-ai" : "fal"));
+    return new Response(imageBody, { status: 200, headers });
   } catch (error) {
     const status = Number(error?.status || 0) || (/rate|Zu viele/i.test(String(error?.message || "")) ? 429 : 502);
     return json({ ok: false, error: clean(error?.message || error, 260) || "Bildgenerierung fehlgeschlagen." }, cors, status);
