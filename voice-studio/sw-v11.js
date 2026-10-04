@@ -1,4 +1,4 @@
-const CACHE="dar-voice-studio-v48";
+const CACHE="dar-voice-studio-v49";
 const SHELL=[
   "/voice-studio/",
   "/voice-studio/index.html",
