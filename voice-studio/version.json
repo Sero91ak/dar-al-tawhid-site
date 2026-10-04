@@ -1,6 +1,6 @@
 {
   "version": "2.9.73",
-  "updatedAt": "2026-10-04T03:04:00+02:00",
+  "updatedAt": "2026-10-04T03:08:00+02:00",
   "deployTrigger": "voice-studio-2.9.73-max-master-pronunciation",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -188,7 +188,8 @@
     "maxMasterPlsSource": "DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls",
     "maxMasterPlsMode": "installed-fallback-and-learning-candidate",
     "maxMasterPlsExactVariantsPreserved": true,
-    "maxMasterPlsConflictPolicy": "exact-existing-curated-rule-wins; remaining PLS spelling variants preload"
+    "maxMasterPlsConflictPolicy": "exact-existing-curated-rule-wins; remaining PLS spelling variants preload",
+    "maxMasterPlsWordBoundaryGuard": true
   },
   "releaseSafety": {
     "stagedInstaller": true,
@@ -641,7 +642,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "ff700518f647809d0b68e28c78aafed32c44382d",
+  "releaseRef": "c3dd1bfb6e17c68d1b9faf12f6e2224abee96ada",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
