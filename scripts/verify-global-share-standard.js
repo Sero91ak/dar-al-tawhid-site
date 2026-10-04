@@ -38,8 +38,8 @@ for (const file of files) {
     failures.push(r + ": alter englischer/falscher App-Store-Badge-Renderer gefunden");
   }
 
-  if (/fillText\(\s*["']App Store["']/.test(code) && !/fillText\(\s*["']Laden im["']/.test(code)) {
-    failures.push(r + ": App-Store-Badge ohne globalen „Laden im“-Standard");
+  if (/fillText\(\s*["']App Store["']/.test(code)) {
+    failures.push(r + ": selbst gezeichneter App-Store-Badge gefunden; nur offizielles Apple-Badge erlaubt");
   }
 }
 
