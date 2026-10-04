@@ -299,6 +299,10 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // DAR_PRAYER_V1254
+  if (!/jummah-v1258\\.css/.test(html)) {
+    html = html.replace(/<\\/head>/i, '<link rel="stylesheet" href="/test/assets/jummah-v1258.css?v=1258"><\\/head>');
+  }
+
   if (!/prayer-v1254\.css/.test(html)) {
     html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/prayer-v1254.css?v=1254"><\/head>');
   }
