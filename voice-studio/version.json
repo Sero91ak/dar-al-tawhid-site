@@ -1,7 +1,7 @@
 {
   "version": "2.9.85",
-  "updatedAt": "2026-10-04T11:38:00+02:00",
-  "deployTrigger": "voice-studio-2.9.85-resilient-async-mobile-generation-green",
+  "updatedAt": "2026-10-04T11:47:00+02:00",
+  "deployTrigger": "voice-studio-2.9.85-resilient-live-audio-pronunciation-prefetch-green",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v56",
@@ -211,7 +211,9 @@
     "catalogEndpoint": "/learning/catalog",
     "interactiveContextBridgeSkippedForFastMode": true,
     "firstAudioPriority": true,
-    "lowLatencyPreviewPollMs": 180
+    "lowLatencyPreviewPollMs": 180,
+    "pronunciationPreviewJobReuse": true,
+    "pronunciationCandidatePrefetch": true
   },
   "releaseSafety": {
     "stagedInstaller": true,
@@ -451,7 +453,7 @@
     "lowLatencyPronunciationPreview": true,
     "lowLatencyPronunciationPreviewBackend": "MLX short-token path with cache/lock first",
     "fullAudioStreamingAvailable": false,
-    "streamingNote": "Chatterbox Multilingual V3 MLX exposes no token/audio streaming API. DĀR Voice 2.9.84 queues each completed, QA-passed speech chunk immediately while the final WAV continues rendering.",
+    "streamingNote": "Chatterbox Multilingual V3 MLX exposes no token/audio streaming API. DĀR Voice 2.9.85 queues every completed, QA-passed speech chunk immediately while the final WAV continues rendering.",
     "progressiveFirstAudioPreview": true,
     "progressiveFirstAudioMinSeconds": 1.8,
     "progressiveFirstAudioMaxInitialSegments": 2,
@@ -480,7 +482,8 @@
     "pronunciationPreviewJobReuse": true,
     "pronunciationPreviewReuseWindowSeconds": 300,
     "asyncMobileGenerationValidated": true,
-    "incrementalLiveChunksValidated": true
+    "incrementalLiveChunksValidated": true,
+    "pronunciationPreviewDeduplicated": true
   },
   "contentStudio": {
     "enabled": true,
@@ -736,7 +739,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "8e57de4e61b0f31fe756e899d0b85cabd363b385",
+  "releaseRef": "1aae1b025044d580244644e3c2c4218d745d6d6e",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1370,7 +1373,7 @@
     "networkRequirement": "same-wifi-with-mac-engine",
     "design": "original-dar-mobile-ui-inspired-by-modern-mobile-voice-workflows",
     "smokeValidated": true,
-    "releaseRef": "8e57de4e61b0f31fe756e899d0b85cabd363b385",
+    "releaseRef": "1aae1b025044d580244644e3c2c4218d745d6d6e",
     "version": "2.9.85",
     "pwaStartUrl": "/mobile/",
     "pairTokenStoredInHttpOnlyCookie": true,
@@ -1400,7 +1403,7 @@
     "progressivePlaybackHandoffToFinal": true,
     "progressivePlaybackKeepsPosition": true,
     "runtimeStyleSelectorFixed": true,
-    "validationNote": "Voice 2.9.85 green: async generation jobs, reload recovery, incremental live chunks, pronunciation preview reuse, all mobile interaction bindings, compile/smoke, full validate, health, canonical guard and native Mac audio-route passed.",
+    "validationNote": "Voice 2.9.85 green: resilient async generation jobs, queued QA-passed live chunks, complete history playback, selector regression guard, and deduplicated pronunciation prefetch on iPhone/iPad and Mac.",
     "pronunciationCatalogMemoryCache": true,
     "renderStatusEndpoint": "/render-status",
     "compactRenderPolling": true,
@@ -1431,7 +1434,15 @@
     "activeJobPersistence": "localStorage",
     "historyPlaybackSelectorFixed": true,
     "allInteractionBindingsValidated": true,
-    "pronunciationPreviewJobReuse": true
+    "pronunciationPreviewJobReuse": true,
+    "generationJobsPersistent": true,
+    "generationJobStart": "/generate-start",
+    "generationFreeJobStart": "/generate-free-start",
+    "generationJobStatus": "/generate-job",
+    "resumeGenerationAfterReload": true,
+    "pronunciationCandidatePrefetch": true,
+    "macPronunciationCandidatePrefetch": true,
+    "selectorRegressionGuard": true
   },
   "mobile": {
     "enabled": true,
