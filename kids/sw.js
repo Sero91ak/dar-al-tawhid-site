@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1092";
+const CACHE_NAME="dar-al-tawhid-kids-v1093";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/section-heroes-v1090.css?v=1090",
@@ -41,15 +41,15 @@ const PRECACHE=[
   "/kids/assets/sahaba-mubashshirun/sad.jpg",
   "/kids/assets/sahaba-mubashshirun/said.jpg",
   "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
-  "/kids/mubashshirun-stories.css?v=11",
-  "/kids/mubashshirun-stories.js?v=11",
+  "/kids/mubashshirun-stories.css?v=12",
+  "/kids/mubashshirun-stories.js?v=12",
   "/kids/story-follow-reader.css?v=1",
   "/kids/story-follow-reader.js?v=1",
   "/kids/kids-age-typography.css?v=4",
   "/kids/kids-age-typography.js?v=3",
   "/kids/prophet-stories.css?v=24",
   "/kids/stories-final-v1088.css?v=1088",
-  "/kids/prophet-stories.js?v=24",
+  "/kids/prophet-stories.js?v=25",
   "/kids/assets/prophet-scenes/library.webp",
   "/kids/assets/prophet-scenes/garden.webp",
   "/kids/assets/prophet-scenes/ocean.webp",
