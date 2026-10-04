@@ -1,6 +1,6 @@
-/* DĀR AL TAWḤĪD · Ḥadīṯ-Bibliothek · Test-only v1243 */
+/* DĀR AL TAWḤĪD · Ḥadīṯ-Bibliothek · Test-only historical CGI v1260 */
 body.is-hadith-route{
-  --hadx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/c833693b-67eb-43e3-b88d-9e64f72b7a6b/e0bc538b-bc5e-4b1c-8381-fa5abdbd6d71/Single_wide_cinematic_background_for_an_Islamic_hadith_libra.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZWNkY2E0ODRhNTA3NGM3MCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI0NjIxMn0.0papixxgDJOTdWv-7pUMhl0WIvXI1VJbaQZJQRfmqbE");
+  --hadx-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/b6c33971-7f4e-4472-b7c8-032316f0b280/Single_standalone_wide_cinematic_historical_CGI_scene_for_an_Islamic_hadith_library_interface__set_r_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYjZkYzBjZmY3ZDAzZTM4NCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMxNDU1OX0.EVtMGOwaX7h6cNVBkJHZ4qM6DwBlEPbAD4uBaOP4_MU");
   --hadx-left:color-mix(in srgb,var(--bg) 91%,transparent);
   --hadx-mid:color-mix(in srgb,var(--bg) 61%,transparent);
   --hadx-right:color-mix(in srgb,var(--bg) 15%,transparent);
@@ -282,4 +282,39 @@ body.is-hadith-route #hadithSearchBlock .dua-row::after{display:none!important}
 
 @media(prefers-reduced-motion:reduce){
   body.is-hadith-route .hadith-hub .dua-theme-card{transition:none!important}
+}
+
+
+/* DAR_HADITH_CGI_STYLE_RULE_V1260
+   Historical 9th–11th c. CGI image language. Test only.
+   Reused through overview → work → Kitāb → Bāb so the complete Hadith path reads as one visual system. */
+body.is-hadith-route .hadith-hub > .view-head{
+  min-height:clamp(258px,52vw,340px)!important;
+  background-position:center,center,79% 48%!important;
+  background-size:auto,auto,cover!important;
+}
+body.is-hadith-route .hadith-hub > .view-head::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,transparent 52%,color-mix(in srgb,var(--bg) 23%,transparent) 100%),
+    radial-gradient(ellipse at 77% 43%,transparent 0 28%,color-mix(in srgb,var(--bg) 12%,transparent) 72%);
+}
+body.is-hadith-route .hadith-hub > .view-head > *{
+  z-index:2!important;
+}
+@media(max-width:599px){
+  body.is-hadith-route .hadith-hub > .view-head{
+    min-height:270px!important;
+    background-position:center,center,76% 50%!important;
+  }
+}
+@media(min-width:760px){
+  body.is-hadith-route .hadith-hub > .view-head{
+    min-height:326px!important;
+    background-position:center,center,73% 47%!important;
+  }
 }
