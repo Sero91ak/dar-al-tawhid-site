@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1089",
-  "label": "KIDS · V1.07.14",
-  "releasedAt": "2026-10-04T00:08:00.000Z",
-  "note": "V1.07.14: Geschichten mit Audio erhalten ein gemeinsames kindgerechtes Mitlese-Fenster. Beim Abspielen öffnet sich eine responsive Bottom-Sheet-Ansicht mit Play/Pause, Fortschritt, Zeit und automatisch folgendem Textabschnitt; manuelles Scrollen bleibt möglich. Aktiv für Propheten- und Ṣaḥābah-Geschichten und als wiederverwendbares System für künftige Text+Audio-Bereiche.",
+  "buildId": "kids-shell-v12-sahaba1090",
+  "label": "KIDS · V1.07.15",
+  "releasedAt": "2026-10-04T00:22:15.922Z",
+  "note": "V1.07.15: Geschichten, Mein Qurʾān und Eltern starten jetzt mit vollflächigen, thematisch erzeugten Hero-Bildern statt separater Header-Kapseln. Die Bildbühnen sind direkt mit dem Seitenhintergrund verbunden, blenden sauber in Nachtblau aus und bleiben auf iPhone und iPad responsiv; Navigation und Inhalte darunter bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1089",
+    "serviceWorkerCache": "v1090",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -35,7 +35,7 @@
     "muhammadHonorFeature": true,
     "chronologicalOrderAfterMuhammadFeature": true,
     "storiesHomePolish": "v23",
-    "storiesHeaderArtwork": false,
+    "storiesHeaderArtwork": true,
     "storiesHeaderAmbientMotion": true,
     "storiesResponsiveLayout": "phone-tablet-desktop-v22",
     "quranHomePolish": "spacious-edge-v1055",
@@ -158,12 +158,24 @@
     "homeChoices": "oval-capsule-restored",
     "homeChoiceLayoutVersion": "v1078",
     "homeChoiceCards": "rounded-cards-v1079",
-    "storiesPageHero": "edge-to-edge-adobe-v1082",
+    "storiesPageHero": "edge-to-edge-generated-v1090",
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1084",
     "storiesBottomNav": "separated-background-v1086",
     "storyFollowReader": "v1",
     "storyFollowReaderMode": "responsive-bottom-sheet-auto-paragraph-follow",
-    "storyFollowReaderReusable": true
+    "storyFollowReaderReusable": true,
+    "sectionEntryHeroes": "edge-to-edge-generated-v1090",
+    "sectionHeroArtworkFormat": "local-jpeg",
+    "sectionHeroNoDetachedHeaderCard": true,
+    "sectionHeroNoKickerCapsule": true,
+    "sectionHeroResponsive": "phone-tablet-desktop",
+    "quranPageHero": "edge-to-edge-generated-v1090",
+    "parentsPageHero": "edge-to-edge-generated-v1090",
+    "sectionHeroAssets": {
+      "stories": "/kids/assets/kids-art/section-stories-v1090.jpg",
+      "quran": "/kids/assets/kids-art/section-quran-v1090.jpg",
+      "parents": "/kids/assets/kids-art/section-parents-v1090.jpg"
+    }
   }
 }
