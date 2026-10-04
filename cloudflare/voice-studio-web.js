@@ -1,6 +1,6 @@
 // owner-voice-config-recovery-20261004
 import { elevenKey, isVoiceConfigured, synthesizeDarVoice } from "./video-studio/voice.js";
-import { darVoiceGpuConfigured, darVoiceGpuPublicStatus, darVoiceWebAccessConfigured, darVoiceWebAuthorized, proxyDarVoiceGpuRequest } from "./voice-studio-gpu-gateway.js";
+import { darVoiceGpuConfigured, darVoiceGpuPublicStatus, darVoiceWebAccessConfigured, darVoiceWebAuthorized, darVoiceWebCodeAuthorized, darVoiceWebSessionCookie, proxyDarVoiceGpuRequest } from "./voice-studio-gpu-gateway.js";
 
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX_REQUESTS = 8;
@@ -205,6 +205,32 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
   if (!url.pathname.startsWith("/voice-studio/api")) return null;
   const rest = url.pathname.slice("/voice-studio/api".length) || "/";
 
+  if (request.method === "POST" && rest === "/access") {
+    assertVoiceStudioOrigin(request, env);
+    if (!darVoiceWebAccessConfigured(env)) {
+      return json({
+        ok: false,
+        error: "DĀR Voice Cloud-Zugang ist serverseitig noch nicht aktiviert.",
+        accessSetupRequired: true
+      }, cors, 503);
+    }
+    const body = await request.json().catch(() => ({}));
+    const code = String(body.code || request.headers.get("X-DAR-Voice-Access") || "").trim();
+    if (!darVoiceWebCodeAuthorized(code, env)) {
+      return json({ ok: false, error: "DĀR Voice Zugangscode ist nicht korrekt.", accessRequired: true }, cors, 401);
+    }
+    const cookie = await darVoiceWebSessionCookie(env);
+    return new Response(JSON.stringify({ ok: true, session: "httpOnly", expiresInSeconds: 2592000 }), {
+      status: 200,
+      headers: {
+        ...cors,
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "no-store, max-age=0",
+        "Set-Cookie": cookie
+      }
+    });
+  }
+
   if (rest === "/engine" || rest.startsWith("/engine/")) {
     assertVoiceStudioOrigin(request, env);
     if (!darVoiceWebAccessConfigured(env)) {
@@ -214,7 +240,7 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
         accessSetupRequired: true
       }, cors, 503);
     }
-    if (!darVoiceWebAuthorized(request, env)) {
+    if (!(await darVoiceWebAuthorized(request, env))) {
       return json({
         ok: false,
         error: "DĀR Voice Zugangscode erforderlich.",
