@@ -1,0 +1,373 @@
+/* DĀR AL TAWḤĪD · Qiblah · Test-only v1259
+   Historical atmosphere stays in the hero; compass/data remain image-free and functional. */
+#appView.view:has(.qibla-hub-page){
+  --qbx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/fe9c2e60-2619-4b1d-b08d-77160f70a24e/363a8db2-cf95-4e17-837c-21ab0dbd04ae/Single_wide_cinematic_app_background_for_a_Qiblah_direction_.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNTNiNjQ4ZmUwN2NkOTFlNyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI2Nzk2Nn0.1uRFqtwbBmbvfQst1C9lIO_dd7LiBQLUYMVeibKrjdQ");
+  --qbx-bg:var(--bg);
+  --qbx-card:var(--card,var(--panel,var(--bg)));
+  --qbx-text:var(--text,var(--cream));
+  --qbx-muted:var(--muted);
+  --qbx-accent:var(--gold2);
+  --qbx-line:color-mix(in srgb,var(--gold2) 18%,var(--line2));
+  --qbx-line-soft:color-mix(in srgb,var(--gold2) 10%,var(--line2));
+  --qbx-surface:color-mix(in srgb,var(--card,var(--bg)) 72%,transparent);
+  --qbx-surface-strong:color-mix(in srgb,var(--card,var(--bg)) 90%,transparent);
+  --qbx-left:color-mix(in srgb,var(--bg) 91%,transparent);
+  --qbx-mid:color-mix(in srgb,var(--bg) 62%,transparent);
+  --qbx-right:color-mix(in srgb,var(--bg) 15%,transparent);
+  width:100%!important;
+  max-width:none!important;
+  background:var(--qbx-bg)!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="light"] #appView.view:has(.qibla-hub-page),
+html[data-theme="soft"] #appView.view:has(.qibla-hub-page),
+html[data-theme="salbei"] #appView.view:has(.qibla-hub-page),
+html[data-theme="eisgold"] #appView.view:has(.qibla-hub-page){
+  --qbx-left:color-mix(in srgb,var(--bg) 95%,transparent);
+  --qbx-mid:color-mix(in srgb,var(--bg) 74%,transparent);
+  --qbx-right:color-mix(in srgb,var(--bg) 35%,transparent);
+  --qbx-surface:color-mix(in srgb,var(--card,var(--bg)) 88%,transparent);
+  --qbx-surface-strong:color-mix(in srgb,var(--card,var(--bg)) 97%,transparent);
+}
+html[data-theme="royal"] #appView.view:has(.qibla-hub-page),
+html[data-theme="dark"] #appView.view:has(.qibla-hub-page),
+html[data-theme="dar-al-layl"] #appView.view:has(.qibla-hub-page),
+html[data-theme="bordeaux"] #appView.view:has(.qibla-hub-page),
+html[data-theme="aurora"] #appView.view:has(.qibla-hub-page){
+  --qbx-left:color-mix(in srgb,var(--bg) 86%,transparent);
+  --qbx-mid:color-mix(in srgb,var(--bg) 54%,transparent);
+  --qbx-right:color-mix(in srgb,var(--bg) 10%,transparent);
+  --qbx-surface:color-mix(in srgb,var(--card,var(--bg)) 60%,transparent);
+  --qbx-surface-strong:color-mix(in srgb,var(--card,var(--bg)) 80%,transparent);
+}
+
+/* Historical direction hero */
+#appView.view:has(.qibla-hub-page) > .view-head{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  width:100vw!important;
+  min-height:clamp(238px,49vw,320px)!important;
+  margin:0 0 18px calc(50% - 50vw)!important;
+  padding:
+    clamp(28px,6vw,42px)
+    max(20px,calc((100vw - 1180px)/2))
+    clamp(24px,5vw,36px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  align-items:flex-start!important;
+  border:0!important;
+  border-radius:0 0 26px 26px!important;
+  background:
+    linear-gradient(90deg,
+      var(--qbx-left) 0%,
+      var(--qbx-mid) 44%,
+      var(--qbx-right) 82%,
+      color-mix(in srgb,var(--bg) 4%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 5%,transparent),
+      transparent 48%,
+      color-mix(in srgb,var(--bg) 22%,transparent)),
+    var(--qbx-art) 78% 46%/cover no-repeat!important;
+  box-shadow:
+    0 20px 44px color-mix(in srgb,var(--bg) 64%,transparent),
+    inset 0 -1px 0 var(--qbx-line)!important;
+}
+#appView.view:has(.qibla-hub-page) > .view-head::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--bg) 18%,transparent),transparent 64%),
+    radial-gradient(circle at 84% 15%,color-mix(in srgb,var(--gold2) 10%,transparent),transparent 42%);
+}
+#appView.view:has(.qibla-hub-page) > .view-head > *{
+  position:relative!important;
+  z-index:1!important;
+  width:min(650px,86%)!important;
+}
+#appView.view:has(.qibla-hub-page) > .view-head .eyebrow{
+  margin:0 0 8px!important;
+  color:var(--qbx-accent)!important;
+  font-size:.66rem!important;
+  line-height:1.1!important;
+  font-weight:850!important;
+  letter-spacing:.12em!important;
+}
+#appView.view:has(.qibla-hub-page) > .view-head h2{
+  margin:0!important;
+  color:var(--qbx-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(2.25rem,9vw,4rem)!important;
+  line-height:.95!important;
+  font-weight:620!important;
+  text-shadow:0 2px 16px color-mix(in srgb,var(--bg) 38%,transparent)!important;
+}
+#appView.view:has(.qibla-hub-page) > .view-head .view-desc{
+  margin:10px 0 0!important;
+  max-width:36rem!important;
+  color:var(--qbx-text)!important;
+  font-size:clamp(.86rem,3vw,1rem)!important;
+  line-height:1.48!important;
+  font-weight:570!important;
+  text-shadow:0 1px 10px color-mix(in srgb,var(--bg) 38%,transparent)!important;
+}
+
+/* Main Qiblah page: one clean flow */
+#appView.view:has(.qibla-hub-page) .qibla-hub-page{
+  width:min(900px,calc(100% - 24px))!important;
+  max-width:none!important;
+  margin:0 auto calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 28px)!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Native inner header is redundant once the page hero is present */
+#appView.view:has(.qibla-hub-page) .qibla-pro-head,
+#appView.view:has(.qibla-hub-page) .qibla-pro-head + .prayer-noble-rule{
+  display:none!important;
+}
+
+#appView.view:has(.qibla-hub-page) .qibla-layout-pro{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:18px!important;
+  align-items:stretch!important;
+}
+
+/* Functional compass becomes the visual centerpiece, with no background image */
+#appView.view:has(.qibla-hub-page) .qibla-compass-pro{
+  width:min(76vw,292px)!important;
+  max-width:292px!important;
+  margin:2px auto 0!important;
+  text-align:center!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-compass-face{
+  border:1.5px solid color-mix(in srgb,var(--qbx-accent) 42%,var(--qbx-line))!important;
+  background:
+    radial-gradient(circle at 50% 48%,
+      color-mix(in srgb,var(--qbx-accent) 8%,transparent) 0%,
+      color-mix(in srgb,var(--qbx-surface-strong) 54%,transparent) 48%,
+      color-mix(in srgb,var(--qbx-bg) 20%,transparent) 100%)!important;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb,var(--qbx-text) 4%,transparent),
+    0 14px 34px color-mix(in srgb,var(--qbx-bg) 24%,transparent)!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-compass-dial::before{
+  border-color:color-mix(in srgb,var(--qbx-accent) 18%,transparent)!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-compass-dial::after,
+#appView.view:has(.qibla-hub-page) .qibla-rose::before{
+  opacity:.72!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-cardinal{
+  color:var(--qbx-muted)!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-n{
+  color:var(--qbx-accent)!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-compass-center{
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--qbx-text) 88%,#fff),var(--qbx-accent) 70%)!important;
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--qbx-accent) 12%,transparent),0 2px 8px color-mix(in srgb,var(--qbx-bg) 28%,transparent)!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-bearing-readout{
+  margin-top:12px!important;
+  color:var(--qbx-accent)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(1.7rem,7vw,2.25rem)!important;
+  font-weight:650!important;
+  line-height:1!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-bearing-readout small,
+#appView.view:has(.qibla-hub-page) .qibla-orient-hint{
+  color:var(--qbx-muted)!important;
+  font-family:var(--sans,var(--ui,system-ui))!important;
+  font-size:.68rem!important;
+  line-height:1.35!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-orient-hint{
+  margin:7px auto 0!important;
+  max-width:24rem!important;
+}
+
+/* Direction data: open table, no card wall */
+#appView.view:has(.qibla-hub-page) .qibla-data-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0!important;
+  margin:0!important;
+  border:0!important;
+  border-top:1px solid var(--qbx-line)!important;
+  border-bottom:1px solid var(--qbx-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  overflow:visible!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-data-item{
+  min-height:66px!important;
+  padding:11px 10px!important;
+  border:0!important;
+  border-right:1px solid var(--qbx-line-soft)!important;
+  border-bottom:1px solid var(--qbx-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-data-item:nth-child(2n){
+  border-right:0!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-data-item:nth-last-child(-n+2){
+  border-bottom:0!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-data-item span,
+#appView.view:has(.qibla-hub-page) .qibla-data-item small{
+  color:var(--qbx-muted)!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-data-item b{
+  color:var(--qbx-text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:.98rem!important;
+  font-weight:650!important;
+}
+
+/* Sensor status and main controls */
+#appView.view:has(.qibla-hub-page) .qibla-status{
+  margin:0!important;
+  padding:10px 0!important;
+  border:0!important;
+  color:var(--qbx-muted)!important;
+  font-size:.74rem!important;
+  line-height:1.45!important;
+  text-align:center!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-action-row{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:8px!important;
+  margin:0!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-btn-start,
+#appView.view:has(.qibla-hub-page) .qibla-btn-stop{
+  min-height:48px!important;
+  border:1px solid var(--qbx-line)!important;
+  border-radius:14px!important;
+  background:var(--qbx-surface)!important;
+  color:var(--qbx-text)!important;
+  box-shadow:none!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-btn-start{
+  border-color:color-mix(in srgb,var(--qbx-accent) 40%,var(--qbx-line))!important;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--qbx-accent) 13%,var(--qbx-surface)),var(--qbx-surface))!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-action-row:not(:has(#stopQiblaBtn:not([hidden]))) .qibla-btn-start{
+  grid-column:1/-1!important;
+}
+
+/* Location/settings as a subordinate section */
+#appView.view:has(.qibla-hub-page) .qibla-hub-tools,
+#appView.view:has(.qibla-hub-page) .prayer-controls-compact{
+  margin:18px 0 0!important;
+  padding:18px 0 0!important;
+  border:0!important;
+  border-top:1px solid var(--qbx-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-hub-tools .prayer-settings-grid{
+  grid-template-columns:1fr 1fr!important;
+  gap:8px!important;
+  margin-top:0!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-hub-tools #prayerCityInput{
+  grid-column:1/-1!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-hub-tools .prayer-action-btn,
+#appView.view:has(.qibla-hub-page) .qibla-hub-tools .filter-select,
+#appView.view:has(.qibla-hub-page) .qibla-hub-tools .field,
+#appView.view:has(.qibla-hub-page) .prayer-controls-compact .prayer-action-btn,
+#appView.view:has(.qibla-hub-page) .prayer-controls-compact .filter-select,
+#appView.view:has(.qibla-hub-page) .prayer-controls-compact .field{
+  min-height:44px!important;
+  border:1px solid var(--qbx-line)!important;
+  border-radius:13px!important;
+  background:var(--qbx-surface)!important;
+  color:var(--qbx-text)!important;
+  box-shadow:none!important;
+}
+
+/* Old warning stays factual but visually quiet */
+#appView.view:has(.qibla-hub-page) .qibla-disclaimer{
+  margin:14px 0!important;
+  padding:11px 0!important;
+  border:0!important;
+  border-top:1px solid var(--qbx-line-soft)!important;
+  border-bottom:1px solid var(--qbx-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--qbx-muted)!important;
+  font-size:.72rem!important;
+  line-height:1.45!important;
+}
+#appView.view:has(.qibla-hub-page) .qibla-disclaimer strong{
+  color:var(--qbx-text)!important;
+}
+
+@media(max-width:599px){
+  #appView.view:has(.qibla-hub-page) > .view-head{
+    min-height:250px!important;
+    padding:26px 18px 24px!important;
+    background-position:center,center,80% 46%!important;
+  }
+  #appView.view:has(.qibla-hub-page) > .view-head > *{
+    width:min(100%,88%)!important;
+  }
+  #appView.view:has(.qibla-hub-page) .qibla-hub-page{
+    width:calc(100% - 20px)!important;
+  }
+  #appView.view:has(.qibla-hub-page) .qibla-compass-pro{
+    width:min(72vw,270px)!important;
+    max-width:270px!important;
+  }
+}
+
+@media(max-width:380px){
+  #appView.view:has(.qibla-hub-page) .qibla-data-grid{
+    grid-template-columns:1fr!important;
+  }
+  #appView.view:has(.qibla-hub-page) .qibla-data-item{
+    border-right:0!important;
+    border-bottom:1px solid var(--qbx-line-soft)!important;
+  }
+  #appView.view:has(.qibla-hub-page) .qibla-data-item:last-child{
+    border-bottom:0!important;
+  }
+}
+
+@media(min-width:760px){
+  #appView.view:has(.qibla-hub-page) > .view-head{
+    min-height:300px!important;
+    background-position:center,center,74% 44%!important;
+  }
+  #appView.view:has(.qibla-hub-page) > .view-head > *{
+    width:min(650px,60%)!important;
+  }
+  #appView.view:has(.qibla-hub-page) .qibla-compass-pro{
+    width:min(310px,34vw)!important;
+    max-width:310px!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  #appView.view:has(.qibla-hub-page) .qibla-rose,
+  #appView.view:has(.qibla-hub-page) .qibla-kaaba-marker{
+    transition:none!important;
+  }
+}
