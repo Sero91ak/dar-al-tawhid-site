@@ -111,8 +111,28 @@
     var hay=(data.title+" "+data.body+" "+data.category).toLowerCase();
     var exact=null;Object.keys(SAHABA_SCENES).some(function(k){if(hay.indexOf(k)>=0){exact=SAHABA_SCENES[k];return true}return false});
     if(exact)return exact;
+    var sahabaAny=[
+      "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
+      "/kids/assets/sahaba-mubashshirun/umar.jpg",
+      "/kids/assets/sahaba-mubashshirun/uthman.jpg",
+      "/kids/assets/sahaba-mubashshirun/ali.jpg",
+      "/kids/assets/sahaba-mubashshirun/talha.jpg",
+      "/kids/assets/sahaba-mubashshirun/zubayr.jpg",
+      "/kids/assets/sahaba-mubashshirun/sad.jpg",
+      "/kids/assets/sahaba-mubashshirun/said.jpg",
+      "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
+      "/kids/assets/sahaba-mubashshirun/abd-ar-rahman.jpg"
+    ];
+    var makkah=["/kids/assets/prophet-scenes/desert.webp","/kids/assets/prophet-scenes/mountain.webp","/assets/post-templates/sand-buecher.jpg","/kids/assets/prophet-scenes/royal.webp"];
+    var madinah=["/kids/assets/prophet-scenes/garden.webp","/kids/assets/prophet-scenes/royal.webp","/assets/post-templates/gruen-moschee.jpg","/assets/post-templates/olive-mihrab.jpg"];
+    var ilm=["/kids/assets/prophet-scenes/library.webp","/assets/post-templates/bibliothek-braun.jpg","/assets/post-templates/nachtblau-buecher.jpg","/assets/post-templates/buecher-teal.jpg","/kids/assets/prophet-scenes/night.webp"];
+    var pool=GENERIC_SCENES;
+    if(/ṣaḥāb|sahab|salaf|gefährten|gefaehrten/.test(hay))pool=sahabaAny;
+    else if(/makkah|mekka|ḥajj|hajj|ʿumrah|umrah|kaʿba|kaaba/.test(hay))pool=makkah;
+    else if(/madīnah|madinah|medina|masjid|moschee/.test(hay))pool=madinah;
+    else if(/ʿilm|ilm|wissen|fiqh|ḥadī|hadith|sunnah|quelle|gelehrt/.test(hay))pool=ilm;
     var key="darGlobalShareSceneV1225",seq=0;try{seq=Number(localStorage.getItem(key)||0)||0;localStorage.setItem(key,String(seq+1))}catch(e){}
-    return GENERIC_SCENES[(hash(hay+"|"+seq))%GENERIC_SCENES.length];
+    return pool[(hash(hay+"|"+seq))%pool.length];
   }
   function splitBody(ctx,body,bodySize,maxW,maxH){
     ctx.font="400 "+bodySize+"px Georgia, 'Times New Roman', serif";
