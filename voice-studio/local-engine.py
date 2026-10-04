@@ -3285,6 +3285,112 @@ def _kids_owner_voice_add_question(rows,q,age_key,scope,source_id):
     _kids_owner_voice_add(rows,q.get("success"),"kids_lesson",scope,source_id)
     _kids_owner_voice_add(rows,q.get("retry"),"kids_lesson",scope,source_id)
 
+def _studio_owner_reference_kind(item):
+    tags={str(x or "").strip().lower() for x in ((item or {}).get("tags") or [])}
+    if "studio:dua" in tags:
+        return "dua"
+    if "studio:narration" in tags:
+        return "narration"
+    kind=str((item or {}).get("kind") or "story").strip().lower()
+    return "lesson" if kind=="lesson" else "story"
+
+def _studio_has_owner_audio(item):
+    audio=(item or {}).get("audio") or {}
+    if not isinstance(audio,dict) or not str(audio.get("url") or "").strip():
+        return False
+    return bool(audio.get("ownerApproved")) or str(audio.get("codec") or "").strip().lower()=="owner-upload" or str(audio.get("source") or "").strip().lower()=="manual-owner-upload"
+
+def _download_live_owner_audio_asset(asset):
+    key=str((asset or {}).get("key") or "").strip().lstrip("/")
+    if not key.startswith("assets/kids-content/"):
+        raise ValueError("Owner-Audio liegt nicht im freigegebenen Kids-Livepfad.")
+    suffix=Path(key).suffix.lower()
+    if suffix not in (".mp3",".m4a",".aac",".wav"):
+        raise ValueError("Owner-Audioformat ist nicht erlaubt.")
+    url="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/main/"+key
+    tmp=STORY_REFERENCE_HOME/(f"live-owner-{uuid.uuid4().hex[:12]}{suffix}")
+    req=urllib.request.Request(url,headers={
+        "User-Agent":"DAR-Voice-Studio-Live-Owner-Learning/1",
+        "Accept":"application/octet-stream",
+        "Cache-Control":"no-cache",
+    })
+    total=0
+    try:
+        with urllib.request.urlopen(req,timeout=35) as response, tmp.open("wb") as fh:
+            while True:
+                block=response.read(1024*1024)
+                if not block:
+                    break
+                total+=len(block)
+                if total>70*1024*1024:
+                    raise ValueError("Owner-Audio ist größer als 70 MB.")
+                fh.write(block)
+        if not tmp.exists() or tmp.stat().st_size<=1024:
+            raise ValueError("Owner-Audio konnte nicht geladen werden.")
+        expected=str((asset or {}).get("sha256") or "").strip().lower()
+        if expected and not hmac.compare_digest(_story_reference_file_sha256(tmp).lower(),expected):
+            raise ValueError("Owner-Audio-Prüfsumme stimmt nicht mit dem Live-Paket überein.")
+        return tmp
+    except Exception:
+        try: tmp.unlink(missing_ok=True)
+        except Exception: pass
+        raise
+
+def sync_live_owner_content_references(studio_data):
+    """Übernimmt auf Smartphone/Web hochgeladene, explizit freigegebene Eigentümer-Audios.
+
+    Dadurch muss die Mac-App dieselbe Geschichte/Duʿāʾ/Erzählung nicht neu erzeugen.
+    Der Audio/Text-Paar-Speicher bleibt lokal; öffentlich bleibt nur die ohnehin
+    freigegebene Kids-Audiodatei.
+    """
+    with STORY_REFERENCE_LOCK:
+        current=list((_story_reference_load().get("references") or []))
+    ready={
+        (str(x.get("itemId") or ""),str(x.get("textSha256") or ""))
+        for x in current if _story_reference_record_ready(x)
+    }
+    imported=0
+    skipped=0
+    failed=[]
+    for item in ((studio_data or {}).get("items") or []):
+        if not isinstance(item,dict) or str(item.get("status") or "")!="published":
+            continue
+        if str(item.get("appTarget") or "kids") not in ("","kids","both"):
+            continue
+        if not _studio_has_owner_audio(item):
+            continue
+        text=str(item.get("text") or "").strip()
+        item_id=str(item.get("id") or "").strip()
+        if len(text)<40 or not item_id:
+            continue
+        text_sha=story_reference_text_sha256(text)
+        if (item_id,text_sha) in ready:
+            skipped+=1
+            continue
+        tmp=None
+        try:
+            audio=item.get("audio") or {}
+            tmp=_download_live_owner_audio_asset(audio)
+            ref=register_story_reference_pair(
+                _studio_owner_reference_kind(item),item_id,text,tmp,
+                source_name=str(audio.get("originalName") or Path(str(audio.get("key") or "owner-audio")).name),
+                age=f"{int(item.get('ageMin') or 4)}-{int(item.get('ageMax') or 10)}",
+                source="auto-live-owner-content-sync",
+            )
+            ready.add((item_id,str(ref.get("textSha256") or text_sha)))
+            imported+=1
+        except Exception as e:
+            failed.append({"id":item_id,"error":str(e)[:300]})
+            print("[DĀR Voice] Live-Owner-Audio konnte nicht gelernt werden:",item_id,e,flush=True)
+        finally:
+            try:
+                if tmp is not None: Path(tmp).unlink(missing_ok=True)
+            except Exception:
+                pass
+    if imported:
+        append_learning_log("live_owner_content_reference_sync",imported=imported,skipped=skipped,failed=len(failed))
+    return {"imported":imported,"skipped":skipped,"failed":failed[-20:]}
+
 def _kids_owner_voice_rows(quiz_data,dua_data,story_data,short_story_data,verified_data,studio_data=None):
     rows={}
     for value in _quiz_voice_texts(quiz_data):
@@ -3333,11 +3439,11 @@ def _kids_owner_voice_rows(quiz_data,dua_data,story_data,short_story_data,verifi
     for item in ((studio_data or {}).get("items") or []):
         if str((item or {}).get("status") or "")!="published":
             continue
-        if str((item or {}).get("appTarget") or "kids") not in ("","kids"):
+        if str((item or {}).get("appTarget") or "kids") not in ("","kids","both"):
             continue
         item_id=str((item or {}).get("id") or "")
         kind=str((item or {}).get("kind") or "").strip()
-        if kind in ("story","lesson"):
+        if kind in ("story","lesson") and not _studio_has_owner_audio(item):
             _kids_owner_voice_add(
                 rows,(item or {}).get("text"),
                 "kids_story" if kind=="story" else "kids_lesson",
@@ -3538,6 +3644,11 @@ def build_kids_owner_voice_sync():
         short_story_data=load_short_stories_voice_fresh()
         verified_data=load_verified_content_fresh()
         studio_data=load_live_kids_content_fresh()
+        owner_reference_sync=sync_live_owner_content_references(studio_data)
+        if int(owner_reference_sync.get("imported") or 0):
+            _set_kids_owner_voice_state(
+                current=f"{int(owner_reference_sync.get('imported') or 0)} neue Eigentümer-Audio/Text-Paare lokal gelernt …"
+            )
         manifest=load_owner_voice_manifest_fresh()
         entries=dict(manifest.get("entries") or {})
 
