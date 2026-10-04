@@ -218,7 +218,7 @@ function ensureUi(){
           '<div id="msVisualDisclaimer" class="ms-visual-disclaimer"></div>'+
           '<div class="ms-detail-modes"><button data-ms-mode="both" type="button">Lesen &amp; Hören</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
           '<div class="ms-profile-grid"><section><small>WIE WAR ER?</small><strong id="msTrait"></strong></section><section><small>SEINE AUFGABE &amp; ZEIT</small><span id="msLife"></span></section><section><small>WER BERICHTET?</small><span id="msWitness"></span></section></div>'+
-          '<section id="msPlayer" class="ms-player"><button id="msPlay" class="ms-play" type="button">Hören &amp; mitlesen</button><div class="ms-progress" id="msProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="msProgress"></span></div><div class="ms-player-time"><strong id="msTimeCurrent">0:00</strong><span id="msTimeTotal">0:00</span></div><button class="ms-follow-open" id="msFollowOpen" type="button">Mitlesen öffnen</button><p id="msVoiceNote"></p></section>'+
+          '<section id="msPlayer" class="ms-player"><button id="msPlay" class="ms-play" type="button">Hören</button><div class="ms-progress" id="msProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="msProgress"></span></div><div class="ms-player-time"><strong id="msTimeCurrent">0:00</strong><span id="msTimeTotal">0:00</span></div><button class="ms-follow-open" id="msFollowOpen" type="button">Mitlesen</button><p id="msVoiceNote"></p></section>'+
           '<article id="msRead" class="ms-read"></article>'+
           '<section class="ms-sources"><strong>GEPRÜFTE QUELLEN</strong><div id="msSources"></div></section>'+
           '<section id="msQuestion" class="ms-question"></section>'+
@@ -229,7 +229,10 @@ function ensureUi(){
   $("#msClose").addEventListener("click",closeStory);
   installSwipeBack($("#msScroll"),closeStory);
   $("#msPlay").addEventListener("click",toggleAudio);
-  $("#msFollowOpen")?.addEventListener("click",()=>followReader?.open());
+  $("#msFollowOpen")?.addEventListener("click",()=>{
+    if(isAudioOnlyAge()&&typeof followReader?.openReadAlong==="function")followReader.openReadAlong();
+    else followReader?.open();
+  });
   $("#msProgressTrack")?.addEventListener("click",seekFromProgress);
   $("#msProgressTrack")?.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();seekBy(e.key==="ArrowLeft"?-15:15)}});
   modal.querySelectorAll("[data-ms-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.msMode)));
@@ -347,7 +350,11 @@ function applyMode(){
   if(isAudioOnlyAge()){
     if(read)read.hidden=true;
     if(player)player.hidden=false;
-    if(follow){follow.hidden=false;follow.textContent="Hörbuch öffnen";follow.setAttribute("aria-label","Hörbuch-Player öffnen")}
+    if(follow){
+      follow.hidden=false;
+      follow.textContent="Mitlesen";
+      follow.setAttribute("aria-label","Mitlesen für Erwachsene öffnen");
+    }
     return;
   }
   const m=mode();
@@ -374,7 +381,7 @@ function updatePlayButton(){
   const b=$("#msPlay");if(!b)return;
   const meta=audioMeta(active);
   b.disabled=busy||!meta?.url;
-  b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiterhören":(isAudioOnlyAge()?"Hörbuch starten":"Hören & mitlesen"));
+  b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiterhören":(isAudioOnlyAge()?"Hören":"Hören & mitlesen"));
 }
 function storyTime(v){return window.DARKidsFollowReader?.formatTime?window.DARKidsFollowReader.formatTime(v):Math.floor((Number(v)||0)/60)+":"+String(Math.floor((Number(v)||0)%60)).padStart(2,"0")}
 function updateProgress(){
