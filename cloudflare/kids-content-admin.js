@@ -56,7 +56,8 @@ function normalizeQuiz(raw) {
       question: clean(q?.question, 700),
       answers,
       success: clean(q?.success || "Richtig.", 700),
-      retry: clean(q?.retry || "Versuche es noch einmal.", 700)
+      retry: clean(q?.retry || "Versuche es noch einmal.", 700),
+      explanation: clean(q?.explanation, 1200)
     };
   }).filter((q) => q.question && q.answers.length >= 2) : [];
   return { questions };
@@ -187,11 +188,27 @@ export function validateKidsContentForPublish(item) {
 
   if (item.kind === "quiz") {
     const qs = Array.isArray(item.quiz?.questions) ? item.quiz.questions : [];
+    const ageKey = item.ageMin === 4 && item.ageMax === 6
+      ? "4-6"
+      : item.ageMin === 7 && item.ageMax === 8
+        ? "7-8"
+        : item.ageMin === 9 && item.ageMax === 10
+          ? "9-10"
+          : "";
+    if (!ageKey) errors.push("Kids-Quiz braucht exakt eine Altersstufe: 4–6, 7–8 oder 9–10");
+    if (!(item.sourceRefs || []).length) errors.push("Kids-Quiz braucht mindestens eine konkrete Quelle");
     if (!qs.length) errors.push("Quiz-Fragen fehlen");
     qs.forEach((q, index) => {
+      const answers = Array.isArray(q.answers) ? q.answers : [];
       if (!q.question) errors.push(`Quiz-Frage ${index + 1} fehlt`);
-      if (!Array.isArray(q.answers) || q.answers.length < 2) errors.push(`Quiz-Frage ${index + 1}: mindestens zwei Antworten nötig`);
-      if ((q.answers || []).filter((a) => a.correct).length !== 1) errors.push(`Quiz-Frage ${index + 1}: genau eine richtige Antwort nötig`);
+      if (answers.length < 2) errors.push(`Quiz-Frage ${index + 1}: mindestens zwei Antworten nötig`);
+      if (answers.filter((a) => a.correct).length !== 1) errors.push(`Quiz-Frage ${index + 1}: genau eine richtige Antwort nötig`);
+      if (!q.explanation) errors.push(`Quiz-Frage ${index + 1}: kurze Erklärung fehlt`);
+      if (ageKey === "4-6" && answers.length !== 2) errors.push(`Quiz-Frage ${index + 1}: 4–6 braucht genau zwei einfache Antworten`);
+      if (ageKey === "4-6" && String(q.question || "").length > 90) errors.push(`Quiz-Frage ${index + 1}: Frage für 4–6 ist zu lang`);
+      if (ageKey === "7-8" && String(q.question || "").length > 130) errors.push(`Quiz-Frage ${index + 1}: Frage für 7–8 ist zu lang`);
+      if (ageKey === "9-10" && String(q.question || "").length > 180) errors.push(`Quiz-Frage ${index + 1}: Frage für 9–10 ist zu lang`);
+      if (ageKey === "4-6" && answers.some((a) => String(a.label || "").length > 45)) errors.push(`Quiz-Frage ${index + 1}: Antwort für 4–6 ist zu lang`);
     });
   }
 
