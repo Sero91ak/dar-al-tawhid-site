@@ -134,7 +134,18 @@
     ["all"].concat(cats).forEach(function(cat){
       var b=document.createElement("button");b.type="button";
       b.className=category===cat?"active":"";
-      b.textContent=cat==="all"?"Alle Themen":cat;
+      b.setAttribute("aria-pressed",category===cat?"true":"false");
+      var art={};
+      if(typeof window.quizArtworkForBand==="function"){
+        try{art=cat==="all"?window.quizArtworkForBand():window.quizArtworkForBand({category:cat,scene:""})||{}}catch(_){art={}}
+      }
+      if(art.url){
+        b.classList.add("has-art");
+        b.style.setProperty("--quiz-cat-art",'url("'+String(art.url).replace(/"/g,"%22")+'")');
+        b.style.setProperty("--quiz-cat-pos",String(art.position||"50% 50%"));
+        b.setAttribute("data-quiz-family",String(art.family||"age"));
+      }
+      b.innerHTML='<span class="quiz-cat-label">'+escapeHtml(cat==="all"?"Alle Themen":cat)+'</span>';
       b.addEventListener("click",function(){category=cat;visibleLimit=PAGE_SIZE;renderCategories();setHero();renderList()});
       box.appendChild(b);
     });
