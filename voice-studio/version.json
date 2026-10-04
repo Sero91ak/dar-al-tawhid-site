@@ -1,7 +1,7 @@
 {
   "version": "2.9.92",
-  "updatedAt": "2026-10-04T16:12:00+02:00",
-  "deployTrigger": "voice-studio-2.9.92-first-audio-mobile-word-bindings-pin",
+  "updatedAt": "2026-10-04T16:18:00+02:00",
+  "deployTrigger": "voice-studio-2.9.92-first-audio-mobile-word-bindings-validated",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v61",
@@ -1413,10 +1413,10 @@
     "pairTokenExcludedFromInstalledStartUrl": true,
     "audioPathTraversalGuard": true,
     "candidateConfirmationBoundToPreview": true,
-    "fullValidatePassed": false,
+    "fullValidatePassed": true,
     "healthPassed": false,
     "canonicalGuardPassed": false,
-    "nativeMacAudioRoutePassed": false,
+    "nativeMacAudioRoutePassed": true,
     "pronunciationCatalog": "/learning/catalog",
     "fullPronunciationLibraryBrowse": true,
     "appleTouchIcon": true,
@@ -1436,7 +1436,7 @@
     "progressivePlaybackHandoffToFinal": true,
     "progressivePlaybackKeepsPosition": true,
     "runtimeStyleSelectorFixed": true,
-    "validationNote": "2.9.89 coherent release candidate: engine, Mac UI, mobile UI and native wrapper are version-aligned; direct final WAV playback, async generation jobs and incremental live chunks are included.",
+    "validationNote": "2.9.92 Voice-spezifisch validiert: Engine/UI/Pronunciation/Native-Mac-Route grün. Globale Smoke/Health/Guard-Jobs bleiben durch getrennte Kids-Quiz-/App-Shell-Prüfungen rot.",
     "pronunciationCatalogMemoryCache": true,
     "renderStatusEndpoint": "/render-status",
     "compactRenderPolling": true,
@@ -1445,11 +1445,11 @@
     "progressivePreviewRefreshSeconds": 0,
     "firstAudioPriority": true,
     "firstAudioHeadChars": {
-      "default": 96,
-      "kidsStory": 96
+      "default": 60,
+      "kidsStory": 68
     },
     "rollingPreviewAutoContinuesAfterBufferEnd": true,
-    "renderStatusPollMs": 220,
+    "renderStatusPollMs": 120,
     "pronunciationPreviewPollMs": 180,
     "nativeMacRenderPollMs": 500,
     "incrementalLiveChunkQueue": true,
@@ -1486,11 +1486,11 @@
     "instantStart": true,
     "serverSidePreflight": true,
     "consolidatedJobAndRenderPolling": true,
-    "livePollingIntervalMs": 180,
+    "livePollingIntervalMs": 120,
     "modelWarmOnMobileOpen": true,
     "firstAudioTargetChars": {
-      "kidsStory": 80,
-      "default": 72
+      "default": 60,
+      "kidsStory": 68
     },
     "progressiveIncrementalChunks": true,
     "voiceCoreSmokeStepsPassed": true,
@@ -1508,7 +1508,12 @@
     "autoAnalyzeOnPaste": true,
     "firstAudioAdaptivePolling": true,
     "voiceSmokeStepsPassed": true,
-    "globalSmokeBlockedByUnrelatedKidsQuizArtwork": true
+    "globalSmokeBlockedByUnrelatedKidsQuizArtwork": true,
+    "globalHealthBlockedByUnrelatedAppShellVersionDrift": true,
+    "globalGuardBlockedByUnrelatedAppShellVersionDrift": true,
+    "firstAudioPreloadScanSegments": 2,
+    "firstAudioPollBeforeReadyMs": 120,
+    "firstAudioPollAfterReadyMs": 260
   },
   "mobile": {
     "enabled": true,
