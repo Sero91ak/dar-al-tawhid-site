@@ -99,8 +99,8 @@ async function refresh(force = false) {
   if (!force && Date.now() - state.fetchedAt < 15000) return;
   state.busy = true;
   try {
-    const url = API_BASE + "/api/kids/content?staging=1&appTarget=kids";
-    const res = await fetch(url, { cache: "force-cache", credentials: "omit" });
+    const url = API_BASE + "/api/kids/content?staging=0&appTarget=kids&cb=" + Date.now();
+    const res = await fetch(url, { cache: "no-store", credentials: "omit" });
     if (!res.ok) throw new Error("Kids-Content " + res.status);
     const data = await res.json();
     state.items = Array.isArray(data?.items) ? data.items : [];
