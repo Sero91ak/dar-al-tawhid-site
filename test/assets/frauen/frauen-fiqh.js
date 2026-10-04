@@ -3661,8 +3661,7 @@
     ctx.drawImage(img, sx, sy, dw, dh);
   }
 
-  var FRAUEN_SHARE_IMAGE_API = "https://dar-admin-publisher.sero91ak.workers.dev/api/share-image/background";
-  var FRAUEN_SHARE_FALLBACKS = [
+  var FRAUEN_SHARE_IMAGE_POOL = [
     "/test/assets/frauen/library-v1224/01-grundlagen-din.jpg",
     "/test/assets/frauen/library-v1224/02-fiqh-frauen.jpg",
     "/test/assets/frauen/library-v1224/03-erste-generationen.jpg",
@@ -3671,70 +3670,36 @@
     "/test/assets/frauen/library-v1224/06-alltag-schutz.jpg",
     "/test/assets/frauen/library-v1224/07-lebensphasen.jpg"
   ];
+  var FRAUEN_SHARE_LAST_IMAGE = "";
 
-  async function frauenHistoricalFallback(abschnitt, e) {
-    var hay = String((bereichKicker(abschnitt) || "") + " " + (titelVon(e) || "") + " " + (aussageVon(e) || "")).toLowerCase();
-    var preferred = 0;
-    if (/fiqh|gebet|fasten|hayd|nifas|hajj|umrah|reinigung/.test(hay)) preferred = 1;
-    else if (/sahab|tabi|generation|geschichte|mütter der gläubigen/.test(hay)) preferred = 2;
-    else if (/famil|ehe|kind|erzieh|tochter|mädchen/.test(hay)) preferred = 3;
-    else if (/wissen|adab|dawah|lehren|lernen|quelle/.test(hay)) preferred = 4;
-    else if (/schutz|reise|privat|umgang|ruqyah|krank/.test(hay)) preferred = 5;
-    else if (/schwanger|still|iddah|trauer|tod|lebensphase/.test(hay)) preferred = 6;
+  function frauenShareRandomIndex(len) {
+    if (!len) return 0;
+    try {
+      if (window.crypto && typeof window.crypto.getRandomValues === "function") {
+        var a = new Uint32Array(1);
+        window.crypto.getRandomValues(a);
+        return a[0] % len;
+      }
+    } catch (err) {}
+    return Math.floor(Math.random() * len);
+  }
+
+  async function frauenRandomPoolBackground() {
+    if (!FRAUEN_SHARE_IMAGE_POOL.length) throw new Error("Kein freigegebener Frauen-Bildpool verfügbar.");
+    var start = frauenShareRandomIndex(FRAUEN_SHARE_IMAGE_POOL.length);
+    if (FRAUEN_SHARE_IMAGE_POOL.length > 1 && FRAUEN_SHARE_IMAGE_POOL[start] === FRAUEN_SHARE_LAST_IMAGE) {
+      start = (start + 1) % FRAUEN_SHARE_IMAGE_POOL.length;
+    }
     var last = null;
-    for (var i = 0; i < FRAUEN_SHARE_FALLBACKS.length; i++) {
-      var src = FRAUEN_SHARE_FALLBACKS[(preferred + i) % FRAUEN_SHARE_FALLBACKS.length];
+    for (var i = 0; i < FRAUEN_SHARE_IMAGE_POOL.length; i++) {
+      var src = FRAUEN_SHARE_IMAGE_POOL[(start + i) % FRAUEN_SHARE_IMAGE_POOL.length];
       try {
-        var img = await frauenLoadImage(src + "?share-fallback=v1247");
+        var img = await frauenLoadImage(src + "?share-pool=v1250");
+        FRAUEN_SHARE_LAST_IMAGE = src;
         return { image: img, objectUrl: "" };
       } catch (err) { last = err; }
     }
-    throw last || new Error("Kein Frauen-Historikbild verfügbar.");
-  }
-
-  async function frauenFreshShareBackground(abschnitt, e) {
-    var controller = typeof AbortController !== "undefined" ? new AbortController() : null;
-    var timer = setTimeout(function () { try { if (controller) controller.abort(); } catch (err) {} }, 45000);
-    try {
-      var res = await fetch(FRAUEN_SHARE_IMAGE_API, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-store",
-        credentials: "omit",
-        headers: { "Content-Type": "application/json", "Accept": "image/avif,image/webp,image/png,image/jpeg" },
-        body: JSON.stringify({
-          title: String(titelVon(e) || bereichKicker(abschnitt) || "Frauen im Islam").trim(),
-          body: String(aussageVon(e) || "").trim(),
-          category: String(bereichKicker(abschnitt) || "Frauen im Islam").trim(),
-          source: String(quelleText(e) || "").trim(),
-          profile: "women-historical"
-        }),
-        signal: controller ? controller.signal : undefined
-      });
-      if (!res.ok) {
-        var msg = "Neues Bild konnte nicht erzeugt werden.";
-        try {
-          var problem = await res.json();
-          if (problem && problem.error) msg = String(problem.error);
-        } catch (e2) {}
-        throw new Error(msg);
-      }
-      var blob = await res.blob();
-      if (!blob || !/^image\//i.test(blob.type || "")) throw new Error("Bildgenerator lieferte kein gültiges Bild.");
-      var objectUrl = URL.createObjectURL(blob);
-      try {
-        var img = await frauenLoadImage(objectUrl);
-        return { image: img, objectUrl: objectUrl };
-      } catch (e3) {
-        URL.revokeObjectURL(objectUrl);
-        throw e3;
-      }
-    } catch (generatorError) {
-      try { console.warn("Frauen share AI unavailable; dedicated historical fallback active", generatorError); } catch (warnErr) {}
-      return frauenHistoricalFallback(abschnitt, e);
-    } finally {
-      clearTimeout(timer);
-    }
+    throw last || new Error("Kein freigegebenes Frauen-Hintergrundbild konnte geladen werden.");
   }
 
   async function frauenImageFiles(abschnitt, e) {
@@ -3745,7 +3710,7 @@
     var ctx = canvas.getContext("2d");
     if (!ctx) return [];
 
-    var fresh = await frauenFreshShareBackground(abschnitt, e);
+    var fresh = await frauenRandomPoolBackground();
     var bg = fresh.image;
     try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e0) {}
 
