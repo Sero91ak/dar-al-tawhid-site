@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "id": "DAR_KIDS_QUIZ_V1",
   "namespace": "dar-kids-quiz",
-  "version": 6,
+  "version": 7,
   "updatedAt": "2026-10-04",
   "separateFromAdultQuiz": true,
   "adultQuizDependency": false,
@@ -44,7 +44,7 @@
       "Ṣaḥīḥ al-Bukhārī",
       "Ṣaḥīḥ Muslim"
     ],
-    "note": "DĀR AL TAWḤĪD Kids ist technisch und redaktionell vom normalen DĀR-Quiz getrennt. Aktuell 150 eigenständige, altersgeprüfte Kids-Fragen."
+    "note": "DĀR AL TAWḤĪD Kids ist technisch und redaktionell vom normalen DĀR-Quiz getrennt. Aktuell 200 eigenständige, altersgeprüfte Kids-Fragen."
   },
   "voice": {
     "speaker": "Serhat Abu Malik",
@@ -56,10 +56,10 @@
     "futureItems": "Neue freigegebene Kids-Fragen werden vom Voice Studio automatisch in den Owner-Voice-Batch aufgenommen."
   },
   "counts": {
-    "total": 150,
-    "4-6": 54,
-    "7-8": 48,
-    "9-10": 48
+    "total": 200,
+    "4-6": 72,
+    "7-8": 64,
+    "9-10": 64
   },
   "items": [
     {
@@ -5188,6 +5188,1716 @@
       "explanation": "Allah erklärt, dass das Gebet von Schändlichem und Verwerflichem abhält.",
       "sourceType": "Qurʾān",
       "source": "Qurʾān 29:45",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-151",
+      "number": 151,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "star",
+      "category": "Tawbah",
+      "topic": "Allahs Vergebung",
+      "question": "Dürfen wir auf Allahs Vergebung hoffen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah verbietet uns, an Seiner Barmherzigkeit zu verzweifeln.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 39:53",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-152",
+      "number": 152,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "help",
+      "category": "Iḥsān",
+      "topic": "Gutes tun",
+      "question": "Liebt Allah diejenigen, die Gutes tun?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah sagt, dass Er die Muḥsinīn liebt.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:195",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-153",
+      "number": 153,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "speech",
+      "category": "Aḫlāq",
+      "topic": "Wahrhaftig sein",
+      "question": "Sollen wir die Wahrheit sagen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah befiehlt den Gläubigen, mit den Wahrhaftigen zu sein.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 9:119",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-154",
+      "number": 154,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "lock",
+      "category": "Aḫlāq",
+      "topic": "Fair messen",
+      "question": "Sollen wir beim Messen und Wiegen fair sein?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah befiehlt vollständiges Maß und gerechtes Wiegen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 17:35",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-155",
+      "number": 155,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "home",
+      "category": "Aḫlāq",
+      "topic": "Verwandte gut behandeln",
+      "question": "Sollen wir unsere Verwandten gut behandeln?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah befiehlt Gerechtigkeit, Iḥsān und Gutes zu den Verwandten.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:90",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-156",
+      "number": 156,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "home",
+      "category": "Adab",
+      "topic": "Nachbarn",
+      "question": "Sollen wir gut zu unseren Nachbarn sein?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah befiehlt gutes Verhalten gegenüber nahen und fernen Nachbarn.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 4:36",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-157",
+      "number": 157,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "help",
+      "category": "Aḫlāq",
+      "topic": "Waise schützen",
+      "question": "Dürfen wir eine Waise schlecht behandeln?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Nein",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Ja",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah verbietet, eine Waise zu unterdrücken.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 93:9",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-158",
+      "number": 158,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "food",
+      "category": "Aḫlāq",
+      "topic": "Bedürftige speisen",
+      "question": "Ist es gut, Bedürftigen Essen zu geben?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah lobt Menschen, die Bedürftige um Seinetwillen speisen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 76:8–9",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-159",
+      "number": 159,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "home",
+      "category": "Adab",
+      "topic": "Beim Eintreten grüßen",
+      "question": "Sollen wir beim Eintreten einen guten Gruß sprechen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah lehrt einen gesegneten und guten Gruß beim Eintreten.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 24:61",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-160",
+      "number": 160,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "star",
+      "category": "Dhikr",
+      "topic": "Allah gedenken",
+      "question": "Sollen wir Allah oft gedenken?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah befiehlt den Gläubigen, Ihn oft zu gedenken.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 33:41",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-161",
+      "number": 161,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "library",
+      "category": "Qurʾān",
+      "topic": "Ādam عليه السلام",
+      "question": "Lehrte Allah Ādam die Namen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah lehrte Ādam die Namen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:31",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-162",
+      "number": 162,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "spark",
+      "category": "Qurʾān",
+      "topic": "Iblīs war ungehorsam",
+      "question": "Weigerte Iblīs sich, Allahs Befehl zu gehorchen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Iblīs weigerte sich hochmütig und wurde ungehorsam.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:34",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-163",
+      "number": 163,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "star",
+      "category": "Tawbah",
+      "topic": "Ādams Reue",
+      "question": "Nahm Allah Ādams Reue an?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah nahm Ādams Reue an; Er ist der Reue-Annehmende.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:37",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-164",
+      "number": 164,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "droplet",
+      "category": "Schöpfung",
+      "topic": "Regen",
+      "question": "Schickt Allah Regen vom Himmel?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah lässt Wasser vom Himmel herabkommen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:10",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-165",
+      "number": 165,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "spark",
+      "category": "Schöpfung",
+      "topic": "Pflanzen",
+      "question": "Lässt Allah Pflanzen wachsen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah lässt durch Wasser Pflanzen und Früchte wachsen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:11",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-166",
+      "number": 166,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "moon",
+      "category": "Schöpfung",
+      "topic": "Tag und Nacht",
+      "question": "Hat Allah Nacht und Tag erschaffen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah erschuf Nacht und Tag sowie Sonne und Mond.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 21:33",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-167",
+      "number": 167,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "spark",
+      "category": "Schöpfung",
+      "topic": "Bienen",
+      "question": "Leitete Allah die Bienen zu ihren Wohnungen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah gab den Bienen ein, wo sie ihre Behausungen nehmen sollen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:68",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-168",
+      "number": 168,
+      "ageBand": "4-6",
+      "ageMin": 4,
+      "ageMax": 6,
+      "scene": "food",
+      "category": "Schöpfung",
+      "topic": "Honig",
+      "question": "Nennt der Qurʾān Heilung im Honig?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Ja",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nein",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah erwähnt beim Getränk der Bienen eine Heilung für die Menschen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:69",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-169",
+      "number": 169,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "home",
+      "category": "Aḫlāq",
+      "topic": "Gerechtigkeit und Iḥsān",
+      "question": "Welche drei Dinge befiehlt Allah in Qurʾān 16:90 besonders?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Gerechtigkeit, Iḥsān und Gutes zu Verwandten",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Hochmut, Streit und Verschwendung",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Schweigen, Schlaf und Reichtum",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Vers verbindet Gerechtigkeit, Iḥsān und Unterstützung der Verwandten.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:90",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-170",
+      "number": 170,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "home",
+      "category": "Adab",
+      "topic": "Rechte der Menschen",
+      "question": "Wen nennt Qurʾān 4:36 unter den Menschen, zu denen wir gut sein sollen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Eltern, Verwandte, Waisen, Bedürftige und Nachbarn",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur reiche Menschen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur Freunde aus der Schule",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah nennt mehrere Gruppen mit Rechten auf gutes Verhalten.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 4:36",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-171",
+      "number": 171,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "help",
+      "category": "Aḫlāq",
+      "topic": "Waise",
+      "question": "Wie sollen wir mit einer Waise umgehen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Wir dürfen sie nicht unterdrücken",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Wir dürfen sie verspotten",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Wir dürfen ihr Recht nehmen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah verbietet ausdrücklich, eine Waise zu unterdrücken.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 93:9",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-172",
+      "number": 172,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "speech",
+      "category": "Adab",
+      "topic": "Bittenden behandeln",
+      "question": "Wie sollen wir einen Bittenden behandeln?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Wir sollen ihn nicht grob zurückweisen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Wir sollen ihn beschimpfen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Wir sollen ihn verspotten",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah verbietet, einen Bittenden schroff zurückzuweisen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 93:10",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-173",
+      "number": 173,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "food",
+      "category": "Iḥsān",
+      "topic": "Speisen für Allah",
+      "question": "Warum speisten die Rechtschaffenen Bedürftige, Waisen und Gefangene?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Sie wollten Allahs Wohlgefallen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Sie wollten dafür gelobt werden",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Sie wollten berühmt werden",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Sie erklärten, dass sie nur um Allahs willen speisen und keinen Dank erwarten.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 76:8–9",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-174",
+      "number": 174,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "home",
+      "category": "Adab",
+      "topic": "Gruß beim Eintreten",
+      "question": "Was lehrt Qurʾān 24:61 beim Betreten von Häusern?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Einander mit einem guten, gesegneten Gruß zu grüßen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Ohne Gruß hineinzulaufen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur zu flüstern",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah beschreibt den Gruß als gesegnet und gut.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 24:61",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-175",
+      "number": 175,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "library",
+      "category": "Qurʾān",
+      "topic": "Ādam und Wissen",
+      "question": "Welche besondere Lehre gab Allah Ādam?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allah lehrte ihn die Namen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Allah lehrte ihn Zauberei",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Allah machte ihn allwissend",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah lehrte Ādam die Namen und zeigte damit Wissen, das Er ihm gegeben hatte.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:31",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-176",
+      "number": 176,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "spark",
+      "category": "Qurʾān",
+      "topic": "Iblīs und Hochmut",
+      "question": "Warum war Iblīs bei Allahs Befehl ungehorsam?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Er weigerte sich und war hochmütig",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Er hatte den Befehl nicht gehört",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Er schlief",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Iblīs verweigerte den Gehorsam aus Hochmut.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:34",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-177",
+      "number": 177,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "star",
+      "category": "Tawbah",
+      "topic": "Ādam und Reue",
+      "question": "Was geschah, nachdem Ādam Worte der Reue von seinem Herrn empfing?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allah nahm seine Reue an",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Seine Reue war unmöglich",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Er sollte niemanden mehr um Vergebung bitten",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah nahm Ādams Reue an und nennt Sich den Reue-Annehmenden und Barmherzigen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:37",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-178",
+      "number": 178,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "droplet",
+      "category": "Schöpfung",
+      "topic": "Regen und Pflanzen",
+      "question": "Was lässt Allah durch Regen wachsen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Pflanzen wie Getreide, Oliven, Datteln und Trauben",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur Steine",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nichts",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah nennt Regen und die daraus wachsenden Pflanzen als Zeichen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:10–11",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-179",
+      "number": 179,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "moon",
+      "category": "Schöpfung",
+      "topic": "Himmelskörper",
+      "question": "Was sagt Qurʾān 21:33 über Sonne und Mond?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Beide bewegen sich auf ihrer Bahn",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Beide stehen immer still",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Menschen steuern sie",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah erschuf Nacht und Tag, Sonne und Mond; jeder bewegt sich auf seiner Bahn.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 21:33",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-180",
+      "number": 180,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "food",
+      "category": "Schöpfung",
+      "topic": "Bienen und Honig",
+      "question": "Welche zwei Zeichen nennt Qurʾān 16:68–69 bei den Bienen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allahs Leitung der Bienen und ein Getränk mit Heilung",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Dass Bienen das Wetter bestimmen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Dass Honig von Menschen erschaffen wird",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah leitet die Bienen und erwähnt in ihrem Getränk Heilung für Menschen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:68–69",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-181",
+      "number": 181,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "star",
+      "category": "Schöpfung",
+      "topic": "Vögel",
+      "question": "Wer hält die Vögel in der Luft?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allah",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur ihre Federn ohne Allahs Willen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Die Wolken",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah nennt die Vögel in der Luft als Zeichen und sagt, dass niemand außer Ihm sie hält.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:79",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-182",
+      "number": 182,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "spark",
+      "category": "Schöpfung",
+      "topic": "Nutztiere",
+      "question": "Welche Nutzen nennt der Qurʾān bei Nutztieren?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Wärme, Nahrung, Schönheit und Transport",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur Unterhaltung",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur Lärm",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah erinnert an viele erlaubte Nutzen, die Er in Nutztieren geschaffen hat.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:5–8",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-183",
+      "number": 183,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "spark",
+      "category": "Qurʾān",
+      "topic": "Sulaymān und die Ameise",
+      "question": "Was tat Sulaymān, als er die Worte der Ameise verstand?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Er lächelte und bat Allah um Dankbarkeit",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Er wurde hochmütig",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Er ignorierte Allahs Gabe",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Sulaymān lächelte und bat Allah, dankbar für Seine Gaben zu sein.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 27:18–19",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-184",
+      "number": 184,
+      "ageBand": "7-8",
+      "ageMin": 7,
+      "ageMax": 8,
+      "scene": "star",
+      "category": "Qurʾān",
+      "topic": "Sulaymān und der Wiedehopf",
+      "question": "Was bemerkte Sulaymān bei der Kontrolle der Vögel?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Der Wiedehopf fehlte",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Alle Vögel waren verschwunden",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Es gab keine Vögel",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Sulaymān kontrollierte die Vögel und fragte nach dem Wiedehopf.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 27:20–22",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-185",
+      "number": 185,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "home",
+      "category": "Aḫlāq",
+      "topic": "Gerechtigkeit und Iḥsān",
+      "question": "Welche Grundwerte verbindet Qurʾān 16:90?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Gerechtigkeit, Iḥsān und Unterstützung der Verwandten",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Geiz, Hochmut und Streit",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Ruhm, Stärke und Reichtum",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Vers fasst zentrale soziale Pflichten zusammen und verbietet Schändliches, Verwerfliches und Übertretung.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 16:90",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-186",
+      "number": 186,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "home",
+      "category": "Adab",
+      "topic": "Soziale Rechte",
+      "question": "Welche Aussage trifft Qurʾān 4:36 am besten?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allah allein dienen und zugleich vielen Menschen gegenüber gut handeln",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur Verwandte haben Rechte",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Gutes Verhalten ist vom Besitz abhängig",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Vers verbindet Tawḥīd mit Güte gegenüber Eltern, Verwandten, Waisen, Bedürftigen, Nachbarn und weiteren Menschen.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 4:36",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-187",
+      "number": 187,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "coin",
+      "category": "Ṣadaqah",
+      "topic": "Von dem geben, was man liebt",
+      "question": "Wann erreicht man nach Qurʾān 3:92 eine besondere Stufe der Güte?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Wenn man von dem spendet, was man liebt",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Wenn man nur Unbrauchbares abgibt",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Wenn man niemals teilt",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah lehrt, dass man al-Birr nicht erreicht, bis man von dem spendet, was man liebt.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 3:92",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-188",
+      "number": 188,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "food",
+      "category": "Adab",
+      "topic": "Ernte und Verschwendung",
+      "question": "Welche Regel nennt Qurʾān 6:141 bei Ernte und Nahrung?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Das Recht am Erntetag geben und nicht verschwenden",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Alles wegwerfen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur für sich selbst behalten",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah befiehlt, das zustehende Recht zu geben und Verschwendung zu vermeiden.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 6:141",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-189",
+      "number": 189,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "lock",
+      "category": "Aḫlāq",
+      "topic": "Schulden dokumentieren",
+      "question": "Was empfiehlt beziehungsweise befiehlt Qurʾān 2:282 bei einer Schuld mit festem Termin?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Sie schriftlich festzuhalten",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Sie absichtlich zu vergessen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Keine Zeugen oder Aufzeichnungen zu verwenden",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der längste Qurʾān-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:282",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-190",
+      "number": 190,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "speech",
+      "category": "Aḫlāq",
+      "topic": "Zeugnis",
+      "question": "Was verbietet Qurʾān 2:283 einem Zeugen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Das Zeugnis zu verbergen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Die Wahrheit zu sagen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Eine Schuld zurückzuzahlen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah warnt davor, Zeugnis zu verbergen, und verbindet dies mit der Sünde des Herzens.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:283",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-191",
+      "number": 191,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "spark",
+      "category": "Aḫlāq",
+      "topic": "Hochmut",
+      "question": "Welche Haltung verbietet Qurʾān 17:37 beim Gehen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Hochmütig auf der Erde umherzugehen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Ruhig und bescheiden zu gehen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Auf den Weg zu achten",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah erinnert den Menschen an seine Begrenztheit und verbietet arrogantes Auftreten.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 17:37",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-192",
+      "number": 192,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "speech",
+      "category": "Aḫlāq",
+      "topic": "Menschen nicht verachten",
+      "question": "Was lehrt Luqmān über den Umgang mit Menschen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Nicht verächtlich das Gesicht abzuwenden und nicht hochmütig zu gehen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Andere wegen ihres Besitzes zu bewerten",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Immer lauter als andere zu sprechen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Luqmān verbindet respektvollen Umgang mit Bescheidenheit.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 31:18",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-193",
+      "number": 193,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "star",
+      "category": "Aḫlāq",
+      "topic": "Sich selbst nicht reinsprechen",
+      "question": "Warum sollen Menschen sich nicht selbst als besonders rein erklären?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allah weiß am besten, wer Taqwā besitzt",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Weil gute Taten verboten sind",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Weil niemand Fehler bereuen darf",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah verbietet Selbstüberhöhung und kennt die Menschen mit wirklicher Taqwā am besten.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 53:32",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-194",
+      "number": 194,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "help",
+      "category": "Aḫlāq",
+      "topic": "Konflikte gerecht lösen",
+      "question": "Was soll geschehen, wenn zwei Gruppen von Gläubigen kämpfen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Versöhnung und gerechte Wiederherstellung des Friedens",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Den Streit weiter anheizen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Gerüchte über beide Seiten verbreiten",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah befiehlt zunächst Versöhnung und bei Übertretung eine gerechte Rückführung zum Frieden.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 49:9",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-195",
+      "number": 195,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "help",
+      "category": "Aḫlāq",
+      "topic": "Brüderlichkeit",
+      "question": "Welche Begründung gibt Qurʾān 49:10 für Versöhnung?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Die Gläubigen sind Brüder",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Streit ist immer besser",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur Verwandte sollen sich versöhnen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah nennt die Gläubigen Brüder und befiehlt, zwischen ihnen Frieden zu stiften.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 49:10",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-196",
+      "number": 196,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "spark",
+      "category": "Īmān",
+      "topic": "Starker Gläubiger",
+      "question": "Was lehrte der Prophet ﷺ neben dem Streben nach Nützlichem?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allah um Hilfe zu bitten und nicht aufzugeben",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur auf die eigene Kraft zu vertrauen",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nützliche Dinge zu meiden",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Prophet ﷺ lehrte, nach dem Nützlichen zu streben, Allah um Hilfe zu bitten und nicht hilflos aufzugeben.",
+      "sourceType": "Ṣaḥīḥ Ḥadīth",
+      "source": "Ṣaḥīḥ Muslim 2664",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-197",
+      "number": 197,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "help",
+      "category": "Aḫlāq",
+      "topic": "Dem Bruder helfen",
+      "question": "Wann ist Allah dem Diener besonders in Hilfe?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Solange der Diener seinem Bruder hilft",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Nur wenn der Diener niemandem hilft",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Nur wenn er bekannt ist",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Prophet ﷺ lehrte, dass Allah dem Diener hilft, solange dieser seinem Bruder hilft.",
+      "sourceType": "Ṣaḥīḥ Ḥadīth",
+      "source": "Ṣaḥīḥ Muslim 2699",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-198",
+      "number": 198,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "help",
+      "category": "Aḫlāq",
+      "topic": "Barmherzigkeit",
+      "question": "Welche Warnung gab der Prophet ﷺ über fehlende Barmherzigkeit?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Wer keine Barmherzigkeit zeigt, dem wird keine Barmherzigkeit gezeigt",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Barmherzigkeit ist nur für kleine Kinder",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Härte ist immer besser",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Prophet ﷺ verband Barmherzigkeit gegenüber anderen mit dem Empfang von Barmherzigkeit.",
+      "sourceType": "Ṣaḥīḥ Ḥadīth",
+      "source": "Ṣaḥīḥ al-Bukhārī 6013; Ṣaḥīḥ Muslim 2319",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-199",
+      "number": 199,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "speech",
+      "category": "Sunnah",
+      "topic": "Erleichtern",
+      "question": "Wie sollen wir Menschen Dinge des Dīn vermitteln?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Erleichtern und nicht unnötig erschweren",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Absichtlich abschrecken",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Unverständliche Härte suchen",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Der Prophet ﷺ befahl, zu erleichtern und nicht zu erschweren sowie frohe Botschaft zu geben und nicht abzuschrecken.",
+      "sourceType": "Ṣaḥīḥ Ḥadīth",
+      "source": "Ṣaḥīḥ al-Bukhārī 69; Ṣaḥīḥ Muslim 1734",
+      "status": "published",
+      "reviewStatus": "approved",
+      "verification": "approved"
+    },
+    {
+      "id": "kids-quiz-200",
+      "number": 200,
+      "ageBand": "9-10",
+      "ageMin": 9,
+      "ageMax": 10,
+      "scene": "star",
+      "category": "Īmān",
+      "topic": "Belastbarkeit",
+      "question": "Was lehrt Qurʾān 2:286 über Allahs Verpflichtungen?",
+      "answers": [
+        {
+          "id": "a1",
+          "label": "Allah belastet keine Seele über ihr Vermögen",
+          "correct": true
+        },
+        {
+          "id": "a2",
+          "label": "Jeder Mensch muss Unmögliches leisten",
+          "correct": false
+        },
+        {
+          "id": "a3",
+          "label": "Allah kennt die Fähigkeiten der Menschen nicht",
+          "correct": false
+        }
+      ],
+      "success": "Richtig. Sehr gut!",
+      "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
+      "explanation": "Allah belastet keine Seele mit mehr, als sie tragen kann.",
+      "sourceType": "Qurʾān",
+      "source": "Qurʾān 2:286",
       "status": "published",
       "reviewStatus": "approved",
       "verification": "approved"
