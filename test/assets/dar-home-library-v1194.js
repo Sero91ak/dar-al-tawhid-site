@@ -82,9 +82,9 @@ function applyHomeAtmosphereV1204(){
   var view=document.getElementById("appView");
   var page=(body&&getComputedStyle(body).getPropertyValue("--dt-page").trim())||(light?"#f5f1e7":"#050706");
   var heroImg=window.matchMedia&&window.matchMedia("(min-width:760px)").matches
-    ? "/test/assets/home-v1194/hero-wide-adobe.jpg?v=1206"
-    : "/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1206";
-  var studyImg="/test/assets/home-v1194/study-runway.jpg?v=1206";
+    ? "/test/assets/home-v1194/hero-wide-adobe.jpg?v=1238-home"
+    : "/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1238-home";
+  var studyImg="/test/assets/home-v1194/study-runway.jpg?v=1238-home";
   if(html){
     html.style.setProperty("background-color",page,"important");
     html.style.setProperty(
@@ -235,31 +235,34 @@ function tuneSearch(){
     }
   });
 }
-function ensureHomeKnowledgeGridStyleV1236(){
-  if(document.getElementById("dtHomeKnowledgeGridStyleV1236"))return;
+function ensureHomeKnowledgeGridStyleV1238(){
+  var old=document.getElementById("dtHomeKnowledgeGridStyleV1236");
+  if(old)old.remove();
+  if(document.getElementById("dtHomeKnowledgeGridStyleV1238"))return;
   var style=document.createElement("style");
-  style.id="dtHomeKnowledgeGridStyleV1236";
+  style.id="dtHomeKnowledgeGridStyleV1238";
   style.textContent=[
-    'html.dar-home-v1194 body.is-home-route #appView :is(.home-line-grid,.home-line-list).dt-home-nav-polished{position:relative!important;isolation:isolate!important;margin-top:0!important;margin-bottom:8px!important;background:linear-gradient(180deg,color-mix(in srgb,var(--dt-page) 34%,transparent) 0%,color-mix(in srgb,var(--dt-page) 46%,transparent) 52%,color-mix(in srgb,var(--dt-page) 58%,transparent) 100%)!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;}',
-    'html.dar-home-v1194 body.is-home-route #appView :is(.home-line-grid,.home-line-list).dt-home-nav-polished::before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;pointer-events:none!important;background:linear-gradient(90deg,color-mix(in srgb,var(--dt-page) 18%,transparent),transparent 42%,color-mix(in srgb,var(--dt-page) 15%,transparent))!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView :is(.home-line-grid,.home-line-list).dt-home-nav-polished{position:relative!important;isolation:isolate!important;margin-top:0!important;margin-bottom:4px!important;background:transparent!important;background-image:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView :is(.home-line-grid,.home-line-list).dt-home-nav-polished::before{content:""!important;position:absolute!important;z-index:0!important;pointer-events:none!important;left:-8px!important;right:-8px!important;top:-20px!important;bottom:-18px!important;background:linear-gradient(180deg,color-mix(in srgb,var(--dt-page) 12%,transparent) 0%,color-mix(in srgb,var(--dt-page) 23%,transparent) 44%,color-mix(in srgb,var(--dt-page) 31%,transparent) 100%)!important;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 9%,#000 92%,transparent 100%)!important;mask-image:linear-gradient(to bottom,transparent 0%,#000 9%,#000 92%,transparent 100%)!important;}',
     'html.dar-home-v1194 body.is-home-route #appView :is(.home-line-grid,.home-line-list).dt-home-nav-polished>*{position:relative!important;z-index:1!important;}',
-    'html.dar-home-v1194 body.is-home-route #appView .home-line-row{min-height:92px!important;padding:12px 14px!important;background:color-mix(in srgb,var(--dt-page) 9%,transparent)!important;box-shadow:none!important;}',
-    'html.dar-home-v1194 body.is-home-route #appView .home-line-row:nth-child(odd){background:color-mix(in srgb,var(--dt-page) 15%,transparent)!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView .home-line-row,html.dar-home-v1194 body.is-home-route #appView .home-line-row:nth-child(odd){min-height:92px!important;padding:12px 14px!important;background:transparent!important;background-image:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;}',
     'html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico{width:48px!important;min-width:48px!important;height:48px!important;display:grid!important;place-items:center!important;margin:0 10px 0 0!important;padding:0!important;}',
-    'html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img,html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img.dar3d-icon{width:40px!important;height:40px!important;max-width:40px!important;max-height:40px!important;object-fit:contain!important;object-position:center!important;margin:0!important;filter:drop-shadow(0 5px 7px color-mix(in srgb,#000 13%,transparent))!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img,html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img.dar3d-icon{width:40px!important;height:40px!important;max-width:40px!important;max-height:40px!important;object-fit:contain!important;object-position:center!important;margin:0!important;filter:drop-shadow(0 4px 6px color-mix(in srgb,#000 12%,transparent))!important;}',
     'html.dar-home-v1194 body.is-home-route #appView .home-line-row :is(.home-line-row__title,h2,h3,h4,b,strong,a){text-decoration:none!important;text-decoration-line:none!important;border-bottom:0!important;box-shadow:none!important;}',
-    'html.dar-home-v1194 body.is-home-route #appView .home-line-row p{margin-top:4px!important;line-height:1.24!important;opacity:.84!important;}',
-    'html.dar-home-v1194 body.is-home-route .footer{min-height:0!important;margin-top:0!important;padding-top:10px!important;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))!important;row-gap:6px!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView .home-line-row p{margin-top:4px!important;line-height:1.24!important;opacity:.86!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView .home-v380-quran-hero.dt-quran-resume-after-core{border-left:0!important;border-right:0!important;border-radius:0!important;border-top:1px solid color-mix(in srgb,var(--dt-rule) 72%,transparent)!important;border-bottom:1px solid color-mix(in srgb,var(--dt-rule) 72%,transparent)!important;background:linear-gradient(90deg,color-mix(in srgb,var(--dt-page) 9%,transparent),color-mix(in srgb,var(--dt-page) 17%,transparent) 54%,color-mix(in srgb,var(--dt-page) 8%,transparent))!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView.view::before{top:-132px!important;height:clamp(860px,132vw,1080px)!important;opacity:.75!important;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.10) 8%,rgba(0,0,0,.38) 19%,rgba(0,0,0,.76) 34%,#000 48%,#000 79%,rgba(0,0,0,.56) 91%,transparent 100%)!important;mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.10) 8%,rgba(0,0,0,.38) 19%,rgba(0,0,0,.76) 34%,#000 48%,#000 79%,rgba(0,0,0,.56) 91%,transparent 100%)!important;}',
+    'html.dar-home-v1194 body.is-home-route #appView.view::after{opacity:.42!important;filter:blur(22px)!important;}',
+    'html.dar-home-v1194 body.is-home-route .footer{min-height:0!important;margin-top:0!important;padding-top:12px!important;padding-bottom:calc(116px + env(safe-area-inset-bottom,0px))!important;row-gap:6px!important;}',
     'html.dar-home-v1194 body.is-home-route .footer :is(h1,h2,h3,p){margin-top:3px!important;margin-bottom:3px!important;}',
-    'html.dar-home-v1194 body.is-home-route .footer .footer-actions{margin-top:6px!important;margin-bottom:4px!important;}',
-    'html.dar-home-v1194 body.is-home-route .footer :is(.footer-sign,.brand-sign,.signature,.footer-signature){margin-top:7px!important;margin-bottom:0!important;}',
-    '@media(max-width:430px){html.dar-home-v1194 body.is-home-route #appView .home-line-row{min-height:88px!important;padding:11px 10px!important;}html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico{width:44px!important;min-width:44px!important;height:44px!important;margin-right:8px!important;}html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img,html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img.dar3d-icon{width:37px!important;height:37px!important;max-width:37px!important;max-height:37px!important;}}'
+    'html.dar-home-v1194 body.is-home-route .footer .footer-actions{margin-top:7px!important;margin-bottom:2px!important;}',
+    '@media(max-width:430px){html.dar-home-v1194 body.is-home-route #appView .home-line-row{min-height:88px!important;padding:11px 10px!important;}html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico{width:44px!important;min-width:44px!important;height:44px!important;margin-right:8px!important;}html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img,html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img.dar3d-icon{width:37px!important;height:37px!important;max-width:37px!important;max-height:37px!important;}html.dar-home-v1194 body.is-home-route #appView.view::before{top:-118px!important;height:850px!important;}}'
   ].join("");
   document.head.appendChild(style);
 }
 function tuneHomeKnowledgeGridV1236(){
   if(!isHome())return;
-  ensureHomeKnowledgeGridStyleV1236();
+  ensureHomeKnowledgeGridStyleV1238();
   var scope=document.getElementById("appView")||document;
   scope.querySelectorAll(".home-line-grid,.home-line-list").forEach(function(el){
     el.classList.add("dt-home-nav-polished");
@@ -377,6 +380,19 @@ function ensureMain(){
     ".home-header-update-chip,#homeRefreshBtn,.home-refresh-icon-btn--header,.home-refresh-panel,.home-update-row-v416"
   ).forEach(function(el){el.style.setProperty("display","none","important")});
 }
+function removeHomePersonalCreditV1238(){
+  if(!isHome())return;
+  var footer=document.querySelector(".footer");
+  if(!footer)return;
+  Array.prototype.slice.call(footer.querySelectorAll("*")).forEach(function(el){
+    if(el.children&&el.children.length)return;
+    var txt=String(el.textContent||"").replace(/\s+/g," ").trim();
+    if(/^by\s+Serhat\s+Abu\s+Malik$/i.test(txt)){
+      el.style.setProperty("display","none","important");
+      el.setAttribute("aria-hidden","true");
+    }
+  });
+}
 function compactHomeFooter(){
   if(!isHome())return;
   var footer=document.querySelector(".footer");
@@ -457,6 +473,7 @@ function sync(){
   ensureHero();
   ensureMain();
   applyHomeAtmosphereV1204();
+  removeHomePersonalCreditV1238();
   compactHomeFooter();
 }
 function queue(){
