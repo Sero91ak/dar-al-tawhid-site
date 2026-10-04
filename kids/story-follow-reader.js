@@ -82,8 +82,7 @@ function create(options){
   }
   function updatePlay(){
     if(!playEl)return;
-    const unavailable=!audio.src&&!audio.currentSrc;
-    playEl.disabled=!!options.disabled?.()&&unavailable;
+    playEl.disabled=typeof options.disabled==="function"?!!options.disabled():false;
     if(!audio.paused&&!audio.ended)playEl.textContent="Pause";
     else if(audio.currentTime>0&&!audio.ended)playEl.textContent="Weiter";
     else if(audio.ended)playEl.textContent="Nochmal";
