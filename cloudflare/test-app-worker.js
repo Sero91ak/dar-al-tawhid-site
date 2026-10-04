@@ -225,7 +225,12 @@ async function finalizeDarTestHomeV1193(asset) {
     html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholars-v1240.css?v=1240"><\/head>');
   }
 
-  // DAR_MORE_V1241
+    // DAR_ILM_TOPICS_V1242
+  if (!/ilm-topics-v1242\.css/.test(html)) {
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-topics-v1242.css?v=1242"><\/head>');
+  }
+
+// DAR_MORE_V1241
   if (!/more-v1241\.css/.test(html)) {
     html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/more-v1241.css?v=1241"><\/head>');
   }
