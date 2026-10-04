@@ -394,7 +394,7 @@ async function init(){
     try{
       const m=String(location.hash||"").match(/^#stories\/sahabi\/([^/?#]+)/i);
       const id=m?decodeURIComponent(m[1]||""):"";
-      if(id&&items.some(x=>x.id===id)){openLibrary();setTimeout(()=>openStory(id),0)}
+      if(id&&items.some(x=>x.id===id)){document.querySelector('.nav-btn[data-target="stories"]')?.click();openLibrary();setTimeout(()=>openStory(id),0)}
     }catch(_){};
     const app=$(".app");
     if(app&&"MutationObserver" in window)new MutationObserver(()=>{renderCards();if(active)renderActive()}).observe(app,{attributes:true,attributeFilter:["data-age"]});
