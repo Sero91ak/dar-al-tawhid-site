@@ -1,6 +1,6 @@
 // owner-voice-config-recovery-20261004
 import { elevenKey, isVoiceConfigured, synthesizeDarVoice } from "./video-studio/voice.js";
-import { darVoiceGpuConfigured, darVoiceGpuPublicStatus, proxyDarVoiceGpuRequest } from "./voice-studio-gpu-gateway.js";
+import { darVoiceGpuConfigured, darVoiceGpuPublicStatus, darVoiceWebAccessConfigured, darVoiceWebAuthorized, proxyDarVoiceGpuRequest } from "./voice-studio-gpu-gateway.js";
 
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const RATE_MAX_REQUESTS = 8;
@@ -207,6 +207,20 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
 
   if (rest === "/engine" || rest.startsWith("/engine/")) {
     assertVoiceStudioOrigin(request, env);
+    if (!darVoiceWebAccessConfigured(env)) {
+      return json({
+        ok: false,
+        error: "DĀR Voice Cloud-Zugang ist serverseitig noch nicht aktiviert.",
+        accessSetupRequired: true
+      }, cors, 503);
+    }
+    if (!darVoiceWebAuthorized(request, env)) {
+      return json({
+        ok: false,
+        error: "DĀR Voice Zugangscode erforderlich.",
+        accessRequired: true
+      }, cors, 401);
+    }
     const enginePath = rest.slice("/engine".length) || "/";
     return proxyDarVoiceGpuRequest(request, env, cors, enginePath);
   }
