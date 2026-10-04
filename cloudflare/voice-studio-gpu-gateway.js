@@ -16,7 +16,16 @@ function json(data, cors, status = 200) {
 }
 
 function normalizedOrigin(env) {
-  return String(env.DAR_VOICE_GPU_ORIGIN || "").trim().replace(/\/+$/, "");
+  const raw = String(env.DAR_VOICE_GPU_ORIGIN || "").trim().replace(/\/+$/, "");
+  if (!raw) return "";
+  try {
+    const url = new URL(raw);
+    const local = url.hostname === "127.0.0.1" || url.hostname === "localhost";
+    if (url.protocol !== "https:" && !local) return "";
+    return raw;
+  } catch (_) {
+    return "";
+  }
 }
 
 function upstreamToken(env) {
@@ -90,13 +99,14 @@ export async function darVoiceWebSessionCookie(env) {
 }
 
 export function darVoiceGpuConfigured(env) {
-  return Boolean(normalizedOrigin(env));
+  return Boolean(normalizedOrigin(env) && upstreamToken(env));
 }
 
 export function darVoiceGpuPublicStatus(env) {
   const origin = normalizedOrigin(env);
   return {
-    configured: Boolean(origin),
+    configured: Boolean(origin && upstreamToken(env)),
+    originConfigured: Boolean(origin),
     authenticatedUpstream: Boolean(upstreamToken(env)),
     webAccessProtected: Boolean(webAccessToken(env)),
     transport: "cloudflare-gateway",
@@ -153,10 +163,13 @@ export async function proxyDarVoiceGpuRequest(request, env, cors, enginePath) {
   }
 
   const origin = normalizedOrigin(env);
-  if (!origin) {
+  const token = upstreamToken(env);
+  if (!origin || !token) {
     return json({
       ok: false,
-      error: "DĀR Voice Cloud Engine ist vorbereitet, aber noch nicht mit einem GPU-Host verbunden.",
+      error: !origin
+        ? "DĀR Voice GPU-Origin fehlt oder ist nicht per HTTPS abgesichert."
+        : "DĀR Voice GPU-Token fehlt serverseitig.",
       setupRequired: true,
       localIpRequired: false,
       transport: "cloudflare-gateway"
