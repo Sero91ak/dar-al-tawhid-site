@@ -1178,7 +1178,7 @@
       '<div class="sf-post__bar feed-bar">' +
         '<button type="button" class="sf-act sf-like' + (liked ? ' is-liked' : '') + '" data-pf-like="' + esc(item.uid) + '" aria-label="Gefällt mir"><span aria-hidden="true">' + (liked ? '♥' : '♡') + '</span></button>' +
         (item.shareEnabled !== false ?
-          '<button type="button" class="sf-act sf-share feed-share-button share-image-btn" data-post-id="' + esc(item.postId || '') + '" data-post-url="' + esc(postUrl) + '" data-post-title="' + esc(item.title || '') + '" aria-label="Neues Bild erzeugen und teilen"><span aria-hidden="true">↗</span></button>' :
+          '<button type="button" class="sf-act sf-share feed-share-button share-image-btn" data-post-id="' + esc(item.postId || '') + '" data-post-url="' + esc(postUrl) + '" data-post-title="' + esc(item.title || '') + '" aria-label="Bildbeitrag erstellen und teilen"><span aria-hidden="true">↗</span></button>' :
           '') +
         statsHtml +
         readBtn +
@@ -3200,7 +3200,7 @@
       }).catch(function (err) {
         if (err && err.name === 'AbortError') return;
         console.error(err);
-        showToast(err && err.message ? String(err.message).slice(0, 180) : 'Neues Bild konnte nicht erzeugt werden. Bitte kurz warten und erneut versuchen.');
+        showToast(err && err.message ? String(err.message).slice(0, 180) : 'Bildbeitrag konnte nicht erstellt werden. Bitte erneut versuchen.');
       }).finally(function () {
         btn.classList.remove('is-loading');
       });
