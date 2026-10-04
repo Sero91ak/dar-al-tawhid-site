@@ -508,7 +508,9 @@ async function previewCandidate(row,term,btn){
     confirm.dataset.previewId=String(snap.previewId||"");
     confirm.dataset.previewJobId=String(snap.jobId||d.jobId||"");
     confirm.disabled=!confirm.dataset.previewId;
-    toast("Schnelltest bereit.");
+    const elapsed=Math.max(0,Number(snap.elapsedMs||0));
+    const speed=String(snap.previewMode||"")==="confirmed-lock"?"Master-Audio":String(snap.previewMode||"")==="preview-cache"?"Schnellcache":"Schnelltest";
+    toast(speed+" bereit"+(elapsed?" · "+(elapsed/1000).toFixed(1)+" s":""));
   }catch(e){toast(e.message)}
   finally{btn.disabled=false;btn.textContent="Anhören"}
 }
