@@ -274,18 +274,17 @@ var(--quiz-art,linear-gradient(180deg,#315c78 0%,#5a8f8a 48%,#ba8b5f 100%));back
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);filter:drop-shadow(0 8px 18px rgba(0,0,0,.24))
 }
 #quizModal[data-quiz-band="4-6"] .quiz-scene{
-  height:clamp(185px,24vh,248px);min-height:0;border-radius:31px;
-  background-image:url("/kids/assets/quiz-scenes/quiz-4-6.svg?v=20261004-real1");background-position:center 54%
+  height:clamp(185px,24vh,248px);min-height:0;border-radius:31px;background-position:var(--quiz-art-position,50% 54%)
 }
 #quizModal[data-quiz-band="7-8"] .quiz-scene{
-  height:clamp(174px,22vh,234px);min-height:0;
-  background-image:url("/kids/assets/quiz-scenes/quiz-7-8.svg?v=20261004-real1");background-position:center 50%
+  height:clamp(174px,22vh,234px);min-height:0;background-position:var(--quiz-art-position,50% 50%)
 }
 #quizModal[data-quiz-band="9-10"] .quiz-scene{
-  height:clamp(162px,20vh,218px);min-height:0;border-radius:25px;
-  background-image:url("/kids/assets/quiz-scenes/quiz-9-10.svg?v=20261004-real1");background-position:center 48%
+  height:clamp(162px,20vh,218px);min-height:0;border-radius:25px;background-position:var(--quiz-art-position,50% 48%)
 }
 #quizModal[data-quiz-band="4-6"] .quiz-scene-symbol{width:56px;height:56px;border-radius:18px;font-size:31px}
+#quizModal[data-quiz-band="4-6"] .quiz-scene-top{justify-content:flex-end}
+#quizModal[data-quiz-band="4-6"] .quiz-scene-top .quiz-scene-chip:first-child{display:none}
 #quizModal[data-quiz-band="9-10"] .quiz-scene-symbol{width:43px;height:43px;border-radius:14px;font-size:24px}
 .quiz-answer.wrong{animation:quizWrongShake .24s ease}
 @keyframes quizWrongShake{0%,100%{transform:translateX(0)}28%{transform:translateX(-4px)}58%{transform:translateX(4px)}82%{transform:translateX(-2px)}}
@@ -6203,13 +6202,14 @@ function renderQuizQuestion(){
   var band=currentKidsQuizAgeBand();
   var help=band==="4-6"?"":(band==="9-10"?"Wähle die beste Antwort.":"Hör zu und tippe auf deine Antwort.");
   var kicker=band==="4-6"?String(q.category||"Quiz"):String(q.category||"Quiz")+" · "+(currentQuizIndex+1)+"/"+currentQuiz.length;
+  var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";
   var art=quizArtworkForBand();
   document.getElementById("quizBody").innerHTML=
     '<div id="quizScene" class="quiz-scene" aria-hidden="true">'+
       '<div class="quiz-scene-top"><span class="quiz-scene-chip">'+quizText(q.category||"Quiz")+'</span><span class="quiz-scene-chip quiz-scene-count">Frage '+(currentQuizIndex+1)+' · '+currentQuiz.length+'</span></div>'+
       '<div id="quizSceneSymbol" class="quiz-scene-symbol">'+kidsIconMarkup(kidsIconName(q.scene,"star"),"scene-icon")+'</div>'+
     '</div>'+
-    '<button id="quizListen" class="quiz-listen" type="button">Frage noch einmal hören</button>'+
+    '<button id="quizListen" class="quiz-listen" type="button">'+listenLabel+'</button>'+
     '<div class="quiz-kicker">'+quizText(kicker)+'</div>'+
     '<div id="quizQuestion" class="quiz-question">'+quizText(q.question)+'</div>'+
     '<div id="quizHelp" class="quiz-help">'+help+'</div>'+
