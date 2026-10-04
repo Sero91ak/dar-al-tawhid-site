@@ -359,11 +359,7 @@ async function applyGenerationJobResult(job,useLibrary,{autoplayIfShort=true}={}
   const outputName=String(job?.outputName||"").trim();
   if(!outputName)throw Error("Fertige Audiodatei fehlt.");
   const finalUrl="/mobile/audio?name="+encodeURIComponent(outputName);
-  try{
-    const sr=await api("/render-status");const ss=await sr.json();
-    const statusJob=String(ss?.render_job_id||"").trim();
-    if(ss?.render_preview_ready&&(!statusJob||statusJob===String(job?.jobId||state.activeJobId||"")))activateLivePreview(ss);
-  }catch(_){}
+  if(job?.render)activateLivePreview(job.render);
   revokeIfBlob(state.audioUrl);
   state.audioBlob=null;state.audioUrl=finalUrl;state.finalAudioName=outputName;state.finalReady=true;
   if(!state.liveStreamActive&&state.liveChunkCursor>=state.liveChunks.length){
