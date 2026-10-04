@@ -88,7 +88,7 @@ h1{font-size:clamp(26px,2.1vw,40px);line-height:1.02;letter-spacing:-.035em;marg
 .prophet-pick.focus{outline:2px solid rgba(217,182,111,.55);outline-offset:2px}.prophet-review{margin-top:9px;border:1px solid rgba(239,157,157,.24);border-radius:12px;padding:9px;background:rgba(120,25,25,.08)}.prophet-review[hidden]{display:none}.prophet-review-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.prophet-review-term{min-height:30px!important;padding:6px 9px!important;font-size:10px!important}.prophet-review-meta{font-size:10px;color:var(--muted);line-height:1.45}
 @media(max-width:900px){.prophet-pick-list{grid-template-columns:1fr}}
 
-/* 2.9.90 · Prophetenübersicht wieder lesbar + klarer Datei-Upload */
+/* 2.9.91 · Prophetenübersicht wieder lesbar + klarer Datei-Upload */
 .prophet-pick-list{grid-template-columns:1fr;gap:8px}
 .prophet-pick-item{
   grid-template-columns:minmax(220px,1.35fr) minmax(150px,.78fr) 102px 112px 96px 112px;
@@ -678,7 +678,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   Voice Studio 2.9.90 · page-focused production architecture
+   Voice Studio 2.9.91 · page-focused production architecture
    Jede Aufgabe hat eine eigene Arbeitsfläche; kein Dashboard-Scroll.
    ═══════════════════════════════════════════════════════════════ */
 [hidden]{display:none!important}
@@ -775,7 +775,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.90 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.91 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -834,7 +834,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.90</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.91</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
@@ -1094,7 +1094,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
     <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.90</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.91</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash</textarea>
@@ -1187,7 +1187,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.90 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.91 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
 </div>
 </div>
 
@@ -1197,7 +1197,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 </div>
 
 <script>
-const APP_VERSION="2.9.90";
+const APP_VERSION="2.9.91";
 const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
 const PROSODY_LABELS={
   auto:"Auto",narration:"Erzählung",kids_story:"Kinder-Geschichte",kids_lesson:"Kinder-Unterricht",
@@ -1432,7 +1432,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.90")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.91")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -1455,7 +1455,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("current");
     top.textContent="Updates · aktuell";
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.90")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.91")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     top.hidden=false;
