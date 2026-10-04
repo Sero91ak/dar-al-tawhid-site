@@ -3052,8 +3052,22 @@ def _kids_owner_voice_rows(quiz_data,dua_data,story_data,short_story_data,verifi
         quiz=(item or {}).get("quiz") or {}
         questions=(quiz or {}).get("questions") or []
         if isinstance(questions,list):
+            age_min=int((item or {}).get("ageMin") or 0)
+            age_max=int((item or {}).get("ageMax") or 99)
+            quiz_age_bands=[]
+            if age_min<=4 and age_max>=6:
+                quiz_age_bands.append("4-6")
+            if age_min<=7 and age_max>=8:
+                quiz_age_bands.append("7-8")
+            if age_min<=9 and age_max>=10:
+                quiz_age_bands.append("9-10")
+            if not quiz_age_bands:
+                quiz_age_bands=["studio"]
             for q in questions:
-                _kids_owner_voice_add_question(rows,q,"studio","studio-quiz",item_id)
+                for quiz_age_band in quiz_age_bands:
+                    _kids_owner_voice_add_question(
+                        rows,q,quiz_age_band,"studio-quiz",item_id
+                    )
 
         game=(item or {}).get("game") or {}
         if isinstance(game,dict):
