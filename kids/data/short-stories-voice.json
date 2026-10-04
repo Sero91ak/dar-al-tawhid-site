@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "source": "kids/index.html legacy short-story set",
+  "policy": {
+    "ownerVoice": "Serhat Abu Malik",
+    "voiceProfileId": "serhat-owner-voice-2026",
+    "systemTtsFallbackAllowed": false
+  },
+  "items": [
+    {
+      "id": "coin",
+      "title": "Die gefundene Münze",
+      "text": "Auf dem Heimweg entdeckte Adam neben einer Bank eine glänzende Münze. Er hob sie auf und sah sich um. Niemand schien sie zu suchen. Für einen Moment dachte Adam: Ich könnte sie einfach behalten. Dann erinnerte er sich daran, dass ein Muslim ehrlich sein soll, nicht nur dann, wenn andere Menschen zuschauen. Adam ging zurück zu dem kleinen Laden neben dem Platz. Er fragte den Besitzer, ob jemand nach einer verlorenen Münze gesucht habe. Der Mann lächelte und sagte: Gerade eben war ein älterer Mann hier. Er hatte bemerkt, dass ihm etwas aus der Tasche gefallen war. Adam wartete einen Augenblick. Kurz darauf kam der Mann zurück. Als Adam ihm die Münze gab, war der Mann sehr erleichtert. Auf dem Heimweg hatte Adam keine neue Münze in der Tasche. Aber er hatte etwas Wertvolleres gelernt: Ehrlichkeit bedeutet, das Richtige zu tun, auch wenn man etwas anderes tun könnte. Denk einmal nach: Was würdest du tun, wenn du etwas findest, das dir nicht gehört?",
+      "question": {
+        "4–5": {
+          "question": "Soll Adam die gefundene Münze einfach behalten?",
+          "answers": [
+            {
+              "label": "Ja",
+              "correct": false
+            },
+            {
+              "label": "Nein",
+              "correct": true
+            }
+          ],
+          "success": "Richtig. Die Münze gehört jemand anderem.",
+          "retry": "Denk noch einmal an die Geschichte."
+        },
+        "6–8": {
+          "question": "Was war die ehrliche Handlung?",
+          "answers": [
+            {
+              "label": "Nach dem Besitzer suchen",
+              "correct": true
+            },
+            {
+              "label": "Die Münze behalten",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Adam suchte nach dem Besitzer.",
+          "retry": "Hör noch einmal: Wem gehörte die Münze?"
+        },
+        "9–10": {
+          "question": "Was zeigt Adams Verhalten am besten?",
+          "answers": [
+            {
+              "label": "Ehrlichkeit auch ohne Zuschauer",
+              "correct": true
+            },
+            {
+              "label": "Nur helfen, wenn jemand zusieht",
+              "correct": false
+            },
+            {
+              "label": "Gefundene Dinge gehören automatisch mir",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Ehrlichkeit gilt auch, wenn niemand zusieht.",
+          "retry": "Denk an die Botschaft der Geschichte."
+        }
+      }
+    },
+    {
+      "id": "water",
+      "title": "Das Glas Wasser",
+      "text": "Maryam saß mit ihrer Familie am Tisch. Alle unterhielten sich. Da bemerkte sie, dass ihre kleine Schwester nach dem Wasser greifen wollte, aber nicht herankam. Maryam hätte einfach weiteressen können. Stattdessen nahm sie die Kanne, schenkte ihrer Schwester ein Glas ein und stellte es vorsichtig vor sie. Es war nur eine kleine Handlung. Niemand klatschte. Niemand gab ihr einen Preis. Aber ihre Schwester lächelte. Maryam verstand: Gutes Benehmen besteht oft aus kleinen Dingen. Aufmerksam sein. Helfen. Freundlich sprechen. Und nicht immer darauf warten, dass jemand einen darum bittet. Welche kleine gute Sache kannst du heute für jemanden tun?",
+      "question": {
+        "4–5": {
+          "question": "War es gut, dass Maryam ihrer Schwester Wasser gab?",
+          "answers": [
+            {
+              "label": "Ja",
+              "correct": true
+            },
+            {
+              "label": "Nein",
+              "correct": false
+            }
+          ],
+          "success": "Ja. Helfen ist gutes Benehmen.",
+          "retry": "Denk an das Lächeln ihrer Schwester."
+        },
+        "6–8": {
+          "question": "Was lernte Maryam?",
+          "answers": [
+            {
+              "label": "Aufmerksam sein und helfen",
+              "correct": true
+            },
+            {
+              "label": "Nur an sich selbst denken",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Kleine Hilfe kann viel bedeuten.",
+          "retry": "Was hat Maryam für ihre Schwester getan?"
+        },
+        "9–10": {
+          "question": "Welche Aussage passt zur Geschichte?",
+          "answers": [
+            {
+              "label": "Gutes Benehmen zeigt sich oft in kleinen Handlungen",
+              "correct": true
+            },
+            {
+              "label": "Gute Taten zählen nur mit Lob",
+              "correct": false
+            },
+            {
+              "label": "Man hilft nur nach Aufforderung",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Kleine gute Handlungen gehören zu gutem Adab.",
+          "retry": "Denk an die kleine Handlung am Tisch."
+        }
+      }
+    },
+    {
+      "id": "helper",
+      "title": "Der leise Helfer",
+      "text": "Nach dem Unterricht lagen einige Bücher und Stifte auf dem Boden. Die meisten Kinder gingen schon zur Tür. Yusuf blieb stehen. Ohne etwas zu sagen, sammelte er die Stifte ein und legte die Bücher zurück an ihren Platz. Sein Freund fragte: Warum machst du das? Die Lehrerin sieht dich doch gar nicht. Yusuf antwortete: Eine gute Sache wird nicht erst gut, wenn jemand mich dafür lobt. Gemeinsam räumten beide den Rest auf. Am nächsten Morgen war der Raum ordentlich und niemand wusste, wer geholfen hatte. Manchmal sind die schönsten guten Taten diejenigen, für die wir keinen Applaus erwarten.",
+      "question": {
+        "4–5": {
+          "question": "War es gut, dass Yusuf aufgeräumt hat?",
+          "answers": [
+            {
+              "label": "Ja",
+              "correct": true
+            },
+            {
+              "label": "Nein",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Yusuf half, obwohl niemand ihn lobte.",
+          "retry": "Denk noch einmal an die Bücher und Stifte."
+        },
+        "6–8": {
+          "question": "Warum half Yusuf?",
+          "answers": [
+            {
+              "label": "Weil die gute Tat selbst wichtig ist",
+              "correct": true
+            },
+            {
+              "label": "Nur damit er gelobt wird",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Er erwartete keinen Applaus.",
+          "retry": "Was sagte Yusuf über gute Taten?"
+        },
+        "9–10": {
+          "question": "Welche Haltung zeigt Yusuf?",
+          "answers": [
+            {
+              "label": "Gutes tun ohne Lob zu erwarten",
+              "correct": true
+            },
+            {
+              "label": "Nur helfen, wenn die Lehrerin zusieht",
+              "correct": false
+            },
+            {
+              "label": "Arbeit immer anderen überlassen",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Eine gute Tat braucht keinen Applaus.",
+          "retry": "Denk an die Botschaft am Ende."
+        }
+      }
+    },
+    {
+      "id": "kindword",
+      "title": "Das gute Wort",
+      "text": "In der Pause saß ein neues Kind allein am Rand des Hofes. Einige liefen vorbei, ohne etwas zu sagen. Hamza blieb stehen. Er wusste nicht, was er Besonderes sagen sollte. Also lächelte er einfach und fragte: Möchtest du mit uns spielen? Es waren nur wenige Worte. Doch plötzlich war der Hof für das neue Kind nicht mehr so fremd. Hamza lernte an diesem Tag, dass ein gutes Wort klein sein kann und trotzdem viel verändert.",
+      "question": {
+        "4–5": {
+          "question": "War Hamzas freundliche Frage eine gute Sache?",
+          "answers": [
+            {
+              "label": "Ja",
+              "correct": true
+            },
+            {
+              "label": "Nein",
+              "correct": false
+            }
+          ],
+          "success": "Ja. Ein gutes Wort kann helfen.",
+          "retry": "Denk an das neue Kind auf dem Hof."
+        },
+        "6–8": {
+          "question": "Was half dem neuen Kind?",
+          "answers": [
+            {
+              "label": "Ein freundliches Wort",
+              "correct": true
+            },
+            {
+              "label": "Ignoriert zu werden",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Wenige freundliche Worte können viel verändern.",
+          "retry": "Was fragte Hamza das neue Kind?"
+        },
+        "9–10": {
+          "question": "Was ist die wichtigste Botschaft?",
+          "answers": [
+            {
+              "label": "Ein gutes Wort kann viel bewirken",
+              "correct": true
+            },
+            {
+              "label": "Nur lange Reden helfen",
+              "correct": false
+            },
+            {
+              "label": "Neue Kinder sollte man allein lassen",
+              "correct": false
+            }
+          ],
+          "success": "Richtig. Ein gutes Wort kann klein sein und trotzdem viel verändern.",
+          "retry": "Denk an Hamzas kurze Frage."
+        }
+      }
+    }
+  ]
+}
