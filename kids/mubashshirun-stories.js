@@ -4,7 +4,7 @@
 const DATA_URL="/kids/data/mubashshirun-stories.json";
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.mubashshirunStory.done.";
-let items=[],libraryPolicy={},active=null,activeText="",playing=false,busy=false,coverResizeObserver=null;
+let items=[],libraryPolicy={},active=null,activeText="",playing=false,busy=false,coverResizeObserver=null,followReader=null;
 const audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -224,6 +224,12 @@ function ensureUi(){
     if($("#msModal")?.classList.contains("open"))closeStory();
     else if($("#msLibraryPage")?.classList.contains("open"))closeLibrary();
   });
+  followReader=window.DARKidsFollowReader?.create({
+    id:"sahaba-story",audio,
+    getContent:()=>({title:active?active.name:"Geschichte",text:activeText}),
+    toggleAudio,
+    disabled:()=>!audioMeta(active)?.url
+  })||null;
   return true;
 }
 function openLibrary(){
@@ -254,10 +260,11 @@ function openStory(id){
   stopAudio();renderActive();
   $("#msModal").classList.add("open");lockLibrary();$("#msScroll").scrollTop=0;$("#msClose").focus();
 }
-function closeStory(){stopAudio();$("#msModal")?.classList.remove("open");unlockLibrary();active=null}
+function closeStory(){followReader?.close();stopAudio();$("#msModal")?.classList.remove("open");unlockLibrary();active=null}
 function renderActive(){
   if(!active)return;
   activeText=textFor(active);
+  followReader?.setContent({title:active.name,text:activeText});
   const hero=$("#msHero");if(hero){hero.src=art(active,"hero");hero.style.objectPosition=heroPos(active);hero.onerror=()=>{hero.onerror=null;hero.src=art(active,"cover")}}
   $("#msTitle").textContent=active.name;
   $("#msArabic").textContent=(active.nameAr||"")+" رضي الله عنه";
