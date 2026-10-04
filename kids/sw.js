@@ -1,9 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1094";
-const QUIZ_ARTWORK=[
-  "https://at.adobe.com/62urgjkDHYmk61s8",
-  "https://at.adobe.com/K94NwM0Yll96pYe9",
-  "https://at.adobe.com/elwjcTvNki8uj6KG"
-];
+const CACHE_NAME="dar-al-tawhid-kids-v1095";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/section-heroes-v1095.css?v=1097-real3",
@@ -26,6 +21,9 @@ const PRECACHE=[
   "/kids/assets/kids-art/surah-109-al-kafirun-v13.jpg",
   "/kids/assets/kids-art/surah-110-an-nasr-v13.jpg",
   "/kids/assets/kids-art/hero-entdecke.png",
+  "/kids/assets/quiz-scenes/quiz-4-6.svg?v=20261004-real1",
+  "/kids/assets/quiz-scenes/quiz-7-8.svg?v=20261004-real1",
+  "/kids/assets/quiz-scenes/quiz-9-10.svg?v=20261004-real1",
   "/kids/assets/kids-art/home-journey-v11-clean2.jpg",
   "/kids/data/alphabet-kids.json",
   "/kids/data/alphabet-audio.json",
@@ -78,23 +76,10 @@ const PRECACHE=[
   "/kids/icons/apple-touch-icon.png?v=logo28"
 ];
 
-function cacheQuizArtwork(cache){
-  return Promise.all(QUIZ_ARTWORK.map(function(url){
-    var request=new Request(url,{mode:"no-cors",credentials:"omit",cache:"reload"});
-    return fetch(request).then(function(response){
-      if(response&&(response.ok||response.type==="opaque")){
-        return cache.put(request,response.clone());
-      }
-      return null;
-    }).catch(function(){return null});
-  }));
-}
 self.addEventListener("install",function(event){
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(function(cache){
-        return cache.addAll(PRECACHE).then(function(){return cacheQuizArtwork(cache)});
-      })
+      .then(function(cache){return cache.addAll(PRECACHE)})
       .then(function(){return self.skipWaiting()})
   );
 });
@@ -109,9 +94,6 @@ self.addEventListener("activate",function(event){
   );
 });
 
-function isQuizArtworkRequest(url){
-  return QUIZ_ARTWORK.indexOf(url.href)>=0;
-}
 function isKidsRequest(url){
   if(url.origin!==self.location.origin)return false;
   return url.pathname.indexOf("/kids/")===0||url.pathname.indexOf("/assets/kids-alphabet-audio/")===0;
@@ -158,10 +140,6 @@ self.addEventListener("fetch",function(event){
   var request=event.request;
   if(request.method!=="GET")return;
   var url=new URL(request.url);
-  if(isQuizArtworkRequest(url)){
-    event.respondWith(cacheFirst(request));
-    return;
-  }
   if(!isKidsRequest(url))return;
 
   if(request.mode==="navigate"||request.destination==="document"||url.pathname==="/kids/start"||url.pathname==="/kids/start.html"||url.pathname==="/kids/start/"||url.pathname==="/kids/"||url.pathname==="/kids/index.html"||url.pathname==="/kids/shell.html"){
