@@ -393,6 +393,177 @@ export async function verifyKidsAlphabetExternalAudioSlot(env, input, helpers) {
   };
 }
 
+
+function normalizeExistingStoryAge(value) {
+  const raw = clean(value, 20).replace(/[–—]/g, "-");
+  return ["4-5","6-8","9-10"].includes(raw) ? raw : "";
+}
+
+function normalizeExistingStoryText(value) {
+  return String(value == null ? "" : value)
+    .replace(/\r\n?/g, "\n")
+    .split("\n")
+    .map((line) => line.replace(/[ \t]+$/g, ""))
+    .join("\n")
+    .trim();
+}
+
+function sanitizeStoryTimings(value) {
+  if (!Array.isArray(value)) return [];
+  const out = [];
+  for (const raw of value.slice(0, 500)) {
+    const start = Number(raw?.start);
+    const end = Number(raw?.end);
+    const paragraphIndex = Math.max(0, Math.round(Number(raw?.paragraphIndex ?? out.length)));
+    if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start || start < 0) continue;
+    out.push({
+      paragraphIndex,
+      start: Number(start.toFixed(3)),
+      end: Number(end.toFixed(3))
+    });
+  }
+  return out;
+}
+
+export async function publishExistingKidsStoryAudio(env, input, helpers) {
+  const storyKind = clean(input?.storyKind || input?.kind, 30).toLowerCase();
+  if (!["prophet","mubashshirun"].includes(storyKind)) {
+    throw mediaError("Geschichten-Typ muss prophet oder mubashshirun sein", 422);
+  }
+  const itemId = safeId(input?.itemId || input?.id);
+  const age = normalizeExistingStoryAge(input?.age);
+  const submittedText = normalizeExistingStoryText(input?.text);
+  if (!itemId) throw mediaError("Geschichten-ID fehlt", 400);
+  if (!age) throw mediaError("Alter muss 4-5, 6-8 oder 9-10 sein", 422);
+  if (submittedText.length < 40) throw mediaError("Erzähltext ist zu kurz", 422);
+
+  const manifestPath = storyKind === "prophet"
+    ? "kids/data/prophet-stories.json"
+    : "kids/data/mubashshirun-stories.json";
+  const owner = env.GITHUB_OWNER || "Sero91ak";
+  const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
+  const branch = env.GITHUB_BRANCH || "main";
+  const manifestFile = await helpers.githubGet(env, owner, repo, manifestPath, branch);
+  if (!manifestFile?.content) throw mediaError("Kids-Geschichtenmanifest fehlt", 404);
+
+  let manifest;
+  try {
+    manifest = JSON.parse(helpers.base64ToUtf8(manifestFile.content));
+  } catch {
+    throw mediaError("Kids-Geschichtenmanifest ist ungültig", 500);
+  }
+  const items = Array.isArray(manifest?.items) ? manifest.items : [];
+  const item = items.find((row) => safeId(row?.id) === itemId);
+  if (!item) throw mediaError("Kids-Geschichte wurde nicht gefunden", 404);
+
+  const scripts = item?.scripts && typeof item.scripts === "object" ? { ...item.scripts } : {};
+  const expectedText = normalizeExistingStoryText(scripts[age] || item?.voiceScript || "");
+  if (!expectedText) throw mediaError("Für diese Altersstufe ist noch kein freigegebener Text hinterlegt", 422);
+  if (submittedText !== expectedText) {
+    throw mediaError("Der hochgeladene Ton gehört nicht exakt zum hinterlegten Text dieser Altersstufe", 409);
+  }
+
+  const payload = decodeDataUrl(input?.dataUrl);
+  validateMime("audio", payload.mime);
+  if (payload.bytes.byteLength > MAX_AUDIO_BYTES) {
+    throw mediaError("Audio zu groß (max. " + Math.round(MAX_AUDIO_BYTES / 1024 / 1024) + " MB)", 413);
+  }
+  if (payload.bytes.byteLength < 1024) throw mediaError("Audiodatei ist leer oder beschädigt", 422);
+
+  const durationSec = Number(input?.durationSec || 0);
+  if (!Number.isFinite(durationSec) || durationSec < 3) {
+    throw mediaError("Audiodauer fehlt oder ist zu kurz", 422);
+  }
+  const sha256 = await sha256Hex(payload.bytes);
+  const ext = extFor(payload.mime, "audio");
+  const short = sha256.slice(0, 14);
+  const assetRoot = storyKind === "prophet"
+    ? "kids/assets/prophet-story-audio"
+    : "kids/assets/mubashshirun-story-audio";
+  const assetPath = assetRoot + "/" + itemId + "/" + age + "-" + short + "." + ext;
+  const now = new Date().toISOString();
+  const timings = sanitizeStoryTimings(input?.timings);
+  const syncMode = clean(input?.syncMode || (timings.length ? "browser-owner-alignment-v1" : ""), 120);
+
+  const audio = item?.audio && typeof item.audio === "object" ? { ...item.audio } : {};
+  scripts[age] = expectedText;
+  audio[age] = {
+    status: "ready",
+    url: "/" + assetPath,
+    durationSec: Number(durationSec.toFixed(3)),
+    bytes: payload.bytes.byteLength,
+    sha256,
+    mime: payload.mime,
+    voiceProfile: "kids_story",
+    voiceProfileId: "serhat-owner-voice-2026",
+    source: "DĀR Voice Studio direct owner-audio upload",
+    sourceSpeaker: "Serhat Abu Malik",
+    sourceFile: clean(input?.originalName, 180),
+    manual: true,
+    manualUpload: true,
+    ownerApproved: true,
+    age,
+    modes: ["read","listen"],
+    technicalQaPassed: true,
+    publishedAt: now,
+    ...(timings.length ? { timings, syncMode } : {})
+  };
+  item.scripts = scripts;
+  item.audio = audio;
+  if (storyKind === "prophet") {
+    item.voiceProduction = {
+      ...(item.voiceProduction && typeof item.voiceProduction === "object" ? item.voiceProduction : {}),
+      status: "owner-audio-updated",
+      lastPublishedAt: now
+    };
+  } else {
+    const publishedAges = ["4-5","6-8","9-10"].filter((key) => String(audio?.[key]?.url || "").trim());
+    item.voiceProduction = {
+      ...(item.voiceProduction && typeof item.voiceProduction === "object" ? item.voiceProduction : {}),
+      publishedAges,
+      status: publishedAges.length === 3 ? "audio-complete" : "audio-partial",
+      lastPublishedAt: now
+    };
+  }
+  manifest.updatedAt = now;
+
+  const batch = await helpers.githubCommitBatch(
+    env,
+    owner,
+    repo,
+    branch,
+    [
+      { path: assetPath, binary: true, contentBase64: payload.base64 },
+      { path: manifestPath, content: JSON.stringify(manifest, null, 2) + "\n" }
+    ],
+    "Kids: " + (storyKind === "prophet" ? "Prophetengeschichte" : "Ṣaḥābah-Geschichte") +
+      " " + itemId + " · " + age + " · Owner Audio"
+  );
+
+  return {
+    ok: true,
+    storyKind,
+    itemId,
+    age,
+    title: clean(item?.title || item?.name || itemId, 220),
+    asset: {
+      url: "/" + assetPath,
+      key: assetPath,
+      mime: payload.mime,
+      bytes: payload.bytes.byteLength,
+      sha256,
+      source: "manual-owner-upload",
+      ownerApproved: true,
+      type: "audio",
+      originalName: clean(input?.originalName, 180),
+      durationSec: Number(durationSec.toFixed(3)),
+      timings,
+      syncMode
+    },
+    commitSha: batch?.commitSha || ""
+  };
+}
+
 export const KIDS_CONTENT_MEDIA_LIMITS = Object.freeze({
   coverBytes: MAX_COVER_BYTES,
   audioBytes: MAX_AUDIO_BYTES
