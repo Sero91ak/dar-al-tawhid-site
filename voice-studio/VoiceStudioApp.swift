@@ -21,7 +21,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private var updateAvailable = false
 
     private var currentVersion: String {
-        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.68"
+        (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "2.9.70"
     }
 
     private var externalEngineOwner: Bool {
@@ -35,7 +35,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .default()
-        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/2.9.68"
+        config.applicationNameForUserAgent = "DĀRVoiceStudioMac/\(currentVersion)"
         config.userContentController.add(self, name: "darAudioOutput")
         config.userContentController.add(self, name: "darUpdater")
         config.userContentController.add(self, name: "darCompanion")
@@ -407,7 +407,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         latestKnownVersion = latest
         updateAvailable = isVersion(latest, newerThan: currentVersion)
         if updateAvailable {
-            // 2.9.68 Stabilitätsmodus:
+            // Stabilitätsmodus:
             // Beim App-Start nur anzeigen, NIEMALS automatisch installieren.
             // Ein automatischer Installationsstart beendet die laufende App und
             // konnte bei einem Installerproblem einen scheinbaren Crash-Loop erzeugen.
@@ -443,7 +443,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
                     "--retry", "2",
                     "--retry-delay", "1",
                     "-H", "Cache-Control: no-cache",
-                    "-H", "User-Agent: DAR-Voice-Studio-Updater/2.9.68"
+                    "-H", "User-Agent: DAR-Voice-Studio-Updater/\(self.currentVersion)"
                 ]
                 if isGitHubAPI {
                     args += ["-H", "Accept: application/vnd.github.raw+json"]
@@ -512,7 +512,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 7
         request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
-        request.setValue("DAR-Voice-Studio-Updater/2.9.68", forHTTPHeaderField: "User-Agent")
+        request.setValue("DAR-Voice-Studio-Updater/\(currentVersion)", forHTTPHeaderField: "User-Agent")
         if url.host == "api.github.com" {
             request.setValue("application/vnd.github.raw+json", forHTTPHeaderField: "Accept")
         } else {
