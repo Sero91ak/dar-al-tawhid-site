@@ -134,6 +134,9 @@ LEARNING_PREVIEW_JOBS={}
 GENERATION_JOB_LOCK=threading.Lock()
 GENERATION_JOBS={}
 GENERATION_JOB_TTL_SECONDS=2*60*60
+ANALYSIS_PREFLIGHT_CACHE_LOCK=threading.Lock()
+ANALYSIS_PREFLIGHT_CACHE={}
+ANALYSIS_PREFLIGHT_CACHE_MAX=24
 ALPHABET_BATCH_STATE={
     "running":False,
     "phase":"idle",
@@ -4256,6 +4259,68 @@ def _mobile_history_records():
     data=load_json_file(MOBILE_HISTORY_META,{"schemaVersion":1,"items":[]})
     return list((data or {}).get("items") or [])
 
+def analysis_preflight_cache_key(text:str):
+    payload={
+        "engine":ENGINE_VERSION,
+        "text":str(text or "").strip(),
+        "userLearning":file_signature(USER_OVERRIDES_FILE),
+        "onlineRules":file_signature(ONLINE_LIBRARY_CACHE),
+        "masterRules":file_signature(MASTER_LIBRARY_CACHE),
+    }
+    return hashlib.sha256(
+        json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(",",":")).encode("utf-8")
+    ).hexdigest()
+
+def get_cached_analysis_preflight(text:str):
+    key=analysis_preflight_cache_key(text)
+    with ANALYSIS_PREFLIGHT_CACHE_LOCK:
+        row=ANALYSIS_PREFLIGHT_CACHE.get(key)
+        if not row:
+            return None
+        row["lastUsedAt"]=time.time()
+        return {
+            "prepared":str(row.get("prepared") or ""),
+            "found":[dict(x or {}) for x in (row.get("found") or [])],
+            "unresolved":[dict(x or {}) for x in (row.get("unresolved") or [])],
+            "cacheKey":key,
+        }
+
+def cache_analysis_preflight(text:str,prepared:str,found,unresolved):
+    key=analysis_preflight_cache_key(text)
+    now=time.time()
+    with ANALYSIS_PREFLIGHT_CACHE_LOCK:
+        ANALYSIS_PREFLIGHT_CACHE[key]={
+            "prepared":str(prepared or ""),
+            "found":[dict(x or {}) for x in (found or [])],
+            "unresolved":[dict(x or {}) for x in (unresolved or [])],
+            "createdAt":now,
+            "lastUsedAt":now,
+        }
+        if len(ANALYSIS_PREFLIGHT_CACHE)>ANALYSIS_PREFLIGHT_CACHE_MAX:
+            ordered=sorted(
+                ANALYSIS_PREFLIGHT_CACHE.items(),
+                key=lambda kv:float((kv[1] or {}).get("lastUsedAt") or 0)
+            )
+            for old_key,_ in ordered[:len(ANALYSIS_PREFLIGHT_CACHE)-ANALYSIS_PREFLIGHT_CACHE_MAX]:
+                ANALYSIS_PREFLIGHT_CACHE.pop(old_key,None)
+    return key
+
+def prepare_analysis_preflight(text:str):
+    cached=get_cached_analysis_preflight(text)
+    if cached is not None:
+        cached["cacheHit"]=True
+        return cached
+    prepared,found=prepare(text)
+    unresolved=detect_unresolved_islamic_terms(text)
+    key=cache_analysis_preflight(text,prepared,found,unresolved)
+    return {
+        "prepared":prepared,
+        "found":found,
+        "unresolved":unresolved,
+        "cacheKey":key,
+        "cacheHit":False,
+    }
+
 def generation_request_signature(text:str,style:str="auto",free_mode:bool=False,free_pronunciation:bool=False):
     """Exakter Cache-Schlüssel für einen interaktiven Voice-Auftrag.
 
@@ -4499,13 +4564,16 @@ def start_generation_job(data:dict,free_mode:bool=False):
     server_found=[]
     if not free_mode:
         # Derselbe Guard wie im Produktionsrenderer, aber VOR dem Thread-Start.
-        # Dadurch bekommt die App unbekannte islamische Begriffe sofort zurück,
-        # ohne erst einen separaten /analyze-Roundtrip abzuwarten.
+        # Ein vorheriger /analyze-Aufruf (z. B. direkt nach Einfügen des Textes)
+        # wird serverseitig wiederverwendet, statt dieselben 5–8 Minuten Text
+        # beim Klick auf „Erzeugen“ erneut vollständig zu scannen.
         quran_guard(text)
-        unresolved=detect_unresolved_islamic_terms(text)
+        preflight=prepare_analysis_preflight(text)
+        unresolved=list(preflight.get("unresolved") or [])
         if unresolved:
             raise PronunciationReviewRequired(unresolved)
-        server_prepared,server_found=prepare(text)
+        server_prepared=str(preflight.get("prepared") or "")
+        server_found=list(preflight.get("found") or [])
 
     with GENERATION_JOB_LOCK:
         active=[
@@ -9556,10 +9624,12 @@ class H(BaseHTTPRequestHandler):
                 text=str(data.get("text","")).strip()
                 style=str(data.get("style","auto")).strip() or "auto"
                 if not text: raise ValueError("Text fehlt.")
-                prepared,found=prepare(text)
+                preflight=prepare_analysis_preflight(text)
+                prepared=str(preflight.get("prepared") or "")
+                found=list(preflight.get("found") or [])
+                unresolved=list(preflight.get("unresolved") or [])
                 mode=resolve_prosody_mode(text,style)
                 plan=build_render_plan(prepared,mode)
-                unresolved=detect_unresolved_islamic_terms(text)
                 return self.send_json(200,{
                     "ok":True,
                     "mode":mode,
@@ -9584,6 +9654,7 @@ class H(BaseHTTPRequestHandler):
                         for r in found if r.get("required_honorific_key")
                     }),
                     "unresolvedIslamicTerms":unresolved,
+                    "analysisCacheHit":bool(preflight.get("cacheHit")),
                     "librarySuggestions":[
                         {"term":x.get("term",""),"suggestions":x.get("suggestions") or []}
                         for x in unresolved
