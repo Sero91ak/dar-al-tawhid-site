@@ -1,7 +1,7 @@
 {
   "version": "2.9.84",
-  "updatedAt": "2026-10-04T11:31:00+02:00",
-  "deployTrigger": "voice-studio-2.9.84-progressive-queue-history-fast-start-candidate",
+  "updatedAt": "2026-10-04T11:36:00+02:00",
+  "deployTrigger": "voice-studio-2.9.84-progressive-queue-history-fast-start-green",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v55",
@@ -1386,7 +1386,7 @@
     "progressivePlaybackHandoffToFinal": true,
     "progressivePlaybackKeepsPosition": true,
     "runtimeStyleSelectorFixed": true,
-    "validationNote": "Voice 2.9.84 candidate: queued QA-passed live chunks on iPhone/iPad and Mac, complete history playback binding, and parallel health/analyze startup.",
+    "validationNote": "Voice 2.9.84 green: QA-passed live chunk queue on iPhone/iPad + Mac, complete history playback, and parallel mobile start handshake.",
     "pronunciationCatalogMemoryCache": true,
     "renderStatusEndpoint": "/render-status",
     "compactRenderPolling": true,
