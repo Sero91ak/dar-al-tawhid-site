@@ -2437,6 +2437,39 @@
     return '<img src="/test/assets/dar-3d-icons/' + esc(name || "ilm.png") + '" alt="" loading="lazy" decoding="async">';
   }
 
+  /* v1222 · Frauen-Bibliothek Bildsprache
+     Historische, ruhige Motivflächen pro Wissenswelt/Kapitel. Die Pfade nutzen
+     bereits vorhandene App-Assets; neue Frauen-/Ṣaḥābiyyāt-Master können später
+     unter denselben Slots ausgetauscht werden, ohne die Navigation anzufassen. */
+  function libraryGroupVisual(id) {
+    var map = {
+      din: "/test/assets/home-v1194/study-runway.jpg",
+      fiqh: "/kids/assets/kids-art/knowledge-courtyard-v11.jpg",
+      generationen: "/kids/assets/kids-art/section-stories-v1096.jpg",
+      familie: "/kids/assets/kids-art/section-stories-v1095.jpg",
+      wissen: "/kids/assets/prophet-scenes/library.webp",
+      alltag: "/kids/assets/prophet-scenes/desert.webp",
+      lebensphasen: "/kids/assets/prophet-scenes/garden.webp"
+    };
+    return map[id] || "";
+  }
+
+  function libraryAreaVisual(id) {
+    id = String(id || "");
+    if (/muetter|sahab|tabi|salaf|kurz/.test(id)) return "/kids/assets/kids-art/section-stories-v1096.jpg";
+    if (/dienst|reise|krankheit|ruqyah/.test(id)) return "/kids/assets/prophet-scenes/mountain.webp";
+    if (/fiqh|reinigung|nikah|iddah|zinah|hijab|hajj|ramadan|qiyam|itikaf|nifas|maedchen/.test(id)) return "/kids/assets/kids-art/knowledge-courtyard-v11.jpg";
+    if (/ehe|kinder|toechter|verwandt|privat|gerecht/.test(id)) return "/kids/assets/kids-art/section-stories-v1095.jpg";
+    if (/wissen|geprueft|bidah|adab|dawah|sadaqah/.test(id)) return "/kids/assets/prophet-scenes/library.webp";
+    if (/moschee|umgang|arbeit|medien|tod|trauer|janaiz|janazah/.test(id)) return "/kids/assets/prophet-scenes/desert.webp";
+    if (/tawhid|muslimah|dhikr|reue|tawbah|muhasaba/.test(id)) return "/test/assets/home-v1194/study-runway.jpg";
+    return "/kids/assets/kids-art/section-stories-v1096.jpg";
+  }
+
+  function libraryVisualStyle(url) {
+    return url ? ' style="--frauen-card-img:url(' + esc(url) + ')"' : "";
+  }
+
   function libraryHero(title, subtitle, mode, backValue, eyebrow, statLeft, statRight) {
     var back = backValue != null
       ? '<button type="button" class="frauen-library-back" data-nav="frauen" data-value="' + esc(backValue) + '" aria-label="Zurück" style="background:rgba(255,250,242,.97)!important;border-color:rgba(255,255,255,.78)!important;color:#17231e!important;-webkit-text-fill-color:#17231e!important;text-shadow:none!important"><span aria-hidden="true" style="color:#17231e!important;-webkit-text-fill-color:#17231e!important;text-shadow:none!important;opacity:1!important">‹</span><b style="color:#17231e!important;-webkit-text-fill-color:#17231e!important;text-shadow:none!important;opacity:1!important">Zurück</b></button>'
@@ -2460,8 +2493,9 @@
 
   function libraryGroupCard(group) {
     var count = libraryVisibleCount(group);
+    var visual = libraryGroupVisual(group.id);
     return (
-      '<article class="frauen-library-card frauen-library-card--' + esc(group.id) + '" data-nav="frauen" data-value="group/' + esc(group.id) + '">' +
+      '<article class="frauen-library-card frauen-library-card--' + esc(group.id) + (visual ? ' has-visual' : '') + '" data-nav="frauen" data-value="group/' + esc(group.id) + '"' + libraryVisualStyle(visual) + '>' +
         '<span class="frauen-library-card__nr" aria-hidden="true">' + esc(group.nr) + '</span>' +
         '<span class="frauen-library-card__icon" aria-hidden="true">' + libraryIcon(group.icon) + '</span>' +
         '<div class="frauen-library-card__copy">' +
@@ -2506,9 +2540,10 @@
   function libraryAreaCard(area, idx) {
     var n = area.id ? countSichtbare(area.id) : 0;
     var pending = !!area.pending || n === 0;
+    var visual = libraryAreaVisual(area.id);
     var nav = pending ? "" : ' data-nav="frauen" data-value="' + esc(area.id) + '"';
     return (
-      '<article class="frauen-library-area-card' + (pending ? " is-pending" : "") + '"' + nav + '>' +
+      '<article class="frauen-library-area-card' + (pending ? " is-pending" : "") + (visual ? " has-visual" : "") + '"' + nav + libraryVisualStyle(visual) + '>' +
         '<span class="frauen-library-area-card__nr" aria-hidden="true">' + String(idx + 1).padStart(2, "0") + '</span>' +
         '<span class="frauen-library-area-card__icon" aria-hidden="true">' + libraryIcon(libraryAreaIcon(area)) + '</span>' +
         '<div class="frauen-library-area-card__copy">' +
