@@ -2637,8 +2637,9 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/assets/kids-open-v95.css?v=96">
 
 
-<link rel="stylesheet" href="/kids/prophet-stories.css?v=23">
-<link rel="stylesheet" href="/kids/mubashshirun-stories.css?v=10">
+<link rel="stylesheet" href="/kids/prophet-stories.css?v=24">
+<link rel="stylesheet" href="/kids/mubashshirun-stories.css?v=11">
+<link rel="stylesheet" href="/kids/story-follow-reader.css?v=1">
 </head>
 <body>
 <div class="kids-open" id="kidsLaunch" data-kids-launch="v96">
@@ -2714,7 +2715,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07.13</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.07.14</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3168,7 +3169,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v12-sahaba1087";
+const KIDS_BUILD_ID="kids-shell-v12-sahaba1089";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6613,7 +6614,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1087",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1089",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>
@@ -8039,7 +8040,8 @@ html[data-view="stories"] .bottom-nav .nav-btn.active{
 
 </style>
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=4">
-<script src="/kids/prophet-stories.js?v=23"></script>
-<script src="/kids/mubashshirun-stories.js?v=10"></script>
+<script src="/kids/story-follow-reader.js?v=1"></script>
+<script src="/kids/prophet-stories.js?v=24"></script>
+<script src="/kids/mubashshirun-stories.js?v=11"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 </html>
