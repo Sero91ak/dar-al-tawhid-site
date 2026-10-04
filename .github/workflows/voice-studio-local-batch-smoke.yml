@@ -554,7 +554,7 @@ jobs:
           assert "patience" in topic_keywords and len(topic_keywords["patience"])>=10, "patience topic keyword routing missing"
           assert "justice" in topic_keywords and len(topic_keywords["justice"])>=10, "justice topic keyword routing missing"
 
-          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1102"' in sw
+          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1103"' in sw
           assert "QUIZ_ARTWORK=[" not in sw, "legacy external quiz artwork runtime cache returned"
 
           visual=((version.get("visualSystem") or {}).get("quizVisualSystem") or {})
@@ -580,7 +580,7 @@ jobs:
           assert visual.get("fullQuestionCatalogOwnerVoice") is True
           assert visual.get("shortQuizRoundsPreserved") is True
           assert visual.get("noNewQuestionsInThisRelease") is True
-          assert int(visual.get("catalogAssetVersion") or 0)>=7
+          assert int(visual.get("catalogAssetVersion") or 0)>=8
           assert visual.get("catalogIncrementalRender") is True
           assert int(visual.get("catalogInitialRenderCount") or 0)==40
           assert visual.get("catalogOwnerVoiceStatus") is True
@@ -590,7 +590,8 @@ jobs:
           assert visual.get("catalogReactiveTopicHero") is True
           assert visual.get("catalogVisualTopicCards") is True
           assert visual.get("catalogVisualTopicCardsAgeAdaptive") is True
-          assert int(visual.get("catalogVisualTopicCardsAssetVersion") or 0)==5
+          assert int(visual.get("catalogVisualTopicCardsAssetVersion") or 0)==6
+          assert visual.get("catalogVisualTopicCardsLabelPlacement")=="bottom-stable"
           assert visual.get("questionGenerationPaused") is True
           assert int(visual.get("questionGenerationCap") or 0)==650
           assert (version.get("visualSystem") or {}).get("kidsQuizGenerationPaused") is True
@@ -616,10 +617,10 @@ jobs:
           assert 'background-image:url("/kids/assets/quiz-scenes/' not in kids, "quiz artwork must stay manifest-driven, not duplicated in CSS"
           assert 'var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";' in kids
           assert '#quizModal[data-quiz-band="4-6"] .quiz-scene-top .quiz-scene-chip:first-child{display:none}' in kids
-          assert '/kids/quiz-library.css?v=5' in kids
-          assert '/kids/quiz-library.js?v=5' in kids
-          assert '/kids/quiz-library.css?v=5' in sw
-          assert '/kids/quiz-library.js?v=5' in sw
+          assert '/kids/quiz-library.css?v=6' in kids
+          assert '/kids/quiz-library.js?v=6' in kids
+          assert '/kids/quiz-library.css?v=6' in sw
+          assert '/kids/quiz-library.js?v=6' in sw
           for marker in (
               "quizLibraryToolbar",
               "quizModeLibrary",
@@ -640,6 +641,8 @@ jobs:
               "--quiz-cat-art",
               "#quizModal[data-quiz-band=\"4-6\"] .quiz-library-categories button",
               "#quizModal[data-quiz-band=\"9-10\"] .quiz-library-categories button",
+              "display:flex;align-items:flex-end;justify-content:flex-start;text-align:left",
+              "padding-bottom:7px",
               "category===\"all\"?window.quizArtworkForBand():window.quizArtworkForBand({category:category,scene:\"\"})",
               "setHero();renderList()",
               "quiz-cat-label",
