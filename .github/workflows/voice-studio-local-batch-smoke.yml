@@ -458,7 +458,7 @@ jobs:
           assert "QUIZ_ARTWORK=[" not in sw, "legacy external quiz artwork runtime cache returned"
 
           visual=((version.get("visualSystem") or {}).get("quizVisualSystem") or {})
-          assert visual.get("version")=="age-adaptive-realistic-v2"
+          assert visual.get("version")=="age-adaptive-realistic-v3"
           assert visual.get("artworkHotlinkDependency") is False
           assert visual.get("youngAgeAudioFirst") is True
           assert visual.get("systemTtsFallbackAllowed") is False
@@ -480,9 +480,9 @@ jobs:
           assert '#quizModal[data-quiz-band="4-6"] .quiz-scene-top .quiz-scene-chip:first-child{display:none}' in kids
 
           items=quiz.get("items") or []
-          assert len(items)==50, f"expected 50 Kids quiz questions, got {len(items)}"
+          assert len(items)==100, f"expected 100 Kids quiz questions, got {len(items)}"
           counts={band:sum(1 for q in items if q.get("ageBand")==band) for band in expected}
-          assert counts=={"4-6":18,"7-8":16,"9-10":16}, counts
+          assert counts=={"4-6":36,"7-8":32,"9-10":32}, counts
 
           print("Realistic age-adaptive Kids quiz artwork OK:",counts)
           PY
