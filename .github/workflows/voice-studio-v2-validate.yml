@@ -440,9 +440,16 @@ jobs:
               'data-cs-step="cover"',
               'data-cs-step="test"',
               'data-cs-step="live"',
+              'data-cs-kind="dua"',
+              'data-cs-kind="narration"',
               'function renderWorkflow()',
               'function goToWorkflowStep(step)',
               'function focusNextProductionAction()',
+              'function handleDirectAudioFile(file)',
+              'async function publishDirectKids()',
+              'manual-owner-upload',
+              'audioAssetText',
+              'directAudioReadyForCurrentText',
               'setTimeout(focusNextProductionAction,120)',
               'setTimeout(()=>goToWorkflowStep("live"),100)',
               'window.DarContentStudio={',
@@ -457,7 +464,11 @@ jobs:
               raise SystemExit("Content Studio must not install a duplicate global production shortcut handler")
           if 'audioAsset=null;' not in src or 'stagingPublished=false;' not in src:
               raise SystemExit("Text edits must invalidate stale production assets/status")
-          print("Zero-detour Content Studio workflow OK")
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          for marker in ("KNOWN_RULE_ALIAS_INDEX","knownRuleAliases","max-master-pls-v1","fastKnownPath"):
+              if marker not in engine:
+                  raise SystemExit("Fast-known pronunciation marker missing: "+marker)
+          print("Zero-detour Content Studio workflow + fast-known pronunciation OK")
           PY
 
       - name: Detect Kids validation scope
