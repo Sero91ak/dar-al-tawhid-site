@@ -2,7 +2,7 @@
   "schemaVersion": 4,
   "id": "DAR_KIDS_QUIZ_V1",
   "namespace": "dar-kids-quiz",
-  "version": 12,
+  "version": 13,
   "updatedAt": "2026-10-04",
   "separateFromAdultQuiz": true,
   "adultQuizDependency": false,
@@ -10607,27 +10607,27 @@
       "ageBand": "4-6",
       "ageMin": 4,
       "ageMax": 6,
-      "scene": "help",
-      "category": "Aḫlāq",
-      "topic": "Waise",
-      "question": "Dürfen wir eine Waise schlecht behandeln?",
+      "scene": "mosque",
+      "category": "Qurʾān",
+      "topic": "Die Kaʿbah",
+      "question": "Ist die Kaʿbah ein besonderer Ort, den Allah für die Menschen bestimmt hat?",
       "answers": [
         {
           "id": "a1",
-          "label": "Nein",
+          "label": "Ja",
           "correct": true
         },
         {
           "id": "a2",
-          "label": "Ja",
+          "label": "Nein",
           "correct": false
         }
       ],
       "success": "Richtig. Sehr gut!",
       "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
-      "explanation": "Allah verbietet, eine Waise zu unterdrücken.",
+      "explanation": "Allah machte das Haus zu einem Ort der Rückkehr und Sicherheit für die Menschen.",
       "sourceType": "Qurʾān",
-      "source": "Qurʾān 93:9",
+      "source": "Qurʾān 2:125",
       "status": "published",
       "reviewStatus": "approved",
       "verification": "approved"
