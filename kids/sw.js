@@ -146,6 +146,12 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
+  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0){
+    // Native <audio> / iOS sends Range requests. Do not satisfy those from Cache API,
+    // otherwise seeking and resume can receive a full 200 response instead of 206.
+    event.respondWith(fetch(request));
+    return;
+  }
   if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"||url.pathname==="/kids/stories-final-v1088.css"||url.pathname==="/kids/mubashshirun-stories.js"||url.pathname==="/kids/mubashshirun-stories.css"||url.pathname==="/kids/story-follow-reader.js"||url.pathname==="/kids/story-follow-reader.css"||url.pathname==="/kids/content-studio-feed.js"){
     event.respondWith(networkFirst(request));
     return;
