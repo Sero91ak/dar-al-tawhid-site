@@ -1677,8 +1677,14 @@
     "workerOriginHiddenFromClient": true,
     "ownerAccessRequired": true,
     "ownerAccessHeader": "X-DAR-Voice-Access",
-    "ownerAccessStorage": "dar.voice.cloud.access.v1",
+    "ownerAccessStorage": "httpOnly-cookie",
     "upstreamTokenNeverExposedToBrowser": true,
-    "failClosedWithoutWebToken": true
+    "failClosedWithoutWebToken": true,
+    "ownerAccessExchange": "/voice-studio/api/access",
+    "ownerAccessSession": "HttpOnly Secure SameSite=Strict cookie",
+    "ownerAccessCookie": "DARVOICE_CLOUD",
+    "ownerAccessCookiePath": "/voice-studio/api/engine",
+    "ownerAccessHeaderFallback": "X-DAR-Voice-Access",
+    "browserDoesNotPersistAccessCode": true
   }
 }
