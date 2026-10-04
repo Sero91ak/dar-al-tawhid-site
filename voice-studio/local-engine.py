@@ -9688,8 +9688,56 @@ class H(BaseHTTPRequestHandler):
             return self.send_json(413,{"ok":False,"error":"Arabische Referenzdatei ist zu groß."})
         if p=="/story-media/upload" and n>90*1024*1024:
             return self.send_json(413,{"ok":False,"error":"Story-Audiodatei ist zu groß. Maximal 64 MB Audio hochladen."})
+        if p=="/content-audio/reference" and n>90*1024*1024:
+            return self.send_json(413,{"ok":False,"error":"Referenz-Audiodatei ist zu groß. Maximal 64 MB Audio hochladen."})
         try:data=json.loads(self.rfile.read(n) or b"{}")
         except Exception:return self.send_json(400,{"error":"Ungültiges JSON"})
+
+        if p=="/content-audio/reference":
+            upload=None
+            try:
+                kind=str(data.get("kind") or "story").strip().lower()
+                if kind not in ("story","dua","duʿāʾ","du'a","narration","erzählung","erzaehlung","content","lesson"):
+                    raise ValueError("Inhaltstyp ist für den Audio-Text-Lernspeicher nicht erlaubt.")
+                item_id=str(data.get("id") or "").strip()
+                age=str(data.get("age") or "all").strip() or "all"
+                text=str(data.get("text") or "").strip()
+                filename=str(data.get("filename") or "").strip()
+                if len(text)<40:
+                    raise ValueError("Für den Lernspeicher wird der vollständige zugehörige Text benötigt.")
+                upload,info=_install_story_audio_upload(str(data.get("dataUrl") or ""),filename)
+                reference=register_story_reference_pair(
+                    kind,item_id,text,upload,
+                    source_name=info["filename"],
+                    age=age,
+                    source="manual-owner-content-upload",
+                )
+                return self.send_json(200,{
+                    "ok":True,
+                    "reference":{
+                        "id":str(reference.get("id") or ""),
+                        "kind":str(reference.get("kind") or ""),
+                        "prosodyMode":str(reference.get("prosodyMode") or ""),
+                        "textSha256":str(reference.get("textSha256") or ""),
+                        "audioSha256":str(reference.get("audioSha256") or ""),
+                        "durationSec":float(reference.get("durationSec") or 0),
+                        "persistent":True,
+                        "exactTextAudioReuse":True,
+                        "incrementalRerenderForEditedText":True,
+                        "modelWeightFineTuning":False,
+                    },
+                    "learning":learning_state(),
+                })
+            except ValueError as e:
+                return self.send_json(422,{"ok":False,"error":str(e)})
+            except Exception as e:
+                return self.send_json(500,{"ok":False,"error":str(e)})
+            finally:
+                try:
+                    if upload is not None:
+                        Path(upload).unlink(missing_ok=True)
+                except Exception:
+                    pass
 
         if p=="/story-media/upload":
             upload=None
