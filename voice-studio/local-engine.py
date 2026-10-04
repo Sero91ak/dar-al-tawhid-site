@@ -50,7 +50,7 @@ try:
     PORT=int(os.environ.get("DAR_VOICE_PORT",os.environ.get("PORT","8787")) or 8787)
 except Exception:
     PORT=8787
-ENGINE_VERSION="2.9.95"
+ENGINE_VERSION="2.9.96"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -579,6 +579,7 @@ HONORIFIC_SOURCE_FORMS={}
 MASTER_ENTRIES=[]
 MASTER_RULES=[]
 MASTER_ALIAS_INDEX={}
+KNOWN_RULE_ALIAS_INDEX={}
 
 def _rule_person_metadata(rule):
     honorific=str(rule.get("required_honorific_key",""))
@@ -731,7 +732,7 @@ RULES_BY_FIRST={}
 def rebuild_runtime_rules():
     global LIB,RULES,MASTER_TTS,AUDIO_LOCK_BY_TTS,AUDIO_LOCK_LABELS,AUDIO_LOCK_FORMS
     global HONORIFIC_TTS_BY_KEY,HONORIFIC_RULE_BY_KEY,HONORIFIC_SOURCE_FORMS
-    global MASTER_ENTRIES,MASTER_RULES,MASTER_ALIAS_INDEX,PRONUNCIATION_CATALOG_CACHE_VERSION,RULES_BY_FIRST
+    global MASTER_ENTRIES,MASTER_RULES,MASTER_ALIAS_INDEX,KNOWN_RULE_ALIAS_INDEX,PRONUNCIATION_CATALOG_CACHE_VERSION,RULES_BY_FIRST
     user_rules=list((USER_OVERRIDE_DATA or {}).get("rules") or [])
     MASTER_ENTRIES=build_master_library()
     blocked=[str(r.get("string_to_replace","")) for r in user_rules+BASE_RULES]
@@ -751,6 +752,22 @@ def rebuild_runtime_rules():
             norm=normalize_lookup(form)
             if norm and norm not in MASTER_ALIAS_INDEX:
                 MASTER_ALIAS_INDEX[norm]=e
+
+    # 2.9.96 Fast-Known-Path:
+    # Jede tatsächlich aktive Aussprache-Regel wird einmal normalisiert indexiert.
+    # Dadurch gelten bestätigte Regeln, kuratierte Basisregeln und das große
+    # ElevenLabs/MAX-MASTER-PLS bei exakter Schreibweise sofort als bekannt.
+    # Unbekannte Wörter bleiben weiterhin REVIEW-pflichtig.
+    KNOWN_RULE_ALIAS_INDEX={}
+    for r in RULES:
+        for form in (
+            r.get("string_to_replace",""),
+            r.get("canonical",""),
+            r.get("alias",""),
+        ):
+            norm=normalize_lookup(form)
+            if norm and norm not in KNOWN_RULE_ALIAS_INDEX:
+                KNOWN_RULE_ALIAS_INDEX[norm]=r
     LIB=dict(BASE_LIB)
     LIB["rules"]=RULES
     counts=dict(BASE_LIB.get("counts") or {})
@@ -759,6 +776,7 @@ def rebuild_runtime_rules():
     counts["onlineSearchRules"]=len(ONLINE_RULES)
     counts["maxMasterPlsRules"]=len(MAX_MASTER_PLS_RULES)
     counts["maxMasterPlsFallbackRules"]=len(MAX_MASTER_PLS_FALLBACK_RULES)
+    counts["knownRuleAliases"]=len(KNOWN_RULE_ALIAS_INDEX)
     counts["masterEntries"]=len(MASTER_ENTRIES)
     counts["masterAutoRules"]=len(MASTER_RULES)
     counts["masterSahaba"]=sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabi")
@@ -4050,6 +4068,8 @@ def learning_state():
         "masterUrl":MASTER_LIBRARY_URL,
         "masterEntries":len(MASTER_ENTRIES),
         "masterAutoRules":len(MASTER_RULES),
+        "knownRuleAliases":len(KNOWN_RULE_ALIAS_INDEX),
+        "fastKnownPath":True,
         "masterSahaba":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabi"),
         "masterSahabiyyat":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="sahabiyyah"),
         "masterProphets":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="prophet"),
@@ -4112,20 +4132,23 @@ def master_suggestions(query:str,limit:int=5):
     return out
 
 def known_master_form_or_german_inflection(value:str):
-    """Bekannte Masterform oder harmlose deutsche Namensflexion erkennen.
+    """Bekannte aktive Ausspracheform oder harmlose deutsche Namensflexion erkennen.
 
+    Exakte Formen aus lokalen MASTER-Locks, den kuratierten Regeln, der
+    verifizierten Master-Library und dem MAX-MASTER-PLS werden direkt akzeptiert.
+    Nur Wörter ohne aktive bekannte Regel bleiben in der Ausspracheprüfung offen.
     Beispiel: Ibrāhīms -> Ibrāhīm + deutsches Genitiv-s.
-    Die Aussprache-Engine ersetzt weiterhin nur den Stamm Ibrāhīm; das sichtbare
-    deutsche s bleibt im Satz erhalten und wird nicht in die arabische Masterform
-    hineingeschrieben.
     """
     norm=normalize_lookup(value)
     if not norm:
         return False
-    if norm in MASTER_ALIAS_INDEX:
+    known=(norm in MASTER_ALIAS_INDEX) or (norm in KNOWN_RULE_ALIAS_INDEX)
+    if known:
         return True
-    if len(norm)>4 and norm.endswith("s") and norm[:-1] in MASTER_ALIAS_INDEX:
-        return True
+    if len(norm)>4 and norm.endswith("s"):
+        stem=norm[:-1]
+        if stem in MASTER_ALIAS_INDEX or stem in KNOWN_RULE_ALIAS_INDEX:
+            return True
     return False
 
 def detect_unresolved_islamic_terms(text:str,limit:int=12):
