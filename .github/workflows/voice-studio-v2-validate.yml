@@ -156,7 +156,7 @@ jobs:
               raise SystemExit("version.json cloudVoiceApp contract missing")
           if pwa.get("start_url") != "/voice-studio/?app=1&cloud=1":
               raise SystemExit("Installed Voice PWA does not reopen in cloud mode")
-          if 'const CACHE="dar-voice-studio-v51";' not in sw:
+          if 'const CACHE="dar-voice-studio-v65";' not in sw:
               raise SystemExit("Voice PWA cache was not bumped for cloud manifest")
           if 'url.pathname.startsWith("/voice-studio/api/")' not in sw or 'cache:"no-store"' not in sw:
               raise SystemExit("Private Voice API must bypass Service Worker cache")
