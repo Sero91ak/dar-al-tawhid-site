@@ -26589,7 +26589,7 @@ function bindImageEditor(){if(currentRoute.view==="image-editor-test")return bin
 
 const IMAGE_EDITOR_PREMIUM_BLOCKS=[{id:"body",label:"Haupttext"},{id:"source",label:"Quelle"}];
 const IMAGE_EDITOR_PREMIUM_TABS=[{id:"font",label:"Schrift"},{id:"color",label:"Farbe"},{id:"size",label:"Größe"},{id:"export",label:"Teilen"}];
-const IMAGE_EDITOR_BLOCK_DEFAULTS={body:{x:110,y:282,w:860,h:700},fazit:{x:110,y:850,w:860,h:90},source:{x:92,y:1047,w:896,h:56}};
+const IMAGE_EDITOR_BLOCK_DEFAULTS={body:{x:110,y:286,w:860,h:694},fazit:{x:110,y:850,w:860,h:90},source:{x:92,y:1057,w:896,h:42}};
 const IMAGE_EDITOR_OVERLAP_TOL=8;
 const IMAGE_EDITOR_CANVAS_BOUNDS={x:48,y:48,w:984,h:1254};
 const IMAGE_EDITOR_LOCKED_ZONES=[{id:"branding",x:0,y:0,w:1080,h:265},{id:"footer",x:0,y:995,w:1080,h:355}];
@@ -26735,6 +26735,12 @@ function imageEditorDrawPremiumChrome(ctx){
     let y=box.y+size;
     lines.slice(0,2).forEach(line=>{ctx.fillText(line,box.x,y);y+=size*1.08});
     ctx.shadowBlur=0;
+    ctx.strokeStyle="rgba(239,216,159,.52)";
+    ctx.lineWidth=1.5;
+    ctx.beginPath();
+    ctx.moveTo(78,258);
+    ctx.lineTo(330,258);
+    ctx.stroke();
   }
 
   imageEditorRoundRect(ctx,66,1012,W-132,122,20);
