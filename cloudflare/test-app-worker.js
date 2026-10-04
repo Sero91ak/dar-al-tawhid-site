@@ -220,7 +220,12 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-historic-v1239");
   html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-compact-v1239");
 
-  // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
+    // DAR_ILM_SCHOLARS_V1240
+  if (!/ilm-scholars-v1240\.css/.test(html)) {
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholars-v1240.css?v=1240"><\/head>');
+  }
+
+// Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
 
   // Build markers only; no route/page geometry is changed here.
