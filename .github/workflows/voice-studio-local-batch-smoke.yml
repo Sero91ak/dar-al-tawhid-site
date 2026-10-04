@@ -80,17 +80,20 @@ jobs:
               '"/mobile/history"',
               'data-preview=',
               'dataset.previewId',
-              '$("[data-style]").forEach',
-              '$("[data-audio]").forEach',
-              '$("[data-preview]").forEach',
-              '$("[data-confirm]").forEach',
+              'const $=s=>document.querySelector(s), $=s=>[...document.querySelectorAll(s)]',
               'Promise.all([health(),analyzeText()])',
+              'prefetchCandidate',
               'incremental-chunks-v1',
               'Zum Home-Bildschirm',
           ]
           missing=[x for x in required if x not in html]
           if missing:
               raise SystemExit("mobile Voice markers missing: "+", ".join(missing))
+          if "$$(" in html:
+              raise SystemExit("mobile Voice contains undefined $$ selector helper")
+          bad_plural=re.findall(r'(?<!\$)\$\("\[data-(?:style|audio|preview|confirm)[^"]*\]"\)\.forEach',html)
+          if bad_plural:
+              raise SystemExit("mobile Voice plural selector incorrectly uses querySelector: "+", ".join(bad_plural))
           print("Mobile Voice surface markers OK")
           PY
           node --check /tmp/dar-voice-mobile-inline.js
