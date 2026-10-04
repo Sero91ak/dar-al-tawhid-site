@@ -3023,7 +3023,7 @@ $("#learnResults").addEventListener("click",e=>{
 $("#learnSelectionBtn").onclick=takeTextSelection;
 $("#manualSelectionBtn").onclick=takeTextSelection;
 $("#pronCatalogMore").onclick=()=>{$("#pronCatalogMore").disabled=true;loadPronunciationCatalog(false)};
-$("#pronCatalogSearch").addEventListener("input",()=>{clearTimeout(pronCatalogTimer);pronCatalogTimer=setTimeout(()=>loadPronunciationCatalog(true),180)});
+$("#pronCatalogSearch").addEventListener("input",()=>{clearTimeout(pronCatalogTimer);pronCatalogTimer=setTimeout(()=>loadPronunciationCatalog(true),100)});
 $("#learnSearchBtn").onclick=()=>{learningVariant=0;$("#learnResetVariantBtn").textContent="Variante 1";searchLearning()};
 $("#learnPreviewBtn").onclick=()=>previewLearning();
 document.querySelectorAll("[data-learning-variant]").forEach(btn=>btn.addEventListener("click",()=>chooseLearningVariant(btn.dataset.learningVariant)));
