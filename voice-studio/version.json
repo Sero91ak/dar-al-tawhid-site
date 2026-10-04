@@ -1,7 +1,7 @@
 {
   "version": "2.9.80",
-  "updatedAt": "2026-10-04T10:55:00+02:00",
-  "deployTrigger": "voice-studio-2.9.80-progressive-first-audio-catalog-cache-voice-green",
+  "updatedAt": "2026-10-04T10:56:00+02:00",
+  "deployTrigger": "voice-studio-2.9.80-progressive-first-audio-compact-poll-candidate",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v51",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-contents-api",
-  "engineVersion": "2.9.79",
+  "engineVersion": "2.9.80",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -449,7 +449,10 @@
     "progressivePreviewExcludedFromHistory": true,
     "progressivePreviewRetentionMinutes": 30,
     "pronunciationCatalogMemoryCache": true,
-    "pronunciationCatalogCacheInvalidatesOnRuleRebuild": true
+    "pronunciationCatalogCacheInvalidatesOnRuleRebuild": true,
+    "compactRenderStatus": true,
+    "renderStatusEndpoint": "/render-status",
+    "highFrequencyPollingAvoidsFullLearningState": true
   },
   "contentStudio": {
     "enabled": true,
@@ -1370,7 +1373,10 @@
     "progressivePlaybackKeepsPosition": true,
     "runtimeStyleSelectorFixed": true,
     "validationNote": "Voice 2.9.80 smoke/compile, health and native Mac audio route passed on the pinned candidate. Repository-wide validate/guard are red only because the independent Kids build is now kids-shell-v14-quiz1095 while legacy Kids guard rules still accept the older v12 build-id format.",
-    "pronunciationCatalogMemoryCache": true
+    "pronunciationCatalogMemoryCache": true,
+    "renderStatusEndpoint": "/render-status",
+    "compactRenderPolling": true,
+    "historyAllRowsInteractive": true
   },
   "mobile": {
     "enabled": true,
