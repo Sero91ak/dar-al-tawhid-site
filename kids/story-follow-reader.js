@@ -32,6 +32,17 @@ function safeJsonWrite(key,value){
   try{localStorage.setItem(key,JSON.stringify(value))}catch(_){}
 }
 function safeRemove(key){try{localStorage.removeItem(key)}catch(_){}}
+let nativeNowPlayingAt=0;
+function postNativeNowPlaying(payload,force=false){
+  try{
+    const handler=window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darKidsNowPlaying;
+    if(!handler||typeof handler.postMessage!=="function")return;
+    const now=Date.now();
+    if(!force&&now-nativeNowPlayingAt<850)return;
+    nativeNowPlayingAt=now;
+    handler.postMessage(payload||{});
+  }catch(_){}
+}
 function normalizeKey(value){return String(value||"").trim().replace(/\s+/g,"-")}
 function progressStorageKey(value){return PROGRESS_PREFIX+normalizeKey(value)}
 
@@ -231,10 +242,34 @@ function create(options){
       if(location.hash!==link)history.replaceState(history.state||{},"",location.pathname+(location.search||"")+link);
     }catch(_){}
   }
+  function nativePayload(clear=false){
+    const c=currentContent&&Object.keys(currentContent).length?currentContent:content();
+    return clear?{clear:true}:{
+      title:String(c.title||"Geschichte"),
+      artist:String(c.subtitle||"DĀR AL TAWḤĪD Kids"),
+      album:String(c.album||"DĀR AL TAWḤĪD Kids · Hörbuch"),
+      artwork:absoluteUrl(c.artwork||""),
+      deepLink:String(c.deepLink||""),
+      elapsed:Number(audio.currentTime)||0,
+      duration:Number(audio.duration)||0,
+      playing:!audio.paused&&!audio.ended
+    };
+  }
+  function exposeNativeRemote(){
+    window.DARKidsAudioRemote={
+      play:()=>Promise.resolve(audio.play()).catch(()=>{}),
+      pause:()=>audio.pause(),
+      seekTo:value=>{const d=Number(audio.duration)||Infinity,v=Number(value)||0;try{audio.currentTime=Math.max(0,Math.min(d,v))}catch(_){}},
+      seekBy:value=>{const d=Number(audio.duration)||Infinity,v=(Number(audio.currentTime)||0)+(Number(value)||0);try{audio.currentTime=Math.max(0,Math.min(d,v))}catch(_){}},
+      openCurrent:()=>{applyDeepLink(currentContent||content());open()},
+      state:()=>nativePayload(false)
+    };
+  }
   function activateMediaSession(){
     const c=currentContent&&Object.keys(currentContent).length?currentContent:content();
     currentContent=c;
     mediaSessionActive=true;
+    exposeNativeRemote();
     if("mediaSession" in navigator&&typeof MediaMetadata!=="undefined"){
       try{
         navigator.mediaSession.metadata=new MediaMetadata({
@@ -255,6 +290,8 @@ function create(options){
       deepLink:String(c.deepLink||""),
       updatedAt:Date.now()
     });
+    try{navigator.mediaSession.playbackState="playing"}catch(_){}
+    postNativeNowPlaying(nativePayload(false),true);
     updatePositionState();
   }
   function open(){
@@ -287,16 +324,16 @@ function create(options){
   root.addEventListener("click",e=>{if(e.target===root)close()});
   progressButton.addEventListener("click",seekFromEvent);
   ["pointerdown","touchstart","wheel"].forEach(type=>readEl.addEventListener(type,()=>{manualUntil=performance.now()+5000},{passive:true}));
-  audio.addEventListener("timeupdate",()=>{sync(false);persist(false)});
+  audio.addEventListener("timeupdate",()=>{sync(false);persist(false);if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),false)});
   audio.addEventListener("loadedmetadata",()=>{restore();sync(true)});
   audio.addEventListener("canplay",()=>{restore();sync(false)},{passive:true});
   audio.addEventListener("durationchange",()=>sync(false));
   audio.addEventListener("play",()=>{activateMediaSession();if(options.autoOpen!==false&&!isOpen())open();updatePlay()});
-  audio.addEventListener("pause",()=>{persist(true);try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="paused"}catch(_){}updatePlay()});
-  audio.addEventListener("ended",()=>{const key=storyKey();if(key)safeRemove(progressStorageKey(key));try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="none"}catch(_){}sync(true)});
+  audio.addEventListener("pause",()=>{persist(true);try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="paused"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);updatePlay()});
+  audio.addEventListener("ended",()=>{const key=storyKey();if(key)safeRemove(progressStorageKey(key));try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="none"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);sync(true)});
   audio.addEventListener("seeking",()=>sync(false));
   audio.addEventListener("seeked",()=>{sync(true);persist(true)});
-  window.addEventListener("pagehide",()=>persist(true));
+  window.addEventListener("pagehide",()=>{persist(true);if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true)});
   document.addEventListener("visibilitychange",()=>{if(document.hidden)persist(true)});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&isOpen()){e.stopPropagation();close()}},true);
 
