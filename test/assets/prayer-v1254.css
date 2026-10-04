@@ -1,0 +1,229 @@
+/* DĀR AL TAWḤĪD · Prayer overview · test-only v1254 */
+#appView.view:has(.prayer-page-noble){
+  --prx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/b6d348aa-cc39-46fb-8bb3-c49e7939604d/8ac00152-37cb-4640-b0c7-d794e4e0701d/Single_wide_cinematic_app_background_for_an_Islamic_prayer_t.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzdiNGYwN2Q5ODI0M2EyYiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIyMzU0OX0.Z4T8Mce7CHN4s1wBzWYc4SQtpm3QmBlEun5Z7K5J1VQ");
+  --prx-left:color-mix(in srgb,var(--bg) 91%,transparent);
+  --prx-mid:color-mix(in srgb,var(--bg) 60%,transparent);
+  --prx-right:color-mix(in srgb,var(--bg) 15%,transparent);
+  --prx-line:color-mix(in srgb,var(--gold2) 20%,var(--line2));
+  --prx-soft:color-mix(in srgb,var(--card) 72%,transparent);
+  --prx-soft-strong:color-mix(in srgb,var(--card) 90%,transparent);
+  border:0!important;
+  box-shadow:none!important;
+  background:var(--bg)!important;
+}
+html[data-theme="light"] #appView.view:has(.prayer-page-noble),
+html[data-theme="soft"] #appView.view:has(.prayer-page-noble),
+html[data-theme="salbei"] #appView.view:has(.prayer-page-noble),
+html[data-theme="eisgold"] #appView.view:has(.prayer-page-noble){
+  --prx-left:color-mix(in srgb,var(--bg) 95%,transparent);
+  --prx-mid:color-mix(in srgb,var(--bg) 73%,transparent);
+  --prx-right:color-mix(in srgb,var(--bg) 35%,transparent);
+  --prx-soft:color-mix(in srgb,var(--card) 88%,transparent);
+  --prx-soft-strong:color-mix(in srgb,var(--card) 97%,transparent);
+}
+html[data-theme="royal"] #appView.view:has(.prayer-page-noble),
+html[data-theme="dark"] #appView.view:has(.prayer-page-noble),
+html[data-theme="dar-al-layl"] #appView.view:has(.prayer-page-noble),
+html[data-theme="bordeaux"] #appView.view:has(.prayer-page-noble),
+html[data-theme="aurora"] #appView.view:has(.prayer-page-noble){
+  --prx-left:color-mix(in srgb,var(--bg) 86%,transparent);
+  --prx-mid:color-mix(in srgb,var(--bg) 53%,transparent);
+  --prx-right:color-mix(in srgb,var(--bg) 9%,transparent);
+  --prx-soft:color-mix(in srgb,var(--card) 60%,transparent);
+  --prx-soft-strong:color-mix(in srgb,var(--card) 80%,transparent);
+}
+
+/* Only the opened prayer page header */
+#appView.view:has(.prayer-page-noble) > .view-head{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  width:100vw!important;
+  min-height:clamp(238px,48vw,315px)!important;
+  margin:0 0 18px calc(50% - 50vw)!important;
+  padding:
+    clamp(28px,6vw,42px)
+    max(20px,calc((100vw - 1180px)/2))
+    clamp(24px,5vw,36px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  align-items:flex-start!important;
+  border:0!important;
+  border-radius:0 0 26px 26px!important;
+  background:
+    linear-gradient(90deg,var(--prx-left) 0%,var(--prx-mid) 44%,var(--prx-right) 82%,color-mix(in srgb,var(--bg) 4%,transparent) 100%),
+    linear-gradient(180deg,color-mix(in srgb,var(--bg) 4%,transparent),transparent 48%,color-mix(in srgb,var(--bg) 22%,transparent)),
+    var(--prx-art) 78% 46%/cover no-repeat!important;
+  box-shadow:0 20px 44px color-mix(in srgb,var(--bg) 64%,transparent),inset 0 -1px 0 var(--prx-line)!important;
+}
+#appView.view:has(.prayer-page-noble) > .view-head::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 18%,transparent),transparent 64%),
+             radial-gradient(circle at 84% 15%,color-mix(in srgb,var(--gold2) 10%,transparent),transparent 42%);
+}
+#appView.view:has(.prayer-page-noble) > .view-head > *{
+  position:relative;z-index:1;width:min(650px,86%)
+}
+#appView.view:has(.prayer-page-noble) > .view-head .eyebrow{
+  margin:0 0 8px!important;color:var(--gold2)!important;font-size:.66rem!important;font-weight:850!important;letter-spacing:.12em!important;opacity:.9!important
+}
+#appView.view:has(.prayer-page-noble) > .view-head h2{
+  margin:0!important;font-family:var(--font-display,var(--serif))!important;font-size:clamp(2.25rem,9vw,4rem)!important;line-height:.94!important;font-weight:620!important;color:var(--text)!important;text-shadow:0 2px 16px color-mix(in srgb,var(--bg) 38%,transparent)!important
+}
+#appView.view:has(.prayer-page-noble) > .view-head .view-desc{
+  margin:11px 0 0!important;max-width:36rem!important;font-size:clamp(.88rem,3.1vw,1.02rem)!important;line-height:1.48!important;font-weight:580!important;color:var(--text)!important;text-shadow:0 1px 10px color-mix(in srgb,var(--bg) 38%,transparent)!important
+}
+
+/* Prayer content becomes one editorial flow */
+#appView.view:has(.prayer-page-noble) .prayer-page-noble{
+  width:min(980px,calc(100% - 24px))!important;
+  margin:0 auto calc(var(--bottom-navigation-height,70px) + env(safe-area-inset-bottom,0px) + 28px)!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Prayer time cards: keep function, reduce card-wall feeling */
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top{
+  gap:0!important;
+  margin:0!important;
+  border-top:1px solid var(--prx-line)!important;
+  border-bottom:1px solid var(--prx-line)!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-time-card,
+#appView.view:has(.prayer-page-noble) .prayer-time-card--slim{
+  min-height:64px!important;
+  padding:10px 8px!important;
+  border:0!important;
+  border-right:1px solid color-mix(in srgb,var(--prx-line) 76%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-time-card:last-child,
+#appView.view:has(.prayer-page-noble) .prayer-time-card--slim:last-child{border-right:0!important}
+#appView.view:has(.prayer-page-noble) .prayer-time-card.active{
+  background:linear-gradient(180deg,color-mix(in srgb,var(--gold2) 7%,transparent),transparent)!important;
+  box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--gold2) 50%,transparent)!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-time-card b{
+  color:var(--muted)!important;
+  font-size:.61rem!important;
+  font-weight:820!important;
+  letter-spacing:.08em!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-time-card span{
+  color:var(--text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:1rem!important;
+  font-weight:680!important;
+}
+
+/* Now/next as open folio table */
+#appView.view:has(.prayer-page-noble) .prayer-compact-summary{
+  margin:16px 0 18px!important;
+  border:0!important;
+  border-top:1px solid var(--prx-line)!important;
+  border-bottom:1px solid var(--prx-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-summary-card{
+  min-height:70px!important;
+  padding:12px 12px!important;
+  border:0!important;
+  background:transparent!important;
+  border-radius:0!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-summary-card + .prayer-summary-card{
+  border-left:1px solid var(--prx-line)!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-summary-card b{
+  color:var(--muted)!important;font-size:.61rem!important;letter-spacing:.09em!important
+}
+#appView.view:has(.prayer-page-noble) .prayer-summary-card span{
+  color:var(--text)!important;font-family:var(--font-display,var(--serif))!important;font-size:1rem!important
+}
+#appView.view:has(.prayer-page-noble) .prayer-summary-card small{color:var(--gold2)!important}
+
+/* Qibla section: calm, centered, theme-native */
+#appView.view:has(.prayer-page-noble) .qibla-pro-section{
+  margin:0!important;
+  padding:18px 0!important;
+  border-top:1px solid var(--prx-line)!important;
+  border-bottom:1px solid var(--prx-line)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#appView.view:has(.prayer-page-noble) .qibla-pro-title{
+  font-family:var(--font-display,var(--serif))!important;
+  color:var(--text)!important;
+  font-size:clamp(1.45rem,5vw,1.8rem)!important;
+}
+#appView.view:has(.prayer-page-noble) .qibla-compass-face{
+  background:color-mix(in srgb,var(--prx-soft) 40%,transparent)!important;
+  border-color:color-mix(in srgb,var(--gold2) 38%,var(--prx-line))!important;
+}
+#appView.view:has(.prayer-page-noble) .qibla-data-grid{
+  border-color:var(--prx-line)!important;
+}
+#appView.view:has(.prayer-page-noble) .qibla-data-item{
+  background:transparent!important;
+  border-color:var(--prx-line)!important;
+}
+
+/* Controls: one quiet settings block */
+#appView.view:has(.prayer-page-noble) .prayer-controls-compact{
+  margin-top:18px!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+}
+#appView.view:has(.prayer-page-noble) .filter-select,
+#appView.view:has(.prayer-page-noble) .prayer-action-btn,
+#appView.view:has(.prayer-page-noble) .field{
+  min-height:46px!important;
+  border:1px solid var(--prx-line)!important;
+  border-radius:14px!important;
+  background:var(--prx-soft)!important;
+  color:var(--text)!important;
+  box-shadow:none!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-push-accordion,
+#appView.view:has(.prayer-page-noble) .jummah-push-panel,
+#appView.view:has(.prayer-page-noble) .daily-push-panel,
+#appView.view:has(.prayer-page-noble) .prayer-push-status{
+  border-color:var(--prx-line)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+@media(max-width:599px){
+  #appView.view:has(.prayer-page-noble) > .view-head{
+    min-height:250px!important;
+    padding:26px 18px 24px!important;
+    background-position:center,center,80% 46%!important;
+  }
+  #appView.view:has(.prayer-page-noble) > .view-head > *{width:min(100%,88%)!important}
+  #appView.view:has(.prayer-page-noble) .prayer-page-noble{width:calc(100% - 20px)!important}
+  #appView.view:has(.prayer-page-noble) .prayer-time-grid--top{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  #appView.view:has(.prayer-page-noble) .prayer-time-card,
+  #appView.view:has(.prayer-page-noble) .prayer-time-card--slim{
+    border-bottom:1px solid color-mix(in srgb,var(--prx-line) 76%,transparent)!important;
+  }
+  #appView.view:has(.prayer-page-noble) .prayer-compact-summary{
+    grid-template-columns:1fr 1fr!important;
+  }
+}
+@media(min-width:760px){
+  #appView.view:has(.prayer-page-noble) > .view-head > *{width:min(650px,60%)!important}
+  #appView.view:has(.prayer-page-noble) > .view-head{min-height:300px!important;background-position:center,center,74% 44%!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #appView.view:has(.prayer-page-noble) *{scroll-behavior:auto!important}
+}
