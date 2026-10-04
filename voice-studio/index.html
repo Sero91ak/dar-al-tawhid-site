@@ -2600,6 +2600,8 @@ async function generateFreeVoice(){
 
     const blob=await response.blob();
     if(!blob.size)throw Error("Die Engine hat eine leere Audiodatei geliefert.");
+    const freeFinalRenderStatus=await getRenderStatus();
+    if(freeFinalRenderStatus?.render_preview_ready)updateChunkStream("free",freeFinalRenderStatus);
     const freePlayer=$("#freeVoicePlayer");
     if(freeVoiceAudioUrl)URL.revokeObjectURL(freeVoiceAudioUrl);
     freeVoiceAudioUrl=URL.createObjectURL(blob);
@@ -2723,6 +2725,8 @@ async function generate({autoRerender=false}={}){
 
     const blob=await r.blob();
     if(!blob.size)throw Error("Die Engine hat eine leere Audiodatei geliefert.");
+    const mainFinalRenderStatus=await getRenderStatus();
+    if(mainFinalRenderStatus?.render_preview_ready)updateChunkStream("main",mainFinalRenderStatus);
 
     const p=$("#player");
     const url=URL.createObjectURL(blob);
