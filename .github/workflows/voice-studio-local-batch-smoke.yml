@@ -121,10 +121,19 @@ jobs:
           assert 'RENDER_LOCK.locked()' in engine
           assert '"requestKey":request_key' in engine
           assert 'snap["reused"]=True' in engine
+          assert 'if p in ("/generate-start","/generate-free-start")' in engine
+          assert 'p=="/generate-job"' in engine
           assert 'await startFullBatch(true);' not in alphabet, "Alphabet/Quiz full batch must never auto-start"
           assert 'Gesamtbatch startet ausschließlich nach dem' in alphabet
           assert f'const APP_VERSION="{expected}";' in html
           assert 'runningVersion!==APP_VERSION' in html
+          assert 'DESKTOP_GENERATION_KEY="dar.voice.desktop.activeGeneration.v1"' in html
+          assert 'function persistDesktopGenerationJob' in html
+          assert 'async function startDesktopGenerationJob' in html
+          assert 'async function waitDesktopGenerationJob' in html
+          assert 'async function restoreDesktopGenerationJob' in html
+          assert '"/generate-free-start"' in html
+          assert '"/generate-start"' in html
           mobile=Path("voice-studio/mobile.html").read_text(encoding="utf-8")
           native=Path("voice-studio/VoiceStudioApp.swift").read_text(encoding="utf-8")
           installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
