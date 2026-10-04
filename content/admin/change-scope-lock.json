@@ -152,6 +152,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "test-ilm-start-phase1-2026-10-04",
+      "approvedBy": "user-explicit-komplette-app-langsam-beginnen-ilm",
+      "reason": "Nutzer hat nach dem Voll-Audit ausdrücklich beauftragt, langsam mit der Modernisierung der kompletten DĀR-AL-TAWḤĪD-Test-App zu beginnen. Phase 1 betrifft ausschließlich die ʿIlm-Einstiegs-/Willkommensansicht: neuer theme-kompatibler Wissens-Hero, bessere Hierarchie und Lesbarkeit. Chatlogik, Quellenlogik und andere App-Bereiche bleiben unverändert.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/ilm-research-chat.css",
+        "test/assets/ilm-research-chat.js",
+        "cloudflare/test-app-worker.js"
+      ],
+      "expiresAt": "2026-11-04T23:59:00.000Z"
+    },
+    {
       "id": "test-library-classic-cinematic-v1224-2026-10-04",
       "approvedBy": "user-explicit-bibliothek-klassisch-edel-theme-kompatibel-leg-los",
       "reason": "Nutzer beauftragt ausdrücklich den optischen Umbau der DĀR AL TAWḤĪD PDF-Bibliothek in Dar Test/Staging: klassischer Bibliotheks-Hero, größere lesbare Buchdarstellung, Themenregale, hochwertige Detailseite vor dem PDF und Kompatibilität mit allen bestehenden Erscheinungsbildern. Reader-/Offline-/Push-Logik bleibt unverändert. Zusätzlich ist die Test-Worker-Build-ID-Festverdrahtung freigegeben, soweit sie nur zur synchronen Auslieferung dieses Dar-Test-Stands auf die bereits gesetzte test/version.json-Version angepasst wird.",
