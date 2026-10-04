@@ -291,8 +291,8 @@ function ensureUi(){
   $("#psClose").addEventListener("click",closeStory);
   $("#psPlay").addEventListener("click",toggleAudio);
   $("#psFollowOpen")?.addEventListener("click",()=>{
-    if(isAudioOnlyAge()&&typeof followReader?.openReadAlong==="function")followReader.openReadAlong();
-    else followReader?.open();
+    if(isAudioOnlyAge())return;
+    followReader?.open();
   });
   $("#psProgressTrack")?.addEventListener("click",seekFromProgress);
   $("#psProgressTrack")?.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();seekBy(e.key==="ArrowLeft"?-15:15)}});
@@ -338,16 +338,16 @@ function applyMode(){
     read.hidden=true;
     player.hidden=false;
     if(follow){
-      follow.hidden=false;
-      follow.textContent="Mitlesen";
-      follow.setAttribute("aria-label","Mitlesen für Erwachsene öffnen");
+      follow.hidden=true;
+      follow.setAttribute("aria-hidden","true");
+      follow.tabIndex=-1;
     }
     return;
   }
   const m=mode();
   read.hidden=m==="listen";
   player.hidden=m==="read";
-  if(follow){follow.hidden=false;follow.textContent="Mitlesen öffnen";follow.setAttribute("aria-label","Mitlesen öffnen")}
+  if(follow){follow.hidden=false;follow.removeAttribute("aria-hidden");follow.tabIndex=0;follow.textContent="Mitlesen öffnen";follow.setAttribute("aria-label","Mitlesen öffnen")}
 }
 function renderActive(){
   if(!active)return;
