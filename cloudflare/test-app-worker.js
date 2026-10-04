@@ -248,9 +248,9 @@ async function finalizeDarTestHomeV1193(asset) {
 // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
 
-  // Build markers only; no route/page geometry is changed here.
-  html = html.replace(/const APP_BUILD_ID="app-shell-v1239"]+"/, 'const APP_BUILD_ID="app-shell-v1239"');
-  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v[^"]+"/, 'window.__DAR_EXPECTED_BUILD="app-shell-v1239"');
+  // Build IDs are produced by scripts/sync-app-build-ids.js during the deploy build.
+  // Do not overwrite them in the Worker; doing so creates a permanent
+  // test/version.json ↔ HTML mismatch and an endless stale-update state.
 
   // Remove superseded visual layers that can still be present in older cached HTML.
   html = html.replace(/<link[^>]+dar-home-knowledge-library-v1183\.css[^>]*>\s*/g, "");
