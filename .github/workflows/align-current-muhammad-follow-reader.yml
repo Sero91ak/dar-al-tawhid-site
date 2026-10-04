@@ -1,0 +1,155 @@
+name: Align Current Muhammad Follow Reader
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/align-current-muhammad-follow-reader.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: align-current-muhammad-follow-reader
+  cancel-in-progress: false
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VOICE_API: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Require owner secret
+        run: |
+          set -euo pipefail
+          test -n "${ADMIN_PUBLISH_SECRET:-}" || { echo "::error::ADMIN_PUBLISH_SECRET fehlt"; exit 1; }
+
+      - name: Extract current Muhammad audio and exact text
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("kids/data/prophet-stories.json")
+          d=json.loads(p.read_text(encoding="utf-8"))
+          item=next((x for x in d.get("items",[]) if x.get("id")=="muhammad"),None)
+          if not item:
+              raise SystemExit("Muhammad item missing")
+          text=str((item.get("scripts") or {}).get("6-8") or item.get("voiceScript") or "").strip()
+          audio=(item.get("audio") or {}).get("6-8") or {}
+          url=str(audio.get("url") or "").strip()
+          if not text or not url:
+              raise SystemExit("Current Muhammad text/audio missing")
+          Path("/tmp/muhammad-story.txt").write_text(text,encoding="utf-8")
+          Path("/tmp/muhammad-url.txt").write_text(url,encoding="utf-8")
+          print("paragraphs",len([x for x in text.split("\n\n") if x.strip()]))
+          print("duration",audio.get("durationSec"))
+          PY
+
+      - name: Download exact current audio
+        run: |
+          set -euo pipefail
+          URL="$(cat /tmp/muhammad-url.txt)"
+          curl -L --fail --retry 3 --retry-all-errors --connect-timeout 20 --max-time 180 \
+            "$URL" -o /tmp/muhammad-current.mp3
+          test "$(stat -c%s /tmp/muhammad-current.mp3)" -gt 100000
+
+      - name: Wait for alignment API and force-align current audio
+        run: |
+          set -euo pipefail
+          ok=0
+          for attempt in $(seq 1 30); do
+            code="$(curl -sS -o /tmp/alignment.json -w '%{http_code}' \
+              -X POST "$VOICE_API/align-story" \
+              -H "Origin: https://dar-al-tawhid.de" \
+              -H "Referer: https://dar-al-tawhid.de/voice-studio/" \
+              -H "X-Admin-Secret: $ADMIN_PUBLISH_SECRET" \
+              -H "Accept: application/json" \
+              -F "file=@/tmp/muhammad-current.mp3;type=audio/mpeg" \
+              --form-string "text=$(cat /tmp/muhammad-story.txt)" || true)"
+            python3 - <<'PY' || true
+          import json
+          try:
+              d=json.load(open("/tmp/alignment.json"))
+              print({k:d.get(k) for k in ("ok","syncMode","alignmentLoss","alignedWords","alignedCharacters","error")})
+          except Exception:
+              pass
+          PY
+            if [ "$code" = "200" ] && python3 - <<'PY'
+          import json,sys
+          d=json.load(open("/tmp/alignment.json"))
+          sys.exit(0 if d.get("ok") and d.get("timings") else 1)
+          PY
+            then
+              ok=1
+              break
+            fi
+            echo "Alignment API not ready yet (attempt $attempt, HTTP $code)"
+            sleep 10
+          done
+          test "$ok" = "1" || { echo "::error::Exact alignment did not complete"; cat /tmp/alignment.json; exit 1; }
+
+      - name: Install exact paragraph timings in manifest
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,time
+          from pathlib import Path
+          p=Path("kids/data/prophet-stories.json")
+          d=json.loads(p.read_text(encoding="utf-8"))
+          a=json.loads(Path("/tmp/alignment.json").read_text(encoding="utf-8"))
+          timings=a.get("timings") or []
+          item=next(x for x in d["items"] if x.get("id")=="muhammad")
+          text=str((item.get("scripts") or {}).get("6-8") or item.get("voiceScript") or "").strip()
+          paragraphs=[x.strip() for x in text.split("\n\n") if x.strip()]
+          if len(timings)!=len(paragraphs):
+              raise SystemExit(f"Timing count mismatch: {len(timings)} != {len(paragraphs)}")
+          previous=-1.0
+          for i,row in enumerate(timings):
+              if int(row.get("paragraphIndex",-1))!=i:
+                  raise SystemExit(f"Bad paragraph index at {i}: {row}")
+              start=float(row.get("start",-1))
+              if start<previous:
+                  raise SystemExit("Non-monotonic timing map")
+              previous=start
+          for age in ("4-5","6-8","9-10"):
+              meta=(item.get("audio") or {}).get(age)
+              if not isinstance(meta,dict):
+                  raise SystemExit(f"Audio meta missing for {age}")
+              meta["timings"]=timings
+              meta["syncMode"]=str(a.get("syncMode") or "elevenlabs-forced-alignment-v1")
+              meta["alignmentLoss"]=a.get("alignmentLoss")
+              meta["alignmentGeneratedAt"]=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
+              meta.pop("syncPoints",None)
+              meta.pop("syncCalibration",None)
+          vp=item.setdefault("voiceProduction",{})
+          vp["followReaderSync"]="exact-forced-alignment"
+          vp["followReaderParagraphs"]=len(timings)
+          vp["followReaderSyncedAt"]=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
+          d["updatedAt"]=time.strftime("%Y-%m-%d",time.gmtime())
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print("Installed exact timings:",len(timings))
+          PY
+
+      - name: Commit exact follow-reader timings
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/prophet-stories.json
+          if git diff --cached --quiet; then
+            echo "Exact timings already current."
+            exit 0
+          fi
+          git commit -m "Kids: exact Muhammad audiobook follow-reader timing"
+          git pull --rebase origin main
+          git push origin HEAD:main
