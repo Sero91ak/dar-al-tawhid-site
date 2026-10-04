@@ -3,6 +3,16 @@
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const state={items:[],selected:"",age:"6-8",visible:false,uploading:false};
+function storyTextStandard(value){
+  const raw=String(value||"").trim();
+  return typeof window.normalizeKidsStoryText==="function"?window.normalizeKidsStoryText(raw):raw;
+}
+function syncStoryTextStandard(){
+  const ta=$("#text");if(!ta)return"";
+  const next=storyTextStandard(ta.value);
+  if(next&&next!==String(ta.value||"").trim()){ta.value=next;ta.dispatchEvent(new Event("input",{bubbles:true}))}
+  return next;
+}
 const URLS=[
   "/mubashshirun/library?cb="+Date.now(),
   "https://dar-al-tawhid.de/kids/data/mubashshirun-stories.json?cb="+Date.now(),
@@ -116,7 +126,7 @@ function fileAsDataUrl(file){
 }
 async function uploadCurrent(file){
   const it=current();if(!it||!file)return false;
-  const text=String($("#text")?.value||"").trim();
+  const text=syncStoryTextStandard();
   const status=$("#mvpReady");
   if(text.length<80){if(status)status.textContent="Der Story-Text ist zu kurz. Text zuerst bearbeiten oder laden.";return false}
   if(Number(file.size||0)>64*1024*1024){if(status)status.textContent="Die Audiodatei ist größer als 64 MB.";return false}
@@ -148,7 +158,7 @@ async function uploadCurrent(file){
 }
 async function publishCurrent(){
   const it=current();if(!it)return false;
-  const btn=$("#mvpPublish"),status=$("#mvpReady"),text=String($("#text")?.value||"").trim();
+  const btn=$("#mvpPublish"),status=$("#mvpReady"),text=syncStoryTextStandard();
   if(!text){if(status)status.textContent="Zuerst den Text laden und Audio erzeugen.";return false}
   if(typeof window.darVoiceQaIsConfirmed==="function"&&!window.darVoiceQaIsConfirmed()){
     if(status)status.textContent="Audio zuerst vollständig anhören und über „Aussprache bestätigen & übernehmen“ freigeben. Erst danach wird diese Altersfassung in Kids veröffentlicht.";
