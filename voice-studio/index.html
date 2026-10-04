@@ -2195,6 +2195,8 @@ async function restoreDesktopGenerationJob(){
     poll=setInterval(async()=>{
       const st=await getRenderStatus();
       if(!st)return;
+      const statusJob=String(st.render_job_id||"").trim();
+      if(statusJob&&statusJob!==jobId)return;
       if(st.render_preview_ready)updateChunkStream(kind,st);
       const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
       if(button)button.textContent="Erzeugen "+pct+" %";
@@ -2711,6 +2713,7 @@ async function generateFreeVoice(){
   const btn=$("#freeVoiceGenerateBtn");
   const old=btn.textContent;
   let timer=null;
+  let activeJobId="";
   try{
     const value=$("#freeVoiceText").value.trim();
     if(!value)throw Error("Bitte zuerst einen Text eingeben.");
@@ -2728,7 +2731,9 @@ async function generateFreeVoice(){
     // Engine-Prozess; die UI wartet nicht mehr vor dem eigentlichen Job.
     timer=setInterval(async()=>{
       const st=await getRenderStatus();
-      if(!st)return;
+      if(!st||!activeJobId)return;
+      const statusJob=String(st.render_job_id||"").trim();
+      if(statusJob&&statusJob!==activeJobId)return;
       const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
       $("#freeVoiceProgress").style.width=pct+"%";
       $("#freeVoiceStatus").textContent=st.message||("Audio wird erzeugt · "+pct+" %");
@@ -2762,12 +2767,14 @@ async function generateFreeVoice(){
       pronunciationLibrary:$("#freeVoicePronunciation").checked,
       interactiveFast:true
     },value);
+    activeJobId=String(started.jobId||"");
     btn.textContent=started.reused?"Laufenden Auftrag öffnen …":"Audio läuft …";
     const job=await waitDesktopGenerationJob(started.jobId);
     const blob=await fetchDesktopGenerationBlob(job);
     clearDesktopGenerationJob(started.jobId);
     const freeFinalRenderStatus=await getRenderStatus();
-    if(freeFinalRenderStatus?.render_preview_ready)updateChunkStream("free",freeFinalRenderStatus);
+    const freeStatusJob=String(freeFinalRenderStatus?.render_job_id||"").trim();
+    if(freeFinalRenderStatus?.render_preview_ready&&(!freeStatusJob||freeStatusJob===activeJobId))updateChunkStream("free",freeFinalRenderStatus);
     const freePlayer=$("#freeVoicePlayer");
     if(freeVoiceAudioUrl)URL.revokeObjectURL(freeVoiceAudioUrl);
     freeVoiceAudioUrl=URL.createObjectURL(blob);
@@ -2808,6 +2815,7 @@ async function generate({autoRerender=false}={}){
   mainLivePreviewName="";mainLivePreviewGeneration=0;resetChunkStream("main");
   setMessage("");
   let progressTimer=null;
+  let activeJobId="";
 
   try{
     if(!engineOK){
@@ -2827,7 +2835,9 @@ async function generate({autoRerender=false}={}){
 
     progressTimer=setInterval(async()=>{
       const st=await getRenderStatus();
-      if(!st)return;
+      if(!st||!activeJobId)return;
+      const statusJob=String(st.render_job_id||"").trim();
+      if(statusJob&&statusJob!==activeJobId)return;
       if(st.render_state==="rendering"){
         const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
         const total=Math.max(0,Number(st.render_total_segments||0));
@@ -2874,12 +2884,14 @@ async function generate({autoRerender=false}={}){
       text,prepared:analysis.prepared,voice:"Serhat",format:"wav",
       style:$("#styleMode").value,interactiveFast:true
     },text);
+    activeJobId=String(started.jobId||"");
     btns.forEach(b=>b.textContent=started.reused?"Laufenden Auftrag öffnen …":"Audio läuft …");
     const job=await waitDesktopGenerationJob(started.jobId);
     const blob=await fetchDesktopGenerationBlob(job);
     clearDesktopGenerationJob(started.jobId);
     const mainFinalRenderStatus=await getRenderStatus();
-    if(mainFinalRenderStatus?.render_preview_ready)updateChunkStream("main",mainFinalRenderStatus);
+    const mainStatusJob=String(mainFinalRenderStatus?.render_job_id||"").trim();
+    if(mainFinalRenderStatus?.render_preview_ready&&(!mainStatusJob||mainStatusJob===activeJobId))updateChunkStream("main",mainFinalRenderStatus);
 
     const p=$("#player");
     const url=URL.createObjectURL(blob);
