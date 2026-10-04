@@ -1,10 +1,10 @@
 {
-  "version": "2.9.73",
-  "updatedAt": "2026-10-04T03:14:00+02:00",
-  "deployTrigger": "voice-studio-2.9.73-max-master-pronunciation",
+  "version": "2.9.74",
+  "updatedAt": "2026-10-04T03:15:00+02:00",
+  "deployTrigger": "voice-studio-2.9.74-owner-story-reference-memory",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v44",
+  "cache": "dar-voice-studio-v45",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-contents-api",
-  "engineVersion": "supervised-mlx-watchdog+bounded-segments+fast-kids-story-v3",
+  "engineVersion": "story-reference-memory+supervised-mlx-watchdog+bounded-segments+fast-kids-story-v3",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -191,7 +191,16 @@
     "maxMasterPlsConflictPolicy": "exact-existing-curated-rule-wins; remaining PLS spelling variants preload",
     "maxMasterPlsWordBoundaryGuard": true,
     "appEngineVersionHandshake": "2.9.73",
-    "smokeTestManifestVersionDynamic": true
+    "smokeTestManifestVersionDynamic": true,
+    "storyReferenceMemory": true,
+    "storyReferenceSeed": "story-reference-muhammad-2026-10-04.json",
+    "storyReferencePersistentPath": "~/SerhatVoice/PronunciationLearning/story-references",
+    "storyReferenceStatePath": "~/SerhatVoice/PronunciationLearning/story-references/state.json",
+    "muhammadOwnerAudioSha256": "d6d7c21c76211def9e1fc6ae1acae0de92b830907218715418eeef3df6b2ad1c",
+    "muhammadOwnerAudioDurationSec": 349.649,
+    "manualStoryUploadAutoRegistersAudioTextPair": true,
+    "exactStoryTextAudioReuse": true,
+    "storyReferenceDoesNotFineTuneModelWeights": true
   },
   "releaseSafety": {
     "stagedInstaller": true,
@@ -332,7 +341,14 @@
     "brokenPipeStartupNoiseSuppressed": true,
     "prophetUploadNativeFilePicker": true,
     "prophetUploadDragAndDrop": true,
-    "prophetOverviewReadableNames": true
+    "prophetOverviewReadableNames": true,
+    "storyReferenceSeedValidation": true,
+    "storyReferencePersistentStateValidation": true,
+    "storyReferenceExactTextFastPathValidation": true,
+    "storyReferenceUploadRegistrationValidation": true,
+    "storyReferenceAudioFingerprintValidation": true,
+    "storyReferenceBootstrapNonBlocking": true,
+    "voice274ValidatorPassed": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -396,7 +412,12 @@
     "arabicSegmentWatchdogMaxSeconds": 48,
     "fakeProgressPulseRemoved": true,
     "segmentElapsedSecondsVisible": true,
-    "realCompletedSegmentProgress": true
+    "realCompletedSegmentProgress": true,
+    "exactReferenceAudioReuse": true,
+    "exactReferenceSkipsModelLoad": true,
+    "editedReferenceTextFallsBackToIncrementalSegmentCache": true,
+    "manualUploadReferenceNormalization": "24kHz mono PCM16 WAV",
+    "storyReferenceBootstrapRunsInBackground": true
   },
   "contentStudio": {
     "enabled": true,
@@ -469,6 +490,14 @@
       "visibleDropZone": true,
       "selectedFilenameFeedback": true,
       "readableProphetOverview": true
+    },
+    "storyReferenceMemory": {
+      "enabled": true,
+      "automaticOnManualStoryUpload": true,
+      "persistentAcrossAppUpdates": true,
+      "exactTextReuse": true,
+      "editedTextUsesIncrementalRenderer": true,
+      "visibleInPronunciationLearningState": true
     }
   },
   "audioFormat": "wav-pcm16-mono",
@@ -644,7 +673,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "01f8058829febc9743279e3a1794b499961d7be8",
+  "releaseRef": "3411ea220d5f21bdd764cfb6b12786b0f9c4975b",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -922,7 +951,7 @@
     "forceNewSemanticVersion": true,
     "previousUiVersion": "2.9.47",
     "previousBundleVersionPossibly": "2.9.45",
-    "targetVersion": "2.9.68",
+    "targetVersion": "2.9.74",
     "alphabetReviewIncluded": true,
     "prophetStoriesIncluded": true,
     "updateCheckFallbackRepair": true,
@@ -1009,7 +1038,9 @@
     "runtimeUiGitHubSync": false,
     "pinnedReleaseUiOnly": true,
     "installerDoesNotStartEngine": true,
-    "directEngineFallbackWithoutLaunchctl": true
+    "directEngineFallbackWithoutLaunchctl": true,
+    "storyReferenceMemoryIncluded": true,
+    "ownerAudioTextPairIncluded": true
   },
   "alphabetFushaStrict": {
     "enabled": true,
@@ -1089,10 +1120,10 @@
     "offlineManifestPackaged": true,
     "staleLocalManifestAutoRefresh": true
   },
-  "validatedCommit": "5fc055282661576a673071347a4d1625172c2cfb",
-  "validatedAt": "2026-10-02T13:45:00+02:00",
+  "validatedCommit": "3411ea220d5f21bdd764cfb6b12786b0f9c4975b",
+  "validatedAt": "2026-10-04T03:14:00+02:00",
   "validation": {
-    "targetVersion": "2.9.73",
+    "targetVersion": "2.9.74",
     "pronunciationAsyncPreviewQueue": true,
     "pronunciationPreviewStatePolling": true,
     "pronunciationLocalCandidateFallback": true,
@@ -1119,7 +1150,7 @@
     "pronunciationPreviewNoLongFormQaCascade": true,
     "rootCauseConfirmed": "alphabet-audio-studio auto-started full 140 alphabet + quiz + greeting batch on studio load, monopolizing the shared local synthesis worker",
     "alphabetBatchDoesNotAutoStart": true,
-    "engineVersion": "2.9.71",
+    "engineVersion": "2.9.74",
     "engineHealthExposesVersion": true,
     "uiRejectsStaleEngineVersion": true,
     "nativeMacRestartsStaleEngine": true,
@@ -1156,7 +1187,16 @@
     "prophetUploadDragAndDrop": true,
     "prophetOverviewReadableNames": true,
     "prophetOverviewDefaultColumns": 1,
-    "prophetOverviewTwoColumnsMinWidth": 2050
+    "prophetOverviewTwoColumnsMinWidth": 2050,
+    "storyReferenceSeedPresent": true,
+    "storyReferenceSourceAudioFingerprintLocked": true,
+    "storyReferencePersistentMemory": true,
+    "storyReferenceExactTextFastPath": true,
+    "storyReferenceManualUploadAutoRegistration": true,
+    "storyReferenceLearningStateVisible": true,
+    "storyReferenceInstallerPackaging": true,
+    "storyReferenceCiValidationPassed": true,
+    "validatedImplementationRef": "3411ea220d5f21bdd764cfb6b12786b0f9c4975b"
   },
   "mubashshirunStories": {
     "enabled": true,
