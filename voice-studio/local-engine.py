@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.88"
+ENGINE_VERSION="2.9.89"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -7014,7 +7014,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             plan,max_chars=fast_chars,max_sentences=fast_sentences
         )
 
-        # 2.9.88 · First-Audio-Latency:
+        # 2.9.89 · First-Audio-Latency:
         # Der erste normale deutsche Renderblock wird bewusst kleiner gehalten,
         # damit iPhone/iPad/Mac deutlich früher etwas Hörbares bekommen. Nur der
         # erste Block wird geteilt; der Rest bleibt groß/coalesced für hohen
