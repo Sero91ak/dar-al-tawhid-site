@@ -1,7 +1,7 @@
 {
   "version": "2.9.91",
-  "updatedAt": "2026-10-04T14:02:00+02:00",
-  "deployTrigger": "voice-studio-2.9.91-exact-repeat-idle-cold-start-candidate",
+  "updatedAt": "2026-10-04T14:12:00+02:00",
+  "deployTrigger": "voice-studio-2.9.90-instant-fast-native-green-r2",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v61",
@@ -764,7 +764,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "e4ce9ceaae96e31bed9f3cc0c74dc561b90f5bd1",
+  "releaseRef": "50576efe8fea8c17b25a134f339edf7a5d88e5cc",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1286,7 +1286,7 @@
     "storyReferenceLearningStateVisible": true,
     "storyReferenceInstallerPackaging": true,
     "storyReferenceCiValidationPassed": true,
-    "validatedImplementationRef": "6bfe736540c94b9defeb16c2a00499027260b095",
+    "validatedImplementationRef": "50576efe8fea8c17b25a134f339edf7a5d88e5cc",
     "fullVoiceValidatePassed": true,
     "mobileReleaseCandidateRef": "eb019ce95a3db6d44351ad54b578217e4d08b6e2",
     "globalCanonicalGuardBlockedByUnrelatedKidsAssetVersionGuard": false,
@@ -1403,7 +1403,7 @@
     "networkRequirement": "same-wifi-with-mac-engine",
     "design": "original-dar-mobile-ui-inspired-by-modern-mobile-voice-workflows",
     "smokeValidated": false,
-    "releaseRef": "e4ce9ceaae96e31bed9f3cc0c74dc561b90f5bd1",
+    "releaseRef": "50576efe8fea8c17b25a134f339edf7a5d88e5cc",
     "version": "2.9.91",
     "pwaStartUrl": "/mobile/",
     "pairTokenStoredInHttpOnlyCookie": true,
@@ -1498,7 +1498,8 @@
     "voiceFullValidatePassed": true,
     "exactRepeatInstantReuse": true,
     "coldStartOptimized": true,
-    "asyncPreviewFlow": true
+    "asyncPreviewFlow": true,
+    "finalRenderStatusUsesJobSnapshot": true
   },
   "mobile": {
     "enabled": true,
