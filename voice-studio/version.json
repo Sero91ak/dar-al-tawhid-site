@@ -1,7 +1,7 @@
 {
   "version": "2.9.92",
-  "updatedAt": "2026-10-04T16:05:00+02:00",
-  "deployTrigger": "voice-studio-2.9.92-first-audio-mobile-word-bindings-candidate",
+  "updatedAt": "2026-10-04T16:12:00+02:00",
+  "deployTrigger": "voice-studio-2.9.92-first-audio-mobile-word-bindings-pin",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v61",
@@ -767,7 +767,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "50576efe8fea8c17b25a134f339edf7a5d88e5cc",
+  "releaseRef": "6787f5e1661d17ff3900254cd258a17498236b28",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1406,7 +1406,7 @@
     "networkRequirement": "same-wifi-with-mac-engine",
     "design": "original-dar-mobile-ui-inspired-by-modern-mobile-voice-workflows",
     "smokeValidated": false,
-    "releaseRef": "50576efe8fea8c17b25a134f339edf7a5d88e5cc",
+    "releaseRef": "6787f5e1661d17ff3900254cd258a17498236b28",
     "version": "2.9.92",
     "pwaStartUrl": "/mobile/",
     "pairTokenStoredInHttpOnlyCookie": true,
@@ -1506,7 +1506,9 @@
     "catalogBindingRegressionFixed": true,
     "serverPronunciationIssueBindingFixed": true,
     "autoAnalyzeOnPaste": true,
-    "firstAudioAdaptivePolling": true
+    "firstAudioAdaptivePolling": true,
+    "voiceSmokeStepsPassed": true,
+    "globalSmokeBlockedByUnrelatedKidsQuizArtwork": true
   },
   "mobile": {
     "enabled": true,
