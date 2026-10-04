@@ -604,11 +604,24 @@ async function copyCurrentText(){
 function effectiveKind(){return studioKind==="ios"?"lesson":studioKind}
 function effectiveTarget(){return studioKind==="ios"?"ios":"kids"}
 function draftKey(kind=studioKind){return STUDIO_DRAFT_KEY+"."+kind}
-function blankQuizQuestion(){return{question:"",answers:[{label:"",correct:true},{label:"",correct:false}],success:"Richtig.",retry:"Versuche es noch einmal."}}
+function quizBandForRange(min,max){
+  min=Number(min||0);max=Number(max||99);
+  if(min<=4&&max>=6)return"4-6";
+  if(min<=7&&max>=8)return"7-8";
+  return"9-10";
+}
+function setQuizAgeBand(band){
+  const ranges={"4-6":[4,6],"7-8":[7,8],"9-10":[9,10]};
+  const range=ranges[String(band||"")]||ranges["7-8"];
+  if(q("csAgeMin"))q("csAgeMin").value=String(range[0]);
+  if(q("csAgeMax"))q("csAgeMax").value=String(range[1]);
+}
+function blankQuizQuestion(){return{question:"",answers:[{label:"",correct:true},{label:"",correct:false}],success:"Richtig.",retry:"Versuche es noch einmal.",explanation:""}}
 function setProductionPhase(phase,error=""){productionPhase=phase||"draft";productionError=error||"";renderStatus()}
 function resetEditorForKind(){
   q("csTitle").value="";q("csTopic").value="";q("csProphet").value="";q("csSources").value="";q("text").value="";
-  q("csAgeMin").value="6";q("csAgeMax").value="10";q("csModeRead").checked=true;q("csModeListen").checked=true;
+  if(studioKind==="quiz"){q("csAgeMin").value="7";q("csAgeMax").value="8"}else{q("csAgeMin").value="6";q("csAgeMax").value="10"}
+  q("csModeRead").checked=true;q("csModeListen").checked=true;
   q("csCategory").value=studioKind==="quiz"?"Quiz · geprüft":studioKind==="game"?"Spiel":studioKind==="ios"?"iOS · Inhalt":"Qurʾān · geprüft";
   coverFile=null;coverRemoteUrl="";coverAsset=null;audioAsset=null;quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
   legacyQuestion={};legacyClaimIds=[];legacyTags=[];
@@ -618,12 +631,14 @@ function renderKindEditor(){
   const wrap=q("csStructured"),body=q("csStructuredBody");if(!wrap||!body)return;
   if(studioKind==="quiz"){
     wrap.hidden=false;if(!quizDraft.length)quizDraft=[blankQuizQuestion()];
-    body.innerHTML="<h3>Quiz-Aufbau</h3>"+quizDraft.map((item,i)=>{
+    const currentBand=quizBandForRange(q("csAgeMin")?.value,q("csAgeMax")?.value);
+    body.innerHTML="<h3>Quiz-Aufbau</h3><div class=\"cs-field\" style=\"margin-bottom:10px\"><label for=\"csQuizAgeBand\">Quiz-Altersstufe</label><select id=\"csQuizAgeBand\"><option value=\"4-6\" "+(currentBand==="4-6"?"selected":"")+">4–6 Jahre</option><option value=\"7-8\" "+(currentBand==="7-8"?"selected":"")+">7–8 Jahre</option><option value=\"9-10\" "+(currentBand==="9-10"?"selected":"")+">9–10 Jahre</option></select></div>"+quizDraft.map((item,i)=>{
       const answers=Array.isArray(item.answers)?item.answers:[];
       const opts=[0,1,2,3].map(ai=>"<option value=\""+ai+"\" "+(answers[ai]?.correct?"selected":"")+">"+String.fromCharCode(65+ai)+"</option>").join("");
       const ans=[0,1,2,3].map(ai=>{const a=answers[ai]||{};return "<div class=\"cs-field\"><label>Antwort "+String.fromCharCode(65+ai)+"</label><input data-q-answer=\""+ai+"\" data-q-index=\""+i+"\" value=\""+escapeHtml(a.label||"")+"\"></div>"}).join("");
-      return "<div class=\"cs-question\" data-cs-question=\""+i+"\"><div class=\"cs-question-head\"><b>Frage "+(i+1)+"</b><button type=\"button\" data-cs-remove-question=\""+i+"\">Entfernen</button></div><div class=\"cs-field\"><label>Frage</label><input data-q-field=\"question\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.question||"")+"\"></div><div class=\"cs-answer-grid\">"+ans+"</div><div class=\"cs-inline-grid\" style=\"margin-top:8px\"><div class=\"cs-field\"><label>Richtige Antwort</label><select data-q-field=\"correctIndex\" data-q-index=\""+i+"\">"+opts+"</select></div><div class=\"cs-field\"><label>Erfolg</label><input data-q-field=\"success\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.success||"Richtig.")+"\"></div></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Nochmal versuchen</label><input data-q-field=\"retry\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.retry||"Versuche es noch einmal.")+"\"></div></div>";
+      return "<div class=\"cs-question\" data-cs-question=\""+i+"\"><div class=\"cs-question-head\"><b>Frage "+(i+1)+"</b><button type=\"button\" data-cs-remove-question=\""+i+"\">Entfernen</button></div><div class=\"cs-field\"><label>Frage</label><input data-q-field=\"question\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.question||"")+"\"></div><div class=\"cs-answer-grid\">"+ans+"</div><div class=\"cs-inline-grid\" style=\"margin-top:8px\"><div class=\"cs-field\"><label>Richtige Antwort</label><select data-q-field=\"correctIndex\" data-q-index=\""+i+"\">"+opts+"</select></div><div class=\"cs-field\"><label>Erfolg</label><input data-q-field=\"success\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.success||"Richtig.")+"\"></div></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Nochmal versuchen</label><input data-q-field=\"retry\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.retry||"Versuche es noch einmal.")+"\"></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Kurze Erklärung nach richtiger Antwort</label><input data-q-field=\"explanation\" data-q-index=\""+i+"\" value=\""+escapeHtml(item.explanation||"")+"\"></div></div>";
     }).join("")+"<button class=\"btn quiet cs-add\" type=\"button\" data-cs-add-question>+ Frage hinzufügen</button>";
+    q("csQuizAgeBand")?.addEventListener("change",e=>{setQuizAgeBand(e.target.value);persistDraft();refreshQa()});
   }else if(studioKind==="game"){
     wrap.hidden=false;
     body.innerHTML="<h3>Spiel-Aufbau</h3><div class=\"cs-inline-grid\"><div class=\"cs-field\"><label>Spieltyp</label><select id=\"csGameType\"><option value=\"choice\">Auswahlspiel</option><option value=\"listen\">Hörspiel</option><option value=\"memory\">Merkspiel</option><option value=\"sequence\">Reihenfolge</option></select></div><div class=\"cs-field\"><label>Kurzbeschreibung</label><input id=\"csGameSummary\" value=\""+escapeHtml(gameDraft.summary||"")+"\"></div></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Anleitung</label><textarea id=\"csGameInstructions\">"+escapeHtml(gameDraft.instructions||"")+"</textarea></div><div class=\"cs-field\" style=\"margin-top:8px\"><label>Serhat-Sprachbausteine · eine Zeile pro Satz</label><textarea id=\"csGameVoiceCues\" placeholder=\"Sehr gut!&#10;Versuche es noch einmal.\">"+escapeHtml((gameDraft.voiceCues||[]).join("\\n"))+"</textarea></div>";
@@ -634,7 +649,7 @@ function captureStructuredEditor(){
   if(studioKind==="quiz"){
     document.querySelectorAll("[data-cs-question]").forEach(node=>{
       const i=Number(node.dataset.csQuestion),item=quizDraft[i]||blankQuizQuestion();
-      item.question=node.querySelector('[data-q-field="question"]')?.value||"";item.success=node.querySelector('[data-q-field="success"]')?.value||"Richtig.";item.retry=node.querySelector('[data-q-field="retry"]')?.value||"Versuche es noch einmal.";
+      item.question=node.querySelector('[data-q-field="question"]')?.value||"";item.success=node.querySelector('[data-q-field="success"]')?.value||"Richtig.";item.retry=node.querySelector('[data-q-field="retry"]')?.value||"Versuche es noch einmal.";item.explanation=node.querySelector('[data-q-field="explanation"]')?.value||"";
       const correct=Number(node.querySelector('[data-q-field="correctIndex"]')?.value||0);
       item.answers=[0,1,2,3].map(ai=>({label:node.querySelector('[data-q-answer="'+ai+'"]')?.value||"",correct:ai===correct})).filter(a=>String(a.label||"").trim());quizDraft[i]=item;
     });
@@ -685,6 +700,7 @@ function fields(){
     prophetId:String(q("csProphet")?.value||"").trim(),
     ageMin:Number(q("csAgeMin")?.value||4),
     ageMax:Number(q("csAgeMax")?.value||10),
+    ageBand:studioKind==="quiz"?quizBandForRange(q("csAgeMin")?.value,q("csAgeMax")?.value):"",
     modes:{read:!!q("csModeRead")?.checked,listen:!!q("csModeListen")?.checked},
     text,
     sourceRefs:String(q("csSources")?.value||"").split(/\n+/).map(x=>x.trim()).filter(Boolean),
@@ -693,7 +709,7 @@ function fields(){
     tags:[...legacyTags],
     cover:coverAsset||{},
     audio:audioAsset||{},
-    quiz:studioKind==="quiz"?{questions:quizDraft.map(x=>({...x,answers:(x.answers||[]).filter(a=>String(a.label||"").trim())}))}:null,
+    quiz:studioKind==="quiz"?{ageBand:quizBandForRange(q("csAgeMin")?.value,q("csAgeMax")?.value),questions:quizDraft.map(x=>({...x,answers:(x.answers||[]).filter(a=>String(a.label||"").trim())}))}:null,
     game:studioKind==="game"?{...gameDraft,voiceCues:[...(gameDraft.voiceCues||[])]}:null,
     production:{phase:productionPhase,error:productionError},
     verification:"studio-review",

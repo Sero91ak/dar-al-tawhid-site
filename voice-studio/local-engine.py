@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.79"
+ENGINE_VERSION="2.9.80"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -707,10 +707,14 @@ def master_rules_from_entries(entries,blocked_needles):
             })
     return out
 
+PRONUNCIATION_CATALOG_CACHE_VERSION=0
+PRONUNCIATION_CATALOG_CACHE={"key":None,"rows":[]}
+PRONUNCIATION_CATALOG_CACHE_LOCK=threading.Lock()
+
 def rebuild_runtime_rules():
     global LIB,RULES,MASTER_TTS,AUDIO_LOCK_BY_TTS,AUDIO_LOCK_LABELS,AUDIO_LOCK_FORMS
     global HONORIFIC_TTS_BY_KEY,HONORIFIC_RULE_BY_KEY,HONORIFIC_SOURCE_FORMS
-    global MASTER_ENTRIES,MASTER_RULES,MASTER_ALIAS_INDEX
+    global MASTER_ENTRIES,MASTER_RULES,MASTER_ALIAS_INDEX,PRONUNCIATION_CATALOG_CACHE_VERSION
     user_rules=list((USER_OVERRIDE_DATA or {}).get("rules") or [])
     MASTER_ENTRIES=build_master_library()
     blocked=[str(r.get("string_to_replace","")) for r in user_rules+BASE_RULES]
@@ -766,6 +770,7 @@ def rebuild_runtime_rules():
                 HONORIFIC_SOURCE_FORMS.setdefault(key,[]).append(src)
     for key in list(HONORIFIC_SOURCE_FORMS):
         HONORIFIC_SOURCE_FORMS[key]=sorted(set(HONORIFIC_SOURCE_FORMS[key]),key=len,reverse=True)
+    PRONUNCIATION_CATALOG_CACHE_VERSION+=1
 
 rebuild_runtime_rules()
 
@@ -1326,19 +1331,18 @@ def pronunciation_candidates(query:str,limit:int=12):
     ))
     return out[:max(1,min(25,int(limit or 12)))]
 
-def pronunciation_catalog(query:str="",offset:int=0,limit:int=80):
-    """Schnelle, paginierte Gesamtliste des installierten Aussprachewortschatzes.
+def _pronunciation_catalog_rows():
+    """Vollständige Wortliste einmal pro Regelstand aufbauen und im RAM halten."""
+    global PRONUNCIATION_CATALOG_CACHE
+    confirmed=tuple(sorted(confirmed_audio_lock_keys()))
+    cache_key=(int(PRONUNCIATION_CATALOG_CACHE_VERSION),confirmed)
+    with PRONUNCIATION_CATALOG_CACHE_LOCK:
+        if PRONUNCIATION_CATALOG_CACHE.get("key")==cache_key:
+            return list(PRONUNCIATION_CATALOG_CACHE.get("rows") or [])
 
-    Die MAX-MASTER-Einträge werden nicht als riesiges JSON auf einmal an
-    iPhone/iPad geschickt. Die komplette Bibliothek bleibt lokal verfügbar und
-    wird alphabetisch in kleinen Seiten geladen.
-    """
-    needle=normalize_lookup(query)
-    offset=max(0,int(offset or 0))
-    limit=max(20,min(160,int(limit or 80)))
     rows=[]
     seen=set()
-    confirmed=confirmed_audio_lock_keys()
+    confirmed_set=set(confirmed)
     for source,r in combined_search_rules():
         canonical=str(r.get("canonical") or r.get("string_to_replace") or "").strip()
         tts=str(r.get("tts_text") or r.get("alias") or canonical).strip()
@@ -1347,18 +1351,15 @@ def pronunciation_catalog(query:str="",offset:int=0,limit:int=80):
         key=(normalize_lookup(canonical),tts,str(r.get("tts_language") or ""))
         if key in seen:
             continue
-        if needle:
-            hay=" ".join([
-                normalize_lookup(canonical),
-                normalize_lookup(r.get("string_to_replace","")),
-                normalize_lookup(r.get("alias","")),
-                normalize_lookup(tts),
-            ])
-            if needle not in hay:
-                continue
         seen.add(key)
         lang=str(r.get("tts_language") or ("ar" if re.search(r"[\u0600-\u06ff]",tts) else "de"))
         lock_key=str(r.get("audio_lock_key") or "")
+        search_text=" ".join([
+            normalize_lookup(canonical),
+            normalize_lookup(r.get("string_to_replace","")),
+            normalize_lookup(r.get("alias","")),
+            normalize_lookup(tts),
+        ])
         rows.append({
             "source":source,
             "input":str(r.get("string_to_replace") or canonical),
@@ -1371,12 +1372,28 @@ def pronunciation_catalog(query:str="",offset:int=0,limit:int=80):
             "voiceLock":str(r.get("voice_lock") or ""),
             "confirmed":bool(
                 str(r.get("voice_lock") or "").upper()=="MASTER"
-                or (lock_key and lock_key in confirmed)
+                or (lock_key and lock_key in confirmed_set)
             ),
+            "_search":search_text,
         })
     rows.sort(key=lambda x:(normalize_lookup(x.get("canonical","")),normalize_lookup(x.get("ttsText",""))))
+    with PRONUNCIATION_CATALOG_CACHE_LOCK:
+        PRONUNCIATION_CATALOG_CACHE={"key":cache_key,"rows":rows}
+    return list(rows)
+
+def pronunciation_catalog(query:str="",offset:int=0,limit:int=80):
+    """Schnelle, paginierte Gesamtliste des installierten Aussprachewortschatzes."""
+    needle=normalize_lookup(query)
+    offset=max(0,int(offset or 0))
+    limit=max(20,min(160,int(limit or 80)))
+    rows=_pronunciation_catalog_rows()
+    if needle:
+        rows=[row for row in rows if needle in str(row.get("_search") or "")]
     total=len(rows)
-    page=rows[offset:offset+limit]
+    page=[
+        {k:v for k,v in row.items() if k!="_search"}
+        for row in rows[offset:offset+limit]
+    ]
     return {
         "ok":True,
         "query":str(query or ""),
@@ -1385,6 +1402,7 @@ def pronunciation_catalog(query:str="",offset:int=0,limit:int=80):
         "limit":limit,
         "hasMore":offset+len(page)<total,
         "items":page,
+        "cached":True,
     }
 
 def _download_json(url:str,timeout:int=15):
@@ -3052,8 +3070,22 @@ def _kids_owner_voice_rows(quiz_data,dua_data,story_data,short_story_data,verifi
         quiz=(item or {}).get("quiz") or {}
         questions=(quiz or {}).get("questions") or []
         if isinstance(questions,list):
+            age_min=int((item or {}).get("ageMin") or 0)
+            age_max=int((item or {}).get("ageMax") or 99)
+            quiz_age_bands=[]
+            if age_min<=4 and age_max>=6:
+                quiz_age_bands.append("4-6")
+            if age_min<=7 and age_max>=8:
+                quiz_age_bands.append("7-8")
+            if age_min<=9 and age_max>=10:
+                quiz_age_bands.append("9-10")
+            if not quiz_age_bands:
+                quiz_age_bands=["studio"]
             for q in questions:
-                _kids_owner_voice_add_question(rows,q,"studio","studio-quiz",item_id)
+                for quiz_age_band in quiz_age_bands:
+                    _kids_owner_voice_add_question(
+                        rows,q,quiz_age_band,"studio-quiz",item_id
+                    )
 
         game=(item or {}).get("game") or {}
         if isinstance(game,dict):
@@ -3966,11 +3998,29 @@ STATUS={
     "render_finished_at":None,
     "prosody_mode":"narration",
     "last_qa":{},
+    "render_preview_name":"",
+    "render_preview_ready":False,
+    "render_preview_segments":0,
+    "render_preview_duration_seconds":0.0,
+    "render_preview_complete":False,
 }
 
 def set_status(**updates):
     with STATUS_LOCK:
         STATUS.update(updates)
+
+def cleanup_progressive_previews(max_age_seconds:int=1800):
+    """Entfernt nur alte temporäre Sofort-Vorschauen; fertige Audios bleiben unberührt."""
+    cutoff=time.time()-max(60,int(max_age_seconds or 1800))
+    try:
+        for p in OUTPUT.glob("dar_voice_live_*.wav"):
+            try:
+                if p.is_file() and p.stat().st_mtime<cutoff:
+                    p.unlink(missing_ok=True)
+            except Exception:
+                pass
+    except Exception:
+        pass
 
 def _mobile_history_records():
     data=load_json_file(MOBILE_HISTORY_META,{"schemaVersion":1,"items":[]})
@@ -4008,7 +4058,12 @@ def mobile_history_snapshot(limit:int=60):
     try:
         meta={str((x or {}).get("name") or ""):dict(x or {}) for x in _mobile_history_records()}
         files=sorted(
-            [p for p in OUTPUT.glob("*.wav") if p.is_file() and p.stat().st_size>44],
+            [
+                p for p in OUTPUT.glob("*.wav")
+                if p.is_file()
+                and p.stat().st_size>44
+                and not p.name.startswith("dar_voice_live_")
+            ],
             key=lambda p:p.stat().st_mtime,
             reverse=True
         )
@@ -6687,6 +6742,11 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         last_error="",
         prosody_mode=doc_mode,
         last_qa={},
+        render_preview_name="",
+        render_preview_ready=False,
+        render_preview_segments=0,
+        render_preview_duration_seconds=0.0,
+        render_preview_complete=False,
         render_total_segments=0,
         render_completed_segments=0,
         render_active_segment=0,
@@ -6751,6 +6811,8 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                 message=f"Freie Stimme · {total} kurze Sprachabschnitte vorbereitet"
             )
         render_id=uuid.uuid4().hex[:12]
+        cleanup_progressive_previews()
+        progressive_preview_path=None
         session_audio_locks={}
         new_audio_lock_candidates={}
         render_started_perf=time.perf_counter()
@@ -6955,6 +7017,40 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                 **metrics
             }
             outputs[original_idx]=(wav.detach().float().cpu(),lang,chunk,mode,metrics)
+
+            # Interaktive Langtexte: Sobald genug Anfangsaudio vorhanden ist,
+            # eine kleine stabile WAV-Vorschau bereitstellen. Die eigentliche
+            # Synthese läuft im selben Render weiter. Dadurch kann iPhone/iPad
+            # oder Mac schon zuhören, bevor die vollständige Datei fertig ist.
+            if interactive_fast and total>1 and progressive_preview_path is None:
+                prefix=[x for x in outputs[:processed_pos] if x is not None]
+                prefix_is_contiguous=(len(prefix)==processed_pos)
+                prefix_seconds=sum(
+                    float(item[0].shape[-1])/max(1,int(render_sr))
+                    for item in prefix
+                ) if prefix_is_contiguous else 0.0
+                if prefix_is_contiguous and (prefix_seconds>=1.8 or processed_pos>=2):
+                    try:
+                        preview_wav=join_rendered_segments(prefix,int(render_sr))
+                        candidate=OUTPUT/f"dar_voice_live_{render_id}.wav"
+                        save_wav(candidate,preview_wav,int(render_sr))
+                        if candidate.exists() and candidate.stat().st_size>44:
+                            progressive_preview_path=candidate
+                            set_status(
+                                render_preview_name=candidate.name,
+                                render_preview_ready=True,
+                                render_preview_segments=processed_pos,
+                                render_preview_duration_seconds=round(
+                                    float(preview_wav.shape[-1])/max(1,int(render_sr)),2
+                                ),
+                                message=(
+                                    f"Sofort-Vorschau bereit · {processed_pos}/{total} "
+                                    "Abschnitte · Rest wird weiter erzeugt …"
+                                )
+                            )
+                    except Exception as preview_error:
+                        print("[DĀR Voice] progressive preview warning:",preview_error,flush=True)
+
             completed_pct=8+int((processed_pos/max(1,total))*78)
             set_status(
                 progress=completed_pct,
@@ -7106,6 +7202,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             message=f"Audio fertig · {doc_mode}",
             last_output=str(out),
             render_finished_at=time.time(),
+            render_preview_complete=True,
             last_error=""
         )
         return out
@@ -8514,8 +8611,8 @@ class H(BaseHTTPRequestHandler):
                 "theme_color":"#f7f7f5",
                 "orientation":"any",
                 "icons":[
-                    {"src":"/mobile/apple-touch-icon.png?v=2979","sizes":"256x256","type":"image/png","purpose":"any"},
-                    {"src":"/mobile/voice-studio-icon.png?v=2979","sizes":"256x256","type":"image/png","purpose":"maskable"}
+                    {"src":"/mobile/apple-touch-icon.png?v=2980","sizes":"256x256","type":"image/png","purpose":"any"},
+                    {"src":"/mobile/voice-studio-icon.png?v=2980","sizes":"256x256","type":"image/png","purpose":"maskable"}
                 ]
             })
         elif p=="/mobile/history":

@@ -8,10 +8,10 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="DĀR Voice">
-<link rel="manifest" href="/mobile/manifest.webmanifest?v=2979">
-<link rel="apple-touch-icon" href="/mobile/apple-touch-icon.png?v=2979">
-<link rel="apple-touch-icon-precomposed" href="/mobile/apple-touch-icon-precomposed.png?v=2979">
-<link rel="icon" type="image/png" href="/mobile/voice-studio-icon.png?v=2979">
+<link rel="manifest" href="/mobile/manifest.webmanifest?v=2980">
+<link rel="apple-touch-icon" href="/mobile/apple-touch-icon.png?v=2980">
+<link rel="apple-touch-icon-precomposed" href="/mobile/apple-touch-icon-precomposed.png?v=2980">
+<link rel="icon" type="image/png" href="/mobile/voice-studio-icon.png?v=2980">
 <title>DĀR Voice</title>
 <style>
 :root{color-scheme:light;--bg:#f7f7f5;--card:#fff;--ink:#111;--muted:#777773;--line:#e8e8e4;--soft:#efefec;--good:#17784a;--warn:#9a5a00;--bad:#b42318;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)}
@@ -71,7 +71,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
             <button class="pill" id="analyzeBtn">Aussprache prüfen</button>
           </div>
           <div class="control-row">
-            <button class="voice" id="voiceBtn"><span class="avatar"><img src="/mobile/voice-studio-icon.png?v=2979" alt=""></span><span class="voice-copy"><span class="voice-name">Serhat Abu Malik</span><span class="voice-desc">Eigene Stimme · Deutsch + Fuṣḥā</span></span><span>›</span></button>
+            <button class="voice" id="voiceBtn"><span class="avatar"><img src="/mobile/voice-studio-icon.png?v=2980" alt=""></span><span class="voice-copy"><span class="voice-name">Serhat Abu Malik</span><span class="voice-desc">Eigene Stimme · Deutsch + Fuṣḥā</span></span><span>›</span></button>
             <button class="settings-btn" id="settingsBtn" aria-label="Einstellungen">⌘</button>
             <button class="generate" id="generateBtn">Erzeugen</button>
           </div>
@@ -107,7 +107,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.79</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.80</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -136,7 +136,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <div id="toast" class="toast"></div>
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
+const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",livePreviewName:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -175,6 +175,22 @@ async function analyzeText(force=false){
   }catch(e){$("#analysisState").textContent="Fehler";$("#analysisBody").textContent=e.message;toast(e.message);return null}
 }
 $("#analyzeBtn").onclick=()=>analyzeText(true);
+
+function activateLivePreview(st){
+  const name=String(st?.render_preview_name||"").trim();
+  if(!name||name===state.livePreviewName)return;
+  state.livePreviewName=name;
+  const audio=$("#audio");
+  const liveUrl="/mobile/audio?name="+encodeURIComponent(name);
+  const segments=Math.max(1,Number(st?.render_preview_segments||1));
+  const sec=Math.max(0,Number(st?.render_preview_duration_seconds||0));
+  audio.src=liveUrl;
+  $("#player").classList.add("show");
+  $(".player-title").textContent="Sofort-Vorschau";
+  $("#playerMeta").textContent="Schon anhören · "+segments+" Abschnitt"+(segments===1?"":"e")+(sec?" · "+sec.toFixed(1)+" s":"")+" · Rest wird weiter erzeugt";
+  audio.play().catch(()=>{});
+}
+
 async function generate(){
   if(!await health())return toast("Mac-Engine nicht erreichbar.");const text=$("#text").value.trim();if(!text)return toast("Bitte Text eingeben.");
   const useLibrary=!!$("#pronToggle").checked;
@@ -183,7 +199,7 @@ async function generate(){
   if(useLibrary&&(analyzed.unresolvedIslamicTerms||[]).length){
     $("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";toast("Erst die markierten Wörter prüfen.");return
   }
-  $("#generateBtn").textContent="Erzeuge …";state.generating=true;
+  $("#generateBtn").textContent="Erzeuge …";state.generating=true;state.livePreviewName="";
   let progressBusy=false;
   const progressTimer=setInterval(async()=>{
     if(!state.generating||progressBusy)return;
@@ -193,6 +209,7 @@ async function generate(){
       const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
       const done=Number(st.render_completed_segments||0),total=Number(st.render_total_segments||0);
       $("#generateBtn").textContent=pct>0?("Erzeuge "+pct+"%"+(total?" · "+done+"/"+total:"")):"Erzeuge …";
+      if(st.render_preview_ready)activateLivePreview(st);
       if(st.message){$("#analysis").classList.add("show");$("#analysisState").textContent=pct?pct+"%":"läuft";$("#analysisBody").textContent=st.message}
     }catch(_){}
     finally{progressBusy=false}
@@ -205,21 +222,40 @@ async function generate(){
     const r=await api(endpoint,{method:"POST",body:JSON.stringify(payload)});
     if(!r.ok){let d={};try{d=await r.json()}catch{};throw Error(d.error||"Audioerzeugung fehlgeschlagen")}
     const blob=await r.blob();
+    const player=$("#audio");
+    const carryTime=state.livePreviewName&&Number.isFinite(player.currentTime)?Math.max(0,player.currentTime):0;
+    const wasPlaying=!player.paused;
     if(state.audioUrl)URL.revokeObjectURL(state.audioUrl);
     state.audioBlob=blob;state.audioUrl=URL.createObjectURL(blob);
-    $("#audio").src=state.audioUrl;$("#player").classList.add("show");
+    player.src=state.audioUrl;$("#player").classList.add("show");
+    $(".player-title").textContent="Audio fertig";
     $("#playerMeta").textContent="Serhat Voice · "+($("#style").selectedOptions[0]?.textContent||"Auto")+(useLibrary?" · Aussprache aktiv":" · frei");
-    $("#audio").play().catch(()=>{});toast("Audio ist fertig.");loadHistory();
+    const resume=()=>{
+      if(carryTime>0&&Number.isFinite(player.duration))player.currentTime=Math.min(carryTime,Math.max(0,player.duration-.15));
+      if(wasPlaying||carryTime===0)player.play().catch(()=>{});
+    };
+    if(player.readyState>=1)resume();else player.addEventListener("loadedmetadata",resume,{once:true});
+    state.livePreviewName="";
+    toast("Audio ist fertig.");loadHistory();
   }catch(e){toast(e.message)}
   finally{state.generating=false;clearInterval(progressTimer);$("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen"}
 }
-$("#generateBtn").onclick=generate;$("#closePlayer").onclick=()=>$("#player").classList.remove("show");$("#saveBtn").onclick=()=>{if(state.audioUrl)window.open(state.audioUrl,"_blank")};
-$("#shareBtn").onclick=async()=>{if(!state.audioBlob)return;const file=new File([state.audioBlob],"dar-serhat-voice.wav",{type:"audio/wav"});if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:"DĀR Voice"})}catch{}}else window.open(state.audioUrl,"_blank")};
+$("#generateBtn").onclick=generate;$("#closePlayer").onclick=()=>$("#player").classList.remove("show");
+$("#saveBtn").onclick=()=>{
+  const u=state.audioUrl||(state.livePreviewName?"/mobile/audio?name="+encodeURIComponent(state.livePreviewName):"");
+  if(u)window.open(u,"_blank");
+};
+$("#shareBtn").onclick=async()=>{
+  if(!state.audioBlob){toast("Teilen ist verfügbar, sobald die vollständige Audio fertig ist.");return}
+  const file=new File([state.audioBlob],"dar-serhat-voice.wav",{type:"audio/wav"});
+  if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:"DĀR Voice"})}catch{}}
+  else window.open(state.audioUrl,"_blank");
+};
 async function loadHistory(){
   const box=$("#historyList");box.innerHTML='<div class="empty">Verlauf wird geladen …</div>';
   try{const r=await api("/mobile/history");const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Verlauf nicht verfügbar");const items=d.items||[];if(!items.length){box.innerHTML='<div class="empty">Noch keine Audios vorhanden.</div>';return}
   box.innerHTML=items.map(x=>'<div class="card history-item"><button class="playdot" data-audio="'+encodeURIComponent(x.name)+'">▶</button><div class="hist-main"><div class="hist-name">'+esc(x.title||x.label||x.name)+'</div>'+(x.text?'<div class="hist-text">'+esc(x.text)+'</div>':'')+'<div class="hist-meta">'+esc(x.styleLabel||"Auto")+' · '+esc(x.createdLabel||"")+' · '+esc(x.sizeLabel||"")+'</div></div><button class="iconbtn" data-open="'+encodeURIComponent(x.name)+'">↗</button></div>').join("");
-  $$("[data-audio]").forEach(b=>b.onclick=()=>{const u="/mobile/audio?name="+b.dataset.audio;$("#audio").src=u;$("#player").classList.add("show");$("#playerMeta").textContent="Verlauf";go("create");$("#audio").play().catch(()=>{})});$$("[data-open]").forEach(b=>b.onclick=()=>window.open("/mobile/audio?name="+b.dataset.open,"_blank"))}
+  $("[data-audio]").forEach(b=>b.onclick=()=>{state.livePreviewName="";const u="/mobile/audio?name="+b.dataset.audio;$("#audio").src=u;$("#player").classList.add("show");$(".player-title").textContent="Verlauf";$("#playerMeta").textContent="Gespeicherte Audio";go("create");$("#audio").play().catch(()=>{})});$("[data-open]").forEach(b=>b.onclick=()=>window.open("/mobile/audio?name="+b.dataset.open,"_blank"))}
   catch(e){box.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}
 }
 function catalogCard(x,i){
