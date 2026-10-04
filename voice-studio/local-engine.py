@@ -45,7 +45,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.69"
+ENGINE_VERSION="2.9.70"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MASTER_AUDIO_DIR=VOICE_HOME/"MasterPronunciations"
@@ -7059,10 +7059,15 @@ class H(BaseHTTPRequestHandler):
 
     def send_json(self,status,obj):
         b=json.dumps(obj,ensure_ascii=False).encode()
-        self.send_response(status)
-        self.send_header("Content-Type","application/json; charset=utf-8")
-        self.send_header("Content-Length",str(len(b)))
-        self.cors();self.end_headers();self.wfile.write(b)
+        try:
+            self.send_response(status)
+            self.send_header("Content-Type","application/json; charset=utf-8")
+            self.send_header("Content-Length",str(len(b)))
+            self.cors();self.end_headers();self.wfile.write(b)
+        except (BrokenPipeError,ConnectionResetError):
+            # Health-/UI-Clients dürfen kurze Requests abbrechen, ohne dass ein
+            # harmloser Disconnect als Engine-Fehler im Startprotokoll landet.
+            return
 
     def do_OPTIONS(self):
         if not self.remote_authorized():
@@ -7124,7 +7129,11 @@ class H(BaseHTTPRequestHandler):
 
         p=urlparse(self.path).path
         if p=="/health":
-            st=get_status()
+            # Start-Handshake muss garantiert leichtgewichtig bleiben. get_status()
+            # enthält große Aussprache-/Learning-Listen und ist für /status gedacht,
+            # nicht für die mehrfach pro Sekunde laufende Engine-Health-Prüfung.
+            with STATUS_LOCK:
+                st=dict(STATUS)
             ok=REF.exists()
             self.send_json(200,{
                 "ok":ok,

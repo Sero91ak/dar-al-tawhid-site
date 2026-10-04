@@ -327,7 +327,7 @@ if ! /bin/bash -n "$STAGE/update-mac.command"; then
 fi
 
 if ! "$PY" "$STAGE/validate-v2.py"     "$STAGE/pronunciation-rules.json"     "$STAGE/voice-production-profile.json"     "$STAGE/local-engine.py"     "$STAGE/voice-regression-fixtures.json"; then
-  echo "FEHLER: Voice-Studio-2.9.68-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
+  echo "FEHLER: Voice-Studio-$RELEASE_VERSION-Regressionsprüfung fehlgeschlagen. Alte Installation bleibt unverändert."
   exit 1
 fi
 
@@ -347,7 +347,7 @@ for optional in watermark-my-logo-full.png app-icon-512.png; do
 done
 chmod +x "$TARGET/update-mac.command"
 
-echo "Voice Studio 2.9.68 Validierung bestanden. Backup: $BACKUP"
+echo "Voice Studio $RELEASE_VERSION Validierung bestanden. Backup: $BACKUP"
 
 if ! command -v ffmpeg >/dev/null 2>&1 && command -v brew >/dev/null 2>&1; then
   brew install ffmpeg >/dev/null 2>&1 || true
@@ -439,7 +439,8 @@ VOICE_HOME="$HOME/SerhatVoice"
 VENV="$VOICE_HOME/.venv"
 URL="http://127.0.0.1:8787/studio/"
 HEALTH="http://127.0.0.1:8787/health"
-EXPECTED_ENGINE_VERSION="2.9.68"
+EXPECTED_ENGINE_VERSION="$(/usr/bin/sed -n 's/^ENGINE_VERSION="\([^"]*\)".*/\1/p' "$TARGET/local-engine.py" | /usr/bin/head -n 1)"
+[ -n "$EXPECTED_ENGINE_VERSION" ] || EXPECTED_ENGINE_VERSION="unknown"
 PAIR_TOKEN_FILE="$TARGET/ipad-pairing-token.txt"
 PAIR_TOKEN=""
 [ -s "$PAIR_TOKEN_FILE" ] && PAIR_TOKEN="$(tr -d '\r\n ' < "$PAIR_TOKEN_FILE")"
@@ -545,8 +546,8 @@ cat > "$PLIST" <<'PLIST'
   <key>CFBundleName</key><string>DĀR Voice Studio</string>
   <key>CFBundleDisplayName</key><string>DĀR Voice Studio</string>
   <key>CFBundleIdentifier</key><string>de.dar-al-tawhid.voice-studio</string>
-  <key>CFBundleVersion</key><string>2.9.68</string>
-  <key>CFBundleShortVersionString</key><string>2.9.68</string>
+  <key>CFBundleVersion</key><string>0.0.0</string>
+  <key>CFBundleShortVersionString</key><string>0.0.0</string>
   <key>CFBundlePackageType</key><string>APPL</string>
   <key>CFBundleExecutable</key><string>DARVoiceStudio</string>
   <key>CFBundleIconFile</key><string>AppIcon.icns</string>
@@ -568,8 +569,10 @@ cat > "$PLIST" <<'PLIST'
 </plist>
 PLIST
 /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable $BUNDLE_EXECUTABLE" "$PLIST"
-/usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio 2.9.68 · Stable Single Engine" "$PLIST" 2>/dev/null || \
-  /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio 2.9.68 · Stable Single Engine'" "$PLIST"
+/usr/libexec/PlistBuddy -c "Set :CFBundleVersion $RELEASE_VERSION" "$PLIST"
+/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $RELEASE_VERSION" "$PLIST"
+/usr/libexec/PlistBuddy -c "Set :CFBundleGetInfoString DĀR Voice Studio $RELEASE_VERSION · Stable Single Engine" "$PLIST" 2>/dev/null || \
+  /usr/libexec/PlistBuddy -c "Add :CFBundleGetInfoString string 'DĀR Voice Studio $RELEASE_VERSION · Stable Single Engine'" "$PLIST"
 /usr/bin/plutil -lint "$PLIST" >/dev/null
 
 if [ ! -s "$RESOURCES/VoiceStudioIcon.png" ]; then
@@ -623,7 +626,7 @@ LSREGISTER="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchS
 sleep 1
 
 # App bei LaunchServices registrieren, dann öffnen.
-say_status "DĀR Voice Studio 2.9.68 ist installiert."
+say_status "DĀR Voice Studio $RELEASE_VERSION ist installiert."
 if ! open -n "$APP"; then
   echo "LaunchServices konnte die App nicht öffnen – starte Bundle-Executable direkt."
   "$APP/Contents/MacOS/$BUNDLE_EXECUTABLE" >/dev/null 2>&1 &
