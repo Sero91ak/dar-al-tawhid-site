@@ -41,15 +41,15 @@ const PRECACHE=[
   "/kids/assets/sahaba-mubashshirun/sad.jpg",
   "/kids/assets/sahaba-mubashshirun/said.jpg",
   "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
-  "/kids/mubashshirun-stories.css?v=12",
-  "/kids/mubashshirun-stories.js?v=12",
-  "/kids/story-follow-reader.css?v=1",
-  "/kids/story-follow-reader.js?v=1",
+  "/kids/mubashshirun-stories.css?v=13",
+  "/kids/mubashshirun-stories.js?v=13",
+  "/kids/story-follow-reader.css?v=2",
+  "/kids/story-follow-reader.js?v=2",\n  "/kids/content-studio-feed.js?v=studio2",
   "/kids/kids-age-typography.css?v=4",
   "/kids/kids-age-typography.js?v=3",
-  "/kids/prophet-stories.css?v=25",
+  "/kids/prophet-stories.css?v=26",
   "/kids/stories-final-v1088.css?v=1088",
-  "/kids/prophet-stories.js?v=25",
+  "/kids/prophet-stories.js?v=26",
   "/kids/assets/prophet-scenes/library.webp",
   "/kids/assets/prophet-scenes/garden.webp",
   "/kids/assets/prophet-scenes/ocean.webp",
@@ -145,7 +145,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"||url.pathname==="/kids/stories-final-v1088.css"||url.pathname==="/kids/mubashshirun-stories.js"||url.pathname==="/kids/mubashshirun-stories.css"||url.pathname==="/kids/story-follow-reader.js"||url.pathname==="/kids/story-follow-reader.css"){
+  if(url.pathname==="/kids/version.json"||url.pathname==="/kids/prophet-stories.js"||url.pathname==="/kids/prophet-stories.css"||url.pathname==="/kids/stories-final-v1088.css"||url.pathname==="/kids/mubashshirun-stories.js"||url.pathname==="/kids/mubashshirun-stories.css"||url.pathname==="/kids/story-follow-reader.js"||url.pathname==="/kids/story-follow-reader.css"||url.pathname==="/kids/content-studio-feed.js"){
     event.respondWith(networkFirst(request));
     return;
   }
