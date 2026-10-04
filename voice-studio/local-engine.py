@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.77"
+ENGINE_VERSION="2.9.78"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -1326,6 +1326,67 @@ def pronunciation_candidates(query:str,limit:int=12):
     ))
     return out[:max(1,min(25,int(limit or 12)))]
 
+def pronunciation_catalog(query:str="",offset:int=0,limit:int=80):
+    """Schnelle, paginierte Gesamtliste des installierten Aussprachewortschatzes.
+
+    Die MAX-MASTER-Einträge werden nicht als riesiges JSON auf einmal an
+    iPhone/iPad geschickt. Die komplette Bibliothek bleibt lokal verfügbar und
+    wird alphabetisch in kleinen Seiten geladen.
+    """
+    needle=normalize_lookup(query)
+    offset=max(0,int(offset or 0))
+    limit=max(20,min(160,int(limit or 80)))
+    rows=[]
+    seen=set()
+    confirmed=confirmed_audio_lock_keys()
+    for source,r in combined_search_rules():
+        canonical=str(r.get("canonical") or r.get("string_to_replace") or "").strip()
+        tts=str(r.get("tts_text") or r.get("alias") or canonical).strip()
+        if not canonical or not tts:
+            continue
+        key=(normalize_lookup(canonical),tts,str(r.get("tts_language") or ""))
+        if key in seen:
+            continue
+        if needle:
+            hay=" ".join([
+                normalize_lookup(canonical),
+                normalize_lookup(r.get("string_to_replace","")),
+                normalize_lookup(r.get("alias","")),
+                normalize_lookup(tts),
+            ])
+            if needle not in hay:
+                continue
+        seen.add(key)
+        lang=str(r.get("tts_language") or ("ar" if re.search(r"[\u0600-\u06ff]",tts) else "de"))
+        lock_key=str(r.get("audio_lock_key") or "")
+        rows.append({
+            "source":source,
+            "input":str(r.get("string_to_replace") or canonical),
+            "canonical":canonical,
+            "alias":str(r.get("alias") or ""),
+            "ttsText":tts,
+            "ttsLanguage":lang if lang in ("ar","de") else "de",
+            "category":str(r.get("category") or ""),
+            "audioLockKey":lock_key,
+            "voiceLock":str(r.get("voice_lock") or ""),
+            "confirmed":bool(
+                str(r.get("voice_lock") or "").upper()=="MASTER"
+                or (lock_key and lock_key in confirmed)
+            ),
+        })
+    rows.sort(key=lambda x:(normalize_lookup(x.get("canonical","")),normalize_lookup(x.get("ttsText",""))))
+    total=len(rows)
+    page=rows[offset:offset+limit]
+    return {
+        "ok":True,
+        "query":str(query or ""),
+        "total":total,
+        "offset":offset,
+        "limit":limit,
+        "hasMore":offset+len(page)<total,
+        "items":page,
+    }
+
 def _download_json(url:str,timeout:int=15):
     req=urllib.request.Request(url,headers={"User-Agent":"DARVoiceStudio/2.7"})
     with urllib.request.urlopen(req,timeout=timeout) as resp:
@@ -1384,6 +1445,35 @@ def learning_lock_key(term:str,existing_key:str=""):
         return existing_key
     digest=hashlib.sha1(normalize_lookup(term).encode("utf-8")).hexdigest()[:12]
     return "learned_"+digest
+
+def render_learning_preview_fast(model,text:str,language_id:str,mode:str):
+    """Niedriglatenz-Pfad für einzelne Wörter und kurze Phrasen."""
+    if getattr(model,"_dar_backend","torch")!="mlx":
+        return render_with_model(model,text,language_id,mode)
+    import numpy as np, torch
+    ref=reference_for_language(language_id)
+    p=prosody_settings(mode,language_id,text)
+    chars=len(re.sub(r"\s+","",str(text or "")))
+    budget=max(64,min(190,int(54+chars*2.6)))
+    timeout_s=max(7.0,min(15.0,5.5+chars*0.24))
+    msg=_mlx_request({
+        "op":"render",
+        "ref_path":str(ref),
+        "text":str(text),
+        "language_id":str(language_id),
+        "exaggeration":float(p["exaggeration"]),
+        "cfg_weight":float(p["cfg_weight"]),
+        "temperature":float(p["temperature"]),
+        "max_tokens":int(budget),
+    },timeout_s=timeout_s,heartbeat=False)
+    arr=np.frombuffer(msg.get("audio",b""),dtype=np.float32).copy()
+    expected=int(msg.get("samples",arr.size) or arr.size)
+    if arr.size!=expected or arr.size==0:
+        raise RuntimeError("Schnelltest lieferte kein vollständiges Audio.")
+    render_learning_preview_fast._last_backend_meta=dict(msg.get("meta") or {})
+    return torch.from_numpy(arr).view(1,-1)
+
+render_learning_preview_fast._last_backend_meta={}
 
 def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_id:str="",variant:int=0):
     term=str(term or "").strip()
@@ -1456,7 +1546,13 @@ def create_learning_preview(term:str,tts_text:str="",canonical:str="",language_i
         for attempt in range(2):
             try:
                 torch.manual_seed(seed+attempt*97)
-                wav=render_with_model(model,effective_tts,requested,mode)
+                # Erster Versuch nutzt den Low-Latency-Kurzpfad; nur bei
+                # technischer QA-Ablehnung fällt Versuch 2 auf Normalrender zurück.
+                wav=(
+                    render_learning_preview_fast(model,effective_tts,requested,mode)
+                    if attempt==0 else
+                    render_with_model(model,effective_tts,requested,mode)
+                )
                 wav=trim_segment_edges(
                     wav,sample_rate,
                     aggressive=True,
@@ -6400,14 +6496,19 @@ def app_delivery_audio(src:Path):
         pass
     return dst
 
-def postprocess(src:Path):
+def postprocess(src:Path,fast:bool=False):
     ffmpeg=find_ffmpeg()
     if not ffmpeg:
         print("[DĀR Voice] ffmpeg nicht gefunden – liefere ungemasterte WAV aus.",flush=True)
         return src
 
     dst=src.with_name(src.stem+"_master.wav")
-    filt="highpass=f=65,acompressor=threshold=-18dB:ratio=2.2:attack=15:release=180,alimiter=limit=0.95,loudnorm=I=-16:TP=-1.5:LRA=7"
+    # Interaktive Erzeugung spart den zweiten Loudness-Analysepass.
+    filt=(
+        "highpass=f=65,acompressor=threshold=-18dB:ratio=2.2:attack=15:release=180,alimiter=limit=0.95"
+        if fast else
+        "highpass=f=65,acompressor=threshold=-18dB:ratio=2.2:attack=15:release=180,alimiter=limit=0.95,loudnorm=I=-16:TP=-1.5:LRA=7"
+    )
     try:
         p=subprocess.run([ffmpeg,"-y","-i",str(src),"-af",filt,str(dst)],capture_output=True,text=True)
     except (FileNotFoundError,OSError) as e:
@@ -6420,7 +6521,7 @@ def postprocess(src:Path):
         print("[DĀR Voice] ffmpeg fallback:",p.stderr[-1200:],flush=True)
     return src
 
-def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free_pronunciation:bool=False):
+def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free_pronunciation:bool=False,interactive_fast:bool=False):
     # Produktionsmodus bleibt unverändert. Der Bereich "Freie Stimme" nutzt
     # dieselbe Serhat-Engine, aber ohne Kids-/Content-Pflichten und ohne neue Locks.
     strict_prophet_story=bool(
@@ -6516,6 +6617,15 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
     else:
         synthesis_text,plan,flow_preflight=prepare_flow_text(
             text,speak,lambda value: build_render_plan(value,doc_mode)
+        )
+
+    # 2.9.78 Interactive Fast Path: weniger Modellaufrufe, arabische
+    # LOCKED-Formen und Sprachgrenzen bleiben unangetastet.
+    if interactive_fast and len(plan)>1:
+        fast_chars=280 if doc_mode=="kids_story" else 225
+        fast_sentences=3 if doc_mode=="kids_story" else 2
+        plan=_coalesce_kids_story_plan(
+            plan,max_chars=fast_chars,max_sentences=fast_sentences
         )
 
     # 2.9.63: "free_mode" bedeutet NICHT automatisch Hintergrundarbeit.
@@ -6980,7 +7090,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             raise RuntimeError("WAV-Datei wurde nicht korrekt geschrieben.")
 
         set_status(progress=95,message="Audio-Mastering läuft …")
-        out=postprocess(raw)
+        out=postprocess(raw,fast=interactive_fast)
         cleanup_render_cache()
         set_status(
             render_state="done",
@@ -8453,6 +8563,15 @@ class H(BaseHTTPRequestHandler):
                     "prophets":sum(1 for e in MASTER_ENTRIES if e.get("personType")=="prophet"),
                 }
             })
+        elif p=="/learning/catalog":
+            try:
+                qs=parse_qs(urlparse(self.path).query)
+                query=str((qs.get("q") or [""])[0]).strip()
+                offset=int((qs.get("offset") or ["0"])[0] or 0)
+                limit=int((qs.get("limit") or ["80"])[0] or 80)
+                self.send_json(200,pronunciation_catalog(query,offset,limit))
+            except Exception as e:
+                self.send_json(400,{"ok":False,"error":str(e)})
         elif p=="/learning/state":
             self.send_json(200,{"ok":True,**learning_state()})
         elif p=="/alphabet/state":
@@ -8891,7 +9010,8 @@ class H(BaseHTTPRequestHandler):
                 out=generate(
                     text,prepared,style,
                     free_mode=free_mode,
-                    free_pronunciation=free_pronunciation
+                    free_pronunciation=free_pronunciation,
+                    interactive_fast=bool(data.get("interactiveFast",True))
                 )
                 record_mobile_generation(out,text,style,free_mode)
                 b=out.read_bytes()
