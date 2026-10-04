@@ -188,6 +188,31 @@ if ! normalize_contents_json_file "$STAGE/quiz-kids.json" '"items"'; then
   echo "FEHLER: Kids-Quizdaten konnten nicht korrekt aus GitHub geladen werden."
   exit 1
 fi
+download_repo_file "kids/data/owner-voice-audio.json" "$STAGE/owner-voice-audio.json"
+if ! normalize_contents_json_file "$STAGE/owner-voice-audio.json" '"entries"'; then
+  echo "FEHLER: Kids-Owner-Voice-Manifest konnte nicht korrekt aus GitHub geladen werden."
+  exit 1
+fi
+download_repo_file "kids/data/dua-kids.json" "$STAGE/dua-kids.json"
+if ! normalize_contents_json_file "$STAGE/dua-kids.json" '"items"'; then
+  echo "FEHLER: Kids-Duʿāʾ-Daten konnten nicht korrekt aus GitHub geladen werden."
+  exit 1
+fi
+download_repo_file "kids/data/stories-authentic.json" "$STAGE/stories-authentic.json"
+if ! normalize_contents_json_file "$STAGE/stories-authentic.json" '"items"'; then
+  echo "FEHLER: Kids-Kurzgeschichten konnten nicht korrekt aus GitHub geladen werden."
+  exit 1
+fi
+download_repo_file "kids/data/short-stories-voice.json" "$STAGE/short-stories-voice.json"
+if ! normalize_contents_json_file "$STAGE/short-stories-voice.json" '"items"'; then
+  echo "FEHLER: Kids-Story-Voice-Index konnte nicht korrekt aus GitHub geladen werden."
+  exit 1
+fi
+download_repo_file "kids/data/verified-content.json" "$STAGE/verified-content.json"
+if ! normalize_contents_json_file "$STAGE/verified-content.json" '"schemaVersion"'; then
+  echo "FEHLER: Verifizierte Kids-Wissensinhalte konnten nicht korrekt aus GitHub geladen werden."
+  exit 1
+fi
 download_repo_file "kids/data/prophet-stories.json" "$STAGE/prophet-stories.json"
 if ! normalize_contents_json_file "$STAGE/prophet-stories.json" '"voiceWorkflow"'; then
   echo "FEHLER: Vorbereitete Prophetengeschichten konnten nicht korrekt aus GitHub geladen werden."
@@ -211,7 +236,7 @@ download_repo_file "scripts/voice-studio/validate-v2.py" "$STAGE/validate-v2.py"
 download_optional_repo_file "watermark-my-logo-full.png" "$STAGE/watermark-my-logo-full.png"
 download_optional_repo_file "app-icon-512.png" "$STAGE/app-icon-512.png"
 
-for required in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json story-reference-muhammad-2026-10-04.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for required in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json owner-voice-audio.json dua-kids.json stories-authentic.json short-stories-voice.json verified-content.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json story-reference-muhammad-2026-10-04.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   if [ ! -s "$STAGE/$required" ]; then
     echo "FEHLER: Update-Datei fehlt oder ist leer: $required"
     exit 1
@@ -338,11 +363,11 @@ fi
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP="$BACKUPS/$STAMP"
 mkdir -p "$BACKUP"
-for old in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json story-reference-muhammad-2026-10-04.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for old in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json owner-voice-audio.json dua-kids.json stories-authentic.json short-stories-voice.json verified-content.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json story-reference-muhammad-2026-10-04.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   [ -f "$TARGET/$old" ] && cp "$TARGET/$old" "$BACKUP/$old" || true
 done
 
-for fresh in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
+for fresh in local-engine.py speech_flow.py studio.html mobile.html content-studio.js mubashshirun-pack.js alphabet-audio-studio.js alphabet-audio.json quiz-kids.json owner-voice-audio.json dua-kids.json stories-authentic.json short-stories-voice.json verified-content.json prophet-stories.json mubashshirun-stories.json VoiceStudioApp.swift update-mac.command voice-studio-icon.png pronunciation-rules.json DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls voice-production-profile.json islamic-master-library.json voice-regression-fixtures.json validate-v2.py; do
   mv "$STAGE/$fresh" "$TARGET/$fresh"
 done
 for optional in watermark-my-logo-full.png app-icon-512.png; do
