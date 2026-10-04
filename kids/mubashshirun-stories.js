@@ -230,8 +230,8 @@ function ensureUi(){
   installSwipeBack($("#msScroll"),closeStory);
   $("#msPlay").addEventListener("click",toggleAudio);
   $("#msFollowOpen")?.addEventListener("click",()=>{
-    if(isAudioOnlyAge()&&typeof followReader?.openReadAlong==="function")followReader.openReadAlong();
-    else followReader?.open();
+    if(isAudioOnlyAge())return;
+    followReader?.open();
   });
   $("#msProgressTrack")?.addEventListener("click",seekFromProgress);
   $("#msProgressTrack")?.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();seekBy(e.key==="ArrowLeft"?-15:15)}});
@@ -351,16 +351,16 @@ function applyMode(){
     if(read)read.hidden=true;
     if(player)player.hidden=false;
     if(follow){
-      follow.hidden=false;
-      follow.textContent="Mitlesen";
-      follow.setAttribute("aria-label","Mitlesen für Erwachsene öffnen");
+      follow.hidden=true;
+      follow.setAttribute("aria-hidden","true");
+      follow.tabIndex=-1;
     }
     return;
   }
   const m=mode();
   if(read)read.hidden=m==="listen";
   if(player)player.hidden=m==="read";
-  if(follow){follow.hidden=false;follow.textContent="Mitlesen öffnen";follow.setAttribute("aria-label","Mitlesen öffnen")}
+  if(follow){follow.hidden=false;follow.removeAttribute("aria-hidden");follow.tabIndex=0;follow.textContent="Mitlesen öffnen";follow.setAttribute("aria-label","Mitlesen öffnen")}
 }
 function resetAudio(){
   stopAudio();
