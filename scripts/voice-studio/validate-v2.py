@@ -506,8 +506,17 @@ def main():
     if not studio_js.exists():
         fail("content-studio.js missing next to local engine or in repository")
     studio_source=studio_js.read_text(encoding="utf-8")
-    for required in ("effectiveKind()","effectiveTarget()","quizDraft","gameDraft","checkpointPackage","productionPhase","generateCover({internal:true})","sendPush:effectiveTarget()===\"kids\""):
+    for required in (
+        "effectiveKind()","effectiveTarget()","quizDraft","gameDraft","checkpointPackage","productionPhase",
+        "generateCover({internal:true})","sendPush:effectiveTarget()===\"kids\"",
+        'data-cs-kind="dua"','data-cs-kind="narration"',"handleDirectAudioFile","publishDirectKids",
+        "manual-owner-upload","audioAssetText","directAudioReadyForCurrentText"
+    ):
         if required not in studio_source: fail("content studio workflow marker missing: "+required)
+
+    engine_source=Path(engine_path).read_text(encoding="utf-8")
+    for required in ("KNOWN_RULE_ALIAS_INDEX","knownRuleAliases","max-master-pls-v1","fastKnownPath"):
+        if required not in engine_source: fail("fast-known pronunciation marker missing: "+required)
 
     integration_paths=[]
     kids_admin_js=root/"cloudflare/kids-content-admin.js"
