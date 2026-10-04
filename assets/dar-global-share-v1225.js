@@ -215,8 +215,26 @@
     try{
       var h=window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darShareImage;
       if(h&&typeof h.postMessage==="function"){
-        var fr=new FileReader();var dataUrl=await new Promise(function(resolve,reject){fr.onload=function(){resolve(String(fr.result||""))};fr.onerror=reject;fr.readAsDataURL(files[0])});
-        h.postMessage({dataUrl:dataUrl,filename:files[0].name,title:data.title+" · DĀR AL TAWḤĪD"});return true;
+        /* GLOBAL_SHARE_MULTI_NATIVE_V1226 */
+        var dataUrls=[];
+        for(var ni=0;ni<files.length;ni++){
+          var fr=new FileReader();
+          var dataUrl=await new Promise(function(resolve,reject){
+            fr.onload=function(){resolve(String(fr.result||""))};
+            fr.onerror=reject;
+            fr.readAsDataURL(files[ni]);
+          });
+          dataUrls.push(dataUrl);
+        }
+        h.postMessage({
+          dataUrl:dataUrls[0]||"",
+          dataUrls:dataUrls,
+          filename:files[0].name,
+          filenames:files.map(function(f){return f.name}),
+          title:data.title+" · DĀR AL TAWḤĪD",
+          text:"dar-al-tawhid.de"
+        });
+        return true;
       }
     }catch(e2){}
     files.forEach(function(file,idx){setTimeout(function(){var u=URL.createObjectURL(file),a=document.createElement("a");a.href=u;a.download=file.name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},30000)},idx*180)});
