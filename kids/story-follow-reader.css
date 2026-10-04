@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD Kids — shared story follow-along reader v1 */
+/* DĀR AL TAWḤĪD Kids — shared story follow-along reader v2 */
 .kids-follow-reader{display:none;position:fixed;z-index:280;inset:0;align-items:flex-end;justify-content:center;padding:0;background:rgba(2,13,21,.66);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
 .kids-follow-reader.open{display:flex}
 .kfr-sheet{width:min(820px,100%);max-height:min(76dvh,760px);display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(239,203,121,.24);border-bottom:0;border-radius:30px 30px 0 0;background:linear-gradient(180deg,#0a2b3a 0%,#071d2a 100%);box-shadow:0 -24px 70px rgba(0,0,0,.36);color:#f7f2e9;padding-bottom:env(safe-area-inset-bottom)}
@@ -27,3 +27,30 @@ html.kids-follow-reader-open{overflow:hidden!important}
   .kfr-read{padding:20px 24px 34px}.kfr-read p{font-size:max(var(--kids-body,18px),18px)}
 }
 @media(prefers-reduced-motion:reduce){.kfr-read p{transition:none}}
+
+
+/* v2 · audiobook resume, visible timing and focus-reader priority */
+.kids-follow-reader{z-index:30050!important}
+.kfr-head-copy{min-width:0}
+.kfr-subtitle{display:block;margin-top:3px;font-size:12px;line-height:1.3;color:rgba(255,255,255,.58);font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kfr-close{width:auto;min-width:48px;padding:0 13px;gap:8px;font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.kfr-close span{display:inline}.kfr-close b{font-size:24px;line-height:1;font-weight:500}
+.kfr-controls{grid-template-columns:minmax(112px,1fr) auto auto;gap:9px 10px}
+.kfr-play{min-width:0;width:100%}
+.kfr-restart{min-height:50px;border:1px solid rgba(255,255,255,.10);border-radius:16px;background:rgba(255,255,255,.045);color:#d7e3e4;font-size:13px;font-weight:900;padding:0 14px;cursor:pointer}
+.kfr-time{justify-content:flex-end;align-items:center;white-space:nowrap;font-variant-numeric:tabular-nums;font-size:13px}
+.kfr-time-sep{opacity:.42}
+.kfr-progress{grid-column:1/-1;appearance:none;width:100%;padding:0;border:0;height:10px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden;cursor:pointer;position:relative}
+.kfr-progress:focus-visible{outline:2px solid rgba(239,203,121,.7);outline-offset:4px}
+.kfr-help{grid-column:1/-1}
+.ps-player-time,.ms-player-time,.studio-story-time{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:9px;color:rgba(255,255,255,.68);font-size:13px;line-height:1.2;font-weight:850;font-variant-numeric:tabular-nums}
+.ps-player-time strong,.ms-player-time strong,.studio-story-time strong{color:#f3d487;font-weight:950}
+.ps-follow-open,.ms-follow-open,.studio-follow-open{margin-top:10px;width:100%;min-height:46px;border:1px solid rgba(126,208,198,.22);border-radius:15px;background:rgba(126,208,198,.055);color:#dff7f3;font:inherit;font-size:13px;font-weight:900;cursor:pointer}
+.ps-progress,.ms-progress{cursor:pointer;touch-action:manipulation}
+.ps-progress:focus-visible,.ms-progress:focus-visible{outline:2px solid rgba(239,203,121,.64);outline-offset:4px}
+@media(max-width:620px){
+  .kfr-controls{grid-template-columns:1fr auto}
+  .kfr-time{grid-column:1/-1;justify-content:center;padding-top:1px}
+  .kfr-close span{display:none}
+  .kfr-close{width:48px;min-width:48px;padding:0}
+}
