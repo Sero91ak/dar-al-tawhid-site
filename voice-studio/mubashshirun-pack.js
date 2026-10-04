@@ -65,7 +65,7 @@ function ensurePanel(){
   const host=$(".editor-panel");if(!host||$("#mubVoicePack"))return;
   const p=document.createElement("section");p.id="mubVoicePack";
   p.innerHTML=
-    '<div class="mvp-head"><div><div class="mvp-kicker">Kids · al-ʿAšarah al-Mubaššarūn</div><h2>Die zehn Mubaschschirūn</h2><div class="mvp-sub">Neue Lebensgeschichten sind fertig vorbereitet. Ṣaḥābī wählen · Altersfassung laden · Fuṣḥā prüfen · Serhat-Audio neu erzeugen.</div></div>'+
+    '<div class="mvp-head"><div><div class="mvp-kicker">Kids · al-ʿAšarah al-Mubaššarūn</div><h2>Die zehn Mubaschschirūn</h2><div class="mvp-sub">Eine vollständige Master-Erzählung pro Ṣaḥābī. Alterswahl ändert nur die Kids-Darstellung, niemals den Story-Inhalt.</div></div>'+
     '<div class="mvp-age"><button type="button" data-mvp-age="4-5">4–5</button><button type="button" data-mvp-age="6-8" class="active">6–8</button><button type="button" data-mvp-age="9-10">9–10</button></div></div>'+
     '<div id="mvpGrid" class="mvp-grid"><div class="notice">Lade 10 Ṣaḥābah …</div></div>'+
     '<div id="mvpSelected" class="mvp-selected" hidden></div>'+
@@ -89,7 +89,7 @@ function openPack(){
   setTimeout(()=>$("#mubVoicePack")?.scrollIntoView({block:"start",behavior:"smooth"}),20);
 }
 function closePack(){setVisible(false)}
-function scriptFor(item){return String(item?.scripts?.[state.age]||item?.scripts?.["6-8"]||"").trim()}
+function scriptFor(item){return String(item?.scripts?.["9-10"]||item?.scripts?.["6-8"]||item?.scripts?.["4-5"]||"").trim()}
 function current(){return state.items.find(x=>x.id===state.selected)||null}
 function render(){
   ensurePanel();
@@ -107,7 +107,7 @@ function render(){
     '<strong>'+esc(it.name)+' · '+(state.age==="4-5"?"4–5 Jahre":state.age==="9-10"?"9–10 Jahre":"6–8 Jahre")+'</strong>'+
     '<div class="mvp-source">'+esc((it.sourceRefs||[]).join(" · "))+'</div>'+
     '<div class="mvp-actions"><button id="mvpLoad" class="btn secondary" type="button">Text in Voice laden</button><button id="mvpUpload" class="btn secondary" type="button">'+(state.uploading?'Datei wird geladen …':'Audio-Datei hochladen')+'</button><button id="mvpGenerate" class="btn primary" type="button">Laden &amp; Audio erzeugen</button><button id="mvpPublish" class="btn secondary" type="button">Geprüft in Kids übernehmen</button></div>'+
-    '<div id="mvpReady" class="mvp-ready">Der Story-Text ist im großen Textfeld direkt bearbeitbar. „Audio-Datei hochladen“ verbindet genau diesen Text mit '+esc(it.name)+' · Alter '+esc(state.age)+'.</div>';
+    '<div id="mvpReady" class="mvp-ready">Der vollständige Master-Storytext ist im großen Textfeld direkt bearbeitbar. „Audio-Datei hochladen“ verbindet diesen Master mit '+esc(it.name)+' · Alter '+esc(state.age)+'.</div>';
   $("#mvpLoad")?.addEventListener("click",()=>loadSelected(true));
   $("#mvpUpload")?.addEventListener("click",()=>{
     const input=$("#mvpAudioUploadInput");
