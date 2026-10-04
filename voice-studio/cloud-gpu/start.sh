@@ -15,8 +15,13 @@ export SERHAT_VOICE_REF="${SERHAT_VOICE_REF:-/root/SerhatVoice/Serhat_Adobe_MAST
 export SERHAT_VOICE_REF_AR="${SERHAT_VOICE_REF_AR:-/root/SerhatVoice/Serhat_AR_MASTER.wav}"
 
 if [[ ! -s "$SERHAT_VOICE_REF" ]]; then
-  echo "FEHLER: Deutsche Voice-Referenz fehlt: $SERHAT_VOICE_REF" >&2
-  exit 64
+  if [[ -s "/root/SerhatVoice/Serhat_FINAL_REF.wav" ]]; then
+    export SERHAT_VOICE_REF="/root/SerhatVoice/Serhat_FINAL_REF.wav"
+    echo "DĀR Voice: Serhat_FINAL_REF.wav wird als deutsche Master-Referenz verwendet."
+  else
+    echo "FEHLER: Deutsche Voice-Referenz fehlt: $SERHAT_VOICE_REF" >&2
+    exit 64
+  fi
 fi
 
 if [[ ! -s "$SERHAT_VOICE_REF_AR" ]]; then
