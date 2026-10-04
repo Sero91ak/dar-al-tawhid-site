@@ -2439,19 +2439,19 @@
 
   function libraryHero(title, subtitle, mode, backValue, eyebrow, statLeft, statRight) {
     var back = backValue != null
-      ? '<button type="button" class="frauen-library-back" data-nav="frauen" data-value="' + esc(backValue) + '" aria-label="Zurück"><span aria-hidden="true">‹</span><b>Zurück</b></button>'
+      ? '<button type="button" class="frauen-library-back" data-nav="frauen" data-value="' + esc(backValue) + '" aria-label="Zurück" style="background:rgba(255,250,242,.97)!important;border-color:rgba(255,255,255,.78)!important;color:#17231e!important;-webkit-text-fill-color:#17231e!important;text-shadow:none!important"><span aria-hidden="true" style="color:#17231e!important;-webkit-text-fill-color:#17231e!important;text-shadow:none!important;opacity:1!important">‹</span><b style="color:#17231e!important;-webkit-text-fill-color:#17231e!important;text-shadow:none!important;opacity:1!important">Zurück</b></button>'
       : "";
     return (
-      '<section class="frauen-library-hero frauen-library-hero--' + esc(mode || "hub") + '">' +
+      '<section class="frauen-library-hero frauen-library-hero--' + esc(mode || "hub") + '" data-hero-readable="true">' +
         '<div class="frauen-library-hero__shade" aria-hidden="true"></div>' +
-        '<div class="frauen-library-hero__content">' +
+        '<div class="frauen-library-hero__content" style="opacity:1!important;filter:none!important;mix-blend-mode:normal!important">' +
           back +
-          '<p class="frauen-library-hero__eyebrow">' + esc(eyebrow || "DĀR AL TAWḤĪD · WISSENSBIBLIOTHEK") + '</p>' +
-          '<h2>' + esc(title) + '</h2>' +
-          '<p class="frauen-library-hero__subtitle">' + esc(subtitle || "") + '</p>' +
+          '<p class="frauen-library-hero__eyebrow" style="color:#f0d896!important;-webkit-text-fill-color:#f0d896!important;opacity:1!important;text-shadow:0 2px 10px rgba(0,0,0,.78)!important">' + esc(eyebrow || "DĀR AL TAWḤĪD · WISSENSBIBLIOTHEK") + '</p>' +
+          '<h2 style="color:#fffaf0!important;-webkit-text-fill-color:#fffaf0!important;opacity:1!important;text-shadow:0 3px 16px rgba(0,0,0,.76)!important">' + esc(title) + '</h2>' +
+          '<p class="frauen-library-hero__subtitle" style="color:rgba(255,250,240,.98)!important;-webkit-text-fill-color:rgba(255,250,240,.98)!important;opacity:1!important;text-shadow:0 2px 12px rgba(0,0,0,.74)!important">' + esc(subtitle || "") + '</p>' +
           '<div class="frauen-library-hero__stats">' +
-            (statLeft ? '<span>' + esc(statLeft) + '</span>' : "") +
-            (statRight ? '<span>' + esc(statRight) + '</span>' : "") +
+            (statLeft ? '<span style="color:#fff1c8!important;-webkit-text-fill-color:#fff1c8!important;opacity:1!important;background:rgba(4,18,17,.64)!important;border-color:rgba(239,214,151,.52)!important;text-shadow:0 1px 7px rgba(0,0,0,.62)!important">' + esc(statLeft) + '</span>' : "") +
+            (statRight ? '<span style="color:#fff1c8!important;-webkit-text-fill-color:#fff1c8!important;opacity:1!important;background:rgba(4,18,17,.64)!important;border-color:rgba(239,214,151,.52)!important;text-shadow:0 1px 7px rgba(0,0,0,.62)!important">' + esc(statRight) + '</span>' : "") +
           '</div>' +
         '</div>' +
       '</section>'
