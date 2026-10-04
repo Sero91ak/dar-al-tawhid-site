@@ -372,8 +372,8 @@ function create(options){
     postNativeNowPlaying(nativePayload(false),true);
     updatePositionState();
   }
-  function open(){
-    const c=content();
+  function openWithContent(value){
+    const c=value&&typeof value==="object"?value:content();
     if(c.text!=null)setContent(c);
     root.classList.add("open");
     root.removeAttribute("aria-hidden");
@@ -381,6 +381,11 @@ function create(options){
     document.documentElement.classList.add("kids-follow-reader-open");
     sync(true);
     setTimeout(()=>playEl?.focus(),0);
+  }
+  function open(){openWithContent(content())}
+  function openReadAlong(){
+    const c=Object.assign({},content(),{audioOnly:false,adultCompanion:true});
+    openWithContent(c);
   }
   function close(){
     persist(true);
@@ -418,7 +423,7 @@ function create(options){
 
   setContent(content());
   return {
-    open,close,isOpen,setContent,sync,persist,restore,clearProgress,
+    open,openReadAlong,close,isOpen,setContent,sync,persist,restore,clearProgress,
     activateMediaSession,
     formatTime,
     getSavedProgress:readProgress
