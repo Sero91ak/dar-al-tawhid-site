@@ -50,7 +50,16 @@ try:
     PORT=int(os.environ.get("DAR_VOICE_PORT",os.environ.get("PORT","8787")) or 8787)
 except Exception:
     PORT=8787
-ENGINE_VERSION="2.9.104"
+ENGINE_VERSION="2.9.105"
+
+def version_tuple(value):
+    parts=[]
+    for part in str(value or "").split("."):
+        m=re.match(r"(\d+)",part)
+        parts.append(int(m.group(1)) if m else 0)
+    while len(parts)<3:
+        parts.append(0)
+    return tuple(parts[:4])
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -9479,6 +9488,43 @@ class H(BaseHTTPRequestHandler):
                     "waiting":LEARNING_PREVIEW_WAITING.is_set(),
                     "jobs":len(LEARNING_PREVIEW_JOBS)
                 }
+            })
+        elif p=="/mobile/release":
+            latest=ENGINE_VERSION
+            source="installed"
+            try:
+                req=urllib.request.Request(
+                    "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/version.json?ref=main",
+                    headers={
+                        "Accept":"application/vnd.github.raw+json",
+                        "User-Agent":"DAR-Voice-Mobile-Updater/"+ENGINE_VERSION,
+                        "Cache-Control":"no-cache",
+                    },
+                )
+                with urllib.request.urlopen(req,timeout=8) as response:
+                    raw=response.read()
+                data=json.loads(raw.decode("utf-8"))
+                latest=str(data.get("version") or ENGINE_VERSION).strip() or ENGINE_VERSION
+                source="github"
+            except Exception:
+                try:
+                    req=urllib.request.Request(
+                        "https://dar-al-tawhid.de/voice-studio/version.json?mobile_update="+str(int(time.time())),
+                        headers={"User-Agent":"DAR-Voice-Mobile-Updater/"+ENGINE_VERSION,"Cache-Control":"no-cache"},
+                    )
+                    with urllib.request.urlopen(req,timeout=8) as response:
+                        raw=response.read()
+                    data=json.loads(raw.decode("utf-8"))
+                    latest=str(data.get("version") or ENGINE_VERSION).strip() or ENGINE_VERSION
+                    source="website"
+                except Exception:
+                    pass
+            self.send_json(200,{
+                "ok":True,
+                "current":ENGINE_VERSION,
+                "latest":latest,
+                "updateAvailable":version_tuple(latest)>version_tuple(ENGINE_VERSION),
+                "source":source,
             })
         elif p=="/render-status":
             self.send_json(200,{"ok":True,**render_status_snapshot()})
