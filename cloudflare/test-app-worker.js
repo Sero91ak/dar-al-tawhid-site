@@ -222,6 +222,10 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
 // DAR_QURAN_READER_V1251
+  if (!/quran-learn-v1256\\.css/.test(html)) {
+    html = html.replace(/<\\/head>/i, '<link rel="stylesheet" href="/test/assets/quran-learn-v1256.css?v=1256"><\\/head>');
+  }
+
   if (!/quran-reader-v1251\.css/.test(html)) {
     html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/quran-reader-v1251.css?v=1251"><\/head>');
   }
