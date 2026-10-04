@@ -1,0 +1,80 @@
+name: Configure DĀR Voice GPU DNS
+
+on:
+  workflow_dispatch:
+    inputs:
+      ipv4:
+        description: "Public IPv4 of the DĀR Voice GPU host"
+        required: true
+        type: string
+      hostname:
+        description: "GPU origin hostname"
+        required: true
+        default: "voice-gpu.dar-al-tawhid.de"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  dns:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate inputs
+        env:
+          IPV4: ${{ inputs.ipv4 }}
+          HOSTNAME: ${{ inputs.hostname }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ipaddress, os
+          ip=ipaddress.ip_address(os.environ["IPV4"])
+          if ip.version != 4:
+              raise SystemExit("Only IPv4 is supported for this workflow.")
+          host=os.environ["HOSTNAME"].strip().lower().rstrip(".")
+          if not host.endswith(".dar-al-tawhid.de"):
+              raise SystemExit("Hostname must remain below dar-al-tawhid.de")
+          print("validated",host,ip)
+          PY
+
+      - name: Upsert Cloudflare DNS record
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          IPV4: ${{ inputs.ipv4 }}
+          HOSTNAME: ${{ inputs.hostname }}
+        run: |
+          set -euo pipefail
+          test -n "$CF_TOKEN"
+
+          ZONE_ID="$(curl -fsS             -H "Authorization: Bearer $CF_TOKEN"             -H "Content-Type: application/json"             "https://api.cloudflare.com/client/v4/zones?name=dar-al-tawhid.de&status=active"             | python -c 'import json,sys; d=json.load(sys.stdin); print((d.get("result") or [{}])[0].get("id",""))')"
+          test -n "$ZONE_ID"
+
+          RECORD_ID="$(curl -fsS             -H "Authorization: Bearer $CF_TOKEN"             -H "Content-Type: application/json"             "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?type=A&name=$HOSTNAME"             | python -c 'import json,sys; d=json.load(sys.stdin); print((d.get("result") or [{}])[0].get("id",""))')"
+
+          BODY="$(python - <<'PY'
+          import json, os
+          print(json.dumps({
+              "type":"A",
+              "name":os.environ["HOSTNAME"],
+              "content":os.environ["IPV4"],
+              "ttl":120,
+              "proxied":False,
+              "comment":"DĀR Voice private GPU origin"
+          }))
+          PY
+          )"
+
+          if [ -n "$RECORD_ID" ]; then
+            curl -fsS -X PUT               -H "Authorization: Bearer $CF_TOKEN"               -H "Content-Type: application/json"               --data "$BODY"               "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$RECORD_ID" >/tmp/cf-dns.json
+          else
+            curl -fsS -X POST               -H "Authorization: Bearer $CF_TOKEN"               -H "Content-Type: application/json"               --data "$BODY"               "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records" >/tmp/cf-dns.json
+          fi
+
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/cf-dns.json"))
+          if not d.get("success"):
+              raise SystemExit("Cloudflare DNS update failed: "+json.dumps(d.get("errors") or []))
+          r=d.get("result") or {}
+          print("DNS ready:",r.get("name"),"->",r.get("content"))
+          PY
