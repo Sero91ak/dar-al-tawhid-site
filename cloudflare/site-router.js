@@ -37,12 +37,42 @@ function iosNativeHeaders(assetResponse) {
 
 const KIDS_MIRROR = "https://dar-al-tawhid-test.sero91ak.workers.dev";
 const PRAYER_API_ORIGIN = "https://dar-admin-publisher.sero91ak.workers.dev";
+const VOICE_API_ORIGIN = "https://dar-admin-publisher.sero91ak.workers.dev";
 /* Apple TV live: /api/prayer/* und /quran-audio/* über diesen Router */
 const KIDS_BUILD = "kids-shell-v40-sahaba-restored1107";
 const KIDS_LABEL = "KIDS · V1.07.46";
 
 function isPrayerApiPath(pathname) {
   return /^\/api\/(prayer|daily|jummah)(\/|$)/.test(pathname) || pathname === "/api/push/welcome";
+}
+
+function isVoiceApiPath(pathname) {
+  return pathname === "/voice-studio/api" || pathname.startsWith("/voice-studio/api/");
+}
+
+async function proxyVoiceApi(request, url) {
+  if (!isVoiceApiPath(url.pathname)) return null;
+  const dest = `${VOICE_API_ORIGIN}${url.pathname}${url.search || ""}`;
+  const headers = new Headers(request.headers);
+  headers.delete("host");
+  const init = {
+    method: request.method,
+    headers,
+    redirect: "manual"
+  };
+  if (request.method !== "GET" && request.method !== "HEAD") init.body = request.body;
+  const upstream = await fetch(dest, init);
+  const out = new Headers(upstream.headers);
+  out.set("Cache-Control", "no-store, max-age=0");
+  out.set("CDN-Cache-Control", "no-store");
+  out.set("Cloudflare-CDN-Cache-Control", "no-store");
+  out.set("X-DAR-Voice-Edge", "same-origin-gateway");
+  out.delete("Content-Length");
+  return new Response(request.method === "HEAD" ? null : upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers: out
+  });
 }
 
 async function proxyPrayerApi(request, url) {
@@ -596,6 +626,8 @@ export default {
     }
     const prayerApi = await proxyPrayerApi(request, url);
     if (prayerApi) return prayerApi;
+    const voiceApi = await proxyVoiceApi(request, url);
+    if (voiceApi) return voiceApi;
     const gated = gateHiddenSurfaces(request, url, env, "live");
     if (gated) return gated;
     if (request.method === "GET" || request.method === "HEAD") {
@@ -609,6 +641,7 @@ export default {
     const kidsRecitationGrade =
       url.pathname === "/kids/api/recitation/grade" ||
       url.pathname === "/test/kids/api/recitation/grade";
+    const voiceAliasPath = url.pathname === "/voice" || url.pathname === "/voice/";
     const voicePath = url.pathname === "/voice-studio" || url.pathname.startsWith("/voice-studio/");
     const legacyVoicePath = url.pathname === "/test/voice-studio" || url.pathname.startsWith("/test/voice-studio/");
 
@@ -621,6 +654,14 @@ export default {
       const suffix = url.pathname.slice("/test/voice-studio".length);
       target.pathname = "/voice-studio" + (suffix || "/");
       return Response.redirect(target.toString(), 301);
+    }
+
+    if ((request.method === "GET" || request.method === "HEAD") && voiceAliasPath) {
+      const target = new URL(request.url);
+      target.pathname = "/voice-studio/";
+      target.searchParams.set("app", "1");
+      target.searchParams.set("cloud", "1");
+      return Response.redirect(target.toString(), 308);
     }
 
     if ((request.method === "GET" || request.method === "HEAD") && url.pathname === "/voice-studio") {
