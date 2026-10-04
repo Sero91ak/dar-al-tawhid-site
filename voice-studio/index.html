@@ -2787,7 +2787,7 @@ $("#installBtn").onclick=async()=>{
 window.addEventListener("appinstalled",()=>{$("#installBtn").style.display="none"});
 
 if(!IS_LOCAL&&"serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("sw-v11.js",{scope:"/voice-studio/"}).catch(()=>{}));
+  window.addEventListener("load",()=>navigator.serviceWorker.register("sw-v11.js?v=47",{scope:"/voice-studio/"}).catch(()=>{}));
 }
 if(IS_LOCAL){
   const setup=$("#engineSetupSection");
@@ -3394,8 +3394,8 @@ setTimeout(()=>{
   },4000);
 })();
 </script>
-<script src="content-studio.js?v=2963"></script>
+<script src="content-studio.js?v=2964"></script>
 <script src="alphabet-audio-studio.js?v=2929"></script>
-<script src="mubashshirun-pack.js?v=6"></script>
+<script src="mubashshirun-pack.js?v=7"></script>
 </body>
 </html>
