@@ -2013,6 +2013,53 @@ def _install_story_audio_upload(data_url:str,original_name:str=""):
     }
 
 
+def _sanitize_story_timings(text:str,raw,duration:float=0.0):
+    paragraphs=[x.strip() for x in re.split(r"\n\s*\n",str(text or "").strip()) if x.strip()]
+    if not paragraphs or not isinstance(raw,list):
+        return []
+    rows=[]
+    for pos,item in enumerate(raw):
+        if not isinstance(item,dict):
+            continue
+        try:
+            idx=int(item.get("paragraphIndex",item.get("paragraph",item.get("index",pos))))
+            start=float(item.get("start",item.get("startSec",item.get("time",0))))
+            end=float(item.get("end",item.get("endSec",start)))
+        except Exception:
+            continue
+        if idx<0 or idx>=len(paragraphs) or start<0:
+            continue
+        if duration>0:
+            start=min(start,float(duration))
+            end=min(max(start,end),float(duration))
+        else:
+            end=max(start,end)
+        rows.append({
+            "paragraphIndex":idx,
+            "start":round(start,3),
+            "end":round(end,3),
+        })
+    rows.sort(key=lambda x:(x["paragraphIndex"],x["start"]))
+    by_index={}
+    for row in rows:
+        by_index[row["paragraphIndex"]]=row
+    if len(by_index)!=len(paragraphs):
+        return []
+    out=[by_index[i] for i in range(len(paragraphs))]
+    last=-1.0
+    for i,row in enumerate(out):
+        if row["start"]<last:
+            return []
+        if i+1<len(out):
+            row["end"]=max(row["start"],out[i+1]["start"])
+        elif duration>0:
+            row["end"]=max(row["start"],round(float(duration),3))
+        last=row["start"]
+    if out:
+        out[0]["start"]=0.0 if out[0]["start"]<0.75 else out[0]["start"]
+    return out
+
+
 def normalize_story_reference_text(text:str):
     """Stable text identity for a confirmed long-form audio/text pair.
 
@@ -7209,7 +7256,7 @@ def start_prophet_story_voice_pack(resume:bool=False):
     time.sleep(.05)
     return _prophet_batch_snapshot()
 
-def publish_manual_prophet_story(item_id:str,age:str,text:str,source_path:Path|None=None,source_name:str=""):
+def publish_manual_prophet_story(item_id:str,age:str,text:str,source_path:Path|None=None,source_name:str="",timings=None,sync_mode:str=""):
     item_id=str(item_id or "").strip()
     requested=str(age or "all").strip()
     text=str(text or "").strip()
@@ -7260,6 +7307,7 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str,source_path:Path|N
     dur=round(_audio_duration_seconds(first_asset),3)
     if dur<5 or first_asset.stat().st_size<4000:
         raise RuntimeError("Audio-QA fehlgeschlagen: zu kurz oder leer.")
+    timing_map=_sanitize_story_timings(text,timings,dur)
     stamp=time.strftime("%Y%m%d-%H%M%S")
     scripts=item.get("scripts") if isinstance(item.get("scripts"),dict) else {}
     audio=item.get("audio") if isinstance(item.get("audio"),dict) else {}
@@ -7280,6 +7328,9 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str,source_path:Path|N
         "technicalQaPassed":True,
         "publishedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
     }
+    if timing_map:
+        meta["timings"]=timing_map
+        meta["syncMode"]=str(sync_mode or "elevenlabs-forced-alignment-v1")
     for a in target_ages:
         asset=repo/"kids/assets/prophet-story-audio"/item_id/(a+".m4a")
         if asset!=first_asset:
@@ -7328,7 +7379,7 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str,source_path:Path|N
 
 
 
-def publish_manual_mubashshirun_story(item_id:str,age:str,text:str,source_path:Path|None=None,source_name:str=""):
+def publish_manual_mubashshirun_story(item_id:str,age:str,text:str,source_path:Path|None=None,source_name:str="",timings=None,sync_mode:str=""):
     item_id=str(item_id or "").strip()
     age=str(age or "").strip()
     text=str(text or "").strip()
@@ -7384,6 +7435,7 @@ def publish_manual_mubashshirun_story(item_id:str,age:str,text:str,source_path:P
     dur=round(_audio_duration_seconds(asset),3)
     if dur<30 or asset.stat().st_size<8000:
         raise RuntimeError("Audio-QA fehlgeschlagen: Geschichte ist zu kurz oder leer.")
+    timing_map=_sanitize_story_timings(text,timings,dur)
 
     stamp=time.strftime("%Y%m%d-%H%M%S")
     scripts=item.get("scripts") if isinstance(item.get("scripts"),dict) else {}
@@ -7407,6 +7459,9 @@ def publish_manual_mubashshirun_story(item_id:str,age:str,text:str,source_path:P
         "publishedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "url":f"/kids/assets/mubashshirun-story-audio/{item_id}/{age}.m4a?v={stamp}",
     }
+    if timing_map:
+        audio[age]["timings"]=timing_map
+        audio[age]["syncMode"]=str(sync_mode or "elevenlabs-forced-alignment-v1")
     item["scripts"]=scripts
     item["audio"]=audio
     vp=item.get("voiceProduction") if isinstance(item.get("voiceProduction"),dict) else {}
@@ -7934,12 +7989,16 @@ class H(BaseHTTPRequestHandler):
                 if kind=="prophet":
                     result=publish_manual_prophet_story(
                         item_id,age or "all",text,
-                        source_path=upload,source_name=info["filename"]
+                        source_path=upload,source_name=info["filename"],
+                        timings=data.get("timings"),
+                        sync_mode=str(data.get("syncMode") or "")
                     )
                 elif kind in ("sahabi","ṣaḥābī","mubashshirun"):
                     result=publish_manual_mubashshirun_story(
                         item_id,age,text,
-                        source_path=upload,source_name=info["filename"]
+                        source_path=upload,source_name=info["filename"],
+                        timings=data.get("timings"),
+                        sync_mode=str(data.get("syncMode") or "")
                     )
                 else:
                     raise ValueError("Story-Typ muss Prophet oder Ṣaḥābī sein.")
@@ -8123,7 +8182,9 @@ class H(BaseHTTPRequestHandler):
                 result=publish_manual_mubashshirun_story(
                     str(data.get("id") or ""),
                     str(data.get("age") or ""),
-                    str(data.get("text") or "")
+                    str(data.get("text") or ""),
+                    timings=data.get("timings"),
+                    sync_mode=str(data.get("syncMode") or "")
                 )
                 return self.send_json(200,result)
             except Exception as e:
@@ -8133,7 +8194,13 @@ class H(BaseHTTPRequestHandler):
             return self.send_json(200,{"ok":True,"stopRequested":True,**_prophet_batch_snapshot()})
         if p=="/prophet-stories/publish":
             try:
-                result=publish_manual_prophet_story(str(data.get("id") or ""),str(data.get("age") or ""),str(data.get("text") or ""))
+                result=publish_manual_prophet_story(
+                    str(data.get("id") or ""),
+                    str(data.get("age") or ""),
+                    str(data.get("text") or ""),
+                    timings=data.get("timings"),
+                    sync_mode=str(data.get("syncMode") or "")
+                )
                 return self.send_json(200,result)
             except Exception as e:
                 return self.send_json(400,{"ok":False,"error":str(e)})
