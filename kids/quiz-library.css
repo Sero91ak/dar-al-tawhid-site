@@ -140,3 +140,27 @@
 @media(prefers-reduced-motion:reduce){
   .quiz-library-open,.quiz-library-audio,.quiz-library-modes button,.quiz-library-categories button{transition:none!important}
 }
+
+/* Quiz compact play mode + race-safe age presentation v3 */
+#quizModal:not(.quiz-library-mode) .quiz-library-toolbar{
+  grid-template-columns:1fr;
+  padding:3px;
+  margin:0 0 7px;
+  border:0;
+  background:transparent;
+}
+#quizModal:not(.quiz-library-mode) .quiz-library-summary{display:none}
+#quizModal:not(.quiz-library-mode) .quiz-library-modes{
+  width:min(100%,360px);
+  margin:0 auto;
+}
+#quizModal:not(.quiz-library-mode) .quiz-library-modes button{
+  min-height:34px;
+  padding:6px 9px;
+}
+@media(max-width:430px){
+  #quizModal:not(.quiz-library-mode)[data-quiz-band="4-6"] .quiz-scene{height:clamp(140px,18vh,172px)}
+  #quizModal:not(.quiz-library-mode)[data-quiz-band="7-8"] .quiz-scene{height:clamp(136px,17vh,166px)}
+  #quizModal:not(.quiz-library-mode)[data-quiz-band="9-10"] .quiz-scene{height:clamp(128px,16vh,156px)}
+  #quizModal:not(.quiz-library-mode) .quiz-progress{margin:5px 0 9px}
+}
