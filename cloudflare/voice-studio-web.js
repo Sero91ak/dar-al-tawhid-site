@@ -208,7 +208,8 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
       voiceConfigured: configured,
       localEngineRequired: false,
       output: "audio/mpeg",
-      ownerBatchEnabled: true
+      ownerBatchEnabled: true,
+      storyAlignment: "elevenlabs-forced-alignment-v1"
     }, cors, configured ? 200 : 503);
   }
 
