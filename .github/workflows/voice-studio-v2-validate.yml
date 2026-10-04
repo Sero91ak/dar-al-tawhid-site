@@ -59,8 +59,11 @@ jobs:
           node --check cloudflare/voice-studio-gpu-gateway.js
           node --check cloudflare/voice-studio-web.js
           bash -n voice-studio/cloud-gpu/start.sh
+          bash -n voice-studio/cloud-gpu/bootstrap.sh
           python -m py_compile voice-studio/local-engine.py
           grep -q 'FROM pytorch/pytorch:' voice-studio/cloud-gpu/Dockerfile
+          grep -q 'gpus: all' voice-studio/cloud-gpu/docker-compose.yml
+          grep -q 'reverse_proxy voice:8787' voice-studio/cloud-gpu/Caddyfile
           grep -q 'chatterbox-tts' voice-studio/cloud-gpu/Dockerfile
           grep -q 'DAR_VOICE_DEVICE=cuda' voice-studio/cloud-gpu/Dockerfile
           python - <<'PY'
