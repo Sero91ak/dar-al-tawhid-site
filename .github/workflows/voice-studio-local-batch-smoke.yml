@@ -58,21 +58,24 @@ jobs:
       - name: Guard interactive Voice Studio priority
         run: |
           python3 - <<'PY'
+          import json
           from pathlib import Path
           engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
           alphabet=Path("voice-studio/alphabet-audio-studio.js").read_text(encoding="utf-8")
           html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          manifest=json.loads(Path("voice-studio/version.json").read_text(encoding="utf-8"))
+          expected=str(manifest["version"])
 
-          assert 'ENGINE_VERSION="2.9.68"' in engine
+          assert f'ENGINE_VERSION="{expected}"' in engine
           assert '"engine_version":ENGINE_VERSION' in engine
           assert 'LEARNING_PREVIEW_WAITING.is_set()' in engine
           assert 'MANUAL_RENDER_WAITING.is_set()' in engine
           assert 'RENDER_LOCK.locked()' in engine
           assert 'await startFullBatch(true);' not in alphabet, "Alphabet/Quiz full batch must never auto-start"
           assert 'Gesamtbatch startet ausschließlich nach dem' in alphabet
-          assert 'const APP_VERSION="2.9.68";' in html
+          assert f'const APP_VERSION="{expected}";' in html
           assert 'runningVersion!==APP_VERSION' in html
-          print("Interactive Voice Studio priority guard OK")
+          print("Interactive Voice Studio priority guard OK:",expected)
           PY
 
       - name: Validate pronunciation candidate fallback
@@ -85,12 +88,20 @@ jobs:
           app=tmp/"studio"; home=tmp/"home"
           app.mkdir(parents=True); home.mkdir(parents=True)
           shutil.copy2(root/"data/pronunciation/pronunciation-rules.json",app/"pronunciation-rules.json")
+          shutil.copy2(root/"data/pronunciation/DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls",app/"DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls")
           shutil.copy2(root/"data/pronunciation/voice-production-profile.json",app/"voice-production-profile.json")
           shutil.copy2(root/"data/pronunciation/islamic-master-library.json",app/"islamic-master-library.json")
           os.environ["DAR_VOICE_APP_HOME"]=str(app)
           os.environ["HOME"]=str(home)
           spec=importlib.util.spec_from_file_location("dar_voice_candidate_smoke",root/"voice-studio/local-engine.py")
           mod=importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+          assert len(mod.MAX_MASTER_PLS_RULES)==8507, len(mod.MAX_MASTER_PLS_RULES)
+          assert mod.MAX_MASTER_PLS_FALLBACK_RULES, "MAX MASTER fallback rules empty"
+          assert all(r.get("requires_boundary") for r in mod.MAX_MASTER_PLS_FALLBACK_RULES)
+          sample=next(r for r in mod.MAX_MASTER_PLS_FALLBACK_RULES if len(str(r.get("string_to_replace") or ""))>=3)
+          needle=str(sample["string_to_replace"])
+          assert mod.pronunciation_rule_boundary_ok(needle,0,needle)
+          assert not mod.pronunciation_rule_boundary_ok("X"+needle+"Y",1,needle)
           rows=mod.pronunciation_candidates("Allah",12)
           assert rows, "Allah candidate list empty"
           assert any(str(r.get("ttsLanguage"))=="ar" and any("\u0600"<=ch<="\u06ff" for ch in str(r.get("ttsText") or "")) for r in rows), rows
