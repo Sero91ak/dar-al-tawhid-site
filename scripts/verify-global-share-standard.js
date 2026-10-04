@@ -41,6 +41,15 @@ for (const file of files) {
   if (/fillText\(\s*["']App Store["']/.test(code)) {
     failures.push(r + ": selbst gezeichneter App-Store-Badge gefunden; nur offizielles Apple-Badge erlaubt");
   }
+
+  if (/App Store/i.test(code) && !/app-store-badge-de-official\.svg/.test(code)) {
+    failures.push(r + ": Bild-Share verweist auf App Store, aber nicht auf das offizielle globale Badge");
+  }
+
+  if (/fillText\(\s*["']AUSSAGE["']/.test(code) && !/(?:adaptiveBodyLayout|AdaptiveBodyLayout)/.test(code)) {
+    failures.push(r + ": Aussage-Renderer ohne adaptive Schriftgrößen-/Seitenlogik");
+  }
+
 }
 
 const globalShare = path.join(root, "assets/dar-global-share-v1225.js");
