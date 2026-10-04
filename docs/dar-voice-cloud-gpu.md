@@ -6,7 +6,7 @@ Stand: 2026-10-04
 
 DĀR Voice soll unter `https://dar-al-tawhid.de/voice/` als installierbare PWA überall funktionieren, ohne lokale IP, ohne gleiches WLAN und ohne eingeschalteten Mac.
 
-Die bestehende Voice-Studio-2.9.93-API bleibt erhalten. Die Web-App wechselt im Cloud-Modus nur den Transport:
+Die bestehende Voice-Studio-2.9.95-API bleibt erhalten. Die Web-App wechselt im Cloud-Modus nur den Transport:
 
 `Browser/PWA → Cloudflare Gateway → privater GPU-Host → bestehende DĀR Voice Engine`
 
