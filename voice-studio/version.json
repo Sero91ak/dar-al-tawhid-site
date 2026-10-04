@@ -1,10 +1,10 @@
 {
-  "version": "2.9.97",
-  "updatedAt": "2026-10-04T20:52:00+02:00",
-  "deployTrigger": "voice-studio-2.9.97-owner-reference-learning",
+  "version": "2.9.98",
+  "updatedAt": "2026-10-04T21:43:00+02:00",
+  "deployTrigger": "voice-studio-2.9.98-trusted-lexicon-section-reopen",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v66",
+  "cache": "dar-voice-studio-v67",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-contents-api",
-  "engineVersion": "2.9.97",
+  "engineVersion": "2.9.98",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -1730,5 +1730,17 @@
     "narration",
     "teaching"
   ],
-  "ownerAudioLearningRequiresLocalEngine": true
+  "ownerAudioLearningRequiresLocalEngine": true,
+  "fastContentWorkflow": {
+    "enabled": true,
+    "sections": [
+      "story",
+      "dua",
+      "narration"
+    ],
+    "directOwnerAudioUpload": true,
+    "textAudioReferenceLearning": true,
+    "directKidsPublish": true,
+    "trustedMaxMasterVocabulary": true
+  }
 }
