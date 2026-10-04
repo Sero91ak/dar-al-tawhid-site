@@ -4465,6 +4465,36 @@ def start_generation_job(data:dict,free_mode:bool=False):
         free_mode=bool(free_mode),
         free_pronunciation=free_pronunciation
     )
+
+    # 2.9.92 · Exact-repeat before preflight:
+    # Der Cache-Schlüssel enthält Engine, Referenzen und lokale Lernrevision.
+    # Ein exakter Treffer darf deshalb VOR den Wort-/Qurʾān-Scans zurückkommen.
+    # Gerade 5–8-Minuten-Texte reagieren beim erneuten Test dadurch sofort.
+    cached=find_generation_history_cache(signature)
+    if cached:
+        job_id=uuid.uuid4().hex[:20]
+        now=time.time()
+        with GENERATION_JOB_LOCK:
+            GENERATION_JOBS[job_id]={
+                "jobId":job_id,
+                "state":"ready",
+                "signature":signature,
+                "style":style,
+                "freeMode":bool(free_mode),
+                "createdAt":now,
+                "startedAt":now,
+                "finishedAt":now,
+                "outputName":str(cached["name"]),
+                "outputBytes":int(cached["bytes"]),
+                "error":"",
+                "reused":True,
+                "reuseType":"exact-history-cache",
+            }
+        return {
+            "ok":True,"jobId":job_id,"state":"ready",
+            "reused":True,"reuseType":"exact-history-cache"
+        }
+
     server_prepared=""
     server_found=[]
     if not free_mode:
@@ -4476,35 +4506,6 @@ def start_generation_job(data:dict,free_mode:bool=False):
         if unresolved:
             raise PronunciationReviewRequired(unresolved)
         server_prepared,server_found=prepare(text)
-
-    # 2.9.91 · Exact-repeat fast path:
-    # Ein identischer, mit derselben Engine/Referenz/Lernrevision bereits
-    # erzeugter Auftrag ist sofort fertig. Kein Modellstart, kein Join und kein
-    # erneutes Mastering. Besonders beim wiederholten Testen auf iPhone/Mac
-    # fühlt sich "Erzeugen" dadurch wie eine native Sofortaktion an.
-    cached=find_generation_history_cache(signature)
-    if cached:
-        job_id=uuid.uuid4().hex[:20]
-        with GENERATION_JOB_LOCK:
-            GENERATION_JOBS[job_id]={
-                "jobId":job_id,
-                "state":"ready",
-                "signature":signature,
-                "style":style,
-                "freeMode":bool(free_mode),
-                "createdAt":time.time(),
-                "startedAt":time.time(),
-                "finishedAt":time.time(),
-                "outputName":str(cached["name"]),
-                "outputBytes":int(cached["bytes"]),
-                "error":"",
-                "reused":True,
-                "reuseType":"exact-history-cache",
-            }
-        return {
-            "ok":True,"jobId":job_id,"state":"ready",
-            "reused":True,"reuseType":"exact-history-cache"
-        }
 
     with GENERATION_JOB_LOCK:
         active=[
