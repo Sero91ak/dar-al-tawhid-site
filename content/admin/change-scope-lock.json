@@ -152,6 +152,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "kids-muhammad-audiobook-permanent-sync-2026-10-04",
+      "approvedBy": "user-explicit-story-audio-kids-voice-workflow-weiter",
+      "reason": "Nutzer verlangt die Muḥammad ﷺ Hörgeschichte und den synchronisierten Mitlese-Workflow dauerhaft in der Kids-App. Der aktuelle signierte Preview-Link muss vor Ablauf als permanentes Kids-Audio gesichert und mit den Absatz-Zeitstempeln gekoppelt werden.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/align-current-muhammad-follow-reader.yml",
+        "kids/"
+      ],
+      "expiresAt": "2026-11-04T23:59:00.000Z"
+    },
+    {
       "id": "kids-v1097-realistic-hero-import-2026-10-04",
       "approvedBy": "user-explicit-kids-realistic-images-adobe-runway-weiter",
       "reason": "Nutzer verlangt die Kids-Geschichten-/Propheten-/Ṣaḥābah-Bereiche mit besseren, realistischeren passenden Bildern direkt in der App weiterzubauen. Der einmalige Import-Workflow darf dafür die bereits erlaubten Kids-Assets einspielen und sich anschließend entfernen.",
