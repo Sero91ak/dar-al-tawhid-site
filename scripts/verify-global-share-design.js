@@ -39,6 +39,10 @@ for (const rel of ["assets/premium-feed-app.js", "test/assets/premium-feed-app.j
   const src = read(rel);
   requireToken(rel, src, "/api/share-image/background", "fresh AI share endpoint");
   requireToken(rel, src, "feedShareFreshImage", "fresh feed-share generator");
+  requireToken(rel, src, "shareFreshPostFeedItem", "fresh post-feed share renderer");
+  forbidToken(rel, src, "shareOriginalFeedImage", "direct reuse of linked post image");
+  forbidToken(rel, src, "data-original-image", "linked original image passed into share action");
+  forbidToken(rel, src, "data-feed-preview-image", "linked preview image passed into share action");
   forbidToken(rel, src, "feedShareBrandFooter", "legacy feed promo footer");
   forbidToken(rel, src, "app-store-badge-de-official.svg", "legacy App Store footer badge");
 }
