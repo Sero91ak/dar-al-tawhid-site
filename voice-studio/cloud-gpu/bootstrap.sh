@@ -32,14 +32,23 @@ set +a
 : "${DAR_VOICE_DOMAIN:?DAR_VOICE_DOMAIN fehlt in .env}"
 : "${DAR_VOICE_PAIR_TOKEN:?DAR_VOICE_PAIR_TOKEN fehlt in .env}"
 
+if [[ "$DAR_VOICE_DOMAIN" == "voice-gpu.example.com" || "$DAR_VOICE_DOMAIN" != *.* ]]; then
+  echo "FEHLER: DAR_VOICE_DOMAIN enthält noch keinen echten Hostnamen." >&2
+  exit 8
+fi
+if [[ "$DAR_VOICE_PAIR_TOKEN" == "replace-with-long-random-token" || ${#DAR_VOICE_PAIR_TOKEN} -lt 32 ]]; then
+  echo "FEHLER: DAR_VOICE_PAIR_TOKEN muss ein echtes zufälliges Secret mit mindestens 32 Zeichen sein." >&2
+  exit 9
+fi
+
 DATA="${DAR_VOICE_DATA_DIR:-/var/lib/dar-voice}"
 MODEL_CACHE="${DAR_VOICE_MODEL_CACHE_DIR:-/var/cache/dar-voice-hf}"
 if [[ "$(id -u)" -eq 0 ]]; then
   mkdir -p "$DATA" "$MODEL_CACHE"
-  chmod 700 "$DATA"
+  chmod 700 "$DATA" "$MODEL_CACHE"
 else
   sudo mkdir -p "$DATA" "$MODEL_CACHE"
-  sudo chmod 700 "$DATA"
+  sudo chmod 700 "$DATA" "$MODEL_CACHE"
 fi
 chmod 600 .env
 
