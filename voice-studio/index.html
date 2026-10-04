@@ -88,7 +88,7 @@ h1{font-size:clamp(26px,2.1vw,40px);line-height:1.02;letter-spacing:-.035em;marg
 .prophet-pick.focus{outline:2px solid rgba(217,182,111,.55);outline-offset:2px}.prophet-review{margin-top:9px;border:1px solid rgba(239,157,157,.24);border-radius:12px;padding:9px;background:rgba(120,25,25,.08)}.prophet-review[hidden]{display:none}.prophet-review-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.prophet-review-term{min-height:30px!important;padding:6px 9px!important;font-size:10px!important}.prophet-review-meta{font-size:10px;color:var(--muted);line-height:1.45}
 @media(max-width:900px){.prophet-pick-list{grid-template-columns:1fr}}
 
-/* 2.9.82 · Prophetenübersicht wieder lesbar + klarer Datei-Upload */
+/* 2.9.83 · Prophetenübersicht wieder lesbar + klarer Datei-Upload */
 .prophet-pick-list{grid-template-columns:1fr;gap:8px}
 .prophet-pick-item{
   grid-template-columns:minmax(220px,1.35fr) minmax(150px,.78fr) 102px 112px 96px 112px;
@@ -678,7 +678,7 @@ body.free-voice-mode .mobile-actions{display:none!important}
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   Voice Studio 2.9.82 · page-focused production architecture
+   Voice Studio 2.9.83 · page-focused production architecture
    Jede Aufgabe hat eine eigene Arbeitsfläche; kein Dashboard-Scroll.
    ═══════════════════════════════════════════════════════════════ */
 [hidden]{display:none!important}
@@ -775,7 +775,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.82 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.83 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -834,7 +834,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
   </div>
   <div class="heading-row">
     <div><h1>Erzählung erzeugen</h1><div class="lead">Schreibe oder füge deinen Text ein. Die wissenschaftliche Schreibweise bleibt sichtbar unverändert; die Aussprache wird intern geprüft und vorbereitet.</div></div>
-    <div class="badges"><span class="badge">SERHAT VOICE 2.9.82</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
+    <div class="badges"><span class="badge">SERHAT VOICE 2.9.83</span><span class="badge">902 BEGRIFFE</span><span class="badge">3.727 REGELN</span></div>
   </div>
   <div class="textbox-wrap">
     <textarea id="text" spellcheck="true" placeholder="Geschichte oder Erzähltext hier einfügen …">Willkommen bei DĀR AL TAWḤĪD Kids. Heute lernen wir etwas über Tawḥīd, Īmān und Islām.</textarea>
@@ -1094,7 +1094,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
     <button id="startEngineBtn" class="btn primary" style="width:100%;margin-bottom:8px">Engine starten</button>
     <button id="companionBtn" class="btn secondary" style="width:100%;margin-bottom:8px;display:none">iPad / iPhone verbinden</button>
     <button id="installEngineBtn" class="btn secondary" style="width:100%;margin-bottom:8px">Mac-App installieren / aktualisieren</button>
-    <div id="appUpdateState" class="update-state">App-Version 2.9.82</div>
+    <div id="appUpdateState" class="update-state">App-Version 2.9.83</div>
     <div id="setupCommandWrap" style="display:none;margin-bottom:8px">
       <label for="setupCommand">Einmaliger Installationsbefehl</label>
       <textarea id="setupCommand" readonly spellcheck="false" style="height:86px;min-height:86px;resize:none;font-size:11px;line-height:1.4;padding:10px">curl -fsSL -H 'Accept: application/vnd.github.raw+json' -H 'User-Agent: DAR-Voice-Studio-Installer' 'https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/install-mac.command?ref=main' | /bin/bash</textarea>
@@ -1187,7 +1187,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.82 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.83 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
 </div>
 </div>
 
@@ -1197,7 +1197,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 </div>
 
 <script>
-const APP_VERSION="2.9.82";
+const APP_VERSION="2.9.83";
 const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
 const PROSODY_LABELS={
   auto:"Auto",narration:"Erzählung",kids_story:"Kinder-Geschichte",kids_lesson:"Kinder-Unterricht",
@@ -1431,7 +1431,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("available");
     top.textContent="Update "+(nativeLatestVersion||"verfügbar");
     side.textContent="Update "+(nativeLatestVersion||"")+" installieren";
-    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.82")+" · neu "+nativeLatestVersion;
+    state.textContent="Neue Version verfügbar · aktuell "+String(d.current||"2.9.83")+" · neu "+nativeLatestVersion;
     state.className="update-state warn";
   }else if(nativeUpdateState==="installing"){
     top.hidden=false;
@@ -1454,7 +1454,7 @@ window.darUpdateStateChanged=data=>{
     top.classList.add("current");
     top.textContent="Updates · aktuell";
     side.textContent="Nach Updates suchen";
-    state.textContent="Voice Studio "+String(d.current||"2.9.82")+" · aktuell";
+    state.textContent="Voice Studio "+String(d.current||"2.9.83")+" · aktuell";
     state.className="update-state good";
   }else if(nativeUpdateState==="error"){
     top.hidden=false;
@@ -2094,6 +2094,83 @@ async function getRenderStatus(){
   }catch(_){return null}
 }
 
+const liveChunkStreams={
+  free:{chunks:[],seen:new Set(),cursor:0,active:false,finalUrl:""},
+  main:{chunks:[],seen:new Set(),cursor:0,active:false,finalUrl:""},
+};
+function chunkStreamConfig(kind){
+  return kind==="free"
+    ?{player:$("#freeVoicePlayer"),wrap:$("#freeVoicePlayerWrap"),link:$("#freeVoiceWavLink")}
+    :{player:$("#player"),wrap:$("#playerWrap"),link:$("#wavLink")};
+}
+function resetChunkStream(kind){
+  const s=liveChunkStreams[kind];if(!s)return;
+  s.chunks=[];s.seen=new Set();s.cursor=0;s.active=false;s.finalUrl="";
+  const {player}=chunkStreamConfig(kind);
+  if(player&&!player.dataset.darChunkQueueBound){
+    player.dataset.darChunkQueueBound="1";
+    player.addEventListener("ended",()=>{
+      const row=liveChunkStreams[kind];
+      if(!row?.active)return;
+      row.active=false;row.cursor+=1;
+      if(row.cursor<row.chunks.length){pumpChunkStream(kind);return}
+      if(row.finalUrl){
+        player.src=row.finalUrl;
+        if(kind==="free")$("#freeVoiceStatus").textContent="Audio vollständig fertig · Player steht auf der kompletten WAV.";
+        else setMessage("Audio vollständig fertig · Player steht auf der kompletten WAV.","good");
+      }else if(kind==="free"){
+        $("#freeVoiceStatus").textContent="Nächster Abschnitt wird erzeugt …";
+      }else{
+        setMessage("Nächster Audioabschnitt wird erzeugt …","warn");
+      }
+    });
+  }
+}
+function pumpChunkStream(kind){
+  const s=liveChunkStreams[kind],cfg=chunkStreamConfig(kind);
+  if(!s||!cfg.player||s.active)return;
+  if(s.cursor>=s.chunks.length){
+    if(s.finalUrl)cfg.player.src=s.finalUrl;
+    return;
+  }
+  const row=s.chunks[s.cursor],name=String(row?.name||"").trim();
+  if(!name)return;
+  s.active=true;
+  cfg.player.src=LOCAL_API+"/mobile/audio?name="+encodeURIComponent(name);
+  if(cfg.wrap)cfg.wrap.hidden=false;
+  if(cfg.link){cfg.link.removeAttribute("href");cfg.link.textContent="Live-Audio · vollständige WAV folgt"}
+  if(kind==="free"){
+    $("#freeVoiceStatus").textContent="Sofort-Audio · Abschnitt "+(s.cursor+1)+" · Rest wird weiter erzeugt …";
+  }else{
+    if($("#qaConfirmBtn"))$("#qaConfirmBtn").disabled=true;
+    setMessage("Sofort-Audio · Abschnitt "+(s.cursor+1)+" · Rest wird weiter erzeugt …","warn");
+  }
+  cfg.player.play().catch(()=>{});
+}
+function updateChunkStream(kind,st){
+  if(st?.render_preview_mode!=="incremental-chunks-v1")return false;
+  const rows=Array.isArray(st?.render_preview_chunks)?st.render_preview_chunks:[];
+  if(!rows.length)return false;
+  const s=liveChunkStreams[kind];if(!s)return false;
+  for(const row of rows.slice().sort((a,b)=>Number(a?.sequence||0)-Number(b?.sequence||0))){
+    const name=String(row?.name||"").trim();
+    if(name&&!s.seen.has(name)){s.seen.add(name);s.chunks.push(row)}
+  }
+  pumpChunkStream(kind);
+  return true;
+}
+function setChunkFinal(kind,url){
+  const s=liveChunkStreams[kind];if(!s)return false;
+  s.finalUrl=String(url||"");
+  const cfg=chunkStreamConfig(kind);
+  if(!s.chunks.length){
+    if(cfg.player&&s.finalUrl)cfg.player.src=s.finalUrl;
+    return false;
+  }
+  if(!s.active&&s.cursor>=s.chunks.length&&cfg.player&&s.finalUrl)cfg.player.src=s.finalUrl;
+  return true;
+}
+
 async function warmupModel(){
   try{
     await localRequest("/warmup",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"});
@@ -2461,7 +2538,7 @@ async function generateFreeVoice(){
 
     btn.disabled=true;
     btn.textContent="Vorbereitung …";
-    freeVoiceLivePreviewName="";freeVoiceLivePreviewGeneration=0;
+    freeVoiceLivePreviewName="";freeVoiceLivePreviewGeneration=0;resetChunkStream("free");
     $("#freeVoiceStatus").textContent="Serhat-Stimme wird vorbereitet …";
     $("#freeVoiceProgress").style.width="1%";
     await waitForModel([btn]);
@@ -2474,9 +2551,10 @@ async function generateFreeVoice(){
       $("#freeVoiceStatus").textContent=st.message||("Audio wird erzeugt · "+pct+" %");
       $("#freeVoiceDot").className="dot "+(st.render_state==="error"?"bad":"ok");
       btn.textContent="Erzeugen "+pct+" %";
+      const chunkMode=st.render_preview_ready&&updateChunkStream("free",st);
       const liveName=String(st.render_preview_name||"");
       const liveGeneration=Math.max(0,Number(st.render_preview_generation||0));
-      if(st.render_preview_ready&&liveName&&liveName!==freeVoiceLivePreviewName&&(!liveGeneration||liveGeneration>freeVoiceLivePreviewGeneration)){
+      if(!chunkMode&&st.render_preview_ready&&liveName&&liveName!==freeVoiceLivePreviewName&&(!liveGeneration||liveGeneration>freeVoiceLivePreviewGeneration)){
         const p=$("#freeVoicePlayer");
         const carryTime=freeVoiceLivePreviewName&&Number.isFinite(p.currentTime)?Math.max(0,p.currentTime):0;
         const wasPlaying=!p.paused;
@@ -2523,23 +2601,21 @@ async function generateFreeVoice(){
     const blob=await response.blob();
     if(!blob.size)throw Error("Die Engine hat eine leere Audiodatei geliefert.");
     const freePlayer=$("#freeVoicePlayer");
-    const carryTime=freeVoiceLivePreviewName&&Number.isFinite(freePlayer.currentTime)?Math.max(0,freePlayer.currentTime):0;
-    const wasPlaying=!freePlayer.paused;
-    const wasEnded=!!freePlayer.ended||(Number.isFinite(freePlayer.duration)&&freePlayer.duration>0&&carryTime>=Math.max(0,freePlayer.duration-.2));
     if(freeVoiceAudioUrl)URL.revokeObjectURL(freeVoiceAudioUrl);
     freeVoiceAudioUrl=URL.createObjectURL(blob);
-    freePlayer.src=freeVoiceAudioUrl;
+    const hadChunkStream=setChunkFinal("free",freeVoiceAudioUrl);
     $("#freeVoiceWavLink").href=freeVoiceAudioUrl;
     $("#freeVoiceWavLink").textContent="WAV speichern";
     $("#freeVoicePlayerWrap").hidden=false;
     $("#freeVoiceProgress").style.width="100%";
     $("#freeVoiceDot").className="dot ok";
-    $("#freeVoiceStatus").textContent="Freie Stimme fertig · keine Kids-Veröffentlichung ausgelöst.";
-    const resumeFree=()=>{
-      if(carryTime>0&&Number.isFinite(freePlayer.duration))freePlayer.currentTime=Math.min(carryTime,Math.max(0,freePlayer.duration-.15));
-      if(wasPlaying||wasEnded||carryTime===0)freePlayer.play().catch(()=>{});
-    };
-    if(freePlayer.readyState>=1)resumeFree();else freePlayer.addEventListener("loadedmetadata",resumeFree,{once:true});
+    $("#freeVoiceStatus").textContent=hadChunkStream
+      ?"Freie Stimme fertig · Live-Wiedergabe läuft ohne Unterbrechung weiter."
+      :"Freie Stimme fertig · keine Kids-Veröffentlichung ausgelöst.";
+    if(!hadChunkStream){
+      freePlayer.src=freeVoiceAudioUrl;
+      freePlayer.play().catch(()=>{});
+    }
     freeVoiceLivePreviewName="";freeVoiceLivePreviewGeneration=0;
   }catch(e){
     const msg=e?.name==="AbortError"
@@ -2561,7 +2637,7 @@ async function generate({autoRerender=false}={}){
   const btns=[$("#generateBtn"),$("#mobileGenerateBtn")].filter(Boolean);
   const old=btns.map(b=>b.textContent);
   btns.forEach(b=>{b.disabled=true;b.textContent="Vorbereitung …"});
-  mainLivePreviewName="";mainLivePreviewGeneration=0;
+  mainLivePreviewName="";mainLivePreviewGeneration=0;resetChunkStream("main");
   setMessage("");
   let progressTimer=null;
 
@@ -2596,9 +2672,10 @@ async function generate({autoRerender=false}={}){
         const detail=st.message||("Audio wird erzeugt · "+pct+" %");
         const doneHint=(total&&active)?(" · "+completed+" fertig"):"";
         const cacheHint=cached?(" · "+cached+" bereits bekannt"):"";
+        const chunkMode=st.render_preview_ready&&updateChunkStream("main",st);
         const liveName=String(st.render_preview_name||"");
         const liveGeneration=Math.max(0,Number(st.render_preview_generation||0));
-        if(st.render_preview_ready&&liveName&&liveName!==mainLivePreviewName&&(!liveGeneration||liveGeneration>mainLivePreviewGeneration)){
+        if(!chunkMode&&st.render_preview_ready&&liveName&&liveName!==mainLivePreviewName&&(!liveGeneration||liveGeneration>mainLivePreviewGeneration)){
           const p=$("#player");
           const carryTime=mainLivePreviewName&&Number.isFinite(p.currentTime)?Math.max(0,p.currentTime):0;
           const wasPlaying=!p.paused;
@@ -2648,14 +2725,12 @@ async function generate({autoRerender=false}={}){
     if(!blob.size)throw Error("Die Engine hat eine leere Audiodatei geliefert.");
 
     const p=$("#player");
-    const carryTime=mainLivePreviewName&&Number.isFinite(p.currentTime)?Math.max(0,p.currentTime):0;
-    const wasPlaying=!p.paused;
-    const wasEnded=!!p.ended||(Number.isFinite(p.duration)&&p.duration>0&&carryTime>=Math.max(0,p.duration-.2));
     const url=URL.createObjectURL(blob);
     lastAudio=url;
     lastGeneratedText=text;
     pendingAutoRerenderText="";
-    p.src=url;
+    const hadChunkStream=setChunkFinal("main",url);
+    if(!hadChunkStream)p.src=url;
     $("#playerWrap").hidden=false;
     $("#wavLink").href=url;
     $("#wavLink").download="dar-serhat-voice.wav";
@@ -2701,11 +2776,8 @@ async function generate({autoRerender=false}={}){
       $("#qaSpeed").className="good";
     }
     setMessage("Audio fertig. Satzfluss und technische QA sind geprüft; bitte jetzt besonders die Kernbegriffe anhören und erst dann bestätigen.","good");
-    const resumeMain=()=>{
-      if(carryTime>0&&Number.isFinite(p.duration))p.currentTime=Math.min(carryTime,Math.max(0,p.duration-.15));
-      if(wasPlaying||wasEnded||carryTime===0)p.play().catch(()=>{});
-    };
-    if(p.readyState>=1)resumeMain();else p.addEventListener("loadedmetadata",resumeMain,{once:true});
+    if(!hadChunkStream)p.play().catch(()=>{});
+    else setMessage("Audio fertig · die laufende Live-Wiedergabe wird nicht unterbrochen. Danach steht die vollständige WAV im Player.","good");
     mainLivePreviewName="";mainLivePreviewGeneration=0;
     $("#playerWrap").scrollIntoView({behavior:"smooth",block:"nearest"});
   }catch(e){
