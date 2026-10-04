@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.78"
+ENGINE_VERSION="2.9.79"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -6720,7 +6720,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                 except Exception:
                     pass
             if not pre_lock:
-                pre_bridge=contextual_bridge_direction(plan,pre_idx)
+                pre_bridge="" if interactive_fast else contextual_bridge_direction(plan,pre_idx)
                 if pre_bridge:
                     pre_wav,pre_metrics,_=load_context_bridge_cache(
                         pre_chunk,pre_lang,pre_mode,pre_bridge,render_sr
@@ -6784,7 +6784,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             pct=8+int(((processed_pos-1)/max(1,total))*78)
             lang_label="Arabisch" if lang=="ar" else "Deutsch"
             mode=resolve_segment_prosody(chunk,doc_mode,style)
-            bridge_direction=contextual_bridge_direction(plan,original_idx)
+            bridge_direction="" if interactive_fast else contextual_bridge_direction(plan,original_idx)
             audio_lock_key=lock_key_for(chunk)
             critical=bool(audio_lock_key) or (lang=="ar" and any(x and x in chunk for x in master_forms))
             set_status(
@@ -8390,10 +8390,19 @@ class H(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.accept_pairing_url():
             return
-        if not self.remote_authorized():
-            return self.reject_remote()
 
         p=urlparse(self.path).path
+        # iOS lädt Home-Screen-Icon/Manifest teils außerhalb des gekoppelten
+        # Dokument-Requests. Nur diese statischen, geheimnisfreien Assets sind
+        # deshalb ohne Pair-Cookie lesbar; Voice-/Audio-/Statusdaten bleiben geschützt.
+        public_mobile_assets={
+            "/mobile/manifest.webmanifest",
+            "/mobile/voice-studio-icon.png",
+            "/mobile/apple-touch-icon.png",
+            "/mobile/apple-touch-icon-precomposed.png",
+        }
+        if not self.remote_authorized() and p not in public_mobile_assets:
+            return self.reject_remote()
         if p=="/health":
             # Start-Handshake muss garantiert leichtgewichtig bleiben. get_status()
             # enthält große Aussprache-/Learning-Listen und ist für /status gedacht,
@@ -8487,7 +8496,11 @@ class H(BaseHTTPRequestHandler):
             self.send_file(APP_HOME/"studio.html","text/html; charset=utf-8")
         elif p in ("/mobile","/mobile/","/mobile/index.html"):
             self.send_file(APP_HOME/"mobile.html","text/html; charset=utf-8")
-        elif p=="/mobile/voice-studio-icon.png":
+        elif p in (
+            "/mobile/voice-studio-icon.png",
+            "/mobile/apple-touch-icon.png",
+            "/mobile/apple-touch-icon-precomposed.png",
+        ):
             self.send_file(APP_HOME/"voice-studio-icon.png","image/png")
         elif p=="/mobile/manifest.webmanifest":
             self.send_json(200,{
@@ -8501,9 +8514,8 @@ class H(BaseHTTPRequestHandler):
                 "theme_color":"#f7f7f5",
                 "orientation":"any",
                 "icons":[
-                    {"src":"/mobile/voice-studio-icon.png?v=2978","sizes":"180x180","type":"image/png","purpose":"any"},
-                    {"src":"/mobile/voice-studio-icon.png?v=2978","sizes":"256x256","type":"image/png","purpose":"any"},
-                    {"src":"/mobile/voice-studio-icon.png?v=2978","sizes":"256x256","type":"image/png","purpose":"maskable"}
+                    {"src":"/mobile/apple-touch-icon.png?v=2979","sizes":"256x256","type":"image/png","purpose":"any"},
+                    {"src":"/mobile/voice-studio-icon.png?v=2979","sizes":"256x256","type":"image/png","purpose":"maskable"}
                 ]
             })
         elif p=="/mobile/history":
