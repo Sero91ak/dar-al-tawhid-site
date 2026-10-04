@@ -1,10 +1,10 @@
 {
-  "version": "2.9.69",
-  "updatedAt": "2026-10-04T01:41:00+02:00",
-  "deployTrigger": "voice-studio-2.9.69-manual-story-audio-upload",
+  "version": "2.9.70",
+  "updatedAt": "2026-10-04T02:18:00+02:00",
+  "deployTrigger": "voice-studio-2.9.70-engine-start-version-handshake-repair",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v41",
+  "cache": "dar-voice-studio-v42",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -277,8 +277,8 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "72c956068a936432d15e44e072427f384618ff89",
-    "validatedAt": "2026-10-04T01:41:00+02:00",
+    "validatedCommit": "c3c701e58dd13273c6bf2a127d95adb8d4eb69a6",
+    "validatedAt": "2026-10-04T02:18:00+02:00",
     "freeVoiceIsolation": true,
     "mainAppBrandingUnchanged": true,
     "prophetStoryLocalBatchSmoke": true,
@@ -315,7 +315,10 @@
     "noRuntimeMainBranchUiOverwrite": true,
     "installerNeverWaitsForEngine": true,
     "manualStoryAudioUpload": true,
-    "storyTextAudioPairing": true
+    "storyTextAudioPairing": true,
+    "dynamicInstallerVersionBinding": true,
+    "lightweightHealthHandshake": true,
+    "brokenPipeStartupNoiseSuppressed": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -622,7 +625,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "72c956068a936432d15e44e072427f384618ff89",
+  "releaseRef": "c3c701e58dd13273c6bf2a127d95adb8d4eb69a6",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1067,7 +1070,7 @@
     "offlineManifestPackaged": true,
     "staleLocalManifestAutoRefresh": true
   },
-  "validatedCommit": "72c956068a936432d15e44e072427f384618ff89",
+  "validatedCommit": "c3c701e58dd13273c6bf2a127d95adb8d4eb69a6",
   "validatedAt": "2026-10-02T13:45:00+02:00",
   "validation": {
     "targetVersion": "2.9.68",
@@ -1097,7 +1100,7 @@
     "pronunciationPreviewNoLongFormQaCascade": true,
     "rootCauseConfirmed": "alphabet-audio-studio auto-started full 140 alphabet + quiz + greeting batch on studio load, monopolizing the shared local synthesis worker",
     "alphabetBatchDoesNotAutoStart": true,
-    "engineVersion": "2.9.69",
+    "engineVersion": "2.9.70",
     "engineHealthExposesVersion": true,
     "uiRejectsStaleEngineVersion": true,
     "nativeMacRestartsStaleEngine": true,
@@ -1125,7 +1128,11 @@
     "launchAgentRuntimeRemoved": true,
     "manualStoryAudioUpload": true,
     "prophetStoryTextAudioPairing": true,
-    "mubashshirunStoryTextAudioPairing": true
+    "mubashshirunStoryTextAudioPairing": true,
+    "dynamicInstallerVersionBinding": true,
+    "lightweightHealthHandshake": true,
+    "brokenPipeStartupNoiseSuppressed": true,
+    "rootCause": "2.9.69 engine was installed with 2.9.68 bundle/launcher version hardcoded in install-mac.command, causing perpetual version mismatch and engine restart loop."
   },
   "mubashshirunStories": {
     "enabled": true,
