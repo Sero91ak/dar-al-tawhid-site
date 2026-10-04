@@ -7,25 +7,28 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="DĀR Voice">
-<link rel="manifest" href="/mobile/manifest.webmanifest">
+<link rel="manifest" href="/mobile/manifest.webmanifest?v=2978">
+<link rel="apple-touch-icon" sizes="180x180" href="/mobile/voice-studio-icon.png?v=2978">
+<link rel="apple-touch-icon-precomposed" href="/mobile/voice-studio-icon.png?v=2978">
+<link rel="icon" type="image/png" href="/mobile/voice-studio-icon.png?v=2978">
 <title>DĀR Voice</title>
 <style>
 :root{color-scheme:light;--bg:#f7f7f5;--card:#fff;--ink:#111;--muted:#777773;--line:#e8e8e4;--soft:#efefec;--good:#17784a;--warn:#9a5a00;--bad:#b42318;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
-body{overscroll-behavior-y:none}.app{min-height:100dvh;max-width:980px;margin:0 auto;padding:calc(var(--safe-top) + 8px) 0 calc(82px + var(--safe-bottom));background:var(--bg)}
-.top{height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;background:rgba(247,247,245,.93);backdrop-filter:blur(18px);z-index:20;border-bottom:1px solid var(--line)}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
+body{overscroll-behavior:none}.app{height:100dvh;min-height:0;max-width:980px;margin:0 auto;padding:calc(var(--safe-top) + 8px) 0 calc(68px + var(--safe-bottom));background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
+.top{height:58px;flex:0 0 58px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:relative;background:rgba(247,247,245,.93);backdrop-filter:blur(18px);z-index:20;border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:-.02em}.logo{width:28px;height:28px;border-radius:50%;background:#101b20;display:grid;place-items:center;overflow:hidden}.logo img{width:100%;height:100%;object-fit:cover}
 .online{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:12px}.dot{width:7px;height:7px;border-radius:50%;background:#aaa}.dot.ok{background:#20a464}.dot.bad{background:#d13d32}
 .iconbtn{border:0;background:transparent;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--ink)}.iconbtn:active{background:var(--soft)}
-main{padding:0 16px 20px}.screen{display:none}.screen.active{display:block}.hero{padding:20px 2px 8px}.kicker{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+main{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:0 16px 30px;scrollbar-width:none}main::-webkit-scrollbar{display:none}.screen{display:none}.screen.active{display:block}.hero{padding:20px 2px 8px}.kicker{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
 h1{font-size:31px;line-height:1.04;letter-spacing:-.045em;margin:8px 0 5px}.sub{font-size:14px;line-height:1.45;color:var(--muted)}
 .editor{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 7px 22px rgba(0,0,0,.035)}
-textarea{width:100%;border:0;outline:0;resize:none;background:transparent;color:var(--ink);font-size:20px;line-height:1.45;min-height:42dvh;padding:22px 20px 8px}textarea::placeholder{color:#aaa9a4}.editor-foot{padding:12px 14px 14px}
+textarea{display:block;width:100%;border:0;outline:0;resize:none;background:transparent;color:var(--ink);font-size:20px;line-height:1.45;min-height:40dvh;padding:22px 20px 12px;overflow:auto}textarea::placeholder{color:#aaa9a4}.editor-foot{padding:12px 14px 14px;border-top:1px solid rgba(0,0,0,.025)}
 .quick{display:flex;gap:8px;overflow-x:auto;padding:2px 0 11px;scrollbar-width:none}.quick::-webkit-scrollbar{display:none}.pill{white-space:nowrap;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 11px;font-size:12px;color:#4f4f4b}
-.control-row{display:flex;align-items:center;gap:8px}.voice{flex:1;min-width:0;border:1px solid var(--line);background:#fff;border-radius:14px;height:48px;padding:0 12px;display:flex;align-items:center;gap:10px;text-align:left}
-.avatar{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f1dca3,#35544f 62%,#132823);flex:0 0 auto}.voice-copy{min-width:0;flex:1}.voice-name{font-size:13px;font-weight:700}.voice-desc{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.settings-btn{width:48px;height:48px;border:1px solid var(--line);background:#fff;border-radius:14px;font-size:18px}.generate{height:48px;border:0;background:#111;color:#fff;border-radius:14px;padding:0 18px;font-weight:800;min-width:104px}.generate[disabled]{opacity:.45}
+.control-row{display:grid;grid-template-columns:minmax(0,1fr) 50px;gap:8px;align-items:center}.voice{width:100%;min-width:0;border:1px solid var(--line);background:#fff;border-radius:14px;min-height:52px;padding:6px 12px;display:flex;align-items:center;gap:10px;text-align:left;overflow:hidden}
+.avatar{width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f1dca3,#35544f 62%,#132823);flex:0 0 auto}.voice-copy{display:block;min-width:0;flex:1;overflow:hidden}.voice-name{display:block;font-size:13px;font-weight:750;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.voice-desc{display:block;font-size:11px;line-height:1.25;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.settings-btn{width:50px;height:52px;border:1px solid var(--line);background:#fff;border-radius:14px;font-size:18px}.generate{height:50px;border:0;background:#111;color:#fff;border-radius:14px;padding:0 18px;font-weight:800;min-width:104px}.control-row>.generate{grid-column:1/-1;width:100%;height:54px;font-size:15px}.generate[disabled]{opacity:.52}
 .analysis{margin-top:12px;display:none;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px}.analysis.show{display:block}.analysis-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}.analysis-title{font-weight:800;font-size:13px}
 .chips{display:flex;flex-wrap:wrap;gap:7px}.chip{border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:7px 9px;font-size:12px}.chip.warn{border-color:#efc48e;background:#fff6e8;color:#88520a}
 .player{display:none;margin-top:12px;background:#111;color:#fff;border-radius:20px;padding:15px}.player.show{display:block}.player-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.player-title{font-weight:800}.player small{color:#c7c7c3}audio{width:100%}
@@ -33,6 +36,7 @@ textarea{width:100%;border:0;outline:0;resize:none;background:transparent;color:
 .searchbar{display:flex;gap:8px}.searchbar input{flex:1;height:48px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:0 14px;outline:0}
 .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:9px}.candidate{display:flex;align-items:flex-start;gap:12px}.candidate-main{min-width:0;flex:1}.candidate strong{display:block;font-size:14px}.candidate .arabic{font-size:19px;line-height:1.35;margin-top:3px}.meta{font-size:11px;color:var(--muted);margin-top:4px}
 .candidate-actions{display:flex;gap:7px;margin-top:10px}.candidate-actions button{height:36px;border-radius:11px;border:1px solid var(--line);background:#fff;padding:0 11px;font-weight:700}.candidate-actions .confirm{background:#111;color:#fff;border-color:#111}
+.library-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 2px 9px}.library-head strong{font-size:15px}.library-head span{font-size:11px;color:var(--muted)}.catalog-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.catalog-actions button{height:40px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-weight:750}.catalog-actions .confirm{background:#111;color:#fff;border-color:#111}.catalog-more{width:100%;height:46px;border:1px solid var(--line);border-radius:14px;background:var(--card);font-weight:750;margin:4px 0 16px}.catalog-more[disabled]{opacity:.5}
 .empty{padding:34px 10px;text-align:center;color:var(--muted);font-size:14px}.history-item{display:flex;align-items:center;gap:12px}.playdot{width:42px;height:42px;border-radius:50%;border:0;background:#111;color:#fff;display:grid;place-items:center;font-size:15px}.hist-main{min-width:0;flex:1}.hist-name{font-weight:750;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hist-text{font-size:12px;line-height:1.35;color:#555;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.hist-meta{font-size:11px;color:var(--muted);margin-top:4px}
 .setting-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}.setting-row:last-child{border-bottom:0}.setting-label{font-weight:700;font-size:14px}.setting-note{font-size:11px;color:var(--muted);margin-top:3px}.badge{font-size:11px;padding:6px 8px;border-radius:999px;background:var(--soft);color:#555}.badge.good{background:#e9f7ef;color:var(--good)}
 .tabbar{position:fixed;left:0;right:0;bottom:0;height:calc(68px + var(--safe-bottom));padding-bottom:var(--safe-bottom);background:rgba(250,250,248,.94);backdrop-filter:blur(22px);border-top:1px solid var(--line);display:flex;z-index:50}.tabbar .inner{width:min(980px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}.tab{border:0;background:transparent;color:#8b8b86;font-size:10px;font-weight:700;display:grid;place-items:center;align-content:center;gap:4px}.tab svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:2}.tab.active{color:#111}
@@ -91,8 +95,10 @@ textarea{width:100%;border:0;outline:0;resize:none;background:transparent;color:
 <section class="screen" data-screen="pronunciation">
   <div class="hero"><div class="kicker">Aussprache</div><h1>Wörter prüfen & lernen</h1><div class="sub">Fehlerhafte oder neue Begriffe suchen, Varianten anhören und als Master bestätigen.</div></div>
   <div class="searchbar"><input id="wordSearch" placeholder="z. B. Tawḥīd, Ṣaḥābah, Fuṣḥā"><button class="generate" id="wordSearchBtn">Suchen</button></div>
-  <div id="wordResults" style="margin-top:12px"><div class="empty">Suche einen Begriff oder tippe in der Analyse auf ein unbekanntes Wort.</div></div>
-  <audio id="previewAudio" controls playsinline style="display:none;margin-top:12px"></audio>
+  <div class="library-head"><strong>Alle Wörter</strong><span id="catalogCount">Bibliothek wird geladen …</span></div>
+  <div id="wordResults"><div class="empty">Wortliste wird geladen …</div></div>
+  <button id="catalogMore" class="catalog-more" type="button" hidden>Weitere Wörter laden</button>
+  <audio id="previewAudio" controls playsinline style="display:none;margin:12px 0 18px"></audio>
 </section>
 <section class="screen" data-screen="settings">
   <div class="hero"><div class="kicker">DĀR Voice</div><h1>System</h1><div class="sub">Engine, Modell und mobile Verbindung.</div></div>
@@ -100,7 +106,7 @@ textarea{width:100%;border:0;outline:0;resize:none;background:transparent;color:
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.77</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.78</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -129,7 +135,7 @@ textarea{width:100%;border:0;outline:0;resize:none;background:transparent;color:
 <div id="toast" class="toast"></div>
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const state={health:null,analysis:null,audioBlob:null,audioUrl:"",previewTerm:""};
+const state={health:null,analysis:null,audioBlob:null,audioUrl:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,generating:false};
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -144,7 +150,7 @@ async function health(){
     $("#arabicBadge").textContent=d.reference_arabic_dedicated?"AR MASTER":"DE Fallback";$("#arabicBadge").className=d.reference_arabic_dedicated?"badge good":"badge";return true;
   }catch(e){$("#dot").className="dot bad";$("#engineText").textContent="Mac nicht erreichbar";$("#healthBadge").textContent="offline";$("#healthNote").textContent="Mac und iPhone/iPad müssen im selben WLAN sein.";return false}
 }
-function go(name){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="settings")health();scrollTo({top:0,behavior:"instant"})}
+function go(name){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="pronunciation")loadCatalog(true);if(name==="settings")health();document.querySelector("main")?.scrollTo({top:0,behavior:"instant"})}
 $$(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));$("#refreshBtn").onclick=()=>{health();if($(".screen.active")?.dataset.screen==="history")loadHistory()};
 $$("[data-style]").forEach(b=>b.onclick=()=>{$("#style").value=b.dataset.style;toast("Stil: "+b.textContent)});
 async function analyzeText(){
@@ -167,12 +173,25 @@ async function generate(){
   if(useLibrary&&(analyzed.unresolvedIslamicTerms||[]).length){
     $("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";toast("Erst die markierten Wörter prüfen.");return
   }
-  $("#generateBtn").textContent="Erzeuge …";
+  $("#generateBtn").textContent="Erzeuge …";state.generating=true;
+  let progressBusy=false;
+  const progressTimer=setInterval(async()=>{
+    if(!state.generating||progressBusy)return;
+    progressBusy=true;
+    try{
+      const rr=await api("/status");const st=await rr.json();
+      const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
+      const done=Number(st.render_completed_segments||0),total=Number(st.render_total_segments||0);
+      $("#generateBtn").textContent=pct>0?("Erzeuge "+pct+"%"+(total?" · "+done+"/"+total:"")):"Erzeuge …";
+      if(st.message){$("#analysis").classList.add("show");$("#analysisState").textContent=pct?pct+"%":"läuft";$("#analysisBody").textContent=st.message}
+    }catch(_){}
+    finally{progressBusy=false}
+  },500);
   try{
     const endpoint=useLibrary?"/generate":"/generate-free";
     const payload=useLibrary
-      ?{text,prepared:analyzed.prepared||"",style:$("#style").value}
-      :{text,prepared:"",style:$("#style").value,pronunciationLibrary:false};
+      ?{text,prepared:analyzed.prepared||"",style:$("#style").value,interactiveFast:true}
+      :{text,prepared:"",style:$("#style").value,pronunciationLibrary:false,interactiveFast:true};
     const r=await api(endpoint,{method:"POST",body:JSON.stringify(payload)});
     if(!r.ok){let d={};try{d=await r.json()}catch{};throw Error(d.error||"Audioerzeugung fehlgeschlagen")}
     const blob=await r.blob();
@@ -182,7 +201,7 @@ async function generate(){
     $("#playerMeta").textContent="Serhat Voice · "+($("#style").selectedOptions[0]?.textContent||"Auto")+(useLibrary?" · Aussprache aktiv":" · frei");
     $("#audio").play().catch(()=>{});toast("Audio ist fertig.");loadHistory();
   }catch(e){toast(e.message)}
-  finally{$("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen"}
+  finally{state.generating=false;clearInterval(progressTimer);$("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen"}
 }
 $("#generateBtn").onclick=generate;$("#closePlayer").onclick=()=>$("#player").classList.remove("show");$("#saveBtn").onclick=()=>{if(state.audioUrl)window.open(state.audioUrl,"_blank")};
 $("#shareBtn").onclick=async()=>{if(!state.audioBlob)return;const file=new File([state.audioBlob],"dar-serhat-voice.wav",{type:"audio/wav"});if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:"DĀR Voice"})}catch{}}else window.open(state.audioUrl,"_blank")};
@@ -193,6 +212,44 @@ async function loadHistory(){
   $$("[data-audio]").forEach(b=>b.onclick=()=>{const u="/mobile/audio?name="+b.dataset.audio;$("#audio").src=u;$("#player").classList.add("show");$("#playerMeta").textContent="Verlauf";go("create");$("#audio").play().catch(()=>{})});$$("[data-open]").forEach(b=>b.onclick=()=>window.open("/mobile/audio?name="+b.dataset.open,"_blank"))}
   catch(e){box.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}
 }
+function catalogCard(x,i){
+  const term=String(x.canonical||x.input||"").trim();
+  const master=!!x.confirmed;
+  return '<div class="card candidate"><div class="candidate-main"><strong>'+esc(term)+'</strong><div class="arabic">'+esc(x.ttsText||x.alias||"")+'</div><div class="meta">'+esc(x.source||"Bibliothek")+' · '+esc(x.ttsLanguage||"")+(master?' · Master ✓':'')+'</div><div class="catalog-actions"><button data-catalog-preview="'+i+'">Anhören</button><button class="confirm" data-catalog-confirm="'+i+'" '+(master?'disabled':'disabled')+'>'+(master?'Master ✓':'Als Master bestätigen')+'</button></div></div></div>';
+}
+function bindCatalogRows(rows){
+  $$("[data-catalog-preview]").forEach(b=>b.onclick=()=>previewCandidate(rows[Number(b.dataset.catalogPreview)],String(rows[Number(b.dataset.catalogPreview)]?.canonical||""),b));
+  $$("[data-catalog-confirm]").forEach(b=>b.onclick=()=>confirmCandidate(String(rows[Number(b.dataset.catalogConfirm)]?.canonical||""),b));
+}
+async function loadCatalog(reset=true){
+  const q=String($("#wordSearch").value||"").trim();
+  if(reset){state.catalogOffset=0;state.catalogQuery=q;$("#wordResults").innerHTML='<div class="empty">Wortliste wird geladen …</div>'}
+  const offset=reset?0:state.catalogOffset;
+  try{
+    const r=await api("/learning/catalog?q="+encodeURIComponent(q)+"&offset="+offset+"&limit=60");
+    const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Wortliste nicht verfügbar");
+    const rows=d.items||[];state.catalogTotal=Number(d.total||0);state.catalogOffset=offset+rows.length;
+    $("#catalogCount").textContent=state.catalogTotal.toLocaleString("de-DE")+" Wörter";
+    const html=rows.map(catalogCard).join("")||'<div class="empty">'+(q?'Keine passenden Wörter gefunden.':'Keine Wörter verfügbar.')+'</div>';
+    if(reset)$("#wordResults").innerHTML=html;else $("#wordResults").insertAdjacentHTML("beforeend",html);
+    $("#catalogMore").hidden=!d.hasMore;$("#catalogMore").disabled=false;
+    bindCatalogRows(rows);
+    if(!reset){
+      const all=[...$("#wordResults").querySelectorAll("[data-catalog-preview]")];
+      const base=all.length-rows.length;
+      rows.forEach((row,j)=>{
+        const p=all[base+j];if(!p)return;
+        p.onclick=()=>previewCandidate(row,String(row.canonical||""),p);
+        const c=p.closest(".candidate")?.querySelector("[data-catalog-confirm]");
+        if(c)c.onclick=()=>confirmCandidate(String(row.canonical||""),c);
+      });
+    }
+  }catch(e){if(reset)$("#wordResults").innerHTML='<div class="empty">'+esc(e.message)+'</div>';$("#catalogCount").textContent="Fehler"}
+}
+$("#catalogMore").onclick=()=>{$("#catalogMore").disabled=true;loadCatalog(false)};
+let catalogSearchTimer=0;
+$("#wordSearch").addEventListener("input",()=>{clearTimeout(catalogSearchTimer);catalogSearchTimer=setTimeout(()=>loadCatalog(true),220)});
+
 function openWord(word){go("pronunciation");$("#wordSearch").value=word;searchWord(word)}
 async function searchWord(force){
   const q=String(force||$("#wordSearch").value).trim();if(!q)return toast("Wort eingeben.");const box=$("#wordResults");box.innerHTML='<div class="empty">Suche Varianten …</div>';
@@ -201,7 +258,7 @@ async function searchWord(force){
   $$("[data-preview]").forEach(b=>b.onclick=()=>previewCandidate(rows[Number(b.dataset.preview)],q,b));$$("[data-confirm]").forEach(b=>b.onclick=()=>confirmCandidate(q,b))}
   catch(e){box.innerHTML='<div class="empty">'+esc(e.message)+'</div>'}
 }
-$("#wordSearchBtn").onclick=()=>searchWord();$("#wordSearch").addEventListener("keydown",e=>{if(e.key==="Enter")searchWord()});
+$("#wordSearchBtn").onclick=()=>{$("#wordSearch").value.trim()?searchWord():loadCatalog(true)};$("#wordSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){$("#wordSearch").value.trim()?searchWord():loadCatalog(true)}});
 async function previewCandidate(row,term,btn){
   btn.disabled=true;btn.textContent="Erzeuge …";state.previewTerm=term;
   try{
