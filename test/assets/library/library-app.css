@@ -1797,20 +1797,6 @@ html[data-theme="bordeaux"] .lib-detail-backdrop{
   .lib-detail-topmeta{justify-content:center}
 }
 
-html[data-theme="bordeaux"] .lib-page[data-library-root] .lib-hero,
-html[data-theme="bordeaux"] .lib-detail .lib-detail-hero{
-  filter:saturate(.88) sepia(.05);
-}
-
-html[data-theme="salbei"] .lib-page[data-library-root] .lib-hero,
-html[data-theme="salbei"] .lib-detail .lib-detail-hero,
-html[data-theme="soft"] .lib-page[data-library-root] .lib-hero,
-html[data-theme="soft"] .lib-detail .lib-detail-hero,
-html[data-theme="light"] .lib-page[data-library-root] .lib-hero,
-html[data-theme="light"] .lib-detail .lib-detail-hero{
-  filter:saturate(.76) brightness(1.025);
-}
-
 @media(prefers-reduced-motion:no-preference){
   .lib-page[data-library-root] .lib-hero,
   .lib-detail .lib-detail-hero{
@@ -1862,5 +1848,76 @@ html[data-layout="expanded"] .lib-page[data-library-root] .lib-grid{
 @media(max-width:360px){
   html[data-layout="compact"] .lib-page[data-library-root] .lib-grid{
     gap:16px 10px!important;
+  }
+}
+
+
+/* DAR_LIBRARY_READABILITY_WIDTH_V1220
+   Keep imagery theme-aware without filtering text, and restrain reading width on tablets/desktop. */
+.lib-page[data-library-root] > .lib-toolbar,
+.lib-page[data-library-root] > .lib-section,
+.lib-page[data-library-root] > .lib-portals{
+  width:min(1180px,calc(100% - 24px));
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.lib-detail > .lib-actions,
+.lib-detail > .lib-meta-grid,
+.lib-detail > .lib-panel,
+.lib-detail > .lib-stats-live,
+.lib-detail > .lib-status-note{
+  width:min(980px,calc(100% - 24px));
+  margin-left:auto;
+  margin-right:auto;
+}
+
+html[data-theme="bordeaux"]{
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 80%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 48%,transparent);
+}
+
+html[data-theme="light"],
+html[data-theme="soft"],
+html[data-theme="salbei"]{
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 97%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 88%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 66%,transparent);
+}
+
+html[data-theme="eisgold"]{
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 96%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 86%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 62%,transparent);
+}
+
+html[data-theme="royal"],
+html[data-theme="dar-al-layl"],
+html[data-theme="dark"]{
+  --dar-lib-hero-overlay-start:color-mix(in srgb,var(--bg) 94%,transparent);
+  --dar-lib-hero-overlay-mid:color-mix(in srgb,var(--bg) 74%,transparent);
+  --dar-lib-hero-overlay-end:color-mix(in srgb,var(--bg) 38%,transparent);
+}
+
+@media(max-width:599px){
+  .lib-page[data-library-root] > .lib-toolbar,
+  .lib-page[data-library-root] > .lib-section,
+  .lib-page[data-library-root] > .lib-portals,
+  .lib-detail > .lib-actions,
+  .lib-detail > .lib-meta-grid,
+  .lib-detail > .lib-panel,
+  .lib-detail > .lib-stats-live,
+  .lib-detail > .lib-status-note{
+    width:calc(100% - 20px);
+  }
+}
+
+@media(min-width:1200px){
+  .lib-page[data-library-root] .lib-hero,
+  .lib-detail .lib-detail-hero{
+    min-height:320px;
+  }
+  .lib-page[data-library-root] .lib-card-body h4{
+    font-size:.93rem;
   }
 }
