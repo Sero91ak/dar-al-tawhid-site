@@ -107,7 +107,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.90</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.91</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -286,7 +286,7 @@ function activateLivePreview(st){
     pumpLiveChunks();
     return;
   }
-  // Rückwärtskompatibilität für Engines vor 2.9.90.
+  // Rückwärtskompatibilität für Engines vor 2.9.91.
   const name=String(st?.render_preview_name||"").trim();
   const generation=Math.max(0,Number(st?.render_preview_generation||0));
   if(!name||name===state.livePreviewName||(generation&&generation<=state.livePreviewGeneration))return;
@@ -421,9 +421,11 @@ async function generate(){
     }
     if(!r.ok||!d.ok)throw Error(d.error||"Audioerzeugung konnte nicht gestartet werden.");
     $("#analysis").classList.add("show");
-    $("#analysisState").textContent="läuft";
+    $("#analysisState").textContent=d.reuseType==="exact-history-cache"?"sofort":"läuft";
     $("#analysisState").className="badge good";
-    $("#analysisBody").textContent="Engine gestartet · erste hörbare Audio wird vorbereitet …";
+    $("#analysisBody").textContent=d.reuseType==="exact-history-cache"
+      ?"Identische Serhat-Voice-Audio bereits vorhanden · wird sofort geöffnet."
+      :"Engine gestartet · erste hörbare Audio wird vorbereitet …";
     persistGenerationJob(d.jobId,useLibrary);
     await monitorGenerationJob(d.jobId,useLibrary);
   }catch(e){
