@@ -717,16 +717,25 @@ PRONUNCIATION_CATALOG_CACHE_VERSION=0
 PRONUNCIATION_CATALOG_CACHE={"key":None,"rows":[]}
 PRONUNCIATION_CATALOG_CACHE_LOCK=threading.Lock()
 
+RULES_BY_FIRST={}
+
 def rebuild_runtime_rules():
     global LIB,RULES,MASTER_TTS,AUDIO_LOCK_BY_TTS,AUDIO_LOCK_LABELS,AUDIO_LOCK_FORMS
     global HONORIFIC_TTS_BY_KEY,HONORIFIC_RULE_BY_KEY,HONORIFIC_SOURCE_FORMS
-    global MASTER_ENTRIES,MASTER_RULES,MASTER_ALIAS_INDEX,PRONUNCIATION_CATALOG_CACHE_VERSION
+    global MASTER_ENTRIES,MASTER_RULES,MASTER_ALIAS_INDEX,PRONUNCIATION_CATALOG_CACHE_VERSION,RULES_BY_FIRST
     user_rules=list((USER_OVERRIDE_DATA or {}).get("rules") or [])
     MASTER_ENTRIES=build_master_library()
     blocked=[str(r.get("string_to_replace","")) for r in user_rules+BASE_RULES]
     MASTER_RULES=master_rules_from_entries(MASTER_ENTRIES,blocked)
     # User-bestätigte Regeln stehen zuerst; installierte Regeln schlagen jeden Online-/Seed-Eintrag.
     RULES=sorted(user_rules+BASE_RULES+MASTER_RULES,key=lambda r:len(str(r.get("string_to_replace",""))),reverse=True)
+    # 2.9.93: O(1)-Startindex statt bei jedem Zeichen tausende Regeln zu prüfen.
+    # Die Reihenfolge pro Anfangszeichen bleibt "längste Regel zuerst".
+    RULES_BY_FIRST={}
+    for _rule in RULES:
+        _needle=str((_rule or {}).get("string_to_replace") or "")
+        if _needle:
+            RULES_BY_FIRST.setdefault(_needle[0],[]).append(_rule)
     MASTER_ALIAS_INDEX={}
     for e in MASTER_ENTRIES:
         for form in [e.get("canonical",""),*(e.get("aliases") or [])]:
@@ -4868,7 +4877,7 @@ def prepare(text:str,interactive_fast:bool=False):
     pos=0;out=[];found=[]
     while pos<len(text):
         hit=None
-        for r in RULES:
+        for r in RULES_BY_FIRST.get(text[pos],()):
             needle=str(r.get("string_to_replace",""))
             if needle and text.startswith(needle,pos):
                 if r.get("requires_boundary") and not pronunciation_rule_boundary_ok(text,pos,needle):
