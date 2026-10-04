@@ -1,4 +1,4 @@
-/* Voice Studio 2.9.77 · page-focused navigation */
+/* Voice Studio 2.9.78 · page-focused navigation */
 (() => {
 "use strict";
 
@@ -381,15 +381,15 @@ function injectStyles(){
 function navHtml(){
   return `<nav class="content-studio-nav" aria-label="Studio Bereiche und Schnellaktionen">
     <div class="cs-nav-tabs">
+      <button id="csFreeVoiceTab" class="cs-tab" type="button">Erzeugen</button>
+      <button id="csPronunciationTab" class="cs-tab" type="button">Aussprache</button>
       <button id="csProphetTab" class="cs-tab" type="button">Propheten</button>
       <button id="csSahabaTab" class="cs-tab" type="button">Ṣaḥābah · 10</button>
       <button class="cs-tab" data-cs-kind="story">Geschichten</button>
       <button class="cs-tab" data-cs-kind="quiz">Quiz</button>
       <button class="cs-tab" data-cs-kind="game">Spiele</button>
-      <button class="cs-tab" data-cs-kind="ios">iOS · Inhalte</button>
-      <button id="csPronunciationTab" class="cs-tab" type="button">Aussprache</button>
       <button id="csAlphabetTab" class="cs-tab" type="button">Alif–Yāʾ</button>
-      <button id="csFreeVoiceTab" class="cs-tab" type="button">Freie Stimme</button>
+      <button class="cs-tab" data-cs-kind="ios">Inhalte</button>
       <button id="csSystemTab" class="cs-tab" type="button">System</button>
     </div>
     <div class="cs-flow" aria-label="Produktionsweg">
