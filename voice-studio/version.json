@@ -1,7 +1,7 @@
 {
-  "version": "2.9.91",
-  "updatedAt": "2026-10-04T14:12:00+02:00",
-  "deployTrigger": "voice-studio-2.9.90-instant-fast-native-green-r2",
+  "version": "2.9.92",
+  "updatedAt": "2026-10-04T16:05:00+02:00",
+  "deployTrigger": "voice-studio-2.9.92-first-audio-mobile-word-bindings-candidate",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v61",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-contents-api",
-  "engineVersion": "2.9.91-fast-async-incremental-exact-repeat",
+  "engineVersion": "2.9.92-fast-async-incremental-first-audio",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -190,7 +190,7 @@
     "maxMasterPlsExactVariantsPreserved": true,
     "maxMasterPlsConflictPolicy": "exact-existing-curated-rule-wins; remaining PLS spelling variants preload",
     "maxMasterPlsWordBoundaryGuard": true,
-    "appEngineVersionHandshake": "2.9.91",
+    "appEngineVersionHandshake": "2.9.92",
     "smokeTestManifestVersionDynamic": true,
     "storyReferenceMemory": true,
     "storyReferenceSeed": "story-reference-muhammad-2026-10-04.json",
@@ -497,8 +497,8 @@
     "macFreeGenerationStartEndpoint": "/generate-free-start",
     "separateModelWaitBeforeInteractiveJob": false,
     "firstAudioHeadChars": {
-      "default": 84,
-      "kidsStory": 96
+      "default": 60,
+      "kidsStory": 68
     },
     "macRenderPollingMilliseconds": 320,
     "mobileRenderPollingMilliseconds": 320,
@@ -508,7 +508,10 @@
     "exactReuseKeyIncludesUserLearning": true,
     "coldStartGermanReferenceFirst": true,
     "deferredArabicWarmupWhenIdle": true,
-    "renderCacheCleanupDeferredUntilIdle": true
+    "renderCacheCleanupDeferredUntilIdle": true,
+    "firstAudioPreloadScanSegments": 2,
+    "firstAudioPollBeforeReadyMs": 120,
+    "firstAudioPollAfterReadyMs": 260
   },
   "contentStudio": {
     "enabled": true,
@@ -1404,16 +1407,16 @@
     "design": "original-dar-mobile-ui-inspired-by-modern-mobile-voice-workflows",
     "smokeValidated": false,
     "releaseRef": "50576efe8fea8c17b25a134f339edf7a5d88e5cc",
-    "version": "2.9.91",
+    "version": "2.9.92",
     "pwaStartUrl": "/mobile/",
     "pairTokenStoredInHttpOnlyCookie": true,
     "pairTokenExcludedFromInstalledStartUrl": true,
     "audioPathTraversalGuard": true,
     "candidateConfirmationBoundToPreview": true,
-    "fullValidatePassed": true,
+    "fullValidatePassed": false,
     "healthPassed": false,
     "canonicalGuardPassed": false,
-    "nativeMacAudioRoutePassed": true,
+    "nativeMacAudioRoutePassed": false,
     "pronunciationCatalog": "/learning/catalog",
     "fullPronunciationLibraryBrowse": true,
     "appleTouchIcon": true,
@@ -1499,7 +1502,11 @@
     "exactRepeatInstantReuse": true,
     "coldStartOptimized": true,
     "asyncPreviewFlow": true,
-    "finalRenderStatusUsesJobSnapshot": true
+    "finalRenderStatusUsesJobSnapshot": true,
+    "catalogBindingRegressionFixed": true,
+    "serverPronunciationIssueBindingFixed": true,
+    "autoAnalyzeOnPaste": true,
+    "firstAudioAdaptivePolling": true
   },
   "mobile": {
     "enabled": true,
