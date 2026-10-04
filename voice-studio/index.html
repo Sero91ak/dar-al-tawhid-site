@@ -2206,7 +2206,6 @@ async function restoreDesktopGenerationJob(){
   try{saved=JSON.parse(localStorage.getItem(DESKTOP_GENERATION_KEY)||"null")}catch(_){}
   const jobId=String(saved?.jobId||"").trim(),kind=saved?.kind==="free"?"free":"main";
   if(!jobId)return;
-  let poll=null;
   const button=kind==="free"?$("#freeVoiceGenerateBtn"):$("#generateBtn");
   try{
     const initial=await getDesktopGenerationJob(jobId);
@@ -2220,22 +2219,13 @@ async function restoreDesktopGenerationJob(){
       $("#playerWrap").hidden=false;
       setMessage("Laufende Audio wird wieder verbunden …","warn");
     }
-    poll=setInterval(async()=>{
-      const st=await getRenderStatus();
-      if(!st)return;
-      const statusJob=String(st.render_job_id||"").trim();
-      if(statusJob&&statusJob!==jobId)return;
-      if(st.render_preview_ready)updateChunkStream(kind,st);
-      const pct=Math.max(0,Math.min(100,Number(st.progress||0)));
-      if(button)button.textContent="Erzeugen "+pct+" %";
-      if(kind==="free"){
-        $("#freeVoiceProgress").style.width=pct+"%";
-        $("#freeVoiceStatus").textContent=st.message||("Audio wird fortgesetzt · "+pct+" %");
-      }else if(st.message){
-        setMessage(st.message,"warn");
-      }
-    },420);
-    const job=initial.state==="ready"?initial:await waitDesktopGenerationJob(jobId);
+    const job=initial.state==="ready"
+      ?initial
+      :await waitDesktopGenerationJob(
+          jobId,30*60*1000,
+          st=>applyDesktopRenderProgress(kind,jobId,st,button?[button]:[])
+        );
+    if(initial.state==="ready"&&initial.render)applyDesktopRenderProgress(kind,jobId,initial.render,button?[button]:[]);
     const url=desktopGenerationAudioUrl(job);
     clearDesktopGenerationJob(jobId);
     if(kind==="free"){
@@ -2262,7 +2252,6 @@ async function restoreDesktopGenerationJob(){
     if(kind==="free")$("#freeVoiceStatus").textContent=e.message||String(e);
     else setMessage(e.message||String(e));
   }finally{
-    if(poll)clearInterval(poll);
     if(button){button.disabled=false;button.textContent=kind==="free"?"Stimme erzeugen":"Audio erzeugen"}
   }
 }
