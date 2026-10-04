@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v12-sahaba1091",
-  "label": "KIDS · V1.07.16",
-  "releasedAt": "2026-10-04T00:28:00.000Z",
-  "note": "V1.07.16: Die hochgeladene Muḥammad-Prophetengeschichte ist für alle drei Altersstufen als Test-Audio zugeordnet. Der Live-Build und Service-Worker-Cache wurden neu veröffentlicht, damit Hören & Mitlesen sofort den aktuellen Audio-Stand lädt.",
+  "buildId": "kids-shell-v12-sahaba1092",
+  "label": "KIDS · V1.07.17",
+  "releasedAt": "2026-10-04T00:47:00.000Z",
+  "note": "V1.07.17: Muḥammad-Geschichte Audio-Wiedergabe repariert. Die bisherige Adobe-Share-Adresse wurde für den Test durch eine direkt abspielbare MP3-Quelle ersetzt; Hören & Mitlesen kann die Aufnahme jetzt unmittelbar starten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1091",
+    "serviceWorkerCache": "v1092",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -182,6 +182,7 @@
       "4-5",
       "6-8",
       "9-10"
-    ]
+    ],
+    "muhammadStoryAudioPlayback": "direct-test-v2"
   }
 }
