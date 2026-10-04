@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v15-quiz-reward1095",
   "label": "KIDS · V1.07.21",
   "releasedAt": "2026-10-04T08:55:00Z",
-  "note": "Kids-Quiz 001–050 bleibt vollständig vom normalen DĀR-Quiz getrennt. Drei lokal gebündelte, altersgerechte Quiz-Bildwelten, responsive Modalführung, Quellen/Erklärungen, audio-first für 4–6 und altersabhängige Erfolgsanimation mit Reduced-Motion-Schutz.",
+  "note": "Kids-Quiz 001–100 bleibt vollständig vom normalen DĀR-Quiz getrennt. Drei lokal gebündelte, altersgerechte Quiz-Bildwelten, responsive Modalführung, Quellen/Erklärungen, audio-first für 4–6 und altersabhängige Erfolgsanimation mit Reduced-Motion-Schutz.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -247,16 +247,16 @@
     "storyAudioSignedPreviewDependency": false,
     "kidsQuizSystem": "independent-v1",
     "kidsQuizAdultDependency": false,
-    "kidsQuizQuestionCount": 50,
+    "kidsQuizQuestionCount": 100,
     "kidsQuizAgeBands": [
       "4-6",
       "7-8",
       "9-10"
     ],
     "kidsQuizDistribution": {
-      "4-6": 18,
-      "7-8": 16,
-      "9-10": 16
+      "4-6": 36,
+      "7-8": 32,
+      "9-10": 32
     },
     "kidsQuizAudioFirstBand": "4-6",
     "kidsQuizAgeAdaptiveUx": "v1",
@@ -270,7 +270,7 @@
       "version": "age-adaptive-realistic-v3",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
-      "questionCount": 50,
+      "questionCount": 100,
       "ageBands": [
         "4-6",
         "7-8",
