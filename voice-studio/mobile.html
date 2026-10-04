@@ -5,12 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#f7f7f5">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="DĀR Voice">
-<link rel="manifest" href="/mobile/manifest.webmanifest?v=2978">
-<link rel="apple-touch-icon" sizes="180x180" href="/mobile/voice-studio-icon.png?v=2978">
-<link rel="apple-touch-icon-precomposed" href="/mobile/voice-studio-icon.png?v=2978">
-<link rel="icon" type="image/png" href="/mobile/voice-studio-icon.png?v=2978">
+<link rel="manifest" href="/mobile/manifest.webmanifest?v=2979">
+<link rel="apple-touch-icon" href="/mobile/apple-touch-icon.png?v=2979">
+<link rel="apple-touch-icon-precomposed" href="/mobile/apple-touch-icon-precomposed.png?v=2979">
+<link rel="icon" type="image/png" href="/mobile/voice-studio-icon.png?v=2979">
 <title>DĀR Voice</title>
 <style>
 :root{color-scheme:light;--bg:#f7f7f5;--card:#fff;--ink:#111;--muted:#777773;--line:#e8e8e4;--soft:#efefec;--good:#17784a;--warn:#9a5a00;--bad:#b42318;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)}
@@ -25,7 +26,7 @@ main{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scro
 h1{font-size:31px;line-height:1.04;letter-spacing:-.045em;margin:8px 0 5px}.sub{font-size:14px;line-height:1.45;color:var(--muted)}
 .editor{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 7px 22px rgba(0,0,0,.035)}
 textarea{display:block;width:100%;border:0;outline:0;resize:none;background:transparent;color:var(--ink);font-size:20px;line-height:1.45;min-height:40dvh;padding:22px 20px 12px;overflow:auto}textarea::placeholder{color:#aaa9a4}.editor-foot{padding:12px 14px 14px;border-top:1px solid rgba(0,0,0,.025)}
-.quick{display:flex;gap:8px;overflow-x:auto;padding:2px 0 11px;scrollbar-width:none}.quick::-webkit-scrollbar{display:none}.pill{white-space:nowrap;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 11px;font-size:12px;color:#4f4f4b}
+.quick{display:flex;gap:8px;overflow-x:auto;padding:2px 0 11px;scrollbar-width:none}.quick::-webkit-scrollbar{display:none}.pill{white-space:nowrap;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 11px;font-size:12px;color:#4f4f4b}.pill.active{background:#111;color:#fff;border-color:#111}
 .control-row{display:grid;grid-template-columns:minmax(0,1fr) 50px;gap:8px;align-items:center}.voice{width:100%;min-width:0;border:1px solid var(--line);background:#fff;border-radius:14px;min-height:52px;padding:6px 12px;display:flex;align-items:center;gap:10px;text-align:left;overflow:hidden}
 .avatar{width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f1dca3,#35544f 62%,#132823);flex:0 0 auto}.voice-copy{display:block;min-width:0;flex:1;overflow:hidden}.voice-name{display:block;font-size:13px;font-weight:750;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.voice-desc{display:block;font-size:11px;line-height:1.25;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
 .settings-btn{width:50px;height:52px;border:1px solid var(--line);background:#fff;border-radius:14px;font-size:18px}.generate{height:50px;border:0;background:#111;color:#fff;border-radius:14px;padding:0 18px;font-weight:800;min-width:104px}.control-row>.generate{grid-column:1/-1;width:100%;height:54px;font-size:15px}.generate[disabled]{opacity:.52}
@@ -60,7 +61,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
   <div class="create-grid">
     <div>
       <div class="editor">
-        <textarea id="text" placeholder="Hier Text eingeben …" spellcheck="true"></textarea>
+        <textarea id="text" placeholder="Hier Text eingeben …" spellcheck="false" autocapitalize="sentences" autocomplete="off"></textarea>
         <div class="editor-foot">
           <div class="quick">
             <button class="pill" data-style="narration">Erzählung</button>
@@ -106,7 +107,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.78</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.79</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -135,7 +136,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <div id="toast" class="toast"></div>
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const state={health:null,analysis:null,audioBlob:null,audioUrl:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
+const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],generating:false};
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
@@ -152,19 +153,28 @@ async function health(){
 }
 function go(name){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="pronunciation")loadCatalog(true);if(name==="settings")health();document.querySelector("main")?.scrollTo({top:0,behavior:"instant"})}
 $$(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));$("#refreshBtn").onclick=()=>{health();if($(".screen.active")?.dataset.screen==="history")loadHistory()};
-$$("[data-style]").forEach(b=>b.onclick=()=>{$("#style").value=b.dataset.style;toast("Stil: "+b.textContent)});
-async function analyzeText(){
+function syncStylePills(){
+  $("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===$("#style").value));
+}
+$("[data-style]").forEach(b=>b.onclick=()=>{
+  $("#style").value=b.dataset.style;
+  try{localStorage.setItem("dar.voice.mobile.style",b.dataset.style)}catch(_){}
+  state.analysis=null;syncStylePills();toast("Stil: "+b.textContent)
+});
+async function analyzeText(force=false){
   const text=$("#text").value.trim();if(!text){toast("Bitte zuerst Text eingeben.");return null}
+  const style=$("#style").value;
+  if(!force&&state.analysis&&state.analysisText===text&&state.analysisStyle===style)return state.analysis;
   $("#analysis").classList.add("show");$("#analysisState").textContent="prüft …";$("#analysisBody").innerHTML='<div class="sub">Begriffe und Aussprache werden geprüft …</div>';
   try{
-    const r=await api("/analyze",{method:"POST",body:JSON.stringify({text,style:$("#style").value})});const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Analyse fehlgeschlagen");state.analysis=d;
+    const r=await api("/analyze",{method:"POST",body:JSON.stringify({text,style:$("#style").value})});const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Analyse fehlgeschlagen");state.analysis=d;state.analysisText=text;state.analysisStyle=style;
     const unresolved=d.unresolvedIslamicTerms||[],review=d.reviewTerms||[],masters=d.masterTerms||[];
     if(unresolved.length){$("#analysisState").textContent=unresolved.length+" prüfen";$("#analysisState").className="badge";$("#analysisBody").innerHTML='<div class="sub" style="margin-bottom:8px">Diese Begriffe brauchen eine Ausspracheprüfung:</div><div class="chips">'+unresolved.map(x=>'<button class="chip warn" data-word="'+esc(x.term)+'">'+esc(x.term)+'</button>').join("")+'</div>';$$("[data-word]").forEach(b=>b.onclick=()=>openWord(b.dataset.word))}
     else{$("#analysisState").textContent="bereit";$("#analysisState").className="badge good";$("#analysisBody").innerHTML='<div class="sub">Keine ungeprüften Begriffe gefunden.</div>'+(masters.length||review.length?'<div class="chips" style="margin-top:8px">'+masters.slice(0,8).map(x=>'<span class="chip">'+esc(x)+'</span>').join("")+review.slice(0,6).map(x=>'<span class="chip">'+esc(x)+'</span>').join("")+'</div>':"")}
     return d;
   }catch(e){$("#analysisState").textContent="Fehler";$("#analysisBody").textContent=e.message;toast(e.message);return null}
 }
-$("#analyzeBtn").onclick=analyzeText;
+$("#analyzeBtn").onclick=()=>analyzeText(true);
 async function generate(){
   if(!await health())return toast("Mac-Engine nicht erreichbar.");const text=$("#text").value.trim();if(!text)return toast("Bitte Text eingeben.");
   const useLibrary=!!$("#pronToggle").checked;
@@ -279,7 +289,8 @@ async function previewCandidate(row,term,btn){
     if(snap.state!=="ready")throw Error(snap.error||"Schnelltest nicht bereit");
     const audio=$("#previewAudio");audio.src="/learning/preview-audio?id="+encodeURIComponent(d.jobId);audio.style.display="block";
     await audio.play().catch(()=>{});
-    const confirm=btn.closest(".candidate").querySelector("[data-confirm]");
+    const confirm=btn.closest(".candidate")?.querySelector("[data-confirm],[data-catalog-confirm]");
+    if(!confirm){toast("Diese Aussprache ist bereits als Master gespeichert.");return}
     confirm.dataset.previewId=String(snap.previewId||"");
     confirm.dataset.previewJobId=String(snap.jobId||d.jobId||"");
     confirm.disabled=!confirm.dataset.previewId;
@@ -303,6 +314,17 @@ $("#settingsBtn").onclick=openSheet;$("#voiceBtn").onclick=openSheet;$("#sheetDo
 const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
 $("#standaloneBadge").textContent=isStandalone?"App":"Web";$("#standaloneBadge").className=isStandalone?"badge good":"badge";
 $("#installHelpBtn").onclick=()=>toast(isStandalone?"DĀR Voice läuft bereits als Home-Bildschirm-App.":"Safari: Teilen → Zum Home-Bildschirm.");
+try{
+  const draft=localStorage.getItem("dar.voice.mobile.draft");if(draft)$("#text").value=draft;
+  const savedStyle=localStorage.getItem("dar.voice.mobile.style");if(savedStyle&&[...$("#style").options].some(o=>o.value===savedStyle))$("#style").value=savedStyle;
+}catch(_){}
+let draftTimer=0;
+$("#text").addEventListener("input",()=>{
+  state.analysis=null;state.analysisText="";
+  clearTimeout(draftTimer);
+  draftTimer=setTimeout(()=>{try{localStorage.setItem("dar.voice.mobile.draft",$("#text").value)}catch(_){}},180);
+});
+syncStylePills();
 health();setInterval(health,10000);
 </script>
 </body>
