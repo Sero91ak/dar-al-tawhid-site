@@ -2866,7 +2866,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07.29</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.07.43</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3325,7 +3325,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v23-quiz500-reward1095";
+const KIDS_BUILD_ID="kids-shell-v37-quiz650-never-empty1104";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6067,7 +6067,19 @@ function quizBankForAge(){
     if(pa.lastSeen!==pb.lastSeen)return pa.lastSeen-pb.lastSeen;
     return deterministicQuizRank(a.id)-deterministicQuizRank(b.id);
   });
-  return pool.filter(function(q){return quizPriority(q.id,now).bucket<90}).slice(0,r.limit);
+  var due=pool.filter(function(q){return quizPriority(q.id,now).bucket<90});
+  if(due.length>=r.limit)return due.slice(0,r.limit);
+  var selected=due.slice();
+  var seen={};
+  selected.forEach(function(q){seen[String(q.id||"")]=true});
+  pool.forEach(function(q){
+    if(selected.length>=r.limit)return;
+    var key=String(q.id||"");
+    if(seen[key])return;
+    seen[key]=true;
+    selected.push(q);
+  });
+  return selected.slice(0,r.limit);
 }
 function studioQuizAgeBands(item){
   var min=Number(item&&item.ageMin||0),max=Number(item&&item.ageMax||99),out=[];
@@ -6226,7 +6238,12 @@ function beginQuizSession(){
   document.getElementById("quizAgeLabel").textContent=quizAgeRange().label;
   if(!currentQuiz.length){
     document.getElementById("quizProgress").innerHTML="";
-    document.getElementById("quizBody").innerHTML='<div class="quiz-finish"><div class="star"></div><h3>Für jetzt geschafft</h3><p>Keine geprüfte Wiederholung ist gerade fällig. Komm später wieder.</p></div>';
+    document.getElementById("quizBody").innerHTML='<div class="quiz-finish"><div class="star"></div><h3>Quiz wird neu geladen</h3><p>Die Fragen werden erneut aus dem Kids-Bestand geladen.</p><button id="quizRetry" class="primary" type="button">Jetzt laden</button></div>';
+    var retry=document.getElementById("quizRetry");
+    if(retry)retry.addEventListener("click",function(){
+      kidsQuizLoaded=false;
+      fetchKidsQuiz().then(function(){beginQuizSession()});
+    });
     return;
   }
   renderQuizQuestion();
@@ -7002,7 +7019,7 @@ fetchCatalog();
 (function(){
   if(!("serviceWorker" in navigator))return;
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1093",{scope:"/kids/"}).catch(function(){});
+    navigator.serviceWorker.register("/kids/sw.js?v=1104",{scope:"/kids/"}).catch(function(){});
   });
 })();
 </script>

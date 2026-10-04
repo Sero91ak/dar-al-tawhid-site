@@ -554,7 +554,7 @@ jobs:
           assert "patience" in topic_keywords and len(topic_keywords["patience"])>=10, "patience topic keyword routing missing"
           assert "justice" in topic_keywords and len(topic_keywords["justice"])>=10, "justice topic keyword routing missing"
 
-          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1103"' in sw
+          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1104"' in sw
           assert "QUIZ_ARTWORK=[" not in sw, "legacy external quiz artwork runtime cache returned"
 
           visual=((version.get("visualSystem") or {}).get("quizVisualSystem") or {})

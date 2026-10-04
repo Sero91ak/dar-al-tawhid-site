@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v36-quiz650-topics-catalog1103",
-  "label": "KIDS · V1.07.42",
-  "releasedAt": "2026-10-04T10:33:00Z",
-  "note": "DĀR AL TAWḤĪD Kids Quiz: 650 geprüfte Fragen bleiben eingefroren. 13 realistische lokale Themenwelten sind aktiv; die Themenauswahl im Vollkatalog ist jetzt selbst bildbasiert und altersabhängig skaliert. Beschriftungen sitzen browserstabil im unteren Bildbereich. Für 4–6 bleiben Hören und große Touchflächen im Vordergrund, 7–8 bleibt spielerisch, 9–10 kompakter. Serhat-Owner-Voice bleibt unverändert.",
+  "buildId": "kids-shell-v37-quiz650-never-empty1104",
+  "label": "KIDS · V1.07.43",
+  "releasedAt": "2026-10-04T11:10:00Z",
+  "note": "Quiz-Hotfix: installierte Kids-Einstiegspunkte sind mit dem aktuellen 650er-Kids-Quiz synchronisiert. Die alte canonicalStatus/canonicalReviewStatus-Abhängigkeit ist aus Start/Shell entfernt. Fällige und neue Fragen haben Vorrang; freie Übungsfragen füllen die Runde auf, damit der Quizbereich nicht leer endet. 4–6 wird korrekt angezeigt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1103",
+    "serviceWorkerCache": "v1104",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -392,11 +392,17 @@
       "catalogVisualTopicCards": true,
       "catalogVisualTopicCardsAgeAdaptive": true,
       "catalogVisualTopicCardsAssetVersion": 6,
-      "catalogVisualTopicCardsLabelPlacement": "bottom-stable"
+      "catalogVisualTopicCardsLabelPlacement": "bottom-stable",
+      "neverEmptyRound": true,
+      "installedEntryPointsSynced": true,
+      "legacyCanonicalRuntimeRemoved": true
     },
     "kidsQuizContentRevision": "001-650",
     "kidsQuizGenerationPaused": true,
-    "kidsQuizGenerationCap": 650
+    "kidsQuizGenerationCap": 650,
+    "kidsQuizNeverEmpty": true,
+    "kidsQuizInstalledEntryPointsSynced": true,
+    "kidsQuizLegacyCanonicalRuntimeRemoved": true
   },
   "updatedAt": "2026-10-04"
 }
