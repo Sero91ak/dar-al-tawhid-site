@@ -50,7 +50,7 @@ try:
     PORT=int(os.environ.get("DAR_VOICE_PORT",os.environ.get("PORT","8787")) or 8787)
 except Exception:
     PORT=8787
-ENGINE_VERSION="2.9.97"
+ENGINE_VERSION="2.9.98"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -490,10 +490,11 @@ def load_max_master_pls(path:Path):
                 "alias":alias,
                 "tts_text":alias,
                 "tts_language":"de",
-                "tts_strategy":"max-master-pls-v1",
-                "voice_lock":"REVIEW",
-                "qa_tier":"seed",
+                "tts_strategy":"max-master-pls-v2-trusted",
+                "voice_lock":"MASTER",
+                "qa_tier":"installed-curated",
                 "source":"DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls",
+                "trusted_seed":True,
                 "requires_boundary":True,
             })
         print(f"[DĀR Voice] MAX-MASTER-PLS geladen: {len(out)} Schreib-/Sprechvarianten.",flush=True)
