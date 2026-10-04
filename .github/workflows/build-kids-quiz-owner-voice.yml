@@ -22,6 +22,8 @@ jobs:
     env:
       VOICE_API: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
 
     steps:
       - name: Checkout main
@@ -32,16 +34,20 @@ jobs:
       - name: Require owner voice service
         run: |
           set -euo pipefail
-          test -n "${ADMIN_PUBLISH_SECRET:-}" || { echo "::error::ADMIN_PUBLISH_SECRET fehlt."; exit 1; }
-          for i in $(seq 1 36); do
+          if [ -n "${ELEVENLABS_API_KEY:-}" ]; then
+            echo "Direkter ElevenLabs-Owner-Voice-Weg ist verfügbar."
+            exit 0
+          fi
+          test -n "${ADMIN_PUBLISH_SECRET:-}" || { echo "::error::Weder ELEVENLABS_API_KEY noch ADMIN_PUBLISH_SECRET verfügbar."; exit 1; }
+          for i in $(seq 1 6); do
             code="$(curl -L -sS -o /tmp/voice-health.json -w '%{http_code}' "$VOICE_API/health" || true)"
             cat /tmp/voice-health.json || true
             if [ "$code" = "200" ] && grep -q '"ok":true' /tmp/voice-health.json; then
               exit 0
             fi
-            sleep 10
+            sleep 5
           done
-          echo "::error::Owner-Voice-Service ist nicht bereit."
+          echo "::error::Weder direkter ElevenLabs-Zugang noch konfigurierter Owner-Voice-Service ist bereit."
           exit 1
 
       - name: Install audio tools
@@ -69,7 +75,10 @@ jobs:
           MANIFEST=ROOT/"kids/data/quiz-audio.json"
           ASSETS=ROOT/"kids/assets/kids-quiz-audio"
           API=os.environ["VOICE_API"].rstrip("/")
-          SECRET=os.environ["ADMIN_PUBLISH_SECRET"].strip()
+          SECRET=os.environ.get("ADMIN_PUBLISH_SECRET","").strip()
+          ELEVEN_KEY=os.environ.get("ELEVENLABS_API_KEY","").strip()
+          ELEVEN_VOICE=(os.environ.get("ELEVENLABS_VOICE_ID","").strip() or "DkU7j9uO4ZEtLD2iRZSH")
+          ELEVEN_MODEL="eleven_multilingual_v2"
           ORIGIN="https://dar-al-tawhid.de"
           REFERER="https://dar-al-tawhid.de/voice-studio/"
           ASSETS.mkdir(parents=True,exist_ok=True)
@@ -151,24 +160,47 @@ jobs:
 
               last=None
               for attempt in range(1,4):
-                  body=json.dumps({
-                      "text":text,
-                      "prepared":text,
-                      "profile":"kids_lesson"
-                  },ensure_ascii=False).encode("utf-8")
-                  req=urllib.request.Request(
-                      API+"/generate",
-                      data=body,
-                      method="POST",
-                      headers={
-                          "Origin":ORIGIN,
-                          "Referer":REFERER,
-                          "Content-Type":"application/json",
-                          "Accept":"audio/mpeg",
-                          "X-Admin-Secret":SECRET,
-                          "User-Agent":"DAR-Kids-Quiz-Owner-Voice/2"
-                      }
-                  )
+                  if ELEVEN_KEY:
+                      body=json.dumps({
+                          "text":text,
+                          "model_id":ELEVEN_MODEL,
+                          "voice_settings":{
+                              "stability":0.72,
+                              "similarity_boost":0.78,
+                              "style":0.08,
+                              "use_speaker_boost":True
+                          }
+                      },ensure_ascii=False).encode("utf-8")
+                      req=urllib.request.Request(
+                          "https://api.elevenlabs.io/v1/text-to-speech/"+ELEVEN_VOICE,
+                          data=body,
+                          method="POST",
+                          headers={
+                              "xi-api-key":ELEVEN_KEY,
+                              "Content-Type":"application/json",
+                              "Accept":"audio/mpeg",
+                              "User-Agent":"DAR-Kids-Quiz-Owner-Voice/3"
+                          }
+                      )
+                  else:
+                      body=json.dumps({
+                          "text":text,
+                          "prepared":text,
+                          "profile":"kids_lesson"
+                      },ensure_ascii=False).encode("utf-8")
+                      req=urllib.request.Request(
+                          API+"/generate",
+                          data=body,
+                          method="POST",
+                          headers={
+                              "Origin":ORIGIN,
+                              "Referer":REFERER,
+                              "Content-Type":"application/json",
+                              "Accept":"audio/mpeg",
+                              "X-Admin-Secret":SECRET,
+                              "User-Agent":"DAR-Kids-Quiz-Owner-Voice/3"
+                          }
+                      )
                   mp3=pathlib.Path("/tmp")/(digest+f"-{attempt}.mp3")
                   try:
                       with urllib.request.urlopen(req,timeout=180) as response:
