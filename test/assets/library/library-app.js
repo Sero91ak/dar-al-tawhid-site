@@ -746,16 +746,16 @@
     const categoryHeroArt = categoryView && filtered[0]
       ? (coverSources(filtered[0]).medium || coverSources(filtered[0]).small || "")
       : "";
-    const heroTitle = categoryView ? uiState.category : "DĀR AL TAWḤĪD Bibliothek";
+    const heroTitle = categoryView ? uiState.category : "DĀR AL TAWḤĪD";
     const heroLead = categoryView
       ? `Veröffentlichungen im Bereich ${uiState.category}`
-      : "Bücher, Abhandlungen und Themenhefte von Serhat Abu Malik";
+      : "Bibliothek";
     const heroShort = categoryView
       ? `${filtered.length} ${filtered.length === 1 ? "Veröffentlichung" : "Veröffentlichungen"} in diesem Themenregal.`
-      : "Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān und Sunnah.";
+      : "Bücher, Abhandlungen und Themenhefte zu Tawḥīd, ʿAqīdah, Qurʾān und Sunnah.";
     const heroFull = categoryView
       ? `Dieses Themenregal bündelt die vorhandenen Veröffentlichungen zu ${uiState.category}.`
-      : "Ausführliche Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān, Sunnah und dem Verständnis der Salaf.";
+      : "Geordnete Veröffentlichungen zu Tawḥīd, ʿAqīdah, Qurʾān, Sunnah und dem Verständnis der Salaf.";
 
     return `<section class="lib-page" data-library-root data-library-category-view="${categoryView ? esc(uiState.category) : ""}">
       <header class="lib-hero" aria-label="Bibliothekskopf">
