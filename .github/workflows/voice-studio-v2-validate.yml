@@ -73,6 +73,8 @@ jobs:
           html=Path("voice-studio/index.html").read_text(encoding="utf-8")
           router=Path("cloudflare/site-router.js").read_text(encoding="utf-8")
           manifest=json.loads(Path("voice-studio/version.json").read_text(encoding="utf-8"))
+          pwa=json.loads(Path("voice-studio/manifest.webmanifest").read_text(encoding="utf-8"))
+          sw=Path("voice-studio/sw-v11.js").read_text(encoding="utf-8")
 
           required_engine=[
               'torch.cuda.is_available()',
@@ -104,6 +106,10 @@ jobs:
           cloud=manifest.get("cloudVoiceApp") or {}
           if not cloud.get("enabled") or cloud.get("localIpRequired") is not False:
               raise SystemExit("version.json cloudVoiceApp contract missing")
+          if pwa.get("start_url") != "/voice-studio/?app=1&cloud=1":
+              raise SystemExit("Installed Voice PWA does not reopen in cloud mode")
+          if 'const CACHE="dar-voice-studio-v50";' not in sw:
+              raise SystemExit("Voice PWA cache was not bumped for cloud manifest")
           print("DĀR Voice cloud GPU bridge OK")
           PY
 
