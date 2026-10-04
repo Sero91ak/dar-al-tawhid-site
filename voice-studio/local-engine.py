@@ -9253,8 +9253,10 @@ class H(BaseHTTPRequestHandler):
             ok=REF.exists()
             self.send_json(200,{
                 "ok":ok,
-                "provider":"Chatterbox Multilingual V3",
+                "provider":"DĀR Voice Extreme Fast · Chatterbox Multilingual",
                 "engine_version":ENGINE_VERSION,
+                "interactive_extreme_fast":True,
+                "mlx_model":MLX_MODEL_ID if MLX_ENABLED else None,
                 "reference_exists":ok,
                 "reference_arabic_dedicated":ARABIC_DEDICATED_REFERENCE,
                 "prosody_mode":st.get("prosody_mode","narration"),
