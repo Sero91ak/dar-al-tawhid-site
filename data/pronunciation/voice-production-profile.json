@@ -1,7 +1,7 @@
 {
   "schemaVersion": 8,
   "id": "dar-own-voice-narration-v2.8.8",
-  "updatedAt": "2026-10-04T03:16:00+02:00",
+  "updatedAt": "2026-10-04T17:12:00+02:00",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
@@ -790,7 +790,18 @@
     "exactStoryTextMayReuseApprovedAudioWithoutModelLoad": true,
     "editedStoryUsesIncrementalSegmentRenderer": true,
     "longFormReferenceDoesNotAutoFineTuneModelWeights": true,
-    "manualStoryUploadAutoRegistersReferencePair": true
+    "manualStoryUploadAutoRegistersReferencePair": true,
+    "storyReferenceSeeds": [
+      "story-reference-muhammad-2026-10-04.json",
+      "story-reference-adam-2026-10-04.json",
+      "story-reference-idris-2026-10-04.json"
+    ],
+    "storyReferenceOwnerApprovedItems": [
+      "muhammad",
+      "adam",
+      "idris"
+    ],
+    "storyReferenceCorpusPolicy": "Every owner-approved story audio plus its exact source text is durable long-form reference memory. Exact matching text may reuse approved audio; edited text reuses learned pronunciation/prosody through incremental rendering. Model weights are never auto-fine-tuned."
   },
   "productionRenderer": {
     "primaryAppleSilicon": "mlx-community/chatterbox-4bit",
