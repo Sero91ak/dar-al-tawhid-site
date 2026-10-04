@@ -31,7 +31,7 @@ try {
 
 const build = String(version.buildId || "").trim();
 const label = String(version.label || "").trim();
-const buildMatch = build.match(/^kids-shell-v(\d+)-([a-z][a-z-]*)(\d+)$/);
+const buildMatch = build.match(/^kids-shell-v(\d+)-([a-z][a-z0-9-]*?)(\d+)$/);
 if (!buildMatch) {
   console.error("::error::Kids Prophet release guard: ungültige Kids buildId: " + build);
   process.exit(1);
@@ -74,7 +74,7 @@ const mubDataVersion = Number(visual.mubashshirunDataVersion || 0);
 
 function assertOnlyCurrentBuild(rel) {
   const text = read(rel);
-  const refs = uniqueMatches(text, /kids-shell-v\d+-[a-z][a-z-]*\d+/g);
+  const refs = uniqueMatches(text, /kids-shell-v\d+-[a-z][a-z0-9-]*\d+/g);
   if (!refs.length) {
     error(rel + " enthält keine Kids buildId");
     return;
