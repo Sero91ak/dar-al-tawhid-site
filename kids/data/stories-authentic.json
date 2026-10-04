@@ -4,7 +4,12 @@
     "source": "data/prophets/*.json",
     "rule": "Nur profileStatus/status=approved und Claims mit verificationStatus=approved sowie evidenceType=quran.",
     "narration": "Kindgerechte deutsche Zusammenfassung; keine erfundenen Dialoge, Namen, Orte, Zahlen oder Israʾīliyyāt.",
-    "status": "approved-only"
+    "status": "approved-only",
+    "storyTextStandard": {
+      "version": "kids-story-greeting-closing-v1",
+      "intro": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.",
+      "outro": "Und الله weiß es am besten.\n\nMöge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh."
+    }
   },
   "items": [
     {
@@ -17,7 +22,7 @@
       "category": "Qurʾān · geprüft",
       "scene": "kaabah",
       "symbol": "◆",
-      "text": "Der Qurʾān berichtet von Ibrāhīm und Ismāʿīl. Gemeinsam erhöhten sie die Grundlagen des Hauses. Während dieser Arbeit baten sie Allah, ihre Tat anzunehmen. Sie baten Ihn auch darum, sie Ihm ergeben zu machen und aus ihren Nachkommen eine Gemeinschaft entstehen zu lassen, die Ihm ergeben ist. Diese Begebenheit erinnert uns daran: Eine gute Tat tun wir für Allah, und wir bitten Ihn darum, sie anzunehmen.",
+      "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nDer Qurʾān berichtet von Ibrāhīm und Ismāʿīl. Gemeinsam erhöhten sie die Grundlagen des Hauses. Während dieser Arbeit baten sie Allah, ihre Tat anzunehmen. Sie baten Ihn auch darum, sie Ihm ergeben zu machen und aus ihren Nachkommen eine Gemeinschaft entstehen zu lassen, die Ihm ergeben ist. Diese Begebenheit erinnert uns daran: Eine gute Tat tun wir für Allah, und wir bitten Ihn darum, sie anzunehmen.\n\nUnd الله weiß es am besten.\n\nMöge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
       "question": {
         "4–5": {
           "question": "Wen baten Ibrāhīm und Ismāʿīl, ihre Tat anzunehmen?",
@@ -76,7 +81,8 @@
       "sourceRefs": [
         "Qurʾān 2:125–129"
       ],
-      "verification": "approved"
+      "verification": "approved",
+      "storyTextStandard": "kids-story-greeting-closing-v1"
     },
     {
       "id": "auth-nuh-ark",
@@ -88,7 +94,7 @@
       "category": "Qurʾān · geprüft",
       "scene": "ark",
       "symbol": "≋",
-      "text": "Nūḥ war ein Gesandter Allahs. Er rief sein Volk dazu auf, Allah allein zu dienen. Der Qurʾān berichtet, dass er seine Botschaft am Tag und in der Nacht weitergab und die Menschen auch zur Vergebung aufrief. Dann befahl Allah ihm, das Schiff unter Seiner Beobachtung und nach Seiner Offenbarung zu bauen. Als die Flut kam, geschah, was Allah bestimmt hatte. Der Qurʾān berichtet anschließend, dass das Schiff auf al-Jūdī aufsetzte. Wir fügen keine unbekannten Namen, Maße oder Orte hinzu, die der Qurʾān nicht nennt.",
+      "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nNūḥ war ein Gesandter Allahs. Er rief sein Volk dazu auf, Allah allein zu dienen. Der Qurʾān berichtet, dass er seine Botschaft am Tag und in der Nacht weitergab und die Menschen auch zur Vergebung aufrief. Dann befahl Allah ihm, das Schiff unter Seiner Beobachtung und nach Seiner Offenbarung zu bauen. Als die Flut kam, geschah, was Allah bestimmt hatte. Der Qurʾān berichtet anschließend, dass das Schiff auf al-Jūdī aufsetzte. Wir fügen keine unbekannten Namen, Maße oder Orte hinzu, die der Qurʾān nicht nennt.\n\nUnd الله weiß es am besten.\n\nMöge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
       "question": {
         "6–8": {
           "question": "Wozu rief Nūḥ sein Volk auf?",
@@ -139,7 +145,8 @@
         "Qurʾān 23:27",
         "Qurʾān 71:5–12"
       ],
-      "verification": "approved"
+      "verification": "approved",
+      "storyTextStandard": "kids-story-greeting-closing-v1"
     },
     {
       "id": "auth-yusuf-forgiveness",
@@ -151,7 +158,7 @@
       "category": "Qurʾān · geprüft",
       "scene": "grain",
       "symbol": "✦",
-      "text": "Der Qurʾān erzählt ausführlich von Yūsuf. Seine Brüder kamen später zu ihm, und schließlich wurde seine Identität bekannt. Obwohl in seiner Geschichte schwere Prüfungen vorkamen, berichtet Allah von Yūsufs Vergebung. In Sūrah Yūsuf sagt er, dass es an diesem Tag keinen Tadel gegen seine Brüder geben solle, und er bittet Allah um Vergebung für sie. Diese Begebenheit zeigt uns, wie groß Vergebung sein kann, wenn man die Möglichkeit hätte, Vorwürfe zu machen.",
+      "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nDer Qurʾān erzählt ausführlich von Yūsuf. Seine Brüder kamen später zu ihm, und schließlich wurde seine Identität bekannt. Obwohl in seiner Geschichte schwere Prüfungen vorkamen, berichtet Allah von Yūsufs Vergebung. In Sūrah Yūsuf sagt er, dass es an diesem Tag keinen Tadel gegen seine Brüder geben solle, und er bittet Allah um Vergebung für sie. Diese Begebenheit zeigt uns, wie groß Vergebung sein kann, wenn man die Möglichkeit hätte, Vorwürfe zu machen.\n\nUnd الله weiß es am besten.\n\nMöge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
       "question": {
         "6–8": {
           "question": "Was tat Yūsuf gegenüber seinen Brüdern?",
@@ -195,7 +202,8 @@
       "sourceRefs": [
         "Qurʾān 12:58–92"
       ],
-      "verification": "approved"
+      "verification": "approved",
+      "storyTextStandard": "kids-story-greeting-closing-v1"
     },
     {
       "id": "auth-musa-tuwa",
@@ -207,7 +215,7 @@
       "category": "Qurʾān · geprüft",
       "scene": "valley",
       "symbol": "✧",
-      "text": "Der Qurʾān berichtet von Mūsā. Im geheiligten Tal Ṭuwā wurde er angesprochen. Allah zeigte ihm Zeichen: seinen Stock und seine Hand. Mūsā bat darum, dass sein Bruder Hārūn ihm zur Seite gestellt werde. Danach wurden Mūsā und Hārūn zu Firʿawn gesandt. Die Geschichte zeigt: Allah gab Mūsā eine große Aufgabe und gab ihm Zeichen und Unterstützung.",
+      "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nDer Qurʾān berichtet von Mūsā. Im geheiligten Tal Ṭuwā wurde er angesprochen. Allah zeigte ihm Zeichen: seinen Stock und seine Hand. Mūsā bat darum, dass sein Bruder Hārūn ihm zur Seite gestellt werde. Danach wurden Mūsā und Hārūn zu Firʿawn gesandt. Die Geschichte zeigt: Allah gab Mūsā eine große Aufgabe und gab ihm Zeichen und Unterstützung.\n\nUnd الله weiß es am besten.\n\nMöge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
       "question": {
         "6–8": {
           "question": "Wer war der Bruder, um dessen Unterstützung Mūsā bat?",
@@ -255,7 +263,8 @@
       "sourceRefs": [
         "Qurʾān 20:9–36"
       ],
-      "verification": "approved"
+      "verification": "approved",
+      "storyTextStandard": "kids-story-greeting-closing-v1"
     }
   ]
 }
