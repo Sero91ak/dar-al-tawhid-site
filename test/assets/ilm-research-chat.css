@@ -1033,3 +1033,284 @@ html[data-theme="aurora"] body.is-ilm-chat-route{
     transition:none!important;
   }
 }
+
+
+/* DAR_ILM_COMPACT_WELCOME_V1233D
+   Image-free welcome, visible prompts, tighter composer focus. */
+body.is-ilm-chat-route .ilm-welcome.ilm-welcome--majlis{
+  width:100%!important;
+  min-height:0!important;
+  display:block!important;
+  padding:0 0 96px!important;
+  background:var(--ilm-page-bg)!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:26px max(20px,env(safe-area-inset-right,0px)) 24px max(20px,env(safe-area-inset-left,0px))!important;
+  border:0!important;
+  border-radius:0!important;
+  background:
+    radial-gradient(ellipse 46% 120% at 78% 0%,var(--ilm-canopy-glow),transparent 72%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--ilm-canopy-a) 74%,transparent),
+      color-mix(in srgb,var(--ilm-page-bg) 96%,transparent))!important;
+  box-shadow:none!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro .ilm-welcome-kicker{
+  margin:0 0 8px!important;
+  color:var(--ilm-accent)!important;
+  font-size:.66rem!important;
+  line-height:1.2!important;
+  font-weight:850!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro h2{
+  margin:0!important;
+  max-width:680px;
+  font-family:var(--ilm-serif)!important;
+  font-size:clamp(2rem,8.2vw,3.45rem)!important;
+  line-height:.98!important;
+  font-weight:620!important;
+  letter-spacing:.004em!important;
+  color:var(--ilm-primary-text)!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro .ilm-welcome-lead{
+  margin:12px 0 0!important;
+  max-width:680px!important;
+  color:var(--ilm-secondary-text)!important;
+  font-size:clamp(.9rem,3.2vw,1.02rem)!important;
+  line-height:1.55!important;
+  font-weight:560!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro .ilm-welcome-trust{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:7px!important;
+  margin:15px 0 0!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro .ilm-welcome-trust span{
+  min-height:28px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  padding:4px 10px!important;
+  border:1px solid var(--ilm-canopy-line)!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--ilm-header-bg) 28%,transparent)!important;
+  color:var(--ilm-primary-text)!important;
+  font-size:.68rem!important;
+  line-height:1!important;
+  font-weight:780!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-prompts{
+  width:min(780px,calc(100% - 28px))!important;
+  margin:22px auto 0!important;
+  padding:0!important;
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-prompts-head{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:end!important;
+  gap:14px!important;
+  padding:0 0 11px!important;
+  border-bottom:1px solid var(--ilm-canopy-line)!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-prompts-head > div{
+  min-width:0;
+}
+
+body.is-ilm-chat-route .ilm-welcome-prompts-head h3{
+  margin:0!important;
+  font-family:var(--ilm-serif)!important;
+  font-size:clamp(1.45rem,5.4vw,1.78rem)!important;
+  line-height:1!important;
+  font-weight:630!important;
+  color:var(--ilm-primary-text)!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-prompts-head p{
+  margin:6px 0 0!important;
+  max-width:36rem!important;
+  color:var(--ilm-secondary-text)!important;
+  font-size:.76rem!important;
+  line-height:1.4!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-prompts-head > span{
+  align-self:center!important;
+  color:var(--ilm-accent)!important;
+  font-size:.66rem!important;
+  line-height:1.15!important;
+  font-weight:820!important;
+  letter-spacing:.025em!important;
+  white-space:nowrap!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-prompts .ilm-starter-chips{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:0!important;
+  margin:0!important;
+  padding:0!important;
+  visibility:visible!important;
+  opacity:1!important;
+  min-height:0!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-prompts .ilm-starter-chip{
+  width:100%!important;
+  min-height:66px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:14px!important;
+  margin:0!important;
+  padding:13px 2px!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--ilm-canopy-line) 78%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--ilm-primary-text)!important;
+  box-shadow:none!important;
+  text-align:left!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+}
+
+body.is-ilm-chat-route .ilm-starter-copy{
+  min-width:0!important;
+  display:grid!important;
+  gap:3px!important;
+}
+
+body.is-ilm-chat-route .ilm-starter-copy b{
+  display:block!important;
+  color:var(--ilm-primary-text)!important;
+  font-size:.93rem!important;
+  line-height:1.28!important;
+  font-weight:680!important;
+}
+
+body.is-ilm-chat-route .ilm-starter-copy small{
+  display:block!important;
+  color:var(--ilm-secondary-text)!important;
+  font-size:.67rem!important;
+  line-height:1.25!important;
+  font-weight:650!important;
+  letter-spacing:.035em!important;
+}
+
+body.is-ilm-chat-route .ilm-starter-arrow{
+  color:var(--ilm-accent)!important;
+  font-family:var(--ilm-serif)!important;
+  font-size:1.25rem!important;
+  line-height:1!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-prompts .ilm-starter-chip:hover,
+body.is-ilm-chat-route .ilm-welcome-prompts .ilm-starter-chip:focus-visible{
+  background:linear-gradient(90deg,color-mix(in srgb,var(--ilm-accent) 5%,transparent),transparent 76%)!important;
+  outline:none!important;
+}
+
+body.is-ilm-chat-route .ilm-message-list{
+  min-height:0!important;
+}
+
+body.is-ilm-chat-route .ilm-composer-bar{
+  background:
+    linear-gradient(180deg,
+      transparent 0%,
+      color-mix(in srgb,var(--ilm-page-bg) 84%,transparent) 22%,
+      var(--ilm-page-bg) 48%)!important;
+  box-shadow:none!important;
+}
+
+body.is-ilm-chat-route .ilm-composer-inner{
+  border:1px solid color-mix(in srgb,var(--ilm-primary-text) 12%,var(--ilm-canopy-line))!important;
+  border-radius:18px!important;
+  background:color-mix(in srgb,var(--ilm-composer-bg) 94%,transparent)!important;
+  box-shadow:
+    0 8px 22px color-mix(in srgb,var(--ilm-page-bg) 20%,transparent)!important;
+  transition:border-color .15s ease,box-shadow .15s ease!important;
+}
+
+body.is-ilm-chat-route .ilm-composer-inner:focus-within{
+  border-color:color-mix(in srgb,var(--ilm-accent) 38%,var(--ilm-canopy-line))!important;
+  box-shadow:
+    0 0 0 2px color-mix(in srgb,var(--ilm-accent) 8%,transparent),
+    0 8px 22px color-mix(in srgb,var(--ilm-page-bg) 20%,transparent)!important;
+}
+
+body.is-ilm-chat-route .ilm-chat-input,
+body.is-ilm-chat-route .ilm-chat-input:focus,
+body.is-ilm-chat-route .ilm-chat-input:focus-visible{
+  outline:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  -webkit-appearance:none!important;
+  appearance:none!important;
+}
+
+body.is-ilm-chat-route .ilm-send-icon{
+  border:1px solid color-mix(in srgb,var(--ilm-accent) 19%,transparent)!important;
+  border-radius:13px!important;
+  background:color-mix(in srgb,var(--ilm-header-bg) 46%,transparent)!important;
+  color:var(--ilm-primary-text)!important;
+  box-shadow:none!important;
+}
+
+@media(max-width:599px){
+  body.is-ilm-chat-route .ilm-welcome-intro{
+    padding:23px 18px 21px!important;
+  }
+  body.is-ilm-chat-route .ilm-welcome-prompts{
+    width:calc(100% - 24px)!important;
+    margin-top:18px!important;
+  }
+  body.is-ilm-chat-route .ilm-welcome-prompts-head{
+    grid-template-columns:minmax(0,1fr) auto!important;
+  }
+  body.is-ilm-chat-route .ilm-welcome-prompts-head p{
+    max-width:17rem!important;
+  }
+}
+
+@media(max-width:380px){
+  body.is-ilm-chat-route .ilm-welcome-prompts-head{
+    grid-template-columns:1fr!important;
+    gap:6px!important;
+  }
+  body.is-ilm-chat-route .ilm-welcome-prompts-head > span{
+    justify-self:start!important;
+  }
+}
+
+@media(min-width:760px){
+  body.is-ilm-chat-route .ilm-welcome-intro{
+    padding-left:max(28px,calc((100vw - 980px)/2))!important;
+    padding-right:max(28px,calc((100vw - 980px)/2))!important;
+  }
+  body.is-ilm-chat-route .ilm-welcome-prompts{
+    margin-top:26px!important;
+  }
+}
