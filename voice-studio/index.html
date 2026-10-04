@@ -2715,7 +2715,7 @@ async function generateFreeVoice(){
         };
         if(p.readyState>=1)resumeLive();else p.addEventListener("loadedmetadata",resumeLive,{once:true});
       }
-    },500);
+    },320);
 
     const started=await startDesktopGenerationJob("free",{
       text:value,
@@ -2829,7 +2829,7 @@ async function generate({autoRerender=false}={}){
       }else if(st.render_state==="error"&&st.last_error){
         setMessage("Renderfehler: "+st.last_error);
       }
-    },500);
+    },320);
 
     const started=await startDesktopGenerationJob("main",{
       text,prepared:analysis.prepared,voice:"Serhat",format:"wav",
