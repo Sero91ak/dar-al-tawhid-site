@@ -1,12 +1,14 @@
 (function(){
   "use strict";
-  if(window.__DAR_GLOBAL_SHARE_V1231)return;
-  window.__DAR_GLOBAL_SHARE_V1231=true;
+  if(window.__DAR_GLOBAL_SHARE_V1232)return;
+  window.__DAR_GLOBAL_SHARE_V1232=true;
 
   var APP_STORE_URL="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
   var APP_STORE_ICON="/assets/app-store-icon-fixed.svg?v=share-v1225";
   var SITE="dar-al-tawhid.de";
   var W=1080,H=1350;
+  var SHARE_SCENE_MANIFEST="/data/share-background-library.json";
+  var REGISTERED_SCENES=[];
 
   var GENERIC_SCENES=[
     "/kids/assets/prophet-scenes/library.webp",
@@ -61,6 +63,28 @@
   };
 
   function clean(s){return String(s||"").replace(/\s+/g," ").trim()}
+  /* GLOBAL_SHARE_MANIFEST_V1232 */
+  function registerSceneItems(items){
+    (Array.isArray(items)?items:[]).forEach(function(item){
+      var src=clean(item&&item.src);if(!src)return;
+      var tags=Array.isArray(item.tags)?item.tags.map(function(x){return clean(x).toLowerCase()}).filter(Boolean):[];
+      if(!REGISTERED_SCENES.some(function(x){return x.src===src}))REGISTERED_SCENES.push({src:src,tags:tags});
+      if(GENERIC_SCENES.indexOf(src)<0)GENERIC_SCENES.push(src);
+    });
+  }
+  function loadSceneManifest(){
+    return fetch(SHARE_SCENE_MANIFEST,{cache:"no-store"})
+      .then(function(r){if(!r.ok)throw new Error("manifest "+r.status);return r.json()})
+      .then(function(data){registerSceneItems(data&&data.items);return REGISTERED_SCENES})
+      .catch(function(){return REGISTERED_SCENES});
+  }
+  function manifestScenesFor(tags){
+    tags=(Array.isArray(tags)?tags:[]).map(function(x){return clean(x).toLowerCase()}).filter(Boolean);
+    if(!tags.length)return[];
+    return REGISTERED_SCENES.filter(function(item){
+      return item.tags.some(function(tag){return tags.indexOf(tag)>=0});
+    }).map(function(item){return item.src});
+  }
   function text(el){return el?clean(el.innerText||el.textContent||""):""}
   function first(root,sel){try{return root&&root.querySelector?root.querySelector(sel):null}catch(e){return null}}
   function hash(s){s=String(s||"");var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h+=(h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24)}return Math.abs(h>>>0)}
@@ -102,17 +126,24 @@
   }
   function ctxFromDom(trigger){
     if(trigger&&(trigger.hasAttribute("data-image-ayah-open")||trigger.hasAttribute("data-quran-share-ayah")))return ctxFromAyah(trigger);
-    var root=(trigger&&trigger.closest&&trigger.closest(".article,.post-reader,[data-frauen-view],.dua-detail,.quran-ayah"))||document.querySelector("#appView .post-reader,#appView .article,#appView .quran-ayah")||document.getElementById("appView")||document.body;
+    var root=(trigger&&trigger.closest&&trigger.closest(".article,.post-reader,[data-frauen-view],.dua-detail,.quran-ayah,.prophets-detail"))||document.querySelector("#appView .post-reader,#appView .article,#appView .quran-ayah,#appView .prophets-detail")||document.getElementById("appView")||document.body;
     var route=(window.currentRoute&&window.currentRoute.view)||String(location.hash||"").replace(/^#\/?/,"").split("/")[0];
-    var title=text(first(root,".post-reader-title h2,.article-title h2,.view-head h2,.quran-explain-title strong,h1,h2"));
-    var category=text(first(root,".post-reader-title .kicker,.article-title .eyebrow,.post-aussage-kicker,.dua-label,.kicker,.eyebrow"))||"Wissen";
+    var title=text(first(root,".post-reader-title h2,.article-title h2,.prophets-detail__name,.view-head h2,.quran-explain-title strong,h1,h2"));
+    var category=text(first(root,".post-reader-title .kicker,.article-title .eyebrow,.post-aussage-kicker,.prophets-tab.is-active,.dua-label,.kicker,.eyebrow"))||"Wissen";
     var body="";
     if(route==="dua"||first(root,".dua-detail-box")){
       var ar=text(first(root,".dua-arabic")),de=text(first(root,".dua-de"));body=[ar,de].filter(Boolean).join("\n\n");category="Duʿāʾ";
+    }else if(root&&root.classList&&root.classList.contains("prophets-detail")){
+      var prophetParts=[];
+      root.querySelectorAll(".prophets-chapter .prophets-quote__de,.prophets-chapter p,.prophets-card p").forEach(function(el){
+        var value=text(el);if(value&&prophetParts.indexOf(value)<0&&value.length>18)prophetParts.push(value);
+      });
+      body=prophetParts.slice(0,5).join("\n\n");
+      category="Propheten";
     }else{
       body=text(first(root,".post-aussage-text,.post-reader .statement,.statement,.post-slide.is-active .post-slide-quote,.post-slide-quote,.quran-ayah-de,.quran-ayah-ar"));
     }
-    var source=text(first(root,"[data-post-after-source],.post-source-main,.post-reader-cite,.hadith-source-line,.source-text,.post-after-source,.dua-source,.quran-ayah-ref,.frauen-source-card"));
+    var source=text(first(root,"[data-post-after-source],.post-source-main,.post-reader-cite,.hadith-source-line,.prophets-source-panel__meta,.prophets-source-actions,.source-text,.post-after-source,.dua-source,.quran-ayah-ref,.frauen-source-card"));
     if(!source){var srcPanel=first(root,".source-area-panel,.post-source,.frauen-source-card");source=text(srcPanel)}
     if(!title)title=category||"DĀR AL TAWḤĪD";
     if(!body){
@@ -143,6 +174,15 @@
     var dua=["/kids/assets/prophet-scenes/night.webp","/kids/assets/prophet-scenes/garden.webp","/assets/post-templates/nacht-mond.jpg","/assets/post-templates/olive-mihrab.jpg"];
     var family=["/kids/assets/prophet-scenes/garden.webp","/kids/assets/prophet-scenes/water.webp","/assets/post-templates/olive-mihrab.jpg","/kids/assets/prophet-scenes/library.webp"];
     var ramadan=["/kids/assets/prophet-scenes/night.webp","/assets/post-templates/nacht-mond.jpg","/assets/post-templates/gruen-moschee.jpg","/kids/assets/prophet-scenes/royal.webp"];
+    var extra=[];
+    if(/ṣaḥāb|sahab|salaf|gefährten|gefaehrten/.test(hay))extra=manifestScenesFor(["sahaba","salaf","historical"]);
+    else if(/makkah|mekka|ḥajj|hajj|ʿumrah|umrah|kaʿba|kaaba/.test(hay))extra=manifestScenesFor(["makkah","hajj","desert","hijaz"]);
+    else if(/madīnah|madinah|medina|masjid|moschee/.test(hay))extra=manifestScenesFor(["madinah","mosque","palms"]);
+    else if(/ramaḍān|ramadan|qiyām|qiyam|iʿtikāf|itikaf/.test(hay))extra=manifestScenesFor(["ramadan","night","mosque"]);
+    else if(/qurʾān|quran|āyah|ayah|sūrah|surah/.test(hay))extra=manifestScenesFor(["quran","night","wissen"]);
+    else if(/duʿā|dua|dhikr|adhkār|adhkar/.test(hay))extra=manifestScenesFor(["dua","night","calm"]);
+    else if(/ehe|nikāḥ|nikah|familie|kinder|töchter|toechter|schwangerschaft|stillzeit|nifās|nifas/.test(hay))extra=manifestScenesFor(["family","garden","calm"]);
+    else if(/ʿilm|ilm|wissen|fiqh|ḥadī|hadith|sunnah|quelle|gelehrt/.test(hay))extra=manifestScenesFor(["wissen","fiqh","hadith","library"]);
     var pool=GENERIC_SCENES;
     if(/ṣaḥāb|sahab|salaf|gefährten|gefaehrten/.test(hay))pool=sahabaAny;
     else if(/makkah|mekka|ḥajj|hajj|ʿumrah|umrah|kaʿba|kaaba/.test(hay))pool=makkah;
@@ -152,7 +192,8 @@
     else if(/duʿā|dua|dhikr|adhkār|adhkar/.test(hay))pool=dua;
     else if(/ehe|nikāḥ|nikah|familie|kinder|töchter|toechter|schwangerschaft|stillzeit|nifās|nifas/.test(hay))pool=family;
     else if(/ʿilm|ilm|wissen|fiqh|ḥadī|hadith|sunnah|quelle|gelehrt/.test(hay))pool=ilm;
-    var key="darGlobalShareSceneV1231",seq=0;try{seq=Number(localStorage.getItem(key)||0)||0;localStorage.setItem(key,String(seq+1))}catch(e){}
+    if(extra.length)pool=Array.from(new Set(extra.concat(pool)));
+    var key="darGlobalShareSceneV1232",seq=0;try{seq=Number(localStorage.getItem(key)||0)||0;localStorage.setItem(key,String(seq+1))}catch(e){}
     return pool[(hash(hay+"|"+seq))%pool.length];
   }
   function splitBody(ctx,body,bodySize,maxW,maxH){
@@ -308,7 +349,33 @@
     b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9" r="1.5" fill="currentColor"/><path d="M6.5 16l3.4-3.4 2.6 2.5 2.1-2.2 3.1 3.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Bildbeitrag</span>';
     return b;
   }
+  function standaloneSharePanel(){
+    var section=document.createElement("section");
+    section.className="share-panel share-panel-v11 dar-global-injected-panel";
+    section.setAttribute("aria-label","Inhalt teilen");
+    var title=document.createElement("div");title.className="share-panel-title";title.textContent="Weitergeben";
+    var holder=document.createElement("div");holder.className="share-flat-v410";
+    holder.appendChild(actionButton("wa","WhatsApp","data-dar-global-wa"));
+    holder.appendChild(actionButton("tg","Telegram","data-dar-global-tg"));
+    holder.appendChild(actionButton("ig","Instagram","data-dar-global-ig"));
+    holder.appendChild(actionButton("native","Teilen","data-dar-global-native"));
+    holder.appendChild(imageButton());
+    section.appendChild(title);section.appendChild(holder);
+    return section;
+  }
+  function injectStandalonePanels(root){
+    var scope=root&&root.querySelectorAll?root:document;
+    var targets=[];
+    if(scope.matches&&scope.matches(".prophets-detail:not(.prophets-detail--loading)"))targets.push(scope);
+    scope.querySelectorAll(".prophets-detail:not(.prophets-detail--loading)").forEach(function(el){targets.push(el)});
+    targets.forEach(function(target){
+      if(target.querySelector(".share-panel")||target.querySelector(".dar-global-injected-panel"))return;
+      if(clean(target.textContent).length<80)return;
+      target.appendChild(standaloneSharePanel());
+    });
+  }
   function enhance(root){
+    injectStandalonePanels(root||document);
     (root||document).querySelectorAll(".share-panel").forEach(function(panel){
       var holder=panel.querySelector(".share-flat-v410,.post-after-share,.frauen-share-primary")||panel;
       if(!panelHas(panel,"wa"))holder.appendChild(actionButton("wa","WhatsApp","data-dar-global-wa"));
@@ -347,7 +414,7 @@
     }
   },true);
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
-  function boot(){enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
+  function boot(){loadSceneManifest().finally(function(){enhance(document)});try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-  window.DARGlobalShare={version:"1231",createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
+  window.DARGlobalShare={version:"1232",registerScenes:registerSceneItems,createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
 })();
