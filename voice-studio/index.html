@@ -2152,9 +2152,35 @@ async function startDesktopGenerationJob(kind,payload,text=""){
     method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)
   });
   const d=await r.json().catch(()=>({}));
-  if(!r.ok||!d.ok)throw Error(d.error||"Audio-Erzeugung konnte nicht gestartet werden.");
+  if(!r.ok||!d.ok){
+    const err=Error(d.error||"Audio-Erzeugung konnte nicht gestartet werden.");
+    err.status=Number(r.status||0);
+    err.items=Array.isArray(d.items)?d.items:[];
+    throw err;
+  }
   persistDesktopGenerationJob(d.jobId,kind,text);
   return d;
+}
+function openServerPronunciationReview(items){
+  const terms=[];
+  const seen=new Set();
+  for(const row of (Array.isArray(items)?items:[])){
+    const term=String(row?.term||row?.tts||row?.canonical||"").trim();
+    const n=learningNorm(term);
+    if(!term||seen.has(n))continue;
+    seen.add(n);terms.push(term);pendingLearningTerms.add(n);
+  }
+  if(!terms.length)return false;
+  persistPendingLearningTerms();
+  renderStoryWordList();
+  setMessage(
+    terms.length===1
+      ?"Ausspracheprüfung erforderlich: „"+terms[0]+"“. Wort ist geöffnet – anhören, bestätigen, danach erneut erzeugen."
+      :terms.length+" Wörter brauchen eine Ausspracheprüfung. Das erste Wort ist geöffnet; danach die roten Wörter abarbeiten.",
+    "warn"
+  );
+  chooseStoryWord(terms[0]);
+  return true;
 }
 async function waitDesktopGenerationJob(jobId,timeoutMs=30*60*1000,onProgress=null){
   const deadline=Date.now()+Math.max(60000,Number(timeoutMs)||0);
@@ -2807,8 +2833,10 @@ async function generate({autoRerender=false}={}){
 
     const text=$("#text").value.trim();
     if(!text)throw Error("Bitte zuerst einen Text eingeben.");
-    const analysis=analyze(text);
 
+    // Kein doppeltes Browser-Preprocessing mehr: Die Engine übernimmt die
+    // verbindliche Ausspracheprüfung und Textvorbereitung direkt beim Job-Start.
+    // So geht der Klick sofort in denselben Produktionspfad wie iPhone/iPad.
     // Kein separater Modell-Wartebildschirm mehr: Job sofort registrieren,
     // Modell/Warmup laufen im Engine-Prozess und die Live-Chunks erscheinen,
     // sobald der erste QA-geprüfte Abschnitt fertig ist.
@@ -2816,7 +2844,7 @@ async function generate({autoRerender=false}={}){
     setMessage("Serhat-Stimme wird erzeugt …","warn");
 
     const started=await startDesktopGenerationJob("main",{
-      text,prepared:analysis.prepared,voice:"Serhat",format:"wav",
+      text,voice:"Serhat",format:"wav",
       style:$("#styleMode").value,interactiveFast:true
     },text);
     activeJobId=String(started.jobId||"");
@@ -2886,10 +2914,14 @@ async function generate({autoRerender=false}={}){
     mainLivePreviewName="";mainLivePreviewGeneration=0;
     $("#playerWrap").scrollIntoView({behavior:"smooth",block:"nearest"});
   }catch(e){
-    const msg=e?.name==="AbortError"
-      ?"Audio-Erzeugung wurde nach 15 Minuten abgebrochen. Bitte Engine-Protokoll prüfen."
-      :(e.message||String(e));
-    setMessage(msg);
+    if(Number(e?.status||0)===422&&Array.isArray(e?.items)&&e.items.length){
+      openServerPronunciationReview(e.items);
+    }else{
+      const msg=e?.name==="AbortError"
+        ?"Audio-Erzeugung wurde nach 15 Minuten abgebrochen. Bitte Engine-Protokoll prüfen."
+        :(e.message||String(e));
+      setMessage(msg);
+    }
   }finally{
     btns.forEach((b,i)=>{b.disabled=false;b.textContent=old[i]});
     checkHealth({quiet:true});
