@@ -37,6 +37,7 @@ self.addEventListener("fetch",event=>{
   const fresh =
     url.pathname==="/voice-studio/" ||
     url.pathname==="/voice-studio/index.html" ||
+    url.pathname==="/voice-studio/manifest.webmanifest" ||
     url.pathname==="/voice-studio/version.json" ||
     url.pathname==="/voice-studio/service-worker.js" ||
     url.pathname==="/voice-studio/install-mac.command" ||
