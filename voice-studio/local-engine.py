@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.93"
+ENGINE_VERSION="2.9.94"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -85,7 +85,13 @@ LEARNING_CONFIRMED_AUDIO_DIR=LEARNING_HOME/"confirmed-audio"
 LEARNING_CONFIRMED_AUDIO_DIR.mkdir(parents=True,exist_ok=True)
 STORY_REFERENCE_HOME=LEARNING_HOME/"story-references"
 STORY_REFERENCE_STATE=STORY_REFERENCE_HOME/"state.json"
-STORY_REFERENCE_SEED=APP_HOME/"story-reference-muhammad-2026-10-04.json"
+STORY_REFERENCE_SEEDS=(
+    APP_HOME/"story-reference-muhammad-2026-10-04.json",
+    APP_HOME/"story-reference-adam-2026-10-04.json",
+    APP_HOME/"story-reference-idris-2026-10-04.json",
+)
+# Compatibility alias for older diagnostics/config consumers.
+STORY_REFERENCE_SEED=STORY_REFERENCE_SEEDS[0]
 STORY_REFERENCE_HOME.mkdir(parents=True,exist_ok=True)
 ONLINE_LIBRARY_CACHE=LEARNING_HOME/"online-library.json"
 MASTER_LIBRARY_CACHE=LEARNING_HOME/"islamic-master-library.json"
@@ -2444,13 +2450,20 @@ def _story_reference_save(data):
     atomic_write_json(STORY_REFERENCE_STATE,payload)
     return payload
 
+def _story_reference_seeds():
+    seeds=[]
+    for seed_path in STORY_REFERENCE_SEEDS:
+        seed=load_json_file(seed_path,{})
+        if isinstance(seed,dict) and seed.get("id") and seed.get("itemId"):
+            seeds.append(seed)
+    return seeds
+
 def _story_reference_seed(item_id:str=""):
-    seed=load_json_file(STORY_REFERENCE_SEED,{})
-    if not isinstance(seed,dict):
-        return {}
-    if item_id and str(seed.get("itemId") or "")!=str(item_id):
-        return {}
-    return seed
+    for seed in _story_reference_seeds():
+        if item_id and str(seed.get("itemId") or "")!=str(item_id):
+            continue
+        return seed
+    return {}
 
 def _story_reference_to_wav(src:Path,dst:Path):
     src=Path(src)
@@ -2645,12 +2658,12 @@ def _story_reference_bootstrap_download(url:str,seed:dict):
         except Exception: pass
         raise
 
-def bootstrap_story_reference_seed():
-    """Best-effort bootstrap of the already approved Muḥammad recording.
+def bootstrap_story_reference_seed(seed=None):
+    """Best-effort bootstrap of one approved owner story recording.
 
     Runs in a background thread and never blocks app launch or model startup.
     """
-    seed=_story_reference_seed()
+    seed=dict(seed or _story_reference_seed())
     if not seed:
         return {"ok":False,"reason":"seed-missing"}
     ref_id=str(seed.get("id") or "").strip()
@@ -2723,6 +2736,17 @@ def bootstrap_story_reference_seed():
         referenceId=ref_id,itemId=str(seed.get("itemId") or "")
     )
     return {"ok":False,"reason":"audio-not-yet-local"}
+
+def bootstrap_story_reference_seeds():
+    """Register every installed owner-approved long-form story reference."""
+    results=[]
+    for seed in _story_reference_seeds():
+        try:
+            results.append(bootstrap_story_reference_seed(seed))
+        except Exception as e:
+            print("[DĀR Voice] story reference bootstrap warning",seed.get("itemId"),e,flush=True)
+            results.append({"ok":False,"itemId":str(seed.get("itemId") or ""),"reason":str(e)})
+    return results
 
 
 def _slot_asset_name(kind:str,key:str):
@@ -10060,7 +10084,7 @@ def serve_single_instance():
         # Bestätigte Audio-Text-Paare werden rein lokal/IO-basiert im Hintergrund
         # registriert. Das blockiert weder UI noch Modell-Warmup.
         threading.Thread(
-            target=bootstrap_story_reference_seed,
+            target=bootstrap_story_reference_seeds,
             daemon=True,
             name="dar-story-reference-bootstrap"
         ).start()
