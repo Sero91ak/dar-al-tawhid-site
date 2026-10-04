@@ -157,6 +157,12 @@ self.addEventListener("fetch",function(event){
     event.respondWith(networkFirst(request));
     return;
   }
+  if(url.pathname==="/kids/data/quiz-kids.json"||url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
+    // Quiz-Inhalt und Owner-Voice-Manifeste müssen nach einem Live-Push sofort aktuell sein.
+    // Offline bleibt der zuletzt erfolgreiche Stand als Fallback verfügbar.
+    event.respondWith(networkFirst(request));
+    return;
+  }
   if(url.pathname.indexOf("/kids/data/")===0){
     event.respondWith(staleWhileRevalidate(request));
     return;
