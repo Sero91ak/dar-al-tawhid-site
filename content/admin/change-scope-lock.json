@@ -6962,6 +6962,26 @@
         "assets/post-templates/"
       ],
       "expiresAt": "2026-10-06T23:59:00.000Z"
+    },
+    {
+      "id": "bildbeitrag-historical-generation-repair-2026-10-04",
+      "approvedBy": "user-explicit-bildbeitrag-historisch-allgemein-frauen-separat-reparieren",
+      "reason": "Nutzer-Auftrag: Bildbeitrag-Funktion in Dar Test, Besucher-/iOS-Web-App reparieren. Normale Beiträge generieren frische thematische Bilder mit historisch plausibler Welt ca. 1000–1400 Jahre bzw. zeitloser Natur; Frauenbereich nutzt ein separates women-historical Profil. Tote Share-Buttons, doppelte Frauen-Handler und Generator-Ausfälle beheben; historische Fallbacks zulässig.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "assets/dar-global-share-v1225.js",
+        "assets/premium-feed-app.js",
+        "test/assets/premium-feed-app.js",
+        "test/assets/frauen/",
+        "cloudflare/share-image.js",
+        "cloudflare/worker.js",
+        ".github/workflows/deploy-admin-publisher.yml",
+        ".github/workflows/sync-admin-publisher-secrets.yml",
+        "scripts/verify-global-share-design.js",
+        "scripts/verify-global-share-standard.js",
+        "scripts/verify-test-app-deploy.js"
+      ],
+      "expiresAt": "2026-10-11T23:59:00.000Z"
     }
   ],
   "enabled": true
