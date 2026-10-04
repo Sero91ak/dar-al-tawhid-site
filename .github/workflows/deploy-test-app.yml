@@ -71,6 +71,7 @@ jobs:
           GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
         run: |
+          node --check cloudflare/test-app-worker.js
           node scripts/test-app-health-check.js
           node scripts/library-deploy-guard.js
           node scripts/app-stability-guard.js
