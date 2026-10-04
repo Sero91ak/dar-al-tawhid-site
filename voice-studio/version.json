@@ -1,10 +1,10 @@
 {
-  "version": "2.9.99",
-  "updatedAt": "2026-10-04T21:43:00+02:00",
-  "deployTrigger": "voice-studio-2.9.99-fast-known-owner-content",
+  "version": "2.9.100",
+  "updatedAt": "2026-10-04T22:08:00+02:00",
+  "deployTrigger": "voice-studio-2.9.100-owner-audio-auto-learning",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v68",
+  "cache": "dar-voice-studio-v69",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-contents-api",
-  "engineVersion": "2.9.99",
+  "engineVersion": "2.9.100",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -1762,6 +1762,8 @@
     "directOwnerAudioUpload": true,
     "textAudioReferenceLearning": true,
     "directKidsPublish": true,
-    "trustedMaxMasterVocabulary": true
+    "trustedMaxMasterVocabulary": true,
+    "mobileOwnerAudioAutoLearning": true,
+    "duplicateRenderAvoidance": true
   }
 }
