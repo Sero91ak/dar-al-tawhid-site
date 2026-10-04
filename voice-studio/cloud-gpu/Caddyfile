@@ -12,10 +12,6 @@
 
   reverse_proxy voice:8787 {
     flush_interval -1
-    transport http {
-      read_buffer 0
-      write_buffer 0
-    }
   }
 
   header {
