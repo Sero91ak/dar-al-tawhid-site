@@ -3662,6 +3662,35 @@
   }
 
   var FRAUEN_SHARE_IMAGE_API = "https://dar-admin-publisher.sero91ak.workers.dev/api/share-image/background";
+  var FRAUEN_SHARE_FALLBACKS = [
+    "/test/assets/frauen/library-v1224/01-grundlagen-din.jpg",
+    "/test/assets/frauen/library-v1224/02-fiqh-frauen.jpg",
+    "/test/assets/frauen/library-v1224/03-erste-generationen.jpg",
+    "/test/assets/frauen/library-v1224/04-familie-erziehung.jpg",
+    "/test/assets/frauen/library-v1224/05-wissen-adab-dawah.jpg",
+    "/test/assets/frauen/library-v1224/06-alltag-schutz.jpg",
+    "/test/assets/frauen/library-v1224/07-lebensphasen.jpg"
+  ];
+
+  async function frauenHistoricalFallback(abschnitt, e) {
+    var hay = String((bereichKicker(abschnitt) || "") + " " + (titelVon(e) || "") + " " + (aussageVon(e) || "")).toLowerCase();
+    var preferred = 0;
+    if (/fiqh|gebet|fasten|hayd|nifas|hajj|umrah|reinigung/.test(hay)) preferred = 1;
+    else if (/sahab|tabi|generation|geschichte|mütter der gläubigen/.test(hay)) preferred = 2;
+    else if (/famil|ehe|kind|erzieh|tochter|mädchen/.test(hay)) preferred = 3;
+    else if (/wissen|adab|dawah|lehren|lernen|quelle/.test(hay)) preferred = 4;
+    else if (/schutz|reise|privat|umgang|ruqyah|krank/.test(hay)) preferred = 5;
+    else if (/schwanger|still|iddah|trauer|tod|lebensphase/.test(hay)) preferred = 6;
+    var last = null;
+    for (var i = 0; i < FRAUEN_SHARE_FALLBACKS.length; i++) {
+      var src = FRAUEN_SHARE_FALLBACKS[(preferred + i) % FRAUEN_SHARE_FALLBACKS.length];
+      try {
+        var img = await frauenLoadImage(src + "?share-fallback=v1247");
+        return { image: img, objectUrl: "" };
+      } catch (err) { last = err; }
+    }
+    throw last || new Error("Kein Frauen-Historikbild verfügbar.");
+  }
 
   async function frauenFreshShareBackground(abschnitt, e) {
     var controller = typeof AbortController !== "undefined" ? new AbortController() : null;
@@ -3700,6 +3729,9 @@
         URL.revokeObjectURL(objectUrl);
         throw e3;
       }
+    } catch (generatorError) {
+      try { console.warn("Frauen share AI unavailable; dedicated historical fallback active", generatorError); } catch (warnErr) {}
+      return frauenHistoricalFallback(abschnitt, e);
     } finally {
       clearTimeout(timer);
     }
