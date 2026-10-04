@@ -3858,7 +3858,17 @@
     var payload = frauenSharePayload(abschnitt, e);
     frauenToast("Bildbeitrag wird erstellt …");
     var files = [];
-    try { files = await frauenImageFiles(abschnitt, e); } catch (err) {}
+    try {
+      files = await frauenImageFiles(abschnitt, e);
+    } catch (err) {
+      try { console.error("DAR Frauen Bildbeitrag", err); } catch (_err) {}
+      frauenToast(err && err.message ? String(err.message).slice(0, 180) : "Bildgenerator derzeit nicht verfügbar");
+      return false;
+    }
+    if (!files.length) {
+      frauenToast("Bildbeitrag konnte nicht erstellt werden.");
+      return false;
+    }
     if (files.length) {
       try {
         if (navigator.canShare && navigator.canShare({ files: files }) && navigator.share) {
@@ -3900,7 +3910,8 @@
         return true;
       } catch (e4) {}
     }
-    return frauenNativeShare(payload);
+    frauenToast("Bildbeitrag konnte nicht geteilt werden.");
+    return false;
   }
 
   async function frauenHandleShare(button) {
