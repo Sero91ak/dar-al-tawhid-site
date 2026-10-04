@@ -1,0 +1,52 @@
+services:
+  voice:
+    build:
+      context: ../..
+      dockerfile: voice-studio/cloud-gpu/Dockerfile
+    restart: unless-stopped
+    gpus: all
+    env_file:
+      - .env
+    environment:
+      DAR_VOICE_NETWORK_MODE: "1"
+      DAR_VOICE_DEVICE: "${DAR_VOICE_DEVICE:-cuda}"
+      DAR_VOICE_PORT: "8787"
+      DAR_VOICE_AUTOWARM: "${DAR_VOICE_AUTOWARM:-1}"
+      HF_HOME: /root/.cache/huggingface
+      SERHAT_VOICE_REF: /root/SerhatVoice/Serhat_Adobe_MASTER.wav
+      SERHAT_VOICE_REF_AR: /root/SerhatVoice/Serhat_AR_MASTER.wav
+    volumes:
+      - ${DAR_VOICE_DATA_DIR:-/var/lib/dar-voice}:/root/SerhatVoice
+      - ${DAR_VOICE_MODEL_CACHE_DIR:-/var/cache/dar-voice-hf}:/root/.cache/huggingface
+    expose:
+      - "8787"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8787/health',timeout=3).read()"
+      interval: 15s
+      timeout: 5s
+      start_period: 180s
+      retries: 4
+
+  caddy:
+    image: caddy:2.8
+    restart: unless-stopped
+    depends_on:
+      voice:
+        condition: service_healthy
+    environment:
+      DAR_VOICE_DOMAIN: ${DAR_VOICE_DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL:-}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
