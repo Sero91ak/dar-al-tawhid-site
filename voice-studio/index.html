@@ -2109,17 +2109,25 @@ function updateEngineUI(data){
   $("#engineDot").className="dot "+(engineOK&&!modelError?"ok":"bad");
   $("#qaEngine").textContent=!engineOK?"offline":loading?"lädt":modelReady?"bereit":modelError?"Fehler":"verbunden";
   $("#qaEngine").className=engineOK&&!modelError?(modelReady?"good":"warn"):"bad";
-  $("#startEngineBtn").textContent=engineOK?"Mac-App öffnen":"Engine / Mac-App starten";
-  $("#startEngineBtn").disabled=false;
+  $("#startEngineBtn").textContent=CLOUD_ENGINE_MODE
+    ?(engineOK?"Cloud Engine verbunden":"Cloud Engine verbinden")
+    :(engineOK?"Mac-App öffnen":"Engine / Mac-App starten");
+  $("#startEngineBtn").disabled=CLOUD_ENGINE_MODE&&engineOK;
 
   const arDedicated=!!(data?.reference_arabic_dedicated||data?.arabic_reference_dedicated);
   $("#qaArabicRef").textContent=arDedicated?"Serhat AR MASTER":"Serhat DE Fallback";
   $("#qaArabicRef").className=arDedicated?"good":"warn";
   if($("#qaBackend")){
     const backend=String(data?.production_backend||"torch");
+    const device=String(data?.model_device||"").toLowerCase();
     const mlx=backend==="mlx";
-    $("#qaBackend").textContent=mlx?"MLX · Apple Silicon":"PyTorch/MPS Fallback";
-    $("#qaBackend").className=mlx?"good":"warn";
+    const cuda=device.startsWith("cuda");
+    $("#qaBackend").textContent=mlx
+      ?"MLX · Apple Silicon"
+      :cuda
+      ?"CUDA · NVIDIA GPU"
+      :"PyTorch/MPS Fallback";
+    $("#qaBackend").className=(mlx||cuda)?"good":"warn";
   }
   if($("#qaHonorific")&&data?.honorific_policy_enabled){
     const count=Number(data?.honorific_name_variants||0);
@@ -2134,8 +2142,13 @@ function updateEngineUI(data){
     $("#engineHelp").textContent="Modellfehler: "+data.last_error;
   }else if(modelReady){
     const perf=data?.performance_engine||"";
-    const backend=data?.production_backend==="mlx"?"MLX High-Speed":"PyTorch/MPS";
-    $("#engineHelp").textContent="Eigene Stimme aktiv · Chatterbox Multilingual V3 · "+backend+" · "+String(data.model_device||"").toUpperCase()+" · "+(perf?"Long-Form Cache aktiv":"renderbereit");
+    const device=String(data?.model_device||"");
+    const backend=data?.production_backend==="mlx"
+      ?"MLX High-Speed"
+      :device.toLowerCase().startsWith("cuda")
+      ?"CUDA High-Speed"
+      :"PyTorch/MPS";
+    $("#engineHelp").textContent="Eigene Stimme aktiv · Chatterbox Multilingual V3 · "+backend+" · "+device.toUpperCase()+" · "+(perf?"Long-Form Cache aktiv":"renderbereit");
     if($("#qaSpeed")){
       const cache=data?.render_cache||{};
       $("#qaSpeed").textContent="aktiv · Cache "+Number(cache.hits||0)+" Treffer";
@@ -2144,7 +2157,9 @@ function updateEngineUI(data){
   }else if(loading){
     $("#engineHelp").textContent="Chatterbox V3 wird geladen. Beim ersten Start kann das einige Minuten dauern.";
   }else{
-    $("#engineHelp").textContent="Engine verbunden. Das Stimm-Modell wird beim ersten Render automatisch geladen.";
+    $("#engineHelp").textContent=CLOUD_ENGINE_MODE&&!engineOK
+      ?"DĀR Voice Cloud wartet auf den privaten GPU-Host. Danach funktioniert die App ohne lokale IP und ohne gleichen WLAN-Zugang."
+      :"Engine verbunden. Das Stimm-Modell wird beim ersten Render automatisch geladen.";
   }
 }
 
