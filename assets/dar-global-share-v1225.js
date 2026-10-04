@@ -289,7 +289,7 @@
     if(trigger&&trigger.dataset.darShareBusy==="1")return true;
     if(trigger){trigger.dataset.darShareBusy="1";trigger.classList.add("is-busy")}
     try{toast("Bildbeitrag wird erstellt …");var files=await renderFiles(data);await shareFiles(files,data,instagram);return true}
-    catch(e){console.error("DAR global image share",e);toast("Bildbeitrag konnte nicht erstellt werden.");return false}
+    catch(e){console.error("DAR global image share",e);toast(e&&e.message?String(e.message).slice(0,180):"Bildbeitrag konnte nicht erstellt werden.");return false}
     finally{if(trigger){trigger.dataset.darShareBusy="0";trigger.classList.remove("is-busy")}}
   }
   /* GLOBAL_SHARE_ACTIONS_V1227 · einheitliche Share-Aktionen in Besucher- und Test-App */
