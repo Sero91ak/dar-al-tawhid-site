@@ -1,0 +1,26 @@
+{
+  email {$ACME_EMAIL}
+}
+
+{$DAR_VOICE_DOMAIN} {
+  encode zstd gzip
+
+  @health path /health
+  reverse_proxy voice:8787 {
+    flush_interval -1
+  }
+
+  reverse_proxy voice:8787 {
+    flush_interval -1
+    transport http {
+      read_buffer 0
+      write_buffer 0
+    }
+  }
+
+  header {
+    -Server
+    Cache-Control "no-store"
+    X-DAR-Voice-Origin "gpu"
+  }
+}
