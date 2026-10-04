@@ -1,4 +1,4 @@
-/* Voice Studio 2.9.100 · trusted lexicon + fast Kids audio/content workflow */
+/* Voice Studio 2.9.102 · Ṣaḥābah texts + direct audio file workspace */
 (() => {
 "use strict";
 
