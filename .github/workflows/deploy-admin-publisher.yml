@@ -8,6 +8,7 @@ on:
     paths:
       - cloudflare/quiz-stats-admin.js
       - cloudflare/worker.js
+      - cloudflare/kids-content-*.js
       - cloudflare/voice-studio-web.js
       - cloudflare/ilm-research.js
       - cloudflare/wrangler.toml
@@ -62,6 +63,9 @@ jobs:
           node --check daily-push-scheduler.js
           node --check daily-push-admin.js
           node --check library-push-admin.js
+          node --check kids-content-admin.js
+          node --check kids-content-push.js
+          node --check kids-content-media.js
           node --check worker.js
 
       - name: Prayer push integrity guard
