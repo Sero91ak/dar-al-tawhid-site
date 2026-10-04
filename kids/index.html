@@ -5939,7 +5939,11 @@ function setKidsQuizAgeBand(value,restart){
   if(restart&&kidsQuizLoaded&&document.getElementById("quizModal").classList.contains("open"))beginQuizSession();
 }
 document.querySelectorAll("#quizAgePick [data-quiz-age]").forEach(function(btn){
-  btn.addEventListener("click",function(){setKidsQuizAgeBand(btn.getAttribute("data-quiz-age"),true)});
+  btn.addEventListener("click",function(){
+    var modal=document.getElementById("quizModal");
+    var libraryMode=!!(modal&&modal.classList.contains("quiz-library-mode"));
+    setKidsQuizAgeBand(btn.getAttribute("data-quiz-age"),!libraryMode);
+  });
 });
 function isYesNoAnswers(answers){
   var labels=(answers||[]).map(function(a){return String(a.label||"").trim().toLowerCase()});
@@ -6157,6 +6161,7 @@ function fetchKidsQuiz(){
       });
       kidsQuizPool=baseItems.concat(normalizeStudioQuizItems(studioData));
       kidsQuizLoaded=true;
+      try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-loaded",{detail:{count:kidsQuizPool.length}}))}catch(e){}
       return kidsQuizPool;
     }).catch(function(){
       kidsQuizPool=[];
@@ -6265,6 +6270,9 @@ function renderQuizProgress(){
 }
 function renderQuizQuestion(){
   if(currentQuizIndex>=currentQuiz.length){renderQuizFinish();return}
+  renderKidsQuizAgePicker();
+  var ageLabel=document.getElementById("quizAgeLabel");
+  if(ageLabel)ageLabel.textContent=quizAgeRange().label;
   var q=currentQuiz[currentQuizIndex];
   quizLocked=false;
   quizQuestionHadError=false;
