@@ -1,6 +1,6 @@
 {
   "version": "2.9.107",
-  "updatedAt": "2026-10-04T23:42:00+02:00",
+  "updatedAt": "2026-10-04T23:47:00+02:00",
   "deployTrigger": "voice-studio-2.9.107-hierarchical-pronunciation-components",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -341,8 +341,8 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "e58e26a8bc7539cf42bd437bd2571e76ea24f565",
-    "validatedAt": "2026-10-04T23:42:00+02:00",
+    "validatedCommit": "db3e0d77c39fb3b2cd76379ae22eaa3667a86594",
+    "validatedAt": "2026-10-04T23:47:00+02:00",
     "freeVoiceIsolation": true,
     "mainAppBrandingUnchanged": true,
     "prophetStoryLocalBatchSmoke": true,
@@ -868,7 +868,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "e58e26a8bc7539cf42bd437bd2571e76ea24f565",
+  "releaseRef": "db3e0d77c39fb3b2cd76379ae22eaa3667a86594",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1315,7 +1315,7 @@
     "offlineManifestPackaged": true,
     "staleLocalManifestAutoRefresh": true
   },
-  "validatedCommit": "e58e26a8bc7539cf42bd437bd2571e76ea24f565",
+  "validatedCommit": "db3e0d77c39fb3b2cd76379ae22eaa3667a86594",
   "validatedAt": "2026-10-04T23:11:00+02:00",
   "validation": {
     "targetVersion": "2.9.107",
