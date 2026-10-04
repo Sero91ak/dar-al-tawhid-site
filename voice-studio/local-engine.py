@@ -8535,7 +8535,7 @@ class H(BaseHTTPRequestHandler):
             self.send_json(200,{"ok":True,**alphabet_master_state()})
         elif p=="/kids-voice/sync-state":
             return self.send_json(200,{"ok":True,**_kids_owner_voice_snapshot()})
-        if p=="/alphabet/batch-state":
+        elif p=="/alphabet/batch-state":
             self.send_json(200,{"ok":True,**_alphabet_batch_snapshot()})
         elif p=="/prophet-stories/batch-state":
             self.send_json(200,{"ok":True,**_prophet_batch_snapshot()})
