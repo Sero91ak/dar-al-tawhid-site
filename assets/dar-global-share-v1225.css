@@ -7,3 +7,79 @@
 .dar-global-share-toast.is-visible{opacity:1;transform:translate(-50%,0)}
 @media(max-width:520px){.share-flat-v410,.post-after-share{grid-template-columns:repeat(3,minmax(0,1fr))!important}.share-panel .share-btn{min-width:0!important}.share-panel .share-btn span{font-size:10px!important}}
 @media(prefers-reduced-motion:reduce){.dar-global-share-toast{transition:none!important}}
+
+/* GLOBAL_SHARE_ACTIONS_STYLE_V1227 */
+.share-panel .dar-global-share-action,
+.share-panel .dar-global-image-btn{
+  min-height:72px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  padding:8px 6px!important;
+  border-radius:15px!important;
+  font-weight:800!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+.dar-global-share-icon{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:color-mix(in srgb,currentColor 8%,transparent);
+}
+.dar-global-share-icon svg{width:21px;height:21px;display:block;fill:currentColor}
+.share-panel .dar-global-share-action>span:last-child,
+.share-panel .dar-global-image-btn>span:last-child{font-size:10px!important;line-height:1!important;white-space:nowrap}
+html[data-theme] .share-panel .dar-global-share-wa{
+  color:#18884a!important;
+  border-color:rgba(37,211,102,.28)!important;
+  background:linear-gradient(145deg,rgba(37,211,102,.10),color-mix(in srgb,var(--card) 88%,transparent))!important;
+}
+html[data-theme] .share-panel .dar-global-share-tg{
+  color:#218ac3!important;
+  border-color:rgba(42,171,238,.28)!important;
+  background:linear-gradient(145deg,rgba(42,171,238,.09),color-mix(in srgb,var(--card) 88%,transparent))!important;
+}
+html[data-theme] .share-panel .dar-global-share-ig{
+  color:#b73570!important;
+  border-color:rgba(214,41,118,.24)!important;
+  background:linear-gradient(145deg,rgba(214,41,118,.08),color-mix(in srgb,var(--card) 88%,transparent))!important;
+}
+html[data-theme] .share-panel .dar-global-share-native,
+html[data-theme] .share-panel .dar-global-image-btn{
+  color:var(--gold2,var(--gold,#d7bc78))!important;
+  border-color:color-mix(in srgb,var(--gold2,var(--gold,#d7bc78)) 28%,var(--line) 72%)!important;
+}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"])
+.share-panel .dar-global-share-wa{color:#8ee7ad!important}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"])
+.share-panel .dar-global-share-tg{color:#9fdcff!important}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"])
+.share-panel .dar-global-share-ig{color:#ffacd2!important}
+.share-panel .share-flat-v410,
+.share-panel .post-after-share,
+.share-panel .frauen-share-primary{
+  align-items:stretch!important;
+}
+@media(max-width:520px){
+  .share-panel .share-flat-v410,
+  .share-panel .post-after-share,
+  .share-panel .frauen-share-primary{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:6px!important;
+  }
+  .share-panel .dar-global-share-action,
+  .share-panel .dar-global-image-btn{min-height:68px!important;padding:7px 4px!important}
+  .dar-global-share-icon{width:31px;height:31px;border-radius:10px}
+  .dar-global-share-icon svg{width:19px;height:19px}
+  .share-panel .dar-global-share-action>span:last-child,
+  .share-panel .dar-global-image-btn>span:last-child{font-size:9px!important}
+}
+@media(max-width:370px){
+  .share-panel .share-flat-v410,
+  .share-panel .post-after-share,
+  .share-panel .frauen-share-primary{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
