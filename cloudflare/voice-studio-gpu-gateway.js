@@ -63,7 +63,7 @@ function copyUpstreamHeaders(request, env) {
   ]) headers.delete(key);
 
   const token = upstreamToken(env);
-  if (token) headers.set("Authorization", "Bearer " + token);
+  if (token) {\n    headers.set("Authorization", "Bearer " + token);\n    headers.set("X-DAR-Voice-Token", token);\n  }
   headers.set("X-DAR-Voice-Gateway", "cloudflare-v1");
   headers.set("X-Forwarded-Proto", "https");
   return headers;
