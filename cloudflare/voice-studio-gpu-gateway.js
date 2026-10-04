@@ -40,10 +40,53 @@ export function darVoiceWebAccessConfigured(env) {
   return Boolean(webAccessToken(env));
 }
 
-export function darVoiceWebAuthorized(request, env) {
+export function darVoiceWebCodeAuthorized(code, env) {
   const expected = webAccessToken(env);
-  const supplied = String(request.headers.get("X-DAR-Voice-Access") || "").trim();
+  const supplied = String(code || "").trim();
   return Boolean(expected && supplied && constantTimeEqual(supplied, expected));
+}
+
+async function webSessionValue(env) {
+  const secret = webAccessToken(env);
+  if (!secret) return "";
+  const bytes = new TextEncoder().encode("dar-voice-cloud-session-v1|" + secret);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest)).map((n) => n.toString(16).padStart(2, "0")).join("");
+}
+
+function cookieValue(request, name) {
+  const cookie = String(request.headers.get("Cookie") || "");
+  const parts = cookie.split(";");
+  for (const part of parts) {
+    const eq = part.indexOf("=");
+    if (eq < 0) continue;
+    const key = part.slice(0, eq).trim();
+    if (key !== name) continue;
+    return decodeURIComponent(part.slice(eq + 1).trim());
+  }
+  return "";
+}
+
+export async function darVoiceWebAuthorized(request, env) {
+  const header = String(request.headers.get("X-DAR-Voice-Access") || "").trim();
+  if (header && darVoiceWebCodeAuthorized(header, env)) return true;
+  const suppliedSession = cookieValue(request, "DARVOICE_CLOUD");
+  if (!suppliedSession) return false;
+  const expectedSession = await webSessionValue(env);
+  return Boolean(expectedSession && constantTimeEqual(suppliedSession, expectedSession));
+}
+
+export async function darVoiceWebSessionCookie(env) {
+  const value = await webSessionValue(env);
+  if (!value) return "";
+  return [
+    "DARVOICE_CLOUD=" + encodeURIComponent(value),
+    "Path=/voice-studio/api/engine",
+    "Max-Age=2592000",
+    "HttpOnly",
+    "Secure",
+    "SameSite=Strict"
+  ].join("; ");
 }
 
 export function darVoiceGpuConfigured(env) {
