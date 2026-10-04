@@ -1153,31 +1153,6 @@ async function compactAudioBlob(){
   if(!r.ok){const d=await r.json().catch(()=>({}));throw Error(d.error||"App-Audio konnte nicht vorbereitet werden.")}
   return await r.blob();
 }
-async function registerOwnerAudioMemory({id,text,file,dataUrl}={}){
-  if(!file||!dataUrl||!String(text||"").trim())return null;
-  const kind=studioKind==="dua"?"dua":studioKind==="narration"?"narration":"story";
-  try{
-    const r=await localRequest("/content-audio/reference",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        kind,
-        id:String(id||contentId||""),
-        age:String(q("csAgeMin")?.value||4)+"-"+String(q("csAgeMax")?.value||10),
-        text:String(text||"").trim(),
-        filename:file.name||"serhat-owner-audio",
-        dataUrl
-      })
-    });
-    const d=await r.json().catch(()=>({}));
-    if(!r.ok||d.ok===false)throw Error(d.error||"Audio-Text-Lernspeicher nicht erreichbar.");
-    if(d.learning&&typeof renderLearningState==="function")renderLearningState(d.learning);
-    return d;
-  }catch(e){
-    console.warn("[DĀR Voice] Owner-Audio-Referenz konnte nicht gespeichert werden:",e);
-    return null;
-  }
-}
 async function uploadAudio(){
   const script=voiceScript();
   if(audioAsset?.url&&audioAssetText===script&&Array.isArray(audioAsset?.timings)&&audioAsset.timings.length)return audioAsset;
@@ -1197,9 +1172,6 @@ async function uploadAudio(){
   const d=await adminApi("/api/admin/kids-content/media",{method:"POST",body:JSON.stringify({
     id,role:"audio",staging:true,dataUrl,originalName:uploadName,source:manual?"manual-owner-upload":"serhat-mlx-master"
   })});
-  if(manual){
-    void registerOwnerAudioMemory({id,text:storyText,file:directAudioFile,dataUrl});
-  }
   audioAsset={
     ...d.asset,
     codec:manual?"owner-upload":"aac-72k-mono",
@@ -1333,7 +1305,16 @@ async function publishLive(){
     const p=pub.push||{};
     setStudioMessage(effectiveTarget()==="ios"?"iOS-Inhalt live veröffentlicht.":(p.sent?"Live veröffentlicht · Kids-Push gesendet.":"Live veröffentlicht · Push: "+(p.reason||"kein Empfänger")),effectiveTarget()==="ios"||p.sent?"good":"warn");
     await loadLibrary(true);
-    if(effectiveTarget()==="kids")await triggerKidsOwnerVoiceSync();
+    if(effectiveTarget()==="kids"){
+      await triggerKidsOwnerVoiceSync();
+      if(directAudioReadyForCurrentText()&&localReferenceLearningAvailable()){
+        registerDirectAudioLearning().then(()=>{
+          console.info("[DĀR Voice] Eigentümer-Audio/Text-Referenz dauerhaft gelernt.");
+        }).catch(e=>{
+          console.warn("[DĀR Voice] Referenzlernen im Hintergrund fehlgeschlagen:",e);
+        });
+      }
+    }
     setTimeout(()=>q("csLibrarySection")?.scrollIntoView?.({behavior:"smooth",block:"center"}),100);
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
   finally{busy=false;renderStatus();refreshQa()}
