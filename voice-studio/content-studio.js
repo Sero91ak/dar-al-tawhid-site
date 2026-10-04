@@ -1121,7 +1121,7 @@ async function produce(){
     await Promise.all(tasks);
     if(workerSecret()&&!coverAsset?.url&&(coverFile||coverRemoteUrl))await uploadCover();
     setProductionPhase(needsVoice&&!qaConfirmed?"awaiting-qa":"ready");
-    if(workerSecret())await checkpointPackage(productionPhase);
+    if(workerSecret()&&!existingStoryTarget)await checkpointPackage(productionPhase);
     setStudioMessage(needsVoice&&!qaConfirmed?"Audio und Cover vorbereitet. Aussprache anhören und bestätigen; danach ist Test-Publish frei.":"Produktionspaket ist bereit für den Test-Publish.","good");
     setTimeout(focusNextProductionAction,120);
   }catch(e){
@@ -1203,6 +1203,7 @@ async function prepareAssets(){
   await Promise.all(jobs);
 }
 async function checkpointPackage(phase=productionPhase,error=""){
+  if(existingStoryTarget)return null;
   await ensureId();
   productionPhase=phase||productionPhase;productionError=error||"";
   const payload={...fields(),id:contentId,staging:true,status:"draft",production:{phase:productionPhase,error:productionError}};
@@ -1210,6 +1211,11 @@ async function checkpointPackage(phase=productionPhase,error=""){
   savedRevision=d.item?.revision||savedRevision;return d.item;
 }
 async function saveDraftRemote(withAssets){
+  if(existingStoryTarget){
+    persistDraft();
+    setStudioMessage("Bestehende Propheten-/Ṣaḥābah-Geschichte: Der Text bleibt unverändert. Audio über „Direkt in Kids“ aktualisieren.","good");
+    return null;
+  }
   if(busy)return null;
   busy=true;contentStatus="draft";renderStatus();
   try{
@@ -1222,8 +1228,81 @@ async function saveDraftRemote(withAssets){
   }catch(e){setStudioMessage(e.message||String(e),"bad");throw e}
   finally{busy=false;refreshQa()}
 }
+
+async function publishExistingStoryAudioDirect(){
+  if(busy||!existingStoryTarget)return null;
+  if(!workerSecret()){setStudioMessage("Admin-Verbindung fehlt. Einmal verbinden, danach bleibt der Direktweg verfügbar.","warn");return null}
+  const script=voiceScript();
+  if(!script){setStudioMessage("Der hinterlegte Erzähltext fehlt.","bad");return null}
+  const manual=directAudioReadyForCurrentText();
+  const generated=!!lastAudio&&lastGeneratedText===script&&Boolean(qaConfirmed);
+  if(!manual&&!generated){
+    setStudioMessage("Zuerst fertige MP3/M4A hochladen oder Audio mit deiner Stimme erzeugen und einmal bestätigen.","warn");
+    return null;
+  }
+  if(!confirm((existingStoryTarget.kind==="prophet"?"Propheten-Geschichte":"Ṣaḥābah-Geschichte")+" · "+existingStoryTarget.age.replace("-","–")+" jetzt mit dieser Audio direkt im bestehenden Kids-Bereich aktualisieren?"))return null;
+  busy=true;renderStatus();
+  setStudioMessage("Direktweg läuft: exakter Text → Audio → bestehender Kids-Bereich …","warn");
+  try{
+    let blob,file,alignment,originalName;
+    if(manual){
+      blob=directAudioFile;
+      file=directAudioFile;
+      alignment=directAudioAlignment;
+      originalName=directAudioFile.name||"serhat-owner-audio";
+    }else{
+      blob=await compactAudioBlob();
+      originalName="serhat-voice-"+existingStoryTarget.itemId+"-"+existingStoryTarget.age+".m4a";
+      file=new File([blob],originalName,{type:blob.type||"audio/mp4"});
+      alignment=await alignStoryFile(file,script);
+    }
+    if(!Array.isArray(alignment?.timings)||!alignment.timings.length)throw Error("Mitlese-Zeitstempel fehlen.");
+    const durationSec=await getAudioDuration(blob);
+    const dataUrl=await blobToDataUrl(blob);
+    const result=await adminApi("/api/admin/kids-existing-story/audio",{
+      method:"POST",
+      body:JSON.stringify({
+        storyKind:existingStoryTarget.kind,
+        itemId:existingStoryTarget.itemId,
+        age:existingStoryTarget.age,
+        text:script,
+        dataUrl,
+        originalName,
+        durationSec,
+        timings:alignment.timings,
+        syncMode:alignment.syncMode||"",
+        triggerDeploy:true
+      })
+    });
+    existingStoryTarget={...existingStoryTarget,existingAudio:result.asset||null};
+    setProductionPhase("live-published");
+    setStudioMessage(
+      (existingStoryTarget.kind==="prophet"?"Propheten-Geschichte":"Ṣaḥābah-Geschichte")+
+      " · "+existingStoryTarget.age.replace("-","–")+" aktualisiert. Audio und Mitlese-Zeiten sind direkt im bestehenden Kids-Bereich gespeichert.",
+      "good"
+    );
+    if(manual&&localReferenceLearningAvailable()){
+      const learnId=existingStoryTarget.kind+"-"+existingStoryTarget.itemId+"-"+existingStoryTarget.age;
+      localRequest("/content-audio/reference",{
+        method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          kind:"story",id:learnId,age:existingStoryTarget.age,text:script,
+          filename:originalName,dataUrl,timings:alignment.timings,syncMode:alignment.syncMode||""
+        })
+      }).catch(()=>null);
+    }
+    await loadLibrary(true);
+    return result;
+  }catch(e){
+    setProductionPhase("error",e.message||String(e));
+    setStudioMessage(e.message||String(e),"bad");
+    return null;
+  }finally{busy=false;renderStatus();refreshQa()}
+}
+
 async function publishDirectKids(){
   if(busy||effectiveTarget()!=="kids")return;
+  if(existingStoryTarget)return publishExistingStoryAudioDirect();
   if(!workerSecret()){setStudioMessage("Admin-Verbindung fehlt. Einmal verbinden, danach bleibt der Kurzweg verfügbar.","warn");return}
   const script=voiceScript();
   if(!String(q("csTitle")?.value||"").trim()){setStudioMessage("Titel fehlt.","warn");return}
@@ -1265,6 +1344,7 @@ async function publishDirectKids(){
   }finally{busy=false;refreshQa()}
 }
 async function publishTest(){
+  if(existingStoryTarget)return publishExistingStoryAudioDirect();
   if(busy)return;
   busy=true;contentStatus="review";renderStatus();
   try{
@@ -1300,6 +1380,7 @@ async function triggerKidsOwnerVoiceSync(){
 }
 
 async function publishLive(){
+  if(existingStoryTarget)return publishExistingStoryAudioDirect();
   if(busy||!stagingPublished)return;
   if(!confirm(effectiveTarget()==="ios"?"Diese geprüfte Version jetzt LIVE für die iOS-Inhalte veröffentlichen?":"Diese geprüfte Version jetzt LIVE in Kids veröffentlichen und den passenden Kids-Push senden?"))return;
   busy=true;renderStatus();
