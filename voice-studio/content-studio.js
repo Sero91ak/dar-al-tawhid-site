@@ -75,6 +75,36 @@ async function adminApi(path,opt={}){
   if(!res.ok||data?.ok===false)throw Error(data?.error||("Studio API "+res.status));
   return data;
 }
+
+async function alignStoryFile(file,text){
+  if(!file)throw Error("Audiodatei fehlt.");
+  const story=String(text||"").trim();
+  if(!story)throw Error("Story-Text fehlt.");
+  const secret=workerSecret();
+  if(!secret)throw Error("Admin-Secret fehlt für die exakte Mitlese-Synchronisierung.");
+  const form=new FormData();
+  form.append("file",file,file.name||"story-audio");
+  form.append("text",story);
+  const res=await fetch(workerBase()+"/voice-studio/api/align-story",{
+    method:"POST",cache:"no-store",credentials:"omit",
+    headers:{Accept:"application/json","X-Admin-Secret":secret},
+    body:form
+  });
+  const data=await res.json().catch(()=>({}));
+  if(!res.ok||data?.ok===false)throw Error(data?.error||("Mitlese-Synchronisierung "+res.status));
+  return data;
+}
+
+window.darVoiceAlignStoryFile=alignStoryFile;
+window.darVoiceAlignCurrentStory=async function(text){
+  const story=String(text||"").trim();
+  if(!story)throw Error("Story-Text fehlt.");
+  if(!lastAudio||lastGeneratedText!==story)throw Error("Die aktuelle Audio gehört nicht exakt zu diesem Story-Text.");
+  const blob=await fetch(lastAudio).then(r=>{if(!r.ok)throw Error("Aktuelle Audio konnte nicht gelesen werden.");return r.blob()});
+  const ext=(blob.type||"audio/wav").includes("mpeg")?".mp3":(blob.type||"").includes("mp4")?".m4a":".wav";
+  const file=new File([blob],"dar-story"+ext,{type:blob.type||"audio/wav"});
+  return alignStoryFile(file,story);
+};
 function setStudioMessage(msg,type=""){
   const el=q("csMessage"); if(!el)return;
   el.textContent=msg||"";
