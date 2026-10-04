@@ -53,7 +53,7 @@ jobs:
           if(!index.includes('4–6 Jahre · hören & tippen'))throw new Error("New Kids quiz age label missing");
           if(index.includes("Keine geprüfte Wiederholung ist gerade fällig"))throw new Error("Legacy empty-quiz state returned");
           if(!index.includes("var due=pool.filter")||!index.includes("selected.push(q)"))throw new Error("Never-empty quiz fallback missing");
-          if(!index.includes("/kids/sw.js?v=1105"))throw new Error("Kids SW v1105 registration missing");
+          if(!index.includes("/kids/sw.js?v=1106"))throw new Error("Kids SW v1105 registration missing");
           if(!index.includes("kids.pwa.controller.reload."))throw new Error("Kids stale-shell self-heal missing");
           if(!sw.includes('dar-al-tawhid-kids-v1106')||!sw.includes("client.navigate"))throw new Error("Kids SW activation recovery missing");
           console.log("KIDS QUIZ LIVE GUARD OK",quiz.items.length,version.buildId);
