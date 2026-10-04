@@ -44,7 +44,7 @@ function itemFitsProfile(item) {
   const modes = item?.modes || {};
   const published=item?.status === "published" && (item?.appTarget === "kids" || item?.appTarget === "both");
   if(!published)return false;
-  if(r.label==="4–5" && item?.kind==="story"){
+  if(r.label==="4–5" && isYoungAudioFirstItem(item)){
     return modes.listen !== false && !!String(item?.audio?.url || "").trim();
   }
   if (state.mode === "listen" && modes.listen === false) return false;
@@ -61,6 +61,9 @@ function sectionKind(item) {
   if(tags.includes("studio:narration")||/erzähl|erzaehl|narration/.test(hay))return"narration";
   if(item?.kind==="story")return"story";
   return String(item?.kind||"content");
+}
+function isYoungAudioFirstItem(item){
+  return ["story","narration","dua"].includes(sectionKind(item));
 }
 function kindLabel(kind) {
   return ({story:"Geschichte",quiz:"Quiz",game:"Spiel",lesson:"Lernen",dua:"Duʿāʾ",narration:"Erzählung"})[kind] || "Inhalt";
@@ -196,7 +199,7 @@ function closeModal() {
 function allowedModes(item) {
   const read = item?.modes?.read !== false && !!String(item?.text || "").trim();
   const listen = item?.modes?.listen !== false && !!String(item?.audio?.url || "").trim();
-  if(isAudioOnlyAge() && item?.kind==="story")return {read:false,listen};
+  if(isAudioOnlyAge() && isYoungAudioFirstItem(item))return {read:false,listen};
   if (state.mode === "read") return { read, listen: false };
   if (state.mode === "listen") return { read: false, listen };
   return { read, listen };
@@ -228,7 +231,7 @@ function openItem(id) {
   const cover = abs(item?.cover?.url);
   body.innerHTML =
     (cover ? '<img class="studio-content-cover" src="'+esc(cover)+'" alt="">' : "") +
-    '<div class="studio-content-meta">'+esc(kindLabel(item.kind))+' · '+esc(item.category || "Kids")+' · '+Number(item.ageMin)+'–'+Number(item.ageMax)+' Jahre</div>'+
+    '<div class="studio-content-meta">'+esc(itemKindLabel(item))+' · '+esc(item.category || "Kids")+' · '+Number(item.ageMin)+'–'+Number(item.ageMax)+' Jahre</div>'+
     '<h2 id="studioContentTitle" class="studio-content-title">'+esc(item.title)+'</h2>'+
     (summaryText(item) ? '<div class="studio-content-summary">'+esc(summaryText(item))+'</div>' : "")+
     ((!isAudioOnlyAge() && modes.read && modes.listen) ? '<div class="studio-mode-tabs"><button type="button" data-studio-mode="listen">Hören</button><button type="button" data-studio-mode="read">Lesen</button></div>' : "")+
