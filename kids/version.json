@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v23-quiz500-reward1095",
-  "label": "KIDS · V1.07.29",
-  "releasedAt": "2026-10-04T09:20:00Z",
-  "note": "DĀR AL TAWḤĪD Kids Quiz umfasst jetzt 500 eigenständige, altersgerechte und quellengebundene Fragen (001–500), vollständig getrennt vom normalen DĀR/iOS-Quiz. Die drei realistischen, lokal/offline gebündelten Bildwelten bleiben altersabhängig für 4–6, 7–8 und 9–10; responsive Touch-UX, Quellen/Erklärungen, audio-first für 4–6, Serhat-Owner-Voice und altersabhängige Erfolgsanimation bleiben aktiv.",
+  "buildId": "kids-shell-v24-quiz550-reward1095",
+  "label": "KIDS · V1.07.30",
+  "releasedAt": "2026-10-04T09:31:00Z",
+  "note": "DĀR AL TAWḤĪD Kids Quiz umfasst jetzt 550 eigenständige, altersgerechte und quellengebundene Fragen (001–550), vollständig getrennt vom normalen DĀR/iOS-Quiz. Die drei realistischen, lokal/offline gebündelten Bildwelten bleiben altersabhängig für 4–6, 7–8 und 9–10; responsive Touch-UX, Quellen/Erklärungen, audio-first für 4–6, Serhat-Owner-Voice und altersabhängige Erfolgsanimation bleiben aktiv.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -247,16 +247,16 @@
     "storyAudioSignedPreviewDependency": false,
     "kidsQuizSystem": "independent-v1",
     "kidsQuizAdultDependency": false,
-    "kidsQuizQuestionCount": 500,
+    "kidsQuizQuestionCount": 550,
     "kidsQuizAgeBands": [
       "4-6",
       "7-8",
       "9-10"
     ],
     "kidsQuizDistribution": {
-      "4-6": 180,
-      "7-8": 160,
-      "9-10": 160
+      "4-6": 198,
+      "7-8": 176,
+      "9-10": 176
     },
     "kidsQuizAudioFirstBand": "4-6",
     "kidsQuizAgeAdaptiveUx": "v1",
@@ -267,10 +267,10 @@
     "kidsQuizManifestNetworkFirst": true,
     "kidsQuizReleaseGuard": true,
     "quizVisualSystem": {
-      "version": "age-adaptive-realistic-v10",
+      "version": "age-adaptive-realistic-v11",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
-      "questionCount": 500,
+      "questionCount": 550,
       "ageBands": [
         "4-6",
         "7-8",
@@ -304,12 +304,13 @@
         "301-350",
         "351-400",
         "401-450",
-        "451-500"
+        "451-500",
+        "501-550"
       ],
       "distribution": {
-        "4-6": 180,
-        "7-8": 160,
-        "9-10": 160
+        "4-6": 198,
+        "7-8": 176,
+        "9-10": 176
       },
       "manifestDrivenArtwork": true,
       "sourcePolicy": "Qurʾān + authentische Ṣaḥīḥ-Sunnah; Quellen pro Frage",
@@ -321,7 +322,8 @@
         "4-6": 18,
         "7-8": 16,
         "9-10": 16
-      }
+      },
+      "latestBatchHadithCrossCheck": "dorar.net"
     },
     "kidsQuizContentRevision": "001-500"
   },
