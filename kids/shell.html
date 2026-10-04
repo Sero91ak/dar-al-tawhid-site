@@ -7017,9 +7017,34 @@ fetchCatalog();
 <script src="/kids/owner-voice.js?v=1"></script>
 <script>
 (function(){
-  if(!("serviceWorker" in navigator))return;
+  var KIDS_BUILD_ID="kids-shell-v38-quiz650-never-empty1105";
+  var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
+  function freshStart(reason){
+    try{
+      if(sessionStorage.getItem(reloadKey)==="1")return;
+      sessionStorage.setItem(reloadKey,"1");
+    }catch(e){}
+    var u=new URL("/kids/start",location.origin);
+    u.searchParams.set("kv",KIDS_BUILD_ID);
+    u.searchParams.set("refresh",reason||"update");
+    u.searchParams.set("cb",String(Date.now()));
+    location.replace(u.toString());
+  }
+  if("serviceWorker" in navigator){
+    navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
+    window.addEventListener("load",function(){
+      navigator.serviceWorker.register("/kids/sw.js?v=1105",{scope:"/kids/",updateViaCache:"none"})
+        .then(function(reg){return reg.update().catch(function(){})})
+        .catch(function(){});
+    });
+  }
   window.addEventListener("load",function(){
-    navigator.serviceWorker.register("/kids/sw.js?v=1105",{scope:"/kids/"}).catch(function(){});
+    fetch("/kids/version.json?cb="+Date.now(),{cache:"no-store"})
+      .then(function(r){return r.ok?r.json():null})
+      .then(function(v){
+        var live=String(v&&v.buildId||"");
+        if(live&&live!==KIDS_BUILD_ID)freshStart("version");
+      }).catch(function(){});
   });
 })();
 </script>
