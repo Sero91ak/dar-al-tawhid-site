@@ -1,8 +1,8 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "DAR_KIDS_QUIZ_V1",
   "namespace": "dar-kids-quiz",
-  "version": 3,
+  "version": 4,
   "updatedAt": "2026-10-04",
   "separateFromAdultQuiz": true,
   "adultQuizDependency": false,
@@ -1772,5 +1772,30 @@
       "reviewStatus": "approved",
       "verification": "approved"
     }
-  ]
+  ],
+  "artwork": {
+    "source": "Adobe Creative Cloud",
+    "delivery": "age-adaptive-quiz-scene",
+    "offlineCache": "service-worker-runtime-cache",
+    "ageBands": {
+      "4-6": {
+        "assetId": "urn:aaid:sc:EU:8fd2faa3-ffe4-4668-a140-31f89f32d3b4",
+        "url": "https://at.adobe.com/62urgjkDHYmk61s8",
+        "position": "50% 50%",
+        "tone": "playful-bright"
+      },
+      "7-8": {
+        "assetId": "urn:aaid:sc:EU:ba9b65f3-99ae-4252-9571-68e71a7245c5",
+        "url": "https://at.adobe.com/K94NwM0Yll96pYe9",
+        "position": "50% 50%",
+        "tone": "adventure-learning"
+      },
+      "9-10": {
+        "assetId": "urn:aaid:sc:EU:eafb8ab1-ce12-4757-a656-3b3ced748327",
+        "url": "https://at.adobe.com/elwjcTvNki8uj6KG",
+        "position": "50% 50%",
+        "tone": "refined-knowledge"
+      }
+    }
+  }
 }
