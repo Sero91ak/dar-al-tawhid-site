@@ -155,8 +155,9 @@
     var icon=null;try{icon=await loadImage(APP_STORE_ICON)}catch(e){}
     if(icon){ctx.save();roundRect(ctx,x+10,y+10,52,52,12);ctx.clip();ctx.drawImage(icon,x+10,y+10,52,52);ctx.restore()}
     else{ctx.fillStyle="#f0d797";ctx.font="700 28px Arial";ctx.fillText("A",x+22,y+40)}
-    ctx.fillStyle="#fff9e9";ctx.font="700 14px Arial, sans-serif";ctx.fillText("DĀR AL TAWḤĪD",x+66,y+26);
-    ctx.fillStyle="rgba(255,249,233,.77)";ctx.font="600 12px Arial, sans-serif";ctx.fillText("Im App Store",x+66,y+45);
+    ctx.fillStyle="rgba(255,249,233,.68)";ctx.font="800 10px Arial, sans-serif";ctx.fillText("JETZT IM",x+74,y+19);
+    ctx.fillStyle="#fff9e9";ctx.font="700 19px Arial, sans-serif";ctx.fillText("App Store",x+74,y+43);
+    ctx.fillStyle="rgba(255,249,233,.72)";ctx.font="650 10px Arial, sans-serif";ctx.fillText("DĀR AL TAWḤĪD",x+74,y+59);
   }
   async function renderFiles(data){
     var canvas=document.createElement("canvas");canvas.width=W;canvas.height=H;var ctx=canvas.getContext("2d");if(!ctx)return[];
@@ -184,11 +185,11 @@
       var y=158;ctx.fillStyle="#fff8e9";ctx.font="650 "+titleSize+"px Georgia, 'Times New Roman', serif";
       titleLines.forEach(function(line){ctx.fillText(line,margin,y);y+=Math.round(titleSize*1.14)});
       ctx.strokeStyle="rgba(239,216,159,.62)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(margin,y+8);ctx.lineTo(margin+210,y+8);ctx.stroke();
-      y+=54;
+      y+=62;
 
-      ctx.font="400 "+bodySize+"px Georgia, 'Times New Roman', serif";ctx.fillStyle="#fffaf0";var lh=Math.round(bodySize*1.42);
+      ctx.font="400 "+bodySize+"px Georgia, 'Times New Roman', serif";ctx.fillStyle="#fffdf5";ctx.shadowColor="rgba(0,0,0,.45)";ctx.shadowBlur=4;var lh=Math.round(bodySize*1.42);
       ctx.strokeStyle="rgba(239,216,159,.72)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(margin-18,y-10);ctx.lineTo(margin-18,Math.min(bodyBottom,y+pages[p].length*lh));ctx.stroke();
-      pages[p].forEach(function(line){if(!line){y+=Math.round(lh*.55);return}ctx.fillText(line,margin,y);y+=lh});
+      pages[p].forEach(function(line){if(!line){y+=Math.round(lh*.55);return}ctx.fillText(line,margin,y);y+=lh});ctx.shadowBlur=0;
 
       var sy=1002,sh=166;roundRect(ctx,margin,sy,contentW,sh,22);ctx.fillStyle="rgba(3,14,15,.64)";ctx.fill();ctx.strokeStyle="rgba(239,216,159,.25)";ctx.lineWidth=1.2;ctx.stroke();
       ctx.fillStyle="#e9cf91";ctx.font="800 15px Arial, sans-serif";ctx.fillText(clean(data.category).toUpperCase(),margin+22,sy+29);
