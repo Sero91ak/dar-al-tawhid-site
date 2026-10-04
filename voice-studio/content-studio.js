@@ -895,6 +895,23 @@ async function publishTest(){
   }catch(e){contentStatus="draft";renderStatus();setStudioMessage(e.message||String(e),"bad")}
   finally{busy=false;refreshQa()}
 }
+async function triggerKidsOwnerVoiceSync(){
+  if(effectiveTarget()!=="kids")return null;
+  try{
+    const res=await fetch("/kids-voice/sync-start",{
+      method:"POST",
+      cache:"no-store",
+      headers:{"Content-Type":"application/json",Accept:"application/json"},
+      body:"{}"
+    });
+    if(!res.ok)throw Error("Kids-Voice-Sync HTTP "+res.status);
+    return await res.json().catch(()=>({ok:true}));
+  }catch(e){
+    console.warn("Kids-Owner-Voice-Sync konnte nicht sofort gestartet werden:",e);
+    return null;
+  }
+}
+
 async function publishLive(){
   if(busy||!stagingPublished)return;
   if(!confirm(effectiveTarget()==="ios"?"Diese geprüfte Version jetzt LIVE für die iOS-Inhalte veröffentlichen?":"Diese geprüfte Version jetzt LIVE in Kids veröffentlichen und den passenden Kids-Push senden?"))return;
@@ -905,6 +922,7 @@ async function publishLive(){
     const p=pub.push||{};
     setStudioMessage(effectiveTarget()==="ios"?"iOS-Inhalt live veröffentlicht.":(p.sent?"Live veröffentlicht · Kids-Push gesendet.":"Live veröffentlicht · Push: "+(p.reason||"kein Empfänger")),effectiveTarget()==="ios"||p.sent?"good":"warn");
     await loadLibrary(true);
+    if(effectiveTarget()==="kids")await triggerKidsOwnerVoiceSync();
     setTimeout(()=>q("csLibrarySection")?.scrollIntoView?.({behavior:"smooth",block:"center"}),100);
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
   finally{busy=false;renderStatus();refreshQa()}
