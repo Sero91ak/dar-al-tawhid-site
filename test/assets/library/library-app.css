@@ -1630,6 +1630,14 @@ html[data-theme="bordeaux"] .lib-detail-backdrop{
   font-weight:560;
 }
 
+.lib-detail-editor{
+  margin:9px 0 0;
+  color:var(--muted);
+  font-size:.72rem;
+  line-height:1.35;
+  font-weight:650;
+}
+
 .lib-detail-topmeta{
   display:flex;
   flex-wrap:wrap;
