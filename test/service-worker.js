@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1225';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1226';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -157,7 +157,7 @@ const APP_SHELL = [
   '/content/quran/surahs.json',
   '/apple-tv/quran/tadabbur/catalog.json',
   '/apple-tv/quran/tadabbur/entries-index.json',
-  '/assets/site-analytics.js',
+  '/assets/site-analytics.js',\n  '/assets/dar-global-share-v1225.js',\n  '/assets/dar-global-share-v1225.css',\n  '/assets/app-store-icon-fixed.svg',
   '/assets/jummah-friday.js',
   '/data/jummah-series.json',
   '/test/assets/dar-home-library-v1193.css',
