@@ -1,10 +1,10 @@
 (function(){
   "use strict";
-  if(window.__DAR_GLOBAL_SHARE_V1237)return;
+  if(window.__DAR_GLOBAL_SHARE_V1239)return;
   window.__DAR_GLOBAL_SHARE_V1237=true;
 
   var APP_STORE_URL="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
-  var APP_STORE_ICON="/assets/app-store-icon-fixed.svg?v=share-v1236";
+  var APP_STORE_BADGE="/assets/app-store-badge-de-official.svg?v=share-v1239";
   var SITE="dar-al-tawhid.de";
   var W=1080,H=1350;
   var SHARE_SCENE_MANIFEST="/data/share-background-library.json";
@@ -224,48 +224,12 @@
     for(var i=0;i<lines.length;i+=per)pages.push(lines.slice(i,i+per));
     return {size:chosen,lineHeight:lh,pages:pages.length?pages:[[]]};
   }
-  /* GLOBAL_SHARE_VISUAL_V1237 */
-  function drawAppleMark(ctx,x,y,size){
-    ctx.save();
-    ctx.translate(x,y);
-    ctx.scale(size/100,size/100);
-    ctx.fillStyle="#ffffff";
-    ctx.beginPath();
-    ctx.moveTo(52,25);
-    ctx.bezierCurveTo(58,17,67,12,75,12);
-    ctx.bezierCurveTo(76,21,72,29,65,34);
-    ctx.bezierCurveTo(58,39,52,37,52,37);
-    ctx.bezierCurveTo(43,36,35,42,30,50);
-    ctx.bezierCurveTo(20,67,28,91,40,99);
-    ctx.bezierCurveTo(46,103,52,97,59,97);
-    ctx.bezierCurveTo(66,97,71,103,78,99);
-    ctx.bezierCurveTo(88,93,94,82,97,73);
-    ctx.bezierCurveTo(83,68,80,48,94,40);
-    ctx.bezierCurveTo(86,30,74,28,66,31);
-    ctx.bezierCurveTo(60,33,56,35,52,35);
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  }
+  /* GLOBAL_SHARE_VISUAL_V1239 · Apple-provided German App Store badge, unmodified */
   async function drawBadge(ctx){
-    var x=690,y=1232,w=320,h=78;
-    roundRect(ctx,x,y,w,h,15);
-    ctx.fillStyle="rgba(0,0,0,.92)";
-    ctx.fill();
-    ctx.strokeStyle="rgba(255,255,255,.46)";
-    ctx.lineWidth=1.15;
-    ctx.stroke();
-
-    drawAppleMark(ctx,x+17,y+17,43);
-
-    ctx.textAlign="left";
-    ctx.textBaseline="alphabetic";
-    ctx.fillStyle="rgba(255,255,255,.88)";
-    ctx.font="500 11px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
-    ctx.fillText("Laden im",x+77,y+27);
-    ctx.fillStyle="#ffffff";
-    ctx.font="650 24px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
-    ctx.fillText("App Store",x+77,y+56);
+    try{
+      var badge=await loadImage(APP_STORE_BADGE);
+      ctx.drawImage(badge,W-76-250,H-125,250,83);
+    }catch(e){}
   }
   async function renderFiles(data){
     var canvas=document.createElement("canvas");canvas.width=W;canvas.height=H;var ctx=canvas.getContext("2d");if(!ctx)return[];
@@ -549,5 +513,5 @@
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
   function boot(){loadSceneManifest().finally(function(){enhance(document)});try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-  window.DARGlobalShare={version:"1237",registerScenes:registerSceneItems,createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
+  window.DARGlobalShare={version:"1239",registerScenes:registerSceneItems,createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
 })();
