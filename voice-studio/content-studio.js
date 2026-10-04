@@ -15,6 +15,10 @@ let coverFile=null;
 let coverRemoteUrl="";
 let coverAsset=null;
 let audioAsset=null;
+let directAudioFile=null;
+let directAudioAlignment=null;
+let directAudioText="";
+let directAudioObjectUrl="";
 let contentStatus="draft";
 let productionPhase="draft";
 let productionError="";
@@ -268,9 +272,10 @@ function qaSnapshot(){
   const text=String(q("text")?.value||"").trim();
   const script=typeof voiceScript==="function"?voiceScript():text;
   const same=!!lastAudio&&lastGeneratedText===script;
+  const ownerAudio=directAudioReadyForCurrentText();
   const cover=!!(coverFile||coverRemoteUrl||coverAsset?.url);
-  const audio=!q("csModeListen")?.checked||same||!!audioAsset?.url;
-  const pron=!q("csModeListen")?.checked||Boolean(qaConfirmed&&same)||Boolean(audioAsset?.url&&contentId);
+  const audio=!q("csModeListen")?.checked||ownerAudio||same||!!audioAsset?.url;
+  const pron=!q("csModeListen")?.checked||ownerAudio||Boolean(qaConfirmed&&same)||Boolean(audioAsset?.url&&contentId);
   const title=!!String(q("csTitle")?.value||"").trim();
   return{text:!!text,title,cover,audio,pron,test:stagingPublished,live:productionPhase==="live-published"};
 }
@@ -354,6 +359,12 @@ function injectStyles(){
   .cs-cover-overlay{position:absolute;inset:auto 0 0;padding:14px 12px 11px;background:linear-gradient(transparent,rgba(1,10,15,.86));pointer-events:none}.cs-cover-overlay b{display:block;color:#fff;font:700 17px Georgia,serif;line-height:1.14}.cs-cover-overlay span{font-size:9px;color:#efd78e;font-weight:800}
   .cs-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}.cs-actions .btn{min-height:40px;font-size:11px}
   .cs-message{min-height:18px;font-size:10px;line-height:1.45;color:#93a7aa}.cs-message.good{color:#9bd8ba}.cs-message.warn{color:#f1c77c}.cs-message.bad{color:#ef9d9d}
+  .cs-audio-drop{margin-top:9px;padding:11px 12px;border:1px dashed rgba(217,182,111,.34);border-radius:12px;background:rgba(217,182,111,.035);display:grid;gap:7px;cursor:pointer}
+  .cs-audio-drop.drag{border-color:#ead18f;background:rgba(217,182,111,.09)}
+  .cs-audio-drop.ready{border-style:solid;border-color:rgba(81,199,143,.42);background:rgba(42,144,96,.055)}
+  .cs-audio-drop-head{display:flex;align-items:center;justify-content:space-between;gap:9px}.cs-audio-drop-head b{font-size:11px}.cs-audio-drop-head span{font-size:9px;color:#8ea1a4}
+  .cs-audio-drop-actions{display:flex;gap:6px;flex-wrap:wrap}.cs-audio-drop-actions .btn{min-height:34px;padding:7px 9px;font-size:10px}
+  #csDirectAudioPlayer{width:100%;height:36px}
   .cs-qa{display:grid;gap:6px}.cs-check{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:10px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)}.cs-check:last-child{border:0}.cs-check b{font-size:10px}
   .cs-library{display:grid;gap:6px;max-height:180px;overflow:auto}.cs-item{border:1px solid var(--line);border-radius:9px;padding:8px;background:rgba(255,255,255,.025);cursor:pointer}.cs-item b{display:block;font-size:11px}.cs-item small{font-size:9px;color:#7f9499}
   .cs-disabled-pane{padding:20px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025);color:#879a9e;font-size:12px;line-height:1.6}
@@ -407,6 +418,8 @@ function navHtml(){
       <button id="csProphetTab" class="cs-tab" type="button">Propheten</button>
       <button id="csSahabaTab" class="cs-tab" type="button">Ṣaḥābah · 10</button>
       <button class="cs-tab" data-cs-kind="story">Geschichten</button>
+      <button class="cs-tab" data-cs-kind="dua">Duʿāʾ</button>
+      <button class="cs-tab" data-cs-kind="narration">Erzählungen</button>
       <button class="cs-tab" data-cs-kind="quiz">Quiz</button>
       <button class="cs-tab" data-cs-kind="game">Spiele</button>
       <button id="csAlphabetTab" class="cs-tab" type="button">Alif–Yāʾ</button>
@@ -457,10 +470,21 @@ function publishHtml(){
       <button id="csCoverGenerate" class="btn secondary" type="button">Cover erzeugen</button>
       <button id="csCoverChoose" class="btn quiet" type="button">Bild hineinladen</button>
     </div>
+    <div id="csAudioDrop" class="cs-audio-drop" tabindex="0">
+      <div class="cs-audio-drop-head"><b>Fertige Audio direkt zum Text</b><span id="csAudioFileName">MP3 · M4A · WAV · AAC</span></div>
+      <div class="notice">Text öffnen → fertige Datei hineinziehen. Die Datei wird dem aktuellen Text zugeordnet, synchronisiert und kann ohne erneute Sprachgenerierung veröffentlicht werden.</div>
+      <input id="csAudioFile" type="file" accept="audio/mpeg,audio/mp4,audio/x-m4a,audio/aac,audio/wav,audio/x-wav" hidden>
+      <div class="cs-audio-drop-actions">
+        <button id="csAudioChoose" class="btn secondary" type="button">Audio auswählen</button>
+        <button id="csAudioClear" class="btn quiet" type="button" hidden>Entfernen</button>
+      </div>
+      <audio id="csDirectAudioPlayer" controls preload="metadata" hidden></audio>
+    </div>
     <div class="cs-actions" style="margin-top:7px">
       <button id="csProduce" class="btn primary" type="button">Audio + Cover vorbereiten</button>
       <button id="csSave" class="btn secondary" type="button">Entwurf speichern</button>
     </div>
+    <button id="csDirectKids" class="btn primary" type="button" style="width:100%;margin-top:7px">Geprüfte Datei direkt in Kids</button>
     <div class="cs-qa" style="margin-top:9px">
       <div class="cs-check"><span>Text</span><b id="csQaText" class="warn">fehlt</b></div>
       <div class="cs-check"><span>Serhat-Audio</span><b id="csQaAudio" class="warn">fehlt</b></div>
@@ -557,6 +581,11 @@ function bind(){
       if(productionPhase!=="draft")setProductionPhase("draft");
       stagingPublished=false;
     }
+    if(directAudioFile&&directAudioText!==voiceScript()){
+      resetDirectAudioSelection();
+      audioAsset=null;
+      stagingPublished=false;
+    }
     persistDraft();refreshQa();
   });
   q("csStructured")?.addEventListener("input",()=>{captureStructuredEditor();persistDraft();refreshQa()});
@@ -574,6 +603,14 @@ function bind(){
   q("csCover")?.addEventListener("dragleave",()=>q("csCover").classList.remove("drag"));
   q("csCover")?.addEventListener("drop",e=>{e.preventDefault();q("csCover").classList.remove("drag");handleCoverFile(e.dataTransfer?.files?.[0])});
   q("csCoverGenerate")?.addEventListener("click",generateCover);
+  q("csAudioChoose")?.addEventListener("click",e=>{e.stopPropagation();q("csAudioFile")?.click()});
+  q("csAudioFile")?.addEventListener("change",e=>handleDirectAudioFile(e.target.files?.[0]));
+  q("csAudioClear")?.addEventListener("click",e=>{e.stopPropagation();resetDirectAudioSelection();refreshQa();setStudioMessage("Direkte Audio entfernt.","good")});
+  q("csAudioDrop")?.addEventListener("click",e=>{if(!e.target.closest("button,audio"))q("csAudioFile")?.click()});
+  q("csAudioDrop")?.addEventListener("dragover",e=>{e.preventDefault();q("csAudioDrop")?.classList.add("drag")});
+  q("csAudioDrop")?.addEventListener("dragleave",()=>q("csAudioDrop")?.classList.remove("drag"));
+  q("csAudioDrop")?.addEventListener("drop",e=>{e.preventDefault();q("csAudioDrop")?.classList.remove("drag");handleDirectAudioFile(e.dataTransfer?.files?.[0])});
+  q("csDirectKids")?.addEventListener("click",publishDirectKids);
   q("csProduce")?.addEventListener("click",produce);
   q("csSave")?.addEventListener("click",()=>saveDraftRemote(false));
   q("csPublishTest")?.addEventListener("click",publishTest);
@@ -622,8 +659,24 @@ async function copyCurrentText(){
     setStudioMessage("Text kopiert.","good");
   }
 }
-function effectiveKind(){return studioKind==="ios"?"lesson":studioKind}
+function effectiveKind(){
+  if(studioKind==="ios"||studioKind==="dua")return"lesson";
+  if(studioKind==="narration")return"story";
+  return studioKind;
+}
 function effectiveTarget(){return studioKind==="ios"?"ios":"kids"}
+function studioSectionTag(){
+  return studioKind==="dua"?"studio:dua":studioKind==="narration"?"studio:narration":"";
+}
+function studioKindForItem(item={}){
+  if(item.appTarget==="ios")return"ios";
+  const tags=Array.isArray(item.tags)?item.tags.map(String):[];
+  const category=String(item.category||"").toLowerCase();
+  const topic=String(item.topic||"").toLowerCase();
+  if(tags.includes("studio:dua")||/du[ʿ'’]?a|bittgebet/.test(category+" "+topic))return"dua";
+  if(tags.includes("studio:narration")||/erzähl|erzaehl|narration/.test(category+" "+topic))return"narration";
+  return item.kind||"story";
+}
 function draftKey(kind=studioKind){return STUDIO_DRAFT_KEY+"."+kind}
 function quizBandForRange(min,max){
   min=Number(min||0);max=Number(max||99);
@@ -802,8 +855,8 @@ function resetEditorForKind(){
   q("csTitle").value="";q("csTopic").value="";q("csProphet").value="";q("csSources").value="";q("text").value="";
   if(studioKind==="quiz"){q("csAgeMin").value="7";q("csAgeMax").value="8"}else{q("csAgeMin").value="6";q("csAgeMax").value="10"}
   q("csModeRead").checked=true;q("csModeListen").checked=true;
-  q("csCategory").value=studioKind==="quiz"?"Quiz · geprüft":studioKind==="game"?"Spiel":studioKind==="ios"?"iOS · Inhalt":"Qurʾān · geprüft";
-  coverFile=null;coverRemoteUrl="";coverAsset=null;audioAsset=null;quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
+  q("csCategory").value=studioKind==="quiz"?"Quiz · geprüft":studioKind==="game"?"Spiel":studioKind==="ios"?"iOS · Inhalt":studioKind==="dua"?"Duʿāʾ · geprüft":studioKind==="narration"?"Erzählung · geprüft":"Qurʾān · geprüft";
+  coverFile=null;coverRemoteUrl="";coverAsset=null;audioAsset=null;resetDirectAudioSelection();quizDraft=[];gameDraft={type:"choice",summary:"",instructions:"",voiceCues:[]};
   legacyQuestion={};legacyClaimIds=[];legacyTags=[];
   q("csCover")?.querySelector("img")?.remove();q("csCoverTitle").textContent="Neuer Inhalt";
 }
@@ -851,11 +904,14 @@ function switchKind(kind){
   q("csProphetTab")?.classList.remove("active");
   const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
   resetEditorForKind();
-  if(studioKind==="story"){title.textContent="Kids-Geschichte produzieren";lead.textContent="Text, Serhat-Stimme, Cover und Altersfreigabe als ein Paket produzieren und direkt in die Kids-App veröffentlichen.";q("styleMode").value="kids_story"}
+  if(studioKind==="story"){title.textContent="Kids-Geschichten";lead.textContent="Vorhandenen Text öffnen oder neuen Text schreiben · Stimme erzeugen oder fertige Audio direkt hochladen · anschließend in Kids veröffentlichen.";q("styleMode").value="kids_story"}
+  else if(studioKind==="dua"){title.textContent="Duʿāʾ · Hören & Lernen";lead.textContent="Duʿāʾ-Text auswählen, deine fertige Audio direkt zuordnen oder neu erzeugen und mit kurzem Weg in Kids veröffentlichen.";q("styleMode").value="dua"}
+  else if(studioKind==="narration"){title.textContent="Erzählungen";lead.textContent="Erzähltexte auswählen, deine fertige Audio zuordnen oder neu erzeugen und direkt als Kids-Inhalt bereitstellen.";q("styleMode").value="narration"}
   else if(studioKind==="quiz"){title.textContent="Kids-Quiz produzieren";lead.textContent="Fragen, Antworten, Erklärung und Serhat-Stimme als eigenes geprüftes Quiz-Paket.";q("styleMode").value="kids_lesson"}
   else if(studioKind==="game"){title.textContent="Kids-Spiel produzieren";lead.textContent="Spielinhalt und wiederverwendbare Serhat-Sprachbausteine getrennt von Geschichten produzieren.";q("styleMode").value="kids_lesson"}
   else{title.textContent="iOS Content Studio";lead.textContent="Text, Serhat-Stimme, Cover und Metadaten als separates Paket für die offizielle iOS-App.";q("styleMode").value="narration"}
   q("csPublishTest").textContent=studioKind==="ios"?"iOS Staging veröffentlichen":"In Test-Kids veröffentlichen";q("csPublishLive").textContent=studioKind==="ios"?"iOS Live veröffentlichen":"Live veröffentlichen";
+  if(q("csDirectKids"))q("csDirectKids").hidden=studioKind==="ios";
   contentId="";savedRevision=0;stagingPublished=false;contentStatus="draft";setProductionPhase("draft");restoreDraft();renderKindEditor();refreshQa();loadLibrary();
 }
 function saveConnection(){
@@ -887,7 +943,7 @@ function fields(){
     sourceRefs:String(q("csSources")?.value||"").split(/\n+/).map(x=>x.trim()).filter(Boolean),
     question:legacyQuestion&&typeof legacyQuestion==="object"?legacyQuestion:{},
     claimIds:[...legacyClaimIds],
-    tags:[...legacyTags],
+    tags:Array.from(new Set([...legacyTags,...(studioSectionTag()?[studioSectionTag()]:[])])),
     cover:coverAsset||{},
     audio:audioAsset||{},
     quiz:studioKind==="quiz"?{ageBand:quizBandForRange(q("csAgeMin")?.value,q("csAgeMax")?.value),questions:quizDraft.map(x=>({...x,answers:(x.answers||[]).filter(a=>String(a.label||"").trim())}))}:null,
@@ -920,7 +976,7 @@ function persistDraft(){
 function restoreDraft(){
   try{
     const d=JSON.parse(localStorage.getItem(draftKey())||"null");if(!d)return;
-    q("csTitle").value=d.title||"";q("csCategory").value=d.category||(studioKind==="quiz"?"Quiz · geprüft":studioKind==="game"?"Spiel":studioKind==="ios"?"iOS · Inhalt":"Qurʾān · geprüft");
+    q("csTitle").value=d.title||"";q("csCategory").value=d.category||(studioKind==="quiz"?"Quiz · geprüft":studioKind==="game"?"Spiel":studioKind==="ios"?"iOS · Inhalt":studioKind==="dua"?"Duʿāʾ · geprüft":studioKind==="narration"?"Erzählung · geprüft":"Qurʾān · geprüft");
     q("csTopic").value=d.topic||"";q("csProphet").value=d.prophetId||"";
     q("csAgeMin").value=d.ageMin||"6";q("csAgeMax").value=d.ageMax||"10";
     q("csModeRead").checked=d.read!==false;q("csModeListen").checked=d.listen!==false;
@@ -931,6 +987,40 @@ function restoreDraft(){
     legacyTags=Array.isArray(d.legacyTags)?d.legacyTags:[];
     q("csCoverTitle").textContent=d.title||"Neuer Inhalt";
   }catch{}
+}
+function resetDirectAudioSelection(){
+  if(directAudioObjectUrl){try{URL.revokeObjectURL(directAudioObjectUrl)}catch{}}
+  directAudioObjectUrl="";directAudioFile=null;directAudioAlignment=null;directAudioText="";
+  const player=q("csDirectAudioPlayer");if(player){player.pause();player.removeAttribute("src");player.hidden=true}
+  const name=q("csAudioFileName");if(name)name.textContent="MP3 · M4A · WAV · AAC";
+  q("csAudioDrop")?.classList.remove("ready");
+  if(q("csAudioClear"))q("csAudioClear").hidden=true;
+  if(q("csAudioFile"))q("csAudioFile").value="";
+}
+function directAudioReadyForCurrentText(){
+  return !!directAudioFile&&!!directAudioAlignment&&directAudioText===voiceScript();
+}
+async function handleDirectAudioFile(file){
+  if(!file)return;
+  const script=voiceScript();
+  if(!script){setStudioMessage("Öffne oder füge zuerst den fertigen Text ein. Danach kann die Audio exakt diesem Inhalt zugeordnet werden.","warn");return}
+  const ext=String(file.name||"").toLowerCase().split(".").pop();
+  if(!String(file.type||"").startsWith("audio/")&&!["mp3","m4a","aac","wav"].includes(ext)){setStudioMessage("Bitte MP3, M4A, AAC oder WAV verwenden.","bad");return}
+  if(file.size>55*1024*1024){setStudioMessage("Die Audiodatei ist größer als 55 MB. Bitte als MP3/M4A komprimieren.","bad");return}
+  setStudioMessage("Audio wird dem geöffneten Text zugeordnet und für Mitlesen synchronisiert …","warn");
+  try{
+    const alignment=await alignStoryFile(file,script);
+    if(!Array.isArray(alignment?.timings)||!alignment.timings.length)throw Error("Keine Mitlese-Zeitstempel erhalten.");
+    resetDirectAudioSelection();
+    directAudioFile=file;directAudioAlignment=alignment;directAudioText=script;
+    directAudioObjectUrl=URL.createObjectURL(file);
+    const player=q("csDirectAudioPlayer");if(player){player.src=directAudioObjectUrl;player.hidden=false}
+    if(q("csAudioFileName"))q("csAudioFileName").textContent=file.name+" · "+Math.max(1,Math.round(file.size/1024))+" KB";
+    q("csAudioDrop")?.classList.add("ready");if(q("csAudioClear"))q("csAudioClear").hidden=false;
+    audioAsset=null;stagingPublished=false;if(productionPhase!=="draft")setProductionPhase("draft");
+    setStudioMessage("Fertige Audio ist dem aktuellen Text zugeordnet. Keine neue Sprachgenerierung nötig.","good");
+    refreshQa();
+  }catch(e){setStudioMessage(e.message||String(e),"bad")}
 }
 function handleCoverFile(file){
   if(!file)return;
@@ -968,13 +1058,13 @@ async function produce(){
   try{
     const needsVoice=!!q("csModeListen")?.checked;
     const script=voiceScript();
-    if((studioKind==="story"||studioKind==="ios")&&!String(q("text")?.value||"").trim())throw Error("Text fehlt.");
+    if(["story","dua","narration","ios"].includes(studioKind)&&!String(q("text")?.value||"").trim())throw Error("Text fehlt.");
     if(studioKind==="quiz"&&!quizDraft.some(x=>String(x.question||"").trim()))throw Error("Mindestens eine Quiz-Frage fehlt.");
     if(studioKind==="game"&&!String(gameDraft.instructions||"").trim())throw Error("Spielanleitung fehlt.");
     if(needsVoice&&!script)throw Error("Sprechtext fehlt.");
     if((studioKind==="quiz"||studioKind==="game")&&script)q("text").value=script;
     const tasks=[];
-    if(needsVoice&&(!lastAudio||lastGeneratedText!==script))tasks.push(generate());
+    if(needsVoice&&!directAudioReadyForCurrentText()&&(!lastAudio||lastGeneratedText!==script))tasks.push(generate());
     if(!coverFile&&!coverRemoteUrl&&!coverAsset&&workerSecret())tasks.push(generateCover({internal:true}));
     await Promise.all(tasks);
     if(workerSecret()&&!coverAsset?.url&&(coverFile||coverRemoteUrl))await uploadCover();
@@ -1016,26 +1106,30 @@ async function compactAudioBlob(){
   return await r.blob();
 }
 async function uploadAudio(){
-  if(audioAsset?.url&&lastGeneratedText===String(q("text")?.value||"").trim()&&Array.isArray(audioAsset?.timings)&&audioAsset.timings.length)return audioAsset;
+  const script=voiceScript();
+  if(audioAsset?.url&&Array.isArray(audioAsset?.timings)&&audioAsset.timings.length)return audioAsset;
   const id=await ensureId();
-  const blob=await compactAudioBlob();
-  const storyText=String(q("text")?.value||"").trim();
-  let alignment=null;
-  if(storyText){
-    setStudioMessage("Audio wird exakt mit dem Lesetext synchronisiert …","warn");
-    const file=new File([blob],"serhat-story.m4a",{type:blob.type||"audio/mp4"});
+  const manual=directAudioReadyForCurrentText();
+  const blob=manual?directAudioFile:await compactAudioBlob();
+  const storyText=script;
+  let alignment=manual?directAudioAlignment:null;
+  let uploadName=manual?(directAudioFile.name||"serhat-owner-audio"):"serhat-story.m4a";
+  if(storyText&&!alignment){
+    setStudioMessage("Audio wird mit dem Lesetext synchronisiert …","warn");
+    const file=new File([blob],uploadName,{type:blob.type||"audio/mp4"});
     alignment=await alignStoryFile(file,storyText);
     if(!Array.isArray(alignment?.timings)||!alignment.timings.length)throw Error("Keine Mitlese-Zeitstempel erhalten.");
   }
   const d=await adminApi("/api/admin/kids-content/media",{method:"POST",body:JSON.stringify({
-    id,role:"audio",staging:true,dataUrl:await blobToDataUrl(blob),originalName:"serhat-story.m4a",source:"serhat-mlx-master"
+    id,role:"audio",staging:true,dataUrl:await blobToDataUrl(blob),originalName:uploadName,source:manual?"manual-owner-upload":"serhat-mlx-master"
   })});
   audioAsset={
     ...d.asset,
-    codec:"aac-72k-mono",
+    codec:manual?"owner-upload":"aac-72k-mono",
     timings:alignment?.timings||[],
     syncMode:alignment?.syncMode||"",
-    alignmentLoss:alignment?.alignmentLoss??null
+    alignmentLoss:alignment?.alignmentLoss??null,
+    ownerApproved:manual
   };
   try{audioAsset.durationSec=await getAudioDuration(blob)}catch{}
   return audioAsset;
@@ -1073,6 +1167,41 @@ async function saveDraftRemote(withAssets){
     setStudioMessage("Entwurf sicher im Staging gespeichert.","good");await loadLibrary();return d.item;
   }catch(e){setStudioMessage(e.message||String(e),"bad");throw e}
   finally{busy=false;refreshQa()}
+}
+async function publishDirectKids(){
+  if(busy||effectiveTarget()!=="kids")return;
+  if(!workerSecret()){setStudioMessage("Admin-Verbindung fehlt. Einmal verbinden, danach bleibt der Kurzweg verfügbar.","warn");return}
+  const script=voiceScript();
+  if(!String(q("csTitle")?.value||"").trim()){setStudioMessage("Titel fehlt.","warn");return}
+  if(!script){setStudioMessage("Text fehlt.","warn");return}
+  if(q("csModeListen")?.checked&&!audioAsset?.url&&!directAudioReadyForCurrentText()){
+    setStudioMessage("Für den Direktweg zuerst deine fertige Audio hochladen. Neu erzeugte Audio bitte einmal anhören und bestätigen.","warn");return
+  }
+  if(!confirm("Diesen geprüften Inhalt jetzt direkt in DĀR AL TAWḤĪD Kids veröffentlichen?"))return;
+  busy=true;renderStatus();setStudioMessage("Kurzweg läuft: Medien → Test-Sicherung → Kids live …","warn");
+  try{
+    if(!coverAsset?.url){
+      if(!coverFile&&!coverRemoteUrl)await generateCover({internal:true});
+      if(!coverAsset?.url&&(coverFile||coverRemoteUrl))await uploadCover();
+    }
+    if(q("csModeListen")?.checked&&!audioAsset?.url)await uploadAudio();
+    if(!coverAsset?.url)throw Error("Cover fehlt.");
+    await ensureId();
+    setProductionPhase("ready");
+    let payload={...fields(),id:contentId,staging:true,status:"review",production:{phase:"ready",error:""}};
+    const saved=await adminApi("/api/admin/kids-content/save",{method:"POST",body:JSON.stringify(payload)});
+    savedRevision=saved.item?.revision||savedRevision;
+    await adminApi("/api/admin/kids-content/publish",{method:"POST",body:JSON.stringify({id:contentId,live:false,sendPush:false})});
+    const pub=await adminApi("/api/admin/kids-content/publish",{method:"POST",body:JSON.stringify({id:contentId,live:true,sendPush:false,triggerDeploy:true})});
+    contentStatus="published";stagingPublished=true;setProductionPhase("live-published");renderStatus();
+    setStudioMessage("Live in Kids veröffentlicht. Datei, Text und Mitlese-Synchronisierung sind als ein Paket verbunden.","good");
+    triggerKidsOwnerVoiceSync();
+    await loadLibrary(true);
+    return pub;
+  }catch(e){
+    setProductionPhase("error",e.message||String(e));
+    setStudioMessage(e.message||String(e),"bad");
+  }finally{busy=false;refreshQa()}
 }
 async function publishTest(){
   if(busy)return;
@@ -1169,9 +1298,24 @@ function renderInventory(){
   const term=String(q("csInventorySearch")?.value||"").trim().toLowerCase();
   const all=mergedInventory();
   const rows=all.filter(row=>{
-    if(!term)return true;
     const item=row.staging||row.live||row.legacy||{};
-    return [row.title,item.prophetId,item.category,item.kind,item.topic].join(" ").toLowerCase().includes(term);
+    const itemStudioKind=studioKindForItem(item);
+    const sectionMatch=studioKind==="ios"
+      ?item.appTarget==="ios"
+      :studioKind==="dua"
+      ?itemStudioKind==="dua"
+      :studioKind==="narration"
+      ?itemStudioKind==="narration"
+      :studioKind==="quiz"
+      ?item.kind==="quiz"
+      :studioKind==="game"
+      ?item.kind==="game"
+      :studioKind==="story"
+      ?(item.kind==="story"&&itemStudioKind!=="narration")
+      :true;
+    if(!sectionMatch)return false;
+    if(!term)return true;
+    return [row.title,item.prophetId,item.category,item.kind,item.topic,(item.tags||[]).join(" ")].join(" ").toLowerCase().includes(term);
   });
   if(summary)summary.textContent="Bestand "+inventoryState.legacy.length+" · Studio intern/Test "+inventoryState.staging.length+" · Studio live "+inventoryState.live.length+" · zusammen "+all.length;
   if(!rows.length){box.innerHTML='<div class="notice">Keine passenden Inhalte gefunden.</div>';return}
@@ -1255,7 +1399,7 @@ async function loadLegacyForEdit(id){
 async function loadLiveForEdit(id){
   const x=inventoryState.live.find(i=>i.id===id);
   if(!x){setStudioMessage("Live-Inhalt wurde nicht gefunden.","bad");return}
-  studioKind=x.appTarget==="ios"?"ios":(x.kind||"story");
+  studioKind=studioKindForItem(x);
   contentId=x.id;
   savedRevision=x.revision||0;
   contentStatus="draft";
@@ -1282,6 +1426,7 @@ async function loadLiveForEdit(id){
   gameDraft=x.game&&typeof x.game==="object"?x.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
   coverFile=null;
   coverRemoteUrl="";
+  resetDirectAudioSelection();
   q("csCover")?.querySelector("img")?.remove();
   if(coverAsset?.url)renderCover(coverAsset.url);
   q("csCoverTitle").textContent=x.title||"Inhalt";
@@ -1298,7 +1443,7 @@ async function loadRemoteItem(id){
   try{
     const d=await adminApi("/api/admin/kids-content?staging=1",{method:"GET"});
     const x=(d.index?.items||[]).find(i=>i.id===id);if(!x)return;
-    studioKind=x.appTarget==="ios"?"ios":(x.kind||"story");contentId=x.id;savedRevision=x.revision||0;contentStatus=x.status||"draft";stagingPublished=x.status==="published";productionPhase=x.production?.phase||(stagingPublished?"test-published":"draft");productionError=x.production?.error||"";
+    studioKind=studioKindForItem(x);contentId=x.id;savedRevision=x.revision||0;contentStatus=x.status||"draft";stagingPublished=x.status==="published";productionPhase=x.production?.phase||(stagingPublished?"test-published":"draft");productionError=x.production?.error||"";
     document.querySelectorAll("[data-cs-kind]").forEach(b=>b.classList.toggle("active",b.dataset.csKind===studioKind));
     q("csTitle").value=x.title||"";q("csCategory").value=x.category||"";q("csTopic").value=x.topic||"";q("csProphet").value=x.prophetId||"";
     q("csAgeMin").value=String(x.ageMin||4);q("csAgeMax").value=String(x.ageMax||10);q("csModeRead").checked=x.modes?.read!==false;q("csModeListen").checked=x.modes?.listen!==false;
@@ -1308,17 +1453,17 @@ async function loadRemoteItem(id){
     legacyTags=Array.isArray(x.tags)?[...x.tags]:[];
     coverAsset=x.cover?.url?x.cover:null;audioAsset=x.audio?.url?x.audio:null;
     quizDraft=Array.isArray(x.quiz?.questions)?x.quiz.questions:[];gameDraft=x.game&&typeof x.game==="object"?x.game:{type:"choice",summary:"",instructions:"",voiceCues:[]};
-    coverFile=null;coverRemoteUrl="";if(coverAsset?.url)renderCover(coverAsset.url);q("csCoverTitle").textContent=x.title||"Inhalt";
+    coverFile=null;coverRemoteUrl="";resetDirectAudioSelection();if(coverAsset?.url)renderCover(coverAsset.url);q("csCoverTitle").textContent=x.title||"Inhalt";
     renderKindEditor();if(typeof renderAnalysis==="function")renderAnalysis();renderStatus();refreshQa();setStudioMessage("Staging-Paket geladen.","good");setTimeout(()=>goToWorkflowStep("text"),80);
   }catch(e){setStudioMessage(e.message||String(e),"bad")}
 }
 function refreshQa(){
   if(!q("csQaText"))return;
   captureStructuredEditor();
-  const text=String(q("text")?.value||"").trim(),script=voiceScript(),same=!!lastAudio&&lastGeneratedText===script;
+  const text=String(q("text")?.value||"").trim(),script=voiceScript(),same=!!lastAudio&&lastGeneratedText===script,ownerAudio=directAudioReadyForCurrentText();
   const cover=!!(coverFile||coverRemoteUrl||coverAsset?.url);
-  const audio=!q("csModeListen")?.checked||same||!!audioAsset?.url;
-  const pron=!q("csModeListen")?.checked||Boolean(qaConfirmed&&same)||Boolean(audioAsset?.url&&contentId);
+  const audio=!q("csModeListen")?.checked||ownerAudio||same||!!audioAsset?.url;
+  const pron=!q("csModeListen")?.checked||ownerAudio||Boolean(qaConfirmed&&same)||Boolean(audioAsset?.url&&contentId);
   const quizOk=quizDraft.length>0&&quizDraft.every(x=>String(x.question||"").trim()&&(x.answers||[]).filter(a=>String(a.label||"").trim()).length>=2&&(x.answers||[]).filter(a=>a.correct).length===1);
   const gameOk=Boolean(String(gameDraft.instructions||"").trim());
   const contentOk=studioKind==="quiz"?quizOk:studioKind==="game"?gameOk:Boolean(text);
@@ -1331,10 +1476,11 @@ function refreshQa(){
   const quickTest=q("csQuickTest");if(quickTest)quickTest.disabled=testDisabled;
   const quickCopy=q("csQuickCopy");if(quickCopy)quickCopy.disabled=!text;
   const quickProduce=q("csQuickProduce");if(quickProduce)quickProduce.disabled=busy;
+  const direct=q("csDirectKids");if(direct)direct.disabled=busy||effectiveTarget()!=="kids"||!contentOk||!cover||!audio||!pron||!q("csTitle")?.value.trim();
   renderStatus();
 }
 function paintQa(id,ok,label){const el=q(id);if(!el)return;el.textContent=label;el.className=ok?"good":"warn"}
 
-window.DarContentStudio={mount,fields,loadLibrary,publishTest,publishLive,generateCover,produce,newCurrentItem,copyCurrentText,goToWorkflowStep,focusNextProductionAction,switchKind};
+window.DarContentStudio={mount,fields,loadLibrary,publishTest,publishLive,publishDirectKids,handleDirectAudioFile,generateCover,produce,newCurrentItem,copyCurrentText,goToWorkflowStep,focusNextProductionAction,switchKind};
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount);else mount();
 })();
