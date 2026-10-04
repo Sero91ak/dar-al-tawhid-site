@@ -158,24 +158,24 @@
     "homeChoices": "oval-capsule-restored",
     "homeChoiceLayoutVersion": "v1078",
     "homeChoiceCards": "rounded-cards-v1079",
-    "storiesPageHero": "photoreal-hijaz-environment-v1096",
+    "storiesPageHero": "edge-to-edge-realistic-v1097",
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1084",
     "storiesBottomNav": "separated-background-v1086",
     "storyFollowReader": "v5",
     "storyFollowReaderMode": "timestamp-aware-auto-scroll-v3",
     "storyFollowReaderReusable": true,
-    "sectionEntryHeroes": "edge-to-edge-compact-photoreal-v1096",
-    "sectionHeroArtworkFormat": "local-jpeg",
+    "sectionEntryHeroes": "realistic-responsive-v1097",
+    "sectionHeroArtworkFormat": "local-png-jpeg",
     "sectionHeroNoDetachedHeaderCard": true,
     "sectionHeroNoKickerCapsule": true,
     "sectionHeroResponsive": "compact-phone-tablet-desktop-v1096",
     "quranPageHero": "edge-to-edge-compact-v1094",
-    "parentsPageHero": "photoreal-parent-study-v1096",
+    "parentsPageHero": "edge-to-edge-realistic-v1097",
     "sectionHeroAssets": {
-      "stories": "/kids/assets/kids-art/section-stories-v1096.jpg",
+      "stories": "/kids/assets/kids-art/section-stories-v1097.png",
       "quran": "/kids/assets/kids-art/section-quran-v1090.jpg",
-      "parents": "/kids/assets/kids-art/section-parents-v1096.jpg"
+      "parents": "/kids/assets/kids-art/section-parents-v1097.png"
     },
     "muhammadStoryAudioTest": true,
     "muhammadStoryAudioAges": [
@@ -229,7 +229,9 @@
     "storyFollowReaderCurrentMuhammadSync": "silence-aware-dynamic-paragraph-v1",
     "storyFollowReaderCurrentMuhammadParagraphs": 23,
     "storyFollowReaderCloudAlignmentOptional": true,
-    "storyFollowReaderBrowserFallback": "browser-silence-aware-paragraph-v1"
+    "storyFollowReaderBrowserFallback": "browser-silence-aware-paragraph-v1",
+    "sectionHeroRealisticArtwork": true,
+    "sectionHeroGeneratedPipeline": "Adobe/Runway-import-v1097"
   },
   "updatedAt": "2026-10-04"
 }
