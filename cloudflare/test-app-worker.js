@@ -216,7 +216,12 @@ async function finalizeDarTestHomeV1193(asset) {
   // v1227 library hero depth: force the current Test library presentation assets.
   html = html.replace(/library-app\.css(?:\?v=[^"']*)?/g, "library-app.css?v=1227-hero-depth");
   html = html.replace(/library-app\.js(?:\?v=[^"']*)?/g, "library-app.js?v=1227-library");
-  // DAR_ILM_START_PHASE1_CACHE
+    // DAR_QURAN_OVERVIEW_V1250
+  if (!/quran-overview-v1250\.css/.test(html)) {
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/quran-overview-v1250.css?v=1250"><\/head>');
+  }
+
+// DAR_ILM_START_PHASE1_CACHE
   html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-historic-v1239");
   html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-compact-v1239");
 
