@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1093";
+const CACHE_NAME="dar-al-tawhid-kids-v1094";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/section-heroes-v1095.css?v=1097-real3",
@@ -27,7 +27,8 @@ const PRECACHE=[
   "/kids/data/dua-kids.json",
   "/kids/data/quiz-kids.json",
   "/kids/data/quiz-audio.json",
-  "/kids/quiz-owner-voice.js?v=1",
+  "/kids/data/owner-voice-audio.json",
+  "/kids/owner-voice.js?v=1",
   "/kids/data/stories-authentic.json",
   "/kids/data/prophet-stories.json",
   "/kids/data/mubashshirun-stories.json",
@@ -146,7 +147,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0){
+  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0||url.pathname.indexOf("/kids/assets/kids-owner-voice/")===0||url.pathname.indexOf("/kids/assets/kids-quiz-audio/")===0){
     // Native <audio> / iOS sends Range requests. Do not satisfy those from Cache API,
     // otherwise seeking and resume can receive a full 200 response instead of 206.
     event.respondWith(fetch(request));
