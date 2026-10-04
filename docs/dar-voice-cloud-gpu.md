@@ -111,9 +111,9 @@ python voice-studio/cloud-gpu/benchmark.py \
   --text-file /pfad/testtext.txt
 ```
 
-Für DigitalOcean ist der erste kostenbewusste Testplan `gpu-4000adax1-20gb` in TOR1. Das NVIDIA-AI/ML-Ready-Image bleibt `gpu-h100x1-base`; DigitalOcean verwendet dieses Image laut eigener Vorgabe auch für andere einzelne NVIDIA-GPU-Pläne. Falls der RTX-4000-Benchmark das gewünschte Latenzziel nicht erreicht, kann derselbe unveränderte Stack auf L40S, RTX 6000 oder H100 erneut gemessen werden.
+Für DigitalOcean ist der aktuelle erste NVIDIA-Testplan `gpu-6000adax1-48gb` in TOR1. Der Provisioner prüft vor jeder kostenpflichtigen Erstellung den Kontostatus und die reale GPU-Verfügbarkeit der Zielregion. Das NVIDIA-AI/ML-Ready-Image bleibt über `DO_GPU_IMAGE` überschreibbar. Falls der RTX-6000-Ada-Benchmark das gewünschte Latenzziel nicht erreicht, kann derselbe Stack auf H100 oder einen anderen freigegebenen GPU-Plan umgestellt und erneut gemessen werden.
 
-`provision-digitalocean.sh` läuft standardmäßig nur als **Plan** und erzeugt erst mit `--apply` eine kostenpflichtige GPU.
+`provision-digitalocean.sh` läuft standardmäßig nur als **Plan** und erzeugt erst mit `--apply` eine kostenpflichtige GPU. Im Plan-Modus darf der SSH-Key noch fehlen; im Apply-Modus werden Kontostatus, GPU-Region und SSH-Key strikt geprüft.
 
 ## Noch offen
 
