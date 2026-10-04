@@ -3036,7 +3036,21 @@ $("#learnArabic").addEventListener("input",()=>{learningPreviewRequestSerial++;c
 
 try{$("#freeVoiceText").value=localStorage.getItem("dar.voice.freeText.v2")||""}catch(_){}
 updateFreeVoiceCounter();
-$("#text").addEventListener("input",()=>{resetAudioQA();renderAnalysis()});
+let textAnalysisTimer=0;
+function scheduleTextAnalysis(){
+  resetAudioQA();
+  const value=String($("#text")?.value||"");
+  $("#charCounter").textContent=value.length.toLocaleString("de-DE")+" Zeichen";
+  $("#words").textContent=(value.trim().match(/\S+/g)||[]).length;
+  clearTimeout(textAnalysisTimer);
+  // Vollständige Regel-/Begriffsanalyse nicht bei jedem einzelnen Tastendruck.
+  // Ein kurzer Debounce hält auch lange 5–8-Minuten-Texte beim Bearbeiten flüssig.
+  textAnalysisTimer=setTimeout(()=>{
+    textAnalysisTimer=0;
+    renderAnalysis();
+  },120);
+}
+$("#text").addEventListener("input",scheduleTextAnalysis);
 $("#text").addEventListener("select",captureManualSelection);
 $("#text").addEventListener("mouseup",()=>setTimeout(captureManualSelection,0));
 $("#text").addEventListener("keyup",e=>{
