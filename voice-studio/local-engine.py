@@ -47,7 +47,7 @@ NETWORK_MODE=os.environ.get("DAR_VOICE_NETWORK_MODE","0").strip()=="1"
 PAIR_TOKEN=os.environ.get("DAR_VOICE_PAIR_TOKEN","").strip()
 HOST="0.0.0.0" if NETWORK_MODE and PAIR_TOKEN else "127.0.0.1"
 PORT=8787
-ENGINE_VERSION="2.9.91"
+ENGINE_VERSION="2.9.92"
 OUTPUT=VOICE_HOME/"VoiceStudioOutput"
 OUTPUT.mkdir(parents=True,exist_ok=True)
 MOBILE_HISTORY_META=OUTPUT/"mobile-history.json"
@@ -5506,7 +5506,7 @@ def prioritize_interactive_first_audio(plan,max_first_chars:int=110):
         return rows
     lang,chunk=rows[0]
     value=str(chunk or "").strip()
-    limit=max(72,min(140,int(max_first_chars or 110)))
+    limit=max(56,min(140,int(max_first_chars or 110)))
     if lang!="de" or len(value)<=limit:
         return rows
     parts=split_chunks(value,max_chars=limit)
@@ -7222,7 +7222,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         # damit iPhone/iPad/Mac deutlich früher etwas Hörbares bekommen. Nur der
         # erste Block wird geteilt; der Rest bleibt groß/coalesced für hohen
         # Gesamtdurchsatz. Audio-Locks und Arabisch werden niemals zerschnitten.
-        first_audio_target=80
+        first_audio_target=64
         for first_idx,(first_lang,first_chunk) in enumerate(plan[:3]):
             if first_lang!="de" or audio_lock_key_for_chunk(first_chunk):
                 continue
@@ -7232,25 +7232,25 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             cut=0
             sentence_cuts=[
                 m.end() for m in re.finditer(r"(?<=[.!?…])\s+",value)
-                if 52<=m.end()<=132
+                if 44<=m.end()<=108
             ]
             if sentence_cuts:
                 cut=min(sentence_cuts,key=lambda x:abs(x-first_audio_target))
             else:
                 word_cuts=[
                     m.start() for m in re.finditer(r"\s+",value)
-                    if 68<=m.start()<=124
+                    if 52<=m.start()<=100
                 ]
                 if word_cuts:
                     cut=min(word_cuts,key=lambda x:abs(x-first_audio_target))
             if cut:
                 head=value[:cut].strip()
                 tail=value[cut:].strip()
-                if len(head)>=45 and len(tail)>=24:
+                if len(head)>=36 and len(tail)>=24:
                     plan=plan[:first_idx]+[(first_lang,head),(first_lang,tail)]+plan[first_idx+1:]
             break
         plan=prioritize_interactive_first_audio(
-            plan,max_first_chars=80 if doc_mode=="kids_story" else 72
+            plan,max_first_chars=68 if doc_mode=="kids_story" else 60
         )
 
     # 2.9.63: "free_mode" bedeutet NICHT automatisch Hintergrundarbeit.
@@ -7318,7 +7318,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         render_preview_mode="incremental-chunks-v1" if interactive_fast and len(plan)>1 else "",
         render_first_audio_priority=bool(interactive_fast and len(plan)>1),
         render_first_audio_ms=0,
-        render_first_audio_target_chars=(80 if doc_mode=="kids_story" else 72) if interactive_fast and len(plan)>1 else 0,
+        render_first_audio_target_chars=(68 if doc_mode=="kids_story" else 60) if interactive_fast and len(plan)>1 else 0,
         render_job_id=str(job_id or ""),
         render_total_segments=0,
         render_completed_segments=0,
@@ -7338,7 +7338,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
         # Vorab-Scan der gesamten 5–8-Minuten-Produktion. Die ersten vier
         # Abschnitte werden vorgeprüft; alle weiteren Cache-/Lock-Treffer werden
         # ohnehin direkt beim jeweiligen Segment on-demand erkannt.
-        preload_scan=plan[:min(len(plan),4)] if interactive_fast else plan
+        preload_scan=plan[:min(len(plan),2)] if interactive_fast else plan
         for pre_idx,(pre_lang,pre_chunk) in enumerate(preload_scan):
             pre_mode=resolve_segment_prosody(pre_chunk,doc_mode,style)
             pre_lock=lock_key_for(pre_chunk)
