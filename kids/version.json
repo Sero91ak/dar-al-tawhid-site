@@ -211,11 +211,11 @@
     ],
     "storyAudioNativeArtwork": true,
     "storyAudioBackgroundMode": "audio",
-    "storyPreschoolMode": "audio-first-with-optional-adult-readalong",
+    "storyPreschoolMode": "audio-only-strict",
     "storyPreschoolAge": "4–5",
     "storyPreschoolReadingHidden": true,
-    "storyPreschoolReadAlongHidden": false,
-    "storyPreschoolPlayer": "focus-audiobook",
+    "storyPreschoolReadAlongHidden": true,
+    "storyPreschoolPlayer": "focus-audiobook-only",
     "storyReadAlongMinimumAge": "6–8",
     "storyFollowReaderTimestampAware": true,
     "storyFollowReaderForcedAlignment": "elevenlabs-forced-alignment-v1",
@@ -235,7 +235,9 @@
     "sectionHeroCacheBust": "1097-real3",
     "sectionHeroLocalPermanentAssets": true,
     "sectionHeroRealismRelease": "v1097",
-    "parentsHeroDecorativeCrescent": false
+    "parentsHeroDecorativeCrescent": false,
+    "storyPreschoolFollowReaderButtonHidden": true,
+    "storyPreschoolAdultReadAlongShortcut": false
   },
   "updatedAt": "2026-10-04"
 }
