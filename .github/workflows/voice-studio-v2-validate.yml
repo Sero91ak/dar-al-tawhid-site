@@ -394,14 +394,14 @@ jobs:
           version=json.loads(Path("kids/version.json").read_text(encoding="utf-8"))
           build=str(version.get("buildId") or "").strip()
           label=str(version.get("label") or "").strip()
-          build_match=re.fullmatch(r"kids-shell-v12-(?:tab|type|sahaba)(\d+)",build)
+          build_match=re.fullmatch(r"kids-shell-v(\d+)-[a-z][a-z-]*(\d+)",build)
           if not build_match:
               raise SystemExit("Invalid Kids buildId: "+build)
           if not re.search(r"V\d+\.\d+(?:\.\d+)?",label):
               raise SystemExit("Invalid Kids label: "+label)
           # Der Cache folgt der kanonischen numerischen Build-Suffix-ID.
-          # Damit bleiben historische tab/type-Builds und aktuelle sahaba-Builds konsistent.
-          cache_suffix=build_match.group(1)
+          # Damit bleiben historische und aktuelle versionierte Build-Tracks konsistent.
+          cache_suffix=build_match.group(2)
 
           required_build_files=[
               "kids/index.html",
@@ -421,7 +421,7 @@ jobs:
 
           for name in ("kids/index.html","kids/start.html","kids/shell.html"):
               src=Path(name).read_text(encoding="utf-8")
-              ids=set(re.findall(r'kids-shell-v12-(?:tab|type|sahaba)\d+',src))
+              ids=set(re.findall(r'kids-shell-v\d+-[a-z][a-z-]*\d+',src))
               if ids != {build}:
                   failures.append(name+" has inconsistent embedded build ids: "+repr(sorted(ids)))
 
