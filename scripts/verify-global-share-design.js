@@ -29,7 +29,7 @@ if (globalShare) {
   requireToken(globalRel, globalShare, "adaptiveBodyLayout", "adaptive body typography");
   requireToken(globalRel, globalShare, 'fillText("AUSSAGE"', "AUSSAGE hierarchy");
   requireToken(globalRel, globalShare, 'fillText("QUELLE"', "QUELLE hierarchy");
-  if (!/__DAR_GLOBAL_SHARE_V1246=true/.test(globalShare)) failures.push(globalRel + ": singleton/version flag mismatch");
+  if (!/__DAR_GLOBAL_SHARE_V1250=true/.test(globalShare)) failures.push(globalRel + ": singleton/version flag mismatch");
   forbidToken(globalRel, globalShare, "/api/share-image/background", "AI share endpoint");
   forbidToken(globalRel, globalShare, "generateFreshBackground", "AI background generator");
   forbidToken(globalRel, globalShare, "GENERIC_SCENES", "legacy app-image scene pool");
