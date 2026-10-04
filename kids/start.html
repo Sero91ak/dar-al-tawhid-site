@@ -2777,7 +2777,7 @@ html:not([data-view="today"]) .view.active{
 
 <link rel="stylesheet" href="/kids/prophet-stories.css?v=28">
 <link rel="stylesheet" href="/kids/mubashshirun-stories.css?v=15">
-<link rel="stylesheet" href="/kids/sahabiyyat-stories.css?v=1">
+<link rel="stylesheet" href="/kids/sahabiyyat-stories.css?v=2">
 <link rel="stylesheet" href="/kids/story-follow-reader.css?v=4">
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1097-real3">
 </head>
@@ -3326,7 +3326,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v41-studio-sections1108";
+const KIDS_BUILD_ID="kids-shell-v42-sahabiyyat1112";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -7041,7 +7041,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1108",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1112",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -8482,6 +8482,7 @@ html[data-view="stories"] .bottom-nav .nav-btn.active{
 <script src="/kids/story-follow-reader.js?v=5"></script>
 <script src="/kids/prophet-stories.js?v=28-audioonly2"></script>
 <script src="/kids/mubashshirun-stories.js?v=15"></script>
+<script src="/kids/sahabiyyat-stories.js?v=2"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=7"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1097-real3" data-kids-section-heroes-late="1">
