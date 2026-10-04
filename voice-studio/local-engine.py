@@ -707,10 +707,14 @@ def master_rules_from_entries(entries,blocked_needles):
             })
     return out
 
+PRONUNCIATION_CATALOG_CACHE_VERSION=0
+PRONUNCIATION_CATALOG_CACHE={"key":None,"rows":[]}
+PRONUNCIATION_CATALOG_CACHE_LOCK=threading.Lock()
+
 def rebuild_runtime_rules():
     global LIB,RULES,MASTER_TTS,AUDIO_LOCK_BY_TTS,AUDIO_LOCK_LABELS,AUDIO_LOCK_FORMS
     global HONORIFIC_TTS_BY_KEY,HONORIFIC_RULE_BY_KEY,HONORIFIC_SOURCE_FORMS
-    global MASTER_ENTRIES,MASTER_RULES,MASTER_ALIAS_INDEX
+    global MASTER_ENTRIES,MASTER_RULES,MASTER_ALIAS_INDEX,PRONUNCIATION_CATALOG_CACHE_VERSION
     user_rules=list((USER_OVERRIDE_DATA or {}).get("rules") or [])
     MASTER_ENTRIES=build_master_library()
     blocked=[str(r.get("string_to_replace","")) for r in user_rules+BASE_RULES]
@@ -766,6 +770,7 @@ def rebuild_runtime_rules():
                 HONORIFIC_SOURCE_FORMS.setdefault(key,[]).append(src)
     for key in list(HONORIFIC_SOURCE_FORMS):
         HONORIFIC_SOURCE_FORMS[key]=sorted(set(HONORIFIC_SOURCE_FORMS[key]),key=len,reverse=True)
+    PRONUNCIATION_CATALOG_CACHE_VERSION+=1
 
 rebuild_runtime_rules()
 
@@ -1326,19 +1331,18 @@ def pronunciation_candidates(query:str,limit:int=12):
     ))
     return out[:max(1,min(25,int(limit or 12)))]
 
-def pronunciation_catalog(query:str="",offset:int=0,limit:int=80):
-    """Schnelle, paginierte Gesamtliste des installierten Aussprachewortschatzes.
+def _pronunciation_catalog_rows():
+    """Vollständige Wortliste einmal pro Regelstand aufbauen und im RAM halten."""
+    global PRONUNCIATION_CATALOG_CACHE
+    confirmed=tuple(sorted(confirmed_audio_lock_keys()))
+    cache_key=(int(PRONUNCIATION_CATALOG_CACHE_VERSION),confirmed)
+    with PRONUNCIATION_CATALOG_CACHE_LOCK:
+        if PRONUNCIATION_CATALOG_CACHE.get("key")==cache_key:
+            return list(PRONUNCIATION_CATALOG_CACHE.get("rows") or [])
 
-    Die MAX-MASTER-Einträge werden nicht als riesiges JSON auf einmal an
-    iPhone/iPad geschickt. Die komplette Bibliothek bleibt lokal verfügbar und
-    wird alphabetisch in kleinen Seiten geladen.
-    """
-    needle=normalize_lookup(query)
-    offset=max(0,int(offset or 0))
-    limit=max(20,min(160,int(limit or 80)))
     rows=[]
     seen=set()
-    confirmed=confirmed_audio_lock_keys()
+    confirmed_set=set(confirmed)
     for source,r in combined_search_rules():
         canonical=str(r.get("canonical") or r.get("string_to_replace") or "").strip()
         tts=str(r.get("tts_text") or r.get("alias") or canonical).strip()
@@ -1347,18 +1351,15 @@ def pronunciation_catalog(query:str="",offset:int=0,limit:int=80):
         key=(normalize_lookup(canonical),tts,str(r.get("tts_language") or ""))
         if key in seen:
             continue
-        if needle:
-            hay=" ".join([
-                normalize_lookup(canonical),
-                normalize_lookup(r.get("string_to_replace","")),
-                normalize_lookup(r.get("alias","")),
-                normalize_lookup(tts),
-            ])
-            if needle not in hay:
-                continue
         seen.add(key)
         lang=str(r.get("tts_language") or ("ar" if re.search(r"[\u0600-\u06ff]",tts) else "de"))
         lock_key=str(r.get("audio_lock_key") or "")
+        search_text=" ".join([
+            normalize_lookup(canonical),
+            normalize_lookup(r.get("string_to_replace","")),
+            normalize_lookup(r.get("alias","")),
+            normalize_lookup(tts),
+        ])
         rows.append({
             "source":source,
             "input":str(r.get("string_to_replace") or canonical),
@@ -1371,12 +1372,28 @@ def pronunciation_catalog(query:str="",offset:int=0,limit:int=80):
             "voiceLock":str(r.get("voice_lock") or ""),
             "confirmed":bool(
                 str(r.get("voice_lock") or "").upper()=="MASTER"
-                or (lock_key and lock_key in confirmed)
+                or (lock_key and lock_key in confirmed_set)
             ),
+            "_search":search_text,
         })
     rows.sort(key=lambda x:(normalize_lookup(x.get("canonical","")),normalize_lookup(x.get("ttsText",""))))
+    with PRONUNCIATION_CATALOG_CACHE_LOCK:
+        PRONUNCIATION_CATALOG_CACHE={"key":cache_key,"rows":rows}
+    return list(rows)
+
+def pronunciation_catalog(query:str="",offset:int=0,limit:int=80):
+    """Schnelle, paginierte Gesamtliste des installierten Aussprachewortschatzes."""
+    needle=normalize_lookup(query)
+    offset=max(0,int(offset or 0))
+    limit=max(20,min(160,int(limit or 80)))
+    rows=_pronunciation_catalog_rows()
+    if needle:
+        rows=[row for row in rows if needle in str(row.get("_search") or "")]
     total=len(rows)
-    page=rows[offset:offset+limit]
+    page=[
+        {k:v for k,v in row.items() if k!="_search"}
+        for row in rows[offset:offset+limit]
+    ]
     return {
         "ok":True,
         "query":str(query or ""),
@@ -1385,6 +1402,7 @@ def pronunciation_catalog(query:str="",offset:int=0,limit:int=80):
         "limit":limit,
         "hasMore":offset+len(page)<total,
         "items":page,
+        "cached":True,
     }
 
 def _download_json(url:str,timeout:int=15):
