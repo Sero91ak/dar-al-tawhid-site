@@ -1,7 +1,7 @@
 {
   "schemaVersion": 8,
   "id": "dar-own-voice-narration-v2.8.8",
-  "updatedAt": "2026-09-28",
+  "updatedAt": "2026-10-04T03:16:00+02:00",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
@@ -781,7 +781,16 @@
     "confirmedAudioBackupPath": "~/SerhatVoice/PronunciationLearning/confirmed-audio",
     "confirmedAudioBackupRecovery": true,
     "migratePreviouslyLearnedTerms": true,
-    "noRetestAfterUpgrade": true
+    "noRetestAfterUpgrade": true,
+    "storyReferenceMemory": true,
+    "storyReferencePath": "~/SerhatVoice/PronunciationLearning/story-references",
+    "storyReferenceStatePath": "~/SerhatVoice/PronunciationLearning/story-references/state.json",
+    "storyReferenceSeed": "story-reference-muhammad-2026-10-04.json",
+    "storyAudioTextPairPersistsAcrossUpdates": true,
+    "exactStoryTextMayReuseApprovedAudioWithoutModelLoad": true,
+    "editedStoryUsesIncrementalSegmentRenderer": true,
+    "longFormReferenceDoesNotAutoFineTuneModelWeights": true,
+    "manualStoryUploadAutoRegistersReferencePair": true
   },
   "productionRenderer": {
     "primaryAppleSilicon": "mlx-community/chatterbox-multilingual-v3",
