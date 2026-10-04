@@ -12,7 +12,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="DĀR Voice Studio">
 <meta name="description" content="Private Sprachproduktion für DĀR AL TAWḤĪD Kids">
-<link rel="manifest" href="manifest.webmanifest?v=12">
+<link rel="manifest" href="manifest.webmanifest?v=13">
 <link rel="apple-touch-icon" href="voice-studio-icon.png?v=299">
 <link rel="icon" type="image/png" href="voice-studio-icon.png?v=299">
 <title>DĀR AL TAWḤĪD – Voice Studio</title>
@@ -1208,7 +1208,9 @@ const IS_ENGINE_ORIGIN=location.port==="8787"&&/^https?:$/.test(location.protoco
 const IS_COMPANION=IS_ENGINE_ORIGIN&&!IS_LOOPBACK;
 const IS_LOCAL=IS_LOOPBACK||IS_ENGINE_ORIGIN;
 const NATIVE_MAC=/DĀRVoiceStudioMac\//.test(navigator.userAgent);
-const LOCAL_API=IS_LOCAL?"":"http://127.0.0.1:8787";
+const REMOTE_ENGINE_API="/voice-studio/api/engine";
+const CLOUD_ENGINE_MODE=!IS_LOCAL&&new URLSearchParams(location.search).get("cloud")==="1";
+const LOCAL_API=IS_LOCAL?"":(CLOUD_ENGINE_MODE?REMOTE_ENGINE_API:"http://127.0.0.1:8787");
 let nativeUpdateState="idle",nativeLatestVersion="";
 let library={rules:[]},buckets=new Map(),lastAudio=null,lastGeneratedText="",pendingAutoRerenderText="",engineOK=false,modelReady=false,qaConfirmed=false,deferredInstall=null;
 let studioMode="production",freeVoiceAudioUrl="",freeVoiceProgressTimer=null,freeVoiceLivePreviewName="",freeVoiceLivePreviewGeneration=0,mainLivePreviewName="",mainLivePreviewGeneration=0;
@@ -1376,15 +1378,42 @@ function setMessage(text,type="bad"){
   el.textContent=text||"";
   el.className="studio-message-bar"+(text?(" "+(type==="good"?"good":type==="warn"?"warn":"bad")):"");
 }
-function localRequest(path,options={}){
+function askCloudAccessToken(){
+  if(!CLOUD_ENGINE_MODE)return "";
+  return String(window.prompt("DĀR Voice Zugangscode","")||"").trim();
+}
+async function establishCloudAccess(code){
+  const token=String(code||"").trim();
+  if(!CLOUD_ENGINE_MODE||!token)return false;
+  const response=await fetch("/voice-studio/api/access",{
+    method:"POST",
+    credentials:"include",
+    cache:"no-store",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({code:token})
+  });
+  return response.ok;
+}
+async function localRequest(path,options={},retried=false){
   const url=LOCAL_API+path;
-  const base={...options,mode:"cors",cache:"no-store"};
+  const headers=new Headers(options.headers||{});
+  const base={...options,headers,mode:"cors",cache:"no-store",credentials:CLOUD_ENGINE_MODE?"include":options.credentials};
+  let response;
   try{
-    const req=new Request(url,{...base,targetAddressSpace:"loopback"});
-    return fetch(req);
+    if(CLOUD_ENGINE_MODE){
+      response=await fetch(url,base);
+    }else{
+      const req=new Request(url,{...base,targetAddressSpace:"loopback"});
+      response=await fetch(req);
+    }
   }catch(_){
-    return fetch(url,base);
+    response=await fetch(url,base);
   }
+  if(CLOUD_ENGINE_MODE&&response.status===401&&!retried){
+    const token=askCloudAccessToken();
+    if(token&&await establishCloudAccess(token))return localRequest(path,options,true);
+  }
+  return response;
 }
 function requestAudioOutput(){
   const nativeHandler=window.webkit?.messageHandlers?.darAudioOutput;
@@ -2067,7 +2096,7 @@ function updateEngineUI(data){
   $("#engineLabel").textContent=engineVersionMismatch
     ?("Engine "+(engineVersion||"alt")+" · Neustart nötig")
     :!engineOK
-    ?"Engine nicht gestartet"
+    ?(CLOUD_ENGINE_MODE?"Cloud Engine nicht verbunden":"Engine nicht gestartet")
     :loading?"Stimm-Modell wird geladen …"
     :modelReady?(IS_COMPANION?"Serhat Engine bereit · iPad":"Serhat Engine bereit")
     :modelError?"Stimm-Modell Fehler"
@@ -2441,7 +2470,7 @@ async function checkHealth({quiet=false}={}){
     return true;
   }catch(_){
     updateEngineUI({ok:false});
-    if(!quiet)setMessage("Serhat Engine ist noch nicht gestartet.","warn");
+    if(!quiet)setMessage(CLOUD_ENGINE_MODE?"DĀR Voice Cloud ist noch nicht verbunden oder der Zugangscode fehlt.":"Serhat Engine ist noch nicht gestartet.","warn");
     return false;
   }
 }
@@ -3196,7 +3225,7 @@ $("#installBtn").onclick=async()=>{
 window.addEventListener("appinstalled",()=>{$("#installBtn").style.display="none"});
 
 if(!IS_LOCAL&&"serviceWorker" in navigator){
-  window.addEventListener("load",()=>navigator.serviceWorker.register("sw-v11.js?v=49",{scope:"/voice-studio/"}).catch(()=>{}));
+  window.addEventListener("load",()=>navigator.serviceWorker.register("sw-v11.js?v=51",{scope:"/voice-studio/"}).catch(()=>{}));
 }
 if(IS_LOCAL){
   const setup=$("#engineSetupSection");
