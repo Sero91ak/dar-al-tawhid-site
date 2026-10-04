@@ -94,14 +94,14 @@ jobs:
             check_body "$worker_url" "$worker_body" "$worker_status" || failed=1
             rm -f "$worker_body"
 
-            custom_url="https://dar-al-tauhid.de/quelle/${slug}/"
+            custom_url="https://dar-al-tawhid.de/quelle/${slug}/"
             custom_body="$(mktemp)"
             custom_status="$(curl -sS -L --retry 2 --retry-delay 2 --max-time 25 -o "$custom_body" -w '%{http_code}' "$custom_url" || true)"
 
             if [ "$custom_status" = '000' ]; then
-              ip="$(dig +short A dar-al-tauhid.de @1.1.1.1 | head -n 1 || true)"
+              ip="$(dig +short A dar-al-tawhid.de @1.1.1.1 | head -n 1 || true)"
               if [ -n "$ip" ]; then
-                custom_status="$(curl -sS -L --resolve "dar-al-tauhid.de:443:${ip}" --max-time 25 -o "$custom_body" -w '%{http_code}' "$custom_url" || true)"
+                custom_status="$(curl -sS -L --resolve "dar-al-tawhid.de:443:${ip}" --max-time 25 -o "$custom_body" -w '%{http_code}' "$custom_url" || true)"
               fi
             fi
 
