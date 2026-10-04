@@ -19,6 +19,7 @@ const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const age=()=>String($(".app")?.getAttribute("data-age")||"6–8");
 const ageKey=()=>age().replace("–","-");
+function isAudioOnlyAge(){return age()==="4–5"}
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){try{localStorage.setItem(MODE_KEY,v)}catch(_){}renderModeButtons();applyMode()}
 function textFor(item){const k=ageKey(),s=item?.scripts||{};return normalizeKidsStoryText(String(s[k]||s["6-8"]||"").trim())}
