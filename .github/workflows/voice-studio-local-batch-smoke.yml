@@ -480,9 +480,9 @@ jobs:
           assert '#quizModal[data-quiz-band="4-6"] .quiz-scene-top .quiz-scene-chip:first-child{display:none}' in kids
 
           items=quiz.get("items") or []
-          assert len(items)==150, f"expected 150 Kids quiz questions, got {len(items)}"
+          assert len(items)==200, f"expected 200 Kids quiz questions, got {len(items)}"
           counts={band:sum(1 for q in items if q.get("ageBand")==band) for band in expected}
-          assert counts=={"4-6":54,"7-8":48,"9-10":48}, counts
+          assert counts=={"4-6":72,"7-8":64,"9-10":64}, counts
 
           print("Realistic age-adaptive Kids quiz artwork OK:",counts)
           PY
