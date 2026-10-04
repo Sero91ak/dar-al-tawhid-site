@@ -7,7 +7,7 @@ if [[ "${1:-}" == "--apply" ]]; then MODE="apply"; fi
 NAME="${DO_DROPLET_NAME:-dar-voice-gpu}"
 REGION="${DO_REGION:-tor1}"
 # Current NVIDIA single-GPU offering exposed by the connected DigitalOcean account in TOR1.
-SIZE="${DO_GPU_SIZE:-gpu-6000adax1-48gb}"
+SIZE="${DO_GPU_SIZE:-gpu-h100x1-80gb}"
 # DigitalOcean's NVIDIA AI/ML-ready base image. Can be overridden when the account exposes another image slug.
 IMAGE="${DO_GPU_IMAGE:-gpu-h100x1-base}"
 SSH_KEY="${DO_SSH_KEY:-}"
