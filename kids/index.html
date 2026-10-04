@@ -183,17 +183,40 @@ radial-gradient(ellipse at 88% 100%,#dfba7f 0 27%,transparent 28%)}
 .quiz-answer:active{transform:scale(.985)}
 .quiz-answer .ans-icon{width:50px;height:50px;border-radius:17px;display:grid;place-items:center;font-size:25px;background:rgba(255,255,255,.07);flex:none}
 .quiz-answer strong{font-size:17px}
-.quiz-answer.correct{background:rgba(82,196,132,.15);border-color:rgba(82,196,132,.36)}
+.quiz-answer.correct{background:rgba(82,196,132,.15);border-color:rgba(82,196,132,.36);animation:quizCorrectPop .24s ease-out}
 .quiz-answer.wrong{background:rgba(235,83,83,.15);border-color:rgba(235,83,83,.36)}
 .quiz-answer.reveal{background:rgba(226,189,114,.13);border-color:rgba(226,189,114,.28)}
 .quiz-feedback{text-align:center;min-height:48px;margin:13px 0 2px;font-size:15px;font-weight:900}
 .quiz-feedback.good{color:#caffe0}.quiz-feedback.bad{color:#ffc3c3}
 .quiz-source{min-height:18px;text-align:center;color:var(--soft);font-size:10px;line-height:1.4;margin:2px 8px 9px}
 .quiz-source strong{color:var(--sage)}
-.app[data-age="4–5"] .quiz-source{display:none}
+.app[data-age="4–5"] .quiz-source,#quizModal[data-quiz-band="4-6"] .quiz-source{display:none}
 .quiz-next{display:none;width:100%;border:0;border-radius:20px;padding:17px;background:var(--gold);color:#102030;font-size:16px;font-weight:950;cursor:pointer}
 .quiz-next.show{display:block}
 .quiz-finish{text-align:center;padding:26px 10px}
+@keyframes quizCorrectPop{0%{transform:scale(.985)}65%{transform:scale(1.018)}100%{transform:scale(1)}}
+#quizModal[data-quiz-band="4-6"] .quiz-scene{min-height:210px;border-radius:34px}
+#quizModal[data-quiz-band="4-6"] .quiz-scene-symbol{font-size:86px}
+#quizModal[data-quiz-band="4-6"] .quiz-listen{min-height:48px;padding:12px 18px;font-size:14px}
+#quizModal[data-quiz-band="4-6"] .quiz-question{font-size:clamp(31px,9vw,43px);margin-top:15px}
+#quizModal[data-quiz-band="4-6"] .quiz-answer{min-height:94px;border-radius:27px;padding:15px 16px}
+#quizModal[data-quiz-band="4-6"] .quiz-answer .ans-icon{width:58px;height:58px;border-radius:19px;font-size:28px}
+#quizModal[data-quiz-band="4-6"] .quiz-answer strong{font-size:21px;line-height:1.2}
+#quizModal[data-quiz-band="4-6"] .quiz-help{display:none}
+#quizModal[data-quiz-band="7-8"] .quiz-question{font-size:clamp(27px,7.4vw,38px)}
+#quizModal[data-quiz-band="7-8"] .quiz-answer{min-height:80px}
+#quizModal[data-quiz-band="7-8"] .quiz-answer strong{font-size:18px}
+#quizModal[data-quiz-band="9-10"] .quiz-scene{min-height:154px;border-radius:27px}
+#quizModal[data-quiz-band="9-10"] .quiz-scene-symbol{font-size:62px}
+#quizModal[data-quiz-band="9-10"] .quiz-question{font-size:clamp(23px,6.4vw,34px);margin-top:14px}
+#quizModal[data-quiz-band="9-10"] .quiz-answer{min-height:68px;border-radius:19px}
+#quizModal[data-quiz-band="9-10"] .quiz-answer strong{font-size:16px;line-height:1.3}
+#quizModal[data-quiz-band="9-10"] .quiz-source{font-size:11px}
+@media(min-width:720px){
+  #quizModal[data-quiz-band="4-6"] .quiz-answers{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #quizModal[data-quiz-band="7-8"] .quiz-answers,#quizModal[data-quiz-band="9-10"] .quiz-answers{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #quizModal[data-quiz-band="7-8"] .quiz-answer:last-child:nth-child(odd),#quizModal[data-quiz-band="9-10"] .quiz-answer:last-child:nth-child(odd){grid-column:1/-1}
+}
 .quiz-finish .star{font-size:68px;margin-bottom:10px}
 .quiz-finish h3{font-size:30px;margin:0 0 8px}
 .quiz-finish p{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 20px}
@@ -5786,8 +5809,12 @@ function currentKidsQuizAgeBand(){
 }
 function renderKidsQuizAgePicker(){
   var selected=currentKidsQuizAgeBand();
+  var modal=document.getElementById("quizModal");
+  if(modal)modal.setAttribute("data-quiz-band",selected);
   document.querySelectorAll("#quizAgePick [data-quiz-age]").forEach(function(btn){
-    btn.classList.toggle("active",btn.getAttribute("data-quiz-age")===selected);
+    var active=btn.getAttribute("data-quiz-age")===selected;
+    btn.classList.toggle("active",active);
+    btn.setAttribute("aria-pressed",active?"true":"false");
   });
 }
 function setKidsQuizAgeBand(value,restart){
@@ -5994,6 +6021,11 @@ function quizSavedCorrect(){
 }
 function renderQuizProgress(){
   var box=document.getElementById("quizProgress");
+  box.setAttribute("role","progressbar");
+  box.setAttribute("aria-valuemin","1");
+  box.setAttribute("aria-valuemax",String(Math.max(1,currentQuiz.length)));
+  box.setAttribute("aria-valuenow",String(Math.min(currentQuiz.length,currentQuizIndex+1)));
+  box.setAttribute("aria-label","Frage "+Math.min(currentQuiz.length,currentQuizIndex+1)+" von "+currentQuiz.length);
   box.innerHTML=currentQuiz.map(function(_,i){
     var cls=i<currentQuizIndex?"done":(i===currentQuizIndex?"now":"");
     return '<span class="'+cls+'"></span>';
@@ -6005,15 +6037,17 @@ function renderQuizQuestion(){
   quizLocked=false;
   quizQuestionHadError=false;
   renderQuizProgress();
+  var band=currentKidsQuizAgeBand();
+  var help=band==="4-6"?"":(band==="9-10"?"Wähle die beste Antwort.":"Hör zu und tippe auf deine Antwort.");
   document.getElementById("quizBody").innerHTML=
-    '<div id="quizScene" class="quiz-scene"><div id="quizSceneSymbol" class="quiz-scene-symbol">'+kidsIconMarkup(kidsIconName(q.scene,"star"),"scene-icon")+'</div></div>'+
-    '<button id="quizListen" class="quiz-listen"> Frage noch einmal hören</button>'+
+    '<div id="quizScene" class="quiz-scene" aria-hidden="true"><div id="quizSceneSymbol" class="quiz-scene-symbol">'+kidsIconMarkup(kidsIconName(q.scene,"star"),"scene-icon")+'</div></div>'+
+    '<button id="quizListen" class="quiz-listen" type="button"> Frage noch einmal hören</button>'+
     '<div id="quizQuestion" class="quiz-question">'+q.question+'</div>'+
-    '<div id="quizHelp" class="quiz-help">'+(currentKidsQuizAgeBand()==="4-6"?"":"Hör zu und tippe auf deine Antwort.")+'</div>'+
-    '<div id="quizAnswers" class="quiz-answers"></div>'+
-    '<div id="quizFeedback" class="quiz-feedback"></div>'+
+    '<div id="quizHelp" class="quiz-help">'+help+'</div>'+
+    '<div id="quizAnswers" class="quiz-answers" role="group" aria-label="Antworten"></div>'+
+    '<div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>'+
     '<div id="quizSource" class="quiz-source"></div>'+
-    '<button id="quizNext" class="quiz-next">Weiter ›</button>';
+    '<button id="quizNext" class="quiz-next" type="button">Weiter ›</button>';
   var answers=document.getElementById("quizAnswers");
   q.answers.forEach(function(a,idx){
     var btn=document.createElement("button");
