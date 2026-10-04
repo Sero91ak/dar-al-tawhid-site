@@ -77,14 +77,14 @@ h1{font-size:clamp(26px,2.1vw,40px);line-height:1.02;letter-spacing:-.035em;marg
 .prophet-pick h2{margin:3px 0 3px;font-size:16px;line-height:1.15}
 .prophet-pick .notice{margin-top:4px}
 .prophet-pick-list{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.prophet-pick-item{display:grid;grid-template-columns:minmax(0,1fr) 88px 74px 72px 72px;gap:6px;align-items:center;border:1px solid rgba(255,255,255,.08);background:#071927;border-radius:10px;padding:5px 7px;min-width:0}
+.prophet-pick-item{display:grid;grid-template-columns:minmax(0,1fr) 88px 74px 92px 72px 72px;gap:6px;align-items:center;border:1px solid rgba(255,255,255,.08);background:#071927;border-radius:10px;padding:5px 7px;min-width:0}
 .prophet-pick-item.active{border-color:rgba(217,182,111,.5);background:rgba(217,182,111,.08)}
 .prophet-pick-item button.prophet-pick-name{appearance:none;background:transparent;border:0;color:var(--ink);text-align:left;font-size:12px;font-weight:800;padding:2px 0;cursor:pointer;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .prophet-pick-status{font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .prophet-pick-status.busy{color:#f1c77c}
 .prophet-pick-status.good{color:#9bd8ba}
 .prophet-pick-status.bad{color:#ef9d9d}
-.prophet-pick-item .prophet-pick-push,.prophet-pick-item .prophet-pick-listen,.prophet-pick-item .prophet-pick-generate{min-height:30px;padding:0 7px;font-size:10px;border-radius:8px}
+.prophet-pick-item .prophet-pick-push,.prophet-pick-item .prophet-pick-listen,.prophet-pick-item .prophet-pick-upload,.prophet-pick-item .prophet-pick-generate{min-height:30px;padding:0 7px;font-size:10px;border-radius:8px}
 .prophet-pick.focus{outline:2px solid rgba(217,182,111,.55);outline-offset:2px}.prophet-review{margin-top:9px;border:1px solid rgba(239,157,157,.24);border-radius:12px;padding:9px;background:rgba(120,25,25,.08)}.prophet-review[hidden]{display:none}.prophet-review-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}.prophet-review-term{min-height:30px!important;padding:6px 9px!important;font-size:10px!important}.prophet-review-meta{font-size:10px;color:var(--muted);line-height:1.45}
 @media(max-width:900px){.prophet-pick-list{grid-template-columns:1fr}}
 textarea{
@@ -679,7 +679,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 <header class="topbar">
   <div class="brand-wrap">
     <div class="brand-mark"><img src="voice-studio-icon.png?v=299" alt="DĀR AL TAWḤĪD Voice Studio"></div>
-    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.68 · SERHAT VOICE</div></div>
+    <div><div class="brand">DĀR AL TAWḤĪD</div><div class="brand-sub">VOICE STUDIO 2.9.69 · SERHAT VOICE</div></div>
   </div>
   <div class="top-actions">
     <button id="freeVoiceToggleBtn" class="btn quiet" type="button">Freie Stimme</button>
@@ -2736,6 +2736,13 @@ setTimeout(()=>{
   let completedAudioSignature="";
   let strictReviewSignature="";
   const busy=new Map();
+  const uploadInput=document.createElement("input");
+  uploadInput.type="file";
+  uploadInput.accept=".wav,.mp3,.m4a,.aac,audio/wav,audio/mpeg,audio/mp4,audio/aac";
+  uploadInput.hidden=true;
+  uploadInput.setAttribute("aria-hidden","true");
+  document.body.appendChild(uploadInput);
+  let uploadTargetId="";
   function honor(it){
     if(!it)return"";
     if(it.id==="muhammad")return"ﷺ";
@@ -2758,6 +2765,7 @@ setTimeout(()=>{
     const liveAges=live&&live.ages?Object.keys(live.ages):[];
     const readyAges=AGES.filter(a=>scripts[a]&&audio[a]&&audio[a].url);
     if(busy.get(it.id)==="generate")return {cls:"busy",text:"wird erzeugt …"};
+    if(busy.get(it.id)==="upload")return {cls:"busy",text:"Datei wird geladen …"};
     if(busy.get(it.id)==="push")return {cls:"busy",text:"lädt …"};
     if(busy.get(it.id)==="error")return {cls:"bad",text:"fehlgeschlagen"};
     if(liveAges.length)return {cls:"good",text:"Audio fertig · anhörbar"};
@@ -2773,12 +2781,15 @@ setTimeout(()=>{
     list.innerHTML=pack.map(it=>{
       const st=slotInfo(it);
       const pushing=busy.get(it.id)==="push";
+      const uploading=busy.get(it.id)==="upload";
       const live=completedAudio.get(it.id);
-      const playable=!!(live&&live.ages&&Object.keys(live.ages).length);
+      const published=it&&it.audio&&typeof it.audio==="object"&&AGES.some(a=>it.audio[a]&&it.audio[a].url);
+      const playable=!!(live&&live.ages&&Object.keys(live.ages).length)||published;
       return '<div class="prophet-pick-item'+(sel.value===it.id?" active":"")+'" data-ps-pick="'+it.id+'">'+
         '<button class="prophet-pick-name" type="button" data-ps-pick="'+it.id+'">'+label(it)+'</button>'+
         '<span class="prophet-pick-status '+st.cls+'" data-ps-status="'+it.id+'">'+st.text+'</span>'+
         (playable?'<button class="btn quiet prophet-pick-listen" type="button" data-ps-listen="'+it.id+'">▶ Anhören</button>':'<span></span>')+
+        '<button class="btn secondary prophet-pick-upload" type="button" data-ps-upload="'+it.id+'" '+(uploading?"disabled":"")+'>'+(uploading?"Lädt …":"Audio-Datei")+'</button>'+
         '<button class="btn secondary prophet-pick-generate" type="button" data-ps-generate="'+it.id+'" '+(busy.get(it.id)==="generate"?"disabled":"")+'>'+(busy.get(it.id)==="generate"?"Läuft":"Erzeugen")+'</button>'+
         '<button class="btn primary prophet-pick-push" type="button" data-ps-push="'+it.id+'" '+(pushing?"disabled":"")+'>'+(pushing?"Lädt":"Übernehmen")+'</button>'+
       '</div>';
@@ -2786,6 +2797,14 @@ setTimeout(()=>{
     list.querySelectorAll("[data-ps-pick]").forEach(el=>el.addEventListener("click",()=>{
       sel.value=el.dataset.psPick;
       prepareSlot();
+    }));
+    list.querySelectorAll("[data-ps-upload]").forEach(btn=>btn.addEventListener("click",e=>{
+      e.stopPropagation();
+      sel.value=btn.dataset.psUpload;
+      prepareSlot();
+      uploadTargetId=btn.dataset.psUpload;
+      uploadInput.value="";
+      uploadInput.click();
     }));
     list.querySelectorAll("[data-ps-generate]").forEach(btn=>btn.addEventListener("click",e=>{
       e.stopPropagation();
@@ -2831,7 +2850,7 @@ setTimeout(()=>{
       img.alt=it.name||"";
       cover.prepend(img);
     }
-    if(ready)ready.textContent=label(it)+" · Text ist fertig vorbereitet. Jetzt nur Audio erzeugen, vollständig anhören und Aussprache bestätigen.";
+    if(ready)ready.textContent=label(it)+" · Text ist direkt bearbeitbar. „Audio-Datei“ ordnet die gewählte Aufnahme und den aktuell sichtbaren Text fest diesem Propheten zu.";
     ta.dispatchEvent(new Event("input"));
     ta.focus();
   }
@@ -2854,21 +2873,83 @@ setTimeout(()=>{
       fillList();
     }
   }
+  function fileAsDataUrl(file){
+    return new Promise((resolve,reject)=>{
+      const reader=new FileReader();
+      reader.onload=()=>resolve(String(reader.result||""));
+      reader.onerror=()=>reject(new Error("Audiodatei konnte nicht gelesen werden."));
+      reader.readAsDataURL(file);
+    });
+  }
+  async function uploadProphetAudio(id,file){
+    const it=pack.find(x=>x.id===id);
+    if(!it||!file)return false;
+    const text=String(ta.value||"").trim();
+    if(text.length<40){setMessage("Der Story-Text ist zu kurz. Text zuerst bearbeiten oder laden.","warn");return false}
+    if(Number(file.size||0)>64*1024*1024){setMessage("Die Audiodatei ist größer als 64 MB.","bad");return false}
+    busy.set(id,"upload");fillList();
+    setMessage(label(it)+" · Audio-Datei und aktueller Text werden fest miteinander verknüpft …","warn");
+    try{
+      const dataUrl=await fileAsDataUrl(file);
+      const r=await localRequest("/story-media/upload",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          kind:"prophet",id:it.id,age:"all",text,
+          filename:file.name||"story-audio",
+          dataUrl
+        })
+      });
+      const d=await r.json().catch(()=>({}));
+      if(!r.ok||d.ok===false)throw Error(d.error||"Audio-Upload fehlgeschlagen.");
+      const scripts=it.scripts&&typeof it.scripts==="object"?it.scripts:{};
+      const audio=it.audio&&typeof it.audio==="object"?it.audio:{};
+      AGES.forEach(a=>{
+        scripts[a]=text;
+        audio[a]={...(audio[a]||{}),url:(a==="4-5"?d.url:(d.url||"").replace("/4-5.m4a","/"+a+".m4a")),status:"ready",manualUpload:true};
+      });
+      it.voiceScript=text;it.scripts=scripts;it.audio=audio;
+      busy.delete(id);fillList();
+      setMessage(label(it)+" · Audiodatei hochgeladen. Text und Stimme sind jetzt derselben Geschichte zugeordnet.","good");
+      return true;
+    }catch(e){
+      busy.set(id,"error");fillList();
+      setMessage(e.message||String(e),"bad");
+      return false;
+    }
+  }
+  uploadInput.addEventListener("change",()=>{
+    const id=uploadTargetId;
+    const file=uploadInput.files&&uploadInput.files[0];
+    uploadTargetId="";
+    if(id&&file)uploadProphetAudio(id,file);
+  });
   function audioApiUrl(path){
     const base=String(LOCAL_API||"").replace(/\/$/,"");
     return base+path;
   }
   function playCompletedProphet(id){
     const live=completedAudio.get(id);
-    if(!live||!live.ages)return;
-    const preferred=["6-8","4-5","9-10"].find(a=>live.ages[a]&&live.ages[a].url);
-    if(!preferred)return;
+    const it=pack.find(x=>x.id===id);
     const player=$("#prophetLivePlayer");
     const wrap=$("#prophetListenWrap");
     const labelEl=$("#prophetListenLabel");
     if(!player||!wrap)return;
-    player.src=audioApiUrl(live.ages[preferred].url)+"&cb="+Date.now();
-    if(labelEl)labelEl.textContent=(live.name||id)+" · fertige Serhat-Aufnahme";
+    let src="",name=(it&&it.name)||id;
+    if(live&&live.ages){
+      const preferred=["6-8","4-5","9-10"].find(a=>live.ages[a]&&live.ages[a].url);
+      if(preferred){src=audioApiUrl(live.ages[preferred].url)+"&cb="+Date.now();name=live.name||name}
+    }
+    if(!src&&it&&it.audio&&typeof it.audio==="object"){
+      const preferred=["6-8","4-5","9-10"].find(a=>it.audio[a]&&it.audio[a].url);
+      if(preferred){
+        const url=String(it.audio[preferred].url||"");
+        src=url.indexOf("http")===0?url:"https://dar-al-tawhid.de"+url;
+      }
+    }
+    if(!src)return;
+    player.src=src;
+    if(labelEl)labelEl.textContent=name+" · fertige Serhat-Aufnahme";
     wrap.hidden=false;
     player.play().catch(()=>{});
   }
