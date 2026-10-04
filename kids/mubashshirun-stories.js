@@ -132,7 +132,7 @@ function renderCards(){
         '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span>'+
       '</span>'+
       '<span class="ms-row-copy">'+
-        '<span class="ms-row-kicker">ṢAḤĀBĪ · GEPRÜFTE QUELLEN</span>'+
+        '<span class="ms-row-kicker">ṢAḤĀBĪ · LEBENSGESCHICHTE</span>'+
         '<strong class="ms-row-title">'+esc(item.name)+'</strong>'+
         '<span class="ms-row-ar" dir="rtl">'+esc(item.nameAr||"")+' رضي الله عنه</span>'+
         '<span class="ms-row-summary">'+esc(item.summary||"")+'</span>'+
@@ -162,7 +162,7 @@ function insertEntry(view){
     Array.from({length:10},(_,i)=>'<i style="--i:'+i+'"></i>').join("")+
     '</span></span>'+
     '<span class="ms-entry-copy">'+
-      '<span class="ms-entry-kicker">EIGENER BEREICH · SUNNAH GEPRÜFT</span>'+
+      '<span class="ms-entry-kicker">DIE ZEHN GEFÄHRTEN · IHRE GESCHICHTEN</span>'+
       '<strong>Die zehn Mubaschschirūn</strong>'+
       '<span>'+(isAudioOnlyAge()?'10 Ṣaḥābah · Hörgeschichten':'10 Ṣaḥābah · ihre Geschichten · lesen &amp; hören')+'</span>'+
     '</span>'+
@@ -218,7 +218,7 @@ function ensureUi(){
         '<div class="ms-body">'+
           '<div id="msVisualDisclaimer" class="ms-visual-disclaimer"></div>'+
           '<div class="ms-detail-modes"><button data-ms-mode="both" type="button">Lesen &amp; Hören</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
-          '<div class="ms-profile-grid"><section><small>WIE WAR ER?</small><strong id="msTrait"></strong></section><section><small>SEINE AUFGABE &amp; ZEIT</small><span id="msLife"></span></section><section><small>WER BERICHTET?</small><span id="msWitness"></span></section></div>'+
+          '<div class="ms-profile-grid"><section><small>WIE WAR ER?</small><strong id="msTrait"></strong></section><section><small>SEIN LEBENSWEG</small><span id="msLife"></span></section><section><small>WICHTIGER MOMENT</small><span id="msWitness"></span></section></div>'+
           '<section id="msPlayer" class="ms-player"><button id="msPlay" class="ms-play" type="button">Hören</button><div class="ms-progress" id="msProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="msProgress"></span></div><div class="ms-player-time"><strong id="msTimeCurrent">0:00</strong><span id="msTimeTotal">0:00</span></div><button class="ms-follow-open" id="msFollowOpen" type="button">Mitlesen</button><p id="msVoiceNote"></p></section>'+
           '<article id="msRead" class="ms-read"></article>'+
           '<section class="ms-sources"><strong>GEPRÜFTE QUELLEN</strong><div id="msSources"></div></section>'+
@@ -316,7 +316,7 @@ function renderActive(){
   $("#msTitle").textContent=active.name;
   $("#msArabic").textContent=(active.nameAr||"")+" رضي الله عنه";
   $("#msSummary").textContent=active.summary||"";
-  $("#msMeta").innerHTML='<span>'+durationLabel(active,activeText)+'</span><span>Alter '+esc(age())+'</span><span>Qurʾān + Sunnah</span>';
+  $("#msMeta").innerHTML='<span>'+durationLabel(active,activeText)+'</span><span>Alter '+esc(age())+'</span><span>Lebensgeschichte</span>';
   {
     const vd=$("#msVisualDisclaimer");
     if(vd){
@@ -327,7 +327,7 @@ function renderActive(){
   }
   $("#msTrait").textContent=active.trait||"";
   $("#msLife").textContent=active.lifeContext||active.summary||"";
-  $("#msWitness").textContent=active.witnessContext||"Die verwendeten Belege stehen direkt unter der Geschichte.";
+  $("#msWitness").textContent=active.storyHighlight||active.witnessContext||active.summary||"";
   $("#msRead").innerHTML=activeText.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join("");
   $("#msSources").innerHTML=sourceHtml(active);
   renderQuestion();applyMode();resetAudio();
@@ -422,7 +422,7 @@ function stopAudio(){followReader?.persist(true);try{audio.pause();audio.removeA
 async function init(){
   if(!ensureUi())return;
   try{
-    const r=await fetch(DATA_URL+"?v=15",{cache:"force-cache"});
+    const r=await fetch(DATA_URL+"?v=16",{cache:"no-store"});
     if(!r.ok)throw Error("Mubaschschirūn "+r.status);
     const data=await r.json();
     libraryPolicy=data.policy&&typeof data.policy==="object"?data.policy:{};
