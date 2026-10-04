@@ -2,6 +2,15 @@
 "use strict";
 
 const DATA_URL="/kids/data/prophet-stories.json";
+const KIDS_STORY_INTRO="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.";
+const KIDS_STORY_OUTRO="Und الله weiß es am besten.\n\nMöge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
+function normalizeKidsStoryText(value){
+  let text=String(value||"").trim();
+  if(!text)return"";
+  if(!text.startsWith(KIDS_STORY_INTRO))text=KIDS_STORY_INTRO+"\n\n"+text;
+  if(!text.endsWith(KIDS_STORY_OUTRO))text=text+"\n\n"+KIDS_STORY_OUTRO;
+  return text;
+}
 const STORIES_FINAL_CSS="/kids/stories-final-v1088.css?v=1088";
 (function installStoriesFinalCss(){
   if(document.querySelector('link[data-kids-stories-final="1088"]'))return;
@@ -80,11 +89,11 @@ function customScript(item){
 }
 function buildText(item){
   const owned=customScript(item);
-  if(owned)return owned;
+  if(owned)return normalizeKidsStoryText(owned);
   const parts=[ageIntro(item)].concat(chaptersForAge(item));
   if(age()==="9–10"&&item.older)parts.push(item.older);
   parts.push(ageOutro(item));
-  return parts.join("\n\n").replace(/\s+\n/g,"\n").trim();
+  return normalizeKidsStoryText(parts.join("\n\n").replace(/\s+\n/g,"\n").trim());
 }
 function words(text){return(String(text).match(/\S+/g)||[]).length}
 function audioMeta(item){return item&&item.audio&&item.audio[ageKey()]?item.audio[ageKey()]:null}
