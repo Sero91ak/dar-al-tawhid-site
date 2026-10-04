@@ -260,8 +260,8 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
 // DAR_MORE_V1241
-  if (!/quiz-overview-v1257\\.css/.test(html)) {
-    html = html.replace(/<\\/head>/i, '<link rel="stylesheet" href="/test/assets/quiz-overview-v1257.css?v=1257"><\\/head>');
+  if (!/quiz-overview-v1257\.css/.test(html)) {
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/quiz-overview-v1257.css?v=1257"><\/head>');
   }
 
   if (!/more-v1241\.css/.test(html)) {
