@@ -90,7 +90,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
   </div>
 </section>
 <section class="screen" data-screen="history">
-  <div class="hero"><div class="kicker">Bibliothek</div><h1>Verlauf</h1><div class="sub">Zuletzt erzeugte Audios auf deinem Mac.</div></div>
+  <div class="hero"><div class="kicker">Bibliothek</div><h1>Verlauf</h1><div class="sub">Zuletzt erzeugte Audios deiner DĀR Voice Engine.</div></div>
   <div id="historyList"><div class="empty">Verlauf wird geladen …</div></div>
 </section>
 <section class="screen" data-screen="pronunciation">
@@ -168,7 +168,7 @@ async function health(){
     const lib=d.library||{};const total=Number(lib.rules||0)||Number(lib.totalRules||0)||Number(lib.maxMasterPlsRules||0)||0;
     $("#libraryBadge").textContent=total?total.toLocaleString("de-DE"):"aktiv";$("#libraryNote").textContent=(Number(lib.maxMasterPlsRules||0)?Number(lib.maxMasterPlsRules).toLocaleString("de-DE")+" MAX-MASTER · ":"")+"Laufzeitbibliothek aktiv";
     $("#arabicBadge").textContent=d.reference_arabic_dedicated?"AR MASTER":"DE Fallback";$("#arabicBadge").className=d.reference_arabic_dedicated?"badge good":"badge";return true;
-  }catch(e){$("#dot").className="dot bad";$("#engineText").textContent="Mac nicht erreichbar";$("#healthBadge").textContent="offline";$("#healthNote").textContent="Mac und iPhone/iPad müssen im selben WLAN sein.";return false}
+  }catch(e){$("#dot").className="dot bad";$("#engineText").textContent=LOCAL_ENGINE_HOST?"Lokale Engine nicht erreichbar":"Cloud Engine nicht verbunden";$("#healthBadge").textContent="offline";$("#healthNote").textContent=LOCAL_ENGINE_HOST?"Lokale Engine starten.":"DĀR Voice Cloud ist noch nicht vollständig mit dem GPU-Host verbunden.";return false}
 }
 function go(name,opts={}){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="pronunciation"&&!opts.skipCatalog)loadCatalog(true);if(name==="settings")health();document.querySelector("main")?.scrollTo({top:0,behavior:"instant"})}
 $$(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));$("#refreshBtn").onclick=()=>{health();if($(".screen.active")?.dataset.screen==="history")loadHistory()};
