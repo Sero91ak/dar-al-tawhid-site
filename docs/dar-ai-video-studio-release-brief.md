@@ -113,7 +113,7 @@ Bedienelemente müssen mindestens 44 px hoch sein. Text darf nicht abgeschnitten
 - genaue Quellenangabe
 - feste Zeile: `Folgt für mehr Wissen aus Qurʾān & Sunnah`
 - Telegram: `@dar_al_tauhid`
-- Website: `dar-al-tauhid.de`
+- Website: `dar-al-tawhid.de`
 - Instagram: `@dar_at_tawhid`
 - `by Serhat Abu Malik`
 
