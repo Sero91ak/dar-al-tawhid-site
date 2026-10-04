@@ -2234,7 +2234,7 @@ async function restoreDesktopGenerationJob(){
     else setMessage(e.message||String(e));
   }finally{
     if(poll)clearInterval(poll);
-    if(button){button.disabled=false;button.textContent=kind==="free"?"Freie Stimme erzeugen":"Audio erzeugen"}
+    if(button){button.disabled=false;button.textContent=kind==="free"?"Stimme erzeugen":"Audio erzeugen"}
   }
 }
 
