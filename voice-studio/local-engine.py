@@ -2975,7 +2975,8 @@ def _kids_owner_voice_add_question(rows,q,age_key,scope,source_id):
     labels=[x for x in labels if x]
     if question:
         lower=[x.casefold() for x in labels]
-        if str(age_key)=="4–5" and len(lower)==2 and "ja" in lower and "nein" in lower:
+        age_value=str(age_key or "").strip()
+        if age_value in {"4–5","4-5","4–6","4-6"} and len(lower)==2 and "ja" in lower and "nein" in lower:
             prompt=(question+" Ja oder Nein?").strip()
         else:
             choices=" ".join(f"Antwort {i+1}: {label}." for i,label in enumerate(labels))
