@@ -627,7 +627,7 @@ export default {
     if ((request.method === "GET" || request.method === "HEAD") && voiceAliasPath) {
       const target = new URL(request.url);
       target.pathname = "/voice-studio/";
-      target.searchParams.set("app", "1");
+      target.searchParams.set("app", "1");\n      target.searchParams.set("cloud", "1");
       return Response.redirect(target.toString(), 308);
     }
 
