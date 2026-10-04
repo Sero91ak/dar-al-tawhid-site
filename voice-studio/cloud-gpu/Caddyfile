@@ -1,14 +1,5 @@
-{
-  email {$ACME_EMAIL}
-}
-
 {$DAR_VOICE_DOMAIN} {
   encode zstd gzip
-
-  @health path /health
-  reverse_proxy voice:8787 {
-    flush_interval -1
-  }
 
   reverse_proxy voice:8787 {
     flush_interval -1
