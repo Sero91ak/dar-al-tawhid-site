@@ -413,5 +413,5 @@
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
   function boot(){enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-  window.DARGlobalShare={version:"1246",createAndShare:createAndShare,renderFiles:renderFiles,site:SITE,freshImageApi:SHARE_IMAGE_API};
+  window.DARGlobalShare={version:"1250",createAndShare:createAndShare,renderFiles:renderFiles,site:SITE,imageMode:"curated-pool-only",poolSize:GENERAL_SHARE_IMAGE_POOL.length};
 })();
