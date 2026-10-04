@@ -52,8 +52,8 @@ else
 fi
 chmod 600 .env
 
-if [[ ! -s "$DATA/Serhat_Adobe_MASTER.wav" ]]; then
-  echo "STOPP: Private Voice-Referenz fehlt: $DATA/Serhat_Adobe_MASTER.wav" >&2
+if [[ ! -s "$DATA/Serhat_Adobe_MASTER.wav" && ! -s "$DATA/Serhat_FINAL_REF.wav" ]]; then
+  echo "STOPP: Private Voice-Referenz fehlt: Serhat_Adobe_MASTER.wav oder Serhat_FINAL_REF.wav" >&2
   echo "Kopiere zuerst die bestehende Master-WAV sicher auf den Server." >&2
   exit 6
 fi
