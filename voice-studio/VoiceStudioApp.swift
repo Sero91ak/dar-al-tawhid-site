@@ -288,12 +288,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         return address ?? fallback
     }
 
+    private func companionPairingHost() -> String? {
+        let host = ProcessInfo.processInfo.hostName.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !host.isEmpty && host.lowercased().hasSuffix(".local") {
+            return host
+        }
+        if !host.isEmpty && !host.contains(" ") {
+            return host + ".local"
+        }
+        return localIPv4Address()
+    }
+
     private func companionPairingURL() -> String? {
-        guard let ip = localIPv4Address(),
+        guard let host = companionPairingHost(),
               let token = companionToken() else { return nil }
         var components = URLComponents()
         components.scheme = "http"
-        components.host = ip
+        components.host = host
         components.port = 8787
         components.path = "/mobile/"
         components.queryItems = [URLQueryItem(name: "pair", value: token)]
@@ -326,7 +337,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             return
         }
 
-        alert.informativeText = "Scanne den QR-Code mit dem iPad/iPhone im selben WLAN oder kopiere den Link. Beim ersten Öffnen wird das Gerät sicher mit diesem Mac gekoppelt.\n\nDen Kopplungslink nicht an andere Personen weitergeben."
+        alert.informativeText = "Scanne den QR-Code nur für die erste Kopplung. Danach bleibt das iPhone/iPad gespeichert und aktualisiert sich über den eigenen Update-Bereich. Der Link verwendet bevorzugt den stabilen Mac-Namen im lokalen Netz statt einer wechselnden IP.\n\nDen Kopplungslink nicht an andere Personen weitergeben."
         if let image = qrImage(for: url) {
             let imageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 220, height: 220))
             imageView.image = image
