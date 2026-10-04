@@ -351,3 +351,79 @@ jobs:
               raise SystemExit("Local batch smoke failed: "+" | ".join(failures))
           print("Voice Studio local Serhat batch markers OK")
           PY
+
+      - name: Validate unified Kids owner voice architecture
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          runtime=Path("kids/owner-voice.js").read_text(encoding="utf-8")
+          kids=Path("kids/index.html").read_text(encoding="utf-8")
+          sw=Path("kids/sw.js").read_text(encoding="utf-8")
+          owner=json.loads(Path("kids/data/owner-voice-audio.json").read_text(encoding="utf-8"))
+          shorts=json.loads(Path("kids/data/short-stories-voice.json").read_text(encoding="utf-8"))
+          version=json.loads(Path("voice-studio/version.json").read_text(encoding="utf-8"))
+
+          engine_required=[
+              "KIDS_OWNER_VOICE_MASTER_HOME",
+              "KIDS_OWNER_VOICE_EXPORT_HOME",
+              "def load_fresh_kids_repo_json",
+              "def _kids_owner_voice_rows",
+              "def _generate_kids_owner_voice_master",
+              "def build_kids_owner_voice_sync",
+              "def start_kids_owner_voice_sync",
+              "def _kids_owner_voice_auto_loop",
+              'if p=="/kids-voice/sync-start"',
+              'elif p=="/kids-voice/sync-state"',
+              'name="dar-kids-owner-voice-auto"',
+              '"dar-kids-owner-voice-sync"',
+              '"question"',
+              '"kids_story"',
+              '"dua"',
+              "failedItems",
+              "pendingFailures",
+          ]
+          missing=[m for m in engine_required if m not in engine]
+          assert not missing, "Kids owner voice engine markers missing: "+", ".join(missing)
+
+          for source in (
+              "kids/data/quiz-kids.json",
+              "kids/data/dua-kids.json",
+              "kids/data/stories-authentic.json",
+              "kids/data/short-stories-voice.json",
+              "kids/data/verified-content.json",
+          ):
+              assert source in engine, "fresh Kids voice source missing: "+source
+
+          assert "/kids/data/owner-voice-audio.json" in runtime
+          assert "/kids/data/quiz-audio.json" in runtime
+          assert "DARKidsOwnerVoice" in runtime
+          assert "SpeechSynthesisUtterance" not in runtime, "owner runtime must never synthesize with system TTS"
+          assert '/kids/owner-voice.js?v=1' in kids
+          assert '/kids/quiz-owner-voice.js' not in kids, "legacy quiz-only runtime must not be loaded"
+          assert "DARKidsOwnerVoice.play" in kids
+          assert "Audio wird vorbereitet" in kids
+          assert "/kids/assets/kids-owner-voice/" in sw
+          assert "/kids/assets/kids-quiz-audio/" in sw
+
+          assert owner.get("voiceProfileId")=="serhat-owner-voice-2026"
+          assert owner.get("systemTtsFallbackAllowed") is False
+          assert owner.get("syntheticQuranRecitationAllowed") is False
+          assert len(shorts.get("items") or [])==4
+
+          cfg=version.get("kidsUnifiedOwnerVoice") or {}
+          assert cfg.get("enabled") is True
+          assert cfg.get("autoDiscovery") is True
+          assert cfg.get("autoSyncOnLocalEngineStart") is True
+          assert int(cfg.get("recheckMinutes") or 0)==30
+          assert cfg.get("systemTtsFallback") is False
+          assert cfg.get("syntheticQuranRecitation") is False
+          assert cfg.get("publicArtifactsOnly") is True
+          assert cfg.get("voiceReferenceStaysLocal") is True
+          assert cfg.get("interactiveRequestsKeepPriority") is True
+
+          print("Unified Kids owner voice architecture OK")
+          PY
+
