@@ -179,7 +179,748 @@
         "flowRepairTargetMs": 55
       }
     ],
-    "freeVoicePhraseRenderPlans": []
+    "freeVoicePhraseRenderPlans": [],
+    "fixedPhraseComponents": [
+      {
+        "id": "salam_as_salamu",
+        "canonical": "As-Salāmu",
+        "forms": [
+          "As-Salāmu",
+          "as-Salāmu",
+          "As-salāmu",
+          "as-salāmu",
+          "Assalamu",
+          "assalamu"
+        ],
+        "tts_text": "السَّلَامُ",
+        "tts_language": "ar",
+        "category": "Begrüßung"
+      },
+      {
+        "id": "salam_alaykum",
+        "canonical": "ʿalaykum",
+        "forms": [
+          "ʿalaykum",
+          "alaykum",
+          "Alaikum",
+          "alaikum",
+          "Aleikum",
+          "aleikum"
+        ],
+        "tts_text": "عَلَيْكُمْ",
+        "tts_language": "ar",
+        "category": "Begrüßung"
+      },
+      {
+        "id": "salam_rahmatullahi",
+        "canonical": "Raḥmatullāhi",
+        "forms": [
+          "Raḥmatullāhi",
+          "raḥmatullāhi",
+          "Rahmatullahi",
+          "rahmatullahi"
+        ],
+        "tts_text": "رَحْمَتُ اللَّهِ",
+        "tts_language": "ar",
+        "category": "Begrüßung"
+      },
+      {
+        "id": "salam_wa_rahmatullahi",
+        "canonical": "wa Raḥmatullāhi",
+        "forms": [
+          "wa Raḥmatullāhi",
+          "Wa Raḥmatullāhi",
+          "wa raḥmatullāhi",
+          "wa Rahmatullahi",
+          "Wa Rahmatullahi"
+        ],
+        "tts_text": "وَرَحْمَتُ اللَّهِ",
+        "tts_language": "ar",
+        "category": "Begrüßung"
+      },
+      {
+        "id": "salam_barakatuh",
+        "canonical": "Barakātuh",
+        "forms": [
+          "Barakātuh",
+          "barakātuh",
+          "Barakatuh",
+          "barakatuh"
+        ],
+        "tts_text": "بَرَكَاتُهُ",
+        "tts_language": "ar",
+        "category": "Begrüßung"
+      },
+      {
+        "id": "salam_wa_barakatuh",
+        "canonical": "wa Barakātuh",
+        "forms": [
+          "wa Barakātuh",
+          "Wa Barakātuh",
+          "wa barakātuh",
+          "wa Barakatuh",
+          "Wa Barakatuh"
+        ],
+        "tts_text": "وَبَرَكَاتُهُ",
+        "tts_language": "ar",
+        "category": "Begrüßung"
+      },
+      {
+        "id": "salam_tail",
+        "canonical": "Raḥmatullāhi wa Barakātuh",
+        "forms": [
+          "Raḥmatullāhi wa Barakātuh",
+          "raḥmatullāhi wa barakātuh",
+          "Rahmatullahi wa Barakatuh",
+          "rahmatullahi wa barakatuh"
+        ],
+        "tts_text": "رَحْمَتُ اللَّهِ وَبَرَكَاتُهُ",
+        "tts_language": "ar",
+        "category": "Begrüßung"
+      },
+      {
+        "id": "salawat_full",
+        "canonical": "ṣallā Allāhu ʿalayhi wa-sallam",
+        "forms": [
+          "ṣallā Allāhu ʿalayhi wa-sallam",
+          "ṣallā llāhu ʿalayhi wa-sallam",
+          "salla Allahu alayhi wa sallam",
+          "sallallahu alayhi wa sallam"
+        ],
+        "tts_text": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+        "tts_language": "ar",
+        "category": "Lobpreisung"
+      },
+      {
+        "id": "salawat_salla_allahu",
+        "canonical": "ṣallā Allāhu",
+        "forms": [
+          "ṣallā Allāhu",
+          "ṣallā llāhu",
+          "salla Allahu",
+          "sallallahu"
+        ],
+        "tts_text": "صَلَّى اللَّهُ",
+        "tts_language": "ar",
+        "category": "Lobpreisung"
+      },
+      {
+        "id": "salawat_salla",
+        "canonical": "ṣallā",
+        "forms": [
+          "ṣallā",
+          "salla"
+        ],
+        "tts_text": "صَلَّى",
+        "tts_language": "ar",
+        "category": "Lobpreisung"
+      },
+      {
+        "id": "allahu_nominative",
+        "canonical": "Allāhu",
+        "forms": [
+          "Allāhu",
+          "allāhu",
+          "Allahu",
+          "allahu"
+        ],
+        "tts_text": "اللَّهُ",
+        "tts_language": "ar",
+        "category": "Lobpreisung"
+      },
+      {
+        "id": "honorific_alayhi",
+        "canonical": "ʿalayhi",
+        "forms": [
+          "ʿalayhi",
+          "alayhi"
+        ],
+        "tts_text": "عَلَيْهِ",
+        "tts_language": "ar",
+        "category": "Lobpreisung"
+      },
+      {
+        "id": "salawat_wa_sallam",
+        "canonical": "wa-sallam",
+        "forms": [
+          "wa-sallam",
+          "wa sallam",
+          "wasallam"
+        ],
+        "tts_text": "وَسَلَّمَ",
+        "tts_language": "ar",
+        "category": "Lobpreisung"
+      },
+      {
+        "id": "salawat_alayhi_wa_sallam",
+        "canonical": "ʿalayhi wa-sallam",
+        "forms": [
+          "ʿalayhi wa-sallam",
+          "ʿalayhi wa sallam",
+          "alayhi wa sallam"
+        ],
+        "tts_text": "عَلَيْهِ وَسَلَّمَ",
+        "tts_language": "ar",
+        "category": "Lobpreisung"
+      },
+      {
+        "id": "tasbih_full",
+        "canonical": "subḥānahu wa-taʿālā",
+        "forms": [
+          "subḥānahu wa-taʿālā",
+          "Subḥānahu wa-Taʿālā",
+          "subhanahu wa ta'ala",
+          "subhanahu wa taala"
+        ],
+        "tts_text": "سُبْحَانَهُ وَتَعَالَى",
+        "tts_language": "ar",
+        "category": "Lobpreisung"
+      },
+      {
+        "id": "tasbih_subhanahu",
+        "canonical": "subḥānahu",
+        "forms": [
+          "subḥānahu",
+          "Subḥānahu",
+          "subhanahu"
+        ],
+        "tts_text": "سُبْحَانَهُ",
+        "tts_language": "ar",
+        "category": "Lobpreisung"
+      },
+      {
+        "id": "tasbih_wa_taala",
+        "canonical": "wa-taʿālā",
+        "forms": [
+          "wa-taʿālā",
+          "wa taʿālā",
+          "wa ta'ala",
+          "wa taala"
+        ],
+        "tts_text": "وَتَعَالَى",
+        "tts_language": "ar",
+        "category": "Lobpreisung"
+      },
+      {
+        "id": "tasbih_taala",
+        "canonical": "taʿālā",
+        "forms": [
+          "taʿālā",
+          "Taʿālā",
+          "ta'ala",
+          "taala"
+        ],
+        "tts_text": "تَعَالَى",
+        "tts_language": "ar",
+        "category": "Lobpreisung"
+      },
+      {
+        "id": "radiya_root",
+        "canonical": "raḍiya",
+        "forms": [
+          "raḍiya",
+          "Raḍiya",
+          "radiya"
+        ],
+        "tts_text": "رَضِيَ",
+        "tts_language": "ar",
+        "category": "Ṣaḥābah"
+      },
+      {
+        "id": "radiya_allahu",
+        "canonical": "raḍiya Allāhu",
+        "forms": [
+          "raḍiya Allāhu",
+          "raḍiya llāhu",
+          "radiya Allahu",
+          "radiyallahu"
+        ],
+        "tts_text": "رَضِيَ اللَّهُ",
+        "tts_language": "ar",
+        "category": "Ṣaḥābah"
+      },
+      {
+        "id": "radiya_anhu",
+        "canonical": "ʿanhu",
+        "forms": [
+          "ʿanhu",
+          "anhu"
+        ],
+        "tts_text": "عَنْهُ",
+        "tts_language": "ar",
+        "category": "Ṣaḥābah"
+      },
+      {
+        "id": "radiya_anha",
+        "canonical": "ʿanhā",
+        "forms": [
+          "ʿanhā",
+          "anha"
+        ],
+        "tts_text": "عَنْهَا",
+        "tts_language": "ar",
+        "category": "Ṣaḥābah"
+      },
+      {
+        "id": "radiya_anhuma",
+        "canonical": "ʿanhumā",
+        "forms": [
+          "ʿanhumā",
+          "anhuma"
+        ],
+        "tts_text": "عَنْهُمَا",
+        "tts_language": "ar",
+        "category": "Ṣaḥābah"
+      },
+      {
+        "id": "radiya_anhum",
+        "canonical": "ʿanhum",
+        "forms": [
+          "ʿanhum",
+          "anhum"
+        ],
+        "tts_text": "عَنْهُمْ",
+        "tts_language": "ar",
+        "category": "Ṣaḥābah"
+      },
+      {
+        "id": "prophet_salam_male",
+        "canonical": "ʿalayhi s-salām",
+        "forms": [
+          "ʿalayhi s-salām",
+          "alayhi salam",
+          "alayhis salam"
+        ],
+        "tts_text": "عَلَيْهِ السَّلَامُ",
+        "tts_language": "ar",
+        "category": "Propheten"
+      },
+      {
+        "id": "prophet_salam_female",
+        "canonical": "ʿalayhā s-salām",
+        "forms": [
+          "ʿalayhā s-salām",
+          "alayha salam"
+        ],
+        "tts_text": "عَلَيْهَا السَّلَامُ",
+        "tts_language": "ar",
+        "category": "Propheten"
+      },
+      {
+        "id": "prophet_salam_plural",
+        "canonical": "ʿalayhimu s-salām",
+        "forms": [
+          "ʿalayhimu s-salām",
+          "alayhimus salam",
+          "alayhim salam"
+        ],
+        "tts_text": "عَلَيْهِمُ السَّلَامُ",
+        "tts_language": "ar",
+        "category": "Propheten"
+      },
+      {
+        "id": "prophet_salam_tail",
+        "canonical": "s-salām",
+        "forms": [
+          "s-salām",
+          "as-salām",
+          "salam"
+        ],
+        "tts_text": "السَّلَامُ",
+        "tts_language": "ar",
+        "category": "Propheten"
+      },
+      {
+        "id": "core_allah",
+        "canonical": "Allāh",
+        "forms": [
+          "Allāh",
+          "Allah",
+          "allah"
+        ],
+        "tts_text": "اللَّه",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_quran",
+        "canonical": "Qurʾān",
+        "forms": [
+          "Qurʾān",
+          "Qur'an",
+          "Quran",
+          "Koran"
+        ],
+        "tts_text": "الْقُرْآن",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_tawhid",
+        "canonical": "Tawḥīd",
+        "forms": [
+          "Tawḥīd",
+          "Tawhid",
+          "Tauhid"
+        ],
+        "tts_text": "التَّوْحِيد",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_aqidah",
+        "canonical": "ʿAqīdah",
+        "forms": [
+          "ʿAqīdah",
+          "Aqīdah",
+          "Aqidah",
+          "Aqida"
+        ],
+        "tts_text": "الْعَقِيدَة",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_fiqh",
+        "canonical": "Fiqh",
+        "forms": [
+          "Fiqh",
+          "fiqh"
+        ],
+        "tts_text": "الْفِقْه",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_salah",
+        "canonical": "Ṣalāh",
+        "forms": [
+          "Ṣalāh",
+          "Salah",
+          "Salat"
+        ],
+        "tts_text": "الصَّلَاة",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_wudu",
+        "canonical": "Wuḍūʾ",
+        "forms": [
+          "Wuḍūʾ",
+          "Wudu",
+          "Wudhu"
+        ],
+        "tts_text": "الْوُضُوء",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_zakah",
+        "canonical": "Zakāh",
+        "forms": [
+          "Zakāh",
+          "Zakah",
+          "Zakat"
+        ],
+        "tts_text": "الزَّكَاة",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_sawm",
+        "canonical": "Ṣawm",
+        "forms": [
+          "Ṣawm",
+          "Sawm"
+        ],
+        "tts_text": "الصَّوْم",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_hajj",
+        "canonical": "Ḥajj",
+        "forms": [
+          "Ḥajj",
+          "Hajj"
+        ],
+        "tts_text": "الْحَجّ",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_umrah",
+        "canonical": "ʿUmrah",
+        "forms": [
+          "ʿUmrah",
+          "Umrah"
+        ],
+        "tts_text": "الْعُمْرَة",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_sunnah",
+        "canonical": "Sunnah",
+        "forms": [
+          "Sunnah",
+          "Sunna"
+        ],
+        "tts_text": "السُّنَّة",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_hadith",
+        "canonical": "Ḥadīṯ",
+        "forms": [
+          "Ḥadīṯ",
+          "Hadith",
+          "Hadis"
+        ],
+        "tts_text": "الْحَدِيث",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_sirah",
+        "canonical": "Sīrah",
+        "forms": [
+          "Sīrah",
+          "Sirah",
+          "Sira"
+        ],
+        "tts_text": "السِّيرَة",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_sahabah",
+        "canonical": "Ṣaḥābah",
+        "forms": [
+          "Ṣaḥābah",
+          "Sahabah",
+          "Sahaba"
+        ],
+        "tts_text": "الصَّحَابَة",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_makkah",
+        "canonical": "Makkah",
+        "forms": [
+          "Makkah",
+          "Mekka",
+          "Mecca"
+        ],
+        "tts_text": "مَكَّة",
+        "tts_language": "ar",
+        "category": "Orte"
+      },
+      {
+        "id": "core_madinah",
+        "canonical": "Madīnah",
+        "forms": [
+          "Madīnah",
+          "Madinah",
+          "Medina"
+        ],
+        "tts_text": "الْمَدِينَة",
+        "tts_language": "ar",
+        "category": "Orte"
+      },
+      {
+        "id": "core_jibril",
+        "canonical": "Ǧibrīl",
+        "forms": [
+          "Ǧibrīl",
+          "Jibrīl",
+          "Jibril",
+          "Gabriel"
+        ],
+        "tts_text": "جِبْرِيل",
+        "tts_language": "ar",
+        "category": "Namen"
+      },
+      {
+        "id": "core_kabah",
+        "canonical": "Kaʿbah",
+        "forms": [
+          "Kaʿbah",
+          "Ka'bah",
+          "Kaaba",
+          "Kaba"
+        ],
+        "tts_text": "الْكَعْبَة",
+        "tts_language": "ar",
+        "category": "Orte"
+      },
+      {
+        "id": "core_hira",
+        "canonical": "Ḥirāʾ",
+        "forms": [
+          "Ḥirāʾ",
+          "Hira"
+        ],
+        "tts_text": "حِرَاء",
+        "tts_language": "ar",
+        "category": "Orte"
+      },
+      {
+        "id": "core_badr",
+        "canonical": "Badr",
+        "forms": [
+          "Badr"
+        ],
+        "tts_text": "بَدْر",
+        "tts_language": "ar",
+        "category": "Orte"
+      },
+      {
+        "id": "core_uhud",
+        "canonical": "Uḥud",
+        "forms": [
+          "Uḥud",
+          "Uhud"
+        ],
+        "tts_text": "أُحُد",
+        "tts_language": "ar",
+        "category": "Orte"
+      },
+      {
+        "id": "core_hudaybiyah",
+        "canonical": "al-Ḥudaybiyah",
+        "forms": [
+          "al-Ḥudaybiyah",
+          "al-Hudaybiyah",
+          "Hudaybiyah"
+        ],
+        "tts_text": "الْحُدَيْبِيَة",
+        "tts_language": "ar",
+        "category": "Orte"
+      },
+      {
+        "id": "core_ramadan",
+        "canonical": "Ramaḍān",
+        "forms": [
+          "Ramaḍān",
+          "Ramadan"
+        ],
+        "tts_text": "رَمَضَان",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_iman",
+        "canonical": "Īmān",
+        "forms": [
+          "Īmān",
+          "Iman"
+        ],
+        "tts_text": "الْإِيمَان",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_ihsan",
+        "canonical": "Iḥsān",
+        "forms": [
+          "Iḥsān",
+          "Ihsan"
+        ],
+        "tts_text": "الْإِحْسَان",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_shirk",
+        "canonical": "Shirk",
+        "forms": [
+          "Shirk",
+          "Schirk"
+        ],
+        "tts_text": "الشِّرْك",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_kufr",
+        "canonical": "Kufr",
+        "forms": [
+          "Kufr"
+        ],
+        "tts_text": "الْكُفْر",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_taqwa",
+        "canonical": "Taqwā",
+        "forms": [
+          "Taqwā",
+          "Taqwa"
+        ],
+        "tts_text": "التَّقْوَى",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_dua",
+        "canonical": "Duʿāʾ",
+        "forms": [
+          "Duʿāʾ",
+          "Dua",
+          "Du'a"
+        ],
+        "tts_text": "الدُّعَاء",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_dhikr",
+        "canonical": "Ḏikr",
+        "forms": [
+          "Ḏikr",
+          "Dhikr",
+          "Zikr"
+        ],
+        "tts_text": "الذِّكْر",
+        "tts_language": "ar",
+        "category": "Kernbegriffe"
+      },
+      {
+        "id": "core_fatiha",
+        "canonical": "al-Fātiḥah",
+        "forms": [
+          "al-Fātiḥah",
+          "al-Fatiha",
+          "Fātiḥah",
+          "Fatiha"
+        ],
+        "tts_text": "الْفَاتِحَة",
+        "tts_language": "ar",
+        "category": "Qurʾān"
+      }
+    ],
+    "componentExpansionPolicy": {
+      "enabled": true,
+      "precedence": [
+        "user-confirmed",
+        "installed-curated",
+        "profile-fixed-component",
+        "max-master-token-component",
+        "verified-master-library"
+      ],
+      "exactPhraseBeforeComponent": true,
+      "exactComponentBeforeFuzzy": true,
+      "deriveTokenAlignedComponentsFromMaxMaster": true,
+      "deriveOnlyConsistentTokenAliases": true,
+      "distinctiveIslamicTokensOnly": true,
+      "blockAmbiguousComponentAliases": true,
+      "neverOverrideUserMaster": true
+    }
   },
   "prosody": {
     "automatic": true,
