@@ -196,8 +196,8 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"']+/g, "dar-library-redesign-v1168.js?v=1213-quran-native");
 
   // v1224 library redesign: force the current Test library presentation assets.
-  html = html.replace(/library-app\.css(?:\?v=[^"']*)?/g, "library-app.css?v=1224-classic");
-  html = html.replace(/library-app\.js(?:\?v=[^"']*)?/g, "library-app.js?v=1224-classic");
+  html = html.replace(/library-app\.css(?:\?v=[^"']*)?/g, "library-app.css?v=1227-hero-depth");
+  html = html.replace(/library-app\.js(?:\?v=[^"']*)?/g, "library-app.js?v=1227-library");
 
   // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
