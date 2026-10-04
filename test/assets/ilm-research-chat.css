@@ -1314,3 +1314,102 @@ body.is-ilm-chat-route .ilm-send-icon{
     margin-top:26px!important;
   }
 }
+
+
+/* DAR_ILM_HISTORICAL_EMBED_V1239
+   Historically grounded image is embedded as atmosphere, never as a loud card/poster. */
+body.is-ilm-chat-route{
+  --ilm-historical-art:url("/test/assets/ilm/ilm-historical-majlis-v1234.jpg");
+  --ilm-historical-opacity:.18;
+  --ilm-historical-filter:saturate(.72) sepia(.05) contrast(.96);
+}
+
+html[data-theme="royal"] body.is-ilm-chat-route,
+html[data-theme="dark"] body.is-ilm-chat-route,
+html[data-theme="dar-al-layl"] body.is-ilm-chat-route,
+html[data-theme="bordeaux"] body.is-ilm-chat-route,
+html[data-theme="aurora"] body.is-ilm-chat-route{
+  --ilm-historical-opacity:.14;
+  --ilm-historical-filter:saturate(.62) brightness(.72) contrast(.92);
+}
+
+html[data-theme="salbei"] body.is-ilm-chat-route,
+html[data-theme="light"][data-theme-variant="salbei"] body.is-ilm-chat-route{
+  --ilm-historical-opacity:.16;
+  --ilm-historical-filter:saturate(.62) sepia(.03) brightness(1.02) contrast(.92);
+}
+
+html[data-theme="light"] body.is-ilm-chat-route,
+html[data-theme="soft"] body.is-ilm-chat-route,
+html[data-theme="eisgold"] body.is-ilm-chat-route{
+  --ilm-historical-opacity:.17;
+  --ilm-historical-filter:saturate(.58) sepia(.04) brightness(1.03) contrast(.92);
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  top:-9%;
+  right:-10%;
+  bottom:-10%;
+  width:min(58%,520px);
+  background:
+    var(--ilm-historical-art) 72% center/cover no-repeat;
+  opacity:var(--ilm-historical-opacity);
+  filter:var(--ilm-historical-filter);
+  pointer-events:none;
+  transform:scale(1.04);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.16) 18%,rgba(0,0,0,.68) 44%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.16) 18%,rgba(0,0,0,.68) 44%,#000 100%);
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--ilm-page-bg) 96%,transparent) 0%,
+      color-mix(in srgb,var(--ilm-page-bg) 82%,transparent) 48%,
+      color-mix(in srgb,var(--ilm-page-bg) 36%,transparent) 78%,
+      transparent 100%),
+    linear-gradient(180deg,transparent 54%,color-mix(in srgb,var(--ilm-page-bg) 24%,transparent));
+}
+
+body.is-ilm-chat-route .ilm-welcome-intro > *{
+  position:relative;
+  z-index:2;
+}
+
+@media(max-width:599px){
+  body.is-ilm-chat-route .ilm-welcome-intro::before{
+    right:-18%;
+    width:64%;
+    opacity:calc(var(--ilm-historical-opacity) * .92);
+  }
+  body.is-ilm-chat-route .ilm-welcome-intro::after{
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb,var(--ilm-page-bg) 97%,transparent) 0%,
+        color-mix(in srgb,var(--ilm-page-bg) 88%,transparent) 55%,
+        color-mix(in srgb,var(--ilm-page-bg) 46%,transparent) 82%,
+        transparent 100%),
+      linear-gradient(180deg,transparent 52%,color-mix(in srgb,var(--ilm-page-bg) 24%,transparent));
+  }
+}
+
+@media(min-width:760px){
+  body.is-ilm-chat-route .ilm-welcome-intro::before{
+    right:0;
+    width:min(49%,600px);
+  }
+}
