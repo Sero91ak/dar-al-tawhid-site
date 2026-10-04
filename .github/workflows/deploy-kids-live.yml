@@ -1,0 +1,90 @@
+name: Deploy Kids App Live
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "kids/**"
+      - "_headers"
+      - "cloudflare/site-router.js"
+      - ".github/workflows/deploy-kids-live.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-al-tawhid-kids-live
+  cancel-in-progress: true
+
+jobs:
+  deploy-kids:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate Kids quiz and PWA release
+        run: |
+          node scripts/kids-prophet-release-guard.js
+          node --check cloudflare/site-router.js
+          node <<'NODE'
+          const fs=require("fs");
+          const quiz=JSON.parse(fs.readFileSync("kids/data/quiz-kids.json","utf8"));
+          const version=JSON.parse(fs.readFileSync("kids/version.json","utf8"));
+          const index=fs.readFileSync("kids/index.html","utf8");
+          const start=fs.readFileSync("kids/start.html","utf8");
+          const shell=fs.readFileSync("kids/shell.html","utf8");
+          const sw=fs.readFileSync("kids/sw.js","utf8");
+          const expected="kids-shell-v38-quiz650-never-empty1105";
+          if(version.buildId!==expected)throw new Error("Kids build mismatch: "+version.buildId);
+          if(index!==start||index!==shell)throw new Error("Kids entry shells are not identical");
+          if(!Array.isArray(quiz.items)||quiz.items.length<650)throw new Error("Kids quiz count below 650");
+          if(quiz.namespace!=="dar-kids-quiz"||quiz.adultQuizDependency!==false)throw new Error("Kids quiz namespace/dependency invalid");
+          if(!index.includes('4–6 Jahre · hören & tippen'))throw new Error("New Kids quiz age label missing");
+          if(index.includes("Keine geprüfte Wiederholung ist gerade fällig"))throw new Error("Legacy empty-quiz state returned");
+          if(!index.includes("var due=pool.filter")||!index.includes("selected.push(q)"))throw new Error("Never-empty quiz fallback missing");
+          if(!index.includes("/kids/sw.js?v=1105"))throw new Error("Kids SW v1105 registration missing");
+          if(!index.includes("kids.pwa.controller.reload."))throw new Error("Kids stale-shell self-heal missing");
+          if(!sw.includes('dar-al-tawhid-kids-v1105')||!sw.includes("client.navigate"))throw new Error("Kids SW activation recovery missing");
+          console.log("KIDS QUIZ LIVE GUARD OK",quiz.items.length,version.buildId);
+          NODE
+
+      - name: Deploy Kids visitor assets
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
+
+      - name: Verify Kids live
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXPECT="kids-shell-v38-quiz650-never-empty1105"
+          ok=0
+          for attempt in $(seq 1 12); do
+            cb="$(date +%s)-$attempt"
+            curl -fsS --max-time 25 "https://dar-al-tawhid.de/kids/version.json?cb=$cb" -o /tmp/kids-version.json || true
+            curl -fsS --max-time 25 "https://dar-al-tawhid.de/kids/data/quiz-kids.json?cb=$cb" -o /tmp/kids-quiz.json || true
+            curl -fsS --max-time 25 "https://dar-al-tawhid.de/kids/start?kv=$EXPECT&cb=$cb" -o /tmp/kids-start.html || true
+            if grep -F -q "$EXPECT" /tmp/kids-version.json 2>/dev/null &&
+               grep -F -q '4–6 Jahre · hören & tippen' /tmp/kids-start.html 2>/dev/null &&
+               ! grep -F -q 'Keine geprüfte Wiederholung ist gerade fällig' /tmp/kids-start.html 2>/dev/null &&
+               node -e 'const fs=require("fs");const q=JSON.parse(fs.readFileSync("/tmp/kids-quiz.json","utf8"));if(!Array.isArray(q.items)||q.items.length<650)process.exit(1);'; then
+              ok=1
+              echo "Kids live OK on attempt $attempt"
+              break
+            fi
+            sleep 8
+          done
+          test "$ok" = "1" || { echo "::error::Kids live verification failed"; exit 1; }
