@@ -1006,12 +1006,30 @@
   }
 
   async function fetchPdfBlob(pub) {
-    const offline = await getOfflineBlob(pub.id);
+    let offline = null;
+    try {
+      offline = await getOfflineBlob(pub.id);
+    } catch (e) {
+      /* IndexedDB darf das Online-Lesen niemals blockieren. */
+    }
     if (offline) return offline;
-    if (!pub.pdfUrl) throw new Error("missing pdf");
-    const res = await fetch(pub.pdfUrl, { cache: "no-cache" });
-    if (!res.ok) throw new Error("download failed");
-    return res.blob();
+    const url = publicationPdfUrl(pub);
+    if (!url) throw new Error("missing pdf");
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeout = controller ? setTimeout(() => controller.abort(), 15000) : null;
+    try {
+      const res = await fetch(url, {
+        cache: "no-store",
+        credentials: "same-origin",
+        signal: controller?.signal
+      });
+      if (!res.ok) throw new Error(`download failed: ${res.status}`);
+      const blob = await res.blob();
+      if (!blob || blob.size < 32) throw new Error("empty pdf");
+      return blob;
+    } finally {
+      if (timeout) clearTimeout(timeout);
+    }
   }
 
   function sharePublication(pub) {
@@ -1530,10 +1548,18 @@
     };
 
     try {
-      const pdfjs = await loadPdfJs();
+      const pdfjs = await Promise.race([
+        loadPdfJs(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("pdfjs timeout")), 8000))
+      ]);
       global.__darPdfReaderDebug = { step: "pdfjs-ready", session, currentSession: readerSessionId };
       if (session !== readerSessionId) return;
-      const offline = await getOfflineBlob(pub.id);
+      let offline = null;
+      try {
+        offline = await getOfflineBlob(pub.id);
+      } catch (e) {
+        /* Defekte/gesperrte Offline-DB darf den Reader nicht hängen lassen. */
+      }
       const blob = offline || await fetchPdfBlob(pub);
       global.__darPdfReaderDebug = { step: "blob-ready", session, currentSession: readerSessionId, size: Number(blob?.size || 0) };
       if (session !== readerSessionId) return;
@@ -1561,7 +1587,8 @@
       if (session !== readerSessionId) return;
       console.error("PDF-Reader-Initialisierung fehlgeschlagen", e);
       if (renderReaderIframeFallback(stage)) return;
-      stage.innerHTML = `<div class="lib-reader-msg">PDF konnte nicht geladen werden. Bitte versuche es erneut oder lade die Datei herunter.</div>`;
+      const directUrl = publicationPdfUrl(pub);
+      stage.innerHTML = `<div class="lib-reader-msg">Der integrierte Leser konnte nicht gestartet werden.${directUrl ? ` <a class="lib-btn" href="${esc(directUrl)}">PDF direkt öffnen</a>` : ""}</div>`;
     }
   }
 
