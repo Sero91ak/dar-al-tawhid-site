@@ -349,10 +349,9 @@ def load_max_master_pls(path:Path):
             alias=str(lexeme.findtext("p:alias",default="",namespaces=ns) or "").strip()
             if not grapheme or not alias:
                 continue
-            norm=normalize_lookup(grapheme)
-            if not norm or norm in seen:
+            if grapheme in seen:
                 continue
-            seen.add(norm)
+            seen.add(grapheme)
             out.append({
                 "category":"MAX MASTER PLS",
                 "canonical":grapheme,
@@ -365,7 +364,7 @@ def load_max_master_pls(path:Path):
                 "qa_tier":"seed",
                 "source":"DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls",
             })
-        print(f"[DĀR Voice] MAX-MASTER-PLS geladen: {len(out)} eindeutige Sprechformen.",flush=True)
+        print(f"[DĀR Voice] MAX-MASTER-PLS geladen: {len(out)} Schreib-/Sprechvarianten.",flush=True)
         return out
     except Exception as e:
         print("[DĀR Voice] MAX-MASTER-PLS konnte nicht geladen werden:",e,flush=True)
@@ -375,14 +374,14 @@ BASE_LIB=json.load(PRON.open(encoding="utf-8"))
 VOICE_PROFILE=json.load(PROFILE.open(encoding="utf-8"))
 _BASE_RULES=list(BASE_LIB.get("rules",[]))
 MAX_MASTER_PLS_RULES=load_max_master_pls(PLS_MASTER)
-_BASE_RULE_NORMALIZED={
-    normalize_lookup(r.get("string_to_replace",""))
+_BASE_RULE_EXACT={
+    str(r.get("string_to_replace","")).strip()
     for r in _BASE_RULES
-    if normalize_lookup(r.get("string_to_replace",""))
+    if str(r.get("string_to_replace","")).strip()
 }
 MAX_MASTER_PLS_FALLBACK_RULES=[
     r for r in MAX_MASTER_PLS_RULES
-    if normalize_lookup(r.get("string_to_replace","")) not in _BASE_RULE_NORMALIZED
+    if str(r.get("string_to_replace","")).strip() not in _BASE_RULE_EXACT
 ]
 BASE_RULES=_BASE_RULES+MAX_MASTER_PLS_FALLBACK_RULES
 
