@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v28-quiz650-library1096",
-  "label": "KIDS · V1.07.34",
-  "releasedAt": "2026-10-04T09:53:00Z",
-  "note": "Der vorhandene DĀR AL TAWḤĪD Kids Quizbestand von 650 Fragen ist jetzt vollständig in der Kinder-App sichtbar und direkt testbar. Die kurze altersgerechte Quizrunde bleibt erhalten; zusätzlich stehen alle Fragen nach Altersstufe mit Suche, Themenfilter, direktem Öffnen und Serhat-Owner-Voice bereit. Die weitere Fragengenerierung ist pausiert.",
+  "buildId": "kids-shell-v29-quiz650-topics1097",
+  "label": "KIDS · V1.07.35",
+  "releasedAt": "2026-10-04T09:55:00Z",
+  "note": "Der eingefrorene DĀR AL TAWḤĪD Kids Quizbestand mit 650 Fragen nutzt jetzt zusätzlich sieben realistische, lokal/offline gebündelte Themenbildwelten. Die Bildauswahl richtet sich automatisch nach Frage, Szene und Kategorie; 4–6 bleibt heller und einfacher, 7–8 spielerisch und 9–10 ruhiger und kompakter. Serhat-Owner-Voice, Vollkatalog, Quellen und die kurze Quizrunde bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1096",
+    "serviceWorkerCache": "v1097",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -267,7 +267,7 @@
     "kidsQuizManifestNetworkFirst": true,
     "kidsQuizReleaseGuard": true,
     "quizVisualSystem": {
-      "version": "age-adaptive-realistic-v13",
+      "version": "age-adaptive-realistic-v14",
       "independentQuizNamespace": true,
       "adultQuizDependency": false,
       "questionCount": 650,
@@ -290,7 +290,14 @@
       "localArtworkAssets": [
         "/kids/assets/quiz-scenes/quiz-4-6.svg?v=20261004-real1",
         "/kids/assets/quiz-scenes/quiz-7-8.svg?v=20261004-real1",
-        "/kids/assets/quiz-scenes/quiz-9-10.svg?v=20261004-real1"
+        "/kids/assets/quiz-scenes/quiz-9-10.svg?v=20261004-real1",
+        "/kids/assets/quiz-scenes/topic-creation.svg?v=20261004-topic1",
+        "/kids/assets/quiz-scenes/topic-quran.svg?v=20261004-topic1",
+        "/kids/assets/quiz-scenes/topic-home.svg?v=20261004-topic1",
+        "/kids/assets/quiz-scenes/topic-salah.svg?v=20261004-topic1",
+        "/kids/assets/quiz-scenes/topic-adab.svg?v=20261004-topic1",
+        "/kids/assets/quiz-scenes/topic-dua.svg?v=20261004-topic1",
+        "/kids/assets/quiz-scenes/topic-charity.svg?v=20261004-topic1"
       ],
       "ageAdaptiveRewardMotion": true,
       "reducedMotionSafe": true,
@@ -337,7 +344,21 @@
       "catalogAssetVersion": 1,
       "latestContentPack": "601-650",
       "questionGenerationPaused": true,
-      "questionGenerationCap": 650
+      "questionGenerationCap": 650,
+      "topicArtworkVersion": "topic-realistic-v1",
+      "topicArtworkFamilies": [
+        "creation",
+        "quran",
+        "home",
+        "salah",
+        "adab",
+        "dua",
+        "charity"
+      ],
+      "topicArtworkCount": 7,
+      "topicArtworkCategoryRouting": true,
+      "topicArtworkSceneRouting": true,
+      "ageToneAdaptive": true
     },
     "kidsQuizContentRevision": "001-650",
     "kidsQuizGenerationPaused": true,
