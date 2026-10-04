@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1106";
-const KIDS_BUILD_ID="kids-shell-v39-quiz650-voice-visual1106";
+const CACHE_NAME="dar-al-tawhid-kids-v1107";
+const KIDS_BUILD_ID="kids-shell-v40-sahaba-restored1107";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/section-heroes-v1095.css?v=1097-real3",
@@ -66,7 +66,7 @@ const PRECACHE=[
   "/kids/assets/sahaba-mubashshirun/said.jpg",
   "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
   "/kids/mubashshirun-stories.css?v=15",
-  "/kids/mubashshirun-stories.js?v=15-audioonly2",
+  "/kids/mubashshirun-stories.js?v=16-restored",
   "/kids/story-follow-reader.css?v=4",
   "/kids/story-follow-reader.js?v=5",
   "/kids/content-studio-feed.js?v=studio4",
