@@ -3047,7 +3047,7 @@ $("#learnArabic").addEventListener("input",()=>{learningPreviewRequestSerial++;c
 
 try{$("#freeVoiceText").value=localStorage.getItem("dar.voice.freeText.v2")||""}catch(_){}
 updateFreeVoiceCounter();
-let textAnalysisTimer=0;
+let textAnalysisTimer=0,pasteServerAnalysisTimer=0;
 function scheduleTextAnalysis(){
   resetAudioQA();
   const value=String($("#text")?.value||"");
@@ -3062,6 +3062,19 @@ function scheduleTextAnalysis(){
   },120);
 }
 $("#text").addEventListener("input",scheduleTextAnalysis);
+$("#text").addEventListener("paste",()=>{
+  clearTimeout(pasteServerAnalysisTimer);
+  pasteServerAnalysisTimer=setTimeout(async()=>{
+    const value=String($("#text")?.value||"").trim();
+    if(!engineOK||value.length<60||studioPage==="free")return;
+    const result=await analyzeProsody();
+    const unresolved=Array.isArray(result?.unresolvedIslamicTerms)?result.unresolvedIslamicTerms:[];
+    if(unresolved.length){
+      const names=unresolved.slice(0,4).map(x=>x.term).filter(Boolean).join(", ");
+      setMessage("Ausspracheprüfung bereit: "+names+(unresolved.length>4?" …":"")+". Anklicken, anhören und bestätigen.","warn");
+    }
+  },260);
+});
 $("#text").addEventListener("select",captureManualSelection);
 $("#text").addEventListener("mouseup",()=>setTimeout(captureManualSelection,0));
 $("#text").addEventListener("keyup",e=>{
