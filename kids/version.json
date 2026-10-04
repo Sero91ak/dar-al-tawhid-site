@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v39-quiz650-voice-visual1106",
-  "label": "KIDS · V1.07.45",
-  "releasedAt": "2026-10-04T14:00:00Z",
-  "note": "Kids-Quiz v1106: Alterskopf und Tabs synchronisiert, 650er-Katalog lädt race-sicher statt mit 0-Fragen-Zwischenstand, Quizrunde kompakter, neue altersadaptive lokale Quizbilder eingebaut; vollständiger Serhat-Owner-Voice-Build für alle 650 Fragen gestartet.",
+  "buildId": "kids-shell-v40-sahaba-restored1107",
+  "label": "KIDS · V1.07.46",
+  "releasedAt": "2026-10-04T14:18:00Z",
+  "note": "Hotfix v1107: Ṣaḥābah-/Mubaschschirūn-Bereich nach Alterslogik-Regression wiederhergestellt; fehlende Altersfunktion repariert, Styles wieder eingebunden und Cache-Bust ausgeliefert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1106",
+    "serviceWorkerCache": "v1107",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
