@@ -110,7 +110,11 @@ function markDone(id){if(!id)return;try{localStorage.setItem(DONE_PREFIX+id,"1")
 function renderModeButtons(){
   const audioOnly=isAudioOnlyAge();
   const detailModes=document.querySelector(".ps-detail-modes");
+  const libraryModes=document.querySelector("#psModes");
+  const toolbar=libraryModes?.closest(".ps-toolbar");
   if(detailModes)detailModes.hidden=audioOnly;
+  if(libraryModes)libraryModes.hidden=audioOnly;
+  if(toolbar)toolbar.hidden=audioOnly;
   const current=audioOnly?"listen":mode();
   document.querySelectorAll("[data-ps-mode]").forEach(b=>b.classList.toggle("active",b.dataset.psMode===current));
 }
@@ -275,7 +279,7 @@ function ensureUi(){
           '</div>'+
         '</div>'+
         '<div class="ps-body">'+
-          '<div class="ps-player" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören &amp; mitlesen</button></div><div class="ps-progress" id="psProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="psProgress"></span></div><div class="ps-player-time"><strong id="psTimeCurrent">0:00</strong><span id="psTimeTotal">0:00</span></div><button class="ps-follow-open" id="psFollowOpen" type="button">Mitlesen öffnen</button><div class="ps-player-note" id="psVoiceNote"></div></div>'+
+          '<div class="ps-player" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören</button></div><div class="ps-progress" id="psProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="psProgress"></span></div><div class="ps-player-time"><strong id="psTimeCurrent">0:00</strong><span id="psTimeTotal">0:00</span></div><button class="ps-follow-open" id="psFollowOpen" type="button">Mitlesen</button><div class="ps-player-note" id="psVoiceNote"></div></div>'+
           '<article class="ps-read" id="psRead"></article>'+
           '<div class="ps-sources"><strong>QUELLEN</strong><div id="psSources"></div></div>'+
           '<div class="ps-question" id="psQuestion"></div>'+
@@ -286,7 +290,10 @@ function ensureUi(){
   modal.querySelectorAll("[data-ps-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.psMode)));
   $("#psClose").addEventListener("click",closeStory);
   $("#psPlay").addEventListener("click",toggleAudio);
-  $("#psFollowOpen")?.addEventListener("click",()=>followReader?.open());
+  $("#psFollowOpen")?.addEventListener("click",()=>{
+    if(isAudioOnlyAge()&&typeof followReader?.openReadAlong==="function")followReader.openReadAlong();
+    else followReader?.open();
+  });
   $("#psProgressTrack")?.addEventListener("click",seekFromProgress);
   $("#psProgressTrack")?.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();seekBy(e.key==="ArrowLeft"?-15:15)}});
   $("#psScroll").addEventListener("scroll",()=>{$("#psModal")?.classList.toggle("scrolled",$("#psScroll").scrollTop>72)},{passive:true});
@@ -330,7 +337,11 @@ function applyMode(){
   if(isAudioOnlyAge()){
     read.hidden=true;
     player.hidden=false;
-    if(follow){follow.hidden=false;follow.textContent="Hörbuch öffnen";follow.setAttribute("aria-label","Hörbuch-Player öffnen")}
+    if(follow){
+      follow.hidden=false;
+      follow.textContent="Mitlesen";
+      follow.setAttribute("aria-label","Mitlesen für Erwachsene öffnen");
+    }
     return;
   }
   const m=mode();
@@ -463,7 +474,7 @@ function updatePlayButton(){
   b.disabled=busy||!meta?.url;
   if(playing)b.textContent="Pause";
   else if(audio.currentTime>0&&!audio.ended)b.textContent="Weiterhören";
-  else b.textContent=isAudioOnlyAge()?"Hörbuch starten":"Hören & mitlesen";
+  else b.textContent=isAudioOnlyAge()?"Hören":"Hören & mitlesen";
 }
 async function toggleAudio(){
   if(!active||busy)return;
