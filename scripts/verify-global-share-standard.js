@@ -37,6 +37,10 @@ const testFeed = file(testRel);
 for (const [rel, src] of [[liveRel, liveFeed], [testRel, testFeed]]) {
   need(rel, src, "/api/share-image/background");
   need(rel, src, "feedShareFreshImage");
+  need(rel, src, "shareFreshPostFeedItem");
+  forbid(rel, src, "shareOriginalFeedImage");
+  forbid(rel, src, "data-original-image");
+  forbid(rel, src, "data-feed-preview-image");
   forbid(rel, src, "feedShareBrandFooter");
 }
 if (liveFeed && testFeed && liveFeed !== testFeed) failures.push("Live/Test Premium-Feed-Renderer sind nicht identisch");
