@@ -1,4 +1,4 @@
-const CACHE="dar-voice-studio-v49";
+const CACHE="dar-voice-studio-v51";
 const SHELL=[
   "/voice-studio/",
   "/voice-studio/index.html",
@@ -35,12 +35,19 @@ self.addEventListener("fetch",event=>{
   const url=new URL(req.url);
   if(url.origin!==location.origin) return;
 
+  // Private Cloud-Voice API is never cached.
+  if(url.pathname==="/voice-studio/api"||url.pathname.startsWith("/voice-studio/api/")){
+    event.respondWith(fetch(req,{cache:"no-store"}));
+    return;
+  }
+
   const fresh =
     url.pathname==="/voice-studio/" ||
     url.pathname==="/voice-studio/index.html" ||
     url.pathname==="/voice-studio/content-studio.js" ||
     url.pathname==="/voice-studio/mubashshirun-pack.js" ||
     url.pathname==="/voice-studio/alphabet-audio-studio.js" ||
+    url.pathname==="/voice-studio/manifest.webmanifest" ||
     url.pathname==="/voice-studio/version.json" ||
     url.pathname==="/voice-studio/voice-studio-icon.png" ||
     url.pathname==="/voice-studio/service-worker.js" ||
