@@ -216,7 +216,12 @@ async function finalizeDarTestHomeV1193(asset) {
   // v1227 library hero depth: force the current Test library presentation assets.
   html = html.replace(/library-app\.css(?:\?v=[^"']*)?/g, "library-app.css?v=1227-hero-depth");
   html = html.replace(/library-app\.js(?:\?v=[^"']*)?/g, "library-app.js?v=1227-library");
-      // DAR_QURAN_READER_V1251
+        // DAR_QURAN_PLAYER_V1252
+  if (!/quran-player-v1252\.css/.test(html)) {
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/quran-player-v1252.css?v=1252"><\/head>');
+  }
+
+// DAR_QURAN_READER_V1251
   if (!/quran-reader-v1251\.css/.test(html)) {
     html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/quran-reader-v1251.css?v=1251"><\/head>');
   }
