@@ -26589,14 +26589,14 @@ function bindImageEditor(){if(currentRoute.view==="image-editor-test")return bin
 
 const IMAGE_EDITOR_PREMIUM_BLOCKS=[{id:"body",label:"Haupttext"},{id:"source",label:"Quelle"}];
 const IMAGE_EDITOR_PREMIUM_TABS=[{id:"font",label:"Schrift"},{id:"color",label:"Farbe"},{id:"size",label:"Größe"},{id:"export",label:"Teilen"}];
-const IMAGE_EDITOR_BLOCK_DEFAULTS={body:{x:120,y:285,w:840,h:650},fazit:{x:120,y:815,w:840,h:100},source:{x:96,y:1042,w:888,h:78}};
+const IMAGE_EDITOR_BLOCK_DEFAULTS={body:{x:110,y:282,w:860,h:700},fazit:{x:110,y:850,w:860,h:90},source:{x:92,y:1047,w:896,h:56}};
 const IMAGE_EDITOR_OVERLAP_TOL=8;
 const IMAGE_EDITOR_CANVAS_BOUNDS={x:48,y:48,w:984,h:1254};
-const IMAGE_EDITOR_LOCKED_ZONES=[{id:"branding",x:0,y:0,w:1080,h:270},{id:"footer",x:0,y:980,w:1080,h:370}];
+const IMAGE_EDITOR_LOCKED_ZONES=[{id:"branding",x:0,y:0,w:1080,h:265},{id:"footer",x:0,y:995,w:1080,h:355}];
 function imageEditorRectOverlap(a,b,tol=IMAGE_EDITOR_OVERLAP_TOL){if(!a||!b||a.w<=0||a.h<=0||b.w<=0||b.h<=0)return false;const ox=Math.min(a.x+a.w,b.x+b.w)-Math.max(a.x,b.x),oy=Math.min(a.y+a.h,b.y+b.h)-Math.max(a.y,b.y);return ox>tol&&oy>tol}
 function imageEditorRectInside(inner,outer,margin=0){return inner.x>=outer.x-margin&&inner.y>=outer.y-margin&&inner.x+inner.w<=outer.x+outer.w+margin&&inner.y+inner.h<=outer.y+outer.h+margin}
 function imageEditorBlockBounds(block){const g=imageEditorBlockGuideRect(block);if(g&&g.w>4&&g.h>4)return{...g};return imageEditorBlockBox(block)}
-function imageEditorEnforceAutoLayout(opts={}){imageEditorEnsurePremiumState();imageEditorState.interactionMode="scroll";resetImageEditorOffsets();const canvas=$("imageEditorCanvas");const ctx=canvas?.getContext("2d");if(!ctx)return false;const targetBody=Math.max(14,Math.min(88,Number(opts.maxBodySize??imageEditorState.fontSize)||58));const font=imageEditorFontCss(imageEditorState.font);const bodyText=imageEditorBlockText("body");const sourceText=imageEditorState.sourceText||"";const bodyInner=imageEditorInnerBox(imageEditorBlockBox("body"));let bodySize=targetBody;for(;bodySize>=14;bodySize--){const fit=fitImageEditorText(ctx,bodyText,bodyInner,font,bodySize,imageEditorState.lineHeight,14);if(fit.ok)break}imageEditorState.fontSize=bodySize;imageEditorState.nameSize=Math.max(16,Math.min(60,Math.round(bodySize*0.62)));const sourceInner=imageEditorInnerBox(imageEditorBlockBox("source"));let sourceSize=Math.max(8,Math.min(30,Math.round(bodySize*0.38)));for(;sourceSize>=8;sourceSize--){const fit=fitImageEditorText(ctx,sourceText,sourceInner,imageEditorFontCss("source"),sourceSize,1.12,8);if(fit.ok)break}imageEditorState.sourceSize=sourceSize;imageEditorState.blockTextTooLong={};return true}
+function imageEditorEnforceAutoLayout(opts={}){imageEditorEnsurePremiumState();imageEditorState.interactionMode="scroll";resetImageEditorOffsets();const canvas=$("imageEditorCanvas");const ctx=canvas?.getContext("2d");if(!ctx)return false;const targetBody=Math.max(14,Math.min(88,Number(opts.maxBodySize??imageEditorState.fontSize)||58));const font=imageEditorFontCss(imageEditorState.font);const bodyText=imageEditorBlockText("body");const sourceText=imageEditorState.sourceText||"";const bodyInner=imageEditorInnerBox(imageEditorBlockBox("body"));let bodySize=targetBody;for(;bodySize>=14;bodySize--){const fit=fitImageEditorText(ctx,bodyText,bodyInner,font,bodySize,imageEditorState.lineHeight,14);if(fit.ok)break}imageEditorState.fontSize=bodySize;imageEditorState.nameSize=Math.max(16,Math.min(60,Math.round(bodySize*0.62)));const sourceInner=imageEditorInnerBox(imageEditorBlockBox("source"));let sourceSize=Math.max(13,Math.min(24,Math.round(bodySize*0.34)));for(;sourceSize>=13;sourceSize--){const fit=fitImageEditorText(ctx,sourceText,sourceInner,imageEditorFontCss("source"),sourceSize,1.12,8);if(fit.ok)break}imageEditorState.sourceSize=sourceSize;imageEditorState.blockTextTooLong={};return true}
 function imageEditorValidateLayout(){imageEditorEnsurePremiumState();if(imageEditorState.templateLoadFailed||!imageEditorState.templateReady)return{ok:false,errors:[],blockErrors:{},message:"Vorlage wird geladen…"};imageEditorEnforceAutoLayout({maxBodySize:imageEditorState.fontSize});const ok=!!String(imageEditorBlockText("body")||"").trim();const result={ok,errors:[],blockErrors:{},message:ok?"Automatisch perfekt angepasst.":""};imageEditorState.layoutValidation=result;return result}
 function applyImageEditorLayoutFeedback(v){if(!v)v=imageEditorValidateLayout();if(imageEditorState.templateLoadFailed)setImageEditorWarning("Vorlage konnte nicht geladen werden. Bitte erneut versuchen.",true);else if(v.ok)setImageEditorWarning("Automatisch angepasst · bereit zum Teilen.",false,"success");else setImageEditorWarning("",false);updateImageEditorGuides();updateImageEditorExportButtons()}
 function imageEditorExportBlockedMessage(){return imageEditorState.templateLoadFailed?"Vorlage wird geladen…":"Bitte zuerst einen Beitrag mit Text öffnen."}
@@ -26631,42 +26631,135 @@ function renderImageEditorTest(){return `<div class="ie-power-test-badge">🧪 T
 function imageEditorRoundRect(ctx,x,y,w,h,r){const rr=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+rr,y);ctx.arcTo(x+w,y,x+w,y+h,rr);ctx.arcTo(x+w,y+h,x,y+h,rr);ctx.arcTo(x,y+h,x,y,rr);ctx.arcTo(x,y,x+w,y,rr);ctx.closePath()}
 let imageEditorAppStoreIcon=null;
 async function imageEditorLoadAppStoreIcon(){if(imageEditorAppStoreIcon)return imageEditorAppStoreIcon;try{imageEditorAppStoreIcon=await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>resolve(img);img.onerror=reject;img.src=new URL("assets/app-store-icon-fixed.svg?v=share-v2",location.origin+"/").href});return imageEditorAppStoreIcon}catch(e){return null}}
+/* GLOBAL_SHARE_VISUAL_V1226 */
 function imageEditorDrawAppStoreBadge(ctx,x,y,w,h){
   ctx.save();
-  imageEditorRoundRect(ctx,x,y,w,h,14);
-  ctx.fillStyle="rgba(2,5,7,.92)";ctx.fill();
-  ctx.strokeStyle="rgba(255,255,255,.44)";ctx.lineWidth=1.35;ctx.stroke();
-  const ix=x+27,iy=y+h/2+1;
-  ctx.textAlign="center";ctx.textBaseline="middle";
+  imageEditorRoundRect(ctx,x,y,w,h,16);
+  ctx.fillStyle="rgba(4,8,10,.88)";
+  ctx.fill();
+  ctx.strokeStyle="rgba(255,255,255,.22)";
+  ctx.lineWidth=1.25;
+  ctx.stroke();
+
+  const iconSize=Math.min(h-12,48);
+  const ix=x+8,iy=y+(h-iconSize)/2;
+  imageEditorRoundRect(ctx,ix,iy,iconSize,iconSize,11);
+  const blue=ctx.createLinearGradient(ix,iy,ix,iy+iconSize);
+  blue.addColorStop(0,"#38a8ff");
+  blue.addColorStop(1,"#0a78e8");
+  ctx.fillStyle=blue;
+  ctx.fill();
+
+  const cx=ix+iconSize/2,cy=iy+iconSize/2;
+  ctx.strokeStyle="#fff";
+  ctx.lineWidth=Math.max(3,iconSize*.075);
+  ctx.lineCap="round";
+  ctx.beginPath();
+  ctx.moveTo(cx-iconSize*.19,cy+iconSize*.22);
+  ctx.lineTo(cx,cy-iconSize*.20);
+  ctx.lineTo(cx+iconSize*.19,cy+iconSize*.22);
+  ctx.moveTo(cx-iconSize*.27,cy+iconSize*.08);
+  ctx.lineTo(cx+iconSize*.27,cy+iconSize*.08);
+  ctx.stroke();
+
+  ctx.textAlign="left";
+  ctx.textBaseline="alphabetic";
+  ctx.fillStyle="rgba(255,255,255,.78)";
+  ctx.font="600 10px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+  ctx.fillText("Download on the",ix+iconSize+10,y+20);
   ctx.fillStyle="#fff";
-  ctx.font="34px -apple-system,BlinkMacSystemFont,'Segoe UI Symbol',Arial,sans-serif";
-  ctx.fillText("",ix,iy-1);
-  ctx.textAlign="left";ctx.textBaseline="alphabetic";
-  ctx.fillStyle="rgba(255,255,255,.84)";
-  ctx.font="500 10px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
-  ctx.fillText("Laden im",x+51,y+18);
-  ctx.fillStyle="#fff";
-  ctx.font="700 17px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
-  ctx.fillText("App Store",x+51,y+39);
+  ctx.font="700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+  ctx.fillText("App Store",ix+iconSize+10,y+42);
   ctx.restore();
 }
-/* GLOBAL_SHARE_POLISH_V1234 */
 function imageEditorDrawPremiumChrome(ctx){
   const W=IMAGE_EDITOR_CANVAS_W,H=IMAGE_EDITOR_CANVAS_H;
-  const top=ctx.createLinearGradient(0,0,0,310);top.addColorStop(0,"rgba(3,13,14,.78)");top.addColorStop(1,"rgba(3,13,14,0)");ctx.fillStyle=top;ctx.fillRect(0,0,W,320);
-  const mid=ctx.createLinearGradient(0,250,0,1020);mid.addColorStop(0,"rgba(4,15,16,.18)");mid.addColorStop(.35,"rgba(4,15,16,.36)");mid.addColorStop(1,"rgba(4,15,16,.30)");ctx.fillStyle=mid;ctx.fillRect(38,245,W-76,760);
-  const foot=ctx.createLinearGradient(0,1080,0,H);foot.addColorStop(0,"rgba(3,12,13,.12)");foot.addColorStop(.38,"rgba(3,12,13,.72)");foot.addColorStop(1,"rgba(3,12,13,.92)");ctx.fillStyle=foot;ctx.fillRect(0,1060,W,H-1060);
-  ctx.textAlign="left";ctx.textBaseline="alphabetic";ctx.fillStyle="#f1d79a";ctx.font="800 24px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";ctx.fillText("DĀR AL TAWḤĪD",78,78);
-  ctx.strokeStyle="rgba(239,216,159,.62)";ctx.lineWidth=1.6;ctx.beginPath();ctx.moveTo(78,108);ctx.lineTo(W-78,108);ctx.stroke();
-  ctx.textAlign="right";ctx.font="700 16px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";ctx.fillStyle="rgba(245,226,181,.82)";ctx.fillText("01 / 01",W-78,77);
-  const title=String(imageEditorState.titleText||"").trim();if(title){const box={x:78,y:135,w:W-156,h:115};let size=52,lines=[];for(;size>=30;size--){ctx.font="700 "+size+"px Georgia,'Times New Roman',serif";lines=wrapCanvasText(ctx,title,box.w);if(lines.length<=2)break}ctx.textAlign="left";ctx.fillStyle="#fff9ec";ctx.shadowColor="rgba(0,0,0,.48)";ctx.shadowBlur=10;let y=box.y+size;lines.slice(0,2).forEach(line=>{ctx.fillText(line,box.x,y);y+=size*1.08});ctx.shadowBlur=0}
-  imageEditorRoundRect(ctx,66,1002,W-132,154,22);ctx.fillStyle="rgba(4,15,16,.64)";ctx.fill();ctx.strokeStyle="rgba(239,216,159,.28)";ctx.lineWidth=1.2;ctx.stroke();
-  ctx.textAlign="left";ctx.fillStyle="#f1d79a";ctx.font="700 18px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";ctx.fillText("QUELLE",88,1035);
-  ctx.fillStyle="rgba(255,249,236,.76)";ctx.font="600 15px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah",88,1132);
-  ctx.fillStyle="#f1d79a";ctx.font="700 19px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";ctx.fillText("dar-al-tawhid.de",78,1269);
-  ctx.fillStyle="rgba(255,249,236,.72)";ctx.font="500 14px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";ctx.fillText("by Serhat Abu Malik",78,1292);
-  imageEditorDrawAppStoreBadge(ctx,W-78-255,1237,255,58);
-  ctx.textAlign="left";ctx.shadowBlur=0;
+
+  ctx.save();
+  ctx.globalCompositeOperation="screen";
+  const lift=ctx.createLinearGradient(0,0,W,H);
+  lift.addColorStop(0,"rgba(255,246,220,.10)");
+  lift.addColorStop(.55,"rgba(255,244,214,.045)");
+  lift.addColorStop(1,"rgba(255,232,190,.025)");
+  ctx.fillStyle=lift;
+  ctx.fillRect(0,0,W,H);
+  ctx.restore();
+
+  const top=ctx.createLinearGradient(0,0,0,300);
+  top.addColorStop(0,"rgba(3,13,14,.58)");
+  top.addColorStop(.72,"rgba(3,13,14,.18)");
+  top.addColorStop(1,"rgba(3,13,14,0)");
+  ctx.fillStyle=top;
+  ctx.fillRect(0,0,W,310);
+
+  const mid=ctx.createLinearGradient(0,245,0,1000);
+  mid.addColorStop(0,"rgba(4,15,16,.08)");
+  mid.addColorStop(.38,"rgba(4,15,16,.18)");
+  mid.addColorStop(1,"rgba(4,15,16,.14)");
+  ctx.fillStyle=mid;
+  ctx.fillRect(40,245,W-80,750);
+
+  const foot=ctx.createLinearGradient(0,1110,0,H);
+  foot.addColorStop(0,"rgba(3,12,13,.04)");
+  foot.addColorStop(.35,"rgba(3,12,13,.54)");
+  foot.addColorStop(1,"rgba(3,12,13,.83)");
+  ctx.fillStyle=foot;
+  ctx.fillRect(0,1090,W,H-1090);
+
+  ctx.textAlign="left";
+  ctx.textBaseline="alphabetic";
+  ctx.fillStyle="#f4d99a";
+  ctx.font="800 25px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+  ctx.fillText("DĀR AL TAWḤĪD",78,78);
+
+  ctx.strokeStyle="rgba(239,216,159,.64)";
+  ctx.lineWidth=1.6;
+  ctx.beginPath();
+  ctx.moveTo(78,108);
+  ctx.lineTo(W-78,108);
+  ctx.stroke();
+
+  const title=String(imageEditorState.titleText||"").trim();
+  if(title){
+    const box={x:78,y:133,w:W-156,h:118};
+    let size=54,lines=[];
+    for(;size>=32;size--){
+      ctx.font="700 "+size+"px Georgia,'Times New Roman',serif";
+      lines=wrapCanvasText(ctx,title,box.w);
+      if(lines.length<=2)break;
+    }
+    ctx.textAlign="left";
+    ctx.fillStyle="#fff9ec";
+    ctx.shadowColor="rgba(0,0,0,.52)";
+    ctx.shadowBlur=10;
+    let y=box.y+size;
+    lines.slice(0,2).forEach(line=>{ctx.fillText(line,box.x,y);y+=size*1.08});
+    ctx.shadowBlur=0;
+  }
+
+  imageEditorRoundRect(ctx,66,1012,W-132,122,20);
+  ctx.fillStyle="rgba(4,15,16,.68)";
+  ctx.fill();
+  ctx.strokeStyle="rgba(239,216,159,.34)";
+  ctx.lineWidth=1.2;
+  ctx.stroke();
+
+  ctx.textAlign="left";
+  ctx.fillStyle="#f3d99b";
+  ctx.font="800 16px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+  ctx.fillText("QUELLE",88,1040);
+
+  ctx.fillStyle="rgba(255,249,236,.82)";
+  ctx.font="600 14px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+  ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah",88,1113);
+
+  ctx.fillStyle="#f3d99b";
+  ctx.font="700 20px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif";
+  ctx.fillText("dar-al-tawhid.de",78,1288);
+
+  imageEditorDrawAppStoreBadge(ctx,W-78-270,1237,270,62);
+  ctx.textAlign="left";
+  ctx.shadowBlur=0;
 }
 function drawImageEditorPremiumBlock(ctx,block,text,box){if(!String(text||"").trim())return{ok:true,metrics:null,guideRect:null,clamped:{x:0,y:0}};const font=imageEditorFontCss(block==="source"?"source":imageEditorState.font);const size=imageEditorBlockSize(block);const align=block==="source"?"left":(imageEditorState.align||"left");const min=block==="source"?12:18;const chosen=imageEditorState.color||"#fff7df";const dark=/^(#2d251c|#111111|#173226|#102b44|#4b1616|#344028|#153d3c|#5a342d|#132d4f|#3b2515)$/i.test(chosen);const color=block==="source"?"#fff5df":(dark?"#fff9ec":chosen);return drawImageEditorSimpleText(ctx,text,box,{font,color,size,lineHeight:block==="source"?1.22:Math.max(1.30,imageEditorState.lineHeight||1.30),align,offsetX:0,offsetY:0,minSize:min})}
 async function renderImageEditorCanvas(){const canvas=$("imageEditorCanvas");if(!canvas)return;imageEditorEnsurePremiumState();await imageEditorLoadAppStoreIcon();const t=imageTemplateById(imageEditorState.templateId);const ctx=canvas.getContext("2d");let templateDrawn=false;try{if(document.fonts?.ready)await document.fonts.ready;const img=await loadImageEditorTemplate(t.src);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.lastTemplateImg=img;imageEditorState.templateReady=true;imageEditorState.templateLoadFailed=false;templateDrawn=true}catch(e){if(imageEditorState.lastTemplateImg){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(imageEditorState.lastTemplateImg,0,0,IMAGE_EDITOR_CANVAS_W,IMAGE_EDITOR_CANVAS_H);imageEditorState.templateReady=true}else{ctx.clearRect(0,0,canvas.width,canvas.height);imageEditorState.templateReady=false}imageEditorState.templateLoadFailed=true}if(templateDrawn||imageEditorState.lastTemplateImg){imageEditorDrawPremiumChrome(ctx);imageEditorEnforceAutoLayout({maxBodySize:imageEditorState.fontSize});imageEditorState.blockMetrics={};imageEditorState.blockGuideRects={};imageEditorState.blockTextTooLong={};IMAGE_EDITOR_PREMIUM_BLOCKS.forEach(b=>{const text=imageEditorBlockText(b.id);const result=drawImageEditorPremiumBlock(ctx,b.id,text,imageEditorBlockBox(b.id));imageEditorState.blockMetrics[b.id]=result.metrics||{blockW:result.blockW||0,blockH:result.blockH||0};imageEditorState.blockGuideRects[b.id]=result.guideRect||null;if(b.id==="body"){imageEditorState.mainMetrics=result.metrics||null;imageEditorState.mainGuideRect=result.guideRect||null}else if(b.id==="source"){imageEditorState.sourceMetrics=result.metrics||null;imageEditorState.sourceGuideRect=result.guideRect||null}});applyImageEditorLayoutFeedback()}else{setImageEditorWarning("Vorlage konnte nicht geladen werden. Bitte erneut versuchen.",true);updateImageEditorGuides();updateImageEditorExportButtons()}}
