@@ -237,7 +237,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
     // DAR_ILM_SCHOLARS_V1240
   if (!/ilm-scholars-v1240\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholars-v1240.css?v=1240"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-scholars-v1240.css?v=1250"><\/head>');
   }
 
     // DAR_ILM_TOPICS_V1242
