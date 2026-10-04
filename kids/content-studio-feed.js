@@ -287,6 +287,8 @@ function openItem(id) {
           text:String(item.text||""),
           artwork:cover,
           deepLink:"",
+          timings:item?.audio?.timings||item?.audio?.paragraphTimings||item?.audio?.cues||[],
+          syncPoints:item?.audio?.syncPoints||item?.audio?.syncAnchors||[],
           audioOnly:isAudioOnlyAge()
         }),
         toggleAudio:toggle,
