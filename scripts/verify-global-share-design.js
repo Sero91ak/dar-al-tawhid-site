@@ -74,7 +74,7 @@ function walk(dir, out = []) {
   return out;
 }
 
-const roots = ["assets", "test/assets", "kids"];
+const roots = ["assets", "test/assets", "kids", "apple-tv", "voice-studio", "desktop-preview", "links", "admin", "ios"];
 const known = new Set([
   "assets/dar-global-share-v1225.js",
   "assets/premium-feed-app.js",
