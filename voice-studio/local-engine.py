@@ -7268,7 +7268,14 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
                 message=f"Freie Stimme · {total} kurze Sprachabschnitte vorbereitet"
             )
         render_id=uuid.uuid4().hex[:12]
-        cleanup_progressive_previews()
+        if interactive_fast:
+            threading.Thread(
+                target=cleanup_progressive_previews,
+                daemon=True,
+                name="dar-live-preview-cleanup"
+            ).start()
+        else:
+            cleanup_progressive_previews()
         progressive_preview_path=None
         progressive_preview_seconds=0.0
         progressive_preview_generation=0
@@ -7672,7 +7679,14 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
 
         set_status(progress=95,message="Audio-Mastering läuft …")
         out=postprocess(raw,fast=interactive_fast)
-        cleanup_render_cache()
+        if interactive_fast:
+            threading.Thread(
+                target=cleanup_render_cache,
+                daemon=True,
+                name="dar-render-cache-cleanup"
+            ).start()
+        else:
+            cleanup_render_cache()
         set_status(
             render_state="done",
             progress=100,
