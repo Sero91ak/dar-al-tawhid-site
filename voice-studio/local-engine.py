@@ -8500,8 +8500,9 @@ class H(BaseHTTPRequestHandler):
                 "theme_color":"#f7f7f5",
                 "orientation":"any",
                 "icons":[
-                    {"src":"/mobile/voice-studio-icon.png","sizes":"256x256","type":"image/png","purpose":"any"},
-                    {"src":"/mobile/voice-studio-icon.png","sizes":"256x256","type":"image/png","purpose":"maskable"}
+                    {"src":"/mobile/voice-studio-icon.png?v=2978","sizes":"180x180","type":"image/png","purpose":"any"},
+                    {"src":"/mobile/voice-studio-icon.png?v=2978","sizes":"256x256","type":"image/png","purpose":"any"},
+                    {"src":"/mobile/voice-studio-icon.png?v=2978","sizes":"256x256","type":"image/png","purpose":"maskable"}
                 ]
             })
         elif p=="/mobile/history":
