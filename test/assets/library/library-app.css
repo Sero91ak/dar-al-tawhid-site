@@ -1929,3 +1929,40 @@ html[data-theme="dark"]{
     font-size:.93rem;
   }
 }
+
+
+/* DAR_LIBRARY_BOOK_OBJECT_V1224 */
+.lib-page[data-library-root] .lib-cover-wrap::after,
+.lib-detail .lib-detail-cover::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  box-shadow:
+    inset 3px 0 0 color-mix(in srgb,var(--text) 4%,transparent),
+    inset -1px 0 0 color-mix(in srgb,var(--gold2) 9%,transparent),
+    inset 0 1px 0 color-mix(in srgb,var(--text) 5%,transparent);
+}
+
+.lib-page[data-library-root] .lib-shelf-row{
+  padding-bottom:16px;
+  background:
+    linear-gradient(90deg,transparent 0%,var(--dar-lib-rule-soft) 8%,var(--dar-lib-rule) 50%,var(--dar-lib-rule-soft) 92%,transparent 100%) bottom/100% 1px no-repeat,
+    linear-gradient(180deg,transparent 0%,transparent 93%,color-mix(in srgb,var(--bg) 18%,transparent) 100%);
+  scrollbar-width:none;
+}
+
+.lib-page[data-library-root] .lib-shelf-row::-webkit-scrollbar{
+  display:none;
+}
+
+.lib-page[data-library-root] .lib-card:hover .lib-cover-wrap{
+  transform:translateY(-2px);
+}
+
+@media(prefers-reduced-motion:reduce){
+  .lib-page[data-library-root] .lib-card:hover .lib-cover-wrap{
+    transform:none;
+  }
+}
