@@ -264,3 +264,32 @@ export async function assertVideoStudioRateLimit(env, request) {
   }
   return { ok: true };
 }
+
+/**
+ * Public Bildbeitrag generation has its own bucket so sharing does not consume
+ * the admin video-studio allowance. Every successful request is intentionally
+ * a new AI generation; there is no image-library/cache fallback.
+ */
+export async function assertShareImageRateLimit(env, request) {
+  const rawKey =
+    request.headers.get("CF-Connecting-IP") ||
+    request.headers.get("X-Forwarded-For") ||
+    "unknown";
+  const key = "share-image:" + String(rawKey).split(",")[0].trim();
+  const result = await storeFetch(env, "/rate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      key,
+      max: Number(env.SHARE_IMAGE_RATE_MAX || 30),
+      windowMs: 60 * 60 * 1000
+    })
+  });
+  if (result.missingStore) return { ok: true };
+  if (result.limited || result.httpStatus === 429) {
+    const err = new Error("Zu viele Bildgenerierungen. Bitte später erneut versuchen.");
+    err.status = 429;
+    throw err;
+  }
+  return { ok: true };
+}
