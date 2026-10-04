@@ -204,7 +204,7 @@ function ensureUi(){
           '<div id="msVisualDisclaimer" class="ms-visual-disclaimer"></div>'+
           '<div class="ms-detail-modes"><button data-ms-mode="both" type="button">Lesen &amp; Hören</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
           '<div class="ms-profile-grid"><section><small>WIE WAR ER?</small><strong id="msTrait"></strong></section><section><small>SEINE AUFGABE &amp; ZEIT</small><span id="msLife"></span></section><section><small>WER BERICHTET?</small><span id="msWitness"></span></section></div>'+
-          '<section id="msPlayer" class="ms-player"><button id="msPlay" class="ms-play" type="button">Hören</button><div class="ms-progress"><span id="msProgress"></span></div><p id="msVoiceNote"></p></section>'+
+          '<section id="msPlayer" class="ms-player"><button id="msPlay" class="ms-play" type="button">Hören &amp; mitlesen</button><div class="ms-progress"><span id="msProgress"></span></div><p id="msVoiceNote"></p></section>'+
           '<article id="msRead" class="ms-read"></article>'+
           '<section class="ms-sources"><strong>GEPRÜFTE QUELLEN</strong><div id="msSources"></div></section>'+
           '<section id="msQuestion" class="ms-question"></section>'+
@@ -319,7 +319,7 @@ function updatePlayButton(){
   const b=$("#msPlay");if(!b)return;
   const meta=audioMeta(active);
   b.disabled=busy||!meta?.url;
-  b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiterhören":"Hören");
+  b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiterhören":"Hören & mitlesen");
 }
 function updateProgress(){
   if($("#msProgress"))$("#msProgress").style.width=(audio.duration?Math.min(100,audio.currentTime/audio.duration*100):0)+"%";
