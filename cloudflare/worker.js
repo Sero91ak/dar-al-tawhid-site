@@ -104,7 +104,6 @@ import {
 export { PrayerStatusStore } from "./prayer-status-store.js";
 export { VideoStudioStore } from "./video-studio/job-store.js";
 import { handleVideoStudioRequest, resumeStuckVideoStudioJobs } from "./video-studio/index.js";
-import { handleShareImageBackground } from "./share-image.js";
 import { handleVoiceStudioWebRequest } from "./voice-studio-web.js";
 import {
   readLibraryCatalog,
@@ -195,7 +194,8 @@ export default {
           jummahPushCron: "*/5 * * * *",
           videoStudioStore: Boolean(env.VIDEO_STUDIO_STORE),
           videoStudioR2: Boolean(env.VIDEO_STUDIO_R2 || env.VIDEO_STUDIO_BUCKET),
-          shareImageAi: Boolean(env.AI && typeof env.AI.run === "function"),
+          shareImageMode: "curated-pool-only",
+          shareImageAi: false,
           videoStudioFal: Boolean(String(env.FAL_KEY || env.FAL_API_KEY || "").trim()),
           videoStudioVoice: Boolean(String(env.ELEVENLABS_API_KEY || "").trim() && String(env.ELEVENLABS_VOICE_ID || env.DAR_MALE_VOICE_ID || "").trim()),
           videoStudioShotstack: Boolean(String(env.SHOTSTACK_API_KEY || "").trim()),
@@ -214,10 +214,14 @@ export default {
         if (voiceStudioResponse) return voiceStudioResponse;
       }
 
-      // Öffentlicher Bildbeitrag-Hintergrund: immer frisch generiert, nie aus App-Assets.
+      // Bildbeitrag-KI dauerhaft deaktiviert: Besucher- und Test-App verwenden ausschließlich kuratierte lokale Bildpools.
       if (url.pathname === "/api/share-image/background") {
-        const shareImageResponse = await handleShareImageBackground(request, env, cors);
-        if (shareImageResponse) return shareImageResponse;
+        return jsonResponse({
+          ok: false,
+          disabled: true,
+          mode: "curated-pool-only",
+          error: "KI-Bildgenerierung für Bildbeiträge ist dauerhaft deaktiviert."
+        }, 410, cors);
       }
 
       // DAR KI-Video-Studio (Admin only; approve = no visitor push)
