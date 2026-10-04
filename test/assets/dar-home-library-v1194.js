@@ -253,7 +253,7 @@ function ensureHomeKnowledgeGridStyleV1239(){
     'html.dar-home-v1194 body.is-home-route #appView .home-v380-quran-hero.dt-quran-resume-after-core::before,html.dar-home-v1194 body.is-home-route #appView .home-v380-quran-hero.dt-quran-resume-after-core::after{content:none!important;display:none!important;}',
     'html.dar-home-v1194 body.is-home-route #appView.view::before{top:-220px!important;height:clamp(1120px,165vw,1380px)!important;opacity:.72!important;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.06) 9%,rgba(0,0,0,.22) 18%,rgba(0,0,0,.48) 30%,rgba(0,0,0,.78) 42%,#000 56%,#000 82%,rgba(0,0,0,.58) 92%,transparent 100%)!important;mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.06) 9%,rgba(0,0,0,.22) 18%,rgba(0,0,0,.48) 30%,rgba(0,0,0,.78) 42%,#000 56%,#000 82%,rgba(0,0,0,.58) 92%,transparent 100%)!important;}',
     'html.dar-home-v1194 body.is-home-route #appView.view::after{content:none!important;display:none!important;}',
-    'html.dar-home-v1194 body.is-home-route .footer{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;}',
+    'html.dar-home-v1194 body.is-home-route .footer{display:block!important;visibility:visible!important;height:auto!important;min-height:0!important;margin-top:0!important;overflow:visible!important;}',
     '@media(max-width:430px){html.dar-home-v1194 body.is-home-route #appView .home-line-row{min-height:88px!important;padding:11px 10px!important;}html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico{width:44px!important;min-width:44px!important;height:44px!important;margin-right:8px!important;}html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img,html.dar-home-v1194 body.is-home-route #appView .home-line-row__ico img.dar3d-icon{width:37px!important;height:37px!important;max-width:37px!important;max-height:37px!important;}html.dar-home-v1194 body.is-home-route #appView.view::before{top:-205px!important;height:1100px!important;}}'
   ].join("");
   document.head.appendChild(style);
@@ -326,8 +326,10 @@ function enforceHomeEditorialSurfaceV1239(){
   }
   var footer=document.querySelector(".footer");
   if(footer){
-    footer.style.setProperty("display","none","important");
-    footer.style.setProperty("visibility","hidden","important");
+    footer.style.setProperty("display","block","important");
+    footer.style.setProperty("visibility","visible","important");
+    footer.style.setProperty("height","auto","important");
+    footer.style.setProperty("overflow","visible","important");
   }
 }
 function cleanupHomeDuplicates(shell){
@@ -439,8 +441,9 @@ function removeHomePersonalCreditV1238(){
     if(el.children&&el.children.length)return;
     var txt=String(el.textContent||"").replace(/\s+/g," ").trim();
     if(/^by\s+Serhat\s+Abu\s+Malik$/i.test(txt)){
-      el.style.setProperty("display","none","important");
-      el.setAttribute("aria-hidden","true");
+      el.style.setProperty("display","block","important");
+      el.style.setProperty("visibility","visible","important");
+      el.removeAttribute("aria-hidden");
     }
   });
 }
