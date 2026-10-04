@@ -61,6 +61,8 @@ jobs:
           bash -n voice-studio/cloud-gpu/start.sh
           bash -n voice-studio/cloud-gpu/bootstrap.sh
           bash -n voice-studio/cloud-gpu/export-cloud-state.command
+          grep -q 'QuizMasters' voice-studio/cloud-gpu/export-cloud-state.command
+          grep -q 'KidsOwnerVoiceMasters' voice-studio/cloud-gpu/export-cloud-state.command
           bash -n voice-studio/cloud-gpu/import-cloud-state.sh
           bash -n voice-studio/cloud-gpu/smoke.sh
           bash -n voice-studio/cloud-gpu/provision-digitalocean.sh
