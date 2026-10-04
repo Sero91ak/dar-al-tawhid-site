@@ -1,7 +1,7 @@
 (function(){
   "use strict";
-  if(window.__DAR_GLOBAL_SHARE_V1232)return;
-  window.__DAR_GLOBAL_SHARE_V1232=true;
+  if(window.__DAR_GLOBAL_SHARE_V1235)return;
+  window.__DAR_GLOBAL_SHARE_V1235=true;
 
   var APP_STORE_URL="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
   var APP_STORE_ICON="/assets/app-store-icon-fixed.svg?v=share-v1225";
@@ -202,14 +202,18 @@
     for(var i=0;i<lines.length;i+=per)pages.push(lines.slice(i,i+per));return pages.length?pages:[[]];
   }
   async function drawBadge(ctx){
-    var x=700,y=1238,w=310,h=72;
-    roundRect(ctx,x,y,w,h,15);ctx.fillStyle="rgba(7,12,12,.62)";ctx.fill();ctx.strokeStyle="rgba(236,211,148,.48)";ctx.lineWidth=1.5;ctx.stroke();
+    var x=700,y=1234,w=310,h=76;
+    roundRect(ctx,x,y,w,h,16);ctx.fillStyle="rgba(3,8,10,.82)";ctx.fill();ctx.strokeStyle="rgba(255,255,255,.34)";ctx.lineWidth=1.4;ctx.stroke();
     var icon=null;try{icon=await loadImage(APP_STORE_ICON)}catch(e){}
-    if(icon){ctx.save();roundRect(ctx,x+10,y+10,52,52,12);ctx.clip();ctx.drawImage(icon,x+10,y+10,52,52);ctx.restore()}
-    else{ctx.fillStyle="#f0d797";ctx.font="700 28px Arial";ctx.fillText("A",x+22,y+40)}
-    ctx.fillStyle="rgba(255,249,233,.68)";ctx.font="800 10px Arial, sans-serif";ctx.fillText("JETZT IM",x+74,y+19);
-    ctx.fillStyle="#fff9e9";ctx.font="700 19px Arial, sans-serif";ctx.fillText("App Store",x+74,y+43);
-    ctx.fillStyle="rgba(255,249,233,.72)";ctx.font="650 10px Arial, sans-serif";ctx.fillText("DĀR AL TAWḤĪD",x+74,y+59);
+    if(icon){
+      ctx.save();
+      roundRect(ctx,x+10,y+10,56,56,13);ctx.clip();
+      ctx.drawImage(icon,x+10,y+10,56,56);
+      ctx.restore();
+    }
+    ctx.fillStyle="rgba(255,255,255,.78)";ctx.font="600 11px Arial, sans-serif";ctx.fillText("Laden im",x+79,y+23);
+    ctx.fillStyle="#ffffff";ctx.font="700 20px Arial, sans-serif";ctx.fillText("App Store",x+79,y+48);
+    ctx.fillStyle="rgba(255,255,255,.68)";ctx.font="650 10px Arial, sans-serif";ctx.fillText("DĀR AL TAWḤĪD",x+79,y+64);
   }
   async function renderFiles(data){
     var canvas=document.createElement("canvas");canvas.width=W;canvas.height=H;var ctx=canvas.getContext("2d");if(!ctx)return[];
@@ -226,12 +230,17 @@
     if(pages.length>8){pages=pages.slice(0,8);pages[7].push("…")}
     var files=[];
     for(var p=0;p<pages.length;p++){
-      ctx.clearRect(0,0,W,H);if(bg)cover(ctx,bg);else{ctx.fillStyle="#0b211d";ctx.fillRect(0,0,W,H)}
-      var g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,"rgba(2,13,14,.91)");g.addColorStop(.55,"rgba(4,18,19,.79)");g.addColorStop(1,"rgba(5,13,16,.69)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-      var rg=ctx.createRadialGradient(W*.82,H*.18,20,W*.82,H*.18,W*.66);rg.addColorStop(0,"rgba(231,200,123,.10)");rg.addColorStop(1,"rgba(231,200,123,0)");ctx.fillStyle=rg;ctx.fillRect(0,0,W,H);
+      ctx.clearRect(0,0,W,H);
+      if(bg){
+        ctx.save();
+        try{ctx.filter="saturate(1.12) contrast(1.04) brightness(1.08)"}catch(e){}
+        cover(ctx,bg);
+        ctx.restore();
+      }else{ctx.fillStyle="#0b211d";ctx.fillRect(0,0,W,H)}
+      var g=ctx.createLinearGradient(0,0,W,H);g.addColorStop(0,"rgba(2,13,14,.66)");g.addColorStop(.55,"rgba(4,18,19,.45)");g.addColorStop(1,"rgba(5,13,16,.30)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+      var rg=ctx.createRadialGradient(W*.82,H*.18,20,W*.82,H*.18,W*.66);rg.addColorStop(0,"rgba(244,213,135,.16)");rg.addColorStop(1,"rgba(231,200,123,0)");ctx.fillStyle=rg;ctx.fillRect(0,0,W,H);
 
       ctx.fillStyle="#efd89f";ctx.font="700 23px Arial, sans-serif";ctx.textAlign="left";ctx.fillText("DĀR AL TAWḤĪD",margin,76);
-      ctx.textAlign="right";ctx.font="700 15px Arial, sans-serif";ctx.fillText(String(p+1).padStart(2,"0")+" / "+String(pages.length).padStart(2,"0"),W-margin,75);ctx.textAlign="left";
       ctx.strokeStyle="rgba(239,216,159,.62)";ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(margin,105);ctx.lineTo(W-margin,105);ctx.stroke();
 
       var y=158;ctx.fillStyle="#fff8e9";ctx.font="650 "+titleSize+"px Georgia, 'Times New Roman', serif";
@@ -239,17 +248,17 @@
       ctx.strokeStyle="rgba(239,216,159,.62)";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(margin,y+8);ctx.lineTo(margin+210,y+8);ctx.stroke();
       y+=62;
 
-      ctx.font="400 "+bodySize+"px Georgia, 'Times New Roman', serif";ctx.fillStyle="#fffdf5";ctx.shadowColor="rgba(0,0,0,.45)";ctx.shadowBlur=4;var lh=Math.round(bodySize*1.42);
-      ctx.strokeStyle="rgba(239,216,159,.72)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(margin-18,y-10);ctx.lineTo(margin-18,Math.min(bodyBottom,y+pages[p].length*lh));ctx.stroke();
+      roundRect(ctx,margin-28,y-34,contentW+56,Math.min(bodyBottom-y+66,720),24);ctx.fillStyle="rgba(2,13,14,.26)";ctx.fill();
+      ctx.font="400 "+bodySize+"px Georgia, 'Times New Roman', serif";ctx.fillStyle="#fffdf7";ctx.shadowColor="rgba(0,0,0,.56)";ctx.shadowBlur=5;var lh=Math.round(bodySize*1.42);
+      ctx.strokeStyle="rgba(239,216,159,.78)";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(margin-18,y-10);ctx.lineTo(margin-18,Math.min(bodyBottom,y+pages[p].length*lh));ctx.stroke();
       pages[p].forEach(function(line){if(!line){y+=Math.round(lh*.55);return}ctx.fillText(line,margin,y);y+=lh});ctx.shadowBlur=0;
 
-      var sy=1002,sh=166;roundRect(ctx,margin,sy,contentW,sh,22);ctx.fillStyle="rgba(3,14,15,.64)";ctx.fill();ctx.strokeStyle="rgba(239,216,159,.25)";ctx.lineWidth=1.2;ctx.stroke();
-      ctx.fillStyle="#e9cf91";ctx.font="800 15px Arial, sans-serif";ctx.fillText(clean(data.category).toUpperCase(),margin+22,sy+29);
-      ctx.fillStyle="rgba(255,249,235,.86)";ctx.font="400 17px Arial, sans-serif";var sl=wrap(ctx,"Quelle: "+trimSource(data.source),contentW-44).slice(0,3),sly=sy+60;sl.forEach(function(line){ctx.fillText(line,margin+22,sly);sly+=24});
-      ctx.fillStyle="rgba(255,249,235,.72)";ctx.font="600 14px Arial, sans-serif";ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah",margin+22,sy+143);
+      var sy=1018,sh=128;roundRect(ctx,margin,sy,contentW,sh,20);ctx.fillStyle="rgba(3,14,15,.58)";ctx.fill();ctx.strokeStyle="rgba(239,216,159,.28)";ctx.lineWidth=1.2;ctx.stroke();
+      ctx.fillStyle="#efd89f";ctx.font="800 14px Arial, sans-serif";ctx.fillText("QUELLE",margin+22,sy+27);
+      ctx.fillStyle="rgba(255,249,235,.92)";ctx.font="500 17px Arial, sans-serif";var sl=wrap(ctx,trimSource(data.source),contentW-44).slice(0,2),sly=sy+55;sl.forEach(function(line){ctx.fillText(line,margin+22,sly);sly+=25});
 
-      ctx.fillStyle="#efd89f";ctx.font="700 18px Arial, sans-serif";ctx.fillText(SITE,margin,H-73);
-      ctx.fillStyle="rgba(255,249,235,.68)";ctx.font="500 13px Arial, sans-serif";ctx.fillText("by Serhat Abu Malik",margin,H-49);
+      ctx.fillStyle="rgba(255,249,235,.78)";ctx.font="600 14px Arial, sans-serif";ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah",margin,1192);
+      ctx.fillStyle="#efd89f";ctx.font="700 18px Arial, sans-serif";ctx.fillText(SITE,margin,H-56);
       await drawBadge(ctx);
       var blob=await new Promise(function(resolve){canvas.toBlob(resolve,"image/png",.97)});if(blob)files.push(new File([blob],"dar-al-tawhid-bildbeitrag-"+(p+1)+".png",{type:"image/png"}));
     }
@@ -416,5 +425,5 @@
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
   function boot(){loadSceneManifest().finally(function(){enhance(document)});try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-  window.DARGlobalShare={version:"1232",registerScenes:registerSceneItems,createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
+  window.DARGlobalShare={version:"1235",registerScenes:registerSceneItems,createAndShare:createAndShare,renderFiles:renderFiles,appStoreUrl:APP_STORE_URL,site:SITE};
 })();
