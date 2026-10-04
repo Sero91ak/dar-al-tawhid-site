@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1101";
+const CACHE_NAME="dar-al-tawhid-kids-v1102";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/section-heroes-v1095.css?v=1097-real3",
@@ -45,8 +45,8 @@ const PRECACHE=[
   "/kids/data/quiz-audio.json",
   "/kids/data/owner-voice-audio.json",
   "/kids/owner-voice.js?v=1",
-  "/kids/quiz-library.css?v=4",
-  "/kids/quiz-library.js?v=4",
+  "/kids/quiz-library.css?v=5",
+  "/kids/quiz-library.js?v=5",
   "/kids/data/stories-authentic.json",
   "/kids/data/prophet-stories.json",
   "/kids/data/mubashshirun-stories.json",
