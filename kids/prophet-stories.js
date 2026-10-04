@@ -260,7 +260,7 @@ function ensureUi(){
           '</div>'+
         '</div>'+
         '<div class="ps-body">'+
-          '<div class="ps-player" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören</button></div><div class="ps-progress"><span id="psProgress"></span></div><div class="ps-player-note" id="psVoiceNote"></div></div>'+
+          '<div class="ps-player" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören &amp; mitlesen</button></div><div class="ps-progress"><span id="psProgress"></span></div><div class="ps-player-note" id="psVoiceNote"></div></div>'+
           '<article class="ps-read" id="psRead"></article>'+
           '<div class="ps-sources"><strong>QUELLEN</strong><div id="psSources"></div></div>'+
           '<div class="ps-question" id="psQuestion"></div>'+
@@ -389,7 +389,7 @@ function updatePlayButton(){
   b.disabled=busy||!meta?.url;
   if(playing)b.textContent="Pause";
   else if(audio.currentTime>0&&!audio.ended)b.textContent="Weiterhören";
-  else b.textContent="Hören";
+  else b.textContent="Hören & mitlesen";
 }
 async function toggleAudio(){
   if(!active||busy)return;
