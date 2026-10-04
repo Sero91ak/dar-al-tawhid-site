@@ -1,7 +1,7 @@
 (function(){
   "use strict";
-  if(window.__DAR_GLOBAL_SHARE_V1230)return;
-  window.__DAR_GLOBAL_SHARE_V1230=true;
+  if(window.__DAR_GLOBAL_SHARE_V1231)return;
+  window.__DAR_GLOBAL_SHARE_V1231=true;
 
   var APP_STORE_URL="https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753";
   var APP_STORE_ICON="/assets/app-store-icon-fixed.svg?v=share-v1225";
