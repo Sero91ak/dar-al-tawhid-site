@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1105";
-const KIDS_BUILD_ID="kids-shell-v38-quiz650-never-empty1105";
+const CACHE_NAME="dar-al-tawhid-kids-v1106";
+const KIDS_BUILD_ID="kids-shell-v39-quiz650-voice-visual1106";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
   "/kids/section-heroes-v1095.css?v=1097-real3",
@@ -50,8 +50,8 @@ const PRECACHE=[
   "/kids/data/quiz-audio.json",
   "/kids/data/owner-voice-audio.json",
   "/kids/owner-voice.js?v=1",
-  "/kids/quiz-library.css?v=6",
-  "/kids/quiz-library.js?v=6",
+  "/kids/quiz-library.css?v=7",
+  "/kids/quiz-library.js?v=7",
   "/kids/data/stories-authentic.json",
   "/kids/data/prophet-stories.json",
   "/kids/data/mubashshirun-stories.json",
