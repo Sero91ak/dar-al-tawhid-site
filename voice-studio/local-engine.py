@@ -2555,108 +2555,29 @@ def _promote_slot_to_owner_voice(slot:dict,letter_id:str,kind:str,key:str,asset:
         slot["alternateSources"]=alternates
 
 
-def _owner_voice_question_prompts(question,answers):
-    q=re.sub(r"\s+"," ",str(question or "")).strip()
-    labels=[
-        re.sub(r"\s+"," ",str((a or {}).get("label") or "")).strip()
-        for a in (answers or [])
-    ]
-    labels=[x for x in labels if x]
-    if not q:
-        return []
-    out=[]
-    if labels:
-        spoken=" ".join(f"Antwort {i+1}: {label}." for i,label in enumerate(labels))
-        out.append((q+" "+spoken).strip())
-    else:
-        out.append(q)
-    lower=[x.casefold() for x in labels]
-    if len(lower)==2 and "ja" in lower and "nein" in lower:
-        out.append((q+" Ja oder Nein?").strip())
-    return list(dict.fromkeys(x for x in out if x))
-
-def _kids_owner_voice_units(quiz_data=None,dua_data=None,story_data=None,extra_data=None,verified_data=None):
-    units=[]
-    index={}
-    mode_priority={"kids_lesson":1,"question":2,"dua":3,"kids_story":4}
-
-    def add(value,mode="kids_lesson",context="kids"):
-        text=re.sub(r"\s+"," ",str(value or "")).strip()
-        if not text:
-            return
-        current=index.get(text)
-        if current is None:
-            row={"text":text,"mode":mode,"context":context}
-            index[text]=row
-            units.append(row)
-            return
-        if mode_priority.get(mode,1)>mode_priority.get(str(current.get("mode") or ""),1):
-            current["mode"]=mode
-        contexts=[x for x in str(current.get("context") or "").split("|") if x]
-        if context and context not in contexts:
-            contexts.append(context)
-            current["context"]="|".join(contexts)
-
-    for item in ((quiz_data or {}).get("items") or []):
-        question=str((item or {}).get("question") or "").strip()
-        answers=list((item or {}).get("answers") or [])
-        for prompt in _owner_voice_question_prompts(question,answers):
-            add(prompt,"question","quiz:question")
-        add((item or {}).get("success"),"kids_lesson","quiz:success")
-        add((item or {}).get("retry"),"kids_lesson","quiz:retry")
-    if quiz_data:
-        add("Sehr gut. Du hast das Quiz geschafft.","kids_lesson","quiz:finish")
-
-    for item in ((dua_data or {}).get("items") or []):
-        if str((item or {}).get("verification") or "")!="verified":
-            continue
-        explanation=(
-            str((item or {}).get("childPrompt") or "").strip()+" "+
-            str((item or {}).get("meaning") or "").strip()
-        ).strip()
-        add(explanation,"dua","dua:explanation")
-        q=(item or {}).get("quiz") or {}
-        for prompt in _owner_voice_question_prompts(q.get("question"),q.get("answers") or []):
-            add(prompt,"question","dua:question")
-    if dua_data:
-        add("Richtig. Sehr gut.","kids_lesson","dua:success")
-        add("Noch nicht. Hör die Erklärung noch einmal.","kids_lesson","dua:retry")
-
-    for item in ((story_data or {}).get("items") or []):
-        if str((item or {}).get("verification") or "")!="approved":
-            continue
-        add((item or {}).get("text"),"kids_story","story:authentic")
-        for age_key,q in (((item or {}).get("question") or {}).items()):
-            q=q or {}
-            for prompt in _owner_voice_question_prompts(q.get("question"),q.get("answers") or []):
-                add(prompt,"question","story:question:"+str(age_key))
-            add(q.get("success"),"kids_lesson","story:success")
-            add(q.get("retry"),"kids_lesson","story:retry")
-
-    for item in ((extra_data or {}).get("items") or []):
-        add((item or {}).get("text"),"kids_story","story:legacy")
-        questions=(item or {}).get("question") or (item or {}).get("questions") or {}
-        for age_key,q in questions.items():
-            q=q or {}
-            for prompt in _owner_voice_question_prompts(q.get("question"),q.get("answers") or []):
-                add(prompt,"question","story:question:"+str(age_key))
-            add(q.get("success"),"kids_lesson","story:success")
-            add(q.get("retry"),"kids_lesson","story:retry")
-
-    for group_name in ("hadithLessons","earlyLessons"):
-        for item in ((verified_data or {}).get(group_name) or []):
-            if str((item or {}).get("verificationStatus") or "")!="verified":
-                continue
-            explanation=str((item or {}).get("childExplanation") or "").strip()
-            add(explanation,"kids_lesson","knowledge:explanation")
-            person=str((item or {}).get("person") or "").strip()
-            if explanation and person:
-                add(explanation+". "+person+".","kids_lesson","knowledge:older")
-
-    return units
-
 def _quiz_voice_texts(quiz_data):
-    return [row["text"] for row in _kids_owner_voice_units(quiz_data=quiz_data)]
+    texts=[]
+    seen=set()
+    def add(value):
+        text=re.sub(r"\s+"," ",str(value or "")).strip()
+        if text and text not in seen:
+            seen.add(text);texts.append(text)
+    for item in (quiz_data.get("items") or []):
+        question=str(item.get("question") or "").strip()
+        answers=list(item.get("answers") or [])
+        labels=[str((a or {}).get("label") or "").strip() for a in answers]
+        spoken=" ".join(
+            f"Antwort {i+1}: {label}."
+            for i,label in enumerate(labels) if label
+        ).strip()
+        add((question+" "+spoken).strip())
+        lower=[x.casefold() for x in labels]
+        if len(lower)==2 and "ja" in lower and "nein" in lower:
+            add((question+" Ja oder Nein?").strip())
+        add(item.get("success"))
+        add(item.get("retry"))
+    add("Sehr gut. Du hast das Quiz geschafft.")
+    return texts
 
 def _quiz_bounded_parts(text:str,max_chars:int=48):
     value=re.sub(r"\s+"," ",str(text or "")).strip()
@@ -2793,28 +2714,30 @@ def _quiz_join_paths(paths,text_value:str,mode:str="kids_lesson"):
     metrics["owner_voice_mode"]=voice_mode
     return joined,sr,metrics
 
-def _generate_quiz_voice_master(text_value:str,mode:str="kids_lesson"):
+def _generate_quiz_voice_master(text_value:str):
     value=re.sub(r"\s+"," ",str(text_value or "")).strip()
-    voice_mode=str(mode or "kids_lesson")
     if not value:
-        raise ValueError("Kids-Sprachtext fehlt.")
-    digest=hashlib.sha1((voice_mode+"\0"+value).encode("utf-8")).hexdigest()[:20]
+        raise ValueError("Quiz-Sprachtext fehlt.")
+    digest=hashlib.sha1(value.encode("utf-8")).hexdigest()[:20]
     master=QUIZ_MASTER_HOME/(digest+".wav")
 
+    # Bereits bestandene Quiz-Master werden bei einem späteren Batch direkt
+    # wiederverwendet. Dadurch setzt ein Lauf nach einem einzelnen Fehler fort,
+    # statt alle vorherigen Quiztexte erneut zu synthetisieren.
     if master.exists() and master.stat().st_size>1024:
         try:
             wav=load_locked_wav(master,24000)
-            metrics=audio_quality_metrics(wav,24000,value,"de",voice_mode)
+            metrics=audio_quality_metrics(wav,24000,value,"de","kids_lesson")
             hard={"empty_audio","non_finite","near_silence","low_peak","clipping"}
             if not any(x in hard for x in (metrics.get("issues") or [])):
-                metrics["owner_voice_master_cache"]="hit"
+                metrics["quiz_master_cache"]="hit"
                 return master,metrics
         except Exception:
             pass
 
     base_parts=_quiz_bounded_parts(value,48)
     if not base_parts:
-        raise RuntimeError("Kids-Sprachtext konnte nicht in sichere Sprachblöcke zerlegt werden.")
+        raise RuntimeError("Quiztext konnte nicht in sichere Sprachblöcke zerlegt werden.")
 
     rendered=[]
     for part in base_parts:
@@ -2823,7 +2746,7 @@ def _generate_quiz_voice_master(text_value:str,mode:str="kids_lesson"):
             piece=queue.pop(0)
             try:
                 path=generate(
-                    piece,"",voice_mode,
+                    piece,"","kids_lesson",
                     free_mode=True,free_pronunciation=True
                 )
                 rendered.append((Path(path),piece))
@@ -2839,11 +2762,11 @@ def _generate_quiz_voice_master(text_value:str,mode:str="kids_lesson"):
                         continue
                 raise
 
-    joined,sr,metrics=_quiz_join_paths(rendered,value,voice_mode)
+    joined,sr,metrics=_quiz_join_paths(rendered,value)
     tmp=master.with_suffix(".tmp.wav")
     save_wav(tmp,joined,sr)
     os.replace(tmp,master)
-    metrics["owner_voice_master_cache"]="write"
+    metrics["quiz_master_cache"]="write"
     return master,metrics
 
 def _build_quiz_owner_voice_pack(quiz_data,build_root:Path,build_id:str,start_index:int,total:int):
@@ -3275,79 +3198,6 @@ def _kids_owner_voice_auto_loop():
         time.sleep(1800)
 
 
-def _build_kids_owner_voice_pack(dua_data,story_data,extra_data,verified_data,build_root:Path,build_id:str,start_index:int,total:int):
-    units=_kids_owner_voice_units(
-        dua_data=dua_data,
-        story_data=story_data,
-        extra_data=extra_data,
-        verified_data=verified_data,
-    )
-    entries={}
-    out_dir=build_root/"kids/assets/kids-owner-voice"
-    out_dir.mkdir(parents=True,exist_ok=True)
-
-    for offset,row in enumerate(units,1):
-        text_value=str(row.get("text") or "").strip()
-        mode=str(row.get("mode") or "kids_lesson")
-        context=str(row.get("context") or "kids")
-        current_index=start_index+offset
-        pct=2+int((current_index-1)/max(1,total)*88)
-        _set_alphabet_batch_state(
-            phase="kids-owner-voice",
-            progress=min(94,pct),
-            completed=current_index-1,
-            total=total,
-            current=f"Kids-Stimme {offset}/{len(units)} · {context} · {text_value[:64]}"
-        )
-        digest=hashlib.sha1(text_value.encode("utf-8")).hexdigest()[:16]
-        asset=out_dir/(digest+".m4a")
-        source,source_metrics=_generate_quiz_voice_master(text_value,mode)
-        _encode_kids_m4a(source,asset)
-        entries[text_value]={
-            "url":f"/kids/assets/kids-owner-voice/{asset.name}?v={build_id}",
-            "sha256":hashlib.sha256(asset.read_bytes()).hexdigest(),
-            "durationSeconds":round(_audio_duration_seconds(asset),3),
-            "voiceProfileId":"serhat-owner-voice-2026",
-            "sourceVoice":"authorized-owner-voice",
-            "sourceType":"local-owner-generated",
-            "engine":"local-serhat-engine",
-            "prosody":mode,
-            "context":context,
-            "qaBy":"local-serhat-engine-auto-qa",
-            "qaMetrics":source_metrics,
-        }
-
-    manifest={
-        "schemaVersion":2,
-        "id":"KIDS_OWNER_VOICE_V2",
-        "buildId":build_id,
-        "updatedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "voiceProfileId":"serhat-owner-voice-2026",
-        "speaker":"Serhat Abu Malik",
-        "engine":"local-serhat-engine",
-        "provider":"self-produced",
-        "manualPerClipApprovalRequired":False,
-        "technicalQaRequired":True,
-        "systemTtsFallbackAllowed":False,
-        "syntheticQuranRecitationAllowed":False,
-        "security":{
-            "publicContainsRenderedAudioOnly":True,
-            "voiceReferencePublished":False,
-            "modelWeightsPublished":False,
-            "pronunciationPrivateStatePublished":False,
-        },
-        "entries":entries,
-        "counts":{
-            "duaItems":len((dua_data or {}).get("items") or []),
-            "authenticStories":len((story_data or {}).get("items") or []),
-            "legacyShortStories":len((extra_data or {}).get("items") or []),
-            "knowledgeLessons":sum(len((verified_data or {}).get(k) or []) for k in ("hadithLessons","earlyLessons")),
-            "uniqueSpokenTexts":len(entries),
-        }
-    }
-    atomic_write_json(build_root/"kids/data/owner-voice-audio.json",manifest)
-    return manifest
-
 def _prepare_publish_repo(export_ready:Path):
     git=shutil.which("git")
     if not git:
@@ -3381,7 +3231,6 @@ def _prepare_publish_repo(export_ready:Path):
         for rel in [
             Path("data/alphabet-audio.json"),
             Path("data/quiz-audio.json"),
-            Path("data/owner-voice-audio.json"),
             Path("assets/kids-cinema/intro-voice-serhat.m4a"),
         ]:
             src=source_kids/rel
@@ -3401,16 +3250,9 @@ def _prepare_publish_repo(export_ready:Path):
             shutil.rmtree(dst_quiz)
         shutil.copytree(src_quiz,dst_quiz)
 
-        src_owner=source_kids/"assets/kids-owner-voice"
-        dst_owner=repo/"kids/assets/kids-owner-voice"
-        if dst_owner.exists():
-            shutil.rmtree(dst_owner)
-        shutil.copytree(src_owner,dst_owner)
-
         p=run([git,"-C",str(repo),"add",
             "kids/data/alphabet-audio.json","kids/assets/kids-alphabet-audio",
             "kids/data/quiz-audio.json","kids/assets/kids-quiz-audio",
-            "kids/data/owner-voice-audio.json","kids/assets/kids-owner-voice",
             "kids/assets/kids-cinema/intro-voice-serhat.m4a"
         ],60)
         if p.returncode!=0:
@@ -3475,21 +3317,11 @@ def build_full_local_kids_voice_pack():
 
         manifest=load_alphabet_manifest()
         quiz_data=load_quiz_manifest()
-        dua_data=load_dua_manifest()
-        story_data=load_authentic_story_manifest()
-        verified_data=load_verified_content_manifest()
-        owner_sources=load_kids_owner_voice_sources()
         tasks=_alphabet_tasks(manifest)
         if len(tasks)!=140:
             raise RuntimeError(f"Alphabet-Pack unvollständig: erwartet 140 Clips, gefunden {len(tasks)}.")
         quiz_texts=_quiz_voice_texts(quiz_data)
-        owner_units=_kids_owner_voice_units(
-            dua_data=dua_data,
-            story_data=story_data,
-            extra_data=owner_sources,
-            verified_data=verified_data,
-        )
-        total_work=len(tasks)+len(quiz_texts)+len(owner_units)+1
+        total_work=len(tasks)+len(quiz_texts)+1
         _set_alphabet_batch_state(total=total_work)
 
         build_id="serhat-local-"+time.strftime("%Y%m%d-%H%M%S")
@@ -3584,13 +3416,9 @@ def build_full_local_kids_voice_pack():
         quiz_manifest=_build_quiz_owner_voice_pack(
             quiz_data,build_root,build_id,len(tasks),total_work
         )
-        owner_voice_manifest=_build_kids_owner_voice_pack(
-            dua_data,story_data,owner_sources,verified_data,
-            build_root,build_id,len(tasks)+len(quiz_texts),total_work
-        )
 
         _set_alphabet_batch_state(
-            phase="greeting",progress=94,completed=len(tasks)+len(quiz_texts)+len(owner_units),
+            phase="greeting",progress=94,completed=len(tasks)+len(quiz_texts),
             total=total_work,
             current="Kids-Begrüßung wird mit deiner Serhat-Stimme erzeugt …"
         )
