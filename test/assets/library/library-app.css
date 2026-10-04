@@ -1976,3 +1976,75 @@ html[data-theme="dark"]{
     transform:none;
   }
 }
+
+
+/* DAR_LIBRARY_CATEGORY_ATMOSPHERES_V1224
+   One visual language, subtle category-specific atmosphere using existing Test assets. */
+.lib-page[data-library-root][data-library-category-view="Qurʾān"]{
+  --dar-lib-cinema-image:url("/test/assets/dar-3d-icons/dar-home-section-quran.png");
+}
+.lib-page[data-library-root][data-library-category-view="Tawḥīd"],
+.lib-page[data-library-root][data-library-category-view="ʿAqīdah"],
+.lib-page[data-library-root][data-library-category-view="al-Asmāʾ waṣ-Ṣifāt"],
+.lib-page[data-library-root][data-library-category-view="Manhaj"]{
+  --dar-lib-cinema-image:url("/test/assets/dar-3d-icons/dar-home-section-knowledge.png");
+}
+.lib-page[data-library-root][data-library-category-view="Sunnah"]{
+  --dar-lib-cinema-image:url("/test/assets/dar-3d-icons/dar-home-cinematic-discover.png");
+}
+.lib-page[data-library-root][data-library-category-view="Fiqh"],
+.lib-page[data-library-root][data-library-category-view="Gebet"]{
+  --dar-lib-cinema-image:url("/test/assets/home-v1194/study-runway.jpg");
+}
+.lib-page[data-library-root][data-library-category-view="Familie"]{
+  --dar-lib-cinema-image:url("/test/assets/home-v1194/hero-mobile-adobe.jpg");
+}
+.lib-page[data-library-root][data-library-category-view="Kufr und Ṭāghūt"],
+.lib-page[data-library-root][data-library-category-view="Schirk"],
+.lib-page[data-library-root][data-library-category-view="Widerlegungen"]{
+  --dar-lib-cinema-image:url("/test/assets/home-v1193/hero-study-runway.jpg");
+}
+
+.lib-detail[data-library-category="Qurʾān"] .lib-detail-hero{
+  --dar-lib-cinema-image:url("/test/assets/dar-3d-icons/dar-home-section-quran.png");
+}
+.lib-detail[data-library-category="Tawḥīd"] .lib-detail-hero,
+.lib-detail[data-library-category="ʿAqīdah"] .lib-detail-hero,
+.lib-detail[data-library-category="al-Asmāʾ waṣ-Ṣifāt"] .lib-detail-hero,
+.lib-detail[data-library-category="Manhaj"] .lib-detail-hero{
+  --dar-lib-cinema-image:url("/test/assets/dar-3d-icons/dar-home-section-knowledge.png");
+}
+.lib-detail[data-library-category="Sunnah"] .lib-detail-hero{
+  --dar-lib-cinema-image:url("/test/assets/dar-3d-icons/dar-home-cinematic-discover.png");
+}
+.lib-detail[data-library-category="Fiqh"] .lib-detail-hero,
+.lib-detail[data-library-category="Gebet"] .lib-detail-hero{
+  --dar-lib-cinema-image:url("/test/assets/home-v1194/study-runway.jpg");
+}
+.lib-detail[data-library-category="Familie"] .lib-detail-hero{
+  --dar-lib-cinema-image:url("/test/assets/home-v1194/hero-mobile-adobe.jpg");
+}
+.lib-detail[data-library-category="Kufr und Ṭāghūt"] .lib-detail-hero,
+.lib-detail[data-library-category="Schirk"] .lib-detail-hero,
+.lib-detail[data-library-category="Widerlegungen"] .lib-detail-hero{
+  --dar-lib-cinema-image:url("/test/assets/home-v1193/hero-study-runway.jpg");
+}
+
+/* Category imagery must remain secondary; text contrast stays theme-owned. */
+.lib-page[data-library-root][data-library-category-view]:not([data-library-category-view=""]) .lib-hero::after,
+.lib-detail[data-library-category] .lib-detail-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    linear-gradient(180deg,color-mix(in srgb,var(--bg) 8%,transparent),color-mix(in srgb,var(--bg) 34%,transparent)),
+    linear-gradient(90deg,color-mix(in srgb,var(--bg) 18%,transparent),transparent 68%);
+}
+.lib-page[data-library-root][data-library-category-view]:not([data-library-category-view=""]) .lib-hero-inner,
+.lib-detail[data-library-category] .lib-detail-cover,
+.lib-detail[data-library-category] .lib-detail-copy{
+  position:relative;
+  z-index:2;
+}
