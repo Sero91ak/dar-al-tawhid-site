@@ -1,8 +1,8 @@
 const CACHE_NAME="dar-al-tawhid-kids-v1093";
 const PRECACHE=[
   "/kids/manifest.webmanifest",
-  "/kids/section-heroes-v1090.css?v=1090",
-  "/kids/assets/kids-art/section-stories-v1090.jpg?v=1090",
+  "/kids/section-heroes-v1090.css?v=1094-compact1",
+  "/kids/assets/kids-art/section-stories-v1094.jpg?v=1094-compact1",
   "/kids/assets/kids-art/section-quran-v1090.jpg?v=1090",
   "/kids/assets/kids-art/section-parents-v1090.jpg?v=1090",
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
