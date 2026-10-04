@@ -17,8 +17,8 @@ Der Browser sieht weder die GPU-Origin noch deren Auth-Token.
 - `/voice/` leitet auf `/voice-studio/?app=1&cloud=1`.
 - Der normale lokale `/voice-studio/`-Workflow bleibt unverändert.
 - Cloud-Modus nutzt:
-  `https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/engine`
-- Cloudflare leitet die bestehende Engine-API transparent weiter.
+  `https://dar-al-tawhid.de/voice-studio/api/engine`
+- Die Besucher-Domain leitet die Voice-API intern an den Admin-Worker weiter; dessen Adresse bleibt aus der App-Oberfläche heraus. Danach leitet Cloudflare die bestehende Engine-API transparent an den privaten GPU-Host weiter.
 - Async-Jobs, Render-Status, progressive Audio-Chunks, History und Aussprache-Endpunkte bleiben auf demselben API-Vertrag.
 - Der bestehende Python-Engine-Server kann nun automatisch CUDA verwenden.
 - Der Engine-Port kann über `DAR_VOICE_PORT` bzw. `PORT` gesetzt werden.
@@ -43,8 +43,8 @@ DAR_VOICE_NETWORK_MODE=1
 DAR_VOICE_PAIR_TOKEN=<langes-zufälliges-token>
 DAR_VOICE_DEVICE=cuda
 DAR_VOICE_PORT=<provider-port>
-SERHAT_VOICE_REF=/data/Serhat_Adobe_MASTER.wav
-SERHAT_VOICE_REF_AR=/data/Serhat_AR_MASTER.wav
+SERHAT_VOICE_REF=/root/SerhatVoice/Serhat_Adobe_MASTER.wav
+SERHAT_VOICE_REF_AR=/root/SerhatVoice/Serhat_AR_MASTER.wav
 ```
 
 Der GPU-Host muss die vorhandenen Voice-Studio-Daten/Regeln und die privaten Referenz-Audios erhalten. Referenz-Audios gehören nicht in Git.
