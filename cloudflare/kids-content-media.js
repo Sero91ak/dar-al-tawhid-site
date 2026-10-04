@@ -427,8 +427,8 @@ function sanitizeStoryTimings(value) {
 
 export async function publishExistingKidsStoryAudio(env, input, helpers) {
   const storyKind = clean(input?.storyKind || input?.kind, 30).toLowerCase();
-  if (!["prophet","mubashshirun"].includes(storyKind)) {
-    throw mediaError("Geschichten-Typ muss prophet oder mubashshirun sein", 422);
+  if (!["prophet","mubashshirun","sahabiyyat"].includes(storyKind)) {
+    throw mediaError("Geschichten-Typ muss prophet, mubashshirun oder sahabiyyat sein", 422);
   }
   const itemId = safeId(input?.itemId || input?.id);
   const age = normalizeExistingStoryAge(input?.age);
@@ -439,7 +439,9 @@ export async function publishExistingKidsStoryAudio(env, input, helpers) {
 
   const manifestPath = storyKind === "prophet"
     ? "kids/data/prophet-stories.json"
-    : "kids/data/mubashshirun-stories.json";
+    : storyKind === "sahabiyyat"
+      ? "kids/data/sahabiyyat-stories.json"
+      : "kids/data/mubashshirun-stories.json";
   const owner = env.GITHUB_OWNER || "Sero91ak";
   const repo = env.GITHUB_REPO || "dar-al-tawhid-site";
   const branch = env.GITHUB_BRANCH || "main";
@@ -479,7 +481,9 @@ export async function publishExistingKidsStoryAudio(env, input, helpers) {
   const short = sha256.slice(0, 14);
   const assetRoot = storyKind === "prophet"
     ? "kids/assets/prophet-story-audio"
-    : "kids/assets/mubashshirun-story-audio";
+    : storyKind === "sahabiyyat"
+      ? "kids/assets/sahabiyyat-story-audio"
+      : "kids/assets/mubashshirun-story-audio";
   const assetPath = assetRoot + "/" + itemId + "/" + age + "-" + short + "." + ext;
   const now = new Date().toISOString();
   const timings = sanitizeStoryTimings(input?.timings);
@@ -536,7 +540,7 @@ export async function publishExistingKidsStoryAudio(env, input, helpers) {
       { path: assetPath, binary: true, contentBase64: payload.base64 },
       { path: manifestPath, content: JSON.stringify(manifest, null, 2) + "\n" }
     ],
-    "Kids: " + (storyKind === "prophet" ? "Prophetengeschichte" : "Ṣaḥābah-Geschichte") +
+    "Kids: " + (storyKind === "prophet" ? "Prophetengeschichte" : storyKind === "sahabiyyat" ? "Ṣaḥābiyyāt-Geschichte" : "Ṣaḥābah-Geschichte") +
       " " + itemId + " · " + age + " · Owner Audio"
   );
 
