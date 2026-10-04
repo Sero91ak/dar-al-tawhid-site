@@ -793,6 +793,7 @@
 
     const toc = (pub.tableOfContents || []);
     const sources = pub.sources || [];
+    const detailCover = coverSources(pub).medium || coverSources(pub).small || coverSources(pub).master || "";
     const topMeta = [
       pub.pageCount && Number(pub.pageCount) > 0 ? `${pub.pageCount} Seiten` : "",
       pub.language || "",
@@ -802,6 +803,7 @@
 
     return `<section class="lib-page lib-detail" data-library-detail="${esc(pub.slug)}" data-library-category="${esc(pub.category || "")}">
       <div class="lib-detail-hero lib-detail-hero-compact">
+        ${detailCover ? `<div class="lib-detail-backdrop" aria-hidden="true"><img src="${esc(detailCover)}" alt="" loading="eager" decoding="async"></div>` : ""}
         <div class="lib-detail-cover">${coverHtml(pub)}</div>
         <div class="lib-detail-copy">
           <p class="lib-detail-kicker">${esc(pub.category || pub.transliteratedTitle || "DĀR AL TAWḤĪD")}</p>
