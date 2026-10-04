@@ -99,8 +99,10 @@ jobs:
 
           if 'rest === "/engine" || rest.startsWith("/engine/")' not in web:
               raise SystemExit("Voice web worker does not route /engine to remote GPU")
-          if 'REMOTE_ENGINE_API="https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/engine"' not in html:
-              raise SystemExit("Public Voice PWA remote engine endpoint missing")
+          if 'REMOTE_ENGINE_API="/voice-studio/api/engine"' not in html:
+              raise SystemExit("Public Voice PWA same-origin engine endpoint missing")
+          if 'const VOICE_API_ORIGIN = "https://dar-admin-publisher.sero91ak.workers.dev";' not in router or 'proxyVoiceApi(request, url)' not in router:
+              raise SystemExit("Public site router does not proxy Voice API to admin gateway")
           if 'target.searchParams.set("cloud", "1")' not in router:
               raise SystemExit("/voice shortcut does not activate cloud mode")
           cloud=manifest.get("cloudVoiceApp") or {}
