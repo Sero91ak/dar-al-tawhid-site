@@ -99,6 +99,22 @@ Ablauf:
 6. Die HTTPS-Origin und Tokens als Cloudflare-Secrets setzen.
 7. `https://dar-al-tawhid.de/voice/` öffnen, privaten Voice-Zugangscode einmalig eingeben und PWA installieren.
 
+## Performance-Benchmark
+
+Nach dem ersten echten GPU-Start wird nicht geraten, sondern gemessen. `voice-studio/cloud-gpu/benchmark.py` startet einen normalen Async-Render über die öffentliche Cloud-PWA, misst Job-Annahme, erstes progressives Audio und vollständige Audiodatei und nutzt dabei denselben HttpOnly-Owner-Zugang wie die App.
+
+Beispiel:
+
+```bash
+DAR_VOICE_WEB_TOKEN='…' \
+python voice-studio/cloud-gpu/benchmark.py \
+  --text-file /pfad/testtext.txt
+```
+
+Für DigitalOcean ist der erste kostenbewusste Testplan `gpu-4000adax1-20gb` in TOR1. Das NVIDIA-AI/ML-Ready-Image bleibt `gpu-h100x1-base`; DigitalOcean verwendet dieses Image laut eigener Vorgabe auch für andere einzelne NVIDIA-GPU-Pläne. Falls der RTX-4000-Benchmark das gewünschte Latenzziel nicht erreicht, kann derselbe unveränderte Stack auf L40S, RTX 6000 oder H100 erneut gemessen werden.
+
+`provision-digitalocean.sh` läuft standardmäßig nur als **Plan** und erzeugt erst mit `--apply` eine kostenpflichtige GPU.
+
 ## Noch offen
 
 Die Software-Seite einschließlich CUDA-Container, TLS-Stack, Cloudflare-Gateway, Owner-Zugang und PWA-Routing ist vorbereitet. Für echten Always-on-Betrieb fehlt nur noch das **Anlegen des externen GPU-Servers**, die DNS-Origin und das sichere Übertragen der privaten Voice-Daten/Secrets. Cloudflare Workers selbst führen das TTS-Modell nicht aus.
