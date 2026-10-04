@@ -9465,14 +9465,16 @@ class H(BaseHTTPRequestHandler):
             # nicht für die mehrfach pro Sekunde laufende Engine-Health-Prüfung.
             with STATUS_LOCK:
                 st=dict(STATUS)
-            ok=REF.exists()
+            reference_ok=REF.exists()
             self.send_json(200,{
-                "ok":ok,
+                "ok":True,
                 "provider":"DĀR Voice Extreme Fast · Chatterbox Multilingual",
                 "engine_version":ENGINE_VERSION,
                 "interactive_extreme_fast":True,
                 "mlx_model":MLX_MODEL_ID if MLX_ENABLED else None,
-                "reference_exists":ok,
+                "reference_exists":reference_ok,
+                "voice_reference_ready":reference_ok,
+                "reference_path":str(REF),
                 "reference_arabic_dedicated":ARABIC_DEDICATED_REFERENCE,
                 "prosody_mode":st.get("prosody_mode","narration"),
                 "model_state":st["model_state"],
