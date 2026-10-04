@@ -1,10 +1,10 @@
-// workers-deploy-stamp:1791126000000
+// workers-deploy-stamp:1791127200000
 /* DĀR AL TAWḤĪD – Offline Light Service Worker
    Ziel: Startseite/App-Hülle offline nutzbar machen, ohne viel Speicher zu belegen.
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1232';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1233';
 const VISUAL_SHELL_KEYS = ['/', '/index.html', '/test/', '/test/index.html', '/version.json', '/test/version.json'];
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
@@ -629,10 +629,32 @@ self.addEventListener('message', (event) => {
   );
 });
 
+async function precacheShareBackgroundManifest(cache) {
+  try {
+    const manifestRequest = new Request('/data/share-background-library.json', { cache: 'reload' });
+    const response = await fetch(manifestRequest);
+    if (!response || !response.ok) return;
+    try { await cache.put(manifestRequest, response.clone()); } catch (e) {}
+    const data = await response.json();
+    const urls = Array.isArray(data && data.items)
+      ? data.items.map((item) => String(item && item.src || '')).filter((url) => url.startsWith('/'))
+      : [];
+    if (!urls.length) return;
+    await Promise.allSettled(
+      urls.map((url) => fetch(new Request(url, { cache: 'reload' }))
+        .then((asset) => (asset && asset.ok ? cache.put(url, asset) : null))
+        .catch(() => null))
+    );
+  } catch (e) {}
+}
+
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_VERSION)
-      .then((cache) => cache.addAll(APP_SHELL.map((url) => new Request(url, { cache: 'reload' }))))
+      .then(async (cache) => {
+        await cache.addAll(APP_SHELL.map((url) => new Request(url, { cache: 'reload' })));
+        await precacheShareBackgroundManifest(cache);
+      })
       .catch(() => null)
       .then(() => self.skipWaiting())
   );
