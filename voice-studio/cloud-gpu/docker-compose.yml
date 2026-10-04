@@ -32,6 +32,7 @@ services:
         condition: service_healthy
     environment:
       DAR_VOICE_DOMAIN: ${DAR_VOICE_DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL:-}
     ports:
       - "80:80"
       - "443:443"
