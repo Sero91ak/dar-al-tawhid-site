@@ -248,14 +248,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         return token.isEmpty ? nil : token
     }
 
+    private func isPrivateIPv4(_ value: String) -> Bool {
+        if value.hasPrefix("10.") || value.hasPrefix("192.168.") { return true }
+        if value.hasPrefix("172.") {
+            let parts = value.split(separator: ".")
+            if parts.count >= 2, let second = Int(parts[1]), (16...31).contains(second) {
+                return true
+            }
+        }
+        return false
+    }
+
     private func localIPv4Address() -> String? {
-        var address: String?
         var ifaddr: UnsafeMutablePointer<ifaddrs>?
         guard getifaddrs(&ifaddr) == 0, let first = ifaddr else { return nil }
         defer { freeifaddrs(ifaddr) }
 
-        var pointer: UnsafeMutablePointer<ifaddrs>? = first
+        var preferredLAN: String?
+        var otherLAN: String?
         var fallback: String?
+        var pointer: UnsafeMutablePointer<ifaddrs>? = first
+
         while let current = pointer {
             let interface = current.pointee
             defer { pointer = interface.ifa_next }
@@ -263,7 +276,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
                   addr.pointee.sa_family == UInt8(AF_INET) else { continue }
 
             let name = String(cString: interface.ifa_name)
-            if name == "lo0" { continue }
+            if name == "lo0"
+                || name.hasPrefix("utun")
+                || name.hasPrefix("awdl")
+                || name.hasPrefix("llw")
+                || name.hasPrefix("anpi") {
+                continue
+            }
 
             var host = [CChar](repeating: 0, count: Int(NI_MAXHOST))
             let length = socklen_t(addr.pointee.sa_len)
@@ -277,26 +296,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
                 NI_NUMERICHOST
             )
             guard result == 0 else { continue }
+
             let value = String(cString: host)
             if value.hasPrefix("169.254.") { continue }
-            if name == "en0" || name == "en1" {
-                address = value
-                break
-            }
-            if fallback == nil { fallback = value }
-        }
-        return address ?? fallback
-    }
 
-    private func companionPairingHost() -> String? {
-        let host = ProcessInfo.processInfo.hostName.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !host.isEmpty && host.lowercased().hasSuffix(".local") {
-            return host
+            if isPrivateIPv4(value) {
+                if name == "en0" || name == "en1" {
+                    preferredLAN = value
+                    break
+                }
+                if otherLAN == nil { otherLAN = value }
+            } else if fallback == nil {
+                fallback = value
+            }
         }
-        if !host.isEmpty && !host.contains(" ") {
-            return host + ".local"
-        }
-        return localIPv4Address()
+
+        return preferredLAN ?? otherLAN ?? fallback
     }
 
     private func companionPairingURL() -> String? {
