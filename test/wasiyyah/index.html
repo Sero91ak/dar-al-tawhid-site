@@ -1885,6 +1885,222 @@
       }
     }
 
+  
+    /* WASIYYAH TRUE EDGE-TO-EDGE V14 · 2026-10-04 */
+
+    /* General shell: no centered phone column, no card-on-card framing. */
+    .page{
+      width:100%!important;
+      max-width:none!important;
+      margin:0!important;
+    }
+
+    #chatPanel,
+    #summaryPanel{
+      width:100%!important;
+      max-width:none!important;
+      border:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+    }
+
+    /* Chat separates sections with lines, not capsules. */
+    #chatPanel .progress{
+      background:transparent!important;
+      border-color:var(--wa-surface-line)!important;
+    }
+    #chatPanel .chat-card{
+      border:0!important;
+      border-radius:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+    }
+    #chatPanel .toolbar{
+      border-bottom:1px solid var(--wa-surface-line)!important;
+    }
+
+    /* Summary: open canvas. */
+    #summaryPanel .summary-grid{
+      width:100%!important;
+      max-width:none!important;
+      align-items:start!important;
+    }
+    #summaryPanel .summary-data,
+    #summaryPanel .editor-box{
+      border:0!important;
+      border-radius:0!important;
+      background:transparent!important;
+      box-shadow:none!important;
+    }
+
+    .wa-summary-overview-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      padding-bottom:11px;
+      border-bottom:1px solid var(--wa-surface-line);
+    }
+    .wa-summary-overview-head .kicker{
+      margin-bottom:4px!important;
+    }
+    .wa-summary-overview-head h3{
+      margin:0!important;
+    }
+    .wa-summary-overview-toggle{
+      appearance:none;
+      border:0;
+      border-bottom:1px solid var(--wa-surface-line);
+      border-radius:0;
+      background:transparent;
+      color:var(--ink);
+      padding:6px 0 5px;
+      font:850 11px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .wa-summary-overview.is-collapsed #summaryData{
+      display:none!important;
+    }
+    .wa-summary-overview.is-collapsed .wa-summary-overview-head{
+      padding-bottom:0;
+      border-bottom:0;
+    }
+
+    .wa-summary-document{
+      min-width:0!important;
+      width:100%!important;
+    }
+
+    /* The preview is the visual focus, not another nested card. */
+    #summaryPanel .editor-box .print-document{
+      border:1px solid color-mix(in srgb,var(--gold) 22%,transparent)!important;
+      border-radius:4px!important;
+      background:color-mix(in srgb,#fffaf0 96%,var(--paper))!important;
+      box-shadow:0 12px 30px rgba(34,27,15,.07)!important;
+    }
+    #summaryPanel .pdf-result{
+      border-left:0!important;
+      border-right:0!important;
+      border-radius:0!important;
+      background:transparent!important;
+    }
+
+    /* Desktop / iPad landscape: use the real screen width. */
+    @media(min-width:900px){
+      body.wa-summary-active .page{
+        padding-left:max(16px,env(safe-area-inset-left))!important;
+        padding-right:max(16px,env(safe-area-inset-right))!important;
+      }
+      #summaryPanel{
+        padding-left:clamp(10px,2vw,30px)!important;
+        padding-right:clamp(10px,2vw,30px)!important;
+      }
+      #summaryPanel .summary-grid{
+        grid-template-columns:minmax(250px,27vw) minmax(0,1fr)!important;
+        gap:clamp(22px,3vw,44px)!important;
+      }
+      #summaryPanel .summary-data{
+        position:sticky;
+        top:calc(12px + env(safe-area-inset-top));
+        max-height:calc(100dvh - 32px - env(safe-area-inset-top));
+        overflow:auto;
+        padding-right:clamp(18px,2vw,32px)!important;
+      }
+      #summaryPanel .editor-box{
+        padding:0!important;
+      }
+    }
+
+    /* Phone / iPad portrait: nearly full bleed, compact overview, document first. */
+    @media(max-width:899px){
+      body.wa-summary-active .page,
+      body.wa-chat-active .page{
+        padding-left:max(2px,env(safe-area-inset-left))!important;
+        padding-right:max(2px,env(safe-area-inset-right))!important;
+      }
+
+      #chatPanel{
+        border-radius:0!important;
+      }
+      #chatPanel .progress{
+        padding-left:12px!important;
+        padding-right:12px!important;
+      }
+      #chatPanel .chat-card{
+        padding-left:12px!important;
+        padding-right:12px!important;
+      }
+
+      #summaryPanel{
+        padding:12px 10px 18px!important;
+      }
+      #summaryPanel>.head{
+        padding-left:2px!important;
+        padding-right:2px!important;
+      }
+      #summaryPanel .summary-grid{
+        display:flex!important;
+        flex-direction:column!important;
+        gap:14px!important;
+      }
+      #summaryPanel .summary-data{
+        order:1;
+        width:100%!important;
+        margin:0!important;
+        padding:0 0 10px!important;
+        border:0!important;
+        border-bottom:1px solid var(--wa-surface-line)!important;
+      }
+      #summaryPanel .editor-box{
+        order:2;
+        width:100%!important;
+        margin:0!important;
+        padding:0!important;
+      }
+      #summaryPanel .wa-summary-overview-head{
+        align-items:center;
+      }
+      #summaryPanel .summary-data>h3{display:none!important}
+      #summaryPanel .wa-summary-reviewbar{
+        margin-top:0!important;
+      }
+      #summaryPanel .editor-box .print-document{
+        width:calc(100% + 8px)!important;
+        margin-left:-4px!important;
+        margin-right:-4px!important;
+        padding:16px 13px!important;
+      }
+      #summaryPanel .actions{
+        margin-top:12px!important;
+      }
+    }
+
+    @media(max-width:430px){
+      #summaryPanel{
+        padding-left:6px!important;
+        padding-right:6px!important;
+      }
+      #chatPanel .progress,
+      #chatPanel .chat-card{
+        padding-left:9px!important;
+        padding-right:9px!important;
+      }
+      #summaryPanel .wa-template-picks{
+        grid-template-columns:repeat(3,minmax(0,1fr))!important;
+      }
+      #summaryPanel .wa-template-pick{
+        min-width:0!important;
+        white-space:normal!important;
+        word-break:normal!important;
+      }
+      #summaryPanel .editor-box .print-document{
+        width:calc(100% + 4px)!important;
+        margin-left:-2px!important;
+        margin-right:-2px!important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1937,7 +2153,7 @@
       <div id="evidenceList" class="evidence-grid"></div>
     </section>
 
-    <section class="panel workspace hidden" id="chatPanel">
+    <section class="workspace hidden" id="chatPanel">
       <aside class="progress">
         <p class="kicker">Fortschritt</p>
         <div class="wa-progress-compact">
@@ -1955,9 +2171,28 @@
       </section>
     </section>
 
-    <section class="panel summary hidden" id="summaryPanel">
-      <div class="head"><div><p class="kicker">Prüfung</p><h2>Zusammenfassung & bearbeitbarer Entwurf</h2></div><button class="btn secondary" type="button" data-action="back-to-chat">Zurück zum Chat</button></div>
-      <div class="summary-grid"><div class="box summary-data"><h3>Erfasste Angaben</h3><div id="summaryData"></div></div><div class="box editor-box"><h3>Wasiyyah-Entwurf</h3><div class="wa-summary-reviewbar"><div><strong>Dokumentvorschau</strong><span id="summaryCompleteness">Angaben prüfen und anschließend PDF erstellen.</span></div><button class="wa-edit-toggle" type="button" data-action="toggle-final-editor">Bearbeiten</button></div><div class="pdf-template-control"><label for="pdfTemplateSelect">PDF-Vorlage</label><select id="pdfTemplateSelect" aria-label="PDF-Vorlage"><option value="royal-blue">Elfenbein & Gold</option><option value="sand-olive">Sand & Olive</option><option value="bordeaux">Creme & Bordeaux-Akzent</option></select><div class="wa-template-picks" aria-label="PDF-Vorlage wählen"><button type="button" class="wa-template-pick" data-template="royal-blue">Elfenbein & Gold</button><button type="button" class="wa-template-pick" data-template="sand-olive">Sand & Olive</button><button type="button" class="wa-template-pick" data-template="bordeaux">Creme & Bordeaux</button></div></div><article id="printDocument" class="print-document" aria-live="polite"></article><textarea id="finalEditor" rows="24" aria-label="Waṣiyyah-Entwurf bearbeiten"></textarea><div id="pdfResult" class="pdf-result" aria-live="polite"></div><div class="actions"><button class="btn secondary" type="button" data-action="regenerate-final">Neu aus Angaben erzeugen</button><button class="btn primary" type="button" data-action="print-pdf">PDF erstellen</button></div></div></div>
+    <section class="summary hidden" id="summaryPanel">
+      <div class="head">
+        <div><p class="kicker">Prüfung</p><h2>Zusammenfassung & bearbeitbarer Entwurf</h2></div>
+        <button class="btn secondary" type="button" data-action="back-to-chat">Zurück zum Chat</button>
+      </div>
+      <div class="summary-grid">
+        <aside class="summary-data wa-summary-overview" id="summaryOverview">
+          <div class="wa-summary-overview-head">
+            <div><p class="kicker">Angaben</p><h3>Erfasste Angaben</h3></div>
+            <button class="wa-summary-overview-toggle" type="button" data-action="toggle-summary-overview" aria-expanded="true">Ausblenden</button>
+          </div>
+          <div id="summaryData"></div>
+        </aside>
+        <section class="editor-box wa-summary-document">
+          <div class="wa-summary-reviewbar"><div><strong>Dokumentvorschau</strong><span id="summaryCompleteness">Angaben prüfen und anschließend PDF erstellen.</span></div><button class="wa-edit-toggle" type="button" data-action="toggle-final-editor">Bearbeiten</button></div>
+          <div class="pdf-template-control"><label for="pdfTemplateSelect">PDF-Vorlage</label><select id="pdfTemplateSelect" aria-label="PDF-Vorlage"><option value="royal-blue">Elfenbein & Gold</option><option value="sand-olive">Sand & Olive</option><option value="bordeaux">Creme & Bordeaux-Akzent</option></select><div class="wa-template-picks" aria-label="PDF-Vorlage wählen"><button type="button" class="wa-template-pick" data-template="royal-blue">Elfenbein & Gold</button><button type="button" class="wa-template-pick" data-template="sand-olive">Sand & Olive</button><button type="button" class="wa-template-pick" data-template="bordeaux">Creme & Bordeaux</button></div></div>
+          <article id="printDocument" class="print-document" aria-live="polite"></article>
+          <textarea id="finalEditor" rows="24" aria-label="Waṣiyyah-Entwurf bearbeiten"></textarea>
+          <div id="pdfResult" class="pdf-result" aria-live="polite"></div>
+          <div class="actions"><button class="btn secondary" type="button" data-action="regenerate-final">Neu aus Angaben erzeugen</button><button class="btn primary" type="button" data-action="print-pdf">PDF erstellen</button></div>
+        </section>
+      </div>
     </section>
     <div id="toast" class="toast"></div>
   </main>
@@ -2098,7 +2333,8 @@
     function clearDraft(){if(!confirm("Lokalen Wasiyyah-Entwurf wirklich löschen?"))return;localStorage.removeItem(STORAGE_KEY);state=emptyDraft();$("#chatMessages").innerHTML="";renderProgress();showPanel("start");toast("Entwurf gelöscht.")}
     function finalText(){const flags=state.reviewFlags.length?state.reviewFlags.map((f,i)=>(i+1)+". "+f).join("\n"):"Keine besonderen Prüfhinweise erfasst.";return "ISLAMISCHE WASIYYAH-ERKLÄRUNG\n\nDiese Erklärung wurde als islamische Wasiyyah vorbereitet. Sie dient der Klärung meiner Wünsche, meiner Schulden, Amānāt, Ansprechpartner und islamischen Anweisungen. Für staatliche Wirksamkeit sind die jeweiligen gesetzlichen Formen separat zu beachten.\n\n1. PERSÖNLICHE ANGABEN\n\n"+(state.personal||"Keine Angaben erfasst.")+"\n\n2. GLAUBE UND GRUNDLAGE\n\n"+(state.faithDeclaration||"Ich bezeuge, dass es keinen anbetungswürdigen Gott gibt außer Allāh und dass Muḥammad ﷺ Sein Diener und Gesandter ist. Ich wünsche, dass meine Angelegenheiten nach Qurʾān, authentischer Sunnah und dem Verständnis der frühen Muslime geregelt werden.")+"\n\n3. FAMILIE UND MÖGLICHE ERBEN\n\n"+(state.family||"Keine Angaben erfasst.")+"\n\nHinweis: Die endgültige Farāʾiḍ-Verteilung hängt von den tatsächlich lebenden Erben zum Todeszeitpunkt ab.\n\n4. SCHULDEN UND OFFENE RECHTE\n\n"+(state.debts||"Keine bekannten Schulden oder offenen Rechte erfasst.")+"\n\n5. AMĀNĀT UND ANVERTRAUTE DINGE\n\n"+(state.amanat||"Keine bekannten Amānāt erfasst.")+"\n\n6. VERMÖGEN UND WICHTIGE DOKUMENTE\n\n"+(state.assets||"Keine Angaben erfasst.")+"\n\n7. ZAKĀH UND RELIGIÖSE PFLICHTEN\n\n"+(state.religiousObligations||"Keine Angaben erfasst.")+"\n\n8. WASIYYAH BIS MAXIMAL EIN DRITTEL\n\n"+(state.bequests||"Keine besondere Wasiyyah erfasst.")+"\n\n9. JANĀZAH NACH SUNNAH\n\n"+(state.janazah||"Ich wünsche Ghusl, Kafan, Ṣalāt al-Janāzah und Beerdigung auf einem muslimischen Grabfeld, soweit möglich.")+"\n\n10. NICHT GEWÜNSCHTE NEUERUNGEN UND ZEREMONIEN\n\n"+(state.bidahRestrictions||"Ich wünsche ausdrücklich, dass alles nach Qurʾān, authentischer Sunnah und dem Verständnis der frühen Muslime erfolgt. Ich lehne Schirk, Bidʿah, unbelegte religiöse Zeremonien, übertriebenes Trauern, Musik, Klagegeschrei, Grab-Bauten, Kuppeln, Bilder, Statuen und jede Handlung ab, die dem Tauḥīd und der Sunnah widerspricht.")+"\n\n11. KINDER / VORMUNDSCHAFT / PRIVATE WÜNSCHE\n\n"+(state.guardianship||"Keine Angaben erfasst.")+"\n\n12. ANSPRECHPARTNER / WASIYY\n\n"+(state.contacts||"Keine Angaben erfasst.")+"\n\n13. PRIVATE HINWEISE AN ANGEHÖRIGE\n\n"+(state.privateNotes||"Ich bitte meine Angehörigen, mit Taqwā, Ruhe und Gerechtigkeit zu handeln, Streit zu vermeiden und bei Unsicherheit fachkundige Menschen von Ahl al-Sunnah zu fragen.")+"\n\n14. PRÜFHINWEISE\n\n"+flags+"\n\n15. QUELLEN-KURZHINWEIS\n\n- Qurʾān 4:11-12: Erbanteile und Reihenfolge nach Wasiyyah/Schuld.\n- Ṣaḥīḥ al-Bukhārī 2738: Wasiyyah nicht aufschieben.\n- Ṣaḥīḥ al-Bukhārī 2742: Ein Drittel, und ein Drittel ist viel.\n- Sunan Abī Dāwūd 2870: Keine Wasiyyah für einen Erben.\n- Ṣaḥīḥ al-Bukhārī 6732: Farāʾiḍ den Berechtigten geben.\n- Ṣaḥīḥ al-Bukhārī 6764: Unterschied der Religion als Erbhindernis.\n- Jāmiʿ at-Tirmidhī 1078: Ernst der Schulden.\n- Ṣaḥīḥ Muslim 970a und 969a: Regeln zu Gräbern und Verbot von Übertreibung.\n- Ṣaḥīḥ al-Bukhārī 1294: Warnung vor Jāhiliyyah-Trauerritualen.\n\nOrt: ______________________________\n\nDatum: ____ / ____ / _____________\n\nUnterschrift: _______________________"}
     function renderSummary(){const rows=[["Persönliche Angaben",state.personal],["Glaube & Grundlage",state.faithDeclaration],["Familie",state.family],["Schulden",state.debts],["Amānāt",state.amanat],["Vermögen",state.assets],["Religiöse Pflichten",state.religiousObligations],["Wasiyyah",state.bequests],["Janāzah",state.janazah],["Keine Bidʿah/Zeremonien",state.bidahRestrictions],["Kinder/Vormundschaft",state.guardianship],["Ansprechpartner",state.contacts],["Private Hinweise",state.privateNotes],["Prüfhinweise",state.reviewFlags.join("\n")]];const box=$("#summaryData");box.innerHTML="";const visible=rows.filter(r=>String(r[1]||"").trim());if(!visible.length){const empty=document.createElement("div");empty.className="wa-summary-empty";empty.innerHTML="<strong>Noch keine eigenen Angaben</strong><span>Im Testmodus kannst du die PDF trotzdem prüfen. Sobald du Antworten einträgst, erscheinen sie hier kompakt.</span>";box.appendChild(empty)}else{visible.forEach(r=>{const div=document.createElement("div");div.className="row";div.innerHTML="<b>"+esc(r[0])+"</b><span>"+esc(r[1])+"</span>";box.appendChild(div)})}const filled=rows.slice(0,13).filter(r=>String(r[1]||"").trim()).length;const complete=$("#summaryCompleteness");if(complete)complete.textContent=filled+" von 13 Bereichen mit eigenen Angaben · vor PDF bitte prüfen."}
-    function showSummary(){state.finalText=finalText();renderSummary();$("#finalEditor").value=state.finalText;buildPrintDocument(state.finalText);showPanel("summary");resetDocumentScroll();requestAnimationFrame(()=>{resetDocumentScroll();panels.summary.scrollIntoView({behavior:"auto",block:"start"})})}
+    function setSummaryOverviewCollapsed(collapsed){const box=$("#summaryOverview");const btn=document.querySelector('[data-action="toggle-summary-overview"]');if(!box)return;box.classList.toggle("is-collapsed",collapsed);if(btn){btn.setAttribute("aria-expanded",collapsed?"false":"true");btn.textContent=collapsed?"Angaben anzeigen":"Ausblenden"}}
+    function showSummary(){state.finalText=finalText();renderSummary();$("#finalEditor").value=state.finalText;buildPrintDocument(state.finalText);showPanel("summary");setSummaryOverviewCollapsed(window.matchMedia("(max-width:899px)").matches);resetDocumentScroll();requestAnimationFrame(()=>{resetDocumentScroll();panels.summary.scrollIntoView({behavior:"auto",block:"start"})})}
     function resetDocumentScroll(){try{window.scrollTo(0,0)}catch(e){}try{if(document.scrollingElement)document.scrollingElement.scrollTop=0}catch(e){}}
     function scrollChatToBottom(behavior="auto"){const box=$("#chatMessages");if(!box)return;requestAnimationFrame(()=>box.scrollTo({top:box.scrollHeight,behavior}))}
     function syncVisualViewport(){const vv=window.visualViewport;const h=vv?vv.height:window.innerHeight;const top=vv?vv.offsetTop:0;document.documentElement.style.setProperty("--wa-vv-height",Math.max(320,Math.round(h))+"px");document.documentElement.style.setProperty("--wa-vv-top",Math.max(0,Math.round(top))+"px")}
@@ -2108,7 +2344,7 @@
     function setupKeyboardDock(){const input=$("#chatInput");if(!input)return;syncVisualViewport();input.addEventListener("input",()=>{resizeChatInput();scrollChatToBottom("auto")});input.addEventListener("focus",()=>{resetDocumentScroll();setKeyboardDock(true);resizeChatInput();scrollChatToBottom("auto")});input.addEventListener("blur",()=>setTimeout(()=>setKeyboardDock(false),220));if(window.visualViewport){window.visualViewport.addEventListener("resize",()=>{syncVisualViewport();if(document.body.classList.contains("wa-keyboard")){resetDocumentScroll();scrollChatToBottom("auto")}});window.visualViewport.addEventListener("scroll",()=>{syncVisualViewport();if(document.body.classList.contains("wa-keyboard"))resetDocumentScroll()})}window.addEventListener("orientationchange",()=>setTimeout(()=>{resetDocumentScroll();syncVisualViewport()},180));window.addEventListener("resize",syncVisualViewport);window.addEventListener("pageshow",()=>{if(!panels.chat.classList.contains("hidden")){setAppMode("chat");stabilizeChatViewport()}})}
     function start(){state=emptyDraft();state.phaseIndex=1;state.history=[];showPanel("chat");renderProgress();ask();syncVisualViewport();scrollChatToBottom("auto")}
     $("#chatForm").addEventListener("submit",e=>{e.preventDefault();const input=$("#chatInput");const answer=input.value.trim();if(!answer){toast("Bitte zuerst eine Antwort eingeben.");return}input.value="";resizeChatInput();handle(answer);requestAnimationFrame(()=>{syncVisualViewport();scrollChatToBottom("auto");input.focus()})});
-    document.addEventListener("click",e=>{const action=e.target.closest("[data-action]")?.dataset.action;if(!action)return;if(action==="start-chat")start();if(action==="show-evidence"){renderEvidence();panels.evidence.classList.remove("hidden")}if(action==="hide-evidence")panels.evidence.classList.add("hidden");if(action==="load-draft")load();if(action==="save-draft")save(true);if(action==="clear-draft")clearDraft();if(action==="show-summary")showSummary();if(action==="back-to-chat")showPanel("chat");if(action==="regenerate-final"){state.finalText=finalText();$("#finalEditor").value=state.finalText;buildPrintDocument(state.finalText);toast("Entwurf neu erzeugt.")}if(action==="print-pdf")openPdfRender();if(action==="complete-pdf-required"){const issue=lastPdfIssues[0];if(issue&&issue.phaseIndex>=0){state.phaseIndex=issue.phaseIndex;showPanel("chat");renderProgress();ask();save(false);stabilizeChatViewport()}}if(action==="previous-question"){if(state.phaseIndex>0){state.phaseIndex--;ask();save(false)}}if(action==="toggle-progress-details"){document.body.classList.toggle("wa-progress-open");const b=e.target.closest("[data-action='toggle-progress-details']");if(b)b.textContent=document.body.classList.contains("wa-progress-open")?"Schritte ausblenden":"Alle Schritte anzeigen"}if(action==="toggle-final-editor"){const box=e.target.closest(".editor-box");if(box){box.classList.toggle("wa-editor-open");const b=e.target.closest("[data-action='toggle-final-editor']");if(b)b.textContent=box.classList.contains("wa-editor-open")?"Vorschau":"Bearbeiten"}}if(action==="app-back")returnToApp()});
+    document.addEventListener("click",e=>{const action=e.target.closest("[data-action]")?.dataset.action;if(!action)return;if(action==="start-chat")start();if(action==="show-evidence"){renderEvidence();panels.evidence.classList.remove("hidden")}if(action==="hide-evidence")panels.evidence.classList.add("hidden");if(action==="load-draft")load();if(action==="save-draft")save(true);if(action==="clear-draft")clearDraft();if(action==="show-summary")showSummary();if(action==="back-to-chat")showPanel("chat");if(action==="regenerate-final"){state.finalText=finalText();$("#finalEditor").value=state.finalText;buildPrintDocument(state.finalText);toast("Entwurf neu erzeugt.")}if(action==="print-pdf")openPdfRender();if(action==="complete-pdf-required"){const issue=lastPdfIssues[0];if(issue&&issue.phaseIndex>=0){state.phaseIndex=issue.phaseIndex;showPanel("chat");renderProgress();ask();save(false);stabilizeChatViewport()}}if(action==="previous-question"){if(state.phaseIndex>0){state.phaseIndex--;ask();save(false)}}if(action==="toggle-progress-details"){document.body.classList.toggle("wa-progress-open");const b=e.target.closest("[data-action='toggle-progress-details']");if(b)b.textContent=document.body.classList.contains("wa-progress-open")?"Schritte ausblenden":"Alle Schritte anzeigen"}if(action==="toggle-summary-overview"){const box=$("#summaryOverview");setSummaryOverviewCollapsed(!box||!box.classList.contains("is-collapsed"))}if(action==="toggle-final-editor"){const box=e.target.closest(".editor-box");if(box){box.classList.toggle("wa-editor-open");const b=e.target.closest("[data-action='toggle-final-editor']");if(b)b.textContent=box.classList.contains("wa-editor-open")?"Vorschau":"Bearbeiten"}}if(action==="app-back")returnToApp()});
     function returnToApp(){try{sessionStorage.setItem("darSkipSoftBootOnce","1")}catch(e){}const fallback=location.pathname.indexOf("/test/")===0?"/test/#more":"/#more";let canBack=false;try{const ref=document.referrer?new URL(document.referrer):null;canBack=!!(ref&&ref.origin===location.origin&&!/\/wasiyyah(?:\/|$)/.test(ref.pathname)&&history.length>1)}catch(e){}if(canBack){history.back();return}location.replace(fallback)}
     $("#finalEditor").addEventListener("input",e=>buildPrintDocument(e.target.value));
     applyTheme();
