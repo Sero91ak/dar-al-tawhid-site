@@ -3386,6 +3386,340 @@
     );
   }
 
+  /* FRAUEN_SHARE_V1223
+     Share-Schicht für Aussagen: WhatsApp, Telegram, Instagram über System-Share,
+     native Weitergabe, Text/Link kopieren sowie lokal erzeugter 4:5-Bildbeitrag. */
+
+  function frauenShareIcon(kind) {
+    if (kind === "wa") return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.84 9.84 0 0 0-8.46 14.86L2 22l5.3-1.39A9.98 9.98 0 1 0 12.04 2Zm0 17.96a8.1 8.1 0 0 1-4.12-1.13l-.3-.18-3.15.83.84-3.07-.2-.31a8.06 8.06 0 1 1 6.93 3.86Zm4.43-6.04c-.24-.12-1.43-.71-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.95-1.2-.72-.64-1.2-1.43-1.35-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.43-.59 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28Z"/></svg>';
+    if (kind === "tg") return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.65 3.25 18.5 20.1c-.24 1.19-.88 1.48-1.78.92l-4.8-3.54-2.32 2.23c-.26.26-.47.47-.97.47l.35-4.89 8.9-8.04c.39-.35-.08-.54-.6-.19L6.28 14l-4.74-1.48c-1.03-.32-1.05-1.03.21-1.52L20.28 3.86c.86-.32 1.61.19 1.37 1.39Z"/></svg>';
+    if (kind === "ig") return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm5 3.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4Zm0 2.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.3-2.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg>';
+    if (kind === "share") return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0-11 4 4m-4-4L8 7M5 11v8h14v-8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    if (kind === "copy") return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+    if (kind === "link") return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 14.5 14.5 9m-7.2 8.4-1.1 1.1a3.2 3.2 0 0 1-4.5-4.5l3.2-3.2a3.2 3.2 0 0 1 4.5 0m7.3-4.2 1.1-1.1a3.2 3.2 0 0 1 4.5 4.5l-3.2 3.2a3.2 3.2 0 0 1-4.5 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM7 15l3-3 2 2 3-4 2 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8" cy="9" r="1.2"/></svg>';
+  }
+
+  function frauenSharePanel(abschnitt, e) {
+    return (
+      '<section class="frauen-share-panel share-panel" aria-label="Aussage teilen">' +
+        '<div class="frauen-share-head"><div><span>Teilen</span><h3>Wissen weitergeben</h3></div><p>Text, Link oder Bildbeitrag</p></div>' +
+        '<div class="frauen-share-primary">' +
+          '<button type="button" class="frauen-share-btn share-btn wa" data-frauen-share="wa" data-share-abschnitt="' + esc(abschnitt) + '" data-share-kennung="' + esc(e.kennung) + '" aria-label="Mit WhatsApp teilen"><span class="frauen-share-icon">' + frauenShareIcon("wa") + '</span><b>WhatsApp</b></button>' +
+          '<button type="button" class="frauen-share-btn share-btn tg" data-frauen-share="tg" data-share-abschnitt="' + esc(abschnitt) + '" data-share-kennung="' + esc(e.kennung) + '" aria-label="Mit Telegram teilen"><span class="frauen-share-icon">' + frauenShareIcon("tg") + '</span><b>Telegram</b></button>' +
+          '<button type="button" class="frauen-share-btn share-btn ig" data-frauen-share="ig" data-share-abschnitt="' + esc(abschnitt) + '" data-share-kennung="' + esc(e.kennung) + '" aria-label="Für Instagram als Bildbeitrag teilen"><span class="frauen-share-icon">' + frauenShareIcon("ig") + '</span><b>Instagram</b></button>' +
+          '<button type="button" class="frauen-share-btn share-btn native" data-frauen-share="native" data-share-abschnitt="' + esc(abschnitt) + '" data-share-kennung="' + esc(e.kennung) + '" aria-label="Weiterleiten"><span class="frauen-share-icon">' + frauenShareIcon("share") + '</span><b>Teilen</b></button>' +
+        '</div>' +
+        '<div class="frauen-share-tools">' +
+          '<button type="button" class="frauen-share-tool" data-frauen-share="copy-text" data-share-abschnitt="' + esc(abschnitt) + '" data-share-kennung="' + esc(e.kennung) + '"><span>' + frauenShareIcon("copy") + '</span><b>Text kopieren</b></button>' +
+          '<button type="button" class="frauen-share-tool" data-frauen-share="copy-link" data-share-abschnitt="' + esc(abschnitt) + '" data-share-kennung="' + esc(e.kennung) + '"><span>' + frauenShareIcon("link") + '</span><b>Link kopieren</b></button>' +
+          '<button type="button" class="frauen-share-tool frauen-share-tool--image" data-frauen-share="image" data-share-abschnitt="' + esc(abschnitt) + '" data-share-kennung="' + esc(e.kennung) + '"><span>' + frauenShareIcon("image") + '</span><b>Bildbeitrag</b></button>' +
+        '</div>' +
+        '<p class="frauen-share-note">Instagram öffnet über das System-Menü; dort Instagram auswählen. Bildbeiträge werden lokal in der App erzeugt.</p>' +
+      '</section>'
+    );
+  }
+
+  function frauenToast(message) {
+    try {
+      if (typeof window.__darToast === "function") { window.__darToast(message); return; }
+      if (typeof window.showToast === "function") { window.showToast(message); return; }
+      if (typeof window.toast === "function") { window.toast(message); return; }
+    } catch (e) {}
+    var old = document.querySelector(".frauen-share-toast");
+    if (old) old.remove();
+    var node = document.createElement("div");
+    node.className = "frauen-share-toast";
+    node.setAttribute("role", "status");
+    node.textContent = message;
+    document.body.appendChild(node);
+    requestAnimationFrame(function () { node.classList.add("is-visible"); });
+    setTimeout(function () {
+      node.classList.remove("is-visible");
+      setTimeout(function () { try { node.remove(); } catch (e) {} }, 240);
+    }, 1800);
+  }
+
+  function frauenShareEntry(abschnitt, kennung) {
+    var data = cacheFor(abschnitt);
+    return (data && data.eintraege || []).find(function (x) {
+      return x.kennung === kennung && istSichtbar(x);
+    }) || null;
+  }
+
+  function frauenShareUrl(abschnitt, kennung) {
+    try {
+      var base = location.origin + location.pathname;
+      return base + "#/frauen/" + encodeURIComponent(abschnitt) + "/" + encodeURIComponent(kennung);
+    } catch (e) {
+      return location.href;
+    }
+  }
+
+  function frauenSharePayload(abschnitt, e) {
+    var title = titelVon(e) || bereichKicker(abschnitt) || "Frauen im Islam";
+    var body = String(aussageVon(e) || "").trim();
+    var lehre = String(lehreVon(e) || "").trim();
+    var quelle = String(quelleText(e) || "").trim();
+    var text = "DĀR AL TAWḤĪD · " + bereichKicker(abschnitt) + "\n\n" + title;
+    if (body) text += "\n\n" + body;
+    if (lehre) text += "\n\nLehre / Nutzen:\n" + lehre;
+    if (quelle) text += "\n\nQuelle: " + quelle;
+    text += "\n\nFolgt für mehr Wissen aus Qurʾān & Sunnah";
+    return {
+      title: title + " · DĀR AL TAWḤĪD",
+      text: text,
+      url: frauenShareUrl(abschnitt, e.kennung)
+    };
+  }
+
+  async function frauenCopyText(value) {
+    var text = String(value || "");
+    if (!text) return false;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (e) {}
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand("copy");
+      ta.remove();
+      return !!ok;
+    } catch (e2) {
+      return false;
+    }
+  }
+
+  async function frauenNativeShare(payload) {
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: payload.title, text: payload.text, url: payload.url });
+        return true;
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") return true;
+    }
+    var copied = await frauenCopyText(payload.text + "\n\n" + payload.url);
+    if (copied) frauenToast("Text und Link kopiert");
+    return copied;
+  }
+
+  function frauenLoadImage(src) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      img.onload = function () { resolve(img); };
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
+
+  function frauenWrapCanvas(ctx, text, maxWidth) {
+    var out = [];
+    String(text || "").split(/\n+/).forEach(function (para, pIndex) {
+      var words = para.trim().split(/\s+/).filter(Boolean);
+      if (!words.length) {
+        if (pIndex) out.push("");
+        return;
+      }
+      var line = "";
+      words.forEach(function (word) {
+        var next = line ? line + " " + word : word;
+        if (line && ctx.measureText(next).width > maxWidth) {
+          out.push(line);
+          line = word;
+        } else {
+          line = next;
+        }
+      });
+      if (line) out.push(line);
+      if (pIndex < String(text || "").split(/\n+/).length - 1) out.push("");
+    });
+    return out;
+  }
+
+  function frauenCanvasBlob(canvas) {
+    return new Promise(function (resolve) {
+      canvas.toBlob(function (blob) { resolve(blob); }, "image/png", 0.96);
+    });
+  }
+
+  async function frauenImageFiles(abschnitt, e) {
+    var W = 1080, H = 1350, margin = 86, contentW = W - margin * 2;
+    var canvas = document.createElement("canvas");
+    canvas.width = W;
+    canvas.height = H;
+    var ctx = canvas.getContext("2d");
+    var bg = null;
+    var imagePath = location.pathname.indexOf("/test/") === 0
+      ? "/test/assets/home-v1194/study-runway.jpg"
+      : "/assets/home-v1194/study-runway.jpg";
+    try { bg = await frauenLoadImage(imagePath); } catch (err) {}
+    try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e0) {}
+
+    ctx.font = "600 43px Georgia, serif";
+    var titleLines = frauenWrapCanvas(ctx, titelVon(e), contentW);
+    ctx.font = "400 37px Georgia, serif";
+    var bodyLines = frauenWrapCanvas(ctx, aussageVon(e), contentW);
+    var linesPerPage = 14;
+    var pages = [];
+    for (var i = 0; i < bodyLines.length; i += linesPerPage) pages.push(bodyLines.slice(i, i + linesPerPage));
+    if (!pages.length) pages = [[]];
+    if (pages.length > 7) {
+      pages = pages.slice(0, 7);
+      pages[6].push("…");
+    }
+
+    var files = [];
+    for (var p = 0; p < pages.length; p++) {
+      ctx.clearRect(0, 0, W, H);
+      if (bg) {
+        var scale = Math.max(W / bg.width, H / bg.height);
+        var dw = bg.width * scale, dh = bg.height * scale;
+        ctx.drawImage(bg, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      } else {
+        ctx.fillStyle = "#0b211d";
+        ctx.fillRect(0, 0, W, H);
+      }
+      var grad = ctx.createLinearGradient(0, 0, W, H);
+      grad.addColorStop(0, "rgba(3,17,16,.92)");
+      grad.addColorStop(.58, "rgba(6,26,22,.82)");
+      grad.addColorStop(1, "rgba(11,20,16,.62)");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.fillStyle = "#e6cb86";
+      ctx.font = "700 25px Arial, sans-serif";
+      ctx.letterSpacing = "2px";
+      ctx.fillText("DĀR AL TAWḤĪD", margin, 88);
+
+      ctx.strokeStyle = "rgba(230,203,134,.58)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(margin, 116);
+      ctx.lineTo(W - margin, 116);
+      ctx.stroke();
+
+      var y = 176;
+      ctx.fillStyle = "#f7eedc";
+      ctx.font = "600 43px Georgia, serif";
+      titleLines.slice(0, 3).forEach(function (line) {
+        ctx.fillText(line, margin, y);
+        y += 54;
+      });
+      y += 28;
+
+      ctx.fillStyle = "#fffaf0";
+      ctx.font = "400 37px Georgia, serif";
+      pages[p].forEach(function (line) {
+        if (!line) { y += 28; return; }
+        ctx.fillText(line, margin, y);
+        y += 55;
+      });
+
+      ctx.fillStyle = "rgba(248,236,207,.74)";
+      ctx.font = "600 24px Arial, sans-serif";
+      ctx.fillText(bereichKicker(abschnitt), margin, H - 160);
+
+      if (p === pages.length - 1) {
+        var src = "Quelle: " + String(quelleText(e) || "");
+        ctx.font = "400 20px Arial, sans-serif";
+        var sourceLines = frauenWrapCanvas(ctx, src, contentW).slice(0, 2);
+        var sy = H - 118;
+        sourceLines.forEach(function (line) {
+          ctx.fillText(line, margin, sy);
+          sy += 28;
+        });
+      }
+
+      ctx.fillStyle = "#e6cb86";
+      ctx.font = "700 22px Arial, sans-serif";
+      ctx.textAlign = "right";
+      ctx.fillText((p + 1) + " / " + pages.length, W - margin, H - 64);
+      ctx.textAlign = "left";
+      ctx.fillText("dar-al-tauhid.de", margin, H - 64);
+
+      var blob = await frauenCanvasBlob(canvas);
+      if (blob) files.push(new File([blob], "dar-al-tawhid-frauen-" + (p + 1) + ".png", { type: "image/png" }));
+    }
+    return files;
+  }
+
+  async function frauenShareImage(abschnitt, e, instagramIntent) {
+    var payload = frauenSharePayload(abschnitt, e);
+    frauenToast("Bildbeitrag wird erstellt …");
+    var files = [];
+    try { files = await frauenImageFiles(abschnitt, e); } catch (err) {}
+    if (files.length) {
+      try {
+        if (navigator.canShare && navigator.canShare({ files: files }) && navigator.share) {
+          if (instagramIntent) frauenToast("Im Teilen-Menü Instagram auswählen");
+          await navigator.share({ title: payload.title, text: "DĀR AL TAWḤĪD", files: files });
+          return true;
+        }
+        if (navigator.canShare && navigator.canShare({ files: [files[0]] }) && navigator.share) {
+          if (instagramIntent) frauenToast("Im Teilen-Menü Instagram auswählen");
+          await navigator.share({ title: payload.title, text: "DĀR AL TAWḤĪD", files: [files[0]] });
+          return true;
+        }
+      } catch (err2) {
+        if (err2 && err2.name === "AbortError") return true;
+      }
+      try {
+        var blobUrl = URL.createObjectURL(files[0]);
+        window.open(blobUrl, "_blank", "noopener");
+        setTimeout(function () { try { URL.revokeObjectURL(blobUrl); } catch (e3) {} }, 60000);
+        frauenToast("Bild geöffnet – zum Teilen speichern oder weiterleiten");
+        return true;
+      } catch (e4) {}
+    }
+    return frauenNativeShare(payload);
+  }
+
+  async function frauenHandleShare(button) {
+    var action = button.getAttribute("data-frauen-share") || "";
+    var abschnitt = button.getAttribute("data-share-abschnitt") || "";
+    var kennung = button.getAttribute("data-share-kennung") || "";
+    var e = frauenShareEntry(abschnitt, kennung);
+    if (!e) { frauenToast("Aussage konnte nicht geladen werden"); return; }
+    var payload = frauenSharePayload(abschnitt, e);
+
+    if (action === "copy-text") {
+      var okText = await frauenCopyText(payload.text);
+      frauenToast(okText ? "Text kopiert" : "Kopieren nicht möglich");
+      return;
+    }
+    if (action === "copy-link") {
+      var okLink = await frauenCopyText(payload.url);
+      frauenToast(okLink ? "Link kopiert" : "Link konnte nicht kopiert werden");
+      return;
+    }
+    if (action === "wa") {
+      window.open("https://wa.me/?text=" + encodeURIComponent(payload.text + "\n\n" + payload.url), "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (action === "tg") {
+      window.open("https://t.me/share/url?url=" + encodeURIComponent(payload.url) + "&text=" + encodeURIComponent(payload.text), "_blank", "noopener,noreferrer");
+      return;
+    }
+    if (action === "ig") {
+      await frauenShareImage(abschnitt, e, true);
+      return;
+    }
+    if (action === "image") {
+      await frauenShareImage(abschnitt, e, false);
+      return;
+    }
+    await frauenNativeShare(payload);
+  }
+
   function renderDetail(abschnitt, kennung) {
     var data = cacheFor(abschnitt);
     var e = (data.eintraege || []).find(function (x) {
@@ -3430,6 +3764,7 @@
       "</div></section>" +
       nachBericht +
       "</section>" +
+      frauenSharePanel(abschnitt, e) +
       '<button type="button" class="frauen-open-btn" data-nav="frauen" data-value="' +
       esc(abschnitt) +
       '">Zurück zur Übersicht</button>' +
@@ -3955,6 +4290,21 @@
   }
 
   document.addEventListener("click", function (ev) {
+    var share = ev.target && ev.target.closest ? ev.target.closest("[data-frauen-share]") : null;
+    if (share) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      if (share.dataset.shareBusy === "1") return;
+      share.dataset.shareBusy = "1";
+      share.classList.add("is-busy");
+      Promise.resolve(frauenHandleShare(share)).catch(function () {
+        frauenToast("Teilen ist gerade nicht verfügbar");
+      }).finally(function () {
+        share.dataset.shareBusy = "0";
+        share.classList.remove("is-busy");
+      });
+      return;
+    }
     var toggle = ev.target && ev.target.closest ? ev.target.closest("[data-frauen-filter-toggle]") : null;
     if (toggle) {
       ev.preventDefault();
