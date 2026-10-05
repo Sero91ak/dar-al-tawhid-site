@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v70-stories1140",
-  "label": "KIDS · V1.07.74",
-  "releasedAt": "2026-10-05T15:55:00+02:00",
-  "note": "Kids v1140: Lesemodus und „Hören & mitlesen“ halten den Bildschirm jetzt aktiv, damit während einer Geschichte keine automatische Abdunkelung oder Tastensperre durch Inaktivität einsetzt. Reines Hören bleibt davon getrennt: dabei darf das Gerät normal dimmen und sperren, während die Audiowiedergabe weiterläuft. Beim Schließen des Lesemodus, beim Verlassen des Bereichs und nach Ende einer mitgelesenen Hörgeschichte wird die Bildschirm-Wachhaltung automatisch wieder freigegeben. Für Browser/PWA wird die Screen Wake Lock API genutzt; die native iOS-Kids-App schaltet zusätzlich den iOS-Idle-Timer nur während aktiver Lesemodi ab.",
+  "buildId": "kids-shell-v71-stories1141",
+  "label": "KIDS · V1.07.75",
+  "releasedAt": "2026-10-05T16:02:00+02:00",
+  "note": "Kids v1141: Der große Podcast-Player wurde wieder zurückgebaut. Die Hörgeschichte nutzt erneut den einfachen universellen StoryPlayer mit Bildbereich oben, klaren Wiedergabe-Tasten und den zwei einfachen Funktionen „Text lesen“ und „Mitlesen“. Beim Mitlesen bleibt der intelligente, zeitgesteuerte Reader erhalten: vorhandene Absatz-Zeitstempel werden bevorzugt, der aktuelle Abschnitt wird markiert und nur der Textbereich selbst scrollt automatisch – nicht die ganze Seite. Die neue Bildschirm-Wachhaltung aus v1140 bleibt unverändert aktiv: Lesen/Mitlesen hält den Bildschirm wach, reines Hören nicht.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1140",
+    "serviceWorkerCache": "v1141",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -167,7 +167,7 @@
     "storiesBottomNavClearance": "v1133-safe-area",
     "storiesBottomNav": "separated-background-v1086",
     "storyFollowReader": "v8",
-    "storyFollowReaderMode": "shared-engine-inline-page-reader-v1139",
+    "storyFollowReaderMode": "internal-smart-scroll-timestamp-aware-v1141",
     "storyFollowReaderReusable": true,
     "sectionEntryHeroes": "edge-to-edge-compact-photoreal-v1097",
     "sectionHeroArtworkFormat": "local-png-jpeg",
@@ -469,10 +469,10 @@
     "storyHubAssetVersion": 5,
     "storyHubCategoryArtwork": "manifest-first-local",
     "storyLegacyAudioPlayers": false,
-    "storyHubCssVersion": 5,
+    "storyHubCssVersion": 6,
     "storyReaderControls": "inline-podcast-dock-v1139",
     "storyReaderTouch": "inline-player-scroll-iphone-ipad-v1139",
-    "storyReaderInternalScroll": false,
+    "storyReaderInternalScroll": true,
     "storyReaderGestureGuard": true,
     "storyReaderCloseRestoresPosition": true,
     "sahabiyyatArtworkVersion": 1127,
@@ -486,7 +486,7 @@
     ],
     "sahabiyyatNameOverlay": true,
     "sahabiyyatNameOverlayPlacement": "card-and-hero-in-own-library-and-universal-story-hub",
-    "storyHubJsVersion": 12,
+    "storyHubJsVersion": 13,
     "sahabiyyatDistinctNewArtworks": [
       "sawdah",
       "juwayriyyah",
@@ -590,7 +590,7 @@
     "storyReaderBackgroundInert": false,
     "storyReaderReadOnlyMode": true,
     "storyReaderListenAndFollowMode": true,
-    "storyReaderInternalScrollGeometry": "player-page-flow-with-sticky-podcast-v1139",
+    "storyReaderInternalScrollGeometry": "reader-pane-only-v1141",
     "storyAreaJumpMode": "direct-library-selector",
     "storiesHomeResponsiveHierarchy": "phone-tablet-portrait-tablet-landscape-desktop-v1138",
     "storiesHomeNoTextCtaOverlap": true,
@@ -602,7 +602,10 @@
     "screenAwakePolicy": "reading-only-not-audio-only",
     "screenAwakeBrowser": "screen-wake-lock-api",
     "screenAwakeNativeIOS": "idle-timer-disabled-while-reading",
-    "screenAwakeRelease": "close-navigation-or-follow-audio-ended"
+    "screenAwakeRelease": "close-navigation-or-follow-audio-ended",
+    "storyPlayerUi": "simple-universal-player-restored-v1141",
+    "storyReaderPodcastSticky": false,
+    "storyReaderExactTimingPreferred": true
   },
   "updatedAt": "2026-10-05"
 }
