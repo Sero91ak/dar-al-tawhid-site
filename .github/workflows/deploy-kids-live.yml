@@ -80,11 +80,12 @@ jobs:
           if(!followJs||!index.includes("/kids/story-follow-reader.js?v="+followJs))throw new Error("Current story follow-reader JS missing");
           if(!followCss||!index.includes("/kids/story-follow-reader.css?v="+followCss))throw new Error("Current story follow-reader CSS missing");
           if(!fs.existsSync("kids/story-hub.js")||!fs.existsSync("kids/story-hub.css"))throw new Error("Universal story hub files missing");
-          if((storyHubJs.match(/new Audio\(/g)||[]).length!==1)throw new Error("Universal StoryPlayer must own exactly one Audio engine");
-          if([prophetJs,sahabaJs,sahabiyyatJs].some(js=>js.includes("new Audio(")))throw new Error("Legacy story audio engine returned");
-          if(!prophetJs.includes('hub.openStory("prophets",id)'))throw new Error("Prophet Hören is not delegated to Universal StoryPlayer");
-          if(!sahabaJs.includes('hub.openStory("sahaba",id)'))throw new Error("Ṣaḥābah Hören is not delegated to Universal StoryPlayer");
-          if(!sahabiyyatJs.includes('hub.openStory("sahabiyyat",id)'))throw new Error("Ṣaḥābiyyāt Hören is not delegated to Universal StoryPlayer");
+          if([prophetJs,sahabaJs,sahabiyyatJs].some(js=>(js.match(/new Audio\(/g)||[]).length!==1))throw new Error("Each story library must own exactly one local Audio engine");
+          if([prophetJs,sahabaJs,sahabiyyatJs].some(js=>js.includes("openUniversalAudio")))throw new Error("Central story-player delegation returned");
+          if(!prophetJs.includes("psBack15")||!prophetJs.includes("psFwd15")||!prophetJs.includes("seekBy(-15)")||!prophetJs.includes("openReadAlong"))throw new Error("Prophet local audio/read-along controls missing");
+          if(!sahabaJs.includes("msBack15")||!sahabaJs.includes("msFwd15")||!sahabaJs.includes("seekBy(-15)")||!sahabaJs.includes("openReadAlong"))throw new Error("Ṣaḥābah local audio/read-along controls missing");
+          if(!sahabiyyatJs.includes("syBack15")||!sahabiyyatJs.includes("syFwd15")||!sahabiyyatJs.includes("seekBy(-15)")||!sahabiyyatJs.includes("openReadAlong"))throw new Error("Ṣaḥābiyyāt local audio/read-along controls missing");
+          if(!storyHubJs.includes('document.getElementById("ghEntry")?.remove()'))throw new Error("Central Hörwelten entry must stay removed");
           if(!sahabiyyatJs.includes("sy-image-name"))throw new Error("Ṣaḥābiyyāt card image-name overlay missing");
           if(sahabiyyatJs.includes("syHeroName"))throw new Error("Ṣaḥābiyyāt detail name duplicated in hero");
           if(!storyHubJs.includes("gh-story-art-name"))throw new Error("Universal Ṣaḥābiyyāt card image-name overlay missing");
