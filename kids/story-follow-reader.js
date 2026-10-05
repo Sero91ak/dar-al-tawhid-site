@@ -380,6 +380,7 @@ function create(options){
     updatePositionState();
   }
   function lockBackground(){
+    unlockBackground();
     backgroundLocks=[];
     Array.from(document.body.children).forEach(el=>{
       if(el===root||!(el instanceof HTMLElement)||["SCRIPT","STYLE","LINK"].includes(el.tagName)||el.hasAttribute("inert"))return;
