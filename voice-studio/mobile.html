@@ -156,11 +156,21 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",finalAudioName:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],wordResultSerial:0,generating:false};
-const MOBILE_APP_VERSION="2.9.111";
+const MOBILE_APP_VERSION="2.9.112";
 const LOCAL_ENGINE_HOST=location.port==="8787"||location.hostname==="127.0.0.1"||location.hostname==="localhost"||/^192\.168\./.test(location.hostname)||/^10\./.test(location.hostname)||/^172\.(1[6-9]|2\d|3[01])\./.test(location.hostname);
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
+const CLOUD_API_BASE="/voice-studio/api";
 const API_BASE=LOCAL_ENGINE_HOST?"":REMOTE_ENGINE_API;
 const apiUrl=path=>API_BASE+path;
+function fetchWithTimeout(url,opts={},ms=8000){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),ms);
+  return fetch(url,{...opts,signal:controller.signal}).finally(()=>clearTimeout(timer));
+}
+function cloudApi(path,opts={},ms=15000){
+  const headers={"Content-Type":"application/json",...(opts.headers||{})};
+  return fetchWithTimeout(CLOUD_API_BASE+path,{credentials:"include",cache:"no-store",...opts,headers},ms);
+}
 const LOCAL_PAIR_KEY="dar.voice.mobilePairToken.v1";
 function captureLocalPairToken(){
   if(!LOCAL_ENGINE_HOST)return "";
@@ -200,7 +210,7 @@ async function establishCloudAccess(code){
 async function api(path,opts={},retried=false){
   const headers={"Content-Type":"application/json",...(opts.headers||{})};
   if(LOCAL_ENGINE_HOST&&LOCAL_PAIR_TOKEN)headers["X-DAR-Voice-Token"]=LOCAL_PAIR_TOKEN;
-  const response=await fetch(apiUrl(path),{credentials:"include",cache:"no-store",...opts,headers});
+  const response=await fetchWithTimeout(apiUrl(path),{credentials:"include",cache:"no-store",...opts,headers},10000);
   if(LOCAL_ENGINE_HOST&&response.status===403&&!retried){
     LOCAL_PAIR_TOKEN=captureLocalPairToken();
     if(LOCAL_PAIR_TOKEN)return api(path,opts,true);
@@ -213,21 +223,43 @@ async function api(path,opts={},retried=false){
 }
 async function health(){
   try{
+    if(!LOCAL_ENGINE_HOST){
+      const r=await cloudApi("/health",{},7000);
+      const d=await r.json().catch(()=>({}));
+      if(!r.ok||!d.ok)throw Error(d.error||"Cloud Voice offline");
+      state.health={...d,model_state:"ready",cloud_provider:true};
+      $("#dot").className="dot ok";
+      $("#engineText").textContent=d.provider&&String(d.provider).includes("ElevenLabs")?"ElevenLabs verbunden":"Cloud verbunden";
+      $("#healthBadge").textContent="bereit";
+      $("#healthBadge").className="badge good";
+      $("#healthNote").textContent=(d.provider||"DĀR Voice Cloud")+" · kein Mac/GPU nötig";
+      $("#libraryBadge").textContent="Cloud";
+      $("#libraryNote").textContent="Serhat Abu Malik – Master · Cloud-Stimme aktiv";
+      $("#arabicBadge").textContent="DE + Fuṣḥā";
+      $("#arabicBadge").className="badge good";
+      return true;
+    }
     const r=await api("/health");const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"offline");
     state.health=d;
     const voiceReferenceReady=d.voice_reference_ready!==false&&d.reference_exists!==false;
     $("#dot").className="dot ok";
     $("#engineText").textContent=!voiceReferenceReady?"Verbunden · Referenz fehlt":(d.model_state==="ready"?"Bereit":d.model_state==="loading"?"Lädt …":"Verbunden");
-    const device=String(d.model_device||"").toUpperCase();const cloudGpu=!LOCAL_ENGINE_HOST&&device.startsWith("CUDA");
-    $("#healthBadge").textContent=!voiceReferenceReady?"verbunden":(d.model_state==="ready"?(cloudGpu?"GPU bereit":"bereit"):"verbunden");
+    $("#healthBadge").textContent=!voiceReferenceReady?"verbunden":(d.model_state==="ready"?"bereit":"verbunden");
     $("#healthBadge").className=voiceReferenceReady?"badge good":"badge";
     $("#healthNote").textContent=!voiceReferenceReady
       ?("Engine "+(d.engine_version||"")+" verbunden · Serhat-Stimmreferenz fehlt am Mac.")
-      :("Engine "+(d.engine_version||"")+" · "+(cloudGpu?"CUDA GPU · ":(d.interactive_extreme_fast?"Extreme Fast · ":""))+(d.model_state||""));
+      :("Engine "+(d.engine_version||"")+" · "+(d.interactive_extreme_fast?"Extreme Fast · ":"")+(d.model_state||""));
     const lib=d.library||{};const total=Number(lib.rules||0)||Number(lib.totalRules||0)||Number(lib.maxMasterPlsRules||0)||0;
     $("#libraryBadge").textContent=total?total.toLocaleString("de-DE"):"aktiv";$("#libraryNote").textContent=(Number(lib.maxMasterPlsRules||0)?Number(lib.maxMasterPlsRules).toLocaleString("de-DE")+" MAX-MASTER · ":"")+"Laufzeitbibliothek aktiv";
     $("#arabicBadge").textContent=d.reference_arabic_dedicated?"AR MASTER":"DE Fallback";$("#arabicBadge").className=d.reference_arabic_dedicated?"badge good":"badge";return true;
-  }catch(e){$("#dot").className="dot bad";const pairMissing=LOCAL_ENGINE_HOST&&!LOCAL_PAIR_TOKEN;$("#engineText").textContent=pairMissing?"Kopplung fehlt":(LOCAL_ENGINE_HOST?"Mac-Engine nicht erreichbar":"Cloud Engine nicht verbunden");$("#healthBadge").textContent="offline";$("#healthNote").textContent=pairMissing?"Einmal den QR-Code am Mac öffnen. Danach bleibt dieses Gerät gekoppelt.":(LOCAL_ENGINE_HOST?"Mac und iPhone/iPad müssen im selben WLAN sein und Voice Studio am Mac muss laufen.":"DĀR Voice Cloud ist noch nicht verbunden.");return false}
+  }catch(e){
+    $("#dot").className="dot bad";
+    const pairMissing=LOCAL_ENGINE_HOST&&!LOCAL_PAIR_TOKEN;
+    $("#engineText").textContent=pairMissing?"Kopplung fehlt":(LOCAL_ENGINE_HOST?"Mac-Engine nicht erreichbar":"Cloud nicht erreichbar");
+    $("#healthBadge").textContent="offline";
+    $("#healthNote").textContent=pairMissing?"Einmal den QR-Code am Mac öffnen. Danach bleibt dieses Gerät gekoppelt.":(LOCAL_ENGINE_HOST?"Mac und iPhone/iPad müssen im selben WLAN sein und Voice Studio am Mac muss laufen.":"ElevenLabs-Cloud konnte nicht erreicht werden. Erneut verbinden.");
+    return false
+  }
 }
 let mobileLatestVersion="";
 function versionParts(v){return String(v||"").split(".").map(x=>parseInt(x,10)||0)}
@@ -331,6 +363,15 @@ $$("[data-style]").forEach(b=>b.onclick=()=>{
 async function analyzeText(force=false){
   const text=$("#text").value.trim();if(!text){toast("Bitte zuerst Text eingeben.");return null}
   const style=$("#style").value;
+  if(!LOCAL_ENGINE_HOST){
+    const d={ok:true,unresolvedIslamicTerms:[],reviewTerms:[],masterTerms:[]};
+    state.analysis=d;state.analysisText=text;state.analysisStyle=style;
+    $("#analysis").classList.add("show");
+    $("#analysisState").textContent="Cloud bereit";
+    $("#analysisState").className="badge good";
+    $("#analysisBody").innerHTML='<div class="sub">Serhat Abu Malik – Master ist über ElevenLabs verbunden. Erweiterte lokale Lernprüfung läuft nur mit der Mac-Engine; die Erzeugung funktioniert trotzdem direkt aus der iPhone-App.</div>';
+    return d;
+  }
   if(!force&&state.analysis&&state.analysisText===text&&state.analysisStyle===style)return state.analysis;
   $("#analysis").classList.add("show");$("#analysisState").textContent="prüft …";$("#analysisBody").innerHTML='<div class="sub">Begriffe und Aussprache werden geprüft …</div>';
   try{
@@ -363,6 +404,7 @@ function showPronunciationIssues(items){
 }
 
 async function warmVoiceEngine(){
+  if(!LOCAL_ENGINE_HOST)return;
   try{
     if(state.health?.model_state==="ready")return;
     await api("/warmup",{method:"POST",body:"{}"});
@@ -561,6 +603,45 @@ async function monitorGenerationJob(jobId,useLibrary,{resumed=false}={}){
 async function generate(){
   if(state.generating)return;
   const text=$("#text").value.trim();if(!text)return toast("Bitte Text eingeben.");
+  if(!LOCAL_ENGINE_HOST){
+    state.generating=true;
+    $("#generateBtn").disabled=true;$("#generateBtn").textContent="Erzeuge …";
+    resetLiveStream();
+    revokeIfBlob(state.audioUrl);state.audioUrl="";state.finalAudioName="";
+    state.audioBlob=null;
+    try{
+      const style=$("#style").value;
+      const profile=style==="kids_story"?"kids_story":style==="kids_lesson"?"kids_story":style==="dua"?"gentle":style==="gentle"?"gentle":"";
+      const r=await cloudApi("/generate",{method:"POST",body:JSON.stringify({text,prepared:text,profile})},120000);
+      if(!r.ok){
+        const d=await r.json().catch(()=>({}));
+        throw Error(d.error||("Cloud-Erzeugung fehlgeschlagen · HTTP "+r.status));
+      }
+      const blob=await r.blob();
+      if(!blob.size)throw Error("ElevenLabs lieferte keine Audiodatei.");
+      state.audioBlob=blob;
+      state.audioUrl=URL.createObjectURL(blob);
+      state.finalAudioName="dar-serhat-voice.mp3";
+      state.finalReady=true;
+      const audio=$("#audio");
+      audio.src=state.audioUrl;
+      $("#player").classList.add("show");
+      $(".player-title").textContent="Audio fertig";
+      $("#playerMeta").textContent="Serhat Abu Malik – Master · ElevenLabs Cloud";
+      $("#analysis").classList.add("show");
+      $("#analysisState").textContent="fertig";
+      $("#analysisState").className="badge good";
+      $("#analysisBody").textContent="Audio wurde direkt über deine ElevenLabs-Masterstimme erzeugt.";
+      await audio.play().catch(()=>{});
+      toast("Audio ist fertig.");
+    }catch(e){
+      toast(e.name==="AbortError"?"Cloud-Erzeugung hat zu lange gedauert. Bitte erneut versuchen.":(e.message||String(e)));
+    }finally{
+      state.generating=false;
+      $("#generateBtn").disabled=false;$("#generateBtn").textContent="Erzeugen";
+    }
+    return;
+  }
   const useLibrary=!!$("#pronToggle").checked;
   const style=$("#style").value;
   const cached=state.analysis&&state.analysisText===text&&state.analysisStyle===style?state.analysis:null;
@@ -600,7 +681,11 @@ async function generate(){
 $("#generateBtn").onclick=generate;$("#closePlayer").onclick=()=>$("#player").classList.remove("show");
 $("#saveBtn").onclick=()=>{
   const u=state.audioUrl||(state.livePreviewName?"/mobile/audio?name="+encodeURIComponent(state.livePreviewName):"");
-  if(u)window.open(u,"_blank");
+  if(!u)return;
+  if(!LOCAL_ENGINE_HOST&&state.audioBlob){
+    const a=document.createElement("a");a.href=u;a.download=state.finalAudioName||"dar-serhat-voice.mp3";a.click();return;
+  }
+  window.open(u,"_blank");
 };
 $("#shareBtn").onclick=async()=>{
   if(!state.audioUrl||!state.finalReady){toast("Teilen ist verfügbar, sobald die vollständige Audio fertig ist.");return}
@@ -611,13 +696,18 @@ $("#shareBtn").onclick=async()=>{
       if(!r.ok)throw Error("Audio konnte nicht geladen werden.");
       state.audioBlob=await r.blob();
     }
-    const file=new File([state.audioBlob],"dar-serhat-voice.wav",{type:"audio/wav"});
+    const cloudMp3=!LOCAL_ENGINE_HOST;
+    const file=new File([state.audioBlob],cloudMp3?"dar-serhat-voice.mp3":"dar-serhat-voice.wav",{type:cloudMp3?"audio/mpeg":"audio/wav"});
     if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:"DĀR Voice"})}catch{}}
     else window.open(state.audioUrl,"_blank");
   }catch(e){toast(e.message||String(e))}
 };
 async function loadHistory(){
   const box=$("#historyList");box.innerHTML='<div class="empty">Verlauf wird geladen …</div>';
+  if(!LOCAL_ENGINE_HOST){
+    box.innerHTML='<div class="empty">Cloud-Modus ist verbunden. Lokaler Mac-Verlauf wird nur angezeigt, wenn die iPhone-App direkt mit der Mac-Engine gekoppelt ist.</div>';
+    return;
+  }
   try{const r=await api("/mobile/history");const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Verlauf nicht verfügbar");const items=d.items||[];if(!items.length){box.innerHTML='<div class="empty">Noch keine Audios vorhanden.</div>';return}
   box.innerHTML=items.map(x=>'<div class="card history-item"><button class="playdot" data-audio="'+encodeURIComponent(x.name)+'">▶</button><div class="hist-main"><div class="hist-name">'+esc(x.title||x.label||x.name)+'</div>'+(x.text?'<div class="hist-text">'+esc(x.text)+'</div>':'')+'<div class="hist-meta">'+esc(x.styleLabel||"Auto")+' · '+esc(x.createdLabel||"")+' · '+esc(x.sizeLabel||"")+'</div></div><button class="iconbtn" data-open="'+encodeURIComponent(x.name)+'">↗</button></div>').join("");
   $$("[data-audio]").forEach(b=>b.onclick=()=>{resetLiveStream();state.finalReady=false;const u="/mobile/audio?name="+b.dataset.audio;$("#audio").src=u;$("#player").classList.add("show");$(".player-title").textContent="Verlauf";$("#playerMeta").textContent="Gespeicherte Audio";go("create");$("#audio").play().catch(()=>{})});$$("[data-open]").forEach(b=>b.onclick=()=>window.open("/mobile/audio?name="+b.dataset.open,"_blank"))}
@@ -660,6 +750,12 @@ function bindCatalogRows(){
 }
 async function loadCatalog(reset=true){
   const q=String($("#wordSearch").value||"").trim();
+  if(!LOCAL_ENGINE_HOST){
+    $("#catalogCount").textContent="Cloud";
+    $("#wordResults").innerHTML='<div class="empty">Die Master-Aussprache ist in deiner ElevenLabs-Stimme verfügbar. Einzelne lokale Lernvarianten werden mit der Mac-Engine bearbeitet.</div>';
+    $("#catalogMore").hidden=true;
+    return;
+  }
   if(reset){
     state.wordResultSerial+=1;
     state.catalogOffset=0;state.catalogQuery=q;state.catalogRows=[];
@@ -709,6 +805,10 @@ function prefetchCandidate(row,term){
 
 async function searchWord(force){
   clearTimeout(catalogSearchTimer);
+  if(!LOCAL_ENGINE_HOST){
+    $("#wordResults").innerHTML='<div class="empty">Einzelwort-Lernen benötigt derzeit die Mac-Engine. Text → Stimme funktioniert auf dem iPhone direkt über ElevenLabs Cloud.</div>';
+    return;
+  }
   const q=String(force||$("#wordSearch").value).trim();if(!q)return toast("Wort eingeben.");
   const requestSerial=++state.wordResultSerial;
   const box=$("#wordResults");box.innerHTML='<div class="empty">Suche Varianten …</div>';
