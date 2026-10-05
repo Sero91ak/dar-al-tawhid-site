@@ -1,6 +1,6 @@
 {
-  "version": 6,
-  "updatedAt": "2026-10-04",
+  "version": 7,
+  "updatedAt": "2026-10-05",
   "title": "Geschichten der Propheten",
   "policy": {
     "source": "data/prophets/*.json",
@@ -525,8 +525,8 @@
       "voiceProduction": {
         "status": "audio-ready-live-test",
         "source": "owner-approved uploaded recording 2026-10-04",
-        "wordCount": 534,
-        "estimatedMinutes": 4.9,
+        "wordCount": 573,
+        "estimatedMinutes": 3.83,
         "prosody": "kids_story",
         "allAges": true,
         "storyTextStandard": "owner-approved-exact-audio-text-pair",
@@ -541,7 +541,11 @@
         "ownerAudioDurationSec": 229.642,
         "lastPublishedAt": "2026-10-04T17:16:00Z",
         "repositoryBinaryPublished": true,
-        "permanentAudioPath": "/kids/assets/prophet-story-audio/adam/story.mp3"
+        "permanentAudioPath": "/kids/assets/prophet-story-audio/adam/story.mp3",
+        "singleMasterAudio": true,
+        "masterAgeRange": "4-10",
+        "masterTextLockedToOwnerAudio": true,
+        "durationPolicy": "owner-approved-existing-master-exception"
       },
       "ownerAudioSource": {
         "status": "owner-approved-repo-permanent-audio",
@@ -956,8 +960,8 @@
       "voiceProduction": {
         "status": "audio-ready-live-test",
         "source": "owner-approved uploaded recording 2026-10-04",
-        "wordCount": 382,
-        "estimatedMinutes": 3.5,
+        "wordCount": 421,
+        "estimatedMinutes": 2.92,
         "prosody": "kids_story",
         "allAges": true,
         "storyTextStandard": "owner-approved-exact-audio-text-pair",
@@ -972,7 +976,11 @@
         "ownerAudioDurationSec": 175.073,
         "lastPublishedAt": "2026-10-04T17:16:00Z",
         "repositoryBinaryPublished": true,
-        "permanentAudioPath": "/kids/assets/prophet-story-audio/idris/story.mp3"
+        "permanentAudioPath": "/kids/assets/prophet-story-audio/idris/story.mp3",
+        "singleMasterAudio": true,
+        "masterAgeRange": "4-10",
+        "masterTextLockedToOwnerAudio": true,
+        "durationPolicy": "owner-approved-existing-master-exception"
       },
       "ownerAudioSource": {
         "status": "owner-approved-repo-permanent-audio",
