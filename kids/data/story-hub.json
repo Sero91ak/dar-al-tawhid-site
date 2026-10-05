@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "updatedAt": "2026-10-05",
   "title": "Geschichten des Īmān",
   "subtitle": "Hören · Mitlesen · Entdecken",
@@ -15,8 +15,8 @@
     "canonicalStoryTextStrategy": "preserve-longest-complete-version",
     "futureCategoriesMustUseMasterText": true,
     "futureStoryDefaultLengthPolicy": "long-complete-no-shortening",
-    "futureBiographyMinimumMasterWords": 800,
-    "sahabiyyatMinimumMasterWords": 800,
+    "futureBiographyMinimumMasterWords": 850,
+    "sahabiyyatMinimumMasterWords": 850,
     "ageChangesPresentationOnly": true
   },
   "sources": [
@@ -49,10 +49,10 @@
       "title": "Ṣaḥābiyyāt",
       "kicker": "DIE BESTEN FRAUEN IHRER ZEIT",
       "description": "Geschichten bedeutender Frauen der ersten Generationen – Wissen, Īmān und Stärke.",
-      "dataUrl": "/kids/data/sahabiyyat-stories.json?v=18",
+      "dataUrl": "/kids/data/sahabiyyat-stories.json?v=1131",
       "image": "/kids/assets/prophet-scenes/library.webp",
-      "storyLengthPolicy": "long-biography",
-      "minimumMasterWords": 800
+      "storyLengthPolicy": "long-biography-850-plus",
+      "minimumMasterWords": 850
     }
   ]
 }
