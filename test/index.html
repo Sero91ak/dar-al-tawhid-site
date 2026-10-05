@@ -21683,7 +21683,81 @@ async function applyQuranSearch(){const searchBlock=$("quranSearchBlock");const 
 function quranTopicVisibleList(){const q=normalizeQuranTopicText(quranTopicSearch);const topics=approvedQuranTopics();if(!q)return topics;return topics.filter(function(t){const hay=normalizeQuranTopicText([t.title,t.group,t.description].concat((t.items||[]).flatMap(function(i){return [i.title,i.note,i.range].concat(i.tags||[])})).join(' '));return hay.includes(q)})}
 function renderQuranTopics(){const topics=quranTopicVisibleList();const groups=[...new Set(topics.map(function(t){return t.group||'Weitere Themen'}))];return setPageHeader('Qurʾān nach Themen','Finde Āyāt nach Themen und öffne sie direkt im Qurʾān-Leser.','Qurʾān')+quranModeTabs('topics')+'<section class="quran-topic-page"><input id="quranTopicSearch" class="quran-topic-search" type="search" placeholder="Thema suchen …" value="'+esc(quranTopicSearch)+'">'+(groups.length?groups.map(function(group){const rows=topics.filter(function(t){return (t.group||'Weitere Themen')===group});return '<section class="quran-topic-group"><h3>'+esc(group)+'</h3><div class="quran-topic-grid">'+rows.map(function(t){const count=(t.items||[]).length;return '<article class="quran-topic-card"><h4>'+esc(t.title)+'</h4><p>'+esc(t.description||'')+'</p><div class="quran-topic-meta"><span>'+count+' Āyāt</span></div><button type="button" class="quran-topic-open-btn" data-nav="quran-topic" data-value="'+esc(t.id)+'">Āyāt ansehen →</button></article>'}).join('')+'</div></section>'}).join(''):'<div class="empty">Kein Thema gefunden.</div>')+'</section>'}
 function quranTopicById(id){return approvedQuranTopics().find(function(t){return String(t.id)===String(id)})||null}
-function renderQuranTopicDetail(id){if(String(id||'')==='saved')return setPageHeader('Merkliste','Gespeicherte Āyāt werden hier vorbereitet.','Qurʾān')+quranModeTabs('saved')+'<section class="quran-topic-detail"><div class="empty">Die Qurʾān-Merkliste ist vorbereitet und wird später mit Konto-Synchronisierung erweitert.</div></section>';const topic=quranTopicById(id);if(!topic)return setPageHeader('Qurʾān nach Themen','Thema nicht gefunden.','Qurʾān')+quranModeTabs('topics')+'<div class="empty">Dieses Thema ist nicht veröffentlicht oder nicht geprüft.</div>';return setPageHeader(topic.title,topic.description||'Āyāt zu diesem Thema.','Qurʾān')+quranModeTabs('topics')+'<section class="quran-topic-detail"><button type="button" class="quran-topic-back-btn" data-nav="quran-topic">← Alle Themen</button><div class="quran-topic-items">'+(topic.items||[]).map(function(item){return '<article class="quran-topic-ayah-card"><h4>Qurʾān '+esc(item.range||((item.surah||'')+':'+(item.ayah||'')))+' · '+esc(item.title||'Āyah')+'</h4><p>'+esc(item.note||'')+'</p><div class="quran-topic-tags">'+(item.tags||[]).map(function(tag){return '<span>'+esc(tag)+'</span>'}).join('')+'</div><button type="button" class="quran-topic-open-btn" data-quran-topic-open="'+esc(topic.id)+'" data-surah="'+esc(item.surah)+'" data-ayah="'+esc(item.ayah)+'">Im Qurʾān öffnen</button></article>'}).join('')+'</div></section>'}
+function getQuranSavedAyahRefs(){
+  const raw=getJson(QURAN_SAVED_AYAHS_KEY,[]);
+  const list=Array.isArray(raw)?raw:[];
+  const seen=new Set();
+  return list.map(function(value){
+    const parts=String(value||"").split(":");
+    return{surah:Number(parts[0]),ayah:Number(parts[1]),key:String(parts[0])+":"+String(parts[1])};
+  }).filter(function(ref){
+    if(!Number.isFinite(ref.surah)||ref.surah<1||ref.surah>114||!Number.isFinite(ref.ayah)||ref.ayah<1||seen.has(ref.key))return false;
+    seen.add(ref.key);
+    return true;
+  }).reverse();
+}
+function quranSavedAyahVerse(ref){
+  const surah=quranSurahCache.get(Number(ref.surah));
+  return surah&&Array.isArray(surah.verses)?surah.verses.find(function(v){return Number(v.id)===Number(ref.ayah)})||null:null;
+}
+function renderQuranSavedAyahCard(ref){
+  const meta=quranSurahMeta(ref.surah);
+  const verse=quranSavedAyahVerse(ref);
+  const surahName=meta&&meta.transliteration?meta.transliteration:"Sūrah "+ref.surah;
+  const arabic=verse&&verse.ar?String(verse.ar):"";
+  const german=verse&&verse.de?String(verse.de):"";
+  return '<article class="quran-saved-card" data-quran-saved-key="'+esc(ref.key)+'">'+
+    '<button type="button" class="quran-saved-card__open" data-nav="quran-surah" data-value="'+esc(ref.surah+"/"+ref.ayah)+'" aria-label="'+esc(surahName+" Āyah "+ref.ayah+" öffnen")+'">'+
+      '<span class="quran-saved-card__meta"><b>'+esc(surahName)+'</b><span>Sūrah '+esc(ref.surah)+' · Āyah '+esc(ref.ayah)+'</span></span>'+
+      (arabic?'<span class="quran-saved-card__ar" dir="rtl" lang="ar">'+esc(arabic)+'</span>':'<span class="quran-saved-card__loading">Āyah wird geladen …</span>')+
+      (german?'<span class="quran-saved-card__de">'+esc(german)+'</span>':'')+
+      '<span class="quran-saved-card__cta">Im Qurʾān öffnen <span aria-hidden="true">›</span></span>'+
+    '</button>'+
+    '<button type="button" class="quran-saved-card__remove" data-quran-saved-remove="'+esc(ref.key)+'" aria-label="Markierung '+esc(ref.key)+' entfernen">Entfernen</button>'+
+  '</article>';
+}
+function renderQuranSavedAyahs(){
+  const refs=getQuranSavedAyahRefs();
+  const list=refs.length?refs.map(renderQuranSavedAyahCard).join(""):'<div class="quran-saved-empty"><h3>Noch keine Āyāt gemerkt</h3><p>Tippe im Qurʾān-Leser bei einer Āyah auf das Lesezeichen. Sie erscheint danach hier und bleibt auf diesem Gerät gespeichert.</p><button type="button" data-nav="quran">Zum Qurʾān</button></div>';
+  return setPageHeader("Merkliste",refs.length?(refs.length+" gespeicherte "+(refs.length===1?"Āyah":"Āyāt")):"Deine gespeicherten Āyāt","Qurʾān")
+    +quranModeTabs("saved")
+    +'<section class="quran-topic-detail quran-saved-page" aria-label="Gespeicherte Qurʾān-Āyāt">'
+    +(refs.length?'<header class="quran-saved-head"><div><b>'+refs.length+'</b><span>'+(refs.length===1?'gespeicherte Āyah':'gespeicherte Āyāt')+'</span></div><button type="button" class="quran-saved-clear" data-quran-saved-clear>Alle entfernen</button></header>':'')
+    +'<div class="quran-saved-list">'+list+'</div></section>';
+}
+function bindQuranSavedAyahs(){
+  document.querySelectorAll("[data-quran-saved-remove]").forEach(function(btn){
+    btn.onclick=function(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
+      const key=String(btn.getAttribute("data-quran-saved-remove")||"");
+      const parts=key.split(":");
+      const surah=Number(parts[0]),ayah=Number(parts[1]);
+      if(!Number.isFinite(surah)||!Number.isFinite(ayah))return;
+      if(isQuranAyahBookmarked(surah,ayah))toggleQuranAyahMark(surah,ayah,null);
+      if(currentRoute.view==="quran-topic"&&String(currentRoute.value||"")==="saved")render();
+    };
+  });
+  const clear=document.querySelector("[data-quran-saved-clear]");
+  if(clear)clear.onclick=function(){
+    const refs=getQuranSavedAyahRefs();
+    if(!refs.length)return;
+    if(!confirm("Alle gespeicherten Qurʾān-Āyāt aus der Merkliste entfernen?"))return;
+    setJson(QURAN_SAVED_AYAHS_KEY,[]);
+    if(currentRoute.view==="quran-topic"&&String(currentRoute.value||"")==="saved")render();
+  };
+}
+async function ensureQuranSavedAyahData(){
+  await loadQuranIndex();
+  const ids=[...new Set(getQuranSavedAyahRefs().map(function(ref){return ref.surah}))];
+  await Promise.all(ids.map(function(id){return loadQuranSurah(id)}));
+}
+function renderQuranTopicDetail(id){
+  if(String(id||"")==="saved")return renderQuranSavedAyahs();
+  const topic=quranTopicById(id);
+  if(!topic)return setPageHeader("Qurʾān nach Themen","Thema nicht gefunden.","Qurʾān")+quranModeTabs("topics")+'<div class="empty">Dieses Thema ist nicht veröffentlicht oder nicht geprüft.</div>';
+  return setPageHeader(topic.title,topic.description||"Āyāt zu diesem Thema.","Qurʾān")+quranModeTabs("topics")+'<section class="quran-topic-detail"><button type="button" class="quran-topic-back-btn" data-nav="quran-topic">← Alle Themen</button><div class="quran-topic-items">'+(topic.items||[]).map(function(item){return '<article class="quran-topic-ayah-card"><h4>Qurʾān '+esc(item.range||((item.surah||"")+":"+(item.ayah||"")))+' · '+esc(item.title||"Āyah")+'</h4><p>'+esc(item.note||"")+'</p><div class="quran-topic-tags">'+(item.tags||[]).map(function(tag){return '<span>'+esc(tag)+'</span>'}).join("")+'</div><button type="button" class="quran-topic-open-btn" data-quran-topic-open="'+esc(topic.id)+'" data-surah="'+esc(item.surah)+'" data-ayah="'+esc(item.ayah)+'">Im Qurʾān öffnen</button></article>'}).join("")+'</div></section>';
+}
 function quranTopicContext(){try{return getJson('darQuranTopicContextV1',null)}catch(e){return null}}
 function setQuranTopicContext(data){try{setJson('darQuranTopicContextV1',data)}catch(e){}}
 function clearQuranTopicContext(){try{localStorage.removeItem('darQuranTopicContextV1')}catch(e){}}
@@ -22259,7 +22333,7 @@ function bindQuranNavPickerSheet(){
 
 
 function renderQuranSurah(rawValue){const normalized=String(rawValue||'').replace(/%2F/gi,'/');const parts=normalized.split('/').filter(Boolean);const id=Number(parts[0]);const selectedAyah=Number(parts[1])||0;const meta=quranSurahMeta(id);const surah=quranSurahCache.get(id);if(surah&&!Array.isArray(surah.verses))return setHeader('Qurʾān','Sure konnte nicht geladen werden.','Fehler')+'<div class="empty">Sure-Daten fehlen.</div>';applyQuranLineSpacing(getQuranLineSpacing());if(!meta)return setHeader('Qurʾān','Sure nicht gefunden.','Fehler')+'<div class="empty">Ungültige Sure.</div>';if(!surah)return `<div class="qrc-shell">${renderQuranReaderChrome(id,meta,selectedAyah)}<div class="qrc-body"><div class="loading">Sure ${id} wird geladen…</div></div><div id="qrcSettingsMount"></div><div id="qrcPickerMount"></div><div id="qrcInfoMount"></div><div id="qrcAyahMenuMount"></div></div>`;const prev=id>1?quranSurahMeta(id-1):null;const next=id<114?quranSurahMeta(id+1):null;const heavySurah=(surah.verses||[]).length>72;if(heavySurah||(typeof isQuranIosPwaClient==="function"&&isQuranIosPwaClient()))window.__quranDeferTajweedPaint=true;else window.__quranDeferTajweedPaint=false;const ayahList=surah.verses.map(function(v){const isHit=selectedAyah===Number(v.id);const ayahData=encodeURIComponent(JSON.stringify({s:id,a:v.id}));return '<article class="quran-ayah quran-ayah--page quran-ayah--noble '+(isHit?'is-topic-highlight':'')+'" id="ayah-'+esc(v.id)+'"><div class="quran-ayah-content"><div class="quran-ayah-ar" data-quran-view="showArabic"'+quranViewHiddenAttr("showArabic")+'>'+renderQuranAyahArHtml(v)+'</div>'+renderQuranAyahTr(v)+'<div class="quran-ayah-de" data-quran-view="showGerman"'+quranViewHiddenAttr("showGerman")+'>'+esc(v.de)+'</div>'+renderQuranAyahLabel(id,v.id)+'</div>'+renderQuranAyahActionsRow(id,v.id,ayahData)+'</article>'}).join('');return `<div class="qrc-shell">${renderQuranReaderChrome(id,meta,selectedAyah)}<div class="qrc-body">${renderQuranTopicContextBar(id,selectedAyah)}<div class="qrc-page"><section class="quran-ayah-list qrc-ayah-list">${ayahList}</section><div class="qrc-footer-nav"><button type="button" data-nav="quran-surah" data-value="${prev?prev.id:''}" ${prev?'':'disabled'}>← ${prev?esc(prev.transliteration):'—'}</button><button type="button" data-nav="quran-surah" data-value="${next?next.id:''}" ${next?'':'disabled'}>${next?esc(next.transliteration):'—'} →</button></div></div></div><div id="qrcSettingsMount"></div><div id="qrcPickerMount"></div><div id="qrcInfoMount"></div><div id="qrcAyahMenuMount"></div></div>`}
-async function ensureQuranRouteData(route){await loadQuranIndex();if(route.view==="quran"){syncQuranOfflinePrecache();return}if(route.view==="quran-topic"){await loadQuranTopics();return}if(route.view==="quran-surah"||route.view==="quran-player"){const id=Number(String(route.value||"").split("/")[0]);if(Number.isFinite(id)){await loadQuranSurah(id)}}}
+async function ensureQuranRouteData(route){await loadQuranIndex();if(route.view==="quran"){syncQuranOfflinePrecache();return}if(route.view==="quran-topic"){if(String(route.value||"")==="saved")await ensureQuranSavedAyahData();else await loadQuranTopics();return}if(route.view==="quran-surah"||route.view==="quran-player"){const id=Number(String(route.value||"").split("/")[0]);if(Number.isFinite(id)){await loadQuranSurah(id)}}}
 function offlineLibrarySummary(){const live=`${posts.length} Beiträge, ${DUAS.length} Duʿāʾ`;try{const meta=getJson(OFFLINE_LIB_KEY,null);if(meta&&meta.updated&&!posts.length&&!DUAS.length)return `${meta.posts||0} Beiträge, ${meta.duas||0} Duʿāʾ`}catch(e){}return live}
 function esc(value){return String(value??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 /* QURAN_PROGRESS_HELPERS_GUARD: Start nie wegen fehlender Qurʾān-Helfer abstürzen */
@@ -27986,7 +28060,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1294";
+const APP_BUILD_ID="app-shell-v1295";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28533,8 +28607,9 @@ function render(){
       const surahId=currentRoute.view==="quran-surah"||currentRoute.view==="quran-player"?Number(String(currentRoute.value||"").split("/")[0]):NaN;
       const needsIndex=!quranMeta;
       const needsSurah=Number.isFinite(surahId)&&surahId>=1&&surahId<=114&&!quranSurahCache.has(surahId);
-      const needsTopics=currentRoute.view==="quran-topic"&&!quranTopicsCache;
-      if(needsIndex||needsSurah||needsTopics){
+      const needsTopics=currentRoute.view==="quran-topic"&&String(currentRoute.value||"")!=="saved"&&!quranTopicsCache;
+      const needsSaved=currentRoute.view==="quran-topic"&&String(currentRoute.value||"")==="saved"&&getQuranSavedAyahRefs().some(function(ref){return !quranSurahCache.has(ref.surah)});
+      if(needsIndex||needsSurah||needsTopics||needsSaved){
         ensureQuranRouteData(currentRoute).then(()=>{
           const r=readRoute();
           if(r.view===currentRoute.view&&r.value===currentRoute.value)render();
@@ -28634,6 +28709,7 @@ function render(){
       window.__tabSwipeDir=null;
     }
     bindEvents();
+    if(currentRoute.view==="quran-topic"&&String(currentRoute.value||"")==="saved")bindQuranSavedAyahs();
     if(currentRoute.view==="home"){ensureHomeUpdateButtonVisible();bindHomeRefreshButton()}
     updateHijriHeaderDate();
     syncQuranWakeLock(currentRoute);
