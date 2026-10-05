@@ -99,7 +99,7 @@
     flushPendingIfReady();
   }
   function loadManifest(url,priority){
-    return fetch(url,{cache:"force-cache"})
+    return fetch(url,{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(data){merge(data,priority);return data})
       .catch(function(){return null});

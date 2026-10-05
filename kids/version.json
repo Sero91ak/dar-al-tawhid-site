@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v60-voice-flow1130",
-  "label": "KIDS · V1.07.64",
-  "releasedAt": "2026-10-05T13:52:00+02:00",
-  "note": "Kids v1130: alle 14 Ṣaḥābiyyāt besitzen jetzt ausführliche vollständige Masterbiografien mit mindestens 850 Wörtern (aktuell 884–993). Lebensweg, Īmān, Taten, Aufgaben, Alltag und zentrale Lehren werden ausführlich erzählt. Derselbe ungekürzte Mastertext gilt für 4–5, 6–8 und 9–10; nur die Darstellung ist altersabhängig. Voice Studio zeigt Wortzahl und geschätzte Sprechdauer.",
+  "buildId": "kids-shell-v61-voice-manifest1131",
+  "label": "KIDS · V1.07.65",
+  "releasedAt": "2026-10-05T14:00:00+02:00",
+  "note": "Kids v1130: alle 14 Ṣaḥābiyyāt besitzen jetzt ausführliche vollständige Masterbiografien mit mindestens 850 Wörtern (aktuell 884–993). Lebensweg, Īmān, Taten, Aufgaben, Alltag und zentrale Lehren werden ausführlich erzählt. Derselbe ungekürzte Mastertext gilt für 4–5, 6–8 und 9–10; nur die Darstellung ist altersabhängig. Voice Studio zeigt Wortzahl und geschätzte Sprechdauer. Zusätzlich: Quiz-/Duʿāʾ-Owner-Voice lädt Sprachmanifeste network-first; Sūrah-/Āyah-/Antwortzahlen werden im internen Sprechtext eindeutig als deutsche Zahlwörter vorbereitet. Der sichtbare Inhalt bleibt unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1130",
+    "serviceWorkerCache": "v1131",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -543,7 +543,8 @@
     "voiceStudioStoryLengthVisible": true,
     "futureBiographyMinimumMasterWords": 850,
     "sahabiyyatMasterWordRange": "884–993",
-    "sahabiyyatSameMasterAllAges": true
+    "sahabiyyatSameMasterAllAges": true,
+    "ownerVoiceManifestFetch": "network-first-v1"
   },
   "updatedAt": "2026-10-05"
 }
