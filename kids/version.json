@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v79-stories1151",
-  "label": "KIDS · V1.07.83",
-  "releasedAt": "2026-10-05T17:05:00+02:00",
-  "note": "Kids v1151: Der Inline-/Podcast-Player auf der Geschichtsseite bleibt vollständig entfernt. Die drei oberen Buttons funktionieren wieder direkt über den separaten Bottom-Sheet-Player: „Hören & Mitlesen“ öffnet die intelligente zeitgestützte Mitlesung und startet Audio; „Hören“ öffnet den kompakten Hörmodus mit −15/+15 Sekunden, Zeit und Fortschritt; „Lesen“ pausiert laufendes Audio und öffnet den reinen Lesemodus. Die drei Aktionen bleiben auf der Detailseite erreichbar. Beim Schließen bleibt man in derselben Geschichte.",
+  "buildId": "kids-shell-v79-stories1152",
+  "label": "KIDS · V1.07.84",
+  "releasedAt": "2026-10-05T17:45:00+02:00",
+  "note": "Kids v1152: Die Geschichten-Startseite ist neu geordnet. Der eigene responsive Hero „Geschichten des Īmān“ steht wieder oben; die redundante Propheten/Ṣaḥābah/Ṣaḥābiyyāt-Kapselleiste ist vollständig entfernt. Die drei großen visuellen Welten bleiben die einzige Hauptnavigation. CTA-Flächen sind reduziert, die Karten bleiben groß und touchfreundlich. Mehrfacher Leerraum am Seitenende wurde auf einen einzigen Bottom-Safe-Bereich reduziert. Kleine iPhones, große Smartphones, Tablets und niedrige Querformate sind getrennt abgesichert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,17 +27,17 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1151",
+    "serviceWorkerCache": "v1152",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
     "storyAssetVersion": 22,
     "muhammadHonorFeature": true,
     "chronologicalOrderAfterMuhammadFeature": true,
-    "storiesHomePolish": "v1138",
+    "storiesHomePolish": "v1152-strict-hero",
     "storiesHeaderArtwork": true,
     "storiesHeaderAmbientMotion": true,
-    "storiesResponsiveLayout": "phone-tablet-desktop-v22",
+    "storiesResponsiveLayout": "small-phone-large-phone-tablet-landscape-v1152",
     "quranHomePolish": "spacious-edge-v1055",
     "quranArtVersion": 1059,
     "quranGeneratedArtwork": 10,
@@ -163,7 +163,7 @@
     "homeChoiceLayoutVersion": "v1078",
     "homeChoiceCards": "rounded-cards-v1079",
     "storiesPageHero": "photoreal-hijaz-environment-v1097",
-    "storiesHero": "edge-to-edge-v1085",
+    "storiesHero": "cinematic-responsive-v1152",
     "storiesBottomNavClearance": "v1133-safe-area",
     "storiesBottomNav": "shared-global-component-v1148",
     "storyFollowReader": "v14",
@@ -622,7 +622,10 @@
       "Hören & Mitlesen",
       "Hören",
       "Lesen"
-    ]
+    ],
+    "storiesCapsuleNavigation": false,
+    "storiesPrimaryNavigation": "three-visual-world-cards",
+    "storiesBottomClearance": "single-global-nav-safe-area-v1152"
   },
   "updatedAt": "2026-10-05"
 }
