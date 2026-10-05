@@ -10563,7 +10563,7 @@ window.DAR_ANALYTICS_CONFIG={
   setTimeout(boot,800);
 })();
 </script>
-<script src="/test/assets/frauen/frauen-fiqh.js?v=791" defer></script>
+<script src="/test/assets/frauen/frauen-fiqh.js?v=1294-local" defer></script>
 <link rel="preload" href="/assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26945,7 +26945,7 @@ function renderDarSetupHubHtml(){
 }
 function renderSettings(){
   const liveActivity=`<section class="settings-live-row" aria-label="Live Activity"><span class="settings-live-icon" aria-hidden="true">◷</span><span><b>Live Activity</b><small>Gebets-Countdown auf Sperrbildschirm und Dynamic Island</small></span><span class="settings-off-badge">Aus</span></section>`;
-  return `${renderDarSetupHubHtml()}${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page settings-flat-live-v1">${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAdaptiveNavPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
+  return `${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}${renderDarSetupHubHtml()}<div class="settings-one-page settings-flat-live-v1">${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAdaptiveNavPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<div class="settings-section-label"><b>Demnächst</b><span>Noch nicht aktiviert</span></div>${liveActivity}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
 }
 function renderJummah(){const s=getPrayerSettings();const manual=jummahPref(s,"jummahUseManualTime");const manualTime=normalizeTimeHHMM(s.jummahManualTime,"13:30");const advance=normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes);const on=jummahPref(s,"jummahNotifications");const timeLabel=manual?manualTime:(hasPrayerLocation(s)?jummahAutoDhuhrLabel(s):"Standort");return `${setPageHeader("Jumuʿah","Freitagsgebet und Erinnerung.","Jumuʿah")}<section class="prayer-panel prayer-page-noble jummah-hub-page">${renderJummahPushPanel()}<div class="qibla-data-grid jummah-hub-meta"><div class="qibla-data-item"><b>Erinnerung</b><span>${on?"Aktiv":"Aus"}</span></div><div class="qibla-data-item"><b>Vorlauf</b><span>${advance} Min</span></div><div class="qibla-data-item"><b>Zeit</b><span>${esc(timeLabel)}</span></div><div class="qibla-data-item"><b>Ort</b><span>${esc(s.city||"—")}</span></div></div><div class="prayer-action-row jummah-hub-nav"><button class="prayer-action-btn" type="button" data-nav="prayer">Gebetszeiten</button></div></section>`}
 function renderQiblaPage(){const settings=getPrayerSettings();return `${setPageHeader("Qibla","","Qibla")}<section class="prayer-panel prayer-page-noble qibla-hub-page">${renderQiblaProPanel(settings)}<div class="prayer-controls-compact qibla-hub-tools"><div class="prayer-settings-grid"><input id="prayerCityInput" class="filter-select" value="${esc(settings.city||"")}" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button><button id="useLocationBtn" class="prayer-action-btn" type="button">Standort</button></div></div></section>`}
@@ -27479,7 +27479,7 @@ function renderTawhidGuide(){
   ];
   const body=blocks.map(b=>`<article class="tawhid-guide__block"><p class="home-line-kicker">${esc(b.k)}</p><h3>${esc(b.t)}</h3><p class="home-line-statement">${esc(b.s)}</p><p class="home-line-text">${esc(b.p)}</p></article>`).join("");
   const belege=proofs.map(b=>`<article class="tawhid-guide__proof"><p class="home-line-kicker">${esc(b.ref)}</p><h3>${esc(b.t)}</h3><p class="home-line-text">${esc(b.p)}</p></article>`).join("");
-  return `${setHeader("Tawḥīd")}<section class="tawhid-guide"><p class="home-line-kicker">Ausführlich</p><h2 class="home-line-title">Tawḥīd</h2><p class="home-line-text">Die folgenden Sätze folgen den Begriffen und den veröffentlichten Qurʾān-Stellen in dieser App.</p>${body}<h2 class="home-line-title tawhid-guide__proofs-title">Belege</h2>${belege}<button type="button" class="home-line-open" data-nav="topic" data-value="Tawḥīd">Beiträge zu Tawḥīd</button></section>`;
+  return `${setHeader("Tawḥīd")}<section class="tawhid-guide"><p class="home-line-kicker">Ausführlich</p><h2 class="home-line-title">Grundlagen</h2><p class="home-line-text">Die folgenden Sätze folgen den Begriffen und den veröffentlichten Qurʾān-Stellen in dieser App.</p>${body}<h2 class="home-line-title tawhid-guide__proofs-title">Belege</h2>${belege}<button type="button" class="home-line-open" data-nav="topic" data-value="Tawḥīd">Beiträge zu Tawḥīd</button></section>`;
 }
 function renderHomeQuranHero(){
   const prog=getPreferredQuranProgress();
@@ -27986,7 +27986,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1293";
+const APP_BUILD_ID="app-shell-v1294";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28269,6 +28269,19 @@ function updateChrome(route){
   document.body.classList.toggle("is-area-route",!isHome);
   document.body.classList.toggle("is-more-route",isMore);
   document.body.classList.toggle("is-account-route",route.view==="account");
+  document.body.classList.toggle("is-news-route",route.view==="news");
+  document.body.classList.toggle("is-news-detail-route",route.view==="news-detail");
+  document.body.classList.toggle("is-zakat-route",route.view==="zakat");
+  document.body.classList.toggle("is-settings-route",route.view==="settings");
+  document.body.classList.toggle("is-tawhid-guide-route",route.view==="tawhid-guide");
+  document.body.classList.toggle("is-ramadan-route",route.view==="ramadan");
+  document.body.classList.toggle("is-recent-route",route.view==="recent");
+  document.body.classList.toggle("is-saved-route",route.view==="saved");
+  document.body.classList.toggle("is-series-route",route.view==="series");
+  document.body.classList.toggle("is-about-route",route.view==="about");
+  document.body.classList.toggle("is-notifications-route",route.view==="notifications");
+  const isSecondaryEditorial=["account","news","news-detail","zakat","settings","tawhid-guide","ramadan","recent","saved","series","about","notifications"].includes(route.view);
+  document.body.classList.toggle("is-secondary-editorial-route",isSecondaryEditorial);
   document.body.classList.toggle("is-ilm-chat-route",isIlm);
   document.body.classList.toggle("is-propheten-route",route.view==="propheten");
   document.body.classList.toggle("is-frauen-route",route.view==="frauen");
