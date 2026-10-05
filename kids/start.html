@@ -3175,7 +3175,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v99-no-alphabet1172";
+const KIDS_BUILD_ID="kids-shell-v100-audio-core1173";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -5794,7 +5794,6 @@ document.querySelectorAll("[data-close]").forEach(function(b){
     if(type==="quiz"){try{speech.cancel()}catch(e){} try{if(window.DARKidsOwnerVoice)window.DARKidsOwnerVoice.stop()}catch(e){} document.getElementById("quizModal").classList.remove("open")}
     if(type==="quran"){stopQuran();releaseMicStream();document.getElementById("quranModal").classList.remove("open")}
     if(type==="fullquran"){document.getElementById("fullQuranModal").classList.remove("open")}
-    if(type==="alphabet"){try{speech.cancel()}catch(e){} if(window.stopKidsAlphabetAudio)window.stopKidsAlphabetAudio();document.getElementById("alphabetModal").classList.remove("open")}
   });
 });
 
@@ -6254,13 +6253,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1172",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1173",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1172",{cache:"no-store"})
+    fetch("/kids/version.json?v=1173",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
@@ -7494,12 +7493,6 @@ html[data-view="stories"] #view-stories > :last-child{
   font-family:"Fredoka",system-ui,sans-serif!important;
   font-size:clamp(18px,4.8vw,23px)!important;
   line-height:1.12!important;
-}
-
-/* Alif-Bāʾ ist für diese Fassung vollständig aus der nutzbaren Oberfläche genommen. */
-#view-quran .alphabet-entry,
-#alphabetModal{
-  display:none!important;
 }
 
 /* Tablet: drei Kernwelten nebeneinander, ohne Lesbarkeit zu verlieren. */
