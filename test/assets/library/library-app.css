@@ -2508,7 +2508,7 @@ html[data-theme="dar-al-layl"]{
 
 /* DAR_LIBRARY_COMPACT_SHELVES_HERO_V1248 */
 :root{
-  --dar-lib-cinema-image:url("https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:e21a6753-593c-459f-9d59-49a79455f6cd");
+  --dar-lib-cinema-image:url("/test/assets/area-heroes-v1290/library.webp");
 }
 .lib-page[data-library-root] .lib-hero{
   min-height:clamp(300px,58vw,440px);
