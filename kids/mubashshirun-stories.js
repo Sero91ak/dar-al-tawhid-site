@@ -165,7 +165,7 @@ function insertEntry(view){
     Array.from({length:10},(_,i)=>'<i style="--i:'+i+'"></i>').join("")+
     '</span></span>'+
     '<span class="ms-entry-copy">'+
-      '<span class="ms-entry-kicker">DIE ZEHN GEFÄHRTEN · IHRE GESCHICHTEN</span>'+
+      '<span class="ms-entry-kicker">DIE ZEHN GEFÄHRTEN</span>'+
       '<strong>Die zehn Mubaschschirūn</strong>'+
       '<span>'+(isAudioOnlyAge()?'10 Ṣaḥābah · Hörgeschichten':'10 Ṣaḥābah · ihre Geschichten · lesen &amp; hören')+'</span>'+
     '</span>'+
