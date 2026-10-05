@@ -53,6 +53,8 @@ jobs:
                   "/originals/" in s or
                   "/raw/" in s or
                   "/sources/" in s or
+                  "-master." in name or
+                  ".master." in name or
                   "logo" in name or
                   "watermark" in name or
                   "favicon" in name
@@ -65,8 +67,8 @@ jobs:
                   size=p.stat().st_size
                   threshold=None
                   kind=None
-                  if ext in image: threshold=700_000; kind="image"
-                  elif ext in audio: threshold=1_000_000; kind="audio"
+                  if ext in image: threshold=1_200_000; kind="image"
+                  elif ext in audio: threshold=1_500_000; kind="audio"
                   elif ext in video: threshold=2_000_000; kind="video"
                   if threshold is not None and size>=threshold:
                       rows.append((size,kind,str(p)))
