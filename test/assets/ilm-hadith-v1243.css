@@ -318,3 +318,64 @@ body.is-hadith-route .hadith-hub > .view-head > *{
     background-position:center,center,73% 47%!important;
   }
 }
+
+
+/* DAR_HADITH_NESTED_ASSET_THEME_V1274
+   Root library uses overview CGI. Work → Kitāb → Bāb uses the second study/majlis CGI.
+   Light-family themes get a cream editorial veil; dark-family themes retain the cinematic night treatment. */
+body.is-hadith-route .hadith-hub--nested > .view-head{
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 88%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 60%,transparent) 38%,
+      color-mix(in srgb,var(--bg) 18%,transparent) 74%,
+      color-mix(in srgb,var(--bg) 5%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 3%,transparent) 0%,
+      transparent 48%,
+      color-mix(in srgb,var(--bg) 34%,transparent) 100%),
+    url("/test/assets/ilm/hadith-library-study-v1267.webp") 75% 48%/cover no-repeat,
+    url("/test/assets/ilm/ilm-historical-majlis-v1234.jpg") center/cover no-repeat!important;
+}
+html[data-theme="light"] body.is-hadith-route .hadith-hub > .view-head,
+html[data-theme="soft"] body.is-hadith-route .hadith-hub > .view-head,
+html[data-theme="salbei"] body.is-hadith-route .hadith-hub > .view-head,
+html[data-theme="eisgold"] body.is-hadith-route .hadith-hub > .view-head{
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 96%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 84%,transparent) 40%,
+      color-mix(in srgb,var(--bg) 35%,transparent) 74%,
+      color-mix(in srgb,var(--bg) 8%,transparent) 100%),
+    linear-gradient(180deg,transparent 48%,color-mix(in srgb,var(--bg) 30%,transparent)),
+    url("/test/assets/ilm/hadith-library-overview-v1267.webp") 78% 46%/cover no-repeat!important;
+}
+html[data-theme="light"] body.is-hadith-route .hadith-hub--nested > .view-head,
+html[data-theme="soft"] body.is-hadith-route .hadith-hub--nested > .view-head,
+html[data-theme="salbei"] body.is-hadith-route .hadith-hub--nested > .view-head,
+html[data-theme="eisgold"] body.is-hadith-route .hadith-hub--nested > .view-head{
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 96%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 84%,transparent) 40%,
+      color-mix(in srgb,var(--bg) 35%,transparent) 74%,
+      color-mix(in srgb,var(--bg) 8%,transparent) 100%),
+    linear-gradient(180deg,transparent 48%,color-mix(in srgb,var(--bg) 30%,transparent)),
+    url("/test/assets/ilm/hadith-library-study-v1267.webp") 75% 48%/cover no-repeat!important;
+}
+html[data-theme="light"] body.is-hadith-route .hadith-hub > .view-head h2,
+html[data-theme="soft"] body.is-hadith-route .hadith-hub > .view-head h2,
+html[data-theme="salbei"] body.is-hadith-route .hadith-hub > .view-head h2,
+html[data-theme="eisgold"] body.is-hadith-route .hadith-hub > .view-head h2,
+html[data-theme="light"] body.is-hadith-route .hadith-hub > .view-head .view-desc,
+html[data-theme="soft"] body.is-hadith-route .hadith-hub > .view-head .view-desc,
+html[data-theme="salbei"] body.is-hadith-route .hadith-hub > .view-head .view-desc,
+html[data-theme="eisgold"] body.is-hadith-route .hadith-hub > .view-head .view-desc{
+  color:var(--text)!important;
+  text-shadow:none!important;
+}
+@media(max-width:599px){
+  body.is-hadith-route .hadith-hub--nested > .view-head{
+    background-position:center,center,71% 48%,center!important;
+  }
+}
