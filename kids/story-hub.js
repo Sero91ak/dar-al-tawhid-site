@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-const REGISTRY_URL="/kids/data/story-hub.json?v=2";
+const REGISTRY_URL="/kids/data/story-hub.json?v=3";
 let SOURCES=[
   {id:"prophets",label:"Propheten",kicker:"GESCHICHTEN DER PROPHETEN",url:"/kids/data/prophet-stories.json?v=28",kind:"prophet"},
   {id:"sahaba",label:"Ṣaḥābah",kicker:"DIE GEFÄHRTEN",url:"/kids/data/mubashshirun-stories.json?v=18",kind:"sahabi"},
@@ -59,7 +59,7 @@ function storyName(item){return String(item?.name||item?.title||"Geschichte")}
 function artFor(item,cat=activeCategory,hero=false){
   if(!item)return"";
   if(cat==="prophets")return "/kids/assets/prophets-v2/"+encodeURIComponent(item.id)+(hero?"-hero.jpg?v=22":"-card.jpg?v=22");
-  return String((hero&&item.hero)||item.cover||item.hero||item.image||item.backgroundImage||category()?.image||"");
+  return String((hero&&item.hero)||item.cover||item.hero||item.image||item.backgroundImage||(SOURCES.find(x=>x.id===cat)?.image||""));
 }
 function honorific(item,cat=activeCategory){
   const src=SOURCES.find(x=>x.id===cat);
@@ -169,7 +169,7 @@ function renderNext(){
 function renderCategories(){
   const host=$("#ghCategories");if(!host)return;
   host.innerHTML=SOURCES.map((s,i)=>{
-    const first=(catalog[s.id]||[])[0],img=artFor(first,s.id,false);
+    const first=(catalog[s.id]||[])[0],img=s.image||artFor(first,s.id,false);
     return '<button class="gh-category '+(s.id===activeCategory?"active":"")+'" data-gh-cat="'+s.id+'" type="button">'+(img?'<img src="'+esc(img)+'" alt="" decoding="async" loading="'+(i===0?"eager":"lazy")+'">':'')+'<span class="gh-category-copy"><strong>'+s.label+'</strong><span>'+sourceCount(s.id)+' Geschichten</span></span></button>';
   }).join("");
   host.querySelectorAll("[data-gh-cat]").forEach(b=>b.addEventListener("click",()=>{activeCategory=b.dataset.ghCat;renderCategories();renderList()}));
@@ -219,7 +219,12 @@ function renderPlayer(){
   $("#ghReadToggle").textContent=isYoung()?"Mitlesen für Erwachsene":"Text lesen";
   $("#ghFollow").hidden=isYoung()||!meta?.url;
   $("#ghFollow").textContent="Synchron mitlesen";
-  $("#ghAudioNote").textContent=meta?.url?"Deine Stelle wird automatisch gespeichert.":(isYoung()?"Diese Hörgeschichte ist noch nicht als Audio freigeschaltet.":"Der vollständige Lesetext ist da. Audio wird automatisch ergänzt, sobald es freigeschaltet ist.");
+  const hasAudio=!!meta?.url;
+  $("#ghProgress").hidden=!hasAudio;
+  $(".gh-time").hidden=!hasAudio;
+  $("#ghBack15").hidden=!hasAudio;
+  $("#ghFwd15").hidden=!hasAudio;
+  $("#ghAudioNote").textContent=hasAudio?"Deine Stelle wird automatisch gespeichert.":"Audio folgt. Der vollständige Lesetext bleibt verfügbar.";
   reader?.setContent({title:storyName(active),subtitle:cat.label+" · Alter "+age(),text,audioOnly:isYoung(),timings:meta?.timings||meta?.paragraphTimings||meta?.cues||[],syncPoints:meta?.syncPoints||meta?.syncAnchors||[]});
   if(meta?.url){audio.src=meta.url;audio.preload="metadata"}else{audio.removeAttribute("src");try{audio.load()}catch(_){}}
   renderNext();updateProgress();renderPlay();renderMini();
@@ -287,7 +292,7 @@ function updateProgress(){
 }
 function seek(delta){if(!Number(audio.duration))return;try{audio.currentTime=Math.max(0,Math.min(audio.duration,(Number(audio.currentTime)||0)+delta))}catch(_){}updateProgress();reader?.persist(true)}
 function seekFromBar(e){if(!Number(audio.duration))return;const r=$("#ghProgress").getBoundingClientRect();if(!r.width)return;try{audio.currentTime=Math.max(0,Math.min(audio.duration,((e.clientX-r.left)/r.width)*audio.duration))}catch(_){}updateProgress();reader?.persist(true)}
-function renderPlay(){const b=$("#ghPlay");if(!b)return;const m=audioMeta(active);b.disabled=busy||!m?.url;b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiter":"Hören")}
+function renderPlay(){const b=$("#ghPlay");if(!b)return;const m=audioMeta(active);if(!m?.url){b.disabled=true;b.textContent="Audio folgt";return}b.disabled=busy;b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiter":"Hören")}
 function renderMini(){
   const mini=$("#ghMini");if(!mini)return;
   const has=!!active&&(playing||Number(audio.currentTime)>0);
