@@ -371,7 +371,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v82-story-library1155");
+      target.searchParams.set("kv", "kids-shell-v83-prophet-controls1156");
       return Response.redirect(target.toString(), 301);
     }
 
