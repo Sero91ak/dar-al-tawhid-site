@@ -161,6 +161,31 @@ if (!fs.existsSync(heroDir)) {
   else ok(`area-heroes-v1290: ${heroFiles.length} permanente WebP-Heroes vorhanden`);
 }
 
+const quranSavedCss = read("test/assets/quran-saved-v1295.css");
+for (const marker of [
+  "quran-saved-page",
+  "quran-saved-card__open",
+  "quran-saved-card__remove",
+  "quran-saved-empty"
+]) {
+  if (!quranSavedCss.includes(marker)) fail(`quran-saved-v1295.css: Marker fehlt: ${marker}`);
+}
+for (const marker of [
+  "function getQuranSavedAyahRefs()",
+  "function renderQuranSavedAyahs()",
+  "function bindQuranSavedAyahs()",
+  "function ensureQuranSavedAyahData()",
+  'data-quran-saved-remove',
+  'data-quran-saved-clear'
+]) {
+  if (!testHtml.includes(marker)) fail(`test/index.html: Qurʾān-Merkliste Marker fehlt: ${marker}`);
+}
+if (testHtml.includes("Gespeicherte Āyāt werden hier vorbereitet.")) {
+  fail("test/index.html: alter Qurʾān-Merkliste-Platzhalter noch vorhanden");
+} else {
+  ok("test/index.html: Qurʾān-Merkliste funktional statt Platzhalter");
+}
+
 const sw = read("service-worker.js");
 if (!/dar-al-tawhid-offline-light-v\d+/.test(sw)) fail("service-worker.js: CACHE_VERSION fehlt");
 else ok("service-worker.js: CACHE_VERSION vorhanden");
@@ -168,11 +193,13 @@ else ok("service-worker.js: CACHE_VERSION vorhanden");
 const worker = read("cloudflare/test-app-worker.js");
 if (!worker.includes("Response.redirect")) fail("test-app-worker.js: Root-Redirect fehlt");
 else ok("test-app-worker.js: Root-Redirect vorhanden");
-if (!worker.includes("area-shell-v1294.css") || !worker.includes("darTestAreaAuthoritiesV1294")) {
-  fail("test-app-worker.js: v1294 Area-Authority fehlt");
+if (!worker.includes("area-shell-v1294.css") || !worker.includes("darTestAreaAuthoritiesV1295")) {
+  fail("test-app-worker.js: v1295 Area-Authority fehlt");
 } else {
-  ok("test-app-worker.js: v1294 Area-Authority aktiv");
+  ok("test-app-worker.js: v1295 Area-Authority aktiv");
 }
+if (!worker.includes("quran-saved-v1295.css")) fail("test-app-worker.js: Qurʾān-Merkliste CSS fehlt");
+else ok("test-app-worker.js: Qurʾān-Merkliste CSS aktiv");
 
 const testWrangler = read("wrangler.test.toml");
 if (!testWrangler.includes('[ai]') || !testWrangler.includes('binding = "AI"')) {
