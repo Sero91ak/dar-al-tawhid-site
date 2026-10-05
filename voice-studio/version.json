@@ -1,10 +1,10 @@
 {
   "version": "2.9.113",
-  "updatedAt": "2026-10-05T12:14:00+02:00",
-  "deployTrigger": "voice-studio-2.9.114-mobile-direct-worker-fallback",
+  "updatedAt": "2026-10-05T12:33:00+02:00",
+  "deployTrigger": "voice-studio-2.9.115-iphone-startup-cloud-fix",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v82",
+  "cache": "dar-voice-studio-v83",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -1474,7 +1474,7 @@
     "uiVersion": "2.9.113",
     "uiEngineManifestVersionCoherence": true,
     "staleUiDoesNotMarkHealthyEngineOffline": true,
-    "mobileVersion": "2.9.114",
+    "mobileVersion": "2.9.115",
     "iosHttpsInstallRegression": true,
     "dedicatedMobileManifestRegression": true,
     "publicInstallQrRegression": true,
@@ -1557,7 +1557,7 @@
   },
   "mobileVoiceApp": {
     "enabled": true,
-    "version": "2.9.114",
+    "version": "2.9.115",
     "installUrl": "https://dar-al-tawhid.de/voice-studio/mobile.html?app=1&cloud=1",
     "manifest": "/voice-studio/mobile-manifest.webmanifest",
     "installTransport": "https",
@@ -1586,7 +1586,9 @@
       "gentle",
       "serious",
       "narration"
-    ]
+    ],
+    "startupCrashFixed": true,
+    "pluralSelectorBindingFixed": true
   },
   "mobile": {
     "enabled": true,
