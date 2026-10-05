@@ -35,6 +35,9 @@ jobs:
         with:
           ref: main
 
+      - name: Validate Kids speech normalization
+        run: python3 kids/tools/voice_text.py --self-test
+
       - name: Require available DĀR owner voice path
         run: |
           set -euo pipefail
@@ -58,9 +61,6 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y ffmpeg >/dev/null
-
-      - name: Validate Kids speech normalization
-        run: python3 kids/tools/voice_text.py --self-test
 
       - name: Generate complete Quiz + Dua Serhat voice packs
         run: |
