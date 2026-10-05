@@ -27992,7 +27992,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1288";
+const APP_BUILD_ID="app-shell-v1289";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28589,7 +28589,7 @@ function render(){
     else if(currentRoute.view==="settings")html=renderSettings();
     else if(currentRoute.view==="jummah")html=renderJummah();
     else if(currentRoute.view==="qibla"){html="";queueMicrotask(()=>{try{openQiblaQuickSheet()}catch(e){}});}
-    else if(currentRoute.view==="image-editor"||currentRoute.view==="image-editor-test")html=renderMore();
+    else if(currentRoute.view==="image-editor")html=renderMore();
     else if(currentRoute.view==="image-editor-test")html=renderImageEditorTest();
     else if(currentRoute.view==="quran")html=renderQuranFoldRoute("quran");
     else if(currentRoute.view==="quran-player")html=(window.DARQuranPlayer&&typeof window.DARQuranPlayer.render==="function"?window.DARQuranPlayer.render(currentRoute.value):`<div class="empty">Qurʾān Player wird geladen…</div>`);
