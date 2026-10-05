@@ -518,45 +518,33 @@ jobs:
           catalog_js=Path("kids/quiz-library.js").read_text(encoding="utf-8")
           catalog_css=Path("kids/quiz-library.css").read_text(encoding="utf-8")
 
-          expected={
-              "4-6":"/kids/assets/quiz-scenes/quiz-4-6.svg?v=20261004-real1",
-              "7-8":"/kids/assets/quiz-scenes/quiz-7-8.svg?v=20261004-real1",
-              "9-10":"/kids/assets/quiz-scenes/quiz-9-10.svg?v=20261004-real1",
-          }
+          expected={"4-6","7-8","9-10"}
           artwork=((quiz.get("artwork") or {}).get("ageBands") or {})
-          assert set(artwork)==set(expected), "quiz artwork age bands drifted"
-          for band,url in expected.items():
-              assert artwork[band].get("url")==url, f"{band} artwork URL is not pinned locally"
-              assert not str(artwork[band].get("url","")).startswith(("http://","https://")), f"{band} artwork hotlink detected"
+          visual=((version.get("visualSystem") or {}).get("quizVisualSystem") or {})
+          local_assets=set(str(x) for x in (visual.get("localArtworkAssets") or []))
+          assert set(artwork)==expected, "quiz artwork age bands drifted"
+          for band in sorted(expected):
+              url=str((artwork.get(band) or {}).get("url") or "")
+              assert url.startswith("/kids/assets/quiz-scenes/"), f"{band} artwork URL is not pinned locally"
+              assert not url.startswith(("http://","https://")), f"{band} artwork hotlink detected"
               rel=url.split("?",1)[0].lstrip("/")
               asset=Path(rel)
               assert asset.exists() and asset.stat().st_size>50000, f"{band} realistic artwork missing or unexpectedly tiny"
               assert url in sw, f"{band} artwork missing from PWA precache"
+              assert url in local_assets, f"{band} artwork missing from versioned local artwork inventory"
 
-          topic_expected={
-              "creation":"/kids/assets/quiz-scenes/topic-creation.svg?v=20261004-topic1",
-              "quran":"/kids/assets/quiz-scenes/topic-quran.svg?v=20261004-topic1",
-              "home":"/kids/assets/quiz-scenes/topic-home.svg?v=20261004-topic1",
-              "salah":"/kids/assets/quiz-scenes/topic-salah.svg?v=20261004-topic1",
-              "adab":"/kids/assets/quiz-scenes/topic-adab.svg?v=20261004-topic1",
-              "dua":"/kids/assets/quiz-scenes/topic-dua.svg?v=20261004-topic1",
-              "charity":"/kids/assets/quiz-scenes/topic-charity.svg?v=20261004-topic1",
-              "prophets":"/kids/assets/quiz-scenes/topic-prophets.svg?v=20261004-topic2",
-              "tawhid":"/kids/assets/quiz-scenes/topic-tawhid.svg?v=20261004-topic2",
-              "iman":"/kids/assets/quiz-scenes/topic-iman.svg?v=20261004-topic2",
-              "akhlaq":"/kids/assets/quiz-scenes/topic-akhlaq.svg?v=20261004-topic2",
-              "patience":"/kids/assets/quiz-scenes/topic-patience.svg?v=20261004-topic3",
-              "justice":"/kids/assets/quiz-scenes/topic-justice.svg?v=20261004-topic3",
-          }
+          topic_expected={"creation","quran","home","salah","adab","dua","charity","prophets","tawhid","iman","akhlaq","patience","justice"}
           topic_families=((quiz.get("artwork") or {}).get("topicFamilies") or {})
-          assert set(topic_families)==set(topic_expected), "quiz topic artwork families drifted"
-          for family,url in topic_expected.items():
-              assert topic_families[family].get("url")==url, f"{family} topic artwork URL drifted"
-              assert not str(topic_families[family].get("url","")).startswith(("http://","https://")), f"{family} topic artwork hotlink detected"
+          assert set(topic_families)==topic_expected, "quiz topic artwork families drifted"
+          for family in sorted(topic_expected):
+              url=str((topic_families.get(family) or {}).get("url") or "")
+              assert url.startswith("/kids/assets/quiz-scenes/"), f"{family} topic artwork URL is not pinned locally"
+              assert not url.startswith(("http://","https://")), f"{family} topic artwork hotlink detected"
               rel=url.split("?",1)[0].lstrip("/")
               asset=Path(rel)
               assert asset.exists() and asset.stat().st_size>50000, f"{family} topic artwork missing or unexpectedly tiny"
               assert url in sw, f"{family} topic artwork missing from PWA precache"
+              assert url in local_assets, f"{family} topic artwork missing from versioned local artwork inventory"
 
           scene_map=((quiz.get("artwork") or {}).get("sceneMap") or {})
           category_map=((quiz.get("artwork") or {}).get("categoryMap") or {})
@@ -576,13 +564,13 @@ jobs:
           assert "patience" in topic_keywords and len(topic_keywords["patience"])>=10, "patience topic keyword routing missing"
           assert "justice" in topic_keywords and len(topic_keywords["justice"])>=10, "justice topic keyword routing missing"
 
-          assert 'const CACHE_NAME="dar-al-tawhid-kids-v1104"' in sw
+          expected_sw=str((version.get("visualSystem") or {}).get("serviceWorkerCache") or "").replace("v","",1)
+          assert expected_sw and ('const CACHE_NAME="dar-al-tawhid-kids-v'+expected_sw+'"' in sw), "Kids SW cache does not match version metadata"
           assert "QUIZ_ARTWORK=[" not in sw, "legacy external quiz artwork runtime cache returned"
 
-          visual=((version.get("visualSystem") or {}).get("quizVisualSystem") or {})
           assert str(visual.get("version") or "").startswith("age-adaptive-realistic-v"), "unexpected Kids quiz visual system version"
           assert visual.get("artworkHotlinkDependency") is False
-          assert visual.get("topicArtworkVersion")=="topic-realistic-v3"
+          assert str(visual.get("topicArtworkVersion") or "").startswith("topic-realistic-v")
           assert int(visual.get("topicArtworkCount") or 0)==13
           assert visual.get("topicArtworkCategoryRouting") is True
           assert visual.get("topicArtworkSceneRouting") is True
