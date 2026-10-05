@@ -1057,6 +1057,100 @@
         color:var(--gold2,#efd78e)!important;
         font-weight:800!important;
       }
+      /* QSRC_SCHOLAR_EDITORIAL_V1280 */
+      .qsrc-page--overview #qsrcResults.qsrc-grid{
+        display:flex!important;
+        flex-direction:column!important;
+        gap:0!important;
+        width:min(940px,100%)!important;
+        margin:0 auto!important;
+        border-top:1px solid color-mix(in srgb,var(--gold2,#efd78e) 13%,transparent)!important;
+        padding-bottom:calc(112px + env(safe-area-inset-bottom))!important;
+      }
+      .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact{
+        display:grid!important;
+        grid-template-columns:minmax(0,1fr) 18px!important;
+        min-height:88px!important;
+        gap:14px!important;
+        align-items:center!important;
+        width:100%!important;
+        padding:14px 2px!important;
+        border:0!important;
+        border-bottom:1px solid color-mix(in srgb,var(--gold2,#efd78e) 13%,transparent)!important;
+        border-radius:0!important;
+        background:transparent!important;
+        box-shadow:none!important;
+        text-align:left!important;
+      }
+      .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact>.qsrc-cover-wrap{
+        display:none!important;
+      }
+      .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact>.qsrc-card-body{
+        grid-column:1!important;
+        min-width:0!important;
+        padding:0!important;
+        border:0!important;
+        background:transparent!important;
+        box-shadow:none!important;
+      }
+      .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact .qsrc-card-kicker{
+        color:var(--gold2,#efd78e)!important;
+        font-size:.65rem!important;
+        font-weight:850!important;
+        letter-spacing:.13em!important;
+        text-transform:uppercase!important;
+      }
+      .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact .qsrc-card-head{
+        display:flex!important;
+        align-items:baseline!important;
+        justify-content:space-between!important;
+        gap:14px!important;
+      }
+      .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact .qsrc-card-title{
+        font-family:var(--font-display,var(--serif,Georgia,serif))!important;
+        font-size:clamp(1.22rem,4vw,1.55rem)!important;
+        line-height:1.16!important;
+        font-weight:590!important;
+        color:var(--text,#f7f1e7)!important;
+      }
+      .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact .qsrc-card-badge{
+        flex:0 0 auto!important;
+        color:var(--muted2,#bdb7aa)!important;
+        background:transparent!important;
+        border:0!important;
+        padding:0!important;
+        font-size:.69rem!important;
+        letter-spacing:.06em!important;
+        text-transform:uppercase!important;
+      }
+      .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact .qsrc-card-author,
+      .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact .qsrc-card-foot{
+        margin-top:5px!important;
+        color:var(--muted2,#bdb7aa)!important;
+      }
+      .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact>.qsrc-chevron{
+        grid-column:2!important;
+        align-self:center!important;
+        justify-self:end!important;
+        color:color-mix(in srgb,var(--text,#f7f1e7) 28%,transparent)!important;
+        font-size:1.7rem!important;
+      }
+      .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact:active{
+        background:linear-gradient(90deg,color-mix(in srgb,var(--gold2,#efd78e) 6%,transparent),transparent 82%)!important;
+      }
+      @media(max-width:640px){
+        .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact{
+          min-height:84px!important;
+          padding:13px 0!important;
+        }
+        .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact .qsrc-card-head{
+          display:grid!important;
+          gap:5px!important;
+        }
+        .qsrc-page--overview #qsrcResults.qsrc-grid .qsrc-card-compact .qsrc-card-badge{
+          justify-self:start!important;
+        }
+      }
       @media(min-width:980px){
         .qsrc-page--overview .qsrc-lib-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:22px 18px!important}
       }
