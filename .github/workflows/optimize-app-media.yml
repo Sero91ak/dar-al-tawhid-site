@@ -65,12 +65,9 @@ jobs:
           set -euo pipefail
           full=0
           skip=0
-          restore=0
           LAST_MSG="$(git log -1 --pretty=%B 2>/dev/null || true)"
           if printf '%s' "$LAST_MSG" | grep -Fq '[media-optimized]'; then
             skip=1
-          elif printf '%s' "$LAST_MSG" | grep -Fq '[media-restore-protected]'; then
-            restore=1
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.full_scan }}" = "true" ]; then
             full=1
           elif printf '%s' "$LAST_MSG" | grep -Fq '[media-fullscan]'; then
@@ -78,7 +75,6 @@ jobs:
           fi
           echo "full=$full" >> "$GITHUB_OUTPUT"
           echo "skip=$skip" >> "$GITHUB_OUTPUT"
-          echo "restore=$restore" >> "$GITHUB_OUTPUT"
 
       - name: Optimize current media
         if: steps.mode.outputs.skip != '1'
@@ -106,14 +102,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin main --depth=1
-          git checkout origin/main --             assets/app-icons             assets/brand/seals             kids/assets/kids-brand/logo-mark.png
-
-      - name: Restore protected brand masters
-        if: steps.mode.outputs.restore == '1'
-        shell: bash
-        run: |
-          set -euo pipefail
           git fetch origin main:refs/remotes/origin/main --depth=1
           git checkout origin/main -- \
             assets/app-icons \
@@ -128,7 +116,7 @@ jobs:
           fail=0
           while IFS= read -r -d '' f; do
             case "$f" in
-              *Assets.xcassets*|*/icons/*|*/app-icons/*|*/logo/*|*/logos/*|*favicon*|*watermark*|*/masters/*|*/master/*|*/originals/*|*/raw/*|*/sources/*|*-master.*) continue ;;
+              *Assets.xcassets*|*/icons/*|*/app-icons/*|*/brand/seals/*|*/logo/*|*/logos/*|*/kids-brand/logo-mark.png|*favicon*|*watermark*|*/masters/*|*/master/*|*/originals/*|*/raw/*|*/sources/*|*-master.*) continue ;;
             esac
             size=$(stat -c%s "$f")
             case "${f,,}" in
