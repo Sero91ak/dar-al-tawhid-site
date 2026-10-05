@@ -171,10 +171,8 @@ function bindAreaJump(){
       if(kind==="sahaba"){document.getElementById("msEntry")?.click();return}
       if(kind==="sahabiyyat"){
         const entry=document.getElementById("syEntry");
-        if(entry){
-          entry.scrollIntoView({behavior:"smooth",block:"center"});
-          setTimeout(()=>entry.focus({preventScroll:true}),350);
-        }else openLibrary();
+        if(entry){entry.click();return}
+        openLibrary();
       }
     });
   });
@@ -196,7 +194,7 @@ function insertEntry(view){
     Array.from({length:14},(_,i)=>'<i style="--i:'+i+'"></i>').join("")+
     '</span></span>'+
     '<span class="ms-entry-copy">'+
-      '<span class="ms-entry-kicker">ṢAḤĀBIYYĀT · FRAUEN DER ERSTEN GENERATION</span>'+
+      '<span class="ms-entry-kicker">FRAUEN DER ERSTEN GENERATION</span>'+
       '<strong>Ṣaḥābiyyāt</strong>'+
       '<span>'+(isAudioOnlyAge()?'14 Ṣaḥābiyyāt · Hörgeschichten':'14 Ṣaḥābiyyāt · ihre Geschichten · lesen &amp; hören')+'</span>'+
     '</span>'+
