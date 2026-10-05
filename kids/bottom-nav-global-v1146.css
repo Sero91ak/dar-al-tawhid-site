@@ -1,0 +1,70 @@
+/* DĀR AL TAWḤĪD KIDS · Global Bottom Navigation Authority v1146
+   The bottom dock is one global component. No page may shrink or restyle it. */
+html[data-kids-age] body .bottom-nav{
+  left:50%!important;
+  right:auto!important;
+  transform:translateX(-50%)!important;
+  bottom:max(9px,env(safe-area-inset-bottom))!important;
+  width:min(calc(100% - 28px),740px)!important;
+  min-height:68px!important;
+  height:auto!important;
+  gap:5px!important;
+  padding:7px!important;
+  overflow:visible!important;
+  isolation:auto!important;
+  border:1px solid rgba(137,214,222,.26)!important;
+  border-radius:32px!important;
+  background:
+    radial-gradient(circle at 24% 0%,rgba(241,202,108,.08),transparent 30%),
+    rgba(3,24,40,.92)!important;
+  box-shadow:0 22px 65px rgba(0,0,0,.40),inset 0 1px rgba(255,255,255,.04)!important;
+  backdrop-filter:blur(27px)!important;
+  -webkit-backdrop-filter:blur(27px)!important;
+}
+html[data-kids-age] body .bottom-nav::before{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+}
+html[data-kids-age] body .bottom-nav .nav-btn{
+  position:static!important;
+  z-index:auto!important;
+  min-height:var(--kids-control-min,var(--kids-touch,54px))!important;
+  max-height:none!important;
+  padding:6px 4px!important;
+  gap:3px!important;
+  border:1px solid transparent!important;
+  border-radius:24px!important;
+  background:transparent!important;
+  color:rgba(255,255,255,.60)!important;
+}
+html[data-kids-age] body .bottom-nav .nav-btn .ico{
+  width:32px!important;
+  height:32px!important;
+  font-size:0!important;
+  line-height:1!important;
+  background-size:88%!important;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.18))!important;
+}
+html[data-kids-age] body .bottom-nav .nav-btn .lab{
+  font-size:var(--kids-fs-small,var(--kids-meta,13px))!important;
+  line-height:1.15!important;
+  font-weight:700!important;
+  letter-spacing:.005em!important;
+}
+html[data-kids-age] body .bottom-nav .nav-btn.active{
+  color:#ffe291!important;
+  border-color:rgba(241,202,108,.34)!important;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,237,174,.18),transparent 66%),
+    linear-gradient(135deg,rgba(241,202,108,.15),rgba(113,206,198,.06))!important;
+  box-shadow:0 0 22px rgba(241,202,108,.11),inset 0 1px rgba(255,255,255,.055)!important;
+}
+@media(max-width:380px){
+  html[data-kids-age] body .bottom-nav{min-height:64px!important}
+  html[data-kids-age] body .bottom-nav .nav-btn .ico{width:30px!important;height:30px!important}
+}
+@media(min-width:700px){
+  html[data-kids-age] body .bottom-nav{min-height:72px!important}
+  html[data-kids-age] body .bottom-nav .nav-btn .ico{width:34px!important;height:34px!important}
+}
