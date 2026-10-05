@@ -59,6 +59,7 @@ function setMode(v){
     return;
   }
   if(v==="read"){
+    if(!audio.paused)audio.pause();
     if(typeof followReader?.openReading==="function")followReader.openReading();
     else followReader?.open?.();
   }
@@ -130,14 +131,13 @@ function doneCount(){return items.reduce((n,item)=>n+(done(item.id)?1:0),0)}
 function markDone(id){if(!id)return;try{localStorage.setItem(DONE_PREFIX+id,"1")}catch(_){}renderCards()}
 
 function renderModeButtons(){
-  const audioOnly=isAudioOnlyAge();
   const detailModes=document.querySelector(".ps-detail-modes");
   const libraryModes=document.querySelector("#psModes");
   const toolbar=libraryModes?.closest(".ps-toolbar");
-  if(detailModes)detailModes.hidden=audioOnly;
-  if(libraryModes)libraryModes.hidden=audioOnly;
-  if(toolbar)toolbar.hidden=audioOnly;
-  const current=audioOnly?"listen":mode();
+  if(detailModes)detailModes.hidden=false;
+  if(libraryModes)libraryModes.hidden=false;
+  if(toolbar)toolbar.hidden=false;
+  const current=mode();
   document.querySelectorAll("[data-ps-mode]").forEach(b=>b.classList.toggle("active",b.dataset.psMode===current));
 }
 function renderMuhammadFeature(){
