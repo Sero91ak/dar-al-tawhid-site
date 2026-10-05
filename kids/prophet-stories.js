@@ -199,7 +199,7 @@ function prepareStoriesHome(view){
     entry.className="ps-prophet-entry";
     entry.type="button";
     entry.innerHTML=
-      '<span class="ps-entry-visual" aria-hidden="true"><img src="/kids/assets/prophets-v2/muhammad-card.jpg?v=22" alt="" decoding="async" loading="lazy"></span>'+
+      '<span class="ps-entry-visual" aria-hidden="true"><img src="/kids/assets/prophet-scenes/desert.webp?v=1133" alt="" decoding="async" loading="eager"></span>'+
       '<span class="ps-entry-panel">'+
         '<span class="ps-entry-copy">'+
           '<span class="ps-entry-kicker">GESCHICHTEN DER PROPHETEN</span>'+
