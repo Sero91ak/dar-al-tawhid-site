@@ -498,7 +498,7 @@
     "quizArtworkLive": true,
     "duaQuizArtworkPlacement": "direct-in-respective-modal-sections",
     "sahabiyyatDistinctArtworkCount": 14,
-    "sahabiyyatDataVersion": 23,
+    "sahabiyyatDataVersion": 25,
     "sahabiyyatArtworkRelease": "v1127-existing-four-photoreal",
     "sahabiyyatArtworkCount": 14,
     "sahabiyyatLocalArtworkCount": 14,
@@ -681,7 +681,14 @@
     "storyLibraryTabletMinHeight": "224px",
     "storyLibraryPreschoolNoShrink": true,
     "storyLibraryAutoGrowLongNames": true,
-    "storyLibraryImageSharePhone": "40%"
+    "storyLibraryImageSharePhone": "40%",
+    "khadijahOwnerAudio": true,
+    "khadijahOwnerAudioDirectAssigned": true,
+    "khadijahOwnerAudioDurationSec": 384.287,
+    "khadijahOwnerAudioSourceCodec": "mp3-128k-mono",
+    "khadijahOwnerAudioOptimizedCodec": "aac-64k-mono",
+    "khadijahOwnerAudioOptimizedBytes": 3210052,
+    "khadijahOwnerAudioTarget": "/kids/assets/sahabiyyat-story-audio/khadijah/master.m4a"
   },
   "updatedAt": "2026-10-05",
   "deployTrigger": "2026-10-05T21:17:00+02:00"
