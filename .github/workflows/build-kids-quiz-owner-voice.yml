@@ -107,6 +107,45 @@ jobs:
               ],text=True).strip()
               return float(out)
 
+          def flow_qa(path,text,total_seconds):
+              proc=subprocess.run([
+                  "ffmpeg","-hide_banner","-i",str(path),
+                  "-af","silencedetect=noise=-45dB:d=0.65",
+                  "-f","null","-"
+              ],stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,text=True)
+              current_start=None
+              max_internal=0.0
+              for line in (proc.stderr or "").splitlines():
+                  m=re.search(r"silence_start:\\s*([0-9.]+)",line)
+                  if m:
+                      current_start=float(m.group(1))
+                      continue
+                  m=re.search(r"silence_end:\\s*([0-9.]+).*silence_duration:\\s*([0-9.]+)",line)
+                  if not m:
+                      continue
+                  end=float(m.group(1))
+                  dur=float(m.group(2))
+                  start=current_start if current_start is not None else max(0.0,end-dur)
+                  current_start=None
+                  if start>0.20 and end<float(total_seconds)-0.20:
+                      max_internal=max(max_internal,dur)
+
+              words=re.findall(r"[A-Za-zÄÖÜäöüßÀ-ÿʾʿ]+",str(text or ""))
+              rate=(len(words)/max(float(total_seconds),0.10)) if words else 0.0
+              issues=[]
+              if max_internal>1.15:
+                  issues.append("long_internal_silence")
+              if len(words)>=8 and rate<0.85:
+                  issues.append("speech_too_slow")
+              if len(words)>=8 and rate>5.50:
+                  issues.append("speech_too_fast")
+              return {
+                  "passed":not issues,
+                  "issues":issues,
+                  "maxInternalSilenceMs":round(max_internal*1000.0),
+                  "wordsPerSecond":round(rate,3)
+              }
+
           def load_manifest(path):
               if not path.exists():
                   return {"entries":{}}
@@ -171,13 +210,16 @@ jobs:
                       d=duration(target)
                       if not (0.25<=d<=120):
                           raise RuntimeError(f"Implausible duration: {d:.3f}s")
+                      flow=flow_qa(target,text,d)
+                      if not flow["passed"]:
+                          raise RuntimeError("Audio flow QA: "+", ".join(flow["issues"]))
                       with lock:
                           serial["done"]+=1
                           print(
                               f"[{serial['done']}/{serial['total']}] {text[:72]} · {d:.2f}s",
                               flush=True
                           )
-                      return text,target,d,prepared
+                      return text,target,d,prepared,flow
                   except Exception as exc:
                       last=exc
                       target.unlink(missing_ok=True)
@@ -198,6 +240,7 @@ jobs:
               old_entries=dict(old.get("entries") or {})
               results={}
               prepared_hashes={}
+              qa_reports={}
 
               for text in unique:
                   entry=old_entries.get(text) or {}
@@ -207,6 +250,7 @@ jobs:
                   results[text]=(p,float(entry.get("durationSeconds") or duration(p)))
                   prepared=prepare_kids_voice_text(text)
                   prepared_hashes[text]=hashlib.sha256(prepared.encode("utf-8")).hexdigest()
+                  qa_reports[text]=entry.get("flowQa") or {"passed":True,"reused":True}
 
               missing=[text for text in unique if text not in results]
               print(f"{pack_id}: {len(unique)} Texte · {len(results)} aktuell · {len(missing)} neu")
@@ -214,9 +258,10 @@ jobs:
               with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
                   futures={ex.submit(synth,text,profile,asset_dir,serial):text for text in missing}
                   for fut in concurrent.futures.as_completed(futures):
-                      text,p,d,prepared=fut.result()
+                      text,p,d,prepared,flow=fut.result()
                       results[text]=(p,d)
                       prepared_hashes[text]=hashlib.sha256(prepared.encode("utf-8")).hexdigest()
+                      qa_reports[text]=flow
 
               build_id=pack_id.lower().replace("_","-")+"-"+time.strftime("%Y%m%d-%H%M%S",time.gmtime())
               now=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
@@ -232,6 +277,7 @@ jobs:
                       "durationSeconds":round(float(d),3),
                       "preparedTextSha256":prepared_hashes[text],
                       "synthesisRevision":SYNTHESIS_REVISION,
+                      "flowQa":qa_reports[text],
                       "voiceProfileId":"serhat-owner-voice-2026",
                       "sourceVoice":"authorized-owner-voice",
                       "sourceType":"owner-voice-generated",
