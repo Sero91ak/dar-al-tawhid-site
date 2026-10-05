@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1124";
-const KIDS_BUILD_ID="kids-shell-v54-dua-quiz-art1124";
+const CACHE_NAME="dar-al-tawhid-kids-v1125";
+const KIDS_BUILD_ID="kids-shell-v55-sahabiyyat-approved1125";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -15,6 +15,20 @@ const CORE_PRECACHE=[
   "/kids/data/prophet-stories.json",
   "/kids/data/mubashshirun-stories.json",
   "/kids/data/sahabiyyat-stories.json",
+  "/kids/assets/sahabiyyat/khadijah-v1124.webp?v=1124",
+  "/kids/assets/sahabiyyat/aishah-v1124.webp?v=1124",
+  "/kids/assets/sahabiyyat/fatimah-v1124.webp?v=1124",
+  "/kids/assets/sahabiyyat/hafsah-v1124.webp?v=1124",
+  "/kids/assets/sahabiyyat/zaynab-v1124.webp?v=1124",
+  "/kids/assets/sahabiyyat/asma-v1124.webp?v=1124",
+  "/kids/assets/sahabiyyat/umm-sulaym-v1124.webp?v=1124",
+  "/kids/assets/sahabiyyat/umm-atiyyah-v1124.webp?v=1124",
+  "/kids/assets/sahabiyyat/umm-habibah-v1124.webp?v=1124",
+  "/kids/assets/sahabiyyat/umm-salamah-v1124.webp?v=1124",
+  "/kids/assets/sahabiyyat/sawdah-v1122.jpg?v=1122",
+  "/kids/assets/sahabiyyat/juwayriyyah-v1122.jpg?v=1122",
+  "/kids/assets/sahabiyyat/safiyyah-v1122.jpg?v=1122",
+  "/kids/assets/sahabiyyat/maymunah-v1122.jpg?v=1122",
   "/kids/data/story-hub.json?v=3",
   "/kids/data/dua-kids.json",
   "/kids/data/verified-content.json",
@@ -24,7 +38,7 @@ const CORE_PRECACHE=[
   "/kids/mubashshirun-stories.css?v=19",
   "/kids/sahabiyyat-stories.css?v=4",
   "/kids/mubashshirun-stories.js?v=19",
-  "/kids/sahabiyyat-stories.js?v=7",
+  "/kids/sahabiyyat-stories.js?v=8",
   "/kids/story-follow-reader.css?v=4",
   "/kids/story-follow-reader.js?v=5",
   "/kids/story-hub.css?v=3",
