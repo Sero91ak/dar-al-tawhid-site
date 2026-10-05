@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v50-single-story-player1120",
-  "label": "KIDS · V1.07.55",
-  "releasedAt": "2026-10-05T10:15:00+02:00",
-  "note": "Kids v1120: Der Geschichtenbereich verwendet technisch genau einen Universal-StoryPlayer. Propheten-, Ṣaḥābah- und Ṣaḥābiyyāt-Seiten behalten ihre Bibliotheken, Bilder, Texte, Quellen und Fragen, delegieren Hören aber vollständig an den zentralen Player. Leere 0:00-Legacy-Player bleiben entfernt, fehlendes Audio zeigt „Audio folgt“, und Kategoriebilder werden manifest-first aus lokalen App-Assets geladen.",
+  "buildId": "kids-shell-v51-story-controls1121",
+  "label": "KIDS · V1.07.56",
+  "releasedAt": "2026-10-05T10:35:00+02:00",
+  "note": "Kids v1121: StoryPlayer-Bedienung auf iPhone/iPad systematisch gehärtet. „Text schließen“ funktioniert zuverlässig, Lesen und synchrones Mitlesen haben eindeutige Zustände, Text-Scroll bleibt im Lesefenster, Swipe-Gesten kollidieren nicht mehr mit Text/Buttons und alle Touch-Ziele sind hardwarefreundlich.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1120",
+    "serviceWorkerCache": "v1121",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -450,9 +450,15 @@
     "legacyStoryPlayersRemoved": true,
     "storyCategoryArtworkLocal": true,
     "storyMissingAudioState": "Audio folgt",
-    "storyHubAssetVersion": 3,
+    "storyHubAssetVersion": 4,
     "storyHubCategoryArtwork": "manifest-first-local",
-    "storyLegacyAudioPlayers": false
+    "storyLegacyAudioPlayers": false,
+    "storyHubCssVersion": 2,
+    "storyReaderControls": "state-machine-v1121",
+    "storyReaderTouch": "iphone-ipad-hardened-v1121",
+    "storyReaderInternalScroll": true,
+    "storyReaderGestureGuard": true,
+    "storyReaderCloseRestoresPosition": true
   },
   "updatedAt": "2026-10-05"
 }
