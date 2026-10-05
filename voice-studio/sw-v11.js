@@ -1,4 +1,4 @@
-const CACHE="dar-voice-studio-v80";
+const CACHE="dar-voice-studio-v81";
 const SHELL=[
   "/voice-studio/",
   "/voice-studio/index.html",
@@ -46,6 +46,8 @@ self.addEventListener("fetch",event=>{
   const fresh =
     url.pathname==="/voice-studio/" ||
     url.pathname==="/voice-studio/index.html" ||
+    url.pathname==="/voice-studio/mobile.html" ||
+    url.pathname==="/voice-studio/sw-v11.js" ||
     url.pathname==="/voice-studio/content-studio.js" ||
     url.pathname==="/voice-studio/mubashshirun-pack.js" ||
     url.pathname==="/voice-studio/alphabet-audio-studio.js" ||
