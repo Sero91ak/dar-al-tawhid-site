@@ -1,6 +1,6 @@
 {
-  "version": 4,
-  "updatedAt": "2026-10-05T10:26:00+02:00",
+  "version": 5,
+  "updatedAt": "2026-10-05T10:55:00+02:00",
   "title": "Ṣaḥābiyyāt",
   "subtitle": "Frauen der ersten Generation – Glaube, Wissen, Standhaftigkeit und Dienst",
   "policy": {
@@ -12,7 +12,7 @@
     ],
     "noLegends": true,
     "noInventedDialogue": true,
-    "womenCompanionDepictionPolicy": "Historisch inspirierte, nicht-identifizierende Szenen sind erlaubt: vollständig verhüllte weibliche Figur nur aus Rücken-/Distanz-/Schattenansicht, kein sichtbares Gesicht, keine Porträtbehauptung, keine moderne Kleidung.",
+    "womenCompanionDepictionPolicy": "Historisch inspirierte, nicht identifizierbare Illustrationsfiguren. Körper und Haare vollständig bedeckt; Gesichter vollständig unsichtbar. Kein Porträtanspruch und keine Behauptung über das tatsächliche Aussehen.",
     "storyNarrationPolicy": {
       "version": "kids-sahabiyyat-life-story-v2",
       "rule": "Pro Ṣaḥābiyyah eine vollständige, kindgerechte Lebensgeschichte mit Herkunft, Lebenskontext, prägenden Ereignissen, Eigenschaften, Diensten und klarer Lehre; keine erfundenen Dialoge oder unbelegten Ausschmückungen. Derselbe Mastertext gilt für alle Altersstufen.",
@@ -424,11 +424,14 @@
           "syncPoints": []
         }
       },
-      "cover": "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:b223553c-e812-449f-b214-d986cdc860aa",
-      "hero": "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:b223553c-e812-449f-b214-d986cdc860aa",
+      "cover": "/kids/assets/sahabiyyat/sawdah-v1122.jpg?v=1122",
+      "hero": "/kids/assets/sahabiyyat/sawdah-v1122.jpg?v=1122",
       "heroPosition": "50% 50%",
-      "visualDisclaimer": "Historisch inspirierte Lernszene. Die dargestellte verhüllte Figur ist keine Porträtbehauptung und zeigt kein bekanntes oder behauptetes tatsächliches Aussehen der Ṣaḥābiyyah.",
-      "visualBasis": "Symbolische historische Szene mit vollständig verhüllter Figur aus Rücken- oder Distanzansicht; Gesicht und individuelle Gesichtszüge bleiben unsichtbar. Kleidung und Umgebung sind allgemein an frühislamische Ḥiǧāz-/Madīnah-Kontexte angelehnt, nicht als individuell sicher überlieferte Garderobe behauptet."
+      "visualDisclaimer": "Historisch inspirierte Lernillustration ohne Porträtanspruch. Das Bild behauptet nicht, die Ṣaḥābiyyah selbst oder ihr tatsächliches Aussehen zu zeigen.",
+      "visualBasis": "Großzügigkeit und freiwilliger Verzicht; Madinah-Hof mit Tuch, Datteln und Wassergefäß. Die dargestellte Frau ist nicht identifizierbar und vollständig gesichtslos.",
+      "artworkVersion": "v1122-local",
+      "artworkFormat": "jpeg",
+      "artworkFaceVisible": false
     },
     {
       "id": "zaynab",
@@ -821,11 +824,14 @@
           "syncPoints": []
         }
       },
-      "cover": "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:69fe8a3c-0a86-40f1-b229-6af7978f90ab",
-      "hero": "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:69fe8a3c-0a86-40f1-b229-6af7978f90ab",
+      "cover": "/kids/assets/sahabiyyat/juwayriyyah-v1122.jpg?v=1122",
+      "hero": "/kids/assets/sahabiyyat/juwayriyyah-v1122.jpg?v=1122",
       "heroPosition": "50% 50%",
-      "visualDisclaimer": "Historisch inspirierte Lernszene. Die dargestellte verhüllte Figur ist keine Porträtbehauptung und zeigt kein bekanntes oder behauptetes tatsächliches Aussehen der Ṣaḥābiyyah.",
-      "visualBasis": "Symbolische historische Szene mit vollständig verhüllter Figur aus Rücken- oder Distanzansicht; Gesicht und individuelle Gesichtszüge bleiben unsichtbar. Kleidung und Umgebung sind allgemein an frühislamische Ḥiǧāz-/Madīnah-Kontexte angelehnt, nicht als individuell sicher überlieferte Garderobe behauptet."
+      "visualDisclaimer": "Historisch inspirierte Lernillustration ohne Porträtanspruch. Das Bild behauptet nicht, die Ṣaḥābiyyah selbst oder ihr tatsächliches Aussehen zu zeigen.",
+      "visualBasis": "Dhikr und Beständigkeit; ruhige Morgenszene auf einer Schilfmatte bei Sonnenaufgang. Die dargestellte Frau ist nicht identifizierbar und vollständig gesichtslos.",
+      "artworkVersion": "v1122-local",
+      "artworkFormat": "jpeg",
+      "artworkFaceVisible": false
     },
     {
       "id": "safiyyah",
@@ -903,11 +909,14 @@
           "syncPoints": []
         }
       },
-      "cover": "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:1ea13bd6-d152-4dd6-9285-f05ec9b92458",
-      "hero": "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:1ea13bd6-d152-4dd6-9285-f05ec9b92458",
+      "cover": "/kids/assets/sahabiyyat/safiyyah-v1122.jpg?v=1122",
+      "hero": "/kids/assets/sahabiyyat/safiyyah-v1122.jpg?v=1122",
       "heroPosition": "50% 50%",
-      "visualDisclaimer": "Historisch inspirierte Lernszene. Die dargestellte verhüllte Figur ist keine Porträtbehauptung und zeigt kein bekanntes oder behauptetes tatsächliches Aussehen der Ṣaḥābiyyah.",
-      "visualBasis": "Symbolische historische Szene mit vollständig verhüllter Figur aus Rücken- oder Distanzansicht; Gesicht und individuelle Gesichtszüge bleiben unsichtbar. Kleidung und Umgebung sind allgemein an frühislamische Ḥiǧāz-/Madīnah-Kontexte angelehnt, nicht als individuell sicher überlieferte Garderobe behauptet."
+      "visualDisclaimer": "Historisch inspirierte Lernillustration ohne Porträtanspruch. Das Bild behauptet nicht, die Ṣaḥābiyyah selbst oder ihr tatsächliches Aussehen zu zeigen.",
+      "visualBasis": "Hajj-Lehre und Reise; Hijaz-Berglandschaft mit historischem Reiselager. Die dargestellte Frau ist nicht identifizierbar und vollständig gesichtslos.",
+      "artworkVersion": "v1122-local",
+      "artworkFormat": "jpeg",
+      "artworkFaceVisible": false
     },
     {
       "id": "maymunah",
@@ -970,11 +979,14 @@
           "syncPoints": []
         }
       },
-      "cover": "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:4cf09c35-78c2-440d-82ff-295584411213",
-      "hero": "https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:4cf09c35-78c2-440d-82ff-295584411213",
+      "cover": "/kids/assets/sahabiyyat/maymunah-v1122.jpg?v=1122",
+      "hero": "/kids/assets/sahabiyyat/maymunah-v1122.jpg?v=1122",
       "heroPosition": "50% 50%",
-      "visualDisclaimer": "Historisch inspirierte Lernszene. Die dargestellte verhüllte Figur ist keine Porträtbehauptung und zeigt kein bekanntes oder behauptetes tatsächliches Aussehen der Ṣaḥābiyyah.",
-      "visualBasis": "Symbolische historische Szene mit vollständig verhüllter Figur aus Rücken- oder Distanzansicht; Gesicht und individuelle Gesichtszüge bleiben unsichtbar. Kleidung und Umgebung sind allgemein an frühislamische Ḥiǧāz-/Madīnah-Kontexte angelehnt, nicht als individuell sicher überlieferte Garderobe behauptet."
+      "visualDisclaimer": "Historisch inspirierte Lernillustration ohne Porträtanspruch. Das Bild behauptet nicht, die Ṣaḥābiyyah selbst oder ihr tatsächliches Aussehen zu zeigen.",
+      "visualBasis": "Beobachtung und Überlieferung der Sunnah; nächtliche Hausszene mit Wassergefäß, Matte und Öllampe. Die dargestellte Frau ist nicht identifizierbar und vollständig gesichtslos.",
+      "artworkVersion": "v1122-local",
+      "artworkFormat": "jpeg",
+      "artworkFaceVisible": false
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v51-story-controls1121",
-  "label": "KIDS · V1.07.56",
-  "releasedAt": "2026-10-05T10:35:00+02:00",
-  "note": "Kids v1121: StoryPlayer-Bedienung auf iPhone/iPad systematisch gehärtet. „Text schließen“ funktioniert zuverlässig, Lesen und synchrones Mitlesen haben eindeutige Zustände, Text-Scroll bleibt im Lesefenster, Swipe-Gesten kollidieren nicht mehr mit Text/Buttons und alle Touch-Ziele sind hardwarefreundlich.",
+  "buildId": "kids-shell-v52-sahabiyyat-local-art1122",
+  "label": "KIDS · V1.07.57",
+  "releasedAt": "2026-10-05T10:55:00+02:00",
+  "note": "Kids v1122: Sawdah, Ǧuwayriyyah, Ṣafiyyah und Maymūnah erhalten vier voneinander unterscheidbare historisch inspirierte, vollständig gesichtslose Ṣaḥābiyyāt-Szenen. Die Bilder sind als kleine lokale JPEG-App-Assets gebündelt; Karten und Detail-Heroes laden sie direkt aus der Kids-App.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -420,7 +420,7 @@
     "sahabiyyatVerifiedStories": 14,
     "sahabiyyatNoPortraits": true,
     "sahabiyyatSingleMasterStory": true,
-    "sahabiyyatArtworkPolicy": "historical-environment-only-no-portrait",
+    "sahabiyyatArtworkPolicy": "historical-veiled-figure-face-fully-hidden-no-portrait-claim",
     "sahabiyyatBundleVersion": 3,
     "sahabiyyatStaticHubCard": true,
     "sahabiyyatStaticEntry": true,
@@ -458,7 +458,16 @@
     "storyReaderTouch": "iphone-ipad-hardened-v1121",
     "storyReaderInternalScroll": true,
     "storyReaderGestureGuard": true,
-    "storyReaderCloseRestoresPosition": true
+    "storyReaderCloseRestoresPosition": true,
+    "sahabiyyatArtworkVersion": 1122,
+    "sahabiyyatArtworkFormat": "local-jpeg",
+    "sahabiyyatNewLocalArtworkCount": 4,
+    "sahabiyyatLocalArtworkAssets": [
+      "/kids/assets/sahabiyyat/sawdah-v1122.jpg",
+      "/kids/assets/sahabiyyat/juwayriyyah-v1122.jpg",
+      "/kids/assets/sahabiyyat/safiyyah-v1122.jpg",
+      "/kids/assets/sahabiyyat/maymunah-v1122.jpg"
+    ]
   },
   "updatedAt": "2026-10-05"
 }
