@@ -1,0 +1,135 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-3051-3075",
+  "series": "3051-3150",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "HAD-3051–3075 setzt Ṣaḥīḥ Muslim ab Muslim 2871 fort und führt bis Muslim 2888. Reine Isnād- und Wiederholungsvarianten wurden nicht künstlich vervielfacht. Muslim 2878 wurde bewusst nicht erneut angelegt, weil sein Aussagekern bereits als HAD-2145 vorhanden ist. Die Datensätze besitzen verified Šarḥ mit direkter klassischer Referenz; sichere Druckseiten wurden nur eingetragen, wenn sie verifiziert waren, sonst blieb sharhPage null. Für Ṣaḥīḥ Muslim wurde die Priorität al-Māzirī → Qāḍī ʿIyāḍ geprüft; verwendet wird hier der direkt greifbare Kommentar von Qāḍī ʿIyāḍ im Ikmāl al-Muʿlim, Bd. 8.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "semanticDuplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "globalCatalogUpdated": true,
+    "appleTvScreensaverUpdated": true,
+    "webIosAndroidLibraryLoaderUpdated": true
+  },
+  "dedupeDecisions": [
+    "Muslim 2878 not duplicated: statement core already exists as HAD-2145",
+    "Muslim 2871–2872 segmented only by substantive statement cores",
+    "Muslim 2880 variants merged by substantive statement core",
+    "Muslim 2883–2884 variants merged by substantive statement core",
+    "Muslim 2886–2888 variants not multiplied by isnad-only differences"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibrary",
+    "iosHadithLibrary",
+    "androidWebAppAndWebsite"
+  ],
+  "records": [
+    {
+      "id": "HAD-3051",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3052",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3053",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3054",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3055",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3056",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3057",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3058",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3059",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3060",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3061",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3062",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3063",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3064",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3065",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3066",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3067",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3068",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3069",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3070",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3071",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3072",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3073",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3074",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3075",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    }
+  ]
+}
