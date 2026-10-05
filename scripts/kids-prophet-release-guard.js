@@ -119,8 +119,11 @@ for (const rel of ["kids/index.html", "kids/start.html", "kids/shell.html"]) {
     if (sahabiyyatCssVersion) requireMatch(text, "/kids/sahabiyyat-stories.css?v=" + sahabiyyatCssVersion, rel);
     if (sahabiyyatJsVersion) requireMatch(text, "/kids/sahabiyyat-stories.js?v=" + sahabiyyatJsVersion, rel);
     requireMatch(text, 'id="syEntry"', rel);
-    requireMatch(text, 'class="stories-area-jump"', rel);
-    requireMatch(text, 'data-story-area="sahabiyyat"', rel);
+    requireMatch(text, 'class="stories-world-head stories-hero"', rel);
+    requireMatch(text, 'id="storiesHeroTitle"', rel);
+    if (text.includes('class="stories-area-jump"') || text.includes('data-story-area=')) {
+      error(rel + " enthält wieder die entfernte Geschichten-Kapselnavigation");
+    }
   }
 }
 
