@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v98-dua-voice1171",
-  "label": "KIDS · V1.07.99",
-  "releasedAt": "2026-10-06T01:02:00+02:00",
-  "note": "Duʿāʾ-Sprachausgabe repariert, ohne neue Voice-Credits zu verbrauchen: acht vorhandene, bereits gerenderte Serhat-Owner-Voice-Erklärungen plus zwei Feedback-Clips wurden aus dem früheren geprüften Voice-Pack wieder zugeordnet. Qurʾān-Arabisch bleibt ausschließlich auf dem echten Rezitationspfad. Startseite bleibt Audio-first mit Hörbuch-/Qurʾān-Weiterhören.",
+  "buildId": "kids-shell-v100-audio-core1173",
+  "label": "KIDS · V1.08.00",
+  "releasedAt": "2026-10-06T01:12:00+02:00",
+  "note": "Audio-Core Release: Startseite bleibt konsequent auf Hörbücher, Mitlesen, Qurʾān und Duʿāʾ fokussiert. Weiterhören öffnet die zuletzt aktive Hörgeschichte oder Qurʾān-Stelle. Duʿāʾ nutzt zehn bereits vorhandene Serhat-Voice-Clips ohne neue Credits. Der Alif-Bāʾ-Bereich wurde aus Markup und laufendem JavaScript entfernt; vorhandene Archiv-Assets bleiben nur für eine spätere, bewusst neue Version im Repository.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1171",
+    "serviceWorkerCache": "v1173",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -711,7 +711,10 @@
     ],
     "duaOwnerVoice": "recovered-existing-assets-v1171",
     "duaVoicePaidGenerations": 0,
-    "duaVoiceEntries": 10
+    "duaVoiceEntries": 10,
+    "homeAudioCore": "v1173",
+    "alphabetRuntimeRemoved": true,
+    "alphabetArchivedAssetsRetained": true
   },
   "updatedAt": "2026-10-05",
   "deployTrigger": "2026-10-05T23:44:00+02:00"
