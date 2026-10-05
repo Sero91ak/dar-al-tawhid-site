@@ -162,8 +162,9 @@ jobs:
           assert 'p=="/mobile/audio"' in engine
           assert 'components.path = "/mobile/"' in native
           assert 'voice-studio/mobile.html' in installer
-          assert expected in mobile
-          print("Interactive Voice Studio priority guard OK:",expected)
+          mobile_expected=str((manifest.get("mobileVoiceApp") or {}).get("version") or expected)
+          assert f'const MOBILE_APP_VERSION="{mobile_expected}";' in mobile
+          print("Interactive Voice Studio priority guard OK:",expected,"mobile",mobile_expected)
           PY
 
       - name: Validate pronunciation candidate fallback
