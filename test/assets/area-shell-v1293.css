@@ -1,0 +1,242 @@
+/* DĀR AL TAWḤĪD · Test-App remaining area shell · v1293
+   Shared iOS hierarchy for routes that were still outside the redesign authority.
+   Functional components remain untouched. */
+
+html[data-theme] body.is-calendar-route{--area1293-art:url("/test/assets/area-heroes-v1290/qibla.webp")}
+html[data-theme] body.is-ramadan-route{--area1293-art:url("/test/assets/area-heroes-v1290/jummah.webp")}
+html[data-theme] body.is-notifications-route{--area1293-art:url("/test/assets/area-heroes-v1290/prayer.webp")}
+html[data-theme] body.is-settings-route{--area1293-art:url("/test/assets/area-heroes-v1290/more-hub.webp")}
+html[data-theme] body.is-account-route{--area1293-art:url("/test/assets/area-heroes-v1290/library.webp")}
+html[data-theme] body.is-about-route{--area1293-art:url("/test/assets/area-heroes-v1290/library.webp")}
+html[data-theme] body.is-news-route{--area1293-art:url("/test/assets/area-heroes-v1290/topics.webp")}
+html[data-theme] body.is-news-detail-route{--area1293-art:url("/test/assets/area-heroes-v1290/post-reader.webp")}
+html[data-theme] body.is-zakat-route{--area1293-art:url("/test/assets/area-heroes-v1290/book-detail.webp")}
+html[data-theme] body.is-source-library-route{--area1293-art:url("/test/assets/area-heroes-v1290/library.webp")}
+html[data-theme] body.is-quran-topic-route{--area1293-art:url("/test/assets/area-heroes-v1290/quran-overview.webp")}
+
+html[data-theme] body:is(
+  .is-ramadan-route,
+  .is-notifications-route,
+  .is-settings-route,
+  .is-account-route,
+  .is-about-route,
+  .is-news-route,
+  .is-news-detail-route,
+  .is-zakat-route,
+  .is-source-library-route,
+  .is-quran-topic-route
+) #appView > .view-head{
+  position:relative!important;
+  isolation:isolate;
+  width:100vw!important;
+  max-width:none!important;
+  min-height:clamp(230px,47vw,350px);
+  margin:0 calc(50% - 50vw) 24px!important;
+  padding:max(92px,calc(env(safe-area-inset-top,0px) + 66px)) max(20px,calc((100vw - 1080px)/2 + 24px)) 28px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  display:flex!important;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:flex-start;
+  border:0!important;
+  border-radius:0 0 30px 30px!important;
+  box-shadow:none!important;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--bg) 96%,transparent) 0%,color-mix(in srgb,var(--bg) 80%,transparent) 42%,color-mix(in srgb,var(--bg) 26%,transparent) 76%,color-mix(in srgb,var(--bg) 10%,transparent) 100%),
+    linear-gradient(0deg,color-mix(in srgb,var(--bg) 94%,transparent) 0%,transparent 58%),
+    var(--area1293-art) center/cover no-repeat!important;
+}
+
+html[data-theme] body:is(
+  .is-ramadan-route,
+  .is-notifications-route,
+  .is-settings-route,
+  .is-account-route,
+  .is-about-route,
+  .is-news-route,
+  .is-news-detail-route,
+  .is-zakat-route,
+  .is-source-library-route,
+  .is-quran-topic-route
+) #appView > .view-head .eyebrow{
+  margin:0 0 8px!important;
+  padding:0!important;
+  background:none!important;
+  border:0!important;
+  box-shadow:none!important;
+  font-size:11px!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase;
+}
+
+html[data-theme] body:is(
+  .is-ramadan-route,
+  .is-notifications-route,
+  .is-settings-route,
+  .is-account-route,
+  .is-about-route,
+  .is-news-route,
+  .is-news-detail-route,
+  .is-zakat-route,
+  .is-source-library-route,
+  .is-quran-topic-route
+) #appView > .view-head h2{
+  max-width:780px;
+  margin:0!important;
+  font-size:clamp(2rem,7vw,3.8rem)!important;
+  line-height:.98!important;
+  letter-spacing:-.025em!important;
+  text-wrap:balance;
+}
+
+html[data-theme] body:is(
+  .is-ramadan-route,
+  .is-notifications-route,
+  .is-settings-route,
+  .is-account-route,
+  .is-about-route,
+  .is-news-route,
+  .is-news-detail-route,
+  .is-zakat-route,
+  .is-source-library-route,
+  .is-quran-topic-route
+) #appView > .view-head .view-desc{
+  max-width:720px;
+  margin-top:10px!important;
+  font-size:clamp(.96rem,2.6vw,1.08rem)!important;
+  line-height:1.5!important;
+}
+
+/* Calendar has its own header instead of the shared view-head. */
+html[data-theme] body.is-calendar-route #appView{
+  padding-top:0!important;
+}
+html[data-theme] body.is-calendar-route .calendar-premium-page{
+  width:min(1040px,100%)!important;
+  margin:0 auto!important;
+  padding-bottom:calc(132px + env(safe-area-inset-bottom,0px))!important;
+}
+html[data-theme] body.is-calendar-route .cal-tl-head{
+  position:relative!important;
+  isolation:isolate;
+  width:100vw!important;
+  max-width:none!important;
+  min-height:clamp(245px,49vw,365px);
+  margin:0 calc(50% - 50vw) 22px!important;
+  padding:max(96px,calc(env(safe-area-inset-top,0px) + 70px)) max(20px,calc((100vw - 1040px)/2 + 24px)) 28px!important;
+  box-sizing:border-box!important;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  border-radius:0 0 30px 30px!important;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--bg) 96%,transparent) 0%,color-mix(in srgb,var(--bg) 78%,transparent) 46%,color-mix(in srgb,var(--bg) 18%,transparent) 100%),
+    linear-gradient(0deg,color-mix(in srgb,var(--bg) 94%,transparent),transparent 62%),
+    var(--area1293-art) center/cover no-repeat!important;
+}
+html[data-theme] body.is-calendar-route .cal-tl-title{
+  font-size:clamp(2.05rem,7vw,3.7rem)!important;
+  line-height:1!important;
+  letter-spacing:-.025em!important;
+}
+html[data-theme] body.is-calendar-route .cal-tl-head-top,
+html[data-theme] body.is-calendar-route .cal-tl-today-row{
+  width:min(760px,100%);
+}
+
+/* Open editorial rhythm instead of a stack of detached boxes. */
+html[data-theme] body:is(.is-account-route,.is-about-route,.is-notifications-route,.is-settings-route) :is(
+  .account-panel,
+  .about-page,
+  .notification-center-page,
+  .settings-one-page
+){
+  width:min(820px,calc(100% - 28px))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+html[data-theme] body:is(.is-account-route,.is-about-route) :is(
+  .account-panel,
+  .about-smart-row,
+  .about-smart-chip
+){
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-news-detail-route .news-detail-article,
+html[data-theme] body.is-quran-topic-route :is(.quran-topic-page,.quran-topic-detail),
+html[data-theme] body.is-zakat-route .zakat-view{
+  width:min(860px,calc(100% - 28px))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+html[data-theme] body.is-source-library-route #appView{
+  padding-bottom:calc(132px + env(safe-area-inset-bottom,0px))!important;
+}
+
+@media(max-width:700px){
+  html[data-theme] body:is(
+    .is-ramadan-route,
+    .is-notifications-route,
+    .is-settings-route,
+    .is-account-route,
+    .is-about-route,
+    .is-news-route,
+    .is-news-detail-route,
+    .is-zakat-route,
+    .is-source-library-route,
+    .is-quran-topic-route
+  ) #appView > .view-head{
+    min-height:252px;
+    padding-left:18px!important;
+    padding-right:18px!important;
+    padding-bottom:22px!important;
+    border-radius:0 0 24px 24px!important;
+    background-position:center!important;
+  }
+
+  html[data-theme] body.is-calendar-route .cal-tl-head{
+    min-height:264px;
+    padding-left:18px!important;
+    padding-right:18px!important;
+    padding-bottom:22px!important;
+    border-radius:0 0 24px 24px!important;
+  }
+
+  html[data-theme] body:is(.is-account-route,.is-about-route,.is-notifications-route,.is-settings-route) :is(
+    .account-panel,
+    .about-page,
+    .notification-center-page,
+    .settings-one-page
+  ),
+  html[data-theme] body.is-news-detail-route .news-detail-article,
+  html[data-theme] body.is-quran-topic-route :is(.quran-topic-page,.quran-topic-detail),
+  html[data-theme] body.is-zakat-route .zakat-view{
+    width:calc(100% - 24px)!important;
+  }
+}
+
+@media(min-width:900px){
+  html[data-theme] body:is(
+    .is-ramadan-route,
+    .is-notifications-route,
+    .is-settings-route,
+    .is-account-route,
+    .is-about-route,
+    .is-news-route,
+    .is-news-detail-route,
+    .is-zakat-route,
+    .is-source-library-route,
+    .is-quran-topic-route
+  ) #appView > .view-head{
+    min-height:390px;
+    padding-bottom:38px!important;
+  }
+  html[data-theme] body.is-calendar-route .cal-tl-head{
+    min-height:400px;
+    padding-bottom:38px!important;
+  }
+}
