@@ -50,7 +50,7 @@ try:
     PORT=int(os.environ.get("DAR_VOICE_PORT",os.environ.get("PORT","8787")) or 8787)
 except Exception:
     PORT=8787
-ENGINE_VERSION="2.9.117"
+ENGINE_VERSION="2.9.118"
 
 def version_tuple(value):
     parts=[]
@@ -4901,6 +4901,7 @@ def start_generation_job(data:dict,free_mode:bool=False):
 
     server_prepared=""
     server_found=[]
+    server_unresolved=[]
     if not free_mode:
         # Derselbe Guard wie im Produktionsrenderer, aber VOR dem Thread-Start.
         # Ein vorheriger /analyze-Aufruf (z. B. direkt nach Einfügen des Textes)
@@ -4908,9 +4909,9 @@ def start_generation_job(data:dict,free_mode:bool=False):
         # beim Klick auf „Erzeugen“ erneut vollständig zu scannen.
         quran_guard(text)
         preflight=prepare_analysis_preflight(text)
-        unresolved=list(preflight.get("unresolved") or [])
-        if unresolved:
-            raise PronunciationReviewRequired(unresolved)
+        server_unresolved=list(preflight.get("unresolved") or [])
+        if server_unresolved:
+            append_learning_log("pronunciation_warning_nonblocking",terms=[str(x.get("term") or "") for x in server_unresolved[:20]])
         if bool((data or {}).get("interactiveFast",True)):
             # Unbekannt-/Qurʾān-Prüfung stammt aus dem Cache; nur die viel leichtere
             # Sprechform wird für Extreme Fast neu aufgebaut.
@@ -4930,6 +4931,8 @@ def start_generation_job(data:dict,free_mode:bool=False):
                     "ok":True,"jobId":existing_id,
                     "state":str(row.get("state") or "queued"),
                     "reused":True,
+                    "pronunciationWarnings":list(row.get("pronunciationWarnings") or []),
+                    "pronunciationReviewRequired":False,
                 }
         if active:
             raise RuntimeError("Eine interaktive Audio-Erzeugung läuft bereits.")
@@ -4946,6 +4949,8 @@ def start_generation_job(data:dict,free_mode:bool=False):
             "outputName":"",
             "outputBytes":0,
             "error":"",
+            "pronunciationWarnings":list(server_unresolved),
+            "pronunciationReviewRequired":False,
         }
     payload=dict(data or {})
     payload["text"]=text
@@ -4961,7 +4966,7 @@ def start_generation_job(data:dict,free_mode:bool=False):
         daemon=True,
         name="dar-interactive-generate-"+job_id[:8],
     ).start()
-    return {"ok":True,"jobId":job_id,"state":"queued","reused":False}
+    return {"ok":True,"jobId":job_id,"state":"queued","reused":False,"pronunciationWarnings":list(server_unresolved),"pronunciationReviewRequired":False}
 
 def get_status():
     with STATUS_LOCK:
@@ -7576,11 +7581,7 @@ def generate(text:str,prepared:str="",style:str="auto",free_mode:bool=False,free
             else:
                 unresolved=detect_unresolved_islamic_terms(text)
                 if unresolved:
-                    terms=", ".join(str(x.get("term","")) for x in unresolved[:6])
-                    raise ValueError(
-                        "Ungeprüfte islamische Namen/Begriffe erkannt: "+terms+
-                        ". Bitte zuerst in der Ausspracheanalyse prüfen oder im Lernzentrum bestätigen."
-                    )
+                    append_learning_log("pronunciation_warning_nonblocking",terms=[str(x.get("term") or "") for x in unresolved[:20]])
     if not REF_DE.exists():
         raise RuntimeError("Referenzstimme fehlt: "+str(REF_DE))
 
