@@ -255,6 +255,11 @@ jobs:
           assert 'externalEngineOwner' in swift
           assert 'installedEngineVersion' in swift
           assert 'loadOrCreatePairToken' in swift
+          assert 'performDeepEngineRepair' in swift
+          assert 'repairEngineFromMenu' in swift
+          assert 'terminatePort8787Listeners' in swift
+          assert 'if externalEngineOwner { return }' not in swift
+          assert 'clear_engine_port_if_stale' in installer
 
           assert 'DAR_VOICE_DEV_UI_SYNC' in engine
           assert 'threading.Thread(target=refresh_studio_ui_from_github' in engine
@@ -1114,6 +1119,9 @@ jobs:
               "localIPv4Address",
               "installedEngineVersion",
               "loadOrCreatePairToken",
+              "performDeepEngineRepair",
+              "repairEngineFromMenu",
+              "terminatePort8787Listeners",
               "CIQRCodeGenerator",
           ]
           missing=[x for x in required if x not in src]
