@@ -395,6 +395,7 @@ export default {
       return finalizeDarTestHomeV1193(asset);
     }
     const bust = /\/test\/(index\.html)?$/.test(path)
+      || /^\/test\/(?:widgets|wasiyyah)(?:\/|$)/.test(path)
       || /dar-quran-player\.(js|css)$/.test(path)
       || path.endsWith("/test/version.json")
       || path.endsWith("/test/service-worker.js");
