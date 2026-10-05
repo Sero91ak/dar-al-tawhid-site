@@ -278,11 +278,6 @@ html[data-view="stories"] .shell{
 /* Die generischen Produktionshinweise stehen nicht im Mittelpunkt der Kinderoberfläche. */
 #view-stories.ps-stories-home > .gentle-note{opacity:.68!important;margin-top:18px!important}
 
-/* Bottom navigation darf nie Inhalte verdecken. */
-html[data-view="stories"] .bottom-nav{
-  bottom:max(12px,env(safe-area-inset-bottom,0px))!important;
-}
-
 @media(max-width:380px){
   #view-stories.ps-stories-home #ghEntry{min-height:300px!important}
   #view-stories.ps-stories-home #psProphetEntry,
