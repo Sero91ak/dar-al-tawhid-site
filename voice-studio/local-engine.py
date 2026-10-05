@@ -9212,11 +9212,15 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str,source_path:Path|N
     if not item:
         raise ValueError("Prophet nicht gefunden: "+item_id)
     first=target_ages[0]
-    first_asset=repo/"kids/assets/prophet-story-audio"/item_id/(first+".m4a")
+    master_mode=len(target_ages)==3
+    asset_name="master.m4a" if master_mode else (first+".m4a")
+    first_asset=repo/"kids/assets/prophet-story-audio"/item_id/asset_name
     _encode_kids_m4a(src,first_asset)
     dur=round(_audio_duration_seconds(first_asset),3)
     if dur<5 or first_asset.stat().st_size<4000:
         raise RuntimeError("Audio-QA fehlgeschlagen: zu kurz oder leer.")
+    if master_mode and (dur<300 or dur>480):
+        raise RuntimeError("Masteraudio muss zwischen 5 und 8 Minuten lang sein.")
     timing_map=_sanitize_story_timings(text,timings,dur)
     stamp=time.strftime("%Y%m%d-%H%M%S")
     scripts=item.get("scripts") if isinstance(item.get("scripts"),dict) else {}
@@ -9234,6 +9238,8 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str,source_path:Path|N
         "manual":True,
         "manualUpload":manual_upload,
         "allAges":requested in ("","all","auto","*"),
+        "masterAudio":master_mode,
+        "masterAgeRange":"4-10" if master_mode else "",
         "modes":["read","listen"],
         "technicalQaPassed":True,
         "publishedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
@@ -9241,14 +9247,11 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str,source_path:Path|N
     if timing_map:
         meta["timings"]=timing_map
         meta["syncMode"]=str(sync_mode or "elevenlabs-forced-alignment-v1")
+    shared_url=f"/kids/assets/prophet-story-audio/{item_id}/{asset_name}?v={stamp}"
     for a in target_ages:
-        asset=repo/"kids/assets/prophet-story-audio"/item_id/(a+".m4a")
-        if asset!=first_asset:
-            asset.parent.mkdir(parents=True,exist_ok=True)
-            shutil.copy2(first_asset,asset)
         scripts[a]=text
-        audio[a]={**meta,"url":f"/kids/assets/prophet-story-audio/{item_id}/{a}.m4a?v={stamp}"}
-        rels.append(str(asset.relative_to(repo)))
+        audio[a]={**meta,"age":a,"url":shared_url}
+    rels.append(str(first_asset.relative_to(repo)))
     item["scripts"]=scripts
     if len(target_ages)==3:
         item["voiceScript"]=text
@@ -9291,11 +9294,15 @@ def publish_manual_prophet_story(item_id:str,age:str,text:str,source_path:Path|N
 
 def publish_manual_mubashshirun_story(item_id:str,age:str,text:str,source_path:Path|None=None,source_name:str="",timings=None,sync_mode:str=""):
     item_id=str(item_id or "").strip()
-    age=str(age or "").strip()
+    requested=str(age or "all").strip()
     text=str(text or "").strip()
     ages=("4-5","6-8","9-10")
-    if age not in ages:
-        raise ValueError("Alter muss 4-5, 6-8 oder 9-10 sein.")
+    if requested in ("","all","auto","*"):
+        target_ages=ages
+    elif requested in ages:
+        target_ages=(requested,)
+    else:
+        raise ValueError("Alter muss all, 4-5, 6-8 oder 9-10 sein.")
     if not item_id:
         raise ValueError("Ṣaḥābī fehlt.")
     if len(text)<80:
@@ -9340,18 +9347,23 @@ def publish_manual_mubashshirun_story(item_id:str,age:str,text:str,source_path:P
     if not item:
         raise ValueError("Ṣaḥābī nicht gefunden: "+item_id)
 
-    asset=repo/"kids/assets/mubashshirun-story-audio"/item_id/(age+".m4a")
+    master_mode=len(target_ages)==3
+    first=target_ages[0]
+    asset_name="master.m4a" if master_mode else (first+".m4a")
+    asset=repo/"kids/assets/mubashshirun-story-audio"/item_id/asset_name
     _encode_kids_m4a(src,asset)
     dur=round(_audio_duration_seconds(asset),3)
     if dur<30 or asset.stat().st_size<8000:
         raise RuntimeError("Audio-QA fehlgeschlagen: Geschichte ist zu kurz oder leer.")
+    if master_mode and (dur<300 or dur>480):
+        raise RuntimeError("Masteraudio muss zwischen 5 und 8 Minuten lang sein.")
     timing_map=_sanitize_story_timings(text,timings,dur)
 
     stamp=time.strftime("%Y%m%d-%H%M%S")
     scripts=item.get("scripts") if isinstance(item.get("scripts"),dict) else {}
     audio=item.get("audio") if isinstance(item.get("audio"),dict) else {}
-    scripts[age]=text
-    audio[age]={
+    shared_url=f"/kids/assets/mubashshirun-story-audio/{item_id}/{asset_name}?v={stamp}"
+    base_meta={
         "status":"ready",
         "durationSec":dur,
         "bytes":asset.stat().st_size,
@@ -9362,16 +9374,23 @@ def publish_manual_mubashshirun_story(item_id:str,age:str,text:str,source_path:P
         "sourceSpeaker":"Serhat Abu Malik",
         "sourceFile":str(source_name or src.name),
         "manualUpload":manual_upload,
-        "age":age,
+        "masterAudio":master_mode,
+        "masterAgeRange":"4-10" if master_mode else "",
         "modes":["read","listen"],
         "technicalQaPassed":True,
         "pronunciationReviewRequired":True,
         "publishedAt":time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "url":f"/kids/assets/mubashshirun-story-audio/{item_id}/{age}.m4a?v={stamp}",
+        "url":shared_url,
     }
     if timing_map:
-        audio[age]["timings"]=timing_map
-        audio[age]["syncMode"]=str(sync_mode or "elevenlabs-forced-alignment-v1")
+        base_meta["timings"]=timing_map
+        base_meta["syncMode"]=str(sync_mode or "elevenlabs-forced-alignment-v1")
+
+    for a in target_ages:
+        scripts[a]=text
+        audio[a]={**base_meta,"age":a}
+    if master_mode:
+        item["masterStoryText"]=text
     item["scripts"]=scripts
     item["audio"]=audio
     vp=item.get("voiceProduction") if isinstance(item.get("voiceProduction"),dict) else {}
@@ -9379,10 +9398,14 @@ def publish_manual_mubashshirun_story(item_id:str,age:str,text:str,source_path:P
     vp["publishedAges"]=published
     vp["status"]="audio-complete" if len(published)==3 else "audio-partial"
     vp["lastPublishedAt"]=time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    vp["singleMasterAudio"]=master_mode or bool(vp.get("singleMasterAudio"))
+    if master_mode:
+        vp["masterAudioUrl"]=shared_url
+        vp["masterAgeRange"]="4-10"
+        vp["audioRefreshRequired"]=False
     item["voiceProduction"]=vp
     manifest["updatedAt"]=time.strftime("%Y-%m-%dT%H:%M:%S%z")
     atomic_write_json(data_path,manifest)
-    # Keep the local Voice-Studio library in sync immediately after a publish.
     atomic_write_json(APP_HOME/"mubashshirun-stories.json",manifest)
 
     rel_asset=str(asset.relative_to(repo))
@@ -9392,14 +9415,14 @@ def publish_manual_mubashshirun_story(item_id:str,age:str,text:str,source_path:P
 
     if rr([git,"-C",str(repo),"diff","--cached","--quiet"],30).returncode==0:
         return {
-            "ok":True,"unchanged":True,"id":item_id,"age":age,
-            "url":audio[age]["url"],"durationSec":dur,"publishedAges":published
+            "ok":True,"unchanged":True,"id":item_id,"age":"all" if master_mode else first,
+            "ages":list(target_ages),"url":shared_url,"durationSec":dur,"publishedAges":published
         }
 
     rr([git,"-C",str(repo),"config","user.name","Serhat Abu Malik"],20)
     rr([git,"-C",str(repo),"config","user.email","73606501+Sero91ak@users.noreply.github.com"],20)
     name=str(item.get("name") or item_id)
-    msg=f"Kids: Ṣaḥābah-Geschichte {name} · Alter {age} · Serhat Voice"
+    msg=f"Kids: Ṣaḥābah-Geschichte {name} · Master 4–10 · Serhat Voice" if master_mode else f"Kids: Ṣaḥābah-Geschichte {name} · Alter {first} · Serhat Voice"
     p=rr([git,"-C",str(repo),"commit","-m",msg],120)
     if p.returncode!=0:
         raise RuntimeError("Git commit fehlgeschlagen: "+(p.stderr or p.stdout)[-600:])
@@ -9415,8 +9438,8 @@ def publish_manual_mubashshirun_story(item_id:str,age:str,text:str,source_path:P
             push=rr([git,"-C",str(repo),"push","origin","HEAD:main"],300)
             if push.returncode==0:
                 return {
-                    "ok":True,"id":item_id,"name":name,"age":age,
-                    "url":audio[age]["url"],"durationSec":dur,
+                    "ok":True,"id":item_id,"name":name,"age":"all" if master_mode else first,
+                    "ages":list(target_ages),"url":shared_url,"durationSec":dur,
                     "publishedAges":published,"pushed":True
                 }
             last=(push.stderr or push.stdout)[-700:]
