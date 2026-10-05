@@ -65,7 +65,9 @@ function create(options){
         '<button class="kfr-close" type="button" aria-label="Mitlesen schließen"><span>Zur Geschichte</span><b aria-hidden="true">×</b></button>'+
       '</header>'+
       '<div class="kfr-controls">'+
+        '<button class="kfr-skip kfr-skip-back" type="button" data-kfr-seek="-15" aria-label="15 Sekunden zurück">−15 s</button>'+
         '<button class="kfr-play" type="button">Abspielen</button>'+
+        '<button class="kfr-skip kfr-skip-forward" type="button" data-kfr-seek="15" aria-label="15 Sekunden vor">+15 s</button>'+
         '<button class="kfr-restart" type="button" aria-label="Geschichte von vorn starten">Von vorn</button>'+
         '<div class="kfr-time"><span class="kfr-current">0:00</span><span class="kfr-time-sep">/</span><span class="kfr-total">0:00</span></div>'+
         '<button class="kfr-progress" type="button" role="slider" aria-label="Wiedergabeposition ändern"><span></span></button>'+
@@ -80,6 +82,7 @@ function create(options){
   const kickerEl=root.querySelector(".kfr-kicker");
   const helpEl=root.querySelector(".kfr-help");
   const playEl=root.querySelector(".kfr-play");
+  const skipEls=Array.from(root.querySelectorAll(".kfr-skip"));
   const restartEl=root.querySelector(".kfr-restart");
   const closeEl=root.querySelector(".kfr-close");
   const readEl=root.querySelector(".kfr-read");
@@ -430,6 +433,10 @@ function create(options){
     const c=Object.assign({},content(),{audioOnly:false,adultCompanion:true});
     openWithContent(c,"follow");
   }
+  function openListening(){
+    const c=Object.assign({},content(),{audioOnly:true,adultCompanion:true});
+    openWithContent(c,"follow");
+  }
   function openReading(){
     const c=Object.assign({},content(),{audioOnly:false,adultCompanion:true});
     openWithContent(c,"read");
@@ -443,6 +450,12 @@ function create(options){
     unlockBackground();
   }
   function isOpen(){return root.classList.contains("open")}
+  function seekBy(seconds){
+    const duration=Number(audio.duration)||0;
+    const next=Math.max(0,Math.min(duration||Infinity,(Number(audio.currentTime)||0)+Number(seconds||0)));
+    try{audio.currentTime=next}catch(_){}
+    sync(true);persist(true);
+  }
   function seekFromEvent(e){
     const r=progressButton.getBoundingClientRect();
     if(!r.width||!Number(audio.duration))return;
@@ -452,6 +465,7 @@ function create(options){
   }
 
   playEl.addEventListener("click",()=>{if(typeof options.toggleAudio==="function")options.toggleAudio()});
+  skipEls.forEach(btn=>btn.addEventListener("click",()=>seekBy(Number(btn.dataset.kfrSeek)||0)));
   restartEl.addEventListener("click",()=>{clearProgress();if(audio.paused&&typeof options.toggleAudio==="function")options.toggleAudio()});
   closeEl.addEventListener("click",close);
   root.addEventListener("click",e=>{if(e.target===root)close()});
@@ -472,11 +486,11 @@ function create(options){
 
   setContent(content());
   return {
-    open,openReadAlong,openReading,close,isOpen,setContent,sync,persist,restore,clearProgress,
+    open,openReadAlong,openListening,openReading,close,isOpen,setContent,sync,persist,restore,clearProgress,
     activateMediaSession,
     formatTime,
     getSavedProgress:readProgress
   };
 }
-window.DARKidsFollowReader={version:11,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
+window.DARKidsFollowReader={version:12,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
 })();
