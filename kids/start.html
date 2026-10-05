@@ -2927,7 +2927,7 @@ html:not([data-view="today"]) .view.active{
 
       <div class="section-title">Was möchtest du machen?</div>
       <div class="big-choice-grid">
-        <button class="choice story" data-story="coin">
+        <button class="choice story" data-go="stories">
           <span class="icon"></span>
           <strong>Geschichte</strong>
           <small>hören & entdecken</small>
@@ -2993,41 +2993,6 @@ html:not([data-view="today"]) .view.active{
         <span class="ms-entry-action">Entdecken <b aria-hidden="true">›</b></span>
       </button>
 
-      <article class="story-feature" data-story="coin">
-        <div class="story-scene"></div>
-        <div class="story-copy">
-          <div class="meta">ADAB · PÄDAGOGISCHE GESCHICHTE · CA. 3 MIN.</div>
-          <h3>Die gefundene Münze</h3>
-          <p>Adam entdeckt etwas, das ihm nicht gehört. Was wird er tun?</p>
-          <span class="story-go" aria-hidden="true">›</span>
-        </div>
-      </article>
-
-      <div class="section-title story-more-title">Weitere Geschichten</div>
-      <div class="story-list">
-        <article class="story-row" data-story="water">
-          <div class="story-thumb"></div>
-          <div class="story-row-copy"><h3>Das Glas Wasser</h3><div class="meta">Adab</div><div class="time">ca. 2 Min.</div></div>
-          <div class="chev">›</div>
-        </article>
-        <article class="story-row" data-story="helper">
-          <div class="story-thumb" aria-hidden="true"></div>
-          <div class="story-row-copy"><h3>Der leise Helfer</h3><div class="meta">Adab</div><div class="time">ca. 3 Min.</div></div>
-          <div class="chev">›</div>
-        </article>
-        <article class="story-row" data-story="kindword">
-          <div class="story-thumb"></div>
-          <div class="story-row-copy"><h3>Das gute Wort</h3><div class="meta">Adab</div><div class="time">ca. 3 Min.</div></div>
-          <div class="chev">›</div>
-        </article>
-      </div>
-
-      <div class="section-title">Aus dem Qurʾān · geprüft</div>
-      <div id="authenticStoryList" class="story-list">
-        <div class="gentle-note" style="padding-top:4px">Geprüfte Geschichten werden geladen …</div>
-      </div>
-
-      <div class="gentle-note">Authentische Propheten- und Ṣaḥābah-Erzählungen kommen nur nach Quellenprüfung hinein. Freie pädagogische Geschichten bleiben sichtbar gekennzeichnet.</div>
     </section>
 
     <section id="view-quran" class="view">
@@ -3688,7 +3653,7 @@ function updateParentProgress(){
   if(r)r.textContent=resume?(resume.label+" "+(Number(resume.ayah)+1)):"–";
 }
 function launchDailyStep(step){
-  if(step==="story"){openStory(dailyStoryKey());return}
+  if(step==="story"){showTab("stories");return}
   if(step==="dua"){openDailyDua();return}
   if(step==="quiz"){openQuiz();return}
   if(step==="quran"){showTab("quran");setTimeout(openDailyQuran,220)}
