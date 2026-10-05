@@ -1,10 +1,10 @@
 {
-  "version": "2.9.119",
-  "updatedAt": "2026-10-05T14:07:00+02:00",
-  "deployTrigger": "voice-studio-2.9.119-selector-hotfix-pinned",
+  "version": "2.9.120",
+  "updatedAt": "2026-10-05T14:55:00+02:00",
+  "deployTrigger": "voice-studio-2.9.120-single-master-stories",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v88",
+  "cache": "dar-voice-studio-v89",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-contents-api",
-  "engineVersion": "2.9.119",
+  "engineVersion": "2.9.120",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -494,7 +494,11 @@
     "legacyPronunciation422Fallback": true,
     "coherentReleaseCandidate": true,
     "releaseArchiveManifestVersion": "2.9.118",
-    "pendingPronunciationPluralSelectorGuard": true
+    "pendingPronunciationPluralSelectorGuard": true,
+    "singleMasterStoryUi": true,
+    "singlePhysicalMasterAudio": true,
+    "masterAudioDurationGuard": true,
+    "sahabaAuthenticSourceExpansion": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -1500,14 +1504,9 @@
   },
   "mubashshirunStories": {
     "enabled": true,
-    "version": 6,
+    "version": 7,
     "count": 10,
-    "ages": [
-      "4-5",
-      "6-8",
-      "9-10"
-    ],
-    "preparedScripts": 30,
+    "preparedScripts": 10,
     "source": "/kids/data/mubashshirun-stories.json",
     "localLibraryEndpoint": "/mubashshirun/library",
     "publishEndpoint": "/mubashshirun/publish",
@@ -1519,35 +1518,50 @@
     "requiredHonorific": "raḍiya llāhu ʿanhu",
     "ownerVoice": "Serhat Abu Malik",
     "prosody": "kids_story",
-    "output": "kids/assets/mubashshirun-story-audio/<sahabi>/<age>.m4a",
+    "output": "kids/assets/mubashshirun-story-audio/<sahabi>/master.m4a",
     "systemVoiceFallback": false,
     "sourcePolicy": "Qurʾān general praise separated from individual authentic Sunnah; no invented dialogue or legends",
-    "sourceDataVersion": 6,
-    "storyTextStandard": "kids-story-single-master-v3",
+    "sourceDataVersion": 7,
+    "storyTextStandard": "kids-story-single-master-v4",
     "audioRefreshRequired": true,
     "uniqueMasterTexts": 10,
-    "ageContentPolicy": "same full master story for 4-5, 6-8 and 9-10",
-    "noAgeShortening": true
+    "ageContentPolicy": "one full master story and one master audio for 4-10; age only changes Kids presentation",
+    "noAgeShortening": true,
+    "uniqueMasterAudios": 10,
+    "ageSelectionInVoiceStudio": false,
+    "masterAgeRange": "4-10",
+    "durationTargetSec": {
+      "min": 300,
+      "max": 480
+    },
+    "legacyAgeSurfaces": [
+      "4-5",
+      "6-8",
+      "9-10"
+    ]
   },
   "mubashshirun": {
     "enabled": true,
     "items": 10,
-    "ageScripts": 30,
-    "dataVersion": 6,
-    "bundleVersion": 9,
+    "dataVersion": 7,
+    "bundleVersion": 10,
     "sourcePolicy": "Qurʾān + authentic Sunnah + source-separated",
     "visualEvidencePolicy": "historical approximation only; no claimed portrait or individually attested wardrobe",
-    "publishFlow": "single full master → generate/review audio → bind to requested Kids age surface",
-    "storyTextStandard": "kids-story-single-master-v3",
+    "publishFlow": "single full master → one 5–8 minute audio → human QA → bind same master to all Kids age surfaces",
+    "storyTextStandard": "kids-story-single-master-v4",
     "uniqueMasterTexts": 10,
-    "noAgeShortening": true
+    "noAgeShortening": true,
+    "masterStories": 10,
+    "uniqueMasterAudios": 10,
+    "legacyAgeSlots": 30,
+    "ageSelectionInVoiceStudio": false
   },
   "updateAutoInstallOnLaunch": false,
   "engineProcessPolicy": "single-owner-launcher",
   "engineLaunchAgentEnabled": false,
   "runtimeUiGitHubSync": false,
   "kidsStoryTextStandard": {
-    "version": "kids-story-single-master-v3",
+    "version": "kids-story-single-master-v4",
     "intro": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.",
     "closingSequence": [
       "Und الله weiß es am besten.",
@@ -1569,14 +1583,20 @@
     "sourceMetaOutsideNarration": true,
     "noAgeShortening": true,
     "biographyLongForm": true,
-    "biographyMinimumMasterWords": 850,
+    "biographyMinimumMasterWords": 735,
     "ageChangesPresentationOnly": true,
     "singleMasterAcrossAges": true,
-    "futureBiographyMinimumMasterWords": 850
+    "futureBiographyMinimumMasterWords": 735,
+    "singleMasterAudioAcrossAges": true,
+    "masterAudioDurationSec": {
+      "min": 300,
+      "max": 480
+    },
+    "masterAgeRange": "4-10"
   },
   "mobileVoiceApp": {
     "enabled": true,
-    "version": "2.9.119",
+    "version": "2.9.120",
     "installUrl": "https://dar-al-tawhid.de/voice-studio/mobile.html?app=1&cloud=1",
     "manifest": "/voice-studio/mobile-manifest.webmanifest",
     "installTransport": "https",
@@ -1623,7 +1643,9 @@
     "pronunciationAnalysisNonBlocking": true,
     "pendingPronunciationQueue": true,
     "legacyEngineGenerateFallback": true,
-    "pendingPronunciationSelectorFixed": true
+    "pendingPronunciationSelectorFixed": true,
+    "singleMasterStoryMode": true,
+    "ageSelectionForStoryAudio": false
   },
   "mobile": {
     "enabled": true,
@@ -1926,5 +1948,22 @@
     ],
     "profileTuningFromOwnerStoryReferences": true
   },
-  "macAppVersion": "2.9.119"
+  "macAppVersion": "2.9.120",
+  "prophetMasterAudio": {
+    "enabled": true,
+    "ageSelectionInVoiceStudio": false,
+    "masterAgeRange": "4-10",
+    "storage": "kids/assets/prophet-story-audio/<prophet>/master.m4a",
+    "legacyAgeSurfaces": [
+      "4-5",
+      "6-8",
+      "9-10"
+    ],
+    "sameAudioAcrossAgeSurfaces": true,
+    "durationTargetSec": {
+      "min": 300,
+      "max": 480
+    },
+    "grandfatheredExistingAudio": true
+  }
 }
