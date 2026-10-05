@@ -574,6 +574,10 @@ def main():
             if required not in content_source: fail("mobile content studio responsive marker missing: "+required)
         for required in ("pendingPronunciationWrap","registerPronunciationIssues","pronunciationWarnings","compatibilityFallback"):
             if required not in mobile_source: fail("mobile non-blocking pronunciation marker missing: "+required)
+        if '$("[data-pending-pron]").forEach' in mobile_source:
+            fail("mobile pending-pron selector must use querySelectorAll/$, not single-element $")
+        if 'document.querySelectorAll("[data-pending-pron]").forEach' not in mobile_source and '$("[data-pending-pron]").forEach' not in mobile_source:
+            fail("mobile pending-pron plural selector binding missing")
         if 'return toast("Erst die markierten Wörter prüfen.")' in mobile_source:
             fail("mobile pronunciation analysis must not block interactive generation")
         if 'raise PronunciationReviewRequired(unresolved)' in engine_source:
