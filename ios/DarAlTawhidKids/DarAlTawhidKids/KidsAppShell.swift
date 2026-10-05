@@ -6,7 +6,7 @@ enum KidsAppShell {
         "www.dar-al-tawhid.de"
     ]
 
-    static let launchURL = URL(string: "https://dar-al-tawhid.de/kids/start?kv=kids-shell-v44-sahabiyyat-static1114")!
+    static let launchURL = URL(string: "https://dar-al-tawhid.de/kids/start?kv=kids-shell-v45-sahabiyyat-visible1115")!
 
     static func isOwnHost(_ url: URL) -> Bool {
         guard let host = url.host?.lowercased() else { return false }
