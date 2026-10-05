@@ -273,9 +273,9 @@ if (visual.sahabiyyatOwnLibrary) {
 
 const sahabiyyatJs = read("kids/sahabiyyat-stories.js");
 const storyHubJs = read("kids/story-hub.js");
-if (!sahabiyyatJs.includes("sy-image-name")) error("Ṣaḥābiyyāt Kartenname im Bild fehlt");
+if (sahabiyyatJs.includes("sy-image-name")) error("Ṣaḥābiyyāt Kartenname darf nicht doppelt im Bild stehen");
 if (sahabiyyatJs.includes("syHeroName")) error("Ṣaḥābiyyāt Detailansicht darf den Namen nicht doppelt im Hero zeigen");
-if (!storyHubJs.includes("gh-story-art-name")) error("Story-Hub Kartenname im Bild fehlt");
+if (storyHubJs.includes("gh-story-art-name")) error("Story-Hub Kartenname darf nicht doppelt im Bild stehen");
 if (storyHubJs.includes("ghPlayerImageName")) error("Universal-Player darf den Namen nicht doppelt im Hero zeigen");
 if (failed) process.exit(1);
 console.log("Kids release guard OK:", build, label, exactV106Snapshot ? "exact-v106-legacy-snapshot" : ("assets v" + assetVersion), "25 Propheten-Karten + 10 Ṣaḥābah + 14 Ṣaḥābiyyāt");
