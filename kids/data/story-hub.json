@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-05",
+  "title": "Geschichten des Īmān",
+  "categories": [
+    {
+      "id": "prophets",
+      "label": "Propheten",
+      "kicker": "GESCHICHTEN DER PROPHETEN",
+      "url": "/kids/data/prophet-stories.json?v=28",
+      "kind": "prophet",
+      "order": 1
+    },
+    {
+      "id": "sahaba",
+      "label": "Ṣaḥābah",
+      "kicker": "DIE GEFÄHRTEN",
+      "url": "/kids/data/mubashshirun-stories.json?v=18",
+      "kind": "sahabi",
+      "order": 2
+    },
+    {
+      "id": "sahabiyyat",
+      "label": "Ṣaḥābiyyāt",
+      "kicker": "DIE FRAUEN DER ERSTEN GENERATION",
+      "url": "/kids/data/sahabiyyat-stories.json?v=18",
+      "kind": "sahabiyyah",
+      "order": 3
+    }
+  ],
+  "policy": {
+    "player": "single-universal-story-player",
+    "existingDetailPagesPreserved": true,
+    "autoIncludeStoriesFromCategoryData": true,
+    "newCategoryRequiresRegistryEntryOnly": true
+  }
+}
