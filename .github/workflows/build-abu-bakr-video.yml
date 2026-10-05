@@ -1,0 +1,146 @@
+name: Build Abu Bakr YouTube Video
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/build-abu-bakr-video.yml"
+      - ".github/abu-bakr-build/**"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ffmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+
+      - name: Download sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/clips output
+          python3 - <<'PY'
+          import json, pathlib, urllib.request
+          root=pathlib.Path(".github/abu-bakr-build")
+          merged={"clips":[]}
+          for p in ["sources-1.json","sources-2.json","sources-3.json"]:
+              d=json.loads((root/p).read_text())
+              merged["clips"].extend(d.get("clips",[]))
+              for k in ("audio_url","words_url","transcript_url","spoken_duration_secs"):
+                  if k in d:
+                      merged[k]=d[k]
+          merged["clips"].sort(key=lambda x:x["order"])
+          pathlib.Path("build/sources.json").write_text(json.dumps(merged,indent=2))
+          for c in merged["clips"]:
+              out=pathlib.Path("build/clips")/f'{c["order"]:02d}-{c["name"]}.mp4'
+              print("Downloading",out.name)
+              urllib.request.urlretrieve(c["url"],out)
+          urllib.request.urlretrieve(merged["audio_url"],"build/master.mp3")
+          urllib.request.urlretrieve(merged["words_url"],"build/words.json")
+          if merged.get("transcript_url"):
+              urllib.request.urlretrieve(merged["transcript_url"],"build/transcript.txt")
+          PY
+
+      - name: Validate sources
+        run: |
+          set -euo pipefail
+          test "$(find build/clips -name '*.mp4' | wc -l)" -eq 29
+          ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 build/master.mp3
+          for f in build/clips/*.mp4; do
+            ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 "$f" >/dev/null
+          done
+
+      - name: Build subtitles
+        run: |
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          data=json.loads(Path("build/words.json").read_text())
+          if isinstance(data,list):
+              raw=data
+          elif isinstance(data,dict):
+              raw=data.get("words") or data.get("tokens") or data.get("segments") or []
+          else:
+              raw=[]
+          words=[]
+          for x in raw:
+              if not isinstance(x,dict): continue
+              s=x.get("start"); e=x.get("end")
+              txt=x.get("text",x.get("word",""))
+              if s is None or e is None or not txt: continue
+              if x.get("type") in ("spacing","audio_event"): continue
+              words.append((float(s),float(e),str(txt)))
+          def stamp(t,comma=True):
+              ms=max(0,round(t*1000)); h=ms//3600000; ms%=3600000
+              m=ms//60000; ms%=60000; s=ms//1000; z=ms%1000
+              return f"{h:02d}:{m:02d}:{s:02d}{',' if comma else '.'}{z:03d}"
+          cues=[]; cur=[]
+          for w in words:
+              cur.append(w)
+              duration=cur[-1][1]-cur[0][0]
+              endpun=bool(re.search(r'[.!?…]["”’)]?$',cur[-1][2]))
+              if (endpun and len(cur)>=4) or len(cur)>=9 or duration>=4.4:
+                  cues.append(cur); cur=[]
+          if cur: cues.append(cur)
+          def cue_text(c):
+              t=" ".join(x[2] for x in c)
+              t=re.sub(r'\s+([,.;:!?…])',r'\1',t)
+              t=re.sub(r'([„“"’(])\s+',r'\1',t)
+              return t.strip()
+          srt=[]; vtt=["WEBVTT",""]
+          for i,c in enumerate(cues,1):
+              start=max(0,c[0][0]-0.04); end=c[-1][1]+0.08
+              txt=cue_text(c)
+              srt += [str(i),f"{stamp(start)} --> {stamp(end)}",txt,""]
+              vtt += [f"{stamp(start,False)} --> {stamp(end,False)}",txt,""]
+          Path("output/abu-bakr-de.srt").write_text("\n".join(srt),encoding="utf-8")
+          Path("output/abu-bakr-de.vtt").write_text("\n".join(vtt),encoding="utf-8")
+          print("subtitle cues:",len(cues))
+          PY
+
+      - name: Assemble video
+        run: |
+          set -euo pipefail
+          : > build/concat.txt
+          for f in build/clips/*.mp4; do
+            echo "file '$PWD/$f'" >> build/concat.txt
+          done
+          ffmpeg -hide_banner -y -f concat -safe 0 -i build/concat.txt \
+            -vf "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,fps=25,tpad=stop_mode=clone:stop_duration=1" \
+            -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p -an build/video-only.mp4
+          ffmpeg -hide_banner -y -i build/video-only.mp4 -i build/master.mp3 \
+            -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k -movflags +faststart -shortest \
+            output/abu-bakr-youtube-1080p.mp4
+          ffmpeg -hide_banner -y -i output/abu-bakr-youtube-1080p.mp4 -i output/abu-bakr-de.srt \
+            -map 0:v -map 0:a -map 1:0 -c:v copy -c:a copy -c:s mov_text \
+            -metadata:s:s:0 language=deu -metadata:s:s:0 title="Deutsch" \
+            -movflags +faststart output/abu-bakr-youtube-1080p-with-subtitles.mp4
+
+      - name: Final validation
+        run: |
+          set -euo pipefail
+          ffprobe -v error -show_entries format=duration,size -of json output/abu-bakr-youtube-1080p.mp4
+          ffprobe -v error -show_streams -of json output/abu-bakr-youtube-1080p-with-subtitles.mp4 > output/ffprobe.json
+          test -s output/abu-bakr-de.srt
+          test -s output/abu-bakr-de.vtt
+
+      - name: Upload finished package
+        uses: actions/upload-artifact@v4
+        with:
+          name: abu-bakr-youtube-final
+          path: |
+            output/abu-bakr-youtube-1080p.mp4
+            output/abu-bakr-youtube-1080p-with-subtitles.mp4
+            output/abu-bakr-de.srt
+            output/abu-bakr-de.vtt
+            output/ffprobe.json
+          compression-level: 0
+          retention-days: 7
