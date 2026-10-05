@@ -6,6 +6,9 @@
   var loaded=false;
   var pending=null;
   var player=new Audio();
+  var preloadCache=new Map();
+  var preloadOrder=[];
+  var MAX_PRELOAD=18;
   player.preload="auto";
   player.setAttribute("playsinline","");
   player.setAttribute("webkit-playsinline","");
@@ -17,6 +20,28 @@
   }
   function stopNativeSpeech(){
     try{if(window.speechSynthesis)window.speechSynthesis.cancel()}catch(e){}
+  }
+  function preload(text){
+    var entry=entryFor(text);
+    var url=String(entry&&entry.url||"");
+    if(!url)return false;
+    if(preloadCache.has(url))return true;
+    try{
+      var audio=new Audio();
+      audio.preload="auto";
+      audio.setAttribute("playsinline","");
+      audio.src=url;
+      audio.load();
+      preloadCache.set(url,audio);
+      preloadOrder.push(url);
+      while(preloadOrder.length>MAX_PRELOAD){
+        var old=preloadOrder.shift();
+        var node=preloadCache.get(old);
+        preloadCache.delete(old);
+        try{if(node){node.pause();node.removeAttribute("src");node.load()}}catch(e){}
+      }
+      return true;
+    }catch(e){return false}
   }
   function entryFor(text){
     return (manifest.entries||{})[normalize(text)]||null;
@@ -125,6 +150,7 @@
   window.DARKidsOwnerVoice={
     play:play,
     stop:stop,
+    preload:preload,
     has:function(text){return !!entryFor(text)},
     isReady:function(){return loaded&&Object.keys(manifest.entries||{}).length>0},
     count:function(){return Object.keys(manifest.entries||{}).length},
