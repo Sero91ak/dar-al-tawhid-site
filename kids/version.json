@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v69-stories1139",
-  "label": "KIDS · V1.07.73",
-  "releasedAt": "2026-10-05T15:34:00+02:00",
-  "note": "Kids v1139: Der problematische separate Fokus-Reader wurde aus dem universellen Geschichten-Player wieder entfernt. „Nur lesen“ und „Hören & mitlesen“ bleiben jetzt direkt auf derselben Story-Seite: das Podcast-Fenster mit dem jeweiligen Hintergrundbild bleibt beim Scrollen oben angeheftet, der vollständige Text fließt darunter weiter und beim Mitlesen wird der laufende Absatz automatisch im Seitenfluss nachgeführt. Die Schrift im Story-Reader ist auf Smartphone und Tablet deutlich größer und die Bedienelemente wurden kompakter.",
+  "buildId": "kids-shell-v70-stories1140",
+  "label": "KIDS · V1.07.74",
+  "releasedAt": "2026-10-05T15:55:00+02:00",
+  "note": "Kids v1140: Lesemodus und „Hören & mitlesen“ halten den Bildschirm jetzt aktiv, damit während einer Geschichte keine automatische Abdunkelung oder Tastensperre durch Inaktivität einsetzt. Reines Hören bleibt davon getrennt: dabei darf das Gerät normal dimmen und sperren, während die Audiowiedergabe weiterläuft. Beim Schließen des Lesemodus, beim Verlassen des Bereichs und nach Ende einer mitgelesenen Hörgeschichte wird die Bildschirm-Wachhaltung automatisch wieder freigegeben. Für Browser/PWA wird die Screen Wake Lock API genutzt; die native iOS-Kids-App schaltet zusätzlich den iOS-Idle-Timer nur während aktiver Lesemodi ab.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1139",
+    "serviceWorkerCache": "v1140",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -166,7 +166,7 @@
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1133-safe-area",
     "storiesBottomNav": "separated-background-v1086",
-    "storyFollowReader": "v7",
+    "storyFollowReader": "v8",
     "storyFollowReaderMode": "shared-engine-inline-page-reader-v1139",
     "storyFollowReaderReusable": true,
     "sectionEntryHeroes": "edge-to-edge-compact-photoreal-v1097",
@@ -486,7 +486,7 @@
     ],
     "sahabiyyatNameOverlay": true,
     "sahabiyyatNameOverlayPlacement": "card-and-hero-in-own-library-and-universal-story-hub",
-    "storyHubJsVersion": 11,
+    "storyHubJsVersion": 12,
     "sahabiyyatDistinctNewArtworks": [
       "sawdah",
       "juwayriyyah",
@@ -596,7 +596,13 @@
     "storiesHomeNoTextCtaOverlap": true,
     "storiesHomeCompactSecondaryCards": true,
     "storyReaderTextSizePhone": "22px",
-    "storyReaderTextSizeTablet": "23–28px"
+    "storyReaderTextSizeTablet": "23–28px",
+    "storyFollowReaderApiVersion": 6,
+    "screenAwakeManager": "v1",
+    "screenAwakePolicy": "reading-only-not-audio-only",
+    "screenAwakeBrowser": "screen-wake-lock-api",
+    "screenAwakeNativeIOS": "idle-timer-disabled-while-reading",
+    "screenAwakeRelease": "close-navigation-or-follow-audio-ended"
   },
   "updatedAt": "2026-10-05"
 }
