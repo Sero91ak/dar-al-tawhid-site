@@ -389,3 +389,56 @@ html[data-view="stories"] .bottom-nav{
     right:12px!important;bottom:13px!important;padding-left:9px!important;font-size:11px!important;
   }
 }
+
+
+/* v1135 · gefundene Münze: echte visuelle Münze statt neutraler Landschaft allein */
+#view-stories.ps-stories-home .story-feature .story-scene{
+  position:relative!important;
+}
+#view-stories.ps-stories-home .story-feature .story-scene::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:2!important;
+  width:62px!important;
+  height:20px!important;
+  left:54%!important;
+  top:61%!important;
+  transform:translate(-50%,-50%) rotate(-8deg)!important;
+  border-radius:50%!important;
+  background:rgba(2,13,20,.34)!important;
+  filter:blur(7px)!important;
+  pointer-events:none!important;
+}
+#view-stories.ps-stories-home .story-feature .story-scene::after{
+  content:"✦"!important;
+  display:grid!important;
+  place-items:center!important;
+  position:absolute!important;
+  z-index:3!important;
+  width:56px!important;
+  height:56px!important;
+  left:54%!important;
+  top:55%!important;
+  transform:translate(-50%,-50%) rotate(-13deg) scaleY(.72)!important;
+  border:3px solid rgba(255,236,166,.88)!important;
+  border-radius:50%!important;
+  background:
+    radial-gradient(circle at 36% 30%,rgba(255,250,208,.92),transparent 20%),
+    radial-gradient(circle at 50% 48%,#d5a53b 0 43%,#9c681d 63%,#6d4517 100%)!important;
+  box-shadow:
+    0 2px 0 rgba(255,239,175,.62) inset,
+    0 -5px 0 rgba(77,42,11,.35) inset,
+    0 10px 18px rgba(2,12,19,.52)!important;
+  color:#f9e9ad!important;
+  font-family:Georgia,serif!important;
+  font-size:22px!important;
+  line-height:1!important;
+  text-shadow:0 1px 2px rgba(75,43,12,.7)!important;
+  pointer-events:none!important;
+}
+@media(max-width:380px){
+  #view-stories.ps-stories-home .story-feature .story-scene::after{
+    width:50px!important;height:50px!important;left:56%!important;top:55%!important;
+  }
+}
