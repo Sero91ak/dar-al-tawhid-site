@@ -21,9 +21,10 @@ const ageKey=()=>age().replace("–","-");
 function isAudioOnlyAge(){return age()==="4–5"}
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){
-  if(active&&(v==="listen"||v==="both")){openUniversalAudio();return}
   try{localStorage.setItem(MODE_KEY,v)}catch(_){}
-  renderModeButtons();applyMode()
+  renderModeButtons();
+  if(active&&(v==="listen"||v==="both")){openUniversalAudio(v);return}
+  applyMode()
 }
 function textFor(item){const policy=window.DARKidsStoryPolicy;if(policy?.canonicalText)return normalizeKidsStoryText(policy.canonicalText(item));const s=item?.scripts||{};const c=[s["4-5"],s["6-8"],s["9-10"]].map(v=>String(v||"").trim()).filter(Boolean).sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length);return normalizeKidsStoryText(c[0]||"")}
 function words(t){return(String(t).match(/\S+/g)||[]).length}
@@ -342,19 +343,20 @@ function clearStoryDeepLink(kind){
     if(raw.indexOf("#stories/"+kind+"/")===0)history.replaceState(history.state||{},"",location.pathname+(location.search||"")+"#stories");
   }catch(_){}
 }
-function openUniversalAudio(){
+function openUniversalAudio(requestedMode=mode()){
   const item=active;if(!item)return false;
   const meta=audioMeta(item),note=$("#msVoiceNote");
   if(!meta?.url){if(note)note.textContent="Audio folgt.";updatePlayButton();return false}
   const hub=window.DARKidsStoryHub;
   if(!hub?.openStory){if(note)note.textContent="Der Hörplayer wird geladen.";return false}
   const id=item.id;
+  const nextMode=isAudioOnlyAge()||requestedMode==="listen"?"listen":"follow";
   closeStory();
   closeLibrary();
-  hub.openStory("sahaba",id);
+  hub.openStory("sahaba",id,{mode:nextMode});
   return true;
 }
-async function toggleAudio(){return openUniversalAudio()}
+async function toggleAudio(){return openUniversalAudio(mode()==="read"?"listen":mode())}
 function stopAudio(){}
 async function init(){
   if(!ensureUi())return;
