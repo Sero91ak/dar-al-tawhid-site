@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v61-voice-buffer1131",
   "label": "KIDS · V1.07.65",
   "releasedAt": "2026-10-05T14:10:00+02:00",
-  "note": "Kids v1131: Quiz- und Duʿāʾ-Owner-Voice laden die aktuelle, die Feedback- und die nächste Audiodatei frühzeitig in den Browser-Audio-Cache. Dadurch muss iOS während kurzer Sprachclips deutlich seltener nachladen. Die neue interne Zahlwort-Normalisierung für Antwortnummern sowie Sūrah-/Āyah-Angaben bleibt für neu erzeugte Serhat-Audios aktiv.",
+  "note": "Kids v1130: alle 14 Ṣaḥābiyyāt besitzen ausführliche vollständige Masterbiografien mit mindestens 850 Wörtern. Lebensweg, Īmān, Taten, Aufgaben, Alltag und zentrale Lehren werden ausführlich erzählt. Derselbe ungekürzte Mastertext gilt für 4–5, 6–8 und 9–10; nur Darstellung und Bedienung sind altersabhängig. Voice Studio zeigt Wortzahl und geschätzte Sprechdauer.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -436,14 +436,14 @@
     "storyAudioPinnedBytes": 2098317,
     "storyAudioDeliveryProfile": "optimized-runtime",
     "sahabiyyatCssVersion": 5,
-    "sahabiyyatJsVersion": 11,
+    "sahabiyyatJsVersion": 12,
     "storyHub": "v3-universal-single-runtime",
     "storyHubPlayer": "single-runtime-audio-player-edge-to-edge",
     "storyHubAgeAdaptive": true,
     "storyHubIntegratedReadAlong": true,
     "storyHubMiniPlayer": true,
     "storyHubGestureNavigation": true,
-    "storyHubManifest": "/kids/data/story-hub.json?v=3",
+    "storyHubManifest": "/kids/data/story-hub.json?v=5",
     "storyHubContinueListening": true,
     "storyHubNextStory": true,
     "storyHubAutoplayNext": false,
@@ -470,7 +470,7 @@
     ],
     "sahabiyyatNameOverlay": true,
     "sahabiyyatNameOverlayPlacement": "card-and-hero-in-own-library-and-universal-story-hub",
-    "storyHubJsVersion": 8,
+    "storyHubJsVersion": 9,
     "sahabiyyatDistinctNewArtworks": [
       "sawdah",
       "juwayriyyah",
@@ -545,7 +545,9 @@
     "sahabiyyatMasterWordRange": "884–993",
     "sahabiyyatSameMasterAllAges": true,
     "ownerVoicePlayback": "preload-current-feedback-next-v3",
-    "ownerVoiceProviderState": "generation-pipeline-ready-provider-secret-required"
+    "ownerVoiceProviderState": "generation-pipeline-ready-provider-secret-required",
+    "sahabiyyatAllAgesSameMaster": true,
+    "biographyAgePolicy": "presentation-only-no-text-shortening"
   },
   "updatedAt": "2026-10-05"
 }
