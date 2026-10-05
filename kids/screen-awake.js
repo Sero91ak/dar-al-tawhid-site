@@ -1,108 +1,91 @@
 (() => {
 "use strict";
 
-/* DĀR AL TAWḤĪD Kids — reading wake-lock manager v1
-   Keeps the display awake only while an actual reading mode is active.
-   Pure audio playback deliberately does not acquire a screen wake lock.
+/* DĀR AL TAWḤĪD Kids — shared reading screen-awake controller v1
+   Keeps the display awake only while an explicit reading mode is active.
+   Audio-only playback never requests a wake lock.
 */
 const reasons=new Set();
 let sentinel=null;
-let requesting=false;
-let nativeEnabled=false;
-let disposed=false;
+let requesting=null;
+let retryTimer=0;
 
-function postNative(enabled){
-  if(nativeEnabled===enabled)return;
-  nativeEnabled=enabled;
+function nativeSet(enabled){
   try{
     const handler=window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darKidsScreenAwake;
     if(handler&&typeof handler.postMessage==="function"){
-      handler.postMessage({enabled:!!enabled,reasons:Array.from(reasons)});
+      handler.postMessage({enabled:!!enabled,reason:"kids-reading"});
     }
   }catch(_){}
   try{
-    if(window.DarNative&&typeof window.DarNative.setScreenAwake==="function"){
-      window.DarNative.setScreenAwake(!!enabled);
+    if(window.DarNative&&typeof window.DarNative.keepScreenAwake==="function"){
+      window.DarNative.keepScreenAwake(!!enabled);
     }
   }catch(_){}
 }
 
-async function requestWake(){
-  if(disposed||!reasons.size||document.visibilityState!=="visible")return;
-  postNative(true);
-  if(sentinel||requesting||!("wakeLock" in navigator)||typeof navigator.wakeLock.request!=="function")return;
-  requesting=true;
+function releaseBrowserLock(){
+  const current=sentinel;
+  sentinel=null;
+  if(current&&typeof current.release==="function"){
+    try{current.release()}catch(_){}
+  }
+}
+
+async function requestBrowserLock(){
+  if(!reasons.size||document.visibilityState!=="visible")return;
+  if(sentinel||requesting)return;
+  if(!navigator.wakeLock||typeof navigator.wakeLock.request!=="function")return;
+  requesting=navigator.wakeLock.request("screen");
   try{
-    const lock=await navigator.wakeLock.request("screen");
+    const lock=await requesting;
+    if(!reasons.size||document.visibilityState!=="visible"){
+      try{await lock.release()}catch(_){}
+      return;
+    }
     sentinel=lock;
     lock.addEventListener("release",()=>{
       if(sentinel===lock)sentinel=null;
-      if(!disposed&&reasons.size&&document.visibilityState==="visible"){
-        setTimeout(requestWake,120);
+      if(reasons.size&&document.visibilityState==="visible"){
+        clearTimeout(retryTimer);
+        retryTimer=setTimeout(()=>{apply()},180);
       }
     },{once:true});
   }catch(_){
-    // Native wrapper still keeps the display awake. Browser support may be unavailable.
+    sentinel=null;
   }finally{
-    requesting=false;
+    requesting=null;
   }
 }
 
-function releaseWake(){
-  postNative(false);
-  const lock=sentinel;
-  sentinel=null;
-  if(lock){
-    try{void lock.release()}catch(_){}
+function apply(){
+  const enabled=reasons.size>0;
+  document.documentElement.classList.toggle("kids-reading-screen-awake",enabled);
+  if(document.visibilityState==="visible"){
+    nativeSet(enabled);
+    if(enabled)void requestBrowserLock();
+    else releaseBrowserLock();
+  }else{
+    nativeSet(false);
+    releaseBrowserLock();
   }
 }
 
-function acquire(reason="reading"){
+function set(enabled,reason="reading"){
   const key=String(reason||"reading");
-  reasons.add(key);
-  void requestWake();
+  if(enabled)reasons.add(key);
+  else reasons.delete(key);
+  apply();
+  return reasons.size>0;
 }
-
-function release(reason="reading"){
-  reasons.delete(String(reason||"reading"));
-  if(!reasons.size)releaseWake();
-}
-
-function releaseAll(){
-  reasons.clear();
-  releaseWake();
-}
-
+function acquire(reason="reading"){return set(true,reason)}
+function release(reason="reading"){return set(false,reason)}
+function releaseAll(){reasons.clear();apply()}
 function active(){return reasons.size>0}
 
-document.addEventListener("visibilitychange",()=>{
-  if(document.visibilityState==="visible"){
-    if(reasons.size)void requestWake();
-  }else if(sentinel){
-    const lock=sentinel;sentinel=null;
-    try{void lock.release()}catch(_){}
-  }
-});
+document.addEventListener("visibilitychange",apply,{passive:true});
+window.addEventListener("pageshow",apply,{passive:true});
+window.addEventListener("pagehide",()=>{nativeSet(false);releaseBrowserLock()},{passive:true});
 
-window.addEventListener("pagehide",()=>{
-  disposed=true;
-  releaseAll();
-},{capture:true});
-
-window.addEventListener("pageshow",()=>{
-  disposed=false;
-  if(reasons.size)void requestWake();
-});
-
-window.addEventListener("dar-kids-reading-start",e=>acquire(e?.detail?.reason||"reading"));
-window.addEventListener("dar-kids-reading-stop",e=>release(e?.detail?.reason||"reading"));
-
-window.DARKidsScreenAwake={
-  version:1,
-  acquire,
-  release,
-  releaseAll,
-  active,
-  reasons:()=>Array.from(reasons)
-};
+window.DARKidsScreenAwake={version:1,set,acquire,release,releaseAll,active};
 })();
