@@ -2,6 +2,7 @@
   "use strict";
 
   var manifest={entries:{}};
+  var entryPriority={};
   var loaded=false;
   var pending=null;
   var player=new Audio();
@@ -60,37 +61,66 @@
     });
     return true;
   }
+  function flushPendingIfReady(){
+    if(!pending)return;
+    var queued=pending;
+    if(!entryFor(queued.text))return;
+    pending=null;
+    playNow(queued.text,queued.options);
+  }
   function play(text,options){
     var key=normalize(text);
     if(!key)return false;
+
+    // Spezialisierte Quiz-/Duʿāʾ-Manifeste dürfen sofort spielen, sobald
+    // ihr kleiner JSON-Pack geladen ist. Nicht mehr auf das große allgemeine
+    // Owner-Voice-Manifest warten.
+    if(entryFor(key))return playNow(key,options);
+
     if(!loaded){
       pending={text:key,options:options||{}};
       stopNativeSpeech();
       return true;
     }
-    return playNow(key,options);
+    emitMissing(key,(options||{}).source);
+    if(options&&typeof options.onerror==="function")options.onerror(new Error("owner-voice-missing"));
+    return false;
   }
-  function merge(data){
+  function merge(data,priority){
     if(!data||!data.entries)return;
     Object.keys(data.entries).forEach(function(k){
-      manifest.entries[normalize(k)]=data.entries[k];
+      var key=normalize(k);
+      if(!key)return;
+      var current=Number(entryPriority[key]||0);
+      if(current>Number(priority||0))return;
+      manifest.entries[key]=data.entries[k];
+      entryPriority[key]=Number(priority||0);
     });
+    flushPendingIfReady();
+  }
+  function loadManifest(url,priority){
+    return fetch(url,{cache:"force-cache"})
+      .then(function(r){return r.ok?r.json():null})
+      .then(function(data){merge(data,priority);return data})
+      .catch(function(){return null});
   }
   function finishLoad(){
     loaded=true;
-    var queued=pending;
-    pending=null;
-    if(queued)playNow(queued.text,queued.options);
+    if(pending){
+      var queued=pending;
+      pending=null;
+      if(!playNow(queued.text,queued.options))emitMissing(queued.text,(queued.options||{}).source);
+    }
   }
 
-  Promise.all([
-    fetch("/kids/data/owner-voice-audio.json?v=1",{cache:"force-cache"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
-    fetch("/kids/data/quiz-audio.json?v=1",{cache:"force-cache"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
-  ]).then(function(parts){
-    merge(parts[1]);
-    merge(parts[0]);
-    finishLoad();
-  }).catch(finishLoad);
+  // Priorität ist absichtlich unabhängig von Netzwerk-Reihenfolge:
+  // allgemeiner Pack < Quiz < Duʿāʾ. So überschreibt nie wieder ein alter
+  // generischer Clip einen frisch gerenderten Bereichs-Clip.
+  Promise.allSettled([
+    loadManifest("/kids/data/owner-voice-audio.json?v=2",1),
+    loadManifest("/kids/data/quiz-audio.json?v=2",2),
+    loadManifest("/kids/data/dua-audio.json?v=2",3)
+  ]).then(finishLoad).catch(finishLoad);
 
   window.DARKidsOwnerVoice={
     play:play,
