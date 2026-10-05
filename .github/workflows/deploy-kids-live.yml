@@ -57,6 +57,8 @@ jobs:
           const swVersion=String(version.visualSystem?.serviceWorkerCache||"").replace(/^v/,"");
           const syCss=String(version.visualSystem?.sahabiyyatCssVersion||"").trim();
           const syJs=String(version.visualSystem?.sahabiyyatJsVersion||"").trim();
+          const hubCss=String(version.visualSystem?.storyHubCssVersion||"").trim();
+          const hubJs=String(version.visualSystem?.storyHubJsVersion||"").trim();
           if(!expected)throw new Error("Kids buildId missing");
           if(!swVersion)throw new Error("Kids serviceWorkerCache missing");
           if(index!==start||index!==shell)throw new Error("Kids entry shells are not identical");
@@ -67,8 +69,8 @@ jobs:
           if(!index.includes("var due=pool.filter")||!index.includes("selected.push(q)"))throw new Error("Never-empty quiz fallback missing");
           if(!index.includes("/kids/sw.js?v="+swVersion))throw new Error("Current Kids SW registration missing");
           if(!index.includes("kids.pwa.controller.reload."))throw new Error("Kids stale-shell self-heal missing");
-          if(!index.includes("/kids/story-hub.js?v=5"))throw new Error("Universal story hub JS missing");
-          if(!index.includes("/kids/story-hub.css?v=3"))throw new Error("Universal story hub CSS missing");
+          if(!hubJs||!index.includes("/kids/story-hub.js?v="+hubJs))throw new Error("Universal story hub JS missing");
+          if(!hubCss||!index.includes("/kids/story-hub.css?v="+hubCss))throw new Error("Universal story hub CSS missing");
           if(!fs.existsSync("kids/story-hub.js")||!fs.existsSync("kids/story-hub.css"))throw new Error("Universal story hub files missing");
           if((storyHubJs.match(/new Audio\(/g)||[]).length!==1)throw new Error("Universal StoryPlayer must own exactly one Audio engine");
           if([prophetJs,sahabaJs,sahabiyyatJs].some(js=>js.includes("new Audio(")))throw new Error("Legacy story audio engine returned");
@@ -104,6 +106,8 @@ jobs:
           set -euo pipefail
           EXPECT="$(node -p 'require("./kids/version.json").buildId')"
           SW_EXPECT="$(node -p 'String(require("./kids/version.json").visualSystem.serviceWorkerCache||"").replace(/^v/,"")')"
+          HUB_JS_EXPECT="$(node -p 'String(require("./kids/version.json").visualSystem.storyHubJsVersion||"")')"
+          SY_JS_EXPECT="$(node -p 'String(require("./kids/version.json").visualSystem.sahabiyyatJsVersion||"")')"
           ok=0
           for attempt in $(seq 1 12); do
             cb="$(date +%s)-$attempt"
@@ -112,8 +116,8 @@ jobs:
             curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/sahabiyyat-stories.json?cb=$cb" -o /tmp/kids-sahabiyyat.json || true
             curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/start?kv=$EXPECT&cb=$cb" -o /tmp/kids-start.html || true
             curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/sw.js?cb=$cb" -o /tmp/kids-sw.js || true
-            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/story-hub.js?v=5&cb=$cb" -o /tmp/kids-story-hub.js || true
-            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/sahabiyyat-stories.js?v=7&cb=$cb" -o /tmp/kids-sahabiyyat-js.js || true
+            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/story-hub.js?v=$HUB_JS_EXPECT&cb=$cb" -o /tmp/kids-story-hub.js || true
+            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/sahabiyyat-stories.js?v=$SY_JS_EXPECT&cb=$cb" -o /tmp/kids-sahabiyyat-js.js || true
             if grep -F -q "$EXPECT" /tmp/kids-version.json 2>/dev/null &&
                grep -F -q 'id="syEntry"' /tmp/kids-start.html 2>/dev/null &&
                grep -F -q 'class="stories-area-jump"' /tmp/kids-start.html 2>/dev/null &&
