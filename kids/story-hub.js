@@ -11,6 +11,9 @@ const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;"
 const audio=new Audio(); audio.preload="metadata"; audio.setAttribute("playsinline","");
 let catalog={},activeCategory="prophets",active=null,playing=false,busy=false,reader=null,lastFocus=null;
 const LAST_STORY_KEY="kids.storyHub.last.v1";
+const STORY_MODE_KEY="kids.contentMode.v19";
+function storyMode(){try{const v=localStorage.getItem(STORY_MODE_KEY);return["both","listen","read"].includes(v)?v:"both"}catch(_){return"both"}}
+function storyAudioOnly(){return isYoung()||storyMode()==="listen"}
 let lastSavedAt=0,resumeHint=0;
 function readLastStory(){try{const v=JSON.parse(localStorage.getItem(LAST_STORY_KEY)||"null");return v&&typeof v==="object"?v:null}catch(_){return null}}
 function writeLastStory(force=false,completed=false){
@@ -115,7 +118,7 @@ function ensureUi(){
     id:"universal-story",audio,
     getContent:()=>{
       const meta=audioMeta(active)||{};
-      return{key:active?(category().kind+":"+active.id+":"+ageKey()):"kids-story",title:active?storyName(active):"Geschichte",subtitle:category().label+" · Alter "+age(),album:"DĀR AL TAWḤĪD Kids · Geschichten des Īmān",text:textFor(active),artwork:active?artFor(active,activeCategory,true):"",deepLink:active?("#stories/listen/"+activeCategory+"/"+encodeURIComponent(active.id)):"#stories",audioOnly:isYoung(),timings:meta.timings||meta.paragraphTimings||meta.cues||[],syncPoints:meta.syncPoints||meta.syncAnchors||[]};
+      return{key:active?(category().kind+":"+active.id+":"+ageKey()):"kids-story",title:active?storyName(active):"Geschichte",subtitle:category().label+" · Alter "+age(),album:"DĀR AL TAWḤĪD Kids · Geschichten des Īmān",text:textFor(active),artwork:active?artFor(active,activeCategory,true):"",deepLink:active?("#stories/listen/"+activeCategory+"/"+encodeURIComponent(active.id)):"#stories",audioOnly:storyAudioOnly(),timings:meta.timings||meta.paragraphTimings||meta.cues||[],syncPoints:meta.syncPoints||meta.syncAnchors||[]};
     },
     toggleAudio,autoOpen:false,disabled:()=>!audioMeta(active)?.url
   })||null;
@@ -234,15 +237,18 @@ function renderPlayer(){
   $("#ghBack15").hidden=!hasAudio;
   $("#ghFwd15").hidden=!hasAudio;
   $("#ghAudioNote").textContent=hasAudio?"Deine Stelle wird automatisch gespeichert.":"Audio folgt. Der vollständige Lesetext bleibt verfügbar.";
-  reader?.setContent({title:storyName(active),subtitle:cat.label+" · Alter "+age(),text,audioOnly:isYoung(),timings:meta?.timings||meta?.paragraphTimings||meta?.cues||[],syncPoints:meta?.syncPoints||meta?.syncAnchors||[]});
+  reader?.setContent({title:storyName(active),subtitle:cat.label+" · Alter "+age(),text,audioOnly:storyAudioOnly(),timings:meta?.timings||meta?.paragraphTimings||meta?.cues||[],syncPoints:meta?.syncPoints||meta?.syncAnchors||[]});
   if(meta?.url){audio.src=meta.url;audio.preload="metadata"}else{audio.removeAttribute("src");try{audio.load()}catch(_){}}
   renderNext();updateProgress();renderPlay();renderMini();
 }
 function openPlayer(){
   if(!active)return;
-  $("#ghPlayer").classList.add("open");$("#ghPlayer").removeAttribute("aria-hidden");document.documentElement.classList.add("gh-player-open");
-  $("#ghWorld").setAttribute("inert","");$("#ghWorld").setAttribute("aria-hidden","true");
-  $("#ghPlayerScroll").scrollTop=0;setTimeout(()=>$("#ghPlayerBack")?.focus(),0);
+  // Restore the accepted player: the shared sheet rises from the bottom.
+  // It always synchronizes from the CURRENT audio position, so resuming or seeking
+  // opens directly at the matching paragraph instead of starting the text from above.
+  reader?.restore();
+  if(storyAudioOnly())reader?.open();
+  else reader?.openReadAlong();
 }
 function minimizePlayer(){
   setReadMode("closed",{restore:false});
