@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1288",
-  "appBuildId": "app-shell-v1288",
-  "note": "v1288 · Ḥadīṯ-Design tatsächlich auf iPhone aktiviert: historisches Hero-Stylesheet wird statisch geladen, Eisgold überschreibt die Bilder nicht mehr, Breadcrumb bleibt schlank und wiederholte Buch-Icons verschwinden aus den Werk-/Kitāb-Listen.",
-  "updatedAt": "2026-10-05T12:39:00+02:00"
+  "buildId": "app-shell-v1289",
+  "appBuildId": "app-shell-v1289",
+  "note": "v1289 · Test-App-Basisaudit: alle vorgesehenen Bereichs-Styles werden trotz fehlendem </head> als letzte Authority geladen; Qurʾān, Gelehrte, Themen, Duʿāʾ, Quiz, Mehr, Detailseiten, Jumuʿah, Qibla und Gebetszeiten erhalten damit ihre tatsächliche neue Gestaltung. Zusätzlich ist die zuvor unerreichbare image-editor-test Route repariert.",
+  "updatedAt": "2026-10-05T13:22:00+02:00"
 }
