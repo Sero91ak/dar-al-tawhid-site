@@ -22,12 +22,25 @@ const ageKey=()=>age().replace("–","-");
 function isAudioOnlyAge(){return age()==="4–5"}
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){
+  if(!["both","listen","read"].includes(v))return;
   try{localStorage.setItem(MODE_KEY,v)}catch(_){}
-  renderModeButtons();applyMode();
-  if(active&&v==="both"&&!isAudioOnlyAge()){
+  renderModeButtons();
+  if(!active){applyMode();return}
+  if(v==="both"){
     if(typeof followReader?.openReadAlong==="function")followReader.openReadAlong();
     else followReader?.open?.();
     if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+    return;
+  }
+  if(v==="listen"){
+    if(typeof followReader?.openListening==="function")followReader.openListening();
+    else followReader?.open?.();
+    if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+    return;
+  }
+  if(v==="read"){
+    if(typeof followReader?.openReading==="function")followReader.openReading();
+    else followReader?.open?.();
   }
 }
 function textFor(item){const policy=window.DARKidsStoryPolicy;if(policy?.canonicalText)return normalizeKidsStoryText(policy.canonicalText(item));const s=item?.scripts||{};const c=[s["4-5"],s["6-8"],s["9-10"]].map(v=>String(v||"").trim()).filter(Boolean).sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length);return normalizeKidsStoryText(c[0]||"")}
@@ -261,7 +274,6 @@ function ensureUi(){
           '<div id="syVisualDisclaimer" class="ms-visual-disclaimer"></div>'+
           '<div class="ms-detail-modes"><button data-sy-mode="both" type="button">Hören &amp; Mitlesen</button><button data-sy-mode="listen" type="button">Hören</button><button data-sy-mode="read" type="button">Lesen</button></div>'+
           '<div class="ms-profile-grid"><section><small>WAS ZEICHNETE SIE AUS?</small><strong id="syTrait"></strong></section><section><small>IHRE GESCHICHTE &amp; ZEIT</small><span id="syLife"></span></section><section><small>QUELLENKONTEXT</small><span id="syWitness"></span></section></div>'+
-          '<section id="syPlayer" class="ms-player"><div class="story-local-controls"><button class="story-skip" id="syBack15" type="button" aria-label="15 Sekunden zurück">−15 s</button><button id="syPlay" class="ms-play" type="button">Hören</button><button class="story-skip" id="syFwd15" type="button" aria-label="15 Sekunden vor">+15 s</button></div><div class="ms-progress" id="syProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="syProgress"></span></div><div class="ms-player-time"><strong id="syTimeCurrent">0:00</strong><span id="syTimeTotal">0:00</span></div><button class="ms-follow-open" id="syFollowOpen" type="button">Hören &amp; Mitlesen</button><p id="syVoiceNote"></p></section>'+
           '<article id="syRead" class="ms-read"></article>'+
           '<section class="ms-sources"><strong>GEPRÜFTE QUELLEN</strong><div id="sySources"></div></section>'+
           '<section id="syQuestion" class="ms-question"></section>'+
@@ -271,7 +283,7 @@ function ensureUi(){
   document.body.appendChild(modal);
   $("#syClose").addEventListener("click",closeStory);
   installSwipeBack($("#syScroll"),closeStory);
-  $("#syPlay").addEventListener("click",toggleAudio);
+  $("#syPlay")?.addEventListener("click",toggleAudio);
   $("#syBack15")?.addEventListener("click",()=>seekBy(-15));
   $("#syFwd15")?.addEventListener("click",()=>seekBy(15));
   $("#syFollowOpen")?.addEventListener("click",()=>{
@@ -379,21 +391,8 @@ function renderQuestion(){
 }
 function applyMode(){
   renderModeButtons();
-  const read=$("#syRead"),player=$("#syPlayer"),follow=$("#syFollowOpen");
-  if(isAudioOnlyAge()){
-    if(read)read.hidden=true;
-    if(player)player.hidden=false;
-    if(follow){
-      follow.hidden=true;
-      follow.setAttribute("aria-hidden","true");
-      follow.tabIndex=-1;
-    }
-    return;
-  }
-  const m=mode();
-  if(read)read.hidden=m==="listen";
-  if(player)player.hidden=m==="read";
-  if(follow){follow.hidden=false;follow.removeAttribute("aria-hidden");follow.tabIndex=0;follow.textContent="Mitlesen öffnen";follow.setAttribute("aria-label","Mitlesen öffnen")}
+  const read=$("#syRead");
+  if(read)read.hidden=true;
 }
 function resetAudio(){
   stopAudio();
