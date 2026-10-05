@@ -3138,3 +3138,77 @@ html[data-kids-age="4-5"] .ps-detail-mode:first-child{
     border-radius:22px!important;
   }
 }
+
+/* PROPHET_LIBRARY_REFINEMENT_V12 — preserve the strong page, make it calmer and more consistent */
+.ps-muhammad-feature{
+  padding-bottom:14px!important;
+}
+.ps-muhammad-card{
+  grid-template-rows:clamp(178px,44vw,250px) auto!important;
+  border-radius:27px!important;
+}
+.ps-muhammad-visual,
+.ps-muhammad-visual img{
+  min-height:178px!important;
+}
+.ps-muhammad-panel{
+  padding:15px 16px 15px!important;
+}
+.ps-muhammad-title{
+  font-size:clamp(27px,7vw,37px)!important;
+}
+.ps-muhammad-cta{
+  min-height:42px!important;
+  margin-top:9px!important;
+  padding:0 0 0 2px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+.ps-muhammad-go{
+  width:40px!important;
+  height:40px!important;
+  border:1px solid rgba(240,205,120,.30)!important;
+  background:rgba(240,205,120,.09)!important;
+}
+.ps-sequence-head{
+  margin-top:2px!important;
+  margin-bottom:10px!important;
+}
+.ps-library-page .ps-story-row{
+  height:clamp(146px,32vw,168px)!important;
+  min-height:146px!important;
+}
+.ps-library-page .ps-row-copy{
+  left:47%!important;
+}
+.ps-library-page .ps-row-rank{
+  position:absolute!important;
+  z-index:5!important;
+  left:11px!important;
+  bottom:10px!important;
+  min-width:39px!important;
+  height:29px!important;
+  padding:0 9px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(239,203,121,.38)!important;
+  border-radius:999px!important;
+  background:rgba(3,20,29,.68)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  color:#f2d48f!important;
+  font:700 12px Georgia,serif!important;
+}
+@media(max-width:430px){
+  .ps-muhammad-card{grid-template-rows:178px auto!important}
+  .ps-muhammad-visual,.ps-muhammad-visual img{min-height:178px!important}
+  .ps-library-page .ps-story-row{height:150px!important;min-height:150px!important}
+  .ps-library-page .ps-row-copy{left:45%!important;right:54px!important}
+}
+@media(min-width:700px){
+  .ps-muhammad-card{grid-template-rows:260px auto!important}
+  .ps-muhammad-visual,.ps-muhammad-visual img{min-height:260px!important}
+  .ps-library-page .ps-story-row{height:184px!important;min-height:184px!important}
+  .ps-library-page .ps-row-copy{left:42%!important}
+}
