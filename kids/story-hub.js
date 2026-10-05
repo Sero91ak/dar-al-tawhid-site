@@ -78,11 +78,8 @@ function stopOtherPlayers(){
   try{window.DARKidsSahabiyyat?.stop?.()}catch(_){}
 }
 function ensureEntry(){
-  const view=$("#view-stories");if(!view||$("#ghEntry"))return;
-  const entry=document.createElement("button");entry.id="ghEntry";entry.className="gh-entry";entry.type="button";
-  entry.innerHTML='<span class="gh-entry-bg" aria-hidden="true"></span><span class="gh-entry-copy"><span class="gh-entry-kicker">HÖREN · LESEN · MITLESEN</span><strong class="gh-entry-title">Geschichten des Īmān</strong><span class="gh-entry-sub">Propheten, Ṣaḥābah und Ṣaḥābiyyāt an einem Ort – einfach auswählen und eintauchen.</span><span class="gh-entry-action">Hörwelten öffnen <b aria-hidden="true">›</b></span></span>';
-  const head=view.querySelector(".page-head"); if(head)head.insertAdjacentElement("afterend",entry); else view.prepend(entry);
-  entry.addEventListener("click",openWorld);
+  const oldEntry=document.getElementById("ghEntry");
+  if(oldEntry)oldEntry.remove();
 }
 function ensureUi(){
   if($("#ghWorld"))return;
