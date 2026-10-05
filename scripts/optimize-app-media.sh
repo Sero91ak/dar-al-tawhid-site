@@ -116,7 +116,7 @@ opt_voice() {
   (( size >= 250000 )) || { skipped_count=$((skipped_count + 1)); return; }
 
   bitrate="$(ffprobe -v error -select_streams a:0 -show_entries stream=bit_rate -of default=nw=1:nk=1 "$f" 2>/dev/null | head -n1 || true)"
-  if [[ "$bitrate" =~ ^[0-9]+$ ]] && (( bitrate <= 52000 )); then
+  if [[ "$bitrate" =~ ^[0-9]+$ ]] && (( bitrate <= 70000 )); then
     skipped_count=$((skipped_count + 1))
     return
   fi
@@ -126,11 +126,11 @@ opt_voice() {
   case "$ext" in
     m4a|aac)
       tmp="$TMP_DIR/$(basename "$f").m4a"
-      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a aac -b:a 48k -movflags +faststart "$tmp" || return 0
+      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a aac -b:a 56k -movflags +faststart "$tmp" || return 0
       ;;
     mp3)
       tmp="$TMP_DIR/$(basename "$f").mp3"
-      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a libmp3lame -b:a 48k "$tmp" || return 0
+      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a libmp3lame -b:a 64k "$tmp" || return 0
       ;;
     *)
       return 0
@@ -152,18 +152,7 @@ process_one() {
   esac
 }
 
-if [[ "$MODE" == "--residual" ]]; then
-  for f in \
-    "kids/assets/kids-cinema/intro-final.mp4" \
-    "kids/assets/kids-cinema/intro-ios.mp4" \
-    "kids/assets/kids-cinema/intro-v74.mp4" \
-    "kids/assets/prophet-story-audio/adam/story.mp3" \
-    "kids/assets/prophet-story-audio/muhammad/story.mp3" \
-    "kids/assets/prophet-story-audio/idris/story.mp3"
-  do
-    process_one "$f"
-  done
-elif [[ "$MODE" == "--all" ]]; then
+if [[ "$MODE" == "--all" ]]; then
   while IFS= read -r -d '' f; do
     process_one "$f"
   done < <(find assets kids/assets content apple-tv ios test/assets -type f \
