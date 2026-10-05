@@ -146,9 +146,9 @@ jobs:
                ! grep -F -q 'class="stories-area-jump"' /tmp/kids-start.html 2>/dev/null &&
                ! grep -F -q 'data-story-area=' /tmp/kids-start.html 2>/dev/null &&
                grep -F -q "dar-al-tawhid-kids-v$SW_EXPECT" /tmp/kids-sw.js 2>/dev/null &&
-               grep -F -q "gh-story-art-name" /tmp/kids-story-hub.js 2>/dev/null &&
+               ! grep -F -q "gh-story-art-name" /tmp/kids-story-hub.js 2>/dev/null &&
                ! grep -F -q "ghPlayerImageName" /tmp/kids-story-hub.js 2>/dev/null &&
-               grep -F -q "sy-image-name" /tmp/kids-sahabiyyat-js.js 2>/dev/null &&
+               ! grep -F -q "sy-image-name" /tmp/kids-sahabiyyat-js.js 2>/dev/null &&
                ! grep -F -q "syHeroName" /tmp/kids-sahabiyyat-js.js 2>/dev/null &&
                node -e 'const fs=require("fs");const q=JSON.parse(fs.readFileSync("/tmp/kids-quiz.json","utf8"));if(!Array.isArray(q.items)||q.items.length<650)process.exit(1);' &&
                node -e 'const fs=require("fs");const s=JSON.parse(fs.readFileSync("/tmp/kids-sahabiyyat.json","utf8"));if(!Array.isArray(s.items)||s.items.length!==14)process.exit(1);'; then
