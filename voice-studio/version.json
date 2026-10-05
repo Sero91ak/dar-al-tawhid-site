@@ -1,7 +1,7 @@
 {
   "version": "2.9.118",
-  "updatedAt": "2026-10-05T13:42:00+02:00",
-  "deployTrigger": "voice-studio-2.9.118-nonblocking-pronunciation-learning",
+  "updatedAt": "2026-10-05T13:47:00+02:00",
+  "deployTrigger": "voice-studio-2.9.118-coherent-release-candidate",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v87",
@@ -491,7 +491,9 @@
     "mobileContentShellValidation": true,
     "pronunciationWarningsNeverBlockInteractiveGenerate": true,
     "unresolvedTermsPersistToLearningQueue": true,
-    "legacyPronunciation422Fallback": true
+    "legacyPronunciation422Fallback": true,
+    "coherentReleaseCandidate": true,
+    "releaseArchiveManifestVersion": "2.9.118"
   },
   "performance": {
     "reusableVoiceConditioning": true,
