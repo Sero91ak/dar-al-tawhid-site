@@ -107,7 +107,7 @@ jobs:
           if(!index.includes('id="syEntry"'))throw new Error("Ṣaḥābiyyāt static hub card missing");
           if(index.includes('class="stories-area-jump"')||index.includes('data-story-area='))throw new Error("Redundant Geschichten capsule navigation returned");
           if(!index.includes('class="stories-world-head stories-hero"')||!index.includes('id="storiesHeroTitle"'))throw new Error("Responsive Geschichten hero missing");
-          if(!storiesHomeCss.includes("STORIES_HOME_STRICT_V1152")||!storiesHomeCss.includes("--story-bottom-clearance:112px"))throw new Error("Strict Geschichten responsive layout guard missing");
+          if(!storiesHomeCss.includes("STORIES_HOME_STRICT_V1152")||!storiesHomeCss.includes("--story-bottom-clearance:18px")||!storiesHomeCss.includes("STORIES_HOME_WIDE_GRID_V1152"))throw new Error("Strict Geschichten responsive layout guard missing");
           if(syCss&&!index.includes("/kids/sahabiyyat-stories.css?v="+syCss))throw new Error("Ṣaḥābiyyāt CSS ref missing");
           if(syJs&&!index.includes("/kids/sahabiyyat-stories.js?v="+syJs))throw new Error("Ṣaḥābiyyāt JS ref missing");
           if(!Array.isArray(sy.items)||sy.items.length!==14)throw new Error("Ṣaḥābiyyāt story count must be 14");
@@ -141,8 +141,10 @@ jobs:
             curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/sahabiyyat-stories.js?v=$SY_JS_EXPECT&cb=$cb" -o /tmp/kids-sahabiyyat-js.js || true
             if grep -F -q "$EXPECT" /tmp/kids-version.json 2>/dev/null &&
                grep -F -q 'id="syEntry"' /tmp/kids-start.html 2>/dev/null &&
-               grep -F -q 'class="stories-area-jump"' /tmp/kids-start.html 2>/dev/null &&
-               grep -F -q 'data-story-area="sahabiyyat"' /tmp/kids-start.html 2>/dev/null &&
+               grep -F -q 'class="stories-world-head stories-hero"' /tmp/kids-start.html 2>/dev/null &&
+               grep -F -q 'id="storiesHeroTitle"' /tmp/kids-start.html 2>/dev/null &&
+               ! grep -F -q 'class="stories-area-jump"' /tmp/kids-start.html 2>/dev/null &&
+               ! grep -F -q 'data-story-area=' /tmp/kids-start.html 2>/dev/null &&
                grep -F -q "dar-al-tawhid-kids-v$SW_EXPECT" /tmp/kids-sw.js 2>/dev/null &&
                grep -F -q "gh-story-art-name" /tmp/kids-story-hub.js 2>/dev/null &&
                ! grep -F -q "ghPlayerImageName" /tmp/kids-story-hub.js 2>/dev/null &&
