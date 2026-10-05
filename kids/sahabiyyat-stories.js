@@ -191,7 +191,7 @@ function insertEntry(view){
   const entry=document.createElement("button");
   entry.id="syEntry"; entry.className="ms-entry sy-entry"; entry.type="button";
   entry.innerHTML=
-    '<span class="ms-entry-bg" aria-hidden="true"><img src="/kids/assets/prophet-scenes/library.webp" alt="" decoding="async" loading="eager"></span>'+
+    '<span class="ms-entry-bg" aria-hidden="true"><img src="/kids/assets/sahabiyyat/khadijah-v1124.webp?v=1133" alt="" decoding="async" loading="eager"></span>'+
     '<span class="ms-entry-art" aria-hidden="true"><span class="ms-entry-arch"></span><span class="ms-entry-stars">'+
     Array.from({length:14},(_,i)=>'<i style="--i:'+i+'"></i>').join("")+
     '</span></span>'+
