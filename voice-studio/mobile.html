@@ -372,8 +372,8 @@ async function installMobileUpdate(){
   }
 }
 function go(name,opts={}){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="pronunciation"&&!opts.skipCatalog)loadCatalog(true);if(name==="settings"){health();checkMobileUpdate(false)}document.querySelector("main")?.scrollTo({top:0,behavior:"instant"})}
-$(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));
-$("[data-content-kind]").forEach(b=>b.onclick=()=>{location.href=contentStudioUrl(b.dataset.contentKind)});
+$$(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));
+$$("[data-content-kind]").forEach(b=>b.onclick=()=>{location.href=contentStudioUrl(b.dataset.contentKind)});
 $("#refreshBtn").onclick=()=>{health();if($(".screen.active")?.dataset.screen==="history")loadHistory()};
 function syncStylePills(){
   $$("[data-style]").forEach(b=>b.classList.toggle("active",b.dataset.style===$("#style").value));
