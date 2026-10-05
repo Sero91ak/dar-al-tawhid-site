@@ -153,7 +153,6 @@ function renderCards(){
         '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span>'+
       '</span>'+
       '<span class="ms-row-copy">'+
-        '<span class="ms-row-kicker">ṢAḤĀBĪ · LEBENSGESCHICHTE</span>'+
         '<strong class="ms-row-title">'+esc(item.name)+'</strong>'+
         '<span class="ms-row-ar" dir="rtl">'+esc(item.nameAr||"")+' رضي الله عنه</span>'+
         '<span class="ms-row-summary">'+esc(item.summary||"")+'</span>'+
