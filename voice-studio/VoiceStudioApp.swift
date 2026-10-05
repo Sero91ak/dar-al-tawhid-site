@@ -19,6 +19,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     private let updateManifestURL = URL(string: "https://api.github.com/repos/Sero91ak/dar-al-tawhid-site/contents/voice-studio/version.json?ref=main")!
     private var latestKnownVersion = ""
     private var updateAvailable = false
+    private var deepEngineRepairAttempted = false
+    private var deepEngineRepairRunning = false
 
     private var currentVersion: String {
         (Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String) ?? "0.0.0"
@@ -96,6 +98,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         appMenu.addItem(menuItem("Nach Updates suchen…", action: #selector(checkForUpdatesFromMenu(_:)), target: self))
         appMenu.addItem(menuItem("Update jetzt installieren…", action: #selector(installUpdateFromMenu(_:)), target: self))
         appMenu.addItem(menuItem("Update-Protokoll öffnen…", action: #selector(openUpdateLog(_:)), target: self))
+        appMenu.addItem(menuItem("Engine reparieren…", action: #selector(repairEngineFromMenu(_:)), target: self))
         appMenu.addItem(menuItem("iPad / iPhone verbinden…", action: #selector(showCompanionPairing(_:)), target: self))
         appMenu.addItem(.separator())
         appMenu.addItem(menuItem("DĀR Voice Studio ausblenden", action: #selector(NSApplication.hide(_:)), key: "h"))
@@ -972,11 +975,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     }
 
     private func ensureEngine() {
-        // 2.9.68 Stabilitätsmodus: Wenn der Bundle-Launcher die Engine besitzt,
-        // bleibt die native WKWebView-App vollständig passiv. Dadurch gibt es
-        // keinen zweiten Prozessmanager, der dieselbe Engine beendet/neustartet.
-        if externalEngineOwner { return }
-
+        // Launcher-Besitz gilt nur solange die Engine tatsächlich gesund ist.
+        // Frühere Releases kehrten hier sofort zurück; starb die Engine danach,
+        // blieb die App dauerhaft ohne Verbindung. Jetzt prüft die native App
+        // immer /health und übernimmt nur bei echtem Ausfall die Recovery.
         var request = URLRequest(url: healthURL)
         request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         request.timeoutInterval = 1.0
@@ -1017,6 +1019,73 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             NSLog("DĀR Voice pairing token repair failed: \(error)")
             return nil
         }
+    }
+
+    private func terminatePort8787Listeners() {
+        let lsofCandidates = ["/usr/sbin/lsof", "/usr/bin/lsof"]
+        guard let lsof = lsofCandidates.first(where: { FileManager.default.isExecutableFile(atPath: $0) }) else {
+            return
+        }
+        let p = Process()
+        p.executableURL = URL(fileURLWithPath: lsof)
+        p.arguments = ["-nP", "-tiTCP:8787", "-sTCP:LISTEN"]
+        let pipe = Pipe()
+        p.standardOutput = pipe
+        p.standardError = FileHandle.nullDevice
+        do {
+            try p.run()
+            p.waitUntilExit()
+            let data = pipe.fileHandleForReading.readDataToEndOfFile()
+            guard let raw = String(data: data, encoding: .utf8) else { return }
+            let own = getpid()
+            let pids = raw.split(whereSeparator: { $0.isWhitespace }).compactMap { Int32(String($0)) }.filter { $0 != own }
+            for pid in pids { kill(pid, SIGTERM) }
+            if !pids.isEmpty { usleep(350_000) }
+            for pid in pids where kill(pid, 0) == 0 { kill(pid, SIGKILL) }
+        } catch {
+            NSLog("DĀR Voice port cleanup failed: \(error)")
+        }
+    }
+
+    private func performDeepEngineRepair(userInitiated: Bool) {
+        if deepEngineRepairRunning { return }
+        deepEngineRepairRunning = true
+        deepEngineRepairAttempted = true
+        DispatchQueue.main.async { [weak self] in
+            self?.showLoading()
+            self?.updateLoadingProgress(18, status: "Serhat Engine wird vollständig repariert …")
+        }
+
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
+            if let p = self.engineProcess, p.isRunning {
+                p.terminate()
+                usleep(250_000)
+                if p.isRunning { p.interrupt() }
+            }
+            self.engineProcess = nil
+            try? self.engineOutHandle?.close()
+            try? self.engineErrHandle?.close()
+            self.engineOutHandle = nil
+            self.engineErrHandle = nil
+
+            self.stopStaleInstalledEngine()
+            self.terminatePort8787Listeners()
+
+            let target = FileManager.default.homeDirectoryForCurrentUser
+                .appendingPathComponent("Applications/DAR-Voice-Studio")
+            _ = self.loadOrCreatePairToken(at: target)
+            self.startEngineDirectly()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                self.deepEngineRepairRunning = false
+                self.waitForEngine(attempt: userInitiated ? 0 : 38)
+            }
+        }
+    }
+
+    @objc private func repairEngineFromMenu(_ sender: Any?) {
+        performDeepEngineRepair(userInitiated: true)
     }
 
     private func startEngineDirectly() {
@@ -1189,11 +1258,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
 
             // Falls LaunchAgent oder Direktstart beendet wurde, nicht 40+ Sekunden
             // blind weiterzählen: kontrolliert erneut prüfen/starten.
-            if attempt == 12 || attempt == 30 || attempt == 50 {
+            if attempt == 12 || attempt == 30 {
                 self.ensureEngine()
             }
+            if attempt == 50 && !self.deepEngineRepairAttempted {
+                self.performDeepEngineRepair(userInitiated: false)
+                return
+            }
 
-            if attempt < 80 {
+            if attempt < 95 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
                     self.waitForEngine(attempt: attempt + 1)
                 }
@@ -1231,8 +1304,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         h1{font-size:21px}p{color:#9cafb4;line-height:1.55}
         pre{text-align:left;white-space:pre-wrap;max-height:320px;overflow:auto;background:#031016;border:1px solid rgba(255,255,255,.1);padding:14px;border-radius:12px;color:#e8c7c7;font-size:11px}
         </style></head><body><div class="box">
-        <h1>Serhat Engine konnte nicht gestartet werden</h1>
-        <p>Die App hat die Engine automatisch erneut gestartet. Unten steht der aktuelle Fehler aus dem lokalen Protokoll.</p>
+        <h1>Serhat Engine konnte nicht verbunden werden</h1>
+        <p>Die automatische Tiefenreparatur wurde bereits ausgeführt. Du kannst oben im Menü „DĀR Voice Studio → Engine reparieren…“ jederzeit einen vollständigen Neustart von Engine, Port 8787 und Pairing durchführen.</p>
         \(detailBlock)
         </div></body></html>
         """

@@ -503,6 +503,28 @@ engine_companion_ready() {
   printf '%s' "$body" | /usr/bin/grep -Eq '"companion_mode"[[:space:]]*:[[:space:]]*true'
 }
 
+clear_engine_port_if_stale() {
+  engine_is_current && return 0
+  local lsof_bin=""
+  for cand in /usr/sbin/lsof /usr/bin/lsof; do
+    [ -x "$cand" ] && { lsof_bin="$cand"; break; }
+  done
+  [ -n "$lsof_bin" ] || return 0
+  local pids
+  pids="$("$lsof_bin" -nP -tiTCP:8787 -sTCP:LISTEN 2>/dev/null || true)"
+  [ -n "$pids" ] || return 0
+  echo "Port 8787 ist durch einen veralteten Prozess belegt – räume ihn kontrolliert frei."
+  for pid in $pids; do
+    [ "$pid" = "$" ] && continue
+    kill -TERM "$pid" >/dev/null 2>&1 || true
+  done
+  sleep 0.35
+  for pid in $pids; do
+    [ "$pid" = "$" ] && continue
+    kill -KILL "$pid" >/dev/null 2>&1 || true
+  done
+}
+
 {
   echo ""
   echo "=== $(date '+%Y-%m-%d %H:%M:%S') DĀR Voice Studio start ==="
@@ -511,6 +533,7 @@ engine_companion_ready() {
 
   if ! engine_is_current; then
     echo "Engine fehlt/veraltet – starte genau eine lokale Engine."
+    clear_engine_port_if_stale
     pkill -TERM -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
     sleep 0.4
     pkill -KILL -f "$TARGET/local-engine.py" >/dev/null 2>&1 || true
