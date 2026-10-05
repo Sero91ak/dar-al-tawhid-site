@@ -73,6 +73,7 @@ for (const marker of [
   'document.body.classList.toggle("is-more-route",isMore)',
   'document.body.classList.toggle("is-account-route",route.view==="account")',
   'document.body.classList.toggle("is-about-route",route.view==="about")',
+  'document.body.classList.toggle("is-tawhid-guide-route",route.view==="tawhid-guide")',
   'document.body.classList.toggle("is-notifications-route",route.view==="notifications")',
   'document.body.classList.toggle("is-settings-route",route.view==="settings")',
   'document.body.classList.toggle("is-news-route",route.view==="news")',
@@ -168,10 +169,10 @@ else ok("service-worker.js: CACHE_VERSION vorhanden");
 const worker = read("cloudflare/test-app-worker.js");
 if (!worker.includes("Response.redirect")) fail("test-app-worker.js: Root-Redirect fehlt");
 else ok("test-app-worker.js: Root-Redirect vorhanden");
-if (!worker.includes("area-shell-v1294.css") || !worker.includes("darTestAreaAuthoritiesV1294")) {
-  fail("test-app-worker.js: v1294 Area-Authority fehlt");
+if (!worker.includes("area-shell-v1294.css") || !worker.includes("tawhid-guide-v1295.css") || !worker.includes("darTestAreaAuthoritiesV1295")) {
+  fail("test-app-worker.js: v1295 Area-/Tawhid-Authority fehlt");
 } else {
-  ok("test-app-worker.js: v1294 Area-Authority aktiv");
+  ok("test-app-worker.js: v1295 Area-/Tawhid-Authority aktiv");
 }
 
 const testWrangler = read("wrangler.test.toml");
