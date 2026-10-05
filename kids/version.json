@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v60-voice-flow1130",
-  "label": "KIDS · V1.07.64",
-  "releasedAt": "2026-10-05T13:52:00+02:00",
-  "note": "Kids v1130: Quiz-/Duʿāʾ-Owner-Voice-Flow und die neuen ausführlichen Ṣaḥābiyyāt-Masterbiografien sind gemeinsam freigegeben. Alle 14 Ṣaḥābiyyāt haben vollständige Langtexte mit mindestens 800 Wörtern; derselbe Text gilt für 4–5, 6–8 und 9–10. Voice Studio zeigt Wortzahl und geschätzte Sprechdauer.",
+  "buildId": "kids-shell-v61-voice-manifest1131",
+  "label": "KIDS · V1.07.65",
+  "releasedAt": "2026-10-05T13:15:00+02:00",
+  "note": "Kids v1131: Voice-Manifeste für Quiz, Duʿāʾ und allgemeine Owner-Voice werden network-first geladen, damit neu erzeugte Serhat-Audios sofort sichtbar werden. Duʿāʾ-Audio wird ebenfalls direkt aus dem Netz geladen; der Voice-Batch validiert die Zahl-/Sūrah-Normalisierung auch dann, wenn serverseitig noch kein Render-Provider konfiguriert ist.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1130",
+    "serviceWorkerCache": "v1131",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -541,7 +541,8 @@
     "sahabiyyatMinimumMasterWords": 800,
     "sahabiyyatLongBiographyRelease": "v1130",
     "voiceStudioStoryLengthVisible": true,
-    "futureBiographyMinimumMasterWords": 800
+    "futureBiographyMinimumMasterWords": 800,
+    "ownerVoiceManifestFetch": "network-first-v1"
   },
   "updatedAt": "2026-10-05"
 }
