@@ -118,7 +118,7 @@ Der Prüfer kontrolliert unter anderem:
 - tatsächliche Eintragsanzahl pro Batch,
 - doppelte Referenzen,
 - Pflichtfelder,
-- Gesamtzahl `5102`, solange kein neuer geprüfter Batch registriert wurde,
+- Gesamtzahl dynamisch aus `catalog.entriesCount` (aktuell `4455`),
 - letzten Referenzstand `114:6` im aktuellen Durchgang.
 
 ## Lookup-Regel
@@ -190,8 +190,8 @@ Die App rendert ausschließlich geprüfte GitHub-Daten oder den festen Fallback.
 1. App starten.
 2. Qurʾān-Bereich öffnen.
 3. Remote-Content-Sync muss `quran/tadabbur/catalog.json` laden.
-4. App erkennt `entriesCount = 5102`.
-5. App lädt `entries-batch-05z-116.json`.
+4. App erkennt `entriesCount = 4455`.
+5. App lädt alle registrierten Dateien, einschließlich `entries-gap-06-118.json`.
 6. Vers `114:6` öffnen.
 7. Tadabbur-Karte erscheint unter der Übersetzung.
 8. Internet ausschalten.
