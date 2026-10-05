@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v49-single-story-player1119",
-  "label": "KIDS · V1.07.54",
-  "releasedAt": "2026-10-05T09:42:00+02:00",
-  "note": "Kids v1119: Propheten-, Ṣaḥābah- und Ṣaḥābiyyāt-Höraktionen laufen über genau einen Universal-StoryPlayer. Bestehende Bibliotheken, Personenseiten, Texte, Bilder und Quellen bleiben erhalten. Eigene Legacy-Audio-Player und 0:00-Leerzustände sind entfernt; fehlendes Audio zeigt klar „Audio folgt“. Das Ṣaḥābiyyāt-Bereichsbild ist lokal appgebündelt.",
+  "buildId": "kids-shell-v50-single-story-player1120",
+  "label": "KIDS · V1.07.55",
+  "releasedAt": "2026-10-05T10:15:00+02:00",
+  "note": "Kids v1120: Der Geschichtenbereich verwendet technisch genau einen Universal-StoryPlayer. Propheten-, Ṣaḥābah- und Ṣaḥābiyyāt-Seiten behalten ihre Bibliotheken, Bilder, Texte, Quellen und Fragen, delegieren Hören aber vollständig an den zentralen Player. Leere 0:00-Legacy-Player bleiben entfernt, fehlendes Audio zeigt „Audio folgt“, und Kategoriebilder werden manifest-first aus lokalen App-Assets geladen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1119",
+    "serviceWorkerCache": "v1120",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -449,7 +449,10 @@
     "storyHubAutoplayNext": false,
     "legacyStoryPlayersRemoved": true,
     "storyCategoryArtworkLocal": true,
-    "storyMissingAudioState": "Audio folgt"
+    "storyMissingAudioState": "Audio folgt",
+    "storyHubAssetVersion": 3,
+    "storyHubCategoryArtwork": "manifest-first-local",
+    "storyLegacyAudioPlayers": false
   },
   "updatedAt": "2026-10-05"
 }
