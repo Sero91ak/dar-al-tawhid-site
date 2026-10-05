@@ -152,8 +152,15 @@ function renderCards(){
   const entryCopy=$("#syEntry .ms-entry-copy > span:last-child");
   if(entryCopy)entryCopy.textContent=isAudioOnlyAge()?"14 Ṣaḥābiyyāt · Hörgeschichten":"14 Ṣaḥābiyyāt · ihre Geschichten · lesen & hören";
 }
+function bindEntry(entry){
+  if(!entry||entry.dataset.syBound==="1")return entry;
+  entry.dataset.syBound="1";
+  entry.addEventListener("click",openLibrary);
+  return entry;
+}
 function insertEntry(view){
-  if($("#syEntry"))return;
+  const existing=$("#syEntry");
+  if(existing){bindEntry(existing);return existing}
   const entry=document.createElement("button");
   entry.id="syEntry"; entry.className="ms-entry sy-entry"; entry.type="button";
   entry.innerHTML=
@@ -172,7 +179,8 @@ function insertEntry(view){
   if(sahaba)sahaba.insertAdjacentElement("afterend",entry);
   else if(prophet)prophet.insertAdjacentElement("afterend",entry);
   else view.querySelector(".page-head")?.insertAdjacentElement("afterend",entry);
-  entry.addEventListener("click",openLibrary);
+  bindEntry(entry);
+  return entry;
 }
 function ensureUi(){
   const view=$("#view-stories");if(!view||$("#syLibraryPage"))return false;
