@@ -57,6 +57,7 @@ jobs:
           const storyHubCss=fs.readFileSync("kids/story-hub.css","utf8");
           const storyFollowReaderJs=fs.readFileSync("kids/story-follow-reader.js","utf8");
           const storyFollowReaderCss=fs.readFileSync("kids/story-follow-reader.css","utf8");
+          const storiesHomeCss=fs.readFileSync("kids/stories-home-v1138.css","utf8");
           const expected=String(version.buildId||"").trim();
           const swVersion=String(version.visualSystem?.serviceWorkerCache||"").replace(/^v/,"");
           const syCss=String(version.visualSystem?.sahabiyyatCssVersion||"").trim();
@@ -104,7 +105,9 @@ jobs:
           if(!storyHubJs.includes("playerAtTop"))throw new Error("Story swipe-down guard missing");
           if(!sw.includes("dar-al-tawhid-kids-v"+swVersion)||!sw.includes("client.navigate"))throw new Error("Kids SW activation recovery missing");
           if(!index.includes('id="syEntry"'))throw new Error("Ṣaḥābiyyāt static hub card missing");
-          if(!index.includes('class="stories-area-jump"')||!index.includes('data-story-area="sahabiyyat"'))throw new Error("Ṣaḥābiyyāt hub shortcut missing");
+          if(index.includes('class="stories-area-jump"')||index.includes('data-story-area='))throw new Error("Redundant Geschichten capsule navigation returned");
+          if(!index.includes('class="stories-world-head stories-hero"')||!index.includes('id="storiesHeroTitle"'))throw new Error("Responsive Geschichten hero missing");
+          if(!storiesHomeCss.includes("STORIES_HOME_STRICT_V1152")||!storiesHomeCss.includes("--story-bottom-clearance:112px"))throw new Error("Strict Geschichten responsive layout guard missing");
           if(syCss&&!index.includes("/kids/sahabiyyat-stories.css?v="+syCss))throw new Error("Ṣaḥābiyyāt CSS ref missing");
           if(syJs&&!index.includes("/kids/sahabiyyat-stories.js?v="+syJs))throw new Error("Ṣaḥābiyyāt JS ref missing");
           if(!Array.isArray(sy.items)||sy.items.length!==14)throw new Error("Ṣaḥābiyyāt story count must be 14");
