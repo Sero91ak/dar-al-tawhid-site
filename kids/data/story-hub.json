@@ -13,7 +13,11 @@
     "storyTextAgeAdaptive": false,
     "ageAdaptivePresentationOnly": true,
     "canonicalStoryTextStrategy": "preserve-longest-complete-version",
-    "futureCategoriesMustUseMasterText": true
+    "futureCategoriesMustUseMasterText": true,
+    "futureStoryDefaultLengthPolicy": "long-complete-no-shortening",
+    "futureBiographyMinimumMasterWords": 800,
+    "sahabiyyatMinimumMasterWords": 800,
+    "ageChangesPresentationOnly": true
   },
   "sources": [
     {
@@ -24,7 +28,8 @@
       "kicker": "GESCHICHTEN DER PROPHETEN",
       "description": "Von Ādam bis Muḥammad ﷺ – geprüfte Geschichten aus Qurʾān und zuverlässigen Quellen.",
       "dataUrl": "/kids/data/prophet-stories.json?v=28",
-      "image": "/kids/assets/prophets-v2/muhammad-hero.jpg?v=22"
+      "image": "/kids/assets/prophets-v2/muhammad-hero.jpg?v=22",
+      "storyLengthPolicy": "single-master-existing"
     },
     {
       "id": "sahaba",
@@ -34,7 +39,8 @@
       "kicker": "DIE GEFÄHRTEN",
       "description": "Lebensgeschichten der Gefährten – Treue, Mut, Wissen und Standhaftigkeit.",
       "dataUrl": "/kids/data/mubashshirun-stories.json?v=18",
-      "image": "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg?v=2"
+      "image": "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg?v=2",
+      "storyLengthPolicy": "single-master-existing"
     },
     {
       "id": "sahabiyyat",
@@ -44,7 +50,9 @@
       "kicker": "DIE BESTEN FRAUEN IHRER ZEIT",
       "description": "Geschichten bedeutender Frauen der ersten Generationen – Wissen, Īmān und Stärke.",
       "dataUrl": "/kids/data/sahabiyyat-stories.json?v=18",
-      "image": "/kids/assets/prophet-scenes/library.webp"
+      "image": "/kids/assets/prophet-scenes/library.webp",
+      "storyLengthPolicy": "long-biography",
+      "minimumMasterWords": 800
     }
   ]
 }
