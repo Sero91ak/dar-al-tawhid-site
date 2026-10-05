@@ -8,7 +8,7 @@ body.is-more-route{
   --more-v-line:color-mix(in srgb,var(--gold2) 18%,transparent);
   --more-v-line-soft:color-mix(in srgb,var(--gold2) 10%,transparent);
   --more-v-surface:color-mix(in srgb,var(--card,var(--bg)) 72%,transparent);
-  --more-v-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/317b5b3d-5527-4b23-bcdb-22d509389a66/ccd178e1-32f4-4b8b-8be5-ff83de34c878/Single_wide_cinematic_app_background_for_a__More__hub_in_an_.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZmU0ODc0M2QxNDg3Yjk2ZiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIzMzIxM30.BsMZSceDYwmlCfwtGnvH_ph6tsLi8C-wpRZwX4yM2_s");
+  --more-v-art:url("/test/assets/area-heroes-v1290/more-hub.jpg");
   --more-v-left:color-mix(in srgb,var(--bg) 94%,transparent);
   --more-v-mid:color-mix(in srgb,var(--bg) 68%,transparent);
   --more-v-right:color-mix(in srgb,var(--bg) 22%,transparent);

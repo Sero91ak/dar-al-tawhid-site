@@ -1,7 +1,7 @@
 /* DĀR AL TAWḤĪD · Qurʾān Player · Test-only v1252 */
 html.is-quran-player-route,
 body.is-quran-player-route{
-  --dqpx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/7e98aff6-107a-4695-8990-240019785dfb/b80bc9ad-619a-4daf-9a91-288ab756037d/Single_wide_cinematic_background_for_a_Qur_an_audio_player__.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiODU4ZTMwYTI2MTZlYmMxYSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIzNTQ5MH0.QVVFzizpewoGOhb_wQKVLCpg8-8qRBcZtb0scrU0doc");
+  --dqpx-art:url("/test/assets/area-heroes-v1290/quran-player.jpg");
   --dqpx-bg:var(--bg,#161813);
   --dqpx-panel:color-mix(in srgb,var(--card,var(--bg)) 76%,transparent);
   --dqpx-panel-strong:color-mix(in srgb,var(--card,var(--bg)) 90%,transparent);

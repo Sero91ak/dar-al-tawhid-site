@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Duʿāʾ overview · Test-only v1244 */
 body.is-dua-route{
-  --dua-x-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/15e1ac1d-9be2-4369-9839-36c687c5996f/15254c40-df81-4cdd-95dd-c5a8506a3656/Single_wide_cinematic_app_background_for_a_Du_a_and_adhkar_s.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYmYzZWI4ZDVlYWFlZDlmYSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI1MzIwNX0.q6wfI5szJCVCVp571UGkbBXrkX4pmtTurWlWxsdHldk");
+  --dua-x-art:url("/test/assets/area-heroes-v1290/dua.jpg");
   --dua-x-left:color-mix(in srgb,var(--bg) 92%,transparent);
   --dua-x-mid:color-mix(in srgb,var(--bg) 63%,transparent);
   --dua-x-right:color-mix(in srgb,var(--bg) 16%,transparent);

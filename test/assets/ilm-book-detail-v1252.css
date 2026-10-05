@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Book detail · test-only v1252 */
 .topic-collection-page:has(.book-profile-box){
-  --bookd-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/c4fe42ac-254f-4be7-bf6b-b58306eacd6d/aec651b6-86e5-4013-b576-e6a0f59643d1/Single_wide_cinematic_app_background_for_an_Islamic_classica.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDNmYWFjNDFjNjBkNzBhOCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI2ODY3M30.ICAJZM_Lzym3huVoLh1vyzUSMKWrRKnYkfOgNbQOw90");
+  --bookd-art:url("/test/assets/area-heroes-v1290/book-detail.jpg");
   --bookd-left:color-mix(in srgb,var(--bg) 91%,transparent);
   --bookd-mid:color-mix(in srgb,var(--bg) 62%,transparent);
   --bookd-right:color-mix(in srgb,var(--bg) 14%,transparent);

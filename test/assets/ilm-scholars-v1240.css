@@ -8,7 +8,7 @@ body.is-scholars-route{
   --sch-v-line:color-mix(in srgb,var(--gold2) 19%,transparent);
   --sch-v-line-soft:color-mix(in srgb,var(--gold2) 10%,transparent);
   --sch-v-surface:color-mix(in srgb,var(--card,var(--bg)) 72%,transparent);
-  --sch-v-hero-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/46049859-1ac3-4cf5-9cad-7436b855005e/Use_the_uploaded_image_only_as_the_visual_style_reference__Create_one_standalone_wide_cinematic_3D_a_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZmQ2ODAwM2FmM2Q2ZmYzMCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI5Nzg1MH0.33IlVzEVp5JLFX34cObR6cZJUCTMCJTzJSJjB7BKX9Q");
+  --sch-v-hero-art:url("/test/assets/area-heroes-v1290/scholars.png");
   --sch-v-art-opacity:.22;
   --sch-v-hero-left:color-mix(in srgb,var(--bg) 94%,transparent);
   --sch-v-hero-mid:color-mix(in srgb,var(--bg) 70%,transparent);

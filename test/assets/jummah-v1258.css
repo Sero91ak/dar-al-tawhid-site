@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Jumuʿah / Freitag · Test-only v1258 */
 #appView.view:has(.jummah-hub-page){
-  --jfx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/9c40e8c5-bac1-4f25-aebe-53c8691339e3/f239e7f3-421d-4c44-beb3-54f2ae460f85/Single_wide_cinematic_app_background_for_a_Jumu_ah_Friday_se.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiODBkMTQxOWUwZjE4NWNlZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIzMjY3MH0.PzQCuo7Q6537MKdFZliobMzQdVm8vdH1HacobteX-Gw");
+  --jfx-art:url("/test/assets/area-heroes-v1290/jummah.jpg");
   --jfx-bg:var(--bg);
   --jfx-text:var(--text,var(--cream));
   --jfx-muted:var(--muted);

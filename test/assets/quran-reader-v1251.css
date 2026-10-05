@@ -1,7 +1,7 @@
 /* DĀR AL TAWḤĪD · Qurʾān reader · Test-only v1251
    Reading-first. Historical imagery is confined to chrome, never behind āyāt. */
 body.is-quran-reader-route{
-  --qrcx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/aebea3d9-9142-4917-90d7-8b2a3ec34926/e8998705-b906-41bc-a65c-a14641cfa453/Single_wide_cinematic_app_background_for_a_Qur_an_overview__.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYzEwNjczNDEwNWFiNDk4NyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIyNTQwOX0.PoNZ1pWhRx5i2o8rab-XqHhVkJ860ajJVakpmkCa7BE");
+  --qrcx-art:url("/test/assets/area-heroes-v1290/quran-overview.jpg");
   --qrcx-chrome-a:color-mix(in srgb,var(--bg) 94%,transparent);
   --qrcx-chrome-b:color-mix(in srgb,var(--bg) 78%,transparent);
   --qrcx-line:color-mix(in srgb,var(--gold2) 18%,var(--line2));
