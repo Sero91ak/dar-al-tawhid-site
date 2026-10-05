@@ -396,7 +396,7 @@ export async function verifyKidsAlphabetExternalAudioSlot(env, input, helpers) {
 
 function normalizeExistingStoryAge(value) {
   const raw = clean(value, 20).replace(/[–—]/g, "-");
-  return ["4-5","6-8","9-10"].includes(raw) ? raw : "";
+  return ["4-5","6-8","9-10","all"].includes(raw) ? raw : "";
 }
 
 function normalizeExistingStoryText(value) {
@@ -434,7 +434,7 @@ export async function publishExistingKidsStoryAudio(env, input, helpers) {
   const age = normalizeExistingStoryAge(input?.age);
   const submittedText = normalizeExistingStoryText(input?.text);
   if (!itemId) throw mediaError("Geschichten-ID fehlt", 400);
-  if (!age) throw mediaError("Alter muss 4-5, 6-8 oder 9-10 sein", 422);
+  if (!age) throw mediaError("Alter muss 4-5, 6-8, 9-10 oder all sein", 422);
   if (submittedText.length < 40) throw mediaError("Erzähltext ist zu kurz", 422);
 
   const manifestPath = storyKind === "prophet"
@@ -459,10 +459,17 @@ export async function publishExistingKidsStoryAudio(env, input, helpers) {
   if (!item) throw mediaError("Kids-Geschichte wurde nicht gefunden", 404);
 
   const scripts = item?.scripts && typeof item.scripts === "object" ? { ...item.scripts } : {};
-  const expectedText = normalizeExistingStoryText(scripts[age] || item?.voiceScript || "");
-  if (!expectedText) throw mediaError("Für diese Altersstufe ist noch kein freigegebener Text hinterlegt", 422);
+  const targetAges = age === "all" ? ["4-5","6-8","9-10"] : [age];
+  const expectedTexts = targetAges.map((key) => normalizeExistingStoryText(scripts[key] || item?.voiceScript || ""));
+  if (expectedTexts.some((value) => !value)) {
+    throw mediaError("Für mindestens eine Altersstufe ist noch kein freigegebener Mastertext hinterlegt", 422);
+  }
+  if (age === "all" && new Set(expectedTexts).size !== 1) {
+    throw mediaError("Die Altersstufen enthalten unterschiedliche Storytexte. Zuerst auf einen Mastertext vereinheitlichen.", 409);
+  }
+  const expectedText = expectedTexts[0];
   if (submittedText !== expectedText) {
-    throw mediaError("Der hochgeladene Ton gehört nicht exakt zum hinterlegten Text dieser Altersstufe", 409);
+    throw mediaError("Der hochgeladene Ton gehört nicht exakt zum hinterlegten Mastertext", 409);
   }
 
   const payload = decodeDataUrl(input?.dataUrl);
@@ -484,14 +491,14 @@ export async function publishExistingKidsStoryAudio(env, input, helpers) {
     : storyKind === "sahabiyyat"
       ? "kids/assets/sahabiyyat-story-audio"
       : "kids/assets/mubashshirun-story-audio";
-  const assetPath = assetRoot + "/" + itemId + "/" + age + "-" + short + "." + ext;
+  const assetSlot = age === "all" ? "master" : age;
+  const assetPath = assetRoot + "/" + itemId + "/" + assetSlot + "-" + short + "." + ext;
   const now = new Date().toISOString();
   const timings = sanitizeStoryTimings(input?.timings);
   const syncMode = clean(input?.syncMode || (timings.length ? "browser-owner-alignment-v1" : ""), 120);
 
   const audio = item?.audio && typeof item.audio === "object" ? { ...item.audio } : {};
-  scripts[age] = expectedText;
-  audio[age] = {
+  const baseAudio = {
     status: "ready",
     url: "/" + assetPath,
     durationSec: Number(durationSec.toFixed(3)),
@@ -506,29 +513,28 @@ export async function publishExistingKidsStoryAudio(env, input, helpers) {
     manual: true,
     manualUpload: true,
     ownerApproved: true,
-    age,
     modes: ["read","listen"],
     technicalQaPassed: true,
     publishedAt: now,
+    masterAudio: age === "all",
+    masterAgeRange: age === "all" ? "4-10" : "",
     ...(timings.length ? { timings, syncMode } : {})
   };
+  for (const targetAge of targetAges) {
+    scripts[targetAge] = expectedText;
+    audio[targetAge] = { ...baseAudio, age: targetAge };
+  }
   item.scripts = scripts;
   item.audio = audio;
-  if (storyKind === "prophet") {
-    item.voiceProduction = {
-      ...(item.voiceProduction && typeof item.voiceProduction === "object" ? item.voiceProduction : {}),
-      status: "owner-audio-updated",
-      lastPublishedAt: now
-    };
-  } else {
-    const publishedAges = ["4-5","6-8","9-10"].filter((key) => String(audio?.[key]?.url || "").trim());
-    item.voiceProduction = {
-      ...(item.voiceProduction && typeof item.voiceProduction === "object" ? item.voiceProduction : {}),
-      publishedAges,
-      status: publishedAges.length === 3 ? "audio-complete" : "audio-partial",
-      lastPublishedAt: now
-    };
-  }
+  const publishedAges = ["4-5","6-8","9-10"].filter((key) => String(audio?.[key]?.url || "").trim());
+  item.voiceProduction = {
+    ...(item.voiceProduction && typeof item.voiceProduction === "object" ? item.voiceProduction : {}),
+    publishedAges,
+    status: publishedAges.length === 3 ? "audio-complete" : "audio-partial",
+    lastPublishedAt: now,
+    singleMasterAudio: age === "all" || item?.voiceProduction?.singleMasterAudio === true,
+    ...(age === "all" ? { masterAudioUrl: "/" + assetPath, masterAgeRange: "4-10" } : {})
+  };
   manifest.updatedAt = now;
 
   const batch = await helpers.githubCommitBatch(
