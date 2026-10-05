@@ -162,16 +162,6 @@ async function gradeKidsRecitation(request, env) {
 const DAR_TEST_HOME_V1193_CSS = "/test/assets/dar-home-library-v1193.css?v=1195-tabrestore";
 const DAR_TEST_HOME_V1193_JS = "/test/assets/dar-home-library-v1193.js?v=1193";
 
-function injectLateTestStylesheet(html, id, href, needle = "") {
-  const sourceNeedle = needle || String(href).split("?")[0];
-  if (html.includes(`id="${id}"`) || (sourceNeedle && html.includes(sourceNeedle))) return html;
-  const tag = `<link rel="stylesheet" id="${id}" href="${href}">`;
-  if (html.includes("</html>")) return html.replace("</html>", tag + "\n</html>");
-  if (html.includes("</body>")) return html.replace("</body>", tag + "\n</body>");
-  if (html.includes("<body")) return html.replace("<body", tag + "\n<body");
-  return html + tag;
-}
-
 async function finalizeDarTestHomeV1193(asset) {
   const type = String(asset && asset.headers && asset.headers.get("content-type") || "");
   if (!asset || !asset.ok || !type.includes("text/html")) return asset;
@@ -227,25 +217,18 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/library-app\.css(?:\?v=[^"']*)?/g, "library-app.css?v=1227-hero-depth");
   html = html.replace(/library-app\.js(?:\?v=[^"']*)?/g, "library-app.js?v=1227-library");
         // DAR_QURAN_PLAYER_V1252
-  html = injectLateTestStylesheet(html, "darQuranPlayerAuthorityV1296", "/test/assets/quran-player-v1252.css?v=1296", "quran-player-v1252.css");
 
 // DAR_QURAN_READER_V1251
-  html = injectLateTestStylesheet(html, "darQuranLearnAuthorityV1296", "/test/assets/quran-learn-v1256.css?v=1296", "quran-learn-v1256.css");
-
-  html = injectLateTestStylesheet(html, "darQuranReaderAuthorityV1296", "/test/assets/quran-reader-v1251.css?v=1296", "quran-reader-v1251.css");
 
 // DAR_QURAN_OVERVIEW_V1250
-  html = injectLateTestStylesheet(html, "darQuranOverviewAuthorityV1296", "/test/assets/quran-overview-v1250.css?v=1296", "quran-overview-v1250.css");
 
 // DAR_ILM_START_PHASE1_CACHE
   html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-cgi-v1252");
   html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-compact-v1239");
 
     // DAR_ILM_SCHOLARS_V1240
-  html = injectLateTestStylesheet(html, "darIlmScholarsAuthorityV1296", "/test/assets/ilm-scholars-v1240.css?v=1296", "ilm-scholars-v1240.css");
 
     // DAR_ILM_TOPICS_V1242
-  html = injectLateTestStylesheet(html, "darIlmTopicsAuthorityV1296", "/test/assets/ilm-topics-v1242.css?v=1296", "ilm-topics-v1242.css");
 
 
   // DAR_ILM_HADITH_V1243
@@ -257,37 +240,22 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // DAR_ILM_DUA_V1244
-  html = injectLateTestStylesheet(html, "darIlmDuaAuthorityV1296", "/test/assets/ilm-dua-v1244.css?v=1296", "ilm-dua-v1244.css");
 
 // DAR_MORE_V1241
-  html = injectLateTestStylesheet(html, "darQuizAuthorityV1296", "/test/assets/quiz-overview-v1257.css?v=1296", "quiz-overview-v1257.css");
-
-  html = injectLateTestStylesheet(html, "darMoreBaseAuthorityV1296", "/test/assets/more-v1241.css?v=1296", "more-v1241.css");
 
   // DAR_ILM_SCHOLAR_PROFILE_V1253
-  html = injectLateTestStylesheet(html, "darScholarProfileAuthorityV1296", "/test/assets/ilm-scholar-profile-v1253.css?v=1296", "ilm-scholar-profile-v1253.css");
 
   // DAR_ILM_TOPIC_DETAIL_V1254
-  html = injectLateTestStylesheet(html, "darTopicDetailAuthorityV1296", "/test/assets/ilm-topic-detail-v1254.css?v=1296", "ilm-topic-detail-v1254.css");
 
   // DAR_ILM_POST_READER_V1255
-  html = injectLateTestStylesheet(html, "darPostReaderAuthorityV1296", "/test/assets/ilm-post-reader-v1255.css?v=1296", "ilm-post-reader-v1255.css");
 
   // DAR_ILM_SCHOLAR_DETAIL_V1251
-  html = injectLateTestStylesheet(html, "darScholarDetailAuthorityV1296", "/test/assets/ilm-scholar-detail-v1251.css?v=1296", "ilm-scholar-detail-v1251.css");
 
   // DAR_ILM_BOOK_DETAIL_V1252
-  html = injectLateTestStylesheet(html, "darBookDetailAuthorityV1296", "/test/assets/ilm-book-detail-v1252.css?v=1296", "ilm-book-detail-v1252.css");
 
   // DAR_MORE_V1253
-  html = injectLateTestStylesheet(html, "darMoreAuthorityV1296", "/test/assets/more-v1253.css?v=1296", "more-v1253.css");
 
   // DAR_PRAYER_V1254
-  html = injectLateTestStylesheet(html, "darJummahAuthorityV1296", "/test/assets/jummah-v1258.css?v=1296", "jummah-v1258.css");
-
-  html = injectLateTestStylesheet(html, "darQiblaAuthorityV1296", "/test/assets/qibla-v1259.css?v=1296", "qibla-v1259.css");
-
-  html = injectLateTestStylesheet(html, "darPrayerAuthorityV1296", "/test/assets/prayer-v1254.css?v=1296", "prayer-v1254.css");
 
 // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
   html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
@@ -303,29 +271,29 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/<link[^>]+dar-home-visual-v1190\.css[^>]*>\s*/g, "");
   html = html.replace(/<script[^>]+dar-home-visual-v1190\.js[^>]*><\/script>\s*/g, "");
 
-  // DAR_TEST_AREA_AUTHORITIES_V1294
+  // DAR_TEST_AREA_AUTHORITIES_V1298
   // test/index.html currently has no closing </head>; load all redesign layers as a final authority
   // so the intended Test-App designs are visible and legacy inline styles cannot win afterwards.
-  if (!html.includes('id="darTestAreaAuthoritiesV1295"')) {
-    const areaAuthority = '<style id="darTestAreaAuthoritiesV1295">' +
-      '@import url("/test/assets/quran-player-v1252.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/quran-learn-v1256.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/quran-reader-v1251.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/quran-overview-v1250.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/ilm-scholars-v1240.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/ilm-topics-v1242.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/ilm-dua-v1244.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/quiz-overview-v1257.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/more-v1241.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/ilm-scholar-profile-v1253.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/ilm-topic-detail-v1254.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/ilm-post-reader-v1255.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/ilm-scholar-detail-v1251.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/ilm-book-detail-v1252.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/more-v1253.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/jummah-v1258.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/qibla-v1259.css?v=area-authority-v1290");' +
-      '@import url("/test/assets/prayer-v1254.css?v=area-authority-v1290");' +
+  if (!html.includes('id="darTestAreaAuthoritiesV1298"')) {
+    const areaAuthority = '<style id="darTestAreaAuthoritiesV1298">' +
+      '@import url("/test/assets/quran-player-v1252.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/quran-learn-v1256.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/quran-reader-v1251.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/quran-overview-v1250.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/ilm-scholars-v1240.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/ilm-topics-v1242.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/ilm-dua-v1244.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/quiz-overview-v1257.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/more-v1241.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/ilm-scholar-profile-v1253.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/ilm-topic-detail-v1254.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/ilm-post-reader-v1255.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/ilm-scholar-detail-v1251.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/ilm-book-detail-v1252.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/more-v1253.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/jummah-v1258.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/qibla-v1259.css?v=area-authority-v1298");' +
+      '@import url("/test/assets/prayer-v1254.css?v=area-authority-v1298");' +
       '@import url("/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292");' +
       '@import url("/test/assets/library/library-app.css?v=library-base-v1293");' +
       '@import url("/test/assets/library/library-authority-v1293.css?v=library-authority-v1293");' +
