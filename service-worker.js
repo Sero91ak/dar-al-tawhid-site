@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1250';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1251';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -52,10 +52,6 @@ const APP_SHELL = [
   '/assets/site-analytics.js',
   '/assets/dar-global-share-v1225.js',
   '/assets/dar-global-share-v1225.css',
-  '/assets/ilm-hadith-v1250.css',
-  '/test/assets/ilm/hadith-library-overview-v1267.webp',
-  '/test/assets/ilm/hadith-library-study-v1267.webp',
-  '/assets/ilm/ilm-historical-majlis-v1234.jpg',
   '/assets/app-store-icon-fixed.svg',
   '/assets/app-store-badge-de-official.svg',
 ];
