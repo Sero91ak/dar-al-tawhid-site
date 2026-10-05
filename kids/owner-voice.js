@@ -99,10 +99,18 @@
     flushPendingIfReady();
   }
   function loadManifest(url,priority){
-    return fetch(url,{cache:"force-cache"})
-      .then(function(r){return r.ok?r.json():null})
-      .then(function(data){merge(data,priority);return data})
-      .catch(function(){return null});
+    var fresh=url+(url.indexOf("?")>=0?"&":"?")+"cb="+Date.now();
+    return fetch(fresh,{cache:"no-store"})
+      .then(function(r){
+        if(!r.ok)throw new Error("owner-voice-manifest-"+r.status);
+        return r.json();
+      })
+      .catch(function(){
+        // Offline-Fallback: der stabile Pfad wird vom Kids-Service-Worker
+        // bereitgehalten. Online wird dagegen immer der aktuelle Pack geholt.
+        return fetch(url,{cache:"force-cache"}).then(function(r){return r.ok?r.json():null}).catch(function(){return null});
+      })
+      .then(function(data){merge(data,priority);return data});
   }
   function finishLoad(){
     loaded=true;
