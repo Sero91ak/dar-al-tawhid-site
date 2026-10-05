@@ -3318,7 +3318,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v94-historical-story-layout1167";
+const KIDS_BUILD_ID="kids-shell-v95-voice-master-sync1168";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -7037,7 +7037,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=3"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v94-historical-story-layout1167";
+  var KIDS_BUILD_ID="kids-shell-v95-voice-master-sync1168";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -7053,7 +7053,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1167",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1168",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -8443,7 +8443,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=5">
 <script src="/kids/screen-awake.js?v=1"></script>
 <script src="/kids/story-follow-reader.js?v=16"></script>
-<script src="/kids/story-policy.js?v=1"></script>
+<script src="/kids/story-policy.js?v=2"></script>
 <script src="/kids/prophet-stories.js?v=39"></script>
 <script src="/kids/mubashshirun-stories.js?v=29"></script>
 <script src="/kids/sahabiyyat-stories.js?v=21"></script>
