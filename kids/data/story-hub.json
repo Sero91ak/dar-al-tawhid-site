@@ -1,0 +1,44 @@
+{
+  "version": 2,
+  "updatedAt": "2026-10-05",
+  "title": "Geschichten des Īmān",
+  "subtitle": "Hören · Mitlesen · Entdecken",
+  "policy": {
+    "singleUniversalPlayer": true,
+    "preserveExistingStoryPages": true,
+    "ageAdaptive": true,
+    "futureCategoriesManifestDriven": true,
+    "masterStoryTextAcrossAges": true
+  },
+  "sources": [
+    {
+      "id": "prophets",
+      "kind": "prophet",
+      "order": 10,
+      "title": "Propheten",
+      "kicker": "GESCHICHTEN DER PROPHETEN",
+      "description": "Von Ādam bis Muḥammad ﷺ – geprüfte Geschichten aus Qurʾān und zuverlässigen Quellen.",
+      "dataUrl": "/kids/data/prophet-stories.json?v=28",
+      "image": "/kids/assets/prophets-v2/muhammad-hero.jpg?v=22"
+    },
+    {
+      "id": "sahaba",
+      "kind": "sahabi",
+      "order": 20,
+      "title": "Ṣaḥābah",
+      "kicker": "DIE GEFÄHRTEN",
+      "description": "Lebensgeschichten der Gefährten – Treue, Mut, Wissen und Standhaftigkeit.",
+      "dataUrl": "/kids/data/mubashshirun-stories.json?v=18",
+      "image": "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg?v=2"
+    },
+    {
+      "id": "sahabiyyat",
+      "kind": "sahabiyyah",
+      "order": 30,
+      "title": "Ṣaḥābiyyāt",
+      "kicker": "DIE BESTEN FRAUEN IHRER ZEIT",
+      "description": "Geschichten bedeutender Frauen der ersten Generationen – Wissen, Īmān und Stärke.",
+      "dataUrl": "/kids/data/sahabiyyat-stories.json?v=18"
+    }
+  ]
+}
