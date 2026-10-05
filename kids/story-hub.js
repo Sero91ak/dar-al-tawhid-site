@@ -96,7 +96,7 @@ function ensureUi(){
   mini.addEventListener("click",openPlayer);
 
   reader=window.DARKidsFollowReader?.create({
-    id:"universal-story",audio,
+    id:"universal-story",audio,autoOpen:false,
     getContent:()=>{
       const meta=audioMeta(active)||{};
       return{key:active?(category().kind+":"+active.id+":"+ageKey()):"kids-story",title:active?active.name:"Geschichte",subtitle:category().label+" · Alter "+age(),album:"DĀR AL TAWḤĪD Kids · Geschichten des Īmān",text:textFor(active),artwork:active?artFor(active,activeCategory,true):"",deepLink:active?("#stories/listen/"+activeCategory+"/"+encodeURIComponent(active.id)):"#stories",audioOnly:isYoung(),timings:meta.timings||meta.paragraphTimings||meta.cues||[],syncPoints:meta.syncPoints||meta.syncAnchors||[]};
