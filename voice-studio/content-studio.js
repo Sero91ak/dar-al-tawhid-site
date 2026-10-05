@@ -1629,10 +1629,10 @@ function legacyQuizFromStory(item){
 }
 function normalizeExistingProphetStories(item){
   if(!item||!String(item.id||"").trim())return[];
-  const scripts=item.scripts&&typeof item.scripts==="object"?item.scripts:{};
+  const text=completeMasterText(item);
+  if(!text)return[];
   const quiz=legacyQuizFromStory(item);
   return["4-5","6-8","9-10"].map(age=>{
-    const text=String(scripts[age]||item.voiceScript||"").trim();
     if(!text)return null;
     const range=ageRangeForStoryBand(age);
     return{
@@ -1654,10 +1654,10 @@ function normalizeExistingProphetStories(item){
 }
 function normalizeExistingMubashshirunStories(item){
   if(!item||!String(item.id||"").trim())return[];
-  const scripts=item.scripts&&typeof item.scripts==="object"?item.scripts:{};
+  const text=completeMasterText(item);
+  if(!text)return[];
   const quiz=legacyQuizFromStory(item);
   return["4-5","6-8","9-10"].map(age=>{
-    const text=String(scripts[age]||"").trim();
     if(!text)return null;
     const range=ageRangeForStoryBand(age);
     return{
@@ -1773,7 +1773,7 @@ function renderInventory(){
     return [row.title,item.prophetId,item.category,item.kind,item.topic,(item.tags||[]).join(" ")].join(" ").toLowerCase().includes(term);
   });
   if(summary)summary.textContent=inventoryFilter==="sahaba"
-    ?("Ṣaḥābah-Texte · "+rows.length+" Altersfassungen · anklicken → Text + Audio-Upload")
+    ?("Ṣaḥābah · 10 vollständige Mastergeschichten · "+rows.length+" Altersplätze · überall identischer Langtext")
     :inventoryFilter==="sahabiyyat"
       ?("Ṣaḥābiyyāt · 14 vollständige Mastergeschichten · "+rows.length+" Altersplätze · überall identischer Langtext")
       :("Bestand "+inventoryState.legacy.length+" · Studio intern/Test "+inventoryState.staging.length+" · Studio live "+inventoryState.live.length+" · zusammen "+all.length);
