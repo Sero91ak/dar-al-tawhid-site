@@ -1,6 +1,6 @@
 {
-  "version": 7,
-  "updatedAt": "2026-10-05T14:45:00+02:00",
+  "version": 8,
+  "updatedAt": "2026-10-05T20:24:30Z",
   "title": "Die zehn al-Mubaššarūn",
   "subtitle": "Die zehn Gefährten, denen das Paradies angekündigt wurde",
   "policy": {
@@ -111,22 +111,94 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "https://at.adobe.com/H4k4ASFSWIMDARZv",
+          "durationSec": 356.597,
+          "bytes": 2976946,
+          "sha256": "5e71122821d52f401c9fa3abbf9666ff300a60e0d44176c838dd05cf352d756c",
+          "mime": "audio/mp4",
+          "codec": "aac",
+          "bitRateKbps": 64,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "DĀR Kids owner-audio direct assignment",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "sourceFile": "Sahaba Abū Bakr aṣ-Ṣiddīq, raḍiya llāhu ʿanhu Audi.mp3",
+          "manual": true,
+          "manualUpload": true,
+          "ownerApproved": true,
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-05T20:24:30Z",
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/abu-bakr/master.m4a",
+          "age": "4-5"
         },
         "6-8": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "https://at.adobe.com/H4k4ASFSWIMDARZv",
+          "durationSec": 356.597,
+          "bytes": 2976946,
+          "sha256": "5e71122821d52f401c9fa3abbf9666ff300a60e0d44176c838dd05cf352d756c",
+          "mime": "audio/mp4",
+          "codec": "aac",
+          "bitRateKbps": 64,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "DĀR Kids owner-audio direct assignment",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "sourceFile": "Sahaba Abū Bakr aṣ-Ṣiddīq, raḍiya llāhu ʿanhu Audi.mp3",
+          "manual": true,
+          "manualUpload": true,
+          "ownerApproved": true,
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-05T20:24:30Z",
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/abu-bakr/master.m4a",
+          "age": "6-8"
         },
         "9-10": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "https://at.adobe.com/H4k4ASFSWIMDARZv",
+          "durationSec": 356.597,
+          "bytes": 2976946,
+          "sha256": "5e71122821d52f401c9fa3abbf9666ff300a60e0d44176c838dd05cf352d756c",
+          "mime": "audio/mp4",
+          "codec": "aac",
+          "bitRateKbps": 64,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "DĀR Kids owner-audio direct assignment",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "sourceFile": "Sahaba Abū Bakr aṣ-Ṣiddīq, raḍiya llāhu ʿanhu Audi.mp3",
+          "manual": true,
+          "manualUpload": true,
+          "ownerApproved": true,
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-05T20:24:30Z",
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/abu-bakr/master.m4a",
+          "age": "9-10"
         }
       },
       "pronunciationTerms": [
@@ -146,7 +218,7 @@
         }
       ],
       "voiceProduction": {
-        "status": "single-master-story-ready-audio-refresh-required",
+        "status": "audio-complete",
         "prosody": "kids_story",
         "targetMinutes": {
           "master": "5–8"
@@ -154,14 +226,23 @@
         "fushaMasterEntry": true,
         "pronunciationPolicy": "Arabic name + honorific are segmented and reviewed before publish.",
         "storyTextStandard": "kids-story-single-master-v4",
-        "audioRefreshRequired": true,
-        "sourceDataVersion": 7,
+        "audioRefreshRequired": false,
+        "sourceDataVersion": 8,
         "masterWordCount": 874,
         "estimatedMinutesAt147Wpm": 5.9,
         "contentMode": "single-master-full-story-all-ages",
         "ageSelectionInVoiceStudio": false,
         "singleMasterAudio": true,
-        "masterAgeRange": "4-10"
+        "masterAgeRange": "4-10",
+        "publishedAges": [
+          "4-5",
+          "6-8",
+          "9-10"
+        ],
+        "lastPublishedAt": "2026-10-05T20:24:30Z",
+        "masterAudioUrl": "https://at.adobe.com/H4k4ASFSWIMDARZv",
+        "localTarget": "/kids/assets/mubashshirun-story-audio/abu-bakr/master.m4a",
+        "directAssignment": true
       },
       "lifeContext": "heute lernen wir Abū Bakr aṣ-Ṣiddīq, raḍiya llāhu ʿanhu, als Menschen seines ganzen Lebensweges kennen: als frühen Gefährten, engen Freund des Propheten ﷺ, Begleiter der Hiǧrah und schließlich als ersten Kalifen der Muslime. Wenn man seine Geschichte betrachtet, fällt besonders auf, wie beständig er in sehr unterschiedlichen Situationen blieb. Abū Bakr gehörte zu den engsten Gefährten des Propheten Muḥammad ﷺ. Er nahm die Botschaft des Islām an und unterstützte den Propheten in einer Zeit, in der die Muslime in Makkah noch klein und verletzlich waren. Seine Nähe zum Propheten bestand nicht nur aus persönlicher Freundschaft. Er lernte von ihm, vertraute ihm und stellte seine Möglichkeiten in den Dienst der muslimischen Gemeinschaft. Einer der bekanntesten Augenblicke seines Lebens ereignete sich während der Hiǧrah. Der Prophet ﷺ und Abū Bakr verließen Makkah in Richtung Madīnah und hielten sich zeitweise in einer Höhle verborgen. Die Verfolger kamen gefährlich nahe. Abū Bakr machte sich große Sorgen um den Propheten ﷺ. Doch mitten in dieser angespannten Situation wurde er daran erinnert, dass Allah sie nicht verlassen hatte. So wurde die Höhle zu einem Sinnbild seiner Treue und seines Vertrauens.",
       "cover": "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg?v=2",
