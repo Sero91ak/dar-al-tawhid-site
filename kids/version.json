@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v60-voice-flow1130",
+  "buildId": "kids-shell-v60-sahabiyyat-long1130",
   "label": "KIDS · V1.07.64",
-  "releasedAt": "2026-10-05T13:00:00+02:00",
-  "note": "Kids v1130: Quiz- und Duʿāʾ-Owner-Voice nutzen denselben zentralen Serhat-Voice-Pfad mit flüssiger Bereichsprosodie. Zahlen, Antwortnummern sowie Sūrah-/Āyah-Angaben werden vor der Synthese als deutsche Zahlwörter vorbereitet; der sichtbare Inhalt bleibt unverändert. Spezialisierte Quiz-/Duʿāʾ-Audios laden unabhängig vom großen allgemeinen Voice-Manifest.",
+  "releasedAt": "2026-10-05T13:48:00+02:00",
+  "note": "Kids v1130: alle 14 Ṣaḥābiyyāt besitzen ausführliche vollständige Master-Biografien mit mindestens 800 Wörtern; Lebensweise, Īmān, Taten, Aufgaben und authentisch belegte Schlüsselereignisse sind erweitert. Derselbe Langtext gilt unverändert für alle Altersstufen. Voice Studio zeigt Wortzahl und geschätzte Sprechdauer.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -536,7 +536,12 @@
     "universalPlayerSingleTitle": true,
     "ownerVoiceFlow": "quiz-dua-fluent-v2",
     "ownerVoiceNumberNormalization": "german-spoken-numbers-v2",
-    "ownerVoiceManifestLoading": "independent-priority-v2"
+    "ownerVoiceManifestLoading": "independent-priority-v2",
+    "sahabiyyatLongBiography": true,
+    "sahabiyyatMinimumMasterWords": 800,
+    "sahabiyyatLongBiographyRelease": "v1130",
+    "voiceStudioStoryLengthVisible": true,
+    "futureBiographyMinimumMasterWords": 800
   },
   "updatedAt": "2026-10-05"
 }
