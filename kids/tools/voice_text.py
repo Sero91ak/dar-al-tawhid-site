@@ -51,7 +51,7 @@ def german_number(value: int) -> str:
     return str(n)
 
 
-def prepare_kids_voice_text(text: str) -> str:
+def prepare_kids_voice_text(text: str, *, apply_dictionary: bool = True) -> str:
     """Prepare hidden TTS text while leaving the visible Kids content untouched.
 
     The owner voice gets explicit German number words instead of raw digits. This
@@ -131,10 +131,14 @@ def _self_test() -> None:
         "Es gibt 5 Gebete.": "Es gibt fünf Gebete.",
     }
     for source, expected in cases.items():
-        actual = prepare_kids_voice_text(source)
+        actual = prepare_kids_voice_text(source, apply_dictionary=False)
         if actual != expected:
             raise SystemExit(f"voice-text self-test failed: {source!r} -> {actual!r} != {expected!r}")
-    print(f"Kids voice text self-test OK · {len(cases)} cases · {SYNTHESIS_REVISION}")
+    # The production path must also be able to load the shared pronunciation
+    # library; do not assert one specific term because the curated library grows.
+    if _PRONUNCIATION_RULES.exists() and not _load_rule_buckets():
+        raise SystemExit("voice-text self-test failed: pronunciation library is empty")
+    print(f"Kids voice text self-test OK · {len(cases)} number cases · {SYNTHESIS_REVISION}")
 
 
 def main() -> None:
