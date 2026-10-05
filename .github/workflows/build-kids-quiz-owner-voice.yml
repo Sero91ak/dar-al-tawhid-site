@@ -1,4 +1,4 @@
-name: Build Kids Quiz Owner Voice
+name: Build Kids Quiz + Dua Owner Voice
 
 on:
   workflow_dispatch:
@@ -7,12 +7,14 @@ on:
     paths:
       - '.github/workflows/build-kids-quiz-owner-voice.yml'
       - 'kids/data/quiz-kids.json'
+      - 'kids/data/dua-kids.json'
+      - 'kids/tools/voice_text.py'
 
 permissions:
   contents: write
 
 concurrency:
-  group: kids-quiz-owner-voice
+  group: kids-quiz-dua-owner-voice
   cancel-in-progress: true
 
 jobs:
@@ -22,8 +24,6 @@ jobs:
     env:
       VOICE_API: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
-      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
-      ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
 
     steps:
       - name: Checkout main
@@ -31,14 +31,10 @@ jobs:
         with:
           ref: main
 
-      - name: Require owner voice service
+      - name: Require central DĀR owner voice service
         run: |
           set -euo pipefail
-          if [ -n "${ELEVENLABS_API_KEY:-}" ]; then
-            echo "Direkter ElevenLabs-Owner-Voice-Weg ist verfügbar."
-            exit 0
-          fi
-          test -n "${ADMIN_PUBLISH_SECRET:-}" || { echo "::error::Weder ELEVENLABS_API_KEY noch ADMIN_PUBLISH_SECRET verfügbar."; exit 1; }
+          test -n "${ADMIN_PUBLISH_SECRET:-}" || { echo "::error::ADMIN_PUBLISH_SECRET fehlt."; exit 1; }
           for i in $(seq 1 6); do
             code="$(curl -L -sS -o /tmp/voice-health.json -w '%{http_code}' "$VOICE_API/health" || true)"
             cat /tmp/voice-health.json || true
@@ -47,7 +43,7 @@ jobs:
             fi
             sleep 5
           done
-          echo "::error::Weder direkter ElevenLabs-Zugang noch konfigurierter Owner-Voice-Service ist bereit."
+          echo "::error::Zentraler DĀR Owner-Voice-Service ist nicht bereit."
           exit 1
 
       - name: Install audio tools
@@ -55,7 +51,10 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y ffmpeg >/dev/null
 
-      - name: Generate complete 650-question Serhat quiz pack
+      - name: Validate Kids speech normalization
+        run: python3 kids/tools/voice_text.py --self-test
+
+      - name: Generate complete Quiz + Dua Serhat voice packs
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -66,31 +65,32 @@ jobs:
           import os
           import pathlib
           import subprocess
+          import sys
           import threading
           import time
           import urllib.request
 
           ROOT=pathlib.Path(".")
+          sys.path.insert(0,str(ROOT/"kids/tools"))
+          from voice_text import SYNTHESIS_REVISION, prepare_kids_voice_text
+
           QUIZ=ROOT/"kids/data/quiz-kids.json"
-          MANIFEST=ROOT/"kids/data/quiz-audio.json"
-          ASSETS=ROOT/"kids/assets/kids-quiz-audio"
+          DUA=ROOT/"kids/data/dua-kids.json"
+          QUIZ_MANIFEST=ROOT/"kids/data/quiz-audio.json"
+          DUA_MANIFEST=ROOT/"kids/data/dua-audio.json"
+          QUIZ_ASSETS=ROOT/"kids/assets/kids-quiz-audio"
+          DUA_ASSETS=ROOT/"kids/assets/kids-dua-audio"
           API=os.environ["VOICE_API"].rstrip("/")
           SECRET=os.environ.get("ADMIN_PUBLISH_SECRET","").strip()
-          ELEVEN_KEY=os.environ.get("ELEVENLABS_API_KEY","").strip()
-          ELEVEN_VOICE=(os.environ.get("ELEVENLABS_VOICE_ID","").strip() or "DkU7j9uO4ZEtLD2iRZSH")
-          ELEVEN_MODEL="eleven_multilingual_v2"
           ORIGIN="https://dar-al-tawhid.de"
           REFERER="https://dar-al-tawhid.de/voice-studio/"
-          ASSETS.mkdir(parents=True,exist_ok=True)
-
-          quiz=json.loads(QUIZ.read_text(encoding="utf-8"))
-          old=json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else {"entries":{}}
-          old_entries=dict(old.get("entries") or {})
+          QUIZ_ASSETS.mkdir(parents=True,exist_ok=True)
+          DUA_ASSETS.mkdir(parents=True,exist_ok=True)
 
           def norm(v):
               return " ".join(str(v or "").split()).strip()
 
-          def prompt(q):
+          def quiz_prompt(q):
               question=norm(q.get("question"))
               labels=[norm((a or {}).get("label")) for a in (q.get("answers") or [])]
               labels=[x for x in labels if x]
@@ -100,49 +100,6 @@ jobs:
               choices=" ".join(f"Antwort {i+1}: {label}." for i,label in enumerate(labels))
               return norm(question+" "+choices)
 
-          items=[
-              q for q in (quiz.get("items") or [])
-              if isinstance(q,dict)
-              and q.get("status")=="published"
-              and q.get("reviewStatus")=="approved"
-              and q.get("verification")=="approved"
-          ]
-          if len(items)!=650:
-              raise SystemExit(f"Erwartet 650 freigegebene Kids-Fragen, gefunden: {len(items)}")
-
-          texts=[]
-          seen=set()
-          for q in items:
-              for value in (prompt(q),norm(q.get("success")),norm(q.get("retry"))):
-                  if value and value not in seen:
-                      seen.add(value); texts.append(value)
-          if len({prompt(q) for q in items})!=650:
-              raise SystemExit("Quiz-Sprachprompts sind nicht eindeutig.")
-          if len(texts)<652:
-              raise SystemExit(f"Zu wenige eindeutige Quiz-Sprachtexte: {len(texts)}")
-
-          def local_from_entry(entry):
-              url=str((entry or {}).get("url") or "").split("?",1)[0]
-              if not url.startswith("/kids/assets/kids-quiz-audio/"):
-                  return None
-              p=ROOT/url.lstrip("/")
-              return p if p.exists() and p.stat().st_size>1200 else None
-
-          reusable={}
-          for text in texts:
-              entry=old_entries.get(text) or {}
-              p=local_from_entry(entry)
-              if p is not None:
-                  reusable[text]=(p,entry)
-
-          print(f"Quizfragen: {len(items)}")
-          print(f"Eindeutige Sprachtexte: {len(texts)}")
-          print(f"Bereits als lokale Serhat-Audios vorhanden: {len(reusable)}")
-          print(f"Neu zu erzeugen: {len(texts)-len(reusable)}")
-
-          lock=threading.Lock()
-          counter={"done":0}
-
           def duration(path):
               out=subprocess.check_output([
                   "ffprobe","-v","error","-show_entries","format=duration",
@@ -150,57 +107,52 @@ jobs:
               ],text=True).strip()
               return float(out)
 
-          def synth(text):
-              digest=hashlib.sha1(text.encode("utf-8")).hexdigest()[:16]
-              target=ASSETS/(digest+".m4a")
-              if target.exists() and target.stat().st_size>1200:
-                  d=duration(target)
-                  if 0.25<=d<=90:
-                      return text,target,d
+          def load_manifest(path):
+              if not path.exists():
+                  return {"entries":{}}
+              try:
+                  return json.loads(path.read_text(encoding="utf-8"))
+              except Exception:
+                  return {"entries":{}}
 
+          def local_from_entry(entry,asset_dir):
+              if str((entry or {}).get("synthesisRevision") or "")!=SYNTHESIS_REVISION:
+                  return None
+              url=str((entry or {}).get("url") or "").split("?",1)[0]
+              expected="/"+str(asset_dir).replace(os.sep,"/")+"/"
+              if not url.startswith(expected):
+                  return None
+              p=ROOT/url.lstrip("/")
+              return p if p.exists() and p.stat().st_size>1200 else None
+
+          lock=threading.Lock()
+
+          def synth(text,profile,asset_dir,serial):
+              prepared=prepare_kids_voice_text(text)
+              digest=hashlib.sha1(
+                  (SYNTHESIS_REVISION+"|"+profile+"|"+text).encode("utf-8")
+              ).hexdigest()[:16]
+              target=asset_dir/(digest+".m4a")
               last=None
               for attempt in range(1,4):
-                  if ELEVEN_KEY:
-                      body=json.dumps({
-                          "text":text,
-                          "model_id":ELEVEN_MODEL,
-                          "voice_settings":{
-                              "stability":0.72,
-                              "similarity_boost":0.78,
-                              "style":0.08,
-                              "use_speaker_boost":True
-                          }
-                      },ensure_ascii=False).encode("utf-8")
-                      req=urllib.request.Request(
-                          "https://api.elevenlabs.io/v1/text-to-speech/"+ELEVEN_VOICE,
-                          data=body,
-                          method="POST",
-                          headers={
-                              "xi-api-key":ELEVEN_KEY,
-                              "Content-Type":"application/json",
-                              "Accept":"audio/mpeg",
-                              "User-Agent":"DAR-Kids-Quiz-Owner-Voice/3"
-                          }
-                      )
-                  else:
-                      body=json.dumps({
-                          "text":text,
-                          "prepared":text,
-                          "profile":"kids_lesson"
-                      },ensure_ascii=False).encode("utf-8")
-                      req=urllib.request.Request(
-                          API+"/generate",
-                          data=body,
-                          method="POST",
-                          headers={
-                              "Origin":ORIGIN,
-                              "Referer":REFERER,
-                              "Content-Type":"application/json",
-                              "Accept":"audio/mpeg",
-                              "X-Admin-Secret":SECRET,
-                              "User-Agent":"DAR-Kids-Quiz-Owner-Voice/3"
-                          }
-                      )
+                  body=json.dumps({
+                      "text":text,
+                      "prepared":prepared,
+                      "profile":profile
+                  },ensure_ascii=False).encode("utf-8")
+                  req=urllib.request.Request(
+                      API+"/generate",
+                      data=body,
+                      method="POST",
+                      headers={
+                          "Origin":ORIGIN,
+                          "Referer":REFERER,
+                          "Content-Type":"application/json",
+                          "Accept":"audio/mpeg",
+                          "X-Admin-Secret":SECRET,
+                          "User-Agent":"DAR-Kids-Owner-Voice/4"
+                      }
+                  )
                   mp3=pathlib.Path("/tmp")/(digest+f"-{attempt}.mp3")
                   try:
                       with urllib.request.urlopen(req,timeout=180) as response:
@@ -217,9 +169,15 @@ jobs:
                       if target.stat().st_size<1200:
                           raise RuntimeError("Encoded clip too small")
                       d=duration(target)
-                      if not (0.25<=d<=90):
+                      if not (0.25<=d<=120):
                           raise RuntimeError(f"Implausible duration: {d:.3f}s")
-                      return text,target,d
+                      with lock:
+                          serial["done"]+=1
+                          print(
+                              f"[{serial['done']}/{serial['total']}] {text[:72]} · {d:.2f}s",
+                              flush=True
+                          )
+                      return text,target,d,prepared
                   except Exception as exc:
                       last=exc
                       target.unlink(missing_ok=True)
@@ -227,80 +185,158 @@ jobs:
                           time.sleep(2*attempt)
               raise RuntimeError(f"Generation failed for {text[:80]!r}: {last}")
 
-          results={}
-          for text,(p,e) in reusable.items():
-              results[text]=(p,float(e.get("durationSeconds") or duration(p)))
+          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts):
+              unique=[]
+              seen=set()
+              for raw in texts:
+                  text=norm(raw)
+                  if text and text not in seen:
+                      seen.add(text)
+                      unique.append(text)
 
-          missing=[t for t in texts if t not in results]
-          with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
-              futures={ex.submit(synth,t):t for t in missing}
-              for fut in concurrent.futures.as_completed(futures):
-                  text,p,d=fut.result()
-                  results[text]=(p,d)
-                  with lock:
-                      counter["done"]+=1
-                      n=counter["done"]
-                  print(f"[{n}/{len(missing)}] {text[:72]} · {d:.2f}s",flush=True)
+              old=load_manifest(manifest_path)
+              old_entries=dict(old.get("entries") or {})
+              results={}
+              prepared_hashes={}
 
-          build_id="serhat-quiz-650-"+time.strftime("%Y%m%d-%H%M%S",time.gmtime())
-          now=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
-          entries={}
-          for text in texts:
-              p,d=results[text]
-              rel="/"+str(p).replace(os.sep,"/")
-              entries[text]={
-                  "url":rel+"?v="+build_id,
-                  "sha256":hashlib.sha256(p.read_bytes()).hexdigest(),
-                  "durationSeconds":round(float(d),3),
+              for text in unique:
+                  entry=old_entries.get(text) or {}
+                  p=local_from_entry(entry,asset_dir)
+                  if p is None:
+                      continue
+                  results[text]=(p,float(entry.get("durationSeconds") or duration(p)))
+                  prepared=prepare_kids_voice_text(text)
+                  prepared_hashes[text]=hashlib.sha256(prepared.encode("utf-8")).hexdigest()
+
+              missing=[text for text in unique if text not in results]
+              print(f"{pack_id}: {len(unique)} Texte · {len(results)} aktuell · {len(missing)} neu")
+              serial={"done":0,"total":len(missing)}
+              with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
+                  futures={ex.submit(synth,text,profile,asset_dir,serial):text for text in missing}
+                  for fut in concurrent.futures.as_completed(futures):
+                      text,p,d,prepared=fut.result()
+                      results[text]=(p,d)
+                      prepared_hashes[text]=hashlib.sha256(prepared.encode("utf-8")).hexdigest()
+
+              build_id=pack_id.lower().replace("_","-")+"-"+time.strftime("%Y%m%d-%H%M%S",time.gmtime())
+              now=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
+              entries={}
+              referenced=set()
+              for text in unique:
+                  p,d=results[text]
+                  referenced.add(p.name)
+                  rel="/"+str(p).replace(os.sep,"/")
+                  entries[text]={
+                      "url":rel+"?v="+build_id,
+                      "sha256":hashlib.sha256(p.read_bytes()).hexdigest(),
+                      "durationSeconds":round(float(d),3),
+                      "preparedTextSha256":prepared_hashes[text],
+                      "synthesisRevision":SYNTHESIS_REVISION,
+                      "voiceProfileId":"serhat-owner-voice-2026",
+                      "sourceVoice":"authorized-owner-voice",
+                      "sourceType":"owner-voice-generated",
+                      "sourceProvider":"DĀR Voice Studio",
+                      "sourceSpeaker":"Serhat Abu Malik",
+                      "qaBy":"automatic-owner-voice-batch-qa",
+                      "qaAt":now
+                  }
+
+              for stale in asset_dir.glob("*.m4a"):
+                  if stale.name not in referenced:
+                      stale.unlink(missing_ok=True)
+
+              manifest={
+                  "schemaVersion":2,
+                  "id":pack_id,
+                  "buildId":build_id,
+                  "updatedAt":now,
+                  "synthesisRevision":SYNTHESIS_REVISION,
                   "voiceProfileId":"serhat-owner-voice-2026",
-                  "sourceVoice":"authorized-owner-voice",
-                  "sourceType":"owner-voice-generated",
-                  "sourceProvider":"DĀR Voice Studio",
-                  "sourceSpeaker":"Serhat Abu Malik",
-                  "qaBy":"automatic-owner-voice-batch-qa",
-                  "qaAt":now
+                  "speaker":"Serhat Abu Malik",
+                  "speechPreparation":"explicit-german-numbers-and-quran-references",
+                  "manualPerClipApprovalRequired":False,
+                  "technicalQaRequired":True,
+                  "systemTtsFallbackAllowed":False,
+                  "entries":entries,
+                  "counts":{**counts,"uniqueSpokenTexts":len(entries)}
               }
+              manifest_path.write_text(
+                  json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",
+                  encoding="utf-8"
+              )
+              for text,entry in entries.items():
+                  p=ROOT/str(entry["url"]).split("?",1)[0].lstrip("/")
+                  if not p.exists() or p.stat().st_size<1200:
+                      raise SystemExit("Audio fehlt: "+str(p))
+              return manifest
 
-          manifest={
-              "schemaVersion":1,
-              "id":"KIDS_QUIZ_OWNER_VOICE_V1",
-              "buildId":build_id,
-              "updatedAt":now,
-              "voiceProfileId":"serhat-owner-voice-2026",
-              "speaker":"Serhat Abu Malik",
-              "manualPerClipApprovalRequired":False,
-              "technicalQaRequired":True,
-              "systemTtsFallbackAllowed":False,
-              "entries":entries,
-              "counts":{
-                  "quizQuestions":len(items),
-                  "questionPrompts":len({prompt(q) for q in items}),
-                  "uniqueSpokenTexts":len(entries)
-              }
-          }
-          MANIFEST.write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          quiz=json.loads(QUIZ.read_text(encoding="utf-8"))
+          quiz_items=[
+              q for q in (quiz.get("items") or [])
+              if isinstance(q,dict)
+              and q.get("status")=="published"
+              and q.get("reviewStatus")=="approved"
+              and q.get("verification")=="approved"
+          ]
+          if len(quiz_items)!=650:
+              raise SystemExit(f"Erwartet 650 freigegebene Kids-Fragen, gefunden: {len(quiz_items)}")
+          prompts=[quiz_prompt(q) for q in quiz_items]
+          if len(set(prompts))!=650:
+              raise SystemExit("Quiz-Sprachprompts sind nicht eindeutig.")
+          quiz_texts=[]
+          for q in quiz_items:
+              quiz_texts.extend((quiz_prompt(q),norm(q.get("success")),norm(q.get("retry"))))
+          quiz_texts.append("Sehr gut. Du hast das Quiz geschafft.")
 
-          if manifest["counts"]["quizQuestions"]!=650 or manifest["counts"]["questionPrompts"]!=650:
+          quiz_manifest=build_pack(
+              texts=quiz_texts,
+              manifest_path=QUIZ_MANIFEST,
+              asset_dir=QUIZ_ASSETS,
+              profile="quiz",
+              pack_id="KIDS_QUIZ_OWNER_VOICE_V2",
+              counts={"quizQuestions":len(quiz_items),"questionPrompts":len(set(prompts))}
+          )
+          if quiz_manifest["counts"]["quizQuestions"]!=650 or quiz_manifest["counts"]["questionPrompts"]!=650:
               raise SystemExit("650er Quiz-Voice-Pack unvollständig.")
-          if manifest["counts"]["uniqueSpokenTexts"]<652:
-              raise SystemExit("Quiz-Voice-Manifest unvollständig.")
-          for text,entry in entries.items():
-              p=ROOT/str(entry["url"]).split("?",1)[0].lstrip("/")
-              if not p.exists() or p.stat().st_size<1200:
-                  raise SystemExit("Audio fehlt: "+str(p))
-          print("Vollständiger Serhat-Quiz-Pack:",manifest["counts"])
+
+          dua=json.loads(DUA.read_text(encoding="utf-8"))
+          dua_items=[
+              d for d in (dua.get("items") or [])
+              if isinstance(d,dict) and d.get("verification")=="verified"
+          ]
+          if not dua_items:
+              raise SystemExit("Keine freigegebenen Kids-Duʿāʾ gefunden.")
+          dua_texts=[norm(str(d.get("childPrompt") or "")+" "+str(d.get("meaning") or "")) for d in dua_items]
+          dua_texts.extend([
+              "Richtig. Sehr gut.",
+              "Noch nicht. Hör die Erklärung noch einmal."
+          ])
+          dua_manifest=build_pack(
+              texts=dua_texts,
+              manifest_path=DUA_MANIFEST,
+              asset_dir=DUA_ASSETS,
+              profile="kids_story",
+              pack_id="KIDS_DUA_OWNER_VOICE_V1",
+              counts={"duaItems":len(dua_items),"explanationPrompts":len(dua_items)}
+          )
+          if dua_manifest["counts"]["explanationPrompts"]!=len(dua_items):
+              raise SystemExit("Duʿāʾ-Voice-Pack unvollständig.")
+
+          print("Quiz voice pack:",quiz_manifest["counts"])
+          print("Dua voice pack:",dua_manifest["counts"])
+          print("Synthesis revision:",SYNTHESIS_REVISION)
           PY
 
-      - name: Commit complete quiz owner voice pack
+      - name: Commit complete Kids owner voice packs
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add kids/data/quiz-audio.json kids/assets/kids-quiz-audio
+          git add             kids/data/quiz-audio.json             kids/data/dua-audio.json             kids/assets/kids-quiz-audio             kids/assets/kids-dua-audio
           if git diff --cached --quiet; then
-            echo "Quiz owner voice pack already current."
+            echo "Kids owner voice packs already current."
             exit 0
           fi
-          git commit -m "Kids: publish complete 650-question Serhat quiz voice pack"
+          git commit -m "Kids: refresh Quiz and Dua Serhat voice packs"
           git pull --rebase origin main
           git push origin HEAD:main
