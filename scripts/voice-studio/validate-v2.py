@@ -572,6 +572,14 @@ def main():
             if required not in index_source: fail("mobile content shell marker missing from index: "+required)
         for required in ("csMobileBack","html.mobile-content-mode .content-studio-nav","html.mobile-content-mode .cs-fast-actions"):
             if required not in content_source: fail("mobile content studio responsive marker missing: "+required)
+        for required in ("pendingPronunciationWrap","registerPronunciationIssues","pronunciationWarnings","compatibilityFallback"):
+            if required not in mobile_source: fail("mobile non-blocking pronunciation marker missing: "+required)
+        if 'return toast("Erst die markierten Wörter prüfen.")' in mobile_source:
+            fail("mobile pronunciation analysis must not block interactive generation")
+        if 'raise PronunciationReviewRequired(unresolved)' in engine_source:
+            fail("engine unresolved pronunciation terms must not block interactive generation")
+        if '"pronunciation_warning_nonblocking"' not in engine_source:
+            fail("engine non-blocking pronunciation warning audit marker missing")
 
     integration_paths=[]
     kids_admin_js=root/"cloudflare/kids-content-admin.js"
