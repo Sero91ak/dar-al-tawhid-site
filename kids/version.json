@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v94-historical-story-layout1167",
-  "label": "KIDS · V1.07.95",
-  "releasedAt": "2026-10-05T19:44:00+02:00",
-  "note": "Story-Auswahl v1167: Der visuelle Stand unmittelbar vor den simplify/unify/compact-Umbauten von 16:18 Uhr wurde als Grundlage wiederhergestellt. Propheten nutzen wieder ihren eigenen vollflächigen Szenenaufbau mit langem dunklen Verlauf und ca. 176px Phone-Höhe. Ṣaḥābah und Ṣaḥābiyyāt nutzen wieder die deutlich größeren historischen Szenenkarten mit ca. 198px Phone-Höhe, großer linker Bildfläche, weichem Übergang, stabiler Textzone und automatischer Mehrhöhe für lange Namen. Tablets: Propheten ca. 210px, Ṣaḥābah/Ṣaḥābiyyāt ca. 228px. Keine Änderung an Geschichten-Startseite, Detailseiten, Player, Audio oder Mitlesen.",
+  "buildId": "kids-shell-v95-voice-master-sync1168",
+  "label": "KIDS · V1.07.96",
+  "releasedAt": "2026-10-05T23:31:00+02:00",
+  "note": "Voice/Kids-Mastertext-Synchronisierung: Propheten (25) und Ṣaḥābah (10) vollständig geprüft und bereits textgleich; 9 abweichende Ṣaḥābiyyāt-Fassungen auf den verbindlichen Voice-Mastertext synchronisiert. Kids-Lesetext, Hören & Mitlesen und Audio-Grundlage verwenden jetzt dieselbe kanonische Textquelle. Release-Guard blockiert künftig Abweichungen zwischen masterStoryText und Altersfassungen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1167",
+    "serviceWorkerCache": "v1168",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -498,7 +498,7 @@
     "quizArtworkLive": true,
     "duaQuizArtworkPlacement": "direct-in-respective-modal-sections",
     "sahabiyyatDistinctArtworkCount": 14,
-    "sahabiyyatDataVersion": 25,
+    "sahabiyyatDataVersion": 26,
     "sahabiyyatArtworkRelease": "v1127-existing-four-photoreal",
     "sahabiyyatArtworkCount": 14,
     "sahabiyyatLocalArtworkCount": 14,
@@ -541,12 +541,12 @@
       "safiyyah",
       "maymunah"
     ],
-    "storyPolicyVersion": 1,
+    "storyPolicyVersion": 2,
     "storyHubRegistryVersion": 4,
     "masterStoryTextAcrossAges": true,
     "storyTextAgeAdaptive": false,
     "ageAdaptivePresentationOnly": true,
-    "masterStorySelection": "longest-complete-version",
+    "masterStorySelection": "voice-masterStoryText-first-fallback-longest-complete-version",
     "futureStoryCategoriesUseMasterText": true,
     "sahabiyyatDetailSingleTitle": true,
     "universalPlayerSingleTitle": true,
@@ -558,7 +558,7 @@
     "sahabiyyatLongBiographyRelease": "v1130",
     "voiceStudioStoryLengthVisible": true,
     "futureBiographyMinimumMasterWords": 850,
-    "sahabiyyatMasterWordRange": "884–993",
+    "sahabiyyatMasterWordRange": "806–960",
     "sahabiyyatSameMasterAllAges": true,
     "ownerVoicePlayback": "preload-current-feedback-next-v3",
     "ownerVoiceProviderState": "generation-pipeline-ready-provider-secret-required",
@@ -692,8 +692,12 @@
     "prophetLibraryHistoricalLayout": "full-bleed-scene-176-phone-210-tablet",
     "sahabaLibraryHistoricalLayout": "large-left-scene-198-phone-228-tablet",
     "sahabiyyatLibraryHistoricalLayout": "large-left-scene-198-phone-228-tablet",
-    "storyLibraryHistoricalReference": "2026-10-05T16:16+02? pre simplify/unify/compact sequence"
+    "storyLibraryHistoricalReference": "2026-10-05T16:16+02? pre simplify/unify/compact sequence",
+    "voiceKidsTextSync": "strict-master-v1",
+    "voiceKidsReadAlongTextParity": true,
+    "storyFollowReaderTextSource": "same-master-as-voice-studio-v1",
+    "storyReleaseGuardMasterParity": true
   },
   "updatedAt": "2026-10-05",
-  "deployTrigger": "2026-10-05T21:17:00+02:00"
+  "deployTrigger": "2026-10-05T23:31:00+02:00"
 }
