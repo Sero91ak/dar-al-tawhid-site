@@ -1,0 +1,67 @@
+name: Optimize Hadith CGI v1267
+
+on:
+  push:
+    paths:
+      - .github/workflows/optimize-hadith-cgi-v1267.yml
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Convert Hadith CGI assets to optimized WebP
+        run: |
+          node <<'NODE'
+          const sharp=require('sharp');
+          const fs=require('fs');
+          (async()=>{
+            await sharp('test/assets/ilm/hadith-library-overview-v1266.png')
+              .resize({width:1920,withoutEnlargement:true})
+              .webp({quality:84,effort:6})
+              .toFile('test/assets/ilm/hadith-library-overview-v1267.webp');
+            await sharp('test/assets/ilm/hadith-library-study-v1266.png')
+              .resize({width:1920,withoutEnlargement:true})
+              .webp({quality:84,effort:6})
+              .toFile('test/assets/ilm/hadith-library-study-v1267.webp');
+            for(const f of ['test/index.html','test/assets/ilm-hadith-v1243.css']){
+              let s=fs.readFileSync(f,'utf8');
+              s=s.split('/test/assets/ilm/hadith-library-overview-v1266.png').join('/test/assets/ilm/hadith-library-overview-v1267.webp');
+              s=s.split('/test/assets/ilm/hadith-library-study-v1266.png').join('/test/assets/ilm/hadith-library-study-v1267.webp');
+              fs.writeFileSync(f,s);
+            }
+            fs.rmSync('test/assets/ilm/hadith-library-overview-v1266.png');
+            fs.rmSync('test/assets/ilm/hadith-library-study-v1266.png');
+            const vf='test/version.json';
+            const v=JSON.parse(fs.readFileSync(vf,'utf8'));
+            v.buildId='app-shell-v1267';
+            v.appBuildId='app-shell-v1267';
+            v.note='v1267 · Historische Ḥadīṯ-Hintergründe verlustarm als optimierte WebP-App-Assets ausgeliefert; gleiche Bildqualität bei deutlich schnellerem Laden.';
+            v.updatedAt=new Date().toISOString();
+            fs.writeFileSync(vf,JSON.stringify(v,null,2)+'\n');
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+
+      - name: Commit optimized assets and remove one-time workflow
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/optimize-hadith-cgi-v1267.yml
+          git add -A test/index.html test/version.json test/assets/ilm-hadith-v1243.css test/assets/ilm/
+          git commit -m "test: optimize Hadith CGI assets v1267"
+          git pull --rebase origin main
+          git push origin HEAD:main
