@@ -119,7 +119,7 @@ jobs:
                               "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
                               "-i", str(tmp_mp3),
                               "-ac", "1", "-ar", "48000",
-                              "-c:a", "aac", "-b:a", "64k",
+                              "-c:a", "aac", "-b:a", "56k",
                               "-movflags", "+faststart",
                               str(target)
                           ],
