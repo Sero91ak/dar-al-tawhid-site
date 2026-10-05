@@ -1,0 +1,86 @@
+name: App Media R2 Inventory and Sync
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/**'
+      - 'kids/assets/**'
+      - 'apple-tv/**'
+      - 'cloudflare/media-r2.js'
+      - 'cloudflare/site-router.js'
+      - '.github/workflows/sync-app-media-r2.yml'
+  workflow_dispatch:
+    inputs:
+      upload:
+        description: "Upload large optimized media to dar-app-media R2"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref || 'main' }}
+          fetch-depth: 1
+
+      - name: Build large-media inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          roots=[Path("assets"),Path("kids/assets"),Path("apple-tv")]
+          image={".jpg",".jpeg",".png",".webp",".avif"}
+          audio={".m4a",".mp3",".aac",".ogg",".wav"}
+          video={".mp4"}
+          rows=[]
+          for root in roots:
+              if not root.exists(): continue
+              for p in root.rglob("*"):
+                  if not p.is_file(): continue
+                  ext=p.suffix.lower()
+                  size=p.stat().st_size
+                  threshold=None
+                  kind=None
+                  if ext in image: threshold=700_000; kind="image"
+                  elif ext in audio: threshold=1_000_000; kind="audio"
+                  elif ext in video: threshold=2_000_000; kind="video"
+                  if threshold is not None and size>=threshold:
+                      rows.append((size,kind,str(p)))
+          rows.sort(reverse=True)
+          total=sum(x[0] for x in rows)
+          Path("/tmp/r2-media-list.txt").write_text("\n".join(x[2] for x in rows)+("\n" if rows else ""),encoding="utf-8")
+          print(f"R2_CANDIDATES={len(rows)}")
+          print(f"R2_CANDIDATE_BYTES={total}")
+          print(f"R2_CANDIDATE_MB={total/1024/1024:.2f}")
+          for size,kind,path in rows[:100]:
+              print(f"{size/1024/1024:9.2f} MB  {kind:5s}  {path}")
+          PY
+
+      - name: Upload candidates to R2
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.upload }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${CLOUDFLARE_API_TOKEN:-}" || { echo "::error::CLOUDFLARE_API_TOKEN fehlt"; exit 1; }
+          test -n "${CLOUDFLARE_ACCOUNT_ID:-}" || { echo "::error::CLOUDFLARE_ACCOUNT_ID fehlt"; exit 1; }
+          npm install --no-save wrangler@latest >/dev/null
+          if ! npx wrangler r2 bucket list --json | grep -q '"name":"dar-app-media"'; then
+            npx wrangler r2 bucket create dar-app-media
+          fi
+          while IFS= read -r file; do
+            [ -n "$file" ] || continue
+            mime="$(file -b --mime-type "$file")"
+            echo "R2 upload: $file ($mime)"
+            npx wrangler r2 object put "dar-app-media/$file"               --file "$file"               --content-type "$mime"               --cache-control "public, max-age=31536000, immutable"               --remote               --force
+          done < /tmp/r2-media-list.txt
