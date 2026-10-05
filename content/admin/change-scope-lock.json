@@ -6997,7 +6997,11 @@
         "test/assets/",
         "ios/",
         "apple-tv/",
-        "voice-studio/"
+        "voice-studio/",
+        "cloudflare/media-r2.js",
+        "cloudflare/site-router.js",
+        "wrangler.toml",
+        ".github/workflows/sync-app-media-r2.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     }
