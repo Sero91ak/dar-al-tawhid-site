@@ -1,0 +1,672 @@
+/* DAR TEST · REMAINING AREA AUTHORITY · v1293
+   Test-App only. Brings utility/service routes into the same quiet editorial
+   system as Qur'an, Ilm, Hadith, Dua, Quiz, More and Prayer. */
+
+:root{
+  --dar-v1293-max: 980px;
+  --dar-v1293-reader: 820px;
+  --dar-v1293-line: color-mix(in srgb,var(--gold2,var(--accent,#b89b58)) 24%,var(--line,transparent));
+  --dar-v1293-line-soft: color-mix(in srgb,var(--gold2,var(--accent,#b89b58)) 13%,var(--line,transparent));
+  --dar-v1293-surface: color-mix(in srgb,var(--card,var(--bg)) 92%,transparent);
+  --dar-v1293-soft: color-mix(in srgb,var(--card,var(--bg)) 76%,transparent);
+  --dar-v1293-muted: var(--muted,#999);
+  --dar-v1293-title: var(--text,var(--cream,#eee));
+  --dar-v1293-accent: var(--gold2,var(--accent,#c3a86b));
+}
+
+body:is(
+  .is-calendar-route,
+  .is-ramadan-route,
+  .is-zakat-route,
+  .is-account-route,
+  .is-settings-route,
+  .is-news-route,
+  .is-recent-route,
+  .is-saved-route,
+  .is-about-route,
+  .is-notifications-route
+) #appView.view{
+  background:transparent!important;
+  box-shadow:none!important;
+  border:0!important;
+  width:100%!important;
+  max-width:none!important;
+  padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(14px,env(safe-area-inset-right,0px))!important;
+  padding-bottom:calc(var(--bottom-navigation-height,72px) + env(safe-area-inset-bottom,0px) + 28px)!important;
+}
+
+body:is(
+  .is-ramadan-route,
+  .is-zakat-route,
+  .is-account-route,
+  .is-settings-route,
+  .is-news-route,
+  .is-recent-route,
+  .is-saved-route,
+  .is-about-route,
+  .is-notifications-route
+) #appView > .view-head{
+  width:min(var(--dar-v1293-max),100%)!important;
+  margin:0 auto 22px!important;
+  padding:18px 0 17px!important;
+  border:0!important;
+  border-bottom:1px solid var(--dar-v1293-line)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  position:relative!important;
+  overflow:visible!important;
+}
+
+body:is(
+  .is-ramadan-route,
+  .is-zakat-route,
+  .is-account-route,
+  .is-settings-route,
+  .is-news-route,
+  .is-recent-route,
+  .is-saved-route,
+  .is-about-route,
+  .is-notifications-route
+) #appView > .view-head::before{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  bottom:-1px!important;
+  width:92px!important;
+  height:1px!important;
+  background:var(--dar-v1293-accent)!important;
+  opacity:.78!important;
+  display:block!important;
+}
+
+body:is(
+  .is-ramadan-route,
+  .is-zakat-route,
+  .is-account-route,
+  .is-settings-route,
+  .is-news-route,
+  .is-recent-route,
+  .is-saved-route,
+  .is-about-route,
+  .is-notifications-route
+) #appView > .view-head .eyebrow{
+  color:var(--dar-v1293-accent)!important;
+  font-size:9.5px!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+  font-weight:800!important;
+  margin-bottom:8px!important;
+}
+
+body:is(
+  .is-ramadan-route,
+  .is-zakat-route,
+  .is-account-route,
+  .is-settings-route,
+  .is-news-route,
+  .is-recent-route,
+  .is-saved-route,
+  .is-about-route,
+  .is-notifications-route
+) #appView > .view-head h2{
+  color:var(--dar-v1293-title)!important;
+  font-family:var(--serif)!important;
+  font-size:clamp(2rem,7vw,3.65rem)!important;
+  line-height:1.02!important;
+  letter-spacing:-.018em!important;
+  margin:0!important;
+  text-wrap:balance;
+}
+
+body:is(
+  .is-ramadan-route,
+  .is-zakat-route,
+  .is-account-route,
+  .is-settings-route,
+  .is-news-route,
+  .is-recent-route,
+  .is-saved-route,
+  .is-about-route,
+  .is-notifications-route
+) #appView > .view-head .view-desc{
+  color:var(--dar-v1293-muted)!important;
+  max-width:46rem!important;
+  margin-top:9px!important;
+  font-size:13px!important;
+  line-height:1.55!important;
+}
+
+/* Calendar: turn the old stacked-card page into a calm timeline. */
+body.is-calendar-route .calendar-premium-page{
+  width:min(var(--dar-v1293-max),100%)!important;
+  margin:0 auto!important;
+  padding:4px 0 calc(var(--bottom-navigation-height,72px) + env(safe-area-inset-bottom,0px) + 24px)!important;
+  background:transparent!important;
+}
+body.is-calendar-route .cal-tl-head{
+  margin:0 0 16px!important;
+  padding:18px 0 16px!important;
+  border-bottom:1px solid var(--dar-v1293-line)!important;
+}
+body.is-calendar-route .cal-tl-head-top,
+body.is-calendar-route .cal-tl-today-row{
+  gap:10px!important;
+}
+body.is-calendar-route .cal-tl-title{
+  font-size:clamp(2rem,7vw,3.5rem)!important;
+  line-height:1.02!important;
+  letter-spacing:-.018em!important;
+}
+body.is-calendar-route .cal-tl-filters-wrap{
+  margin:0 -14px 18px!important;
+  padding:0 14px 3px!important;
+  overflow-x:auto!important;
+  scrollbar-width:none!important;
+  -webkit-overflow-scrolling:touch;
+}
+body.is-calendar-route .cal-tl-filters-wrap::-webkit-scrollbar{display:none}
+body.is-calendar-route .cal-tl-filters{
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  width:max-content!important;
+  min-width:100%!important;
+  gap:7px!important;
+}
+body.is-calendar-route .cal-tl-filter{
+  min-height:40px!important;
+  padding:8px 13px!important;
+  border-radius:999px!important;
+  white-space:nowrap!important;
+  box-shadow:none!important;
+}
+body.is-calendar-route .cal-tl-highlight{
+  border:0!important;
+  border-left:2px solid var(--dar-v1293-accent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:12px 0 12px 14px!important;
+  margin:4px 0 22px!important;
+}
+body.is-calendar-route .cal-tl-month{
+  border:0!important;
+  border-top:1px solid var(--dar-v1293-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  margin:0!important;
+}
+body.is-calendar-route .cal-tl-month:last-child{
+  border-bottom:1px solid var(--dar-v1293-line-soft)!important;
+}
+body.is-calendar-route .cal-tl-month-toggle{
+  min-height:58px!important;
+  padding:12px 2px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-calendar-route .cal-tl-month-body{
+  padding:0 0 12px!important;
+}
+body.is-calendar-route .cal-tl-item{
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--dar-v1293-line-soft) 70%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:13px 0!important;
+}
+
+/* Ramadan: one seasonal editorial page, not several detached cards. */
+body.is-ramadan-route .ramadan-panel,
+body.is-ramadan-route .calendar-panel,
+body.is-ramadan-route .section-block{
+  width:min(var(--dar-v1293-max),100%)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+body.is-ramadan-route .ramadan-panel{
+  border:0!important;
+  border-top:1px solid var(--dar-v1293-line)!important;
+  border-bottom:1px solid var(--dar-v1293-line)!important;
+  border-radius:0!important;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--dar-v1293-accent) 8%,transparent),transparent 45%)!important;
+  box-shadow:none!important;
+  padding:20px 0!important;
+  margin-bottom:22px!important;
+}
+body.is-ramadan-route .ramadan-panel h3{
+  color:var(--dar-v1293-title)!important;
+  font-size:clamp(1.8rem,6vw,2.7rem)!important;
+}
+body.is-ramadan-route .ramadan-countdown{
+  color:var(--dar-v1293-accent)!important;
+  font-size:clamp(2.15rem,9vw,4.4rem)!important;
+  letter-spacing:-.025em!important;
+}
+body.is-ramadan-route .suhur-iftar-row{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0!important;
+  margin:18px 0 10px!important;
+  border-top:1px solid var(--dar-v1293-line-soft)!important;
+  border-bottom:1px solid var(--dar-v1293-line-soft)!important;
+}
+body.is-ramadan-route .suhur-iftar-row > div{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:14px 10px!important;
+}
+body.is-ramadan-route .suhur-iftar-row > div + div{
+  border-left:1px solid var(--dar-v1293-line-soft)!important;
+}
+body.is-ramadan-route .calendar-panel{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin-bottom:24px!important;
+}
+body.is-ramadan-route .event-list{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+}
+body.is-ramadan-route .event-card{
+  border:0!important;
+  border-top:1px solid var(--dar-v1293-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:14px 2px!important;
+}
+body.is-ramadan-route .section-block{
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin-top:26px!important;
+}
+body.is-ramadan-route .section-head{
+  padding-bottom:10px!important;
+  border-bottom:1px solid var(--dar-v1293-line)!important;
+}
+body.is-ramadan-route .post-grid{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:4px!important;
+  grid-template-columns:none!important;
+}
+
+/* Zakat: preserve calculator logic, reduce visual nesting. */
+body.is-zakat-route .zakat-shell{
+  width:min(var(--dar-v1293-max),100%)!important;
+  max-width:var(--dar-v1293-max)!important;
+  margin:0 auto!important;
+  padding:0!important;
+}
+body.is-zakat-route .app-card--zakat,
+body.is-zakat-route .zakat-result-strip,
+body.is-zakat-route .zakat-source-card{
+  box-shadow:none!important;
+}
+body.is-zakat-route .app-card--zakat{
+  border:0!important;
+  border-top:1px solid var(--dar-v1293-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding:18px 0!important;
+}
+body.is-zakat-route .app-card--zakat:last-of-type{
+  border-bottom:1px solid var(--dar-v1293-line-soft)!important;
+}
+body.is-zakat-route .zakat-result-strip{
+  border-radius:18px!important;
+  border:1px solid var(--dar-v1293-line)!important;
+  background:color-mix(in srgb,var(--dar-v1293-accent) 7%,var(--dar-v1293-surface))!important;
+}
+body.is-zakat-route .zakat-form-grid{
+  gap:12px!important;
+}
+body.is-zakat-route .zakat-actions{
+  position:relative!important;
+  z-index:1;
+}
+
+/* Account + Saved + Recent: line-based catalog, no card wall. */
+body.is-account-route .account-panel,
+body.is-saved-route .account-panel{
+  width:min(var(--dar-v1293-reader),100%)!important;
+  margin:0 auto 24px!important;
+  padding:20px 0!important;
+  border:0!important;
+  border-top:1px solid var(--dar-v1293-line)!important;
+  border-bottom:1px solid var(--dar-v1293-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-account-route .account-summary{
+  gap:0!important;
+  border-top:1px solid var(--dar-v1293-line-soft)!important;
+  border-bottom:1px solid var(--dar-v1293-line-soft)!important;
+}
+body.is-account-route .account-summary-card{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:13px 10px!important;
+}
+body.is-account-route .account-summary-card + .account-summary-card{
+  border-left:1px solid var(--dar-v1293-line-soft)!important;
+}
+body.is-account-route .account-form input{
+  min-height:54px!important;
+  border-radius:14px!important;
+  background:var(--dar-v1293-soft)!important;
+  box-shadow:none!important;
+}
+body:is(.is-recent-route,.is-saved-route) .post-grid{
+  width:min(var(--dar-v1293-max),100%)!important;
+  margin:0 auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:4px!important;
+  grid-template-columns:none!important;
+}
+body:is(.is-recent-route,.is-saved-route) .post-card,
+body:is(.is-recent-route,.is-saved-route) .post-row{
+  border:0!important;
+  border-bottom:1px solid var(--dar-v1293-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* News/current focus. */
+body.is-news-route .current-focus{
+  width:min(var(--dar-v1293-max),100%)!important;
+  margin:0 auto!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-news-route .current-focus-list{
+  gap:0!important;
+}
+body.is-news-route .current-focus-row{
+  min-height:72px!important;
+  border:0!important;
+  border-bottom:1px solid var(--dar-v1293-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:12px 2px!important;
+  transform:none!important;
+}
+
+/* Settings / notification center. */
+body:is(.is-settings-route,.is-notifications-route) .dar-setup-hub,
+body:is(.is-settings-route,.is-notifications-route) .settings-one-page,
+body:is(.is-settings-route,.is-notifications-route) .notification-center-page{
+  width:min(var(--dar-v1293-max),100%)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+body.is-settings-route .dar-setup-hub{
+  border:0!important;
+  border-bottom:1px solid var(--dar-v1293-line)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+body.is-settings-route .settings-section-label{
+  margin-top:26px!important;
+  padding:0 0 10px!important;
+  border-bottom:1px solid var(--dar-v1293-line)!important;
+}
+body.is-settings-route :is(
+  .theme-switch-panel,
+  .app-font-panel,
+  .font-slider-panel,
+  .reading-font-panel,
+  .settings-live-row,
+  .notification-section,
+  .notification-hero
+){
+  box-shadow:none!important;
+}
+body.is-settings-route .notification-section{
+  border:0!important;
+  border-top:1px solid var(--dar-v1293-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+body.is-settings-route .notification-section:last-of-type{
+  border-bottom:1px solid var(--dar-v1293-line-soft)!important;
+}
+body.is-settings-route .settings-live-row{
+  border-radius:14px!important;
+}
+
+/* About: retain meaning, reduce decorative card weight. */
+body.is-about-route .about-page--smart{
+  width:min(var(--dar-v1293-reader),100%)!important;
+  margin:0 auto 20px!important;
+  gap:14px!important;
+}
+body.is-about-route .about-smart-overview{
+  gap:0!important;
+  border-top:1px solid var(--dar-v1293-line-soft)!important;
+  border-bottom:1px solid var(--dar-v1293-line-soft)!important;
+}
+body.is-about-route .about-smart-chip{
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:11px 6px!important;
+}
+body.is-about-route .about-smart-chip + .about-smart-chip{
+  border-left:1px solid var(--dar-v1293-line-soft)!important;
+}
+body.is-about-route .about-smart-list{
+  gap:0!important;
+}
+body.is-about-route .about-smart-row{
+  border:0!important;
+  border-bottom:1px solid var(--dar-v1293-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  padding:15px 2px!important;
+}
+
+/* Shared control behavior. */
+body:is(
+  .is-calendar-route,
+  .is-ramadan-route,
+  .is-zakat-route,
+  .is-account-route,
+  .is-settings-route,
+  .is-news-route,
+  .is-recent-route,
+  .is-saved-route,
+  .is-about-route,
+  .is-notifications-route
+) :is(button,input,select,a){
+  -webkit-tap-highlight-color:transparent;
+}
+
+body:is(
+  .is-calendar-route,
+  .is-ramadan-route,
+  .is-zakat-route,
+  .is-account-route,
+  .is-settings-route,
+  .is-news-route,
+  .is-recent-route,
+  .is-saved-route,
+  .is-about-route,
+  .is-notifications-route
+) button:focus-visible,
+body:is(
+  .is-calendar-route,
+  .is-ramadan-route,
+  .is-zakat-route,
+  .is-account-route,
+  .is-settings-route,
+  .is-news-route,
+  .is-recent-route,
+  .is-saved-route,
+  .is-about-route,
+  .is-notifications-route
+) input:focus-visible,
+body:is(
+  .is-calendar-route,
+  .is-ramadan-route,
+  .is-zakat-route,
+  .is-account-route,
+  .is-settings-route,
+  .is-news-route,
+  .is-recent-route,
+  .is-saved-route,
+  .is-about-route,
+  .is-notifications-route
+) select:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--dar-v1293-accent) 58%,transparent)!important;
+  outline-offset:2px!important;
+}
+
+@media(max-width:760px){
+  body:is(
+    .is-calendar-route,
+    .is-ramadan-route,
+    .is-zakat-route,
+    .is-account-route,
+    .is-settings-route,
+    .is-news-route,
+    .is-recent-route,
+    .is-saved-route,
+    .is-about-route,
+    .is-notifications-route
+  ) #appView.view{
+    padding-left:max(12px,env(safe-area-inset-left,0px))!important;
+    padding-right:max(12px,env(safe-area-inset-right,0px))!important;
+  }
+
+  body.is-calendar-route .calendar-premium-page{
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+  body.is-calendar-route .cal-tl-filters-wrap{
+    margin-left:-12px!important;
+    margin-right:-12px!important;
+    padding-left:12px!important;
+    padding-right:12px!important;
+  }
+  body.is-ramadan-route .suhur-iftar-row{
+    grid-template-columns:1fr 1fr!important;
+  }
+  body.is-ramadan-route .prayer-action-row{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:8px!important;
+  }
+  body.is-account-route .account-form{
+    grid-template-columns:1fr!important;
+  }
+  body.is-account-route .account-summary{
+    grid-template-columns:1fr!important;
+    border-bottom:0!important;
+  }
+  body.is-account-route .account-summary-card{
+    border-left:0!important;
+    border-bottom:1px solid var(--dar-v1293-line-soft)!important;
+  }
+  body.is-about-route .about-smart-overview{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body.is-about-route .about-smart-chip:nth-child(3){
+    border-left:0!important;
+    border-top:1px solid var(--dar-v1293-line-soft)!important;
+  }
+  body.is-about-route .about-smart-chip:nth-child(4){
+    border-top:1px solid var(--dar-v1293-line-soft)!important;
+  }
+  body.is-settings-route .notification-prayer-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+@media(min-width:761px) and (max-width:1180px){
+  body:is(
+    .is-calendar-route,
+    .is-ramadan-route,
+    .is-zakat-route,
+    .is-account-route,
+    .is-settings-route,
+    .is-news-route,
+    .is-recent-route,
+    .is-saved-route,
+    .is-about-route,
+    .is-notifications-route
+  ) #appView.view{
+    padding-left:max(24px,env(safe-area-inset-left,0px))!important;
+    padding-right:max(24px,env(safe-area-inset-right,0px))!important;
+  }
+  body.is-account-route .account-panel,
+  body.is-saved-route .account-panel,
+  body.is-about-route .about-page--smart{
+    max-width:860px!important;
+  }
+}
+
+@media(min-width:1181px){
+  body:is(
+    .is-calendar-route,
+    .is-ramadan-route,
+    .is-zakat-route,
+    .is-account-route,
+    .is-settings-route,
+    .is-news-route,
+    .is-recent-route,
+    .is-saved-route,
+    .is-about-route,
+    .is-notifications-route
+  ) #appView.view{
+    padding-left:clamp(28px,4vw,56px)!important;
+    padding-right:clamp(28px,4vw,56px)!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  body:is(
+    .is-calendar-route,
+    .is-ramadan-route,
+    .is-zakat-route,
+    .is-account-route,
+    .is-settings-route,
+    .is-news-route,
+    .is-recent-route,
+    .is-saved-route,
+    .is-about-route,
+    .is-notifications-route
+  ) *{
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+    animation-duration:.01ms!important;
+  }
+}
