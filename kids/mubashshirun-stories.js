@@ -145,10 +145,13 @@ function sourceHtml(item){
 }
 function renderCards(){
   const grid=$("#msGrid");if(!grid)return;
+  const libraryPage=$("#msLibraryPage");if(libraryPage)libraryPage.dataset.age=age();
   grid.innerHTML=items.map((item,index)=>{
     const t=textFor(item),src=art(item);
     const rawSummary=String(item.summary||"").replace(/\s+/g," ").trim();
-    const shortSummary=rawSummary.length>92?(rawSummary.slice(0,89).replace(/\s+\S*$/,"")+"…"):rawSummary;
+    const leadSummary=rawSummary.split(/\s+[–—]\s+|;\s+/)[0].trim();
+    const cardSummary=(leadSummary.length>=14&&leadSummary.length<=72)?leadSummary:rawSummary;
+    const shortSummary=cardSummary.length>78?(cardSummary.slice(0,75).replace(/\s+\S*$/,"")+"…"):cardSummary;
     return '<button class="ms-story-row" type="button" data-ms-id="'+esc(item.id)+'">'+
       '<span class="ms-row-visual" aria-hidden="true">'+
         (src?'<img src="'+esc(src)+'" alt="" data-ms-cover-id="'+esc(item.id)+'" decoding="async" loading="'+(index<4?"eager":"lazy")+'">':'')+
@@ -209,6 +212,7 @@ function ensureUi(){
 
 
 
+      '<div class="story-list-head"><span>DIE ZEHN GEFÄHRTEN</span><strong>Die zehn Mubaschschirūn</strong><small>Wähle eine Geschichte aus.</small></div>'+
       '<div id="msGrid" class="ms-list"></div>'+
     '</div>';
   document.body.appendChild(page);
