@@ -13,7 +13,7 @@ function normalizeKidsStoryText(value){
 }
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.mubashshirunStory.done.";
-let items=[],libraryPolicy={},active=null,activeText="",coverResizeObserver=null,followReader=null;
+let items=[],libraryPolicy={},active=null,activeText="",playing=false,busy=false,coverResizeObserver=null,followReader=null;\nconst audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const age=()=>String($(".app")?.getAttribute("data-age")||"6–8");
@@ -21,11 +21,14 @@ const ageKey=()=>age().replace("–","-");
 function isAudioOnlyAge(){return age()==="4–5"}
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){
-  if(active&&(v==="listen"||v==="both")){openUniversalAudio();return}
   try{localStorage.setItem(MODE_KEY,v)}catch(_){}
-  renderModeButtons();applyMode()
-}
-function textFor(item){const policy=window.DARKidsStoryPolicy;if(policy?.canonicalText)return normalizeKidsStoryText(policy.canonicalText(item));const s=item?.scripts||{};const c=[s["4-5"],s["6-8"],s["9-10"]].map(v=>String(v||"").trim()).filter(Boolean).sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length);return normalizeKidsStoryText(c[0]||"")}
+  renderModeButtons();applyMode();
+  if(active&&v==="both"&&!isAudioOnlyAge()){
+    if(typeof followReader?.openReadAlong==="function")followReader.openReadAlong();
+    else followReader?.open?.();
+    if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+  }
+}\nfunction textFor(item)function textFor(item){const policy=window.DARKidsStoryPolicy;if(policy?.canonicalText)return normalizeKidsStoryText(policy.canonicalText(item));const s=item?.scripts||{};const c=[s["4-5"],s["6-8"],s["9-10"]].map(v=>String(v||"").trim()).filter(Boolean).sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length);return normalizeKidsStoryText(c[0]||"")}
 function words(t){return(String(t).match(/\S+/g)||[]).length}
 function durationLabel(item,t){
   const target=item?.durationTargets?.[ageKey()];
@@ -220,9 +223,9 @@ function ensureUi(){
         '</header>'+
         '<div class="ms-body">'+
           '<div id="msVisualDisclaimer" class="ms-visual-disclaimer"></div>'+
-          '<div class="ms-detail-modes"><button data-ms-mode="both" type="button">Lesen &amp; Hören</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
+          '<div class="ms-detail-modes"><button data-ms-mode="both" type="button">Hören &amp; Mitlesen</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
           '<div class="ms-profile-grid"><section><small>WIE WAR ER?</small><strong id="msTrait"></strong></section><section><small>SEIN LEBENSWEG</small><span id="msLife"></span></section><section><small>WICHTIGER MOMENT</small><span id="msWitness"></span></section></div>'+
-          '<section id="msPlayer" class="ms-player ms-player-launch"><button id="msPlay" class="ms-play" type="button">Hören</button><p id="msVoiceNote"></p></section>'+
+          '<section id="msPlayer" class="ms-player"><div class="story-local-controls"><button class="story-skip" id="msBack15" type="button" aria-label="15 Sekunden zurück">−15 s</button><button id="msPlay" class="ms-play" type="button">Hören</button><button class="story-skip" id="msFwd15" type="button" aria-label="15 Sekunden vor">+15 s</button></div><div class="ms-progress" id="msProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="msProgress"></span></div><div class="ms-player-time"><strong id="msTimeCurrent">0:00</strong><span id="msTimeTotal">0:00</span></div><button class="ms-follow-open" id="msFollowOpen" type="button">Hören &amp; Mitlesen</button><p id="msVoiceNote"></p></section>'+
           '<article id="msRead" class="ms-read"></article>'+
           '<section class="ms-sources"><strong>GEPRÜFTE QUELLEN</strong><div id="msSources"></div></section>'+
           '<section id="msQuestion" class="ms-question"></section>'+
@@ -233,10 +236,44 @@ function ensureUi(){
   $("#msClose").addEventListener("click",closeStory);
   installSwipeBack($("#msScroll"),closeStory);
   $("#msPlay").addEventListener("click",toggleAudio);
-  $("#msFollowOpen")?.addEventListener("click",()=>openUniversalAudio());
+  $("#msBack15")?.addEventListener("click",()=>seekBy(-15));
+  $("#msFwd15")?.addEventListener("click",()=>seekBy(15));
+  $("#msFollowOpen")?.addEventListener("click",()=>{
+    if(isAudioOnlyAge())return;
+    if(typeof followReader?.openReadAlong==="function")followReader.openReadAlong();
+    else followReader?.open?.();
+    if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+  });
   $("#msProgressTrack")?.addEventListener("click",seekFromProgress);
   $("#msProgressTrack")?.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();seekBy(e.key==="ArrowLeft"?-15:15)}});
   modal.querySelectorAll("[data-ms-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.msMode)));
+  audio.preload="metadata";
+  audio.addEventListener("timeupdate",updateProgress);
+  audio.addEventListener("loadedmetadata",()=>{followReader?.restore();updateProgress()});
+  audio.addEventListener("play",()=>{playing=true;updatePlayButton()});
+  audio.addEventListener("pause",()=>{playing=false;updatePlayButton()});
+  audio.addEventListener("ended",()=>{playing=false;updatePlayButton();markDone(active?.id||"");});
+  followReader=window.DARKidsFollowReader?.create({
+    id:"sahaba-story",audio,
+    getContent:()=>{
+      const meta=audioMeta(active)||{};
+      return{
+        key:active?("sahabi:"+active.id+":"+ageKey()):"sahabi:story",
+        title:active?(active.name):"Geschichte",
+        subtitle:"Ṣaḥābah-Geschichte",
+        album:"DĀR AL TAWḤĪD Kids · Mubaschschirūn",
+        text:activeText,
+        artwork:active?(art(active,"hero")):"",
+        deepLink:active?("#stories/sahabi/"+encodeURIComponent(active.id)):"#stories",
+        audioOnly:isAudioOnlyAge(),
+        timings:meta.timings||meta.paragraphTimings||meta.cues||[],
+        syncPoints:meta.syncPoints||meta.syncAnchors||[]
+      };
+    },
+    toggleAudio,
+    autoOpen:false,
+    disabled:()=>!audioMeta(active)?.url
+  })||null;
   return true;
 }
 function openLibrary(){
@@ -323,40 +360,73 @@ function applyMode(){
   if(follow){follow.hidden=false;follow.removeAttribute("aria-hidden");follow.tabIndex=0;follow.textContent="Mitlesen öffnen";follow.setAttribute("aria-label","Mitlesen öffnen")}
 }
 function resetAudio(){
+  stopAudio();
   const meta=audioMeta(active),note=$("#msVoiceNote");
-  if(note)note.textContent=meta?.url?"Öffnet den zentralen Hörplayer.":"Audio folgt.";
+  if(meta?.url){
+    audio.src=meta.url;audio.preload="metadata";
+    if(note)note.textContent="Serhat-Stimme · geprüfte Fuṣḥā-Aussprache";
+  }else{
+    audio.removeAttribute("src");
+    if(note)note.textContent=isAudioOnlyAge()?"Das Hörbuch ist gerade nicht verfügbar.":"Der Lesetext ist vollständig. Audio folgt, sobald es freigeschaltet ist.";
+  }
+  if($("#msProgress"))$("#msProgress").style.width="0";
+  if($("#msTimeCurrent"))$("#msTimeCurrent").textContent="0:00";
+  if($("#msTimeTotal"))$("#msTimeTotal").textContent="0:00";
   updatePlayButton();
 }
 function updatePlayButton(){
   const b=$("#msPlay");if(!b)return;
   const meta=audioMeta(active);
-  b.disabled=!meta?.url;
-  b.textContent=meta?.url?"Hören":"Audio folgt";
+  b.disabled=busy||!meta?.url;
+  b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiterhören":(isAudioOnlyAge()?"Hören":(mode()==="both"?"Hören & mitlesen":"Hören")));
 }
-function updateProgress(){}
-function seekBy(){}
-function seekFromProgress(){}
+function storyTime(v){return window.DARKidsFollowReader?.formatTime?window.DARKidsFollowReader.formatTime(v):Math.floor((Number(v)||0)/60)+":"+String(Math.floor((Number(v)||0)%60)).padStart(2,"0")}
+function updateProgress(){
+  const duration=Number(audio.duration)||0,current=Number(audio.currentTime)||0;
+  if($("#msProgress"))$("#msProgress").style.width=(duration?Math.min(100,current/duration*100):0)+"%";
+  if($("#msTimeCurrent"))$("#msTimeCurrent").textContent=storyTime(current);
+  if($("#msTimeTotal"))$("#msTimeTotal").textContent=storyTime(duration);
+  const track=$("#msProgressTrack");
+  if(track){track.setAttribute("aria-valuemin","0");track.setAttribute("aria-valuemax",String(Math.max(0,Math.round(duration))));track.setAttribute("aria-valuenow",String(Math.max(0,Math.round(current))));track.setAttribute("aria-valuetext",storyTime(current)+" von "+storyTime(duration))}
+}
+function seekBy(delta){
+  if(!Number(audio.duration))return;
+  try{audio.currentTime=Math.max(0,Math.min(audio.duration,(Number(audio.currentTime)||0)+Number(delta||0)))}catch(_){}
+  updateProgress();followReader?.persist(true);
+}
+function seekFromProgress(e){
+  const track=$("#msProgressTrack");if(!track||!Number(audio.duration))return;
+  const rect=track.getBoundingClientRect();if(!rect.width)return;
+  try{audio.currentTime=Math.max(0,Math.min(audio.duration,((e.clientX-rect.left)/rect.width)*audio.duration))}catch(_){}
+  updateProgress();followReader?.persist(true);
+}
 function clearStoryDeepLink(kind){
   try{
     const raw=String(location.hash||"");
     if(raw.indexOf("#stories/"+kind+"/")===0)history.replaceState(history.state||{},"",location.pathname+(location.search||"")+"#stories");
   }catch(_){}
 }
-function openUniversalAudio(){
-  const item=active;if(!item)return false;
-  const meta=audioMeta(item),note=$("#msVoiceNote");
-  if(!meta?.url){if(note)note.textContent="Audio folgt.";updatePlayButton();return false}
-  const hub=window.DARKidsStoryHub;
-  if(!hub?.openStory){if(note)note.textContent="Der Hörplayer wird geladen.";return false}
-  const id=item.id;
-  closeStory();
-  closeLibrary();
-  hub.openStory("sahaba",id);
-  return true;
+async function toggleAudio(){
+  if(!active||busy)return;
+  const meta=audioMeta(active);if(!meta?.url)return;
+  if(playing){audio.pause();return}
+  try{
+    busy=true;updatePlayButton();
+    if(!audio.src)audio.src=meta.url;
+    if(audio.ended)try{audio.currentTime=0}catch(_){}
+    followReader?.restore();
+    await audio.play();
+  }catch(_){
+    playing=false;
+    if($("#msVoiceNote"))$("#msVoiceNote").textContent="Audio ist gerade nicht verfügbar.";
+  }finally{busy=false;updatePlayButton()}
 }
-async function toggleAudio(){return openUniversalAudio()}
-function stopAudio(){}
-async function init(){
+function stopAudio(){
+  followReader?.persist(true);
+  try{audio.pause();audio.removeAttribute("src");audio.load()}catch(_){}
+  playing=false;busy=false;updatePlayButton();updateProgress();
+}
+async function init(){async function init(){
   if(!ensureUi())return;
   try{
     const r=await fetch(DATA_URL+"?v=18",{cache:"no-store"});
