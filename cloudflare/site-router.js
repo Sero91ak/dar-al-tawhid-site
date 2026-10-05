@@ -40,7 +40,7 @@ const PRAYER_API_ORIGIN = "https://dar-admin-publisher.sero91ak.workers.dev";
 const VOICE_API_ORIGIN = "https://dar-admin-publisher.sero91ak.workers.dev";
 /* Apple TV live: /api/prayer/* und /quran-audio/* über diesen Router */
 const KIDS_BUILD = "kids-shell-v79-stories1152";
-const KIDS_LABEL = "KIDS · V1.07.83";
+const KIDS_LABEL = "KIDS · V1.07.84";
 
 function isPrayerApiPath(pathname) {
   return /^\/api\/(prayer|daily|jummah)(\/|$)/.test(pathname) || pathname === "/api/push/welcome";
