@@ -1144,3 +1144,85 @@ body.is-hadith-route .hadith-sibling-btn strong{
     font-size:clamp(1.18rem,2.4vw,1.48rem)!important;
   }
 }
+
+
+/* DAR_HADITH_BAB_LEAF_HIERARCHY_V1287
+   The selected Bāb remains inside the same historical study hierarchy instead of
+   dropping back to the legacy collection-page header. */
+body.is-hadith-route .hadith-hub--leaf > .view-head{
+  min-height:clamp(238px,40vw,338px)!important;
+}
+body.is-hadith-route .hadith-hub--leaf > .dua-hub__label{
+  margin-top:12px!important;
+}
+body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list{
+  width:min(900px,calc(100% - 28px))!important;
+  margin:0 auto 28px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+  padding-bottom:calc(108px + env(safe-area-inset-bottom))!important;
+}
+body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row{
+  min-height:82px!important;
+  padding:15px 2px!important;
+  border:0!important;
+  border-bottom:1px solid var(--hadx-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row::before,
+body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row::after{
+  display:none!important;
+}
+body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row__icon{
+  display:none!important;
+}
+body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row__body{
+  min-width:0!important;
+}
+body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row__body h3{
+  margin:0!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(1.12rem,3.8vw,1.42rem)!important;
+  line-height:1.18!important;
+  font-weight:610!important;
+  color:var(--text)!important;
+}
+body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row__sub{
+  margin:7px 0 0!important;
+  max-width:46rem!important;
+  color:var(--muted2)!important;
+  font-size:.88rem!important;
+  line-height:1.5!important;
+}
+body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row__meta{
+  margin-top:8px!important;
+  gap:8px 12px!important;
+  color:var(--muted)!important;
+  font-size:.68rem!important;
+  line-height:1.35!important;
+}
+body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row:active{
+  background:linear-gradient(90deg,color-mix(in srgb,var(--gold2) 5%,transparent),transparent 82%)!important;
+}
+@media(max-width:699px){
+  body.is-hadith-route .hadith-hub--leaf > .view-head{
+    min-height:270px!important;
+  }
+  body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list{
+    width:calc(100% - 28px)!important;
+  }
+  body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row{
+    min-height:78px!important;
+    padding:13px 0!important;
+  }
+  body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row__body h3{
+    font-size:clamp(1.06rem,5.1vw,1.28rem)!important;
+  }
+  body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list .dua-row__sub{
+    font-size:.84rem!important;
+    line-height:1.46!important;
+  }
+}
