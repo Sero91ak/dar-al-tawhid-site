@@ -1,6 +1,19 @@
 name: Optimize App Media
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/**'
+      - 'kids/**'
+      - 'content/admin/change-scope-lock.json'
+      - 'apple-tv/**'
+      - 'ios/**'
+      - 'voice-studio/**'
+      - 'test/assets/**'
+      - 'scripts/optimize-app-media.sh'
+      - 'scripts/update-local-media-metadata.py'
+      - '.github/workflows/optimize-app-media.yml'
   workflow_dispatch:
     inputs:
       full_scan:
@@ -30,7 +43,7 @@ concurrency:
 
 jobs:
   optimize:
-    if: ${{ !contains(github.event.head_commit.message || '', '[media-optimized]') }}
+    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message || '', '[media-optimized]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 240
 
@@ -38,7 +51,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event.pull_request.head.ref || 'main' }}
           fetch-depth: 2
 
       - name: Install media tools
@@ -52,7 +65,9 @@ jobs:
         run: |
           set -euo pipefail
           full=0
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.full_scan }}" = "true" ]; then
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            full=1
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.full_scan }}" = "true" ]; then
             full=1
           elif git diff --name-only HEAD^ HEAD 2>/dev/null | grep -Eq '^(scripts/optimize-app-media\.sh|scripts/update-local-media-metadata\.py|\.github/workflows/optimize-app-media\.yml)$'; then
             full=1
@@ -82,9 +97,9 @@ jobs:
             size=$(stat -c%s "$f")
             case "${f,,}" in
               *.jpg|*.jpeg|*.png|*.webp)
-                if [ "$size" -gt 1800000 ]; then echo "::error::$f is still larger than 1.8 MB"; fail=1; fi ;;
+                if [ "$size" -gt 1200000 ]; then echo "::error::$f is still larger than 1.2 MB"; fail=1; fi ;;
               *.mp4)
-                if [ "$size" -gt 18000000 ]; then echo "::warning::$f remains larger than 18 MB; consider streaming segmentation for long video."; fi ;;
+                if [ "$size" -gt 12000000 ]; then echo "::warning::$f remains larger than 12 MB; move long video to Cloudflare/R2 streaming delivery."; fi ;;
             esac
           done < <(find assets kids/assets content apple-tv ios -type f \
             \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.mp4' \) -print0 2>/dev/null)
@@ -102,5 +117,6 @@ jobs:
             exit 0
           fi
           git commit -m "[media-optimized] Compress app media automatically"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          TARGET_BRANCH="${{ github.event.pull_request.head.ref || 'main' }}"
+          git pull --rebase origin "$TARGET_BRANCH"
+          git push origin HEAD:"$TARGET_BRANCH"
