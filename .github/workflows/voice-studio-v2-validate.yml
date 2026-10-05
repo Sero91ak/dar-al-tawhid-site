@@ -108,9 +108,11 @@ jobs:
           engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
           gateway=Path("cloudflare/voice-studio-gpu-gateway.js").read_text(encoding="utf-8")
           web=Path("cloudflare/voice-studio-web.js").read_text(encoding="utf-8")
+          voice_js=Path("cloudflare/video-studio/voice.js").read_text(encoding="utf-8")
           html=Path("voice-studio/index.html").read_text(encoding="utf-8")
           router=Path("cloudflare/site-router.js").read_text(encoding="utf-8")
           manifest=json.loads(Path("voice-studio/version.json").read_text(encoding="utf-8"))
+          voice_profile=json.loads(Path("data/pronunciation/voice-production-profile.json").read_text(encoding="utf-8"))
           pwa=json.loads(Path("voice-studio/manifest.webmanifest").read_text(encoding="utf-8"))
           mobile_pwa=json.loads(Path("voice-studio/mobile-manifest.webmanifest").read_text(encoding="utf-8"))
           mobile_html=Path("voice-studio/mobile.html").read_text(encoding="utf-8")
@@ -192,6 +194,28 @@ jobs:
               raise SystemExit("Voice PWA cache does not match version.json: "+expected_cache)
           if 'url.pathname.startsWith("/voice-studio/api/")' not in sw or 'cache:"no-store"' not in sw:
               raise SystemExit("Private Voice API must bypass Service Worker cache")
+          if 'url.pathname==="/voice-studio/mobile.html"' not in sw:
+              raise SystemExit("Installed iPhone app must load mobile.html network-first")
+          if 'url.pathname==="/voice-studio/sw-v11.js"' not in sw:
+              raise SystemExit("Installed iPhone app must refresh its service worker")
+          for marker in (
+              'profile === "kids_story"',
+              'profile === "kids_lesson"',
+              'profile === "quiz"',
+              'profile === "dua"',
+              'profile === "gentle"',
+              'profile === "teaching"',
+              'ELEVENLABS_PRONUNCIATION_DICTIONARY_ID',
+              'pronunciation_dictionary_locators',
+          ):
+              if marker not in voice_js:
+                  raise SystemExit("ElevenLabs smooth-profile/dictionary marker missing: "+marker)
+          ref_learning=voice_profile.get("referenceLearning") or {}
+          refs={str(x.get("itemId") or ""):x for x in (ref_learning.get("ownerApprovedCorpus") or [])}
+          if set(("adam","idris"))-set(refs):
+              raise SystemExit("Adam/Idris owner reference corpus missing")
+          if int(ref_learning.get("kidsStoryTargetWpm") or 0) != 147:
+              raise SystemExit("Owner reference kids-story target WPM must stay at 147")
           print("DĀR Voice cloud GPU bridge OK")
           PY
 
