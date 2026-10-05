@@ -71,7 +71,19 @@ if (!testHtml.includes("window.__DAR_STAGING_APP")) fail("test/index.html: Stagi
 
 for (const marker of [
   'document.body.classList.toggle("is-more-route",isMore)',
-  'document.body.classList.toggle("is-account-route",route.view==="account")'
+  'document.body.classList.toggle("is-account-route",route.view==="account")',
+  'document.body.classList.toggle("is-about-route",route.view==="about")',
+  'document.body.classList.toggle("is-notifications-route",route.view==="notifications")',
+  'document.body.classList.toggle("is-settings-route",route.view==="settings")',
+  'document.body.classList.toggle("is-news-route",route.view==="news")',
+  'document.body.classList.toggle("is-news-detail-route",route.view==="news-detail")',
+  'document.body.classList.toggle("is-ramadan-route",route.view==="ramadan")',
+  'document.body.classList.toggle("is-zakat-route",route.view==="zakat")',
+  'document.body.classList.toggle("is-source-library-route",["books","quellen-book","quellen-scholar"].includes(route.view))',
+  'document.body.classList.toggle("is-recent-route",route.view==="recent")',
+  'document.body.classList.toggle("is-saved-route",route.view==="saved")',
+  'document.body.classList.toggle("is-quran-topic-route",route.view==="quran-topic")',
+  'document.body.classList.toggle("is-topics-route",["topics","recent","saved"].includes(route.view))'
 ]) {
   if (!testHtml.includes(marker)) fail(`test/index.html: Route-State fehlt: ${marker}`);
 }
@@ -123,6 +135,23 @@ if (!remoteHeroRefs && localizedHeroRefs >= 17) {
   fail(`Test-Area-Heroes: nur ${localizedHeroRefs} lokale Referenzen gefunden; erwartet mindestens 17`);
 }
 
+const areaShell = read("test/assets/area-shell-v1294.css");
+for (const marker of [
+  "body.is-calendar-route",
+  "body.is-ramadan-route",
+  "body.is-notifications-route",
+  "body.is-settings-route",
+  "body.is-account-route",
+  "body.is-about-route",
+  "body.is-news-route",
+  "body.is-news-detail-route",
+  "body.is-zakat-route",
+  "body.is-source-library-route",
+  "body.is-quran-topic-route"
+]) {
+  if (!areaShell.includes(marker)) fail(`area-shell-v1294.css: Route-Authority fehlt: ${marker}`);
+}
+
 const heroDir = path.join(ROOT, "test/assets/area-heroes-v1290");
 if (!fs.existsSync(heroDir)) {
   fail("test/assets/area-heroes-v1290 fehlt");
@@ -139,6 +168,11 @@ else ok("service-worker.js: CACHE_VERSION vorhanden");
 const worker = read("cloudflare/test-app-worker.js");
 if (!worker.includes("Response.redirect")) fail("test-app-worker.js: Root-Redirect fehlt");
 else ok("test-app-worker.js: Root-Redirect vorhanden");
+if (!worker.includes("area-shell-v1294.css") || !worker.includes("darTestAreaAuthoritiesV1294")) {
+  fail("test-app-worker.js: v1294 Area-Authority fehlt");
+} else {
+  ok("test-app-worker.js: v1294 Area-Authority aktiv");
+}
 
 const testWrangler = read("wrangler.test.toml");
 if (!testWrangler.includes('[ai]') || !testWrangler.includes('binding = "AI"')) {
