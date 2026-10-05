@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v50-single-story-player1120",
-  "label": "KIDS · V1.07.55",
-  "releasedAt": "2026-10-05T10:15:00+02:00",
-  "note": "Kids v1120: Der Geschichtenbereich verwendet technisch genau einen Universal-StoryPlayer. Propheten-, Ṣaḥābah- und Ṣaḥābiyyāt-Seiten behalten ihre Bibliotheken, Bilder, Texte, Quellen und Fragen, delegieren Hören aber vollständig an den zentralen Player. Leere 0:00-Legacy-Player bleiben entfernt, fehlendes Audio zeigt „Audio folgt“, und Kategoriebilder werden manifest-first aus lokalen App-Assets geladen.",
+  "buildId": "kids-shell-v51-sahabiyyat-art-names1121",
+  "label": "KIDS · V1.07.56",
+  "releasedAt": "2026-10-05T10:34:00+02:00",
+  "note": "Kids v1121: Ṣaḥābiyyāt-Karten und Detail-Heroes zeigen den Namen direkt auf dem Bild; vier neue historisch inspirierte, gesichtslose Szenen für Sawdah, Ǧuwayriyyah, Ṣafiyyah und Maymūnah zugeordnet.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1120",
+    "serviceWorkerCache": "v1121",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -420,7 +420,7 @@
     "sahabiyyatVerifiedStories": 14,
     "sahabiyyatNoPortraits": true,
     "sahabiyyatSingleMasterStory": true,
-    "sahabiyyatArtworkPolicy": "historical-environment-only-no-portrait",
+    "sahabiyyatArtworkPolicy": "historical-veiled-figure-no-face-no-portrait-claim",
     "sahabiyyatBundleVersion": 3,
     "sahabiyyatStaticHubCard": true,
     "sahabiyyatStaticEntry": true,
@@ -435,8 +435,8 @@
     "sahabiyyatScrollSafety": true,
     "storyAudioPinnedBytes": 2098317,
     "storyAudioDeliveryProfile": "optimized-runtime",
-    "sahabiyyatCssVersion": 3,
-    "sahabiyyatJsVersion": 6,
+    "sahabiyyatCssVersion": 4,
+    "sahabiyyatJsVersion": 7,
     "storyHub": "v3-universal-single-runtime",
     "storyHubPlayer": "single-runtime-audio-player-edge-to-edge",
     "storyHubAgeAdaptive": true,
@@ -452,7 +452,15 @@
     "storyMissingAudioState": "Audio folgt",
     "storyHubAssetVersion": 3,
     "storyHubCategoryArtwork": "manifest-first-local",
-    "storyLegacyAudioPlayers": false
+    "storyLegacyAudioPlayers": false,
+    "sahabiyyatNameOverlay": true,
+    "sahabiyyatNameOverlayPlacement": "bottom-on-card-and-detail-hero",
+    "sahabiyyatDistinctNewArtworks": [
+      "sawdah",
+      "juwayriyyah",
+      "safiyyah",
+      "maymunah"
+    ]
   },
   "updatedAt": "2026-10-05"
 }
