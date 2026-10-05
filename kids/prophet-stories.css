@@ -3063,49 +3063,6 @@ html.ps-modal-open body{
   }
 }
 
-/* PROPHET_DETAIL_ACTIONS_V1156 */
-/* Exact visual parity with the Ṣaḥābah story detail controls.
-   Presentation only — audio/player/follow-reader behavior is untouched. */
-.ps-detail-modes{
-  display:flex!important;
-  gap:7px!important;
-  overflow-x:auto!important;
-  overflow-y:hidden!important;
-  margin:0!important;
-  padding:14px 0 2px!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-  scrollbar-width:none!important;
-}
-.ps-detail-modes::-webkit-scrollbar{display:none!important}
-.ps-detail-mode{
-  flex:0 0 auto!important;
-  min-width:0!important;
-  min-height:var(--kids-touch,58px)!important;
-  padding:10px 13px!important;
-  display:inline-flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  border:1px solid rgba(255,255,255,.09)!important;
-  border-radius:999px!important;
-  background:rgba(255,255,255,.05)!important;
-  color:#d9e4e6!important;
-  font-size:var(--kids-button,17px)!important;
-  line-height:1.2!important;
-  font-weight:900!important;
-  white-space:nowrap!important;
-  box-shadow:none!important;
-}
-.ps-detail-mode.active{
-  background:rgba(239,203,121,.14)!important;
-  border-color:rgba(239,203,121,.36)!important;
-  color:#f5db9c!important;
-  box-shadow:none!important;
-}
-
 /* PROPHET_LIBRARY_REFINEMENT_V12 — preserve the strong page, make it calmer and more consistent */
 .ps-muhammad-feature{
   padding-bottom:14px!important;
