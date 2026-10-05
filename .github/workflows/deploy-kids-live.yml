@@ -39,6 +39,7 @@ jobs:
         run: |
           node scripts/kids-prophet-release-guard.js
           node --check cloudflare/site-router.js
+          node --check kids/story-hub.js
           node <<'NODE'
           const fs=require("fs");
           const quiz=JSON.parse(fs.readFileSync("kids/data/quiz-kids.json","utf8"));
@@ -62,6 +63,9 @@ jobs:
           if(!index.includes("var due=pool.filter")||!index.includes("selected.push(q)"))throw new Error("Never-empty quiz fallback missing");
           if(!index.includes("/kids/sw.js?v="+swVersion))throw new Error("Current Kids SW registration missing");
           if(!index.includes("kids.pwa.controller.reload."))throw new Error("Kids stale-shell self-heal missing");
+          if(!index.includes("/kids/story-hub.js?v=1"))throw new Error("Universal story hub JS missing");
+          if(!index.includes("/kids/story-hub.css?v=1"))throw new Error("Universal story hub CSS missing");
+          if(!fs.existsSync("kids/story-hub.js")||!fs.existsSync("kids/story-hub.css"))throw new Error("Universal story hub files missing");
           if(!sw.includes("dar-al-tawhid-kids-v"+swVersion)||!sw.includes("client.navigate"))throw new Error("Kids SW activation recovery missing");
           if(!index.includes('id="syEntry"'))throw new Error("Ṣaḥābiyyāt static hub card missing");
           if(!index.includes('class="stories-area-jump"')||!index.includes('data-story-area="sahabiyyat"'))throw new Error("Ṣaḥābiyyāt hub shortcut missing");
