@@ -352,6 +352,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/jummah-v1258.css?v=area-authority-v1290");' +
       '@import url("/test/assets/qibla-v1259.css?v=area-authority-v1290");' +
       '@import url("/test/assets/prayer-v1254.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", areaAuthority + "</html>");
     else html += areaAuthority;
