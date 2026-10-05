@@ -38,12 +38,12 @@ permissions:
   contents: write
 
 concurrency:
-  group: app-media-optimizer-final-${{ github.sha }}
-  cancel-in-progress: false
+  group: app-media-optimizer-${{ github.event.pull_request.number || 'main' }}
+  cancel-in-progress: true
 
 jobs:
   optimize:
-    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message || '', '[media-optimized]') }}
+    if: ${{ (github.event_name != 'push' || !contains(github.event.head_commit.message || '', '[media-optimized]')) && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
     runs-on: ubuntu-latest
     timeout-minutes: 240
 
@@ -65,16 +65,20 @@ jobs:
         run: |
           set -euo pipefail
           full=0
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            full=1
+          skip=0
+          LAST_MSG="$(git log -1 --pretty=%B 2>/dev/null || true)"
+          if printf '%s' "$LAST_MSG" | grep -Fq '[media-optimized]'; then
+            skip=1
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.full_scan }}" = "true" ]; then
             full=1
-          elif git diff --name-only HEAD^ HEAD 2>/dev/null | grep -Eq '^(scripts/optimize-app-media\.sh|scripts/update-local-media-metadata\.py|\.github/workflows/optimize-app-media\.yml)$'; then
+          elif printf '%s' "$LAST_MSG" | grep -Fq '[media-fullscan]'; then
             full=1
           fi
           echo "full=$full" >> "$GITHUB_OUTPUT"
+          echo "skip=$skip" >> "$GITHUB_OUTPUT"
 
       - name: Optimize current media
+        if: steps.mode.outputs.skip != '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -86,6 +90,7 @@ jobs:
           fi
 
       - name: Enforce delivery budgets
+        if: steps.mode.outputs.skip != '1'
         shell: bash
         run: |
           set -euo pipefail
@@ -106,6 +111,7 @@ jobs:
           exit "$fail"
 
       - name: Commit optimized media
+        if: steps.mode.outputs.skip != '1'
         shell: bash
         run: |
           set -euo pipefail
