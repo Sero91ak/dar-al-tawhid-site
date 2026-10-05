@@ -39,6 +39,7 @@ function setMode(v){
     return;
   }
   if(v==="read"){
+    if(!audio.paused)audio.pause();
     if(typeof followReader?.openReading==="function")followReader.openReading();
     else followReader?.open?.();
   }
@@ -118,10 +119,9 @@ function installSwipeBack(el,onBack){
   el.addEventListener("pointercancel",reset,{passive:true});
 }
 function renderModeButtons(){
-  const audioOnly=isAudioOnlyAge();
   const detailModes=document.querySelector(".ms-detail-modes");
-  if(detailModes)detailModes.hidden=audioOnly;
-  const m=audioOnly?"listen":mode();
+  if(detailModes)detailModes.hidden=false;
+  const m=mode();
   document.querySelectorAll("[data-ms-mode]").forEach(b=>b.classList.toggle("active",b.dataset.msMode===m));
 }
 function sourceHtml(item){
