@@ -38,6 +38,29 @@ function stopOtherPlayers(){
   try{window.DARKidsMubashshirun?.stop?.()}catch(_){}
   try{window.DARKidsSahabiyyat?.stop?.()}catch(_){}
 }
+function installBackGestures(el,onBack){
+  if(!el||el.dataset.ghSwipeReady==="1")return;
+  el.dataset.ghSwipeReady="1";
+  let sx=0,sy=0,edge=false,down=false,tracking=false;
+  const reset=()=>{sx=sy=0;edge=down=tracking=false};
+  el.addEventListener("pointerdown",e=>{
+    if(e.pointerType==="mouse"&&e.button!==0)return;
+    const edgeZone=Math.max(36,Math.min(58,window.innerWidth*.12));
+    edge=e.clientX<=edgeZone;
+    down=el.scrollTop<=2&&e.clientY<=150;
+    if(!edge&&!down)return;
+    sx=e.clientX;sy=e.clientY;tracking=true;
+  },{passive:true});
+  el.addEventListener("pointerup",e=>{
+    if(!tracking)return;
+    const dx=e.clientX-sx,dy=e.clientY-sy,adx=Math.abs(dx),ady=Math.abs(dy);
+    const goRight=edge&&dx>Math.min(112,window.innerWidth*.23)&&adx>ady*1.35;
+    const goDown=down&&dy>108&&ady>adx*1.45;
+    reset();
+    if(goRight||goDown){try{navigator.vibrate?.(8)}catch(_){}onBack()}
+  },{passive:true});
+  el.addEventListener("pointercancel",reset,{passive:true});
+}
 function ensureEntry(){
   const view=$("#view-stories");if(!view||$("#ghEntry"))return;
   const entry=document.createElement("button");entry.id="ghEntry";entry.className="gh-entry";entry.type="button";
@@ -51,11 +74,13 @@ function ensureUi(){
   world.innerHTML='<header class="gh-world-nav"><button class="gh-back" id="ghBack" type="button" aria-label="Hörwelten schließen">‹</button><div class="gh-world-nav-copy"><strong>Geschichten des Īmān</strong><span>Hören · Lesen · Mitlesen</span></div></header><div class="gh-world-scroll" id="ghWorldScroll"><section class="gh-world-hero"><div class="gh-world-hero-copy"><div class="gh-world-kicker">DĀR AL TAWḤĪD KIDS · HÖRWELTEN</div><h2>Geschichten, die den Īmān stärken</h2><p>Wähle eine Welt und danach eine Geschichte. Bilder, Text und Audio gehören immer zusammen.</p></div></section><main class="gh-content"><div class="gh-categories" id="ghCategories"></div><div class="gh-list-head"><div><small id="ghListKicker"></small><strong id="ghListTitle"></strong><span id="ghListCount"></span></div></div><div class="gh-list" id="ghList"></div></main></div>';
   document.body.appendChild(world);
   $("#ghBack").addEventListener("click",closeWorld);
+  installBackGestures($("#ghWorldScroll"),closeWorld);
 
   const player=document.createElement("section");player.id="ghPlayer";player.className="gh-player";player.setAttribute("aria-hidden","true");
   player.innerHTML='<div class="gh-player-scroll" id="ghPlayerScroll"><section class="gh-player-hero"><img id="ghPlayerBg" class="gh-player-bg" src="" alt=""><span class="gh-player-shade" aria-hidden="true"></span><button id="ghPlayerBack" class="gh-player-back" type="button" aria-label="Zurück zur Auswahl">‹</button><div class="gh-player-copy"><div class="gh-player-kicker" id="ghPlayerKicker"></div><h2 id="ghPlayerTitle"></h2><div class="gh-player-ar" id="ghPlayerArabic" dir="rtl"></div><div class="gh-player-summary" id="ghPlayerSummary"></div></div></section><main class="gh-player-body"><section class="gh-controls"><div class="gh-main-controls"><button class="gh-skip" id="ghBack15" type="button">−15 s</button><button class="gh-play" id="ghPlay" type="button">Hören</button><button class="gh-skip" id="ghFwd15" type="button">+15 s</button></div><div class="gh-progress" id="ghProgress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div><div class="gh-time"><span id="ghCurrent">0:00</span><span id="ghTotal">0:00</span></div><div class="gh-player-actions"><button class="gh-read-toggle" id="ghReadToggle" type="button">Text lesen</button><button class="gh-read-toggle" id="ghFollow" type="button">Mitlesen</button></div><p class="gh-audio-note" id="ghAudioNote"></p></section><article class="gh-read" id="ghRead" hidden></article><section class="gh-sources"><strong>QUELLEN</strong><div id="ghSources"></div></section></main></div>';
   document.body.appendChild(player);
   $("#ghPlayerBack").addEventListener("click",minimizePlayer);
+  installBackGestures($("#ghPlayerScroll"),minimizePlayer);
   $("#ghPlay").addEventListener("click",toggleAudio);
   $("#ghBack15").addEventListener("click",()=>seek(-15));
   $("#ghFwd15").addEventListener("click",()=>seek(15));
@@ -144,14 +169,20 @@ function renderPlayer(){
 function openPlayer(){
   if(!active)return;
   $("#ghPlayer").classList.add("open");$("#ghPlayer").removeAttribute("aria-hidden");document.documentElement.classList.add("gh-player-open");
-  $("#ghWorld").setAttribute("inert","");$("#ghWorld").setAttribute("aria-hidden","true");
+  const world=$("#ghWorld"),app=$(".app");
+  if(world){world.setAttribute("inert","");world.setAttribute("aria-hidden","true")}
+  if(!world?.classList.contains("open")&&app){app.setAttribute("inert","");app.setAttribute("aria-hidden","true")}
   $("#ghPlayerScroll").scrollTop=0;setTimeout(()=>$("#ghPlayerBack")?.focus(),0);
 }
 function minimizePlayer(){
   reader?.close();reader?.persist(true);
   $("#ghPlayer").classList.remove("open");$("#ghPlayer").setAttribute("aria-hidden","true");document.documentElement.classList.remove("gh-player-open");
-  $("#ghWorld").removeAttribute("inert");if($("#ghWorld").classList.contains("open"))$("#ghWorld").removeAttribute("aria-hidden");
-  renderMini();setTimeout(()=>$("#ghList [data-gh-id='"+CSS.escape(active?.id||"")+"']")?.focus(),0);
+  const world=$("#ghWorld"),app=$(".app");
+  if(world){world.removeAttribute("inert");if(world.classList.contains("open"))world.removeAttribute("aria-hidden")}
+  if(!world?.classList.contains("open")&&app){app.removeAttribute("inert");app.removeAttribute("aria-hidden")}
+  renderMini();
+  const id=String(active?.id||"").replace(/'/g,"\\'");
+  setTimeout(()=>$("#ghList [data-gh-id='"+id+"']")?.focus(),0);
 }
 function toggleRead(){
   const read=$("#ghRead");if(!read)return;read.hidden=!read.hidden;$("#ghReadToggle").textContent=read.hidden?(isYoung()?"Mitlesen für Erwachsene":"Text lesen"):"Text schließen";if(!read.hidden)setTimeout(()=>read.scrollIntoView({block:"start",behavior:"smooth"}),20)
@@ -183,7 +214,7 @@ async function toggleAudio(){
 function stopAudio(clear=true){reader?.persist(true);try{audio.pause()}catch(_){}playing=false;busy=false;if(clear){try{audio.removeAttribute("src");audio.load()}catch(_){}}renderPlay();renderMini()}
 async function load(){
   ensureEntry();ensureUi();
-  const results=await Promise.all(SOURCES.map(async s=>{try{const r=await fetch(s.url,{cache:"no-store"});if(!r.ok)throw Error(String(r.status));const d=await r.json();return[s.id,(d.items||[]).slice().sort((a,b)=>Number(a.displayOrder||999)-Number(b.displayOrder||999))]}catch(e){console.warn("[DĀR Kids Hörwelten]",s.id,e);return[s.id,[]]}}));
+  const results=await Promise.all(SOURCES.map(async s=>{try{const r=await fetch(s.url,{cache:"default"});if(!r.ok)throw Error(String(r.status));const d=await r.json();return[s.id,(d.items||[]).slice().sort((a,b)=>Number(a.displayOrder||999)-Number(b.displayOrder||999))]}catch(e){console.warn("[DĀR Kids Hörwelten]",s.id,e);return[s.id,[]]}}));
   results.forEach(([id,items])=>catalog[id]=items);renderCategories();renderList();
   try{const m=String(location.hash||"").match(/^#stories\/listen\/(prophets|sahaba|sahabiyyat)\/([^/?#]+)/i);if(m){activeCategory=m[1];openWorld();setTimeout(()=>selectStory(decodeURIComponent(m[2])),0)}}catch(_){}
   const app=$(".app");if(app&&"MutationObserver" in window)new MutationObserver(()=>{renderCategories();renderList();if(active)renderPlayer()}).observe(app,{attributes:true,attributeFilter:["data-age"]});
