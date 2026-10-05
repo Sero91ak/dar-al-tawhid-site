@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v85-story-pages1158",
-  "label": "KIDS · V1.07.88",
+  "buildId": "kids-shell-v86-reader-resume1159",
+  "label": "KIDS · V1.07.87",
   "releasedAt": "2026-10-05T19:05:00+02:00",
-  "note": "Kids v1158: sichtbarer Neuaufbau der einzelnen Geschichtsseiten mit finaler CSS-Autorität. Propheten-Hero kompakter, Prophetenliste nummeriert und in klare Karten gesetzt; Mubaschschirūn und Ṣaḥābiyyāt nutzen denselben kindgerechten Kartenrhythmus, weniger Textlast und keine doppelten Bildnamen. Alle Story-Bundles und der Service Worker werden mit neuen Cache-Keys geladen.",
+  "note": "Kids Reader: Beim erneuten Öffnen springt der intelligente Mitleser sofort auf den zur gespeicherten Audiozeit gehörenden Absatz. Ein bewusstes Schließen über X, Backdrop oder Escape speichert die Position und pausiert Audio; beim nächsten Öffnen gibt es kein Autoplay, sondern Weiterhören ab der gespeicherten Stelle. App-Hintergrund und Displaysperre bleiben davon getrennt: ohne explizites Schließen darf Audio weiterlaufen, und beim Zurückkehren richtet sich der Mitleser sofort auf die aktuelle Stelle aus. Zentral für Propheten, Ṣaḥābah, Ṣaḥābiyyāt und alle Nutzer des gemeinsamen Follow-Readers.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1158",
+    "serviceWorkerCache": "v1159",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -166,7 +166,7 @@
     "storiesHero": "cinematic-responsive-v1152",
     "storiesBottomNavClearance": "v1133-safe-area",
     "storiesBottomNav": "shared-global-component-v1148",
-    "storyFollowReader": "v15",
+    "storyFollowReader": "v16",
     "storyFollowReaderMode": "bottom-sheet-compact-smart-timestamp-reader-v1154",
     "storyFollowReaderReusable": true,
     "sectionEntryHeroes": "edge-to-edge-compact-photoreal-v1097",
@@ -597,7 +597,7 @@
     "storiesHomeCompactSecondaryCards": true,
     "storyReaderTextSizePhone": "22px",
     "storyReaderTextSizeTablet": "23–28px",
-    "storyFollowReaderApiVersion": 7,
+    "storyFollowReaderApiVersion": 16,
     "screenAwakeManager": "v1",
     "screenAwakePolicy": "reading-and-follow-only-not-audio-only",
     "screenAwakeBrowser": "screen-wake-lock-api",
@@ -642,7 +642,10 @@
       "sahabiyyat"
     ],
     "storyLibraryAuthority": "kids-age-typography.css?v=5",
-    "storyLibraryAuthorityLoadedLate": true
+    "storyLibraryAuthorityLoadedLate": true,
+    "storyReaderExplicitClose": "pause-save-no-autoplay",
+    "storyReaderResumeAlignment": "instant-current-time-snap",
+    "storyReaderBackgroundPolicy": "continue-unless-explicitly-closed"
   },
   "updatedAt": "2026-10-05"
 }
