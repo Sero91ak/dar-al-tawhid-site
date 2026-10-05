@@ -1,0 +1,77 @@
+name: Optimize Test Hero Assets v1290
+
+on:
+  push:
+    paths:
+      - ".github/workflows/optimize-test-hero-assets-v1290.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: optimize-test-hero-assets-v1290
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Test hero branch
+        uses: actions/checkout@v4
+        with:
+          ref: test-local-heroes-v1290
+          fetch-depth: 0
+
+      - name: Install image optimizer
+        run: python -m pip install --disable-pip-version-check pillow
+
+      - name: Optimize localized heroes for iPhone and PWA
+        shell: python
+        run: |
+          import hashlib, re
+          from pathlib import Path
+          from PIL import Image, ImageOps
+
+          root=Path("test/assets/area-heroes-v1290")
+          converted={}
+          for src in sorted(list(root.glob("*.jpg"))+list(root.glob("*.png"))):
+            im=ImageOps.exif_transpose(Image.open(src)).convert("RGB")
+            if im.width>1920:
+              h=round(im.height*(1920/im.width))
+              im=im.resize((1920,h),Image.Resampling.LANCZOS)
+            out=src.with_suffix(".webp")
+            im.save(out,"WEBP",quality=84,method=6)
+            converted[src.name]=out.name
+            print(f"{src.name}: {src.stat().st_size} -> {out.stat().st_size} bytes; {im.width}x{im.height}")
+            src.unlink()
+
+          css_files=list(Path("test/assets").glob("*.css"))+[Path("test/assets/library/library-app.css")]
+          for p in css_files:
+            if not p.exists():
+              continue
+            s=p.read_text()
+            original=s
+            for old,new in converted.items():
+              s=s.replace(f"/test/assets/area-heroes-v1290/{old}",f"/test/assets/area-heroes-v1290/{new}")
+            if s!=original:
+              p.write_text(s)
+              print(f"updated {p}")
+
+          sums=[]
+          for p in sorted(root.glob("*.webp")):
+            sums.append(f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.as_posix()}")
+          (root/"SHA256SUMS.txt").write_text("\n".join(sums)+"\n")
+
+      - name: Commit optimized Test heroes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "DAR Test Asset Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A test/assets/area-heroes-v1290 test/assets
+          if git diff --cached --quiet; then
+            echo "No optimization changes."
+            exit 0
+          fi
+          git commit -m "test: optimize localized hero assets for iOS PWA"
+          git push origin HEAD:test-local-heroes-v1290
