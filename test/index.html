@@ -21144,6 +21144,31 @@ body.is-hadith-route .hadith-hub>.dua-theme-grid .dua-theme-card__chev{
   body.is-hadith-route .hadith-hub>.dua-theme-grid .dua-theme-card__count{font-size:.70rem!important}
 }
 </style>
+
+<style id="darHadithBreadcrumbV1270">
+/* HADITH_BREADCRUMB_V1270 */
+body.is-hadith-route .hadith-crumbs{
+  width:min(980px,calc(100% - 28px));margin:0 auto 12px;padding:2px 0 10px;
+  display:flex;align-items:center;gap:7px;overflow-x:auto;white-space:nowrap;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 12%,transparent)
+}
+body.is-hadith-route .hadith-crumbs::-webkit-scrollbar{display:none}
+body.is-hadith-route .hadith-crumb-link{
+  appearance:none;border:0;background:transparent;padding:5px 0;color:var(--muted2);
+  font:750 .74rem/1.2 var(--font-sans,system-ui);letter-spacing:.045em;cursor:pointer
+}
+body.is-hadith-route .hadith-crumb-link:active{color:var(--gold2)}
+body.is-hadith-route .hadith-crumb-sep{color:color-mix(in srgb,var(--gold2) 42%,transparent);font-size:1rem}
+body.is-hadith-route .hadith-crumb-current{
+  color:var(--text);font:800 .75rem/1.2 var(--font-sans,system-ui);letter-spacing:.045em
+}
+body.is-hadith-route .hadith-detail{margin-top:0!important}
+@media(max-width:599px){
+  body.is-hadith-route .hadith-crumbs{width:calc(100% - 32px);margin-bottom:10px;padding-bottom:9px}
+  body.is-hadith-route .hadith-crumb-link,body.is-hadith-route .hadith-crumb-current{font-size:.70rem}
+}
+</style>
 <body class="has-bottom-nav">
 <div id="newPostsBanner" class="new-posts-banner hidden" role="button" tabindex="0" aria-label="Aktualisieren" style="display:none">
   <span class="new-posts-icon">&#x23F3;</span>
