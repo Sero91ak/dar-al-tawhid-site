@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v66-stories1136",
-  "label": "KIDS · V1.07.70",
-  "releasedAt": "2026-10-05T14:53:00+02:00",
-  "note": "Kids v1136: Geschichtenseite final gehärtet. Die vier neu erzeugten Bildwelten sind lokal gebündelt und werden auch als direkte Fallbacks der Kategorien verwendet, damit beim Laden keine alten Ṣaḥābah-/Ṣaḥābiyyāt-Bilder aufblitzen. Der doppelte Geschichten-Einstieg und die redundante Zählerleiste bleiben entfernt. Propheten, Ṣaḥābah und Ṣaḥābiyyāt haben dieselbe visuelle Gewichtung; freie Adab-Erzählungen werden kindgerechter als pädagogische Geschichten gekennzeichnet. Cache, installierte App und Offline-Pfade wurden aktualisiert.",
+  "buildId": "kids-shell-v67-stories1137",
+  "label": "KIDS · V1.07.71",
+  "releasedAt": "2026-10-05T15:27:00+02:00",
+  "note": "Kids v1137: Der Hörgeschichten-Player trennt jetzt sauber zwischen „Nur lesen“ und „Hören & mitlesen“. Beide Modi öffnen den dedizierten Fokus-Reader statt den Hauptplayer nach unten zu verschieben. Der Mitlese-Reader scrollt ausschließlich in seinem eigenen Textbereich, hebt den laufenden Abschnitt automatisch hervor und sperrt den Hintergrund vollständig. Cache- und App-Shell-Versionen wurden angehoben.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1136",
+    "serviceWorkerCache": "v1137",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -166,8 +166,8 @@
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1133-safe-area",
     "storiesBottomNav": "separated-background-v1086",
-    "storyFollowReader": "v5",
-    "storyFollowReaderMode": "timestamp-aware-auto-scroll-v3",
+    "storyFollowReader": "v6",
+    "storyFollowReaderMode": "dedicated-read-and-follow-focus-v6",
     "storyFollowReaderReusable": true,
     "sectionEntryHeroes": "edge-to-edge-compact-photoreal-v1097",
     "sectionHeroArtworkFormat": "local-png-jpeg",
@@ -466,7 +466,7 @@
     "storyHubCategoryArtwork": "manifest-first-local",
     "storyLegacyAudioPlayers": false,
     "storyHubCssVersion": 4,
-    "storyReaderControls": "state-machine-v1121",
+    "storyReaderControls": "focus-dialog-v1137",
     "storyReaderTouch": "iphone-ipad-hardened-v1121",
     "storyReaderInternalScroll": true,
     "storyReaderGestureGuard": true,
@@ -482,7 +482,7 @@
     ],
     "sahabiyyatNameOverlay": true,
     "sahabiyyatNameOverlayPlacement": "card-and-hero-in-own-library-and-universal-story-hub",
-    "storyHubJsVersion": 9,
+    "storyHubJsVersion": 10,
     "sahabiyyatDistinctNewArtworks": [
       "sawdah",
       "juwayriyyah",
@@ -582,7 +582,10 @@
     "storiesHomeEqualPrimaryCards": true,
     "storiesHomePedagogicalLabels": true,
     "prophetStoriesJsVersion": 32,
-    "storiesHomeStylesheetVersion": "1136-1"
+    "storiesHomeStylesheetVersion": "1136-1",
+    "storyReaderBackgroundInert": true,
+    "storyReaderReadOnlyMode": true,
+    "storyReaderListenAndFollowMode": true
   },
   "updatedAt": "2026-10-05"
 }
