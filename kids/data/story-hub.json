@@ -15,9 +15,11 @@
     "canonicalStoryTextStrategy": "preserve-longest-complete-version",
     "futureCategoriesMustUseMasterText": true,
     "futureStoryDefaultLengthPolicy": "long-complete-no-shortening",
-    "futureBiographyMinimumMasterWords": 800,
+    "futureBiographyMinimumMasterWords": 850,
     "sahabiyyatMinimumMasterWords": 800,
-    "ageChangesPresentationOnly": true
+    "ageChangesPresentationOnly": true,
+    "biographyMinimumMasterWords": 850,
+    "longBiographyRequired": true
   },
   "sources": [
     {
