@@ -88,6 +88,15 @@ for (const marker of [
 ]) {
   if (!testHtml.includes(marker)) fail(`test/index.html: Route-State fehlt: ${marker}`);
 }
+const settingsFnStart = testHtml.indexOf("function renderSettings(){");
+const settingsFnEnd = settingsFnStart >= 0 ? testHtml.indexOf("function renderJummah(){", settingsFnStart) : -1;
+const settingsFn = settingsFnStart >= 0 && settingsFnEnd > settingsFnStart ? testHtml.slice(settingsFnStart, settingsFnEnd) : "";
+if (!settingsFn || settingsFn.indexOf('setHeader("Einstellungen"') < 0 || settingsFn.indexOf("renderDarSetupHubHtml()") < 0 || settingsFn.indexOf('setHeader("Einstellungen"') > settingsFn.indexOf("renderDarSetupHubHtml()")) {
+  fail("test/index.html: Settings-Hero muss vor Setup-Hub stehen");
+} else {
+  ok("test/index.html: Settings-Hero steht vor Setup-Hub");
+}
+
 if (testHtml.includes('location.href="/widgets/?from=test"')) {
   fail("test/index.html: Widgets verlassen die Test-App auf /widgets/");
 } else if (!testHtml.includes('location.href="/test/widgets/?from=test"')) {
@@ -153,6 +162,25 @@ for (const marker of [
   if (!areaShell.includes(marker)) fail(`area-shell-v1294.css: Route-Authority fehlt: ${marker}`);
 }
 
+const utilityShell = read("test/assets/area-utility-v1299.css");
+for (const marker of [
+  "body.is-settings-route",
+  "body.is-notifications-route",
+  "body.is-account-route",
+  "body.is-about-route",
+  "body.is-news-route",
+  "body.is-ramadan-route",
+  "body.is-quran-topic-route",
+  "body.is-calendar-route"
+]) {
+  if (!utilityShell.includes(marker)) fail(`area-utility-v1299.css: Utility-Authority fehlt: ${marker}`);
+}
+if (!worker.includes("area-utility-v1299.css")) {
+  fail("test-app-worker.js: area-utility-v1299.css fehlt in finaler Authority");
+} else {
+  ok("test-app-worker.js: Utility-Surface v1299 aktiv");
+}
+
 const heroDir = path.join(ROOT, "test/assets/area-heroes-v1290");
 if (!fs.existsSync(heroDir)) {
   fail("test/assets/area-heroes-v1290 fehlt");
@@ -189,10 +217,10 @@ const areaAuthorityFiles = [
   "qibla-v1259.css",
   "prayer-v1254.css"
 ];
-if (!worker.includes("area-shell-v1294.css") || !worker.includes("tawhid-guide-v1295.css") || !worker.includes("darTestAreaAuthoritiesV1298")) {
-  fail("test-app-worker.js: v1298 finale Area-/Tawhid-Authority fehlt");
+if (!worker.includes("area-shell-v1294.css") || !worker.includes("tawhid-guide-v1295.css") || !worker.includes("darTestAreaAuthoritiesV1299")) {
+  fail("test-app-worker.js: v1299 finale Area-/Tawhid-Authority fehlt");
 } else {
-  ok("test-app-worker.js: v1298 finale Area-/Tawhid-Authority aktiv");
+  ok("test-app-worker.js: v1299 finale Area-/Tawhid-Authority aktiv");
 }
 if (/html\s*=\s*html\.replace\(\/<\\\/head>\/i,\s*'<link rel="stylesheet"/.test(worker)) {
   fail("test-app-worker.js: Bereichs-CSS darf nicht mehr von </head> abhängen");
