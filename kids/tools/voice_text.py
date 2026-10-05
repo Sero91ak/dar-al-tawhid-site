@@ -2,11 +2,13 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 import unicodedata
+from pathlib import Path
 
-SYNTHESIS_REVISION = "kids-speech-flow-v2-20261005"
+SYNTHESIS_REVISION = "kids-speech-flow-v3-20261005"
 
 _ONES = [
     "null","eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun",
@@ -21,6 +23,55 @@ _DIGIT_TRANSLATION = str.maketrans(
     "٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹",
     "01234567890123456789",
 )
+
+
+_ROOT = Path(__file__).resolve().parents[2]
+_PRONUNCIATION_RULES = _ROOT / "data" / "pronunciation" / "pronunciation-rules.json"
+_MASTER_RULE_CACHE = None
+_TRUSTED_STRATEGIES = {
+    "max-master-pls-v1",
+    "max-master-pls-v2-trusted",
+    "profile-fixed-component-v1",
+    "max-master-token-component-v1",
+    "verified-islamic-master-library-v1",
+}
+
+
+def _load_master_rules():
+    global _MASTER_RULE_CACHE
+    if _MASTER_RULE_CACHE is not None:
+        return _MASTER_RULE_CACHE
+    rows = []
+    try:
+        data = json.loads(_PRONUNCIATION_RULES.read_text(encoding="utf-8"))
+        for raw in data.get("rules") or []:
+            needle = str(raw.get("string_to_replace") or "").strip()
+            tts = str(raw.get("tts_text") or raw.get("alias") or "").strip()
+            if not needle or not tts or needle == tts:
+                continue
+            voice_lock = str(raw.get("voice_lock") or raw.get("voiceLock") or "").strip()
+            strategy = str(raw.get("tts_strategy") or raw.get("ttsStrategy") or "").strip()
+            category = str(raw.get("category") or "").strip()
+            trusted = (
+                voice_lock == "MASTER"
+                or strategy in _TRUSTED_STRATEGIES
+                or category in {"MAX MASTER PLS", "MAX MASTER COMPONENT"}
+            )
+            if trusted:
+                rows.append((needle, tts))
+    except Exception:
+        rows = []
+    rows.sort(key=lambda item: len(item[0]), reverse=True)
+    _MASTER_RULE_CACHE = rows
+    return rows
+
+
+def apply_master_pronunciations(text: str) -> str:
+    value = str(text or "")
+    for needle, tts in _load_master_rules():
+        if needle in value:
+            value = value.replace(needle, tts)
+    return value
 
 
 def german_number(value: int) -> str:
@@ -51,7 +102,7 @@ def german_number(value: int) -> str:
     return str(n)
 
 
-def prepare_kids_voice_text(text: str) -> str:
+def prepare_kids_voice_text(text: str, *, apply_pronunciation: bool = True) -> str:
     """Prepare hidden TTS text; visible Kids content is not changed."""
     value = unicodedata.normalize("NFC", str(text or ""))
     value = value.translate(_DIGIT_TRANSLATION)
@@ -102,6 +153,9 @@ def prepare_kids_voice_text(text: str) -> str:
         value,
     )
 
+    if apply_pronunciation:
+        value = apply_master_pronunciations(value)
+
     value = re.sub(r"[ \t]+", " ", value)
     value = re.sub(r"\s+([,;:!?؟])", r"\1", value)
     value = re.sub(r"([,;:!?؟])(?=\S)", r"\1 ", value)
@@ -120,11 +174,10 @@ def _self_test() -> None:
         "Es gibt 5 Gebete.": "Es gibt fünf Gebete.",
     }
     for source, expected in cases.items():
-        actual = prepare_kids_voice_text(source)
+        actual = prepare_kids_voice_text(source, apply_pronunciation=False)
         if actual != expected:
             raise SystemExit(f"voice-text self-test failed: {source!r} -> {actual!r} != {expected!r}")
-    print(f"Kids voice text self-test OK · {len(cases)} cases · {SYNTHESIS_REVISION}")
-
+    rules = _load_master_rules()\n    if _PRONUNCIATION_RULES.exists() and not rules:\n        raise SystemExit("voice-text self-test failed: MASTER pronunciation rules are empty")\n    print(f"Kids voice text self-test OK · {len(cases)} number cases · {len(rules)} MASTER pronunciation rules · {SYNTHESIS_REVISION}")\n
 
 def main() -> None:
     parser = argparse.ArgumentParser()
