@@ -564,8 +564,14 @@ def main():
     mobile_html=root/"voice-studio/mobile.html"
     if mobile_html.exists():
         mobile_source=mobile_html.read_text(encoding="utf-8")
-        for required in ('data-content-kind="story"','data-content-kind="dua"','data-content-kind="narration"',"contentStudioUrl","/voice-studio/?cloud=1&kind="):
+        for required in ('data-content-kind="story"','data-content-kind="dua"','data-content-kind="narration"',"contentStudioUrl","/studio/?mobile=1&kind=","/voice-studio/?cloud=1&mobile=1&kind="):
             if required not in mobile_source: fail("mobile content shortcut marker missing: "+required)
+        index_source=(root/"voice-studio/index.html").read_text(encoding="utf-8")
+        content_source=(root/"voice-studio/content-studio.js").read_text(encoding="utf-8")
+        for required in ("MOBILE_CONTENT_MODE","mobile-content-mode"):
+            if required not in index_source: fail("mobile content shell marker missing from index: "+required)
+        for required in ("csMobileBack","html.mobile-content-mode .content-studio-nav","html.mobile-content-mode .cs-fast-actions"):
+            if required not in content_source: fail("mobile content studio responsive marker missing: "+required)
 
     integration_paths=[]
     kids_admin_js=root/"cloudflare/kids-content-admin.js"
