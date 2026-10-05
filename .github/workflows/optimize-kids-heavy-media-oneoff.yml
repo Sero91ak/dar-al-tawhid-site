@@ -10,8 +10,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: kids-heavy-media-oneoff
-  cancel-in-progress: true
+  group: kids-heavy-media-oneoff-${{ github.sha }}
+  cancel-in-progress: false
 
 jobs:
   optimize:
