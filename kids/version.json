@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v46-sahabiyyat-jump1116",
-  "label": "KIDS · V1.07.51",
-  "releasedAt": "2026-10-05T08:09:00+02:00",
-  "note": "Kids v1116: Ṣaḥābiyyāt ist im Geschichten-Hub zusätzlich über die sichtbare Bereichsauswahl Propheten · Ṣaḥābah · Ṣaḥābiyyāt erreichbar; der dritte Bereich springt direkt zur Ṣaḥābiyyāt-Karte. Scroll-Sicherheitsabstand zur Bottom-Navigation wurde vergrößert.",
+  "buildId": "kids-shell-v47-hoerwelten1117",
+  "label": "KIDS · V1.07.52",
+  "releasedAt": "2026-10-05T08:40:00+02:00",
+  "note": "Kids v1117: Geschichten des Īmān nutzt jetzt einen gemeinsamen altersgerechten Universal-Player für Propheten, Ṣaḥābah und Ṣaḥābiyyāt. Edge-to-edge, Mini-Player, echtes Minimieren, ±15 Sekunden, Resume und synchrones Mitlesen laufen aus einer gemeinsamen Registry. Bestehende Bereiche bleiben erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1116",
+    "serviceWorkerCache": "v1117",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -436,7 +436,14 @@
     "storyAudioPinnedBytes": 2098317,
     "storyAudioDeliveryProfile": "optimized-runtime",
     "sahabiyyatCssVersion": 3,
-    "sahabiyyatJsVersion": 5
+    "sahabiyyatJsVersion": 5,
+    "storyHub": "v2-universal-registry",
+    "storyHubPlayer": "single-player-edge-to-edge",
+    "storyHubAgeAdaptive": true,
+    "storyHubIntegratedReadAlong": true,
+    "storyHubMiniPlayer": true,
+    "storyHubGestureNavigation": true,
+    "storyHubManifest": "/kids/data/story-hub.json?v=2"
   },
   "updatedAt": "2026-10-04"
 }
