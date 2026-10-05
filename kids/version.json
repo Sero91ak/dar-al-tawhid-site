@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v55-sahabiyyat-approved1125",
-  "label": "KIDS · V1.07.59",
-  "releasedAt": "2026-10-05T11:38:00+02:00",
-  "note": "Kids v1125: freigegebene Ṣaḥābiyyāt-Bilder als feste lokale App-Assets eingebunden; externe Bildzuordnung für die ersten zehn entfernt; redundanter Kartenkicker 'ṢAḤĀBIYYAH · QUELLENGEPRÜFTE GESCHICHTE' entfernt.",
+  "buildId": "kids-shell-v56-sahabiyyat-names1126",
+  "label": "KIDS · V1.07.60",
+  "releasedAt": "2026-10-05T11:40:00+02:00",
+  "note": "Kids v1126: alle 14 Ṣaḥābiyyāt-Bilder bleiben lokal eingebunden; Namen werden direkt im Bildbereich auf Karte und Detail-Hero sowie im zentralen Geschichten-Player gerendert. Update-Pfad und Cache-Busting für installierte Kids-App gehärtet.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1125",
+    "serviceWorkerCache": "v1126",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -435,8 +435,8 @@
     "sahabiyyatScrollSafety": true,
     "storyAudioPinnedBytes": 2098317,
     "storyAudioDeliveryProfile": "optimized-runtime",
-    "sahabiyyatCssVersion": 4,
-    "sahabiyyatJsVersion": 8,
+    "sahabiyyatCssVersion": 5,
+    "sahabiyyatJsVersion": 9,
     "storyHub": "v3-universal-single-runtime",
     "storyHubPlayer": "single-runtime-audio-player-edge-to-edge",
     "storyHubAgeAdaptive": true,
@@ -453,7 +453,7 @@
     "storyHubAssetVersion": 5,
     "storyHubCategoryArtwork": "manifest-first-local",
     "storyLegacyAudioPlayers": false,
-    "storyHubCssVersion": 3,
+    "storyHubCssVersion": 4,
     "storyReaderControls": "state-machine-v1121",
     "storyReaderTouch": "iphone-ipad-hardened-v1121",
     "storyReaderInternalScroll": true,
@@ -470,7 +470,7 @@
     ],
     "sahabiyyatNameOverlay": true,
     "sahabiyyatNameOverlayPlacement": "card-and-hero-in-own-library-and-universal-story-hub",
-    "storyHubJsVersion": 5,
+    "storyHubJsVersion": 6,
     "sahabiyyatDistinctNewArtworks": [
       "sawdah",
       "juwayriyyah",
@@ -507,7 +507,9 @@
       "/kids/assets/sahabiyyat/juwayriyyah-v1122.jpg",
       "/kids/assets/sahabiyyat/safiyyah-v1122.jpg",
       "/kids/assets/sahabiyyat/maymunah-v1122.jpg"
-    ]
+    ],
+    "sahabiyyatNameOverlayRelease": "v1126",
+    "sahabiyyatInstalledAppCacheRefresh": "hard-refresh-v1126"
   },
   "updatedAt": "2026-10-05"
 }
