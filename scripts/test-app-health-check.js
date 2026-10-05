@@ -69,6 +69,20 @@ if (!testBuildMatch) {
 if (!testHtml.includes("renderStagingBanner")) fail("test/index.html: renderStagingBanner fehlt");
 if (!testHtml.includes("window.__DAR_STAGING_APP")) fail("test/index.html: Staging-Markierung fehlt");
 
+for (const marker of [
+  'document.body.classList.toggle("is-more-route",isMore)',
+  'document.body.classList.toggle("is-account-route",route.view==="account")'
+]) {
+  if (!testHtml.includes(marker)) fail(`test/index.html: Route-State fehlt: ${marker}`);
+}
+if (testHtml.includes('location.href="/widgets/?from=test"')) {
+  fail("test/index.html: Widgets verlassen die Test-App auf /widgets/");
+} else if (!testHtml.includes('location.href="/test/widgets/?from=test"')) {
+  fail("test/index.html: Test-Widgets-Ziel fehlt");
+} else {
+  ok("test/index.html: Mehr/Account Route-State + Widgets-Test-Isolation");
+}
+
 const sw = read("service-worker.js");
 if (!/dar-al-tawhid-offline-light-v\d+/.test(sw)) fail("service-worker.js: CACHE_VERSION fehlt");
 else ok("service-worker.js: CACHE_VERSION vorhanden");

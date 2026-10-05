@@ -45,12 +45,25 @@ function currentCommitTouchesKids() {
       ["diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD"],
       { cwd: ROOT_DIR, encoding: "utf8" }
     ).split(/\r?\n/).map((v) => v.trim()).filter(Boolean);
-    return changed.some((file) =>
+    if (changed.some((file) =>
       /^kids\//.test(file) ||
       /^test\/kids\//.test(file) ||
-      file === "cloudflare/test-app-worker.js" ||
       file === "scripts/purge-test-kids-cache.js"
-    );
+    )) return true;
+
+    if (changed.includes("cloudflare/test-app-worker.js")) {
+      try {
+        const workerDiff = execFileSync(
+          "git",
+          ["diff", "HEAD^", "HEAD", "--", "cloudflare/test-app-worker.js"],
+          { cwd: ROOT_DIR, encoding: "utf8" }
+        );
+        return /(?:\/test\/kids|kidsPath|dar-al-tawhid-kids|kids\/)/i.test(workerDiff);
+      } catch (error) {
+        console.log("Kids worker diff detection failed; generic Test-Worker change does not force Kids verification:", error.message || error);
+      }
+    }
+    return false;
   } catch (error) {
     console.log("Kids scope detection failed; unrelated Kids verification is skipped:", error.message || error);
     return false;
