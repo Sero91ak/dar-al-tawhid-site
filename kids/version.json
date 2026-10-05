@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v45-sahabiyyat-visible1115",
-  "label": "KIDS · V1.07.50",
-  "releasedAt": "2026-10-05T08:02:00+02:00",
-  "note": "Kids v1115: Ṣaḥābiyyāt ist fest im Geschichten-Hub verankert, wird beim Start direkt hinter Ṣaḥābah positioniert und die App-Shell lädt online network-first statt zuerst eine veraltete Cache-Seite zu zeigen.",
+  "buildId": "kids-shell-v46-sahabiyyat-jump1116",
+  "label": "KIDS · V1.07.51",
+  "releasedAt": "2026-10-05T08:09:00+02:00",
+  "note": "Kids v1116: Ṣaḥābiyyāt ist im Geschichten-Hub zusätzlich über die sichtbare Bereichsauswahl Propheten · Ṣaḥābah · Ṣaḥābiyyāt erreichbar; der dritte Bereich springt direkt zur Ṣaḥābiyyāt-Karte. Scroll-Sicherheitsabstand zur Bottom-Navigation wurde vergrößert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1115",
+    "serviceWorkerCache": "v1116",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -425,7 +425,14 @@
     "sahabiyyatStaticHubCard": true,
     "sahabiyyatStaticEntry": true,
     "sahabiyyatForcedAfterSahaba": true,
-    "navigationStrategy": "network-first-with-offline-fallback"
+    "navigationStrategy": "network-first-with-offline-fallback",
+    "storyAreaJump": true,
+    "storyAreaJumpItems": [
+      "Propheten",
+      "Ṣaḥābah",
+      "Ṣaḥābiyyāt"
+    ],
+    "sahabiyyatScrollSafety": true
   },
   "updatedAt": "2026-10-04"
 }
