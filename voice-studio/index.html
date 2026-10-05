@@ -1187,7 +1187,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
   </aside>
 </section>
 
-<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.117 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
+<div class="footer">DĀR AL TAWḤĪD Voice Studio 2.9.118 · lokale Produktion · Audio wird erst nach deiner Bestätigung übernommen</div>
 </div>
 </div>
 
@@ -1197,7 +1197,7 @@ body.studio-page-system .content-studio-nav .cs-flow,body.studio-page-system .co
 </div>
 
 <script>
-const APP_VERSION="2.9.117";
+const APP_VERSION="2.9.118";
 const MOBILE_CONTENT_MODE=new URLSearchParams(location.search).get("mobile")==="1";
 if(MOBILE_CONTENT_MODE)document.documentElement.classList.add("mobile-content-mode");
 const LOCKED=new Set(["DĀR AL TAWḤĪD","Dār al-Tawḥīd","Allāh","Qurʾān","Tawḥīd","ʿAqīdah","Ḥadīṯ","Ṣaḥābah","Duʿāʾ","Ṣalāh","Muḥammad","Ibrāhīm","Mūsā"]);
@@ -2259,10 +2259,14 @@ async function getDesktopGenerationJob(jobId){
 }
 async function startDesktopGenerationJob(kind,payload,text=""){
   const endpoint=kind==="free"?"/generate-free-start":"/generate-start";
-  const r=await localRequest(endpoint,{
-    method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)
-  });
-  const d=await r.json().catch(()=>({}));
+  let r=await localRequest(endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+  let d=await r.json().catch(()=>({}));
+  if(kind!=="free"&&r.status===422&&Array.isArray(d.items)&&d.items.length){
+    const legacyWarnings=d.items;
+    const rr=await localRequest("/generate-free-start",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...payload,pronunciationLibrary:true,interactiveFast:true})});
+    const dd=await rr.json().catch(()=>({}));
+    if(rr.ok&&dd.ok){r=rr;d={...dd,pronunciationWarnings:legacyWarnings,compatibilityFallback:true}}
+  }
   if(!r.ok||!d.ok){
     const err=Error(d.error||"Audio-Erzeugung konnte nicht gestartet werden.");
     err.status=Number(r.status||0);
@@ -2272,7 +2276,7 @@ async function startDesktopGenerationJob(kind,payload,text=""){
   persistDesktopGenerationJob(d.jobId,kind,text);
   return d;
 }
-function openServerPronunciationReview(items){
+function openServerPronunciationReview(items,{openFirst=true}={}){
   const terms=[];
   const seen=new Set();
   for(const row of (Array.isArray(items)?items:[])){
@@ -2290,7 +2294,7 @@ function openServerPronunciationReview(items){
       :terms.length+" Wörter brauchen eine Ausspracheprüfung. Das erste Wort ist geöffnet; danach die roten Wörter abarbeiten.",
     "warn"
   );
-  chooseStoryWord(terms[0]);
+  if(openFirst)chooseStoryWord(terms[0]);
   return true;
 }
 async function waitDesktopGenerationJob(jobId,timeoutMs=30*60*1000,onProgress=null){
@@ -2980,6 +2984,9 @@ async function generate({autoRerender=false}={}){
       text,voice:"Serhat",format:"wav",
       style:$("#styleMode").value,interactiveFast:true
     },text);
+    if(Array.isArray(started.pronunciationWarnings)&&started.pronunciationWarnings.length){
+      openServerPronunciationReview(started.pronunciationWarnings,{openFirst:false});
+    }
     activeJobId=String(started.jobId||"");
     btns.forEach(b=>b.textContent=started.reused?"Laufenden Auftrag öffnen …":"Audio läuft …");
     const job=await waitDesktopGenerationJob(
