@@ -136,7 +136,6 @@ function renderCards(){
         '<span class="sy-image-name">'+esc(item.name)+'</span>'+
       '</span>'+
       '<span class="ms-row-copy">'+
-        '<span class="ms-row-kicker">ṢAḤĀBIYYAH · QUELLENGEPRÜFTE GESCHICHTE</span>'+
         '<strong class="ms-row-title">'+esc(item.name)+'</strong>'+
         '<span class="ms-row-ar" dir="rtl">'+esc(item.nameAr||"")+' رضي الله عنها</span>'+
         '<span class="ms-row-summary">'+esc(item.summary||"")+'</span>'+
