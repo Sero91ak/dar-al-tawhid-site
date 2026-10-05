@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v67-stories1137",
-  "label": "KIDS · V1.07.71",
-  "releasedAt": "2026-10-05T15:27:00+02:00",
-  "note": "Kids v1137: Der Hörgeschichten-Player trennt jetzt sauber zwischen „Nur lesen“ und „Hören & mitlesen“. Beide Modi öffnen den dedizierten Fokus-Reader statt den Hauptplayer nach unten zu verschieben. Der Mitlese-Reader scrollt ausschließlich in seinem eigenen Textbereich, hebt den laufenden Abschnitt automatisch hervor und sperrt den Hintergrund vollständig. Cache- und App-Shell-Versionen wurden angehoben.",
+  "buildId": "kids-shell-v68-stories1138",
+  "label": "KIDS · V1.07.72",
+  "releasedAt": "2026-10-05T15:31:00+02:00",
+  "note": "Kids v1138: Der Geschichten-Player nutzt jetzt überall einen echten Fokus-Reader für „Nur lesen“ sowie „Hören & mitlesen“. Beim Mitlesen bleibt die Höransicht stehen; der laufende Absatz wird im eigenen Reader-Fenster hervorgehoben und ausschließlich innerhalb dieses Textbereichs automatisch nachgeführt. Der Hintergrund ist währenddessen vollständig inert. Die Scroll-Berechnung wurde für iPhone und iPad relativ zum Reader selbst gehärtet, damit die Seite nicht mehr nach unten springt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1137",
+    "serviceWorkerCache": "v1138",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -166,8 +166,8 @@
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1133-safe-area",
     "storiesBottomNav": "separated-background-v1086",
-    "storyFollowReader": "v6",
-    "storyFollowReaderMode": "dedicated-read-and-follow-focus-v6",
+    "storyFollowReader": "v7",
+    "storyFollowReaderMode": "dedicated-read-and-follow-focus-v7",
     "storyFollowReaderReusable": true,
     "sectionEntryHeroes": "edge-to-edge-compact-photoreal-v1097",
     "sectionHeroArtworkFormat": "local-png-jpeg",
@@ -466,8 +466,8 @@
     "storyHubCategoryArtwork": "manifest-first-local",
     "storyLegacyAudioPlayers": false,
     "storyHubCssVersion": 4,
-    "storyReaderControls": "focus-dialog-v1137",
-    "storyReaderTouch": "iphone-ipad-hardened-v1121",
+    "storyReaderControls": "focus-dialog-v1138",
+    "storyReaderTouch": "iphone-ipad-focus-reader-v1138",
     "storyReaderInternalScroll": true,
     "storyReaderGestureGuard": true,
     "storyReaderCloseRestoresPosition": true,
@@ -585,7 +585,8 @@
     "storiesHomeStylesheetVersion": "1136-1",
     "storyReaderBackgroundInert": true,
     "storyReaderReadOnlyMode": true,
-    "storyReaderListenAndFollowMode": true
+    "storyReaderListenAndFollowMode": true,
+    "storyReaderInternalScrollGeometry": "relative-scroll-pane-v1138"
   },
   "updatedAt": "2026-10-05"
 }
