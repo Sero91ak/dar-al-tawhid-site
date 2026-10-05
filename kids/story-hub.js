@@ -188,7 +188,7 @@ function renderList(){
   $("#ghList").innerHTML=list.map(item=>{
     const m=audioMeta(item),img=artFor(item,activeCategory,false);
     return '<button class="gh-story" type="button" data-gh-id="'+esc(item.id)+'">'+
-      '<span class="gh-story-art">'+(img?'<img src="'+esc(img)+'" alt="" decoding="async" loading="lazy">':'')+(activeCategory==="sahabiyyat"?'<span class="gh-story-art-name">'+esc(storyName(item))+'</span>':'')+'</span>'+
+      '<span class="gh-story-art">'+(img?'<img src="'+esc(img)+'" alt="" decoding="async" loading="lazy">':'')+'</span>'+
       '<span class="gh-story-copy"><small>'+(m?.url?"HÖRBEREIT":"LESEN · AUDIO FOLGT")+'</small><strong>'+esc(storyName(item))+'</strong><em dir="rtl">'+esc(arabic(item,activeCategory))+'</em><span>'+esc(item.summary||"")+'</span></span><span class="gh-story-go" aria-hidden="true">›</span></button>';
   }).join("");
   $("#ghList").querySelectorAll("[data-gh-id]").forEach(b=>b.addEventListener("click",()=>selectStory(b.dataset.ghId)));
