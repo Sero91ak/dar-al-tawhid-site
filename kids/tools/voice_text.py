@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 import unicodedata
+from pathlib import Path
 
 SYNTHESIS_REVISION = "kids-speech-flow-v2-20261005"
 
@@ -21,6 +23,9 @@ _DIGIT_TRANSLATION = str.maketrans(
     "٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹",
     "01234567890123456789",
 )
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_PRONUNCIATION_RULES = _REPO_ROOT / "data/pronunciation/pronunciation-rules.json"
+_RULE_BUCKETS = None
 
 
 def german_number(value: int) -> str:
@@ -51,12 +56,60 @@ def german_number(value: int) -> str:
     return str(n)
 
 
-def prepare_kids_voice_text(text: str, *, apply_dictionary: bool = True) -> str:
-    """Prepare hidden TTS text while leaving the visible Kids content untouched.
+def _load_rule_buckets():
+    global _RULE_BUCKETS
+    if _RULE_BUCKETS is not None:
+        return _RULE_BUCKETS
 
-    The owner voice gets explicit German number words instead of raw digits. This
-    avoids provider-dependent readings such as digit-by-digit Sūrah references.
-    Decimal/version strings and URL-like numbers are deliberately left alone.
+    buckets = {}
+    try:
+        data = json.loads(_PRONUNCIATION_RULES.read_text(encoding="utf-8"))
+        for rule in data.get("rules") or []:
+            needle = str(rule.get("string_to_replace") or "")
+            spoken = str(rule.get("tts_text") or rule.get("alias") or "")
+            if not needle or not spoken:
+                continue
+            buckets.setdefault(needle[0], []).append((needle, spoken))
+        for values in buckets.values():
+            values.sort(key=lambda row: len(row[0]), reverse=True)
+    except Exception:
+        buckets = {}
+
+    _RULE_BUCKETS = buckets
+    return buckets
+
+
+def apply_pronunciation_library(text: str) -> str:
+    """Apply DĀR Voice Studio's longest-match curated TTS spellings."""
+    value = str(text or "")
+    buckets = _load_rule_buckets()
+    if not value or not buckets:
+        return value
+
+    out = []
+    pos = 0
+    while pos < len(value):
+        hit = None
+        for needle, spoken in buckets.get(value[pos], ()):
+            if value.startswith(needle, pos):
+                hit = (needle, spoken)
+                break
+        if hit is None:
+            out.append(value[pos])
+            pos += 1
+            continue
+        out.append(hit[1])
+        pos += len(hit[0])
+    return "".join(out)
+
+
+def prepare_kids_voice_text(text: str, *, apply_dictionary: bool = True) -> str:
+    """Prepare hidden TTS text while leaving visible Kids content untouched.
+
+    Numbers are expanded to deterministic German speech, including Qurʾān
+    references and answer numbering. Then the shared DĀR pronunciation library
+    is applied so Quiz and Duʿāʾ use the same learned/native Islamic terms as
+    the Voice Studio.
     """
     value = unicodedata.normalize("NFC", str(text or ""))
     value = value.translate(_DIGIT_TRANSLATION)
@@ -116,7 +169,11 @@ def prepare_kids_voice_text(text: str, *, apply_dictionary: bool = True) -> str:
     value = re.sub(r"[ \t]+", " ", value)
     value = re.sub(r"\s+([,;:!?؟])", r"\1", value)
     value = re.sub(r"([,;:!?؟])(?=\S)", r"\1 ", value)
-    return value.strip()
+    value = value.strip()
+
+    if apply_dictionary:
+        value = apply_pronunciation_library(value)
+    return value
 
 
 def _self_test() -> None:
@@ -134,10 +191,14 @@ def _self_test() -> None:
         actual = prepare_kids_voice_text(source, apply_dictionary=False)
         if actual != expected:
             raise SystemExit(f"voice-text self-test failed: {source!r} -> {actual!r} != {expected!r}")
-    # The production path must also be able to load the shared pronunciation
-    # library; do not assert one specific term because the curated library grows.
+
     if _PRONUNCIATION_RULES.exists() and not _load_rule_buckets():
         raise SystemExit("voice-text self-test failed: pronunciation library is empty")
+    if _PRONUNCIATION_RULES.exists():
+        sample = apply_pronunciation_library("Tawḥīd")
+        if sample == "Tawḥīd":
+            raise SystemExit("voice-text self-test failed: pronunciation rules not applied")
+
     print(f"Kids voice text self-test OK · {len(cases)} number cases · {SYNTHESIS_REVISION}")
 
 
@@ -145,12 +206,13 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("text", nargs="?")
     parser.add_argument("--self-test", action="store_true")
+    parser.add_argument("--numbers-only", action="store_true")
     args = parser.parse_args()
     if args.self_test:
         _self_test()
         return
     source = args.text if args.text is not None else sys.stdin.read()
-    sys.stdout.write(prepare_kids_voice_text(source))
+    sys.stdout.write(prepare_kids_voice_text(source, apply_dictionary=not args.numbers_only))
 
 
 if __name__ == "__main__":
