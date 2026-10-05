@@ -131,7 +131,7 @@ function doneCount(){return items.reduce((n,item)=>n+(done(item.id)?1:0),0)}
 function markDone(id){if(!id)return;try{localStorage.setItem(DONE_PREFIX+id,"1")}catch(_){}renderCards()}
 
 function renderModeButtons(){
-  const detailModes=document.querySelector(".ps-detail-modes");
+  const detailModes=document.querySelector(".ps-prophet-modes");
   const libraryModes=document.querySelector("#psModes");
   const toolbar=libraryModes?.closest(".ps-toolbar");
   if(detailModes)detailModes.hidden=false;
@@ -298,7 +298,7 @@ function ensureUi(){
             '<div class="ps-ar" id="psArabic" dir="rtl"></div>'+
             '<p class="ps-summary" id="psSummary"></p>'+
             '<div class="ps-meta" id="psMeta"></div>'+
-            '<div class="ps-detail-modes"><button class="ps-detail-mode" data-ps-mode="both" type="button">Hören &amp; Mitlesen</button><button class="ps-detail-mode" data-ps-mode="listen" type="button">Hören</button><button class="ps-detail-mode" data-ps-mode="read" type="button">Lesen</button></div>'+
+            '<div class="ps-prophet-modes ms-detail-modes"><button data-ps-mode="both" type="button">Hören &amp; Mitlesen</button><button data-ps-mode="listen" type="button">Hören</button><button data-ps-mode="read" type="button">Lesen</button></div>'+
           '</div>'+
         '</div>'+
         '<div class="ps-body">'+
