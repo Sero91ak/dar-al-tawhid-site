@@ -251,10 +251,11 @@ async function finalizeDarTestHomeV1193(asset) {
 
 
   // DAR_ILM_HADITH_V1243
-  if (!html.includes("ilm-hadith-v1243.css")) {
-    const hadithCss = '<link rel="stylesheet" href="/test/assets/ilm-hadith-v1243.css?v=hadith-authority-v1287">';
-    if (html.includes("</head>")) html = html.replace("</head>", hadithCss + "</head>");
-    else html = html.replace("<body", hadithCss + "<body");
+  // This authority must be LAST because legacy Hadith style tags exist near the end of test/index.html.
+  if (!html.includes('id="darHadithAuthorityV1287"')) {
+    const hadithAuthority = '<style id="darHadithAuthorityV1287">@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-authority-v1287");</style>';
+    if (html.includes("</html>")) html = html.replace("</html>", hadithAuthority + "</html>");
+    else html += hadithAuthority;
   }
 
   // DAR_ILM_DUA_V1244
