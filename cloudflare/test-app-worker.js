@@ -252,7 +252,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // DAR_ILM_HADITH_V1243
   if (!/ilm-hadith-v1243\.css/.test(html)) {
-    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-hadith-v1243.css?v=hadith-authority-v1285"><\/head>');
+    html = html.replace(/<\/head>/i, '<link rel="stylesheet" href="/test/assets/ilm-hadith-v1243.css?v=hadith-authority-v1286"><\/head>');
   }
 
   // DAR_ILM_DUA_V1244
