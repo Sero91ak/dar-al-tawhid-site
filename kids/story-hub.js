@@ -115,7 +115,7 @@ function ensureUi(){
     id:"universal-story",audio,
     getContent:()=>{
       const meta=audioMeta(active)||{};
-      return{key:active?(category().kind+":"+active.id+":"+ageKey()):"kids-story",title:active?storyName(active):"Geschichte",subtitle:category().label+" · Alter "+age(),album:"DĀR AL TAWḤĪD Kids · Geschichten des Īmān",text:textFor(active),artwork:active?artFor(active,activeCategory,true):"",deepLink:active?("#stories/listen/"+activeCategory+"/"+encodeURIComponent(active.id)):"#stories",audioOnly:isYoung(),timings:meta.timings||meta.paragraphTimings||meta.cues||[],syncPoints:meta.syncPoints||meta.syncAnchors||[]};
+      return{key:active?(category().kind+":"+active.id+":"+ageKey()):"kids-story",title:active?storyName(active):"Geschichte",subtitle:category().label,album:"DĀR AL TAWḤĪD Kids · Geschichten des Īmān",text:textFor(active),artwork:active?artFor(active,activeCategory,true):"",deepLink:active?("#stories/listen/"+activeCategory+"/"+encodeURIComponent(active.id)):"#stories",audioOnly:isYoung(),timings:meta.timings||meta.paragraphTimings||meta.cues||[],syncPoints:meta.syncPoints||meta.syncAnchors||[]};
     },
     toggleAudio,autoOpen:false,disabled:()=>!audioMeta(active)?.url
   })||null;
@@ -236,7 +236,7 @@ function renderPlayer(){
   $("#ghBack15").hidden=!hasAudio;
   $("#ghFwd15").hidden=!hasAudio;
   $("#ghAudioNote").textContent=hasAudio?"Deine Stelle wird automatisch gespeichert.":"Audio folgt. Der vollständige Lesetext bleibt verfügbar.";
-  reader?.setContent({title:storyName(active),subtitle:cat.label+" · Alter "+age(),text,audioOnly:isYoung(),timings:meta?.timings||meta?.paragraphTimings||meta?.cues||[],syncPoints:meta?.syncPoints||meta?.syncAnchors||[]});
+  reader?.setContent({title:storyName(active),subtitle:cat.label,text,audioOnly:isYoung(),timings:meta?.timings||meta?.paragraphTimings||meta?.cues||[],syncPoints:meta?.syncPoints||meta?.syncAnchors||[]});
   if(meta?.url){audio.src=meta.url;audio.preload="metadata"}else{audio.removeAttribute("src");try{audio.load()}catch(_){}}
   renderNext();updateProgress();renderPlay();renderMini();
 }
