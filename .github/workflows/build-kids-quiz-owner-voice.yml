@@ -244,7 +244,7 @@ jobs:
                       body=json.dumps({
                           "text":text,
                           "prepared":prepared,
-                          "profile":profile
+                          "profile":("kids_lesson" if profile=="quiz" else profile)
                       },ensure_ascii=False).encode("utf-8")
                       req=urllib.request.Request(
                           API+"/generate",
