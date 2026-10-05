@@ -1,6 +1,8 @@
 /* DĀR AL TAWḤĪD Kids — shared story follow-along reader v2 */
 .kids-follow-reader{display:none;position:fixed;z-index:280;inset:0;align-items:flex-end;justify-content:center;padding:0;background:rgba(2,13,21,.66);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
 .kids-follow-reader.open{display:flex}
+@keyframes kfr-sheet-rise{from{transform:translateY(100%);opacity:.55}to{transform:translateY(0);opacity:1}}
+.kids-follow-reader.open .kfr-sheet{animation:kfr-sheet-rise .28s cubic-bezier(.22,.78,.24,1) both}
 .kfr-sheet{width:min(820px,100%);max-height:min(76dvh,760px);display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(239,203,121,.24);border-bottom:0;border-radius:30px 30px 0 0;background:linear-gradient(180deg,#0a2b3a 0%,#071d2a 100%);box-shadow:0 -24px 70px rgba(0,0,0,.36);color:#f7f2e9;padding-bottom:env(safe-area-inset-bottom)}
 .kfr-head{position:relative;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:18px 18px 10px;border-bottom:1px solid rgba(255,255,255,.07)}
 .kfr-head-copy{min-width:0;display:grid;gap:2px}.kfr-kicker{font-size:11px;line-height:1.2;letter-spacing:.12em;font-weight:950;color:#86d3cc}.kfr-title{font-size:clamp(19px,4.7vw,27px);line-height:1.15;font-weight:950;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
