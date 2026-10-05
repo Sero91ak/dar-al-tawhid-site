@@ -155,3 +155,16 @@ html.gh-world-open,html.gh-player-open,html.gh-world-open body,html.gh-player-op
   .gh-story-art-name{left:6px;right:6px;bottom:6px;font-size:12px}
   .gh-player-image-name{left:14px;bottom:116px;max-width:84%;font-size:18px;padding:8px 11px;border-radius:12px}
 }
+
+/* STORY_HUB_CARD_REFINEMENT_V12 */
+.gh-story-art-name{display:none!important}
+.gh-story-copy>span:last-child{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+}
+@media(max-width:620px){
+  .gh-story{min-height:148px!important}
+  .gh-story-copy{gap:4px!important}
+}
