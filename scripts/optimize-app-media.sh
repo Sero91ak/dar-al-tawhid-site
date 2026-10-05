@@ -48,26 +48,26 @@ opt_image() {
   ext="${f##*.}"
   ext="${ext,,}"
   size=$(stat -c%s "$f")
-  (( size >= 180000 )) || { skipped_count=$((skipped_count + 1)); return; }
+  (( size >= 120000 )) || { skipped_count=$((skipped_count + 1)); return; }
 
   case "$ext" in
     jpg|jpeg)
       tmp="$TMP_DIR/$(basename "$f").jpg"
-      convert "$f" -auto-orient -strip -resize '2880x2880>' -sampling-factor 4:2:0 -interlace Plane -quality 82 "$tmp" 2>/dev/null || return 0
+      convert "$f" -auto-orient -strip -resize '2200x2200>' -sampling-factor 4:2:0 -interlace Plane -quality 78 "$tmp" 2>/dev/null || return 0
       replace_if_smaller "$f" "$tmp"
       ;;
     png)
       local pre="$TMP_DIR/$(basename "$f").pre.png"
       tmp="$TMP_DIR/$(basename "$f").png"
       convert "$f" -auto-orient -strip -resize '2880x2880>' "$pre" 2>/dev/null || cp "$f" "$pre"
-      if pngquant --quality=74-90 --speed 2 --strip --force --output "$tmp" -- "$pre" >/dev/null 2>&1; then
+      if pngquant --quality=60-82 --speed 2 --strip --force --output "$tmp" -- "$pre" >/dev/null 2>&1; then
         replace_if_smaller "$f" "$tmp"
       fi
       rm -f "$pre"
       ;;
     webp)
       tmp="$TMP_DIR/$(basename "$f").webp"
-      convert "$f" -auto-orient -strip -resize '2880x2880>' -quality 80 "$tmp" 2>/dev/null || return 0
+      convert "$f" -auto-orient -strip -resize '2200x2200>' -quality 76 "$tmp" 2>/dev/null || return 0
       replace_if_smaller "$f" "$tmp"
       ;;
   esac
@@ -76,7 +76,7 @@ opt_image() {
 opt_video() {
   local f="$1" tmp size
   size=$(stat -c%s "$f")
-  (( size >= 1200000 )) || { skipped_count=$((skipped_count + 1)); return; }
+  (( size >= 800000 )) || { skipped_count=$((skipped_count + 1)); return; }
   tmp="$TMP_DIR/$(basename "$f").mp4"
   ffmpeg -hide_banner -loglevel error -y -i "$f"     -map 0:v:0 -map '0:a?'     -vf "scale='min(1920,iw)':'min(1920,ih)':force_original_aspect_ratio=decrease"     -c:v libx264 -preset medium -crf 27 -pix_fmt yuv420p     -c:a aac -b:a 96k -movflags +faststart     "$tmp" || { rm -f "$tmp"; return 0; }
   replace_if_smaller "$f" "$tmp"
@@ -89,7 +89,7 @@ opt_voice() {
   (( size >= 250000 )) || { skipped_count=$((skipped_count + 1)); return; }
 
   bitrate="$(ffprobe -v error -select_streams a:0 -show_entries stream=bit_rate -of default=nw=1:nk=1 "$f" 2>/dev/null | head -n1 || true)"
-  if [[ "$bitrate" =~ ^[0-9]+$ ]] && (( bitrate <= 70000 )); then
+  if [[ "$bitrate" =~ ^[0-9]+$ ]] && (( bitrate <= 60000 )); then
     skipped_count=$((skipped_count + 1))
     return
   fi
@@ -99,7 +99,7 @@ opt_voice() {
   case "$ext" in
     m4a|aac)
       tmp="$TMP_DIR/$(basename "$f").m4a"
-      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a aac -b:a 64k -movflags +faststart "$tmp" || return 0
+      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a aac -b:a 56k -movflags +faststart "$tmp" || return 0
       ;;
     mp3)
       tmp="$TMP_DIR/$(basename "$f").mp3"
