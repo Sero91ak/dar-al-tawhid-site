@@ -132,11 +132,11 @@ function markDone(id){if(!id)return;try{localStorage.setItem(DONE_PREFIX+id,"1")
 
 function renderModeButtons(){
   const detailModes=document.querySelector(".ps-prophet-modes");
+  if(detailModes)detailModes.hidden=false;
   const libraryModes=document.querySelector("#psModes");
   const toolbar=libraryModes?.closest(".ps-toolbar");
-  if(detailModes)detailModes.hidden=false;
-  if(libraryModes)libraryModes.hidden=false;
-  if(toolbar)toolbar.hidden=false;
+  if(libraryModes)libraryModes.hidden=true;
+  if(toolbar)toolbar.hidden=true;
   const current=mode();
   document.querySelectorAll("[data-ps-mode]").forEach(b=>b.classList.toggle("active",b.dataset.psMode===current));
 }
@@ -170,18 +170,22 @@ function renderMuhammadFeature(){
 }
 function renderCards(){
   const grid=$("#psGrid");if(!grid)return;
+  const libraryPage=$("#psLibraryPage");if(libraryPage)libraryPage.dataset.age=age();
   renderMuhammadFeature();
   const regularItems=items.filter(item=>item.id!=="muhammad");
   grid.innerHTML=regularItems.map((item,index)=>{
     const text=buildText(item);
-    const meta=(item.disputed?"IKHTILĀF · ":"")+durationLabel(item,text);
+    const rawSummary=String(item.summary||"").replace(/\s+/g," ").trim();
+    const shortSummary=rawSummary.length>78?(rawSummary.slice(0,75).replace(/\s+\S*$/,"")+"…"):rawSummary;
+    const meta=(item.disputed?"Ikhtilāf · ":"")+durationLabel(item,text)+" · Alter "+age();
     return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button">'+
       '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" loading="lazy">'+
       '<span class="ps-row-rank" aria-hidden="true">'+String(index+1).padStart(2,"0")+'</span>'+
       '<span class="ps-row-copy">'+
-        '<span class="ps-row-meta">'+esc(meta)+'</span>'+
         '<span class="ps-row-title">'+esc(item.name)+'</span>'+
         '<span class="ps-row-ar" dir="rtl">'+esc(arabicLine(item))+'</span>'+
+        '<span class="ps-row-summary">'+esc(shortSummary)+'</span>'+
+        '<span class="ps-row-meta">'+esc(meta)+'</span>'+
       '</span>'+
       '<span class="ps-row-go'+(isAudioOnlyAge()?' is-listen':'')+'" aria-hidden="true">'+(isAudioOnlyAge()?'▶':'›')+'</span>'+
       (done(item.id)?'<span class="ps-done" aria-label="Abgeschlossen"></span>':'')+
