@@ -107,12 +107,3 @@ html.kids-follow-reader-open{overflow:hidden!important;overscroll-behavior:none!
 @media(min-width:700px){
   .kfr-help{font-size:14px}
 }
-
-
-/* v1147 · local story player controls restored */
-.story-local-controls{display:grid;grid-template-columns:minmax(64px,auto) minmax(0,1fr) minmax(64px,auto);gap:10px;align-items:center}
-.story-local-controls .ms-play,.story-local-controls .ps-play{width:100%;min-height:54px;font-size:16px}
-.story-skip{min-height:50px;padding:0 10px;border:1px solid rgba(239,203,121,.2);border-radius:15px;background:rgba(255,255,255,.045);color:#f4ddb0;font:inherit;font-size:14px;font-weight:900;cursor:pointer;touch-action:manipulation}
-.story-skip:active{transform:scale(.98)}
-.story-skip:focus-visible{outline:2px solid rgba(239,203,121,.7);outline-offset:3px}
-@media(max-width:390px){.story-local-controls{grid-template-columns:58px minmax(0,1fr) 58px;gap:8px}.story-skip{padding:0 6px;font-size:13px}}
