@@ -27986,7 +27986,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1292";
+const APP_BUILD_ID="app-shell-v1293";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28269,6 +28269,17 @@ function updateChrome(route){
   document.body.classList.toggle("is-area-route",!isHome);
   document.body.classList.toggle("is-more-route",isMore);
   document.body.classList.toggle("is-account-route",route.view==="account");
+  document.body.classList.toggle("is-about-route",route.view==="about");
+  document.body.classList.toggle("is-notifications-route",route.view==="notifications");
+  document.body.classList.toggle("is-settings-route",route.view==="settings");
+  document.body.classList.toggle("is-news-route",route.view==="news");
+  document.body.classList.toggle("is-news-detail-route",route.view==="news-detail");
+  document.body.classList.toggle("is-ramadan-route",route.view==="ramadan");
+  document.body.classList.toggle("is-zakat-route",route.view==="zakat");
+  document.body.classList.toggle("is-source-library-route",["books","quellen-book","quellen-scholar"].includes(route.view));
+  document.body.classList.toggle("is-recent-route",route.view==="recent");
+  document.body.classList.toggle("is-saved-route",route.view==="saved");
+  document.body.classList.toggle("is-quran-topic-route",route.view==="quran-topic");
   document.body.classList.toggle("is-ilm-chat-route",isIlm);
   document.body.classList.toggle("is-propheten-route",route.view==="propheten");
   document.body.classList.toggle("is-frauen-route",route.view==="frauen");
@@ -28290,11 +28301,11 @@ function updateChrome(route){
   if(route.view!=="quran-surah"&&route.view!=="quran")ensurePageDocumentScroll();
   document.body.classList.toggle("is-library-route",["bibliothek","bibliothek-detail","bibliothek-reader"].includes(route.view));
   document.body.classList.toggle("is-dua-route",["duas","dua-cat","dua"].includes(route.view));
-  document.body.classList.toggle("is-topics-route",route.view==="topics");
+  document.body.classList.toggle("is-topics-route",["topics","recent","saved"].includes(route.view));
   document.body.classList.toggle("is-topic-route",route.view==="topic"||route.view==="book"||route.view==="series");
   document.body.classList.toggle("is-scholars-route",route.view==="scholars");
   document.body.classList.toggle("is-scholar-route",route.view==="scholar");
-  document.body.classList.toggle("is-catalog-route",["duas","dua-cat","dua","topics","topic","scholars","scholar","book","series","frauen"].includes(route.view));
+  document.body.classList.toggle("is-catalog-route",["duas","dua-cat","dua","topics","topic","recent","saved","scholars","scholar","book","series","frauen","books","quellen-book","quellen-scholar"].includes(route.view));
   document.body.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
   document.documentElement.classList.toggle("is-library-reader-route",route.view==="bibliothek-reader");
   document.body.classList.toggle("is-post-route",isPost);
@@ -28333,7 +28344,7 @@ function updateChrome(route){
   if(appBar)appBar.classList.remove("is-home");
   backBtn.classList.add("show");
   if(homeBtn)homeBtn.classList.add("show");
-  const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",feed:"Feed",ilm:"ʿIlm",quiz:"Quiz-App",hadith:"Hadith",bibliothek:"Bibliothek","bibliothek-detail":"Bibliothek","bibliothek-reader":"Lesen",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",qibla:"Qibla",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:""};
+  const labels={"news-detail":"Neu im Fokus",news:"Neu im Fokus",notifications:"Benachrichtigungen","quran-topic":"Qurʾān nach Themen",feed:"Feed",ilm:"ʿIlm",quiz:"Quiz-App",hadith:"Hadith",bibliothek:"Bibliothek","bibliothek-detail":"Bibliothek","bibliothek-reader":"Lesen",topics:"Beiträge",scholars:"Gelehrte",books:"Bücher",recent:"Neueste Beiträge",saved:"Favoriten",account:"Mein Bereich",about:"Über diese App",duas:"Duʿāʾ",quran:"Qurʾān",calendar:"Islamischer Kalender",prayer:"Gebetszeiten",jummah:"Jumuʿah",qibla:"Qibla",settings:"Einstellungen",ramadan:"Ramaḍān & ʿĪd",zakat:"Zakāt-Rechner",series:"Serie",statistik:"Statistik",more:"","image-editor":"Bild-Beitrag","image-editor-test":"Bild-Editor Test",topic:route.value,scholar:resolveScholarRef(route.value).label,book:route.value,"dua-cat":route.value,dua:"Duʿāʾ-Eintrag",post:""};
   let crumbLabel=labels[route.view]||"";
   if(isMore)crumbLabel="";
   if(isPost)crumbLabel="";
