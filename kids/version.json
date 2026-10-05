@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v90-restored-story-cards1163",
-  "label": "KIDS · V1.07.91",
+  "buildId": "kids-shell-v91-story-card-authority1164",
+  "label": "KIDS · V1.07.92",
   "releasedAt": "2026-10-05T19:44:00+02:00",
-  "note": "Story-Card-Reparatur v1163: Die kompakte V13/v1162-Geometrie wurde aus den Auswahlkarten zurückgenommen. Propheten erhalten wieder die bewährte ca. 150px-Kartenhöhe, Ṣaḥābah und Ṣaḥābiyyāt die größere V12-Geometrie mit automatischer Höhe für lange Namen. Bilder behalten ihre ursprüngliche linke Bildfläche und gehen nur über einen weichen Farbverlauf in die Textfläche über. Wörter werden nicht mehr mitten im Wort getrennt. Der doppelte Play-Pfeil ist entfernt; es bleibt exakt ein Symbol. Die Geschichten-Startseite, Player-, Audio- und Mitleselogik bleiben unverändert.",
+  "note": "Story-Card-Reparatur v1164: Die Reparaturdatei wird jetzt tatsächlich nach story-card-system.css geladen und kann nicht mehr vom alten globalen Kartensystem überschrieben werden. Ṣaḥābah und Ṣaḥābiyyāt behalten die größere V12-Geometrie, Propheten ihre eigene bewährte Höhe. Bilder behalten ihre ursprüngliche Bildfläche und werden nur weich in die Kartenfarbe eingebettet. Namen brechen nur an Wortgrenzen; der Play-Button zeigt exakt ein Symbol. Geschichten-Startseite sowie Player-, Audio- und Mitleselogik bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1163",
+    "serviceWorkerCache": "v1164",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -641,7 +641,7 @@
       "sahaba",
       "sahabiyyat"
     ],
-    "storyLibraryAuthority": "/kids/story-card-system.css?v=2",
+    "storyLibraryAuthority": "/kids/story-library-cards.css?v=3",
     "storyLibraryAuthorityLoadedLate": true,
     "storyReaderExplicitClose": "pause-save-no-autoplay",
     "storyReaderResumeAlignment": "instant-current-time-snap",
@@ -653,16 +653,18 @@
     "storyLibraryGlobalModeControls": false,
     "muhammadHeroHeightReduction": "about 13–15% phone",
     "muhammadHeroNestedCta": false,
-    "storyLibraryCards": "restored-v12-geometry-soft-edge-v2",
+    "storyLibraryCards": "restored-v12-geometry-soft-edge-v3",
     "storyLibraryCardArtwork": "full-card-cover-with-soft-copy-gradient",
     "storyLibraryPlayButton": "single-glyph",
     "storyLibraryRankBadge": "shared-bottom-left",
     "storyLibraryHardImageSplit": false,
-    "storyLibraryCardCssVersion": 2,
+    "storyLibraryCardCssVersion": 3,
     "storyLibraryCardHeightPolicy": "prophets-150-sahaba-sahabiyyat-158-auto-grow",
-    "storyLibraryArtwork": "original-left-area-soft-color-blend",
+    "storyLibraryArtwork": "original-area-soft-color-blend",
     "storyLibraryWordBreak": "whole-words-only",
-    "storyHomeUntouched": true
+    "storyHomeUntouched": true,
+    "storyLibraryAuthorityLoadedLast": true,
+    "storyLibraryLegacySystemLoadedBeforeRepair": true
   },
   "updatedAt": "2026-10-05",
   "deployTrigger": "2026-10-05T21:17:00+02:00"
