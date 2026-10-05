@@ -1,0 +1,331 @@
+name: Align Current Aishah Follow Reader
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/align-current-aishah-follow-reader.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: align-current-aishah-follow-reader
+  cancel-in-progress: false
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      VOICE_API: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Extract current Aishah master text and audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          p=Path("kids/data/sahabiyyat-stories.json")
+          d=json.loads(p.read_text(encoding="utf-8"))
+          item=next((x for x in d.get("items",[]) if x.get("id")=="aishah"),None)
+          if not item:
+              raise SystemExit("Aishah item missing")
+
+          scripts=item.get("scripts") or {}
+          text=str(scripts.get("6-8") or scripts.get("9-10") or scripts.get("4-5") or item.get("voiceScript") or "").strip()
+          audio=(item.get("audio") or {}).get("6-8") or (item.get("audio") or {}).get("9-10") or (item.get("audio") or {}).get("4-5") or {}
+          url=str(audio.get("url") or "").strip()
+          if not text or not url:
+              raise SystemExit("Current Aishah text/audio missing")
+
+          paragraphs=[x.strip() for x in text.split("\n\n") if x.strip()]
+          if len(paragraphs)<2:
+              raise SystemExit("Aishah master text has too few paragraphs")
+
+          Path("/tmp/aishah-story.txt").write_text(text,encoding="utf-8")
+          Path("/tmp/aishah-url.txt").write_text(url,encoding="utf-8")
+          print("paragraphs",len(paragraphs))
+          print("duration",audio.get("durationSec"))
+          print("url",url)
+          PY
+
+          URL="$(cat /tmp/aishah-url.txt)"
+          if [[ "$URL" == /kids/* ]]; then
+            LOCAL_PATH="${URL#/}"
+            test -s "$LOCAL_PATH" || { echo "::error::Aishah audio asset missing: $LOCAL_PATH"; exit 1; }
+            cp "$LOCAL_PATH" /tmp/aishah-current.mp3
+          else
+            curl -L --fail --retry 3 --retry-all-errors --connect-timeout 20 --max-time 180 "$URL" -o /tmp/aishah-current.mp3
+          fi
+          test "$(stat -c%s /tmp/aishah-current.mp3)" -gt 100000
+
+      - name: Ensure audio analysis tools
+        run: |
+          set -euo pipefail
+          command -v ffmpeg >/dev/null 2>&1 || {
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg >/dev/null
+          }
+
+      - name: Align Aishah audio to master paragraphs
+        shell: bash
+        run: |
+          set -euo pipefail
+          ok=0
+
+          if [ -n "${ADMIN_PUBLISH_SECRET:-}" ]; then
+            for attempt in $(seq 1 4); do
+              code="$(curl -sS -o /tmp/alignment.json -w '%{http_code}'                 -X POST "$VOICE_API/align-story"                 -H "Origin: https://dar-al-tawhid.de"                 -H "Referer: https://dar-al-tawhid.de/voice-studio/"                 -H "X-Admin-Secret: $ADMIN_PUBLISH_SECRET"                 -H "Accept: application/json"                 -F "file=@/tmp/aishah-current.mp3;type=audio/mpeg"                 --form-string "text=$(cat /tmp/aishah-story.txt)" || true)"
+              if [ "$code" = "200" ] && python3 - <<'PY'
+          import json,sys
+          d=json.load(open("/tmp/alignment.json"))
+          sys.exit(0 if d.get("ok") and d.get("timings") else 1)
+          PY
+              then
+                ok=1
+                echo "DĀR Voice forced alignment successful."
+                break
+              fi
+              echo "DĀR Voice alignment attempt $attempt: HTTP $code"
+              sleep 4
+            done
+          fi
+
+          if [ "$ok" != "1" ] && [ -n "${ELEVENLABS_API_KEY:-}" ]; then
+            code="$(curl -sS -o /tmp/eleven-alignment-raw.json -w '%{http_code}'               -X POST "https://api.elevenlabs.io/v1/forced-alignment"               -H "xi-api-key: $ELEVENLABS_API_KEY"               -F "file=@/tmp/aishah-current.mp3;type=audio/mpeg"               --form-string "text=$(cat /tmp/aishah-story.txt)" || true)"
+            if [ "$code" = "200" ]; then
+              python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          text=Path("/tmp/aishah-story.txt").read_text(encoding="utf-8").strip()
+          raw=json.loads(Path("/tmp/eleven-alignment-raw.json").read_text(encoding="utf-8"))
+          chars=raw.get("characters") or []
+          paragraphs=[x.strip() for x in text.split("\n\n") if x.strip()]
+          joined="".join(str(x.get("text","")) for x in chars)
+
+          starts=[]
+          cursor=0
+          for p in paragraphs:
+              probe=p[:min(80,len(p))]
+              hit=joined.find(probe,cursor)
+              if hit<0:
+                  ratio=text.find(p)/max(1,len(text))
+                  hit=max(0,min(len(chars)-1,round(ratio*max(0,len(chars)-1))))
+              while hit<len(chars)-1 and not str(chars[hit].get("text","")).strip():
+                  hit+=1
+              cursor=max(cursor,hit)
+              starts.append(max(0.0,float(chars[hit].get("start") or 0)))
+
+          last=chars[-1] if chars else {}
+          duration=float(last.get("end") or 0)
+          timings=[]
+          for i,st in enumerate(starts):
+              en=starts[i+1] if i+1<len(starts) else duration
+              timings.append({"paragraphIndex":i,"start":round(st,3),"end":round(max(st,en),3)})
+          if len(timings)!=len(paragraphs) or not timings:
+              raise SystemExit("Direct forced alignment produced invalid timing count")
+          Path("/tmp/alignment.json").write_text(json.dumps({
+              "ok":True,
+              "timings":timings,
+              "alignmentLoss":raw.get("loss"),
+              "alignedWords":len(raw.get("words") or []),
+              "alignedCharacters":len(chars),
+              "syncMode":"elevenlabs-forced-alignment-v1"
+          },ensure_ascii=False),encoding="utf-8")
+          print("Direct forced alignment paragraphs:",len(timings))
+          PY
+              ok=1
+            else
+              echo "Direct ElevenLabs forced alignment: HTTP $code"
+            fi
+          fi
+
+          if [ "$ok" != "1" ]; then
+            echo "Cloud forced alignment unavailable; deriving paragraph starts from real speech pauses."
+            ffmpeg -hide_banner -nostats -i /tmp/aishah-current.mp3               -af "silencedetect=noise=-38dB:d=0.16" -f null - 2> /tmp/silence.log || true
+
+            python3 - <<'PY'
+          import json,math,re,subprocess
+          from pathlib import Path
+
+          text=Path("/tmp/aishah-story.txt").read_text(encoding="utf-8").strip()
+          paragraphs=[x.strip() for x in re.split(r"\n\s*\n",text) if x.strip()]
+          duration=float(subprocess.check_output([
+              "ffprobe","-v","error","-show_entries","format=duration",
+              "-of","default=noprint_wrappers=1:nokey=1","/tmp/aishah-current.mp3"
+          ],text=True).strip())
+
+          log=Path("/tmp/silence.log").read_text(encoding="utf-8",errors="ignore")
+          starts=[float(x) for x in re.findall(r"silence_start: ([0-9.]+)",log)]
+          ends=[float(x) for x in re.findall(r"silence_end: ([0-9.]+)",log)]
+          pairs=[]
+          for i,en in enumerate(ends):
+              st=starts[i] if i<len(starts) else max(0,en-.2)
+              dur=max(0.0,en-st)
+              if 0.6<en<duration-0.6:
+                  pairs.append((en,dur))
+          ded=[]
+          for t,d in sorted(pairs):
+              if ded and t-ded[-1][0]<0.12:
+                  if d>ded[-1][1]: ded[-1]=(t,d)
+              else:
+                  ded.append((t,d))
+          pairs=ded
+
+          weights=[]
+          for p in paragraphs:
+              spoken=re.sub(r"[^A-Za-zÀ-žĀ-žʿʾḤḥṢṣḌḍṬṭẒẓḎḏṮṯŠšǦǧĠġḪḫ0-9]+"," ",p)
+              words=[w for w in spoken.split() if w]
+              weights.append(max(1.0,len(words)+0.08*len(p)))
+          total=sum(weights)
+          cum=[]; s=0.0
+          for w in weights[:-1]:
+              s+=w
+              cum.append(s/total)
+          expected=[max(.5,min(duration-.5,duration*r)) for r in cum]
+
+          candidates=[{"t":t,"sil":d,"real":True} for t,d in pairs]
+          for t in expected:
+              if not any(abs(x["t"]-t)<0.35 for x in candidates):
+                  candidates.append({"t":t,"sil":0.0,"real":False})
+          candidates=sorted(candidates,key=lambda x:x["t"])
+
+          B=len(expected); N=len(candidates); inf=10**18
+          prev=[inf]*N; back=[[-1]*N for _ in range(B)]
+
+          def cost(b,j):
+              t=candidates[j]["t"]; exp=expected[b]
+              left=0 if b==0 else expected[b-1]
+              right=duration if b==B-1 else expected[b+1]
+              scale=max(2.0,0.45*min(exp-left,right-exp))
+              drift=((t-exp)/scale)**2
+              pause_bonus=min(1.8,candidates[j]["sil"])*0.75
+              fake_penalty=1.7 if not candidates[j]["real"] else 0.0
+              return drift+fake_penalty-pause_bonus
+
+          for j,x in enumerate(candidates):
+              if x["t"]>0.6: prev[j]=cost(0,j)
+
+          min_gap=.45
+          for b in range(1,B):
+              cur=[inf]*N; best=inf; best_j=-1; k=0
+              for j,x in enumerate(candidates):
+                  limit=x["t"]-min_gap
+                  while k<j and candidates[k]["t"]<=limit:
+                      if prev[k]<best:
+                          best=prev[k]; best_j=k
+                      k+=1
+                  if best_j>=0:
+                      cur[j]=best+cost(b,j); back[b][j]=best_j
+              prev=cur
+
+          end_j=min(range(N),key=lambda j:prev[j]) if N else -1
+          if end_j<0 or not math.isfinite(prev[end_j]) or prev[end_j]>=inf/2:
+              boundaries=expected
+              mode="weighted-audio-duration-fallback"
+          else:
+              idx=[end_j]
+              for b in range(B-1,0,-1): idx.append(back[b][idx[-1]])
+              idx=list(reversed(idx))
+              boundaries=[candidates[j]["t"] for j in idx]
+              mode="silence-aware-dynamic-paragraph-v1"
+
+          points=[0.0]+boundaries+[duration]
+          timings=[{
+              "paragraphIndex":i,
+              "start":round(max(0.0,points[i]),3),
+              "end":round(max(points[i],points[i+1]),3)
+          } for i in range(len(paragraphs))]
+
+          Path("/tmp/alignment.json").write_text(json.dumps({
+              "ok":True,
+              "timings":timings,
+              "alignmentLoss":None,
+              "alignedWords":sum(len(p.split()) for p in paragraphs),
+              "alignedCharacters":len(text),
+              "syncMode":mode,
+              "detectedSilences":len(pairs),
+              "durationSec":round(duration,3)
+          },ensure_ascii=False),encoding="utf-8")
+          print("Fallback alignment:",mode,"paragraphs",len(timings),"silences",len(pairs))
+          PY
+            ok=1
+          fi
+
+          test "$ok" = "1"
+
+      - name: Install synchronized Aishah timings
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,time
+          from pathlib import Path
+
+          p=Path("kids/data/sahabiyyat-stories.json")
+          d=json.loads(p.read_text(encoding="utf-8"))
+          a=json.loads(Path("/tmp/alignment.json").read_text(encoding="utf-8"))
+          timings=a.get("timings") or []
+          item=next(x for x in d["items"] if x.get("id")=="aishah")
+          text=str((item.get("scripts") or {}).get("6-8") or "").strip()
+          paragraphs=[x.strip() for x in text.split("\n\n") if x.strip()]
+          if len(timings)!=len(paragraphs):
+              raise SystemExit(f"Timing count mismatch: {len(timings)} != {len(paragraphs)}")
+
+          previous=-1.0
+          for i,row in enumerate(timings):
+              if int(row.get("paragraphIndex",-1))!=i:
+                  raise SystemExit(f"Bad paragraph index at {i}: {row}")
+              start=float(row.get("start",-1))
+              if start<previous:
+                  raise SystemExit("Non-monotonic timing map")
+              previous=start
+
+          stamp=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
+          for age in ("4-5","6-8","9-10"):
+              meta=(item.get("audio") or {}).get(age)
+              if not isinstance(meta,dict):
+                  raise SystemExit(f"Audio meta missing for {age}")
+              meta["timings"]=timings
+              meta["syncMode"]=str(a.get("syncMode") or "unknown")
+              meta["alignmentLoss"]=a.get("alignmentLoss")
+              meta["alignmentGeneratedAt"]=stamp
+              meta["allAges"]=True
+              meta["masterAudio"]=True
+
+          vp=item.setdefault("voiceProduction",{})
+          mode=str(a.get("syncMode") or "unknown")
+          vp["followReaderSync"]="exact-forced-alignment" if mode.startswith("elevenlabs-forced-alignment") else mode
+          vp["followReaderParagraphs"]=len(timings)
+          vp["followReaderSyncMode"]=mode
+          vp["followReaderSyncedAt"]=stamp
+          d["updatedAt"]=time.strftime("%Y-%m-%d",time.gmtime())
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print("Installed Aishah synchronized timings:",len(timings),mode)
+          PY
+
+      - name: Commit synchronized reader data
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/sahabiyyat-stories.json
+          if git diff --cached --quiet; then
+            echo "Aishah timings already current."
+            exit 0
+          fi
+          git commit -m "Kids: synchronize Aishah follow-reader"
+          git pull --rebase origin main
+          git push origin HEAD:main
