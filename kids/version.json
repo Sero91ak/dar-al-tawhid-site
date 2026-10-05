@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v59-story-master1129",
-  "label": "KIDS · V1.07.63",
-  "releasedAt": "2026-10-05T12:28:00+02:00",
-  "note": "Kids v1129: Ṣaḥābiyyāt-Detailseiten zeigen den Namen nur noch einmal als große Hauptüberschrift. Eine globale Mastertext-Regel verhindert gekürzte Altersfassungen: 4–5, 6–8 und 9–10 verwenden immer dieselbe vollständige lange Erzählung; Alterslogik verändert nur Bedienung und Darstellung.",
+  "buildId": "kids-shell-v60-voice-flow1130",
+  "label": "KIDS · V1.07.64",
+  "releasedAt": "2026-10-05T13:00:00+02:00",
+  "note": "Kids v1130: Quiz- und Duʿāʾ-Owner-Voice nutzen denselben zentralen Serhat-Voice-Pfad mit flüssiger Bereichsprosodie. Zahlen, Antwortnummern sowie Sūrah-/Āyah-Angaben werden vor der Synthese als deutsche Zahlwörter vorbereitet; der sichtbare Inhalt bleibt unverändert. Spezialisierte Quiz-/Duʿāʾ-Audios laden unabhängig vom großen allgemeinen Voice-Manifest.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1129",
+    "serviceWorkerCache": "v1130",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -533,7 +533,10 @@
     "masterStorySelection": "longest-complete-version",
     "futureStoryCategoriesUseMasterText": true,
     "sahabiyyatDetailSingleTitle": true,
-    "universalPlayerSingleTitle": true
+    "universalPlayerSingleTitle": true,
+    "ownerVoiceFlow": "quiz-dua-fluent-v2",
+    "ownerVoiceNumberNormalization": "german-spoken-numbers-v2",
+    "ownerVoiceManifestLoading": "independent-priority-v2"
   },
   "updatedAt": "2026-10-05"
 }
