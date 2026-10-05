@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1117";
-const KIDS_BUILD_ID="kids-shell-v47-hoerwelten1117";
+const CACHE_NAME="dar-al-tawhid-kids-v1118";
+const KIDS_BUILD_ID="kids-shell-v48-hoerwelten1118";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
