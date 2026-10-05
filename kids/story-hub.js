@@ -364,7 +364,7 @@ function stopAudio(clear=true){reader?.persist(true);try{audio.pause()}catch(_){
 async function load(){
   await loadRegistry();
   if(!SOURCES.some(s=>s.id===activeCategory))activeCategory=SOURCES[0]?.id||"prophets";
-  ensureEntry();ensureUi();
+  document.getElementById("ghEntry")?.remove();ensureUi();
   const results=await Promise.all(SOURCES.map(async s=>{try{const r=await fetch(s.url,{cache:"no-store"});if(!r.ok)throw Error(String(r.status));const d=await r.json();return[s.id,(d.items||[]).slice().sort((a,b)=>Number(a.displayOrder||999)-Number(b.displayOrder||999))]}catch(e){console.warn("[DĀR Kids Hörwelten]",s.id,e);return[s.id,[]]}}));
   results.forEach(([id,items])=>catalog[id]=items);renderContinue();renderCategories();renderList();
   try{const m=String(location.hash||"").match(/^#stories\/listen\/([^/]+)\/([^/?#]+)/i);if(m&&SOURCES.some(s=>s.id===m[1])){activeCategory=m[1];openWorld();setTimeout(()=>selectStory(decodeURIComponent(m[2])),0)}}catch(_){}
