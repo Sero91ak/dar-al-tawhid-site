@@ -83,6 +83,55 @@ if (testHtml.includes('location.href="/widgets/?from=test"')) {
   ok("test/index.html: Mehr/Account Route-State + Widgets-Test-Isolation");
 }
 
+
+const heroCssFiles = [
+  "test/assets/quran-player-v1252.css",
+  "test/assets/quran-learn-v1256.css",
+  "test/assets/quran-reader-v1251.css",
+  "test/assets/quran-overview-v1250.css",
+  "test/assets/ilm-scholars-v1240.css",
+  "test/assets/ilm-topics-v1242.css",
+  "test/assets/ilm-dua-v1244.css",
+  "test/assets/quiz-overview-v1257.css",
+  "test/assets/more-v1241.css",
+  "test/assets/ilm-scholar-profile-v1253.css",
+  "test/assets/ilm-topic-detail-v1254.css",
+  "test/assets/ilm-post-reader-v1255.css",
+  "test/assets/ilm-scholar-detail-v1251.css",
+  "test/assets/ilm-book-detail-v1252.css",
+  "test/assets/more-v1253.css",
+  "test/assets/jummah-v1258.css",
+  "test/assets/qibla-v1259.css",
+  "test/assets/prayer-v1254.css",
+  "test/assets/ilm-research-chat.css",
+  "test/assets/library/library-app.css"
+];
+let remoteHeroRefs = 0;
+let localizedHeroRefs = 0;
+for (const file of heroCssFiles) {
+  const css = read(file);
+  const remote = (css.match(/https?:\/\/dnznrvs05pmza\.cloudfront\.net/g) || []).length +
+    (css.match(/_jwt=/g) || []).length;
+  const local = (css.match(/\/test\/assets\/area-heroes-v1290\//g) || []).length;
+  remoteHeroRefs += remote;
+  localizedHeroRefs += local;
+  if (remote) fail(`${file}: ablaufender Remote-Hero-Link vorhanden`);
+}
+if (!remoteHeroRefs && localizedHeroRefs >= 17) {
+  ok(`Test-Area-Heroes lokal: ${localizedHeroRefs} lokale CSS-Referenzen, keine signierten Remote-URLs`);
+} else if (!remoteHeroRefs) {
+  fail(`Test-Area-Heroes: nur ${localizedHeroRefs} lokale Referenzen gefunden; erwartet mindestens 17`);
+}
+
+const heroDir = path.join(ROOT, "test/assets/area-heroes-v1290");
+if (!fs.existsSync(heroDir)) {
+  fail("test/assets/area-heroes-v1290 fehlt");
+} else {
+  const heroFiles = fs.readdirSync(heroDir).filter((name) => /\.webp$/i.test(name));
+  if (heroFiles.length < 17) fail(`area-heroes-v1290: nur ${heroFiles.length} WebP-Dateien; erwartet mindestens 17`);
+  else ok(`area-heroes-v1290: ${heroFiles.length} permanente WebP-Heroes vorhanden`);
+}
+
 const sw = read("service-worker.js");
 if (!/dar-al-tawhid-offline-light-v\d+/.test(sw)) fail("service-worker.js: CACHE_VERSION fehlt");
 else ok("service-worker.js: CACHE_VERSION vorhanden");
