@@ -1,0 +1,160 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-3101-3125",
+  "series": "3051-3150",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "HAD-3101–3125 setzt Ṣaḥīḥ Muslim im Kitāb al-Fitan wa-Ašrāṭ as-Sāʿah von Muslim 2903 bis Muslim 2920 fort. Es wurden nur eigenständige Aussagekerne angelegt. Mehrfachfassungen derselben Aussage wurden zusammengeführt, insbesondere Muslim 2905a–f, 2907a–b, 2908a–b, 2909a–c, 2912a–e, 2913–2914, 2915–2916 sowie 2918–2920. Vor der Anlage wurden die vorgesehenen Kernaussagen semantisch gegen den bestehenden HAD-Bestand geprüft; es wurden keine bereits vorhandenen eigenständigen Karten gefunden. Muslim-Nummern und Aussagekerne wurden anhand des laufenden Ṣaḥīḥ-Muslim-Textes kontrolliert. Früheste-Šarḥ-Priorität al-Māzirī → Qāḍī ʿIyāḍ wurde beibehalten; im Block wird Qāḍī ʿIyāḍ, Ikmāl al-Muʿlim, Bd. 8, als direkter früher Muslim-Kommentar geführt. Unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "semanticDuplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "sourceHadithNumbersChecked": true,
+    "globalCatalogUpdated": true,
+    "appleTvScreensaverUpdated": true,
+    "webIosAndroidLibraryLoaderUpdated": true,
+    "seriesProgress": "75/100"
+  },
+  "dedupeDecisions": [
+    "Muslim 2905a–e merged into one east/fitnah statement core; 2905f not multiplied by isnad/wording overlap",
+    "Muslim 2907b omitted as same-chain repetition of 2907a",
+    "Muslim 2908a–b split only into two substantive cores: indiscriminate killing and the Harj warning",
+    "Muslim 2909a–c merged into one Kaʿbah-destruction statement core",
+    "Muslim 2912a–e reduced to two substantive descriptive cores, not five cards",
+    "Muslim 2913–2914 merged into one end-time caliph/wealth core",
+    "Muslim 2915–2916 merged into one ʿAmmār/fīʾah bāġiyah core",
+    "Muslim 2918 variants split only by three independent clauses: Kisrā, Qayṣar, treasures",
+    "Muslim 2919a not duplicated where it repeats 2918; 2919b retained for the independent White Palace treasure statement",
+    "Muslim 2920b omitted as chain repetition; 2920a segmented into three substantive statement cores"
+  ],
+  "sourceRange": [
+    "Muslim 2903",
+    "Muslim 2904",
+    "Muslim 2905a–f",
+    "Muslim 2906",
+    "Muslim 2907a–b",
+    "Muslim 2908a–b",
+    "Muslim 2909a–c",
+    "Muslim 2910",
+    "Muslim 2911",
+    "Muslim 2912a–e",
+    "Muslim 2913–2914",
+    "Muslim 2915a–2916c",
+    "Muslim 2917",
+    "Muslim 2918a–b",
+    "Muslim 2919a–c",
+    "Muslim 2920a–b"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibrary",
+    "iosHadithLibrary",
+    "androidWebAppAndWebsite"
+  ],
+  "records": [
+    {
+      "id": "HAD-3101",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3102",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3103",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3104",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3105",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3106",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3107",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3108",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3109",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3110",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3111",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3112",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3113",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3114",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3115",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3116",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3117",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3118",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3119",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3120",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3121",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3122",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3123",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3124",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3125",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    }
+  ]
+}
