@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v53-dua-quiz-art1123",
   "label": "KIDS · V1.07.58",
   "releasedAt": "2026-10-05T11:05:00+02:00",
-  "note": "Kids v1123: neue kinderfreundliche Bildwelten direkt im Duʿāʾ- und Quiz-Bereich live eingebaut; Duʿāʾ erhält eine ruhige historische Hofszene, Quiz eine spielerische historische Lernszene. PWA-Cache und Build-ID aktualisiert.",
+  "note": "Kids v1123: neue kinderfreundliche Bildwelten direkt im Duʿāʾ- und Quiz-Bereich live eingebaut; Duʿāʾ erhält eine ruhige historische Hofszene, Quiz eine spielerische historische Lernszene. PWA-Cache und Build-ID aktualisiert. Ṣaḥābiyyāt: 14 individuelle historische Bildszenen und feste Namensoverlays auf Karten und Detail-Heroes.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1122",
+    "serviceWorkerCache": "v1123",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -472,7 +472,17 @@
     "sahabiyyatNameOverlayPlacement": "card-and-hero-in-own-library-and-universal-story-hub",
     "storyHubJsVersion": 5,
     "sahabiyyatDistinctNewArtworks": [
+      "khadijah",
+      "aishah",
+      "fatimah",
+      "umm-salamah",
+      "hafsah",
       "sawdah",
+      "zaynab",
+      "asma",
+      "umm-sulaym",
+      "umm-atiyyah",
+      "umm-habibah",
       "juwayriyyah",
       "safiyyah",
       "maymunah"
@@ -480,7 +490,8 @@
     "duaQuizArtworkVersion": 1123,
     "duaArtworkLive": true,
     "quizArtworkLive": true,
-    "duaQuizArtworkPlacement": "direct-in-respective-modal-sections"
+    "duaQuizArtworkPlacement": "direct-in-respective-modal-sections",
+    "sahabiyyatDistinctArtworkCount": 14
   },
   "updatedAt": "2026-10-05"
 }
