@@ -1,0 +1,333 @@
+/* DĀR AL TAWḤĪD Kids — Shared Story Library Cards v1
+   One visual system for Propheten, Ṣaḥābah and Ṣaḥābiyyāt.
+   Full-bleed artwork inside the card, soft transition into the copy zone,
+   consistent rank and play controls, age-aware content density. */
+
+:root{
+  --story-lib-card-radius:26px;
+  --story-lib-card-height:168px;
+  --story-lib-play:46px;
+  --story-lib-copy-left:44%;
+  --story-lib-copy-right:72px;
+}
+
+/* ---------- shared card shell ---------- */
+.ps-library-page .ps-story-row,
+.ms-library-page .ms-story-row{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  min-height:var(--story-lib-card-height)!important;
+  height:var(--story-lib-card-height)!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  padding:0!important;
+  border:1px solid rgba(126,205,216,.20)!important;
+  border-radius:var(--story-lib-card-radius)!important;
+  background:#061f31!important;
+  box-shadow:0 13px 32px rgba(0,0,0,.17)!important;
+  text-align:left!important;
+}
+
+/* ---------- full-bleed artwork ---------- */
+.ps-library-page .ps-row-scene,
+.ms-library-page .ms-row-visual{
+  position:absolute!important;
+  z-index:0!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  overflow:hidden!important;
+  background:#08283a!important;
+}
+
+.ps-library-page .ps-row-scene{
+  object-fit:cover!important;
+  filter:saturate(.98) contrast(1.03) brightness(.91)!important;
+}
+
+.ms-library-page .ms-row-visual img{
+  position:absolute!important;
+  z-index:0!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  display:block!important;
+  filter:saturate(.96) contrast(1.03) brightness(.90)!important;
+}
+
+/* Old split-image edge/shade is no longer needed. */
+.ms-library-page .ms-row-visual::after,
+.ms-library-page .ms-row-art-shade{
+  display:none!important;
+}
+
+/* Soft image -> text transition. Artwork remains underneath the whole card. */
+.ps-library-page .ps-story-row::before,
+.ms-library-page .ms-story-row::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:2!important;
+  inset:0!important;
+  display:block!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,
+      rgba(2,16,27,.04) 0%,
+      rgba(2,16,27,.08) 27%,
+      rgba(2,18,30,.34) 43%,
+      rgba(3,24,38,.78) 59%,
+      rgba(3,24,38,.94) 73%,
+      rgba(3,24,38,.985) 100%),
+    linear-gradient(180deg,
+      rgba(0,0,0,.02) 0%,
+      rgba(1,13,22,.04) 58%,
+      rgba(1,13,22,.24) 100%)!important;
+}
+
+/* One restrained lower highlight, no hard visual split. */
+.ps-library-page .ps-story-row::after,
+.ms-library-page .ms-story-row::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:3!important;
+  left:18px!important;
+  right:18px!important;
+  bottom:0!important;
+  height:1px!important;
+  display:block!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,rgba(240,204,119,.38),rgba(105,204,209,.16),transparent)!important;
+}
+
+/* ---------- unified copy zone ---------- */
+.ps-library-page .ps-row-copy,
+.ms-library-page .ms-row-copy{
+  position:absolute!important;
+  z-index:4!important;
+  left:var(--story-lib-copy-left)!important;
+  right:var(--story-lib-copy-right)!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  display:grid!important;
+  align-content:center!important;
+  gap:4px!important;
+  min-width:0!important;
+  padding:0!important;
+  margin:0!important;
+}
+
+.ps-library-page .ps-row-title,
+.ms-library-page .ms-row-title{
+  display:block!important;
+  margin:0!important;
+  color:#fff8ed!important;
+  line-height:1.07!important;
+  font-weight:700!important;
+  letter-spacing:-.016em!important;
+  text-shadow:0 3px 16px rgba(0,0,0,.34)!important;
+  overflow-wrap:anywhere!important;
+}
+
+.ps-library-page .ps-row-ar,
+.ms-library-page .ms-row-ar{
+  display:block!important;
+  margin:3px 0 0!important;
+  color:#f0d99d!important;
+  line-height:1.18!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.30)!important;
+}
+
+.ps-library-page .ps-row-summary,
+.ms-library-page .ms-row-summary{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:1!important;
+  overflow:hidden!important;
+  margin:2px 0 0!important;
+  color:rgba(255,255,255,.70)!important;
+  line-height:1.34!important;
+}
+
+.ps-library-page .ps-row-meta,
+.ms-library-page .ms-row-meta{
+  display:block!important;
+  margin-top:1px!important;
+  color:rgba(255,255,255,.50)!important;
+  line-height:1.25!important;
+  letter-spacing:.025em!important;
+  text-transform:none!important;
+}
+
+/* ---------- identical rank badge ---------- */
+.ps-library-page .ps-row-rank,
+.ms-library-page .ms-rank{
+  position:absolute!important;
+  z-index:5!important;
+  left:12px!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:11px!important;
+  min-width:42px!important;
+  width:auto!important;
+  height:31px!important;
+  padding:0 10px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(239,203,121,.44)!important;
+  border-radius:999px!important;
+  background:rgba(3,18,28,.73)!important;
+  color:#f5d991!important;
+  font:700 12px/1 Georgia,serif!important;
+  backdrop-filter:blur(9px)!important;
+  -webkit-backdrop-filter:blur(9px)!important;
+  box-shadow:0 5px 15px rgba(0,0,0,.20)!important;
+}
+
+/* ---------- identical, visible but quiet play button ---------- */
+.ps-library-page .ps-row-go,
+.ms-library-page .ms-row-go{
+  position:absolute!important;
+  z-index:6!important;
+  right:15px!important;
+  left:auto!important;
+  top:50%!important;
+  bottom:auto!important;
+  transform:translateY(-50%)!important;
+  width:var(--story-lib-play)!important;
+  min-width:var(--story-lib-play)!important;
+  height:var(--story-lib-play)!important;
+  margin:0!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(240,204,119,.47)!important;
+  border-radius:50%!important;
+  background:rgba(8,35,48,.66)!important;
+  color:#f3d584!important;
+  font-size:0!important;
+  line-height:1!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  box-shadow:0 7px 20px rgba(0,0,0,.18)!important;
+}
+
+/* Always use the same unobtrusive play glyph in all three libraries. */
+.ps-library-page .ps-row-go::before,
+.ms-library-page .ms-row-go::before{
+  content:"▶"!important;
+  display:block!important;
+  margin-left:2px!important;
+  color:currentColor!important;
+  font-size:16px!important;
+  line-height:1!important;
+}
+
+.ps-library-page .ps-row-go.is-listen,
+.ms-library-page .ms-row-go.is-listen{
+  width:var(--story-lib-play)!important;
+  min-width:var(--story-lib-play)!important;
+  height:var(--story-lib-play)!important;
+  padding:0!important;
+  border-color:rgba(240,204,119,.47)!important;
+  background:rgba(8,35,48,.66)!important;
+  font-size:0!important;
+}
+
+/* Completion mark stays away from the main play action. */
+.ps-library-page .ps-done,
+.ms-library-page .ms-done{
+  z-index:6!important;
+  right:12px!important;
+  top:10px!important;
+  bottom:auto!important;
+}
+
+/* ---------- preschool: image + name + number + play only ---------- */
+html[data-kids-age="4-5"]{
+  --story-lib-card-height:158px;
+  --story-lib-play:50px;
+  --story-lib-copy-left:42%;
+  --story-lib-copy-right:76px;
+}
+
+html[data-kids-age="4-5"] .ps-library-page .ps-row-ar,
+html[data-kids-age="4-5"] .ps-library-page .ps-row-summary,
+html[data-kids-age="4-5"] .ps-library-page .ps-row-meta,
+html[data-kids-age="4-5"] .ms-library-page .ms-row-ar,
+html[data-kids-age="4-5"] .ms-library-page .ms-row-summary,
+html[data-kids-age="4-5"] .ms-library-page .ms-row-meta{
+  display:none!important;
+}
+
+/* ---------- narrow phones ---------- */
+@media(max-width:390px){
+  :root{
+    --story-lib-card-height:158px;
+    --story-lib-card-radius:23px;
+    --story-lib-play:44px;
+    --story-lib-copy-left:42%;
+    --story-lib-copy-right:66px;
+  }
+  html[data-kids-age="4-5"]{
+    --story-lib-card-height:154px;
+    --story-lib-play:47px;
+    --story-lib-copy-left:40%;
+    --story-lib-copy-right:69px;
+  }
+  .ps-library-page .ps-row-rank,
+  .ms-library-page .ms-rank{
+    left:10px!important;
+    bottom:9px!important;
+    min-width:39px!important;
+    height:29px!important;
+    padding:0 9px!important;
+  }
+  .ps-library-page .ps-row-go,
+  .ms-library-page .ms-row-go{
+    right:12px!important;
+  }
+}
+
+/* ---------- tablets / wide phones ---------- */
+@media(min-width:700px){
+  :root{
+    --story-lib-card-height:196px;
+    --story-lib-card-radius:28px;
+    --story-lib-play:50px;
+    --story-lib-copy-left:43%;
+    --story-lib-copy-right:82px;
+  }
+  .ps-library-page .ps-row-copy,
+  .ms-library-page .ms-row-copy{
+    gap:6px!important;
+  }
+  .ps-library-page .ps-row-summary,
+  .ms-library-page .ms-row-summary{
+    -webkit-line-clamp:2!important;
+  }
+  .ps-library-page .ps-row-go,
+  .ms-library-page .ms-row-go{
+    right:20px!important;
+  }
+}
+
+/* Keep one-column cinematic cards on tablets too; imagery should remain large and legible. */
+@media(min-width:1100px){
+  .ps-library-page .ps-library-list,
+  .ms-library-page .ms-list{
+    grid-template-columns:1fr!important;
+    width:min(100%,980px)!important;
+    margin-inline:auto!important;
+  }
+  :root{
+    --story-lib-card-height:214px;
+    --story-lib-copy-left:42%;
+    --story-lib-copy-right:92px;
+  }
+}
