@@ -970,3 +970,56 @@ body.is-hadith-route .hadith-sibling-btn[disabled]{
     padding:18px 0!important;
   }
 }
+
+
+/* DAR_HADITH_THREE_SCENE_HIERARCHY_V1285
+   Three deliberately different historical surfaces:
+   overview = library, work/Kitāb/Bāb = study majlis, individual Ḥadīṯ = manuscript chamber.
+   Keeps one visual language without repeating the same image on every depth. */
+body.is-hadith-route .hadith-hub:not(.hadith-hub--nested) > .view-head{
+  --hadx-art:url("/test/assets/ilm/hadith-library-overview-v1267.webp");
+}
+body.is-hadith-route .hadith-hub--nested > .view-head{
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 88%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 60%,transparent) 38%,
+      color-mix(in srgb,var(--bg) 18%,transparent) 74%,
+      color-mix(in srgb,var(--bg) 5%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 3%,transparent) 0%,
+      transparent 48%,
+      color-mix(in srgb,var(--bg) 34%,transparent) 100%),
+    url("/test/assets/ilm/hadith-library-study-v1267.webp") 75% 48%/cover no-repeat!important;
+}
+body.is-hadith-route .hadith-detail > .post-reader-title{
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 91%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 64%,transparent) 38%,
+      color-mix(in srgb,var(--bg) 19%,transparent) 73%,
+      color-mix(in srgb,var(--bg) 5%,transparent) 100%),
+    linear-gradient(180deg,
+      color-mix(in srgb,var(--bg) 3%,transparent) 0%,
+      transparent 46%,
+      color-mix(in srgb,var(--bg) 39%,transparent) 100%),
+    url("/test/assets/ilm/ilm-historical-majlis-v1234.jpg") 74% 47%/cover no-repeat!important;
+}
+html[data-theme="light"] body.is-hadith-route .hadith-detail > .post-reader-title,
+html[data-theme="soft"] body.is-hadith-route .hadith-detail > .post-reader-title,
+html[data-theme="salbei"] body.is-hadith-route .hadith-detail > .post-reader-title,
+html[data-theme="eisgold"] body.is-hadith-route .hadith-detail > .post-reader-title{
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 96%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 84%,transparent) 40%,
+      color-mix(in srgb,var(--bg) 34%,transparent) 74%,
+      color-mix(in srgb,var(--bg) 8%,transparent) 100%),
+    linear-gradient(180deg,transparent 48%,color-mix(in srgb,var(--bg) 30%,transparent)),
+    url("/test/assets/ilm/ilm-historical-majlis-v1234.jpg") 74% 47%/cover no-repeat!important;
+}
+@media(max-width:699px){
+  body.is-hadith-route .hadith-detail > .post-reader-title{
+    background-position:center,center,70% 46%!important;
+  }
+}
