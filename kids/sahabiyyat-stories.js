@@ -158,6 +158,24 @@ function bindEntry(entry){
   entry.addEventListener("click",openLibrary);
   return entry;
 }
+function bindAreaJump(){
+  document.querySelectorAll("[data-story-area]").forEach(btn=>{
+    if(btn.dataset.storyAreaBound==="1")return;
+    btn.dataset.storyAreaBound="1";
+    btn.addEventListener("click",()=>{
+      const kind=btn.dataset.storyArea;
+      if(kind==="prophets"){document.getElementById("psProphetEntry")?.click();return}
+      if(kind==="sahaba"){document.getElementById("msEntry")?.click();return}
+      if(kind==="sahabiyyat"){
+        const entry=document.getElementById("syEntry");
+        if(entry){
+          entry.scrollIntoView({behavior:"smooth",block:"center"});
+          setTimeout(()=>entry.focus({preventScroll:true}),350);
+        }else openLibrary();
+      }
+    });
+  });
+}
 function ensureEntryOrder(){
   const entry=$("#syEntry"),sahaba=$("#msEntry"),prophet=$("#psProphetEntry");
   if(!entry)return;
@@ -438,6 +456,7 @@ async function toggleAudio(){
 function stopAudio(){followReader?.persist(true);try{audio.pause();audio.removeAttribute("src");audio.load()}catch(_){}playing=false;busy=false;updatePlayButton();updateProgress()}
 async function init(){
   if(!ensureUi())return;
+  bindAreaJump();
   try{
     const r=await fetch(DATA_URL+"?v=18",{cache:"no-store"});
     if(!r.ok)throw Error("Ṣaḥābiyyāt "+r.status);
