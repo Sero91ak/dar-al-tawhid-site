@@ -2901,16 +2901,17 @@ html:not([data-view="today"]) .view.active{
         <div class="lantern"></div>
         <div class="hero-copy">
           <p class="hero-salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</p>
-          <div class="hero-kicker">Willkommen</div>
-          <h1>Hier ist deine Kinderwelt</h1>
-          <p>Geschichten, Qurʾān und Duʿāʾ – ganz in Ruhe.</p>
+          <div class="hero-kicker">HÖREN · MITLESEN · LERNEN</div>
+          <h1>Hören. Mitlesen. Lernen.</h1>
+          <p>Geschichten, Qurʾān und Duʿāʾ – ruhig und kindgerecht.</p>
         </div>
       </div>
 
       <button class="resume" id="resumeButton">
         <div class="resume-icon"></div>
-        <div>
-          <strong>Da weitermachen, wo du warst</strong>
+        <div class="resume-copy">
+          <small class="resume-kicker">DEIN HÖRPLATZ</small>
+          <strong>Weiterhören</strong>
           <span id="resumeText">Noch nichts begonnen</span>
         </div>
         <div class="go">›</div>
@@ -2925,12 +2926,12 @@ html:not([data-view="today"]) .view.active{
         <button id="dailyStart" class="daily-start">Reise starten</button>
       </div>
 
-      <div class="section-title">Was möchtest du machen?</div>
+      <div class="section-title">Was möchtest du hören?</div>
       <div class="big-choice-grid">
         <button class="choice story" data-go="stories">
           <span class="icon"></span>
-          <strong>Geschichte</strong>
-          <small>hören & entdecken</small>
+          <strong>Geschichten</strong>
+          <small>hören & mitlesen</small>
           <span class="arrow">›</span>
         </button>
 
@@ -2944,7 +2945,7 @@ html:not([data-view="today"]) .view.active{
         <button class="choice dua" id="openDuaButton">
           <span class="icon"></span>
           <strong>Meine Duʿāʾ</strong>
-          <small>hören · verstehen · lernen</small>
+          <small>hören & lernen</small>
           <span class="arrow">›</span>
         </button>
 
@@ -3009,7 +3010,7 @@ html:not([data-view="today"]) .view.active{
           <button class="quran-action" id="resumeQuran"><div class="qa-icon"></div><strong>Weiterlernen</strong><small id="resumeQuranText">dein letzter Vers</small></button>
         </div>
       </div>
-      <button class="full-quran alphabet-entry" id="openAlphabetButton" type="button">
+      <button class="full-quran alphabet-entry" id="openAlphabetButton" type="button" hidden aria-hidden="true" tabindex="-1">
         <span class="alphabet-entry-art" aria-hidden="true"></span>
         <span class="alphabet-entry-copy"><span class="entry-kicker">BUCHSTABEN · ḤARAKĀT · BILDER</span><strong>Alif-Bāʾ lernen</strong><small>Ein eigener Lernbereich zum Anschauen, Hören und Nachsprechen.</small></span>
         <span class="fgo">›</span>
@@ -3318,7 +3319,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v95-voice-master-sync1168";
+const KIDS_BUILD_ID="kids-shell-v96-audio-home-focus1169";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -8455,4 +8456,303 @@ html[data-view="stories"] #view-stories > :last-child{
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
 <link rel="stylesheet" href="/kids/story-card-system.css?v=2" data-kids-story-card-system="1">
 <link rel="stylesheet" href="/kids/story-library-cards.css?v=6" data-kids-story-card-repair="1">
+
+<style id="kids-home-audio-focus-v1169">
+/* Startseite: Audio-first, drei klare Kernwelten, große lesbare Markenbühne. */
+#view-today .hero{
+  min-height:clamp(460px,116vw,590px)!important;
+  isolation:isolate!important;
+  background:#0a2537!important;
+}
+#view-today .hero::before{
+  inset:-8% -8% -5%!important;
+  background-image:url("/kids/assets/kids-brand/hero-warm-world.png?v=1169")!important;
+  background-size:cover!important;
+  background-position:center 18%!important;
+  filter:saturate(1.06) contrast(1.035) brightness(.96)!important;
+  transform:scale(1.06)!important;
+}
+#view-today .hero::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 78% 21%,rgba(255,214,115,.11),transparent 24%),
+    linear-gradient(180deg,rgba(5,20,31,.08) 0%,rgba(5,20,31,.02) 29%,rgba(5,20,31,.12) 50%,rgba(5,20,31,.55) 73%,#0c2636 100%)!important;
+}
+#view-today .kids-wordmark{
+  top:max(11%,calc(env(safe-area-inset-top,0px) + 42px))!important;
+  width:min(94vw,520px)!important;
+}
+#view-today .wm-dar-line{
+  font-size:clamp(25px,7.2vw,40px)!important;
+  font-weight:800!important;
+  letter-spacing:.105em!important;
+  line-height:1.08!important;
+  color:#fff0c5!important;
+  text-shadow:0 2px 0 rgba(255,255,255,.20),0 8px 22px rgba(0,17,27,.54)!important;
+}
+#view-today .wm-kids{
+  margin-top:10px!important;
+  font-size:clamp(66px,20vw,110px)!important;
+  line-height:.84!important;
+}
+#view-today .wm-kids span{
+  -webkit-text-stroke:3px rgba(255,255,255,.55)!important;
+  text-shadow:0 2px 0 rgba(255,255,255,.62),0 6px 0 rgba(26,21,15,.13),0 12px 24px rgba(2,17,27,.34)!important;
+}
+#view-today .hero-copy{
+  position:absolute!important;
+  left:0!important;right:0!important;bottom:22px!important;
+  z-index:6!important;
+  margin:0!important;
+  padding:0 22px 24px!important;
+  text-align:center!important;
+}
+#view-today .hero-salam{
+  margin:0 auto 9px!important;
+  max-width:31em!important;
+  color:#fff8e8!important;
+  font-size:clamp(12px,3.45vw,16px)!important;
+  line-height:1.38!important;
+  font-weight:650!important;
+  text-shadow:0 3px 14px rgba(0,0,0,.62)!important;
+}
+#view-today .hero-kicker{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:31px!important;
+  margin:0 auto 9px!important;
+  padding:6px 13px!important;
+  border:1px solid rgba(255,229,166,.36)!important;
+  border-radius:999px!important;
+  background:rgba(7,31,45,.55)!important;
+  color:#ffe5a6!important;
+  backdrop-filter:blur(7px)!important;
+  -webkit-backdrop-filter:blur(7px)!important;
+  font-size:clamp(9px,2.55vw,11px)!important;
+  font-weight:850!important;
+  letter-spacing:.115em!important;
+  text-shadow:none!important;
+}
+#view-today .hero h1{
+  max-width:620px!important;
+  margin:0 auto 7px!important;
+  color:#fff!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(28px,7.7vw,42px)!important;
+  font-weight:720!important;
+  line-height:1.02!important;
+  letter-spacing:-.025em!important;
+  text-wrap:balance!important;
+  text-shadow:0 4px 18px rgba(0,0,0,.58)!important;
+}
+#view-today .hero-copy>p:last-child{
+  max-width:34em!important;
+  margin:0 auto!important;
+  color:rgba(255,255,255,.90)!important;
+  font-size:clamp(13px,3.55vw,16px)!important;
+  line-height:1.4!important;
+  font-weight:600!important;
+  text-shadow:0 3px 13px rgba(0,0,0,.56)!important;
+}
+
+/* Audiofortsetzung ist die erste Handlung nach dem Hero. */
+#view-today .resume{
+  width:100%!important;
+  min-height:104px!important;
+  margin:14px 0 0!important;
+  padding:15px 16px!important;
+  display:grid!important;
+  grid-template-columns:58px minmax(0,1fr) 38px!important;
+  gap:14px!important;
+  align-items:center!important;
+  border:1px solid rgba(243,207,115,.18)!important;
+  border-radius:26px!important;
+  background:
+    radial-gradient(circle at 8% 50%,rgba(243,207,115,.12),transparent 33%),
+    linear-gradient(145deg,rgba(10,42,58,.98),rgba(7,32,48,.98))!important;
+  box-shadow:0 16px 34px rgba(0,0,0,.19),inset 0 1px rgba(255,255,255,.035)!important;
+  text-align:left!important;
+}
+#view-today .resume-icon{
+  width:56px!important;height:56px!important;
+  margin:0!important;
+  border-radius:50%!important;
+  box-shadow:0 0 0 7px rgba(243,207,115,.055),0 10px 22px rgba(0,0,0,.16)!important;
+}
+#view-today .resume-copy{min-width:0!important}
+#view-today .resume-kicker{
+  display:block!important;
+  margin:0 0 3px!important;
+  color:#e7c777!important;
+  font:850 9px/1.1 "Fredoka",system-ui,sans-serif!important;
+  letter-spacing:.12em!important;
+}
+#view-today .resume strong{
+  display:block!important;
+  margin:0!important;
+  color:#fff8e8!important;
+  font-size:clamp(21px,5.6vw,27px)!important;
+  line-height:1.05!important;
+  font-weight:720!important;
+}
+#view-today .resume #resumeText{
+  display:block!important;
+  margin-top:6px!important;
+  color:rgba(255,255,255,.68)!important;
+  font-size:clamp(12px,3.2vw,14px)!important;
+  line-height:1.3!important;
+  font-weight:600!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+#view-today .resume .go{
+  position:static!important;
+  width:36px!important;height:36px!important;
+  display:grid!important;place-items:center!important;
+  border-radius:50%!important;
+  background:rgba(255,255,255,.055)!important;
+  color:#ffe3a0!important;
+  font-size:27px!important;
+}
+
+/* Kein Aufgaben-Dashboard auf der Startseite: Kern ist Hören + Mitlesen. */
+#view-today .daily-journey,
+#view-today .choice.quiz,
+#view-today .gentle-note{
+  display:none!important;
+}
+#view-today .section-title{
+  margin:27px 2px 13px!important;
+  color:#fff8e8!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(27px,7.1vw,36px)!important;
+  line-height:1.06!important;
+  font-weight:720!important;
+  letter-spacing:-.025em!important;
+}
+#view-today .big-choice-grid{
+  grid-template-columns:1fr!important;
+  gap:14px!important;
+}
+#view-today .choice{
+  min-height:148px!important;
+  grid-template-columns:58px minmax(0,1fr) 42px!important;
+  padding:19px 20px 19px 24px!important;
+  border-radius:30px!important;
+  clip-path:inset(0 round 30px)!important;
+  border:1px solid rgba(255,255,255,.15)!important;
+  box-shadow:0 16px 34px rgba(0,0,0,.18)!important;
+}
+#view-today .choice::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,rgba(4,20,30,.50) 0%,rgba(4,20,30,.26) 42%,rgba(4,20,30,.04) 75%)!important;
+}
+#view-today .choice .icon,
+#view-today .choice strong,
+#view-today .choice small,
+#view-today .choice .arrow{
+  z-index:3!important;
+}
+#view-today .choice strong{
+  max-width:none!important;
+  color:#fff!important;
+  font-size:clamp(24px,6.2vw,31px)!important;
+  font-weight:720!important;
+  line-height:1.02!important;
+  text-shadow:0 3px 13px rgba(0,0,0,.56)!important;
+}
+#view-today .choice small{
+  max-width:none!important;
+  margin-top:5px!important;
+  color:rgba(255,255,255,.86)!important;
+  font-size:clamp(13px,3.5vw,16px)!important;
+  line-height:1.22!important;
+  font-weight:620!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.54)!important;
+}
+#view-today .choice .arrow{
+  background:rgba(3,21,31,.43)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  color:#fff!important;
+}
+#view-today .knowledge-card{
+  margin-top:20px!important;
+  min-height:96px!important;
+  border-radius:24px!important;
+  opacity:.94!important;
+}
+#view-today .knowledge-card .kcopy strong{
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(18px,4.8vw,23px)!important;
+  line-height:1.12!important;
+}
+
+/* Alif-Bāʾ ist für diese Fassung vollständig aus der nutzbaren Oberfläche genommen. */
+#view-quran .alphabet-entry,
+#alphabetModal{
+  display:none!important;
+}
+
+/* Tablet: drei Kernwelten nebeneinander, ohne Lesbarkeit zu verlieren. */
+@media(min-width:700px){
+  #view-today .hero{min-height:560px!important}
+  #view-today .kids-wordmark{top:max(10%,calc(env(safe-area-inset-top,0px) + 48px))!important}
+  #view-today .wm-dar-line{font-size:40px!important}
+  #view-today .wm-kids{font-size:108px!important}
+  #view-today .hero h1{font-size:42px!important}
+  #view-today .resume{max-width:760px!important;margin:18px auto 0!important}
+  #view-today .big-choice-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:16px!important;
+  }
+  #view-today .choice{
+    min-height:196px!important;
+    grid-template-columns:1fr 42px!important;
+    grid-template-rows:58px auto auto!important;
+    column-gap:10px!important;
+    align-content:center!important;
+    padding:22px!important;
+  }
+  #view-today .choice .icon{grid-column:1!important;grid-row:1!important;justify-self:start!important}
+  #view-today .choice strong{grid-column:1 / -1!important;grid-row:2!important;align-self:end!important;font-size:27px!important}
+  #view-today .choice small{grid-column:1 / -1!important;grid-row:3!important;font-size:14px!important}
+  #view-today .choice .arrow{grid-column:2!important;grid-row:1!important;justify-self:end!important}
+}
+@media(max-width:380px){
+  #view-today .hero{min-height:430px!important}
+  #view-today .kids-wordmark{top:max(11%,calc(env(safe-area-inset-top,0px) + 38px))!important}
+  #view-today .wm-dar-line{font-size:23px!important}
+  #view-today .wm-kids{font-size:60px!important}
+  #view-today .hero-copy{padding:0 17px 20px!important}
+  #view-today .hero h1{font-size:26px!important}
+  #view-today .resume{
+    min-height:96px!important;
+    grid-template-columns:52px minmax(0,1fr) 34px!important;
+    gap:11px!important;
+    padding:13px 14px!important;
+  }
+  #view-today .resume-icon{width:50px!important;height:50px!important}
+  #view-today .choice{
+    min-height:136px!important;
+    grid-template-columns:50px minmax(0,1fr) 36px!important;
+    padding:16px 17px 16px 19px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .wm-dar-line,
+  #view-today .wm-kids span{animation:none!important}
+}
+</style>
 </html>
