@@ -822,3 +822,184 @@ html[data-kids-age] .ms-story-row{
   text-wrap:pretty;
 }
 
+
+/* STORY_LIBRARY_AUTHORITY_V1158
+   Final authority for Propheten, Ṣaḥābah and Ṣaḥābiyyāt.
+   This lives in the late-loaded age typography bundle so older library CSS cannot win. */
+
+:root{--story-card-radius:24px;--story-card-gap:12px}
+
+/* Shared Ṣaḥābah / Ṣaḥābiyyāt overview cards */
+.ms-library-page .ms-library-scroll{padding-top:10px!important}
+.ms-library-page .ms-list{
+  width:min(100%,940px)!important;
+  margin:0 auto!important;
+  padding:8px 12px calc(26px + env(safe-area-inset-bottom,0px))!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:var(--story-card-gap)!important
+}
+.ms-library-page .ms-story-row{
+  width:100%!important;
+  min-height:158px!important;
+  height:auto!important;
+  display:grid!important;
+  grid-template-columns:minmax(116px,36%) minmax(0,1fr) 42px!important;
+  align-items:stretch!important;
+  gap:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:1px solid rgba(120,207,201,.16)!important;
+  border-radius:var(--story-card-radius)!important;
+  background:linear-gradient(145deg,#0a2c3d,#082432 76%)!important;
+  box-shadow:0 13px 30px rgba(0,0,0,.17)!important
+}
+.sy-library-page .ms-story-row{
+  border-color:rgba(231,190,145,.17)!important;
+  background:linear-gradient(145deg,#102b38,#0a2533 72%)!important
+}
+.ms-library-page .ms-row-visual{
+  position:relative!important;
+  min-height:158px!important;
+  height:100%!important;
+  overflow:hidden!important;
+  background:#08283a!important
+}
+.ms-library-page .ms-row-visual img{
+  width:100%!important;height:100%!important;min-height:158px!important;
+  display:block!important;object-fit:cover!important;object-position:center!important
+}
+.ms-library-page .ms-row-visual::after{
+  content:""!important;position:absolute!important;z-index:1!important;inset:0!important;height:auto!important;
+  background:linear-gradient(90deg,transparent 54%,rgba(6,31,44,.84) 100%),linear-gradient(0deg,rgba(3,16,24,.30),transparent 48%)!important;
+  pointer-events:none!important
+}
+.ms-library-page .sy-image-name,.sy-modal .sy-hero-name,.gh-story-art-name{display:none!important}
+.ms-library-page .ms-rank{
+  position:absolute!important;z-index:3!important;left:10px!important;bottom:10px!important;top:auto!important;
+  min-width:40px!important;width:auto!important;height:30px!important;padding:0 10px!important;
+  display:grid!important;place-items:center!important;
+  border:1px solid rgba(239,203,121,.42)!important;border-radius:999px!important;
+  background:rgba(3,20,29,.72)!important;color:#f3d58e!important;
+  font:700 12px/1 Georgia,serif!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important
+}
+.ms-library-page .ms-row-copy{
+  min-width:0!important;display:grid!important;align-content:center!important;gap:4px!important;
+  padding:14px 8px 14px 16px!important
+}
+.ms-library-page .ms-row-kicker{display:none!important}
+.ms-library-page .ms-row-title{
+  margin:0!important;color:#fff9ed!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(21px,5.4vw,28px)!important;font-weight:700!important;line-height:1.04!important;letter-spacing:-.025em!important
+}
+.ms-library-page .ms-row-ar{
+  margin:1px 0 0!important;color:#f0d691!important;
+  font-family:"Noto Naskh Arabic","Geeza Pro","Traditional Arabic",serif!important;
+  font-size:clamp(19px,4.9vw,25px)!important;line-height:1.18!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important
+}
+.ms-library-page .ms-row-summary{
+  margin-top:1px!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important;
+  overflow:hidden!important;color:rgba(255,255,255,.68)!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:clamp(11.5px,2.8vw,13.5px)!important;line-height:1.34!important
+}
+.ms-library-page .ms-row-meta{
+  margin-top:1px!important;color:rgba(255,255,255,.53)!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:clamp(10.5px,2.5vw,12px)!important;font-weight:650!important;line-height:1.2!important
+}
+.ms-library-page .ms-row-go{
+  width:42px!important;display:grid!important;place-items:center!important;align-self:stretch!important;
+  padding:0!important;color:#ead08b!important;font-size:31px!important;line-height:1!important
+}
+html[data-kids-age="4-5"] .ms-library-page .ms-row-summary{display:none!important}
+html[data-kids-age="4-5"] .ms-library-page .ms-story-row{min-height:150px!important}
+html[data-kids-age="4-5"] .ms-library-page .ms-row-visual,
+html[data-kids-age="4-5"] .ms-library-page .ms-row-visual img{min-height:150px!important}
+
+/* Propheten: same child-first density, while keeping Muhammad ﷺ as the honor feature */
+.ps-library-page .ps-library-scroll{padding-top:10px!important}
+.ps-muhammad-feature{width:min(100%,940px)!important;margin:0 auto!important;padding:0 12px 14px!important}
+.ps-muhammad-card{
+  grid-template-rows:clamp(168px,42vw,238px) auto!important;
+  border-radius:26px!important;border:1px solid rgba(240,205,120,.42)!important;
+  box-shadow:0 16px 38px rgba(0,0,0,.24)!important
+}
+.ps-muhammad-visual,.ps-muhammad-visual img{min-height:168px!important}
+.ps-muhammad-panel{padding:14px 16px 15px!important}
+.ps-muhammad-kicker{font-size:9px!important;letter-spacing:.085em!important}
+.ps-muhammad-title{margin-top:5px!important;font-size:clamp(27px,7vw,37px)!important;line-height:1!important}
+.ps-muhammad-ar{margin-top:5px!important;font-size:clamp(20px,5.1vw,25px)!important}
+.ps-muhammad-meta{margin-top:5px!important;font-size:11px!important}
+.ps-muhammad-cta{
+  min-height:40px!important;margin-top:8px!important;padding:0!important;border:0!important;border-radius:0!important;
+  background:transparent!important;font-size:13px!important
+}
+.ps-muhammad-go{
+  width:38px!important;height:38px!important;border:1px solid rgba(240,205,120,.30)!important;
+  background:rgba(240,205,120,.08)!important
+}
+.ps-sequence-head{width:min(calc(100% - 32px),908px)!important;margin:5px auto 11px!important}
+.ps-library-page .ps-library-list{
+  width:min(100%,940px)!important;margin:0 auto!important;
+  padding:0 12px calc(26px + env(safe-area-inset-bottom,0px))!important;
+  display:grid!important;grid-template-columns:1fr!important;gap:10px!important;background:transparent!important
+}
+.ps-library-page .ps-story-row{
+  position:relative!important;width:100%!important;height:154px!important;min-height:154px!important;overflow:hidden!important;
+  border:1px solid rgba(82,185,224,.22)!important;border-radius:24px!important;box-shadow:0 12px 28px rgba(0,0,0,.18)!important
+}
+.ps-library-page .ps-row-copy{left:47%!important;right:56px!important}
+.ps-library-page .ps-row-title{
+  margin:4px 0 1px!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(22px,5.6vw,29px)!important;font-weight:700!important;line-height:1.03!important
+}
+.ps-library-page .ps-row-ar{font-size:clamp(18px,4.7vw,24px)!important;line-height:1.16!important}
+.ps-library-page .ps-row-meta{font-size:clamp(9.5px,2.2vw,11px)!important}
+.ps-library-page .ps-row-rank{
+  position:absolute!important;z-index:5!important;left:10px!important;bottom:10px!important;
+  min-width:40px!important;height:30px!important;padding:0 10px!important;display:grid!important;place-items:center!important;
+  border:1px solid rgba(239,203,121,.42)!important;border-radius:999px!important;background:rgba(3,20,29,.72)!important;
+  color:#f3d58e!important;font:700 12px/1 Georgia,serif!important;
+  backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important
+}
+.ps-library-page .ps-row-go{width:42px!important;height:42px!important;right:10px!important}
+
+/* Tight iPhones */
+@media(max-width:390px){
+  .ms-library-page .ms-list,.ps-library-page .ps-library-list{padding-left:9px!important;padding-right:9px!important;gap:9px!important}
+  .ms-library-page .ms-story-row{grid-template-columns:108px minmax(0,1fr) 34px!important;min-height:146px!important;border-radius:21px!important}
+  .ms-library-page .ms-row-visual,.ms-library-page .ms-row-visual img{min-height:146px!important}
+  .ms-library-page .ms-row-copy{padding:12px 6px 12px 12px!important}
+  .ms-library-page .ms-row-title{font-size:20px!important}
+  .ms-library-page .ms-row-ar{font-size:19px!important}
+  .ms-library-page .ms-row-summary{font-size:11px!important}
+  .ps-muhammad-feature{padding-left:9px!important;padding-right:9px!important}
+  .ps-muhammad-card{grid-template-rows:164px auto!important;border-radius:23px!important}
+  .ps-muhammad-visual,.ps-muhammad-visual img{min-height:164px!important}
+  .ps-library-page .ps-story-row{height:148px!important;min-height:148px!important;border-radius:21px!important}
+  .ps-library-page .ps-row-copy{left:45%!important;right:50px!important}
+  .ps-library-page .ps-row-title{font-size:21px!important}
+}
+
+/* iPad / wide layouts */
+@media(min-width:700px){
+  .ms-library-page .ms-list,.ps-library-page .ps-library-list{padding-left:20px!important;padding-right:20px!important;gap:13px!important}
+  .ms-library-page .ms-story-row{min-height:190px!important;grid-template-columns:minmax(190px,34%) minmax(0,1fr) 50px!important;border-radius:28px!important}
+  .ms-library-page .ms-row-visual,.ms-library-page .ms-row-visual img{min-height:190px!important}
+  .ms-library-page .ms-row-copy{padding:20px 18px 20px 23px!important;gap:5px!important}
+  .ms-library-page .ms-row-title{font-size:29px!important}
+  .ms-library-page .ms-row-ar{font-size:26px!important}
+  .ms-library-page .ms-row-summary{font-size:14px!important}
+  .ms-library-page .ms-row-meta{font-size:12px!important}
+  .ps-muhammad-feature{padding-left:20px!important;padding-right:20px!important}
+  .ps-muhammad-card{grid-template-rows:255px auto!important}
+  .ps-muhammad-visual,.ps-muhammad-visual img{min-height:255px!important}
+  .ps-library-page .ps-story-row{height:188px!important;min-height:188px!important;border-radius:28px!important}
+  .ps-library-page .ps-row-copy{left:42%!important;right:64px!important}
+  .ps-library-page .ps-row-title{font-size:30px!important}
+  .ps-library-page .ps-row-ar{font-size:26px!important}
+}
