@@ -10,14 +10,14 @@
     "hadith",
     "athar"
   ],
-  "totalCount": 3050,
-  "publishedCount": 3050,
-  "hadithCount": 2165,
+  "totalCount": 3075,
+  "publishedCount": 3075,
+  "hadithCount": 2190,
   "atharCount": 885,
-  "currentSeries": "2951-3050",
-  "latestId": "HAD-3050",
-  "latestPublishedId": "HAD-3050",
-  "nextId": "HAD-3051",
+  "currentSeries": "3051-3150",
+  "latestId": "HAD-3075",
+  "latestPublishedId": "HAD-3075",
+  "nextId": "HAD-3076",
   "screensaver": {
     "enabled": true,
     "provider": "HadithScreensaverProvider",
@@ -453,6 +453,18 @@
       "publishedFrom": "HAD-2951",
       "publishedTo": "HAD-3050",
       "publishedCount": 100,
+      "skipped": []
+    },
+    {
+      "id": "3051-3150",
+      "count": 25,
+      "firstId": "HAD-3051",
+      "lastId": "HAD-3075",
+      "indexPath": "series/3051-3150/index.json",
+      "label": "HAD-3051 bis HAD-3075",
+      "publishedFrom": "HAD-3051",
+      "publishedTo": "HAD-3075",
+      "publishedCount": 25,
       "skipped": []
     }
   ]
