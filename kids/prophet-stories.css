@@ -3063,80 +3063,47 @@ html.ps-modal-open body{
   }
 }
 
-/* PROPHET_DETAIL_ACTIONS_V1153 */
-/* Match the child-friendly control density used in the Ṣaḥābah stories.
-   Detail controls only — no player, audio, reader or mode logic changes. */
+/* PROPHET_DETAIL_ACTIONS_V1156 */
+/* Exact visual parity with the Ṣaḥābah story detail controls.
+   Presentation only — audio/player/follow-reader behavior is untouched. */
 .ps-detail-modes{
-  display:grid!important;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
-  gap:10px!important;
-  margin-top:18px!important;
-  padding:0!important;
+  display:flex!important;
+  gap:7px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  margin:0!important;
+  padding:14px 0 2px!important;
   border:0!important;
   border-radius:0!important;
   background:transparent!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
-  overflow:visible!important;
+  scrollbar-width:none!important;
 }
+.ps-detail-modes::-webkit-scrollbar{display:none!important}
 .ps-detail-mode{
+  flex:0 0 auto!important;
   min-width:0!important;
-  min-height:max(var(--kids-touch,58px),62px)!important;
-  padding:12px 14px!important;
+  min-height:var(--kids-touch,58px)!important;
+  padding:10px 13px!important;
   display:inline-flex!important;
   align-items:center!important;
   justify-content:center!important;
-  gap:7px!important;
-  border:1px solid rgba(143,216,225,.26)!important;
-  border-radius:20px!important;
-  background:rgba(9,44,66,.62)!important;
-  color:rgba(255,255,255,.90)!important;
+  border:1px solid rgba(255,255,255,.09)!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.05)!important;
+  color:#d9e4e6!important;
   font-size:var(--kids-button,17px)!important;
-  line-height:1.16!important;
+  line-height:1.2!important;
   font-weight:900!important;
-  text-align:center!important;
-  white-space:normal!important;
-  box-shadow:inset 0 1px rgba(255,255,255,.035)!important;
-}
-.ps-detail-mode:first-child{
-  grid-column:1/-1!important;
-  min-height:max(var(--kids-touch,58px),66px)!important;
-}
-.ps-detail-mode .ps-mode-icon{
-  flex:0 0 auto!important;
+  white-space:nowrap!important;
+  box-shadow:none!important;
 }
 .ps-detail-mode.active{
-  border-color:#f1cb6d!important;
-  color:#ffe69a!important;
-  background:
-    radial-gradient(circle at 50% 0%,rgba(255,239,177,.22),transparent 64%),
-    linear-gradient(135deg,rgba(189,142,56,.31),rgba(78,77,47,.34))!important;
-  box-shadow:
-    0 0 0 1px rgba(255,218,126,.10),
-    0 0 24px rgba(239,198,92,.20),
-    inset 0 1px rgba(255,255,255,.08)!important;
-}
-html[data-kids-age="4-5"] .ps-detail-mode{
-  min-height:68px!important;
-  font-size:max(var(--kids-button,18px),18px)!important;
-}
-html[data-kids-age="4-5"] .ps-detail-mode:first-child{
-  min-height:72px!important;
-}
-@media(min-width:700px){
-  .ps-detail-modes{
-    grid-template-columns:minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr)!important;
-    gap:12px!important;
-    margin-top:22px!important;
-  }
-  .ps-detail-mode:first-child{
-    grid-column:auto!important;
-  }
-  .ps-detail-mode{
-    min-height:66px!important;
-    padding:13px 18px!important;
-    border-radius:22px!important;
-  }
+  background:rgba(239,203,121,.14)!important;
+  border-color:rgba(239,203,121,.36)!important;
+  color:#f5db9c!important;
+  box-shadow:none!important;
 }
 
 /* PROPHET_LIBRARY_REFINEMENT_V12 — preserve the strong page, make it calmer and more consistent */
