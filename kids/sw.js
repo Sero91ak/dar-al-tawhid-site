@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1171";
-const KIDS_BUILD_ID="kids-shell-v98-dua-voice1171";
+const CACHE_NAME="dar-al-tawhid-kids-v1173";
+const KIDS_BUILD_ID="kids-shell-v100-audio-core1173";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -189,7 +189,7 @@ self.addEventListener("activate",function(event){
 
 function isKidsRequest(url){
   if(url.origin!==self.location.origin)return false;
-  return url.pathname.indexOf("/kids/")===0||url.pathname.indexOf("/assets/kids-alphabet-audio/")===0;
+  return url.pathname.indexOf("/kids/")===0;
 }
 function networkFirst(request,fallback){
   return fetch(request,{cache:"no-store"}).then(function(response){
