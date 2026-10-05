@@ -1,4 +1,5 @@
-import { gateHiddenSurfaces } from "./preview-gate.js";\nimport { serveR2Media } from "./media-r2.js";
+import { gateHiddenSurfaces } from "./preview-gate.js";
+import { serveR2Media } from "./media-r2.js";
 /* Dar Test (/test) ohne Browser-Anmeldefenster. Kids bleibt geschützt. v1096 */
 function isNativeAppRequest(ua) {
   return /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(String(ua || ""));
