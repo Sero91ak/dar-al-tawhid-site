@@ -32,7 +32,8 @@ const DEDICATED_HERO=new Set(PROPHET_ORDER);
 function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=22"}
 function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=22":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
-let items=[],active=null,activeText="",playing=false,busy=false,followReader=null;\nconst audio=new Audio();
+let items=[],active=null,activeText="",playing=false,busy=false,followReader=null;
+const audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
@@ -48,7 +49,8 @@ function setMode(v){
     else followReader?.open?.();
     if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
   }
-}\nfunction uniqueItems(list)function uniqueItems(list){
+}
+function uniqueItems(list){
   const seen=new Set();
   return (Array.isArray(list)?list:[])
     .filter(x=>x&&x.id&&!seen.has(x.id)&&(seen.add(x.id),true))
@@ -493,7 +495,7 @@ function stopAudio(){
   try{audio.pause();audio.removeAttribute("src");audio.load()}catch(_){}
   playing=false;busy=false;updatePlayButton();updateProgress();
 }
-async function init(){async function init(){
+async function init(){
   if(!ensureUi())return;
   try{
     const r=await fetch(DATA_URL+"?v=28",{cache:"force-cache"});
