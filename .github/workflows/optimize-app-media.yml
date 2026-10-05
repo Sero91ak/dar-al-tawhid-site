@@ -84,6 +84,11 @@ jobs:
           chmod +x scripts/optimize-app-media.sh
           if [ "${{ steps.mode.outputs.full }}" = "1" ]; then
             scripts/optimize-app-media.sh --all
+          elif [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch origin "${{ github.base_ref }}" --depth=1
+            git diff --name-only "origin/${{ github.base_ref }}"...HEAD -- \
+              assets kids/assets content apple-tv ios test/assets \
+              | scripts/optimize-app-media.sh --stdin
           else
             git diff --name-only HEAD^ HEAD -- \
               assets kids/assets content apple-tv ios test/assets \
