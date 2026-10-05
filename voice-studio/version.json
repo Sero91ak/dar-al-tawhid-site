@@ -498,7 +498,8 @@
     "singleMasterStoryUi": true,
     "singlePhysicalMasterAudio": true,
     "masterAudioDurationGuard": true,
-    "sahabaAuthenticSourceExpansion": true
+    "sahabaAuthenticSourceExpansion": true,
+    "releaseCandidateRef": "7cfab1e3530f3ef408a2c93f4f58612aa09a960e"
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -908,7 +909,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "b64b8a40292884f7994ae49457eece7a705bf21d",
+  "releaseRef": "7cfab1e3530f3ef408a2c93f4f58612aa09a960e",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1797,7 +1798,7 @@
     "mobileHealthEndpoint": "/voice-studio/api/health",
     "mobileGenerateEndpoint": "/voice-studio/api/generate"
   },
-  "releaseRefPolicy": "immutable 2.9.104 single-master Sahaba content commit; engine/UI/story master aligned",
+  "releaseRefPolicy": "Pinned 2.9.120 archive: the downloaded release already contains Voice Studio 2.9.120, single-master story UI, one physical master audio workflow, and the 5–8 minute master guard before the installer replaces the running app.",
   "knownRuleFastPath": true,
   "maxMasterPlsExactMatchesSkipUnknownReview": true,
   "directContentAudioUpload": true,
