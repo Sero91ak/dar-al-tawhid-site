@@ -63,3 +63,7 @@ html.gh-world-open,html.gh-player-open,html.gh-world-open body,html.gh-player-op
   .gh-list{grid-template-columns:1fr 1fr!important;gap:15px!important}.gh-story{min-height:205px!important}
 }
 @media(min-width:1100px){.gh-world-hero{min-height:590px!important}.gh-player-hero{min-height:720px!important}.gh-content{width:min(100%,1180px)!important}}
+
+.gh-player-min{position:absolute;z-index:5;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));width:46px;height:46px;border-radius:50%;border:1px solid rgba(239,208,138,.24);background:rgba(4,22,33,.58);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#f7dda0;font-size:25px;display:grid;place-items:center;cursor:pointer}
+.gh-mini{grid-template-columns:minmax(0,1fr) 48px!important}
+.gh-mini-open{min-width:0;border:0;background:transparent;color:#fff;padding:0;display:grid;grid-template-columns:48px minmax(0,1fr);gap:10px;align-items:center;text-align:left;cursor:pointer}
