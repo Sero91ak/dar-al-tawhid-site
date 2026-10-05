@@ -82,9 +82,8 @@ jobs:
           if(!fs.existsSync("kids/story-hub.js")||!fs.existsSync("kids/story-hub.css"))throw new Error("Universal story hub files missing");
           if([prophetJs,sahabaJs,sahabiyyatJs].some(js=>(js.match(/new Audio\(/g)||[]).length!==1))throw new Error("Each story library must own exactly one local Audio engine");
           if([prophetJs,sahabaJs,sahabiyyatJs].some(js=>js.includes("openUniversalAudio")))throw new Error("Central story-player delegation returned");
-          if(!prophetJs.includes("psBack15")||!prophetJs.includes("psFwd15")||!prophetJs.includes("seekBy(-15)")||!prophetJs.includes("openReadAlong"))throw new Error("Prophet local audio/read-along controls missing");
-          if(!sahabaJs.includes("msBack15")||!sahabaJs.includes("msFwd15")||!sahabaJs.includes("seekBy(-15)")||!sahabaJs.includes("openReadAlong"))throw new Error("Ṣaḥābah local audio/read-along controls missing");
-          if(!sahabiyyatJs.includes("syBack15")||!sahabiyyatJs.includes("syFwd15")||!sahabiyyatJs.includes("seekBy(-15)")||!sahabiyyatJs.includes("openReadAlong"))throw new Error("Ṣaḥābiyyāt local audio/read-along controls missing");
+          if([prophetJs,sahabaJs,sahabiyyatJs].some(js=>js.includes("story-local-controls")||js.includes('id="psPlayer"')||js.includes('id="msPlayer"')||js.includes('id="syPlayer"')))throw new Error("Inline story player must stay removed");
+          if([prophetJs,sahabaJs,sahabiyyatJs].some(js=>!js.includes("openReadAlong")||!js.includes("openListening")||!js.includes("openReading")))throw new Error("Story mode buttons must route to popup reader modes");
           if(!storyHubJs.includes('document.getElementById("ghEntry")?.remove()'))throw new Error("Central Hörwelten entry must stay removed");
           if(!sahabiyyatJs.includes("sy-image-name"))throw new Error("Ṣaḥābiyyāt card image-name overlay missing");
           if(sahabiyyatJs.includes("syHeroName"))throw new Error("Ṣaḥābiyyāt detail name duplicated in hero");
@@ -94,7 +93,8 @@ jobs:
           if(storyHubJs.includes('addEventListener("click",toggleRead)'))throw new Error("Story text toggle must not receive the click event as syncMode");
           if(!storyHubJs.includes("reader.openReadAlong?.()")||!storyHubJs.includes('typeof reader.openReading==="function"'))throw new Error("Bottom-sheet read/follow routing missing");
           if(!storyHubJs.includes('aria-haspopup="dialog"')||!storyHubJs.includes('$("#ghFollow").textContent="Hören & mitlesen"'))throw new Error("Focus-reader controls missing");
-          if(!storyFollowReaderJs.includes("function openWithContent")||!storyFollowReaderJs.includes("function openReadAlong")||!storyFollowReaderJs.includes("function openReading"))throw new Error("Shared popup reader modes missing");
+          if(!storyFollowReaderJs.includes("function openWithContent")||!storyFollowReaderJs.includes("function openReadAlong")||!storyFollowReaderJs.includes("function openListening")||!storyFollowReaderJs.includes("function openReading"))throw new Error("Shared popup reader modes missing");
+          if(!storyFollowReaderJs.includes('data-kfr-seek="-15"')||!storyFollowReaderJs.includes('data-kfr-seek="15"'))throw new Error("Popup reader 15-second seek controls missing");
           if(!storyFollowReaderJs.includes("paragraphIndexFromTimings")||!storyFollowReaderJs.includes("scrollReaderNode"))throw new Error("Timestamp-aware intelligent popup follow-reader missing");
           if(!storyFollowReaderJs.includes('setReadingWake(!root.classList.contains("audio-only"))')||!storyFollowReaderJs.includes("setReadingWake(false)"))throw new Error("Reading-only screen-awake hook missing in popup reader");
           if(!storyFollowReaderCss.includes(".kids-follow-reader.open{display:flex}")||!storyFollowReaderCss.includes("align-items:flex-end")||!storyFollowReaderCss.includes(".kfr-sheet"))throw new Error("Bottom-sheet popup reader styling missing");
