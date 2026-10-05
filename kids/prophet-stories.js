@@ -298,7 +298,7 @@ function ensureUi(){
             '<div class="ps-ar" id="psArabic" dir="rtl"></div>'+
             '<p class="ps-summary" id="psSummary"></p>'+
             '<div class="ps-meta" id="psMeta"></div>'+
-            '<div class="ps-detail-modes"><button class="ps-detail-mode" data-ps-mode="both" type="button"><span class="ps-mode-icon ps-mode-icon-headphones" aria-hidden="true"></span>Hören &amp; Mitlesen</button><button class="ps-detail-mode" data-ps-mode="listen" type="button"><span class="ps-mode-icon ps-mode-icon-headphones" aria-hidden="true"></span>Hören</button><button class="ps-detail-mode" data-ps-mode="read" type="button"><span class="ps-mode-icon ps-mode-icon-book" aria-hidden="true"></span>Lesen</button></div>'+
+            '<div class="ps-detail-modes"><button class="ps-detail-mode" data-ps-mode="both" type="button">Hören &amp; Mitlesen</button><button class="ps-detail-mode" data-ps-mode="listen" type="button">Hören</button><button class="ps-detail-mode" data-ps-mode="read" type="button">Lesen</button></div>'+
           '</div>'+
         '</div>'+
         '<div class="ps-body">'+
