@@ -1,7 +1,7 @@
 {
   "buildId": "kids-shell-v53-dua-quiz-art1123",
   "label": "KIDS · V1.07.58",
-  "releasedAt": "2026-10-05T11:05:00+02:00",
+  "releasedAt": "2026-10-05T10:52:00+02:00",
   "note": "Kids v1123: Duʿāʾ-/Quiz-Artwork-Release plus Ṣaḥābiyyāt-Namen direkt auf Karten- und Hero-Bildern; Sawdah, Ǧuwayriyyah, Ṣafiyyah und Maymūnah haben eigene historische, gesichtslose Szenen. Universeller Geschichten-Player nutzt dieselbe Zuordnung.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
@@ -481,7 +481,14 @@
     "duaArtworkLive": true,
     "quizArtworkLive": true,
     "duaQuizArtworkPlacement": "direct-in-respective-modal-sections",
-    "sahabiyyatDistinctArtworkCount": 14
+    "sahabiyyatDistinctArtworkCount": 14,
+    "sahabiyyatDataVersion": 5,
+    "sahabiyyatArtworkRelease": "v1123-complete-14",
+    "sahabiyyatArtworkCount": 14,
+    "sahabiyyatLocalArtworkCount": 4,
+    "sahabiyyatAdobeArtworkCount": 10,
+    "sahabiyyatAllNamesOnArtwork": true,
+    "sahabiyyatNoVisibleFaces": true
   },
   "updatedAt": "2026-10-05"
 }
