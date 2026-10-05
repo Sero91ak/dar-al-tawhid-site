@@ -1,7 +1,7 @@
 {
   "schemaVersion": 8,
   "id": "dar-own-voice-narration-v2.8.8",
-  "updatedAt": "2026-10-04T17:12:00+02:00",
+  "updatedAt": "2026-10-05T12:05:00+02:00",
   "provider": "self-produced",
   "sourceVoice": "authorized-owner-voice",
   "language": "de-DE",
@@ -1604,5 +1604,36 @@
     "interactiveUnconfirmedArabicAlias": true,
     "confirmedAudioMasterNeverFlattened": true,
     "fastModelCanBeOverriddenByEnv": true
+  },
+  "referenceLearning": {
+    "mode": "owner-approved-reference-corpus",
+    "modelWeightFineTuning": false,
+    "purpose": [
+      "prosody calibration",
+      "speech-rate calibration",
+      "pronunciation memory",
+      "exact text/audio reuse",
+      "style selection for kids story, dua and quiz"
+    ],
+    "ownerApprovedCorpus": [
+      {
+        "itemId": "adam",
+        "file": "story-reference-adam-2026-10-04.json",
+        "durationSec": 229.642,
+        "words": 573,
+        "measuredWpm": 150,
+        "style": "kids_story"
+      },
+      {
+        "itemId": "idris",
+        "file": "story-reference-idris-2026-10-04.json",
+        "durationSec": 175.073,
+        "words": 421,
+        "measuredWpm": 144,
+        "style": "kids_story"
+      }
+    ],
+    "kidsStoryTargetWpm": 147,
+    "policy": "Use confirmed owner recordings as delivery/prosody references and pronunciation memory; do not silently retrain model weights."
   }
 }
