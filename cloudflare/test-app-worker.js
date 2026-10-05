@@ -307,12 +307,12 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_HADITH_REFRAME_FINAL_V1299
   if (!html.includes('id="darHadithReframeFinalV1299"')) {
     const hadithFinal = '<style id="darHadithReframeFinalV1299">@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-reframe-v1299");</style>' +
-      '<script id="darHadithReframeScriptV1299" src="/test/assets/hadith-library-reframe-v1299.js?v=1299"><\\/script>';
+      '<script id="darHadithReframeScriptV1299" src="/test/assets/hadith-library-reframe-v1299.js?v=1299"><\/script>';
     if (html.includes("</html>")) html = html.replace("</html>", hadithFinal + "</html>");
     else html += hadithFinal;
   }
-  html = html.replace(/window\\.__DAR_EXPECTED_BUILD="app-shell-v\\d+"/g, 'window.__DAR_EXPECTED_BUILD="app-shell-v1299"');
-  html = html.replace(/const APP_BUILD_ID="app-shell-v\\d+"/g, 'const APP_BUILD_ID="app-shell-v1299"');
+  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v\d+"/g, 'window.__DAR_EXPECTED_BUILD="app-shell-v1299"');
+  html = html.replace(/const APP_BUILD_ID="app-shell-v\d+"/g, 'const APP_BUILD_ID="app-shell-v1299"');
 
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
