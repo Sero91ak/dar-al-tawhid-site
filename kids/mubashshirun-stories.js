@@ -412,6 +412,7 @@ function clearStoryDeepLink(kind){
 }
 async function toggleAudio(){
   if(!active||busy)return;
+  try{window.DARKidsStoryHub?.stop?.()}catch(_){}
   const meta=audioMeta(active);if(!meta?.url)return;
   if(playing){audio.pause();playing=false;updatePlayButton();return}
   try{busy=true;updatePlayButton();if(!audio.src)audio.src=meta.url;if(audio.ended)try{audio.currentTime=0}catch(_){}followReader?.restore();await audio.play();playing=true}
