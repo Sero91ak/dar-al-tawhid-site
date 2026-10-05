@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v44-sahabiyyat-static1114",
-  "label": "KIDS · V1.07.49",
-  "releasedAt": "2026-10-05T07:52:00+02:00",
-  "note": "Kids v1114: Ṣaḥābiyyāt-Karte ist jetzt fest im Geschichten-Hub verankert und nicht mehr nur von dynamischer JS-Einfügung abhängig. Reihenfolge Propheten → Ṣaḥābah → Ṣaḥābiyyāt bleibt stabil; JS bindet die feste Karte an Bibliothek und Player.",
+  "buildId": "kids-shell-v45-sahabiyyat-visible1115",
+  "label": "KIDS · V1.07.50",
+  "releasedAt": "2026-10-05T08:02:00+02:00",
+  "note": "Kids v1115: Ṣaḥābiyyāt ist fest im Geschichten-Hub verankert, wird beim Start direkt hinter Ṣaḥābah positioniert und die App-Shell lädt online network-first statt zuerst eine veraltete Cache-Seite zu zeigen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1114",
+    "serviceWorkerCache": "v1115",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -422,7 +422,10 @@
     "sahabiyyatSingleMasterStory": true,
     "sahabiyyatArtworkPolicy": "historical-environment-only-no-portrait",
     "sahabiyyatBundleVersion": 3,
-    "sahabiyyatStaticHubCard": true
+    "sahabiyyatStaticHubCard": true,
+    "sahabiyyatStaticEntry": true,
+    "sahabiyyatForcedAfterSahaba": true,
+    "navigationStrategy": "network-first-with-offline-fallback"
   },
   "updatedAt": "2026-10-04"
 }
