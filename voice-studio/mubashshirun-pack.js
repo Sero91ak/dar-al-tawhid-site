@@ -136,25 +136,21 @@ async function uploadCurrent(file){
     const alignment=await window.darVoiceAlignStoryFile(file,text);
     if(!Array.isArray(alignment?.timings)||!alignment.timings.length)throw Error("Keine Mitlese-Zeitstempel erhalten.");
     const dataUrl=await fileAsDataUrl(file);
-    const ages=["4-5","6-8","9-10"],results=[];
-    for(const age of ages){
-      const r=await engineRequest("/story-media/upload",{
-        method:"POST",headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          kind:"sahabi",id:it.id,age,text,
-          filename:file.name||"story-audio",dataUrl,
-          timings:alignment.timings,
-          syncMode:alignment.syncMode||"elevenlabs-forced-alignment-v1",
-          alignmentLoss:alignment.alignmentLoss
-        })
-      });
-      const d=await r.json().catch(()=>({}));
-      if(!r.ok||d.ok===false)throw Error(d.error||("Audio-Upload für "+age+" fehlgeschlagen."));
-      results.push([age,d]);
-    }
+    const r=await engineRequest("/story-media/upload",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        kind:"sahabi",id:it.id,age:"all",text,
+        filename:file.name||"story-audio",dataUrl,
+        timings:alignment.timings,
+        syncMode:alignment.syncMode||"elevenlabs-forced-alignment-v1",
+        alignmentLoss:alignment.alignmentLoss
+      })
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||d.ok===false)throw Error(d.error||"Masteraudio-Upload fehlgeschlagen.");
     if(!it.scripts||typeof it.scripts!=="object")it.scripts={};
     if(!it.audio||typeof it.audio!=="object")it.audio={};
-    for(const [age,d] of results){
+    for(const age of ["4-5","6-8","9-10"]){
       it.scripts[age]=text;
       it.audio[age]={...(it.audio[age]||{}),url:d.url||"",durationSec:d.durationSec||0,status:"ready",manualUpload:true,masterAudio:true};
     }
@@ -183,28 +179,24 @@ async function publishCurrent(){
     if(status)status.textContent="Audio und Mastertext werden jetzt wortgenau für das automatische Mitlesen ausgerichtet …";
     const alignment=await window.darVoiceAlignCurrentStory(text);
     if(!Array.isArray(alignment?.timings)||!alignment.timings.length)throw Error("Keine Mitlese-Zeitstempel erhalten.");
-    const ages=["4-5","6-8","9-10"],results=[];
-    for(const age of ages){
-      const r=await engineRequest("/mubashshirun/publish",{
-        method:"POST",headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          id:it.id,age,text,
-          timings:alignment.timings,
-          syncMode:alignment.syncMode||"elevenlabs-forced-alignment-v1",
-          alignmentLoss:alignment.alignmentLoss
-        })
-      });
-      const d=await r.json().catch(()=>({}));
-      if(!r.ok||d.ok===false)throw Error(d.error||("Übernahme für "+age+" fehlgeschlagen."));
-      results.push([age,d]);
-    }
+    const r=await engineRequest("/mubashshirun/publish",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        id:it.id,age:"all",text,
+        timings:alignment.timings,
+        syncMode:alignment.syncMode||"elevenlabs-forced-alignment-v1",
+        alignmentLoss:alignment.alignmentLoss
+      })
+    });
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||d.ok===false)throw Error(d.error||"Masteraudio-Übernahme fehlgeschlagen.");
     if(!it.audio||typeof it.audio!=="object")it.audio={};
     if(!it.scripts||typeof it.scripts!=="object")it.scripts={};
-    for(const [age,d] of results){
+    for(const age of ["4-5","6-8","9-10"]){
       it.scripts[age]=text;
       it.audio[age]={...(it.audio[age]||{}),url:d.url||"",durationSec:d.durationSec||0,status:"ready",masterAudio:true};
     }
-    const duration=Number(results[0]?.[1]?.durationSec||0);
+    const duration=Number(d.durationSec||0);
     if(status)status.textContent=it.name+" · ein geprüftes Serhat-Masteraudio ist für 4–10 Jahre in Kids übernommen. "+(duration?("Dauer: "+Math.round(duration/60)+" Min."):"");
     render();
     return true;
