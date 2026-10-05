@@ -71,6 +71,13 @@ const expectedMubashshirunIds = [
 ];
 const mubBundleVersion = String(Number(visual.mubashshirunBundleVersion || 0) || "");
 const mubDataVersion = Number(visual.mubashshirunDataVersion || 0);
+const expectedSahabiyyatIds = [
+  "khadijah","aishah","fatimah","umm-salamah","hafsah","sawdah","zaynab",
+  "asma","umm-sulaym","umm-atiyyah","umm-habibah","juwayriyyah","safiyyah","maymunah"
+];
+const sahabiyyatCssVersion = String(Number(visual.sahabiyyatCssVersion || visual.sahabiyyatBundleVersion || 0) || "");
+const sahabiyyatJsVersion = String(Number(visual.sahabiyyatJsVersion || 0) || "");
+
 
 function assertOnlyCurrentBuild(rel) {
   const text = read(rel);
@@ -92,6 +99,14 @@ for (const rel of ["kids/index.html", "kids/start.html", "kids/shell.html"]) {
   if (mubBundleVersion) {
     requireMatch(text, "/kids/mubashshirun-stories.css?v=" + mubBundleVersion, rel);
     requireMatch(text, "/kids/mubashshirun-stories.js?v=" + mubBundleVersion, rel);
+  }
+  if (visual.sahabiyyatOwnLibrary) {
+    if (!sahabiyyatCssVersion || !sahabiyyatJsVersion) error("Ṣaḥābiyyāt CSS/JS Versionsmarker fehlen in visualSystem");
+    if (sahabiyyatCssVersion) requireMatch(text, "/kids/sahabiyyat-stories.css?v=" + sahabiyyatCssVersion, rel);
+    if (sahabiyyatJsVersion) requireMatch(text, "/kids/sahabiyyat-stories.js?v=" + sahabiyyatJsVersion, rel);
+    requireMatch(text, 'id="syEntry"', rel);
+    requireMatch(text, 'class="stories-area-jump"', rel);
+    requireMatch(text, 'data-story-area="sahabiyyat"', rel);
   }
 }
 
@@ -123,6 +138,12 @@ if (mubBundleVersion) {
   requireMatch(sw, "/kids/mubashshirun-stories.css?v=" + mubBundleVersion, "kids/sw.js");
   requireMatch(sw, "/kids/mubashshirun-stories.js?v=" + mubBundleVersion, "kids/sw.js");
   requireMatch(sw, "/kids/data/mubashshirun-stories.json", "kids/sw.js");
+}
+if (visual.sahabiyyatOwnLibrary) {
+  if (sahabiyyatCssVersion) requireMatch(sw, "/kids/sahabiyyat-stories.css?v=" + sahabiyyatCssVersion, "kids/sw.js");
+  if (sahabiyyatJsVersion) requireMatch(sw, "/kids/sahabiyyat-stories.js?v=" + sahabiyyatJsVersion, "kids/sw.js");
+  requireMatch(sw, "/kids/data/sahabiyyat-stories.json", "kids/sw.js");
+  requireMatch(sw, 'event.respondWith(networkFirst(request,"/kids/start"))', "kids/sw.js");
 }
 
 const prophetJs = read("kids/prophet-stories.js");
@@ -185,5 +206,32 @@ if (mubDataVersion) {
   }
 }
 
+
+if (visual.sahabiyyatOwnLibrary) {
+  let sy;
+  try {
+    sy = JSON.parse(read("kids/data/sahabiyyat-stories.json"));
+  } catch (err) {
+    error("Ṣaḥābiyyāt-Daten ungültig: " + err.message);
+  }
+  if (sy) {
+    const rows = Array.isArray(sy.items) ? sy.items : [];
+    if (rows.length !== 14) error("Erwartet 14 Ṣaḥābiyyāt-Geschichten, gefunden " + rows.length);
+    const ids = rows.map(x => String(x && x.id || ""));
+    for (const id of expectedSahabiyyatIds) {
+      if (!ids.includes(id)) {
+        error("Ṣaḥābiyyāt-Geschichte fehlt: " + id);
+        continue;
+      }
+      const item = rows.find(x => String(x && x.id || "") === id) || {};
+      for (const age of ["4-5","6-8","9-10"]) {
+        if (!String((item.scripts || {})[age] || "").trim()) error(id + " Ṣaḥābiyyāt-Text fehlt für Alter " + age);
+      }
+      if (!Array.isArray(item.sourceRefs) || !item.sourceRefs.length) error(id + " Ṣaḥābiyyāt-Quellen fehlen");
+      if (!String(item.cover || "").trim()) error(id + " Ṣaḥābiyyāt-Bild fehlt");
+    }
+  }
+}
+
 if (failed) process.exit(1);
-console.log("Kids Prophet release guard OK:", build, label, exactV106Snapshot ? "exact-v106-legacy-snapshot" : ("assets v" + assetVersion), "25 Karten + 25 Heroes");
+console.log("Kids release guard OK:", build, label, exactV106Snapshot ? "exact-v106-legacy-snapshot" : ("assets v" + assetVersion), "25 Propheten-Karten + 10 Ṣaḥābah + 14 Ṣaḥābiyyāt");
