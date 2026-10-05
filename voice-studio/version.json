@@ -1,10 +1,10 @@
 {
-  "version": "2.9.118",
-  "updatedAt": "2026-10-05T13:48:00+02:00",
-  "deployTrigger": "voice-studio-2.9.118-coherent-release-pin",
+  "version": "2.9.119",
+  "updatedAt": "2026-10-05T14:06:00+02:00",
+  "deployTrigger": "voice-studio-2.9.119-pending-pron-selector-hotfix",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v87",
+  "cache": "dar-voice-studio-v88",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-contents-api",
-  "engineVersion": "2.9.118",
+  "engineVersion": "2.9.119",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -487,13 +487,14 @@
     "adamIdrisReferenceCorpus": true,
     "smoothDuaQuizProfiles": true,
     "pronunciationDictionaryLocatorSupport": true,
-    "unifiedReleaseVersion": "2.9.118",
+    "unifiedReleaseVersion": "2.9.119",
     "mobileContentShellValidation": true,
     "pronunciationWarningsNeverBlockInteractiveGenerate": true,
     "unresolvedTermsPersistToLearningQueue": true,
     "legacyPronunciation422Fallback": true,
     "coherentReleaseCandidate": true,
-    "releaseArchiveManifestVersion": "2.9.118"
+    "releaseArchiveManifestVersion": "2.9.118",
+    "pendingPronunciationPluralSelectorGuard": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -1379,7 +1380,7 @@
     "pronunciationPreviewNoLongFormQaCascade": true,
     "rootCauseConfirmed": "alphabet-audio-studio auto-started full 140 alphabet + quiz + greeting batch on studio load, monopolizing the shared local synthesis worker",
     "alphabetBatchDoesNotAutoStart": true,
-    "engineVersion": "2.9.118",
+    "engineVersion": "2.9.119",
     "engineHealthExposesVersion": true,
     "uiRejectsStaleEngineVersion": true,
     "nativeMacRestartsStaleEngine": true,
@@ -1484,7 +1485,7 @@
     "uiVersion": "2.9.113",
     "uiEngineManifestVersionCoherence": true,
     "staleUiDoesNotMarkHealthyEngineOffline": true,
-    "mobileVersion": "2.9.118",
+    "mobileVersion": "2.9.119",
     "iosHttpsInstallRegression": true,
     "dedicatedMobileManifestRegression": true,
     "publicInstallQrRegression": true,
@@ -1495,7 +1496,7 @@
     "elevenLabsMobileCloudRegression": true,
     "adamIdrisReferenceCorpusRegression": true,
     "duaQuizProfileRegression": true,
-    "macVersion": "2.9.118"
+    "macVersion": "2.9.119"
   },
   "mubashshirunStories": {
     "enabled": true,
@@ -1575,7 +1576,7 @@
   },
   "mobileVoiceApp": {
     "enabled": true,
-    "version": "2.9.118",
+    "version": "2.9.119",
     "installUrl": "https://dar-al-tawhid.de/voice-studio/mobile.html?app=1&cloud=1",
     "manifest": "/voice-studio/mobile-manifest.webmanifest",
     "installTransport": "https",
@@ -1621,7 +1622,8 @@
     "desktopContentStudioSqueezeDisabled": true,
     "pronunciationAnalysisNonBlocking": true,
     "pendingPronunciationQueue": true,
-    "legacyEngineGenerateFallback": true
+    "legacyEngineGenerateFallback": true,
+    "pendingPronunciationSelectorFixed": true
   },
   "mobile": {
     "enabled": true,
@@ -1924,5 +1926,5 @@
     ],
     "profileTuningFromOwnerStoryReferences": true
   },
-  "macAppVersion": "2.9.118"
+  "macAppVersion": "2.9.119"
 }
