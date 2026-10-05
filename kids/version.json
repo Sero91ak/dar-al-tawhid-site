@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v66-stories1135b",
-  "label": "KIDS · V1.07.69",
-  "releasedAt": "2026-10-05T14:52:00+02:00",
-  "note": "Kids v1135: Die Geschichtenseite verwendet jetzt die neu erzeugten lokalen Bildwelten direkt in der App: eine allgemeine historische Landschaft für Propheten, eine eigene historische Abendwelt für Ṣaḥābah, einen ruhigen historischen Innenhof ohne Personen für Ṣaḥābiyyāt und ein eigenes Motiv für „Die gefundene Münze“. Der doppelte Geschichten-Einstieg bleibt entfernt, die drei Hauptwelten sind gleichwertig aufgebaut und die Bottom-Navigation überdeckt keine Inhalte.",
+  "buildId": "kids-shell-v66-stories1136",
+  "label": "KIDS · V1.07.70",
+  "releasedAt": "2026-10-05T14:53:00+02:00",
+  "note": "Kids v1136: Geschichtenseite final gehärtet. Die vier neu erzeugten Bildwelten sind lokal gebündelt und werden auch als direkte Fallbacks der Kategorien verwendet, damit beim Laden keine alten Ṣaḥābah-/Ṣaḥābiyyāt-Bilder aufblitzen. Der doppelte Geschichten-Einstieg und die redundante Zählerleiste bleiben entfernt. Propheten, Ṣaḥābah und Ṣaḥābiyyāt haben dieselbe visuelle Gewichtung; freie Adab-Erzählungen werden kindgerechter als pädagogische Geschichten gekennzeichnet. Cache, installierte App und Offline-Pfade wurden aktualisiert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -34,7 +34,7 @@
     "storyAssetVersion": 22,
     "muhammadHonorFeature": true,
     "chronologicalOrderAfterMuhammadFeature": true,
-    "storiesHomePolish": "v1135",
+    "storiesHomePolish": "v1136",
     "storiesHeaderArtwork": true,
     "storiesHeaderAmbientMotion": true,
     "storiesResponsiveLayout": "phone-tablet-desktop-v22",
@@ -81,7 +81,7 @@
     "mubashshirunProfilePanels": true,
     "mubashshirunDirectHadithLinks": true,
     "mubashshirunStoryUi": "responsive-follow-reader-v11",
-    "mubashshirunBundleVersion": 21,
+    "mubashshirunBundleVersion": 22,
     "mubashshirunDataVersion": 6,
     "mubashshirunAudioPublishPipeline": true,
     "mubashshirunFuṣḥāReview": true,
@@ -431,16 +431,12 @@
     "sahabiyyatForcedAfterSahaba": true,
     "navigationStrategy": "network-first-with-offline-fallback",
     "storyAreaJump": false,
-    "storyAreaJumpItems": [
-      "Propheten",
-      "Ṣaḥābah",
-      "Ṣaḥābiyyāt"
-    ],
+    "storyAreaJumpItems": [],
     "sahabiyyatScrollSafety": true,
     "storyAudioPinnedBytes": 2098317,
     "storyAudioDeliveryProfile": "optimized-runtime",
     "sahabiyyatCssVersion": 5,
-    "sahabiyyatJsVersion": 13,
+    "sahabiyyatJsVersion": 14,
     "storyHub": "v3-universal-single-runtime",
     "storyHubPlayer": "single-runtime-audio-player-edge-to-edge",
     "storyHubAgeAdaptive": true,
@@ -453,7 +449,12 @@
     "storyHubAutoplayNext": false,
     "legacyStoryPlayersRemoved": true,
     "storyCategoryArtworkLocal": true,
-    "storiesHomeGeneratedArtwork": true,
+    "storiesHomeGeneratedArtwork": [
+      "/kids/assets/stories-home/prophets-v1133.webp?v=1136",
+      "/kids/assets/stories-home/sahaba-v1133.webp?v=1136",
+      "/kids/assets/stories-home/sahabiyyat-v1133.webp?v=1136",
+      "/kids/assets/stories-home/coin-v1133.webp?v=1136"
+    ],
     "storiesHomeGeneratedArtworkAssets": [
       "/kids/assets/stories-home/prophets-v1133.webp",
       "/kids/assets/stories-home/sahaba-v1133.webp",
@@ -577,7 +578,10 @@
       "/kids/assets/stories-home/sahabiyyat-v1133.webp",
       "/kids/assets/stories-home/coin-v1133.webp"
     ],
-    "storiesHomeNoExpiringHotlinks": true
+    "storiesHomeNoExpiringHotlinks": true,
+    "storiesHomeEqualPrimaryCards": true,
+    "storiesHomePedagogicalLabels": true,
+    "prophetStoriesJsVersion": 32
   },
   "updatedAt": "2026-10-05"
 }
