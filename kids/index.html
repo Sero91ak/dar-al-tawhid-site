@@ -7092,7 +7092,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1137",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1138",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -8530,7 +8530,7 @@ html[data-view="stories"] .bottom-nav .nav-btn.active{
 </style>
 <link rel="stylesheet" href="/kids/quiz-library.css?v=7">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=4">
-<script src="/kids/story-follow-reader.js?v=6"></script>
+<script src="/kids/story-follow-reader.js?v=7"></script>
 <script src="/kids/story-policy.js?v=1"></script>
 <script src="/kids/prophet-stories.js?v=31"></script>
 <script src="/kids/mubashshirun-stories.js?v=22"></script>
