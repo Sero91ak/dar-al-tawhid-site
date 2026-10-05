@@ -116,7 +116,7 @@ opt_voice() {
   (( size >= 250000 )) || { skipped_count=$((skipped_count + 1)); return; }
 
   bitrate="$(ffprobe -v error -select_streams a:0 -show_entries stream=bit_rate -of default=nw=1:nk=1 "$f" 2>/dev/null | head -n1 || true)"
-  if [[ "$bitrate" =~ ^[0-9]+$ ]] && (( bitrate <= 70000 )); then
+  if [[ "$bitrate" =~ ^[0-9]+$ ]] && (( bitrate <= 52000 )); then
     skipped_count=$((skipped_count + 1))
     return
   fi
