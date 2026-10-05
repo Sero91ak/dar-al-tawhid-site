@@ -11,7 +11,7 @@ function normalizeKidsStoryText(value){
   if(!text.endsWith(KIDS_STORY_OUTRO))text=text+"\n\n"+KIDS_STORY_OUTRO;
   return text;
 }
-const STORIES_FINAL_CSS="/kids/stories-final-v1088.css?v=1088";
+const STORIES_FINAL_CSS="/kids/stories-final-v1088.css?v=1148";
 (function installStoriesFinalCss(){
   if(document.querySelector('link[data-kids-stories-final="1088"]'))return;
   const link=document.createElement("link");
