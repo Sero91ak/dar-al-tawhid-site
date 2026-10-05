@@ -2770,6 +2770,18 @@ html:not([data-view="today"]) .view.active{
   .nav-btn{min-height:59px!important}
 }
 
+
+/* KIDS_DUA_QUIZ_INLINE_ART_V1124 */
+#duaModal .dua-scene,#duaModal .dua-scene.morning,#duaModal .dua-scene.learn,#duaModal .dua-scene.sleep,#duaModal .dua-scene.night,#duaModal .dua-scene.food,#duaModal .dua-scene.family{
+ --dua-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/c469c30f-7dda-48c5-a72f-7bb40a043993/Single_standalone_cinematic_16_9_hero_illustration_for_a_premium_Islamic_children_s_app_Du_a_section_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiN2FiNTAyMmYyM2ZjYjc0OSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTM2MTMyN30.KiYu2lPZdL0AbD8W0UyithIa1nWu57iaVAgb-SwDtA4")!important;
+ background:#173848!important;
+}
+#duaModal .dua-scene::before{background-image:var(--dua-art)!important;background-size:cover!important;background-position:center 52%!important;filter:saturate(1.03) brightness(.9)!important}
+#quizModal .quiz-scene{
+ --quiz-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/cbe2efa5-f245-41e4-9262-be656af8ffc7/c22155b0-3b92-4227-a372-cfdaf600c518/Single_standalone_cinematic_16_9_hero_illustration_for_a_pre.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDEzNTA0YmI5ZTBiNjNjMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMzMDM2M30.RWZGx2UrVdXyvfYQRM-noI7t5EVNJPS9cvcn4fawl40")!important;
+ background-image:linear-gradient(180deg,rgba(4,17,28,.01),rgba(4,17,28,.08) 45%,rgba(4,17,28,.56) 100%),var(--quiz-art)!important;
+ background-size:cover!important;background-position:center 50%!important;background-repeat:no-repeat!important;
+}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Fredoka:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap">
 <link rel="stylesheet" href="/kids/assets/kids-open-v95.css?v=97">
@@ -6299,7 +6311,7 @@ function renderQuizQuestion(){
   var help=band==="4-6"?"":(band==="9-10"?"Wähle die beste Antwort.":"Hör zu und tippe auf deine Antwort.");
   var kicker=band==="4-6"?String(q.category||"Quiz"):String(q.category||"Quiz")+" · "+(currentQuizIndex+1)+"/"+currentQuiz.length;
   var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";
-  var art=quizArtworkForBand(q);
+  var art={url:"https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/cbe2efa5-f245-41e4-9262-be656af8ffc7/c22155b0-3b92-4227-a372-cfdaf600c518/Single_standalone_cinematic_16_9_hero_illustration_for_a_pre.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDEzNTA0YmI5ZTBiNjNjMyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMzMDM2M30.RWZGx2UrVdXyvfYQRM-noI7t5EVNJPS9cvcn4fawl40",position:"50% 50%",family:"v1124"};
   document.getElementById("quizBody").innerHTML=
     '<div id="quizScene" class="quiz-scene" aria-hidden="true">'+
       '<div class="quiz-scene-top"><span class="quiz-scene-chip">'+quizText(q.category||"Quiz")+'</span><span class="quiz-scene-chip quiz-scene-count">Frage '+(currentQuizIndex+1)+' · '+currentQuiz.length+'</span></div>'+
@@ -7043,7 +7055,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=1"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v53-dua-quiz-art1123";
+  var KIDS_BUILD_ID="kids-shell-v54-dua-quiz-art1124";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
