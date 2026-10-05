@@ -89,6 +89,10 @@ function create(options){
   const totalEl=root.querySelector(".kfr-total");
   let paragraphs=[],weights=[],totalWeight=0,timingCues=[],syncPoints=[],lastIndex=-1,manualUntil=0;
   let currentContent={},restoredToken="",lastPersistAt=0,mediaSessionActive=false,readerView="follow",backgroundLocks=[];
+  const wakeReason="follow-reader-"+id;
+  function setReadingWake(enabled){
+    try{if(enabled)window.DARKidsScreenAwake?.acquire?.(wakeReason);else window.DARKidsScreenAwake?.release?.(wakeReason)}catch(_){}
+  }
 
   function content(){
     const value=typeof options.getContent==="function"?options.getContent():{};
@@ -413,6 +417,8 @@ function create(options){
     root.classList.add("open");
     root.removeAttribute("aria-hidden");
     document.documentElement.classList.add("kids-follow-reader-open");
+    const keepsAwake=!root.classList.contains("audio-only");
+    setReadingWake(keepsAwake);
     if(readerView==="read"){try{readEl.scrollTop=0}catch(_){}}
     else sync(true);
     setTimeout(()=>(readerView==="read"?closeEl:playEl)?.focus(),0);
@@ -431,6 +437,7 @@ function create(options){
     root.classList.remove("open");
     root.setAttribute("aria-hidden","true");
     document.documentElement.classList.remove("kids-follow-reader-open");
+    setReadingWake(false);
     unlockBackground();
   }
   function isOpen(){return root.classList.contains("open")}
@@ -452,9 +459,9 @@ function create(options){
   audio.addEventListener("loadedmetadata",()=>{restore();sync(true)});
   audio.addEventListener("canplay",()=>{restore();sync(false)},{passive:true});
   audio.addEventListener("durationchange",()=>sync(false));
-  audio.addEventListener("play",()=>{activateMediaSession();if(options.autoOpen!==false&&!isOpen())open();updatePlay()});
+  audio.addEventListener("play",()=>{activateMediaSession();if(options.autoOpen!==false&&!isOpen())open();if(isOpen()&&!root.classList.contains("audio-only"))setReadingWake(true);updatePlay()});
   audio.addEventListener("pause",()=>{persist(true);try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="paused"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);updatePlay()});
-  audio.addEventListener("ended",()=>{const key=storyKey();if(key)safeRemove(progressStorageKey(key));try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="none"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);sync(true)});
+  audio.addEventListener("ended",()=>{if(readerView==="follow")setReadingWake(false);const key=storyKey();if(key)safeRemove(progressStorageKey(key));try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="none"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);sync(true)});
   audio.addEventListener("seeking",()=>sync(false));
   audio.addEventListener("seeked",()=>{sync(true);persist(true)});
   window.addEventListener("pagehide",()=>{persist(true);if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true)});
