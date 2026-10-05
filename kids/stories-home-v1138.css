@@ -417,21 +417,8 @@
   background-position:center 54%!important;
 }
 
-/* Bottom Navigation etwas ruhiger, aber weiterhin groß genug für Kinder. */
-html:has(#view-stories.active) .bottom-nav{
-  width:min(calc(100% - 24px),700px)!important;
-  padding:5px!important;
-  gap:3px!important;
-  border-radius:24px!important;
-}
-html:has(#view-stories.active) .bottom-nav .nav-btn{
-  min-height:54px!important;
-  padding:6px 3px!important;
-  gap:3px!important;
-  border-radius:18px!important;
-}
-html:has(#view-stories.active) .bottom-nav .nav-btn .ico{font-size:19px!important}
-html:has(#view-stories.active) .bottom-nav .nav-btn .lab{font-size:9.5px!important}
+/* Bottom Navigation: Geschichten nutzt exakt dieselbe globale Dock-Geometrie wie „Heute“.
+   Keine seitenbezogene Verkleinerung von Breite, Höhe, Icons, Labels oder Touchflächen. */
 
 /* Kleine iPhones */
 @media(max-width:389px){
