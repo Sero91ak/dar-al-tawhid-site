@@ -2793,7 +2793,7 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/story-follow-reader.css?v=7">
 <link rel="stylesheet" href="/kids/story-hub.css?v=9">
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1123-dua-quiz-art">
-<link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1135-2">
+<link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148">
 </head>
 <body>
 <div class="kids-open" id="kidsLaunch" data-kids-launch="v95">
@@ -3322,7 +3322,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v77-nav1147";
+const KIDS_BUILD_ID="kids-shell-v78-nav1148";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -7041,7 +7041,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=3"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v77-nav1147";
+  var KIDS_BUILD_ID="kids-shell-v78-nav1148";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -8416,55 +8416,14 @@ html[data-view="stories"] .shell{
 }
 
 
-/* KIDS_STORIES_BOTTOM_NAV_V1086
-   Geschichten: klarer Abstand zum unteren Navigationsbereich + eigenes ruhiges Story-Hintergrundbild. */
+/* KIDS_STORIES_BOTTOM_CLEARANCE_V1148
+   Geschichten reserves scroll room for the shared global bottom navigation.
+   The navigation itself is not resized or restyled on this page. */
 html[data-view="stories"] #view-stories{
   padding-bottom:calc(178px + env(safe-area-inset-bottom,0px))!important;
 }
 html[data-view="stories"] #view-stories > :last-child{
   margin-bottom:30px!important;
-}
-html[data-view="stories"] .bottom-nav{
-  bottom:max(12px,env(safe-area-inset-bottom,0px))!important;
-  min-height:88px!important;
-  padding:10px 9px calc(10px + env(safe-area-inset-bottom,0px))!important;
-  border-radius:30px!important;
-  overflow:hidden!important;
-  isolation:isolate!important;
-  background-color:#071c2c!important;
-  background-image:
-    linear-gradient(180deg,rgba(5,20,32,.62),rgba(5,20,32,.88)),
-    linear-gradient(90deg,rgba(6,25,38,.72),rgba(8,37,52,.50),rgba(6,25,38,.76)),
-    url("/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3")!important;
-  background-size:cover!important;
-  background-position:center 58%!important;
-  background-repeat:no-repeat!important;
-  border:1px solid rgba(241,202,108,.18)!important;
-  box-shadow:
-    0 20px 48px rgba(0,0,0,.38),
-    0 -1px 0 rgba(255,255,255,.025) inset!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-}
-html[data-view="stories"] .bottom-nav::before{
-  content:""!important;
-  position:absolute!important;
-  inset:0!important;
-  z-index:0!important;
-  pointer-events:none!important;
-  background:
-    radial-gradient(circle at 20% 14%,rgba(241,202,108,.07),transparent 22%),
-    radial-gradient(circle at 80% 18%,rgba(115,209,217,.06),transparent 24%)!important;
-}
-html[data-view="stories"] .bottom-nav .nav-btn{
-  position:relative!important;
-  z-index:1!important;
-  min-height:64px!important;
-  border-radius:21px!important;
-}
-html[data-view="stories"] .bottom-nav .nav-btn.active{
-  background:linear-gradient(145deg,rgba(241,202,108,.18),rgba(115,209,217,.07))!important;
-  box-shadow:inset 0 1px rgba(255,255,255,.035)!important;
 }
 @media(max-width:390px){
   html[data-view="stories"] #view-stories{
@@ -8473,10 +8432,6 @@ html[data-view="stories"] .bottom-nav .nav-btn.active{
   html[data-view="stories"] #view-stories > :last-child{
     margin-bottom:24px!important;
   }
-  html[data-view="stories"] .bottom-nav{
-    min-height:82px!important;
-    border-radius:27px!important;
-  }
 }
 @media(min-width:700px){
   html[data-view="stories"] #view-stories{
@@ -8484,11 +8439,6 @@ html[data-view="stories"] .bottom-nav .nav-btn.active{
   }
   html[data-view="stories"] #view-stories > :last-child{
     margin-bottom:36px!important;
-  }
-  html[data-view="stories"] .bottom-nav{
-    bottom:max(16px,env(safe-area-inset-bottom,0px))!important;
-    min-height:94px!important;
-    border-radius:32px!important;
   }
 }
 
@@ -8505,7 +8455,6 @@ html[data-view="stories"] .bottom-nav .nav-btn.active{
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=7"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1123-dua-quiz-art" data-kids-section-heroes-late="1">
-<link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1135-2" data-kids-stories-home-late="1">
-<link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1147" data-kids-stories-home-polish="1">
-<link rel="stylesheet" href="/kids/bottom-nav-global-v1147.css?v=1147" data-kids-bottom-nav-global="1147">
+<link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
+<link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1148" data-kids-stories-home-polish="1">
 </html>
