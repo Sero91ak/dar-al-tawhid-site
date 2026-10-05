@@ -67,3 +67,11 @@ html.gh-world-open,html.gh-player-open,html.gh-world-open body,html.gh-player-op
 .gh-player-min{position:absolute;z-index:5;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));width:46px;height:46px;border-radius:50%;border:1px solid rgba(239,208,138,.24);background:rgba(4,22,33,.58);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#f7dda0;font-size:25px;display:grid;place-items:center;cursor:pointer}
 .gh-mini{grid-template-columns:minmax(0,1fr) 48px!important}
 .gh-mini-open{min-width:0;border:0;background:transparent;color:#fff;padding:0;display:grid;grid-template-columns:48px minmax(0,1fr);gap:10px;align-items:center;text-align:left;cursor:pointer}
+
+/* v1117 · true viewport edge-to-edge entry, including iPad / wide layouts */
+#view-stories .gh-entry{
+  width:100vw!important;
+  max-width:none!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;
+}
