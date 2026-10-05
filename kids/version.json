@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v52-story-controls-sahabiyyat1122",
-  "label": "KIDS · V1.07.57",
-  "releasedAt": "2026-10-05T10:48:00+02:00",
-  "note": "Kids v1122: Ṣaḥābiyyāt-Namen stehen direkt auf Karten- und Hero-Bildern im eigenen Ṣaḥābiyyāt-Bereich und im universellen Geschichten-Player; vier neue individuelle historische Szenen für Sawdah, Ǧuwayriyyah, Ṣafiyyah und Maymūnah sind zugeordnet. Story-Controls bleiben erhalten.",
+  "buildId": "kids-shell-v53-dua-quiz-art1123",
+  "label": "KIDS · V1.07.58",
+  "releasedAt": "2026-10-05T11:05:00+02:00",
+  "note": "Kids v1123: neue kinderfreundliche Bildwelten direkt im Duʿāʾ- und Quiz-Bereich live eingebaut; Duʿāʾ erhält eine ruhige historische Hofszene, Quiz eine spielerische historische Lernszene. PWA-Cache und Build-ID aktualisiert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -476,7 +476,11 @@
       "juwayriyyah",
       "safiyyah",
       "maymunah"
-    ]
+    ],
+    "duaQuizArtworkVersion": 1123,
+    "duaArtworkLive": true,
+    "quizArtworkLive": true,
+    "duaQuizArtworkPlacement": "direct-in-respective-modal-sections"
   },
   "updatedAt": "2026-10-05"
 }
