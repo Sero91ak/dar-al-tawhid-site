@@ -800,3 +800,113 @@ html[data-theme="eisgold"] body.is-hadith-route .hadith-detail > .post-reader-ti
     width:min(620px,56%)!important;
   }
 }
+
+
+/* DAR_HADITH_NAV_EXTERNAL_V1283
+   Breadcrumb + sibling navigation live in the single Hadith stylesheet.
+   Removes legacy inline authority from test/index.html. */
+body.is-hadith-route .hadith-crumbs{
+  width:min(980px,calc(100% - 28px))!important;
+  margin:0 auto 12px!important;
+  padding:2px 0 10px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:7px!important;
+  overflow-x:auto!important;
+  white-space:nowrap!important;
+  scrollbar-width:none!important;
+  -webkit-overflow-scrolling:touch!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 12%,transparent)!important;
+}
+body.is-hadith-route .hadith-crumbs::-webkit-scrollbar{display:none!important}
+body.is-hadith-route .hadith-crumb-link{
+  appearance:none!important;
+  border:0!important;
+  background:transparent!important;
+  padding:5px 0!important;
+  color:var(--muted2)!important;
+  font:750 .74rem/1.2 var(--font-sans,system-ui)!important;
+  letter-spacing:.045em!important;
+  cursor:pointer!important;
+}
+body.is-hadith-route .hadith-crumb-link:active{color:var(--gold2)!important}
+body.is-hadith-route .hadith-crumb-sep{
+  color:color-mix(in srgb,var(--gold2) 42%,transparent)!important;
+  font-size:1rem!important;
+}
+body.is-hadith-route .hadith-crumb-current{
+  color:var(--text)!important;
+  font:800 .75rem/1.2 var(--font-sans,system-ui)!important;
+  letter-spacing:.045em!important;
+}
+body.is-hadith-route .hadith-sibling-nav{
+  width:min(820px,100%)!important;
+  margin:24px auto 4px!important;
+  padding-top:14px!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2) 16%,transparent)!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:10px!important;
+}
+body.is-hadith-route .hadith-sibling-btn{
+  appearance:none!important;
+  min-width:0!important;
+  min-height:70px!important;
+  padding:12px 14px!important;
+  border:1px solid color-mix(in srgb,var(--gold2) 13%,var(--line2))!important;
+  border-radius:18px!important;
+  background:color-mix(in srgb,var(--surface) 76%,transparent)!important;
+  color:var(--text)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  gap:4px!important;
+  text-align:left!important;
+  cursor:pointer!important;
+}
+body.is-hadith-route .hadith-sibling-btn:active{
+  background:color-mix(in srgb,var(--gold2) 8%,var(--surface))!important;
+  border-color:color-mix(in srgb,var(--gold2) 28%,var(--line2))!important;
+}
+body.is-hadith-route .hadith-sibling-next{
+  text-align:right!important;
+  align-items:flex-end!important;
+}
+body.is-hadith-route .hadith-sibling-kicker{
+  color:var(--gold2)!important;
+  font:800 .68rem/1.15 var(--font-sans,system-ui)!important;
+  letter-spacing:.09em!important;
+  text-transform:uppercase!important;
+}
+body.is-hadith-route .hadith-sibling-btn strong{
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  font:650 1.02rem/1.25 var(--font-display,var(--serif))!important;
+  color:var(--text)!important;
+}
+body.is-hadith-route .hadith-sibling-spacer{min-height:1px!important}
+@media(max-width:699px){
+  body.is-hadith-route .hadith-crumbs{
+    width:calc(100% - 28px)!important;
+    margin-bottom:10px!important;
+    padding-bottom:9px!important;
+  }
+  body.is-hadith-route .hadith-crumb-link,
+  body.is-hadith-route .hadith-crumb-current{
+    font-size:.70rem!important;
+  }
+  body.is-hadith-route .hadith-sibling-nav{
+    width:100%!important;
+    gap:8px!important;
+    margin-top:20px!important;
+  }
+  body.is-hadith-route .hadith-sibling-btn{
+    min-height:64px!important;
+    padding:10px 11px!important;
+    border-radius:16px!important;
+  }
+  body.is-hadith-route .hadith-sibling-kicker{font-size:.62rem!important}
+  body.is-hadith-route .hadith-sibling-btn strong{font-size:.94rem!important}
+}
