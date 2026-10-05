@@ -405,7 +405,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v61-voice-buffer1131");
+      target.searchParams.set("kv", "kids-shell-v62-voice-flow1132");
       return Response.redirect(target.toString(), 301);
     }
 
