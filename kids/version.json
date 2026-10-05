@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v58-sahabiyyat-found1128",
-  "label": "KIDS · V1.07.62",
-  "releasedAt": "2026-10-05T11:58:00+02:00",
-  "note": "Kids v1128: die vier bereits zuvor erzeugten historischen Originalmotive für Sawdah, Ǧuwayriyyah, Ṣafiyyah und Maymūnah wurden wiedergefunden, lokal übernommen und den richtigen Ṣaḥābiyyāt-Karten/Heroes zugeordnet. Keine Ersatzmotive.",
+  "buildId": "kids-shell-v59-story-master1129",
+  "label": "KIDS · V1.07.63",
+  "releasedAt": "2026-10-05T12:28:00+02:00",
+  "note": "Kids v1129: Ṣaḥābiyyāt-Detailseiten zeigen den Namen nur noch einmal als große Hauptüberschrift. Eine globale Mastertext-Regel verhindert gekürzte Altersfassungen: 4–5, 6–8 und 9–10 verwenden immer dieselbe vollständige lange Erzählung; Alterslogik verändert nur Bedienung und Darstellung.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1128",
+    "serviceWorkerCache": "v1129",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -81,7 +81,7 @@
     "mubashshirunProfilePanels": true,
     "mubashshirunDirectHadithLinks": true,
     "mubashshirunStoryUi": "responsive-follow-reader-v11",
-    "mubashshirunBundleVersion": 19,
+    "mubashshirunBundleVersion": 20,
     "mubashshirunDataVersion": 6,
     "mubashshirunAudioPublishPipeline": true,
     "mubashshirunFuṣḥāReview": true,
@@ -152,7 +152,7 @@
     "mubashshirunAgeAwareVisualDisclaimer": true,
     "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03",
     "mubashshirunSwipeBack": true,
-    "prophetStoriesBundleVersion": 29,
+    "prophetStoriesBundleVersion": 30,
     "storyCategoryBackgrounds": "prophets-adobe-v22+sahabah-runway-v10",
     "mubashshirunCardFocalCentering": "subject-aware-responsive-v1",
     "homeChoices": "oval-capsule-restored",
@@ -436,7 +436,7 @@
     "storyAudioPinnedBytes": 2098317,
     "storyAudioDeliveryProfile": "optimized-runtime",
     "sahabiyyatCssVersion": 5,
-    "sahabiyyatJsVersion": 10,
+    "sahabiyyatJsVersion": 11,
     "storyHub": "v3-universal-single-runtime",
     "storyHubPlayer": "single-runtime-audio-player-edge-to-edge",
     "storyHubAgeAdaptive": true,
@@ -470,7 +470,7 @@
     ],
     "sahabiyyatNameOverlay": true,
     "sahabiyyatNameOverlayPlacement": "card-and-hero-in-own-library-and-universal-story-hub",
-    "storyHubJsVersion": 7,
+    "storyHubJsVersion": 8,
     "sahabiyyatDistinctNewArtworks": [
       "sawdah",
       "juwayriyyah",
@@ -524,7 +524,16 @@
       "juwayriyyah",
       "safiyyah",
       "maymunah"
-    ]
+    ],
+    "storyPolicyVersion": 1,
+    "storyHubRegistryVersion": 4,
+    "masterStoryTextAcrossAges": true,
+    "storyTextAgeAdaptive": false,
+    "ageAdaptivePresentationOnly": true,
+    "masterStorySelection": "longest-complete-version",
+    "futureStoryCategoriesUseMasterText": true,
+    "sahabiyyatDetailSingleTitle": true,
+    "universalPlayerSingleTitle": true
   },
   "updatedAt": "2026-10-05"
 }

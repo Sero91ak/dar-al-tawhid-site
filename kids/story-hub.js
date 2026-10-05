@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-const REGISTRY_URL="/kids/data/story-hub.json?v=3";
+const REGISTRY_URL="/kids/data/story-hub.json?v=4";
 let SOURCES=[
   {id:"prophets",label:"Propheten",kicker:"GESCHICHTEN DER PROPHETEN",url:"/kids/data/prophet-stories.json?v=28",kind:"prophet"},
   {id:"sahaba",label:"Ṣaḥābah",kicker:"DIE GEFÄHRTEN",url:"/kids/data/mubashshirun-stories.json?v=18",kind:"sahabi"},
@@ -41,9 +41,11 @@ async function loadRegistry(){
 }
 function textFor(item){
   if(!item)return"";
+  const policy=window.DARKidsStoryPolicy;
+  if(policy?.canonicalText)return String(policy.canonicalText(item)||"").trim();
   const scripts=item.scripts&&typeof item.scripts==="object"?item.scripts:{};
-  const candidates=[scripts["9-10"],scripts["6-8"],scripts["4-5"],item.voiceScript].map(v=>String(v||"").trim()).filter(Boolean);
-  let text=candidates.sort((a,b)=>b.length-a.length)[0]||String(item.text||item.story||"").trim();
+  const candidates=[scripts["4-5"],scripts["6-8"],scripts["9-10"],item.voiceScript].map(v=>String(v||"").trim()).filter(Boolean);
+  let text=candidates.sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length)[0]||String(item.text||item.story||"").trim();
   if(!text&&Array.isArray(item.blocks))text=item.blocks.join("\n\n");
   if(!text&&Array.isArray(item.chapters))text=item.chapters.join("\n\n");
   return text;
@@ -90,7 +92,7 @@ function ensureUi(){
   $("#ghBack").addEventListener("click",closeWorld);
 
   const player=document.createElement("section");player.id="ghPlayer";player.className="gh-player";player.setAttribute("aria-hidden","true");
-  player.innerHTML='<div class="gh-player-scroll" id="ghPlayerScroll"><section class="gh-player-hero"><img id="ghPlayerBg" class="gh-player-bg" src="" alt=""><span class="gh-player-shade" aria-hidden="true"></span><div id="ghPlayerImageName" class="gh-player-image-name" hidden></div><button id="ghPlayerBack" class="gh-player-back" type="button" aria-label="Zurück zur Auswahl">‹</button><button id="ghPlayerMin" class="gh-player-min" type="button" aria-label="Player minimieren">⌄</button><div class="gh-player-copy"><div class="gh-player-kicker" id="ghPlayerKicker"></div><h2 id="ghPlayerTitle"></h2><div class="gh-player-ar" id="ghPlayerArabic" dir="rtl"></div><div class="gh-player-summary" id="ghPlayerSummary"></div></div></section><main class="gh-player-body"><section class="gh-controls"><div class="gh-main-controls"><button class="gh-skip" id="ghBack15" type="button">−15 s</button><button class="gh-play" id="ghPlay" type="button">Hören</button><button class="gh-skip" id="ghFwd15" type="button">+15 s</button></div><div class="gh-progress" id="ghProgress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div><div class="gh-time"><span id="ghCurrent">0:00</span><span id="ghTotal">0:00</span></div><div class="gh-player-actions"><button class="gh-read-toggle" id="ghReadToggle" type="button" aria-expanded="false" aria-controls="ghRead">Text lesen</button><button class="gh-read-toggle" id="ghFollow" type="button" aria-pressed="false" aria-controls="ghRead">Mitlesen</button></div><p class="gh-audio-note" id="ghAudioNote"></p></section><article class="gh-read" id="ghRead" hidden></article><section class="gh-sources"><strong>QUELLEN</strong><div id="ghSources"></div></section><section class="gh-next" id="ghNext" hidden><small>WEITER ENTDECKEN</small><button id="ghNextButton" type="button"><img id="ghNextImg" src="" alt=""><span><em id="ghNextMeta"></em><strong id="ghNextTitle"></strong></span><b aria-hidden="true">›</b></button></section></main></div>';
+  player.innerHTML='<div class="gh-player-scroll" id="ghPlayerScroll"><section class="gh-player-hero"><img id="ghPlayerBg" class="gh-player-bg" src="" alt=""><span class="gh-player-shade" aria-hidden="true"></span><button id="ghPlayerBack" class="gh-player-back" type="button" aria-label="Zurück zur Auswahl">‹</button><button id="ghPlayerMin" class="gh-player-min" type="button" aria-label="Player minimieren">⌄</button><div class="gh-player-copy"><div class="gh-player-kicker" id="ghPlayerKicker"></div><h2 id="ghPlayerTitle"></h2><div class="gh-player-ar" id="ghPlayerArabic" dir="rtl"></div><div class="gh-player-summary" id="ghPlayerSummary"></div></div></section><main class="gh-player-body"><section class="gh-controls"><div class="gh-main-controls"><button class="gh-skip" id="ghBack15" type="button">−15 s</button><button class="gh-play" id="ghPlay" type="button">Hören</button><button class="gh-skip" id="ghFwd15" type="button">+15 s</button></div><div class="gh-progress" id="ghProgress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div><div class="gh-time"><span id="ghCurrent">0:00</span><span id="ghTotal">0:00</span></div><div class="gh-player-actions"><button class="gh-read-toggle" id="ghReadToggle" type="button" aria-expanded="false" aria-controls="ghRead">Text lesen</button><button class="gh-read-toggle" id="ghFollow" type="button" aria-pressed="false" aria-controls="ghRead">Mitlesen</button></div><p class="gh-audio-note" id="ghAudioNote"></p></section><article class="gh-read" id="ghRead" hidden></article><section class="gh-sources"><strong>QUELLEN</strong><div id="ghSources"></div></section><section class="gh-next" id="ghNext" hidden><small>WEITER ENTDECKEN</small><button id="ghNextButton" type="button"><img id="ghNextImg" src="" alt=""><span><em id="ghNextMeta"></em><strong id="ghNextTitle"></strong></span><b aria-hidden="true">›</b></button></section></main></div>';
   document.body.appendChild(player);
   $("#ghPlayerBack").addEventListener("click",minimizePlayer);
   $("#ghPlayerMin").addEventListener("click",minimizeAll);
@@ -218,8 +220,6 @@ function renderPlayer(){
   const cat=category(),meta=audioMeta(active),text=textFor(active),img=artFor(active,activeCategory,true);
   const bg=$("#ghPlayerBg");bg.onerror=()=>{bg.onerror=null;bg.src=artFor(active,activeCategory,false)};bg.src=img;bg.alt="";
   $("#ghPlayerKicker").textContent=cat.label.toUpperCase()+" · HÖRGESCHICHTE";
-  const imageName=$("#ghPlayerImageName");
-  if(imageName){imageName.textContent=activeCategory==="sahabiyyat"?storyName(active):"";imageName.hidden=activeCategory!=="sahabiyyat"}
   $("#ghPlayerTitle").textContent=storyName(active);
   $("#ghPlayerArabic").textContent=arabic(active,activeCategory);
   $("#ghPlayerSummary").textContent=active.summary||"";
