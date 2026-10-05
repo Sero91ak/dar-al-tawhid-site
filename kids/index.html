@@ -2775,8 +2775,8 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/assets/kids-open-v95.css?v=97">
 
 
-<link rel="stylesheet" href="/kids/prophet-stories.css?v=28">
-<link rel="stylesheet" href="/kids/mubashshirun-stories.css?v=18">
+<link rel="stylesheet" href="/kids/prophet-stories.css?v=29">
+<link rel="stylesheet" href="/kids/mubashshirun-stories.css?v=19">
 <link rel="stylesheet" href="/kids/sahabiyyat-stories.css?v=3">
 <link rel="stylesheet" href="/kids/story-follow-reader.css?v=4">
 <link rel="stylesheet" href="/kids/story-hub.css?v=1">
@@ -2970,7 +2970,7 @@ html:not([data-view="today"]) .view.active{
       </nav>
 
       <button id="syEntry" class="ms-entry sy-entry" type="button" aria-label="Ṣaḥābiyyāt entdecken">
-        <span class="ms-entry-bg" aria-hidden="true"><img src="https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:56158735-9dc2-469e-8746-ecb7d6d156b8" alt="" decoding="async" loading="eager"></span>
+        <span class="ms-entry-bg" aria-hidden="true"><img src="/kids/assets/prophet-scenes/library.webp" alt="" decoding="async" loading="eager"></span>
         <span class="ms-entry-art" aria-hidden="true"><span class="ms-entry-arch"></span><span class="ms-entry-stars"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i><i style="--i:10"></i><i style="--i:11"></i><i style="--i:12"></i><i style="--i:13"></i></span></span>
         <span class="ms-entry-copy">
           <span class="ms-entry-kicker">ṢAḤĀBIYYĀT · FRAUEN DER ERSTEN GENERATION</span>
@@ -3344,7 +3344,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v48-hoerwelten1118";
+const KIDS_BUILD_ID="kids-shell-v49-single-story-player1119";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -7043,7 +7043,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=1"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v48-hoerwelten1118";
+  var KIDS_BUILD_ID="kids-shell-v49-single-story-player1119";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -7059,7 +7059,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1118",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1119",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -8498,10 +8498,10 @@ html[data-view="stories"] .bottom-nav .nav-btn.active{
 <link rel="stylesheet" href="/kids/quiz-library.css?v=7">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=4">
 <script src="/kids/story-follow-reader.js?v=5"></script>
-<script src="/kids/prophet-stories.js?v=28-audioonly2"></script>
-<script src="/kids/mubashshirun-stories.js?v=18"></script>
-<script src="/kids/sahabiyyat-stories.js?v=5"></script>
-<script src="/kids/story-hub.js?v=1"></script>
+<script src="/kids/prophet-stories.js?v=29"></script>
+<script src="/kids/mubashshirun-stories.js?v=19"></script>
+<script src="/kids/sahabiyyat-stories.js?v=6"></script>
+<script src="/kids/story-hub.js?v=2"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=7"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1097-real3" data-kids-section-heroes-late="1">
