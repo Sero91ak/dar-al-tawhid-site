@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v42-sahabiyyat1112",
-  "label": "KIDS · V1.07.48",
-  "releasedAt": "2026-10-05T01:58:00+02:00",
-  "note": "Kids v1112: eigener Ṣaḥābiyyāt-Bereich im Geschichten-Hub, parallel zu Propheten und Ṣaḥābah. 14 quellengeprüfte Geschichten, individuelle historische Adobe-Szenen ohne Porträtanspruch, identische vollständige Master-Erzählung in allen Altersstufen, 4–5 audio-first, Hören/Mitlesen/Quellen/Quiz vorbereitet.",
+  "buildId": "kids-shell-v45-sahabiyyat-visible1115",
+  "label": "KIDS · V1.07.50",
+  "releasedAt": "2026-10-05T08:02:00+02:00",
+  "note": "Kids v1115: Ṣaḥābiyyāt ist fest im Geschichten-Hub verankert, wird beim Start direkt hinter Ṣaḥābah positioniert und die App-Shell lädt online network-first statt zuerst eine veraltete Cache-Seite zu zeigen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1112",
+    "serviceWorkerCache": "v1115",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-build-cache-assets",
@@ -241,7 +241,7 @@
     "storyAudioPermanentLocalAsset": true,
     "storyAudioRangeSafeServiceWorker": true,
     "storyAudioRangeStrategy": "direct-network-range-response",
-    "storyAudioPinnedAsset": "/kids/assets/prophet-story-audio/muhammad/story.mp3?v=20261004-owner1",
+    "storyAudioPinnedAsset": "/kids/assets/prophet-story-audio/muhammad/story.mp3?v=20261005-media1",
     "storyAudioPinnedSha256": "5f5ed5a58a88babc46bcc6e107edd50a6c95bb3e80ed11264f3b4d358e359cfb",
     "storyAudioPinnedCommit": "media-optimized-runtime",
     "storyAudioSignedPreviewDependency": false,
@@ -421,7 +421,11 @@
     "sahabiyyatNoPortraits": true,
     "sahabiyyatSingleMasterStory": true,
     "sahabiyyatArtworkPolicy": "historical-environment-only-no-portrait",
-    "sahabiyyatBundleVersion": 2
+    "sahabiyyatBundleVersion": 3,
+    "sahabiyyatStaticHubCard": true,
+    "sahabiyyatStaticEntry": true,
+    "sahabiyyatForcedAfterSahaba": true,
+    "navigationStrategy": "network-first-with-offline-fallback"
   },
   "updatedAt": "2026-10-04"
 }
