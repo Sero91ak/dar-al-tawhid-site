@@ -1,0 +1,576 @@
+/* ==========================================================================
+   FRAUEN_AUTHORITY_V1292
+   Final Test-App authority for Frauen im Islam.
+   Hub -> Wissenswelt -> Kapitel -> Aussage.
+   Detail/reader intentionally left functionally untouched.
+   ========================================================================== */
+
+html[data-theme] body.is-frauen-route{
+  --fw1292-line:color-mix(in srgb,var(--gold2,#d8c18b) 19%,transparent);
+  --fw1292-line-strong:color-mix(in srgb,var(--gold2,#d8c18b) 32%,transparent);
+  --fw1292-surface:color-mix(in srgb,var(--card,var(--bg)) 76%,transparent);
+  --fw1292-surface-strong:color-mix(in srgb,var(--card,var(--bg)) 92%,transparent);
+  --fw1292-ink:var(--text,var(--ink,#f4efe4));
+  --fw1292-muted:var(--muted,#b9b09f);
+}
+
+/* One visual authority: the Frauen pages own the full available viewport. */
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"] #appView,
+html[data-theme] body.is-frauen-route[data-frauen-view="group"] #appView,
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] #appView{
+  padding-top:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  overflow:visible!important;
+}
+
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"] #appView > .view-head,
+html[data-theme] body.is-frauen-route[data-frauen-view="group"] #appView > .view-head,
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] #appView > .view-head{
+  display:none!important;
+}
+
+html[data-theme] body.is-frauen-route .frauen-library-shell{
+  width:min(1080px,100%)!important;
+  max-width:1080px!important;
+  margin:0 auto!important;
+  padding:0 14px calc(138px + env(safe-area-inset-bottom,0px))!important;
+  box-sizing:border-box!important;
+}
+
+/* Historical edge-to-edge hero. */
+html[data-theme] body.is-frauen-route .frauen-library-hero{
+  min-height:clamp(300px,44vw,410px)!important;
+  width:100vw!important;
+  max-width:none!important;
+  margin:0 0 20px calc(50% - 50vw)!important;
+  border:0!important;
+  border-radius:0 0 30px 30px!important;
+  box-shadow:0 18px 42px rgba(4,15,14,.13)!important;
+  background-size:cover!important;
+  background-position:center 46%!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="hub"] .frauen-library-hero{
+  --frauen-hero-img:url("/test/assets/frauen/library-v1224/03-erste-generationen.jpg")!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero::before{
+  z-index:1!important;
+  background:
+    linear-gradient(90deg,rgba(2,13,13,.96) 0%,rgba(2,15,14,.89) 34%,rgba(2,15,14,.63) 58%,rgba(2,15,14,.18) 82%,rgba(2,15,14,.04) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.08) 52%,rgba(2,11,11,.65) 100%)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero__shade{
+  z-index:1!important;
+  opacity:.62!important;
+  background:
+    radial-gradient(circle at 79% 24%,rgba(244,214,145,.13),transparent 31%),
+    linear-gradient(180deg,rgba(255,255,255,.02),transparent 46%)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero__content{
+  position:relative!important;
+  z-index:3!important;
+  justify-content:flex-end!important;
+  width:min(720px,88%)!important;
+  min-height:inherit!important;
+  padding:30px 26px 34px!important;
+  box-sizing:border-box!important;
+  text-shadow:0 2px 13px rgba(0,0,0,.55)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero__eyebrow{
+  margin-bottom:8px!important;
+  font-size:10px!important;
+  letter-spacing:.17em!important;
+  color:#efd89b!important;
+  -webkit-text-fill-color:#efd89b!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero h2{
+  max-width:690px!important;
+  margin:0!important;
+  font-size:clamp(36px,8.7vw,56px)!important;
+  line-height:.98!important;
+  letter-spacing:-.025em!important;
+  color:#fff9ec!important;
+  -webkit-text-fill-color:#fff9ec!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero--group h2,
+html[data-theme] body.is-frauen-route .frauen-library-hero--section h2{
+  font-size:clamp(31px,7.5vw,47px)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero__subtitle{
+  max-width:620px!important;
+  margin:11px 0 0!important;
+  font-size:14.5px!important;
+  line-height:1.48!important;
+  color:rgba(255,249,236,.94)!important;
+  -webkit-text-fill-color:rgba(255,249,236,.94)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero__stats{
+  gap:7px!important;
+  margin-top:14px!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-hero__stats span,
+html[data-theme] body.is-frauen-route .frauen-library-back{
+  min-height:30px!important;
+  border-radius:999px!important;
+  background:rgba(5,24,22,.58)!important;
+  border:1px solid rgba(239,214,151,.34)!important;
+  color:#fff1c8!important;
+  -webkit-text-fill-color:#fff1c8!important;
+  backdrop-filter:blur(9px)!important;
+  -webkit-backdrop-filter:blur(9px)!important;
+}
+
+/* Search is a tool, not another oversized card. */
+html[data-theme] body.is-frauen-route .frauen-library-search-wrap,
+html[data-theme] body.is-frauen-route .frauen-library-list-controls{
+  position:relative!important;
+  z-index:4!important;
+  width:min(920px,calc(100% - 8px))!important;
+  margin:-34px auto 27px!important;
+}
+html[data-theme] body.is-frauen-route .frauen-search-pro{
+  margin:0!important;
+  padding:9px!important;
+  border:1px solid var(--fw1292-line)!important;
+  border-radius:20px!important;
+  background:color-mix(in srgb,var(--bg) 91%,transparent)!important;
+  box-shadow:0 13px 30px rgba(3,15,14,.10)!important;
+  backdrop-filter:blur(16px) saturate(1.08)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.08)!important;
+}
+html[data-theme] body.is-frauen-route .frauen-search-pro .search-line,
+html[data-theme] body.is-frauen-route .frauen-search-pro .search-input-shell{
+  margin:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-frauen-route .frauen-search-pro .search-input-field{
+  min-height:52px!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+  font-size:15px!important;
+  line-height:1.2!important;
+  border-radius:15px!important;
+}
+
+/* Section rhythm. */
+html[data-theme] body.is-frauen-route .frauen-library-section-head{
+  width:min(960px,100%)!important;
+  margin:26px auto 16px!important;
+  padding:0 2px!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:space-between!important;
+  gap:18px!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-section-head span{
+  font-size:9.5px!important;
+  letter-spacing:.16em!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-section-head h3{
+  margin:4px 0 0!important;
+  font-size:clamp(22px,4.8vw,31px)!important;
+  line-height:1.05!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-section-head > p{
+  max-width:390px!important;
+  margin:0!important;
+  font-size:12.5px!important;
+  line-height:1.5!important;
+  color:var(--fw1292-muted)!important;
+  text-align:right!important;
+}
+
+/* Hub and chapter shelves: image-first editorial rows, never tiny card grids. */
+html[data-theme] body.is-frauen-route .frauen-library-grid,
+html[data-theme] body.is-frauen-route .frauen-library-area-grid{
+  width:min(960px,100%)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:15px!important;
+  padding:0!important;
+}
+
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+  position:relative!important;
+  isolation:isolate!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  min-width:0!important;
+  overflow:hidden!important;
+  border:1px solid var(--fw1292-line)!important;
+  background-color:var(--card,var(--bg))!important;
+  background-image:var(--frauen-card-img)!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  background-position:right center!important;
+  box-shadow:0 10px 26px rgba(4,16,15,.07)!important;
+  color:var(--fw1292-ink)!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual{
+  min-height:205px!important;
+  aspect-ratio:auto!important;
+  padding:20px 54px 19px 20px!important;
+  border-radius:25px!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+  min-height:174px!important;
+  aspect-ratio:auto!important;
+  padding:18px 50px 17px 18px!important;
+  border-radius:23px!important;
+}
+
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual::before,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual::before{
+  display:none!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual::after,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:0!important;
+  display:block!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--card,var(--bg)) 99%,transparent) 0%,
+      color-mix(in srgb,var(--card,var(--bg)) 96%,transparent) 31%,
+      color-mix(in srgb,var(--card,var(--bg)) 82%,transparent) 48%,
+      color-mix(in srgb,var(--card,var(--bg)) 48%,transparent) 64%,
+      color-mix(in srgb,var(--card,var(--bg)) 12%,transparent) 79%,
+      transparent 90%)!important;
+  pointer-events:none!important;
+}
+
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__copy,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+  position:relative!important;
+  z-index:3!important;
+  display:block!important;
+  width:61%!important;
+  max-width:61%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+  text-align:left!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+  width:64%!important;
+  max-width:64%!important;
+}
+
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__kicker{
+  min-height:0!important;
+  margin:0 0 8px!important;
+  padding:0!important;
+  font-size:9px!important;
+  line-height:1.25!important;
+  letter-spacing:.13em!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__copy h3,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+  width:auto!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  hyphens:none!important;
+  -webkit-line-clamp:unset!important;
+  font-size:22px!important;
+  line-height:1.08!important;
+  letter-spacing:-.015em!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+  font-size:19.5px!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__desc,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{
+  display:block!important;
+  width:auto!important;
+  max-width:100%!important;
+  margin:8px 0 0!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+  -webkit-line-clamp:unset!important;
+  font-size:13px!important;
+  line-height:1.43!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{
+  font-size:12.6px!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__meta,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__meta{
+  display:block!important;
+  width:auto!important;
+  max-width:100%!important;
+  margin:9px 0 0!important;
+  overflow:visible!important;
+  white-space:normal!important;
+  font-size:10.8px!important;
+  line-height:1.25!important;
+  color:var(--fw1292-muted)!important;
+}
+
+/* Keep numbering small; remove the old icon column entirely. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__icon,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__icon{
+  display:none!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__nr,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__nr{
+  position:absolute!important;
+  z-index:5!important;
+  top:16px!important;
+  right:16px!important;
+  left:auto!important;
+  width:auto!important;
+  min-width:28px!important;
+  height:22px!important;
+  margin:0!important;
+  padding:0 6px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  border:1px solid rgba(239,214,151,.28)!important;
+  border-radius:999px!important;
+  background:rgba(4,22,20,.54)!important;
+  color:#f3dfaa!important;
+  -webkit-text-fill-color:#f3dfaa!important;
+  font-size:8.5px!important;
+  line-height:1!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__arrow,
+html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__arrow{
+  position:absolute!important;
+  z-index:6!important;
+  right:12px!important;
+  top:auto!important;
+  bottom:12px!important;
+  transform:none!important;
+  width:34px!important;
+  height:34px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(239,214,151,.30)!important;
+  border-radius:999px!important;
+  background:rgba(4,22,20,.52)!important;
+  color:#f5dfa6!important;
+  -webkit-text-fill-color:#f5dfa6!important;
+  font-size:22px!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+
+/* Statement list: open editorial lines rather than another card wall. */
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-post-list{
+  width:min(900px,100%)!important;
+  margin:0 auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+  padding:0!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-post-row{
+  display:grid!important;
+  grid-template-columns:34px minmax(0,1fr)!important;
+  column-gap:12px!important;
+  width:100%!important;
+  min-height:82px!important;
+  margin:0!important;
+  padding:17px 3px 16px!important;
+  border:0!important;
+  border-bottom:1px solid var(--fw1292-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  color:var(--fw1292-ink)!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-post-row:hover,
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-post-row:focus-visible,
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-post-row:active{
+  padding-left:8px!important;
+  padding-right:5px!important;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--gold2) 5%,transparent),transparent 78%)!important;
+  outline:none!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-post-row .post-row__icon,
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-post-row .dua-row__icon{
+  width:32px!important;
+  height:32px!important;
+  min-width:32px!important;
+  max-width:32px!important;
+  padding:5px!important;
+  border:1px solid var(--fw1292-line)!important;
+  border-radius:11px!important;
+  background:color-mix(in srgb,var(--gold2) 4%,transparent)!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-post-row h3{
+  margin:0!important;
+  font-size:17.5px!important;
+  line-height:1.25!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-row__sprecher{
+  margin:5px 0 0!important;
+  font-size:12.6px!important;
+  line-height:1.35!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-row__aussage{
+  display:block!important;
+  margin:6px 0 0!important;
+  overflow:visible!important;
+  white-space:normal!important;
+  -webkit-line-clamp:unset!important;
+  font-size:14px!important;
+  line-height:1.52!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-row__quelle{
+  margin:7px 0 0!important;
+  font-size:12.2px!important;
+  line-height:1.4!important;
+}
+html[data-theme] body.is-frauen-route[data-frauen-view="list"] .post-row__meta{
+  margin-top:8px!important;
+  gap:7px!important;
+  font-size:10px!important;
+}
+
+/* iPhone: preserve image presence but give text real reading width. */
+@media (max-width:600px){
+  html[data-theme] body.is-frauen-route .frauen-library-shell{
+    padding-left:10px!important;
+    padding-right:10px!important;
+  }
+  html[data-theme] body.is-frauen-route .frauen-library-hero{
+    min-height:330px!important;
+    margin-bottom:19px!important;
+    border-radius:0 0 26px 26px!important;
+    background-position:62% 46%!important;
+  }
+  html[data-theme] body.is-frauen-route[data-frauen-view="group"] .frauen-library-hero,
+  html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-library-hero{
+    min-height:286px!important;
+  }
+  html[data-theme] body.is-frauen-route .frauen-library-hero__content{
+    width:94%!important;
+    padding:24px 20px 30px!important;
+  }
+  html[data-theme] body.is-frauen-route .frauen-library-hero h2{
+    font-size:clamp(34px,10vw,45px)!important;
+  }
+  html[data-theme] body.is-frauen-route .frauen-library-hero--group h2,
+  html[data-theme] body.is-frauen-route .frauen-library-hero--section h2{
+    font-size:clamp(29px,8.4vw,38px)!important;
+  }
+  html[data-theme] body.is-frauen-route .frauen-library-search-wrap,
+  html[data-theme] body.is-frauen-route .frauen-library-list-controls{
+    width:calc(100% - 8px)!important;
+    margin-top:-29px!important;
+    margin-bottom:25px!important;
+  }
+  html[data-theme] body.is-frauen-route .frauen-library-section-head{
+    display:block!important;
+    margin:25px 2px 14px!important;
+  }
+  html[data-theme] body.is-frauen-route .frauen-library-section-head > p{
+    max-width:none!important;
+    margin-top:7px!important;
+    text-align:left!important;
+  }
+  html[data-theme] body.is-frauen-route .frauen-library-grid,
+  html[data-theme] body.is-frauen-route .frauen-library-area-grid{
+    gap:13px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual{
+    min-height:214px!important;
+    padding:19px 48px 18px 17px!important;
+    border-radius:23px!important;
+    background-position:70% center!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+    min-height:184px!important;
+    padding:17px 46px 16px 16px!important;
+    border-radius:22px!important;
+    background-position:72% center!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual::after,
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual::after{
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb,var(--card,var(--bg)) 99%,transparent) 0%,
+        color-mix(in srgb,var(--card,var(--bg)) 96%,transparent) 36%,
+        color-mix(in srgb,var(--card,var(--bg)) 78%,transparent) 54%,
+        color-mix(in srgb,var(--card,var(--bg)) 39%,transparent) 69%,
+        color-mix(in srgb,var(--card,var(--bg)) 8%,transparent) 82%,
+        transparent 92%)!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__copy{
+    width:64%!important;
+    max-width:64%!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy{
+    width:66%!important;
+    max-width:66%!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__copy h3{
+    font-size:20px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy h3{
+    font-size:18px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual .frauen-library-card__desc{
+    font-size:12.4px!important;
+    line-height:1.42!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual .frauen-library-area-card__copy > p{
+    font-size:12px!important;
+    line-height:1.4!important;
+  }
+  html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-post-row{
+    grid-template-columns:32px minmax(0,1fr)!important;
+    column-gap:10px!important;
+    min-height:80px!important;
+    padding:16px 2px 15px!important;
+  }
+  html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-post-row h3{
+    font-size:16.5px!important;
+  }
+  html[data-theme] body.is-frauen-route[data-frauen-view="list"] .frauen-row__aussage{
+    font-size:13.7px!important;
+  }
+}
+
+/* Tablet/desktop: only here may the shelves become two columns. */
+@media (min-width:760px){
+  html[data-theme] body.is-frauen-route .frauen-library-grid,
+  html[data-theme] body.is-frauen-route .frauen-library-area-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-card.has-visual{
+    min-height:230px!important;
+  }
+  html[data-theme] body.is-frauen-route #appView .frauen-library-area-card.has-visual{
+    min-height:195px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html[data-theme] body.is-frauen-route .frauen-library-card,
+  html[data-theme] body.is-frauen-route .frauen-library-area-card,
+  html[data-theme] body.is-frauen-route .frauen-post-row{
+    transition:none!important;
+  }
+}
