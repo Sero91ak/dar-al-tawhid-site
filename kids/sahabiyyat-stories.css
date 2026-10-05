@@ -218,3 +218,85 @@ html[data-view="stories"] #view-stories.ps-stories-home{
   .sy-library-page .ms-row-visual{min-height:188px!important}
   .sy-library-page .ms-row-copy{padding:19px 18px 19px 22px!important;gap:5px!important}
 }
+
+/* SAHABIYYAT_UNIFIED_CARDS_V13 — no artwork titles, same child-first card language */
+.sy-library-page .sy-image-name,
+.sy-modal .sy-hero-name{display:none!important}
+.sy-library-page .ms-list{
+  width:min(100%,920px)!important;
+  margin:0 auto!important;
+  grid-template-columns:1fr!important;
+  gap:10px!important;
+}
+.sy-library-page .ms-story-row{
+  min-height:146px!important;
+  height:auto!important;
+  grid-template-columns:minmax(112px,34%) minmax(0,1fr) 44px!important;
+  border-radius:24px!important;
+  overflow:hidden!important;
+}
+.sy-library-page .ms-row-visual{min-height:146px!important}
+.sy-library-page .ms-row-copy{
+  gap:4px!important;
+  padding:13px 8px 13px 15px!important;
+}
+.sy-library-page .ms-row-title{
+  font-size:var(--kids-card-title)!important;
+  line-height:1.08!important;
+}
+.sy-library-page .ms-row-ar{
+  font-size:clamp(18px,4.6vw,23px)!important;
+  line-height:1.18!important;
+}
+.sy-library-page .ms-row-summary{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:1!important;
+  overflow:hidden!important;
+  font-size:clamp(11px,2.7vw,13px)!important;
+  line-height:1.35!important;
+}
+.sy-library-page .ms-row-meta{font-size:clamp(9.5px,2.3vw,11px)!important}
+.sy-library-page .ms-row-go{
+  width:42px!important;
+  height:42px!important;
+  justify-self:center!important;
+  align-self:center!important;
+  border:1px solid rgba(231,190,145,.34)!important;
+  border-radius:50%!important;
+  background:rgba(231,190,145,.08)!important;
+  font-size:28px!important;
+}
+html[data-kids-age="4-5"] .sy-library-page .ms-story-row{
+  min-height:132px!important;
+  grid-template-columns:minmax(118px,39%) minmax(0,1fr) 58px!important;
+}
+html[data-kids-age="4-5"] .sy-library-page .ms-row-visual{min-height:132px!important}
+html[data-kids-age="4-5"] .sy-library-page .ms-row-ar,
+html[data-kids-age="4-5"] .sy-library-page .ms-row-summary,
+html[data-kids-age="4-5"] .sy-library-page .ms-row-meta{display:none!important}
+html[data-kids-age="4-5"] .sy-library-page .ms-row-title{
+  font-size:clamp(23px,6.2vw,28px)!important;
+  line-height:1.08!important;
+}
+html[data-kids-age="4-5"] .sy-library-page .ms-row-go.is-listen{
+  width:48px!important;
+  height:48px!important;
+  border-color:rgba(239,199,155,.58)!important;
+  background:rgba(239,199,155,.14)!important;
+  font-size:18px!important;
+  padding-left:3px!important;
+}
+@media(max-width:390px){
+  .sy-library-page .ms-story-row{grid-template-columns:108px minmax(0,1fr) 40px!important;min-height:142px!important}
+  .sy-library-page .ms-row-visual{min-height:142px!important}
+  .sy-library-page .ms-row-copy{padding:12px 6px 12px 12px!important}
+  html[data-kids-age="4-5"] .sy-library-page .ms-story-row{grid-template-columns:112px minmax(0,1fr) 54px!important;min-height:128px!important}
+  html[data-kids-age="4-5"] .sy-library-page .ms-row-visual{min-height:128px!important}
+}
+@media(min-width:700px){
+  .sy-library-page .ms-list{gap:12px!important}
+  .sy-library-page .ms-story-row{grid-template-columns:minmax(180px,32%) minmax(0,1fr) 50px!important;min-height:176px!important}
+  .sy-library-page .ms-row-visual{min-height:176px!important}
+  .sy-library-page .ms-row-copy{padding:18px 16px 18px 22px!important}
+}
