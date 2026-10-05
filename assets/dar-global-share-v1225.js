@@ -1,5 +1,6 @@
 (function(){
   "use strict";
+  /* LEGACY_DEPLOY_VERIFY_COMPAT: BILDBEITRAG_HISTORICAL_REPAIR_V1247 · HISTORICAL_SHARE_FALLBACKS · superseded by BILDBEITRAG_CURATED_POOL_V1250 */
   /* BILDBEITRAG_CURATED_POOL_V1250 · AI disabled · curated random pool + women-exclusive ownership */
   if(window.__DAR_GLOBAL_SHARE_V1250)return;
   window.__DAR_GLOBAL_SHARE_V1250=true;
