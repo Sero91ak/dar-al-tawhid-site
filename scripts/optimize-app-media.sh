@@ -138,7 +138,17 @@ process_one() {
   esac
 }
 
-if [[ "$MODE" == "--all" ]]; then
+if [[ "$MODE" == "--residual" ]]; then
+  for f in \
+    "kids/assets/kids-cinema/intro-final.mp4" \
+    "kids/assets/kids-cinema/intro-ios.mp4" \
+    "kids/assets/kids-cinema/intro-v74.mp4" \
+    "kids/assets/prophet-story-audio/adam/story.mp3" \
+    "kids/assets/prophet-story-audio/muhammad/story.mp3"
+  do
+    process_one "$f"
+  done
+elif [[ "$MODE" == "--all" ]]; then
   while IFS= read -r -d '' f; do
     process_one "$f"
   done < <(find assets kids/assets content apple-tv ios test/assets -type f \
