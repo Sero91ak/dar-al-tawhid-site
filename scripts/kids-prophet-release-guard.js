@@ -20,7 +20,7 @@ function requireMatch(text, needle, file) {
 function uniqueMatches(text, re) {
   return [...new Set(text.match(re) || [])];
 }
-function assertMasterStory(item, id, group) {
+function assertMasterStory(item, id, group, minimumWords = 0) {
   const scripts = item && item.scripts && typeof item.scripts === "object" ? item.scripts : {};
   const values = ["4-5","6-8","9-10"].map(age => String(scripts[age] || "").trim());
   if (values.some(v => !v)) {
@@ -28,6 +28,10 @@ function assertMasterStory(item, id, group) {
     return;
   }
   if (new Set(values).size !== 1) error(group + " " + id + " enthält gekürzte oder abweichende Altersfassungen");
+  if (minimumWords > 0) {
+    const words = (values[0].match(/\S+/g) || []).length;
+    if (words < minimumWords) error(group + " " + id + " ist mit " + words + " Wörtern zu kurz; mindestens " + minimumWords + " Wörter erforderlich");
+  }
 }
 
 let version;
@@ -257,7 +261,7 @@ if (visual.sahabiyyatOwnLibrary) {
       for (const age of ["4-5","6-8","9-10"]) {
         if (!String((item.scripts || {})[age] || "").trim()) error(id + " Ṣaḥābiyyāt-Text fehlt für Alter " + age);
       }
-      assertMasterStory(item, id, "Ṣaḥābiyyāt");
+      assertMasterStory(item, id, "Ṣaḥābiyyāt", Number(sy.storyPolicy?.minimumMasterWords || 800));
       if (!Array.isArray(item.sourceRefs) || !item.sourceRefs.length) error(id + " Ṣaḥābiyyāt-Quellen fehlen");
       if (!String(item.cover || "").trim()) error(id + " Ṣaḥābiyyāt-Bild fehlt");
     }
