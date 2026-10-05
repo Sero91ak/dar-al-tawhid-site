@@ -156,7 +156,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",finalAudioName:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],wordResultSerial:0,generating:false};
-const MOBILE_APP_VERSION="2.9.112";
+const MOBILE_APP_VERSION="2.9.113";
 const LOCAL_ENGINE_HOST=location.port==="8787"||location.hostname==="127.0.0.1"||location.hostname==="localhost"||/^192\.168\./.test(location.hostname)||/^10\./.test(location.hostname)||/^172\.(1[6-9]|2\d|3[01])\./.test(location.hostname);
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const CLOUD_API_BASE="/voice-studio/api";
@@ -611,7 +611,17 @@ async function generate(){
     state.audioBlob=null;
     try{
       const style=$("#style").value;
-      const profile=style==="kids_story"?"kids_story":style==="kids_lesson"?"kids_story":style==="dua"?"gentle":style==="gentle"?"gentle":"";
+      const profileMap={
+        narration:"narration",
+        kids_story:"kids_story",
+        kids_lesson:"kids_lesson",
+        teaching:"teaching",
+        gentle:"gentle",
+        serious:"serious",
+        question:"quiz",
+        dua:"dua"
+      };
+      const profile=profileMap[style]||"narration";
       const r=await cloudApi("/generate",{method:"POST",body:JSON.stringify({text,prepared:text,profile})},120000);
       if(!r.ok){
         const d=await r.json().catch(()=>({}));
@@ -884,7 +894,15 @@ $("#text").addEventListener("paste",()=>{
 });
 syncStylePills();
 if(location.protocol==="https:"&&"serviceWorker" in navigator){
-  navigator.serviceWorker.register("/voice-studio/sw-v11.js",{scope:"/voice-studio/"}).catch(()=>{});
+  let reloadedForController=false;
+  navigator.serviceWorker.addEventListener("controllerchange",()=>{
+    if(reloadedForController)return;
+    reloadedForController=true;
+    location.reload();
+  });
+  navigator.serviceWorker.register("/voice-studio/sw-v11.js",{scope:"/voice-studio/"})
+    .then(reg=>reg.update().catch(()=>{}))
+    .catch(()=>{});
 }
 health().then(ok=>{if(ok)warmVoiceEngine()});checkMobileUpdate(false);setInterval(health,10000);
 setTimeout(async()=>{

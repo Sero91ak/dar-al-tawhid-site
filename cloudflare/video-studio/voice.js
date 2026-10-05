@@ -102,6 +102,112 @@ export async function synthesizeDarVoice(env, text, options = {}) {
   const endpoint = withTimings
     ? `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}/with-timestamps`
     : `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}`;
+
+  // Adam + Idrīs liegen als bestätigte Owner-Referenzen bei ~144–150 WPM.
+  // Die Profile orientieren sich daran: Kids ruhig-flüssig, Duʿāʾ sanfter,
+  // Quiz etwas direkter, ohne die Stimme hektisch zu machen.
+  const voiceSettings = profile === "kids_intro"
+    ? {
+        stability: 0.50,
+        similarity_boost: 0.86,
+        style: 0.30,
+        speed: 0.94,
+        use_speaker_boost: true
+      }
+    : profile === "kids_alphabet"
+      ? {
+          stability: 0.78,
+          similarity_boost: 0.88,
+          style: 0.04,
+          speed: 0.88,
+          use_speaker_boost: true
+        }
+      : profile === "kids_story"
+        ? {
+            stability: 0.62,
+            similarity_boost: 0.88,
+            style: 0.16,
+            speed: 0.91,
+            use_speaker_boost: true
+          }
+        : profile === "kids_lesson"
+          ? {
+              stability: 0.68,
+              similarity_boost: 0.88,
+              style: 0.10,
+              speed: 0.93,
+              use_speaker_boost: true
+            }
+          : profile === "quiz"
+            ? {
+                stability: 0.58,
+                similarity_boost: 0.88,
+                style: 0.18,
+                speed: 0.97,
+                use_speaker_boost: true
+              }
+            : profile === "dua"
+              ? {
+                  stability: 0.80,
+                  similarity_boost: 0.89,
+                  style: 0.04,
+                  speed: 0.86,
+                  use_speaker_boost: true
+                }
+              : profile === "gentle"
+                ? {
+                    stability: 0.74,
+                    similarity_boost: 0.87,
+                    style: 0.06,
+                    speed: 0.90,
+                    use_speaker_boost: true
+                  }
+                : profile === "teaching"
+                  ? {
+                      stability: 0.70,
+                      similarity_boost: 0.87,
+                      style: 0.08,
+                      speed: 0.93,
+                      use_speaker_boost: true
+                    }
+                  : profile === "serious"
+                    ? {
+                        stability: 0.76,
+                        similarity_boost: 0.87,
+                        style: 0.05,
+                        speed: 0.91,
+                        use_speaker_boost: true
+                      }
+                    : {
+                        stability: 0.72,
+                        similarity_boost: 0.82,
+                        style: 0.08,
+                        speed: 0.92,
+                        use_speaker_boost: true
+                      };
+
+  const dictionaryId = String(
+    env.ELEVENLABS_PRONUNCIATION_DICTIONARY_ID ||
+    env.DAR_VOICE_PRONUNCIATION_DICTIONARY_ID ||
+    ""
+  ).trim();
+  const dictionaryVersionId = String(
+    env.ELEVENLABS_PRONUNCIATION_DICTIONARY_VERSION_ID ||
+    env.DAR_VOICE_PRONUNCIATION_DICTIONARY_VERSION_ID ||
+    ""
+  ).trim();
+  const body = {
+    text: script,
+    model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_multilingual_v2"),
+    voice_settings: voiceSettings
+  };
+  if (dictionaryId && dictionaryVersionId) {
+    body.pronunciation_dictionary_locators = [{
+      pronunciation_dictionary_id: dictionaryId,
+      version_id: dictionaryVersionId
+    }];
+  }
+
   const res = await fetch(endpoint, {
     method: "POST",
     headers: {
@@ -109,38 +215,7 @@ export async function synthesizeDarVoice(env, text, options = {}) {
       "Content-Type": "application/json",
       Accept: withTimings ? "application/json" : "audio/mpeg"
     },
-    body: JSON.stringify({
-      text: script,
-      model_id: String(env.ELEVENLABS_MODEL_ID || "eleven_multilingual_v2"),
-      voice_settings: profile === "kids_intro"
-        ? {
-            stability: 0.50,
-            similarity_boost: 0.86,
-            style: 0.30,
-            use_speaker_boost: true
-          }
-        : profile === "kids_alphabet"
-          ? {
-              stability: 0.78,
-              similarity_boost: 0.88,
-              style: 0.04,
-              use_speaker_boost: true
-            }
-          : profile === "kids_story"
-            ? {
-                stability: 0.60,
-                similarity_boost: 0.86,
-                style: 0.18,
-                speed: 0.90,
-                use_speaker_boost: true
-              }
-            : {
-                stability: 0.72,
-                similarity_boost: 0.78,
-                style: 0.08,
-                use_speaker_boost: true
-              }
-    })
+    body: JSON.stringify(body)
   });
   if (!res.ok) {
     const errText = await res.text().catch(() => "");

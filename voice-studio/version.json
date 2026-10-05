@@ -1,10 +1,10 @@
 {
-  "version": "2.9.112",
-  "updatedAt": "2026-10-05T11:55:00+02:00",
-  "deployTrigger": "voice-studio-2.9.112-iphone-elevenlabs-cloud",
+  "version": "2.9.113",
+  "updatedAt": "2026-10-05T12:14:00+02:00",
+  "deployTrigger": "voice-studio-2.9.113-mobile-eleven-direct-cache-fix",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v80",
+  "cache": "dar-voice-studio-v81",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-contents-api",
-  "engineVersion": "2.9.106",
+  "engineVersion": "2.9.113",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -341,8 +341,8 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "5439aec5097fd551b6c30e4e5cdee9a9a172f994",
-    "validatedAt": "2026-10-05T11:55:00+02:00",
+    "validatedCommit": "5166e5f7a57b8bcce817146589803df5ef0a1114",
+    "validatedAt": "2026-10-05T12:14:00+02:00",
     "freeVoiceIsolation": true,
     "mainAppBrandingUnchanged": true,
     "prophetStoryLocalBatchSmoke": true,
@@ -480,7 +480,13 @@
     "mobileCloudHealthDirect": true,
     "mobileCloudGenerateDirect": true,
     "mobileGpuNotRequiredForCoreVoice": true,
-    "mobileFetchTimeouts": true
+    "mobileFetchTimeouts": true,
+    "mobileShellNetworkFirst": true,
+    "serviceWorkerSelfRefresh": true,
+    "elevenLabsDirectMobileCore": true,
+    "adamIdrisReferenceCorpus": true,
+    "smoothDuaQuizProfiles": true,
+    "pronunciationDictionaryLocatorSupport": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -887,7 +893,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "5439aec5097fd551b6c30e4e5cdee9a9a172f994",
+  "releaseRef": "5166e5f7a57b8bcce817146589803df5ef0a1114",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1165,7 +1171,7 @@
     "forceNewSemanticVersion": true,
     "previousUiVersion": "2.9.47",
     "previousBundleVersionPossibly": "2.9.45",
-    "targetVersion": "2.9.112",
+    "targetVersion": "2.9.113",
     "alphabetReviewIncluded": true,
     "prophetStoriesIncluded": true,
     "updateCheckFallbackRepair": true,
@@ -1334,10 +1340,10 @@
     "offlineManifestPackaged": true,
     "staleLocalManifestAutoRefresh": true
   },
-  "validatedCommit": "5439aec5097fd551b6c30e4e5cdee9a9a172f994",
+  "validatedCommit": "5166e5f7a57b8bcce817146589803df5ef0a1114",
   "validatedAt": "2026-10-04T23:11:00+02:00",
   "validation": {
-    "targetVersion": "2.9.112",
+    "targetVersion": "2.9.113",
     "pronunciationAsyncPreviewQueue": true,
     "pronunciationPreviewStatePolling": true,
     "pronunciationLocalCandidateFallback": true,
@@ -1363,7 +1369,7 @@
     "pronunciationPreviewNoLongFormQaCascade": true,
     "rootCauseConfirmed": "alphabet-audio-studio auto-started full 140 alphabet + quiz + greeting batch on studio load, monopolizing the shared local synthesis worker",
     "alphabetBatchDoesNotAutoStart": true,
-    "engineVersion": "2.9.112",
+    "engineVersion": "2.9.113",
     "engineHealthExposesVersion": true,
     "uiRejectsStaleEngineVersion": true,
     "nativeMacRestartsStaleEngine": true,
@@ -1465,16 +1471,20 @@
     "stalePortCleanupRegression": true,
     "deepEngineRepairRegression": true,
     "manualEngineRepairMenuRegression": true,
-    "uiVersion": "2.9.112",
+    "uiVersion": "2.9.113",
     "uiEngineManifestVersionCoherence": true,
     "staleUiDoesNotMarkHealthyEngineOffline": true,
-    "mobileVersion": "2.9.112",
+    "mobileVersion": "2.9.113",
     "iosHttpsInstallRegression": true,
     "dedicatedMobileManifestRegression": true,
     "publicInstallQrRegression": true,
     "iphoneElevenCloudConnectionRegression": true,
     "iphoneCloudGenerateRegression": true,
-    "iphoneNoInfiniteConnectingRegression": true
+    "iphoneNoInfiniteConnectingRegression": true,
+    "mobileShellFreshnessRegression": true,
+    "elevenLabsMobileCloudRegression": true,
+    "adamIdrisReferenceCorpusRegression": true,
+    "duaQuizProfileRegression": true
   },
   "mubashshirunStories": {
     "enabled": true,
@@ -1547,7 +1557,7 @@
   },
   "mobileVoiceApp": {
     "enabled": true,
-    "version": "2.9.112",
+    "version": "2.9.113",
     "installUrl": "https://dar-al-tawhid.de/voice-studio/mobile.html?app=1&cloud=1",
     "manifest": "/voice-studio/mobile-manifest.webmanifest",
     "installTransport": "https",
@@ -1561,7 +1571,20 @@
     "cloudHealthEndpoint": "/voice-studio/api/health",
     "cloudGenerateEndpoint": "/voice-studio/api/generate",
     "requestTimeouts": true,
-    "noInfiniteConnectingState": true
+    "noInfiniteConnectingState": true,
+    "freshMobileShellNetworkFirst": true,
+    "serviceWorkerSelfUpdate": true,
+    "staleInstalledAppRepair": true,
+    "smoothProfiles": [
+      "kids_story",
+      "kids_lesson",
+      "dua",
+      "quiz",
+      "teaching",
+      "gentle",
+      "serious",
+      "narration"
+    ]
   },
   "mobile": {
     "enabled": true,
@@ -1818,5 +1841,38 @@
     "manualRepairMenu": "DĀR Voice Studio → Engine reparieren…",
     "uiVersionMismatchIsNonBlocking": true,
     "healthyEngineRemainsConnectedDuringUiDrift": true
+  },
+  "ownerVoiceLearning": {
+    "mode": "reference-corpus-not-weight-finetune",
+    "adam": {
+      "durationSec": 229.642,
+      "words": 573,
+      "measuredWpm": 150,
+      "source": "story-reference-adam-2026-10-04.json"
+    },
+    "idris": {
+      "durationSec": 175.073,
+      "words": 421,
+      "measuredWpm": 144,
+      "source": "story-reference-idris-2026-10-04.json"
+    },
+    "kidsStoryTargetWpm": 147,
+    "uses": [
+      "prosody calibration",
+      "speech-rate calibration",
+      "pronunciation memory",
+      "exact text/audio reuse"
+    ]
+  },
+  "elevenLabsCloud": {
+    "enabled": true,
+    "voiceName": "Serhat Abu Malik – Master",
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "pronunciationDictionaryLocatorSupport": true,
+    "dictionaryEnv": [
+      "ELEVENLABS_PRONUNCIATION_DICTIONARY_ID",
+      "ELEVENLABS_PRONUNCIATION_DICTIONARY_VERSION_ID"
+    ],
+    "profileTuningFromOwnerStoryReferences": true
   }
 }
