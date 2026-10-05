@@ -66,7 +66,7 @@ def _load_rule_buckets():
         data = json.loads(_PRONUNCIATION_RULES.read_text(encoding="utf-8"))
         for rule in data.get("rules") or []:
             needle = str(rule.get("string_to_replace") or "")
-            spoken = str(rule.get("tts_text") or rule.get("alias") or "")
+            spoken = str(rule.get("alias") or rule.get("tts_text") or "")
             if not needle or not spoken:
                 continue
             buckets.setdefault(needle[0], []).append((needle, spoken))
@@ -80,7 +80,7 @@ def _load_rule_buckets():
 
 
 def apply_pronunciation_library(text: str) -> str:
-    """Apply DĀR Voice Studio's longest-match curated TTS spellings."""
+    """Apply DĀR Voice Studio's longest-match curated pronunciation aliases."""
     value = str(text or "")
     buckets = _load_rule_buckets()
     if not value or not buckets:
@@ -108,8 +108,8 @@ def prepare_kids_voice_text(text: str, *, apply_dictionary: bool = True) -> str:
 
     Numbers are expanded to deterministic German speech, including Qurʾān
     references and answer numbering. Then the shared DĀR pronunciation library
-    is applied so Quiz and Duʿāʾ use the same learned/native Islamic terms as
-    the Voice Studio.
+    is applied so Quiz and Duʿāʾ use the same learned Islamic pronunciations
+    as the Voice Studio without unnecessary language-script switching.
     """
     value = unicodedata.normalize("NFC", str(text or ""))
     value = value.translate(_DIGIT_TRANSLATION)
