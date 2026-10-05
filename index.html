@@ -25365,6 +25365,16 @@ async function sendPrayerTestNotification(clickedBtn){
 }
 async function activatePrayerReminder(){
   const s=getPrayerSettings();
+  if(isDarNativeApp()){
+    if(!hasPrayerLocation(s)){alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}
+    setPrayerSettings({reminder:true});
+    try{if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darPushSettings)window.webkit.messageHandlers.darPushSettings.postMessage(getPrayerSettings())}catch(e){}
+    updatePrayerReminderButtons();
+    updatePushFloatButton();
+    updateHighlightPushButtons();
+    if(typeof updateHomePushRemindersSummary==="function")updateHomePushRemindersSummary();
+    return;
+  }
   if(!hasPrayerLocation(s)){alert("Bitte zuerst Standort freigeben oder Ort suchen.");return}
   if(!hasNotificationApi()){alert("Benachrichtigungen werden von diesem Browser nicht unterstützt.");return}
   const reminder=$("enablePrayerReminderBtn");
