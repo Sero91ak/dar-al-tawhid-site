@@ -86,9 +86,9 @@ jobs:
           if([prophetJs,sahabaJs,sahabiyyatJs].some(js=>js.includes("story-local-controls")||js.includes('id="psPlayer"')||js.includes('id="msPlayer"')||js.includes('id="syPlayer"')))throw new Error("Inline story player must stay removed");
           if([prophetJs,sahabaJs,sahabiyyatJs].some(js=>!js.includes("openReadAlong")||!js.includes("openListening")||!js.includes("openReading")))throw new Error("Story mode buttons must route to popup reader modes");
           if(!storyHubJs.includes('document.getElementById("ghEntry")?.remove()'))throw new Error("Central Hörwelten entry must stay removed");
-          if(!sahabiyyatJs.includes("sy-image-name"))throw new Error("Ṣaḥābiyyāt card image-name overlay missing");
+          if(sahabiyyatJs.includes("sy-image-name"))throw new Error("Ṣaḥābiyyāt card image-name overlay must stay removed");
           if(sahabiyyatJs.includes("syHeroName"))throw new Error("Ṣaḥābiyyāt detail name duplicated in hero");
-          if(!storyHubJs.includes("gh-story-art-name"))throw new Error("Universal Ṣaḥābiyyāt card image-name overlay missing");
+          if(storyHubJs.includes("gh-story-art-name"))throw new Error("Universal Ṣaḥābiyyāt card image-name overlay must stay removed");
           if(storyHubJs.includes("ghPlayerImageName"))throw new Error("Universal player story name duplicated in hero");
           if(!storyHubJs.includes('img=s.image||artFor(first,s.id,false)'))throw new Error("Story category artwork must prefer manifest image");
           if(storyHubJs.includes('addEventListener("click",toggleRead)'))throw new Error("Story text toggle must not receive the click event as syncMode");
