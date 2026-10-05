@@ -3356,7 +3356,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v60-voice-flow1130";
+const KIDS_BUILD_ID="kids-shell-v61-voice-buffer1131";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -5085,6 +5085,16 @@ function renderDua(){
   var list=filteredDuas();
   var d=list[currentDuaIndex];
   if(!d)return;
+  try{
+    var duaVoice=window.DARKidsOwnerVoice;
+    if(duaVoice&&typeof duaVoice.preload==="function"){
+      duaVoice.preload((d.childPrompt||"")+" "+(d.meaning||""));
+      duaVoice.preload("Richtig. Sehr gut.");
+      duaVoice.preload("Noch nicht. Hör die Erklärung noch einmal.");
+      var nextDuaVoice=list[(currentDuaIndex+1)%list.length];
+      if(nextDuaVoice)duaVoice.preload((nextDuaVoice.childPrompt||"")+" "+(nextDuaVoice.meaning||""));
+    }
+  }catch(e){}
   var progress=duaProgress(d.id);
   duaQuestionPassed=false;
   var progressText=duaProgressLabel(d.id);
@@ -6304,6 +6314,16 @@ function renderQuizQuestion(){
   var ageLabel=document.getElementById("quizAgeLabel");
   if(ageLabel)ageLabel.textContent=quizAgeRange().label;
   var q=currentQuiz[currentQuizIndex];
+  try{
+    var quizVoice=window.DARKidsOwnerVoice;
+    if(quizVoice&&typeof quizVoice.preload==="function"){
+      quizVoice.preload(quizPrompt(q));
+      quizVoice.preload(q.success||"");
+      quizVoice.preload(q.retry||"");
+      var nextQuizVoice=currentQuiz[currentQuizIndex+1];
+      if(nextQuizVoice)quizVoice.preload(quizPrompt(nextQuizVoice));
+    }
+  }catch(e){}
   quizLocked=false;
   quizQuestionHadError=false;
   renderQuizProgress();
@@ -7052,10 +7072,10 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio6"></script>
-<script src="/kids/owner-voice.js?v=2"></script>
+<script src="/kids/owner-voice.js?v=3"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v60-voice-flow1130";
+  var KIDS_BUILD_ID="kids-shell-v61-voice-buffer1131";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -7071,13 +7091,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1130",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1131",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1130",{cache:"no-store"})
+    fetch("/kids/version.json?v=1131",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
