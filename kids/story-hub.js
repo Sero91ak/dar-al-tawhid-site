@@ -4,7 +4,7 @@ const REGISTRY_URL="/kids/data/story-hub.json?v=5";
 let SOURCES=[
   {id:"prophets",label:"Propheten",kicker:"GESCHICHTEN DER PROPHETEN",url:"/kids/data/prophet-stories.json?v=29",kind:"prophet"},
   {id:"sahaba",label:"Ṣaḥābah",kicker:"DIE GEFÄHRTEN",url:"/kids/data/mubashshirun-stories.json?v=19",kind:"sahabi"},
-  {id:"sahabiyyat",label:"Ṣaḥābiyyāt",kicker:"DIE BESTEN FRAUEN IHRER ZEIT",url:"/kids/data/sahabiyyat-stories.json?v=1143",kind:"sahabiyyah"}
+  {id:"sahabiyyat",label:"Ṣaḥābiyyāt",kicker:"DIE BESTEN FRAUEN IHRER ZEIT",url:"/kids/data/sahabiyyat-stories.json?v=1144",kind:"sahabiyyah"}
 ];
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -92,7 +92,7 @@ function ensureUi(){
   $("#ghBack").addEventListener("click",closeWorld);
 
   const player=document.createElement("section");player.id="ghPlayer";player.className="gh-player";player.setAttribute("aria-hidden","true");
-  player.innerHTML='<div class="gh-player-scroll" id="ghPlayerScroll"><section class="gh-player-hero"><img id="ghPlayerBg" class="gh-player-bg" src="" alt=""><span class="gh-player-shade" aria-hidden="true"></span><button id="ghPlayerBack" class="gh-player-back" type="button" aria-label="Zurück zur Auswahl">‹</button><button id="ghPlayerMin" class="gh-player-min" type="button" aria-label="Player minimieren">⌄</button><div class="gh-player-copy"><div class="gh-player-kicker" id="ghPlayerKicker"></div><h2 id="ghPlayerTitle"></h2><div class="gh-player-ar" id="ghPlayerArabic" dir="rtl"></div><div class="gh-player-summary" id="ghPlayerSummary"></div></div></section><main class="gh-player-body"><section class="gh-controls"><div class="gh-main-controls"><button class="gh-skip" id="ghBack15" type="button">−15 s</button><button class="gh-play" id="ghPlay" type="button">Hören</button><button class="gh-skip" id="ghFwd15" type="button">+15 s</button></div><div class="gh-progress" id="ghProgress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div><div class="gh-time"><span id="ghCurrent">0:00</span><span id="ghTotal">0:00</span></div><div class="gh-player-actions"><button class="gh-read-toggle" id="ghReadToggle" type="button" aria-expanded="false" aria-controls="ghRead">Text lesen</button><button class="gh-read-toggle" id="ghFollow" type="button" aria-pressed="false" aria-controls="ghRead">Mitlesen</button></div><p class="gh-audio-note" id="ghAudioNote"></p></section><article class="gh-read" id="ghRead" hidden></article><section class="gh-sources"><strong>QUELLEN</strong><div id="ghSources"></div></section><section class="gh-next" id="ghNext" hidden><small>WEITER ENTDECKEN</small><button id="ghNextButton" type="button"><img id="ghNextImg" src="" alt=""><span><em id="ghNextMeta"></em><strong id="ghNextTitle"></strong></span><b aria-hidden="true">›</b></button></section></main></div>';
+  player.innerHTML='<div class="gh-player-scroll" id="ghPlayerScroll"><section class="gh-player-hero"><img id="ghPlayerBg" class="gh-player-bg" src="" alt=""><span class="gh-player-shade" aria-hidden="true"></span><button id="ghPlayerBack" class="gh-player-back" type="button" aria-label="Zurück zur Auswahl">‹</button><button id="ghPlayerMin" class="gh-player-min" type="button" aria-label="Player minimieren">⌄</button><div class="gh-player-copy"><div class="gh-player-kicker" id="ghPlayerKicker"></div><h2 id="ghPlayerTitle"></h2><div class="gh-player-ar" id="ghPlayerArabic" dir="rtl"></div><div class="gh-player-summary" id="ghPlayerSummary"></div></div></section><main class="gh-player-body"><section class="gh-controls"><div class="gh-main-controls"><button class="gh-skip" id="ghBack15" type="button">−15 s</button><button class="gh-play" id="ghPlay" type="button">Hören</button><button class="gh-skip" id="ghFwd15" type="button">+15 s</button></div><div class="gh-progress" id="ghProgress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div><div class="gh-time"><span id="ghCurrent">0:00</span><span id="ghTotal">0:00</span></div><div class="gh-player-actions"><button class="gh-read-toggle" id="ghReadToggle" type="button" aria-expanded="false" aria-controls="ghRead" aria-haspopup="dialog">Nur lesen</button><button class="gh-read-toggle" id="ghFollow" type="button" aria-pressed="false" aria-controls="ghRead" aria-haspopup="dialog">Hören &amp; mitlesen</button></div><p class="gh-audio-note" id="ghAudioNote"></p></section><article class="gh-read" id="ghRead" hidden></article><section class="gh-sources"><strong>QUELLEN</strong><div id="ghSources"></div></section><section class="gh-next" id="ghNext" hidden><small>WEITER ENTDECKEN</small><button id="ghNextButton" type="button"><img id="ghNextImg" src="" alt=""><span><em id="ghNextMeta"></em><strong id="ghNextTitle"></strong></span><b aria-hidden="true">›</b></button></section></main></div>';
   document.body.appendChild(player);
   $("#ghPlayerBack").addEventListener("click",minimizePlayer);
   $("#ghPlayerMin").addEventListener("click",minimizeAll);
@@ -123,10 +123,10 @@ function ensureUi(){
   audio.addEventListener("loadedmetadata",()=>{reader?.restore();if(resumeHint>0){try{audio.currentTime=Math.min(Number(audio.duration)||resumeHint,resumeHint)}catch(_){}resumeHint=0}updateProgress()});
   audio.addEventListener("play",()=>{playing=true;writeLastStory(true,false);renderPlay();renderMini()});
   audio.addEventListener("pause",()=>{playing=false;writeLastStory(true,false);renderPlay();renderMini()});
-  audio.addEventListener("ended",()=>{playing=false;setStoryReadingWake(false);writeLastStory(true,true);renderPlay();renderMini();renderNext()});
+  audio.addEventListener("ended",()=>{playing=false;writeLastStory(true,true);renderPlay();renderMini();renderNext()});
   window.addEventListener("pagehide",()=>{reader?.persist(true);writeLastStory(true,false)});
   document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if($("#ghPlayer")?.classList.contains("open"))minimizePlayer();else if($("#ghWorld")?.classList.contains("open"))closeWorld()});
-  document.addEventListener("click",e=>{const nav=e.target.closest?.(".nav-btn[data-target]");if(nav&&nav.dataset.target!=="stories"){setReadMode("closed",{restore:false});setStoryReadingWake(false);stopAudio(true);active=null;renderMini()}},true);
+  document.addEventListener("click",e=>{const nav=e.target.closest?.(".nav-btn[data-target]");if(nav&&nav.dataset.target!=="stories"){setReadMode("closed",{restore:false});stopAudio(true);active=null;renderMini()}},true);
   $("#ghRead")?.addEventListener("pointerdown",()=>{manualReadUntil=performance.now()+5000},{passive:true});
   $("#ghRead")?.addEventListener("wheel",()=>{manualReadUntil=performance.now()+5000},{passive:true});
   installGestures();
@@ -225,8 +225,10 @@ function renderPlayer(){
   $("#ghPlayerSummary").textContent=active.summary||"";
   $("#ghRead").innerHTML=text.split(/\n{2,}/).map((p,i)=>'<p data-gh-p="'+i+'">'+esc(p)+"</p>").join("");
   $("#ghSources").textContent=(active.sourceRefs||[]).join(" · ");
+  $("#ghReadToggle").hidden=isYoung();
   $("#ghFollow").hidden=isYoung()||!meta?.url;
-  $("#ghFollow").textContent="Synchron mitlesen";
+  $(".gh-player-actions").hidden=isYoung();
+  $("#ghFollow").textContent="Hören & mitlesen";
   setReadMode("closed",{restore:false});
   const hasAudio=!!meta?.url;
   $("#ghProgress").hidden=!hasAudio;
@@ -261,13 +263,6 @@ function minimizeAll(){
   renderMini();
 }
 let followMode=false,manualReadUntil=0,lastReadIndex=-1,readReturnScroll=0;
-const STORY_READING_WAKE="story-player-reading";
-function setStoryReadingWake(enabled){
-  try{
-    if(enabled)window.DARKidsScreenAwake?.acquire?.(STORY_READING_WAKE);
-    else window.DARKidsScreenAwake?.release?.(STORY_READING_WAKE);
-  }catch(_){}
-}
 function clearReadHighlights(){
   $("#ghRead")?.querySelectorAll("[data-gh-p].active").forEach(p=>p.classList.remove("active"));
   lastReadIndex=-1;
@@ -278,8 +273,7 @@ function setReadMode(next,{restore=false}={}){
   const open=next==="read"||next==="follow",sync=next==="follow";
   followMode=sync;
   read.hidden=!open;
-  setStoryReadingWake(open);
-  toggle.textContent=open?"Text schließen":(isYoung()?"Mitlesen für Erwachsene":"Text lesen");
+  toggle.textContent=open?"Text schließen":(isYoung()?"Mitlesen für Erwachsene":"Nur lesen");
   toggle.setAttribute("aria-expanded",String(open));
   toggle.setAttribute("aria-pressed",String(open&&!sync));
   if(follow){
@@ -303,14 +297,16 @@ function setReadMode(next,{restore=false}={}){
   });
 }
 function toggleRead(syncMode=false){
-  const read=$("#ghRead"),scroll=$("#ghPlayerScroll");if(!read)return;
-  const wantsFollow=syncMode===true,isOpen=!read.hidden;
-  if((!wantsFollow&&isOpen)||(wantsFollow&&isOpen&&followMode)){
-    setReadMode("closed",{restore:true});
+  setReadMode("closed",{restore:false});
+  if(!reader)return;
+  if(syncMode===true){
+    reader.openReadAlong?.();
+    if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
     return;
   }
-  if(!isOpen&&scroll)readReturnScroll=scroll.scrollTop;
-  setReadMode(wantsFollow?"follow":"read",{restore:false});
+  if(!audio.paused)audio.pause();
+  if(typeof reader.openReading==="function")reader.openReading();
+  else reader.openReadAlong?.();
 }
 function readIndexAtTime(){
   const ps=Array.from($("#ghRead")?.querySelectorAll("[data-gh-p]")||[]);if(!ps.length)return-1;
