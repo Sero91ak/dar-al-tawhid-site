@@ -6982,6 +6982,24 @@
         "scripts/verify-test-app-deploy.js"
       ],
       "expiresAt": "2026-10-11T23:59:00.000Z"
+    },
+    {
+      "id": "media-size-reduction-r2-ready-2026-10-05",
+      "approvedBy": "user-explicit-compress-all-images-videos-audios-cloud-file",
+      "reason": "Nutzer beauftragt ausdrücklich, Bilder, Videos und Voice/Audio beider Apps deutlich kleiner auszuliefern und große Medien perspektivisch über Cloudflare/R2 statt als schweres App-/GitHub-Medienpaket zu behandeln. Zuerst Staging/PR-Vollscan und Kompression; keine Push-Logik.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/optimize-app-media.yml",
+        "scripts/optimize-app-media.sh",
+        "scripts/update-local-media-metadata.py",
+        "assets/",
+        "kids/",
+        "test/assets/",
+        "ios/",
+        "apple-tv/",
+        "voice-studio/"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
