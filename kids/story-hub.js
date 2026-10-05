@@ -230,7 +230,9 @@ function renderPlayer(){
   if(controls){const safeArt=String(img||artFor(active,activeCategory,false)||"").replace(/["\\\n\r]/g,"");controls.style.setProperty("--gh-podcast-art",safeArt?'url("'+safeArt+'")':"none")}
   $("#ghRead").innerHTML=text.split(/\n{2,}/).map((p,i)=>'<p data-gh-p="'+i+'">'+esc(p)+"</p>").join("");
   $("#ghSources").textContent=(active.sourceRefs||[]).join(" · ");
+  $("#ghReadToggle").hidden=isYoung();
   $("#ghFollow").hidden=isYoung()||!meta?.url;
+  $(".gh-player-actions").hidden=isYoung();
   $("#ghFollow").textContent="Hören & mitlesen";
   setReadMode("closed",{restore:false});
   const hasAudio=!!meta?.url;
