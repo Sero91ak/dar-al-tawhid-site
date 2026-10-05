@@ -1772,11 +1772,28 @@ function renderInventory(){
     if(!term)return true;
     return [row.title,item.prophetId,item.category,item.kind,item.topic,(item.tags||[]).join(" ")].join(" ").toLowerCase().includes(term);
   });
-  if(summary)summary.textContent=inventoryFilter==="sahaba"
-    ?("Ṣaḥābah · 10 vollständige Mastergeschichten · "+rows.length+" Altersplätze · überall identischer Langtext")
-    :inventoryFilter==="sahabiyyat"
-      ?("Ṣaḥābiyyāt · 14 vollständige Mastergeschichten · "+rows.length+" Altersplätze · überall identischer Langtext")
-      :("Bestand "+inventoryState.legacy.length+" · Studio intern/Test "+inventoryState.staging.length+" · Studio live "+inventoryState.live.length+" · zusammen "+all.length);
+  if(summary){
+    if(inventoryFilter==="sahaba"){
+      summary.textContent="Ṣaḥābah · 10 vollständige Mastergeschichten · "+rows.length+" Altersplätze · überall identischer Langtext";
+    }else if(inventoryFilter==="sahabiyyat"){
+      const masters=new Map();
+      rows.forEach(row=>{
+        const item=row.staging||row.live||row.legacy||{};
+        const key=String(item?.existingStory?.itemId||item?.id||row.key||"");
+        if(!masters.has(key))masters.set(key,storyTextMetrics(item.text||""));
+      });
+      const values=[...masters.values()].filter(x=>x.words>0);
+      const words=values.map(x=>x.words);
+      const secs=values.map(x=>x.seconds);
+      const fmt=seconds=>Math.floor(seconds/60)+":"+String(seconds%60).padStart(2,"0");
+      const range=values.length
+        ?(" · "+Math.min(...words)+"–"+Math.max(...words)+" Wörter · ca. "+fmt(Math.min(...secs))+"–"+fmt(Math.max(...secs))+" Min.")
+        :"";
+      summary.textContent="Ṣaḥābiyyāt · "+masters.size+" vollständige Mastergeschichten"+range+" · derselbe vollständige Text bei 4–5, 6–8 und 9–10";
+    }else{
+      summary.textContent="Bestand "+inventoryState.legacy.length+" · Studio intern/Test "+inventoryState.staging.length+" · Studio live "+inventoryState.live.length+" · zusammen "+all.length;
+    }
+  }
   if(!rows.length){box.innerHTML='<div class="notice">Keine passenden Inhalte gefunden.</div>';return}
   box.innerHTML=rows.map(row=>{
     const active=row.staging||row.live||row.legacy||{};
