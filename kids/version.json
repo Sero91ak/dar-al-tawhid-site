@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v74-stories1144",
-  "label": "KIDS · V1.07.78",
-  "releasedAt": "2026-10-05T16:33:00+02:00",
-  "note": "Kids v1144: Der Hörgeschichten-Player ist wieder auf den gewünschten Fokus-Reader mit Bottom-Sheet-Popup zurückgesetzt. „Nur lesen“ und „Hören & mitlesen“ öffnen wieder den separaten Reader von unten; die intelligente Mitlesung nutzt vorhandene Absatz-Zeitstempel, markiert den aktuellen Abschnitt und scrollt ausschließlich innerhalb des Reader-Fensters. Der große Inline-/Podcast-Reader bleibt entfernt. Die Bildschirm-Wachhaltung ist nur zusätzlich aktiv: Lesen/Mitlesen verhindert automatische Displaysperre, reines Hören darf weiterhin dimmen und sperren; beim Schließen, Verlassen oder Ende der Geschichte wird die Wachhaltung freigegeben.",
+  "buildId": "kids-shell-v75-stories1145",
+  "label": "KIDS · V1.07.79",
+  "releasedAt": "2026-10-05T16:46:00+02:00",
+  "note": "Kids v1145: Die iOS-/System-Wiedergabeanzeige der Hörgeschichten wurde bereinigt. Auf dem Sperrbildschirm steht jetzt nur der Name der Geschichte bzw. Person und darunter die Kategorie (z. B. „Ṣaḥābiyyāt“); Altersangaben wie „Alter 4–5“ werden nicht mehr an Now Playing oder Media Session übergeben. Titel und Kategorie bleiben dadurch deutlich besser lesbar. Player, Bottom-Sheet-Mitlesung, intelligente Synchronisierung und Screen-Awake-Verhalten wurden nicht verändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1144",
+    "serviceWorkerCache": "v1145",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -166,7 +166,7 @@
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1133-safe-area",
     "storiesBottomNav": "separated-background-v1086",
-    "storyFollowReader": "v11",
+    "storyFollowReader": "v12",
     "storyFollowReaderMode": "bottom-sheet-popup-smart-timestamp-reader-v1144",
     "storyFollowReaderReusable": true,
     "sectionEntryHeroes": "edge-to-edge-compact-photoreal-v1097",
@@ -486,7 +486,7 @@
     ],
     "sahabiyyatNameOverlay": true,
     "sahabiyyatNameOverlayPlacement": "card-and-hero-in-own-library-and-universal-story-hub",
-    "storyHubJsVersion": 16,
+    "storyHubJsVersion": 17,
     "sahabiyyatDistinctNewArtworks": [
       "sawdah",
       "juwayriyyah",
@@ -608,7 +608,11 @@
     "storyReaderExactTimingPreferred": true,
     "storyFollowReaderCssVersion": 7,
     "storyReadingScreenAwake": true,
-    "storyAudioOnlyAllowsScreenLock": true
+    "storyAudioOnlyAllowsScreenLock": true,
+    "storyNowPlayingMetadata": "name-plus-category-no-age-v1145",
+    "storyNowPlayingTitle": "full-story-name",
+    "storyNowPlayingSubtitle": "category-only",
+    "storyNowPlayingAgeHidden": true
   },
   "updatedAt": "2026-10-05"
 }
