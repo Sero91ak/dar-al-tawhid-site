@@ -42,12 +42,25 @@ function ageKey(){return age().replace("–","-")}
 function isAudioOnlyAge(){return age()==="4–5"}
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){
+  if(!["both","listen","read"].includes(v))return;
   try{localStorage.setItem(MODE_KEY,v)}catch(_){}
-  renderModeButtons();applyMode();
-  if(active&&v==="both"&&!isAudioOnlyAge()){
+  renderModeButtons();
+  if(!active){applyMode();return}
+  if(v==="both"){
     if(typeof followReader?.openReadAlong==="function")followReader.openReadAlong();
     else followReader?.open?.();
     if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+    return;
+  }
+  if(v==="listen"){
+    if(typeof followReader?.openListening==="function")followReader.openListening();
+    else followReader?.open?.();
+    if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+    return;
+  }
+  if(v==="read"){
+    if(typeof followReader?.openReading==="function")followReader.openReading();
+    else followReader?.open?.();
   }
 }
 function uniqueItems(list){
@@ -288,7 +301,6 @@ function ensureUi(){
           '</div>'+
         '</div>'+
         '<div class="ps-body">'+
-          '<div class="ps-player" id="psPlayer"><div class="story-local-controls"><button class="story-skip" id="psBack15" type="button" aria-label="15 Sekunden zurück">−15 s</button><button class="ps-play" id="psPlay" type="button">Hören</button><button class="story-skip" id="psFwd15" type="button" aria-label="15 Sekunden vor">+15 s</button></div><div class="ps-progress" id="psProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="psProgress"></span></div><div class="ps-player-time"><strong id="psTimeCurrent">0:00</strong><span id="psTimeTotal">0:00</span></div><button class="ps-follow-open" id="psFollowOpen" type="button">Hören &amp; Mitlesen</button><div class="ps-player-note" id="psVoiceNote"></div></div>'+
           '<article class="ps-read" id="psRead"></article>'+
           '<div class="ps-sources"><strong>QUELLEN</strong><div id="psSources"></div></div>'+
           '<div class="ps-question" id="psQuestion"></div>'+
@@ -298,7 +310,7 @@ function ensureUi(){
   document.body.appendChild(modal);
   modal.querySelectorAll("[data-ps-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.psMode)));
   $("#psClose").addEventListener("click",closeStory);
-  $("#psPlay").addEventListener("click",toggleAudio);
+  $("#psPlay")?.addEventListener("click",toggleAudio);
   $("#psBack15")?.addEventListener("click",()=>seekBy(-15));
   $("#psFwd15")?.addEventListener("click",()=>seekBy(15));
   $("#psFollowOpen")?.addEventListener("click",()=>{
@@ -345,23 +357,9 @@ function ensureUi(){
   return true;
 }
 function applyMode(){
-  const read=$("#psRead"),player=$("#psPlayer"),follow=$("#psFollowOpen");
   renderModeButtons();
-  if(!read||!player)return;
-  if(isAudioOnlyAge()){
-    read.hidden=true;
-    player.hidden=false;
-    if(follow){
-      follow.hidden=true;
-      follow.setAttribute("aria-hidden","true");
-      follow.tabIndex=-1;
-    }
-    return;
-  }
-  const m=mode();
-  read.hidden=m==="listen";
-  player.hidden=m==="read";
-  if(follow){follow.hidden=false;follow.removeAttribute("aria-hidden");follow.tabIndex=0;follow.textContent="Mitlesen öffnen";follow.setAttribute("aria-label","Mitlesen öffnen")}
+  const read=$("#psRead");
+  if(read)read.hidden=true;
 }
 function renderActive(){
   if(!active)return;
