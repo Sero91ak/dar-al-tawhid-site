@@ -40,6 +40,7 @@ jobs:
           node scripts/kids-prophet-release-guard.js
           node --check cloudflare/site-router.js
           node --check kids/story-hub.js
+          node --check kids/story-follow-reader.js
           node <<'NODE'
           const fs=require("fs");
           const quiz=JSON.parse(fs.readFileSync("kids/data/quiz-kids.json","utf8"));
@@ -53,12 +54,15 @@ jobs:
           const sahabaJs=fs.readFileSync("kids/mubashshirun-stories.js","utf8");
           const sahabiyyatJs=fs.readFileSync("kids/sahabiyyat-stories.js","utf8");
           const storyHubJs=fs.readFileSync("kids/story-hub.js","utf8");
+          const storyFollowReaderJs=fs.readFileSync("kids/story-follow-reader.js","utf8");
+          const storyFollowReaderCss=fs.readFileSync("kids/story-follow-reader.css","utf8");
           const expected=String(version.buildId||"").trim();
           const swVersion=String(version.visualSystem?.serviceWorkerCache||"").replace(/^v/,"");
           const syCss=String(version.visualSystem?.sahabiyyatCssVersion||"").trim();
           const syJs=String(version.visualSystem?.sahabiyyatJsVersion||"").trim();
           const hubCss=String(version.visualSystem?.storyHubCssVersion||"").trim();
           const hubJs=String(version.visualSystem?.storyHubJsVersion||"").trim();
+          const followJs=String(version.visualSystem?.storyFollowReader||"").replace(/^v/,"").trim();
           if(!expected)throw new Error("Kids buildId missing");
           if(!swVersion)throw new Error("Kids serviceWorkerCache missing");
           if(index!==start||index!==shell)throw new Error("Kids entry shells are not identical");
@@ -71,6 +75,8 @@ jobs:
           if(!index.includes("kids.pwa.controller.reload."))throw new Error("Kids stale-shell self-heal missing");
           if(!hubJs||!index.includes("/kids/story-hub.js?v="+hubJs))throw new Error("Universal story hub JS missing");
           if(!hubCss||!index.includes("/kids/story-hub.css?v="+hubCss))throw new Error("Universal story hub CSS missing");
+          if(!followJs||!index.includes("/kids/story-follow-reader.js?v="+followJs))throw new Error("Current story follow-reader JS missing");
+          if(!index.includes("/kids/story-follow-reader.css?v=5"))throw new Error("Current story follow-reader CSS missing");
           if(!fs.existsSync("kids/story-hub.js")||!fs.existsSync("kids/story-hub.css"))throw new Error("Universal story hub files missing");
           if((storyHubJs.match(/new Audio\(/g)||[]).length!==1)throw new Error("Universal StoryPlayer must own exactly one Audio engine");
           if([prophetJs,sahabaJs,sahabiyyatJs].some(js=>js.includes("new Audio(")))throw new Error("Legacy story audio engine returned");
@@ -85,6 +91,11 @@ jobs:
           if(storyHubJs.includes('addEventListener("click",toggleRead)'))throw new Error("Story text toggle must not receive the click event as syncMode");
           if(!storyHubJs.includes("reader.openReading")||!storyHubJs.includes("reader.openReadAlong"))throw new Error("Story focus reader modes missing");
           if(!storyHubJs.includes("scrollReadParagraphIntoView"))throw new Error("Story read-along must scroll inside the text pane");
+          if(!storyHubJs.includes("reader.openReadAlong?.()")||!storyHubJs.includes("reader.openReading"))throw new Error("Story read/follow buttons must open the dedicated focus reader");
+          if(!storyFollowReaderJs.includes('readerView="follow"')||!storyFollowReaderJs.includes("applyReaderView"))throw new Error("Dedicated reader mode state missing");
+          if(!storyFollowReaderJs.includes("readEl.scrollTop+(nr.top-rr.top)"))throw new Error("Follow-reader must scroll relative to its own pane");
+          if(!storyFollowReaderJs.includes('el.setAttribute("inert","")'))throw new Error("Follow-reader background inert lock missing");
+          if(!storyFollowReaderCss.includes("z-index:30050")||!storyFollowReaderCss.includes('[data-reader-view="read"]'))throw new Error("Follow-reader focus/read CSS missing");
           if(!storyHubJs.includes("playerAtTop"))throw new Error("Story swipe-down guard missing");
           if(!sw.includes("dar-al-tawhid-kids-v"+swVersion)||!sw.includes("client.navigate"))throw new Error("Kids SW activation recovery missing");
           if(!index.includes('id="syEntry"'))throw new Error("Ṣaḥābiyyāt static hub card missing");
