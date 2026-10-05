@@ -261,7 +261,7 @@ if (visual.sahabiyyatOwnLibrary) {
       for (const age of ["4-5","6-8","9-10"]) {
         if (!String((item.scripts || {})[age] || "").trim()) error(id + " Ṣaḥābiyyāt-Text fehlt für Alter " + age);
       }
-      assertMasterStory(item, id, "Ṣaḥābiyyāt", Number(sy.storyPolicy?.minimumMasterWords || 800));
+      assertMasterStory(item, id, "Ṣaḥābiyyāt", Number(sy.storyPolicy?.minimumMasterWords || 850));
       if (!Array.isArray(item.sourceRefs) || !item.sourceRefs.length) error(id + " Ṣaḥābiyyāt-Quellen fehlen");
       if (!String(item.cover || "").trim()) error(id + " Ṣaḥābiyyāt-Bild fehlt");
     }
