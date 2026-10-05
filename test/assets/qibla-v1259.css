@@ -1,7 +1,7 @@
 /* DĀR AL TAWḤĪD · Qiblah · Test-only v1259
    Historical atmosphere stays in the hero; compass/data remain image-free and functional. */
 #appView.view:has(.qibla-hub-page){
-  --qbx-art:url("/test/assets/area-heroes-v1290/qibla.jpg");
+  --qbx-art:url("/test/assets/area-heroes-v1290/qibla.webp");
   --qbx-bg:var(--bg);
   --qbx-card:var(--card,var(--panel,var(--bg)));
   --qbx-text:var(--text,var(--cream));

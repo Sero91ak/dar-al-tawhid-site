@@ -1,7 +1,7 @@
 /* DĀR AL TAWḤĪD · Qurʾān reader · Test-only v1251
    Reading-first. Historical imagery is confined to chrome, never behind āyāt. */
 body.is-quran-reader-route{
-  --qrcx-art:url("/test/assets/area-heroes-v1290/quran-overview.jpg");
+  --qrcx-art:url("/test/assets/area-heroes-v1290/quran-overview.webp");
   --qrcx-chrome-a:color-mix(in srgb,var(--bg) 94%,transparent);
   --qrcx-chrome-b:color-mix(in srgb,var(--bg) 78%,transparent);
   --qrcx-line:color-mix(in srgb,var(--gold2) 18%,var(--line2));

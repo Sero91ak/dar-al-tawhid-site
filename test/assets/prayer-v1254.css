@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Prayer overview · test-only v1254 */
 #appView.view:has(.prayer-page-noble){
-  --prx-art:url("/test/assets/area-heroes-v1290/prayer.jpg");
+  --prx-art:url("/test/assets/area-heroes-v1290/prayer.webp");
   --prx-left:color-mix(in srgb,var(--bg) 91%,transparent);
   --prx-mid:color-mix(in srgb,var(--bg) 60%,transparent);
   --prx-right:color-mix(in srgb,var(--bg) 15%,transparent);

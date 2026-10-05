@@ -1,7 +1,7 @@
 /* DĀR AL TAWḤĪD · Qurʾān Player · Test-only v1252 */
 html.is-quran-player-route,
 body.is-quran-player-route{
-  --dqpx-art:url("/test/assets/area-heroes-v1290/quran-player.jpg");
+  --dqpx-art:url("/test/assets/area-heroes-v1290/quran-player.webp");
   --dqpx-bg:var(--bg,#161813);
   --dqpx-panel:color-mix(in srgb,var(--card,var(--bg)) 76%,transparent);
   --dqpx-panel-strong:color-mix(in srgb,var(--card,var(--bg)) 90%,transparent);

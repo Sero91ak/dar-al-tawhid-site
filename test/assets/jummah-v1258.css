@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Jumuʿah / Freitag · Test-only v1258 */
 #appView.view:has(.jummah-hub-page){
-  --jfx-art:url("/test/assets/area-heroes-v1290/jummah.jpg");
+  --jfx-art:url("/test/assets/area-heroes-v1290/jummah.webp");
   --jfx-bg:var(--bg);
   --jfx-text:var(--text,var(--cream));
   --jfx-muted:var(--muted);

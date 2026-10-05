@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Book detail · test-only v1252 */
 .topic-collection-page:has(.book-profile-box){
-  --bookd-art:url("/test/assets/area-heroes-v1290/book-detail.jpg");
+  --bookd-art:url("/test/assets/area-heroes-v1290/book-detail.webp");
   --bookd-left:color-mix(in srgb,var(--bg) 91%,transparent);
   --bookd-mid:color-mix(in srgb,var(--bg) 62%,transparent);
   --bookd-right:color-mix(in srgb,var(--bg) 14%,transparent);

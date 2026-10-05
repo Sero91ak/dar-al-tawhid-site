@@ -2582,7 +2582,7 @@ html[data-theme="dar-al-layl"]{
 /* DAR_LIBRARY_RESPONSIVE_HERO_V1249
    Hero behaves like the other app areas: embedded full-width scene, no side-cut poster. */
 :root{
-  --dar-lib-cinema-image:url("/test/assets/area-heroes-v1290/library.png");
+  --dar-lib-cinema-image:url("/test/assets/area-heroes-v1290/library.webp");
 }
 .lib-page[data-library-root] .lib-hero{
   width:auto;

@@ -1,7 +1,7 @@
 /* DĀR AL TAWḤĪD · Qurʾān Lernen · Test-only v1256
    Full-screen, theme-aware, historical atmosphere only around the learning surface. */
 html.dql-open{
-  --dqlx-art:url("/test/assets/area-heroes-v1290/quran-learn.jpg");
+  --dqlx-art:url("/test/assets/area-heroes-v1290/quran-learn.webp");
   --dqlx-bg:var(--bg);
   --dqlx-card:var(--card,var(--panel,var(--bg)));
   --dqlx-text:var(--text,var(--cream));
