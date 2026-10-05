@@ -3136,3 +3136,137 @@ html.ps-modal-open body{
   .ps-library-page .ps-story-row{height:184px!important;min-height:184px!important}
   .ps-library-page .ps-row-copy{left:42%!important}
 }
+
+/* STORY_LIBRARY_UNIFIED_V13 — one child-first story-card system */
+.ps-library-page .ps-toolbar{display:none!important}
+.ps-muhammad-feature{padding:0 12px 12px!important}
+.ps-muhammad-card{
+  grid-template-rows:160px auto!important;
+  border-radius:25px!important;
+}
+.ps-muhammad-visual,.ps-muhammad-visual img{min-height:160px!important}
+.ps-muhammad-panel{padding:14px 16px 14px!important}
+.ps-muhammad-cta{
+  min-height:40px!important;
+  margin-top:8px!important;
+  padding:0 0 0 1px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.ps-library-page .ps-library-list{
+  display:grid!important;
+  gap:10px!important;
+  padding:0 12px 24px!important;
+  background:transparent!important;
+}
+.ps-library-page .ps-story-row{
+  min-height:146px!important;
+  height:auto!important;
+  display:grid!important;
+  grid-template-columns:minmax(112px,34%) minmax(0,1fr) 48px!important;
+  padding:0!important;
+  border:1px solid rgba(111,207,215,.18)!important;
+  border-radius:24px!important;
+  overflow:hidden!important;
+  background:linear-gradient(135deg,#08283a,#072234 74%)!important;
+  box-shadow:0 13px 32px rgba(0,0,0,.16)!important;
+}
+.ps-library-page .ps-story-row::before{
+  background:linear-gradient(90deg,transparent 28%,rgba(5,31,46,.18) 34%,rgba(5,31,46,.90) 58%,rgba(5,31,46,.98) 100%)!important;
+  z-index:3!important;
+  pointer-events:none!important;
+}
+.ps-library-page .ps-row-scene{
+  display:block!important;
+  position:relative!important;
+  z-index:2!important;
+  grid-column:1!important;
+  grid-row:1!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:146px!important;
+  align-self:stretch!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  filter:saturate(.96) contrast(1.03) brightness(.93)!important;
+}
+.ps-library-page .ps-row-rank{
+  z-index:6!important;
+  left:10px!important;
+  bottom:10px!important;
+}
+.ps-library-page .ps-row-copy{
+  position:relative!important;
+  z-index:5!important;
+  grid-column:2!important;
+  grid-row:1!important;
+  left:auto!important;
+  right:auto!important;
+  align-self:center!important;
+  min-width:0!important;
+  padding:14px 8px 14px 15px!important;
+}
+.ps-library-page .ps-row-title{
+  margin-top:4px!important;
+  font-size:var(--kids-card-title)!important;
+  line-height:1.08!important;
+}
+.ps-library-page .ps-row-ar{
+  margin-top:6px!important;
+  font-size:clamp(18px,4.6vw,23px)!important;
+  line-height:1.18!important;
+}
+.ps-library-page .ps-row-meta{
+  font-size:clamp(9.5px,2.3vw,11px)!important;
+  letter-spacing:.055em!important;
+}
+.ps-library-page .ps-row-go{
+  z-index:6!important;
+  grid-column:3!important;
+  grid-row:1!important;
+  justify-self:center!important;
+  align-self:center!important;
+  width:42px!important;
+  height:42px!important;
+  margin:0!important;
+  font-size:28px!important;
+}
+html[data-kids-age="4-5"] .ps-library-page .ps-story-row{
+  min-height:132px!important;
+  grid-template-columns:minmax(118px,39%) minmax(0,1fr) 58px!important;
+}
+html[data-kids-age="4-5"] .ps-library-page .ps-row-scene{min-height:132px!important}
+html[data-kids-age="4-5"] .ps-library-page .ps-row-meta,
+html[data-kids-age="4-5"] .ps-library-page .ps-row-ar{display:none!important}
+html[data-kids-age="4-5"] .ps-library-page .ps-row-title{
+  margin:0!important;
+  font-size:clamp(23px,6.2vw,28px)!important;
+  line-height:1.08!important;
+}
+html[data-kids-age="4-5"] .ps-library-page .ps-row-go.is-listen{
+  width:48px!important;
+  height:48px!important;
+  border-color:rgba(244,209,122,.58)!important;
+  background:rgba(244,209,122,.14)!important;
+  font-size:18px!important;
+  padding-left:3px!important;
+}
+@media(max-width:390px){
+  .ps-muhammad-card{grid-template-rows:154px auto!important}
+  .ps-muhammad-visual,.ps-muhammad-visual img{min-height:154px!important}
+  .ps-library-page .ps-story-row{grid-template-columns:108px minmax(0,1fr) 44px!important;min-height:142px!important}
+  .ps-library-page .ps-row-scene{min-height:142px!important}
+  .ps-library-page .ps-row-copy{padding:12px 6px 12px 12px!important}
+  html[data-kids-age="4-5"] .ps-library-page .ps-story-row{grid-template-columns:112px minmax(0,1fr) 54px!important;min-height:128px!important}
+  html[data-kids-age="4-5"] .ps-library-page .ps-row-scene{min-height:128px!important}
+}
+@media(min-width:700px){
+  .ps-muhammad-card{grid-template-rows:228px auto!important}
+  .ps-muhammad-visual,.ps-muhammad-visual img{min-height:228px!important}
+  .ps-library-page .ps-library-list{gap:12px!important}
+  .ps-library-page .ps-story-row{grid-template-columns:minmax(180px,32%) minmax(0,1fr) 54px!important;min-height:176px!important}
+  .ps-library-page .ps-row-scene{min-height:176px!important}
+  .ps-library-page .ps-row-copy{padding:18px 16px 18px 22px!important}
+}
