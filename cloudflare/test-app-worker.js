@@ -371,7 +371,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v84-shared-story-controls1157");
+      target.searchParams.set("kv", "kids-shell-v85-story-pages1158");
       return Response.redirect(target.toString(), 301);
     }
 
