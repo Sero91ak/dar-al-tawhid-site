@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v77-nav1147",
   "label": "KIDS · V1.07.81",
   "releasedAt": "2026-10-05T16:58:00+02:00",
-  \"note\": \"Kids v1147: Der tatsächliche Geschichten-spezifische CSS-Override wurde entfernt. Er hatte die Hauptnavigation trotz des ersten Guards weiterhin über eine stärkere :has(#view-stories.active)-Spezifität auf 54 px Tabs und 9,5 px Labels verkleinert. Die Bottom-Navigation kommt jetzt auf Geschichten aus derselben globalen Autorität wie auf Heute, Qurʾān und Eltern; zusätzlich erzwingt der v1147-Guard die identische Geometrie auch gegen alte gecachte Story-Regeln. Inhalte und Player bleiben unverändert.\",
+  "note": "Kids v1147: Der tatsächliche Geschichten-spezifische CSS-Override wurde entfernt. Er hatte die Hauptnavigation trotz des ersten Guards weiterhin über eine stärkere :has(#view-stories.active)-Spezifität auf 54 px Tabs und 9,5 px Labels verkleinert. Die Bottom-Navigation kommt jetzt auf Geschichten aus derselben globalen Autorität wie auf Heute, Qurʾān und Eltern; zusätzlich erzwingt der v1147-Guard die identische Geometrie auch gegen alte gecachte Story-Regeln. Inhalte und Player bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
