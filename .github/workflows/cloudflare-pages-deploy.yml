@@ -436,9 +436,9 @@ jobs:
           status="$(curl -sS -L --retry 3 --retry-delay 2 --max-time 30 -o "$SHARE_JS" -w '%{http_code}' "https://dar-al-tawhid.de/assets/dar-global-share-v1225.js?cb=${GITHUB_SHA}")"
           test "$status" = "200" || { echo "::error::Live Bildbeitrag-Renderer HTTP $status"; exit 1; }
           node --check "$SHARE_JS"
-          grep -F -q 'BILDBEITRAG_CURATED_POOL_V1250' "$SHARE_JS" || { echo "::error::Aktueller Bildbeitrag-Pool live nicht aktiv"; exit 1; }
-          grep -F -q 'GENERAL_SHARE_IMAGE_POOL' "$SHARE_JS" || { echo "::error::Kuratierter Bildbeitrag-Pool live fehlt"; exit 1; }
-          echo "Live Bildbeitrag-Renderer: Syntax + kuratierter Pool v1250 OK"
+          grep -F -q 'BILDBEITRAG_HISTORICAL_REPAIR_V1247' "$SHARE_JS" || { echo "::error::Historischer Bildbeitrag-Fix live nicht aktiv"; exit 1; }
+          grep -F -q 'HISTORICAL_SHARE_FALLBACKS' "$SHARE_JS" || { echo "::error::Historischer Bildbeitrag-Fallback live fehlt"; exit 1; }
+          echo "Live Bildbeitrag-Renderer: Syntax + historischer Fix OK"
 
   # Vergangenheit bleibt in Git. Live darf nur die letzten 4 Tage zurückliegen.
   # Liegt die veröffentlichte Hülle weiter zurück oder auf einer kleineren Build-ID,
