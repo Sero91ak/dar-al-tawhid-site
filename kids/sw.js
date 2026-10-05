@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1118";
-const KIDS_BUILD_ID="kids-shell-v48-hoerwelten1118";
+const CACHE_NAME="dar-al-tawhid-kids-v1119";
+const KIDS_BUILD_ID="kids-shell-v49-single-story-player1119";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -15,20 +15,20 @@ const CORE_PRECACHE=[
   "/kids/data/prophet-stories.json",
   "/kids/data/mubashshirun-stories.json",
   "/kids/data/sahabiyyat-stories.json",
-  "/kids/data/story-hub.json?v=2",
+  "/kids/data/story-hub.json?v=3",
   "/kids/data/dua-kids.json",
   "/kids/data/verified-content.json",
   "/kids/data/alphabet-kids.json",
-  "/kids/prophet-stories.css?v=28",
-  "/kids/prophet-stories.js?v=28-audioonly2",
-  "/kids/mubashshirun-stories.css?v=18",
+  "/kids/prophet-stories.css?v=29",
+  "/kids/prophet-stories.js?v=29",
+  "/kids/mubashshirun-stories.css?v=19",
   "/kids/sahabiyyat-stories.css?v=3",
-  "/kids/mubashshirun-stories.js?v=18",
-  "/kids/sahabiyyat-stories.js?v=5",
+  "/kids/mubashshirun-stories.js?v=19",
+  "/kids/sahabiyyat-stories.js?v=6",
   "/kids/story-follow-reader.css?v=4",
   "/kids/story-follow-reader.js?v=5",
   "/kids/story-hub.css?v=1",
-  "/kids/story-hub.js?v=1",
+  "/kids/story-hub.js?v=2",
   "/kids/kids-age-typography.css?v=4",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=1",
