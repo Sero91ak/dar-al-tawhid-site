@@ -71,7 +71,19 @@ if (!testHtml.includes("window.__DAR_STAGING_APP")) fail("test/index.html: Stagi
 
 for (const marker of [
   'document.body.classList.toggle("is-more-route",isMore)',
-  'document.body.classList.toggle("is-account-route",route.view==="account")'
+  'document.body.classList.toggle("is-account-route",route.view==="account")',
+  'document.body.classList.toggle("is-news-route",route.view==="news")',
+  'document.body.classList.toggle("is-news-detail-route",route.view==="news-detail")',
+  'document.body.classList.toggle("is-zakat-route",route.view==="zakat")',
+  'document.body.classList.toggle("is-settings-route",route.view==="settings")',
+  'document.body.classList.toggle("is-tawhid-guide-route",route.view==="tawhid-guide")',
+  'document.body.classList.toggle("is-ramadan-route",route.view==="ramadan")',
+  'document.body.classList.toggle("is-recent-route",route.view==="recent")',
+  'document.body.classList.toggle("is-saved-route",route.view==="saved")',
+  'document.body.classList.toggle("is-series-route",route.view==="series")',
+  'document.body.classList.toggle("is-about-route",route.view==="about")',
+  'document.body.classList.toggle("is-notifications-route",route.view==="notifications")',
+  'document.body.classList.toggle("is-secondary-editorial-route",isSecondaryEditorial)'
 ]) {
   if (!testHtml.includes(marker)) fail(`test/index.html: Route-State fehlt: ${marker}`);
 }
@@ -132,11 +144,50 @@ if (!fs.existsSync(heroDir)) {
   else ok(`area-heroes-v1290: ${heroFiles.length} permanente WebP-Heroes vorhanden`);
 }
 
+
+const secondaryCssPath = "test/assets/secondary-editorial-v1292.css";
+if (!fs.existsSync(path.join(ROOT, secondaryCssPath))) {
+  fail(`${secondaryCssPath} fehlt`);
+} else {
+  const secondaryCss = read(secondaryCssPath);
+  for (const marker of [
+    "is-secondary-editorial-route",
+    "is-news-route",
+    "is-zakat-route",
+    "is-settings-route",
+    "is-tawhid-guide-route",
+    "is-ramadan-route",
+    "is-recent-route",
+    "is-saved-route",
+    "is-series-route",
+    "is-notifications-route"
+  ]) {
+    if (!secondaryCss.includes(marker)) fail(`${secondaryCssPath}: Marker fehlt: ${marker}`);
+  }
+  ok("Sekundärbereiche: gemeinsame v1292 Editorial-CSS vorhanden");
+}
+
+const frauenJs = read("test/assets/frauen/frauen-fiqh.js");
+const frauenRemoteRefs = (frauenJs.match(/cloudfront\.net|_jwt=/g) || []).length;
+const frauenLocalRefs = (frauenJs.match(/\/test\/assets\/frauen\/share-v1292\/\d+\.webp/g) || []).length;
+if (frauenRemoteRefs) fail(`Frauenbereich: ${frauenRemoteRefs} signierte Remote-Bildreferenzen verblieben`);
+else if (frauenLocalRefs < 10) fail(`Frauenbereich: nur ${frauenLocalRefs} lokale v1292-Bildreferenzen; erwartet 10`);
+else ok(`Frauenbereich: ${frauenLocalRefs} historische Bilder lokal`);
+
+const legacyTopicsCss = read("test/assets/ilm-topics-v1241.css");
+if (/cloudfront\.net|_jwt=/.test(legacyTopicsCss)) fail("ilm-topics-v1241.css enthält noch signierte Remote-Bildreferenz");
+else ok("Legacy Topics CSS: keine signierte Remote-Bildreferenz");
+
 const sw = read("service-worker.js");
 if (!/dar-al-tawhid-offline-light-v\d+/.test(sw)) fail("service-worker.js: CACHE_VERSION fehlt");
 else ok("service-worker.js: CACHE_VERSION vorhanden");
 
 const worker = read("cloudflare/test-app-worker.js");
+if (!worker.includes("secondary-editorial-v1292.css") || !worker.includes("darTestAreaAuthoritiesV1292")) {
+  fail("test-app-worker.js: v1292 Sekundär-Authority fehlt");
+} else {
+  ok("test-app-worker.js: v1292 Sekundär-Authority aktiv");
+}
 if (!worker.includes("Response.redirect")) fail("test-app-worker.js: Root-Redirect fehlt");
 else ok("test-app-worker.js: Root-Redirect vorhanden");
 
