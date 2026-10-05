@@ -151,7 +151,6 @@ function renderCards(){
       '<span class="ms-row-visual" aria-hidden="true">'+
         (src?'<img src="'+esc(src)+'" alt="" data-sy-cover-id="'+esc(item.id)+'" decoding="async" loading="'+(index<4?"eager":"lazy")+'">':'')+
         '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span>'+
-        '<span class="sy-image-name">'+esc(item.name)+'</span>'+
       '</span>'+
       '<span class="ms-row-copy">'+
         '<strong class="ms-row-title">'+esc(item.name)+'</strong>'+
