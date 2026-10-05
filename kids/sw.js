@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1142";
-const KIDS_BUILD_ID="kids-shell-v72-stories1142";
+const CACHE_NAME="dar-al-tawhid-kids-v1143";
+const KIDS_BUILD_ID="kids-shell-v73-stories1143";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -46,12 +46,12 @@ const CORE_PRECACHE=[
   "/kids/sahabiyyat-stories.css?v=5",
   "/kids/mubashshirun-stories.js?v=22",
   "/kids/sahabiyyat-stories.js?v=14",
-  "/kids/story-follow-reader.css?v=5",
+  "/kids/story-follow-reader.css?v=6",
   "/kids/screen-awake.js?v=1",
-  "/kids/story-follow-reader.js?v=9",
-  "/kids/story-hub.css?v=7",
+  "/kids/story-follow-reader.js?v=10",
+  "/kids/story-hub.css?v=8",
   "/kids/stories-home-v1133.css?v=1135-2",
-  "/kids/story-hub.js?v=14",
+  "/kids/story-hub.js?v=15",
   "/kids/kids-age-typography.css?v=4",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=3",
