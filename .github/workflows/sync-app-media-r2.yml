@@ -1,4 +1,5 @@
 name: App Media R2 Inventory and Sync
+# post-compression inventory v2
 
 on:
   pull_request:
@@ -41,10 +42,25 @@ jobs:
           audio={".m4a",".mp3",".aac",".ogg",".wav"}
           video={".mp4"}
           rows=[]
+          def protected(p: Path):
+              s=str(p).replace("\\","/").lower()
+              name=p.name.lower()
+              return (
+                  "/app-icons/" in s or
+                  "/brand/seals/" in s or
+                  "/masters/" in s or
+                  "/master/" in s or
+                  "/originals/" in s or
+                  "/raw/" in s or
+                  "/sources/" in s or
+                  "logo" in name or
+                  "watermark" in name or
+                  "favicon" in name
+              )
           for root in roots:
               if not root.exists(): continue
               for p in root.rglob("*"):
-                  if not p.is_file(): continue
+                  if not p.is_file() or protected(p): continue
                   ext=p.suffix.lower()
                   size=p.stat().st_size
                   threshold=None
