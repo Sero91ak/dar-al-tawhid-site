@@ -718,7 +718,10 @@
       "exactTextReuse": true,
       "editedTextUsesIncrementalRenderer": true,
       "visibleInPronunciationLearningState": true
-    }
+    },
+    "storyMasterPolicy": "one-complete-long-master-per-story",
+    "storyAgePolicy": "presentation-only-no-shortening",
+    "storyLengthMetricsVisible": true
   },
   "audioFormat": "wav-pcm16-mono",
   "legacyFloatWavMigration": true,
@@ -1552,7 +1555,9 @@
       "kids_story",
       "Prophetengeschichten",
       "Mubaschschirūn-Geschichten",
-      "Kids-Geschichten"
+      "Kids-Geschichten",
+      "Ṣaḥābiyyāt-Geschichten",
+      "zukünftige biografische Kids-Geschichten"
     ],
     "excludes": [
       "Qurʾān-Rezitation",
@@ -1562,7 +1567,9 @@
     "noAgeShortening": true,
     "biographyLongForm": true,
     "biographyMinimumMasterWords": 850,
-    "ageChangesPresentationOnly": true
+    "ageChangesPresentationOnly": true,
+    "singleMasterAcrossAges": true,
+    "futureBiographyMinimumMasterWords": 850
   },
   "mobileVoiceApp": {
     "enabled": true,
@@ -1864,7 +1871,9 @@
     "source": "/kids/data/sahabiyyat-stories.json",
     "currentMasterWordRange": "884–993",
     "sameMasterAcrossAges": true,
-    "masterDataVersion": 23
+    "masterDataVersion": 23,
+    "kidsDataVersion": 23,
+    "allAgeSlotsUseIdenticalMaster": true
   },
   "engineConnectionRepair": {
     "enabled": true,
