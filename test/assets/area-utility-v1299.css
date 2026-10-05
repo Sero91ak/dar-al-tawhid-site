@@ -1,0 +1,452 @@
+/* DĀR AL TAWḤĪD · Test-App utility/service surfaces · v1299
+   Open editorial hierarchy for remaining utility routes.
+   Test-only: no visitor-app styles are changed. */
+
+html[data-theme] body:is(
+  .is-calendar-route,
+  .is-ramadan-route,
+  .is-notifications-route,
+  .is-settings-route,
+  .is-account-route,
+  .is-about-route,
+  .is-news-route,
+  .is-news-detail-route,
+  .is-quran-topic-route
+) #appView{
+  padding-bottom:calc(128px + env(safe-area-inset-bottom,0px))!important;
+}
+
+/* Settings: page hero first, then one quiet settings flow. */
+body.is-settings-route .settings-one-page{
+  width:min(900px,calc(100% - 28px))!important;
+  max-width:none!important;
+  margin:0 auto!important;
+  padding:0 0 24px!important;
+}
+body.is-settings-route #dar-setup-hub{
+  width:100%!important;
+  margin:0 0 26px!important;
+  padding:0 0 24px!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 18%,var(--line2))!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-settings-route #dar-setup-hub .dar-setup-hub__head{
+  margin:0 0 14px!important;
+  padding:0!important;
+}
+body.is-settings-route #dar-setup-hub .dar-setup-hub__title{
+  margin:0!important;
+  color:var(--text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(1.45rem,4.8vw,2rem)!important;
+  line-height:1.08!important;
+}
+body.is-settings-route #dar-setup-hub .dar-setup-hub__sub{
+  margin:6px 0 0!important;
+  color:var(--muted)!important;
+  font-size:.92rem!important;
+  line-height:1.45!important;
+}
+body.is-settings-route #dar-setup-hub .dar-setup-hub__list{
+  display:block!important;
+  border:0!important;
+  background:transparent!important;
+}
+body.is-settings-route #dar-setup-hub .dar-setup-hub__row{
+  min-height:64px!important;
+  padding:12px 0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--line2) 62%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-settings-route #dar-setup-hub .dar-setup-hub__row:first-child{border-top:0!important}
+body.is-settings-route #dar-setup-hub .dar-setup-hub__btn{
+  min-height:38px!important;
+  padding:8px 13px!important;
+  border-radius:999px!important;
+}
+
+/* Notification center: the page already has a real hero; inner summary is not a second card-hero. */
+body:is(.is-notifications-route,.is-settings-route) .notification-center-page{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-hero{
+  margin:0 0 22px!important;
+  padding:0 0 20px!important;
+  overflow:visible!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 18%,var(--line2))!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-hero::after{display:none!important}
+body:is(.is-notifications-route,.is-settings-route) .notification-hero__icon{
+  width:46px!important;height:46px!important;
+  border-radius:50%!important;
+  box-shadow:none!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-hero h2{
+  font-size:clamp(1.5rem,5.5vw,2rem)!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-hero p{
+  font-size:.9rem!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-hero__count{
+  width:auto!important;height:auto!important;
+  min-width:52px!important;min-height:40px!important;
+  padding:7px 10px!important;
+  border-radius:14px!important;
+  background:transparent!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-section{
+  margin:0!important;
+  padding:24px 0 22px!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-section__head{
+  margin:0 0 14px!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-location,
+body:is(.is-notifications-route,.is-settings-route) .notification-settings-list{
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-row{
+  padding-left:0!important;
+  padding-right:0!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-prayer-grid{
+  gap:0!important;
+  border-top:1px solid color-mix(in srgb,var(--line2) 60%,transparent)!important;
+  border-bottom:1px solid color-mix(in srgb,var(--line2) 60%,transparent)!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-prayer{
+  border:0!important;
+  border-right:1px solid color-mix(in srgb,var(--line2) 45%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body:is(.is-notifications-route,.is-settings-route) .notification-prayer:last-child{border-right:0!important}
+
+/* Settings controls: flatten the old premium cards into editorial sections. */
+body.is-settings-route :is(.theme-switch-panel,.app-icon-panel,.app-font-panel,.settings-live-row){
+  margin:0!important;
+  padding:20px 0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--line2) 56%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-settings-route .settings-section-label{
+  margin:28px 0 8px!important;
+  padding:0!important;
+}
+body.is-settings-route .settings-save-note{
+  margin:22px 0 0!important;
+  padding-top:18px!important;
+  border-top:1px solid color-mix(in srgb,var(--line2) 56%,transparent)!important;
+}
+
+/* Account: one readable form, not a floating premium card. */
+body.is-account-route .account-panel{
+  width:min(780px,calc(100% - 28px))!important;
+  margin:0 auto!important;
+  padding:4px 0 24px!important;
+  gap:18px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-account-route .account-panel h3{
+  color:var(--text)!important;
+  font-size:clamp(1.65rem,5.8vw,2.35rem)!important;
+}
+body.is-account-route .account-panel p{
+  max-width:42rem!important;
+  font-size:.98rem!important;
+  line-height:1.62!important;
+}
+body.is-account-route .account-summary{
+  gap:0!important;
+  border-top:1px solid color-mix(in srgb,var(--line2) 58%,transparent)!important;
+  border-bottom:1px solid color-mix(in srgb,var(--line2) 58%,transparent)!important;
+}
+body.is-account-route .account-summary-card{
+  min-height:82px!important;
+  padding:16px 14px!important;
+  border:0!important;
+  border-right:1px solid color-mix(in srgb,var(--line2) 45%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+body.is-account-route .account-summary-card:last-child{border-right:0!important}
+body.is-account-route .account-form{
+  gap:10px!important;
+}
+body.is-account-route .account-form input{
+  min-height:52px!important;
+  border-radius:14px!important;
+  background:color-mix(in srgb,var(--card) 42%,transparent)!important;
+  color:var(--text)!important;
+}
+body.is-account-route .account-status{
+  padding:14px 0 0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--line2) 54%,transparent)!important;
+  border-radius:0!important;
+}
+
+/* About: compact source-order rail + open numbered rows. */
+body.is-about-route .about-page--smart{
+  width:min(820px,calc(100% - 28px))!important;
+  margin:0 auto!important;
+  padding:0 0 18px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-about-route .about-smart-overview{
+  display:flex!important;
+  gap:0!important;
+  overflow-x:auto!important;
+  padding:0 0 14px!important;
+  margin:0 0 4px!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 18%,var(--line2))!important;
+  scrollbar-width:none;
+}
+body.is-about-route .about-smart-overview::-webkit-scrollbar{display:none}
+body.is-about-route .about-smart-chip{
+  flex:0 0 auto!important;
+  min-width:112px!important;
+  padding:10px 14px!important;
+  border:0!important;
+  border-right:1px solid color-mix(in srgb,var(--line2) 50%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-about-route .about-smart-row{
+  display:grid!important;
+  grid-template-columns:48px minmax(0,1fr)!important;
+  gap:14px!important;
+  padding:18px 0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--line2) 52%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-about-route .about-smart-row:first-child{border-top:0!important}
+body.is-about-route .about-smart-step{
+  width:42px!important;height:42px!important;
+  border-radius:50%!important;
+  background:color-mix(in srgb,var(--gold2) 8%,transparent)!important;
+}
+
+/* News: list rows instead of nested cards. */
+body.is-news-route .current-focus{
+  width:min(860px,calc(100% - 28px))!important;
+  margin:0 auto!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-news-route .current-focus-list{gap:0!important}
+body.is-news-route .current-focus-row{
+  min-height:78px!important;
+  padding:14px 0!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--line2) 58%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+body.is-news-route .current-focus-row:hover{
+  transform:none!important;
+  filter:none!important;
+  border-color:color-mix(in srgb,var(--gold2) 28%,var(--line2))!important;
+}
+body.is-news-route .current-focus-icon{
+  border:0!important;
+  background:color-mix(in srgb,var(--gold2) 7%,transparent)!important;
+  box-shadow:none!important;
+}
+body.is-news-detail-route .news-detail-article{
+  padding-top:0!important;
+}
+body.is-news-detail-route .news-detail-article .article-title{
+  text-align:left!important;
+  margin:0 0 12px!important;
+}
+body.is-news-detail-route .news-detail-article .article-meta{
+  justify-content:flex-start!important;
+  margin:8px 0 20px!important;
+}
+body.is-news-detail-route .news-detail-article .statement{
+  padding:22px 0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2) 18%,var(--line2))!important;
+  border-bottom:1px solid color-mix(in srgb,var(--line2) 55%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--text)!important;
+  text-align:left!important;
+}
+
+/* Ramaḍān: one seasonal reading flow, not multiple glossy panels. */
+body.is-ramadan-route :is(.ramadan-panel,.calendar-panel){
+  width:min(920px,calc(100% - 28px))!important;
+  margin:0 auto 8px!important;
+  padding:22px 0!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 18%,var(--line2))!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-ramadan-route .ramadan-panel h3,
+body.is-ramadan-route .calendar-title h3{
+  color:var(--text)!important;
+}
+body.is-ramadan-route .ramadan-countdown{
+  color:var(--gold2)!important;
+  font-size:clamp(2rem,8vw,3.5rem)!important;
+}
+body.is-ramadan-route .event-list{
+  grid-template-columns:1fr!important;
+  gap:0!important;
+}
+body.is-ramadan-route .event-card{
+  padding:14px 0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--line2) 52%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+body.is-ramadan-route .event-date,
+body.is-ramadan-route .event-name{color:var(--text)!important}
+body.is-ramadan-route .section-block{
+  width:min(920px,calc(100% - 28px))!important;
+  margin:0 auto!important;
+  padding:22px 0!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--line2) 52%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Qurʾān topics: rows optimized for reading and tapping on iPhone. */
+body.is-quran-topic-route .quran-topic-page,
+body.is-quran-topic-route .quran-topic-detail{
+  padding-top:0!important;
+}
+body.is-quran-topic-route .quran-topic-group{
+  margin:0!important;
+  padding:20px 0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--line2) 52%,transparent)!important;
+}
+body.is-quran-topic-route .quran-topic-grid,
+body.is-quran-topic-route .quran-topic-items{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:0!important;
+}
+body.is-quran-topic-route :is(.quran-topic-card,.quran-topic-ayah-card){
+  padding:16px 0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--line2) 52%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-quran-topic-route :is(.quran-topic-card,.quran-topic-ayah-card):first-child{border-top:0!important}
+
+/* Calendar already has a timeline; remove only the remaining detached-card treatment. */
+body.is-calendar-route .cal-tl-highlight{
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 18%,var(--line2))!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-calendar-route .cal-tl-month{
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--line2) 52%,transparent)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+@media(max-width:700px){
+  body.is-settings-route .settings-one-page,
+  body.is-account-route .account-panel,
+  body.is-about-route .about-page--smart,
+  body.is-news-route .current-focus,
+  body.is-ramadan-route :is(.ramadan-panel,.calendar-panel,.section-block){
+    width:calc(100% - 24px)!important;
+  }
+
+  body:is(.is-notifications-route,.is-settings-route) .notification-hero__top{
+    grid-template-columns:42px minmax(0,1fr) auto!important;
+    gap:10px!important;
+  }
+  body:is(.is-notifications-route,.is-settings-route) .notification-prayer-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body:is(.is-notifications-route,.is-settings-route) .notification-prayer{
+    border-right:0!important;
+    border-bottom:1px solid color-mix(in srgb,var(--line2) 45%,transparent)!important;
+  }
+
+  body.is-account-route .account-form{
+    grid-template-columns:1fr!important;
+  }
+  body.is-account-route .account-summary{
+    grid-template-columns:1fr!important;
+  }
+  body.is-account-route .account-summary-card{
+    border-right:0!important;
+    border-bottom:1px solid color-mix(in srgb,var(--line2) 45%,transparent)!important;
+  }
+  body.is-account-route .account-summary-card:last-child{border-bottom:0!important}
+
+  body.is-about-route .about-smart-row{
+    grid-template-columns:42px minmax(0,1fr)!important;
+    gap:12px!important;
+  }
+
+  body.is-news-route .current-focus-row{
+    grid-template-columns:36px minmax(0,1fr) auto!important;
+    gap:10px!important;
+  }
+}
+
+@media(min-width:900px){
+  body.is-settings-route .settings-one-page{width:min(960px,calc(100% - 64px))!important}
+  body:is(.is-notifications-route,.is-settings-route) .notification-prayer-grid{
+    grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  }
+  body.is-ramadan-route .event-list{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    column-gap:28px!important;
+  }
+}
