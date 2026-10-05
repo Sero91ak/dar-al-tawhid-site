@@ -41,9 +41,10 @@ function ageKey(){return age().replace("–","-")}
 function isAudioOnlyAge(){return age()==="4–5"}
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){
-  if(active&&(v==="listen"||v==="both")){openUniversalAudio();return}
   try{localStorage.setItem(MODE_KEY,v)}catch(_){}
-  renderModeButtons();applyMode()
+  renderModeButtons();
+  if(active&&(v==="listen"||v==="both")){openUniversalAudio(v);return}
+  applyMode()
 }
 function uniqueItems(list){
   const seen=new Set();
@@ -409,19 +410,20 @@ function updatePlayButton(){
   b.disabled=!meta?.url;
   b.textContent=meta?.url?"Hören":"Audio folgt";
 }
-function openUniversalAudio(){
+function openUniversalAudio(requestedMode=mode()){
   const item=active;if(!item)return false;
   const meta=audioMeta(item),note=$("#psVoiceNote");
   if(!meta?.url){if(note)note.textContent="Audio folgt.";updatePlayButton();return false}
   const hub=window.DARKidsStoryHub;
   if(!hub?.openStory){if(note)note.textContent="Der Hörplayer wird geladen.";return false}
   const id=item.id;
+  const nextMode=isAudioOnlyAge()||requestedMode==="listen"?"listen":"follow";
   closeStory();
   closeLibrary();
-  hub.openStory("prophets",id);
+  hub.openStory("prophets",id,{mode:nextMode});
   return true;
 }
-async function toggleAudio(){return openUniversalAudio()}
+async function toggleAudio(){return openUniversalAudio(mode()==="read"?"listen":mode())}
 function stopAudio(){}
 async function init(){
   if(!ensureUi())return;
