@@ -1024,6 +1024,39 @@
         font-weight:800!important;
         letter-spacing:.05em!important;
       }
+      /* QSRC_STATE_SURFACES_V1279 */
+      .qsrc-page--state .qsrc-shell,
+      .qsrc-page--state .qsrc-detail{
+        width:min(1040px,calc(100% - 30px))!important;
+        margin:0 auto!important;
+        padding-bottom:calc(118px + env(safe-area-inset-bottom))!important;
+      }
+      .qsrc-page--state .qsrc-loading,
+      .qsrc-page--state .qsrc-error,
+      .qsrc-page--state .qsrc-empty{
+        min-height:150px!important;
+        display:grid!important;
+        place-items:center!important;
+        align-content:center!important;
+        gap:12px!important;
+        padding:28px 18px!important;
+        border:0!important;
+        border-top:1px solid color-mix(in srgb,var(--gold2,#efd78e) 14%,transparent)!important;
+        border-radius:0!important;
+        background:transparent!important;
+        color:var(--muted2,#bdb7aa)!important;
+        text-align:center!important;
+      }
+      .qsrc-page--state .qsrc-error p{margin:0!important;max-width:34rem!important;line-height:1.55!important}
+      .qsrc-page--state .qsrc-retry{
+        min-height:42px!important;
+        padding:0 16px!important;
+        border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 24%,transparent)!important;
+        border-radius:999px!important;
+        background:color-mix(in srgb,var(--gold2,#efd78e) 7%,transparent)!important;
+        color:var(--gold2,#efd78e)!important;
+        font-weight:800!important;
+      }
       @media(min-width:980px){
         .qsrc-page--overview .qsrc-lib-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:22px 18px!important}
       }
@@ -1196,11 +1229,11 @@
   }
 
   function renderLoading() {
-    return `${setPageHeader("Quellenbibliothek", "Geprüfte historische Werke und zitierte Gelehrte", "Quellenbibliothek")}<section class="qsrc-shell"><div class="qsrc-loading">Quellenbibliothek wird geladen…</div></section>`;
+    return `<div class="qsrc-page qsrc-page--overview qsrc-page--state">${setPageHeader("Quellenbibliothek", "Geprüfte historische Werke und zitierte Gelehrte", "Quellenbibliothek")}<section class="qsrc-shell"><div class="qsrc-loading">Quellenbibliothek wird geladen…</div></section></div>`;
   }
 
   function renderError() {
-    return `${setPageHeader("Quellenbibliothek", "Geprüfte historische Werke und zitierte Gelehrte", "Quellenbibliothek")}<section class="qsrc-shell"><div class="qsrc-error"><p>Die Quellenbibliothek konnte momentan nicht geladen werden.</p><button type="button" class="qsrc-retry" data-qsrc-retry>Erneut versuchen</button></div></section>`;
+    return `<div class="qsrc-page qsrc-page--overview qsrc-page--state">${setPageHeader("Quellenbibliothek", "Geprüfte historische Werke und zitierte Gelehrte", "Quellenbibliothek")}<section class="qsrc-shell"><div class="qsrc-error"><p>Die Quellenbibliothek konnte momentan nicht geladen werden.</p><button type="button" class="qsrc-retry" data-qsrc-retry>Erneut versuchen</button></div></section></div>`;
   }
 
   function categoryBookCounts() {
@@ -1363,7 +1396,7 @@
 
     const book = state.booksById.get(String(bookId || ""));
     if (!book) {
-      return `<div class="qsrc-page qsrc-page--detail">${setPageHeader("Werk nicht gefunden", "Dieses Buch ist nicht in der geprüften Quellenbibliothek.", "Quellenbibliothek")}<section class="qsrc-empty">Das Werk konnte nicht gefunden werden.</section>`;
+      return `<div class="qsrc-page qsrc-page--detail qsrc-page--state">${setPageHeader("Werk nicht gefunden", "Dieses Buch ist nicht in der geprüften Quellenbibliothek.", "Quellenbibliothek")}<section class="qsrc-detail"><div class="qsrc-empty">Das Werk konnte nicht gefunden werden.</div></section></div>`;
     }
 
     const aliases = (book.aliases || []).filter((alias) => alias && !isHiddenPlaceholder(alias));
@@ -1399,7 +1432,7 @@
 
     const scholar = state.scholarsById.get(String(scholarId || ""));
     if (!scholar) {
-      return `<div class="qsrc-page qsrc-page--detail">${setPageHeader("Gelehrter nicht gefunden", "Dieser Gelehrte ist nicht in der geprüften Quellenbibliothek.", "Quellenbibliothek")}<section class="qsrc-empty">Der Gelehrte konnte nicht gefunden werden.</section>`;
+      return `<div class="qsrc-page qsrc-page--detail qsrc-page--state">${setPageHeader("Gelehrter nicht gefunden", "Dieser Gelehrte ist nicht in der geprüften Quellenbibliothek.", "Quellenbibliothek")}<section class="qsrc-detail"><div class="qsrc-empty">Der Gelehrte konnte nicht gefunden werden.</div></section></div>`;
     }
 
     const works = (scholar.citedWorkIds || [])
