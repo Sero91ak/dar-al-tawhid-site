@@ -201,7 +201,8 @@ function create(options){
   }
   function scrollReaderNode(node,instant=false){
     if(!node||!readEl)return;
-    const top=Math.max(0,node.offsetTop-(readEl.clientHeight-node.offsetHeight)/2);
+    const rr=readEl.getBoundingClientRect(),nr=node.getBoundingClientRect();
+    const top=Math.max(0,readEl.scrollTop+(nr.top-rr.top)-(readEl.clientHeight-nr.height)/2);
     try{readEl.scrollTo({top,behavior:instant?"auto":"smooth"})}catch(_){readEl.scrollTop=top}
   }
   function mark(index,forceScroll){
