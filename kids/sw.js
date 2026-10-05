@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1147";
-const KIDS_BUILD_ID="kids-shell-v77-nav1147";
+const CACHE_NAME="dar-al-tawhid-kids-v1148";
+const KIDS_BUILD_ID="kids-shell-v78-nav1148";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -50,11 +50,10 @@ const CORE_PRECACHE=[
   "/kids/screen-awake.js?v=1",
   "/kids/story-follow-reader.js?v=12",
   "/kids/story-hub.css?v=9",
-  "/kids/stories-home-v1133.css?v=1135-2",
-  "/kids/stories-home-v1138.css?v=1147",
+  "/kids/stories-home-v1133.css?v=1148",
+  "/kids/stories-home-v1138.css?v=1148",
   "/kids/story-hub.js?v=17",
   "/kids/kids-age-typography.css?v=4",
-  "/kids/bottom-nav-global-v1147.css?v=1147",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=3",
   "/kids/content-studio-feed.js?v=studio6",
@@ -118,7 +117,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/assets/sahaba-mubashshirun/sad.jpg",
   "/kids/assets/sahaba-mubashshirun/said.jpg",
   "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg",
-  "/kids/stories-final-v1088.css?v=1088",
+  "/kids/stories-final-v1088.css?v=1148",
   "/kids/assets/prophet-scenes/library.webp",
   "/kids/assets/prophet-scenes/garden.webp",
   "/kids/assets/prophet-scenes/ocean.webp",
@@ -256,6 +255,10 @@ self.addEventListener("fetch",function(event){
     return;
   }
   if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  if(url.pathname==="/kids/stories-home-v1133.css"||url.pathname==="/kids/stories-home-v1138.css"||url.pathname==="/kids/stories-final-v1088.css"){
     event.respondWith(networkFirst(request));
     return;
   }
