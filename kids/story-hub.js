@@ -78,8 +78,7 @@ function stopOtherPlayers(){
   try{window.DARKidsSahabiyyat?.stop?.()}catch(_){}
 }
 function ensureEntry(){
-  const oldEntry=document.getElementById("ghEntry");
-  if(oldEntry)oldEntry.remove();
+  document.getElementById("ghEntry")?.remove();
 }
 function ensureUi(){
   if($("#ghWorld"))return;
