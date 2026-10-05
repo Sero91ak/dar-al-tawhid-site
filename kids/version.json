@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v89-fullbleed-story-cards1162",
   "label": "KIDS · V1.07.90",
   "releasedAt": "2026-10-05T19:44:00+02:00",
-  "note": "Story-Card-System v3: Propheten, Ṣaḥābah und Ṣaḥābiyyāt verwenden wieder vollflächig eingebettete Bilder innerhalb der gesamten Kartenkapsel. Die harte Bild/Text-Spalte ist aufgehoben; ein weicher Verlauf schafft eine einheitliche, gut lesbare Textzone. Nummern- und Play-Buttons sitzen in allen drei Bibliotheken identisch, sichtbar aber zurückhaltend. Player-, Audio-, Mitlese- und Inhaltslogik bleiben unverändert.",
+  "note": "Story-Card-System v2 aktiviert und cache-sicher ausgerollt: Propheten, Mubaschschirūn und Ṣaḥābiyyāt nutzen die gemeinsame nummerierte Kinderkarten-Hierarchie; Muḥammad-Hero kompakter, CTA ohne Card-in-Card; 4–5 Jahre bleiben auf Bild, Name, Nummer und große Hör-Aktion reduziert. Direkter Main-Commit erzwingt den Kids-Live-Deploy. Player-, Mitlese- und Bottom-Navigation bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -659,5 +659,6 @@
     "storyLibraryRankBadge": "shared-bottom-left",
     "storyLibraryHardImageSplit": false
   },
-  "updatedAt": "2026-10-05"
+  "updatedAt": "2026-10-05",
+  "deployTrigger": "2026-10-05T21:17:00+02:00"
 }
