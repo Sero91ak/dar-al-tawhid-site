@@ -64,6 +64,17 @@ opt_image() {
         replace_if_smaller "$f" "$tmp"
       fi
       rm -f "$pre"
+      # Zweiter Pass nur für weiterhin sehr große Laufzeit-PNGs.
+      # Ziel: unter 1,2 MB bleiben, ohne normale Assets unnötig aggressiv anzufassen.
+      if (( $(stat -c%s "$f") > 1200000 )); then
+        local tight_pre="$TMP_DIR/$(basename "$f").tight.pre.png"
+        local tight="$TMP_DIR/$(basename "$f").tight.png"
+        convert "$f" -auto-orient -strip -resize '2000x2000>' "$tight_pre" 2>/dev/null || cp "$f" "$tight_pre"
+        if pngquant --quality=52-76 --speed 1 --strip --force --output "$tight" -- "$tight_pre" >/dev/null 2>&1; then
+          replace_if_smaller "$f" "$tight"
+        fi
+        rm -f "$tight_pre" "$tight"
+      fi
       ;;
     webp)
       tmp="$TMP_DIR/$(basename "$f").webp"
