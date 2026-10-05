@@ -1,7 +1,7 @@
 {
-  "version": "2.9.113",
-  "updatedAt": "2026-10-05T12:38:00+02:00",
-  "deployTrigger": "voice-studio-2.9.116-cloud-release-updater",
+  "version": "2.9.116",
+  "updatedAt": "2026-10-05T12:56:00+02:00",
+  "deployTrigger": "voice-studio-2.9.116-unified-mac-mobile-release",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v84",
@@ -20,7 +20,7 @@
   "browserRequiredAfterInstall": false,
   "serviceWorker": "/voice-studio/sw-v11.js",
   "setupSource": "github-contents-api",
-  "engineVersion": "2.9.113",
+  "engineVersion": "2.9.116",
   "modelWarmup": true,
   "mpsFallback": true,
   "renderProgress": true,
@@ -486,7 +486,8 @@
     "elevenLabsDirectMobileCore": true,
     "adamIdrisReferenceCorpus": true,
     "smoothDuaQuizProfiles": true,
-    "pronunciationDictionaryLocatorSupport": true
+    "pronunciationDictionaryLocatorSupport": true,
+    "unifiedReleaseVersion": "2.9.116"
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -1369,7 +1370,7 @@
     "pronunciationPreviewNoLongFormQaCascade": true,
     "rootCauseConfirmed": "alphabet-audio-studio auto-started full 140 alphabet + quiz + greeting batch on studio load, monopolizing the shared local synthesis worker",
     "alphabetBatchDoesNotAutoStart": true,
-    "engineVersion": "2.9.113",
+    "engineVersion": "2.9.116",
     "engineHealthExposesVersion": true,
     "uiRejectsStaleEngineVersion": true,
     "nativeMacRestartsStaleEngine": true,
@@ -1484,7 +1485,8 @@
     "mobileShellFreshnessRegression": true,
     "elevenLabsMobileCloudRegression": true,
     "adamIdrisReferenceCorpusRegression": true,
-    "duaQuizProfileRegression": true
+    "duaQuizProfileRegression": true,
+    "macVersion": "2.9.116"
   },
   "mubashshirunStories": {
     "enabled": true,
@@ -1882,5 +1884,6 @@
       "ELEVENLABS_PRONUNCIATION_DICTIONARY_VERSION_ID"
     ],
     "profileTuningFromOwnerStoryReferences": true
-  }
+  },
+  "macAppVersion": "2.9.116"
 }
