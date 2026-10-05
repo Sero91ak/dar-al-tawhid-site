@@ -1,0 +1,29 @@
+{
+  "name": "DĀR AL TAWḤĪD Voice",
+  "short_name": "DĀR Voice",
+  "description": "Private Sprachproduktion für DĀR AL TAWḤĪD",
+  "id": "/voice-studio/mobile.html",
+  "start_url": "/voice-studio/mobile.html?app=1&cloud=1",
+  "scope": "/voice-studio/",
+  "display": "standalone",
+  "display_override": [
+    "standalone"
+  ],
+  "orientation": "any",
+  "background_color": "#f7f7f5",
+  "theme_color": "#f7f7f5",
+  "icons": [
+    {
+      "src": "/voice-studio/voice-studio-icon.png?v=29111",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/voice-studio/voice-studio-icon.png?v=29111",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
