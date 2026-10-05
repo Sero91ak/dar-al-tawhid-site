@@ -116,11 +116,11 @@ jobs:
               current_start=None
               max_internal=0.0
               for line in (proc.stderr or "").splitlines():
-                  m=re.search(r"silence_start:\\s*([0-9.]+)",line)
+                  m=re.search(r"silence_start:\s*([0-9.]+)",line)
                   if m:
                       current_start=float(m.group(1))
                       continue
-                  m=re.search(r"silence_end:\\s*([0-9.]+).*silence_duration:\\s*([0-9.]+)",line)
+                  m=re.search(r"silence_end:\s*([0-9.]+).*silence_duration:\s*([0-9.]+)",line)
                   if not m:
                       continue
                   end=float(m.group(1))
@@ -378,7 +378,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add             kids/data/quiz-audio.json             kids/data/dua-audio.json             kids/assets/kids-quiz-audio             kids/assets/kids-dua-audio
+          git add kids/data/quiz-audio.json kids/data/dua-audio.json kids/assets/kids-quiz-audio kids/assets/kids-dua-audio
           if git diff --cached --quiet; then
             echo "Kids owner voice packs already current."
             exit 0
