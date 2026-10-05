@@ -1,6 +1,6 @@
 {
-  "version": 23,
-  "updatedAt": "2026-10-05T13:45:00+02:00",
+  "version": 24,
+  "updatedAt": "2026-10-05T12:54:00.000Z",
   "title": "Ṣaḥābiyyāt",
   "subtitle": "Frauen der ersten Generation – Glaube, Wissen, Standhaftigkeit und Dienst",
   "policy": {
@@ -149,22 +149,79 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/sahabiyyat-story-audio/aishah/master-ce85c82fa65a9d.mp3",
+          "durationSec": 431.52,
+          "bytes": 2589356,
+          "sha256": "ce85c82fa65a9d20b4a82556d45338c8351aa43a9713b96eda47606661e56c20",
+          "mime": "audio/mpeg",
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "DĀR Voice Studio direct owner-audio upload",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "sourceFile": "Sahabiyyah ʿĀʾišah bint Abī Bakr Geschichte.mp3",
+          "manual": true,
+          "manualUpload": true,
+          "ownerApproved": true,
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-05T12:54:00.000Z",
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "age": "4-5"
         },
         "6-8": {
-          "status": "audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/sahabiyyat-story-audio/aishah/master-ce85c82fa65a9d.mp3",
+          "durationSec": 431.52,
+          "bytes": 2589356,
+          "sha256": "ce85c82fa65a9d20b4a82556d45338c8351aa43a9713b96eda47606661e56c20",
+          "mime": "audio/mpeg",
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "DĀR Voice Studio direct owner-audio upload",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "sourceFile": "Sahabiyyah ʿĀʾišah bint Abī Bakr Geschichte.mp3",
+          "manual": true,
+          "manualUpload": true,
+          "ownerApproved": true,
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-05T12:54:00.000Z",
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "age": "6-8"
         },
         "9-10": {
-          "status": "audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/sahabiyyat-story-audio/aishah/master-ce85c82fa65a9d.mp3",
+          "durationSec": 431.52,
+          "bytes": 2589356,
+          "sha256": "ce85c82fa65a9d20b4a82556d45338c8351aa43a9713b96eda47606661e56c20",
+          "mime": "audio/mpeg",
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "DĀR Voice Studio direct owner-audio upload",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "sourceFile": "Sahabiyyah ʿĀʾišah bint Abī Bakr Geschichte.mp3",
+          "manual": true,
+          "manualUpload": true,
+          "ownerApproved": true,
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-05T12:54:00.000Z",
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "age": "9-10"
         }
       },
       "cover": "/kids/assets/sahabiyyat/aishah-v1124.webp?v=1124",
@@ -182,7 +239,19 @@
       },
       "wordCount": 978,
       "estimatedNarrationSec": 399,
-      "estimatedNarrationLabel": "ca. 6:39 Min. bei 147 WPM"
+      "estimatedNarrationLabel": "ca. 6:39 Min. bei 147 WPM",
+      "voiceProduction": {
+        "publishedAges": [
+          "4-5",
+          "6-8",
+          "9-10"
+        ],
+        "status": "audio-complete",
+        "lastPublishedAt": "2026-10-05T12:54:00.000Z",
+        "singleMasterAudio": true,
+        "masterAudioUrl": "/kids/assets/sahabiyyat-story-audio/aishah/master-ce85c82fa65a9d.mp3",
+        "masterAgeRange": "4-10"
+      }
     },
     {
       "id": "fatimah",

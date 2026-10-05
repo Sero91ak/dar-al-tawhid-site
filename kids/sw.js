@@ -248,7 +248,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0||url.pathname.indexOf("/kids/assets/kids-owner-voice/")===0||url.pathname.indexOf("/kids/assets/kids-quiz-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-audio/")===0){
+  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0||url.pathname.indexOf("/kids/assets/sahabiyyat-story-audio/")===0||url.pathname.indexOf("/kids/assets/kids-owner-voice/")===0||url.pathname.indexOf("/kids/assets/kids-quiz-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-audio/")===0){
     event.respondWith(fetch(request));
     return;
   }

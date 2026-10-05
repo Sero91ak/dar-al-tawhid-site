@@ -4,7 +4,7 @@ const REGISTRY_URL="/kids/data/story-hub.json?v=5";
 let SOURCES=[
   {id:"prophets",label:"Propheten",kicker:"GESCHICHTEN DER PROPHETEN",url:"/kids/data/prophet-stories.json?v=29",kind:"prophet"},
   {id:"sahaba",label:"Ṣaḥābah",kicker:"DIE GEFÄHRTEN",url:"/kids/data/mubashshirun-stories.json?v=19",kind:"sahabi"},
-  {id:"sahabiyyat",label:"Ṣaḥābiyyāt",kicker:"DIE BESTEN FRAUEN IHRER ZEIT",url:"/kids/data/sahabiyyat-stories.json?v=1131",kind:"sahabiyyah"}
+  {id:"sahabiyyat",label:"Ṣaḥābiyyāt",kicker:"DIE BESTEN FRAUEN IHRER ZEIT",url:"/kids/data/sahabiyyat-stories.json?v=1137",kind:"sahabiyyah"}
 ];
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
