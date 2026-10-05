@@ -322,3 +322,70 @@ html[data-view="stories"] .bottom-nav{
   #view-stories.ps-stories-home .story-feature{width:100%!important;margin-left:0!important;margin-right:0!important}
   #view-stories.ps-stories-home .story-list{margin-left:0!important;margin-right:0!important;grid-template-columns:1fr 1fr!important}
 }
+
+
+/* v1133.1 · identische CTA-Struktur auf allen drei Hauptkarten */
+#view-stories.ps-stories-home #psProphetEntry .ps-entry-copy,
+#view-stories.ps-stories-home #msEntry .ms-entry-copy,
+#view-stories.ps-stories-home #syEntry .ms-entry-copy{
+  right:150px!important;
+}
+#view-stories.ps-stories-home #psProphetEntry .ps-entry-action,
+#view-stories.ps-stories-home #msEntry .ms-entry-action,
+#view-stories.ps-stories-home #syEntry .ms-entry-action{
+  position:absolute!important;
+  z-index:5!important;
+  right:16px!important;
+  bottom:16px!important;
+  left:auto!important;
+  width:auto!important;
+  height:44px!important;
+  min-height:44px!important;
+  margin:0!important;
+  padding:4px 4px 4px 12px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:5px!important;
+  border:1px solid rgba(239,208,138,.30)!important;
+  border-radius:999px!important;
+  background:rgba(5,28,40,.54)!important;
+  color:#ffe2a0!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:12px!important;
+  font-weight:650!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+#view-stories.ps-stories-home #psProphetEntry .ps-entry-go,
+#view-stories.ps-stories-home #msEntry .ms-entry-action b,
+#view-stories.ps-stories-home #syEntry .ms-entry-action b{
+  position:static!important;
+  transform:none!important;
+  flex:none!important;
+  width:34px!important;
+  height:34px!important;
+  margin:0!important;
+  padding:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border:0!important;
+  border-radius:50%!important;
+  background:rgba(239,208,138,.13)!important;
+  color:#ffe2a0!important;
+  font-size:25px!important;
+  line-height:1!important;
+}
+@media(max-width:380px){
+  #view-stories.ps-stories-home #psProphetEntry .ps-entry-copy,
+  #view-stories.ps-stories-home #msEntry .ms-entry-copy,
+  #view-stories.ps-stories-home #syEntry .ms-entry-copy{right:126px!important}
+  #view-stories.ps-stories-home #psProphetEntry .ps-entry-action,
+  #view-stories.ps-stories-home #msEntry .ms-entry-action,
+  #view-stories.ps-stories-home #syEntry .ms-entry-action{
+    right:12px!important;bottom:13px!important;padding-left:9px!important;font-size:11px!important;
+  }
+}
