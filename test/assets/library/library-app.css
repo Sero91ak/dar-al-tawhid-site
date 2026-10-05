@@ -2582,7 +2582,7 @@ html[data-theme="dar-al-layl"]{
 /* DAR_LIBRARY_RESPONSIVE_HERO_V1249
    Hero behaves like the other app areas: embedded full-width scene, no side-cut poster. */
 :root{
-  --dar-lib-cinema-image:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/bf6eec28-bad9-444e-96b1-d0bd11904658/Photorealistic_historical_Islamic_manuscript_library_interior__approximately_10th_11th_century__Abso_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiODM5MDlkMzRhOTY5ZTRlZCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI3NjcyNH0.RqeiQkRznAZsdXSwDu2plvX4B7TQHXn33__bXRCi5z8");
+  --dar-lib-cinema-image:url("/test/assets/area-heroes-v1290/library.webp");
 }
 .lib-page[data-library-root] .lib-hero{
   width:auto;

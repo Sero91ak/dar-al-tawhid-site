@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Erwachsenen-Quiz · Test-only v1257 */
 body.is-quiz-route{
-  --quizx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/61b06f2f-b165-40ac-a263-9f9fecc3eb37/89cacb0f-6ef9-478f-b285-e95bfdf54652/Single_wide_cinematic_app_background_for_an_adult_Islamic_kn.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzMzNjYzNzc1ZTNkOTIzNiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI0ODI0N30.SXigB0AA0OIxaiXk4D1zljc1RDpy2ZvpT8W-DGSiW_E");
+  --quizx-art:url("/test/assets/area-heroes-v1290/quiz.webp");
   --quizx-bg:var(--bg);
   --quizx-card:var(--card,var(--panel,var(--bg)));
   --quizx-text:var(--text,var(--cream));

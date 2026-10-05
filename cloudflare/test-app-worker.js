@@ -334,24 +334,24 @@ async function finalizeDarTestHomeV1193(asset) {
   // so the intended Test-App designs are visible and legacy inline styles cannot win afterwards.
   if (!html.includes('id="darTestAreaAuthoritiesV1289"')) {
     const areaAuthority = '<style id="darTestAreaAuthoritiesV1289">' +
-      '@import url("/test/assets/quran-player-v1252.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/quran-learn-v1256.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/quran-reader-v1251.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/quran-overview-v1250.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/ilm-scholars-v1240.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/ilm-topics-v1242.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/ilm-dua-v1244.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/quiz-overview-v1257.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/more-v1241.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/ilm-scholar-profile-v1253.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/ilm-topic-detail-v1254.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/ilm-post-reader-v1255.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/ilm-scholar-detail-v1251.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/ilm-book-detail-v1252.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/more-v1253.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/jummah-v1258.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/qibla-v1259.css?v=area-authority-v1289");' +
-      '@import url("/test/assets/prayer-v1254.css?v=area-authority-v1289");' +
+      '@import url("/test/assets/quran-player-v1252.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/quran-learn-v1256.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/quran-reader-v1251.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/quran-overview-v1250.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/ilm-scholars-v1240.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/ilm-topics-v1242.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/ilm-dua-v1244.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/quiz-overview-v1257.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/more-v1241.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/ilm-scholar-profile-v1253.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/ilm-topic-detail-v1254.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/ilm-post-reader-v1255.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/ilm-scholar-detail-v1251.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/ilm-book-detail-v1252.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/more-v1253.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/jummah-v1258.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/qibla-v1259.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/prayer-v1254.css?v=area-authority-v1290");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", areaAuthority + "</html>");
     else html += areaAuthority;

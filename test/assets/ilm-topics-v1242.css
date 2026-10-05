@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Themenübersicht · Test-only v1242 */
 body.is-topics-route{
-  --topics-hero-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/bfd550e8-69d5-4bfa-a339-e2a148476515/Use_the_uploaded_image_only_as_the_visual_style_reference__Create_one_standalone_wide_cinematic_3D_a_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiOWEwMjExOTBjY2FlZWFlMiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI3OTYzMn0.SNJzrd5Sd-njkBOivTSDulNVYPfD3EA8tkhWl-VMoB4");
+  --topics-hero-art:url("/test/assets/area-heroes-v1290/topics.webp");
   --topics-hero-left:color-mix(in srgb,var(--bg) 91%,transparent);
   --topics-hero-mid:color-mix(in srgb,var(--bg) 62%,transparent);
   --topics-hero-right:color-mix(in srgb,var(--bg) 16%,transparent);

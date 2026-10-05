@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Prayer overview · test-only v1254 */
 #appView.view:has(.prayer-page-noble){
-  --prx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/b6d348aa-cc39-46fb-8bb3-c49e7939604d/8ac00152-37cb-4640-b0c7-d794e4e0701d/Single_wide_cinematic_app_background_for_an_Islamic_prayer_t.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzdiNGYwN2Q5ODI0M2EyYiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIyMzU0OX0.Z4T8Mce7CHN4s1wBzWYc4SQtpm3QmBlEun5Z7K5J1VQ");
+  --prx-art:url("/test/assets/area-heroes-v1290/prayer.webp");
   --prx-left:color-mix(in srgb,var(--bg) 91%,transparent);
   --prx-mid:color-mix(in srgb,var(--bg) 60%,transparent);
   --prx-right:color-mix(in srgb,var(--bg) 15%,transparent);

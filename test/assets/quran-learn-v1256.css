@@ -1,7 +1,7 @@
 /* DĀR AL TAWḤĪD · Qurʾān Lernen · Test-only v1256
    Full-screen, theme-aware, historical atmosphere only around the learning surface. */
 html.dql-open{
-  --dqlx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/1e53d019-0184-44a8-9014-b430362d0f7c/025032b9-3603-40ef-84e4-b6098ff1bb7c/Single_wide_cinematic_app_background_for_a_Qur_an_learning_s.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzUwYjVjZjQ3NzE0YWM3NCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIyNDU2NH0.Cf2abOUPwZmv1S1VC2BELvXRLDLG1aFkTf4XuqPgBBc");
+  --dqlx-art:url("/test/assets/area-heroes-v1290/quran-learn.webp");
   --dqlx-bg:var(--bg);
   --dqlx-card:var(--card,var(--panel,var(--bg)));
   --dqlx-text:var(--text,var(--cream));

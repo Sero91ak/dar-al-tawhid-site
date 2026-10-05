@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Mehr start · test-only v1253 */
 body.is-more-route{
-  --morex-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/5d9422a1-6e6c-4bc6-8c69-70f00941e383/46b0ed47-c8ea-41cf-b280-70de2fedaf41/Single_wide_cinematic_app_background_for_an_Islamic_multi_se.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMGVkY2EwNDI1MTNiMDBjNCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIzNDM3MH0.KPZjR31SX3UJSPxF5UaLbycXAMzsld5_qhBcZr0YdiU");
+  --morex-art:url("/test/assets/area-heroes-v1290/more-hub.webp");
   --morex-left:color-mix(in srgb,var(--bg) 91%,transparent);
   --morex-mid:color-mix(in srgb,var(--bg) 61%,transparent);
   --morex-right:color-mix(in srgb,var(--bg) 14%,transparent);

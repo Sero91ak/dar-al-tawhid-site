@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Scholar profile detail · Test-only v1253 */
 body.is-scholar-route{
-  --schp-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/ae37dcf4-549a-4a33-892a-0e0a40cc8135/Use_the_uploaded_image_only_as_the_visual_style_reference__Create_one_standalone_wide_cinematic_3D_a_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYTcxMTFkNjFhNGFmNWZhMiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI1OTEwNX0.BmxODoPbFiwTXEXXKb-8tApeY25QdQoErRgHY4OH9ZA");
+  --schp-art:url("/test/assets/area-heroes-v1290/scholar-detail.webp");
   --schp-left:color-mix(in srgb,var(--bg) 92%,transparent);
   --schp-mid:color-mix(in srgb,var(--bg) 64%,transparent);
   --schp-right:color-mix(in srgb,var(--bg) 18%,transparent);

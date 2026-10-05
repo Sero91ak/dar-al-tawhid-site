@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Topic detail · test-only v1254 */
 body.is-topic-route{
-  --topd-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/36a7e878-5e37-4f73-8e2a-e3967126a2ff/Use_the_uploaded_image_only_as_the_visual_style_reference__Create_one_standalone_wide_cinematic_3D_a_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYTlkMTFiNDNjYzVmMWZjMiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI1ODMwN30.wuHLnBwmdHDmj0e-MF4513xgwyFYbdyGJkxzlelsnqE");
+  --topd-art:url("/test/assets/area-heroes-v1290/topic-detail.webp");
   --topd-left:color-mix(in srgb,var(--bg) 92%,transparent);
   --topd-mid:color-mix(in srgb,var(--bg) 64%,transparent);
   --topd-right:color-mix(in srgb,var(--bg) 18%,transparent);

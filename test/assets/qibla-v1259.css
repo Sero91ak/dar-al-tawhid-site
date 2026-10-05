@@ -1,7 +1,7 @@
 /* DĀR AL TAWḤĪD · Qiblah · Test-only v1259
    Historical atmosphere stays in the hero; compass/data remain image-free and functional. */
 #appView.view:has(.qibla-hub-page){
-  --qbx-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/fe9c2e60-2619-4b1d-b08d-77160f70a24e/363a8db2-cf95-4e17-837c-21ab0dbd04ae/Single_wide_cinematic_app_background_for_a_Qiblah_direction_.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNTNiNjQ4ZmUwN2NkOTFlNyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI2Nzk2Nn0.1uRFqtwbBmbvfQst1C9lIO_dd7LiBQLUYMVeibKrjdQ");
+  --qbx-art:url("/test/assets/area-heroes-v1290/qibla.webp");
   --qbx-bg:var(--bg);
   --qbx-card:var(--card,var(--panel,var(--bg)));
   --qbx-text:var(--text,var(--cream));
