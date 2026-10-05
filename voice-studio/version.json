@@ -1,10 +1,10 @@
 {
-  "version": "2.9.109",
-  "updatedAt": "2026-10-05T10:05:00+02:00",
-  "deployTrigger": "voice-studio-2.9.109-deep-engine-repair",
+  "version": "2.9.110",
+  "updatedAt": "2026-10-05T11:12:00+02:00",
+  "deployTrigger": "voice-studio-2.9.110-ui-engine-version-sync",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v77",
+  "cache": "dar-voice-studio-v78",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -341,8 +341,8 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "7e1d7b56b3823aae3003e343d09d0e218e8071be",
-    "validatedAt": "2026-10-05T10:05:00+02:00",
+    "validatedCommit": "0a500384808abb1c5fc9e76a1a6673f339c803f2",
+    "validatedAt": "2026-10-05T11:12:00+02:00",
     "freeVoiceIsolation": true,
     "mainAppBrandingUnchanged": true,
     "prophetStoryLocalBatchSmoke": true,
@@ -469,7 +469,9 @@
     "launcherOwnershipCanFailOverToNative": true,
     "stalePort8787Cleanup": true,
     "deepEngineRepair": true,
-    "manualEngineRepairMenu": true
+    "manualEngineRepairMenu": true,
+    "uiEngineManifestVersionCoherence": true,
+    "engineHealthNotBlockedByStaleUiVersion": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -876,7 +878,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "7e1d7b56b3823aae3003e343d09d0e218e8071be",
+  "releaseRef": "0a500384808abb1c5fc9e76a1a6673f339c803f2",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1154,7 +1156,7 @@
     "forceNewSemanticVersion": true,
     "previousUiVersion": "2.9.47",
     "previousBundleVersionPossibly": "2.9.45",
-    "targetVersion": "2.9.109",
+    "targetVersion": "2.9.110",
     "alphabetReviewIncluded": true,
     "prophetStoriesIncluded": true,
     "updateCheckFallbackRepair": true,
@@ -1323,10 +1325,10 @@
     "offlineManifestPackaged": true,
     "staleLocalManifestAutoRefresh": true
   },
-  "validatedCommit": "7e1d7b56b3823aae3003e343d09d0e218e8071be",
+  "validatedCommit": "0a500384808abb1c5fc9e76a1a6673f339c803f2",
   "validatedAt": "2026-10-04T23:11:00+02:00",
   "validation": {
-    "targetVersion": "2.9.109",
+    "targetVersion": "2.9.110",
     "pronunciationAsyncPreviewQueue": true,
     "pronunciationPreviewStatePolling": true,
     "pronunciationLocalCandidateFallback": true,
@@ -1352,7 +1354,7 @@
     "pronunciationPreviewNoLongFormQaCascade": true,
     "rootCauseConfirmed": "alphabet-audio-studio auto-started full 140 alphabet + quiz + greeting batch on studio load, monopolizing the shared local synthesis worker",
     "alphabetBatchDoesNotAutoStart": true,
-    "engineVersion": "2.9.109",
+    "engineVersion": "2.9.110",
     "engineHealthExposesVersion": true,
     "uiRejectsStaleEngineVersion": true,
     "nativeMacRestartsStaleEngine": true,
@@ -1453,7 +1455,10 @@
     "launcherFailoverRegression": true,
     "stalePortCleanupRegression": true,
     "deepEngineRepairRegression": true,
-    "manualEngineRepairMenuRegression": true
+    "manualEngineRepairMenuRegression": true,
+    "uiVersion": "2.9.110",
+    "uiEngineManifestVersionCoherence": true,
+    "staleUiDoesNotMarkHealthyEngineOffline": true
   },
   "mubashshirunStories": {
     "enabled": true,
@@ -1914,6 +1919,8 @@
     "launcherOwnershipCanFailOverToNative": true,
     "stalePort8787Cleanup": true,
     "deepRepairOnRepeatedHealthFailure": true,
-    "manualRepairMenu": "DĀR Voice Studio → Engine reparieren…"
+    "manualRepairMenu": "DĀR Voice Studio → Engine reparieren…",
+    "uiVersionMismatchIsNonBlocking": true,
+    "healthyEngineRemainsConnectedDuringUiDrift": true
   }
 }
