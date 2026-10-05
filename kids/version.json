@@ -1,8 +1,8 @@
 {
   "buildId": "kids-shell-v65-stories1135",
   "label": "KIDS · V1.07.69",
-  "releasedAt": "2026-10-05T14:49:00+02:00",
-  "note": "Kids v1135: Geschichtenseite final aufgeräumt. „Geschichten des Īmān“ bleibt der einzige Hero; Propheten, Ṣaḥābah und Ṣaḥābiyyāt sind gleichwertige Hauptwelten. Für alle drei Hauptkarten sowie „Die gefundene Münze“ werden jetzt neu erzeugte, dauerhaft lokal gespeicherte WebP-Artworks verwendet. Der unpassende Ṣaḥābiyyāt-Hintergrund ist vollständig ersetzt; die redundante Sprungleiste bleibt entfernt und die Bottom-Navigation überdeckt keine Inhalte.",
+  "releasedAt": "2026-10-05T14:50:00+02:00",
+  "note": "Kids v1135: Die Geschichtenseite verwendet jetzt die neu erzeugten lokalen Bildwelten direkt in der App: eine allgemeine historische Landschaft für Propheten, eine eigene historische Abendwelt für Ṣaḥābah, einen ruhigen historischen Innenhof ohne Personen für Ṣaḥābiyyāt und ein eigenes Motiv für „Die gefundene Münze“. Der doppelte Geschichten-Einstieg bleibt entfernt, die drei Hauptwelten sind gleichwertig aufgebaut und die Bottom-Navigation überdeckt keine Inhalte.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -569,7 +569,15 @@
     "storiesHomeEqualCategoryCards": true,
     "storiesHomeSahabiyyatGeneratedArtwork": true,
     "storiesHomeSahabiyyatArtworkMode": "historical-courtyard-no-people",
-    "storiesHomeCss": "/kids/stories-home-v1133.css?v=1134-1"
+    "storiesHomeCss": "/kids/stories-home-v1133.css?v=1135-1",
+    "storiesHomeArtworkRelease": "generated-local-v1135",
+    "storiesHomeArtworkAssets": [
+      "/kids/assets/stories-home/prophets-v1133.webp",
+      "/kids/assets/stories-home/sahaba-v1133.webp",
+      "/kids/assets/stories-home/sahabiyyat-v1133.webp",
+      "/kids/assets/stories-home/coin-v1133.webp"
+    ],
+    "storiesHomeNoExpiringHotlinks": true
   },
   "updatedAt": "2026-10-05"
 }
