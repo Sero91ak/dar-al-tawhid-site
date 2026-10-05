@@ -166,6 +166,23 @@ jobs:
               raise SystemExit("Mobile Voice surface does not reference the public HTTPS install manifest")
           if 'navigator.serviceWorker.register("/voice-studio/sw-v11.js"' not in mobile_html:
               raise SystemExit("Mobile Voice surface does not register the HTTPS PWA service worker")
+          mobile_required=[
+              'const CLOUD_API_BASE="/voice-studio/api"',
+              'function cloudApi(',
+              'fetchWithTimeout(',
+              'cloudApi("/health"',
+              'cloudApi("/generate"',
+              'Serhat Abu Malik – Master · ElevenLabs Cloud',
+              'if(!LOCAL_ENGINE_HOST)',
+          ]
+          mobile_missing=[x for x in mobile_required if x not in mobile_html]
+          if mobile_missing:
+              raise SystemExit("iPhone ElevenLabs cloud fallback missing: "+", ".join(mobile_missing))
+          mobile_cfg=manifest.get("mobileVoiceApp") or {}
+          if mobile_cfg.get("primaryProvider")!="ElevenLabs Cloud":
+              raise SystemExit("mobileVoiceApp primary provider must be ElevenLabs Cloud")
+          if mobile_cfg.get("externalGpuRequiredForCoreTts") is not False:
+              raise SystemExit("iPhone core TTS must not require the external GPU")
           import re
           mobile_match=re.search(r'const MOBILE_APP_VERSION="([^"]+)";',mobile_html)
           if not mobile_match or mobile_match.group(1) != str(manifest.get("version") or ""):
