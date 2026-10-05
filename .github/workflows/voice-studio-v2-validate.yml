@@ -1022,7 +1022,19 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import json,re
           html=Path("voice-studio/index.html").read_text(encoding="utf-8")
+          engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
+          manifest=json.loads(Path("voice-studio/version.json").read_text(encoding="utf-8"))
+          app_match=re.search(r'const APP_VERSION="([^"]+)";',html)
+          eng_match=re.search(r'^ENGINE_VERSION="([^"]+)"',engine,re.M)
+          if not app_match or not eng_match:
+              raise SystemExit("Voice Studio version markers missing")
+          app_version=app_match.group(1)
+          engine_version=eng_match.group(1)
+          manifest_version=str(manifest.get("version") or "")
+          if len({app_version,engine_version,manifest_version})!=1:
+              raise SystemExit(f"Voice Studio version mismatch: UI={app_version}, engine={engine_version}, manifest={manifest_version}")
           required=[
               'id="styleMode"',
               'id="qaProsody"',
