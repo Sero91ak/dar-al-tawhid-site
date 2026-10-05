@@ -1,0 +1,211 @@
+/* DĀR AL TAWḤĪD · Test-App Tawḥīd Guide authority · v1295
+   Test only. Dedicated route styling; no visitor-app promotion. */
+
+html[data-theme] body.is-tawhid-guide-route{
+  --tawhid1295-art:url("/test/assets/area-heroes-v1290/ilm-chat.webp");
+  --tawhid1295-line:color-mix(in srgb,var(--gold2,#c6a15b) 28%,var(--line,transparent));
+  --tawhid1295-line-soft:color-mix(in srgb,var(--gold2,#c6a15b) 16%,var(--line,transparent));
+  --tawhid1295-title:var(--text,var(--cream,#f3ead8));
+  --tawhid1295-copy:var(--muted,#a8a197);
+  --tawhid1295-accent:var(--gold2,#c6a15b);
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView.view{
+  padding-top:0!important;
+  padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(14px,env(safe-area-inset-right,0px))!important;
+  padding-bottom:calc(var(--bottom-navigation-height,72px) + env(safe-area-inset-bottom,0px) + 30px)!important;
+  background:transparent!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView > .view-head{
+  position:relative!important;
+  isolation:isolate;
+  width:100vw!important;
+  max-width:none!important;
+  min-height:clamp(250px,48vw,380px)!important;
+  margin:0 calc(50% - 50vw) 24px!important;
+  padding:max(92px,calc(env(safe-area-inset-top,0px) + 66px)) max(20px,calc((100vw - 980px)/2 + 24px)) 28px!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  align-items:flex-start!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0 0 30px 30px!important;
+  box-shadow:none!important;
+  background:
+    linear-gradient(90deg,color-mix(in srgb,var(--bg) 96%,transparent) 0%,color-mix(in srgb,var(--bg) 84%,transparent) 43%,color-mix(in srgb,var(--bg) 28%,transparent) 78%,color-mix(in srgb,var(--bg) 10%,transparent) 100%),
+    linear-gradient(0deg,color-mix(in srgb,var(--bg) 95%,transparent),transparent 60%),
+    var(--tawhid1295-art) center/cover no-repeat!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView > .view-head .eyebrow{
+  margin:0 0 8px!important;
+  padding:0!important;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:var(--tawhid1295-accent)!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  letter-spacing:.18em!important;
+  text-transform:uppercase!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView > .view-head h2{
+  max-width:760px!important;
+  margin:0!important;
+  color:var(--tawhid1295-title)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(2.35rem,8vw,4.5rem)!important;
+  font-weight:600!important;
+  letter-spacing:-.03em!important;
+  line-height:.96!important;
+  text-wrap:balance;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide{
+  width:min(820px,100%)!important;
+  margin:0 auto!important;
+  padding:2px 0 34px!important;
+  background:transparent!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide > .home-line-kicker{
+  margin:0 0 8px!important;
+  color:var(--tawhid1295-accent)!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide > .home-line-title{
+  margin:0 0 10px!important;
+  color:var(--tawhid1295-title)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(2rem,7vw,3.2rem)!important;
+  font-weight:600!important;
+  line-height:1!important;
+  letter-spacing:-.02em!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide > .home-line-text{
+  max-width:44rem!important;
+  margin:0 0 22px!important;
+  color:var(--tawhid1295-copy)!important;
+  font-size:clamp(.98rem,2.8vw,1.08rem)!important;
+  line-height:1.65!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide__block,
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide__proof{
+  position:relative!important;
+  display:grid!important;
+  gap:6px!important;
+  margin:0!important;
+  padding:17px 2px 18px!important;
+  border:0!important;
+  border-top:1px solid var(--tawhid1295-line-soft)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide__block:first-of-type{
+  border-top-color:var(--tawhid1295-line)!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide__block .home-line-kicker,
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide__proof .home-line-kicker{
+  margin:0!important;
+  color:var(--tawhid1295-accent)!important;
+  font-size:9.5px!important;
+  font-weight:800!important;
+  letter-spacing:.16em!important;
+  text-transform:uppercase!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide__block h3,
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide__proof h3{
+  margin:0!important;
+  color:var(--tawhid1295-title)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(1.28rem,4.8vw,1.7rem)!important;
+  font-weight:650!important;
+  line-height:1.08!important;
+  text-wrap:balance;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide__block .home-line-statement{
+  margin:2px 0 0!important;
+  color:var(--tawhid1295-title)!important;
+  font-size:clamp(1.02rem,3.4vw,1.18rem)!important;
+  line-height:1.5!important;
+  font-weight:650!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide__block .home-line-text,
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide__proof .home-line-text{
+  margin:0!important;
+  color:var(--tawhid1295-copy)!important;
+  font-size:clamp(.94rem,2.8vw,1.02rem)!important;
+  line-height:1.62!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide__proofs-title{
+  margin:30px 0 6px!important;
+  padding-top:4px!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .home-line-open{
+  min-height:48px!important;
+  margin-top:20px!important;
+  padding:11px 16px!important;
+  border:1px solid var(--tawhid1295-line)!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--tawhid1295-accent) 7%,transparent)!important;
+  box-shadow:none!important;
+  color:var(--tawhid1295-title)!important;
+  font-size:12px!important;
+  font-weight:800!important;
+}
+
+html[data-theme] body.is-tawhid-guide-route #appView .home-line-open:active{
+  transform:scale(.985);
+}
+
+@media(max-width:700px){
+  html[data-theme] body.is-tawhid-guide-route #appView.view{
+    padding-left:max(12px,env(safe-area-inset-left,0px))!important;
+    padding-right:max(12px,env(safe-area-inset-right,0px))!important;
+  }
+  html[data-theme] body.is-tawhid-guide-route #appView > .view-head{
+    min-height:270px!important;
+    padding-left:18px!important;
+    padding-right:18px!important;
+    padding-bottom:22px!important;
+    border-radius:0 0 24px 24px!important;
+  }
+  html[data-theme] body.is-tawhid-guide-route #appView .tawhid-guide{
+    padding-left:2px!important;
+    padding-right:2px!important;
+  }
+}
+
+@media(min-width:900px){
+  html[data-theme] body.is-tawhid-guide-route #appView > .view-head{
+    min-height:410px!important;
+    padding-bottom:38px!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] body.is-tawhid-guide-route *{
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+    animation-duration:.01ms!important;
+  }
+}
