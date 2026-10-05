@@ -135,7 +135,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets kids/assets content apple-tv ios test/assets kids/data voice-studio scripts 2>/dev/null || true
+          git add assets kids/assets content apple-tv ios test/assets kids/data kids/version.json data/pronunciation voice-studio scripts 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Media already within optimization targets."
             exit 0
