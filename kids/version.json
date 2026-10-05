@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v53-dua-quiz-art1123",
-  "label": "KIDS · V1.07.58",
-  "releasedAt": "2026-10-05T10:52:00+02:00",
-  "note": "Kids v1123: Duʿāʾ-/Quiz-Artwork-Release plus Ṣaḥābiyyāt-Namen direkt auf Karten- und Hero-Bildern; Sawdah, Ǧuwayriyyah, Ṣafiyyah und Maymūnah haben eigene historische, gesichtslose Szenen. Universeller Geschichten-Player nutzt dieselbe Zuordnung.",
+  "buildId": "kids-shell-v55-sahabiyyat-approved1125",
+  "label": "KIDS · V1.07.59",
+  "releasedAt": "2026-10-05T11:38:00+02:00",
+  "note": "Kids v1125: freigegebene Ṣaḥābiyyāt-Bilder als feste lokale App-Assets eingebunden; externe Bildzuordnung für die ersten zehn entfernt; redundanter Kartenkicker 'ṢAḤĀBIYYAH · QUELLENGEPRÜFTE GESCHICHTE' entfernt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1123",
+    "serviceWorkerCache": "v1125",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -436,7 +436,7 @@
     "storyAudioPinnedBytes": 2098317,
     "storyAudioDeliveryProfile": "optimized-runtime",
     "sahabiyyatCssVersion": 4,
-    "sahabiyyatJsVersion": 7,
+    "sahabiyyatJsVersion": 8,
     "storyHub": "v3-universal-single-runtime",
     "storyHubPlayer": "single-runtime-audio-player-edge-to-edge",
     "storyHubAgeAdaptive": true,
@@ -460,7 +460,7 @@
     "storyReaderGestureGuard": true,
     "storyReaderCloseRestoresPosition": true,
     "sahabiyyatArtworkVersion": 1122,
-    "sahabiyyatArtworkFormat": "local-jpeg",
+    "sahabiyyatArtworkFormat": "local-webp+jpeg",
     "sahabiyyatNewLocalArtworkCount": 4,
     "sahabiyyatLocalArtworkAssets": [
       "/kids/assets/sahabiyyat/sawdah-v1122.jpg",
@@ -488,7 +488,26 @@
     "sahabiyyatLocalArtworkCount": 4,
     "sahabiyyatAdobeArtworkCount": 10,
     "sahabiyyatAllNamesOnArtwork": true,
-    "sahabiyyatNoVisibleFaces": true
+    "sahabiyyatNoVisibleFaces": true,
+    "sahabiyyatApprovedLocalArtworkCount": 14,
+    "sahabiyyatExternalArtworkHotlinks": false,
+    "sahabiyyatCardKickerRemoved": true,
+    "sahabiyyatApprovedArtworkAssets": [
+      "/kids/assets/sahabiyyat/khadijah-v1124.webp",
+      "/kids/assets/sahabiyyat/aishah-v1124.webp",
+      "/kids/assets/sahabiyyat/fatimah-v1124.webp",
+      "/kids/assets/sahabiyyat/hafsah-v1124.webp",
+      "/kids/assets/sahabiyyat/zaynab-v1124.webp",
+      "/kids/assets/sahabiyyat/asma-v1124.webp",
+      "/kids/assets/sahabiyyat/umm-sulaym-v1124.webp",
+      "/kids/assets/sahabiyyat/umm-atiyyah-v1124.webp",
+      "/kids/assets/sahabiyyat/umm-habibah-v1124.webp",
+      "/kids/assets/sahabiyyat/umm-salamah-v1124.webp",
+      "/kids/assets/sahabiyyat/sawdah-v1122.jpg",
+      "/kids/assets/sahabiyyat/juwayriyyah-v1122.jpg",
+      "/kids/assets/sahabiyyat/safiyyah-v1122.jpg",
+      "/kids/assets/sahabiyyat/maymunah-v1122.jpg"
+    ]
   },
   "updatedAt": "2026-10-05"
 }
