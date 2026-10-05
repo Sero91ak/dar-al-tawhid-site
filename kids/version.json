@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v60-voice-flow1130",
   "label": "KIDS · V1.07.64",
   "releasedAt": "2026-10-05T13:52:00+02:00",
-  "note": "Kids v1130: Quiz-/Duʿāʾ-Owner-Voice-Flow und die neuen ausführlichen Ṣaḥābiyyāt-Masterbiografien sind gemeinsam freigegeben. Alle 14 Ṣaḥābiyyāt haben vollständige Langtexte mit mindestens 800 Wörtern; derselbe Text gilt für 4–5, 6–8 und 9–10. Voice Studio zeigt Wortzahl und geschätzte Sprechdauer.",
+  "note": "Kids v1130: alle 14 Ṣaḥābiyyāt besitzen jetzt ausführliche vollständige Masterbiografien mit mindestens 850 Wörtern (aktuell 884–993). Lebensweg, Īmān, Taten, Aufgaben, Alltag und zentrale Lehren werden ausführlich erzählt. Derselbe ungekürzte Mastertext gilt für 4–5, 6–8 und 9–10; nur die Darstellung ist altersabhängig. Voice Studio zeigt Wortzahl und geschätzte Sprechdauer.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -482,7 +482,7 @@
     "quizArtworkLive": true,
     "duaQuizArtworkPlacement": "direct-in-respective-modal-sections",
     "sahabiyyatDistinctArtworkCount": 14,
-    "sahabiyyatDataVersion": 6,
+    "sahabiyyatDataVersion": 23,
     "sahabiyyatArtworkRelease": "v1127-existing-four-photoreal",
     "sahabiyyatArtworkCount": 14,
     "sahabiyyatLocalArtworkCount": 14,
@@ -538,10 +538,12 @@
     "ownerVoiceNumberNormalization": "german-spoken-numbers-v2",
     "ownerVoiceManifestLoading": "independent-priority-v2",
     "sahabiyyatLongBiography": true,
-    "sahabiyyatMinimumMasterWords": 800,
+    "sahabiyyatMinimumMasterWords": 850,
     "sahabiyyatLongBiographyRelease": "v1130",
     "voiceStudioStoryLengthVisible": true,
-    "futureBiographyMinimumMasterWords": 800
+    "futureBiographyMinimumMasterWords": 850,
+    "sahabiyyatMasterWordRange": "884–993",
+    "sahabiyyatSameMasterAllAges": true
   },
   "updatedAt": "2026-10-05"
 }
