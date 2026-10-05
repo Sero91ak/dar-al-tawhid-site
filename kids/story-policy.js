@@ -9,9 +9,12 @@ function longest(values){
 }
 function canonicalText(item){
   if(!item||typeof item!=="object")return"";
+  const explicit=clean(item.masterStoryText);
+  if(explicit)return explicit;
   const scripts=item.scripts&&typeof item.scripts==="object"?item.scripts:{};
-  const candidates=AGE_KEYS.map(key=>scripts[key]);
-  candidates.push(item.voiceScript,item.fullText,item.storyText,item.text,item.story);
+  const fromScripts=longest(AGE_KEYS.map(key=>scripts[key]));
+  if(fromScripts)return fromScripts;
+  const candidates=[item.voiceScript,item.fullText,item.storyText,item.text,item.story];
   if(Array.isArray(item.blocks)&&item.blocks.length)candidates.push(item.blocks.join("\n\n"));
   if(Array.isArray(item.chapters)&&item.chapters.length){
     const full=item.chapters.slice();
@@ -25,12 +28,20 @@ function normalizeItem(item){
   const text=canonicalText(item);if(!text)return item;
   const scripts={...(item.scripts&&typeof item.scripts==="object"?item.scripts:{})};
   for(const key of AGE_KEYS)scripts[key]=text;
-  return {...item,scripts};
+  return {...item,masterStoryText:text,scripts};
 }
 function hasSingleMasterAcrossAges(item){
+  const master=canonicalText(item);
+  if(!master)return true;
   const scripts=item&&item.scripts&&typeof item.scripts==="object"?item.scripts:{};
-  const values=AGE_KEYS.map(key=>clean(scripts[key])).filter(Boolean);
-  return values.length===0||new Set(values).size===1;
+  return AGE_KEYS.every(key=>clean(scripts[key])===master);
 }
-window.DARKidsStoryPolicy=Object.freeze({version:1,ageKeys:Object.freeze(AGE_KEYS.slice()),canonicalText,normalizeItem,hasSingleMasterAcrossAges});
+window.DARKidsStoryPolicy=Object.freeze({
+  version:2,
+  sourcePriority:Object.freeze(["masterStoryText","scripts","voiceScript","fallbackText"]),
+  ageKeys:Object.freeze(AGE_KEYS.slice()),
+  canonicalText,
+  normalizeItem,
+  hasSingleMasterAcrossAges
+});
 })();
