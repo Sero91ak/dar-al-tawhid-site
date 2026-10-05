@@ -83,7 +83,7 @@ jobs:
           if(storyHubJs.includes("ghPlayerImageName"))throw new Error("Universal player story name duplicated in hero");
           if(!storyHubJs.includes('img=s.image||artFor(first,s.id,false)'))throw new Error("Story category artwork must prefer manifest image");
           if(storyHubJs.includes('addEventListener("click",toggleRead)'))throw new Error("Story text toggle must not receive the click event as syncMode");
-          if(!storyHubJs.includes('setReadMode("closed",{restore:true})'))throw new Error("Story text close state machine missing");
+          if(!storyHubJs.includes("reader.openReading")||!storyHubJs.includes("reader.openReadAlong"))throw new Error("Story focus reader modes missing");
           if(!storyHubJs.includes("scrollReadParagraphIntoView"))throw new Error("Story read-along must scroll inside the text pane");
           if(!storyHubJs.includes("playerAtTop"))throw new Error("Story swipe-down guard missing");
           if(!sw.includes("dar-al-tawhid-kids-v"+swVersion)||!sw.includes("client.navigate"))throw new Error("Kids SW activation recovery missing");
