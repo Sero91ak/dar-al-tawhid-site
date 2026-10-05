@@ -332,8 +332,8 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_TEST_AREA_AUTHORITIES_V1291
   // test/index.html currently has no closing </head>; load all redesign layers as a final authority
   // so the intended Test-App designs are visible and legacy inline styles cannot win afterwards.
-  if (!html.includes('id="darTestAreaAuthoritiesV1291"')) {
-    const areaAuthority = '<style id="darTestAreaAuthoritiesV1291">' +
+  if (!html.includes('id="darTestAreaAuthoritiesV1293"')) {
+    const areaAuthority = '<style id="darTestAreaAuthoritiesV1293">' +
       '@import url("/test/assets/quran-player-v1252.css?v=area-authority-v1290");' +
       '@import url("/test/assets/quran-learn-v1256.css?v=area-authority-v1290");' +
       '@import url("/test/assets/quran-reader-v1251.css?v=area-authority-v1290");' +
@@ -352,6 +352,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/jummah-v1258.css?v=area-authority-v1290");' +
       '@import url("/test/assets/qibla-v1259.css?v=area-authority-v1290");' +
       '@import url("/test/assets/prayer-v1254.css?v=area-authority-v1290");' +
+      '@import url("/test/assets/remaining-areas-v1293.css?v=remaining-authority-v1293");' +
       '@import url("/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", areaAuthority + "</html>");
