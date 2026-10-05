@@ -121,12 +121,12 @@ function ensureUi(){
   })||null;
   audio.addEventListener("timeupdate",()=>{updateProgress();syncReadAlong(false);writeLastStory(false,false)});
   audio.addEventListener("loadedmetadata",()=>{reader?.restore();if(resumeHint>0){try{audio.currentTime=Math.min(Number(audio.duration)||resumeHint,resumeHint)}catch(_){}resumeHint=0}updateProgress()});
-  audio.addEventListener("play",()=>{playing=true;writeLastStory(true,false);renderPlay();renderMini()});
+  audio.addEventListener("play",()=>{playing=true;if(followMode)setStoryReadingWake(true);writeLastStory(true,false);renderPlay();renderMini()});
   audio.addEventListener("pause",()=>{playing=false;writeLastStory(true,false);renderPlay();renderMini()});
-  audio.addEventListener("ended",()=>{playing=false;writeLastStory(true,true);renderPlay();renderMini();renderNext()});
+  audio.addEventListener("ended",()=>{playing=false;if(followMode)setStoryReadingWake(false);writeLastStory(true,true);renderPlay();renderMini();renderNext()});
   window.addEventListener("pagehide",()=>{reader?.persist(true);writeLastStory(true,false)});
   document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if($("#ghPlayer")?.classList.contains("open"))minimizePlayer();else if($("#ghWorld")?.classList.contains("open"))closeWorld()});
-  document.addEventListener("click",e=>{const nav=e.target.closest?.(".nav-btn[data-target]");if(nav&&nav.dataset.target!=="stories"){setReadMode("closed",{restore:false});stopAudio(true);active=null;renderMini()}},true);
+  document.addEventListener("click",e=>{const nav=e.target.closest?.(".nav-btn[data-target]");if(nav&&nav.dataset.target!=="stories"){setReadMode("closed",{restore:false});setStoryReadingWake(false);stopAudio(true);active=null;renderMini()}},true);
   $("#ghRead")?.addEventListener("pointerdown",()=>{manualReadUntil=performance.now()+5000},{passive:true});
   $("#ghRead")?.addEventListener("wheel",()=>{manualReadUntil=performance.now()+5000},{passive:true});
   installGestures();
@@ -268,6 +268,10 @@ function minimizeAll(){
   renderMini();
 }
 let followMode=false,manualReadUntil=0,lastReadIndex=-1,readReturnScroll=0;
+const STORY_READING_WAKE="story-player-reading";
+function setStoryReadingWake(enabled){
+  try{if(enabled)window.DARKidsScreenAwake?.acquire?.(STORY_READING_WAKE);else window.DARKidsScreenAwake?.release?.(STORY_READING_WAKE)}catch(_){}
+}
 function clearReadHighlights(){
   $("#ghRead")?.querySelectorAll("[data-gh-p].active").forEach(p=>p.classList.remove("active"));
   lastReadIndex=-1;
@@ -291,6 +295,7 @@ function setReadMode(next,{restore=false}={}){
   const open=next==="read"||next==="follow",sync=next==="follow";
   followMode=sync;
   read.hidden=!open;
+  setStoryReadingWake(open);
   player?.classList.toggle("gh-reading",open);
   player?.classList.toggle("gh-following",open&&sync);
   player?.classList.toggle("gh-readonly",open&&!sync);
