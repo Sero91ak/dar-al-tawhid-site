@@ -28277,6 +28277,15 @@ function updateChrome(route){
   document.body.classList.toggle("is-feed-fullscreen",isFeedFull);
   document.body.classList.toggle("is-quiz-route",route.view==="quiz");
   document.body.classList.toggle("is-calendar-route",route.view==="calendar");
+  document.body.classList.toggle("is-ramadan-route",route.view==="ramadan");
+  document.body.classList.toggle("is-zakat-route",route.view==="zakat");
+  document.body.classList.toggle("is-settings-route",route.view==="settings");
+  document.body.classList.toggle("is-news-route",route.view==="news"||route.view==="news-detail");
+  document.body.classList.toggle("is-recent-route",route.view==="recent");
+  document.body.classList.toggle("is-saved-route",route.view==="saved");
+  document.body.classList.toggle("is-about-route",route.view==="about");
+  document.body.classList.toggle("is-notifications-route",route.view==="notifications");
+  document.body.classList.toggle("is-books-route",["books","quellen-book","quellen-scholar"].includes(route.view));
   document.body.classList.toggle("is-hadith-route",route.view==="hadith");const hadithDepth=route.view==="hadith"?String(route.value||"").split("/").filter(Boolean).length:0;document.body.classList.toggle("is-hadith-root-route",route.view==="hadith"&&hadithDepth===0);document.body.classList.toggle("is-hadith-nested-route",route.view==="hadith"&&hadithDepth>0);try{confineHadithLibraryEntry();[0,180,600].forEach(function(ms){setTimeout(function(){try{confineHadithLibraryEntry()}catch(e){}},ms)})}catch(e){}
   document.body.classList.toggle("is-quran-overview",route.view==="quran");
   document.body.classList.toggle("is-quran-reader-route",route.view==="quran-surah");
