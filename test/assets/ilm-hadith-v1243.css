@@ -1023,3 +1023,124 @@ html[data-theme="eisgold"] body.is-hadith-route .hadith-detail > .post-reader-ti
     background-position:center,center,70% 46%!important;
   }
 }
+
+
+/* DAR_HADITH_DEPTH_RHYTHM_V1286
+   Depth-specific rhythm after the three-scene split:
+   nested catalogue levels stay compact; the individual reader remains the calm endpoint. */
+body.is-hadith-route .hadith-hub--nested > .view-head{
+  min-height:clamp(248px,43vw,360px)!important;
+}
+body.is-hadith-route .hadith-hub--nested > .view-head h2{
+  font-size:clamp(1.95rem,6.8vw,3.35rem)!important;
+  line-height:.98!important;
+}
+body.is-hadith-route .hadith-hub--nested > .view-head .view-desc{
+  max-width:34rem!important;
+}
+body.is-hadith-route .hadith-hub--nested > .dua-hub__label{
+  margin-top:14px!important;
+}
+body.is-hadith-route .hadith-hub--nested > .dua-theme-grid .dua-theme-card{
+  min-height:72px!important;
+  padding:10px 0!important;
+}
+body.is-hadith-route .hadith-hub--nested > .dua-theme-grid .dua-theme-card__body h3{
+  font-size:clamp(1.06rem,3.9vw,1.34rem)!important;
+  line-height:1.18!important;
+  font-weight:610!important;
+}
+body.is-hadith-route .hadith-hub--nested > .dua-theme-grid .dua-theme-card__count{
+  margin-top:4px!important;
+  font-size:.68rem!important;
+  letter-spacing:.07em!important;
+}
+body.is-hadith-route .hadith-detail{
+  width:min(860px,calc(100% - 32px))!important;
+}
+body.is-hadith-route .hadith-detail > .post-reader-title{
+  min-height:clamp(292px,45vw,380px)!important;
+}
+body.is-hadith-route .hadith-detail > .post-reader-main{
+  width:min(780px,100%)!important;
+}
+body.is-hadith-route .hadith-detail .statement.post-aussage{
+  font-size:clamp(1.02rem,2.4vw,1.16rem)!important;
+  line-height:1.72!important;
+}
+body.is-hadith-route .hadith-detail .hadith-arabic{
+  font-size:clamp(1.32rem,4.2vw,1.82rem)!important;
+  line-height:2.05!important;
+}
+body.is-hadith-route .hadith-sibling-nav{
+  gap:18px!important;
+  padding-top:16px!important;
+}
+body.is-hadith-route .hadith-sibling-btn{
+  min-height:62px!important;
+  padding:11px 0!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 15%,var(--line2))!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+body.is-hadith-route .hadith-sibling-btn:active{
+  background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--gold2) 5%,transparent))!important;
+  border-color:color-mix(in srgb,var(--gold2) 30%,var(--line2))!important;
+}
+body.is-hadith-route .hadith-sibling-btn strong{
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+  line-height:1.28!important;
+}
+@media(max-width:699px){
+  body.is-hadith-route .hadith-hub--nested > .view-head{
+    min-height:278px!important;
+    padding:26px 18px 23px!important;
+  }
+  body.is-hadith-route .hadith-hub--nested > .view-head h2{
+    font-size:clamp(1.95rem,9vw,2.85rem)!important;
+  }
+  body.is-hadith-route .hadith-hub--nested > .dua-theme-grid .dua-theme-card{
+    grid-template-columns:31px minmax(0,1fr) 15px!important;
+    min-height:68px!important;
+    padding:9px 0!important;
+  }
+  body.is-hadith-route .hadith-hub--nested > .dua-theme-grid .dua-theme-card__body h3{
+    font-size:clamp(1.02rem,4.9vw,1.28rem)!important;
+  }
+  body.is-hadith-route .hadith-detail{
+    width:calc(100% - 28px)!important;
+  }
+  body.is-hadith-route .hadith-detail > .post-reader-title{
+    min-height:292px!important;
+    padding:28px 18px 25px!important;
+  }
+  body.is-hadith-route .hadith-detail > .post-reader-title h2{
+    font-size:clamp(2rem,9vw,2.9rem)!important;
+  }
+  body.is-hadith-route .hadith-sibling-nav{
+    gap:12px!important;
+  }
+  body.is-hadith-route .hadith-sibling-btn{
+    min-height:60px!important;
+    padding:10px 0!important;
+  }
+  body.is-hadith-route .hadith-sibling-btn strong{
+    font-size:.91rem!important;
+  }
+}
+@media(min-width:700px) and (max-width:1366px){
+  body.is-hadith-route .hadith-hub--nested > .view-head{
+    min-height:350px!important;
+  }
+  body.is-hadith-route .hadith-hub--nested > .dua-theme-grid .dua-theme-card{
+    min-height:78px!important;
+    padding:12px 2px!important;
+  }
+  body.is-hadith-route .hadith-hub--nested > .dua-theme-grid .dua-theme-card__body h3{
+    font-size:clamp(1.18rem,2.4vw,1.48rem)!important;
+  }
+}
