@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v79-stories1152",
   "label": "KIDS · V1.07.84",
   "releasedAt": "2026-10-05T17:45:00+02:00",
-  "note": "Kids v1152: Die Geschichten-Startseite ist neu geordnet. Der eigene responsive Hero „Geschichten des Īmān“ steht wieder oben; die redundante Propheten/Ṣaḥābah/Ṣaḥābiyyāt-Kapselleiste ist vollständig entfernt. Die drei großen visuellen Welten bleiben die einzige Hauptnavigation. CTA-Flächen sind reduziert, die Karten bleiben groß und touchfreundlich. Mehrfacher Leerraum am Seitenende wurde auf einen einzigen Bottom-Safe-Bereich reduziert. Kleine iPhones, große Smartphones, Tablets und niedrige Querformate sind getrennt abgesichert.",
+  "note": "Kids v1152: Die Geschichten-Startseite ist neu geordnet. Der eigene responsive Hero „Geschichten des Īmān“ steht wieder oben; die redundante Propheten/Ṣaḥābah/Ṣaḥābiyyāt-Kapselleiste ist vollständig entfernt. Die drei großen visuellen Welten bleiben die einzige Hauptnavigation. CTA-Flächen sind reduziert, die Karten bleiben groß und touchfreundlich. Der zusätzliche Seiten-Endabstand ist entfernt; nur die globale Shell schützt vor der festen Bottom-Navigation. Kleine iPhones, große Smartphones, Tablet-Hochformat und breite Tablet-/Desktop-Ansichten sind getrennt abgestimmt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -574,7 +574,7 @@
     "storiesHomeEqualCategoryCards": true,
     "storiesHomeSahabiyyatGeneratedArtwork": true,
     "storiesHomeSahabiyyatArtworkMode": "historical-courtyard-no-people",
-    "storiesHomeCss": "/kids/stories-home-v1138.css?v=1147",
+    "storiesHomeCss": "/kids/stories-home-v1138.css?v=1152",
     "storiesHomeArtworkRelease": "generated-local-v1136",
     "storiesHomeArtworkAssets": [
       "/kids/assets/stories-home/prophets-v1133.webp",
@@ -586,13 +586,13 @@
     "storiesHomeEqualPrimaryCards": true,
     "storiesHomePedagogicalLabels": true,
     "prophetStoriesJsVersion": 34,
-    "storiesHomeStylesheetVersion": "1148",
+    "storiesHomeStylesheetVersion": "1152",
     "storyReaderBackgroundInert": true,
     "storyReaderReadOnlyMode": true,
     "storyReaderListenAndFollowMode": true,
     "storyReaderInternalScrollGeometry": "relative-scroll-pane-v1151",
     "storyAreaJumpMode": "direct-library-selector",
-    "storiesHomeResponsiveHierarchy": "phone-tablet-portrait-tablet-landscape-desktop-v1138",
+    "storiesHomeResponsiveHierarchy": "small-phone-phone-large-phone-tablet-portrait-wide-tablet-grid-desktop-v1152",
     "storiesHomeNoTextCtaOverlap": true,
     "storiesHomeCompactSecondaryCards": true,
     "storyReaderTextSizePhone": "22px",
@@ -625,7 +625,8 @@
     ],
     "storiesCapsuleNavigation": false,
     "storiesPrimaryNavigation": "three-visual-world-cards",
-    "storiesBottomClearance": "single-global-nav-safe-area-v1152"
+    "storiesBottomClearance": "global-shell-only-plus-18px-content-rhythm-v1152",
+    "storiesWideLayout": "three-equal-worlds-from-1100px"
   },
   "updatedAt": "2026-10-05"
 }
