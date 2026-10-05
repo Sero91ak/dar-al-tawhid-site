@@ -21,51 +21,118 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Download expiring Test hero images
-        shell: bash
+      - name: Download current Test hero images from CSS
+        shell: python
         run: |
-          set -euo pipefail
-          OUT="test/assets/area-heroes-v1290"
-          mkdir -p "$OUT"
+          import hashlib, json, re, urllib.request
+          from pathlib import Path
 
-          fetch() {
-            local url="$1"
-            local file="$2"
-            echo "Downloading $file"
-            curl -L --fail --retry 4 --retry-all-errors --connect-timeout 20 --max-time 180 "$url" -o "$OUT/$file"
-            test -s "$OUT/$file"
+          downloads = {
+            "test/assets/more-v1253.css": "more-hub.jpg",
+            "test/assets/jummah-v1258.css": "jummah.jpg",
+            "test/assets/prayer-v1254.css": "prayer.jpg",
+            "test/assets/qibla-v1259.css": "qibla.jpg",
+            "test/assets/ilm-dua-v1244.css": "dua.jpg",
+            "test/assets/quran-learn-v1256.css": "quran-learn.jpg",
+            "test/assets/ilm-book-detail-v1252.css": "book-detail.jpg",
+            "test/assets/ilm-post-reader-v1255.css": "post-reader.jpg",
+            "test/assets/quran-player-v1252.css": "quran-player.jpg",
+            "test/assets/quran-overview-v1250.css": "quran-overview.jpg",
+            "test/assets/ilm-topics-v1242.css": "topics.png",
+            "test/assets/ilm-topic-detail-v1254.css": "topic-detail.png",
+            "test/assets/ilm-scholars-v1240.css": "scholars.png",
+            "test/assets/quiz-overview-v1257.css": "quiz.jpg",
+            "test/assets/ilm-scholar-detail-v1251.css": "scholar-detail.png",
+            "test/assets/ilm-research-chat.css": "ilm-chat.png",
+            "test/assets/library/library-app.css": "library.png",
           }
+          out = Path("test/assets/area-heroes-v1290")
+          out.mkdir(parents=True, exist_ok=True)
+          url_re = re.compile(r'https://dnznrvs05pmza\.cloudfront\.net/[^)"\'\s]+')
+          sums=[]
+          for css_file, local_name in downloads.items():
+            text=Path(css_file).read_text()
+            match=url_re.search(text)
+            if not match:
+              raise SystemExit(f"Missing expiring hero URL in {css_file}")
+            req=urllib.request.Request(match.group(0), headers={"User-Agent":"DAR-Test-Asset-Localizer/1.0"})
+            with urllib.request.urlopen(req, timeout=90) as r:
+              data=r.read()
+            if len(data)<1000:
+              raise SystemExit(f"Downloaded hero too small: {css_file} -> {len(data)} bytes")
+            target=out/local_name
+            target.write_bytes(data)
+            digest=hashlib.sha256(data).hexdigest()
+            sums.append(f"{digest}  {target.as_posix()}")
+            print(f"{css_file} -> {target} ({len(data)} bytes)")
+          (out/"SHA256SUMS.txt").write_text("\n".join(sums)+"\n")
 
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/5d9422a1-6e6c-4bc6-8c69-70f00941e383/46b0ed47-c8ea-41cf-b280-70de2fedaf41/Single_wide_cinematic_app_background_for_an_Islamic_multi_se.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMGVkY2EwNDI1MTNiMDBjNCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIzNDM3MH0.KPZjR31SX3UJSPxF5UaLbycXAMzsld5_qhBcZr0YdiU' 'more-hub.jpg'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/9c40e8c5-bac1-4f25-aebe-53c8691339e3/f239e7f3-421d-4c44-beb3-54f2ae460f85/Single_wide_cinematic_app_background_for_a_Jumu_ah_Friday_se.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiODBkMTQxOWUwZjE4NWNlZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIzMjY3MH0.PzQCuo7Q6537MKdFZliobMzQdVm8vdH1HacobteX-Gw' 'jummah.jpg'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/b6d348aa-cc39-46fb-8bb3-c49e7939604d/8ac00152-37cb-4640-b0c7-d794e4e0701d/Single_wide_cinematic_app_background_for_an_Islamic_prayer_t.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzdiNGYwN2Q5ODI0M2EyYiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIyMzU0OX0.Z4T8Mce7CHN4s1wBzWYc4SQtpm3QmBlEun5Z7K5J1VQ' 'prayer.jpg'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/fe9c2e60-2619-4b1d-b08d-77160f70a24e/363a8db2-cf95-4e17-837c-21ab0dbd04ae/Single_wide_cinematic_app_background_for_a_Qiblah_direction_.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNTNiNjQ4ZmUwN2NkOTFlNyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI2Nzk2Nn0.1uRFqtwbBmbvfQst1C9lIO_dd7LiBQLUYMVeibKrjdQ' 'qibla.jpg'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/15e1ac1d-9be2-4369-9839-36c687c5996f/15254c40-df81-4cdd-95dd-c5a8506a3656/Single_wide_cinematic_app_background_for_a_Du_a_and_adhkar_s.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYmYzZWI4ZDVlYWFlZDlmYSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI1MzIwNX0.q6wfI5szJCVCVp571UGkbBXrkX4pmtTurWlWxsdHldk' 'dua.jpg'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/1e53d019-0184-44a8-9014-b430362d0f7c/025032b9-3603-40ef-84e4-b6098ff1bb7c/Single_wide_cinematic_app_background_for_a_Qur_an_learning_s.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzUwYjVjZjQ3NzE0YWM3NCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIyNDU2NH0.Cf2abOUPwZmv1S1VC2BELvXRLDLG1aFkTf4XuqPgBBc' 'quran-learn.jpg'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/c4fe42ac-254f-4be7-bf6b-b58306eacd6d/aec651b6-86e5-4013-b576-e6a0f59643d1/Single_wide_cinematic_app_background_for_an_Islamic_classica.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZDNmYWFjNDFjNjBkNzBhOCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI2ODY3M30.ICAJZM_Lzym3huVoLh1vyzUSMKWrRKnYkfOgNbQOw90' 'book-detail.jpg'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/c90118ad-ae17-4ebd-b528-1c68dc49c69a/58c886ea-8e34-4c83-a91f-01ff6b076474/Single_wide_cinematic_mobile_app_background_for_an_individua.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMDA5ODNiZmVkZWQ3YmRmMSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI4NTYzMH0.jqkT2MPNlZuNHVN7W6rT_JCJSuCZxnH0Ssf3BzW9ANU' 'post-reader.jpg'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/7e98aff6-107a-4695-8990-240019785dfb/b80bc9ad-619a-4daf-9a91-288ab756037d/Single_wide_cinematic_background_for_a_Qur_an_audio_player__.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiODU4ZTMwYTI2MTZlYmMxYSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIzNTQ5MH0.QVVFzizpewoGOhb_wQKVLCpg8-8qRBcZtb0scrU0doc' 'quran-player.jpg'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/aebea3d9-9142-4917-90d7-8b2a3ec34926/e8998705-b906-41bc-a65c-a14641cfa453/Single_wide_cinematic_app_background_for_a_Qur_an_overview__.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYzEwNjczNDEwNWFiNDk4NyIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIyNTQwOX0.PoNZ1pWhRx5i2o8rab-XqHhVkJ860ajJVakpmkCa7BE' 'quran-overview.jpg'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/bfd550e8-69d5-4bfa-a339-e2a148476515/Use_the_uploaded_image_only_as_the_visual_style_reference__Create_one_standalone_wide_cinematic_3D_a_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiOWEwMjExOTBjY2FlZWFlMiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI3OTYzMn0.SNJzrd5Sd-njkBOivTSDulNVYPfD3EA8tkhWl-VMoB4' 'topics.png'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/36a7e878-5e37-4f73-8e2a-e3967126a2ff/Use_the_uploaded_image_only_as_the_visual_style_reference__Create_one_standalone_wide_cinematic_3D_a_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYTlkMTFiNDNjYzVmMWZjMiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI1ODMwN30.wuHLnBwmdHDmj0e-MF4513xgwyFYbdyGJkxzlelsnqE' 'topic-detail.png'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/46049859-1ac3-4cf5-9cad-7436b855005e/Use_the_uploaded_image_only_as_the_visual_style_reference__Create_one_standalone_wide_cinematic_3D_a_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZmQ2ODAwM2FmM2Q2ZmYzMCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI5Nzg1MH0.33IlVzEVp5JLFX34cObR6cZJUCTMCJTzJSJjB7BKX9Q' 'scholars.png'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/61b06f2f-b165-40ac-a263-9f9fecc3eb37/89cacb0f-6ef9-478f-b285-e95bfdf54652/Single_wide_cinematic_app_background_for_an_adult_Islamic_kn.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzMzNjYzNzc1ZTNkOTIzNiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI0ODI0N30.SXigB0AA0OIxaiXk4D1zljc1RDpy2ZvpT8W-DGSiW_E' 'quiz.jpg'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/ae37dcf4-549a-4a33-892a-0e0a40cc8135/Use_the_uploaded_image_only_as_the_visual_style_reference__Create_one_standalone_wide_cinematic_3D_a_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYTcxMTFkNjFhNGFmNWZhMiIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI1OTEwNX0.BmxODoPbFiwTXEXXKb-8tApeY25QdQoErRgHY4OH9ZA' 'scholar-detail.png'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/1befe5d5-1f8e-4aba-a257-1748336eb816/Use_the_uploaded_image_only_as_the_visual_style_reference__Create_one_standalone_wide_cinematic_3D_a_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMTU2ZTYxYThlODMxZTE1ZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI4OTg5Nn0.PT9xI_WkVnDZmqFW1dGM_eLsq3-PaEO_BO7BwP-y4A8' 'ilm-chat.png'
-          fetch 'https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/bf6eec28-bad9-444e-96b1-d0bd11904658/Photorealistic_historical_Islamic_manuscript_library_interior__approximately_10th_11th_century__Abso_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiODM5MDlkMzRhOTY5ZTRlZCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI3NjcyNH0.RqeiQkRznAZsdXSwDu2plvX4B7TQHXn33__bXRCi5z8' 'library.png'
+      - name: Switch Test CSS to permanent local heroes
+        shell: python
+        run: |
+          import json, re
+          from pathlib import Path
 
-          sha256sum "$OUT"/* | tee "$OUT/SHA256SUMS.txt"
+          mapping = {
+            "test/assets/more-v1253.css": "more-hub.jpg",
+            "test/assets/more-v1241.css": "more-hub.jpg",
+            "test/assets/jummah-v1258.css": "jummah.jpg",
+            "test/assets/prayer-v1254.css": "prayer.jpg",
+            "test/assets/qibla-v1259.css": "qibla.jpg",
+            "test/assets/ilm-dua-v1244.css": "dua.jpg",
+            "test/assets/quran-learn-v1256.css": "quran-learn.jpg",
+            "test/assets/ilm-book-detail-v1252.css": "book-detail.jpg",
+            "test/assets/ilm-post-reader-v1255.css": "post-reader.jpg",
+            "test/assets/quran-player-v1252.css": "quran-player.jpg",
+            "test/assets/quran-overview-v1250.css": "quran-overview.jpg",
+            "test/assets/quran-reader-v1251.css": "quran-overview.jpg",
+            "test/assets/ilm-topics-v1242.css": "topics.png",
+            "test/assets/ilm-topic-detail-v1254.css": "topic-detail.png",
+            "test/assets/ilm-scholars-v1240.css": "scholars.png",
+            "test/assets/quiz-overview-v1257.css": "quiz.jpg",
+            "test/assets/ilm-scholar-detail-v1251.css": "scholar-detail.png",
+            "test/assets/ilm-scholar-profile-v1253.css": "scholar-detail.png",
+            "test/assets/ilm-research-chat.css": "ilm-chat.png",
+            "test/assets/library/library-app.css": "library.png",
+          }
+          pat=re.compile(r'https://dnznrvs05pmza\.cloudfront\.net/[^)"\'\s]+')
+          for filename, local in mapping.items():
+            p=Path(filename)
+            source=p.read_text()
+            updated,count=pat.subn(f"/test/assets/area-heroes-v1290/{local}",source)
+            if count:
+              p.write_text(updated)
+              print(f"{filename}: {count} remote hero URL(s) localized")
 
-      - name: Commit localized Test hero assets
+          idx=Path("test/index.html")
+          source=idx.read_text()
+          source=re.sub(r'const APP_BUILD_ID="app-shell-v\d+(?:-test)?";','const APP_BUILD_ID="app-shell-v1290";',source,count=1)
+          idx.write_text(source)
+
+          worker=Path("cloudflare/test-app-worker.js")
+          source=worker.read_text().replace("area-authority-v1289","area-authority-v1290")
+          worker.write_text(source)
+
+          version=Path("test/version.json")
+          data=json.loads(version.read_text())
+          data.update({
+            "buildId":"app-shell-v1290",
+            "appBuildId":"app-shell-v1290",
+            "note":"v1290 · Test-App-Hero-Assets dauerhaft lokalisiert: Qurʾān, Quiz, Duʿāʾ, Mehr, Gebetszeiten, Jumuʿah, Qibla, Themen, Gelehrte, Leser und Bibliothek verwenden keine ablaufenden signierten Cloud-Bildlinks mehr.",
+            "updatedAt":"2026-10-05T13:46:00+02:00"
+          })
+          version.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n")
+
+      - name: Commit Test-only v1290 branch
         shell: bash
         run: |
           set -euo pipefail
-          if git diff --quiet -- test/assets/area-heroes-v1290; then
-            echo "No hero asset changes."
-            exit 0
-          fi
           git config user.name "DAR Test Asset Bot"
           git config user.email "actions@users.noreply.github.com"
-          git add test/assets/area-heroes-v1290
-          git commit -m "test: localize expiring hero assets v1290"
-          git push origin HEAD:main
+          git add test/assets/area-heroes-v1290 test/assets/*.css test/assets/library/library-app.css test/index.html test/version.json cloudflare/test-app-worker.js
+          if git diff --cached --quiet; then
+            echo "No localized Test changes."
+            exit 0
+          fi
+          git commit -m "test: localize hero assets and bump v1290"
+          git push --force origin HEAD:refs/heads/test-local-heroes-v1290
