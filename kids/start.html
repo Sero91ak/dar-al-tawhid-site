@@ -1469,9 +1469,9 @@ html,body{background:#06131f!important}
   content:"";position:absolute;inset:0;z-index:1;
   background:linear-gradient(180deg,rgba(5,19,28,.04),rgba(5,19,28,.18) 58%,rgba(5,19,28,.42))
 }
-.dua-scene.morning,.dua-scene.learn{--dua-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/c469c30f-7dda-48c5-a72f-7bb40a043993/Single_standalone_cinematic_16_9_hero_illustration_for_a_premium_Islamic_children_s_app_Du_a_section_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiN2FiNTAyMmYyM2ZjYjc0OSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTM2MTMyN30.KiYu2lPZdL0AbD8W0UyithIa1nWu57iaVAgb-SwDtA4")}
-.dua-scene.sleep,.dua-scene.night{--dua-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/c469c30f-7dda-48c5-a72f-7bb40a043993/Single_standalone_cinematic_16_9_hero_illustration_for_a_premium_Islamic_children_s_app_Du_a_section_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiN2FiNTAyMmYyM2ZjYjc0OSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTM2MTMyN30.KiYu2lPZdL0AbD8W0UyithIa1nWu57iaVAgb-SwDtA4")}
-.dua-scene.food,.dua-scene.family{--dua-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/c469c30f-7dda-48c5-a72f-7bb40a043993/Single_standalone_cinematic_16_9_hero_illustration_for_a_premium_Islamic_children_s_app_Du_a_section_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiN2FiNTAyMmYyM2ZjYjc0OSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTM2MTMyN30.KiYu2lPZdL0AbD8W0UyithIa1nWu57iaVAgb-SwDtA4")}
+.dua-scene.morning,.dua-scene.learn{--dua-art:url("/kids/assets/kids-art/dua-day-v11.jpg?v=11-creative1")}
+.dua-scene.sleep,.dua-scene.night{--dua-art:url("/kids/assets/kids-art/dua-night-v11.jpg?v=11-creative1")}
+.dua-scene.food,.dua-scene.family{--dua-art:url("/kids/assets/kids-art/dua-home-v11.jpg?v=11-creative1")}
 .dua-scene-symbol{position:relative;z-index:2}
 .dua-scene-symbol .kid-icon{
   background-image:url("/kids/assets/kids-icons/dua-real-v12.png?v=cut1")!important;
@@ -3356,7 +3356,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v57-sahabiyyat-fourfix1127";
+const KIDS_BUILD_ID="kids-shell-v58-sahabiyyat-found1128";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -7055,7 +7055,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=1"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v57-sahabiyyat-fourfix1127";
+  var KIDS_BUILD_ID="kids-shell-v58-sahabiyyat-found1128";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -7071,13 +7071,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1127",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1128",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1127",{cache:"no-store"})
+    fetch("/kids/version.json?v=1128",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");

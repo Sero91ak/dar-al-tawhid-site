@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1127";
-const KIDS_BUILD_ID="kids-shell-v57-sahabiyyat-fourfix1127";
+const CACHE_NAME="dar-al-tawhid-kids-v1128";
+const KIDS_BUILD_ID="kids-shell-v58-sahabiyyat-found1128";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -25,10 +25,10 @@ const CORE_PRECACHE=[
   "/kids/assets/sahabiyyat/umm-atiyyah-v1124.webp?v=1124",
   "/kids/assets/sahabiyyat/umm-habibah-v1124.webp?v=1124",
   "/kids/assets/sahabiyyat/umm-salamah-v1124.webp?v=1124",
-  "/kids/assets/sahabiyyat/sawdah-v1127.jpg?v=1127",
-  "/kids/assets/sahabiyyat/juwayriyyah-v1127.jpg?v=1127",
-  "/kids/assets/sahabiyyat/safiyyah-v1127.jpg?v=1127",
-  "/kids/assets/sahabiyyat/maymunah-v1127.jpg?v=1127",
+  "/kids/assets/sahabiyyat/sawdah-v1128.jpg?v=1128",
+  "/kids/assets/sahabiyyat/juwayriyyah-v1128.jpg?v=1128",
+  "/kids/assets/sahabiyyat/safiyyah-v1128.jpg?v=1128",
+  "/kids/assets/sahabiyyat/maymunah-v1128.jpg?v=1128",
   "/kids/data/story-hub.json?v=3",
   "/kids/data/dua-kids.json",
   "/kids/data/verified-content.json",

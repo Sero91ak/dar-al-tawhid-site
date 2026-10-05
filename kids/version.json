@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v57-sahabiyyat-fourfix1127",
-  "label": "KIDS · V1.07.61",
-  "releasedAt": "2026-10-05T11:55:00+02:00",
-  "note": "Kids v1127: die vier bereits vorhandenen hochwertigen Ṣaḥābiyyāt-Motive für Sawdah, Ǧuwayriyyah, Ṣafiyyah und Maymūnah wurden wiedergefunden, lokal importiert und korrekt zugeordnet; keine Ersatz-Szenen neu erzeugt. Namens-Overlay bleibt exakt aus den Story-Daten.",
+  "buildId": "kids-shell-v58-sahabiyyat-found1128",
+  "label": "KIDS · V1.07.62",
+  "releasedAt": "2026-10-05T11:58:00+02:00",
+  "note": "Kids v1128: die vier bereits zuvor erzeugten historischen Originalmotive für Sawdah, Ǧuwayriyyah, Ṣafiyyah und Maymūnah wurden wiedergefunden, lokal übernommen und den richtigen Ṣaḥābiyyāt-Karten/Heroes zugeordnet. Keine Ersatzmotive.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1127",
+    "serviceWorkerCache": "v1128",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -516,7 +516,15 @@
       "juwayriyyah": "05361165-96b4-4aa3-8af8-d75b99ae81ea",
       "safiyyah": "8dc6f829-ee24-4d42-8859-5e2d244aa6e2",
       "maymunah": "d35cabfa-3480-4bd1-82bc-46d88e996ea4"
-    }
+    },
+    "sahabiyyatRecoveredOriginals": true,
+    "sahabiyyatRecoveredOriginalsRelease": "v1128",
+    "sahabiyyatRecoveredOriginalIds": [
+      "sawdah",
+      "juwayriyyah",
+      "safiyyah",
+      "maymunah"
+    ]
   },
   "updatedAt": "2026-10-05"
 }
