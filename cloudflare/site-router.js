@@ -1,5 +1,4 @@
 import { gateHiddenSurfaces } from "./preview-gate.js";
-import { serveR2Media } from "./media-r2.js";
 /* Dar Test (/test) ohne Browser-Anmeldefenster. Kids bleibt geschützt. v1096 */
 function isNativeAppRequest(ua) {
   return /DarAlTawhid-iOS|DarAlTawhidOfficialIOS|DarAlTawhidAndroid/i.test(String(ua || ""));
@@ -649,10 +648,6 @@ async function serveKidsIntroVideo(request, url, env) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (request.method === "GET" || request.method === "HEAD") {
-      const r2Media = await serveR2Media(request, url, env);
-      if (r2Media) return r2Media;
-    }
     if (request.method === "GET" || request.method === "HEAD") {
       const audio = await proxyQuranAudio(request, url);
       if (audio) return audio;
