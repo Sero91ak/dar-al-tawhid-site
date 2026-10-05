@@ -92,7 +92,7 @@ document.addEventListener("click",e=>{
 });
 $("#backBtn").addEventListener("click",closeDetail);
 
-fetch("/kids/data/prophet-stories.json?v=28",{cache:"force-cache"})
+fetch("/kids/data/prophet-stories.json?v=29",{cache:"force-cache"})
   .then(r=>{if(!r.ok)throw new Error("data "+r.status);return r.json()})
   .then(data=>{
     items=sorted(data.items);
