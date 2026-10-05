@@ -910,3 +910,63 @@ body.is-hadith-route .hadith-sibling-spacer{min-height:1px!important}
   body.is-hadith-route .hadith-sibling-kicker{font-size:.62rem!important}
   body.is-hadith-route .hadith-sibling-btn strong{font-size:.94rem!important}
 }
+
+
+/* DAR_HADITH_FINAL_STATES_V1284
+   Final QA pass: loading/empty/error states, keyboard focus and reader metadata
+   follow the same open historical editorial language as the main Hadith hierarchy. */
+body.is-hadith-route .hadith-hub .empty,
+body.is-hadith-route .dua-collection-page > .empty,
+body.is-hadith-route #hadithSearchBlock .empty{
+  width:min(900px,calc(100% - 28px))!important;
+  margin:8px auto 28px!important;
+  padding:20px 0!important;
+  border:0!important;
+  border-top:1px solid var(--hadx-line)!important;
+  border-bottom:1px solid var(--hadx-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--muted2)!important;
+  font-size:.9rem!important;
+  line-height:1.55!important;
+  text-align:left!important;
+}
+body.is-hadith-route .hadith-detail .hadith-card-grade,
+body.is-hadith-route .hadith-detail .hadith-meta-line{
+  margin:0!important;
+  padding:13px 0!important;
+  border:0!important;
+  border-bottom:1px solid var(--hadx-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:var(--muted2)!important;
+  font-size:.78rem!important;
+  line-height:1.45!important;
+  font-weight:720!important;
+  letter-spacing:.035em!important;
+}
+body.is-hadith-route .hadith-detail .hadith-arabic{
+  font-size:clamp(1.28rem,4.4vw,1.8rem)!important;
+  line-height:2!important;
+  text-align:right!important;
+}
+body.is-hadith-route .hadith-crumb-link:focus-visible,
+body.is-hadith-route .hadith-sibling-btn:focus-visible,
+body.is-hadith-route .hadith-hub .dua-theme-card:focus-visible,
+body.is-hadith-route .dua-row:focus-visible{
+  outline:2px solid color-mix(in srgb,var(--gold2) 54%,transparent)!important;
+  outline-offset:3px!important;
+}
+body.is-hadith-route .hadith-sibling-btn[disabled]{
+  opacity:.34!important;
+  pointer-events:none!important;
+}
+@media(max-width:699px){
+  body.is-hadith-route .hadith-hub .empty,
+  body.is-hadith-route .dua-collection-page > .empty,
+  body.is-hadith-route #hadithSearchBlock .empty{
+    width:calc(100% - 28px)!important;
+    padding:18px 0!important;
+  }
+}
