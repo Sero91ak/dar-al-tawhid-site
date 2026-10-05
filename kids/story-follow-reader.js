@@ -45,13 +45,6 @@ function postNativeNowPlaying(payload,force=false){
   }catch(_){}
 }
 function normalizeKey(value){return String(value||"").trim().replace(/\s+/g,"-")}
-function cleanNowPlayingSubtitle(value){
-  return String(value||"DĀR AL TAWḤĪD Kids")
-    .replace(/\s*[·•|–—-]\s*Alter\s*\d+\s*[–-]\s*\d+\s*(?:Jahre?)?/gi,"")
-    .replace(/\s*Alter\s*\d+\s*[–-]\s*\d+\s*(?:Jahre?)?/gi,"")
-    .replace(/\s{2,}/g," ")
-    .trim()||"DĀR AL TAWḤĪD Kids";
-}
 function progressStorageKey(value){return PROGRESS_PREFIX+normalizeKey(value)}
 
 function create(options){
@@ -346,7 +339,7 @@ function create(options){
     const c=currentContent&&Object.keys(currentContent).length?currentContent:content();
     return clear?{clear:true}:{
       title:String(c.title||"Geschichte"),
-      artist:cleanNowPlayingSubtitle(c.subtitle),
+      artist:String(c.subtitle||"DĀR AL TAWḤĪD Kids"),
       album:String(c.album||"DĀR AL TAWḤĪD Kids · Hörbuch"),
       artwork:absoluteUrl(c.artwork||""),
       deepLink:String(c.deepLink||""),
@@ -374,7 +367,7 @@ function create(options){
       try{
         navigator.mediaSession.metadata=new MediaMetadata({
           title:String(c.title||"Geschichte"),
-          artist:cleanNowPlayingSubtitle(c.subtitle),
+          artist:String(c.subtitle||"DĀR AL TAWḤĪD Kids"),
           album:String(c.album||"Kinder-Hörbuch"),
           artwork:mediaArtwork(c)
         });
@@ -385,7 +378,7 @@ function create(options){
     safeJsonWrite(NOW_PLAYING_KEY,{
       key:storyKey(c),
       title:String(c.title||"Geschichte"),
-      subtitle:cleanNowPlayingSubtitle(c.subtitle),
+      subtitle:String(c.subtitle||"DĀR AL TAWḤĪD Kids"),
       artwork:absoluteUrl(c.artwork||""),
       deepLink:String(c.deepLink||""),
       updatedAt:Date.now()
@@ -468,12 +461,12 @@ function create(options){
   audio.addEventListener("loadedmetadata",()=>{restore();sync(true)});
   audio.addEventListener("canplay",()=>{restore();sync(false)},{passive:true});
   audio.addEventListener("durationchange",()=>sync(false));
-  audio.addEventListener("play",()=>{activateMediaSession();if(options.autoOpen!==false&&!isOpen())open();if(isOpen()&&!root.classList.contains("audio-only"))setReadingWake(true);updatePlay()});
+  audio.addEventListener("play",()=>{activateMediaSession();if(options.autoOpen!==false&&!isOpen())open();updatePlay()});
   audio.addEventListener("pause",()=>{persist(true);try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="paused"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);updatePlay()});
-  audio.addEventListener("ended",()=>{setReadingWake(false);const key=storyKey();if(key)safeRemove(progressStorageKey(key));try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="none"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);sync(true)});
+  audio.addEventListener("ended",()=>{const key=storyKey();if(key)safeRemove(progressStorageKey(key));setReadingWake(false);try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="none"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);sync(true)});
   audio.addEventListener("seeking",()=>sync(false));
   audio.addEventListener("seeked",()=>{sync(true);persist(true)});
-  window.addEventListener("pagehide",()=>{setReadingWake(false);persist(true);if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true)});
+  window.addEventListener("pagehide",()=>{persist(true);setReadingWake(false);if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true)});
   document.addEventListener("visibilitychange",()=>{if(document.hidden)persist(true)});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&isOpen()){e.stopPropagation();close()}},true);
 
@@ -485,5 +478,5 @@ function create(options){
     getSavedProgress:readProgress
   };
 }
-window.DARKidsFollowReader={version:6,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
+window.DARKidsFollowReader={version:11,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
 })();
