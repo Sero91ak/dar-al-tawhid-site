@@ -223,9 +223,13 @@ function create(options){
       node.classList.toggle("active",i===index);
       node.classList.toggle("past",i<index);
     });
-    if(index<0||index===lastIndex)return;
-    lastIndex=index;
+    if(index<0)return;
     const node=nodes[index];
+    if(index===lastIndex){
+      if(node&&forceScroll)scrollReaderNode(node,true);
+      return;
+    }
+    lastIndex=index;
     if(node&&(forceScroll||performance.now()>manualUntil))scrollReaderNode(node,!!forceScroll);
   }
   function readProgress(){
@@ -441,8 +445,13 @@ function create(options){
     root.removeAttribute("aria-hidden");
     document.documentElement.classList.add("kids-follow-reader-open");
     setReadingWake(!root.classList.contains("audio-only"));
+    manualUntil=0;
     if(readerView==="read"){try{readEl.scrollTop=0}catch(_){}}
-    else sync(true);
+    else{
+      restore();
+      sync(true);
+      requestAnimationFrame(()=>sync(true));
+    }
     setTimeout(()=>(readerView==="read"?closeEl:playEl)?.focus(),0);
   }
   function open(){openWithContent(content(),"follow")}
@@ -460,6 +469,7 @@ function create(options){
   }
   function close(){
     persist(true);
+    try{if(!audio.paused)audio.pause()}catch(_){}
     root.classList.remove("open");
     root.setAttribute("aria-hidden","true");
     document.documentElement.classList.remove("kids-follow-reader-open");
@@ -498,7 +508,14 @@ function create(options){
   audio.addEventListener("seeking",()=>sync(false));
   audio.addEventListener("seeked",()=>{sync(true);persist(true)});
   window.addEventListener("pagehide",()=>{persist(true);setReadingWake(false);if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true)});
-  document.addEventListener("visibilitychange",()=>{if(document.hidden)persist(true)});
+  document.addEventListener("visibilitychange",()=>{
+    if(document.hidden){persist(true);return}
+    if(isOpen()&&readerView!=="read"){
+      manualUntil=0;
+      sync(true);
+      requestAnimationFrame(()=>sync(true));
+    }
+  });
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&isOpen()){e.stopPropagation();close()}},true);
 
   setContent(content());
@@ -509,5 +526,5 @@ function create(options){
     getSavedProgress:readProgress
   };
 }
-window.DARKidsFollowReader={version:15,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
+window.DARKidsFollowReader={version:16,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
 })();
