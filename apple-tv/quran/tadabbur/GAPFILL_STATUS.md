@@ -26,27 +26,27 @@ duplicate-review-archive.json
 
 archiviert. Die jeweils erste registrierte Referenz bleibt kanonisch.
 
-Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-119` gilt jetzt:
+Nach Dedupe-Reparatur und den Gap-Fill-Batches `06-001` bis `06-120` gilt jetzt:
 
 ```text
 Qurʾān-Gesamtverse: 6236
-entriesCount: 4456
-totalVerifiedEntries: 4456
-loadedEntries: 4456
-uniqueVerifiedReferences: 4456
-missingCount: 1780
+entriesCount: 4457
+totalVerifiedEntries: 4457
+loadedEntries: 4457
+uniqueVerifiedReferences: 4457
+missingCount: 1779
 duplicateCount: 0
 invalidCount: 0
 countMismatchCount: 0
-firstMissingReference: 2:64
+firstMissingReference: 2:82
 lastMissingReference: 19:98
 letzter fortlaufender Batch: entries-batch-05z-116.json
 letzter fortlaufender Vers: 114:6
-letzter Gap-Fill-Batch: entries-gap-06-119.json
-nächster Gap-Fill-Batch: entries-gap-06-120.json
+letzter Gap-Fill-Batch: entries-gap-06-120.json
+nächster Gap-Fill-Batch: entries-gap-06-121.json
 ```
 
-Seit der Dedupe-Basis `4190` wurden damit `266` neue eindeutige, geprüfte Referenzen registriert.
+Seit der Dedupe-Basis `4190` wurden damit `267` neue eindeutige, geprüfte Referenzen registriert.
 
 ## Warum kein `entries-batch-05z-117.json`?
 
@@ -144,6 +144,7 @@ Danach gibt es keinen weiteren Qurʾān-Vers. Alle weiteren Arbeiten sind aussch
 06-117  1
 06-118  1
 06-119  1
+06-120  1
 ```
 
 Die Zahl hinter jedem Batch ist die aktuell registrierte Eintragszahl der Datei.
@@ -251,6 +252,7 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 06-117: 3:85
 06-118: 2:43
 06-119: 2:49
+06-120: 2:64
 ```
 
 ## Nächste echte Audit-Lücken
@@ -258,13 +260,12 @@ Qurʾān `2:229` darf nicht erneut als Gap-Fill registriert werden.
 Der erste weiterhin fehlende Vers ist:
 
 ```text
-2:64
+2:82
 ```
 
 Der aktuelle nächste 25er-Auditbereich beginnt mit:
 
 ```text
-2:64
 2:82
 2:92
 2:98
@@ -289,6 +290,7 @@ Der aktuelle nächste 25er-Auditbereich beginnt mit:
 2:209
 2:242
 2:244
+2:246
 ```
 
 Diese Referenzen sind Arbeitsziele, keine Aufforderung zum künstlichen Füllen. Ein Vers bleibt offen, bis ein konkreter früher Bericht mit belastbarer Zuordnung und ausreichend geprüfter Überlieferungskette vorliegt.
