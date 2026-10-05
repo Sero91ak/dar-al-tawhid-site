@@ -7011,6 +7011,19 @@
         "kids/version.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "test-hadith-library-mobile-structure-v1297-2026-10-05",
+      "at": "2026-10-05T14:40:00+02:00",
+      "approvedBy": "user-explicit-github-hadith-library-redesign",
+      "reason": "Nutzer beauftragt ausdrücklich die Test-App-Ḥadīṯ-Bibliothek strukturell zu korrigieren: Startseite stark kürzen, Werke klar als Werke kennzeichnen, Hero-Bilder sauber einbetten, Werk→Kitāb→Bāb-Hierarchie ordnen, Bāb-Ḥadīṯlisten auf Mobile volle Breite geben und Einzel-Ḥadīṯ vertikal lesbar gestalten. Nur Test-App.",
+      "paths": [
+        "test/assets/ilm-hadith-v1243.css",
+        "test/assets/hadith-structure-v1297.js",
+        "cloudflare/test-app-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
