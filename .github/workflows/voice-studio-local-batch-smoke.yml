@@ -509,6 +509,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import json
+          import re
           from pathlib import Path
 
           quiz=json.loads(Path("kids/data/quiz-kids.json").read_text(encoding="utf-8"))
@@ -626,10 +627,11 @@ jobs:
           assert 'background-image:url("/kids/assets/quiz-scenes/' not in kids, "quiz artwork must stay manifest-driven, not duplicated in CSS"
           assert 'var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";' in kids
           assert '#quizModal[data-quiz-band="4-6"] .quiz-scene-top .quiz-scene-chip:first-child{display:none}' in kids
-          assert '/kids/quiz-library.css?v=6' in kids
-          assert '/kids/quiz-library.js?v=6' in kids
-          assert '/kids/quiz-library.css?v=6' in sw
-          assert '/kids/quiz-library.js?v=6' in sw
+          css_ref=re.search(r'/kids/quiz-library\.css\?v=(\d+)',kids)
+          js_ref=re.search(r'/kids/quiz-library\.js\?v=(\d+)',kids)
+          assert css_ref and js_ref, "versioned Kids quiz library assets missing from shell"
+          assert css_ref.group(0) in sw, "Kids quiz library CSS version is not precached"
+          assert js_ref.group(0) in sw, "Kids quiz library JS version is not precached"
           for marker in (
               "quizLibraryToolbar",
               "quizModeLibrary",
