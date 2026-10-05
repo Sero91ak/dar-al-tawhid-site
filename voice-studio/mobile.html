@@ -8,10 +8,10 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="DĀR Voice">
-<link rel="manifest" href="/voice-studio/mobile-manifest.webmanifest?v=29115">
-<link rel="apple-touch-icon" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29115">
-<link rel="apple-touch-icon-precomposed" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29115">
-<link rel="icon" type="image/png" href="/voice-studio/voice-studio-icon.png?v=29115">
+<link rel="manifest" href="/voice-studio/mobile-manifest.webmanifest?v=29116">
+<link rel="apple-touch-icon" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29116">
+<link rel="apple-touch-icon-precomposed" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29116">
+<link rel="icon" type="image/png" href="/voice-studio/voice-studio-icon.png?v=29116">
 <title>DĀR Voice</title>
 <style>
 :root{color-scheme:light;--bg:#f7f7f5;--card:#fff;--ink:#111;--muted:#777773;--line:#e8e8e4;--soft:#efefec;--good:#17784a;--warn:#9a5a00;--bad:#b42318;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)}
@@ -116,7 +116,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.115</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.116</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -156,7 +156,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",finalAudioName:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],wordResultSerial:0,generating:false};
-const MOBILE_APP_VERSION="2.9.115";
+const MOBILE_APP_VERSION="2.9.116";
 const LOCAL_ENGINE_HOST=location.port==="8787"||location.hostname==="127.0.0.1"||location.hostname==="localhost"||/^192\.168\./.test(location.hostname)||/^10\./.test(location.hostname)||/^172\.(1[6-9]|2\d|3[01])\./.test(location.hostname);
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const CLOUD_API_BASE="/voice-studio/api";
@@ -301,10 +301,19 @@ async function checkMobileUpdate(showToast=true){
       data=await r.json().catch(()=>({}));
       if(!r.ok||!data.ok)throw Error(data.error||"Update-Prüfung fehlgeschlagen");
     }else{
-      const r=await fetch("/voice-studio/version.json?mobile_update="+Date.now(),{cache:"no-store",credentials:"include"});
-      const manifest=await r.json().catch(()=>({}));
-      if(!r.ok)throw Error("Update-Datei nicht erreichbar");
-      const latest=String(manifest.mobileVoiceApp?.version||manifest.version||MOBILE_APP_VERSION);
+      let manifest={};
+      let latest="";
+      try{
+        const r=await fetch("/voice-studio/version.json?mobile_update="+Date.now(),{cache:"no-store",credentials:"include"});
+        manifest=await r.json().catch(()=>({}));
+        if(r.ok)latest=String(manifest.mobileVoiceApp?.version||"");
+      }catch(_){}
+      try{
+        const rr=await fetch(CLOUD_DIRECT_BASE+"/mobile-release?cb="+Date.now(),{cache:"no-store",mode:"cors",credentials:"omit"});
+        const release=await rr.json().catch(()=>({}));
+        if(rr.ok&&release.ok&&versionNewer(String(release.version||""),latest||"0"))latest=String(release.version||"");
+      }catch(_){}
+      if(!latest)latest=String(manifest.version||MOBILE_APP_VERSION);
       data={ok:true,current:MOBILE_APP_VERSION,latest,updateAvailable:versionNewer(latest,MOBILE_APP_VERSION)};
     }
     mobileLatestVersion=String(data.latest||MOBILE_APP_VERSION);
@@ -357,13 +366,18 @@ async function installMobileUpdate(){
     }
     if("serviceWorker" in navigator){
       const regs=await navigator.serviceWorker.getRegistrations();
-      await Promise.all(regs.map(r=>r.update().catch(()=>{})));
+      await Promise.all(regs.filter(r=>String(r.scope||"").includes("/voice-studio/")).map(async r=>{
+        try{await r.update()}catch(_){}
+        try{await r.unregister()}catch(_){}
+      }));
     }
     if("caches" in window){
       const keys=await caches.keys();
       await Promise.all(keys.filter(k=>k.startsWith("dar-voice-studio-")).map(k=>caches.delete(k)));
     }
-    location.reload();
+    try{localStorage.setItem("dar.voice.mobile.forceRefresh",String(Date.now()))}catch(_){}
+    const target="/voice-studio/mobile.html?app=1&cloud=1&update="+Date.now();
+    location.replace(target);
   }catch(e){
     if(btn){btn.disabled=false;btn.textContent="Update erneut versuchen"}
     if(badge){badge.textContent="Fehler";badge.className="badge"}
