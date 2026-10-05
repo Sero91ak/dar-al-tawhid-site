@@ -1,0 +1,433 @@
+/* ==========================================================================
+   LIBRARY_AUTHORITY_V1293
+   Final Test-App authority for Bibliothek / Detail / PDF reader.
+   ========================================================================== */
+
+html[data-theme] body.is-library-route{
+  --lib1293-line:color-mix(in srgb,var(--gold2,#d8c18b) 19%,transparent);
+  --lib1293-line-strong:color-mix(in srgb,var(--gold2,#d8c18b) 31%,transparent);
+  --lib1293-muted:var(--muted,#aaa18f);
+}
+
+/* Main library uses the same open editorial rhythm as the redesigned areas. */
+html[data-theme] body.is-library-route .lib-page[data-library-root]{
+  width:min(1100px,100%)!important;
+  max-width:1100px!important;
+  margin:0 auto!important;
+  padding:0 14px calc(138px + env(safe-area-inset-bottom,0px))!important;
+  box-sizing:border-box!important;
+  overflow:visible!important;
+  --dar-lib-cinema-image:url("/test/assets/area-heroes-v1290/library.webp")!important;
+}
+
+/* Full-width historical hero; copy stays on the left, scene remains visible on the right. */
+html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero{
+  width:100vw!important;
+  max-width:none!important;
+  min-height:clamp(310px,44vw,410px)!important;
+  margin:0 0 22px calc(50% - 50vw)!important;
+  padding:32px max(24px,calc((100vw - min(1080px,100vw)) / 2 + 20px)) 34px!important;
+  border:0!important;
+  border-radius:0 0 30px 30px!important;
+  box-shadow:0 18px 42px rgba(4,14,14,.12)!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 97%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 90%,transparent) 31%,
+      color-mix(in srgb,var(--bg) 65%,transparent) 54%,
+      color-mix(in srgb,var(--bg) 22%,transparent) 79%,
+      transparent 100%),
+    linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.10) 54%,color-mix(in srgb,var(--bg) 35%,transparent)),
+    var(--dar-lib-cinema-image) 57% center/cover no-repeat!important;
+}
+html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  pointer-events:none!important;
+  opacity:1!important;
+  background:
+    radial-gradient(circle at 82% 22%,rgba(239,210,142,.12),transparent 30%),
+    linear-gradient(180deg,rgba(255,255,255,.018),transparent 48%)!important;
+}
+html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero-inner{
+  position:relative!important;
+  z-index:2!important;
+  width:min(600px,62%)!important;
+  max-width:600px!important;
+}
+html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero h2{
+  margin:0!important;
+  font-family:var(--serif,var(--font-display),serif)!important;
+  font-size:clamp(36px,7vw,56px)!important;
+  font-weight:620!important;
+  line-height:.98!important;
+  letter-spacing:-.025em!important;
+  color:var(--text)!important;
+}
+html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero-lead{
+  margin:9px 0 0!important;
+  font-size:17px!important;
+  line-height:1.35!important;
+  color:var(--gold2,var(--text))!important;
+}
+html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero-note{
+  max-width:520px!important;
+  margin:10px 0 0!important;
+  font-size:13px!important;
+  line-height:1.48!important;
+  color:color-mix(in srgb,var(--text) 80%,var(--muted) 20%)!important;
+}
+html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero-note.is-full{
+  display:none!important;
+}
+html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero-note.is-short{
+  display:block!important;
+}
+html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero-line{
+  display:none!important;
+}
+
+/* Search/filter should read as controls, not another floating dashboard. */
+html[data-theme] body.is-library-route .lib-toolbar{
+  position:relative!important;
+  top:auto!important;
+  z-index:4!important;
+  width:min(940px,100%)!important;
+  margin:-38px auto 30px!important;
+  padding:10px!important;
+  gap:8px!important;
+  border:1px solid var(--lib1293-line)!important;
+  border-radius:21px!important;
+  background:color-mix(in srgb,var(--bg) 92%,transparent)!important;
+  box-shadow:0 12px 30px rgba(3,15,14,.09)!important;
+  backdrop-filter:blur(16px) saturate(1.06)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(1.06)!important;
+}
+html[data-theme] body.is-library-route .lib-search,
+html[data-theme] body.is-library-route .lib-cat-toggle{
+  min-height:50px!important;
+  max-height:none!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+  border:0!important;
+  border-bottom:1px solid var(--lib1293-line)!important;
+  border-radius:0!important;
+  background-color:transparent!important;
+  box-shadow:none!important;
+  font-size:14.5px!important;
+}
+html[data-theme] body.is-library-route .lib-cat-panel{
+  border:1px solid var(--lib1293-line)!important;
+  border-radius:16px!important;
+  background:var(--card,var(--bg))!important;
+  box-shadow:0 16px 38px rgba(3,12,12,.13)!important;
+}
+
+/* Section heads need breathing room. */
+html[data-theme] body.is-library-route .lib-section,
+html[data-theme] body.is-library-route .lib-portals{
+  width:min(960px,100%)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+html[data-theme] body.is-library-route .lib-section-head,
+html[data-theme] body.is-library-route .lib-portals-head{
+  margin:29px 0 15px!important;
+}
+html[data-theme] body.is-library-route .lib-section-head h3,
+html[data-theme] body.is-library-route .lib-portals-head h3{
+  font-size:clamp(21px,4.4vw,29px)!important;
+  line-height:1.08!important;
+}
+html[data-theme] body.is-library-route .lib-section-count,
+html[data-theme] body.is-library-route .lib-portals-head p{
+  font-size:11px!important;
+  line-height:1.3!important;
+}
+
+/* Topics shelves: one generous historic row on iPhone, two only on wider screens. */
+html[data-theme] body.is-library-route .lib-portal-grid{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:13px!important;
+}
+html[data-theme] body.is-library-route .lib-portal{
+  position:relative!important;
+  isolation:isolate!important;
+  display:block!important;
+  width:100%!important;
+  min-height:118px!important;
+  padding:20px 94px 18px 19px!important;
+  overflow:hidden!important;
+  border:1px solid var(--lib1293-line)!important;
+  border-radius:22px!important;
+  background:
+    linear-gradient(145deg,color-mix(in srgb,var(--card) 96%,transparent),color-mix(in srgb,var(--bg) 92%,transparent))!important;
+  box-shadow:0 9px 24px rgba(3,14,13,.06)!important;
+  text-align:left!important;
+}
+html[data-theme] body.is-library-route .lib-portal::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:1!important;
+  inset:0!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--card,var(--bg)) 100%,transparent) 0%,
+      color-mix(in srgb,var(--card,var(--bg)) 97%,transparent) 42%,
+      color-mix(in srgb,var(--card,var(--bg)) 71%,transparent) 61%,
+      color-mix(in srgb,var(--card,var(--bg)) 21%,transparent) 82%,
+      transparent 100%)!important;
+}
+html[data-theme] body.is-library-route .lib-portal-art{
+  position:absolute!important;
+  z-index:0!important;
+  inset:0 0 0 auto!important;
+  width:46%!important;
+  height:100%!important;
+  margin:0!important;
+  opacity:.72!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+}
+html[data-theme] body.is-library-route .lib-portal-art img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  filter:saturate(.86) contrast(1.03)!important;
+}
+html[data-theme] body.is-library-route .lib-portal-name{
+  position:relative!important;
+  z-index:2!important;
+  display:block!important;
+  width:64%!important;
+  max-width:64%!important;
+  margin:0!important;
+  font-size:19px!important;
+  font-weight:680!important;
+  line-height:1.13!important;
+  color:var(--text)!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+html[data-theme] body.is-library-route .lib-portal-count{
+  position:relative!important;
+  z-index:2!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  min-height:25px!important;
+  margin-top:10px!important;
+  padding:4px 9px!important;
+  border:1px solid var(--lib1293-line)!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--gold2) 5%,transparent)!important;
+  color:var(--muted)!important;
+  font-size:10px!important;
+  line-height:1!important;
+}
+
+/* Keep books readable; do not force a dense poster wall. */
+html[data-theme] body.is-library-route .lib-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:14px 11px!important;
+}
+html[data-theme] body.is-library-route .lib-card{
+  min-width:0!important;
+  border-radius:18px!important;
+  border:1px solid var(--lib1293-line)!important;
+  background:color-mix(in srgb,var(--card) 90%,transparent)!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-library-route .lib-card-body{
+  padding:11px 10px 12px!important;
+}
+html[data-theme] body.is-library-route .lib-card-body h4{
+  display:block!important;
+  margin:0!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  white-space:normal!important;
+  -webkit-line-clamp:unset!important;
+  font-size:13.5px!important;
+  line-height:1.3!important;
+}
+html[data-theme] body.is-library-route .lib-card-meta-line,
+html[data-theme] body.is-library-route .lib-card-date{
+  font-size:10.5px!important;
+  line-height:1.35!important;
+}
+html[data-theme] body.is-library-route .lib-shelf-row{
+  gap:12px!important;
+  padding-bottom:8px!important;
+}
+html[data-theme] body.is-library-route .lib-shelf-row .lib-card{
+  min-width:150px!important;
+  max-width:180px!important;
+}
+
+/* Detail route: open page, cover + title remain the focus. */
+html[data-theme] body.is-library-route .lib-page.lib-detail{
+  width:min(900px,100%)!important;
+  margin:0 auto!important;
+  padding:8px 14px calc(130px + env(safe-area-inset-bottom,0px))!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-library-route .lib-detail-hero{
+  gap:20px!important;
+  padding:20px!important;
+  border:1px solid var(--lib1293-line)!important;
+  border-radius:24px!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-library-route .lib-detail-copy h2{
+  font-size:clamp(27px,6.5vw,42px)!important;
+  line-height:1.03!important;
+}
+html[data-theme] body.is-library-route .lib-detail-desc{
+  font-size:14px!important;
+  line-height:1.58!important;
+}
+html[data-theme] body.is-library-route .lib-actions{
+  margin-top:16px!important;
+}
+html[data-theme] body.is-library-route .lib-actions-row{
+  gap:8px!important;
+}
+html[data-theme] body.is-library-route .lib-btn{
+  min-height:46px!important;
+  border-radius:14px!important;
+}
+
+/* PDF reader: compact controls, safe iPhone insets, no decorative redesign. */
+html[data-theme] body.is-library-route .lib-reader{
+  background:var(--bg)!important;
+}
+html[data-theme] body.is-library-route .lib-reader-toolbar{
+  min-height:56px!important;
+  padding:
+    max(7px,env(safe-area-inset-top,0px))
+    max(8px,env(safe-area-inset-right,0px))
+    7px
+    max(8px,env(safe-area-inset-left,0px))!important;
+  gap:6px!important;
+  border-bottom:1px solid var(--lib1293-line)!important;
+}
+html[data-theme] body.is-library-route .lib-reader-icon{
+  min-width:42px!important;
+  min-height:42px!important;
+  padding:0!important;
+  border-radius:12px!important;
+}
+html[data-theme] body.is-library-route .lib-reader-page input{
+  min-height:40px!important;
+  font-size:14px!important;
+}
+html[data-theme] body.is-library-route .lib-reader-titlebar{
+  min-height:38px!important;
+  padding:9px 14px!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+html[data-theme] body.is-library-route .lib-reader-stage{
+  overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+
+@media(max-width:600px){
+  html[data-theme] body.is-library-route .lib-page[data-library-root]{
+    padding-left:10px!important;
+    padding-right:10px!important;
+  }
+  html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero{
+    min-height:330px!important;
+    margin-bottom:20px!important;
+    padding:26px 20px 30px!important;
+    border-radius:0 0 26px 26px!important;
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb,var(--bg) 97%,transparent) 0%,
+        color-mix(in srgb,var(--bg) 91%,transparent) 38%,
+        color-mix(in srgb,var(--bg) 67%,transparent) 59%,
+        color-mix(in srgb,var(--bg) 18%,transparent) 86%,
+        transparent 100%),
+      linear-gradient(180deg,transparent 54%,color-mix(in srgb,var(--bg) 35%,transparent)),
+      var(--dar-lib-cinema-image) 64% center/cover no-repeat!important;
+  }
+  html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero-inner{
+    width:68%!important;
+    max-width:68%!important;
+  }
+  html[data-theme] body.is-library-route .lib-page[data-library-root] .lib-hero h2{
+    font-size:clamp(34px,10vw,44px)!important;
+  }
+  html[data-theme] body.is-library-route .lib-toolbar{
+    width:calc(100% - 8px)!important;
+    margin-top:-32px!important;
+    margin-bottom:27px!important;
+  }
+  html[data-theme] body.is-library-route .lib-portal{
+    min-height:124px!important;
+    padding:20px 74px 18px 17px!important;
+  }
+  html[data-theme] body.is-library-route .lib-portal-art{
+    width:48%!important;
+  }
+  html[data-theme] body.is-library-route .lib-portal-name{
+    width:68%!important;
+    max-width:68%!important;
+    font-size:18px!important;
+  }
+  html[data-theme] body.is-library-route .lib-grid{
+    gap:12px 9px!important;
+  }
+  html[data-theme] body.is-library-route .lib-card-body{
+    padding:10px 8px 11px!important;
+  }
+  html[data-theme] body.is-library-route .lib-card-body h4{
+    font-size:12.8px!important;
+  }
+  html[data-theme] body.is-library-route .lib-page.lib-detail{
+    padding-left:10px!important;
+    padding-right:10px!important;
+  }
+  html[data-theme] body.is-library-route .lib-detail-hero{
+    grid-template-columns:92px minmax(0,1fr)!important;
+    gap:14px!important;
+    padding:15px!important;
+    border-radius:20px!important;
+  }
+  html[data-theme] body.is-library-route .lib-detail-copy h2{
+    font-size:clamp(24px,7.4vw,34px)!important;
+  }
+}
+
+@media(min-width:760px){
+  html[data-theme] body.is-library-route .lib-portal-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  html[data-theme] body.is-library-route .lib-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:17px 14px!important;
+  }
+}
+
+@media(min-width:1120px){
+  html[data-theme] body.is-library-route .lib-portal-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+  html[data-theme] body.is-library-route .lib-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] body.is-library-route .lib-portal,
+  html[data-theme] body.is-library-route .lib-card{
+    transition:none!important;
+  }
+}
