@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v95-voice-master-sync1168",
-  "label": "KIDS · V1.07.96",
-  "releasedAt": "2026-10-05T23:31:00+02:00",
-  "note": "Voice/Kids-Mastertext-Synchronisierung: Propheten (25) und Ṣaḥābah (10) vollständig geprüft und bereits textgleich; 9 abweichende Ṣaḥābiyyāt-Fassungen auf den verbindlichen Voice-Mastertext synchronisiert. Kids-Lesetext, Hören & Mitlesen und Audio-Grundlage verwenden jetzt dieselbe kanonische Textquelle. Release-Guard blockiert künftig Abweichungen zwischen masterStoryText und Altersfassungen.",
+  "buildId": "kids-shell-v96-audio-home-focus1169",
+  "label": "KIDS · V1.07.97",
+  "releasedAt": "2026-10-06T00:20:00+02:00",
+  "note": "Startseite auf Hörbücher, intelligentes Mitlesen und Qurʾān fokussiert: größere DĀR AL TAWḤĪD KIDS Markenbühne, klarer Weiterhören-Einstieg, nur drei primäre Hörwelten (Geschichten, Qurʾān, Duʿāʾ), Tagesreise und Quiz auf der Startseite zurückgenommen. Alif-Bāʾ ist für diese Fassung vollständig aus der nutzbaren Oberfläche und dem aktiven Runtime-Start entfernt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1168",
+    "serviceWorkerCache": "v1169",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -696,7 +696,10 @@
     "voiceKidsTextSync": "strict-master-v1",
     "voiceKidsReadAlongTextParity": true,
     "storyFollowReaderTextSource": "same-master-as-voice-studio-v1",
-    "storyReleaseGuardMasterParity": true
+    "storyReleaseGuardMasterParity": true,
+    "homeFocus": "audio-readalong-quran",
+    "homePrimaryChoices": 3,
+    "alphabetEnabled": false
   },
   "updatedAt": "2026-10-05",
   "deployTrigger": "2026-10-05T23:44:00+02:00"
