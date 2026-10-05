@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v51-sahabiyyat-art-names1121",
+  "buildId": "kids-shell-v51-story-controls1121",
   "label": "KIDS · V1.07.56",
-  "releasedAt": "2026-10-05T10:34:00+02:00",
-  "note": "Kids v1121: Ṣaḥābiyyāt-Karten und Detail-Heroes zeigen den Namen direkt auf dem Bild; vier neue historisch inspirierte, gesichtslose Szenen für Sawdah, Ǧuwayriyyah, Ṣafiyyah und Maymūnah zugeordnet.",
+  "releasedAt": "2026-10-05T10:35:00+02:00",
+  "note": "Kids v1121: StoryPlayer-Bedienung auf iPhone/iPad systematisch gehärtet. „Text schließen“ funktioniert zuverlässig, Lesen und synchrones Mitlesen haben eindeutige Zustände, Text-Scroll bleibt im Lesefenster, Swipe-Gesten kollidieren nicht mehr mit Text/Buttons und alle Touch-Ziele sind hardwarefreundlich.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -420,7 +420,7 @@
     "sahabiyyatVerifiedStories": 14,
     "sahabiyyatNoPortraits": true,
     "sahabiyyatSingleMasterStory": true,
-    "sahabiyyatArtworkPolicy": "historical-veiled-figure-no-face-no-portrait-claim",
+    "sahabiyyatArtworkPolicy": "historical-environment-only-no-portrait",
     "sahabiyyatBundleVersion": 3,
     "sahabiyyatStaticHubCard": true,
     "sahabiyyatStaticEntry": true,
@@ -435,8 +435,8 @@
     "sahabiyyatScrollSafety": true,
     "storyAudioPinnedBytes": 2098317,
     "storyAudioDeliveryProfile": "optimized-runtime",
-    "sahabiyyatCssVersion": 4,
-    "sahabiyyatJsVersion": 7,
+    "sahabiyyatCssVersion": 3,
+    "sahabiyyatJsVersion": 6,
     "storyHub": "v3-universal-single-runtime",
     "storyHubPlayer": "single-runtime-audio-player-edge-to-edge",
     "storyHubAgeAdaptive": true,
@@ -450,17 +450,15 @@
     "legacyStoryPlayersRemoved": true,
     "storyCategoryArtworkLocal": true,
     "storyMissingAudioState": "Audio folgt",
-    "storyHubAssetVersion": 3,
+    "storyHubAssetVersion": 4,
     "storyHubCategoryArtwork": "manifest-first-local",
     "storyLegacyAudioPlayers": false,
-    "sahabiyyatNameOverlay": true,
-    "sahabiyyatNameOverlayPlacement": "bottom-on-card-and-detail-hero",
-    "sahabiyyatDistinctNewArtworks": [
-      "sawdah",
-      "juwayriyyah",
-      "safiyyah",
-      "maymunah"
-    ]
+    "storyHubCssVersion": 2,
+    "storyReaderControls": "state-machine-v1121",
+    "storyReaderTouch": "iphone-ipad-hardened-v1121",
+    "storyReaderInternalScroll": true,
+    "storyReaderGestureGuard": true,
+    "storyReaderCloseRestoresPosition": true
   },
   "updatedAt": "2026-10-05"
 }

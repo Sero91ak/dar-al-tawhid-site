@@ -1,5 +1,5 @@
 const CACHE_NAME="dar-al-tawhid-kids-v1121";
-const KIDS_BUILD_ID="kids-shell-v51-sahabiyyat-art-names1121";
+const KIDS_BUILD_ID="kids-shell-v51-story-controls1121";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -22,13 +22,13 @@ const CORE_PRECACHE=[
   "/kids/prophet-stories.css?v=29",
   "/kids/prophet-stories.js?v=29",
   "/kids/mubashshirun-stories.css?v=19",
-  "/kids/sahabiyyat-stories.css?v=4",
+  "/kids/sahabiyyat-stories.css?v=3",
   "/kids/mubashshirun-stories.js?v=19",
-  "/kids/sahabiyyat-stories.js?v=7",
+  "/kids/sahabiyyat-stories.js?v=6",
   "/kids/story-follow-reader.css?v=4",
   "/kids/story-follow-reader.js?v=5",
-  "/kids/story-hub.css?v=1",
-  "/kids/story-hub.js?v=3",
+  "/kids/story-hub.css?v=2",
+  "/kids/story-hub.js?v=4",
   "/kids/kids-age-typography.css?v=4",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=1",

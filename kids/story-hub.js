@@ -90,14 +90,14 @@ function ensureUi(){
   $("#ghBack").addEventListener("click",closeWorld);
 
   const player=document.createElement("section");player.id="ghPlayer";player.className="gh-player";player.setAttribute("aria-hidden","true");
-  player.innerHTML='<div class="gh-player-scroll" id="ghPlayerScroll"><section class="gh-player-hero"><img id="ghPlayerBg" class="gh-player-bg" src="" alt=""><span class="gh-player-shade" aria-hidden="true"></span><button id="ghPlayerBack" class="gh-player-back" type="button" aria-label="Zurück zur Auswahl">‹</button><button id="ghPlayerMin" class="gh-player-min" type="button" aria-label="Player minimieren">⌄</button><div class="gh-player-copy"><div class="gh-player-kicker" id="ghPlayerKicker"></div><h2 id="ghPlayerTitle"></h2><div class="gh-player-ar" id="ghPlayerArabic" dir="rtl"></div><div class="gh-player-summary" id="ghPlayerSummary"></div></div></section><main class="gh-player-body"><section class="gh-controls"><div class="gh-main-controls"><button class="gh-skip" id="ghBack15" type="button">−15 s</button><button class="gh-play" id="ghPlay" type="button">Hören</button><button class="gh-skip" id="ghFwd15" type="button">+15 s</button></div><div class="gh-progress" id="ghProgress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div><div class="gh-time"><span id="ghCurrent">0:00</span><span id="ghTotal">0:00</span></div><div class="gh-player-actions"><button class="gh-read-toggle" id="ghReadToggle" type="button">Text lesen</button><button class="gh-read-toggle" id="ghFollow" type="button">Mitlesen</button></div><p class="gh-audio-note" id="ghAudioNote"></p></section><article class="gh-read" id="ghRead" hidden></article><section class="gh-sources"><strong>QUELLEN</strong><div id="ghSources"></div></section><section class="gh-next" id="ghNext" hidden><small>WEITER ENTDECKEN</small><button id="ghNextButton" type="button"><img id="ghNextImg" src="" alt=""><span><em id="ghNextMeta"></em><strong id="ghNextTitle"></strong></span><b aria-hidden="true">›</b></button></section></main></div>';
+  player.innerHTML='<div class="gh-player-scroll" id="ghPlayerScroll"><section class="gh-player-hero"><img id="ghPlayerBg" class="gh-player-bg" src="" alt=""><span class="gh-player-shade" aria-hidden="true"></span><button id="ghPlayerBack" class="gh-player-back" type="button" aria-label="Zurück zur Auswahl">‹</button><button id="ghPlayerMin" class="gh-player-min" type="button" aria-label="Player minimieren">⌄</button><div class="gh-player-copy"><div class="gh-player-kicker" id="ghPlayerKicker"></div><h2 id="ghPlayerTitle"></h2><div class="gh-player-ar" id="ghPlayerArabic" dir="rtl"></div><div class="gh-player-summary" id="ghPlayerSummary"></div></div></section><main class="gh-player-body"><section class="gh-controls"><div class="gh-main-controls"><button class="gh-skip" id="ghBack15" type="button">−15 s</button><button class="gh-play" id="ghPlay" type="button">Hören</button><button class="gh-skip" id="ghFwd15" type="button">+15 s</button></div><div class="gh-progress" id="ghProgress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div><div class="gh-time"><span id="ghCurrent">0:00</span><span id="ghTotal">0:00</span></div><div class="gh-player-actions"><button class="gh-read-toggle" id="ghReadToggle" type="button" aria-expanded="false" aria-controls="ghRead">Text lesen</button><button class="gh-read-toggle" id="ghFollow" type="button" aria-pressed="false" aria-controls="ghRead">Mitlesen</button></div><p class="gh-audio-note" id="ghAudioNote"></p></section><article class="gh-read" id="ghRead" hidden></article><section class="gh-sources"><strong>QUELLEN</strong><div id="ghSources"></div></section><section class="gh-next" id="ghNext" hidden><small>WEITER ENTDECKEN</small><button id="ghNextButton" type="button"><img id="ghNextImg" src="" alt=""><span><em id="ghNextMeta"></em><strong id="ghNextTitle"></strong></span><b aria-hidden="true">›</b></button></section></main></div>';
   document.body.appendChild(player);
   $("#ghPlayerBack").addEventListener("click",minimizePlayer);
   $("#ghPlayerMin").addEventListener("click",minimizeAll);
   $("#ghPlay").addEventListener("click",toggleAudio);
   $("#ghBack15").addEventListener("click",()=>seek(-15));
   $("#ghFwd15").addEventListener("click",()=>seek(15));
-  $("#ghReadToggle").addEventListener("click",toggleRead);
+  $("#ghReadToggle").addEventListener("click",()=>toggleRead(false));
   $("#ghFollow").addEventListener("click",()=>toggleRead(true));
   $("#ghProgress").addEventListener("click",seekFromBar);
   $("#ghProgress").addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();seek(e.key==="ArrowLeft"?-15:15)}});
@@ -124,7 +124,7 @@ function ensureUi(){
   audio.addEventListener("ended",()=>{playing=false;writeLastStory(true,true);renderPlay();renderMini();renderNext()});
   window.addEventListener("pagehide",()=>{reader?.persist(true);writeLastStory(true,false)});
   document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;if($("#ghPlayer")?.classList.contains("open"))minimizePlayer();else if($("#ghWorld")?.classList.contains("open"))closeWorld()});
-  document.addEventListener("click",e=>{const nav=e.target.closest?.(".nav-btn[data-target]");if(nav&&nav.dataset.target!=="stories")stopAudio(false)},true);
+  document.addEventListener("click",e=>{const nav=e.target.closest?.(".nav-btn[data-target]");if(nav&&nav.dataset.target!=="stories"){setReadMode("closed",{restore:false});stopAudio(true);active=null;renderMini()}},true);
   $("#ghRead")?.addEventListener("pointerdown",()=>{manualReadUntil=performance.now()+5000},{passive:true});
   $("#ghRead")?.addEventListener("wheel",()=>{manualReadUntil=performance.now()+5000},{passive:true});
   installGestures();
@@ -133,13 +133,21 @@ function ensureUi(){
 function installGestures(){
   const world=$("#ghWorld"),player=$("#ghPlayer");if(!world||!player)return;
   const bind=(el,onBack,onDown)=>{
-    let sx=0,sy=0,lx=0,ly=0,start=0,edge=false;
-    el.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"&&e.button!==0)return;sx=lx=e.clientX;sy=ly=e.clientY;start=performance.now();edge=e.clientX<=Math.max(36,Math.min(58,innerWidth*.12))},{passive:true});
+    let sx=0,sy=0,lx=0,ly=0,start=0,edge=false,blocked=false;
+    el.addEventListener("pointerdown",e=>{
+      if(e.pointerType==="mouse"&&e.button!==0)return;
+      const target=e.target instanceof Element?e.target:null;
+      blocked=!!target?.closest("button,a,input,textarea,select,[role='slider'],#ghRead");
+      sx=lx=e.clientX;sy=ly=e.clientY;start=performance.now();
+      edge=!blocked&&e.clientX<=Math.max(36,Math.min(58,innerWidth*.12));
+    },{passive:true});
     el.addEventListener("pointermove",e=>{lx=e.clientX;ly=e.clientY},{passive:true});
     el.addEventListener("pointerup",e=>{
+      if(blocked)return;
       const x=e.clientX??lx,y=e.clientY??ly,dx=x-sx,dy=y-sy,dt=Math.max(1,performance.now()-start);
       if(edge&&dx>Math.min(120,innerWidth*.24)&&Math.abs(dx)>Math.abs(dy)*1.3&&(dx/dt>.16||dx>160)){onBack?.();return}
-      if(onDown&&dy>Math.min(150,innerHeight*.18)&&Math.abs(dy)>Math.abs(dx)*1.35&&(dy/dt>.18||dy>190))onDown();
+      const playerAtTop=el!==player||Number($("#ghPlayerScroll")?.scrollTop||0)<=4;
+      if(onDown&&playerAtTop&&dy>Math.min(150,innerHeight*.18)&&Math.abs(dy)>Math.abs(dx)*1.35&&(dy/dt>.18||dy>190))onDown();
     },{passive:true});
   };
   bind(world,closeWorld,null);bind(player,minimizePlayer,minimizeAll);
@@ -215,10 +223,9 @@ function renderPlayer(){
   $("#ghPlayerSummary").textContent=active.summary||"";
   $("#ghRead").innerHTML=text.split(/\n{2,}/).map((p,i)=>'<p data-gh-p="'+i+'">'+esc(p)+"</p>").join("");
   $("#ghSources").textContent=(active.sourceRefs||[]).join(" · ");
-  $("#ghRead").hidden=true;
-  $("#ghReadToggle").textContent=isYoung()?"Mitlesen für Erwachsene":"Text lesen";
   $("#ghFollow").hidden=isYoung()||!meta?.url;
   $("#ghFollow").textContent="Synchron mitlesen";
+  setReadMode("closed",{restore:false});
   const hasAudio=!!meta?.url;
   $("#ghProgress").hidden=!hasAudio;
   $(".gh-time").hidden=!hasAudio;
@@ -236,12 +243,14 @@ function openPlayer(){
   $("#ghPlayerScroll").scrollTop=0;setTimeout(()=>$("#ghPlayerBack")?.focus(),0);
 }
 function minimizePlayer(){
+  setReadMode("closed",{restore:false});
   reader?.close();reader?.persist(true);
   $("#ghPlayer").classList.remove("open");$("#ghPlayer").setAttribute("aria-hidden","true");document.documentElement.classList.remove("gh-player-open");
   $("#ghWorld").removeAttribute("inert");if($("#ghWorld").classList.contains("open"))$("#ghWorld").removeAttribute("aria-hidden");
   renderMini();setTimeout(()=>$("#ghList [data-gh-id='"+CSS.escape(active?.id||"")+"']")?.focus(),0);
 }
 function minimizeAll(){
+  setReadMode("closed",{restore:false});
   reader?.close();reader?.persist(true);
   $("#ghPlayer")?.classList.remove("open");$("#ghPlayer")?.setAttribute("aria-hidden","true");
   $("#ghWorld")?.classList.remove("open");$("#ghWorld")?.removeAttribute("inert");$("#ghWorld")?.setAttribute("aria-hidden","true");
@@ -249,15 +258,49 @@ function minimizeAll(){
   const app=$(".app");if(app){app.removeAttribute("inert");app.removeAttribute("aria-hidden")}
   renderMini();
 }
-let followMode=false,manualReadUntil=0,lastReadIndex=-1;
+let followMode=false,manualReadUntil=0,lastReadIndex=-1,readReturnScroll=0;
+function clearReadHighlights(){
+  $("#ghRead")?.querySelectorAll("[data-gh-p].active").forEach(p=>p.classList.remove("active"));
+  lastReadIndex=-1;
+}
+function setReadMode(next,{restore=false}={}){
+  const read=$("#ghRead"),toggle=$("#ghReadToggle"),follow=$("#ghFollow"),scroll=$("#ghPlayerScroll");
+  if(!read||!toggle)return;
+  const open=next==="read"||next==="follow",sync=next==="follow";
+  followMode=sync;
+  read.hidden=!open;
+  toggle.textContent=open?"Text schließen":(isYoung()?"Mitlesen für Erwachsene":"Text lesen");
+  toggle.setAttribute("aria-expanded",String(open));
+  toggle.setAttribute("aria-pressed",String(open&&!sync));
+  if(follow){
+    follow.classList.toggle("active",open&&sync);
+    follow.setAttribute("aria-pressed",String(open&&sync));
+  }
+  if(!open){
+    clearReadHighlights();
+    if(restore&&scroll){
+      const top=Math.max(0,Math.min(readReturnScroll,scroll.scrollHeight-scroll.clientHeight));
+      requestAnimationFrame(()=>scroll.scrollTo({top,behavior:"smooth"}));
+    }
+    return;
+  }
+  requestAnimationFrame(()=>{
+    if(scroll){
+      const top=Math.max(0,read.offsetTop-18);
+      scroll.scrollTo({top,behavior:"smooth"});
+    }
+    if(sync)syncReadAlong(true);
+  });
+}
 function toggleRead(syncMode=false){
-  const read=$("#ghRead");if(!read)return;
-  const opening=read.hidden||syncMode;
-  followMode=!!syncMode;
-  read.hidden=!opening;
-  $("#ghReadToggle").textContent=read.hidden?(isYoung()?"Mitlesen für Erwachsene":"Text lesen"):"Text schließen";
-  $("#ghFollow")?.classList.toggle("active",opening&&followMode);
-  if(opening){setTimeout(()=>{read.scrollIntoView({block:"start",behavior:"smooth"});syncReadAlong(true)},20)}
+  const read=$("#ghRead"),scroll=$("#ghPlayerScroll");if(!read)return;
+  const wantsFollow=syncMode===true,isOpen=!read.hidden;
+  if((!wantsFollow&&isOpen)||(wantsFollow&&isOpen&&followMode)){
+    setReadMode("closed",{restore:true});
+    return;
+  }
+  if(!isOpen&&scroll)readReturnScroll=scroll.scrollTop;
+  setReadMode(wantsFollow?"follow":"read",{restore:false});
 }
 function readIndexAtTime(){
   const ps=Array.from($("#ghRead")?.querySelectorAll("[data-gh-p]")||[]);if(!ps.length)return-1;
@@ -276,11 +319,16 @@ function readIndexAtTime(){
   const weights=ps.map(el=>Math.max(1,(el.textContent.match(/\S+/g)||[]).length)),total=weights.reduce((a,b)=>a+b,0)||1,target=(t/d)*total;
   let sum=0;for(let i=0;i<weights.length;i++){sum+=weights[i];if(target<=sum)return i}return ps.length-1;
 }
+function scrollReadParagraphIntoView(el,instant=false){
+  const read=$("#ghRead");if(!read||!el)return;
+  const top=Math.max(0,el.offsetTop-(read.clientHeight-el.offsetHeight)/2);
+  read.scrollTo({top,behavior:instant?"auto":"smooth"});
+}
 function syncReadAlong(force=false){
   const read=$("#ghRead");if(!read||read.hidden||(!followMode&&!force))return;
   const idx=readIndexAtTime();if(idx<0||(!force&&idx===lastReadIndex))return;lastReadIndex=idx;
   const ps=Array.from(read.querySelectorAll("[data-gh-p]"));ps.forEach((p,i)=>p.classList.toggle("active",i===idx));
-  if(force||performance.now()>manualReadUntil)ps[idx]?.scrollIntoView({block:"center",behavior:force?"auto":"smooth"});
+  if(force||performance.now()>manualReadUntil)scrollReadParagraphIntoView(ps[idx],force);
 }
 function formatTime(v){return window.DARKidsFollowReader?.formatTime?window.DARKidsFollowReader.formatTime(v):Math.floor((Number(v)||0)/60)+":"+String(Math.floor((Number(v)||0)%60)).padStart(2,"0")}
 function updateProgress(){

@@ -95,3 +95,17 @@ html.gh-world-open,html.gh-player-open,html.gh-world-open body,html.gh-player-op
 .gh-next button img{width:76px;height:76px;border-radius:17px;object-fit:cover;background:#0b2a3b}.gh-next button span{min-width:0;display:grid;gap:4px}.gh-next button em{font-style:normal;font-size:8px;letter-spacing:.11em;color:#efd18a;font-weight:950}.gh-next button strong{font-size:17px;line-height:1.08;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.gh-next button>b{font-size:28px;color:#efd18a;text-align:center}
 @media(max-width:390px){.gh-continue-card{grid-template-columns:94px minmax(0,1fr) 30px}.gh-continue-copy{padding-left:12px}.gh-continue-copy strong{font-size:18px}.gh-next button{grid-template-columns:66px minmax(0,1fr) 28px}.gh-next button img{width:66px;height:66px}}
 @media(min-width:760px){.gh-continue{max-width:760px}.gh-continue-card{min-height:132px;grid-template-columns:132px minmax(0,1fr) 44px}.gh-continue-copy strong{font-size:23px}.gh-next{max-width:760px;margin-left:auto;margin-right:auto}}
+
+
+/* v1121 · iPhone/iPad control hardening */
+.gh-world,.gh-player{height:100vh;height:100dvh;max-height:100dvh}
+.gh-world-scroll,.gh-player-scroll,.gh-read{touch-action:pan-y;-webkit-overflow-scrolling:touch}
+.gh-back,.gh-player-back,.gh-player-min,.gh-mini-open,.gh-mini-play,.gh-play,.gh-skip,.gh-read-toggle,.gh-category,.gh-story,.gh-continue-card,.gh-next button{
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent
+}
+.gh-read-toggle{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+#ghReadToggle[aria-expanded="true"],#ghFollow[aria-pressed="true"]{
+  border-color:rgba(239,208,138,.34);background:rgba(239,208,138,.10);color:#ffe3a5
+}
+.gh-read{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){.gh-read{scroll-behavior:auto}}
