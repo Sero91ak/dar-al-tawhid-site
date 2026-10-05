@@ -921,6 +921,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         window.toggleFullScreen(sender)
     }
 
+    private func installedEngineVersion() -> String? {
+        let path = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Applications/DAR-Voice-Studio/local-engine.py")
+        guard let raw = try? String(contentsOf: path, encoding: .utf8) else { return nil }
+        guard let range = raw.range(of: #"ENGINE_VERSION\s*=\s*"([^"]+)""#, options: .regularExpression) else {
+            return nil
+        }
+        let match = String(raw[range])
+        guard let firstQuote = match.firstIndex(of: "\""),
+              let lastQuote = match.lastIndex(of: "\""),
+              firstQuote < lastQuote else { return nil }
+        return String(match[match.index(after: firstQuote)..<lastQuote])
+    }
+
     private func healthMatchesCurrentEngine(data: Data?, response: URLResponse?, error: Error?) -> Bool {
         guard error == nil,
               (response as? HTTPURLResponse)?.statusCode == 200,
@@ -929,7 +943,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
               let version = object["engine_version"] as? String else {
             return false
         }
-        return version == currentVersion
+        // Ein teilweise aktualisiertes Bundle darf die lokale Engine nicht aussperren.
+        // Maßgeblich ist zuerst die tatsächlich installierte Engine-Datei; danach wird
+        // das Update in der laufenden App sauber repariert.
+        let expected = installedEngineVersion() ?? currentVersion
+        return version == expected
     }
 
     private func stopStaleInstalledEngine() {
@@ -979,6 +997,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         }.resume()
     }
 
+    private func loadOrCreatePairToken(at target: URL) -> String? {
+        let fm = FileManager.default
+        let pairFile = target.appendingPathComponent("ipad-pairing-token.txt")
+        if let raw = try? String(contentsOf: pairFile, encoding: .utf8) {
+            let existing = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !existing.isEmpty { return existing }
+        }
+
+        let token = UUID().uuidString
+            .replacingOccurrences(of: "-", with: "")
+            .lowercased()
+        do {
+            try fm.createDirectory(at: target, withIntermediateDirectories: true)
+            try (token + "\n").write(to: pairFile, atomically: true, encoding: .utf8)
+            try? fm.setAttributes([.posixPermissions: 0o600], ofItemAtPath: pairFile.path)
+            return token
+        } catch {
+            NSLog("DĀR Voice pairing token repair failed: \(error)")
+            return nil
+        }
+    }
+
     private func startEngineDirectly() {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else { return }
@@ -1006,13 +1046,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             var env = ProcessInfo.processInfo.environment
             env["DAR_VOICE_APP_HOME"] = target.path
             env["PYTORCH_ENABLE_MPS_FALLBACK"] = "1"
-            let pairFile = target.appendingPathComponent("ipad-pairing-token.txt")
-            if let rawPair = try? String(contentsOf: pairFile, encoding: .utf8) {
-                let pair = rawPair.trimmingCharacters(in: .whitespacesAndNewlines)
-                if !pair.isEmpty {
-                    env["DAR_VOICE_NETWORK_MODE"] = "1"
-                    env["DAR_VOICE_PAIR_TOKEN"] = pair
-                }
+            if let pair = self.loadOrCreatePairToken(at: target), !pair.isEmpty {
+                env["DAR_VOICE_NETWORK_MODE"] = "1"
+                env["DAR_VOICE_PAIR_TOKEN"] = pair
+            } else {
+                // Mac-Loopback bleibt trotzdem funktionsfähig; Companion ist optional.
+                env.removeValue(forKey: "DAR_VOICE_NETWORK_MODE")
+                env.removeValue(forKey: "DAR_VOICE_PAIR_TOKEN")
             }
             env["PATH"] = "/opt/homebrew/bin:/usr/local/bin:/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
             for ffmpeg in ["/opt/homebrew/bin/ffmpeg", "/usr/local/bin/ffmpeg", "/opt/local/bin/ffmpeg"] {
