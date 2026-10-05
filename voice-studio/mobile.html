@@ -8,10 +8,10 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="DĀR Voice">
-<link rel="manifest" href="/voice-studio/mobile-manifest.webmanifest?v=29117">
-<link rel="apple-touch-icon" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29117">
-<link rel="apple-touch-icon-precomposed" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29117">
-<link rel="icon" type="image/png" href="/voice-studio/voice-studio-icon.png?v=29117">
+<link rel="manifest" href="/voice-studio/mobile-manifest.webmanifest?v=29118">
+<link rel="apple-touch-icon" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29118">
+<link rel="apple-touch-icon-precomposed" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29118">
+<link rel="icon" type="image/png" href="/voice-studio/voice-studio-icon.png?v=29118">
 <title>DĀR Voice</title>
 <style>
 :root{color-scheme:light;--bg:#f7f7f5;--card:#fff;--ink:#111;--muted:#777773;--line:#e8e8e4;--soft:#efefec;--good:#17784a;--warn:#9a5a00;--bad:#b42318;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)}
@@ -104,6 +104,11 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 </section>
 <section class="screen" data-screen="pronunciation">
   <div class="hero"><div class="kicker">Aussprache</div><h1>Wörter prüfen & lernen</h1><div class="sub">Fehlerhafte oder neue Begriffe suchen, Varianten anhören und als Master bestätigen.</div></div>
+  <div id="pendingPronunciationWrap" class="card" hidden>
+    <div class="analysis-head"><div class="analysis-title">Offene Wörter aus deiner Analyse</div><span id="pendingPronunciationCount" class="badge">0</span></div>
+    <div class="sub" style="margin-bottom:8px">Diese Wörter blockieren die Erzeugung nicht. Tippe ein Wort an, höre Varianten und speichere nur die richtige Form.</div>
+    <div id="pendingPronunciationList" class="chips"></div>
+  </div>
   <div class="searchbar"><input id="wordSearch" placeholder="z. B. Tawḥīd, Ṣaḥābah, Fuṣḥā"><button class="generate" id="wordSearchBtn">Suchen</button></div>
   <div class="library-head"><strong>Alle Wörter</strong><span id="catalogCount">Bibliothek wird geladen …</span></div>
   <div id="wordResults"><div class="empty">Wortliste wird geladen …</div></div>
@@ -116,7 +121,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.117</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.118</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -156,7 +161,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",finalAudioName:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],wordResultSerial:0,generating:false};
-const MOBILE_APP_VERSION="2.9.117";
+const MOBILE_APP_VERSION="2.9.118";
 const LOCAL_ENGINE_HOST=location.port==="8787"||location.hostname==="127.0.0.1"||location.hostname==="localhost"||/^192\.168\./.test(location.hostname)||/^10\./.test(location.hostname)||/^172\.(1[6-9]|2\d|3[01])\./.test(location.hostname);
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const CLOUD_API_BASE="/voice-studio/api";
@@ -223,6 +228,15 @@ function contentStudioUrl(kind){
 document.body.classList.add("auto-dark");
 function toast(msg){const n=$("#toast");n.textContent=msg;n.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>n.classList.remove("show"),2400)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+const MOBILE_PENDING_PRON_KEY="dar.voice.mobile.pendingPronunciation.v1";
+function pronunciationIssueTerm(row){return String(row?.term||row?.tts||row?.canonical||row||"").trim()}
+function pronunciationIssueKey(value){return String(value||"").trim().toLocaleLowerCase("de-DE")}
+function readPendingPronunciationTerms(){try{const raw=JSON.parse(localStorage.getItem(MOBILE_PENDING_PRON_KEY)||"[]");return Array.isArray(raw)?raw.map(x=>String(x||"").trim()).filter(Boolean):[]}catch(_){return []}}
+function writePendingPronunciationTerms(items){const out=[],seen=new Set();for(const raw of(items||[])){const term=String(raw||"").trim(),key=pronunciationIssueKey(term);if(!term||seen.has(key))continue;seen.add(key);out.push(term)}try{localStorage.setItem(MOBILE_PENDING_PRON_KEY,JSON.stringify(out.slice(-200)))}catch(_){}renderPendingPronunciationTerms();return out}
+function registerPronunciationIssues(items){const merged=readPendingPronunciationTerms();for(const row of(Array.isArray(items)?items:[])){const term=pronunciationIssueTerm(row);if(term)merged.push(term)}return writePendingPronunciationTerms(merged)}
+function removePendingPronunciationTerm(term){const key=pronunciationIssueKey(term);return writePendingPronunciationTerms(readPendingPronunciationTerms().filter(x=>pronunciationIssueKey(x)!==key))}
+function renderPendingPronunciationTerms(){const wrap=$("#pendingPronunciationWrap"),list=$("#pendingPronunciationList"),count=$("#pendingPronunciationCount");if(!wrap||!list||!count)return;const terms=readPendingPronunciationTerms();wrap.hidden=!terms.length;count.textContent=String(terms.length);list.innerHTML=terms.map(term=>'<button class="chip warn" type="button" data-pending-pron="'+esc(term)+'">'+esc(term)+'</button>').join("");$("[data-pending-pron]").forEach(btn=>btn.onclick=()=>openWord(btn.dataset.pendingPron||""))}
+
 function askCloudAccessToken(){if(LOCAL_ENGINE_HOST)return "";return String(window.prompt("DĀR Voice Zugangscode","")||"").trim()}
 async function establishCloudAccess(code){
   const token=String(code||"").trim();
@@ -385,7 +399,7 @@ async function installMobileUpdate(){
     toast(e.message||"Update fehlgeschlagen.");
   }
 }
-function go(name,opts={}){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="pronunciation"&&!opts.skipCatalog)loadCatalog(true);if(name==="settings"){health();checkMobileUpdate(false)}document.querySelector("main")?.scrollTo({top:0,behavior:"instant"})}
+function go(name,opts={}){$$(".screen").forEach(x=>x.classList.toggle("active",x.dataset.screen===name));$$(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name));if(name==="history")loadHistory();if(name==="pronunciation"){renderPendingPronunciationTerms();if(!opts.skipCatalog)loadCatalog(true)}if(name==="settings"){health();checkMobileUpdate(false)}document.querySelector("main")?.scrollTo({top:0,behavior:"instant"})}
 $$(".tab").forEach(b=>b.onclick=()=>go(b.dataset.tab));
 $$("[data-content-kind]").forEach(b=>b.onclick=()=>{location.href=contentStudioUrl(b.dataset.contentKind)});
 $("#refreshBtn").onclick=()=>{health();if($(".screen.active")?.dataset.screen==="history")loadHistory()};
@@ -414,7 +428,7 @@ async function analyzeText(force=false){
   try{
     const r=await api("/analyze",{method:"POST",body:JSON.stringify({text,style:$("#style").value})});const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Analyse fehlgeschlagen");state.analysis=d;state.analysisText=text;state.analysisStyle=style;
     const unresolved=d.unresolvedIslamicTerms||[],review=d.reviewTerms||[],masters=d.masterTerms||[];
-    if(unresolved.length){$("#analysisState").textContent=unresolved.length+" prüfen";$("#analysisState").className="badge";$("#analysisBody").innerHTML='<div class="sub" style="margin-bottom:8px">Diese Begriffe brauchen eine Ausspracheprüfung:</div><div class="chips">'+unresolved.map(x=>'<button class="chip warn" data-word="'+esc(x.term)+'">'+esc(x.term)+'</button>').join("")+'</div>';$$("[data-word]").forEach(b=>b.onclick=()=>openWord(b.dataset.word))}
+    if(unresolved.length){registerPronunciationIssues(unresolved);$("#analysisState").textContent=unresolved.length+" prüfen";$("#analysisState").className="badge";$("#analysisBody").innerHTML='<div class="sub" style="margin-bottom:8px">Diese Begriffe brauchen eine Ausspracheprüfung:</div><div class="chips">'+unresolved.map(x=>'<button class="chip warn" data-word="'+esc(x.term)+'">'+esc(x.term)+'</button>').join("")+'</div>';$$("[data-word]").forEach(b=>b.onclick=()=>openWord(b.dataset.word))}
     else{$("#analysisState").textContent="bereit";$("#analysisState").className="badge good";$("#analysisBody").innerHTML='<div class="sub">Keine ungeprüften Begriffe gefunden.</div>'+(masters.length||review.length?'<div class="chips" style="margin-top:8px">'+masters.slice(0,8).map(x=>'<span class="chip">'+esc(x)+'</span>').join("")+review.slice(0,6).map(x=>'<span class="chip">'+esc(x)+'</span>').join("")+'</div>':"")}
     return d;
   }catch(e){$("#analysisState").textContent="Fehler";$("#analysisBody").textContent=e.message;toast(e.message);return null}
@@ -423,6 +437,7 @@ $("#analyzeBtn").onclick=()=>analyzeText(true);
 
 function showPronunciationIssues(items){
   const rows=Array.isArray(items)?items:[];
+  registerPronunciationIssues(rows);
   state.analysis={
     ok:false,
     unresolvedIslamicTerms:rows,
@@ -692,10 +707,8 @@ async function generate(){
   const useLibrary=!!$("#pronToggle").checked;
   const style=$("#style").value;
   const cached=state.analysis&&state.analysisText===text&&state.analysisStyle===style?state.analysis:null;
-  if(useLibrary&&cached&&(cached.unresolvedIslamicTerms||[]).length){
-    showPronunciationIssues(cached.unresolvedIslamicTerms);
-    return toast("Erst die markierten Wörter prüfen.");
-  }
+  const cachedIssues=useLibrary&&cached?Array.from(cached.unresolvedIslamicTerms||[]):[];
+  if(cachedIssues.length){showPronunciationIssues(cachedIssues);toast("Audio startet trotzdem · "+cachedIssues.length+" Wort"+(cachedIssues.length===1?" bleibt":"e bleiben")+" zur Prüfung markiert.");}
   $("#generateBtn").disabled=true;$("#generateBtn").textContent="Starte …";
   resetLiveStream();
   revokeIfBlob(state.audioUrl);state.audioUrl="";state.finalAudioName="";
@@ -705,13 +718,17 @@ async function generate(){
     const payload=useLibrary
       ?{text,style,interactiveFast:true}
       :{text,style,pronunciationLibrary:false,interactiveFast:true};
-    const r=await api(endpoint,{method:"POST",body:JSON.stringify(payload)});
-    const d=await r.json().catch(()=>({}));
-    if(r.status===422&&Array.isArray(d.items)){
-      showPronunciationIssues(d.items);
-      throw Error("Erst die markierten Wörter prüfen.");
+    let r=await api(endpoint,{method:"POST",body:JSON.stringify(payload)});
+    let d=await r.json().catch(()=>({}));
+    if(r.status===422&&Array.isArray(d.items)&&d.items.length){
+      const legacyWarnings=d.items;showPronunciationIssues(legacyWarnings);
+      const fallback=await api("/generate-free-start",{method:"POST",body:JSON.stringify({text,style,pronunciationLibrary:true,interactiveFast:true})});
+      const fd=await fallback.json().catch(()=>({}));
+      if(!fallback.ok||!fd.ok)throw Error(fd.error||d.error||"Audioerzeugung konnte nicht gestartet werden.");
+      r=fallback;d={...fd,pronunciationWarnings:legacyWarnings,compatibilityFallback:true};
     }
     if(!r.ok||!d.ok)throw Error(d.error||"Audioerzeugung konnte nicht gestartet werden.");
+    if(Array.isArray(d.pronunciationWarnings)&&d.pronunciationWarnings.length)showPronunciationIssues(d.pronunciationWarnings);
     $("#analysis").classList.add("show");
     $("#analysisState").textContent=d.reuseType==="exact-history-cache"?"sofort":"läuft";
     $("#analysisState").className="badge good";
@@ -899,7 +916,7 @@ async function confirmCandidate(term,btn){
   try{
     const r=await api("/learning/confirm",{method:"POST",body:JSON.stringify({previewId,term})});
     const d=await r.json();if(!r.ok||!d.ok)throw Error(d.error||"Bestätigung fehlgeschlagen");
-    delete btn.dataset.previewId;btn.textContent="Master ✓";toast(term+" wurde gelernt.");await health();
+    delete btn.dataset.previewId;btn.textContent="Master ✓";removePendingPronunciationTerm(term);toast(term+" wurde gelernt.");await health();
     if($("#text").value.trim())await analyzeText();
   }catch(e){btn.disabled=false;btn.textContent="Als Master bestätigen";toast(e.message)}
 }
