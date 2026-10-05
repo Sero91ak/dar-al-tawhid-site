@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 
-/* DĀR AL TAWḤĪD Kids — shared audiobook / follow reader v3
+/* DĀR AL TAWḤĪD Kids — shared audiobook / follow reader v4
    - persistent per-story progress
    - timestamp-aware paragraph following with calibrated fallback
    - child-friendly focus reader with automatic voice-follow scrolling
@@ -88,7 +88,7 @@ function create(options){
   const currentEl=root.querySelector(".kfr-current");
   const totalEl=root.querySelector(".kfr-total");
   let paragraphs=[],weights=[],totalWeight=0,timingCues=[],syncPoints=[],lastIndex=-1,manualUntil=0;
-  let currentContent={},restoredToken="",lastPersistAt=0,mediaSessionActive=false;
+  let currentContent={},restoredToken="",lastPersistAt=0,mediaSessionActive=false,readerView="follow",backgroundLocks=[];
 
   function content(){
     const value=typeof options.getContent==="function"?options.getContent():{};
@@ -195,6 +195,15 @@ function create(options){
     for(let i=0;i<weights.length;i++){sum+=weights[i];if(target<sum||i===weights.length-1)return i}
     return paragraphs.length-1;
   }
+  function clearMarks(){
+    readEl.querySelectorAll("p[data-kfr-index]").forEach(node=>node.classList.remove("active","past"));
+    lastIndex=-1;
+  }
+  function scrollReaderNode(node,instant=false){
+    if(!node||!readEl)return;
+    const top=Math.max(0,node.offsetTop-(readEl.clientHeight-node.offsetHeight)/2);
+    try{readEl.scrollTo({top,behavior:instant?"auto":"smooth"})}catch(_){readEl.scrollTop=top}
+  }
   function mark(index,forceScroll){
     const nodes=readEl.querySelectorAll("p[data-kfr-index]");
     nodes.forEach((node,i)=>{
@@ -204,9 +213,7 @@ function create(options){
     if(index<0||index===lastIndex)return;
     lastIndex=index;
     const node=nodes[index];
-    if(node&&(forceScroll||performance.now()>manualUntil)){
-      try{node.scrollIntoView({block:"center",behavior:forceScroll?"auto":"smooth"})}catch(_){node.scrollIntoView()}
-    }
+    if(node&&(forceScroll||performance.now()>manualUntil))scrollReaderNode(node,!!forceScroll);
   }
   function readProgress(){
     const key=storyKey();
@@ -292,7 +299,7 @@ function create(options){
       progressButton.setAttribute("aria-valuenow",String(Math.max(0,Math.round(current))));
       progressButton.setAttribute("aria-valuetext",formatTime(current)+" von "+formatTime(duration));
     }
-    if(!root.classList.contains("audio-only"))mark(paragraphIndexAtTime(current,duration),!!forceScroll);
+    if(!root.classList.contains("audio-only")&&readerView!=="read")mark(paragraphIndexAtTime(current,duration),!!forceScroll);
     updatePlay();
     try{navigator.mediaSession.playbackState="playing"}catch(_){}
     updatePositionState();
@@ -372,26 +379,57 @@ function create(options){
     postNativeNowPlaying(nativePayload(false),true);
     updatePositionState();
   }
-  function openWithContent(value){
+  function lockBackground(){
+    backgroundLocks=[];
+    Array.from(document.body.children).forEach(el=>{
+      if(el===root||!(el instanceof HTMLElement)||["SCRIPT","STYLE","LINK"].includes(el.tagName)||el.hasAttribute("inert"))return;
+      el.setAttribute("inert","");
+      backgroundLocks.push(el);
+    });
+  }
+  function unlockBackground(){
+    backgroundLocks.forEach(el=>{try{el.removeAttribute("inert")}catch(_){}});
+    backgroundLocks=[];
+  }
+  function applyReaderView(mode){
+    readerView=mode==="read"?"read":"follow";
+    root.dataset.readerView=readerView;
+    if(readerView==="read"){
+      if(kickerEl)kickerEl.textContent="NUR LESEN";
+      root.querySelector(".kfr-sheet")?.setAttribute("aria-label","Geschichte nur lesen");
+      clearMarks();
+    }else{
+      if(kickerEl)kickerEl.textContent=root.classList.contains("audio-only")?"HÖRBUCH":"HÖREN · MITLESEN";
+      root.querySelector(".kfr-sheet")?.setAttribute("aria-label",root.classList.contains("audio-only")?"Hörbuch-Player":"Geschichte hören und mitlesen");
+    }
+  }
+  function openWithContent(value,mode="follow"){
     const c=value&&typeof value==="object"?value:content();
     if(c.text!=null)setContent(c);
+    applyReaderView(mode);
+    lockBackground();
     root.classList.add("open");
     root.removeAttribute("aria-hidden");
-    root.querySelector(".kfr-sheet")?.setAttribute("aria-label",root.classList.contains("audio-only")?"Hörbuch-Player":"Geschichte mitlesen");
     document.documentElement.classList.add("kids-follow-reader-open");
-    sync(true);
-    setTimeout(()=>playEl?.focus(),0);
+    if(readerView==="read"){try{readEl.scrollTop=0}catch(_){}}
+    else sync(true);
+    setTimeout(()=>(readerView==="read"?closeEl:playEl)?.focus(),0);
   }
-  function open(){openWithContent(content())}
+  function open(){openWithContent(content(),"follow")}
   function openReadAlong(){
     const c=Object.assign({},content(),{audioOnly:false,adultCompanion:true});
-    openWithContent(c);
+    openWithContent(c,"follow");
+  }
+  function openReading(){
+    const c=Object.assign({},content(),{audioOnly:false,adultCompanion:true});
+    openWithContent(c,"read");
   }
   function close(){
     persist(true);
     root.classList.remove("open");
     root.setAttribute("aria-hidden","true");
     document.documentElement.classList.remove("kids-follow-reader-open");
+    unlockBackground();
   }
   function isOpen(){return root.classList.contains("open")}
   function seekFromEvent(e){
@@ -423,11 +461,11 @@ function create(options){
 
   setContent(content());
   return {
-    open,openReadAlong,close,isOpen,setContent,sync,persist,restore,clearProgress,
+    open,openReadAlong,openReading,close,isOpen,setContent,sync,persist,restore,clearProgress,
     activateMediaSession,
     formatTime,
     getSavedProgress:readProgress
   };
 }
-window.DARKidsFollowReader={version:4,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
+window.DARKidsFollowReader={version:5,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
 })();
