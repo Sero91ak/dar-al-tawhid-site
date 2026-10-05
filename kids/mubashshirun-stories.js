@@ -160,7 +160,7 @@ function insertEntry(view){
   const entry=document.createElement("button");
   entry.id="msEntry"; entry.className="ms-entry"; entry.type="button";
   entry.innerHTML=
-    '<span class="ms-entry-bg" aria-hidden="true"><img src="/kids/assets/sahaba-mubashshirun/abu-bakr.jpg?v=1133" alt="" decoding="async" loading="eager"></span>'+
+    '<span class="ms-entry-bg" aria-hidden="true"><img src="/kids/assets/stories-home/sahaba-v1133.webp?v=1136" alt="" decoding="async" loading="eager"></span>'+
     '<span class="ms-entry-art" aria-hidden="true"><span class="ms-entry-arch"></span><span class="ms-entry-stars">'+
     Array.from({length:10},(_,i)=>'<i style="--i:'+i+'"></i>').join("")+
     '</span></span>'+
