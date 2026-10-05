@@ -8,10 +8,10 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="DĀR Voice">
-<link rel="manifest" href="/mobile/manifest.webmanifest?v=2990">
-<link rel="apple-touch-icon" sizes="256x256" href="/mobile/apple-touch-icon.png?v=2990">
-<link rel="apple-touch-icon-precomposed" sizes="256x256" href="/mobile/apple-touch-icon-precomposed.png?v=2990">
-<link rel="icon" type="image/png" href="/mobile/voice-studio-icon.png?v=2990">
+<link rel="manifest" href="/voice-studio/mobile-manifest.webmanifest?v=29111">
+<link rel="apple-touch-icon" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29111">
+<link rel="apple-touch-icon-precomposed" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29111">
+<link rel="icon" type="image/png" href="/voice-studio/voice-studio-icon.png?v=29111">
 <title>DĀR Voice</title>
 <style>
 :root{color-scheme:light;--bg:#f7f7f5;--card:#fff;--ink:#111;--muted:#777773;--line:#e8e8e4;--soft:#efefec;--good:#17784a;--warn:#9a5a00;--bad:#b42318;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)}
@@ -156,7 +156,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",finalAudioName:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],wordResultSerial:0,generating:false};
-const MOBILE_APP_VERSION="2.9.106";
+const MOBILE_APP_VERSION="2.9.111";
 const LOCAL_ENGINE_HOST=location.port==="8787"||location.hostname==="127.0.0.1"||location.hostname==="localhost"||/^192\.168\./.test(location.hostname)||/^10\./.test(location.hostname)||/^172\.(1[6-9]|2\d|3[01])\./.test(location.hostname);
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const API_BASE=LOCAL_ENGINE_HOST?"":REMOTE_ENGINE_API;
@@ -760,7 +760,10 @@ function openSheet(){$("#sheetBackdrop").classList.add("show")}function closeShe
 $("#settingsBtn").onclick=openSheet;$("#voiceBtn").onclick=openSheet;$("#sheetDone").onclick=closeSheet;$("#sheetBackdrop").addEventListener("click",e=>{if(e.target.id==="sheetBackdrop")closeSheet()});
 const isStandalone=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
 $("#standaloneBadge").textContent=isStandalone?"App":"Web";$("#standaloneBadge").className=isStandalone?"badge good":"badge";
-$("#installHelpBtn").onclick=()=>toast(isStandalone?"DĀR Voice läuft bereits als Home-Bildschirm-App. Updates findest du unter System → App-Update.":"Safari: Teilen → Zum Home-Bildschirm. QR-Code brauchst du nur für die erste Kopplung.");
+$("#installHelpBtn").onclick=()=>toast(isStandalone
+  ?"DĀR Voice ist installiert. Updates findest du unter System → App-Update."
+  :"In Safari: Teilen → Zum Home-Bildschirm. Für die Installation brauchst du keinen lokalen QR-Code."
+);
 $("#mobileUpdateBtn").onclick=installMobileUpdate;
 try{
   const draft=localStorage.getItem("dar.voice.mobile.draft");if(draft)$("#text").value=draft;
@@ -780,6 +783,9 @@ $("#text").addEventListener("paste",()=>{
   },320);
 });
 syncStylePills();
+if(location.protocol==="https:"&&"serviceWorker" in navigator){
+  navigator.serviceWorker.register("/voice-studio/sw-v11.js",{scope:"/voice-studio/"}).catch(()=>{});
+}
 health().then(ok=>{if(ok)warmVoiceEngine()});checkMobileUpdate(false);setInterval(health,10000);
 setTimeout(async()=>{
   const saved=savedGenerationJob();

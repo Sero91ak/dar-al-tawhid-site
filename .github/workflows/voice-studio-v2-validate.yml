@@ -112,6 +112,8 @@ jobs:
           router=Path("cloudflare/site-router.js").read_text(encoding="utf-8")
           manifest=json.loads(Path("voice-studio/version.json").read_text(encoding="utf-8"))
           pwa=json.loads(Path("voice-studio/manifest.webmanifest").read_text(encoding="utf-8"))
+          mobile_pwa=json.loads(Path("voice-studio/mobile-manifest.webmanifest").read_text(encoding="utf-8"))
+          mobile_html=Path("voice-studio/mobile.html").read_text(encoding="utf-8")
           sw=Path("voice-studio/sw-v11.js").read_text(encoding="utf-8")
 
           required_engine=[
@@ -156,6 +158,18 @@ jobs:
               raise SystemExit("version.json cloudVoiceApp contract missing")
           if pwa.get("start_url") != "/voice-studio/?app=1&cloud=1":
               raise SystemExit("Installed Voice PWA does not reopen in cloud mode")
+          if mobile_pwa.get("start_url") != "/voice-studio/mobile.html?app=1&cloud=1":
+              raise SystemExit("Installed iPhone Voice PWA does not reopen on the HTTPS mobile cloud surface")
+          if mobile_pwa.get("scope") != "/voice-studio/":
+              raise SystemExit("iPhone Voice PWA scope mismatch")
+          if '/voice-studio/mobile-manifest.webmanifest' not in mobile_html:
+              raise SystemExit("Mobile Voice surface does not reference the public HTTPS install manifest")
+          if 'navigator.serviceWorker.register("/voice-studio/sw-v11.js"' not in mobile_html:
+              raise SystemExit("Mobile Voice surface does not register the HTTPS PWA service worker")
+          import re
+          mobile_match=re.search(r'const MOBILE_APP_VERSION="([^"]+)";',mobile_html)
+          if not mobile_match or mobile_match.group(1) != str(manifest.get("version") or ""):
+              raise SystemExit("Mobile Voice app version does not match version.json")
           expected_cache=str(manifest.get("cache") or "").strip()
           if not expected_cache or ('const CACHE="'+expected_cache+'";') not in sw:
               raise SystemExit("Voice PWA cache does not match version.json: "+expected_cache)
@@ -402,6 +416,10 @@ jobs:
               'localIPv4Address',
               'companionPairingURL',
               'showCompanionPairing',
+              'publicMobileInstallURL',
+              'showMobileInstall',
+              'https://dar-al-tawhid.de/voice-studio/mobile.html?app=1&cloud=1',
+              'iPhone / iPad App installieren',
               'CIQRCodeGenerator',
               'Link kopieren',
               'DAR_VOICE_NETWORK_MODE',
@@ -1128,6 +1146,8 @@ jobs:
               "darCompanion",
               "showCompanionPairing",
               "companionPairingURL",
+              "publicMobileInstallURL",
+              "showMobileInstall",
               "localIPv4Address",
               "installedEngineVersion",
               "loadOrCreatePairToken",
