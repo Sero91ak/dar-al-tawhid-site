@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1131";
-const KIDS_BUILD_ID="kids-shell-v61-voice-buffer1131";
+const CACHE_NAME="dar-al-tawhid-kids-v1132";
+const KIDS_BUILD_ID="kids-shell-v62-voice-flow1132";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -241,8 +241,12 @@ self.addEventListener("fetch",function(event){
     event.respondWith(fetch(request));
     return;
   }
-  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0||url.pathname.indexOf("/kids/assets/kids-owner-voice/")===0||url.pathname.indexOf("/kids/assets/kids-quiz-audio/")===0){
+  if(url.pathname.indexOf("/kids/assets/prophet-story-audio/")===0||url.pathname.indexOf("/kids/assets/mubashshirun-story-audio/")===0||url.pathname.indexOf("/kids/assets/kids-owner-voice/")===0||url.pathname.indexOf("/kids/assets/kids-quiz-audio/")===0||url.pathname.indexOf("/kids/assets/kids-dua-audio/")===0){
     event.respondWith(fetch(request));
+    return;
+  }
+  if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
+    event.respondWith(networkFirst(request));
     return;
   }
   if(url.pathname==="/kids/version.json"){
