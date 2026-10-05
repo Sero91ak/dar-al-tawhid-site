@@ -1,5 +1,5 @@
 {
-  "buildId": "kids-shell-v83-prophet-controls1156",
+  "buildId": "kids-shell-v84-shared-story-controls1157",
   "label": "KIDS · V1.07.86",
   "releasedAt": "2026-10-05T18:18:00+02:00",
   "note": "Kids v1156: Die drei Modus-Buttons im Propheten-Detail entsprechen wieder exakt dem Ṣaḥābah-Bereich: eine gemeinsame horizontale Reihe, gleiche Touch-Höhe, gleiche Kapsel-Geometrie, gleiche Abstände und gleiche aktive Gold-Markierung. Die zusätzlichen Propheten-Icons wurden nur in dieser Detailleiste entfernt. Player-, Audio- und Mitleselogik bleiben unverändert.",
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1156",
+    "serviceWorkerCache": "v1157",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -152,7 +152,7 @@
     "mubashshirunAgeAwareVisualDisclaimer": true,
     "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03",
     "mubashshirunSwipeBack": true,
-    "prophetStoriesBundleVersion": 35,
+    "prophetStoriesBundleVersion": 36,
     "storyCategoryBackgrounds": {
       "prophets": "/kids/assets/prophet-scenes/desert.webp",
       "sahaba": "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
@@ -585,7 +585,7 @@
     "storiesHomeNoExpiringHotlinks": true,
     "storiesHomeEqualPrimaryCards": true,
     "storiesHomePedagogicalLabels": true,
-    "prophetStoriesJsVersion": 35,
+    "prophetStoriesJsVersion": 36,
     "storiesHomeStylesheetVersion": "1152",
     "storyReaderBackgroundInert": true,
     "storyReaderReadOnlyMode": true,
@@ -629,13 +629,18 @@
     "storiesPrimaryNavigation": "three-visual-world-cards",
     "storiesBottomClearance": "global-shell-only-plus-18px-content-rhythm-v1152",
     "storiesWideLayout": "three-equal-worlds-from-1100px",
-    "prophetDetailActions": "exact-sahabah-parity-v1156",
+    "prophetDetailActions": "shared-ms-detail-modes-exact-parity",
     "storyLibraryCardSystem": "unified-child-first-v1155",
     "storyLibraryDuplicateArtworkTitles": false,
     "storyLibraryResponsive": "small-phone-phone-tablet-v1155",
     "prophetLibraryRefinement": "compact-honor-hero-numbered-list-v1155",
     "mubashshirunCardHierarchy": "name-arabic-summary-meta-v1155",
-    "sahabiyyatCardHierarchy": "name-arabic-summary-meta-v1155"
+    "sahabiyyatCardHierarchy": "name-arabic-summary-meta-v1155",
+    "storyModeControlsSharedAcross": [
+      "prophets",
+      "sahaba",
+      "sahabiyyat"
+    ]
   },
   "updatedAt": "2026-10-05"
 }
