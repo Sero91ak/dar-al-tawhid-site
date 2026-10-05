@@ -115,30 +115,25 @@ jobs:
           done
           ffmpeg -hide_banner -y -f concat -safe 0 -i build/concat.txt \
             -vf "scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,fps=25,tpad=stop_mode=clone:stop_duration=1" \
-            -c:v libx264 -preset medium -crf 18 -pix_fmt yuv420p -an build/video-only.mp4
+            -c:v libx264 -preset medium -crf 21 -pix_fmt yuv420p -an build/video-only.mp4
           ffmpeg -hide_banner -y -i build/video-only.mp4 -i build/master.mp3 \
             -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k -movflags +faststart -shortest \
             output/abu-bakr-youtube-1080p.mp4
-          ffmpeg -hide_banner -y -i output/abu-bakr-youtube-1080p.mp4 -i output/abu-bakr-de.srt \
-            -map 0:v -map 0:a -map 1:0 -c:v copy -c:a copy -c:s mov_text \
-            -metadata:s:s:0 language=deu -metadata:s:s:0 title="Deutsch" \
-            -movflags +faststart output/abu-bakr-youtube-1080p-with-subtitles.mp4
 
       - name: Final validation
         run: |
           set -euo pipefail
           ffprobe -v error -show_entries format=duration,size -of json output/abu-bakr-youtube-1080p.mp4
-          ffprobe -v error -show_streams -of json output/abu-bakr-youtube-1080p-with-subtitles.mp4 > output/ffprobe.json
+          ffprobe -v error -show_streams -of json output/abu-bakr-youtube-1080p.mp4 > output/ffprobe.json
           test -s output/abu-bakr-de.srt
           test -s output/abu-bakr-de.vtt
 
       - name: Upload finished package
         uses: actions/upload-artifact@v4
         with:
-          name: abu-bakr-youtube-final
+          name: abu-bakr-youtube-final-light
           path: |
             output/abu-bakr-youtube-1080p.mp4
-            output/abu-bakr-youtube-1080p-with-subtitles.mp4
             output/abu-bakr-de.srt
             output/abu-bakr-de.vtt
             output/ffprobe.json
