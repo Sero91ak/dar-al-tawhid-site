@@ -107,3 +107,46 @@ html.kids-follow-reader-open{overflow:hidden!important;overscroll-behavior:none!
 @media(min-width:700px){
   .kfr-help{font-size:14px}
 }
+
+
+/* v9 · popup-only story controls */
+.kfr-controls{
+  grid-template-columns:minmax(68px,.7fr) minmax(118px,1.45fr) minmax(68px,.7fr)!important;
+  grid-template-areas:
+    "back play forward"
+    "restart time time"
+    "progress progress progress"
+    "help help help"!important;
+  gap:10px!important;
+}
+.kfr-skip{
+  min-height:50px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
+  color:#f7f2e9;
+  font:inherit;
+  font-size:13px;
+  font-weight:950;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+.kfr-skip-back{grid-area:back}
+.kfr-play{grid-area:play}
+.kfr-skip-forward{grid-area:forward}
+.kfr-restart{grid-area:restart;min-height:44px}
+.kfr-time{grid-area:time;justify-content:flex-end}
+.kfr-progress{grid-area:progress!important}
+.kfr-help{grid-area:help!important}
+.kfr-skip:focus-visible,.kfr-play:focus-visible,.kfr-restart:focus-visible{
+  outline:2px solid rgba(239,203,121,.72);
+  outline-offset:3px;
+}
+@media(max-width:390px){
+  .kfr-controls{
+    grid-template-columns:64px minmax(112px,1fr) 64px!important;
+    gap:8px!important;
+  }
+  .kfr-skip{min-height:52px;padding:0 6px;font-size:12px}
+  .kfr-play{min-height:56px;padding-inline:10px}
+}
