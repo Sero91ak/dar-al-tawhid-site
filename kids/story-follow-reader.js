@@ -10,6 +10,7 @@
 */
 const PROGRESS_PREFIX="kids.storyAudioProgress.v2.";
 const NOW_PLAYING_KEY="kids.storyNowPlaying.v2";
+const HELP_SEEN_KEY="kids.storyReaderHint.v1";
 
 function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function formatTime(value){
@@ -212,7 +213,8 @@ function create(options){
   function scrollReaderNode(node,instant=false){
     if(!node||!readEl)return;
     const rr=readEl.getBoundingClientRect(),nr=node.getBoundingClientRect();
-    const top=Math.max(0,readEl.scrollTop+(nr.top-rr.top)-(readEl.clientHeight-nr.height)/2);
+    const breathingRoom=Math.max(18,Math.min(34,readEl.clientHeight*.08));
+    const top=Math.max(0,readEl.scrollTop+(nr.top-rr.top)-breathingRoom);
     try{readEl.scrollTo({top,behavior:instant?"auto":"smooth"})}catch(_){readEl.scrollTop=top}
   }
   function mark(index,forceScroll){
@@ -286,6 +288,9 @@ function create(options){
   }
   function updatePlay(){
     if(!playEl)return;
+    const hasProgress=(Number(audio.currentTime)||0)>.25&&!audio.ended;
+    root.classList.toggle("has-progress",hasProgress);
+    root.classList.toggle("is-playing",!audio.paused&&!audio.ended);
     playEl.disabled=typeof options.disabled==="function"?!!options.disabled():false;
     if(!audio.paused&&!audio.ended)playEl.textContent="Pause";
     else if(audio.currentTime>0&&!audio.ended)playEl.textContent="Weiterhören";
@@ -415,10 +420,22 @@ function create(options){
       root.querySelector(".kfr-sheet")?.setAttribute("aria-label",root.classList.contains("audio-only")?"Hörbuch-Player":"Geschichte hören und mitlesen");
     }
   }
+  function prepareHelpHint(){
+    if(!helpEl)return;
+    if(root.classList.contains("audio-only")){helpEl.hidden=false;return}
+    let seen=false;
+    try{seen=localStorage.getItem(HELP_SEEN_KEY)==="1"}catch(_){}
+    helpEl.hidden=seen;
+    if(!seen){
+      try{localStorage.setItem(HELP_SEEN_KEY,"1")}catch(_){}
+      setTimeout(()=>{if(isOpen()&&!root.classList.contains("audio-only"))helpEl.hidden=true},6500);
+    }
+  }
   function openWithContent(value,mode="follow"){
     const c=value&&typeof value==="object"?value:content();
     if(c.text!=null)setContent(c);
     applyReaderView(mode);
+    prepareHelpHint();
     lockBackground();
     root.classList.add("open");
     root.removeAttribute("aria-hidden");
@@ -492,5 +509,5 @@ function create(options){
     getSavedProgress:readProgress
   };
 }
-window.DARKidsFollowReader={version:12,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
+window.DARKidsFollowReader={version:15,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
 })();
