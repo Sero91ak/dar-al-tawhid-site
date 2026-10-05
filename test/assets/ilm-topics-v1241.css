@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Themen/Beiträge overview · test-only v1241 */
 body.is-topics-route{
-  --topics-hero-art:url("https://dnznrvs05pmza.cloudfront.net/gemini/gemini-3.1-flash-lite-image/images/bd9a92a6-c79a-4451-8caf-fa6b6ad73954/9d2872c2-8bb1-41f7-933b-924c4cf71a3c/Single_wide_cinematic_mobile_app_background_for_an_Islamic_k.jpg?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMjMzZmM5NzllYmU5NTllOSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTIxOTcwNX0.sAXXWyBf9PyQlcxyzX16qGAZByLmtBsdReUuSbD0vsU");
+  --topics-hero-art:url("/test/assets/area-heroes-v1290/topics.webp");
   --topics-hero-a:color-mix(in srgb,var(--bg) 92%,transparent);
   --topics-hero-b:color-mix(in srgb,var(--bg) 66%,transparent);
   --topics-hero-c:color-mix(in srgb,var(--bg) 20%,transparent);
