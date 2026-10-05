@@ -1,6 +1,6 @@
 {
-  "version": 24,
-  "updatedAt": "2026-10-05",
+  "version": 25,
+  "updatedAt": "2026-10-05T20:35:30Z",
   "title": "Ṣaḥābiyyāt",
   "subtitle": "Frauen der ersten Generation – Glaube, Wissen, Standhaftigkeit und Dienst",
   "policy": {
@@ -71,22 +71,118 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "https://at.adobe.com/HNH9VVqyH6KG1AzW",
+          "durationSec": 384.287,
+          "bytes": 6165535,
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "DĀR Kids owner-audio direct assignment",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "sourceFile": "Sahabiyyah Khadīǧah bint Khuwaylid, raḍiya llāhu ʿanhā Geschichte.mp3",
+          "manual": true,
+          "manualUpload": true,
+          "ownerApproved": true,
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-05T20:35:30Z",
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "localTarget": "/kids/assets/sahabiyyat-story-audio/khadijah/master.m4a",
+          "optimizedTarget": {
+            "mime": "audio/mp4",
+            "codec": "aac",
+            "bitRateKbps": 64,
+            "channels": 1,
+            "sampleRateHz": 44100,
+            "bytes": 3210052,
+            "sha256": "85518d943a3600f1463324fe163a9ad5f2f1825581599abba9a0ebcbf05fb230"
+          },
+          "age": "4-5"
         },
         "6-8": {
-          "status": "audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "https://at.adobe.com/HNH9VVqyH6KG1AzW",
+          "durationSec": 384.287,
+          "bytes": 6165535,
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "DĀR Kids owner-audio direct assignment",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "sourceFile": "Sahabiyyah Khadīǧah bint Khuwaylid, raḍiya llāhu ʿanhā Geschichte.mp3",
+          "manual": true,
+          "manualUpload": true,
+          "ownerApproved": true,
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-05T20:35:30Z",
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "localTarget": "/kids/assets/sahabiyyat-story-audio/khadijah/master.m4a",
+          "optimizedTarget": {
+            "mime": "audio/mp4",
+            "codec": "aac",
+            "bitRateKbps": 64,
+            "channels": 1,
+            "sampleRateHz": 44100,
+            "bytes": 3210052,
+            "sha256": "85518d943a3600f1463324fe163a9ad5f2f1825581599abba9a0ebcbf05fb230"
+          },
+          "age": "6-8"
         },
         "9-10": {
-          "status": "audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "https://at.adobe.com/HNH9VVqyH6KG1AzW",
+          "durationSec": 384.287,
+          "bytes": 6165535,
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "DĀR Kids owner-audio direct assignment",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "sourceFile": "Sahabiyyah Khadīǧah bint Khuwaylid, raḍiya llāhu ʿanhā Geschichte.mp3",
+          "manual": true,
+          "manualUpload": true,
+          "ownerApproved": true,
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-05T20:35:30Z",
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "localTarget": "/kids/assets/sahabiyyat-story-audio/khadijah/master.m4a",
+          "optimizedTarget": {
+            "mime": "audio/mp4",
+            "codec": "aac",
+            "bitRateKbps": 64,
+            "channels": 1,
+            "sampleRateHz": 44100,
+            "bytes": 3210052,
+            "sha256": "85518d943a3600f1463324fe163a9ad5f2f1825581599abba9a0ebcbf05fb230"
+          },
+          "age": "9-10"
         }
       },
       "cover": "/kids/assets/sahabiyyat/khadijah-v1124.webp?v=1124",
@@ -104,7 +200,26 @@
       },
       "wordCount": 913,
       "estimatedNarrationSec": 373,
-      "estimatedNarrationLabel": "ca. 6:13 Min. bei 147 WPM"
+      "estimatedNarrationLabel": "ca. 6:13 Min. bei 147 WPM",
+      "voiceProduction": {
+        "status": "audio-complete",
+        "audioRefreshRequired": false,
+        "sourceDataVersion": 25,
+        "publishedAges": [
+          "4-5",
+          "6-8",
+          "9-10"
+        ],
+        "lastPublishedAt": "2026-10-05T20:35:30Z",
+        "singleMasterAudio": true,
+        "masterAgeRange": "4-10",
+        "masterAudioUrl": "https://at.adobe.com/HNH9VVqyH6KG1AzW",
+        "localTarget": "/kids/assets/sahabiyyat-story-audio/khadijah/master.m4a",
+        "directAssignment": true,
+        "optimizedMasterReady": true,
+        "optimizedMasterBytes": 3210052,
+        "optimizedMasterSha256": "85518d943a3600f1463324fe163a9ad5f2f1825581599abba9a0ebcbf05fb230"
+      }
     },
     {
       "id": "aishah",
@@ -175,7 +290,7 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
+              "start": 0,
               "end": 3.963
             },
             {
@@ -306,7 +421,7 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
+              "start": 0,
               "end": 3.963
             },
             {
@@ -437,7 +552,7 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
+              "start": 0,
               "end": 3.963
             },
             {
