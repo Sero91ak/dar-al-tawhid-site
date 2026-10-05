@@ -29,7 +29,7 @@ const CORE_PRECACHE=[
   "/kids/assets/sahabiyyat/juwayriyyah-v1128.jpg?v=1128",
   "/kids/assets/sahabiyyat/safiyyah-v1128.jpg?v=1128",
   "/kids/assets/sahabiyyat/maymunah-v1128.jpg?v=1128",
-  "/kids/data/story-hub.json?v=4",
+  "/kids/data/story-hub.json?v=5",
   "/kids/data/dua-kids.json",
   "/kids/data/verified-content.json",
   "/kids/data/alphabet-kids.json",
