@@ -271,33 +271,34 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/<link[^>]+dar-home-visual-v1190\.css[^>]*>\s*/g, "");
   html = html.replace(/<script[^>]+dar-home-visual-v1190\.js[^>]*><\/script>\s*/g, "");
 
-  // DAR_TEST_AREA_AUTHORITIES_V1298
+  // DAR_TEST_AREA_AUTHORITIES_V1300
   // test/index.html currently has no closing </head>; load all redesign layers as a final authority
   // so the intended Test-App designs are visible and legacy inline styles cannot win afterwards.
-  if (!html.includes('id="darTestAreaAuthoritiesV1298"')) {
-    const areaAuthority = '<style id="darTestAreaAuthoritiesV1298">' +
-      '@import url("/test/assets/quran-player-v1252.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/quran-learn-v1256.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/quran-reader-v1251.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/quran-overview-v1250.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/ilm-scholars-v1240.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/ilm-topics-v1242.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/ilm-dua-v1244.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/quiz-overview-v1257.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/more-v1241.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/ilm-scholar-profile-v1253.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/ilm-topic-detail-v1254.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/ilm-post-reader-v1255.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/ilm-scholar-detail-v1251.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/ilm-book-detail-v1252.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/more-v1253.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/jummah-v1258.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/qibla-v1259.css?v=area-authority-v1298");' +
-      '@import url("/test/assets/prayer-v1254.css?v=area-authority-v1298");' +
+  if (!html.includes('id="darTestAreaAuthoritiesV1300"')) {
+    const areaAuthority = '<style id="darTestAreaAuthoritiesV1300">' +
+      '@import url("/test/assets/quran-player-v1252.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/quran-learn-v1256.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/quran-reader-v1251.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/quran-overview-v1250.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/ilm-scholars-v1240.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/ilm-topics-v1242.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/ilm-dua-v1244.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/quiz-overview-v1257.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/more-v1241.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/ilm-scholar-profile-v1253.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/ilm-topic-detail-v1254.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/ilm-post-reader-v1255.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/ilm-scholar-detail-v1251.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/ilm-book-detail-v1252.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/more-v1253.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/jummah-v1258.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/qibla-v1259.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/prayer-v1254.css?v=area-authority-v1300");' +
       '@import url("/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292");' +
       '@import url("/test/assets/library/library-app.css?v=library-base-v1293");' +
       '@import url("/test/assets/library/library-authority-v1293.css?v=library-authority-v1293");' +
       '@import url("/test/assets/area-shell-v1294.css?v=area-shell-v1294");' +
+      '@import url("/test/assets/area-utility-v1300.css?v=area-utility-v1300");' +
       '@import url("/test/assets/tawhid-guide-v1295.css?v=tawhid-guide-v1295");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", areaAuthority + "</html>");
@@ -311,8 +312,8 @@ async function finalizeDarTestHomeV1193(asset) {
     if (html.includes("</html>")) html = html.replace("</html>", hadithFinal + "</html>");
     else html += hadithFinal;
   }
-  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v\d+"/g, 'window.__DAR_EXPECTED_BUILD="app-shell-v1299"');
-  html = html.replace(/const APP_BUILD_ID="app-shell-v\d+"/g, 'const APP_BUILD_ID="app-shell-v1299"');
+  html = html.replace(/window\.__DAR_EXPECTED_BUILD="app-shell-v\d+"/g, 'window.__DAR_EXPECTED_BUILD="app-shell-v1300"');
+  html = html.replace(/const APP_BUILD_ID="app-shell-v\d+"/g, 'const APP_BUILD_ID="app-shell-v1300"');
 
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
