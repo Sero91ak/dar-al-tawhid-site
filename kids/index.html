@@ -2901,7 +2901,7 @@ html:not([data-view="today"]) .view.active{
         <div class="lantern"></div>
         <div class="hero-copy">
           <p class="hero-salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</p>
-          <div class="hero-kicker">HÖREN · MITLESEN · LERNEN</div>
+          <div class="hero-kicker">HÖRBUCH · QURʾĀN · DUʿĀʾ</div>
           <h1>Hören. Mitlesen. Lernen.</h1>
           <p>Geschichten, Qurʾān und Duʿāʾ – ruhig und kindgerecht.</p>
         </div>
@@ -2910,9 +2910,10 @@ html:not([data-view="today"]) .view.active{
       <button class="resume" id="resumeButton">
         <div class="resume-icon"></div>
         <div class="resume-copy">
-          <small class="resume-kicker">DEIN HÖRPLATZ</small>
+          <small class="resume-kicker" id="resumeKindLabel">DEIN HÖRPLATZ</small>
           <strong>Weiterhören</strong>
           <span id="resumeText">Noch nichts begonnen</span>
+          <span class="resume-progress" id="resumeProgressTrack" hidden><b id="resumeProgress"></b></span>
         </div>
         <div class="go">›</div>
       </button>
@@ -3319,7 +3320,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v96-audio-home-focus1169";
+const KIDS_BUILD_ID="kids-shell-v97-unified-resume1170";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -4791,22 +4792,97 @@ document.getElementById("nextAyah").addEventListener("click",function(){
     updateLearnStatus(" Sūrah geschafft",false,"success");
   }
 });
+var homeResumeTarget=null;
 function saveQuranResume(){
   if(!currentSurah)return;
-  localStorage.setItem("kids.quran.resume",JSON.stringify({surah:currentSurah.id,ayah:currentAyahIndex,label:currentSurah.transliteration}));
+  localStorage.setItem("kids.quran.resume",JSON.stringify({
+    surah:currentSurah.id,
+    ayah:currentAyahIndex,
+    label:currentSurah.transliteration,
+    updatedAt:Date.now()
+  }));
   updateResume();
 }
 function readQuranResume(){
   try{return JSON.parse(localStorage.getItem("kids.quran.resume")||"null")}catch(e){return null}
 }
+function readStoryResume(){
+  try{return JSON.parse(localStorage.getItem("kids.storyHub.last.v1")||"null")}catch(e){return null}
+}
+function homeResumeCategoryLabel(value){
+  value=String(value||"");
+  if(value==="prophets")return"Propheten";
+  if(value==="sahaba")return"Ṣaḥābah";
+  if(value==="sahabiyyat")return"Ṣaḥābiyyāt";
+  return"Geschichten";
+}
+function homeResumeFormatTime(value){
+  var n=Math.max(0,Number(value)||0);
+  return Math.floor(n/60)+":"+String(Math.floor(n%60)).padStart(2,"0");
+}
 function updateResume(){
-  var r=readQuranResume();
-  var text=r?(r.label+" · Āyah "+(Number(r.ayah)+1)):"Noch nichts begonnen";
-  document.getElementById("resumeText").textContent=text;
-  document.getElementById("resumeQuranText").textContent=r?text:"Starte mit einer kurzen Sūrah";
+  var q=readQuranResume();
+  var s=readStoryResume();
+  var qTime=Number(q&&q.updatedAt||0);
+  var sTime=Number(s&&s.updatedAt||0);
+  var hasStory=!!(s&&s.completed!==true&&Number(s.time||0)>.5&&s.category&&s.id);
+  var useStory=hasStory&&(!q||sTime>=qTime);
+  var text="Noch nichts begonnen";
+  var kind="none";
+  var progress=0;
+
+  if(useStory){
+    kind="story";
+    text=String(s.title||"Deine Hörgeschichte");
+    var categoryLabel=homeResumeCategoryLabel(s.category);
+    if(categoryLabel)text+=" · "+categoryLabel;
+    if(Number(s.time||0)>0)text+=" · "+homeResumeFormatTime(s.time);
+    if(Number(s.duration||0)>0)progress=Math.max(0,Math.min(100,(Number(s.time||0)/Number(s.duration))*100));
+    homeResumeTarget={kind:"story",category:String(s.category),id:String(s.id),time:Number(s.time)||0};
+  }else if(q){
+    kind="quran";
+    text=String(q.label||"Qurʾān")+" · Āyah "+(Number(q.ayah)+1);
+    homeResumeTarget={kind:"quran",surah:Number(q.surah),ayah:Number(q.ayah)||0};
+  }else{
+    homeResumeTarget=null;
+  }
+
+  var button=document.getElementById("resumeButton");
+  var label=document.getElementById("resumeKindLabel");
+  var main=document.getElementById("resumeText");
+  var track=document.getElementById("resumeProgressTrack");
+  var bar=document.getElementById("resumeProgress");
+  if(button)button.setAttribute("data-resume-kind",kind);
+  if(label)label.textContent=kind==="story"?"DEIN HÖRBUCH":(kind==="quran"?"DEIN QURʾĀN":"DEIN HÖRPLATZ");
+  if(main)main.textContent=text;
+  if(track)track.hidden=!(progress>0);
+  if(bar)bar.style.width=progress.toFixed(1)+"%";
+
+  var quranText=q?(String(q.label||"Qurʾān")+" · Āyah "+(Number(q.ayah)+1)):"Starte mit einer kurzen Sūrah";
+  var quranResumeText=document.getElementById("resumeQuranText");
+  if(quranResumeText)quranResumeText.textContent=quranText;
   updateParentProgress();
 }
+window.addEventListener("dar-kids-story-resume",updateResume);
+window.addEventListener("storage",function(event){
+  if(event&&["kids.storyHub.last.v1","kids.quran.resume"].indexOf(event.key)>=0)updateResume();
+});
+document.addEventListener("visibilitychange",function(){
+  if(document.visibilityState==="visible")updateResume();
+});
 document.getElementById("resumeButton").addEventListener("click",function(){
+  var target=homeResumeTarget;
+  if(target&&target.kind==="story"){
+    showTab("stories");
+    setTimeout(function(){
+      if(window.DARKidsStoryHub&&typeof window.DARKidsStoryHub.openResume==="function"){
+        window.DARKidsStoryHub.openResume(target.category,target.id,target.time);
+      }else if(window.DARKidsStoryHub&&typeof window.DARKidsStoryHub.openStory==="function"){
+        window.DARKidsStoryHub.openStory(target.category,target.id);
+      }
+    },220);
+    return;
+  }
   var r=readQuranResume();
   showTab("quran");
   if(r)setTimeout(function(){openSurah(r.surah,r.ayah,"learn")},220);
@@ -7056,13 +7132,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1169",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1170",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1155",{cache:"no-store"})
+    fetch("/kids/version.json?v=1170",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
@@ -8472,7 +8548,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/prophet-stories.js?v=39"></script>
 <script src="/kids/mubashshirun-stories.js?v=29"></script>
 <script src="/kids/sahabiyyat-stories.js?v=21"></script>
-<script src="/kids/story-hub.js?v=20"></script>
+<script src="/kids/story-hub.js?v=21"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=7"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1123-dua-quiz-art" data-kids-section-heroes-late="1">
@@ -8778,6 +8854,53 @@ html[data-view="stories"] #view-stories > :last-child{
   #view-today .wm-dar-line,
   #view-today .wm-kids span,
   #view-today .hero .cloud{animation:none!important}
+}
+</style>
+<style id="kids-home-premium-resume-v1170">
+/* V1170 — ruhige Premium-Animation und echtes Weiterhören für Hörbücher + Qurʾān. */
+#view-today .hero::before{
+  background-image:url("/kids/assets/kids-brand/hero-warm-world.png?v=1170")!important;
+  animation:homeWorldDrift 22s ease-in-out infinite alternate!important;
+  transform-origin:50% 38%!important;
+  will-change:transform!important;
+}
+#view-today .hero::after{animation:homeWorldLight 7.5s ease-in-out infinite!important}
+#view-today .wm-dar-line{animation:homeBrandFloat 6.4s ease-in-out infinite!important}
+#view-today .wm-kids span{animation:homeKidFloat 5.8s ease-in-out infinite!important}
+@keyframes homeWorldDrift{
+  0%{transform:scale(1.06) translate3d(0,0,0)}
+  100%{transform:scale(1.09) translate3d(-.7%,-.8%,0)}
+}
+@keyframes homeWorldLight{0%,100%{opacity:.95}50%{opacity:1}}
+@keyframes homeBrandFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+@keyframes homeKidFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-3px) scale(1.015)}}
+#view-today .resume-progress{
+  position:relative!important;display:block!important;width:100%!important;height:5px!important;
+  margin:9px 0 0!important;overflow:hidden!important;border-radius:999px!important;
+  background:rgba(255,255,255,.08)!important
+}
+#view-today .resume-progress[hidden]{display:none!important}
+#view-today .resume-progress b{
+  display:block!important;width:0;height:100%!important;border-radius:inherit!important;
+  background:linear-gradient(90deg,#e8bd67,#ffe6a2)!important;
+  box-shadow:0 0 12px rgba(242,199,111,.28)!important;transition:width .35s ease!important
+}
+#view-today .resume[data-resume-kind="story"] .resume-icon{
+  background-image:url("/kids/assets/kids-icons/headphones-real-v12.png?v=cut1")!important;
+  background-size:76%!important;background-repeat:no-repeat!important;background-position:center!important
+}
+#view-today .resume[data-resume-kind="quran"] .resume-icon{
+  background-image:url("/kids/assets/kids-icons/quran-real-v12.png?v=cut1")!important;
+  background-size:72%!important;background-repeat:no-repeat!important;background-position:center!important
+}
+#view-today .resume[data-resume-kind="none"] .resume-icon{
+  background-image:url("/kids/assets/kids-icons/play-real-v12.png?v=cut1")!important
+}
+#view-today .resume-copy{align-self:center!important}
+#view-today .resume #resumeText{max-width:100%!important}
+@media(prefers-reduced-motion:reduce){
+  #view-today .hero::before,#view-today .hero::after,#view-today .wm-dar-line,#view-today .wm-kids span{animation:none!important}
+  #view-today .resume-progress b{transition:none!important}
 }
 </style>
 </html>
