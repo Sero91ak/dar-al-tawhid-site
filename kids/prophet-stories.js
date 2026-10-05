@@ -32,7 +32,8 @@ const DEDICATED_HERO=new Set(PROPHET_ORDER);
 function cardUrl(item){return ART_ROOT+encodeURIComponent(item.id)+"-card.jpg?v=22"}
 function heroUrl(item){return DEDICATED_HERO.has(item.id)?ART_ROOT+encodeURIComponent(item.id)+"-hero.jpg?v=22":cardUrl(item)}
 const DONE_PREFIX="kids.prophetStory.done.";
-let items=[],active=null,activeText="",followReader=null;
+let items=[],active=null,activeText="",playing=false,busy=false,followReader=null;
+const audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
@@ -40,11 +41,7 @@ function age(){return String($(".app")?.getAttribute("data-age")||"6–8")}
 function ageKey(){return age().replace("–","-")}
 function isAudioOnlyAge(){return age()==="4–5"}
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
-function setMode(v){
-  if(active&&(v==="listen"||v==="both")){openUniversalAudio();return}
-  try{localStorage.setItem(MODE_KEY,v)}catch(_){}
-  renderModeButtons();applyMode()
-}
+function setMode(v){try{localStorage.setItem(MODE_KEY,v)}catch(_){}renderModeButtons();applyMode()}
 function uniqueItems(list){
   const seen=new Set();
   return (Array.isArray(list)?list:[])
@@ -283,7 +280,7 @@ function ensureUi(){
           '</div>'+
         '</div>'+
         '<div class="ps-body">'+
-          '<div class="ps-player ps-player-launch" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören</button></div><div class="ps-player-note" id="psVoiceNote"></div></div>'+
+          '<div class="ps-player" id="psPlayer"><div class="ps-player-row"><button class="ps-play" id="psPlay" type="button">Hören</button></div><div class="ps-progress" id="psProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="psProgress"></span></div><div class="ps-player-time"><strong id="psTimeCurrent">0:00</strong><span id="psTimeTotal">0:00</span></div><button class="ps-follow-open" id="psFollowOpen" type="button">Mitlesen</button><div class="ps-player-note" id="psVoiceNote"></div></div>'+
           '<article class="ps-read" id="psRead"></article>'+
           '<div class="ps-sources"><strong>QUELLEN</strong><div id="psSources"></div></div>'+
           '<div class="ps-question" id="psQuestion"></div>'+
@@ -294,7 +291,10 @@ function ensureUi(){
   modal.querySelectorAll("[data-ps-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.psMode)));
   $("#psClose").addEventListener("click",closeStory);
   $("#psPlay").addEventListener("click",toggleAudio);
-  $("#psFollowOpen")?.addEventListener("click",()=>openUniversalAudio());
+  $("#psFollowOpen")?.addEventListener("click",()=>{
+    if(isAudioOnlyAge())return;
+    followReader?.open();
+  });
   $("#psProgressTrack")?.addEventListener("click",seekFromProgress);
   $("#psProgressTrack")?.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();seekBy(e.key==="ArrowLeft"?-15:15)}});
   $("#psScroll").addEventListener("scroll",()=>{$("#psModal")?.classList.toggle("scrolled",$("#psScroll").scrollTop>72)},{passive:true});
@@ -303,6 +303,32 @@ function ensureUi(){
     if($("#psModal")?.classList.contains("open"))closeStory();
     else if($("#psLibraryPage")?.classList.contains("open"))closeLibrary();
   });
+  audio.preload="metadata";
+  audio.addEventListener("timeupdate",updateProgress);
+  audio.addEventListener("loadedmetadata",()=>{followReader?.restore();updateProgress()});
+  audio.addEventListener("ended",()=>{playing=false;updatePlayButton();markDone(active?.id||"");if($("#psVoiceNote"))$("#psVoiceNote").textContent="Geschichte vollständig angehört."});
+  audio.addEventListener("play",()=>{playing=true;updatePlayButton()});
+  audio.addEventListener("pause",()=>{playing=false;updatePlayButton()});
+  followReader=window.DARKidsFollowReader?.create({
+    id:"prophet-story",audio,
+    getContent:()=>{
+      const meta=audioMeta(active)||{};
+      return{
+        key:active?("prophet:"+active.id+":"+ageKey()):"prophet:story",
+        title:active?(active.name+(active.id==="muhammad"?" ﷺ":"")):"Geschichte",
+        subtitle:"Prophetengeschichte · Alter "+age(),
+        album:"DĀR AL TAWḤĪD Kids · Propheten",
+        text:activeText,
+        artwork:active?heroUrl(active):"",
+        deepLink:active?("#stories/prophet/"+encodeURIComponent(active.id)):"#stories",
+        timings:meta.timings||meta.paragraphTimings||meta.cues||[],
+        syncPoints:meta.syncPoints||meta.syncAnchors||[],
+        audioOnly:isAudioOnlyAge()||mode()==="listen"
+      };
+    },
+    toggleAudio,
+    disabled:()=>!audioMeta(active)?.url
+  })||null;
   return true;
 }
 function applyMode(){
@@ -327,6 +353,16 @@ function applyMode(){
 function renderActive(){
   if(!active)return;
   activeText=buildText(active);
+  {
+    const meta=audioMeta(active)||{};
+    followReader?.setContent({
+      title:active.name+(active.id==="muhammad"?" ﷺ":""),
+      text:activeText,
+      timings:meta.timings||meta.paragraphTimings||meta.cues||[],
+      syncPoints:meta.syncPoints||meta.syncAnchors||[],
+      audioOnly:isAudioOnlyAge()||mode()==="listen"
+    });
+  }
   const hero=$(".ps-hero");if(hero){hero.setAttribute("data-ps-id",active.id);hero.setAttribute("data-hero-copy",DEDICATED_HERO.has(active.id)?"left":"right")}
   const heroImg=$("#psHero");if(heroImg){
     heroImg.onerror=()=>{
@@ -390,13 +426,43 @@ function openStory(id){
 }
 function closeStory(){followReader?.close();stopAudio();$("#psModal")?.classList.remove("open","scrolled");unlockPage();clearStoryDeepLink("prophet");active=null}
 function resetAudioForActive(){
-  const meta=audioMeta(active),note=$("#psVoiceNote");
-  if(note)note.textContent=meta?.url?"Öffnet den zentralen Hörplayer.":"Audio folgt.";
+  stopAudio();
+  const meta=audioMeta(active);
+  const note=$("#psVoiceNote");
+  if(meta&&meta.url){
+    audio.src=meta.url;
+    audio.preload="metadata";
+    if(note)note.textContent="";
+  }else{
+    audio.removeAttribute("src");
+    if(note)note.textContent=isAudioOnlyAge()?"Das Hörbuch ist gerade nicht verfügbar.":"Die Geschichte kann gelesen werden.";
+  }
+  if($("#psProgress"))$("#psProgress").style.width="0";
+  if($("#psTimeCurrent"))$("#psTimeCurrent").textContent="0:00";
+  if($("#psTimeTotal"))$("#psTimeTotal").textContent="0:00";
   updatePlayButton();
 }
-function updateProgress(){}
-function seekBy(){}
-function seekFromProgress(){}
+function storyTime(v){return window.DARKidsFollowReader?.formatTime?window.DARKidsFollowReader.formatTime(v):Math.floor((Number(v)||0)/60)+":"+String(Math.floor((Number(v)||0)%60)).padStart(2,"0")}
+function updateProgress(){
+  const duration=Number(audio.duration)||0,current=Number(audio.currentTime)||0;
+  const p=duration?Math.min(100,current/duration*100):0;
+  if($("#psProgress"))$("#psProgress").style.width=p+"%";
+  if($("#psTimeCurrent"))$("#psTimeCurrent").textContent=storyTime(current);
+  if($("#psTimeTotal"))$("#psTimeTotal").textContent=storyTime(duration);
+  const track=$("#psProgressTrack");
+  if(track){track.setAttribute("aria-valuemin","0");track.setAttribute("aria-valuemax",String(Math.max(0,Math.round(duration))));track.setAttribute("aria-valuenow",String(Math.max(0,Math.round(current))));track.setAttribute("aria-valuetext",storyTime(current)+" von "+storyTime(duration))}
+}
+function seekBy(delta){
+  if(!Number(audio.duration))return;
+  try{audio.currentTime=Math.max(0,Math.min(audio.duration,(Number(audio.currentTime)||0)+Number(delta||0)))}catch(_){}
+  updateProgress();followReader?.persist(true);
+}
+function seekFromProgress(e){
+  const track=$("#psProgressTrack");if(!track||!Number(audio.duration))return;
+  const rect=track.getBoundingClientRect();if(!rect.width)return;
+  try{audio.currentTime=Math.max(0,Math.min(audio.duration,((e.clientX-rect.left)/rect.width)*audio.duration))}catch(_){}
+  updateProgress();followReader?.persist(true);
+}
 function clearStoryDeepLink(kind){
   try{
     const raw=String(location.hash||"");
@@ -406,23 +472,36 @@ function clearStoryDeepLink(kind){
 function updatePlayButton(){
   const b=$("#psPlay");if(!b)return;
   const meta=audioMeta(active);
-  b.disabled=!meta?.url;
-  b.textContent=meta?.url?"Hören":"Audio folgt";
+  b.disabled=busy||!meta?.url;
+  if(playing)b.textContent="Pause";
+  else if(audio.currentTime>0&&!audio.ended)b.textContent="Weiterhören";
+  else b.textContent=isAudioOnlyAge()?"Hören":"Hören & mitlesen";
 }
-function openUniversalAudio(){
-  const item=active;if(!item)return false;
-  const meta=audioMeta(item),note=$("#psVoiceNote");
-  if(!meta?.url){if(note)note.textContent="Audio folgt.";updatePlayButton();return false}
-  const hub=window.DARKidsStoryHub;
-  if(!hub?.openStory){if(note)note.textContent="Der Hörplayer wird geladen.";return false}
-  const id=item.id;
-  closeStory();
-  closeLibrary();
-  hub.openStory("prophets",id);
-  return true;
+async function toggleAudio(){
+  if(!active||busy)return;
+  try{window.DARKidsStoryHub?.stop?.()}catch(_){}
+  const meta=audioMeta(active);
+  if(!meta?.url)return;
+  if(playing){audio.pause();return}
+  try{
+    busy=true;updatePlayButton();
+    if(!audio.src)audio.src=meta.url;
+    if(audio.ended)try{audio.currentTime=0}catch(_){}
+    followReader?.restore();
+    await audio.play();
+    busy=false;playing=true;updatePlayButton();
+  }catch(err){
+    busy=false;playing=false;updatePlayButton();
+    const note=$("#psVoiceNote");if(note)note.textContent=isAudioOnlyAge()?"Das Hörbuch ist gerade nicht verfügbar.":"Die Geschichte kann gelesen werden.";
+  }
 }
-async function toggleAudio(){return openUniversalAudio()}
-function stopAudio(){}
+function stopAudio(){
+  followReader?.persist(true);
+  try{audio.pause()}catch(_){}
+  playing=false;busy=false;
+  try{audio.removeAttribute("src");audio.load()}catch(_){}
+  updatePlayButton();updateProgress();
+}
 async function init(){
   if(!ensureUi())return;
   try{
