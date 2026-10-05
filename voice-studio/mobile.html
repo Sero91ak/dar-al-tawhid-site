@@ -8,10 +8,10 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="DĀR Voice">
-<link rel="manifest" href="/voice-studio/mobile-manifest.webmanifest?v=29111">
-<link rel="apple-touch-icon" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29111">
-<link rel="apple-touch-icon-precomposed" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29111">
-<link rel="icon" type="image/png" href="/voice-studio/voice-studio-icon.png?v=29111">
+<link rel="manifest" href="/voice-studio/mobile-manifest.webmanifest?v=29114">
+<link rel="apple-touch-icon" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29114">
+<link rel="apple-touch-icon-precomposed" sizes="256x256" href="/voice-studio/voice-studio-icon.png?v=29114">
+<link rel="icon" type="image/png" href="/voice-studio/voice-studio-icon.png?v=29114">
 <title>DĀR Voice</title>
 <style>
 :root{color-scheme:light;--bg:#f7f7f5;--card:#fff;--ink:#111;--muted:#777773;--line:#e8e8e4;--soft:#efefec;--good:#17784a;--warn:#9a5a00;--bad:#b42318;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)}
@@ -116,7 +116,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
     <div class="setting-row"><div><div class="setting-label">Serhat Engine</div><div class="setting-note" id="healthNote">Prüfe Verbindung …</div></div><span id="healthBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Aussprachebibliothek</div><div class="setting-note" id="libraryNote">Lade Daten …</div></div><span id="libraryBadge" class="badge">…</span></div>
     <div class="setting-row"><div><div class="setting-label">Fuṣḥā-Referenz</div><div class="setting-note">Eigene arabische Referenz bevorzugen</div></div><span id="arabicBadge" class="badge">…</span></div>
-    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.106</span></div>
+    <div class="setting-row"><div><div class="setting-label">Version</div><div class="setting-note">Mobile Voice Surface</div></div><span class="badge">2.9.114</span></div>
   </div>
   <div class="card">
     <div class="setting-row">
@@ -156,10 +156,12 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;background:tran
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const state={health:null,analysis:null,analysisText:"",analysisStyle:"",audioBlob:null,audioUrl:"",finalAudioName:"",livePreviewName:"",livePreviewDuration:0,livePreviewGeneration:0,liveChunks:[],liveChunkCursor:0,liveStreamActive:false,liveChunkUrls:new Map(),liveChunkFetches:new Map(),liveChunkEpoch:0,finalReady:false,activeJobId:"",previewTerm:"",catalogOffset:0,catalogQuery:"",catalogTotal:0,catalogRows:[],wordResultSerial:0,generating:false};
-const MOBILE_APP_VERSION="2.9.113";
+const MOBILE_APP_VERSION="2.9.114";
 const LOCAL_ENGINE_HOST=location.port==="8787"||location.hostname==="127.0.0.1"||location.hostname==="localhost"||/^192\.168\./.test(location.hostname)||/^10\./.test(location.hostname)||/^172\.(1[6-9]|2\d|3[01])\./.test(location.hostname);
 const REMOTE_ENGINE_API="/voice-studio/api/engine";
 const CLOUD_API_BASE="/voice-studio/api";
+const CLOUD_DIRECT_BASE="https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api";
+let CLOUD_ACTIVE_BASE=CLOUD_API_BASE;
 const API_BASE=LOCAL_ENGINE_HOST?"":REMOTE_ENGINE_API;
 const apiUrl=path=>API_BASE+path;
 function fetchWithTimeout(url,opts={},ms=8000){
@@ -167,9 +169,30 @@ function fetchWithTimeout(url,opts={},ms=8000){
   const timer=setTimeout(()=>controller.abort(),ms);
   return fetch(url,{...opts,signal:controller.signal}).finally(()=>clearTimeout(timer));
 }
-function cloudApi(path,opts={},ms=15000){
+async function cloudApi(path,opts={},ms=15000){
   const headers={"Content-Type":"application/json",...(opts.headers||{})};
-  return fetchWithTimeout(CLOUD_API_BASE+path,{credentials:"include",cache:"no-store",...opts,headers},ms);
+  const run=(base,direct=false)=>fetchWithTimeout(base+path,{
+    credentials:direct?"omit":"include",
+    ...(direct?{mode:"cors"}:{}),
+    cache:"no-store",
+    ...opts,
+    headers
+  },ms);
+  const shouldFallback=response=>{
+    const type=String(response?.headers?.get("content-type")||"").toLowerCase();
+    if(!response)return true;
+    if([404,405,502,504].includes(response.status))return true;
+    if(path==="/health"&&response.ok&&!type.includes("application/json"))return true;
+    return false;
+  };
+  if(CLOUD_ACTIVE_BASE===CLOUD_DIRECT_BASE)return run(CLOUD_DIRECT_BASE,true);
+  try{
+    const response=await run(CLOUD_API_BASE,false);
+    if(!shouldFallback(response))return response;
+  }catch(_){}
+  const direct=await run(CLOUD_DIRECT_BASE,true);
+  if(direct.ok||direct.status===503)CLOUD_ACTIVE_BASE=CLOUD_DIRECT_BASE;
+  return direct;
 }
 const LOCAL_PAIR_KEY="dar.voice.mobilePairToken.v1";
 function captureLocalPairToken(){
@@ -281,7 +304,7 @@ async function checkMobileUpdate(showToast=true){
       const r=await fetch("/voice-studio/version.json?mobile_update="+Date.now(),{cache:"no-store",credentials:"include"});
       const manifest=await r.json().catch(()=>({}));
       if(!r.ok)throw Error("Update-Datei nicht erreichbar");
-      const latest=String(manifest.version||MOBILE_APP_VERSION);
+      const latest=String(manifest.mobileVoiceApp?.version||manifest.version||MOBILE_APP_VERSION);
       data={ok:true,current:MOBILE_APP_VERSION,latest,updateAvailable:versionNewer(latest,MOBILE_APP_VERSION)};
     }
     mobileLatestVersion=String(data.latest||MOBILE_APP_VERSION);
@@ -900,7 +923,7 @@ if(location.protocol==="https:"&&"serviceWorker" in navigator){
     reloadedForController=true;
     location.reload();
   });
-  navigator.serviceWorker.register("/voice-studio/sw-v11.js",{scope:"/voice-studio/"})
+  navigator.serviceWorker.register("/voice-studio/sw-v11.js",{scope:"/voice-studio/",updateViaCache:"none"})
     .then(reg=>reg.update().catch(()=>{}))
     .catch(()=>{});
 }
