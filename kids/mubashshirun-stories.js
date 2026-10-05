@@ -22,12 +22,25 @@ const ageKey=()=>age().replace("–","-");
 function isAudioOnlyAge(){return age()==="4–5"}
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){
+  if(!["both","listen","read"].includes(v))return;
   try{localStorage.setItem(MODE_KEY,v)}catch(_){}
-  renderModeButtons();applyMode();
-  if(active&&v==="both"&&!isAudioOnlyAge()){
+  renderModeButtons();
+  if(!active){applyMode();return}
+  if(v==="both"){
     if(typeof followReader?.openReadAlong==="function")followReader.openReadAlong();
     else followReader?.open?.();
     if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+    return;
+  }
+  if(v==="listen"){
+    if(typeof followReader?.openListening==="function")followReader.openListening();
+    else followReader?.open?.();
+    if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+    return;
+  }
+  if(v==="read"){
+    if(typeof followReader?.openReading==="function")followReader.openReading();
+    else followReader?.open?.();
   }
 }
 function textFor(item){const policy=window.DARKidsStoryPolicy;if(policy?.canonicalText)return normalizeKidsStoryText(policy.canonicalText(item));const s=item?.scripts||{};const c=[s["4-5"],s["6-8"],s["9-10"]].map(v=>String(v||"").trim()).filter(Boolean).sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length);return normalizeKidsStoryText(c[0]||"")}
@@ -227,7 +240,6 @@ function ensureUi(){
           '<div id="msVisualDisclaimer" class="ms-visual-disclaimer"></div>'+
           '<div class="ms-detail-modes"><button data-ms-mode="both" type="button">Hören &amp; Mitlesen</button><button data-ms-mode="listen" type="button">Hören</button><button data-ms-mode="read" type="button">Lesen</button></div>'+
           '<div class="ms-profile-grid"><section><small>WIE WAR ER?</small><strong id="msTrait"></strong></section><section><small>SEIN LEBENSWEG</small><span id="msLife"></span></section><section><small>WICHTIGER MOMENT</small><span id="msWitness"></span></section></div>'+
-          '<section id="msPlayer" class="ms-player"><div class="story-local-controls"><button class="story-skip" id="msBack15" type="button" aria-label="15 Sekunden zurück">−15 s</button><button id="msPlay" class="ms-play" type="button">Hören</button><button class="story-skip" id="msFwd15" type="button" aria-label="15 Sekunden vor">+15 s</button></div><div class="ms-progress" id="msProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="msProgress"></span></div><div class="ms-player-time"><strong id="msTimeCurrent">0:00</strong><span id="msTimeTotal">0:00</span></div><button class="ms-follow-open" id="msFollowOpen" type="button">Hören &amp; Mitlesen</button><p id="msVoiceNote"></p></section>'+
           '<article id="msRead" class="ms-read"></article>'+
           '<section class="ms-sources"><strong>GEPRÜFTE QUELLEN</strong><div id="msSources"></div></section>'+
           '<section id="msQuestion" class="ms-question"></section>'+
@@ -237,7 +249,7 @@ function ensureUi(){
   document.body.appendChild(modal);
   $("#msClose").addEventListener("click",closeStory);
   installSwipeBack($("#msScroll"),closeStory);
-  $("#msPlay").addEventListener("click",toggleAudio);
+  $("#msPlay")?.addEventListener("click",toggleAudio);
   $("#msBack15")?.addEventListener("click",()=>seekBy(-15));
   $("#msFwd15")?.addEventListener("click",()=>seekBy(15));
   $("#msFollowOpen")?.addEventListener("click",()=>{
@@ -345,21 +357,8 @@ function renderQuestion(){
 }
 function applyMode(){
   renderModeButtons();
-  const read=$("#msRead"),player=$("#msPlayer"),follow=$("#msFollowOpen");
-  if(isAudioOnlyAge()){
-    if(read)read.hidden=true;
-    if(player)player.hidden=false;
-    if(follow){
-      follow.hidden=true;
-      follow.setAttribute("aria-hidden","true");
-      follow.tabIndex=-1;
-    }
-    return;
-  }
-  const m=mode();
-  if(read)read.hidden=m==="listen";
-  if(player)player.hidden=m==="read";
-  if(follow){follow.hidden=false;follow.removeAttribute("aria-hidden");follow.tabIndex=0;follow.textContent="Mitlesen öffnen";follow.setAttribute("aria-label","Mitlesen öffnen")}
+  const read=$("#msRead");
+  if(read)read.hidden=true;
 }
 function resetAudio(){
   stopAudio();
