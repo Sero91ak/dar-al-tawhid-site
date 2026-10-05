@@ -39,7 +39,7 @@ permissions:
 
 concurrency:
   group: app-media-optimizer-${{ github.event.pull_request.number || 'main' }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   optimize:
