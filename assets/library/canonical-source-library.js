@@ -1,9 +1,18 @@
-/* DAR AL TAWḤĪD – geprüfte Quellenbibliothek (Test-App) */
+/* DĀR AL TAWḤĪD – geprüfte Quellenbibliothek (Test-App) */
 (function attachCanonicalSourceLibrary(global) {
   "use strict";
 
-  const BOOKS_URL = "/data/books-library.json";
-  const SCHOLARS_URL = "/data/scholars-library.json";
+  function dataUrl(file) {
+    try {
+      if (location.pathname.indexOf("/test/") === 0 || location.pathname === "/test") {
+        // Test teilt die kanonischen Daten mit Live-Root, falls kein Test-Spiegel existiert.
+        return "/data/" + file;
+      }
+    } catch (e) {}
+    return "/data/" + file;
+  }
+  const BOOKS_URL = dataUrl("books-library.json");
+  const SCHOLARS_URL = dataUrl("scholars-library.json");
   const HIDDEN_PLACEHOLDERS = new Set([
     "autor nicht verifiziert",
     "autor unbekannt",
@@ -818,214 +827,6 @@
         .qsrc-lib-card-meta--author .qsrc-lib-card-author-name{font-size:0.66rem}
       }
     `;
-
-    style.textContent += `
-      /* QSRCHISTORICAL_HERO_V1277
-         Historical source-library language: quiet full-bleed library hero, open editorial shelves,
-         and book-detail reading surfaces. */
-      .qsrc-page{width:100%;min-width:0}
-      .qsrc-page>.view-head{
-        position:relative!important;
-        isolation:isolate!important;
-        overflow:hidden!important;
-        width:100vw!important;
-        min-height:clamp(248px,48vw,330px)!important;
-        margin:0 0 18px calc(50% - 50vw)!important;
-        padding:clamp(30px,6vw,44px) max(20px,calc((100vw - 1180px)/2)) clamp(26px,5vw,38px)!important;
-        display:flex!important;
-        flex-direction:column!important;
-        justify-content:flex-end!important;
-        align-items:flex-start!important;
-        border:0!important;
-        border-radius:0 0 28px 28px!important;
-        background:
-          linear-gradient(90deg,
-            color-mix(in srgb,var(--bg,#070706) 92%,transparent) 0%,
-            color-mix(in srgb,var(--bg,#070706) 66%,transparent) 39%,
-            color-mix(in srgb,var(--bg,#070706) 20%,transparent) 73%,
-            color-mix(in srgb,var(--bg,#070706) 5%,transparent) 100%),
-          linear-gradient(180deg,
-            color-mix(in srgb,var(--bg,#070706) 4%,transparent) 0%,
-            transparent 48%,
-            color-mix(in srgb,var(--bg,#070706) 30%,transparent) 100%),
-          url("/assets/ilm/ilm-historical-majlis-v1234.jpg") 76% 47%/cover no-repeat!important;
-        box-shadow:0 22px 48px color-mix(in srgb,var(--bg,#070706) 58%,transparent),inset 0 -1px 0 color-mix(in srgb,var(--gold2,#efd78e) 18%,transparent)!important;
-      }
-      .qsrc-page>.view-head:before{
-        content:""!important;
-        position:absolute!important;
-        inset:0!important;
-        z-index:0!important;
-        pointer-events:none!important;
-        background:
-          linear-gradient(90deg,color-mix(in srgb,var(--bg,#070706) 14%,transparent),transparent 65%),
-          radial-gradient(circle at 84% 16%,color-mix(in srgb,var(--gold2,#efd78e) 10%,transparent),transparent 42%)!important;
-      }
-      .qsrc-page>.view-head>*{position:relative!important;z-index:1!important;width:min(680px,88%)!important}
-      .qsrc-page>.view-head .eyebrow{
-        margin:0 0 8px!important;
-        color:var(--gold2,#efd78e)!important;
-        font-size:.67rem!important;
-        font-weight:850!important;
-        letter-spacing:.15em!important;
-        text-transform:uppercase!important;
-      }
-      .qsrc-page>.view-head h2{
-        margin:0!important;
-        font-family:var(--font-display,var(--serif,Georgia,serif))!important;
-        font-size:clamp(2.15rem,8.5vw,4rem)!important;
-        line-height:.96!important;
-        font-weight:610!important;
-        color:var(--text,#f7f1e7)!important;
-        text-shadow:0 2px 16px color-mix(in srgb,var(--bg,#070706) 42%,transparent)!important;
-      }
-      .qsrc-page>.view-head .view-desc{
-        margin:11px 0 0!important;
-        max-width:42rem!important;
-        color:var(--text,#f7f1e7)!important;
-        font-size:clamp(.88rem,3vw,1.02rem)!important;
-        line-height:1.48!important;
-        font-weight:560!important;
-        text-shadow:0 1px 10px color-mix(in srgb,var(--bg,#070706) 38%,transparent)!important;
-      }
-      .qsrc-page--overview>.qsrc-shell,
-      .qsrc-page--detail>.qsrc-detail{
-        width:min(1040px,calc(100% - 24px))!important;
-        margin-left:auto!important;
-        margin-right:auto!important;
-        padding-bottom:calc(112px + env(safe-area-inset-bottom))!important;
-      }
-      .qsrc-page--overview .qsrc-sticky{
-        top:max(8px,env(safe-area-inset-top))!important;
-        margin-bottom:12px!important;
-        padding:10px!important;
-        border-color:color-mix(in srgb,var(--gold2,#efd78e) 18%,var(--line2,rgba(127,127,127,.18)))!important;
-        background:color-mix(in srgb,var(--card,#14120e) 86%,transparent)!important;
-        box-shadow:0 12px 28px color-mix(in srgb,var(--bg,#070706) 26%,transparent)!important;
-      }
-      .qsrc-page--overview .qsrc-lib-grid{
-        display:grid!important;
-        grid-template-columns:repeat(2,minmax(0,1fr))!important;
-        gap:18px 14px!important;
-      }
-      .qsrc-page--overview .qsrc-lib-card{
-        border-radius:16px!important;
-      }
-      .qsrc-page--overview .qsrc-lib-cover-wrap{
-        border-radius:14px 14px 0 0!important;
-        box-shadow:0 12px 28px color-mix(in srgb,var(--bg,#070706) 42%,transparent)!important;
-      }
-      .qsrc-page--overview .qsrc-lib-card-body{
-        min-height:118px!important;
-        padding:12px 12px 13px!important;
-        border-radius:0 0 14px 14px!important;
-        gap:6px!important;
-      }
-      .qsrc-page--overview .qsrc-lib-card-body h4{
-        font-size:clamp(.94rem,2.4vw,1.08rem)!important;
-        line-height:1.28!important;
-      }
-      .qsrc-page--detail>.view-head{min-height:clamp(220px,42vw,290px)!important}
-      .qsrc-page--detail .qsrc-detail-showcase{
-        display:grid!important;
-        grid-template-columns:minmax(150px,220px) minmax(0,1fr)!important;
-        align-items:center!important;
-        gap:24px!important;
-        text-align:left!important;
-        padding:18px!important;
-        border-color:color-mix(in srgb,var(--gold2,#efd78e) 16%,var(--line2,rgba(127,127,127,.16)))!important;
-        background:color-mix(in srgb,var(--card,#14120e) 84%,transparent)!important;
-      }
-      .qsrc-page--detail .qsrc-detail-cover-slot{width:100%!important}
-      .qsrc-page--detail .qsrc-detail-copy{max-width:46rem!important}
-      .qsrc-page--detail .qsrc-detail-showcase h4{
-        font-size:clamp(1.5rem,4.6vw,2.25rem)!important;
-        line-height:1.08!important;
-        color:var(--text,#f7f1e7)!important;
-      }
-      .qsrc-page--detail .qsrc-detail-block{
-        border:0!important;
-        border-top:1px solid color-mix(in srgb,var(--gold2,#efd78e) 15%,transparent)!important;
-        border-radius:0!important;
-        padding:16px 0!important;
-        background:transparent!important;
-      }
-      html[data-theme="light"] .qsrc-page>.view-head,
-      html[data-theme="soft"] .qsrc-page>.view-head,
-      html[data-theme="salbei"] .qsrc-page>.view-head,
-      html[data-theme="eisgold"] .qsrc-page>.view-head{
-        background:
-          linear-gradient(90deg,
-            color-mix(in srgb,var(--bg,#f4f0e7) 96%,transparent) 0%,
-            color-mix(in srgb,var(--bg,#f4f0e7) 84%,transparent) 40%,
-            color-mix(in srgb,var(--bg,#f4f0e7) 36%,transparent) 74%,
-            color-mix(in srgb,var(--bg,#f4f0e7) 8%,transparent) 100%),
-          linear-gradient(180deg,transparent 48%,color-mix(in srgb,var(--bg,#f4f0e7) 28%,transparent)),
-          url("/assets/ilm/ilm-historical-majlis-v1234.jpg") 76% 47%/cover no-repeat!important;
-      }
-      html[data-theme="light"] .qsrc-page>.view-head h2,
-      html[data-theme="soft"] .qsrc-page>.view-head h2,
-      html[data-theme="salbei"] .qsrc-page>.view-head h2,
-      html[data-theme="eisgold"] .qsrc-page>.view-head h2,
-      html[data-theme="light"] .qsrc-page>.view-head .view-desc,
-      html[data-theme="soft"] .qsrc-page>.view-head .view-desc,
-      html[data-theme="salbei"] .qsrc-page>.view-head .view-desc,
-      html[data-theme="eisgold"] .qsrc-page>.view-head .view-desc{
-        color:var(--text)!important;
-        text-shadow:none!important;
-      }
-      @media(min-width:980px){
-        .qsrc-page--overview .qsrc-lib-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:22px 18px!important}
-      }
-      @media(max-width:640px){
-        .qsrc-page>.view-head{
-          min-height:280px!important;
-          padding:30px 20px 28px!important;
-          background-position:center,center,72% 48%!important;
-        }
-        .qsrc-page>.view-head>*{width:min(100%,92%)!important}
-        .qsrc-page--overview>.qsrc-shell,
-        .qsrc-page--detail>.qsrc-detail{width:calc(100% - 30px)!important}
-        .qsrc-page--overview .qsrc-lib-grid{grid-template-columns:1fr!important;gap:0!important}
-        .qsrc-page--overview .qsrc-lib-card{
-          display:grid!important;
-          grid-template-columns:88px minmax(0,1fr)!important;
-          min-height:128px!important;
-          border-bottom:1px solid color-mix(in srgb,var(--gold2,#efd78e) 14%,var(--line2,rgba(127,127,127,.16)))!important;
-          border-radius:0!important;
-          padding:12px 0!important;
-        }
-        .qsrc-page--overview .qsrc-lib-cover-wrap{
-          width:88px!important;
-          height:124px!important;
-          aspect-ratio:auto!important;
-          border-radius:10px!important;
-          border-bottom:1px solid var(--line2,rgba(127,127,127,.18))!important;
-          box-shadow:0 8px 18px color-mix(in srgb,var(--bg,#070706) 36%,transparent)!important;
-        }
-        .qsrc-page--overview .qsrc-lib-card-body{
-          min-height:0!important;
-          align-self:stretch!important;
-          justify-content:center!important;
-          padding:7px 0 7px 14px!important;
-          border:0!important;
-          border-radius:0!important;
-          background:transparent!important;
-          box-shadow:none!important;
-        }
-        .qsrc-page--overview .qsrc-lib-card-body h4{
-          font-size:1.05rem!important;
-          line-height:1.24!important;
-        }
-        .qsrc-page--detail .qsrc-detail-showcase{
-          grid-template-columns:110px minmax(0,1fr)!important;
-          gap:14px!important;
-          padding:14px!important;
-          text-align:left!important;
-        }
-        .qsrc-page--detail .qsrc-detail-showcase h4{font-size:1.32rem!important}
-      }
-    `;
     document.head.appendChild(style);
   }
 
@@ -1283,7 +1084,7 @@
         ? books.map(renderBookCard).join("")
         : `<div class="qsrc-empty">Keine Bücher gefunden.</div>`);
 
-    return `<div class="qsrc-page qsrc-page--overview">${setPageHeader("Quellenbibliothek", `Alle ${bookCount} geprüften Werke mit verifiziertem Autor. Zitierte Gelehrte werden getrennt ausgewiesen.`, "Quellenbibliothek")}
+    return `${setPageHeader("Quellenbibliothek", `Alle ${bookCount} geprüften Werke mit verifiziertem Autor. Zitierte Gelehrte werden getrennt ausgewiesen.`, "Quellenbibliothek")}
 <section class="qsrc-shell">
   <div class="qsrc-sticky">
     <div class="qsrc-control-head">
@@ -1303,7 +1104,7 @@
     </div>
   </div>
   <div class="${activeTab === "books" ? "qsrc-lib-grid" : "qsrc-grid"}" id="qsrcResults">${listHtml}</div>
-</section></div>`;
+</section>`;
   }
 
   function renderBookDetail(bookId) {
@@ -1313,7 +1114,7 @@
 
     const book = state.booksById.get(String(bookId || ""));
     if (!book) {
-      return `<div class="qsrc-page qsrc-page--detail">${setPageHeader("Werk nicht gefunden", "Dieses Buch ist nicht in der geprüften Quellenbibliothek.", "Quellenbibliothek")}<section class="qsrc-empty">Das Werk konnte nicht gefunden werden.</section>`;
+      return `${setPageHeader("Werk nicht gefunden", "Dieses Buch ist nicht in der geprüften Quellenbibliothek.", "Quellenbibliothek")}<section class="qsrc-empty">Das Werk konnte nicht gefunden werden.</section>`;
     }
 
     const aliases = (book.aliases || []).filter((alias) => alias && !isHiddenPlaceholder(alias));
@@ -1339,7 +1140,7 @@
     <p>${postCount} ${postCount === 1 ? "Beitrag" : "Beiträge"}</p>
     <div class="qsrc-post-list">${relatedPosts.length ? relatedPosts.map(qsrcPostItemHtml).join("") : `<div class="qsrc-empty">Keine Beiträge verknüpft.</div>`}</div>
   </article>
-</section></div>`;
+</section>`;
   }
 
   function renderScholarDetail(scholarId) {
@@ -1349,7 +1150,7 @@
 
     const scholar = state.scholarsById.get(String(scholarId || ""));
     if (!scholar) {
-      return `<div class="qsrc-page qsrc-page--detail">${setPageHeader("Gelehrter nicht gefunden", "Dieser Gelehrte ist nicht in der geprüften Quellenbibliothek.", "Quellenbibliothek")}<section class="qsrc-empty">Der Gelehrte konnte nicht gefunden werden.</section>`;
+      return `${setPageHeader("Gelehrter nicht gefunden", "Dieser Gelehrte ist nicht in der geprüften Quellenbibliothek.", "Quellenbibliothek")}<section class="qsrc-empty">Der Gelehrte konnte nicht gefunden werden.</section>`;
     }
 
     const works = (scholar.citedWorkIds || [])
@@ -1373,7 +1174,7 @@
     <p>${Number(scholar.postCount || relatedPosts.length || 0)} ${Number(scholar.postCount || relatedPosts.length || 0) === 1 ? "Beitrag" : "Beiträge"}</p>
     <div class="qsrc-post-list">${relatedPosts.length ? relatedPosts.map(postCardHtml).join("") : `<div class="qsrc-empty">Keine Beiträge verknüpft.</div>`}</div>
   </article>
-</section></div>`;
+</section>`;
   }
 
   function renderRoute(route) {
@@ -1534,7 +1335,19 @@
     renderScholarDetail,
     renderRoute,
     bind,
-    getBookCount: () => state.books.length,
+    getBookCount: () => (state.status === "ready" ? state.books.length : Math.max(state.books.length, 0)),
+    getReadyBookCount: () => (state.status === "ready" ? state.books.length : null),
     getScholarCount: () => state.scholars.length
   };
+
+  // Sofort laden — nicht auf DARLibraryApp warten (Besucher-Mehr braucht Zähler/Liste).
+  ensureModule().then(() => {
+    try {
+      const view = (global.currentRoute && global.currentRoute.view) || "";
+      if (typeof global.render === "function" && ["more","home","books","quellen-book","quellen-scholar","bibliothek"].includes(view)) {
+        global.render();
+      }
+    } catch (e) {}
+  }).catch(() => {});
+
 })(window);
