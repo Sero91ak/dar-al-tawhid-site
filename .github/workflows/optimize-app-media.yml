@@ -1,0 +1,106 @@
+name: Optimize App Media
+
+on:
+  workflow_dispatch:
+    inputs:
+      full_scan:
+        description: "Scan all current app media"
+        required: false
+        default: true
+        type: boolean
+  push:
+    branches: [main]
+    paths:
+      - 'assets/**'
+      - 'kids/assets/**'
+      - 'content/**'
+      - 'apple-tv/**'
+      - 'ios/**'
+      - 'test/assets/**'
+      - 'scripts/optimize-app-media.sh'
+      - 'scripts/update-local-media-metadata.py'
+      - '.github/workflows/optimize-app-media.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: app-media-optimizer
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    if: ${{ !contains(github.event.head_commit.message || '', '[media-optimized]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 2
+
+      - name: Install media tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg imagemagick pngquant webp >/dev/null
+
+      - name: Decide scan mode
+        id: mode
+        shell: bash
+        run: |
+          set -euo pipefail
+          full=0
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.full_scan }}" = "true" ]; then
+            full=1
+          elif git diff --name-only HEAD^ HEAD 2>/dev/null | grep -Eq '^(scripts/optimize-app-media\.sh|scripts/update-local-media-metadata\.py|\.github/workflows/optimize-app-media\.yml)$'; then
+            full=1
+          fi
+          echo "full=$full" >> "$GITHUB_OUTPUT"
+
+      - name: Optimize current media
+        shell: bash
+        run: |
+          set -euo pipefail
+          chmod +x scripts/optimize-app-media.sh
+          if [ "${{ steps.mode.outputs.full }}" = "1" ]; then
+            scripts/optimize-app-media.sh --all
+          else
+            git diff --name-only HEAD^ HEAD --               assets kids/assets content apple-tv ios test/assets               | scripts/optimize-app-media.sh --stdin
+          fi
+
+      - name: Enforce delivery budgets
+        shell: bash
+        run: |
+          set -euo pipefail
+          fail=0
+          while IFS= read -r -d '' f; do
+            case "$f" in
+              *Assets.xcassets*|*/icons/*|*/logo/*|*/logos/*|*favicon*|*watermark*|*-master.*) continue ;;
+            esac
+            size=$(stat -c%s "$f")
+            case "${f,,}" in
+              *.jpg|*.jpeg|*.png|*.webp)
+                if [ "$size" -gt 1800000 ]; then echo "::error::$f is still larger than 1.8 MB"; fail=1; fi ;;
+              *.mp4)
+                if [ "$size" -gt 18000000 ]; then echo "::warning::$f remains larger than 18 MB; consider streaming segmentation for long video."; fi ;;
+            esac
+          done < <(find assets kids/assets content apple-tv ios -type f \
+            \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.mp4' \) -print0 2>/dev/null)
+          exit "$fail"
+
+      - name: Commit optimized media
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets kids/assets content apple-tv ios test/assets kids/data voice-studio scripts 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Media already within optimization targets."
+            exit 0
+          fi
+          git commit -m "[media-optimized] Compress app media automatically"
+          git pull --rebase origin main
+          git push origin HEAD:main
