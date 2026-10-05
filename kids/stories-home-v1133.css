@@ -1,0 +1,324 @@
+/* DĀR AL TAWḤĪD Kids · Geschichten Startseite v1133
+   Ein Hero, drei gleichwertige Hörwelten, kompakte freie Geschichten. */
+
+html[data-view="stories"] .shell{
+  padding-top:0!important;
+  scroll-padding-bottom:calc(170px + env(safe-area-inset-bottom,0px))!important;
+}
+#view-stories.ps-stories-home{
+  width:100%!important;
+  padding-bottom:calc(210px + env(safe-area-inset-bottom,0px))!important;
+}
+#view-stories.ps-stories-home.active{
+  display:flex!important;
+  flex-direction:column!important;
+}
+
+/* Der alte doppelte Seitentitel und die Statistik-Sprungzeile verschwinden.
+   Geschichten des Īmān ist jetzt der einzige Einstieg. */
+#view-stories.ps-stories-home > .page-head,
+#view-stories.ps-stories-home > .stories-area-jump{
+  display:none!important;
+}
+#view-stories.ps-stories-home > #ghEntry{order:1}
+#view-stories.ps-stories-home > #psProphetEntry{order:2}
+#view-stories.ps-stories-home > #msEntry{order:3}
+#view-stories.ps-stories-home > #syEntry{order:4}
+#view-stories.ps-stories-home > .story-feature{order:5}
+#view-stories.ps-stories-home > .story-more-title{order:6}
+#view-stories.ps-stories-home > .story-list{order:7}
+#view-stories.ps-stories-home > .section-title:not(.story-more-title){order:8}
+#view-stories.ps-stories-home > .gentle-note{order:9}
+
+/* ===== EINZIGER HERO ===== */
+#view-stories.ps-stories-home #ghEntry{
+  width:calc(100% + 32px)!important;
+  min-height:clamp(282px,72vw,390px)!important;
+  margin:0 -16px 24px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(239,208,138,.23)!important;
+  border-radius:0 0 36px 36px!important;
+  overflow:hidden!important;
+  box-shadow:0 26px 58px rgba(0,0,0,.23)!important;
+  background:#071e2d!important;
+}
+#view-stories.ps-stories-home #ghEntry .gh-entry-bg{
+  background:
+    linear-gradient(90deg,rgba(2,17,29,.88) 0%,rgba(2,17,29,.62) 46%,rgba(2,17,29,.18) 76%,rgba(2,17,29,.08) 100%),
+    linear-gradient(180deg,rgba(2,15,26,.02) 35%,rgba(3,19,31,.88) 100%),
+    url("/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3") center 48%/cover no-repeat!important;
+}
+#view-stories.ps-stories-home #ghEntry .gh-entry-bg::after{
+  background:
+    radial-gradient(circle at 82% 20%,rgba(247,213,133,.16),transparent 24%),
+    linear-gradient(180deg,transparent 32%,rgba(3,18,29,.74))!important;
+}
+#view-stories.ps-stories-home #ghEntry .gh-entry-copy{
+  left:max(22px,calc(env(safe-area-inset-left,0px) + 18px))!important;
+  right:max(22px,calc(env(safe-area-inset-right,0px) + 18px))!important;
+  bottom:24px!important;
+  gap:7px!important;
+}
+#view-stories.ps-stories-home #ghEntry .gh-entry-kicker{
+  color:#f2cf79!important;
+  font-family:"Cinzel",Georgia,serif!important;
+  font-size:10px!important;
+  letter-spacing:.15em!important;
+}
+#view-stories.ps-stories-home #ghEntry .gh-entry-title{
+  max-width:640px!important;
+  color:#fff8e9!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(39px,10.6vw,64px)!important;
+  font-weight:650!important;
+  line-height:.94!important;
+  letter-spacing:-.045em!important;
+  text-shadow:0 5px 24px rgba(0,0,0,.34)!important;
+}
+#view-stories.ps-stories-home #ghEntry .gh-entry-sub{
+  max-width:560px!important;
+  color:rgba(255,255,255,.82)!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:14px!important;
+  line-height:1.42!important;
+  font-weight:560!important;
+}
+#view-stories.ps-stories-home #ghEntry .gh-entry-action{
+  width:max-content!important;
+  margin-top:5px!important;
+  min-height:43px!important;
+  padding:0 4px 0 13px!important;
+  border:1px solid rgba(239,208,138,.28)!important;
+  border-radius:999px!important;
+  background:rgba(5,27,40,.48)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:12px!important;
+  font-weight:650!important;
+}
+#view-stories.ps-stories-home #ghEntry .gh-entry-action b{
+  width:35px!important;height:35px!important;margin-left:3px!important;
+  border:0!important;background:rgba(239,208,138,.12)!important;
+}
+
+/* ===== DREI GLEICHWERTIGE KATEGORIEN ===== */
+#view-stories.ps-stories-home #psProphetEntry,
+#view-stories.ps-stories-home #msEntry,
+#view-stories.ps-stories-home #syEntry{
+  position:relative!important;
+  display:block!important;
+  width:calc(100% - 16px)!important;
+  min-height:236px!important;
+  height:236px!important;
+  margin:0 8px 16px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:1px solid rgba(236,209,144,.22)!important;
+  border-radius:30px!important;
+  background:#082b3d!important;
+  box-shadow:0 18px 40px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.035)!important;
+  isolation:isolate!important;
+}
+
+/* Propheten: allgemeine Landschaft statt einer einzelnen Person / Kaʿbah als Hauptsymbol. */
+#view-stories.ps-stories-home #psProphetEntry .ps-entry-visual{
+  position:absolute!important;z-index:0!important;inset:0!important;display:block!important;
+  background:url("/kids/assets/prophet-scenes/desert.webp?v=1133") center 52%/cover no-repeat!important;
+}
+#view-stories.ps-stories-home #psProphetEntry .ps-entry-visual img{opacity:0!important}
+#view-stories.ps-stories-home #psProphetEntry .ps-entry-panel{
+  position:absolute!important;z-index:2!important;inset:0!important;
+  display:block!important;padding:0!important;background:
+    linear-gradient(90deg,rgba(4,23,34,.90) 0%,rgba(4,23,34,.55) 52%,rgba(4,23,34,.10) 82%),
+    linear-gradient(180deg,rgba(4,20,31,.04) 25%,rgba(4,22,34,.92) 100%)!important;
+  border:0!important;
+}
+#view-stories.ps-stories-home #psProphetEntry .ps-entry-copy{
+  position:absolute!important;left:20px!important;right:78px!important;bottom:21px!important;
+}
+#view-stories.ps-stories-home #psProphetEntry .ps-entry-action{
+  position:absolute!important;right:17px!important;bottom:17px!important;left:auto!important;
+}
+
+/* Ṣaḥābah: lokales historisches Artwork, kein ablaufender externer Hotlink. */
+#view-stories.ps-stories-home #msEntry .ms-entry-bg,
+#view-stories.ps-stories-home #syEntry .ms-entry-bg{
+  position:absolute!important;z-index:0!important;inset:0!important;display:block!important;
+  background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important;
+}
+#view-stories.ps-stories-home #msEntry .ms-entry-bg{
+  background-image:url("/kids/assets/sahaba-mubashshirun/abu-bakr.jpg?v=1133")!important;
+}
+#view-stories.ps-stories-home #syEntry .ms-entry-bg{
+  background-image:url("/kids/assets/sahabiyyat/khadijah-v1124.webp?v=1133")!important;
+  background-position:center 42%!important;
+}
+#view-stories.ps-stories-home #msEntry .ms-entry-bg img,
+#view-stories.ps-stories-home #syEntry .ms-entry-bg img{opacity:0!important}
+#view-stories.ps-stories-home #msEntry .ms-entry-art,
+#view-stories.ps-stories-home #syEntry .ms-entry-art{display:none!important}
+#view-stories.ps-stories-home #msEntry::before,
+#view-stories.ps-stories-home #syEntry::before{
+  content:""!important;position:absolute!important;z-index:1!important;inset:0!important;
+  background:
+    linear-gradient(90deg,rgba(4,22,33,.88) 0%,rgba(4,22,33,.53) 54%,rgba(4,22,33,.10) 83%),
+    linear-gradient(180deg,rgba(4,18,28,.02) 24%,rgba(4,22,33,.91) 100%)!important;
+  pointer-events:none!important;
+}
+#view-stories.ps-stories-home #syEntry::before{
+  background:
+    linear-gradient(90deg,rgba(19,24,31,.86) 0%,rgba(37,27,34,.48) 56%,rgba(20,19,24,.09) 83%),
+    linear-gradient(180deg,rgba(12,16,22,.02) 24%,rgba(22,24,30,.91) 100%)!important;
+}
+#view-stories.ps-stories-home #msEntry .ms-entry-copy,
+#view-stories.ps-stories-home #syEntry .ms-entry-copy{
+  position:absolute!important;z-index:3!important;left:20px!important;right:78px!important;bottom:20px!important;
+  display:block!important;padding:0!important;
+}
+#view-stories.ps-stories-home #msEntry .ms-entry-action,
+#view-stories.ps-stories-home #syEntry .ms-entry-action{
+  position:absolute!important;z-index:4!important;right:17px!important;bottom:17px!important;left:auto!important;
+  width:48px!important;height:48px!important;margin:0!important;padding:0!important;
+  overflow:hidden!important;color:transparent!important;font-size:0!important;
+  border:1px solid rgba(245,219,153,.30)!important;border-radius:50%!important;
+  background:rgba(5,28,40,.48)!important;display:grid!important;place-items:center!important;
+}
+#view-stories.ps-stories-home #msEntry .ms-entry-action b,
+#view-stories.ps-stories-home #syEntry .ms-entry-action b{
+  width:auto!important;height:auto!important;margin:0!important;border:0!important;
+  color:#ffe2a0!important;font-size:30px!important;background:transparent!important;
+}
+
+/* Gemeinsame Typografie */
+#view-stories.ps-stories-home #psProphetEntry .ps-entry-kicker,
+#view-stories.ps-stories-home #msEntry .ms-entry-kicker,
+#view-stories.ps-stories-home #syEntry .ms-entry-kicker{
+  display:block!important;margin:0 0 7px!important;
+  color:#f0cf80!important;font-family:"Cinzel",Georgia,serif!important;
+  font-size:9px!important;font-weight:700!important;line-height:1.3!important;letter-spacing:.11em!important;
+}
+#view-stories.ps-stories-home #psProphetEntry .ps-entry-copy strong,
+#view-stories.ps-stories-home #msEntry .ms-entry-copy strong,
+#view-stories.ps-stories-home #syEntry .ms-entry-copy strong{
+  display:block!important;margin:0!important;max-width:100%!important;
+  color:#fff8e9!important;font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(27px,7vw,37px)!important;font-weight:650!important;line-height:.98!important;
+  letter-spacing:-.035em!important;text-shadow:0 3px 18px rgba(0,0,0,.38)!important;
+  overflow-wrap:normal!important;hyphens:none!important;
+}
+#view-stories.ps-stories-home #psProphetEntry .ps-entry-sub,
+#view-stories.ps-stories-home #msEntry .ms-entry-copy > span:last-child,
+#view-stories.ps-stories-home #syEntry .ms-entry-copy > span:last-child{
+  display:block!important;margin-top:7px!important;
+  color:rgba(255,255,255,.76)!important;font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:12.5px!important;font-weight:550!important;line-height:1.28!important;
+}
+
+/* ===== FREIE GESCHICHTEN KOMPAKTER ===== */
+#view-stories.ps-stories-home .story-feature{
+  width:calc(100% - 16px)!important;
+  min-height:194px!important;margin:7px 8px 24px!important;
+  display:grid!important;grid-template-columns:minmax(145px,42%) minmax(0,1fr)!important;
+  border-radius:29px!important;overflow:hidden!important;
+  border:1px solid rgba(145,215,220,.17)!important;background:#0a3449!important;
+}
+#view-stories.ps-stories-home .story-feature .story-scene{
+  height:100%!important;min-height:194px!important;
+  background:
+    linear-gradient(180deg,rgba(3,20,31,.06),rgba(3,20,31,.24)),
+    url("/kids/assets/kids-art/knowledge-courtyard-v11.jpg?v=1133") center 55%/cover no-repeat!important;
+}
+#view-stories.ps-stories-home .story-feature .story-scene::before,
+#view-stories.ps-stories-home .story-feature .story-scene::after{display:none!important}
+#view-stories.ps-stories-home .story-feature .story-copy{
+  min-height:194px!important;padding:17px 15px 17px 17px!important;
+  grid-template-columns:minmax(0,1fr) 42px!important;align-content:center!important;
+  background:linear-gradient(135deg,#10465b,#092f43)!important;
+}
+#view-stories.ps-stories-home .story-feature .story-copy h3{
+  font-size:clamp(23px,5.9vw,31px)!important;line-height:1.02!important;
+}
+#view-stories.ps-stories-home .story-feature .story-copy p{font-size:13px!important}
+#view-stories.ps-stories-home .story-feature .story-copy .meta{
+  font-size:8.5px!important;opacity:.74!important;letter-spacing:.08em!important;
+}
+#view-stories.ps-stories-home .story-feature .story-go{width:42px!important;height:42px!important}
+
+/* Weitere Geschichten: echte kleine Szenen statt Symbol-/Emoji-Kacheln. */
+#view-stories.ps-stories-home .story-more-title{
+  margin:0 10px 12px!important;font-size:clamp(25px,6.5vw,31px)!important;
+}
+#view-stories.ps-stories-home .story-list{
+  margin:0 8px!important;gap:11px!important;
+}
+#view-stories.ps-stories-home .story-row{
+  min-height:100px!important;padding:10px!important;gap:13px!important;
+  border-radius:24px!important;background:linear-gradient(135deg,rgba(15,62,82,.94),rgba(7,42,60,.96))!important;
+}
+#view-stories.ps-stories-home .story-thumb{
+  width:88px!important;height:76px!important;flex:0 0 88px!important;border-radius:19px!important;
+  border:1px solid rgba(255,255,255,.07)!important;background-color:#0b3247!important;
+  background-size:cover!important;background-repeat:no-repeat!important;
+}
+#view-stories.ps-stories-home .story-row[data-story="water"] .story-thumb{
+  background-image:url("/kids/assets/kids-art/dua-home-v11.jpg?v=1133")!important;background-position:center 52%!important;
+}
+#view-stories.ps-stories-home .story-row[data-story="helper"] .story-thumb{
+  background-image:url("/kids/assets/kids-art/knowledge-courtyard-v11.jpg?v=1133")!important;background-position:center 48%!important;
+}
+#view-stories.ps-stories-home .story-row[data-story="kindword"] .story-thumb{
+  background-image:url("/kids/assets/kids-art/home-journey-v11-clean2.jpg?v=1133")!important;background-position:center 54%!important;
+}
+#view-stories.ps-stories-home .story-row h3{font-size:18px!important;line-height:1.08!important}
+#view-stories.ps-stories-home .story-row .meta{font-size:10.5px!important;opacity:.72!important}
+#view-stories.ps-stories-home .story-row .time{font-size:10.5px!important;margin-top:2px!important}
+#view-stories.ps-stories-home .story-row .chev{font-size:25px!important;margin-right:3px!important}
+
+/* Die generischen Produktionshinweise stehen nicht im Mittelpunkt der Kinderoberfläche. */
+#view-stories.ps-stories-home > .gentle-note{opacity:.68!important;margin-top:18px!important}
+
+/* Bottom navigation darf nie Inhalte verdecken. */
+html[data-view="stories"] .bottom-nav{
+  bottom:max(12px,env(safe-area-inset-bottom,0px))!important;
+}
+
+@media(max-width:380px){
+  #view-stories.ps-stories-home #ghEntry{min-height:300px!important}
+  #view-stories.ps-stories-home #psProphetEntry,
+  #view-stories.ps-stories-home #msEntry,
+  #view-stories.ps-stories-home #syEntry{height:224px!important;min-height:224px!important}
+  #view-stories.ps-stories-home #psProphetEntry .ps-entry-copy,
+  #view-stories.ps-stories-home #msEntry .ms-entry-copy,
+  #view-stories.ps-stories-home #syEntry .ms-entry-copy{left:17px!important;right:68px!important;bottom:18px!important}
+  #view-stories.ps-stories-home #psProphetEntry .ps-entry-action,
+  #view-stories.ps-stories-home #msEntry .ms-entry-action,
+  #view-stories.ps-stories-home #syEntry .ms-entry-action{right:13px!important;bottom:14px!important}
+  #view-stories.ps-stories-home .story-feature{display:block!important}
+  #view-stories.ps-stories-home .story-feature .story-scene{height:170px!important;min-height:170px!important}
+  #view-stories.ps-stories-home .story-feature .story-copy{min-height:150px!important}
+  #view-stories.ps-stories-home .story-thumb{width:78px!important;flex-basis:78px!important}
+}
+
+@media(min-width:700px){
+  #view-stories.ps-stories-home #ghEntry{
+    width:100vw!important;margin-left:calc(50% - 50vw)!important;margin-right:calc(50% - 50vw)!important;
+    min-height:430px!important;border-radius:0 0 42px 42px!important;
+  }
+  #view-stories.ps-stories-home #ghEntry .gh-entry-copy{
+    left:max(42px,calc((100vw - 920px)/2))!important;right:max(42px,calc((100vw - 920px)/2))!important;bottom:40px!important;
+  }
+  #view-stories.ps-stories-home #psProphetEntry,
+  #view-stories.ps-stories-home #msEntry,
+  #view-stories.ps-stories-home #syEntry{
+    width:100%!important;height:286px!important;min-height:286px!important;margin-left:0!important;margin-right:0!important;
+  }
+  #view-stories.ps-stories-home #psProphetEntry .ps-entry-copy,
+  #view-stories.ps-stories-home #msEntry .ms-entry-copy,
+  #view-stories.ps-stories-home #syEntry .ms-entry-copy{left:30px!important;right:100px!important;bottom:28px!important}
+  #view-stories.ps-stories-home #psProphetEntry .ps-entry-action,
+  #view-stories.ps-stories-home #msEntry .ms-entry-action,
+  #view-stories.ps-stories-home #syEntry .ms-entry-action{right:27px!important;bottom:25px!important}
+  #view-stories.ps-stories-home .story-feature{width:100%!important;margin-left:0!important;margin-right:0!important}
+  #view-stories.ps-stories-home .story-list{margin-left:0!important;margin-right:0!important;grid-template-columns:1fr 1fr!important}
+}
