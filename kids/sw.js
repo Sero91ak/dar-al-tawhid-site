@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1162";
-const KIDS_BUILD_ID="kids-shell-v89-fullbleed-story-cards1162";
+const CACHE_NAME="dar-al-tawhid-kids-v1163";
+const KIDS_BUILD_ID="kids-shell-v90-restored-story-cards1163";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -55,7 +55,7 @@ const CORE_PRECACHE=[
   "/kids/stories-home-v1138.css?v=1152",
   "/kids/story-hub.js?v=20",
   "/kids/kids-age-typography.css?v=5",
-  "/kids/story-library-cards.css?v=1",
+  "/kids/story-library-cards.css?v=2",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=3",
   "/kids/content-studio-feed.js?v=studio6",
