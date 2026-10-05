@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 
-/* DĀR AL TAWḤĪD Kids — shared audiobook / follow reader v6
+/* DĀR AL TAWḤĪD Kids — shared audiobook / follow reader v4
    - persistent per-story progress
    - timestamp-aware paragraph following with calibrated fallback
    - child-friendly focus reader with automatic voice-follow scrolling
@@ -89,9 +89,12 @@ function create(options){
   const totalEl=root.querySelector(".kfr-total");
   let paragraphs=[],weights=[],totalWeight=0,timingCues=[],syncPoints=[],lastIndex=-1,manualUntil=0;
   let currentContent={},restoredToken="",lastPersistAt=0,mediaSessionActive=false,readerView="follow",backgroundLocks=[];
-  const wakeReason="follow-reader-"+id;
+  const READING_WAKE_REASON="shared-story-reader";
   function setReadingWake(enabled){
-    try{if(enabled)window.DARKidsScreenAwake?.acquire?.(wakeReason);else window.DARKidsScreenAwake?.release?.(wakeReason)}catch(_){}
+    try{
+      if(enabled)window.DARKidsScreenAwake?.acquire?.(READING_WAKE_REASON);
+      else window.DARKidsScreenAwake?.release?.(READING_WAKE_REASON);
+    }catch(_){}
   }
 
   function content(){
@@ -417,8 +420,7 @@ function create(options){
     root.classList.add("open");
     root.removeAttribute("aria-hidden");
     document.documentElement.classList.add("kids-follow-reader-open");
-    const keepsAwake=!root.classList.contains("audio-only");
-    setReadingWake(keepsAwake);
+    setReadingWake(!root.classList.contains("audio-only"));
     if(readerView==="read"){try{readEl.scrollTop=0}catch(_){}}
     else sync(true);
     setTimeout(()=>(readerView==="read"?closeEl:playEl)?.focus(),0);
@@ -459,9 +461,9 @@ function create(options){
   audio.addEventListener("loadedmetadata",()=>{restore();sync(true)});
   audio.addEventListener("canplay",()=>{restore();sync(false)},{passive:true});
   audio.addEventListener("durationchange",()=>sync(false));
-  audio.addEventListener("play",()=>{activateMediaSession();if(options.autoOpen!==false&&!isOpen())open();if(isOpen()&&!root.classList.contains("audio-only"))setReadingWake(true);updatePlay()});
+  audio.addEventListener("play",()=>{activateMediaSession();if(options.autoOpen!==false&&!isOpen())open();updatePlay()});
   audio.addEventListener("pause",()=>{persist(true);try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="paused"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);updatePlay()});
-  audio.addEventListener("ended",()=>{if(readerView==="follow")setReadingWake(false);const key=storyKey();if(key)safeRemove(progressStorageKey(key));try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="none"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);sync(true)});
+  audio.addEventListener("ended",()=>{const key=storyKey();if(key)safeRemove(progressStorageKey(key));try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="none"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);sync(true)});
   audio.addEventListener("seeking",()=>sync(false));
   audio.addEventListener("seeked",()=>{sync(true);persist(true)});
   window.addEventListener("pagehide",()=>{persist(true);if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true)});
@@ -476,5 +478,5 @@ function create(options){
     getSavedProgress:readProgress
   };
 }
-window.DARKidsFollowReader={version:6,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
+window.DARKidsFollowReader={version:5,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
 })();
