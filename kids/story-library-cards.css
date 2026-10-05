@@ -1,364 +1,59 @@
-/* DĀR AL TAWḤĪD Kids — Story Library Card Repair v3
-   Restore the proven pre-compact geometry.
-   Scope: story selection lists only. The Geschichten start page is intentionally untouched.
-   Goal: preserve each library's sizing while visually blending artwork into the card.
-   v3 is intentionally loaded AFTER story-card-system.css and is the final visual authority. */
+/* DĀR AL TAWḤĪD Kids — Story Library Image Blend v4
+   FINAL OVERRIDE, loaded after story-card-system.css.
+   IMPORTANT: no card sizing, typography, grid, rank or play-button geometry lives here.
+   The pre-v1162 shared card system remains the source of truth.
+   This file only removes the hard pasted-on image edge. */
 
-.ps-library-page,
-.ms-library-page{
-  --sl-card-bg:#082433;
-  --sl-card-bg-2:#092a3a;
-  --sl-card-line:rgba(126,205,216,.19);
-  --sl-card-gold:#f0cf7c;
-  --sl-card-cream:#fff7e8;
-}
-
-/* ---------- LIST WIDTH / RHYTHM ---------- */
-.ps-library-page .ps-library-list,
-.ms-library-page .ms-list{
-  width:min(100%,920px)!important;
-  margin:0 auto!important;
-  display:grid!important;
-  grid-template-columns:1fr!important;
-  gap:10px!important;
-  background:transparent!important;
-}
-
-/* ---------- CARD SHELL: AUTO HEIGHT, NEVER CRUSH LONG NAMES ---------- */
-.ps-library-page .ps-story-row,
-.ms-library-page .ms-story-row{
-  position:relative!important;
-  display:grid!important;
-  align-items:stretch!important;
-  width:100%!important;
-  height:auto!important;
-  overflow:hidden!important;
-  isolation:isolate!important;
-  padding:0!important;
-  border:1px solid var(--sl-card-line)!important;
-  border-radius:24px!important;
-  background:linear-gradient(135deg,var(--sl-card-bg-2),var(--sl-card-bg) 74%)!important;
-  box-shadow:0 13px 32px rgba(0,0,0,.16)!important;
-  text-align:left!important;
-}
-
-/* Prophet cards keep their established slightly tighter rhythm. */
-.ps-library-page .ps-story-row{
-  min-height:150px!important;
-  grid-template-columns:minmax(118px,39%) minmax(0,1fr) 58px!important;
-}
-
-/* Ṣaḥābah and Ṣaḥābiyyāt return to the larger V12 geometry. */
-.ms-library-page .ms-story-row{
-  min-height:158px!important;
-  grid-template-columns:minmax(118px,39%) minmax(0,1fr) 58px!important;
-}
-
-/* ---------- ARTWORK: SAME SIZE/CROP AS BEFORE, BUT NO HARD "PASTED" EDGE ---------- */
-.ps-library-page .ps-row-scene,
-.ms-library-page .ms-row-visual{
-  position:relative!important;
-  z-index:1!important;
-  grid-column:1!important;
-  grid-row:1!important;
-  align-self:stretch!important;
-  width:100%!important;
-  height:100%!important;
-  min-width:0!important;
-  min-height:inherit!important;
-  overflow:hidden!important;
-  background:var(--sl-card-bg)!important;
-}
-
-.ps-library-page .ps-row-scene{
-  display:block!important;
-  object-fit:cover!important;
-  object-position:center!important;
-  filter:saturate(.98) contrast(1.03) brightness(.93)!important;
-}
-
-.ms-library-page .ms-row-visual img{
+/* Propheten: dissolve the end of the image into the existing card background.
+   The underlying grid/image width stays completely unchanged. */
+.ps-library-page .ps-story-row::before{
+  content:""!important;
   position:absolute!important;
+  z-index:3!important;
   inset:0!important;
-  width:100%!important;
-  height:100%!important;
-  min-height:100%!important;
-  object-fit:cover!important;
-  display:block!important;
-  filter:saturate(.98) contrast(1.03) brightness(.93)!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,
+      transparent 0%,
+      transparent 23%,
+      rgba(8,42,59,.08) 26%,
+      rgba(8,42,59,.26) 29%,
+      rgba(8,42,59,.58) 32%,
+      rgba(8,42,59,.88) 35%,
+      rgba(8,42,59,.98) 37%,
+      transparent 42%)!important;
 }
 
-/* Disable legacy image-only overlays; the card gets one shared blend layer instead. */
-.ms-library-page .ms-row-visual::after,
+/* Ṣaḥābah + Ṣaḥābiyyāt: keep the original image box and crop,
+   but make its right edge finish in the exact dark-teal card tone. */
+.ms-library-page .ms-row-visual::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:2!important;
+  inset:0!important;
+  display:block!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,
+      transparent 0%,
+      transparent 44%,
+      rgba(8,42,59,.10) 56%,
+      rgba(8,42,59,.30) 68%,
+      rgba(8,42,59,.62) 82%,
+      rgba(8,42,59,.90) 94%,
+      #082a3b 100%),
+    linear-gradient(0deg,rgba(3,17,27,.10),transparent 58%)!important;
+}
+
+/* The older optional shade layer must not stack another hard edge. */
 .ms-library-page .ms-row-art-shade{
   display:none!important;
 }
 
-/* Shared color transition over the image boundary.
-   The image dimensions stay unchanged; only the edge dissolves into the card color. */
-.ps-library-page .ps-story-row::before,
-.ms-library-page .ms-story-row::before{
-  content:""!important;
-  position:absolute!important;
-  z-index:2!important;
-  left:0!important;
-  top:0!important;
-  bottom:0!important;
-  width:48%!important;
-  pointer-events:none!important;
-  background:linear-gradient(
-    90deg,
-    rgba(8,36,51,0) 0%,
-    rgba(8,36,51,0) 57%,
-    rgba(8,36,51,.14) 68%,
-    rgba(8,36,51,.48) 80%,
-    rgba(8,36,51,.82) 91%,
-    rgba(8,36,51,1) 100%
-  )!important;
-}
-
-/* Subtle lower accent only. */
-.ps-library-page .ps-story-row::after,
-.ms-library-page .ms-story-row::after{
-  content:""!important;
-  position:absolute!important;
-  z-index:3!important;
-  left:16px!important;
-  right:16px!important;
-  bottom:0!important;
-  height:1px!important;
-  pointer-events:none!important;
-  background:linear-gradient(90deg,rgba(240,207,124,.34),rgba(118,205,210,.13),transparent)!important;
-}
-
-/* ---------- COPY: RESTORE WIDTH AND NATURAL WORD WRAPPING ---------- */
-.ps-library-page .ps-row-copy,
-.ms-library-page .ms-row-copy{
-  position:relative!important;
-  z-index:4!important;
-  grid-column:2!important;
-  grid-row:1!important;
-  left:auto!important;
-  right:auto!important;
-  top:auto!important;
-  transform:none!important;
-  align-self:center!important;
-  min-width:0!important;
-  display:grid!important;
-  align-content:center!important;
-  gap:4px!important;
-  padding:14px 8px 14px 15px!important;
-  margin:0!important;
-}
-
-.ps-library-page .ps-row-title,
-.ms-library-page .ms-row-title{
-  display:block!important;
-  margin:0!important;
-  color:var(--sl-card-cream)!important;
-  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
-  font-size:clamp(23px,6.2vw,28px)!important;
-  line-height:1.08!important;
-  font-weight:700!important;
-  letter-spacing:-.02em!important;
-  white-space:normal!important;
-  overflow:visible!important;
-  overflow-wrap:normal!important;
-  word-break:normal!important;
-  hyphens:none!important;
-  text-shadow:0 2px 12px rgba(0,0,0,.20)!important;
-}
-
-.ps-library-page .ps-row-ar,
-.ms-library-page .ms-row-ar{
-  white-space:normal!important;
-  overflow-wrap:normal!important;
-  word-break:normal!important;
-  hyphens:none!important;
-}
-
-.ps-library-page .ps-row-summary,
-.ms-library-page .ms-row-summary{
-  overflow-wrap:normal!important;
-  word-break:normal!important;
-  hyphens:none!important;
-}
-
-/* ---------- RANK: IDENTICAL ---------- */
-.ps-library-page .ps-row-rank,
-.ms-library-page .ms-rank{
-  position:absolute!important;
-  z-index:6!important;
-  left:10px!important;
-  right:auto!important;
-  top:auto!important;
-  bottom:10px!important;
-  min-width:39px!important;
-  width:auto!important;
-  height:29px!important;
-  padding:0 9px!important;
-  display:grid!important;
-  place-items:center!important;
-  border:1px solid rgba(240,207,124,.40)!important;
-  border-radius:999px!important;
-  background:rgba(3,20,29,.72)!important;
-  color:#f3d791!important;
-  font:700 12px/1 Georgia,serif!important;
-  backdrop-filter:blur(8px)!important;
-  -webkit-backdrop-filter:blur(8px)!important;
-  box-shadow:0 5px 14px rgba(0,0,0,.17)!important;
-}
-
-/* ---------- ACTION: ONE BUTTON / ONE SYMBOL ---------- */
-.ps-library-page .ps-row-go,
-.ms-library-page .ms-row-go{
-  position:relative!important;
-  z-index:6!important;
-  grid-column:3!important;
-  grid-row:1!important;
-  align-self:center!important;
-  justify-self:center!important;
-  left:auto!important;
-  right:auto!important;
-  top:auto!important;
-  bottom:auto!important;
-  transform:none!important;
-  width:48px!important;
-  min-width:48px!important;
-  height:48px!important;
-  margin:0!important;
-  padding:0!important;
-  display:grid!important;
-  place-items:center!important;
-  border:1px solid rgba(240,207,124,.44)!important;
-  border-radius:50%!important;
-  background:rgba(8,35,48,.52)!important;
-  color:#f4d886!important;
-  font-size:18px!important;
-  line-height:1!important;
-  box-shadow:none!important;
-  backdrop-filter:blur(7px)!important;
-  -webkit-backdrop-filter:blur(7px)!important;
-}
-
-/* v1162 accidentally added a second triangle with ::before. Never duplicate glyphs. */
+/* Do not synthesize any action glyph here.
+   The original markup owns the single play symbol. */
 .ps-library-page .ps-row-go::before,
 .ms-library-page .ms-row-go::before{
   content:none!important;
   display:none!important;
-}
-
-.ps-library-page .ps-row-go.is-listen,
-.ms-library-page .ms-row-go.is-listen{
-  width:52px!important;
-  min-width:52px!important;
-  height:52px!important;
-  padding:0 0 0 2px!important;
-  font-size:20px!important;
-  border-color:rgba(240,207,124,.52)!important;
-  background:rgba(240,207,124,.11)!important;
-}
-
-/* ---------- 4–5 YEARS: KEEP LARGE CARDS; REMOVE ONLY READING METADATA ---------- */
-html[data-kids-age="4-5"] .ps-library-page .ps-story-row,
-.ps-library-page[data-age="4–5"] .ps-story-row,
-.ps-library-page[data-age="4-5"] .ps-story-row{
-  min-height:150px!important;
-  height:auto!important;
-  grid-template-columns:minmax(118px,39%) minmax(0,1fr) 58px!important;
-}
-html[data-kids-age="4-5"] .ms-library-page .ms-story-row,
-.ms-library-page[data-age="4–5"] .ms-story-row,
-.ms-library-page[data-age="4-5"] .ms-story-row{
-  min-height:158px!important;
-  height:auto!important;
-  grid-template-columns:minmax(118px,39%) minmax(0,1fr) 58px!important;
-}
-
-html[data-kids-age="4-5"] .ps-library-page .ps-row-ar,
-html[data-kids-age="4-5"] .ps-library-page .ps-row-summary,
-html[data-kids-age="4-5"] .ps-library-page .ps-row-meta,
-html[data-kids-age="4-5"] .ms-library-page .ms-row-ar,
-html[data-kids-age="4-5"] .ms-library-page .ms-row-summary,
-html[data-kids-age="4-5"] .ms-library-page .ms-row-meta{
-  display:none!important;
-}
-
-/* ---------- SMALL PHONES ---------- */
-@media(max-width:390px){
-  .ps-library-page .ps-story-row{
-    min-height:146px!important;
-    grid-template-columns:112px minmax(0,1fr) 54px!important;
-  }
-  .ms-library-page .ms-story-row{
-    min-height:152px!important;
-    grid-template-columns:112px minmax(0,1fr) 54px!important;
-  }
-  html[data-kids-age="4-5"] .ps-library-page .ps-story-row{min-height:146px!important}
-  html[data-kids-age="4-5"] .ms-library-page .ms-story-row{min-height:152px!important}
-
-  .ps-library-page .ps-row-copy,
-  .ms-library-page .ms-row-copy{
-    padding:12px 6px 12px 12px!important;
-  }
-  .ps-library-page .ps-row-title,
-  .ms-library-page .ms-row-title{
-    font-size:clamp(21px,6.4vw,25px)!important;
-  }
-  .ps-library-page .ps-row-go,
-  .ms-library-page .ms-row-go{
-    width:46px!important;
-    min-width:46px!important;
-    height:46px!important;
-  }
-  .ps-library-page .ps-row-go.is-listen,
-  .ms-library-page .ms-row-go.is-listen{
-    width:50px!important;
-    min-width:50px!important;
-    height:50px!important;
-  }
-}
-
-/* ---------- TABLETS ---------- */
-@media(min-width:700px){
-  .ps-library-page .ps-library-list,
-  .ms-library-page .ms-list{
-    gap:12px!important;
-  }
-
-  .ps-library-page .ps-story-row{
-    min-height:184px!important;
-    grid-template-columns:minmax(180px,34%) minmax(0,1fr) 66px!important;
-  }
-  .ms-library-page .ms-story-row{
-    min-height:188px!important;
-    grid-template-columns:minmax(180px,34%) minmax(0,1fr) 66px!important;
-  }
-
-  .ps-library-page .ps-row-copy,
-  .ms-library-page .ms-row-copy{
-    padding:19px 18px 19px 22px!important;
-    gap:5px!important;
-  }
-
-  .ps-library-page .ps-row-title,
-  .ms-library-page .ms-row-title{
-    font-size:clamp(25px,3.6vw,31px)!important;
-  }
-
-  .ps-library-page .ps-row-go,
-  .ms-library-page .ms-row-go{
-    width:52px!important;
-    min-width:52px!important;
-    height:52px!important;
-  }
-}
-
-/* Wide screens stay one-column so the artwork remains cinematic and readable. */
-@media(min-width:1100px){
-  .ps-library-page .ps-library-list,
-  .ms-library-page .ms-list{
-    grid-template-columns:1fr!important;
-    width:min(100%,940px)!important;
-  }
 }
