@@ -66,12 +66,9 @@ jobs:
           set -euo pipefail
           full=0
           skip=0
-          residual=0
           LAST_MSG="$(git log -1 --pretty=%B 2>/dev/null || true)"
           if printf '%s' "$LAST_MSG" | grep -Fq '[media-optimized]'; then
             skip=1
-          elif printf '%s' "$LAST_MSG" | grep -Fq '[media-residual-pass]'; then
-            residual=1
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.full_scan }}" = "true" ]; then
             full=1
           elif printf '%s' "$LAST_MSG" | grep -Fq '[media-fullscan]'; then
@@ -79,7 +76,6 @@ jobs:
           fi
           echo "full=$full" >> "$GITHUB_OUTPUT"
           echo "skip=$skip" >> "$GITHUB_OUTPUT"
-          echo "residual=$residual" >> "$GITHUB_OUTPUT"
 
       - name: Optimize current media
         if: steps.mode.outputs.skip != '1'
@@ -87,9 +83,7 @@ jobs:
         run: |
           set -euo pipefail
           chmod +x scripts/optimize-app-media.sh
-          if [ "${{ steps.mode.outputs.residual }}" = "1" ]; then
-            scripts/optimize-app-media.sh --residual
-          elif [ "${{ steps.mode.outputs.full }}" = "1" ]; then
+          if [ "${{ steps.mode.outputs.full }}" = "1" ]; then
             scripts/optimize-app-media.sh --all
           else
             git diff --name-only HEAD^ HEAD -- \
