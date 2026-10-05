@@ -1,7 +1,7 @@
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v48-hoerwelten1118",
-  label: "KIDS · V1.07.53"
+  buildId: "kids-shell-v49-single-story-player1119",
+  label: "KIDS · V1.07.54"
 });
 
 function kidsVersionResponse() {
@@ -391,7 +391,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v48-hoerwelten1118");
+      target.searchParams.set("kv", "kids-shell-v49-single-story-player1119");
       return Response.redirect(target.toString(), 301);
     }
 
