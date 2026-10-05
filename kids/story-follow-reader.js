@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 
-/* DĀR AL TAWḤĪD Kids — shared audiobook / follow reader v4
+/* DĀR AL TAWḤĪD Kids — shared audiobook / follow reader v3
    - persistent per-story progress
    - timestamp-aware paragraph following with calibrated fallback
    - child-friendly focus reader with automatic voice-follow scrolling
@@ -48,6 +48,13 @@ function normalizeKey(value){return String(value||"").trim().replace(/\s+/g,"-")
 function progressStorageKey(value){return PROGRESS_PREFIX+normalizeKey(value)}
 
 function create(options){
+  const READING_WAKE_REASON="shared-story-reader";
+  function setReadingWake(enabled){
+    try{
+      if(enabled)window.DARKidsScreenAwake?.acquire?.(READING_WAKE_REASON);
+      else window.DARKidsScreenAwake?.release?.(READING_WAKE_REASON);
+    }catch(_){}
+  }
   if(!options||!options.id||!options.audio)return null;
   const audio=options.audio,id=String(options.id).replace(/[^a-z0-9_-]/gi,"-");
   try{audio.setAttribute("playsinline","");audio.setAttribute("webkit-playsinline","");audio.preload="metadata"}catch(_){}
@@ -88,14 +95,7 @@ function create(options){
   const currentEl=root.querySelector(".kfr-current");
   const totalEl=root.querySelector(".kfr-total");
   let paragraphs=[],weights=[],totalWeight=0,timingCues=[],syncPoints=[],lastIndex=-1,manualUntil=0;
-  let currentContent={},restoredToken="",lastPersistAt=0,mediaSessionActive=false,readerView="follow",backgroundLocks=[];
-  const READING_WAKE_REASON="shared-story-reader";
-  function setReadingWake(enabled){
-    try{
-      if(enabled)window.DARKidsScreenAwake?.acquire?.(READING_WAKE_REASON);
-      else window.DARKidsScreenAwake?.release?.(READING_WAKE_REASON);
-    }catch(_){}
-  }
+  let currentContent={},restoredToken="",lastPersistAt=0,mediaSessionActive=false;
 
   function content(){
     const value=typeof options.getContent==="function"?options.getContent():{};
@@ -202,16 +202,6 @@ function create(options){
     for(let i=0;i<weights.length;i++){sum+=weights[i];if(target<sum||i===weights.length-1)return i}
     return paragraphs.length-1;
   }
-  function clearMarks(){
-    readEl.querySelectorAll("p[data-kfr-index]").forEach(node=>node.classList.remove("active","past"));
-    lastIndex=-1;
-  }
-  function scrollReaderNode(node,instant=false){
-    if(!node||!readEl)return;
-    const rr=readEl.getBoundingClientRect(),nr=node.getBoundingClientRect();
-    const top=Math.max(0,readEl.scrollTop+(nr.top-rr.top)-(readEl.clientHeight-nr.height)/2);
-    try{readEl.scrollTo({top,behavior:instant?"auto":"smooth"})}catch(_){readEl.scrollTop=top}
-  }
   function mark(index,forceScroll){
     const nodes=readEl.querySelectorAll("p[data-kfr-index]");
     nodes.forEach((node,i)=>{
@@ -221,7 +211,9 @@ function create(options){
     if(index<0||index===lastIndex)return;
     lastIndex=index;
     const node=nodes[index];
-    if(node&&(forceScroll||performance.now()>manualUntil))scrollReaderNode(node,!!forceScroll);
+    if(node&&(forceScroll||performance.now()>manualUntil)){
+      try{node.scrollIntoView({block:"center",behavior:forceScroll?"auto":"smooth"})}catch(_){node.scrollIntoView()}
+    }
   }
   function readProgress(){
     const key=storyKey();
@@ -307,7 +299,7 @@ function create(options){
       progressButton.setAttribute("aria-valuenow",String(Math.max(0,Math.round(current))));
       progressButton.setAttribute("aria-valuetext",formatTime(current)+" von "+formatTime(duration));
     }
-    if(!root.classList.contains("audio-only")&&readerView!=="read")mark(paragraphIndexAtTime(current,duration),!!forceScroll);
+    if(!root.classList.contains("audio-only"))mark(paragraphIndexAtTime(current,duration),!!forceScroll);
     updatePlay();
     try{navigator.mediaSession.playbackState="playing"}catch(_){}
     updatePositionState();
@@ -387,52 +379,21 @@ function create(options){
     postNativeNowPlaying(nativePayload(false),true);
     updatePositionState();
   }
-  function lockBackground(){
-    unlockBackground();
-    backgroundLocks=[];
-    Array.from(document.body.children).forEach(el=>{
-      if(el===root||!(el instanceof HTMLElement)||["SCRIPT","STYLE","LINK"].includes(el.tagName)||el.hasAttribute("inert"))return;
-      el.setAttribute("inert","");
-      backgroundLocks.push(el);
-    });
-  }
-  function unlockBackground(){
-    backgroundLocks.forEach(el=>{try{el.removeAttribute("inert")}catch(_){}});
-    backgroundLocks=[];
-  }
-  function applyReaderView(mode){
-    readerView=mode==="read"?"read":"follow";
-    root.dataset.readerView=readerView;
-    if(readerView==="read"){
-      if(kickerEl)kickerEl.textContent="NUR LESEN";
-      root.querySelector(".kfr-sheet")?.setAttribute("aria-label","Geschichte nur lesen");
-      clearMarks();
-    }else{
-      if(kickerEl)kickerEl.textContent=root.classList.contains("audio-only")?"HÖRBUCH":"HÖREN · MITLESEN";
-      root.querySelector(".kfr-sheet")?.setAttribute("aria-label",root.classList.contains("audio-only")?"Hörbuch-Player":"Geschichte hören und mitlesen");
-    }
-  }
-  function openWithContent(value,mode="follow"){
+  function openWithContent(value){
     const c=value&&typeof value==="object"?value:content();
     if(c.text!=null)setContent(c);
-    applyReaderView(mode);
-    lockBackground();
     root.classList.add("open");
     root.removeAttribute("aria-hidden");
+    root.querySelector(".kfr-sheet")?.setAttribute("aria-label",root.classList.contains("audio-only")?"Hörbuch-Player":"Geschichte mitlesen");
     document.documentElement.classList.add("kids-follow-reader-open");
     setReadingWake(!root.classList.contains("audio-only"));
-    if(readerView==="read"){try{readEl.scrollTop=0}catch(_){}}
-    else sync(true);
-    setTimeout(()=>(readerView==="read"?closeEl:playEl)?.focus(),0);
+    sync(true);
+    setTimeout(()=>playEl?.focus(),0);
   }
-  function open(){openWithContent(content(),"follow")}
+  function open(){openWithContent(content())}
   function openReadAlong(){
     const c=Object.assign({},content(),{audioOnly:false,adultCompanion:true});
-    openWithContent(c,"follow");
-  }
-  function openReading(){
-    const c=Object.assign({},content(),{audioOnly:false,adultCompanion:true});
-    openWithContent(c,"read");
+    openWithContent(c);
   }
   function close(){
     persist(true);
@@ -440,7 +401,6 @@ function create(options){
     root.setAttribute("aria-hidden","true");
     document.documentElement.classList.remove("kids-follow-reader-open");
     setReadingWake(false);
-    unlockBackground();
   }
   function isOpen(){return root.classList.contains("open")}
   function seekFromEvent(e){
@@ -463,20 +423,20 @@ function create(options){
   audio.addEventListener("durationchange",()=>sync(false));
   audio.addEventListener("play",()=>{activateMediaSession();if(options.autoOpen!==false&&!isOpen())open();updatePlay()});
   audio.addEventListener("pause",()=>{persist(true);try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="paused"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);updatePlay()});
-  audio.addEventListener("ended",()=>{const key=storyKey();if(key)safeRemove(progressStorageKey(key));try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="none"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);sync(true)});
+  audio.addEventListener("ended",()=>{setReadingWake(false);const key=storyKey();if(key)safeRemove(progressStorageKey(key));try{if("mediaSession" in navigator)navigator.mediaSession.playbackState="none"}catch(_){}if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true);sync(true)});
   audio.addEventListener("seeking",()=>sync(false));
   audio.addEventListener("seeked",()=>{sync(true);persist(true)});
-  window.addEventListener("pagehide",()=>{persist(true);if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true)});
+  window.addEventListener("pagehide",()=>{setReadingWake(false);persist(true);if(mediaSessionActive)postNativeNowPlaying(nativePayload(false),true)});
   document.addEventListener("visibilitychange",()=>{if(document.hidden)persist(true)});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&isOpen()){e.stopPropagation();close()}},true);
 
   setContent(content());
   return {
-    open,openReadAlong,openReading,close,isOpen,setContent,sync,persist,restore,clearProgress,
+    open,openReadAlong,close,isOpen,setContent,sync,persist,restore,clearProgress,
     activateMediaSession,
     formatTime,
     getSavedProgress:readProgress
   };
 }
-window.DARKidsFollowReader={version:5,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
+window.DARKidsFollowReader={version:4,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
 })();
