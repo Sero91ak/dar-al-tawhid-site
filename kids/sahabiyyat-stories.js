@@ -13,7 +13,7 @@ function normalizeKidsStoryText(value){
 }
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.sahabiyyatStory.done.";
-let items=[],libraryPolicy={},active=null,activeText="",coverResizeObserver=null,followReader=null;
+let items=[],libraryPolicy={},active=null,activeText="",playing=false,busy=false,coverResizeObserver=null,followReader=null;\nconst audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const age=()=>String($(".app")?.getAttribute("data-age")||"6–8");
@@ -21,11 +21,14 @@ const ageKey=()=>age().replace("–","-");
 function isAudioOnlyAge(){return age()==="4–5"}
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function setMode(v){
-  if(active&&(v==="listen"||v==="both")){openUniversalAudio();return}
   try{localStorage.setItem(MODE_KEY,v)}catch(_){}
-  renderModeButtons();applyMode()
-}
-function textFor(item){const policy=window.DARKidsStoryPolicy;if(policy?.canonicalText)return normalizeKidsStoryText(policy.canonicalText(item));const s=item?.scripts||{};const c=[s["4-5"],s["6-8"],s["9-10"]].map(v=>String(v||"").trim()).filter(Boolean).sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length);return normalizeKidsStoryText(c[0]||"")}
+  renderModeButtons();applyMode();
+  if(active&&v==="both"&&!isAudioOnlyAge()){
+    if(typeof followReader?.openReadAlong==="function")followReader.openReadAlong();
+    else followReader?.open?.();
+    if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+  }
+}\nfunction textFor(item)function textFor(item){const policy=window.DARKidsStoryPolicy;if(policy?.canonicalText)return normalizeKidsStoryText(policy.canonicalText(item));const s=item?.scripts||{};const c=[s["4-5"],s["6-8"],s["9-10"]].map(v=>String(v||"").trim()).filter(Boolean).sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length);return normalizeKidsStoryText(c[0]||"")}
 function words(t){return(String(t).match(/\S+/g)||[]).length}
 function durationLabel(item,t){
   const target=item?.durationTargets?.[ageKey()];
@@ -254,9 +257,9 @@ function ensureUi(){
         '</header>'+
         '<div class="ms-body">'+
           '<div id="syVisualDisclaimer" class="ms-visual-disclaimer"></div>'+
-          '<div class="ms-detail-modes"><button data-sy-mode="both" type="button">Lesen &amp; Hören</button><button data-sy-mode="listen" type="button">Hören</button><button data-sy-mode="read" type="button">Lesen</button></div>'+
+          '<div class="ms-detail-modes"><button data-sy-mode="both" type="button">Hören &amp; Mitlesen</button><button data-sy-mode="listen" type="button">Hören</button><button data-sy-mode="read" type="button">Lesen</button></div>'+
           '<div class="ms-profile-grid"><section><small>WAS ZEICHNETE SIE AUS?</small><strong id="syTrait"></strong></section><section><small>IHRE GESCHICHTE &amp; ZEIT</small><span id="syLife"></span></section><section><small>QUELLENKONTEXT</small><span id="syWitness"></span></section></div>'+
-          '<section id="syPlayer" class="ms-player ms-player-launch"><button id="syPlay" class="ms-play" type="button">Hören</button><p id="syVoiceNote"></p></section>'+
+          '<section id="syPlayer" class="ms-player"><div class="story-local-controls"><button class="story-skip" id="syBack15" type="button" aria-label="15 Sekunden zurück">−15 s</button><button id="syPlay" class="ms-play" type="button">Hören</button><button class="story-skip" id="syFwd15" type="button" aria-label="15 Sekunden vor">+15 s</button></div><div class="ms-progress" id="syProgressTrack" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span id="syProgress"></span></div><div class="ms-player-time"><strong id="syTimeCurrent">0:00</strong><span id="syTimeTotal">0:00</span></div><button class="ms-follow-open" id="syFollowOpen" type="button">Hören &amp; Mitlesen</button><p id="syVoiceNote"></p></section>'+
           '<article id="syRead" class="ms-read"></article>'+
           '<section class="ms-sources"><strong>GEPRÜFTE QUELLEN</strong><div id="sySources"></div></section>'+
           '<section id="syQuestion" class="ms-question"></section>'+
@@ -267,10 +270,44 @@ function ensureUi(){
   $("#syClose").addEventListener("click",closeStory);
   installSwipeBack($("#syScroll"),closeStory);
   $("#syPlay").addEventListener("click",toggleAudio);
-  $("#syFollowOpen")?.addEventListener("click",()=>openUniversalAudio());
+  $("#syBack15")?.addEventListener("click",()=>seekBy(-15));
+  $("#syFwd15")?.addEventListener("click",()=>seekBy(15));
+  $("#syFollowOpen")?.addEventListener("click",()=>{
+    if(isAudioOnlyAge())return;
+    if(typeof followReader?.openReadAlong==="function")followReader.openReadAlong();
+    else followReader?.open?.();
+    if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+  });
   $("#syProgressTrack")?.addEventListener("click",seekFromProgress);
   $("#syProgressTrack")?.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();seekBy(e.key==="ArrowLeft"?-15:15)}});
   modal.querySelectorAll("[data-sy-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.syMode)));
+  audio.preload="metadata";
+  audio.addEventListener("timeupdate",updateProgress);
+  audio.addEventListener("loadedmetadata",()=>{followReader?.restore();updateProgress()});
+  audio.addEventListener("play",()=>{playing=true;updatePlayButton()});
+  audio.addEventListener("pause",()=>{playing=false;updatePlayButton()});
+  audio.addEventListener("ended",()=>{playing=false;updatePlayButton();markDone(active?.id||"");});
+  followReader=window.DARKidsFollowReader?.create({
+    id:"sahabiyyat-story",audio,
+    getContent:()=>{
+      const meta=audioMeta(active)||{};
+      return{
+        key:active?("sahabiyyah:"+active.id+":"+ageKey()):"sahabiyyah:story",
+        title:active?(active.name):"Geschichte",
+        subtitle:"Ṣaḥābiyyāt-Geschichte",
+        album:"DĀR AL TAWḤĪD Kids · Ṣaḥābiyyāt",
+        text:activeText,
+        artwork:active?(art(active,"hero")):"",
+        deepLink:active?("#stories/sahabiyyah/"+encodeURIComponent(active.id)):"#stories",
+        audioOnly:isAudioOnlyAge(),
+        timings:meta.timings||meta.paragraphTimings||meta.cues||[],
+        syncPoints:meta.syncPoints||meta.syncAnchors||[]
+      };
+    },
+    toggleAudio,
+    autoOpen:false,
+    disabled:()=>!audioMeta(active)?.url
+  })||null;
   return true;
 }
 function openLibrary(){
@@ -357,40 +394,73 @@ function applyMode(){
   if(follow){follow.hidden=false;follow.removeAttribute("aria-hidden");follow.tabIndex=0;follow.textContent="Mitlesen öffnen";follow.setAttribute("aria-label","Mitlesen öffnen")}
 }
 function resetAudio(){
+  stopAudio();
   const meta=audioMeta(active),note=$("#syVoiceNote");
-  if(note)note.textContent=meta?.url?"Öffnet den zentralen Hörplayer.":"Audio folgt.";
+  if(meta?.url){
+    audio.src=meta.url;audio.preload="metadata";
+    if(note)note.textContent="Serhat-Stimme · geprüfte Fuṣḥā-Aussprache";
+  }else{
+    audio.removeAttribute("src");
+    if(note)note.textContent=isAudioOnlyAge()?"Das Hörbuch ist gerade nicht verfügbar.":"Der Lesetext ist vollständig. Audio folgt, sobald es freigeschaltet ist.";
+  }
+  if($("#syProgress"))$("#syProgress").style.width="0";
+  if($("#syTimeCurrent"))$("#syTimeCurrent").textContent="0:00";
+  if($("#syTimeTotal"))$("#syTimeTotal").textContent="0:00";
   updatePlayButton();
 }
 function updatePlayButton(){
   const b=$("#syPlay");if(!b)return;
   const meta=audioMeta(active);
-  b.disabled=!meta?.url;
-  b.textContent=meta?.url?"Hören":"Audio folgt";
+  b.disabled=busy||!meta?.url;
+  b.textContent=playing?"Pause":(audio.currentTime>0&&!audio.ended?"Weiterhören":(isAudioOnlyAge()?"Hören":(mode()==="both"?"Hören & mitlesen":"Hören")));
 }
-function updateProgress(){}
-function seekBy(){}
-function seekFromProgress(){}
+function storyTime(v){return window.DARKidsFollowReader?.formatTime?window.DARKidsFollowReader.formatTime(v):Math.floor((Number(v)||0)/60)+":"+String(Math.floor((Number(v)||0)%60)).padStart(2,"0")}
+function updateProgress(){
+  const duration=Number(audio.duration)||0,current=Number(audio.currentTime)||0;
+  if($("#syProgress"))$("#syProgress").style.width=(duration?Math.min(100,current/duration*100):0)+"%";
+  if($("#syTimeCurrent"))$("#syTimeCurrent").textContent=storyTime(current);
+  if($("#syTimeTotal"))$("#syTimeTotal").textContent=storyTime(duration);
+  const track=$("#syProgressTrack");
+  if(track){track.setAttribute("aria-valuemin","0");track.setAttribute("aria-valuemax",String(Math.max(0,Math.round(duration))));track.setAttribute("aria-valuenow",String(Math.max(0,Math.round(current))));track.setAttribute("aria-valuetext",storyTime(current)+" von "+storyTime(duration))}
+}
+function seekBy(delta){
+  if(!Number(audio.duration))return;
+  try{audio.currentTime=Math.max(0,Math.min(audio.duration,(Number(audio.currentTime)||0)+Number(delta||0)))}catch(_){}
+  updateProgress();followReader?.persist(true);
+}
+function seekFromProgress(e){
+  const track=$("#syProgressTrack");if(!track||!Number(audio.duration))return;
+  const rect=track.getBoundingClientRect();if(!rect.width)return;
+  try{audio.currentTime=Math.max(0,Math.min(audio.duration,((e.clientX-rect.left)/rect.width)*audio.duration))}catch(_){}
+  updateProgress();followReader?.persist(true);
+}
 function clearStoryDeepLink(kind){
   try{
     const raw=String(location.hash||"");
     if(raw.indexOf("#stories/"+kind+"/")===0)history.replaceState(history.state||{},"",location.pathname+(location.search||"")+"#stories");
   }catch(_){}
 }
-function openUniversalAudio(){
-  const item=active;if(!item)return false;
-  const meta=audioMeta(item),note=$("#syVoiceNote");
-  if(!meta?.url){if(note)note.textContent="Audio folgt.";updatePlayButton();return false}
-  const hub=window.DARKidsStoryHub;
-  if(!hub?.openStory){if(note)note.textContent="Der Hörplayer wird geladen.";return false}
-  const id=item.id;
-  closeStory();
-  closeLibrary();
-  hub.openStory("sahabiyyat",id);
-  return true;
+async function toggleAudio(){
+  if(!active||busy)return;
+  const meta=audioMeta(active);if(!meta?.url)return;
+  if(playing){audio.pause();return}
+  try{
+    busy=true;updatePlayButton();
+    if(!audio.src)audio.src=meta.url;
+    if(audio.ended)try{audio.currentTime=0}catch(_){}
+    followReader?.restore();
+    await audio.play();
+  }catch(_){
+    playing=false;
+    if($("#syVoiceNote"))$("#syVoiceNote").textContent="Audio ist gerade nicht verfügbar.";
+  }finally{busy=false;updatePlayButton()}
 }
-async function toggleAudio(){return openUniversalAudio()}
-function stopAudio(){}
-async function init(){
+function stopAudio(){
+  followReader?.persist(true);
+  try{audio.pause();audio.removeAttribute("src");audio.load()}catch(_){}
+  playing=false;busy=false;updatePlayButton();updateProgress();
+}
+async function init(){async function init(){
   if(!ensureUi())return;
   bindAreaJump();
   try{
