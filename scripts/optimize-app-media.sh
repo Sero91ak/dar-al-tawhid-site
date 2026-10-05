@@ -126,11 +126,11 @@ opt_voice() {
   case "$ext" in
     m4a|aac)
       tmp="$TMP_DIR/$(basename "$f").m4a"
-      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a aac -b:a 56k -movflags +faststart "$tmp" || return 0
+      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a aac -b:a 48k -movflags +faststart "$tmp" || return 0
       ;;
     mp3)
       tmp="$TMP_DIR/$(basename "$f").mp3"
-      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a libmp3lame -b:a 64k "$tmp" || return 0
+      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a libmp3lame -b:a 48k "$tmp" || return 0
       ;;
     *)
       return 0
