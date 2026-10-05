@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Ḥadīṯ-Bibliothek · Test-only historical CGI v1260 */
 body.is-hadith-route{
-  --hadx-art:url("/assets/ilm/hadith-library-overview-v1267.webp");
+  --hadx-art:url("/test/assets/ilm/hadith-library-overview-v1267.webp");
   --hadx-left:color-mix(in srgb,var(--bg) 91%,transparent);
   --hadx-mid:color-mix(in srgb,var(--bg) 61%,transparent);
   --hadx-right:color-mix(in srgb,var(--bg) 15%,transparent);
@@ -334,7 +334,7 @@ body.is-hadith-route .hadith-hub--nested > .view-head{
       color-mix(in srgb,var(--bg) 3%,transparent) 0%,
       transparent 48%,
       color-mix(in srgb,var(--bg) 34%,transparent) 100%),
-    url("/assets/ilm/hadith-library-study-v1267.webp") 75% 48%/cover no-repeat,
+    url("/test/assets/ilm/hadith-library-study-v1267.webp") 75% 48%/cover no-repeat,
     url("/assets/ilm/ilm-historical-majlis-v1234.jpg") center/cover no-repeat!important;
 }
 html[data-theme="light"] body.is-hadith-route .hadith-hub > .view-head,
@@ -348,7 +348,7 @@ html[data-theme="eisgold"] body.is-hadith-route .hadith-hub > .view-head{
       color-mix(in srgb,var(--bg) 35%,transparent) 74%,
       color-mix(in srgb,var(--bg) 8%,transparent) 100%),
     linear-gradient(180deg,transparent 48%,color-mix(in srgb,var(--bg) 30%,transparent)),
-    url("/assets/ilm/hadith-library-overview-v1267.webp") 78% 46%/cover no-repeat!important;
+    url("/test/assets/ilm/hadith-library-overview-v1267.webp") 78% 46%/cover no-repeat!important;
 }
 html[data-theme="light"] body.is-hadith-route .hadith-hub--nested > .view-head,
 html[data-theme="soft"] body.is-hadith-route .hadith-hub--nested > .view-head,
@@ -361,7 +361,7 @@ html[data-theme="eisgold"] body.is-hadith-route .hadith-hub--nested > .view-head
       color-mix(in srgb,var(--bg) 35%,transparent) 74%,
       color-mix(in srgb,var(--bg) 8%,transparent) 100%),
     linear-gradient(180deg,transparent 48%,color-mix(in srgb,var(--bg) 30%,transparent)),
-    url("/assets/ilm/hadith-library-study-v1267.webp") 75% 48%/cover no-repeat!important;
+    url("/test/assets/ilm/hadith-library-study-v1267.webp") 75% 48%/cover no-repeat!important;
 }
 html[data-theme="light"] body.is-hadith-route .hadith-hub > .view-head h2,
 html[data-theme="soft"] body.is-hadith-route .hadith-hub > .view-head h2,
@@ -671,7 +671,7 @@ body.is-hadith-route .hadith-detail > .post-reader-title{
       color-mix(in srgb,var(--bg) 3%,transparent) 0%,
       transparent 48%,
       color-mix(in srgb,var(--bg) 38%,transparent) 100%),
-    url("/assets/ilm/hadith-library-study-v1267.webp") 75% 47%/cover no-repeat!important;
+    url("/test/assets/ilm/hadith-library-study-v1267.webp") 75% 47%/cover no-repeat!important;
   box-shadow:
     0 22px 50px color-mix(in srgb,var(--bg) 62%,transparent),
     inset 0 -1px 0 var(--hadx-line)!important;
@@ -757,7 +757,7 @@ html[data-theme="eisgold"] body.is-hadith-route .hadith-detail > .post-reader-ti
       color-mix(in srgb,var(--bg) 34%,transparent) 74%,
       color-mix(in srgb,var(--bg) 8%,transparent) 100%),
     linear-gradient(180deg,transparent 48%,color-mix(in srgb,var(--bg) 30%,transparent)),
-    url("/assets/ilm/hadith-library-study-v1267.webp") 75% 47%/cover no-repeat!important;
+    url("/test/assets/ilm/hadith-library-study-v1267.webp") 75% 47%/cover no-repeat!important;
 }
 html[data-theme="light"] body.is-hadith-route .hadith-detail > .post-reader-title h2,
 html[data-theme="soft"] body.is-hadith-route .hadith-detail > .post-reader-title h2,
@@ -977,7 +977,7 @@ body.is-hadith-route .hadith-sibling-btn[disabled]{
    overview = library, work/Kitāb/Bāb = study majlis, individual Ḥadīṯ = manuscript chamber.
    Keeps one visual language without repeating the same image on every depth. */
 body.is-hadith-route .hadith-hub:not(.hadith-hub--nested) > .view-head{
-  --hadx-art:url("/assets/ilm/hadith-library-overview-v1267.webp");
+  --hadx-art:url("/test/assets/ilm/hadith-library-overview-v1267.webp");
 }
 body.is-hadith-route .hadith-hub--nested > .view-head{
   background:
@@ -990,7 +990,7 @@ body.is-hadith-route .hadith-hub--nested > .view-head{
       color-mix(in srgb,var(--bg) 3%,transparent) 0%,
       transparent 48%,
       color-mix(in srgb,var(--bg) 34%,transparent) 100%),
-    url("/assets/ilm/hadith-library-study-v1267.webp") 75% 48%/cover no-repeat!important;
+    url("/test/assets/ilm/hadith-library-study-v1267.webp") 75% 48%/cover no-repeat!important;
 }
 body.is-hadith-route .hadith-detail > .post-reader-title{
   background:
