@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1168";
-const KIDS_BUILD_ID="kids-shell-v95-voice-master-sync1168";
+const CACHE_NAME="dar-al-tawhid-kids-v1169";
+const KIDS_BUILD_ID="kids-shell-v96-audio-home-focus1169";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -38,7 +38,6 @@ const CORE_PRECACHE=[
   "/kids/data/story-hub.json?v=5",
   "/kids/data/dua-kids.json",
   "/kids/data/verified-content.json",
-  "/kids/data/alphabet-kids.json",
   "/kids/prophet-stories.css?v=39",
   "/kids/story-policy.js?v=2",
   "/kids/prophet-stories.js?v=39",
@@ -69,7 +68,6 @@ const CORE_PRECACHE=[
 const PRECACHE=CORE_PRECACHE.concat([
   "/kids/assets/kids-art/quran-reise-v11-clean.png",
   "/kids/assets/kids-art/quran-home-v1053.jpg",
-  "/kids/assets/kids-art/quran-alphabet-v1053.jpg",
   "/kids/assets/kids-art/quran-surahs-v1053.jpg",
   "/kids/assets/kids-art/quran-verses-v1053.jpg",
   "/kids/assets/kids-art/surah-001-al-fatihah-v13.jpg",
@@ -102,7 +100,6 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/assets/quiz-scenes/topic-akhlaq.svg?v=20261004-topic2",
   "/kids/assets/quiz-scenes/topic-patience.svg?v=20261004-topic3",
   "/kids/assets/quiz-scenes/topic-justice.svg?v=20261004-topic3",
-  "/kids/data/alphabet-audio.json",
   "/kids/data/quiz-kids.json",
   "/kids/data/quiz-audio.json",
   "/kids/data/dua-audio.json",
