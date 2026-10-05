@@ -3661,6 +3661,7 @@
     ctx.drawImage(img, sx, sy, dw, dh);
   }
 
+  /* share-pool=v1250 */
   var FRAUEN_SHARE_IMAGE_POOL = [
     "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/1fe59965-948a-44c7-a26b-4572566997dc/7th_century_Hijaz_historical_reconstruction__Modestly_dressed_adult_woman_strictly_from_behind__face_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiZTIxZGM0YTIxNDE1Y2U2ZSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTI4MTY5OH0.5-RaAXQp4HKeDgffaJY3mrK90dUO-0hyF-RCgKGUEc0",
     "https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/5e64694b-78d3-4041-b432-1522decec4e9/7th_century_Hijaz_oasis_historical_reconstruction__Modestly_dressed_adult_woman_strictly_from_behind_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiNzY1MTNiM2FlMTg5NDU5NSIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMyNjI2Nn0.HJV59YtqfBRi2A3OvioVwwel1jnxfDe3DoCy3QYuDOU",
