@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v76-nav1146",
-  "label": "KIDS · V1.07.80",
-  "releasedAt": "2026-10-05T16:50:00+02:00",
-  "note": "Kids v1146: Die untere Hauptnavigation ist wieder global vereinheitlicht. Auf Geschichten verwendet sie jetzt exakt dieselbe Größe, Typografie, aktive Kapsel, Icon-Geometrie und Glasdarstellung wie auf Heute, Qurʾān und Eltern. Der seitenbezogene Geschichten-Override, der Labels auf 9,5 px und Tabs auf 54 px verkleinert hat, wird durch die globale Navigations-Autorität neutralisiert. Geschichten-Inhalte und Player wurden nicht verändert.",
+  "buildId": "kids-shell-v77-nav1147",
+  "label": "KIDS · V1.07.81",
+  "releasedAt": "2026-10-05T16:58:00+02:00",
+  \"note\": \"Kids v1147: Der tatsächliche Geschichten-spezifische CSS-Override wurde entfernt. Er hatte die Hauptnavigation trotz des ersten Guards weiterhin über eine stärkere :has(#view-stories.active)-Spezifität auf 54 px Tabs und 9,5 px Labels verkleinert. Die Bottom-Navigation kommt jetzt auf Geschichten aus derselben globalen Autorität wie auf Heute, Qurʾān und Eltern; zusätzlich erzwingt der v1147-Guard die identische Geometrie auch gegen alte gecachte Story-Regeln. Inhalte und Player bleiben unverändert.\",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1146",
+    "serviceWorkerCache": "v1147",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -165,7 +165,7 @@
     "storiesPageHero": "photoreal-hijaz-environment-v1097",
     "storiesHero": "edge-to-edge-v1085",
     "storiesBottomNavClearance": "v1133-safe-area",
-    "storiesBottomNav": "global-standard-v1146",
+    "storiesBottomNav": "global-standard-v1147",
     "storyFollowReader": "v12",
     "storyFollowReaderMode": "bottom-sheet-popup-smart-timestamp-reader-v1144",
     "storyFollowReaderReusable": true,
@@ -574,7 +574,7 @@
     "storiesHomeEqualCategoryCards": true,
     "storiesHomeSahabiyyatGeneratedArtwork": true,
     "storiesHomeSahabiyyatArtworkMode": "historical-courtyard-no-people",
-    "storiesHomeCss": "/kids/stories-home-v1138.css?v=1138",
+    "storiesHomeCss": "/kids/stories-home-v1138.css?v=1147",
     "storiesHomeArtworkRelease": "generated-local-v1136",
     "storiesHomeArtworkAssets": [
       "/kids/assets/stories-home/prophets-v1133.webp",
@@ -613,7 +613,7 @@
     "storyNowPlayingTitle": "full-story-name",
     "storyNowPlayingSubtitle": "category-only",
     "storyNowPlayingAgeHidden": true,
-    "bottomNavigationAuthority": "global-v1146",
+    "bottomNavigationAuthority": "global-v1147",
     "bottomNavigationPageSpecificOverrides": false
   },
   "updatedAt": "2026-10-05"
