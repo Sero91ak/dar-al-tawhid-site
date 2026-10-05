@@ -35,26 +35,33 @@ jobs:
         with:
           ref: main
 
-      - name: Require available DĀR owner voice path
+      - name: Resolve available DĀR owner voice path
         run: |
           set -euo pipefail
           if [ -n "${ELEVENLABS_API_KEY:-}" ]; then
+            echo "DAR_VOICE_PROVIDER_AVAILABLE=1" >> "$GITHUB_ENV"
+            echo "DAR_VOICE_PROVIDER=elevenlabs-direct" >> "$GITHUB_ENV"
             echo "Direkter Serhat-Owner-Voice-Weg ist verfügbar."
             exit 0
           fi
-          test -n "${ADMIN_PUBLISH_SECRET:-}" || { echo "::error::Weder ELEVENLABS_API_KEY noch ADMIN_PUBLISH_SECRET verfügbar."; exit 1; }
-          for i in $(seq 1 3); do
-            code="$(curl -L -sS -o /tmp/voice-health.json -w '%{http_code}' "$VOICE_API/health" || true)"
-            cat /tmp/voice-health.json || true
-            if [ "$code" = "200" ] && grep -q '"ok":true' /tmp/voice-health.json; then
-              exit 0
-            fi
-            sleep 3
-          done
-          echo "::error::Kein verfügbarer DĀR Owner-Voice-Renderweg."
-          exit 1
+          if [ -n "${ADMIN_PUBLISH_SECRET:-}" ]; then
+            for i in $(seq 1 3); do
+              code="$(curl -L -sS -o /tmp/voice-health.json -w '%{http_code}' "$VOICE_API/health" || true)"
+              cat /tmp/voice-health.json || true
+              if [ "$code" = "200" ] && grep -q '"ok":true' /tmp/voice-health.json; then
+                echo "DAR_VOICE_PROVIDER_AVAILABLE=1" >> "$GITHUB_ENV"
+                echo "DAR_VOICE_PROVIDER=dar-cloud" >> "$GITHUB_ENV"
+                exit 0
+              fi
+              sleep 3
+            done
+          fi
+          echo "DAR_VOICE_PROVIDER_AVAILABLE=0" >> "$GITHUB_ENV"
+          echo "DAR_VOICE_PROVIDER=unavailable" >> "$GITHUB_ENV"
+          echo "::warning::Kein CI-Voice-Provider konfiguriert. Sprach-Normalisierung wird geprüft; Audio-Neurendering wird übersprungen."
 
       - name: Install audio tools
+        if: env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y ffmpeg >/dev/null
@@ -63,6 +70,7 @@ jobs:
         run: python3 kids/tools/voice_text.py --self-test
 
       - name: Generate complete Quiz + Dua Serhat voice packs
+        if: env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
         run: |
           set -euo pipefail
           python3 - <<'PY'
@@ -176,7 +184,8 @@ jobs:
                       payload={
                           "text":prepared,
                           "model_id":ELEVEN_MODEL,
-                          "voice_settings":voice_settings
+                          "voice_settings":voice_settings,
+                          "apply_text_normalization":"on"
                       }
                       if DICT_ID and DICT_VERSION:
                           payload["pronunciation_dictionary_locators"]=[{
@@ -389,6 +398,7 @@ jobs:
           PY
 
       - name: Commit complete Kids owner voice packs
+        if: env.DAR_VOICE_PROVIDER_AVAILABLE == '1'
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
