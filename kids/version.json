@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v79-stories1152",
-  "label": "KIDS · V1.07.84",
+  "buildId": "kids-shell-v80-prophet-actions1153",
+  "label": "KIDS · V1.07.85",
   "releasedAt": "2026-10-05T17:45:00+02:00",
-  "note": "Kids v1152: Die Geschichten-Startseite ist neu geordnet. Der eigene responsive Hero „Geschichten des Īmān“ steht wieder oben; die redundante Propheten/Ṣaḥābah/Ṣaḥābiyyāt-Kapselleiste ist vollständig entfernt. Die drei großen visuellen Welten bleiben die einzige Hauptnavigation. CTA-Flächen sind reduziert, die Karten bleiben groß und touchfreundlich. Der zusätzliche Seiten-Endabstand ist entfernt; nur die globale Shell schützt vor der festen Bottom-Navigation. Kleine iPhones, große Smartphones, Tablet-Hochformat und breite Tablet-/Desktop-Ansichten sind getrennt abgestimmt.",
+  "note": "Kids v1153: Die Aktionsbuttons im Propheten-Detail sind wieder groß und kindgerecht wie im Ṣaḥābah-Bereich. Auf Smartphones steht „Hören & Mitlesen“ als große Hauptaktion über „Hören“ und „Lesen“; auf Tablets stehen alle drei großzügig nebeneinander. Nur Darstellung und Touch-Flächen wurden angepasst — Player-, Audio- und Mitleselogik bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1152",
+    "serviceWorkerCache": "v1153",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -626,7 +626,8 @@
     "storiesCapsuleNavigation": false,
     "storiesPrimaryNavigation": "three-visual-world-cards",
     "storiesBottomClearance": "global-shell-only-plus-18px-content-rhythm-v1152",
-    "storiesWideLayout": "three-equal-worlds-from-1100px"
+    "storiesWideLayout": "three-equal-worlds-from-1100px",
+    "prophetDetailActions": "sahaba-scale-responsive-v1153"
   },
   "updatedAt": "2026-10-05"
 }
