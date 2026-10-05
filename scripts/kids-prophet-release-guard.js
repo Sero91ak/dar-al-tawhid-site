@@ -20,6 +20,15 @@ function requireMatch(text, needle, file) {
 function uniqueMatches(text, re) {
   return [...new Set(text.match(re) || [])];
 }
+function assertMasterStory(item, id, group) {
+  const scripts = item && item.scripts && typeof item.scripts === "object" ? item.scripts : {};
+  const values = ["4-5","6-8","9-10"].map(age => String(scripts[age] || "").trim());
+  if (values.some(v => !v)) {
+    error(group + " " + id + " muss für alle Altersstufen denselben vollständigen Mastertext besitzen");
+    return;
+  }
+  if (new Set(values).size !== 1) error(group + " " + id + " enthält gekürzte oder abweichende Altersfassungen");
+}
 
 let version;
 try {
@@ -96,6 +105,7 @@ for (const rel of ["kids/index.html", "kids/start.html", "kids/shell.html"]) {
   requireMatch(text, "/kids/prophet-stories.css?v=" + htmlCssVersion, rel);
   requireMatch(text, "/kids/prophet-stories.js?v=" + htmlJsVersion, rel);
   requireMatch(text, "/kids/sw.js?v=" + swVersion, rel);
+  requireMatch(text, "/kids/story-policy.js?v=" + String(Number(visual.storyPolicyVersion || 0)), rel);
   if (mubBundleVersion) {
     requireMatch(text, "/kids/mubashshirun-stories.css?v=" + mubBundleVersion, rel);
     requireMatch(text, "/kids/mubashshirun-stories.js?v=" + mubBundleVersion, rel);
@@ -133,6 +143,7 @@ requireMatch(read("_headers"), "X-Kids-Build: " + build, "_headers");
 const sw = read("kids/sw.js");
 requireMatch(sw, 'const CACHE_NAME="dar-al-tawhid-kids-v' + swVersion + '";', "kids/sw.js");
 requireMatch(sw, "/kids/prophet-stories.css?v=" + htmlCssVersion, "kids/sw.js");
+requireMatch(sw, "/kids/story-policy.js?v=" + String(Number(visual.storyPolicyVersion || 0)), "kids/sw.js");
 requireMatch(sw, "/kids/prophet-stories.js?v=" + htmlJsVersion, "kids/sw.js");
 if (mubBundleVersion) {
   requireMatch(sw, "/kids/mubashshirun-stories.css?v=" + mubBundleVersion, "kids/sw.js");
@@ -147,6 +158,24 @@ if (visual.sahabiyyatOwnLibrary) {
 }
 
 const prophetJs = read("kids/prophet-stories.js");
+const prophetData = JSON.parse(read("kids/data/prophet-stories.json"));
+for (const item of (Array.isArray(prophetData.items) ? prophetData.items : [])) assertMasterStory(item, String(item.id || ""), "Propheten");
+const storyRegistry = JSON.parse(read("kids/data/story-hub.json"));
+if (storyRegistry.policy?.masterStoryTextAcrossAges !== true || storyRegistry.policy?.storyTextAgeAdaptive !== false) {
+  error("Story-Hub Mastertext-Policy fehlt oder erlaubt gekürzte Altersfassungen");
+}
+for (const source of (Array.isArray(storyRegistry.sources) ? storyRegistry.sources : [])) {
+  const raw = String(source.dataUrl || "").split("?")[0].replace(/^\//, "");
+  if (!raw || !exists(raw)) continue;
+  try {
+    const payload = JSON.parse(read(raw));
+    for (const item of (Array.isArray(payload.items) ? payload.items : [])) {
+      if (item && item.scripts) assertMasterStory(item, String(item.id || ""), String(source.title || source.id || "Story"));
+    }
+  } catch (err) {
+    error("Story-Quelle kann für Mastertext-Regel nicht geprüft werden: " + raw + " · " + err.message);
+  }
+}
 requireMatch(prophetJs, '-card.jpg?v=' + assetVersion, "kids/prophet-stories.js");
 requireMatch(prophetJs, '-hero.jpg?v=' + assetVersion, "kids/prophet-stories.js");
 requireMatch(prophetJs, "const DEDICATED_HERO=new Set(PROPHET_ORDER);", "kids/prophet-stories.js");
@@ -199,6 +228,7 @@ if (mubDataVersion) {
       for (const age of ["4-5","6-8","9-10"]) {
         if (!String((item.scripts || {})[age] || "").trim()) error(id + " Text fehlt für Alter " + age);
       }
+      assertMasterStory(item, id, "Ṣaḥābah");
       const rel = "kids/assets/sahaba-mubashshirun/" + id + ".jpg";
       if (!exists(rel)) error("Ṣaḥābah-Asset fehlt: " + rel);
       else if (size(rel) < 50000) error("Ṣaḥābah-Asset ist verdächtig klein: " + rel + " (" + size(rel) + " Bytes)");
@@ -227,11 +257,18 @@ if (visual.sahabiyyatOwnLibrary) {
       for (const age of ["4-5","6-8","9-10"]) {
         if (!String((item.scripts || {})[age] || "").trim()) error(id + " Ṣaḥābiyyāt-Text fehlt für Alter " + age);
       }
+      assertMasterStory(item, id, "Ṣaḥābiyyāt");
       if (!Array.isArray(item.sourceRefs) || !item.sourceRefs.length) error(id + " Ṣaḥābiyyāt-Quellen fehlen");
       if (!String(item.cover || "").trim()) error(id + " Ṣaḥābiyyāt-Bild fehlt");
     }
   }
 }
 
+const sahabiyyatJs = read("kids/sahabiyyat-stories.js");
+const storyHubJs = read("kids/story-hub.js");
+if (!sahabiyyatJs.includes("sy-image-name")) error("Ṣaḥābiyyāt Kartenname im Bild fehlt");
+if (sahabiyyatJs.includes("syHeroName")) error("Ṣaḥābiyyāt Detailansicht darf den Namen nicht doppelt im Hero zeigen");
+if (!storyHubJs.includes("gh-story-art-name")) error("Story-Hub Kartenname im Bild fehlt");
+if (storyHubJs.includes("ghPlayerImageName")) error("Universal-Player darf den Namen nicht doppelt im Hero zeigen");
 if (failed) process.exit(1);
 console.log("Kids release guard OK:", build, label, exactV106Snapshot ? "exact-v106-legacy-snapshot" : ("assets v" + assetVersion), "25 Propheten-Karten + 10 Ṣaḥābah + 14 Ṣaḥābiyyāt");

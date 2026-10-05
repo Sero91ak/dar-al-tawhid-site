@@ -25,7 +25,7 @@ function setMode(v){
   try{localStorage.setItem(MODE_KEY,v)}catch(_){}
   renderModeButtons();applyMode()
 }
-function textFor(item){const s=item?.scripts||{};return normalizeKidsStoryText(String(s["9-10"]||s["6-8"]||s["4-5"]||"").trim())}
+function textFor(item){const policy=window.DARKidsStoryPolicy;if(policy?.canonicalText)return normalizeKidsStoryText(policy.canonicalText(item));const s=item?.scripts||{};const c=[s["4-5"],s["6-8"],s["9-10"]].map(v=>String(v||"").trim()).filter(Boolean).sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length);return normalizeKidsStoryText(c[0]||"")}
 function words(t){return(String(t).match(/\S+/g)||[]).length}
 function durationLabel(item,t){
   const target=item?.durationTargets?.[ageKey()];

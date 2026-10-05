@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "updatedAt": "2026-10-05",
   "title": "Geschichten des Īmān",
   "subtitle": "Hören · Mitlesen · Entdecken",
@@ -9,7 +9,11 @@
     "ageAdaptive": true,
     "futureCategoriesManifestDriven": true,
     "masterStoryTextAcrossAges": true,
-    "legacyStoryPlayersRemoved": true
+    "legacyStoryPlayersRemoved": true,
+    "storyTextAgeAdaptive": false,
+    "ageAdaptivePresentationOnly": true,
+    "canonicalStoryTextStrategy": "preserve-longest-complete-version",
+    "futureCategoriesMustUseMasterText": true
   },
   "sources": [
     {

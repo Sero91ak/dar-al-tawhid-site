@@ -83,20 +83,21 @@ function ageOutro(item){
   return "Bevor du zur Frage weitergehst, denk noch einmal an die wichtigsten Punkte. Die Propheten riefen zu Allah, hielten in Prüfungen an der Wahrheit fest und vertrauten auf Seine Führung. Die Geschichte soll nicht nur spannend sein, sondern dir helfen, die Botschaft des Qurʾān zu verstehen. Die genauen Qurʾān-Stellen stehen direkt unter der Erzählung.";
 }
 function chaptersForAge(item){
-  const ch=Array.isArray(item.chapters)?item.chapters.slice():[];
-  if(age()!=="4–5"||ch.length<=4)return ch;
-  return [ch[0],ch[1],ch[Math.max(2,ch.length-2)],ch[ch.length-1]];
+  return Array.isArray(item.chapters)?item.chapters.slice():[];
 }
 function customScript(item){
+  const policy=window.DARKidsStoryPolicy;
+  if(policy?.canonicalText)return String(policy.canonicalText(item)||"").trim();
   const s=item&&item.scripts&&typeof item.scripts==="object"?item.scripts:{};
-  return String(s[ageKey()]||"").trim();
+  return [s["4-5"],s["6-8"],s["9-10"],item?.voiceScript]
+    .map(v=>String(v||"").trim()).filter(Boolean)
+    .sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length)[0]||"";
 }
 function buildText(item){
   const owned=customScript(item);
   if(owned)return normalizeKidsStoryText(owned);
-  const parts=[ageIntro(item)].concat(chaptersForAge(item));
-  if(age()==="9–10"&&item.older)parts.push(item.older);
-  parts.push(ageOutro(item));
+  const parts=chaptersForAge(item);
+  if(item?.older)parts.push(item.older);
   return normalizeKidsStoryText(parts.join("\n\n").replace(/\s+\n/g,"\n").trim());
 }
 function words(text){return(String(text).match(/\S+/g)||[]).length}

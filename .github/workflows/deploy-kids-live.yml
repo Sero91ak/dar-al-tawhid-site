@@ -77,8 +77,10 @@ jobs:
           if(!prophetJs.includes('hub.openStory("prophets",id)'))throw new Error("Prophet Hören is not delegated to Universal StoryPlayer");
           if(!sahabaJs.includes('hub.openStory("sahaba",id)'))throw new Error("Ṣaḥābah Hören is not delegated to Universal StoryPlayer");
           if(!sahabiyyatJs.includes('hub.openStory("sahabiyyat",id)'))throw new Error("Ṣaḥābiyyāt Hören is not delegated to Universal StoryPlayer");
-          if(!sahabiyyatJs.includes("sy-image-name")||!sahabiyyatJs.includes("syHeroName"))throw new Error("Ṣaḥābiyyāt image-name overlay missing");
-          if(!storyHubJs.includes("gh-story-art-name")||!storyHubJs.includes("ghPlayerImageName"))throw new Error("Universal Ṣaḥābiyyāt image-name overlay missing");
+          if(!sahabiyyatJs.includes("sy-image-name"))throw new Error("Ṣaḥābiyyāt card image-name overlay missing");
+          if(sahabiyyatJs.includes("syHeroName"))throw new Error("Ṣaḥābiyyāt detail name duplicated in hero");
+          if(!storyHubJs.includes("gh-story-art-name"))throw new Error("Universal Ṣaḥābiyyāt card image-name overlay missing");
+          if(storyHubJs.includes("ghPlayerImageName"))throw new Error("Universal player story name duplicated in hero");
           if(!storyHubJs.includes('img=s.image||artFor(first,s.id,false)'))throw new Error("Story category artwork must prefer manifest image");
           if(storyHubJs.includes('addEventListener("click",toggleRead)'))throw new Error("Story text toggle must not receive the click event as syncMode");
           if(!storyHubJs.includes('setReadMode("closed",{restore:true})'))throw new Error("Story text close state machine missing");
@@ -124,8 +126,9 @@ jobs:
                grep -F -q 'data-story-area="sahabiyyat"' /tmp/kids-start.html 2>/dev/null &&
                grep -F -q "dar-al-tawhid-kids-v$SW_EXPECT" /tmp/kids-sw.js 2>/dev/null &&
                grep -F -q "gh-story-art-name" /tmp/kids-story-hub.js 2>/dev/null &&
-               grep -F -q "ghPlayerImageName" /tmp/kids-story-hub.js 2>/dev/null &&
+               ! grep -F -q "ghPlayerImageName" /tmp/kids-story-hub.js 2>/dev/null &&
                grep -F -q "sy-image-name" /tmp/kids-sahabiyyat-js.js 2>/dev/null &&
+               ! grep -F -q "syHeroName" /tmp/kids-sahabiyyat-js.js 2>/dev/null &&
                node -e 'const fs=require("fs");const q=JSON.parse(fs.readFileSync("/tmp/kids-quiz.json","utf8"));if(!Array.isArray(q.items)||q.items.length<650)process.exit(1);' &&
                node -e 'const fs=require("fs");const s=JSON.parse(fs.readFileSync("/tmp/kids-sahabiyyat.json","utf8"));if(!Array.isArray(s.items)||s.items.length!==14)process.exit(1);'; then
               ok=1
