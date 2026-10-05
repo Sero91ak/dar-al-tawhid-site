@@ -13,7 +13,8 @@ function normalizeKidsStoryText(value){
 }
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.mubashshirunStory.done.";
-let items=[],libraryPolicy={},active=null,activeText="",playing=false,busy=false,coverResizeObserver=null,followReader=null;\nconst audio=new Audio();
+let items=[],libraryPolicy={},active=null,activeText="",playing=false,busy=false,coverResizeObserver=null,followReader=null;
+const audio=new Audio();
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const age=()=>String($(".app")?.getAttribute("data-age")||"6–8");
@@ -28,7 +29,8 @@ function setMode(v){
     else followReader?.open?.();
     if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
   }
-}\nfunction textFor(item)function textFor(item){const policy=window.DARKidsStoryPolicy;if(policy?.canonicalText)return normalizeKidsStoryText(policy.canonicalText(item));const s=item?.scripts||{};const c=[s["4-5"],s["6-8"],s["9-10"]].map(v=>String(v||"").trim()).filter(Boolean).sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length);return normalizeKidsStoryText(c[0]||"")}
+}
+function textFor(item){const policy=window.DARKidsStoryPolicy;if(policy?.canonicalText)return normalizeKidsStoryText(policy.canonicalText(item));const s=item?.scripts||{};const c=[s["4-5"],s["6-8"],s["9-10"]].map(v=>String(v||"").trim()).filter(Boolean).sort((a,b)=>(b.match(/\S+/g)||[]).length-(a.match(/\S+/g)||[]).length||b.length-a.length);return normalizeKidsStoryText(c[0]||"")}
 function words(t){return(String(t).match(/\S+/g)||[]).length}
 function durationLabel(item,t){
   const target=item?.durationTargets?.[ageKey()];
@@ -426,7 +428,7 @@ function stopAudio(){
   try{audio.pause();audio.removeAttribute("src");audio.load()}catch(_){}
   playing=false;busy=false;updatePlayButton();updateProgress();
 }
-async function init(){async function init(){
+async function init(){
   if(!ensureUi())return;
   try{
     const r=await fetch(DATA_URL+"?v=18",{cache:"no-store"});
