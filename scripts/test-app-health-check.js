@@ -175,6 +175,23 @@ if (!worker.includes("area-shell-v1294.css") || !worker.includes("tawhid-guide-v
   ok("test-app-worker.js: v1295 Area-/Tawhid-Authority aktiv");
 }
 
+const testWidgets = read("test/widgets/index.html");
+if (/http-equiv=["']refresh["']/i.test(testWidgets) || /location\.replace\(["']\/widgets\//.test(testWidgets)) {
+  fail("test/widgets/index.html: darf nicht in die Besucher-Widgets umleiten");
+} else {
+  ok("test/widgets/index.html: bleibt in der Test-App");
+}
+if (!testWidgets.includes("pw-test-hero") || !testWidgets.includes("Nur Test-App")) {
+  fail("test/widgets/index.html: v1297 Test-Widgets-Hero fehlt");
+} else {
+  ok("test/widgets/index.html: v1297 Test-Widgets-Oberfläche aktiv");
+}
+if (!worker.includes('(?:widgets|wasiyyah)')) {
+  fail("test-app-worker.js: No-Cache-Schutz für Widgets/Wasiyyah fehlt");
+} else {
+  ok("test-app-worker.js: Widgets/Wasiyyah Cache-Schutz aktiv");
+}
+
 const testWrangler = read("wrangler.test.toml");
 if (!testWrangler.includes('[ai]') || !testWrangler.includes('binding = "AI"')) {
   fail("wrangler.test.toml: Workers-AI-Binding für Kids-Rezitationsprüfung fehlt");
