@@ -211,7 +211,7 @@ jobs:
                       subprocess.run([
                           "ffmpeg","-hide_banner","-loglevel","error","-y",
                           "-i",str(mp3),"-ac","1","-ar","48000",
-                          "-c:a","aac","-b:a","64k","-movflags","+faststart",
+                          "-c:a","aac","-b:a","56k","-movflags","+faststart",
                           str(target)
                       ],check=True)
                       if target.stat().st_size<1200:
