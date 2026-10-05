@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v63-stories1133",
-  "label": "KIDS · V1.07.67",
-  "releasedAt": "2026-10-05T14:35:00+02:00",
-  "note": "Kids v1133: Geschichtenseite neu geordnet. Nur noch ein zentraler Hero „Geschichten des Īmān“, drei gleichwertige Bereiche für Propheten, Ṣaḥābah und Ṣaḥābiyyāt, lokal gebündelte historische Bildwelten, kompaktere freie Geschichten und sichere Bottom-Navigation ohne überdeckte Inhalte. Der Ṣaḥābiyyāt-Einstieg verwendet jetzt ein passendes historisches Artwork statt des abstrakten Platzhalter-Hintergrunds.",
+  "buildId": "kids-shell-v64-stories1134",
+  "label": "KIDS · V1.07.68",
+  "releasedAt": "2026-10-05T14:44:00+02:00",
+  "note": "Kids v1134: Geschichtenseite weiter verfeinert. Der doppelte Aufbau bleibt entfernt; „Geschichten des Īmān“ ist der einzige Hero. Propheten, Ṣaḥābah und Ṣaḥābiyyāt erscheinen als gleichwertige Hauptwelten. Der Ṣaḥābiyyāt-Bereich nutzt jetzt ein eigenes neu generiertes historisches Hof-/Wohnumfeld ohne Personen statt eines abstrakten bzw. unpassenden Platzhalters. Cache und installierte App wurden für die neue Darstellung aktualisiert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,14 +27,14 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1133",
+    "serviceWorkerCache": "v1134",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
     "storyAssetVersion": 22,
     "muhammadHonorFeature": true,
     "chronologicalOrderAfterMuhammadFeature": true,
-    "storiesHomePolish": "v24-single-hero-equal-worlds",
+    "storiesHomePolish": "v1134",
     "storiesHeaderArtwork": true,
     "storiesHeaderAmbientMotion": true,
     "storiesResponsiveLayout": "phone-tablet-desktop-v22",
@@ -557,7 +557,12 @@
     "storiesDuplicateHeroRemoved": true,
     "storyCategoryCardsEqualized": true,
     "sahabiyyatHomeArtwork": "historical-local-v1133",
-    "storiesFreeStoryThumbnails": "photoreal-local-scenes-v1133"
+    "storiesFreeStoryThumbnails": "photoreal-local-scenes-v1133",
+    "storiesHomeSingleHero": true,
+    "storiesHomeEqualCategoryCards": true,
+    "storiesHomeSahabiyyatGeneratedArtwork": true,
+    "storiesHomeSahabiyyatArtworkMode": "historical-courtyard-no-people",
+    "storiesHomeCss": "/kids/stories-home-v1133.css?v=1134-1"
   },
   "updatedAt": "2026-10-05"
 }
