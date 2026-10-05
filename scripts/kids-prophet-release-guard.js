@@ -27,7 +27,7 @@ function assertMasterStory(item, id, group, minimumWords = 0) {
     error(group + " " + id + " muss für alle Altersstufen denselben vollständigen Mastertext besitzen");
     return;
   }
-  if (new Set(values).size !== 1) error(group + " " + id + " enthält gekürzte oder abweichende Altersfassungen");
+  if (new Set(values).size !== 1) error(group + " " + id + " enthält gekürzte oder abweichende Altersfassungen");\n  const explicitMaster = String(item && item.masterStoryText || "").trim();\n  if (explicitMaster && values.some(v => v !== explicitMaster)) error(group + " " + id + " weicht vom Voice-Mastertext ab");
   if (minimumWords > 0) {
     const words = (values[0].match(/\S+/g) || []).length;
     if (words < minimumWords) error(group + " " + id + " ist mit " + words + " Wörtern zu kurz; mindestens " + minimumWords + " Wörter erforderlich");
