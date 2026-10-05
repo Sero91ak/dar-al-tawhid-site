@@ -77,9 +77,9 @@ jobs:
             echo "R2_AUTH_STATUS=missing-actions-secrets"
             exit 1
           fi
-          npx -y wrangler@latest r2 bucket list --json >/tmp/r2-buckets.json
+          npx -y wrangler@latest r2 bucket list >/tmp/r2-buckets.txt
           echo "R2_AUTH_STATUS=ok"
-          cat /tmp/r2-buckets.json
+          cat /tmp/r2-buckets.txt
 
       - name: Upload candidates to R2
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.upload }}
@@ -92,7 +92,7 @@ jobs:
           test -n "${CLOUDFLARE_API_TOKEN:-}" || { echo "::error::CLOUDFLARE_API_TOKEN fehlt"; exit 1; }
           test -n "${CLOUDFLARE_ACCOUNT_ID:-}" || { echo "::error::CLOUDFLARE_ACCOUNT_ID fehlt"; exit 1; }
           npm install --no-save wrangler@latest >/dev/null
-          if ! npx wrangler r2 bucket list --json | grep -q '"name":"dar-app-media"'; then
+          if ! npx wrangler r2 bucket list | grep -q 'dar-app-media'; then
             npx wrangler r2 bucket create dar-app-media
           fi
           while IFS= read -r file; do
