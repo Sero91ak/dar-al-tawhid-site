@@ -29,19 +29,23 @@ function textFor(item){
   if(!item)return"";
   const scripts=item.scripts&&typeof item.scripts==="object"?item.scripts:{};
   const candidates=[scripts["9-10"],scripts["6-8"],scripts["4-5"],item.voiceScript].map(v=>String(v||"").trim()).filter(Boolean);
-  let text=candidates.sort((a,b)=>b.length-a.length)[0]||"";
+  let text=candidates.sort((a,b)=>b.length-a.length)[0]||String(item.text||item.story||"").trim();
   if(!text&&Array.isArray(item.blocks))text=item.blocks.join("\n\n");
   if(!text&&Array.isArray(item.chapters))text=item.chapters.join("\n\n");
   return text;
 }
 function audioMeta(item){
   const a=item&&item.audio&&typeof item.audio==="object"?item.audio:{};
-  return a[ageKey()]||a["9-10"]||a["6-8"]||a["4-5"]||null;
+  const selected=a[ageKey()]||a["9-10"]||a["6-8"]||a["4-5"]||((a.url||item?.audioUrl)?a:null);
+  if(selected?.url)return selected;
+  const url=String(item?.audioUrl||"").trim();
+  return url?{url,durationSec:Number(item?.durationSec)||0}:null;
 }
+function storyName(item){return String(item?.name||item?.title||"Geschichte")}
 function artFor(item,cat=activeCategory,hero=false){
   if(!item)return"";
   if(cat==="prophets")return "/kids/assets/prophets-v2/"+encodeURIComponent(item.id)+(hero?"-hero.jpg?v=22":"-card.jpg?v=22");
-  return String((hero&&item.hero)||item.cover||item.hero||"");
+  return String((hero&&item.hero)||item.cover||item.hero||item.image||item.backgroundImage||category()?.image||"");
 }
 function honorific(item,cat=activeCategory){
   const src=SOURCES.find(x=>x.id===cat);
@@ -94,7 +98,7 @@ function ensureUi(){
     id:"universal-story",audio,
     getContent:()=>{
       const meta=audioMeta(active)||{};
-      return{key:active?(category().kind+":"+active.id+":"+ageKey()):"kids-story",title:active?active.name:"Geschichte",subtitle:category().label+" · Alter "+age(),album:"DĀR AL TAWḤĪD Kids · Geschichten des Īmān",text:textFor(active),artwork:active?artFor(active,activeCategory,true):"",deepLink:active?("#stories/listen/"+activeCategory+"/"+encodeURIComponent(active.id)):"#stories",audioOnly:isYoung(),timings:meta.timings||meta.paragraphTimings||meta.cues||[],syncPoints:meta.syncPoints||meta.syncAnchors||[]};
+      return{key:active?(category().kind+":"+active.id+":"+ageKey()):"kids-story",title:active?storyName(active):"Geschichte",subtitle:category().label+" · Alter "+age(),album:"DĀR AL TAWḤĪD Kids · Geschichten des Īmān",text:textFor(active),artwork:active?artFor(active,activeCategory,true):"",deepLink:active?("#stories/listen/"+activeCategory+"/"+encodeURIComponent(active.id)):"#stories",audioOnly:isYoung(),timings:meta.timings||meta.paragraphTimings||meta.cues||[],syncPoints:meta.syncPoints||meta.syncAnchors||[]};
     },
     toggleAudio,autoOpen:false,disabled:()=>!audioMeta(active)?.url
   })||null;
@@ -143,7 +147,7 @@ function renderList(){
     const m=audioMeta(item),img=artFor(item,activeCategory,false);
     return '<button class="gh-story" type="button" data-gh-id="'+esc(item.id)+'">'+
       '<span class="gh-story-art">'+(img?'<img src="'+esc(img)+'" alt="" decoding="async" loading="lazy">':'')+'</span>'+
-      '<span class="gh-story-copy"><small>'+(m?.url?"HÖRBEREIT":"LESEN · AUDIO FOLGT")+'</small><strong>'+esc(item.name)+'</strong><em dir="rtl">'+esc(arabic(item,activeCategory))+'</em><span>'+esc(item.summary||"")+'</span></span><span class="gh-story-go" aria-hidden="true">›</span></button>';
+      '<span class="gh-story-copy"><small>'+(m?.url?"HÖRBEREIT":"LESEN · AUDIO FOLGT")+'</small><strong>'+esc(storyName(item))+'</strong><em dir="rtl">'+esc(arabic(item,activeCategory))+'</em><span>'+esc(item.summary||"")+'</span></span><span class="gh-story-go" aria-hidden="true">›</span></button>';
   }).join("");
   $("#ghList").querySelectorAll("[data-gh-id]").forEach(b=>b.addEventListener("click",()=>selectStory(b.dataset.ghId)));
 }
@@ -169,7 +173,7 @@ function renderPlayer(){
   const cat=category(),meta=audioMeta(active),text=textFor(active),img=artFor(active,activeCategory,true);
   const bg=$("#ghPlayerBg");bg.onerror=()=>{bg.onerror=null;bg.src=artFor(active,activeCategory,false)};bg.src=img;bg.alt="";
   $("#ghPlayerKicker").textContent=cat.label.toUpperCase()+" · HÖRGESCHICHTE";
-  $("#ghPlayerTitle").textContent=active.name;
+  $("#ghPlayerTitle").textContent=storyName(active);
   $("#ghPlayerArabic").textContent=arabic(active,activeCategory);
   $("#ghPlayerSummary").textContent=active.summary||"";
   $("#ghRead").innerHTML=text.split(/\n{2,}/).map((p,i)=>'<p data-gh-p="'+i+'">'+esc(p)+"</p>").join("");
@@ -179,7 +183,7 @@ function renderPlayer(){
   $("#ghFollow").hidden=isYoung()||!meta?.url;
   $("#ghFollow").textContent="Synchron mitlesen";
   $("#ghAudioNote").textContent=meta?.url?"Deine Stelle wird automatisch gespeichert.":(isYoung()?"Diese Hörgeschichte ist noch nicht als Audio freigeschaltet.":"Der vollständige Lesetext ist da. Audio wird automatisch ergänzt, sobald es freigeschaltet ist.");
-  reader?.setContent({title:active.name,subtitle:cat.label+" · Alter "+age(),text,audioOnly:isYoung(),timings:meta?.timings||meta?.paragraphTimings||meta?.cues||[],syncPoints:meta?.syncPoints||meta?.syncAnchors||[]});
+  reader?.setContent({title:storyName(active),subtitle:cat.label+" · Alter "+age(),text,audioOnly:isYoung(),timings:meta?.timings||meta?.paragraphTimings||meta?.cues||[],syncPoints:meta?.syncPoints||meta?.syncAnchors||[]});
   if(meta?.url){audio.src=meta.url;audio.preload="metadata"}else{audio.removeAttribute("src");try{audio.load()}catch(_){}}
   updateProgress();renderPlay();renderMini();
 }
@@ -252,7 +256,7 @@ function renderMini(){
   const has=!!active&&(playing||Number(audio.currentTime)>0);
   mini.classList.toggle("show",has&&!$("#ghPlayer")?.classList.contains("open"));
   if(!has)return;
-  $("#ghMiniImg").src=artFor(active,activeCategory,false);$("#ghMiniTitle").textContent=active.name;$("#ghMiniMeta").textContent=(playing?"Läuft · ":"Pausiert · ")+formatTime(audio.currentTime);$("#ghMiniPlay").textContent=playing?"Ⅱ":"▶";$("#ghMiniPlay").setAttribute("aria-label",playing?"Wiedergabe pausieren":"Wiedergabe starten");
+  $("#ghMiniImg").src=artFor(active,activeCategory,false);$("#ghMiniTitle").textContent=storyName(active);$("#ghMiniMeta").textContent=(playing?"Läuft · ":"Pausiert · ")+formatTime(audio.currentTime);$("#ghMiniPlay").textContent=playing?"Ⅱ":"▶";$("#ghMiniPlay").setAttribute("aria-label",playing?"Wiedergabe pausieren":"Wiedergabe starten");
 }
 async function toggleAudio(){
   if(!active||busy)return;const meta=audioMeta(active);if(!meta?.url)return;
