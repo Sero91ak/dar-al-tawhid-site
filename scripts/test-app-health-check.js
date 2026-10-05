@@ -169,10 +169,47 @@ else ok("service-worker.js: CACHE_VERSION vorhanden");
 const worker = read("cloudflare/test-app-worker.js");
 if (!worker.includes("Response.redirect")) fail("test-app-worker.js: Root-Redirect fehlt");
 else ok("test-app-worker.js: Root-Redirect vorhanden");
-if (!worker.includes("area-shell-v1294.css") || !worker.includes("tawhid-guide-v1295.css") || !worker.includes("darTestAreaAuthoritiesV1295")) {
-  fail("test-app-worker.js: v1295 Area-/Tawhid-Authority fehlt");
+const areaAuthorityFiles = [
+  "quran-player-v1252.css",
+  "quran-learn-v1256.css",
+  "quran-reader-v1251.css",
+  "quran-overview-v1250.css",
+  "ilm-scholars-v1240.css",
+  "ilm-topics-v1242.css",
+  "ilm-dua-v1244.css",
+  "quiz-overview-v1257.css",
+  "more-v1241.css",
+  "ilm-scholar-profile-v1253.css",
+  "ilm-topic-detail-v1254.css",
+  "ilm-post-reader-v1255.css",
+  "ilm-scholar-detail-v1251.css",
+  "ilm-book-detail-v1252.css",
+  "more-v1253.css",
+  "jummah-v1258.css",
+  "qibla-v1259.css",
+  "prayer-v1254.css"
+];
+if (!worker.includes("area-shell-v1294.css") || !worker.includes("tawhid-guide-v1295.css") || !worker.includes("darTestAreaAuthoritiesV1298")) {
+  fail("test-app-worker.js: v1298 finale Area-/Tawhid-Authority fehlt");
 } else {
-  ok("test-app-worker.js: v1295 Area-/Tawhid-Authority aktiv");
+  ok("test-app-worker.js: v1298 finale Area-/Tawhid-Authority aktiv");
+}
+if (/html\s*=\s*html\.replace\(\/<\\\/head>\/i,\s*'<link rel="stylesheet"/.test(worker)) {
+  fail("test-app-worker.js: Bereichs-CSS darf nicht mehr von </head> abhängen");
+} else {
+  ok("test-app-worker.js: keine </head>-abhängige Bereichs-CSS-Injection");
+}
+for (const file of areaAuthorityFiles) {
+  const count = worker.split(file).length - 1;
+  if (count !== 1) fail(`test-app-worker.js: ${file} muss exakt einmal in der finalen Authority stehen (gefunden: ${count})`);
+}
+if (areaAuthorityFiles.every((file) => worker.split(file).length - 1 === 1)) {
+  ok(`test-app-worker.js: ${areaAuthorityFiles.length} Bereichs-Styles exakt einmal eingebunden`);
+}
+if (worker.includes("injectLateTestStylesheet")) {
+  fail("test-app-worker.js: alte doppelte Einzel-Stylesheet-Injection noch vorhanden");
+} else {
+  ok("test-app-worker.js: keine doppelte Einzel-Stylesheet-Injection");
 }
 
 const testWidgets = read("test/widgets/index.html");
