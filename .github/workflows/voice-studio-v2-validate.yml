@@ -245,10 +245,16 @@ jobs:
           assert 'launchctl kickstart -k' not in installer
           assert 'Launcher bleibt alleiniger Engine-Besitzer.' in installer
           assert 'DAR_VOICE_ENGINE_OWNER=launcher' in installer
+          assert 'ensure_pair_token' in installer
+          assert 'engine_companion_ready' in installer
+          launcher_health=installer[installer.index('engine_is_current()'):installer.index('engine_companion_ready()')]
+          assert 'companion_mode' not in launcher_health, "Mac engine health must not depend on companion mode"
 
           assert 'if !userInitiated' not in swift or 'installAvailableUpdate()' not in swift.split('if !userInitiated',1)[-1][:250]
           assert 'Installation nur nach deinem Klick' in swift
           assert 'externalEngineOwner' in swift
+          assert 'installedEngineVersion' in swift
+          assert 'loadOrCreatePairToken' in swift
 
           assert 'DAR_VOICE_DEV_UI_SYNC' in engine
           assert 'threading.Thread(target=refresh_studio_ui_from_github' in engine
@@ -937,6 +943,10 @@ jobs:
           shutil.copy2(root/"data/pronunciation/pronunciation-rules.json",app/"pronunciation-rules.json")
           shutil.copy2(root/"data/pronunciation/voice-production-profile.json",app/"voice-production-profile.json")
           shutil.copy2(root/"data/pronunciation/islamic-master-library.json",app/"islamic-master-library.json")
+          shutil.copy2(
+              root/"data/pronunciation/DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls",
+              app/"DAR_AL_TAWHID_ElevenLabs_Aussprache_MAX_MASTER.pls"
+          )
           os.environ["DAR_VOICE_APP_HOME"]=str(app)
           os.environ["HOME"]=str(home)
 
@@ -979,6 +989,12 @@ jobs:
           state=mod.learning_state()
           assert state["masterEntries"] >= 25, state
           assert state["masterProphets"] >= 25, state
+          assert len(mod.MAX_MASTER_PLS_RULES) >= 8000, len(mod.MAX_MASTER_PLS_RULES)
+          assert len(mod.PROFILE_COMPONENT_RULES) >= 50, len(mod.PROFILE_COMPONENT_RULES)
+          assert mod.known_master_form_or_german_inflection("Barakātuh") is True
+          assert mod.known_master_form_or_german_inflection("Raḥmatullāhi") is True
+          assert mod.detect_unresolved_islamic_terms("Barakātuh") == []
+          assert mod.detect_unresolved_islamic_terms("Raḥmatullāhi") == []
           prepared,found=mod.prepare("Mūsā und ʿĀʾišah")
           assert "مُوسَى" in prepared, prepared
           assert "عَائِشَة" in prepared, prepared
@@ -1096,6 +1112,8 @@ jobs:
               "showCompanionPairing",
               "companionPairingURL",
               "localIPv4Address",
+              "installedEngineVersion",
+              "loadOrCreatePairToken",
               "CIQRCodeGenerator",
           ]
           missing=[x for x in required if x not in src]
