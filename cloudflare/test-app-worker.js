@@ -1,7 +1,7 @@
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v55-sahabiyyat-approved1125",
-  label: "KIDS · V1.07.59"
+  buildId: "kids-shell-v56-sahabiyyat-names1126",
+  label: "KIDS · V1.07.60"
 });
 
 function kidsVersionResponse() {
@@ -391,7 +391,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v55-sahabiyyat-approved1125");
+      target.searchParams.set("kv", "kids-shell-v56-sahabiyyat-names1126");
       return Response.redirect(target.toString(), 301);
     }
 
