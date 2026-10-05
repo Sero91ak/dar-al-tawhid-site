@@ -82,7 +82,7 @@
     "mubashshirunDirectHadithLinks": true,
     "mubashshirunStoryUi": "responsive-follow-reader-v11",
     "mubashshirunBundleVersion": 29,
-    "mubashshirunDataVersion": 7,
+    "mubashshirunDataVersion": 8,
     "mubashshirunAudioPublishPipeline": true,
     "mubashshirunFuṣḥāReview": true,
     "mubashshirunPreparedStoryScripts": 30,
@@ -670,7 +670,12 @@
     "storyLibraryBlendOnly": true,
     "storyLibraryGeometryOverriddenByBlend": false,
     "storyLibraryTypographyOverriddenByBlend": false,
-    "storyLibraryButtonsOverriddenByBlend": false
+    "storyLibraryButtonsOverriddenByBlend": false,
+    "abuBakrOwnerAudio": true,
+    "abuBakrOwnerAudioDirectAssigned": true,
+    "abuBakrOwnerAudioDurationSec": 356.597,
+    "abuBakrOwnerAudioCodec": "aac-64k-mono",
+    "abuBakrOwnerAudioTarget": "/kids/assets/mubashshirun-story-audio/abu-bakr/master.m4a"
   },
   "updatedAt": "2026-10-05",
   "deployTrigger": "2026-10-05T21:17:00+02:00"
