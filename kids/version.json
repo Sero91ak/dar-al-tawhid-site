@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v97-unified-resume1170",
-  "label": "KIDS · V1.07.98",
-  "releasedAt": "2026-10-06T00:45:00+02:00",
-  "note": "Audio-first Startseite weiter verfeinert: Weiterhören erkennt jetzt automatisch die zuletzt aktive Hörgeschichte oder Qurʾān-Stelle und öffnet sie direkt wieder. Hörbuch-Fortschritt wird sichtbar angezeigt, der Hero bewegt sich ruhiger und hochwertiger, DĀR AL TAWḤĪD KIDS bleibt groß und gut lesbar. Alif-Bāʾ bleibt vollständig deaktiviert. Keine neuen kostenpflichtigen Bild-, Video- oder Voice-Generierungen für diesen Schritt.",
+  "buildId": "kids-shell-v98-dua-voice1171",
+  "label": "KIDS · V1.07.99",
+  "releasedAt": "2026-10-06T01:02:00+02:00",
+  "note": "Duʿāʾ-Sprachausgabe repariert, ohne neue Voice-Credits zu verbrauchen: acht vorhandene, bereits gerenderte Serhat-Owner-Voice-Erklärungen plus zwei Feedback-Clips wurden aus dem früheren geprüften Voice-Pack wieder zugeordnet. Qurʾān-Arabisch bleibt ausschließlich auf dem echten Rezitationspfad. Startseite bleibt Audio-first mit Hörbuch-/Qurʾān-Weiterhören.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1170",
+    "serviceWorkerCache": "v1171",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -708,7 +708,10 @@
       "stories",
       "quran",
       "dua"
-    ]
+    ],
+    "duaOwnerVoice": "recovered-existing-assets-v1171",
+    "duaVoicePaidGenerations": 0,
+    "duaVoiceEntries": 10
   },
   "updatedAt": "2026-10-05",
   "deployTrigger": "2026-10-05T23:44:00+02:00"
