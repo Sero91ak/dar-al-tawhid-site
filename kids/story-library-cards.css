@@ -1,7 +1,8 @@
-/* DĀR AL TAWḤĪD Kids — Story Library Card Repair v2
+/* DĀR AL TAWḤĪD Kids — Story Library Card Repair v3
    Restore the proven pre-compact geometry.
    Scope: story selection lists only. The Geschichten start page is intentionally untouched.
-   Goal: preserve each library's sizing while visually blending artwork into the card. */
+   Goal: preserve each library's sizing while visually blending artwork into the card.
+   v3 is intentionally loaded AFTER story-card-system.css and is the final visual authority. */
 
 .ps-library-page,
 .ms-library-page{
