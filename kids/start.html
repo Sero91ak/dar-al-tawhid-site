@@ -2881,7 +2881,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07.74</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.07.78</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -7057,7 +7057,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1143",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1144",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -8498,9 +8498,9 @@ html[data-view="stories"] .bottom-nav .nav-btn.active{
 <script src="/kids/screen-awake.js?v=1"></script>
 <script src="/kids/story-follow-reader.js?v=10"></script>
 <script src="/kids/story-policy.js?v=1"></script>
-<script src="/kids/prophet-stories.js?v=32"></script>
-<script src="/kids/mubashshirun-stories.js?v=23"></script>
-<script src="/kids/sahabiyyat-stories.js?v=15"></script>
+<script src="/kids/prophet-stories.js?v=31"></script>
+<script src="/kids/mubashshirun-stories.js?v=22"></script>
+<script src="/kids/sahabiyyat-stories.js?v=14"></script>
 <script src="/kids/story-hub.js?v=16"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-library.js?v=7"></script>
