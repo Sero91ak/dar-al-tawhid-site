@@ -109,3 +109,49 @@ html.gh-world-open,html.gh-player-open,html.gh-world-open body,html.gh-player-op
 }
 .gh-read{scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){.gh-read{scroll-behavior:auto}}
+
+
+/* STORY_HUB_SAHABIYYAT_IMAGE_NAMES_V3 */
+.gh-story-art{position:relative;overflow:hidden}
+.gh-story-art-name{
+  position:absolute;
+  left:8px;right:8px;bottom:7px;
+  z-index:4;
+  color:#fff8ea;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif;
+  font-size:clamp(12px,3.4vw,15px);
+  line-height:1.05;
+  font-weight:850;
+  text-align:left;
+  text-shadow:0 2px 9px rgba(0,0,0,.88);
+  overflow-wrap:anywhere;
+}
+.gh-story-art:has(.gh-story-art-name)::after{
+  content:"";
+  position:absolute;inset:auto 0 0 0;height:46%;
+  background:linear-gradient(180deg,rgba(3,17,27,0),rgba(3,17,27,.9));
+  z-index:2;pointer-events:none;
+}
+.gh-player-hero{position:relative}
+.gh-player-image-name{
+  position:absolute;
+  left:clamp(16px,4vw,34px);
+  bottom:clamp(126px,20vw,176px);
+  z-index:8;
+  max-width:min(82%,760px);
+  padding:9px 13px 10px;
+  border:1px solid rgba(239,208,138,.25);
+  border-radius:14px;
+  background:linear-gradient(135deg,rgba(4,20,31,.9),rgba(55,31,39,.74));
+  color:#fff8ea;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif;
+  font-size:clamp(18px,4.7vw,28px);
+  line-height:1.06;
+  font-weight:850;
+  box-shadow:0 10px 28px rgba(0,0,0,.22);
+  text-shadow:0 2px 8px rgba(0,0,0,.55);
+}
+@media(max-width:430px){
+  .gh-story-art-name{left:6px;right:6px;bottom:6px;font-size:12px}
+  .gh-player-image-name{left:14px;bottom:116px;max-width:84%;font-size:18px;padding:8px 11px;border-radius:12px}
+}
