@@ -177,7 +177,10 @@ def _self_test() -> None:
         actual = prepare_kids_voice_text(source, apply_pronunciation=False)
         if actual != expected:
             raise SystemExit(f"voice-text self-test failed: {source!r} -> {actual!r} != {expected!r}")
-    rules = _load_master_rules()\n    if _PRONUNCIATION_RULES.exists() and not rules:\n        raise SystemExit("voice-text self-test failed: MASTER pronunciation rules are empty")\n    print(f"Kids voice text self-test OK · {len(cases)} number cases · {len(rules)} MASTER pronunciation rules · {SYNTHESIS_REVISION}")\n
+    rules = _load_master_rules()
+    if _PRONUNCIATION_RULES.exists() and not rules:
+        raise SystemExit("voice-text self-test failed: MASTER pronunciation rules are empty")
+    print(f"Kids voice text self-test OK · {len(cases)} number cases · {len(rules)} MASTER pronunciation rules · {SYNTHESIS_REVISION}")
 
 def main() -> None:
     parser = argparse.ArgumentParser()
