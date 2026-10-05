@@ -30,7 +30,7 @@ jobs:
           curl -L --fail --retry 3 --retry-delay 2 "$VIDEO_URL" -o /tmp/intro-v74-source.mp4
           ffmpeg -hide_banner -loglevel error -y -i /tmp/intro-v74-source.mp4 \
             -an -vf "scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280" \
-            -c:v libx264 -preset medium -crf 27 -pix_fmt yuv420p -movflags +faststart \
+            -c:v libx264 -preset medium -crf 30 -pix_fmt yuv420p -movflags +faststart \
             kids/assets/kids-cinema/intro-v74.mp4
           test -s kids/assets/kids-cinema/intro-v74.mp4
           bytes="$(wc -c < kids/assets/kids-cinema/intro-v74.mp4)"
