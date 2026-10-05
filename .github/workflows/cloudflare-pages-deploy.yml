@@ -2,6 +2,9 @@ name: Deploy Besucher-App (Cloudflare Workers)
 
 on:
   workflow_dispatch:
+  schedule:
+    # Einmal täglich: Live-Hülle darf höchstens 4 Tage hinter main zurückliegen.
+    - cron: "30 4 * * *"
   push:
     branches:
       - main
@@ -283,7 +286,7 @@ jobs:
 
   deploy:
     needs: classify
-    if: needs.classify.outputs.shortlinks_only != 'true' && needs.classify.outputs.qsource_only != 'true' && needs.classify.outputs.preview_only != 'true'
+    if: github.event_name != 'schedule' && needs.classify.outputs.shortlinks_only != 'true' && needs.classify.outputs.qsource_only != 'true' && needs.classify.outputs.preview_only != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -436,3 +439,50 @@ jobs:
           grep -F -q 'BILDBEITRAG_HISTORICAL_REPAIR_V1247' "$SHARE_JS" || { echo "::error::Historischer Bildbeitrag-Fix live nicht aktiv"; exit 1; }
           grep -F -q 'HISTORICAL_SHARE_FALLBACKS' "$SHARE_JS" || { echo "::error::Historischer Bildbeitrag-Fallback live fehlt"; exit 1; }
           echo "Live Bildbeitrag-Renderer: Syntax + historischer Fix OK"
+
+  # Vergangenheit bleibt in Git. Live darf nur die letzten 4 Tage zurückliegen.
+  # Liegt die veröffentlichte Hülle weiter zurück oder auf einer kleineren Build-ID,
+  # wird der aktuelle main-Stand erneut veröffentlicht.
+  keep-recent:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Prüfen, ob die Live-Hülle älter als 4 Tage ist
+        id: stale
+        run: |
+          set -euo pipefail
+          LIVE="$(curl -fsS --max-time 25 "https://dar-al-tawhid.de/version.json?cb=$(date +%s)" || echo '{}')"
+          echo "$LIVE" | node -e '
+            let d=""; process.stdin.on("data",c=>d+=c); process.stdin.on("end",()=>{
+              const git=require("./version.json");
+              const live=JSON.parse(d||"{}");
+              const num=s=>{const m=String(s||"").match(/v(\d+)/); return m?Number(m[1]):0};
+              const gitN=num(git.buildId||git.appBuildId);
+              const liveN=num(live.buildId||live.appBuildId);
+              const gitAt=Date.parse(git.updatedAt||"")||0;
+              const liveAt=Date.parse(live.updatedAt||"")||0;
+              const fourDays=4*24*60*60*1000;
+              const behindBuild=liveN>0&&gitN>liveN;
+              const behindTime=gitAt&&liveAt&&(gitAt-liveAt)>fourDays;
+              const ancient=!liveAt||(Date.now()-liveAt)>fourDays&&gitN>liveN;
+              const stale=behindBuild||behindTime||ancient;
+              console.log(JSON.stringify({gitN,liveN,stale,behindBuild,behindTime,ancient}));
+              require("fs").appendFileSync(process.env.GITHUB_OUTPUT,"stale="+(stale?"true":"false")+"\n");
+            });
+          '
+
+      - name: Aktuellen Stand wieder veröffentlichen
+        if: steps.stale.outputs.stale == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
