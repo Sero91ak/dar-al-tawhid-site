@@ -2787,8 +2787,8 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/assets/kids-open-v95.css?v=97">
 
 
-<link rel="stylesheet" href="/kids/prophet-stories.css?v=30">
-<link rel="stylesheet" href="/kids/mubashshirun-stories.css?v=20">
+<link rel="stylesheet" href="/kids/prophet-stories.css?v=31">
+<link rel="stylesheet" href="/kids/mubashshirun-stories.css?v=21">
 <link rel="stylesheet" href="/kids/sahabiyyat-stories.css?v=5">
 <link rel="stylesheet" href="/kids/story-follow-reader.css?v=4">
 <link rel="stylesheet" href="/kids/story-hub.css?v=4">
@@ -3357,7 +3357,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v62-voice-flow1132";
+const KIDS_BUILD_ID="kids-shell-v65-stories1135";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -7076,7 +7076,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=3"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v62-voice-flow1132";
+  var KIDS_BUILD_ID="kids-shell-v65-stories1135";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -7092,7 +7092,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1132",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1135",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
