@@ -72,9 +72,10 @@ function ensureUi(){
   $("#ghBack").addEventListener("click",closeWorld);
 
   const player=document.createElement("section");player.id="ghPlayer";player.className="gh-player";player.setAttribute("aria-hidden","true");
-  player.innerHTML='<div class="gh-player-scroll" id="ghPlayerScroll"><section class="gh-player-hero"><img id="ghPlayerBg" class="gh-player-bg" src="" alt=""><span class="gh-player-shade" aria-hidden="true"></span><button id="ghPlayerBack" class="gh-player-back" type="button" aria-label="Zurück zur Auswahl">‹</button><div class="gh-player-copy"><div class="gh-player-kicker" id="ghPlayerKicker"></div><h2 id="ghPlayerTitle"></h2><div class="gh-player-ar" id="ghPlayerArabic" dir="rtl"></div><div class="gh-player-summary" id="ghPlayerSummary"></div></div></section><main class="gh-player-body"><section class="gh-controls"><div class="gh-main-controls"><button class="gh-skip" id="ghBack15" type="button">−15 s</button><button class="gh-play" id="ghPlay" type="button">Hören</button><button class="gh-skip" id="ghFwd15" type="button">+15 s</button></div><div class="gh-progress" id="ghProgress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div><div class="gh-time"><span id="ghCurrent">0:00</span><span id="ghTotal">0:00</span></div><div class="gh-player-actions"><button class="gh-read-toggle" id="ghReadToggle" type="button">Text lesen</button><button class="gh-read-toggle" id="ghFollow" type="button">Mitlesen</button></div><p class="gh-audio-note" id="ghAudioNote"></p></section><article class="gh-read" id="ghRead" hidden></article><section class="gh-sources"><strong>QUELLEN</strong><div id="ghSources"></div></section></main></div>';
+  player.innerHTML='<div class="gh-player-scroll" id="ghPlayerScroll"><section class="gh-player-hero"><img id="ghPlayerBg" class="gh-player-bg" src="" alt=""><span class="gh-player-shade" aria-hidden="true"></span><button id="ghPlayerBack" class="gh-player-back" type="button" aria-label="Zurück zur Auswahl">‹</button><button id="ghPlayerMin" class="gh-player-min" type="button" aria-label="Player minimieren">⌄</button><div class="gh-player-copy"><div class="gh-player-kicker" id="ghPlayerKicker"></div><h2 id="ghPlayerTitle"></h2><div class="gh-player-ar" id="ghPlayerArabic" dir="rtl"></div><div class="gh-player-summary" id="ghPlayerSummary"></div></div></section><main class="gh-player-body"><section class="gh-controls"><div class="gh-main-controls"><button class="gh-skip" id="ghBack15" type="button">−15 s</button><button class="gh-play" id="ghPlay" type="button">Hören</button><button class="gh-skip" id="ghFwd15" type="button">+15 s</button></div><div class="gh-progress" id="ghProgress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div><div class="gh-time"><span id="ghCurrent">0:00</span><span id="ghTotal">0:00</span></div><div class="gh-player-actions"><button class="gh-read-toggle" id="ghReadToggle" type="button">Text lesen</button><button class="gh-read-toggle" id="ghFollow" type="button">Mitlesen</button></div><p class="gh-audio-note" id="ghAudioNote"></p></section><article class="gh-read" id="ghRead" hidden></article><section class="gh-sources"><strong>QUELLEN</strong><div id="ghSources"></div></section></main></div>';
   document.body.appendChild(player);
   $("#ghPlayerBack").addEventListener("click",minimizePlayer);
+  $("#ghPlayerMin").addEventListener("click",minimizeAll);
   $("#ghPlay").addEventListener("click",toggleAudio);
   $("#ghBack15").addEventListener("click",()=>seek(-15));
   $("#ghFwd15").addEventListener("click",()=>seek(15));
@@ -83,10 +84,11 @@ function ensureUi(){
   $("#ghProgress").addEventListener("click",seekFromBar);
   $("#ghProgress").addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();seek(e.key==="ArrowLeft"?-15:15)}});
 
-  const mini=document.createElement("button");mini.id="ghMini";mini.className="gh-mini";mini.type="button";mini.setAttribute("aria-label","Aktuelle Hörgeschichte öffnen");
-  mini.innerHTML='<img id="ghMiniImg" src="" alt=""><span class="gh-mini-copy"><strong id="ghMiniTitle"></strong><span id="ghMiniMeta"></span></span><span class="gh-mini-play" id="ghMiniPlay" aria-hidden="true">▶</span>';
+  const mini=document.createElement("aside");mini.id="ghMini";mini.className="gh-mini";mini.setAttribute("aria-label","Aktuelle Hörgeschichte");
+  mini.innerHTML='<button id="ghMiniOpen" class="gh-mini-open" type="button" aria-label="Aktuelle Hörgeschichte öffnen"><img id="ghMiniImg" src="" alt=""><span class="gh-mini-copy"><strong id="ghMiniTitle"></strong><span id="ghMiniMeta"></span></span></button><button class="gh-mini-play" id="ghMiniPlay" type="button" aria-label="Wiedergabe starten">▶</button>';
   document.body.appendChild(mini);
-  mini.addEventListener("click",openPlayer);
+  $("#ghMiniOpen").addEventListener("click",openPlayer);
+  $("#ghMiniPlay").addEventListener("click",e=>{e.stopPropagation();toggleAudio()});
 
   reader=window.DARKidsFollowReader?.create({
     id:"universal-story",audio,
@@ -121,7 +123,7 @@ function installGestures(){
       if(onDown&&dy>Math.min(150,innerHeight*.18)&&Math.abs(dy)>Math.abs(dx)*1.35&&(dy/dt>.18||dy>190))onDown();
     },{passive:true});
   };
-  bind(world,closeWorld,null);bind(player,minimizePlayer,minimizePlayer);
+  bind(world,closeWorld,null);bind(player,minimizePlayer,minimizeAll);
 }
 
 function renderCategories(){
@@ -193,6 +195,14 @@ function minimizePlayer(){
   $("#ghWorld").removeAttribute("inert");if($("#ghWorld").classList.contains("open"))$("#ghWorld").removeAttribute("aria-hidden");
   renderMini();setTimeout(()=>$("#ghList [data-gh-id='"+CSS.escape(active?.id||"")+"']")?.focus(),0);
 }
+function minimizeAll(){
+  reader?.close();reader?.persist(true);
+  $("#ghPlayer")?.classList.remove("open");$("#ghPlayer")?.setAttribute("aria-hidden","true");
+  $("#ghWorld")?.classList.remove("open");$("#ghWorld")?.removeAttribute("inert");$("#ghWorld")?.setAttribute("aria-hidden","true");
+  document.documentElement.classList.remove("gh-player-open","gh-world-open");
+  const app=$(".app");if(app){app.removeAttribute("inert");app.removeAttribute("aria-hidden")}
+  renderMini();
+}
 let followMode=false,manualReadUntil=0,lastReadIndex=-1;
 function toggleRead(syncMode=false){
   const read=$("#ghRead");if(!read)return;
@@ -242,7 +252,7 @@ function renderMini(){
   const has=!!active&&(playing||Number(audio.currentTime)>0);
   mini.classList.toggle("show",has&&!$("#ghPlayer")?.classList.contains("open"));
   if(!has)return;
-  $("#ghMiniImg").src=artFor(active,activeCategory,false);$("#ghMiniTitle").textContent=active.name;$("#ghMiniMeta").textContent=(playing?"Läuft · ":"Pausiert · ")+formatTime(audio.currentTime);$("#ghMiniPlay").textContent=playing?"Ⅱ":"▶";
+  $("#ghMiniImg").src=artFor(active,activeCategory,false);$("#ghMiniTitle").textContent=active.name;$("#ghMiniMeta").textContent=(playing?"Läuft · ":"Pausiert · ")+formatTime(audio.currentTime);$("#ghMiniPlay").textContent=playing?"Ⅱ":"▶";$("#ghMiniPlay").setAttribute("aria-label",playing?"Wiedergabe pausieren":"Wiedergabe starten");
 }
 async function toggleAudio(){
   if(!active||busy)return;const meta=audioMeta(active);if(!meta?.url)return;
