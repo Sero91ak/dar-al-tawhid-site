@@ -1,7 +1,7 @@
 {
-  "buildId": "kids-shell-v65-stories1135",
+  "buildId": "kids-shell-v66-stories1135b",
   "label": "KIDS · V1.07.69",
-  "releasedAt": "2026-10-05T14:50:00+02:00",
+  "releasedAt": "2026-10-05T14:52:00+02:00",
   "note": "Kids v1135: Die Geschichtenseite verwendet jetzt die neu erzeugten lokalen Bildwelten direkt in der App: eine allgemeine historische Landschaft für Propheten, eine eigene historische Abendwelt für Ṣaḥābah, einen ruhigen historischen Innenhof ohne Personen für Ṣaḥābiyyāt und ein eigenes Motiv für „Die gefundene Münze“. Der doppelte Geschichten-Einstieg bleibt entfernt, die drei Hauptwelten sind gleichwertig aufgebaut und die Bottom-Navigation überdeckt keine Inhalte.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1135",
+    "serviceWorkerCache": "v1136",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
