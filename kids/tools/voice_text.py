@@ -2,11 +2,13 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 import unicodedata
+from pathlib import Path
 
-SYNTHESIS_REVISION = "kids-speech-flow-v2-20261005"
+SYNTHESIS_REVISION = "kids-speech-flow-v3-20261005"
 
 _ONES = [
     "null","eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun",
@@ -21,6 +23,9 @@ _DIGIT_TRANSLATION = str.maketrans(
     "٠١٢٣٤٥٦٧٨٩۰۱۲۳۴۵۶۷۸۹",
     "01234567890123456789",
 )
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_PRONUNCIATION_RULES = _REPO_ROOT / "data/pronunciation/pronunciation-rules.json"
+_ALIAS_BUCKETS = None
 
 
 def german_number(value: int) -> str:
@@ -51,8 +56,58 @@ def german_number(value: int) -> str:
     return str(n)
 
 
-def prepare_kids_voice_text(text: str) -> str:
-    """Prepare hidden TTS text; visible Kids content is not changed."""
+def _load_alias_buckets():
+    global _ALIAS_BUCKETS
+    if _ALIAS_BUCKETS is not None:
+        return _ALIAS_BUCKETS
+    buckets = {}
+    try:
+        data = json.loads(_PRONUNCIATION_RULES.read_text(encoding="utf-8"))
+        for rule in data.get("rules") or []:
+            needle = str(rule.get("string_to_replace") or "")
+            alias = str(rule.get("alias") or "")
+            if not needle or not alias or alias == needle:
+                continue
+            buckets.setdefault(needle[0], []).append((needle, alias))
+        for values in buckets.values():
+            values.sort(key=lambda row: len(row[0]), reverse=True)
+    except Exception:
+        buckets = {}
+    _ALIAS_BUCKETS = buckets
+    return buckets
+
+
+def apply_pronunciation_aliases(text: str) -> str:
+    """Fallback only when no provider pronunciation dictionary is connected."""
+    value = str(text or "")
+    buckets = _load_alias_buckets()
+    if not value or not buckets:
+        return value
+    out = []
+    pos = 0
+    while pos < len(value):
+        hit = None
+        for needle, alias in buckets.get(value[pos], ()):
+            if value.startswith(needle, pos):
+                hit = (needle, alias)
+                break
+        if hit is None:
+            out.append(value[pos])
+            pos += 1
+            continue
+        out.append(hit[1])
+        pos += len(hit[0])
+    return "".join(out)
+
+
+def prepare_kids_voice_text(text: str, *, use_pronunciation_aliases: bool = False) -> str:
+    """Prepare hidden TTS text; visible Kids content is not changed.
+
+    Raw digits are converted to deterministic German speech before synthesis,
+    especially Sūrah/Āyah references and quiz answer numbers. If the external
+    pronunciation dictionary is unavailable, the shared DĀR fallback aliases
+    can also be applied without changing the displayed app text.
+    """
     value = unicodedata.normalize("NFC", str(text or ""))
     value = value.translate(_DIGIT_TRANSLATION)
     value = value.replace("\u00a0", " ").replace("\u202f", " ")
@@ -105,7 +160,10 @@ def prepare_kids_voice_text(text: str) -> str:
     value = re.sub(r"[ \t]+", " ", value)
     value = re.sub(r"\s+([,;:!?؟])", r"\1", value)
     value = re.sub(r"([,;:!?؟])(?=\S)", r"\1 ", value)
-    return value.strip()
+    value = value.strip()
+    if use_pronunciation_aliases:
+        value = apply_pronunciation_aliases(value)
+    return value
 
 
 def _self_test() -> None:
@@ -123,19 +181,26 @@ def _self_test() -> None:
         actual = prepare_kids_voice_text(source)
         if actual != expected:
             raise SystemExit(f"voice-text self-test failed: {source!r} -> {actual!r} != {expected!r}")
-    print(f"Kids voice text self-test OK · {len(cases)} cases · {SYNTHESIS_REVISION}")
+    if _PRONUNCIATION_RULES.exists() and _load_alias_buckets():
+        sample = prepare_kids_voice_text("Tawḥīd", use_pronunciation_aliases=True)
+        if sample == "Tawḥīd":
+            raise SystemExit("voice-text self-test failed: pronunciation alias fallback inactive")
+    print(f"Kids voice text self-test OK · {len(cases)} number cases · {SYNTHESIS_REVISION}")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("text", nargs="?")
     parser.add_argument("--self-test", action="store_true")
+    parser.add_argument("--pronunciation-aliases", action="store_true")
     args = parser.parse_args()
     if args.self_test:
         _self_test()
         return
     source = args.text if args.text is not None else sys.stdin.read()
-    sys.stdout.write(prepare_kids_voice_text(source))
+    sys.stdout.write(
+        prepare_kids_voice_text(source, use_pronunciation_aliases=args.pronunciation_aliases)
+    )
 
 
 if __name__ == "__main__":
