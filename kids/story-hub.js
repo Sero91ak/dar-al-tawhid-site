@@ -92,7 +92,7 @@ function ensureUi(){
   $("#ghBack").addEventListener("click",closeWorld);
 
   const player=document.createElement("section");player.id="ghPlayer";player.className="gh-player";player.setAttribute("aria-hidden","true");
-  player.innerHTML='<div class="gh-player-scroll" id="ghPlayerScroll"><section class="gh-player-hero"><img id="ghPlayerBg" class="gh-player-bg" src="" alt=""><span class="gh-player-shade" aria-hidden="true"></span><button id="ghPlayerBack" class="gh-player-back" type="button" aria-label="Zurück zur Auswahl">‹</button><button id="ghPlayerMin" class="gh-player-min" type="button" aria-label="Player minimieren">⌄</button><div class="gh-player-copy"><div class="gh-player-kicker" id="ghPlayerKicker"></div><h2 id="ghPlayerTitle"></h2><div class="gh-player-ar" id="ghPlayerArabic" dir="rtl"></div><div class="gh-player-summary" id="ghPlayerSummary"></div></div></section><main class="gh-player-body"><section class="gh-controls" id="ghControls"><div class="gh-podcast-meta" aria-hidden="true"><img id="ghControlArt" src="" alt=""><span><small id="ghControlKicker">HÖRGESCHICHTE</small><strong id="ghControlTitle"></strong></span></div><div class="gh-main-controls"><button class="gh-skip" id="ghBack15" type="button">−15 s</button><button class="gh-play" id="ghPlay" type="button">Hören</button><button class="gh-skip" id="ghFwd15" type="button">+15 s</button></div><div class="gh-progress" id="ghProgress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div><div class="gh-time"><span id="ghCurrent">0:00</span><span id="ghTotal">0:00</span></div><div class="gh-player-actions"><button class="gh-read-toggle" id="ghReadToggle" type="button" aria-expanded="false" aria-controls="ghRead">Nur lesen</button><button class="gh-read-toggle" id="ghFollow" type="button" aria-pressed="false" aria-controls="ghRead">Hören &amp; mitlesen</button></div><p class="gh-audio-note" id="ghAudioNote"></p></section><article class="gh-read" id="ghRead" hidden></article><section class="gh-sources"><strong>QUELLEN</strong><div id="ghSources"></div></section><section class="gh-next" id="ghNext" hidden><small>WEITER ENTDECKEN</small><button id="ghNextButton" type="button"><img id="ghNextImg" src="" alt=""><span><em id="ghNextMeta"></em><strong id="ghNextTitle"></strong></span><b aria-hidden="true">›</b></button></section></main></div>';
+  player.innerHTML='<div class="gh-player-scroll" id="ghPlayerScroll"><section class="gh-player-hero"><img id="ghPlayerBg" class="gh-player-bg" src="" alt=""><span class="gh-player-shade" aria-hidden="true"></span><button id="ghPlayerBack" class="gh-player-back" type="button" aria-label="Zurück zur Auswahl">‹</button><button id="ghPlayerMin" class="gh-player-min" type="button" aria-label="Player minimieren">⌄</button><div class="gh-player-copy"><div class="gh-player-kicker" id="ghPlayerKicker"></div><h2 id="ghPlayerTitle"></h2><div class="gh-player-ar" id="ghPlayerArabic" dir="rtl"></div><div class="gh-player-summary" id="ghPlayerSummary"></div></div></section><main class="gh-player-body"><section class="gh-controls" id="ghControls"><div class="gh-main-controls"><button class="gh-skip" id="ghBack15" type="button">−15 s</button><button class="gh-play" id="ghPlay" type="button">Hören</button><button class="gh-skip" id="ghFwd15" type="button">+15 s</button></div><div class="gh-progress" id="ghProgress" role="slider" tabindex="0" aria-label="Wiedergabeposition"><span></span></div><div class="gh-time"><span id="ghCurrent">0:00</span><span id="ghTotal">0:00</span></div><div class="gh-player-actions"><button class="gh-read-toggle" id="ghReadToggle" type="button" aria-expanded="false" aria-controls="ghRead">Nur lesen</button><button class="gh-read-toggle" id="ghFollow" type="button" aria-pressed="false" aria-controls="ghRead">Hören &amp; mitlesen</button></div><p class="gh-audio-note" id="ghAudioNote"></p></section><article class="gh-read" id="ghRead" hidden></article><section class="gh-sources"><strong>QUELLEN</strong><div id="ghSources"></div></section><section class="gh-next" id="ghNext" hidden><small>WEITER ENTDECKEN</small><button id="ghNextButton" type="button"><img id="ghNextImg" src="" alt=""><span><em id="ghNextMeta"></em><strong id="ghNextTitle"></strong></span><b aria-hidden="true">›</b></button></section></main></div>';
   document.body.appendChild(player);
   $("#ghPlayerBack").addEventListener("click",minimizePlayer);
   $("#ghPlayerMin").addEventListener("click",minimizeAll);
@@ -223,17 +223,12 @@ function renderPlayer(){
   $("#ghPlayerTitle").textContent=storyName(active);
   $("#ghPlayerArabic").textContent=arabic(active,activeCategory);
   $("#ghPlayerSummary").textContent=active.summary||"";
-  const controlArt=$("#ghControlArt"),controls=$("#ghControls");
-  if(controlArt){controlArt.src=img||artFor(active,activeCategory,false)||"";controlArt.alt=""}
-  const controlTitle=$("#ghControlTitle");if(controlTitle)controlTitle.textContent=storyName(active);
-  const controlKicker=$("#ghControlKicker");if(controlKicker)controlKicker.textContent=cat.label.toUpperCase()+" · HÖRGESCHICHTE";
-  if(controls){const safeArt=String(img||artFor(active,activeCategory,false)||"").replace(/["\\\n\r]/g,"");controls.style.setProperty("--gh-podcast-art",safeArt?'url("'+safeArt+'")':"none")}
   $("#ghRead").innerHTML=text.split(/\n{2,}/).map((p,i)=>'<p data-gh-p="'+i+'">'+esc(p)+"</p>").join("");
   $("#ghSources").textContent=(active.sourceRefs||[]).join(" · ");
   $("#ghReadToggle").hidden=isYoung();
   $("#ghFollow").hidden=isYoung()||!meta?.url;
   $(".gh-player-actions").hidden=isYoung();
-  $("#ghFollow").textContent="Hören & mitlesen";
+  $("#ghFollow").textContent="Mitlesen";
   setReadMode("closed",{restore:false});
   const hasAudio=!!meta?.url;
   $("#ghProgress").hidden=!hasAudio;
@@ -276,19 +271,6 @@ function clearReadHighlights(){
   $("#ghRead")?.querySelectorAll("[data-gh-p].active").forEach(p=>p.classList.remove("active"));
   lastReadIndex=-1;
 }
-function scrollPlayerElementIntoView(el,{center=false,instant=false}={}){
-  const scroll=$("#ghPlayerScroll");if(!scroll||!el)return;
-  const sr=scroll.getBoundingClientRect(),er=el.getBoundingClientRect(),controls=$("#ghControls");
-  const sticky=Math.min((controls?.offsetHeight||0)+12,scroll.clientHeight*.46);
-  const available=Math.max(180,scroll.clientHeight-sticky);
-  const relativeTop=er.top-sr.top;
-  const delta=center
-    ?relativeTop-sticky-Math.max(20,(available-Math.min(er.height,available*.82))/2)
-    :relativeTop-sticky-14;
-  const maxTop=Math.max(0,scroll.scrollHeight-scroll.clientHeight);
-  const top=Math.max(0,Math.min(maxTop,scroll.scrollTop+delta));
-  scroll.scrollTo({top,behavior:instant?"auto":"smooth"});
-}
 function setReadMode(next,{restore=false}={}){
   const read=$("#ghRead"),toggle=$("#ghReadToggle"),follow=$("#ghFollow"),scroll=$("#ghPlayerScroll"),player=$("#ghPlayer");
   if(!read||!toggle)return;
@@ -299,7 +281,7 @@ function setReadMode(next,{restore=false}={}){
   player?.classList.toggle("gh-reading",open);
   player?.classList.toggle("gh-following",open&&sync);
   player?.classList.toggle("gh-readonly",open&&!sync);
-  toggle.textContent=open?"Text schließen":(isYoung()?"Mitlesen für Erwachsene":"Nur lesen");
+  toggle.textContent=open?"Text schließen":(isYoung()?"Mitlesen für Erwachsene":"Text lesen");
   toggle.setAttribute("aria-expanded",String(open));
   toggle.setAttribute("aria-pressed",String(open&&!sync));
   if(follow){
@@ -316,7 +298,7 @@ function setReadMode(next,{restore=false}={}){
   }
   requestAnimationFrame(()=>{
     if(sync)syncReadAlong(true);
-    else scrollPlayerElementIntoView(read,{center:false,instant:false});
+    else { try{read.scrollTo({top:0,behavior:"auto"})}catch(_){read.scrollTop=0} }
   });
 }
 function toggleRead(syncMode=false){
@@ -349,8 +331,10 @@ function readIndexAtTime(){
   let sum=0;for(let i=0;i<weights.length;i++){sum+=weights[i];if(target<=sum)return i}return ps.length-1;
 }
 function scrollReadParagraphIntoView(el,instant=false){
-  if(!el)return;
-  scrollPlayerElementIntoView(el,{center:true,instant});
+  const read=$("#ghRead");if(!read||!el)return;
+  const rr=read.getBoundingClientRect(),er=el.getBoundingClientRect();
+  const top=Math.max(0,read.scrollTop+(er.top-rr.top)-(read.clientHeight-er.height)/2);
+  try{read.scrollTo({top,behavior:instant?"auto":"smooth"})}catch(_){read.scrollTop=top}
 }
 function syncReadAlong(force=false){
   const read=$("#ghRead");if(!read||read.hidden||(!followMode&&!force))return;
