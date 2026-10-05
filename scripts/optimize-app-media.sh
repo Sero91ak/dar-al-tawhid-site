@@ -15,9 +15,11 @@ skipped_count=0
 
 is_protected() {
   local f="$1"
-  [[ "$f" =~ (^|/)(Assets\.xcassets|AppIcon|icons?|logos?|favicons?|watermarks?|badges?)(/|$) ]] && return 0
-  [[ "$f" =~ (^|/)(originals?|masters?|source|raw)(/|$) ]] && return 0
+  [[ "$f" =~ (^|/)(Assets\.xcassets|AppIcon|app-icons|icons?|logos?|favicons?|watermarks?|badges?|seals?)(/|$) ]] && return 0
+  [[ "$(basename "$f")" =~ (logo|watermark|favicon) ]] && return 0
+  [[ "$f" =~ (^|/)(originals?|masters?|sources?|raw)(/|$) ]] && return 0
   [[ "$f" =~ (-master|\.master)\.(png|jpe?g|webp|mp4)$ ]] && return 0
+  [[ "$f" == "kids/assets/kids-brand/logo-mark.png" ]] && return 0
   return 1
 }
 
@@ -48,26 +50,37 @@ opt_image() {
   ext="${f##*.}"
   ext="${ext,,}"
   size=$(stat -c%s "$f")
-  (( size >= 180000 )) || { skipped_count=$((skipped_count + 1)); return; }
+  (( size >= 120000 )) || { skipped_count=$((skipped_count + 1)); return; }
 
   case "$ext" in
     jpg|jpeg)
       tmp="$TMP_DIR/$(basename "$f").jpg"
-      convert "$f" -auto-orient -strip -resize '2880x2880>' -sampling-factor 4:2:0 -interlace Plane -quality 82 "$tmp" 2>/dev/null || return 0
+      convert "$f" -auto-orient -strip -resize '2200x2200>' -sampling-factor 4:2:0 -interlace Plane -quality 78 "$tmp" 2>/dev/null || return 0
       replace_if_smaller "$f" "$tmp"
       ;;
     png)
       local pre="$TMP_DIR/$(basename "$f").pre.png"
       tmp="$TMP_DIR/$(basename "$f").png"
       convert "$f" -auto-orient -strip -resize '2880x2880>' "$pre" 2>/dev/null || cp "$f" "$pre"
-      if pngquant --quality=74-90 --speed 2 --strip --force --output "$tmp" -- "$pre" >/dev/null 2>&1; then
+      if pngquant --quality=60-82 --speed 2 --strip --force --output "$tmp" -- "$pre" >/dev/null 2>&1; then
         replace_if_smaller "$f" "$tmp"
       fi
       rm -f "$pre"
+      # Zweiter Pass nur für weiterhin sehr große Laufzeit-PNGs.
+      # Ziel: unter 1,2 MB bleiben, ohne normale Assets unnötig aggressiv anzufassen.
+      if (( $(stat -c%s "$f") > 1200000 )); then
+        local tight_pre="$TMP_DIR/$(basename "$f").tight.pre.png"
+        local tight="$TMP_DIR/$(basename "$f").tight.png"
+        convert "$f" -auto-orient -strip -resize '2000x2000>' "$tight_pre" 2>/dev/null || cp "$f" "$tight_pre"
+        if pngquant --quality=52-76 --speed 1 --strip --force --output "$tight" -- "$tight_pre" >/dev/null 2>&1; then
+          replace_if_smaller "$f" "$tight"
+        fi
+        rm -f "$tight_pre" "$tight"
+      fi
       ;;
     webp)
       tmp="$TMP_DIR/$(basename "$f").webp"
-      convert "$f" -auto-orient -strip -resize '2880x2880>' -quality 80 "$tmp" 2>/dev/null || return 0
+      convert "$f" -auto-orient -strip -resize '2200x2200>' -quality 76 "$tmp" 2>/dev/null || return 0
       replace_if_smaller "$f" "$tmp"
       ;;
   esac
@@ -76,9 +89,23 @@ opt_image() {
 opt_video() {
   local f="$1" tmp size
   size=$(stat -c%s "$f")
-  (( size >= 1200000 )) || { skipped_count=$((skipped_count + 1)); return; }
+  (( size >= 800000 )) || { skipped_count=$((skipped_count + 1)); return; }
   tmp="$TMP_DIR/$(basename "$f").mp4"
-  ffmpeg -hide_banner -loglevel error -y -i "$f"     -map 0:v:0 -map '0:a?'     -vf "scale='min(1920,iw)':'min(1920,ih)':force_original_aspect_ratio=decrease"     -c:v libx264 -preset medium -crf 27 -pix_fmt yuv420p     -c:a aac -b:a 96k -movflags +faststart     "$tmp" || { rm -f "$tmp"; return 0; }
+  if [[ "$f" == kids/assets/kids-cinema/* ]]; then
+    ffmpeg -hide_banner -loglevel error -y -i "$f" \
+      -map 0:v:0 -map '0:a?' \
+      -vf "scale='min(720,iw)':'min(1280,ih)':force_original_aspect_ratio=decrease" \
+      -c:v libx264 -preset medium -crf 30 -pix_fmt yuv420p \
+      -c:a aac -b:a 64k -movflags +faststart \
+      "$tmp" || { rm -f "$tmp"; return 0; }
+  else
+    ffmpeg -hide_banner -loglevel error -y -i "$f" \
+      -map 0:v:0 -map '0:a?' \
+      -vf "scale='min(1920,iw)':'min(1920,ih)':force_original_aspect_ratio=decrease" \
+      -c:v libx264 -preset medium -crf 29 -pix_fmt yuv420p \
+      -c:a aac -b:a 80k -movflags +faststart \
+      "$tmp" || { rm -f "$tmp"; return 0; }
+  fi
   replace_if_smaller "$f" "$tmp"
 }
 
@@ -99,7 +126,7 @@ opt_voice() {
   case "$ext" in
     m4a|aac)
       tmp="$TMP_DIR/$(basename "$f").m4a"
-      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a aac -b:a 64k -movflags +faststart "$tmp" || return 0
+      ffmpeg -hide_banner -loglevel error -y -i "$f" -vn -ac 1 -ar 48000 -c:a aac -b:a 56k -movflags +faststart "$tmp" || return 0
       ;;
     mp3)
       tmp="$TMP_DIR/$(basename "$f").mp3"
@@ -141,3 +168,7 @@ python3 scripts/update-local-media-metadata.py
 
 saved=$((before_total - after_total))
 printf 'MEDIA_OPTIMIZE_SUMMARY changed=%s skipped=%s saved_bytes=%s\n' "$changed_count" "$skipped_count" "$saved"
+
+# final-residual-voice-pass-20261005
+
+# execute-final-residual-after-cache-fix

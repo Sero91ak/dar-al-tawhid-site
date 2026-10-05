@@ -34,7 +34,7 @@ jobs:
       - name: Mix final cinema master
         run: |
           set -euo pipefail
-          ffmpeg -hide_banner -y             -i kids/assets/kids-cinema/intro-v1.mp4             -i /tmp/kids-voice.mp3             -i /tmp/kids-sfx.mp3             -filter_complex "[1:a]volume=1.0,adelay=220|220[voice];[2:a]volume=0.16[sfx];[voice][sfx]amix=inputs=2:duration=longest:dropout_transition=0,alimiter=limit=0.93,apad=pad_dur=1.0[mix]"             -map 0:v:0 -map "[mix]"             -vf "scale='min(1920,iw)':'min(1920,ih)':force_original_aspect_ratio=decrease" -c:v libx264 -preset medium -crf 27 -pix_fmt yuv420p -c:a aac -b:a 96k -t 9.3 -movflags +faststart             kids/assets/kids-cinema/intro-final.mp4
+          ffmpeg -hide_banner -y             -i kids/assets/kids-cinema/intro-v1.mp4             -i /tmp/kids-voice.mp3             -i /tmp/kids-sfx.mp3             -filter_complex "[1:a]volume=1.0,adelay=220|220[voice];[2:a]volume=0.16[sfx];[voice][sfx]amix=inputs=2:duration=longest:dropout_transition=0,alimiter=limit=0.93,apad=pad_dur=1.0[mix]"             -map 0:v:0 -map "[mix]"             -vf "scale='min(1920,iw)':'min(1920,ih)':force_original_aspect_ratio=decrease" -c:v libx264 -preset medium -crf 30 -pix_fmt yuv420p -c:a aac -b:a 64k -t 9.3 -movflags +faststart             kids/assets/kids-cinema/intro-final.mp4
           test -s kids/assets/kids-cinema/intro-final.mp4
       - name: Commit final master
         run: |

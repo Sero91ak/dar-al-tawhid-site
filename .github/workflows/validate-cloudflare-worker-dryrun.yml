@@ -1,0 +1,35 @@
+name: Validate Cloudflare Worker Build
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'cloudflare/**'
+      - 'wrangler.toml'
+      - '.assetsignore'
+      - '.github/workflows/validate-cloudflare-worker-dryrun.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref || 'main' }}
+          fetch-depth: 1
+
+      - name: Install Wrangler
+        run: npm ci --ignore-scripts
+
+      - name: Validate Worker bundle and static assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/wrangler-dryrun
+          npx wrangler deploy --dry-run --outdir /tmp/wrangler-dryrun
+          find /tmp/wrangler-dryrun -maxdepth 2 -type f -printf '%s %p\n' | sort -nr | head -50
