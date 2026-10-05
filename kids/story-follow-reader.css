@@ -1,5 +1,5 @@
 /* DĀR AL TAWḤĪD Kids — shared story follow-along reader v2 */
-.kids-follow-reader{display:none;position:fixed;z-index:280;inset:0;align-items:flex-end;justify-content:center;padding:0;background:rgba(2,13,21,.66);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.kids-follow-reader{display:none;position:fixed;z-index:30050;inset:0;align-items:flex-end;justify-content:center;padding:0;background:rgba(2,13,21,.66);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
 .kids-follow-reader.open{display:flex}
 .kfr-sheet{width:min(820px,100%);max-height:min(76dvh,760px);display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(239,203,121,.24);border-bottom:0;border-radius:30px 30px 0 0;background:linear-gradient(180deg,#0a2b3a 0%,#071d2a 100%);box-shadow:0 -24px 70px rgba(0,0,0,.36);color:#f7f2e9;padding-bottom:env(safe-area-inset-bottom)}
 .kfr-head{position:relative;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:18px 18px 10px;border-bottom:1px solid rgba(255,255,255,.07)}
@@ -81,4 +81,16 @@ html.kids-follow-reader-open{overflow:hidden!important}
   .kids-follow-reader.audio-only .kfr-sheet{
     max-height:min(58dvh,500px)!important;
   }
+}
+
+/* v5 · dedicated focus modes: no parent-page jump, exact internal reader scroll */
+html.kids-follow-reader-open{overflow:hidden!important;overscroll-behavior:none!important}
+.kids-follow-reader[data-reader-view="read"] .kfr-controls{display:none}
+.kids-follow-reader[data-reader-view="read"] .kfr-sheet{max-height:min(92dvh,900px)}
+.kids-follow-reader[data-reader-view="read"] .kfr-read{padding-top:22px;scroll-padding-block:20%}
+.kids-follow-reader[data-reader-view="read"] .kfr-read p{color:rgba(248,246,240,.88)}
+.kids-follow-reader[data-reader-view="read"] .kfr-read p.active,
+.kids-follow-reader[data-reader-view="read"] .kfr-read p.past{color:rgba(248,246,240,.88);background:transparent;border-color:transparent}
+@media(max-width:620px){
+  .kids-follow-reader[data-reader-view="read"] .kfr-sheet{max-height:94dvh}
 }
