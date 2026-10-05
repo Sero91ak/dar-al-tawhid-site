@@ -19,6 +19,7 @@ is_protected() {
   [[ "$(basename "$f")" =~ (logo|watermark|favicon) ]] && return 0
   [[ "$f" =~ (^|/)(originals?|masters?|sources?|raw)(/|$) ]] && return 0
   [[ "$f" =~ (-master|\.master)\.(png|jpe?g|webp|mp4)$ ]] && return 0
+  [[ "$f" == "kids/assets/kids-brand/logo-mark.png" ]] && return 0
   return 1
 }
 
