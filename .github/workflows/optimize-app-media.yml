@@ -5,8 +5,7 @@ on:
     branches: [main]
     paths:
       - 'assets/**'
-      - 'kids/**'
-      - 'content/admin/change-scope-lock.json'
+      - 'kids/assets/**'
       - 'apple-tv/**'
       - 'ios/**'
       - 'voice-studio/**'
