@@ -1560,7 +1560,9 @@
     ],
     "sourceMetaOutsideNarration": true,
     "noAgeShortening": true,
-    "biographyLongForm": true
+    "biographyLongForm": true,
+    "biographyMinimumMasterWords": 850,
+    "ageChangesPresentationOnly": true
   },
   "mobileVoiceApp": {
     "enabled": true,
@@ -1854,12 +1856,15 @@
     "singleMasterStory": true,
     "uiTab": "Ṣaḥābiyyāt · 14",
     "fullBiographyMaster": true,
-    "minMasterWords": 800,
+    "minMasterWords": 850,
     "wordCountVisible": true,
     "estimatedDurationVisible": true,
     "voiceReferenceWpm": 147,
     "noAgeShortening": true,
-    "source": "/kids/data/sahabiyyat-stories.json"
+    "source": "/kids/data/sahabiyyat-stories.json",
+    "currentMasterWordRange": "884–993",
+    "sameMasterAcrossAges": true,
+    "masterDataVersion": 23
   },
   "engineConnectionRepair": {
     "enabled": true,
