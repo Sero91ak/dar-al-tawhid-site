@@ -1,11 +1,11 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1122";
-const KIDS_BUILD_ID="kids-shell-v52-story-controls-sahabiyyat1122";
+const CACHE_NAME="dar-al-tawhid-kids-v1123";
+const KIDS_BUILD_ID="kids-shell-v53-dua-quiz-art1123";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
   "/kids/manifest.webmanifest",
   "/kids/version.json",
-  "/kids/section-heroes-v1095.css?v=1097-real3",
+  "/kids/section-heroes-v1095.css?v=1123-dua-quiz-art",
   "/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",
   "/kids/assets/kids-art/section-quran-v1090.jpg?v=1090",
   "/kids/assets/kids-art/section-parents-v1097.png?v=1097-real3",
