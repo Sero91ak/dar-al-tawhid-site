@@ -1038,7 +1038,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             let data = pipe.fileHandleForReading.readDataToEndOfFile()
             guard let raw = String(data: data, encoding: .utf8) else { return }
             let own = getpid()
-            let pids = raw.split(whereSeparator: { $0.isWhitespace }).compactMap { pid_t($0) }.filter { $0 != own }
+            let pids = raw.split(whereSeparator: { $0.isWhitespace }).compactMap { Int32(String($0)) }.filter { $0 != own }
             for pid in pids { kill(pid, SIGTERM) }
             if !pids.isEmpty { usleep(350_000) }
             for pid in pids where kill(pid, 0) == 0 { kill(pid, SIGKILL) }
