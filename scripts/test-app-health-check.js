@@ -175,12 +175,6 @@ for (const marker of [
 ]) {
   if (!utilityShell.includes(marker)) fail(`area-utility-v1299.css: Utility-Authority fehlt: ${marker}`);
 }
-if (!worker.includes("area-utility-v1299.css")) {
-  fail("test-app-worker.js: area-utility-v1299.css fehlt in finaler Authority");
-} else {
-  ok("test-app-worker.js: Utility-Surface v1299 aktiv");
-}
-
 const heroDir = path.join(ROOT, "test/assets/area-heroes-v1290");
 if (!fs.existsSync(heroDir)) {
   fail("test/assets/area-heroes-v1290 fehlt");
@@ -195,6 +189,11 @@ if (!/dar-al-tawhid-offline-light-v\d+/.test(sw)) fail("service-worker.js: CACHE
 else ok("service-worker.js: CACHE_VERSION vorhanden");
 
 const worker = read("cloudflare/test-app-worker.js");
+if (!worker.includes("area-utility-v1299.css")) {
+  fail("test-app-worker.js: area-utility-v1299.css fehlt in finaler Authority");
+} else {
+  ok("test-app-worker.js: Utility-Surface v1299 aktiv");
+}
 if (!worker.includes("Response.redirect")) fail("test-app-worker.js: Root-Redirect fehlt");
 else ok("test-app-worker.js: Root-Redirect vorhanden");
 const areaAuthorityFiles = [
