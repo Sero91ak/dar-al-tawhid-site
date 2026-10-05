@@ -478,6 +478,7 @@ function updatePlayButton(){
 }
 async function toggleAudio(){
   if(!active||busy)return;
+  try{window.DARKidsStoryHub?.stop?.()}catch(_){}
   const meta=audioMeta(active);
   if(!meta?.url)return;
   if(playing){audio.pause();return}
