@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1112";
-const KIDS_BUILD_ID="kids-shell-v42-sahabiyyat1112";
+const CACHE_NAME="dar-al-tawhid-kids-v1113";
+const KIDS_BUILD_ID="kids-shell-v43-media-ondemand1113";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -139,7 +139,8 @@ self.addEventListener("activate",function(event){
     }).then(function(){
       return self.clients.claim();
     }).then(function(){
-      fillCache(PRECACHE.filter(function(url){return CORE_PRECACHE.indexOf(url)<0}));
+      // Große Bilder und Zusatzmedien nicht mehr automatisch vorladen.
+      // Sie werden erst beim tatsächlichen Öffnen des Bereichs geladen und danach gecacht.
       return self.clients.matchAll({type:"window",includeUncontrolled:true});
     }).then(function(clients){
       return Promise.all(clients.map(function(client){
