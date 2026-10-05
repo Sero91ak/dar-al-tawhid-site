@@ -466,7 +466,20 @@ EXPECTED_ENGINE_VERSION="$(/usr/bin/awk -F'"' '/^ENGINE_VERSION="/ {print $2}' "
 [ -n "$EXPECTED_ENGINE_VERSION" ] || EXPECTED_ENGINE_VERSION="unknown"
 PAIR_TOKEN_FILE="$TARGET/ipad-pairing-token.txt"
 PAIR_TOKEN=""
-[ -s "$PAIR_TOKEN_FILE" ] && PAIR_TOKEN="$(tr -d '\r\n ' < "$PAIR_TOKEN_FILE")"
+
+ensure_pair_token() {
+  mkdir -p "$TARGET"
+  if [ ! -s "$PAIR_TOKEN_FILE" ]; then
+    umask 077
+    PAIR_TOKEN="$(/usr/bin/uuidgen | tr -d '-' | tr '[:upper:]' '[:lower:]')"
+    [ -n "$PAIR_TOKEN" ] && printf '%s\n' "$PAIR_TOKEN" > "$PAIR_TOKEN_FILE"
+    chmod 600 "$PAIR_TOKEN_FILE" >/dev/null 2>&1 || true
+  else
+    PAIR_TOKEN="$(tr -d '\r\n ' < "$PAIR_TOKEN_FILE")"
+  fi
+}
+
+ensure_pair_token
 SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
 NATIVE="$SELF_DIR/DARVoiceStudioNative"
 LOG="$TARGET/app-launch.log"
@@ -478,10 +491,15 @@ engine_is_current() {
   local body
   body="$(/usr/bin/curl -fsS --max-time 1 "$HEALTH" 2>/dev/null || true)"
   [ -n "$body" ] || return 1
-  printf '%s' "$body" | /usr/bin/grep -Eq '"engine_version"[[:space:]]*:[[:space:]]*"'"$EXPECTED_ENGINE_VERSION"'"' || return 1
-  # Eine nur auf 127.0.0.1 gebundene Engine ist für Mac zwar gesund, aber für
-  # iPhone/iPad unbrauchbar. Der Launcher akzeptiert deshalb nur den aktuellen
-  # Release MIT aktivem, token-geschütztem Companion-Modus.
+  # Für die Mac-App zählt zuerst die lokale Engine-Verbindung. Companion darf
+  # niemals den Mac-Start blockieren oder eine gesunde Engine in Neustartschleifen schicken.
+  printf '%s' "$body" | /usr/bin/grep -Eq '"engine_version"[[:space:]]*:[[:space:]]*"'"$EXPECTED_ENGINE_VERSION"'"'
+}
+
+engine_companion_ready() {
+  local body
+  body="$(/usr/bin/curl -fsS --max-time 1 "$HEALTH" 2>/dev/null || true)"
+  [ -n "$body" ] || return 1
   printf '%s' "$body" | /usr/bin/grep -Eq '"companion_mode"[[:space:]]*:[[:space:]]*true'
 }
 
@@ -521,7 +539,12 @@ engine_is_current() {
 
   if engine_is_current; then
     export DAR_VOICE_ENGINE_OWNER=launcher
-    echo "Serhat Engine bereit · Launcher bleibt alleiniger Engine-Besitzer."
+    if engine_companion_ready; then
+      echo "Serhat Engine bereit · Mac + Companion verbunden."
+    else
+      echo "Serhat Engine bereit · Mac verbunden; Companion wird separat repariert."
+    fi
+    echo "Launcher bleibt alleiniger Engine-Besitzer."
   else
     unset DAR_VOICE_ENGINE_OWNER
     echo "Engine-Health noch nicht bereit · native App übernimmt einmalige Recovery."
