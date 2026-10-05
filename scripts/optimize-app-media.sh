@@ -158,7 +158,8 @@ if [[ "$MODE" == "--residual" ]]; then
     "kids/assets/kids-cinema/intro-ios.mp4" \
     "kids/assets/kids-cinema/intro-v74.mp4" \
     "kids/assets/prophet-story-audio/adam/story.mp3" \
-    "kids/assets/prophet-story-audio/muhammad/story.mp3"
+    "kids/assets/prophet-story-audio/muhammad/story.mp3" \
+    "kids/assets/prophet-story-audio/idris/story.mp3"
   do
     process_one "$f"
   done
