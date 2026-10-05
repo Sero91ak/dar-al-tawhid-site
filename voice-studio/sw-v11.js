@@ -1,4 +1,4 @@
-const CACHE="dar-voice-studio-v78";
+const CACHE="dar-voice-studio-v79";
 const SHELL=[
   "/voice-studio/",
   "/voice-studio/index.html",
@@ -7,6 +7,7 @@ const SHELL=[
   "/voice-studio/mubashshirun-pack.js",
   "/voice-studio/alphabet-audio-studio.js",
   "/voice-studio/manifest.webmanifest",
+  "/voice-studio/mobile-manifest.webmanifest",
   "/voice-studio/version.json",
   "/voice-studio/voice-studio-icon.png",
   "/data/pronunciation/pronunciation-rules.json",
@@ -49,6 +50,7 @@ self.addEventListener("fetch",event=>{
     url.pathname==="/voice-studio/mubashshirun-pack.js" ||
     url.pathname==="/voice-studio/alphabet-audio-studio.js" ||
     url.pathname==="/voice-studio/manifest.webmanifest" ||
+    url.pathname==="/voice-studio/mobile-manifest.webmanifest" ||
     url.pathname==="/voice-studio/version.json" ||
     url.pathname==="/voice-studio/voice-studio-icon.png" ||
     url.pathname==="/voice-studio/service-worker.js" ||
