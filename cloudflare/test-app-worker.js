@@ -299,9 +299,18 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/library/library-authority-v1293.css?v=library-authority-v1293");' +
       '@import url("/test/assets/area-shell-v1294.css?v=area-shell-v1294");' +
       '@import url("/test/assets/tawhid-guide-v1295.css?v=tawhid-guide-v1295");' +
+      '@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-final-v1297");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", areaAuthority + "</html>");
     else html += areaAuthority;
+  }
+
+  // DAR_HADITH_STRUCTURE_V1297
+  if (!html.includes('id="darHadithStructureV1297"')) {
+    const hadithStructure = '<script id="darHadithStructureV1297" src="/test/assets/hadith-structure-v1297.js?v=1297"></script>';
+    if (html.includes("</body>")) html = html.replace("</body>", hadithStructure + "</body>");
+    else if (html.includes("</html>")) html = html.replace("</html>", hadithStructure + "</html>");
+    else html += hadithStructure;
   }
 
   // DAR_HADITH_REFRAME_FINAL_V1299
