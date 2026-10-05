@@ -2790,7 +2790,7 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/prophet-stories.css?v=34">
 <link rel="stylesheet" href="/kids/mubashshirun-stories.css?v=25">
 <link rel="stylesheet" href="/kids/sahabiyyat-stories.css?v=5">
-<link rel="stylesheet" href="/kids/story-follow-reader.css?v=9">
+<link rel="stylesheet" href="/kids/story-follow-reader.css?v=10">
 <link rel="stylesheet" href="/kids/story-hub.css?v=10">
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1123-dua-quiz-art">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1152">
@@ -3318,7 +3318,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v79-stories1152";
+const KIDS_BUILD_ID="kids-shell-v81-story-player1154";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -7037,7 +7037,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=3"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v79-stories1152";
+  var KIDS_BUILD_ID="kids-shell-v81-story-player1154";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -7053,7 +7053,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1152",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1154",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -8442,7 +8442,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <link rel="stylesheet" href="/kids/quiz-library.css?v=7">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=4">
 <script src="/kids/screen-awake.js?v=1"></script>
-<script src="/kids/story-follow-reader.js?v=14"></script>
+<script src="/kids/story-follow-reader.js?v=15"></script>
 <script src="/kids/story-policy.js?v=1"></script>
 <script src="/kids/prophet-stories.js?v=34"></script>
 <script src="/kids/mubashshirun-stories.js?v=25"></script>
