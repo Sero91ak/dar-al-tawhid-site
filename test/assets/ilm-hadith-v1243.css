@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD · Ḥadīṯ-Bibliothek · Test-only historical CGI v1260 */
 body.is-hadith-route{
-  --hadx-art:url("https://dnznrvs05pmza.cloudfront.net/gpt_image_2_5_flare/b6c33971-7f4e-4472-b7c8-032316f0b280/Single_standalone_wide_cinematic_historical_CGI_scene_for_an_Islamic_hadith_library_interface__set_r_0.png?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiYjZkYzBjZmY3ZDAzZTM4NCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTMxNDU1OX0.EVtMGOwaX7h6cNVBkJHZ4qM6DwBlEPbAD4uBaOP4_MU");
+  --hadx-art:url("/test/assets/ilm/hadith-library-overview-v1266.png");
   --hadx-left:color-mix(in srgb,var(--bg) 91%,transparent);
   --hadx-mid:color-mix(in srgb,var(--bg) 61%,transparent);
   --hadx-right:color-mix(in srgb,var(--bg) 15%,transparent);
