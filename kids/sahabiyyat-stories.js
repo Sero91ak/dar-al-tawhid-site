@@ -145,10 +145,15 @@ function sourceHtml(item){
 }
 function renderCards(){
   const grid=$("#syGrid");if(!grid)return;
+  const libraryPage=$("#syLibraryPage");if(libraryPage)libraryPage.dataset.age=age();
   grid.innerHTML=items.map((item,index)=>{
     const t=textFor(item),src=art(item);
     const rawSummary=String(item.summary||"").replace(/\s+/g," ").trim();
-    const shortSummary=rawSummary.length>92?(rawSummary.slice(0,89).replace(/\s+\S*$/,"")+"…"):rawSummary;
+    const summaryOverride=item.id==="khadijah"
+      ?"Ehefrau des Propheten ﷺ und eine der vorzüglichsten Frauen."
+      :(item.id==="aishah"?"Mutter der Gläubigen und eine große Überlieferin von Wissen.":"");
+    const cardSummary=summaryOverride||rawSummary;
+    const shortSummary=cardSummary.length>78?(cardSummary.slice(0,75).replace(/\s+\S*$/,"")+"…"):cardSummary;
     return '<button class="ms-story-row" type="button" data-sy-id="'+esc(item.id)+'">'+
       '<span class="ms-row-visual" aria-hidden="true">'+
         (src?'<img src="'+esc(src)+'" alt="" data-sy-cover-id="'+esc(item.id)+'" decoding="async" loading="'+(index<4?"eager":"lazy")+'">':'')+
@@ -242,6 +247,7 @@ function ensureUi(){
 
 
 
+      '<div class="story-list-head"><span>FRAUEN DER ERSTEN GENERATION</span><strong>Ṣaḥābiyyāt</strong><small>Wähle eine Geschichte aus.</small></div>'+
       '<div id="syGrid" class="ms-list"></div>'+
     '</div>';
   document.body.appendChild(page);
