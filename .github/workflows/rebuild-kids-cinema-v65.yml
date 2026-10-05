@@ -54,7 +54,7 @@ jobs:
           [v0][v1]xfade=transition=fade:duration=0.55:offset=3.02[x01];\
           [x01][v2]xfade=transition=fade:duration=0.55:offset=6.05,format=yuv420p[v]" \
             -map "[v]" -t 9.25 -r 24 \
-            -c:v libx264 -preset slow -crf 24 -profile:v high -level 4.1 \
+            -c:v libx264 -preset medium -crf 29 -profile:v high -level 4.1 \
             -movflags +faststart -an \
             kids/assets/kids-cinema/intro-final.mp4
 
