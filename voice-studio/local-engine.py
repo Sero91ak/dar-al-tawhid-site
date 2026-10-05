@@ -9579,7 +9579,9 @@ class H(BaseHTTPRequestHandler):
             "/mobile/",
             "/mobile/index.html",
             "/mobile/manifest.webmanifest",
+            "/voice-studio/mobile-manifest.webmanifest",
             "/mobile/voice-studio-icon.png",
+            "/voice-studio/voice-studio-icon.png",
             "/mobile/apple-touch-icon.png",
             "/mobile/apple-touch-icon-precomposed.png",
             "/studio",
@@ -9737,6 +9739,7 @@ class H(BaseHTTPRequestHandler):
             self.send_file(APP_HOME/"mobile.html","text/html; charset=utf-8")
         elif p in (
             "/mobile/voice-studio-icon.png",
+            "/voice-studio/voice-studio-icon.png",
             "/mobile/apple-touch-icon.png",
             "/mobile/apple-touch-icon-precomposed.png",
             "/apple-touch-icon.png",
@@ -9744,7 +9747,7 @@ class H(BaseHTTPRequestHandler):
             "/favicon.png",
         ):
             self.send_file(APP_HOME/"voice-studio-icon.png","image/png")
-        elif p=="/mobile/manifest.webmanifest":
+        elif p in ("/mobile/manifest.webmanifest","/voice-studio/mobile-manifest.webmanifest"):
             self.send_json(200,{
                 "name":"DĀR AL TAWḤĪD Voice",
                 "short_name":"DĀR Voice",
