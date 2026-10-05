@@ -293,3 +293,87 @@ html.gh-world-open,html.gh-player-open,html.gh-world-open body,html.gh-player-op
 @media(prefers-reduced-motion:reduce){
   .gh-read p{transition:none!important}
 }
+
+/* v1141 · restore simple StoryPlayer + exact internal read-along */
+.gh-controls{
+  position:static!important;
+  top:auto!important;
+  z-index:auto!important;
+  overflow:visible!important;
+  isolation:auto!important;
+  border:1px solid rgba(239,208,138,.15)!important;
+  border-radius:26px!important;
+  background:linear-gradient(145deg,rgba(239,208,138,.06),rgba(89,185,181,.035))!important;
+  box-shadow:none!important;
+}
+.gh-controls::before,.gh-controls::after{content:none!important;display:none!important}
+.gh-podcast-meta{display:none!important}
+.gh-main-controls{grid-template-columns:56px 1fr 56px!important;gap:13px!important}
+.gh-play{width:76px!important;height:76px!important;font-size:15px!important}
+.gh-skip{width:54px!important;height:54px!important;font-size:12px!important}
+.gh-progress{height:8px!important;margin-top:15px!important}
+.gh-time{font-size:11px!important;margin-top:7px!important}
+.gh-player-actions{gap:8px!important;margin-top:14px!important}
+.gh-read-toggle{
+  min-height:46px!important;
+  padding:0 15px!important;
+  font-size:15px!important;
+}
+.gh-audio-note{font-size:11.5px!important;line-height:1.45!important;margin-top:10px!important}
+.gh-read{
+  max-width:760px!important;
+  max-height:min(54dvh,620px)!important;
+  overflow:auto!important;
+  overscroll-behavior:contain!important;
+  touch-action:pan-y!important;
+  -webkit-overflow-scrolling:touch!important;
+  margin:18px auto 0!important;
+  padding:4px 2px 18px!important;
+  scroll-padding-block:38%!important;
+  scrollbar-width:none!important;
+  font-size:clamp(20px,4.8vw,23px)!important;
+  line-height:1.68!important;
+  color:#eef3f0!important;
+}
+.gh-read::-webkit-scrollbar{display:none!important}
+.gh-read p{
+  margin:0 0 16px!important;
+  padding:13px 14px!important;
+  border:1px solid transparent!important;
+  border-radius:16px!important;
+  color:rgba(249,247,241,.88)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+.gh-read p.active{
+  color:#fff8e8!important;
+  background:rgba(239,208,138,.095)!important;
+  border-color:rgba(239,208,138,.16)!important;
+  box-shadow:inset 3px 0 #e7c574!important;
+}
+.gh-read p.past{color:rgba(249,247,241,.68)!important}
+.gh-readonly .gh-main-controls,
+.gh-readonly .gh-progress,
+.gh-readonly .gh-time,
+.gh-readonly .gh-audio-note{display:initial!important}
+.gh-readonly .gh-main-controls{display:grid!important}
+.gh-readonly .gh-progress{display:block!important}
+.gh-readonly .gh-time{display:flex!important}
+.gh-readonly .gh-audio-note{display:block!important}
+@media(max-width:430px){
+  .gh-player-hero{min-height:60vh!important;max-height:none!important}
+  .gh-player-body{padding-top:18px!important}
+  .gh-controls{padding:16px!important;border-radius:24px!important}
+  .gh-play{width:78px!important;height:78px!important}
+  .gh-skip{width:54px!important;height:54px!important}
+  .gh-read{font-size:20px!important;line-height:1.68!important;max-height:52dvh!important;margin-top:18px!important}
+  .gh-read p{padding:13px 12px!important;margin-bottom:14px!important}
+  .gh-read-toggle{font-size:14px!important;min-height:46px!important}
+}
+@media(min-width:760px){
+  .gh-controls{padding:18px 20px!important}
+  .gh-read{font-size:22px!important;line-height:1.7!important;max-height:min(58dvh,680px)!important;padding-left:8px!important;padding-right:8px!important}
+  .gh-read p{padding:15px 17px!important;margin-bottom:18px!important}
+  .gh-read-toggle{font-size:16px!important;min-height:48px!important}
+}
