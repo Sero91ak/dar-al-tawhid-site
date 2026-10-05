@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1297",
-  "appBuildId": "app-shell-v1297",
-  "note": "v1297 · Widgets vollständig in der Test-App isoliert: /test/widgets/ leitet nicht mehr in die Besucher-App um, nutzt die vorhandene Widget-Funktion direkt, erhält einen eigenen iOS-Hero und responsive Test-Oberfläche; Widgets/Wasiyyah werden cache-sicher ausgeliefert.",
-  "updatedAt": "2026-10-05T14:38:00+02:00"
+  "buildId": "app-shell-v1298",
+  "appBuildId": "app-shell-v1298",
+  "note": "v1298 · Test-App-CSS konsolidiert: Qurʾān, Wissen, Duʿāʾ, Quiz, Mehr, Gebet, Jumuʿah und Qiblah laden über genau eine finale Area-Authority. Doppelte Einzel-Injections entfernt und Health-Guard gegen fehlendes </head> sowie doppelte Styles ergänzt.",
+  "updatedAt": "2026-10-05T14:45:00+02:00"
 }
