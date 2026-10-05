@@ -260,6 +260,8 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
       service: "dar-voice-studio-cloud",
       provider: gpu.configured ? "DĀR Voice Remote GPU" : (elevenConfigured ? "ElevenLabs Cloud" : "Cloud Voice nicht konfiguriert"),
       voiceConfigured: configured,
+      elevenLabsConfigured: elevenConfigured,
+      mobileCloudRevision: "2.9.114",
       remoteGpu: gpu,
       localEngineRequired: false,
       output: gpu.configured ? "engine-native" : "audio/mpeg",
