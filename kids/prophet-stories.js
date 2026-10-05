@@ -183,7 +183,7 @@ function renderCards(){
         '<span class="ps-row-title">'+esc(item.name)+'</span>'+
         '<span class="ps-row-ar" dir="rtl">'+esc(arabicLine(item))+'</span>'+
       '</span>'+
-      '<span class="ps-row-go" aria-hidden="true">›</span>'+
+      '<span class="ps-row-go'+(isAudioOnlyAge()?' is-listen':'')+'" aria-hidden="true">'+(isAudioOnlyAge()?'▶':'›')+'</span>'+
       (done(item.id)?'<span class="ps-done" aria-label="Abgeschlossen"></span>':'')+
     '</button>';
   }).join("");
@@ -266,20 +266,12 @@ function ensureUi(){
       '<button class="ps-library-back" id="psLibraryBack" type="button" aria-label="Zurück zu Geschichten">‹</button>'+
       '<div class="ps-library-nav-copy"><strong>Propheten</strong><span>25 geprüfte Geschichten</span></div>'+
     '</div>'+
-    '<div class="ps-toolbar">'+
-      '<div class="ps-modes" id="psModes">'+
-        '<button class="ps-mode" data-ps-mode="both" type="button"><span class="ps-mode-icon ps-mode-icon-headphones" aria-hidden="true"></span>Hören &amp; Mitlesen</button>'+
-        '<button class="ps-mode" data-ps-mode="listen" type="button"><span class="ps-mode-icon ps-mode-icon-headphones" aria-hidden="true"></span>Hören</button>'+
-        '<button class="ps-mode" data-ps-mode="read" type="button"><span class="ps-mode-icon ps-mode-icon-book" aria-hidden="true"></span>Lesen</button>'+
-      '</div>'+
-    '</div>'+
     '<div class="ps-library-scroll" id="psLibraryScroll">'+
       '<div id="psMuhammadFeature" class="ps-muhammad-feature"></div>'+
       '<div class="ps-sequence-head"><span>IN REIHENFOLGE</span><strong>Die Propheten</strong><small>Danach geht es chronologisch von Ādam bis ʿĪsā weiter.</small></div>'+
       '<div id="psGrid" class="ps-library-list"></div>'+
     '</div>';
   document.body.appendChild(library);
-  library.querySelectorAll("[data-ps-mode]").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.psMode)));
   $("#psLibraryBack").addEventListener("click",closeLibrary);
 
   const modal=document.createElement("div");
