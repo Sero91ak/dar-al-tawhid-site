@@ -253,7 +253,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_ILM_HADITH_V1243
   // This authority must be LAST because legacy Hadith style tags exist near the end of test/index.html.
   if (!html.includes('id="darHadithAuthorityV1287"')) {
-    const hadithAuthority = '<style id="darHadithAuthorityV1287">@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-authority-v1287");</style>';
+    const hadithAuthority = '<style id="darHadithAuthorityV1287">@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-authority-v1288");</style>';
     if (html.includes("</html>")) html = html.replace("</html>", hadithAuthority + "</html>");
     else html += hadithAuthority;
   }
