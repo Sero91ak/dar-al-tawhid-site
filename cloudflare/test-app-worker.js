@@ -300,7 +300,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/area-shell-v1294.css?v=area-shell-v1294");' +
       '@import url("/test/assets/area-utility-v1300.css?v=area-utility-v1300");' +
       '@import url("/test/assets/tawhid-guide-v1295.css?v=tawhid-guide-v1295");' +
-      '@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-final-v1301");' +
+      '@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-final-v1302");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", areaAuthority + "</html>");
     else html += areaAuthority;
@@ -316,7 +316,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // DAR_HADITH_REFRAME_FINAL_V1299
   if (!html.includes('id="darHadithReframeFinalV1299"')) {
-    const hadithFinal = '<style id="darHadithReframeFinalV1299">@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-reader-fix-v1301");</style>' +
+    const hadithFinal = '<style id="darHadithReframeFinalV1299">@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-reader-fix-v1302");</style>' +
       '<script id="darHadithReframeScriptV1299" src="/test/assets/hadith-library-reframe-v1299.js?v=1299"><\/script>';
     if (html.includes("</html>")) html = html.replace("</html>", hadithFinal + "</html>");
     else html += hadithFinal;
