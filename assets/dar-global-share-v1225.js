@@ -52,6 +52,49 @@
   }
   function text(el){return el?clean(el.innerText||el.textContent||""):""}
   function first(root,sel){try{return root&&root.querySelector?root.querySelector(sel):null}catch(e){return null}}
+  function copyPlainText(text){
+    text=String(text||"");
+    if(!text){toast("Nichts zum Kopieren");return false}
+    var ok=false;
+    try{
+      var ta=document.createElement("textarea");
+      ta.value=text;
+      ta.setAttribute("readonly","readonly");
+      ta.style.cssText="position:fixed;top:0;left:0;width:2px;height:2px;opacity:0;font-size:16px";
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try{ta.setSelectionRange(0,text.length)}catch(e1){}
+      ok=document.execCommand("copy");
+      ta.remove();
+    }catch(e){ok=false}
+    if(ok){toast("Kopiert");return true}
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){toast("Kopiert")}).catch(function(){showCopySheet(text)});
+      return true;
+    }
+    showCopySheet(text);
+    return false;
+  }
+  function showCopySheet(text){
+    var old=document.getElementById("darCopySheet");if(old)old.remove();
+    var wrap=document.createElement("div");
+    wrap.id="darCopySheet";
+    wrap.style.cssText="position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.72);display:flex;align-items:flex-end;justify-content:center;padding:16px";
+    var box=document.createElement("div");
+    box.style.cssText="width:min(560px,100%);background:#14120f;color:#f6f1e4;border-radius:18px;padding:16px;border:1px solid rgba(239,215,142,.35)";
+    var title=document.createElement("div");title.textContent="Text markiert halten und kopieren";title.style.cssText="font-weight:700;margin-bottom:8px";
+    var area=document.createElement("textarea");
+    area.value=text;area.readOnly=true;
+    area.style.cssText="width:100%;min-height:180px;border-radius:12px;padding:10px;background:#0c0b09;color:#f6f1e4;border:1px solid rgba(239,215,142,.25)";
+    var close=document.createElement("button");close.type="button";close.textContent="Schließen";
+    close.style.cssText="margin-top:10px;width:100%;height:44px;border-radius:12px;border:0;background:#efd78e;color:#1a1408;font-weight:700";
+    close.onclick=function(){wrap.remove()};
+    box.appendChild(title);box.appendChild(area);box.appendChild(close);wrap.appendChild(box);
+    wrap.addEventListener("click",function(ev){if(ev.target===wrap)wrap.remove()});
+    document.body.appendChild(wrap);
+    area.focus();area.select();
+  }
   function toast(msg){
     var old=document.querySelector(".dar-global-share-toast");if(old)old.remove();
     var n=document.createElement("div");n.className="dar-global-share-toast";n.textContent=msg;document.body.appendChild(n);
@@ -385,6 +428,15 @@
   document.addEventListener("click",function(ev){
     var frauenOwned=ev.target&&ev.target.closest?ev.target.closest("[data-frauen-share]"):null;
     if(frauenOwned)return; // Frauenbereich besitzt seine Share-Aktionen exklusiv (women-historical Profil).
+    var copyBtn=ev.target&&ev.target.closest?ev.target.closest("[data-share-copy],[data-post-copy],[data-ilm-copy-answer],[data-post-share-channel=\"copy\"]"):null;
+    if(copyBtn){
+      ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
+      var raw=copyBtn.getAttribute("data-share-text")||copyBtn.getAttribute("data-copy-text")||"";
+      var data=ctxFromDom(copyBtn);
+      var payload=raw||(data?sharePayload(data).text:"");
+      copyPlainText(payload);
+      return;
+    }
     var wa=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-wa]"):null;
     if(wa){
       ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
@@ -414,5 +466,6 @@
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
   function boot(){enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-  window.DARGlobalShare={version:"1250",createAndShare:createAndShare,renderFiles:renderFiles,site:SITE,imageMode:"curated-pool-only",poolSize:GENERAL_SHARE_IMAGE_POOL.length};
+  window.darCopyText=copyPlainText;
+  window.DARGlobalShare={version:"1250",createAndShare:createAndShare,renderFiles:renderFiles,copyText:copyPlainText,site:SITE,imageMode:"curated-pool-only",poolSize:GENERAL_SHARE_IMAGE_POOL.length};
 })();
