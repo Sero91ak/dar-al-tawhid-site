@@ -1,31 +1,101 @@
-/* DĀR AL TAWḤĪD Kids — Story Library Image Blend v4
-   FINAL OVERRIDE, loaded after story-card-system.css.
-   IMPORTANT: no card sizing, typography, grid, rank or play-button geometry lives here.
-   The pre-v1162 shared card system remains the source of truth.
-   This file only removes the hard pasted-on image edge. */
+/* DĀR AL TAWḤĪD Kids — Spacious Story Library Cards v5
+   FINAL visual authority for the three story-selection libraries only:
+   Propheten, Ṣaḥābah, Ṣaḥābiyyāt.
+   The Geschichten home page and all player/detail views are intentionally untouched. */
 
-/* Propheten: dissolve the end of the image into the existing card background.
-   The underlying grid/image width stays completely unchanged. */
-.ps-library-page .ps-story-row::before{
-  content:""!important;
-  position:absolute!important;
-  z-index:3!important;
-  inset:0!important;
-  pointer-events:none!important;
-  background:
-    linear-gradient(90deg,
-      transparent 0%,
-      transparent 23%,
-      rgba(8,42,59,.08) 26%,
-      rgba(8,42,59,.26) 29%,
-      rgba(8,42,59,.58) 32%,
-      rgba(8,42,59,.88) 35%,
-      rgba(8,42,59,.98) 37%,
-      transparent 42%)!important;
+.ps-library-page,
+.ms-library-page{
+  --sl5-bg:#082a3b;
+  --sl5-line:rgba(126,205,216,.20);
+  --sl5-gold:#efd07f;
+  --sl5-cream:#fff8e8;
 }
 
-/* Ṣaḥābah + Ṣaḥābiyyāt: keep the original image box and crop,
-   but make its right edge finish in the exact dark-teal card tone. */
+/* Give the selector headings breathing room below their fixed headers. */
+.ps-library-page .ps-library-scroll,
+.ms-library-page .ms-library-scroll{
+  padding-top:24px!important;
+}
+
+.ps-library-page .ps-library-list,
+.ms-library-page .ms-list{
+  width:min(100%,920px)!important;
+  margin:0 auto!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:14px!important;
+  padding-bottom:calc(34px + env(safe-area-inset-bottom))!important;
+  background:transparent!important;
+}
+
+/* ---------- LARGE, CALM PHONE CARDS ---------- */
+.ps-library-page .ps-story-row,
+.ms-library-page .ms-story-row{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:minmax(138px,40%) minmax(0,1fr) 58px!important;
+  align-items:stretch!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:186px!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  padding:0!important;
+  border:1px solid var(--sl5-line)!important;
+  border-radius:27px!important;
+  background:linear-gradient(135deg,#0a3041,var(--sl5-bg) 72%)!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.18)!important;
+  text-align:left!important;
+}
+
+/* Never shrink preschool cards. Young children benefit most from the large targets. */
+html[data-kids-age="4-5"] .ps-library-page .ps-story-row,
+html[data-kids-age="4-5"] .ms-library-page .ms-story-row,
+.ps-library-page[data-age="4–5"] .ps-story-row,
+.ps-library-page[data-age="4-5"] .ps-story-row,
+.ms-library-page[data-age="4–5"] .ms-story-row,
+.ms-library-page[data-age="4-5"] .ms-story-row{
+  min-height:186px!important;
+  height:auto!important;
+  grid-template-columns:minmax(138px,40%) minmax(0,1fr) 58px!important;
+}
+
+/* ---------- ARTWORK ---------- */
+.ps-library-page .ps-row-scene,
+.ms-library-page .ms-row-visual{
+  position:relative!important;
+  z-index:1!important;
+  grid-column:1!important;
+  grid-row:1!important;
+  align-self:stretch!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  min-height:186px!important;
+  overflow:hidden!important;
+  background:#08283a!important;
+}
+
+.ps-library-page .ps-row-scene{
+  display:block!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  filter:saturate(.99) contrast(1.03) brightness(.94)!important;
+}
+
+.ms-library-page .ms-row-visual img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:100%!important;
+  display:block!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  filter:saturate(.99) contrast(1.03) brightness(.94)!important;
+}
+
+/* Smoothly embed the picture into the dark card instead of a pasted hard edge. */
 .ms-library-page .ms-row-visual::after{
   content:""!important;
   position:absolute!important;
@@ -36,24 +106,242 @@
   background:
     linear-gradient(90deg,
       transparent 0%,
-      transparent 44%,
-      rgba(8,42,59,.10) 56%,
-      rgba(8,42,59,.30) 68%,
-      rgba(8,42,59,.62) 82%,
-      rgba(8,42,59,.90) 94%,
+      transparent 43%,
+      rgba(8,42,59,.08) 54%,
+      rgba(8,42,59,.25) 67%,
+      rgba(8,42,59,.52) 79%,
+      rgba(8,42,59,.80) 90%,
       #082a3b 100%),
-    linear-gradient(0deg,rgba(3,17,27,.10),transparent 58%)!important;
+    linear-gradient(0deg,rgba(3,17,27,.10),transparent 60%)!important;
+}
+.ms-library-page .ms-row-art-shade{display:none!important}
+
+/* Prophet artwork is the image element itself, so blend on the whole row. */
+.ps-library-page .ps-story-row::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:3!important;
+  inset:0!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    transparent 28%,
+    rgba(8,42,59,.08) 32%,
+    rgba(8,42,59,.30) 35%,
+    rgba(8,42,59,.66) 38%,
+    rgba(8,42,59,.94) 40%,
+    transparent 45%)!important;
 }
 
-/* The older optional shade layer must not stack another hard edge. */
-.ms-library-page .ms-row-art-shade{
-  display:none!important;
+/* ---------- COPY ---------- */
+.ps-library-page .ps-row-copy,
+.ms-library-page .ms-row-copy{
+  position:relative!important;
+  z-index:5!important;
+  grid-column:2!important;
+  grid-row:1!important;
+  align-self:center!important;
+  min-width:0!important;
+  display:grid!important;
+  align-content:center!important;
+  gap:5px!important;
+  padding:20px 10px 20px 18px!important;
+  margin:0!important;
+  left:auto!important;
+  right:auto!important;
+  top:auto!important;
+  transform:none!important;
 }
 
-/* Do not synthesize any action glyph here.
-   The original markup owns the single play symbol. */
+.ps-library-page .ps-row-title,
+.ms-library-page .ms-row-title{
+  display:block!important;
+  margin:0!important;
+  color:var(--sl5-cream)!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:max(var(--kids-card-title,22px),22px)!important;
+  line-height:1.08!important;
+  font-weight:700!important;
+  letter-spacing:-.02em!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+  text-wrap:balance!important;
+  text-shadow:0 2px 13px rgba(0,0,0,.22)!important;
+}
+
+html[data-kids-age="4-5"] .ps-library-page .ps-row-title,
+html[data-kids-age="4-5"] .ms-library-page .ms-row-title{
+  font-size:clamp(24px,6.4vw,28px)!important;
+  line-height:1.08!important;
+}
+
+/* Never split a person's name inside a word. */
+.ps-library-page .ps-row-title,
+.ms-library-page .ms-row-title,
+.ps-library-page .ps-row-ar,
+.ms-library-page .ms-row-ar,
+.ps-library-page .ps-row-summary,
+.ms-library-page .ms-row-summary{
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+}
+
+/* ---------- RANK ---------- */
+.ps-library-page .ps-row-rank,
+.ms-library-page .ms-rank{
+  position:absolute!important;
+  z-index:7!important;
+  left:12px!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:12px!important;
+  min-width:43px!important;
+  width:auto!important;
+  height:32px!important;
+  padding:0 10px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(239,208,127,.40)!important;
+  border-radius:999px!important;
+  background:rgba(3,20,29,.72)!important;
+  color:#f3d791!important;
+  font:700 12.5px/1 Georgia,serif!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  box-shadow:0 5px 14px rgba(0,0,0,.18)!important;
+}
+
+/* ---------- ONE QUIET PLAY CONTROL, SAME PLACE EVERYWHERE ---------- */
+.ps-library-page .ps-row-go,
+.ms-library-page .ms-row-go,
+.ps-library-page .ps-row-go.is-listen,
+.ms-library-page .ms-row-go.is-listen{
+  position:relative!important;
+  z-index:7!important;
+  grid-column:3!important;
+  grid-row:1!important;
+  align-self:center!important;
+  justify-self:center!important;
+  width:50px!important;
+  min-width:50px!important;
+  height:50px!important;
+  margin:0!important;
+  padding:0 0 0 2px!important;
+  left:auto!important;
+  right:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(239,208,127,.43)!important;
+  border-radius:50%!important;
+  background:rgba(8,35,48,.48)!important;
+  color:#f3d98e!important;
+  font-size:19px!important;
+  line-height:1!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(7px)!important;
+  -webkit-backdrop-filter:blur(7px)!important;
+}
+
 .ps-library-page .ps-row-go::before,
 .ms-library-page .ms-row-go::before{
   content:none!important;
   display:none!important;
+}
+
+/* Keep preschool metadata reduction, but never reduce the physical card. */
+html[data-kids-age="4-5"] .ps-library-page .ps-row-ar,
+html[data-kids-age="4-5"] .ps-library-page .ps-row-summary,
+html[data-kids-age="4-5"] .ps-library-page .ps-row-meta,
+html[data-kids-age="4-5"] .ms-library-page .ms-row-ar,
+html[data-kids-age="4-5"] .ms-library-page .ms-row-summary,
+html[data-kids-age="4-5"] .ms-library-page .ms-row-meta{
+  display:none!important;
+}
+
+/* ---------- NARROW PHONES ---------- */
+@media(max-width:374px){
+  .ps-library-page .ps-story-row,
+  .ms-library-page .ms-story-row,
+  html[data-kids-age="4-5"] .ps-library-page .ps-story-row,
+  html[data-kids-age="4-5"] .ms-library-page .ms-story-row{
+    min-height:176px!important;
+    grid-template-columns:minmax(126px,39%) minmax(0,1fr) 54px!important;
+    border-radius:24px!important;
+  }
+  .ps-library-page .ps-row-scene,
+  .ms-library-page .ms-row-visual{
+    min-height:176px!important;
+  }
+  .ps-library-page .ps-row-copy,
+  .ms-library-page .ms-row-copy{
+    padding:17px 7px 17px 15px!important;
+  }
+  .ps-library-page .ps-row-go,
+  .ms-library-page .ms-row-go,
+  .ps-library-page .ps-row-go.is-listen,
+  .ms-library-page .ms-row-go.is-listen{
+    width:46px!important;
+    min-width:46px!important;
+    height:46px!important;
+  }
+}
+
+/* ---------- TABLETS ---------- */
+@media(min-width:700px){
+  .ps-library-page .ps-library-list,
+  .ms-library-page .ms-list{
+    width:min(900px,calc(100% - 48px))!important;
+    gap:16px!important;
+  }
+
+  .ps-library-page .ps-story-row,
+  .ms-library-page .ms-story-row,
+  html[data-kids-age="4-5"] .ps-library-page .ps-story-row,
+  html[data-kids-age="4-5"] .ms-library-page .ms-story-row{
+    min-height:224px!important;
+    grid-template-columns:minmax(230px,38%) minmax(0,1fr) 72px!important;
+    border-radius:30px!important;
+  }
+
+  .ps-library-page .ps-row-scene,
+  .ms-library-page .ms-row-visual{
+    min-height:224px!important;
+  }
+
+  .ps-library-page .ps-row-copy,
+  .ms-library-page .ms-row-copy{
+    padding:26px 18px 26px 26px!important;
+    gap:7px!important;
+  }
+
+  .ps-library-page .ps-row-title,
+  .ms-library-page .ms-row-title{
+    font-size:max(var(--kids-card-title,26px),27px)!important;
+  }
+
+  .ps-library-page .ps-row-go,
+  .ms-library-page .ms-row-go,
+  .ps-library-page .ps-row-go.is-listen,
+  .ms-library-page .ms-row-go.is-listen{
+    width:56px!important;
+    min-width:56px!important;
+    height:56px!important;
+    font-size:21px!important;
+  }
+}
+
+/* Wide displays remain a single calm column instead of shrinking each card. */
+@media(min-width:1100px){
+  .ps-library-page .ps-library-list,
+  .ms-library-page .ms-list{
+    width:940px!important;
+    grid-template-columns:1fr!important;
+  }
 }
