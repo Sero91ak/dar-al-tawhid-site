@@ -411,11 +411,61 @@ function injectStyles(){
   @media(max-width:1240px){.content-studio-nav{align-items:flex-start;flex-direction:column;top:64px}.cs-nav-tabs,.cs-flow,.cs-fast-actions{width:100%;overflow-x:auto}.cs-fast-actions{margin-left:0}.cs-fast-actions .btn,.cs-flow-step{flex:0 0 auto}}
   @media(max-width:900px){.cs-grid{grid-template-columns:1fr 1fr}.cs-field.span4{grid-column:1/-1}}
   @media(max-width:600px){.cs-grid{grid-template-columns:1fr}.cs-field.span2,.cs-field.span4{grid-column:1}.cs-actions{grid-template-columns:1fr}.cs-fast-actions .btn{min-height:36px}}
+  .cs-mobile-back{display:none}
+  @media(max-width:799px){
+    html.mobile-content-mode,html.mobile-content-mode body{width:100%;max-width:100%;overflow-x:hidden}
+    html.mobile-content-mode .app{padding:env(safe-area-inset-top) 0 calc(96px + env(safe-area-inset-bottom));min-height:100dvh}
+    html.mobile-content-mode .shell{width:100%;max-width:none}
+    html.mobile-content-mode .topbar{min-height:58px;padding:7px 14px;gap:8px;position:sticky;top:0;background:rgba(6,19,24,.96);border-bottom:1px solid var(--line);z-index:50}
+    html.mobile-content-mode .brand-wrap{gap:8px;min-width:0}
+    html.mobile-content-mode .brand-mark,html.mobile-content-mode .brand-mark img{width:31px;height:31px}
+    html.mobile-content-mode .brand{font-size:11px;letter-spacing:.09em;max-width:45vw;overflow:hidden;text-overflow:ellipsis}
+    html.mobile-content-mode .brand-sub{display:none}
+    html.mobile-content-mode .top-actions{gap:6px}
+    html.mobile-content-mode .top-actions .install-btn,html.mobile-content-mode .top-actions .update-btn{display:none!important}
+    html.mobile-content-mode .top-actions .status{min-width:0;padding:7px 9px;border-radius:999px;font-size:10px}
+    html.mobile-content-mode .top-actions .status span:last-child{max-width:29vw;overflow:hidden;text-overflow:ellipsis}
+    html.mobile-content-mode .content-studio-nav{position:sticky;top:58px;z-index:48;display:grid;grid-template-columns:40px minmax(0,1fr);gap:8px;padding:8px 12px;background:rgba(6,19,24,.97);border-bottom:1px solid var(--line);backdrop-filter:blur(20px)}
+    html.mobile-content-mode .cs-mobile-back{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.035);color:#eef4f1;font-size:24px;line-height:1}
+    html.mobile-content-mode .cs-nav-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;width:100%;overflow:visible}
+    html.mobile-content-mode .cs-nav-tabs>*{display:none!important}
+    html.mobile-content-mode .cs-nav-tabs>[data-cs-kind="story"],html.mobile-content-mode .cs-nav-tabs>[data-cs-kind="dua"],html.mobile-content-mode .cs-nav-tabs>[data-cs-kind="narration"]{display:flex!important;align-items:center;justify-content:center;min-height:40px;padding:7px 5px;border-radius:13px;font-size:10px}
+    html.mobile-content-mode .cs-flow{grid-column:1/-1;width:100%;display:flex;gap:5px;overflow-x:auto;padding:1px 0 0;scrollbar-width:none}
+    html.mobile-content-mode .cs-flow::-webkit-scrollbar{display:none}
+    html.mobile-content-mode .cs-flow-step{flex:1 0 auto;min-height:28px;text-align:center}
+    html.mobile-content-mode .cs-fast-actions{position:fixed;left:10px;right:10px;bottom:calc(9px + env(safe-area-inset-bottom));z-index:80;display:grid;grid-template-columns:1fr 1fr 1fr;width:auto;margin:0;padding:8px;background:rgba(6,20,26,.94);border:1px solid rgba(255,255,255,.13);border-radius:18px;box-shadow:0 18px 44px rgba(0,0,0,.38);backdrop-filter:blur(24px)}
+    html.mobile-content-mode #csQuickNew,html.mobile-content-mode #csQuickCopy{display:none}
+    html.mobile-content-mode .cs-fast-actions .btn{display:flex;align-items:center;justify-content:center;min-height:50px;padding:8px 6px;border-radius:13px;font-size:11px}
+    html.mobile-content-mode .workspace{display:block;min-height:0;background:transparent}
+    html.mobile-content-mode .editor-panel{padding:17px 15px 28px;border:0!important;border-bottom:1px solid var(--line)!important}
+    html.mobile-content-mode .side-panel{position:relative;top:auto;max-height:none;overflow:visible;margin:0;padding:18px 15px 110px;background:rgba(7,24,31,.34)!important;border:0!important}
+    html.mobile-content-mode .heading-row{display:block;margin-bottom:12px}
+    html.mobile-content-mode .heading-row h1{font-size:29px;line-height:1.04;margin-bottom:7px}
+    html.mobile-content-mode .heading-row .lead{font-size:13px;line-height:1.45}
+    html.mobile-content-mode .heading-row .badges{display:none}
+    html.mobile-content-mode .cs-meta{margin:0 0 12px;padding:12px;border-radius:18px;background:rgba(255,255,255,.025)}
+    html.mobile-content-mode .cs-grid{grid-template-columns:1fr 1fr;gap:8px}
+    html.mobile-content-mode .cs-field.span2,html.mobile-content-mode .cs-field.span4{grid-column:1/-1}
+    html.mobile-content-mode .cs-field input,html.mobile-content-mode .cs-field select,html.mobile-content-mode .cs-field textarea{min-height:44px;border-radius:12px;font-size:13px}
+    html.mobile-content-mode .cs-field textarea{height:78px;min-height:78px}
+    html.mobile-content-mode .textbox-wrap{margin:0;border:1px solid var(--line-strong);border-radius:20px;overflow:hidden;background:rgba(2,14,19,.26)}
+    html.mobile-content-mode #text{height:42dvh;min-height:300px;max-height:520px;padding:18px 15px 48px;font-size:17px;line-height:1.58}
+    html.mobile-content-mode .stats{margin:10px 0 14px}
+    html.mobile-content-mode .preview-grid{grid-template-columns:1fr}
+    html.mobile-content-mode .actions-card{display:none}
+    html.mobile-content-mode .cs-cover{max-width:430px;margin:0 auto;border-radius:20px}
+    html.mobile-content-mode .cs-actions{grid-template-columns:1fr 1fr}
+    html.mobile-content-mode .cs-audio-drop{padding:13px;border-radius:16px}
+    html.mobile-content-mode #csPublishSection,html.mobile-content-mode #csLibrarySection{max-width:760px;margin-left:auto;margin-right:auto}
+    html.mobile-content-mode .footer{padding-bottom:110px}
+    html.mobile-content-mode .mobile-actions{display:none!important}
+  }
   `;
   document.head.appendChild(st);
 }
 function navHtml(){
   return `<nav class="content-studio-nav" aria-label="Studio Bereiche und Schnellaktionen">
+    <button id="csMobileBack" class="cs-mobile-back" type="button" aria-label="Zurück zur Voice-App">‹</button>
     <div class="cs-nav-tabs">
       <button id="csFreeVoiceTab" class="cs-tab" type="button">Erzeugen</button>
       <button id="csPronunciationTab" class="cs-tab" type="button">Aussprache</button>
@@ -574,6 +624,9 @@ function mount(){
   },0);
 }
 function bind(){
+  q("csMobileBack")?.addEventListener("click",()=>{
+    location.href=location.port==="8787"?"/mobile/":"/voice-studio/mobile.html?app=1&cloud=1";
+  });
   document.querySelectorAll("[data-cs-kind]").forEach(btn=>btn.addEventListener("click",()=>{
     inventoryFilter="";
     window.setStudioPage?.("content");
