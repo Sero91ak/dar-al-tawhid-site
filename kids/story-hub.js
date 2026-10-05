@@ -16,7 +16,18 @@ function readLastStory(){try{const v=JSON.parse(localStorage.getItem(LAST_STORY_
 function writeLastStory(force=false,completed=false){
   if(!active)return;
   const now=Date.now();if(!force&&now-lastSavedAt<4500)return;lastSavedAt=now;
-  try{localStorage.setItem(LAST_STORY_KEY,JSON.stringify({category:activeCategory,id:active.id,time:Number(audio.currentTime)||0,duration:Number(audio.duration)||0,completed:!!completed,updatedAt:now}))}catch(_){}
+  const payload={
+    category:activeCategory,
+    id:active.id,
+    title:storyName(active),
+    artwork:artFor(active,activeCategory,false),
+    time:Number(audio.currentTime)||0,
+    duration:Number(audio.duration)||0,
+    completed:!!completed,
+    updatedAt:now
+  };
+  try{localStorage.setItem(LAST_STORY_KEY,JSON.stringify(payload))}catch(_){}
+  try{window.dispatchEvent(new CustomEvent("dar-kids-story-resume",{detail:payload}))}catch(_){}
   renderContinue();
 }
 function storyById(cat,id){return (catalog[cat]||[]).find(x=>x.id===id)||null}
@@ -367,5 +378,23 @@ async function load(){
   const app=$(".app");if(app&&"MutationObserver" in window)new MutationObserver(()=>{renderCategories();renderList();if(active)renderPlayer()}).observe(app,{attributes:true,attributeFilter:["data-age"]});
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(load,0),{once:true});else setTimeout(load,0);
-window.DARKidsStoryHub={open:openWorld,openStory:(cat,id)=>{activeCategory=cat;openWorld();selectStory(id)},stop:()=>stopAudio(true)};
+function openExternalStory(cat,id,time=0){
+  let tries=0;
+  const attempt=()=>{
+    if(!$("#ghWorld")||!(catalog[cat]||[]).length){
+      if(tries++<24)setTimeout(attempt,120);
+      return;
+    }
+    activeCategory=cat;
+    openWorld();
+    selectStory(id,{resume:Math.max(0,Number(time)||0)});
+  };
+  attempt();
+}
+window.DARKidsStoryHub={
+  open:openWorld,
+  openStory:(cat,id)=>openExternalStory(cat,id,0),
+  openResume:(cat,id,time)=>openExternalStory(cat,id,time),
+  stop:()=>stopAudio(true)
+};
 })();
