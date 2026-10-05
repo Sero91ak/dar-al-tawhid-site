@@ -54,6 +54,7 @@ jobs:
           const sahabaJs=fs.readFileSync("kids/mubashshirun-stories.js","utf8");
           const sahabiyyatJs=fs.readFileSync("kids/sahabiyyat-stories.js","utf8");
           const storyHubJs=fs.readFileSync("kids/story-hub.js","utf8");
+          const storyHubCss=fs.readFileSync("kids/story-hub.css","utf8");
           const storyFollowReaderJs=fs.readFileSync("kids/story-follow-reader.js","utf8");
           const storyFollowReaderCss=fs.readFileSync("kids/story-follow-reader.css","utf8");
           const expected=String(version.buildId||"").trim();
