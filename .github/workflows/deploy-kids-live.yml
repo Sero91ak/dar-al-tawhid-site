@@ -9,6 +9,8 @@ on:
       - "kids/**"
       - "_headers"
       - "cloudflare/site-router.js"
+      - "cloudflare/test-app-worker.js"
+      - "scripts/kids-prophet-release-guard.js"
       - ".github/workflows/deploy-kids-live.yml"
 
 permissions:
@@ -33,30 +35,40 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Validate Kids quiz and PWA release
+      - name: Validate Kids release
         run: |
           node scripts/kids-prophet-release-guard.js
           node --check cloudflare/site-router.js
           node <<'NODE'
           const fs=require("fs");
           const quiz=JSON.parse(fs.readFileSync("kids/data/quiz-kids.json","utf8"));
+          const sy=JSON.parse(fs.readFileSync("kids/data/sahabiyyat-stories.json","utf8"));
           const version=JSON.parse(fs.readFileSync("kids/version.json","utf8"));
           const index=fs.readFileSync("kids/index.html","utf8");
           const start=fs.readFileSync("kids/start.html","utf8");
           const shell=fs.readFileSync("kids/shell.html","utf8");
           const sw=fs.readFileSync("kids/sw.js","utf8");
-          const expected="kids-shell-v41-studio-sections1108";
-          if(version.buildId!==expected)throw new Error("Kids build mismatch: "+version.buildId);
+          const expected=String(version.buildId||"").trim();
+          const swVersion=String(version.visualSystem?.serviceWorkerCache||"").replace(/^v/,"");
+          const syCss=String(version.visualSystem?.sahabiyyatCssVersion||"").trim();
+          const syJs=String(version.visualSystem?.sahabiyyatJsVersion||"").trim();
+          if(!expected)throw new Error("Kids buildId missing");
+          if(!swVersion)throw new Error("Kids serviceWorkerCache missing");
           if(index!==start||index!==shell)throw new Error("Kids entry shells are not identical");
           if(!Array.isArray(quiz.items)||quiz.items.length<650)throw new Error("Kids quiz count below 650");
           if(quiz.namespace!=="dar-kids-quiz"||quiz.adultQuizDependency!==false)throw new Error("Kids quiz namespace/dependency invalid");
           if(!index.includes('4–6 Jahre · hören & tippen'))throw new Error("New Kids quiz age label missing");
           if(index.includes("Keine geprüfte Wiederholung ist gerade fällig"))throw new Error("Legacy empty-quiz state returned");
           if(!index.includes("var due=pool.filter")||!index.includes("selected.push(q)"))throw new Error("Never-empty quiz fallback missing");
-          if(!index.includes("/kids/sw.js?v=1108"))throw new Error("Kids SW v1108 registration missing");
+          if(!index.includes("/kids/sw.js?v="+swVersion))throw new Error("Current Kids SW registration missing");
           if(!index.includes("kids.pwa.controller.reload."))throw new Error("Kids stale-shell self-heal missing");
-          if(!sw.includes('dar-al-tawhid-kids-v1108')||!sw.includes("client.navigate"))throw new Error("Kids SW activation recovery missing");
-          console.log("KIDS QUIZ LIVE GUARD OK",quiz.items.length,version.buildId);
+          if(!sw.includes("dar-al-tawhid-kids-v"+swVersion)||!sw.includes("client.navigate"))throw new Error("Kids SW activation recovery missing");
+          if(!index.includes('id="syEntry"'))throw new Error("Ṣaḥābiyyāt static hub card missing");
+          if(!index.includes('class="stories-area-jump"')||!index.includes('data-story-area="sahabiyyat"'))throw new Error("Ṣaḥābiyyāt hub shortcut missing");
+          if(syCss&&!index.includes("/kids/sahabiyyat-stories.css?v="+syCss))throw new Error("Ṣaḥābiyyāt CSS ref missing");
+          if(syJs&&!index.includes("/kids/sahabiyyat-stories.js?v="+syJs))throw new Error("Ṣaḥābiyyāt JS ref missing");
+          if(!Array.isArray(sy.items)||sy.items.length!==14)throw new Error("Ṣaḥābiyyāt story count must be 14");
+          console.log("KIDS LIVE GUARD OK",quiz.items.length,sy.items.length,expected,swVersion);
           NODE
 
       - name: Deploy Kids visitor assets
@@ -70,21 +82,27 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          EXPECT="kids-shell-v41-studio-sections1108"
+          EXPECT="$(node -p 'require("./kids/version.json").buildId')"
+          SW_EXPECT="$(node -p 'String(require("./kids/version.json").visualSystem.serviceWorkerCache||"").replace(/^v/,"")')"
           ok=0
           for attempt in $(seq 1 12); do
             cb="$(date +%s)-$attempt"
             curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/version.json?cb=$cb" -o /tmp/kids-version.json || true
             curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/quiz-kids.json?cb=$cb" -o /tmp/kids-quiz.json || true
+            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/sahabiyyat-stories.json?cb=$cb" -o /tmp/kids-sahabiyyat.json || true
             curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/start?kv=$EXPECT&cb=$cb" -o /tmp/kids-start.html || true
+            curl -fsS --max-time 25 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/sw.js?cb=$cb" -o /tmp/kids-sw.js || true
             if grep -F -q "$EXPECT" /tmp/kids-version.json 2>/dev/null &&
-               grep -F -q '4–6 Jahre · hören & tippen' /tmp/kids-start.html 2>/dev/null &&
-               ! grep -F -q 'Keine geprüfte Wiederholung ist gerade fällig' /tmp/kids-start.html 2>/dev/null &&
-               node -e 'const fs=require("fs");const q=JSON.parse(fs.readFileSync("/tmp/kids-quiz.json","utf8"));if(!Array.isArray(q.items)||q.items.length<650)process.exit(1);'; then
+               grep -F -q 'id="syEntry"' /tmp/kids-start.html 2>/dev/null &&
+               grep -F -q 'class="stories-area-jump"' /tmp/kids-start.html 2>/dev/null &&
+               grep -F -q 'data-story-area="sahabiyyat"' /tmp/kids-start.html 2>/dev/null &&
+               grep -F -q "dar-al-tawhid-kids-v$SW_EXPECT" /tmp/kids-sw.js 2>/dev/null &&
+               node -e 'const fs=require("fs");const q=JSON.parse(fs.readFileSync("/tmp/kids-quiz.json","utf8"));if(!Array.isArray(q.items)||q.items.length<650)process.exit(1);' &&
+               node -e 'const fs=require("fs");const s=JSON.parse(fs.readFileSync("/tmp/kids-sahabiyyat.json","utf8"));if(!Array.isArray(s.items)||s.items.length!==14)process.exit(1);'; then
               ok=1
-              echo "Kids live OK on attempt $attempt"
+              echo "Kids live OK on attempt $attempt · $EXPECT"
               break
             fi
             sleep 8
           done
-          test "$ok" = "1" || { echo "::error::Kids live verification failed"; exit 1; }
+          test "$ok" = "1" || { echo "::error::Kids live verification failed for $EXPECT"; exit 1; }
