@@ -99,7 +99,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         appMenu.addItem(menuItem("Update jetzt installieren…", action: #selector(installUpdateFromMenu(_:)), target: self))
         appMenu.addItem(menuItem("Update-Protokoll öffnen…", action: #selector(openUpdateLog(_:)), target: self))
         appMenu.addItem(menuItem("Engine reparieren…", action: #selector(repairEngineFromMenu(_:)), target: self))
-        appMenu.addItem(menuItem("iPad / iPhone verbinden…", action: #selector(showCompanionPairing(_:)), target: self))
+        appMenu.addItem(menuItem("iPhone / iPad App installieren…", action: #selector(showMobileInstall(_:)), target: self))
+        appMenu.addItem(menuItem("iPad / iPhone lokal mit Mac verbinden…", action: #selector(showCompanionPairing(_:)), target: self))
         appMenu.addItem(.separator())
         appMenu.addItem(menuItem("DĀR Voice Studio ausblenden", action: #selector(NSApplication.hide(_:)), key: "h"))
         let hideOthers = menuItem("Andere ausblenden", action: #selector(NSApplication.hideOtherApplications(_:)), key: "h", modifiers: [.command, .option])
@@ -318,9 +319,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
     }
 
     private func companionPairingHost() -> String? {
-        // Bevorzugt einen stabilen Bonjour-Namen statt einer wechselnden WLAN-IP.
-        // Falls macOS keinen brauchbaren Hostnamen liefert, bleibt die erprobte
-        // lokale IPv4-Ermittlung als sicherer Fallback erhalten.
+        // Für die lokale Kopplung ist die aktuelle WLAN-IP auf iPhone/iPad
+        // zuverlässiger als ein Bonjour-.local-Name. Bonjour bleibt Fallback.
+        if let ip = localIPv4Address(), !ip.isEmpty { return ip }
+
         let rawNames = [
             Host.current().localizedName,
             ProcessInfo.processInfo.hostName
@@ -331,11 +333,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             var host = raw
             if host.hasSuffix(".") { host.removeLast() }
             if host.hasSuffix(".local") { return host }
-            if !host.contains(" ") && !host.contains("/") {
-                return host + ".local"
-            }
+            if !host.contains(" ") && !host.contains("/") { return host + ".local" }
         }
-        return localIPv4Address()
+        return nil
     }
 
     private func companionPairingURL() -> String? {
@@ -364,10 +364,38 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
         return NSImage(cgImage: cg, size: NSSize(width: size, height: size))
     }
 
+    private func publicMobileInstallURL() -> String {
+        "https://dar-al-tawhid.de/voice-studio/mobile.html?app=1&cloud=1"
+    }
+
+    @objc private func showMobileInstall(_ sender: Any?) {
+        let url = publicMobileInstallURL()
+        let alert = NSAlert()
+        alert.alertStyle = .informational
+        alert.messageText = "DĀR Voice auf iPhone / iPad installieren"
+        alert.informativeText = "Dieser QR-Code ist der echte HTTPS-App-Link und funktioniert unabhängig von der lokalen Mac-IP.\n\n1. QR-Code mit der iPhone-Kamera öffnen.\n2. In Safari auf Teilen tippen.\n3. „Zum Home-Bildschirm“ wählen.\n\nDanach startet DĀR Voice wie eine eigene App. Der lokale Mac-QR-Code ist nur noch für die optionale direkte WLAN-Verbindung."
+
+        if let image = qrImage(for: url) {
+            let imageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 220, height: 220))
+            imageView.image = image
+            imageView.imageScaling = .scaleProportionallyUpOrDown
+            alert.accessoryView = imageView
+        }
+
+        alert.addButton(withTitle: "HTTPS-App-Link kopieren")
+        alert.addButton(withTitle: "Schließen")
+        let response = alert.runModal()
+        if response == .alertFirstButtonReturn {
+            let pasteboard = NSPasteboard.general
+            pasteboard.clearContents()
+            pasteboard.setString(url, forType: .string)
+        }
+    }
+
     @objc private func showCompanionPairing(_ sender: Any?) {
         let alert = NSAlert()
         alert.alertStyle = .informational
-        alert.messageText = "DĀR Voice auf iPad / iPhone öffnen"
+        alert.messageText = "DĀR Voice lokal mit diesem Mac verbinden"
 
         guard let url = companionPairingURL() else {
             alert.informativeText = "Keine lokale WLAN-Adresse oder kein Kopplungsschlüssel verfügbar. Verbinde den Mac mit demselben WLAN wie dein iPad/iPhone und starte Voice Studio erneut."
@@ -376,7 +404,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             return
         }
 
-        alert.informativeText = "Scanne den QR-Code nur für die erste Kopplung. Danach bleibt das iPhone/iPad gespeichert und aktualisiert sich über den eigenen Update-Bereich. Der Link verwendet bevorzugt den stabilen Mac-Namen im lokalen Netz statt einer wechselnden IP.\n\nDen Kopplungslink nicht an andere Personen weitergeben."
+        alert.informativeText = "Dieser QR-Code ist nur für die direkte lokale WLAN-Kopplung mit dem Mac. Für die eigentliche iPhone-App-Installation nutze im Menü „iPhone / iPad App installieren…“.\n\nMac und iPhone müssen für diese lokale Verbindung im selben WLAN sein. Den Kopplungslink nicht an andere Personen weitergeben."
         if let image = qrImage(for: url) {
             let imageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 220, height: 220))
             imageView.image = image
