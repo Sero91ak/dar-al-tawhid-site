@@ -974,6 +974,56 @@
         color:var(--text)!important;
         text-shadow:none!important;
       }
+      /* QSRC_DETAIL_CONTINUITY_V1278 */
+      .qsrc-page--detail .qsrc-detail{
+        display:grid!important;
+        gap:0!important;
+      }
+      .qsrc-page--detail .qsrc-detail-block h3{
+        margin:0 0 8px!important;
+        font-family:var(--font-display,var(--serif,Georgia,serif))!important;
+        font-size:clamp(1.12rem,3.2vw,1.42rem)!important;
+        line-height:1.15!important;
+        font-weight:620!important;
+        color:var(--text,#f7f1e7)!important;
+      }
+      .qsrc-page--detail .qsrc-detail-block>p{
+        margin:0 0 10px!important;
+        color:var(--muted2,#bdb7aa)!important;
+        line-height:1.6!important;
+      }
+      .qsrc-page--detail .qsrc-post-list{
+        display:flex!important;
+        flex-direction:column!important;
+        gap:0!important;
+        border-top:1px solid color-mix(in srgb,var(--gold2,#efd78e) 12%,transparent)!important;
+      }
+      .qsrc-page--detail .qsrc-post-list .qsrc-post-row,
+      .qsrc-page--detail .qsrc-post-list .post-row{
+        border-radius:0!important;
+        border-left:0!important;
+        border-right:0!important;
+        background:transparent!important;
+        box-shadow:none!important;
+      }
+      .qsrc-page--scholar-detail .qsrc-detail>.qsrc-detail-block:first-child{
+        padding-top:4px!important;
+        border-top:0!important;
+      }
+      .qsrc-page--scholar-detail .qsrc-detail>.qsrc-detail-block:first-child p{
+        display:inline-flex!important;
+        align-items:center!important;
+        min-height:32px!important;
+        margin:0!important;
+        padding:6px 11px!important;
+        border:1px solid color-mix(in srgb,var(--gold2,#efd78e) 18%,transparent)!important;
+        border-radius:999px!important;
+        color:var(--gold2,#efd78e)!important;
+        background:color-mix(in srgb,var(--gold2,#efd78e) 5%,transparent)!important;
+        font-size:.78rem!important;
+        font-weight:800!important;
+        letter-spacing:.05em!important;
+      }
       @media(min-width:980px){
         .qsrc-page--overview .qsrc-lib-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:22px 18px!important}
       }
@@ -1321,7 +1371,7 @@
     const relatedPosts = postsForBook(book);
     const postCount = relatedPosts.length || Number(book.postCount || 0);
 
-    return `${setPageHeader(book.title, book.category || "Geprüftes Werk", "Quellenbibliothek")}
+    return `<div class="qsrc-page qsrc-page--detail qsrc-page--book-detail">${setPageHeader(book.title, book.category || "Geprüftes Werk", "Quellenbibliothek")}
 <section class="qsrc-detail">
   <article class="qsrc-detail-showcase">
     <div class="qsrc-detail-cover-slot">${libCoverHtml(book)}</div>
@@ -1357,7 +1407,7 @@
       .filter(Boolean);
     const relatedPosts = postsForScholar(scholar);
 
-    return `${setPageHeader(scholar.name, "Zitierter Gelehrter", "Quellenbibliothek")}
+    return `<div class="qsrc-page qsrc-page--detail qsrc-page--scholar-detail">${setPageHeader(scholar.name, "Zitierter Gelehrter", "Quellenbibliothek")}
 <section class="qsrc-detail">
   <article class="qsrc-detail-block">
     <h3>Rolle</h3>
