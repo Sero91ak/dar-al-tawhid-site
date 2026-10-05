@@ -553,7 +553,7 @@
 */
 html[data-view="stories"] body #view-stories.ps-stories-home{
   --story-shell:min(calc(100% - 28px),860px);
-  --story-bottom-clearance:112px;
+  --story-bottom-clearance:18px;
   width:100%!important;
   max-width:none!important;
   margin:0!important;
@@ -726,7 +726,7 @@ html[data-view="stories"] body #view-stories.ps-stories-home > :last-child{margi
 @media(max-width:359px){
   html[data-view="stories"] body #view-stories.ps-stories-home{
     --story-shell:min(calc(100% - 18px),860px);
-    --story-bottom-clearance:104px;
+    --story-bottom-clearance:16px;
   }
   #view-stories.ps-stories-home > .stories-world-head.stories-hero{
     min-height:258px!important;
@@ -748,7 +748,7 @@ html[data-view="stories"] body #view-stories.ps-stories-home > :last-child{margi
 @media(min-width:480px) and (max-width:767px){
   html[data-view="stories"] body #view-stories.ps-stories-home{
     --story-shell:min(calc(100% - 40px),820px);
-    --story-bottom-clearance:114px;
+    --story-bottom-clearance:18px;
   }
   #view-stories.ps-stories-home > .stories-world-head.stories-hero{
     min-height:340px!important;
@@ -768,7 +768,7 @@ html[data-view="stories"] body #view-stories.ps-stories-home > :last-child{margi
 @media(min-width:768px){
   html[data-view="stories"] body #view-stories.ps-stories-home{
     --story-shell:min(calc(100% - 72px),900px);
-    --story-bottom-clearance:120px;
+    --story-bottom-clearance:20px;
   }
   #view-stories.ps-stories-home > .stories-world-head.stories-hero{
     min-height:390px!important;
@@ -795,7 +795,7 @@ html[data-view="stories"] body #view-stories.ps-stories-home > :last-child{margi
 @media(min-width:1024px){
   html[data-view="stories"] body #view-stories.ps-stories-home{
     --story-shell:min(calc(100% - 96px),1040px);
-    --story-bottom-clearance:124px;
+    --story-bottom-clearance:22px;
   }
   #view-stories.ps-stories-home > .stories-world-head.stories-hero{
     min-height:420px!important;
@@ -831,5 +831,43 @@ html[data-view="stories"] body #view-stories.ps-stories-home > :last-child{margi
   #view-stories.ps-stories-home #syEntry{
     scroll-behavior:auto!important;
     transition:none!important;
+  }
+}
+
+
+/* STORIES_HOME_WIDE_GRID_V1152 */
+@media(min-width:1100px){
+  html[data-view="stories"] body #view-stories.ps-stories-home.active{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    column-gap:18px!important;
+    row-gap:0!important;
+    align-items:start!important;
+    padding-left:max(28px,calc((100vw - 1180px)/2))!important;
+    padding-right:max(28px,calc((100vw - 1180px)/2))!important;
+  }
+  #view-stories.ps-stories-home > .stories-world-head.stories-hero{
+    grid-column:1/-1!important;
+    width:100vw!important;
+    margin-left:calc(50% - 50vw)!important;
+    margin-right:calc(50% - 50vw)!important;
+  }
+  #view-stories.ps-stories-home > #psProphetEntry{grid-column:1!important}
+  #view-stories.ps-stories-home > #msEntry{grid-column:2!important}
+  #view-stories.ps-stories-home > #syEntry{grid-column:3!important}
+  #view-stories.ps-stories-home #psProphetEntry,
+  #view-stories.ps-stories-home #msEntry,
+  #view-stories.ps-stories-home #syEntry{
+    width:100%!important;
+    height:300px!important;
+    min-height:300px!important;
+    margin:0 0 26px!important;
+  }
+  #view-stories.ps-stories-home > .story-feature,
+  #view-stories.ps-stories-home > .story-more-title,
+  #view-stories.ps-stories-home > .story-list,
+  #view-stories.ps-stories-home > .section-title:not(.story-more-title),
+  #view-stories.ps-stories-home > .gentle-note{
+    grid-column:1/-1!important;
   }
 }
