@@ -129,6 +129,48 @@ async function fetchKidsMirror(pathname, search) {
   return fetch(next.toString(), { method: "GET", redirect: "follow" });
 }
 
+const RUNTIME_MEDIA_RE = /\.(?:avif|webp|png|jpe?g|gif|svg|mp4|m4a|mp3|aac|ogg|wav)$/i;
+
+function runtimeMediaHeaders(assetResponse, url, extra = {}) {
+  const headers = new Headers(assetResponse.headers);
+  const versioned = Boolean(
+    url.searchParams.get("v") ||
+    url.searchParams.get("ver") ||
+    url.searchParams.get("version") ||
+    url.searchParams.get("build") ||
+    url.searchParams.get("kv")
+  );
+  if (versioned) {
+    headers.set("Cache-Control", "public, max-age=31536000, immutable");
+    headers.set("CDN-Cache-Control", "public, max-age=31536000, immutable");
+    headers.set("Cloudflare-CDN-Cache-Control", "public, max-age=31536000, immutable");
+  } else {
+    headers.set("Cache-Control", "public, max-age=86400, stale-while-revalidate=604800");
+    headers.set("CDN-Cache-Control", "public, max-age=604800, stale-while-revalidate=2592000");
+    headers.set("Cloudflare-CDN-Cache-Control", "public, max-age=604800, stale-while-revalidate=2592000");
+  }
+  headers.delete("Pragma");
+  for (const [key, value] of Object.entries(extra)) headers.set(key, value);
+  return headers;
+}
+
+function mediaAssetResponse(assetResponse, request, url, extra = {}) {
+  if (!assetResponse || !assetResponse.ok || !RUNTIME_MEDIA_RE.test(url.pathname)) return null;
+  const headers = runtimeMediaHeaders(assetResponse, url, extra);
+  if (request.method === "HEAD") {
+    return new Response(null, {
+      status: assetResponse.status,
+      statusText: assetResponse.statusText,
+      headers
+    });
+  }
+  return new Response(assetResponse.body, {
+    status: assetResponse.status,
+    statusText: assetResponse.statusText,
+    headers
+  });
+}
+
 function kidsHeaders(assetResponse) {
   const headers = new Headers(assetResponse.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
@@ -830,6 +872,8 @@ export default {
         if (!assetResponse) {
           return new Response("Kids unavailable", { status: 503, headers: { "Content-Type": "text/plain; charset=utf-8" } });
         }
+        const mediaResponse = mediaAssetResponse(assetResponse, request, url, { "X-Kids-Build": KIDS_BUILD });
+        if (mediaResponse) return mediaResponse;
         const headers = kidsHeaders(assetResponse);
         if (request.method === "HEAD") {
           return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
@@ -907,7 +951,9 @@ export default {
     }
 
     try {
-      return await env.ASSETS.fetch(request);
+      const assetResponse = await env.ASSETS.fetch(request);
+      const mediaResponse = mediaAssetResponse(assetResponse, request, url);
+      return mediaResponse || assetResponse;
     } catch (err) {
       return new Response("Not Found", {
         status: 404,
