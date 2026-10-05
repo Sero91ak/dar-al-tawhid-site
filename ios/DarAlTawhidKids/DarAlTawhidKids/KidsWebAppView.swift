@@ -16,6 +16,7 @@ struct KidsWebAppView: UIViewRepresentable {
         configuration.websiteDataStore = .default()
         configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         configuration.userContentController.add(context.coordinator, name: "darKidsNowPlaying")
+        configuration.userContentController.add(context.coordinator, name: "darKidsScreenAwake")
 
         let bridge = """
         (function(){
@@ -62,6 +63,7 @@ struct KidsWebAppView: UIViewRepresentable {
         private var nowPlayingArtURL = ""
         private var hasKidsNowPlaying = false
         private var currentDeepLink = ""
+        private var readingKeepsScreenAwake = false
 
         func attach(_ webView: WKWebView) {
             self.webView = webView
@@ -77,6 +79,12 @@ struct KidsWebAppView: UIViewRepresentable {
                 name: .kidsIntroDidFinish,
                 object: nil
             )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(appDidEnterBackground),
+                name: UIApplication.didEnterBackgroundNotification,
+                object: nil
+            )
         }
 
         @objc private func introDidFinish() {
@@ -90,7 +98,11 @@ struct KidsWebAppView: UIViewRepresentable {
 
         deinit {
             NotificationCenter.default.removeObserver(self)
+            DispatchQueue.main.async {
+                UIApplication.shared.isIdleTimerDisabled = false
+            }
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsNowPlaying")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsScreenAwake")
         }
 
         func loadKidsHome(in webView: WKWebView) {
@@ -106,11 +118,24 @@ struct KidsWebAppView: UIViewRepresentable {
         }
 
         @objc private func appDidBecomeActive() {
+            UIApplication.shared.isIdleTimerDisabled = readingKeepsScreenAwake
             guard hasKidsNowPlaying else { return }
             webView?.evaluateJavaScript(
                 "try{if(window.DARKidsAudioRemote&&DARKidsAudioRemote.openCurrent)DARKidsAudioRemote.openCurrent()}catch(e){}",
                 completionHandler: nil
             )
+        }
+
+        @objc private func appDidEnterBackground() {
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
+
+        private func applyKidsScreenAwake(_ body: [String: Any]) {
+            let enabled = body["enabled"] as? Bool == true
+            readingKeepsScreenAwake = enabled
+            DispatchQueue.main.async {
+                UIApplication.shared.isIdleTimerDisabled = enabled
+            }
         }
 
         private func configurePlaybackSession() {
@@ -235,8 +260,15 @@ struct KidsWebAppView: UIViewRepresentable {
         }
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-            guard message.name == "darKidsNowPlaying" else { return }
-            applyKidsNowPlaying(message.body as? [String: Any] ?? [:])
+            let body = message.body as? [String: Any] ?? [:]
+            switch message.name {
+            case "darKidsNowPlaying":
+                applyKidsNowPlaying(body)
+            case "darKidsScreenAwake":
+                applyKidsScreenAwake(body)
+            default:
+                break
+            }
         }
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
