@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1129";
-const KIDS_BUILD_ID="kids-shell-v59-story-master1129";
+const CACHE_NAME="dar-al-tawhid-kids-v1130";
+const KIDS_BUILD_ID="kids-shell-v60-voice-flow1130";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -46,7 +46,7 @@ const CORE_PRECACHE=[
   "/kids/story-hub.js?v=8",
   "/kids/kids-age-typography.css?v=4",
   "/kids/kids-age-typography.js?v=3",
-  "/kids/owner-voice.js?v=1",
+  "/kids/owner-voice.js?v=2",
   "/kids/content-studio-feed.js?v=studio6",
   "/kids/assets/kids-open-v95.css?v=97",
   "/kids/assets/kids-open-v95.js?v=97",
@@ -94,6 +94,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/alphabet-audio.json",
   "/kids/data/quiz-kids.json",
   "/kids/data/quiz-audio.json",
+  "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
   "/kids/quiz-library.css?v=7",
   "/kids/quiz-library.js?v=7",
