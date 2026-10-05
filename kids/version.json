@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v60-voice-flow1130",
-  "label": "KIDS · V1.07.64",
-  "releasedAt": "2026-10-05T13:52:00+02:00",
-  "note": "Kids v1130: alle 14 Ṣaḥābiyyāt besitzen jetzt ausführliche vollständige Masterbiografien mit mindestens 850 Wörtern (aktuell 884–993). Lebensweg, Īmān, Taten, Aufgaben, Alltag und zentrale Lehren werden ausführlich erzählt. Derselbe ungekürzte Mastertext gilt für 4–5, 6–8 und 9–10; nur die Darstellung ist altersabhängig. Voice Studio zeigt Wortzahl und geschätzte Sprechdauer.",
+  "buildId": "kids-shell-v61-voice-buffer1131",
+  "label": "KIDS · V1.07.65",
+  "releasedAt": "2026-10-05T14:10:00+02:00",
+  "note": "Kids v1131: Quiz- und Duʿāʾ-Owner-Voice laden die aktuelle, die Feedback- und die nächste Audiodatei frühzeitig in den Browser-Audio-Cache. Dadurch muss iOS während kurzer Sprachclips deutlich seltener nachladen. Die neue interne Zahlwort-Normalisierung für Antwortnummern sowie Sūrah-/Āyah-Angaben bleibt für neu erzeugte Serhat-Audios aktiv.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1130",
+    "serviceWorkerCache": "v1131",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -543,7 +543,9 @@
     "voiceStudioStoryLengthVisible": true,
     "futureBiographyMinimumMasterWords": 850,
     "sahabiyyatMasterWordRange": "884–993",
-    "sahabiyyatSameMasterAllAges": true
+    "sahabiyyatSameMasterAllAges": true,
+    "ownerVoicePlayback": "preload-current-feedback-next-v3",
+    "ownerVoiceProviderState": "generation-pipeline-ready-provider-secret-required"
   },
   "updatedAt": "2026-10-05"
 }
