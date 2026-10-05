@@ -1,0 +1,150 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-3076-3100",
+  "series": "3051-3150",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "HAD-3076–3100 setzt Ṣaḥīḥ Muslim im Kitāb al-Fitan wa-Ašrāṭ as-Sāʿah von Muslim 2889a bis Muslim 2902 fort. Verwendet wurden nur eigenständige Aussagekerne. Isnād- und reine Wiederholungsvarianten (u. a. 2889b, 2890b, 2891c/e sowie Parallelfassungen 2894b–d und 2901b–d) wurden nicht künstlich als zusätzliche Karten vervielfacht. Die vorgesehenen Kernaussagen wurden semantisch gegen den vorhandenen HAD-Bestand geprüft; es wurden keine bereits vorhandenen Aussagekarten gefunden. Die Ṣaḥīḥ-Muslim-Nummern und Wortlautinhalte wurden zusätzlich gegen aktuelle Textnachweise geprüft. Früheste-Šarḥ-Priorität al-Māzirī → Qāḍī ʿIyāḍ wurde beibehalten; für diesen Block wird der direkt zuordenbare frühe Kommentar Qāḍī ʿIyāḍs im Ikmāl al-Muʿlim, Bd. 8, verwendet. Unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "semanticDuplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "sourceHadithNumbersChecked": true,
+    "globalCatalogUpdated": true,
+    "appleTvScreensaverUpdated": true,
+    "webIosAndroidLibraryLoaderUpdated": true,
+    "seriesProgress": "50/100"
+  },
+  "dedupeDecisions": [
+    "Muslim 2889b not duplicated: same substantive report as 2889a",
+    "Muslim 2890b not duplicated: same substantive report as 2890a",
+    "Muslim 2891c/e not duplicated: isnad/repetition variants",
+    "Muslim 2894b–d merged into substantive Euphrates-gold statement cores",
+    "Muslim 2901b–d not multiplied: ten-sign variants consolidated in HAD-3099",
+    "Existing HAD corpus semantically searched before creating the 25 new records"
+  ],
+  "sourceRange": [
+    "Muslim 2889a",
+    "Muslim 2891a-b",
+    "Muslim 2892",
+    "Muslim 2894a-d",
+    "Muslim 2896",
+    "Muslim 2897",
+    "Muslim 2898a-b",
+    "Muslim 2900",
+    "Muslim 2901a-d",
+    "Muslim 2902"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibrary",
+    "iosHadithLibrary",
+    "androidWebAppAndWebsite"
+  ],
+  "records": [
+    {
+      "id": "HAD-3076",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3077",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3078",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3079",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3080",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3081",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3082",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3083",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3084",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3085",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3086",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3087",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3088",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3089",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3090",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3091",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3092",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3093",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3094",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3095",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3096",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3097",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3098",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3099",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3100",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    }
+  ]
+}
