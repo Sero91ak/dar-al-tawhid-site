@@ -455,7 +455,8 @@ jobs:
           assert "/kids/data/quiz-audio.json" in runtime
           assert "DARKidsOwnerVoice" in runtime
           assert "SpeechSynthesisUtterance" not in runtime, "owner runtime must never synthesize with system TTS"
-          assert '/kids/owner-voice.js?v=1' in kids
+          import re
+          assert re.search(r'/kids/owner-voice\.js\?v=\d+',kids), "current Kids owner-voice runtime reference missing"
           assert '/kids/quiz-owner-voice.js' not in kids, "legacy quiz-only runtime must not be loaded"
           assert "DARKidsOwnerVoice.play" in kids
           assert "Audio wird vorbereitet" in kids
