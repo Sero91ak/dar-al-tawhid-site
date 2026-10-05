@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v47-hoerwelten1117",
-  "label": "KIDS · V1.07.52",
-  "releasedAt": "2026-10-05T08:40:00+02:00",
-  "note": "Kids v1117: Geschichten des Īmān nutzt jetzt einen gemeinsamen altersgerechten Universal-Player für Propheten, Ṣaḥābah und Ṣaḥābiyyāt. Edge-to-edge, Mini-Player, echtes Minimieren, ±15 Sekunden, Resume und synchrones Mitlesen laufen aus einer gemeinsamen Registry. Bestehende Bereiche bleiben erhalten.",
+  "buildId": "kids-shell-v48-hoerwelten1118",
+  "label": "KIDS · V1.07.53",
+  "releasedAt": "2026-10-05T09:00:00+02:00",
+  "note": "Kids v1118: Die Hörwelten merken sich die zuletzt gehörte Geschichte und zeigen einen klaren Weiterhören-Einstieg. Im Player führt eine ruhige nächste-Geschichte-Fläche ohne Autoplay direkt weiter. Universal-Player, Alterslogik, bestehende Story-Seiten und Quellen bleiben erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1117",
+    "serviceWorkerCache": "v1118",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -443,7 +443,10 @@
     "storyHubIntegratedReadAlong": true,
     "storyHubMiniPlayer": true,
     "storyHubGestureNavigation": true,
-    "storyHubManifest": "/kids/data/story-hub.json?v=2"
+    "storyHubManifest": "/kids/data/story-hub.json?v=2",
+    "storyHubContinueListening": true,
+    "storyHubNextStory": true,
+    "storyHubAutoplayNext": false
   },
   "updatedAt": "2026-10-04"
 }
