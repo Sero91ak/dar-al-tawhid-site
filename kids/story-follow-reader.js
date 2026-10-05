@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 
-/* DĀR AL TAWḤĪD Kids — shared audiobook / follow reader v4
+/* DĀR AL TAWḤĪD Kids — shared audiobook / follow reader v6
    - persistent per-story progress
    - timestamp-aware paragraph following with calibrated fallback
    - child-friendly focus reader with automatic voice-follow scrolling
@@ -476,5 +476,5 @@ function create(options){
     getSavedProgress:readProgress
   };
 }
-window.DARKidsFollowReader={version:5,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
+window.DARKidsFollowReader={version:6,create,formatTime,progressPrefix:PROGRESS_PREFIX,nowPlayingKey:NOW_PLAYING_KEY};
 })();
