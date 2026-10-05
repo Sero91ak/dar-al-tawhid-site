@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v84-shared-story-controls1157",
-  "label": "KIDS · V1.07.86",
-  "releasedAt": "2026-10-05T18:18:00+02:00",
-  "note": "Kids v1156: Die drei Modus-Buttons im Propheten-Detail entsprechen wieder exakt dem Ṣaḥābah-Bereich: eine gemeinsame horizontale Reihe, gleiche Touch-Höhe, gleiche Kapsel-Geometrie, gleiche Abstände und gleiche aktive Gold-Markierung. Die zusätzlichen Propheten-Icons wurden nur in dieser Detailleiste entfernt. Player-, Audio- und Mitleselogik bleiben unverändert.",
+  "buildId": "kids-shell-v85-story-pages1158",
+  "label": "KIDS · V1.07.88",
+  "releasedAt": "2026-10-05T19:05:00+02:00",
+  "note": "Kids v1158: sichtbarer Neuaufbau der einzelnen Geschichtsseiten mit finaler CSS-Autorität. Propheten-Hero kompakter, Prophetenliste nummeriert und in klare Karten gesetzt; Mubaschschirūn und Ṣaḥābiyyāt nutzen denselben kindgerechten Kartenrhythmus, weniger Textlast und keine doppelten Bildnamen. Alle Story-Bundles und der Service Worker werden mit neuen Cache-Keys geladen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1157",
+    "serviceWorkerCache": "v1158",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -81,14 +81,14 @@
     "mubashshirunProfilePanels": true,
     "mubashshirunDirectHadithLinks": true,
     "mubashshirunStoryUi": "responsive-follow-reader-v11",
-    "mubashshirunBundleVersion": 26,
+    "mubashshirunBundleVersion": 27,
     "mubashshirunDataVersion": 7,
     "mubashshirunAudioPublishPipeline": true,
     "mubashshirunFuṣḥāReview": true,
     "mubashshirunPreparedStoryScripts": 30,
     "mubashshirunUniqueArtworkAssets": true,
     "mubashshirunDuplicateBundleGuard": true,
-    "ageAdaptiveTypography": "v4",
+    "ageAdaptiveTypography": "v5",
     "ageTypographyProfiles": {
       "4-5": {
         "body": "20px",
@@ -152,7 +152,7 @@
     "mubashshirunAgeAwareVisualDisclaimer": true,
     "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03",
     "mubashshirunSwipeBack": true,
-    "prophetStoriesBundleVersion": 36,
+    "prophetStoriesBundleVersion": 37,
     "storyCategoryBackgrounds": {
       "prophets": "/kids/assets/prophet-scenes/desert.webp",
       "sahaba": "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
@@ -439,8 +439,8 @@
     "sahabiyyatScrollSafety": true,
     "storyAudioPinnedBytes": 2098317,
     "storyAudioDeliveryProfile": "optimized-runtime",
-    "sahabiyyatCssVersion": 6,
-    "sahabiyyatJsVersion": 18,
+    "sahabiyyatCssVersion": 7,
+    "sahabiyyatJsVersion": 19,
     "storyHub": "compatibility-runtime-hidden-entry-v1149",
     "storyHubPlayer": "old-deeplink-compatibility-only",
     "storyHubAgeAdaptive": true,
@@ -469,7 +469,7 @@
     "storyHubAssetVersion": 5,
     "storyHubCategoryArtwork": "manifest-first-local",
     "storyLegacyAudioPlayers": true,
-    "storyHubCssVersion": 11,
+    "storyHubCssVersion": 12,
     "storyReaderControls": "compact-play-seek15-progress-v1154",
     "storyReaderTouch": "iphone-ipad-child-first-v1154",
     "storyReaderInternalScroll": true,
@@ -486,7 +486,7 @@
     ],
     "sahabiyyatNameOverlay": false,
     "sahabiyyatNameOverlayPlacement": "removed-from-card-and-hero",
-    "storyHubJsVersion": 19,
+    "storyHubJsVersion": 20,
     "sahabiyyatDistinctNewArtworks": [
       "sawdah",
       "juwayriyyah",
@@ -585,7 +585,7 @@
     "storiesHomeNoExpiringHotlinks": true,
     "storiesHomeEqualPrimaryCards": true,
     "storiesHomePedagogicalLabels": true,
-    "prophetStoriesJsVersion": 36,
+    "prophetStoriesJsVersion": 37,
     "storiesHomeStylesheetVersion": "1152",
     "storyReaderBackgroundInert": true,
     "storyReaderReadOnlyMode": true,
@@ -630,9 +630,9 @@
     "storiesBottomClearance": "global-shell-only-plus-18px-content-rhythm-v1152",
     "storiesWideLayout": "three-equal-worlds-from-1100px",
     "prophetDetailActions": "shared-ms-detail-modes-exact-parity",
-    "storyLibraryCardSystem": "unified-child-first-v1155",
+    "storyLibraryCardSystem": "unified-child-first-final-authority-v1158",
     "storyLibraryDuplicateArtworkTitles": false,
-    "storyLibraryResponsive": "small-phone-phone-tablet-v1155",
+    "storyLibraryResponsive": "small-phone-phone-tablet-wide-v1158",
     "prophetLibraryRefinement": "compact-honor-hero-numbered-list-v1155",
     "mubashshirunCardHierarchy": "name-arabic-summary-meta-v1155",
     "sahabiyyatCardHierarchy": "name-arabic-summary-meta-v1155",
@@ -640,7 +640,9 @@
       "prophets",
       "sahaba",
       "sahabiyyat"
-    ]
+    ],
+    "storyLibraryAuthority": "kids-age-typography.css?v=5",
+    "storyLibraryAuthorityLoadedLate": true
   },
   "updatedAt": "2026-10-05"
 }
