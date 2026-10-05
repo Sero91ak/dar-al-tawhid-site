@@ -158,9 +158,15 @@ function bindEntry(entry){
   entry.addEventListener("click",openLibrary);
   return entry;
 }
+function ensureEntryOrder(){
+  const entry=$("#syEntry"),sahaba=$("#msEntry"),prophet=$("#psProphetEntry");
+  if(!entry)return;
+  if(sahaba&&entry.previousElementSibling!==sahaba)sahaba.insertAdjacentElement("afterend",entry);
+  else if(!sahaba&&prophet&&entry.previousElementSibling!==prophet)prophet.insertAdjacentElement("afterend",entry);
+}
 function insertEntry(view){
   const existing=$("#syEntry");
-  if(existing){bindEntry(existing);return existing}
+  if(existing){bindEntry(existing);ensureEntryOrder();setTimeout(ensureEntryOrder,120);return existing}
   const entry=document.createElement("button");
   entry.id="syEntry"; entry.className="ms-entry sy-entry"; entry.type="button";
   entry.innerHTML=
@@ -180,6 +186,7 @@ function insertEntry(view){
   else if(prophet)prophet.insertAdjacentElement("afterend",entry);
   else view.querySelector(".page-head")?.insertAdjacentElement("afterend",entry);
   bindEntry(entry);
+  ensureEntryOrder();setTimeout(ensureEntryOrder,120);
   return entry;
 }
 function ensureUi(){
