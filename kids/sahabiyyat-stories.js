@@ -133,6 +133,7 @@ function renderCards(){
       '<span class="ms-row-visual" aria-hidden="true">'+
         (src?'<img src="'+esc(src)+'" alt="" data-sy-cover-id="'+esc(item.id)+'" decoding="async" loading="'+(index<4?"eager":"lazy")+'">':'')+
         '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span>'+
+        '<span class="sy-image-name">'+esc(item.name)+'</span>'+
       '</span>'+
       '<span class="ms-row-copy">'+
         '<span class="ms-row-kicker">ṢAḤĀBIYYAH · QUELLENGEPRÜFTE GESCHICHTE</span>'+
@@ -247,6 +248,7 @@ function ensureUi(){
         '<header class="ms-detail-hero" id="syDetailHero">'+
           '<img id="syHero" class="ms-detail-image" src="" alt="" decoding="async">'+
           '<span class="ms-detail-shade" aria-hidden="true"></span>'+
+          '<div id="syHeroName" class="sy-hero-name"></div>'+
           '<div class="ms-detail-copy">'+
             '<div class="ms-detail-kicker">ṢAḤĀBIYYAH · ERSTE GENERATION</div>'+
             '<h2 id="syTitle"></h2><div id="syArabic" class="ms-ar" dir="rtl"></div>'+
@@ -308,6 +310,7 @@ function renderActive(){
   activeText=textFor(active);
   const hero=$("#syHero");if(hero){hero.src=art(active,"hero");hero.style.objectPosition=heroPos(active);hero.onerror=()=>{hero.onerror=null;hero.src=art(active,"cover")}}
   $("#syTitle").textContent=active.name;
+  const heroName=$("#syHeroName"); if(heroName)heroName.textContent=active.name;
   $("#syArabic").textContent=(active.nameAr||"")+" رضي الله عنها";
   $("#sySummary").textContent=active.summary||"";
   $("#syMeta").innerHTML='<span>'+durationLabel(active,activeText)+'</span><span>Alter '+esc(age())+'</span><span>Lebensgeschichte</span>';
