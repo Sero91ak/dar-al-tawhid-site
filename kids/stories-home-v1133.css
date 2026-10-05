@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD Kids · Geschichten Startseite v1135
+/* DĀR AL TAWḤĪD Kids · Geschichten Startseite v1136
    Ein Hero, drei gleichwertige Hörwelten, kompakte freie Geschichten. */
 
 html[data-view="stories"] .shell{
@@ -124,7 +124,7 @@ html[data-view="stories"] .shell{
 /* Propheten: allgemeine Landschaft statt einer einzelnen Person / Kaʿbah als Hauptsymbol. */
 #view-stories.ps-stories-home #psProphetEntry .ps-entry-visual{
   position:absolute!important;z-index:0!important;inset:0!important;display:block!important;
-  background:url("/kids/assets/stories-home/prophets-v1133.webp?v=1135") center 52%/cover no-repeat!important;
+  background:url("/kids/assets/stories-home/prophets-v1133.webp?v=1136") center 52%/cover no-repeat!important;
 }
 #view-stories.ps-stories-home #psProphetEntry .ps-entry-visual img{opacity:0!important}
 #view-stories.ps-stories-home #psProphetEntry .ps-entry-panel{
@@ -148,10 +148,10 @@ html[data-view="stories"] .shell{
   background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important;
 }
 #view-stories.ps-stories-home #msEntry .ms-entry-bg{
-  background-image:url("/kids/assets/stories-home/sahaba-v1133.webp?v=1135")!important;
+  background-image:url("/kids/assets/stories-home/sahaba-v1133.webp?v=1136")!important;
 }
 #view-stories.ps-stories-home #syEntry .ms-entry-bg{
-  background-image:url("/kids/assets/stories-home/sahabiyyat-v1133.webp?v=1135")!important;
+  background-image:url("/kids/assets/stories-home/sahabiyyat-v1133.webp?v=1136")!important;
   background-position:center 42%!important;
 }
 #view-stories.ps-stories-home #msEntry .ms-entry-bg img,
@@ -227,7 +227,7 @@ html[data-view="stories"] .shell{
   height:100%!important;min-height:194px!important;
   background:
     linear-gradient(180deg,rgba(3,20,31,.06),rgba(3,20,31,.24)),
-    url("/kids/assets/stories-home/coin-v1133.webp?v=1135") center 55%/cover no-repeat!important;
+    url("/kids/assets/stories-home/coin-v1133.webp?v=1136") center 55%/cover no-repeat!important;
 }
 #view-stories.ps-stories-home .story-feature .story-scene::before,
 #view-stories.ps-stories-home .story-feature .story-scene::after{display:none!important}
