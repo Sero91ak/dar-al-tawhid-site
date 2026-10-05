@@ -2,7 +2,7 @@
 
 Status: verbindliche Prüfanweisung  
 Bereich: `apple-tv/quran/tadabbur/`  
-Aktueller Stand: `entriesCount = 5102`, letzter Batch `entries-batch-05z-116.json`, letzter Vers im aktuellen Durchgang `114:6`
+Aktueller Stand: `entriesCount = 4455`, letzter registrierter Gap-Batch `entries-gap-06-118.json`, letzter fortlaufender Batch `entries-batch-05z-116.json`, letzter Vers im fortlaufenden Durchgang `114:6`
 
 ## Zweck
 
@@ -63,9 +63,9 @@ Bei korrektem Stand erscheint:
 
 ```text
 TADABBUR VERIFY OK
-entries: 5102
+entries: 4455
 files: ...
-last_reference: 114:6
+last_reference: 2:43
 coverage_verses: 6236
 ```
 
@@ -73,7 +73,7 @@ Die genaue Dateianzahl kann steigen, wenn später weitere Batch-Dateien ergänzt
 
 ## Xcode-Regel
 
-Xcode darf keine feste Grenze wie `5102` oder `entries-batch-05z-116.json` kennen.
+Xcode darf keine feste `entriesCount`-Grenze und keinen fest verdrahteten letzten Batch kennen.
 
 Die App lädt:
 
