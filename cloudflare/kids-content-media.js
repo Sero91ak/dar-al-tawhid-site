@@ -483,6 +483,9 @@ export async function publishExistingKidsStoryAudio(env, input, helpers) {
   if (!Number.isFinite(durationSec) || durationSec < 3) {
     throw mediaError("Audiodauer fehlt oder ist zu kurz", 422);
   }
+  if (age === "all" && (durationSec < 300 || durationSec > 480)) {
+    throw mediaError("Masteraudio muss zwischen 5 und 8 Minuten lang sein", 422);
+  }
   const sha256 = await sha256Hex(payload.bytes);
   const ext = extFor(payload.mime, "audio");
   const short = sha256.slice(0, 14);
