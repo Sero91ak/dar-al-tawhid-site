@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1114";
-const KIDS_BUILD_ID="kids-shell-v44-sahabiyyat-static1114";
+const CACHE_NAME="dar-al-tawhid-kids-v1115";
+const KIDS_BUILD_ID="kids-shell-v45-sahabiyyat-visible1115";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -23,7 +23,7 @@ const CORE_PRECACHE=[
   "/kids/mubashshirun-stories.css?v=18",
   "/kids/sahabiyyat-stories.css?v=2",
   "/kids/mubashshirun-stories.js?v=18",
-  "/kids/sahabiyyat-stories.js?v=3",
+  "/kids/sahabiyyat-stories.js?v=4",
   "/kids/story-follow-reader.css?v=4",
   "/kids/story-follow-reader.js?v=5",
   "/kids/kids-age-typography.css?v=4",
@@ -215,7 +215,7 @@ self.addEventListener("fetch",function(event){
   if(!isKidsRequest(url))return;
 
   if(request.mode==="navigate"||request.destination==="document"||url.pathname==="/kids/start"||url.pathname==="/kids/start.html"||url.pathname==="/kids/start/"||url.pathname==="/kids/"||url.pathname==="/kids/index.html"||url.pathname==="/kids/shell.html"){
-    event.respondWith(staleWhileRevalidate(request));
+    event.respondWith(networkFirst(request,"/kids/start"));
     return;
   }
   if(url.pathname.indexOf("/kids/assets/kids-cinema/")===0&&url.pathname.indexOf(".mp4")>0){
