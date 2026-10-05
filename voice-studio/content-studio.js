@@ -651,7 +651,7 @@ function bind(){
     q("csSahabaTab")?.classList.add("active");
     const title=document.querySelector(".editor-panel h1"),lead=document.querySelector(".editor-panel .lead");
     if(title)title.textContent="Ṣaḥābah-Geschichten";
-    if(lead)lead.textContent="Einen Ṣaḥābī und eine Altersfassung anklicken. Der vollständige vorhandene Text wird direkt ins Voice-Studio geladen; danach Audio anklicken oder aus dem Finder hineinziehen.";
+    if(lead)lead.textContent="Einen Ṣaḥābī anklicken. Es gibt genau einen vollständigen Mastertext und ein Masteraudio für 4–10 Jahre; danach Audio erzeugen oder aus dem Finder hineinziehen.";
     await loadLibrary(true);
     q("csLibrarySection")?.scrollIntoView?.({behavior:"smooth",block:"start"});
   });
@@ -1343,7 +1343,8 @@ async function publishExistingStoryAudioDirect(){
     setStudioMessage("Zuerst fertige MP3/M4A hochladen oder Audio mit deiner Stimme erzeugen und einmal bestätigen.","warn");
     return null;
   }
-  if(!confirm(existingStoryKindLabel(existingStoryTarget.kind)+" · "+existingStoryTarget.age.replace("-","–")+" jetzt mit dieser Audio direkt im bestehenden Kids-Bereich aktualisieren?"))return null;
+  const masterTarget=existingStoryTarget.age==="all";
+  if(!confirm(existingStoryKindLabel(existingStoryTarget.kind)+(masterTarget?" · Master 4–10 Jahre":" · "+existingStoryTarget.age.replace("-","–"))+" jetzt mit dieser Audio direkt im bestehenden Kids-Bereich aktualisieren?"))return null;
   busy=true;renderStatus();
   setStudioMessage("Direktweg läuft: exakter Text → Audio → bestehender Kids-Bereich …","warn");
   try{
@@ -1355,7 +1356,7 @@ async function publishExistingStoryAudioDirect(){
       originalName=directAudioFile.name||"serhat-owner-audio";
     }else{
       blob=await compactAudioBlob();
-      originalName="serhat-voice-"+existingStoryTarget.itemId+"-"+existingStoryTarget.age+".m4a";
+      originalName="serhat-voice-"+existingStoryTarget.itemId+(masterTarget?"-master":"-"+existingStoryTarget.age)+".m4a";
       file=new File([blob],originalName,{type:blob.type||"audio/mp4"});
       alignment=await alignStoryFile(file,script);
     }
@@ -1381,11 +1382,11 @@ async function publishExistingStoryAudioDirect(){
     setProductionPhase("live-published");
     setStudioMessage(
       existingStoryKindLabel(existingStoryTarget.kind)+
-      " · "+existingStoryTarget.age.replace("-","–")+" aktualisiert. Audio und Mitlese-Zeiten sind direkt im bestehenden Kids-Bereich gespeichert.",
+      (masterTarget?" · Master 4–10 Jahre":" · "+existingStoryTarget.age.replace("-","–"))+" aktualisiert. Eine Audiodatei und dieselben Mitlese-Zeiten gelten im bestehenden Kids-Bereich für alle Altersstufen.",
       "good"
     );
     if(manual&&localReferenceLearningAvailable()){
-      const learnId=existingStoryTarget.kind+"-"+existingStoryTarget.itemId+"-"+existingStoryTarget.age;
+      const learnId=existingStoryTarget.kind+"-"+existingStoryTarget.itemId+(masterTarget?"-master":"-"+existingStoryTarget.age);
       localRequest("/content-audio/reference",{
         method:"POST",headers:{"Content-Type":"application/json"},
         body:JSON.stringify({
@@ -1627,55 +1628,59 @@ function legacyQuizFromStory(item){
     retry:"Hör die Geschichte noch einmal aufmerksam."
   };
 }
+function masterQuestionForStory(quiz){
+  if(!quiz||!Object.keys(quiz).length)return{};
+  return{"4–5":{...quiz},"6–8":{...quiz},"9–10":{...quiz}};
+}
+function masterExistingAudio(item){
+  const audio=item?.audio&&typeof item.audio==="object"?item.audio:{};
+  return audio["9-10"]||audio["6-8"]||audio["4-5"]||null;
+}
 function normalizeExistingProphetStories(item){
   if(!item||!String(item.id||"").trim())return[];
   const text=completeMasterText(item);
   if(!text)return[];
+  const metrics=storyTextMetrics(text);
   const quiz=legacyQuizFromStory(item);
-  return["4-5","6-8","9-10"].map(age=>{
-    if(!text)return null;
-    const range=ageRangeForStoryBand(age);
-    return{
-      id:"existing-prophet-"+String(item.id)+"-"+age,
-      kind:"story",appTarget:"kids",ageMin:range[0],ageMax:range[1],
-      title:String(item.storyTitle||item.title||item.name||item.id)+" · "+age.replace("-","–")+" Jahre",
-      category:"Propheten · Geschichte",topic:String(item.name||item.id),
-      prophetId:String(item.id||""),text,
-      sourceRefs:Array.isArray(item.sourceRefs)?item.sourceRefs:[],
-      question:Object.keys(quiz).length?{[age.replace("-","–")]:quiz}:{},
-      claimIds:[],tags:["legacy-kids","legacy-existing-story","existing-story:prophet","legacy-id:"+String(item.id)],
-      modes:{read:true,listen:true},
-      cover:item.cover?{url:String(item.cover),source:"existing-kids-art",type:"cover"}:{url:"/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",source:"existing-kids-art",type:"cover"},
-      existingAudio:item.audio?.[age]||null,
-      existingStory:{kind:"prophet",itemId:String(item.id),age},
-      verification:"approved"
-    };
-  }).filter(Boolean);
+  return [{
+    id:"existing-prophet-"+String(item.id)+"-master",
+    kind:"story",appTarget:"kids",ageMin:4,ageMax:10,
+    title:String(item.storyTitle||item.title||item.name||item.id)+" · Master 4–10 Jahre",
+    category:"Propheten · Geschichte",topic:String(item.name||item.id),
+    prophetId:String(item.id||""),text,
+    masterWords:metrics.words,masterDurationSec:metrics.seconds,masterLengthLabel:metrics.label,
+    sourceRefs:Array.isArray(item.sourceRefs)?item.sourceRefs:[],
+    question:masterQuestionForStory(quiz),
+    claimIds:[],tags:["legacy-kids","legacy-existing-story","existing-story:prophet","legacy-id:"+String(item.id),"single-master-story","single-master-audio"],
+    modes:{read:true,listen:true},
+    cover:item.cover?{url:String(item.cover),source:"existing-kids-art",type:"cover"}:{url:"/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",source:"existing-kids-art",type:"cover"},
+    existingAudio:masterExistingAudio(item),
+    existingStory:{kind:"prophet",itemId:String(item.id),age:"all",ageRange:"4-10"},
+    verification:"approved"
+  }];
 }
 function normalizeExistingMubashshirunStories(item){
   if(!item||!String(item.id||"").trim())return[];
   const text=completeMasterText(item);
   if(!text)return[];
+  const metrics=storyTextMetrics(text);
   const quiz=legacyQuizFromStory(item);
-  return["4-5","6-8","9-10"].map(age=>{
-    if(!text)return null;
-    const range=ageRangeForStoryBand(age);
-    return{
-      id:"existing-mubashshirun-"+String(item.id)+"-"+age,
-      kind:"story",appTarget:"kids",ageMin:range[0],ageMax:range[1],
-      title:String(item.name||item.short||item.id)+" · "+age.replace("-","–")+" Jahre",
-      category:"Ṣaḥābah · Geschichte",topic:String(item.trait||item.category||"Ṣaḥābah"),
-      text,
-      sourceRefs:Array.isArray(item.sourceRefs)?item.sourceRefs:[],
-      question:Object.keys(quiz).length?{[age.replace("-","–")]:quiz}:{},
-      claimIds:[],tags:["legacy-kids","legacy-existing-story","existing-story:mubashshirun","legacy-id:"+String(item.id)],
-      modes:{read:true,listen:true},
-      cover:item.cover?{url:String(item.cover),source:"existing-kids-art",type:"cover"}:{url:"/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",source:"existing-kids-art",type:"cover"},
-      existingAudio:item.audio?.[age]||null,
-      existingStory:{kind:"mubashshirun",itemId:String(item.id),age},
-      verification:"approved"
-    };
-  }).filter(Boolean);
+  return [{
+    id:"existing-mubashshirun-"+String(item.id)+"-master",
+    kind:"story",appTarget:"kids",ageMin:4,ageMax:10,
+    title:String(item.name||item.short||item.id)+" · Master 4–10 Jahre",
+    category:"Ṣaḥābah · Geschichte",topic:String(item.trait||item.category||"Ṣaḥābah"),
+    text,
+    masterWords:metrics.words,masterDurationSec:metrics.seconds,masterLengthLabel:metrics.label,
+    sourceRefs:Array.isArray(item.sourceRefs)?item.sourceRefs:[],
+    question:masterQuestionForStory(quiz),
+    claimIds:[],tags:["legacy-kids","legacy-existing-story","existing-story:mubashshirun","legacy-id:"+String(item.id),"single-master-story","single-master-audio"],
+    modes:{read:true,listen:true},
+    cover:item.cover?{url:String(item.cover),source:"existing-kids-art",type:"cover"}:{url:"/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",source:"existing-kids-art",type:"cover"},
+    existingAudio:masterExistingAudio(item),
+    existingStory:{kind:"mubashshirun",itemId:String(item.id),age:"all",ageRange:"4-10"},
+    verification:"approved"
+  }];
 }
 function normalizeExistingSahabiyyatStories(item){
   if(!item||!String(item.id||"").trim())return[];
@@ -1683,24 +1688,21 @@ function normalizeExistingSahabiyyatStories(item){
   if(!text)return[];
   const metrics=storyTextMetrics(text);
   const quiz=legacyQuizFromStory(item);
-  return["4-5","6-8","9-10"].map(age=>{
-    const range=ageRangeForStoryBand(age);
-    return{
-      id:"existing-sahabiyyat-"+String(item.id)+"-"+age,
-      kind:"story",appTarget:"kids",ageMin:range[0],ageMax:range[1],
-      title:String(item.name||item.short||item.id)+" · "+age.replace("-","–")+" Jahre",
-      category:"Ṣaḥābiyyāt · Geschichte",topic:String(item.trait||item.category||"Ṣaḥābiyyāt"),
-      text,masterWords:metrics.words,masterDurationSec:metrics.seconds,masterLengthLabel:metrics.label,
-      sourceRefs:Array.isArray(item.sourceRefs)?item.sourceRefs:[],
-      question:Object.keys(quiz).length?{[age.replace("-","–")]:quiz}:{},
-      claimIds:[],tags:["legacy-kids","legacy-existing-story","existing-story:sahabiyyat","legacy-id:"+String(item.id),"single-master-story"],
-      modes:{read:true,listen:true},
-      cover:item.cover?{url:String(item.cover),source:"existing-kids-art",type:"cover"}:{url:"/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",source:"existing-kids-art",type:"cover"},
-      existingAudio:item.audio?.[age]||null,
-      existingStory:{kind:"sahabiyyat",itemId:String(item.id),age},
-      verification:"approved"
-    };
-  });
+  return [{
+    id:"existing-sahabiyyat-"+String(item.id)+"-master",
+    kind:"story",appTarget:"kids",ageMin:4,ageMax:10,
+    title:String(item.name||item.short||item.id)+" · Master 4–10 Jahre",
+    category:"Ṣaḥābiyyāt · Geschichte",topic:String(item.trait||item.category||"Ṣaḥābiyyāt"),
+    text,masterWords:metrics.words,masterDurationSec:metrics.seconds,masterLengthLabel:metrics.label,
+    sourceRefs:Array.isArray(item.sourceRefs)?item.sourceRefs:[],
+    question:masterQuestionForStory(quiz),
+    claimIds:[],tags:["legacy-kids","legacy-existing-story","existing-story:sahabiyyat","legacy-id:"+String(item.id),"single-master-story","single-master-audio"],
+    modes:{read:true,listen:true},
+    cover:item.cover?{url:String(item.cover),source:"existing-kids-art",type:"cover"}:{url:"/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",source:"existing-kids-art",type:"cover"},
+    existingAudio:masterExistingAudio(item),
+    existingStory:{kind:"sahabiyyat",itemId:String(item.id),age:"all",ageRange:"4-10"},
+    verification:"approved"
+  }];
 }
 async function fetchLegacyKidsInventory(){
   const results=await Promise.allSettled([
@@ -1874,7 +1876,7 @@ async function loadLegacyForEdit(id){
   renderStatus();refreshQa();persistDraft();
   setStudioMessage(
     existingStoryTarget
-      ?(existingStoryKindLabel(existingStoryTarget.kind)+" · Alter "+existingStoryTarget.age.replace("-","–")+" geöffnet. "+storyTextMetrics(x.text||"").label+" · vollständiger Mastertext ist bereit: Audio erzeugen oder fertige MP3/M4A hochladen → direkt in den bestehenden Kids-Bereich.")
+      ?(existingStoryKindLabel(existingStoryTarget.kind)+(existingStoryTarget.age==="all"?" · Master 4–10 Jahre":" · Alter "+existingStoryTarget.age.replace("-","–"))+" geöffnet. "+storyTextMetrics(x.text||"").label+" · vollständiger Mastertext ist bereit: genau ein Audio erzeugen oder fertige MP3/M4A hochladen → für alle Altersstufen übernehmen.")
       :((studioKind==="dua"?"Duʿāʾ":studioKind==="narration"?"Erzählung":"Geschichte")+" aus dem vorhandenen Kids-Bestand geöffnet. Text ist sofort bereit: Audio erzeugen oder fertige MP3/M4A hochladen → direkt Kids veröffentlichen."),
     "good"
   );
