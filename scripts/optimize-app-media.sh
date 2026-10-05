@@ -15,7 +15,8 @@ skipped_count=0
 
 is_protected() {
   local f="$1"
-  [[ "$f" =~ (^|/)(Assets\.xcassets|AppIcon|icons?|logos?|favicons?|watermarks?|badges?)(/|$) ]] && return 0
+  [[ "$f" =~ (^|/)(Assets\.xcassets|AppIcon|app-icons|icons?|logos?|favicons?|watermarks?|badges?|seals?)(/|$) ]] && return 0
+  [[ "$(basename "$f")" =~ (logo|watermark|favicon) ]] && return 0
   [[ "$f" =~ (^|/)(originals?|masters?|sources?|raw)(/|$) ]] && return 0
   [[ "$f" =~ (-master|\.master)\.(png|jpe?g|webp|mp4)$ ]] && return 0
   return 1
