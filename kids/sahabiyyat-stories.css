@@ -125,3 +125,96 @@ html[data-view="stories"] #view-stories.ps-stories-home{
   .sy-library-page .sy-image-name{left:9px!important;right:9px!important;bottom:8px!important;font-size:14px!important}
   .sy-modal .sy-hero-name{left:14px!important;bottom:104px!important;max-width:82%!important;font-size:18px!important;padding:8px 11px!important;border-radius:12px!important}
 }
+
+/* SAHABIYYAT_UNIFIED_CARDS_V12 — same hierarchy, no duplicate artwork title */
+.sy-library-page .sy-image-name,
+.sy-modal .sy-hero-name{
+  display:none!important;
+}
+.sy-library-page .ms-list{
+  width:min(100%,920px)!important;
+  margin:0 auto!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:10px!important;
+}
+.sy-library-page .ms-story-row{
+  min-height:158px!important;
+  grid-template-columns:minmax(116px,34%) minmax(0,1fr) 40px!important;
+  border:1px solid rgba(231,190,145,.14)!important;
+  border-radius:24px!important;
+  background:linear-gradient(135deg,#0a2938,#082332 74%)!important;
+  box-shadow:0 13px 32px rgba(0,0,0,.16)!important;
+}
+.sy-library-page .ms-row-visual{
+  min-height:158px!important;
+}
+.sy-library-page .ms-row-visual::after{
+  inset:0!important;
+  height:auto!important;
+  background:linear-gradient(90deg,transparent 56%,rgba(8,35,50,.90) 100%)!important;
+  z-index:1!important;
+}
+.sy-library-page .ms-row-copy{
+  gap:4px!important;
+  padding:14px 9px 14px 15px!important;
+  align-content:center!important;
+}
+.sy-library-page .ms-row-title{
+  font-size:clamp(20px,5.2vw,27px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.025em!important;
+}
+.sy-library-page .ms-row-ar{
+  font-size:clamp(19px,4.8vw,25px)!important;
+  line-height:1.15!important;
+}
+.sy-library-page .ms-row-summary{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  overflow:hidden!important;
+  font-size:clamp(11px,2.7vw,13px)!important;
+  line-height:1.35!important;
+  color:rgba(255,255,255,.67)!important;
+}
+.sy-library-page .ms-row-meta{
+  margin-top:1px!important;
+  font-size:clamp(9.5px,2.3vw,11px)!important;
+  color:rgba(255,255,255,.52)!important;
+}
+.sy-library-page .ms-rank{
+  z-index:3!important;
+  left:10px!important;
+  top:auto!important;
+  bottom:10px!important;
+  min-width:39px!important;
+  width:auto!important;
+  height:29px!important;
+  border-radius:999px!important;
+  font-size:12px!important;
+}
+.sy-library-page .ms-row-go{
+  padding:0!important;
+  font-size:31px!important;
+}
+@media(max-width:390px){
+  .sy-library-page .ms-story-row{
+    min-height:152px!important;
+    grid-template-columns:108px minmax(0,1fr) 34px!important;
+  }
+  .sy-library-page .ms-row-visual{min-height:152px!important}
+  .sy-library-page .ms-row-copy{padding:12px 7px 12px 12px!important}
+  .sy-library-page .ms-row-title{font-size:19px!important}
+  .sy-library-page .ms-row-ar{font-size:19px!important}
+  .sy-library-page .ms-row-summary{font-size:10.8px!important}
+}
+@media(min-width:700px){
+  .sy-library-page .ms-list{gap:12px!important}
+  .sy-library-page .ms-story-row{
+    min-height:188px!important;
+    grid-template-columns:minmax(180px,32%) minmax(0,1fr) 48px!important;
+  }
+  .sy-library-page .ms-row-visual{min-height:188px!important}
+  .sy-library-page .ms-row-copy{padding:19px 18px 19px 22px!important;gap:5px!important}
+}
