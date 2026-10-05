@@ -2,7 +2,7 @@
 
 Status: verbindliche Prüfanweisung  
 Bereich: `apple-tv/quran/tadabbur/`  
-Aktueller Stand: `entriesCount = 4455`, letzter registrierter Gap-Batch `entries-gap-06-118.json`, letzter fortlaufender Batch `entries-batch-05z-116.json`, letzter Vers im fortlaufenden Durchgang `114:6`
+Aktueller Stand: wird ausschließlich aus `catalog.json`, `entries-index.json` und dem Gap-Audit abgeleitet; keine feste Eintragszahl in App-Code oder Prüfdokumentation.
 
 ## Zweck
 
@@ -63,9 +63,9 @@ Bei korrektem Stand erscheint:
 
 ```text
 TADABBUR VERIFY OK
-entries: 4455
+entries: <catalog.entriesCount>
 files: ...
-last_reference: 2:43
+last_reference: <Referenz des zuletzt registrierten Batch-Eintrags>
 coverage_verses: 6236
 ```
 
