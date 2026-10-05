@@ -38,7 +38,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: app-media-optimizer-${{ github.event.pull_request.number || 'main' }}
+  group: app-media-optimizer-final-${{ github.sha }}
   cancel-in-progress: false
 
 jobs:
