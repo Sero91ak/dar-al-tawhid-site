@@ -1,10 +1,11 @@
 (() => {
 "use strict";
-const SOURCES=[
-  {id:"prophets",label:"Propheten",kicker:"GESCHICHTEN DER PROPHETEN",url:"/kids/data/prophet-stories.json?v=28",countLabel:"25 Geschichten",kind:"prophet"},
-  {id:"sahaba",label:"Ṣaḥābah",kicker:"DIE GEFÄHRTEN",url:"/kids/data/mubashshirun-stories.json?v=18",countLabel:"10 Geschichten",kind:"sahabi"},
-  {id:"sahabiyyat",label:"Ṣaḥābiyyāt",kicker:"DIE FRAUEN DER ERSTEN GENERATION",url:"/kids/data/sahabiyyat-stories.json?v=18",countLabel:"14 Geschichten",kind:"sahabiyyah"}
+const DEFAULT_SOURCES=[
+  {id:"prophets",label:"Propheten",kicker:"GESCHICHTEN DER PROPHETEN",url:"/kids/data/prophet-stories.json?v=28",kind:"prophet",order:1},
+  {id:"sahaba",label:"Ṣaḥābah",kicker:"DIE GEFÄHRTEN",url:"/kids/data/mubashshirun-stories.json?v=18",kind:"sahabi",order:2},
+  {id:"sahabiyyat",label:"Ṣaḥābiyyāt",kicker:"DIE FRAUEN DER ERSTEN GENERATION",url:"/kids/data/sahabiyyat-stories.json?v=18",kind:"sahabiyyah",order:3}
 ];
+let sources=DEFAULT_SOURCES.slice();
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const audio=new Audio(); audio.preload="metadata"; audio.setAttribute("playsinline","");
@@ -12,7 +13,7 @@ let catalog={},activeCategory="prophets",active=null,playing=false,busy=false,re
 function age(){return String($(".app")?.getAttribute("data-age")||"6–8")}
 function ageKey(){return age().replace("–","-")}
 function isYoung(){return age()==="4–5"}
-function category(){return SOURCES.find(x=>x.id===activeCategory)||SOURCES[0]}
+function category(){return sources.find(x=>x.id===activeCategory)||sources[0]||DEFAULT_SOURCES[0]}
 function textFor(item){
   if(!item)return"";
   const scripts=item.scripts&&typeof item.scripts==="object"?item.scripts:{};
@@ -112,7 +113,7 @@ function ensureUi(){
 }
 function renderCategories(){
   const host=$("#ghCategories");if(!host)return;
-  host.innerHTML=SOURCES.map((s,i)=>{
+  host.innerHTML=sources.map((s,i)=>{
     const first=(catalog[s.id]||[])[0],img=artFor(first,s.id,false);
     return '<button class="gh-category '+(s.id===activeCategory?"active":"")+'" data-gh-cat="'+s.id+'" type="button">'+(img?'<img src="'+esc(img)+'" alt="" decoding="async" loading="'+(i===0?"eager":"lazy")+'">':'')+'<span class="gh-category-copy"><strong>'+s.label+'</strong><span>'+sourceCount(s.id)+' Geschichten</span></span></button>';
   }).join("");
@@ -212,11 +213,21 @@ async function toggleAudio(){
   try{busy=true;renderPlay();if(!audio.src)audio.src=meta.url;if(audio.ended)audio.currentTime=0;reader?.restore();await audio.play()}catch(_){$("#ghAudioNote").textContent="Audio konnte gerade nicht gestartet werden."}finally{busy=false;renderPlay()}
 }
 function stopAudio(clear=true){reader?.persist(true);try{audio.pause()}catch(_){}playing=false;busy=false;if(clear){try{audio.removeAttribute("src");audio.load()}catch(_){}}renderPlay();renderMini()}
+async function loadRegistry(){
+  try{
+    const r=await fetch("/kids/data/story-hub.json?v=1",{cache:"default"});if(!r.ok)throw Error(String(r.status));
+    const data=await r.json(),rows=Array.isArray(data.categories)?data.categories:[];
+    const valid=rows.filter(x=>x&&x.id&&x.label&&x.url).map(x=>({id:String(x.id),label:String(x.label),kicker:String(x.kicker||x.label),url:String(x.url),kind:String(x.kind||x.id),order:Number(x.order)||999})).sort((a,b)=>a.order-b.order);
+    if(valid.length)sources=valid;
+  }catch(e){console.warn("[DĀR Kids Hörwelten] Registry fallback",e)}
+}
 async function load(){
   ensureEntry();ensureUi();
-  const results=await Promise.all(SOURCES.map(async s=>{try{const r=await fetch(s.url,{cache:"default"});if(!r.ok)throw Error(String(r.status));const d=await r.json();return[s.id,(d.items||[]).slice().sort((a,b)=>Number(a.displayOrder||999)-Number(b.displayOrder||999))]}catch(e){console.warn("[DĀR Kids Hörwelten]",s.id,e);return[s.id,[]]}}));
+  await loadRegistry();
+  if(!sources.some(x=>x.id===activeCategory))activeCategory=sources[0]?.id||DEFAULT_SOURCES[0].id;
+  const results=await Promise.all(sources.map(async s=>{try{const r=await fetch(s.url,{cache:"default"});if(!r.ok)throw Error(String(r.status));const d=await r.json();return[s.id,(d.items||[]).slice().sort((a,b)=>Number(a.displayOrder||999)-Number(b.displayOrder||999))]}catch(e){console.warn("[DĀR Kids Hörwelten]",s.id,e);return[s.id,[]]}}));
   results.forEach(([id,items])=>catalog[id]=items);renderCategories();renderList();
-  try{const m=String(location.hash||"").match(/^#stories\/listen\/(prophets|sahaba|sahabiyyat)\/([^/?#]+)/i);if(m){activeCategory=m[1];openWorld();setTimeout(()=>selectStory(decodeURIComponent(m[2])),0)}}catch(_){}
+  try{const m=String(location.hash||"").match(/^#stories\/listen\/([^/]+)\/([^/?#]+)/i);if(m&&sources.some(x=>x.id===m[1])){activeCategory=m[1];openWorld();setTimeout(()=>selectStory(decodeURIComponent(m[2])),0)}}catch(_){}
   const app=$(".app");if(app&&"MutationObserver" in window)new MutationObserver(()=>{renderCategories();renderList();if(active)renderPlayer()}).observe(app,{attributes:true,attributeFilter:["data-age"]});
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(load,0),{once:true});else setTimeout(load,0);
