@@ -45,6 +45,13 @@ function postNativeNowPlaying(payload,force=false){
   }catch(_){}
 }
 function normalizeKey(value){return String(value||"").trim().replace(/\s+/g,"-")}
+function cleanNowPlayingSubtitle(value){
+  return String(value||"DĀR AL TAWḤĪD Kids")
+    .replace(/\s*[·•|–—-]\s*Alter\s*\d+\s*[–-]\s*\d+\s*(?:Jahre?)?/gi,"")
+    .replace(/\s*Alter\s*\d+\s*[–-]\s*\d+\s*(?:Jahre?)?/gi,"")
+    .replace(/\s{2,}/g," ")
+    .trim()||"DĀR AL TAWḤĪD Kids";
+}
 function progressStorageKey(value){return PROGRESS_PREFIX+normalizeKey(value)}
 
 function create(options){
@@ -339,7 +346,7 @@ function create(options){
     const c=currentContent&&Object.keys(currentContent).length?currentContent:content();
     return clear?{clear:true}:{
       title:String(c.title||"Geschichte"),
-      artist:String(c.subtitle||"DĀR AL TAWḤĪD Kids"),
+      artist:cleanNowPlayingSubtitle(c.subtitle),
       album:String(c.album||"DĀR AL TAWḤĪD Kids · Hörbuch"),
       artwork:absoluteUrl(c.artwork||""),
       deepLink:String(c.deepLink||""),
@@ -367,7 +374,7 @@ function create(options){
       try{
         navigator.mediaSession.metadata=new MediaMetadata({
           title:String(c.title||"Geschichte"),
-          artist:String(c.subtitle||"DĀR AL TAWḤĪD Kids"),
+          artist:cleanNowPlayingSubtitle(c.subtitle),
           album:String(c.album||"Kinder-Hörbuch"),
           artwork:mediaArtwork(c)
         });
@@ -378,7 +385,7 @@ function create(options){
     safeJsonWrite(NOW_PLAYING_KEY,{
       key:storyKey(c),
       title:String(c.title||"Geschichte"),
-      subtitle:String(c.subtitle||"DĀR AL TAWḤĪD Kids"),
+      subtitle:cleanNowPlayingSubtitle(c.subtitle),
       artwork:absoluteUrl(c.artwork||""),
       deepLink:String(c.deepLink||""),
       updatedAt:Date.now()
