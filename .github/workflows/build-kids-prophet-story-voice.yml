@@ -204,7 +204,7 @@ jobs:
                           "ffmpeg","-hide_banner","-loglevel","error","-y",
                           "-i",str(tmp),
                           "-af","loudnorm=I=-18:TP=-2:LRA=7",
-                          "-ac","1","-ar","48000","-c:a","aac","-b:a","96k",
+                          "-ac","1","-ar","48000","-c:a","aac","-b:a","64k",
                           "-movflags","+faststart",str(target)
                       ],check=True)
                       dur=ffprobe_duration(target)
