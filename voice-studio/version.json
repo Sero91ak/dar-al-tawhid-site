@@ -4,7 +4,7 @@
   "deployTrigger": "voice-studio-2.9.117-mobile-content-shell",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v86",
+  "cache": "dar-voice-studio-v87",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -715,7 +715,10 @@
       "exactTextReuse": true,
       "editedTextUsesIncrementalRenderer": true,
       "visibleInPronunciationLearningState": true
-    }
+    },
+    "storyMasterPolicy": "one-complete-long-master-per-story",
+    "storyAgePolicy": "presentation-only-no-shortening",
+    "storyLengthMetricsVisible": true
   },
   "audioFormat": "wav-pcm16-mono",
   "legacyFloatWavMigration": true,
@@ -1549,7 +1552,9 @@
       "kids_story",
       "Prophetengeschichten",
       "Mubaschschirūn-Geschichten",
-      "Kids-Geschichten"
+      "Kids-Geschichten",
+      "Ṣaḥābiyyāt-Geschichten",
+      "zukünftige biografische Kids-Geschichten"
     ],
     "excludes": [
       "Qurʾān-Rezitation",
@@ -1557,7 +1562,10 @@
     ],
     "sourceMetaOutsideNarration": true,
     "noAgeShortening": true,
-    "biographyLongForm": true
+    "biographyLongForm": true,
+    "singleMasterAcrossAges": true,
+    "futureBiographyMinimumMasterWords": 800,
+    "ageChangesPresentationOnly": true
   },
   "mobileVoiceApp": {
     "enabled": true,
@@ -1853,7 +1861,9 @@
     "estimatedDurationVisible": true,
     "voiceReferenceWpm": 147,
     "noAgeShortening": true,
-    "source": "/kids/data/sahabiyyat-stories.json"
+    "source": "/kids/data/sahabiyyat-stories.json",
+    "kidsDataVersion": 22,
+    "allAgeSlotsUseIdenticalMaster": true
   },
   "engineConnectionRepair": {
     "enabled": true,
