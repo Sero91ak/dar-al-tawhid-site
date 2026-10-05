@@ -7001,7 +7001,11 @@
         "cloudflare/media-r2.js",
         "cloudflare/site-router.js",
         "wrangler.toml",
-        ".github/workflows/sync-app-media-r2.yml"
+        ".github/workflows/sync-app-media-r2.yml",
+        ".github/workflows/build-kids-intro-owner-voice.yml",
+        ".github/workflows/build-kids-prophet-story-voice.yml",
+        ".github/workflows/build-kids-quiz-owner-voice.yml",
+        ".github/workflows/mix-kids-cinema-audio.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
     }
