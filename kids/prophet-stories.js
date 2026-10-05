@@ -177,6 +177,7 @@ function renderCards(){
     const meta=(item.disputed?"IKHTILĀF · ":"")+durationLabel(item,text);
     return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button">'+
       '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" loading="lazy">'+
+      '<span class="ps-row-rank" aria-hidden="true">'+String(index+1).padStart(2,"0")+'</span>'+
       '<span class="ps-row-copy">'+
         '<span class="ps-row-meta">'+esc(meta)+'</span>'+
         '<span class="ps-row-title">'+esc(item.name)+'</span>'+
