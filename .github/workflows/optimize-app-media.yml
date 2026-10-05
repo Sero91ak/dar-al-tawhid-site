@@ -85,8 +85,25 @@ jobs:
           if [ "${{ steps.mode.outputs.full }}" = "1" ]; then
             scripts/optimize-app-media.sh --all
           else
-            git diff --name-only HEAD^ HEAD --               assets kids/assets content apple-tv ios test/assets               | scripts/optimize-app-media.sh --stdin
+            if [ "${{ github.event_name }}" = "pull_request" ]; then
+              git fetch origin "${{ github.base_ref }}" --depth=1
+              git diff --name-only "origin/${{ github.base_ref }}"...HEAD -- \
+                assets kids/assets content apple-tv ios test/assets \
+                | scripts/optimize-app-media.sh --stdin
+            else
+              git diff --name-only HEAD^ HEAD -- \
+                assets kids/assets content apple-tv ios test/assets \
+                | scripts/optimize-app-media.sh --stdin
+            fi
           fi
+
+      - name: Restore protected brand assets
+        if: steps.mode.outputs.skip != '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main --depth=1
+          git checkout origin/main --             assets/app-icons             assets/brand/seals             kids/assets/kids-brand/logo-mark.png
 
       - name: Enforce delivery budgets
         if: steps.mode.outputs.skip != '1'
