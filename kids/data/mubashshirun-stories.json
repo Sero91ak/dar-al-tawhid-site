@@ -1,6 +1,6 @@
 {
-  "version": 9,
-  "updatedAt": "2026-10-06T12:47:40Z",
+  "version": 10,
+  "updatedAt": "2026-10-06T21:27:33Z",
   "title": "Die zehn al-Mubaššarūn",
   "subtitle": "Die zehn Gefährten, denen das Paradies angekündigt wurde",
   "policy": {
@@ -346,22 +346,418 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/umar/master.mp3?v=10-v4",
+          "durationSec": 316.003,
+          "bytes": 5056513,
+          "sha256": "5a6a25833b831bffe3bc75b0eeca3f630ae8bbbdf6eadf28bde614ee7be4c5aa",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/umar/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "H7iezGqItmms8YRdNIHw",
+            "Dj5X5i1Mu4M2wKBmhhte"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.95
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.95,
+              "end": 21.95
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 21.95,
+              "end": 39.35
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 39.35,
+              "end": 60.425
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 60.425,
+              "end": 80.2
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 80.2,
+              "end": 97.625
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 97.625,
+              "end": 118.0
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 118.0,
+              "end": 130.025
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 130.025,
+              "end": 148.825
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 148.825,
+              "end": 158.1
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 158.1,
+              "end": 188.575
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 188.575,
+              "end": 208.9
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 208.9,
+              "end": 230.75
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 230.75,
+              "end": 255.3
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 255.3,
+              "end": 276.675
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 276.675,
+              "end": 301.825
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 301.825,
+              "end": 304.025
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 304.025,
+              "end": 312.65
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 312.65,
+              "end": 316.003
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 171,
+          "readAlongTextSha256": "7e7903ffaf9e37aba65239bb92b1ad290fcd71b314e78a3232c09d6c5e9ba4fd",
+          "age": "4-5"
         },
         "6-8": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/umar/master.mp3?v=10-v4",
+          "durationSec": 316.003,
+          "bytes": 5056513,
+          "sha256": "5a6a25833b831bffe3bc75b0eeca3f630ae8bbbdf6eadf28bde614ee7be4c5aa",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/umar/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "H7iezGqItmms8YRdNIHw",
+            "Dj5X5i1Mu4M2wKBmhhte"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.95
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.95,
+              "end": 21.95
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 21.95,
+              "end": 39.35
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 39.35,
+              "end": 60.425
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 60.425,
+              "end": 80.2
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 80.2,
+              "end": 97.625
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 97.625,
+              "end": 118.0
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 118.0,
+              "end": 130.025
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 130.025,
+              "end": 148.825
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 148.825,
+              "end": 158.1
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 158.1,
+              "end": 188.575
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 188.575,
+              "end": 208.9
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 208.9,
+              "end": 230.75
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 230.75,
+              "end": 255.3
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 255.3,
+              "end": 276.675
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 276.675,
+              "end": 301.825
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 301.825,
+              "end": 304.025
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 304.025,
+              "end": 312.65
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 312.65,
+              "end": 316.003
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 171,
+          "readAlongTextSha256": "7e7903ffaf9e37aba65239bb92b1ad290fcd71b314e78a3232c09d6c5e9ba4fd",
+          "age": "6-8"
         },
         "9-10": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/umar/master.mp3?v=10-v4",
+          "durationSec": 316.003,
+          "bytes": 5056513,
+          "sha256": "5a6a25833b831bffe3bc75b0eeca3f630ae8bbbdf6eadf28bde614ee7be4c5aa",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/umar/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "H7iezGqItmms8YRdNIHw",
+            "Dj5X5i1Mu4M2wKBmhhte"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.95
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.95,
+              "end": 21.95
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 21.95,
+              "end": 39.35
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 39.35,
+              "end": 60.425
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 60.425,
+              "end": 80.2
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 80.2,
+              "end": 97.625
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 97.625,
+              "end": 118.0
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 118.0,
+              "end": 130.025
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 130.025,
+              "end": 148.825
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 148.825,
+              "end": 158.1
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 158.1,
+              "end": 188.575
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 188.575,
+              "end": 208.9
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 208.9,
+              "end": 230.75
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 230.75,
+              "end": 255.3
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 255.3,
+              "end": 276.675
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 276.675,
+              "end": 301.825
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 301.825,
+              "end": 304.025
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 304.025,
+              "end": 312.65
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 312.65,
+              "end": 316.003
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 171,
+          "readAlongTextSha256": "7e7903ffaf9e37aba65239bb92b1ad290fcd71b314e78a3232c09d6c5e9ba4fd",
+          "age": "9-10"
         }
       },
       "pronunciationTerms": [
@@ -488,22 +884,448 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/uthman/master.mp3?v=10-v4",
+          "durationSec": 312.973,
+          "bytes": 5008030,
+          "sha256": "0ab3e773861f46316dd704527178d379c83a94067d9dbf64cf6b9fdc1de8efb4",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/uthman/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "XNmrOQIhpSqEyTVUFRKA",
+            "CIF7V7jhLf7f529bUd7W"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.95
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.95,
+              "end": 18.175
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 18.175,
+              "end": 37.225
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 37.225,
+              "end": 53.1
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 53.1,
+              "end": 72.725
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 72.725,
+              "end": 88.65
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 88.65,
+              "end": 105.95
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 105.95,
+              "end": 116.45
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 116.45,
+              "end": 132.675
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 132.675,
+              "end": 140.775
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 140.775,
+              "end": 161.975
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 161.975,
+              "end": 186.175
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 186.175,
+              "end": 208.35
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 208.35,
+              "end": 229.025
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 229.025,
+              "end": 249.9
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 249.9,
+              "end": 264.95
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 264.95,
+              "end": 283.4
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 283.4,
+              "end": 299.025
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 299.025,
+              "end": 301.05
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 301.05,
+              "end": 309.575
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 309.575,
+              "end": 312.973
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 182,
+          "readAlongTextSha256": "5da53036a65a7f558e386f2d0dedee9befd3bc02321158598a8691065f5d6c76",
+          "age": "4-5"
         },
         "6-8": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/uthman/master.mp3?v=10-v4",
+          "durationSec": 312.973,
+          "bytes": 5008030,
+          "sha256": "0ab3e773861f46316dd704527178d379c83a94067d9dbf64cf6b9fdc1de8efb4",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/uthman/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "XNmrOQIhpSqEyTVUFRKA",
+            "CIF7V7jhLf7f529bUd7W"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.95
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.95,
+              "end": 18.175
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 18.175,
+              "end": 37.225
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 37.225,
+              "end": 53.1
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 53.1,
+              "end": 72.725
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 72.725,
+              "end": 88.65
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 88.65,
+              "end": 105.95
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 105.95,
+              "end": 116.45
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 116.45,
+              "end": 132.675
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 132.675,
+              "end": 140.775
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 140.775,
+              "end": 161.975
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 161.975,
+              "end": 186.175
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 186.175,
+              "end": 208.35
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 208.35,
+              "end": 229.025
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 229.025,
+              "end": 249.9
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 249.9,
+              "end": 264.95
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 264.95,
+              "end": 283.4
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 283.4,
+              "end": 299.025
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 299.025,
+              "end": 301.05
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 301.05,
+              "end": 309.575
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 309.575,
+              "end": 312.973
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 182,
+          "readAlongTextSha256": "5da53036a65a7f558e386f2d0dedee9befd3bc02321158598a8691065f5d6c76",
+          "age": "6-8"
         },
         "9-10": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/uthman/master.mp3?v=10-v4",
+          "durationSec": 312.973,
+          "bytes": 5008030,
+          "sha256": "0ab3e773861f46316dd704527178d379c83a94067d9dbf64cf6b9fdc1de8efb4",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/uthman/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "XNmrOQIhpSqEyTVUFRKA",
+            "CIF7V7jhLf7f529bUd7W"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.95
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.95,
+              "end": 18.175
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 18.175,
+              "end": 37.225
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 37.225,
+              "end": 53.1
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 53.1,
+              "end": 72.725
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 72.725,
+              "end": 88.65
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 88.65,
+              "end": 105.95
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 105.95,
+              "end": 116.45
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 116.45,
+              "end": 132.675
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 132.675,
+              "end": 140.775
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 140.775,
+              "end": 161.975
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 161.975,
+              "end": 186.175
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 186.175,
+              "end": 208.35
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 208.35,
+              "end": 229.025
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 229.025,
+              "end": 249.9
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 249.9,
+              "end": 264.95
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 264.95,
+              "end": 283.4
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 283.4,
+              "end": 299.025
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 299.025,
+              "end": 301.05
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 301.05,
+              "end": 309.575
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 309.575,
+              "end": 312.973
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 182,
+          "readAlongTextSha256": "5da53036a65a7f558e386f2d0dedee9befd3bc02321158598a8691065f5d6c76",
+          "age": "9-10"
         }
       },
       "pronunciationTerms": [
@@ -629,22 +1451,433 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/ali/master.mp3?v=10-v4",
+          "durationSec": 324.545,
+          "bytes": 5193186,
+          "sha256": "3975ad568f9759030ad4d4059c4bedcd5c61775a732d56fd21bfaba99967a131",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/ali/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "cPqTigo4tkz0KYPJ6nuc",
+            "MxVKlmatBNoSZoQBLnze"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.1
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.1,
+              "end": 23.625
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 23.625,
+              "end": 41.1
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 41.1,
+              "end": 56.35
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 56.35,
+              "end": 75.225
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 75.225,
+              "end": 93.275
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 93.275,
+              "end": 113.85
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 113.85,
+              "end": 126.2
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 126.2,
+              "end": 142.175
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 142.175,
+              "end": 156.05
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 156.05,
+              "end": 183.4
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 183.4,
+              "end": 202.825
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 202.825,
+              "end": 219.5
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 219.5,
+              "end": 242.65
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 242.65,
+              "end": 259.625
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 259.625,
+              "end": 279.225
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 279.225,
+              "end": 310.025
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 310.025,
+              "end": 312.25
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 312.25,
+              "end": 321.2
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 321.2,
+              "end": 324.545
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 168,
+          "readAlongTextSha256": "6ceef217c9a63197d78a61a592d8a855e45e4334d44a9fc4b035030fd46671e2",
+          "age": "4-5"
         },
         "6-8": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/ali/master.mp3?v=10-v4",
+          "durationSec": 324.545,
+          "bytes": 5193186,
+          "sha256": "3975ad568f9759030ad4d4059c4bedcd5c61775a732d56fd21bfaba99967a131",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/ali/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "cPqTigo4tkz0KYPJ6nuc",
+            "MxVKlmatBNoSZoQBLnze"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.1
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.1,
+              "end": 23.625
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 23.625,
+              "end": 41.1
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 41.1,
+              "end": 56.35
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 56.35,
+              "end": 75.225
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 75.225,
+              "end": 93.275
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 93.275,
+              "end": 113.85
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 113.85,
+              "end": 126.2
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 126.2,
+              "end": 142.175
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 142.175,
+              "end": 156.05
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 156.05,
+              "end": 183.4
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 183.4,
+              "end": 202.825
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 202.825,
+              "end": 219.5
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 219.5,
+              "end": 242.65
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 242.65,
+              "end": 259.625
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 259.625,
+              "end": 279.225
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 279.225,
+              "end": 310.025
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 310.025,
+              "end": 312.25
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 312.25,
+              "end": 321.2
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 321.2,
+              "end": 324.545
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 168,
+          "readAlongTextSha256": "6ceef217c9a63197d78a61a592d8a855e45e4334d44a9fc4b035030fd46671e2",
+          "age": "6-8"
         },
         "9-10": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/ali/master.mp3?v=10-v4",
+          "durationSec": 324.545,
+          "bytes": 5193186,
+          "sha256": "3975ad568f9759030ad4d4059c4bedcd5c61775a732d56fd21bfaba99967a131",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/ali/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "cPqTigo4tkz0KYPJ6nuc",
+            "MxVKlmatBNoSZoQBLnze"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.1
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.1,
+              "end": 23.625
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 23.625,
+              "end": 41.1
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 41.1,
+              "end": 56.35
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 56.35,
+              "end": 75.225
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 75.225,
+              "end": 93.275
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 93.275,
+              "end": 113.85
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 113.85,
+              "end": 126.2
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 126.2,
+              "end": 142.175
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 142.175,
+              "end": 156.05
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 156.05,
+              "end": 183.4
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 183.4,
+              "end": 202.825
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 202.825,
+              "end": 219.5
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 219.5,
+              "end": 242.65
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 242.65,
+              "end": 259.625
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 259.625,
+              "end": 279.225
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 279.225,
+              "end": 310.025
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 310.025,
+              "end": 312.25
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 312.25,
+              "end": 321.2
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 321.2,
+              "end": 324.545
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 168,
+          "readAlongTextSha256": "6ceef217c9a63197d78a61a592d8a855e45e4334d44a9fc4b035030fd46671e2",
+          "age": "9-10"
         }
       },
       "pronunciationTerms": [
@@ -770,22 +2003,448 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/talha/master.mp3?v=10-v4",
+          "durationSec": 314.384,
+          "bytes": 5030600,
+          "sha256": "a68a9245e749bdc2b2043fcc363d5d1a8f531254a7d50d07e0d70651d7f394d6",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/talha/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "7vMgVWNEePdKejnEZ2t2",
+            "xZW57IsMnddMN93arnVC"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.025
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.025,
+              "end": 19.225
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 19.225,
+              "end": 32.25
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 32.25,
+              "end": 45.0
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 45.0,
+              "end": 62.6
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 62.6,
+              "end": 75.025
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 75.025,
+              "end": 91.9
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 91.9,
+              "end": 103.925
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 103.925,
+              "end": 118.075
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 118.075,
+              "end": 129.65
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 129.65,
+              "end": 161.425
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 161.425,
+              "end": 180.6
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 180.6,
+              "end": 198.025
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 198.025,
+              "end": 220.575
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 220.575,
+              "end": 243.15
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 243.15,
+              "end": 261.3
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 261.3,
+              "end": 281.0
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 281.0,
+              "end": 300.575
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 300.575,
+              "end": 302.475
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 302.475,
+              "end": 311.35
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 311.35,
+              "end": 314.384
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 170,
+          "readAlongTextSha256": "333c660dda6aa611f4a4d0e29bd26df803c9addb303c2642ec581b46a860507d",
+          "age": "4-5"
         },
         "6-8": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/talha/master.mp3?v=10-v4",
+          "durationSec": 314.384,
+          "bytes": 5030600,
+          "sha256": "a68a9245e749bdc2b2043fcc363d5d1a8f531254a7d50d07e0d70651d7f394d6",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/talha/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "7vMgVWNEePdKejnEZ2t2",
+            "xZW57IsMnddMN93arnVC"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.025
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.025,
+              "end": 19.225
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 19.225,
+              "end": 32.25
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 32.25,
+              "end": 45.0
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 45.0,
+              "end": 62.6
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 62.6,
+              "end": 75.025
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 75.025,
+              "end": 91.9
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 91.9,
+              "end": 103.925
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 103.925,
+              "end": 118.075
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 118.075,
+              "end": 129.65
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 129.65,
+              "end": 161.425
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 161.425,
+              "end": 180.6
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 180.6,
+              "end": 198.025
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 198.025,
+              "end": 220.575
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 220.575,
+              "end": 243.15
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 243.15,
+              "end": 261.3
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 261.3,
+              "end": 281.0
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 281.0,
+              "end": 300.575
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 300.575,
+              "end": 302.475
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 302.475,
+              "end": 311.35
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 311.35,
+              "end": 314.384
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 170,
+          "readAlongTextSha256": "333c660dda6aa611f4a4d0e29bd26df803c9addb303c2642ec581b46a860507d",
+          "age": "6-8"
         },
         "9-10": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/talha/master.mp3?v=10-v4",
+          "durationSec": 314.384,
+          "bytes": 5030600,
+          "sha256": "a68a9245e749bdc2b2043fcc363d5d1a8f531254a7d50d07e0d70651d7f394d6",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/talha/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "7vMgVWNEePdKejnEZ2t2",
+            "xZW57IsMnddMN93arnVC"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.025
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.025,
+              "end": 19.225
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 19.225,
+              "end": 32.25
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 32.25,
+              "end": 45.0
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 45.0,
+              "end": 62.6
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 62.6,
+              "end": 75.025
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 75.025,
+              "end": 91.9
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 91.9,
+              "end": 103.925
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 103.925,
+              "end": 118.075
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 118.075,
+              "end": 129.65
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 129.65,
+              "end": 161.425
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 161.425,
+              "end": 180.6
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 180.6,
+              "end": 198.025
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 198.025,
+              "end": 220.575
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 220.575,
+              "end": 243.15
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 243.15,
+              "end": 261.3
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 261.3,
+              "end": 281.0
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 281.0,
+              "end": 300.575
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 300.575,
+              "end": 302.475
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 302.475,
+              "end": 311.35
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 311.35,
+              "end": 314.384
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 170,
+          "readAlongTextSha256": "333c660dda6aa611f4a4d0e29bd26df803c9addb303c2642ec581b46a860507d",
+          "age": "9-10"
         }
       },
       "pronunciationTerms": [
@@ -911,22 +2570,463 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/zubayr/master.mp3?v=10-v4",
+          "durationSec": 331.99,
+          "bytes": 5312304,
+          "sha256": "83e5e64060972c811d3dbfd4147ba56de081a57394adc825ed9b32b2bb68bd65",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/zubayr/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "DsXGJmL5gtlFrL1z4LRz",
+            "1Igk1qbAZc6GTbwKLxKY"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.025
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.025,
+              "end": 22.35
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 22.35,
+              "end": 36.125
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 36.125,
+              "end": 52.45
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 52.45,
+              "end": 67.125
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 67.125,
+              "end": 81.75
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 81.75,
+              "end": 92.8
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 92.8,
+              "end": 108.1
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 108.1,
+              "end": 122.6
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 122.6,
+              "end": 134.95
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 134.95,
+              "end": 163.675
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 163.675,
+              "end": 176.275
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 176.275,
+              "end": 199.425
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 199.425,
+              "end": 222.1
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 222.1,
+              "end": 238.35
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 238.35,
+              "end": 259.2
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 259.2,
+              "end": 283.875
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 283.875,
+              "end": 301.475
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 301.475,
+              "end": 317.95
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 317.95,
+              "end": 319.9
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 319.9,
+              "end": 328.575
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 328.575,
+              "end": 331.99
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 183,
+          "readAlongTextSha256": "872f57e36fe204ded7beae14930973c8d53e430a7484fdd9d468f5bd0148f8d9",
+          "age": "4-5"
         },
         "6-8": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/zubayr/master.mp3?v=10-v4",
+          "durationSec": 331.99,
+          "bytes": 5312304,
+          "sha256": "83e5e64060972c811d3dbfd4147ba56de081a57394adc825ed9b32b2bb68bd65",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/zubayr/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "DsXGJmL5gtlFrL1z4LRz",
+            "1Igk1qbAZc6GTbwKLxKY"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.025
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.025,
+              "end": 22.35
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 22.35,
+              "end": 36.125
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 36.125,
+              "end": 52.45
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 52.45,
+              "end": 67.125
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 67.125,
+              "end": 81.75
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 81.75,
+              "end": 92.8
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 92.8,
+              "end": 108.1
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 108.1,
+              "end": 122.6
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 122.6,
+              "end": 134.95
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 134.95,
+              "end": 163.675
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 163.675,
+              "end": 176.275
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 176.275,
+              "end": 199.425
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 199.425,
+              "end": 222.1
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 222.1,
+              "end": 238.35
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 238.35,
+              "end": 259.2
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 259.2,
+              "end": 283.875
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 283.875,
+              "end": 301.475
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 301.475,
+              "end": 317.95
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 317.95,
+              "end": 319.9
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 319.9,
+              "end": 328.575
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 328.575,
+              "end": 331.99
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 183,
+          "readAlongTextSha256": "872f57e36fe204ded7beae14930973c8d53e430a7484fdd9d468f5bd0148f8d9",
+          "age": "6-8"
         },
         "9-10": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/zubayr/master.mp3?v=10-v4",
+          "durationSec": 331.99,
+          "bytes": 5312304,
+          "sha256": "83e5e64060972c811d3dbfd4147ba56de081a57394adc825ed9b32b2bb68bd65",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/zubayr/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "DsXGJmL5gtlFrL1z4LRz",
+            "1Igk1qbAZc6GTbwKLxKY"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.025
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.025,
+              "end": 22.35
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 22.35,
+              "end": 36.125
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 36.125,
+              "end": 52.45
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 52.45,
+              "end": 67.125
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 67.125,
+              "end": 81.75
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 81.75,
+              "end": 92.8
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 92.8,
+              "end": 108.1
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 108.1,
+              "end": 122.6
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 122.6,
+              "end": 134.95
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 134.95,
+              "end": 163.675
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 163.675,
+              "end": 176.275
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 176.275,
+              "end": 199.425
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 199.425,
+              "end": 222.1
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 222.1,
+              "end": 238.35
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 238.35,
+              "end": 259.2
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 259.2,
+              "end": 283.875
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 283.875,
+              "end": 301.475
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 301.475,
+              "end": 317.95
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 317.95,
+              "end": 319.9
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 319.9,
+              "end": 328.575
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 328.575,
+              "end": 331.99
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 183,
+          "readAlongTextSha256": "872f57e36fe204ded7beae14930973c8d53e430a7484fdd9d468f5bd0148f8d9",
+          "age": "9-10"
         }
       },
       "pronunciationTerms": [
@@ -1052,22 +3152,463 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/abd-ar-rahman/master.mp3?v=10-v4",
+          "durationSec": 309.603,
+          "bytes": 4954114,
+          "sha256": "378152e22bd60f1eb95dada4646b5c6a44fd79aef8cb9e398490099b1f242efc",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/abd-ar-rahman/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "Jp8u4ZqK3WL3htG4Rb5Y",
+            "bpOYSVzQa0MOAvT1RYuJ"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.05
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.05,
+              "end": 16.05
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 16.05,
+              "end": 26.625
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 26.625,
+              "end": 40.0
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 40.0,
+              "end": 55.5
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 55.5,
+              "end": 73.375
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 73.375,
+              "end": 90.15
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 90.15,
+              "end": 103.8
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 103.8,
+              "end": 119.6
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 119.6,
+              "end": 126.975
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 126.975,
+              "end": 155.25
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 155.25,
+              "end": 171.675
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 171.675,
+              "end": 190.1
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 190.1,
+              "end": 203.475
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 203.475,
+              "end": 222.775
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 222.775,
+              "end": 237.6
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 237.6,
+              "end": 254.8
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 254.8,
+              "end": 277.025
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 277.025,
+              "end": 297.275
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 297.275,
+              "end": 299.975
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 299.975,
+              "end": 306.4
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 306.4,
+              "end": 309.603
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 175,
+          "readAlongTextSha256": "7f7b890e8a2cc44ee74625fdc99ccdbdfbd4ce54c3bba190ec1ad12c6567f6c4",
+          "age": "4-5"
         },
         "6-8": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/abd-ar-rahman/master.mp3?v=10-v4",
+          "durationSec": 309.603,
+          "bytes": 4954114,
+          "sha256": "378152e22bd60f1eb95dada4646b5c6a44fd79aef8cb9e398490099b1f242efc",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/abd-ar-rahman/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "Jp8u4ZqK3WL3htG4Rb5Y",
+            "bpOYSVzQa0MOAvT1RYuJ"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.05
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.05,
+              "end": 16.05
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 16.05,
+              "end": 26.625
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 26.625,
+              "end": 40.0
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 40.0,
+              "end": 55.5
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 55.5,
+              "end": 73.375
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 73.375,
+              "end": 90.15
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 90.15,
+              "end": 103.8
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 103.8,
+              "end": 119.6
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 119.6,
+              "end": 126.975
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 126.975,
+              "end": 155.25
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 155.25,
+              "end": 171.675
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 171.675,
+              "end": 190.1
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 190.1,
+              "end": 203.475
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 203.475,
+              "end": 222.775
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 222.775,
+              "end": 237.6
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 237.6,
+              "end": 254.8
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 254.8,
+              "end": 277.025
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 277.025,
+              "end": 297.275
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 297.275,
+              "end": 299.975
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 299.975,
+              "end": 306.4
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 306.4,
+              "end": 309.603
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 175,
+          "readAlongTextSha256": "7f7b890e8a2cc44ee74625fdc99ccdbdfbd4ce54c3bba190ec1ad12c6567f6c4",
+          "age": "6-8"
         },
         "9-10": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/abd-ar-rahman/master.mp3?v=10-v4",
+          "durationSec": 309.603,
+          "bytes": 4954114,
+          "sha256": "378152e22bd60f1eb95dada4646b5c6a44fd79aef8cb9e398490099b1f242efc",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/abd-ar-rahman/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "Jp8u4ZqK3WL3htG4Rb5Y",
+            "bpOYSVzQa0MOAvT1RYuJ"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.05
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.05,
+              "end": 16.05
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 16.05,
+              "end": 26.625
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 26.625,
+              "end": 40.0
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 40.0,
+              "end": 55.5
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 55.5,
+              "end": 73.375
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 73.375,
+              "end": 90.15
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 90.15,
+              "end": 103.8
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 103.8,
+              "end": 119.6
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 119.6,
+              "end": 126.975
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 126.975,
+              "end": 155.25
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 155.25,
+              "end": 171.675
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 171.675,
+              "end": 190.1
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 190.1,
+              "end": 203.475
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 203.475,
+              "end": 222.775
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 222.775,
+              "end": 237.6
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 237.6,
+              "end": 254.8
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 254.8,
+              "end": 277.025
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 277.025,
+              "end": 297.275
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 297.275,
+              "end": 299.975
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 299.975,
+              "end": 306.4
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 306.4,
+              "end": 309.603
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 175,
+          "readAlongTextSha256": "7f7b890e8a2cc44ee74625fdc99ccdbdfbd4ce54c3bba190ec1ad12c6567f6c4",
+          "age": "9-10"
         }
       },
       "pronunciationTerms": [
@@ -1200,22 +3741,463 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/sad/master.mp3?v=10-v4",
+          "durationSec": 318.485,
+          "bytes": 5096219,
+          "sha256": "c366d331c0c3807dcb67271a8e8997b09b221ff35746ce4040e497c29c8a5909",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/sad/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "pN1B9szJJxwK65OePrEF",
+            "cvAsGemq8ZsV3vcKR6Kz"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.975
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.975,
+              "end": 19.975
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 19.975,
+              "end": 31.55
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 31.55,
+              "end": 46.125
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 46.125,
+              "end": 58.425
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 58.425,
+              "end": 74.175
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 74.175,
+              "end": 86.125
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 86.125,
+              "end": 97.775
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 97.775,
+              "end": 112.675
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 112.675,
+              "end": 123.1
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 123.1,
+              "end": 146.325
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 146.325,
+              "end": 162.675
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 162.675,
+              "end": 186.1
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 186.1,
+              "end": 207.6
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 207.6,
+              "end": 225.45
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 225.45,
+              "end": 248.05
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 248.05,
+              "end": 268.975
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 268.975,
+              "end": 285.25
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 285.25,
+              "end": 304.55
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 304.55,
+              "end": 306.4
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 306.4,
+              "end": 315.375
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 315.375,
+              "end": 318.485
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 175,
+          "readAlongTextSha256": "9876d53d958d22c1e1d61a7353f600c29948626c0e350c8b6aa4f6acd95f000f",
+          "age": "4-5"
         },
         "6-8": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/sad/master.mp3?v=10-v4",
+          "durationSec": 318.485,
+          "bytes": 5096219,
+          "sha256": "c366d331c0c3807dcb67271a8e8997b09b221ff35746ce4040e497c29c8a5909",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/sad/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "pN1B9szJJxwK65OePrEF",
+            "cvAsGemq8ZsV3vcKR6Kz"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.975
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.975,
+              "end": 19.975
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 19.975,
+              "end": 31.55
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 31.55,
+              "end": 46.125
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 46.125,
+              "end": 58.425
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 58.425,
+              "end": 74.175
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 74.175,
+              "end": 86.125
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 86.125,
+              "end": 97.775
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 97.775,
+              "end": 112.675
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 112.675,
+              "end": 123.1
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 123.1,
+              "end": 146.325
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 146.325,
+              "end": 162.675
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 162.675,
+              "end": 186.1
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 186.1,
+              "end": 207.6
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 207.6,
+              "end": 225.45
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 225.45,
+              "end": 248.05
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 248.05,
+              "end": 268.975
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 268.975,
+              "end": 285.25
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 285.25,
+              "end": 304.55
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 304.55,
+              "end": 306.4
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 306.4,
+              "end": 315.375
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 315.375,
+              "end": 318.485
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 175,
+          "readAlongTextSha256": "9876d53d958d22c1e1d61a7353f600c29948626c0e350c8b6aa4f6acd95f000f",
+          "age": "6-8"
         },
         "9-10": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/sad/master.mp3?v=10-v4",
+          "durationSec": 318.485,
+          "bytes": 5096219,
+          "sha256": "c366d331c0c3807dcb67271a8e8997b09b221ff35746ce4040e497c29c8a5909",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/sad/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "pN1B9szJJxwK65OePrEF",
+            "cvAsGemq8ZsV3vcKR6Kz"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.975
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.975,
+              "end": 19.975
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 19.975,
+              "end": 31.55
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 31.55,
+              "end": 46.125
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 46.125,
+              "end": 58.425
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 58.425,
+              "end": 74.175
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 74.175,
+              "end": 86.125
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 86.125,
+              "end": 97.775
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 97.775,
+              "end": 112.675
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 112.675,
+              "end": 123.1
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 123.1,
+              "end": 146.325
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 146.325,
+              "end": 162.675
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 162.675,
+              "end": 186.1
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 186.1,
+              "end": 207.6
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 207.6,
+              "end": 225.45
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 225.45,
+              "end": 248.05
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 248.05,
+              "end": 268.975
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 268.975,
+              "end": 285.25
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 285.25,
+              "end": 304.55
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 304.55,
+              "end": 306.4
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 306.4,
+              "end": 315.375
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 315.375,
+              "end": 318.485
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 175,
+          "readAlongTextSha256": "9876d53d958d22c1e1d61a7353f600c29948626c0e350c8b6aa4f6acd95f000f",
+          "age": "9-10"
         }
       },
       "pronunciationTerms": [
@@ -1346,22 +4328,478 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/said/master.mp3?v=10-v4",
+          "durationSec": 331.677,
+          "bytes": 5307289,
+          "sha256": "f04aefb7a97346b22dd2173d05ce70d1cb8744d215ea6c3c888bd4a7302e56a4",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/said/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "XqbaVpekffBCrLZRbIm0",
+            "3hiuAkfKYO0mVIRnpbOL"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.025
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.025,
+              "end": 21.225
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 21.225,
+              "end": 35.275
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 35.275,
+              "end": 50.05
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 50.05,
+              "end": 65.325
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 65.325,
+              "end": 80.65
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 80.65,
+              "end": 89.725
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 89.725,
+              "end": 102.925
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 102.925,
+              "end": 117.125
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 117.125,
+              "end": 129.375
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 129.375,
+              "end": 153.625
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 153.625,
+              "end": 173.05
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 173.05,
+              "end": 195.7
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 195.7,
+              "end": 209.225
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 209.225,
+              "end": 229.75
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 229.75,
+              "end": 239.425
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 239.425,
+              "end": 264.0
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 264.0,
+              "end": 276.625
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 276.625,
+              "end": 302.2
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 302.2,
+              "end": 317.55
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 317.55,
+              "end": 319.65
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 319.65,
+              "end": 328.425
+            },
+            {
+              "paragraphIndex": 22,
+              "start": 328.425,
+              "end": 331.677
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 166,
+          "readAlongTextSha256": "c01ef94a8bce9dbe825d19afe736810e0b148001266a5b1183c004aa46d17c9f",
+          "age": "4-5"
         },
         "6-8": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/said/master.mp3?v=10-v4",
+          "durationSec": 331.677,
+          "bytes": 5307289,
+          "sha256": "f04aefb7a97346b22dd2173d05ce70d1cb8744d215ea6c3c888bd4a7302e56a4",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/said/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "XqbaVpekffBCrLZRbIm0",
+            "3hiuAkfKYO0mVIRnpbOL"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.025
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.025,
+              "end": 21.225
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 21.225,
+              "end": 35.275
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 35.275,
+              "end": 50.05
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 50.05,
+              "end": 65.325
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 65.325,
+              "end": 80.65
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 80.65,
+              "end": 89.725
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 89.725,
+              "end": 102.925
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 102.925,
+              "end": 117.125
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 117.125,
+              "end": 129.375
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 129.375,
+              "end": 153.625
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 153.625,
+              "end": 173.05
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 173.05,
+              "end": 195.7
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 195.7,
+              "end": 209.225
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 209.225,
+              "end": 229.75
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 229.75,
+              "end": 239.425
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 239.425,
+              "end": 264.0
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 264.0,
+              "end": 276.625
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 276.625,
+              "end": 302.2
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 302.2,
+              "end": 317.55
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 317.55,
+              "end": 319.65
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 319.65,
+              "end": 328.425
+            },
+            {
+              "paragraphIndex": 22,
+              "start": 328.425,
+              "end": 331.677
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 166,
+          "readAlongTextSha256": "c01ef94a8bce9dbe825d19afe736810e0b148001266a5b1183c004aa46d17c9f",
+          "age": "6-8"
         },
         "9-10": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/said/master.mp3?v=10-v4",
+          "durationSec": 331.677,
+          "bytes": 5307289,
+          "sha256": "f04aefb7a97346b22dd2173d05ce70d1cb8744d215ea6c3c888bd4a7302e56a4",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/said/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "XqbaVpekffBCrLZRbIm0",
+            "3hiuAkfKYO0mVIRnpbOL"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 4.025
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 4.025,
+              "end": 21.225
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 21.225,
+              "end": 35.275
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 35.275,
+              "end": 50.05
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 50.05,
+              "end": 65.325
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 65.325,
+              "end": 80.65
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 80.65,
+              "end": 89.725
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 89.725,
+              "end": 102.925
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 102.925,
+              "end": 117.125
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 117.125,
+              "end": 129.375
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 129.375,
+              "end": 153.625
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 153.625,
+              "end": 173.05
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 173.05,
+              "end": 195.7
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 195.7,
+              "end": 209.225
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 209.225,
+              "end": 229.75
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 229.75,
+              "end": 239.425
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 239.425,
+              "end": 264.0
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 264.0,
+              "end": 276.625
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 276.625,
+              "end": 302.2
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 302.2,
+              "end": 317.55
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 317.55,
+              "end": 319.65
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 319.65,
+              "end": 328.425
+            },
+            {
+              "paragraphIndex": 22,
+              "start": 328.425,
+              "end": 331.677
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 166,
+          "readAlongTextSha256": "c01ef94a8bce9dbe825d19afe736810e0b148001266a5b1183c004aa46d17c9f",
+          "age": "9-10"
         }
       },
       "pronunciationTerms": [
@@ -1483,22 +4921,478 @@
       "correct": 0,
       "audio": {
         "4-5": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/abu-ubaydah/master.mp3?v=10-v4",
+          "durationSec": 350.798,
+          "bytes": 5613235,
+          "sha256": "512d3f4ad0bb734f466ad8f58921171efb03b76bee06985f1e1b43416d6a5005",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/abu-ubaydah/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "gdovRzzgdkVXktjqVlKw",
+            "7ck0L9moUevwyYEPwogD"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.95
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.95,
+              "end": 17.4
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 17.4,
+              "end": 33.5
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 33.5,
+              "end": 48.975
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 48.975,
+              "end": 62.025
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 62.025,
+              "end": 76.825
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 76.825,
+              "end": 90.4
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 90.4,
+              "end": 105.625
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 105.625,
+              "end": 118.25
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 118.25,
+              "end": 129.6
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 129.6,
+              "end": 158.575
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 158.575,
+              "end": 177.3
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 177.3,
+              "end": 197.925
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 197.925,
+              "end": 214.925
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 214.925,
+              "end": 233.225
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 233.225,
+              "end": 255.85
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 255.85,
+              "end": 272.625
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 272.625,
+              "end": 291.575
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 291.575,
+              "end": 313.675
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 313.675,
+              "end": 337.4
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 337.4,
+              "end": 339.225
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 339.225,
+              "end": 347.7
+            },
+            {
+              "paragraphIndex": 22,
+              "start": 347.7,
+              "end": 350.798
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 200,
+          "readAlongTextSha256": "7eb1c2d0a0db7d88a7c73f1987948ea39205874f04f06bcace9ae517f94908f3",
+          "age": "4-5"
         },
         "6-8": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/abu-ubaydah/master.mp3?v=10-v4",
+          "durationSec": 350.798,
+          "bytes": 5613235,
+          "sha256": "512d3f4ad0bb734f466ad8f58921171efb03b76bee06985f1e1b43416d6a5005",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/abu-ubaydah/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "gdovRzzgdkVXktjqVlKw",
+            "7ck0L9moUevwyYEPwogD"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.95
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.95,
+              "end": 17.4
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 17.4,
+              "end": 33.5
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 33.5,
+              "end": 48.975
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 48.975,
+              "end": 62.025
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 62.025,
+              "end": 76.825
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 76.825,
+              "end": 90.4
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 90.4,
+              "end": 105.625
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 105.625,
+              "end": 118.25
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 118.25,
+              "end": 129.6
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 129.6,
+              "end": 158.575
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 158.575,
+              "end": 177.3
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 177.3,
+              "end": 197.925
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 197.925,
+              "end": 214.925
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 214.925,
+              "end": 233.225
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 233.225,
+              "end": 255.85
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 255.85,
+              "end": 272.625
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 272.625,
+              "end": 291.575
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 291.575,
+              "end": 313.675
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 313.675,
+              "end": 337.4
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 337.4,
+              "end": 339.225
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 339.225,
+              "end": 347.7
+            },
+            {
+              "paragraphIndex": 22,
+              "start": 347.7,
+              "end": 350.798
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 200,
+          "readAlongTextSha256": "7eb1c2d0a0db7d88a7c73f1987948ea39205874f04f06bcace9ae517f94908f3",
+          "age": "6-8"
         },
         "9-10": {
-          "status": "master-text-updated-audio-refresh-required",
-          "url": "",
-          "timings": [],
-          "syncPoints": []
+          "status": "ready",
+          "url": "/kids/assets/mubashshirun-story-audio/abu-ubaydah/master.mp3?v=10-v4",
+          "durationSec": 350.798,
+          "bytes": 5613235,
+          "sha256": "512d3f4ad0bb734f466ad8f58921171efb03b76bee06985f1e1b43416d6a5005",
+          "mime": "audio/mpeg",
+          "codec": "mp3",
+          "bitRateKbps": 128,
+          "channels": 1,
+          "sampleRateHz": 44100,
+          "voiceProfile": "kids_story",
+          "voiceProfileId": "serhat-owner-voice-2026",
+          "source": "ElevenLabs v4 · Serhat Abu Malik – Master",
+          "sourceSpeaker": "Serhat Abu Malik",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "generatedFromCanonicalMasterText": true,
+          "masterAudio": true,
+          "masterAgeRange": "4-10",
+          "modes": [
+            "read",
+            "listen"
+          ],
+          "technicalQaPassed": true,
+          "publishedAt": "2026-10-06T21:27:33Z",
+          "localTarget": "/kids/assets/mubashshirun-story-audio/abu-ubaydah/master.mp3",
+          "transcoded": false,
+          "concatMode": "ffmpeg-stream-copy",
+          "losslessFrameConcat": true,
+          "sourceGenerationIds": [
+            "gdovRzzgdkVXktjqVlKw",
+            "7ck0L9moUevwyYEPwogD"
+          ],
+          "longFormParts": 2,
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.95
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.95,
+              "end": 17.4
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 17.4,
+              "end": 33.5
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 33.5,
+              "end": 48.975
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 48.975,
+              "end": 62.025
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 62.025,
+              "end": 76.825
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 76.825,
+              "end": 90.4
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 90.4,
+              "end": 105.625
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 105.625,
+              "end": 118.25
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 118.25,
+              "end": 129.6
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 129.6,
+              "end": 158.575
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 158.575,
+              "end": 177.3
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 177.3,
+              "end": 197.925
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 197.925,
+              "end": 214.925
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 214.925,
+              "end": 233.225
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 233.225,
+              "end": 255.85
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 255.85,
+              "end": 272.625
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 272.625,
+              "end": 291.575
+            },
+            {
+              "paragraphIndex": 18,
+              "start": 291.575,
+              "end": 313.675
+            },
+            {
+              "paragraphIndex": 19,
+              "start": 313.675,
+              "end": 337.4
+            },
+            {
+              "paragraphIndex": 20,
+              "start": 337.4,
+              "end": 339.225
+            },
+            {
+              "paragraphIndex": 21,
+              "start": 339.225,
+              "end": 347.7
+            },
+            {
+              "paragraphIndex": 22,
+              "start": 347.7,
+              "end": 350.798
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "detectedSilences": 200,
+          "readAlongTextSha256": "7eb1c2d0a0db7d88a7c73f1987948ea39205874f04f06bcace9ae517f94908f3",
+          "age": "9-10"
         }
       },
       "pronunciationTerms": [
