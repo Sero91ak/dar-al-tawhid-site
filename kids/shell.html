@@ -9409,6 +9409,17 @@ html[data-view="stories"] #view-stories > :last-child{
   max-width:100vw!important;
 }
 
+/* Local offline fallback for the same Cinzel family already used across DĀR.
+   Adobe Fonts remains the online primary source; this prevents a visual fallback
+   to Georgia when the Kids app is offline. */
+@font-face{
+  font-family:"DarKidsCinzel";
+  src:url("/assets/fonts/cinzel-latin-600-normal.woff2") format("woff2");
+  font-weight:600;
+  font-style:normal;
+  font-display:swap;
+}
+
 /* Local Runway clip: zero CSS camera movement. */
 #view-today .hero-sky-video-v1188{
   position:absolute!important;
@@ -9700,17 +9711,6 @@ html[data-view="stories"] #view-stories > :last-child{
 #view-today .hero{
   overflow:hidden!important;
   background:#061b26!important;
-  margin:calc(-1 * var(--safe-top)) calc(50% - 50vw) 0!important;
-  width:100vw!important;
-  max-width:100vw!important;
-}
-
-@font-face{
-  font-family:"DarKidsCinzel";
-  src:url("/assets/fonts/cinzel-latin-600-normal.woff2") format("woff2");
-  font-weight:600;
-  font-style:normal;
-  font-display:swap;
 }
 #view-today .hero::before{
   content:""!important;
