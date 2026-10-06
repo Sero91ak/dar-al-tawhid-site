@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1188";
+const CACHE_NAME="dar-al-tawhid-kids-v1189";
 const KIDS_BUILD_ID="kids-shell-v108-home-cinema1188";
 const CORE_PRECACHE=[
   "/kids/start",
@@ -62,7 +62,7 @@ const CORE_PRECACHE=[
   "/kids/navigation-v1182.js?v=1182",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
-  "/kids/kids-touch-rail.css?v=2",
+  "/kids/kids-touch-rail.css?v=3",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=4",
   "/kids/content-studio-feed.js?v=studio6",
