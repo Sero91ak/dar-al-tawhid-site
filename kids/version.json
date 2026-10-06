@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v105-home-cinema1178",
-  "label": "KIDS · V1.08.05",
-  "releasedAt": "2026-10-06T10:02:00+02:00",
-  "note": "V1178 verwandelt den Startseiten-Hero in eine echte Cinema-Fläche: neuer Adobe-Hero als Bildbasis, echter 6-Sekunden-Loop mit Wolken-, Haze-, Licht-, Partikel- und Parallax-Bewegung, nahtloser dunkler Übergang in die Seite sowie deutlich größere DĀR AL TAWḤĪD-Marke mit Gold-Shimmer. Die farbigen KIDS-Buchstaben behalten ihren versetzten Ballon-Sprung.",
+  "buildId": "kids-shell-v106-home-cinema1179",
+  "label": "KIDS · V1.08.06",
+  "releasedAt": "2026-10-06T12:36:00+02:00",
+  "note": "V1179 korrigiert den tatsächlich sichtbaren Startseiten-Hero: neues semi-realistisches Adobe-Motiv, neuer Cinema-Loop, iOS-Playback-Recovery inklusive erster Berührung, Service-Worker-Bypass für MP4-Range-Requests, deutlich größere DĀR AL TAWḤĪD-Marke, lebendige KIDS-Ballonbewegung und einzeilige, kindgerechte Hero-Typografie mit nahtlosem Übergang in die App.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1178",
+    "serviceWorkerCache": "v1179",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -703,7 +703,7 @@
     "homeAudioFirst": true,
     "homeUnifiedResume": "audiobook-or-quran-v1170",
     "homeResumeProgress": true,
-    "homeHeroMotion": "multi-layer-cinema-pan-cloud-twinkle-light-haze-v1176",
+    "homeHeroMotion": "real-video-plus-parallax-haze-particles-light-sweep-v1179",
     "homePrimaryWorlds": [
       "stories",
       "quran",
@@ -715,11 +715,11 @@
     "homeAudioCore": "v1178",
     "alphabetRuntimeRemoved": true,
     "alphabetArchivedAssetsRetained": true,
-    "homeHeroBrand": "large-gold-cinema-dar-plus-balloon-kids-v1178",
+    "homeHeroBrand": "large-gold-dar-first-plus-balloon-kids-v1179",
     "homeQuizVisible": false,
     "homeDailyJourneyVisible": false,
     "homeKnowledgeCardVisible": false,
-    "homeHeroArtwork": "/kids/assets/kids-home-v1176/hero-cinema.png",
+    "homeHeroArtwork": "/kids/assets/kids-home-v1179/hero-poster.png",
     "homeResumeLayout": "stable-flow-no-overlap-v1176",
     "homeCards": "dedicated-generated-backgrounds-v1176",
     "homeCardArtwork": {
@@ -727,19 +727,21 @@
       "quran": "/kids/assets/kids-home-v1176/world-quran.png",
       "dua": "/kids/assets/kids-home-v1176/world-dua.png"
     },
-    "homeHeroCopyWrap": "single-line-phone-guard-v1176",
+    "homeHeroCopyWrap": "single-line-salam-headline-subcopy-v1179",
     "homeWordmarkPosition": "viewport-centered-transform-reset-v1177",
     "homeWordmarkClippingFixed": true,
-    "homeHeroCinema": "real-video-loop-v1178",
+    "homeHeroCinema": "ios-recovered-real-video-loop-v1179",
     "homeHeroCinemaDurationSeconds": 6,
-    "homeHeroCinemaResolution": "834x1112",
-    "homeHeroCinemaAsset": "/kids/assets/kids-home-v1178/hero-cinema.mp4",
-    "homeHeroPosterAsset": "/kids/assets/kids-home-v1178/hero-poster.png",
-    "homeHeroBlend": "seamless-dark-page-falloff-v1178",
-    "homeWordmarkEffect": "animated-gold-shimmer-and-aura-v1178",
-    "homeKidsLetters": "staggered-balloon-bounce-v1178",
-    "homeReducedMotionFallback": true
+    "homeHeroCinemaResolution": "720p-portrait",
+    "homeHeroCinemaAsset": "/kids/assets/kids-home-v1179/hero-cinema.mp4",
+    "homeHeroPosterAsset": "/kids/assets/kids-home-v1179/hero-poster.png",
+    "homeHeroBlend": "full-bleed-seamless-petrol-falloff-v1179",
+    "homeWordmarkEffect": "large-gold-shimmer-aura-v1179",
+    "homeKidsLetters": "visible-staggered-balloon-bounce-v1179",
+    "homeReducedMotionFallback": true,
+    "homeHeroPlayback": "autoplay-plus-canplay-pageshow-first-gesture-v1179",
+    "homeHeroVideoCachePolicy": "network-direct-range-safe-v1179"
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T10:02:00+02:00"
+  "deployTrigger": "2026-10-06T12:36:00+02:00"
 }
