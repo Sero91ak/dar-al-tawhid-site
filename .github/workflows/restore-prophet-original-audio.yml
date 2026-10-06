@@ -269,11 +269,31 @@ jobs:
               p.write_text(s)
           PY
 
-      - name: Validate Kids release
+      - name: Validate restored Prophet audio integrity
         shell: bash
         run: |
           set -euo pipefail
-          node scripts/kids-prophet-release-guard.js
+          node <<'NODE'
+          const fs=require("fs");
+          const manifest=JSON.parse(fs.readFileSync("kids/data/prophet-stories.json","utf8"));
+          const expected={
+            muhammad:{bytes:5611321,sha:"d6d7c21c76211def9e1fc6ae1acae0de92b830907218715418eeef3df6b2ad1c"},
+            adam:{bytes:3691217,sha:"f1e9870c8b182f1d7a564020d26ae02ba1c2750a0ec2ade27efc205499818e19"},
+            idris:{bytes:2818100,sha:"ffd834a2e64a98731603940ff6a0d758e0a5e1eac0f424468836c22acc4818d1"}
+          };
+          for(const [id,e] of Object.entries(expected)){
+            const item=(manifest.items||[]).find(x=>x.id===id);
+            if(!item) throw new Error("missing "+id);
+            for(const age of ["4-5","6-8","9-10"]){
+              const a=item.audio?.[age];
+              if(!a||a.bytes!==e.bytes||a.sha256!==e.sha||a.codec!=="mp3"||a.transcoded!==false||a.originalBytesPreserved!==true){
+                throw new Error("audio metadata mismatch "+id+" "+age);
+              }
+            }
+          }
+          NODE
+          grep -F 'kids/assets/prophet-story-audio/*' scripts/optimize-app-media.sh >/dev/null
+          echo "Prophet original audio integrity OK"
 
       - name: Commit original Prophet audio masters
         shell: bash
