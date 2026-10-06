@@ -463,3 +463,214 @@ html[data-kids-age="4-5"] .ps-library-page .ps-story-row,
     grid-template-columns:1fr!important;
   }
 }
+
+
+/* =========================================================
+   STORY_LIBRARY_RESTORE_V7 — larger capsules + seamless image blend
+   2026-10-06
+   User-approved target: Ṣaḥābah and Ṣaḥābiyyāt use the same large,
+   spacious selection-card geometry. Artwork visually dissolves into
+   the copy area instead of ending at a hard vertical cut.
+   ========================================================= */
+.ms-library-page .ms-list{
+  gap:14px!important;
+}
+
+.ms-library-page .ms-story-row{
+  min-height:218px!important;
+  grid-template-columns:minmax(138px,43%) minmax(0,1fr) 58px!important;
+  border-radius:30px!important;
+  border-width:1px!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 89% 10%,rgba(239,208,127,.055),transparent 31%),
+    linear-gradient(145deg,#0a2b3b 0%,#082737 48%,#072432 100%)!important;
+  box-shadow:0 16px 38px rgba(0,0,0,.18)!important;
+}
+
+.sy-library-page .ms-story-row{
+  border-color:rgba(231,190,145,.18)!important;
+  background:
+    radial-gradient(circle at 88% 9%,rgba(231,190,145,.055),transparent 31%),
+    linear-gradient(145deg,#0b2c3b 0%,#092837 48%,#072432 100%)!important;
+}
+
+.ms-library-page .ms-row-visual{
+  min-height:218px!important;
+  overflow:visible!important;
+  background:#08283a!important;
+}
+
+.ms-library-page .ms-row-visual img{
+  min-height:218px!important;
+  object-fit:cover!important;
+  filter:saturate(.98) contrast(1.02) brightness(.94)!important;
+}
+
+/* Extend the fade beyond the image column so the image and petrol card
+   surface merge instead of forming a visible vertical seam. */
+.ms-library-page .ms-row-visual::after,
+.sy-library-page .ms-row-visual::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:2!important;
+  top:0!important;
+  bottom:0!important;
+  left:0!important;
+  right:-54px!important;
+  height:auto!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,
+      rgba(7,31,44,0) 0%,
+      rgba(7,31,44,0) 42%,
+      rgba(7,31,44,.10) 55%,
+      rgba(7,31,44,.30) 68%,
+      rgba(7,31,44,.62) 82%,
+      rgba(7,31,44,.94) 100%),
+    linear-gradient(180deg,rgba(3,17,27,.02),rgba(3,17,27,.19) 74%,rgba(3,17,27,.30) 100%)!important;
+}
+
+.ms-library-page .ms-row-copy{
+  z-index:4!important;
+  gap:5px!important;
+  padding:20px 8px 20px 19px!important;
+}
+
+.ms-library-page .ms-row-title{
+  font-size:clamp(23px,5.8vw,30px)!important;
+  line-height:1.04!important;
+  font-weight:780!important;
+  letter-spacing:-.025em!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+}
+
+.ms-library-page .ms-row-summary{
+  -webkit-line-clamp:2!important;
+  font-size:11.5px!important;
+  line-height:1.38!important;
+}
+
+.ms-library-page .ms-rank{
+  left:13px!important;
+  bottom:13px!important;
+  min-width:44px!important;
+  height:33px!important;
+  padding:0 10px!important;
+  border-radius:999px!important;
+}
+
+/* Same button geometry on Ṣaḥābah and Ṣaḥābiyyāt. */
+.ms-library-page .ms-row-go,
+.ms-library-page .ms-row-go.is-listen,
+.sy-library-page .ms-row-go,
+.sy-library-page .ms-row-go.is-listen{
+  width:54px!important;
+  min-width:54px!important;
+  height:54px!important;
+  margin:0!important;
+  padding:0 0 0 3px!important;
+  align-self:center!important;
+  justify-self:center!important;
+  border:1px solid rgba(239,208,127,.48)!important;
+  border-radius:50%!important;
+  background:rgba(239,208,127,.11)!important;
+  color:#f6d77f!important;
+  font-size:20px!important;
+  line-height:1!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 8px 18px rgba(0,0,0,.10)!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+
+/* Preschool remains audio-first, but cards stay large and visual. */
+html[data-kids-age="4-5"] .ms-library-page .ms-story-row,
+.ms-library-page[data-age="4–5"] .ms-story-row,
+.ms-library-page[data-age="4-5"] .ms-story-row{
+  min-height:218px!important;
+  grid-template-columns:minmax(138px,43%) minmax(0,1fr) 58px!important;
+}
+html[data-kids-age="4-5"] .ms-library-page .ms-row-visual,
+.ms-library-page[data-age="4–5"] .ms-row-visual,
+.ms-library-page[data-age="4-5"] .ms-row-visual,
+html[data-kids-age="4-5"] .ms-library-page .ms-row-visual img,
+.ms-library-page[data-age="4–5"] .ms-row-visual img,
+.ms-library-page[data-age="4-5"] .ms-row-visual img{
+  min-height:218px!important;
+}
+html[data-kids-age="4-5"] .ms-library-page .ms-row-title,
+.ms-library-page[data-age="4–5"] .ms-row-title,
+.ms-library-page[data-age="4-5"] .ms-row-title{
+  font-size:clamp(26px,6.8vw,31px)!important;
+  line-height:1.06!important;
+}
+html[data-kids-age="4-5"] .ms-library-page .ms-row-go.is-listen,
+.ms-library-page[data-age="4–5"] .ms-row-go.is-listen,
+.ms-library-page[data-age="4-5"] .ms-row-go.is-listen{
+  width:54px!important;
+  min-width:54px!important;
+  height:54px!important;
+  font-size:20px!important;
+  padding-left:3px!important;
+}
+
+/* Very narrow phones still keep the larger visual language. */
+@media(max-width:374px){
+  .ms-library-page .ms-story-row,
+  html[data-kids-age="4-5"] .ms-library-page .ms-story-row,
+  .ms-library-page[data-age="4–5"] .ms-story-row,
+  .ms-library-page[data-age="4-5"] .ms-story-row{
+    min-height:208px!important;
+    grid-template-columns:130px minmax(0,1fr) 54px!important;
+    border-radius:27px!important;
+  }
+  .ms-library-page .ms-row-visual,
+  .ms-library-page .ms-row-visual img,
+  html[data-kids-age="4-5"] .ms-library-page .ms-row-visual,
+  html[data-kids-age="4-5"] .ms-library-page .ms-row-visual img{
+    min-height:208px!important;
+  }
+  .ms-library-page .ms-row-copy{padding:18px 6px 18px 15px!important}
+  .ms-library-page .ms-row-title{font-size:22px!important}
+}
+
+/* Tablets: same design, with more breathing room and artwork. */
+@media(min-width:700px){
+  .ms-library-page .ms-list{
+    width:min(920px,calc(100% - 44px))!important;
+    gap:16px!important;
+  }
+  .ms-library-page .ms-story-row,
+  html[data-kids-age="4-5"] .ms-library-page .ms-story-row{
+    min-height:248px!important;
+    grid-template-columns:minmax(250px,39%) minmax(0,1fr) 70px!important;
+    border-radius:32px!important;
+  }
+  .ms-library-page .ms-row-visual,
+  .ms-library-page .ms-row-visual img,
+  html[data-kids-age="4-5"] .ms-library-page .ms-row-visual,
+  html[data-kids-age="4-5"] .ms-library-page .ms-row-visual img{
+    min-height:248px!important;
+  }
+  .ms-library-page .ms-row-visual::after,
+  .sy-library-page .ms-row-visual::after{
+    right:-72px!important;
+  }
+  .ms-library-page .ms-row-copy{
+    padding:26px 14px 26px 26px!important;
+    gap:6px!important;
+  }
+  .ms-library-page .ms-row-title{font-size:30px!important}
+  .ms-library-page .ms-row-summary{font-size:13px!important}
+  .ms-library-page .ms-row-go,
+  .ms-library-page .ms-row-go.is-listen,
+  .sy-library-page .ms-row-go,
+  .sy-library-page .ms-row-go.is-listen{
+    width:58px!important;
+    min-width:58px!important;
+    height:58px!important;
+    font-size:21px!important;
+  }
+}
