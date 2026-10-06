@@ -1,5 +1,5 @@
 {
-  "fassung": 2,
+  "fassung": 3,
   "aktualisiertAm": "2026-10-06",
   "bereiche": [
     {
@@ -202,7 +202,7 @@
       "datenDatei": "test/data/frauen-schwangerschaft-stillzeit-nifas.json",
       "atharPruefDatei": "",
       "status": "aktiv",
-      "sichtbareEintraege": 4,
+      "sichtbareEintraege": 6,
       "verborgeneEintraege": 21,
       "hinweis": "Nur geprüfte Inhalte mit Direktnachweis."
     },
@@ -214,8 +214,8 @@
       "datenDatei": "test/data/frauen-iddah-scheidung-trauerzeit.json",
       "atharPruefDatei": "",
       "status": "aktiv",
-      "sichtbareEintraege": 8,
-      "verborgeneEintraege": 25,
+      "sichtbareEintraege": 10,
+      "verborgeneEintraege": 23,
       "hinweis": "Nur geprüfte Inhalte mit Direktnachweis."
     },
     {
@@ -449,14 +449,14 @@
     {
       "kennung": "maedchen-pubertaet-pflichtwissen",
       "titel": "Mädchen, Pubertät & Pflichtwissen",
-      "untertitel": "In Prüfung",
+      "untertitel": "Pubertät, Gebet, Ḥayḍ und notwendiges Pflichtwissen",
       "route": "#/frauen/maedchen-pubertaet-pflichtwissen",
       "datenDatei": "test/data/frauen-maedchen-pubertaet-pflichtwissen.json",
       "atharPruefDatei": "test/data/frauen-maedchen-pubertaet-pflichtwissen-athar-pruefung.json",
-      "status": "in-pruefung",
-      "sichtbareEintraege": 0,
-      "verborgeneEintraege": 25,
-      "hinweis": "Keine ungeprüften Inhalte anzeigen."
+      "status": "aktiv",
+      "sichtbareEintraege": 5,
+      "verborgeneEintraege": 20,
+      "hinweis": "Nur geprüfte Grundlagen mit Direktnachweis."
     },
     {
       "kennung": "falsches-wissen-bidah-quellenpruefung",
