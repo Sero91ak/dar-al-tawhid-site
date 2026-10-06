@@ -181,4 +181,3 @@ hp.write_text(json.dumps(hub,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 print("Exact forced alignment installed for all 10 Sahaba · data",d["version"],"cache",cache_v)
 PY
 
-node scripts/kids-prophet-release-guard.js
