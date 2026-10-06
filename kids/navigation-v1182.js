@@ -44,6 +44,14 @@
       "  scroll-padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important;",
       "}",
       "html[data-kids-age] body .shell > .view.active > :last-child{margin-bottom:0!important;}",
+      "#psLibraryScroll,#msLibraryScroll,#syLibraryScroll,#ghWorldScroll{",
+      "  padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))!important;",
+      "  scroll-padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))!important;",
+      "}",
+      "#psScroll,#msScroll,#syScroll,#ghPlayerScroll{",
+      "  padding-bottom:calc(26px + env(safe-area-inset-bottom,0px))!important;",
+      "  scroll-padding-bottom:calc(26px + env(safe-area-inset-bottom,0px))!important;",
+      "}",
       "@media(max-width:380px){html[data-kids-age] body .shell{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))!important;}}",
       "@media(min-width:700px){html[data-kids-age] body .shell{padding-bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;}}"
     ].join("\n");
