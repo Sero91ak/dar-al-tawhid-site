@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v108-card-glow1190",
-  "label": "KIDS · V1.08.17",
-  "releasedAt": "2026-10-06T18:15:00+02:00",
-  "note": "V1190 entfernt global die Pfeile, Rails und Edge-Tabs von navigierbaren Kinderkarten. Die komplette Kapsel ist das Touch-Ziel und bestätigt Interaktivität nur noch durch einen dezenten Rand-/Glow-Effekt bei Berührung, Fokus oder Hover. Dadurch steht die volle Kartenbreite wieder Bild und lesbarem Text zur Verfügung. Die Start-Wortmarke ist zugleich auf vollständig sichtbares DĀR AL TAWḤĪD korrigiert.",
+  "buildId": "kids-shell-v108-card-glow1191",
+  "label": "KIDS · V1.08.18",
+  "releasedAt": "2026-10-06T18:24:00+02:00",
+  "note": "V1191 beschränkt die Pfeil-/Antipp-Änderung ausdrücklich auf die Bereiche außerhalb der Startseite. Die Startseite einschließlich oberem Bereich bleibt unverändert. In den übrigen Kids-Bereichen sind permanente Pfeile/Tabs entfernt; die ganze Karte ist das Touch-Ziel und bestätigt Antippen nur durch einen dezenten Rand-/Glow-Effekt. Freigewordener Pfeilplatz wird ausschließlich dem vorhandenen Inhalt zurückgegeben.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1190",
+    "serviceWorkerCache": "v1191",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -823,7 +823,7 @@
     },
     "prophetLibraryCardMinHeightPhone": "206px",
     "prophetLibraryCardMinHeightTablet": "236px",
-    "globalCardInteraction": "whole-card-glow-v5",
+    "globalCardInteraction": "whole-card-glow-v6-scoped",
     "globalCardArrows": false,
     "globalCardRails": false,
     "globalCardWholeHitTarget": true,
@@ -848,8 +848,14 @@
       "sahabiyyat story rows"
     ],
     "homeWordmark": "DĀR AL TAWḤĪD fully visible curved gold",
-    "homeWordmarkSafeMargins": true
+    "homeWordmarkSafeMargins": true,
+    "startPageTouchedByInteractionChange": false,
+    "startPageArrowStyle": "unchanged",
+    "globalCardArrowsOutsideStart": false,
+    "globalCardWholeHitTargetOutsideStart": true,
+    "globalCardFeedbackOutsideStart": "subtle-border-glow-on-active-hover-focus",
+    "interactionScope": "all navigable child cards outside #view-today"
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T18:15:00+02:00"
+  "deployTrigger": "2026-10-06T18:24:00+02:00"
 }
