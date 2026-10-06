@@ -1,18 +1,23 @@
-/* DĀR AL TAWḤĪD KIDS — Global Card + Touch Rail System v1
-   One interaction language across the child-facing app:
-   large visual cards, readable copy, and a right-docked touch rail.
-   The whole card stays tappable; the rail is the visual affordance. */
+/* DĀR AL TAWḤĪD KIDS — Navigation Affordance System v3
+   2026-10-06
+   Purpose: one consistent "this opens something" language without putting a
+   giant rail on every card. Whole cards stay tappable. The right affordance
+   adapts to the component: compact edge-tab on ordinary cards, integrated
+   action column only on the large story library cards. */
 
 :root{
-  --kids-card-rail-w:56px;
-  --kids-card-rail-inset:10px;
-  --kids-card-rail-gold:#f0cf7a;
-  --kids-card-rail-line:rgba(240,207,122,.30);
-  --kids-card-rail-bg:linear-gradient(180deg,rgba(240,207,122,.13),rgba(240,207,122,.055));
-  --kids-card-rail-shadow:inset 1px 0 rgba(255,255,255,.035),-10px 0 24px rgba(3,19,29,.14);
+  --kids-action-gold:#f1d083;
+  --kids-action-line:rgba(241,208,131,.30);
+  --kids-action-fill:linear-gradient(180deg,rgba(241,208,131,.105),rgba(8,35,49,.16));
+  --kids-action-shadow:inset 1px 0 rgba(255,255,255,.035),-8px 0 20px rgba(1,18,27,.10);
+  --kids-action-tab-w:48px;
+  --kids-action-tab-h:70px;
+  --kids-story-action-w:46px;
 }
 
-/* ---------- shared interaction feel ---------- */
+/* ---------------------------------------------------------
+   Common interaction
+   --------------------------------------------------------- */
 .choice,
 .resume,
 .knowledge-card,
@@ -20,14 +25,14 @@
 .surah-card,
 .verse-card,
 .full-quran,
-.daily-step,
 .story-row,
 .ps-prophet-entry,
 .ms-entry,
+.gh-entry,
+.ps-muhammad-card,
 .ps-story-row,
 .ms-story-row{
   position:relative!important;
-  overflow:hidden!important;
   -webkit-tap-highlight-color:transparent!important;
   touch-action:manipulation!important;
 }
@@ -40,10 +45,11 @@
   .surah-card,
   .verse-card,
   .full-quran,
-  .daily-step,
   .story-row,
   .ps-prophet-entry,
   .ms-entry,
+  .gh-entry,
+  .ps-muhammad-card,
   .ps-story-row,
   .ms-story-row{
     transition:transform .14s ease,filter .14s ease,border-color .14s ease!important;
@@ -55,198 +61,241 @@
   .surah-card:active,
   .verse-card:active,
   .full-quran:active,
-  .daily-step:active,
   .story-row:active,
   .ps-prophet-entry:active,
   .ms-entry:active,
+  .gh-entry:active,
+  .ps-muhammad-card:active,
   .ps-story-row:active,
   .ms-story-row:active{
-    transform:scale(.992)!important;
-    filter:brightness(1.035)!important;
+    transform:scale(.993)!important;
+    filter:brightness(1.025)!important;
   }
 }
 
-/* ---------- universal right-docked visual rail ---------- */
+/* ---------------------------------------------------------
+   Compact edge-tab
+   Used on normal navigation cards. It is attached to the
+   right edge, but deliberately NOT full-height.
+   --------------------------------------------------------- */
 .choice .arrow,
 .resume .go,
 .knowledge-card .kgo,
 .surah-card .surah-go,
 .full-quran .fgo,
-.daily-step .dstate,
-.story-row .chev,
-.ps-story-row .ps-row-go,
-.ms-story-row .ms-row-go{
+.story-row .chev{
   position:absolute!important;
   z-index:12!important;
-  right:0!important;
-  top:var(--kids-card-rail-inset)!important;
-  bottom:var(--kids-card-rail-inset)!important;
+  right:-1px!important;
+  top:50%!important;
+  bottom:auto!important;
   left:auto!important;
-  width:var(--kids-card-rail-w)!important;
-  min-width:var(--kids-card-rail-w)!important;
-  height:auto!important;
+  width:var(--kids-action-tab-w)!important;
+  min-width:var(--kids-action-tab-w)!important;
+  height:var(--kids-action-tab-h)!important;
   margin:0!important;
-  padding:0 0 0 2px!important;
+  padding:0 0 2px 2px!important;
   display:grid!important;
   place-items:center!important;
-  align-self:auto!important;
-  justify-self:auto!important;
-  border:0!important;
-  border-left:1px solid var(--kids-card-rail-line)!important;
-  border-radius:18px 0 0 18px!important;
-  background:var(--kids-card-rail-bg)!important;
-  color:var(--kids-card-rail-gold)!important;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded","Avenir Next",system-ui,sans-serif!important;
-  font-size:34px!important;
+  transform:translateY(-50%)!important;
+  border:1px solid var(--kids-action-line)!important;
+  border-right:0!important;
+  border-radius:20px 0 0 20px!important;
+  background:var(--kids-action-fill)!important;
+  color:var(--kids-action-gold)!important;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:31px!important;
   font-weight:650!important;
   line-height:1!important;
-  box-shadow:var(--kids-card-rail-shadow)!important;
-  backdrop-filter:blur(10px)!important;
-  -webkit-backdrop-filter:blur(10px)!important;
+  box-shadow:var(--kids-action-shadow)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  backdrop-filter:blur(8px)!important;
   pointer-events:none!important;
-  transform:none!important;
 }
 
-/* Cards without a dedicated arrow node receive the same rail. */
+/* Smaller rows use a smaller, quieter tab. */
+.resume .go,
+.knowledge-card .kgo,
+.full-quran .fgo,
+.story-row .chev{
+  --kids-action-tab-w:44px;
+  --kids-action-tab-h:60px;
+  border-radius:17px 0 0 17px!important;
+  font-size:28px!important;
+}
+
+/* Cards that do not have an arrow element get the same edge-tab. */
 .quran-action::after,
 .verse-card::after{
   content:"›"!important;
   position:absolute!important;
   z-index:12!important;
-  right:0!important;
-  top:var(--kids-card-rail-inset)!important;
-  bottom:var(--kids-card-rail-inset)!important;
-  width:var(--kids-card-rail-w)!important;
+  right:-1px!important;
+  top:50%!important;
+  width:46px!important;
+  height:66px!important;
   display:grid!important;
   place-items:center!important;
-  padding-left:2px!important;
-  border-left:1px solid var(--kids-card-rail-line)!important;
-  border-radius:18px 0 0 18px!important;
-  background:var(--kids-card-rail-bg)!important;
-  color:var(--kids-card-rail-gold)!important;
-  font-size:34px!important;
+  padding:0 0 2px 2px!important;
+  transform:translateY(-50%)!important;
+  border:1px solid var(--kids-action-line)!important;
+  border-right:0!important;
+  border-radius:19px 0 0 19px!important;
+  background:var(--kids-action-fill)!important;
+  color:var(--kids-action-gold)!important;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:31px!important;
   font-weight:650!important;
   line-height:1!important;
-  box-shadow:var(--kids-card-rail-shadow)!important;
-  backdrop-filter:blur(10px)!important;
-  -webkit-backdrop-filter:blur(10px)!important;
+  box-shadow:var(--kids-action-shadow)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  backdrop-filter:blur(8px)!important;
   pointer-events:none!important;
 }
 
-/* Reserve readable space so copy never runs under the rail. */
-.choice,
-.resume,
-.knowledge-card,
-.quran-action,
-.surah-card,
-.verse-card,
-.full-quran,
-.daily-step,
-.story-row{
-  padding-right:calc(var(--kids-card-rail-w) + 14px)!important;
-}
+/* Reserve copy space only where an edge-tab exists. */
+.choice{padding-right:64px!important}
+.resume{padding-right:62px!important}
+.knowledge-card{padding-right:62px!important}
+.quran-action{padding-right:62px!important}
+.surah-card{padding-right:62px!important}
+.verse-card{padding-right:62px!important}
+.full-quran{padding-right:62px!important}
+.story-row{padding-right:62px!important}
 
-/* Existing icon/text blocks stay flexible and readable. */
 .resume-copy,
 .knowledge-card .kcopy,
-.quran-action > *:not(.qa-icon),
-.surah-card > *:not(.surah-go),
-.verse-card > div:last-of-type,
+.quran-action strong,
+.quran-action small,
+.surah-card strong,
+.surah-card small,
+.verse-card > div:last-child,
 .full-quran > div:nth-child(2),
-.daily-step .dtxt,
 .story-row-copy{
   min-width:0!important;
 }
 
-/* ---------- large category entry cards ---------- */
+/* ---------------------------------------------------------
+   Large category cards: same language, larger edge-tab
+   --------------------------------------------------------- */
 .ps-prophet-entry .ps-entry-action,
 .ms-entry .ms-entry-action,
-.gh-entry .gh-entry-action{
+.gh-entry .gh-entry-action,
+.ps-muhammad-card .ps-muhammad-cta{
   position:absolute!important;
   z-index:15!important;
-  top:12px!important;
-  right:0!important;
-  bottom:12px!important;
+  right:-1px!important;
+  top:50%!important;
+  bottom:auto!important;
   left:auto!important;
-  width:60px!important;
-  min-width:60px!important;
-  height:auto!important;
+  width:52px!important;
+  min-width:52px!important;
+  height:82px!important;
   margin:0!important;
   padding:0!important;
   display:grid!important;
   place-items:center!important;
-  border:0!important;
-  border-left:1px solid var(--kids-card-rail-line)!important;
-  border-radius:20px 0 0 20px!important;
-  background:var(--kids-card-rail-bg)!important;
-  color:var(--kids-card-rail-gold)!important;
-  box-shadow:var(--kids-card-rail-shadow)!important;
-  backdrop-filter:blur(10px)!important;
-  -webkit-backdrop-filter:blur(10px)!important;
+  transform:translateY(-50%)!important;
+  border:1px solid rgba(241,208,131,.34)!important;
+  border-right:0!important;
+  border-radius:22px 0 0 22px!important;
+  background:linear-gradient(180deg,rgba(241,208,131,.11),rgba(6,31,44,.20))!important;
+  box-shadow:inset 1px 0 rgba(255,255,255,.04),-10px 0 24px rgba(1,18,27,.11)!important;
+  -webkit-backdrop-filter:blur(9px)!important;
+  backdrop-filter:blur(9px)!important;
+  color:var(--kids-action-gold)!important;
   font-size:0!important;
   pointer-events:none!important;
 }
 
-.ps-prophet-entry .ps-entry-action .ps-entry-go,
+.ps-prophet-entry .ps-entry-action > span:first-child,
+.ps-muhammad-card .ps-muhammad-cta > span:first-child{
+  display:none!important;
+}
+
+.ps-prophet-entry .ps-entry-go,
 .ms-entry .ms-entry-action b,
-.gh-entry .gh-entry-action b{
+.gh-entry .gh-entry-action b,
+.ps-muhammad-card .ps-muhammad-go{
   display:grid!important;
   place-items:center!important;
   width:auto!important;
   height:auto!important;
+  min-width:0!important;
   margin:0!important;
-  padding:0 0 0 2px!important;
+  padding:0 0 2px 2px!important;
   border:0!important;
   border-radius:0!important;
   background:transparent!important;
-  color:var(--kids-card-rail-gold)!important;
-  font-size:36px!important;
+  color:var(--kids-action-gold)!important;
+  font-size:34px!important;
+  font-weight:650!important;
   line-height:1!important;
   box-shadow:none!important;
 }
 
 .ps-prophet-entry .ps-entry-panel,
 .ms-entry .ms-entry-copy,
-.gh-entry .gh-entry-copy{
-  padding-right:72px!important;
+.gh-entry .gh-entry-copy,
+.ps-muhammad-card .ps-muhammad-panel{
+  padding-right:66px!important;
 }
 
-/* ---------- Ṣaḥābah + Ṣaḥābiyyāt: larger artwork and capsule ---------- */
+/* ---------------------------------------------------------
+   ṢAḤĀBAH + ṢAḤĀBIYYĀT
+   Large visual cards with a REAL third action column.
+   The column is quiet and integrated, not a giant wall.
+   --------------------------------------------------------- */
+#msLibraryPage .ms-library-scroll,
+#syLibraryPage .ms-library-scroll{
+  padding-left:6px!important;
+  padding-right:6px!important;
+}
+
 #msLibraryPage .ms-list,
 #syLibraryPage .ms-list{
+  width:100%!important;
+  max-width:940px!important;
+  margin:0 auto!important;
+  padding:8px 4px calc(30px + env(safe-area-inset-bottom,0px))!important;
   gap:14px!important;
 }
 
 #msLibraryPage .ms-story-row,
 #syLibraryPage .ms-story-row{
-  min-height:218px!important;
+  width:100%!important;
+  min-height:246px!important;
   height:auto!important;
   display:grid!important;
-  grid-template-columns:minmax(156px,42%) minmax(0,1fr)!important;
+  grid-template-columns:minmax(154px,42%) minmax(0,1fr) var(--kids-story-action-w)!important;
+  align-items:stretch!important;
+  gap:0!important;
   padding:0!important;
+  overflow:hidden!important;
+  border:1px solid rgba(127,204,199,.18)!important;
   border-radius:30px!important;
-  background:linear-gradient(145deg,#0a2c3b 0%,#082737 60%,#072432 100%)!important;
-  box-shadow:0 15px 36px rgba(0,0,0,.18)!important;
+  background:
+    radial-gradient(circle at 86% 8%,rgba(239,205,124,.045),transparent 28%),
+    linear-gradient(145deg,#0a2c3c 0%,#082737 63%,#072432 100%)!important;
+  box-shadow:0 16px 38px rgba(0,0,0,.18)!important;
 }
 
 #syLibraryPage .ms-story-row{
-  border-color:rgba(231,190,145,.17)!important;
-}
-
-#msLibraryPage .ms-row-visual,
-#syLibraryPage .ms-row-visual,
-#msLibraryPage .ms-row-visual img,
-#syLibraryPage .ms-row-visual img{
-  min-height:218px!important;
+  border-color:rgba(231,190,145,.18)!important;
 }
 
 #msLibraryPage .ms-row-visual,
 #syLibraryPage .ms-row-visual{
+  position:relative!important;
+  z-index:1!important;
   grid-column:1!important;
   grid-row:1!important;
   width:100%!important;
+  min-width:0!important;
+  min-height:246px!important;
   height:100%!important;
   overflow:hidden!important;
+  background:#08283a!important;
 }
 
 #msLibraryPage .ms-row-visual img,
@@ -255,11 +304,13 @@
   inset:0!important;
   width:100%!important;
   height:100%!important;
+  min-height:246px!important;
+  display:block!important;
   object-fit:cover!important;
-  filter:saturate(.98) contrast(1.025) brightness(.94)!important;
+  filter:saturate(.99) contrast(1.02) brightness(.95)!important;
 }
 
-/* Long soft image fade: more of the picture remains visible while the cut disappears. */
+/* Keep the picture broad; only soften its last quarter. */
 #msLibraryPage .ms-row-visual::after,
 #syLibraryPage .ms-row-visual::after{
   content:""!important;
@@ -270,375 +321,38 @@
   background:
     linear-gradient(90deg,
       rgba(8,35,50,0) 0%,
-      rgba(8,35,50,0) 48%,
-      rgba(8,35,50,.10) 61%,
-      rgba(8,35,50,.34) 76%,
-      rgba(8,35,50,.72) 91%,
-      rgba(8,35,50,.92) 100%),
-    linear-gradient(0deg,rgba(3,17,27,.18),transparent 56%)!important;
+      rgba(8,35,50,0) 58%,
+      rgba(8,35,50,.08) 70%,
+      rgba(8,35,50,.28) 82%,
+      rgba(8,35,50,.66) 94%,
+      rgba(8,35,50,.88) 100%),
+    linear-gradient(0deg,rgba(3,17,27,.16),transparent 60%)!important;
 }
 
 #msLibraryPage .ms-row-copy,
 #syLibraryPage .ms-row-copy{
+  position:relative!important;
+  z-index:4!important;
   grid-column:2!important;
   grid-row:1!important;
   min-width:0!important;
-  align-self:stretch!important;
+  display:grid!important;
   align-content:center!important;
-  gap:6px!important;
-  padding:20px calc(var(--kids-card-rail-w) + 13px) 20px 19px!important;
-}
-
-#msLibraryPage .ms-row-title,
-#syLibraryPage .ms-row-title{
-  font-size:clamp(22px,5.6vw,29px)!important;
-  line-height:1.07!important;
-  text-wrap:balance!important;
-}
-
-#msLibraryPage .ms-row-ar,
-#syLibraryPage .ms-row-ar{
-  font-size:clamp(20px,5vw,26px)!important;
-  line-height:1.25!important;
-}
-
-#msLibraryPage .ms-row-summary,
-#syLibraryPage .ms-row-summary{
-  font-size:clamp(11px,2.8vw,13px)!important;
-  line-height:1.4!important;
-  -webkit-line-clamp:2!important;
-}
-
-#msLibraryPage .ms-row-meta,
-#syLibraryPage .ms-row-meta{
-  font-size:clamp(10px,2.45vw,11.5px)!important;
-  line-height:1.25!important;
-}
-
-#msLibraryPage .ms-rank,
-#syLibraryPage .ms-rank{
-  left:13px!important;
-  bottom:13px!important;
-  top:auto!important;
-  min-width:44px!important;
-  height:32px!important;
-  border-radius:999px!important;
-}
-
-/* ---------- Prophets get the same right interaction language ---------- */
-#psLibraryPage .ps-story-row{
-  padding-right:calc(var(--kids-card-rail-w) + 8px)!important;
-}
-#psLibraryPage .ps-row-copy{
-  right:calc(var(--kids-card-rail-w) + 12px)!important;
-}
-#psLibraryPage .ps-row-go{
-  right:0!important;
-}
-
-/* ---------- compact navigation cards retain comfortable height ---------- */
-.resume,
-.knowledge-card,
-.full-quran,
-.daily-step,
-.story-row,
-.verse-card{
-  min-height:max(72px,var(--kids-touch,54px))!important;
-}
-
-.quran-action{
-  min-height:116px!important;
-}
-
-.surah-card{
-  min-height:148px!important;
-}
-
-/* ---------- phone tuning ---------- */
-@media(max-width:430px){
-  :root{
-    --kids-card-rail-w:52px;
-    --kids-card-rail-inset:9px;
-  }
-
-  #msLibraryPage .ms-story-row,
-  #syLibraryPage .ms-story-row{
-    min-height:208px!important;
-    grid-template-columns:minmax(146px,41%) minmax(0,1fr)!important;
-    border-radius:28px!important;
-  }
-  #msLibraryPage .ms-row-visual,
-  #syLibraryPage .ms-row-visual,
-  #msLibraryPage .ms-row-visual img,
-  #syLibraryPage .ms-row-visual img{
-    min-height:208px!important;
-  }
-  #msLibraryPage .ms-row-copy,
-  #syLibraryPage .ms-row-copy{
-    padding:18px calc(var(--kids-card-rail-w) + 10px) 18px 16px!important;
-  }
-}
-
-/* ---------- tablet tuning ---------- */
-@media(min-width:700px){
-  :root{
-    --kids-card-rail-w:62px;
-    --kids-card-rail-inset:12px;
-  }
-
-  #msLibraryPage .ms-story-row,
-  #syLibraryPage .ms-story-row{
-    min-height:260px!important;
-    grid-template-columns:minmax(250px,40%) minmax(0,1fr)!important;
-    border-radius:34px!important;
-  }
-  #msLibraryPage .ms-row-visual,
-  #syLibraryPage .ms-row-visual,
-  #msLibraryPage .ms-row-visual img,
-  #syLibraryPage .ms-row-visual img{
-    min-height:260px!important;
-  }
-  #msLibraryPage .ms-row-copy,
-  #syLibraryPage .ms-row-copy{
-    padding:28px calc(var(--kids-card-rail-w) + 18px) 28px 28px!important;
-  }
-  #msLibraryPage .ms-row-title,
-  #syLibraryPage .ms-row-title{
-    font-size:31px!important;
-  }
-}
-
-/* Whole card remains the actual hit target; rail is only the visual cue. */
-.choice .arrow,
-.resume .go,
-.knowledge-card .kgo,
-.surah-card .surah-go,
-.full-quran .fgo,
-.daily-step .dstate,
-.story-row .chev,
-.ps-story-row .ps-row-go,
-.ms-story-row .ms-row-go,
-.quran-action::after,
-.verse-card::after,
-.ps-prophet-entry .ps-entry-action,
-.ms-entry .ms-entry-action,
-.gh-entry .gh-entry-action{
-  user-select:none!important;
-  -webkit-user-select:none!important;
-}
-
-
-/* =========================================================
-   GLOBAL_TOUCH_RAIL_V2 — full-height separated action field
-   2026-10-06
-   The right area is a real, visually separated touch field.
-   Copy gets the full remaining space and is never ellipsized
-   just because the card has room vertically.
-   ========================================================= */
-:root{
-  --kids-card-rail-w:64px;
-  --kids-card-rail-inset:0px;
-  --kids-card-rail-line:rgba(239,205,124,.44);
-  --kids-card-rail-bg:
-    radial-gradient(circle at 50% 50%,rgba(239,205,124,.10),transparent 56%),
-    linear-gradient(180deg,rgba(255,255,255,.025),rgba(239,205,124,.055));
-  --kids-card-rail-shadow:
-    inset 1px 0 rgba(255,255,255,.035),
-    inset 2px 0 rgba(239,205,124,.055),
-    -12px 0 28px rgba(1,17,27,.12);
-}
-
-/* The rail is a complete right-hand field, not a floating pill. */
-.choice .arrow,
-.resume .go,
-.knowledge-card .kgo,
-.surah-card .surah-go,
-.full-quran .fgo,
-.daily-step .dstate,
-.story-row .chev,
-.ps-story-row .ps-row-go,
-.ms-story-row .ms-row-go,
-.ps-muhammad-card .ps-muhammad-cta,
-.ps-prophet-entry .ps-entry-action,
-.ms-entry .ms-entry-action,
-.gh-entry .gh-entry-action{
-  top:0!important;
-  right:0!important;
-  bottom:0!important;
-  width:var(--kids-card-rail-w)!important;
-  min-width:var(--kids-card-rail-w)!important;
-  height:auto!important;
-  border-left:1.5px solid var(--kids-card-rail-line)!important;
-  border-radius:0!important;
-  background:var(--kids-card-rail-bg)!important;
-  box-shadow:var(--kids-card-rail-shadow)!important;
-}
-
-/* A subtle full-height light seam makes the content/touch boundary obvious. */
-.choice .arrow::before,
-.resume .go::before,
-.knowledge-card .kgo::before,
-.surah-card .surah-go::before,
-.full-quran .fgo::before,
-.daily-step .dstate::before,
-.story-row .chev::before,
-.ps-story-row .ps-row-go::before,
-.ms-story-row .ms-row-go::before,
-.ps-muhammad-card .ps-muhammad-cta::before,
-.ps-prophet-entry .ps-entry-action::before,
-.ms-entry .ms-entry-action::before,
-.gh-entry .gh-entry-action::before,
-.quran-action::before,
-.verse-card::before{
-  content:""!important;
-  position:absolute!important;
-  z-index:1!important;
-  left:-1px!important;
-  top:10%!important;
-  bottom:10%!important;
-  width:1px!important;
-  border-radius:999px!important;
-  background:linear-gradient(180deg,transparent,rgba(245,218,150,.70) 18%,rgba(245,218,150,.70) 82%,transparent)!important;
-  box-shadow:0 0 10px rgba(240,207,122,.16)!important;
-  pointer-events:none!important;
-}
-
-/* Cards without a physical arrow node get an equivalent complete rail. */
-.quran-action::after,
-.verse-card::after{
-  top:0!important;
-  right:0!important;
-  bottom:0!important;
-  width:var(--kids-card-rail-w)!important;
-  min-width:var(--kids-card-rail-w)!important;
-  height:auto!important;
-  border-left:1.5px solid var(--kids-card-rail-line)!important;
-  border-radius:0!important;
-  background:var(--kids-card-rail-bg)!important;
-  box-shadow:var(--kids-card-rail-shadow)!important;
-  font-size:38px!important;
-  font-weight:700!important;
-}
-
-/* Strong but calm chevron. */
-.choice .arrow,
-.resume .go,
-.knowledge-card .kgo,
-.surah-card .surah-go,
-.full-quran .fgo,
-.daily-step .dstate,
-.story-row .chev,
-.ps-story-row .ps-row-go,
-.ms-story-row .ms-row-go{
-  font-size:38px!important;
-  font-weight:700!important;
-  color:#f2d17f!important;
-  text-shadow:0 1px 12px rgba(240,207,122,.18)!important;
-}
-
-.ps-muhammad-card .ps-muhammad-cta,
-.ps-prophet-entry .ps-entry-action,
-.ms-entry .ms-entry-action,
-.gh-entry .gh-entry-action{
-  display:grid!important;
-  place-items:center!important;
-  font-size:0!important;
-}
-.ps-muhammad-card .ps-muhammad-cta > span:first-child,
-.ps-prophet-entry .ps-entry-action > span:first-child{
-  display:none!important;
-}
-.ps-muhammad-card .ps-muhammad-go,
-.ps-prophet-entry .ps-entry-go,
-.ms-entry .ms-entry-action b,
-.gh-entry .gh-entry-action b{
-  position:relative!important;
-  z-index:2!important;
-  display:grid!important;
-  place-items:center!important;
-  width:100%!important;
-  height:100%!important;
-  margin:0!important;
-  padding:0 0 0 2px!important;
-  border:0!important;
-  background:transparent!important;
-  color:#f2d17f!important;
-  font-size:38px!important;
-  font-weight:700!important;
-  line-height:1!important;
-}
-
-/* Reserve the rail cleanly on every child-facing navigation card. */
-.choice,
-.resume,
-.knowledge-card,
-.quran-action,
-.surah-card,
-.verse-card,
-.full-quran,
-.daily-step,
-.story-row{
-  padding-right:calc(var(--kids-card-rail-w) + 18px)!important;
-}
-.ps-prophet-entry .ps-entry-panel,
-.ms-entry .ms-entry-copy,
-.gh-entry .gh-entry-copy,
-.ps-muhammad-card .ps-muhammad-panel{
-  padding-right:calc(var(--kids-card-rail-w) + 18px)!important;
-}
-
-/* ---------- Story libraries: larger, readable capsules ---------- */
-#msLibraryPage .ms-story-row,
-#syLibraryPage .ms-story-row{
-  min-height:248px!important;
-  grid-template-columns:minmax(164px,43%) minmax(0,1fr)!important;
-  border-radius:32px!important;
-  border-color:rgba(133,205,200,.20)!important;
-  background:
-    radial-gradient(circle at 88% 12%,rgba(239,205,124,.045),transparent 30%),
-    linear-gradient(145deg,#0a2d3d 0%,#082838 60%,#072432 100%)!important;
-  box-shadow:0 18px 42px rgba(0,0,0,.19)!important;
-}
-
-#syLibraryPage .ms-story-row{
-  border-color:rgba(231,190,145,.20)!important;
-}
-
-#msLibraryPage .ms-row-visual,
-#syLibraryPage .ms-row-visual,
-#msLibraryPage .ms-row-visual img,
-#syLibraryPage .ms-row-visual img{
-  min-height:248px!important;
-}
-
-/* Image remains broad and visible; only its right edge dissolves. */
-#msLibraryPage .ms-row-visual::after,
-#syLibraryPage .ms-row-visual::after{
-  background:
-    linear-gradient(90deg,
-      rgba(8,35,50,0) 0%,
-      rgba(8,35,50,0) 57%,
-      rgba(8,35,50,.08) 68%,
-      rgba(8,35,50,.28) 80%,
-      rgba(8,35,50,.62) 92%,
-      rgba(8,35,50,.90) 100%),
-    linear-gradient(0deg,rgba(3,17,27,.17),transparent 58%)!important;
-}
-
-#msLibraryPage .ms-row-copy,
-#syLibraryPage .ms-row-copy{
   gap:7px!important;
-  padding:22px calc(var(--kids-card-rail-w) + 14px) 22px 20px!important;
+  padding:20px 13px 20px 18px!important;
   overflow:visible!important;
 }
 
 #msLibraryPage .ms-row-title,
 #syLibraryPage .ms-row-title{
   display:block!important;
-  font-size:var(--kids-card-title,23px)!important;
-  line-height:1.12!important;
+  margin:0!important;
+  color:#fff!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(21px,5.45vw,27px)!important;
+  line-height:1.10!important;
   font-weight:760!important;
-  letter-spacing:-.015em!important;
+  letter-spacing:-.018em!important;
   white-space:normal!important;
   overflow:visible!important;
   text-overflow:clip!important;
@@ -652,38 +366,40 @@
 #syLibraryPage .ms-row-ar{
   display:block!important;
   margin:0!important;
-  font-size:calc(var(--kids-card-title,23px) + 1px)!important;
-  line-height:1.35!important;
+  color:#f0d492!important;
+  font-family:"Noto Naskh Arabic","Geeza Pro","Traditional Arabic",serif!important;
+  font-size:clamp(19px,4.9vw,24px)!important;
+  line-height:1.38!important;
   white-space:normal!important;
   overflow:visible!important;
   text-overflow:clip!important;
   max-height:none!important;
-  text-align:left!important;
-  unicode-bidi:plaintext!important;
 }
 
 #msLibraryPage .ms-row-summary,
 #syLibraryPage .ms-row-summary{
   display:block!important;
-  margin:1px 0 0!important;
-  font-size:var(--kids-small,15px)!important;
-  line-height:1.42!important;
-  color:rgba(255,255,255,.72)!important;
+  margin:0!important;
+  color:rgba(255,255,255,.70)!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:clamp(12px,3vw,14px)!important;
+  line-height:1.38!important;
+  white-space:normal!important;
   overflow:visible!important;
   text-overflow:clip!important;
+  max-height:none!important;
   -webkit-line-clamp:unset!important;
   line-clamp:unset!important;
-  max-height:none!important;
-  white-space:normal!important;
 }
 
 #msLibraryPage .ms-row-meta,
 #syLibraryPage .ms-row-meta{
   display:block!important;
-  margin-top:1px!important;
-  font-size:var(--kids-meta,13.75px)!important;
-  line-height:1.3!important;
-  color:rgba(255,255,255,.58)!important;
+  margin:0!important;
+  color:rgba(255,255,255,.55)!important;
+  font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:clamp(11px,2.65vw,12.5px)!important;
+  line-height:1.28!important;
   white-space:normal!important;
   overflow:visible!important;
   text-overflow:clip!important;
@@ -691,160 +407,328 @@
 
 #msLibraryPage .ms-rank,
 #syLibraryPage .ms-rank{
-  left:14px!important;
-  bottom:14px!important;
-  min-width:46px!important;
-  height:34px!important;
-  padding:0 11px!important;
-  font-size:13px!important;
+  position:absolute!important;
+  z-index:5!important;
+  left:13px!important;
+  bottom:13px!important;
+  top:auto!important;
+  min-width:45px!important;
+  width:auto!important;
+  height:33px!important;
+  padding:0 10px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(239,203,121,.38)!important;
+  border-radius:999px!important;
+  background:rgba(3,20,29,.70)!important;
+  color:#f2d48f!important;
+  font:700 13px/1 Georgia,serif!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  backdrop-filter:blur(8px)!important;
 }
 
-/* The story rail is now a true third visual zone, despite being absolutely positioned. */
+/* Integrated action column. */
 #msLibraryPage .ms-row-go,
-#syLibraryPage .ms-row-go{
-  right:0!important;
-  top:0!important;
-  bottom:0!important;
-  width:var(--kids-card-rail-w)!important;
+#syLibraryPage .ms-row-go,
+#msLibraryPage .ms-row-go.is-listen,
+#syLibraryPage .ms-row-go.is-listen{
+  position:relative!important;
+  z-index:6!important;
+  grid-column:3!important;
+  grid-row:1!important;
+  right:auto!important;
+  left:auto!important;
+  top:auto!important;
+  bottom:auto!important;
+  width:var(--kids-story-action-w)!important;
+  min-width:var(--kids-story-action-w)!important;
+  height:auto!important;
+  align-self:stretch!important;
+  justify-self:stretch!important;
+  display:grid!important;
+  place-items:center!important;
+  margin:0!important;
+  padding:0!important;
+  transform:none!important;
+  border:0!important;
+  border-radius:0!important;
+  background:linear-gradient(180deg,rgba(239,205,124,.025),rgba(239,205,124,.055))!important;
+  color:transparent!important;
+  font-size:0!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  pointer-events:none!important;
 }
 
-/* ---------- Prophet library uses the same readable/no-ellipsis rule ---------- */
+/* Short inset divider — clear enough to read as a field, never a harsh wall. */
+#msLibraryPage .ms-row-go::before,
+#syLibraryPage .ms-row-go::before{
+  content:""!important;
+  position:absolute!important;
+  left:0!important;
+  top:14px!important;
+  bottom:14px!important;
+  width:1px!important;
+  display:block!important;
+  background:linear-gradient(180deg,transparent,rgba(241,208,131,.42) 16%,rgba(241,208,131,.42) 84%,transparent)!important;
+  box-shadow:0 0 8px rgba(241,208,131,.10)!important;
+}
+
+#msLibraryPage .ms-row-go::after,
+#syLibraryPage .ms-row-go::after{
+  content:"›"!important;
+  display:grid!important;
+  place-items:center!important;
+  color:var(--kids-action-gold)!important;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:31px!important;
+  font-weight:650!important;
+  line-height:1!important;
+  transform:translateY(-1px)!important;
+}
+
+/* ---------------------------------------------------------
+   PROPHET LIBRARY
+   Keep its cinematic full-bleed image language, but use the
+   same compact right edge-tab and stop truncating copy.
+   --------------------------------------------------------- */
+#psLibraryPage .ps-library-list{
+  padding-left:8px!important;
+  padding-right:8px!important;
+  gap:12px!important;
+}
+
 #psLibraryPage .ps-story-row{
-  min-height:218px!important;
-  padding-right:calc(var(--kids-card-rail-w) + 14px)!important;
+  height:auto!important;
+  min-height:214px!important;
+  border-radius:28px!important;
+  overflow:hidden!important;
 }
+
+#psLibraryPage .ps-row-scene{
+  min-height:214px!important;
+}
+
 #psLibraryPage .ps-row-copy{
-  right:calc(var(--kids-card-rail-w) + 18px)!important;
-  padding-top:20px!important;
-  padding-bottom:20px!important;
+  left:42%!important;
+  right:60px!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+  padding:14px 0!important;
 }
-#psLibraryPage .ps-row-title,
-#psLibraryPage .ps-row-ar,
-#psLibraryPage .ps-row-summary,
-#psLibraryPage .ps-row-meta{
+
+#psLibraryPage .ps-row-title{
+  font-size:clamp(21px,5.5vw,28px)!important;
+  line-height:1.08!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+
+#psLibraryPage .ps-row-ar{
+  margin-top:6px!important;
+  font-size:clamp(18px,4.7vw,23px)!important;
+  line-height:1.32!important;
   white-space:normal!important;
   overflow:visible!important;
   text-overflow:clip!important;
   max-height:none!important;
 }
+
 #psLibraryPage .ps-row-summary{
   display:block!important;
+  margin-top:6px!important;
+  color:rgba(255,255,255,.72)!important;
+  font-size:clamp(12px,3vw,14px)!important;
+  line-height:1.38!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  max-height:none!important;
   -webkit-line-clamp:unset!important;
   line-clamp:unset!important;
-  font-size:var(--kids-small,15px)!important;
-  line-height:1.42!important;
 }
+
 #psLibraryPage .ps-row-meta{
-  font-size:var(--kids-meta,13.75px)!important;
-  line-height:1.3!important;
+  display:block!important;
+  margin-top:6px!important;
+  color:rgba(255,255,255,.58)!important;
+  font-size:clamp(11px,2.6vw,12.5px)!important;
+  line-height:1.25!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
 }
 
-/* Muhammad feature gets the same right rail instead of a detached CTA pill. */
-.ps-muhammad-card{
-  position:relative!important;
-  overflow:hidden!important;
-}
-.ps-muhammad-card .ps-muhammad-cta{
+#psLibraryPage .ps-row-go,
+#psLibraryPage .ps-row-go.is-listen{
   position:absolute!important;
-  right:0!important;
-  top:0!important;
-  bottom:0!important;
-  width:var(--kids-card-rail-w)!important;
-  min-width:var(--kids-card-rail-w)!important;
+  z-index:7!important;
+  right:-1px!important;
+  left:auto!important;
+  top:50%!important;
+  bottom:auto!important;
+  width:46px!important;
+  min-width:46px!important;
+  height:72px!important;
   margin:0!important;
-  padding:0!important;
+  padding:0 0 2px 2px!important;
+  display:grid!important;
+  place-items:center!important;
+  transform:translateY(-50%)!important;
+  border:1px solid rgba(241,208,131,.30)!important;
+  border-right:0!important;
+  border-radius:20px 0 0 20px!important;
+  background:linear-gradient(180deg,rgba(241,208,131,.10),rgba(4,29,43,.20))!important;
+  color:var(--kids-action-gold)!important;
+  font-size:0!important;
+  box-shadow:inset 1px 0 rgba(255,255,255,.035),-8px 0 20px rgba(1,18,27,.10)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  backdrop-filter:blur(8px)!important;
+  pointer-events:none!important;
+}
+#psLibraryPage .ps-row-go::before{
+  content:"›"!important;
+  position:static!important;
+  display:grid!important;
+  place-items:center!important;
+  width:auto!important;
+  height:auto!important;
+  color:var(--kids-action-gold)!important;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Rounded",system-ui,sans-serif!important;
+  font-size:31px!important;
+  font-weight:650!important;
+  line-height:1!important;
+  background:none!important;
+  box-shadow:none!important;
 }
 
-/* ---------- per-area tint: same component, subtle contextual identity ---------- */
-#view-quran .quran-action,
-#view-quran .surah-card,
-#view-quran .verse-card,
-#view-quran .full-quran{
-  --kids-card-rail-line:rgba(241,204,111,.48);
-  --kids-card-rail-bg:
-    radial-gradient(circle at 50% 50%,rgba(241,204,111,.11),transparent 58%),
-    linear-gradient(180deg,rgba(18,71,82,.22),rgba(241,204,111,.045));
-}
-#view-today .choice.dua{
-  --kids-card-rail-line:rgba(225,192,135,.42);
-}
-#view-today .choice.quiz{
-  --kids-card-rail-line:rgba(126,204,195,.38);
+/* ---------------------------------------------------------
+   Context tints
+   --------------------------------------------------------- */
+#view-quran .quran-action::after,
+#view-quran .verse-card::after,
+#view-quran .surah-card .surah-go,
+#view-quran .full-quran .fgo{
+  --kids-action-line:rgba(243,207,115,.30);
+  --kids-action-fill:linear-gradient(180deg,rgba(243,207,115,.105),rgba(11,50,62,.18));
+  --kids-action-gold:#f3cf73;
 }
 
-/* ---------- phone ---------- */
+/* ---------------------------------------------------------
+   Phone / narrow phone / tablet
+   --------------------------------------------------------- */
 @media(max-width:430px){
   :root{
-    --kids-card-rail-w:60px;
+    --kids-story-action-w:44px;
   }
 
-  #msLibraryPage .ms-story-row,
-  #syLibraryPage .ms-story-row{
-    min-height:240px!important;
-    grid-template-columns:minmax(158px,43%) minmax(0,1fr)!important;
-    border-radius:30px!important;
-  }
-  #msLibraryPage .ms-row-visual,
-  #syLibraryPage .ms-row-visual,
-  #msLibraryPage .ms-row-visual img,
-  #syLibraryPage .ms-row-visual img{
-    min-height:240px!important;
-  }
-  #msLibraryPage .ms-row-copy,
-  #syLibraryPage .ms-row-copy{
-    padding:20px calc(var(--kids-card-rail-w) + 12px) 20px 17px!important;
-  }
-  #psLibraryPage .ps-story-row{
-    min-height:210px!important;
-  }
-}
-
-/* Narrow iPhones: preserve text first, allow the card to grow vertically. */
-@media(max-width:374px){
-  :root{--kids-card-rail-w:56px}
   #msLibraryPage .ms-story-row,
   #syLibraryPage .ms-story-row{
     min-height:238px!important;
-    grid-template-columns:144px minmax(0,1fr)!important;
-  }
-  #msLibraryPage .ms-row-copy,
-  #syLibraryPage .ms-row-copy{
-    padding-left:14px!important;
-    padding-right:calc(var(--kids-card-rail-w) + 9px)!important;
-  }
-}
-
-/* ---------- tablet ---------- */
-@media(min-width:700px){
-  :root{
-    --kids-card-rail-w:72px;
-  }
-
-  #msLibraryPage .ms-story-row,
-  #syLibraryPage .ms-story-row{
-    min-height:286px!important;
-    grid-template-columns:minmax(280px,42%) minmax(0,1fr)!important;
-    border-radius:36px!important;
+    grid-template-columns:minmax(150px,42%) minmax(0,1fr) var(--kids-story-action-w)!important;
+    border-radius:29px!important;
   }
   #msLibraryPage .ms-row-visual,
   #syLibraryPage .ms-row-visual,
   #msLibraryPage .ms-row-visual img,
   #syLibraryPage .ms-row-visual img{
-    min-height:286px!important;
+    min-height:238px!important;
   }
   #msLibraryPage .ms-row-copy,
   #syLibraryPage .ms-row-copy{
-    padding:30px calc(var(--kids-card-rail-w) + 22px) 30px 30px!important;
-    gap:9px!important;
+    padding:18px 11px 18px 16px!important;
+    gap:6px!important;
   }
-  #psLibraryPage .ps-story-row{
-    min-height:248px!important;
+  #psLibraryPage .ps-story-row,
+  #psLibraryPage .ps-row-scene{
+    min-height:206px!important;
   }
 }
 
-/* Text may grow the card; never sacrifice readability to keep a fixed capsule height. */
-#msLibraryPage .ms-story-row,
-#syLibraryPage .ms-story-row,
-#psLibraryPage .ps-story-row{
-  height:auto!important;
+@media(max-width:374px){
+  :root{
+    --kids-action-tab-w:44px;
+    --kids-action-tab-h:64px;
+    --kids-story-action-w:42px;
+  }
+  #msLibraryPage .ms-story-row,
+  #syLibraryPage .ms-story-row{
+    min-height:236px!important;
+    grid-template-columns:140px minmax(0,1fr) var(--kids-story-action-w)!important;
+  }
+  #msLibraryPage .ms-row-copy,
+  #syLibraryPage .ms-row-copy{
+    padding-left:13px!important;
+    padding-right:9px!important;
+  }
+  #psLibraryPage .ps-row-copy{
+    left:40%!important;
+    right:54px!important;
+  }
+}
+
+@media(min-width:700px){
+  :root{
+    --kids-action-tab-w:52px;
+    --kids-action-tab-h:76px;
+    --kids-story-action-w:52px;
+  }
+
+  #msLibraryPage .ms-list,
+  #syLibraryPage .ms-list{
+    padding-left:14px!important;
+    padding-right:14px!important;
+    gap:16px!important;
+  }
+  #msLibraryPage .ms-story-row,
+  #syLibraryPage .ms-story-row{
+    min-height:282px!important;
+    grid-template-columns:minmax(268px,40%) minmax(0,1fr) var(--kids-story-action-w)!important;
+    border-radius:34px!important;
+  }
+  #msLibraryPage .ms-row-visual,
+  #syLibraryPage .ms-row-visual,
+  #msLibraryPage .ms-row-visual img,
+  #syLibraryPage .ms-row-visual img{
+    min-height:282px!important;
+  }
+  #msLibraryPage .ms-row-copy,
+  #syLibraryPage .ms-row-copy{
+    padding:28px 20px 28px 28px!important;
+    gap:8px!important;
+  }
+  #msLibraryPage .ms-row-title,
+  #syLibraryPage .ms-row-title{
+    font-size:29px!important;
+  }
+  #psLibraryPage .ps-story-row,
+  #psLibraryPage .ps-row-scene{
+    min-height:236px!important;
+  }
+  #psLibraryPage .ps-row-copy{
+    left:40%!important;
+    right:66px!important;
+  }
+}
+
+/* Never let the visual affordance steal clicks. */
+.choice .arrow,
+.resume .go,
+.knowledge-card .kgo,
+.surah-card .surah-go,
+.full-quran .fgo,
+.story-row .chev,
+.quran-action::after,
+.verse-card::after,
+.ps-prophet-entry .ps-entry-action,
+.ms-entry .ms-entry-action,
+.gh-entry .gh-entry-action,
+.ps-muhammad-card .ps-muhammad-cta,
+.ps-story-row .ps-row-go,
+.ms-story-row .ms-row-go{
+  pointer-events:none!important;
+  user-select:none!important;
+  -webkit-user-select:none!important;
 }
