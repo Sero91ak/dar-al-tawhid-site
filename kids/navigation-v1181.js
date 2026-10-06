@@ -297,8 +297,8 @@
     try{ok=replay(entry.desc)}catch(_){ok=false}
     setTimeout(function(){
       replaying=false;
-      restoreScrolls(entry.scrolls);
-      if(entry.desc&&entry.desc.type==="tab"&&Number(entry.scrolls&&entry.scrolls.shell||0)===0)resetMainTop();
+      if(entry.desc&&entry.desc.type==="tab")resetMainTop();
+      else restoreScrolls(entry.scrolls);
     },140);
     return ok;
   }
