@@ -4,7 +4,7 @@
    Hinweis: OneSignal nutzt eigenen Service Worker unter /push/onesignal/ und wird hier nicht verändert.
 */
 
-const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1264-frauen-prod1';
+const CACHE_VERSION = 'dar-al-tawhid-offline-light-v1265-frauen-prod2';
 const OFFLINE_META_KEY = '/__offline_meta_v1__';
 const OFFLINE_PREP_PENDING_KEY = '/__offline_prep_pending_v1__';
 const OFFLINE_PREP_PROGRESS_KEY = '/__offline_prep_progress_v1__';
@@ -25,7 +25,68 @@ const APP_SHELL = [
   '/data/offline-content-manifest.json',
   '/test/assets/library/canonical-source-library.js',
   '/assets/library/canonical-source-library.js',
-  '/assets/frauen/frauen-fiqh.js',\n  '/assets/frauen/frauen-fiqh.css',\n  '/assets/frauen/frauen-authority-v1292.css',\n  '/assets/frauen/frauen-live-adapter.js',\n  '/assets/frauen/library-v1224/01-grundlagen-din.jpg',\n  '/assets/frauen/library-v1224/02-fiqh-frauen.jpg',\n  '/assets/frauen/library-v1224/03-erste-generationen.jpg',\n  '/assets/frauen/library-v1224/04-familie-erziehung.jpg',\n  '/assets/frauen/library-v1224/05-wissen-adab-dawah.jpg',\n  '/assets/frauen/library-v1224/06-alltag-schutz.jpg',\n  '/assets/frauen/library-v1224/07-lebensphasen.jpg',\n  '/data/frauen-bereiche-index.json',\n  '/data/frauen-fiqh.json',\n  '/data/frauen-sahabiyyat.json',\n  '/data/frauen-tabiiyyat.json',\n  '/data/frauen-muetter-der-glaeubigen.json',\n  '/data/frauen-ehe-familie.json',\n  '/data/frauen-hijab-schamhaftigkeit.json',\n  '/data/frauen-wissen-lernen.json',\n  '/data/frauen-fragen-antworten.json',\n  '/data/frauen-gepruefte-kurzberichte.json',\n  '/data/frauen-der-salaf.json',\n  '/data/frauen-moschee-gemeinschaft.json',\n  '/data/frauen-hajj-umrah.json',\n  '/data/frauen-sadaqah-wohltatigkeit.json',\n  '/data/frauen-adab-charakter.json',\n  '/data/frauen-kinder-erziehung.json',\n  '/data/frauen-rechtschaffene-muslimah.json',\n  '/data/frauen-schwangerschaft-stillzeit-nifas.json',\n  '/data/frauen-dienst-pflege-hilfeleistung.json',\n  '/data/frauen-iddah-scheidung-trauerzeit.json',\n  '/data/frauen-reinigung-gebet-fasten.json',\n  '/data/frauen-nikah-zustimmung-mahr.json',\n  '/data/frauen-zinah-schmuck-kleidung.json',\n  '/data/frauen-umgang-nicht-maharim.json',\n  '/data/frauen-reise-mahram-schutz.json',\n  '/data/frauen-krankheit-pruefung-geduld.json',\n  '/data/frauen-privatsphaere-erlaubnis-haus-adab.json',\n  '/data/frauen-verwandtschaft-nachbarschaft-gastrecht.json',\n  '/data/frauen-tawhid-iman-ibadah.json',\n  '/data/frauen-gerechtigkeit-guter-umgang-schutz.json',\n  '/data/frauen-dhikr-dua-ibadah.json',\n  '/data/frauen-geprueftes-wissen-quellen-weitergabe.json',\n  '/data/frauen-tod-janazah-trauer-adab.json',\n  '/data/frauen-arbeit-studium-oeffentlichkeit.json',\n  '/data/frauen-medien-bilder-oeffentliche-darstellung.json',\n  '/data/frauen-ruqyah-schutz-zuflucht.json',\n  '/data/frauen-tod-janazah-trauer.json',\n  '/data/frauen-maedchen-pubertaet-pflichtwissen.json',\n  '/data/frauen-falsches-wissen-bidah-quellenpruefung.json',\n  '/data/frauen-reue-istighfar-rueckkehr.json',\n  '/data/frauen-tod-janaiz-trauer-sabr.json',\n  '/data/frauen-reue-tawbah-istighfar.json',\n  '/data/frauen-toechter-maedchen-fuersorge.json',\n  '/data/frauen-janazah-tod-trauer-adab.json',\n  '/data/frauen-ramadan-fasten-eid.json',\n  '/data/frauen-ramadan-fasten-nachtgebet.json',\n  '/data/frauen-reue-istighfar-schutz-suenden.json',\n  '/data/frauen-tawbah-istighfar-selbstpruefung.json',\n  '/data/frauen-ramadan-fasten-itikaf.json',\n  '/data/frauen-dawah-lehren-weitergeben.json',\n  '/data/books-library.json',
+  '/assets/frauen/frauen-fiqh.js',
+  '/assets/frauen/frauen-fiqh.css',
+  '/assets/frauen/frauen-authority-v1292.css',
+  '/assets/frauen/frauen-live-adapter.js',
+  '/assets/frauen/library-v1224/01-grundlagen-din.jpg',
+  '/assets/frauen/library-v1224/02-fiqh-frauen.jpg',
+  '/assets/frauen/library-v1224/03-erste-generationen.jpg',
+  '/assets/frauen/library-v1224/04-familie-erziehung.jpg',
+  '/assets/frauen/library-v1224/05-wissen-adab-dawah.jpg',
+  '/assets/frauen/library-v1224/06-alltag-schutz.jpg',
+  '/assets/frauen/library-v1224/07-lebensphasen.jpg',
+  '/data/frauen-bereiche-index.json',
+  '/data/frauen-fiqh.json',
+  '/data/frauen-sahabiyyat.json',
+  '/data/frauen-tabiiyyat.json',
+  '/data/frauen-muetter-der-glaeubigen.json',
+  '/data/frauen-ehe-familie.json',
+  '/data/frauen-hijab-schamhaftigkeit.json',
+  '/data/frauen-wissen-lernen.json',
+  '/data/frauen-fragen-antworten.json',
+  '/data/frauen-gepruefte-kurzberichte.json',
+  '/data/frauen-der-salaf.json',
+  '/data/frauen-moschee-gemeinschaft.json',
+  '/data/frauen-hajj-umrah.json',
+  '/data/frauen-sadaqah-wohltatigkeit.json',
+  '/data/frauen-adab-charakter.json',
+  '/data/frauen-kinder-erziehung.json',
+  '/data/frauen-rechtschaffene-muslimah.json',
+  '/data/frauen-schwangerschaft-stillzeit-nifas.json',
+  '/data/frauen-dienst-pflege-hilfeleistung.json',
+  '/data/frauen-iddah-scheidung-trauerzeit.json',
+  '/data/frauen-reinigung-gebet-fasten.json',
+  '/data/frauen-nikah-zustimmung-mahr.json',
+  '/data/frauen-zinah-schmuck-kleidung.json',
+  '/data/frauen-umgang-nicht-maharim.json',
+  '/data/frauen-reise-mahram-schutz.json',
+  '/data/frauen-krankheit-pruefung-geduld.json',
+  '/data/frauen-privatsphaere-erlaubnis-haus-adab.json',
+  '/data/frauen-verwandtschaft-nachbarschaft-gastrecht.json',
+  '/data/frauen-tawhid-iman-ibadah.json',
+  '/data/frauen-gerechtigkeit-guter-umgang-schutz.json',
+  '/data/frauen-dhikr-dua-ibadah.json',
+  '/data/frauen-geprueftes-wissen-quellen-weitergabe.json',
+  '/data/frauen-tod-janazah-trauer-adab.json',
+  '/data/frauen-arbeit-studium-oeffentlichkeit.json',
+  '/data/frauen-medien-bilder-oeffentliche-darstellung.json',
+  '/data/frauen-ruqyah-schutz-zuflucht.json',
+  '/data/frauen-tod-janazah-trauer.json',
+  '/data/frauen-maedchen-pubertaet-pflichtwissen.json',
+  '/data/frauen-falsches-wissen-bidah-quellenpruefung.json',
+  '/data/frauen-reue-istighfar-rueckkehr.json',
+  '/data/frauen-tod-janaiz-trauer-sabr.json',
+  '/data/frauen-reue-tawbah-istighfar.json',
+  '/data/frauen-toechter-maedchen-fuersorge.json',
+  '/data/frauen-janazah-tod-trauer-adab.json',
+  '/data/frauen-ramadan-fasten-eid.json',
+  '/data/frauen-ramadan-fasten-nachtgebet.json',
+  '/data/frauen-reue-istighfar-schutz-suenden.json',
+  '/data/frauen-tawbah-istighfar-selbstpruefung.json',
+  '/data/frauen-ramadan-fasten-itikaf.json',
+  '/data/frauen-dawah-lehren-weitergeben.json',
+  '/data/books-library.json',
   '/data/scholars-library.json',
   '/test-apple-touch-icon.png',
   '/test-app-icon-192.png',
@@ -278,6 +339,14 @@ function isPinnedLiveBootRequest(url) {
 
 function isPostDataRequest(url) {
   return url.pathname.includes('/content/posts/') || url.pathname.endsWith('/posts-index.json') || url.pathname.includes('/content/staging/posts/') || url.pathname.includes('/content/stories/') || url.pathname.includes('/content/staging/stories/') || url.pathname.includes('/content/focus-feed/') || url.pathname.includes('/content/staging/focus-feed/') || url.pathname.includes('/content/feed-backgrounds/') || url.pathname.includes('/content/staging/feed-backgrounds/') || url.pathname.includes('/assets/feed-backgrounds/') || url.pathname.includes('/content/updates/') || url.pathname.includes('/content/staging/updates/');
+}
+
+function isFrauenLiveRequest(url) {
+  return url.origin === self.location.origin
+    && (
+      url.pathname.startsWith('/data/frauen-')
+      || url.pathname.startsWith('/assets/frauen/')
+    );
 }
 
 function isTadabburDataRequest(url) {
@@ -549,6 +618,23 @@ self.addEventListener('fetch', (event) => {
 
   // Nach App-Aktualisieren: kurz alles frisch vom Netz laden.
   if (refreshBypassActive()) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  // Frauenbereich live: Network-first, damit neue geprüfte Inhalte sofort in Web/iOS erscheinen.
+  // Bei Netzfehler bleibt der zuletzt erfolgreiche Offline-Stand verfügbar.
+  if (isFrauenLiveRequest(url)) {
     event.respondWith(
       fetch(request, { cache: 'no-store' })
         .then((response) => {
