@@ -57,7 +57,7 @@
     const actions=`${share}<div class="hadith-actions"><button type="button" class="share-btn link ${fav?"is-active":""}" data-hadith-favorite="${esc(h.id)}"><span>${fav?"Gemerkt":"Merken"}</span></button></div>`;
     const detailTitle=cleanTitle("Bāb",(h.babTitle&&h.babTitle!==h.chapterTitle)?h.babTitle:(h.chapterTitle||h.bookTitle||"Ḥadīṯ"));
     const detailKicker=`${esc(h.bookTitle||"Ḥadīṯ-Werk")}${h.hadithNumber?` · ḤADĪṮ NR. ${esc(h.hadithNumber)}`:""}`;
-    return`${renderHadithBreadcrumb(crumbBook,crumbChapter,crumbSection,h.hadithNumber?("Ḥadīṯ "+h.hadithNumber):"Ḥadīṯ")}<article class="article post-reader hadith-detail"><header class="post-reader-title"><div class="kicker">${detailKicker}</div><h2>${esc(detailTitle)}</h2></header><section class="post-reader-main">${narrator}${speaker}${german}${arabic}${h.grade?`<p class="hadith-card-grade">${esc(h.grade)}</p>`:""}${h.babTitle?`<p class="hadith-meta-line">${esc(h.babTitle)}</p>`:""}${sharh}${cite}${actions}${renderHadithSiblingNav(h)}</section></article>`;
+    const detailPath=renderHadithBreadcrumb(crumbBook,crumbChapter,crumbSection,h.hadithNumber?("Ḥadīṯ "+h.hadithNumber):"Ḥadīṯ");\n    return`<article class="article post-reader hadith-detail hadith-detail--v1303"><header class="post-reader-title"><div class="kicker">${detailKicker}</div><h2>${esc(detailTitle)}</h2></header>${detailPath}<section class="post-reader-main">${narrator}${speaker}${german}${arabic}${h.grade?`<p class="hadith-card-grade">${esc(h.grade)}</p>`:""}${h.babTitle?`<p class="hadith-meta-line">${esc(h.babTitle)}</p>`:""}${sharh}${cite}${actions}${renderHadithSiblingNav(h)}</section></article>`;
   }
   function newBookPanel(book,route){
     if(!book)return"";
