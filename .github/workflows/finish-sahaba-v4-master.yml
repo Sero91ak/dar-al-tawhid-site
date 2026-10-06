@@ -1,0 +1,322 @@
+name: Finish Sahaba V4 Masters
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/finish-sahaba-v4-master.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: finish-sahaba-v4-masters
+  cancel-in-progress: false
+
+jobs:
+  finish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      VOICE_API: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Ensure audio tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v ffmpeg >/dev/null 2>&1 || {
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg >/dev/null
+          }
+
+      - name: Download and join existing Eleven v4 parts
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > /tmp/sahaba-v4-parts.json <<'JSON'
+{"umar":[{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/6NyCmn1NKs1vguSwHbSQ/H7iezGqItmms8YRdNIHw/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211538Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6ad51f4f47785fe51ed2eb519bbc466cd7d27874b78b487ea56c7052fce017a2ab44e1c63ad8a4b0d6155cce53bb57e0a5218294212b7a7bf021ca666af2b9578f477d5aece9957b7683fee15278695a7f33d8f17a3306dcad03f689fe480db96ef6e17fb2f66646b7a9768a535d7e66c0e06671f0343f491ab0e7e6fe32c86ed6c232b4f3b9d3add61d7dc7a6c11c4f906f103bd3c260ef8ebd36403d99c624922b2dd69b2ba09c687a1e0087ad44a0754197e514aac6f4a65c70341588fc199f7cea6719f078af957b66b192549bd78782ef34e368722f75cc5e5d5df0f088a5ce7dd8352522b9982c2714a5212b337caaa242e6434b1e10b251f9fc9800f6","durationSec":188.48,"generationId":"H7iezGqItmms8YRdNIHw"},{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/wUFQPol7vj4HEwXzGCgw/Dj5X5i1Mu4M2wKBmhhte/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211523Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=4ecf6e1b6e0dc724b9b077a715288f75d3b1dedc9e01b1cfcf892b19134c2ea4690f54b729ad0e789f3cf2a615f991db7b71458c4b8b6239ac53ef3dd3d4f9e4ea16435417d16fea0e0689405ab36d2d083ab3ab50d708ddb72ea50e2cc887a44d7ae056f28649ad7d5f13436b6e63210429f23dca8a1d9c7305d60ba4dbeda26afb6c2633fa8645cb3063e94cfecc07209812b002f5a234f1f0e2016b0a75dcb52cf6fcb99bd4731bddd351912e537451d3e28b2c5af2dc57a0d1e2a645bf8794f435befd7b01f31fe5e1489c2c0dfa86333cab4410b2d9f272ef823bebe67a615b6da0a61d03362d62007588b6ed18fb1de9335833d931ee529ec88aeceb41","durationSec":127.44,"generationId":"Dj5X5i1Mu4M2wKBmhhte"}],"uthman":[{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/wBknLxHliCSobeCiz9rE/XNmrOQIhpSqEyTVUFRKA/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211535Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6fc364b8d8c04a44da0ec55a4b9764446bfc8548596ea68de1f64186668202d30d14c275d1b2920ff1cfa36e257250097de79d172f17eecf84e17dbc1b6e0e2088e4a5b6441532dcc344aa065d5bf76e94ebc72485788f714393f006955979bb6bc2861a4fb248413fe4b63c60e5887377c34ff93ffca8e5fef795db38bfb6a6b659bf861846be7b0fe10cf04c5c5673b8bbe26a2d6ba40d77dfaca97cd17f2fb5affa1a3756f0d7ca9ba494b22b226e54d4d0bcaccf222177c64c1f9b22a8d95b0f305a34ac32f2a9354b61f40dbc9f018168e19d1f90f5c7a67ad4f5dfa569003cfd6ddb8193c57a8c2d59ebd67dc8a1483cf473865c1e41e7a47dcd82db4a","durationSec":167.84,"generationId":"XNmrOQIhpSqEyTVUFRKA"},{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/80iuYFy7IiDSOE38A7s6/CIF7V7jhLf7f529bUd7W/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211533Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=1bb85c6962993160c95a3513f8eae966e55bfa7b78149a9c31f940151cfa5fdfae85ce710c894ba428c1159db9834676d2d0a47840202b502defebeed5faf5262ec1b291e908956b4cc4de12a1a5c385460fa8d804e7800bced4857b431ebd8d970178ed44ed0970566a3db073097b620c161e4fde601c913b7d6701a5d6ec4a8e81afc3f702ebc8d08e96193092d740cea15b2e8923318cf061b4c4b3736eedfd9e7700d3cc41098f62575abe7ed0c1bed9f2b71b3ecd48125e123d15984437e0bdb2b46b4a317298c1e4400405227b5ebe14dfc9aba8abe2c332f00227490029e337ce342cbe0032bb5bc6a52ec7914fb54a9b281026f270d03bdd4073c5b0","durationSec":145.04,"generationId":"CIF7V7jhLf7f529bUd7W"}],"ali":[{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/f1chux9zLOCEYBjqTK24/cPqTigo4tkz0KYPJ6nuc/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211543Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=5e1259fb48feb8c1aa3f5eba09df0ba4d68367141690db744ab808bb3c2e3d4046b133d34d140d9933064e9fd33f07d4d4139085e70d28660b4f3020079f2aaa1d49e8fed2b4b6387efe0d6d5a814958d19acf4ee8f347d1fc8653a86269654af34546962d8a0fdb7e45d74765884c32c9fdc586747f1ff188620be72391463e60e860eb5582c28aa6e1cf10be5eb6aa9402f545d802a845ae6a4b18282d22e390d949aea4b058a0733812893d259cad9d7492bd5cd851e2830f75e1e91439933785b6bd9374ab0c0f991c81c4e43fd6f0ba112d7aeb3a7bd69382f62f61d6dbf1d043ebf0dee7b7260247bdce7366ebb63c67e9a7fe9f1ab75b98bbbacaac12","durationSec":180.24,"generationId":"cPqTigo4tkz0KYPJ6nuc"},{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/9SaY70xFMLY0J1PlMtEz/MxVKlmatBNoSZoQBLnze/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211626Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=8e3b3e1d1131e3b8906bd89d544fee5e190555e10ab6024205e70ce00c9848ff7f294553f1e5b71178247b815c3a27f7832d3aaab29000096b64d164298af7c7d07308ee00606803d73df6c84fdfd93d405893f2d42203ec20304b003e12d351fa9fb4c58d38dee80d6db0d62c13e97bd33c361d696c17af3f972cc1900bcd4f47de142212a7e28864ff36af6aa0d2c57745482c233989d9265efc0a6876998900fb977750f5c899f58e81c042e3e16e1d6358371bffa88bdf112634da4941ae6da49e8b06160a03ef2b4125b56cbe4d4db10407f65302a7782399adcb39f9b2c5ab35c8099f05961a4a4d590fab89da9b0c0af47b14bbfab495f0f7bfc1b7a4","durationSec":144.24,"generationId":"MxVKlmatBNoSZoQBLnze"}],"talha":[{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/FcHgCwkRD623qDWMvCq0/7vMgVWNEePdKejnEZ2t2/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211700Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=31245b958b5053cd2cebf439e9666628746cf8d85a7fe38c23b3587991a7bc7827f0260e2257b04a74f0dc419d24d59bc1e1eacd18ff263161994df6617678deb30cf5ffd46ab9f15fe426c8eac4a83e45a2fe1a3fd4027f908eabfb531cb97fa7e25a41ae4b82526a5eaad691dd67972c9c59609fa95d6e20b541d246b609eeac3e725ff7e2034f3d659a42fd7301284f16af067bf6c54571025a0b864f011c96cd86d77537b22c7e335fcfedd1eae63fb2d7c0e86073e422ab7be175b640b7dc1d9def5f5ea0510a617db14ca0de6aed570508f5bc38e39ea6fed6bf37fadd8fb14f9121a8c5fd8886b0641dd7c8da869fcebf8cf2e81e86290c6ac65918b5","durationSec":157.04,"generationId":"7vMgVWNEePdKejnEZ2t2"},{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/7U92ohcosHiBS66BlQVY/xZW57IsMnddMN93arnVC/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211710Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=b2611dff7e6d2fe816bfd642a6df9b2e74b440aadc64007a1ab1278371f7a7e31d97477f1bd34a293e9a5c147df7475b6c8c709472f2dfe1662ee56e5f695e12f769d861f7dfacdd8112b8190f9279e1feb3870083fde9c330f21715363af37c7114463fc8c4e28b0809e6c9993a44e79d023df51762587f241e798a37acbc610004fbad4341bbb3d0a8fdef7edb6ed4ace34bbf86c4ff0f1f0e7565695ecefdd21fc95e568e7acc8eb4a42af2a03d407704d2cfe6f18b7c829aa900f73ff27adfe5f46f776aada38688472eac541ae83be4f118f3ada672f80033cd58f0ae3d1a0460bdffcb3c3cb2bd2bd7edda4c3ddd66ebbc97f44b0eed81d7afeb2c153a","durationSec":157.28,"generationId":"xZW57IsMnddMN93arnVC"}],"zubayr":[{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/FWctPfRjiKXi6rKRtGTN/DsXGJmL5gtlFrL1z4LRz/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211841Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=7c43f78307812a6c8bb97612d2ed9147609914098c5bd831841022056eb63b4d07db0aa71f9b1cb6a3c0886721199452c99dd5ccda99de101463fbbec53020b792a9618189525a253c47377d2e58534c7d824ca5ae78230817a89b114598e0117803aeec327cb4b7ad88501a591eee0acbd429b683a72513ea61437f2df62dfd816b6bb208cdeca7a0737eca24d95b452a2a61d965b16e7fcd26598b29b581dec094cc8d4194b4a9c5b1be932b1796baa4ec879cd8a36815201f7a3818cac26ffcde90df8287c901bb2ea5e4fe6064f94fca4b8d453db46158c98ae153be1ce8f14af8c67bd808185aa5363f9452406dbb36f84b90865bfed52ab9c63e67f096","durationSec":182.8,"generationId":"DsXGJmL5gtlFrL1z4LRz"},{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/FtcpBcRDkQJ9flVsjkly/1Igk1qbAZc6GTbwKLxKY/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211629Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=35f308f2b245e2cb9a5e6aac948de94858617dc57a0d155c020ea5f4f3e4357455cad7e495a6ac64d903b2029a32bd901f16819bc6fa29e944cfdafeebc7decff348b4946daf058dfd4c7f8cebe823fed6c584720e719e990f9739053e5b9170e2570ae3dc779295e19a46bfe7dd6d717f1014df68fe8113a54c9cb47bf5fcddebdf17e43cff7b022bb0d2ee0fbeca4dc69cad4e0b4bfcf66c9cd8d51ef17cc11775de9d31d567290b7c8cd83e27f07593066810099859aea6af1d7e02a84fe775ac9555a0f7feab17995a174036d3ccf717dd8568bff5aeffe2ad0b84f745f9edb332a150b24930a6001842c77a812d906d932ef06923b2df60ce59c491c133","durationSec":149.12,"generationId":"1Igk1qbAZc6GTbwKLxKY"}],"abd-ar-rahman":[{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/cMOcEZCJklMZf9rSlLK1/Jp8u4ZqK3WL3htG4Rb5Y/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211701Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=6b517b061138c573b675520c5707a62538689875a30377b2004587c1f9005fe846e37196d00888d666676e373f5dedf060116e8e342b757afe217b89f8c98a4330390040754d0c106bef9cc8f064ee77180db4c7c41b0fdd3cd842c16a9748c1da300d2dfee69db83a1e7c02e08cfe4a115cb91038688f096b34d5994aeeec3e55e074c02b1c091f3ad1d339a024372a6337d660c771ded11d2d5088dc2cfc377e771b3c46d2a30b61505906b15b600de4dbcf1526e1c867c3ffbc61c2bc2e51cd13a682fa9cd33f501d555e4b995ab94fdc10087ca549dad186c50b497b083138bcedfa6fe544443277048f000430a0552f94ce65b35f3cf22e9c115e4181a6","durationSec":152.8,"generationId":"Jp8u4ZqK3WL3htG4Rb5Y"},{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/8km7PW5jIyHSUmptvZiE/bpOYSVzQa0MOAvT1RYuJ/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211711Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=647b6a3b228993489c8d056fd9ad1e9d0c25d2e35eafe1aa59db76ee9ff20373f2d9a561add7ce837b4cd820f42a0e4145fd54dc4d3c5f627a3216689f1e0e8c6614b5b6931c35c7472e8baa4d42d89522211d7bb0df0393a905d83a14f09c7fadecbe9cac347648efe157043be8fffc6ce1d9630e0d9335e9766765884513af27a2ba591b2a7591dd5c73d57e0c34526141aad6d44c3221b0c59b2e783ea7705a59da1b9912d0c08055633819a8365c2335e9526a242698bf3456008ac2b9b91a3d78e32f33c9470ada09efb517766a365a9b5bbda3d78d4901ed7b339450d67d27ba007218989c79911d93bfd787ae6526c154fd6f459222cd00a9aa288eaa","durationSec":156.72,"generationId":"bpOYSVzQa0MOAvT1RYuJ"}],"sad":[{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/En98TeVcHdTYHG0uIim9/pN1B9szJJxwK65OePrEF/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211738Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=79de02f3fb2e63342cd5abdc11d2b316c26c2ea421acadbb636736a9e7d951dfcce4fa8bf0ec81699ef0e8710d5b351dc2803403a5130cb3bd1254809cd32163ab98a44ca70e742d4d56ec5b704c37ea7376aef1aef548dbf7f10d98abf2739bfbebd298f0a0b6e0af69c535b591d84c24326ff6f73212403b0fef048936b4db358e9fa2d4e3cffab9f31fb50bc82aa5652cb98ce790a762e91cf2a36b4fb45de356dc3998b28988b397f2a0856a4cab61864be978e06ac79d18353a23b08fd6b64bfb50a23b4c2970baab77c6241e64a8c608a7d20b20d2bfb18a2a3a02f60d606dbbe348992ecb85075634fc61f8762b812a83a1c3fafdf9eb8986e0f2f236","durationSec":164.72,"generationId":"pN1B9szJJxwK65OePrEF"},{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/JTDiwE1eF7bLWSnQijIv/cvAsGemq8ZsV3vcKR6Kz/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211624Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=655bc5a8427080e6ea1ef4403525b2e036032d52f966d0b84a63c9173102b11c5b324ed3f95e741373e60c41e523e2fd334099d52c8844b4ea898a5a0ab0fc41f8c561a5a541c762e37f07e8ca103842d07ae48d9674dcc81894216436454eb3889fb2a42d575c27d3d86574d3123e94071ad72c367235c16a7a60645f378d503a709edc85cff44f5f53982545ddaa65cad232c2ba2a502a1c2dfc59cbb080c100c7532f93b09d8976eb5fed733f38678a8784066486bff792bae275a33ad25cdcf69a89ce5b1f57f96e047f35d8559f6de9b42f718ad02316de2d219f4295c0f11173be244bb7ccee1c0dfdaa1ecf41ceeb70854208fb27fcc1746fa8c0fd8f","durationSec":153.68,"generationId":"cvAsGemq8ZsV3vcKR6Kz"}],"said":[{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/Z7sU4qNa22RbFjM5NjmO/XqbaVpekffBCrLZRbIm0/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211629Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=547bb5e605c5c7fa9b23cd5f9806e429a446420646cf84dd6164dcdc0cc79ac9c1d3dd30fe62946429c02cd760fb6555d58b2b83975817043a65620388cae95a770e0fe8859c5a8110d2b2da82b4745a87a4230f017afca721e177bca2db8e11d6a6d8a3e4d9c5e1337b90a98670e18aede56194f0633de72512abeee0a53065716b55f3df7ef4bed3ad588a8c066c94774cce37bd2d189330c58d03a3d4a84d95365d9c23e7e1f2da2b45a1d754ee7615977b52bb474c55fedab9eb2f0d8d0e05e6735829580f9126ea54b05ae1ac019c67089eb99bab91262ab8d9d74f005d8d41857567c333f01121ddc32504aaff3c9ccec7acfa79b09b62c560aacc3b94","durationSec":170.56,"generationId":"XqbaVpekffBCrLZRbIm0"},{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/iYdXARuhMM1f1bgKomPK/3hiuAkfKYO0mVIRnpbOL/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211644Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=3b2b3e2497bcacece289b2ed4220851823e158b3321d95003e23b2cc16fe306dffd5a0d1fd2482373581384f05ce07ab96d2220ca7b97c65173e4b4fe04ced1cfff587a9d70f3ead87c5b2f1bb5a5fb875c807a82b8718a0156ce77ad3152b4654065d42b9da0ed1831e2b211de8cf47618e9fe9e0ec46fe9dc573476bb1df3b0816c6b9c9cfc8ddc004f1f3b1310aae41fcdbf0e2e64a6c77ae9908e58f0664a177fa0391a9043ce8c69581ac53b393f35b9636e710f92a354fb7e42a9bc396c3635148cee3e5832859262d1d217df75a1d670c2fa29e50debd21348e491d7391865f0fe21c4187c91ef8a42bec78b60e03342ae094841408f365def917adb2","durationSec":161.04,"generationId":"3hiuAkfKYO0mVIRnpbOL"}],"abu-ubaydah":[{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/0yo1rxG4uBS8MbZYvSAi/gdovRzzgdkVXktjqVlKw/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211834Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=809360e923900fea5dd536eada52e36eefc7f56d054fd2c1f975fce9e4ba6561381f5987b52f8a20dc661220c6fa440bf23bb0878258da318649b72710364e03a3745900ff9b7d7f3028e9b89f5cf265253e33788e90731ca6a85d2f9f49d6ff73e873e5ed67c5c966326a09a80f3d9b573fb555c63453a738d5d6162492ff2491156f95f35209a503bdcd6c4583941a0046f57995bcd764ccb7b74994a1efc805caa2830131cfa481006ad77a386f6d955cd28a391b78a7d77ee8c6421f8df5a297c95892dfbccc34d6b70abaad7f8145b9df9f09d22e168c312d2f406cb1d386d1daa838283bf7363f471e41e6358cdf7868a6131a6985426cc5df88ed5656","durationSec":182.64,"generationId":"gdovRzzgdkVXktjqVlKw"},{"url":"https://storage.googleapis.com/xi-backend/database/workspace/9e52ab872d7b4775b36e50d2e07d17be/content_generation/GigWslCeKvDDyjKsnYMk/7ck0L9moUevwyYEPwogD/content.mp3?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=xi-backend-prod%40xi-labs.iam.gserviceaccount.com%2F20261006%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20261006T211605Z&X-Goog-Expires=7200&X-Goog-SignedHeaders=host&X-Goog-Signature=9308d3bb66310f71f54ff3cf4ef541bb2344d87280bba6b1fd4cb3c7abf029dd3d8c479145e0715c39d5e1732ae04c804e354ba2712be688db788c7009de4fb0e808c6270a3f29ec9e7ebf4b653a1dfb1c4c5058d8a5be0f16f9938960fe0b21aa38dffe69854703b39c8e2a83cc1b352028003a36e9155a85142123721cd4c0af9ef76e92be2b71dd00b47a208b7e34120e54009ab482c90bcc95338606d4a82ddff24fe0c9d59077040d05af38948044647b90c9ec8afa6c490222545a4654a7b56ffd060bfef5a0fc2eeab7069096460da79a341d7bc8036fa7d3b1a2be77330045ec66a0836ff0d80faddc5c6632714261033db0f2d9e92a73b172b8edc1","durationSec":168.08,"generationId":"7ck0L9moUevwyYEPwogD"}]}
+JSON
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+
+          manifest=json.loads(Path("/tmp/sahaba-v4-parts.json").read_text())
+          data=json.loads(Path("kids/data/mubashshirun-stories.json").read_text(encoding="utf-8"))
+          by_id={x.get("id"):x for x in data.get("items",[])}
+
+          for sid,parts in manifest.items():
+              item=by_id.get(sid)
+              if not item:
+                  raise SystemExit(f"Missing story item: {sid}")
+              scripts=item.get("scripts") or {}
+              text=str(scripts.get("9-10") or scripts.get("6-8") or scripts.get("4-5") or "").strip()
+              if not text:
+                  raise SystemExit(f"Missing master text: {sid}")
+              Path(f"/tmp/{sid}-story.txt").write_text(text,encoding="utf-8")
+              files=[]
+              for idx,part in enumerate(parts,1):
+                  out=Path(f"/tmp/{sid}-p{idx}.mp3")
+                  subprocess.run([
+                      "curl","-L","--fail","--retry","4","--retry-all-errors",
+                      "--connect-timeout","20","--max-time","360",part["url"],"-o",str(out)
+                  ],check=True)
+                  if out.stat().st_size<100000:
+                      raise SystemExit(f"Downloaded part too small: {sid} part {idx}")
+                  files.append(out)
+
+              concat=Path(f"/tmp/{sid}-concat.txt")
+              concat.write_text("".join(f"file '{p}'\n" for p in files),encoding="utf-8")
+              target=Path(f"kids/assets/mubashshirun-story-audio/{sid}/master.mp3")
+              target.parent.mkdir(parents=True,exist_ok=True)
+              subprocess.run([
+                  "ffmpeg","-hide_banner","-loglevel","error","-y",
+                  "-f","concat","-safe","0","-i",str(concat),"-c","copy",str(target)
+              ],check=True)
+              dur=float(subprocess.check_output([
+                  "ffprobe","-v","error","-show_entries","format=duration",
+                  "-of","default=noprint_wrappers=1:nokey=1",str(target)
+              ],text=True).strip())
+              if dur<180:
+                  raise SystemExit(f"Master duration unexpectedly short: {sid} {dur}")
+              print(sid,"master seconds",round(dur,3),"bytes",target.stat().st_size)
+          PY
+
+      - name: Forced-align every Sahaba master
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          m=json.loads(Path("/tmp/sahaba-v4-parts.json").read_text())
+          Path("/tmp/sahaba-ids.txt").write_text("\n".join(m.keys())+"\n")
+          PY
+
+          while IFS= read -r sid; do
+            [ -n "$sid" ] || continue
+            audio="kids/assets/mubashshirun-story-audio/$sid/master.mp3"
+            story="/tmp/$sid-story.txt"
+            result="/tmp/$sid-alignment.json"
+            ok=0
+
+            if [ -n "${ADMIN_PUBLISH_SECRET:-}" ]; then
+              for attempt in 1 2 3; do
+                code="$(curl -sS -o "$result" -w '%{http_code}' \
+                  -X POST "$VOICE_API/align-story" \
+                  -H "Origin: https://dar-al-tawhid.de" \
+                  -H "Referer: https://dar-al-tawhid.de/voice-studio/" \
+                  -H "X-Admin-Secret: $ADMIN_PUBLISH_SECRET" \
+                  -H "Accept: application/json" \
+                  -F "file=@$audio;type=audio/mpeg" \
+                  --form-string "text=$(cat "$story")" || true)"
+                if [ "$code" = "200" ] && python3 - "$result" <<'PY2'
+          import json,sys
+          d=json.load(open(sys.argv[1]))
+          sys.exit(0 if d.get("ok") and d.get("timings") and str(d.get("syncMode","")).startswith("elevenlabs-forced-alignment") else 1)
+          PY2
+                then
+                  ok=1
+                  break
+                fi
+                sleep 3
+              done
+            fi
+
+            if [ "$ok" != "1" ] && [ -n "${ELEVENLABS_API_KEY:-}" ]; then
+              raw="/tmp/$sid-eleven-alignment-raw.json"
+              code="$(curl -sS -o "$raw" -w '%{http_code}' \
+                -X POST "https://api.elevenlabs.io/v1/forced-alignment" \
+                -H "xi-api-key: $ELEVENLABS_API_KEY" \
+                -F "file=@$audio;type=audio/mpeg" \
+                --form-string "text=$(cat "$story")" || true)"
+              if [ "$code" = "200" ]; then
+                python3 - "$story" "$raw" "$result" <<'PY2'
+          import json,re,sys
+          from pathlib import Path
+          text=Path(sys.argv[1]).read_text(encoding="utf-8").strip()
+          raw=json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
+          chars=raw.get("characters") or []
+          paragraphs=[x.strip() for x in re.split(r"\n\s*\n",text) if x.strip()]
+          if not chars or not paragraphs:
+              raise SystemExit("Forced alignment returned no usable data")
+          joined="".join(str(x.get("text","")) for x in chars)
+          starts=[]
+          cursor=0
+          for p in paragraphs:
+              probe=p[:min(80,len(p))]
+              hit=joined.find(probe,cursor)
+              if hit<0:
+                  ratio=max(0,text.find(p))/max(1,len(text))
+                  hit=max(0,min(len(chars)-1,round(ratio*(len(chars)-1))))
+              while hit<len(chars)-1 and not str(chars[hit].get("text","")).strip():
+                  hit+=1
+              cursor=max(cursor,hit)
+              starts.append(max(0.0,float(chars[hit].get("start") or 0)))
+          duration=float((chars[-1] or {}).get("end") or 0)
+          timings=[]
+          for i,st in enumerate(starts):
+              en=starts[i+1] if i+1<len(starts) else duration
+              timings.append({"paragraphIndex":i,"start":round(st,3),"end":round(max(st,en),3)})
+          if len(timings)!=len(paragraphs):
+              raise SystemExit("Timing/paragraph mismatch")
+          Path(sys.argv[3]).write_text(json.dumps({
+              "ok":True,
+              "timings":timings,
+              "alignmentLoss":raw.get("loss"),
+              "alignedWords":len(raw.get("words") or []),
+              "alignedCharacters":len(chars),
+              "syncMode":"elevenlabs-forced-alignment-v1"
+          },ensure_ascii=False),encoding="utf-8")
+          PY2
+                ok=1
+              fi
+            fi
+
+            if [ "$ok" != "1" ]; then
+              echo "::error::Exact ElevenLabs forced alignment failed for $sid"
+              exit 1
+            fi
+            echo "$sid forced alignment complete"
+          done < /tmp/sahaba-ids.txt
+
+      - name: Install master audio metadata and exact reader timings
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,re,subprocess,time
+          from pathlib import Path
+
+          p=Path("kids/data/mubashshirun-stories.json")
+          d=json.loads(p.read_text(encoding="utf-8"))
+          ids=json.loads(Path("/tmp/sahaba-v4-parts.json").read_text()).keys()
+          by_id={x.get("id"):x for x in d.get("items",[])}
+          stamp=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
+
+          for sid in ids:
+              item=by_id[sid]
+              text=str((item.get("scripts") or {}).get("9-10") or (item.get("scripts") or {}).get("6-8") or (item.get("scripts") or {}).get("4-5") or "").strip()
+              paragraphs=[x.strip() for x in re.split(r"\n\s*\n",text) if x.strip()]
+              align=json.loads(Path(f"/tmp/{sid}-alignment.json").read_text(encoding="utf-8"))
+              timings=align.get("timings") or []
+              mode=str(align.get("syncMode") or "")
+              if not mode.startswith("elevenlabs-forced-alignment"):
+                  raise SystemExit(f"Non-exact alignment rejected: {sid} {mode}")
+              if len(timings)!=len(paragraphs):
+                  raise SystemExit(f"Timing count mismatch {sid}: {len(timings)} != {len(paragraphs)}")
+
+              previous=-1.0
+              for i,row in enumerate(timings):
+                  if int(row.get("paragraphIndex",-1))!=i:
+                      raise SystemExit(f"Bad paragraphIndex {sid} at {i}")
+                  st=float(row.get("start",-1))
+                  en=float(row.get("end",-1))
+                  if st<previous or en<st:
+                      raise SystemExit(f"Non-monotonic timing {sid} at {i}")
+                  previous=st
+
+              audio_path=Path(f"kids/assets/mubashshirun-story-audio/{sid}/master.mp3")
+              duration=float(subprocess.check_output([
+                  "ffprobe","-v","error","-show_entries","format=duration",
+                  "-of","default=noprint_wrappers=1:nokey=1",str(audio_path)
+              ],text=True).strip())
+              sha=hashlib.sha256(audio_path.read_bytes()).hexdigest()
+              url=f"/kids/assets/mubashshirun-story-audio/{sid}/master.mp3?v=10-v4"
+              base={
+                  "status":"ready",
+                  "url":url,
+                  "durationSec":round(duration,3),
+                  "bytes":audio_path.stat().st_size,
+                  "sha256":sha,
+                  "mime":"audio/mpeg",
+                  "codec":"mp3",
+                  "voiceProfile":"kids_story",
+                  "voiceProfileId":"serhat-owner-voice-2026",
+                  "voiceName":"Serhat Abu Malik – Master",
+                  "model":"eleven_v4",
+                  "source":"ElevenLabs v4 · Serhat Abu Malik – Master · long-form stitched",
+                  "sourceSpeaker":"Serhat Abu Malik",
+                  "masterAudio":True,
+                  "masterAgeRange":"4-10",
+                  "allAges":True,
+                  "modes":["read","listen"],
+                  "timings":timings,
+                  "syncMode":mode,
+                  "alignmentLoss":align.get("alignmentLoss"),
+                  "alignmentGeneratedAt":stamp,
+                  "publishedAt":stamp,
+                  "technicalQaPassed":True,
+                  "longFormParts":2,
+                  "transcoded":False,
+                  "deliveryProfile":"lossless-mp3-concat"
+              }
+              item.setdefault("audio",{})
+              for age in ("4-5","6-8","9-10"):
+                  item["audio"][age]={**base,"age":age}
+              vp=item.setdefault("voiceProduction",{})
+              vp.update({
+                  "masterVoice":"Serhat Abu Malik – Master",
+                  "model":"eleven_v4",
+                  "singleMasterAudio":True,
+                  "followReaderSync":"exact-forced-alignment",
+                  "followReaderSyncMode":mode,
+                  "followReaderParagraphs":len(timings),
+                  "followReaderSyncedAt":stamp
+              })
+
+          d["version"]=max(int(d.get("version") or 0)+1,10)
+          d["updatedAt"]=stamp
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print("Installed exact v4 masters for",len(list(ids)),"Sahaba")
+          PY
+
+      - name: Validate all ten Sahaba
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          d=json.loads(Path("kids/data/mubashshirun-stories.json").read_text(encoding="utf-8"))
+          items=d.get("items") or []
+          if len(items)!=10:
+              raise SystemExit(f"Expected 10 Sahaba, got {len(items)}")
+          for item in items:
+              sid=item.get("id")
+              audio=item.get("audio") or {}
+              for age in ("4-5","6-8","9-10"):
+                  meta=audio.get(age) or {}
+                  if meta.get("status")!="ready" or not meta.get("url"):
+                      raise SystemExit(f"{sid} {age} audio not ready")
+                  if sid!="abu-bakr" and not str(meta.get("syncMode","")).startswith("elevenlabs-forced-alignment"):
+                      raise SystemExit(f"{sid} {age} is not exact forced alignment")
+              if sid!="abu-bakr":
+                  p=Path(f"kids/assets/mubashshirun-story-audio/{sid}/master.mp3")
+                  if not p.exists() or p.stat().st_size<100000:
+                      raise SystemExit(f"Missing master asset for {sid}")
+          print("All 10 Sahaba validated.")
+          PY
+
+      - name: Commit Sahaba v4 masters
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/mubashshirun-stories.json kids/assets/mubashshirun-story-audio/
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git commit -m "Kids: finish Sahaba v4 master audios and exact reader sync"
+          git push origin HEAD:main
