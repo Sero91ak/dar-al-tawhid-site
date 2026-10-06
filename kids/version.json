@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v104-home-wordmark1177",
+  "buildId": "kids-shell-v104-wordmark1177",
   "label": "KIDS · V1.08.04",
-  "releasedAt": "2026-10-06T08:24:00+02:00",
-  "note": "V1177 korrigiert den sichtbaren Startseitenfehler auf iPhone: die zuvor geerbte translateX(-50%)-Transformation des Kids-Wordmarks wird explizit aufgehoben. DĀR AL TAWḤĪD und alle vier KIDS-Buchstaben bleiben vollständig zentriert im Hero; Animationen und Cinema-Hintergrund bleiben erhalten.",
+  "releasedAt": "2026-10-06T08:26:00+02:00",
+  "note": "V1177 behebt die auf iPhone/PWA halb aus dem Viewport verschobene DĀR AL TAWḤĪD KIDS-Marke durch eine robuste 50%-Zentrierung, hält alle vier KIDS-Buchstaben im eigenen Flex-Container, verstärkt den Ballon-Sprung, ergänzt einen ruhigen Gold-Shimmer für DĀR AL TAWḤĪD und verbessert den unteren Sicherheitsabstand zur festen Navigation.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -703,7 +703,7 @@
     "homeAudioFirst": true,
     "homeUnifiedResume": "audiobook-or-quran-v1170",
     "homeResumeProgress": true,
-    "homeHeroMotion": "multi-layer-cinema-pan-cloud-twinkle-light-haze-v1176",
+    "homeHeroMotion": "cinema-pan-visible-v1177",
     "homePrimaryWorlds": [
       "stories",
       "quran",
@@ -729,8 +729,11 @@
     },
     "homeHeroCopyWrap": "single-line-phone-guard-v1176",
     "homeWordmarkPosition": "viewport-centered-transform-reset-v1177",
-    "homeWordmarkClippingFixed": true
+    "homeWordmarkClippingFixed": true,
+    "homeWordmarkGeometry": "ios-safe-left50-transform-centered-v1177",
+    "homeWordmarkAnimation": "gold-shimmer-plus-colored-balloon-bounce-v1177",
+    "homeBottomNavClearance": "158px-safe-area-v1177"
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T08:24:00+02:00"
+  "deployTrigger": "2026-10-06T08:26:00+02:00"
 }
