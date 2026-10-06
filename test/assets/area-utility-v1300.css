@@ -1,6 +1,7 @@
 /* DĀR AL TAWḤĪD · Test-App utility/service surfaces · v1300
    Open editorial hierarchy for remaining utility routes.
-   Test-only: no visitor-app styles are changed. */
+   Test-only: no visitor-app styles are changed.
+   body.is-notifications-route */
 
 html[data-theme] body:is(
   .is-calendar-route,
