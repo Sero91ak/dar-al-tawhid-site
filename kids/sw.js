@@ -62,6 +62,7 @@ const CORE_PRECACHE=[
   "/kids/navigation-v1182.js?v=1182",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
+  "/kids/kids-touch-rail.css?v=1",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=4",
   "/kids/content-studio-feed.js?v=studio6",
@@ -268,6 +269,11 @@ self.addEventListener("fetch",function(event){
   }
   /* STORY LIBRARY RUNTIME: network-first so restored structure is immediate on iOS/PWA. */
   if(url.pathname==="/kids/mubashshirun-stories.js"||url.pathname==="/kids/sahabiyyat-stories.js"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  /* GLOBAL TOUCH RAIL: always network-first so interaction styling updates immediately. */
+  if(url.pathname==="/kids/kids-touch-rail.css"){
     event.respondWith(networkFirst(request));
     return;
   }
