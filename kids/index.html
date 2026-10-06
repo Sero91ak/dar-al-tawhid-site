@@ -2801,7 +2801,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.30</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.31</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3192,7 +3192,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v111-home-hero1203";
+const KIDS_BUILD_ID="kids-shell-v112-home-reference1204";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6263,7 +6263,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v111-home-hero1203";
+  var KIDS_BUILD_ID="kids-shell-v112-home-reference1204";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6279,7 +6279,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1203",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1204",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -10202,6 +10202,82 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 @media(prefers-reduced-motion:reduce){
   #view-today .shooting-star{animation:none!important}
+}
+</style>
+<style id="kids-home-reference-polish-v1204">
+/* V1204 — closer match to the approved reference:
+   - use the shooting star already baked into the artwork (no duplicate overlay),
+   - lower the brand so the star has clear sky above it,
+   - restore the soft dark atmospheric shading behind "Deine Hörwelten". */
+
+/* The reference image already contains the correct meteor. The V1203 CSS
+   overlay created a second bright streak that crossed the gold wordmark. */
+#view-today .shooting-star,
+#view-today .shooting-star::before,
+#view-today .shooting-star::after{
+  display:none!important;
+  content:none!important;
+  animation:none!important;
+}
+
+/* Give the baked meteor its own sky space and bring the brand composition
+   back down toward the approved screenshot. */
+#view-today .kids-wordmark{
+  top:max(66px,calc(env(safe-area-inset-top,0px) + 25px))!important;
+}
+
+/* Keep the safer width from V1203, but strengthen the approved warm glow. */
+#view-today .wm-dar-safe{
+  width:calc(100% - 26px)!important;
+  max-width:610px!important;
+  font-size:clamp(39px,10.55vw,52px)!important;
+  filter:
+    drop-shadow(0 2px 0 rgba(72,39,7,.82))
+    drop-shadow(0 6px 11px rgba(0,0,0,.44))
+    drop-shadow(0 0 8px rgba(255,232,157,.78))
+    drop-shadow(0 0 20px rgba(255,174,38,.46))!important;
+}
+
+/* The approved reference has a soft atmospheric shadow behind the
+   "Deine Hörwelten" heading. It is a fade, not a hard rectangular panel. */
+#view-today .section-title{
+  position:relative!important;
+  isolation:isolate!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#view-today .section-title::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:-1!important;
+  left:50%!important;
+  top:-24px!important;
+  width:100vw!important;
+  height:112px!important;
+  transform:translateX(-50%)!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(ellipse at 28% 50%,
+      rgba(1,12,19,.34) 0%,
+      rgba(2,17,25,.25) 34%,
+      rgba(3,22,31,.14) 57%,
+      transparent 78%)!important;
+}
+#view-today .section-title::after{
+  content:none!important;
+  display:none!important;
+}
+
+@media(max-width:430px){
+  #view-today .kids-wordmark{
+    top:max(64px,calc(env(safe-area-inset-top,0px) + 23px))!important;
+  }
+}
+@media(min-width:700px){
+  #view-today .kids-wordmark{
+    top:max(78px,calc(env(safe-area-inset-top,0px) + 35px))!important;
+  }
 }
 </style>
 
