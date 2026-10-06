@@ -54,3 +54,21 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Für diese Bereichs-Header gibt es **keinen separaten Karten-/Kapselbau** und **keine Kicker-Pill**. Der Kicker ist eine ruhige goldene Editorial-Zeile mit feiner Linie.
 - background-size: cover und ein pro Motiv gesetzter Fokus sind Pflicht; Smartphone und Tablet bekommen eigene Höhen/Abstände.
 - Die Regel betrifft nur die Bereichs-Header. Die Hauptnavigation **Heute · Geschichten · Qurʾān · Eltern** bleibt ausdrücklich die ovale schwebende Glas-Kapsel.
+
+
+## Globale Kapselbreite — `KIDS_GLOBAL_CAPSULE_WIDTH`
+
+- Referenz ist die äußere **Qurʾān-Reise-Kapsel** auf dem Smartphone.
+- Große navigierbare Kapseln nutzen die verfügbare Seitenbreite nahezu vollständig: Shell-Sicherheitsabstand 16 px, davon visuell 6 px Bleed je Seite → effektiv ungefähr 10 px Außenrand.
+- Keine schmalen zentrierten Karten für Propheten, Ṣaḥābah, Ṣaḥābiyyāt oder andere Hauptbereiche.
+- Unterkarten innerhalb einer großen Kapsel bleiben 100 % breit innerhalb ihres Elternbereichs; sie dürfen die Elternkapsel nicht überlaufen.
+- Auf Tablet/Desktop gilt 100 % der vorgesehenen Content-Spalte ohne künstliches zusätzliches `max-width`.
+- Freier Platz aus entfernten Pfeilen wird immer Bild und Text zurückgegeben.
+
+## Globaler Touch-Glow — `KIDS_GLOBAL_TOUCH_GLOW`
+
+- Jede navigierbare Kids-Kapsel verwendet denselben ruhigen Interaktionszustand.
+- `hover` (Desktop), `active`/Pointer-Press (Touch) und `focus-visible` hellen ausschließlich Kontur und Glow leicht auf.
+- Kein Hochspringen, kein `translateY`, kein Scale-/Lift-Effekt.
+- Mobile Touch-Rückmeldung wird zusätzlich durch `kids-card-interaction.js` stabilisiert, damit der Glow auf iPhone/iPad sichtbar bleibt.
+- Neue navigierbare Karten müssen die Klasse `.kids-tap-card` verwenden oder in den zentralen Card-Interaction-Selektor aufgenommen werden.
