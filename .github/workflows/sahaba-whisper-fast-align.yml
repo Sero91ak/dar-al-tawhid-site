@@ -63,5 +63,17 @@ jobs:
           git add kids/data/mubashshirun-stories.json kids/version.json kids/story-hub.js kids/data/story-hub.json
           git diff --cached --quiet && { echo "::error::No changes"; exit 1; }
           git commit -m "Kids: audio-align all 10 Sahaba read-along"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          pushed=0
+          for attempt in $(seq 1 30); do
+            echo "Push attempt $attempt/30"
+            if git pull --rebase origin main; then
+              if git push origin HEAD:main; then
+                pushed=1
+                break
+              fi
+            else
+              git rebase --abort || true
+            fi
+            sleep 2
+          done
+          test "$pushed" = "1" || { echo "::error::Could not publish validated Sahaba timing maps after 30 attempts"; exit 1; }
