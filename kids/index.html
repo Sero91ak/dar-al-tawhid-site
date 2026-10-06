@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.07.74</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.01</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2820,9 +2820,9 @@ html:not([data-view="today"]) .view.active{
         <div class="lantern"></div>
         <div class="hero-copy">
           <p class="hero-salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</p>
-          <div class="hero-kicker">HÖRBUCH · QURʾĀN · DUʿĀʾ</div>
+          <div class="hero-kicker">HÖRBÜCHER · QURʾĀN · DUʿĀʾ</div>
           <h1>Hören. Mitlesen. Lernen.</h1>
-          <p>Geschichten, Qurʾān und Duʿāʾ – ruhig und kindgerecht.</p>
+          <p>Hörbücher, Qurʾān und Duʿāʾ – einfach antippen und loshören.</p>
         </div>
       </div>
 
@@ -2846,7 +2846,7 @@ html:not([data-view="today"]) .view.active{
         <button id="dailyStart" class="daily-start">Reise starten</button>
       </div>
 
-      <div class="section-title">Was möchtest du hören?</div>
+      <div class="section-title">Deine Hörwelten</div>
       <div class="big-choice-grid">
         <button class="choice story" data-go="stories">
           <span class="icon"></span>
@@ -3175,7 +3175,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v100-audio-core1173";
+const KIDS_BUILD_ID="kids-shell-v101-home-audio1174";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6237,7 +6237,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v100-audio-core1173";
+  var KIDS_BUILD_ID="kids-shell-v101-home-audio1174";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -7593,4 +7593,313 @@ html[data-view="stories"] #view-stories > :last-child{
   #view-today .resume-progress b{transition:none!important}
 }
 </style>
-</html>
+
+<style id="kids-home-audio-v1174">
+/* V1174 — sichtbarer Audio-first Home-Relaunch: ruhiger Premium-Hero, großes Branding,
+   klarer Weiterhören-Einstieg und nur drei Hörwelten. */
+#view-today{
+  --home-gold:#f3d28a;
+  --home-cream:#fff7e6;
+  --home-deep:#061723;
+  --home-card:#0c2b3b;
+}
+#view-today .hero{
+  min-height:clamp(440px,112vw,520px)!important;
+  margin:calc(-1 * var(--safe-top)) -16px 0!important;
+  width:calc(100% + 32px)!important;
+  border-radius:0 0 40px 40px!important;
+  background:#0b2b3f!important;
+  box-shadow:0 26px 54px rgba(1,12,20,.34)!important;
+  overflow:hidden!important;
+}
+#view-today .hero::before{
+  background-image:url("/kids/assets/kids-brand/hero-warm-world.png?v=1174")!important;
+  background-size:cover!important;
+  background-position:center 37%!important;
+  filter:saturate(1.03) contrast(1.05) brightness(.91)!important;
+  opacity:1!important;
+  transform:scale(1.045)!important;
+  animation:homeSceneBreath1174 18s ease-in-out infinite alternate!important;
+}
+#view-today .hero::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  background:
+    linear-gradient(180deg,rgba(2,14,22,.38) 0%,rgba(4,20,30,.06) 25%,rgba(4,20,30,.06) 48%,rgba(4,20,30,.48) 73%,rgba(3,17,26,.92) 100%)!important;
+  animation:none!important;
+}
+@keyframes homeSceneBreath1174{
+  from{transform:scale(1.045) translate3d(0,0,0)}
+  to{transform:scale(1.075) translate3d(-.6%,-.7%,0)}
+}
+#view-today .kids-wordmark{
+  position:absolute!important;
+  z-index:5!important;
+  top:max(44px,calc(env(safe-area-inset-top,0px) + 28px))!important;
+  left:16px!important;
+  right:16px!important;
+  width:auto!important;
+  margin:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:5px!important;
+  text-align:center!important;
+}
+#view-today .wm-dar-line{
+  margin:0!important;
+  color:#fff9ec!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:clamp(22px,6.1vw,34px)!important;
+  line-height:1!important;
+  font-weight:700!important;
+  letter-spacing:.12em!important;
+  text-shadow:0 5px 24px rgba(0,0,0,.48)!important;
+  animation:none!important;
+}
+#view-today .wm-kids{
+  margin:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:.035em!important;
+  color:var(--home-gold)!important;
+  font-family:"Fredoka","Avenir Next",system-ui,sans-serif!important;
+  font-size:clamp(58px,17.2vw,94px)!important;
+  font-weight:780!important;
+  line-height:.88!important;
+  letter-spacing:-.055em!important;
+  text-transform:uppercase!important;
+  filter:drop-shadow(0 8px 24px rgba(0,0,0,.34))!important;
+}
+#view-today .wm-kids span{
+  color:var(--home-gold)!important;
+  rotate:0deg!important;
+  -webkit-text-stroke:0!important;
+  text-shadow:0 2px 0 rgba(255,255,255,.10),0 8px 22px rgba(0,0,0,.35)!important;
+  animation:homeLetterFloat1174 7s ease-in-out infinite!important;
+}
+#view-today .wm-kids span:nth-child(2){animation-delay:.12s!important}
+#view-today .wm-kids span:nth-child(3){animation-delay:.24s!important}
+#view-today .wm-kids span:nth-child(4){animation-delay:.36s!important}
+@keyframes homeLetterFloat1174{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+
+#view-today .hero-copy{
+  position:absolute!important;
+  left:20px!important;
+  right:20px!important;
+  bottom:30px!important;
+  z-index:5!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:left!important;
+  max-width:560px!important;
+}
+#view-today .hero-salam{
+  margin:0 0 9px!important;
+  max-width:31em!important;
+  color:rgba(255,248,229,.82)!important;
+  font-size:clamp(11px,3vw,14px)!important;
+  line-height:1.35!important;
+  font-weight:560!important;
+  text-align:left!important;
+}
+#view-today .hero-kicker{
+  margin:0 0 9px!important;
+  padding:6px 11px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  min-height:28px!important;
+  border:1px solid rgba(255,229,168,.24)!important;
+  border-radius:999px!important;
+  background:rgba(5,26,38,.52)!important;
+  color:#ffe4a7!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+  font-size:10px!important;
+  font-weight:850!important;
+  letter-spacing:.12em!important;
+}
+#view-today .hero h1{
+  margin:0!important;
+  max-width:12em!important;
+  color:#fff!important;
+  font-family:"Fredoka","Avenir Next",system-ui,sans-serif!important;
+  font-size:clamp(31px,8.5vw,44px)!important;
+  line-height:1.02!important;
+  font-weight:740!important;
+  letter-spacing:-.035em!important;
+  text-shadow:0 5px 22px rgba(0,0,0,.44)!important;
+}
+#view-today .hero-copy>p:last-child{
+  margin:9px 0 0!important;
+  max-width:28em!important;
+  color:rgba(255,255,255,.82)!important;
+  font-size:clamp(13px,3.5vw,16px)!important;
+  line-height:1.38!important;
+  font-weight:560!important;
+  text-align:left!important;
+}
+
+#view-today .resume{
+  position:relative!important;
+  z-index:9!important;
+  width:calc(100% - 16px)!important;
+  min-height:106px!important;
+  margin:-24px 8px 0!important;
+  padding:15px 16px!important;
+  display:grid!important;
+  grid-template-columns:60px minmax(0,1fr) 38px!important;
+  gap:14px!important;
+  align-items:center!important;
+  border:1px solid rgba(255,225,155,.19)!important;
+  border-radius:27px!important;
+  background:linear-gradient(145deg,rgba(9,42,57,.97),rgba(5,28,41,.98))!important;
+  box-shadow:0 20px 38px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.045)!important;
+}
+#view-today .resume-icon{
+  width:58px!important;
+  height:58px!important;
+  border-radius:19px!important;
+  background-color:rgba(255,255,255,.06)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)!important;
+}
+#view-today .resume-kicker{color:#e9c978!important;font-size:9px!important;letter-spacing:.13em!important}
+#view-today .resume strong{font-size:clamp(22px,5.8vw,28px)!important;color:#fffaf0!important}
+#view-today .resume #resumeText{font-size:clamp(12px,3.2vw,14px)!important;color:rgba(255,255,255,.66)!important}
+
+#view-today .daily-journey,
+#view-today .choice.quiz,
+#view-today .knowledge-card,
+#view-today .gentle-note{display:none!important}
+#view-today .section-title{
+  margin:31px 2px 14px!important;
+  color:#fff8e8!important;
+  font-size:clamp(28px,7vw,36px)!important;
+  line-height:1.03!important;
+  font-weight:740!important;
+  letter-spacing:-.035em!important;
+}
+#view-today .big-choice-grid{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:14px!important;
+}
+#view-today .choice{
+  min-height:156px!important;
+  display:grid!important;
+  grid-template-columns:72px minmax(0,1fr) 40px!important;
+  align-items:center!important;
+  gap:14px!important;
+  padding:19px 18px 19px 20px!important;
+  border:1px solid rgba(255,255,255,.11)!important;
+  border-radius:30px!important;
+  clip-path:inset(0 round 30px)!important;
+  box-shadow:0 18px 36px rgba(0,0,0,.20)!important;
+}
+#view-today .choice.story{background:linear-gradient(135deg,#6d453b 0%,#9e6659 52%,#643f42 100%)!important}
+#view-today .choice.quran{background:linear-gradient(135deg,#154e55 0%,#277d79 54%,#124351 100%)!important}
+#view-today .choice.dua{background:linear-gradient(135deg,#3a456f 0%,#6b6aa1 54%,#3d4169 100%)!important}
+#view-today .choice::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:
+    radial-gradient(circle at 12% 18%,rgba(255,255,255,.16),transparent 26%),
+    linear-gradient(118deg,rgba(255,255,255,.07),transparent 46%)!important;
+  pointer-events:none!important;
+}
+#view-today .choice::after{
+  content:""!important;
+  position:absolute!important;
+  inset:auto -30px -55px auto!important;
+  width:150px!important;
+  height:150px!important;
+  border-radius:50%!important;
+  background:rgba(255,255,255,.04)!important;
+  pointer-events:none!important;
+}
+#view-today .choice .icon{
+  position:relative!important;
+  z-index:3!important;
+  width:66px!important;
+  height:66px!important;
+  margin:0!important;
+  border-radius:22px!important;
+  background-size:76%!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-color:rgba(6,22,31,.20)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),0 10px 20px rgba(0,0,0,.12)!important;
+}
+#view-today .choice strong{
+  position:relative!important;
+  z-index:3!important;
+  align-self:end!important;
+  color:#fff!important;
+  font-size:clamp(26px,6.8vw,34px)!important;
+  line-height:1!important;
+  font-weight:740!important;
+  letter-spacing:-.025em!important;
+  text-shadow:0 3px 14px rgba(0,0,0,.33)!important;
+}
+#view-today .choice small{
+  position:relative!important;
+  z-index:3!important;
+  grid-column:2!important;
+  align-self:start!important;
+  margin-top:-34px!important;
+  padding-top:38px!important;
+  color:rgba(255,255,255,.80)!important;
+  font-size:clamp(13px,3.5vw,16px)!important;
+  line-height:1.25!important;
+  font-weight:580!important;
+  text-shadow:none!important;
+}
+#view-today .choice .arrow{
+  position:relative!important;
+  z-index:3!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:38px!important;
+  height:38px!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  background:rgba(5,20,30,.24)!important;
+  color:#fff4d3!important;
+  font-size:26px!important;
+}
+@media(min-width:700px){
+  #view-today .hero{min-height:570px!important}
+  #view-today .kids-wordmark{top:max(56px,calc(env(safe-area-inset-top,0px) + 36px))!important}
+  #view-today .wm-dar-line{font-size:37px!important}
+  #view-today .wm-kids{font-size:104px!important}
+  #view-today .hero-copy{left:34px!important;right:34px!important;bottom:38px!important}
+  #view-today .resume{max-width:760px!important;margin:-30px auto 0!important}
+  #view-today .big-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}
+  #view-today .choice{
+    min-height:210px!important;
+    grid-template-columns:1fr 40px!important;
+    grid-template-rows:70px auto auto!important;
+    padding:22px!important;
+  }
+  #view-today .choice .icon{grid-column:1!important;grid-row:1!important}
+  #view-today .choice .arrow{grid-column:2!important;grid-row:1!important;justify-self:end!important}
+  #view-today .choice strong{grid-column:1 / -1!important;grid-row:2!important;align-self:end!important;font-size:29px!important}
+  #view-today .choice small{grid-column:1 / -1!important;grid-row:3!important;margin:6px 0 0!important;padding:0!important;font-size:14px!important}
+}
+@media(max-width:380px){
+  #view-today .hero{min-height:420px!important}
+  #view-today .wm-dar-line{font-size:20px!important}
+  #view-today .wm-kids{font-size:54px!important}
+  #view-today .hero h1{font-size:29px!important}
+  #view-today .choice{min-height:144px!important;grid-template-columns:62px minmax(0,1fr) 36px!important;padding:17px!important}
+  #view-today .choice .icon{width:58px!important;height:58px!important;border-radius:19px!important}
+  #view-today .choice strong{font-size:24px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .hero::before,#view-today .wm-kids span{animation:none!important}
+}
+</style>
+\n</html>
