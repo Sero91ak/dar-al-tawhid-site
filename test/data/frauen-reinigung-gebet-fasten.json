@@ -1,6 +1,6 @@
 {
-  "fassung": 1,
-  "aktualisiertAm": "2026-08-29",
+  "fassung": 2,
+  "aktualisiertAm": "2026-10-06",
   "bereich": "reinigung-gebet-fasten",
   "eintraege": [
     {
@@ -228,21 +228,28 @@
     },
     {
       "kennung": "reinigung-gelblich-001",
-      "titel": "Gelbliche oder bräunliche Flüssigkeit",
+      "titel": "Gelbliche oder bräunliche Absonderung nach der Reinheit",
       "bereich": "hayd",
-      "thema": "in-pruefung",
-      "kurzvorschau": "In Prüfung.",
-      "vollstaendigeAussage": "",
-      "lehre": "",
-      "quellenart": "in-pruefung",
-      "quellenstatus": "nicht-anzeigen",
-      "quellenanzeige": "In Prüfung.",
-      "direktnachweisText": "",
-      "direktnachweisUrl": "",
-      "direktnachweisArt": "",
-      "atharPruefung": "Verborgen, bis Quelle, Fiqh-Abgrenzung und Direktnachweis geprüft sind.",
-      "freigabeDurchSerhat": false,
-      "hinweise": "Nicht anzeigen."
+      "thema": "reinheit-gelb-braun",
+      "kurzvorschau": "Gelbliche oder bräunliche Absonderung nach festgestellter Reinheit wird nicht als Ḥayḍ gewertet.",
+      "vollstaendigeAussage": "Umm ʿAṭiyyah رضي الله عنها berichtete, dass sie gelbliche und bräunliche Absonderung nach eingetretener Reinheit nicht als Ḥayḍ betrachteten. Der Eintrag gilt ausdrücklich für den Zustand nach festgestellter Reinheit und wird nicht auf ungeklärte Blutungsphasen ausgeweitet.",
+      "lehre": "Nach festgestellter Reinheit wird eine spätere gelbliche oder bräunliche Absonderung nicht automatisch als Ḥayḍ behandelt.",
+      "quellenart": "sahih",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Ṣaḥīḥ al-Bukhārī, Kitāb al-Ḥayḍ, Nr. 326; Sunan Abī Dāwūd, Nr. 307 mit dem Zusatz „nach der Reinheit“.",
+      "direktnachweisText": "→ Quelle öffnen",
+      "direktnachweisUrl": "https://dorar.net/h/3PdniQua?osoul=1",
+      "direktnachweisArt": "Webseite",
+      "atharPruefung": "Authentischer Bericht geprüft; keine zusätzliche Athar-Behauptung nötig.",
+      "freigabeDurchSerhat": true,
+      "hinweise": "Nur nach festgestellter Reinheit anwenden. Keine pauschale Aussage zu jeder gelblichen oder bräunlichen Absonderung.",
+      "schlagwoerter": [
+        "Ḥayḍ",
+        "Reinheit",
+        "Ṣufrah",
+        "Kudrah",
+        "Umm ʿAṭiyyah"
+      ]
     },
     {
       "kennung": "reinigung-reinheit-vor-tagen-001",
@@ -603,6 +610,31 @@
       "atharPruefung": "Verborgen, bis Quelle, Fiqh-Abgrenzung und Direktnachweis geprüft sind.",
       "freigabeDurchSerhat": false,
       "hinweise": "Nicht anzeigen."
+    },
+    {
+      "kennung": "reinigung-ghusl-zopf-001",
+      "titel": "Geflochtenes Haar beim Ghusl nach Janābah",
+      "bereich": "ghusl",
+      "thema": "ghusl-und-haar",
+      "kurzvorschau": "Für den Ghusl nach Janābah muss geflochtenes Haar nicht zwingend geöffnet werden, wenn das Wasser den Kopf und das Haar erreicht.",
+      "vollstaendigeAussage": "Umm Salamah رضي الله عنها fragte den Propheten ﷺ, ob sie ihre fest geflochtenen Haare für den Ghusl nach Janābah öffnen müsse. Er verneinte dies und erklärte, dass es genügt, Wasser über den Kopf zu geben und anschließend den übrigen Körper zu waschen. Der sichere Eintrag bezieht sich auf den Ghusl nach Janābah.",
+      "lehre": "Beim Ghusl nach Janābah ist das Öffnen geflochtener Haare nicht grundsätzlich erforderlich, solange die vorgeschriebene Waschung vollständig erfolgt.",
+      "quellenart": "sahih",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Ṣaḥīḥ Muslim, Kitāb al-Ḥayḍ, Nr. 330.",
+      "direktnachweisText": "→ Quelle öffnen",
+      "direktnachweisUrl": "https://dorar.net/h/ujJjKKfQ?osoul=1",
+      "direktnachweisArt": "Webseite",
+      "freigabeDurchSerhat": true,
+      "schlagwoerter": [
+        "Ghusl",
+        "Janābah",
+        "Haare",
+        "Zöpfe",
+        "Umm Salamah"
+      ],
+      "hinweise": "Für Ḥayḍ-Ghusl keine zusätzliche Detailregel behaupten; die Überlieferungsvarianten dazu werden getrennt geprüft.",
+      "atharPruefung": "Ṣaḥīḥ-Muslim-Grundlage geprüft."
     }
   ]
 }
