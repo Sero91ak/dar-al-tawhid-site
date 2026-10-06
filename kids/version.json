@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v101-home-audio1174",
-  "label": "KIDS · V1.08.01",
-  "releasedAt": "2026-10-06T07:18:00+02:00",
-  "note": "Startseite sichtbar neu aufgebaut: großer ruhiger DĀR AL TAWḤĪD KIDS Hero, Audio-first Weiterhören und nur drei klare Hörwelten: Hörbücher, Qurʾān Player und Duʿāʾ. Quiz/Tagesreise/Wissenskarte sind auf der Startseite ausgeblendet; Alif-Bāʾ bleibt aus dem Runtime-Bereich entfernt.",
+  "buildId": "kids-shell-v102-home-cinema1175",
+  "label": "KIDS · V1.08.02",
+  "releasedAt": "2026-10-06T07:38:00+02:00",
+  "note": "Startseite neu geordnet und stabilisiert: DĀR AL TAWḤĪD steht vollständig und prominent über KIDS, der Hero nutzt eine ruhige Cinema-Bewegung ohne abgeschnittene Elemente, Weiterhören bleibt im normalen Layoutfluss und die drei Hörwelten erhalten lokale thematische Bildhintergründe statt flacher Farbflächen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1174",
+    "serviceWorkerCache": "v1175",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -703,7 +703,7 @@
     "homeAudioFirst": true,
     "homeUnifiedResume": "audiobook-or-quran-v1170",
     "homeResumeProgress": true,
-    "homeHeroMotion": "calm-cinematic-v1174",
+    "homeHeroMotion": "cinematic-slow-pan-light-sweep-v1175",
     "homePrimaryWorlds": [
       "stories",
       "quran",
@@ -712,14 +712,22 @@
     "duaOwnerVoice": "recovered-existing-assets-v1171",
     "duaVoicePaidGenerations": 0,
     "duaVoiceEntries": 10,
-    "homeAudioCore": "v1174",
+    "homeAudioCore": "v1175",
     "alphabetRuntimeRemoved": true,
     "alphabetArchivedAssetsRetained": true,
-    "homeHeroBrand": "large-premium-wordmark-v1174",
+    "homeHeroBrand": "dar-first-centered-gold-kids-v1175",
     "homeQuizVisible": false,
     "homeDailyJourneyVisible": false,
-    "homeKnowledgeCardVisible": false
+    "homeKnowledgeCardVisible": false,
+    "homeHeroArtwork": "/kids/assets/kids-art/hero-entdecke.png",
+    "homeResumeLayout": "stable-flow-no-overlap-v1175",
+    "homeCards": "local-illustrated-backgrounds-v1175",
+    "homeCardArtwork": {
+      "stories": "/kids/assets/stories-home/prophets-v1133.webp?v=1136",
+      "quran": "/kids/assets/kids-art/quran-home-v1053.jpg",
+      "dua": "/kids/assets/kids-art/dua-home-v11.jpg"
+    }
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T07:18:00+02:00"
+  "deployTrigger": "2026-10-06T07:38:00+02:00"
 }

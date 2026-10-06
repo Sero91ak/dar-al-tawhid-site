@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.01</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.02</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3175,7 +3175,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v101-home-audio1174";
+const KIDS_BUILD_ID="kids-shell-v102-home-cinema1175";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6237,7 +6237,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v101-home-audio1174";
+  var KIDS_BUILD_ID="kids-shell-v102-home-cinema1175";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6253,7 +6253,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1174",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1175",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -7594,312 +7594,485 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-<style id="kids-home-audio-v1174">
-/* V1174 — sichtbarer Audio-first Home-Relaunch: ruhiger Premium-Hero, großes Branding,
-   klarer Weiterhören-Einstieg und nur drei Hörwelten. */
+<style id="kids-home-cinematic-v1175">
+/* V1175 — ruhiger Cinema-Home: Branding zuerst, keine abgeschnittenen Elemente,
+   echte Bildwelten in den drei Kernkarten, klare mobile Geometrie. */
 #view-today{
-  --home-gold:#f3d28a;
-  --home-cream:#fff7e6;
-  --home-deep:#061723;
-  --home-card:#0c2b3b;
+  --home-gold:#f1cd7b;
+  --home-gold-soft:#ffe8ad;
+  --home-cream:#fff8e9;
+  --home-deep:#061823;
+  --home-ink:#fdf8ec;
+  overflow:visible!important;
 }
+
+/* HERO — bewusst kompakter und stabil statt übergroß/verschoben. */
 #view-today .hero{
-  min-height:clamp(440px,112vw,520px)!important;
+  position:relative!important;
+  isolation:isolate!important;
+  min-height:430px!important;
+  height:auto!important;
   margin:calc(-1 * var(--safe-top)) -16px 0!important;
   width:calc(100% + 32px)!important;
-  border-radius:0 0 40px 40px!important;
-  background:#0b2b3f!important;
-  box-shadow:0 26px 54px rgba(1,12,20,.34)!important;
+  border:0!important;
+  border-radius:0 0 36px 36px!important;
+  background:#092a3b!important;
   overflow:hidden!important;
+  box-shadow:0 20px 46px rgba(0,0,0,.28)!important;
 }
 #view-today .hero::before{
-  background-image:url("/kids/assets/kids-brand/hero-warm-world.png?v=1174")!important;
+  content:""!important;
+  position:absolute!important;
+  inset:-3%!important;
+  z-index:0!important;
+  background-image:url("/kids/assets/kids-art/hero-entdecke.png")!important;
   background-size:cover!important;
-  background-position:center 37%!important;
-  filter:saturate(1.03) contrast(1.05) brightness(.91)!important;
-  opacity:1!important;
-  transform:scale(1.045)!important;
-  animation:homeSceneBreath1174 18s ease-in-out infinite alternate!important;
+  background-position:center 43%!important;
+  background-repeat:no-repeat!important;
+  filter:saturate(.92) contrast(1.04) brightness(.78)!important;
+  transform:scale(1.055)!important;
+  transform-origin:50% 42%!important;
+  animation:homeCinemaDrift1175 24s ease-in-out infinite alternate!important;
 }
 #view-today .hero::after{
   content:""!important;
   position:absolute!important;
   inset:0!important;
-  z-index:2!important;
+  z-index:1!important;
+  pointer-events:none!important;
   background:
-    linear-gradient(180deg,rgba(2,14,22,.38) 0%,rgba(4,20,30,.06) 25%,rgba(4,20,30,.06) 48%,rgba(4,20,30,.48) 73%,rgba(3,17,26,.92) 100%)!important;
-  animation:none!important;
+    radial-gradient(circle at 50% 22%,rgba(244,205,119,.15),transparent 28%),
+    linear-gradient(180deg,rgba(3,17,27,.46) 0%,rgba(3,17,27,.12) 26%,rgba(3,17,27,.18) 50%,rgba(3,17,27,.68) 76%,rgba(3,17,27,.94) 100%)!important;
 }
-@keyframes homeSceneBreath1174{
-  from{transform:scale(1.045) translate3d(0,0,0)}
-  to{transform:scale(1.075) translate3d(-.6%,-.7%,0)}
+@keyframes homeCinemaDrift1175{
+  0%{transform:scale(1.055) translate3d(0,0,0)}
+  100%{transform:scale(1.085) translate3d(-.45%,-.65%,0)}
 }
+
+/* Ein einzelner, sehr langsamer Lichtzug statt hektischer Animation. */
+#view-today .hero .cloud{
+  display:block!important;
+  position:absolute!important;
+  z-index:2!important;
+  top:-35%!important;
+  left:-58%!important;
+  width:44%!important;
+  height:170%!important;
+  border-radius:48%!important;
+  background:linear-gradient(90deg,transparent,rgba(255,229,169,.16),transparent)!important;
+  filter:blur(22px)!important;
+  opacity:.7!important;
+  transform:rotate(15deg)!important;
+  animation:homeCinemaSweep1175 13s ease-in-out infinite!important;
+  pointer-events:none!important;
+}
+#view-today .hero .cloud::before,
+#view-today .hero .cloud::after{display:none!important}
+@keyframes homeCinemaSweep1175{
+  0%,18%{left:-58%;opacity:0}
+  34%{opacity:.7}
+  68%{left:112%;opacity:.42}
+  100%{left:112%;opacity:0}
+}
+#view-today .hero .city,
+#view-today .hero .arch,
+#view-today .hero .dune,
+#view-today .hero .lantern{display:none!important}
+
+/* BRANDING — DĀR AL TAWḤĪD steht sauber und vollständig VOR KIDS. */
 #view-today .kids-wordmark{
   position:absolute!important;
   z-index:5!important;
-  top:max(44px,calc(env(safe-area-inset-top,0px) + 28px))!important;
-  left:16px!important;
-  right:16px!important;
-  width:auto!important;
+  top:max(48px,calc(env(safe-area-inset-top,0px) + 24px))!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  max-width:none!important;
   margin:0!important;
+  padding:0 24px!important;
+  box-sizing:border-box!important;
   display:flex!important;
   flex-direction:column!important;
   align-items:center!important;
-  gap:5px!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
   text-align:center!important;
+  transform:none!important;
+  filter:none!important;
+  overflow:visible!important;
+}
+#view-today .kids-wordmark::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:-1!important;
+  width:min(88vw,420px)!important;
+  height:120px!important;
+  top:-18px!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  border-radius:50%!important;
+  background:radial-gradient(ellipse,rgba(241,205,123,.17),rgba(10,38,52,.03) 54%,transparent 74%)!important;
+  filter:blur(6px)!important;
+  animation:homeBrandAura1175 7s ease-in-out infinite!important;
+}
+#view-today .kids-wordmark::after{
+  content:""!important;
+  display:block!important;
+  width:min(64vw,280px)!important;
+  height:1px!important;
+  margin-top:2px!important;
+  background:linear-gradient(90deg,transparent,rgba(255,226,154,.82),transparent)!important;
+  box-shadow:0 0 14px rgba(255,215,130,.28)!important;
+}
+@keyframes homeBrandAura1175{
+  0%,100%{opacity:.66;transform:translateX(-50%) scale(.96)}
+  50%{opacity:1;transform:translateX(-50%) scale(1.03)}
 }
 #view-today .wm-dar-line{
-  margin:0!important;
-  color:#fff9ec!important;
-  font-family:Georgia,"Times New Roman",serif!important;
-  font-size:clamp(22px,6.1vw,34px)!important;
-  line-height:1!important;
-  font-weight:700!important;
-  letter-spacing:.12em!important;
-  text-shadow:0 5px 24px rgba(0,0,0,.48)!important;
-  animation:none!important;
-}
-#view-today .wm-kids{
-  margin:0!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:.035em!important;
-  color:var(--home-gold)!important;
-  font-family:"Fredoka","Avenir Next",system-ui,sans-serif!important;
-  font-size:clamp(58px,17.2vw,94px)!important;
-  font-weight:780!important;
-  line-height:.88!important;
-  letter-spacing:-.055em!important;
-  text-transform:uppercase!important;
-  filter:drop-shadow(0 8px 24px rgba(0,0,0,.34))!important;
-}
-#view-today .wm-kids span{
-  color:var(--home-gold)!important;
-  rotate:0deg!important;
-  -webkit-text-stroke:0!important;
-  text-shadow:0 2px 0 rgba(255,255,255,.10),0 8px 22px rgba(0,0,0,.35)!important;
-  animation:homeLetterFloat1174 7s ease-in-out infinite!important;
-}
-#view-today .wm-kids span:nth-child(2){animation-delay:.12s!important}
-#view-today .wm-kids span:nth-child(3){animation-delay:.24s!important}
-#view-today .wm-kids span:nth-child(4){animation-delay:.36s!important}
-@keyframes homeLetterFloat1174{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
-
-#view-today .hero-copy{
-  position:absolute!important;
-  left:20px!important;
-  right:20px!important;
-  bottom:30px!important;
-  z-index:5!important;
+  width:100%!important;
   margin:0!important;
   padding:0!important;
-  text-align:left!important;
-  max-width:560px!important;
+  display:block!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+  color:#fff6db!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:clamp(24px,6.6vw,34px)!important;
+  line-height:1.05!important;
+  font-weight:700!important;
+  letter-spacing:.105em!important;
+  text-indent:.105em!important;
+  text-shadow:0 5px 20px rgba(0,0,0,.55),0 0 18px rgba(241,205,123,.15)!important;
+  transform:none!important;
+  animation:homeDarGlow1175 6.8s ease-in-out infinite!important;
+}
+@keyframes homeDarGlow1175{
+  0%,100%{filter:brightness(.98)}
+  50%{filter:brightness(1.08)}
+}
+#view-today .wm-kids{
+  width:100%!important;
+  margin:0!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:center!important;
+  gap:.025em!important;
+  overflow:visible!important;
+  font-family:"Fredoka","Avenir Next",system-ui,sans-serif!important;
+  font-size:clamp(66px,18.5vw,96px)!important;
+  font-weight:760!important;
+  line-height:.82!important;
+  letter-spacing:-.065em!important;
+  text-transform:uppercase!important;
+  transform:none!important;
+  filter:drop-shadow(0 9px 24px rgba(0,0,0,.38))!important;
+}
+#view-today .wm-kids span{
+  display:inline-block!important;
+  color:transparent!important;
+  -webkit-text-fill-color:transparent!important;
+  background:linear-gradient(180deg,#fff9e8 0%,#f5d687 44%,#c68f42 100%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-stroke:0!important;
+  paint-order:normal!important;
+  rotate:0deg!important;
+  text-shadow:none!important;
+  transform:none!important;
+  animation:homeKidFloat1175 8s ease-in-out infinite!important;
+}
+#view-today .wm-kids span:nth-child(2){animation-delay:.18s!important}
+#view-today .wm-kids span:nth-child(3){animation-delay:.36s!important}
+#view-today .wm-kids span:nth-child(4){animation-delay:.54s!important}
+@keyframes homeKidFloat1175{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2px)}
+}
+
+/* Hero-Text bleibt zweitrangig, damit das Branding atmen kann. */
+#view-today .hero-copy{
+  position:absolute!important;
+  z-index:5!important;
+  left:24px!important;
+  right:24px!important;
+  bottom:25px!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:center!important;
+  transform:none!important;
 }
 #view-today .hero-salam{
-  margin:0 0 9px!important;
+  margin:0 auto 8px!important;
   max-width:31em!important;
-  color:rgba(255,248,229,.82)!important;
-  font-size:clamp(11px,3vw,14px)!important;
-  line-height:1.35!important;
-  font-weight:560!important;
-  text-align:left!important;
+  color:rgba(255,249,232,.84)!important;
+  font-size:clamp(11px,3vw,13px)!important;
+  line-height:1.34!important;
+  font-weight:580!important;
+  text-align:center!important;
+  text-shadow:0 2px 10px rgba(0,0,0,.44)!important;
 }
 #view-today .hero-kicker{
-  margin:0 0 9px!important;
-  padding:6px 11px!important;
   display:inline-flex!important;
   align-items:center!important;
-  min-height:28px!important;
-  border:1px solid rgba(255,229,168,.24)!important;
+  justify-content:center!important;
+  min-height:27px!important;
+  margin:0 auto 9px!important;
+  padding:5px 12px!important;
+  border:1px solid rgba(241,205,123,.34)!important;
   border-radius:999px!important;
-  background:rgba(5,26,38,.52)!important;
-  color:#ffe4a7!important;
-  backdrop-filter:blur(14px)!important;
-  -webkit-backdrop-filter:blur(14px)!important;
-  font-size:10px!important;
+  background:rgba(4,25,37,.62)!important;
+  color:#f7d98f!important;
+  backdrop-filter:blur(12px)!important;
+  -webkit-backdrop-filter:blur(12px)!important;
+  font-size:9.5px!important;
+  line-height:1!important;
   font-weight:850!important;
   letter-spacing:.12em!important;
+  text-shadow:none!important;
 }
 #view-today .hero h1{
   margin:0!important;
-  max-width:12em!important;
-  color:#fff!important;
-  font-family:"Fredoka","Avenir Next",system-ui,sans-serif!important;
-  font-size:clamp(31px,8.5vw,44px)!important;
+  max-width:none!important;
+  color:#fffaf0!important;
+  font-size:clamp(29px,7.6vw,39px)!important;
   line-height:1.02!important;
   font-weight:740!important;
   letter-spacing:-.035em!important;
-  text-shadow:0 5px 22px rgba(0,0,0,.44)!important;
+  text-align:center!important;
+  text-wrap:balance!important;
+  text-shadow:0 4px 18px rgba(0,0,0,.54)!important;
 }
 #view-today .hero-copy>p:last-child{
-  margin:9px 0 0!important;
-  max-width:28em!important;
-  color:rgba(255,255,255,.82)!important;
-  font-size:clamp(13px,3.5vw,16px)!important;
-  line-height:1.38!important;
+  margin:7px auto 0!important;
+  max-width:30em!important;
+  color:rgba(255,255,255,.76)!important;
+  font-size:clamp(12px,3.15vw,14px)!important;
+  line-height:1.35!important;
   font-weight:560!important;
-  text-align:left!important;
+  text-align:center!important;
 }
 
+/* Weiterhören: normaler Fluss, kein verrutschtes Überlappen. */
 #view-today .resume{
   position:relative!important;
-  z-index:9!important;
-  width:calc(100% - 16px)!important;
-  min-height:106px!important;
-  margin:-24px 8px 0!important;
-  padding:15px 16px!important;
+  z-index:4!important;
+  width:100%!important;
+  min-height:96px!important;
+  margin:14px 0 0!important;
+  padding:13px 14px!important;
   display:grid!important;
-  grid-template-columns:60px minmax(0,1fr) 38px!important;
-  gap:14px!important;
+  grid-template-columns:54px minmax(0,1fr) 36px!important;
+  gap:12px!important;
   align-items:center!important;
-  border:1px solid rgba(255,225,155,.19)!important;
-  border-radius:27px!important;
-  background:linear-gradient(145deg,rgba(9,42,57,.97),rgba(5,28,41,.98))!important;
-  box-shadow:0 20px 38px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.045)!important;
+  border:1px solid rgba(241,205,123,.18)!important;
+  border-radius:25px!important;
+  background:
+    radial-gradient(circle at 8% 50%,rgba(241,205,123,.08),transparent 30%),
+    linear-gradient(145deg,rgba(8,42,57,.97),rgba(5,29,42,.98))!important;
+  box-shadow:0 15px 31px rgba(0,0,0,.20),inset 0 1px rgba(255,255,255,.035)!important;
 }
 #view-today .resume-icon{
-  width:58px!important;
-  height:58px!important;
-  border-radius:19px!important;
-  background-color:rgba(255,255,255,.06)!important;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)!important;
+  width:52px!important;height:52px!important;
+  border-radius:17px!important;
+  background-color:rgba(255,255,255,.055)!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)!important;
 }
-#view-today .resume-kicker{color:#e9c978!important;font-size:9px!important;letter-spacing:.13em!important}
-#view-today .resume strong{font-size:clamp(22px,5.8vw,28px)!important;color:#fffaf0!important}
-#view-today .resume #resumeText{font-size:clamp(12px,3.2vw,14px)!important;color:rgba(255,255,255,.66)!important}
+#view-today .resume-kicker{font-size:8.5px!important;letter-spacing:.13em!important;color:#e9c978!important}
+#view-today .resume strong{font-size:clamp(21px,5.6vw,27px)!important;line-height:1.02!important}
+#view-today .resume #resumeText{margin-top:5px!important;font-size:12px!important;color:rgba(255,255,255,.63)!important}
+#view-today .resume .go{width:34px!important;height:34px!important;font-size:24px!important}
+#view-today .resume-progress{height:4px!important;margin-top:7px!important}
 
+/* Die Startseite bleibt konsequent Audio-first. */
 #view-today .daily-journey,
 #view-today .choice.quiz,
 #view-today .knowledge-card,
 #view-today .gentle-note{display:none!important}
+
 #view-today .section-title{
-  margin:31px 2px 14px!important;
+  margin:27px 2px 13px!important;
   color:#fff8e8!important;
-  font-size:clamp(28px,7vw,36px)!important;
-  line-height:1.03!important;
-  font-weight:740!important;
-  letter-spacing:-.035em!important;
+  font-size:clamp(27px,7vw,34px)!important;
+  line-height:1.04!important;
+  font-weight:730!important;
+  letter-spacing:-.03em!important;
 }
 #view-today .big-choice-grid{
   display:grid!important;
   grid-template-columns:1fr!important;
-  gap:14px!important;
+  gap:12px!important;
 }
+
+/* HÖRWELTEN — echte lokale Bildmotive statt flacher Farbflächen. */
 #view-today .choice{
-  min-height:156px!important;
+  position:relative!important;
+  min-height:132px!important;
   display:grid!important;
-  grid-template-columns:72px minmax(0,1fr) 40px!important;
+  grid-template-columns:58px minmax(0,1fr) 36px!important;
+  grid-template-rows:auto auto!important;
   align-items:center!important;
-  gap:14px!important;
-  padding:19px 18px 19px 20px!important;
-  border:1px solid rgba(255,255,255,.11)!important;
-  border-radius:30px!important;
-  clip-path:inset(0 round 30px)!important;
-  box-shadow:0 18px 36px rgba(0,0,0,.20)!important;
+  column-gap:13px!important;
+  row-gap:4px!important;
+  padding:17px 16px!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  border-radius:27px!important;
+  clip-path:inset(0 round 27px)!important;
+  overflow:hidden!important;
+  background:#0a2b3b!important;
+  box-shadow:0 14px 30px rgba(0,0,0,.19)!important;
+  isolation:isolate!important;
 }
-#view-today .choice.story{background:linear-gradient(135deg,#6d453b 0%,#9e6659 52%,#643f42 100%)!important}
-#view-today .choice.quran{background:linear-gradient(135deg,#154e55 0%,#277d79 54%,#124351 100%)!important}
-#view-today .choice.dua{background:linear-gradient(135deg,#3a456f 0%,#6b6aa1 54%,#3d4169 100%)!important}
 #view-today .choice::before{
   content:""!important;
   position:absolute!important;
   inset:0!important;
-  background:
-    radial-gradient(circle at 12% 18%,rgba(255,255,255,.16),transparent 26%),
-    linear-gradient(118deg,rgba(255,255,255,.07),transparent 46%)!important;
-  pointer-events:none!important;
+  z-index:0!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  opacity:.96!important;
+  transform:scale(1.015)!important;
+  transition:transform .25s ease!important;
+}
+#view-today .choice.story::before{
+  background-image:
+    linear-gradient(90deg,rgba(17,20,24,.82) 0%,rgba(38,25,20,.68) 48%,rgba(38,25,20,.18) 100%),
+    url("/kids/assets/stories-home/prophets-v1133.webp?v=1136")!important;
+  background-position:center 48%!important;
+}
+#view-today .choice.quran::before{
+  background-image:
+    linear-gradient(90deg,rgba(3,30,35,.84) 0%,rgba(4,50,53,.62) 50%,rgba(4,50,53,.12) 100%),
+    url("/kids/assets/kids-art/quran-home-v1053.jpg")!important;
+  background-position:center 50%!important;
+}
+#view-today .choice.dua::before{
+  background-image:
+    linear-gradient(90deg,rgba(26,24,53,.84) 0%,rgba(45,41,82,.62) 50%,rgba(45,41,82,.12) 100%),
+    url("/kids/assets/kids-art/dua-home-v11.jpg")!important;
+  background-position:center 49%!important;
 }
 #view-today .choice::after{
   content:""!important;
   position:absolute!important;
-  inset:auto -30px -55px auto!important;
-  width:150px!important;
-  height:150px!important;
-  border-radius:50%!important;
-  background:rgba(255,255,255,.04)!important;
+  inset:0!important;
+  z-index:1!important;
   pointer-events:none!important;
+  border-radius:inherit!important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.055),transparent 34%,rgba(3,16,24,.15)),
+    radial-gradient(circle at 86% 50%,rgba(255,225,160,.09),transparent 31%)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.08)!important;
 }
+#view-today .choice:active::before{transform:scale(1.045)!important}
+#view-today .choice .icon,
+#view-today .choice strong,
+#view-today .choice small,
+#view-today .choice .arrow{position:relative!important;z-index:3!important}
 #view-today .choice .icon{
-  position:relative!important;
-  z-index:3!important;
-  width:66px!important;
-  height:66px!important;
+  grid-column:1!important;
+  grid-row:1 / 3!important;
+  width:56px!important;
+  height:56px!important;
   margin:0!important;
-  border-radius:22px!important;
-  background-size:76%!important;
+  align-self:center!important;
+  border-radius:18px!important;
+  background-size:74%!important;
   background-position:center!important;
   background-repeat:no-repeat!important;
-  background-color:rgba(6,22,31,.20)!important;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),0 10px 20px rgba(0,0,0,.12)!important;
+  background-color:rgba(5,20,29,.45)!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  box-shadow:0 8px 18px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.05)!important;
+  backdrop-filter:blur(10px)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
 }
 #view-today .choice strong{
-  position:relative!important;
-  z-index:3!important;
+  grid-column:2!important;
+  grid-row:1!important;
   align-self:end!important;
+  min-width:0!important;
   color:#fff!important;
-  font-size:clamp(26px,6.8vw,34px)!important;
-  line-height:1!important;
-  font-weight:740!important;
+  font-size:clamp(23px,6.2vw,30px)!important;
+  line-height:1.02!important;
+  font-weight:735!important;
   letter-spacing:-.025em!important;
-  text-shadow:0 3px 14px rgba(0,0,0,.33)!important;
+  text-shadow:0 3px 12px rgba(0,0,0,.60)!important;
 }
 #view-today .choice small{
-  position:relative!important;
-  z-index:3!important;
   grid-column:2!important;
+  grid-row:2!important;
   align-self:start!important;
-  margin-top:-34px!important;
-  padding-top:38px!important;
-  color:rgba(255,255,255,.80)!important;
-  font-size:clamp(13px,3.5vw,16px)!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  color:rgba(255,255,255,.82)!important;
+  font-size:clamp(12px,3.25vw,14px)!important;
   line-height:1.25!important;
-  font-weight:580!important;
-  text-shadow:none!important;
+  font-weight:590!important;
+  text-shadow:0 2px 8px rgba(0,0,0,.58)!important;
 }
 #view-today .choice .arrow{
-  position:relative!important;
-  z-index:3!important;
+  grid-column:3!important;
+  grid-row:1 / 3!important;
+  align-self:center!important;
+  justify-self:end!important;
   right:auto!important;
   bottom:auto!important;
-  width:38px!important;
-  height:38px!important;
-  border:1px solid rgba(255,255,255,.12)!important;
-  background:rgba(5,20,30,.24)!important;
-  color:#fff4d3!important;
-  font-size:26px!important;
+  width:34px!important;
+  height:34px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(255,255,255,.13)!important;
+  border-radius:50%!important;
+  background:rgba(4,20,29,.48)!important;
+  color:#ffe2a0!important;
+  font-size:23px!important;
+  backdrop-filter:blur(10px)!important;
+  -webkit-backdrop-filter:blur(10px)!important;
+}
+
+/* Mobile-Abstände für die feste Navigation. */
+#view-today{padding-bottom:14px!important}
+.shell{padding-bottom:calc(126px + env(safe-area-inset-bottom))!important}
+
+@media(max-width:380px){
+  #view-today .hero{min-height:408px!important}
+  #view-today .kids-wordmark{top:max(43px,calc(env(safe-area-inset-top,0px) + 20px))!important;padding-inline:18px!important}
+  #view-today .wm-dar-line{font-size:22px!important;letter-spacing:.085em!important;text-indent:.085em!important}
+  #view-today .wm-kids{font-size:60px!important}
+  #view-today .hero-copy{left:18px!important;right:18px!important;bottom:22px!important}
+  #view-today .hero h1{font-size:27px!important}
+  #view-today .choice{min-height:126px!important;grid-template-columns:52px minmax(0,1fr) 32px!important;padding:15px 14px!important;column-gap:11px!important}
+  #view-today .choice .icon{width:50px!important;height:50px!important;border-radius:16px!important}
+  #view-today .choice strong{font-size:22px!important}
 }
 @media(min-width:700px){
-  #view-today .hero{min-height:570px!important}
-  #view-today .kids-wordmark{top:max(56px,calc(env(safe-area-inset-top,0px) + 36px))!important}
-  #view-today .wm-dar-line{font-size:37px!important}
-  #view-today .wm-kids{font-size:104px!important}
-  #view-today .hero-copy{left:34px!important;right:34px!important;bottom:38px!important}
-  #view-today .resume{max-width:760px!important;margin:-30px auto 0!important}
-  #view-today .big-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}
+  #view-today .hero{min-height:500px!important;border-radius:0 0 42px 42px!important}
+  #view-today .kids-wordmark{top:max(60px,calc(env(safe-area-inset-top,0px) + 34px))!important}
+  #view-today .wm-dar-line{font-size:36px!important}
+  #view-today .wm-kids{font-size:100px!important}
+  #view-today .hero-copy{left:40px!important;right:40px!important;bottom:34px!important}
+  #view-today .hero h1{font-size:42px!important}
+  #view-today .resume{max-width:760px!important;margin:16px auto 0!important}
+  #view-today .big-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}
   #view-today .choice{
-    min-height:210px!important;
-    grid-template-columns:1fr 40px!important;
-    grid-template-rows:70px auto auto!important;
-    padding:22px!important;
+    min-height:188px!important;
+    grid-template-columns:1fr 36px!important;
+    grid-template-rows:58px auto auto!important;
+    padding:20px!important;
   }
-  #view-today .choice .icon{grid-column:1!important;grid-row:1!important}
-  #view-today .choice .arrow{grid-column:2!important;grid-row:1!important;justify-self:end!important}
-  #view-today .choice strong{grid-column:1 / -1!important;grid-row:2!important;align-self:end!important;font-size:29px!important}
-  #view-today .choice small{grid-column:1 / -1!important;grid-row:3!important;margin:6px 0 0!important;padding:0!important;font-size:14px!important}
-}
-@media(max-width:380px){
-  #view-today .hero{min-height:420px!important}
-  #view-today .wm-dar-line{font-size:20px!important}
-  #view-today .wm-kids{font-size:54px!important}
-  #view-today .hero h1{font-size:29px!important}
-  #view-today .choice{min-height:144px!important;grid-template-columns:62px minmax(0,1fr) 36px!important;padding:17px!important}
-  #view-today .choice .icon{width:58px!important;height:58px!important;border-radius:19px!important}
-  #view-today .choice strong{font-size:24px!important}
+  #view-today .choice .icon{grid-column:1!important;grid-row:1!important;width:54px!important;height:54px!important}
+  #view-today .choice .arrow{grid-column:2!important;grid-row:1!important}
+  #view-today .choice strong{grid-column:1 / -1!important;grid-row:2!important;font-size:27px!important}
+  #view-today .choice small{grid-column:1 / -1!important;grid-row:3!important;font-size:13px!important}
 }
 @media(prefers-reduced-motion:reduce){
-  #view-today .hero::before,#view-today .wm-kids span{animation:none!important}
+  #view-today .hero::before,
+  #view-today .hero .cloud,
+  #view-today .kids-wordmark::before,
+  #view-today .wm-dar-line,
+  #view-today .wm-kids span{animation:none!important}
 }
 </style>
 \n</html>
