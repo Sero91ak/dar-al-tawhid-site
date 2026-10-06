@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1205";
-const KIDS_BUILD_ID="kids-shell-v113-deen-photoreal1205";
+const CACHE_NAME="dar-al-tawhid-kids-v1206";
+const KIDS_BUILD_ID="kids-shell-v113-deen-photoreal1206";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -48,13 +48,13 @@ const CORE_PRECACHE=[
   "/kids/deen-lessons.css?v=2",
   "/kids/deen-lessons.js?v=2",
   "/kids/data/deen-lessons.json?v=3",
-  "/kids/assets/deen/deen-entry.jpg?v=1205",
-  "/kids/assets/deen/tawhid.jpg?v=1205",
-  "/kids/assets/deen/iman.jpg?v=1205",
-  "/kids/assets/deen/asma-sifat.jpg?v=1205",
-  "/kids/assets/deen/ibadah.jpg?v=1205",
-  "/kids/assets/deen/adab-akhlaq.jpg?v=1205",
-  "/kids/assets/deen/akhirah.jpg?v=1205",
+  "/kids/assets/deen/deen-entry.jpg?v=1206",
+  "/kids/assets/deen/tawhid.jpg?v=1206",
+  "/kids/assets/deen/iman.jpg?v=1206",
+  "/kids/assets/deen/asma-sifat.jpg?v=1206",
+  "/kids/assets/deen/ibadah.jpg?v=1206",
+  "/kids/assets/deen/adab-akhlaq.jpg?v=1206",
+  "/kids/assets/deen/akhirah.jpg?v=1206",
   "/kids/data/dua-kids.json",
   "/kids/data/verified-content.json",
   "/kids/prophet-stories.css?v=42",
