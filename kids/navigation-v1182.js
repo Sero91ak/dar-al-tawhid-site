@@ -163,36 +163,36 @@
 
   function descriptorFor(target){
     if(!target||!target.closest)return null;
-    var el=target.closest("button,a,[data-go],[data-story],[data-ps-id],[data-ms-id],[data-sy-id],[data-gh-id]");
+    var el=target.closest("button,a,[role='button'],[data-go],[data-story],[data-ps-id],[data-ms-id],[data-sy-id],[data-gh-id],[data-surah],[data-quran-ref]");
     if(!el)return null;
     var nav=el.closest(".nav-btn[data-target]");
-    if(nav)return {type:"tab",target:nav.dataset.target};
+    if(nav)return {type:"tab",target:nav.dataset.target,element:nav};
 
     var go=el.closest("[data-go]");
     if(go){
-      if(go.id)return {type:"click-id",id:go.id};
-      return {type:"tab",target:go.dataset.go};
+      if(go.id)return {type:"click-id",id:go.id,element:go};
+      return {type:"tab",target:go.dataset.go,element:go};
     }
 
-    if(el.id==="psProphetEntry")return {type:"ps-library"};
-    if(el.id==="msEntry")return {type:"ms-library"};
-    if(el.id==="syEntry")return {type:"sy-library"};
+    if(el.id==="psProphetEntry")return {type:"ps-library",element:el};
+    if(el.id==="msEntry")return {type:"ms-library",element:el};
+    if(el.id==="syEntry")return {type:"sy-library",element:el};
 
     var ps=el.closest("[data-ps-id]");
-    if(ps)return {type:"ps-story",id:ps.dataset.psId};
+    if(ps)return {type:"ps-story",id:ps.dataset.psId,element:ps};
     var ms=el.closest("[data-ms-id]");
-    if(ms)return {type:"ms-story",id:ms.dataset.msId};
+    if(ms)return {type:"ms-story",id:ms.dataset.msId,element:ms};
     var sy=el.closest("[data-sy-id]");
-    if(sy)return {type:"sy-story",id:sy.dataset.syId};
+    if(sy)return {type:"sy-story",id:sy.dataset.syId,element:sy};
     var shortStory=el.closest("[data-story]");
-    if(shortStory)return {type:"short-story",id:shortStory.dataset.story};
+    if(shortStory)return {type:"short-story",id:shortStory.dataset.story,element:shortStory};
     var gh=el.closest("[data-gh-id]");
     if(gh){
       var cat=q(".gh-category.active[data-gh-cat]");
-      return {type:"gh-story",id:gh.dataset.ghId,cat:cat&&cat.dataset.ghCat||"prophets"};
+      return {type:"gh-story",id:gh.dataset.ghId,cat:cat&&cat.dataset.ghCat||"prophets",element:gh};
     }
-    if(el.id)return {type:"click-id",id:el.id};
-    return null;
+    if(el.id)return {type:"click-id",id:el.id,element:el};
+    return {type:"element",element:el};
   }
 
   function isBackControl(target){
@@ -278,6 +278,9 @@
     if(desc.type==="tab"){
       var nav=q('.nav-btn[data-target="'+CSS.escape(desc.target)+'"]');
       if(nav){nav.click();return true}
+    }
+    if(desc.element&&desc.element.isConnected){
+      try{desc.element.click();return true}catch(_){}
     }
     if(desc.type==="ps-library"&&window.DARKidsProphetStories?.openLibrary){window.DARKidsProphetStories.openLibrary();return true}
     if(desc.type==="ps-story"&&window.DARKidsProphetStories?.open){window.DARKidsProphetStories.open(desc.id);return true}
