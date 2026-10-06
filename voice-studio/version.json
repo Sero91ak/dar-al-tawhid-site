@@ -1,6 +1,6 @@
 {
   "version": "2.9.120",
-  "updatedAt": "2026-10-05T14:55:00+02:00",
+  "updatedAt": "2026-10-06",
   "deployTrigger": "voice-studio-2.9.120-single-master-stories",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
@@ -1505,7 +1505,7 @@
   },
   "mubashshirunStories": {
     "enabled": true,
-    "version": 7,
+    "version": 9,
     "count": 10,
     "preparedScripts": 10,
     "source": "/kids/data/mubashshirun-stories.json",
@@ -1522,7 +1522,7 @@
     "output": "kids/assets/mubashshirun-story-audio/<sahabi>/master.m4a",
     "systemVoiceFallback": false,
     "sourcePolicy": "Qurʾān general praise separated from individual authentic Sunnah; no invented dialogue or legends",
-    "sourceDataVersion": 7,
+    "sourceDataVersion": 9,
     "storyTextStandard": "kids-story-single-master-v4",
     "audioRefreshRequired": true,
     "uniqueMasterTexts": 10,
@@ -1539,12 +1539,22 @@
       "4-5",
       "6-8",
       "9-10"
-    ]
+    ],
+    "ownerOriginalAudioPolicy": "preserve-uploaded-bytes-no-transcode",
+    "abuBakrOwnerAudio": {
+      "status": "audio-complete",
+      "codec": "mp3",
+      "bitRateKbps": 128,
+      "bytes": 5722498,
+      "sha256": "485f33a8c0e64c82ed6390df22b739559ca75e1c5bcbc894c6df717783469c26",
+      "target": "/kids/assets/mubashshirun-story-audio/abu-bakr/master.mp3",
+      "transcoded": false
+    }
   },
   "mubashshirun": {
     "enabled": true,
     "items": 10,
-    "dataVersion": 7,
+    "dataVersion": 9,
     "bundleVersion": 10,
     "sourcePolicy": "Qurʾān + authentic Sunnah + source-separated",
     "visualEvidencePolicy": "historical approximation only; no claimed portrait or individually attested wardrobe",
@@ -1898,9 +1908,17 @@
     "source": "/kids/data/sahabiyyat-stories.json",
     "currentMasterWordRange": "884–993",
     "sameMasterAcrossAges": true,
-    "masterDataVersion": 23,
-    "kidsDataVersion": 23,
-    "allAgeSlotsUseIdenticalMaster": true
+    "masterDataVersion": 27,
+    "kidsDataVersion": 27,
+    "allAgeSlotsUseIdenticalMaster": true,
+    "ownerOriginalAudioPolicy": "preserve-uploaded-bytes-no-transcode",
+    "khadijahOwnerAudio": true,
+    "khadijahOwnerAudioStatus": "audio-complete",
+    "khadijahOwnerAudioDurationSec": 384.287313,
+    "khadijahOwnerAudioMasterAgeRange": "4-10",
+    "khadijahOwnerAudioCodec": "mp3-128k-mono-original",
+    "khadijahOwnerAudioTarget": "/kids/assets/sahabiyyat-story-audio/khadijah/master.mp3",
+    "khadijahOwnerAudioSha256": "68b44b569ca17d5f2496a453f070e11989a2076ed52751034aa84eb612aeb663"
   },
   "engineConnectionRepair": {
     "enabled": true,
