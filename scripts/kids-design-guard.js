@@ -49,6 +49,34 @@ function runKidsDesignGuard() {
   if (!html.includes("kid-icon") || !html.includes("function kidsIconMarkup")) {
     failed += fail(`${KIDS_HTML}: Icon-System kidsIconMarkup/kid-icon fehlt`);
   }
+  if (!/KIDS_WHOLE_CARD_TAP/.test(doc)) {
+    failed += fail(`${KIDS_DOC}: Whole-Card-Tap-Regel fehlt`);
+  }
+  if (!/KIDS_NO_PRECLICK_DURATION/.test(doc)) {
+    failed += fail(`${KIDS_DOC}: Pre-Click-Dauer/Alter-Regel fehlt`);
+  }
+  if (!html.includes("/kids/kids-touch-rail.css?v=7")) {
+    failed += fail(`${KIDS_HTML}: globales Karten-Interaktionssystem v7 fehlt`);
+  }
+  const forbiddenStaticArrowMarkup = [
+    '<span class="arrow">›</span>',
+    '<div class="go">›</div>',
+    '<span class="kgo">›</span>',
+    '<div class="fgo">›</div>'
+  ];
+  for (const marker of forbiddenStaticArrowMarkup) {
+    if (html.includes(marker)) failed += fail(`${KIDS_HTML}: permanente Karten-Pfeil-Markup verboten: ${marker}`);
+  }
+  const runtimeFiles = [
+    "kids/prophet-stories.js",
+    "kids/mubashshirun-stories.js",
+    "kids/sahabiyyat-stories.js"
+  ];
+  for (const rel of runtimeFiles) {
+    const body = fs.readFileSync(path.join(ROOT, rel), "utf8");
+    if (/class="(?:ps|ms)-row-go/.test(body)) failed += fail(`${rel}: Vorschau-Pfeil verboten`);
+    if (/class="(?:ps|ms)-row-meta/.test(body)) failed += fail(`${rel}: Laufzeit/Alter vor dem Öffnen verboten`);
+  }
   // Common UI emojis must not be used as symbols in the Kids shell.
   const banned = ["🎧", "🌙", "☀️", "❤️", "📚", "👨‍👩‍👧", "🕌", "⭐️", "🌟", "🙏"];
   for (const e of banned) {
@@ -63,7 +91,7 @@ function runKidsDesignGuard() {
       failed += fail(`${f} muss eine echte PNG-Datei sein (kein JPEG mit .png-Endung)`);
     }
   }
-  if (!failed) ok("Kids Design (Edge-to-Edge, Glass-Nav, keine Emojis, PNG-Icons)");
+  if (!failed) ok("Kids Design (Edge-to-Edge, Glass-Nav, Whole-Card-Tap, keine Pre-Click-Dauer, keine Emojis, PNG-Icons)");
   return failed;
 }
 
