@@ -68,11 +68,11 @@ function runKidsDesignGuard() {
     failed += fail(`${KIDS_HTML}: globales Karten-Interaktionssystem v9 fehlt`);
   }
 
-  // Approved start hero reference (V1198): keep the exact static scene and
+  // Approved start hero reference (V1199): keep the exact static scene and
   // iOS-safe real-text brand from regressing into video/camera motion or clipped SVG text.
   const homeHeroNeedles = [
-    "kids-home-reference-exact-v1198",
-    "/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1198",
+    "kids-home-reference-exact-v1199",
+    "/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1199",
     "https://use.typekit.net/jka5jda.css",
     "class=\"wm-dar-safe\"",
     "margin:calc(-1 * var(--safe-top)) calc(50% - 50vw) 0!important"
@@ -80,8 +80,8 @@ function runKidsDesignGuard() {
   for (const n of homeHeroNeedles) {
     if (!html.includes(n)) failed += fail(`${KIDS_HTML}: Startseiten-Hero Referenz fehlt: ${n}`);
   }
-  if (!/Startseiten-Hero – verbindliche Referenz \(V1198\)/.test(doc)) {
-    failed += fail(`${KIDS_DOC}: verbindliche V1198-Startseitenreferenz fehlt`);
+  if (!/Startseiten-Hero – verbindliche Referenz \(V1199\)/.test(doc)) {
+    failed += fail(`${KIDS_DOC}: verbindliche V1199-Startseitenreferenz fehlt`);
   }
   const forbiddenStaticArrowMarkup = [
     '<span class="arrow">›</span>',
@@ -116,7 +116,7 @@ function runKidsDesignGuard() {
       failed += fail(`${f} muss eine echte PNG-Datei sein (kein JPEG mit .png-Endung)`);
     }
   }
-  if (!failed) ok("Kids Design (Edge-to-Edge, V1198-Referenzhero, Adobe-Cinzel-Wortmarke, Glass-Nav, Whole-Card-Tap, keine Pre-Click-Dauer, keine Emojis, PNG-Icons)");
+  if (!failed) ok("Kids Design (Edge-to-Edge, V1199-Referenzhero, Adobe-Cinzel-Wortmarke, Glass-Nav, Whole-Card-Tap, keine Pre-Click-Dauer, keine Emojis, PNG-Icons)");
   return failed;
 }
 
