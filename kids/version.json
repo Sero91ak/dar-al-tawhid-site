@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v100-audio-core1173",
-  "label": "KIDS · V1.08.00",
-  "releasedAt": "2026-10-06T07:12:00+02:00",
-  "note": "Audio-Core V1.08.00 live release metadata synchronized with router, manifest, headers and Story-Hub v21. This fixes the failed Kids live deployment that kept the older app visible.",
+  "buildId": "kids-shell-v101-home-audio1174",
+  "label": "KIDS · V1.08.01",
+  "releasedAt": "2026-10-06T07:18:00+02:00",
+  "note": "Startseite sichtbar neu aufgebaut: großer ruhiger DĀR AL TAWḤĪD KIDS Hero, Audio-first Weiterhören und nur drei klare Hörwelten: Hörbücher, Qurʾān Player und Duʿāʾ. Quiz/Tagesreise/Wissenskarte sind auf der Startseite ausgeblendet; Alif-Bāʾ bleibt aus dem Runtime-Bereich entfernt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1173",
+    "serviceWorkerCache": "v1174",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -703,7 +703,7 @@
     "homeAudioFirst": true,
     "homeUnifiedResume": "audiobook-or-quran-v1170",
     "homeResumeProgress": true,
-    "homeHeroMotion": "subtle-premium-v1170",
+    "homeHeroMotion": "calm-cinematic-v1174",
     "homePrimaryWorlds": [
       "stories",
       "quran",
@@ -712,10 +712,14 @@
     "duaOwnerVoice": "recovered-existing-assets-v1171",
     "duaVoicePaidGenerations": 0,
     "duaVoiceEntries": 10,
-    "homeAudioCore": "v1173",
+    "homeAudioCore": "v1174",
     "alphabetRuntimeRemoved": true,
-    "alphabetArchivedAssetsRetained": true
+    "alphabetArchivedAssetsRetained": true,
+    "homeHeroBrand": "large-premium-wordmark-v1174",
+    "homeQuizVisible": false,
+    "homeDailyJourneyVisible": false,
+    "homeKnowledgeCardVisible": false
   },
-  "updatedAt": "2026-10-05",
-  "deployTrigger": "2026-10-05T23:44:00+02:00"
-}
+  "updatedAt": "2026-10-06",
+  "deployTrigger": "2026-10-06T07:18:00+02:00"
+}\n
