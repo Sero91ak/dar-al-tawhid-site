@@ -8215,4 +8215,189 @@ html[data-view="stories"] #view-stories > :last-child{
   #view-today .choice::after{animation:none!important}
 }
 </style>
-\n</html>
+\n<style id="kids-home-wordmark-v1177">
+/* V1177 — robuste Hero-Zentrierung für iOS/PWA + klarere Markenanimation. */
+
+/* Wichtig: dieselbe Geometrie wie die ältere absolute Zentrierung verwenden.
+   So kann kein alter translateX(-50%)-Rest die Marke halb aus dem Viewport schieben. */
+#view-today .kids-wordmark{
+  position:absolute!important;
+  z-index:8!important;
+  top:max(52px,calc(env(safe-area-inset-top,0px) + 24px))!important;
+  left:50%!important;
+  right:auto!important;
+  width:min(calc(100vw - 24px),430px)!important;
+  max-width:calc(100vw - 24px)!important;
+  margin:0!important;
+  padding:0 10px!important;
+  box-sizing:border-box!important;
+  transform:translate3d(-50%,0,0)!important;
+  translate:none!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
+  overflow:visible!important;
+  text-align:center!important;
+  pointer-events:none!important;
+}
+
+/* DĀR AL TAWḤĪD: groß, vollständig, ruhiger Gold-Shimmer statt statischer Textzeile. */
+#view-today .wm-dar-line{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-align:center!important;
+  font-family:"Fredoka","Avenir Next",system-ui,sans-serif!important;
+  font-size:clamp(23px,6.1vw,31px)!important;
+  line-height:1!important;
+  font-weight:790!important;
+  letter-spacing:.095em!important;
+  text-indent:.095em!important;
+  color:#fff2c8!important;
+  background:linear-gradient(96deg,#fff8df 0%,#e5b958 32%,#fff5cf 49%,#d7a641 67%,#fff8df 100%)!important;
+  background-size:220% 100%!important;
+  background-position:0% 50%!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  text-shadow:0 5px 18px rgba(0,0,0,.40)!important;
+  filter:drop-shadow(0 0 10px rgba(242,202,112,.16))!important;
+  animation:darGoldCinema1177 6.4s ease-in-out infinite!important;
+}
+@keyframes darGoldCinema1177{
+  0%,100%{background-position:0% 50%;filter:drop-shadow(0 0 8px rgba(242,202,112,.12));transform:translateY(0)}
+  48%{background-position:100% 50%;filter:drop-shadow(0 0 15px rgba(242,202,112,.30));transform:translateY(-1px)}
+}
+
+/* KIDS: alle vier Buchstaben bleiben garantiert im eigenen zentrierten Flex-Container. */
+#view-today .wm-kids{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  width:auto!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0 auto!important;
+  padding:0 4px 5px!important;
+  display:inline-flex!important;
+  flex:none!important;
+  justify-content:center!important;
+  align-items:flex-end!important;
+  gap:.025em!important;
+  overflow:visible!important;
+  transform:none!important;
+  translate:none!important;
+  font-family:"Fredoka","Avenir Next",system-ui,sans-serif!important;
+  font-size:clamp(66px,18vw,92px)!important;
+  font-weight:790!important;
+  line-height:.84!important;
+  letter-spacing:-.055em!important;
+  filter:drop-shadow(0 10px 22px rgba(0,0,0,.34))!important;
+}
+#view-today .wm-kids span{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  flex:0 0 auto!important;
+  display:block!important;
+  margin:0!important;
+  padding:0!important;
+  -webkit-text-fill-color:currentColor!important;
+  -webkit-text-stroke:3px rgba(255,255,255,.62)!important;
+  paint-order:stroke fill!important;
+  transform-origin:50% 100%!important;
+  will-change:transform!important;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.56),
+    0 5px 0 rgba(32,20,8,.14),
+    0 12px 20px rgba(3,17,26,.36)!important;
+  animation:kidsBalloonV1177 2.85s cubic-bezier(.34,.08,.29,1) infinite!important;
+}
+#view-today .wm-kids .k{color:#ffd45e!important;rotate:-7deg!important;animation-delay:0s!important}
+#view-today .wm-kids .i{color:#62d4ff!important;rotate:5deg!important;animation-delay:.13s!important}
+#view-today .wm-kids .d{color:#ff7ab8!important;rotate:-4deg!important;animation-delay:.26s!important}
+#view-today .wm-kids .s{color:#74e08f!important;rotate:7deg!important;animation-delay:.39s!important}
+@keyframes kidsBalloonV1177{
+  0%,16%,100%{transform:translate3d(0,0,0) scale(1,1)}
+  27%{transform:translate3d(0,-8px,0) scale(1.025,.978)}
+  36%{transform:translate3d(0,-14px,0) scale(1.035,.965)}
+  48%{transform:translate3d(0,2px,0) scale(.982,1.032)}
+  58%{transform:translate3d(0,-3px,0) scale(1.012,.99)}
+  68%{transform:translate3d(0,0,0) scale(1,1)}
+}
+
+/* Der Hero darf intern nichts horizontal über den Bildschirm hinaustragen. */
+#view-today .hero{
+  max-width:none!important;
+  contain:paint!important;
+}
+#view-today .hero-copy{
+  left:14px!important;
+  right:14px!important;
+  width:auto!important;
+  max-width:none!important;
+  box-sizing:border-box!important;
+}
+#view-today .hero-salam,
+#view-today .hero h1,
+#view-today .hero-copy>p:last-child{
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:clip!important;
+}
+#view-today .hero-salam{font-size:clamp(10.2px,2.65vw,12.2px)!important}
+#view-today .hero h1{font-size:clamp(24px,6.25vw,31px)!important}
+#view-today .hero-copy>p:last-child{font-size:clamp(10.2px,2.65vw,12.2px)!important}
+
+/* Cinema-Bewegung etwas klarer wahrnehmbar, aber weiter ruhig. */
+#view-today .hero::before{
+  animation:homeCinemaPan1177 20s cubic-bezier(.45,.05,.45,.95) infinite alternate!important;
+}
+@keyframes homeCinemaPan1177{
+  0%{transform:scale(1.045) translate3d(-1.2%,.35%,0)}
+  50%{transform:scale(1.078) translate3d(.35%,-.8%,0)}
+  100%{transform:scale(1.105) translate3d(1.5%,-1.45%,0)}
+}
+#view-today .hero .arch{animation-duration:10.8s!important}
+#view-today .hero .city{animation-duration:3.9s!important}
+
+/* Mehr Platz unter den Hörwelten, damit die feste Navigation nie das letzte Ziel blockiert. */
+.shell{
+  padding-bottom:calc(158px + env(safe-area-inset-bottom))!important;
+  scroll-padding-bottom:calc(158px + env(safe-area-inset-bottom))!important;
+}
+#view-today .big-choice-grid{padding-bottom:8px!important}
+
+@media(max-width:380px){
+  #view-today .kids-wordmark{
+    width:min(calc(100vw - 18px),410px)!important;
+    max-width:calc(100vw - 18px)!important;
+    top:max(47px,calc(env(safe-area-inset-top,0px) + 20px))!important;
+    padding-inline:7px!important;
+  }
+  #view-today .wm-dar-line{font-size:21px!important;letter-spacing:.075em!important;text-indent:.075em!important}
+  #view-today .wm-kids{font-size:61px!important;gap:.018em!important}
+  #view-today .hero-copy{left:10px!important;right:10px!important}
+  #view-today .hero-salam{font-size:9.2px!important}
+  #view-today .hero h1{font-size:22.2px!important}
+  #view-today .hero-copy>p:last-child{font-size:9.2px!important}
+}
+@media(min-width:700px){
+  #view-today .kids-wordmark{width:min(calc(100vw - 48px),560px)!important;max-width:560px!important}
+  #view-today .wm-dar-line{font-size:36px!important}
+  #view-today .wm-kids{font-size:102px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .wm-dar-line,
+  #view-today .wm-kids span,
+  #view-today .hero::before{animation:none!important}
+}
+</style>
+</html>
