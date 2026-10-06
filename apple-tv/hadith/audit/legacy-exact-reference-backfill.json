@@ -1,0 +1,52 @@
+{
+  "project": "DĀR AL TAWḤĪD – Legacy Exact Reference Backfill",
+  "status": "in-progress",
+  "ruleVersion": 7,
+  "policy": {
+    "exactPrimaryReferenceRequired": true,
+    "exactSharhReferenceRequired": true,
+    "noEstimatedPages": true,
+    "onlyVerifiedPrintPages": true,
+    "globalSourceOfTruth": "/apple-tv/hadith/"
+  },
+  "initialAudit": {
+    "note": "GitHub code search reached its top-100 result cap for multiple null-field queries; therefore these are minimum backlog counts, not exact totals.",
+    "atLeast": {
+      "sourcePageNull": 100,
+      "sourceVolumeNull": 100,
+      "sourceChapterNull": 100,
+      "sourceEditionNull": 100,
+      "sharhPageNull": 100,
+      "sharhVolumeNull": 100,
+      "sharhEditionNull": 100
+    }
+  },
+  "completedRecords": [
+    {
+      "id": "HAD-0003",
+      "status": "exact-primary-and-sharh-backfilled"
+    },
+    {
+      "id": "HAD-0007",
+      "status": "exact-primary-and-sharh-backfilled"
+    },
+    {
+      "id": "HAD-0010",
+      "status": "exact-primary-and-sharh-backfilled"
+    },
+    {
+      "id": "HAD-0026",
+      "status": "exact-primary-and-sharh-backfilled"
+    }
+  ],
+  "lastCompletedId": "HAD-0026",
+  "completedCount": 4,
+  "nextPriority": [
+    "HAD-0001",
+    "HAD-0002",
+    "HAD-0012",
+    "HAD-0014",
+    "HAD-0023",
+    "HAD-0033"
+  ]
+}
