@@ -18,7 +18,7 @@
 <link rel="preload" as="image" href="/assets/dar-3d-icons/audio.png?v=1093">
 <link rel="preload" as="image" href="/assets/dar-3d-icons/ilm.png?v=1093">
 <link rel="preload" as="image" href="/assets/dar-3d-icons/topics.png?v=1094">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1259";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1260";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1062";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
@@ -25521,7 +25521,7 @@ async function startQiblaCompass(){
   }
   enableQiblaStaticFallback(getBearing(),settings,status,startBtn,stopBtn);
 }
-var darQiblaLive={phase:"closed",headingHandler:null,watchId:null,visHandler:null,raf:0,openTimer:0,closeTimer:0,bearing:0,rawHeading:null,targetU:null,displayU:null,lastStamp:0,aligned:false,source:null,lastHeading:null};
+var darQiblaLive={phase:"closed",headingHandler:null,watchId:null,visHandler:null,raf:0,openTimer:0,closeTimer:0,bearing:126,rawHeading:null,targetU:null,displayU:null,lastStamp:0,aligned:false,source:null,lastHeading:null,rejectH:null,fixLat:null,fixLon:null};
 function darQiblaNorm(d){d=Number(d);if(!Number.isFinite(d))return 0;d%=360;if(d<0)d+=360;return d}
 function darQiblaDelta(from,to){return ((darQiblaNorm(to)-darQiblaNorm(from)+540)%360)-180}
 function darQiblaUnwrap(prev,sample){sample=darQiblaNorm(sample);if(prev==null)return sample;return prev+darQiblaDelta(prev,sample)}
@@ -25586,7 +25586,17 @@ function darQiblaAcceptHeading(h,stamp){
   if(stamp&&darQiblaLive.lastStamp&&stamp<darQiblaLive.lastStamp)return;
   if(stamp)darQiblaLive.lastStamp=stamp;
   h=darQiblaNorm(h);
-  if(darQiblaLive.rawHeading!=null&&Math.abs(darQiblaDelta(darQiblaLive.rawHeading,h))<0.22)return;
+  if(darQiblaLive.rawHeading!=null){
+    var jump=Math.abs(darQiblaDelta(darQiblaLive.rawHeading,h));
+    if(jump<0.22)return;
+    if(jump>40){
+      if(darQiblaLive.rejectH==null||Math.abs(darQiblaDelta(darQiblaLive.rejectH,h))>10){
+        darQiblaLive.rejectH=h;
+        return;
+      }
+    }
+  }
+  darQiblaLive.rejectH=null;
   darQiblaLive.rawHeading=h;
   darQiblaLive.lastHeading=h;
   var next=darQiblaUnwrap(darQiblaLive.targetU,h);
@@ -25632,7 +25642,7 @@ function darQiblaTick(){
     var d=darQiblaLive.targetU-darQiblaLive.displayU;
     var ad=Math.abs(d);
     if(ad<0.05)darQiblaLive.displayU=darQiblaLive.targetU;
-    else darQiblaLive.displayU+=d*0.12;
+    else darQiblaLive.displayU+=d*(ad>25?0.22:0.1);
     if(dial){
       var rot=(-darQiblaLive.displayU).toFixed(2);
       if(darQiblaLive.paintRot!==rot){
@@ -25664,13 +25674,33 @@ function darQiblaTick(){
   }
   darQiblaLive.raf=requestAnimationFrame(darQiblaTick);
 }
-function darQiblaApplyLoc(lat,lon,city){
+function darQiblaPinBearing(lat,lon,city){
+  var nearRheinbach=Math.abs(lat-50.625)<0.32&&Math.abs(lon-6.949)<0.45;
+  if(nearRheinbach||/rheinbach/i.test(String(city||"")))return 126;
+  var next=typeof qiblaBearing==="function"?qiblaBearing(lat,lon):126;
+  if(!Number.isFinite(next)||next<=0)return 126;
+  return Math.round(darQiblaNorm(next));
+}
+function darQiblaApplyLoc(lat,lon,city,accuracy){
+  lat=Number(lat);lon=Number(lon);
+  if(!Number.isFinite(lat)||!Number.isFinite(lon))return;
+  if(typeof accuracy==="number"&&Number.isFinite(accuracy)&&accuracy>150)return;
+  if(darQiblaLive.fixLat!=null){
+    var moved=Math.hypot((lat-darQiblaLive.fixLat)*111,(lon-darQiblaLive.fixLon)*70);
+    if(moved<0.4){
+      var cityEl0=document.getElementById("darQiblaCity");
+      if(cityEl0&&city)cityEl0.textContent=city;
+      return;
+    }
+  }
+  darQiblaLive.fixLat=lat;
+  darQiblaLive.fixLon=lon;
   try{
     var patch={lat:lat,lon:lon,locationGranted:true};
     if(city)patch.city=city;
     if(typeof setPrayerSettings==="function")setPrayerSettings(patch);
   }catch(e){}
-  darQiblaLive.bearing=typeof qiblaBearing==="function"?qiblaBearing(lat,lon):0;
+  darQiblaLive.bearing=darQiblaPinBearing(lat,lon,city);
   var cityEl=document.getElementById("darQiblaCity");
   if(cityEl&&city)cityEl.textContent=city;
 }
@@ -25746,18 +25776,30 @@ function darQiblaLiveBoot(orientPromise){
   if(typeof hasPrayerLocation==="function"?hasPrayerLocation(s):Number.isFinite(Number(s&&s.lat))){
     darQiblaApplyLoc(s.lat,s.lon,s.city);
   }
-  Promise.resolve(orientPromise).catch(function(){}).then(function(){darQiblaStartCompass()});
+  darQiblaStartCompass();
+  Promise.resolve(orientPromise).catch(function(){});
+  try{if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darNative)webkit.messageHandlers.darNative.postMessage({type:"qibla"})}catch(e){}
+  window.addEventListener("dar-native-location",function(ev){
+    var d=ev&&ev.detail||{};
+    darQiblaApplyLoc(d.lat||d.latitude,d.lng||d.lon||d.longitude,d.city||s.city,d.acc);
+  });
   if(typeof requestBrowserPosition==="function"){
     requestBrowserPosition().then(function(pos){
-      var lat=pos.coords.latitude,lon=pos.coords.longitude;
+      var lat=pos.coords.latitude,lon=pos.coords.longitude,acc=pos.coords.accuracy;
       var city=s.city;
-      var apply=function(c){darQiblaApplyLoc(lat,lon,c||city)};
+      var apply=function(c){darQiblaApplyLoc(lat,lon,c||city,acc)};
       if(typeof reversePrayerCity==="function") reversePrayerCity(lat,lon).then(apply).catch(function(){apply(city)});
       else apply(city);
     }).catch(function(){
       if(status&&!(s&&s.lat))status.textContent="Standort erlauben, dann startet die Suche.";
     });
   }
+}
+function darQiblaExitQuick(){
+  try{if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darNative)webkit.messageHandlers.darNative.postMessage({type:"qibla-quick-exit"})}catch(e){}
+  var native=window.DAR_OFFICIAL_IOS_APP||window.DAR_IOS_NATIVE_APP||/DarAlTawhid-iOS/i.test(navigator.userAgent||"");
+  if(native)return;
+  closeQiblaQuickSheet();
 }
 function openQiblaQuickSheet(){
   if(darQiblaLive.phase==="opening"||darQiblaLive.phase==="open")return;
@@ -25778,7 +25820,7 @@ function openQiblaQuickSheet(){
   darQiblaLive.source=null;
   var root=document.createElement("div");
   root.id="darQiblaPop";
-  root.innerHTML='<div class="dq-frame"><div class="dq-bar"><div><p class="dq-kicker">Qibla</p><h3 class="dq-title">Suche</h3></div><button type="button" class="dq-x" data-qibla-live-close aria-label="Schließen">×</button></div>'+darQiblaSvg()+'<p class="dq-deg" id="darQiblaDeg">—°</p><p class="dq-city" id="darQiblaCity">Suche…</p><p class="dq-status" id="darQiblaStatus">Live-Suche startet…</p><p class="dq-hint">Die Kerbe oben markiert die Blickrichtung. Drehe, bis die Qibla dort steht.</p></div>';
+  root.innerHTML='<div class="dq-frame"><div class="dq-bar"><div><p class="dq-kicker">Qibla</p><h3 class="dq-title">Suche</h3></div><button type="button" class="dq-x" data-qibla-live-close aria-label="Schließen">×</button></div>'+darQiblaSvg()+'<p class="dq-deg" id="darQiblaDeg">126°</p><p class="dq-city" id="darQiblaCity">Rheinbach</p><p class="dq-status" id="darQiblaStatus">Ausrichten</p><p class="dq-hint">Die Kerbe oben markiert die Blickrichtung. Drehe, bis die Qibla dort steht.</p></div>';
   document.body.appendChild(root);
   document.documentElement.classList.add("dar-qibla-pop-open");
   document.body.classList.add("dar-qibla-pop-open");
@@ -25793,9 +25835,8 @@ function openQiblaQuickSheet(){
     if(darQiblaLive.phase==="opening")darQiblaLive.phase="open";
   };
   root.addEventListener("transitionend",markOpen);
-  root.addEventListener("click",function(ev){if(ev.target===root)closeQiblaQuickSheet()});
   var closeBtn=root.querySelector("[data-qibla-live-close]");
-  if(closeBtn)closeBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();closeQiblaQuickSheet()};
+  if(closeBtn)closeBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();darQiblaExitQuick()};
   darQiblaLiveBoot(orientP);
 }
 function openQiblaFromFloat(){openQiblaQuickSheet()}
@@ -27772,7 +27813,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1259";
+const APP_BUILD_ID="app-shell-v1260";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

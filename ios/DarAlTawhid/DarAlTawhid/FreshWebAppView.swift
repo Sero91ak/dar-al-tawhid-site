@@ -436,6 +436,12 @@ struct WebAppView: UIViewRepresentable {
             let body = message.body as? [String: Any] ?? [:]
             switch message.name {
             case "darNative":
+                let kind = body["type"] as? String ?? ""
+                if kind == "qibla-quick-exit" {
+                    DarNativePermissions.shared.stopLiveQibla()
+                    UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                    return
+                }
                 DarNativePermissions.shared.handleWebMessage(message.body)
             case "darPushSettings":
                 DarPushNotifications.applyWebPrayerSettings(body)

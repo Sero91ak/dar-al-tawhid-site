@@ -76,6 +76,7 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darAppIcon")
         userContentController.add(context.coordinator, name: "darQuranNowPlaying")
         userContentController.add(context.coordinator, name: "darShareImage")
+        userContentController.add(context.coordinator, name: "darNative")
         let deviceId = DarPushNotifications.deviceId()
         let escapedDevice = deviceId
             .replacingOccurrences(of: "\\", with: "\\\\")
@@ -828,6 +829,7 @@ struct WebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushExternalId")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppIcon")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darQuranNowPlaying")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darNative")
             NotificationCenter.default.removeObserver(self)
         }
 
@@ -846,6 +848,10 @@ struct WebAppView: UIViewRepresentable {
             (function(){
               var hash=\(Self.jsString(hash));
               var hint=\(Self.jsString(hint));
+              if(hint==="qibla"){
+                if(typeof openQiblaFromFloat==="function"){openQiblaFromFloat();return;}
+                if(typeof openQiblaQuickSheet==="function"){openQiblaQuickSheet();return;}
+              }
               var view=String(hash||"").replace(/^#/,"");
               var views=view==="duas"?["duas","dua"]:view==="quran"?["quran"]:view==="prayer"?["prayer"]: [view];
               var opened=false;
@@ -862,14 +868,6 @@ struct WebAppView: UIViewRepresentable {
                 }
                 if(!opened){location.hash=hash;}
               }catch(e){location.hash=hash;}
-              if(hint==="qibla"){
-                setTimeout(function(){
-                  var el=document.getElementById("qiblaCompassWrap")||document.querySelector("[data-qibla],#qibla, .qibla-compass, .qibla-card");
-                  if(el) el.scrollIntoView({behavior:"smooth",block:"center"});
-                  var btn=document.querySelector('[href="#qibla"],[data-nav="qibla"],button[aria-label*="Qibla"]');
-                  if(btn){try{btn.click()}catch(e){}}
-                },450);
-              }
               if(hint==="search"){
                 setTimeout(function(){
                   var inp=document.querySelector('input[placeholder*="Suche nach Beitrag"],input[placeholder*="Sūrah, Āyah"]');
@@ -1111,6 +1109,17 @@ struct WebAppView: UIViewRepresentable {
         }
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            if message.name == "darNative" {
+                let body = message.body as? [String: Any] ?? [:]
+                if (body["type"] as? String) == "qibla-quick-exit" {
+                    DarNativePermissions.shared.stopLiveQibla()
+                    UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                    return
+                }
+                DarNativePermissions.shared.attach(webView: webView)
+                DarNativePermissions.shared.handleWebMessage(message.body)
+                return
+            }
             if message.name == "darShareImage" {
                 let body = message.body as? [String: Any] ?? [:]
                 Task { @MainActor in self.shareImageFromWeb(body) }

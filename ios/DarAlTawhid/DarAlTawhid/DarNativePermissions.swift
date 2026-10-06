@@ -10,6 +10,7 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
     private let motionManager = CMMotionManager()
     private weak var webView: WKWebView?
     private var pendingGeoDecisions: [(WKPermissionDecision) -> Void] = []
+    private var liveQibla = false
 
     func attach(webView: WKWebView) {
         self.webView = webView
@@ -20,15 +21,41 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
     func handleWebMessage(_ body: Any) {
         guard let dict = body as? [String: Any], let type = dict["type"] as? String else { return }
         switch type {
-        case "geolocation", "location", "qibla", "prayer":
+        case "geolocation", "location", "prayer":
             requestLocationIfNeeded()
+        case "qibla", "motion", "qibla-compass":
+            startLiveQibla()
+        case "qibla-stop":
+            stopLiveQibla()
         case "notifications", "push":
             DarPushNotifications.requestAuthorization()
-        case "motion", "qibla-compass":
-            warmUpMotion()
         default:
             break
         }
+    }
+
+    func startLiveQibla() {
+        liveQibla = true
+        switch locationManager.authorizationStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.distanceFilter = 20
+            locationManager.headingFilter = 1
+            locationManager.startUpdatingLocation()
+            if CLLocationManager.headingAvailable() {
+                locationManager.startUpdatingHeading()
+            }
+        default:
+            break
+        }
+    }
+
+    func stopLiveQibla() {
+        liveQibla = false
+        locationManager.stopUpdatingHeading()
+        locationManager.stopUpdatingLocation()
     }
 
     func decideGeolocation(_ decisionHandler: @escaping (WKPermissionDecision) -> Void) {
@@ -70,7 +97,7 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways:
-            manager.requestLocation()
+            if liveQibla { startLiveQibla() } else { manager.requestLocation() }
             flushGeoDecisions(.grant)
         case .denied, .restricted:
             flushGeoDecisions(.deny)
@@ -83,9 +110,16 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         guard let loc = locations.last else { return }
         let js = """
         window.__darNativeLocation={lat:\(loc.coordinate.latitude),lng:\(loc.coordinate.longitude),acc:\(loc.horizontalAccuracy)};
+        window.DAR_NATIVE_LOCATION=window.__darNativeLocation;
         window.dispatchEvent(new CustomEvent('dar-native-location',{detail:window.__darNativeLocation}));
         """
         webView?.evaluateJavaScript(js, completionHandler: nil)
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        let deg = newHeading.trueHeading >= 0 ? newHeading.trueHeading : newHeading.magneticHeading
+        guard deg >= 0 else { return }
+        webView?.evaluateJavaScript("window.DAR_NATIVE_HEADING=\(deg);", completionHandler: nil)
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
