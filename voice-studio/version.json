@@ -1505,7 +1505,7 @@
   },
   "mubashshirunStories": {
     "enabled": true,
-    "version": 10,
+    "version": 11,
     "count": 10,
     "preparedScripts": 10,
     "source": "/kids/data/mubashshirun-stories.json",
@@ -1522,7 +1522,7 @@
     "output": "kids/assets/mubashshirun-story-audio/<sahabi>/master.mp3",
     "systemVoiceFallback": false,
     "sourcePolicy": "Qurʾān general praise separated from individual authentic Sunnah; no invented dialogue or legends",
-    "sourceDataVersion": 10,
+    "sourceDataVersion": 11,
     "storyTextStandard": "kids-story-single-master-v4",
     "audioRefreshRequired": false,
     "uniqueMasterTexts": 10,
@@ -1560,12 +1560,13 @@
     "readAlongTimingValidated": true,
     "readAlongValidation": "paragraph-count parity + monotonic timing + audio-duration exact end + speech-rate sanity",
     "newV4MastersReady": 9,
-    "existingOwnerOriginalMastersReady": 1
+    "existingOwnerOriginalMastersReady": 1,
+    "readAlongMastersReady": 10
   },
   "mubashshirun": {
     "enabled": true,
     "items": 10,
-    "dataVersion": 10,
+    "dataVersion": 11,
     "bundleVersion": 10,
     "sourcePolicy": "Qurʾān + authentic Sunnah + source-separated",
     "visualEvidencePolicy": "historical approximation only; no claimed portrait or individually attested wardrobe",
@@ -1578,7 +1579,8 @@
     "legacyAgeSlots": 30,
     "ageSelectionInVoiceStudio": false,
     "audioStatus": "complete",
-    "readAlongTimingMode": "silence-aware-dynamic-paragraph-v1"
+    "readAlongTimingMode": "silence-aware-dynamic-paragraph-v1",
+    "readAlongMastersReady": 10
   },
   "updateAutoInstallOnLaunch": false,
   "engineProcessPolicy": "single-owner-launcher",

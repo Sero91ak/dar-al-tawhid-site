@@ -1,6 +1,6 @@
 {
-  "version": 10,
-  "updatedAt": "2026-10-06T21:27:33Z",
+  "version": 11,
+  "updatedAt": "2026-10-06T21:55:08Z",
   "title": "Die zehn al-Mubaššarūn",
   "subtitle": "Die zehn Gefährten, denen das Paradies angekündigt wurde",
   "policy": {
@@ -141,7 +141,105 @@
           "masterAudio": true,
           "masterAgeRange": "4-10",
           "localTarget": "/kids/assets/mubashshirun-story-audio/abu-bakr/master.mp3",
-          "age": "4-5"
+          "age": "4-5",
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.997
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.997,
+              "end": 26.516
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 26.516,
+              "end": 50.257
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 50.257,
+              "end": 80.573
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 80.573,
+              "end": 102.159
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 102.159,
+              "end": 129.767
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 129.767,
+              "end": 143.916
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 143.916,
+              "end": 164.739
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 164.739,
+              "end": 183.394
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 183.394,
+              "end": 201.14
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 201.14,
+              "end": 236.957
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 236.957,
+              "end": 259.23
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 259.23,
+              "end": 293.634
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 293.634,
+              "end": 318.894
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 318.894,
+              "end": 342.688
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 342.688,
+              "end": 344.63
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 344.63,
+              "end": 353.278
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 353.278,
+              "end": 356.598
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "alignmentGeneratedAt": "2026-10-06T21:55:08Z",
+          "timingSource": "owner-original-audio-silence-analysis",
+          "timingQaPassed": true,
+          "allAges": true
         },
         "6-8": {
           "status": "ready",
@@ -174,7 +272,105 @@
           "masterAudio": true,
           "masterAgeRange": "4-10",
           "localTarget": "/kids/assets/mubashshirun-story-audio/abu-bakr/master.mp3",
-          "age": "6-8"
+          "age": "6-8",
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.997
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.997,
+              "end": 26.516
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 26.516,
+              "end": 50.257
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 50.257,
+              "end": 80.573
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 80.573,
+              "end": 102.159
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 102.159,
+              "end": 129.767
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 129.767,
+              "end": 143.916
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 143.916,
+              "end": 164.739
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 164.739,
+              "end": 183.394
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 183.394,
+              "end": 201.14
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 201.14,
+              "end": 236.957
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 236.957,
+              "end": 259.23
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 259.23,
+              "end": 293.634
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 293.634,
+              "end": 318.894
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 318.894,
+              "end": 342.688
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 342.688,
+              "end": 344.63
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 344.63,
+              "end": 353.278
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 353.278,
+              "end": 356.598
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "alignmentGeneratedAt": "2026-10-06T21:55:08Z",
+          "timingSource": "owner-original-audio-silence-analysis",
+          "timingQaPassed": true,
+          "allAges": true
         },
         "9-10": {
           "status": "ready",
@@ -207,7 +403,105 @@
           "masterAudio": true,
           "masterAgeRange": "4-10",
           "localTarget": "/kids/assets/mubashshirun-story-audio/abu-bakr/master.mp3",
-          "age": "9-10"
+          "age": "9-10",
+          "timings": [
+            {
+              "paragraphIndex": 0,
+              "start": 0.0,
+              "end": 3.997
+            },
+            {
+              "paragraphIndex": 1,
+              "start": 3.997,
+              "end": 26.516
+            },
+            {
+              "paragraphIndex": 2,
+              "start": 26.516,
+              "end": 50.257
+            },
+            {
+              "paragraphIndex": 3,
+              "start": 50.257,
+              "end": 80.573
+            },
+            {
+              "paragraphIndex": 4,
+              "start": 80.573,
+              "end": 102.159
+            },
+            {
+              "paragraphIndex": 5,
+              "start": 102.159,
+              "end": 129.767
+            },
+            {
+              "paragraphIndex": 6,
+              "start": 129.767,
+              "end": 143.916
+            },
+            {
+              "paragraphIndex": 7,
+              "start": 143.916,
+              "end": 164.739
+            },
+            {
+              "paragraphIndex": 8,
+              "start": 164.739,
+              "end": 183.394
+            },
+            {
+              "paragraphIndex": 9,
+              "start": 183.394,
+              "end": 201.14
+            },
+            {
+              "paragraphIndex": 10,
+              "start": 201.14,
+              "end": 236.957
+            },
+            {
+              "paragraphIndex": 11,
+              "start": 236.957,
+              "end": 259.23
+            },
+            {
+              "paragraphIndex": 12,
+              "start": 259.23,
+              "end": 293.634
+            },
+            {
+              "paragraphIndex": 13,
+              "start": 293.634,
+              "end": 318.894
+            },
+            {
+              "paragraphIndex": 14,
+              "start": 318.894,
+              "end": 342.688
+            },
+            {
+              "paragraphIndex": 15,
+              "start": 342.688,
+              "end": 344.63
+            },
+            {
+              "paragraphIndex": 16,
+              "start": 344.63,
+              "end": 353.278
+            },
+            {
+              "paragraphIndex": 17,
+              "start": 353.278,
+              "end": 356.598
+            }
+          ],
+          "syncMode": "silence-aware-dynamic-paragraph-v1",
+          "alignmentLoss": null,
+          "alignmentGeneratedAt": "2026-10-06T21:55:08Z",
+          "timingSource": "owner-original-audio-silence-analysis",
+          "timingQaPassed": true,
+          "allAges": true
         }
       },
       "pronunciationTerms": [
@@ -254,7 +548,13 @@
         "directAssignment": false,
         "originalOwnerUpload": true,
         "originalBytesPreserved": true,
-        "transcoded": false
+        "transcoded": false,
+        "followReaderSync": "audio-silence-aware-paragraph",
+        "followReaderSyncMode": "silence-aware-dynamic-paragraph-v1",
+        "followReaderParagraphs": 18,
+        "followReaderSyncedAt": "2026-10-06T21:55:08Z",
+        "followReaderQaPassed": true,
+        "audioBytesPreservedForTimingUpdate": true
       },
       "lifeContext": "heute lernen wir Abū Bakr aṣ-Ṣiddīq, raḍiya llāhu ʿanhu, als Menschen seines ganzen Lebensweges kennen: als frühen Gefährten, engen Freund des Propheten ﷺ, Begleiter der Hiǧrah und schließlich als ersten Kalifen der Muslime. Wenn man seine Geschichte betrachtet, fällt besonders auf, wie beständig er in sehr unterschiedlichen Situationen blieb. Abū Bakr gehörte zu den engsten Gefährten des Propheten Muḥammad ﷺ. Er nahm die Botschaft des Islām an und unterstützte den Propheten in einer Zeit, in der die Muslime in Makkah noch klein und verletzlich waren. Seine Nähe zum Propheten bestand nicht nur aus persönlicher Freundschaft. Er lernte von ihm, vertraute ihm und stellte seine Möglichkeiten in den Dienst der muslimischen Gemeinschaft. Einer der bekanntesten Augenblicke seines Lebens ereignete sich während der Hiǧrah. Der Prophet ﷺ und Abū Bakr verließen Makkah in Richtung Madīnah und hielten sich zeitweise in einer Höhle verborgen. Die Verfolger kamen gefährlich nahe. Abū Bakr machte sich große Sorgen um den Propheten ﷺ. Doch mitten in dieser angespannten Situation wurde er daran erinnert, dass Allah sie nicht verlassen hatte. So wurde die Höhle zu einem Sinnbild seiner Treue und seines Vertrauens.",
       "cover": "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg?v=2",
