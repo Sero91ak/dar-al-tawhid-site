@@ -74,13 +74,13 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Neue navigierbare Karten müssen die Klasse `.kids-tap-card` verwenden oder in den zentralen Card-Interaction-Selektor aufgenommen werden.
 
 
-## Startseiten-Hero – verbindliche Referenz (V1198)
+## Startseiten-Hero – verbindliche Referenz (V1199)
 
 - Das obere Startseitenmotiv ist **statisch** und verwendet ausschließlich `/kids/assets/kids-home-v1191/hero-static-reference.jpg`.
 - Das Motiv läuft auf iPhone/iPad **edge-to-edge bis unter den Statusbereich**; kein separater Petrol-/Leerstreifen oberhalb des Bildes.
-- Bild-Framing: **center / 50% / cover**. Keine Kamera-, Zoom-, Pan-, Wolken- oder Hintergrundanimation.
+- Smartphone-Framing: **100% Breite / auto Höhe**, proportional um **13,2 vw nach oben** verschoben, damit der im Referenzasset enthaltene dunkle Sicherheitsstreifen vollständig außerhalb des sichtbaren Hero liegt. Tablet: **cover / center 42%**. Keine Kamera-, Zoom-, Pan-, Wolken- oder Hintergrundanimation.
 - Die sichtbare Sternschnuppe gehört zum statischen Referenzbild. Keine zusätzliche CSS-/Video-Sternschnuppe darüberlegen.
-- **DĀR AL TAWḤĪD** wird als echte App-Schrift gerendert: Adobe Fonts **Cinzel 700** (Kit `jka5jda`), groß, vollständig sichtbar, gold, flacher optischer Bogen. Niemals wieder SVG-`textPath`/`textLength` für diese Wortmarke, damit auf iOS kein D abgeschnitten wird.
+- **DĀR AL TAWḤĪD** wird als echte App-Schrift gerendert: Adobe Fonts **Cinzel 700** (Kit `jka5jda`), mit lokalem Offline-Fallback `/assets/fonts/cinzel-latin-600-normal.woff2`; groß, vollständig sichtbar, gold, flacher optischer Bogen. Niemals wieder SVG-`textPath`/`textLength` für diese Wortmarke, damit auf iOS kein D abgeschnitten wird.
 - Die Goldschrift selbst bleibt positionsstabil; nur ein dezenter horizontal wandernder Lichtschein ist erlaubt.
 - **Kids** behält den sanften, zeitversetzten Balloon-Effekt pro Buchstabe sowie den dezenten Unterglow.
 - Keine generierte/eingebrannte Schrift im Hintergrundbild verwenden; die Markenwörter bleiben echte UI-Typografie.
