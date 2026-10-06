@@ -77,7 +77,7 @@ function runKidsDesignGuard() {
     "class=\"wm-dar-safe\"",
     "margin:calc(-1 * var(--safe-top)) calc(50% - 50vw) 0!important",
     "kids-home-hero-polish-v1203",
-    "static shooting star",
+    "Static shooting star.",
     "background:transparent!important"
   ];
   for (const n of homeHeroNeedles) {
