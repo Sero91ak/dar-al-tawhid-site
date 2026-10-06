@@ -1983,6 +1983,18 @@
       "min": 300,
       "max": 480
     },
-    "grandfatheredExistingAudio": true
+    "grandfatheredExistingAudio": true,
+    "ownerOriginalAudioPolicy": "preserve-uploaded-bytes-no-transcode",
+    "existingOwnerAudioStorage": "kids/assets/prophet-story-audio/<prophet>/story.mp3",
+    "restoredExistingOwnerAudios": true,
+    "restoredAt": "2026-10-06T13:02:00Z",
+    "restoredIds": [
+      "muhammad",
+      "adam",
+      "idris"
+    ],
+    "originalOwnerAudioCodec": "mp3",
+    "originalBytesPreserved": true,
+    "transcoded": false
   }
 }

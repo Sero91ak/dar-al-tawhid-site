@@ -17,7 +17,13 @@
     "sha256": "d6d7c21c76211def9e1fc6ae1acae0de92b830907218715418eeef3df6b2ad1c",
     "durationSec": 349.649,
     "format": "mp3",
-    "ownerConfirmedPair": true
+    "ownerConfirmedPair": true,
+    "repositoryTarget": "/kids/assets/prophet-story-audio/muhammad/story.mp3",
+    "repositoryBinaryPublished": true,
+    "repositoryBlobSha": "279169092e0617b64cff9c9f485f2972df8d0319",
+    "repositoryPublishedAt": "2026-10-06T13:02:00Z",
+    "originalBytesPreserved": true,
+    "transcoded": false
   },
   "pronunciationProfile": {
     "description": "Deutsche Erzählstimme mit Fuṣḥā-orientierter Aussprache islamischer Namen, Begriffe und Ehrenformeln. Die lange Aufnahme ist Referenzkorpus, kein automatisches Modellgewichts-Finetuning.",
@@ -91,5 +97,16 @@
     "~/SerhatVoice/ProphetStoryExport/ready/muhammad.m4a",
     "~/SerhatVoice/VoiceStudioOutput/Prophete Geschichte Muahammad ﷺ .mp3"
   ],
-  "createdAt": "2026-10-04T03:00:00+02:00"
+  "createdAt": "2026-10-04T03:00:00+02:00",
+  "deliveryAudio": {
+    "url": "/kids/assets/prophet-story-audio/muhammad/story.mp3",
+    "bytes": 5611321,
+    "sha256": "d6d7c21c76211def9e1fc6ae1acae0de92b830907218715418eeef3df6b2ad1c",
+    "format": "mp3",
+    "profile": "owner-original-byte-identical",
+    "repositoryBlobSha": "279169092e0617b64cff9c9f485f2972df8d0319",
+    "originalBytesPreserved": true,
+    "transcoded": false,
+    "restoredAt": "2026-10-06T13:02:00Z"
+  }
 }

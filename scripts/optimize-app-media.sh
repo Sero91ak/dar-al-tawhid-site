@@ -14,6 +14,7 @@ changed_count=0
 skipped_count=0
 
 is_protected() {
+  [[ "$f" == kids/assets/prophet-story-audio/* || "$f" == kids/assets/mubashshirun-story-audio/* || "$f" == kids/assets/sahabiyyat-story-audio/* ]] && return 0
   local f="$1"
   [[ "$f" =~ (^|/)(Assets\.xcassets|AppIcon|app-icons|icons?|logos?|favicons?|watermarks?|badges?|seals?)(/|$) ]] && return 0
   [[ "$(basename "$f")" =~ (logo|watermark|favicon) ]] && return 0

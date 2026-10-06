@@ -245,9 +245,9 @@
     "storyAudioPermanentLocalAsset": true,
     "storyAudioRangeSafeServiceWorker": true,
     "storyAudioRangeStrategy": "direct-network-range-response",
-    "storyAudioPinnedAsset": "/kids/assets/prophet-story-audio/muhammad/story.mp3?v=20261005-media48k",
-    "storyAudioPinnedSha256": "069cfad95efb215ae0ad63b588a9d716994a2a88b057f1058fef04bad31cb34f",
-    "storyAudioPinnedCommit": "media-optimized-runtime-48k",
+    "storyAudioPinnedAsset": "/kids/assets/prophet-story-audio/muhammad/story.mp3?v=20261006-original",
+    "storyAudioPinnedSha256": "d6d7c21c76211def9e1fc6ae1acae0de92b830907218715418eeef3df6b2ad1c",
+    "storyAudioPinnedCommit": "owner-original-restored",
     "storyAudioSignedPreviewDependency": false,
     "kidsQuizSystem": "independent-v1",
     "kidsQuizAdultDependency": false,
@@ -437,8 +437,8 @@
       "Ṣaḥābiyyāt"
     ],
     "sahabiyyatScrollSafety": true,
-    "storyAudioPinnedBytes": 2098317,
-    "storyAudioDeliveryProfile": "optimized-runtime",
+    "storyAudioPinnedBytes": 5611321,
+    "storyAudioDeliveryProfile": "owner-original-byte-identical",
     "sahabiyyatCssVersion": 7,
     "sahabiyyatJsVersion": 22,
     "storyHub": "compatibility-runtime-hidden-entry-v1149",
@@ -763,7 +763,16 @@
     "storyLibraryJsFetch": "network-first-v1184",
     "homeHeroArtifactGuard": "top-center-reframe-plus-soft-shield-v1185",
     "homeHeroSpacing": "compact-no-dead-middle-zone-v1185",
-    "homeSalam": "larger-child-readable-v1185"
+    "homeSalam": "larger-child-readable-v1185",
+    "prophetOwnerOriginalAudioRestored": true,
+    "prophetOwnerOriginalAudioRestoredAt": "2026-10-06T13:02:00Z",
+    "prophetOwnerOriginalAudioCount": 3,
+    "prophetOwnerOriginalAudioPolicy": "preserve-uploaded-bytes-no-transcode",
+    "prophetOwnerOriginalAudioIds": [
+      "muhammad",
+      "adam",
+      "idris"
+    ]
   },
   "updatedAt": "2026-10-06",
   "deployTrigger": "2026-10-06T15:32:00+02:00"

@@ -22,8 +22,10 @@
     "assetId": "6rt4bedJ3m0PAL7hW3gZ",
     "repositoryTarget": "/kids/assets/prophet-story-audio/idris/story.mp3",
     "repositoryBinaryPublished": true,
-    "repositoryBlobSha": "09fbadb5fa7b81c10f3ac28e5c03286d7219e6e0",
-    "repositoryPublishedAt": "2026-10-04T17:16:00Z"
+    "repositoryBlobSha": "59e39532dffadf5f1a2a1820375799497fb71f44",
+    "repositoryPublishedAt": "2026-10-06T13:02:00Z",
+    "originalBytesPreserved": true,
+    "transcoded": false
   },
   "pronunciationProfile": {
     "description": "Freigegebene deutsche Kinder-Erzählstimme des Eigentümers. Wortwahl, Rhythmus und Aussprache dieser Aufnahme werden als dauerhaftes Referenzkorpus gespeichert; kein automatisches Modellgewichts-Finetuning.",
@@ -57,10 +59,13 @@
   "createdAt": "2026-10-04T17:12:00+02:00",
   "deliveryAudio": {
     "url": "/kids/assets/prophet-story-audio/idris/story.mp3",
-    "bytes": 1401069,
-    "sha256": "2d71a07eee502305098e97092d1fbc335299f615fd004c6aaa29129b0e377dca",
+    "bytes": 2818100,
+    "sha256": "ffd834a2e64a98731603940ff6a0d758e0a5e1eac0f424468836c22acc4818d1",
     "format": "mp3",
-    "profile": "optimized-runtime",
-    "repositoryBlobSha": "09fbadb5fa7b81c10f3ac28e5c03286d7219e6e0"
+    "profile": "owner-original-byte-identical",
+    "repositoryBlobSha": "59e39532dffadf5f1a2a1820375799497fb71f44",
+    "originalBytesPreserved": true,
+    "transcoded": false,
+    "restoredAt": "2026-10-06T13:02:00Z"
   }
 }
