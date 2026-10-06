@@ -1,0 +1,167 @@
+name: Sahaba Alignment Auth Bridge Once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/sahaba-alignment-auth-bridge.trigger'
+
+permissions:
+  contents: write
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+      VOICE_API: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Install Wrangler
+        run: npm install -g wrangler@4.86.0
+
+      - name: Prepare temporary GitHub alignment auth bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${ADMIN_PUBLISH_SECRET:-}" || { echo "::error::GitHub ADMIN_PUBLISH_SECRET missing"; exit 1; }
+          test -n "${CLOUDFLARE_API_TOKEN:-}" || { echo "::error::Cloudflare token missing"; exit 1; }
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("cloudflare/voice-studio-web.js")
+          s=p.read_text(encoding="utf-8")
+          old='''function isOwnerAutomationAuthorized(request, env) {
+            const supplied = String(request.headers.get("X-Admin-Secret") || "").trim();
+            const expected = String(env.ADMIN_PUBLISH_SECRET || "").trim();
+            return Boolean(supplied && expected && supplied === expected);
+          }'''
+          new='''function isOwnerAutomationAuthorized(request, env) {
+            const supplied = String(request.headers.get("X-Admin-Secret") || "").trim();
+            const expected = String(env.ADMIN_PUBLISH_SECRET || "").trim();
+            const githubAlignment = String(env.GITHUB_ALIGNMENT_SECRET || "").trim();
+            return Boolean(
+              supplied &&
+              ((expected && supplied === expected) || (githubAlignment && supplied === githubAlignment))
+            );
+          }'''
+          if old not in s:
+              raise SystemExit("Owner automation auth function shape changed")
+          p.write_text(s.replace(old,new,1),encoding="utf-8")
+
+          q=Path("scripts/exact-sahaba-reader.sh")
+          t=q.read_text(encoding="utf-8")
+          t=t.replace(
+              'IDS=(umar uthman ali talha zubayr abd-ar-rahman sad said abu-ubaydah)',
+              'IDS=(abu-bakr umar uthman ali talha zubayr abd-ar-rahman sad said abu-ubaydah)'
+          )
+          t=t.replace(
+              'ids=["umar","uthman","ali","talha","zubayr","abd-ar-rahman","sad","said","abu-ubaydah"]',
+              'ids=["abu-bakr","umar","uthman","ali","talha","zubayr","abd-ar-rahman","sad","said","abu-ubaydah"]'
+          )
+          t=t.replace(
+              'visual["mubashshirunExactAlignedMasters"]=9',
+              'visual["mubashshirunExactAlignedMasters"]=10'
+          )
+          q.write_text(t,encoding="utf-8")
+          PY
+
+      - name: Install temporary bridge secret and deploy worker
+        working-directory: cloudflare
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf '%s' "$ADMIN_PUBLISH_SECRET" | wrangler secret put GITHUB_ALIGNMENT_SECRET --name dar-admin-publisher
+          wrangler deploy --name dar-admin-publisher
+          sleep 4
+          curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/health" | tee /tmp/voice-health.json
+          grep -q '"storyAlignment":"elevenlabs-forced-alignment-v1"' /tmp/voice-health.json
+
+      - name: Forced-align all ten existing Sahaba masters
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Keep the temporary bridge alive if a Cloudflare Builds race overwrites the admin worker.
+          (
+            for n in 1 2 3 4 5 6; do
+              sleep 35
+              cd cloudflare
+              wrangler deploy --name dar-admin-publisher >/tmp/sahaba-bridge-redeploy-${n}.log 2>&1 || true
+              cd ..
+            done
+          ) &
+          KEEPER_PID=$!
+          trap 'kill "$KEEPER_PID" 2>/dev/null || true' EXIT
+          bash scripts/exact-sahaba-reader.sh
+          kill "$KEEPER_PID" 2>/dev/null || true
+          wait "$KEEPER_PID" 2>/dev/null || true
+          trap - EXIT
+
+      - name: Validate exact alignment before commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          d=json.loads(Path("kids/data/mubashshirun-stories.json").read_text(encoding="utf-8"))
+          items=d.get("items") or []
+          if len(items)!=10:
+              raise SystemExit(f"Expected 10 Sahaba, got {len(items)}")
+          for item in items:
+              sid=str(item.get("id") or "")
+              scripts=item.get("scripts") or {}
+              text=str(scripts.get("9-10") or scripts.get("6-8") or scripts.get("4-5") or "").strip()
+              paras=[x.strip() for x in re.split(r"\n\s*\n",text) if x.strip()]
+              urls=set()
+              for age in ("4-5","6-8","9-10"):
+                  m=(item.get("audio") or {}).get(age) or {}
+                  mode=str(m.get("syncMode") or "")
+                  timings=m.get("timings") or []
+                  if m.get("status")!="ready" or not m.get("url"):
+                      raise SystemExit(f"{sid} {age}: audio not ready")
+                  if mode!="elevenlabs-forced-alignment-v1":
+                      raise SystemExit(f"{sid} {age}: syncMode={mode!r}")
+                  if len(timings)!=len(paras):
+                      raise SystemExit(f"{sid} {age}: {len(timings)} timings != {len(paras)} paragraphs")
+                  urls.add(str(m["url"]).split("?",1)[0])
+              if len(urls)!=1:
+                  raise SystemExit(f"{sid}: age variants do not share one master audio")
+              asset=Path(next(iter(urls)).lstrip("/"))
+              if not asset.exists() or asset.stat().st_size<100000:
+                  raise SystemExit(f"{sid}: master audio missing")
+          print("VALIDATED: all 10 Sahaba use one master audio and exact ElevenLabs forced alignment.")
+          PY
+
+      - name: Commit exact reader maps only
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Do not commit the temporary worker/script patches.
+          git checkout -- cloudflare/voice-studio-web.js scripts/exact-sahaba-reader.sh
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/mubashshirun-stories.json kids/version.json kids/story-hub.js kids/data/story-hub.json
+          git diff --cached --quiet && { echo "::error::No timing changes produced"; exit 1; }
+          git commit -m "Kids: exact-align all 10 Sahaba master audios"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      - name: Restore canonical admin worker
+        if: always()
+        working-directory: cloudflare
+        shell: bash
+        run: |
+          set +e
+          git checkout -- voice-studio-web.js
+          wrangler deploy --name dar-admin-publisher
+          sleep 5
+          curl -fsS "https://dar-admin-publisher.sero91ak.workers.dev/health" || true
