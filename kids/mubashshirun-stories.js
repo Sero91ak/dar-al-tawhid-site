@@ -169,7 +169,7 @@ function renderCards(){
   });
   grid.querySelectorAll("[data-ms-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.msId)));
   const dc=$("#msDoneCount");if(dc)dc.textContent=String(doneCount());
-  const ag=$("#msAge");if(ag)ag.textContent="Alter "+age();
+  const ag=$("#msAge");if(ag)ag.textContent="";
   const entryCopy=$("#msEntry .ms-entry-copy > span:last-child");
   if(entryCopy)entryCopy.textContent=isAudioOnlyAge()?"10 Ṣaḥābah · Hörgeschichten":"10 Ṣaḥābah · ihre Geschichten · lesen & hören";
 }
@@ -187,7 +187,7 @@ function insertEntry(view){
       '<strong>Die zehn Mubaschschirūn</strong>'+
       '<span>'+(isAudioOnlyAge()?'10 Ṣaḥābah · Hörgeschichten':'10 Ṣaḥābah · ihre Geschichten · lesen &amp; hören')+'</span>'+
     '</span>'+
-    '<span class="ms-entry-action">Entdecken <b aria-hidden="true">›</b></span>';
+    '';
   const prophet=$("#psProphetEntry");
   if(prophet)prophet.insertAdjacentElement("afterend",entry);
   else view.querySelector(".page-head")?.insertAdjacentElement("afterend",entry);
