@@ -898,3 +898,262 @@ html[data-kids-age="4-5"] .ms-library-page .ms-row-title,
     font-size:22px!important;
   }
 }
+
+
+/* =========================================================
+   STORY_LIBRARY_ORIGINAL_RESTORE_V9
+   Exact visual direction from the pre-compact story libraries:
+   2026-10-05 before simplify/unify/compact. No duplicated list heading,
+   classic large scene card, original hierarchy and chevron.
+   ========================================================= */
+#msLibraryPage .story-list-head,
+#syLibraryPage .story-list-head{display:none!important}
+
+#msLibraryPage .ms-library-scroll,
+#syLibraryPage .ms-library-scroll{
+  padding:18px max(16px,calc((100vw - 900px)/2)) calc(120px + env(safe-area-inset-bottom))!important;
+}
+
+#msGrid.ms-list,
+#syGrid.ms-list{
+  width:auto!important;
+  max-width:none!important;
+  margin:15px 0 0!important;
+  padding:0!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:14px!important;
+}
+
+#msLibraryPage .ms-story-row,
+#syLibraryPage .ms-story-row{
+  width:100%!important;
+  min-height:174px!important;
+  height:auto!important;
+  display:grid!important;
+  grid-template-columns:minmax(128px,34%) minmax(0,1fr) 42px!important;
+  gap:0!important;
+  align-items:stretch!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:1px solid rgba(121,207,200,.17)!important;
+  border-radius:28px!important;
+  background:#082332!important;
+  box-shadow:none!important;
+  color:#fff!important;
+  text-align:left!important;
+}
+
+#syLibraryPage .ms-story-row{
+  border-color:rgba(231,190,145,.12)!important;
+}
+
+#msLibraryPage .ms-row-visual,
+#syLibraryPage .ms-row-visual{
+  position:relative!important;
+  grid-column:1!important;
+  grid-row:1!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:174px!important;
+  height:100%!important;
+  overflow:hidden!important;
+  background:#08283a!important;
+}
+
+#msLibraryPage .ms-row-visual img,
+#syLibraryPage .ms-row-visual img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:174px!important;
+  display:block!important;
+  object-fit:cover!important;
+  filter:saturate(.96) contrast(1.02) brightness(.92)!important;
+}
+
+/* Original soft embedded image edge — no hard cut. */
+#msLibraryPage .ms-row-visual::after,
+#syLibraryPage .ms-row-visual::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:2!important;
+  inset:0!important;
+  height:auto!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,transparent 48%,rgba(8,35,50,.15) 64%,rgba(8,35,50,.52) 82%,rgba(8,35,50,.92) 100%),
+    linear-gradient(0deg,rgba(3,17,27,.18),transparent 55%)!important;
+}
+
+#msLibraryPage .ms-rank,
+#syLibraryPage .ms-rank{
+  position:absolute!important;
+  z-index:4!important;
+  left:12px!important;
+  bottom:12px!important;
+  top:auto!important;
+  min-width:42px!important;
+  width:auto!important;
+  height:31px!important;
+  padding:0 9px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(239,203,121,.38)!important;
+  border-radius:999px!important;
+  background:rgba(3,20,29,.68)!important;
+  color:#f2d48f!important;
+  font:700 13px/1 Georgia,serif!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+}
+
+#msLibraryPage .ms-row-copy,
+#syLibraryPage .ms-row-copy{
+  position:relative!important;
+  z-index:3!important;
+  grid-column:2!important;
+  grid-row:1!important;
+  min-width:0!important;
+  display:grid!important;
+  align-content:center!important;
+  gap:5px!important;
+  padding:18px 14px 18px 20px!important;
+  margin:0!important;
+}
+
+#msLibraryPage .ms-row-title,
+#syLibraryPage .ms-row-title{
+  display:block!important;
+  margin:0!important;
+  color:#fff!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:21px!important;
+  line-height:1.04!important;
+  font-weight:760!important;
+  letter-spacing:-.02em!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+}
+
+#msLibraryPage .ms-row-ar,
+#syLibraryPage .ms-row-ar{
+  display:block!important;
+  margin:0!important;
+  color:#f5dfaa!important;
+  font-family:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic",serif!important;
+  font-size:22px!important;
+  line-height:1.2!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+
+#msLibraryPage .ms-row-summary,
+#syLibraryPage .ms-row-summary{
+  display:-webkit-box!important;
+  -webkit-box-orient:vertical!important;
+  -webkit-line-clamp:2!important;
+  overflow:hidden!important;
+  margin:0!important;
+  color:rgba(255,255,255,.64)!important;
+  font-size:11px!important;
+  line-height:1.45!important;
+}
+
+#msLibraryPage .ms-row-meta,
+#syLibraryPage .ms-row-meta{
+  display:block!important;
+  margin:0!important;
+  color:rgba(255,255,255,.47)!important;
+  font-size:10px!important;
+  line-height:1.25!important;
+  font-weight:800!important;
+}
+
+/* Original arrow control: no circular play button. */
+#msLibraryPage .ms-row-go,
+#msLibraryPage .ms-row-go.is-listen,
+#syLibraryPage .ms-row-go,
+#syLibraryPage .ms-row-go.is-listen{
+  position:relative!important;
+  z-index:4!important;
+  grid-column:3!important;
+  grid-row:1!important;
+  width:auto!important;
+  min-width:0!important;
+  height:auto!important;
+  align-self:stretch!important;
+  justify-self:stretch!important;
+  display:grid!important;
+  place-items:center!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#eacb83!important;
+  font-size:35px!important;
+  line-height:1!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  transform:none!important;
+}
+
+/* The old 4–5 overview stayed structurally identical; audio-only starts after opening. */
+html[data-kids-age="4-5"] #msLibraryPage .ms-row-ar,
+html[data-kids-age="4-5"] #msLibraryPage .ms-row-summary,
+html[data-kids-age="4-5"] #msLibraryPage .ms-row-meta,
+html[data-kids-age="4-5"] #syLibraryPage .ms-row-ar,
+html[data-kids-age="4-5"] #syLibraryPage .ms-row-summary,
+html[data-kids-age="4-5"] #syLibraryPage .ms-row-meta{
+  display:block!important;
+}
+
+@media(max-width:620px){
+  #msLibraryPage .ms-story-row,
+  #syLibraryPage .ms-story-row{
+    min-height:174px!important;
+    grid-template-columns:122px minmax(0,1fr) 28px!important;
+  }
+  #msLibraryPage .ms-row-visual,
+  #syLibraryPage .ms-row-visual,
+  #msLibraryPage .ms-row-visual img,
+  #syLibraryPage .ms-row-visual img{min-height:174px!important}
+  #msLibraryPage .ms-row-copy,
+  #syLibraryPage .ms-row-copy{padding:15px 7px 15px 13px!important}
+  #msLibraryPage .ms-row-title,
+  #syLibraryPage .ms-row-title{font-size:18px!important}
+  #msLibraryPage .ms-row-ar,
+  #syLibraryPage .ms-row-ar{font-size:19px!important}
+  #msLibraryPage .ms-row-summary,
+  #syLibraryPage .ms-row-summary{font-size:10.5px!important}
+  #msLibraryPage .ms-row-go,
+  #syLibraryPage .ms-row-go{font-size:30px!important}
+}
+
+@media(min-width:760px){
+  #msGrid.ms-list,
+  #syGrid.ms-list{grid-template-columns:1fr!important}
+  #msLibraryPage .ms-story-row,
+  #syLibraryPage .ms-story-row{
+    min-height:228px!important;
+    grid-template-columns:minmax(220px,34%) minmax(0,1fr) 44px!important;
+    border-radius:28px!important;
+  }
+  #msLibraryPage .ms-row-visual,
+  #syLibraryPage .ms-row-visual,
+  #msLibraryPage .ms-row-visual img,
+  #syLibraryPage .ms-row-visual img{min-height:228px!important}
+  #msLibraryPage .ms-row-copy,
+  #syLibraryPage .ms-row-copy{padding:24px!important}
+  #msLibraryPage .ms-row-title,
+  #syLibraryPage .ms-row-title{font-size:25px!important}
+  #msLibraryPage .ms-row-summary,
+  #syLibraryPage .ms-row-summary{font-size:13px!important}
+}
