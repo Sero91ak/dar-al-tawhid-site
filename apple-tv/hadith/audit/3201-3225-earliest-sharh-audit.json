@@ -1,0 +1,163 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-3201-3225",
+  "series": "3151-3250",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "HAD-3201–3225 setzt Ṣaḥīḥ Muslim im Kitāb az-Zuhd wa-r-Raqāʾiq ab Muslim 2971 fort. Die verwendeten Muslim-Stellen wurden gegen aktuelle Dorar-Nachweise geprüft. Längere Berichte wie Muslim 2972, 2973, 2980 und 2984 wurden nur nach klar eigenständigen Aussagekernen segmentiert. Muslim 2986–2987 wurde wegen identischem Sumʿah/Riyāʾ-Kern zu einer Karte zusammengeführt. Muslim 2994 wurde bewusst nicht neu angelegt, weil der Kern 'Gähnen ist vom Satan und soll so gut wie möglich unterdrückt werden' bereits global in HAD-0142 aus Ṣaḥīḥ al-Buḫārī vorhanden ist; Muslim 2995 wurde nur für den zusätzlichen eigenständigen Kern 'Hand auf den Mund' verwendet. al-Māzirī, al-Muʿlim bi-Fawāʾid Muslim, Bd. 3, bleibt die früheste direkte Muslim-Priorität für Kitāb az-Zuhd; unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "semanticDuplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "sourceHadithNumbersChecked": true,
+    "globalCatalogUpdated": true,
+    "appleTvScreensaverUpdated": true,
+    "webIosAndroidLibraryLoaderUpdated": true,
+    "seriesProgress": "75/100",
+    "globalPushCompleted": true
+  },
+  "dedupeDecisions": [
+    "Muslim 2972 segmented into three independent cores: no cooking fire, dates/water, Ansar milk support",
+    "Muslim 2973 segmented into two independent cores: remaining barley and its ending after measurement",
+    "Muslim 2978 not separately used because its hunger/poor-dates core substantially overlaps the immediately preceding Muslim 2977 card in this production block",
+    "Muslim 2980 split only into verbal warning and the Prophet's practical hurried departure",
+    "Muslim 2984 split into cloud-directed irrigation and the owner's three-way produce allocation",
+    "Muslim 2986–2987 merged into one Sumʿah/Riyāʾ statement core",
+    "Muslim 2994 skipped: substantive core already exists globally as HAD-0142",
+    "Muslim 2995 retained only for the independent hand-over-mouth instruction"
+  ],
+  "sourceRange": [
+    "Muslim 2971",
+    "Muslim 2972",
+    "Muslim 2973",
+    "Muslim 2974",
+    "Muslim 2975",
+    "Muslim 2976",
+    "Muslim 2977",
+    "Muslim 2979",
+    "Muslim 2980",
+    "Muslim 2981",
+    "Muslim 2982",
+    "Muslim 2983",
+    "Muslim 2984",
+    "Muslim 2985",
+    "Muslim 2986–2987",
+    "Muslim 2988",
+    "Muslim 2990",
+    "Muslim 2992",
+    "Muslim 2993",
+    "Muslim 2995"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibrary",
+    "iosHadithLibrary",
+    "androidWebAppAndWebsite"
+  ],
+  "records": [
+    {
+      "id": "HAD-3201",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3202",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3203",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3204",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3205",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3206",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3207",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3208",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3209",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3210",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3211",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3212",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3213",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3214",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3215",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3216",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3217",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3218",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3219",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3220",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3221",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3222",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3223",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3224",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3225",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    }
+  ]
+}
