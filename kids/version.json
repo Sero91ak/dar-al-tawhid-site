@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v108-home-static-card1193",
-  "label": "KIDS · V1.08.20",
-  "releasedAt": "2026-10-06T19:02:00+02:00",
-  "note": "V1193 vereinheitlicht die Kids-App auf ein ruhiges Whole-Card-Tap-System: keine permanenten Vorwärts-Pfeile oder Rails auf navigierbaren Karten, kein Hochspringen/Skalieren, nur ein dezenter Rand- und Glow-Effekt bei Antippen, Hover oder Fokus. Laufzeit und Altersangabe werden vor dem Öffnen von Geschichten/Hörinhalten nicht mehr gezeigt. Ṣaḥābah- und Ṣaḥābiyyāt-Kapseln sind wieder groß mit breiter Bildfläche; die drei Geschichten-Hauptwelten nutzen nahezu die volle Seitenbreite. Der obere Startseiten-Hero bleibt unverändert.",
+  "buildId": "kids-shell-v108-global-capsule1194",
+  "label": "KIDS · V1.08.21",
+  "releasedAt": "2026-10-06T20:31:00+02:00",
+  "note": "V1194 vereinheitlicht die Kids-App auf die Außenbreite der Qurʾān-Reise-Kapsel: große navigierbare Kapseln nutzen auf dem Smartphone nahezu die komplette Seitenbreite, Unterkarten bleiben 100% im Elternbereich. Zusätzlich ist der dezente Rand-/Glow-Effekt nun global auf allen navigierbaren Kids-Kapseln stabilisiert, inklusive iPhone/iPad-Touch; es gibt kein Springen, Liften oder Skalieren. Pfeilflächen bleiben entfernt und der frei gewordene Platz gehört Bild und Text.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1193",
+    "serviceWorkerCache": "v1194",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -868,8 +868,18 @@
     "preClickAgeVisible": false,
     "storyHomePrimaryWorldWidth": "near-viewport-edge",
     "startHeroChangedByV1193": false,
-    "contentStudioFeedVersion": "studio7"
+    "contentStudioFeedVersion": "studio7",
+    "globalCapsuleWidth": "quran-outer-reference-v8",
+    "globalCapsulePhoneBleed": "6px each side",
+    "globalCapsuleEffectiveOuterMargin": "about 10px with 16px shell inset",
+    "globalCapsuleTabletWidth": "100% content column",
+    "globalTouchGlow": "runtime-v2 + css-v9",
+    "globalTouchGlowCoverage": "all navigable Kids capsule/card surfaces",
+    "globalTouchMotion": "no translate/scale/lift",
+    "globalArrowSpaceReclaimed": true,
+    "storyLibraryWidth": "near-edge-safe-width",
+    "storyLibraryLargeCardsPreserved": true
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T19:02:00+02:00"
+  "deployTrigger": "2026-10-06T20:31:00+02:00"
 }
