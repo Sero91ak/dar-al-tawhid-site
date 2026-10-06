@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v108-touch-rail1185",
-  "label": "KIDS · V1.08.12",
-  "releasedAt": "2026-10-06T16:31:00+02:00",
-  "note": "V1185 führt app-weit ein einheitliches rechts angedocktes Touchfeld für navigierbare Karten ein. Die ganze Karte bleibt antippbar, rechts zeigt eine ruhige goldene Rail die Aktion. Ṣaḥābah und Ṣaḥābiyyāt erhalten zugleich größere, höhere Bildflächen und größere Kapseln mit lesbarem Text.",
+  "buildId": "kids-shell-v108-home-cinema1186",
+  "label": "KIDS · V1.08.13",
+  "releasedAt": "2026-10-06T16:38:00+02:00",
+  "note": "V1186 bündelt die aktuelle Startseiten-Cinema-Fassung mit dem neuen app-weiten Interaktionssystem: navigierbare Karten erhalten rechts eine angeheftete goldene Touch-Rail; die ganze Karte bleibt antippbar. Ṣaḥābah und Ṣaḥābiyyāt zeigen zugleich größere und höhere Bildflächen mit größerer Kapsel und lesbarem Text.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1185",
+    "serviceWorkerCache": "v1186",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -808,5 +808,5 @@
     "storyLibraryDefaultMinHeight": "218px"
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T16:31:00+02:00"
+  "deployTrigger": "2026-10-06T16:38:00+02:00"
 }
