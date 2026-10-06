@@ -1,0 +1,63 @@
+name: Import Kids Cinema V1178
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "kids/cinema-sources-v1178.json"
+      - ".github/workflows/import-kids-cinema-v1178.yml"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: import-kids-cinema-v1178
+  cancel-in-progress: false
+
+jobs:
+  import-cinema:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: main
+
+      - name: Download generated hero assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p kids/assets/kids-home-v1178
+          POSTER_URL="$(jq -r '.poster_url' kids/cinema-sources-v1178.json)"
+          VIDEO_URL="$(jq -r '.video_url' kids/cinema-sources-v1178.json)"
+          curl -fL --retry 4 --retry-delay 2 --connect-timeout 20 --max-time 180 "$POSTER_URL" -o /tmp/hero-poster.png
+          curl -fL --retry 4 --retry-delay 2 --connect-timeout 20 --max-time 300 "$VIDEO_URL" -o /tmp/hero-cinema.mp4
+          test -s /tmp/hero-poster.png
+          test -s /tmp/hero-cinema.mp4
+          file /tmp/hero-poster.png
+          file /tmp/hero-cinema.mp4
+          mv /tmp/hero-poster.png kids/assets/kids-home-v1178/hero-poster.png
+          mv /tmp/hero-cinema.mp4 kids/assets/kids-home-v1178/hero-cinema.mp4
+
+      - name: Persist cinema assets and remove one-shot importer
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f kids/cinema-sources-v1178.json
+          rm -f .github/workflows/import-kids-cinema-v1178.yml
+          git config user.name "dar-kids-cinema-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A kids/assets/kids-home-v1178 kids/cinema-sources-v1178.json .github/workflows/import-kids-cinema-v1178.yml
+          git commit -m "assets(kids): persist cinema hero v1178"
+          git push origin HEAD:main
+
+      - name: Deploy persisted Kids cinema build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          sleep 3
+          gh workflow run deploy-kids-live.yml --ref main

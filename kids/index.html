@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.04</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.05</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2809,6 +2809,9 @@ html:not([data-view="today"]) .view.active{
       </div>
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
+        <video class="hero-cinema-video" autoplay muted loop playsinline preload="auto" poster="/kids/assets/kids-home-v1176/hero-cinema.png" aria-hidden="true" tabindex="-1" disablepictureinpicture>
+          <source src="/kids/assets/kids-home-v1178/hero-cinema.mp4" type="video/mp4">
+        </video>
         <div class="kids-wordmark">
           <p class="wm-dar-line">DĀR AL TAWḤĪD</p>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
@@ -3175,7 +3178,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v104-home-wordmark1177";
+const KIDS_BUILD_ID="kids-shell-v105-home-cinema1178";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6237,7 +6240,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v104-home-wordmark1177";
+  var KIDS_BUILD_ID="kids-shell-v105-home-cinema1178";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6253,7 +6256,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1177",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1178",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -8215,4 +8218,191 @@ html[data-view="stories"] #view-stories > :last-child{
   #view-today .choice::after{animation:none!important}
 }
 </style>
-\n</html>
+\n<style id="kids-home-cinema-v1178">
+/* V1178 — echter Cinema-Hero statt sichtbar aufgehängtem Standbild.
+   Das Video ist die bewegte Bildbasis; CSS-Ebenen dienen nur als dezente Atmosphäre. */
+#view-today{
+  --home-cinema-deep:#061923;
+  --home-cinema-deep-2:#082433;
+  background:linear-gradient(180deg,var(--home-cinema-deep) 0%,var(--home-cinema-deep-2) 100%)!important;
+}
+#view-today .hero{
+  min-height:clamp(500px,130vw,580px)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:var(--home-cinema-deep)!important;
+  overflow:hidden!important;
+}
+#view-today .hero::before{
+  inset:-2.5%!important;
+  background-image:
+    url("/kids/assets/kids-home-v1178/hero-poster.png"),
+    url("/kids/assets/kids-home-v1176/hero-cinema.png")!important;
+  background-size:cover,cover!important;
+  background-position:center 43%,center 46%!important;
+  filter:saturate(1.06) contrast(1.04) brightness(.86)!important;
+  animation:homePosterBreath1178 20s ease-in-out infinite alternate!important;
+}
+@keyframes homePosterBreath1178{
+  from{transform:scale(1.025) translate3d(-.4%,.1%,0)}
+  to{transform:scale(1.055) translate3d(.5%,-.45%,0)}
+}
+#view-today .hero-cinema-video{
+  position:absolute!important;
+  z-index:0!important;
+  left:-2%!important;
+  top:-2%!important;
+  width:104%!important;
+  height:104%!important;
+  object-fit:cover!important;
+  object-position:center 43%!important;
+  opacity:1!important;
+  pointer-events:none!important;
+  user-select:none!important;
+  -webkit-user-select:none!important;
+  filter:saturate(1.07) contrast(1.045) brightness(.90)!important;
+  transform:translateZ(0) scale(1.012)!important;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,.96) 82%,rgba(0,0,0,.70) 91%,rgba(0,0,0,.20) 98%,transparent 100%)!important;
+  mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,.96) 82%,rgba(0,0,0,.70) 91%,rgba(0,0,0,.20) 98%,transparent 100%)!important;
+}
+#view-today .hero::after{
+  z-index:1!important;
+  background:
+    radial-gradient(ellipse at 50% 22%,rgba(255,229,165,.10) 0%,transparent 40%),
+    radial-gradient(circle at 72% 49%,rgba(235,165,86,.11),transparent 22%),
+    linear-gradient(180deg,
+      rgba(2,15,24,.20) 0%,
+      rgba(2,15,24,.03) 22%,
+      rgba(2,15,24,.08) 49%,
+      rgba(4,20,29,.42) 68%,
+      rgba(5,23,33,.82) 83%,
+      var(--home-cinema-deep) 100%)!important;
+}
+/* Die zusätzlichen CSS-Ebenen bleiben sichtbar, aber deutlich subtiler als das echte Video. */
+#view-today .hero .cloud{opacity:.08!important;filter:blur(19px)!important;animation-duration:36s!important}
+#view-today .hero .city{opacity:.35!important;animation-duration:5.4s!important}
+#view-today .hero .arch{
+  width:28%!important;
+  opacity:0!important;
+  filter:blur(22px)!important;
+  animation:homeLightSweep1178 9.8s ease-in-out infinite!important;
+}
+@keyframes homeLightSweep1178{
+  0%,28%{left:-58%;opacity:0}
+  39%{opacity:.46}
+  65%{left:112%;opacity:.22}
+  100%{left:112%;opacity:0}
+}
+#view-today .hero .dune{opacity:.26!important;height:142px!important;bottom:-38px!important}
+#view-today .hero .lantern{opacity:.28!important}
+
+/* Größere, markantere Hauptmarke mit echtem Gold-Shimmer. */
+#view-today .kids-wordmark{
+  top:max(52px,calc(env(safe-area-inset-top,0px) + 24px))!important;
+  padding:0 12px!important;
+  gap:9px!important;
+}
+#view-today .kids-wordmark::before{
+  top:-29px!important;
+  width:min(96vw,448px)!important;
+  height:174px!important;
+  background:radial-gradient(ellipse,rgba(2,20,31,.58),rgba(6,30,41,.20) 56%,transparent 78%)!important;
+  filter:blur(10px)!important;
+  animation:homeBrandAura1178 6.2s ease-in-out infinite!important;
+}
+@keyframes homeBrandAura1178{
+  0%,100%{opacity:.58;transform:translateX(-50%) scale(.95)}
+  50%{opacity:1;transform:translateX(-50%) scale(1.045)}
+}
+#view-today .wm-dar-line{
+  width:auto!important;
+  max-width:100%!important;
+  font-family:Georgia,"Times New Roman",serif!important;
+  font-size:clamp(30px,8.6vw,40px)!important;
+  line-height:.98!important;
+  font-weight:700!important;
+  letter-spacing:.064em!important;
+  text-indent:.064em!important;
+  color:#fff3cb!important;
+  background:linear-gradient(100deg,#fff8dd 0%,#e6bd64 26%,#fff7d4 48%,#c99738 70%,#fff8df 100%)!important;
+  background-size:230% 100%!important;
+  background-position:0% 50%!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  text-shadow:none!important;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.50)) drop-shadow(0 0 11px rgba(238,195,99,.22))!important;
+  animation:homeDarCinema1178 6s ease-in-out infinite!important;
+}
+@keyframes homeDarCinema1178{
+  0%,100%{background-position:0% 50%;transform:translateY(0) scale(1);filter:drop-shadow(0 4px 12px rgba(0,0,0,.50)) drop-shadow(0 0 8px rgba(238,195,99,.15))}
+  46%{background-position:100% 50%;transform:translateY(-2px) scale(1.018);filter:drop-shadow(0 4px 12px rgba(0,0,0,.50)) drop-shadow(0 0 17px rgba(255,214,124,.34))}
+}
+#view-today .kids-wordmark::after{
+  width:min(68vw,290px)!important;
+  margin-top:4px!important;
+  background:linear-gradient(90deg,transparent,rgba(255,229,158,.26),rgba(255,236,179,.96),rgba(255,229,158,.26),transparent)!important;
+  background-size:220% 100%!important;
+  animation:homeBrandLine1178 5.2s ease-in-out infinite!important;
+}
+@keyframes homeBrandLine1178{
+  0%,100%{opacity:.42;background-position:0% 50%;transform:scaleX(.88)}
+  50%{opacity:.92;background-position:100% 50%;transform:scaleX(1.03)}
+}
+#view-today .wm-kids{
+  font-size:clamp(72px,19.1vw,98px)!important;
+  filter:drop-shadow(0 11px 24px rgba(0,0,0,.38))!important;
+}
+#view-today .wm-kids span{
+  animation:kidsBalloonV1178 3.15s cubic-bezier(.33,.06,.28,1) infinite!important;
+}
+#view-today .wm-kids .k{animation-delay:0s!important}
+#view-today .wm-kids .i{animation-delay:.13s!important}
+#view-today .wm-kids .d{animation-delay:.26s!important}
+#view-today .wm-kids .s{animation-delay:.39s!important}
+@keyframes kidsBalloonV1178{
+  0%,17%,100%{transform:translate3d(0,0,0) scale(1,1)}
+  29%{transform:translate3d(0,-9px,0) scale(1.025,.978)}
+  38%{transform:translate3d(0,-15px,0) scale(1.04,.962)}
+  49%{transform:translate3d(0,2px,0) scale(.98,1.035)}
+  59%{transform:translate3d(0,-3px,0) scale(1.012,.99)}
+  69%{transform:translate3d(0,0,0) scale(1)}
+}
+
+/* Copy sitzt im gleichen dunklen Bildverlauf – kein sichtbarer angehängter Block. */
+#view-today .hero-copy{
+  bottom:17px!important;
+  left:14px!important;
+  right:14px!important;
+}
+#view-today .hero-kicker{
+  background:rgba(4,25,36,.48)!important;
+  border-color:rgba(240,202,115,.34)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.04),0 6px 18px rgba(0,0,0,.10)!important;
+}
+#view-today .resume{
+  margin-top:7px!important;
+  border-color:rgba(240,202,115,.16)!important;
+  background:
+    radial-gradient(circle at 8% 50%,rgba(240,202,115,.07),transparent 30%),
+    linear-gradient(145deg,rgba(7,38,52,.98),rgba(5,28,40,.99))!important;
+}
+
+/* Video nur auf der tatsächlich sichtbaren Startseite laufen lassen; iOS bleibt energiesparender. */
+.view:not(.active) .hero-cinema-video{visibility:hidden!important}
+@media(max-width:390px){
+  #view-today .wm-dar-line{font-size:clamp(29px,8.35vw,34px)!important;letter-spacing:.055em!important;text-indent:.055em!important}
+  #view-today .wm-kids{font-size:clamp(68px,18.8vw,86px)!important}
+  #view-today .hero-salam{font-size:clamp(9.7px,2.55vw,11.2px)!important}
+  #view-today .hero h1{font-size:clamp(23px,6.15vw,29px)!important}
+  #view-today .hero-copy>p:last-child{font-size:clamp(9.8px,2.6vw,11.5px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .hero-cinema-video{display:none!important}
+  #view-today .wm-dar-line,
+  #view-today .kids-wordmark::before,
+  #view-today .kids-wordmark::after,
+  #view-today .wm-kids span{animation:none!important}
+}
+</style>
+</html>
