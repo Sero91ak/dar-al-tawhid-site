@@ -1,0 +1,166 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-3126-3150",
+  "series": "3051-3150",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "HAD-3126–3150 setzt Ṣaḥīḥ Muslim im Kitāb al-Fitan wa-Ašrāṭ as-Sāʿah von Muslim 2921 bis Muslim 2939 fort und schließt die Serie 3051–3150 vollständig ab. Parallelüberlieferungen wurden nicht künstlich vervielfacht. Muslim 2921a–d wurde als ein endzeitlicher Aussagekern geführt; 2923b nicht als eigener Datensatz; 2924a–b nur nach eigenständigen Kernen segmentiert; 2928a–b zusammengeführt; 2930/2931 nur nach vier eigenständigen prophetischen Aussagen segmentiert; 2932a–b zusammengeführt; 2934/2935a–b als eine Wasser-/Feuer-Täuschung geführt; 2937a nach klar getrennten Aussagekernen segmentiert; 2938b und 2939b–c nicht als bloße Parallelkarten vervielfacht. Alle vorgesehenen Kerne wurden vor Anlage semantisch gegen den bestehenden HAD-Bestand geprüft. Die Ṣaḥīḥ-Muslim-Stellen wurden zusätzlich gegen aktuelle Textnachweise geprüft. Früheste-Šarḥ-Priorität al-Māzirī → Qāḍī ʿIyāḍ wurde beibehalten; Qāḍī ʿIyāḍ, Ikmāl al-Muʿlim, Bd. 8, wird als direkter früher Kommentar geführt. Unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "semanticDuplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "sourceHadithNumbersChecked": true,
+    "globalCatalogUpdated": true,
+    "appleTvScreensaverUpdated": true,
+    "webIosAndroidLibraryLoaderUpdated": true,
+    "seriesProgress": "100/100",
+    "seriesCompleted": true
+  },
+  "dedupeDecisions": [
+    "Muslim 2921a–d merged into one substantive end-time combat statement core",
+    "Muslim 2922 not separately multiplied where it repeats the same core with the gharqad detail",
+    "Muslim 2923b omitted as repetition of 2923a",
+    "Muslim 2924a–b segmented only into independent Ibn Ṣayyād statement cores",
+    "Muslim 2926 omitted as same substantive Ibn Ṣayyād report as the surrounding narrations",
+    "Muslim 2927a–b merged for the confirmed Dajjāl markers concerning offspring and Makkah/Madīnah",
+    "Muslim 2928a–b merged into one Paradise-soil statement core",
+    "Muslim 2930a–2931 segmented only by independent prophetic statements; chain/wording repetitions omitted",
+    "Muslim 2932a–b merged into one anger/emergence statement core",
+    "Muslim 2933a–c not duplicated because its one-eyed/kāfir cores were already represented from the immediately preceding Muslim reports in this same block",
+    "Muslim 2934/2935a–b merged into one water/fire deception core",
+    "Muslim 2937a segmented only by clearly independent teachings and events",
+    "Muslim 2938b omitted as chain repetition of 2938a",
+    "Muslim 2939a–c merged into one 'insignificant before Allah' statement core"
+  ],
+  "sourceRange": [
+    "Muslim 2921a–d",
+    "Muslim 2922",
+    "Muslim 2923a–b",
+    "Muslim 2924a–b",
+    "Muslim 2925",
+    "Muslim 2926",
+    "Muslim 2927a–b",
+    "Muslim 2928a–b",
+    "Muslim 2929",
+    "Muslim 2930a–2931",
+    "Muslim 2932a–b",
+    "Muslim 2933a–c",
+    "Muslim 2934/2935a–b",
+    "Muslim 2936",
+    "Muslim 2937a",
+    "Muslim 2938a–b",
+    "Muslim 2939a–c"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibrary",
+    "iosHadithLibrary",
+    "androidWebAppAndWebsite"
+  ],
+  "records": [
+    {
+      "id": "HAD-3126",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3127",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3128",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3129",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3130",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3131",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3132",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3133",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3134",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3135",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3136",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3137",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3138",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3139",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3140",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3141",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3142",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3143",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3144",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3145",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3146",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3147",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3148",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3149",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3150",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    }
+  ]
+}
