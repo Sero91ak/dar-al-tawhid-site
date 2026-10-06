@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.13</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.14</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2809,18 +2809,34 @@ html:not([data-view="today"]) .view.active{
       </div>
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
-        <video class="hero-cinema-video" src="/kids/assets/kids-home-v1179/hero-cinema.mp4?v=1186" autoplay muted playsinline webkit-playsinline preload="auto" poster="/kids/assets/kids-home-v1179/hero-poster.png?v=1186" aria-hidden="true" tabindex="-1" disablepictureinpicture data-cinema-version="1185"></video>
         <div class="hero-artifact-shield" aria-hidden="true"></div>
         <div class="kids-wordmark">
-          <div class="wm-dar-html" aria-label="DĀR AL TAWḤĪD">
-            <span class="wm-dar-word wm-dar-word-1">DĀR</span>
-            <span class="wm-dar-word wm-dar-word-2">AL</span>
-            <span class="wm-dar-word wm-dar-word-3">TAWḤĪD</span>
-            <span class="wm-dar-glint" aria-hidden="true"></span>
-          </div>
+          <svg class="wm-dar-arc wm-dar-arc-v1187" viewBox="0 0 720 126" role="img" aria-label="DĀR AL TAWḤĪD">
+            <defs>
+              <path id="kidsDarArcPath1187" d="M104 84 Q360 35 616 84"></path>
+              <linearGradient id="kidsDarGold1187" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#a96c1c"></stop>
+                <stop offset="17%" stop-color="#e9b84e"></stop>
+                <stop offset="42%" stop-color="#fff0a4"></stop>
+                <stop offset="63%" stop-color="#d5942b"></stop>
+                <stop offset="82%" stop-color="#f7d275"></stop>
+                <stop offset="100%" stop-color="#ad711e"></stop>
+              </linearGradient>
+              <linearGradient id="kidsDarLine1187" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#d19a36" stop-opacity="0"></stop>
+                <stop offset="18%" stop-color="#e6b64f" stop-opacity=".45"></stop>
+                <stop offset="50%" stop-color="#ffe59a" stop-opacity=".92"></stop>
+                <stop offset="82%" stop-color="#e6b64f" stop-opacity=".45"></stop>
+                <stop offset="100%" stop-color="#d19a36" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+            <text class="wm-dar-arc-text-v1187"><textPath href="#kidsDarArcPath1187" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath></text>
+            <path class="wm-dar-arc-line-v1187" d="M142 105 Q360 83 578 105"></path>
+          </svg>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
         </div>
         <div class="cloud"></div>
+        <div class="shooting-star" aria-hidden="true"></div>
         <div class="city"></div>
         <div class="arch"></div>
         <div class="dune"></div>
@@ -3182,7 +3198,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v108-home-cinema1186";
+const KIDS_BUILD_ID="kids-shell-v108-home-sky1187";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6253,7 +6269,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v108-home-cinema1186";
+  var KIDS_BUILD_ID="kids-shell-v108-home-sky1187";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6269,7 +6285,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1186",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1187",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -9217,6 +9233,172 @@ html[data-view="stories"] #view-stories > :last-child{
 @media(prefers-reduced-motion:reduce){
   #view-today .wm-dar-word,#view-today .wm-dar-glint{animation:none!important}
   #view-today.view.active,#view-stories.view.active,#view-quran.view.active,#view-parents.view.active{animation:none!important}
+}
+</style>
+
+
+<style id="kids-home-sky-v1187">
+/* V1187: exact calm home direction — no video loop, no camera zoom.
+   Only slow clouds + one occasional shooting star move. */
+#view-today .hero{
+  min-height:clamp(485px,122vw,535px)!important;
+  max-height:535px!important;
+  overflow:hidden!important;
+}
+#view-today .hero-cinema-video{display:none!important}
+#view-today .hero::before{
+  inset:0!important;
+  transform:none!important;
+  animation:none!important;
+  background:
+    linear-gradient(180deg,rgba(3,19,27,.04) 0%,rgba(3,19,27,.015) 38%,rgba(5,26,36,.20) 64%,#061b26 100%),
+    url("/kids/assets/kids-home-v1179/hero-poster.png?v=1187") center 55%/cover no-repeat!important;
+  filter:saturate(1.04) contrast(1.03) brightness(.92)!important;
+}
+#view-today .hero::after{
+  background:
+    radial-gradient(ellipse at 68% 12%,rgba(255,225,156,.055),transparent 23%),
+    linear-gradient(180deg,rgba(3,18,27,.10) 0%,rgba(3,18,27,.02) 48%,rgba(4,22,31,.24) 72%,#061b26 100%)!important;
+}
+
+/* Keep the old source-artifact guard, but lighter and fully static. */
+#view-today .hero-artifact-shield{
+  top:-14px!important;
+  width:min(64vw,315px)!important;
+  height:118px!important;
+  opacity:.84!important;
+  filter:blur(7px)!important;
+  background:radial-gradient(ellipse at 50% 15%,rgba(4,32,43,.96) 0 30%,rgba(4,34,45,.72) 48%,rgba(5,39,50,.22) 70%,transparent 84%)!important;
+}
+
+/* Exact earlier-style brand: slight arch, gold serif, stable and centered. */
+#view-today .wm-dar-html{display:none!important}
+#view-today .wm-dar-arc-v1187{
+  display:block!important;
+  width:min(calc(100vw - 32px),535px)!important;
+  max-width:535px!important;
+  height:auto!important;
+  margin:0 auto -7px!important;
+  overflow:visible!important;
+  transform:none!important;
+  animation:none!important;
+  filter:
+    drop-shadow(0 2px 0 rgba(72,40,8,.62))
+    drop-shadow(0 7px 13px rgba(0,0,0,.44))
+    drop-shadow(0 0 8px rgba(247,196,83,.20))!important;
+}
+#view-today .wm-dar-arc-text-v1187{
+  font-family:"Cinzel",Georgia,"Times New Roman",serif!important;
+  font-size:52px!important;
+  font-weight:700!important;
+  letter-spacing:2px!important;
+  fill:url(#kidsDarGold1187)!important;
+  stroke:rgba(82,44,8,.58)!important;
+  stroke-width:.85px!important;
+  paint-order:stroke fill!important;
+}
+#view-today .wm-dar-arc-line-v1187{
+  fill:none!important;
+  stroke:url(#kidsDarLine1187)!important;
+  stroke-width:1.65px!important;
+  stroke-linecap:round!important;
+  opacity:.82!important;
+}
+#view-today .wm-dar-shine-bar,
+#view-today .wm-dar-spark,
+#view-today .wm-dar-glint{display:none!important}
+
+/* No Kids bounce. The wordmark and Kids lettering stay visually stable. */
+#view-today .wm-kids span{
+  animation:none!important;
+  transform:none!important;
+}
+
+/* Only motion #1: very slow cloud drift, with two soft layers. */
+#view-today .hero .cloud{
+  display:block!important;
+  position:absolute!important;
+  z-index:4!important;
+  left:-22%!important;
+  top:17%!important;
+  width:145%!important;
+  height:28%!important;
+  border-radius:0!important;
+  opacity:.15!important;
+  filter:blur(13px)!important;
+  background:
+    radial-gradient(ellipse at 14% 49%,rgba(217,236,240,.42) 0 9%,transparent 20%),
+    radial-gradient(ellipse at 34% 34%,rgba(228,240,241,.34) 0 11%,transparent 23%),
+    radial-gradient(ellipse at 57% 53%,rgba(207,231,236,.34) 0 10%,transparent 22%),
+    radial-gradient(ellipse at 79% 35%,rgba(229,241,242,.30) 0 10%,transparent 22%),
+    radial-gradient(ellipse at 95% 54%,rgba(208,230,235,.30) 0 9%,transparent 20%)!important;
+  animation:homeCloudDrift1187 34s ease-in-out infinite alternate!important;
+  will-change:transform!important;
+  pointer-events:none!important;
+}
+#view-today .hero .cloud::before,
+#view-today .hero .cloud::after{display:none!important}
+@keyframes homeCloudDrift1187{
+  from{transform:translate3d(-2.5%,0,0)}
+  to{transform:translate3d(7.5%,1.5%,0)}
+}
+
+/* Only motion #2: one realistic, brief shooting star with a long idle phase. */
+#view-today .shooting-star{
+  position:absolute!important;
+  z-index:6!important;
+  top:16%!important;
+  left:76%!important;
+  width:4px!important;
+  height:4px!important;
+  border-radius:50%!important;
+  background:#fff5c8!important;
+  box-shadow:0 0 6px rgba(255,242,190,.95),0 0 13px rgba(255,210,108,.50)!important;
+  opacity:0;
+  pointer-events:none!important;
+  transform:translate3d(60px,-26px,0)!important;
+  animation:homeShootingStar1187 13.5s ease-in-out infinite!important;
+}
+#view-today .shooting-star::after{
+  content:""!important;
+  position:absolute!important;
+  right:-2px!important;
+  top:50%!important;
+  width:92px!important;
+  height:1.3px!important;
+  transform-origin:right center!important;
+  transform:translateY(-50%) rotate(-27deg)!important;
+  border-radius:999px!important;
+  background:linear-gradient(90deg,transparent,rgba(255,228,145,.18),rgba(255,247,212,.88))!important;
+  filter:drop-shadow(0 0 4px rgba(255,218,124,.35))!important;
+}
+@keyframes homeShootingStar1187{
+  0%,70%{opacity:0;transform:translate3d(60px,-26px,0)}
+  72%{opacity:.18}
+  74%{opacity:1}
+  82%{opacity:.86;transform:translate3d(-105px,76px,0)}
+  86%,100%{opacity:0;transform:translate3d(-132px,92px,0)}
+}
+
+/* Everything else in the hero stays still. */
+#view-today .hero .city,
+#view-today .hero .arch,
+#view-today .hero .dune,
+#view-today .hero .lantern,
+#view-today .kids-wordmark::before{
+  animation:none!important;
+}
+@media(max-width:390px){
+  #view-today .wm-dar-arc-v1187{width:calc(100vw - 28px)!important}
+  #view-today .wm-dar-arc-text-v1187{font-size:50px!important;letter-spacing:1.7px!important}
+}
+@media(min-width:700px){
+  #view-today .wm-dar-arc-v1187{width:545px!important;max-width:545px!important}
+  #view-today .wm-dar-arc-text-v1187{font-size:54px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .hero .cloud,#view-today .shooting-star{animation:none!important}
+  #view-today .shooting-star{display:none!important}
 }
 </style>
 
