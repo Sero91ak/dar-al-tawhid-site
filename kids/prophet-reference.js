@@ -44,9 +44,9 @@ function render(){
         '<span class="eyebrow">'+label+'</span>'+
         '<h2>'+esc(item.name)+(item.id==="muhammad"?" ﷺ":"")+'</h2>'+
         '<span class="arabic" dir="rtl">'+esc(ar(item))+'</span>'+
-        '<span class="story-time">◷ &nbsp;ca. '+minutes(item)+' Min.</span>'+
+
       '</span>'+
-      '<span class="story-go" aria-hidden="true">›</span>'+
+
     '</button>';
   }).join("");
   document.querySelectorAll(".story").forEach(b=>b.addEventListener("click",()=>openDetail(b.dataset.id)));
