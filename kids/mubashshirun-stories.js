@@ -148,10 +148,6 @@ function renderCards(){
   const libraryPage=$("#msLibraryPage");if(libraryPage)libraryPage.dataset.age=age();
   grid.innerHTML=items.map((item,index)=>{
     const t=textFor(item),src=art(item);
-    const rawSummary=String(item.summary||"").replace(/\s+/g," ").trim();
-    const leadSummary=rawSummary.split(/\s+[–—]\s+|;\s+/)[0].trim();
-    const cardSummary=(leadSummary.length>=14&&leadSummary.length<=72)?leadSummary:rawSummary;
-    const shortSummary=cardSummary.length>78?(cardSummary.slice(0,75).replace(/\s+\S*$/,"")+"…"):cardSummary;
     return '<button class="ms-story-row" type="button" data-ms-id="'+esc(item.id)+'">'+
       '<span class="ms-row-visual" aria-hidden="true">'+
         (src?'<img src="'+esc(src)+'" alt="" data-ms-cover-id="'+esc(item.id)+'" decoding="async" loading="'+(index<4?"eager":"lazy")+'">':'')+
@@ -159,11 +155,11 @@ function renderCards(){
       '</span>'+
       '<span class="ms-row-copy">'+
         '<strong class="ms-row-title">'+esc(item.name)+'</strong>'+
-        '<span class="ms-row-ar" dir="rtl">'+esc(item.nameAr||"")+'</span>'+
-        '<span class="ms-row-summary">'+esc(shortSummary)+'</span>'+
+        '<span class="ms-row-ar" dir="rtl">'+esc(item.nameAr||"")+' رضي الله عنه</span>'+
+        '<span class="ms-row-summary">'+esc(item.summary||"")+'</span>'+
         '<span class="ms-row-meta">'+durationLabel(item,t)+' · Alter '+esc(age())+'</span>'+
       '</span>'+
-      '<span class="ms-row-go'+(isAudioOnlyAge()?' is-listen':'')+'" aria-hidden="true">'+(isAudioOnlyAge()?'▶':'›')+'</span>'+
+      '<span class="ms-row-go" aria-hidden="true">›</span>'+
       (done(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':'')+
     '</button>';
   }).join("");
@@ -209,10 +205,6 @@ function ensureUi(){
       '<div><strong>Die zehn Mubaschschirūn</strong><span>al-ʿAšarah al-Mubaššarūn · 10 Gefährten</span></div>'+
     '</div>'+
     '<div class="ms-library-scroll" id="msLibraryScroll">'+
-
-
-
-      '<div class="story-list-head"><span>DIE ZEHN GEFÄHRTEN</span><strong>Die zehn Mubaschschirūn</strong><small>Wähle eine Geschichte aus.</small></div>'+
       '<div id="msGrid" class="ms-list"></div>'+
     '</div>';
   document.body.appendChild(page);
