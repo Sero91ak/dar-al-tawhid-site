@@ -314,4 +314,5 @@ jobs:
             scripts/optimize-app-media.sh
           git diff --cached --stat
           git commit -m "Kids: restore original Prophet story audio masters"
+          git pull --rebase origin main
           git push origin HEAD:main
