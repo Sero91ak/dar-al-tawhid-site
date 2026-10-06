@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c2636">
+<link rel="stylesheet" href="https://use.typekit.net/jka5jda.css">
 <link rel="manifest" href="/kids/manifest.webmanifest">
 <link rel="apple-touch-icon" sizes="180x180" href="/kids/icons/apple-touch-icon.png?v=logo28">
 <link rel="icon" type="image/png" sizes="32x32" href="/kids/icons/favicon-32.png?v=logo28">
@@ -2800,7 +2801,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.24</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.25</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3181,7 +3182,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v108-reference-hero1197";
+const KIDS_BUILD_ID="kids-shell-v108-reference-hero1198";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6252,7 +6253,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v108-reference-hero1197";
+  var KIDS_BUILD_ID="kids-shell-v108-reference-hero1198";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6268,7 +6269,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1197",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1198",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -8954,7 +8955,7 @@ html[data-view="stories"] #view-stories > :last-child{
   animation:darArcFloat1181 6.4s ease-in-out infinite!important;
 }
 #view-today .wm-dar-arc-text{
-  font-family:"Cinzel",Georgia,"Times New Roman",serif!important;
+  font-family:"cinzel","Cinzel",Georgia,"Times New Roman",serif!important;
   font-size:54px!important;
   font-weight:700!important;
   letter-spacing:2.4px!important;
@@ -9084,7 +9085,7 @@ html[data-view="stories"] #view-stories > :last-child{
 #view-today .kids-wordmark::before{top:-18px!important;width:min(88vw,465px)!important;height:158px!important;opacity:.82!important;animation:none!important;background:radial-gradient(ellipse,rgba(3,22,31,.70) 0%,rgba(5,28,39,.30) 55%,transparent 80%)!important;filter:blur(8px)!important}
 #view-today .wm-dar-line{display:none!important}
 #view-today .wm-dar-arc{display:block!important;width:min(92vw,500px)!important;height:auto!important;margin:0 auto -7px!important;overflow:visible!important;animation:none!important;transform:none!important;filter:drop-shadow(0 2px 0 rgba(76,43,10,.66)) drop-shadow(0 6px 11px rgba(0,0,0,.48)) drop-shadow(0 0 9px rgba(245,195,82,.22))!important}
-#view-today .wm-dar-arc-text,#view-today .wm-dar-arc-masktext{font-family:"Cinzel",Georgia,"Times New Roman",serif!important;font-size:52px!important;font-weight:700!important;letter-spacing:2.2px!important}
+#view-today .wm-dar-arc-text,#view-today .wm-dar-arc-masktext{font-family:"cinzel","Cinzel",Georgia,"Times New Roman",serif!important;font-size:52px!important;font-weight:700!important;letter-spacing:2.2px!important}
 #view-today .wm-dar-arc-text{fill:url(#kidsDarGold1185)!important;stroke:rgba(82,44,8,.72)!important;stroke-width:1.65px!important;paint-order:stroke fill!important}
 #view-today .wm-dar-arc-line{fill:none!important;stroke:url(#kidsDarLineGold1185)!important;stroke-width:1.8px!important;stroke-linecap:round!important;opacity:.74!important;animation:none!important}
 #view-today .wm-dar-shine-bar{opacity:0;animation:darLightSweep1185 6.8s cubic-bezier(.32,.02,.25,1) infinite!important}
@@ -9122,7 +9123,7 @@ html[data-view="stories"] #view-stories > :last-child{
   padding:8px 8px 12px!important;
   overflow:visible!important;
   white-space:nowrap!important;
-  font-family:"Cinzel",Georgia,"Times New Roman",serif!important;
+  font-family:"cinzel","Cinzel",Georgia,"Times New Roman",serif!important;
   font-size:clamp(34px,8.7vw,46px)!important;
   line-height:1!important;
   font-weight:700!important;
@@ -9271,7 +9272,7 @@ html[data-view="stories"] #view-stories > :last-child{
     drop-shadow(0 0 8px rgba(247,196,83,.20))!important;
 }
 #view-today .wm-dar-arc-text-v1187{
-  font-family:"Cinzel",Georgia,"Times New Roman",serif!important;
+  font-family:"cinzel","Cinzel",Georgia,"Times New Roman",serif!important;
   font-size:52px!important;
   font-weight:700!important;
   letter-spacing:2px!important;
@@ -9487,7 +9488,7 @@ html[data-view="stories"] #view-stories > :last-child{
     drop-shadow(0 0 17px rgba(255,173,42,.22))!important;
 }
 #view-today .wm-dar-arc-text-v1188{
-  font-family:"Cinzel",Georgia,"Times New Roman",serif!important;
+  font-family:"cinzel","Cinzel",Georgia,"Times New Roman",serif!important;
   font-size:88px!important;
   font-weight:700!important;
   letter-spacing:0!important;
@@ -9740,7 +9741,7 @@ html[data-view="stories"] #view-stories > :last-child{
   filter:drop-shadow(0 2px 0 rgba(72,39,7,.78)) drop-shadow(0 6px 11px rgba(0,0,0,.44)) drop-shadow(0 0 8px rgba(255,197,75,.38))!important;
 }
 #view-today .wm-dar-arc-text-v1188{
-  font-family:"Cinzel",Georgia,"Times New Roman",serif!important;
+  font-family:"cinzel","Cinzel",Georgia,"Times New Roman",serif!important;
   font-size:88px!important;
   font-weight:700!important;
   letter-spacing:0!important;
@@ -9827,7 +9828,7 @@ html[data-view="stories"] #view-stories > :last-child{
 
   <script src="/kids/kids-card-interaction.js?v=2" defer></script>
 
-<style id="kids-home-reference-exact-v1197">
+<style id="kids-home-reference-exact-v1198">
 /* V1196 — approved screenshot direction.
    Exact static reference artwork, center/cover framing, no background motion.
    Brand stays real text (Safari-safe), but regains the larger luminous curved look. */
@@ -9852,7 +9853,7 @@ html[data-view="stories"] #view-stories > :last-child{
       rgba(4,22,31,.13) 73%,
       rgba(6,27,38,.55) 91%,
       #061b26 100%),
-    url("/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1197") center 50%/cover no-repeat!important;
+    url("/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1198") center 50%/cover no-repeat!important;
   background-position:center 50%!important;
   background-size:cover!important;
   background-repeat:no-repeat!important;
@@ -9906,7 +9907,7 @@ html[data-view="stories"] #view-stories > :last-child{
   overflow:visible!important;
   white-space:nowrap!important;
   color:#edb94d!important;
-  font-family:"Cinzel",Georgia,"Times New Roman",serif!important;
+  font-family:"cinzel","Cinzel",Georgia,"Times New Roman",serif!important;
   font-size:clamp(43px,11.8vw,57px)!important;
   line-height:1!important;
   font-weight:700!important;
@@ -9945,7 +9946,7 @@ html[data-view="stories"] #view-stories > :last-child{
   -webkit-text-stroke:.55px rgba(78,42,8,.60)!important;
   paint-order:stroke fill!important;
   transform-origin:50% 100%!important;
-  animation:darReferenceGlow1197 7.6s ease-in-out infinite!important;
+  animation:darReferenceGlow1198 7.6s ease-in-out infinite!important;
 }
 
 /* Shallow letter-by-letter arch, matching the reference while keeping every glyph fully visible. */
@@ -9975,7 +9976,7 @@ html[data-view="stories"] #view-stories > :last-child{
   pointer-events:none!important;
 }
 
-@keyframes darReferenceGlow1197{
+@keyframes darReferenceGlow1198{
   0%,18%,100%{background-position:0% 50%;filter:brightness(.99)}
   45%{background-position:100% 50%;filter:brightness(1.13)}
   70%{background-position:100% 50%;filter:brightness(1.02)}
