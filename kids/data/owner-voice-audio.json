@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "id": "KIDS_OWNER_VOICE_V2",
-  "buildId": "serhat-kids-20261005-090732",
-  "updatedAt": "2026-10-05T09:31:10+0200",
+  "buildId": "serhat-kids-20261005-141540",
+  "updatedAt": "2026-10-06T15:01:02+0200",
   "voiceProfileId": "serhat-owner-voice-2026",
   "speaker": "Serhat Abu Malik",
   "engine": "local-serhat-engine",
@@ -27741,14 +27741,49 @@
         "owner_voice_mode": "kids_lesson",
         "kids_owner_master_cache": "write"
       }
+    },
+    "Welche Reihenfolge lehrt Qurʾān 3:159 im Umgang mit Menschen und Entscheidungen? Antwort 1: Sanft sein, vergeben, beraten und nach dem Entschluss auf Allah vertrauen. Antwort 2: Hart sein und nie jemanden beraten. Antwort 3: Nach jeder Entscheidung nur auf sich selbst vertrauen.": {
+      "url": "/kids/assets/kids-owner-voice/097d23722704e394d3fc.m4a?v=serhat-kids-20261005-141540",
+      "sha256": "6e3b4052a791be051cfa3d44fee1c89e3e1486e038561f060bc1ef8f8b9c9bd9",
+      "durationSeconds": 22.976,
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "speaker": "Serhat Abu Malik",
+      "engine": "local-serhat-engine",
+      "sourceVoice": "authorized-owner-voice",
+      "sourceType": "local-owner-generated",
+      "mode": "kids_lesson",
+      "scopes": [
+        "quiz"
+      ],
+      "sourceIds": [
+        "quiz"
+      ],
+      "qaBy": "local-serhat-engine-auto-qa",
+      "qaMetrics": {
+        "duration_s": 22.976,
+        "rms": 0.152088,
+        "peak": 0.95897,
+        "clipping_ratio": 0.0,
+        "max_internal_silence_ms": 490,
+        "max_sustained_plateau_ms": 60,
+        "speech_rate_wpm": 114.9,
+        "issues": [],
+        "internal_punctuation": true,
+        "inline_arabic_microterm": false,
+        "internal_silence_limit_ms": 560,
+        "owner_voice_composite": true,
+        "owner_voice_parts": 7,
+        "owner_voice_mode": "kids_lesson",
+        "kids_owner_master_cache": "write"
+      }
     }
   },
   "counts": {
     "requiredTexts": 753,
-    "generatedThisRun": 0,
-    "failedThisRun": 33,
-    "remainingMissing": 33,
-    "totalEntries": 802
+    "generatedThisRun": 1,
+    "failedThisRun": 32,
+    "remainingMissing": 32,
+    "totalEntries": 803
   },
   "pendingFailures": [
     {
@@ -27961,17 +27996,6 @@
       "error": "Kids-Owner-Gesamt-Audio-QA fehlgeschlagen: excessive_internal_pause · Text: Welche Verantwortung zeigt Qurʾān 99:7–8? Antwort 1: Selbst kleinste gut"
     },
     {
-      "text": "Welche Reihenfolge lehrt Qurʾān 3:159 im Umgang mit Menschen und Entscheidungen? Antwort 1: Sanft sein, vergeben, beraten und nach dem Entschluss auf Allah vert",
-      "mode": "kids_lesson",
-      "scopes": [
-        "quiz"
-      ],
-      "sourceIds": [
-        "quiz"
-      ],
-      "error": "Audio-QA fehlgeschlagen (de/kids_lesson): speech_rate_too_slow · interne Stille 560 ms · Text: Antwort 1: Sanft sein, vergeben, beraten"
-    },
-    {
       "text": "Welche Lehre enthält Ṣaḥīḥ Muslim 2626? Antwort 1: Keine gute Tat gering achten, selbst freundliches Begegnen nicht. Antwort 2: Nur große Taten zählen. Antwort ",
       "mode": "kids_lesson",
       "scopes": [
@@ -28079,7 +28103,7 @@
       "sourceIds": [
         "auth-ibrahim-kabah"
       ],
-      "error": "Ausspracheprüfung erforderlich: Barakātuh"
+      "error": "Ausspracheprüfung erforderlich: ad"
     },
     {
       "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. Nūḥ war ein Gesandter Allahs. Er rief sein Volk dazu auf, Allah allein zu dienen. Der Qurʾān beri",
@@ -28090,7 +28114,7 @@
       "sourceIds": [
         "auth-nuh-ark"
       ],
-      "error": "Ausspracheprüfung erforderlich: Barakātuh"
+      "error": "Ausspracheprüfung erforderlich: al-Jūdī"
     },
     {
       "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. Der Qurʾān erzählt ausführlich von Yūsuf. Seine Brüder kamen später zu ihm, und schließlich wurde",
@@ -28101,7 +28125,7 @@
       "sourceIds": [
         "auth-yusuf-forgiveness"
       ],
-      "error": "Ausspracheprüfung erforderlich: Barakātuh"
+      "error": "Ausspracheprüfung erforderlich: Sūrah"
     },
     {
       "text": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder. Der Qurʾān berichtet von Mūsā. Im geheiligten Tal Ṭuwā wurde er angesprochen. Allah zeigte ihm Ze",
@@ -28112,7 +28136,7 @@
       "sourceIds": [
         "auth-musa-tuwa"
       ],
-      "error": "Ausspracheprüfung erforderlich: Barakātuh"
+      "error": "Ausspracheprüfung erforderlich: Ṭuwā"
     }
   ]
 }
