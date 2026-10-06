@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.08</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.12</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2809,27 +2809,36 @@ html:not([data-view="today"]) .view.active{
       </div>
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
+        <video class="hero-cinema-video" src="/kids/assets/kids-home-v1179/hero-cinema.mp4?v=1185" autoplay muted playsinline webkit-playsinline preload="auto" poster="/kids/assets/kids-home-v1179/hero-poster.png?v=1185" aria-hidden="true" tabindex="-1" disablepictureinpicture data-cinema-version="1185"></video>
+        <div class="hero-artifact-shield" aria-hidden="true"></div>
         <div class="kids-wordmark">
-          <svg class="wm-dar-arc" viewBox="0 0 640 104" role="img" aria-label="DĀR AL TAWḤĪD">
+          <svg class="wm-dar-arc" viewBox="0 0 640 118" role="img" aria-label="DĀR AL TAWḤĪD">
             <defs>
-              <path id="kidsDarArcPath1181" d="M58 76 Q320 24 582 76"></path>
-              <linearGradient id="kidsDarGold1181" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#b67a22"></stop>
-                <stop offset="18%" stop-color="#f7d77d"></stop>
-                <stop offset="44%" stop-color="#fff4bf"></stop>
-                <stop offset="67%" stop-color="#d79b37"></stop>
-                <stop offset="100%" stop-color="#ffe79a"></stop>
+              <path id="kidsDarArcPath1185" d="M82 79 Q320 28 558 79"></path>
+              <linearGradient id="kidsDarGold1185" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#a96f1d"></stop><stop offset="16%" stop-color="#e9b94f"></stop>
+                <stop offset="39%" stop-color="#fff1a9"></stop><stop offset="58%" stop-color="#d79b31"></stop>
+                <stop offset="78%" stop-color="#ffe598"></stop><stop offset="100%" stop-color="#b97920"></stop>
               </linearGradient>
-              <linearGradient id="kidsDarLineGold1181" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#d09b38" stop-opacity="0"></stop>
-                <stop offset="20%" stop-color="#e7ba55" stop-opacity=".62"></stop>
-                <stop offset="50%" stop-color="#fff0aa" stop-opacity=".98"></stop>
-                <stop offset="80%" stop-color="#e7ba55" stop-opacity=".62"></stop>
+              <linearGradient id="kidsDarLineGold1185" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#d09b38" stop-opacity="0"></stop><stop offset="18%" stop-color="#e7ba55" stop-opacity=".48"></stop>
+                <stop offset="50%" stop-color="#fff0aa" stop-opacity=".95"></stop><stop offset="82%" stop-color="#e7ba55" stop-opacity=".48"></stop>
                 <stop offset="100%" stop-color="#d09b38" stop-opacity="0"></stop>
               </linearGradient>
+              <linearGradient id="kidsDarShine1185" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#fff" stop-opacity="0"></stop><stop offset="42%" stop-color="#fff7cf" stop-opacity=".10"></stop>
+                <stop offset="50%" stop-color="#fff" stop-opacity=".98"></stop><stop offset="58%" stop-color="#fff7cf" stop-opacity=".10"></stop>
+                <stop offset="100%" stop-color="#fff" stop-opacity="0"></stop>
+              </linearGradient>
+              <mask id="kidsDarShineMask1185">
+                <rect width="640" height="118" fill="#000"></rect>
+                <text class="wm-dar-arc-masktext" fill="#fff"><textPath href="#kidsDarArcPath1185" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath></text>
+              </mask>
             </defs>
-            <text class="wm-dar-arc-text"><textPath href="#kidsDarArcPath1181" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath></text>
-            <path class="wm-dar-arc-line" d="M112 91 Q320 69 528 91"></path>
+            <text class="wm-dar-arc-text"><textPath href="#kidsDarArcPath1185" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath></text>
+            <rect class="wm-dar-shine-bar" x="-170" y="8" width="150" height="88" rx="40" fill="url(#kidsDarShine1185)" mask="url(#kidsDarShineMask1185)"></rect>
+            <path class="wm-dar-arc-line" d="M126 100 Q320 78 514 100"></path>
+            <g class="wm-dar-spark" aria-hidden="true"><path d="M565 66 L569 76 L579 80 L569 84 L565 94 L561 84 L551 80 L561 76 Z"></path><circle cx="584" cy="68" r="2.5"></circle><circle cx="548" cy="61" r="1.8"></circle></g>
           </svg>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
         </div>
@@ -3195,7 +3204,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v108-story-cards1183";
+const KIDS_BUILD_ID="kids-shell-v108-home-cinema1185";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6262,7 +6271,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v108-story-cards1183";
+  var KIDS_BUILD_ID="kids-shell-v108-home-cinema1185";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6278,7 +6287,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1183",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1185",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -9073,4 +9082,47 @@ html[data-view="stories"] #view-stories > :last-child{
 </style>
 
 <script src="/kids/navigation-v1182.js?v=1182"></script>
+
+<style id="kids-home-cinema-v1185">
+#view-today{--home-v1185-deep:#061b26;--home-v1185-petrol:#082b37}
+#view-today .hero{min-height:clamp(485px,122vw,535px)!important;max-height:535px!important;background:var(--home-v1185-deep)!important;overflow:hidden!important}
+#view-today .hero::before{inset:-8%!important;background:linear-gradient(180deg,rgba(3,19,27,.10),rgba(3,19,27,.02) 38%,rgba(5,26,36,.22) 64%,var(--home-v1185-deep) 100%),url("/kids/assets/kids-home-v1179/hero-poster.png?v=1185") center 59%/cover no-repeat!important;filter:saturate(1.045) contrast(1.035) brightness(.91)!important;animation:homePosterBreath1185 18s ease-in-out infinite alternate!important}
+@keyframes homePosterBreath1185{from{transform:scale(1.09) translate3d(-.25%,.15%,0)}to{transform:scale(1.13) translate3d(.38%,-.32%,0)}}
+#view-today .hero-cinema-video{display:block!important;position:absolute!important;z-index:1!important;inset:-8%!important;width:116%!important;height:116%!important;object-fit:cover!important;object-position:center 59%!important;opacity:0!important;pointer-events:none!important;transform:scale(1.08) translateZ(0)!important;transform-origin:50% 52%!important;filter:saturate(1.055) contrast(1.04) brightness(.91)!important;transition:opacity .42s ease!important;animation:homeVideoDrift1185 16s ease-in-out infinite alternate!important}
+#view-today .hero.cinema-playing:not(.cinema-resetting) .hero-cinema-video{opacity:.94!important}
+#view-today .hero.cinema-resetting .hero-cinema-video{opacity:0!important}
+@keyframes homeVideoDrift1185{from{transform:scale(1.08) translate3d(-.35%,.12%,0)}to{transform:scale(1.115) translate3d(.45%,-.30%,0)}}
+#view-today .hero-artifact-shield{display:block!important;position:absolute!important;z-index:5!important;top:-10px!important;left:50%!important;width:min(66vw,330px)!important;height:126px!important;transform:translateX(-50%)!important;pointer-events:none!important;background:radial-gradient(ellipse at 50% 18%,rgba(4,33,44,.98) 0 31%,rgba(4,34,45,.90) 44%,rgba(5,39,50,.56) 62%,rgba(5,39,50,.16) 75%,transparent 86%)!important;filter:blur(5px)!important}
+#view-today .hero .cloud{opacity:.085!important;animation-duration:31s!important}
+#view-today .hero .city{opacity:.34!important;animation-duration:6.2s!important}
+#view-today .hero .arch{opacity:0!important;animation-duration:16.5s!important}
+#view-today .hero .dune{opacity:.18!important;animation-duration:14s!important}
+#view-today .hero .lantern{animation-duration:5.4s!important}
+#view-today .kids-wordmark{z-index:9!important;top:max(42px,calc(env(safe-area-inset-top,0px) + 17px))!important;width:min(calc(100vw - 46px),520px)!important;max-width:calc(100vw - 46px)!important;gap:0!important}
+#view-today .kids-wordmark::before{top:-18px!important;width:min(88vw,465px)!important;height:158px!important;opacity:.82!important;animation:none!important;background:radial-gradient(ellipse,rgba(3,22,31,.70) 0%,rgba(5,28,39,.30) 55%,transparent 80%)!important;filter:blur(8px)!important}
+#view-today .wm-dar-line{display:none!important}
+#view-today .wm-dar-arc{display:block!important;width:min(92vw,500px)!important;height:auto!important;margin:0 auto -7px!important;overflow:visible!important;animation:none!important;transform:none!important;filter:drop-shadow(0 2px 0 rgba(76,43,10,.66)) drop-shadow(0 6px 11px rgba(0,0,0,.48)) drop-shadow(0 0 9px rgba(245,195,82,.22))!important}
+#view-today .wm-dar-arc-text,#view-today .wm-dar-arc-masktext{font-family:"Cinzel",Georgia,"Times New Roman",serif!important;font-size:52px!important;font-weight:700!important;letter-spacing:2.2px!important}
+#view-today .wm-dar-arc-text{fill:url(#kidsDarGold1185)!important;stroke:rgba(82,44,8,.72)!important;stroke-width:1.65px!important;paint-order:stroke fill!important}
+#view-today .wm-dar-arc-line{fill:none!important;stroke:url(#kidsDarLineGold1185)!important;stroke-width:1.8px!important;stroke-linecap:round!important;opacity:.74!important;animation:none!important}
+#view-today .wm-dar-shine-bar{opacity:0;animation:darLightSweep1185 6.8s cubic-bezier(.32,.02,.25,1) infinite!important}
+@keyframes darLightSweep1185{0%,18%{transform:translateX(0);opacity:0}24%{opacity:.15}34%{opacity:.92}55%{transform:translateX(840px);opacity:.82}61%,100%{transform:translateX(840px);opacity:0}}
+#view-today .wm-dar-spark{fill:#fff3b2!important;filter:drop-shadow(0 0 7px rgba(255,224,129,.92))!important;transform-box:fill-box!important;transform-origin:center!important;opacity:0;animation:darSparkFinish1185 6.8s ease-in-out infinite!important}
+@keyframes darSparkFinish1185{0%,53%{opacity:0;transform:translateY(2px) scale(.25) rotate(-18deg)}59%{opacity:1;transform:translateY(0) scale(1) rotate(0)}64%{opacity:.95;transform:translateY(-7px) scale(1.16) rotate(8deg)}71%,100%{opacity:0;transform:translateY(-13px) scale(.56) rotate(16deg)}}
+#view-today .wm-kids{font-size:clamp(74px,19.5vw,98px)!important;margin-top:-7px!important}
+#view-today .wm-kids span{animation:kidsPremiumFloat1185 4.7s ease-in-out infinite!important}
+@keyframes kidsPremiumFloat1185{0%,100%{transform:translateY(0) scale(1)}48%{transform:translateY(-3px) scale(1.008)}64%{transform:translateY(0) scale(1)}}
+#view-today .hero-copy{z-index:9!important;left:12px!important;right:12px!important;bottom:16px!important;padding:7px 8px 5px!important;background:linear-gradient(180deg,rgba(4,22,31,0),rgba(4,22,31,.28))!important}
+#view-today .hero-salam{max-width:430px!important;margin:0 auto 9px!important;font-size:clamp(16px,4.15vw,18.5px)!important;line-height:1.28!important;font-weight:700!important;color:#fff9ee!important;text-shadow:0 3px 13px rgba(0,0,0,.64)!important}
+#view-today .hero-kicker{margin-bottom:8px!important}
+#view-today .hero h1{font-size:clamp(26px,6.7vw,32px)!important}
+#view-today .hero-copy>p:last-child{font-size:clamp(13.5px,3.5vw,15px)!important}
+@media(max-width:390px){#view-today .hero{min-height:clamp(468px,124vw,505px)!important;max-height:505px!important}#view-today .kids-wordmark{top:max(37px,calc(env(safe-area-inset-top,0px) + 14px))!important;width:calc(100vw - 34px)!important;max-width:calc(100vw - 34px)!important}#view-today .wm-dar-arc{width:calc(100vw - 34px)!important}#view-today .wm-dar-arc-text,#view-today .wm-dar-arc-masktext{font-size:50px!important;letter-spacing:1.8px!important}#view-today .wm-kids{font-size:clamp(69px,18.5vw,82px)!important}#view-today .hero-copy{bottom:13px!important}#view-today .hero-salam{font-size:clamp(15px,4vw,16.5px)!important}}
+@media(min-width:700px){#view-today .hero{min-height:525px!important;max-height:525px!important}#view-today .kids-wordmark{top:max(46px,calc(env(safe-area-inset-top,0px) + 20px))!important;width:min(calc(100vw - 82px),560px)!important;max-width:560px!important}#view-today .wm-dar-arc{width:530px!important}#view-today .wm-dar-arc-text,#view-today .wm-dar-arc-masktext{font-size:54px!important}#view-today .wm-kids{font-size:98px!important}#view-today .hero-copy{bottom:18px!important}#view-today .hero-salam{font-size:19px!important;max-width:470px!important}}
+@media(prefers-reduced-motion:reduce){#view-today .hero-cinema-video{display:none!important}#view-today .wm-dar-shine-bar,#view-today .wm-dar-spark,#view-today .wm-kids span{animation:none!important}#view-today .wm-dar-shine-bar,#view-today .wm-dar-spark{display:none!important}}
+</style>
+<script id="kids-home-cinema-runtime-v1185">
+(function(){function boot1185(){var today=document.getElementById("view-today"),hero=today&&today.querySelector(".hero"),video=hero&&hero.querySelector(".hero-cinema-video");if(!today||!hero||!video)return;var resetting=false;video.muted=true;video.defaultMuted=true;video.loop=false;video.playsInline=true;video.playbackRate=.62;video.setAttribute("muted","");video.setAttribute("playsinline","");video.setAttribute("webkit-playsinline","");function active(){return today.classList.contains("active")&&document.visibilityState!=="hidden"}function play(){if(!active())return;try{video.playbackRate=.62;var p=video.play();if(p&&typeof p.catch==="function")p.catch(function(){hero.classList.remove("cinema-playing")})}catch(e){}}function resetSeam(){if(resetting)return;resetting=true;hero.classList.add("cinema-resetting");setTimeout(function(){try{video.currentTime=.08}catch(e){}setTimeout(function(){hero.classList.remove("cinema-resetting");resetting=false;play()},110)},300)}function guardSeam(){var d=Number(video.duration||0);if(d>0&&video.currentTime>=Math.max(.2,d-.44))resetSeam()}video.addEventListener("playing",function(){hero.classList.add("cinema-playing")});video.addEventListener("timeupdate",guardSeam);video.addEventListener("ended",resetSeam);video.addEventListener("canplay",play);video.addEventListener("loadeddata",play);video.addEventListener("stalled",function(){hero.classList.remove("cinema-playing")});video.addEventListener("error",function(){hero.classList.remove("cinema-playing")});document.addEventListener("visibilitychange",function(){if(active())play();else try{video.pause()}catch(e){}});window.addEventListener("pageshow",play);window.addEventListener("focus",play);document.addEventListener("touchstart",play,{once:true,passive:true});document.addEventListener("pointerdown",play,{once:true,passive:true});try{new MutationObserver(function(){if(active())play();else try{video.pause()}catch(e){}}).observe(today,{attributes:true,attributeFilter:["class"]})}catch(e){}try{video.load()}catch(e){}setTimeout(play,80);setTimeout(play,700)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot1185,{once:true});else boot1185()})();
+</script>
+
 </html>
