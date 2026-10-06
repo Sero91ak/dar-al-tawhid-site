@@ -23,9 +23,18 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - CSS darf Kästen nicht „wegzaubern“, wenn das Quellbild einen Hintergrund eingebrannt hat – dann muss die Datei neu freigestellt werden.
 - Icons schweben wie Wasserzeichen (`background-size: contain`, transparenter Behälter, `drop-shadow`).
 
-## Karten & Pfeile
+## Karten & Antippen — `KIDS_WHOLE_CARD_TAP`
 
-- Weiter-Pfeile liegen in einem **eigenen** Rasterfeld rechts, nie im Titel- oder Fließtext.
+- Navigierbare Kinder-Karten und Kapseln haben **keine permanenten Weiter-Pfeile, Rails oder Edge-Tabs**.
+- Die **gesamte Karte** ist das Touch-Ziel. Interaktivität wird nur durch eine sehr leichte Aufhellung der Kontur / einen dezenten Glow bei `:active`, `:hover` und `:focus-visible` angezeigt.
+- Karten dürfen beim Antippen oder Hover **nicht springen, hochfahren, skalieren oder vertikal wandern**. Kein `translateY`, kein Lift-Effekt.
+- Der durch Pfeile frei gewordene Platz gehört Bild und Text. Text darf nicht wegen einer unsichtbaren Aktionsspalte schmaler werden.
+- Diese Regel gilt verbindlich für bestehende und **alle künftigen** navigierbaren Kids-Karten.
+
+## Vorschau-Metadaten — `KIDS_NO_PRECLICK_DURATION`
+
+- Vor dem Öffnen einer Geschichte / eines Hörinhalts werden **keine Laufzeit** (`ca. X Min.`) und **keine Alterszeile** (`Alter X–Y`) auf Auswahlkarten gezeigt.
+- Laufzeit und Alterskontext dürfen nach dem Öffnen im Player / Detailbereich weiterhin sichtbar sein.
 - Hintergrundbilder: `cover` + sinnvoller Fokus, kein verzerrtes `100% 100%`.
 
 ## Qurʾān-Rezitation
