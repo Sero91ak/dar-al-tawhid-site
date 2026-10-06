@@ -370,7 +370,7 @@ function bindQuiz(item) {
 }
 function cardHtml(item) {
   const cover = abs(item?.cover?.url);
-  const meta = [itemKindLabel(item), durationLabel(item), modeLabels(item)].filter(Boolean).join(" · ");
+  const meta = [itemKindLabel(item), modeLabels(item)].filter(Boolean).join(" · ");
   return '<button type="button" class="studio-content-card" data-studio-content="'+esc(item.id)+'">'+
     (cover ? '<img src="'+esc(cover)+'" alt="" loading="lazy">' : "")+
     '<span class="studio-card-copy"><span class="studio-card-badges">'+
@@ -382,7 +382,7 @@ function rowHtml(item) {
   const cover = abs(item?.cover?.url);
   return '<button type="button" class="studio-story-row" data-studio-content="'+esc(item.id)+'">'+
     (cover ? '<img src="'+esc(cover)+'" alt="" loading="lazy">' : '<span></span>')+
-    '<span><strong>'+esc(item.title)+'</strong><small>'+esc([item.category,durationLabel(item),modeLabels(item)].filter(Boolean).join(" · "))+'</small></span><span class="chev">›</span></button>';
+    '<span><strong>'+esc(item.title)+'</strong><small>'+esc([item.category,modeLabels(item)].filter(Boolean).join(" · "))+'</small></span></button>';
 }
 function ensureTodaySection() {
   const view = document.getElementById("view-today");
