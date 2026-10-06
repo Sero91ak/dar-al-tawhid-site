@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1187";
-const KIDS_BUILD_ID="kids-shell-v108-home-sky1187";
+const CACHE_NAME="dar-al-tawhid-kids-v1188";
+const KIDS_BUILD_ID="kids-shell-v108-global-touch1188";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -46,7 +46,7 @@ const CORE_PRECACHE=[
   "/kids/data/verified-content.json",
   "/kids/prophet-stories.css?v=39",
   "/kids/story-policy.js?v=2",
-  "/kids/prophet-stories.js?v=39",
+  "/kids/prophet-stories.js?v=40",
   "/kids/mubashshirun-stories.css?v=29",
   "/kids/sahabiyyat-stories.css?v=7",
   "/kids/story-card-system.css?v=2",
@@ -62,7 +62,7 @@ const CORE_PRECACHE=[
   "/kids/navigation-v1182.js?v=1182",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
-  "/kids/kids-touch-rail.css?v=1",
+  "/kids/kids-touch-rail.css?v=2",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=4",
   "/kids/content-studio-feed.js?v=studio6",
@@ -264,6 +264,11 @@ self.addEventListener("fetch",function(event){
     return;
   }
   if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  /* PROPHET LIBRARY RUNTIME: network-first so card structure/text changes are immediate. */
+  if(url.pathname==="/kids/prophet-stories.js"){
     event.respondWith(networkFirst(request));
     return;
   }
