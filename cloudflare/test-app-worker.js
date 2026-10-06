@@ -1,7 +1,7 @@
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v95-voice-master-sync1168",
-  label: "KIDS · V1.07.96"
+  buildId: "kids-shell-v100-audio-core1173",
+  label: "KIDS · V1.08.00"
 });
 
 function kidsVersionResponse() {
@@ -371,7 +371,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v95-voice-master-sync1168");
+      target.searchParams.set("kv", "kids-shell-v100-audio-core1173");
       return Response.redirect(target.toString(), 301);
     }
 
