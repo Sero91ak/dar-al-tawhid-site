@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1183";
-const KIDS_BUILD_ID="kids-shell-v108-story-cards1183";
+const CACHE_NAME="dar-al-tawhid-kids-v1184";
+const KIDS_BUILD_ID="kids-shell-v108-story-cards1184";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -50,8 +50,8 @@ const CORE_PRECACHE=[
   "/kids/mubashshirun-stories.css?v=29",
   "/kids/sahabiyyat-stories.css?v=7",
   "/kids/story-card-system.css?v=2",
-  "/kids/mubashshirun-stories.js?v=29",
-  "/kids/sahabiyyat-stories.js?v=21",
+  "/kids/mubashshirun-stories.js?v=30",
+  "/kids/sahabiyyat-stories.js?v=22",
   "/kids/story-follow-reader.css?v=10",
   "/kids/screen-awake.js?v=1",
   "/kids/story-follow-reader.js?v=16",
@@ -61,7 +61,7 @@ const CORE_PRECACHE=[
   "/kids/story-hub.js?v=21",
   "/kids/navigation-v1182.js?v=1182",
   "/kids/kids-age-typography.css?v=5",
-  "/kids/story-library-cards.css?v=8",
+  "/kids/story-library-cards.css?v=9",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=4",
   "/kids/content-studio-feed.js?v=studio6",
@@ -263,6 +263,11 @@ self.addEventListener("fetch",function(event){
     return;
   }
   if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  /* STORY LIBRARY RUNTIME: network-first so restored structure is immediate on iOS/PWA. */
+  if(url.pathname==="/kids/mubashshirun-stories.js"||url.pathname==="/kids/sahabiyyat-stories.js"){
     event.respondWith(networkFirst(request));
     return;
   }
