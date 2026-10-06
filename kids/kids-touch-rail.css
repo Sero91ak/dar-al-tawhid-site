@@ -1,23 +1,38 @@
-/* DĀR AL TAWḤĪD KIDS — Card Interaction System v6
+/* DĀR AL TAWḤĪD KIDS — Global Whole-Card Interaction v7
+   KIDS_WHOLE_CARD_TAP
+   KIDS_NO_PRECLICK_DURATION
    2026-10-06
-   Scope: navigation/tap affordance only.
-   IMPORTANT: the Today/start page is intentionally excluded and keeps its existing design.
-   Everywhere else, the whole card is the tap target. Permanent arrows/tabs are removed
-   and tapability is communicated by a subtle border/glow response.
+
+   Binding rule for the whole Kids app:
+   - navigable capsules/cards have NO permanent forward arrow / rail / edge-tab;
+   - the WHOLE card is the hit target;
+   - tap/hover/focus is indicated only by a quiet border + glow;
+   - no jump, lift, translate or scale animation;
+   - duration/age metadata is not shown before opening a story/audio item.
 */
 
 :root{
-  --kids-card-tap-line:rgba(245,211,126,.60);
-  --kids-card-tap-glow:0 0 0 1px rgba(245,211,126,.12),0 0 24px rgba(238,196,103,.12);
-  --kids-card-hover-line:rgba(240,207,128,.40);
-  --kids-card-hover-glow:0 0 0 1px rgba(240,207,128,.07),0 0 18px rgba(238,196,103,.06);
+  --kids-nav-rest-line:rgba(190,215,214,.17);
+  --kids-nav-hover-line:rgba(244,211,128,.44);
+  --kids-nav-active-line:rgba(250,220,145,.68);
+  --kids-nav-hover-glow:
+    0 0 0 1px rgba(244,211,128,.075),
+    0 0 20px rgba(236,196,105,.075),
+    0 15px 36px rgba(0,0,0,.15);
+  --kids-nav-active-glow:
+    0 0 0 1px rgba(250,220,145,.14),
+    0 0 27px rgba(240,202,116,.14),
+    0 14px 34px rgba(0,0,0,.16);
 }
 
-/* ---------------------------------------------------------
-   Whole-card interaction — all child navigation surfaces
-   EXCEPT #view-today / start page.
-   --------------------------------------------------------- */
+/* =========================================================
+   ONE INTERACTION LANGUAGE
+   ========================================================= */
+#view-today .resume,
+#view-today .choice,
+#view-today .knowledge-card,
 #view-stories .story-row,
+#view-stories .ps-prophet-entry,
 #view-stories .ms-entry,
 #view-quran .quran-action,
 #view-quran .surah-card,
@@ -28,7 +43,6 @@
 .gh-continue-card,
 .gh-story,
 .gh-next button,
-.ps-prophet-entry,
 .ps-muhammad-card,
 .ps-story-row,
 .ms-library-page .ms-story-row,
@@ -38,11 +52,65 @@
   cursor:pointer!important;
   -webkit-tap-highlight-color:transparent!important;
   touch-action:manipulation!important;
-  transition:border-color .15s ease,box-shadow .15s ease,filter .15s ease!important;
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    filter .15s ease!important;
+}
+
+/* No more bouncing/lifting. */
+#view-today .resume,
+#view-today .resume:hover,
+#view-today .resume:active,
+#view-today .choice,
+#view-today .choice:hover,
+#view-today .choice:active,
+#view-today .knowledge-card,
+#view-today .knowledge-card:hover,
+#view-today .knowledge-card:active,
+#view-stories .story-row,
+#view-stories .story-row:hover,
+#view-stories .story-row:active,
+#view-stories .ps-prophet-entry,
+#view-stories .ps-prophet-entry:hover,
+#view-stories .ps-prophet-entry:active,
+#view-stories .ms-entry,
+#view-stories .ms-entry:hover,
+#view-stories .ms-entry:active,
+#view-quran .quran-action,
+#view-quran .quran-action:hover,
+#view-quran .quran-action:active,
+#view-quran .surah-card,
+#view-quran .surah-card:hover,
+#view-quran .surah-card:active,
+#view-quran .verse-card,
+#view-quran .verse-card:hover,
+#view-quran .verse-card:active,
+#view-quran .full-quran,
+#view-quran .full-quran:hover,
+#view-quran .full-quran:active,
+.gh-entry,.gh-entry:hover,.gh-entry:active,
+.gh-category,.gh-category:hover,.gh-category:active,
+.gh-continue-card,.gh-continue-card:hover,.gh-continue-card:active,
+.gh-story,.gh-story:hover,.gh-story:active,
+.gh-next button,.gh-next button:hover,.gh-next button:active,
+.ps-muhammad-card,.ps-muhammad-card:hover,.ps-muhammad-card:active,
+.ps-story-row,.ps-story-row:hover,.ps-story-row:active,
+.ms-library-page .ms-story-row,
+.ms-library-page .ms-story-row:hover,
+.ms-library-page .ms-story-row:active,
+.studio-content-card,.studio-content-card:hover,.studio-content-card:active,
+.studio-story-row,.studio-story-row:hover,.studio-story-row:active{
+  transform:none!important;
+  translate:none!important;
 }
 
 @media(hover:hover) and (pointer:fine){
+  #view-today .resume:hover,
+  #view-today .choice:hover,
+  #view-today .knowledge-card:hover,
   #view-stories .story-row:hover,
+  #view-stories .ps-prophet-entry:hover,
   #view-stories .ms-entry:hover,
   #view-quran .quran-action:hover,
   #view-quran .surah-card:hover,
@@ -53,19 +121,22 @@
   .gh-continue-card:hover,
   .gh-story:hover,
   .gh-next button:hover,
-  .ps-prophet-entry:hover,
   .ps-muhammad-card:hover,
   .ps-story-row:hover,
   .ms-library-page .ms-story-row:hover,
   .studio-content-card:hover,
   .studio-story-row:hover{
-    border-color:var(--kids-card-hover-line)!important;
-    box-shadow:var(--kids-card-hover-glow)!important;
-    filter:brightness(1.02)!important;
+    border-color:var(--kids-nav-hover-line)!important;
+    box-shadow:var(--kids-nav-hover-glow)!important;
+    filter:brightness(1.025)!important;
   }
 }
 
+#view-today .resume:active,
+#view-today .choice:active,
+#view-today .knowledge-card:active,
 #view-stories .story-row:active,
+#view-stories .ps-prophet-entry:active,
 #view-stories .ms-entry:active,
 #view-quran .quran-action:active,
 #view-quran .surah-card:active,
@@ -76,18 +147,21 @@
 .gh-continue-card:active,
 .gh-story:active,
 .gh-next button:active,
-.ps-prophet-entry:active,
 .ps-muhammad-card:active,
 .ps-story-row:active,
 .ms-library-page .ms-story-row:active,
 .studio-content-card:active,
 .studio-story-row:active{
-  border-color:var(--kids-card-tap-line)!important;
-  box-shadow:var(--kids-card-tap-glow)!important;
+  border-color:var(--kids-nav-active-line)!important;
+  box-shadow:var(--kids-nav-active-glow)!important;
   filter:brightness(1.045)!important;
 }
 
+#view-today .resume:focus-visible,
+#view-today .choice:focus-visible,
+#view-today .knowledge-card:focus-visible,
 #view-stories .story-row:focus-visible,
+#view-stories .ps-prophet-entry:focus-visible,
 #view-stories .ms-entry:focus-visible,
 #view-quran .quran-action:focus-visible,
 #view-quran .surah-card:focus-visible,
@@ -98,116 +172,306 @@
 .gh-continue-card:focus-visible,
 .gh-story:focus-visible,
 .gh-next button:focus-visible,
-.ps-prophet-entry:focus-visible,
 .ps-muhammad-card:focus-visible,
 .ps-story-row:focus-visible,
 .ms-library-page .ms-story-row:focus-visible,
 .studio-content-card:focus-visible,
 .studio-story-row:focus-visible{
   outline:0!important;
-  border-color:var(--kids-card-tap-line)!important;
-  box-shadow:0 0 0 3px rgba(245,211,126,.15),var(--kids-card-tap-glow)!important;
+  border-color:var(--kids-nav-active-line)!important;
+  box-shadow:0 0 0 3px rgba(247,214,132,.14),var(--kids-nav-active-glow)!important;
 }
 
-/* ---------------------------------------------------------
-   Remove permanent arrows / arrow tabs outside the start page.
-   --------------------------------------------------------- */
+/* =========================================================
+   NO FORWARD ARROWS / EDGE TABS
+   ========================================================= */
+#view-today .resume .go,
+#view-today .choice .arrow,
+#view-today .knowledge-card .kgo,
 #view-stories .story-row .chev,
-#view-stories .ms-entry .ms-entry-action,
-#view-quran .surah-card .surah-go,
-#view-quran .full-quran .fgo,
-.gh-entry .gh-entry-action,
+#view-stories .ps-entry-action,
+#view-stories .ms-entry-action,
+#view-quran .surah-go,
+#view-quran .fgo,
+.gh-entry-action,
 .gh-continue-go,
 .gh-story-go,
 .gh-next button>b,
-.ps-prophet-entry .ps-entry-action,
-.ps-muhammad-card .ps-muhammad-cta,
-.ps-story-row .ps-row-go,
-.ms-library-page .ms-story-row .ms-row-go,
+.ps-muhammad-cta,
+.ps-row-go,
+.ms-row-go,
 .studio-story-row .chev{
   display:none!important;
 }
 
-/* Old generated arrows from earlier rail experiments must never reappear. */
 #view-quran .quran-action::after,
 #view-quran .verse-card::after{
   content:none!important;
   display:none!important;
 }
 
-/* ---------------------------------------------------------
-   Reclaim only the space that belonged to arrows.
-   No card heights, image sizes or typography are changed here.
-   --------------------------------------------------------- */
-.ms-library-page .ms-story-row{
-  grid-template-columns:minmax(130px,38%) minmax(0,1fr)!important;
+/* =========================================================
+   START PAGE LOWER CARDS ONLY — hero/wordmark untouched
+   ========================================================= */
+#view-today .resume{
+  border:1px solid rgba(190,215,214,.17)!important;
+  padding-right:18px!important;
 }
-.ms-library-page .ms-row-copy{
+#view-today .choice{
+  border:1px solid rgba(190,215,214,.17)!important;
+  padding-right:18px!important;
+}
+#view-today .knowledge-card{
+  border-color:rgba(190,215,214,.17)!important;
   padding-right:18px!important;
 }
 
-.ps-library-page .ps-row-copy{
+/* =========================================================
+   NO DURATION / AGE BEFORE OPENING
+   Detail/player metadata remains available after opening.
+   ========================================================= */
+.ps-library-page .ps-row-meta,
+.ps-library-page .ps-muhammad-meta,
+.ms-library-page .ms-row-meta,
+#view-stories .story-row .time,
+#view-stories .story-row .age,
+.kids-preview-duration,
+.kids-preview-age{
+  display:none!important;
+}
+
+/* =========================================================
+   ṢAḤĀBAH + ṢAḤĀBIYYĀT — restore large visual capsules
+   Arrow removal gives the freed width back to image + copy.
+   ========================================================= */
+html body #msLibraryPage.ms-library-page .ms-list,
+html body #syLibraryPage.ms-library-page .ms-list{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding-left:12px!important;
+  padding-right:12px!important;
+  gap:14px!important;
+}
+
+html body #msLibraryPage.ms-library-page .ms-story-row,
+html body #syLibraryPage.ms-library-page .ms-story-row{
+  width:100%!important;
+  min-height:244px!important;
+  height:auto!important;
+  display:grid!important;
+  grid-template-columns:minmax(164px,43%) minmax(0,1fr)!important;
+  align-items:stretch!important;
+  gap:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border-radius:31px!important;
+  border:1px solid rgba(130,202,198,.19)!important;
+  background:
+    radial-gradient(circle at 90% 10%,rgba(239,208,127,.045),transparent 31%),
+    linear-gradient(145deg,#0a2c3c 0%,#082737 64%,#072432 100%)!important;
+  box-shadow:0 16px 38px rgba(0,0,0,.18)!important;
+}
+
+html body #syLibraryPage.ms-library-page .ms-story-row{
+  border-color:rgba(231,190,145,.20)!important;
+}
+
+html body #msLibraryPage .ms-row-visual,
+html body #syLibraryPage .ms-row-visual,
+html body #msLibraryPage .ms-row-visual img,
+html body #syLibraryPage .ms-row-visual img{
+  min-height:244px!important;
+  height:100%!important;
+}
+
+html body #msLibraryPage .ms-row-visual,
+html body #syLibraryPage .ms-row-visual{
+  overflow:hidden!important;
+}
+
+html body #msLibraryPage .ms-row-visual img,
+html body #syLibraryPage .ms-row-visual img{
+  width:100%!important;
+  object-fit:cover!important;
+  display:block!important;
+}
+
+/* Soft meeting edge, not a hard picture cut. */
+html body #msLibraryPage .ms-row-visual::after,
+html body #syLibraryPage .ms-row-visual::after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,
+      transparent 0%,
+      transparent 57%,
+      rgba(8,35,50,.08) 69%,
+      rgba(8,35,50,.30) 83%,
+      rgba(8,35,50,.70) 100%),
+    linear-gradient(0deg,rgba(3,17,27,.16),transparent 58%)!important;
+}
+
+html body #msLibraryPage .ms-row-copy,
+html body #syLibraryPage .ms-row-copy{
+  min-width:0!important;
+  display:grid!important;
+  align-content:center!important;
+  gap:7px!important;
+  padding:22px 22px 22px 20px!important;
+  overflow:visible!important;
+}
+
+html body #msLibraryPage .ms-row-title,
+html body #syLibraryPage .ms-row-title{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+  text-wrap:pretty!important;
+}
+
+html body #msLibraryPage .ms-row-ar,
+html body #syLibraryPage .ms-row-ar{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  max-height:none!important;
+}
+
+html body #msLibraryPage .ms-row-summary,
+html body #syLibraryPage .ms-row-summary{
+  display:block!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  -webkit-line-clamp:unset!important;
+  line-clamp:unset!important;
+  max-height:none!important;
+}
+
+html[data-kids-age="4-5"] body #msLibraryPage .ms-row-summary,
+html[data-kids-age="4-5"] body #syLibraryPage .ms-row-summary{
+  display:block!important;
+}
+
+/* =========================================================
+   PROPHETS — full content width after arrow removal
+   ========================================================= */
+html body #psLibraryPage.ps-library-page .ps-row-copy{
   right:20px!important;
+  max-width:none!important;
+}
+html body #psLibraryPage .ps-row-title,
+html body #psLibraryPage .ps-row-ar,
+html body #psLibraryPage .ps-row-summary{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  max-height:none!important;
+}
+html body #psLibraryPage .ps-row-summary{
+  display:block!important;
+  -webkit-line-clamp:unset!important;
+  line-clamp:unset!important;
 }
 
-.gh-continue-card{
-  grid-template-columns:108px minmax(0,1fr)!important;
-}
-.gh-story{
-  grid-template-columns:minmax(118px,35%) minmax(0,1fr)!important;
-}
-.gh-next button{
-  grid-template-columns:76px minmax(0,1fr)!important;
-}
-.studio-story-row{
-  grid-template-columns:76px minmax(0,1fr)!important;
-}
-
-/* Category cards: content may use the full width after the action label disappears. */
-.ps-prophet-entry .ps-entry-panel,
-.ms-entry .ms-entry-copy,
-.gh-entry .gh-entry-copy{
-  padding-right:18px!important;
+/* =========================================================
+   STORIES HOME — three main worlds use nearly full viewport width
+   ========================================================= */
+html body #view-stories.ps-stories-home #psProphetEntry,
+html body #view-stories.ps-stories-home #msEntry,
+html body #view-stories.ps-stories-home #syEntry{
+  width:calc(100% + 24px)!important;
+  max-width:none!important;
+  margin-left:-12px!important;
+  margin-right:-12px!important;
+  margin-bottom:16px!important;
 }
 
-/* Tight phones: remove the old third-column reservation without shrinking text. */
+html body #view-stories.ps-stories-home #psProphetEntry .ps-entry-copy,
+html body #view-stories.ps-stories-home #msEntry .ms-entry-copy,
+html body #view-stories.ps-stories-home #syEntry .ms-entry-copy{
+  left:22px!important;
+  right:22px!important;
+  bottom:22px!important;
+}
+
+/* Story hub/studio: remove dead third columns. */
+.gh-continue-card{grid-template-columns:108px minmax(0,1fr)!important}
+.gh-story{grid-template-columns:minmax(118px,35%) minmax(0,1fr)!important}
+.gh-next button{grid-template-columns:76px minmax(0,1fr)!important}
+.studio-story-row{grid-template-columns:76px minmax(0,1fr)!important}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 @media(max-width:390px){
-  .ms-library-page .ms-story-row{
-    grid-template-columns:108px minmax(0,1fr)!important;
+  html body #msLibraryPage.ms-library-page .ms-story-row,
+  html body #syLibraryPage.ms-library-page .ms-story-row{
+    min-height:238px!important;
+    grid-template-columns:minmax(150px,43%) minmax(0,1fr)!important;
+    border-radius:29px!important;
   }
-  .ps-library-page .ps-row-copy{
-    right:16px!important;
+  html body #msLibraryPage .ms-row-visual,
+  html body #syLibraryPage .ms-row-visual,
+  html body #msLibraryPage .ms-row-visual img,
+  html body #syLibraryPage .ms-row-visual img{
+    min-height:238px!important;
   }
+  html body #msLibraryPage .ms-row-copy,
+  html body #syLibraryPage .ms-row-copy{
+    padding:19px 16px!important;
+  }
+  html body #psLibraryPage.ps-library-page .ps-row-copy{right:16px!important}
 }
 
-/* Tablets: same rule, just reclaim the former arrow column. */
 @media(min-width:700px){
-  .ms-library-page .ms-story-row{
-    grid-template-columns:minmax(190px,34%) minmax(0,1fr)!important;
+  html body #msLibraryPage.ms-library-page .ms-story-row,
+  html body #syLibraryPage.ms-library-page .ms-story-row{
+    min-height:286px!important;
+    grid-template-columns:minmax(280px,42%) minmax(0,1fr)!important;
+    border-radius:36px!important;
   }
-  .ps-library-page .ps-row-copy{
-    right:26px!important;
+  html body #msLibraryPage .ms-row-visual,
+  html body #syLibraryPage .ms-row-visual,
+  html body #msLibraryPage .ms-row-visual img,
+  html body #syLibraryPage .ms-row-visual img{
+    min-height:286px!important;
+  }
+  html body #msLibraryPage .ms-row-copy,
+  html body #syLibraryPage .ms-row-copy{
+    padding:30px!important;
+    gap:9px!important;
+  }
+  html body #psLibraryPage.ps-library-page .ps-row-copy{right:28px!important}
+  html body #view-stories.ps-stories-home #psProphetEntry,
+  html body #view-stories.ps-stories-home #msEntry,
+  html body #view-stories.ps-stories-home #syEntry{
+    width:calc(100% + 32px)!important;
+    margin-left:-16px!important;
+    margin-right:-16px!important;
   }
 }
 
 @media(prefers-reduced-motion:reduce){
+  #view-today .resume,
+  #view-today .choice,
+  #view-today .knowledge-card,
   #view-stories .story-row,
+  #view-stories .ps-prophet-entry,
   #view-stories .ms-entry,
   #view-quran .quran-action,
   #view-quran .surah-card,
   #view-quran .verse-card,
   #view-quran .full-quran,
-  .gh-entry,
-  .gh-category,
-  .gh-continue-card,
-  .gh-story,
-  .gh-next button,
-  .ps-prophet-entry,
-  .ps-muhammad-card,
-  .ps-story-row,
-  .ms-library-page .ms-story-row,
-  .studio-content-card,
-  .studio-story-row{
+  .gh-entry,.gh-category,.gh-continue-card,.gh-story,.gh-next button,
+  .ps-muhammad-card,.ps-story-row,.ms-library-page .ms-story-row,
+  .studio-content-card,.studio-story-row{
     transition:border-color .1s ease,box-shadow .1s ease!important;
   }
 }
