@@ -77,8 +77,8 @@ function runKidsDesignGuard() {
     "class=\"wm-dar-safe\"",
     "margin:calc(-1 * var(--safe-top)) calc(50% - 50vw) 0!important",
     "kids-home-reference-polish-v1204",
-    "baked-reference-only-no-css-duplicate-v1204",
-    "soft-atmospheric-radial-haze-v1204"
+    "The reference image already contains the correct meteor.",
+    "The approved reference has a soft atmospheric shadow"
   ];
   for (const n of homeHeroNeedles) {
     if (!html.includes(n)) failed += fail(`${KIDS_HTML}: Startseiten-Hero Referenz fehlt: ${n}`);
