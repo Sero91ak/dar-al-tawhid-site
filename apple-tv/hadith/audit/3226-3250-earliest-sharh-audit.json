@@ -1,0 +1,151 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-3226-3250",
+  "series": "3151-3250",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "HAD-3226–3250 schließt die Serie 3151–3250 ab und setzt Ṣaḥīḥ Muslim im Kitāb az-Zuhd wa-r-Raqāʾiq von Muslim 2996 bis 3005 fort. Muslim 2998 wurde bewusst nicht erneut angelegt, weil der Kern 'Der Gläubige wird nicht zweimal aus demselben Loch gestochen' bereits mehrfach im globalen Bestand vorhanden ist. Muslim 2999 wurde nicht wiederholt, weil der vollständige Kern 'Die Angelegenheit des Gläubigen ist immer gut' bereits als HAD-0079 und weitere ältere Karten existiert. Beim Muslim-3004-Bericht wurden nur die noch neuen Kerne zum Schreiben/Löschen und zur erlaubten Überlieferung aufgenommen; die Warnung vor absichtlicher Lüge über den Propheten ﷺ wurde nicht dupliziert, weil sie bereits als HAD-0620 und HAD-0830 vorhanden ist. Muslim 3000a–c und 3001 wurden nach den zwei eigenständigen Lob-Kernen zusammengeführt; Muslim 3002a–c als ein Schmeichler-Kern. Muslim 3005 wurde als langer authentischer Aṣḥāb-al-Uḫdūd-Bericht nur nach inhaltlich klar getrennten Ereignis-/Lehrkernen segmentiert. Aktuelle Textnachweise wurden über Dorar sowie zur Nummernkontrolle ergänzend über den laufenden Ṣaḥīḥ-Muslim-Text abgeglichen. al-Māzirī, al-Muʿlim bi-Fawāʾid Muslim, Bd. 3, bleibt die früheste direkte Muslim-Priorität für Kitāb az-Zuhd; unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "semanticDuplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "sourceHadithNumbersChecked": true,
+    "globalCatalogUpdated": true,
+    "appleTvScreensaverUpdated": true,
+    "webIosAndroidLibraryLoaderUpdated": true,
+    "seriesProgress": "100/100",
+    "seriesCompleted": true,
+    "globalPushCompleted": true
+  },
+  "dedupeDecisions": [
+    "Muslim 2998 skipped: core already exists globally in HAD-0913, HAD-0817, HAD-2036, HAD-2118, HAD-1225, HAD-1663, HAD-0625 and HAD-1321",
+    "Muslim 2999 skipped: complete believer-gratitude/patience core already exists in HAD-0079 and older duplicates",
+    "Muslim 3000a–c and 3001 consolidated into two substantive praise cores instead of four cards",
+    "Muslim 3002a–c merged into one excessive-praise/dust core",
+    "Muslim 3004: deliberate-lie clause skipped because already represented by HAD-0620 and HAD-0830",
+    "Muslim 3004 retained only for the still-new writing/erasing and narrating clauses",
+    "Muslim 3005 segmented into distinct story/teaching cores only; repeated return-to-king narrative language not multiplied"
+  ],
+  "sourceRange": [
+    "Muslim 2996",
+    "Muslim 2997",
+    "Muslim 3000a–c",
+    "Muslim 3001",
+    "Muslim 3002a–c",
+    "Muslim 3003",
+    "Muslim 3004",
+    "Muslim 3005"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibrary",
+    "iosHadithLibrary",
+    "androidWebAppAndWebsite"
+  ],
+  "records": [
+    {
+      "id": "HAD-3226",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3227",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3228",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3229",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3230",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3231",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3232",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3233",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3234",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3235",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3236",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3237",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3238",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3239",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3240",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3241",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3242",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3243",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3244",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3245",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3246",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3247",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3248",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3249",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3250",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    }
+  ]
+}
