@@ -3546,7 +3546,12 @@ function showTab(name){
     view.style.animation="";
   }
   document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.toggle("active",b.dataset.target===name)});
-  window.scrollTo({top:0,behavior:"smooth"});
+  var shellScroll=document.querySelector(".shell");
+  if(shellScroll){
+    try{shellScroll.scrollTo({top:0,left:0,behavior:"auto"})}catch(e){shellScroll.scrollTop=0}
+  }else{
+    window.scrollTo({top:0,behavior:"auto"});
+  }
 }
 document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
 document.querySelectorAll("[data-go]").forEach(function(b){
@@ -6257,7 +6262,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v108-home-cinema1181";
+  var KIDS_BUILD_ID="kids-shell-v108-navigation1182";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6273,13 +6278,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1181",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1182",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
   }
   window.addEventListener("load",function(){
-    fetch("/kids/version.json?v=1180",{cache:"no-store"})
+    fetch("/kids/version.json?v=1182",{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(v){
         var live=String(v&&v.buildId||"");
@@ -9067,4 +9072,5 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
+<script src="/kids/navigation-v1182.js?v=1182"></script>
 </html>
