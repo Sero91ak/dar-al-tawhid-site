@@ -44,7 +44,7 @@ const CORE_PRECACHE=[
   "/kids/data/story-hub.json?v=5",
   "/kids/data/dua-kids.json",
   "/kids/data/verified-content.json",
-  "/kids/prophet-stories.css?v=39",
+  "/kids/prophet-stories.css?v=40",
   "/kids/story-policy.js?v=2",
   "/kids/prophet-stories.js?v=40",
   "/kids/mubashshirun-stories.css?v=29",
