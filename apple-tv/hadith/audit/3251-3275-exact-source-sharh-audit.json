@@ -1,0 +1,202 @@
+{
+  "project": "DĀR AL TAWḤĪD – Exact Source & Early Šarḥ Audit",
+  "range": "HAD-3251-3275",
+  "series": "3251-3350",
+  "status": "completed-exact-source-early-sharh-audit",
+  "ruleVersion": 7,
+  "exactReferenceRule": {
+    "required": [
+      "sourceBook",
+      "sourceVolume",
+      "sourcePage",
+      "sourceChapter",
+      "sourceSection",
+      "sourceHadithNumber",
+      "sourceEdition",
+      "sharhBook",
+      "sharhVolume",
+      "sharhPage",
+      "sharhChapter",
+      "sharhSection",
+      "sharhEdition",
+      "sharhReference"
+    ],
+    "noEstimatedPages": true,
+    "nullPagesForbiddenForNewRecords": true
+  },
+  "sourceEdition": {
+    "book": "Ṣaḥīḥ Muslim",
+    "editor": "Muḥammad Fuʾād ʿAbd al-Bāqī",
+    "publisher": "Dār Iḥyāʾ at-Turāṯ al-ʿArabī",
+    "place": "Bayrūt",
+    "volume": "4",
+    "pagesUsed": [
+      "2301",
+      "2302",
+      "2303",
+      "2304"
+    ],
+    "chapter": "Kitāb az-Zuhd wa-r-Raqāʾiq",
+    "section": "Bāb Ḥadīṯ Jābir aṭ-ṭawīl wa-qiṣṣat Abī al-Yasar",
+    "hadithNumbers": [
+      "Muslim 3006",
+      "Muslim 3007",
+      "Muslim 3008",
+      "Muslim 3009"
+    ]
+  },
+  "sharhEdition": {
+    "scholar": "Qāḍī ʿIyāḍ",
+    "book": "Ikmāl al-Muʿlim bi-Fawāʾid Muslim",
+    "editor": "Yaḥyā Ismāʿīl",
+    "publisher": "Dār al-Wafāʾ",
+    "place": "al-Manṣūrah",
+    "edition": "1. Aufl.",
+    "year": "1419 H/1998",
+    "volume": "8",
+    "pagesUsed": [
+      "560",
+      "561",
+      "563",
+      "565"
+    ],
+    "chapter": "Kitāb az-Zuhd wa-r-Raqāʾiq"
+  },
+  "reason": "Der Block HAD-3251–3275 eröffnet die Serie 3251–3350 unter der verschärften Exaktquellen-Regel. Jeder neue Datensatz enthält erstmals verpflichtend eine konkrete Primärquellen-Ausgabe mit Band und Druckseite sowie eine konkret benannte frühe Šarḥ-Ausgabe mit Band und Druckseite. Muslim 3006 wurde aus Bd. 4 S. 2301 mit Ikmāl al-Muʿlim Bd. 8 S. 560 geführt; Muslim 3007 aus S. 2302 mit Ikmāl S. 561; Muslim 3008 aus S. 2303 mit Ikmāl S. 563; Muslim 3009 aus S. 2304 mit Ikmāl S. 565. Es wurden keine Seiten geschätzt. Die 25 Kerne wurden vor Anlage semantisch gegen den globalen HAD-Bestand geprüft.",
+  "completionRequirement": {
+    "exactPrimaryBook": true,
+    "exactPrimaryVolume": true,
+    "exactPrimaryPage": true,
+    "exactPrimaryChapter": true,
+    "exactPrimarySection": true,
+    "exactPrimaryHadithNumber": true,
+    "exactPrimaryEdition": true,
+    "exactSharhBook": true,
+    "exactSharhVolume": true,
+    "exactSharhPage": true,
+    "exactSharhEdition": true,
+    "noEstimatedPages": true,
+    "noNullSourcePages": true,
+    "noNullSharhPages": true,
+    "duplicateCheckCompleted": true,
+    "semanticDuplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "globalCatalogUpdated": true,
+    "appleTvScreensaverUpdated": true,
+    "webIosAndroidLibraryLoaderUpdated": true,
+    "seriesProgress": "25/100",
+    "globalPushCompleted": true
+  },
+  "recordTypeCounts": {
+    "hadith": 17,
+    "athar": 8
+  },
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibrary",
+    "iosHadithLibrary",
+    "androidWebAppAndWebsite"
+  ],
+  "records": [
+    {
+      "id": "HAD-3251",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3252",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3253",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3254",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3255",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3256",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3257",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3258",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3259",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3260",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3261",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3262",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3263",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3264",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3265",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3266",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3267",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3268",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3269",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3270",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3271",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3272",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3273",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3274",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    },
+    {
+      "id": "HAD-3275",
+      "auditStatus": "verified-exact-source-and-sharh-page"
+    }
+  ]
+}
