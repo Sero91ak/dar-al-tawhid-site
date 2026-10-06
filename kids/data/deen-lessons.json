@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "updatedAt": "2026-10-06",
   "title": "Den Dīn lernen",
   "subtitle": "Tawḥīd · Īmān · Wissen · Adab",
@@ -17,7 +17,9 @@
     "dedicatedLibraryPage": true,
     "universalStoryHub": false,
     "playerArchitecture": "same-popup-reader-buttons-as-prophets-sahaba",
-    "photorealisticArtwork": true
+    "photorealisticArtwork": true,
+    "artworkRelease": "photoreal-v1205",
+    "sixLearningCategoriesOnly": true
   },
   "items": [
     {
@@ -40,8 +42,8 @@
         "Ṣaḥīḥ al-Buḫārī 2856",
         "Ṣaḥīḥ Muslim 30"
       ],
-      "cover": "/kids/assets/deen/tawhid.jpg?v=1202",
-      "hero": "/kids/assets/deen/tawhid.jpg?v=1202",
+      "cover": "/kids/assets/deen/tawhid.jpg?v=1205",
+      "hero": "/kids/assets/deen/tawhid.jpg?v=1205",
       "audio": {},
       "wordCount": 502,
       "estimatedNarrationSec": 205,
@@ -57,7 +59,10 @@
         "noScholarNamesInNarration": true,
         "ageChangesPresentationOnly": true,
         "allahHonorificInNarration": "subḥānahu wa taʿālā"
-      }
+      },
+      "categoryTitle": "Tawḥīd",
+      "categoryLessonLabel": "1. Lektion · Was ist Tawḥīd?",
+      "categorySummary": "Das Fundament des Dīn: Allah, subḥānahu wa taʿālā, allein anbeten und Ihm nichts beigesellen."
     },
     {
       "id": "was-ist-iman",
@@ -78,8 +83,8 @@
         "Qurʾān 48:4",
         "Ṣaḥīḥ Muslim 8 · Ḥadīṯ Ǧibrīl"
       ],
-      "cover": "/kids/assets/deen/iman.jpg?v=1202",
-      "hero": "/kids/assets/deen/iman.jpg?v=1202",
+      "cover": "/kids/assets/deen/iman.jpg?v=1205",
+      "hero": "/kids/assets/deen/iman.jpg?v=1205",
       "audio": {},
       "wordCount": 468,
       "estimatedNarrationSec": 191,
@@ -95,7 +100,10 @@
         "noScholarNamesInNarration": true,
         "ageChangesPresentationOnly": true,
         "allahHonorificInNarration": "subḥānahu wa taʿālā"
-      }
+      },
+      "categoryTitle": "Īmān",
+      "categoryLessonLabel": "1. Lektion · Was ist Īmān?",
+      "categorySummary": "Die Grundlagen des Glaubens verstehen und lernen, wie Īmān unser Herz und unsere Taten prägt."
     },
     {
       "id": "asma-wa-sifat",
@@ -117,8 +125,8 @@
         "Ṣaḥīḥ al-Buḫārī 2736",
         "Ṣaḥīḥ Muslim 2677"
       ],
-      "cover": "/kids/assets/deen/asma-sifat.jpg?v=1202",
-      "hero": "/kids/assets/deen/asma-sifat.jpg?v=1202",
+      "cover": "/kids/assets/deen/asma-sifat.jpg?v=1205",
+      "hero": "/kids/assets/deen/asma-sifat.jpg?v=1205",
       "audio": {},
       "wordCount": 513,
       "estimatedNarrationSec": 209,
@@ -134,7 +142,10 @@
         "noScholarNamesInNarration": true,
         "ageChangesPresentationOnly": true,
         "allahHonorificInNarration": "subḥānahu wa taʿālā"
-      }
+      },
+      "categoryTitle": "Asmāʾ wa-Ṣifāt",
+      "categoryLessonLabel": "1. Lektion · Allahs Namen & Eigenschaften",
+      "categorySummary": "Allah, subḥānahu wa taʿālā, durch Qurʾān und authentische Sunnah kennenlernen – ohne Vergleich und ohne erfundenes Wie."
     },
     {
       "id": "was-ist-ibadah",
@@ -157,8 +168,8 @@
         "Ṣaḥīḥ Muslim 16",
         "Ṣaḥīḥ Muslim 1718"
       ],
-      "cover": "/kids/assets/deen/ibadah.jpg?v=1202",
-      "hero": "/kids/assets/deen/ibadah.jpg?v=1202",
+      "cover": "/kids/assets/deen/ibadah.jpg?v=1205",
+      "hero": "/kids/assets/deen/ibadah.jpg?v=1205",
       "audio": {},
       "wordCount": 396,
       "estimatedNarrationSec": 162,
@@ -174,7 +185,10 @@
         "noScholarNamesInNarration": true,
         "ageChangesPresentationOnly": true,
         "allahHonorificInNarration": "subḥānahu wa taʿālā"
-      }
+      },
+      "categoryTitle": "ʿIbādah",
+      "categoryLessonLabel": "1. Lektion · Was ist ʿIbādah?",
+      "categorySummary": "Lernen, wie wir Allah, subḥānahu wa taʿālā, aufrichtig und gemäß der Sunnah dienen."
     },
     {
       "id": "adab-und-akhlaq",
@@ -196,8 +210,8 @@
         "Ṣaḥīḥ Muslim 47",
         "Ṣaḥīḥ al-Buḫārī 3559"
       ],
-      "cover": "/kids/assets/deen/adab-akhlaq.jpg?v=1202",
-      "hero": "/kids/assets/deen/adab-akhlaq.jpg?v=1202",
+      "cover": "/kids/assets/deen/adab-akhlaq.jpg?v=1205",
+      "hero": "/kids/assets/deen/adab-akhlaq.jpg?v=1205",
       "audio": {},
       "wordCount": 431,
       "estimatedNarrationSec": 176,
@@ -213,7 +227,10 @@
         "noScholarNamesInNarration": true,
         "ageChangesPresentationOnly": true,
         "allahHonorificInNarration": "subḥānahu wa taʿālā"
-      }
+      },
+      "categoryTitle": "Adab & Aḫlāq",
+      "categoryLessonLabel": "1. Lektion · Guter Charakter",
+      "categorySummary": "Wahrhaftigkeit, Respekt, Geduld und gutes Verhalten im Alltag lernen."
     },
     {
       "id": "al-akhirah",
@@ -235,8 +252,8 @@
         "Qurʾān 99:7–8",
         "Ṣaḥīḥ Muslim 8"
       ],
-      "cover": "/kids/assets/deen/akhirah.jpg?v=1202",
-      "hero": "/kids/assets/deen/akhirah.jpg?v=1202",
+      "cover": "/kids/assets/deen/akhirah.jpg?v=1205",
+      "hero": "/kids/assets/deen/akhirah.jpg?v=1205",
       "audio": {},
       "wordCount": 427,
       "estimatedNarrationSec": 174,
@@ -252,7 +269,10 @@
         "noScholarNamesInNarration": true,
         "ageChangesPresentationOnly": true,
         "allahHonorificInNarration": "subḥānahu wa taʿālā"
-      }
+      },
+      "categoryTitle": "Āḫirah",
+      "categoryLessonLabel": "1. Lektion · Der Jüngste Tag",
+      "categorySummary": "Die Rückkehr zu Allah, subḥānahu wa taʿālā, behutsam und nur mit dem lernen, was offenbart wurde."
     }
   ]
 }

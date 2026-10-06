@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-const DATA_URL="/kids/data/deen-lessons.json?v=2";
+const DATA_URL="/kids/data/deen-lessons.json?v=3";
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.deenLesson.done.";
 const $=(s,r=document)=>r.querySelector(s);
@@ -63,9 +63,10 @@ function renderCards(){
     return '<button class="ms-story-row dl-story-row" type="button" data-dl-id="'+esc(item.id)+'">'+
       '<span class="ms-row-visual" aria-hidden="true">'+(src?'<img src="'+esc(src)+'" alt="" decoding="async" loading="'+(index<3?"eager":"lazy")+'">':'')+
       '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span></span>'+
-      '<span class="ms-row-copy"><span class="ms-row-kicker">'+esc(item.series||"DĪN-LERNERZÄHLUNG")+'</span>'+
-      '<strong class="ms-row-title">'+esc(item.title||item.name||"")+'</strong>'+
-      '<span class="ms-row-summary">'+esc(item.summary||"")+'</span></span>'+
+      '<span class="ms-row-copy"><span class="ms-row-kicker">LERNBEREICH '+String(index+1).padStart(2,"0")+'</span>'+
+      '<strong class="ms-row-title">'+esc(item.categoryTitle||item.series||item.title||"")+'</strong>'+
+      '<span class="dl-row-lesson">'+esc(item.categoryLessonLabel||item.title||"")+'</span>'+
+      '<span class="ms-row-summary">'+esc(item.categorySummary||item.summary||"")+'</span></span>'+
       (done(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':'')+
     '</button>';
   }).join("");
@@ -104,7 +105,7 @@ function ensureUi(){
   page.id="dlLibraryPage";page.className="ms-library-page dl-library-page";page.setAttribute("aria-hidden","true");
   page.innerHTML=
     '<div class="ms-library-nav dl-library-nav"><button id="dlBack" class="ms-back" type="button" aria-label="Zurück zu Geschichten">‹</button>'+
-    '<div><strong>Den Dīn lernen</strong><span>Tawḥīd · Īmān · Wissen</span></div></div>'+
+    '<div><strong>Den Dīn lernen</strong><span>6 Lernbereiche · Qurʾān &amp; authentische Sunnah</span></div></div>'+
     '<div class="ms-library-scroll" id="dlLibraryScroll"><div id="dlGrid" class="ms-list dl-list"></div></div>';
   document.body.appendChild(page);
   $("#dlBack").addEventListener("click",closeLibrary);installSwipeBack($("#dlLibraryScroll"),closeLibrary);
