@@ -15,6 +15,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-art/hero-entdecke.png",
   "/kids/assets/kids-home-v1176/hero-cinema.png",
   "/kids/assets/kids-home-v1179/hero-poster.png?v=1188",
+  "/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1196",
   "/kids/assets/kids-home-v1176/world-stories.png",
   "/kids/assets/kids-home-v1176/world-quran.png",
   "/kids/assets/kids-home-v1176/world-dua.png",
