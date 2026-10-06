@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.18</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.19</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3199,7 +3199,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v108-card-glow1191";
+const KIDS_BUILD_ID="kids-shell-v108-home-static1192";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6270,7 +6270,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v108-card-glow1191";
+  var KIDS_BUILD_ID="kids-shell-v108-home-static1192";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6286,7 +6286,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1191",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1192",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -9709,7 +9709,7 @@ html[data-view="stories"] #view-stories > :last-child{
   animation:none!important;
   background:
     linear-gradient(180deg,rgba(2,15,23,0) 0%,rgba(2,15,23,0) 56%,rgba(4,22,31,.16) 73%,#061b26 100%),
-    url("/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1191") center 50%/cover no-repeat!important;
+    url("/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1192") center 50%/cover no-repeat!important;
   filter:none!important;
 }
 #view-today .hero-sky-video-v1188,
