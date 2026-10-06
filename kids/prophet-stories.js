@@ -153,8 +153,7 @@ function renderMuhammadFeature(){
         '<span class="ps-muhammad-kicker">BESONDERER BEREICH · SIEGEL DER PROPHETEN</span>'+
         '<span class="ps-muhammad-title">Prophet Muhammad ﷺ</span>'+
         '<span class="ps-muhammad-ar" dir="rtl">'+esc(arabicLine(item))+'</span>'+
-        '<span class="ps-muhammad-meta">'+esc(meta)+'</span>'+
-        '<span class="ps-muhammad-cta"><span>Geschichte öffnen</span><span class="ps-muhammad-go" aria-hidden="true">›</span></span>'+
+
       '</span>'+
       (done(item.id)?'<span class="ps-done ps-muhammad-done" aria-label="Abgeschlossen"></span>':'')+
     '</button>';
@@ -183,9 +182,9 @@ function renderCards(){
         '<span class="ps-row-title">'+esc(item.name)+'</span>'+
         '<span class="ps-row-ar" dir="rtl">'+esc(arabicLine(item))+'</span>'+
         '<span class="ps-row-summary">'+esc(shortSummary)+'</span>'+
-        '<span class="ps-row-meta">'+esc(meta)+'</span>'+
+
       '</span>'+
-      '<span class="ps-row-go'+(isAudioOnlyAge()?' is-listen':'')+'" aria-hidden="true">'+(isAudioOnlyAge()?'▶':'›')+'</span>'+
+
       (done(item.id)?'<span class="ps-done" aria-label="Abgeschlossen"></span>':'')+
     '</button>';
   }).join("");
@@ -227,7 +226,7 @@ function prepareStoriesHome(view){
           '<strong>Prophetengeschichten</strong>'+
           '<span class="ps-entry-sub">'+(isAudioOnlyAge()?'25 Hörgeschichten':'25 Geschichten · lesen &amp; hören')+'</span>'+
         '</span>'+
-        '<span class="ps-entry-action"><span>Entdecken</span><span class="ps-entry-go" aria-hidden="true">›</span></span>'+
+
       '</span>';
     if(pageHead)pageHead.insertAdjacentElement("afterend",entry);
     else view.insertBefore(entry,view.firstChild);
