@@ -1,0 +1,21 @@
+/* DĀR AL TAWḤĪD Kids · Dīn-Lektionen v1202 */
+.dl-library-page{background:#061c29!important}
+.dl-library-nav{background:rgba(5,24,35,.96)!important}
+.dl-library-nav strong{font-size:18px!important}
+.dl-library-nav span{color:rgba(255,255,255,.58)!important}
+.dl-list{margin-top:2px!important}
+.dl-story-row{border-color:rgba(124,210,198,.16)!important;background:#082735!important}
+.dl-story-row .ms-row-kicker{color:#8edbd1!important}
+.dl-story-row .ms-row-title{font-size:clamp(19px,5vw,26px)!important}
+.dl-story-row .ms-row-summary{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.dl-detail-hero{min-height:500px!important}
+.dl-detail-modes{margin-top:2px!important}
+.dl-detail-modes button:disabled{opacity:.34;cursor:default}
+.dl-audio-note{margin:8px 2px 18px;color:rgba(255,255,255,.58);font-size:11px;line-height:1.5}
+.dl-sources{margin-top:18px!important}
+.dl-sources .ms-source-ref{color:#bfe8e1!important}
+@media(max-width:620px){
+  .dl-library-page .ms-story-row{grid-template-columns:122px minmax(0,1fr)!important}
+  .dl-library-page .ms-row-go{display:none!important}
+  .dl-detail-hero{min-height:470px!important}
+}

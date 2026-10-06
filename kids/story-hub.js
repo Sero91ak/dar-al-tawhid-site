@@ -1,16 +1,14 @@
 (() => {
 "use strict";
-const REGISTRY_URL="/kids/data/story-hub.json?v=6";
-let SOURCES=[
-  {id:"deen",label:"Den Dīn lernen",kicker:"TAWḤĪD · ĪMĀN · WISSEN",url:"/kids/data/deen-lessons.json?v=1",kind:"lesson",image:"/kids/assets/deen/deen-entry.jpg?v=1199"},
-  {id:"prophets",label:"Propheten",kicker:"GESCHICHTEN DER PROPHETEN",url:"/kids/data/prophet-stories.json?v=29",kind:"prophet"},
+const REGISTRY_URL="/kids/data/story-hub.json?v=7";
+let SOURCES=[  {id:"prophets",label:"Propheten",kicker:"GESCHICHTEN DER PROPHETEN",url:"/kids/data/prophet-stories.json?v=29",kind:"prophet"},
   {id:"sahaba",label:"Ṣaḥābah",kicker:"DIE GEFÄHRTEN",url:"/kids/data/mubashshirun-stories.json?v=19",kind:"sahabi"},
   {id:"sahabiyyat",label:"Ṣaḥābiyyāt",kicker:"DIE BESTEN FRAUEN IHRER ZEIT",url:"/kids/data/sahabiyyat-stories.json?v=1144",kind:"sahabiyyah"}
 ];
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const audio=new Audio(); audio.preload="metadata"; audio.setAttribute("playsinline","");
-let catalog={},activeCategory="deen",active=null,playing=false,busy=false,reader=null,lastFocus=null;
+let catalog={},activeCategory="prophets",active=null,playing=false,busy=false,reader=null,lastFocus=null;
 const LAST_STORY_KEY="kids.storyHub.last.v1";
 let lastSavedAt=0,resumeHint=0;
 function readLastStory(){try{const v=JSON.parse(localStorage.getItem(LAST_STORY_KEY)||"null");return v&&typeof v==="object"?v:null}catch(_){return null}}
@@ -373,7 +371,7 @@ async function toggleAudio(){
 function stopAudio(clear=true){reader?.persist(true);try{audio.pause()}catch(_){}playing=false;busy=false;if(clear){try{audio.removeAttribute("src");audio.load()}catch(_){}}renderPlay();renderMini()}
 async function load(){
   await loadRegistry();
-  if(!SOURCES.some(s=>s.id===activeCategory))activeCategory=SOURCES[0]?.id||"deen";
+  if(!SOURCES.some(s=>s.id===activeCategory))activeCategory=SOURCES[0]?.id||"prophets";
   ensureEntry();ensureUi();
   const results=await Promise.all(SOURCES.map(async s=>{try{const r=await fetch(s.url,{cache:"no-store"});if(!r.ok)throw Error(String(r.status));const d=await r.json();return[s.id,(d.items||[]).slice().sort((a,b)=>Number(a.displayOrder||999)-Number(b.displayOrder||999))]}catch(e){console.warn("[DĀR Kids Hörwelten]",s.id,e);return[s.id,[]]}}));
   results.forEach(([id,items])=>catalog[id]=items);renderContinue();renderCategories();renderList();const deenEntry=$("#deenEntry");if(deenEntry&&!deenEntry.dataset.ghBound){deenEntry.dataset.ghBound="1";deenEntry.addEventListener("click",()=>openCategory("deen"));}

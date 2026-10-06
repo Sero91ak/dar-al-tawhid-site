@@ -163,7 +163,7 @@
 
   function descriptorFor(target){
     if(!target||!target.closest)return null;
-    var el=target.closest("button,a,[role='button'],[data-go],[data-story],[data-ps-id],[data-ms-id],[data-sy-id],[data-gh-id],[data-surah],[data-quran-ref]");
+    var el=target.closest("button,a,[role='button'],[data-go],[data-story],[data-ps-id],[data-ms-id],[data-sy-id],[data-dl-id],[data-gh-id],[data-surah],[data-quran-ref]");
     if(!el)return null;
     var nav=el.closest(".nav-btn[data-target]");
     if(nav)return {type:"tab",target:nav.dataset.target,element:nav};
@@ -177,6 +177,7 @@
     if(el.id==="psProphetEntry")return {type:"ps-library",element:el};
     if(el.id==="msEntry")return {type:"ms-library",element:el};
     if(el.id==="syEntry")return {type:"sy-library",element:el};
+    if(el.id==="deenEntry")return {type:"dl-library",element:el};
 
     var ps=el.closest("[data-ps-id]");
     if(ps)return {type:"ps-story",id:ps.dataset.psId,element:ps};
@@ -184,6 +185,8 @@
     if(ms)return {type:"ms-story",id:ms.dataset.msId,element:ms};
     var sy=el.closest("[data-sy-id]");
     if(sy)return {type:"sy-story",id:sy.dataset.syId,element:sy};
+    var dl=el.closest("[data-dl-id]");
+    if(dl)return {type:"dl-story",id:dl.dataset.dlId,element:dl};
     var shortStory=el.closest("[data-story]");
     if(shortStory)return {type:"short-story",id:shortStory.dataset.story,element:shortStory};
     var gh=el.closest("[data-gh-id]");
@@ -198,7 +201,7 @@
   function isBackControl(target){
     if(!target||!target.closest)return false;
     return !!target.closest(
-      "[data-close],#psClose,#psLibraryBack,#msClose,#msBack,#syClose,#syBack,"+
+      "[data-close],#psClose,#psLibraryBack,#msClose,#msBack,#syClose,#syBack,#dlClose,#dlBack,"+
       "#ghBack,#ghPlayerBack,#ghPlayerMin,.kfr-close"
     );
   }
@@ -288,6 +291,8 @@
     if(desc.type==="ms-story"&&window.DARKidsMubashshirun?.open){window.DARKidsMubashshirun.open(desc.id);return true}
     if(desc.type==="sy-library"&&window.DARKidsSahabiyyat?.openLibrary){window.DARKidsSahabiyyat.openLibrary();return true}
     if(desc.type==="sy-story"&&window.DARKidsSahabiyyat?.open){window.DARKidsSahabiyyat.open(desc.id);return true}
+    if(desc.type==="dl-library"&&window.DARKidsDeenLessons?.openLibrary){window.DARKidsDeenLessons.openLibrary();return true}
+    if(desc.type==="dl-story"&&window.DARKidsDeenLessons?.open){window.DARKidsDeenLessons.open(desc.id);return true}
     if(desc.type==="gh-story"&&window.DARKidsStoryHub?.openStory){window.DARKidsStoryHub.openStory(desc.cat||"prophets",desc.id);return true}
     if(desc.type==="short-story"){
       var row=q('[data-story="'+CSS.escape(desc.id)+'"]');
