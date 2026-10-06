@@ -1,6 +1,6 @@
 {
-  "fassung": 1,
-  "aktualisiertAm": "2026-08-29",
+  "fassung": 2,
+  "aktualisiertAm": "2026-10-06",
   "bereich": "iddah-scheidung-trauerzeit",
   "eintraege": [
     {
@@ -361,19 +361,25 @@
       "kennung": "iddah-schwangere-001",
       "titel": "ʿIddah der Schwangeren",
       "bereich": "iddah",
-      "thema": "in-pruefung",
-      "kurzvorschau": "In Prüfung.",
-      "vollstaendigeAussage": "",
-      "lehre": "",
-      "quellenart": "in-pruefung",
-      "quellenstatus": "nicht-anzeigen",
-      "quellenanzeige": "In Prüfung.",
-      "direktnachweisText": "",
-      "direktnachweisUrl": "",
-      "direktnachweisArt": "",
-      "hinweise": "Nicht anzeigen.",
-      "freigabeDurchSerhat": false,
-      "atharPruefung": "Verborgen, bis Quelle, Fiqh-Abgrenzung und Direktnachweis geprüft sind."
+      "thema": "schwangerschaft-und-iddah",
+      "kurzvorschau": "Die Qurʾānische Grundregel lautet: Die Wartezeit einer Schwangeren endet mit der Geburt.",
+      "vollstaendigeAussage": "Allah sagt in Sūrat aṭ-Ṭalāq 65:4, dass die Frist der Schwangeren endet, wenn sie ihre Schwangerschaft beendet, also das Kind geboren ist. Dieser Eintrag stellt nur diese klare Qurʾānische Grundregel dar und behandelt keine individuellen Streitfälle.",
+      "lehre": "Schwangerschaft hat für die ʿIddah eine ausdrücklich genannte Qurʾānische Regel.",
+      "quellenart": "quran",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Qurʾān, Sūrat aṭ-Ṭalāq 65:4.",
+      "direktnachweisText": "→ Quelle öffnen",
+      "direktnachweisUrl": "https://www.islamweb.net/ar/library/content/127/1199/index.php?ID=1180&bk_no=127&idfrom=1226&idto=1226&page=bookcontents_ver3",
+      "direktnachweisArt": "Webseite",
+      "hinweise": "Nur die allgemeine Qurʾānische Grundregel. Sonderfälle und Detailfragen separat behandeln.",
+      "freigabeDurchSerhat": true,
+      "atharPruefung": "Qurʾānische Grundlage geprüft; Detail-Athār bleiben getrennt.",
+      "schlagwoerter": [
+        "ʿIddah",
+        "Schwangerschaft",
+        "Geburt",
+        "Sūrat aṭ-Ṭalāq"
+      ]
     },
     {
       "kennung": "iddah-nach-khul-001",
@@ -626,6 +632,30 @@
       "hinweise": "Nicht anzeigen.",
       "freigabeDurchSerhat": false,
       "atharPruefung": "Verborgen, bis Quelle, Fiqh-Abgrenzung und Direktnachweis geprüft sind."
+    },
+    {
+      "kennung": "iddah-khul-grundlage-001",
+      "titel": "Khulʿ als belegte Form der Trennung",
+      "bereich": "scheidung",
+      "thema": "khul-grundlage",
+      "kurzvorschau": "Der Fall der Frau von Ṯābit ibn Qays belegt den Khulʿ als Form der Trennung.",
+      "vollstaendigeAussage": "Die Frau von Ṯābit ibn Qays رضي الله عنه kam zum Propheten ﷺ und erklärte, dass sie ihm weder seinen Charakter noch seine Religion vorwerfe, die Ehe aber nicht fortsetzen könne. Der Prophet ﷺ fragte sie nach der Rückgabe des Gartens, den sie als Mahr erhalten hatte, und ordnete anschließend die Trennung an. Der Eintrag belegt nur die Grundlage des Khulʿ; seine Detailbedingungen werden separat behandelt.",
+      "lehre": "Khulʿ ist in der Sunnah belegt und darf nicht mit jeder Form von Ṭalāq gleichgesetzt werden.",
+      "quellenart": "sahih",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Ṣaḥīḥ al-Bukhārī, Kitāb aṭ-Ṭalāq, Nr. 5273.",
+      "direktnachweisText": "→ Quelle öffnen",
+      "direktnachweisUrl": "https://dorar.net/h/F5vCyonA?osoul=1",
+      "direktnachweisArt": "Webseite",
+      "freigabeDurchSerhat": true,
+      "schlagwoerter": [
+        "Khulʿ",
+        "Trennung",
+        "Ṯābit ibn Qays",
+        "Mahr"
+      ],
+      "hinweise": "Keine Detail-Fatwa zu ʿIddah, Gericht, Rückzahlung oder heutigen Rechtsverfahren in diesem Grundeintrag.",
+      "atharPruefung": "Ṣaḥīḥ-al-Bukhārī-Grundlage geprüft."
     }
   ]
 }
