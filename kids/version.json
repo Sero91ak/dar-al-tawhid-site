@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v108-home-cinema1181",
-  "label": "KIDS · V1.08.08",
-  "releasedAt": "2026-10-06T14:04:00+02:00",
-  "note": "V1181 verkürzt den Startseiten-Hero deutlich, entfernt das fehlerhafte sichtbare 6-Sekunden-MP4 mit eingebrannter Zufallsschrift aus der Darstellung und ersetzt es durch ruhige mehrschichtige Cinema-Bewegung. DĀR AL TAWḤĪD steht jetzt groß in Cinzel-Gold auf einem leichten Bogen mit Glow-/Linienanimation; KIDS bewegt sich ruhiger.",
+  "buildId": "kids-shell-v108-navigation1182",
+  "label": "KIDS · V1.08.09",
+  "releasedAt": "2026-10-06T14:09:00+02:00",
+  "note": "V1182 vereinheitlicht die Navigation der Kinder-App: Hauptbereiche öffnen immer oben, Detailseiten kehren exakt zur vorherigen Karten-/Scrollposition zurück, Wischen vom linken/rechten Rand navigiert zurück/vorwärts und überflüssige gestapelte Leerflächen unter Seiten wurden entfernt.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1180",
+    "serviceWorkerCache": "v1182",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -446,7 +446,7 @@
     "storyHubAgeAdaptive": true,
     "storyHubIntegratedReadAlong": true,
     "storyHubMiniPlayer": false,
-    "storyHubGestureNavigation": true,
+    "storyHubGestureNavigation": "global-history-v1182",
     "storyHubManifest": "/kids/data/story-hub.json?v=5",
     "storyHubContinueListening": true,
     "storyHubNextStory": true,
@@ -742,8 +742,11 @@
     "homeHeroCinemaStreaming": "network-range-safe-ios-v1179",
     "homeHeroCinemaAutoplay": "muted-playsinline-recovery-v1179",
     "homeHeroVisualStyle": "semi-realistic-cinematic-illustration-v1179",
-    "homeHeroVideoSrc": "direct-video-src-v1180"
+    "homeHeroVideoSrc": "direct-video-src-v1180",
+    "navigationScrollPolicy": "main-tab-top-detail-return-position-v1182",
+    "navigationGestureHistory": "edge-swipe-back-forward-v1182",
+    "globalBottomScrollClearance": "single-shell-clearance-v1182"
   },
   "updatedAt": "2026-10-06",
   "deployTrigger": "2026-10-06T14:04:00+02:00"
-}
+}\n
