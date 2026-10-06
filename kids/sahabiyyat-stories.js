@@ -148,12 +148,6 @@ function renderCards(){
   const libraryPage=$("#syLibraryPage");if(libraryPage)libraryPage.dataset.age=age();
   grid.innerHTML=items.map((item,index)=>{
     const t=textFor(item),src=art(item);
-    const rawSummary=String(item.summary||"").replace(/\s+/g," ").trim();
-    const summaryOverride=item.id==="khadijah"
-      ?"Ehefrau des Propheten ﷺ und eine der vorzüglichsten Frauen."
-      :(item.id==="aishah"?"Mutter der Gläubigen und eine große Überlieferin von Wissen.":"");
-    const cardSummary=summaryOverride||rawSummary;
-    const shortSummary=cardSummary.length>78?(cardSummary.slice(0,75).replace(/\s+\S*$/,"")+"…"):cardSummary;
     return '<button class="ms-story-row" type="button" data-sy-id="'+esc(item.id)+'">'+
       '<span class="ms-row-visual" aria-hidden="true">'+
         (src?'<img src="'+esc(src)+'" alt="" data-sy-cover-id="'+esc(item.id)+'" decoding="async" loading="'+(index<4?"eager":"lazy")+'">':'')+
@@ -161,11 +155,11 @@ function renderCards(){
       '</span>'+
       '<span class="ms-row-copy">'+
         '<strong class="ms-row-title">'+esc(item.name)+'</strong>'+
-        '<span class="ms-row-ar" dir="rtl">'+esc(item.nameAr||"")+'</span>'+
-        '<span class="ms-row-summary">'+esc(shortSummary)+'</span>'+
+        '<span class="ms-row-ar" dir="rtl">'+esc(item.nameAr||"")+' رضي الله عنها</span>'+
+        '<span class="ms-row-summary">'+esc(item.summary||"")+'</span>'+
         '<span class="ms-row-meta">'+durationLabel(item,t)+' · Alter '+esc(age())+'</span>'+
       '</span>'+
-      '<span class="ms-row-go'+(isAudioOnlyAge()?' is-listen':'')+'" aria-hidden="true">'+(isAudioOnlyAge()?'▶':'›')+'</span>'+
+      '<span class="ms-row-go" aria-hidden="true">›</span>'+
       (done(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':'')+
     '</button>';
   }).join("");
@@ -244,10 +238,6 @@ function ensureUi(){
       '<div><strong>Ṣaḥābiyyāt</strong><span>Frauen der ersten Generation · 14 Geschichten</span></div>'+
     '</div>'+
     '<div class="ms-library-scroll" id="syLibraryScroll">'+
-
-
-
-      '<div class="story-list-head"><span>FRAUEN DER ERSTEN GENERATION</span><strong>Ṣaḥābiyyāt</strong><small>Wähle eine Geschichte aus.</small></div>'+
       '<div id="syGrid" class="ms-list"></div>'+
     '</div>';
   document.body.appendChild(page);
