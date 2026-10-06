@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1199";
-const KIDS_BUILD_ID="kids-shell-v108-reference-hero1199";
+const CACHE_NAME="dar-al-tawhid-kids-v1200";
+const KIDS_BUILD_ID="kids-shell-v109-deen-learning1200";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -43,7 +43,16 @@ const CORE_PRECACHE=[
   "/kids/assets/sahabiyyat/juwayriyyah-v1128.jpg?v=1128",
   "/kids/assets/sahabiyyat/safiyyah-v1128.jpg?v=1128",
   "/kids/assets/sahabiyyat/maymunah-v1128.jpg?v=1128",
-  "/kids/data/story-hub.json?v=5",
+  "/kids/data/story-hub.json?v=6",
+  "/kids/deen-learning-v1199.css?v=1199",
+  "/kids/data/deen-lessons.json?v=1",
+  "/kids/assets/deen/deen-entry.jpg?v=1199",
+  "/kids/assets/deen/tawhid.jpg?v=1199",
+  "/kids/assets/deen/iman.jpg?v=1199",
+  "/kids/assets/deen/asma-sifat.jpg?v=1199",
+  "/kids/assets/deen/ibadah.jpg?v=1199",
+  "/kids/assets/deen/adab-akhlaq.jpg?v=1199",
+  "/kids/assets/deen/akhirah.jpg?v=1199",
   "/kids/data/dua-kids.json",
   "/kids/data/verified-content.json",
   "/kids/prophet-stories.css?v=41",
@@ -60,7 +69,7 @@ const CORE_PRECACHE=[
   "/kids/story-hub.css?v=12",
   "/kids/stories-home-v1133.css?v=1152",
   "/kids/stories-home-v1138.css?v=1152",
-  "/kids/story-hub.js?v=22",
+  "/kids/story-hub.js?v=23",
   "/kids/navigation-v1182.js?v=1182",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",

@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v108-reference-hero1199",
-  "label": "KIDS · V1.08.26",
-  "releasedAt": "2026-10-06T21:48:00+02:00",
-  "note": "V1199 korrigiert das Referenzmotiv selbst auf dem Smartphone: Der im Bild enthaltene dunkle obere Sicherheitsstreifen wird proportional herausgeschoben, ohne das Motiv neu zu generieren. Dadurch beginnen Palmen, Sterne und Himmel direkt unter dem iOS-Statusbereich wie in der gewünschten Referenz. Adobe Cinzel bleibt online primär; zusätzlich ist die lokale Cinzel-Datei als Offline-Fallback eingebunden. Keine Hintergrundbewegung; KIDS behält Balloon-Effekt und Unterglow.",
+  "buildId": "kids-shell-v109-deen-learning1200",
+  "label": "KIDS · V1.08.27",
+  "releasedAt": "2026-10-06T21:55:00+02:00",
+  "note": "V1200 erweitert den Geschichtenbereich um die neue wichtigste Lernwelt „Den Dīn lernen“ an Position 1. Enthalten sind sechs vollständige Master-Lektionen zu Tawḥīd, Īmān, Asmāʾ wa-Ṣifāt, ʿIbādah, Adab & Aḫlāq und Āḫirah. Die freigegebene V1199-Startseiten-/Cinzel-Korrektur bleibt unverändert erhalten. Voice-Mastertext, Kids-Lesetext und intelligentes Mitlesen verwenden dieselbe Textquelle; Quellen stehen kompakt separat, ohne Quellenreferat in der Erzählung.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1199",
+    "serviceWorkerCache": "v1200",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -447,7 +447,7 @@
     "storyHubIntegratedReadAlong": true,
     "storyHubMiniPlayer": false,
     "storyHubGestureNavigation": "global-history-v1182",
-    "storyHubManifest": "/kids/data/story-hub.json?v=5",
+    "storyHubManifest": "/kids/data/story-hub.json?v=6",
     "storyHubContinueListening": true,
     "storyHubNextStory": true,
     "storyHubAutoplayNext": false,
@@ -466,7 +466,7 @@
       "/kids/assets/stories-home/coin-v1133.webp"
     ],
     "storyMissingAudioState": "Audio folgt",
-    "storyHubAssetVersion": 5,
+    "storyHubAssetVersion": 6,
     "storyHubCategoryArtwork": "manifest-first-local",
     "storyLegacyAudioPlayers": true,
     "storyHubCssVersion": 12,
@@ -486,7 +486,7 @@
     ],
     "sahabiyyatNameOverlay": false,
     "sahabiyyatNameOverlayPlacement": "removed-from-card-and-hero",
-    "storyHubJsVersion": 22,
+    "storyHubJsVersion": 23,
     "sahabiyyatDistinctNewArtworks": [
       "sawdah",
       "juwayriyyah",
@@ -542,7 +542,7 @@
       "maymunah"
     ],
     "storyPolicyVersion": 2,
-    "storyHubRegistryVersion": 4,
+    "storyHubRegistryVersion": 6,
     "masterStoryTextAcrossAges": true,
     "storyTextAgeAdaptive": false,
     "ageAdaptivePresentationOnly": true,
@@ -886,8 +886,25 @@
     "homeHeroFontFallback": "Cinzel/Georgia/system",
     "homeHeroFontOfflineFallback": "/assets/fonts/cinzel-latin-600-normal.woff2",
     "homeHeroBackgroundPositionPhone": "center -13.2vw / 100% auto",
-    "homeHeroBackgroundPositionTablet": "center 42% / cover"
+    "homeHeroBackgroundPositionTablet": "center 42% / cover",
+    "deenLearningEnabled": true,
+    "deenLearningPosition": 1,
+    "deenLearningLessonCount": 6,
+    "deenLearningEntry": "first-primary-story-world",
+    "deenLearningMasterText": "voice-kids-identical",
+    "deenLearningNarration": "teaching-story-no-source-rollcall",
+    "deenLearningSources": "compact-separate",
+    "deenLearningAudioStatus": "text-ready-no-paid-tts-generated",
+    "deenLearningArtworkCount": 7,
+    "deenLearningArtworkProviders": [
+      "Adobe",
+      "Runway"
+    ],
+    "deenLearningNoPeople": true,
+    "deenLearningNoUnseenDepiction": true,
+    "deenLearningAllahHonorific": "subḥānahu wa taʿālā",
+    "approvedReferenceHeroPreservedFrom": "v1199"
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T21:48:00+02:00"
+  "deployTrigger": "2026-10-06T21:55:00+02:00"
 }

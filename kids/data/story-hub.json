@@ -1,6 +1,6 @@
 {
-  "version": 5,
-  "updatedAt": "2026-10-05",
+  "version": 6,
+  "updatedAt": "2026-10-06",
   "title": "Geschichten des Īmān",
   "subtitle": "Hören · Mitlesen · Entdecken",
   "policy": {
@@ -12,16 +12,33 @@
     "legacyStoryPlayersRemoved": true,
     "storyTextAgeAdaptive": false,
     "ageAdaptivePresentationOnly": true,
-    "canonicalStoryTextStrategy": "preserve-longest-complete-version",
+    "canonicalStoryTextStrategy": "masterStoryText-first-voice-kids-parity",
     "futureCategoriesMustUseMasterText": true,
     "futureStoryDefaultLengthPolicy": "long-complete-no-shortening",
     "futureBiographyMinimumMasterWords": 850,
     "sahabiyyatMinimumMasterWords": 850,
     "ageChangesPresentationOnly": true,
     "biographyMinimumMasterWords": 850,
-    "longBiographyRequired": true
+    "longBiographyRequired": true,
+    "voiceMasterIsCanonical": true,
+    "voiceKidsExactTextParity": true,
+    "lessonNarrationNoSourceRollcall": true,
+    "compactSourcesSeparate": true,
+    "deenLearningFirst": true
   },
   "sources": [
+    {
+      "id": "deen",
+      "kind": "lesson",
+      "order": 1,
+      "title": "Den Dīn lernen",
+      "kicker": "TAWḤĪD · ĪMĀN · WISSEN",
+      "description": "Kindgerechte Lern-Erzählungen zu Tawḥīd, Īmān, Allahs Namen und Eigenschaften, ʿIbādah, Adab und Āḫirah.",
+      "dataUrl": "/kids/data/deen-lessons.json?v=1",
+      "image": "/kids/assets/deen/deen-entry.jpg?v=1199",
+      "storyLengthPolicy": "single-master-teaching-narration",
+      "sourceDisplay": "compact-separate"
+    },
     {
       "id": "prophets",
       "kind": "prophet",

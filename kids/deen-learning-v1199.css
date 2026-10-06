@@ -1,0 +1,39 @@
+/* DĀR AL TAWḤĪD Kids · Dīn-Lernwelt v1199 */
+#view-stories.ps-stories-home > #deenEntry{order:2!important}
+#view-stories.ps-stories-home > #psProphetEntry{order:3!important}
+#view-stories.ps-stories-home > #msEntry{order:4!important}
+#view-stories.ps-stories-home > #syEntry{order:5!important}
+.deen-entry{
+  position:relative;isolation:isolate;display:block;overflow:hidden;
+  width:var(--story-shell,min(calc(100% - 24px),860px));min-height:clamp(258px,68vw,330px);
+  margin:0 auto 18px;padding:0;border:1px solid rgba(242,207,127,.26);border-radius:30px;
+  background:#071f31;color:#fff;text-align:left;box-shadow:0 22px 50px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.05);cursor:pointer;
+}
+.deen-entry-bg,.deen-entry-bg img{position:absolute;inset:0;width:100%;height:100%}
+.deen-entry-bg img{object-fit:cover;object-position:center;filter:saturate(.98) contrast(1.03) brightness(.82)}
+.deen-entry:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(3,16,27,.94) 0%,rgba(3,18,30,.79) 43%,rgba(3,18,30,.30) 72%,rgba(3,18,30,.08) 100%),linear-gradient(180deg,rgba(5,23,36,.04),rgba(5,23,36,.72))}
+.deen-entry-copy{position:absolute;z-index:2;left:clamp(19px,5vw,34px);right:clamp(18px,5vw,34px);bottom:clamp(20px,5vw,31px);display:grid;gap:7px;max-width:640px}
+.deen-entry-kicker{font-family:"Cinzel",Georgia,serif;font-size:10px;line-height:1.1;font-weight:800;letter-spacing:.15em;color:#f1ce79}
+.deen-entry-copy strong{font-family:"Fredoka","SF Pro Rounded",system-ui,sans-serif;font-size:clamp(31px,8.8vw,48px);line-height:.96;letter-spacing:-.035em;color:#fff8e9;text-shadow:0 5px 22px rgba(0,0,0,.35)}
+.deen-entry-copy>span:last-of-type{max-width:39ch;font:600 clamp(12px,3.4vw,15px)/1.42 "Fredoka","SF Pro Rounded",system-ui,sans-serif;color:rgba(255,250,239,.82)}
+.deen-entry-badge{display:inline-flex;width:max-content;max-width:100%;margin-top:4px;padding:7px 10px;border:1px solid rgba(242,207,127,.28);border-radius:999px;background:rgba(5,28,42,.45);font-size:10px;font-weight:800;letter-spacing:.05em;color:#f3d890}
+.deen-entry:active{transform:scale(.992)}
+#ghWorld[data-category="deen"] .gh-world-hero{background-image:linear-gradient(90deg,rgba(2,18,30,.88),rgba(2,18,30,.32)),url("/kids/assets/deen/deen-entry.jpg?v=1199")!important;background-position:center!important}
+#ghWorld[data-category="deen"] .gh-world-kicker{color:#f2cf7f}
+#ghWorld[data-category="deen"] .gh-story-copy em{display:none}
+#ghWorld[data-category="deen"] .gh-list{gap:14px}
+#ghWorld[data-category="deen"] .gh-story{min-height:170px;border-color:rgba(242,207,127,.12);background:#082534}
+.gh-category[data-gh-cat="deen"]{grid-column:1/-1;min-height:188px;border-color:rgba(242,207,127,.30)}
+.gh-category[data-gh-cat="deen"] .gh-category-copy strong{font-size:23px}
+.gh-source-chip{display:inline-flex;align-items:center;margin:0 6px 7px 0;padding:6px 9px;border:1px solid rgba(239,208,138,.16);border-radius:999px;background:rgba(239,208,138,.06);color:rgba(255,247,226,.72);font-size:10px;line-height:1.25}
+@media(min-width:760px){
+  .gh-categories{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .gh-category[data-gh-cat="deen"]{grid-column:1/-1;min-height:230px}
+}
+@media(min-width:1100px){
+  #view-stories.ps-stories-home > #deenEntry{grid-column:1/-1!important;width:100%!important;min-height:340px;margin:0 0 22px!important}
+  #view-stories.ps-stories-home > #psProphetEntry{grid-column:1!important}
+  #view-stories.ps-stories-home > #msEntry{grid-column:2!important}
+  #view-stories.ps-stories-home > #syEntry{grid-column:3!important}
+}
+@media(prefers-reduced-motion:reduce){.deen-entry{transition:none!important}}

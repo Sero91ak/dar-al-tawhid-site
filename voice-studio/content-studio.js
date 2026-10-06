@@ -1704,6 +1704,28 @@ function normalizeExistingSahabiyyatStories(item){
     verification:"approved"
   }];
 }
+function normalizeExistingDeenLessons(item){
+  if(!item||!String(item.id||"").trim())return[];
+  const text=completeMasterText(item);
+  if(!text)return[];
+  const metrics=storyTextMetrics(text);
+  return [{
+    id:"existing-deen-"+String(item.id)+"-master",
+    kind:"lesson",appTarget:"kids",ageMin:4,ageMax:10,
+    title:String(item.title||item.name||item.id)+" · Master 4–10 Jahre",
+    category:"Den Dīn lernen · Lern-Erzählung",topic:String(item.series||item.title||item.id),
+    text,
+    masterWords:metrics.words,masterDurationSec:metrics.seconds,masterLengthLabel:metrics.label,
+    sourceRefs:Array.isArray(item.sourceRefs)?item.sourceRefs:[],
+    question:{},claimIds:[],
+    tags:["kids-deen","deen-learning","existing-story:deen","legacy-id:"+String(item.id),"single-master-story","single-master-audio","quran-sunnah-first"],
+    modes:{read:true,listen:true},
+    cover:item.cover?{url:String(item.cover),source:"existing-kids-art",type:"cover"}:{url:"/kids/assets/deen/deen-entry.jpg?v=1199",source:"existing-kids-art",type:"cover"},
+    existingAudio:masterExistingAudio(item),
+    existingStory:{kind:"deen",itemId:String(item.id),age:"all",ageRange:"4-10"},
+    verification:"approved"
+  }];
+}
 async function fetchLegacyKidsInventory(){
   const results=await Promise.allSettled([
     fetchExistingKidsJson("kids/data/stories-authentic.json"),
@@ -1711,7 +1733,8 @@ async function fetchLegacyKidsInventory(){
     fetchExistingKidsJson("kids/data/short-stories-voice.json"),
     fetchExistingKidsJson("kids/data/prophet-stories.json"),
     fetchExistingKidsJson("kids/data/mubashshirun-stories.json"),
-    fetchExistingKidsJson("kids/data/sahabiyyat-stories.json")
+    fetchExistingKidsJson("kids/data/sahabiyyat-stories.json"),
+    fetchExistingKidsJson("kids/data/deen-lessons.json")
   ]);
   const stories=results[0].status==="fulfilled"&&Array.isArray(results[0].value?.items)
     ?results[0].value.items.map(normalizeLegacyStory).filter(Boolean):[];
@@ -1725,7 +1748,9 @@ async function fetchLegacyKidsInventory(){
     ?results[4].value.items.flatMap(normalizeExistingMubashshirunStories):[];
   const sahabiyyat=results[5].status==="fulfilled"&&Array.isArray(results[5].value?.items)
     ?results[5].value.items.flatMap(normalizeExistingSahabiyyatStories):[];
-  const all=[...prophets,...mubashshirun,...sahabiyyat,...stories,...duas,...narrations];
+  const deen=results[6].status==="fulfilled"&&Array.isArray(results[6].value?.items)
+    ?results[6].value.items.flatMap(normalizeExistingDeenLessons):[];
+  const all=[...deen,...prophets,...mubashshirun,...sahabiyyat,...stories,...duas,...narrations];
   if(!all.length){
     const failed=results.filter(x=>x.status==="rejected").map(x=>x.reason?.message||String(x.reason||"")).filter(Boolean);
     throw Error(failed.join(" · ")||"Bestehender Kids-Bestand ist leer.");

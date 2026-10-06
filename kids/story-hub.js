@@ -1,7 +1,8 @@
 (() => {
 "use strict";
-const REGISTRY_URL="/kids/data/story-hub.json?v=5";
+const REGISTRY_URL="/kids/data/story-hub.json?v=6";
 let SOURCES=[
+  {id:"deen",label:"Den Dīn lernen",kicker:"TAWḤĪD · ĪMĀN · WISSEN",url:"/kids/data/deen-lessons.json?v=1",kind:"lesson",image:"/kids/assets/deen/deen-entry.jpg?v=1199"},
   {id:"prophets",label:"Propheten",kicker:"GESCHICHTEN DER PROPHETEN",url:"/kids/data/prophet-stories.json?v=29",kind:"prophet"},
   {id:"sahaba",label:"Ṣaḥābah",kicker:"DIE GEFÄHRTEN",url:"/kids/data/mubashshirun-stories.json?v=19",kind:"sahabi"},
   {id:"sahabiyyat",label:"Ṣaḥābiyyāt",kicker:"DIE BESTEN FRAUEN IHRER ZEIT",url:"/kids/data/sahabiyyat-stories.json?v=1144",kind:"sahabiyyah"}
@@ -9,7 +10,7 @@ let SOURCES=[
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v==null?"":v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const audio=new Audio(); audio.preload="metadata"; audio.setAttribute("playsinline","");
-let catalog={},activeCategory="prophets",active=null,playing=false,busy=false,reader=null,lastFocus=null;
+let catalog={},activeCategory="deen",active=null,playing=false,busy=false,reader=null,lastFocus=null;
 const LAST_STORY_KEY="kids.storyHub.last.v1";
 let lastSavedAt=0,resumeHint=0;
 function readLastStory(){try{const v=JSON.parse(localStorage.getItem(LAST_STORY_KEY)||"null");return v&&typeof v==="object"?v:null}catch(_){return null}}
@@ -83,6 +84,7 @@ function honorific(item,cat=activeCategory){
 }
 function arabic(item,cat=activeCategory){return [item?.nameAr||"",honorific(item,cat)].filter(Boolean).join(" ")}
 function sourceCount(cat){return (catalog[cat]||[]).length}
+function sourceUnit(cat){return cat==="deen"?"Lektionen":"Geschichten"}
 function stopOtherPlayers(){
   try{window.DARKidsProphetStories?.stop?.()}catch(_){}
   try{window.DARKidsMubashshirun?.stop?.()}catch(_){}
@@ -180,22 +182,23 @@ function renderNext(){
   const host=$("#ghNext"),n=nextItem();if(!host)return;
   if(!n){host.hidden=true;return}
   const m=audioMeta(n),img=artFor(n,activeCategory,false);
-  host.hidden=false;$("#ghNextImg").src=img||"";$("#ghNextTitle").textContent=storyName(n);$("#ghNextMeta").textContent=m?.url?"NÄCHSTE HÖRGESCHICHTE":"NÄCHSTE GESCHICHTE · AUDIO FOLGT";
+  host.hidden=false;$("#ghNextImg").src=img||"";$("#ghNextTitle").textContent=storyName(n);$("#ghNextMeta").textContent=m?.url?(activeCategory==="deen"?"NÄCHSTE LERN-ERZÄHLUNG":"NÄCHSTE HÖRGESCHICHTE"):(activeCategory==="deen"?"NÄCHSTE LEKTION · AUDIO FOLGT":"NÄCHSTE GESCHICHTE · AUDIO FOLGT");
 }
 
 function renderCategories(){
   const host=$("#ghCategories");if(!host)return;
   host.innerHTML=SOURCES.map((s,i)=>{
     const first=(catalog[s.id]||[])[0],img=s.image||artFor(first,s.id,false);
-    return '<button class="gh-category '+(s.id===activeCategory?"active":"")+'" data-gh-cat="'+s.id+'" type="button">'+(img?'<img src="'+esc(img)+'" alt="" decoding="async" loading="'+(i===0?"eager":"lazy")+'">':'')+'<span class="gh-category-copy"><strong>'+s.label+'</strong><span>'+sourceCount(s.id)+' Geschichten</span></span></button>';
+    return '<button class="gh-category '+(s.id===activeCategory?"active":"")+'" data-gh-cat="'+s.id+'" type="button">'+(img?'<img src="'+esc(img)+'" alt="" decoding="async" loading="'+(i===0?"eager":"lazy")+'">':'')+'<span class="gh-category-copy"><strong>'+s.label+'</strong><span>'+sourceCount(s.id)+' '+sourceUnit(s.id)+'</span></span></button>';
   }).join("");
-  host.querySelectorAll("[data-gh-cat]").forEach(b=>b.addEventListener("click",()=>{activeCategory=b.dataset.ghCat;renderCategories();renderList()}));
+  host.querySelectorAll("[data-gh-cat]").forEach(b=>b.addEventListener("click",()=>{activeCategory=b.dataset.ghCat;$("#ghWorld")?.setAttribute("data-category",activeCategory);renderCategories();renderList()}));
 }
 function renderList(){
   const cat=category(),list=catalog[activeCategory]||[];
+  $("#ghWorld")?.setAttribute("data-category",activeCategory);
   $("#ghListKicker").textContent=cat.kicker;
   $("#ghListTitle").textContent=cat.label;
-  $("#ghListCount").textContent=list.length+" Geschichten";
+  $("#ghListCount").textContent=list.length+" "+sourceUnit(activeCategory);
   $("#ghList").innerHTML=list.map(item=>{
     const m=audioMeta(item),img=artFor(item,activeCategory,false);
     return '<button class="gh-story" type="button" data-gh-id="'+esc(item.id)+'">'+
@@ -226,12 +229,12 @@ function renderPlayer(){
   if(!active)return;
   const cat=category(),meta=audioMeta(active),text=textFor(active),img=artFor(active,activeCategory,true);
   const bg=$("#ghPlayerBg");bg.onerror=()=>{bg.onerror=null;bg.src=artFor(active,activeCategory,false)};bg.src=img;bg.alt="";
-  $("#ghPlayerKicker").textContent=cat.label.toUpperCase()+" · HÖRGESCHICHTE";
+  $("#ghPlayerKicker").textContent=cat.label.toUpperCase()+" · "+(activeCategory==="deen"?"LERN-ERZÄHLUNG":"HÖRGESCHICHTE");
   $("#ghPlayerTitle").textContent=storyName(active);
   $("#ghPlayerArabic").textContent=arabic(active,activeCategory);
   $("#ghPlayerSummary").textContent=active.summary||"";
   $("#ghRead").innerHTML=text.split(/\n{2,}/).map((p,i)=>'<p data-gh-p="'+i+'">'+esc(p)+"</p>").join("");
-  $("#ghSources").textContent=(active.sourceRefs||[]).join(" · ");
+  const refs=Array.isArray(active.sourceRefs)?active.sourceRefs:[];$("#ghSources").innerHTML=refs.map(ref=>'<span class="gh-source-chip">'+esc(ref)+'</span>').join("");
   $("#ghReadToggle").hidden=isYoung();
   $("#ghFollow").hidden=isYoung()||!meta?.url;
   $(".gh-player-actions").hidden=isYoung();
@@ -370,14 +373,15 @@ async function toggleAudio(){
 function stopAudio(clear=true){reader?.persist(true);try{audio.pause()}catch(_){}playing=false;busy=false;if(clear){try{audio.removeAttribute("src");audio.load()}catch(_){}}renderPlay();renderMini()}
 async function load(){
   await loadRegistry();
-  if(!SOURCES.some(s=>s.id===activeCategory))activeCategory=SOURCES[0]?.id||"prophets";
+  if(!SOURCES.some(s=>s.id===activeCategory))activeCategory=SOURCES[0]?.id||"deen";
   ensureEntry();ensureUi();
   const results=await Promise.all(SOURCES.map(async s=>{try{const r=await fetch(s.url,{cache:"no-store"});if(!r.ok)throw Error(String(r.status));const d=await r.json();return[s.id,(d.items||[]).slice().sort((a,b)=>Number(a.displayOrder||999)-Number(b.displayOrder||999))]}catch(e){console.warn("[DĀR Kids Hörwelten]",s.id,e);return[s.id,[]]}}));
-  results.forEach(([id,items])=>catalog[id]=items);renderContinue();renderCategories();renderList();
+  results.forEach(([id,items])=>catalog[id]=items);renderContinue();renderCategories();renderList();const deenEntry=$("#deenEntry");if(deenEntry&&!deenEntry.dataset.ghBound){deenEntry.dataset.ghBound="1";deenEntry.addEventListener("click",()=>openCategory("deen"));}
   try{const m=String(location.hash||"").match(/^#stories\/listen\/([^/]+)\/([^/?#]+)/i);if(m&&SOURCES.some(s=>s.id===m[1])){activeCategory=m[1];openWorld();setTimeout(()=>selectStory(decodeURIComponent(m[2])),0)}}catch(_){}
   const app=$(".app");if(app&&"MutationObserver" in window)new MutationObserver(()=>{renderCategories();renderList();if(active)renderPlayer()}).observe(app,{attributes:true,attributeFilter:["data-age"]});
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(load,0),{once:true});else setTimeout(load,0);
+function openCategory(cat){if(!SOURCES.some(s=>s.id===cat))return;activeCategory=cat;openWorld();renderCategories();renderList();}
 function openExternalStory(cat,id,time=0){
   let tries=0;
   const attempt=()=>{
@@ -393,6 +397,7 @@ function openExternalStory(cat,id,time=0){
 }
 window.DARKidsStoryHub={
   open:openWorld,
+  openCategory,
   openStory:(cat,id)=>openExternalStory(cat,id,0),
   openResume:(cat,id,time)=>openExternalStory(cat,id,time),
   stop:()=>stopAudio(true)

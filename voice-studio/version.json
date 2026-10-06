@@ -1,7 +1,7 @@
 {
-  "version": "2.9.120",
+  "version": "2.9.121",
   "updatedAt": "2026-10-06",
-  "deployTrigger": "voice-studio-2.9.120-single-master-stories",
+  "deployTrigger": "voice-studio-2.9.121-kids-deen-master-lessons",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
   "cache": "dar-voice-studio-v89",
@@ -2005,5 +2005,13 @@
     "originalOwnerAudioCodec": "mp3",
     "originalBytesPreserved": true,
     "transcoded": false
+  },
+  "kidsDeenLearning": {
+    "enabled": true,
+    "lessonCount": 6,
+    "dataPath": "/kids/data/deen-lessons.json",
+    "masterTextPolicy": "masterStoryText=Kids=Voice=read-along",
+    "audioPolicy": "text-ready; generate only on explicit production",
+    "allahHonorific": "subḥānahu wa taʿālā"
   }
 }
