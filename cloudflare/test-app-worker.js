@@ -1,7 +1,7 @@
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v108-home-title1195",
-  label: "KIDS · V1.08.22"
+  buildId: "kids-shell-v108-reference-hero1196",
+  label: "KIDS · V1.08.23"
 });
 
 function kidsVersionResponse() {
@@ -159,7 +159,7 @@ async function gradeKidsRecitation(request, env) {
 }
 
 
-const DAR_TEST_HOME_V1193_CSS = "/test/assets/dar-home-library-v1193.css?v=1195-tabrestore";
+const DAR_TEST_HOME_V1193_CSS = "/test/assets/dar-home-library-v1193.css?v=1196-tabrestore";
 const DAR_TEST_HOME_V1193_JS = "/test/assets/dar-home-library-v1193.js?v=1193";
 
 async function finalizeDarTestHomeV1193(asset) {
@@ -371,7 +371,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v108-home-title1195");
+      target.searchParams.set("kv", "kids-shell-v108-reference-hero1196");
       return Response.redirect(target.toString(), 301);
     }
 
