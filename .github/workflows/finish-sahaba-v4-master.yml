@@ -274,10 +274,37 @@ JSON
                   "followReaderSyncedAt":stamp
               })
 
-          d["version"]=max(int(d.get("version") or 0)+1,10)
+          d["version"]=max(int(d.get("version") or 0)+1,11)
           d["updatedAt"]=stamp
           p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-          print("Installed exact v4 masters for",len(list(ids)),"Sahaba")
+
+          kvp=Path("kids/version.json")
+          kv=json.loads(kvp.read_text(encoding="utf-8"))
+          visual=kv.setdefault("visualSystem",{})
+          visual["mubashshirunDataVersion"]=d["version"]
+          visual["mubashshirunAudioMastersReady"]=10
+          visual["mubashshirunTtsModel"]="eleven_v4"
+          visual["mubashshirunMasterVoice"]="Serhat Abu Malik – Master"
+          visual["mubashshirunReadAlongTiming"]="elevenlabs-forced-alignment-v1"
+          kvp.write_text(json.dumps(kv,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+
+          hubjs=Path("kids/story-hub.js")
+          js=hubjs.read_text(encoding="utf-8")
+          m=re.search(r"/kids/data/mubashshirun-stories\\.json\\?v=(\\d+)",js)
+          cache_v=(int(m.group(1))+1) if m else 21
+          js=re.sub(r"/kids/data/mubashshirun-stories\\.json\\?v=\\d+",f"/kids/data/mubashshirun-stories.json?v={cache_v}",js)
+          hubjs.write_text(js,encoding="utf-8")
+
+          hubp=Path("kids/data/story-hub.json")
+          hub=json.loads(hubp.read_text(encoding="utf-8"))
+          for src in hub.get("sources",[]):
+              if str(src.get("id"))=="sahaba":
+                  src["dataUrl"]=f"/kids/data/mubashshirun-stories.json?v={cache_v}"
+          if isinstance(hub.get("version"),int):
+              hub["version"]+=1
+          hub["updatedAt"]=stamp
+          hubp.write_text(json.dumps(hub,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print("Installed exact v4 masters for",len(list(ids)),"Sahaba · data version",d["version"],"· cache",cache_v)
           PY
 
       - name: Validate all ten Sahaba
@@ -313,10 +340,11 @@ JSON
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add kids/data/mubashshirun-stories.json kids/assets/mubashshirun-story-audio/
+          git add kids/data/mubashshirun-stories.json kids/assets/mubashshirun-story-audio/ kids/version.json kids/story-hub.js kids/data/story-hub.json
           if git diff --cached --quiet; then
             echo "No changes."
             exit 0
           fi
           git commit -m "Kids: finish Sahaba v4 master audios and exact reader sync"
+          git pull --rebase origin main
           git push origin HEAD:main
