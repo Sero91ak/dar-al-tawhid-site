@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.12</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.13</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2809,37 +2809,15 @@ html:not([data-view="today"]) .view.active{
       </div>
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
-        <video class="hero-cinema-video" src="/kids/assets/kids-home-v1179/hero-cinema.mp4?v=1185" autoplay muted playsinline webkit-playsinline preload="auto" poster="/kids/assets/kids-home-v1179/hero-poster.png?v=1185" aria-hidden="true" tabindex="-1" disablepictureinpicture data-cinema-version="1185"></video>
+        <video class="hero-cinema-video" src="/kids/assets/kids-home-v1179/hero-cinema.mp4?v=1186" autoplay muted playsinline webkit-playsinline preload="auto" poster="/kids/assets/kids-home-v1179/hero-poster.png?v=1186" aria-hidden="true" tabindex="-1" disablepictureinpicture data-cinema-version="1185"></video>
         <div class="hero-artifact-shield" aria-hidden="true"></div>
         <div class="kids-wordmark">
-          <svg class="wm-dar-arc" viewBox="0 0 640 118" role="img" aria-label="DĀR AL TAWḤĪD">
-            <defs>
-              <path id="kidsDarArcPath1185" d="M82 79 Q320 28 558 79"></path>
-              <linearGradient id="kidsDarGold1185" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#a96f1d"></stop><stop offset="16%" stop-color="#e9b94f"></stop>
-                <stop offset="39%" stop-color="#fff1a9"></stop><stop offset="58%" stop-color="#d79b31"></stop>
-                <stop offset="78%" stop-color="#ffe598"></stop><stop offset="100%" stop-color="#b97920"></stop>
-              </linearGradient>
-              <linearGradient id="kidsDarLineGold1185" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#d09b38" stop-opacity="0"></stop><stop offset="18%" stop-color="#e7ba55" stop-opacity=".48"></stop>
-                <stop offset="50%" stop-color="#fff0aa" stop-opacity=".95"></stop><stop offset="82%" stop-color="#e7ba55" stop-opacity=".48"></stop>
-                <stop offset="100%" stop-color="#d09b38" stop-opacity="0"></stop>
-              </linearGradient>
-              <linearGradient id="kidsDarShine1185" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#fff" stop-opacity="0"></stop><stop offset="42%" stop-color="#fff7cf" stop-opacity=".10"></stop>
-                <stop offset="50%" stop-color="#fff" stop-opacity=".98"></stop><stop offset="58%" stop-color="#fff7cf" stop-opacity=".10"></stop>
-                <stop offset="100%" stop-color="#fff" stop-opacity="0"></stop>
-              </linearGradient>
-              <mask id="kidsDarShineMask1185">
-                <rect width="640" height="118" fill="#000"></rect>
-                <text class="wm-dar-arc-masktext" fill="#fff"><textPath href="#kidsDarArcPath1185" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath></text>
-              </mask>
-            </defs>
-            <text class="wm-dar-arc-text"><textPath href="#kidsDarArcPath1185" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath></text>
-            <rect class="wm-dar-shine-bar" x="-170" y="8" width="150" height="88" rx="40" fill="url(#kidsDarShine1185)" mask="url(#kidsDarShineMask1185)"></rect>
-            <path class="wm-dar-arc-line" d="M126 100 Q320 78 514 100"></path>
-            <g class="wm-dar-spark" aria-hidden="true"><path d="M565 66 L569 76 L579 80 L569 84 L565 94 L561 84 L551 80 L561 76 Z"></path><circle cx="584" cy="68" r="2.5"></circle><circle cx="548" cy="61" r="1.8"></circle></g>
-          </svg>
+          <div class="wm-dar-html" aria-label="DĀR AL TAWḤĪD">
+            <span class="wm-dar-word wm-dar-word-1">DĀR</span>
+            <span class="wm-dar-word wm-dar-word-2">AL</span>
+            <span class="wm-dar-word wm-dar-word-3">TAWḤĪD</span>
+            <span class="wm-dar-glint" aria-hidden="true"></span>
+          </div>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
         </div>
         <div class="cloud"></div>
@@ -3204,7 +3182,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v108-home-cinema1185";
+const KIDS_BUILD_ID="kids-shell-v108-home-cinema1186";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -3546,21 +3524,25 @@ function launchNextDailyStep(){
   if(next)launchDailyStep(next.id);
 }
 function showTab(name){
-  document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active")});
   var view=document.getElementById("view-"+name);
-  if(view){
-    view.classList.add("active");
-    view.style.animation="none";
-    void view.offsetWidth;
-    view.style.animation="";
-  }
+  if(!view)return;
+  var current=document.querySelector(".view.active");
   document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.toggle("active",b.dataset.target===name)});
-  var shellScroll=document.querySelector(".shell");
-  if(shellScroll){
-    try{shellScroll.scrollTo({top:0,left:0,behavior:"auto"})}catch(e){shellScroll.scrollTop=0}
-  }else{
-    window.scrollTo({top:0,behavior:"auto"});
+  if(current===view){
+    var sameScroll=document.querySelector(".shell");
+    requestAnimationFrame(function(){
+      if(sameScroll){try{sameScroll.scrollTo({top:0,left:0,behavior:"auto"})}catch(e){sameScroll.scrollTop=0}}
+      else window.scrollTo({top:0,behavior:"auto"});
+    });
+    return;
   }
+  if(current)current.classList.remove("active");
+  view.classList.add("active");
+  var shellScroll=document.querySelector(".shell");
+  requestAnimationFrame(function(){
+    if(shellScroll){try{shellScroll.scrollTo({top:0,left:0,behavior:"auto"})}catch(e){shellScroll.scrollTop=0}}
+    else window.scrollTo({top:0,behavior:"auto"});
+  });
 }
 document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
 document.querySelectorAll("[data-go]").forEach(function(b){
@@ -6009,7 +5991,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     });
   }
   document.addEventListener("pointerdown",function(ev){
-    var el=ev.target.closest&&ev.target.closest(".choice,.resume,.nav-btn,.daily-step,.daily-start,.story-feature,.story-row,.surah-card,.verse-card,.quran-action,.close-btn,.quiz-answer");
+    var el=ev.target.closest&&ev.target.closest(".choice,.resume,.daily-step,.daily-start,.story-feature,.story-row,.surah-card,.verse-card,.quran-action,.close-btn,.quiz-answer");
     if(!el)return;
     el.classList.remove("kid-pop");
     void el.offsetWidth;
@@ -6271,7 +6253,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v108-home-cinema1185";
+  var KIDS_BUILD_ID="kids-shell-v108-home-cinema1186";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6287,7 +6269,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1185",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1186",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -9124,5 +9106,117 @@ html[data-view="stories"] #view-stories > :last-child{
 <script id="kids-home-cinema-runtime-v1185">
 (function(){function boot1185(){var today=document.getElementById("view-today"),hero=today&&today.querySelector(".hero"),video=hero&&hero.querySelector(".hero-cinema-video");if(!today||!hero||!video)return;var resetting=false;video.muted=true;video.defaultMuted=true;video.loop=false;video.playsInline=true;video.playbackRate=.62;video.setAttribute("muted","");video.setAttribute("playsinline","");video.setAttribute("webkit-playsinline","");function active(){return today.classList.contains("active")&&document.visibilityState!=="hidden"}function play(){if(!active())return;try{video.playbackRate=.62;var p=video.play();if(p&&typeof p.catch==="function")p.catch(function(){hero.classList.remove("cinema-playing")})}catch(e){}}function resetSeam(){if(resetting)return;resetting=true;hero.classList.add("cinema-resetting");setTimeout(function(){try{video.currentTime=.08}catch(e){}setTimeout(function(){hero.classList.remove("cinema-resetting");resetting=false;play()},110)},300)}function guardSeam(){var d=Number(video.duration||0);if(d>0&&video.currentTime>=Math.max(.2,d-.44))resetSeam()}video.addEventListener("playing",function(){hero.classList.add("cinema-playing")});video.addEventListener("timeupdate",guardSeam);video.addEventListener("ended",resetSeam);video.addEventListener("canplay",play);video.addEventListener("loadeddata",play);video.addEventListener("stalled",function(){hero.classList.remove("cinema-playing")});video.addEventListener("error",function(){hero.classList.remove("cinema-playing")});document.addEventListener("visibilitychange",function(){if(active())play();else try{video.pause()}catch(e){}});window.addEventListener("pageshow",play);window.addEventListener("focus",play);document.addEventListener("touchstart",play,{once:true,passive:true});document.addEventListener("pointerdown",play,{once:true,passive:true});try{new MutationObserver(function(){if(active())play();else try{video.pause()}catch(e){}}).observe(today,{attributes:true,attributeFilter:["class"]})}catch(e){}try{video.load()}catch(e){}setTimeout(play,80);setTimeout(play,700)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot1185,{once:true});else boot1185()})();
 </script>
+
+
+<style id="kids-home-wordmark-nav-v1186">
+/* Stable HTML wordmark: shallow arc without SVG textPath, so the final D cannot distort on iOS. */
+#view-today .wm-dar-arc{display:none!important}
+#view-today .wm-dar-html{
+  position:relative!important;
+  display:flex!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:clamp(6px,1.6vw,10px)!important;
+  width:min(calc(100vw - 54px),500px)!important;
+  margin:0 auto -4px!important;
+  padding:8px 8px 12px!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+  font-family:"Cinzel",Georgia,"Times New Roman",serif!important;
+  font-size:clamp(34px,8.7vw,46px)!important;
+  line-height:1!important;
+  font-weight:700!important;
+  letter-spacing:.025em!important;
+  text-rendering:geometricPrecision!important;
+  -webkit-font-smoothing:antialiased!important;
+  filter:drop-shadow(0 3px 0 rgba(76,43,10,.56)) drop-shadow(0 7px 12px rgba(0,0,0,.42)) drop-shadow(0 0 8px rgba(244,192,78,.18))!important;
+}
+#view-today .wm-dar-word{
+  position:relative!important;
+  display:inline-block!important;
+  flex:0 0 auto!important;
+  color:#e5b34e!important;
+  background:linear-gradient(100deg,#a86c1b 0%,#e6b34d 24%,#ffe89a 47%,#d5942c 68%,#f7d477 86%,#b87920 100%)!important;
+  background-size:250% 100%!important;
+  background-position:0% 50%!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:.45px rgba(87,48,10,.54)!important;
+  paint-order:stroke fill!important;
+  animation:darSheen1186 8.6s ease-in-out infinite!important;
+}
+#view-today .wm-dar-word-1{transform:translateY(5px) rotate(-1.1deg)!important;animation-delay:0s!important}
+#view-today .wm-dar-word-2{transform:translateY(0)!important;animation-delay:.14s!important}
+#view-today .wm-dar-word-3{transform:translateY(5px) rotate(1.1deg)!important;padding-right:.07em!important;animation-delay:.28s!important}
+@keyframes darSheen1186{
+  0%,22%{background-position:0% 50%;filter:brightness(.98)}
+  42%{background-position:100% 50%;filter:brightness(1.10)}
+  58%,100%{background-position:100% 50%;filter:brightness(1)}
+}
+#view-today .wm-dar-glint{
+  position:absolute!important;
+  right:1px!important;
+  top:43%!important;
+  width:5px!important;
+  height:5px!important;
+  border-radius:50%!important;
+  background:#fff1a4!important;
+  box-shadow:0 0 7px rgba(255,224,128,.88),0 0 13px rgba(255,203,91,.34)!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  animation:darGlint1186 8.6s ease-in-out infinite!important;
+}
+#view-today .wm-dar-glint::before,
+#view-today .wm-dar-glint::after{
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  background:#fff6c9!important;
+  border-radius:999px!important;
+  transform:translate(-50%,-50%)!important;
+}
+#view-today .wm-dar-glint::before{width:13px!important;height:1px!important}
+#view-today .wm-dar-glint::after{width:1px!important;height:13px!important}
+@keyframes darGlint1186{
+  0%,43%{opacity:0;transform:translateY(3px) scale(.55)}
+  48%{opacity:.9;transform:translateY(0) scale(1)}
+  54%{opacity:.48;transform:translateY(-3px) scale(.82)}
+  60%,100%{opacity:0;transform:translateY(-5px) scale(.6)}
+}
+
+/* Bottom navigation: no bounce, no forced-reflow flash; only a short compositor fade for page content. */
+#view-today.view.active,
+#view-stories.view.active,
+#view-quran.view.active,
+#view-parents.view.active{
+  animation:kidsTabFade1186 .15s ease-out both!important;
+  filter:none!important;
+}
+@keyframes kidsTabFade1186{from{opacity:.88}to{opacity:1}}
+.bottom-nav .nav-btn,
+.bottom-nav .nav-btn:active{
+  animation:none!important;
+  transform:none!important;
+  -webkit-tap-highlight-color:transparent!important;
+  transition:color .16s ease,border-color .16s ease,box-shadow .16s ease,opacity .16s ease!important;
+  will-change:auto!important;
+}
+.bottom-nav .nav-btn .ico,
+.bottom-nav .nav-btn .lab{
+  position:relative!important;
+  z-index:2!important;
+  transition:opacity .16s ease,transform .16s ease!important;
+  transform:translateZ(0)!important;
+}
+.bottom-nav .nav-btn.active .ico{transform:translate3d(0,-1px,0)!important}
+.bottom-nav .nav-btn:not(.active) .ico{opacity:.84!important}
+.bottom-nav .nav-btn:not(.active) .lab{opacity:.88!important}
+@media(prefers-reduced-motion:reduce){
+  #view-today .wm-dar-word,#view-today .wm-dar-glint{animation:none!important}
+  #view-today.view.active,#view-stories.view.active,#view-quran.view.active,#view-parents.view.active{animation:none!important}
+}
+</style>
 
 </html>
