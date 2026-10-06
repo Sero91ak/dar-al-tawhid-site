@@ -1874,3 +1874,196 @@ html[data-theme] body.is-hadith-route .hadith-detail .post-aussage-text > :last-
   }
 }
 
+
+
+/* DAR_HADITH_DETAIL_SYSTEM_V1303
+   2026-10-06 · Test-App
+   Single horizontal geometry for every Hadith level.
+   The app shell contributes no lateral inset; Hadith owns its own centered gutters.
+   Detail path sits below the hero and remains plain editorial navigation. */
+body.is-hadith-route{
+  --hadith-page-gutter:14px;
+}
+html[data-theme] body.is-hadith-route #appView,
+html[data-theme] body.is-hadith-route #appView.view{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  box-sizing:border-box!important;
+  overflow-x:clip!important;
+}
+
+/* Shared centered measure. */
+html[data-theme] body.is-hadith-route .hadith-hub > .view-head{
+  width:calc(100% - (var(--hadith-page-gutter) * 2))!important;
+  max-width:1120px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-hadith-route .hadith-hub > .main-search,
+html[data-theme] body.is-hadith-route .hadith-hub > .dua-hub__label,
+html[data-theme] body.is-hadith-route .hadith-hub > .dua-theme-grid,
+html[data-theme] body.is-hadith-route #hadithSearchBlock,
+html[data-theme] body.is-hadith-route .hadith-hub--leaf > .hadith-leaf-list,
+html[data-theme] body.is-hadith-route .hadith-work-toggle,
+html[data-theme] body.is-hadith-route .hadith-works-toggle{
+  width:calc(100% - (var(--hadith-page-gutter) * 2))!important;
+  max-width:920px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box!important;
+}
+
+/* Detail page is one centered composition; no viewport tricks are allowed here. */
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303{
+  position:relative!important;
+  inset:auto!important;
+  left:auto!important;
+  right:auto!important;
+  translate:none!important;
+  transform:none!important;
+  width:calc(100% - (var(--hadith-page-gutter) * 2))!important;
+  max-width:860px!important;
+  min-width:0!important;
+  margin:0 auto!important;
+  padding:0 0 calc(150px + env(safe-area-inset-bottom))!important;
+  box-sizing:border-box!important;
+  overflow:visible!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 > .post-reader-title{
+  position:relative!important;
+  inset:auto!important;
+  left:auto!important;
+  right:auto!important;
+  translate:none!important;
+  transform:none!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:8px auto 16px!important;
+  box-sizing:border-box!important;
+}
+
+/* Detail breadcrumb now lives below the hero and follows the reading measure. */
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 > nav.hadith-crumbs{
+  width:calc(100% - 8px)!important;
+  max-width:780px!important;
+  min-width:0!important;
+  margin:0 auto 8px!important;
+  padding:1px 0 10px!important;
+  box-sizing:border-box!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 13%,transparent)!important;
+  border-radius:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 > .post-reader-main{
+  position:relative!important;
+  inset:auto!important;
+  left:auto!important;
+  right:auto!important;
+  translate:none!important;
+  transform:none!important;
+  width:calc(100% - 8px)!important;
+  max-width:780px!important;
+  min-width:0!important;
+  margin:0 auto!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+}
+
+/* No Hadith breadcrumb element may inherit a capsule/card presentation. */
+html[data-theme] body.is-hadith-route .hadith-crumbs > :is(button,span,a),
+html[data-theme] body.is-hadith-route .hadith-crumbs > :is(button,span,a)::before,
+html[data-theme] body.is-hadith-route .hadith-crumbs > :is(button,span,a)::after{
+  border-radius:0!important;
+  background:none!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html[data-theme] body.is-hadith-route .hadith-crumbs > :is(button,span,a)::before,
+html[data-theme] body.is-hadith-route .hadith-crumbs > :is(button,span,a)::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* Statement is a clean reading section: label above, text below, no vertical rail. */
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .statement.post-aussage{
+  padding:20px 0 22px!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .post-aussage-kicker{
+  display:flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  margin:0 0 13px!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .post-aussage-kicker::after{
+  content:""!important;
+  display:block!important;
+  width:34px!important;
+  height:1px!important;
+  flex:0 0 34px!important;
+  background:color-mix(in srgb,var(--gold2) 34%,transparent)!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .post-aussage-text{
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-left:0!important;
+  text-indent:0!important;
+}
+
+/* Bottom navigation never covers the final reading rows. */
+html[data-theme] body.is-hadith-route .hadith-hub,
+html[data-theme] body.is-hadith-route .dua-collection-page{
+  padding-bottom:calc(138px + env(safe-area-inset-bottom))!important;
+}
+html[data-theme] body.is-hadith-route .hadith-hub > .hadith-work-toggle,
+html[data-theme] body.is-hadith-route .hadith-hub > .hadith-works-toggle{
+  margin-bottom:0!important;
+}
+
+@media(max-width:699px){
+  body.is-hadith-route{
+    --hadith-page-gutter:10px;
+  }
+  html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303{
+    width:calc(100% - (var(--hadith-page-gutter) * 2))!important;
+    max-width:none!important;
+  }
+  html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 > .post-reader-title{
+    width:100%!important;
+    max-width:none!important;
+    min-height:218px!important;
+    margin:6px auto 14px!important;
+    padding:23px 18px 21px!important;
+    border-radius:24px!important;
+  }
+  html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 > nav.hadith-crumbs,
+  html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 > .post-reader-main{
+    width:calc(100% - 8px)!important;
+    max-width:none!important;
+  }
+  html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 > nav.hadith-crumbs{
+    margin-bottom:6px!important;
+    padding-bottom:9px!important;
+  }
+}
+
+@media(min-width:700px){
+  body.is-hadith-route{
+    --hadith-page-gutter:20px;
+  }
+}
