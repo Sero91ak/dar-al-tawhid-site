@@ -438,8 +438,7 @@ struct WebAppView: UIViewRepresentable {
             case "darNative":
                 let kind = body["type"] as? String ?? ""
                 if kind == "qibla-quick-exit" {
-                    DarNativePermissions.shared.stopLiveQibla()
-                    UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                    DarNativePermissions.shared.closeAppToHomeScreen()
                     return
                 }
                 DarNativePermissions.shared.handleWebMessage(message.body)
@@ -456,6 +455,10 @@ struct WebAppView: UIViewRepresentable {
             case "darAppIcon":
                 DarAppIcons.set(body["name"] as? String ?? body["id"] as? String ?? "")
             case "darHaptic":
+                if (body["style"] as? String) == "qibla-exit" {
+                    DarNativePermissions.shared.closeAppToHomeScreen()
+                    return
+                }
                 DarHaptics.play(raw: body["style"] as? String ?? "light")
             case "darShareImage":
                 Task { @MainActor in self.shareImageFromWeb(body) }

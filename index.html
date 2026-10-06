@@ -18,7 +18,7 @@
 <link rel="preload" as="image" href="/assets/dar-3d-icons/audio.png?v=1093">
 <link rel="preload" as="image" href="/assets/dar-3d-icons/ilm.png?v=1093">
 <link rel="preload" as="image" href="/assets/dar-3d-icons/topics.png?v=1094">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1260";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1261";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1062";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
@@ -13649,8 +13649,9 @@ body.is-quran-overview.qov-search-active .qov-main{opacity:.45;pointer-events:no
 
 <style id="qibla-quick-sheet-v1">/* retired: Qibla Quick View uses assets/qibla-quick-view.css */</style>
 <style id="dar-qibla-pop-v3">
-html.dar-qibla-pop-open,html.dar-qibla-pop-open body{overflow:hidden!important;touch-action:none;overscroll-behavior:none}
-html.dar-qibla-pop-open #appView,html.dar-qibla-pop-open #bottomNav,html.dar-qibla-pop-open .bottom-nav,html.dar-qibla-pop-open .float-actions{pointer-events:none!important}
+html.dar-qibla-pop-open,html.dar-qibla-pop-open body{overflow:hidden!important;touch-action:none!important;overscroll-behavior:none!important;height:100%!important;max-height:100dvh!important}
+html.dar-qibla-pop-open body{position:fixed!important;left:0!important;right:0!important;width:100%!important}
+html.dar-qibla-pop-open #appView,html.dar-qibla-pop-open #bottomNav,html.dar-qibla-pop-open .bottom-nav,html.dar-qibla-pop-open .float-actions,html.dar-qibla-pop-open .app{pointer-events:none!important;touch-action:none!important}
 #darQiblaPop{
   position:fixed!important;inset:0!important;z-index:2147483646!important;
   display:flex!important;align-items:center!important;justify-content:center!important;
@@ -13660,7 +13661,7 @@ html.dar-qibla-pop-open #appView,html.dar-qibla-pop-open #bottomNav,html.dar-qib
     radial-gradient(ellipse 90% 70% at 50% 42%,rgba(239,215,142,.14),transparent 46%),
     radial-gradient(circle at 50% 40%,rgba(18,16,12,.35),rgba(3,3,5,.88) 72%);
   -webkit-backdrop-filter:blur(22px) saturate(1.1);backdrop-filter:blur(22px) saturate(1.1);
-  opacity:0;visibility:visible;pointer-events:auto;
+  opacity:0;visibility:visible;pointer-events:auto;touch-action:none;overscroll-behavior:none;
   transition:opacity 360ms cubic-bezier(0.22,1,0.36,1);
   will-change:opacity
 }
@@ -13681,9 +13682,10 @@ html.dar-qibla-pop-open #appView,html.dar-qibla-pop-open #bottomNav,html.dar-qib
 #darQiblaPop .dq-kicker{margin:0;font:800 8px/1 Georgia,serif;letter-spacing:.24em;color:rgba(239,215,142,.8);text-transform:uppercase}
 #darQiblaPop .dq-title{margin:6px 0 0;font:500 28px/1 Georgia,serif;color:#f6e7b4}
 #darQiblaPop .dq-x{
-  appearance:none;-webkit-appearance:none;width:38px;height:38px;border-radius:999px;
+  appearance:none;-webkit-appearance:none;width:44px;height:44px;border-radius:999px;
   border:1px solid rgba(239,215,142,.28)!important;background:rgba(255,255,255,.05)!important;
-  color:#f4eee1!important;font:500 22px/1 Georgia,serif;padding:0;margin:0;flex:none
+  color:#f4eee1!important;font:500 22px/1 Georgia,serif;padding:0;margin:0;flex:none;
+  position:relative;z-index:3;pointer-events:auto!important;touch-action:manipulation;cursor:pointer
 }
 #darQiblaPop .dq-svg{
   display:block!important;width:min(82vw,340px)!important;height:min(82vw,340px)!important;
@@ -25563,6 +25565,20 @@ function darQiblaTeardown(){
   if(el)el.remove();
   document.documentElement.classList.remove("dar-qibla-pop-open","dar-qibla-live-open");
   document.body.classList.remove("dar-qibla-pop-open","dar-qibla-live-open");
+  document.body.style.position="";
+  document.body.style.top="";
+  document.body.style.left="";
+  document.body.style.right="";
+  document.body.style.width="";
+  if(darQiblaLive.blockMove){
+    document.removeEventListener("touchmove",darQiblaLive.blockMove,true);
+    document.removeEventListener("wheel",darQiblaLive.blockMove,true);
+    darQiblaLive.blockMove=null;
+  }
+  if(typeof darQiblaLive.scrollY==="number"){
+    window.scrollTo(0,darQiblaLive.scrollY);
+    darQiblaLive.scrollY=null;
+  }
   darQiblaLive.phase="closed";
 }
 function closeQiblaQuickSheet(){
@@ -25796,10 +25812,25 @@ function darQiblaLiveBoot(orientPromise){
   }
 }
 function darQiblaExitQuick(){
-  try{if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darNative)webkit.messageHandlers.darNative.postMessage({type:"qibla-quick-exit"})}catch(e){}
-  var native=window.DAR_OFFICIAL_IOS_APP||window.DAR_IOS_NATIVE_APP||/DarAlTawhid-iOS/i.test(navigator.userAgent||"");
-  if(native)return;
+  if(darQiblaLive.exiting)return;
+  darQiblaLive.exiting=true;
+  var native=!!(window.DAR_OFFICIAL_IOS_APP||window.DAR_IOS_NATIVE_APP||/DarAlTawhid-iOS/i.test(navigator.userAgent||""));
+  var sent=false;
+  try{
+    if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darNative){
+      webkit.messageHandlers.darNative.postMessage({type:"qibla-quick-exit"});
+      sent=true;
+    }
+  }catch(e){}
+  try{
+    if(window.webkit&&webkit.messageHandlers&&webkit.messageHandlers.darHaptic){
+      webkit.messageHandlers.darHaptic.postMessage({style:"qibla-exit"});
+    }
+  }catch(e){}
+  if(native&&sent)return;
+  try{if(native)window.close()}catch(e){}
   closeQiblaQuickSheet();
+  darQiblaLive.exiting=false;
 }
 function openQiblaQuickSheet(){
   if(darQiblaLive.phase==="opening"||darQiblaLive.phase==="open")return;
@@ -25822,8 +25853,19 @@ function openQiblaQuickSheet(){
   root.id="darQiblaPop";
   root.innerHTML='<div class="dq-frame"><div class="dq-bar"><div><p class="dq-kicker">Qibla</p><h3 class="dq-title">Suche</h3></div><button type="button" class="dq-x" data-qibla-live-close aria-label="Schließen">×</button></div>'+darQiblaSvg()+'<p class="dq-deg" id="darQiblaDeg">126°</p><p class="dq-city" id="darQiblaCity">Rheinbach</p><p class="dq-status" id="darQiblaStatus">Ausrichten</p><p class="dq-hint">Die Kerbe oben markiert die Blickrichtung. Drehe, bis die Qibla dort steht.</p></div>';
   document.body.appendChild(root);
+  darQiblaLive.scrollY=window.scrollY||document.documentElement.scrollTop||0;
+  document.body.style.top=(-darQiblaLive.scrollY)+"px";
   document.documentElement.classList.add("dar-qibla-pop-open");
   document.body.classList.add("dar-qibla-pop-open");
+  if(!darQiblaLive.blockMove){
+    darQiblaLive.blockMove=function(ev){
+      var t=ev.target;
+      if(t&&t.closest&&t.closest("[data-qibla-live-close]"))return;
+      ev.preventDefault();
+    };
+    document.addEventListener("touchmove",darQiblaLive.blockMove,{passive:false,capture:true});
+    document.addEventListener("wheel",darQiblaLive.blockMove,{passive:false,capture:true});
+  }
   void root.offsetHeight;
   requestAnimationFrame(function(){root.classList.add("is-open")});
   darQiblaLive.openTimer=setTimeout(function(){if(darQiblaLive.phase==="opening")darQiblaLive.phase="open"},400);
@@ -25835,8 +25877,16 @@ function openQiblaQuickSheet(){
     if(darQiblaLive.phase==="opening")darQiblaLive.phase="open";
   };
   root.addEventListener("transitionend",markOpen);
-  var closeBtn=root.querySelector("[data-qibla-live-close]");
-  if(closeBtn)closeBtn.onclick=function(ev){ev.preventDefault();ev.stopPropagation();darQiblaExitQuick()};
+  var closeTap=function(ev){
+    var btn=ev.target&&ev.target.closest?ev.target.closest("[data-qibla-live-close]"):null;
+    if(!btn)return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    darQiblaExitQuick();
+  };
+  root.addEventListener("pointerup",closeTap,true);
+  root.addEventListener("touchend",closeTap,true);
+  root.addEventListener("click",closeTap,true);
   darQiblaLiveBoot(orientP);
 }
 function openQiblaFromFloat(){openQiblaQuickSheet()}
@@ -27813,7 +27863,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1260";
+const APP_BUILD_ID="app-shell-v1261";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}

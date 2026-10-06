@@ -1112,8 +1112,7 @@ struct WebAppView: UIViewRepresentable {
             if message.name == "darNative" {
                 let body = message.body as? [String: Any] ?? [:]
                 if (body["type"] as? String) == "qibla-quick-exit" {
-                    DarNativePermissions.shared.stopLiveQibla()
-                    UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                    DarNativePermissions.shared.closeAppToHomeScreen()
                     return
                 }
                 DarNativePermissions.shared.attach(webView: webView)
@@ -1160,6 +1159,10 @@ struct WebAppView: UIViewRepresentable {
             }
             if message.name == "darHaptic" {
                 let style = (message.body as? [String: Any])?["style"] as? String ?? "light"
+                if style == "qibla-exit" {
+                    DarNativePermissions.shared.closeAppToHomeScreen()
+                    return
+                }
                 DarHaptics.play(raw: style)
                 return
             }

@@ -1,6 +1,7 @@
 import CoreLocation
 import CoreMotion
 import Foundation
+import UIKit
 import WebKit
 
 final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
@@ -56,6 +57,14 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         liveQibla = false
         locationManager.stopUpdatingHeading()
         locationManager.stopUpdatingLocation()
+    }
+
+    func closeAppToHomeScreen() {
+        stopLiveQibla()
+        UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            exit(0)
+        }
     }
 
     func decideGeolocation(_ decisionHandler: @escaping (WKPermissionDecision) -> Void) {
