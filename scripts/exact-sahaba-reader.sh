@@ -55,6 +55,8 @@ PY2
         ok=1
         break
       fi
+      echo "Worker alignment $sid attempt $attempt: HTTP $code"
+      if [ -s "$result" ]; then head -c 600 "$result"; echo; fi
       sleep 2
     done
   fi
@@ -170,7 +172,7 @@ visual["mubashshirunAudioMastersReady"]=10
 visual["mubashshirunTtsModel"]="eleven_v4"
 visual["mubashshirunMasterVoice"]="Serhat Abu Malik – Master"
 visual["mubashshirunReadAlongTiming"]="elevenlabs-forced-alignment-v1"
-visual["mubashshirunExactAlignedMasters"]=10
+visual["mubashshirunExactAlignedMasters"]=9
 kvp.write_text(json.dumps(kv,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
 hubjs=Path("kids/story-hub.js")
