@@ -3546,7 +3546,12 @@ function showTab(name){
     view.style.animation="";
   }
   document.querySelectorAll(".nav-btn").forEach(function(b){b.classList.toggle("active",b.dataset.target===name)});
-  window.scrollTo({top:0,behavior:"smooth"});
+  var shellScroll=document.querySelector(".shell");
+  if(shellScroll){
+    try{shellScroll.scrollTo({top:0,left:0,behavior:"auto"})}catch(e){shellScroll.scrollTop=0}
+  }else{
+    window.scrollTo({top:0,behavior:"auto"});
+  }
 }
 document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
 document.querySelectorAll("[data-go]").forEach(function(b){
@@ -9067,4 +9072,4 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-</html>
+<script src="/kids/navigation-v1181.js?v=1181"></script>\n</html>
