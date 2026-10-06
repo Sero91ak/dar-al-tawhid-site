@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.21</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.22</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2811,28 +2811,11 @@ html:not([data-view="today"]) .view.active{
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
         <div class="hero-artifact-shield" aria-hidden="true"></div>
         <div class="kids-wordmark">
-          <svg class="wm-dar-arc wm-dar-arc-v1188" viewBox="0 0 820 150" role="img" aria-label="DĀR AL TAWḤĪD">
-            <defs>
-              <path id="kidsDarArcPath1188" d="M78 102 Q410 48 742 102"></path>
-              <linearGradient id="kidsDarGold1188" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#b97820"></stop>
-                <stop offset="18%" stop-color="#e9ae42"></stop>
-                <stop offset="43%" stop-color="#fff0a6"></stop>
-                <stop offset="61%" stop-color="#e3a43a"></stop>
-                <stop offset="82%" stop-color="#ffd978"></stop>
-                <stop offset="100%" stop-color="#b8751d"></stop>
-              </linearGradient>
-              <linearGradient id="kidsDarLine1188" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#d69e3b" stop-opacity="0"></stop>
-                <stop offset="18%" stop-color="#edc463" stop-opacity=".50"></stop>
-                <stop offset="50%" stop-color="#ffeaa0" stop-opacity=".92"></stop>
-                <stop offset="82%" stop-color="#edc463" stop-opacity=".50"></stop>
-                <stop offset="100%" stop-color="#d69e3b" stop-opacity="0"></stop>
-              </linearGradient>
-            </defs>
-            <text class="wm-dar-arc-text-v1188" textLength="650" lengthAdjust="spacingAndGlyphs"><textPath href="#kidsDarArcPath1188" startOffset="50%" text-anchor="middle">DĀR AL TAWḤĪD</textPath></text>
-            <path class="wm-dar-arc-line-v1188" d="M120 126 Q410 96 700 126"></path>
-          </svg>
+          <div class="wm-dar-safe" aria-label="DĀR AL TAWḤĪD">
+            <span class="wm-word wm-word-dar"><span>D</span><span>Ā</span><span>R</span></span>
+            <span class="wm-word wm-word-al"><span>A</span><span>L</span></span>
+            <span class="wm-word wm-word-tawhid"><span>T</span><span>A</span><span>W</span><span>Ḥ</span><span>Ī</span><span>D</span></span>
+          </div>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
         </div>
         <div class="cloud cloud-back" aria-hidden="true"></div>
@@ -3198,7 +3181,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v108-global-capsule1194";
+const KIDS_BUILD_ID="kids-shell-v108-home-title1195";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6269,7 +6252,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v108-global-capsule1194";
+  var KIDS_BUILD_ID="kids-shell-v108-home-title1195";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6285,7 +6268,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1194",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1195",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -9840,4 +9823,113 @@ html[data-view="stories"] #view-stories > :last-child{
 </style>
 
   <script src="/kids/kids-card-interaction.js?v=2" defer></script>
+
+<style id="kids-home-title-safe-v1195">
+/* Fix from the 20:50 iPhone screenshot:
+   full title must always read DĀR AL TAWḤĪD, including both outer D glyphs.
+   No SVG textPath/textLength is used, so Safari cannot crop the ends. */
+#view-today .hero::before{
+  background-position:center top!important;
+  background-size:100% auto!important;
+  background-repeat:no-repeat!important;
+}
+
+/* Keep the exact static reference framing. No background movement. */
+#view-today .hero::before,
+#view-today .hero::after{
+  animation:none!important;
+  transform:none!important;
+}
+
+/* Real text, three words, shallow optical arch. */
+#view-today .wm-dar-safe{
+  position:relative!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+  gap:clamp(6px,1.7vw,11px)!important;
+  width:calc(100% - 30px)!important;
+  max-width:600px!important;
+  margin:0 auto -7px!important;
+  padding:4px 8px 10px!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+  color:#e9b64d!important;
+  font-family:"Cinzel",Georgia,"Times New Roman",serif!important;
+  font-size:clamp(37px,9.55vw,50px)!important;
+  line-height:1!important;
+  font-weight:700!important;
+  letter-spacing:.018em!important;
+  text-rendering:geometricPrecision!important;
+  -webkit-font-smoothing:antialiased!important;
+  filter:
+    drop-shadow(0 2px 0 rgba(75,40,7,.72))
+    drop-shadow(0 6px 11px rgba(0,0,0,.42))
+    drop-shadow(0 0 8px rgba(255,196,74,.30))!important;
+}
+
+/* Each word and every glyph stays inside its own box: no clipping behind palms or viewport edges. */
+#view-today .wm-dar-safe .wm-word{
+  display:inline-flex!important;
+  flex:0 0 auto!important;
+  align-items:flex-start!important;
+  gap:0!important;
+  overflow:visible!important;
+}
+#view-today .wm-dar-safe .wm-word>span{
+  display:inline-block!important;
+  min-width:0!important;
+  background:linear-gradient(100deg,#ad711e 0%,#e3a641 22%,#fff0a6 46%,#d8952e 68%,#f6d276 86%,#b8751d 100%)!important;
+  background-size:220% 100%!important;
+  background-position:0% 50%!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  -webkit-text-stroke:.45px rgba(85,45,7,.48)!important;
+  paint-order:stroke fill!important;
+  animation:darSafeGlow1195 8.2s ease-in-out infinite!important;
+}
+
+/* Gentle arch: outer words sit slightly lower, center word slightly higher. */
+#view-today .wm-word-dar{transform:translateY(5px) rotate(-.65deg)!important}
+#view-today .wm-word-al{transform:translateY(0)!important}
+#view-today .wm-word-tawhid{transform:translateY(5px) rotate(.65deg)!important}
+
+/* Subtle light travel only. The title itself does not move or shake. */
+@keyframes darSafeGlow1195{
+  0%,18%,100%{background-position:0% 50%;filter:brightness(.98)}
+  44%{background-position:100% 50%;filter:brightness(1.09)}
+  68%{background-position:100% 50%;filter:brightness(1)}
+}
+
+/* Keep the balloon motion already approved for Kids. */
+#view-today .wm-kids span{
+  animation:kidsBalloon1191 4.6s cubic-bezier(.42,.02,.28,1) infinite!important;
+}
+#view-today .wm-kids .k{animation-delay:0s!important}
+#view-today .wm-kids .i{animation-delay:.14s!important}
+#view-today .wm-kids .d{animation-delay:.28s!important}
+#view-today .wm-kids .s{animation-delay:.42s!important}
+
+/* Protect readable side margins on narrow iPhones. */
+@media(max-width:390px){
+  #view-today .wm-dar-safe{
+    width:calc(100% - 24px)!important;
+    gap:5px!important;
+    font-size:clamp(35px,9.35vw,39px)!important;
+    letter-spacing:.01em!important;
+  }
+}
+@media(min-width:700px){
+  #view-today .wm-dar-safe{
+    max-width:620px!important;
+    font-size:52px!important;
+    gap:11px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .wm-dar-safe .wm-word>span{animation:none!important}
+}
+</style>
+
 </html>
