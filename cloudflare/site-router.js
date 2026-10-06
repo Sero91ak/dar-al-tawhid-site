@@ -214,10 +214,10 @@ function browserManifestResponse(request) {
 
 function liveFrauenNativeAddon() {
   return [
-    '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-live-v2">',
-    '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-live-v2">',
-    '<script defer src="/assets/frauen/frauen-fiqh.js?v=frauen-live-v2"><\\/script>',
-    '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-live-v2"><\\/script>'
+    '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-live-v3">',
+    '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-live-v3">',
+    '<script defer src="/assets/frauen/frauen-fiqh.js?v=frauen-live-v3"><\\/script>',
+    '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-live-v3"><\\/script>'
   ].join("");
 }
 
