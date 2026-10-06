@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/exact-align-sahaba-v4-run.yml'
+      - '.github/sahaba-exact-align.trigger'
 
 permissions:
   contents: write
