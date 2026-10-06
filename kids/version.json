@@ -1,8 +1,8 @@
 {
   "buildId": "kids-shell-v100-audio-core1173",
   "label": "KIDS · V1.08.00",
-  "releasedAt": "2026-10-06T01:12:00+02:00",
-  "note": "Audio-Core Release: Startseite bleibt konsequent auf Hörbücher, Mitlesen, Qurʾān und Duʿāʾ fokussiert. Weiterhören öffnet die zuletzt aktive Hörgeschichte oder Qurʾān-Stelle. Duʿāʾ nutzt zehn bereits vorhandene Serhat-Voice-Clips ohne neue Credits. Der Alif-Bāʾ-Bereich wurde aus Markup und laufendem JavaScript entfernt; vorhandene Archiv-Assets bleiben nur für eine spätere, bewusst neue Version im Repository.",
+  "releasedAt": "2026-10-06T07:12:00+02:00",
+  "note": "Audio-Core V1.08.00 live release metadata synchronized with router, manifest, headers and Story-Hub v21. This fixes the failed Kids live deployment that kept the older app visible.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -486,7 +486,7 @@
     ],
     "sahabiyyatNameOverlay": false,
     "sahabiyyatNameOverlayPlacement": "removed-from-card-and-hero",
-    "storyHubJsVersion": 20,
+    "storyHubJsVersion": 21,
     "sahabiyyatDistinctNewArtworks": [
       "sawdah",
       "juwayriyyah",
