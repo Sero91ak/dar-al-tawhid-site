@@ -694,3 +694,113 @@ html body #syLibraryPage .ms-row-visual img{
     filter:none!important;
   }
 }
+
+
+/* KIDS_GLOBAL_CAPSULE_WIDTH_V8B — reclaim old arrow columns + complete glow coverage */
+#view-today .daily-step,
+#view-stories .story-feature,
+#view-quran .alphabet-entry{
+  position:relative!important;
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+  transform:none!important;
+  translate:none!important;
+  transition:border-color .15s ease,box-shadow .15s ease,filter .15s ease!important;
+}
+
+#view-today .daily-step:hover,
+#view-today .daily-step:active,
+#view-today .daily-step.is-kids-pressed,
+#view-stories .story-feature:hover,
+#view-stories .story-feature:active,
+#view-stories .story-feature.is-kids-pressed,
+#view-quran .alphabet-entry:hover,
+#view-quran .alphabet-entry:active,
+#view-quran .alphabet-entry.is-kids-pressed{
+  transform:none!important;
+  translate:none!important;
+}
+
+@media(hover:hover) and (pointer:fine){
+  #view-today .daily-step:hover,
+  #view-stories .story-feature:hover,
+  #view-quran .alphabet-entry:hover{
+    border-color:var(--kids-capsule-line-hover)!important;
+    box-shadow:var(--kids-capsule-glow-hover)!important;
+    filter:brightness(1.025)!important;
+  }
+}
+
+#view-today .daily-step:active,
+#view-today .daily-step.is-kids-pressed,
+#view-stories .story-feature:active,
+#view-stories .story-feature.is-kids-pressed,
+#view-quran .alphabet-entry:active,
+#view-quran .alphabet-entry.is-kids-pressed{
+  border-color:var(--kids-capsule-line-press)!important;
+  box-shadow:var(--kids-capsule-glow-press)!important;
+  filter:brightness(1.045)!important;
+}
+
+/* Start cards: remove invisible arrow columns so text gets the freed space. */
+#view-today .resume{
+  grid-template-columns:54px minmax(0,1fr)!important;
+}
+#view-today .choice{
+  grid-template-columns:58px minmax(0,1fr)!important;
+}
+#view-today .choice .icon{grid-column:1!important}
+#view-today .choice strong,
+#view-today .choice small{
+  grid-column:2!important;
+}
+#view-today .resume-copy{grid-column:2!important}
+#view-today .resume .go,
+#view-today .choice .arrow,
+#view-today .knowledge-card .kgo{display:none!important}
+
+/* Qurʾān cards: reclaim the old arrow reserve without changing their content hierarchy. */
+#view-quran .alphabet-entry .fgo,
+#view-quran .surah-card .surah-go,
+#view-quran .full-quran .fgo{
+  display:none!important;
+}
+#view-quran .full-quran-listen{
+  padding-right:18px!important;
+}
+#view-quran .surah-card{
+  padding-right:18px!important;
+}
+#view-quran .alphabet-entry{
+  grid-template-columns:minmax(0,1fr)!important;
+}
+#view-quran .alphabet-entry-copy{
+  padding-right:18px!important;
+}
+
+/* The same approved outer width on other top-level capsule blocks. */
+@media(max-width:699px){
+  #view-stories > .story-feature,
+  #view-quran > .alphabet-entry{
+    width:calc(100% + (var(--kids-capsule-bleed) * 2))!important;
+    max-width:none!important;
+    margin-left:calc(0px - var(--kids-capsule-bleed))!important;
+    margin-right:calc(0px - var(--kids-capsule-bleed))!important;
+  }
+}
+
+@media(min-width:700px){
+  #view-today .resume{grid-template-columns:56px minmax(0,1fr)!important}
+  #view-today .choice{
+    grid-template-columns:1fr!important;
+  }
+  #view-today .choice .icon,
+  #view-today .choice strong,
+  #view-today .choice small{
+    grid-column:1!important;
+  }
+  #view-quran .alphabet-entry{
+    grid-template-columns:minmax(140px,28%) minmax(0,1fr)!important;
+  }
+}
