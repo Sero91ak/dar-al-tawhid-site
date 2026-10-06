@@ -426,3 +426,425 @@
   user-select:none!important;
   -webkit-user-select:none!important;
 }
+
+
+/* =========================================================
+   GLOBAL_TOUCH_RAIL_V2 — full-height separated action field
+   2026-10-06
+   The right area is a real, visually separated touch field.
+   Copy gets the full remaining space and is never ellipsized
+   just because the card has room vertically.
+   ========================================================= */
+:root{
+  --kids-card-rail-w:64px;
+  --kids-card-rail-inset:0px;
+  --kids-card-rail-line:rgba(239,205,124,.44);
+  --kids-card-rail-bg:
+    radial-gradient(circle at 50% 50%,rgba(239,205,124,.10),transparent 56%),
+    linear-gradient(180deg,rgba(255,255,255,.025),rgba(239,205,124,.055));
+  --kids-card-rail-shadow:
+    inset 1px 0 rgba(255,255,255,.035),
+    inset 2px 0 rgba(239,205,124,.055),
+    -12px 0 28px rgba(1,17,27,.12);
+}
+
+/* The rail is a complete right-hand field, not a floating pill. */
+.choice .arrow,
+.resume .go,
+.knowledge-card .kgo,
+.surah-card .surah-go,
+.full-quran .fgo,
+.daily-step .dstate,
+.story-row .chev,
+.ps-story-row .ps-row-go,
+.ms-story-row .ms-row-go,
+.ps-muhammad-card .ps-muhammad-cta,
+.ps-prophet-entry .ps-entry-action,
+.ms-entry .ms-entry-action,
+.gh-entry .gh-entry-action{
+  top:0!important;
+  right:0!important;
+  bottom:0!important;
+  width:var(--kids-card-rail-w)!important;
+  min-width:var(--kids-card-rail-w)!important;
+  height:auto!important;
+  border-left:1.5px solid var(--kids-card-rail-line)!important;
+  border-radius:0!important;
+  background:var(--kids-card-rail-bg)!important;
+  box-shadow:var(--kids-card-rail-shadow)!important;
+}
+
+/* A subtle full-height light seam makes the content/touch boundary obvious. */
+.choice .arrow::before,
+.resume .go::before,
+.knowledge-card .kgo::before,
+.surah-card .surah-go::before,
+.full-quran .fgo::before,
+.daily-step .dstate::before,
+.story-row .chev::before,
+.ps-story-row .ps-row-go::before,
+.ms-story-row .ms-row-go::before,
+.ps-muhammad-card .ps-muhammad-cta::before,
+.ps-prophet-entry .ps-entry-action::before,
+.ms-entry .ms-entry-action::before,
+.gh-entry .gh-entry-action::before,
+.quran-action::before,
+.verse-card::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:1!important;
+  left:-1px!important;
+  top:10%!important;
+  bottom:10%!important;
+  width:1px!important;
+  border-radius:999px!important;
+  background:linear-gradient(180deg,transparent,rgba(245,218,150,.70) 18%,rgba(245,218,150,.70) 82%,transparent)!important;
+  box-shadow:0 0 10px rgba(240,207,122,.16)!important;
+  pointer-events:none!important;
+}
+
+/* Cards without a physical arrow node get an equivalent complete rail. */
+.quran-action::after,
+.verse-card::after{
+  top:0!important;
+  right:0!important;
+  bottom:0!important;
+  width:var(--kids-card-rail-w)!important;
+  min-width:var(--kids-card-rail-w)!important;
+  height:auto!important;
+  border-left:1.5px solid var(--kids-card-rail-line)!important;
+  border-radius:0!important;
+  background:var(--kids-card-rail-bg)!important;
+  box-shadow:var(--kids-card-rail-shadow)!important;
+  font-size:38px!important;
+  font-weight:700!important;
+}
+
+/* Strong but calm chevron. */
+.choice .arrow,
+.resume .go,
+.knowledge-card .kgo,
+.surah-card .surah-go,
+.full-quran .fgo,
+.daily-step .dstate,
+.story-row .chev,
+.ps-story-row .ps-row-go,
+.ms-story-row .ms-row-go{
+  font-size:38px!important;
+  font-weight:700!important;
+  color:#f2d17f!important;
+  text-shadow:0 1px 12px rgba(240,207,122,.18)!important;
+}
+
+.ps-muhammad-card .ps-muhammad-cta,
+.ps-prophet-entry .ps-entry-action,
+.ms-entry .ms-entry-action,
+.gh-entry .gh-entry-action{
+  display:grid!important;
+  place-items:center!important;
+  font-size:0!important;
+}
+.ps-muhammad-card .ps-muhammad-cta > span:first-child,
+.ps-prophet-entry .ps-entry-action > span:first-child{
+  display:none!important;
+}
+.ps-muhammad-card .ps-muhammad-go,
+.ps-prophet-entry .ps-entry-go,
+.ms-entry .ms-entry-action b,
+.gh-entry .gh-entry-action b{
+  position:relative!important;
+  z-index:2!important;
+  display:grid!important;
+  place-items:center!important;
+  width:100%!important;
+  height:100%!important;
+  margin:0!important;
+  padding:0 0 0 2px!important;
+  border:0!important;
+  background:transparent!important;
+  color:#f2d17f!important;
+  font-size:38px!important;
+  font-weight:700!important;
+  line-height:1!important;
+}
+
+/* Reserve the rail cleanly on every child-facing navigation card. */
+.choice,
+.resume,
+.knowledge-card,
+.quran-action,
+.surah-card,
+.verse-card,
+.full-quran,
+.daily-step,
+.story-row{
+  padding-right:calc(var(--kids-card-rail-w) + 18px)!important;
+}
+.ps-prophet-entry .ps-entry-panel,
+.ms-entry .ms-entry-copy,
+.gh-entry .gh-entry-copy,
+.ps-muhammad-card .ps-muhammad-panel{
+  padding-right:calc(var(--kids-card-rail-w) + 18px)!important;
+}
+
+/* ---------- Story libraries: larger, readable capsules ---------- */
+#msLibraryPage .ms-story-row,
+#syLibraryPage .ms-story-row{
+  min-height:248px!important;
+  grid-template-columns:minmax(164px,43%) minmax(0,1fr)!important;
+  border-radius:32px!important;
+  border-color:rgba(133,205,200,.20)!important;
+  background:
+    radial-gradient(circle at 88% 12%,rgba(239,205,124,.045),transparent 30%),
+    linear-gradient(145deg,#0a2d3d 0%,#082838 60%,#072432 100%)!important;
+  box-shadow:0 18px 42px rgba(0,0,0,.19)!important;
+}
+
+#syLibraryPage .ms-story-row{
+  border-color:rgba(231,190,145,.20)!important;
+}
+
+#msLibraryPage .ms-row-visual,
+#syLibraryPage .ms-row-visual,
+#msLibraryPage .ms-row-visual img,
+#syLibraryPage .ms-row-visual img{
+  min-height:248px!important;
+}
+
+/* Image remains broad and visible; only its right edge dissolves. */
+#msLibraryPage .ms-row-visual::after,
+#syLibraryPage .ms-row-visual::after{
+  background:
+    linear-gradient(90deg,
+      rgba(8,35,50,0) 0%,
+      rgba(8,35,50,0) 57%,
+      rgba(8,35,50,.08) 68%,
+      rgba(8,35,50,.28) 80%,
+      rgba(8,35,50,.62) 92%,
+      rgba(8,35,50,.90) 100%),
+    linear-gradient(0deg,rgba(3,17,27,.17),transparent 58%)!important;
+}
+
+#msLibraryPage .ms-row-copy,
+#syLibraryPage .ms-row-copy{
+  gap:7px!important;
+  padding:22px calc(var(--kids-card-rail-w) + 14px) 22px 20px!important;
+  overflow:visible!important;
+}
+
+#msLibraryPage .ms-row-title,
+#syLibraryPage .ms-row-title{
+  display:block!important;
+  font-size:var(--kids-card-title,23px)!important;
+  line-height:1.12!important;
+  font-weight:760!important;
+  letter-spacing:-.015em!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+  text-wrap:pretty!important;
+}
+
+#msLibraryPage .ms-row-ar,
+#syLibraryPage .ms-row-ar{
+  display:block!important;
+  margin:0!important;
+  font-size:calc(var(--kids-card-title,23px) + 1px)!important;
+  line-height:1.35!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  max-height:none!important;
+  text-align:left!important;
+  unicode-bidi:plaintext!important;
+}
+
+#msLibraryPage .ms-row-summary,
+#syLibraryPage .ms-row-summary{
+  display:block!important;
+  margin:1px 0 0!important;
+  font-size:var(--kids-small,15px)!important;
+  line-height:1.42!important;
+  color:rgba(255,255,255,.72)!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  -webkit-line-clamp:unset!important;
+  line-clamp:unset!important;
+  max-height:none!important;
+  white-space:normal!important;
+}
+
+#msLibraryPage .ms-row-meta,
+#syLibraryPage .ms-row-meta{
+  display:block!important;
+  margin-top:1px!important;
+  font-size:var(--kids-meta,13.75px)!important;
+  line-height:1.3!important;
+  color:rgba(255,255,255,.58)!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+
+#msLibraryPage .ms-rank,
+#syLibraryPage .ms-rank{
+  left:14px!important;
+  bottom:14px!important;
+  min-width:46px!important;
+  height:34px!important;
+  padding:0 11px!important;
+  font-size:13px!important;
+}
+
+/* The story rail is now a true third visual zone, despite being absolutely positioned. */
+#msLibraryPage .ms-row-go,
+#syLibraryPage .ms-row-go{
+  right:0!important;
+  top:0!important;
+  bottom:0!important;
+  width:var(--kids-card-rail-w)!important;
+}
+
+/* ---------- Prophet library uses the same readable/no-ellipsis rule ---------- */
+#psLibraryPage .ps-story-row{
+  min-height:218px!important;
+  padding-right:calc(var(--kids-card-rail-w) + 14px)!important;
+}
+#psLibraryPage .ps-row-copy{
+  right:calc(var(--kids-card-rail-w) + 18px)!important;
+  padding-top:20px!important;
+  padding-bottom:20px!important;
+}
+#psLibraryPage .ps-row-title,
+#psLibraryPage .ps-row-ar,
+#psLibraryPage .ps-row-summary,
+#psLibraryPage .ps-row-meta{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  max-height:none!important;
+}
+#psLibraryPage .ps-row-summary{
+  display:block!important;
+  -webkit-line-clamp:unset!important;
+  line-clamp:unset!important;
+  font-size:var(--kids-small,15px)!important;
+  line-height:1.42!important;
+}
+#psLibraryPage .ps-row-meta{
+  font-size:var(--kids-meta,13.75px)!important;
+  line-height:1.3!important;
+}
+
+/* Muhammad feature gets the same right rail instead of a detached CTA pill. */
+.ps-muhammad-card{
+  position:relative!important;
+  overflow:hidden!important;
+}
+.ps-muhammad-card .ps-muhammad-cta{
+  position:absolute!important;
+  right:0!important;
+  top:0!important;
+  bottom:0!important;
+  width:var(--kids-card-rail-w)!important;
+  min-width:var(--kids-card-rail-w)!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+/* ---------- per-area tint: same component, subtle contextual identity ---------- */
+#view-quran .quran-action,
+#view-quran .surah-card,
+#view-quran .verse-card,
+#view-quran .full-quran{
+  --kids-card-rail-line:rgba(241,204,111,.48);
+  --kids-card-rail-bg:
+    radial-gradient(circle at 50% 50%,rgba(241,204,111,.11),transparent 58%),
+    linear-gradient(180deg,rgba(18,71,82,.22),rgba(241,204,111,.045));
+}
+#view-today .choice.dua{
+  --kids-card-rail-line:rgba(225,192,135,.42);
+}
+#view-today .choice.quiz{
+  --kids-card-rail-line:rgba(126,204,195,.38);
+}
+
+/* ---------- phone ---------- */
+@media(max-width:430px){
+  :root{
+    --kids-card-rail-w:60px;
+  }
+
+  #msLibraryPage .ms-story-row,
+  #syLibraryPage .ms-story-row{
+    min-height:240px!important;
+    grid-template-columns:minmax(158px,43%) minmax(0,1fr)!important;
+    border-radius:30px!important;
+  }
+  #msLibraryPage .ms-row-visual,
+  #syLibraryPage .ms-row-visual,
+  #msLibraryPage .ms-row-visual img,
+  #syLibraryPage .ms-row-visual img{
+    min-height:240px!important;
+  }
+  #msLibraryPage .ms-row-copy,
+  #syLibraryPage .ms-row-copy{
+    padding:20px calc(var(--kids-card-rail-w) + 12px) 20px 17px!important;
+  }
+  #psLibraryPage .ps-story-row{
+    min-height:210px!important;
+  }
+}
+
+/* Narrow iPhones: preserve text first, allow the card to grow vertically. */
+@media(max-width:374px){
+  :root{--kids-card-rail-w:56px}
+  #msLibraryPage .ms-story-row,
+  #syLibraryPage .ms-story-row{
+    min-height:238px!important;
+    grid-template-columns:144px minmax(0,1fr)!important;
+  }
+  #msLibraryPage .ms-row-copy,
+  #syLibraryPage .ms-row-copy{
+    padding-left:14px!important;
+    padding-right:calc(var(--kids-card-rail-w) + 9px)!important;
+  }
+}
+
+/* ---------- tablet ---------- */
+@media(min-width:700px){
+  :root{
+    --kids-card-rail-w:72px;
+  }
+
+  #msLibraryPage .ms-story-row,
+  #syLibraryPage .ms-story-row{
+    min-height:286px!important;
+    grid-template-columns:minmax(280px,42%) minmax(0,1fr)!important;
+    border-radius:36px!important;
+  }
+  #msLibraryPage .ms-row-visual,
+  #syLibraryPage .ms-row-visual,
+  #msLibraryPage .ms-row-visual img,
+  #syLibraryPage .ms-row-visual img{
+    min-height:286px!important;
+  }
+  #msLibraryPage .ms-row-copy,
+  #syLibraryPage .ms-row-copy{
+    padding:30px calc(var(--kids-card-rail-w) + 22px) 30px 30px!important;
+    gap:9px!important;
+  }
+  #psLibraryPage .ps-story-row{
+    min-height:248px!important;
+  }
+}
+
+/* Text may grow the card; never sacrifice readability to keep a fixed capsule height. */
+#msLibraryPage .ms-story-row,
+#syLibraryPage .ms-story-row,
+#psLibraryPage .ps-story-row{
+  height:auto!important;
+}
