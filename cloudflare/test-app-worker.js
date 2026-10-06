@@ -1,7 +1,7 @@
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
   buildId: "kids-shell-v101-home-audio1174",
-  label: "KIDS · V1.08.00"
+  label: "KIDS · V1.08.01"
 });
 
 function kidsVersionResponse() {
