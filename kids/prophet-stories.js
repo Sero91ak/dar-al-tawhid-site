@@ -146,7 +146,6 @@ function renderMuhammadFeature(){
   const item=items.find(x=>x.id==="muhammad");
   if(!item){host.innerHTML="";return}
   const text=buildText(item);
-  const meta=durationLabel(item,text);
   host.innerHTML=
     '<button class="ps-muhammad-card" data-ps-id="muhammad" type="button">'+
       '<span class="ps-muhammad-visual" aria-hidden="true"><img src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" fetchpriority="high"></span>'+
@@ -177,7 +176,6 @@ function renderCards(){
     const text=buildText(item);
     const rawSummary=String(item.summary||"").replace(/\s+/g," ").trim();
     const shortSummary=rawSummary;
-    const meta=(item.disputed?"Ikhtilāf · ":"")+durationLabel(item,text)+" · Alter "+age();
     return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button">'+
       '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" loading="lazy">'+
       '<span class="ps-row-rank" aria-hidden="true">'+String(index+1).padStart(2,"0")+'</span>'+
@@ -200,7 +198,7 @@ function renderCards(){
     };
   });
   const doneEl=$("#psDoneCount");if(doneEl)doneEl.textContent=String(doneCount());
-  const ageEl=$("#psAgeHero");if(ageEl)ageEl.textContent="Alter "+age();
+  const ageEl=$("#psAgeHero");if(ageEl)ageEl.textContent="";
   const entrySub=$("#psProphetEntry .ps-entry-sub");
   if(entrySub)entrySub.textContent=isAudioOnlyAge()?"25 Hörgeschichten":"25 Geschichten · lesen & hören";
 }
