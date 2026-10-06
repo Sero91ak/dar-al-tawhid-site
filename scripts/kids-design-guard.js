@@ -75,7 +75,10 @@ function runKidsDesignGuard() {
     "/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1199",
     "https://use.typekit.net/jka5jda.css",
     "class=\"wm-dar-safe\"",
-    "margin:calc(-1 * var(--safe-top)) calc(50% - 50vw) 0!important"
+    "margin:calc(-1 * var(--safe-top)) calc(50% - 50vw) 0!important",
+    "kids-home-hero-polish-v1203",
+    "static shooting star",
+    "background:transparent!important"
   ];
   for (const n of homeHeroNeedles) {
     if (!html.includes(n)) failed += fail(`${KIDS_HTML}: Startseiten-Hero Referenz fehlt: ${n}`);
