@@ -228,7 +228,9 @@ function prepareStoriesHome(view){
         '</span>'+
 
       '</span>';
-    if(pageHead)pageHead.insertAdjacentElement("afterend",entry);
+    const deenEntry=$("#deenEntry");
+    if(deenEntry)deenEntry.insertAdjacentElement("afterend",entry);
+    else if(pageHead)pageHead.insertAdjacentElement("afterend",entry);
     else view.insertBefore(entry,view.firstChild);
     entry.addEventListener("click",openLibrary);
   }

@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v109-deen-learning1200",
-  "label": "KIDS · V1.08.27",
-  "releasedAt": "2026-10-06T21:55:00+02:00",
-  "note": "V1200 erweitert den Geschichtenbereich um die neue wichtigste Lernwelt „Den Dīn lernen“ an Position 1. Enthalten sind sechs vollständige Master-Lektionen zu Tawḥīd, Īmān, Asmāʾ wa-Ṣifāt, ʿIbādah, Adab & Aḫlāq und Āḫirah. Die freigegebene V1199-Startseiten-/Cinzel-Korrektur bleibt unverändert erhalten. Voice-Mastertext, Kids-Lesetext und intelligentes Mitlesen verwenden dieselbe Textquelle; Quellen stehen kompakt separat, ohne Quellenreferat in der Erzählung.",
+  "buildId": "kids-shell-v109-deen-learning1201",
+  "label": "KIDS · V1.08.28",
+  "releasedAt": "2026-10-06T22:15:00+02:00",
+  "note": "V1201 erzwingt „Den Dīn lernen“ auch in der dynamischen mobilen Geschichten-Reihenfolge als Platz 1. Propheten, Ṣaḥābah und Ṣaḥābiyyāt folgen danach. Inhalt, Mastertexte, V1199-Startseitenreferenz und Dīn-Artwork bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1200",
+    "serviceWorkerCache": "v1201",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -152,7 +152,7 @@
     "mubashshirunAgeAwareVisualDisclaimer": true,
     "mubashshirunSourceAudit": "Dorar cross-check 2026-10-03",
     "mubashshirunSwipeBack": true,
-    "prophetStoriesBundleVersion": 41,
+    "prophetStoriesBundleVersion": 42,
     "storyCategoryBackgrounds": {
       "prophets": "/kids/assets/prophet-scenes/desert.webp",
       "sahaba": "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
@@ -585,7 +585,7 @@
     "storiesHomeNoExpiringHotlinks": true,
     "storiesHomeEqualPrimaryCards": true,
     "storiesHomePedagogicalLabels": true,
-    "prophetStoriesJsVersion": 38,
+    "prophetStoriesJsVersion": 42,
     "storiesHomeStylesheetVersion": "1152",
     "storyReaderBackgroundInert": true,
     "storyReaderReadOnlyMode": true,
@@ -903,8 +903,9 @@
     "deenLearningNoPeople": true,
     "deenLearningNoUnseenDepiction": true,
     "deenLearningAllahHonorific": "subḥānahu wa taʿālā",
-    "approvedReferenceHeroPreservedFrom": "v1199"
+    "approvedReferenceHeroPreservedFrom": "v1199",
+    "deenLearningMobileDomOrder": "first-before-prophets-sahaba-sahabiyyat"
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T21:55:00+02:00"
+  "deployTrigger": "2026-10-06T22:15:00+02:00"
 }

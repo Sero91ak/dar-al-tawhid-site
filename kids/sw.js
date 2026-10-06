@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1200";
-const KIDS_BUILD_ID="kids-shell-v109-deen-learning1200";
+const CACHE_NAME="dar-al-tawhid-kids-v1201";
+const KIDS_BUILD_ID="kids-shell-v109-deen-learning1201";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -55,9 +55,9 @@ const CORE_PRECACHE=[
   "/kids/assets/deen/akhirah.jpg?v=1199",
   "/kids/data/dua-kids.json",
   "/kids/data/verified-content.json",
-  "/kids/prophet-stories.css?v=41",
+  "/kids/prophet-stories.css?v=42",
   "/kids/story-policy.js?v=2",
-  "/kids/prophet-stories.js?v=41",
+  "/kids/prophet-stories.js?v=42",
   "/kids/mubashshirun-stories.css?v=29",
   "/kids/sahabiyyat-stories.css?v=7",
   "/kids/story-card-system.css?v=2",
