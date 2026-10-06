@@ -494,7 +494,7 @@
       +'.dar-share-tool b{font-size:10px!important;line-height:1.15!important;font-weight:760!important;color:inherit!important;-webkit-text-fill-color:currentColor!important}'
       +'.dar-share-tool--image{border-color:color-mix(in srgb,var(--gold2,#d9bf79) 34%,transparent)!important}'
       +'.dar-share-note{margin:9px 2px 0!important;color:var(--muted)!important;-webkit-text-fill-color:var(--muted)!important;font-size:9.4px!important;line-height:1.4!important}'
-      +'html[data-theme] body.is-hadith-route .hadith-detail .post-aussage-text{border-left:2px solid color-mix(in srgb,var(--gold2,#d9bf79) 78%,transparent)!important;padding-left:14px!important}'
+      +''
       +'@media(max-width:420px){.dar-share-head>p{display:none}.dar-share-head h3{font-size:18px!important}}';
     var tag=document.createElement("style");tag.id="darShareCardStyleV1233";tag.textContent=css;document.head.appendChild(tag);
   }

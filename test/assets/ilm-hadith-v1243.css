@@ -1616,7 +1616,6 @@ body.is-hadith-route .hadith-detail .statement.post-aussage{
   box-shadow:none!important;
   overflow:visible!important;
 }
-body.is-hadith-route .hadith-detail .statement.post-aussage::before,
 body.is-hadith-route .hadith-detail .statement.post-aussage::after,
 body.is-hadith-route .hadith-detail .post-aussage-text::before,
 body.is-hadith-route .hadith-detail .post-aussage-text::after{
@@ -1838,7 +1837,6 @@ html[data-theme] body.is-hadith-route .hadith-detail .post-aussage-text p{
   border-right:0!important;
   box-shadow:none!important;
 }
-html[data-theme] body.is-hadith-route .hadith-detail .statement.post-aussage::before,
 html[data-theme] body.is-hadith-route .hadith-detail .statement.post-aussage::after,
 html[data-theme] body.is-hadith-route .hadith-detail .post-aussage-text::before,
 html[data-theme] body.is-hadith-route .hadith-detail .post-aussage-text::after,
@@ -1876,8 +1874,3 @@ html[data-theme] body.is-hadith-route .hadith-detail .post-aussage-text > :last-
   }
 }
 
-/* Aussage wieder mit der linken Leselinie */
-html[data-theme] body.is-hadith-route .hadith-detail .post-aussage-text{
-  border-left:2px solid color-mix(in srgb,var(--gold2,var(--gold,#d9bf79)) 78%,transparent)!important;
-  padding-left:14px!important;
-}
