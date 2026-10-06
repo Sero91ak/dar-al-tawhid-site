@@ -2,7 +2,7 @@
 "use strict";
 const REGISTRY_URL="/kids/data/story-hub.json?v=7";
 let SOURCES=[  {id:"prophets",label:"Propheten",kicker:"GESCHICHTEN DER PROPHETEN",url:"/kids/data/prophet-stories.json?v=29",kind:"prophet"},
-  {id:"sahaba",label:"Ṣaḥābah",kicker:"DIE GEFÄHRTEN",url:"/kids/data/mubashshirun-stories.json?v=20",kind:"sahabi"},
+  {id:"sahaba",label:"Ṣaḥābah",kicker:"DIE GEFÄHRTEN",url:"/kids/data/mubashshirun-stories.json?v=21",kind:"sahabi"},
   {id:"sahabiyyat",label:"Ṣaḥābiyyāt",kicker:"DIE BESTEN FRAUEN IHRER ZEIT",url:"/kids/data/sahabiyyat-stories.json?v=1144",kind:"sahabiyyah"}
 ];
 const $=(s,r=document)=>r.querySelector(s);

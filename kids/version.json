@@ -82,7 +82,7 @@
     "mubashshirunDirectHadithLinks": true,
     "mubashshirunStoryUi": "responsive-follow-reader-v11",
     "mubashshirunBundleVersion": 29,
-    "mubashshirunDataVersion": 11,
+    "mubashshirunDataVersion": 12,
     "mubashshirunAudioPublishPipeline": true,
     "mubashshirunFuṣḥāReview": true,
     "mubashshirunPreparedStoryScripts": 30,
@@ -937,9 +937,10 @@
     "mubashshirunAudioMastersReady": 10,
     "mubashshirunTtsModel": "eleven_v4",
     "mubashshirunMasterVoice": "Serhat Abu Malik – Master",
-    "mubashshirunReadAlongTiming": "silence-aware-dynamic-paragraph-v1",
+    "mubashshirunReadAlongTiming": "whisper-word-alignment-v1",
     "mubashshirunReadAlongMastersReady": 10,
-    "mubashshirunReadAlongTimingValidated": true
+    "mubashshirunReadAlongTimingValidated": true,
+    "mubashshirunExactAlignedMasters": 10
   },
   "updatedAt": "2026-10-06",
   "deployTrigger": "2026-10-06T22:24:00+02:00"
