@@ -39,7 +39,7 @@ const KIDS_MIRROR = "https://dar-al-tawhid-test.sero91ak.workers.dev";
 const PRAYER_API_ORIGIN = "https://dar-admin-publisher.sero91ak.workers.dev";
 const VOICE_API_ORIGIN = "https://dar-admin-publisher.sero91ak.workers.dev";
 /* Apple TV live: /api/prayer/* und /quran-audio/* über diesen Router */
-const KIDS_BUILD = "kids-shell-v108-global-touch1188";
+const KIDS_BUILD = "kids-shell-v108-home-cinema1188";
 const KIDS_LABEL = "KIDS · V1.08.15";
 
 function isPrayerApiPath(pathname) {
