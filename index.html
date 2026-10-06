@@ -18,7 +18,7 @@
 <link rel="preload" as="image" href="/assets/dar-3d-icons/audio.png?v=1093">
 <link rel="preload" as="image" href="/assets/dar-3d-icons/ilm.png?v=1093">
 <link rel="preload" as="image" href="/assets/dar-3d-icons/topics.png?v=1094">
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1262";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1263";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1062";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 <script id="dar-browser-desktop-router-v833">
 (function(){
@@ -20030,10 +20030,10 @@ html[data-theme] .post-reader-main .statement.post-aussage{
   content:"";
   position:absolute;
   left:0;top:0;bottom:0;
-  width:2.5px;
-  border-radius:99px;
-  background:linear-gradient(180deg,color-mix(in srgb,var(--gold2,#efd78e) 92%,#fff 8%),color-mix(in srgb,var(--gold2,#efd78e) 18%,transparent));
-  box-shadow:0 0 12px color-mix(in srgb,var(--gold2,#efd78e) 35%,transparent);
+  width:1px;
+  border-radius:0;
+  background:#f4ead2;
+  box-shadow:none;
 }
 .post-aussage-kicker{
   display:block;
@@ -27863,7 +27863,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1262";
+const APP_BUILD_ID="app-shell-v1263";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -30033,7 +30033,7 @@ html[data-theme] .statement.post-aussage::after,
 html[data-theme] .post-aussage-text::before,
 html[data-theme] .post-aussage-text::after{content:none!important;display:none!important}
 html[data-theme] .statement.post-aussage{position:relative!important}
-html[data-theme] .statement.post-aussage::before{content:""!important;display:block!important;position:absolute!important;left:0!important;top:0!important;bottom:0!important;width:2px!important;height:auto!important;margin:0!important;border:0!important;border-radius:99px!important;box-shadow:none!important;background:#f4ead2!important}
+html[data-theme] .statement.post-aussage::before{content:""!important;display:block!important;position:absolute!important;left:0!important;top:0!important;bottom:0!important;width:1px!important;min-width:1px!important;max-width:1px!important;height:auto!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;filter:none!important;background:#f4ead2!important}
 html[data-theme="light"] .statement.post-aussage::before,
 html[data-theme="soft"] .statement.post-aussage::before,
 html[data-theme="eisgold"] .statement.post-aussage::before{background:#241c14!important}
