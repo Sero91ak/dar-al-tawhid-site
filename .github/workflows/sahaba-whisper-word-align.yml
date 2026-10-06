@@ -1,0 +1,96 @@
+name: Sahaba Whisper Word Alignment
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/sahaba-whisper-align.trigger'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sahaba-whisper-word-alignment
+  cancel-in-progress: false
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install audio alignment runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v ffmpeg >/dev/null 2>&1 || {
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg >/dev/null
+          }
+          python -m pip install --upgrade pip
+          python -m pip install faster-whisper rapidfuzz numpy
+
+      - name: Align all 10 Sahaba masters from real audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/align-sahaba-whisper.py | tee /tmp/sahaba-whisper.log
+
+      - name: Validate reader maps
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          p=Path("kids/data/mubashshirun-stories.json")
+          d=json.loads(p.read_text(encoding="utf-8"))
+          if len(d.get("items",[]))!=10:
+              raise SystemExit("Expected exactly 10 Sahaba")
+          for item in d["items"]:
+              sid=item["id"]
+              text=str((item.get("scripts") or {}).get("9-10") or (item.get("scripts") or {}).get("6-8") or (item.get("scripts") or {}).get("4-5") or "").strip()
+              paragraphs=[x.strip() for x in re.split(r"\n\s*\n",text) if x.strip()]
+              urls=set()
+              for age in ("4-5","6-8","9-10"):
+                  m=(item.get("audio") or {}).get(age) or {}
+                  if m.get("syncMode")!="whisper-word-alignment-v1":
+                      raise SystemExit(f"{sid} {age}: wrong syncMode {m.get('syncMode')}")
+                  timings=m.get("timings") or []
+                  if len(timings)!=len(paragraphs):
+                      raise SystemExit(f"{sid} {age}: timing count mismatch")
+                  if float(m.get("alignmentCoverage") or 0)<0.56:
+                      raise SystemExit(f"{sid} {age}: low coverage")
+                  prev=-1.0
+                  for i,row in enumerate(timings):
+                      st=float(row["start"]); en=float(row["end"])
+                      if int(row["paragraphIndex"])!=i or st<prev or en<st:
+                          raise SystemExit(f"{sid} {age}: bad timing at {i}")
+                      prev=st
+                  urls.add(str(m.get("url") or "").split("?",1)[0])
+              if len(urls)!=1:
+                  raise SystemExit(f"{sid}: age variants do not share one master audio")
+          print("VALIDATED all 10 Sahaba: one master audio + audio-derived word timestamps.")
+          PY
+
+      - name: Commit synchronized Sahaba reader
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/mubashshirun-stories.json kids/version.json kids/story-hub.js kids/data/story-hub.json
+          git diff --cached --quiet && { echo "::error::No synchronized reader changes produced"; exit 1; }
+          git commit -m "Kids: audio-align all 10 Sahaba read-along"
+          git pull --rebase origin main
+          git push origin HEAD:main
