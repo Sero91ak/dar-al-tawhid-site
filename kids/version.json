@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v108-home-cinema1188",
-  "label": "KIDS · V1.08.15",
-  "releasedAt": "2026-10-06T17:14:00+02:00",
-  "note": "V1188 setzt den Home-Hero exakt in die gewünschte Richtung: deutlich größere leicht gebogene goldene DĀR-AL-TAWḤĪD-Wortmarke mit sicherem Rand für das letzte D, feste Kamera ohne Zoom oder Push-in, lokal gespeicherter ruhiger Cinema-Clip, zwei sehr langsame Wolkenebenen sowie eine sichtbar durch den Himmel wandernde Sternschnuppe. Die unerwünschte generierte Schrift im oberen Hintergrund wird vollständig maskiert. Bottom-Navigation bleibt auf der flüssigen V1186-Logik.",
+  "buildId": "kids-shell-v108-adaptive-touch1189",
+  "label": "KIDS · V1.08.16",
+  "releasedAt": "2026-10-06T17:12:00+02:00",
+  "note": "V1189 ersetzt die zu dominante globale Touch-Rail durch ein adaptives Navigationssystem: normale Karten bekommen nur einen kleinen rechts angedockten Edge-Tab, große Story-Karten eine ruhige integrierte Aktionsspalte. Die ganze Karte bleibt antippbar. Ṣaḥābah, Ṣaḥābiyyāt und Propheten nutzen den Platz besser; Namen, Arabisch, Kurztext und Meta werden nicht unnötig abgeschnitten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1188",
+    "serviceWorkerCache": "v1189",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -676,12 +676,12 @@
     "abuBakrOwnerAudioDurationSec": 356.5975,
     "abuBakrOwnerAudioCodec": "mp3-128k-mono-original",
     "abuBakrOwnerAudioTarget": "/kids/assets/mubashshirun-story-audio/abu-bakr/master.mp3",
-    "storyLibraryPhoneMinHeight": "240px",
+    "storyLibraryPhoneMinHeight": "238px",
     "storyLibraryNarrowPhoneMinHeight": "224px",
-    "storyLibraryTabletMinHeight": "286px",
+    "storyLibraryTabletMinHeight": "282px",
     "storyLibraryPreschoolNoShrink": true,
     "storyLibraryAutoGrowLongNames": true,
-    "storyLibraryImageSharePhone": "43%",
+    "storyLibraryImageSharePhone": "42%",
     "khadijahOwnerAudio": true,
     "khadijahOwnerAudioDirectAssigned": true,
     "khadijahOwnerAudioDurationSec": 384.287313,
@@ -784,7 +784,7 @@
     "aishahOwnerAudioDurationSec": 431.490563,
     "aishahOwnerAudioTarget": "/kids/assets/sahabiyyat-story-audio/aishah/master.mp3",
     "aishahOwnerOriginalAudioDeployTrigger": "2026-10-06T14:14:00Z",
-    "globalTouchRail": "v2",
+    "globalTouchRail": "removed-v2",
     "globalTouchRailPosition": "full-height-right-field",
     "globalTouchRailWidth": "56px narrow · 60px phone · 64px default · 72px tablet",
     "globalTouchRailWholeCardHitTarget": true,
@@ -807,15 +807,23 @@
       "sahaba story rows",
       "sahabiyyat story rows"
     ],
-    "storyLibraryDefaultMinHeight": "248px",
+    "storyLibraryDefaultMinHeight": "246px",
     "homeHeroCameraMotion": "none-v1188",
     "homeHeroCloudMotion": "dual-slow-depth-layers-v1188",
     "homeHeroShootingStar": "visible-traveling-trail-v1188",
     "globalTouchRailDivider": "full-height-gold-seam",
-    "storyLibraryTextOverflow": "no-unnecessary-ellipsis",
+    "storyLibraryTextOverflow": "full-readable-no-forced-ellipsis",
     "storyLibraryArabicWrap": "full-readable",
-    "storyLibrarySummaryWrap": "full-readable"
+    "storyLibrarySummaryWrap": "full-readable",
+    "globalNavigationAffordance": "adaptive-edge-tab-v3",
+    "navigationAffordanceMode": {
+      "compactCards": "small-attached-edge-tab",
+      "categoryCards": "medium-attached-edge-tab",
+      "storyLibraryCards": "integrated-right-action-column"
+    },
+    "prophetLibraryCardMinHeightPhone": "206px",
+    "prophetLibraryCardMinHeightTablet": "236px"
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T17:14:00+02:00"
+  "deployTrigger": "2026-10-06T17:12:00+02:00"
 }
