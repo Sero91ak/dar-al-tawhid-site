@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.06</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.07</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2809,7 +2809,7 @@ html:not([data-view="today"]) .view.active{
       </div>
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
-        <video class="hero-cinema-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="/kids/assets/kids-home-v1179/hero-poster.png?v=1179" aria-hidden="true" tabindex="-1" disablepictureinpicture data-cinema-version="1179">\n          <source src="/kids/assets/kids-home-v1179/hero-cinema.mp4?v=1179" type="video/mp4">\n        </video>
+        <video class="hero-cinema-video" src="/kids/assets/kids-home-v1179/hero-cinema.mp4?v=1180" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="/kids/assets/kids-home-v1179/hero-poster.png?v=1180" aria-hidden="true" tabindex="-1" disablepictureinpicture data-cinema-version="1180"></video>
         <div class="kids-wordmark">
           <p class="wm-dar-line">DĀR AL TAWḤĪD</p>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
@@ -2820,7 +2820,7 @@ html:not([data-view="today"]) .view.active{
         <div class="dune"></div>
         <div class="lantern"></div>
         <div class="hero-copy">
-          <p class="hero-salam"><span>As-Salāmu ʿalaykum wa Raḥmatullāhi</span><span>wa Barakātuh</span></p>
+          <p class="hero-salam"><span>As-Salāmu ʿalaykum wa</span><span>Raḥmatullāhi wa Barakātuh</span></p>
           <div class="hero-kicker">HÖRBÜCHER · QURʾĀN · DUʿĀʾ</div>
           <h1>Hören. Mitlesen. Lernen.</h1>
           <p>Antippen und loshören.</p>
@@ -3176,7 +3176,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v106-home-cinema1179";
+const KIDS_BUILD_ID="kids-shell-v107-home-cinema1180";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6238,7 +6238,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v106-home-cinema1179";
+  var KIDS_BUILD_ID="kids-shell-v107-home-cinema1180";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -8590,4 +8590,181 @@ html[data-view="stories"] #view-stories > :last-child{
   }
 })();
 </script>
+<style id="kids-home-cinema-v1180">
+/* V1180 — sichtbarer Cinema-Look auch dann, wenn iOS das Video kurz verzögert. */
+#view-today .hero{
+  min-height:clamp(600px,152vw,690px)!important;
+  background:#061a24!important;
+}
+#view-today .hero::before{
+  inset:-5%!important;
+  background:
+    linear-gradient(180deg,rgba(2,14,22,.02),rgba(2,14,22,.05) 48%,rgba(4,22,31,.46) 77%,#061a24 100%),
+    url("/kids/assets/kids-home-v1179/hero-poster.png?v=1180") center 45%/cover no-repeat!important;
+  filter:saturate(1.05) contrast(1.04) brightness(.90)!important;
+  animation:homePosterCinema1180 10s ease-in-out infinite alternate!important;
+}
+@keyframes homePosterCinema1180{
+  from{transform:scale(1.045) translate3d(-1.1%,.25%,0)}
+  to{transform:scale(1.095) translate3d(1.15%,-.8%,0)}
+}
+#view-today .hero-cinema-video{
+  object-position:center 45%!important;
+  filter:saturate(1.06) contrast(1.05) brightness(.91)!important;
+  animation:homeVideoCinema1180 11s ease-in-out infinite alternate!important;
+}
+@keyframes homeVideoCinema1180{
+  from{transform:scale(1.025) translate3d(-.55%,.1%,0)}
+  to{transform:scale(1.07) translate3d(.65%,-.45%,0)}
+}
+
+/* Immer sichtbare Bewegungsebenen: Wolken, Licht, Partikel und Tiefe. */
+#view-today .hero .cloud{
+  display:block!important;
+  position:absolute!important;
+  z-index:3!important;
+  top:20%!important;
+  left:-52%!important;
+  width:78%!important;
+  height:15%!important;
+  opacity:.13!important;
+  border-radius:50%!important;
+  background:radial-gradient(ellipse,rgba(242,246,245,.72),rgba(242,246,245,.10) 55%,transparent 76%)!important;
+  filter:blur(23px)!important;
+  animation:homeCloud1180 18s linear infinite!important;
+}
+#view-today .hero .cloud::before,#view-today .hero .cloud::after{display:none!important}
+@keyframes homeCloud1180{
+  from{transform:translate3d(-10%,0,0) scale(1)}
+  to{transform:translate3d(225%,8%,0) scale(1.12)}
+}
+#view-today .hero .city{
+  display:block!important;
+  position:absolute!important;
+  z-index:3!important;
+  inset:0!important;
+  width:auto!important;height:auto!important;
+  opacity:.5!important;
+  transform:none!important;clip-path:none!important;
+  background:
+    radial-gradient(circle at 12% 22%,rgba(255,246,206,.95) 0 1px,transparent 1.9px),
+    radial-gradient(circle at 26% 14%,rgba(255,232,174,.86) 0 1.1px,transparent 2px),
+    radial-gradient(circle at 43% 27%,rgba(255,246,206,.9) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 61% 17%,rgba(255,232,174,.82) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 79% 31%,rgba(255,246,206,.88) 0 1.1px,transparent 2px),
+    radial-gradient(circle at 89% 12%,rgba(255,232,174,.86) 0 1px,transparent 1.8px)!important;
+  filter:drop-shadow(0 0 7px rgba(255,219,140,.4))!important;
+  animation:homeStars1180 3.7s ease-in-out infinite alternate!important;
+}
+@keyframes homeStars1180{
+  from{opacity:.25;filter:brightness(.9)}
+  to{opacity:.62;filter:brightness(1.22)}
+}
+#view-today .hero .arch{
+  display:block!important;
+  position:absolute!important;
+  z-index:4!important;
+  top:-30%!important;bottom:-30%!important;left:-50%!important;right:auto!important;
+  width:26%!important;height:auto!important;border:0!important;border-radius:50%!important;
+  opacity:0!important;
+  background:linear-gradient(90deg,transparent,rgba(255,226,159,.18),transparent)!important;
+  filter:blur(22px)!important;
+  transform:rotate(13deg)!important;
+  animation:homeSweep1180 9.5s ease-in-out infinite!important;
+}
+@keyframes homeSweep1180{
+  0%,26%{left:-50%;opacity:0}
+  40%{opacity:.48}
+  70%{left:125%;opacity:.18}
+  100%{left:125%;opacity:0}
+}
+#view-today .hero .dune{
+  display:block!important;
+  position:absolute!important;
+  z-index:3!important;
+  left:-10%!important;right:-10%!important;bottom:-7%!important;height:32%!important;
+  opacity:.32!important;
+  background:radial-gradient(ellipse at 50% 100%,rgba(15,58,69,.86),rgba(6,30,42,.24) 58%,transparent 76%)!important;
+  filter:blur(12px)!important;
+  animation:homeHaze1180 8s ease-in-out infinite alternate!important;
+}
+@keyframes homeHaze1180{
+  from{transform:translate3d(-2%,2%,0) scale(1)}
+  to{transform:translate3d(2%,-2%,0) scale(1.05)}
+}
+#view-today .hero .lantern{
+  display:block!important;
+  position:absolute!important;
+  z-index:4!important;
+  right:11%!important;top:36%!important;
+  width:8px!important;height:8px!important;border-radius:50%!important;
+  font-size:0!important;opacity:.55!important;background:#ffe0a0!important;
+  box-shadow:0 0 12px rgba(255,215,135,.7),0 0 28px rgba(255,183,87,.28)!important;
+  animation:homeGlow1180 3.1s ease-in-out infinite!important;
+}
+@keyframes homeGlow1180{0%,100%{opacity:.28;transform:scale(.75)}50%{opacity:.95;transform:scale(1.25)}}
+
+/* Marke deutlich größer: DĀR AL TAWḤĪD ist nicht mehr nur eine kleine Zeile. */
+#view-today .kids-wordmark{
+  top:max(58px,calc(env(safe-area-inset-top,0px) + 28px))!important;
+  width:min(calc(100vw - 18px),560px)!important;
+  max-width:calc(100vw - 18px)!important;
+  gap:8px!important;
+}
+#view-today .wm-dar-line{
+  font-size:clamp(38px,9.8vw,50px)!important;
+  font-weight:860!important;
+  letter-spacing:.025em!important;
+  text-indent:.025em!important;
+  line-height:.98!important;
+}
+#view-today .wm-kids{
+  font-size:clamp(84px,22vw,110px)!important;
+  margin-top:2px!important;
+}
+#view-today .wm-kids span{
+  animation-duration:2.65s!important;
+}
+#view-today .kids-wordmark::after{margin-top:8px!important;width:min(76vw,340px)!important}
+
+/* Salam absichtlich balanciert statt eines einzelnen herunterfallenden Wortes. */
+#view-today .hero-copy{
+  left:12px!important;right:12px!important;bottom:26px!important;
+  padding:12px 8px 8px!important;
+  border-radius:26px!important;
+  background:linear-gradient(180deg,rgba(4,22,31,.02),rgba(4,22,31,.44))!important;
+}
+#view-today .hero-salam{
+  max-width:360px!important;
+  font-size:clamp(14px,3.7vw,16px)!important;
+  line-height:1.28!important;
+  margin-bottom:10px!important;
+}
+#view-today .hero-salam span{
+  display:block!important;
+  white-space:nowrap!important;
+}
+#view-today .hero h1{
+  font-size:clamp(27px,7.05vw,34px)!important;
+  white-space:nowrap!important;
+}
+#view-today .hero-copy>p:last-child{
+  font-size:clamp(13px,3.45vw,15px)!important;
+  white-space:nowrap!important;
+}
+#view-today .resume{margin-top:-8px!important}
+
+@media(max-width:390px){
+  #view-today .hero{min-height:clamp(585px,155vw,635px)!important}
+  #view-today .wm-dar-line{font-size:clamp(35px,9.2vw,40px)!important}
+  #view-today .wm-kids{font-size:clamp(78px,21vw,92px)!important}
+  #view-today .hero-salam{font-size:clamp(13.4px,3.55vw,14.5px)!important}
+  #view-today .hero h1{font-size:clamp(25px,6.5vw,29px)!important}
+  #view-today .hero-copy>p:last-child{font-size:clamp(12.5px,3.3vw,13.6px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .hero::before,#view-today .hero-cinema-video,
+  #view-today .hero .cloud,#view-today .hero .city,#view-today .hero .arch,#view-today .hero .dune,#view-today .hero .lantern{animation:none!important}
+}
+</style>
 </html>
