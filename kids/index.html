@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.22</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.23</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3181,7 +3181,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v108-home-title1195";
+const KIDS_BUILD_ID="kids-shell-v108-reference-hero1196";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6252,7 +6252,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v108-home-title1195";
+  var KIDS_BUILD_ID="kids-shell-v108-reference-hero1196";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6268,7 +6268,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1195",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1196",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -9824,111 +9824,226 @@ html[data-view="stories"] #view-stories > :last-child{
 
   <script src="/kids/kids-card-interaction.js?v=2" defer></script>
 
-<style id="kids-home-title-safe-v1195">
-/* Fix from the 20:50 iPhone screenshot:
-   full title must always read DĀR AL TAWḤĪD, including both outer D glyphs.
-   No SVG textPath/textLength is used, so Safari cannot crop the ends. */
-#view-today .hero::before{
-  background-position:center top!important;
-  background-size:100% auto!important;
-  background-repeat:no-repeat!important;
+<style id="kids-home-reference-exact-v1196">
+/* V1196 — approved screenshot direction.
+   Exact static reference artwork, center/cover framing, no background motion.
+   Brand stays real text (Safari-safe), but regains the larger luminous curved look. */
+
+#view-today .hero{
+  overflow:hidden!important;
+  background:#061b26!important;
 }
 
-/* Keep the exact static reference framing. No background movement. */
-#view-today .hero::before,
+/* The reference must fill the complete hero. Center/cover is deliberate:
+   it brings palms, stars and the baked shooting star back under the status area,
+   instead of exposing the empty top band created by top/100%-auto framing. */
+#view-today .hero::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  background:
+    linear-gradient(180deg,
+      rgba(2,15,23,0) 0%,
+      rgba(2,15,23,0) 56%,
+      rgba(4,22,31,.13) 73%,
+      rgba(6,27,38,.55) 91%,
+      #061b26 100%),
+    url("/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1196") center 50%/cover no-repeat!important;
+  background-position:center 50%!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  filter:none!important;
+  transform:none!important;
+  animation:none!important;
+}
 #view-today .hero::after{
   animation:none!important;
   transform:none!important;
 }
 
-/* Real text, three words, shallow optical arch. */
+/* Nothing in the scenery moves. The meteor visible in the approved artwork is baked in. */
+#view-today .hero-sky-video-v1188,
+#view-today .hero-cinema-video,
+#view-today .hero-artifact-shield,
+#view-today .hero .cloud,
+#view-today .shooting-star,
+#view-today .hero .city,
+#view-today .hero .arch,
+#view-today .hero .dune,
+#view-today .hero .lantern{
+  display:none!important;
+  animation:none!important;
+  transform:none!important;
+}
+
+/* Brand position from the approved screenshot: high in the sky, with generous width. */
+#view-today .kids-wordmark{
+  z-index:20!important;
+  top:max(44px,calc(env(safe-area-inset-top,0px) + 7px))!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  max-width:none!important;
+  transform:none!important;
+  pointer-events:none!important;
+}
+
+/* iOS-safe real text. Larger, stronger gold and optically curved without SVG textPath clipping. */
 #view-today .wm-dar-safe{
   position:relative!important;
   display:flex!important;
   justify-content:center!important;
   align-items:flex-start!important;
-  gap:clamp(6px,1.7vw,11px)!important;
-  width:calc(100% - 30px)!important;
-  max-width:600px!important;
-  margin:0 auto -7px!important;
-  padding:4px 8px 10px!important;
+  gap:clamp(3px,1.05vw,7px)!important;
+  width:calc(100% - 10px)!important;
+  max-width:650px!important;
+  margin:0 auto -8px!important;
+  padding:3px 2px 14px!important;
   overflow:visible!important;
   white-space:nowrap!important;
-  color:#e9b64d!important;
+  color:#edb94d!important;
   font-family:"Cinzel",Georgia,"Times New Roman",serif!important;
-  font-size:clamp(37px,9.55vw,50px)!important;
+  font-size:clamp(43px,11.8vw,57px)!important;
   line-height:1!important;
   font-weight:700!important;
-  letter-spacing:.018em!important;
+  letter-spacing:-.018em!important;
   text-rendering:geometricPrecision!important;
   -webkit-font-smoothing:antialiased!important;
   filter:
-    drop-shadow(0 2px 0 rgba(75,40,7,.72))
-    drop-shadow(0 6px 11px rgba(0,0,0,.42))
-    drop-shadow(0 0 8px rgba(255,196,74,.30))!important;
+    drop-shadow(0 2px 0 rgba(72,39,7,.82))
+    drop-shadow(0 6px 11px rgba(0,0,0,.46))
+    drop-shadow(0 0 7px rgba(255,230,144,.70))
+    drop-shadow(0 0 18px rgba(255,174,38,.42))!important;
 }
-
-/* Each word and every glyph stays inside its own box: no clipping behind palms or viewport edges. */
 #view-today .wm-dar-safe .wm-word{
   display:inline-flex!important;
   flex:0 0 auto!important;
   align-items:flex-start!important;
   gap:0!important;
   overflow:visible!important;
+  transform:none!important;
 }
 #view-today .wm-dar-safe .wm-word>span{
   display:inline-block!important;
   min-width:0!important;
-  background:linear-gradient(100deg,#ad711e 0%,#e3a641 22%,#fff0a6 46%,#d8952e 68%,#f6d276 86%,#b8751d 100%)!important;
-  background-size:220% 100%!important;
+  background:linear-gradient(100deg,
+    #a96817 0%,
+    #e2a039 18%,
+    #fff4ae 43%,
+    #e6a039 65%,
+    #ffd978 84%,
+    #ad6b18 100%)!important;
+  background-size:235% 100%!important;
   background-position:0% 50%!important;
   -webkit-background-clip:text!important;
   background-clip:text!important;
   -webkit-text-fill-color:transparent!important;
-  -webkit-text-stroke:.45px rgba(85,45,7,.48)!important;
+  -webkit-text-stroke:.55px rgba(78,42,8,.60)!important;
   paint-order:stroke fill!important;
-  animation:darSafeGlow1195 8.2s ease-in-out infinite!important;
+  transform-origin:50% 100%!important;
+  animation:darReferenceGlow1196 7.6s ease-in-out infinite!important;
 }
 
-/* Gentle arch: outer words sit slightly lower, center word slightly higher. */
-#view-today .wm-word-dar{transform:translateY(5px) rotate(-.65deg)!important}
-#view-today .wm-word-al{transform:translateY(0)!important}
-#view-today .wm-word-tawhid{transform:translateY(5px) rotate(.65deg)!important}
+/* Shallow letter-by-letter arch, matching the reference while keeping every glyph fully visible. */
+#view-today .wm-word-dar>span:nth-child(1){transform:translateY(9px) rotate(-1.1deg)!important}
+#view-today .wm-word-dar>span:nth-child(2){transform:translateY(5px) rotate(-.45deg)!important}
+#view-today .wm-word-dar>span:nth-child(3){transform:translateY(2px)!important}
+#view-today .wm-word-al>span:nth-child(1){transform:translateY(0)!important}
+#view-today .wm-word-al>span:nth-child(2){transform:translateY(0)!important}
+#view-today .wm-word-tawhid>span:nth-child(1){transform:translateY(0)!important}
+#view-today .wm-word-tawhid>span:nth-child(2){transform:translateY(1px)!important}
+#view-today .wm-word-tawhid>span:nth-child(3){transform:translateY(2px)!important}
+#view-today .wm-word-tawhid>span:nth-child(4){transform:translateY(3px)!important}
+#view-today .wm-word-tawhid>span:nth-child(5){transform:translateY(5px) rotate(.35deg)!important}
+#view-today .wm-word-tawhid>span:nth-child(6){transform:translateY(9px) rotate(1.1deg)!important}
 
-/* Subtle light travel only. The title itself does not move or shake. */
-@keyframes darSafeGlow1195{
-  0%,18%,100%{background-position:0% 50%;filter:brightness(.98)}
-  44%{background-position:100% 50%;filter:brightness(1.09)}
-  68%{background-position:100% 50%;filter:brightness(1)}
+/* Fine curved gold line below the brand, as in the desired composition. */
+#view-today .wm-dar-safe::after{
+  content:""!important;
+  position:absolute!important;
+  left:8%!important;
+  right:8%!important;
+  bottom:0!important;
+  height:17px!important;
+  border-top:1.7px solid rgba(255,216,111,.72)!important;
+  border-radius:50% 50% 0 0/100% 100% 0 0!important;
+  filter:drop-shadow(0 0 5px rgba(255,190,61,.36))!important;
+  pointer-events:none!important;
 }
 
-/* Keep the balloon motion already approved for Kids. */
+@keyframes darReferenceGlow1196{
+  0%,18%,100%{background-position:0% 50%;filter:brightness(.99)}
+  45%{background-position:100% 50%;filter:brightness(1.13)}
+  70%{background-position:100% 50%;filter:brightness(1.02)}
+}
+
+/* Keep the approved Kids balloon motion and its quiet under-glow. */
+#view-today .wm-kids{
+  position:relative!important;
+  z-index:21!important;
+  margin-top:-1px!important;
+}
 #view-today .wm-kids span{
+  display:inline-block!important;
+  transform-origin:50% 88%!important;
+  will-change:transform!important;
   animation:kidsBalloon1191 4.6s cubic-bezier(.42,.02,.28,1) infinite!important;
 }
 #view-today .wm-kids .k{animation-delay:0s!important}
 #view-today .wm-kids .i{animation-delay:.14s!important}
 #view-today .wm-kids .d{animation-delay:.28s!important}
 #view-today .wm-kids .s{animation-delay:.42s!important}
+#view-today .kids-wordmark::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:-1!important;
+  left:50%!important;
+  top:91px!important;
+  width:min(77vw,400px)!important;
+  height:128px!important;
+  transform:translateX(-50%)!important;
+  opacity:.54!important;
+  border-radius:50%!important;
+  background:radial-gradient(ellipse,rgba(255,216,111,.16) 0%,rgba(91,214,226,.08) 42%,transparent 73%)!important;
+  filter:blur(15px)!important;
+  animation:kidsUnderGlow1191 6.4s ease-in-out infinite alternate!important;
+}
+#view-today .kids-wordmark::after{display:none!important}
 
-/* Protect readable side margins on narrow iPhones. */
+/* Keep the lower copy readable without changing the approved card/navigation system. */
+#view-today .hero-copy{z-index:22!important}
+#view-today .hero-salam{
+  font-size:clamp(15.5px,4.25vw,18px)!important;
+  line-height:1.34!important;
+  text-shadow:0 2px 4px rgba(0,0,0,.60),0 0 10px rgba(0,0,0,.22)!important;
+}
+
 @media(max-width:390px){
+  #view-today .kids-wordmark{
+    top:max(41px,calc(env(safe-area-inset-top,0px) + 5px))!important;
+  }
   #view-today .wm-dar-safe{
-    width:calc(100% - 24px)!important;
-    gap:5px!important;
-    font-size:clamp(35px,9.35vw,39px)!important;
-    letter-spacing:.01em!important;
+    width:calc(100% - 6px)!important;
+    gap:3px!important;
+    font-size:clamp(41px,11.65vw,46px)!important;
+    letter-spacing:-.022em!important;
   }
 }
 @media(min-width:700px){
+  #view-today .kids-wordmark{
+    top:max(53px,calc(env(safe-area-inset-top,0px) + 12px))!important;
+  }
   #view-today .wm-dar-safe{
-    max-width:620px!important;
-    font-size:52px!important;
-    gap:11px!important;
+    max-width:680px!important;
+    font-size:59px!important;
+    gap:7px!important;
   }
 }
 @media(prefers-reduced-motion:reduce){
-  #view-today .wm-dar-safe .wm-word>span{animation:none!important}
+  #view-today .wm-dar-safe .wm-word>span,
+  #view-today .wm-kids span,
+  #view-today .kids-wordmark::before{animation:none!important}
 }
 </style>
 
