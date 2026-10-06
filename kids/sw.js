@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1178";
-const KIDS_BUILD_ID="kids-shell-v105-home-cinema1178";
+const CACHE_NAME="dar-al-tawhid-kids-v1179";
+const KIDS_BUILD_ID="kids-shell-v106-home-cinema1179";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -14,6 +14,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-art/dua-home-v11.jpg",
   "/kids/assets/kids-art/hero-entdecke.png",
   "/kids/assets/kids-home-v1176/hero-cinema.png",
+  "/kids/assets/kids-home-v1179/hero-poster.png?v=1179",
   "/kids/assets/kids-home-v1176/world-stories.png",
   "/kids/assets/kids-home-v1176/world-quran.png",
   "/kids/assets/kids-home-v1176/world-dua.png",
@@ -250,7 +251,9 @@ self.addEventListener("fetch",function(event){
     event.respondWith(networkFirst(request,"/kids/start"));
     return;
   }
-  if(url.pathname.indexOf("/kids/assets/kids-cinema/")===0&&url.pathname.indexOf(".mp4")>0){
+  /* Safari/iOS video uses HTTP Range requests. Never serve MP4 through cacheFirst,
+     otherwise a cached full response can make the hero appear completely static. */
+  if(request.destination==="video"||/\.mp4$/i.test(url.pathname)){
     event.respondWith(fetch(request));
     return;
   }
