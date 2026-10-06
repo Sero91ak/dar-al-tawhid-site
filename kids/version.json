@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v103-home-live1176",
-  "label": "KIDS · V1.08.03",
-  "releasedAt": "2026-10-06T08:10:00+02:00",
-  "note": "Startseite V1176: sichtbarer farbiger Kids-Ballonrhythmus wiederhergestellt, DĀR AL TAWḤĪD als klare Hauptmarke davor gesetzt, Hero mit mehreren ruhigen Cinema-Bewegungsebenen aufgebaut, Textumbrüche auf Phone-Breiten stabilisiert und Hörbücher/Qurʾān/Duʿāʾ mit drei eigens dafür erzeugten Bildwelten statt recycelter Bereichsbilder ausgestattet.",
+  "buildId": "kids-shell-v104-home-wordmark1177",
+  "label": "KIDS · V1.08.04",
+  "releasedAt": "2026-10-06T08:24:00+02:00",
+  "note": "V1177 korrigiert den sichtbaren Startseitenfehler auf iPhone: die zuvor geerbte translateX(-50%)-Transformation des Kids-Wordmarks wird explizit aufgehoben. DĀR AL TAWḤĪD und alle vier KIDS-Buchstaben bleiben vollständig zentriert im Hero; Animationen und Cinema-Hintergrund bleiben erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1176",
+    "serviceWorkerCache": "v1177",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -712,10 +712,10 @@
     "duaOwnerVoice": "recovered-existing-assets-v1171",
     "duaVoicePaidGenerations": 0,
     "duaVoiceEntries": 10,
-    "homeAudioCore": "v1176",
+    "homeAudioCore": "v1177",
     "alphabetRuntimeRemoved": true,
     "alphabetArchivedAssetsRetained": true,
-    "homeHeroBrand": "dar-first-colored-balloon-kids-v1176",
+    "homeHeroBrand": "dar-first-colored-balloon-kids-v1177",
     "homeQuizVisible": false,
     "homeDailyJourneyVisible": false,
     "homeKnowledgeCardVisible": false,
@@ -727,8 +727,10 @@
       "quran": "/kids/assets/kids-home-v1176/world-quran.png",
       "dua": "/kids/assets/kids-home-v1176/world-dua.png"
     },
-    "homeHeroCopyWrap": "single-line-phone-guard-v1176"
+    "homeHeroCopyWrap": "single-line-phone-guard-v1176",
+    "homeWordmarkPosition": "viewport-centered-transform-reset-v1177",
+    "homeWordmarkClippingFixed": true
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T08:10:00+02:00"
+  "deployTrigger": "2026-10-06T08:24:00+02:00"
 }

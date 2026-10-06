@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.03</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.04</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3175,7 +3175,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v103-home-live1176";
+const KIDS_BUILD_ID="kids-shell-v104-home-wordmark1177";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6237,7 +6237,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v103-home-live1176";
+  var KIDS_BUILD_ID="kids-shell-v104-home-wordmark1177";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6253,7 +6253,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1176",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1177",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -7594,7 +7594,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-<style id="kids-home-live-v1176">
+<style id="kids-home-live-v1177">
 /* V1176 — lebendige, ruhige Cinema-Startseite.
    Marke zuerst, sichtbarer Kids-Ballonrhythmus, eigene Hörwelten-Illustrationen,
    keine zufälligen Ein-Wort-Umbrüche auf üblichen Phone-Breiten. */
@@ -7785,9 +7785,11 @@ html[data-view="stories"] #view-stories > :last-child{
   left:0!important;
   right:0!important;
   width:100%!important;
-  max-width:none!important;
+  max-width:100%!important;
   margin:0!important;
   padding:0 18px!important;
+  transform:none!important;
+  translate:none!important;
   box-sizing:border-box!important;
   display:flex!important;
   flex-direction:column!important;
