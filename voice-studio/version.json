@@ -1908,8 +1908,8 @@
     "source": "/kids/data/sahabiyyat-stories.json",
     "currentMasterWordRange": "884–993",
     "sameMasterAcrossAges": true,
-    "masterDataVersion": 27,
-    "kidsDataVersion": 27,
+    "masterDataVersion": 28,
+    "kidsDataVersion": 28,
     "allAgeSlotsUseIdenticalMaster": true,
     "ownerOriginalAudioPolicy": "preserve-uploaded-bytes-no-transcode",
     "khadijahOwnerAudio": true,
@@ -1918,7 +1918,16 @@
     "khadijahOwnerAudioMasterAgeRange": "4-10",
     "khadijahOwnerAudioCodec": "mp3-128k-mono-original",
     "khadijahOwnerAudioTarget": "/kids/assets/sahabiyyat-story-audio/khadijah/master.mp3",
-    "khadijahOwnerAudioSha256": "68b44b569ca17d5f2496a453f070e11989a2076ed52751034aa84eb612aeb663"
+    "khadijahOwnerAudioSha256": "68b44b569ca17d5f2496a453f070e11989a2076ed52751034aa84eb612aeb663",
+    "aishahOwnerAudio": true,
+    "aishahOwnerAudioStatus": "audio-complete",
+    "aishahOwnerAudioOriginal": true,
+    "aishahOwnerAudioDurationSec": 431.490563,
+    "aishahOwnerAudioMasterAgeRange": "4-10",
+    "aishahOwnerAudioCodec": "mp3-128k-mono-original",
+    "aishahOwnerAudioBytes": 6920787,
+    "aishahOwnerAudioSha256": "23826c5f9ea6e1af9d50a7a79fcafcbc0668b0c9f64f17211c8ce9a4f94005d5",
+    "aishahOwnerAudioTarget": "/kids/assets/sahabiyyat-story-audio/aishah/master.mp3"
   },
   "engineConnectionRepair": {
     "enabled": true,

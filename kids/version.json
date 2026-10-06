@@ -498,7 +498,7 @@
     "quizArtworkLive": true,
     "duaQuizArtworkPlacement": "direct-in-respective-modal-sections",
     "sahabiyyatDistinctArtworkCount": 14,
-    "sahabiyyatDataVersion": 27,
+    "sahabiyyatDataVersion": 28,
     "sahabiyyatArtworkRelease": "v1127-existing-four-photoreal",
     "sahabiyyatArtworkCount": 14,
     "sahabiyyatLocalArtworkCount": 14,
@@ -775,7 +775,14 @@
     ],
     "prophetOwnerOriginalAudioDeployTrigger": "2026-10-06T13:45:00Z",
     "bottomNavigationMotion": "no-forced-reflow-no-bounce-v1186",
-    "mainTabTransition": "opacity-only-150ms-v1186"
+    "mainTabTransition": "opacity-only-150ms-v1186",
+    "aishahOwnerAudio": true,
+    "aishahOwnerAudioOriginal": true,
+    "aishahOwnerAudioCodec": "mp3-128k-mono-original",
+    "aishahOwnerAudioBytes": 6920787,
+    "aishahOwnerAudioSha256": "23826c5f9ea6e1af9d50a7a79fcafcbc0668b0c9f64f17211c8ce9a4f94005d5",
+    "aishahOwnerAudioDurationSec": 431.490563,
+    "aishahOwnerAudioTarget": "/kids/assets/sahabiyyat-story-audio/aishah/master.mp3"
   },
   "updatedAt": "2026-10-06",
   "deployTrigger": "2026-10-06T15:46:00+02:00"
