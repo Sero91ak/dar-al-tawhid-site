@@ -1,0 +1,68 @@
+name: Sahaba Whisper Turbo Alignment
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/sahaba-whisper-turbo.trigger'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sahaba-whisper-turbo-alignment
+  cancel-in-progress: false
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      WHISPER_MODEL: base
+      WHISPER_BEAM_SIZE: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install runtime
+        run: |
+          command -v ffmpeg >/dev/null 2>&1 || { sudo apt-get update -qq && sudo apt-get install -y ffmpeg >/dev/null; }
+          python -m pip install --upgrade pip
+          python -m pip install faster-whisper rapidfuzz numpy
+      - name: Align and QA all Sahaba
+        run: python scripts/align-sahaba-whisper.py | tee /tmp/sahaba-whisper-turbo.log
+      - name: Commit only validated timing maps
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,re
+          from pathlib import Path
+          d=json.loads(Path("kids/data/mubashshirun-stories.json").read_text(encoding="utf-8"))
+          if len(d.get("items",[]))!=10: raise SystemExit("Expected 10 Sahaba")
+          for item in d["items"]:
+              sid=item["id"]
+              text=str((item.get("scripts") or {}).get("9-10") or (item.get("scripts") or {}).get("6-8") or (item.get("scripts") or {}).get("4-5") or "").strip()
+              paras=[x.strip() for x in re.split(r"\n\s*\n",text) if x.strip()]
+              urls=set()
+              for age in ("4-5","6-8","9-10"):
+                  m=(item.get("audio") or {}).get(age) or {}
+                  if m.get("syncMode")!="whisper-word-alignment-v1": raise SystemExit(f"{sid} {age}: no word alignment")
+                  if len(m.get("timings") or [])!=len(paras): raise SystemExit(f"{sid} {age}: timing mismatch")
+                  if float(m.get("alignmentCoverage") or 0)<0.56: raise SystemExit(f"{sid} {age}: low coverage")
+                  if float(m.get("alignmentMeanSimilarity") or 0)<0.84: raise SystemExit(f"{sid} {age}: low similarity")
+                  urls.add(str(m.get("url") or "").split("?",1)[0])
+              if len(urls)!=1: raise SystemExit(f"{sid}: not one master audio")
+          print("TURBO QA PASS all 10")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/mubashshirun-stories.json kids/version.json kids/story-hub.js kids/data/story-hub.json
+          git diff --cached --quiet && { echo "::error::No changes"; exit 1; }
+          git commit -m "Kids: audio-align all 10 Sahaba read-along"
+          git pull --rebase origin main
+          git push origin HEAD:main
