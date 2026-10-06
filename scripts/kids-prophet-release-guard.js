@@ -84,7 +84,8 @@ const expectedIds = [
 const expectedMubashshirunIds = [
   "abu-bakr","umar","uthman","ali","talha","zubayr","abd-ar-rahman","sad","said","abu-ubaydah"
 ];
-const mubBundleVersion = String(Number(visual.mubashshirunBundleVersion || 0) || "");
+const mubCssVersion = String(Number(visual.mubashshirunCssVersion || visual.mubashshirunBundleVersion || 0) || "");
+const mubJsVersion = String(Number(visual.mubashshirunJsVersion || visual.mubashshirunBundleVersion || 0) || "");
 const mubDataVersion = Number(visual.mubashshirunDataVersion || 0);
 const expectedSahabiyyatIds = [
   "khadijah","aishah","fatimah","umm-salamah","hafsah","sawdah","zaynab",
@@ -112,10 +113,8 @@ for (const rel of ["kids/index.html", "kids/start.html", "kids/shell.html"]) {
   requireMatch(text, "/kids/prophet-stories.js?v=" + htmlJsVersion, rel);
   requireMatch(text, "/kids/sw.js?v=" + swVersion, rel);
   requireMatch(text, "/kids/story-policy.js?v=" + String(Number(visual.storyPolicyVersion || 0)), rel);
-  if (mubBundleVersion) {
-    requireMatch(text, "/kids/mubashshirun-stories.css?v=" + mubBundleVersion, rel);
-    requireMatch(text, "/kids/mubashshirun-stories.js?v=" + mubBundleVersion, rel);
-  }
+  if (mubCssVersion) requireMatch(text, "/kids/mubashshirun-stories.css?v=" + mubCssVersion, rel);
+  if (mubJsVersion) requireMatch(text, "/kids/mubashshirun-stories.js?v=" + mubJsVersion, rel);
   if (visual.sahabiyyatOwnLibrary) {
     if (!sahabiyyatCssVersion || !sahabiyyatJsVersion) error("Ṣaḥābiyyāt CSS/JS Versionsmarker fehlen in visualSystem");
     if (sahabiyyatCssVersion) requireMatch(text, "/kids/sahabiyyat-stories.css?v=" + sahabiyyatCssVersion, rel);
@@ -154,9 +153,9 @@ requireMatch(sw, 'const CACHE_NAME="dar-al-tawhid-kids-v' + swVersion + '";', "k
 requireMatch(sw, "/kids/prophet-stories.css?v=" + htmlCssVersion, "kids/sw.js");
 requireMatch(sw, "/kids/story-policy.js?v=" + String(Number(visual.storyPolicyVersion || 0)), "kids/sw.js");
 requireMatch(sw, "/kids/prophet-stories.js?v=" + htmlJsVersion, "kids/sw.js");
-if (mubBundleVersion) {
-  requireMatch(sw, "/kids/mubashshirun-stories.css?v=" + mubBundleVersion, "kids/sw.js");
-  requireMatch(sw, "/kids/mubashshirun-stories.js?v=" + mubBundleVersion, "kids/sw.js");
+if (mubCssVersion || mubJsVersion) {
+  if (mubCssVersion) requireMatch(sw, "/kids/mubashshirun-stories.css?v=" + mubCssVersion, "kids/sw.js");
+  if (mubJsVersion) requireMatch(sw, "/kids/mubashshirun-stories.js?v=" + mubJsVersion, "kids/sw.js");
   requireMatch(sw, "/kids/data/mubashshirun-stories.json", "kids/sw.js");
 }
 if (visual.sahabiyyatOwnLibrary) {
