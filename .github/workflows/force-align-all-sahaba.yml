@@ -1,0 +1,293 @@
+name: Force Align All Sahaba Masters
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/force-align-all-sahaba.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: force-align-all-sahaba
+  cancel-in-progress: false
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      VOICE_API: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Exact ElevenLabs forced alignment for all Sahaba
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          d=json.loads(Path("kids/data/mubashshirun-stories.json").read_text(encoding="utf-8"))
+          for item in d.get("items",[]):
+              sid=str(item.get("id") or "").strip()
+              scripts=item.get("scripts") or {}
+              text=str(scripts.get("9-10") or scripts.get("6-8") or scripts.get("4-5") or "").strip()
+              if not sid or not text:
+                  raise SystemExit(f"Missing id/text for {sid}")
+              audio=(item.get("audio") or {}).get("6-8") or (item.get("audio") or {}).get("4-5") or {}
+              url=str(audio.get("url") or "").split("?",1)[0].lstrip("/")
+              p=Path(url)
+              if not p.exists() or p.stat().st_size<100000:
+                  raise SystemExit(f"Missing local master audio: {sid} -> {p}")
+              Path(f"/tmp/{sid}-story.txt").write_text(text,encoding="utf-8")
+              print(sid,p)
+          PY
+
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("kids/data/mubashshirun-stories.json").read_text(encoding="utf-8"))
+          Path("/tmp/sahaba-ids.txt").write_text("\n".join(str(x.get("id")) for x in d.get("items",[]) if x.get("id"))+"\n")
+          PY
+
+          while IFS= read -r sid; do
+            [ -n "$sid" ] || continue
+            story="/tmp/$sid-story.txt"
+            audio_url="$(python3 - "$sid" <<'PY'
+          import json,sys
+          from pathlib import Path
+          d=json.loads(Path("kids/data/mubashshirun-stories.json").read_text(encoding="utf-8"))
+          item=next(x for x in d["items"] if x.get("id")==sys.argv[1])
+          a=(item.get("audio") or {}).get("6-8") or (item.get("audio") or {}).get("4-5") or {}
+          print(str(a.get("url") or "").split("?",1)[0].lstrip("/"))
+          PY
+          )"
+            result="/tmp/$sid-alignment.json"
+            ok=0
+
+            if [ -n "${ADMIN_PUBLISH_SECRET:-}" ]; then
+              for attempt in 1 2 3; do
+                code="$(curl -sS -o "$result" -w '%{http_code}' \
+                  -X POST "$VOICE_API/align-story" \
+                  -H "Origin: https://dar-al-tawhid.de" \
+                  -H "Referer: https://dar-al-tawhid.de/voice-studio/" \
+                  -H "X-Admin-Secret: $ADMIN_PUBLISH_SECRET" \
+                  -H "Accept: application/json" \
+                  -F "file=@$audio_url;type=audio/mpeg" \
+                  --form-string "text=$(cat "$story")" || true)"
+                if [ "$code" = "200" ] && python3 - "$result" <<'PY2'
+          import json,sys
+          d=json.load(open(sys.argv[1]))
+          ok=bool(d.get("ok") and d.get("timings"))
+          mode=str(d.get("syncMode") or "")
+          sys.exit(0 if ok and mode.startswith("elevenlabs-forced-alignment") else 1)
+          PY2
+                then
+                  ok=1
+                  echo "$sid aligned through DĀR Voice worker"
+                  break
+                fi
+                sleep 2
+              done
+            fi
+
+            if [ "$ok" != "1" ]; then
+              [ -n "${ELEVENLABS_API_KEY:-}" ] || { echo "::error::ELEVENLABS_API_KEY missing"; exit 1; }
+              raw="/tmp/$sid-eleven-raw.json"
+              code="$(curl -sS -o "$raw" -w '%{http_code}' \
+                -X POST "https://api.elevenlabs.io/v1/forced-alignment" \
+                -H "xi-api-key: $ELEVENLABS_API_KEY" \
+                -F "file=@$audio_url;type=audio/mpeg" \
+                --form-string "text=$(cat "$story")" || true)"
+              [ "$code" = "200" ] || { echo "::error::Forced alignment HTTP $code for $sid"; cat "$raw"; exit 1; }
+
+              python3 - "$story" "$raw" "$result" <<'PY2'
+          import json,re,sys,unicodedata
+          from pathlib import Path
+
+          text=Path(sys.argv[1]).read_text(encoding="utf-8").strip()
+          raw=json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
+          chars=raw.get("characters") or []
+          if not chars:
+              raise SystemExit("No forced-alignment characters returned")
+
+          joined="".join(str(x.get("text","")) for x in chars)
+          def canon(s):
+              return unicodedata.normalize("NFC",s).replace("\r\n","\n").replace("\r","\n")
+          original=canon(text)
+          aligned=canon(joined)
+
+          # ElevenLabs should return the same submitted character stream.
+          # We reject any result that cannot be mapped exactly; no weighted/silence fallback is allowed.
+          if aligned != original:
+              raise SystemExit(f"Character stream mismatch: input={len(original)} aligned={len(aligned)}")
+
+          paragraphs=[x.strip() for x in re.split(r"\n\s*\n",original) if x.strip()]
+          starts=[]
+          cursor=0
+          for p in paragraphs:
+              hit=original.find(p,cursor)
+              if hit<0:
+                  raise SystemExit("Paragraph not found in exact source stream")
+              idx=hit
+              while idx<len(chars) and chars[idx].get("start") is None:
+                  idx+=1
+              if idx>=len(chars):
+                  raise SystemExit("No timestamp for paragraph start")
+              starts.append(float(chars[idx]["start"]))
+              cursor=hit+len(p)
+
+          last_end=0.0
+          for row in reversed(chars):
+              if row.get("end") is not None:
+                  last_end=float(row["end"])
+                  break
+          if last_end<=0:
+              raise SystemExit("No final audio end timestamp")
+
+          timings=[]
+          for i,st in enumerate(starts):
+              en=starts[i+1] if i+1<len(starts) else last_end
+              if en<st:
+                  raise SystemExit("Non-monotonic exact alignment")
+              timings.append({"paragraphIndex":i,"start":round(st,3),"end":round(en,3)})
+
+          Path(sys.argv[3]).write_text(json.dumps({
+              "ok":True,
+              "timings":timings,
+              "alignmentLoss":raw.get("loss"),
+              "alignedWords":len(raw.get("words") or []),
+              "alignedCharacters":len(chars),
+              "syncMode":"elevenlabs-forced-alignment-v1"
+          },ensure_ascii=False),encoding="utf-8")
+          print("exact paragraphs",len(timings))
+          PY2
+              ok=1
+              echo "$sid aligned directly through ElevenLabs"
+            fi
+
+            [ "$ok" = "1" ] || { echo "::error::Exact forced alignment failed for $sid"; exit 1; }
+          done < /tmp/sahaba-ids.txt
+
+      - name: Install exact timing maps
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,re,time
+          from pathlib import Path
+
+          p=Path("kids/data/mubashshirun-stories.json")
+          d=json.loads(p.read_text(encoding="utf-8"))
+          stamp=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
+
+          for item in d.get("items",[]):
+              sid=str(item.get("id") or "")
+              a=json.loads(Path(f"/tmp/{sid}-alignment.json").read_text(encoding="utf-8"))
+              mode=str(a.get("syncMode") or "")
+              if not mode.startswith("elevenlabs-forced-alignment"):
+                  raise SystemExit(f"Rejected non-exact sync mode for {sid}: {mode}")
+              text=str((item.get("scripts") or {}).get("9-10") or (item.get("scripts") or {}).get("6-8") or (item.get("scripts") or {}).get("4-5") or "").strip()
+              paragraphs=[x.strip() for x in re.split(r"\n\s*\n",text) if x.strip()]
+              timings=a.get("timings") or []
+              if len(timings)!=len(paragraphs):
+                  raise SystemExit(f"Timing count mismatch for {sid}: {len(timings)} != {len(paragraphs)}")
+              prev=-1.0
+              for i,row in enumerate(timings):
+                  st=float(row.get("start",-1))
+                  en=float(row.get("end",-1))
+                  if int(row.get("paragraphIndex",-1))!=i or st<prev or en<st:
+                      raise SystemExit(f"Invalid timing row for {sid} at {i}")
+                  prev=st
+
+              for age in ("4-5","6-8","9-10"):
+                  meta=(item.setdefault("audio",{})).setdefault(age,{})
+                  meta["timings"]=timings
+                  meta["syncMode"]=mode
+                  meta["alignmentLoss"]=a.get("alignmentLoss")
+                  meta["alignmentGeneratedAt"]=stamp
+                  meta["masterAudio"]=True
+                  meta["allAges"]=True
+              vp=item.setdefault("voiceProduction",{})
+              vp["singleMasterAudio"]=True
+              vp["followReaderSync"]="exact-forced-alignment"
+              vp["followReaderSyncMode"]=mode
+              vp["followReaderParagraphs"]=len(timings)
+              vp["followReaderSyncedAt"]=stamp
+
+          d["version"]=max(int(d.get("version") or 0)+1,11)
+          d["updatedAt"]=stamp
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+
+          # Bump client-side data cache references so the live apps fetch the new timing maps immediately.
+          hub=Path("kids/story-hub.js")
+          if hub.exists():
+              s=hub.read_text(encoding="utf-8")
+              s=re.sub(r'(/kids/data/mubashshirun-stories\.json\?v=)\d+',lambda m:m.group(1)+str(d["version"]),s)
+              hub.write_text(s,encoding="utf-8")
+          page=Path("kids/mubashshirun-stories.js")
+          if page.exists():
+              s=page.read_text(encoding="utf-8")
+              s=re.sub(r'const DATA_URL="/kids/data/mubashshirun-stories\.json(?:\?v=\d+)?";',f'const DATA_URL="/kids/data/mubashshirun-stories.json?v={d["version"]}";',s)
+              page.write_text(s,encoding="utf-8")
+
+          print("Installed exact forced alignment for",len(d.get("items",[])),"Sahaba; version",d["version"])
+          PY
+
+      - name: Validate complete Sahaba area
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          d=json.loads(Path("kids/data/mubashshirun-stories.json").read_text(encoding="utf-8"))
+          items=d.get("items") or []
+          if len(items)!=10:
+              raise SystemExit(f"Expected 10 Sahaba, got {len(items)}")
+          for item in items:
+              sid=item.get("id")
+              scripts=item.get("scripts") or {}
+              text=str(scripts.get("9-10") or scripts.get("6-8") or scripts.get("4-5") or "").strip()
+              paras=[x.strip() for x in re.split(r"\n\s*\n",text) if x.strip()]
+              urls=set()
+              for age in ("4-5","6-8","9-10"):
+                  meta=(item.get("audio") or {}).get(age) or {}
+                  if meta.get("status")!="ready":
+                      raise SystemExit(f"{sid} {age}: not ready")
+                  if not str(meta.get("syncMode") or "").startswith("elevenlabs-forced-alignment"):
+                      raise SystemExit(f"{sid} {age}: not exact")
+                  if len(meta.get("timings") or [])!=len(paras):
+                      raise SystemExit(f"{sid} {age}: timing count mismatch")
+                  urls.add(str(meta.get("url") or ""))
+              if len(urls)!=1:
+                  raise SystemExit(f"{sid}: ages do not share one master audio")
+              local=Path(next(iter(urls)).split("?",1)[0].lstrip("/"))
+              if not local.exists() or local.stat().st_size<100000:
+                  raise SystemExit(f"{sid}: local master asset missing")
+          print("All 10 Sahaba are ready with one master audio and exact forced alignment.")
+          PY
+
+      - name: Commit exact Sahaba timing maps
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/mubashshirun-stories.json kids/story-hub.js kids/mubashshirun-stories.js
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          git commit -m "Kids: exact forced alignment for all Sahaba masters"
+          git push origin HEAD:main
