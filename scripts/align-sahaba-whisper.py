@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json, re, subprocess, time, unicodedata
+import json, re, subprocess, time, unicodedata, os
 from pathlib import Path
 from rapidfuzz.fuzz import ratio
 import numpy as np
@@ -92,7 +92,8 @@ items=d.get("items") or []
 if len(items)!=10:
     raise SystemExit(f"Expected 10 Sahaba, got {len(items)}")
 
-model=WhisperModel("small",device="cpu",compute_type="int8",cpu_threads=4)
+model_name=os.environ.get("WHISPER_MODEL","small").strip() or "small"
+model=WhisperModel(model_name,device="cpu",compute_type="int8",cpu_threads=4)
 stamp=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
 report=[]
 
@@ -207,7 +208,7 @@ for item in items:
             raise SystemExit(f"Audio not ready: {sid} {age}")
         m["timings"]=timings
         m["syncMode"]="whisper-word-alignment-v1"
-        m["alignmentEngine"]="faster-whisper-small-int8"
+        m["alignmentEngine"]=f"faster-whisper-{model_name}-int8"
         m["alignmentCoverage"]=round(coverage,4)
         m["alignmentMeanSimilarity"]=round(mean_sim,4)
         m["alignmentGeneratedAt"]=stamp
