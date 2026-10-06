@@ -2801,7 +2801,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.32</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.33</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2908,7 +2908,7 @@ html:not([data-view="today"]) .view.active{
       </header>
 
       <button id="deenEntry" class="deen-entry" type="button" aria-label="Den Dīn lernen öffnen">
-        <span class="deen-entry-bg" aria-hidden="true"><img src="/kids/assets/deen/deen-entry.jpg?v=1205" alt="" decoding="async" loading="eager"></span>
+        <span class="deen-entry-bg" aria-hidden="true"><img src="/kids/assets/deen/deen-entry.jpg?v=1206" alt="" decoding="async" loading="eager"></span>
         <span class="deen-entry-copy">
           <span class="deen-entry-kicker">DAS WICHTIGSTE ZUERST</span>
           <strong>Den Dīn lernen</strong>
@@ -3192,7 +3192,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v113-deen-photoreal1205";
+const KIDS_BUILD_ID="kids-shell-v113-deen-photoreal1206";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6263,7 +6263,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v113-deen-photoreal1205";
+  var KIDS_BUILD_ID="kids-shell-v113-deen-photoreal1206";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6279,7 +6279,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1205",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1206",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
