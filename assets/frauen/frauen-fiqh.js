@@ -2323,7 +2323,7 @@
       { nr: "35", title: "Ruqyah, Schutz & Zuflucht", id: RUQYAH_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu al-Falaq, an-Nās, Muʿawwidhāt, Ruqyah und Zuflucht bei Allah." },
       { nr: "36", title: "Tod, Janāzah & Trauer", id: TRAUER_SLUG, mark: "ring", pending: true, lede: "Geprüfte Grundlagen zu Tod, Trauer, Janāzah, Duʿāʾ und Grenzen der Klage." },
       { nr: "37", title: "Mädchen, Pubertät & Pflichtwissen", id: MAEDCHEN_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Reife, Pflichtwissen, Schamhaftigkeit, Gebet und religiöser Verantwortung." },
-      { nr: "38", title: "Falsches Wissen, Bidʿah & Quellenprüfung", id: BIDAHQ_SLUG, mark: "lamp", pending: true, lede: "Geprüfte Grundlagen zum Schutz vor ungeprüften Aussagen, schwachen Quellen und erfundenen Inhalten." },
+      { nr: "38", title: "Falsches Wissen, Bidʿah & Quellenprüfung", id: BIDAHQ_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zum Schutz vor ungeprüften Aussagen, schwachen Quellen und erfundenen Inhalten." },
       { nr: "39", title: "Reue, Istighfār & Rückkehr zu Allah", id: REUE_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Tawbah, Istighfār, Hoffnung, Schuld und Rückkehr zu Allah." },
       { nr: "40", title: "Tod, Janāʾiz, Trauer & Ṣabr", id: JANAIZ_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Muṣībah, erlaubter Trauer, Ṣabr und Janāʾiz." },
       { nr: "41", title: "Reue, Tawbah & Istighfār", id: TAWBAH_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Reue, Vergebung, Tawbah Naṣūḥ und Sayyid al-Istighfār." },
