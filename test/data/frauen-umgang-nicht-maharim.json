@@ -1,6 +1,6 @@
 {
-  "fassung": 1,
-  "aktualisiertAm": "2026-08-30",
+  "fassung": 2,
+  "aktualisiertAm": "2026-10-06",
   "bereich": "umgang-nicht-maharim",
   "eintraege": [
     {
@@ -226,22 +226,27 @@
     },
     {
       "kennung": "umgang-handschlag-001",
-      "titel": "Händedruck mit Nicht-Maḥārim",
-      "bereich": "in-pruefung",
-      "thema": "in-pruefung",
-      "kurzvorschau": "Innere Vorbereitung.",
-      "vollstaendigeAussage": "",
-      "lehre": "",
-      "quellenart": "in-pruefung",
-      "quellenstatus": "nicht-anzeigen",
-      "quellenanzeige": "In Prüfung",
+      "titel": "Kein Händedruck mit Nicht-Maḥārim",
+      "bereich": "adab",
+      "thema": "haendedruck",
+      "kurzvorschau": "Der Prophet ﷺ erklärte bei der Bayʿah der Frauen, dass er Frauen nicht die Hand reichte.",
+      "vollstaendigeAussage": "Ummaymah bint Ruqayqah رضي الله عنها berichtete von der Bayʿah der Frauen. Als sie den Propheten ﷺ um die Hand zur Bayʿah baten, sagte er, dass er Frauen nicht die Hand reiche. Der Bericht bildet eine klare Grundlage dafür, körperliche Berührung beim gewöhnlichen Händedruck zwischen Nicht-Maḥārim zu vermeiden.",
+      "lehre": "Höflichkeit kann ohne körperliche Berührung gewahrt werden.",
+      "quellenart": "sahih",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Sunan an-Nasāʾī, Nr. 4181; Ibn Māǧah, Nr. 2874; Bericht von Ummaymah bint Ruqayqah.",
       "direktnachweisText": "→ Quelle öffnen",
-      "direktnachweisUrl": "",
+      "direktnachweisUrl": "https://dorar.net/hadith/sharh/61832",
       "direktnachweisArt": "Webseite",
-      "freigabeDurchSerhat": false,
-      "schlagwoerter": [],
-      "hinweise": "Innere Vorbereitung. Unsichtbar, bis Quelle, Direktnachweis und Prüfung feststehen.",
-      "atharPruefung": "Bei der Endprüfung Ṣaḥābah-, Salaf- und Athar-Aussagen mit Direktnachweis prüfen."
+      "freigabeDurchSerhat": true,
+      "schlagwoerter": [
+        "Händedruck",
+        "Nicht-Maḥārim",
+        "Bayʿah",
+        "Ummaymah bint Ruqayqah"
+      ],
+      "hinweise": "Keine Notfall- oder medizinischen Sonderfälle aus diesem Grundeintrag ableiten.",
+      "atharPruefung": "Ṣaḥīḥer Sunnah-Nachweis geprüft."
     },
     {
       "kennung": "umgang-bildschirm-001",
@@ -302,22 +307,27 @@
     },
     {
       "kennung": "umgang-schwager-001",
-      "titel": "Schwager",
-      "bereich": "in-pruefung",
-      "thema": "in-pruefung",
-      "kurzvorschau": "Innere Vorbereitung.",
-      "vollstaendigeAussage": "",
-      "lehre": "",
-      "quellenart": "in-pruefung",
-      "quellenstatus": "nicht-anzeigen",
-      "quellenanzeige": "In Prüfung",
+      "titel": "Der Schwager ist kein Maḥram",
+      "bereich": "khalwah",
+      "thema": "schwager-khalwah",
+      "kurzvorschau": "Die Sunnah warnt ausdrücklich vor nachlässigem Umgang und Khalwah mit nahen männlichen Verwandten des Ehemanns.",
+      "vollstaendigeAussage": "ʿUqbah ibn ʿĀmir رضي الله عنه berichtete, dass der Prophet ﷺ vor dem Eintritt zu fremden Frauen warnte. Auf die Frage nach dem ḥamw, also nahen männlichen Verwandten des Ehemanns wie dem Bruder, antwortete er: „Der ḥamw ist der Tod.“ Die Warnung richtet sich gegen die besondere Nachlässigkeit, die gerade bei vertrauten Familienbeziehungen entstehen kann.",
+      "lehre": "Verwandtschaft mit dem Ehemann macht einen Mann nicht automatisch zum Maḥram der Ehefrau.",
+      "quellenart": "sahih",
+      "quellenstatus": "geprueft",
+      "quellenanzeige": "Quelle: Ṣaḥīḥ al-Bukhārī, Nr. 5232; Ṣaḥīḥ Muslim, Nr. 2172.",
       "direktnachweisText": "→ Quelle öffnen",
-      "direktnachweisUrl": "",
+      "direktnachweisUrl": "https://dorar.net/hadith/sharh/151192",
       "direktnachweisArt": "Webseite",
-      "freigabeDurchSerhat": false,
-      "schlagwoerter": [],
-      "hinweise": "Innere Vorbereitung. Unsichtbar, bis Quelle, Direktnachweis und Prüfung feststehen.",
-      "atharPruefung": "Bei der Endprüfung Ṣaḥābah-, Salaf- und Athar-Aussagen mit Direktnachweis prüfen."
+      "freigabeDurchSerhat": true,
+      "schlagwoerter": [
+        "Schwager",
+        "Ḥamw",
+        "Khalwah",
+        "Nicht-Maḥram"
+      ],
+      "hinweise": "Nicht pauschal alle Verwandten des Ehemanns gleichsetzen; echte Maḥārim bleiben ausgenommen.",
+      "atharPruefung": "Ṣaḥīḥ-al-Bukhārī-/Muslim-Grundlage geprüft."
     }
   ]
 }
