@@ -46,6 +46,15 @@ function runKidsDesignGuard() {
   if (!/KIDS_NO_SYSTEM_EMOJI/.test(doc) || !/keine.*Emojis/i.test(doc)) {
     failed += fail(`${KIDS_DOC}: Emoji-Verbot muss dokumentiert sein`);
   }
+  if (!/KIDS_GLOBAL_CAPSULE_WIDTH/.test(doc)) {
+    failed += fail(`${KIDS_DOC}: globale Kapselbreite muss dokumentiert sein`);
+  }
+  if (!/KIDS_GLOBAL_TOUCH_GLOW/.test(doc)) {
+    failed += fail(`${KIDS_DOC}: globaler Touch-Glow muss dokumentiert sein`);
+  }
+  if (!html.includes("/kids/kids-touch-rail.css?v=") || !html.includes("/kids/kids-card-interaction.js?v=")) {
+    failed += fail(`${KIDS_HTML}: globales Kapsel-/Touch-System fehlt`);
+  }
   if (!html.includes("kid-icon") || !html.includes("function kidsIconMarkup")) {
     failed += fail(`${KIDS_HTML}: Icon-System kidsIconMarkup/kid-icon fehlt`);
   }
