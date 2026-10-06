@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v110-deen-dedicated1202",
-  "label": "KIDS · V1.08.29",
-  "releasedAt": "2026-10-06T22:28:00+02:00",
-  "note": "V1202 trennt „Den Dīn lernen“ vollständig vom allgemeinen Hörwelten-/Story-Hub. Beim Öffnen erscheinen ausschließlich die sechs Dīn-Lern-Erzählungen. Dīn nutzt dieselbe Detail-/Popup-Reader-Button-Architektur wie Propheten und Ṣaḥābah; der alte universelle ghPlayer wird für Dīn nicht mehr verwendet. Alle sieben Dīn-Motive wurden durch deutlich fotorealistischere lokale Adobe-/Runway-Assets ersetzt.",
+  "buildId": "kids-shell-v111-home-hero1203",
+  "label": "KIDS · V1.08.30",
+  "releasedAt": "2026-10-06T22:36:00+02:00",
+  "note": "V1203 korrigiert die Startseite nach der 22:19-iPhone-Referenz: DĀR AL TAWḤĪD ist etwas kleiner und bleibt vollständig im Display, eine deutlich sichtbare statische Sternschnuppe sitzt wieder im oberen Nachthimmel, und der dunkle rechteckige Hintergrundstreifen hinter „Deine Hörwelten“ ist entfernt. Die Weiterhören-Kapsel behält ihre eigene dezente Schattierung; Hintergrund, Kids-Balloon-Effekt und Dīn-Bereich bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1202",
+    "serviceWorkerCache": "v1203",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -848,7 +848,7 @@
       "sahabiyyat story rows"
     ],
     "homeWordmark": "DĀR AL TAWḤĪD fully visible curved gold",
-    "homeWordmarkSafeMargins": true,
+    "homeWordmarkSafeMargins": "26px phone-safe-v1203",
     "startPageTouchedByInteractionChange": false,
     "startPageArrowStyle": "unchanged",
     "globalCardArrowsOutsideStart": false,
@@ -913,8 +913,12 @@
     "deenLearningCssVersion": 1,
     "deenLearningPlayer": "shared-popup-reader-buttons-same-as-prophets-sahaba",
     "deenLearningOldGhPlayer": false,
-    "deenLearningArtworkRelease": "photoreal-v1202"
+    "deenLearningArtworkRelease": "photoreal-v1202",
+    "homeHeroPolish": "v1203-title-fit-static-shooting-star-clean-worlds-background",
+    "homeShootingStar": "static-css-overlay-no-motion-v1203",
+    "homeWorldsBackground": "transparent-no-rectangular-band-v1203",
+    "homeResumeShadow": "contained-soft-shadow-v1203"
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T22:28:00+02:00"
+  "deployTrigger": "2026-10-06T22:36:00+02:00"
 }
