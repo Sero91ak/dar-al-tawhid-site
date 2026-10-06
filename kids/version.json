@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v106-home-cinema1179",
-  "label": "KIDS · V1.08.06",
-  "releasedAt": "2026-10-06T12:52:00+02:00",
-  "note": "V1179 korrigiert den Startseiten-Hero sichtbar: neuer semi-realistischer Adobe-Hintergrund, neuer Runway-Cinema-Loop, iOS/Safari Range-sicheres Video-Streaming statt CacheFirst, aktiver Autoplay-Recovery, deutlich größere animierte DĀR AL TAWḤĪD-Marke, bewusst lesbarer zweizeiliger Salām und nahtloser dunkler Übergang in Weiterhören.",
+  "buildId": "kids-shell-v107-home-cinema1180",
+  "label": "KIDS · V1.08.07",
+  "releasedAt": "2026-10-06T13:02:00+02:00",
+  "note": "V1180 verstärkt die sichtbare Startseitenbewegung: größerer DĀR AL TAWḤĪD-Hero, stärkerer KIDS-Ballonrhythmus, sichtbare Wolken-, Stern-, Haze- und Lichtbewegung zusätzlich zum echten Runway-Video, direkter MP4-src für iOS, ausgewogener zweizeiliger Salām und nahtloser Übergang in die App.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1179",
+    "serviceWorkerCache": "v1180",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -712,10 +712,10 @@
     "duaOwnerVoice": "recovered-existing-assets-v1171",
     "duaVoicePaidGenerations": 0,
     "duaVoiceEntries": 10,
-    "homeAudioCore": "v1179",
+    "homeAudioCore": "v1180",
     "alphabetRuntimeRemoved": true,
     "alphabetArchivedAssetsRetained": true,
-    "homeHeroBrand": "larger-dar-gold-shimmer-balanced-kids-v1179",
+    "homeHeroBrand": "extra-large-gold-dar-and-balloon-kids-v1180",
     "homeQuizVisible": false,
     "homeDailyJourneyVisible": false,
     "homeKnowledgeCardVisible": false,
@@ -727,10 +727,10 @@
       "quran": "/kids/assets/kids-home-v1176/world-quran.png",
       "dua": "/kids/assets/kids-home-v1176/world-dua.png"
     },
-    "homeHeroCopyWrap": "intentional-balanced-salam-two-line-v1179",
+    "homeHeroCopyWrap": "balanced-two-line-salam-v1180",
     "homeWordmarkPosition": "viewport-centered-transform-reset-v1177",
     "homeWordmarkClippingFixed": true,
-    "homeHeroCinema": "real-video-loop-range-safe-v1179",
+    "homeHeroCinema": "real-video-plus-visible-css-cinema-v1180",
     "homeHeroCinemaDurationSeconds": 6,
     "homeHeroCinemaResolution": "720x1280",
     "homeHeroCinemaAsset": "/kids/assets/kids-home-v1179/hero-cinema.mp4",
@@ -741,8 +741,9 @@
     "homeReducedMotionFallback": true,
     "homeHeroCinemaStreaming": "network-range-safe-ios-v1179",
     "homeHeroCinemaAutoplay": "muted-playsinline-recovery-v1179",
-    "homeHeroVisualStyle": "semi-realistic-cinematic-illustration-v1179"
+    "homeHeroVisualStyle": "semi-realistic-cinematic-illustration-v1179",
+    "homeHeroVideoSrc": "direct-video-src-v1180"
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T12:52:00+02:00"
+  "deployTrigger": "2026-10-06T13:02:00+02:00"
 }
