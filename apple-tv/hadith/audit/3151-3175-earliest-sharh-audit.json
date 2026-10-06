@@ -1,0 +1,158 @@
+{
+  "project": "DĀR AL TAWḤĪD – Earliest Šarḥ Audit",
+  "range": "HAD-3151-3175",
+  "series": "3151-3250",
+  "status": "completed-earliest-sharh-audit",
+  "createdAfterRuleChange": true,
+  "ruleVersion": 6,
+  "reason": "HAD-3151–3175 eröffnet die Serie 3151–3250 und setzt Ṣaḥīḥ Muslim von Muslim 2940 bis Muslim 2955 fort. Die Quellen wurden gegen aktuelle Dorar-Nachweise zu Ṣaḥīḥ Muslim kontrolliert. Der lange Muslim-2940-Bericht und der Ǧassāsah-Bericht Muslim 2942 wurden nur nach eigenständigen Aussagekernen segmentiert. Bereits vorhandene Kerne wurden bewusst nicht erneut angelegt: die vierzigtägige Dajjāl-Dauer (bereits HAD-3143), die Tötung des Dajjāl durch ʿĪsā عليه السلام (HAD-3094), der Wind, der die Gläubigen fortnimmt (HAD-3106), sowie das Verbot von Makkah/Madīnah für den Dajjāl (HAD-3132/HAD-3148). Muslim 2950–2951 wurde als gemeinsamer Aussagekern zur Nähe der Stunde geführt; Muslim 2954 wurde nicht in drei künstliche Karten zerlegt; Muslim 2955 wurde nur für die zwei noch eigenständigen Kerne 'vierzig zwischen den Nafḫatayn' und 'ʿaǧb aḏ-ḏanab' verwendet. Früheste-Šarḥ-Priorität al-Māzirī → Qāḍī ʿIyāḍ wurde geprüft; für diesen Block wird Qāḍī ʿIyāḍ, Ikmāl al-Muʿlim, Bd. 8, als direkter früher Muslim-Kommentar geführt. Unsichere Druckseiten wurden nicht geschätzt.",
+  "completionRequirement": {
+    "allRecordsHaveSharh": true,
+    "exactReferenceRequired": true,
+    "noEstimatedPages": true,
+    "duplicateCheckCompleted": true,
+    "semanticDuplicateCheckCompleted": true,
+    "recordTypeAuditCompleted": true,
+    "sourceHadithNumbersChecked": true,
+    "globalCatalogUpdated": true,
+    "appleTvScreensaverUpdated": true,
+    "webIosAndroidLibraryLoaderUpdated": true,
+    "seriesProgress": "25/100",
+    "globalPushCompleted": true
+  },
+  "dedupeDecisions": [
+    "Muslim 2940: Dajjāl duration not duplicated because already represented by HAD-3143 from Muslim 2937a",
+    "Muslim 2940: killing of Dajjāl by ʿĪsā not duplicated because already represented by HAD-3094",
+    "Muslim 2940: wind taking believers not duplicated because already represented by HAD-3106",
+    "Muslim 2940 segmented only into new substantive resurrection/end-time statement cores",
+    "Muslim 2941 represented as one combined near-sequential sun-from-west/beast core",
+    "Muslim 2942 segmented by independent Ǧassāsah narrative/sign cores; Makkah/Madīnah exclusion omitted as already represented",
+    "Muslim 2943 represented only by the new three-earthquakes/expulsion core; general non-entry into Makkah/Madīnah not duplicated",
+    "Muslim 2945 split into two independent cores: flight to mountains and scarcity of Arabs",
+    "Muslim 2950–2951 merged into one 'Prophet and Hour like two fingers' core",
+    "Muslim 2952–2953 not multiplied into the catalog because the local-generation 'hour' wording is not needed for a new independent core in this block",
+    "Muslim 2954 consolidated into one sudden-Hour everyday-activity core",
+    "Muslim 2955: water-regrowth clause not repeated because HAD-3154 already captures the same core from Muslim 2940; only interval and tailbone cores retained"
+  ],
+  "sourceRange": [
+    "Muslim 2940",
+    "Muslim 2941",
+    "Muslim 2942",
+    "Muslim 2943",
+    "Muslim 2944",
+    "Muslim 2945",
+    "Muslim 2946",
+    "Muslim 2947",
+    "Muslim 2950–2951",
+    "Muslim 2954",
+    "Muslim 2955"
+  ],
+  "readyForImmediateTargets": [
+    "appleTvScreensaver",
+    "testAppHadithLibrary",
+    "iosHadithLibrary",
+    "androidWebAppAndWebsite"
+  ],
+  "records": [
+    {
+      "id": "HAD-3151",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3152",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3153",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3154",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3155",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3156",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3157",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3158",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3159",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3160",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3161",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3162",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3163",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3164",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3165",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3166",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3167",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3168",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3169",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3170",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3171",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3172",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3173",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3174",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    },
+    {
+      "id": "HAD-3175",
+      "auditStatus": "verified-direct-early-muslim-sharh"
+    }
+  ]
+}
