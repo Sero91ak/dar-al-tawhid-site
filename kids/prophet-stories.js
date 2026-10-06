@@ -176,7 +176,7 @@ function renderCards(){
   grid.innerHTML=regularItems.map((item,index)=>{
     const text=buildText(item);
     const rawSummary=String(item.summary||"").replace(/\s+/g," ").trim();
-    const shortSummary=rawSummary.length>78?(rawSummary.slice(0,75).replace(/\s+\S*$/,"")+"…"):rawSummary;
+    const shortSummary=rawSummary;
     const meta=(item.disputed?"Ikhtilāf · ":"")+durationLabel(item,text)+" · Alter "+age();
     return '<button class="ps-story-row" data-ps-id="'+esc(item.id)+'" type="button">'+
       '<img class="ps-row-scene" src="'+esc(cardUrl(item))+'" data-fallback="'+esc(item.cover||"")+'" alt="" decoding="async" loading="lazy">'+
