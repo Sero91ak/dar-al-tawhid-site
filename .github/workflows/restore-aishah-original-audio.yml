@@ -1,0 +1,223 @@
+name: Restore Aishah Original Audio
+
+on:
+  push:
+    paths:
+      - ".github/workflows/restore-aishah-original-audio.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: restore-aishah-original-audio
+  cancel-in-progress: false
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Sync latest main
+        shell: bash
+        run: git pull --rebase origin main
+
+      - name: Ensure ffprobe
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+
+      - name: Download and verify Aishah owner original
+        env:
+          SOURCE_URL: "https://at.adobe.com/DF0nYEn2V8poucac"
+          EXPECTED_BYTES: "6920787"
+          EXPECTED_SHA256: "23826c5f9ea6e1af9d50a7a79fcafcbc0668b0c9f64f17211c8ce9a4f94005d5"
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 --retry-delay 2 --connect-timeout 20 "$SOURCE_URL" -o /tmp/aishah-original.mp3
+          test "$(stat -c%s /tmp/aishah-original.mp3)" = "$EXPECTED_BYTES"
+          echo "$EXPECTED_SHA256  /tmp/aishah-original.mp3" | sha256sum -c -
+
+          python3 - <<'PY'
+          import json,subprocess
+          p="/tmp/aishah-original.mp3"
+          data=json.loads(subprocess.check_output([
+            "ffprobe","-v","error",
+            "-show_entries","stream=codec_name,sample_rate,channels,bit_rate:format=duration,size,bit_rate",
+            "-of","json",p
+          ],text=True))
+          s=data["streams"][0]
+          assert s["codec_name"]=="mp3", s
+          assert int(s["sample_rate"])==44100, s
+          assert int(s["channels"])==1, s
+          assert int(s["bit_rate"])==128000, s
+          d=float(data["format"]["duration"])
+          assert 431.0 <= d <= 432.0, d
+          print(json.dumps(data,ensure_ascii=False))
+          PY
+
+          mkdir -p kids/assets/sahabiyyat-story-audio/aishah
+          cp /tmp/aishah-original.mp3 kids/assets/sahabiyyat-story-audio/aishah/master.mp3
+          rm -f kids/assets/sahabiyyat-story-audio/aishah/master-ce85c82fa65a9d.mp3
+
+      - name: Bind original Aishah master without changing read-along timings
+        env:
+          PUBLISHED_AT: "2026-10-06T14:10:00Z"
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs=require("fs");
+          const manifestPath="kids/data/sahabiyyat-stories.json";
+          const kidsVersionPath="kids/version.json";
+          const voiceVersionPath="voice-studio/version.json";
+
+          const manifest=JSON.parse(fs.readFileSync(manifestPath,"utf8"));
+          const kidsVersion=JSON.parse(fs.readFileSync(kidsVersionPath,"utf8"));
+          const voiceVersion=JSON.parse(fs.readFileSync(voiceVersionPath,"utf8"));
+          const item=(manifest.items||[]).find(x=>x&&x.id==="aishah");
+          if(!item) throw new Error("Aishah story missing");
+
+          const nextVersion=Math.max(Number(manifest.version||0)+1,28);
+          const url="/kids/assets/sahabiyyat-story-audio/aishah/master.mp3?v="+nextVersion+"-original";
+          const ages=["4-5","6-8","9-10"];
+          item.audio=item.audio&&typeof item.audio==="object"?item.audio:{};
+
+          for(const age of ages){
+            const prev=item.audio[age]&&typeof item.audio[age]==="object"?item.audio[age]:{};
+            const timings=Array.isArray(prev.timings)?prev.timings:[];
+            item.audio[age]={
+              ...prev,
+              status:"ready",
+              url,
+              durationSec:431.490563,
+              bytes:6920787,
+              sha256:"23826c5f9ea6e1af9d50a7a79fcafcbc0668b0c9f64f17211c8ce9a4f94005d5",
+              mime:"audio/mpeg",
+              codec:"mp3",
+              bitRateKbps:128,
+              channels:1,
+              sampleRateHz:44100,
+              source:"DĀR owner original upload · byte-identical",
+              sourceSpeaker:"Serhat Abu Malik",
+              sourceFile:"Sahabiyyah ʿĀʾišah bint Abī Bakr Geschichte .mp3",
+              manual:true,
+              manualUpload:true,
+              ownerApproved:true,
+              originalOwnerUpload:true,
+              originalBytesPreserved:true,
+              transcoded:false,
+              deliveryProfile:"owner-original-byte-identical",
+              modes:["read","listen"],
+              technicalQaPassed:true,
+              publishedAt:process.env.PUBLISHED_AT,
+              masterAudio:true,
+              masterAgeRange:"4-10",
+              allAges:true,
+              timings
+            };
+          }
+
+          item.voiceProduction={
+            ...(item.voiceProduction||{}),
+            status:"audio-complete",
+            audioRefreshRequired:false,
+            sourceDataVersion:nextVersion,
+            publishedAges:ages,
+            lastPublishedAt:process.env.PUBLISHED_AT,
+            singleMasterAudio:true,
+            masterAudioUrl:url,
+            masterAgeRange:"4-10",
+            originalOwnerUpload:true,
+            originalBytesPreserved:true,
+            transcoded:false,
+            deliveryProfile:"owner-original-byte-identical",
+            ownerAudioSha256:"23826c5f9ea6e1af9d50a7a79fcafcbc0668b0c9f64f17211c8ce9a4f94005d5",
+            ownerAudioBytes:6920787,
+            ownerAudioDurationSec:431.490563
+          };
+
+          manifest.version=nextVersion;
+          manifest.updatedAt=process.env.PUBLISHED_AT;
+
+          kidsVersion.visualSystem=kidsVersion.visualSystem||{};
+          Object.assign(kidsVersion.visualSystem,{
+            sahabiyyatDataVersion:nextVersion,
+            aishahOwnerAudio:true,
+            aishahOwnerAudioOriginal:true,
+            aishahOwnerAudioCodec:"mp3-128k-mono-original",
+            aishahOwnerAudioBytes:6920787,
+            aishahOwnerAudioSha256:"23826c5f9ea6e1af9d50a7a79fcafcbc0668b0c9f64f17211c8ce9a4f94005d5",
+            aishahOwnerAudioDurationSec:431.490563,
+            aishahOwnerAudioTarget:"/kids/assets/sahabiyyat-story-audio/aishah/master.mp3",
+            ownerOriginalAudioPolicy:"preserve-uploaded-bytes-no-transcode"
+          });
+          kidsVersion.updatedAt="2026-10-06";
+
+          if(voiceVersion.sahabiyyatKidsIntegration&&typeof voiceVersion.sahabiyyatKidsIntegration==="object"){
+            Object.assign(voiceVersion.sahabiyyatKidsIntegration,{
+              masterDataVersion:nextVersion,
+              kidsDataVersion:nextVersion,
+              ownerOriginalAudioPolicy:"preserve-uploaded-bytes-no-transcode",
+              aishahOwnerAudio:true,
+              aishahOwnerAudioStatus:"audio-complete",
+              aishahOwnerAudioOriginal:true,
+              aishahOwnerAudioDurationSec:431.490563,
+              aishahOwnerAudioMasterAgeRange:"4-10",
+              aishahOwnerAudioCodec:"mp3-128k-mono-original",
+              aishahOwnerAudioBytes:6920787,
+              aishahOwnerAudioSha256:"23826c5f9ea6e1af9d50a7a79fcafcbc0668b0c9f64f17211c8ce9a4f94005d5",
+              aishahOwnerAudioTarget:"/kids/assets/sahabiyyat-story-audio/aishah/master.mp3"
+            });
+          }
+          voiceVersion.updatedAt="2026-10-06";
+
+          fs.writeFileSync(manifestPath,JSON.stringify(manifest,null,2)+"\n");
+          fs.writeFileSync(kidsVersionPath,JSON.stringify(kidsVersion,null,2)+"\n");
+          fs.writeFileSync(voiceVersionPath,JSON.stringify(voiceVersion,null,2)+"\n");
+          NODE
+
+      - name: Validate Aishah original audio binding
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum kids/assets/sahabiyyat-story-audio/aishah/master.mp3
+          test "$(stat -c%s kids/assets/sahabiyyat-story-audio/aishah/master.mp3)" = "6920787"
+          node <<'NODE'
+          const fs=require("fs");
+          const m=JSON.parse(fs.readFileSync("kids/data/sahabiyyat-stories.json","utf8"));
+          const i=m.items.find(x=>x.id==="aishah");
+          if(!i) throw new Error("Aishah missing");
+          for(const age of ["4-5","6-8","9-10"]){
+            const a=i.audio?.[age];
+            if(!a||a.bytes!==6920787||a.sha256!=="23826c5f9ea6e1af9d50a7a79fcafcbc0668b0c9f64f17211c8ce9a4f94005d5"||a.codec!=="mp3"||a.bitRateKbps!==128||a.transcoded!==false||a.originalBytesPreserved!==true) throw new Error("Aishah audio metadata mismatch "+age);
+            if(!Array.isArray(a.timings)||a.timings.length!==20) throw new Error("Aishah read-along timings lost "+age);
+          }
+          NODE
+          grep -F 'kids/assets/sahabiyyat-story-audio/*' scripts/optimize-app-media.sh >/dev/null
+
+      - name: Commit Aishah original master
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "DAR Kids Audio Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A \
+            kids/assets/sahabiyyat-story-audio/aishah \
+            kids/data/sahabiyyat-stories.json \
+            kids/version.json \
+            voice-studio/version.json
+          git diff --cached --stat
+          git commit -m "Kids: restore Aishah original owner audio"
+          git pull --rebase origin main
+          git push origin HEAD:main
