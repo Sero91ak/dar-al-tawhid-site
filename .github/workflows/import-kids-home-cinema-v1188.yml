@@ -1,0 +1,46 @@
+name: Import Kids Home Cinema V1188
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-kids-home-cinema-v1188
+  cancel-in-progress: false
+
+jobs:
+  import:
+    if: ${{ github.actor != 'github-actions[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download generated cinema asset
+        env:
+          CINEMA_URL: "https://dnznrvs05pmza.cloudfront.net/seedance_2_mini/cgt-20261006230034-t7dsb/Locked_off_camera__Preserve_this_exact_mobile_hero_composition_and_all_architecture__palms__lanterns.mp4?_jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlIYXNoIjoiMzcyOTk0ZDU1NWUxOTE2MCIsImJ1Y2tldCI6InJ1bndheS10YXNrLWFydGlmYWN0cyIsInN0YWdlIjoicHJvZCIsImV4cCI6MTc5MTQ1OTE1N30.06AEC48VhaaDUNXJTcrvFp4dnZBcuwvl4szXy2lMJiI"
+        run: |
+          set -euo pipefail
+          mkdir -p kids/assets/kids-home-v1188
+          curl -L --fail --retry 3 --retry-delay 2 "$CINEMA_URL" -o kids/assets/kids-home-v1188/hero-sky.mp4
+          test -s kids/assets/kids-home-v1188/hero-sky.mp4
+          bytes="$(wc -c < kids/assets/kids-home-v1188/hero-sky.mp4)"
+          echo "Downloaded $bytes bytes"
+          if [ "$bytes" -lt 100000 ]; then
+            echo "Cinema asset unexpectedly small" >&2
+            exit 1
+          fi
+
+      - name: Commit asset and remove one-shot importer
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/assets/kids-home-v1188/hero-sky.mp4
+          git rm .github/workflows/import-kids-home-cinema-v1188.yml
+          git commit -m "Kids v1188: store locked-camera cinema asset"
+          git push origin HEAD:main
