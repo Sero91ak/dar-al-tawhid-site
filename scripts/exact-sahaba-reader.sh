@@ -2,13 +2,13 @@
 set -euo pipefail
 
 VOICE_API="${VOICE_API:-https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api}"
-IDS=(abu-bakr umar uthman ali talha zubayr abd-ar-rahman sad said abu-ubaydah)
+IDS=(umar uthman ali talha zubayr abd-ar-rahman sad said abu-ubaydah)
 
 python3 - <<'PY'
 import json
 from pathlib import Path
 d=json.loads(Path("kids/data/mubashshirun-stories.json").read_text(encoding="utf-8"))
-ids=["abu-bakr","umar","uthman","ali","talha","zubayr","abd-ar-rahman","sad","said","abu-ubaydah"]
+ids=["umar","uthman","ali","talha","zubayr","abd-ar-rahman","sad","said","abu-ubaydah"]
 by={str(x.get("id")):x for x in d.get("items",[])}
 for sid in ids:
     item=by.get(sid)
@@ -35,6 +35,17 @@ for sid in "${IDS[@]}"; do
         -H "Accept: application/json" \
         -F "file=@$audio;type=audio/mpeg" \
         --form-string "text=$(cat "$story")" || true)"
+      if [ "$code" != "200" ]; then
+        echo "$sid worker alignment HTTP $code"
+        python3 - "$result" <<'PYERR' || true
+import json,sys
+try:
+    d=json.load(open(sys.argv[1]))
+    print("worker:", d.get("error") or d)
+except Exception:
+    print("worker response unreadable")
+PYERR
+      fi
       if [ "$code" = "200" ] && python3 - "$result" <<'PY2'
 import json,sys
 d=json.load(open(sys.argv[1]))
@@ -103,7 +114,7 @@ import json,re,time
 from pathlib import Path
 data_path=Path("kids/data/mubashshirun-stories.json")
 d=json.loads(data_path.read_text(encoding="utf-8"))
-ids=["abu-bakr","umar","uthman","ali","talha","zubayr","abd-ar-rahman","sad","said","abu-ubaydah"]
+ids=["umar","uthman","ali","talha","zubayr","abd-ar-rahman","sad","said","abu-ubaydah"]
 by={str(x.get("id")):x for x in d.get("items",[])}
 stamp=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
 
