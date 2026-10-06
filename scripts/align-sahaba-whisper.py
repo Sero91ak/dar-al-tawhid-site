@@ -93,7 +93,7 @@ if len(items)!=10:
     raise SystemExit(f"Expected 10 Sahaba, got {len(items)}")
 
 model_name=os.environ.get("WHISPER_MODEL","small").strip() or "small"
-model=WhisperModel(model_name,device="cpu",compute_type="int8",cpu_threads=4)
+beam_size=int(os.environ.get("WHISPER_BEAM_SIZE","5"))\nmodel=WhisperModel(model_name,device="cpu",compute_type="int8",cpu_threads=4)
 stamp=time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime())
 report=[]
 
@@ -115,7 +115,7 @@ for item in items:
     duration=ffprobe_duration(audio)
 
     segments,info=model.transcribe(
-        str(audio),language="de",beam_size=5,word_timestamps=True,
+        str(audio),language="de",beam_size=beam_size,word_timestamps=True,
         vad_filter=True,vad_parameters={"min_silence_duration_ms":180},
         condition_on_previous_text=True
     )
