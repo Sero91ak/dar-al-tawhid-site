@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.23</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.24</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3181,7 +3181,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v108-reference-hero1196";
+const KIDS_BUILD_ID="kids-shell-v108-reference-hero1197";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6252,7 +6252,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v108-reference-hero1196";
+  var KIDS_BUILD_ID="kids-shell-v108-reference-hero1197";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6268,7 +6268,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1196",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1197",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -9392,6 +9392,9 @@ html[data-view="stories"] #view-stories > :last-child{
 #view-today .hero{
   overflow:hidden!important;
   background:#061b26!important;
+  margin:calc(-1 * var(--safe-top)) calc(50% - 50vw) 0!important;
+  width:100vw!important;
+  max-width:100vw!important;
 }
 
 /* Local Runway clip: zero CSS camera movement. */
@@ -9824,7 +9827,7 @@ html[data-view="stories"] #view-stories > :last-child{
 
   <script src="/kids/kids-card-interaction.js?v=2" defer></script>
 
-<style id="kids-home-reference-exact-v1196">
+<style id="kids-home-reference-exact-v1197">
 /* V1196 — approved screenshot direction.
    Exact static reference artwork, center/cover framing, no background motion.
    Brand stays real text (Safari-safe), but regains the larger luminous curved look. */
@@ -9849,7 +9852,7 @@ html[data-view="stories"] #view-stories > :last-child{
       rgba(4,22,31,.13) 73%,
       rgba(6,27,38,.55) 91%,
       #061b26 100%),
-    url("/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1196") center 50%/cover no-repeat!important;
+    url("/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1197") center 50%/cover no-repeat!important;
   background-position:center 50%!important;
   background-size:cover!important;
   background-repeat:no-repeat!important;
@@ -9942,7 +9945,7 @@ html[data-view="stories"] #view-stories > :last-child{
   -webkit-text-stroke:.55px rgba(78,42,8,.60)!important;
   paint-order:stroke fill!important;
   transform-origin:50% 100%!important;
-  animation:darReferenceGlow1196 7.6s ease-in-out infinite!important;
+  animation:darReferenceGlow1197 7.6s ease-in-out infinite!important;
 }
 
 /* Shallow letter-by-letter arch, matching the reference while keeping every glyph fully visible. */
@@ -9972,7 +9975,7 @@ html[data-view="stories"] #view-stories > :last-child{
   pointer-events:none!important;
 }
 
-@keyframes darReferenceGlow1196{
+@keyframes darReferenceGlow1197{
   0%,18%,100%{background-position:0% 50%;filter:brightness(.99)}
   45%{background-position:100% 50%;filter:brightness(1.13)}
   70%{background-position:100% 50%;filter:brightness(1.02)}
