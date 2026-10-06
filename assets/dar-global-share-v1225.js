@@ -428,6 +428,12 @@
   document.addEventListener("click",function(ev){
     var frauenOwned=ev.target&&ev.target.closest?ev.target.closest("[data-frauen-share]"):null;
     if(frauenOwned)return; // Frauenbereich besitzt seine Share-Aktionen exklusiv (women-historical Profil).
+    var linkBtn=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-copy-link]"):null;
+    if(linkBtn){
+      ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
+      copyPlainText(linkBtn.getAttribute("data-share-url")||location.href);
+      return;
+    }
     var copyBtn=ev.target&&ev.target.closest?ev.target.closest("[data-share-copy],[data-post-copy],[data-ilm-copy-answer],[data-post-share-channel=\"copy\"]"):null;
     if(copyBtn){
       ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
@@ -464,7 +470,35 @@
     }
   },true);
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
-  function boot(){enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
+  function ensureShareCardStyle(){
+    if(document.getElementById("darShareCardStyleV1233"))return;
+    var css='.dar-share-card{position:relative;overflow:hidden;margin:18px 0 12px!important;padding:15px 14px 13px!important;border:1px solid var(--theme-share-btn-border,var(--line))!important;border-radius:22px!important;background:var(--theme-share-panel-bg,radial-gradient(circle at 16% 0%,color-mix(in srgb,var(--gold2,#d9bf79) 9%,transparent),transparent 42%),linear-gradient(145deg,color-mix(in srgb,var(--card) 94%,transparent),color-mix(in srgb,var(--bg) 93%,transparent)))!important;box-shadow:0 10px 26px rgba(4,14,15,.10),inset 0 1px 0 rgba(255,255,255,.055)!important}'
+      +'.dar-share-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin:0 2px 12px}'
+      +'.dar-share-head span{display:block;margin-bottom:3px;color:var(--gold2,var(--gold,#d9bf79))!important;-webkit-text-fill-color:var(--gold2,var(--gold,#d9bf79))!important;font-size:8.8px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}'
+      +'.dar-share-head h3{margin:0!important;color:var(--ink,var(--text))!important;-webkit-text-fill-color:var(--ink,var(--text))!important;font-family:var(--serif,Georgia,serif)!important;font-size:20px!important;line-height:1.12!important;font-weight:650!important}'
+      +'.dar-share-head>p{margin:0;color:var(--muted)!important;-webkit-text-fill-color:var(--muted)!important;font-size:10.5px;line-height:1.3;text-align:right}'
+      +'.dar-share-card .dar-share-primary,.dar-share-card .share-flat-v410{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important}'
+      +'.dar-share-btn{appearance:none;display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:78px!important;padding:9px 5px 8px!important;border:1px solid var(--line)!important;border-radius:16px!important;background:color-mix(in srgb,var(--card) 92%,transparent)!important;cursor:pointer}'
+      +'.dar-share-btn b{font-size:10.2px!important;line-height:1!important;font-weight:800!important;color:inherit!important;-webkit-text-fill-color:currentColor!important}'
+      +'.dar-share-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:color-mix(in srgb,currentColor 8%,transparent)}'
+      +'.dar-share-icon svg{width:22px;height:22px;fill:currentColor}'
+      +'html[data-theme] .dar-share-btn.wa{color:#18884a!important;-webkit-text-fill-color:#18884a!important;border-color:rgba(37,211,102,.27)!important;background:linear-gradient(145deg,rgba(37,211,102,.115),color-mix(in srgb,var(--card) 90%,transparent))!important}'
+      +'html[data-theme] .dar-share-btn.tg{color:#218ac3!important;-webkit-text-fill-color:#218ac3!important;border-color:rgba(42,171,238,.28)!important;background:linear-gradient(145deg,rgba(42,171,238,.11),color-mix(in srgb,var(--card) 90%,transparent))!important}'
+      +'html[data-theme] .dar-share-btn.ig{color:#b73570!important;-webkit-text-fill-color:#b73570!important;border-color:rgba(214,41,118,.25)!important;background:linear-gradient(145deg,rgba(214,41,118,.09),color-mix(in srgb,var(--card) 90%,transparent))!important}'
+      +'html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"]) .dar-share-btn.wa{color:#8ee7ad!important;-webkit-text-fill-color:#8ee7ad!important}'
+      +'html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"]) .dar-share-btn.tg{color:#9fdcff!important;-webkit-text-fill-color:#9fdcff!important}'
+      +'html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"]) .dar-share-btn.ig{color:#ffacd2!important;-webkit-text-fill-color:#ffacd2!important}'
+      +'.dar-share-tools{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px;margin-top:8px}'
+      +'.dar-share-tool{appearance:none;display:grid!important;grid-template-columns:22px minmax(0,1fr);align-items:center;gap:7px;min-height:42px!important;padding:8px 9px!important;border:1px solid var(--line)!important;border-radius:13px!important;background:color-mix(in srgb,var(--card) 74%,transparent)!important;color:var(--ink,var(--text))!important;-webkit-text-fill-color:var(--ink,var(--text))!important;cursor:pointer}'
+      +'.dar-share-tool svg{width:19px;height:19px;fill:currentColor}'
+      +'.dar-share-tool b{font-size:10px!important;line-height:1.15!important;font-weight:760!important;color:inherit!important;-webkit-text-fill-color:currentColor!important}'
+      +'.dar-share-tool--image{border-color:color-mix(in srgb,var(--gold2,#d9bf79) 34%,transparent)!important}'
+      +'.dar-share-note{margin:9px 2px 0!important;color:var(--muted)!important;-webkit-text-fill-color:var(--muted)!important;font-size:9.4px!important;line-height:1.4!important}'
+      +'html[data-theme] body.is-hadith-route .hadith-detail .post-aussage-text{border-left:2px solid color-mix(in srgb,var(--gold2,#d9bf79) 78%,transparent)!important;padding-left:14px!important}'
+      +'@media(max-width:420px){.dar-share-head>p{display:none}.dar-share-head h3{font-size:18px!important}}';
+    var tag=document.createElement("style");tag.id="darShareCardStyleV1233";tag.textContent=css;document.head.appendChild(tag);
+  }
+  function boot(){ensureShareCardStyle();enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
   window.darCopyText=copyPlainText;
   window.DARGlobalShare={version:"1250",createAndShare:createAndShare,renderFiles:renderFiles,copyText:copyPlainText,site:SITE,imageMode:"curated-pool-only",poolSize:GENERAL_SHARE_IMAGE_POOL.length};

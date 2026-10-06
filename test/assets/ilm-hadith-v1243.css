@@ -1875,3 +1875,9 @@ html[data-theme] body.is-hadith-route .hadith-detail .post-aussage-text > :last-
     max-width:none!important;
   }
 }
+
+/* Aussage wieder mit der linken Leselinie */
+html[data-theme] body.is-hadith-route .hadith-detail .post-aussage-text{
+  border-left:2px solid color-mix(in srgb,var(--gold2,var(--gold,#d9bf79)) 78%,transparent)!important;
+  padding-left:14px!important;
+}
