@@ -2706,7 +2706,7 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/assets/kids-open-v95.css?v=97">
 
 
-<link rel="stylesheet" href="/kids/prophet-stories.css?v=40">
+<link rel="stylesheet" href="/kids/prophet-stories.css?v=41">
 <link rel="stylesheet" href="/kids/mubashshirun-stories.css?v=29">
 <link rel="stylesheet" href="/kids/sahabiyyat-stories.css?v=7">
 <link rel="stylesheet" href="/kids/story-follow-reader.css?v=10">
@@ -6285,7 +6285,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1192",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1193",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
