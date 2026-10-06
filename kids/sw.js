@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1182";
-const KIDS_BUILD_ID="kids-shell-v108-story-cards1182";
+const CACHE_NAME="dar-al-tawhid-kids-v1183";
+const KIDS_BUILD_ID="kids-shell-v108-story-cards1183";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -61,7 +61,7 @@ const CORE_PRECACHE=[
   "/kids/story-hub.js?v=21",
   "/kids/navigation-v1182.js?v=1182",
   "/kids/kids-age-typography.css?v=5",
-  "/kids/story-library-cards.css?v=7",
+  "/kids/story-library-cards.css?v=8",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=4",
   "/kids/content-studio-feed.js?v=studio6",
@@ -263,6 +263,11 @@ self.addEventListener("fetch",function(event){
     return;
   }
   if(url.pathname==="/kids/data/quiz-audio.json"||url.pathname==="/kids/data/dua-audio.json"||url.pathname==="/kids/data/owner-voice-audio.json"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  /* STORY LIBRARY CSS: always network-first so visual repairs appear immediately on iOS/PWA. */
+  if(url.pathname==="/kids/story-library-cards.css"||url.pathname==="/kids/story-card-system.css"||url.pathname==="/kids/mubashshirun-stories.css"||url.pathname==="/kids/sahabiyyat-stories.css"){
     event.respondWith(networkFirst(request));
     return;
   }
