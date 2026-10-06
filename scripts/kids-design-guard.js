@@ -64,8 +64,8 @@ function runKidsDesignGuard() {
   if (!/KIDS_NO_PRECLICK_DURATION/.test(doc)) {
     failed += fail(`${KIDS_DOC}: Pre-Click-Dauer/Alter-Regel fehlt`);
   }
-  if (!html.includes("/kids/kids-touch-rail.css?v=7")) {
-    failed += fail(`${KIDS_HTML}: globales Karten-Interaktionssystem v7 fehlt`);
+  if (!html.includes("/kids/kids-touch-rail.css?v=9")) {
+    failed += fail(`${KIDS_HTML}: globales Karten-Interaktionssystem v9 fehlt`);
   }
   const forbiddenStaticArrowMarkup = [
     '<span class="arrow">›</span>',
