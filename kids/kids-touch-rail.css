@@ -475,3 +475,222 @@ html body #view-stories.ps-stories-home #syEntry .ms-entry-copy{
     transition:border-color .1s ease,box-shadow .1s ease!important;
   }
 }
+
+
+/* =========================================================
+   KIDS_GLOBAL_CAPSULE_WIDTH_V8
+   KIDS_GLOBAL_TOUCH_GLOW
+   Reference geometry = Qurʾān outer capsule on phone:
+   shell safe edge + 6px visual bleed = nearly edge-to-edge.
+   Whole-card glow is identical across all navigable capsules.
+   ========================================================= */
+:root{
+  --kids-capsule-bleed:6px;
+  --kids-capsule-line-rest:rgba(190,215,214,.17);
+  --kids-capsule-line-hover:rgba(244,211,128,.48);
+  --kids-capsule-line-press:rgba(250,220,145,.72);
+  --kids-capsule-glow-hover:
+    0 0 0 1px rgba(244,211,128,.085),
+    0 0 22px rgba(236,196,105,.095),
+    0 16px 36px rgba(0,0,0,.15);
+  --kids-capsule-glow-press:
+    0 0 0 1px rgba(250,220,145,.16),
+    0 0 30px rgba(240,202,116,.16),
+    0 14px 34px rgba(0,0,0,.16);
+}
+
+/* Shared card contract. */
+.kids-tap-card{
+  width:100%!important;
+  max-width:none!important;
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+  transform:none!important;
+  translate:none!important;
+  clip-path:none!important;
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease,
+    filter .15s ease!important;
+}
+
+/* Remove any old lift/bounce declarations from previous component CSS. */
+.kids-tap-card:hover,
+.kids-tap-card:active,
+.kids-tap-card.is-kids-pressed,
+.kids-tap-card:focus-visible{
+  transform:none!important;
+  translate:none!important;
+}
+
+@media(hover:hover) and (pointer:fine){
+  .kids-tap-card:hover{
+    border-color:var(--kids-capsule-line-hover)!important;
+    box-shadow:var(--kids-capsule-glow-hover)!important;
+    filter:brightness(1.025)!important;
+  }
+}
+
+.kids-tap-card:active,
+.kids-tap-card.is-kids-pressed{
+  border-color:var(--kids-capsule-line-press)!important;
+  box-shadow:var(--kids-capsule-glow-press)!important;
+  filter:brightness(1.045)!important;
+}
+
+.kids-tap-card:focus-visible{
+  outline:0!important;
+  border-color:var(--kids-capsule-line-press)!important;
+  box-shadow:
+    0 0 0 3px rgba(247,214,132,.14),
+    var(--kids-capsule-glow-press)!important;
+}
+
+/* Mobile reference width: same outer footprint as the approved Qurʾān capsule. */
+@media(max-width:699px){
+  #view-today .resume,
+  #view-today .choice,
+  #view-today .knowledge-card,
+  #view-stories > .ps-prophet-entry,
+  #view-stories > .ms-entry,
+  #view-stories > .story-row,
+  #view-quran > .full-quran{
+    width:calc(100% + (var(--kids-capsule-bleed) * 2))!important;
+    max-width:none!important;
+    margin-left:calc(0px - var(--kids-capsule-bleed))!important;
+    margin-right:calc(0px - var(--kids-capsule-bleed))!important;
+  }
+
+  /* Multi-card containers keep each card full-width inside the same safe geometry. */
+  #view-quran .quran-action,
+  #view-quran .surah-card,
+  #view-quran .verse-card,
+  #view-stories .story-row,
+  .gh-continue-card,
+  .gh-story,
+  .studio-content-card,
+  .studio-story-row{
+    width:100%!important;
+    max-width:none!important;
+  }
+}
+
+/* Story home: all three main worlds use exactly the same outer capsule width. */
+html body #view-stories.ps-stories-home #psProphetEntry,
+html body #view-stories.ps-stories-home #msEntry,
+html body #view-stories.ps-stories-home #syEntry{
+  width:calc(100% + (var(--kids-capsule-bleed) * 2))!important;
+  max-width:none!important;
+  margin-left:calc(0px - var(--kids-capsule-bleed))!important;
+  margin-right:calc(0px - var(--kids-capsule-bleed))!important;
+}
+
+/* Story libraries: use the same near-edge safe width, never a narrow centered column. */
+html body #psLibraryPage .ps-library-scroll,
+html body #msLibraryPage .ms-library-scroll,
+html body #syLibraryPage .ms-library-scroll{
+  padding-left:10px!important;
+  padding-right:10px!important;
+}
+
+html body #psLibraryPage .ps-library-list,
+html body #msLibraryPage .ms-list,
+html body #syLibraryPage .ms-list{
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+
+html body #psLibraryPage .ps-story-row,
+html body #msLibraryPage .ms-story-row,
+html body #syLibraryPage .ms-story-row{
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+
+/* Keep the restored large Ṣaḥābah / Ṣaḥābiyyāt card geometry. */
+html body #msLibraryPage .ms-story-row,
+html body #syLibraryPage .ms-story-row{
+  min-height:244px!important;
+  grid-template-columns:minmax(164px,43%) minmax(0,1fr)!important;
+}
+
+html body #msLibraryPage .ms-row-visual,
+html body #syLibraryPage .ms-row-visual,
+html body #msLibraryPage .ms-row-visual img,
+html body #syLibraryPage .ms-row-visual img{
+  min-height:244px!important;
+}
+
+/* Start-page lower cards get the same glow without touching the hero/wordmark. */
+#view-today .resume,
+#view-today .choice,
+#view-today .knowledge-card{
+  border-color:var(--kids-capsule-line-rest)!important;
+}
+
+/* No permanent forward arrows anywhere on the shared capsule system. */
+#view-today .resume .go,
+#view-today .choice .arrow,
+#view-today .knowledge-card .kgo,
+#view-stories .story-row .chev,
+#view-stories .ps-entry-action,
+#view-stories .ms-entry-action,
+#view-quran .surah-go,
+#view-quran .fgo,
+.gh-entry-action,
+.gh-continue-go,
+.gh-story-go,
+.gh-next button>b,
+.ps-muhammad-cta,
+.ps-row-go,
+.ms-row-go,
+.studio-story-row .chev{
+  display:none!important;
+}
+
+@media(max-width:390px){
+  html body #msLibraryPage .ms-story-row,
+  html body #syLibraryPage .ms-story-row{
+    min-height:238px!important;
+    grid-template-columns:minmax(150px,43%) minmax(0,1fr)!important;
+  }
+  html body #msLibraryPage .ms-row-visual,
+  html body #syLibraryPage .ms-row-visual,
+  html body #msLibraryPage .ms-row-visual img,
+  html body #syLibraryPage .ms-row-visual img{
+    min-height:238px!important;
+  }
+}
+
+@media(min-width:700px){
+  .kids-tap-card{
+    width:100%!important;
+    max-width:none!important;
+  }
+
+  html body #view-stories.ps-stories-home #psProphetEntry,
+  html body #view-stories.ps-stories-home #msEntry,
+  html body #view-stories.ps-stories-home #syEntry{
+    width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+
+  html body #msLibraryPage .ms-story-row,
+  html body #syLibraryPage .ms-story-row{
+    min-height:286px!important;
+    grid-template-columns:minmax(280px,42%) minmax(0,1fr)!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .kids-tap-card{
+    transition:border-color .1s ease,box-shadow .1s ease!important;
+    filter:none!important;
+  }
+}
