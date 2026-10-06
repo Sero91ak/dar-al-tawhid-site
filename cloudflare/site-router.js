@@ -212,6 +212,15 @@ function browserManifestResponse(request) {
   return new Response(request.method === "HEAD" ? null : JSON.stringify(manifest, null, 2), { status: 200, headers });
 }
 
+function liveFrauenNativeAddon() {
+  return [
+    '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-live-v1">',
+    '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-live-v1">',
+    '<script defer src="/assets/frauen/frauen-fiqh.js?v=frauen-live-v1"><\\/script>',
+    '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-live-v1"><\\/script>'
+  ].join("");
+}
+
 function publicWebsiteAddon() {
   return `
 <style id="darPublicWebsiteOnlyV1">
@@ -890,7 +899,13 @@ export default {
       if (request.method === "HEAD") {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
-      return new Response(assetResponse.body, {
+      let html = await assetResponse.text();
+      if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
+        const frauenAddon = liveFrauenNativeAddon();
+        html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;
+      }
+      headers.set("Content-Type", "text/html; charset=utf-8");
+      return new Response(html, {
         status: assetResponse.status,
         statusText: assetResponse.statusText,
         headers

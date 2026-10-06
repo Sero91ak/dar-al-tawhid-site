@@ -54,7 +54,7 @@ for (const rel of ["assets/premium-feed-app.js", "test/assets/premium-feed-app.j
   forbidToken(rel, src, "app-store-badge-de-official.svg", "legacy App Store footer badge");
 }
 
-const frauenRel = "test/assets/frauen/frauen-fiqh.js";
+const frauenRel = "assets/frauen/frauen-fiqh.js";
 const frauen = read(frauenRel);
 if (frauen) {
   requireToken(frauenRel, frauen, "FRAUEN_SHARE_IMAGE_POOL", "separate curated women image pool");

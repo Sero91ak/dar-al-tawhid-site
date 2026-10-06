@@ -97,7 +97,7 @@ if (liveFeed && testFeed && liveFeed !== testFeed) {
   failures.push("Live/Test Premium-Feed-Renderer sind nicht identisch");
 }
 
-const frauenRel = "test/assets/frauen/frauen-fiqh.js";
+const frauenRel = "assets/frauen/frauen-fiqh.js";
 const frauen = file(frauenRel);
 syntax(frauenRel, frauen);
 for (const token of [

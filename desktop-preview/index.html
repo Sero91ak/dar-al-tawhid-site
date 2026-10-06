@@ -2777,7 +2777,7 @@ button,input,select{font:inherit}
  function initWomenReal(){
   var out=document.getElementById("womenReal");if(!out)return;
   var cat=new URLSearchParams(location.search).get("cat");
-  jget("/test/data/frauen-bereiche-index.json").then(function(d){
+  jget("/data/frauen-bereiche-index.json").then(function(d){
    var active=(d.bereiche||[]).filter(function(x){return x.status==="aktiv"&&x.sichtbareEintraege>0});
    if(!cat){out.innerHTML='<div class="section-head"><h2>Frauen</h2><p>'+active.length+' geprüfte Bereiche</p></div><div class="women-list">'+active.map(function(x){return '<a class="women-item desktop-link" data-page="frauen" href="'+p("frauen","cat="+encodeURIComponent(x.kennung))+'"><span class="eyebrow">'+x.sichtbareEintraege+' Inhalte</span><h3>'+escBook(x.titel)+'</h3><p>'+escBook(x.untertitel)+'</p></a>'}).join("")+'</div>';return}
    var area=active.find(function(x){return x.kennung===cat});if(!area)throw 0;
@@ -2802,7 +2802,7 @@ button,input,select{font:inherit}
  }
  function initSearchReal(){
   var input=document.getElementById("siteSearch"),out=document.getElementById("searchResults");if(!input||!out)return;
-  Promise.all([loadRealPosts(),jget("/content/duas/duas.json"),jget("/data/library-publications.json"),jget("/data/prophets/index.json"),jget("/test/data/frauen-bereiche-index.json")]).then(function(all){
+  Promise.all([loadRealPosts(),jget("/content/duas/duas.json"),jget("/data/library-publications.json"),jget("/data/prophets/index.json"),jget("/data/frauen-bereiche-index.json")]).then(function(all){
    var items=[];
    all[0].forEach(function(x){items.push({type:"Beitrag",title:x.title,sub:x.speaker||x.category,url:postHref(x),page:"beitrag"})});
    (all[1]||[]).slice(0,120).forEach(function(x){items.push({type:"Duʿāʾ",title:x.title,sub:x.cat,url:p("dua","id="+encodeURIComponent(x.id)),page:"dua"})});
@@ -2957,7 +2957,7 @@ button,input,select{font:inherit}
    fetchJsonSafe("/data/prophets/index.json").catch(function(){return{prophets:[]}}),
    fetchJsonSafe("/data/quiz-questions.json").catch(function(){return[]}),
    fetchJsonSafe("/data/scholars-library.json").catch(function(){return{scholars:[]}}),
-   fetchJsonSafe("/test/data/frauen-bereiche-index.json").catch(function(){return{bereiche:[]}}),
+   fetchJsonSafe("/data/frauen-bereiche-index.json").catch(function(){return{bereiche:[]}}),
    fetchJsonSafe("/content/duas/duas.json").catch(function(){return[]})
   ]).then(function(all){
    realData.posts=(all[0]&&all[0].posts)||[];
