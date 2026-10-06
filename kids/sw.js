@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1198";
-const KIDS_BUILD_ID="kids-shell-v108-reference-hero1198";
+const CACHE_NAME="dar-al-tawhid-kids-v1199";
+const KIDS_BUILD_ID="kids-shell-v108-reference-hero1199";
 const CORE_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
@@ -15,7 +15,8 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-art/hero-entdecke.png",
   "/kids/assets/kids-home-v1176/hero-cinema.png",
   "/kids/assets/kids-home-v1179/hero-poster.png?v=1188",
-  "/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1198",
+  "/kids/assets/kids-home-v1191/hero-static-reference.jpg?v=1199",
+  "/assets/fonts/cinzel-latin-600-normal.woff2",
   "/kids/assets/kids-home-v1176/world-stories.png",
   "/kids/assets/kids-home-v1176/world-quran.png",
   "/kids/assets/kids-home-v1176/world-dua.png",
