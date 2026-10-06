@@ -1,0 +1,267 @@
+name: Restore Owner Story Audio Originals
+
+on:
+  push:
+    paths:
+      - ".github/workflows/restore-owner-story-audio-originals.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: restore-owner-story-audio-originals
+  cancel-in-progress: false
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Sync latest main
+        shell: bash
+        run: git pull --rebase origin main
+
+      - name: Ensure ffprobe
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
+
+      - name: Download original owner MP3 files without transcoding
+        env:
+          ABU_URL: "https://at.adobe.com/QB90BTajYFs0MH93"
+          KHADIJAH_URL: "https://at.adobe.com/WW93xO5GJAjQxCn0"
+          ABU_SHA256: "485f33a8c0e64c82ed6390df22b739559ca75e1c5bcbc894c6df717783469c26"
+          KHADIJAH_SHA256: "68b44b569ca17d5f2496a453f070e11989a2076ed52751034aa84eb612aeb663"
+          ABU_BYTES: "5722498"
+          KHADIJAH_BYTES: "6165535"
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p kids/assets/mubashshirun-story-audio/abu-bakr
+          mkdir -p kids/assets/sahabiyyat-story-audio/khadijah
+
+          curl -L --fail --retry 3 --retry-delay 2 --connect-timeout 20 "$ABU_URL" -o /tmp/abu-bakr-original.mp3
+          curl -L --fail --retry 3 --retry-delay 2 --connect-timeout 20 "$KHADIJAH_URL" -o /tmp/khadijah-original.mp3
+
+          test "$(stat -c%s /tmp/abu-bakr-original.mp3)" = "$ABU_BYTES"
+          test "$(stat -c%s /tmp/khadijah-original.mp3)" = "$KHADIJAH_BYTES"
+          echo "$ABU_SHA256  /tmp/abu-bakr-original.mp3" | sha256sum -c -
+          echo "$KHADIJAH_SHA256  /tmp/khadijah-original.mp3" | sha256sum -c -
+
+          python3 - <<'PY'
+          import json, subprocess
+          expected = {
+              "/tmp/abu-bakr-original.mp3": (300, 480),
+              "/tmp/khadijah-original.mp3": (300, 480),
+          }
+          for path, (lo, hi) in expected.items():
+              raw=subprocess.check_output([
+                  "ffprobe","-v","error",
+                  "-show_entries","stream=codec_name,sample_rate,channels,bit_rate:format=duration,size",
+                  "-of","json",path
+              ], text=True)
+              data=json.loads(raw)
+              stream=data["streams"][0]
+              duration=float(data["format"]["duration"])
+              assert stream["codec_name"]=="mp3", (path, stream)
+              assert int(stream["sample_rate"])==44100, (path, stream)
+              assert int(stream["channels"])==1, (path, stream)
+              assert int(stream["bit_rate"])==128000, (path, stream)
+              assert lo <= duration <= hi, (path, duration)
+              print(path, json.dumps(data, ensure_ascii=False))
+          PY
+
+          # Byte-for-byte copy only. No ffmpeg encode/transcode step.
+          cp /tmp/abu-bakr-original.mp3 kids/assets/mubashshirun-story-audio/abu-bakr/master.mp3
+          cp /tmp/khadijah-original.mp3 kids/assets/sahabiyyat-story-audio/khadijah/master.mp3
+
+      - name: Bind byte-identical originals to Voice Studio and Kids manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PUBLISHED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          node <<'NODE'
+          const fs=require("fs");
+
+          const kidsVersionPath="kids/version.json";
+          const voiceVersionPath="voice-studio/version.json";
+          const abuManifestPath="kids/data/mubashshirun-stories.json";
+          const khManifestPath="kids/data/sahabiyyat-stories.json";
+
+          const kidsVersion=JSON.parse(fs.readFileSync(kidsVersionPath,"utf8"));
+          const voiceVersion=JSON.parse(fs.readFileSync(voiceVersionPath,"utf8"));
+          const abuManifest=JSON.parse(fs.readFileSync(abuManifestPath,"utf8"));
+          const khManifest=JSON.parse(fs.readFileSync(khManifestPath,"utf8"));
+
+          const publishedAt=process.env.PUBLISHED_AT || new Date().toISOString();
+          const ages=["4-5","6-8","9-10"];
+
+          function bindOriginal({manifest,id,url,durationSec,bytes,sha256,sourceFile,nextFloor}){
+            const item=(manifest.items||[]).find(x=>x&&x.id===id);
+            if(!item) throw new Error("Missing story "+id);
+            const nextVersion=Math.max(Number(manifest.version||0)+1,nextFloor);
+            const base={
+              status:"ready",
+              url:url+"?v="+nextVersion,
+              durationSec,
+              bytes,
+              sha256,
+              mime:"audio/mpeg",
+              codec:"mp3",
+              bitRateKbps:128,
+              channels:1,
+              sampleRateHz:44100,
+              voiceProfile:"kids_story",
+              voiceProfileId:"serhat-owner-voice-2026",
+              source:"DĀR owner original upload · byte-identical",
+              sourceSpeaker:"Serhat Abu Malik",
+              sourceFile,
+              manual:true,
+              manualUpload:true,
+              ownerApproved:true,
+              originalOwnerUpload:true,
+              originalBytesPreserved:true,
+              transcoded:false,
+              modes:["read","listen"],
+              technicalQaPassed:true,
+              publishedAt,
+              masterAudio:true,
+              masterAgeRange:"4-10",
+              localTarget:url
+            };
+            item.audio=item.audio&&typeof item.audio==="object"?item.audio:{};
+            for(const age of ages) item.audio[age]={...base,age};
+            item.voiceProduction={
+              ...(item.voiceProduction||{}),
+              status:"audio-complete",
+              audioRefreshRequired:false,
+              sourceDataVersion:nextVersion,
+              publishedAges:ages,
+              lastPublishedAt:publishedAt,
+              singleMasterAudio:true,
+              masterAgeRange:"4-10",
+              masterAudioUrl:base.url,
+              localTarget:url,
+              directAssignment:false,
+              originalOwnerUpload:true,
+              originalBytesPreserved:true,
+              transcoded:false
+            };
+            delete item.voiceProduction.optimizedMasterReady;
+            delete item.voiceProduction.optimizedMasterBytes;
+            delete item.voiceProduction.optimizedMasterSha256;
+            manifest.version=nextVersion;
+            manifest.updatedAt=publishedAt;
+            return nextVersion;
+          }
+
+          const abuVersion=bindOriginal({
+            manifest:abuManifest,
+            id:"abu-bakr",
+            url:"/kids/assets/mubashshirun-story-audio/abu-bakr/master.mp3",
+            durationSec:356.5975,
+            bytes:5722498,
+            sha256:"485f33a8c0e64c82ed6390df22b739559ca75e1c5bcbc894c6df717783469c26",
+            sourceFile:"Sahaba Abū Bakr aṣ-Ṣiddīq, raḍiya llāhu ʿanhu Audi.mp3",
+            nextFloor:9
+          });
+          const khVersion=bindOriginal({
+            manifest:khManifest,
+            id:"khadijah",
+            url:"/kids/assets/sahabiyyat-story-audio/khadijah/master.mp3",
+            durationSec:384.287313,
+            bytes:6165535,
+            sha256:"68b44b569ca17d5f2496a453f070e11989a2076ed52751034aa84eb612aeb663",
+            sourceFile:"Sahabiyyah Khadīǧah bint Khuwaylid, raḍiya llāhu ʿanhā Geschichte .mp3",
+            nextFloor:27
+          });
+
+          kidsVersion.visualSystem=kidsVersion.visualSystem||{};
+          Object.assign(kidsVersion.visualSystem,{
+            mubashshirunDataVersion:abuVersion,
+            sahabiyyatDataVersion:khVersion,
+            ownerOriginalAudioPolicy:"preserve-uploaded-bytes-no-transcode",
+            abuBakrOwnerAudio:true,
+            abuBakrOwnerAudioDurationSec:356.5975,
+            abuBakrOwnerAudioCodec:"mp3-128k-mono-original",
+            abuBakrOwnerAudioBytes:5722498,
+            abuBakrOwnerAudioSha256:"485f33a8c0e64c82ed6390df22b739559ca75e1c5bcbc894c6df717783469c26",
+            abuBakrOwnerAudioTarget:"/kids/assets/mubashshirun-story-audio/abu-bakr/master.mp3",
+            khadijahOwnerAudio:true,
+            khadijahOwnerAudioDurationSec:384.287313,
+            khadijahOwnerAudioCodec:"mp3-128k-mono-original",
+            khadijahOwnerAudioBytes:6165535,
+            khadijahOwnerAudioSha256:"68b44b569ca17d5f2496a453f070e11989a2076ed52751034aa84eb612aeb663",
+            khadijahOwnerAudioTarget:"/kids/assets/sahabiyyat-story-audio/khadijah/master.mp3"
+          });
+          delete kidsVersion.visualSystem.abuBakrOwnerAudioOptimizedCodec;
+          delete kidsVersion.visualSystem.abuBakrOwnerAudioOptimizedBytes;
+          delete kidsVersion.visualSystem.khadijahOwnerAudioOptimizedCodec;
+          delete kidsVersion.visualSystem.khadijahOwnerAudioOptimizedBytes;
+          kidsVersion.updatedAt=publishedAt.slice(0,10);
+
+          if(voiceVersion.mubashshirunStories&&typeof voiceVersion.mubashshirunStories==="object"){
+            voiceVersion.mubashshirunStories.version=abuVersion;
+            voiceVersion.mubashshirunStories.sourceDataVersion=abuVersion;
+            voiceVersion.mubashshirunStories.ownerOriginalAudioPolicy="preserve-uploaded-bytes-no-transcode";
+            voiceVersion.mubashshirunStories.abuBakrOwnerAudio={
+              status:"audio-complete",
+              codec:"mp3",
+              bitRateKbps:128,
+              bytes:5722498,
+              sha256:"485f33a8c0e64c82ed6390df22b739559ca75e1c5bcbc894c6df717783469c26",
+              target:"/kids/assets/mubashshirun-story-audio/abu-bakr/master.mp3",
+              transcoded:false
+            };
+          }
+          if(voiceVersion.mubashshirun&&typeof voiceVersion.mubashshirun==="object"){
+            voiceVersion.mubashshirun.dataVersion=abuVersion;
+          }
+          if(voiceVersion.sahabiyyatKidsIntegration&&typeof voiceVersion.sahabiyyatKidsIntegration==="object"){
+            voiceVersion.sahabiyyatKidsIntegration.masterDataVersion=khVersion;
+            voiceVersion.sahabiyyatKidsIntegration.kidsDataVersion=khVersion;
+            voiceVersion.sahabiyyatKidsIntegration.ownerOriginalAudioPolicy="preserve-uploaded-bytes-no-transcode";
+            voiceVersion.sahabiyyatKidsIntegration.khadijahOwnerAudio=true;
+            voiceVersion.sahabiyyatKidsIntegration.khadijahOwnerAudioStatus="audio-complete";
+            voiceVersion.sahabiyyatKidsIntegration.khadijahOwnerAudioDurationSec=384.287313;
+            voiceVersion.sahabiyyatKidsIntegration.khadijahOwnerAudioMasterAgeRange="4-10";
+            voiceVersion.sahabiyyatKidsIntegration.khadijahOwnerAudioCodec="mp3-128k-mono-original";
+            voiceVersion.sahabiyyatKidsIntegration.khadijahOwnerAudioTarget="/kids/assets/sahabiyyat-story-audio/khadijah/master.mp3";
+            voiceVersion.sahabiyyatKidsIntegration.khadijahOwnerAudioSha256="68b44b569ca17d5f2496a453f070e11989a2076ed52751034aa84eb612aeb663";
+            delete voiceVersion.sahabiyyatKidsIntegration.khadijahOwnerAudioOptimizedCodec;
+          }
+          voiceVersion.updatedAt=publishedAt.slice(0,10);
+
+          fs.writeFileSync(abuManifestPath,JSON.stringify(abuManifest,null,2)+"\n");
+          fs.writeFileSync(khManifestPath,JSON.stringify(khManifest,null,2)+"\n");
+          fs.writeFileSync(kidsVersionPath,JSON.stringify(kidsVersion,null,2)+"\n");
+          fs.writeFileSync(voiceVersionPath,JSON.stringify(voiceVersion,null,2)+"\n");
+          console.log(JSON.stringify({abuVersion,khVersion,publishedAt},null,2));
+          NODE
+
+      - name: Validate Kids release
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/kids-prophet-release-guard.js
+
+      - name: Commit byte-identical original MP3 masters
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "DAR Kids Audio Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add             kids/assets/mubashshirun-story-audio/abu-bakr/master.mp3             kids/assets/sahabiyyat-story-audio/khadijah/master.mp3             kids/data/mubashshirun-stories.json             kids/data/sahabiyyat-stories.json             kids/version.json             voice-studio/version.json
+          git diff --cached --stat
+          git commit -m "Kids: restore original owner story audio quality"
+          git push origin HEAD:main
