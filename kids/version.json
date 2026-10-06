@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v102-home-cinema1175",
-  "label": "KIDS · V1.08.02",
-  "releasedAt": "2026-10-06T07:38:00+02:00",
-  "note": "Startseite neu geordnet und stabilisiert: DĀR AL TAWḤĪD steht vollständig und prominent über KIDS, der Hero nutzt eine ruhige Cinema-Bewegung ohne abgeschnittene Elemente, Weiterhören bleibt im normalen Layoutfluss und die drei Hörwelten erhalten lokale thematische Bildhintergründe statt flacher Farbflächen.",
+  "buildId": "kids-shell-v103-home-live1176",
+  "label": "KIDS · V1.08.03",
+  "releasedAt": "2026-10-06T08:10:00+02:00",
+  "note": "Startseite V1176: sichtbarer farbiger Kids-Ballonrhythmus wiederhergestellt, DĀR AL TAWḤĪD als klare Hauptmarke davor gesetzt, Hero mit mehreren ruhigen Cinema-Bewegungsebenen aufgebaut, Textumbrüche auf Phone-Breiten stabilisiert und Hörbücher/Qurʾān/Duʿāʾ mit drei eigens dafür erzeugten Bildwelten statt recycelter Bereichsbilder ausgestattet.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1175",
+    "serviceWorkerCache": "v1176",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -703,7 +703,7 @@
     "homeAudioFirst": true,
     "homeUnifiedResume": "audiobook-or-quran-v1170",
     "homeResumeProgress": true,
-    "homeHeroMotion": "cinematic-slow-pan-light-sweep-v1175",
+    "homeHeroMotion": "multi-layer-cinema-pan-cloud-twinkle-light-haze-v1176",
     "homePrimaryWorlds": [
       "stories",
       "quran",
@@ -712,22 +712,23 @@
     "duaOwnerVoice": "recovered-existing-assets-v1171",
     "duaVoicePaidGenerations": 0,
     "duaVoiceEntries": 10,
-    "homeAudioCore": "v1175",
+    "homeAudioCore": "v1176",
     "alphabetRuntimeRemoved": true,
     "alphabetArchivedAssetsRetained": true,
-    "homeHeroBrand": "dar-first-centered-gold-kids-v1175",
+    "homeHeroBrand": "dar-first-colored-balloon-kids-v1176",
     "homeQuizVisible": false,
     "homeDailyJourneyVisible": false,
     "homeKnowledgeCardVisible": false,
-    "homeHeroArtwork": "/kids/assets/kids-art/hero-entdecke.png",
-    "homeResumeLayout": "stable-flow-no-overlap-v1175",
-    "homeCards": "local-illustrated-backgrounds-v1175",
+    "homeHeroArtwork": "/kids/assets/kids-home-v1176/hero-cinema.png",
+    "homeResumeLayout": "stable-flow-no-overlap-v1176",
+    "homeCards": "dedicated-generated-backgrounds-v1176",
     "homeCardArtwork": {
-      "stories": "/kids/assets/stories-home/prophets-v1133.webp?v=1136",
-      "quran": "/kids/assets/kids-art/quran-home-v1053.jpg",
-      "dua": "/kids/assets/kids-art/dua-home-v11.jpg"
-    }
+      "stories": "/kids/assets/kids-home-v1176/world-stories.png",
+      "quran": "/kids/assets/kids-home-v1176/world-quran.png",
+      "dua": "/kids/assets/kids-home-v1176/world-dua.png"
+    },
+    "homeHeroCopyWrap": "single-line-phone-guard-v1176"
   },
   "updatedAt": "2026-10-06",
-  "deployTrigger": "2026-10-06T07:38:00+02:00"
+  "deployTrigger": "2026-10-06T08:10:00+02:00"
 }

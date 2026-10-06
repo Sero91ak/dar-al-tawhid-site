@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.02</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.03</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2822,7 +2822,7 @@ html:not([data-view="today"]) .view.active{
           <p class="hero-salam">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</p>
           <div class="hero-kicker">HÖRBÜCHER · QURʾĀN · DUʿĀʾ</div>
           <h1>Hören. Mitlesen. Lernen.</h1>
-          <p>Hörbücher, Qurʾān und Duʿāʾ – einfach antippen und loshören.</p>
+          <p>Hörbücher, Qurʾān & Duʿāʾ – antippen und loshören.</p>
         </div>
       </div>
 
@@ -3175,7 +3175,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v102-home-cinema1175";
+const KIDS_BUILD_ID="kids-shell-v103-home-live1176";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6237,7 +6237,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v102-home-cinema1175";
+  var KIDS_BUILD_ID="kids-shell-v103-home-live1176";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6253,7 +6253,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1175",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1176",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -7594,45 +7594,46 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-<style id="kids-home-cinematic-v1175">
-/* V1175 — ruhiger Cinema-Home: Branding zuerst, keine abgeschnittenen Elemente,
-   echte Bildwelten in den drei Kernkarten, klare mobile Geometrie. */
+<style id="kids-home-live-v1176">
+/* V1176 — lebendige, ruhige Cinema-Startseite.
+   Marke zuerst, sichtbarer Kids-Ballonrhythmus, eigene Hörwelten-Illustrationen,
+   keine zufälligen Ein-Wort-Umbrüche auf üblichen Phone-Breiten. */
 #view-today{
-  --home-gold:#f1cd7b;
-  --home-gold-soft:#ffe8ad;
-  --home-cream:#fff8e9;
-  --home-deep:#061823;
-  --home-ink:#fdf8ec;
+  --home-gold:#f0ca73;
+  --home-gold-soft:#ffe8a8;
+  --home-cream:#fff9ea;
+  --home-deep:#061923;
   overflow:visible!important;
 }
 
-/* HERO — bewusst kompakter und stabil statt übergroß/verschoben. */
+/* HERO */
 #view-today .hero{
   position:relative!important;
   isolation:isolate!important;
-  min-height:430px!important;
+  min-height:472px!important;
   height:auto!important;
   margin:calc(-1 * var(--safe-top)) -16px 0!important;
   width:calc(100% + 32px)!important;
   border:0!important;
-  border-radius:0 0 36px 36px!important;
-  background:#092a3b!important;
+  border-radius:0 0 34px 34px!important;
+  background:#071d29!important;
   overflow:hidden!important;
-  box-shadow:0 20px 46px rgba(0,0,0,.28)!important;
+  box-shadow:0 22px 48px rgba(0,0,0,.28)!important;
 }
 #view-today .hero::before{
   content:""!important;
   position:absolute!important;
-  inset:-3%!important;
+  inset:-4.5%!important;
   z-index:0!important;
-  background-image:url("/kids/assets/kids-art/hero-entdecke.png")!important;
+  background-image:url("/kids/assets/kids-home-v1176/hero-cinema.png")!important;
   background-size:cover!important;
-  background-position:center 43%!important;
+  background-position:center 46%!important;
   background-repeat:no-repeat!important;
-  filter:saturate(.92) contrast(1.04) brightness(.78)!important;
-  transform:scale(1.055)!important;
+  filter:saturate(1.02) contrast(1.03) brightness(.76)!important;
+  transform:scale(1.045) translate3d(0,0,0)!important;
   transform-origin:50% 42%!important;
-  animation:homeCinemaDrift1175 24s ease-in-out infinite alternate!important;
+  will-change:transform!important;
+  animation:homeCinemaPan1176 24s cubic-bezier(.45,.05,.45,.95) infinite alternate!important;
 }
 #view-today .hero::after{
   content:""!important;
@@ -7641,177 +7642,279 @@ html[data-view="stories"] #view-stories > :last-child{
   z-index:1!important;
   pointer-events:none!important;
   background:
-    radial-gradient(circle at 50% 22%,rgba(244,205,119,.15),transparent 28%),
-    linear-gradient(180deg,rgba(3,17,27,.46) 0%,rgba(3,17,27,.12) 26%,rgba(3,17,27,.18) 50%,rgba(3,17,27,.68) 76%,rgba(3,17,27,.94) 100%)!important;
+    radial-gradient(circle at 70% 18%,rgba(255,224,151,.17),transparent 18%),
+    linear-gradient(180deg,rgba(2,16,25,.34) 0%,rgba(2,16,25,.08) 26%,rgba(2,16,25,.10) 48%,rgba(2,16,25,.66) 78%,rgba(2,16,25,.92) 100%)!important;
 }
-@keyframes homeCinemaDrift1175{
-  0%{transform:scale(1.055) translate3d(0,0,0)}
-  100%{transform:scale(1.085) translate3d(-.45%,-.65%,0)}
+@keyframes homeCinemaPan1176{
+  0%{transform:scale(1.045) translate3d(-.7%,.2%,0)}
+  50%{transform:scale(1.073) translate3d(.3%,-.55%,0)}
+  100%{transform:scale(1.095) translate3d(1.05%,-1.1%,0)}
 }
 
-/* Ein einzelner, sehr langsamer Lichtzug statt hektischer Animation. */
+/* bewegte Wolken-/Nebel-Ebene */
 #view-today .hero .cloud{
   display:block!important;
   position:absolute!important;
   z-index:2!important;
-  top:-35%!important;
-  left:-58%!important;
-  width:44%!important;
-  height:170%!important;
-  border-radius:48%!important;
-  background:linear-gradient(90deg,transparent,rgba(255,229,169,.16),transparent)!important;
-  filter:blur(22px)!important;
-  opacity:.7!important;
-  transform:rotate(15deg)!important;
-  animation:homeCinemaSweep1175 13s ease-in-out infinite!important;
+  top:19%!important;
+  left:-42%!important;
+  width:52%!important;
+  height:38px!important;
+  border-radius:999px!important;
+  opacity:.16!important;
+  background:rgba(238,244,240,.64)!important;
+  filter:blur(15px)!important;
+  box-shadow:86px 8px 0 13px rgba(238,244,240,.30),172px -7px 0 6px rgba(238,244,240,.20)!important;
+  animation:homeCloudDrift1176 29s linear infinite!important;
   pointer-events:none!important;
 }
 #view-today .hero .cloud::before,
 #view-today .hero .cloud::after{display:none!important}
-@keyframes homeCinemaSweep1175{
-  0%,18%{left:-58%;opacity:0}
-  34%{opacity:.7}
-  68%{left:112%;opacity:.42}
-  100%{left:112%;opacity:0}
+@keyframes homeCloudDrift1176{
+  from{transform:translate3d(-8%,0,0)}
+  to{transform:translate3d(300%,7px,0)}
 }
-#view-today .hero .city,
-#view-today .hero .arch,
-#view-today .hero .dune,
-#view-today .hero .lantern{display:none!important}
 
-/* BRANDING — DĀR AL TAWḤĪD steht sauber und vollständig VOR KIDS. */
+/* Stern-/Partikel-Ebene */
+#view-today .hero .city{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  z-index:2!important;
+  width:auto!important;
+  height:auto!important;
+  left:0!important;
+  bottom:0!important;
+  transform:none!important;
+  clip-path:none!important;
+  opacity:.54!important;
+  filter:none!important;
+  pointer-events:none!important;
+  background:
+    radial-gradient(circle at 13% 17%,rgba(255,246,206,.95) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 23% 29%,rgba(255,246,206,.72) 0 1.1px,transparent 1.9px),
+    radial-gradient(circle at 39% 13%,rgba(255,246,206,.72) 0 .9px,transparent 1.7px),
+    radial-gradient(circle at 57% 24%,rgba(255,246,206,.92) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 77% 11%,rgba(255,246,206,.72) 0 1.2px,transparent 2px),
+    radial-gradient(circle at 88% 31%,rgba(255,246,206,.76) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 69% 37%,rgba(255,221,143,.74) 0 1px,transparent 1.8px)!important;
+  animation:homeTwinkle1176 4.6s ease-in-out infinite alternate!important;
+}
+@keyframes homeTwinkle1176{
+  0%{opacity:.27;filter:brightness(.88)}
+  45%{opacity:.62;filter:brightness(1.18)}
+  100%{opacity:.40;filter:brightness(1)}
+}
+
+/* langsamer Kinolicht-Zug */
+#view-today .hero .arch{
+  display:block!important;
+  position:absolute!important;
+  z-index:3!important;
+  top:-38%!important;
+  left:-64%!important;
+  width:34%!important;
+  height:184%!important;
+  right:auto!important;
+  bottom:auto!important;
+  border:0!important;
+  border-radius:45%!important;
+  opacity:0!important;
+  transform:rotate(15deg)!important;
+  background:linear-gradient(90deg,transparent,rgba(255,229,165,.19),transparent)!important;
+  filter:blur(17px)!important;
+  pointer-events:none!important;
+  animation:homeLightSweep1176 12.5s ease-in-out infinite!important;
+}
+@keyframes homeLightSweep1176{
+  0%,22%{left:-64%;opacity:0}
+  34%{opacity:.55}
+  68%{left:116%;opacity:.28}
+  100%{left:116%;opacity:0}
+}
+
+/* Vordergrund-Haze: zweite Parallax-Ebene */
+#view-today .hero .dune{
+  display:block!important;
+  position:absolute!important;
+  z-index:2!important;
+  left:-8%!important;
+  right:-8%!important;
+  bottom:-28px!important;
+  height:118px!important;
+  opacity:.42!important;
+  background:
+    radial-gradient(ellipse at 25% 100%,rgba(1,18,27,.84) 0 46%,transparent 48%),
+    radial-gradient(ellipse at 71% 100%,rgba(3,24,34,.78) 0 44%,transparent 46%)!important;
+  filter:blur(1.5px)!important;
+  pointer-events:none!important;
+  animation:homeHaze1176 11s ease-in-out infinite alternate!important;
+}
+@keyframes homeHaze1176{
+  from{transform:translate3d(-1.5%,2px,0) scale(1)}
+  to{transform:translate3d(1.3%,-2px,0) scale(1.025)}
+}
+
+/* ein einzelner warmer Bokeh-Punkt als sanfte Kinder-Magie */
+#view-today .hero .lantern{
+  display:block!important;
+  position:absolute!important;
+  z-index:3!important;
+  top:31%!important;
+  right:9%!important;
+  width:9px!important;
+  height:9px!important;
+  border-radius:50%!important;
+  font-size:0!important;
+  opacity:.35!important;
+  background:#ffe39a!important;
+  box-shadow:0 0 10px 4px rgba(255,215,126,.22)!important;
+  pointer-events:none!important;
+  animation:homeBokeh1176 5.4s ease-in-out infinite!important;
+}
+@keyframes homeBokeh1176{
+  0%,100%{transform:translate3d(0,0,0) scale(.78);opacity:.20}
+  48%{transform:translate3d(-5px,-8px,0) scale(1.12);opacity:.58}
+}
+
+/* MARKE — DĀR AL TAWḤĪD zuerst, danach KIDS */
 #view-today .kids-wordmark{
   position:absolute!important;
-  z-index:5!important;
-  top:max(48px,calc(env(safe-area-inset-top,0px) + 24px))!important;
+  z-index:6!important;
+  top:max(49px,calc(env(safe-area-inset-top,0px) + 22px))!important;
   left:0!important;
   right:0!important;
   width:100%!important;
   max-width:none!important;
   margin:0!important;
-  padding:0 24px!important;
+  padding:0 18px!important;
   box-sizing:border-box!important;
   display:flex!important;
   flex-direction:column!important;
   align-items:center!important;
   justify-content:flex-start!important;
   gap:8px!important;
-  text-align:center!important;
-  transform:none!important;
-  filter:none!important;
   overflow:visible!important;
+  text-align:center!important;
 }
 #view-today .kids-wordmark::before{
   content:""!important;
   position:absolute!important;
   z-index:-1!important;
-  width:min(88vw,420px)!important;
-  height:120px!important;
-  top:-18px!important;
+  top:-22px!important;
   left:50%!important;
-  transform:translateX(-50%)!important;
+  width:min(88vw,410px)!important;
+  height:144px!important;
   border-radius:50%!important;
-  background:radial-gradient(ellipse,rgba(241,205,123,.17),rgba(10,38,52,.03) 54%,transparent 74%)!important;
-  filter:blur(6px)!important;
-  animation:homeBrandAura1175 7s ease-in-out infinite!important;
+  transform:translateX(-50%)!important;
+  background:radial-gradient(ellipse,rgba(4,26,38,.46),rgba(7,28,38,.13) 54%,transparent 76%)!important;
+  filter:blur(7px)!important;
+  animation:homeBrandAura1176 6.8s ease-in-out infinite!important;
 }
 #view-today .kids-wordmark::after{
   content:""!important;
-  display:block!important;
-  width:min(64vw,280px)!important;
+  width:min(56vw,244px)!important;
   height:1px!important;
   margin-top:2px!important;
-  background:linear-gradient(90deg,transparent,rgba(255,226,154,.82),transparent)!important;
-  box-shadow:0 0 14px rgba(255,215,130,.28)!important;
+  background:linear-gradient(90deg,transparent,rgba(255,226,154,.80),transparent)!important;
+  box-shadow:0 0 15px rgba(255,215,130,.30)!important;
 }
-@keyframes homeBrandAura1175{
-  0%,100%{opacity:.66;transform:translateX(-50%) scale(.96)}
-  50%{opacity:1;transform:translateX(-50%) scale(1.03)}
+@keyframes homeBrandAura1176{
+  0%,100%{opacity:.64;transform:translateX(-50%) scale(.96)}
+  50%{opacity:1;transform:translateX(-50%) scale(1.035)}
 }
 #view-today .wm-dar-line{
+  display:block!important;
   width:100%!important;
   margin:0!important;
   padding:0!important;
-  display:block!important;
-  overflow:visible!important;
   white-space:nowrap!important;
+  overflow:visible!important;
   text-align:center!important;
-  color:#fff6db!important;
   font-family:Georgia,"Times New Roman",serif!important;
-  font-size:clamp(24px,6.6vw,34px)!important;
-  line-height:1.05!important;
+  font-size:clamp(22px,6vw,30px)!important;
+  line-height:1!important;
   font-weight:700!important;
   letter-spacing:.105em!important;
   text-indent:.105em!important;
-  text-shadow:0 5px 20px rgba(0,0,0,.55),0 0 18px rgba(241,205,123,.15)!important;
-  transform:none!important;
-  animation:homeDarGlow1175 6.8s ease-in-out infinite!important;
+  color:#fff5d7!important;
+  text-shadow:0 4px 18px rgba(0,0,0,.58),0 0 14px rgba(240,202,115,.22)!important;
+  animation:homeDarReveal1176 6.2s ease-in-out infinite!important;
 }
-@keyframes homeDarGlow1175{
-  0%,100%{filter:brightness(.98)}
-  50%{filter:brightness(1.08)}
+@keyframes homeDarReveal1176{
+  0%,100%{filter:brightness(.95);letter-spacing:.105em}
+  50%{filter:brightness(1.12);letter-spacing:.117em}
 }
+
+/* Sichtbar ballonhaft und farbig – bewusst wieder näher am früheren Kids-Moment. */
 #view-today .wm-kids{
   width:100%!important;
   margin:0!important;
   display:flex!important;
-  align-items:flex-end!important;
   justify-content:center!important;
-  gap:.025em!important;
+  align-items:flex-end!important;
+  gap:.035em!important;
   overflow:visible!important;
   font-family:"Fredoka","Avenir Next",system-ui,sans-serif!important;
-  font-size:clamp(66px,18.5vw,96px)!important;
-  font-weight:760!important;
-  line-height:.82!important;
-  letter-spacing:-.065em!important;
-  text-transform:uppercase!important;
-  transform:none!important;
-  filter:drop-shadow(0 9px 24px rgba(0,0,0,.38))!important;
+  font-size:clamp(68px,18.4vw,94px)!important;
+  font-weight:780!important;
+  line-height:.84!important;
+  letter-spacing:-.055em!important;
+  text-transform:none!important;
+  filter:drop-shadow(0 10px 22px rgba(0,0,0,.34))!important;
 }
 #view-today .wm-kids span{
   display:inline-block!important;
-  color:transparent!important;
-  -webkit-text-fill-color:transparent!important;
-  background:linear-gradient(180deg,#fff9e8 0%,#f5d687 44%,#c68f42 100%)!important;
-  -webkit-background-clip:text!important;
-  background-clip:text!important;
-  -webkit-text-stroke:0!important;
-  paint-order:normal!important;
-  rotate:0deg!important;
-  text-shadow:none!important;
-  transform:none!important;
-  animation:homeKidFloat1175 8s ease-in-out infinite!important;
+  -webkit-text-fill-color:currentColor!important;
+  background:none!important;
+  -webkit-background-clip:border-box!important;
+  background-clip:border-box!important;
+  -webkit-text-stroke:3px rgba(255,255,255,.63)!important;
+  paint-order:stroke fill!important;
+  text-shadow:
+    0 2px 0 rgba(255,255,255,.56),
+    0 5px 0 rgba(31,20,8,.14),
+    0 12px 20px rgba(3,17,26,.36)!important;
+  transform-origin:50% 100%!important;
+  animation:kidsBalloonV1176 3s cubic-bezier(.36,.07,.31,1) infinite!important;
 }
-#view-today .wm-kids span:nth-child(2){animation-delay:.18s!important}
-#view-today .wm-kids span:nth-child(3){animation-delay:.36s!important}
-#view-today .wm-kids span:nth-child(4){animation-delay:.54s!important}
-@keyframes homeKidFloat1175{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-2px)}
+#view-today .wm-kids .k{color:#ffd45e!important;rotate:-7deg!important;animation-delay:0s!important}
+#view-today .wm-kids .i{color:#62d4ff!important;rotate:5deg!important;animation-delay:.12s!important}
+#view-today .wm-kids .d{color:#ff7ab8!important;rotate:-4deg!important;animation-delay:.24s!important}
+#view-today .wm-kids .s{color:#74e08f!important;rotate:7deg!important;animation-delay:.36s!important}
+@keyframes kidsBalloonV1176{
+  0%,18%,100%{transform:translateY(0) scale(1,1)}
+  29%{transform:translateY(-11px) scale(1.035,.965)}
+  38%{transform:translateY(-13px) scale(1.02,.98)}
+  50%{transform:translateY(2px) scale(.985,1.035)}
+  58%{transform:translateY(-3px) scale(1.01,.99)}
+  68%{transform:translateY(0) scale(1,1)}
 }
 
-/* Hero-Text bleibt zweitrangig, damit das Branding atmen kann. */
+/* Hero-Copy: auf normalen iPhones bewusst einzeilig und sauber zentriert. */
 #view-today .hero-copy{
   position:absolute!important;
-  z-index:5!important;
-  left:24px!important;
-  right:24px!important;
-  bottom:25px!important;
+  z-index:6!important;
+  left:16px!important;
+  right:16px!important;
+  bottom:23px!important;
   max-width:none!important;
   margin:0!important;
   padding:0!important;
   text-align:center!important;
-  transform:none!important;
+  text-shadow:0 3px 14px rgba(0,0,0,.56)!important;
 }
 #view-today .hero-salam{
+  display:block!important;
   margin:0 auto 8px!important;
-  max-width:31em!important;
-  color:rgba(255,249,232,.84)!important;
-  font-size:clamp(11px,3vw,13px)!important;
-  line-height:1.34!important;
-  font-weight:580!important;
-  text-align:center!important;
-  text-shadow:0 2px 10px rgba(0,0,0,.44)!important;
+  max-width:none!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  color:rgba(255,249,232,.91)!important;
+  font-size:clamp(10.5px,2.75vw,12.4px)!important;
+  line-height:1.2!important;
+  font-weight:620!important;
+  letter-spacing:0!important;
 }
 #view-today .hero-kicker{
   display:inline-flex!important;
@@ -7820,41 +7923,41 @@ html[data-view="stories"] #view-stories > :last-child{
   min-height:27px!important;
   margin:0 auto 9px!important;
   padding:5px 12px!important;
-  border:1px solid rgba(241,205,123,.34)!important;
+  white-space:nowrap!important;
+  border:1px solid rgba(240,202,115,.39)!important;
   border-radius:999px!important;
-  background:rgba(4,25,37,.62)!important;
-  color:#f7d98f!important;
+  background:rgba(3,23,34,.66)!important;
+  color:#f6d98f!important;
   backdrop-filter:blur(12px)!important;
   -webkit-backdrop-filter:blur(12px)!important;
   font-size:9.5px!important;
   line-height:1!important;
   font-weight:850!important;
-  letter-spacing:.12em!important;
+  letter-spacing:.105em!important;
   text-shadow:none!important;
 }
 #view-today .hero h1{
   margin:0!important;
   max-width:none!important;
+  white-space:nowrap!important;
   color:#fffaf0!important;
-  font-size:clamp(29px,7.6vw,39px)!important;
-  line-height:1.02!important;
-  font-weight:740!important;
+  font-size:clamp(25px,6.5vw,32px)!important;
+  line-height:1.04!important;
+  font-weight:760!important;
   letter-spacing:-.035em!important;
   text-align:center!important;
-  text-wrap:balance!important;
-  text-shadow:0 4px 18px rgba(0,0,0,.54)!important;
 }
 #view-today .hero-copy>p:last-child{
   margin:7px auto 0!important;
-  max-width:30em!important;
-  color:rgba(255,255,255,.76)!important;
-  font-size:clamp(12px,3.15vw,14px)!important;
-  line-height:1.35!important;
-  font-weight:560!important;
-  text-align:center!important;
+  max-width:none!important;
+  white-space:nowrap!important;
+  color:rgba(255,255,255,.78)!important;
+  font-size:clamp(10.6px,2.8vw,12.4px)!important;
+  line-height:1.2!important;
+  font-weight:580!important;
 }
 
-/* Weiterhören: normaler Fluss, kein verrutschtes Überlappen. */
+/* WEITERHÖREN */
 #view-today .resume{
   position:relative!important;
   z-index:4!important;
@@ -7866,26 +7969,34 @@ html[data-view="stories"] #view-stories > :last-child{
   grid-template-columns:54px minmax(0,1fr) 36px!important;
   gap:12px!important;
   align-items:center!important;
-  border:1px solid rgba(241,205,123,.18)!important;
+  border:1px solid rgba(240,202,115,.18)!important;
   border-radius:25px!important;
   background:
-    radial-gradient(circle at 8% 50%,rgba(241,205,123,.08),transparent 30%),
+    radial-gradient(circle at 8% 50%,rgba(240,202,115,.08),transparent 30%),
     linear-gradient(145deg,rgba(8,42,57,.97),rgba(5,29,42,.98))!important;
   box-shadow:0 15px 31px rgba(0,0,0,.20),inset 0 1px rgba(255,255,255,.035)!important;
 }
 #view-today .resume-icon{
-  width:52px!important;height:52px!important;
-  border-radius:17px!important;
+  width:52px!important;height:52px!important;border-radius:17px!important;
   background-color:rgba(255,255,255,.055)!important;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)!important;
 }
 #view-today .resume-kicker{font-size:8.5px!important;letter-spacing:.13em!important;color:#e9c978!important}
 #view-today .resume strong{font-size:clamp(21px,5.6vw,27px)!important;line-height:1.02!important}
-#view-today .resume #resumeText{margin-top:5px!important;font-size:12px!important;color:rgba(255,255,255,.63)!important}
+#view-today .resume #resumeText{
+  display:block!important;
+  margin-top:5px!important;
+  max-width:100%!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  font-size:12px!important;
+  color:rgba(255,255,255,.66)!important;
+}
 #view-today .resume .go{width:34px!important;height:34px!important;font-size:24px!important}
 #view-today .resume-progress{height:4px!important;margin-top:7px!important}
 
-/* Die Startseite bleibt konsequent Audio-first. */
+/* Startseite konsequent Audio-first. */
 #view-today .daily-journey,
 #view-today .choice.quiz,
 #view-today .knowledge-card,
@@ -7896,7 +8007,7 @@ html[data-view="stories"] #view-stories > :last-child{
   color:#fff8e8!important;
   font-size:clamp(27px,7vw,34px)!important;
   line-height:1.04!important;
-  font-weight:730!important;
+  font-weight:740!important;
   letter-spacing:-.03em!important;
 }
 #view-today .big-choice-grid{
@@ -7905,7 +8016,7 @@ html[data-view="stories"] #view-stories > :last-child{
   gap:12px!important;
 }
 
-/* HÖRWELTEN — echte lokale Bildmotive statt flacher Farbflächen. */
+/* EIGENE HÖRWELTEN-ASSETS — keine recycelten Bereichsbilder mehr. */
 #view-today .choice{
   position:relative!important;
   min-height:132px!important;
@@ -7927,31 +8038,39 @@ html[data-view="stories"] #view-stories > :last-child{
 #view-today .choice::before{
   content:""!important;
   position:absolute!important;
-  inset:0!important;
+  inset:-4%!important;
   z-index:0!important;
   background-repeat:no-repeat!important;
   background-size:cover!important;
-  opacity:.96!important;
-  transform:scale(1.015)!important;
-  transition:transform .25s ease!important;
+  background-position:center!important;
+  opacity:.98!important;
+  transform:scale(1.04)!important;
+  will-change:transform!important;
+  animation:homeWorldBreath1176 16s ease-in-out infinite alternate!important;
 }
 #view-today .choice.story::before{
   background-image:
-    linear-gradient(90deg,rgba(17,20,24,.82) 0%,rgba(38,25,20,.68) 48%,rgba(38,25,20,.18) 100%),
-    url("/kids/assets/stories-home/prophets-v1133.webp?v=1136")!important;
-  background-position:center 48%!important;
+    linear-gradient(90deg,rgba(5,17,23,.92) 0%,rgba(12,24,27,.70) 44%,rgba(19,22,22,.12) 100%),
+    url("/kids/assets/kids-home-v1176/world-stories.png")!important;
+  background-position:center 50%!important;
 }
 #view-today .choice.quran::before{
   background-image:
-    linear-gradient(90deg,rgba(3,30,35,.84) 0%,rgba(4,50,53,.62) 50%,rgba(4,50,53,.12) 100%),
-    url("/kids/assets/kids-art/quran-home-v1053.jpg")!important;
+    linear-gradient(90deg,rgba(3,23,29,.92) 0%,rgba(4,38,43,.67) 45%,rgba(5,46,51,.10) 100%),
+    url("/kids/assets/kids-home-v1176/world-quran.png")!important;
   background-position:center 50%!important;
+  animation-delay:-5s!important;
 }
 #view-today .choice.dua::before{
   background-image:
-    linear-gradient(90deg,rgba(26,24,53,.84) 0%,rgba(45,41,82,.62) 50%,rgba(45,41,82,.12) 100%),
-    url("/kids/assets/kids-art/dua-home-v11.jpg")!important;
-  background-position:center 49%!important;
+    linear-gradient(90deg,rgba(18,18,40,.93) 0%,rgba(33,31,62,.68) 46%,rgba(50,44,80,.10) 100%),
+    url("/kids/assets/kids-home-v1176/world-dua.png")!important;
+  background-position:center 50%!important;
+  animation-delay:-9s!important;
+}
+@keyframes homeWorldBreath1176{
+  from{transform:scale(1.035) translate3d(-.6%,0,0)}
+  to{transform:scale(1.075) translate3d(.8%,-.5%,0)}
 }
 #view-today .choice::after{
   content:""!important;
@@ -7961,11 +8080,18 @@ html[data-view="stories"] #view-stories > :last-child{
   pointer-events:none!important;
   border-radius:inherit!important;
   background:
-    linear-gradient(180deg,rgba(255,255,255,.055),transparent 34%,rgba(3,16,24,.15)),
-    radial-gradient(circle at 86% 50%,rgba(255,225,160,.09),transparent 31%)!important;
+    linear-gradient(110deg,transparent 0 52%,rgba(255,236,185,.055) 58%,transparent 65%),
+    linear-gradient(180deg,rgba(255,255,255,.045),transparent 38%,rgba(2,15,23,.13))!important;
+  background-size:210% 100%,100% 100%!important;
+  background-position:170% 0,0 0!important;
   box-shadow:inset 0 1px rgba(255,255,255,.08)!important;
+  animation:homeCardSheen1176 10s ease-in-out infinite!important;
 }
-#view-today .choice:active::before{transform:scale(1.045)!important}
+@keyframes homeCardSheen1176{
+  0%,62%{background-position:170% 0,0 0}
+  82%{background-position:-35% 0,0 0}
+  100%{background-position:-35% 0,0 0}
+}
 #view-today .choice .icon,
 #view-today .choice strong,
 #view-today .choice small,
@@ -7973,15 +8099,14 @@ html[data-view="stories"] #view-stories > :last-child{
 #view-today .choice .icon{
   grid-column:1!important;
   grid-row:1 / 3!important;
-  width:56px!important;
-  height:56px!important;
+  width:56px!important;height:56px!important;
   margin:0!important;
   align-self:center!important;
   border-radius:18px!important;
   background-size:74%!important;
   background-position:center!important;
   background-repeat:no-repeat!important;
-  background-color:rgba(5,20,29,.45)!important;
+  background-color:rgba(3,18,27,.47)!important;
   border:1px solid rgba(255,255,255,.12)!important;
   box-shadow:0 8px 18px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.05)!important;
   backdrop-filter:blur(10px)!important;
@@ -7992,12 +8117,13 @@ html[data-view="stories"] #view-stories > :last-child{
   grid-row:1!important;
   align-self:end!important;
   min-width:0!important;
+  white-space:nowrap!important;
   color:#fff!important;
-  font-size:clamp(23px,6.2vw,30px)!important;
+  font-size:clamp(22px,5.9vw,29px)!important;
   line-height:1.02!important;
-  font-weight:735!important;
+  font-weight:750!important;
   letter-spacing:-.025em!important;
-  text-shadow:0 3px 12px rgba(0,0,0,.60)!important;
+  text-shadow:0 3px 12px rgba(0,0,0,.64)!important;
 }
 #view-today .choice small{
   grid-column:2!important;
@@ -8006,58 +8132,64 @@ html[data-view="stories"] #view-stories > :last-child{
   min-width:0!important;
   margin:0!important;
   padding:0!important;
-  color:rgba(255,255,255,.82)!important;
-  font-size:clamp(12px,3.25vw,14px)!important;
-  line-height:1.25!important;
-  font-weight:590!important;
-  text-shadow:0 2px 8px rgba(0,0,0,.58)!important;
+  white-space:nowrap!important;
+  color:rgba(255,255,255,.84)!important;
+  font-size:clamp(11.2px,2.95vw,13.7px)!important;
+  line-height:1.22!important;
+  font-weight:600!important;
+  text-shadow:0 2px 8px rgba(0,0,0,.64)!important;
 }
 #view-today .choice .arrow{
   grid-column:3!important;
   grid-row:1 / 3!important;
   align-self:center!important;
   justify-self:end!important;
-  right:auto!important;
-  bottom:auto!important;
-  width:34px!important;
-  height:34px!important;
-  display:grid!important;
-  place-items:center!important;
+  right:auto!important;bottom:auto!important;
+  width:34px!important;height:34px!important;
+  display:grid!important;place-items:center!important;
   border:1px solid rgba(255,255,255,.13)!important;
   border-radius:50%!important;
-  background:rgba(4,20,29,.48)!important;
+  background:rgba(3,18,27,.53)!important;
   color:#ffe2a0!important;
   font-size:23px!important;
   backdrop-filter:blur(10px)!important;
   -webkit-backdrop-filter:blur(10px)!important;
 }
+#view-today .choice:active::before{transform:scale(1.09)!important}
 
-/* Mobile-Abstände für die feste Navigation. */
-#view-today{padding-bottom:14px!important}
-.shell{padding-bottom:calc(126px + env(safe-area-inset-bottom))!important}
+/* Die feste Navigation darf den letzten Inhalt nicht optisch verschlucken. */
+#view-today{padding-bottom:18px!important}
+.shell{padding-bottom:calc(138px + env(safe-area-inset-bottom))!important}
 
-@media(max-width:380px){
-  #view-today .hero{min-height:408px!important}
-  #view-today .kids-wordmark{top:max(43px,calc(env(safe-area-inset-top,0px) + 20px))!important;padding-inline:18px!important}
-  #view-today .wm-dar-line{font-size:22px!important;letter-spacing:.085em!important;text-indent:.085em!important}
-  #view-today .wm-kids{font-size:60px!important}
-  #view-today .hero-copy{left:18px!important;right:18px!important;bottom:22px!important}
-  #view-today .hero h1{font-size:27px!important}
-  #view-today .choice{min-height:126px!important;grid-template-columns:52px minmax(0,1fr) 32px!important;padding:15px 14px!important;column-gap:11px!important}
-  #view-today .choice .icon{width:50px!important;height:50px!important;border-radius:16px!important}
-  #view-today .choice strong{font-size:22px!important}
+/* sehr schmale Geräte: lieber kontrolliert balancieren als ein einzelnes Wort abwerfen */
+@media(max-width:350px){
+  #view-today .hero{min-height:458px!important}
+  #view-today .kids-wordmark{top:max(44px,calc(env(safe-area-inset-top,0px) + 18px))!important;padding-inline:13px!important}
+  #view-today .wm-dar-line{font-size:20px!important;letter-spacing:.075em!important;text-indent:.075em!important}
+  #view-today .wm-kids{font-size:62px!important}
+  #view-today .hero-copy{left:12px!important;right:12px!important;bottom:20px!important}
+  #view-today .hero-salam{font-size:9.2px!important}
+  #view-today .hero h1{font-size:22.5px!important}
+  #view-today .hero-copy>p:last-child{font-size:9.4px!important}
+  #view-today .hero-kicker{font-size:8.5px!important;padding-inline:9px!important}
+  #view-today .choice{min-height:126px!important;grid-template-columns:50px minmax(0,1fr) 30px!important;padding:15px 13px!important;column-gap:10px!important}
+  #view-today .choice .icon{width:49px!important;height:49px!important;border-radius:15px!important}
+  #view-today .choice strong{font-size:20.5px!important}
+  #view-today .choice small{font-size:10.1px!important}
 }
 @media(min-width:700px){
-  #view-today .hero{min-height:500px!important;border-radius:0 0 42px 42px!important}
-  #view-today .kids-wordmark{top:max(60px,calc(env(safe-area-inset-top,0px) + 34px))!important}
+  #view-today .hero{min-height:520px!important;border-radius:0 0 42px 42px!important}
+  #view-today .kids-wordmark{top:max(62px,calc(env(safe-area-inset-top,0px) + 34px))!important}
   #view-today .wm-dar-line{font-size:36px!important}
-  #view-today .wm-kids{font-size:100px!important}
+  #view-today .wm-kids{font-size:102px!important}
   #view-today .hero-copy{left:40px!important;right:40px!important;bottom:34px!important}
-  #view-today .hero h1{font-size:42px!important}
+  #view-today .hero-salam{font-size:14px!important}
+  #view-today .hero h1{font-size:39px!important}
+  #view-today .hero-copy>p:last-child{font-size:14px!important}
   #view-today .resume{max-width:760px!important;margin:16px auto 0!important}
   #view-today .big-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}
   #view-today .choice{
-    min-height:188px!important;
+    min-height:190px!important;
     grid-template-columns:1fr 36px!important;
     grid-template-rows:58px auto auto!important;
     padding:20px!important;
@@ -8070,9 +8202,15 @@ html[data-view="stories"] #view-stories > :last-child{
 @media(prefers-reduced-motion:reduce){
   #view-today .hero::before,
   #view-today .hero .cloud,
+  #view-today .hero .city,
+  #view-today .hero .arch,
+  #view-today .hero .dune,
+  #view-today .hero .lantern,
   #view-today .kids-wordmark::before,
   #view-today .wm-dar-line,
-  #view-today .wm-kids span{animation:none!important}
+  #view-today .wm-kids span,
+  #view-today .choice::before,
+  #view-today .choice::after{animation:none!important}
 }
 </style>
 \n</html>
