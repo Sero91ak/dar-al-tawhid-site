@@ -2800,7 +2800,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.05</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.06</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -2809,9 +2809,7 @@ html:not([data-view="today"]) .view.active{
       </div>
 
       <div class="hero" aria-label="DĀR AL TAWḤĪD Kids">
-        <video class="hero-cinema-video" autoplay muted loop playsinline preload="auto" poster="/kids/assets/kids-home-v1176/hero-cinema.png" aria-hidden="true" tabindex="-1" disablepictureinpicture>
-          <source src="/kids/assets/kids-home-v1178/hero-cinema.mp4" type="video/mp4">
-        </video>
+        <video class="hero-cinema-video" src="/kids/assets/kids-home-v1179/hero-cinema.mp4?v=1179" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="/kids/assets/kids-home-v1179/hero-poster.png?v=1179" aria-hidden="true" tabindex="-1" disablepictureinpicture></video>
         <div class="kids-wordmark">
           <p class="wm-dar-line">DĀR AL TAWḤĪD</p>
           <span class="wm-kids" aria-hidden="true"><span class="k">K</span><span class="i">i</span><span class="d">d</span><span class="s">s</span></span>
@@ -3178,7 +3176,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v105-home-cinema1178";
+const KIDS_BUILD_ID="kids-shell-v106-home-cinema1179";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6240,7 +6238,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=4"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v105-home-cinema1178";
+  var KIDS_BUILD_ID="kids-shell-v106-home-cinema1179";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -8218,191 +8216,504 @@ html[data-view="stories"] #view-stories > :last-child{
   #view-today .choice::after{animation:none!important}
 }
 </style>
-\n<style id="kids-home-cinema-v1178">
-/* V1178 — echter Cinema-Hero statt sichtbar aufgehängtem Standbild.
-   Das Video ist die bewegte Bildbasis; CSS-Ebenen dienen nur als dezente Atmosphäre. */
+\n<style id="kids-home-cinema-v1179">
+/* V1179 — sichtbarer Cinema-Hero: semi-realistisches Artwork, echtes Video,
+   iOS-Playback-Recovery, größere Marke und bewusst einzeilige Kinder-Typografie. */
 #view-today{
-  --home-cinema-deep:#061923;
-  --home-cinema-deep-2:#082433;
+  --home-cinema-deep:#061a24;
+  --home-cinema-deep-2:#082635;
   background:linear-gradient(180deg,var(--home-cinema-deep) 0%,var(--home-cinema-deep-2) 100%)!important;
 }
 #view-today .hero{
-  min-height:clamp(500px,130vw,580px)!important;
+  width:100vw!important;
+  max-width:100vw!important;
+  min-height:clamp(570px,146vw,680px)!important;
+  margin:0 calc(50% - 50vw)!important;
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  border:0!important;
   border-radius:0!important;
   box-shadow:none!important;
   background:var(--home-cinema-deep)!important;
-  overflow:hidden!important;
 }
 #view-today .hero::before{
-  inset:-2.5%!important;
-  background-image:
-    url("/kids/assets/kids-home-v1178/hero-poster.png"),
-    url("/kids/assets/kids-home-v1176/hero-cinema.png")!important;
-  background-size:cover,cover!important;
-  background-position:center 43%,center 46%!important;
-  filter:saturate(1.06) contrast(1.04) brightness(.86)!important;
-  animation:homePosterBreath1178 20s ease-in-out infinite alternate!important;
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:-3.5%!important;
+  display:block!important;
+  opacity:1!important;
+  background-image:url("/kids/assets/kids-home-v1179/hero-poster.png")!important;
+  background-size:cover!important;
+  background-position:center 45%!important;
+  filter:saturate(1.06) contrast(1.045) brightness(.82)!important;
+  transform:scale(1.035) translate3d(0,0,0)!important;
+  animation:homePosterCinema1179 16s ease-in-out infinite alternate!important;
 }
-@keyframes homePosterBreath1178{
-  from{transform:scale(1.025) translate3d(-.4%,.1%,0)}
-  to{transform:scale(1.055) translate3d(.5%,-.45%,0)}
+@keyframes homePosterCinema1179{
+  0%{transform:scale(1.035) translate3d(-.8%,.25%,0)}
+  100%{transform:scale(1.075) translate3d(.85%,-.65%,0)}
 }
 #view-today .hero-cinema-video{
   position:absolute!important;
-  z-index:0!important;
-  left:-2%!important;
-  top:-2%!important;
-  width:104%!important;
-  height:104%!important;
+  z-index:1!important;
+  inset:-3%!important;
+  width:106%!important;
+  height:106%!important;
   object-fit:cover!important;
-  object-position:center 43%!important;
-  opacity:1!important;
+  object-position:center 45%!important;
+  opacity:0!important;
   pointer-events:none!important;
   user-select:none!important;
   -webkit-user-select:none!important;
-  filter:saturate(1.07) contrast(1.045) brightness(.90)!important;
-  transform:translateZ(0) scale(1.012)!important;
-  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,.96) 82%,rgba(0,0,0,.70) 91%,rgba(0,0,0,.20) 98%,transparent 100%)!important;
-  mask-image:linear-gradient(180deg,#000 0%,#000 72%,rgba(0,0,0,.96) 82%,rgba(0,0,0,.70) 91%,rgba(0,0,0,.20) 98%,transparent 100%)!important;
+  filter:saturate(1.075) contrast(1.05) brightness(.86)!important;
+  transform:scale(1.035) translate3d(0,0,0)!important;
+  transition:opacity .9s ease!important;
+  animation:homeVideoParallax1179 12s ease-in-out infinite alternate!important;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 74%,rgba(0,0,0,.98) 83%,rgba(0,0,0,.78) 91%,rgba(0,0,0,.28) 98%,transparent 100%)!important;
+  mask-image:linear-gradient(180deg,#000 0%,#000 74%,rgba(0,0,0,.98) 83%,rgba(0,0,0,.78) 91%,rgba(0,0,0,.28) 98%,transparent 100%)!important;
+}
+html.home-cinema-playing #view-today .hero-cinema-video{opacity:1!important}
+@keyframes homeVideoParallax1179{
+  0%{transform:scale(1.04) translate3d(-.45%,.1%,0)}
+  100%{transform:scale(1.065) translate3d(.5%,-.3%,0)}
 }
 #view-today .hero::after{
-  z-index:1!important;
+  content:""!important;
+  position:absolute!important;
+  z-index:2!important;
+  inset:0!important;
+  display:block!important;
+  pointer-events:none!important;
   background:
-    radial-gradient(ellipse at 50% 22%,rgba(255,229,165,.10) 0%,transparent 40%),
-    radial-gradient(circle at 72% 49%,rgba(235,165,86,.11),transparent 22%),
+    radial-gradient(ellipse at 50% 18%,rgba(255,232,172,.10) 0%,transparent 38%),
+    radial-gradient(circle at 84% 34%,rgba(245,186,102,.11) 0%,transparent 22%),
     linear-gradient(180deg,
-      rgba(2,15,24,.20) 0%,
-      rgba(2,15,24,.03) 22%,
-      rgba(2,15,24,.08) 49%,
-      rgba(4,20,29,.42) 68%,
-      rgba(5,23,33,.82) 83%,
+      rgba(2,15,23,.18) 0%,
+      rgba(2,15,23,.02) 28%,
+      rgba(3,17,25,.04) 45%,
+      rgba(3,18,27,.22) 60%,
+      rgba(4,20,29,.60) 76%,
+      rgba(5,24,34,.90) 89%,
       var(--home-cinema-deep) 100%)!important;
 }
-/* Die zusätzlichen CSS-Ebenen bleiben sichtbar, aber deutlich subtiler als das echte Video. */
-#view-today .hero .cloud{opacity:.08!important;filter:blur(19px)!important;animation-duration:36s!important}
-#view-today .hero .city{opacity:.35!important;animation-duration:5.4s!important}
+/* Zusätzliche lebendige Ebenen: sichtbar, aber ruhig genug für eine Kinder-App. */
+#view-today .hero .cloud{
+  display:block!important;
+  z-index:3!important;
+  top:24%!important;
+  left:-42%!important;
+  width:72%!important;
+  height:13%!important;
+  opacity:.10!important;
+  border-radius:50%!important;
+  background:radial-gradient(ellipse,rgba(255,255,255,.58),rgba(255,255,255,.08) 52%,transparent 74%)!important;
+  filter:blur(24px)!important;
+  animation:homeMist1179 20s linear infinite!important;
+}
+#view-today .hero .cloud::before,
+#view-today .hero .cloud::after{display:none!important}
+@keyframes homeMist1179{
+  from{transform:translate3d(-8%,0,0) scale(1)}
+  to{transform:translate3d(210%,7%,0) scale(1.12)}
+}
+#view-today .hero .city{
+  display:block!important;
+  z-index:3!important;
+  left:8%!important;
+  right:8%!important;
+  bottom:17%!important;
+  width:auto!important;
+  height:25%!important;
+  transform:none!important;
+  clip-path:none!important;
+  opacity:.42!important;
+  background:
+    radial-gradient(circle at 8% 48%,rgba(255,219,143,.9) 0 1.2px,transparent 2px),
+    radial-gradient(circle at 18% 22%,rgba(255,242,196,.8) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 31% 66%,rgba(255,215,125,.85) 0 1.1px,transparent 2px),
+    radial-gradient(circle at 47% 34%,rgba(255,239,190,.76) 0 1px,transparent 1.9px),
+    radial-gradient(circle at 61% 72%,rgba(255,215,125,.8) 0 1.2px,transparent 2px),
+    radial-gradient(circle at 76% 30%,rgba(255,242,196,.8) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 91% 58%,rgba(255,219,143,.9) 0 1.2px,transparent 2px)!important;
+  filter:drop-shadow(0 0 10px rgba(255,213,126,.36))!important;
+  animation:homeDust1179 5.8s ease-in-out infinite alternate!important;
+}
+@keyframes homeDust1179{
+  from{transform:translate3d(0,4px,0);opacity:.28}
+  to{transform:translate3d(0,-7px,0);opacity:.62}
+}
 #view-today .hero .arch{
-  width:28%!important;
+  display:block!important;
+  z-index:3!important;
+  top:12%!important;
+  bottom:12%!important;
+  left:-46%!important;
+  right:auto!important;
+  width:22%!important;
+  height:auto!important;
+  border:0!important;
+  border-radius:50%!important;
   opacity:0!important;
-  filter:blur(22px)!important;
-  animation:homeLightSweep1178 9.8s ease-in-out infinite!important;
+  background:linear-gradient(90deg,transparent,rgba(255,229,169,.16),transparent)!important;
+  filter:blur(20px)!important;
+  transform:skewX(-12deg)!important;
+  animation:homeLightSweep1179 10.5s ease-in-out infinite!important;
 }
-@keyframes homeLightSweep1178{
-  0%,28%{left:-58%;opacity:0}
-  39%{opacity:.46}
-  65%{left:112%;opacity:.22}
-  100%{left:112%;opacity:0}
+@keyframes homeLightSweep1179{
+  0%,26%{left:-46%;opacity:0}
+  39%{opacity:.42}
+  68%{left:124%;opacity:.14}
+  100%{left:124%;opacity:0}
 }
-#view-today .hero .dune{opacity:.26!important;height:142px!important;bottom:-38px!important}
-#view-today .hero .lantern{opacity:.28!important}
+#view-today .hero .dune{
+  display:block!important;
+  z-index:3!important;
+  left:-10%!important;
+  right:-10%!important;
+  bottom:-5%!important;
+  height:29%!important;
+  opacity:.33!important;
+  background:radial-gradient(ellipse at 50% 100%,rgba(17,58,68,.80),rgba(7,31,43,.25) 58%,transparent 76%)!important;
+  filter:blur(10px)!important;
+  animation:homeLowHaze1179 9s ease-in-out infinite alternate!important;
+}
+@keyframes homeLowHaze1179{
+  from{transform:translate3d(-2%,0,0) scale(1)}
+  to{transform:translate3d(2%,-2%,0) scale(1.04)}
+}
+#view-today .hero .lantern{
+  display:block!important;
+  z-index:3!important;
+  right:9%!important;
+  top:34%!important;
+  width:10px!important;
+  height:10px!important;
+  font-size:0!important;
+  border-radius:50%!important;
+  opacity:.55!important;
+  background:#ffe0a0!important;
+  box-shadow:0 0 12px rgba(255,215,135,.72),0 0 30px rgba(255,183,87,.30)!important;
+  animation:homeGlowDot1179 3.4s ease-in-out infinite!important;
+}
+#view-today .hero .lantern::before,
+#view-today .hero .lantern::after{
+  content:""!important;position:absolute!important;border-radius:50%!important;background:#fff0c7!important;
+  box-shadow:0 0 12px rgba(255,224,159,.65)!important;
+}
+#view-today .hero .lantern::before{width:5px!important;height:5px!important;left:-58vw!important;top:10vh!important;animation:homeGlowDot1179 4.6s 1.1s ease-in-out infinite!important}
+#view-today .hero .lantern::after{width:4px!important;height:4px!important;left:-23vw!important;top:-13vh!important;animation:homeGlowDot1179 5.2s .4s ease-in-out infinite!important}
+@keyframes homeGlowDot1179{0%,100%{opacity:.28;transform:scale(.76)}50%{opacity:1;transform:scale(1.28)}}
 
-/* Größere, markantere Hauptmarke mit echtem Gold-Shimmer. */
+/* Hauptmarke: DĀR AL TAWḤĪD zuerst, groß, leuchtend und hochwertig. */
 #view-today .kids-wordmark{
-  top:max(52px,calc(env(safe-area-inset-top,0px) + 24px))!important;
+  position:absolute!important;
+  z-index:6!important;
+  top:max(60px,calc(env(safe-area-inset-top,0px) + 28px))!important;
+  left:0!important;
+  right:0!important;
+  width:min(96vw,560px)!important;
+  margin:0 auto!important;
   padding:0 12px!important;
-  gap:9px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:6px!important;
+  text-align:center!important;
+  transform:none!important;
 }
 #view-today .kids-wordmark::before{
-  top:-29px!important;
-  width:min(96vw,448px)!important;
-  height:174px!important;
-  background:radial-gradient(ellipse,rgba(2,20,31,.58),rgba(6,30,41,.20) 56%,transparent 78%)!important;
-  filter:blur(10px)!important;
-  animation:homeBrandAura1178 6.2s ease-in-out infinite!important;
+  content:""!important;
+  position:absolute!important;
+  z-index:-1!important;
+  top:-38px!important;
+  left:50%!important;
+  width:min(98vw,530px)!important;
+  height:210px!important;
+  transform:translateX(-50%)!important;
+  border-radius:50%!important;
+  background:radial-gradient(ellipse,rgba(2,20,31,.64) 0%,rgba(4,27,39,.30) 54%,transparent 78%)!important;
+  filter:blur(11px)!important;
+  animation:homeBrandAura1179 5.8s ease-in-out infinite!important;
 }
-@keyframes homeBrandAura1178{
-  0%,100%{opacity:.58;transform:translateX(-50%) scale(.95)}
+@keyframes homeBrandAura1179{
+  0%,100%{opacity:.62;transform:translateX(-50%) scale(.95)}
   50%{opacity:1;transform:translateX(-50%) scale(1.045)}
 }
 #view-today .wm-dar-line{
+  display:block!important;
   width:auto!important;
   max-width:100%!important;
-  font-family:Georgia,"Times New Roman",serif!important;
-  font-size:clamp(30px,8.6vw,40px)!important;
-  line-height:.98!important;
-  font-weight:700!important;
-  letter-spacing:.064em!important;
-  text-indent:.064em!important;
-  color:#fff3cb!important;
-  background:linear-gradient(100deg,#fff8dd 0%,#e6bd64 26%,#fff7d4 48%,#c99738 70%,#fff8df 100%)!important;
-  background-size:230% 100%!important;
-  background-position:0% 50%!important;
+  margin:0!important;
+  color:#fff1bd!important;
+  font-family:"Fredoka","Avenir Next",system-ui,sans-serif!important;
+  font-size:clamp(35px,9.25vw,48px)!important;
+  line-height:1!important;
+  font-weight:780!important;
+  letter-spacing:.045em!important;
+  text-indent:.045em!important;
+  white-space:nowrap!important;
+  background:linear-gradient(104deg,#fff9df 0%,#efca78 23%,#fff5c9 43%,#c99431 65%,#fff8da 86%,#e1b75e 100%)!important;
+  background-size:260% 100%!important;
   -webkit-background-clip:text!important;
   background-clip:text!important;
   -webkit-text-fill-color:transparent!important;
-  text-shadow:none!important;
-  filter:drop-shadow(0 4px 12px rgba(0,0,0,.50)) drop-shadow(0 0 11px rgba(238,195,99,.22))!important;
-  animation:homeDarCinema1178 6s ease-in-out infinite!important;
+  filter:drop-shadow(0 5px 15px rgba(0,0,0,.55)) drop-shadow(0 0 13px rgba(255,213,117,.22))!important;
+  animation:homeDarShimmer1179 4.7s ease-in-out infinite!important;
 }
-@keyframes homeDarCinema1178{
-  0%,100%{background-position:0% 50%;transform:translateY(0) scale(1);filter:drop-shadow(0 4px 12px rgba(0,0,0,.50)) drop-shadow(0 0 8px rgba(238,195,99,.15))}
-  46%{background-position:100% 50%;transform:translateY(-2px) scale(1.018);filter:drop-shadow(0 4px 12px rgba(0,0,0,.50)) drop-shadow(0 0 17px rgba(255,214,124,.34))}
-}
-#view-today .kids-wordmark::after{
-  width:min(68vw,290px)!important;
-  margin-top:4px!important;
-  background:linear-gradient(90deg,transparent,rgba(255,229,158,.26),rgba(255,236,179,.96),rgba(255,229,158,.26),transparent)!important;
-  background-size:220% 100%!important;
-  animation:homeBrandLine1178 5.2s ease-in-out infinite!important;
-}
-@keyframes homeBrandLine1178{
-  0%,100%{opacity:.42;background-position:0% 50%;transform:scaleX(.88)}
-  50%{opacity:.92;background-position:100% 50%;transform:scaleX(1.03)}
+@keyframes homeDarShimmer1179{
+  0%,100%{background-position:0% 50%;transform:translateY(0) scale(1)}
+  46%{background-position:100% 50%;transform:translateY(-2px) scale(1.022)}
 }
 #view-today .wm-kids{
-  font-size:clamp(72px,19.1vw,98px)!important;
-  filter:drop-shadow(0 11px 24px rgba(0,0,0,.38))!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:flex-end!important;
+  gap:.035em!important;
+  margin:2px 0 0!important;
+  color:#fff!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(82px,21.6vw,112px)!important;
+  font-weight:760!important;
+  line-height:.83!important;
+  filter:drop-shadow(0 12px 25px rgba(0,0,0,.42))!important;
 }
 #view-today .wm-kids span{
-  animation:kidsBalloonV1178 3.15s cubic-bezier(.33,.06,.28,1) infinite!important;
+  display:inline-block!important;
+  transform-origin:50% 100%!important;
+  -webkit-text-stroke:3.5px rgba(255,255,255,.56)!important;
+  paint-order:stroke fill!important;
+  text-shadow:0 2px 0 rgba(255,255,255,.58),0 7px 0 rgba(34,22,12,.13),0 14px 22px rgba(0,0,0,.28)!important;
+  animation:kidsBalloonV1179 2.85s cubic-bezier(.28,.04,.25,1) infinite!important;
 }
-#view-today .wm-kids .k{animation-delay:0s!important}
-#view-today .wm-kids .i{animation-delay:.13s!important}
-#view-today .wm-kids .d{animation-delay:.26s!important}
-#view-today .wm-kids .s{animation-delay:.39s!important}
-@keyframes kidsBalloonV1178{
-  0%,17%,100%{transform:translate3d(0,0,0) scale(1,1)}
-  29%{transform:translate3d(0,-9px,0) scale(1.025,.978)}
-  38%{transform:translate3d(0,-15px,0) scale(1.04,.962)}
-  49%{transform:translate3d(0,2px,0) scale(.98,1.035)}
-  59%{transform:translate3d(0,-3px,0) scale(1.012,.99)}
-  69%{transform:translate3d(0,0,0) scale(1)}
+#view-today .wm-kids .k{color:#ffd05d!important;rotate:-7deg!important;animation-delay:0s!important}
+#view-today .wm-kids .i{color:#63d3ff!important;rotate:5deg!important;animation-delay:.11s!important}
+#view-today .wm-kids .d{color:#ff77b4!important;rotate:-4deg!important;animation-delay:.22s!important}
+#view-today .wm-kids .s{color:#71df8e!important;rotate:7deg!important;animation-delay:.33s!important}
+@keyframes kidsBalloonV1179{
+  0%,18%,100%{transform:translate3d(0,0,0) scale(1)}
+  31%{transform:translate3d(0,-10px,0) scale(1.025,.98)}
+  41%{transform:translate3d(0,-17px,0) scale(1.045,.96)}
+  53%{transform:translate3d(0,3px,0) scale(.985,1.035)}
+  64%{transform:translate3d(0,-4px,0) scale(1.012,.99)}
+  74%{transform:translate3d(0,0,0) scale(1)}
+}
+#view-today .kids-wordmark::after{
+  content:""!important;
+  display:block!important;
+  width:min(72vw,330px)!important;
+  height:1px!important;
+  margin-top:12px!important;
+  background:linear-gradient(90deg,transparent,rgba(255,223,146,.28),rgba(255,238,185,.94),rgba(255,223,146,.28),transparent)!important;
+  background-size:230% 100%!important;
+  animation:homeBrandLine1179 4.6s ease-in-out infinite!important;
+}
+@keyframes homeBrandLine1179{
+  0%,100%{opacity:.36;background-position:0% 50%;transform:scaleX(.86)}
+  50%{opacity:.94;background-position:100% 50%;transform:scaleX(1.04)}
 }
 
-/* Copy sitzt im gleichen dunklen Bildverlauf – kein sichtbarer angehängter Block. */
+/* Copy: keine abgebrochenen Einzelwörter; hohe Lesbarkeit auf dem bewegten Hintergrund. */
 #view-today .hero-copy{
-  bottom:17px!important;
-  left:14px!important;
-  right:14px!important;
+  position:absolute!important;
+  z-index:7!important;
+  left:12px!important;
+  right:12px!important;
+  bottom:24px!important;
+  margin:0 auto!important;
+  padding:14px 10px 8px!important;
+  max-width:760px!important;
+  text-align:center!important;
+  border-radius:28px!important;
+  background:linear-gradient(180deg,rgba(4,22,31,.04),rgba(4,22,31,.46))!important;
+  text-shadow:0 3px 14px rgba(0,0,0,.68)!important;
+}
+#view-today .hero-salam{
+  display:block!important;
+  width:max-content!important;
+  max-width:100%!important;
+  margin:0 auto 11px!important;
+  color:#fff8e8!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(10.6px,2.92vw,13.5px)!important;
+  line-height:1.25!important;
+  font-weight:690!important;
+  letter-spacing:-.012em!important;
+  white-space:nowrap!important;
+  text-shadow:0 3px 16px rgba(0,0,0,.82)!important;
 }
 #view-today .hero-kicker{
-  background:rgba(4,25,36,.48)!important;
-  border-color:rgba(240,202,115,.34)!important;
-  box-shadow:inset 0 1px rgba(255,255,255,.04),0 6px 18px rgba(0,0,0,.10)!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:32px!important;
+  margin:0 auto 10px!important;
+  padding:6px 14px!important;
+  border:1px solid rgba(244,205,116,.46)!important;
+  border-radius:999px!important;
+  background:rgba(5,27,38,.62)!important;
+  color:#ffe1a1!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(9px,2.45vw,11px)!important;
+  line-height:1!important;
+  font-weight:780!important;
+  letter-spacing:.095em!important;
+  white-space:nowrap!important;
+  backdrop-filter:blur(8px)!important;
+  -webkit-backdrop-filter:blur(8px)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.05),0 7px 20px rgba(0,0,0,.16)!important;
 }
-#view-today .resume{
-  margin-top:7px!important;
-  border-color:rgba(240,202,115,.16)!important;
-  background:
-    radial-gradient(circle at 8% 50%,rgba(240,202,115,.07),transparent 30%),
-    linear-gradient(145deg,rgba(7,38,52,.98),rgba(5,28,40,.99))!important;
+#view-today .hero h1{
+  display:block!important;
+  width:max-content!important;
+  max-width:100%!important;
+  margin:0 auto 7px!important;
+  color:#fff!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(23.5px,6.05vw,34px)!important;
+  line-height:1.03!important;
+  font-weight:760!important;
+  letter-spacing:-.035em!important;
+  white-space:nowrap!important;
+  text-shadow:0 4px 18px rgba(0,0,0,.75)!important;
+}
+#view-today .hero-copy>p:last-child{
+  display:block!important;
+  width:max-content!important;
+  max-width:100%!important;
+  margin:0 auto!important;
+  color:rgba(255,255,255,.92)!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(10.2px,2.82vw,13px)!important;
+  line-height:1.28!important;
+  font-weight:590!important;
+  letter-spacing:-.012em!important;
+  white-space:nowrap!important;
+  text-shadow:0 3px 15px rgba(0,0,0,.78)!important;
 }
 
-/* Video nur auf der tatsächlich sichtbaren Startseite laufen lassen; iOS bleibt energiesparender. */
+/* Hero und Seite fließen wirklich ineinander. */
+#view-today .resume{
+  position:relative!important;
+  z-index:8!important;
+  margin-top:4px!important;
+  border-color:rgba(241,203,113,.18)!important;
+  background:
+    radial-gradient(circle at 8% 50%,rgba(242,205,117,.08),transparent 31%),
+    linear-gradient(145deg,rgba(7,39,53,.985),rgba(5,28,40,.995))!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.14)!important;
+}
+#view-today .section-title{font-size:clamp(27px,7vw,34px)!important;line-height:1.05!important;margin-top:26px!important}
+
+/* Das Video darf nicht mehr durch den Service-/Tab-Lebenszyklus "stumm" verschwinden. */
 .view:not(.active) .hero-cinema-video{visibility:hidden!important}
+
 @media(max-width:390px){
-  #view-today .wm-dar-line{font-size:clamp(29px,8.35vw,34px)!important;letter-spacing:.055em!important;text-indent:.055em!important}
-  #view-today .wm-kids{font-size:clamp(68px,18.8vw,86px)!important}
-  #view-today .hero-salam{font-size:clamp(9.7px,2.55vw,11.2px)!important}
-  #view-today .hero h1{font-size:clamp(23px,6.15vw,29px)!important}
-  #view-today .hero-copy>p:last-child{font-size:clamp(9.8px,2.6vw,11.5px)!important}
+  #view-today .hero{min-height:clamp(550px,150vw,610px)!important}
+  #view-today .kids-wordmark{top:max(56px,calc(env(safe-area-inset-top,0px) + 24px))!important}
+  #view-today .wm-dar-line{font-size:clamp(32px,8.7vw,38px)!important;letter-spacing:.036em!important;text-indent:.036em!important}
+  #view-today .wm-kids{font-size:clamp(76px,21.2vw,91px)!important}
+  #view-today .hero-salam{font-size:clamp(10px,2.82vw,11.2px)!important}
+  #view-today .hero h1{font-size:clamp(22.4px,5.95vw,27px)!important}
+  #view-today .hero-copy>p:last-child{font-size:clamp(9.8px,2.65vw,11.2px)!important}
+}
+@media(max-width:350px){
+  #view-today .hero-salam{font-size:9.25px!important;letter-spacing:-.022em!important}
+  #view-today .hero h1{font-size:21.6px!important}
+  #view-today .hero-copy>p:last-child{font-size:9.2px!important}
+  #view-today .hero-kicker{font-size:8.4px!important;padding-inline:10px!important}
+  #view-today .wm-dar-line{font-size:30px!important}
+  #view-today .wm-kids{font-size:72px!important}
+}
+@media(min-width:700px){
+  #view-today .hero{min-height:700px!important}
+  #view-today .kids-wordmark{top:max(74px,calc(env(safe-area-inset-top,0px) + 42px))!important}
+  #view-today .wm-dar-line{font-size:54px!important}
+  #view-today .wm-kids{font-size:122px!important}
+  #view-today .hero-copy{bottom:36px!important;left:32px!important;right:32px!important}
+  #view-today .hero-salam{font-size:16px!important}
+  #view-today .hero h1{font-size:42px!important}
+  #view-today .hero-copy>p:last-child{font-size:15px!important}
 }
 @media(prefers-reduced-motion:reduce){
-  #view-today .hero-cinema-video{display:none!important}
-  #view-today .wm-dar-line,
+  #view-today .hero::before{animation:none!important}
+  #view-today .hero-cinema-video{animation:none!important}
+  #view-today .hero .cloud,
+  #view-today .hero .city,
+  #view-today .hero .arch,
+  #view-today .hero .dune,
+  #view-today .hero .lantern,
   #view-today .kids-wordmark::before,
   #view-today .kids-wordmark::after,
+  #view-today .wm-dar-line,
   #view-today .wm-kids span{animation:none!important}
 }
 </style>
+<script id="kids-home-cinema-runtime-v1179">
+(function(){
+  "use strict";
+  function bootCinema(){
+    var root=document.documentElement;
+    var view=document.getElementById("view-today");
+    var video=view&&view.querySelector(".hero-cinema-video");
+    if(!video)return;
+
+    video.muted=true;
+    video.defaultMuted=true;
+    video.autoplay=true;
+    video.loop=true;
+    video.playsInline=true;
+    video.setAttribute("muted","");
+    video.setAttribute("playsinline","");
+    video.setAttribute("webkit-playsinline","");
+    video.setAttribute("preload","auto");
+
+    function mark(state){
+      root.setAttribute("data-home-cinema",state);
+      if(state==="playing")root.classList.add("home-cinema-playing");
+    }
+    function attemptPlay(){
+      if(document.visibilityState==="hidden"||!view.classList.contains("active"))return;
+      try{
+        var p=video.play();
+        if(p&&typeof p.then==="function"){
+          p.then(function(){mark("playing")}).catch(function(){mark("awaiting-gesture")});
+        }
+      }catch(e){mark("awaiting-gesture")}
+    }
+    function pauseIfHidden(){
+      if(document.visibilityState==="hidden"||!view.classList.contains("active")){
+        try{video.pause()}catch(e){}
+        return;
+      }
+      attemptPlay();
+    }
+
+    video.addEventListener("playing",function(){mark("playing")},{passive:true});
+    video.addEventListener("timeupdate",function(){
+      if(video.currentTime>.06)mark("playing");
+    },{passive:true});
+    video.addEventListener("canplay",attemptPlay,{passive:true});
+    video.addEventListener("loadedmetadata",attemptPlay,{passive:true});
+    video.addEventListener("stalled",function(){mark("stalled")},{passive:true});
+    video.addEventListener("error",function(){mark("fallback")},{passive:true});
+    document.addEventListener("visibilitychange",pauseIfHidden,{passive:true});
+    window.addEventListener("pageshow",attemptPlay,{passive:true});
+    window.addEventListener("focus",attemptPlay,{passive:true});
+    document.addEventListener("pointerdown",attemptPlay,{once:true,passive:true});
+    document.addEventListener("touchstart",attemptPlay,{once:true,passive:true});
+
+    if(window.MutationObserver){
+      new MutationObserver(pauseIfHidden).observe(view,{attributes:true,attributeFilter:["class"]});
+    }
+
+    setTimeout(attemptPlay,80);
+    setTimeout(attemptPlay,650);
+    setTimeout(attemptPlay,1800);
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",bootCinema,{once:true});
+  else bootCinema();
+})();
+</script>
 </html>
