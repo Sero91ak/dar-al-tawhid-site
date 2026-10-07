@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1234-dua-voice",
+    "serviceWorkerCache": "v1234",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1135,8 +1135,12 @@
     "duaWordMode": "isolated-v4-word-files-no-timing-slices",
     "duaVoiceCache": "network-first-manifests-direct-audio",
     "duaKarimFallback": false,
-    "duaQuranLearningVoice": "serhat-master-fusha"
+    "duaQuranLearningVoice": "serhat-master-fusha",
+    "kidsQuizLearningCenter": "v4",
+    "kidsQuizStats": "secure-seen-learning-errors-due-first-try",
+    "kidsQuizResume": true,
+    "kidsQuizMobileNext": "fixed-visible-v5"
   },
-  "updatedAt": "2026-10-07T16:44:00+02:00",
+  "updatedAt": "2026-10-07T16:45:00+02:00",
   "deployTrigger": "2026-10-07T16:44:00+02:00"
 }
