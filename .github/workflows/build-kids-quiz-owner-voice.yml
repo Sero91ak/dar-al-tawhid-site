@@ -33,6 +33,17 @@ jobs:
         with:
           ref: main
 
+      - name: Auto-scope pure Dua data pushes
+        if: github.event_name == 'push' && env.VOICE_BUILD_SCOPE == 'full'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t changed < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | sed '/^$/d')
+          if [ "${#changed[@]}" -eq 1 ] && [ "${changed[0]}" = "kids/data/dua-kids.json" ]; then
+            echo "VOICE_BUILD_SCOPE=dua" >> "$GITHUB_ENV"
+            echo "Pure kids/data/dua-kids.json push detected -> VOICE_BUILD_SCOPE=dua"
+          fi
+
       - name: Resolve available DĀR owner voice path
         run: |
           set -euo pipefail
