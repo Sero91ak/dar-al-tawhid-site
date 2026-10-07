@@ -13,15 +13,16 @@
 
   var COMPACT_MAX = 599;
   /* v1326: capacity based — no device-name or fixed desktop-only breakpoint. */
-  var EXPANDED_MIN = 800;
-  var EXPANDED_PORTRAIT_MIN = 800;
-  var EXPANDED_MIN_HEIGHT = 420;
-  var SIDE_NAV_RESERVE = 82;
+  var EXPANDED_MIN = 900;
+  var EXPANDED_PORTRAIT_MIN = 900;
+  var EXPANDED_MIN_HEIGHT = 560;
+  var SIDE_NAV_RESERVE = 72;
   var SIDE_NAV_MIN_WIDTH = 760;
-  var RAIL_MIN = 260;
-  var RAIL_MAX = 340;
-  var MASTER_GAP = 16;
-  var READER_MIN = 480;
+  var SIDE_NAV_MIN_HEIGHT = 360;
+  var RAIL_MIN = 300;
+  var RAIL_MAX = 360;
+  var MASTER_GAP = 18;
+  var READER_MIN = 500;
   var currentMode = "";
   var rafId = 0;
   var started = false;
@@ -76,7 +77,7 @@
     var w = Number(width) || 0;
     var h = Number(height) || 0;
     if (pref !== "left" && pref !== "right") return false;
-    if (w < SIDE_NAV_MIN_WIDTH || h < EXPANDED_MIN_HEIGHT) return false;
+    if (w < SIDE_NAV_MIN_WIDTH || h < SIDE_NAV_MIN_HEIGHT) return false;
     if (document.documentElement && document.documentElement.classList.contains("adaptive-keyboard-open")) return false;
     return true;
   }
@@ -89,8 +90,11 @@
     var usable = Math.max(0, w - sideReserve - outer);
     var rail = Math.round(Math.min(RAIL_MAX, Math.max(RAIL_MIN, usable * 0.31)));
     var reader = Math.max(0, usable - rail - MASTER_GAP);
-    var readerMin = w >= 1000 ? 500 : READER_MIN;
-    var dual = w >= EXPANDED_MIN && h >= EXPANDED_MIN_HEIGHT && reader >= readerMin;
+    var readerMin = READER_MIN;
+    /* Phone landscape stays a single app surface. A real master/detail split
+       needs tablet/Fold-like short-edge height, not only a wide aspect ratio. */
+    var phoneLandscape = w > h && h < EXPANDED_MIN_HEIGHT;
+    var dual = !phoneLandscape && w >= EXPANDED_MIN && h >= EXPANDED_MIN_HEIGHT && reader >= readerMin;
     return {
       width: w,
       height: h,
@@ -430,6 +434,7 @@
     EXPANDED_PORTRAIT_MIN: EXPANDED_PORTRAIT_MIN,
     EXPANDED_MIN_HEIGHT: EXPANDED_MIN_HEIGHT,
     SIDE_NAV_RESERVE: SIDE_NAV_RESERVE,
+    SIDE_NAV_MIN_HEIGHT: SIDE_NAV_MIN_HEIGHT,
     RAIL_MIN: RAIL_MIN,
     RAIL_MAX: RAIL_MAX,
     READER_MIN: READER_MIN,
