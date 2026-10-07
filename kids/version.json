@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v127-home-brand1223",
-  "label": "KIDS · V1.08.48",
-  "releasedAt": "2026-10-07T11:45:00+02:00",
-  "note": "V1223 behebt den fehlenden DĀR AL TAWḤĪD-Titel in der iOS-Kids-App. Die freigegebene Wortmarke wird nicht mehr über das V1222-SVG geladen, das intern wieder eine data:-PNG einbettete, sondern direkt als echte same-origin PNG-Datei. Dadurch kann iOS/CSP die Wortmarke zuverlässig rendern. Kids und der bestehende Ballon-Effekt bleiben unverändert.",
+  "buildId": "kids-shell-v128-nav-deen-fix1224",
+  "label": "KIDS · V1.08.49",
+  "releasedAt": "2026-10-07T12:11:00+02:00",
+  "note": "V1224 behebt zwei sichtbare Kids-Fehler: Der Propheten-Zurück-Button wird nicht mehr fälschlich durch die globale Capsule-Regel auf volle Breite gezogen. Im Dīn-Detail sind Hören & Mitlesen, Hören und Lesen wieder als drei getrennte Modi sichtbar; der vollständige Lesetext bleibt auch ohne hinterlegte Audioaufnahme verfügbar, während Audio-Modi bis zur Aufnahme deaktiviert bleiben.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1223",
+    "serviceWorkerCache": "v1224",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -838,7 +838,7 @@
     },
     "prophetLibraryCardMinHeightPhone": "206px",
     "prophetLibraryCardMinHeightTablet": "236px",
-    "globalCardInteraction": "whole-card-tap-v10",
+    "globalCardInteraction": "whole-card-tap-v12-nav-safe",
     "globalCardArrows": false,
     "globalCardRails": false,
     "globalCardWholeHitTarget": true,
@@ -888,7 +888,7 @@
     "globalCapsulePhoneBleed": "6px each side",
     "globalCapsuleEffectiveOuterMargin": "about 10px with 16px shell inset",
     "globalCapsuleTabletWidth": "100% content column",
-    "globalTouchGlow": "runtime-v4 + css-v11",
+    "globalTouchGlow": "runtime-v5 + css-v12",
     "globalTouchGlowCoverage": "all clickable Kids capsules/cards + stories home + deen + prophets + sahaba + sahabiyyat + quran + dua + quiz + parents + story libraries + compact mode capsules",
     "globalTouchMotion": "no translate/scale/lift",
     "globalArrowSpaceReclaimed": true,
@@ -1055,8 +1055,15 @@
     "duaHeader": "compact-contained",
     "duaAssets": "local-3d-svg-v1221",
     "bottomNav": "five-tabs-one-row-original-form",
-    "homeBrandTransparent": true
+    "homeBrandTransparent": true,
+    "globalNavigationControlsExcludedFromCardGeometry": true,
+    "deenLessonModes": [
+      "Hören & Mitlesen",
+      "Hören",
+      "Lesen"
+    ],
+    "deenReadTextWithoutAudio": true
   },
   "updatedAt": "2026-10-07",
-  "deployTrigger": "2026-10-07T10:06:00+02:00"
+  "deployTrigger": "2026-10-07T12:11:00+02:00"
 }
