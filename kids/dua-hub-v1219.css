@@ -9,7 +9,7 @@
   --duahub-ink:#102747;
   --duahub-muted:#786b5a;
 }
-html[data-view="dua"] body{background:#061a2d}
+html[data-view="dua"] body{background:#061a2d}\nhtml.duahub-detail-open .shell{overflow:hidden!important;overscroll-behavior:none!important}
 #view-dua{
   position:relative;
   isolation:isolate;
