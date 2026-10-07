@@ -1301,3 +1301,211 @@ html body .gh-world-nav{--kids-subnav-line:rgba(239,208,138,.20)}
     transition:none!important;
   }
 }
+
+
+/* =========================================================
+   KIDS_SUBPAGE_APPBAR_V14
+   Professional correction of V13:
+   - no rounded outer navigation card
+   - no oversized "Zurück" pill
+   - integrated app bar with clear hierarchy
+   - hero stages remain untouched
+   ========================================================= */
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+){
+  width:100%!important;
+  min-height:calc(62px + env(safe-area-inset-top,0px))!important;
+  margin:0!important;
+  padding:calc(env(safe-area-inset-top,0px) + 8px) max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))!important;
+  gap:11px!important;
+  align-items:center!important;
+  border:0!important;
+  border-bottom:1px solid rgba(154,210,205,.12)!important;
+  border-radius:0!important;
+  background:
+    linear-gradient(180deg,rgba(5,25,37,.95),rgba(5,25,37,.82))!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(18px) saturate(1.05)!important;
+  -webkit-backdrop-filter:blur(18px) saturate(1.05)!important;
+  overflow:visible!important;
+}
+
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+) > div{
+  min-width:0!important;
+  flex:1 1 auto!important;
+  gap:3px!important;
+}
+
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+) > div > strong{
+  font-size:clamp(18px,2.35vw,20px)!important;
+  line-height:1.08!important;
+  font-weight:900!important;
+  color:#fff8eb!important;
+  letter-spacing:-.014em!important;
+}
+
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+) > div > span{
+  font-size:clamp(10.5px,1.55vw,12px)!important;
+  line-height:1.28!important;
+  font-weight:700!important;
+  color:rgba(255,255,255,.58)!important;
+}
+
+/* Compact back control: clear, stable and visually subordinate to the page title. */
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+),
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+).kids-tap-card{
+  width:46px!important;
+  min-width:46px!important;
+  max-width:46px!important;
+  height:46px!important;
+  min-height:46px!important;
+  max-height:46px!important;
+  flex:0 0 46px!important;
+  margin:0!important;
+  padding:0 0 2px!important;
+  display:grid!important;
+  place-items:center!important;
+  border:1px solid rgba(239,207,132,.24)!important;
+  border-radius:15px!important;
+  background:
+    linear-gradient(145deg,rgba(239,207,132,.09),rgba(255,255,255,.035))!important;
+  color:#f7dda0!important;
+  font-size:31px!important;
+  font-weight:700!important;
+  line-height:1!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
+  transform:none!important;
+  translate:none!important;
+}
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+)::after{
+  content:none!important;
+  display:none!important;
+}
+
+@media(hover:hover) and (pointer:fine){
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ):hover{
+    border-color:rgba(247,218,147,.42)!important;
+    box-shadow:0 0 18px rgba(236,196,105,.10)!important;
+    filter:brightness(1.035)!important;
+  }
+}
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+):is(:active,:focus-visible){
+  outline:0!important;
+  border-color:rgba(250,220,145,.68)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,232,164,.12),
+    0 0 20px rgba(240,202,116,.14)!important;
+  filter:brightness(1.05)!important;
+}
+
+/* Preserve local accents without turning the app bar into a separate card. */
+html body .dl-library-nav{border-bottom-color:rgba(124,210,198,.15)!important}
+html body .sy-library-page .ms-library-nav{border-bottom-color:rgba(231,190,145,.15)!important}
+html body .ps-library-nav{border-bottom-color:rgba(96,193,230,.15)!important}
+html body .gh-world-nav{border-bottom-color:rgba(239,208,138,.14)!important}
+
+@media(max-width:370px){
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav){
+    padding-left:12px!important;
+    padding-right:12px!important;
+    gap:9px!important;
+  }
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ),
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ).kids-tap-card{
+    width:44px!important;
+    min-width:44px!important;
+    max-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    max-height:44px!important;
+    flex-basis:44px!important;
+  }
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav)>div>strong{
+    font-size:17px!important;
+  }
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav)>div>span{
+    font-size:10px!important;
+  }
+}
+
+@media(min-width:700px){
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav){
+    min-height:calc(68px + env(safe-area-inset-top,0px))!important;
+    padding-left:max(20px,env(safe-area-inset-left,0px))!important;
+    padding-right:max(20px,env(safe-area-inset-right,0px))!important;
+  }
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ),
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ).kids-tap-card{
+    width:48px!important;
+    min-width:48px!important;
+    max-width:48px!important;
+    height:48px!important;
+    min-height:48px!important;
+    max-height:48px!important;
+    flex-basis:48px!important;
+  }
+}

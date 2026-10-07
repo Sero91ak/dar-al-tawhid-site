@@ -94,3 +94,12 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Bestehende **Hero-/Bildbühnen werden nicht verändert**. Das gilt ausdrücklich auch für Zurück-/Minimieren-Controls, die direkt innerhalb eines Hero-Bildes liegen.
 - Nicht unter diese Regel fallen die Startseiten-Hero-Bühne, Geschichten-/Qurʾān-/Eltern-Heroes, Detail-Heroes, Player-Heroes, die Duʿāʾ-Detailbildbühne, Quiz-Kontextbuttons und die untere Haupt-Tab-Leiste.
 - Neue Unterseiten mit dieser Struktur verwenden `.kids-subpage-nav` und `.kids-subpage-back`, damit der globale Standard automatisch greift.
+
+
+## Korrektur Unterseiten-Kopf — `KIDS_SUBPAGE_APPBAR_V14`
+
+- Der Nicht-Hero-Unterseitenkopf ist **keine eigene große Karte/Kapsel**. Er sitzt als ruhige, integrierte App-Bar direkt am oberen Seitenrand.
+- Kein großer beschrifteter „Zurück“-Pill-Button. Zurück bleibt ein kompakter 44–48-px-Control links; Titel und Untertitel bekommen die visuelle Priorität.
+- Keine doppelte Rahmenwirkung aus Seitenkopf plus Inhaltskarten. Nur eine sehr feine untere Trennlinie und zurückhaltender Blur sind erlaubt.
+- Titel darf groß genug für Kinder sein, soll aber keine Inhaltskarte imitieren. Untertitel bleibt sekundär.
+- Diese Korrektur gilt global nur für die bereits definierte Nicht-Hero-Unterseitenstruktur. Hero-/Bildbühnen und deren Overlay-Controls bleiben weiterhin ausdrücklich ausgeschlossen.

@@ -52,6 +52,9 @@ function runKidsDesignGuard() {
   if (!/KIDS_SUBPAGE_NAV_RAIL/.test(doc)) {
     failed += fail(`${KIDS_DOC}: globale Nicht-Hero-Unterseiten-Navigation fehlt`);
   }
+  if (!/KIDS_SUBPAGE_APPBAR_V14/.test(doc)) {
+    failed += fail(`${KIDS_DOC}: professionelle Unterseiten-App-Bar V14 fehlt`);
+  }
   if (!/KIDS_GLOBAL_TOUCH_GLOW/.test(doc)) {
     failed += fail(`${KIDS_DOC}: globaler Touch-Glow muss dokumentiert sein`);
   }
@@ -67,8 +70,8 @@ function runKidsDesignGuard() {
   if (!/KIDS_NO_PRECLICK_DURATION/.test(doc)) {
     failed += fail(`${KIDS_DOC}: Pre-Click-Dauer/Alter-Regel fehlt`);
   }
-  if (!html.includes("/kids/kids-touch-rail.css?v=13")) {
-    failed += fail(`${KIDS_HTML}: globales Karten-Interaktionssystem v13 fehlt`);
+  if (!html.includes("/kids/kids-touch-rail.css?v=14")) {
+    failed += fail(`${KIDS_HTML}: globales Karten-Interaktionssystem v14 fehlt`);
   }
 
   // Approved start hero reference (V1199): keep the exact static scene and
