@@ -1,10 +1,10 @@
 {
-  "version": "2.9.120",
-  "updatedAt": "2026-10-06",
-  "deployTrigger": "voice-studio-2.9.120-kids-deen-master-lessons",
+  "version": "2.9.121",
+  "updatedAt": "2026-10-07T09:20:00+02:00",
+  "deployTrigger": "voice-studio-2.9.121-expanded-islamic-lexicon",
   "engine": "chatterbox-multilingual-v3-mlx-primary",
   "provider": "self-produced",
-  "cache": "dar-voice-studio-v89",
+  "cache": "dar-voice-studio-v90",
   "productionSurface": "local-http://127.0.0.1:8787/studio/",
   "remoteSurface": "/voice-studio/",
   "setupPolicy": "setup-app-only-no-direct-command",
@@ -341,8 +341,8 @@
     "appIconPlaceholderRegressionGuard": true,
     "appIconHeaderPresenceValidation": true,
     "appIconPwaCacheRefresh": true,
-    "validatedCommit": "b64b8a40292884f7994ae49457eece7a705bf21d",
-    "validatedAt": "2026-10-05T12:14:00+02:00",
+    "validatedCommit": "5539b94c2e57b838bb98b905882eb6d0d38e051f",
+    "validatedAt": "2026-10-07T09:20:00+02:00",
     "freeVoiceIsolation": true,
     "mainAppBrandingUnchanged": true,
     "prophetStoryLocalBatchSmoke": true,
@@ -499,7 +499,10 @@
     "singlePhysicalMasterAudio": true,
     "masterAudioDurationGuard": true,
     "sahabaAuthenticSourceExpansion": true,
-    "releaseCandidateRef": "7cfab1e3530f3ef408a2c93f4f58612aa09a960e"
+    "releaseCandidateRef": "7cfab1e3530f3ef408a2c93f4f58612aa09a960e",
+    "expandedIslamicLexicon": true,
+    "cloudPronunciationPreprocessing": true,
+    "duaQuizSmoothProfiles": true
   },
   "performance": {
     "reusableVoiceConditioning": true,
@@ -909,7 +912,7 @@
   "macBundleIconName": "AppIcon",
   "macDockRefresh": true,
   "macLaunchServicesReregister": true,
-  "releaseRef": "7cfab1e3530f3ef408a2c93f4f58612aa09a960e",
+  "releaseRef": "5539b94c2e57b838bb98b905882eb6d0d38e051f",
   "releaseChannel": "main",
   "updateRepair": true,
   "updateRepairReason": "2.9.68 ist ein Stabilitäts-Recovery-Release. Ursache der wiederholten Hänger/Abstürze war eine Kombination aus mehreren Engine-Prozessmanagern (LaunchAgent/KeepAlive, Bundle-Launcher und native App), automatischem UI-Sync von GitHub/main sowie automatischer Update-Installation direkt beim App-Start. Der Installer startet keine Engine mehr. Der App-Bundle-Launcher startet exakt eine lokale Engine, wartet auf die passende Health-Version und übergibt erst dann an die native App. Die native App bleibt bei Launcher-Besitz passiv. Updates werden beim Start nur angezeigt und niemals automatisch installiert. Der installierte UI-Stand bleibt auf dem gepinnten Release eingefroren.",
@@ -1356,10 +1359,10 @@
     "offlineManifestPackaged": true,
     "staleLocalManifestAutoRefresh": true
   },
-  "validatedCommit": "5166e5f7a57b8bcce817146589803df5ef0a1114",
+  "validatedCommit": "5539b94c2e57b838bb98b905882eb6d0d38e051f",
   "validatedAt": "2026-10-04T23:11:00+02:00",
   "validation": {
-    "targetVersion": "2.9.113",
+    "targetVersion": "2.9.121",
     "pronunciationAsyncPreviewQueue": true,
     "pronunciationPreviewStatePolling": true,
     "pronunciationLocalCandidateFallback": true,
@@ -1385,7 +1388,7 @@
     "pronunciationPreviewNoLongFormQaCascade": true,
     "rootCauseConfirmed": "alphabet-audio-studio auto-started full 140 alphabet + quiz + greeting batch on studio load, monopolizing the shared local synthesis worker",
     "alphabetBatchDoesNotAutoStart": true,
-    "engineVersion": "2.9.119",
+    "engineVersion": "2.9.121",
     "engineHealthExposesVersion": true,
     "uiRejectsStaleEngineVersion": true,
     "nativeMacRestartsStaleEngine": true,
@@ -1487,10 +1490,10 @@
     "stalePortCleanupRegression": true,
     "deepEngineRepairRegression": true,
     "manualEngineRepairMenuRegression": true,
-    "uiVersion": "2.9.113",
+    "uiVersion": "2.9.121",
     "uiEngineManifestVersionCoherence": true,
     "staleUiDoesNotMarkHealthyEngineOffline": true,
-    "mobileVersion": "2.9.119",
+    "mobileVersion": "2.9.121",
     "iosHttpsInstallRegression": true,
     "dedicatedMobileManifestRegression": true,
     "publicInstallQrRegression": true,
@@ -1501,7 +1504,10 @@
     "elevenLabsMobileCloudRegression": true,
     "adamIdrisReferenceCorpusRegression": true,
     "duaQuizProfileRegression": true,
-    "macVersion": "2.9.119"
+    "macVersion": "2.9.119",
+    "expandedLexiconEntries": 326,
+    "expandedLexiconAliases": 768,
+    "duaQuizSmoothProfiles": true
   },
   "mubashshirunStories": {
     "enabled": true,
@@ -1622,7 +1628,7 @@
   },
   "mobileVoiceApp": {
     "enabled": true,
-    "version": "2.9.120",
+    "version": "2.9.121",
     "installUrl": "https://dar-al-tawhid.de/voice-studio/mobile.html?app=1&cloud=1",
     "manifest": "/voice-studio/mobile-manifest.webmanifest",
     "installTransport": "https",
@@ -1671,7 +1677,8 @@
     "legacyEngineGenerateFallback": true,
     "pendingPronunciationSelectorFixed": true,
     "singleMasterStoryMode": true,
-    "ageSelectionForStoryAudio": false
+    "ageSelectionForStoryAudio": false,
+    "expandedPronunciationLexicon": true
   },
   "mobile": {
     "enabled": true,
@@ -1821,7 +1828,8 @@
     "mobileCoreProvider": "ElevenLabs Cloud",
     "mobileExternalGpuRequired": false,
     "mobileHealthEndpoint": "/voice-studio/api/health",
-    "mobileGenerateEndpoint": "/voice-studio/api/generate"
+    "mobileGenerateEndpoint": "/voice-studio/api/generate",
+    "expandedPronunciationLexicon": true
   },
   "releaseRefPolicy": "Pinned 2.9.120 archive: the downloaded release already contains Voice Studio 2.9.120, single-master story UI, one physical master audio workflow, and the 5–8 minute master guard before the installer replaces the running app.",
   "knownRuleFastPath": true,
@@ -2028,5 +2036,45 @@
     "masterTextPolicy": "masterStoryText=Kids=Voice=read-along",
     "audioPolicy": "text-ready; generate only on explicit production",
     "allahHonorific": "subḥānahu wa taʿālā"
+  },
+  "pronunciation": {
+    "expandedLexiconEnabled": true,
+    "expandedLexiconEntries": 326,
+    "expandedLexiconAliases": 768,
+    "expandedLexiconFile": "data/pronunciation/islamic-expanded-lexicon.json",
+    "elevenLabsSupplement": "data/pronunciation/DAR_AL_TAWHID_ElevenLabs_EXPANDED_SUPPLEMENT_29121.pls",
+    "internetCrossCheck": "Quranic Arabic Corpus",
+    "categories": [
+      "formulas",
+      "core",
+      "aqidah",
+      "quran",
+      "fiqh",
+      "hadith",
+      "seerah",
+      "names",
+      "places"
+    ],
+    "cloudPreprocessing": true,
+    "localEnginePreprocessing": true,
+    "symbols": [
+      "ﷺ",
+      "ﷻ"
+    ]
+  },
+  "ownerReferenceCalibration": {
+    "enabled": true,
+    "references": [
+      "Ādam",
+      "Idrīs",
+      "Muḥammad"
+    ],
+    "role": "cadence/prosody calibration + exact-text reuse; no model-weight fine-tuning",
+    "kidsStoryWpmRange": [
+      144,
+      150
+    ],
+    "duaProfile": "calm-continuous",
+    "quizProfile": "clear-fluid"
   }
 }
