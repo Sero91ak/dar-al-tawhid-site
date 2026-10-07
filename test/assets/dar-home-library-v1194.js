@@ -70,31 +70,6 @@ function removeOldLayers(){
   if(document.body)document.body.classList.remove("dar-knowledge-home-v1183");
   document.documentElement.classList.remove("dar-home-v1190","dar-home-v1192");
 }
-function ensureHomeContinuousCanvasV1322(){
-  var id="dtHomeContinuousCanvasV1322";
-  var style=document.getElementById(id);
-  if(style)return;
-  style=document.createElement("style");
-  style.id=id;
-  style.textContent=[
-    'html.dar-home-v1194 body.is-home-route{position:relative!important;isolation:isolate!important;overflow-x:hidden!important;}',
-    'html.dar-home-v1194 body.is-home-route :is(.app,#appRoot,#appShell,.app-shell,.page-shell,.page,.main,main,.top-shell,.top-shell.theme-hero-shell,#appView,#appView.view,#appView .home-v380-shell){background-color:transparent!important;background-image:none!important;}',
-    'html.dar-home-v1194 body.is-home-route :is(.top-shell,#appView,.footer){position:relative!important;z-index:1!important;}',
-    'html.dar-home-v1194 body.is-home-route #bottomNav,html.dar-home-v1194 body.is-home-route .bottom-nav{z-index:999!important;}',
-    'html.dar-home-v1194 body.is-home-route #appView.view::before,html.dar-home-v1194 body.is-home-route #appView.view::after,html.dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad::after,html.dar-home-v1194 body.is-home-route .home-line-tawhid::before,html.dar-home-v1194 body.is-home-route .home-line-tawhid::after{content:none!important;display:none!important;}',
-    'html.dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad{margin-bottom:0!important;border-bottom:0!important;background:transparent!important;background-image:none!important;}',
-    'html.dar-home-v1194 body.is-home-route .home-line-tawhid{margin-top:0!important;border-top:0!important;background:transparent!important;background-image:none!important;}',
-    'html.dar-home-v1194 body.is-home-route #appView :is(.home-line-grid,.home-line-list,.home-line-row,.home-line-row:nth-child(odd),.home-line-row:nth-child(even)){background:transparent!important;background-image:none!important;box-shadow:none!important;}',
-    'html.dar-home-v1194 body.is-home-route .footer{background:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--dt-page) 78%,#efe8da 22%) 34%,var(--dt-page) 100%)!important;background-image:linear-gradient(180deg,transparent 0%,color-mix(in srgb,var(--dt-page) 78%,#efe8da 22%) 34%,var(--dt-page) 100%)!important;}'
-  ].join("");
-  document.head.appendChild(style);
-}
-function removeHomeContinuousCanvasV1322(){
-  ["dtHomeHeroBackdropV1322","dtHomeStudyBackdropV1322"].forEach(function(id){
-    var el=document.getElementById(id);
-    if(el)el.remove();
-  });
-}
 function applyHomeAtmosphereV1204(){
   if(!isHome())return;
   var html=document.documentElement;
@@ -104,99 +79,55 @@ function applyHomeAtmosphereV1204(){
   var top=document.querySelector(".top-shell");
   var header=top&&top.querySelector(".header");
   var view=document.getElementById("appView");
-  var footer=document.querySelector(".footer");
-  if(!body||!top||!view)return;
-
-  ensureHomeContinuousCanvasV1322();
-
-  var page=(getComputedStyle(body).getPropertyValue("--dt-page").trim())||(light?"#f5f1e7":"#050706");
+  var page=(body&&getComputedStyle(body).getPropertyValue("--dt-page").trim())||(light?"#f5f1e7":"#050706");
   var heroImg=window.matchMedia&&window.matchMedia("(min-width:760px)").matches
-    ? "/test/assets/home-v1194/hero-wide-adobe.jpg?v=1322-home"
-    : "/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1322-home";
-  var studyImg="/test/assets/home-v1194/study-runway.jpg?v=1322-home";
-  var viewport=Math.max(document.documentElement.clientWidth||0,window.innerWidth||0);
-  var blend=viewport<=430?260:300;
-  var half=Math.round(blend/2);
-  var scrollY=window.scrollY||window.pageYOffset||0;
-  var topRect=top.getBoundingClientRect();
-  var viewRect=view.getBoundingClientRect();
-  var footerRect=footer&&footer.getBoundingClientRect();
-  var seamY=Math.max(0,Math.round(topRect.bottom+scrollY));
-  var heroStart=Math.min(-220,Math.round(topRect.top+scrollY));
-  var heroEnd=seamY+half;
-  var studyStart=Math.max(0,seamY-half);
-  var contentEnd=Math.max(
-    Math.round(viewRect.bottom+scrollY),
-    footerRect?Math.round(footerRect.bottom+scrollY):0,
-    studyStart+1200
-  );
-
-  function ensureLayer(id){
-    var el=document.getElementById(id);
-    if(!el){
-      el=document.createElement("div");
-      el.id=id;
-      el.setAttribute("aria-hidden","true");
-      body.insertBefore(el,body.firstChild);
-    }
-    el.style.setProperty("position","absolute","important");
-    el.style.setProperty("left","0","important");
-    el.style.setProperty("right","0","important");
-    el.style.setProperty("width","100%","important");
-    el.style.setProperty("pointer-events","none","important");
-    el.style.setProperty("z-index","0","important");
-    el.style.setProperty("display","block","important");
-    el.style.setProperty("overflow","hidden","important");
-    return el;
+    ? "/test/assets/home-v1194/hero-wide-adobe.jpg?v=1239-home"
+    : "/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1239-home";
+  var studyImg="/test/assets/home-v1194/study-runway.jpg?v=1239-home";
+  if(html){
+    html.style.setProperty("background-color",page,"important");
+    html.style.setProperty(
+      "background-image",
+      light
+        ? "linear-gradient(90deg,rgba(249,246,238,.44),rgba(249,246,238,.10)),url('"+heroImg+"')"
+        : "linear-gradient(90deg,rgba(2,3,2,.58),rgba(2,3,2,.10)),url('"+heroImg+"')",
+      "important"
+    );
+    html.style.setProperty("background-repeat","no-repeat","important");
+    html.style.setProperty("background-size","cover","important");
+    html.style.setProperty("background-position","62% top","important");
   }
-
-  var heroLayer=ensureLayer("dtHomeHeroBackdropV1322");
-  heroLayer.style.setProperty("top",heroStart+"px","important");
-  heroLayer.style.setProperty("height",Math.max(760,heroEnd-heroStart)+"px","important");
-  heroLayer.style.setProperty(
-    "background",
-    light
-      ? "linear-gradient(180deg,rgba(248,244,235,.20) 0%,rgba(248,244,235,.28) 42%,rgba(244,239,229,.44) 72%,rgba(244,239,229,.62) 100%),linear-gradient(90deg,rgba(248,244,235,.42) 0%,rgba(248,244,235,.18) 52%,rgba(248,244,235,.06) 100%),url('"+heroImg+"') 62% 32%/cover no-repeat"
-      : "linear-gradient(180deg,rgba(2,3,2,.10) 0%,rgba(2,3,2,.18) 40%,rgba(2,3,2,.40) 72%,rgba(2,3,2,.70) 100%),linear-gradient(90deg,rgba(2,3,2,.56) 0%,rgba(2,3,2,.24) 52%,rgba(2,3,2,.06) 100%),url('"+heroImg+"') 62% 32%/cover no-repeat",
-    "important"
-  );
-  heroLayer.style.setProperty("-webkit-mask-image","linear-gradient(to bottom,#000 0%,#000 calc(100% - "+blend+"px),rgba(0,0,0,.92) calc(100% - "+Math.round(blend*.78)+"px),rgba(0,0,0,.62) calc(100% - "+Math.round(blend*.48)+"px),rgba(0,0,0,.22) calc(100% - "+Math.round(blend*.18)+"px),transparent 100%)","important");
-  heroLayer.style.setProperty("mask-image","linear-gradient(to bottom,#000 0%,#000 calc(100% - "+blend+"px),rgba(0,0,0,.92) calc(100% - "+Math.round(blend*.78)+"px),rgba(0,0,0,.62) calc(100% - "+Math.round(blend*.48)+"px),rgba(0,0,0,.22) calc(100% - "+Math.round(blend*.18)+"px),transparent 100%)","important");
-
-  var studyLayer=ensureLayer("dtHomeStudyBackdropV1322");
-  studyLayer.style.setProperty("top",studyStart+"px","important");
-  studyLayer.style.setProperty("height",Math.max(1320,contentEnd-studyStart+180)+"px","important");
-  studyLayer.style.setProperty(
-    "background",
-    light
-      ? "linear-gradient(180deg,rgba(247,243,234,.50) 0%,rgba(247,243,234,.68) 12%,rgba(247,243,234,.78) 34%,rgba(247,243,234,.82) 70%,rgba(247,243,234,.91) 90%,rgba(247,243,234,.98) 100%),url('"+studyImg+"') 56% 12%/cover no-repeat"
-      : "linear-gradient(180deg,rgba(5,8,7,.44) 0%,rgba(5,8,7,.58) 15%,rgba(5,8,7,.68) 44%,rgba(5,8,7,.78) 78%,rgba(5,8,7,.94) 100%),url('"+studyImg+"') 56% 12%/cover no-repeat",
-    "important"
-  );
-  studyLayer.style.setProperty("-webkit-mask-image","linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.18) "+Math.round(blend*.18)+"px,rgba(0,0,0,.56) "+Math.round(blend*.48)+"px,rgba(0,0,0,.90) "+Math.round(blend*.78)+"px,#000 "+blend+"px,#000 calc(100% - 240px),rgba(0,0,0,.72) calc(100% - 120px),transparent 100%)","important");
-  studyLayer.style.setProperty("mask-image","linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.18) "+Math.round(blend*.18)+"px,rgba(0,0,0,.56) "+Math.round(blend*.48)+"px,rgba(0,0,0,.90) "+Math.round(blend*.78)+"px,#000 "+blend+"px,#000 calc(100% - 240px),rgba(0,0,0,.72) calc(100% - 120px),transparent 100%)","important");
-
-  html.style.setProperty("background-color",page,"important");
-  html.style.setProperty("background-image","none","important");
-  body.style.setProperty("background-color",page,"important");
-  body.style.setProperty("background-image","none","important");
-  body.style.setProperty("position","relative","important");
-  body.style.setProperty("isolation","isolate","important");
-
-  [top,header,view].forEach(function(el){
-    if(!el)return;
-    el.style.setProperty("background","transparent","important");
-    el.style.setProperty("background-color","transparent","important");
-    el.style.setProperty("background-image","none","important");
-  });
-  [top,view,footer].forEach(function(el){
-    if(!el)return;
-    el.style.setProperty("position","relative","important");
-    el.style.setProperty("z-index","1","important");
-  });
+  if(body){
+    body.style.setProperty("background-color",page,"important");
+    body.style.setProperty("background-image","none","important");
+  }
+  if(top){
+    top.style.setProperty("background-color",page,"important");
+    top.style.setProperty(
+      "background-image",
+      light
+        ? "linear-gradient(180deg,rgba(249,246,238,.24) 0%,rgba(249,246,238,.28) 36%,rgba(249,246,238,.42) 78%,rgba(249,246,238,.48) 100%),linear-gradient(90deg,rgba(249,246,238,.50) 0%,rgba(249,246,238,.28) 50%,rgba(249,246,238,.12) 100%),url('"+heroImg+"')"
+        : "linear-gradient(180deg,rgba(2,3,2,.10) 0%,rgba(2,3,2,.18) 34%,rgba(2,3,2,.58) 72%,rgba(2,3,2,.98) 100%),linear-gradient(90deg,rgba(2,3,2,.58) 0%,rgba(2,3,2,.28) 48%,rgba(2,3,2,.08) 100%),url('"+heroImg+"')",
+      "important"
+    );
+    top.style.setProperty("background-repeat","no-repeat","important");
+    top.style.setProperty("background-size","100% 100%,100% 100%,cover","important");
+    top.style.setProperty("background-position","center,center,62% 32%","important");
+  }
+  if(header){
+    header.style.setProperty("background","transparent","important");
+    header.style.setProperty("background-image","none","important");
+  }
+  if(view){
+    view.style.setProperty("background-color","transparent","important");
+    view.style.setProperty("background-image","none","important");
+    view.style.removeProperty("background-repeat");
+    view.style.removeProperty("background-size");
+    view.style.removeProperty("background-position");
+  }
   document.querySelectorAll("#appView .home-v380-shell,#appView .home-v380-section,#appView .home-line-list,#appView .home-line-grid,.top-shell .header").forEach(function(el){
     el.style.setProperty("background-color","transparent","important");
-    el.style.setProperty("background-image","none","important");
+    if(!el.classList.contains("header"))el.style.setProperty("background-image","none","important");
   });
 }
 function ensureHero(){
@@ -717,7 +648,6 @@ function cleanupHomeLiteralArtifacts(){
 function sync(){
   if(!document.documentElement||!document.body)return;
   if(!isHome()){
-    removeHomeContinuousCanvasV1322();
     document.documentElement.classList.remove("dar-home-v1194");
     document.documentElement.style.removeProperty("background-color");
     document.documentElement.style.removeProperty("background-image");
@@ -751,8 +681,6 @@ function observe(){
   new MutationObserver(queue).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme","data-theme-variant"]});
   window.addEventListener("hashchange",queue);
   window.addEventListener("pageshow",queue);
-  window.addEventListener("resize",queue);
-  window.addEventListener("orientationchange",queue);
   document.addEventListener("dar:view-rendered",queue);
   queue();
 }
