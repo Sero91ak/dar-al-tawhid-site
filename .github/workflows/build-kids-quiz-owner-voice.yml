@@ -677,6 +677,28 @@ jobs:
               d["slowAudioMode"]="dedicated-owner-voice-v4"
               d["timingSlicesDeprecated"]=True
 
+          # Persist the product rule as data, not only as generator behavior.
+          # The whole Duʿāʾ area uses the owner's Master voice for Arabic/Fuṣḥā
+          # learning speech and German explanations. Qurʾānic Duʿāʾ here are
+          # educational pronunciation references, not a replacement for tilāwah.
+          policy=dua.setdefault("policy",{})
+          policy.update({
+              "quranAudio":"Im Duʿāʾ-Lernbereich spricht Serhat Abu Malik – Master den exakt geprüften arabischen Wortlaut in Fuṣḥā mit ElevenLabs V4. Dies ist eine Lernreferenz und kein Ersatz für Qurʾān-Rezitation.",
+              "sunnahArabicAudio":"Arabische Sunnah-Duʿāʾ verwenden Serhat Abu Malik – Master mit ElevenLabs V4 und expliziter Fuṣḥā-Ausrichtung.",
+              "audioLearning":"Jedes verifizierte Duʿāʾ hat getrennte Master-Audios für Deutsch, normales Arabisch, langsames Arabisch und isolierte arabische Wörter.",
+              "smartLearning":"Wort-Taps verwenden ausschließlich eigene isolierte V4-Wortclips. Satz-Zeitmarken und Audio-Slices sind für Wortwiedergabe verboten.",
+              "slowPracticeRate":"dedicated-v4-slow-render",
+              "arabicPronunciation":"Serhat Abu Malik – Master · ElevenLabs V4 · Fuṣḥā / hocharabische Lernreferenz · exakter geprüfter Wortlaut.",
+              "audioExpansionPolicy":"Neue verifizierte Duʿāʾ werden im selben Serhat-Master-V4-Pfad für Erklärung, Volltext, Slow-Render und isolierte Wörter produziert."
+          })
+          counts=dua.setdefault("counts",{})
+          counts["total"]=len(dua_items)
+          counts["smartLearningReady"]=len(dua_items)
+          counts["ownerVoiceGermanReady"]=len(dua_items)
+          counts["ownerVoiceArabicReady"]=len(dua_items)
+          counts["ownerVoiceArabicSlowReady"]=len(dua_items)
+          counts["isolatedWordLearningReady"]=len(dua_items)
+
           dua["audioPolicy"]={
               "voiceProfileId":"serhat-owner-voice-2026",
               "speaker":"Serhat Abu Malik – Master",
