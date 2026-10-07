@@ -630,6 +630,13 @@
     const smart = window.DARDuaSmartLearn;
     if (smart && typeof smart.playPreview === "function") {
       const fallback = () => {
+        if (d.audioArabicUrl) {
+          fallbackAudio = new Audio(String(d.audioArabicUrl));
+          fallbackAudio.playsInline = true;
+          fallbackAudio.preload = "auto";
+          fallbackAudio.play().catch(() => {});
+          return;
+        }
         if (window.DARKidsOwnerVoice?.play) {
           window.DARKidsOwnerVoice.play(String(d.audioArabicText || d.arabic || ""), { source: "kids-dua-hub-serhat-fusha" });
         }
@@ -657,6 +664,13 @@
     const text = String(d.audioGermanText || ((d.childPrompt || "") + " " + (d.meaning || ""))).replace(/\s+/g, " ").trim();
     const smart = window.DARDuaSmartLearn;
     const fallback = () => {
+      if (d.audioGermanUrl) {
+        fallbackAudio = new Audio(String(d.audioGermanUrl));
+        fallbackAudio.playsInline = true;
+        fallbackAudio.preload = "auto";
+        fallbackAudio.play().catch(() => {});
+        return;
+      }
       if (window.DARKidsOwnerVoice?.play) {
         window.DARKidsOwnerVoice.play(text, { source: "kids-dua-hub-german" });
       }
