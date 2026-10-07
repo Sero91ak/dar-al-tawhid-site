@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v118-global-glow1214",
-  "label": "KIDS · V1.08.39",
-  "releasedAt": "2026-10-07T09:01:00+02:00",
-  "note": "V1214 vereinheitlicht den sichtbaren Capsule-/Card-Touch-Glow appweit. Dīn-Hauptkarte und Dīn-Lektionen haben nun exakt dieselbe Breite und Press-Rückmeldung wie Propheten, Ṣaḥābah und Ṣaḥābiyyāt. Kleine Hören/Lesen/Mitlesen-Capsules bekommen denselben Lichtsaum ohne Layoutänderung. Bestehender Quiz-900-Stand bleibt vollständig erhalten.",
+  "buildId": "kids-shell-v118-global-glow1215",
+  "label": "KIDS · V1.08.40",
+  "releasedAt": "2026-10-07T09:43:00+02:00",
+  "note": "V1215 erzwingt den globalen Capsule-/Card-Touch-Glow auch bei Ṣaḥābah, Ṣaḥābiyyāt und lokalen Karten-Schatten. Neue anklickbare Kids-Capsules werden automatisch in das Glow-System aufgenommen. Der sichtbare Dīn-Badge „6 Lern-Erzählungen · Quellen kompakt getrennt“ wurde entfernt; Dīn verwendet konsequent die Bezeichnung Dīn-Lektion.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1214",
+    "serviceWorkerCache": "v1215",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
