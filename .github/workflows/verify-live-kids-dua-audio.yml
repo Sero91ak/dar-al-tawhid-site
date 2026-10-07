@@ -1,0 +1,65 @@
+name: Verify Live Kids Dua Audio
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-live-kids-dua-audio.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Verify live runtime and manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://dar-al-tawhid.de"
+          CB="$(date +%s)"
+          curl -fsS -A "DarAlTawhidKids-iOS" "$BASE/kids/dua-smart-learn.js?v=1241&cb=$CB" -o /tmp/dua-smart.js
+          grep -F 'GERMAN_URL="/kids/data/dua-audio.json?v=8"' /tmp/dua-smart.js
+          grep -F 'playGerman:playGerman' /tmp/dua-smart.js
+          grep -F 'prepare:prepare' /tmp/dua-smart.js
+          curl -fsS -A "DarAlTawhidKids-iOS" "$BASE/kids/owner-voice.js?v=8&cb=$CB" -o /tmp/owner.js
+          grep -F 'ensurePlayerAttached' /tmp/owner.js
+
+          for name in dua-audio dua-arabic-audio dua-arabic-slow-audio dua-word-audio; do
+            curl -fsS -A "DarAlTawhidKids-iOS" "$BASE/kids/data/$name.json?cb=$CB" -o "/tmp/$name.json"
+          done
+
+          python3 - <<'PY' > /tmp/audio-urls.txt
+          import json
+          specs=[
+            ("german","/tmp/dua-audio.json",122),
+            ("arabic","/tmp/dua-arabic-audio.json",120),
+            ("slow","/tmp/dua-arabic-slow-audio.json",120),
+            ("word","/tmp/dua-word-audio.json",696),
+          ]
+          for label,path,expected in specs:
+            data=json.load(open(path,encoding="utf-8"))
+            entries=data.get("entries") or {}
+            assert len(entries)==expected,(label,len(entries),expected)
+            assert data.get("modelId")=="eleven_v4",(label,data.get("modelId"))
+            assert data.get("voiceProfileId")=="serhat-owner-voice-2026",(label,data.get("voiceProfileId"))
+            first=next(iter(entries.values()))
+            print(label+"\t"+first["url"])
+          PY
+
+          while IFS=$'\t' read -r label path; do
+            url="$BASE$path"
+            headers="/tmp/$label.headers"
+            body="/tmp/$label.bin"
+            code="$(curl -L -sS -D "$headers" -o "$body" -w '%{http_code}' -A "DarAlTawhidKids-iOS" -H 'Range: bytes=0-2047' "$url")"
+            echo "$label HTTP $code · $(wc -c < "$body") bytes"
+            cat "$headers"
+            case "$code" in 200|206) ;; *) echo "::error::$label audio HTTP $code"; exit 1;; esac
+            test "$(wc -c < "$body")" -gt 500 || { echo "::error::$label audio body too small"; exit 1; }
+            grep -Eiq '^content-type:[[:space:]]*(audio/|application/octet-stream)' "$headers" || {
+              echo "::error::$label audio MIME type is not playable"; exit 1;
+            }
+          done < /tmp/audio-urls.txt
