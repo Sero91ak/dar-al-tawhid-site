@@ -4,7 +4,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 1238;
+  const VERSION = 1239;
   const DATA_URL = "/kids/data/dua-kids.json?v=1235";
   const PROFILE_KEY = "kids.profiles.v1";
   const ACTIVE_PROFILE_KEY = "kids.activeProfile";
@@ -732,11 +732,41 @@
     });
   }
 
+  function placeHomeProfileEmblem() {
+    const mark = q("#view-today .kids-wordmark");
+    const kids = q("#view-today .kids-wordmark > .wm-kids");
+    const dot = q("#view-today .profile-dot.profile-dot-avatar");
+    if (!mark || !kids || !dot) return;
+
+    const mr = mark.getBoundingClientRect();
+    const kr = kids.getBoundingClientRect();
+    if (!mr.width || !kr.width) return;
+
+    const width = Math.max(320, Number(window.innerWidth) || 390);
+    const size = width >= 700 ? 57 : (width <= 390 ? 51 : 53);
+    const gap = width >= 700 ? 12 : 9;
+    const safe = width >= 700 ? 18 : 10;
+
+    let left = Math.round((kr.left - mr.left) - size - gap);
+    left = Math.max(safe, Math.min(left, Math.round(mr.width - size - safe)));
+
+    let top = Math.round((kr.top - mr.top) + ((kr.height - size) / 2));
+    top = Math.max(0, top);
+
+    mark.style.setProperty("--kids-profile-left", left + "px");
+    mark.style.setProperty("--kids-profile-top", top + "px");
+  }
+
   function enhanceHeaderProfile() {
-    const dot = q(".brand-line .profile-dot");
-    if (!dot) return;
+    const dot = q("#view-today .profile-dot");
+    const mark = q("#view-today .kids-wordmark");
+    if (!dot || !mark) return;
+
     const gender = activeGender();
     const p = activeProfile();
+
+    if (dot.parentNode !== mark) mark.appendChild(dot);
+
     dot.classList.add("profile-dot-avatar");
     dot.setAttribute("aria-label", p ? "Aktives Profil: " + (p.name || "Kind") + " – Profil öffnen" : "Kinderprofil öffnen");
     dot.setAttribute("title", p ? (p.name || "Kind") + " · Profil" : "Kinderprofil");
@@ -750,7 +780,21 @@
         const parents = q('.bottom-nav .nav-btn[data-target="parents"]');
         if (parents) parents.click();
       });
+
+      let resizeTimer = 0;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(placeHomeProfileEmblem, 90);
+      }, { passive: true });
+      window.addEventListener("orientationchange", () => {
+        setTimeout(placeHomeProfileEmblem, 220);
+      }, { passive: true });
     }
+
+    requestAnimationFrame(() => {
+      placeHomeProfileEmblem();
+      requestAnimationFrame(placeHomeProfileEmblem);
+    });
   }
 
   function observeProfiles() {
