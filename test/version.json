@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1325",
-  "appBuildId": "app-shell-v1325",
-  "note": "v1325 · Beginn des adaptiven Fold/iPad-Navigationssystems: Einstellungen erhalten Unten/Links/Rechts für die globale 5-Tab-Leiste. Unten bleibt die bisherige Glas-Capsule mit Text; links/rechts wird dieselbe Navigation als schmale vertikale 3D-Icon-Rail geführt, mit eigener reservierter Fläche und ohne Inhaltsüberdeckung. Auf schmalen Displays fällt eine gespeicherte Seitenposition automatisch auf unten zurück. Bestehende Master/Detail-Ansichten spiegeln ihre Bereichsauswahl passend zur Händigkeit. Im Reader wird die Seitenleiste nach kurzer Ruhe dezent und bei Scroll/Interaktion wieder sichtbar. Test-App only.",
-  "updatedAt": "2026-10-07T21:52:00+02:00"
+  "buildId": "app-shell-v1326",
+  "appBuildId": "app-shell-v1326",
+  "note": "v1326 · Adaptive Fold/iPad Phase 2: Der Split-Modus hängt nicht mehr an einer starren 1400-px-Grenze, sondern an der tatsächlich verbleibenden Readerbreite nach Seiten-Tab-Rail, Master-Rail und Abständen. Dual wird nur aktiviert, wenn mindestens ca. 480–500 px Readerfläche bleiben. Der Fold-Shell behält Rail und Pane als stabilen DOM beim Auf-/Zuklappen; CSS schaltet nur die Anordnung/Sichtbarkeit. Readertexte bleiben auf max. 46rem lesbar, PDFs und Medien dürfen die komplette Content-Pane nutzen. Horizontales Seitendriften ist global blockiert; Grids verwenden verfügbare Mindestbreiten statt starre 3/4-Spalten. Links/Rechts-Händigkeit aus v1325 bleibt erhalten. Test-App.",
+  "updatedAt": "2026-10-07T22:18:00+02:00"
 }
