@@ -72,30 +72,44 @@ function renderCards(){
   }).join("");
   grid.querySelectorAll("[data-dl-id]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.dlId)));
 }
+function effectiveMode(){
+  const m=mode();
+  const has=!!audioMeta(active)?.url;
+  return !has&&(m==="listen"||m==="both")?"read":m;
+}
 function renderModeButtons(){
-  const m=mode(),has=!!audioMeta(active)?.url,young=isAudioOnlyAge();
+  const m=effectiveMode(),has=!!audioMeta(active)?.url;
   document.querySelectorAll("[data-dl-mode]").forEach(b=>{
     const kind=b.dataset.dlMode;
+    b.hidden=false;
     b.classList.toggle("active",kind===m);
-    b.hidden=young&&(kind==="both"||kind==="read");
     b.disabled=!!active&&((kind==="listen"||kind==="both")&&!has);
   });
 }
+function applyMode(interactive=false){
+  const m=effectiveMode();
+  const read=$("#dlRead");
+  if(read)read.hidden=(m==="listen");
+  renderModeButtons();
+  if(!active||!interactive)return;
+  if(m==="both"){
+    followReader?.openReadAlong?.();
+    if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+  }else if(m==="listen"){
+    followReader?.openListening?.();
+    if(audioMeta(active)?.url&&audio.paused)void toggleAudio();
+  }else{
+    if(!audio.paused)audio.pause();
+    followReader?.close?.();
+    if(read)read.hidden=false;
+  }
+}
 function setMode(v){
   if(!["both","listen","read"].includes(v))return;
-  if(isAudioOnlyAge()&&v!=="listen")v="listen";
   const has=!!audioMeta(active)?.url;
   if((v==="listen"||v==="both")&&!has)return;
   try{localStorage.setItem(MODE_KEY,v)}catch(_){}
-  renderModeButtons();
-  if(!active)return;
-  if(v==="both"){
-    followReader?.openReadAlong?.();if(audio.paused)void toggleAudio();
-  }else if(v==="listen"){
-    followReader?.openListening?.();if(audio.paused)void toggleAudio();
-  }else{
-    if(!audio.paused)audio.pause();followReader?.openReading?.();
-  }
+  applyMode(true);
 }
 function ensureUi(){
   const entry=$("#deenEntry");
@@ -196,8 +210,10 @@ function renderActive(){
   $("#dlRead").innerHTML=activeText.split(/\n{2,}/).map(p=>'<p>'+esc(p)+'</p>').join("");
   $("#dlSources").innerHTML=sourceHtml(active);
   const has=!!audioMeta(active)?.url,note=$("#dlAudioNote");
-  if(note)note.textContent=has?"Audio und intelligentes Mitlesen sind bereit.":(isAudioOnlyAge()?"Das Hörbuch folgt, sobald die freigegebene Aufnahme hinterlegt ist.":"Lesen ist bereit. Audio und intelligentes Mitlesen folgen nach der freigegebenen Aufnahme.");
-  renderModeButtons();resetAudio();
+  if(note)note.textContent=has
+    ?"Hören, Hören & Mitlesen und Lesen sind bereit."
+    :"Der vollständige Lesetext ist bereit. Hören und intelligentes Mitlesen werden aktiv, sobald die freigegebene Aufnahme hinterlegt ist.";
+  resetAudio();applyMode(false);
 }
 function resetAudio(){
   stopAudio();
