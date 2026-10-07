@@ -63,7 +63,21 @@
       return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];
     });
   }
-  function norm(s){return String(s||"").replace(/\s+/g," ").trim()}
+  function norm(s){
+    var value=String(s||"").replace(/\s+/g," ").trim();
+    try{return value.normalize("NFD")}catch(e){return value}
+  }
+  function manifestEntryIndex(manifest){
+    if(!manifest||!manifest.entries)return null;
+    if(manifest.__darCanonicalEntries)return manifest.__darCanonicalEntries;
+    var index=Object.create(null);
+    Object.keys(manifest.entries).forEach(function(key){
+      index[norm(key)]=manifest.entries[key];
+    });
+    try{Object.defineProperty(manifest,"__darCanonicalEntries",{value:index,configurable:true})}
+    catch(e){manifest.__darCanonicalEntries=index}
+    return index;
+  }
   function arabicText(d){return norm(d&&(d.audioArabicText||d.arabic))}
   function fetchJson(url){
     return fetch(url,{cache:"no-store"}).then(function(r){
@@ -93,7 +107,8 @@
     return packPromise;
   }
   function entry(manifest,text){
-    return manifest&&manifest.entries&&manifest.entries[norm(text)]||null;
+    var index=manifestEntryIndex(manifest);
+    return index&&index[norm(text)]||null;
   }
 
   function store(){
