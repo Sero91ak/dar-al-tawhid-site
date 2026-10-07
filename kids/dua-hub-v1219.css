@@ -1828,3 +1828,51 @@ html[data-kids-age] body .bottom-nav .nav-btn[data-target="dua"] .lab{
   .duahub-detail-actions{padding-left:18px!important;padding-right:18px!important}
   .duahub-textcard{width:calc(100% - 36px)!important;margin-left:18px!important;margin-right:18px!important;padding:22px!important}
 }
+
+
+/* DUA_CONTENT_FLOW_V1237 */
+/* One global shell reserve only. The Duʿāʾ page must end with its real content,
+   not a second 170px reserve or a 100dvh detail scroller. */
+#view-dua{
+  padding-bottom:0!important;
+  margin-bottom:0!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+}
+#view-dua .duahub-home,
+#view-dua .duahub-detail{
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  margin-bottom:0!important;
+}
+#view-dua .duahub-detail-scroll,
+#duaHubDetailScroll{
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  padding-bottom:14px!important;
+  scroll-padding-bottom:14px!important;
+  overscroll-behavior-y:auto!important;
+}
+#view-dua .duahub-textcard,
+#view-dua .duahub-source{
+  margin-bottom:0!important;
+}
+html.duahub-detail-open .shell{
+  padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important;
+  scroll-padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important;
+}
+@media(max-width:380px){
+  html.duahub-detail-open .shell{
+    padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))!important;
+    scroll-padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))!important;
+  }
+}
+@media(min-width:700px){
+  html.duahub-detail-open .shell{
+    padding-bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;
+    scroll-padding-bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;
+  }
+}
