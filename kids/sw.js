@@ -1,5 +1,5 @@
 const CACHE_NAME="dar-al-tawhid-kids-v1230";
-const KIDS_BUILD_ID="kids-shell-v132-home-transparent-brand1229";
+const KIDS_BUILD_ID="kids-shell-v133-quiz-learning-center1230";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
