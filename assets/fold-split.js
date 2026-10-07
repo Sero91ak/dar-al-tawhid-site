@@ -11,11 +11,11 @@
   if (global.__DAR_FOLD_SPLIT_V1326) return;
   global.__DAR_FOLD_SPLIT_V1326 = true;
 
-  var DUAL_MIN = 800;
-  var DUAL_PORTRAIT_MIN = 800;
-  var RAIL_MIN = 260;
-  var RAIL_MAX = 340;
-  var READER_MIN = 480;
+  var DUAL_MIN = 900;
+  var DUAL_PORTRAIT_MIN = 900;
+  var RAIL_MIN = 300;
+  var RAIL_MAX = 360;
+  var READER_MIN = 500;
   var syncRaf = 0;
 
   function measureViewport() {
@@ -57,13 +57,13 @@
     var sideReserve = 0;
     try {
       var pref = String(global.localStorage.getItem("darNavPositionV2") || "bottom");
-      if ((pref === "left" || pref === "right") && w >= 760 && h >= 420) sideReserve = 82;
+      if ((pref === "left" || pref === "right") && w >= 760 && h >= 360) sideReserve = 72;
     } catch (e2) {}
     var outer = Math.round(Math.max(24, Math.min(48, w * 0.04)));
     var usable = Math.max(0, w - sideReserve - outer);
     var rail = Math.round(Math.min(RAIL_MAX, Math.max(RAIL_MIN, usable * 0.31)));
-    var reader = Math.max(0, usable - rail - 16);
-    return w >= DUAL_MIN && h >= 420 && reader >= READER_MIN;
+    var reader = Math.max(0, usable - rail - 18);
+    return w >= DUAL_MIN && h >= 560 && reader >= READER_MIN;
   }
 
   function isDual() {
