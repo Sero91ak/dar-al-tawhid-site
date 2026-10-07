@@ -1,6 +1,6 @@
 {
-  "version": 12,
-  "updatedAt": "2026-10-06T22:01:53Z",
+  "version": 13,
+  "updatedAt": "2026-10-07T08:38:38Z",
   "title": "Die zehn al-Mubaššarūn",
   "subtitle": "Die zehn Gefährten, denen das Paradies angekündigt wurde",
   "policy": {
@@ -145,116 +145,98 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 4.0,
-              "confidence": 1.0
+              "start": 0.06,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 4.0,
-              "end": 26.0,
-              "confidence": 0.958
+              "start": 4.019,
+              "end": 26.54
             },
             {
               "paragraphIndex": 2,
-              "start": 26.0,
-              "end": 50.2,
-              "confidence": 1.0
+              "start": 26.54,
+              "end": 50.3
             },
             {
               "paragraphIndex": 3,
-              "start": 50.2,
-              "end": 80.5,
-              "confidence": 1.0
+              "start": 50.3,
+              "end": 80.6
             },
             {
               "paragraphIndex": 4,
-              "start": 80.5,
-              "end": 102.16,
-              "confidence": 1.0
+              "start": 80.6,
+              "end": 102.2
             },
             {
               "paragraphIndex": 5,
-              "start": 102.16,
-              "end": 129.7,
-              "confidence": 1.0
+              "start": 102.2,
+              "end": 129.8
             },
             {
               "paragraphIndex": 6,
-              "start": 129.7,
-              "end": 150.44,
-              "confidence": 1.0
+              "start": 129.8,
+              "end": 150.52
             },
             {
               "paragraphIndex": 7,
-              "start": 150.44,
-              "end": 169.02,
-              "confidence": 1.0
+              "start": 150.52,
+              "end": 169.54
             },
             {
               "paragraphIndex": 8,
-              "start": 169.02,
-              "end": 186.8,
-              "confidence": 0.977
+              "start": 169.54,
+              "end": 186.86
             },
             {
               "paragraphIndex": 9,
-              "start": 186.8,
-              "end": 201.1,
-              "confidence": 1.0
+              "start": 186.86,
+              "end": 201.16
             },
             {
               "paragraphIndex": 10,
-              "start": 201.1,
-              "end": 236.9,
-              "confidence": 0.989
+              "start": 201.16,
+              "end": 236.96
             },
             {
               "paragraphIndex": 11,
-              "start": 236.9,
-              "end": 259.16,
-              "confidence": 1.0
+              "start": 236.96,
+              "end": 259.26
             },
             {
               "paragraphIndex": 12,
-              "start": 259.16,
-              "end": 293.56,
-              "confidence": 1.0
+              "start": 259.26,
+              "end": 293.64
             },
             {
               "paragraphIndex": 13,
-              "start": 293.56,
-              "end": 318.88,
-              "confidence": 1.0
+              "start": 293.64,
+              "end": 318.92
             },
             {
               "paragraphIndex": 14,
-              "start": 318.88,
-              "end": 342.72,
-              "confidence": 1.0
+              "start": 318.92,
+              "end": 342.7
             },
             {
               "paragraphIndex": 15,
-              "start": 342.72,
-              "end": 344.66,
-              "confidence": 1.0
+              "start": 342.7,
+              "end": 344.66
             },
             {
               "paragraphIndex": 16,
               "start": 344.66,
-              "end": 353.24,
-              "confidence": 0.947
+              "end": 353.28
             },
             {
               "paragraphIndex": 17,
-              "start": 353.24,
-              "end": 356.598,
-              "confidence": 1.0
+              "start": 353.28,
+              "end": 356.36
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5765994187298628,
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "timingSource": "owner-original-audio-silence-analysis",
           "timingQaPassed": true,
           "allAges": true,
@@ -297,116 +279,98 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 4.0,
-              "confidence": 1.0
+              "start": 0.06,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 4.0,
-              "end": 26.0,
-              "confidence": 0.958
+              "start": 4.019,
+              "end": 26.54
             },
             {
               "paragraphIndex": 2,
-              "start": 26.0,
-              "end": 50.2,
-              "confidence": 1.0
+              "start": 26.54,
+              "end": 50.3
             },
             {
               "paragraphIndex": 3,
-              "start": 50.2,
-              "end": 80.5,
-              "confidence": 1.0
+              "start": 50.3,
+              "end": 80.6
             },
             {
               "paragraphIndex": 4,
-              "start": 80.5,
-              "end": 102.16,
-              "confidence": 1.0
+              "start": 80.6,
+              "end": 102.2
             },
             {
               "paragraphIndex": 5,
-              "start": 102.16,
-              "end": 129.7,
-              "confidence": 1.0
+              "start": 102.2,
+              "end": 129.8
             },
             {
               "paragraphIndex": 6,
-              "start": 129.7,
-              "end": 150.44,
-              "confidence": 1.0
+              "start": 129.8,
+              "end": 150.52
             },
             {
               "paragraphIndex": 7,
-              "start": 150.44,
-              "end": 169.02,
-              "confidence": 1.0
+              "start": 150.52,
+              "end": 169.54
             },
             {
               "paragraphIndex": 8,
-              "start": 169.02,
-              "end": 186.8,
-              "confidence": 0.977
+              "start": 169.54,
+              "end": 186.86
             },
             {
               "paragraphIndex": 9,
-              "start": 186.8,
-              "end": 201.1,
-              "confidence": 1.0
+              "start": 186.86,
+              "end": 201.16
             },
             {
               "paragraphIndex": 10,
-              "start": 201.1,
-              "end": 236.9,
-              "confidence": 0.989
+              "start": 201.16,
+              "end": 236.96
             },
             {
               "paragraphIndex": 11,
-              "start": 236.9,
-              "end": 259.16,
-              "confidence": 1.0
+              "start": 236.96,
+              "end": 259.26
             },
             {
               "paragraphIndex": 12,
-              "start": 259.16,
-              "end": 293.56,
-              "confidence": 1.0
+              "start": 259.26,
+              "end": 293.64
             },
             {
               "paragraphIndex": 13,
-              "start": 293.56,
-              "end": 318.88,
-              "confidence": 1.0
+              "start": 293.64,
+              "end": 318.92
             },
             {
               "paragraphIndex": 14,
-              "start": 318.88,
-              "end": 342.72,
-              "confidence": 1.0
+              "start": 318.92,
+              "end": 342.7
             },
             {
               "paragraphIndex": 15,
-              "start": 342.72,
-              "end": 344.66,
-              "confidence": 1.0
+              "start": 342.7,
+              "end": 344.66
             },
             {
               "paragraphIndex": 16,
               "start": 344.66,
-              "end": 353.24,
-              "confidence": 0.947
+              "end": 353.28
             },
             {
               "paragraphIndex": 17,
-              "start": 353.24,
-              "end": 356.598,
-              "confidence": 1.0
+              "start": 353.28,
+              "end": 356.36
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5765994187298628,
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "timingSource": "owner-original-audio-silence-analysis",
           "timingQaPassed": true,
           "allAges": true,
@@ -449,116 +413,98 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 4.0,
-              "confidence": 1.0
+              "start": 0.06,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 4.0,
-              "end": 26.0,
-              "confidence": 0.958
+              "start": 4.019,
+              "end": 26.54
             },
             {
               "paragraphIndex": 2,
-              "start": 26.0,
-              "end": 50.2,
-              "confidence": 1.0
+              "start": 26.54,
+              "end": 50.3
             },
             {
               "paragraphIndex": 3,
-              "start": 50.2,
-              "end": 80.5,
-              "confidence": 1.0
+              "start": 50.3,
+              "end": 80.6
             },
             {
               "paragraphIndex": 4,
-              "start": 80.5,
-              "end": 102.16,
-              "confidence": 1.0
+              "start": 80.6,
+              "end": 102.2
             },
             {
               "paragraphIndex": 5,
-              "start": 102.16,
-              "end": 129.7,
-              "confidence": 1.0
+              "start": 102.2,
+              "end": 129.8
             },
             {
               "paragraphIndex": 6,
-              "start": 129.7,
-              "end": 150.44,
-              "confidence": 1.0
+              "start": 129.8,
+              "end": 150.52
             },
             {
               "paragraphIndex": 7,
-              "start": 150.44,
-              "end": 169.02,
-              "confidence": 1.0
+              "start": 150.52,
+              "end": 169.54
             },
             {
               "paragraphIndex": 8,
-              "start": 169.02,
-              "end": 186.8,
-              "confidence": 0.977
+              "start": 169.54,
+              "end": 186.86
             },
             {
               "paragraphIndex": 9,
-              "start": 186.8,
-              "end": 201.1,
-              "confidence": 1.0
+              "start": 186.86,
+              "end": 201.16
             },
             {
               "paragraphIndex": 10,
-              "start": 201.1,
-              "end": 236.9,
-              "confidence": 0.989
+              "start": 201.16,
+              "end": 236.96
             },
             {
               "paragraphIndex": 11,
-              "start": 236.9,
-              "end": 259.16,
-              "confidence": 1.0
+              "start": 236.96,
+              "end": 259.26
             },
             {
               "paragraphIndex": 12,
-              "start": 259.16,
-              "end": 293.56,
-              "confidence": 1.0
+              "start": 259.26,
+              "end": 293.64
             },
             {
               "paragraphIndex": 13,
-              "start": 293.56,
-              "end": 318.88,
-              "confidence": 1.0
+              "start": 293.64,
+              "end": 318.92
             },
             {
               "paragraphIndex": 14,
-              "start": 318.88,
-              "end": 342.72,
-              "confidence": 1.0
+              "start": 318.92,
+              "end": 342.7
             },
             {
               "paragraphIndex": 15,
-              "start": 342.72,
-              "end": 344.66,
-              "confidence": 1.0
+              "start": 342.7,
+              "end": 344.66
             },
             {
               "paragraphIndex": 16,
               "start": 344.66,
-              "end": 353.24,
-              "confidence": 0.947
+              "end": 353.28
             },
             {
               "paragraphIndex": 17,
-              "start": 353.24,
-              "end": 356.598,
-              "confidence": 1.0
+              "start": 353.28,
+              "end": 356.36
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5765994187298628,
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "timingSource": "owner-original-audio-silence-analysis",
           "timingQaPassed": true,
           "allAges": true,
@@ -612,10 +558,10 @@
         "originalOwnerUpload": true,
         "originalBytesPreserved": true,
         "transcoded": false,
-        "followReaderSync": "audio-word-aligned",
-        "followReaderSyncMode": "whisper-word-alignment-v1",
+        "followReaderSync": "exact-forced-alignment",
+        "followReaderSyncMode": "elevenlabs-forced-alignment-v1",
         "followReaderParagraphs": 18,
-        "followReaderSyncedAt": "2026-10-06T22:01:53Z",
+        "followReaderSyncedAt": "2026-10-07T08:38:38Z",
         "followReaderQaPassed": true,
         "audioBytesPreservedForTimingUpdate": true,
         "followReaderCoverage": 0.9942
@@ -747,128 +693,109 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 3.88,
-              "confidence": 0.875
+              "start": 0.04,
+              "end": 3.94
             },
             {
               "paragraphIndex": 1,
-              "start": 3.88,
-              "end": 21.88,
-              "confidence": 0.932
+              "start": 3.94,
+              "end": 21.96
             },
             {
               "paragraphIndex": 2,
-              "start": 21.88,
-              "end": 39.28,
-              "confidence": 1.0
+              "start": 21.96,
+              "end": 39.38
             },
             {
               "paragraphIndex": 3,
-              "start": 39.28,
-              "end": 60.38,
-              "confidence": 1.0
+              "start": 39.38,
+              "end": 60.42
             },
             {
               "paragraphIndex": 4,
-              "start": 60.38,
-              "end": 80.14,
-              "confidence": 1.0
+              "start": 60.42,
+              "end": 80.24
             },
             {
               "paragraphIndex": 5,
-              "start": 80.14,
-              "end": 97.6,
-              "confidence": 1.0
+              "start": 80.24,
+              "end": 97.64
             },
             {
               "paragraphIndex": 6,
-              "start": 97.6,
-              "end": 117.96,
-              "confidence": 1.0
+              "start": 97.64,
+              "end": 118
             },
             {
               "paragraphIndex": 7,
-              "start": 117.96,
-              "end": 129.92,
-              "confidence": 1.0
+              "start": 118,
+              "end": 130
             },
             {
               "paragraphIndex": 8,
-              "start": 129.92,
-              "end": 148.78,
-              "confidence": 1.0
+              "start": 130,
+              "end": 148.82
             },
             {
               "paragraphIndex": 9,
-              "start": 148.78,
-              "end": 158.0,
-              "confidence": 1.0
+              "start": 148.82,
+              "end": 158.14
             },
             {
               "paragraphIndex": 10,
-              "start": 158.0,
-              "end": 188.52,
-              "confidence": 0.973
+              "start": 158.14,
+              "end": 188.58
             },
             {
               "paragraphIndex": 11,
-              "start": 188.52,
-              "end": 208.8,
-              "confidence": 1.0
+              "start": 188.58,
+              "end": 208.94
             },
             {
               "paragraphIndex": 12,
-              "start": 208.8,
-              "end": 230.72,
-              "confidence": 1.0
+              "start": 208.94,
+              "end": 230.78
             },
             {
               "paragraphIndex": 13,
-              "start": 230.72,
-              "end": 255.22,
-              "confidence": 1.0
+              "start": 230.78,
+              "end": 255.32
             },
             {
               "paragraphIndex": 14,
-              "start": 255.22,
-              "end": 276.58,
-              "confidence": 1.0
+              "start": 255.32,
+              "end": 276.68
             },
             {
               "paragraphIndex": 15,
-              "start": 276.58,
-              "end": 301.12,
-              "confidence": 1.0
+              "start": 276.68,
+              "end": 301.84
             },
             {
               "paragraphIndex": 16,
-              "start": 301.12,
-              "end": 303.98,
-              "confidence": 1.0
+              "start": 301.84,
+              "end": 304.06
             },
             {
               "paragraphIndex": 17,
-              "start": 303.98,
-              "end": 312.52,
-              "confidence": 0.947
+              "start": 304.06,
+              "end": 312.64
             },
             {
               "paragraphIndex": 18,
-              "start": 312.52,
-              "end": 316.003,
-              "confidence": 1.0
+              "start": 312.64,
+              "end": 315.8
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5601782917275281,
           "detectedSilences": 171,
           "readAlongTextSha256": "7e7903ffaf9e37aba65239bb92b1ad290fcd71b314e78a3232c09d6c5e9ba4fd",
           "age": "4-5",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9908,
           "alignmentMeanSimilarity": 0.9906,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "6-8": {
@@ -909,128 +836,109 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 3.88,
-              "confidence": 0.875
+              "start": 0.04,
+              "end": 3.94
             },
             {
               "paragraphIndex": 1,
-              "start": 3.88,
-              "end": 21.88,
-              "confidence": 0.932
+              "start": 3.94,
+              "end": 21.96
             },
             {
               "paragraphIndex": 2,
-              "start": 21.88,
-              "end": 39.28,
-              "confidence": 1.0
+              "start": 21.96,
+              "end": 39.38
             },
             {
               "paragraphIndex": 3,
-              "start": 39.28,
-              "end": 60.38,
-              "confidence": 1.0
+              "start": 39.38,
+              "end": 60.42
             },
             {
               "paragraphIndex": 4,
-              "start": 60.38,
-              "end": 80.14,
-              "confidence": 1.0
+              "start": 60.42,
+              "end": 80.24
             },
             {
               "paragraphIndex": 5,
-              "start": 80.14,
-              "end": 97.6,
-              "confidence": 1.0
+              "start": 80.24,
+              "end": 97.64
             },
             {
               "paragraphIndex": 6,
-              "start": 97.6,
-              "end": 117.96,
-              "confidence": 1.0
+              "start": 97.64,
+              "end": 118
             },
             {
               "paragraphIndex": 7,
-              "start": 117.96,
-              "end": 129.92,
-              "confidence": 1.0
+              "start": 118,
+              "end": 130
             },
             {
               "paragraphIndex": 8,
-              "start": 129.92,
-              "end": 148.78,
-              "confidence": 1.0
+              "start": 130,
+              "end": 148.82
             },
             {
               "paragraphIndex": 9,
-              "start": 148.78,
-              "end": 158.0,
-              "confidence": 1.0
+              "start": 148.82,
+              "end": 158.14
             },
             {
               "paragraphIndex": 10,
-              "start": 158.0,
-              "end": 188.52,
-              "confidence": 0.973
+              "start": 158.14,
+              "end": 188.58
             },
             {
               "paragraphIndex": 11,
-              "start": 188.52,
-              "end": 208.8,
-              "confidence": 1.0
+              "start": 188.58,
+              "end": 208.94
             },
             {
               "paragraphIndex": 12,
-              "start": 208.8,
-              "end": 230.72,
-              "confidence": 1.0
+              "start": 208.94,
+              "end": 230.78
             },
             {
               "paragraphIndex": 13,
-              "start": 230.72,
-              "end": 255.22,
-              "confidence": 1.0
+              "start": 230.78,
+              "end": 255.32
             },
             {
               "paragraphIndex": 14,
-              "start": 255.22,
-              "end": 276.58,
-              "confidence": 1.0
+              "start": 255.32,
+              "end": 276.68
             },
             {
               "paragraphIndex": 15,
-              "start": 276.58,
-              "end": 301.12,
-              "confidence": 1.0
+              "start": 276.68,
+              "end": 301.84
             },
             {
               "paragraphIndex": 16,
-              "start": 301.12,
-              "end": 303.98,
-              "confidence": 1.0
+              "start": 301.84,
+              "end": 304.06
             },
             {
               "paragraphIndex": 17,
-              "start": 303.98,
-              "end": 312.52,
-              "confidence": 0.947
+              "start": 304.06,
+              "end": 312.64
             },
             {
               "paragraphIndex": 18,
-              "start": 312.52,
-              "end": 316.003,
-              "confidence": 1.0
+              "start": 312.64,
+              "end": 315.8
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5601782917275281,
           "detectedSilences": 171,
           "readAlongTextSha256": "7e7903ffaf9e37aba65239bb92b1ad290fcd71b314e78a3232c09d6c5e9ba4fd",
           "age": "6-8",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9908,
           "alignmentMeanSimilarity": 0.9906,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "9-10": {
@@ -1071,128 +979,109 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 3.88,
-              "confidence": 0.875
+              "start": 0.04,
+              "end": 3.94
             },
             {
               "paragraphIndex": 1,
-              "start": 3.88,
-              "end": 21.88,
-              "confidence": 0.932
+              "start": 3.94,
+              "end": 21.96
             },
             {
               "paragraphIndex": 2,
-              "start": 21.88,
-              "end": 39.28,
-              "confidence": 1.0
+              "start": 21.96,
+              "end": 39.38
             },
             {
               "paragraphIndex": 3,
-              "start": 39.28,
-              "end": 60.38,
-              "confidence": 1.0
+              "start": 39.38,
+              "end": 60.42
             },
             {
               "paragraphIndex": 4,
-              "start": 60.38,
-              "end": 80.14,
-              "confidence": 1.0
+              "start": 60.42,
+              "end": 80.24
             },
             {
               "paragraphIndex": 5,
-              "start": 80.14,
-              "end": 97.6,
-              "confidence": 1.0
+              "start": 80.24,
+              "end": 97.64
             },
             {
               "paragraphIndex": 6,
-              "start": 97.6,
-              "end": 117.96,
-              "confidence": 1.0
+              "start": 97.64,
+              "end": 118
             },
             {
               "paragraphIndex": 7,
-              "start": 117.96,
-              "end": 129.92,
-              "confidence": 1.0
+              "start": 118,
+              "end": 130
             },
             {
               "paragraphIndex": 8,
-              "start": 129.92,
-              "end": 148.78,
-              "confidence": 1.0
+              "start": 130,
+              "end": 148.82
             },
             {
               "paragraphIndex": 9,
-              "start": 148.78,
-              "end": 158.0,
-              "confidence": 1.0
+              "start": 148.82,
+              "end": 158.14
             },
             {
               "paragraphIndex": 10,
-              "start": 158.0,
-              "end": 188.52,
-              "confidence": 0.973
+              "start": 158.14,
+              "end": 188.58
             },
             {
               "paragraphIndex": 11,
-              "start": 188.52,
-              "end": 208.8,
-              "confidence": 1.0
+              "start": 188.58,
+              "end": 208.94
             },
             {
               "paragraphIndex": 12,
-              "start": 208.8,
-              "end": 230.72,
-              "confidence": 1.0
+              "start": 208.94,
+              "end": 230.78
             },
             {
               "paragraphIndex": 13,
-              "start": 230.72,
-              "end": 255.22,
-              "confidence": 1.0
+              "start": 230.78,
+              "end": 255.32
             },
             {
               "paragraphIndex": 14,
-              "start": 255.22,
-              "end": 276.58,
-              "confidence": 1.0
+              "start": 255.32,
+              "end": 276.68
             },
             {
               "paragraphIndex": 15,
-              "start": 276.58,
-              "end": 301.12,
-              "confidence": 1.0
+              "start": 276.68,
+              "end": 301.84
             },
             {
               "paragraphIndex": 16,
-              "start": 301.12,
-              "end": 303.98,
-              "confidence": 1.0
+              "start": 301.84,
+              "end": 304.06
             },
             {
               "paragraphIndex": 17,
-              "start": 303.98,
-              "end": 312.52,
-              "confidence": 0.947
+              "start": 304.06,
+              "end": 312.64
             },
             {
               "paragraphIndex": 18,
-              "start": 312.52,
-              "end": 316.003,
-              "confidence": 1.0
+              "start": 312.64,
+              "end": 315.8
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5601782917275281,
           "detectedSilences": 171,
           "readAlongTextSha256": "7e7903ffaf9e37aba65239bb92b1ad290fcd71b314e78a3232c09d6c5e9ba4fd",
           "age": "9-10",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9908,
           "alignmentMeanSimilarity": 0.9906,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         }
       },
@@ -1229,11 +1118,11 @@
         "ageSelectionInVoiceStudio": false,
         "singleMasterAudio": true,
         "masterAgeRange": "4-10",
-        "followReaderSync": "audio-word-aligned",
-        "followReaderSyncMode": "whisper-word-alignment-v1",
+        "followReaderSync": "exact-forced-alignment",
+        "followReaderSyncMode": "elevenlabs-forced-alignment-v1",
         "followReaderParagraphs": 19,
         "followReaderCoverage": 0.9908,
-        "followReaderSyncedAt": "2026-10-06T22:01:53Z"
+        "followReaderSyncedAt": "2026-10-07T08:38:38Z"
       },
       "lifeContext": "heute betrachten wir das Leben von ʿUmar ibn al-Ḫaṭṭāb, raḍiya llāhu ʿanhu, als Geschichte einer starken Persönlichkeit, die durch den Islām geordnet und auf Verantwortung ausgerichtet wurde. ʿUmar war nicht dafür bekannt, schwach oder unentschlossen zu sein. Gerade deshalb ist sein Lebensweg so lehrreich. Als ʿUmar Muslim wurde, brachte er seine Entschlossenheit mit. Der Islām löschte seine Persönlichkeit nicht aus. Er lehrte ihn vielmehr, dass Stärke einem höheren Maßstab folgen muss. Ein Muslim darf seine Kraft nicht für Stolz oder Ungerechtigkeit benutzen. Er muss lernen, sie zu kontrollieren. In der Nähe des Propheten ﷺ wurde ʿUmar zu einem der bekannten Gefährten. Der Prophet ﷺ beschrieb seine Festigkeit so eindrucksvoll, dass überliefert ist, der Shayṭān nehme einen anderen Weg, wenn er ʿUmar auf einem Weg sehe. Das ist keine Geschichte über körperliche Größe, sondern über Entschlossenheit im Glauben.",
       "cover": "/kids/assets/sahaba-mubashshirun/umar.jpg?v=2",
@@ -1362,140 +1251,119 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 3.9,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 3.94
             },
             {
               "paragraphIndex": 1,
-              "start": 3.9,
-              "end": 18.1,
-              "confidence": 0.909
+              "start": 3.94,
+              "end": 18.18
             },
             {
               "paragraphIndex": 2,
-              "start": 18.1,
-              "end": 41.62,
-              "confidence": 1.0
+              "start": 18.18,
+              "end": 41.7
             },
             {
               "paragraphIndex": 3,
-              "start": 41.62,
-              "end": 55.92,
-              "confidence": 1.0
+              "start": 41.7,
+              "end": 56.5
             },
             {
               "paragraphIndex": 4,
-              "start": 55.92,
-              "end": 72.68,
-              "confidence": 1.0
+              "start": 56.5,
+              "end": 72.76
             },
             {
               "paragraphIndex": 5,
-              "start": 72.68,
-              "end": 92.34,
-              "confidence": 1.0
+              "start": 72.76,
+              "end": 92.38
             },
             {
               "paragraphIndex": 6,
-              "start": 92.34,
-              "end": 105.86,
-              "confidence": 1.0
+              "start": 92.38,
+              "end": 105.96
             },
             {
               "paragraphIndex": 7,
-              "start": 105.86,
-              "end": 118.24,
-              "confidence": 0.966
+              "start": 105.96,
+              "end": 118.28
             },
             {
               "paragraphIndex": 8,
-              "start": 118.24,
-              "end": 132.56,
-              "confidence": 1.0
+              "start": 118.28,
+              "end": 132.66
             },
             {
               "paragraphIndex": 9,
-              "start": 132.56,
-              "end": 140.78,
-              "confidence": 1.0
+              "start": 132.66,
+              "end": 140.8
             },
             {
               "paragraphIndex": 10,
-              "start": 140.78,
-              "end": 167.92,
-              "confidence": 1.0
+              "start": 140.8,
+              "end": 167.96
             },
             {
               "paragraphIndex": 11,
-              "start": 167.92,
-              "end": 186.1,
-              "confidence": 0.979
+              "start": 167.96,
+              "end": 186.14
             },
             {
               "paragraphIndex": 12,
-              "start": 186.1,
-              "end": 208.32,
-              "confidence": 1.0
+              "start": 186.14,
+              "end": 208.36
             },
             {
               "paragraphIndex": 13,
-              "start": 208.32,
-              "end": 228.96,
-              "confidence": 0.98
+              "start": 208.36,
+              "end": 229.06
             },
             {
               "paragraphIndex": 14,
-              "start": 228.96,
-              "end": 249.94,
-              "confidence": 1.0
+              "start": 229.06,
+              "end": 250
             },
             {
               "paragraphIndex": 15,
-              "start": 249.94,
-              "end": 264.9,
-              "confidence": 0.968
+              "start": 250,
+              "end": 264.96
             },
             {
               "paragraphIndex": 16,
-              "start": 264.9,
-              "end": 283.32,
-              "confidence": 1.0
+              "start": 264.96,
+              "end": 283.38
             },
             {
               "paragraphIndex": 17,
-              "start": 283.32,
-              "end": 299.1,
-              "confidence": 1.0
+              "start": 283.38,
+              "end": 299.06
             },
             {
               "paragraphIndex": 18,
-              "start": 299.1,
-              "end": 301.08,
-              "confidence": 1.0
+              "start": 299.06,
+              "end": 301.1
             },
             {
               "paragraphIndex": 19,
-              "start": 301.08,
-              "end": 309.54,
-              "confidence": 0.947
+              "start": 301.1,
+              "end": 309.58
             },
             {
               "paragraphIndex": 20,
-              "start": 309.54,
-              "end": 312.973,
-              "confidence": 1.0
+              "start": 309.58,
+              "end": 312.72
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5639465799077279,
           "detectedSilences": 182,
           "readAlongTextSha256": "5da53036a65a7f558e386f2d0dedee9befd3bc02321158598a8691065f5d6c76",
           "age": "4-5",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9892,
           "alignmentMeanSimilarity": 0.9933,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "6-8": {
@@ -1536,140 +1404,119 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 3.9,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 3.94
             },
             {
               "paragraphIndex": 1,
-              "start": 3.9,
-              "end": 18.1,
-              "confidence": 0.909
+              "start": 3.94,
+              "end": 18.18
             },
             {
               "paragraphIndex": 2,
-              "start": 18.1,
-              "end": 41.62,
-              "confidence": 1.0
+              "start": 18.18,
+              "end": 41.7
             },
             {
               "paragraphIndex": 3,
-              "start": 41.62,
-              "end": 55.92,
-              "confidence": 1.0
+              "start": 41.7,
+              "end": 56.5
             },
             {
               "paragraphIndex": 4,
-              "start": 55.92,
-              "end": 72.68,
-              "confidence": 1.0
+              "start": 56.5,
+              "end": 72.76
             },
             {
               "paragraphIndex": 5,
-              "start": 72.68,
-              "end": 92.34,
-              "confidence": 1.0
+              "start": 72.76,
+              "end": 92.38
             },
             {
               "paragraphIndex": 6,
-              "start": 92.34,
-              "end": 105.86,
-              "confidence": 1.0
+              "start": 92.38,
+              "end": 105.96
             },
             {
               "paragraphIndex": 7,
-              "start": 105.86,
-              "end": 118.24,
-              "confidence": 0.966
+              "start": 105.96,
+              "end": 118.28
             },
             {
               "paragraphIndex": 8,
-              "start": 118.24,
-              "end": 132.56,
-              "confidence": 1.0
+              "start": 118.28,
+              "end": 132.66
             },
             {
               "paragraphIndex": 9,
-              "start": 132.56,
-              "end": 140.78,
-              "confidence": 1.0
+              "start": 132.66,
+              "end": 140.8
             },
             {
               "paragraphIndex": 10,
-              "start": 140.78,
-              "end": 167.92,
-              "confidence": 1.0
+              "start": 140.8,
+              "end": 167.96
             },
             {
               "paragraphIndex": 11,
-              "start": 167.92,
-              "end": 186.1,
-              "confidence": 0.979
+              "start": 167.96,
+              "end": 186.14
             },
             {
               "paragraphIndex": 12,
-              "start": 186.1,
-              "end": 208.32,
-              "confidence": 1.0
+              "start": 186.14,
+              "end": 208.36
             },
             {
               "paragraphIndex": 13,
-              "start": 208.32,
-              "end": 228.96,
-              "confidence": 0.98
+              "start": 208.36,
+              "end": 229.06
             },
             {
               "paragraphIndex": 14,
-              "start": 228.96,
-              "end": 249.94,
-              "confidence": 1.0
+              "start": 229.06,
+              "end": 250
             },
             {
               "paragraphIndex": 15,
-              "start": 249.94,
-              "end": 264.9,
-              "confidence": 0.968
+              "start": 250,
+              "end": 264.96
             },
             {
               "paragraphIndex": 16,
-              "start": 264.9,
-              "end": 283.32,
-              "confidence": 1.0
+              "start": 264.96,
+              "end": 283.38
             },
             {
               "paragraphIndex": 17,
-              "start": 283.32,
-              "end": 299.1,
-              "confidence": 1.0
+              "start": 283.38,
+              "end": 299.06
             },
             {
               "paragraphIndex": 18,
-              "start": 299.1,
-              "end": 301.08,
-              "confidence": 1.0
+              "start": 299.06,
+              "end": 301.1
             },
             {
               "paragraphIndex": 19,
-              "start": 301.08,
-              "end": 309.54,
-              "confidence": 0.947
+              "start": 301.1,
+              "end": 309.58
             },
             {
               "paragraphIndex": 20,
-              "start": 309.54,
-              "end": 312.973,
-              "confidence": 1.0
+              "start": 309.58,
+              "end": 312.72
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5639465799077279,
           "detectedSilences": 182,
           "readAlongTextSha256": "5da53036a65a7f558e386f2d0dedee9befd3bc02321158598a8691065f5d6c76",
           "age": "6-8",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9892,
           "alignmentMeanSimilarity": 0.9933,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "9-10": {
@@ -1710,140 +1557,119 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 3.9,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 3.94
             },
             {
               "paragraphIndex": 1,
-              "start": 3.9,
-              "end": 18.1,
-              "confidence": 0.909
+              "start": 3.94,
+              "end": 18.18
             },
             {
               "paragraphIndex": 2,
-              "start": 18.1,
-              "end": 41.62,
-              "confidence": 1.0
+              "start": 18.18,
+              "end": 41.7
             },
             {
               "paragraphIndex": 3,
-              "start": 41.62,
-              "end": 55.92,
-              "confidence": 1.0
+              "start": 41.7,
+              "end": 56.5
             },
             {
               "paragraphIndex": 4,
-              "start": 55.92,
-              "end": 72.68,
-              "confidence": 1.0
+              "start": 56.5,
+              "end": 72.76
             },
             {
               "paragraphIndex": 5,
-              "start": 72.68,
-              "end": 92.34,
-              "confidence": 1.0
+              "start": 72.76,
+              "end": 92.38
             },
             {
               "paragraphIndex": 6,
-              "start": 92.34,
-              "end": 105.86,
-              "confidence": 1.0
+              "start": 92.38,
+              "end": 105.96
             },
             {
               "paragraphIndex": 7,
-              "start": 105.86,
-              "end": 118.24,
-              "confidence": 0.966
+              "start": 105.96,
+              "end": 118.28
             },
             {
               "paragraphIndex": 8,
-              "start": 118.24,
-              "end": 132.56,
-              "confidence": 1.0
+              "start": 118.28,
+              "end": 132.66
             },
             {
               "paragraphIndex": 9,
-              "start": 132.56,
-              "end": 140.78,
-              "confidence": 1.0
+              "start": 132.66,
+              "end": 140.8
             },
             {
               "paragraphIndex": 10,
-              "start": 140.78,
-              "end": 167.92,
-              "confidence": 1.0
+              "start": 140.8,
+              "end": 167.96
             },
             {
               "paragraphIndex": 11,
-              "start": 167.92,
-              "end": 186.1,
-              "confidence": 0.979
+              "start": 167.96,
+              "end": 186.14
             },
             {
               "paragraphIndex": 12,
-              "start": 186.1,
-              "end": 208.32,
-              "confidence": 1.0
+              "start": 186.14,
+              "end": 208.36
             },
             {
               "paragraphIndex": 13,
-              "start": 208.32,
-              "end": 228.96,
-              "confidence": 0.98
+              "start": 208.36,
+              "end": 229.06
             },
             {
               "paragraphIndex": 14,
-              "start": 228.96,
-              "end": 249.94,
-              "confidence": 1.0
+              "start": 229.06,
+              "end": 250
             },
             {
               "paragraphIndex": 15,
-              "start": 249.94,
-              "end": 264.9,
-              "confidence": 0.968
+              "start": 250,
+              "end": 264.96
             },
             {
               "paragraphIndex": 16,
-              "start": 264.9,
-              "end": 283.32,
-              "confidence": 1.0
+              "start": 264.96,
+              "end": 283.38
             },
             {
               "paragraphIndex": 17,
-              "start": 283.32,
-              "end": 299.1,
-              "confidence": 1.0
+              "start": 283.38,
+              "end": 299.06
             },
             {
               "paragraphIndex": 18,
-              "start": 299.1,
-              "end": 301.08,
-              "confidence": 1.0
+              "start": 299.06,
+              "end": 301.1
             },
             {
               "paragraphIndex": 19,
-              "start": 301.08,
-              "end": 309.54,
-              "confidence": 0.947
+              "start": 301.1,
+              "end": 309.58
             },
             {
               "paragraphIndex": 20,
-              "start": 309.54,
-              "end": 312.973,
-              "confidence": 1.0
+              "start": 309.58,
+              "end": 312.72
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5639465799077279,
           "detectedSilences": 182,
           "readAlongTextSha256": "5da53036a65a7f558e386f2d0dedee9befd3bc02321158598a8691065f5d6c76",
           "age": "9-10",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9892,
           "alignmentMeanSimilarity": 0.9933,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         }
       },
@@ -1880,11 +1706,11 @@
         "ageSelectionInVoiceStudio": false,
         "singleMasterAudio": true,
         "masterAgeRange": "4-10",
-        "followReaderSync": "audio-word-aligned",
-        "followReaderSyncMode": "whisper-word-alignment-v1",
+        "followReaderSync": "exact-forced-alignment",
+        "followReaderSyncMode": "elevenlabs-forced-alignment-v1",
         "followReaderParagraphs": 21,
         "followReaderCoverage": 0.9892,
-        "followReaderSyncedAt": "2026-10-06T22:01:53Z"
+        "followReaderSyncedAt": "2026-10-07T08:38:38Z"
       },
       "lifeContext": "heute lernen wir ʿUṯmān ibn ʿAffān, raḍiya llāhu ʿanhu, als einen Gefährten kennen, bei dem Sanftheit, Ḥayāʾ und große Verantwortung zusammenkamen. Sein Lebensweg zeigt, dass Führung nicht immer laut oder hart aussehen muss. ʿUṯmān gehörte zu den frühen Muslimen. In der Nähe des Propheten ﷺ wurde besonders seine Schamhaftigkeit und würdevolle Art sichtbar. ʿĀʾišah berichtete eine Begebenheit, bei der der Prophet ﷺ seine Haltung änderte und seine Kleidung ordnete, als ʿUṯmān eintrat. Auf ihre Frage erklärte er, dass selbst die Engel sich vor ʿUṯmān schämen. Diese Aussage beschreibt eine besondere Form von Ḥayāʾ. Im Islām ist damit nicht gemeint, dass ein Mensch unsicher oder ängstlich sein soll. Gemeint ist, dass man ein inneres Gefühl für Würde besitzt, sich vor Schlechtem zurückhält und andere respektiert.",
       "cover": "/kids/assets/sahaba-mubashshirun/uthman.jpg?v=2",
@@ -2012,134 +1838,114 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.2,
-              "end": 4.04,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 4.08
             },
             {
               "paragraphIndex": 1,
-              "start": 4.04,
-              "end": 23.54,
-              "confidence": 0.957
+              "start": 4.08,
+              "end": 23.78
             },
             {
               "paragraphIndex": 2,
-              "start": 23.54,
-              "end": 41.08,
-              "confidence": 0.977
+              "start": 23.78,
+              "end": 41.14
             },
             {
               "paragraphIndex": 3,
-              "start": 41.08,
-              "end": 55.94,
-              "confidence": 1.0
+              "start": 41.14,
+              "end": 56.36
             },
             {
               "paragraphIndex": 4,
-              "start": 55.94,
-              "end": 75.16,
-              "confidence": 1.0
+              "start": 56.36,
+              "end": 75.2
             },
             {
               "paragraphIndex": 5,
-              "start": 75.16,
-              "end": 90.74,
-              "confidence": 1.0
+              "start": 75.2,
+              "end": 90.84
             },
             {
               "paragraphIndex": 6,
-              "start": 90.74,
-              "end": 109.8,
-              "confidence": 1.0
+              "start": 90.84,
+              "end": 109.86
             },
             {
               "paragraphIndex": 7,
-              "start": 109.8,
-              "end": 126.12,
-              "confidence": 1.0
+              "start": 109.86,
+              "end": 126.18
             },
             {
               "paragraphIndex": 8,
-              "start": 126.12,
-              "end": 138.72,
-              "confidence": 1.0
+              "start": 126.18,
+              "end": 138.76
             },
             {
               "paragraphIndex": 9,
-              "start": 138.72,
-              "end": 149.93,
-              "confidence": 0.966
+              "start": 138.76,
+              "end": 150
             },
             {
               "paragraphIndex": 10,
-              "start": 149.93,
-              "end": 180.31,
-              "confidence": 0.971
+              "start": 150,
+              "end": 180.34
             },
             {
               "paragraphIndex": 11,
-              "start": 180.31,
-              "end": 199.53,
-              "confidence": 1.0
+              "start": 180.34,
+              "end": 199.64
             },
             {
               "paragraphIndex": 12,
-              "start": 199.53,
-              "end": 219.27,
-              "confidence": 1.0
+              "start": 199.64,
+              "end": 219.56
             },
             {
               "paragraphIndex": 13,
-              "start": 219.27,
-              "end": 239.29,
-              "confidence": 1.0
+              "start": 219.56,
+              "end": 239.4
             },
             {
               "paragraphIndex": 14,
-              "start": 239.29,
-              "end": 259.57,
-              "confidence": 1.0
+              "start": 239.4,
+              "end": 259.62
             },
             {
               "paragraphIndex": 15,
-              "start": 259.57,
-              "end": 279.15,
-              "confidence": 1.0
+              "start": 259.62,
+              "end": 279.24
             },
             {
               "paragraphIndex": 16,
-              "start": 279.15,
-              "end": 309.85,
-              "confidence": 1.0
+              "start": 279.24,
+              "end": 310.04
             },
             {
               "paragraphIndex": 17,
-              "start": 309.85,
-              "end": 312.23,
-              "confidence": 1.0
+              "start": 310.04,
+              "end": 312.28
             },
             {
               "paragraphIndex": 18,
-              "start": 312.23,
-              "end": 321.09,
-              "confidence": 0.947
+              "start": 312.28,
+              "end": 321.2
             },
             {
               "paragraphIndex": 19,
-              "start": 321.09,
-              "end": 324.545,
-              "confidence": 1.0
+              "start": 321.2,
+              "end": 324.34
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5739969252064905,
           "detectedSilences": 168,
           "readAlongTextSha256": "6ceef217c9a63197d78a61a592d8a855e45e4334d44a9fc4b035030fd46671e2",
           "age": "4-5",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9908,
           "alignmentMeanSimilarity": 0.9968,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "6-8": {
@@ -2180,134 +1986,114 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.2,
-              "end": 4.04,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 4.08
             },
             {
               "paragraphIndex": 1,
-              "start": 4.04,
-              "end": 23.54,
-              "confidence": 0.957
+              "start": 4.08,
+              "end": 23.78
             },
             {
               "paragraphIndex": 2,
-              "start": 23.54,
-              "end": 41.08,
-              "confidence": 0.977
+              "start": 23.78,
+              "end": 41.14
             },
             {
               "paragraphIndex": 3,
-              "start": 41.08,
-              "end": 55.94,
-              "confidence": 1.0
+              "start": 41.14,
+              "end": 56.36
             },
             {
               "paragraphIndex": 4,
-              "start": 55.94,
-              "end": 75.16,
-              "confidence": 1.0
+              "start": 56.36,
+              "end": 75.2
             },
             {
               "paragraphIndex": 5,
-              "start": 75.16,
-              "end": 90.74,
-              "confidence": 1.0
+              "start": 75.2,
+              "end": 90.84
             },
             {
               "paragraphIndex": 6,
-              "start": 90.74,
-              "end": 109.8,
-              "confidence": 1.0
+              "start": 90.84,
+              "end": 109.86
             },
             {
               "paragraphIndex": 7,
-              "start": 109.8,
-              "end": 126.12,
-              "confidence": 1.0
+              "start": 109.86,
+              "end": 126.18
             },
             {
               "paragraphIndex": 8,
-              "start": 126.12,
-              "end": 138.72,
-              "confidence": 1.0
+              "start": 126.18,
+              "end": 138.76
             },
             {
               "paragraphIndex": 9,
-              "start": 138.72,
-              "end": 149.93,
-              "confidence": 0.966
+              "start": 138.76,
+              "end": 150
             },
             {
               "paragraphIndex": 10,
-              "start": 149.93,
-              "end": 180.31,
-              "confidence": 0.971
+              "start": 150,
+              "end": 180.34
             },
             {
               "paragraphIndex": 11,
-              "start": 180.31,
-              "end": 199.53,
-              "confidence": 1.0
+              "start": 180.34,
+              "end": 199.64
             },
             {
               "paragraphIndex": 12,
-              "start": 199.53,
-              "end": 219.27,
-              "confidence": 1.0
+              "start": 199.64,
+              "end": 219.56
             },
             {
               "paragraphIndex": 13,
-              "start": 219.27,
-              "end": 239.29,
-              "confidence": 1.0
+              "start": 219.56,
+              "end": 239.4
             },
             {
               "paragraphIndex": 14,
-              "start": 239.29,
-              "end": 259.57,
-              "confidence": 1.0
+              "start": 239.4,
+              "end": 259.62
             },
             {
               "paragraphIndex": 15,
-              "start": 259.57,
-              "end": 279.15,
-              "confidence": 1.0
+              "start": 259.62,
+              "end": 279.24
             },
             {
               "paragraphIndex": 16,
-              "start": 279.15,
-              "end": 309.85,
-              "confidence": 1.0
+              "start": 279.24,
+              "end": 310.04
             },
             {
               "paragraphIndex": 17,
-              "start": 309.85,
-              "end": 312.23,
-              "confidence": 1.0
+              "start": 310.04,
+              "end": 312.28
             },
             {
               "paragraphIndex": 18,
-              "start": 312.23,
-              "end": 321.09,
-              "confidence": 0.947
+              "start": 312.28,
+              "end": 321.2
             },
             {
               "paragraphIndex": 19,
-              "start": 321.09,
-              "end": 324.545,
-              "confidence": 1.0
+              "start": 321.2,
+              "end": 324.34
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5739969252064905,
           "detectedSilences": 168,
           "readAlongTextSha256": "6ceef217c9a63197d78a61a592d8a855e45e4334d44a9fc4b035030fd46671e2",
           "age": "6-8",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9908,
           "alignmentMeanSimilarity": 0.9968,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "9-10": {
@@ -2348,134 +2134,114 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.2,
-              "end": 4.04,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 4.08
             },
             {
               "paragraphIndex": 1,
-              "start": 4.04,
-              "end": 23.54,
-              "confidence": 0.957
+              "start": 4.08,
+              "end": 23.78
             },
             {
               "paragraphIndex": 2,
-              "start": 23.54,
-              "end": 41.08,
-              "confidence": 0.977
+              "start": 23.78,
+              "end": 41.14
             },
             {
               "paragraphIndex": 3,
-              "start": 41.08,
-              "end": 55.94,
-              "confidence": 1.0
+              "start": 41.14,
+              "end": 56.36
             },
             {
               "paragraphIndex": 4,
-              "start": 55.94,
-              "end": 75.16,
-              "confidence": 1.0
+              "start": 56.36,
+              "end": 75.2
             },
             {
               "paragraphIndex": 5,
-              "start": 75.16,
-              "end": 90.74,
-              "confidence": 1.0
+              "start": 75.2,
+              "end": 90.84
             },
             {
               "paragraphIndex": 6,
-              "start": 90.74,
-              "end": 109.8,
-              "confidence": 1.0
+              "start": 90.84,
+              "end": 109.86
             },
             {
               "paragraphIndex": 7,
-              "start": 109.8,
-              "end": 126.12,
-              "confidence": 1.0
+              "start": 109.86,
+              "end": 126.18
             },
             {
               "paragraphIndex": 8,
-              "start": 126.12,
-              "end": 138.72,
-              "confidence": 1.0
+              "start": 126.18,
+              "end": 138.76
             },
             {
               "paragraphIndex": 9,
-              "start": 138.72,
-              "end": 149.93,
-              "confidence": 0.966
+              "start": 138.76,
+              "end": 150
             },
             {
               "paragraphIndex": 10,
-              "start": 149.93,
-              "end": 180.31,
-              "confidence": 0.971
+              "start": 150,
+              "end": 180.34
             },
             {
               "paragraphIndex": 11,
-              "start": 180.31,
-              "end": 199.53,
-              "confidence": 1.0
+              "start": 180.34,
+              "end": 199.64
             },
             {
               "paragraphIndex": 12,
-              "start": 199.53,
-              "end": 219.27,
-              "confidence": 1.0
+              "start": 199.64,
+              "end": 219.56
             },
             {
               "paragraphIndex": 13,
-              "start": 219.27,
-              "end": 239.29,
-              "confidence": 1.0
+              "start": 219.56,
+              "end": 239.4
             },
             {
               "paragraphIndex": 14,
-              "start": 239.29,
-              "end": 259.57,
-              "confidence": 1.0
+              "start": 239.4,
+              "end": 259.62
             },
             {
               "paragraphIndex": 15,
-              "start": 259.57,
-              "end": 279.15,
-              "confidence": 1.0
+              "start": 259.62,
+              "end": 279.24
             },
             {
               "paragraphIndex": 16,
-              "start": 279.15,
-              "end": 309.85,
-              "confidence": 1.0
+              "start": 279.24,
+              "end": 310.04
             },
             {
               "paragraphIndex": 17,
-              "start": 309.85,
-              "end": 312.23,
-              "confidence": 1.0
+              "start": 310.04,
+              "end": 312.28
             },
             {
               "paragraphIndex": 18,
-              "start": 312.23,
-              "end": 321.09,
-              "confidence": 0.947
+              "start": 312.28,
+              "end": 321.2
             },
             {
               "paragraphIndex": 19,
-              "start": 321.09,
-              "end": 324.545,
-              "confidence": 1.0
+              "start": 321.2,
+              "end": 324.34
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5739969252064905,
           "detectedSilences": 168,
           "readAlongTextSha256": "6ceef217c9a63197d78a61a592d8a855e45e4334d44a9fc4b035030fd46671e2",
           "age": "9-10",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9908,
           "alignmentMeanSimilarity": 0.9968,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         }
       },
@@ -2512,11 +2278,11 @@
         "ageSelectionInVoiceStudio": false,
         "singleMasterAudio": true,
         "masterAgeRange": "4-10",
-        "followReaderSync": "audio-word-aligned",
-        "followReaderSyncMode": "whisper-word-alignment-v1",
+        "followReaderSync": "exact-forced-alignment",
+        "followReaderSyncMode": "elevenlabs-forced-alignment-v1",
         "followReaderParagraphs": 20,
         "followReaderCoverage": 0.9908,
-        "followReaderSyncedAt": "2026-10-06T22:01:53Z"
+        "followReaderSyncedAt": "2026-10-07T08:38:38Z"
       },
       "lifeContext": "heute lernen wir ʿAlī ibn Abī Ṭālib, raḍiya llāhu ʿanhu, als einen Gefährten kennen, dessen Leben eng mit dem Haus und der Umgebung des Propheten Muḥammad ﷺ verbunden war. Diese Nähe prägte ihn früh und machte ihn zu einem Menschen, bei dem Lernen, Familie, Mut und Verantwortung zusammenkamen. ʿAlī war ein naher Verwandter des Propheten ﷺ und gehörte früh zur muslimischen Gemeinschaft. Er verbrachte viel Zeit in seiner Nähe. Dadurch lernte er den Islām nicht nur aus einzelnen Aussagen kennen, sondern durch das tägliche Verhalten, die Entscheidungen und die Unterweisung des Propheten. Eine besonders eindrucksvolle Szene aus seinem Leben ereignete sich bei Ḫaybar. Der Prophet ﷺ erklärte, dass er die Fahne einem Mann geben werde, durch den Allah den Sieg schenken werde. Am nächsten Morgen wurde ʿAlī gerufen und erhielt die Fahne.",
       "cover": "/kids/assets/sahaba-mubashshirun/ali.jpg?v=2",
@@ -2644,140 +2410,119 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.18,
-              "end": 3.98,
-              "confidence": 0.75
+              "start": 0.04,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 3.98,
-              "end": 19.14,
-              "confidence": 0.921
+              "start": 4.019,
+              "end": 19.22
             },
             {
               "paragraphIndex": 2,
-              "start": 19.14,
-              "end": 32.2,
-              "confidence": 1.0
+              "start": 19.22,
+              "end": 32.28
             },
             {
               "paragraphIndex": 3,
-              "start": 32.2,
-              "end": 45.26,
-              "confidence": 0.969
+              "start": 32.28,
+              "end": 45
             },
             {
               "paragraphIndex": 4,
-              "start": 45.26,
-              "end": 62.58,
-              "confidence": 0.978
+              "start": 45,
+              "end": 62.58
             },
             {
               "paragraphIndex": 5,
               "start": 62.58,
-              "end": 77.36,
-              "confidence": 1.0
+              "end": 77.42
             },
             {
               "paragraphIndex": 6,
-              "start": 77.36,
-              "end": 91.88,
-              "confidence": 1.0
+              "start": 77.42,
+              "end": 91.9
             },
             {
               "paragraphIndex": 7,
-              "start": 91.88,
-              "end": 103.84,
-              "confidence": 1.0
+              "start": 91.9,
+              "end": 103.9
             },
             {
               "paragraphIndex": 8,
-              "start": 103.84,
-              "end": 117.98,
-              "confidence": 1.0
+              "start": 103.9,
+              "end": 118.06
             },
             {
               "paragraphIndex": 9,
-              "start": 117.98,
-              "end": 129.58,
-              "confidence": 1.0
+              "start": 118.06,
+              "end": 129.639
             },
             {
               "paragraphIndex": 10,
-              "start": 129.58,
-              "end": 157.14,
-              "confidence": 0.985
+              "start": 129.639,
+              "end": 157.16
             },
             {
               "paragraphIndex": 11,
-              "start": 157.14,
-              "end": 180.58,
-              "confidence": 0.98
+              "start": 157.16,
+              "end": 180.62
             },
             {
               "paragraphIndex": 12,
-              "start": 180.58,
-              "end": 197.9,
-              "confidence": 1.0
+              "start": 180.62,
+              "end": 198.06
             },
             {
               "paragraphIndex": 13,
-              "start": 197.9,
-              "end": 220.54,
-              "confidence": 0.961
+              "start": 198.06,
+              "end": 220.58
             },
             {
               "paragraphIndex": 14,
-              "start": 220.54,
-              "end": 243.1,
-              "confidence": 1.0
+              "start": 220.58,
+              "end": 243.2
             },
             {
               "paragraphIndex": 15,
-              "start": 243.1,
-              "end": 261.44,
-              "confidence": 1.0
+              "start": 243.2,
+              "end": 261.32
             },
             {
               "paragraphIndex": 16,
-              "start": 261.44,
-              "end": 280.96,
-              "confidence": 1.0
+              "start": 261.32,
+              "end": 281.06
             },
             {
               "paragraphIndex": 17,
-              "start": 280.96,
-              "end": 300.52,
-              "confidence": 1.0
+              "start": 281.06,
+              "end": 300.6
             },
             {
               "paragraphIndex": 18,
-              "start": 300.52,
-              "end": 302.5,
-              "confidence": 1.0
+              "start": 300.6,
+              "end": 302.52
             },
             {
               "paragraphIndex": 19,
-              "start": 302.5,
-              "end": 311.46,
-              "confidence": 0.947
+              "start": 302.52,
+              "end": 311.34
             },
             {
               "paragraphIndex": 20,
-              "start": 311.46,
-              "end": 314.384,
-              "confidence": 1.0
+              "start": 311.34,
+              "end": 314.16
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5764862699425093,
           "detectedSilences": 170,
           "readAlongTextSha256": "333c660dda6aa611f4a4d0e29bd26df803c9addb303c2642ec581b46a860507d",
           "age": "4-5",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9843,
           "alignmentMeanSimilarity": 0.9939,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "6-8": {
@@ -2818,140 +2563,119 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.18,
-              "end": 3.98,
-              "confidence": 0.75
+              "start": 0.04,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 3.98,
-              "end": 19.14,
-              "confidence": 0.921
+              "start": 4.019,
+              "end": 19.22
             },
             {
               "paragraphIndex": 2,
-              "start": 19.14,
-              "end": 32.2,
-              "confidence": 1.0
+              "start": 19.22,
+              "end": 32.28
             },
             {
               "paragraphIndex": 3,
-              "start": 32.2,
-              "end": 45.26,
-              "confidence": 0.969
+              "start": 32.28,
+              "end": 45
             },
             {
               "paragraphIndex": 4,
-              "start": 45.26,
-              "end": 62.58,
-              "confidence": 0.978
+              "start": 45,
+              "end": 62.58
             },
             {
               "paragraphIndex": 5,
               "start": 62.58,
-              "end": 77.36,
-              "confidence": 1.0
+              "end": 77.42
             },
             {
               "paragraphIndex": 6,
-              "start": 77.36,
-              "end": 91.88,
-              "confidence": 1.0
+              "start": 77.42,
+              "end": 91.9
             },
             {
               "paragraphIndex": 7,
-              "start": 91.88,
-              "end": 103.84,
-              "confidence": 1.0
+              "start": 91.9,
+              "end": 103.9
             },
             {
               "paragraphIndex": 8,
-              "start": 103.84,
-              "end": 117.98,
-              "confidence": 1.0
+              "start": 103.9,
+              "end": 118.06
             },
             {
               "paragraphIndex": 9,
-              "start": 117.98,
-              "end": 129.58,
-              "confidence": 1.0
+              "start": 118.06,
+              "end": 129.639
             },
             {
               "paragraphIndex": 10,
-              "start": 129.58,
-              "end": 157.14,
-              "confidence": 0.985
+              "start": 129.639,
+              "end": 157.16
             },
             {
               "paragraphIndex": 11,
-              "start": 157.14,
-              "end": 180.58,
-              "confidence": 0.98
+              "start": 157.16,
+              "end": 180.62
             },
             {
               "paragraphIndex": 12,
-              "start": 180.58,
-              "end": 197.9,
-              "confidence": 1.0
+              "start": 180.62,
+              "end": 198.06
             },
             {
               "paragraphIndex": 13,
-              "start": 197.9,
-              "end": 220.54,
-              "confidence": 0.961
+              "start": 198.06,
+              "end": 220.58
             },
             {
               "paragraphIndex": 14,
-              "start": 220.54,
-              "end": 243.1,
-              "confidence": 1.0
+              "start": 220.58,
+              "end": 243.2
             },
             {
               "paragraphIndex": 15,
-              "start": 243.1,
-              "end": 261.44,
-              "confidence": 1.0
+              "start": 243.2,
+              "end": 261.32
             },
             {
               "paragraphIndex": 16,
-              "start": 261.44,
-              "end": 280.96,
-              "confidence": 1.0
+              "start": 261.32,
+              "end": 281.06
             },
             {
               "paragraphIndex": 17,
-              "start": 280.96,
-              "end": 300.52,
-              "confidence": 1.0
+              "start": 281.06,
+              "end": 300.6
             },
             {
               "paragraphIndex": 18,
-              "start": 300.52,
-              "end": 302.5,
-              "confidence": 1.0
+              "start": 300.6,
+              "end": 302.52
             },
             {
               "paragraphIndex": 19,
-              "start": 302.5,
-              "end": 311.46,
-              "confidence": 0.947
+              "start": 302.52,
+              "end": 311.34
             },
             {
               "paragraphIndex": 20,
-              "start": 311.46,
-              "end": 314.384,
-              "confidence": 1.0
+              "start": 311.34,
+              "end": 314.16
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5764862699425093,
           "detectedSilences": 170,
           "readAlongTextSha256": "333c660dda6aa611f4a4d0e29bd26df803c9addb303c2642ec581b46a860507d",
           "age": "6-8",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9843,
           "alignmentMeanSimilarity": 0.9939,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "9-10": {
@@ -2992,140 +2716,119 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.18,
-              "end": 3.98,
-              "confidence": 0.75
+              "start": 0.04,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 3.98,
-              "end": 19.14,
-              "confidence": 0.921
+              "start": 4.019,
+              "end": 19.22
             },
             {
               "paragraphIndex": 2,
-              "start": 19.14,
-              "end": 32.2,
-              "confidence": 1.0
+              "start": 19.22,
+              "end": 32.28
             },
             {
               "paragraphIndex": 3,
-              "start": 32.2,
-              "end": 45.26,
-              "confidence": 0.969
+              "start": 32.28,
+              "end": 45
             },
             {
               "paragraphIndex": 4,
-              "start": 45.26,
-              "end": 62.58,
-              "confidence": 0.978
+              "start": 45,
+              "end": 62.58
             },
             {
               "paragraphIndex": 5,
               "start": 62.58,
-              "end": 77.36,
-              "confidence": 1.0
+              "end": 77.42
             },
             {
               "paragraphIndex": 6,
-              "start": 77.36,
-              "end": 91.88,
-              "confidence": 1.0
+              "start": 77.42,
+              "end": 91.9
             },
             {
               "paragraphIndex": 7,
-              "start": 91.88,
-              "end": 103.84,
-              "confidence": 1.0
+              "start": 91.9,
+              "end": 103.9
             },
             {
               "paragraphIndex": 8,
-              "start": 103.84,
-              "end": 117.98,
-              "confidence": 1.0
+              "start": 103.9,
+              "end": 118.06
             },
             {
               "paragraphIndex": 9,
-              "start": 117.98,
-              "end": 129.58,
-              "confidence": 1.0
+              "start": 118.06,
+              "end": 129.639
             },
             {
               "paragraphIndex": 10,
-              "start": 129.58,
-              "end": 157.14,
-              "confidence": 0.985
+              "start": 129.639,
+              "end": 157.16
             },
             {
               "paragraphIndex": 11,
-              "start": 157.14,
-              "end": 180.58,
-              "confidence": 0.98
+              "start": 157.16,
+              "end": 180.62
             },
             {
               "paragraphIndex": 12,
-              "start": 180.58,
-              "end": 197.9,
-              "confidence": 1.0
+              "start": 180.62,
+              "end": 198.06
             },
             {
               "paragraphIndex": 13,
-              "start": 197.9,
-              "end": 220.54,
-              "confidence": 0.961
+              "start": 198.06,
+              "end": 220.58
             },
             {
               "paragraphIndex": 14,
-              "start": 220.54,
-              "end": 243.1,
-              "confidence": 1.0
+              "start": 220.58,
+              "end": 243.2
             },
             {
               "paragraphIndex": 15,
-              "start": 243.1,
-              "end": 261.44,
-              "confidence": 1.0
+              "start": 243.2,
+              "end": 261.32
             },
             {
               "paragraphIndex": 16,
-              "start": 261.44,
-              "end": 280.96,
-              "confidence": 1.0
+              "start": 261.32,
+              "end": 281.06
             },
             {
               "paragraphIndex": 17,
-              "start": 280.96,
-              "end": 300.52,
-              "confidence": 1.0
+              "start": 281.06,
+              "end": 300.6
             },
             {
               "paragraphIndex": 18,
-              "start": 300.52,
-              "end": 302.5,
-              "confidence": 1.0
+              "start": 300.6,
+              "end": 302.52
             },
             {
               "paragraphIndex": 19,
-              "start": 302.5,
-              "end": 311.46,
-              "confidence": 0.947
+              "start": 302.52,
+              "end": 311.34
             },
             {
               "paragraphIndex": 20,
-              "start": 311.46,
-              "end": 314.384,
-              "confidence": 1.0
+              "start": 311.34,
+              "end": 314.16
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5764862699425093,
           "detectedSilences": 170,
           "readAlongTextSha256": "333c660dda6aa611f4a4d0e29bd26df803c9addb303c2642ec581b46a860507d",
           "age": "9-10",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9843,
           "alignmentMeanSimilarity": 0.9939,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         }
       },
@@ -3162,11 +2865,11 @@
         "ageSelectionInVoiceStudio": false,
         "singleMasterAudio": true,
         "masterAgeRange": "4-10",
-        "followReaderSync": "audio-word-aligned",
-        "followReaderSyncMode": "whisper-word-alignment-v1",
+        "followReaderSync": "exact-forced-alignment",
+        "followReaderSyncMode": "elevenlabs-forced-alignment-v1",
         "followReaderParagraphs": 21,
         "followReaderCoverage": 0.9843,
-        "followReaderSyncedAt": "2026-10-06T22:01:53Z"
+        "followReaderSyncedAt": "2026-10-07T08:38:38Z"
       },
       "lifeContext": "heute lernen wir Ṭalḥah ibn ʿUbaydillāh, raḍiya llāhu ʿanhu, als einen Gefährten kennen, dessen Name besonders mit Treue und Schutz verbunden ist. Sein Leben enthält einen Augenblick, der sehr deutlich zeigt, wie ernst diese Eigenschaften für ihn waren. Ṭalḥah gehörte zu den frühen Gefährten und lebte in der Nähe des Propheten ﷺ. Wie die anderen Muslime erlebte er Zeiten, in denen die Gemeinschaft wuchs, aber auch Zeiten großer Gefahr und Belastung. Am Tag von Uḥud veränderte sich die Lage der Muslime plötzlich. Der Prophet ﷺ befand sich in einer gefährlichen Situation. In diesem Moment blieb Ṭalḥah bei ihm und stellte sich schützend vor ihn.",
       "cover": "/kids/assets/sahaba-mubashshirun/talha.jpg?v=2",
@@ -3294,146 +2997,124 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.18,
-              "end": 4.0,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 4.0,
-              "end": 22.44,
-              "confidence": 0.925
+              "start": 4.019,
+              "end": 22.38
             },
             {
               "paragraphIndex": 2,
-              "start": 22.44,
-              "end": 36.08,
-              "confidence": 1.0
+              "start": 22.38,
+              "end": 36.14
             },
             {
               "paragraphIndex": 3,
-              "start": 36.08,
-              "end": 52.4,
-              "confidence": 1.0
+              "start": 36.14,
+              "end": 52.46
             },
             {
               "paragraphIndex": 4,
-              "start": 52.4,
-              "end": 67.08,
-              "confidence": 1.0
+              "start": 52.46,
+              "end": 67.14
             },
             {
               "paragraphIndex": 5,
-              "start": 67.08,
-              "end": 81.22,
-              "confidence": 1.0
+              "start": 67.14,
+              "end": 81.74
             },
             {
               "paragraphIndex": 6,
-              "start": 81.22,
-              "end": 96.6,
-              "confidence": 1.0
+              "start": 81.74,
+              "end": 96.68
             },
             {
               "paragraphIndex": 7,
-              "start": 96.6,
-              "end": 109.7,
-              "confidence": 1.0
+              "start": 96.68,
+              "end": 110.18
             },
             {
               "paragraphIndex": 8,
-              "start": 109.7,
-              "end": 122.54,
-              "confidence": 1.0
+              "start": 110.18,
+              "end": 122.6
             },
             {
               "paragraphIndex": 9,
-              "start": 122.54,
-              "end": 134.56,
-              "confidence": 1.0
+              "start": 122.6,
+              "end": 134.96
             },
             {
               "paragraphIndex": 10,
-              "start": 134.56,
-              "end": 163.36,
-              "confidence": 1.0
+              "start": 134.96,
+              "end": 163.68
             },
             {
               "paragraphIndex": 11,
-              "start": 163.36,
-              "end": 182.84,
-              "confidence": 1.0
+              "start": 163.68,
+              "end": 182.9
             },
             {
               "paragraphIndex": 12,
-              "start": 182.84,
-              "end": 203.58,
-              "confidence": 1.0
+              "start": 182.9,
+              "end": 203.72
             },
             {
               "paragraphIndex": 13,
-              "start": 203.58,
-              "end": 222.04,
-              "confidence": 1.0
+              "start": 203.72,
+              "end": 222.08
             },
             {
               "paragraphIndex": 14,
-              "start": 222.04,
-              "end": 237.84,
-              "confidence": 0.978
+              "start": 222.08,
+              "end": 238.36
             },
             {
               "paragraphIndex": 15,
-              "start": 237.84,
-              "end": 259.14,
-              "confidence": 1.0
+              "start": 238.36,
+              "end": 259.2
             },
             {
               "paragraphIndex": 16,
-              "start": 259.14,
-              "end": 283.84,
-              "confidence": 0.986
+              "start": 259.2,
+              "end": 283.9
             },
             {
               "paragraphIndex": 17,
-              "start": 283.84,
-              "end": 301.42,
-              "confidence": 1.0
+              "start": 283.9,
+              "end": 301.48
             },
             {
               "paragraphIndex": 18,
-              "start": 301.42,
-              "end": 317.46,
-              "confidence": 1.0
+              "start": 301.48,
+              "end": 317.96
             },
             {
               "paragraphIndex": 19,
-              "start": 317.46,
-              "end": 319.44,
-              "confidence": 1.0
+              "start": 317.96,
+              "end": 319.92
             },
             {
               "paragraphIndex": 20,
-              "start": 319.44,
-              "end": 328.54,
-              "confidence": 1.0
+              "start": 319.92,
+              "end": 328.58
             },
             {
               "paragraphIndex": 21,
-              "start": 328.54,
-              "end": 331.99,
-              "confidence": 1.0
+              "start": 328.58,
+              "end": 331.8
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5765263293659253,
           "detectedSilences": 183,
           "readAlongTextSha256": "872f57e36fe204ded7beae14930973c8d53e430a7484fdd9d468f5bd0148f8d9",
           "age": "4-5",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9935,
           "alignmentMeanSimilarity": 0.9934,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "6-8": {
@@ -3474,146 +3155,124 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.18,
-              "end": 4.0,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 4.0,
-              "end": 22.44,
-              "confidence": 0.925
+              "start": 4.019,
+              "end": 22.38
             },
             {
               "paragraphIndex": 2,
-              "start": 22.44,
-              "end": 36.08,
-              "confidence": 1.0
+              "start": 22.38,
+              "end": 36.14
             },
             {
               "paragraphIndex": 3,
-              "start": 36.08,
-              "end": 52.4,
-              "confidence": 1.0
+              "start": 36.14,
+              "end": 52.46
             },
             {
               "paragraphIndex": 4,
-              "start": 52.4,
-              "end": 67.08,
-              "confidence": 1.0
+              "start": 52.46,
+              "end": 67.14
             },
             {
               "paragraphIndex": 5,
-              "start": 67.08,
-              "end": 81.22,
-              "confidence": 1.0
+              "start": 67.14,
+              "end": 81.74
             },
             {
               "paragraphIndex": 6,
-              "start": 81.22,
-              "end": 96.6,
-              "confidence": 1.0
+              "start": 81.74,
+              "end": 96.68
             },
             {
               "paragraphIndex": 7,
-              "start": 96.6,
-              "end": 109.7,
-              "confidence": 1.0
+              "start": 96.68,
+              "end": 110.18
             },
             {
               "paragraphIndex": 8,
-              "start": 109.7,
-              "end": 122.54,
-              "confidence": 1.0
+              "start": 110.18,
+              "end": 122.6
             },
             {
               "paragraphIndex": 9,
-              "start": 122.54,
-              "end": 134.56,
-              "confidence": 1.0
+              "start": 122.6,
+              "end": 134.96
             },
             {
               "paragraphIndex": 10,
-              "start": 134.56,
-              "end": 163.36,
-              "confidence": 1.0
+              "start": 134.96,
+              "end": 163.68
             },
             {
               "paragraphIndex": 11,
-              "start": 163.36,
-              "end": 182.84,
-              "confidence": 1.0
+              "start": 163.68,
+              "end": 182.9
             },
             {
               "paragraphIndex": 12,
-              "start": 182.84,
-              "end": 203.58,
-              "confidence": 1.0
+              "start": 182.9,
+              "end": 203.72
             },
             {
               "paragraphIndex": 13,
-              "start": 203.58,
-              "end": 222.04,
-              "confidence": 1.0
+              "start": 203.72,
+              "end": 222.08
             },
             {
               "paragraphIndex": 14,
-              "start": 222.04,
-              "end": 237.84,
-              "confidence": 0.978
+              "start": 222.08,
+              "end": 238.36
             },
             {
               "paragraphIndex": 15,
-              "start": 237.84,
-              "end": 259.14,
-              "confidence": 1.0
+              "start": 238.36,
+              "end": 259.2
             },
             {
               "paragraphIndex": 16,
-              "start": 259.14,
-              "end": 283.84,
-              "confidence": 0.986
+              "start": 259.2,
+              "end": 283.9
             },
             {
               "paragraphIndex": 17,
-              "start": 283.84,
-              "end": 301.42,
-              "confidence": 1.0
+              "start": 283.9,
+              "end": 301.48
             },
             {
               "paragraphIndex": 18,
-              "start": 301.42,
-              "end": 317.46,
-              "confidence": 1.0
+              "start": 301.48,
+              "end": 317.96
             },
             {
               "paragraphIndex": 19,
-              "start": 317.46,
-              "end": 319.44,
-              "confidence": 1.0
+              "start": 317.96,
+              "end": 319.92
             },
             {
               "paragraphIndex": 20,
-              "start": 319.44,
-              "end": 328.54,
-              "confidence": 1.0
+              "start": 319.92,
+              "end": 328.58
             },
             {
               "paragraphIndex": 21,
-              "start": 328.54,
-              "end": 331.99,
-              "confidence": 1.0
+              "start": 328.58,
+              "end": 331.8
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5765263293659253,
           "detectedSilences": 183,
           "readAlongTextSha256": "872f57e36fe204ded7beae14930973c8d53e430a7484fdd9d468f5bd0148f8d9",
           "age": "6-8",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9935,
           "alignmentMeanSimilarity": 0.9934,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "9-10": {
@@ -3654,146 +3313,124 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.18,
-              "end": 4.0,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 4.0,
-              "end": 22.44,
-              "confidence": 0.925
+              "start": 4.019,
+              "end": 22.38
             },
             {
               "paragraphIndex": 2,
-              "start": 22.44,
-              "end": 36.08,
-              "confidence": 1.0
+              "start": 22.38,
+              "end": 36.14
             },
             {
               "paragraphIndex": 3,
-              "start": 36.08,
-              "end": 52.4,
-              "confidence": 1.0
+              "start": 36.14,
+              "end": 52.46
             },
             {
               "paragraphIndex": 4,
-              "start": 52.4,
-              "end": 67.08,
-              "confidence": 1.0
+              "start": 52.46,
+              "end": 67.14
             },
             {
               "paragraphIndex": 5,
-              "start": 67.08,
-              "end": 81.22,
-              "confidence": 1.0
+              "start": 67.14,
+              "end": 81.74
             },
             {
               "paragraphIndex": 6,
-              "start": 81.22,
-              "end": 96.6,
-              "confidence": 1.0
+              "start": 81.74,
+              "end": 96.68
             },
             {
               "paragraphIndex": 7,
-              "start": 96.6,
-              "end": 109.7,
-              "confidence": 1.0
+              "start": 96.68,
+              "end": 110.18
             },
             {
               "paragraphIndex": 8,
-              "start": 109.7,
-              "end": 122.54,
-              "confidence": 1.0
+              "start": 110.18,
+              "end": 122.6
             },
             {
               "paragraphIndex": 9,
-              "start": 122.54,
-              "end": 134.56,
-              "confidence": 1.0
+              "start": 122.6,
+              "end": 134.96
             },
             {
               "paragraphIndex": 10,
-              "start": 134.56,
-              "end": 163.36,
-              "confidence": 1.0
+              "start": 134.96,
+              "end": 163.68
             },
             {
               "paragraphIndex": 11,
-              "start": 163.36,
-              "end": 182.84,
-              "confidence": 1.0
+              "start": 163.68,
+              "end": 182.9
             },
             {
               "paragraphIndex": 12,
-              "start": 182.84,
-              "end": 203.58,
-              "confidence": 1.0
+              "start": 182.9,
+              "end": 203.72
             },
             {
               "paragraphIndex": 13,
-              "start": 203.58,
-              "end": 222.04,
-              "confidence": 1.0
+              "start": 203.72,
+              "end": 222.08
             },
             {
               "paragraphIndex": 14,
-              "start": 222.04,
-              "end": 237.84,
-              "confidence": 0.978
+              "start": 222.08,
+              "end": 238.36
             },
             {
               "paragraphIndex": 15,
-              "start": 237.84,
-              "end": 259.14,
-              "confidence": 1.0
+              "start": 238.36,
+              "end": 259.2
             },
             {
               "paragraphIndex": 16,
-              "start": 259.14,
-              "end": 283.84,
-              "confidence": 0.986
+              "start": 259.2,
+              "end": 283.9
             },
             {
               "paragraphIndex": 17,
-              "start": 283.84,
-              "end": 301.42,
-              "confidence": 1.0
+              "start": 283.9,
+              "end": 301.48
             },
             {
               "paragraphIndex": 18,
-              "start": 301.42,
-              "end": 317.46,
-              "confidence": 1.0
+              "start": 301.48,
+              "end": 317.96
             },
             {
               "paragraphIndex": 19,
-              "start": 317.46,
-              "end": 319.44,
-              "confidence": 1.0
+              "start": 317.96,
+              "end": 319.92
             },
             {
               "paragraphIndex": 20,
-              "start": 319.44,
-              "end": 328.54,
-              "confidence": 1.0
+              "start": 319.92,
+              "end": 328.58
             },
             {
               "paragraphIndex": 21,
-              "start": 328.54,
-              "end": 331.99,
-              "confidence": 1.0
+              "start": 328.58,
+              "end": 331.8
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5765263293659253,
           "detectedSilences": 183,
           "readAlongTextSha256": "872f57e36fe204ded7beae14930973c8d53e430a7484fdd9d468f5bd0148f8d9",
           "age": "9-10",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9935,
           "alignmentMeanSimilarity": 0.9934,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         }
       },
@@ -3830,11 +3467,11 @@
         "ageSelectionInVoiceStudio": false,
         "singleMasterAudio": true,
         "masterAgeRange": "4-10",
-        "followReaderSync": "audio-word-aligned",
-        "followReaderSyncMode": "whisper-word-alignment-v1",
+        "followReaderSync": "exact-forced-alignment",
+        "followReaderSyncMode": "elevenlabs-forced-alignment-v1",
         "followReaderParagraphs": 22,
         "followReaderCoverage": 0.9935,
-        "followReaderSyncedAt": "2026-10-06T22:01:53Z"
+        "followReaderSyncedAt": "2026-10-07T08:38:38Z"
       },
       "lifeContext": "heute lernen wir az-Zubayr ibn al-ʿAwwām, raḍiya llāhu ʿanhu, als einen Gefährten kennen, dessen Mut eng mit Zuverlässigkeit verbunden war. Seine Geschichte zeigt, dass ein mutiger Mensch nicht nur vorangeht, sondern auch genau beobachtet, Verantwortung übernimmt und verlässliche Informationen zurückbringt. az-Zubayr gehörte zu den frühen Muslimen und stand dem Propheten ﷺ nahe. Er lebte in einer Zeit, in der die muslimische Gemeinschaft wiederholt unter Druck geriet und viele Aufgaben schnell verteilt werden mussten. Während der Grabenschlacht war die Situation besonders angespannt. Die Muslime mussten wissen, was die gegnerischen Gruppen taten. Dafür brauchte der Prophet ﷺ jemanden, der sich einer schwierigen Aufgabe stellte und anschließend zuverlässig Bericht erstatten konnte.",
       "cover": "/kids/assets/sahaba-mubashshirun/zubayr.jpg?v=2",
@@ -3962,146 +3599,124 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 4.0,
-              "confidence": 0.75
+              "start": 0.06,
+              "end": 4.04
             },
             {
               "paragraphIndex": 1,
-              "start": 4.0,
-              "end": 15.98,
-              "confidence": 0.923
+              "start": 4.04,
+              "end": 16.059
             },
             {
               "paragraphIndex": 2,
-              "start": 15.98,
-              "end": 30.38,
-              "confidence": 1.0
+              "start": 16.059,
+              "end": 30.42
             },
             {
               "paragraphIndex": 3,
-              "start": 30.38,
-              "end": 45.58,
-              "confidence": 1.0
+              "start": 30.42,
+              "end": 45.64
             },
             {
               "paragraphIndex": 4,
-              "start": 45.58,
-              "end": 59.3,
-              "confidence": 0.974
+              "start": 45.64,
+              "end": 59.34
             },
             {
               "paragraphIndex": 5,
-              "start": 59.3,
-              "end": 73.34,
-              "confidence": 0.974
+              "start": 59.34,
+              "end": 73.38
             },
             {
               "paragraphIndex": 6,
-              "start": 73.34,
-              "end": 90.1,
-              "confidence": 1.0
+              "start": 73.38,
+              "end": 90.18
             },
             {
               "paragraphIndex": 7,
-              "start": 90.1,
-              "end": 103.72,
-              "confidence": 1.0
+              "start": 90.18,
+              "end": 103.78
             },
             {
               "paragraphIndex": 8,
-              "start": 103.72,
-              "end": 117.4,
-              "confidence": 1.0
+              "start": 103.78,
+              "end": 117.46
             },
             {
               "paragraphIndex": 9,
-              "start": 117.4,
-              "end": 126.92,
-              "confidence": 1.0
+              "start": 117.46,
+              "end": 126.98
             },
             {
               "paragraphIndex": 10,
-              "start": 126.92,
-              "end": 152.86,
-              "confidence": 1.0
+              "start": 126.98,
+              "end": 152.9
             },
             {
               "paragraphIndex": 11,
-              "start": 152.86,
-              "end": 171.6,
-              "confidence": 1.0
+              "start": 152.9,
+              "end": 171.66
             },
             {
               "paragraphIndex": 12,
-              "start": 171.6,
-              "end": 186.76,
-              "confidence": 1.0
+              "start": 171.66,
+              "end": 186.9
             },
             {
               "paragraphIndex": 13,
-              "start": 186.76,
-              "end": 200.04,
-              "confidence": 1.0
+              "start": 186.9,
+              "end": 200.1
             },
             {
               "paragraphIndex": 14,
-              "start": 200.04,
-              "end": 217.3,
-              "confidence": 1.0
+              "start": 200.1,
+              "end": 217.38
             },
             {
               "paragraphIndex": 15,
-              "start": 217.3,
-              "end": 233.58,
-              "confidence": 1.0
+              "start": 217.38,
+              "end": 233.62
             },
             {
               "paragraphIndex": 16,
-              "start": 233.58,
-              "end": 249.82,
-              "confidence": 1.0
+              "start": 233.62,
+              "end": 250.46
             },
             {
               "paragraphIndex": 17,
-              "start": 249.82,
-              "end": 272.78,
-              "confidence": 1.0
+              "start": 250.46,
+              "end": 272.94
             },
             {
               "paragraphIndex": 18,
-              "start": 272.78,
-              "end": 295.22,
-              "confidence": 1.0
+              "start": 272.94,
+              "end": 295.38
             },
             {
               "paragraphIndex": 19,
-              "start": 295.22,
-              "end": 297.28,
-              "confidence": 1.0
+              "start": 295.38,
+              "end": 297.32
             },
             {
               "paragraphIndex": 20,
-              "start": 297.28,
-              "end": 306.54,
-              "confidence": 0.947
+              "start": 297.32,
+              "end": 306.4
             },
             {
               "paragraphIndex": 21,
-              "start": 306.54,
-              "end": 309.603,
-              "confidence": 0.833
+              "start": 306.4,
+              "end": 309.38
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5758646608729141,
           "detectedSilences": 175,
           "readAlongTextSha256": "7f7b890e8a2cc44ee74625fdc99ccdbdfbd4ce54c3bba190ec1ad12c6567f6c4",
           "age": "4-5",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9897,
           "alignmentMeanSimilarity": 0.9887,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "6-8": {
@@ -4142,146 +3757,124 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 4.0,
-              "confidence": 0.75
+              "start": 0.06,
+              "end": 4.04
             },
             {
               "paragraphIndex": 1,
-              "start": 4.0,
-              "end": 15.98,
-              "confidence": 0.923
+              "start": 4.04,
+              "end": 16.059
             },
             {
               "paragraphIndex": 2,
-              "start": 15.98,
-              "end": 30.38,
-              "confidence": 1.0
+              "start": 16.059,
+              "end": 30.42
             },
             {
               "paragraphIndex": 3,
-              "start": 30.38,
-              "end": 45.58,
-              "confidence": 1.0
+              "start": 30.42,
+              "end": 45.64
             },
             {
               "paragraphIndex": 4,
-              "start": 45.58,
-              "end": 59.3,
-              "confidence": 0.974
+              "start": 45.64,
+              "end": 59.34
             },
             {
               "paragraphIndex": 5,
-              "start": 59.3,
-              "end": 73.34,
-              "confidence": 0.974
+              "start": 59.34,
+              "end": 73.38
             },
             {
               "paragraphIndex": 6,
-              "start": 73.34,
-              "end": 90.1,
-              "confidence": 1.0
+              "start": 73.38,
+              "end": 90.18
             },
             {
               "paragraphIndex": 7,
-              "start": 90.1,
-              "end": 103.72,
-              "confidence": 1.0
+              "start": 90.18,
+              "end": 103.78
             },
             {
               "paragraphIndex": 8,
-              "start": 103.72,
-              "end": 117.4,
-              "confidence": 1.0
+              "start": 103.78,
+              "end": 117.46
             },
             {
               "paragraphIndex": 9,
-              "start": 117.4,
-              "end": 126.92,
-              "confidence": 1.0
+              "start": 117.46,
+              "end": 126.98
             },
             {
               "paragraphIndex": 10,
-              "start": 126.92,
-              "end": 152.86,
-              "confidence": 1.0
+              "start": 126.98,
+              "end": 152.9
             },
             {
               "paragraphIndex": 11,
-              "start": 152.86,
-              "end": 171.6,
-              "confidence": 1.0
+              "start": 152.9,
+              "end": 171.66
             },
             {
               "paragraphIndex": 12,
-              "start": 171.6,
-              "end": 186.76,
-              "confidence": 1.0
+              "start": 171.66,
+              "end": 186.9
             },
             {
               "paragraphIndex": 13,
-              "start": 186.76,
-              "end": 200.04,
-              "confidence": 1.0
+              "start": 186.9,
+              "end": 200.1
             },
             {
               "paragraphIndex": 14,
-              "start": 200.04,
-              "end": 217.3,
-              "confidence": 1.0
+              "start": 200.1,
+              "end": 217.38
             },
             {
               "paragraphIndex": 15,
-              "start": 217.3,
-              "end": 233.58,
-              "confidence": 1.0
+              "start": 217.38,
+              "end": 233.62
             },
             {
               "paragraphIndex": 16,
-              "start": 233.58,
-              "end": 249.82,
-              "confidence": 1.0
+              "start": 233.62,
+              "end": 250.46
             },
             {
               "paragraphIndex": 17,
-              "start": 249.82,
-              "end": 272.78,
-              "confidence": 1.0
+              "start": 250.46,
+              "end": 272.94
             },
             {
               "paragraphIndex": 18,
-              "start": 272.78,
-              "end": 295.22,
-              "confidence": 1.0
+              "start": 272.94,
+              "end": 295.38
             },
             {
               "paragraphIndex": 19,
-              "start": 295.22,
-              "end": 297.28,
-              "confidence": 1.0
+              "start": 295.38,
+              "end": 297.32
             },
             {
               "paragraphIndex": 20,
-              "start": 297.28,
-              "end": 306.54,
-              "confidence": 0.947
+              "start": 297.32,
+              "end": 306.4
             },
             {
               "paragraphIndex": 21,
-              "start": 306.54,
-              "end": 309.603,
-              "confidence": 0.833
+              "start": 306.4,
+              "end": 309.38
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5758646608729141,
           "detectedSilences": 175,
           "readAlongTextSha256": "7f7b890e8a2cc44ee74625fdc99ccdbdfbd4ce54c3bba190ec1ad12c6567f6c4",
           "age": "6-8",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9897,
           "alignmentMeanSimilarity": 0.9887,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "9-10": {
@@ -4322,146 +3915,124 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 4.0,
-              "confidence": 0.75
+              "start": 0.06,
+              "end": 4.04
             },
             {
               "paragraphIndex": 1,
-              "start": 4.0,
-              "end": 15.98,
-              "confidence": 0.923
+              "start": 4.04,
+              "end": 16.059
             },
             {
               "paragraphIndex": 2,
-              "start": 15.98,
-              "end": 30.38,
-              "confidence": 1.0
+              "start": 16.059,
+              "end": 30.42
             },
             {
               "paragraphIndex": 3,
-              "start": 30.38,
-              "end": 45.58,
-              "confidence": 1.0
+              "start": 30.42,
+              "end": 45.64
             },
             {
               "paragraphIndex": 4,
-              "start": 45.58,
-              "end": 59.3,
-              "confidence": 0.974
+              "start": 45.64,
+              "end": 59.34
             },
             {
               "paragraphIndex": 5,
-              "start": 59.3,
-              "end": 73.34,
-              "confidence": 0.974
+              "start": 59.34,
+              "end": 73.38
             },
             {
               "paragraphIndex": 6,
-              "start": 73.34,
-              "end": 90.1,
-              "confidence": 1.0
+              "start": 73.38,
+              "end": 90.18
             },
             {
               "paragraphIndex": 7,
-              "start": 90.1,
-              "end": 103.72,
-              "confidence": 1.0
+              "start": 90.18,
+              "end": 103.78
             },
             {
               "paragraphIndex": 8,
-              "start": 103.72,
-              "end": 117.4,
-              "confidence": 1.0
+              "start": 103.78,
+              "end": 117.46
             },
             {
               "paragraphIndex": 9,
-              "start": 117.4,
-              "end": 126.92,
-              "confidence": 1.0
+              "start": 117.46,
+              "end": 126.98
             },
             {
               "paragraphIndex": 10,
-              "start": 126.92,
-              "end": 152.86,
-              "confidence": 1.0
+              "start": 126.98,
+              "end": 152.9
             },
             {
               "paragraphIndex": 11,
-              "start": 152.86,
-              "end": 171.6,
-              "confidence": 1.0
+              "start": 152.9,
+              "end": 171.66
             },
             {
               "paragraphIndex": 12,
-              "start": 171.6,
-              "end": 186.76,
-              "confidence": 1.0
+              "start": 171.66,
+              "end": 186.9
             },
             {
               "paragraphIndex": 13,
-              "start": 186.76,
-              "end": 200.04,
-              "confidence": 1.0
+              "start": 186.9,
+              "end": 200.1
             },
             {
               "paragraphIndex": 14,
-              "start": 200.04,
-              "end": 217.3,
-              "confidence": 1.0
+              "start": 200.1,
+              "end": 217.38
             },
             {
               "paragraphIndex": 15,
-              "start": 217.3,
-              "end": 233.58,
-              "confidence": 1.0
+              "start": 217.38,
+              "end": 233.62
             },
             {
               "paragraphIndex": 16,
-              "start": 233.58,
-              "end": 249.82,
-              "confidence": 1.0
+              "start": 233.62,
+              "end": 250.46
             },
             {
               "paragraphIndex": 17,
-              "start": 249.82,
-              "end": 272.78,
-              "confidence": 1.0
+              "start": 250.46,
+              "end": 272.94
             },
             {
               "paragraphIndex": 18,
-              "start": 272.78,
-              "end": 295.22,
-              "confidence": 1.0
+              "start": 272.94,
+              "end": 295.38
             },
             {
               "paragraphIndex": 19,
-              "start": 295.22,
-              "end": 297.28,
-              "confidence": 1.0
+              "start": 295.38,
+              "end": 297.32
             },
             {
               "paragraphIndex": 20,
-              "start": 297.28,
-              "end": 306.54,
-              "confidence": 0.947
+              "start": 297.32,
+              "end": 306.4
             },
             {
               "paragraphIndex": 21,
-              "start": 306.54,
-              "end": 309.603,
-              "confidence": 0.833
+              "start": 306.4,
+              "end": 309.38
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5758646608729141,
           "detectedSilences": 175,
           "readAlongTextSha256": "7f7b890e8a2cc44ee74625fdc99ccdbdfbd4ce54c3bba190ec1ad12c6567f6c4",
           "age": "9-10",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9897,
           "alignmentMeanSimilarity": 0.9887,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         }
       },
@@ -4498,11 +4069,11 @@
         "ageSelectionInVoiceStudio": false,
         "singleMasterAudio": true,
         "masterAgeRange": "4-10",
-        "followReaderSync": "audio-word-aligned",
-        "followReaderSyncMode": "whisper-word-alignment-v1",
+        "followReaderSync": "exact-forced-alignment",
+        "followReaderSyncMode": "elevenlabs-forced-alignment-v1",
         "followReaderParagraphs": 22,
         "followReaderCoverage": 0.9897,
-        "followReaderSyncedAt": "2026-10-06T22:01:53Z"
+        "followReaderSyncedAt": "2026-10-07T08:38:38Z"
       },
       "lifeContext": "heute lernen wir ʿAbd ar-Raḥmān ibn ʿAwf, raḍiya llāhu ʿanhu, als einen Gefährten kennen, dessen Geschichte besonders gut zeigt, was Neuanfang, Selbstständigkeit und ehrlicher Erwerb bedeuten. ʿAbd ar-Raḥmān gehörte zu den Muhāǧirūn. Er verließ Makkah und zog nach Madīnah. Eine Hiǧrah ist nicht nur eine Reise auf einer Karte. Sie bedeutet, Gewohntes zurückzulassen: Beziehungen, Besitz, Arbeit und vertraute Wege. In Madīnah schuf der Prophet ﷺ Brüderschaft zwischen den Muhāǧirūn und den Anṣār. ʿAbd ar-Raḥmān wurde mit Saʿd ibn ar-Rabīʿ verbunden. Saʿd machte ihm ein sehr großzügiges Angebot und war bereit, seinen Besitz mit ihm zu teilen.",
       "cover": "/kids/assets/sahaba-mubashshirun/abd-ar-rahman.jpg?v=2",
@@ -4637,146 +4208,124 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.2,
-              "end": 3.92,
-              "confidence": 1.0
+              "start": 0.06,
+              "end": 3.96
             },
             {
               "paragraphIndex": 1,
-              "start": 3.92,
-              "end": 20.14,
-              "confidence": 0.919
+              "start": 3.96,
+              "end": 20.04
             },
             {
               "paragraphIndex": 2,
-              "start": 20.14,
-              "end": 31.52,
-              "confidence": 1.0
+              "start": 20.04,
+              "end": 31.6
             },
             {
               "paragraphIndex": 3,
-              "start": 31.52,
-              "end": 46.06,
-              "confidence": 1.0
+              "start": 31.6,
+              "end": 46.12
             },
             {
               "paragraphIndex": 4,
-              "start": 46.06,
-              "end": 58.42,
-              "confidence": 1.0
+              "start": 46.12,
+              "end": 58.44
             },
             {
               "paragraphIndex": 5,
-              "start": 58.42,
-              "end": 74.36,
-              "confidence": 1.0
+              "start": 58.44,
+              "end": 74.24
             },
             {
               "paragraphIndex": 6,
-              "start": 74.36,
-              "end": 85.66,
-              "confidence": 1.0
+              "start": 74.24,
+              "end": 86.08
             },
             {
               "paragraphIndex": 7,
-              "start": 85.66,
-              "end": 97.96,
-              "confidence": 1.0
+              "start": 86.08,
+              "end": 97.84
             },
             {
               "paragraphIndex": 8,
-              "start": 97.96,
-              "end": 110.84,
-              "confidence": 1.0
+              "start": 97.84,
+              "end": 110.9
             },
             {
               "paragraphIndex": 9,
-              "start": 110.84,
-              "end": 119.36,
-              "confidence": 1.0
+              "start": 110.9,
+              "end": 119.44
             },
             {
               "paragraphIndex": 10,
-              "start": 119.36,
-              "end": 146.24,
-              "confidence": 1.0
+              "start": 119.44,
+              "end": 146.36
             },
             {
               "paragraphIndex": 11,
-              "start": 146.24,
-              "end": 164.8,
-              "confidence": 0.976
+              "start": 146.36,
+              "end": 164.8
             },
             {
               "paragraphIndex": 12,
               "start": 164.8,
-              "end": 186.28,
-              "confidence": 1.0
+              "end": 186.14
             },
             {
               "paragraphIndex": 13,
-              "start": 186.28,
-              "end": 207.54,
-              "confidence": 1.0
+              "start": 186.14,
+              "end": 207.62
             },
             {
               "paragraphIndex": 14,
-              "start": 207.54,
-              "end": 224.9,
-              "confidence": 1.0
+              "start": 207.62,
+              "end": 225.42
             },
             {
               "paragraphIndex": 15,
-              "start": 224.9,
-              "end": 247.98,
-              "confidence": 1.0
+              "start": 225.42,
+              "end": 248.1
             },
             {
               "paragraphIndex": 16,
-              "start": 247.98,
-              "end": 268.86,
-              "confidence": 1.0
+              "start": 248.1,
+              "end": 268.94
             },
             {
               "paragraphIndex": 17,
-              "start": 268.86,
-              "end": 285.2,
-              "confidence": 1.0
+              "start": 268.94,
+              "end": 285.26
             },
             {
               "paragraphIndex": 18,
-              "start": 285.2,
-              "end": 304.48,
-              "confidence": 0.98
+              "start": 285.26,
+              "end": 304.56
             },
             {
               "paragraphIndex": 19,
-              "start": 304.48,
-              "end": 306.36,
-              "confidence": 1.0
+              "start": 304.56,
+              "end": 306.44
             },
             {
               "paragraphIndex": 20,
-              "start": 306.36,
-              "end": 315.32,
-              "confidence": 0.947
+              "start": 306.44,
+              "end": 315.38
             },
             {
               "paragraphIndex": 21,
-              "start": 315.32,
-              "end": 318.485,
-              "confidence": 0.667
+              "start": 315.38,
+              "end": 318.22
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5611531196390825,
           "detectedSilences": 175,
           "readAlongTextSha256": "9876d53d958d22c1e1d61a7353f600c29948626c0e350c8b6aa4f6acd95f000f",
           "age": "4-5",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9896,
           "alignmentMeanSimilarity": 0.9934,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "6-8": {
@@ -4817,146 +4366,124 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.2,
-              "end": 3.92,
-              "confidence": 1.0
+              "start": 0.06,
+              "end": 3.96
             },
             {
               "paragraphIndex": 1,
-              "start": 3.92,
-              "end": 20.14,
-              "confidence": 0.919
+              "start": 3.96,
+              "end": 20.04
             },
             {
               "paragraphIndex": 2,
-              "start": 20.14,
-              "end": 31.52,
-              "confidence": 1.0
+              "start": 20.04,
+              "end": 31.6
             },
             {
               "paragraphIndex": 3,
-              "start": 31.52,
-              "end": 46.06,
-              "confidence": 1.0
+              "start": 31.6,
+              "end": 46.12
             },
             {
               "paragraphIndex": 4,
-              "start": 46.06,
-              "end": 58.42,
-              "confidence": 1.0
+              "start": 46.12,
+              "end": 58.44
             },
             {
               "paragraphIndex": 5,
-              "start": 58.42,
-              "end": 74.36,
-              "confidence": 1.0
+              "start": 58.44,
+              "end": 74.24
             },
             {
               "paragraphIndex": 6,
-              "start": 74.36,
-              "end": 85.66,
-              "confidence": 1.0
+              "start": 74.24,
+              "end": 86.08
             },
             {
               "paragraphIndex": 7,
-              "start": 85.66,
-              "end": 97.96,
-              "confidence": 1.0
+              "start": 86.08,
+              "end": 97.84
             },
             {
               "paragraphIndex": 8,
-              "start": 97.96,
-              "end": 110.84,
-              "confidence": 1.0
+              "start": 97.84,
+              "end": 110.9
             },
             {
               "paragraphIndex": 9,
-              "start": 110.84,
-              "end": 119.36,
-              "confidence": 1.0
+              "start": 110.9,
+              "end": 119.44
             },
             {
               "paragraphIndex": 10,
-              "start": 119.36,
-              "end": 146.24,
-              "confidence": 1.0
+              "start": 119.44,
+              "end": 146.36
             },
             {
               "paragraphIndex": 11,
-              "start": 146.24,
-              "end": 164.8,
-              "confidence": 0.976
+              "start": 146.36,
+              "end": 164.8
             },
             {
               "paragraphIndex": 12,
               "start": 164.8,
-              "end": 186.28,
-              "confidence": 1.0
+              "end": 186.14
             },
             {
               "paragraphIndex": 13,
-              "start": 186.28,
-              "end": 207.54,
-              "confidence": 1.0
+              "start": 186.14,
+              "end": 207.62
             },
             {
               "paragraphIndex": 14,
-              "start": 207.54,
-              "end": 224.9,
-              "confidence": 1.0
+              "start": 207.62,
+              "end": 225.42
             },
             {
               "paragraphIndex": 15,
-              "start": 224.9,
-              "end": 247.98,
-              "confidence": 1.0
+              "start": 225.42,
+              "end": 248.1
             },
             {
               "paragraphIndex": 16,
-              "start": 247.98,
-              "end": 268.86,
-              "confidence": 1.0
+              "start": 248.1,
+              "end": 268.94
             },
             {
               "paragraphIndex": 17,
-              "start": 268.86,
-              "end": 285.2,
-              "confidence": 1.0
+              "start": 268.94,
+              "end": 285.26
             },
             {
               "paragraphIndex": 18,
-              "start": 285.2,
-              "end": 304.48,
-              "confidence": 0.98
+              "start": 285.26,
+              "end": 304.56
             },
             {
               "paragraphIndex": 19,
-              "start": 304.48,
-              "end": 306.36,
-              "confidence": 1.0
+              "start": 304.56,
+              "end": 306.44
             },
             {
               "paragraphIndex": 20,
-              "start": 306.36,
-              "end": 315.32,
-              "confidence": 0.947
+              "start": 306.44,
+              "end": 315.38
             },
             {
               "paragraphIndex": 21,
-              "start": 315.32,
-              "end": 318.485,
-              "confidence": 0.667
+              "start": 315.38,
+              "end": 318.22
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5611531196390825,
           "detectedSilences": 175,
           "readAlongTextSha256": "9876d53d958d22c1e1d61a7353f600c29948626c0e350c8b6aa4f6acd95f000f",
           "age": "6-8",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9896,
           "alignmentMeanSimilarity": 0.9934,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "9-10": {
@@ -4997,146 +4524,124 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.2,
-              "end": 3.92,
-              "confidence": 1.0
+              "start": 0.06,
+              "end": 3.96
             },
             {
               "paragraphIndex": 1,
-              "start": 3.92,
-              "end": 20.14,
-              "confidence": 0.919
+              "start": 3.96,
+              "end": 20.04
             },
             {
               "paragraphIndex": 2,
-              "start": 20.14,
-              "end": 31.52,
-              "confidence": 1.0
+              "start": 20.04,
+              "end": 31.6
             },
             {
               "paragraphIndex": 3,
-              "start": 31.52,
-              "end": 46.06,
-              "confidence": 1.0
+              "start": 31.6,
+              "end": 46.12
             },
             {
               "paragraphIndex": 4,
-              "start": 46.06,
-              "end": 58.42,
-              "confidence": 1.0
+              "start": 46.12,
+              "end": 58.44
             },
             {
               "paragraphIndex": 5,
-              "start": 58.42,
-              "end": 74.36,
-              "confidence": 1.0
+              "start": 58.44,
+              "end": 74.24
             },
             {
               "paragraphIndex": 6,
-              "start": 74.36,
-              "end": 85.66,
-              "confidence": 1.0
+              "start": 74.24,
+              "end": 86.08
             },
             {
               "paragraphIndex": 7,
-              "start": 85.66,
-              "end": 97.96,
-              "confidence": 1.0
+              "start": 86.08,
+              "end": 97.84
             },
             {
               "paragraphIndex": 8,
-              "start": 97.96,
-              "end": 110.84,
-              "confidence": 1.0
+              "start": 97.84,
+              "end": 110.9
             },
             {
               "paragraphIndex": 9,
-              "start": 110.84,
-              "end": 119.36,
-              "confidence": 1.0
+              "start": 110.9,
+              "end": 119.44
             },
             {
               "paragraphIndex": 10,
-              "start": 119.36,
-              "end": 146.24,
-              "confidence": 1.0
+              "start": 119.44,
+              "end": 146.36
             },
             {
               "paragraphIndex": 11,
-              "start": 146.24,
-              "end": 164.8,
-              "confidence": 0.976
+              "start": 146.36,
+              "end": 164.8
             },
             {
               "paragraphIndex": 12,
               "start": 164.8,
-              "end": 186.28,
-              "confidence": 1.0
+              "end": 186.14
             },
             {
               "paragraphIndex": 13,
-              "start": 186.28,
-              "end": 207.54,
-              "confidence": 1.0
+              "start": 186.14,
+              "end": 207.62
             },
             {
               "paragraphIndex": 14,
-              "start": 207.54,
-              "end": 224.9,
-              "confidence": 1.0
+              "start": 207.62,
+              "end": 225.42
             },
             {
               "paragraphIndex": 15,
-              "start": 224.9,
-              "end": 247.98,
-              "confidence": 1.0
+              "start": 225.42,
+              "end": 248.1
             },
             {
               "paragraphIndex": 16,
-              "start": 247.98,
-              "end": 268.86,
-              "confidence": 1.0
+              "start": 248.1,
+              "end": 268.94
             },
             {
               "paragraphIndex": 17,
-              "start": 268.86,
-              "end": 285.2,
-              "confidence": 1.0
+              "start": 268.94,
+              "end": 285.26
             },
             {
               "paragraphIndex": 18,
-              "start": 285.2,
-              "end": 304.48,
-              "confidence": 0.98
+              "start": 285.26,
+              "end": 304.56
             },
             {
               "paragraphIndex": 19,
-              "start": 304.48,
-              "end": 306.36,
-              "confidence": 1.0
+              "start": 304.56,
+              "end": 306.44
             },
             {
               "paragraphIndex": 20,
-              "start": 306.36,
-              "end": 315.32,
-              "confidence": 0.947
+              "start": 306.44,
+              "end": 315.38
             },
             {
               "paragraphIndex": 21,
-              "start": 315.32,
-              "end": 318.485,
-              "confidence": 0.667
+              "start": 315.38,
+              "end": 318.22
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5611531196390825,
           "detectedSilences": 175,
           "readAlongTextSha256": "9876d53d958d22c1e1d61a7353f600c29948626c0e350c8b6aa4f6acd95f000f",
           "age": "9-10",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9896,
           "alignmentMeanSimilarity": 0.9934,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         }
       },
@@ -5173,11 +4678,11 @@
         "ageSelectionInVoiceStudio": false,
         "singleMasterAudio": true,
         "masterAgeRange": "4-10",
-        "followReaderSync": "audio-word-aligned",
-        "followReaderSyncMode": "whisper-word-alignment-v1",
+        "followReaderSync": "exact-forced-alignment",
+        "followReaderSyncMode": "elevenlabs-forced-alignment-v1",
         "followReaderParagraphs": 22,
         "followReaderCoverage": 0.9896,
-        "followReaderSyncedAt": "2026-10-06T22:01:53Z"
+        "followReaderSyncedAt": "2026-10-07T08:38:38Z"
       },
       "lifeContext": "heute lernen wir Saʿd ibn Abī Waqqāṣ, raḍiya llāhu ʿanhu, als einen Gefährten kennen, dessen besondere Fähigkeit in einem entscheidenden Moment gebraucht wurde. Seine Geschichte eignet sich deshalb sehr gut, um über Talent, Disziplin und Verantwortung nachzudenken. Saʿd gehörte zu den frühen Muslimen. Er war für seine Fertigkeit mit dem Bogen bekannt. Eine solche Fähigkeit entsteht nicht einfach zufällig. Sie braucht Übung, Aufmerksamkeit und Kontrolle. Am Tag von Uḥud befand sich die muslimische Gemeinschaft in einer schwierigen Lage. Saʿd setzte seine Fähigkeit als Bogenschütze ein. Der Prophet ﷺ ermutigte ihn auf besondere Weise und gab ihm damit eine deutliche Anerkennung.",
       "cover": "/kids/assets/sahaba-mubashshirun/sad.jpg?v=2",
@@ -5310,152 +4815,129 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.18,
-              "end": 3.98,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 3.98,
-              "end": 21.6,
-              "confidence": 0.929
+              "start": 4.019,
+              "end": 21.26
             },
             {
               "paragraphIndex": 2,
-              "start": 21.6,
-              "end": 35.22,
-              "confidence": 0.971
+              "start": 21.26,
+              "end": 35.26
             },
             {
               "paragraphIndex": 3,
-              "start": 35.22,
-              "end": 50.4,
-              "confidence": 0.949
+              "start": 35.26,
+              "end": 50.1
             },
             {
               "paragraphIndex": 4,
-              "start": 50.4,
-              "end": 63.28,
-              "confidence": 0.972
+              "start": 50.1,
+              "end": 63.26
             },
             {
               "paragraphIndex": 5,
-              "start": 63.28,
-              "end": 80.58,
-              "confidence": 1.0
+              "start": 63.26,
+              "end": 80.64
             },
             {
               "paragraphIndex": 6,
-              "start": 80.58,
-              "end": 92.02,
-              "confidence": 1.0
+              "start": 80.64,
+              "end": 92.06
             },
             {
               "paragraphIndex": 7,
-              "start": 92.02,
-              "end": 102.84,
-              "confidence": 1.0
+              "start": 92.06,
+              "end": 102.9
             },
             {
               "paragraphIndex": 8,
-              "start": 102.84,
-              "end": 117.04,
-              "confidence": 1.0
+              "start": 102.9,
+              "end": 117.1
             },
             {
               "paragraphIndex": 9,
-              "start": 117.04,
-              "end": 129.36,
-              "confidence": 0.967
+              "start": 117.1,
+              "end": 129.419
             },
             {
               "paragraphIndex": 10,
-              "start": 129.36,
-              "end": 153.56,
-              "confidence": 0.951
+              "start": 129.419,
+              "end": 153.64
             },
             {
               "paragraphIndex": 11,
-              "start": 153.56,
-              "end": 170.66,
-              "confidence": 0.977
+              "start": 153.64,
+              "end": 170.7
             },
             {
               "paragraphIndex": 12,
-              "start": 170.66,
-              "end": 190.8,
-              "confidence": 1.0
+              "start": 170.7,
+              "end": 191.06
             },
             {
               "paragraphIndex": 13,
-              "start": 190.8,
-              "end": 205.92,
-              "confidence": 0.975
+              "start": 191.06,
+              "end": 205.8
             },
             {
               "paragraphIndex": 14,
-              "start": 205.92,
-              "end": 224.66,
-              "confidence": 1.0
+              "start": 205.8,
+              "end": 224.74
             },
             {
               "paragraphIndex": 15,
-              "start": 224.66,
-              "end": 239.36,
-              "confidence": 1.0
+              "start": 224.74,
+              "end": 239.42
             },
             {
               "paragraphIndex": 16,
-              "start": 239.36,
-              "end": 261.06,
-              "confidence": 1.0
+              "start": 239.42,
+              "end": 261.14
             },
             {
               "paragraphIndex": 17,
-              "start": 261.06,
-              "end": 276.14,
-              "confidence": 1.0
+              "start": 261.14,
+              "end": 276.68
             },
             {
               "paragraphIndex": 18,
-              "start": 276.14,
-              "end": 299.7,
-              "confidence": 0.981
+              "start": 276.68,
+              "end": 299.4
             },
             {
               "paragraphIndex": 19,
-              "start": 299.7,
-              "end": 317.58,
-              "confidence": 0.976
+              "start": 299.4,
+              "end": 317.58
             },
             {
               "paragraphIndex": 20,
               "start": 317.58,
-              "end": 319.68,
-              "confidence": 1.0
+              "end": 319.7
             },
             {
               "paragraphIndex": 21,
-              "start": 319.68,
-              "end": 328.36,
-              "confidence": 0.947
+              "start": 319.7,
+              "end": 328.42
             },
             {
               "paragraphIndex": 22,
-              "start": 328.36,
-              "end": 331.677,
-              "confidence": 1.0
+              "start": 328.42,
+              "end": 331.4
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5520062493518632,
           "detectedSilences": 166,
           "readAlongTextSha256": "c01ef94a8bce9dbe825d19afe736810e0b148001266a5b1183c004aa46d17c9f",
           "age": "4-5",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9806,
           "alignmentMeanSimilarity": 0.9966,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "6-8": {
@@ -5496,152 +4978,129 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.18,
-              "end": 3.98,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 3.98,
-              "end": 21.6,
-              "confidence": 0.929
+              "start": 4.019,
+              "end": 21.26
             },
             {
               "paragraphIndex": 2,
-              "start": 21.6,
-              "end": 35.22,
-              "confidence": 0.971
+              "start": 21.26,
+              "end": 35.26
             },
             {
               "paragraphIndex": 3,
-              "start": 35.22,
-              "end": 50.4,
-              "confidence": 0.949
+              "start": 35.26,
+              "end": 50.1
             },
             {
               "paragraphIndex": 4,
-              "start": 50.4,
-              "end": 63.28,
-              "confidence": 0.972
+              "start": 50.1,
+              "end": 63.26
             },
             {
               "paragraphIndex": 5,
-              "start": 63.28,
-              "end": 80.58,
-              "confidence": 1.0
+              "start": 63.26,
+              "end": 80.64
             },
             {
               "paragraphIndex": 6,
-              "start": 80.58,
-              "end": 92.02,
-              "confidence": 1.0
+              "start": 80.64,
+              "end": 92.06
             },
             {
               "paragraphIndex": 7,
-              "start": 92.02,
-              "end": 102.84,
-              "confidence": 1.0
+              "start": 92.06,
+              "end": 102.9
             },
             {
               "paragraphIndex": 8,
-              "start": 102.84,
-              "end": 117.04,
-              "confidence": 1.0
+              "start": 102.9,
+              "end": 117.1
             },
             {
               "paragraphIndex": 9,
-              "start": 117.04,
-              "end": 129.36,
-              "confidence": 0.967
+              "start": 117.1,
+              "end": 129.419
             },
             {
               "paragraphIndex": 10,
-              "start": 129.36,
-              "end": 153.56,
-              "confidence": 0.951
+              "start": 129.419,
+              "end": 153.64
             },
             {
               "paragraphIndex": 11,
-              "start": 153.56,
-              "end": 170.66,
-              "confidence": 0.977
+              "start": 153.64,
+              "end": 170.7
             },
             {
               "paragraphIndex": 12,
-              "start": 170.66,
-              "end": 190.8,
-              "confidence": 1.0
+              "start": 170.7,
+              "end": 191.06
             },
             {
               "paragraphIndex": 13,
-              "start": 190.8,
-              "end": 205.92,
-              "confidence": 0.975
+              "start": 191.06,
+              "end": 205.8
             },
             {
               "paragraphIndex": 14,
-              "start": 205.92,
-              "end": 224.66,
-              "confidence": 1.0
+              "start": 205.8,
+              "end": 224.74
             },
             {
               "paragraphIndex": 15,
-              "start": 224.66,
-              "end": 239.36,
-              "confidence": 1.0
+              "start": 224.74,
+              "end": 239.42
             },
             {
               "paragraphIndex": 16,
-              "start": 239.36,
-              "end": 261.06,
-              "confidence": 1.0
+              "start": 239.42,
+              "end": 261.14
             },
             {
               "paragraphIndex": 17,
-              "start": 261.06,
-              "end": 276.14,
-              "confidence": 1.0
+              "start": 261.14,
+              "end": 276.68
             },
             {
               "paragraphIndex": 18,
-              "start": 276.14,
-              "end": 299.7,
-              "confidence": 0.981
+              "start": 276.68,
+              "end": 299.4
             },
             {
               "paragraphIndex": 19,
-              "start": 299.7,
-              "end": 317.58,
-              "confidence": 0.976
+              "start": 299.4,
+              "end": 317.58
             },
             {
               "paragraphIndex": 20,
               "start": 317.58,
-              "end": 319.68,
-              "confidence": 1.0
+              "end": 319.7
             },
             {
               "paragraphIndex": 21,
-              "start": 319.68,
-              "end": 328.36,
-              "confidence": 0.947
+              "start": 319.7,
+              "end": 328.42
             },
             {
               "paragraphIndex": 22,
-              "start": 328.36,
-              "end": 331.677,
-              "confidence": 1.0
+              "start": 328.42,
+              "end": 331.4
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5520062493518632,
           "detectedSilences": 166,
           "readAlongTextSha256": "c01ef94a8bce9dbe825d19afe736810e0b148001266a5b1183c004aa46d17c9f",
           "age": "6-8",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9806,
           "alignmentMeanSimilarity": 0.9966,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "9-10": {
@@ -5682,152 +5141,129 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.18,
-              "end": 3.98,
-              "confidence": 1.0
+              "start": 0.04,
+              "end": 4.019
             },
             {
               "paragraphIndex": 1,
-              "start": 3.98,
-              "end": 21.6,
-              "confidence": 0.929
+              "start": 4.019,
+              "end": 21.26
             },
             {
               "paragraphIndex": 2,
-              "start": 21.6,
-              "end": 35.22,
-              "confidence": 0.971
+              "start": 21.26,
+              "end": 35.26
             },
             {
               "paragraphIndex": 3,
-              "start": 35.22,
-              "end": 50.4,
-              "confidence": 0.949
+              "start": 35.26,
+              "end": 50.1
             },
             {
               "paragraphIndex": 4,
-              "start": 50.4,
-              "end": 63.28,
-              "confidence": 0.972
+              "start": 50.1,
+              "end": 63.26
             },
             {
               "paragraphIndex": 5,
-              "start": 63.28,
-              "end": 80.58,
-              "confidence": 1.0
+              "start": 63.26,
+              "end": 80.64
             },
             {
               "paragraphIndex": 6,
-              "start": 80.58,
-              "end": 92.02,
-              "confidence": 1.0
+              "start": 80.64,
+              "end": 92.06
             },
             {
               "paragraphIndex": 7,
-              "start": 92.02,
-              "end": 102.84,
-              "confidence": 1.0
+              "start": 92.06,
+              "end": 102.9
             },
             {
               "paragraphIndex": 8,
-              "start": 102.84,
-              "end": 117.04,
-              "confidence": 1.0
+              "start": 102.9,
+              "end": 117.1
             },
             {
               "paragraphIndex": 9,
-              "start": 117.04,
-              "end": 129.36,
-              "confidence": 0.967
+              "start": 117.1,
+              "end": 129.419
             },
             {
               "paragraphIndex": 10,
-              "start": 129.36,
-              "end": 153.56,
-              "confidence": 0.951
+              "start": 129.419,
+              "end": 153.64
             },
             {
               "paragraphIndex": 11,
-              "start": 153.56,
-              "end": 170.66,
-              "confidence": 0.977
+              "start": 153.64,
+              "end": 170.7
             },
             {
               "paragraphIndex": 12,
-              "start": 170.66,
-              "end": 190.8,
-              "confidence": 1.0
+              "start": 170.7,
+              "end": 191.06
             },
             {
               "paragraphIndex": 13,
-              "start": 190.8,
-              "end": 205.92,
-              "confidence": 0.975
+              "start": 191.06,
+              "end": 205.8
             },
             {
               "paragraphIndex": 14,
-              "start": 205.92,
-              "end": 224.66,
-              "confidence": 1.0
+              "start": 205.8,
+              "end": 224.74
             },
             {
               "paragraphIndex": 15,
-              "start": 224.66,
-              "end": 239.36,
-              "confidence": 1.0
+              "start": 224.74,
+              "end": 239.42
             },
             {
               "paragraphIndex": 16,
-              "start": 239.36,
-              "end": 261.06,
-              "confidence": 1.0
+              "start": 239.42,
+              "end": 261.14
             },
             {
               "paragraphIndex": 17,
-              "start": 261.06,
-              "end": 276.14,
-              "confidence": 1.0
+              "start": 261.14,
+              "end": 276.68
             },
             {
               "paragraphIndex": 18,
-              "start": 276.14,
-              "end": 299.7,
-              "confidence": 0.981
+              "start": 276.68,
+              "end": 299.4
             },
             {
               "paragraphIndex": 19,
-              "start": 299.7,
-              "end": 317.58,
-              "confidence": 0.976
+              "start": 299.4,
+              "end": 317.58
             },
             {
               "paragraphIndex": 20,
               "start": 317.58,
-              "end": 319.68,
-              "confidence": 1.0
+              "end": 319.7
             },
             {
               "paragraphIndex": 21,
-              "start": 319.68,
-              "end": 328.36,
-              "confidence": 0.947
+              "start": 319.7,
+              "end": 328.42
             },
             {
               "paragraphIndex": 22,
-              "start": 328.36,
-              "end": 331.677,
-              "confidence": 1.0
+              "start": 328.42,
+              "end": 331.4
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5520062493518632,
           "detectedSilences": 166,
           "readAlongTextSha256": "c01ef94a8bce9dbe825d19afe736810e0b148001266a5b1183c004aa46d17c9f",
           "age": "9-10",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9806,
           "alignmentMeanSimilarity": 0.9966,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         }
       },
@@ -5864,11 +5300,11 @@
         "ageSelectionInVoiceStudio": false,
         "singleMasterAudio": true,
         "masterAgeRange": "4-10",
-        "followReaderSync": "audio-word-aligned",
-        "followReaderSyncMode": "whisper-word-alignment-v1",
+        "followReaderSync": "exact-forced-alignment",
+        "followReaderSyncMode": "elevenlabs-forced-alignment-v1",
         "followReaderParagraphs": 23,
         "followReaderCoverage": 0.9806,
-        "followReaderSyncedAt": "2026-10-06T22:01:53Z"
+        "followReaderSyncedAt": "2026-10-07T08:38:38Z"
       },
       "lifeContext": "heute lernen wir Saʿīd ibn Zayd, raḍiya llāhu ʿanhu, als einen Gefährten kennen, dessen Geschichte ruhiger wirkt als die vieler anderer bekannter Ṣaḥābah. Gerade deshalb ist sie wichtig. Sie zeigt, dass ein bedeutendes Leben nicht immer aus vielen spektakulären Szenen bestehen muss. Saʿīd gehörte zur Generation des Propheten ﷺ und zu den zehn Gefährten, denen das Paradies angekündigt wurde. Schon diese Stellung zeigt, dass sein Rang nicht davon abhängt, wie viele Geschichten später über ihn erzählt wurden. Von Saʿīd ist eine Überlieferung über eine Gruppe von Gefährten auf dem Berg Ḥirāʾ bekannt. Der Berg bewegte sich, und der Prophet ﷺ befahl ihm, ruhig zu bleiben. Dabei nannte er den besonderen Rang der Menschen, die sich dort befanden.",
       "cover": "/kids/assets/sahaba-mubashshirun/said.jpg?v=2",
@@ -5992,152 +5428,129 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 3.9,
-              "confidence": 0.875
+              "start": 0.04,
+              "end": 3.94
             },
             {
               "paragraphIndex": 1,
-              "start": 3.9,
-              "end": 19.48,
-              "confidence": 0.943
+              "start": 3.94,
+              "end": 19.54
             },
             {
               "paragraphIndex": 2,
-              "start": 19.48,
-              "end": 35.64,
-              "confidence": 1.0
+              "start": 19.54,
+              "end": 35.7
             },
             {
               "paragraphIndex": 3,
-              "start": 35.64,
-              "end": 52.76,
-              "confidence": 1.0
+              "start": 35.7,
+              "end": 52.82
             },
             {
               "paragraphIndex": 4,
-              "start": 52.76,
-              "end": 66.38,
-              "confidence": 1.0
+              "start": 52.82,
+              "end": 66.44
             },
             {
               "paragraphIndex": 5,
-              "start": 66.38,
-              "end": 80.56,
-              "confidence": 1.0
+              "start": 66.44,
+              "end": 80.66
             },
             {
               "paragraphIndex": 6,
-              "start": 80.56,
-              "end": 95.18,
-              "confidence": 1.0
+              "start": 80.66,
+              "end": 95.22
             },
             {
               "paragraphIndex": 7,
-              "start": 95.18,
-              "end": 110.32,
-              "confidence": 1.0
+              "start": 95.22,
+              "end": 110.34
             },
             {
               "paragraphIndex": 8,
-              "start": 110.32,
-              "end": 121.04,
-              "confidence": 1.0
+              "start": 110.34,
+              "end": 121.1
             },
             {
               "paragraphIndex": 9,
-              "start": 121.04,
-              "end": 133.92,
-              "confidence": 1.0
+              "start": 121.1,
+              "end": 133.96
             },
             {
               "paragraphIndex": 10,
-              "start": 133.92,
-              "end": 164.74,
-              "confidence": 0.985
+              "start": 133.96,
+              "end": 164.82
             },
             {
               "paragraphIndex": 11,
-              "start": 164.74,
-              "end": 182.7,
-              "confidence": 1.0
+              "start": 164.82,
+              "end": 182.76
             },
             {
               "paragraphIndex": 12,
-              "start": 182.7,
-              "end": 202.8,
-              "confidence": 1.0
+              "start": 182.76,
+              "end": 202.88
             },
             {
               "paragraphIndex": 13,
-              "start": 202.8,
-              "end": 221.82,
-              "confidence": 1.0
+              "start": 202.88,
+              "end": 222.28
             },
             {
               "paragraphIndex": 14,
-              "start": 221.82,
-              "end": 236.68,
-              "confidence": 0.974
+              "start": 222.28,
+              "end": 236.72
             },
             {
               "paragraphIndex": 15,
-              "start": 236.68,
-              "end": 257.42,
-              "confidence": 0.982
+              "start": 236.72,
+              "end": 257.48
             },
             {
               "paragraphIndex": 16,
-              "start": 257.42,
-              "end": 272.04,
-              "confidence": 1.0
+              "start": 257.48,
+              "end": 272.64
             },
             {
               "paragraphIndex": 17,
-              "start": 272.04,
-              "end": 291.52,
-              "confidence": 1.0
+              "start": 272.64,
+              "end": 291.54
             },
             {
               "paragraphIndex": 18,
-              "start": 291.52,
-              "end": 313.6,
-              "confidence": 0.945
+              "start": 291.54,
+              "end": 313.68
             },
             {
               "paragraphIndex": 19,
-              "start": 313.6,
-              "end": 337.42,
-              "confidence": 0.98
+              "start": 313.68,
+              "end": 337.4
             },
             {
               "paragraphIndex": 20,
-              "start": 337.42,
-              "end": 339.26,
-              "confidence": 1.0
+              "start": 337.4,
+              "end": 339.26
             },
             {
               "paragraphIndex": 21,
               "start": 339.26,
-              "end": 347.68,
-              "confidence": 0.947
+              "end": 347.72
             },
             {
               "paragraphIndex": 22,
-              "start": 347.68,
-              "end": 350.798,
-              "confidence": 1.0
+              "start": 347.72,
+              "end": 350.58
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5770129212118152,
           "detectedSilences": 200,
           "readAlongTextSha256": "7eb1c2d0a0db7d88a7c73f1987948ea39205874f04f06bcace9ae517f94908f3",
           "age": "4-5",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9864,
           "alignmentMeanSimilarity": 0.9949,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "6-8": {
@@ -6178,152 +5591,129 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 3.9,
-              "confidence": 0.875
+              "start": 0.04,
+              "end": 3.94
             },
             {
               "paragraphIndex": 1,
-              "start": 3.9,
-              "end": 19.48,
-              "confidence": 0.943
+              "start": 3.94,
+              "end": 19.54
             },
             {
               "paragraphIndex": 2,
-              "start": 19.48,
-              "end": 35.64,
-              "confidence": 1.0
+              "start": 19.54,
+              "end": 35.7
             },
             {
               "paragraphIndex": 3,
-              "start": 35.64,
-              "end": 52.76,
-              "confidence": 1.0
+              "start": 35.7,
+              "end": 52.82
             },
             {
               "paragraphIndex": 4,
-              "start": 52.76,
-              "end": 66.38,
-              "confidence": 1.0
+              "start": 52.82,
+              "end": 66.44
             },
             {
               "paragraphIndex": 5,
-              "start": 66.38,
-              "end": 80.56,
-              "confidence": 1.0
+              "start": 66.44,
+              "end": 80.66
             },
             {
               "paragraphIndex": 6,
-              "start": 80.56,
-              "end": 95.18,
-              "confidence": 1.0
+              "start": 80.66,
+              "end": 95.22
             },
             {
               "paragraphIndex": 7,
-              "start": 95.18,
-              "end": 110.32,
-              "confidence": 1.0
+              "start": 95.22,
+              "end": 110.34
             },
             {
               "paragraphIndex": 8,
-              "start": 110.32,
-              "end": 121.04,
-              "confidence": 1.0
+              "start": 110.34,
+              "end": 121.1
             },
             {
               "paragraphIndex": 9,
-              "start": 121.04,
-              "end": 133.92,
-              "confidence": 1.0
+              "start": 121.1,
+              "end": 133.96
             },
             {
               "paragraphIndex": 10,
-              "start": 133.92,
-              "end": 164.74,
-              "confidence": 0.985
+              "start": 133.96,
+              "end": 164.82
             },
             {
               "paragraphIndex": 11,
-              "start": 164.74,
-              "end": 182.7,
-              "confidence": 1.0
+              "start": 164.82,
+              "end": 182.76
             },
             {
               "paragraphIndex": 12,
-              "start": 182.7,
-              "end": 202.8,
-              "confidence": 1.0
+              "start": 182.76,
+              "end": 202.88
             },
             {
               "paragraphIndex": 13,
-              "start": 202.8,
-              "end": 221.82,
-              "confidence": 1.0
+              "start": 202.88,
+              "end": 222.28
             },
             {
               "paragraphIndex": 14,
-              "start": 221.82,
-              "end": 236.68,
-              "confidence": 0.974
+              "start": 222.28,
+              "end": 236.72
             },
             {
               "paragraphIndex": 15,
-              "start": 236.68,
-              "end": 257.42,
-              "confidence": 0.982
+              "start": 236.72,
+              "end": 257.48
             },
             {
               "paragraphIndex": 16,
-              "start": 257.42,
-              "end": 272.04,
-              "confidence": 1.0
+              "start": 257.48,
+              "end": 272.64
             },
             {
               "paragraphIndex": 17,
-              "start": 272.04,
-              "end": 291.52,
-              "confidence": 1.0
+              "start": 272.64,
+              "end": 291.54
             },
             {
               "paragraphIndex": 18,
-              "start": 291.52,
-              "end": 313.6,
-              "confidence": 0.945
+              "start": 291.54,
+              "end": 313.68
             },
             {
               "paragraphIndex": 19,
-              "start": 313.6,
-              "end": 337.42,
-              "confidence": 0.98
+              "start": 313.68,
+              "end": 337.4
             },
             {
               "paragraphIndex": 20,
-              "start": 337.42,
-              "end": 339.26,
-              "confidence": 1.0
+              "start": 337.4,
+              "end": 339.26
             },
             {
               "paragraphIndex": 21,
               "start": 339.26,
-              "end": 347.68,
-              "confidence": 0.947
+              "end": 347.72
             },
             {
               "paragraphIndex": 22,
-              "start": 347.68,
-              "end": 350.798,
-              "confidence": 1.0
+              "start": 347.72,
+              "end": 350.58
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5770129212118152,
           "detectedSilences": 200,
           "readAlongTextSha256": "7eb1c2d0a0db7d88a7c73f1987948ea39205874f04f06bcace9ae517f94908f3",
           "age": "6-8",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9864,
           "alignmentMeanSimilarity": 0.9949,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         },
         "9-10": {
@@ -6364,152 +5754,129 @@
           "timings": [
             {
               "paragraphIndex": 0,
-              "start": 0.0,
-              "end": 3.9,
-              "confidence": 0.875
+              "start": 0.04,
+              "end": 3.94
             },
             {
               "paragraphIndex": 1,
-              "start": 3.9,
-              "end": 19.48,
-              "confidence": 0.943
+              "start": 3.94,
+              "end": 19.54
             },
             {
               "paragraphIndex": 2,
-              "start": 19.48,
-              "end": 35.64,
-              "confidence": 1.0
+              "start": 19.54,
+              "end": 35.7
             },
             {
               "paragraphIndex": 3,
-              "start": 35.64,
-              "end": 52.76,
-              "confidence": 1.0
+              "start": 35.7,
+              "end": 52.82
             },
             {
               "paragraphIndex": 4,
-              "start": 52.76,
-              "end": 66.38,
-              "confidence": 1.0
+              "start": 52.82,
+              "end": 66.44
             },
             {
               "paragraphIndex": 5,
-              "start": 66.38,
-              "end": 80.56,
-              "confidence": 1.0
+              "start": 66.44,
+              "end": 80.66
             },
             {
               "paragraphIndex": 6,
-              "start": 80.56,
-              "end": 95.18,
-              "confidence": 1.0
+              "start": 80.66,
+              "end": 95.22
             },
             {
               "paragraphIndex": 7,
-              "start": 95.18,
-              "end": 110.32,
-              "confidence": 1.0
+              "start": 95.22,
+              "end": 110.34
             },
             {
               "paragraphIndex": 8,
-              "start": 110.32,
-              "end": 121.04,
-              "confidence": 1.0
+              "start": 110.34,
+              "end": 121.1
             },
             {
               "paragraphIndex": 9,
-              "start": 121.04,
-              "end": 133.92,
-              "confidence": 1.0
+              "start": 121.1,
+              "end": 133.96
             },
             {
               "paragraphIndex": 10,
-              "start": 133.92,
-              "end": 164.74,
-              "confidence": 0.985
+              "start": 133.96,
+              "end": 164.82
             },
             {
               "paragraphIndex": 11,
-              "start": 164.74,
-              "end": 182.7,
-              "confidence": 1.0
+              "start": 164.82,
+              "end": 182.76
             },
             {
               "paragraphIndex": 12,
-              "start": 182.7,
-              "end": 202.8,
-              "confidence": 1.0
+              "start": 182.76,
+              "end": 202.88
             },
             {
               "paragraphIndex": 13,
-              "start": 202.8,
-              "end": 221.82,
-              "confidence": 1.0
+              "start": 202.88,
+              "end": 222.28
             },
             {
               "paragraphIndex": 14,
-              "start": 221.82,
-              "end": 236.68,
-              "confidence": 0.974
+              "start": 222.28,
+              "end": 236.72
             },
             {
               "paragraphIndex": 15,
-              "start": 236.68,
-              "end": 257.42,
-              "confidence": 0.982
+              "start": 236.72,
+              "end": 257.48
             },
             {
               "paragraphIndex": 16,
-              "start": 257.42,
-              "end": 272.04,
-              "confidence": 1.0
+              "start": 257.48,
+              "end": 272.64
             },
             {
               "paragraphIndex": 17,
-              "start": 272.04,
-              "end": 291.52,
-              "confidence": 1.0
+              "start": 272.64,
+              "end": 291.54
             },
             {
               "paragraphIndex": 18,
-              "start": 291.52,
-              "end": 313.6,
-              "confidence": 0.945
+              "start": 291.54,
+              "end": 313.68
             },
             {
               "paragraphIndex": 19,
-              "start": 313.6,
-              "end": 337.42,
-              "confidence": 0.98
+              "start": 313.68,
+              "end": 337.4
             },
             {
               "paragraphIndex": 20,
-              "start": 337.42,
-              "end": 339.26,
-              "confidence": 1.0
+              "start": 337.4,
+              "end": 339.26
             },
             {
               "paragraphIndex": 21,
               "start": 339.26,
-              "end": 347.68,
-              "confidence": 0.947
+              "end": 347.72
             },
             {
               "paragraphIndex": 22,
-              "start": 347.68,
-              "end": 350.798,
-              "confidence": 1.0
+              "start": 347.72,
+              "end": 350.58
             }
           ],
-          "syncMode": "whisper-word-alignment-v1",
-          "alignmentLoss": null,
+          "syncMode": "elevenlabs-forced-alignment-v1",
+          "alignmentLoss": 0.5770129212118152,
           "detectedSilences": 200,
           "readAlongTextSha256": "7eb1c2d0a0db7d88a7c73f1987948ea39205874f04f06bcace9ae517f94908f3",
           "age": "9-10",
           "alignmentEngine": "faster-whisper-small-int8",
           "alignmentCoverage": 0.9864,
           "alignmentMeanSimilarity": 0.9949,
-          "alignmentGeneratedAt": "2026-10-06T22:01:53Z",
+          "alignmentGeneratedAt": "2026-10-07T08:38:38Z",
           "allAges": true
         }
       },
@@ -6546,11 +5913,11 @@
         "ageSelectionInVoiceStudio": false,
         "singleMasterAudio": true,
         "masterAgeRange": "4-10",
-        "followReaderSync": "audio-word-aligned",
-        "followReaderSyncMode": "whisper-word-alignment-v1",
+        "followReaderSync": "exact-forced-alignment",
+        "followReaderSyncMode": "elevenlabs-forced-alignment-v1",
         "followReaderParagraphs": 23,
         "followReaderCoverage": 0.9864,
-        "followReaderSyncedAt": "2026-10-06T22:01:53Z"
+        "followReaderSyncedAt": "2026-10-07T08:38:38Z"
       },
       "lifeContext": "heute lernen wir Abū ʿUbaydah ibn al-Ǧarrāḥ, raḍiya llāhu ʿanhu, als einen Gefährten kennen, dessen Name besonders mit Amānah verbunden ist. Seine Geschichte zeigt eine Form von Stärke, die nicht immer auffällig ist: absolute Zuverlässigkeit. Der Prophet ﷺ bezeichnete Abū ʿUbaydah als den Amīn dieser Ummah. Ein Amīn ist ein Mensch, bei dem das Anvertraute sicher ist. Dazu gehören Besitz, Aufgaben, Wissen, Geheimnisse und Verantwortung für andere Menschen. Diese Auszeichnung blieb nicht nur ein schöner Satz. Menschen aus dem Jemen baten den Propheten ﷺ um jemanden, der sie unterweisen sollte. Der Prophet wählte Abū ʿUbaydah. Damit bekam seine Vertrauenswürdigkeit eine konkrete Aufgabe.",
       "cover": "/kids/assets/sahaba-mubashshirun/abu-ubaydah.jpg?v=2",

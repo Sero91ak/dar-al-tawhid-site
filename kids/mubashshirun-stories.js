@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 
-const DATA_URL="/kids/data/mubashshirun-stories.json";
+const DATA_URL="/kids/data/mubashshirun-stories.json?v=13";
 const KIDS_STORY_INTRO="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.";
 const KIDS_STORY_OUTRO="Und الله weiß es am besten.\n\nMöge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
 function normalizeKidsStoryText(value){
