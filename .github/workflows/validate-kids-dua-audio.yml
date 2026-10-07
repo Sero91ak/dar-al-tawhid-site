@@ -71,8 +71,8 @@ jobs:
             if(!deI.has(g))failures.push(d.id+": german");
             const words=String(d.audioArabicText||d.arabic||"")
               .replace(/\s+/g," ").trim().split(/\s+/)
-              .map(x=>x.replace(/^[،؛؟,.!…«»"'()\[\]{}]+|[،؛؟,.!…«»"'()\[\]{}]+$/g,""))
-              .filter(Boolean);
+              .map(x=>x.replace(/[\u06D6-\u06DC]/g,"").replace(/^[،؛؟,.!…«»"'()\[\]{}]+|[،؛؟,.!…«»"'()\[\]{}]+$/g,""))
+              .filter(x=>Boolean(x)&&/[\u0621-\u064A\u0671]/.test(x));
             for(const w of words){
               if(!wordI.has(norm(w)))failures.push(d.id+": word "+w);
             }
