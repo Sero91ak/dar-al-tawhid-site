@@ -1,5 +1,6 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1226";
-const KIDS_BUILD_ID="kids-shell-v129-quiz-restore1225";
+const CACHE_NAME="dar-al-tawhid-kids-v1224";
+const KIDS_BUILD_ID="kids-shell-v128-nav-deen-fix1224";
+// QUIZ_HOME_HOTFIX_V1224: force SW update so the restored Quiz entry reaches installed PWAs.
 const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1226",
   "/kids/start",
