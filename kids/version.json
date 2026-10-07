@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v124-dua-hub1220",
-  "label": "KIDS · V1.08.45",
-  "releasedAt": "2026-10-07T09:08:54.746Z",
-  "note": "V1220/V1.08.45 führt den neuen Duʿāʾ-Hub weiter und enthält zugleich die korrigierte Startseiten-Wortmarke: DĀR AL TAWḤĪD wird als echtes same-origin PNG geladen, das fehlerhafte literale \\\\n ist entfernt und die Kids-Ballonanimation bleibt aktiv. Service Worker und App-Shell sind auf denselben V1220-Cache synchronisiert.",
+  "buildId": "kids-shell-v125-dua-compact1221",
+  "label": "KIDS · V1.08.46",
+  "releasedAt": "2026-10-07T09:45:00.000Z",
+  "note": "V1221 ersetzt den übergroßen Duʿāʾ-Baukasten durch die kompakte Kids-App-Struktur: begrenzte Kopfkarte, drei vertikale Aktionskapseln, kompakte Weiterlernen-/Zuletzt-gehört-Kapseln, einspaltige Duʿāʾ-Bibliothek, lokale 3D-Vektorassets und ein strikt einreihiger Fünf-Tab-Dock.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1220",
+    "serviceWorkerCache": "v1221-dua-compact",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1042,7 +1042,7 @@
     "homeBrandDelivery": "same-origin-static-png",
     "homeBrandDataUri": false,
     "homeBrandEscapedNewlineBug": false,
-    "duaHub": "premium-hybrid-v1220",
+    "duaHub": "compact-capsule-v1221",
     "duaHubManualLibrary": true,
     "duaHubVerifiedEntries": 20,
     "duaHubTarget": "100+ verified entries",
@@ -1050,7 +1050,11 @@
     "duaHubRandom": true,
     "duaHubCustom3DIconSystem": true,
     "duaHubDetailBackgroundInert": true,
-    "duaHubProfileAvatars": "boy-kufi-girl-hijab"
+    "duaHubProfileAvatars": "boy-kufi-girl-hijab",
+    "duaLibraryLayout": "single-column-capsules",
+    "duaHeader": "compact-contained",
+    "duaAssets": "local-3d-svg-v1221",
+    "bottomNav": "five-tabs-one-row-original-form"
   },
   "updatedAt": "2026-10-07",
   "deployTrigger": "2026-10-07T10:06:00+02:00"
