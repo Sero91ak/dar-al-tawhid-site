@@ -2,6 +2,7 @@
   /* DUA_AUDIO_RELEASE_1244_FINAL_SYNCED */
   "use strict";
 
+  // FUSHA_AUDIO_RELEASE_20261007_V3 · full v2 · slow/word v3 · exact vocalized Arabic
   var GERMAN_URL="/kids/data/dua-audio.json?v=8";
   var ARABIC_URL="/kids/data/dua-arabic-audio.json?v=9";
   var SLOW_URL="/kids/data/dua-arabic-slow-audio.json?v=4";
