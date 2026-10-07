@@ -16,7 +16,8 @@
   let activeCategory = "all";
   let activeQuery = "";
   let detailItem = null;
-  let fallbackAudio = null;\n  let lastShellScroll = 0;
+  let fallbackAudio = null;
+  let lastShellScroll = 0;
 
   const q = (s, r) => (r || document).querySelector(s);
   const qa = (s, r) => Array.from((r || document).querySelectorAll(s));
