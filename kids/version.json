@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v121-global-glow1217",
-  "label": "KIDS · V1.08.42",
-  "releasedAt": "2026-10-07T10:06:00+02:00",
-  "note": "V1217 setzt den Capsule-/Card-Glow als globale Kids-Regel durch. Ṣaḥābah, Ṣaḥābiyyāt, Propheten, Dīn und neue anklickbare Kids-Capsules erhalten dieselbe sichtbare Touch-/Pressed-Rückmeldung; lokale Karten-Schatten können den Glow nicht mehr verdecken. Die Story-Capsules leuchten ohne Springen, Skalieren oder Breitenänderung. Der sichtbare Dīn-Badge „6 Lern-Erzählungen · Quellen kompakt getrennt“ wurde entfernt; Dīn verwendet konsequent die Bezeichnung Dīn-Lektion. Die V1215-Startseitenreferenz und Kids-Ballonanimation bleiben unverändert.",
+  "buildId": "kids-shell-v122-home-reference-lock1218",
+  "label": "KIDS · V1.08.43",
+  "releasedAt": "2026-10-07T10:44:00+02:00",
+  "note": "V1218 sperrt die Startseiten-Wortmarke exakt auf die freigegebene Bild-1-Referenz: DĀR AL TAWḤĪD wird nicht mehr per Font/CSS angenähert, sondern als exakt extrahierte und 2× hochskalierte Referenzgrafik inline geladen. Damit bleiben Rundung, Abstände, Diakritika und gold-orange 3D-Anmutung wie in der Vorlage. Kids behält seine Bild-1-Proportionen und erhält wieder den klar sichtbaren alten Ballon-Sprung mit zeitversetzten Buchstaben. Die globale V1217-Capsule-/Card-Glow-Regel bleibt vollständig erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1217",
+    "serviceWorkerCache": "v1218",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -997,10 +997,10 @@
     "duaSmartHeroImage": false,
     "duaTransliterationLarge": true,
     "duaWordTapEnabled": true,
-    "homeBrand": "rounded-gold-kids-family-v1215",
+    "homeBrand": "exact-approved-reference-inline-v1218",
     "homeBrandWordSpacing": "explicit-three-word-spacing",
-    "homeBrandMotion": "subtle-word-float",
-    "homeKidsBalloon": "classic-visible-2.6s-12px-staggered-v1215",
+    "homeBrandMotion": "subtle-whole-wordmark-wobble-v1218",
+    "homeKidsBalloon": "strong-staggered-2.18s-v1218",
     "homeBackgroundMotion": false,
     "kidsQuizOwnerVoiceGeneration": "manual-after-900-content-freeze",
     "kidsQuizTargetPerAge": 300,
@@ -1028,7 +1028,11 @@
       "Din-Lektionen",
       "Story-Modus-Buttons"
     ],
-    "globalNewStoryAreaGlowInheritance": true
+    "globalNewStoryAreaGlowInheritance": true,
+    "homeBrandSource": "user approved Bild 1",
+    "homeBrandRasterUpscale": "Runway 2x",
+    "homeBrandCssApproximation": false,
+    "globalCapsuleGlow": "v1217-preserved"
   },
   "updatedAt": "2026-10-07",
   "deployTrigger": "2026-10-07T10:06:00+02:00"
