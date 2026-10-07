@@ -1,9 +1,10 @@
 {
   "version": 2,
   "policy": {
-    "childExplanation": "Die Erklärung darf kindgerecht vereinfacht werden. Arabischer Wortlaut, Lautschrift und Quelle bleiben quellgebunden und werden nicht zwischen Überlieferungsvarianten vermischt.",
-    "quranAudio": "Qurʾān-Arabisch niemals synthetisch rezitieren; Qurʾān-Duʿāʾ nutzen menschliche Qurʾān-Rezitation.",
-    "sunnahAudio": "Sunnah-Duʿāʾ werden als eigener arabischer Lerntrack mit der autorisierten Serhat-Owner-Voice erzeugt; deutsche Erklärung bleibt ein separater Track.",
+    "childExplanation": "Die Erklärung darf vereinfacht werden. Arabischer Wortlaut und Quellenangabe werden nicht frei umformuliert.",
+    "quranAudio": "Qurʾān-Arabisch wird ausschließlich über die echte Qurʾān-Rezitation abgespielt und niemals synthetisch erzeugt.",
+    "sunnahArabicAudio": "Arabische Sunnah-Duʿāʾ werden wortgetreu mit der autorisierten Serhat-Masterstimme erzeugt; der sichtbare Wortlaut bleibt die Referenz.",
+    "audioLearning": "Jedes Duʿāʾ hat getrennte Hörwege für Arabisch und Deutsch sowie einen langsamen Übemodus.",
     "maxItems": 20,
     "status": "verified-only"
   },
@@ -16,10 +17,11 @@
       "scene": "learn",
       "symbol": "library",
       "title": "Wenn ich lerne",
-      "childPrompt": "Bitte Allah um mehr Wissen.",
-      "arabic": "رَّبِّ زِدْنِي عِلْمًا",
+      "childPrompt": "Beim Lernen kannst du Allah um mehr Wissen bitten.",
+      "arabic": "رَبِّ زِدْنِي عِلْمًا",
       "transliteration": "Rabbi zidnī ʿilmā.",
       "meaning": "Mein Herr, mehre mein Wissen.",
+      "audioGermanText": "Beim Lernen kannst du Allah um mehr Wissen bitten. Die Bedeutung ist: Mein Herr, mehre mein Wissen.",
       "source": "Qurʾān, Ṭā-Hā 20:114",
       "canonicalId": "dua-032-rabbi-zidni-ilma",
       "verification": "verified",
@@ -41,23 +43,23 @@
           "surah": 20,
           "ayah": 114
         }
-      ],
-      "audioGermanText": "Beim Lernen kannst du Allah um mehr Wissen bitten. Das Duʿāʾ bedeutet: Mein Herr, mehre mein Wissen."
+      ]
     },
     {
       "id": "dua-parents",
-      "ageMin": 6,
+      "ageMin": 4,
       "ageMax": 10,
       "type": "quran",
       "scene": "family",
       "symbol": "heart",
       "title": "Für meine Eltern",
       "childPrompt": "Bitte Allah um Vergebung für dich, deine Eltern und die Gläubigen.",
-      "arabic": "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ",
-      "transliteration": "Rabbanā-ghfir lī wa li-wālidayya wa li-l-muʾminīna yawma yaqūmu-l-ḥisāb.",
-      "meaning": "Unser Herr, vergib mir und meinen Eltern und den Gläubigen am Tag, an dem die Abrechnung stattfindet.",
+      "arabic": "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ",
+      "transliteration": "Rabbanā ighfir lī wa li-wālidayya wa li-l-muʾminīna yawma yaqūmu l-ḥisāb.",
+      "meaning": "Unser Herr, vergib mir, meinen Eltern und den Gläubigen an dem Tag, an dem die Abrechnung stattfinden wird.",
+      "audioGermanText": "Bitte Allah um Vergebung für dich, deine Eltern und die Gläubigen. Die Bedeutung ist: Unser Herr, vergib mir, meinen Eltern und den Gläubigen an dem Tag, an dem die Abrechnung stattfinden wird.",
       "source": "Qurʾān, Ibrāhīm 14:41",
-      "canonicalId": "dua-044-rabbana-ghfir-li-wa-li-walidayya",
+      "canonicalId": "dua-076-rabbana-ghfir-li-wa-liwalidayya",
       "verification": "verified",
       "quiz": {
         "question": "Für wen bitten wir in diesem Duʿāʾ auch um Vergebung?",
@@ -77,21 +79,21 @@
           "surah": 14,
           "ayah": 41
         }
-      ],
-      "audioGermanText": "Mit diesem Duʿāʾ bittest du Allah um Vergebung für dich, deine Eltern und die Gläubigen."
+      ]
     },
     {
       "id": "dua-protection",
-      "ageMin": 7,
+      "ageMin": 4,
       "ageMax": 10,
       "type": "quran",
       "scene": "night",
       "symbol": "moon",
       "title": "Allah um Schutz bitten",
-      "childPrompt": "Wenn du Schutz vor Einflüsterungen suchst.",
-      "arabic": "رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ وَأَعُوذُ بِكَ رَبِّ أَن يَحْضُرُونِ",
-      "transliteration": "Rabbi aʿūdhu bika min hamazāti-sh-shayāṭīn, wa aʿūdhu bika rabbi an yaḥḍurūn.",
+      "childPrompt": "Wenn du Schutz vor den Einflüsterungen der Shayāṭīn suchst.",
+      "arabic": "رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ وَأَعُوذُ بِكَ رَبِّ أَنْ يَحْضُرُونِ",
+      "transliteration": "Rabbi aʿūdhu bika min hamazāti sh-shayāṭīn, wa aʿūdhu bika rabbi an yaḥḍurūn.",
       "meaning": "Mein Herr, ich suche Zuflucht bei Dir vor den Einflüsterungen der Shayāṭīn, und ich suche Zuflucht bei Dir, mein Herr, davor, dass sie bei mir anwesend sind.",
+      "audioGermanText": "Wenn du Schutz vor den Einflüsterungen der Shayāṭīn suchst, kannst du dieses Duʿāʾ sprechen. Die Bedeutung ist: Mein Herr, ich suche Zuflucht bei Dir vor den Einflüsterungen der Shayāṭīn, und ich suche Zuflucht bei Dir, mein Herr, davor, dass sie bei mir anwesend sind.",
       "source": "Qurʾān, al-Muʾminūn 23:97–98",
       "canonicalId": "dua-079-rabbi-audhu-bika-min-hamazati-sh-shayatin",
       "verification": "verified",
@@ -117,44 +119,7 @@
           "surah": 23,
           "ayah": 98
         }
-      ],
-      "audioGermanText": "Mit diesem Duʿāʾ suchst du bei Allah Schutz vor den Einflüsterungen der Shayāṭīn."
-    },
-    {
-      "id": "dua-arrival",
-      "ageMin": 4,
-      "ageMax": 10,
-      "type": "quran",
-      "scene": "home",
-      "symbol": "home",
-      "title": "Gesegnet ankommen",
-      "childPrompt": "Bitte Allah um eine gute und gesegnete Ankunft.",
-      "arabic": "رَّبِّ أَنزِلْنِي مُنزَلًا مُّبَارَكًا وَأَنتَ خَيْرُ الْمُنزِلِينَ",
-      "transliteration": "Rabbi anzilnī munzalan mubārakan wa anta khayru-l-munzilīn.",
-      "meaning": "Mein Herr, lass mich an einem gesegneten Ort ankommen, und Du bist der beste derer, die ankommen lassen.",
-      "source": "Qurʾān, al-Muʾminūn 23:29",
-      "canonicalId": "dua-052-rabbi-anzilni-munzalan-mubarakan",
-      "verification": "verified",
-      "quranRefs": [
-        {
-          "surah": 23,
-          "ayah": 29
-        }
-      ],
-      "quiz": {
-        "question": "Worum bitten wir Allah in diesem Duʿāʾ?",
-        "answers": [
-          {
-            "label": "Um eine gesegnete Ankunft",
-            "correct": true
-          },
-          {
-            "label": "Darum, immer zuerst zu sein",
-            "correct": false
-          }
-        ]
-      },
-      "audioGermanText": "Mit diesem Duʿāʾ bittest du Allah um eine gute und gesegnete Ankunft."
+      ]
     },
     {
       "id": "dua-sleep",
@@ -166,11 +131,14 @@
       "title": "Vor dem Schlafen",
       "childPrompt": "Dieses Duʿāʾ sagte der Prophet ﷺ, wenn er sich zum Schlafen legte.",
       "arabic": "اللَّهُمَّ بِاسْمِكَ أَحْيَا وَأَمُوتُ",
-      "transliteration": "Allāhumma bismika aḥyā wa-amūt.",
+      "transliteration": "Allāhumma bismika aḥyā wa amūt.",
       "meaning": "O Allah, in Deinem Namen lebe ich und sterbe ich.",
+      "audioGermanText": "Dieses Duʿāʾ sagte der Prophet ﷺ, wenn er sich zum Schlafen legte. Die Bedeutung ist: O Allah, in Deinem Namen lebe ich und sterbe ich.",
+      "audioArabicText": "اللَّهُمَّ بِاسْمِكَ أَحْيَا وَأَمُوتُ",
       "source": "Ṣaḥīḥ al-Buḫārī, Nr. 7394",
-      "sourceUrl": "https://dorar.net/hadith/sharh/1656",
+      "sourceUrl": "https://dorar.net/h/q5F8hPon",
       "verification": "verified",
+      "grade": "Ṣaḥīḥ",
       "quiz": {
         "question": "Wann sagen wir dieses Duʿāʾ?",
         "answers": [
@@ -183,11 +151,7 @@
             "correct": false
           }
         ]
-      },
-      "grade": "Ṣaḥīḥ",
-      "audioGermanText": "Vor dem Schlafen sagte der Prophet dieses Duʿāʾ. Es bedeutet: O Allah, in Deinem Namen lebe ich und sterbe ich.",
-      "audioArabicText": "اللَّهُمَّ بِاسْمِكَ أَحْيَا وَأَمُوتُ",
-      "verificationNote": "Wortlaut exakt an Ṣaḥīḥ al-Buḫārī 7394 gebunden; keine Vermischung mit der Variante »amūtu wa-aḥyā«."
+      }
     },
     {
       "id": "dua-wake",
@@ -199,28 +163,27 @@
       "title": "Nach dem Aufwachen",
       "childPrompt": "Nach dem Aufwachen loben wir Allah.",
       "arabic": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
-      "transliteration": "Al-ḥamdu lillāhi-lladhī aḥyānā baʿda mā amātanā wa ilayhi-n-nushūr.",
+      "transliteration": "Al-ḥamdu lillāhi lladhī aḥyānā baʿda mā amātanā wa ilayhi n-nushūr.",
       "meaning": "Alles Lob gehört Allah, Der uns lebendig gemacht hat, nachdem Er uns sterben ließ; und zu Ihm ist die Auferstehung.",
+      "audioGermanText": "Nach dem Aufwachen loben wir Allah. Die Bedeutung ist: Alles Lob gehört Allah, Der uns lebendig gemacht hat, nachdem Er uns sterben ließ; und zu Ihm ist die Auferstehung.",
+      "audioArabicText": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
       "source": "Ṣaḥīḥ al-Buḫārī, Nr. 7394",
-      "sourceUrl": "https://dorar.net/hadith/sharh/1656",
+      "sourceUrl": "https://dorar.net/h/q5F8hPon",
       "verification": "verified",
+      "grade": "Ṣaḥīḥ",
       "quiz": {
-        "question": "Was machen wir mit diesem Duʿāʾ?",
+        "question": "Wann sagen wir dieses Duʿāʾ?",
         "answers": [
           {
-            "label": "Wir loben Allah nach dem Aufwachen",
+            "label": "Nach dem Aufwachen",
             "correct": true
           },
           {
-            "label": "Wir bitten um ein Spielzeug",
+            "label": "Beim Schuheanziehen",
             "correct": false
           }
         ]
-      },
-      "grade": "Ṣaḥīḥ",
-      "audioGermanText": "Nach dem Aufwachen loben wir Allah. Es bedeutet: Alles Lob gehört Allah, Der uns lebendig gemacht hat, nachdem Er uns sterben ließ; und zu Ihm ist die Auferstehung.",
-      "audioArabicText": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
-      "verificationNote": "Wortlaut aus demselben Ḥadīṯ Ṣaḥīḥ al-Buḫārī 7394."
+      }
     },
     {
       "id": "dua-eating",
@@ -234,9 +197,12 @@
       "arabic": "بِسْمِ اللَّهِ",
       "transliteration": "Bismillāh.",
       "meaning": "Im Namen Allahs.",
+      "audioGermanText": "Bevor du isst, nenne Allahs Namen. Die Bedeutung von Bismillāh ist: Im Namen Allahs.",
+      "audioArabicText": "بِسْمِ اللَّهِ",
       "source": "Jāmiʿ at-Tirmiḏī, Nr. 1858; Ḥadīṯ ḥasan ṣaḥīḥ",
       "sourceUrl": "https://dorar.net/h/b1RqSELr",
       "verification": "verified",
+      "grade": "Ḥasan ṣaḥīḥ",
       "olderNote": {
         "ageMin": 7,
         "title": "Wenn du es am Anfang vergessen hast",
@@ -256,26 +222,213 @@
             "correct": false
           }
         ]
-      },
-      "grade": "Ḥasan ṣaḥīḥ",
-      "audioGermanText": "Vor dem Essen sagen wir Bismillāh. Das bedeutet: Im Namen Allahs.",
-      "audioArabicText": "بِسْمِ اللَّهِ"
+      }
+    },
+    {
+      "id": "dua-after-eating",
+      "ageMin": 4,
+      "ageMax": 10,
+      "type": "sunnah",
+      "scene": "food",
+      "symbol": "food",
+      "title": "Nach dem Essen",
+      "childPrompt": "Nach dem Essen danken wir Allah für die Versorgung.",
+      "arabic": "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ",
+      "transliteration": "Al-ḥamdu lillāhi lladhī aṭʿamanī hādhā wa razaqanīhi min ghayri ḥawlin minnī wa lā quwwah.",
+      "meaning": "Alles Lob gehört Allah, Der mir dies zu essen gab und es mir gewährte, ohne Kraft und Macht von mir.",
+      "audioGermanText": "Nach dem Essen danken wir Allah für die Versorgung. Die Bedeutung ist: Alles Lob gehört Allah, Der mir dies zu essen gab und es mir gewährte, ohne Kraft und Macht von mir.",
+      "audioArabicText": "الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنِي هَذَا وَرَزَقَنِيهِ مِنْ غَيْرِ حَوْلٍ مِنِّي وَلَا قُوَّةٍ",
+      "source": "Sunan Abī Dāwūd, Nr. 4023; Jāmiʿ at-Tirmiḏī, Nr. 3458",
+      "verification": "verified",
+      "grade": "Ḥasan",
+      "quiz": {
+        "question": "Was machen wir nach dem Essen mit diesem Duʿāʾ?",
+        "answers": [
+          {
+            "label": "Wir danken Allah",
+            "correct": true
+          },
+          {
+            "label": "Wir vergessen die Gunst",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "dua-toilet-enter",
+      "ageMin": 4,
+      "ageMax": 10,
+      "type": "sunnah",
+      "scene": "home",
+      "symbol": "home",
+      "title": "Vor dem Toilettengang",
+      "childPrompt": "Bevor du die Toilette betrittst, bitte Allah um Schutz.",
+      "arabic": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
+      "transliteration": "Allāhumma innī aʿūdhu bika mina l-khubthi wa l-khabāʾith.",
+      "meaning": "O Allah, ich suche Zuflucht bei Dir vor den männlichen und weiblichen Shayāṭīn.",
+      "audioGermanText": "Bevor du die Toilette betrittst, bitte Allah um Schutz. Die Bedeutung ist: O Allah, ich suche Zuflucht bei Dir vor den männlichen und weiblichen Shayāṭīn.",
+      "audioArabicText": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ",
+      "source": "Ṣaḥīḥ al-Buḫārī, Nr. 142; Ṣaḥīḥ Muslim, Nr. 375",
+      "verification": "verified",
+      "grade": "Ṣaḥīḥ",
+      "quiz": {
+        "question": "Wann sprechen wir dieses Duʿāʾ?",
+        "answers": [
+          {
+            "label": "Vor dem Toilettengang",
+            "correct": true
+          },
+          {
+            "label": "Vor dem Schlafen",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "dua-toilet-exit",
+      "ageMin": 4,
+      "ageMax": 10,
+      "type": "sunnah",
+      "scene": "home",
+      "symbol": "home",
+      "title": "Nach dem Toilettengang",
+      "childPrompt": "Wenn du die Toilette verlässt, sag dieses kurze Duʿāʾ.",
+      "arabic": "غُفْرَانَكَ",
+      "transliteration": "Ghufrānak.",
+      "meaning": "Ich bitte Dich um Deine Vergebung.",
+      "audioGermanText": "Wenn du die Toilette verlässt, sag dieses kurze Duʿāʾ. Die Bedeutung ist: Ich bitte Dich um Deine Vergebung.",
+      "audioArabicText": "غُفْرَانَكَ",
+      "source": "Sunan Abī Dāwūd, Nr. 30; Jāmiʿ at-Tirmiḏī, Nr. 7",
+      "verification": "verified",
+      "grade": "Ṣaḥīḥ",
+      "quiz": {
+        "question": "Was bitten wir Allah nach dem Toilettengang?",
+        "answers": [
+          {
+            "label": "Um Vergebung",
+            "correct": true
+          },
+          {
+            "label": "Um ein Spiel",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "dua-leave-home",
+      "ageMin": 4,
+      "ageMax": 10,
+      "type": "sunnah",
+      "scene": "home",
+      "symbol": "home",
+      "title": "Wenn ich das Haus verlasse",
+      "childPrompt": "Beim Verlassen des Hauses vertrauen wir auf Allah.",
+      "arabic": "بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+      "transliteration": "Bismillāh, tawakkaltu ʿalā Allāh, lā ḥawla wa lā quwwata illā billāh.",
+      "meaning": "Im Namen Allahs. Ich vertraue auf Allah. Es gibt keine Macht und keine Kraft außer durch Allah.",
+      "audioGermanText": "Beim Verlassen des Hauses vertrauen wir auf Allah. Die Bedeutung ist: Im Namen Allahs. Ich vertraue auf Allah. Es gibt keine Macht und keine Kraft außer durch Allah.",
+      "audioArabicText": "بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ",
+      "source": "Sunan Abī Dāwūd, Nr. 5095; Jāmiʿ at-Tirmiḏī, Nr. 3426",
+      "verification": "verified",
+      "grade": "Ṣaḥīḥ",
+      "quiz": {
+        "question": "Auf wen vertrauen wir beim Verlassen des Hauses?",
+        "answers": [
+          {
+            "label": "Auf Allah",
+            "correct": true
+          },
+          {
+            "label": "Auf Glücksbringer",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "dua-mosque-enter",
+      "ageMin": 4,
+      "ageMax": 10,
+      "type": "sunnah",
+      "scene": "learn",
+      "symbol": "library",
+      "title": "Beim Betreten der Moschee",
+      "childPrompt": "Wenn du die Moschee betrittst, bitte Allah um Seine Barmherzigkeit.",
+      "arabic": "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+      "transliteration": "Allāhumma iftaḥ lī abwāba raḥmatik.",
+      "meaning": "O Allah, öffne mir die Tore Deiner Barmherzigkeit.",
+      "audioGermanText": "Wenn du die Moschee betrittst, bitte Allah um Seine Barmherzigkeit. Die Bedeutung ist: O Allah, öffne mir die Tore Deiner Barmherzigkeit.",
+      "audioArabicText": "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+      "source": "Ṣaḥīḥ Muslim, Nr. 713",
+      "verification": "verified",
+      "grade": "Ṣaḥīḥ",
+      "quiz": {
+        "question": "Worum bitten wir Allah beim Betreten der Moschee?",
+        "answers": [
+          {
+            "label": "Um Seine Barmherzigkeit",
+            "correct": true
+          },
+          {
+            "label": "Um Süßigkeiten",
+            "correct": false
+          }
+        ]
+      }
+    },
+    {
+      "id": "dua-mosque-exit",
+      "ageMin": 4,
+      "ageMax": 10,
+      "type": "sunnah",
+      "scene": "learn",
+      "symbol": "library",
+      "title": "Beim Verlassen der Moschee",
+      "childPrompt": "Wenn du die Moschee verlässt, bitte Allah um Seine Huld.",
+      "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
+      "transliteration": "Allāhumma innī asʾaluka min faḍlik.",
+      "meaning": "O Allah, ich bitte Dich um etwas von Deiner Huld.",
+      "audioGermanText": "Wenn du die Moschee verlässt, bitte Allah um Seine Huld. Die Bedeutung ist: O Allah, ich bitte Dich um etwas von Deiner Huld.",
+      "audioArabicText": "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
+      "source": "Ṣaḥīḥ Muslim, Nr. 713",
+      "verification": "verified",
+      "grade": "Ṣaḥīḥ",
+      "quiz": {
+        "question": "Was bitten wir Allah beim Verlassen der Moschee?",
+        "answers": [
+          {
+            "label": "Um Seine Huld",
+            "correct": true
+          },
+          {
+            "label": "Um Lob von Menschen",
+            "correct": false
+          }
+        ]
+      }
     },
     {
       "id": "dua-afiyah",
-      "ageMin": 6,
+      "ageMin": 4,
       "ageMax": 10,
       "type": "sunnah",
       "scene": "morning",
       "symbol": "spark",
       "title": "Um Vergebung und Wohlergehen",
-      "childPrompt": "Eine kurze tägliche Bitte um Vergebung und Wohlergehen.",
-      "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",
-      "transliteration": "Allāhumma innī asʾaluka-l-ʿafwa wa-l-ʿāfiyata fi-d-dunyā wa-l-ākhirah.",
+      "childPrompt": "Eine tägliche Bitte um Vergebung und Wohlergehen.",
+      "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",
+      "transliteration": "Allāhumma innī asʾaluka l-ʿafwa wa l-ʿāfiyata fī d-dunyā wa l-ākhirah.",
       "meaning": "O Allah, ich bitte Dich um Vergebung und Wohlergehen im Diesseits und im Jenseits.",
+      "audioGermanText": "Eine tägliche Bitte um Vergebung und Wohlergehen. Die Bedeutung ist: O Allah, ich bitte Dich um Vergebung und Wohlergehen im Diesseits und im Jenseits.",
+      "audioArabicText": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ",
       "source": "Sunan Abī Dāwūd, Nr. 5074; Sunan Ibn Māǧah, Nr. 3871",
       "canonicalId": "dua-065-allahumma-inni-asaluka-al-afwa-wal-afiyah",
       "verification": "verified",
+      "grade": "Ṣaḥīḥ",
+      "sourceUrl": "https://dorar.net/hadith/sharh/131323",
       "quiz": {
         "question": "Worum bitten wir Allah in diesem Duʿāʾ?",
         "answers": [
@@ -288,38 +441,33 @@
             "correct": false
           }
         ]
-      },
-      "grade": "Ṣaḥīḥ",
-      "sourceUrl": "https://dorar.net/hadith/sharh/131323",
-      "verificationNote": "Dorar: Abū Dāwūd 5074; al-Albānī: ṣaḥīḥ; auch Ibn Māǧah 3871.",
-      "audioGermanText": "Mit diesem Duʿāʾ bittest du Allah um Vergebung und Wohlergehen im Diesseits und im Jenseits.",
-      "audioArabicText": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ"
+      }
     },
     {
-      "id": "dua-dunya-akhirah",
-      "ageMin": 6,
+      "id": "dua-rabbana-atina",
+      "ageMin": 4,
       "ageMax": 10,
       "type": "quran",
-      "scene": "family",
-      "symbol": "spark",
+      "scene": "learn",
+      "symbol": "heart",
       "title": "Gutes im Diesseits und Jenseits",
-      "childPrompt": "Bitte Allah um Gutes in diesem Leben und im Jenseits.",
-      "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
-      "transliteration": "Rabbanā ātinā fi-d-dunyā ḥasanah wa fi-l-ākhirati ḥasanah wa qinā ʿadhāba-n-nār.",
+      "childPrompt": "Bitte Allah um Gutes im Diesseits und im Jenseits.",
+      "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+      "transliteration": "Rabbanā ātinā fī d-dunyā ḥasanatan wa fī l-ākhirati ḥasanatan wa qinā ʿadhāba n-nār.",
       "meaning": "Unser Herr, gib uns im Diesseits Gutes und im Jenseits Gutes und bewahre uns vor der Strafe des Feuers.",
-      "source": "Qurʾān, al-Baqarah 2:201.",
+      "audioGermanText": "Bitte Allah um Gutes im Diesseits und im Jenseits. Die Bedeutung ist: Unser Herr, gib uns im Diesseits Gutes und im Jenseits Gutes und bewahre uns vor der Strafe des Feuers.",
+      "source": "Qurʾān, al-Baqarah 2:201",
       "canonicalId": "dua-001-rabbana-atina",
       "verification": "verified",
-      "audioGermanText": "Mit diesem Duʿāʾ bittest du Allah um Gutes im Diesseits und im Jenseits und um Schutz vor der Strafe des Feuers.",
       "quiz": {
-        "question": "Worum bitten wir Allah hier?",
+        "question": "Worum bitten wir Allah in diesem Duʿāʾ?",
         "answers": [
           {
             "label": "Um Gutes im Diesseits und Jenseits",
             "correct": true
           },
           {
-            "label": "Nur um mehr Spielsachen",
+            "label": "Nur um Spielzeug",
             "correct": false
           }
         ]
@@ -332,66 +480,30 @@
       ]
     },
     {
-      "id": "dua-forgive-mercy",
+      "id": "dua-repentance",
       "ageMin": 4,
       "ageMax": 10,
       "type": "quran",
-      "scene": "learn",
-      "symbol": "spark",
-      "title": "Vergib und erbarme Dich",
-      "childPrompt": "Eine kurze Bitte um Vergebung und Barmherzigkeit.",
-      "arabic": "رَّبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ",
-      "transliteration": "Rabbi-ghfir warḥam wa anta khayru-r-rāḥimīn.",
-      "meaning": "Mein Herr, vergib und erbarme Dich, denn Du bist der Beste der Barmherzigen.",
-      "source": "Qurʾān, al-Muʾminūn 23:118.",
-      "canonicalId": "dua-006-rabbi-ighfir-warham",
-      "verification": "verified",
-      "audioGermanText": "Dieses kurze Duʿāʾ bedeutet: Mein Herr, vergib und erbarme Dich, denn Du bist der Beste der Barmherzigen.",
-      "quiz": {
-        "question": "Worum bitten wir Allah?",
-        "answers": [
-          {
-            "label": "Um Vergebung und Barmherzigkeit",
-            "correct": true
-          },
-          {
-            "label": "Um Ruhm vor anderen",
-            "correct": false
-          }
-        ]
-      },
-      "quranRefs": [
-        {
-          "surah": 23,
-          "ayah": 118
-        }
-      ]
-    },
-    {
-      "id": "dua-after-mistake",
-      "ageMin": 6,
-      "ageMax": 10,
-      "type": "quran",
-      "scene": "night",
-      "symbol": "spark",
+      "scene": "family",
+      "symbol": "heart",
       "title": "Wenn ich einen Fehler gemacht habe",
-      "childPrompt": "Wenn wir einen Fehler gemacht haben, kehren wir zu Allah zurück.",
-      "arabic": "رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِن لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",
-      "transliteration": "Rabbanā ẓalamnā anfusanā wa in lam taghfir lanā wa tarḥamnā lanakūnanna mina-l-khāsirīn.",
+      "childPrompt": "Wenn du einen Fehler gemacht hast, bitte Allah um Vergebung und Barmherzigkeit.",
+      "arabic": "رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ",
+      "transliteration": "Rabbanā ẓalamnā anfusanā wa in lam taghfir lanā wa tarḥamnā la-nakūnanna mina l-khāsirīn.",
       "meaning": "Unser Herr, wir haben uns selbst Unrecht getan. Wenn Du uns nicht vergibst und Dich unser erbarmst, werden wir gewiss zu den Verlierern gehören.",
-      "source": "Qurʾān, al-Aʿrāf 7:23.",
+      "audioGermanText": "Wenn du einen Fehler gemacht hast, bitte Allah um Vergebung und Barmherzigkeit. Die Bedeutung ist: Unser Herr, wir haben uns selbst Unrecht getan. Wenn Du uns nicht vergibst und Dich unser erbarmst, werden wir gewiss zu den Verlierern gehören.",
+      "source": "Qurʾān, al-Aʿrāf 7:23",
       "canonicalId": "dua-041-rabbana-zalamna-anfusana-maidah",
       "verification": "verified",
-      "audioGermanText": "Mit diesem Duʿāʾ erkennen wir unseren Fehler an und bitten Allah um Vergebung und Barmherzigkeit.",
       "quiz": {
-        "question": "Was tun wir nach einem Fehler?",
+        "question": "Was tun wir, wenn wir einen Fehler gemacht haben?",
         "answers": [
           {
             "label": "Allah um Vergebung bitten",
             "correct": true
           },
           {
-            "label": "Den Fehler stolz weitererzählen",
+            "label": "Den Fehler verstecken und nie bereuen",
             "correct": false
           }
         ]
@@ -404,30 +516,30 @@
       ]
     },
     {
-      "id": "dua-hard-task",
-      "ageMin": 6,
+      "id": "dua-clear-speech",
+      "ageMin": 4,
       "ageMax": 10,
       "type": "quran",
       "scene": "learn",
-      "symbol": "spark",
-      "title": "Wenn etwas schwer ist",
-      "childPrompt": "Bitte Allah um Erleichterung und klare Worte.",
-      "arabic": "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِّن لِّسَانِي يَفْقَهُوا قَوْلِي",
-      "transliteration": "Rabbi-shraḥ lī ṣadrī wa yassir lī amrī waḥlul ʿuqdatan min lisānī yafqahū qawlī.",
+      "symbol": "library",
+      "title": "Vor einer schweren Aufgabe",
+      "childPrompt": "Mūsā عليه السلام bat Allah um Erleichterung und klare Rede.",
+      "arabic": "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي وَاحْلُلْ عُقْدَةً مِنْ لِسَانِي يَفْقَهُوا قَوْلِي",
+      "transliteration": "Rabbi ishraḥ lī ṣadrī wa yassir lī amrī wa-ḥlul ʿuqdatan min lisānī yafqahū qawlī.",
       "meaning": "Mein Herr, weite mir meine Brust, erleichtere mir meine Angelegenheit und löse den Knoten von meiner Zunge, damit sie meine Worte verstehen.",
-      "source": "Qurʾān, Ṭā-Hā 20:25–28.",
+      "audioGermanText": "Mūsā, Friede sei mit ihm, bat Allah um Erleichterung und klare Rede. Die Bedeutung ist: Mein Herr, weite mir meine Brust, erleichtere mir meine Angelegenheit und löse den Knoten von meiner Zunge, damit sie meine Worte verstehen.",
+      "source": "Qurʾān, Ṭā-Hā 20:25–28",
       "canonicalId": "dua-049-rabbi-shrah-li-sadri",
       "verification": "verified",
-      "audioGermanText": "Mit diesem Duʿāʾ bat Mūsā Allah um Weite, Erleichterung und eine klare Rede, damit seine Worte verstanden werden.",
       "quiz": {
-        "question": "Worum bitten wir Allah hier?",
+        "question": "Worum bat Mūsā عليه السلام in diesem Duʿāʾ?",
         "answers": [
           {
-            "label": "Um Erleichterung und klare Worte",
+            "label": "Um Erleichterung und klare Rede",
             "correct": true
           },
           {
-            "label": "Darum, nie lernen zu müssen",
+            "label": "Um mehr Besitz",
             "correct": false
           }
         ]
@@ -452,62 +564,26 @@
       ]
     },
     {
-      "id": "dua-need-good",
-      "ageMin": 6,
-      "ageMax": 10,
-      "type": "quran",
-      "scene": "learn",
-      "symbol": "spark",
-      "title": "Wenn ich Allahs Gutes brauche",
-      "childPrompt": "Zeige Allah, dass du Sein Gutes brauchst.",
-      "arabic": "رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ",
-      "transliteration": "Rabbi innī limā anzalta ilayya min khayrin faqīr.",
-      "meaning": "Mein Herr, ich bin dessen, was Du an Gutem zu mir herabsendest, bedürftig.",
-      "source": "Qurʾān, al-Qaṣaṣ 28:24.",
-      "canonicalId": "dua-062-rabbi-inni-lima-anzalta",
-      "verification": "verified",
-      "audioGermanText": "Dieses Duʿāʾ von Mūsā bedeutet: Mein Herr, ich bin dessen, was Du an Gutem zu mir herabsendest, bedürftig.",
-      "quiz": {
-        "question": "Von wem erbitten wir das Gute?",
-        "answers": [
-          {
-            "label": "Von Allah",
-            "correct": true
-          },
-          {
-            "label": "Von Glücksbringern",
-            "correct": false
-          }
-        ]
-      },
-      "quranRefs": [
-        {
-          "surah": 28,
-          "ayah": 24
-        }
-      ]
-    },
-    {
       "id": "dua-accept-deeds",
-      "ageMin": 6,
+      "ageMin": 4,
       "ageMax": 10,
       "type": "quran",
       "scene": "learn",
-      "symbol": "spark",
-      "title": "Nach einer guten Tat",
-      "childPrompt": "Bitte Allah, deine gute Tat anzunehmen.",
-      "arabic": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ",
-      "transliteration": "Rabbanā taqabbal minnā innaka anta-s-samīʿu-l-ʿalīm.",
+      "symbol": "heart",
+      "title": "Allah soll unsere guten Taten annehmen",
+      "childPrompt": "Nach einer guten Tat bitten wir Allah, sie von uns anzunehmen.",
+      "arabic": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ",
+      "transliteration": "Rabbanā taqabbal minnā innaka anta s-samīʿu l-ʿalīm.",
       "meaning": "Unser Herr, nimm von uns an. Du bist wahrlich der Allhörende, der Allwissende.",
-      "source": "Qurʾān, al-Baqarah 2:127.",
+      "audioGermanText": "Nach einer guten Tat bitten wir Allah, sie von uns anzunehmen. Die Bedeutung ist: Unser Herr, nimm von uns an. Du bist wahrlich der Allhörende, der Allwissende.",
+      "source": "Qurʾān, al-Baqarah 2:127",
       "canonicalId": "dua-071-rabbana-taqabbal-minna",
       "verification": "verified",
-      "audioGermanText": "Nach einer guten Tat können wir Allah bitten, sie von uns anzunehmen. Er ist der Allhörende, der Allwissende.",
       "quiz": {
-        "question": "Worum bitten wir nach einer guten Tat?",
+        "question": "Was bitten wir Allah nach einer guten Tat?",
         "answers": [
           {
-            "label": "Dass Allah sie annimmt",
+            "label": "Dass Er sie annimmt",
             "correct": true
           },
           {
@@ -525,29 +601,29 @@
     },
     {
       "id": "dua-heart-guidance",
-      "ageMin": 9,
+      "ageMin": 4,
       "ageMax": 10,
       "type": "quran",
-      "scene": "night",
-      "symbol": "spark",
-      "title": "Für ein festes Herz",
-      "childPrompt": "Bitte Allah, dein Herz nach der Rechtleitung nicht abweichen zu lassen.",
-      "arabic": "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً إِنَّكَ أَنتَ الْوَهَّابُ",
-      "transliteration": "Rabbanā lā tuzigh qulūbanā baʿda idh hadaytanā wa hab lanā min ladunka raḥmatan innaka anta-l-wahhāb.",
+      "scene": "family",
+      "symbol": "heart",
+      "title": "Ein standhaftes Herz",
+      "childPrompt": "Bitte Allah darum, dein Herz nach der Rechtleitung nicht abweichen zu lassen.",
+      "arabic": "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ",
+      "transliteration": "Rabbanā lā tuzigh qulūbanā baʿda idh hadaytanā wa hab lanā min ladunka raḥmatan, innaka anta l-wahhāb.",
       "meaning": "Unser Herr, lass unsere Herzen nicht abweichen, nachdem Du uns rechtgeleitet hast, und schenke uns Barmherzigkeit von Dir. Du bist wahrlich der unablässig Schenkende.",
-      "source": "Qurʾān, Āl ʿImrān 3:8.",
+      "audioGermanText": "Bitte Allah darum, dein Herz nach der Rechtleitung nicht abweichen zu lassen. Die Bedeutung ist: Unser Herr, lass unsere Herzen nicht abweichen, nachdem Du uns rechtgeleitet hast, und schenke uns Barmherzigkeit von Dir. Du bist wahrlich der unablässig Schenkende.",
+      "source": "Qurʾān, Āl ʿImrān 3:8",
       "canonicalId": "dua-073-rabbana-la-tuzigh-qulubana",
       "verification": "verified",
-      "audioGermanText": "Mit diesem Duʿāʾ bitten wir Allah, unsere Herzen nach der Rechtleitung nicht abweichen zu lassen und uns Barmherzigkeit zu schenken.",
       "quiz": {
-        "question": "Worum bitten wir für unser Herz?",
+        "question": "Worum bitten wir Allah für unser Herz?",
         "answers": [
           {
-            "label": "Dass es auf der Rechtleitung bleibt",
+            "label": "Um Standhaftigkeit",
             "correct": true
           },
           {
-            "label": "Dass es stolz auf andere wird",
+            "label": "Um Hochmut",
             "correct": false
           }
         ]
@@ -560,169 +636,68 @@
       ]
     },
     {
-      "id": "dua-firm-heart",
-      "ageMin": 6,
+      "id": "dua-ya-muqallib",
+      "ageMin": 4,
       "ageMax": 10,
       "type": "sunnah",
-      "scene": "night",
-      "symbol": "spark",
-      "title": "Fest im Dīn bleiben",
-      "childPrompt": "Bitte Allah, dein Herz auf Seinem Dīn fest zu machen.",
-      "arabic": "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ",
-      "transliteration": "Yā Muqalliba-l-qulūb, thabbit qalbī ʿalā dīnik.",
+      "scene": "family",
+      "symbol": "heart",
+      "title": "Fest auf Allahs Dīn bleiben",
+      "childPrompt": "Der Prophet ﷺ bat Allah oft darum, sein Herz auf dem Dīn fest zu machen.",
+      "arabic": "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ",
+      "transliteration": "Yā Muqalliba l-qulūb, thabbit qalbī ʿalā dīnik.",
       "meaning": "O Wender der Herzen, festige mein Herz auf Deiner Religion.",
-      "source": "Jāmiʿ at-Tirmidhī, Hadith Nr. 2140; Musnad Aḥmad, Hadith Nr. 12107.",
+      "audioGermanText": "Der Prophet ﷺ bat Allah oft darum, sein Herz auf dem Dīn fest zu machen. Die Bedeutung ist: O Wender der Herzen, festige mein Herz auf Deiner Religion.",
+      "audioArabicText": "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ",
+      "source": "Jāmiʿ at-Tirmiḏī, Nr. 2140",
       "canonicalId": "dua-026-ya-muqallib",
       "verification": "verified",
-      "audioGermanText": "Der Prophet sagte dieses Duʿāʾ häufig. Es bedeutet: O Wender der Herzen, festige mein Herz auf Deiner Religion.",
+      "grade": "Ḥasan",
       "quiz": {
-        "question": "Worum bitten wir Allah?",
+        "question": "Worum bitten wir Allah in diesem Duʿāʾ?",
         "answers": [
           {
-            "label": "Um ein festes Herz auf dem Dīn",
+            "label": "Dass unser Herz auf dem Dīn fest bleibt",
             "correct": true
           },
           {
-            "label": "Um ein hartes Herz gegen Menschen",
+            "label": "Dass wir nie lernen müssen",
             "correct": false
           }
         ]
-      },
-      "audioArabicText": "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ",
-      "sourceUrl": "https://dorar.net/h/bPmrOs5k?osoul=1",
-      "grade": "Ḥasan"
+      }
     },
     {
       "id": "dua-guidance-taqwa",
-      "ageMin": 6,
+      "ageMin": 4,
       "ageMax": 10,
       "type": "sunnah",
       "scene": "learn",
-      "symbol": "spark",
+      "symbol": "heart",
       "title": "Um Rechtleitung und Taqwā",
-      "childPrompt": "Bitte Allah um Rechtleitung, Taqwā, Keuschheit und Genügsamkeit.",
-      "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى",
-      "transliteration": "Allāhumma innī asʾaluka-l-hudā wa-t-tuqā wa-l-ʿafāfa wa-l-ghinā.",
+      "childPrompt": "Eine kurze umfassende Bitte um Rechtleitung, Taqwā, Keuschheit und Genügsamkeit.",
+      "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى",
+      "transliteration": "Allāhumma innī asʾaluka l-hudā wa t-tuqā wa l-ʿafāfa wa l-ghinā.",
       "meaning": "O Allah, ich bitte Dich um Rechtleitung, Taqwā, Keuschheit und Genügsamkeit.",
-      "source": "Ṣaḥīḥ Muslim, Hadith Nr. 2721.",
+      "audioGermanText": "Eine kurze umfassende Bitte um Rechtleitung, Taqwā, Keuschheit und Genügsamkeit. Die Bedeutung ist: O Allah, ich bitte Dich um Rechtleitung, Taqwā, Keuschheit und Genügsamkeit.",
+      "audioArabicText": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى",
+      "source": "Ṣaḥīḥ Muslim, Nr. 2721",
       "canonicalId": "dua-027-allahumma-inni-asaluka-huda",
       "verification": "verified",
-      "audioGermanText": "Dieses Duʿāʾ bedeutet: O Allah, ich bitte Dich um Rechtleitung, Taqwā, Keuschheit und Genügsamkeit.",
+      "grade": "Ṣaḥīḥ",
       "quiz": {
-        "question": "Was erbitten wir unter anderem?",
+        "question": "Was gehört zu diesem Duʿāʾ?",
         "answers": [
           {
             "label": "Rechtleitung und Taqwā",
             "correct": true
           },
           {
-            "label": "Stolz und Überheblichkeit",
+            "label": "Stolz auf sich selbst",
             "correct": false
           }
         ]
-      },
-      "audioArabicText": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى",
-      "sourceUrl": "https://dorar.net/hadith/sharh/66389",
-      "grade": "Ṣaḥīḥ"
-    },
-    {
-      "id": "dua-afuww",
-      "ageMin": 6,
-      "ageMax": 10,
-      "type": "sunnah",
-      "scene": "night",
-      "symbol": "spark",
-      "title": "Allah liebt Vergebung",
-      "childPrompt": "Bitte Allah um Seine Vergebung.",
-      "arabic": "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
-      "transliteration": "Allāhumma innaka ʿafuwwun tuḥibbu-l-ʿafwa faʿfu ʿannī.",
-      "meaning": "O Allah, Du bist vergebend und liebst die Vergebung, so vergib mir.",
-      "source": "Jāmiʿ at-Tirmidhī, Hadith Nr. 3513; Sunan Ibn Māǧah, Hadith Nr. 3850.",
-      "canonicalId": "dua-068-allahumma-innaka-afuwwun",
-      "verification": "verified",
-      "audioGermanText": "Dieses Duʿāʾ bedeutet: O Allah, Du bist vergebend und liebst die Vergebung, so vergib mir.",
-      "quiz": {
-        "question": "Worum bitten wir Allah?",
-        "answers": [
-          {
-            "label": "Um Vergebung",
-            "correct": true
-          },
-          {
-            "label": "Um Lob von Menschen",
-            "correct": false
-          }
-        ]
-      },
-      "audioArabicText": "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
-      "sourceUrl": "https://dorar.net/hadith/sharh/116980",
-      "grade": "Ṣaḥīḥ"
-    },
-    {
-      "id": "dua-often-istighfar",
-      "ageMin": 4,
-      "ageMax": 10,
-      "type": "sunnah",
-      "scene": "learn",
-      "symbol": "spark",
-      "title": "Oft um Vergebung bitten",
-      "childPrompt": "Eine kurze Duʿāʾ für häufiges Istighfār und Tawbah.",
-      "arabic": "رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ",
-      "transliteration": "Rabbi-ghfir lī wa tub ʿalayya innaka anta-t-tawwābu-r-raḥīm.",
-      "meaning": "Mein Herr, vergib mir und nimm meine Reue an. Du bist wahrlich der Reue-Annehmende, der Barmherzige.",
-      "source": "Sunan Abī Dāwūd, Hadith Nr. 1516; Jāmiʿ at-Tirmidhī, Hadith Nr. 3434; Sunan Ibn Māǧah, Hadith Nr. 3814. Einstufung: ṣaḥīḥ.",
-      "canonicalId": "dua-085-rabbi-ghfir-li-wa-tub-alayya",
-      "verification": "verified",
-      "audioGermanText": "Dieses Duʿāʾ bedeutet: Mein Herr, vergib mir und nimm meine Reue an. Du bist der Reue-Annehmende, der Barmherzige.",
-      "quiz": {
-        "question": "Was bitten wir Allah anzunehmen?",
-        "answers": [
-          {
-            "label": "Unsere Reue",
-            "correct": true
-          },
-          {
-            "label": "Unseren Stolz",
-            "correct": false
-          }
-        ]
-      },
-      "audioArabicText": "رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ",
-      "sourceUrl": "https://dorar.net/hadith/sharh/28359",
-      "grade": "Ṣaḥīḥ"
-    },
-    {
-      "id": "dua-great-forgiveness",
-      "ageMin": 9,
-      "ageMax": 10,
-      "type": "sunnah",
-      "scene": "night",
-      "symbol": "spark",
-      "title": "Umfassend um Vergebung bitten",
-      "childPrompt": "Ein umfassendes Duʿāʾ um Vergebung und Barmherzigkeit.",
-      "arabic": "اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا، وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ، فَاغْفِرْ لِي مَغْفِرَةً مِنْ عِنْدِكَ، وَارْحَمْنِي، إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ",
-      "transliteration": "Allāhumma innī ẓalamtu nafsī ẓulman kathīran, wa lā yaghfiru-dh-dhunūba illā anta, faghfir lī maghfiratan min ʿindika warḥamnī, innaka anta-l-ghafūru-r-raḥīm.",
-      "meaning": "O Allah, ich habe mir selbst viel Unrecht getan, und niemand vergibt die Sünden außer Dir. So vergib mir mit einer Vergebung von Dir und erbarme Dich meiner. Du bist wahrlich der Allvergebende, der Barmherzige.",
-      "source": "Ṣaḥīḥ al-Bukhārī, Hadith Nr. 834; Ṣaḥīḥ Muslim, Hadith Nr. 2705.",
-      "canonicalId": "dua-082-allahumma-inni-zalamtu-nafsi-kathiran",
-      "verification": "verified",
-      "audioGermanText": "In diesem Duʿāʾ erkennen wir unser eigenes Unrecht an und bitten Allah allein um Vergebung und Barmherzigkeit.",
-      "quiz": {
-        "question": "Wer vergibt die Sünden?",
-        "answers": [
-          {
-            "label": "Allah allein",
-            "correct": true
-          },
-          {
-            "label": "Glücksbringer",
-            "correct": false
-          }
-        ]
-      },
-      "audioArabicText": "اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا، وَلَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ، فَاغْفِرْ لِي مَغْفِرَةً مِنْ عِنْدِكَ، وَارْحَمْنِي، إِنَّكَ أَنْتَ الْغَفُورُ الرَّحِيمُ",
-      "sourceUrl": "https://dorar.net/hadith/sharh/13113",
-      "grade": "Ṣaḥīḥ"
+      }
     }
   ]
 }
