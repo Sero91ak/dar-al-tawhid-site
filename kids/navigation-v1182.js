@@ -56,9 +56,9 @@
       "@media(min-width:700px){html[data-kids-age] body .shell{padding-bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;}}",
       "/* HOME_STABILITY_V1236 — one invariant hero geometry on first load and every return. */",
       "#view-today .hero{",
-      "  min-height:clamp(485px,122vw,535px)!important;",
-      "  height:clamp(485px,122vw,535px)!important;",
-      "  max-height:535px!important;",
+      "  min-height:var(--kids-home-hero-height-fixed,clamp(485px,122vw,535px))!important;",
+      "  height:var(--kids-home-hero-height-fixed,clamp(485px,122vw,535px))!important;",
+      "  max-height:var(--kids-home-hero-height-fixed,535px)!important;",
       "}",
       "#view-today .kids-wordmark{",
       "  top:var(--kids-home-title-top-fixed,82px)!important;",
@@ -68,10 +68,10 @@
       "  animation-play-state:running!important;",
       "}",
       "@media(max-width:390px){",
-      "  #view-today .hero{min-height:485px!important;height:485px!important;max-height:485px!important;}",
+      "  #view-today .hero{min-height:var(--kids-home-hero-height-fixed,485px)!important;height:var(--kids-home-hero-height-fixed,485px)!important;max-height:var(--kids-home-hero-height-fixed,485px)!important;}",
       "}",
       "@media(min-width:700px){",
-      "  #view-today .hero{min-height:525px!important;height:525px!important;max-height:525px!important;}",
+      "  #view-today .hero{min-height:var(--kids-home-hero-height-fixed,525px)!important;height:var(--kids-home-hero-height-fixed,525px)!important;max-height:var(--kids-home-hero-height-fixed,525px)!important;}",
       "}"
     ].join("\n");
     (document.head||root).appendChild(style);
@@ -415,23 +415,32 @@
     if(g.side==="back")back();else forward();
   }
 
-  function readSafeTop(){
-    var probe=document.createElement("div");
-    probe.setAttribute("aria-hidden","true");
-    probe.style.cssText="position:fixed;left:0;top:0;width:0;height:0;padding-top:env(safe-area-inset-top,0px);visibility:hidden;pointer-events:none;";
-    (document.body||root).appendChild(probe);
-    var value=parseFloat(getComputedStyle(probe).paddingTop)||0;
-    if(probe.parentNode)probe.parentNode.removeChild(probe);
-    return Math.max(0,value);
-  }
-
   function lockHomeGeometry(force){
     var width=Math.max(320,Number(window.innerWidth)||390);
     var bucket=width>=700?"tablet":(width<=390?"compact":"phone");
-    if(!force&&root.dataset.kidsHomeGeometryBucket===bucket&&root.style.getPropertyValue("--kids-home-title-top-fixed"))return;
-    var safe=readSafeTop();
-    var top=bucket==="tablet"?Math.max(64,safe+24):bucket==="compact"?Math.max(66,safe+18):Math.max(70,safe+20);
-    root.style.setProperty("--kids-home-title-top-fixed",Math.round(top)+"px");
+    if(!force&&root.dataset.kidsHomeGeometryBucket===bucket&&
+       root.style.getPropertyValue("--kids-home-title-top-fixed")&&
+       root.style.getPropertyValue("--kids-home-hero-height-fixed"))return;
+
+    var hero=q("#view-today .hero");
+    var mark=q("#view-today .kids-wordmark");
+    var heroHeight=0,markTop=0;
+    if(hero&&mark){
+      var hr=hero.getBoundingClientRect();
+      var mr=mark.getBoundingClientRect();
+      heroHeight=Math.round(hr.height||0);
+      markTop=Math.round((mr.top||0)-(hr.top||0));
+    }
+
+    if(heroHeight<420||heroHeight>620){
+      heroHeight=bucket==="tablet"?525:485;
+    }
+    if(markTop<28||markTop>150){
+      markTop=bucket==="tablet"?64:(bucket==="compact"?54:56);
+    }
+
+    root.style.setProperty("--kids-home-hero-height-fixed",heroHeight+"px");
+    root.style.setProperty("--kids-home-title-top-fixed",markTop+"px");
     root.dataset.kidsHomeGeometryBucket=bucket;
   }
 
@@ -456,8 +465,9 @@
 
   function init(){
     shell=q(".shell");
-    installLateLayout();
+    /* Capture the approved first-entry geometry BEFORE the late lock is injected. */
     lockHomeGeometry(true);
+    installLateLayout();
     if(shell){
       try{shell.scrollTo({top:0,left:0,behavior:"auto"})}catch(_){shell.scrollTop=0}
     }
@@ -477,7 +487,10 @@
       if(active==="today")armHome();
     });
     window.addEventListener("orientationchange",function(){
-      setTimeout(function(){lockHomeGeometry(true);if(activeTab()==="today")armHome()},180);
+      root.style.removeProperty("--kids-home-hero-height-fixed");
+      root.style.removeProperty("--kids-home-title-top-fixed");
+      delete root.dataset.kidsHomeGeometryBucket;
+      setTimeout(function(){lockHomeGeometry(true);if(activeTab()==="today")armHome()},220);
     });
     document.addEventListener("visibilitychange",function(){
       if(document.visibilityState==="visible"&&activeTab()==="today")armHome();
