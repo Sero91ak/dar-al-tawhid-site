@@ -2319,7 +2319,7 @@
       { nr: "31", title: "Geprüftes Wissen, Quellen & Weitergabe", id: GEPRUEFT_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Wissen, Quellen, Weitergabe, Sunnah, Bidʿah und Vorsicht im Zitieren." },
       { nr: "32", title: "Tod, Janāzah & Trauer-Adab", id: TOD_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Tod, Janāzah, Ghusl, Trauer, Ṣabr und Iḥtisāb." },
       { nr: "33", title: "Arbeit, Studium & Öffentlichkeit", id: ARBEIT_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu öffentlicher Tätigkeit, Lernen, Grenzen, Nutzen und Schutz." },
-      { nr: "34", title: "Medien, Bilder & öffentliche Darstellung", id: MEDIEN_SLUG, mark: "veil", pending: true, lede: "Geprüfte Grundlagen zu Darstellung, Fotos, Stimme, Schreiben, öffentlichem Auftreten und digitalen Grenzen." },
+      { nr: "34", title: "Medien, Bilder & öffentliche Darstellung", id: MEDIEN_SLUG, mark: "veil", lede: "Geprüfte Grundlagen zu Darstellung, Fotos, Stimme, Schreiben, öffentlichem Auftreten und digitalen Grenzen." },
       { nr: "35", title: "Ruqyah, Schutz & Zuflucht", id: RUQYAH_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu al-Falaq, an-Nās, Muʿawwidhāt, Ruqyah und Zuflucht bei Allah." },
       { nr: "36", title: "Tod, Janāzah & Trauer", id: TRAUER_SLUG, mark: "ring", pending: true, lede: "Geprüfte Grundlagen zu Tod, Trauer, Janāzah, Duʿāʾ und Grenzen der Klage." },
       { nr: "37", title: "Mädchen, Pubertät & Pflichtwissen", id: MAEDCHEN_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Reife, Pflichtwissen, Schamhaftigkeit, Gebet und religiöser Verantwortung." },
