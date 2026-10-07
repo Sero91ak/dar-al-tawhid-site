@@ -89,6 +89,15 @@ if (frauen) {
   forbidToken(frauenRel, frauen, 'ctx.fillText("Folgt für mehr Wissen aus Qurʾān & Sunnah"', "legacy promo footer draw");
 }
 
+const frauenTestRel = "test/assets/frauen/frauen-fiqh.js";
+const frauenTest = read(frauenTestRel);
+if (frauenTest) {
+  requireToken(frauenTestRel, frauenTest, "FRAUEN_SHARE_BRANDING_V1275", "mandatory visitor women share branding");
+  requireToken(frauenTestRel, frauenTest, "watermark-my-logo-full.png", "DAR logo in visitor women export");
+  requireToken(frauenTestRel, frauenTest, "app-store-badge-de-official.svg", "App Store badge in visitor women export");
+  requireToken(frauenTestRel, frauenTest, "dar-al-tawhid.de", "website in visitor women export");
+}
+
 if (failures.length) {
   console.error("Curated Bildbeitrag design verification FAILED:");
   failures.forEach((item) => console.error(" - " + item));

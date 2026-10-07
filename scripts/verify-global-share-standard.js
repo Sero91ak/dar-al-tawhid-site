@@ -229,6 +229,16 @@ for (const token of [
   'from "./share-image.js"'
 ]) forbid(workerRel, worker, token);
 
+const frauenTestRel = "test/assets/frauen/frauen-fiqh.js";
+const frauenTest = file(frauenTestRel);
+syntax(frauenTestRel, frauenTest);
+for (const token of [
+  "FRAUEN_SHARE_BRANDING_V1275",
+  "watermark-my-logo-full.png",
+  "app-store-badge-de-official.svg",
+  "dar-al-tawhid.de"
+]) need(frauenTestRel, frauenTest, token);
+
 if (failures.length) {
   console.error("GLOBAL SHARE STANDARD: FEHLER");
   failures.forEach((msg) => console.error(" - " + msg));

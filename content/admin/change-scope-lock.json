@@ -152,6 +152,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-women-share-brand-route-fix-2026-10-07",
+      "at": "2026-10-07T17:52:00+02:00",
+      "approvedBy": "user-explicit-not-changed-fix-now",
+      "reason": "Korrektur nach Nutzer-Screenshot: Die Besucher-/iOS-App lädt den Frauen-Bildbeitrag-Renderer tatsächlich aus test/assets/frauen/frauen-fiqh.js über cloudflare/site-router.js. Dieser aktive Pfad muss dasselbe DĀR-Logo-, Website- und App-Store-Branding erhalten und mit neuer Cache-Version ausgeliefert werden.",
+      "paths": [
+        "content/admin/change-scope-lock.json",
+        "test/assets/frauen/frauen-fiqh.js",
+        "cloudflare/site-router.js",
+        "desktop-preview/index.html",
+        "scripts/verify-global-share-design.js",
+        "scripts/verify-global-share-standard.js"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
       "id": "global-share-image-branding-v1275-2026-10-07",
       "at": "2026-10-07T17:24:00+02:00",
       "approvedBy": "user-explicit-global-share-logo-website-appstore",

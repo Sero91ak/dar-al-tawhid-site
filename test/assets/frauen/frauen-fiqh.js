@@ -3648,6 +3648,12 @@
     ctx.closePath();
   }
 
+  /* FRAUEN_SHARE_BRANDING_V1275 · Pflichtbranding im tatsächlich ausgelieferten Besucher-/iOS-Renderer. */
+  function frauenDrawShareBranding(ctx,brandLogo,appStoreBadge,W,H,margin){
+    if(brandLogo){var size=88,x=W-margin-size,y=18;ctx.save();ctx.beginPath();ctx.arc(x+size/2,y+size/2,size/2,0,Math.PI*2);ctx.closePath();ctx.clip();ctx.fillStyle="rgba(250,246,235,.97)";ctx.fillRect(x,y,size,size);ctx.drawImage(brandLogo,x,y,size,size);ctx.restore();ctx.save();ctx.strokeStyle="rgba(239,216,159,.78)";ctx.lineWidth=2;ctx.beginPath();ctx.arc(x+size/2,y+size/2,size/2-1,0,Math.PI*2);ctx.stroke();ctx.restore()}
+    var footerY=1288;ctx.save();var fade=ctx.createLinearGradient(0,footerY-18,0,H);fade.addColorStop(0,"rgba(3,12,13,0)");fade.addColorStop(1,"rgba(3,12,13,.64)");ctx.fillStyle=fade;ctx.fillRect(0,footerY-18,W,H-footerY+18);ctx.strokeStyle="rgba(239,216,159,.48)";ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(margin,footerY);ctx.lineTo(W-margin,footerY);ctx.stroke();var gx=margin+14,gy=1321,gr=13;ctx.strokeStyle="#efd89f";ctx.lineWidth=2;ctx.beginPath();ctx.arc(gx,gy,gr,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.ellipse(gx,gy,gr*.48,gr,0,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.moveTo(gx-gr,gy);ctx.lineTo(gx+gr,gy);ctx.stroke();ctx.fillStyle="#fff8e9";ctx.font="650 24px Georgia, serif";ctx.textAlign="left";ctx.shadowColor="rgba(0,0,0,.5)";ctx.shadowBlur=4;ctx.fillText("dar-al-tawhid.de",margin+39,1330);ctx.shadowBlur=0;var bw=168,bh=Math.round(bw*40/119.66407),bx=W-margin-bw,by=1293;if(appStoreBadge)ctx.drawImage(appStoreBadge,bx,by,bw,bh);else{frauenRoundRect(ctx,bx,by,bw,bh,10);ctx.fillStyle="rgba(4,8,10,.88)";ctx.fill();ctx.strokeStyle="rgba(239,216,159,.65)";ctx.stroke();ctx.fillStyle="#fff";ctx.font="700 17px Arial, sans-serif";ctx.textAlign="center";ctx.fillText("Im App Store",bx+bw/2,by+34);ctx.textAlign="left"}ctx.restore();
+  }
+
   function frauenDrawCover(ctx, img, W, H, shift) {
     var iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
     if (!iw || !ih) return;
@@ -3713,6 +3719,9 @@
 
     var fresh = await frauenRandomPoolBackground();
     var bg = fresh.image;
+    var brandLogo = null, appStoreBadge = null;
+    try { brandLogo = await frauenLoadImage("/watermark-my-logo-full.png?share-brand=v1275"); } catch (eLogo) {}
+    try { appStoreBadge = await frauenLoadImage("/assets/app-store-badge-de-official.svg?share-brand=v1275"); } catch (eBadge) {}
     try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e0) {}
 
     var title = String(titelVon(e) || bereichKicker(abschnitt) || "Frauen im Islam").trim();
@@ -3812,7 +3821,7 @@
         ctx.textAlign = "left";
       }
 
-      var panelY = 1130, panelH = 160;
+      var panelY = 1130, panelH = 148;
       frauenRoundRect(ctx, margin, panelY, contentW, panelH, 22);
       ctx.fillStyle = "rgba(4,15,15,.70)";
       ctx.fill();
@@ -3833,6 +3842,7 @@
         sy += 27;
       });
 
+      frauenDrawShareBranding(ctx, brandLogo, appStoreBadge, W, H, margin);
       var blob = await frauenCanvasBlob(canvas);
       if (blob) files.push(new File([blob], "dar-al-tawhid-bildbeitrag-" + (p + 1) + ".png", { type: "image/png" }));
     }
