@@ -845,8 +845,10 @@ export default {
             add(url.pathname.replace(/\.html$/, ""));
             add(url.pathname);
           } else {
-            add(url.pathname.replace(/\/$/, "") || url.pathname);
+            // Prefer the explicit canonical HTML asset first. Cloudflare pretty-URL
+            // resolution may otherwise return a stale extensionless /kids/start.
             add(pretty[url.pathname]);
+            add(url.pathname.replace(/\/$/, "") || url.pathname);
           }
           let last = null;
           for (const pathname of paths) {
