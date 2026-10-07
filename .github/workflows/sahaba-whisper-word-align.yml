@@ -1,10 +1,9 @@
 name: Sahaba Whisper Word Alignment
 
+# Legacy diagnostics only. Production read-along uses ElevenLabs forced alignment.
+
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/sahaba-whisper-align.trigger'
+  workflow_dispatch:
 
 permissions:
   contents: write
