@@ -422,7 +422,9 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
     if (original.length > 5000 || prepared.length > 5000) {
       return json({ ok: false, error: "Text ist zu lang. Maximal 5.000 Zeichen pro Audio." }, cors, 413);
     }
-    if (looksLikeLongArabicRecitation(original)) {
+    const ownerAutomation = isOwnerAutomationAuthorized(request, env);
+    const duaLearningProfile = ["dua_arabic", "dua_arabic_slow", "dua_word"].includes(profile);
+    if (looksLikeLongArabicRecitation(original) && !(ownerAutomation && duaLearningProfile)) {
       return json({
         ok: false,
         error: "Qurʾān-/Rezitationsaudio wird nicht synthetisch erzeugt. Verwende dafür eine echte Rezitation."
@@ -436,7 +438,6 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
       }, cors, 503);
     }
 
-    const ownerAutomation = isOwnerAutomationAuthorized(request, env);
     if (!ownerAutomation) assertVoiceRateLimit(request, prepared.length);
     const result = await synthesizeDarVoice(env, prepared, { profile, timestamps: includeTimings });
     if (!result.ok) {
