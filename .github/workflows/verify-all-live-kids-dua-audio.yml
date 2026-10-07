@@ -1,0 +1,126 @@
+name: Verify All Live Kids Dua Audio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-all-live-kids-dua-audio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-all:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Verify every live Dua audio asset
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import concurrent.futures
+          import json
+          import time
+          import urllib.request
+          import urllib.error
+          import unicodedata
+
+          BASE="https://dar-al-tawhid.de"
+          UA="DarAlTawhidKids-iOS"
+          CB=str(int(time.time()))
+
+          def fetch_json(path):
+              req=urllib.request.Request(
+                  BASE+path+("?cb="+CB if "?" not in path else "&cb="+CB),
+                  headers={"User-Agent":UA,"Cache-Control":"no-cache"}
+              )
+              with urllib.request.urlopen(req,timeout=30) as r:
+                  if r.status!=200:
+                      raise RuntimeError(f"{path}: HTTP {r.status}")
+                  return json.loads(r.read().decode("utf-8"))
+
+          packs={
+              "german":fetch_json("/kids/data/dua-audio.json"),
+              "arabic":fetch_json("/kids/data/dua-arabic-audio.json"),
+              "slow":fetch_json("/kids/data/dua-arabic-slow-audio.json"),
+              "word":fetch_json("/kids/data/dua-word-audio.json"),
+          }
+          expected={"german":122,"arabic":120,"slow":120,"word":696}
+          urls=[]
+          for label,data in packs.items():
+              entries=data.get("entries") or {}
+              if len(entries)!=expected[label]:
+                  raise RuntimeError(f"{label}: expected {expected[label]} entries, got {len(entries)}")
+              if data.get("modelId")!="eleven_v4":
+                  raise RuntimeError(f"{label}: wrong model {data.get('modelId')}")
+              if data.get("voiceProfileId")!="serhat-owner-voice-2026":
+                  raise RuntimeError(f"{label}: wrong voice profile")
+              if label in {"arabic","slow","word"} and data.get("pronunciationDictionaryApplied") is not False:
+                  raise RuntimeError(f"{label}: transliteration dictionary unexpectedly applied")
+              for key,entry in entries.items():
+                  url=str(entry.get("url") or "").strip()
+                  if not url:
+                      raise RuntimeError(f"{label}: missing URL for {key[:50]}")
+                  urls.append((label,key,url))
+
+          if len(urls)!=1058:
+              raise RuntimeError(f"Expected 1058 manifest URLs, got {len(urls)}")
+
+          def probe(row):
+              label,key,path=row
+              url=BASE+path
+              last=None
+              for attempt in range(1,4):
+                  try:
+                      req=urllib.request.Request(
+                          url,
+                          headers={
+                              "User-Agent":UA,
+                              "Range":"bytes=0-127",
+                              "Cache-Control":"no-cache"
+                          }
+                      )
+                      with urllib.request.urlopen(req,timeout=30) as r:
+                          code=int(getattr(r,"status",0) or 0)
+                          ctype=str(r.headers.get("Content-Type") or "").lower()
+                          body=r.read(256)
+                          if code not in (200,206):
+                              raise RuntimeError(f"HTTP {code}")
+                          if "audio/" not in ctype and "application/octet-stream" not in ctype:
+                              raise RuntimeError(f"bad content-type {ctype!r}")
+                          if len(body)<16:
+                              raise RuntimeError("audio body too small")
+                          if b"ftyp" not in body[:64]:
+                              raise RuntimeError("not MP4/M4A header")
+                          return label
+                  except Exception as exc:
+                      last=exc
+                      if attempt<3:
+                          time.sleep(0.4*attempt)
+              raise RuntimeError(f"{label} {key[:45]!r} {path}: {last}")
+
+          counts={k:0 for k in expected}
+          failures=[]
+          with concurrent.futures.ThreadPoolExecutor(max_workers=16) as ex:
+              futures={ex.submit(probe,row):row for row in urls}
+              done=0
+              for fut in concurrent.futures.as_completed(futures):
+                  done+=1
+                  try:
+                      label=fut.result()
+                      counts[label]+=1
+                  except Exception as exc:
+                      failures.append(str(exc))
+                  if done%100==0:
+                      print(f"checked {done}/1058",flush=True)
+
+          if failures:
+              print("\n".join(failures[:80]))
+              raise RuntimeError(f"{len(failures)} live audio assets failed")
+          if counts!=expected:
+              raise RuntimeError(f"Count mismatch: {counts} != {expected}")
+          print("ALL LIVE DUA AUDIO OK · 1058/1058")
+          print(json.dumps(counts,ensure_ascii=False,sort_keys=True))
+          PY
