@@ -15,7 +15,7 @@ html[data-view="dua"] body{background:#061a2d}
   isolation:isolate;
   color:var(--duahub-ink);
   margin:0!important;
-  padding:0 0 calc(118px + env(safe-area-inset-bottom,0px))!important;
+  padding:0 0 28px!important;
   border-radius:0!important;
   overflow:visible;
   background:
