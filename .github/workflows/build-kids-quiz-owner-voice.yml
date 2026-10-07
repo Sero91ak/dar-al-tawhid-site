@@ -7,6 +7,7 @@ on:
     paths:
       - 'kids/data/dua-kids.json'
       - 'kids/tools/voice_text.py'
+      - '.github/workflows/build-kids-quiz-owner-voice.yml'
 
 permissions:
   contents: write
@@ -24,6 +25,7 @@ jobs:
       ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+      VOICE_BUILD_SCOPE: ${{ contains(github.event.head_commit.message, '[quiz-only]') && 'quiz' || 'full' }}
 
     steps:
       - name: Checkout main
@@ -145,10 +147,12 @@ jobs:
               except Exception:
                   return {"entries":{}}
 
-          def local_from_entry(entry,asset_dir,expected_model=None):
+          def local_from_entry(entry,asset_dir,expected_model=None,expected_profile=None):
               if str((entry or {}).get("synthesisRevision") or "")!=SYNTHESIS_REVISION:
                   return None
               if expected_model and str((entry or {}).get("modelId") or "")!=str(expected_model):
+                  return None
+              if expected_profile and str((entry or {}).get("speechProfile") or "")!=str(expected_profile):
                   return None
               url=str((entry or {}).get("url") or "").split("?",1)[0]
               expected="/"+str(asset_dir).replace(os.sep,"/")+"/"
@@ -168,11 +172,43 @@ jobs:
               last=None
               for attempt in range(1,4):
                   if ELEVEN_KEY:
-                      if profile=="quiz":
+                      if profile=="quiz_4_6":
+                          voice_settings={
+                              "stability":0.62,
+                              "similarity_boost":0.90,
+                              "style":0.12,
+                              "speed":0.90,
+                              "use_speaker_boost":True
+                          }
+                      elif profile=="quiz_7_8":
+                          voice_settings={
+                              "stability":0.60,
+                              "similarity_boost":0.89,
+                              "style":0.14,
+                              "speed":0.94,
+                              "use_speaker_boost":True
+                          }
+                      elif profile=="quiz_9_10":
                           voice_settings={
                               "stability":0.58,
                               "similarity_boost":0.88,
-                              "style":0.18,
+                              "style":0.16,
+                              "speed":0.97,
+                              "use_speaker_boost":True
+                          }
+                      elif profile=="quiz_feedback":
+                          voice_settings={
+                              "stability":0.60,
+                              "similarity_boost":0.89,
+                              "style":0.14,
+                              "speed":0.95,
+                              "use_speaker_boost":True
+                          }
+                      elif profile=="quiz":
+                          voice_settings={
+                              "stability":0.58,
+                              "similarity_boost":0.88,
+                              "style":0.16,
                               "speed":0.97,
                               "use_speaker_boost":True
                           }
@@ -274,7 +310,7 @@ jobs:
                           time.sleep(2*attempt)
               raise RuntimeError(f"Generation failed for {text[:80]!r}: {last}")
 
-          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False):
+          def build_pack(*,texts,manifest_path,asset_dir,profile,pack_id,counts,model_id=None,require_model_match=False,profiles_by_text=None):
               model_id=model_id or ELEVEN_MODEL
               unique=[]
               seen=set()
@@ -291,7 +327,13 @@ jobs:
 
               for text in unique:
                   entry=old_entries.get(text) or {}
-                  p=local_from_entry(entry,asset_dir,model_id if require_model_match else None)
+                  text_profile=(profiles_by_text or {}).get(text,profile)
+                  p=local_from_entry(
+                      entry,
+                      asset_dir,
+                      model_id if require_model_match else None,
+                      text_profile
+                  )
                   if p is None:
                       continue
                   results[text]=(p,float(entry.get("durationSeconds") or duration(p)))
@@ -302,7 +344,17 @@ jobs:
               print(f"{pack_id}: {len(unique)} Texte · {len(results)} aktuell · {len(missing)} neu")
               serial={"done":0,"total":len(missing)}
               with concurrent.futures.ThreadPoolExecutor(max_workers=3) as ex:
-                  futures={ex.submit(synth,text,profile,asset_dir,serial,model_id):text for text in missing}
+                  futures={
+                      ex.submit(
+                          synth,
+                          text,
+                          (profiles_by_text or {}).get(text,profile),
+                          asset_dir,
+                          serial,
+                          model_id
+                      ):text
+                      for text in missing
+                  }
                   for fut in concurrent.futures.as_completed(futures):
                       text,p,d,prepared=fut.result()
                       results[text]=(p,d)
@@ -323,6 +375,7 @@ jobs:
                       "preparedTextSha256":prepared_hashes[text],
                       "synthesisRevision":SYNTHESIS_REVISION,
                       "modelId":model_id,
+                      "speechProfile":(profiles_by_text or {}).get(text,profile),
                       "voiceProfileId":"serhat-owner-voice-2026",
                       "sourceVoice":"authorized-owner-voice",
                       "sourceType":"owner-voice-generated",
@@ -382,22 +435,47 @@ jobs:
           if len(set(prompts))!=900:
               raise SystemExit("Quiz-Sprachprompts sind nicht eindeutig.")
           quiz_texts=[]
+          quiz_profiles={}
+          age_profile={
+              "4-6":"quiz_4_6",
+              "7-8":"quiz_7_8",
+              "9-10":"quiz_9_10"
+          }
           for q in quiz_items:
-              quiz_texts.extend((quiz_prompt(q),norm(q.get("success")),norm(q.get("retry"))))
-          quiz_texts.append("Sehr gut. Du hast das Quiz geschafft.")
+              prompt=quiz_prompt(q)
+              quiz_texts.append(prompt)
+              quiz_profiles[prompt]=age_profile.get(str(q.get("ageBand") or ""),"quiz_9_10")
+              for feedback in (norm(q.get("success")),norm(q.get("retry"))):
+                  if feedback:
+                      quiz_texts.append(feedback)
+                      quiz_profiles[feedback]="quiz_feedback"
+          final_feedback="Sehr gut. Du hast das Quiz geschafft."
+          quiz_texts.append(final_feedback)
+          quiz_profiles[final_feedback]="quiz_feedback"
 
           quiz_manifest=build_pack(
               texts=quiz_texts,
               manifest_path=QUIZ_MANIFEST,
               asset_dir=QUIZ_ASSETS,
-              profile="quiz",
+              profile="quiz_feedback",
               pack_id="KIDS_QUIZ_OWNER_VOICE_V4",
-              counts={"quizQuestions":len(quiz_items),"questionPrompts":len(set(prompts))},
+              counts={
+                  "quizQuestions":len(quiz_items),
+                  "questionPrompts":len(set(prompts)),
+                  "age4to6":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="4-6"),
+                  "age7to8":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="7-8"),
+                  "age9to10":sum(1 for q in quiz_items if str(q.get("ageBand") or "")=="9-10")
+              },
               model_id=ELEVEN_MODEL,
-              require_model_match=True
+              require_model_match=True,
+              profiles_by_text=quiz_profiles
           )
           if quiz_manifest["counts"]["quizQuestions"]!=900 or quiz_manifest["counts"]["questionPrompts"]!=900:
               raise SystemExit("900er Quiz-Voice-Pack unvollständig.")
+
+          if os.environ.get("VOICE_BUILD_SCOPE","full").strip().lower()=="quiz":
+              print("VOICE_BUILD_SCOPE=quiz · Duʿāʾ-Packs bleiben unverändert.")
+              raise SystemExit(0)
 
           dua=json.loads(DUA.read_text(encoding="utf-8"))
           dua_items=[
