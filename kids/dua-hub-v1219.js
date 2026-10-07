@@ -16,7 +16,7 @@
   let activeCategory = "all";
   let activeQuery = "";
   let detailItem = null;
-  let fallbackAudio = null;
+  let fallbackAudio = null;\n  let lastShellScroll = 0;
 
   const q = (s, r) => (r || document).querySelector(s);
   const qa = (s, r) => Array.from((r || document).querySelectorAll(s));
@@ -189,7 +189,7 @@
         '</section>' +
       '</div>' +
       '<section class="duahub-detail" id="duaHubDetail" aria-hidden="true">' +
-        '<div class="duahub-detail-scroll">' +
+        '<div class="duahub-detail-scroll" id="duaHubDetailScroll">' +
           '<button type="button" class="duahub-detail-back" id="duaHubBack" aria-label="Zur Duʿāʾ-Bibliothek">‹ <span>Zurück</span></button>' +
           '<div class="duahub-detail-hero" id="duaHubDetailHero"></div>' +
           '<div class="duahub-detail-kicker" id="duaHubDetailKicker">GEPRÜFT</div>' +
@@ -433,6 +433,16 @@
     const source = q("#duaHubSource");
     source.innerHTML = '<span>Quelle</span><b>' + escapeHtml(d.source || "Geprüfter Eintrag") + '</b>' +
       (d.sourceUrl ? '<a href="' + escapeHtml(d.sourceUrl) + '" target="_blank" rel="noopener">Nachweis öffnen</a>' : "");
+    const shell = q(".shell");
+    lastShellScroll = shell ? (Number(shell.scrollTop) || 0) : 0;
+    if (shell) {
+      try { shell.scrollTo({ top: 0, left: 0, behavior: "auto" }); } catch (_) { shell.scrollTop = 0; }
+    }
+    const bottomNav = q(".bottom-nav");
+    if (bottomNav) {
+      bottomNav.setAttribute("inert", "");
+      bottomNav.setAttribute("aria-hidden", "true");
+    }
     home.setAttribute("inert", "");
     home.setAttribute("aria-hidden", "true");
     detail.classList.add("open");
@@ -448,11 +458,24 @@
     if (!detail || !home) return;
     detail.classList.remove("open");
     detail.setAttribute("aria-hidden", "true");
+    const bottomNav = q(".bottom-nav");
+    if (bottomNav) {
+      bottomNav.removeAttribute("inert");
+      bottomNav.removeAttribute("aria-hidden");
+    }
     home.removeAttribute("inert");
     home.removeAttribute("aria-hidden");
     document.documentElement.classList.remove("duahub-detail-open");
     detailItem = null;
-    if (restore) q("#view-dua")?.focus?.({ preventScroll: true });
+    if (restore) {
+      const shell = q(".shell");
+      requestAnimationFrame(() => {
+        if (shell) {
+          try { shell.scrollTo({ top: lastShellScroll, left: 0, behavior: "auto" }); } catch (_) { shell.scrollTop = lastShellScroll; }
+        }
+      });
+      q("#view-dua")?.focus?.({ preventScroll: true });
+    }
   }
 
   function stopAudio() {
