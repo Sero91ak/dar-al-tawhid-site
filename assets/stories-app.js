@@ -212,6 +212,9 @@
 .story-viewer-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;justify-content:center}
 .story-viewer-actions .story-cta{min-height:40px;padding:9px 16px;border-radius:999px;border:1px solid rgba(214,190,132,.45);background:rgba(255,255,255,.12);color:#fff;font-size:11px;font-weight:900;cursor:pointer;font-family:'Source Serif 4',Georgia,serif}
 .story-viewer-actions .story-ghost{min-height:36px;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:#eee;font-size:10px;font-weight:800;cursor:pointer}
+.story-global-share-host{width:100%;margin-top:10px;text-align:left}
+.story-global-share-host .dar-share-card{margin:0!important;max-width:100%!important}
+.story-global-share-host .dar-share-note{display:none!important}
 .story-viewer-hint{margin:8px 0 10px;text-align:center;font-size:10px;color:rgba(245,236,212,.55);flex:0 0 auto;position:relative;z-index:3}
 .story-viewer-zones{position:absolute;inset:0;z-index:6;display:grid;grid-template-columns:1fr 1fr;pointer-events:none}
 .story-viewer-zones button{border:0;background:transparent;padding:0;margin:0;cursor:pointer;-webkit-tap-highlight-color:transparent;pointer-events:auto}
@@ -484,6 +487,7 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
           <p id="storyViewerText"></p>
           <div class="story-viewer-source" id="storyViewerSource"></div>
           <div class="story-viewer-actions" id="storyViewerActions"></div>
+          <div class="story-global-share-host" id="storyViewerShareHost"></div>
         </div>
       </div>
       <p class="story-viewer-hint">Links/rechts wischen · Inhalt unten öffnen</p>
@@ -537,15 +541,40 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
   }
 
   function shareStory(story) {
-    const title = story.title || "DAR AL TAWḤID";
-    const text = `${title}\n\n${story.text || ""}\n\n${story.source || ""}\n\nDAR AL TAWḤID`;
+    const title = story.title || "DAR AL TAWḤĪD";
+    const text = `${title}\n\n${story.text || ""}\n\n${story.source || ""}\n\nDAR AL TAWḤĪD`;
     if (global.navigator?.share) {
       global.navigator.share({ title, text }).catch(() => {});
       return;
     }
     try {
-      global.navigator.clipboard.writeText(text);
+      if (global.DARGlobalShare?.copyText) global.DARGlobalShare.copyText(text);
+      else global.navigator.clipboard?.writeText(text);
     } catch (e) {}
+  }
+
+  function mountStoryShare(story, tries) {
+    const host = document.getElementById("storyViewerShareHost");
+    if (!host || !story) return;
+    tries = Number(tries || 0);
+    if (global.DARGlobalShare?.mount) {
+      global.DARGlobalShare.mount(host, {
+        kind: "story",
+        category: story.category || "Story",
+        title: story.title || "DĀR AL TAWḤĪD",
+        body: story.text || "",
+        source: story.source || story.category || "DĀR AL TAWḤĪD",
+        url: global.location?.href || ""
+      });
+      return;
+    }
+    if (tries < 25) {
+      setTimeout(() => mountStoryShare(story, tries + 1), 80);
+      return;
+    }
+    host.innerHTML = '<button type="button" class="story-ghost" id="storyViewerShareFallback">Teilen</button>';
+    const fallback = document.getElementById("storyViewerShareFallback");
+    if (fallback) fallback.onclick = () => shareStory(story);
   }
 
   function applyStoryTheme(story) {
@@ -598,8 +627,7 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
     if (!cta && story.targetType === "none" && story.category) {
       cta = "Ordner öffnen";
     }
-    actionsEl.innerHTML = `${cta ? `<button type="button" class="story-cta" id="storyViewerCta">${esc(cta)}</button>` : ""}
-      <button type="button" class="story-ghost" id="storyViewerShare">Teilen</button>`;
+    actionsEl.innerHTML = `${cta ? `<button type="button" class="story-cta" id="storyViewerCta">${esc(cta)}</button>` : ""}`;
 
     progressEl.innerHTML = activeSlides
       .map((_, i) => {
@@ -621,7 +649,7 @@ html.story-viewer-open #bottomNav,html.story-viewer-open #floatActions,html.stor
         }
       };
     }
-    document.getElementById("storyViewerShare").onclick = () => shareStory(story);
+    mountStoryShare(story);
 
     markSeen(story.id);
     updateStripSeenStates();
