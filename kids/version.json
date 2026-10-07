@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v117-dua-smart1212",
-  "label": "KIDS · V1.08.37",
-  "releasedAt": "2026-10-07T08:12:00+02:00",
-  "note": "V1212 trennt den normalen Duʿāʾ-Bereich vom vertieften Smart-Lernmodus. Die normale Ansicht bleibt kompakt für Arabisch hören, Bedeutung hören und Lernfrage. Über „Lernen“ öffnet sich ein smoothes Bottom-Sheet ohne dekoratives Kopfbild mit großem Arabisch, deutlich größerer Lautschrift, Wort-für-Wort-Auswahl, exaktem Hören, 68-%-Langsammodus, Schritt-Navigation und gespeichertem Lernfortschritt. Arabisch und Lautschrift sind über 157 feste Lernsegmente gekoppelt. Geschätzte Wort-Timings sind verboten; der Smart-Follower akzeptiert nur ElevenLabs Forced Alignment. Mikrofonbewertung bleibt absichtlich deaktiviert, bis die arabische Worterkennung geräteübergreifend zuverlässig genug ist.",
+  "buildId": "kids-shell-v118-home-bubble1213",
+  "label": "KIDS · V1.08.38",
+  "releasedAt": "2026-10-07T08:51:00+02:00",
+  "note": "V1213 gestaltet die Startseitenmarke neu: DĀR AL TAWḤĪD nutzt jetzt denselben kinderfreundlichen Fredoka-/Balloncharakter wie Kids, bleibt aber bewusst einfarbig warm-gold. Die drei Wörter haben klare Abstände, die Buchstaben behalten eine sanfte Bogenform und die Wortgruppen bewegen sich nur sehr leicht. Kids erhält wieder den früheren dauerhaften Ballon-Sprung mit 2,6 Sekunden und zeitversetzten Buchstaben. Hintergrund, Karten, Navigation und übrige Startseite bleiben unverändert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1212",
+    "serviceWorkerCache": "v1213",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -984,7 +984,12 @@
     "duaBasicPageMode": "listen-meaning-quiz-learn-entry",
     "duaSmartHeroImage": false,
     "duaTransliterationLarge": true,
-    "duaWordTapEnabled": true
+    "duaWordTapEnabled": true,
+    "homeBrand": "fredoka-single-gold-bubble-v1213",
+    "homeBrandWordSpacing": "explicit-three-word-spacing",
+    "homeBrandMotion": "subtle-word-wobble-v1213",
+    "homeKidsBalloon": "classic-2.6s-staggered-v1213",
+    "homeBackgroundMotion": false
   },
   "updatedAt": "2026-10-07",
   "deployTrigger": "2026-10-07T07:22:00+02:00"
