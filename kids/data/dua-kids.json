@@ -3,14 +3,15 @@
   "policy": {
     "childExplanation": "Die Erklärung darf vereinfacht werden. Arabischer Wortlaut und Quellenangabe werden nicht frei umformuliert.",
     "quranAudio": "Qurʾān-Arabisch wird ausschließlich über die echte Qurʾān-Rezitation abgespielt und niemals synthetisch erzeugt.",
-    "sunnahArabicAudio": "Arabische Sunnah-Duʿāʾ werden wortgetreu mit der autorisierten Serhat-Masterstimme erzeugt; der sichtbare Wortlaut bleibt die Referenz.",
+    "sunnahArabicAudio": "Arabische Sunnah-Duʿāʾ verwenden eine dedizierte professionelle Fuṣḥā/MSA-Stimme; der Wortlaut ist exakt an den geprüften Eintrag gebunden.",
     "audioLearning": "Jedes Duʿāʾ hat getrennte Hörwege für Arabisch und Deutsch sowie einen langsamen Übemodus.",
     "maxItems": 20,
     "status": "verified-only",
     "sourceVariantLock": "Arabischer Wortlaut, Lautschrift und verlinkte Quelle müssen dieselbe Überlieferungsvariante abbilden.",
     "smartLearning": "Der separate Smart-Lernmodus nutzt feste Arabisch↔Lautschrift-Segmente und nur exakt ausgerichtete Audio-Zeitmarken. Keine geschätzten Timings.",
     "microphone": "Mikrofonbasierte Bewertung bleibt deaktiviert, bis eine zuverlässige arabische Worterkennung mit belastbarer Geräte-QA vorliegt.",
-    "slowPracticeRate": 0.68
+    "slowPracticeRate": 0.68,
+    "arabicPronunciation": "Qurʾān: ausschließlich echte Rezitation. Sunnah-Duʿāʾ: professionelle arabische Fuṣḥā-Aussprache mit ElevenLabs v4; keine deutsche Sprecherstimme für arabische Lernreferenzen."
   },
   "items": [
     {
