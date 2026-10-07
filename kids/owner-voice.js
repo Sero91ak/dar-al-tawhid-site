@@ -126,11 +126,21 @@
     });
     flushPendingIfReady();
   }
-  function loadManifest(url,priority){
+  function loadManifest(url,priority,validator){
     return fetch(url,{cache:"no-store"})
       .then(function(r){return r.ok?r.json():null})
-      .then(function(data){merge(data,priority);return data})
+      .then(function(data){
+        if(data&&typeof validator==="function"&&!validator(data))return null;
+        merge(data,priority);
+        return data;
+      })
       .catch(function(){return null});
+  }
+  function isSerhatV4DuaArabic(data){
+    return !!(data&&
+      data.modelId==="eleven_v4"&&
+      data.voiceProfileId==="serhat-owner-voice-2026"&&
+      /Serhat Abu Malik/i.test(String(data.speaker||"")));
   }
   function finishLoad(){
     loaded=true;
@@ -148,7 +158,7 @@
     loadManifest("/kids/data/owner-voice-audio.json?v=2",1),
     loadManifest("/kids/data/quiz-audio.json?v=2",2),
     loadManifest("/kids/data/dua-audio.json?v=7",3),
-    loadManifest("/kids/data/dua-arabic-audio.json?v=7",4)
+    loadManifest("/kids/data/dua-arabic-audio.json?v=7",4,isSerhatV4DuaArabic)
   ]).then(finishLoad).catch(finishLoad);
 
   window.DARKidsOwnerVoice={
