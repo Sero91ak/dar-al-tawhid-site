@@ -5317,6 +5317,73 @@ function defaultKidsQuizAgeBand(){
 function currentKidsQuizAgeBand(){
   return defaultKidsQuizAgeBand();
 }
+var kidsQuizRoundCategory="all";
+var kidsQuizRoundMode="normal";
+var QUIZ_SESSION_KEY="kids.quiz.session.v1";
+function normalizeKidsQuizCategory(value){
+  value=String(value||"all").trim();
+  return value||"all";
+}
+function loadKidsQuizSession(){
+  try{
+    var raw=JSON.parse(localStorage.getItem(QUIZ_SESSION_KEY)||"null");
+    if(!raw||typeof raw!=="object")return null;
+    if(raw.ageBand!==currentKidsQuizAgeBand())return null;
+    if(!Array.isArray(raw.ids)||!raw.ids.length)return null;
+    if(Date.now()-Number(raw.updatedAt||0)>30*24*60*60*1000)return null;
+    return raw;
+  }catch(e){return null}
+}
+function saveKidsQuizSession(){
+  if(!Array.isArray(currentQuiz)||!currentQuiz.length)return;
+  try{
+    localStorage.setItem(QUIZ_SESSION_KEY,JSON.stringify({
+      ageBand:currentKidsQuizAgeBand(),
+      category:normalizeKidsQuizCategory(kidsQuizRoundCategory),
+      mode:String(kidsQuizRoundMode||"normal"),
+      ids:currentQuiz.map(function(q){return String(q&&q.id||"")}).filter(Boolean),
+      index:Math.max(0,Math.min(currentQuiz.length-1,Number(currentQuizIndex||0))),
+      updatedAt:Date.now()
+    }));
+  }catch(e){}
+}
+function clearKidsQuizSession(){
+  try{localStorage.removeItem(QUIZ_SESSION_KEY)}catch(e){}
+}
+function setKidsQuizRoundContext(category,mode){
+  kidsQuizRoundCategory=normalizeKidsQuizCategory(category);
+  kidsQuizRoundMode=String(mode||"normal");
+}
+window.startKidsQuizRound=function(category,mode){
+  setKidsQuizRoundContext(category,mode);
+  beginQuizSession();
+};
+window.resumeKidsQuizSession=function(){
+  var resume=function(){
+    var saved=loadKidsQuizSession();
+    if(!saved)return false;
+    var byId={};
+    kidsQuizPool.forEach(function(q){if(q&&q.id)byId[String(q.id)]=q});
+    var restored=saved.ids.map(function(id){return byId[String(id)]}).filter(Boolean);
+    if(!restored.length)return false;
+    setKidsQuizRoundContext(saved.category,saved.mode);
+    currentQuiz=restored;
+    currentQuizIndex=Math.max(0,Math.min(restored.length-1,Number(saved.index||0)));
+    quizCorrectCount=0;
+    quizLocked=false;
+    quizQuestionHadError=false;
+    renderKidsQuizAgePicker();
+    document.getElementById("quizModal").classList.add("open");
+    renderQuizQuestion();
+    return true;
+  };
+  if(!kidsQuizLoaded){
+    fetchKidsQuiz().then(function(){if(!resume()&&window.openKidsQuizHub)window.openKidsQuizHub()});
+    return true;
+  }
+  return resume();
+};
+window.getKidsQuizSession=function(){return loadKidsQuizSession()};
 function renderKidsQuizAgePicker(){
   /* Die Quiz-Altersstufe folgt ausschließlich der Kids-Einstellung.
      Im Quiz selbst gibt es bewusst keine zweite Altersauswahl. */
@@ -5443,6 +5510,20 @@ function quizBankForAge(){
       Number(q.ageMin)<=r.min &&
       Number(q.ageMax)>=r.max;
   });
+  if(kidsQuizRoundCategory!=="all"){
+    pool=pool.filter(function(q){return String(q.category||"Quiz")===kidsQuizRoundCategory});
+  }
+  if(kidsQuizRoundMode==="mistakes"){
+    pool=pool.filter(function(q){
+      var e=quizProgress(q.id);
+      return Number(e.wrong||0)>0||Number(e.lapses||0)>0;
+    });
+  }else if(kidsQuizRoundMode==="due"){
+    pool=pool.filter(function(q){
+      var e=quizProgress(q.id);
+      return Number(e.attempts||0)>0&&Number(e.dueAt||0)<=now;
+    });
+  }
   pool.sort(function(a,b){
     var pa=quizPriority(a.id,now),pb=quizPriority(b.id,now);
     if(pa.bucket!==pb.bucket)return pa.bucket-pb.bucket;
@@ -5451,6 +5532,9 @@ function quizBankForAge(){
     return deterministicQuizRank(a.id)-deterministicQuizRank(b.id);
   });
   var due=pool.filter(function(q){return quizPriority(q.id,now).bucket<90});
+  if(kidsQuizRoundMode==="mistakes"||kidsQuizRoundMode==="due"){
+    return due.slice(0,r.limit);
+  }
   if(due.length>=r.limit)return due.slice(0,r.limit);
   var selected=due.slice();
   var seen={};
@@ -5621,6 +5705,7 @@ function beginQuizSession(){
   quizQuestionHadError=false;
   document.getElementById("quizModal").classList.add("open");
   document.getElementById("quizAgeLabel").textContent=quizAgeRange().label;
+  saveKidsQuizSession();
   if(!currentQuiz.length){
     document.getElementById("quizProgress").innerHTML="";
     document.getElementById("quizBody").innerHTML='<div class="quiz-finish"><div class="star"></div><h3>Quiz wird neu geladen</h3><p>Die Fragen werden erneut aus dem Kids-Bestand geladen.</p><button id="quizRetry" class="primary" type="button">Jetzt laden</button></div>';
@@ -5651,6 +5736,7 @@ function renderQuizProgress(){
 function renderQuizQuestion(){
   if(currentQuizIndex>=currentQuiz.length){renderQuizFinish();return}
   renderKidsQuizAgePicker();
+  saveKidsQuizSession();
   var ageLabel=document.getElementById("quizAgeLabel");
   if(ageLabel)ageLabel.textContent=quizAgeRange().label;
   var q=currentQuiz[currentQuizIndex];
@@ -5766,6 +5852,7 @@ function chooseQuizAnswer(index,button){
   }
 }
 function renderQuizFinish(){
+  clearKidsQuizSession();
   try{
     var total=quizSavedCorrect()+quizCorrectCount;
     localStorage.setItem("kids.quiz.correct",String(total));
@@ -5781,7 +5868,10 @@ function renderQuizFinish(){
   markDailyDone("quiz");
   quizSpeak("Sehr gut. Du hast das Quiz geschafft.");
 }
-document.getElementById("openQuizButton").addEventListener("click",openQuiz);
+document.getElementById("openQuizButton").addEventListener("click",function(){
+  if(window.openKidsQuizHub){window.openKidsQuizHub();return}
+  openQuiz();
+});
 
 var STORY_PROGRESS_PREFIX="kids.story.progress.v2.";
 function storyProgressDefault(){
@@ -6002,6 +6092,8 @@ var ageButtons=[].slice.call(document.querySelectorAll("[data-age]"));
 var age=localStorage.getItem("kids.age")||"6–8";
 function setAge(a){
   age=a;localStorage.setItem("kids.age",a);
+  try{localStorage.removeItem("kids.quiz.ageBand")}catch(e){}
+  if(window.onKidsQuizAgeChanged)window.onKidsQuizAgeChanged();
   ageButtons.forEach(function(b){b.classList.toggle("active",b.dataset.age===a)});
   document.getElementById("ageHelp").textContent=ageHelp[a]||"";
   var app=document.querySelector(".app");
