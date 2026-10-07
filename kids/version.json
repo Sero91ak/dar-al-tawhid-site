@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v118-quiz-9001213",
-  "label": "KIDS · V1.08.38",
-  "releasedAt": "2026-10-07T06:59:42.473Z",
-  "note": "V1213 erweitert das eigenständige Kids-Quiz auf exakt 900 altersgeprüfte Fragen: je 300 für 4–6, 7–8 und 9–10 Jahre. Die 250 neuen Fragen setzen bewusst Schwerpunkte auf Tawḥīd, Īmān, Adab, Aḫlāq, Iḥsān, Ikhlāṣ, Ṣabr, Tawakkul, Wissen und kindliche Alltagssituationen. Fortgeschrittene Ṭālib-al-ʿIlm-Themen bleiben ausgeschlossen. Für den Ausbau wurden ausschließlich Qurʾān-Fundstellen verwendet, die bereits im zuvor freigegebenen 650er-Kidsbestand vorkamen. Audio-Neurendering bleibt bis zum gesonderten V4-Voice-Schritt ausgesetzt.",
+  "buildId": "kids-shell-v118-global-glow1214",
+  "label": "KIDS · V1.08.39",
+  "releasedAt": "2026-10-07T09:01:00+02:00",
+  "note": "V1214 vereinheitlicht den sichtbaren Capsule-/Card-Touch-Glow appweit. Dīn-Hauptkarte und Dīn-Lektionen haben nun exakt dieselbe Breite und Press-Rückmeldung wie Propheten, Ṣaḥābah und Ṣaḥābiyyāt. Kleine Hören/Lesen/Mitlesen-Capsules bekommen denselben Lichtsaum ohne Layoutänderung. Bestehender Quiz-900-Stand bleibt vollständig erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1213",
+    "serviceWorkerCache": "v1214",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -835,7 +835,7 @@
     },
     "prophetLibraryCardMinHeightPhone": "206px",
     "prophetLibraryCardMinHeightTablet": "236px",
-    "globalCardInteraction": "whole-card-tap-v7",
+    "globalCardInteraction": "whole-card-tap-v10",
     "globalCardArrows": false,
     "globalCardRails": false,
     "globalCardWholeHitTarget": true,
@@ -885,8 +885,8 @@
     "globalCapsulePhoneBleed": "6px each side",
     "globalCapsuleEffectiveOuterMargin": "about 10px with 16px shell inset",
     "globalCapsuleTabletWidth": "100% content column",
-    "globalTouchGlow": "runtime-v2 + css-v9",
-    "globalTouchGlowCoverage": "all navigable Kids capsule/card surfaces",
+    "globalTouchGlow": "runtime-v3 + css-v10",
+    "globalTouchGlowCoverage": "home + stories home + deen + prophets + sahaba + sahabiyyat + quran + story libraries + compact mode capsules",
     "globalTouchMotion": "no translate/scale/lift",
     "globalArrowSpaceReclaimed": true,
     "storyLibraryWidth": "near-edge-safe-width",
@@ -1005,8 +1005,12 @@
     "kidsQuizOwnerVoiceGeneration": "manual-after-900-content-freeze",
     "kidsQuizTargetPerAge": 300,
     "kidsQuizNewQuestionsThisRelease": 250,
-    "kidsQuizNewQuestionSourcePolicy": "only-previously-approved-quran-source-refs"
+    "kidsQuizNewQuestionSourcePolicy": "only-previously-approved-quran-source-refs",
+    "globalTouchGlowIOSFallback": true,
+    "globalTouchGlowInnerRing": true,
+    "globalTouchGlowPressHoldMs": 165,
+    "globalCapsuleStoryHomeParity": "deen=prophets=sahaba=sahabiyyat"
   },
   "updatedAt": "2026-10-07",
-  "deployTrigger": "2026-10-07T06:59:42.478Z"
+  "deployTrigger": "2026-10-07T09:01:00+02:00"
 }

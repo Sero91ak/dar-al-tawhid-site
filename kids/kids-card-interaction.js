@@ -1,4 +1,4 @@
-/* DĀR AL TAWḤĪD KIDS — Global Card Interaction Runtime v1
+/* DĀR AL TAWḤĪD KIDS — Global Card Interaction Runtime v3
    KIDS_GLOBAL_TOUCH_GLOW
    Applies one touch language to all current and future Kids card/capsule surfaces.
 */
@@ -12,6 +12,7 @@
     "#view-today .daily-step",
     "#view-stories .story-row",
     "#view-stories .story-feature",
+    "#view-stories .deen-entry",
     "#view-stories .ps-prophet-entry",
     "#view-stories .ms-entry",
     "#view-quran .quran-action",
@@ -27,15 +28,32 @@
     ".ps-muhammad-card",
     ".ps-story-row",
     ".ms-library-page .ms-story-row",
+    ".dl-library-page .dl-story-row",
     ".studio-content-card",
     ".studio-story-row",
     ".kids-tap-card"
+  ].join(",");
+
+  const CONTROL_SELECTORS=[
+    ".dl-detail-modes button",
+    ".ms-detail-modes button",
+    ".ps-prophet-modes button",
+    ".dua-main-listen",
+    ".dua-main-learn",
+    ".dua-audio-de",
+    ".dua-nav-btn",
+    ".quiz-listen",
+    ".quiz-next",
+    "#view-parents .parent-card button",
+    "#view-today .daily-start",
+    ".knowledge-listen"
   ].join(",");
 
   const WIDE_SELECTORS=[
     "#view-today .resume",
     "#view-today .choice",
     "#view-today .knowledge-card",
+    "#view-stories > .deen-entry",
     "#view-stories > .ps-prophet-entry",
     "#view-stories > .ms-entry",
     "#view-stories > .story-row",
@@ -48,6 +66,9 @@
     if(root.nodeType!==1 && root.nodeType!==9) return;
     if(root.matches?.(TAP_SELECTORS)) root.classList.add("kids-tap-card");
     root.querySelectorAll?.(TAP_SELECTORS).forEach(el=>el.classList.add("kids-tap-card"));
+
+    if(root.matches?.(CONTROL_SELECTORS)) root.classList.add("kids-touch-control");
+    root.querySelectorAll?.(CONTROL_SELECTORS).forEach(el=>el.classList.add("kids-touch-control"));
 
     if(root.matches?.(WIDE_SELECTORS)) root.classList.add("kids-wide-capsule");
     root.querySelectorAll?.(WIDE_SELECTORS).forEach(el=>el.classList.add("kids-wide-capsule"));
@@ -84,19 +105,30 @@
   }
 
   document.addEventListener("pointerdown",e=>{
-    const el=e.target.closest?.(".kids-tap-card");
+    const el=e.target.closest?.(".kids-tap-card,.kids-touch-control");
     if(!el || el.disabled || el.getAttribute("aria-disabled")==="true") return;
     setPressed(el);
   },{passive:true,capture:true});
 
-  document.addEventListener("pointerup",()=>clearPressed(95),{passive:true,capture:true});
+  document.addEventListener("pointerup",()=>clearPressed(165),{passive:true,capture:true});
   document.addEventListener("pointercancel",()=>clearPressed(0),{passive:true,capture:true});
   document.addEventListener("pointerleave",e=>{
     if(active && e.target===active) clearPressed(0);
   },{passive:true,capture:true});
 
+  let lastPointerAt=0;
+  document.addEventListener("pointerdown",()=>{lastPointerAt=performance.now()},{passive:true,capture:true});
+  document.addEventListener("touchstart",e=>{
+    if(performance.now()-lastPointerAt<220)return;
+    const el=e.target.closest?.(".kids-tap-card,.kids-touch-control");
+    if(!el||el.disabled||el.getAttribute("aria-disabled")==="true")return;
+    setPressed(el);
+  },{passive:true,capture:true});
+  document.addEventListener("touchend",()=>clearPressed(165),{passive:true,capture:true});
+  document.addEventListener("touchcancel",()=>clearPressed(0),{passive:true,capture:true});
+
   window.DARKidsCardInteraction={
-    version:1,
+    version:3,
     mark,
     tapSelector:TAP_SELECTORS
   };

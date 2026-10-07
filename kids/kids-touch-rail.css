@@ -804,3 +804,131 @@ html body #syLibraryPage .ms-row-visual img{
     grid-template-columns:minmax(140px,28%) minmax(0,1fr)!important;
   }
 }
+
+
+/* =========================================================
+   KIDS_GLOBAL_TOUCH_GLOW_V10
+   One visible iPhone/iPad press language for every navigable
+   card/capsule. Includes Dīn learning and compact mode controls.
+   ========================================================= */
+:root{
+  --kids-glow-v10-hover:
+    inset 0 0 0 1px rgba(255,229,158,.13),
+    inset 0 0 18px rgba(240,202,116,.065),
+    0 0 0 1px rgba(244,211,128,.10),
+    0 0 24px rgba(236,196,105,.12),
+    0 15px 36px rgba(0,0,0,.16);
+  --kids-glow-v10-press:
+    inset 0 0 0 1px rgba(255,232,164,.28),
+    inset 0 0 26px rgba(240,202,116,.13),
+    0 0 0 1px rgba(250,220,145,.19),
+    0 0 34px rgba(240,202,116,.23),
+    0 14px 34px rgba(0,0,0,.18);
+}
+
+/* Dīn belongs to the same full-card system as Prophets / Ṣaḥābah / Ṣaḥābiyyāt. */
+#view-stories #deenEntry,
+#dlLibraryPage .dl-story-row{
+  position:relative!important;
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+  transition:border-color .14s ease,box-shadow .14s ease,filter .14s ease!important;
+}
+
+@media(hover:hover) and (pointer:fine){
+  .kids-tap-card:hover,
+  #view-stories #deenEntry:hover,
+  #dlLibraryPage .dl-story-row:hover{
+    border-color:rgba(244,211,128,.55)!important;
+    box-shadow:var(--kids-glow-v10-hover)!important;
+    filter:brightness(1.035) saturate(1.015)!important;
+  }
+}
+
+.kids-tap-card:active,
+.kids-tap-card.is-kids-pressed,
+#view-stories #deenEntry:active,
+#view-stories #deenEntry.is-kids-pressed,
+#dlLibraryPage .dl-story-row:active,
+#dlLibraryPage .dl-story-row.is-kids-pressed{
+  border-color:rgba(250,220,145,.80)!important;
+  box-shadow:var(--kids-glow-v10-press)!important;
+  filter:brightness(1.07) saturate(1.025)!important;
+}
+
+.kids-tap-card:focus-visible,
+#view-stories #deenEntry:focus-visible,
+#dlLibraryPage .dl-story-row:focus-visible{
+  outline:0!important;
+  border-color:rgba(250,220,145,.82)!important;
+  box-shadow:
+    0 0 0 3px rgba(247,214,132,.16),
+    var(--kids-glow-v10-press)!important;
+}
+
+/* Compact capsules/buttons use the same light language without becoming full width. */
+.kids-touch-control{
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+  transition:border-color .14s ease,box-shadow .14s ease,filter .14s ease!important;
+}
+@media(hover:hover) and (pointer:fine){
+  .kids-touch-control:hover{
+    border-color:rgba(244,211,128,.52)!important;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,229,158,.11),
+      0 0 20px rgba(236,196,105,.12)!important;
+    filter:brightness(1.035)!important;
+  }
+}
+.kids-touch-control:active,
+.kids-touch-control.is-kids-pressed,
+.kids-touch-control[aria-pressed="true"]{
+  border-color:rgba(250,220,145,.78)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,232,164,.25),
+    inset 0 0 16px rgba(240,202,116,.10),
+    0 0 24px rgba(240,202,116,.18)!important;
+  filter:brightness(1.065)!important;
+}
+.kids-touch-control:focus-visible{
+  outline:0!important;
+  border-color:rgba(250,220,145,.80)!important;
+  box-shadow:0 0 0 3px rgba(247,214,132,.15),0 0 24px rgba(240,202,116,.18)!important;
+}
+
+/* Exact same outer geometry for all four primary story-home capsules. */
+html body #view-stories.ps-stories-home #deenEntry,
+html body #view-stories.ps-stories-home #psProphetEntry,
+html body #view-stories.ps-stories-home #msEntry,
+html body #view-stories.ps-stories-home #syEntry{
+  width:calc(100% + (var(--kids-capsule-bleed) * 2))!important;
+  max-width:none!important;
+  margin-left:calc(0px - var(--kids-capsule-bleed))!important;
+  margin-right:calc(0px - var(--kids-capsule-bleed))!important;
+}
+
+/* Dīn library gets the same safe-edge geometry as all other story libraries. */
+html body #dlLibraryPage .ms-library-scroll{
+  padding-left:10px!important;
+  padding-right:10px!important;
+}
+html body #dlLibraryPage .dl-list,
+html body #dlLibraryPage .dl-story-row{
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+
+@media(min-width:700px){
+  html body #view-stories.ps-stories-home #deenEntry,
+  html body #view-stories.ps-stories-home #psProphetEntry,
+  html body #view-stories.ps-stories-home #msEntry,
+  html body #view-stories.ps-stories-home #syEntry{
+    width:100%!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+}

@@ -3003,7 +3003,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.38</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.39</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3394,7 +3394,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v118-home-bubble1213";
+const KIDS_BUILD_ID="kids-shell-v118-global-glow1214";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6521,7 +6521,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=6"></script>\n<script src="/kids/dua-smart-learn.js?v=2"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v118-home-bubble1213";
+  var KIDS_BUILD_ID="kids-shell-v118-global-glow1214";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6537,7 +6537,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1213",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1214",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -7537,7 +7537,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <link rel="stylesheet" href="/kids/deen-learning-v1199.css?v=1199" data-kids-deen-learning="1">\n<link rel="stylesheet" href="/kids/deen-lessons.css?v=2" data-kids-deen-lessons="1">
 <link rel="stylesheet" href="/kids/story-card-system.css?v=2" data-kids-story-card-system="1">
 <link rel="stylesheet" href="/kids/story-library-cards.css?v=9" data-kids-story-card-repair="1">
-<link rel="stylesheet" href="/kids/kids-touch-rail.css?v=9" data-kids-touch-rail="1">
+<link rel="stylesheet" href="/kids/kids-touch-rail.css?v=10" data-kids-touch-rail="1">
 
 <style id="kids-home-audio-focus-v1169">
 /* Startseite: Audio-first, drei klare Kernwelten, große lesbare Markenbühne. */
@@ -10110,7 +10110,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-  <script src="/kids/kids-card-interaction.js?v=2" defer></script>
+  <script src="/kids/kids-card-interaction.js?v=3" defer></script>
 
 <style id="kids-home-reference-exact-v1199">
 /* V1196 — approved screenshot direction.

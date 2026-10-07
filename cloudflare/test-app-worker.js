@@ -1,7 +1,7 @@
 import { gateHiddenSurfaces } from "./preview-gate.js";
 const KIDS_VERSION_BODY = JSON.stringify({
-  buildId: "kids-shell-v117-dua-smart1212",
-  label: "KIDS · V1.08.37"
+  buildId: "kids-shell-v118-global-glow1214",
+  label: "KIDS · V1.08.39"
 });
 
 function kidsVersionResponse() {
@@ -371,7 +371,7 @@ export default {
         target.pathname = "/kids/start";
       }
       target.searchParams.delete("darsw");
-      target.searchParams.set("kv", "kids-shell-v117-dua-smart1212");
+      target.searchParams.set("kv", "kids-shell-v118-global-glow1214");
       return Response.redirect(target.toString(), 301);
     }
 
