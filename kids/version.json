@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v128-nav-deen-fix1224",
-  "label": "KIDS · V1.08.49",
-  "releasedAt": "2026-10-07T12:11:00+02:00",
-  "note": "V1224 enthält zusätzlich den Quiz-Home-Hotfix: Der sichtbare Einstieg „Quiz spielen“ bleibt trotz älterer Audio-first-Regeln dauerhaft sichtbar. Die bestehende Release-ID bleibt absichtlich unverändert, damit alle Kids-Release-Guards, Manifest-, Router- und Service-Worker-Referenzen konsistent bleiben.",
+  "buildId": "kids-shell-v129-quiz-restore1225",
+  "label": "KIDS · V1.08.50",
+  "releasedAt": "2026-10-07T12:19:00+02:00",
+  "note": "V1225 stellt den sichtbaren Quiz-Einstieg auf der Kids-Startseite wieder her. Zwei ältere Audio-first-CSS-Regeln hatten die Quiz-Capsule mit display:none!important versteckt, obwohl Quiz-Modal, 900-Fragen-Katalog und Voice-System vorhanden waren. Der finale Regression-Guard hält #openQuizButton sichtbar. Release-Dateien und Service-Worker sind vollständig auf V1225 synchronisiert.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1224",
+    "serviceWorkerCache": "v1225",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1064,10 +1064,10 @@
     ],
     "deenReadTextWithoutAudio": true,
     "kidsQuizHomeEntryVisible": true,
-    "kidsQuizHomeEntryRegressionGuard": "hotfix-v1224",
+    "kidsQuizHomeEntryRegressionGuard": "v1225",
     "homeBrandVisibilityFix": "v1226-specificity",
     "kidsDesignGuardTouchRail": "v12"
   },
-  "updatedAt": "2026-10-07T12:27:00+02:00",
+  "updatedAt": "2026-10-07T12:31:00+02:00",
   "deployTrigger": "2026-10-07T12:11:00+02:00"
 }
