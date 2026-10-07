@@ -76,6 +76,9 @@
     };
     player.src=String(entry.url);
     player.currentTime=0;
+    var rate=Number(options.rate||1);
+    if(!Number.isFinite(rate))rate=1;
+    player.playbackRate=Math.max(.68,Math.min(1.12,rate));
     var p;
     try{p=player.play()}catch(e){
       if(typeof options.onerror==="function")options.onerror(e);
@@ -144,7 +147,8 @@
   Promise.allSettled([
     loadManifest("/kids/data/owner-voice-audio.json?v=2",1),
     loadManifest("/kids/data/quiz-audio.json?v=2",2),
-    loadManifest("/kids/data/dua-audio.json?v=3",3)
+    loadManifest("/kids/data/dua-audio.json?v=4",3),
+    loadManifest("/kids/data/dua-arabic-audio.json?v=1",4)
   ]).then(finishLoad).catch(finishLoad);
 
   window.DARKidsOwnerVoice={
