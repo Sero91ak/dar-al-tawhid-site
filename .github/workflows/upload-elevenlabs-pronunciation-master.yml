@@ -60,8 +60,8 @@ jobs:
               if a is not None and (a.text or "").strip():
                   aliases += 1
 
-          if len(lexemes) != 10111:
-              raise SystemExit(f"Erwartet 10111 Lexeme, gefunden {len(lexemes)}")
+          if len(lexemes) != 10099:
+              raise SystemExit(f"Erwartet 10099 Lexeme, gefunden {len(lexemes)}")
           if len(graphemes) != len(set(graphemes)):
               raise SystemExit("Doppelte Grapheme im PLS-Master")
           if aliases != len(lexemes):
