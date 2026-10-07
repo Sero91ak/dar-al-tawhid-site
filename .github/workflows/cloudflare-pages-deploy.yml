@@ -54,9 +54,9 @@ concurrency:
   # Prevents an older visitor run from finishing after a newer Kids/audio deploy
   # and rolling the same Cloudflare Worker back to stale static assets.
   group: dar-al-tawhid-production-worker-deploy
-  # Single automatic deploy lane: a newer main commit contains every earlier
-  # Kids/Test/Visitor change, so cancel stale in-flight publishes and ship latest.
-  cancel-in-progress: true
+  # Serialize shared Worker publishes. Rapid Kids/Test/Visitor commits must queue;
+  # cancelling an in-flight publish can leave one surface stale.
+  cancel-in-progress: false
 
 jobs:
   classify:
