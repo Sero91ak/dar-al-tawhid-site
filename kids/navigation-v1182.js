@@ -53,7 +53,26 @@
       "  scroll-padding-bottom:calc(26px + env(safe-area-inset-bottom,0px))!important;",
       "}",
       "@media(max-width:380px){html[data-kids-age] body .shell{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))!important;}}",
-      "@media(min-width:700px){html[data-kids-age] body .shell{padding-bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;}}"
+      "@media(min-width:700px){html[data-kids-age] body .shell{padding-bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;}}",
+      "/* HOME_STABILITY_V1236 — one invariant hero geometry on first load and every return. */",
+      "#view-today .hero{",
+      "  min-height:clamp(485px,122vw,535px)!important;",
+      "  height:clamp(485px,122vw,535px)!important;",
+      "  max-height:535px!important;",
+      "}",
+      "#view-today .kids-wordmark{",
+      "  top:var(--kids-home-title-top-fixed,82px)!important;",
+      "  margin-top:0!important;",
+      "}",
+      "#view-today .kids-wordmark > .wm-kids span{",
+      "  animation-play-state:running!important;",
+      "}",
+      "@media(max-width:390px){",
+      "  #view-today .hero{min-height:485px!important;height:485px!important;max-height:485px!important;}",
+      "}",
+      "@media(min-width:700px){",
+      "  #view-today .hero{min-height:525px!important;height:525px!important;max-height:525px!important;}",
+      "}"
     ].join("\n");
     (document.head||root).appendChild(style);
   }
@@ -245,7 +264,10 @@
     if(token!==clickToken||replaying)return;
     var after=signature();
     if(after===before){
-      if(desc&&desc.type==="tab")resetMainTop();
+      if(desc&&desc.type==="tab"){
+        resetMainTop();
+        if(desc.target==="today")armHome();
+      }
       return;
     }
     if(back){
@@ -253,7 +275,10 @@
       return;
     }
     pushState(desc,after);
-    if(desc&&desc.type==="tab")resetMainTop();
+    if(desc&&desc.type==="tab"){
+      resetMainTop();
+      if(desc.target==="today")armHome();
+    }
   }
 
   function onClickCapture(e){
@@ -390,9 +415,49 @@
     if(g.side==="back")back();else forward();
   }
 
+  function readSafeTop(){
+    var probe=document.createElement("div");
+    probe.setAttribute("aria-hidden","true");
+    probe.style.cssText="position:fixed;left:0;top:0;width:0;height:0;padding-top:env(safe-area-inset-top,0px);visibility:hidden;pointer-events:none;";
+    (document.body||root).appendChild(probe);
+    var value=parseFloat(getComputedStyle(probe).paddingTop)||0;
+    if(probe.parentNode)probe.parentNode.removeChild(probe);
+    return Math.max(0,value);
+  }
+
+  function lockHomeGeometry(force){
+    var width=Math.max(320,Number(window.innerWidth)||390);
+    var bucket=width>=700?"tablet":(width<=390?"compact":"phone");
+    if(!force&&root.dataset.kidsHomeGeometryBucket===bucket&&root.style.getPropertyValue("--kids-home-title-top-fixed"))return;
+    var safe=readSafeTop();
+    var top=bucket==="tablet"?Math.max(64,safe+24):bucket==="compact"?Math.max(66,safe+18):Math.max(70,safe+20);
+    root.style.setProperty("--kids-home-title-top-fixed",Math.round(top)+"px");
+    root.dataset.kidsHomeGeometryBucket=bucket;
+  }
+
+  function restartHomeMotion(){
+    var today=q("#view-today");
+    if(!today||!today.classList.contains("active"))return;
+    var letters=qa("#view-today .kids-wordmark > .wm-kids span");
+    if(!letters.length)return;
+    letters.forEach(function(el){el.style.setProperty("animation","none","important")});
+    void today.offsetHeight;
+    requestAnimationFrame(function(){
+      letters.forEach(function(el){el.style.removeProperty("animation")});
+    });
+  }
+
+  function armHome(){
+    lockHomeGeometry(false);
+    requestAnimationFrame(function(){
+      requestAnimationFrame(restartHomeMotion);
+    });
+  }
+
   function init(){
     shell=q(".shell");
     installLateLayout();
+    lockHomeGeometry(true);
     if(shell){
       try{shell.scrollTo({top:0,left:0,behavior:"auto"})}catch(_){shell.scrollTop=0}
     }
@@ -406,9 +471,19 @@
 
     window.addEventListener("pageshow",function(){
       installLateLayout();
+      lockHomeGeometry(false);
       var active=activeTab();
       if(!surfaceIds().length&&active)resetMainTop();
+      if(active==="today")armHome();
     });
+    window.addEventListener("orientationchange",function(){
+      setTimeout(function(){lockHomeGeometry(true);if(activeTab()==="today")armHome()},180);
+    });
+    document.addEventListener("visibilitychange",function(){
+      if(document.visibilityState==="visible"&&activeTab()==="today")armHome();
+    });
+    armHome();
+    setTimeout(function(){if(activeTab()==="today")armHome()},320);
   }
 
   window.DARKidsNavigation={
