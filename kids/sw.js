@@ -1,6 +1,7 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1221-dua-compact";
-const KIDS_BUILD_ID="kids-shell-v125-dua-compact1221";
+const CACHE_NAME="dar-al-tawhid-kids-v1222";
+const KIDS_BUILD_ID="kids-shell-v126-home-brand1222";
 const CORE_PRECACHE=[
+  "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1222",
   "/kids/start",
   "/kids/start.html",
   "/kids/manifest.webmanifest",
