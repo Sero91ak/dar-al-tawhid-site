@@ -5,6 +5,14 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/verify-all-live-kids-dua-audio.yml'
+      - 'kids/data/dua-audio.json'
+      - 'kids/data/dua-arabic-audio.json'
+      - 'kids/data/dua-arabic-slow-audio.json'
+      - 'kids/data/dua-word-audio.json'
+      - 'kids/assets/kids-dua-audio/**'
+      - 'kids/assets/kids-dua-arabic-audio/**'
+      - 'kids/assets/kids-dua-arabic-slow-audio/**'
+      - 'kids/assets/kids-dua-word-audio/**'
   workflow_dispatch:
 
 permissions:
@@ -48,6 +56,11 @@ jobs:
               "word":fetch_json("/kids/data/dua-word-audio.json"),
           }
           expected={"german":122,"arabic":120,"slow":120,"word":696}
+          expected_revision={
+              "arabic":"dua-arabic-native-fusha-v3-20261007",
+              "slow":"dua-arabic-native-fusha-slow-v3-20261007",
+              "word":"dua-arabic-native-fusha-word-v3-20261007",
+          }
           urls=[]
           for label,data in packs.items():
               entries=data.get("entries") or {}
@@ -57,8 +70,13 @@ jobs:
                   raise RuntimeError(f"{label}: wrong model {data.get('modelId')}")
               if data.get("voiceProfileId")!="serhat-owner-voice-2026":
                   raise RuntimeError(f"{label}: wrong voice profile")
-              if label in {"arabic","slow","word"} and data.get("pronunciationDictionaryApplied") is not False:
-                  raise RuntimeError(f"{label}: transliteration dictionary unexpectedly applied")
+              if label in {"arabic","slow","word"}:
+                  if data.get("pronunciationDictionaryApplied") is not False:
+                      raise RuntimeError(f"{label}: transliteration dictionary unexpectedly applied")
+                  if data.get("arabicSynthesisRevision")!=expected_revision[label]:
+                      raise RuntimeError(
+                          f"{label}: expected revision {expected_revision[label]}, got {data.get('arabicSynthesisRevision')}"
+                      )
               for key,entry in entries.items():
                   url=str(entry.get("url") or "").strip()
                   if not url:
