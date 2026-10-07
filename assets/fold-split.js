@@ -57,7 +57,7 @@
     var sideReserve = 0;
     try {
       var pref = String(global.localStorage.getItem("darNavPositionV2") || "bottom");
-      if ((pref === "left" || pref === "right") && w >= 760 && h >= 360) sideReserve = 72;
+      if ((pref === "left" || pref === "right") && w >= 760 && h >= 360) sideReserve = 76;
     } catch (e2) {}
     var outer = Math.round(Math.max(24, Math.min(48, w * 0.04)));
     var usable = Math.max(0, w - sideReserve - outer);
