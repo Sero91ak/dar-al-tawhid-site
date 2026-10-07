@@ -122,7 +122,11 @@ jobs:
           ELEVEN_MODEL=str(PROD_CFG.get("modelId") or "").strip()
           ELEVEN_DUA_MODEL=ELEVEN_MODEL
           ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word"}
-          ARABIC_SYNTHESIS_REVISION="dua-arabic-native-fusha-v2-20261007"
+          profile_revision(text_profile)S={
+              "dua_arabic":"dua-arabic-native-fusha-v2-20261007",
+              "dua_arabic_slow":"dua-arabic-native-fusha-slow-v3-20261007",
+              "dua_word":"dua-arabic-native-fusha-word-v3-20261007"
+          }
           DICT_CFG=PROD_CFG.get("pronunciationDictionary") or {}
           DICT_ID=str(DICT_CFG.get("id") or "").strip()
           DICT_VERSION=str(DICT_CFG.get("versionId") or "").strip()
@@ -151,11 +155,17 @@ jobs:
                   # Qurʾānic pause signs are visual recitation annotations, not spoken tokens.
                   value=re.sub(r"[\u06D6-\u06DC]","",value)
                   value=re.sub(r"\s+"," ",value).strip()
+                  # Eleven v4 follows delivery tags more reliably than a numeric speed field.
+                  # Keep the visible/key text untouched; this is hidden synthesis text only.
+                  if profile=="dua_arabic_slow":
+                      value="[slowly] "+value
+                  elif profile=="dua_word":
+                      value="[slowly] "+value.rstrip(".")+"."
                   return value
               return prepare_kids_voice_text(value)
 
           def profile_revision(profile):
-              return ARABIC_SYNTHESIS_REVISION if profile in ARABIC_PROFILES else SYNTHESIS_REVISION
+              return profile_revision(text_profile)S.get(profile,SYNTHESIS_REVISION)
 
           def quiz_prompt(q):
               question=norm(q.get("question"))
@@ -261,24 +271,18 @@ jobs:
                           voice_settings={
                               "stability":0.72,
                               "similarity_boost":0.92,
-                              "style":0.04,
-                              "speed":0.90,
                               "use_speaker_boost":True
                           }
                       elif profile=="dua_arabic_slow":
                           voice_settings={
                               "stability":0.76,
                               "similarity_boost":0.92,
-                              "style":0.02,
-                              "speed":0.74,
                               "use_speaker_boost":True
                           }
                       elif profile=="dua_word":
                           voice_settings={
                               "stability":0.80,
                               "similarity_boost":0.93,
-                              "style":0.01,
-                              "speed":0.80,
                               "use_speaker_boost":True
                           }
                       else:
@@ -470,7 +474,7 @@ jobs:
                       "durationSeconds":round(float(d),3),
                       "preparedTextSha256":prepared_hashes[text],
                       "synthesisRevision":profile_revision(text_profile),
-                      "arabicSynthesisRevision":(ARABIC_SYNTHESIS_REVISION if is_arabic else None),
+                      "arabicSynthesisRevision":(profile_revision(text_profile) if is_arabic else None),
                       "arabicTextNormalization":("NFC" if is_arabic else None),
                       "modelId":model_id,
                       "speechProfile":text_profile,
@@ -492,13 +496,14 @@ jobs:
                       stale.unlink(missing_ok=True)
 
               manifest_is_arabic=profile in ARABIC_PROFILES
+              manifest_revision=profile_revision(profile)
               manifest={
                   "schemaVersion":2,
                   "id":pack_id,
                   "buildId":build_id,
                   "updatedAt":now,
-                  "synthesisRevision":(ARABIC_SYNTHESIS_REVISION if manifest_is_arabic else SYNTHESIS_REVISION),
-                  "arabicSynthesisRevision":(ARABIC_SYNTHESIS_REVISION if manifest_is_arabic else None),
+                  "synthesisRevision":(manifest_revision if manifest_is_arabic else SYNTHESIS_REVISION),
+                  "arabicSynthesisRevision":(manifest_revision if manifest_is_arabic else None),
                   "voiceProfileId":"serhat-owner-voice-2026",
                   "speaker":"Serhat Abu Malik",
                   "speechPreparation":("native-vocalized-arabic-nfc-no-dictionary" if manifest_is_arabic else "explicit-german-numbers-and-quran-references"),
