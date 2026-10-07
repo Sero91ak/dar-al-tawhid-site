@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1235";
-const KIDS_BUILD_ID="kids-shell-v138-profile-avatar1235";
+const CACHE_NAME="dar-al-tawhid-kids-v1236";
+const KIDS_BUILD_ID="kids-shell-v139-home-stability1236";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
@@ -119,7 +119,7 @@ const CORE_PRECACHE=[
   "/kids/assets/dua-3d/home.svg?v=1221",
   "/kids/assets/dua-3d/mosque.svg?v=1221",
   "/kids/assets/dua-3d/shield.svg?v=1221",
-  "/kids/navigation-v1182.js?v=1183",
+  "/kids/navigation-v1182.js?v=1236",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
   "/kids/kids-touch-rail.css?v=12",
