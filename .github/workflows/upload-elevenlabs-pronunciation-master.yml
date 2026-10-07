@@ -20,22 +20,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
-      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       MASTER_FILE: data/pronunciation/DAR_AL_TAWHID_ElevenLabs_ARABIC_MASTER_29122.pls
-      UPLOAD_ENDPOINT: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/pronunciation-master/upload
+      DICTIONARY_NAME: DAR AL TAWHID Arabic Master 2.9.122
 
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
 
-      - name: Verify secure upload bridge secret
+      - name: Verify ElevenLabs API secret
         shell: bash
         run: |
           set -euo pipefail
-          if [ -z "${ADMIN_PUBLISH_SECRET:-}" ]; then
-            echo "::error::ADMIN_PUBLISH_SECRET ist im Repository nicht konfiguriert."
+          if [ -z "${ELEVENLABS_API_KEY:-}" ]; then
+            echo "::error::ELEVENLABS_API_KEY ist im Repository nicht konfiguriert."
             exit 1
           fi
+          echo "ElevenLabs API secret ist vorhanden."
 
       - name: Validate PLS master
         shell: bash
@@ -69,16 +70,19 @@ jobs:
           print(f"PLS OK: {len(lexemes)} eindeutige Alias-Regeln")
           PY
 
-      - name: Upload through DĀR secure ElevenLabs bridge
+      - name: Upload master directly to ElevenLabs
         shell: bash
         run: |
           set -euo pipefail
           http_code="$(
             curl -sS -o /tmp/elevenlabs-pronunciation-result.json -w '%{http_code}' \
-              -X POST "$UPLOAD_ENDPOINT" \
-              -H "X-Admin-Secret: $ADMIN_PUBLISH_SECRET" \
-              -H "Accept: application/json"
+              -X POST 'https://api.elevenlabs.io/v1/pronunciation-dictionaries/add-from-file' \
+              -H "xi-api-key: $ELEVENLABS_API_KEY" \
+              -F "file=@$MASTER_FILE;type=application/pls+xml" \
+              -F "name=$DICTIONARY_NAME" \
+              -F "description=DAR AL TAWHID Arabic-heavy pronunciation master 2.9.122; 10099 unique alias rules; existing curated rules preserved."
           )"
+
           echo "HTTP $http_code"
           cat /tmp/elevenlabs-pronunciation-result.json
 
@@ -89,22 +93,22 @@ jobs:
           python3 - <<'PY'
           import json
           from pathlib import Path
+
           data = json.loads(Path("/tmp/elevenlabs-pronunciation-result.json").read_text())
-          if not data.get("ok"):
-              raise SystemExit(data.get("error") or "Upload nicht bestätigt")
           clean = {
               "id": data.get("id"),
               "name": data.get("name"),
               "version_id": data.get("version_id"),
               "version_rules_num": data.get("version_rules_num"),
               "description": data.get("description"),
-              "sourceLexemes": data.get("sourceLexemes"),
           }
+          if not clean["id"] or not clean["version_id"]:
+              raise SystemExit("ElevenLabs hat keine Dictionary-/Version-ID zurückgegeben.")
           Path("elevenlabs-pronunciation-upload-result.json").write_text(
               json.dumps(clean, ensure_ascii=False, indent=2) + "\n"
           )
-          print("ELEVENLABS_DICTIONARY_ID=" + str(clean.get("id") or ""))
-          print("ELEVENLABS_VERSION_ID=" + str(clean.get("version_id") or ""))
+          print("ELEVENLABS_DICTIONARY_ID=" + str(clean["id"]))
+          print("ELEVENLABS_VERSION_ID=" + str(clean["version_id"]))
           print("ELEVENLABS_RULES=" + str(clean.get("version_rules_num") or ""))
           PY
 
