@@ -114,6 +114,12 @@
    * Dual is enabled only when the real remaining reader pane stays readable
    * after optional side-tab rail + master rail + spacing.
    */
+  function isPhoneLandscapeViewport(width, height) {
+    var w = Math.max(0, Number(width) || 0);
+    var h = Math.max(0, Number(height) || 0);
+    return w > h && h < EXPANDED_MIN_HEIGHT;
+  }
+
   function isDualViewport(width, height) {
     return !!computeLayoutCapacity(width, height).dual;
   }
@@ -231,8 +237,11 @@
     var root = document.documentElement;
     var landscape = metrics.width >= metrics.height;
     var dual = isDualViewport(metrics.width, metrics.height);
+    var phoneLandscape = isPhoneLandscapeViewport(metrics.width, metrics.height);
     root.setAttribute("data-orientation", landscape ? "landscape" : "portrait");
+    root.setAttribute("data-layout-surface", phoneLandscape ? "phone-landscape" : (dual ? "workspace" : "single"));
     root.classList.toggle("is-layout-landscape", landscape);
+    root.classList.toggle("is-phone-landscape", phoneLandscape);
     root.classList.toggle("is-layout-wide", metrics.width >= 600);
     root.classList.toggle("is-fold-dual", dual);
     root.setAttribute("data-fold-dual", dual ? "1" : "0");
@@ -405,6 +414,11 @@
   var api = {
     resolveLayoutMode: resolveLayoutMode,
     isDualViewport: isDualViewport,
+    isPhoneLandscapeViewport: isPhoneLandscapeViewport,
+    isPhoneLandscape: function () {
+      var m = measureViewport();
+      return isPhoneLandscapeViewport(m.width, m.height);
+    },
     getLayoutCapacity: function (width, height) {
       if (arguments.length < 2) {
         var m = measureViewport();
