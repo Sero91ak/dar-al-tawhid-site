@@ -124,9 +124,9 @@ jobs:
           ELEVEN_DUA_MODEL=ELEVEN_MODEL
           ARABIC_PROFILES={"dua_arabic","dua_arabic_slow","dua_word"}
           ARABIC_SYNTHESIS_REVISIONS={
-              "dua_arabic":"dua-arabic-fusha-master-dict-v4-20261007",
-              "dua_arabic_slow":"dua-arabic-fusha-master-dict-slow-v4-20261007",
-              "dua_word":"dua-arabic-fusha-master-dict-word-v4-20261007"
+              "dua_arabic":"dua-arabic-native-fusha-v2-20261007",
+              "dua_arabic_slow":"dua-arabic-native-fusha-slow-v3-20261007",
+              "dua_word":"dua-arabic-native-fusha-word-v3-20261007"
           }
           DICT_CFG=PROD_CFG.get("pronunciationDictionary") or {}
           DICT_ID=str(DICT_CFG.get("id") or "").strip()
@@ -212,7 +212,7 @@ jobs:
           def synth(text,profile,asset_dir,serial,model_id):
               prepared=prepare_profile_text(text,profile)
               revision=profile_revision(profile)
-              dictionary_fingerprint=(DICT_ID+"|"+DICT_VERSION)
+              dictionary_fingerprint=("native-ar-no-dict" if profile in ARABIC_PROFILES else (DICT_ID+"|"+DICT_VERSION))
               digest=hashlib.sha1(
                   (revision+"|"+str(model_id)+"|"+profile+"|"+dictionary_fingerprint+"|"+prepared).encode("utf-8")
               ).hexdigest()[:16]
@@ -303,7 +303,7 @@ jobs:
                       }
                       if is_arabic_profile:
                           payload["language_code"]="ar"
-                      if DICT_ID and DICT_VERSION:
+                      if DICT_ID and DICT_VERSION and not is_arabic_profile:
                           payload["pronunciation_dictionary_locators"]=[{
                               "pronunciation_dictionary_id":DICT_ID,
                               "version_id":DICT_VERSION
@@ -429,11 +429,7 @@ jobs:
                   if text_profile in ARABIC_PROFILES:
                       if str(entry.get("preparedTextSha256") or "")!=prepared_hash:
                           p=None
-                      if entry.get("pronunciationDictionaryApplied") is not True:
-                          p=None
-                      if str(entry.get("pronunciationDictionaryId") or "")!=DICT_ID:
-                          p=None
-                      if str(entry.get("pronunciationDictionaryVersionId") or "")!=DICT_VERSION:
+                      if entry.get("pronunciationDictionaryApplied") is not False:
                           p=None
                   if p is None:
                       continue
@@ -485,10 +481,10 @@ jobs:
                       "sourceType":"owner-voice-generated",
                       "sourceProvider":"DĀR Voice Studio",
                       "sourceSpeaker":"Serhat Abu Malik",
-                      "pronunciationDictionaryApplied":True,
-                      "pronunciationDictionaryId":DICT_ID,
-                      "pronunciationDictionaryVersionId":DICT_VERSION,
-                      "pronunciationDictionaryRuleCount":DICT_RULES,
+                      "pronunciationDictionaryApplied":(not is_arabic),
+                      "pronunciationDictionaryId":(None if is_arabic else DICT_ID),
+                      "pronunciationDictionaryVersionId":(None if is_arabic else DICT_VERSION),
+                      "pronunciationDictionaryRuleCount":(0 if is_arabic else DICT_RULES),
                       "qaBy":"automatic-owner-voice-batch-qa",
                       "qaAt":now
                   }
@@ -508,15 +504,15 @@ jobs:
                   "arabicSynthesisRevision":(manifest_revision if manifest_is_arabic else None),
                   "voiceProfileId":"serhat-owner-voice-2026",
                   "speaker":"Serhat Abu Malik",
-                  "speechPreparation":("vocalized-arabic-nfc-master-dictionary-v4" if manifest_is_arabic else "explicit-german-numbers-and-quran-references"),
+                  "speechPreparation":("native-vocalized-arabic-nfc-no-dictionary-v4" if manifest_is_arabic else "explicit-german-numbers-and-quran-references"),
                   "manualPerClipApprovalRequired":False,
                   "technicalQaRequired":True,
                   "systemTtsFallbackAllowed":False,
                   "modelId":model_id,
-                  "pronunciationDictionaryApplied":True,
-                  "pronunciationDictionaryId":DICT_ID,
-                  "pronunciationDictionaryVersionId":DICT_VERSION,
-                  "pronunciationDictionaryRuleCount":DICT_RULES,
+                  "pronunciationDictionaryApplied":(not manifest_is_arabic),
+                  "pronunciationDictionaryId":(None if manifest_is_arabic else DICT_ID),
+                  "pronunciationDictionaryVersionId":(None if manifest_is_arabic else DICT_VERSION),
+                  "pronunciationDictionaryRuleCount":(0 if manifest_is_arabic else DICT_RULES),
                   "entries":entries,
                   "counts":{**counts,"uniqueSpokenTexts":len(entries)}
               }
