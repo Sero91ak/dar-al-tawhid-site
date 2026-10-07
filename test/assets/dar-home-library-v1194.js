@@ -75,6 +75,8 @@ function applyHomeAtmosphereV1204(){
   var html=document.documentElement;
   var theme=String(html.getAttribute("data-theme")||"").toLowerCase();
   var light=(theme==="light"||theme==="soft"||theme==="eisgold");
+  var mobile=!!(window.matchMedia&&window.matchMedia("(max-width:759px)").matches);
+  var singleCanvas=light&&mobile;
   var body=document.body;
   var top=document.querySelector(".top-shell");
   var header=top&&top.querySelector(".header");
@@ -83,7 +85,47 @@ function applyHomeAtmosphereV1204(){
   var heroImg=window.matchMedia&&window.matchMedia("(min-width:760px)").matches
     ? "/test/assets/home-v1194/hero-wide-adobe.jpg?v=1239-home"
     : "/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1239-home";
-  var studyImg="/test/assets/home-v1194/study-runway.jpg?v=1239-home";
+
+  html.classList.toggle("dar-home-single-canvas-v1324",singleCanvas);
+
+  if(singleCanvas){
+    if(html){
+      html.style.setProperty("background-color",page,"important");
+      html.style.setProperty("background-image","none","important");
+      html.style.setProperty("background-repeat","no-repeat","important");
+    }
+    if(body){
+      body.style.setProperty("background-color",page,"important");
+      body.style.setProperty("background-image","url('/test/assets/home-v1194/home-mobile-canvas-v1324.svg?v=1324-home')","important");
+      body.style.setProperty("background-repeat","no-repeat","important");
+      body.style.setProperty("background-size","100% auto","important");
+      body.style.setProperty("background-position","center top","important");
+      body.style.setProperty("background-attachment","scroll","important");
+    }
+    [top,header,view].forEach(function(el){
+      if(!el)return;
+      el.style.setProperty("background","transparent","important");
+      el.style.setProperty("background-color","transparent","important");
+      el.style.setProperty("background-image","none","important");
+      el.style.removeProperty("background-repeat");
+      el.style.removeProperty("background-size");
+      el.style.removeProperty("background-position");
+      el.style.removeProperty("background-attachment");
+    });
+    document.querySelectorAll("#appView .home-v380-shell,#appView .home-v380-section,#appView .home-line-list,#appView .home-line-grid,.top-shell .header").forEach(function(el){
+      el.style.setProperty("background-color","transparent","important");
+      el.style.setProperty("background-image","none","important");
+    });
+    return;
+  }
+
+  if(body){
+    body.style.removeProperty("background-repeat");
+    body.style.removeProperty("background-size");
+    body.style.removeProperty("background-position");
+    body.style.removeProperty("background-attachment");
+  }
+
   if(html){
     html.style.setProperty("background-color",page,"important");
     html.style.setProperty(
@@ -648,7 +690,7 @@ function cleanupHomeLiteralArtifacts(){
 function sync(){
   if(!document.documentElement||!document.body)return;
   if(!isHome()){
-    document.documentElement.classList.remove("dar-home-v1194");
+    document.documentElement.classList.remove("dar-home-v1194","dar-home-single-canvas-v1324");
     document.documentElement.style.removeProperty("background-color");
     document.documentElement.style.removeProperty("background-image");
     document.documentElement.style.removeProperty("background-repeat");
