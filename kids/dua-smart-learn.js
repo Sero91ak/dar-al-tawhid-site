@@ -1,5 +1,5 @@
 (function(){
-  /* DUA_AUDIO_RELEASE_1244_FINAL */
+  /* DUA_AUDIO_RELEASE_1244_FINAL_SYNCED */
   "use strict";
 
   var GERMAN_URL="/kids/data/dua-audio.json?v=8";
