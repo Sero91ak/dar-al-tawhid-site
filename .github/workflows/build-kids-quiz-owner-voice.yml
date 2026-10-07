@@ -5,7 +5,6 @@ on:
   push:
     branches: [main]
     paths:
-      - 'kids/data/quiz-kids.json'
       - 'kids/data/dua-kids.json'
       - 'kids/tools/voice_text.py'
 
@@ -101,7 +100,7 @@ jobs:
           SECRET=os.environ.get("ADMIN_PUBLISH_SECRET","").strip()
           ELEVEN_KEY=os.environ.get("ELEVENLABS_API_KEY","").strip()
           ELEVEN_VOICE=(os.environ.get("ELEVENLABS_VOICE_ID","").strip() or "DkU7j9uO4ZEtLD2iRZSH")
-          ELEVEN_MODEL="eleven_multilingual_v2"
+          ELEVEN_MODEL="eleven_v4"
           ELEVEN_DUA_MODEL="eleven_v4"
           DICT_ID=os.environ.get("ELEVENLABS_PRONUNCIATION_DICTIONARY_ID","").strip()
           DICT_VERSION=os.environ.get("ELEVENLABS_PRONUNCIATION_DICTIONARY_VERSION_ID","").strip()
@@ -363,10 +362,10 @@ jobs:
               and q.get("reviewStatus")=="approved"
               and q.get("verification")=="approved"
           ]
-          if len(quiz_items)!=650:
-              raise SystemExit(f"Erwartet 650 freigegebene Kids-Fragen, gefunden: {len(quiz_items)}")
+          if len(quiz_items)!=900:
+              raise SystemExit(f"Erwartet 900 freigegebene Kids-Fragen, gefunden: {len(quiz_items)}")
           prompts=[quiz_prompt(q) for q in quiz_items]
-          if len(set(prompts))!=650:
+          if len(set(prompts))!=900:
               raise SystemExit("Quiz-Sprachprompts sind nicht eindeutig.")
           quiz_texts=[]
           for q in quiz_items:
@@ -378,11 +377,13 @@ jobs:
               manifest_path=QUIZ_MANIFEST,
               asset_dir=QUIZ_ASSETS,
               profile="quiz",
-              pack_id="KIDS_QUIZ_OWNER_VOICE_V2",
-              counts={"quizQuestions":len(quiz_items),"questionPrompts":len(set(prompts))}
+              pack_id="KIDS_QUIZ_OWNER_VOICE_V4",
+              counts={"quizQuestions":len(quiz_items),"questionPrompts":len(set(prompts))},
+              model_id=ELEVEN_MODEL,
+              require_model_match=True
           )
-          if quiz_manifest["counts"]["quizQuestions"]!=650 or quiz_manifest["counts"]["questionPrompts"]!=650:
-              raise SystemExit("650er Quiz-Voice-Pack unvollständig.")
+          if quiz_manifest["counts"]["quizQuestions"]!=900 or quiz_manifest["counts"]["questionPrompts"]!=900:
+              raise SystemExit("900er Quiz-Voice-Pack unvollständig.")
 
           dua=json.loads(DUA.read_text(encoding="utf-8"))
           dua_items=[
