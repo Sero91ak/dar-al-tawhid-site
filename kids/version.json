@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v114-dua-learning1207",
-  "label": "KIDS · V1.08.34",
-  "releasedAt": "2026-10-07T07:22:00+02:00",
-  "note": "V1207 baut den Duʿāʾ-Bereich als echten Lernmodus aus: exakt 20 geprüfte Duʿāʾ, quellgebundener arabischer Wortlaut und Lautschrift, getrennte Buttons für Arabisch hören, langsam hören, Nachsprechen und deutsche Erklärung. Für 9 Sunnah-Duʿāʾ liegen permanente ElevenLabs-v4-Audios mit der Serhat-Masterstimme vor; 11 Qurʾān-Duʿāʾ bleiben ausschließlich bei menschlicher Qurʾān-Rezitation. Der Schlaf-Duʿāʾ ist fest an Ṣaḥīḥ al-Buḫārī 7394 gebunden, damit keine Überlieferungsvarianten vermischt werden.",
+  "buildId": "kids-shell-v115-dua-learning1210",
+  "label": "KIDS · V1.08.35",
+  "releasedAt": "2026-10-07T07:36:00+02:00",
+  "note": "V1210 schließt den Duʿāʾ-Lernbereich vollständig ab: exakt 20 geprüfte Duʿāʾ mit korrigiertem arabischem Wortlaut und Lautschrift, kompakter Zwei-Schritt-Lernansicht, getrenntem Arabisch-Hören, langsamem Üben, Nachsprechen und deutscher Erklärung. Alle 20 deutschen Lern-Audios wurden mit ElevenLabs v4 und der Serhat-Masterstimme neu passend zum aktuellen Text erzeugt. Für alle 12 Sunnah-Duʿāʾ liegen wortgebundene arabische ElevenLabs-v4-Audios vor. Die 8 Qurʾān-Duʿāʾ verwenden ausschließlich echte Qurʾān-Rezitation und niemals synthetische Rezitation. Quellen und Audio-Wortlaut sind an den sichtbaren Eintrag gebunden.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1207",
+    "serviceWorkerCache": "v1210",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -956,7 +956,17 @@
     "duaArabicAudioManifestVersion": 1,
     "duaSlowPlayback": true,
     "duaRepeatMode": true,
-    "duaAutoGermanPlayback": false
+    "duaAutoGermanPlayback": false,
+    "duaLearning": "compact-two-step-v1210",
+    "duaItems": 20,
+    "duaSunnahItems": 12,
+    "duaQuranItems": 8,
+    "duaGermanVoice": "eleven-v4-serhat-master",
+    "duaSunnahArabicVoice": "eleven-v4-serhat-master",
+    "duaQuranArabicVoice": "human-quran-recitation-only",
+    "duaSlowPractice": true,
+    "duaTransliterationCorrected": true,
+    "duaSourceLocked": true
   },
   "updatedAt": "2026-10-07",
   "deployTrigger": "2026-10-07T07:22:00+02:00"
