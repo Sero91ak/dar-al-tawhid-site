@@ -54,6 +54,8 @@
   var VERWANDT_SLUG = "verwandtschaft-nachbarschaft-gastrecht";
   var TAWHID_URL = "/data/frauen-tawhid-iman-ibadah.json";
   var TAWHID_SLUG = "tawhid-iman-ibadah";
+  var VERMOEGEN_URL = "/data/frauen-vermoegen-besitz-erbrecht.json";
+  var VERMOEGEN_SLUG = "vermoegen-besitz-erbrecht";
   var GERECHT_URL = "/data/frauen-gerechtigkeit-guter-umgang-schutz.json";
   var GERECHT_SLUG = "gerechtigkeit-guter-umgang-schutz";
   var DHIKR_URL = "/data/frauen-dhikr-dua-ibadah.json";
@@ -702,6 +704,17 @@
     "sahabah-athar": "Ṣaḥābah & Āthār",
     "in-pruefung": "In Prüfung"
   };
+  var VERMOEGEN_THEMEN = [
+    { id: "alle", label: "Alle" },
+    { id: "erbrecht", label: "Erbrecht" },
+    { id: "mahr", label: "Mahr" },
+    { id: "besitz", label: "Besitz & Ṣadaqah" }
+  ];
+  var VERMOEGEN_BEREICH_LABEL = {
+    erbrecht: "Erbrecht",
+    mahr: "Mahr",
+    besitz: "Besitz & Ṣadaqah"
+  };
   var GERECHT_THEMEN = [
     { id: "alle", label: "Alle" },
     { id: "maaruf", label: "Maʿrūf" },
@@ -1225,6 +1238,7 @@
   var privatCache = null;
   var verwandtCache = null;
   var tawhidCache = null;
+  var vermoegenCache = null;
   var gerechtCache = null;
   var dhikrCache = null;
   var geprueftCache = null;
@@ -1275,6 +1289,7 @@
   var privatQ = "";
   var verwandtQ = "";
   var tawhidQ = "";
+  var vermoegenQ = "";
   var gerechtQ = "";
   var dhikrQ = "";
   var geprueftQ = "";
@@ -1324,6 +1339,7 @@
   var privatThema = "alle";
   var verwandtThema = "alle";
   var tawhidThema = "alle";
+  var vermoegenThema = "alle";
   var gerechtThema = "alle";
   var dhikrThema = "alle";
   var geprueftThema = "alle";
@@ -1380,6 +1396,7 @@
       abschnitt === PRIVAT_SLUG ||
       abschnitt === VERWANDT_SLUG ||
       abschnitt === TAWHID_SLUG ||
+      abschnitt === VERMOEGEN_SLUG ||
       abschnitt === GERECHT_SLUG ||
       abschnitt === DHIKR_SLUG ||
       abschnitt === GEPRUEFT_SLUG ||
@@ -1493,7 +1510,7 @@
   }
 
   function load() {
-    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache && muslimahCache && nifasCache && dienstCache && iddahCache && reinigungCache && nikahCache && zinahCache && umgangCache && reiseCache && krankheitCache && privatCache && verwandtCache && tawhidCache && gerechtCache && dhikrCache && geprueftCache && todCache && arbeitCache && medienCache && ruqyahCache && trauerCache && maedchenCache && bidahqCache && reueCache && janaizCache && tawbahCache && toechterCache && janazahCache && ramadanCache && qiyamCache && reueschutzCache && muhasabaCache && itikafCache && dawahCache)
+    if (fiqhCache && sahabCache && tabiiCache && muetterCache && eheCache && hijabCache && wissenCache && faqCache && kurzCache && salafCache && moscheeCache && hajjCache && sadaqahCache && adabCache && kinderCache && muslimahCache && nifasCache && dienstCache && iddahCache && reinigungCache && nikahCache && zinahCache && umgangCache && reiseCache && krankheitCache && privatCache && verwandtCache && tawhidCache && vermoegenCache && gerechtCache && dhikrCache && geprueftCache && todCache && arbeitCache && medienCache && ruqyahCache && trauerCache && maedchenCache && bidahqCache && reueCache && janaizCache && tawbahCache && toechterCache && janazahCache && ramadanCache && qiyamCache && reueschutzCache && muhasabaCache && itikafCache && dawahCache)
       return Promise.resolve();
     if (loadPromise) return loadPromise;
     loadPromise = Promise.all([
@@ -1545,7 +1562,8 @@
       fetchJson(REUESCHUTZ_URL),
       fetchJson(MUHASABA_URL),
       fetchJson(ITIKAF_URL),
-      fetchJson(DAWAH_URL)
+      fetchJson(DAWAH_URL),
+      fetchJson(VERMOEGEN_URL)
     ])
       .then(function (pair) {
         fiqhCache = pair[0];
@@ -1597,6 +1615,7 @@
         muhasabaCache = pair[46];
         itikafCache = pair[47];
         dawahCache = pair[48];
+        vermoegenCache = pair[49];
       })
       .catch(function (err) {
         loadPromise = null;
@@ -1719,6 +1738,10 @@
     if (v.indexOf(TAWHID_SLUG + "/") === 0) {
       return { page: "detail", abschnitt: TAWHID_SLUG, kennung: v.slice(TAWHID_SLUG.length + 1) };
     }
+    if (v === VERMOEGEN_SLUG) return { page: "list", abschnitt: VERMOEGEN_SLUG, kennung: "" };
+    if (v.indexOf(VERMOEGEN_SLUG + "/") === 0) {
+      return { page: "detail", abschnitt: VERMOEGEN_SLUG, kennung: v.slice(VERMOEGEN_SLUG.length + 1) };
+    }
     if (v === GERECHT_SLUG) return { page: "list", abschnitt: GERECHT_SLUG, kennung: "" };
     if (v.indexOf(GERECHT_SLUG + "/") === 0) {
       return { page: "detail", abschnitt: GERECHT_SLUG, kennung: v.slice(GERECHT_SLUG.length + 1) };
@@ -1834,6 +1857,7 @@
     if (abschnitt === PRIVAT_SLUG) return privatCache;
     if (abschnitt === VERWANDT_SLUG) return verwandtCache;
     if (abschnitt === TAWHID_SLUG) return tawhidCache;
+    if (abschnitt === VERMOEGEN_SLUG) return vermoegenCache;
     if (abschnitt === GERECHT_SLUG) return gerechtCache;
     if (abschnitt === DHIKR_SLUG) return dhikrCache;
     if (abschnitt === GEPRUEFT_SLUG) return geprueftCache;
@@ -1887,6 +1911,7 @@
     if (abschnitt === PRIVAT_SLUG) return privatThema;
     if (abschnitt === VERWANDT_SLUG) return verwandtThema;
     if (abschnitt === TAWHID_SLUG) return tawhidThema;
+    if (abschnitt === VERMOEGEN_SLUG) return vermoegenThema;
     if (abschnitt === GERECHT_SLUG) return gerechtThema;
     if (abschnitt === DHIKR_SLUG) return dhikrThema;
     if (abschnitt === GEPRUEFT_SLUG) return geprueftThema;
@@ -1940,6 +1965,7 @@
     else if (abschnitt === PRIVAT_SLUG) privatThema = id;
     else if (abschnitt === VERWANDT_SLUG) verwandtThema = id;
     else if (abschnitt === TAWHID_SLUG) tawhidThema = id;
+    else if (abschnitt === VERMOEGEN_SLUG) vermoegenThema = id;
     else if (abschnitt === GERECHT_SLUG) gerechtThema = id;
     else if (abschnitt === DHIKR_SLUG) dhikrThema = id;
     else if (abschnitt === GEPRUEFT_SLUG) geprueftThema = id;
@@ -1993,6 +2019,7 @@
     if (abschnitt === PRIVAT_SLUG) return privatQ;
     if (abschnitt === VERWANDT_SLUG) return verwandtQ;
     if (abschnitt === TAWHID_SLUG) return tawhidQ;
+    if (abschnitt === VERMOEGEN_SLUG) return vermoegenQ;
     if (abschnitt === GERECHT_SLUG) return gerechtQ;
     if (abschnitt === DHIKR_SLUG) return dhikrQ;
     if (abschnitt === GEPRUEFT_SLUG) return geprueftQ;
@@ -2046,6 +2073,7 @@
     else if (abschnitt === PRIVAT_SLUG) privatQ = v;
     else if (abschnitt === VERWANDT_SLUG) verwandtQ = v;
     else if (abschnitt === TAWHID_SLUG) tawhidQ = v;
+    else if (abschnitt === VERMOEGEN_SLUG) vermoegenQ = v;
     else if (abschnitt === GERECHT_SLUG) gerechtQ = v;
     else if (abschnitt === DHIKR_SLUG) dhikrQ = v;
     else if (abschnitt === GEPRUEFT_SLUG) geprueftQ = v;
@@ -2334,7 +2362,8 @@
       { nr: "46", title: "Reue, Istighfār & Schutz vor Sünden", id: REUESCHUTZ_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Tawbah, Istighfār, Hoffnung, Furcht und Rückkehr zu Allah." },
       { nr: "47", title: "Tawbah, Istighfār & Selbstprüfung", id: MUHASABA_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Reue, Rückkehr zu Allah, Istighfār und ehrlicher Selbstprüfung." },
       { nr: "48", title: "Ramaḍān, Fasten & Iʿtikāf", id: ITIKAF_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Pflichtfasten, Nachholen, Qiyām, Laylat al-Qadr und Iʿtikāf." },
-      { nr: "49", title: "Lehren, Weitergeben & Daʿwah-Grenzen", id: DAWAH_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Wissen, Weitergabe, Qurʾān-Lehre und Grenzen der Daʿwah." }
+      { nr: "49", title: "Lehren, Weitergeben & Daʿwah-Grenzen", id: DAWAH_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Wissen, Weitergabe, Qurʾān-Lehre und Grenzen der Daʿwah." },
+      { nr: "50", title: "Vermögen, Besitz & Erbrecht", id: VERMOEGEN_SLUG, mark: "scale", lede: "Geprüfte Grundlagen zu Erbe, Mahr, Besitz und eigener Ṣadaqah." }
     ];
   }
 
@@ -2360,7 +2389,7 @@
       kicker: "Pflichtwissen · Alltag",
       desc: "Reinigung, Gebet, Fasten, Kleidung, Nikāḥ, ʿIddah, Ḥajj und häufige Fragen.",
       icon: "scale.png",
-      areas: ["fiqh", REINIGUNG_SLUG, HIJAB_SLUG, NIKAH_SLUG, IDDAH_SLUG, ZINAH_SLUG, HAJJ_SLUG, RAMADAN_SLUG, QIYAM_SLUG, ITIKAF_SLUG, FAQ_SLUG]
+      areas: ["fiqh", REINIGUNG_SLUG, HIJAB_SLUG, NIKAH_SLUG, VERMOEGEN_SLUG, IDDAH_SLUG, ZINAH_SLUG, HAJJ_SLUG, RAMADAN_SLUG, QIYAM_SLUG, ITIKAF_SLUG, FAQ_SLUG]
     },
     {
       id: "generationen",
@@ -2472,7 +2501,7 @@
     if (/wissen|adab|da.?wah|lernen|lehren|quelle/.test(key)) return map.wissen;
     if (/alltag|schutz|reise|moschee|öffentlich|oeffentlich|medien|ruqyah|krank/.test(key)) return map.alltag;
     if (/schwanger|still|nif|pubert|tod|trauer|janaz|lebensphase/.test(key)) return map.lebensphasen;
-    if (/fiqh|reinigung|gebet|fasten|kleidung|hijab|nikah|iddah|hajj|umrah/.test(key)) return map.fiqh;
+    if (/fiqh|reinigung|gebet|fasten|kleidung|hijab|nikah|iddah|hajj|umrah|vermögen|vermoegen|erbrecht|mahr|besitz/.test(key)) return map.fiqh;
     return map.din;
   }
 
@@ -2905,6 +2934,8 @@
                                         ? VERWANDT_BEREICH_LABEL
                                       : abschnitt === TAWHID_SLUG
                                         ? TAWHID_BEREICH_LABEL
+                                      : abschnitt === VERMOEGEN_SLUG
+                                        ? VERMOEGEN_BEREICH_LABEL
                                       : abschnitt === GERECHT_SLUG
                                         ? GERECHT_BEREICH_LABEL
                                       : abschnitt === DHIKR_SLUG
@@ -3037,6 +3068,8 @@
                                         ? VERWANDT_THEMEN
                                       : abschnitt === TAWHID_SLUG
                                         ? TAWHID_THEMEN
+                                      : abschnitt === VERMOEGEN_SLUG
+                                        ? VERMOEGEN_THEMEN
                                       : abschnitt === GERECHT_SLUG
                                         ? GERECHT_THEMEN
                                       : abschnitt === DHIKR_SLUG
@@ -3382,6 +3415,7 @@
     if (abschnitt === PRIVAT_SLUG) return "Privatsphäre, Erlaubnis & Haus-Adab";
     if (abschnitt === VERWANDT_SLUG) return "Verwandtschaft, Nachbarschaft & Gastrecht";
     if (abschnitt === TAWHID_SLUG) return "Tawḥīd, Īmān & ʿIbādah";
+    if (abschnitt === VERMOEGEN_SLUG) return "Vermögen, Besitz & Erbrecht";
     if (abschnitt === GERECHT_SLUG) return "Gerechtigkeit, guter Umgang & Schutz vor Unrecht";
     if (abschnitt === DHIKR_SLUG) return "Dhikr, Duʿāʾ & tägliche ʿIbādah";
     if (abschnitt === GEPRUEFT_SLUG) return "Geprüftes Wissen, Quellen & Weitergabe";
@@ -3978,7 +4012,7 @@
       "</div></div>" +
       nachweiseDirekt(e) +
       "</div>";
-    var nachBericht = istKurz(abschnitt) || abschnitt === DIENST_SLUG || abschnitt === KRANKHEIT_SLUG || abschnitt === PRIVAT_SLUG || abschnitt === VERWANDT_SLUG || abschnitt === TAWHID_SLUG || abschnitt === GERECHT_SLUG || abschnitt === DHIKR_SLUG || abschnitt === GEPRUEFT_SLUG || abschnitt === TOD_SLUG || abschnitt === ARBEIT_SLUG || abschnitt === MEDIEN_SLUG || abschnitt === RUQYAH_SLUG || abschnitt === TRAUER_SLUG || abschnitt === MAEDCHEN_SLUG || abschnitt === BIDAHQ_SLUG || abschnitt === REUE_SLUG || abschnitt === JANAIZ_SLUG || abschnitt === TAWBAH_SLUG || abschnitt === TOECHTER_SLUG || abschnitt === JANAZAH_SLUG || abschnitt === RAMADAN_SLUG || abschnitt === QIYAM_SLUG || abschnitt === REUESCHUTZ_SLUG || abschnitt === MUHASABA_SLUG || abschnitt === ITIKAF_SLUG || abschnitt === DAWAH_SLUG ? lehreHtml + quelleBlock : quelleBlock + lehreHtml;
+    var nachBericht = istKurz(abschnitt) || abschnitt === DIENST_SLUG || abschnitt === KRANKHEIT_SLUG || abschnitt === PRIVAT_SLUG || abschnitt === VERWANDT_SLUG || abschnitt === TAWHID_SLUG || abschnitt === VERMOEGEN_SLUG || abschnitt === GERECHT_SLUG || abschnitt === DHIKR_SLUG || abschnitt === GEPRUEFT_SLUG || abschnitt === TOD_SLUG || abschnitt === ARBEIT_SLUG || abschnitt === MEDIEN_SLUG || abschnitt === RUQYAH_SLUG || abschnitt === TRAUER_SLUG || abschnitt === MAEDCHEN_SLUG || abschnitt === BIDAHQ_SLUG || abschnitt === REUE_SLUG || abschnitt === JANAIZ_SLUG || abschnitt === TAWBAH_SLUG || abschnitt === TOECHTER_SLUG || abschnitt === JANAZAH_SLUG || abschnitt === RAMADAN_SLUG || abschnitt === QIYAM_SLUG || abschnitt === REUESCHUTZ_SLUG || abschnitt === MUHASABA_SLUG || abschnitt === ITIKAF_SLUG || abschnitt === DAWAH_SLUG ? lehreHtml + quelleBlock : quelleBlock + lehreHtml;
     return (
       '<article class="article post-reader">' +
       '<header class="post-reader-title"><div class="kicker">' +
@@ -4133,6 +4167,12 @@
       return {
         title: "Tawḥīd, Īmān & ʿIbādah",
         subtitle: "Geprüfte Grundlagen aus Qurʾān, Sunnah und später ergänzten Āthār – ohne moderne Rollenbilder."
+      };
+    }
+    if (parsed.abschnitt === VERMOEGEN_SLUG && parsed.page === "list") {
+      return {
+        title: "Vermögen, Besitz & Erbrecht",
+        subtitle: "Geprüfte Grundlagen zu Erbe, Mahr, Besitz und Ṣadaqah – ohne pauschale Erbformeln oder moderne Vermögensberatung."
       };
     }
     if (parsed.abschnitt === GERECHT_SLUG && parsed.page === "list") {
@@ -4356,6 +4396,8 @@
             ? "Verwandtschaft, Nachbarschaft & Gastrecht"
             : parsed.abschnitt === TAWHID_SLUG
             ? "Tawḥīd, Īmān & ʿIbādah"
+            : parsed.abschnitt === VERMOEGEN_SLUG
+            ? "Vermögen, Besitz & Erbrecht"
             : parsed.abschnitt === GERECHT_SLUG
             ? "Gerechtigkeit, guter Umgang & Schutz vor Unrecht"
             : parsed.abschnitt === DHIKR_SLUG
@@ -4461,6 +4503,7 @@
       !privatCache ||
       !verwandtCache ||
       !tawhidCache ||
+      !vermoegenCache ||
       !gerechtCache ||
       !dhikrCache ||
       !geprueftCache ||
