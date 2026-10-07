@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1328",
-  "appBuildId": "app-shell-v1328",
-  "note": "v1328 · Sichtbarer Adaptive-Navigation-Fix: Der Einstellungen-Bereich rendert die Auswahl Links/Unten/Rechts jetzt direkt aus test/index.html statt nur über eine nachgeladene Runtime-Injektion. adaptive-layout, fold-split und fold-thumb-nav sind statisch mit v1328 eingebunden. Auf schmalem Portrait bleibt die Bottom-Leiste bewusst unverändert; die gespeicherte Seitenposition wird sichtbar und greift bei ausreichender Breite bzw. Landscape/Fold/iPad.",
-  "updatedAt": "2026-10-07T22:43:00+02:00"
+  "buildId": "app-shell-v1329",
+  "appBuildId": "app-shell-v1329",
+  "note": "v1329 · Landscape-Korrektur nach iPhone-17-Pro-Max-Test: normales Smartphone quer bleibt Einspalten-App statt Master/Detail. Split benötigt jetzt mindestens 900 px Breite, 560 px nutzbare Höhe und 500 px Readerbreite. Seitliche Tab-Rail ist auf 60 px verschlankt, näher am physischen Rand, 3D-Icons exakt zentriert in 52-px-Touchzonen und der Content reserviert eine eigene freie Rail-Spur. Beim aktiven Scrollen blendet nur die Rail per Opacity ab und kommt nach Scroll-Stopp weich zurück; kein Blur/Resize/Reflow. Vertikale Listen bleiben im kurzen Landscape vertikal. Links/Rechts spiegeln weiterhin die Händigkeit.",
+  "updatedAt": "2026-10-07T22:58:00+02:00"
 }
