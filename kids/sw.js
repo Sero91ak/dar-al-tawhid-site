@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1229";
+const CACHE_NAME="dar-al-tawhid-kids-v1230";
 const KIDS_BUILD_ID="kids-shell-v132-home-transparent-brand1229";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
@@ -181,7 +181,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/quiz-audio.json",
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
-  "/kids/quiz-library.css?v=7",
+  "/kids/quiz-library.css?v=8",
   "/kids/quiz-library.js?v=8",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
