@@ -22,6 +22,8 @@ jobs:
     timeout-minutes: 45
     env:
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      VOICE_API: https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api
+      ADMIN_PUBLISH_SECRET: ${{ secrets.ADMIN_PUBLISH_SECRET }}
 
     steps:
       - name: Checkout main
@@ -34,7 +36,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          [ -n "${ELEVENLABS_API_KEY:-}" ] || { echo "::error::ELEVENLABS_API_KEY missing"; exit 1; }
+          [ -n "${ELEVENLABS_API_KEY:-}" ] || [ -n "${ADMIN_PUBLISH_SECRET:-}" ] || { echo "::error::No alignment provider configured"; exit 1; }
 
           python3 - <<'PY'
           from __future__ import annotations
@@ -45,7 +47,9 @@ jobs:
           DUA=ROOT/"kids/data/dua-kids.json"
           AR_MANIFEST=ROOT/"kids/data/dua-arabic-audio.json"
           OUT=ROOT/"kids/data/dua-learning-timings.json"
-          API_KEY=os.environ["ELEVENLABS_API_KEY"]
+          API_KEY=os.environ.get("ELEVENLABS_API_KEY","").strip()
+          VOICE_API=os.environ.get("VOICE_API","").strip()
+          ADMIN_SECRET=os.environ.get("ADMIN_PUBLISH_SECRET","").strip()
 
           data=json.loads(DUA.read_text(encoding="utf-8"))
           ar_manifest=json.loads(AR_MANIFEST.read_text(encoding="utf-8"))
@@ -71,6 +75,8 @@ jobs:
 
           def post_alignment(audio_path:Path,text:str):
               raw=Path(tempfile.mkstemp(prefix="dua-align-",suffix=".json")[1])
+              if not API_KEY:
+                  raise SystemExit("Direct ElevenLabs key required for exact word-level character timestamps")
               cmd=[
                   "curl","-sS","-o",str(raw),"-w","%{http_code}",
                   "-X","POST","https://api.elevenlabs.io/v1/forced-alignment",
@@ -90,7 +96,6 @@ jobs:
               if nfc(joined)!=nfc(text):
                   raise SystemExit("Forced alignment character stream mismatch")
               return d
-
           def char_span(chars,start,end):
               timed=[x for x in chars[start:end] if x.get("start") is not None and x.get("end") is not None]
               if not timed:
