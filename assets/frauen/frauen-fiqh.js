@@ -2349,7 +2349,6 @@
       { nr: "33", title: "Arbeit, Studium & Öffentlichkeit", id: ARBEIT_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu öffentlicher Tätigkeit, Lernen, Grenzen, Nutzen und Schutz." },
       { nr: "34", title: "Medien, Bilder & öffentliche Darstellung", id: MEDIEN_SLUG, mark: "veil", lede: "Geprüfte Grundlagen zu Darstellung, Fotos, Stimme, Schreiben, öffentlichem Auftreten und digitalen Grenzen." },
       { nr: "35", title: "Ruqyah, Schutz & Zuflucht", id: RUQYAH_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu al-Falaq, an-Nās, Muʿawwidhāt, Ruqyah und Zuflucht bei Allah." },
-      { nr: "36", title: "Tod, Janāzah & Trauer", id: TRAUER_SLUG, mark: "ring", pending: true, lede: "Geprüfte Grundlagen zu Tod, Trauer, Janāzah, Duʿāʾ und Grenzen der Klage." },
       { nr: "37", title: "Mädchen, Pubertät & Pflichtwissen", id: MAEDCHEN_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Reife, Pflichtwissen, Schamhaftigkeit, Gebet und religiöser Verantwortung." },
       { nr: "38", title: "Falsches Wissen, Bidʿah & Quellenprüfung", id: BIDAHQ_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zum Schutz vor ungeprüften Aussagen, schwachen Quellen und erfundenen Inhalten." },
       { nr: "39", title: "Reue, Istighfār & Rückkehr zu Allah", id: REUE_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Tawbah, Istighfār, Hoffnung, Schuld und Rückkehr zu Allah." },
@@ -2434,7 +2433,7 @@
       kicker: "Lebensphasen · Ṣabr",
       desc: "Schwangerschaft, Stillzeit, Nifās, Pubertät sowie geprüfte Inhalte zu Tod, Janāzah und Trauer.",
       icon: "ramadan.png",
-      areas: [NIFAS_SLUG, MAEDCHEN_SLUG, TOD_SLUG, TRAUER_SLUG, JANAIZ_SLUG, JANAZAH_SLUG]
+      areas: [NIFAS_SLUG, MAEDCHEN_SLUG, TOD_SLUG, JANAIZ_SLUG, JANAZAH_SLUG]
     }
   ];
 
