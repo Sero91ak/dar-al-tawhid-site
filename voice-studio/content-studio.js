@@ -239,9 +239,7 @@ async function alignStoryFile(file,text){
       console.warn("[DĀR Voice] Cloud alignment unavailable:",e);
     }
   }
-  const fallback=await browserStoryAlignment(file,story);
-  if(!Array.isArray(fallback?.timings)||!fallback.timings.length)throw Error("Mitlese-Synchronisierung konnte nicht erzeugt werden.");
-  return fallback;
+  throw Error("Exakte ElevenLabs-Mitlese-Synchronisierung ist nicht verfügbar. Veröffentlichung wird gestoppt; geschätzte Browser-Zeitmarken sind im Produktionsstand nicht erlaubt.");
 }
 
 window.darVoiceAlignStoryFile=alignStoryFile;
