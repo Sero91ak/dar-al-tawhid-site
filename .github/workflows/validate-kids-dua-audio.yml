@@ -49,6 +49,41 @@ jobs:
               assert p.exists() and p.stat().st_size>1200,(path,url)
           print("Du'a manifests and audio assets OK")
           PY
+
+      - name: Check all 120 Du'a runtime key matches
+        run: |
+          node <<'NODE'
+          const fs=require("fs");
+          const dua=JSON.parse(fs.readFileSync("kids/data/dua-kids.json","utf8"));
+          const de=JSON.parse(fs.readFileSync("kids/data/dua-audio.json","utf8"));
+          const ar=JSON.parse(fs.readFileSync("kids/data/dua-arabic-audio.json","utf8"));
+          const slow=JSON.parse(fs.readFileSync("kids/data/dua-arabic-slow-audio.json","utf8"));
+          const word=JSON.parse(fs.readFileSync("kids/data/dua-word-audio.json","utf8"));
+          const norm=s=>String(s||"").replace(/\s+/g," ").trim().normalize("NFD");
+          const index=m=>new Map(Object.entries(m.entries||{}).map(([k,v])=>[norm(k),v]));
+          const deI=index(de), arI=index(ar), slowI=index(slow), wordI=index(word);
+          const failures=[];
+          for(const d of dua.items||[]){
+            const a=norm(d.audioArabicText||d.arabic||"");
+            const g=norm(d.audioGermanText||((d.childPrompt||"")+" "+(d.meaning||"")));
+            if(!arI.has(a))failures.push(d.id+": arabic");
+            if(!slowI.has(a))failures.push(d.id+": slow");
+            if(!deI.has(g))failures.push(d.id+": german");
+            const words=String(d.audioArabicText||d.arabic||"")
+              .replace(/\s+/g," ").trim().split(/\s+/)
+              .map(x=>x.replace(/^[،؛؟,.!…«»"'()\[\]{}]+|[،؛؟,.!…«»"'()\[\]{}]+$/g,""))
+              .filter(Boolean);
+            for(const w of words){
+              if(!wordI.has(norm(w)))failures.push(d.id+": word "+w);
+            }
+          }
+          if(failures.length){
+            console.error(failures.slice(0,80).join("\n"));
+            throw new Error("Du'a runtime key coverage failed: "+failures.length);
+          }
+          if((dua.items||[]).length!==120)throw new Error("Du'a count is not 120");
+          console.log("DUA RUNTIME KEY COVERAGE OK · 120/120 full + slow + German + isolated words");
+          NODE
       - name: Verify runtime cache-bust wiring
         run: |
           grep -F '/kids/owner-voice.js?v=8' kids/index.html
