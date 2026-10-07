@@ -21,7 +21,7 @@
   var STORAGE_KEY = "darNavPositionV2";
   var VALID = { bottom: true, left: true, right: true };
   var SIDE_MIN_WIDTH = 760;
-  var SIDE_MIN_HEIGHT = 420;
+  var SIDE_MIN_HEIGHT = 360;
   var currentEffective = "bottom";
   var sideApplied = false;
   var rafId = 0;
@@ -55,6 +55,37 @@
       global.localStorage.setItem(STORAGE_KEY, next);
     } catch (error) {}
     return next;
+  }
+
+
+  function renderAdaptiveNavPanelMarkup() {
+    var preference = readPreference();
+    function button(value,label,small,mark) {
+      var selected = preference === value;
+      return '<button type="button" class="' + (selected ? 'is-selected' : '') +
+        '" data-dar-nav-choice="' + value + '" aria-pressed="' + (selected ? 'true' : 'false') + '">' +
+        '<span class="dar-nav-choice-mark dar-nav-choice-mark--' + mark + '" aria-hidden="true"></span>' +
+        '<strong>' + label + '</strong><small>' + small + '</small></button>';
+    }
+    return '<section class="settings-section dar-nav-position-settings" id="darNavPositionSettingsV1325" aria-labelledby="darNavPositionTitleV1325">' +
+      '<div class="dar-nav-position-kicker">NAVIGATION</div>' +
+      '<div class="dar-nav-position-head"><div>' +
+        '<h3 id="darNavPositionTitleV1325">Position der Tab-Leiste</h3>' +
+        '<p>Unten wie bisher oder seitlich als schmale 3D-Icon-Leiste. Auf schmalen Displays bleibt sie automatisch unten.</p>' +
+      '</div></div>' +
+      '<div class="dar-nav-position-options" role="group" aria-label="Position der Tab-Leiste">' +
+        button("left","Links","Linkshänder","left") +
+        button("bottom","Unten","Standard","bottom") +
+        button("right","Rechts","Rechtshänder","right") +
+      '</div>' +
+      '<p class="dar-nav-position-status" id="darNavPositionStatusV1325"></p>' +
+    '</section>';
+  }
+
+  function installSettingsRenderer() {
+    try {
+      global.renderAdaptiveNavPanel = renderAdaptiveNavPanelMarkup;
+    } catch (error) {}
   }
 
   function measure() {
@@ -307,6 +338,7 @@
   }
 
   function start() {
+    installSettingsRenderer();
     schedule();
 
     global.addEventListener("dar:layoutchange", schedule);
@@ -335,6 +367,13 @@
       observer.observe(document.body, { childList: true, subtree: true });
     }
   }
+
+  document.addEventListener("click", function (event) {
+    var button = event.target && event.target.closest && event.target.closest("[data-dar-nav-choice]");
+    if (!button) return;
+    event.preventDefault();
+    setPreference(button.getAttribute("data-dar-nav-choice"));
+  }, true);
 
   global.DarAdaptiveNavPlacement = {
     getPreference: readPreference,
