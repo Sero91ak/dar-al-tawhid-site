@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "policy": {
     "childExplanation": "Die Erklärung darf vereinfacht werden. Arabischer Wortlaut und Quellenangabe werden nicht frei umformuliert.",
     "quranAudio": "Qurʾān-Arabisch wird ausschließlich über die echte Qurʾān-Rezitation abgespielt und niemals synthetisch erzeugt.",
@@ -7,7 +7,10 @@
     "audioLearning": "Jedes Duʿāʾ hat getrennte Hörwege für Arabisch und Deutsch sowie einen langsamen Übemodus.",
     "maxItems": 20,
     "status": "verified-only",
-    "sourceVariantLock": "Arabischer Wortlaut, Lautschrift und verlinkte Quelle müssen dieselbe Überlieferungsvariante abbilden."
+    "sourceVariantLock": "Arabischer Wortlaut, Lautschrift und verlinkte Quelle müssen dieselbe Überlieferungsvariante abbilden.",
+    "smartLearning": "Der separate Smart-Lernmodus nutzt feste Arabisch↔Lautschrift-Segmente und nur exakt ausgerichtete Audio-Zeitmarken. Keine geschätzten Timings.",
+    "microphone": "Mikrofonbasierte Bewertung bleibt deaktiviert, bis eine zuverlässige arabische Worterkennung mit belastbarer Geräte-QA vorliegt.",
+    "slowPracticeRate": 0.68
   },
   "items": [
     {
@@ -44,6 +47,23 @@
           "surah": 20,
           "ayah": 114
         }
+      ],
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "رَبِّ",
+          "transliteration": "Rabbi"
+        },
+        {
+          "index": 1,
+          "arabic": "زِدْنِي",
+          "transliteration": "zidnī"
+        },
+        {
+          "index": 2,
+          "arabic": "عِلْمًا",
+          "transliteration": "ʿilmā"
+        }
       ]
     },
     {
@@ -79,6 +99,48 @@
         {
           "surah": 14,
           "ayah": 41
+        }
+      ],
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "رَبَّنَا",
+          "transliteration": "Rabbanā"
+        },
+        {
+          "index": 1,
+          "arabic": "اغْفِرْ",
+          "transliteration": "ighfir"
+        },
+        {
+          "index": 2,
+          "arabic": "لِي",
+          "transliteration": "lī"
+        },
+        {
+          "index": 3,
+          "arabic": "وَلِوَالِدَيَّ",
+          "transliteration": "wa-li-wālidayya"
+        },
+        {
+          "index": 4,
+          "arabic": "وَلِلْمُؤْمِنِينَ",
+          "transliteration": "wa-li-l-muʾminīna"
+        },
+        {
+          "index": 5,
+          "arabic": "يَوْمَ",
+          "transliteration": "yawma"
+        },
+        {
+          "index": 6,
+          "arabic": "يَقُومُ",
+          "transliteration": "yaqūmu"
+        },
+        {
+          "index": 7,
+          "arabic": "الْحِسَابُ",
+          "transliteration": "l-ḥisāb"
         }
       ]
     },
@@ -120,6 +182,63 @@
           "surah": 23,
           "ayah": 98
         }
+      ],
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "رَبِّ",
+          "transliteration": "Rabbi"
+        },
+        {
+          "index": 1,
+          "arabic": "أَعُوذُ",
+          "transliteration": "aʿūdhu"
+        },
+        {
+          "index": 2,
+          "arabic": "بِكَ",
+          "transliteration": "bika"
+        },
+        {
+          "index": 3,
+          "arabic": "مِنْ",
+          "transliteration": "min"
+        },
+        {
+          "index": 4,
+          "arabic": "هَمَزَاتِ",
+          "transliteration": "hamazāti"
+        },
+        {
+          "index": 5,
+          "arabic": "الشَّيَاطِينِ",
+          "transliteration": "sh-shayāṭīn"
+        },
+        {
+          "index": 6,
+          "arabic": "وَأَعُوذُ",
+          "transliteration": "wa-aʿūdhu"
+        },
+        {
+          "index": 7,
+          "arabic": "بِكَ",
+          "transliteration": "bika"
+        },
+        {
+          "index": 8,
+          "arabic": "رَبِّ",
+          "transliteration": "rabbi"
+        },
+        {
+          "index": 9,
+          "arabic": "أَنْ",
+          "transliteration": "an"
+        },
+        {
+          "index": 10,
+          "arabic": "يَحْضُرُونِ",
+          "transliteration": "yaḥḍurūn"
+        }
       ]
     },
     {
@@ -153,7 +272,29 @@
           }
         ]
       },
-      "verificationNote": "Wortlaut exakt an Ṣaḥīḥ al-Buḫārī 7394 gebunden; nicht mit der Überlieferungsvariante »amūtu wa-aḥyā« vermischen."
+      "verificationNote": "Wortlaut exakt an Ṣaḥīḥ al-Buḫārī 7394 gebunden; nicht mit der Überlieferungsvariante »amūtu wa-aḥyā« vermischen.",
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "اللَّهُمَّ",
+          "transliteration": "Allāhumma"
+        },
+        {
+          "index": 1,
+          "arabic": "بِاسْمِكَ",
+          "transliteration": "bismika"
+        },
+        {
+          "index": 2,
+          "arabic": "أَحْيَا",
+          "transliteration": "aḥyā"
+        },
+        {
+          "index": 3,
+          "arabic": "وَأَمُوتُ",
+          "transliteration": "wa-amūt"
+        }
+      ]
     },
     {
       "id": "dua-wake",
@@ -186,7 +327,54 @@
           }
         ]
       },
-      "verificationNote": "Wortlaut aus Ṣaḥīḥ al-Buḫārī 7394."
+      "verificationNote": "Wortlaut aus Ṣaḥīḥ al-Buḫārī 7394.",
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "الْحَمْدُ",
+          "transliteration": "Al-ḥamdu"
+        },
+        {
+          "index": 1,
+          "arabic": "لِلَّهِ",
+          "transliteration": "lillāhi"
+        },
+        {
+          "index": 2,
+          "arabic": "الَّذِي",
+          "transliteration": "lladhī"
+        },
+        {
+          "index": 3,
+          "arabic": "أَحْيَانَا",
+          "transliteration": "aḥyānā"
+        },
+        {
+          "index": 4,
+          "arabic": "بَعْدَ",
+          "transliteration": "baʿda"
+        },
+        {
+          "index": 5,
+          "arabic": "مَا",
+          "transliteration": "mā"
+        },
+        {
+          "index": 6,
+          "arabic": "أَمَاتَنَا",
+          "transliteration": "amātanā"
+        },
+        {
+          "index": 7,
+          "arabic": "وَإِلَيْهِ",
+          "transliteration": "wa-ilayhi"
+        },
+        {
+          "index": 8,
+          "arabic": "النُّشُورُ",
+          "transliteration": "n-nushūr"
+        }
+      ]
     },
     {
       "id": "dua-eating",
@@ -225,7 +413,19 @@
             "correct": false
           }
         ]
-      }
+      },
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "بِسْمِ",
+          "transliteration": "Bismi"
+        },
+        {
+          "index": 1,
+          "arabic": "اللَّهِ",
+          "transliteration": "llāh"
+        }
+      ]
     },
     {
       "id": "dua-after-eating",
@@ -257,7 +457,69 @@
           }
         ]
       },
-      "sourceUrl": "https://dorar.net/h/9x453UuN"
+      "sourceUrl": "https://dorar.net/h/9x453UuN",
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "الْحَمْدُ",
+          "transliteration": "Al-ḥamdu"
+        },
+        {
+          "index": 1,
+          "arabic": "لِلَّهِ",
+          "transliteration": "lillāhi"
+        },
+        {
+          "index": 2,
+          "arabic": "الَّذِي",
+          "transliteration": "lladhī"
+        },
+        {
+          "index": 3,
+          "arabic": "أَطْعَمَنِي",
+          "transliteration": "aṭʿamanī"
+        },
+        {
+          "index": 4,
+          "arabic": "هَذَا",
+          "transliteration": "hādhā"
+        },
+        {
+          "index": 5,
+          "arabic": "وَرَزَقَنِيهِ",
+          "transliteration": "wa-razaqanīhi"
+        },
+        {
+          "index": 6,
+          "arabic": "مِنْ",
+          "transliteration": "min"
+        },
+        {
+          "index": 7,
+          "arabic": "غَيْرِ",
+          "transliteration": "ghayri"
+        },
+        {
+          "index": 8,
+          "arabic": "حَوْلٍ",
+          "transliteration": "ḥawlin"
+        },
+        {
+          "index": 9,
+          "arabic": "مِنِّي",
+          "transliteration": "minnī"
+        },
+        {
+          "index": 10,
+          "arabic": "وَلَا",
+          "transliteration": "wa-lā"
+        },
+        {
+          "index": 11,
+          "arabic": "قُوَّةٍ",
+          "transliteration": "quwwah"
+        }
+      ]
     },
     {
       "id": "dua-toilet-enter",
@@ -289,7 +551,44 @@
           }
         ]
       },
-      "sourceUrl": "https://dorar.net/hadith/sharh/23650"
+      "sourceUrl": "https://dorar.net/hadith/sharh/23650",
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "اللَّهُمَّ",
+          "transliteration": "Allāhumma"
+        },
+        {
+          "index": 1,
+          "arabic": "إِنِّي",
+          "transliteration": "innī"
+        },
+        {
+          "index": 2,
+          "arabic": "أَعُوذُ",
+          "transliteration": "aʿūdhu"
+        },
+        {
+          "index": 3,
+          "arabic": "بِكَ",
+          "transliteration": "bika"
+        },
+        {
+          "index": 4,
+          "arabic": "مِنَ",
+          "transliteration": "mina"
+        },
+        {
+          "index": 5,
+          "arabic": "الْخُبُثِ",
+          "transliteration": "l-khubthi"
+        },
+        {
+          "index": 6,
+          "arabic": "وَالْخَبَائِثِ",
+          "transliteration": "wa-l-khabāʾith"
+        }
+      ]
     },
     {
       "id": "dua-toilet-exit",
@@ -321,7 +620,14 @@
           }
         ]
       },
-      "sourceUrl": "https://dorar.net/h/QR1BIuc2"
+      "sourceUrl": "https://dorar.net/h/QR1BIuc2",
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "غُفْرَانَكَ",
+          "transliteration": "Ghufrānak"
+        }
+      ]
     },
     {
       "id": "dua-leave-home",
@@ -353,7 +659,64 @@
           }
         ]
       },
-      "sourceUrl": "https://dorar.net/h/N9oQVlMF"
+      "sourceUrl": "https://dorar.net/h/N9oQVlMF",
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "بِسْمِ",
+          "transliteration": "Bismi"
+        },
+        {
+          "index": 1,
+          "arabic": "اللَّهِ",
+          "transliteration": "llāh"
+        },
+        {
+          "index": 2,
+          "arabic": "تَوَكَّلْتُ",
+          "transliteration": "tawakkaltu"
+        },
+        {
+          "index": 3,
+          "arabic": "عَلَى",
+          "transliteration": "ʿalā"
+        },
+        {
+          "index": 4,
+          "arabic": "اللَّهِ",
+          "transliteration": "Allāh"
+        },
+        {
+          "index": 5,
+          "arabic": "لَا",
+          "transliteration": "lā"
+        },
+        {
+          "index": 6,
+          "arabic": "حَوْلَ",
+          "transliteration": "ḥawla"
+        },
+        {
+          "index": 7,
+          "arabic": "وَلَا",
+          "transliteration": "wa-lā"
+        },
+        {
+          "index": 8,
+          "arabic": "قُوَّةَ",
+          "transliteration": "quwwata"
+        },
+        {
+          "index": 9,
+          "arabic": "إِلَّا",
+          "transliteration": "illā"
+        },
+        {
+          "index": 10,
+          "arabic": "بِاللَّهِ",
+          "transliteration": "billāh"
+        }
+      ]
     },
     {
       "id": "dua-mosque-enter",
@@ -385,7 +748,34 @@
           }
         ]
       },
-      "sourceUrl": "https://dorar.net/h/GKFx5lgu"
+      "sourceUrl": "https://dorar.net/h/GKFx5lgu",
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "اللَّهُمَّ",
+          "transliteration": "Allāhumma"
+        },
+        {
+          "index": 1,
+          "arabic": "افْتَحْ",
+          "transliteration": "iftaḥ"
+        },
+        {
+          "index": 2,
+          "arabic": "لِي",
+          "transliteration": "lī"
+        },
+        {
+          "index": 3,
+          "arabic": "أَبْوَابَ",
+          "transliteration": "abwāba"
+        },
+        {
+          "index": 4,
+          "arabic": "رَحْمَتِكَ",
+          "transliteration": "raḥmatik"
+        }
+      ]
     },
     {
       "id": "dua-mosque-exit",
@@ -417,7 +807,34 @@
           }
         ]
       },
-      "sourceUrl": "https://dorar.net/h/GKFx5lgu"
+      "sourceUrl": "https://dorar.net/h/GKFx5lgu",
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "اللَّهُمَّ",
+          "transliteration": "Allāhumma"
+        },
+        {
+          "index": 1,
+          "arabic": "إِنِّي",
+          "transliteration": "innī"
+        },
+        {
+          "index": 2,
+          "arabic": "أَسْأَلُكَ",
+          "transliteration": "asʾaluka"
+        },
+        {
+          "index": 3,
+          "arabic": "مِنْ",
+          "transliteration": "min"
+        },
+        {
+          "index": 4,
+          "arabic": "فَضْلِكَ",
+          "transliteration": "faḍlik"
+        }
+      ]
     },
     {
       "id": "dua-afiyah",
@@ -450,7 +867,49 @@
             "correct": false
           }
         ]
-      }
+      },
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "اللَّهُمَّ",
+          "transliteration": "Allāhumma"
+        },
+        {
+          "index": 1,
+          "arabic": "إِنِّي",
+          "transliteration": "innī"
+        },
+        {
+          "index": 2,
+          "arabic": "أَسْأَلُكَ",
+          "transliteration": "asʾaluka"
+        },
+        {
+          "index": 3,
+          "arabic": "الْعَفْوَ",
+          "transliteration": "l-ʿafwa"
+        },
+        {
+          "index": 4,
+          "arabic": "وَالْعَافِيَةَ",
+          "transliteration": "wa-l-ʿāfiyata"
+        },
+        {
+          "index": 5,
+          "arabic": "فِي",
+          "transliteration": "fī"
+        },
+        {
+          "index": 6,
+          "arabic": "الدُّنْيَا",
+          "transliteration": "d-dunyā"
+        },
+        {
+          "index": 7,
+          "arabic": "وَالْآخِرَةِ",
+          "transliteration": "wa-l-ākhirah"
+        }
+      ]
     },
     {
       "id": "dua-rabbana-atina",
@@ -485,6 +944,63 @@
         {
           "surah": 2,
           "ayah": 201
+        }
+      ],
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "رَبَّنَا",
+          "transliteration": "Rabbanā"
+        },
+        {
+          "index": 1,
+          "arabic": "آتِنَا",
+          "transliteration": "ātinā"
+        },
+        {
+          "index": 2,
+          "arabic": "فِي",
+          "transliteration": "fī"
+        },
+        {
+          "index": 3,
+          "arabic": "الدُّنْيَا",
+          "transliteration": "d-dunyā"
+        },
+        {
+          "index": 4,
+          "arabic": "حَسَنَةً",
+          "transliteration": "ḥasanatan"
+        },
+        {
+          "index": 5,
+          "arabic": "وَفِي",
+          "transliteration": "wa-fī"
+        },
+        {
+          "index": 6,
+          "arabic": "الْآخِرَةِ",
+          "transliteration": "l-ākhirati"
+        },
+        {
+          "index": 7,
+          "arabic": "حَسَنَةً",
+          "transliteration": "ḥasanatan"
+        },
+        {
+          "index": 8,
+          "arabic": "وَقِنَا",
+          "transliteration": "wa-qinā"
+        },
+        {
+          "index": 9,
+          "arabic": "عَذَابَ",
+          "transliteration": "ʿadhāba"
+        },
+        {
+          "index": 10,
+          "arabic": "النَّارِ",
+          "transliteration": "n-nār"
         }
       ]
     },
@@ -521,6 +1037,63 @@
         {
           "surah": 7,
           "ayah": 23
+        }
+      ],
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "رَبَّنَا",
+          "transliteration": "Rabbanā"
+        },
+        {
+          "index": 1,
+          "arabic": "ظَلَمْنَا",
+          "transliteration": "ẓalamnā"
+        },
+        {
+          "index": 2,
+          "arabic": "أَنْفُسَنَا",
+          "transliteration": "anfusanā"
+        },
+        {
+          "index": 3,
+          "arabic": "وَإِنْ",
+          "transliteration": "wa-in"
+        },
+        {
+          "index": 4,
+          "arabic": "لَمْ",
+          "transliteration": "lam"
+        },
+        {
+          "index": 5,
+          "arabic": "تَغْفِرْ",
+          "transliteration": "taghfir"
+        },
+        {
+          "index": 6,
+          "arabic": "لَنَا",
+          "transliteration": "lanā"
+        },
+        {
+          "index": 7,
+          "arabic": "وَتَرْحَمْنَا",
+          "transliteration": "wa-tarḥamnā"
+        },
+        {
+          "index": 8,
+          "arabic": "لَنَكُونَنَّ",
+          "transliteration": "la-nakūnanna"
+        },
+        {
+          "index": 9,
+          "arabic": "مِنَ",
+          "transliteration": "mina"
+        },
+        {
+          "index": 10,
+          "arabic": "الْخَاسِرِينَ",
+          "transliteration": "l-khāsirīn"
         }
       ]
     },
@@ -570,6 +1143,73 @@
           "surah": 20,
           "ayah": 28
         }
+      ],
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "رَبِّ",
+          "transliteration": "Rabbi"
+        },
+        {
+          "index": 1,
+          "arabic": "اشْرَحْ",
+          "transliteration": "ishraḥ"
+        },
+        {
+          "index": 2,
+          "arabic": "لِي",
+          "transliteration": "lī"
+        },
+        {
+          "index": 3,
+          "arabic": "صَدْرِي",
+          "transliteration": "ṣadrī"
+        },
+        {
+          "index": 4,
+          "arabic": "وَيَسِّرْ",
+          "transliteration": "wa-yassir"
+        },
+        {
+          "index": 5,
+          "arabic": "لِي",
+          "transliteration": "lī"
+        },
+        {
+          "index": 6,
+          "arabic": "أَمْرِي",
+          "transliteration": "amrī"
+        },
+        {
+          "index": 7,
+          "arabic": "وَاحْلُلْ",
+          "transliteration": "wa-ḥlul"
+        },
+        {
+          "index": 8,
+          "arabic": "عُقْدَةً",
+          "transliteration": "ʿuqdatan"
+        },
+        {
+          "index": 9,
+          "arabic": "مِنْ",
+          "transliteration": "min"
+        },
+        {
+          "index": 10,
+          "arabic": "لِسَانِي",
+          "transliteration": "lisānī"
+        },
+        {
+          "index": 11,
+          "arabic": "يَفْقَهُوا",
+          "transliteration": "yafqahū"
+        },
+        {
+          "index": 12,
+          "arabic": "قَوْلِي",
+          "transliteration": "qawlī"
+        }
       ]
     },
     {
@@ -605,6 +1245,43 @@
         {
           "surah": 2,
           "ayah": 127
+        }
+      ],
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "رَبَّنَا",
+          "transliteration": "Rabbanā"
+        },
+        {
+          "index": 1,
+          "arabic": "تَقَبَّلْ",
+          "transliteration": "taqabbal"
+        },
+        {
+          "index": 2,
+          "arabic": "مِنَّا",
+          "transliteration": "minnā"
+        },
+        {
+          "index": 3,
+          "arabic": "إِنَّكَ",
+          "transliteration": "innaka"
+        },
+        {
+          "index": 4,
+          "arabic": "أَنْتَ",
+          "transliteration": "anta"
+        },
+        {
+          "index": 5,
+          "arabic": "السَّمِيعُ",
+          "transliteration": "s-samīʿu"
+        },
+        {
+          "index": 6,
+          "arabic": "الْعَلِيمُ",
+          "transliteration": "l-ʿalīm"
         }
       ]
     },
@@ -642,6 +1319,83 @@
           "surah": 3,
           "ayah": 8
         }
+      ],
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "رَبَّنَا",
+          "transliteration": "Rabbanā"
+        },
+        {
+          "index": 1,
+          "arabic": "لَا",
+          "transliteration": "lā"
+        },
+        {
+          "index": 2,
+          "arabic": "تُزِغْ",
+          "transliteration": "tuzigh"
+        },
+        {
+          "index": 3,
+          "arabic": "قُلُوبَنَا",
+          "transliteration": "qulūbanā"
+        },
+        {
+          "index": 4,
+          "arabic": "بَعْدَ",
+          "transliteration": "baʿda"
+        },
+        {
+          "index": 5,
+          "arabic": "إِذْ",
+          "transliteration": "idh"
+        },
+        {
+          "index": 6,
+          "arabic": "هَدَيْتَنَا",
+          "transliteration": "hadaytanā"
+        },
+        {
+          "index": 7,
+          "arabic": "وَهَبْ",
+          "transliteration": "wa-hab"
+        },
+        {
+          "index": 8,
+          "arabic": "لَنَا",
+          "transliteration": "lanā"
+        },
+        {
+          "index": 9,
+          "arabic": "مِنْ",
+          "transliteration": "min"
+        },
+        {
+          "index": 10,
+          "arabic": "لَدُنْكَ",
+          "transliteration": "ladunka"
+        },
+        {
+          "index": 11,
+          "arabic": "رَحْمَةً",
+          "transliteration": "raḥmatan"
+        },
+        {
+          "index": 12,
+          "arabic": "إِنَّكَ",
+          "transliteration": "innaka"
+        },
+        {
+          "index": 13,
+          "arabic": "أَنْتَ",
+          "transliteration": "anta"
+        },
+        {
+          "index": 14,
+          "arabic": "الْوَهَّابُ",
+          "transliteration": "l-wahhāb"
+        }
       ]
     },
     {
@@ -675,7 +1429,44 @@
           }
         ]
       },
-      "sourceUrl": "https://dorar.net/h/bPmrOs5k?osoul=1"
+      "sourceUrl": "https://dorar.net/h/bPmrOs5k?osoul=1",
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "يَا",
+          "transliteration": "Yā"
+        },
+        {
+          "index": 1,
+          "arabic": "مُقَلِّبَ",
+          "transliteration": "Muqalliba"
+        },
+        {
+          "index": 2,
+          "arabic": "الْقُلُوبِ",
+          "transliteration": "l-qulūb"
+        },
+        {
+          "index": 3,
+          "arabic": "ثَبِّتْ",
+          "transliteration": "thabbit"
+        },
+        {
+          "index": 4,
+          "arabic": "قَلْبِي",
+          "transliteration": "qalbī"
+        },
+        {
+          "index": 5,
+          "arabic": "عَلَى",
+          "transliteration": "ʿalā"
+        },
+        {
+          "index": 6,
+          "arabic": "دِينِكَ",
+          "transliteration": "dīnik"
+        }
+      ]
     },
     {
       "id": "dua-guidance-taqwa",
@@ -708,7 +1499,44 @@
           }
         ]
       },
-      "sourceUrl": "https://dorar.net/hadith/sharh/66389"
+      "sourceUrl": "https://dorar.net/hadith/sharh/66389",
+      "learningSegments": [
+        {
+          "index": 0,
+          "arabic": "اللَّهُمَّ",
+          "transliteration": "Allāhumma"
+        },
+        {
+          "index": 1,
+          "arabic": "إِنِّي",
+          "transliteration": "innī"
+        },
+        {
+          "index": 2,
+          "arabic": "أَسْأَلُكَ",
+          "transliteration": "asʾaluka"
+        },
+        {
+          "index": 3,
+          "arabic": "الْهُدَى",
+          "transliteration": "l-hudā"
+        },
+        {
+          "index": 4,
+          "arabic": "وَالتُّقَى",
+          "transliteration": "wa-t-tuqā"
+        },
+        {
+          "index": 5,
+          "arabic": "وَالْعَفَافَ",
+          "transliteration": "wa-l-ʿafāfa"
+        },
+        {
+          "index": 6,
+          "arabic": "وَالْغِنَى",
+          "transliteration": "wa-l-ghinā"
+        }
+      ]
     }
   ]
 }
