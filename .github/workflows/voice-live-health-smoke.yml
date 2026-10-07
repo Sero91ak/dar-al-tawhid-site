@@ -1,0 +1,71 @@
+name: Voice Live Health Smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'cloudflare/video-studio/voice.js'
+      - 'cloudflare/voice-studio-web.js'
+      - 'cloudflare/wrangler.toml'
+      - 'data/pronunciation/elevenlabs-production.json'
+      - '.github/workflows/voice-live-health-smoke.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: voice-live-health-smoke
+  cancel-in-progress: true
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify live production voice contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://dar-admin-publisher.sero91ak.workers.dev/voice-studio/api/health"
+          for attempt in $(seq 1 30); do
+            code="$(curl -sS -o /tmp/voice-health.json -w '%{http_code}' "$URL" || true)"
+            echo "attempt=$attempt http=$code"
+            cat /tmp/voice-health.json 2>/dev/null || true
+            if [ "$code" = "200" ] && python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("/tmp/voice-health.json").read_text(encoding="utf-8"))
+          checks={
+              "ok":d.get("ok") is True,
+              "elevenLabsProductionReady":d.get("elevenLabsProductionReady") is True,
+              "elevenLabsModelId":d.get("elevenLabsModelId")=="eleven_v4",
+              "pronunciationDictionaryReady":d.get("pronunciationDictionaryReady") is True,
+              "pronunciationDictionaryId":d.get("pronunciationDictionaryId")=="Q8w3SxtoVo8NSjsnlJEd",
+              "pronunciationDictionaryVersionId":d.get("pronunciationDictionaryVersionId")=="wSzgkGpAwEDiTak8DApc",
+              "pronunciationRuleCount":int(d.get("pronunciationRuleCount") or 0)==10099,
+              "storyAlignment":d.get("storyAlignment")=="elevenlabs-forced-alignment-v1",
+              "estimatedTimingsAllowed":d.get("estimatedTimingsAllowed") is False,
+              "quranSyntheticRecitationAllowed":d.get("quranSyntheticRecitationAllowed") is False,
+          }
+          failed=[k for k,v in checks.items() if not v]
+          if failed:
+              raise SystemExit("Live Voice contract not ready: "+", ".join(failed))
+          print("LIVE_VOICE_OK",json.dumps({
+              "provider":d.get("provider"),
+              "model":d.get("elevenLabsModelId"),
+              "dictionary":d.get("pronunciationDictionaryId"),
+              "version":d.get("pronunciationDictionaryVersionId"),
+              "rules":d.get("pronunciationRuleCount"),
+              "alignment":d.get("storyAlignment"),
+          },ensure_ascii=False))
+          PY
+            then
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::Live Voice contract wurde innerhalb des Prüfzeitraums nicht aktiv."
+          exit 1
