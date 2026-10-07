@@ -19,6 +19,7 @@
   var activeTrack=-1;
   var activeRange=null;
   var externalPlaying=false;
+  var exactReady=false;
 
   audio.preload="auto";
   audio.setAttribute("playsinline","");
@@ -139,6 +140,7 @@
       '</section>';
     document.body.appendChild(root);
     root.addEventListener("click",onClick);
+    setExactReady(false);
     return root;
   }
   function getSegments(){
@@ -146,6 +148,16 @@
   }
   function timingSegments(){
     return currentTiming&&Array.isArray(currentTiming.segments)?currentTiming.segments:[];
+  }
+  function setExactReady(on){
+    exactReady=!!on;
+    if(!root)return;
+    root.classList.toggle("exact-ready",exactReady);
+    root.querySelectorAll("[data-seg]").forEach(function(n){n.disabled=!exactReady});
+    ["repeat","prev","next"].forEach(function(a){
+      var b=root.querySelector('[data-dsl="'+a+'"]');
+      if(b)b.disabled=!exactReady;
+    });
   }
   function setStatus(text,kind){
     var el=document.getElementById("dslStatus");
@@ -340,6 +352,7 @@
   function onClick(ev){
     var seg=ev.target.closest&&ev.target.closest("[data-seg]");
     if(seg){
+      if(!exactReady)return;
       var i=Number(seg.getAttribute("data-seg"));
       selectIndex(i,{play:true,rate:1});
       return;
@@ -372,8 +385,10 @@
     stopAudio();
     currentDua=dua;
     currentTiming=null;
+    exactReady=false;
     currentIndex=restoreIndex(dua);
     render();
+    setExactReady(false);
     root.classList.add("open");
     root.setAttribute("aria-hidden","false");
     lockBackground(true);
@@ -382,13 +397,16 @@
       if(currentDua!==dua)return;
       currentTiming=(m.items||{})[dua.id]||null;
       if(!currentTiming||currentTiming.syncMode!=="elevenlabs-forced-alignment-v1"){
-        setStatus("Dieser Eintrag ist noch nicht für exaktes Smart-Lernen freigegeben.","bad");
+        setExactReady(false);
+        setStatus("Ganz hören und Langsam hören funktionieren. Wort-für-Wort wird erst mit exakten Zeitmarken freigeschaltet.","");
         return;
       }
+      setExactReady(true);
       setStatus("Bereit. Tippe auf ein Wort oder starte das ganze Duʿāʾ.","good");
       paintSelection();
     }).catch(function(){
-      setStatus("Der exakte Lernmodus ist noch nicht verfügbar. Es wird nichts geschätzt.","bad");
+      setExactReady(false);
+      setStatus("Ganz hören und Langsam hören funktionieren. Wort-für-Wort bleibt gesperrt, bis exakte Zeitmarken vorliegen.","");
     });
   }
   function close(){
@@ -401,6 +419,7 @@
     lockBackground(false);
     currentDua=null;
     currentTiming=null;
+    exactReady=false;
   }
   function preview(dua,rate){
     return loadManifest().then(function(m){
