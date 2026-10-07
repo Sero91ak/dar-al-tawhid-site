@@ -347,3 +347,29 @@ html.dar-test-side-nav .dar-fold__pane{
     transition:none!important;
   }
 }
+
+
+/* v1326.1 · forceDual compatibility without DOM replacement */
+.dar-fold[data-fold-mode="dual"][data-fold-force="dual"]{
+  display:grid!important;
+  grid-template-columns:var(--fold-rail-current,280px) minmax(0,1fr)!important;
+  gap:var(--fold-gap,16px)!important;
+}
+.dar-fold[data-fold-mode="dual"][data-fold-force="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
+  display:block!important;
+}
+.dar-fold[data-fold-mode="dual"][data-fold-force="single"]{
+  display:block!important;
+  grid-template-columns:1fr!important;
+}
+.dar-fold[data-fold-mode="dual"][data-fold-force="single"][data-fold-single-show="pane"] > .dar-fold__rail,
+.dar-fold[data-fold-mode="dual"][data-fold-force="single"][data-fold-single-show="rail"] > .dar-fold__pane{
+  display:none!important;
+}
+.dar-fold[data-fold-mode="dual"][data-fold-force="single"] > :is(.dar-fold__rail,.dar-fold__pane){
+  position:static!important;
+  max-height:none!important;
+  overflow:visible!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
