@@ -1,0 +1,290 @@
+name: Force Align Dua Smart Learning
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'kids/data/dua-kids.json'
+      - 'kids/data/dua-arabic-audio.json'
+      - '.github/workflows/force-align-dua-smart-learning.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: force-align-dua-smart-learning
+  cancel-in-progress: true
+
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Build exact word timing map
+        shell: bash
+        run: |
+          set -euo pipefail
+          [ -n "${ELEVENLABS_API_KEY:-}" ] || { echo "::error::ELEVENLABS_API_KEY missing"; exit 1; }
+
+          python3 - <<'PY'
+          from __future__ import annotations
+          import json, os, re, subprocess, tempfile, time, unicodedata, urllib.request
+          from pathlib import Path
+
+          ROOT=Path(".")
+          DUA=ROOT/"kids/data/dua-kids.json"
+          AR_MANIFEST=ROOT/"kids/data/dua-arabic-audio.json"
+          OUT=ROOT/"kids/data/dua-learning-timings.json"
+          API_KEY=os.environ["ELEVENLABS_API_KEY"]
+
+          data=json.loads(DUA.read_text(encoding="utf-8"))
+          ar_manifest=json.loads(AR_MANIFEST.read_text(encoding="utf-8"))
+          ar_entries=ar_manifest.get("entries") or {}
+
+          def nfc(s):
+              return unicodedata.normalize("NFC",str(s or ""))
+
+          def norm_key(s):
+              return re.sub(r"\s+"," ",nfc(s)).strip()
+
+          def arabic_key(s):
+              s=nfc(s)
+              s=s.replace("ـ","")
+              s=re.sub(r"[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]","",s)
+              s=s.translate(str.maketrans({
+                  "أ":"ا","إ":"ا","آ":"ا","ٱ":"ا","ى":"ي","ؤ":"و","ئ":"ي",
+                  "ۥ":"","ۦ":"","ۤ":"","ۚ":"","ۖ":"","ۗ":"","ۛ":"","ۜ":"","۞":"",
+                  "،":"","؛":"","؟":"",".":"","!":"","﴾":"","﴿":""
+              }))
+              s=re.sub(r"\s+"," ",s).strip()
+              return s
+
+          def post_alignment(audio_path:Path,text:str):
+              raw=Path(tempfile.mkstemp(prefix="dua-align-",suffix=".json")[1])
+              cmd=[
+                  "curl","-sS","-o",str(raw),"-w","%{http_code}",
+                  "-X","POST","https://api.elevenlabs.io/v1/forced-alignment",
+                  "-H",f"xi-api-key: {API_KEY}",
+                  "-F",f"file=@{audio_path}",
+                  "--form-string",f"text={text}"
+              ]
+              code=subprocess.check_output(cmd,text=True).strip()
+              if code!="200":
+                  body=raw.read_text(encoding="utf-8",errors="replace")
+                  raise SystemExit(f"Forced alignment HTTP {code}: {body[:500]}")
+              d=json.loads(raw.read_text(encoding="utf-8"))
+              chars=d.get("characters") or []
+              if not chars:
+                  raise SystemExit("Forced alignment returned no characters")
+              joined="".join(str(x.get("text","")) for x in chars)
+              if nfc(joined)!=nfc(text):
+                  raise SystemExit("Forced alignment character stream mismatch")
+              return d
+
+          def char_span(chars,start,end):
+              timed=[x for x in chars[start:end] if x.get("start") is not None and x.get("end") is not None]
+              if not timed:
+                  raise SystemExit(f"No timestamps in character span {start}:{end}")
+              return float(timed[0]["start"]),float(timed[-1]["end"])
+
+          def exact_segment_spans(text,segments):
+              cursor=0
+              rows=[]
+              for seg in segments:
+                  needle=nfc(seg["arabic"])
+                  pos=nfc(text).find(needle,cursor)
+                  if pos<0:
+                      raise SystemExit(f"Segment not found exactly: {needle}")
+                  rows.append((pos,pos+len(needle)))
+                  cursor=pos+len(needle)
+              return rows
+
+          def quran_doc(surah):
+              p=ROOT/f"content/quran-translit/{int(surah):03d}.json"
+              if not p.exists():
+                  raise SystemExit(f"Missing Quran translit source {p}")
+              return json.loads(p.read_text(encoding="utf-8"))
+
+          def verse_for(surah,ayah):
+              doc=quran_doc(surah)
+              row=next((v for v in doc.get("verses",[]) if int(v.get("id") or 0)==int(ayah)),None)
+              if not row:
+                  raise SystemExit(f"Missing verse {surah}:{ayah}")
+              words=[str(w.get("ar") or "").strip() for w in row.get("words",[]) if str(w.get("ar") or "").strip()]
+              if not words:
+                  raise SystemExit(f"No words for verse {surah}:{ayah}")
+              return words
+
+          def download_quran(surah,ayah):
+              url=f"https://everyayah.com/data/Husary_128kbps/{int(surah):03d}{int(ayah):03d}.mp3"
+              p=Path(tempfile.mkstemp(prefix=f"quran-{surah}-{ayah}-",suffix=".mp3")[1])
+              req=urllib.request.Request(url,headers={"User-Agent":"DAR-Kids-Dua-Learning/1"})
+              with urllib.request.urlopen(req,timeout=60) as r:
+                  p.write_bytes(r.read())
+              if p.stat().st_size<5000:
+                  raise SystemExit(f"Quran audio too small {surah}:{ayah}")
+              return url,p
+
+          def word_positions(text,words):
+              out=[]; cursor=0
+              for w in words:
+                  pos=text.find(w,cursor)
+                  if pos<0: raise SystemExit(f"Verse word not found in source stream: {w}")
+                  out.append((pos,pos+len(w)))
+                  cursor=pos+len(w)
+              return out
+
+          items_out={}
+          total_segments=0
+          for item in data.get("items",[]):
+              sid=str(item.get("id") or "")
+              segments=item.get("learningSegments") or []
+              if not sid or not segments:
+                  raise SystemExit(f"Missing smart-learning segments: {sid}")
+              tracks=[]
+              seg_rows=[]
+              losses=[]
+              if str(item.get("type") or "").lower()=="sunnah":
+                  key=norm_key(item.get("audioArabicText") or item.get("arabic"))
+                  entry=next((v for k,v in ar_entries.items() if norm_key(k)==key),None)
+                  if not entry:
+                      raise SystemExit(f"Arabic master audio missing for {sid}")
+                  rel=str(entry.get("url") or "").split("?",1)[0].lstrip("/")
+                  audio=ROOT/rel
+                  if not audio.exists() or audio.stat().st_size<1200:
+                      raise SystemExit(f"Arabic master asset missing for {sid}: {audio}")
+                  full=nfc(item.get("arabic") or "")
+                  aligned=post_alignment(audio,full)
+                  losses.append(aligned.get("loss"))
+                  chars=aligned["characters"]
+                  spans=exact_segment_spans(full,segments)
+                  tracks=[{"url":str(entry.get("url") or ""),"kind":"sunnah-master"}]
+                  for i,(stc,enc) in enumerate(spans):
+                      st,en=char_span(chars,stc,enc)
+                      seg_rows.append({
+                          "index":i,"track":0,"start":round(st,3),"end":round(en,3),
+                          "arabic":segments[i]["arabic"],"transliteration":segments[i]["transliteration"]
+                      })
+              else:
+                  refs=item.get("quranRefs") or []
+                  if not refs:
+                      raise SystemExit(f"Quran refs missing for {sid}")
+                  target_i=0
+                  for ref_i,ref in enumerate(refs):
+                      surah=int(ref["surah"]); ayah=int(ref["ayah"])
+                      words=verse_for(surah,ayah)
+                      full=" ".join(words)
+                      url,audio=download_quran(surah,ayah)
+                      aligned=post_alignment(audio,full)
+                      losses.append(aligned.get("loss"))
+                      chars=aligned["characters"]
+                      positions=word_positions(full,words)
+                      keys=[arabic_key(w) for w in words]
+                      tracks.append({"url":url,"kind":"quran-recitation","surah":surah,"ayah":ayah})
+                      search_from=0
+                      while target_i<len(segments):
+                          target=arabic_key(segments[target_i]["arabic"])
+                          hit=-1
+                          for wi in range(search_from,len(keys)):
+                              if keys[wi]==target:
+                                  hit=wi; break
+                          if hit<0:
+                              break
+                          stc,enc=positions[hit]
+                          st,en=char_span(chars,stc,enc)
+                          seg_rows.append({
+                              "index":target_i,"track":ref_i,"start":round(st,3),"end":round(en,3),
+                              "arabic":segments[target_i]["arabic"],"transliteration":segments[target_i]["transliteration"]
+                          })
+                          target_i+=1
+                          search_from=hit+1
+                  if target_i!=len(segments):
+                      missing=segments[target_i]["arabic"] if target_i<len(segments) else "?"
+                      raise SystemExit(f"Quran segment mapping incomplete {sid}: {target_i}/{len(segments)} next={missing}")
+
+              if len(seg_rows)!=len(segments):
+                  raise SystemExit(f"Timing count mismatch {sid}: {len(seg_rows)} != {len(segments)}")
+              prev_by_track={}
+              for row in seg_rows:
+                  tr=int(row["track"]); st=float(row["start"]); en=float(row["end"])
+                  if en<=st:
+                      raise SystemExit(f"Non-positive timing {sid} segment {row['index']}")
+                  if tr in prev_by_track and st+0.001<prev_by_track[tr]:
+                      raise SystemExit(f"Non-monotonic timing {sid} track {tr}")
+                  prev_by_track[tr]=en
+
+              ranges=[]
+              for tr in range(len(tracks)):
+                  rs=[x for x in seg_rows if int(x["track"])==tr]
+                  if rs:
+                      ranges.append({"track":tr,"start":rs[0]["start"],"end":rs[-1]["end"]})
+
+              items_out[sid]={
+                  "type":item.get("type"),
+                  "tracks":tracks,
+                  "segments":seg_rows,
+                  "ranges":ranges,
+                  "alignmentLoss":losses,
+                  "syncMode":"elevenlabs-forced-alignment-v1"
+              }
+              total_segments+=len(seg_rows)
+              print(f"{sid}: {len(seg_rows)} exact segments")
+
+          expected=sum(len(x.get("learningSegments") or []) for x in data.get("items",[]))
+          if len(items_out)!=20 or total_segments!=expected:
+              raise SystemExit(f"Coverage failed items={len(items_out)} segments={total_segments}/{expected}")
+
+          payload={
+              "schemaVersion":1,
+              "id":"KIDS_DUA_SMART_LEARNING_TIMINGS_V1",
+              "generatedAt":time.strftime("%Y-%m-%dT%H:%M:%SZ",time.gmtime()),
+              "syncMode":"elevenlabs-forced-alignment-v1",
+              "estimatedTimingsAllowed":False,
+              "microphoneEvaluationEnabled":False,
+              "items":items_out,
+              "counts":{"duaItems":len(items_out),"segments":total_segments}
+          }
+          OUT.write_text(json.dumps(payload,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+          print("Wrote",OUT,"items",len(items_out),"segments",total_segments)
+          PY
+
+      - name: Validate exact smart-learning timing map
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("kids/data/dua-learning-timings.json").read_text(encoding="utf-8"))
+          if d.get("syncMode")!="elevenlabs-forced-alignment-v1":
+              raise SystemExit("Non-exact sync mode rejected")
+          if d.get("estimatedTimingsAllowed") is not False:
+              raise SystemExit("Estimated timings must stay forbidden")
+          if int((d.get("counts") or {}).get("duaItems") or 0)!=20:
+              raise SystemExit("Expected 20 Duas")
+          if int((d.get("counts") or {}).get("segments") or 0)<150:
+              raise SystemExit("Segment coverage too low")
+          print("DUA SMART LEARNING ALIGNMENT OK",d["counts"])
+          PY
+
+      - name: Commit exact timing map
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/data/dua-learning-timings.json
+          if git diff --cached --quiet; then
+            echo "Dua timing map already current."
+            exit 0
+          fi
+          git commit -m "Kids: exact forced alignment for Dua smart learning"
+          git pull --rebase origin main
+          git push origin HEAD:main
