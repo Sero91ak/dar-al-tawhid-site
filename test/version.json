@@ -1,6 +1,6 @@
 {
-  "buildId": "app-shell-v1322",
-  "appBuildId": "app-shell-v1322",
-  "note": "v1322 · Test-Startseite als eine durchgehende visuelle Leinwand: Hero- und Studienmotiv überlappen dynamisch mit 260–300 px Crossfade, DER KERN liegt innerhalb der Übergangszone, der untere Bereich behält das Studienmotiv unter einem warmen Pergament-Schleier und läuft weich in den Footer aus. Die Fünf-Tab-Leiste bleibt vollständig unverändert.",
-  "updatedAt": "2026-10-07T19:49:00+02:00"
+  "buildId": "app-shell-v1323",
+  "appBuildId": "app-shell-v1323",
+  "note": "v1323 · Stabilitäts-Hotfix: die experimentellen dynamischen Vollseiten-Hintergrundebenen aus v1322 wurden vollständig entfernt. Startseite nutzt wieder die stabile v1321-Home-Struktur, damit Scrollen und Touch in iOS/PWA nicht blockiert werden. Keine Änderung an der Fünf-Tab-Leiste.",
+  "updatedAt": "2026-10-07T20:59:00+02:00"
 }
