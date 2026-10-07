@@ -10794,4 +10794,15 @@ html[data-view="stories"] #view-stories > :last-child{
 @keyframes kidsBalloonReduced1222{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-7px) scale(1.025)}}
 </style>
 
+<style id="kids-quiz-entry-restore-v1225">
+/* V1225 regression guard: Quiz is a permanent Kids home area.
+   Older audio-first experiments must never hide this entry again. */
+#view-today #openQuizButton.choice.quiz{
+  display:grid!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+}
+</style>
+
 </html>
