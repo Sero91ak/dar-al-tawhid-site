@@ -64,18 +64,18 @@ jobs:
         run: |
           set -euo pipefail
           CB="$(date +%s)"
-          curl -fsSL --max-time 30 "https://dar-al-tawhid.de/kids/start?cb=$CB" -o /tmp/kids-live.html
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/start?cb=$CB" -o /tmp/kids-live.html
           grep -F '/kids/owner-voice.js?v=8' /tmp/kids-live.html
           grep -F '/kids/dua-smart-learn.js?v=1241' /tmp/kids-live.html
           grep -F '/kids/dua-hub-v1219.js?v=1241' /tmp/kids-live.html
 
-          curl -fsSL --max-time 30 "https://dar-al-tawhid.de/kids/dua-smart-learn.js?v=1241&cb=$CB" -o /tmp/dua-smart.js
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/dua-smart-learn.js?v=1241&cb=$CB" -o /tmp/dua-smart.js
           grep -F 'playGerman:playGerman' /tmp/dua-smart.js
           grep -F 'ensureAudioAttached' /tmp/dua-smart.js
 
-          curl -fsSL --max-time 30 "https://dar-al-tawhid.de/kids/data/dua-arabic-audio.json?v=8&cb=$CB" -o /tmp/dua-ar.json
-          curl -fsSL --max-time 30 "https://dar-al-tawhid.de/kids/data/dua-arabic-slow-audio.json?v=3&cb=$CB" -o /tmp/dua-slow.json
-          curl -fsSL --max-time 30 "https://dar-al-tawhid.de/kids/data/dua-word-audio.json?v=3&cb=$CB" -o /tmp/dua-word.json
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-arabic-audio.json?v=8&cb=$CB" -o /tmp/dua-ar.json
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-arabic-slow-audio.json?v=3&cb=$CB" -o /tmp/dua-slow.json
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de/kids/data/dua-word-audio.json?v=3&cb=$CB" -o /tmp/dua-word.json
 
           node <<'NODE'
           const fs=require("fs");
@@ -97,7 +97,7 @@ jobs:
           NODE
 
           SAMPLE="$(cat /tmp/sample-url.txt)"
-          curl -fsSL --max-time 30 "https://dar-al-tawhid.de$SAMPLE?cb=$CB" -o /tmp/dua-sample.m4a
+          curl -fsSL --max-time 30 -A "DarAlTawhidKids-iOS" "https://dar-al-tawhid.de$SAMPLE?cb=$CB" -o /tmp/dua-sample.m4a
           BYTES="$(wc -c < /tmp/dua-sample.m4a)"
           test "$BYTES" -gt 1200
           python3 - <<'PY'
