@@ -2882,7 +2882,7 @@ html:not([data-view="today"]) .view.active{
 
 <div class="app">
   <div class="ambient"></div>
-  <div class="dev-ribbon" hidden>KIDS · V1.08.51</div>
+  <div class="dev-ribbon" hidden>KIDS · V1.08.52</div>
 
   <main class="shell">
     <section id="view-today" class="view active">
@@ -3273,7 +3273,7 @@ html:not([data-view="today"]) .view.active{
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v130-home-wordmark-live1227";
+const KIDS_BUILD_ID="kids-shell-v131-home-wordmark-fallback1228";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -6400,7 +6400,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/owner-voice.js?v=6"></script>\n<script src="/kids/dua-smart-learn.js?v=2"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v130-home-wordmark-live1227";
+  var KIDS_BUILD_ID="kids-shell-v131-home-wordmark-fallback1228";
   var reloadKey="kids.pwa.controller.reload."+KIDS_BUILD_ID;
   function freshStart(reason){
     try{
@@ -6416,7 +6416,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if("serviceWorker" in navigator){
     navigator.serviceWorker.addEventListener("controllerchange",function(){freshStart("controller")});
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1227",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1228",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     });
@@ -10850,6 +10850,178 @@ html[data-view="stories"] #view-stories > :last-child{
   opacity:1!important;
   pointer-events:auto!important;
 }
+</style>
+
+
+<style id="kids-home-wordmark-guaranteed-v1228">
+/* V1228 · GUARANTEED HOME BRAND
+   DĀR AL TAWḤĪD is real DOM text in the same rounded Kids visual language.
+   No image/CSP dependency. This is the final style block and outranks all legacy rules. */
+
+#view-today .kids-wordmark{
+  position:absolute!important;
+  z-index:40!important;
+  top:max(44px,calc(env(safe-area-inset-top,0px) + 7px))!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0 10px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:2px!important;
+  overflow:visible!important;
+  pointer-events:none!important;
+}
+
+/* Disable the unreliable raster layer. The approved visual is rebuilt as live rounded type below. */
+#view-today .kids-wordmark > img,
+#view-today .kids-wordmark > img.wm-dar-reference-v1222{
+  display:none!important;
+  visibility:hidden!important;
+  opacity:0!important;
+}
+
+/* DĀR AL TAWḤĪD — visible under every circumstance. */
+#view-today .kids-wordmark > .wm-dar-safe{
+  position:relative!important;
+  z-index:42!important;
+  width:auto!important;
+  max-width:calc(100vw - 22px)!important;
+  height:auto!important;
+  margin:0 auto 3px!important;
+  padding:5px 0 8px!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:center!important;
+  gap:clamp(10px,2.4vw,16px)!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(35px,9.35vw,49px)!important;
+  font-weight:700!important;
+  line-height:.88!important;
+  letter-spacing:-.035em!important;
+  color:#ffc34d!important;
+  -webkit-text-fill-color:#ffc34d!important;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.30))!important;
+  transform-origin:50% 85%!important;
+  animation:darTitleFloat1228 4.9s ease-in-out infinite!important;
+}
+#view-today .kids-wordmark > .wm-dar-safe .wm-word{
+  display:inline-flex!important;
+  align-items:flex-end!important;
+  flex:0 0 auto!important;
+  gap:0!important;
+  overflow:visible!important;
+  transform-origin:50% 100%!important;
+}
+#view-today .kids-wordmark > .wm-dar-safe .wm-word > span{
+  display:inline-block!important;
+  position:relative!important;
+  color:#ffc34d!important;
+  -webkit-text-fill-color:#ffc34d!important;
+  -webkit-text-stroke:1.15px rgba(255,235,163,.68)!important;
+  paint-order:stroke fill!important;
+  text-shadow:
+    0 1px 0 #ffe18a,
+    0 3px 0 #eba333,
+    0 5px 0 #c97916,
+    0 7px 0 rgba(132,67,8,.78),
+    0 10px 16px rgba(0,0,0,.24)!important;
+  filter:none!important;
+  animation:none!important;
+  transform-origin:50% 100%!important;
+}
+
+/* The same friendly upward arch as the approved reference. */
+#view-today .wm-word-dar > span:nth-child(1){transform:translateY(5px) rotate(-3deg)!important}
+#view-today .wm-word-dar > span:nth-child(2){transform:translateY(0) rotate(-1deg)!important}
+#view-today .wm-word-dar > span:nth-child(3){transform:translateY(3px) rotate(1.5deg)!important}
+#view-today .wm-word-al > span:nth-child(1){transform:translateY(-1px) rotate(-1.5deg)!important}
+#view-today .wm-word-al > span:nth-child(2){transform:translateY(1px) rotate(1.8deg)!important}
+#view-today .wm-word-tawhid > span:nth-child(1){transform:translateY(0) rotate(-1.6deg)!important}
+#view-today .wm-word-tawhid > span:nth-child(2){transform:translateY(1px) rotate(.8deg)!important}
+#view-today .wm-word-tawhid > span:nth-child(3){transform:translateY(3px) rotate(-1deg)!important}
+#view-today .wm-word-tawhid > span:nth-child(4){transform:translateY(4px) rotate(1.3deg)!important}
+#view-today .wm-word-tawhid > span:nth-child(5){transform:translateY(2px) rotate(-.7deg)!important}
+#view-today .wm-word-tawhid > span:nth-child(6){transform:translateY(6px) rotate(2.5deg)!important}
+
+@keyframes darTitleFloat1228{
+  0%,100%{transform:translate3d(0,0,0) rotate(0deg)}
+  38%{transform:translate3d(0,-2px,0) rotate(-.22deg)}
+  70%{transform:translate3d(0,1px,0) rotate(.18deg)}
+}
+
+/* Kids — old staggered balloon hop, clearly visible and continuous. */
+#view-today .kids-wordmark > .wm-kids{
+  position:relative!important;
+  z-index:43!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:flex-end!important;
+  gap:.028em!important;
+  margin:2px auto 0!important;
+  font-family:"Fredoka","SF Pro Rounded","Arial Rounded MT Bold",system-ui,sans-serif!important;
+  font-size:clamp(69px,19.6vw,90px)!important;
+  font-weight:700!important;
+  line-height:.84!important;
+}
+#view-today .kids-wordmark > .wm-kids span{
+  display:inline-block!important;
+  transform-origin:50% 90%!important;
+  will-change:transform!important;
+  animation:kidsBalloon1228 2.18s cubic-bezier(.34,.02,.22,1) infinite!important;
+}
+#view-today .kids-wordmark > .wm-kids .k{animation-delay:0s!important}
+#view-today .kids-wordmark > .wm-kids .i{animation-delay:.13s!important}
+#view-today .kids-wordmark > .wm-kids .d{animation-delay:.26s!important}
+#view-today .kids-wordmark > .wm-kids .s{animation-delay:.39s!important}
+@keyframes kidsBalloon1228{
+  0%,100%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+  30%{transform:translate3d(0,-14px,0) rotate(-.9deg) scale(1.055,.945)}
+  49%{transform:translate3d(0,2px,0) rotate(.3deg) scale(.976,1.034)}
+  66%{transform:translate3d(0,-5px,0) rotate(-.2deg) scale(1.018,.986)}
+  82%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}
+}
+
+@media(max-width:390px){
+  #view-today .kids-wordmark{
+    top:max(41px,calc(env(safe-area-inset-top,0px) + 5px))!important;
+    padding-inline:7px!important;
+  }
+  #view-today .kids-wordmark > .wm-dar-safe{
+    max-width:calc(100vw - 14px)!important;
+    gap:9px!important;
+    font-size:clamp(33px,9.1vw,36px)!important;
+  }
+  #view-today .kids-wordmark > .wm-kids{
+    font-size:clamp(66px,19.2vw,78px)!important;
+  }
+}
+@media(min-width:700px){
+  #view-today .kids-wordmark{
+    top:max(52px,calc(env(safe-area-inset-top,0px) + 12px))!important;
+  }
+  #view-today .kids-wordmark > .wm-dar-safe{
+    font-size:52px!important;
+    gap:17px!important;
+  }
+  #view-today .kids-wordmark > .wm-kids{font-size:96px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-today .kids-wordmark > .wm-dar-safe{
+    animation:darTitleReduced1228 7s ease-in-out infinite!important;
+  }
+  #view-today .kids-wordmark > .wm-kids span{
+    animation:kidsBalloonReduced1228 3.2s ease-in-out infinite!important;
+  }
+}
+@keyframes darTitleReduced1228{0%,100%{transform:translateY(0)}50%{transform:translateY(-1px)}}
+@keyframes kidsBalloonReduced1228{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 </style>
 
 </html>
