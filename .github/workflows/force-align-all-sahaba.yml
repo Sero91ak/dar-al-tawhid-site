@@ -34,6 +34,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          ELEVENLABS_API_KEY_CLEAN="$(printf '%s' "${ELEVENLABS_API_KEY:-}" | tr -d '[:space:]')"
+          ADMIN_PUBLISH_SECRET_CLEAN="$(printf '%s' "${ADMIN_PUBLISH_SECRET:-}" | tr -d '\r\n')"
           python3 - <<'PY'
           import json,re
           from pathlib import Path
@@ -75,13 +77,13 @@ jobs:
             result="/tmp/$sid-alignment.json"
             ok=0
 
-            if [ -n "${ADMIN_PUBLISH_SECRET:-}" ]; then
+            if [ -n "${ADMIN_PUBLISH_SECRET_CLEAN:-}" ]; then
               for attempt in 1 2 3; do
                 code="$(curl -sS -o "$result" -w '%{http_code}' \
                   -X POST "$VOICE_API/align-story" \
                   -H "Origin: https://dar-al-tawhid.de" \
                   -H "Referer: https://dar-al-tawhid.de/voice-studio/" \
-                  -H "X-Admin-Secret: $ADMIN_PUBLISH_SECRET" \
+                  -H "X-Admin-Secret: $ADMIN_PUBLISH_SECRET_CLEAN" \
                   -H "Accept: application/json" \
                   -F "file=@$audio_url;type=audio/mpeg" \
                   --form-string "text=$(cat "$story")" || true)"
@@ -102,11 +104,11 @@ jobs:
             fi
 
             if [ "$ok" != "1" ]; then
-              [ -n "${ELEVENLABS_API_KEY:-}" ] || { echo "::error::ELEVENLABS_API_KEY missing"; exit 1; }
+              [ -n "${ELEVENLABS_API_KEY_CLEAN:-}" ] || { echo "::error::ELEVENLABS_API_KEY missing"; exit 1; }
               raw="/tmp/$sid-eleven-raw.json"
               code="$(curl -sS -o "$raw" -w '%{http_code}' \
                 -X POST "https://api.elevenlabs.io/v1/forced-alignment" \
-                -H "xi-api-key: $ELEVENLABS_API_KEY" \
+                -H "xi-api-key: $ELEVENLABS_API_KEY_CLEAN" \
                 -F "file=@$audio_url;type=audio/mpeg" \
                 --form-string "text=$(cat "$story")" || true)"
               [ "$code" = "200" ] || { echo "::error::Forced alignment HTTP $code for $sid"; cat "$raw"; exit 1; }
