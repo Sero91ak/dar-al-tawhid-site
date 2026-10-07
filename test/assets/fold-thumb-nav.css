@@ -656,3 +656,88 @@ html.dar-test-side-nav:not(.dar-nav-scrolling) #bottomNav.bottom-nav{
 html.dar-test-side-nav #bottomNav.bottom-nav:is(:hover,:focus-within){
   opacity:1!important;
 }
+
+
+/* v1331 · FIXED READER CHROME SAFE-LANE */
+html.dar-test-side-nav{
+  --dar-side-nav-reserve:76px!important;
+  --dar-side-content-gap:12px!important;
+}
+
+/* Give every normal route a visible gap before the side rail. */
+html.dar-test-side-nav[data-dar-nav-position="right"] #appView{
+  padding-right:var(--dar-side-content-gap)!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] #appView{
+  padding-left:var(--dar-side-content-gap)!important;
+}
+
+/* Fixed Qurʾān reader chrome must respect the side rail as well; body padding
+   cannot constrain fixed-position UI. */
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-quran-reader-route .qrc-chrome{
+  left:0!important;
+  right:calc(var(--dar-side-nav-reserve) + var(--dar-side-content-gap))!important;
+  width:auto!important;
+  max-width:none!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-quran-reader-route .qrc-chrome{
+  left:calc(var(--dar-side-nav-reserve) + var(--dar-side-content-gap))!important;
+  right:0!important;
+  width:auto!important;
+  max-width:none!important;
+}
+
+/* The reader's floating context dock is centered inside the usable content
+   surface instead of the physical viewport. */
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-quran-reader-route .qrc-context-bar,
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-quran-reader-route .qrc-context-bar.qrc-context-bar--dock{
+  left:calc(50% - (var(--dar-side-nav-reserve) + var(--dar-side-content-gap))/2)!important;
+  right:auto!important;
+  width:min(760px,calc(100vw - var(--dar-side-nav-reserve) - var(--dar-side-content-gap) - 28px))!important;
+  max-width:min(760px,calc(100vw - var(--dar-side-nav-reserve) - var(--dar-side-content-gap) - 28px))!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  transform:translate(-50%,0)!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-quran-reader-route .qrc-context-bar,
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-quran-reader-route .qrc-context-bar.qrc-context-bar--dock{
+  left:calc(50% + (var(--dar-side-nav-reserve) + var(--dar-side-content-gap))/2)!important;
+  right:auto!important;
+  width:min(760px,calc(100vw - var(--dar-side-nav-reserve) - var(--dar-side-content-gap) - 28px))!important;
+  max-width:min(760px,calc(100vw - var(--dar-side-nav-reserve) - var(--dar-side-content-gap) - 28px))!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  transform:translate(-50%,0)!important;
+}
+
+/* Qurʾān mini-player / reader dock uses the same usable lane when visible. */
+html.dar-test-side-nav[data-dar-nav-position="right"] body.is-quran-reader-route #darQuranMiniPlayer{
+  left:0!important;
+  right:calc(var(--dar-side-nav-reserve) + var(--dar-side-content-gap))!important;
+  width:auto!important;
+  max-width:none!important;
+}
+html.dar-test-side-nav[data-dar-nav-position="left"] body.is-quran-reader-route #darQuranMiniPlayer{
+  left:calc(var(--dar-side-nav-reserve) + var(--dar-side-content-gap))!important;
+  right:0!important;
+  width:auto!important;
+  max-width:none!important;
+}
+
+/* Keep the reader body visually centred in the usable surface. */
+html.dar-test-side-nav body.is-quran-reader-route .qrc-body{
+  margin-left:auto!important;
+  margin-right:auto!important;
+  max-width:min(100%,58rem)!important;
+}
+
+/* Articles and contribution detail pages get a calm reading measure and a
+   small safety gap from the global side rail. */
+html.dar-test-side-nav body:is(.is-post-route,.is-news-detail-route) :is(
+  .article,.post-reader,.post-body,.post-detail,.news-detail
+){
+  width:100%!important;
+  max-inline-size:min(100%,52rem)!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+}
