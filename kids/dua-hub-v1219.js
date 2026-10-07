@@ -126,23 +126,73 @@
     })[cat] || "book";
   }
 
-  function artMarkup(kind, extraClass) {
+  function assetHash(seed) {
+    const s = String(seed || "");
+    let h = 0;
+    for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+    return Math.abs(h);
+  }
+
+  function artAsset(kind, seed) {
+    const raw = String(kind || "");
+    if (/^action-/.test(raw)) {
+      return ({
+        "action-library": "/kids/assets/dua-premium/action-library-v1222.png?v=1233",
+        "action-learn": "/kids/assets/dua-premium/action-learn-v1222.png?v=1233",
+        "action-random": "/kids/assets/dua-premium/action-random-v1222.png?v=1233"
+      })[raw] || "/kids/assets/dua-premium/action-library-v1222.png?v=1233";
+    }
+    const k = artKind(kind);
+    const sets = {
+      book: [
+        "/kids/assets/dua-premium/knowledge-v1222.jpg?v=1233",
+        "/kids/assets/dua-premium/knowledge-2-v1233.jpg?v=1233",
+        "/kids/assets/dua-premium/knowledge-3-v1233.jpg?v=1233"
+      ],
+      family: [
+        "/kids/assets/dua-premium/family-v1222.jpg?v=1233",
+        "/kids/assets/dua-premium/family-2-v1233.jpg?v=1233",
+        "/kids/assets/dua-premium/family-3-v1233.jpg?v=1233"
+      ],
+      shield: [
+        "/kids/assets/dua-premium/protection-v1222.jpg?v=1233",
+        "/kids/assets/dua-premium/protection-2-v1233.jpg?v=1233",
+        "/kids/assets/dua-premium/protection-3-v1233.jpg?v=1233"
+      ],
+      moon: [
+        "/kids/assets/dua-premium/sleep-v1222.jpg?v=1233",
+        "/kids/assets/dua-premium/sleep-2-v1233.jpg?v=1233",
+        "/kids/assets/dua-premium/sleep-3-v1233.jpg?v=1233"
+      ],
+      food: [
+        "/kids/assets/dua-premium/food-v1222.jpg?v=1233",
+        "/kids/assets/dua-premium/food-2-v1233.jpg?v=1233",
+        "/kids/assets/dua-premium/food-3-v1233.jpg?v=1233"
+      ],
+      home: [
+        "/kids/assets/dua-premium/home-v1222.jpg?v=1233",
+        "/kids/assets/dua-premium/home-2-v1233.jpg?v=1233",
+        "/kids/assets/dua-premium/home-3-v1233.jpg?v=1233"
+      ],
+      mosque: [
+        "/kids/assets/dua-premium/mosque-v1222.jpg?v=1233",
+        "/kids/assets/dua-premium/mosque-2-v1233.jpg?v=1233",
+        "/kids/assets/dua-premium/mosque-3-v1233.jpg?v=1233"
+      ]
+    };
+    const list = sets[k] || sets.book;
+    return list[assetHash(seed || k) % list.length];
+  }
+
+  function artMarkup(kind, extraClass, seed) {
     const raw = String(kind || "");
     const k = /^action-/.test(raw) ? raw : artKind(kind);
-    const file = ({
-      "action-library": "action-library-v1222.png",
-      "action-learn": "action-learn-v1222.png",
-      "action-random": "action-random-v1222.png",
-      moon: "sleep-v1222.jpg",
-      food: "food-v1222.jpg",
-      home: "home-v1222.jpg",
-      mosque: "mosque-v1222.jpg",
-      family: "family-v1222.jpg",
-      shield: "protection-v1222.jpg",
-      book: "knowledge-v1222.jpg"
-    })[k] || "knowledge-v1222.jpg";
     return '<img class="duahub-3d ' + escapeHtml(k) + " " + (extraClass || "") +
-      '" src="/kids/assets/dua-premium/' + file + '?v=1222" alt="" aria-hidden="true" loading="lazy" decoding="async">';
+      '" src="' + artAsset(kind, seed) + '" alt="" aria-hidden="true" loading="lazy" decoding="async">';
+  }
+
+  function detailSceneAsset(d) {
+    return artAsset(categoryOf(d), d && d.id);
   }
 
   function avatarSvg(gender, className) {
@@ -183,20 +233,17 @@
     view.innerHTML =
       '<div class="duahub-home" id="duaHubHome">' +
         '<header class="duahub-head">' +
-          '<div class="duahub-profile" id="duaHubProfile">' + avatarSvg(activeGender(), "duahub-profile-avatar") + '<span>' + escapeHtml(profileDisplayName()) + '</span></div>' +
-          '<div class="duahub-brand"><span>DĀR AL TAWḤĪD</span><b>Kids</b></div>' +
-          '<div class="duahub-moonmark" aria-hidden="true"><i></i></div>' +
-          '<div class="duahub-head-copy"><small>HÖREN · VERSTEHEN · LERNEN</small><h2>Duʿāʾ</h2><p>Was möchtest du heute machen?</p></div>' +
+          '<div class="duahub-head-copy"><small>HÖREN · VERSTEHEN · MERKEN</small><h2>Duʿāʾ</h2><p>Deine Duʿāʾ für jeden Tag.</p></div>' +
         '</header>' +
         '<div class="duahub-actions" aria-label="Duʿāʾ Bereiche">' +
-          '<button type="button" class="duahub-action select" data-duahub-action="library">' + artMarkup("action-library", "duahub-action-art") + '<strong>Duʿāʾ auswählen</strong><span>Alle geprüften Duʿāʾ</span><i class="duahub-arrow">›</i></button>' +
-          '<button type="button" class="duahub-action learn" data-duahub-action="learn">' + artMarkup("action-learn", "duahub-action-art") + '<strong>Duʿāʾ lernen</strong><span>Schritt für Schritt</span><i class="duahub-arrow">›</i></button>' +
-          '<button type="button" class="duahub-action random" data-duahub-action="random">' + artMarkup("action-random", "duahub-action-art") + '<strong>Zufalls-Duʿāʾ</strong><span>Etwas entdecken</span><i class="duahub-arrow">›</i></button>' +
+          '<button type="button" class="duahub-action select" data-duahub-action="library">' + artMarkup("action-library", "duahub-action-art") + '<strong>Duʿāʾ auswählen</strong><span>Finde die passende Duʿāʾ</span><i class="duahub-arrow">›</i></button>' +
+          '<button type="button" class="duahub-action learn" data-duahub-action="learn">' + artMarkup("action-learn", "duahub-action-art") + '<strong>Duʿāʾ lernen</strong><span>Hören · nachsprechen · merken</span><i class="duahub-arrow">›</i></button>' +
+          '<button type="button" class="duahub-action random" data-duahub-action="random">' + artMarkup("action-random", "duahub-action-art") + '<strong>Zufalls-Duʿāʾ</strong><span>Entdecke etwas Neues</span><i class="duahub-arrow">›</i></button>' +
         '</div>' +
         '<section class="duahub-resume" id="duaHubResume"></section>' +
         '<section class="duahub-library" id="duaHubLibrary">' +
           '<div class="duahub-section-title"><div><small>DEINE BIBLIOTHEK</small><h3>Duʿāʾ auswählen</h3></div><span id="duaHubCount"></span></div>' +
-          '<label class="duahub-search"><span aria-hidden="true"></span><input id="duaHubSearch" type="search" inputmode="search" autocomplete="off" placeholder="Duʿāʾ suchen"></label>' +
+          '<label class="duahub-search"><span aria-hidden="true"></span><input id="duaHubSearch" type="search" inputmode="search" autocomplete="off" placeholder="Welche Duʿāʾ suchst du?"></label>' +
           '<div class="duahub-chips" id="duaHubChips"></div>' +
           '<div class="duahub-grid" id="duaHubGrid"><div class="duahub-loading">Duʿāʾ werden geladen …</div></div>' +
         '</section>' +
@@ -204,10 +251,13 @@
       '<section class="duahub-detail" id="duaHubDetail" aria-hidden="true">' +
         '<div class="duahub-detail-scroll" id="duaHubDetailScroll">' +
           '<button type="button" class="duahub-detail-back" id="duaHubBack" aria-label="Zur Duʿāʾ-Bibliothek">‹ <span>Zurück</span></button>' +
-          '<div class="duahub-detail-hero" id="duaHubDetailHero"></div>' +
-          '<div class="duahub-detail-kicker" id="duaHubDetailKicker">GEPRÜFT</div>' +
-          '<h2 id="duaHubDetailTitle">Duʿāʾ</h2>' +
-          '<p id="duaHubDetailPrompt" class="duahub-detail-prompt"></p>' +
+          '<div class="duahub-detail-hero" id="duaHubDetailHero">' +
+            '<div class="duahub-detail-titlewrap">' +
+              '<div class="duahub-detail-kicker" id="duaHubDetailKicker">GEPRÜFT</div>' +
+              '<h2 id="duaHubDetailTitle">Duʿāʾ</h2>' +
+              '<p id="duaHubDetailPrompt" class="duahub-detail-prompt"></p>' +
+            '</div>' +
+          '</div>' +
           '<div class="duahub-detail-actions">' +
             '<button type="button" id="duaHubListen" class="duahub-listen"><span class="duahub-play">▶</span><b>Anhören</b></button>' +
             '<button type="button" id="duaHubLearn" class="duahub-learn"><span class="duahub-bookmark">◆</span><b>Lernen</b></button>' +
@@ -218,8 +268,8 @@
             '<div class="duahub-rule"></div>' +
             '<div class="duahub-meaning" id="duaHubMeaning"></div>' +
             '<button type="button" class="duahub-german-audio" id="duaHubGerman">Erklärung hören</button>' +
+            '<div class="duahub-source" id="duaHubSource"></div>' +
           '</article>' +
-          '<div class="duahub-source" id="duaHubSource"></div>' +
         '</div>' +
       '</section>';
     quran.parentNode.insertBefore(view, quran);
@@ -324,7 +374,7 @@
     box.innerHTML = list.map(d => {
       const cat = categoryOf(d);
       return '<button type="button" class="duahub-card cat-' + cat + '" data-duahub-id="' + escapeHtml(d.id) + '">' +
-        '<span class="duahub-card-art">' + artMarkup(cat) + '</span>' +
+        '<span class="duahub-card-art">' + artMarkup(cat, "", d.id) + '</span>' +
         '<span class="duahub-card-copy"><small>' + escapeHtml(categoryLabel(cat)) + '</small><strong>' + escapeHtml(d.title) + '</strong><em>' + escapeHtml(stageLabel(d)) + '</em></span>' +
         '<span class="duahub-card-go">›</span>' +
       "</button>";
@@ -374,7 +424,7 @@
     return '<div class="duahub-resume-block">' +
       '<div class="duahub-resume-head"><strong>' + escapeHtml(label) + '</strong><span>' + escapeHtml(stageLabel(d)) + '</span></div>' +
       '<button type="button" class="duahub-resume-card" data-duahub-resume="' + escapeHtml(d.id) + '">' +
-        '<span class="duahub-resume-art">' + artMarkup(categoryOf(d)) + '</span>' +
+        '<span class="duahub-resume-art">' + artMarkup(categoryOf(d), "", d.id) + '</span>' +
         '<span class="duahub-resume-copy"><strong>' + escapeHtml(d.title) + '</strong><span class="duahub-mini-progress"><i style="width:' + percent + '%"></i></span><small>' + (type === "continue" ? "Lernweg fortsetzen" : "Noch einmal anhören") + '</small></span>' +
         '<span class="duahub-resume-go">›</span>' +
       '</button></div>';
@@ -464,14 +514,19 @@
     const home = q("#duaHubHome");
     if (!detail || !home) return;
     clearDuaLocks();
-    q("#duaHubDetailHero").className = "duahub-detail-hero " + heroSceneClass(d);
-    q("#duaHubDetailHero").innerHTML = artMarkup(categoryOf(d), "duahub-detail-art");
+
+    const hero = q("#duaHubDetailHero");
+    if (hero) {
+      hero.className = "duahub-detail-hero " + heroSceneClass(d);
+      hero.style.setProperty("--duahub-detail-image", 'url("' + detailSceneAsset(d) + '")');
+    }
     q("#duaHubDetailKicker").textContent = "✓ GEPRÜFT · " + categoryLabel(categoryOf(d)).toUpperCase();
     q("#duaHubDetailTitle").textContent = d.title || "Duʿāʾ";
     q("#duaHubDetailPrompt").textContent = d.childPrompt || "";
     q("#duaHubArabic").textContent = d.arabic || "";
     q("#duaHubTranslit").textContent = d.transliteration || "";
     q("#duaHubMeaning").textContent = d.meaning || "";
+
     const audioReady = hasReadyAudio(d);
     const learnReady = canSmartLearn(d);
     const listenButton = q("#duaHubListen");
@@ -494,9 +549,11 @@
       germanButton.textContent = audioReady ? "Erklärung hören" : "Erklärung lesen";
       germanButton.setAttribute("aria-disabled", audioReady ? "false" : "true");
     }
+
     const source = q("#duaHubSource");
     source.innerHTML = '<span>Quelle</span><b>' + escapeHtml(d.source || "Geprüfter Eintrag") + '</b>' +
       (d.sourceUrl ? '<a href="' + escapeHtml(d.sourceUrl) + '" target="_blank" rel="noopener">Nachweis öffnen</a>' : "");
+
     const shell = q(".shell");
     lastShellScroll = shell ? (Number(shell.scrollTop) || 0) : 0;
     home.hidden = true;
@@ -506,7 +563,8 @@
     document.documentElement.classList.add("duahub-detail-open");
     requestAnimationFrame(() => {
       if (shell) {
-        try { shell.scrollTo({ top: 0, left: 0, behavior: "auto" }); } catch (_) { shell.scrollTop = 0; }
+        try { shell.scrollTo({ top: 0, left: 0, behavior: "auto" }); }
+        catch (_) { shell.scrollTop = 0; }
       }
     });
   }
