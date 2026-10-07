@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1223";
-const KIDS_BUILD_ID="kids-shell-v127-home-brand1223";
+const CACHE_NAME="dar-al-tawhid-kids-v1224";
+const KIDS_BUILD_ID="kids-shell-v128-nav-deen-fix1224";
 const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1223",
   "/kids/start",
@@ -49,7 +49,7 @@ const CORE_PRECACHE=[
   "/kids/data/story-hub.json?v=7",
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
-  "/kids/deen-lessons.js?v=3",
+  "/kids/deen-lessons.js?v=4",
   "/kids/data/deen-lessons.json?v=3",
   "/kids/assets/deen/deen-entry.jpg?v=1206",
   "/kids/assets/deen/tawhid.jpg?v=1206",
@@ -125,8 +125,8 @@ const CORE_PRECACHE=[
   "/kids/navigation-v1182.js?v=1183",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
-  "/kids/kids-touch-rail.css?v=11",
-  "/kids/kids-card-interaction.js?v=4",
+  "/kids/kids-touch-rail.css?v=12",
+  "/kids/kids-card-interaction.js?v=5",
   "/kids/kids-age-typography.js?v=3",
   "/kids/owner-voice.js?v=6",
   "/kids/dua-smart-learn.css?v=2",
@@ -340,6 +340,11 @@ self.addEventListener("fetch",function(event){
   }
   /* STORY LIBRARY RUNTIME: network-first so restored structure is immediate on iOS/PWA. */
   if(url.pathname==="/kids/mubashshirun-stories.js"||url.pathname==="/kids/sahabiyyat-stories.js"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  /* DĪN DETAIL RUNTIME: network-first so reading/mode repairs are immediate. */
+  if(url.pathname==="/kids/deen-lessons.js"){
     event.respondWith(networkFirst(request));
     return;
   }
