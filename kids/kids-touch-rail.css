@@ -1509,3 +1509,308 @@ html body .gh-world-nav{border-bottom-color:rgba(239,208,138,.14)!important}
     flex-basis:48px!important;
   }
 }
+
+
+/* =========================================================
+   KIDS_SUBPAGE_DOCK_V15
+   Middle-ground navigation system:
+   - visibly redesigned, not a rollback to the thin legacy bar
+   - attached to the top edge, therefore not a floating content card
+   - rounded bottom edge creates a premium "docked" header
+   - compact icon-only back control with CSS-drawn chevron
+   - hero/image stages are NOT targeted
+   ========================================================= */
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+){
+  position:relative!important;
+  isolation:isolate!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:calc(76px + env(safe-area-inset-top,0px))!important;
+  margin:0 0 14px!important;
+  padding:calc(env(safe-area-inset-top,0px) + 11px) max(16px,env(safe-area-inset-right,0px)) 13px max(16px,env(safe-area-inset-left,0px))!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:13px!important;
+  border:0!important;
+  border-bottom:1px solid rgba(239,211,145,.16)!important;
+  border-radius:0 0 26px 26px!important;
+  background:
+    radial-gradient(circle at 8% 0%,rgba(104,202,192,.085),transparent 34%),
+    linear-gradient(180deg,rgba(5,27,40,.985),rgba(6,34,47,.945))!important;
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.16),
+    inset 0 -1px 0 rgba(111,205,196,.055)!important;
+  backdrop-filter:blur(20px) saturate(1.08)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(1.08)!important;
+  overflow:visible!important;
+}
+
+/* Soft light band: gives the dock depth without creating another card outline. */
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+)::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:-1!important;
+  left:58px!important;
+  right:20px!important;
+  bottom:0!important;
+  height:1px!important;
+  border-radius:999px!important;
+  background:linear-gradient(90deg,rgba(239,210,139,.22),rgba(109,205,196,.12),transparent)!important;
+  pointer-events:none!important;
+}
+
+/* Copy area: separated by one quiet vertical accent instead of another box. */
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+) > div{
+  position:relative!important;
+  min-width:0!important;
+  flex:1 1 auto!important;
+  display:grid!important;
+  align-content:center!important;
+  gap:3px!important;
+  margin:0!important;
+  padding:1px 0 1px 14px!important;
+  border-left:1px solid rgba(239,211,145,.16)!important;
+}
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+) > div > strong{
+  display:block!important;
+  margin:0!important;
+  font-size:clamp(19px,2.45vw,22px)!important;
+  line-height:1.05!important;
+  font-weight:900!important;
+  letter-spacing:-.016em!important;
+  color:#fff8eb!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+html body :is(
+  .kids-subpage-nav,
+  .ms-library-nav,
+  .ps-library-nav,
+  .gh-world-nav
+) > div > span{
+  display:block!important;
+  margin:0!important;
+  font-size:clamp(10.5px,1.55vw,12.25px)!important;
+  line-height:1.28!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+  color:rgba(255,255,255,.60)!important;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+
+/* One consistent back control. Existing text glyph is hidden;
+   the chevron is drawn in CSS for a cleaner, platform-neutral shape. */
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+),
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+).kids-tap-card{
+  position:relative!important;
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  width:50px!important;
+  min-width:50px!important;
+  max-width:50px!important;
+  height:50px!important;
+  min-height:50px!important;
+  max-height:50px!important;
+  flex:0 0 50px!important;
+  margin:0!important;
+  padding:0!important;
+  display:block!important;
+  border:1px solid rgba(239,207,132,.28)!important;
+  border-radius:17px!important;
+  background:
+    radial-gradient(circle at 35% 25%,rgba(255,255,255,.055),transparent 46%),
+    linear-gradient(145deg,rgba(239,207,132,.105),rgba(64,151,152,.055))!important;
+  color:transparent!important;
+  font-size:0!important;
+  line-height:0!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.045),
+    0 7px 18px rgba(0,0,0,.11)!important;
+  cursor:pointer!important;
+  -webkit-tap-highlight-color:transparent!important;
+  touch-action:manipulation!important;
+  transform:none!important;
+  translate:none!important;
+  clip-path:none!important;
+  overflow:hidden!important;
+  transition:border-color .14s ease,box-shadow .14s ease,filter .14s ease!important;
+}
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+)::before{
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:11px!important;
+  height:11px!important;
+  border-left:3px solid #f7dda0!important;
+  border-bottom:3px solid #f7dda0!important;
+  border-radius:1px!important;
+  transform:translate(-37%,-50%) rotate(45deg)!important;
+  box-shadow:none!important;
+  pointer-events:none!important;
+}
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+)::after{
+  content:""!important;
+  display:none!important;
+}
+
+@media(hover:hover) and (pointer:fine){
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ):hover{
+    border-color:rgba(247,218,147,.48)!important;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.055),
+      0 0 20px rgba(236,196,105,.12),
+      0 7px 18px rgba(0,0,0,.11)!important;
+    filter:brightness(1.04)!important;
+  }
+}
+html body :is(
+  .ms-library-nav .ms-back,
+  .ps-library-nav .ps-library-back,
+  .gh-world-nav .gh-back,
+  .kids-subpage-nav .kids-subpage-back
+):is(:active,:focus-visible){
+  outline:0!important;
+  border-color:rgba(250,220,145,.72)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,232,164,.13),
+    inset 0 0 14px rgba(240,202,116,.08),
+    0 0 22px rgba(240,202,116,.15),
+    0 7px 18px rgba(0,0,0,.11)!important;
+  filter:brightness(1.055)!important;
+}
+
+/* Keep each section's identity through the accent, not through different geometry. */
+html body .dl-library-nav > div{border-left-color:rgba(124,210,198,.22)!important}
+html body .sy-library-page .ms-library-nav > div{border-left-color:rgba(231,190,145,.22)!important}
+html body .ps-library-nav > div{border-left-color:rgba(96,193,230,.22)!important}
+html body .gh-world-nav > div{border-left-color:rgba(239,208,138,.21)!important}
+
+@media(max-width:370px){
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav){
+    min-height:calc(72px + env(safe-area-inset-top,0px))!important;
+    padding-left:12px!important;
+    padding-right:12px!important;
+    gap:10px!important;
+    border-radius:0 0 22px 22px!important;
+  }
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ),
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ).kids-tap-card{
+    width:46px!important;
+    min-width:46px!important;
+    max-width:46px!important;
+    height:46px!important;
+    min-height:46px!important;
+    max-height:46px!important;
+    flex-basis:46px!important;
+    border-radius:15px!important;
+  }
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav)>div{
+    padding-left:11px!important;
+  }
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav)>div>strong{
+    font-size:17.5px!important;
+  }
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav)>div>span{
+    font-size:10px!important;
+  }
+}
+
+@media(min-width:700px){
+  html body :is(.kids-subpage-nav,.ms-library-nav,.ps-library-nav,.gh-world-nav){
+    min-height:calc(82px + env(safe-area-inset-top,0px))!important;
+    padding-left:max(22px,env(safe-area-inset-left,0px))!important;
+    padding-right:max(22px,env(safe-area-inset-right,0px))!important;
+    border-radius:0 0 30px 30px!important;
+  }
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ),
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ).kids-tap-card{
+    width:52px!important;
+    min-width:52px!important;
+    max-width:52px!important;
+    height:52px!important;
+    min-height:52px!important;
+    max-height:52px!important;
+    flex-basis:52px!important;
+    border-radius:18px!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html body :is(
+    .ms-library-nav .ms-back,
+    .ps-library-nav .ps-library-back,
+    .gh-world-nav .gh-back,
+    .kids-subpage-nav .kids-subpage-back
+  ){
+    transition:none!important;
+  }
+}

@@ -103,3 +103,13 @@ Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
 - Keine doppelte Rahmenwirkung aus Seitenkopf plus Inhaltskarten. Nur eine sehr feine untere Trennlinie und zurückhaltender Blur sind erlaubt.
 - Titel darf groß genug für Kinder sein, soll aber keine Inhaltskarte imitieren. Untertitel bleibt sekundär.
 - Diese Korrektur gilt global nur für die bereits definierte Nicht-Hero-Unterseitenstruktur. Hero-/Bildbühnen und deren Overlay-Controls bleiben weiterhin ausdrücklich ausgeschlossen.
+
+
+## Eingedockter Unterseiten-Kopf — `KIDS_SUBPAGE_DOCK_V15`
+
+- Der Unterseitenkopf ist weder die alte dünne Leiste noch eine große schwebende Karte.
+- Er ist als **eingedockter Top-Header mit nur unten abgerundeten Ecken** aufgebaut. Dadurch ist die Navigation sichtbar neu gestaltet, bleibt aber Teil der Seite und konkurriert nicht mit Inhaltskarten.
+- Links sitzt ein 46–52-px Zurück-Control mit einem per CSS gezeichneten Chevron. Kein großer „Zurück“-Text-Pill.
+- Zwischen Zurück-Control und Titelblock liegt eine feine vertikale Akzentlinie. Titel bleibt primär, Untertitel sekundär.
+- Tiefe entsteht nur über einen dezenten unteren Schatten/Blur und eine feine Akzentkante; keine komplette Kartenumrandung.
+- Hero-/Bildbühnen, Detail-Heroes und deren Overlay-Navigation sind weiterhin ausdrücklich ausgeschlossen.
