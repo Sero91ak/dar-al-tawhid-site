@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v128-nav-deen-fix1224",
-  "label": "KIDS · V1.08.49",
-  "releasedAt": "2026-10-07T12:11:00+02:00",
-  "note": "V1224 behebt zwei sichtbare Kids-Fehler: Der Propheten-Zurück-Button wird nicht mehr fälschlich durch die globale Capsule-Regel auf volle Breite gezogen. Im Dīn-Detail sind Hören & Mitlesen, Hören und Lesen wieder als drei getrennte Modi sichtbar; der vollständige Lesetext bleibt auch ohne hinterlegte Audioaufnahme verfügbar, während Audio-Modi bis zur Aufnahme deaktiviert bleiben.",
+  "buildId": "kids-shell-v129-quiz-restore1225",
+  "label": "KIDS · V1.08.50",
+  "releasedAt": "2026-10-07T12:19:00+02:00",
+  "note": "V1225 stellt den sichtbaren Quiz-Einstieg auf der Kids-Startseite wieder her. Zwei ältere Audio-first-CSS-Regeln hatten die Quiz-Capsule mit display:none!important versteckt, obwohl Quiz-Modal, 900-Fragen-Katalog und Voice-System weiterhin vorhanden waren. Ein finaler Regression-Guard hält #openQuizButton dauerhaft sichtbar; Service-Worker-Cache wird auf V1225 angehoben.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1224",
+    "serviceWorkerCache": "v1225",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1062,7 +1062,9 @@
       "Hören",
       "Lesen"
     ],
-    "deenReadTextWithoutAudio": true
+    "deenReadTextWithoutAudio": true,
+    "kidsQuizHomeEntryVisible": true,
+    "kidsQuizHomeEntryRegressionGuard": "v1225"
   },
   "updatedAt": "2026-10-07",
   "deployTrigger": "2026-10-07T12:11:00+02:00"
