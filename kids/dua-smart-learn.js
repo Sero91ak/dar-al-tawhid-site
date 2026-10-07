@@ -2,9 +2,9 @@
   "use strict";
 
   var GERMAN_URL="/kids/data/dua-audio.json?v=8";
-  var ARABIC_URL="/kids/data/dua-arabic-audio.json?v=8";
-  var SLOW_URL="/kids/data/dua-arabic-slow-audio.json?v=3";
-  var WORD_URL="/kids/data/dua-word-audio.json?v=3";
+  var ARABIC_URL="/kids/data/dua-arabic-audio.json?v=9";
+  var SLOW_URL="/kids/data/dua-arabic-slow-audio.json?v=4";
+  var WORD_URL="/kids/data/dua-word-audio.json?v=4";
   var STORE_KEY="kids.dua.smart.progress.v2";
 
   var packs=null;
