@@ -6,6 +6,7 @@
   var loaded=false;
   var pending=null;
   var player=new Audio();
+  var playerAttached=false;
   var preloadCache=new Map();
   var preloadOrder=[];
   var MAX_PRELOAD=18;
@@ -14,6 +15,23 @@
   player.setAttribute("webkit-playsinline","");
   player.setAttribute("disableremoteplayback","");
   player.volume=1;
+  player.muted=false;
+
+  function ensurePlayerAttached(){
+    if(playerAttached&&player.isConnected)return;
+    var attach=function(){
+      if(!document.body)return;
+      if(!player.isConnected){
+        player.style.display="none";
+        player.setAttribute("aria-hidden","true");
+        document.body.appendChild(player);
+      }
+      playerAttached=true;
+    };
+    if(document.body)attach();
+    else document.addEventListener("DOMContentLoaded",attach,{once:true});
+  }
+  ensurePlayerAttached();
 
   function normalize(text){
     return String(text||"").normalize("NFC").replace(/\s+/g," ").trim();
@@ -68,7 +86,10 @@
       return false;
     }
     stopNativeSpeech();
+    ensurePlayerAttached();
     try{player.pause()}catch(e){}
+    player.muted=false;
+    player.volume=1;
     player.onended=typeof options.onended==="function"?options.onended:null;
     player.onerror=function(){
       emitMissing(key,options.source||"asset-error");
@@ -76,6 +97,7 @@
     };
     player.src=String(entry.url);
     player.currentTime=0;
+    try{player.load()}catch(e){}
     var rate=Number(options.rate||1);
     if(!Number.isFinite(rate))rate=1;
     player.playbackRate=Math.max(.68,Math.min(1.12,rate));
@@ -157,8 +179,8 @@
   Promise.allSettled([
     loadManifest("/kids/data/owner-voice-audio.json?v=2",1),
     loadManifest("/kids/data/quiz-audio.json?v=2",2),
-    loadManifest("/kids/data/dua-audio.json?v=7",3),
-    loadManifest("/kids/data/dua-arabic-audio.json?v=7",4,isSerhatV4DuaArabic)
+    loadManifest("/kids/data/dua-audio.json?v=8",3),
+    loadManifest("/kids/data/dua-arabic-audio.json?v=8",4,isSerhatV4DuaArabic)
   ]).then(finishLoad).catch(finishLoad);
 
   window.DARKidsOwnerVoice={
