@@ -2,7 +2,7 @@
   "buildId": "kids-shell-v129-quiz-restore1225",
   "label": "KIDS · V1.08.50",
   "releasedAt": "2026-10-07T12:19:00+02:00",
-  "note": "V1225 stellt den sichtbaren Quiz-Einstieg auf der Kids-Startseite wieder her. Zwei ältere Audio-first-CSS-Regeln hatten die Quiz-Capsule mit display:none!important versteckt, obwohl Quiz-Modal, 900-Fragen-Katalog und Voice-System weiterhin vorhanden waren. Ein finaler Regression-Guard hält #openQuizButton dauerhaft sichtbar; Service-Worker-Cache wird auf V1225 angehoben.",
+  "note": "V1225 stellt den sichtbaren Quiz-Einstieg auf der Kids-Startseite wieder her. Zwei ältere Audio-first-CSS-Regeln hatten die Quiz-Capsule mit display:none!important versteckt, obwohl Quiz-Modal, 900-Fragen-Katalog und Voice-System weiterhin vorhanden waren. Ein finaler Regression-Guard hält #openQuizButton dauerhaft sichtbar; Service-Worker-Cache wird auf V1225 angehoben. V1226 behebt gezielt die unsichtbare DĀR-AL-TAWḤĪD-Wortmarke auf iOS: Eine alte !important-Regel für .kids-wordmark img hatte höhere CSS-Spezifität und blendete das Referenzbild aus. Der neue finale Selektor überstimmt diese Regel; das Referenzbild wird zusätzlich mit neuer Asset-/SW-Version geladen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1225",
+    "serviceWorkerCache": "v1226",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1038,7 +1038,7 @@
     "homeBrandRasterUpscale": "Runway 2x",
     "homeBrandCssApproximation": false,
     "globalCapsuleGlow": "v1217-preserved",
-    "homeBrandAsset": "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1223",
+    "homeBrandAsset": "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1226",
     "homeBrandDelivery": "same-origin-png-no-svg-wrapper",
     "homeBrandDataUri": false,
     "homeBrandEscapedNewlineBug": false,
@@ -1064,7 +1064,8 @@
     ],
     "deenReadTextWithoutAudio": true,
     "kidsQuizHomeEntryVisible": true,
-    "kidsQuizHomeEntryRegressionGuard": "v1225"
+    "kidsQuizHomeEntryRegressionGuard": "v1225",
+    "homeBrandVisibilityFix": "v1226-specificity"
   },
   "updatedAt": "2026-10-07",
   "deployTrigger": "2026-10-07T12:11:00+02:00"
