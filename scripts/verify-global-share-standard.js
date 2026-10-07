@@ -55,7 +55,7 @@ for (const token of [
   "[data-image-dua-open]",
   "[data-image-ayah-open]",
   "[data-image-hadith-open]",
-  "GLOBAL_SHARE_UI_STANDARD_V1267",
+  "GLOBAL_SHARE_UI_STANDARD_V1268",
   "buildShareStandard",
   "normalizeSharePanel",
   "dar-share-primary",
@@ -63,7 +63,11 @@ for (const token of [
   "data-dar-global-copy-text",
   "data-dar-global-copy-link",
   "Wissen weitergeben",
-  "Text, Link oder Bildbeitrag"
+  "Text, Link oder Bildbeitrag",
+  "function mountShare",
+  "mount:mountShare",
+  "ownedPanel.__darSharePayload",
+  "legacyTitle.remove()"
 ]) need(globalRel, globalShare, token);
 for (const token of [
   "/api/share-image/background",
@@ -82,7 +86,7 @@ for (const token of [
 const globalCssRel = "assets/dar-global-share-v1225.css";
 const globalCss = file(globalCssRel);
 for (const token of [
-  "GLOBAL_SHARE_UI_STANDARD_V1267",
+  "GLOBAL_SHARE_UI_STANDARD_V1268",
   ".dar-share-card .dar-share-primary",
   "grid-template-columns:repeat(4,minmax(0,1fr))",
   ".dar-share-tools",
@@ -93,6 +97,27 @@ for (const token of [
   "@media(max-width:370px){\n  .share-panel .share-flat-v410",
   "grid-template-columns:repeat(3,minmax(0,1fr))!important}.share-panel .share-btn"
 ]) forbid(globalCssRel, globalCss, token);
+
+const desktopRel = "desktop-preview/index.html";
+const desktop = file(desktopRel);
+for (const token of [
+  "/assets/dar-global-share-v1225.css?v=1268",
+  "/assets/dar-global-share-v1225.js?v=1268",
+  "function mountDesktopShare",
+  "desktopPostShare",
+  "desktopDuaShare",
+  "desktopPdfShareHost",
+  "publicationShareData(pub)",
+  "PDF teilen"
+]) need(desktopRel, desktop, token);
+
+for (const [rel, src] of [
+  ["index.html", file("index.html")],
+  ["test/index.html", file("test/index.html")]
+]) {
+  need(rel, src, "dar-global-share-v1225.css?v=1268");
+  need(rel, src, "dar-global-share-v1225.js?v=1268");
+}
 
 const liveRel = "assets/premium-feed-app.js";
 const testRel = "test/assets/premium-feed-app.js";
