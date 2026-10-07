@@ -342,19 +342,31 @@
     finally{if(trigger){trigger.dataset.darShareBusy="0";trigger.classList.remove("is-busy")}}
   }
   /* GLOBAL_SHARE_ACTIONS_V1227 · einheitliche Share-Aktionen in Besucher- und Test-App */
+  /* GLOBAL_SHARE_UI_STANDARD_V1267 · Bild-1-Struktur ist der einzige globale Share-Standard. */
   function shareSvg(kind){
     if(kind==="wa")return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.84 9.84 0 0 0-8.46 14.86L2 22l5.3-1.39A9.98 9.98 0 1 0 12.04 2Zm0 17.96a8.1 8.1 0 0 1-4.12-1.13l-.3-.18-3.15.83.84-3.07-.2-.31a8.06 8.06 0 1 1 6.93 3.86Zm4.43-6.04c-.24-.12-1.43-.71-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.95-1.2-.72-.64-1.2-1.43-1.35-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.1 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.43-.59 1.63-1.15.2-.56.2-1.04.14-1.15-.06-.1-.22-.16-.46-.28Z"/></svg>';
     if(kind==="tg")return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.65 3.25 18.5 20.1c-.24 1.19-.88 1.48-1.78.92l-4.8-3.54-2.32 2.23c-.26.26-.47.47-.97.47l.35-4.89 8.9-8.04c.39-.35-.08-.54-.6-.19L6.28 14l-4.74-1.48c-1.03-.32-1.05-1.03.21-1.52L20.28 3.86c.86-.32 1.61.19 1.37 1.39Z"/></svg>';
     if(kind==="ig")return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm5 3.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4Zm0 2.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.3-2.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg>';
     if(kind==="native")return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0-11 4 4m-4-4L8 7M5 11v8h14v-8" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM7 15l3-3 2 2 3-4 2 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="8" cy="9" r="1.2"/></svg>';
+    if(kind==="copy")return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>';
+    if(kind==="link")return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 14.5 14.5 9.5M7.2 16.8l-1.1 1.1a3.3 3.3 0 0 1-4.7-4.7l3.1-3.1a3.3 3.3 0 0 1 4.7 0M16.8 7.2l1.1-1.1a3.3 3.3 0 0 1 4.7 4.7l-3.1 3.1a3.3 3.3 0 0 1-4.7 0" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>';
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9" r="1.5" fill="currentColor"/><path d="M6.5 16l3.4-3.4 2.6 2.5 2.1-2.2 3.1 3.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   }
   function actionButton(kind,label,attr){
     var b=document.createElement("button");
     b.type="button";
-    b.className="share-btn dar-global-share-action dar-global-share-"+kind;
+    b.className="share-btn dar-share-btn dar-global-share-action dar-global-share-"+kind;
     b.setAttribute(attr||("data-dar-global-"+kind),"1");
-    b.innerHTML='<span class="dar-global-share-icon">'+shareSvg(kind)+'</span><span>'+label+'</span>';
+    b.setAttribute("aria-label",label+" teilen");
+    b.innerHTML='<span class="dar-global-share-icon dar-share-icon">'+shareSvg(kind)+'</span><b>'+label+'</b>';
+    return b;
+  }
+  function toolButton(kind,label,attr){
+    var b=document.createElement("button");
+    b.type="button";
+    b.className="dar-share-tool"+(kind==="image"?" dar-share-tool--image":"");
+    b.setAttribute(attr,"1");
+    b.innerHTML='<span>'+shareSvg(kind)+'</span><b>'+label+'</b>';
     return b;
   }
   function sharePayload(data){
@@ -383,24 +395,66 @@
     return false;
   }
 
-  function imageButton(){
-    var b=document.createElement("button");b.type="button";b.className="share-btn image-post dar-global-image-btn";b.setAttribute("data-dar-global-image","1");
-    b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9" r="1.5" fill="currentColor"/><path d="M6.5 16l3.4-3.4 2.6 2.5 2.1-2.2 3.1 3.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Bildbeitrag</span>';
-    return b;
+  function shareContextAttrs(panel){
+    var attrs={};
+    if(!panel||!panel.querySelectorAll)return attrs;
+    var names=["data-image-post-open","data-image-dua-open","data-image-ayah-open","data-image-hadith-open","data-quran-share-ayah","data-share-text","data-copy-text","data-share-url"];
+    var nodes=[panel].concat(Array.prototype.slice.call(panel.querySelectorAll("*")));
+    names.forEach(function(name){
+      for(var i=0;i<nodes.length;i++){
+        if(nodes[i]&&nodes[i].hasAttribute&&nodes[i].hasAttribute(name)){
+          attrs[name]=nodes[i].getAttribute(name)||"";
+          break;
+        }
+      }
+    });
+    return attrs;
   }
-  function standaloneSharePanel(){
+  function applyShareContext(node,attrs){
+    if(!node||!attrs)return node;
+    Object.keys(attrs).forEach(function(name){node.setAttribute(name,attrs[name])});
+    return node;
+  }
+  function buildShareStandard(panel,attrs){
+    panel.classList.add("dar-share-card");
+    panel.classList.remove("share-panel-v2","share-panel-v9");
+    panel.classList.add("share-panel-v11");
+    panel.setAttribute("aria-label","Wissen weitergeben");
+    panel.dataset.darShareStandard="v1267";
+    panel.innerHTML="";
+
+    var head=document.createElement("div");head.className="dar-share-head";
+    var left=document.createElement("div");
+    var kicker=document.createElement("span");kicker.textContent="Teilen";
+    var heading=document.createElement("h3");heading.textContent="Wissen weitergeben";
+    left.appendChild(kicker);left.appendChild(heading);
+    var hint=document.createElement("p");hint.textContent="Text, Link oder Bildbeitrag";
+    head.appendChild(left);head.appendChild(hint);
+
+    var primary=document.createElement("div");primary.className="dar-share-primary";
+    primary.appendChild(applyShareContext(actionButton("wa","WhatsApp","data-dar-global-wa"),attrs));
+    primary.appendChild(applyShareContext(actionButton("tg","Telegram","data-dar-global-tg"),attrs));
+    primary.appendChild(applyShareContext(actionButton("ig","Instagram","data-dar-global-ig"),attrs));
+    primary.appendChild(applyShareContext(actionButton("native","Teilen","data-dar-global-native"),attrs));
+
+    var tools=document.createElement("div");tools.className="dar-share-tools";
+    tools.appendChild(applyShareContext(toolButton("copy","Text kopieren","data-dar-global-copy-text"),attrs));
+    var link=applyShareContext(toolButton("link","Link kopieren","data-dar-global-copy-link"),attrs);
+    if(!link.getAttribute("data-share-url"))link.setAttribute("data-share-url",location.href);
+    tools.appendChild(link);
+    tools.appendChild(applyShareContext(toolButton("image","Bildbeitrag","data-dar-global-image"),attrs));
+
+    var note=document.createElement("p");note.className="dar-share-note";
+    note.textContent="Instagram öffnet über das System-Menü; dort Instagram auswählen. Bildbeiträge werden lokal in der App erzeugt.";
+
+    panel.appendChild(head);panel.appendChild(primary);panel.appendChild(tools);panel.appendChild(note);
+    panel.dataset.darGlobalShareEnhanced="1";
+    return panel;
+  }
+  function standaloneSharePanel(attrs){
     var section=document.createElement("section");
     section.className="share-panel share-panel-v11 dar-global-injected-panel";
-    section.setAttribute("aria-label","Inhalt teilen");
-    var title=document.createElement("div");title.className="share-panel-title";title.textContent="Weitergeben";
-    var holder=document.createElement("div");holder.className="share-flat-v410";
-    holder.appendChild(actionButton("wa","WhatsApp","data-dar-global-wa"));
-    holder.appendChild(actionButton("tg","Telegram","data-dar-global-tg"));
-    holder.appendChild(actionButton("ig","Instagram","data-dar-global-ig"));
-    holder.appendChild(actionButton("native","Teilen","data-dar-global-native"));
-    holder.appendChild(imageButton());
-    section.appendChild(title);section.appendChild(holder);
-    return section;
+    return buildShareStandard(section,attrs||{});
   }
   function injectStandalonePanels(root){
     var scope=root&&root.querySelectorAll?root:document;
@@ -410,20 +464,22 @@
     targets.forEach(function(target){
       if(target.querySelector(".share-panel")||target.querySelector(".dar-global-injected-panel"))return;
       if(clean(target.textContent).length<80)return;
-      target.appendChild(standaloneSharePanel());
+      target.appendChild(standaloneSharePanel({}));
     });
   }
+  function normalizeSharePanel(panel){
+    if(!panel||panel.dataset.darShareStandard==="v1267")return;
+    /* Frauenbereich ist bereits die Referenz (Bild 1) und behält seinen women-historical Bildrenderer. */
+    if(panel.classList.contains("frauen-share-panel")||panel.querySelector("[data-frauen-share]"))return;
+    buildShareStandard(panel,shareContextAttrs(panel));
+  }
   function enhance(root){
-    injectStandalonePanels(root||document);
-    (root||document).querySelectorAll(".share-panel").forEach(function(panel){
-      var holder=panel.querySelector(".share-flat-v410,.post-after-share,.frauen-share-primary")||panel;
-      if(!panelHas(panel,"wa"))holder.appendChild(actionButton("wa","WhatsApp","data-dar-global-wa"));
-      if(!panelHas(panel,"tg"))holder.appendChild(actionButton("tg","Telegram","data-dar-global-tg"));
-      if(!panelHas(panel,"ig"))holder.appendChild(actionButton("ig","Instagram","data-dar-global-ig"));
-      if(!panelHas(panel,"native"))holder.appendChild(actionButton("native","Teilen","data-dar-global-native"));
-      if(!panelHas(panel,"image"))holder.appendChild(imageButton());
-      panel.dataset.darGlobalShareEnhanced="1";
-    });
+    var scope=root&&root.querySelectorAll?root:document;
+    injectStandalonePanels(scope);
+    var panels=[];
+    if(scope.matches&&scope.matches(".share-panel"))panels.push(scope);
+    scope.querySelectorAll(".share-panel").forEach(function(panel){panels.push(panel)});
+    panels.forEach(normalizeSharePanel);
   }
   document.addEventListener("click",function(ev){
     var frauenOwned=ev.target&&ev.target.closest?ev.target.closest("[data-frauen-share]"):null;
@@ -434,7 +490,7 @@
       copyPlainText(linkBtn.getAttribute("data-share-url")||location.href);
       return;
     }
-    var copyBtn=ev.target&&ev.target.closest?ev.target.closest("[data-share-copy],[data-post-copy],[data-ilm-copy-answer],[data-post-share-channel=\"copy\"]"):null;
+    var copyBtn=ev.target&&ev.target.closest?ev.target.closest("[data-dar-global-copy-text],[data-share-copy],[data-post-copy],[data-ilm-copy-answer],[data-post-share-channel=\"copy\"]"):null;
     if(copyBtn){
       ev.preventDefault();ev.stopPropagation();if(ev.stopImmediatePropagation)ev.stopImmediatePropagation();
       var raw=copyBtn.getAttribute("data-share-text")||copyBtn.getAttribute("data-copy-text")||"";
@@ -471,35 +527,40 @@
   },true);
   var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++){for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];if(n&&n.nodeType===1)enhance(n)}}});
   function ensureShareCardStyle(){
-    if(document.getElementById("darShareCardStyleV1233"))return;
-    var css='.dar-share-card{position:relative;overflow:hidden;margin:18px 0 12px!important;padding:15px 14px 13px!important;border:1px solid var(--theme-share-btn-border,var(--line))!important;border-radius:22px!important;background:var(--theme-share-panel-bg,radial-gradient(circle at 16% 0%,color-mix(in srgb,var(--gold2,#d9bf79) 9%,transparent),transparent 42%),linear-gradient(145deg,color-mix(in srgb,var(--card) 94%,transparent),color-mix(in srgb,var(--bg) 93%,transparent)))!important;box-shadow:0 10px 26px rgba(4,14,15,.10),inset 0 1px 0 rgba(255,255,255,.055)!important}'
+    if(document.getElementById("darShareCardStyleV1267"))return;
+    var css='.dar-share-card{position:relative;overflow:hidden;margin:18px 0 12px!important;padding:15px 14px 13px!important;border:1px solid var(--theme-share-btn-border,var(--line,rgba(214,183,106,.34)))!important;border-radius:22px!important;background:var(--theme-share-panel-bg,radial-gradient(circle at 16% 0%,color-mix(in srgb,var(--gold2,#d9bf79) 9%,transparent),transparent 42%),linear-gradient(145deg,color-mix(in srgb,var(--card,#fff) 94%,transparent),color-mix(in srgb,var(--bg,#fff) 93%,transparent)))!important;box-shadow:0 10px 26px rgba(4,14,15,.10),inset 0 1px 0 rgba(255,255,255,.055)!important}'
       +'.dar-share-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin:0 2px 12px}'
-      +'.dar-share-head span{display:block;margin-bottom:3px;color:var(--gold2,var(--gold,#d9bf79))!important;-webkit-text-fill-color:var(--gold2,var(--gold,#d9bf79))!important;font-size:8.8px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}'
-      +'.dar-share-head h3{margin:0!important;color:var(--ink,var(--text))!important;-webkit-text-fill-color:var(--ink,var(--text))!important;font-family:var(--serif,Georgia,serif)!important;font-size:20px!important;line-height:1.12!important;font-weight:650!important}'
-      +'.dar-share-head>p{margin:0;color:var(--muted)!important;-webkit-text-fill-color:var(--muted)!important;font-size:10.5px;line-height:1.3;text-align:right}'
-      +'.dar-share-card .dar-share-primary,.dar-share-card .share-flat-v410{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important}'
-      +'.dar-share-btn{appearance:none;display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:0;min-height:78px!important;padding:9px 5px 8px!important;border:1px solid var(--line)!important;border-radius:16px!important;background:color-mix(in srgb,var(--card) 92%,transparent)!important;cursor:pointer}'
-      +'.dar-share-btn b{font-size:10.2px!important;line-height:1!important;font-weight:800!important;color:inherit!important;-webkit-text-fill-color:currentColor!important}'
+      +'.dar-share-head span{display:block;margin-bottom:3px;color:var(--gold2,var(--gold,#9b7522))!important;-webkit-text-fill-color:var(--gold2,var(--gold,#9b7522))!important;font-size:8.8px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}'
+      +'.dar-share-head h3{margin:0!important;color:var(--ink,var(--text,#101b2d))!important;-webkit-text-fill-color:var(--ink,var(--text,#101b2d))!important;font-family:var(--serif,Georgia,serif)!important;font-size:20px!important;line-height:1.12!important;font-weight:650!important}'
+      +'.dar-share-head>p{margin:0;color:var(--muted,#667085)!important;-webkit-text-fill-color:var(--muted,#667085)!important;font-size:10.5px;line-height:1.3;text-align:right}'
+      +'.dar-share-card .dar-share-primary{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important}'
+      +'.dar-share-card .dar-share-btn{appearance:none;display:flex!important;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-width:0!important;min-height:78px!important;padding:9px 5px 8px!important;border:1px solid var(--line,rgba(20,30,45,.12))!important;border-radius:16px!important;background:color-mix(in srgb,var(--card,#fff) 92%,transparent)!important;cursor:pointer;touch-action:manipulation;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}'
+      +'.dar-share-card .dar-share-btn b{font-size:10.2px!important;line-height:1!important;font-weight:800!important;color:inherit!important;-webkit-text-fill-color:currentColor!important;white-space:nowrap}'
       +'.dar-share-icon{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:color-mix(in srgb,currentColor 8%,transparent)}'
       +'.dar-share-icon svg{width:22px;height:22px;fill:currentColor}'
-      +'html[data-theme] .dar-share-btn.wa{color:#18884a!important;-webkit-text-fill-color:#18884a!important;border-color:rgba(37,211,102,.27)!important;background:linear-gradient(145deg,rgba(37,211,102,.115),color-mix(in srgb,var(--card) 90%,transparent))!important}'
-      +'html[data-theme] .dar-share-btn.tg{color:#218ac3!important;-webkit-text-fill-color:#218ac3!important;border-color:rgba(42,171,238,.28)!important;background:linear-gradient(145deg,rgba(42,171,238,.11),color-mix(in srgb,var(--card) 90%,transparent))!important}'
-      +'html[data-theme] .dar-share-btn.ig{color:#b73570!important;-webkit-text-fill-color:#b73570!important;border-color:rgba(214,41,118,.25)!important;background:linear-gradient(145deg,rgba(214,41,118,.09),color-mix(in srgb,var(--card) 90%,transparent))!important}'
-      +'html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"]) .dar-share-btn.wa{color:#8ee7ad!important;-webkit-text-fill-color:#8ee7ad!important}'
-      +'html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"]) .dar-share-btn.tg{color:#9fdcff!important;-webkit-text-fill-color:#9fdcff!important}'
-      +'html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"]) .dar-share-btn.ig{color:#ffacd2!important;-webkit-text-fill-color:#ffacd2!important}'
-      +'.dar-share-tools{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px;margin-top:8px}'
-      +'.dar-share-tool{appearance:none;display:grid!important;grid-template-columns:22px minmax(0,1fr);align-items:center;gap:7px;min-height:42px!important;padding:8px 9px!important;border:1px solid var(--line)!important;border-radius:13px!important;background:color-mix(in srgb,var(--card) 74%,transparent)!important;color:var(--ink,var(--text))!important;-webkit-text-fill-color:var(--ink,var(--text))!important;cursor:pointer}'
-      +'.dar-share-tool svg{width:19px;height:19px;fill:currentColor}'
+      +'.dar-share-card .dar-global-share-wa{color:#18884a!important;-webkit-text-fill-color:#18884a!important;border-color:rgba(37,211,102,.34)!important;background:linear-gradient(145deg,rgba(37,211,102,.10),color-mix(in srgb,var(--card,#fff) 90%,transparent))!important;box-shadow:0 0 16px rgba(37,211,102,.14)}'
+      +'.dar-share-card .dar-global-share-tg{color:#218ac3!important;-webkit-text-fill-color:#218ac3!important;border-color:rgba(42,171,238,.34)!important;background:linear-gradient(145deg,rgba(42,171,238,.09),color-mix(in srgb,var(--card,#fff) 90%,transparent))!important;box-shadow:0 0 16px rgba(42,171,238,.13)}'
+      +'.dar-share-card .dar-global-share-ig{color:#b73570!important;-webkit-text-fill-color:#b73570!important;border-color:rgba(214,41,118,.31)!important;background:linear-gradient(145deg,rgba(214,41,118,.08),color-mix(in srgb,var(--card,#fff) 90%,transparent))!important;box-shadow:0 0 16px rgba(214,41,118,.12)}'
+      +'.dar-share-card .dar-global-share-native{color:var(--ink,var(--text,#101b2d))!important;-webkit-text-fill-color:currentColor!important;border-color:color-mix(in srgb,var(--gold2,#d9bf79) 42%,var(--line,transparent))!important}'
+      +'html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"]) .dar-share-card .dar-global-share-wa{color:#8ee7ad!important;-webkit-text-fill-color:#8ee7ad!important}'
+      +'html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"]) .dar-share-card .dar-global-share-tg{color:#9fdcff!important;-webkit-text-fill-color:#9fdcff!important}'
+      +'html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"]) .dar-share-card .dar-global-share-ig{color:#ffacd2!important;-webkit-text-fill-color:#ffacd2!important}'
+      +'.dar-share-card .dar-share-btn:hover,.dar-share-card .dar-share-btn:focus-visible{transform:translateY(-1px);box-shadow:0 7px 22px color-mix(in srgb,currentColor 18%,transparent)!important;outline:none}'
+      +'.dar-share-tools{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;margin-top:8px}'
+      +'.dar-share-tool{appearance:none;display:grid!important;grid-template-columns:22px minmax(0,1fr);align-items:center;justify-content:center;gap:7px;min-width:0!important;min-height:42px!important;padding:8px 9px!important;border:1px solid var(--line,rgba(20,30,45,.12))!important;border-radius:13px!important;background:color-mix(in srgb,var(--card,#fff) 74%,transparent)!important;color:var(--ink,var(--text,#101b2d))!important;-webkit-text-fill-color:var(--ink,var(--text,#101b2d))!important;cursor:pointer;touch-action:manipulation;transition:transform .16s ease,box-shadow .16s ease}'
+      +'.dar-share-tool>span{display:grid;place-items:center}.dar-share-tool svg{width:19px;height:19px;fill:currentColor}'
       +'.dar-share-tool b{font-size:10px!important;line-height:1.15!important;font-weight:760!important;color:inherit!important;-webkit-text-fill-color:currentColor!important}'
-      +'.dar-share-tool--image{border-color:color-mix(in srgb,var(--gold2,#d9bf79) 34%,transparent)!important}'
-      +'.dar-share-note{margin:9px 2px 0!important;color:var(--muted)!important;-webkit-text-fill-color:var(--muted)!important;font-size:9.4px!important;line-height:1.4!important}'
-      +''
-      +'@media(max-width:420px){.dar-share-head>p{display:none}.dar-share-head h3{font-size:18px!important}}';
-    var tag=document.createElement("style");tag.id="darShareCardStyleV1233";tag.textContent=css;document.head.appendChild(tag);
+      +'.dar-share-tool--image{border-color:color-mix(in srgb,var(--gold2,#d9bf79) 40%,transparent)!important}'
+      +'.dar-share-tool:hover,.dar-share-tool:focus-visible{transform:translateY(-1px);box-shadow:0 7px 20px rgba(10,20,25,.10);outline:none}'
+      +'.dar-share-note{margin:9px 2px 0!important;color:var(--muted,#667085)!important;-webkit-text-fill-color:var(--muted,#667085)!important;font-size:9.4px!important;line-height:1.4!important}'
+      +'@media(max-width:520px){.dar-share-card{padding:13px 12px 12px!important}.dar-share-card .dar-share-primary{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important}.dar-share-card .dar-share-btn{min-height:72px!important;padding:8px 3px!important}.dar-share-icon{width:33px;height:33px;border-radius:11px}.dar-share-icon svg{width:20px;height:20px}.dar-share-card .dar-share-btn b{font-size:9.6px!important}.dar-share-tools{gap:6px!important}.dar-share-tool{padding:8px 6px!important;grid-template-columns:19px minmax(0,1fr);gap:5px}.dar-share-tool b{font-size:9.5px!important}}'
+      +'@media(max-width:420px){.dar-share-head>p{display:none}.dar-share-head h3{font-size:18px!important}.dar-share-note{font-size:9px!important}}'
+      +'@media(max-width:350px){.dar-share-card .dar-share-btn b{font-size:8.7px!important}.dar-share-tool b{font-size:8.7px!important}}'
+      +'@media(prefers-reduced-motion:reduce){.dar-share-card .dar-share-btn,.dar-share-tool{transition:none!important}}';
+    var tag=document.createElement("style");tag.id="darShareCardStyleV1267";tag.textContent=css;document.head.appendChild(tag);
   }
   function boot(){ensureShareCardStyle();enhance(document);try{mo.observe(document.getElementById("appView")||document.body,{childList:true,subtree:true})}catch(e){}}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
   window.darCopyText=copyPlainText;
-  window.DARGlobalShare={version:"1250",createAndShare:createAndShare,renderFiles:renderFiles,copyText:copyPlainText,site:SITE,imageMode:"curated-pool-only",poolSize:GENERAL_SHARE_IMAGE_POOL.length};
+  window.DARGlobalShare={version:"1250",uiVersion:"1267",standard:"wissen-weitergeben",createAndShare:createAndShare,renderFiles:renderFiles,copyText:copyPlainText,site:SITE,imageMode:"curated-pool-only",poolSize:GENERAL_SHARE_IMAGE_POOL.length};
 })();
