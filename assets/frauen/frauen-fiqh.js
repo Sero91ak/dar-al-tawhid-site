@@ -2355,7 +2355,7 @@
       { nr: "40", title: "Tod, Janāʾiz, Trauer & Ṣabr", id: JANAIZ_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Muṣībah, erlaubter Trauer, Ṣabr und Janāʾiz." },
       { nr: "41", title: "Reue, Tawbah & Istighfār", id: TAWBAH_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Reue, Vergebung, Tawbah Naṣūḥ und Sayyid al-Istighfār." },
       { nr: "42", title: "Töchter, Mädchen & Fürsorge", id: TOECHTER_SLUG, mark: "home", lede: "Geprüfte Grundlagen zu Barmherzigkeit, Fürsorge, Gerechtigkeit und Schutz von Mädchen." },
-      { nr: "43", title: "Janāzah, Tod & Trauer-Adab", id: JANAZAH_SLUG, mark: "ring", lede: "Geprüfte Grundlagen zu Tod, Trauer, Janāzah, Iḥdād und Adab bei Verlust." },
+      { nr: "43", title: "Janāzah, Tod & Trauer-Adab", id: JANAZAH_SLUG, mark: "ring", pending: true, lede: "Doppelbereich deaktiviert – Inhalte stehen im Hauptbereich Tod, Janāzah & Trauer-Adab." },
       { nr: "44", title: "Ramaḍān, Fasten & ʿĪd", id: RAMADAN_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Fasten, Ḥayḍ, Laylat al-Qadr, ʿĪd und Ṣadaqah." },
       { nr: "45", title: "Ramaḍān, Fasten & Nachtgebet", id: QIYAM_SLUG, mark: "lamp", lede: "Geprüfte Grundlagen zu Ramaḍān, Fasten, Nachholen, Qiyām, Laylat al-Qadr und Iʿtikāf." },
       { nr: "46", title: "Reue, Istighfār & Schutz vor Sünden", id: REUESCHUTZ_SLUG, mark: "book", lede: "Geprüfte Grundlagen zu Tawbah, Istighfār, Hoffnung, Furcht und Rückkehr zu Allah." },
