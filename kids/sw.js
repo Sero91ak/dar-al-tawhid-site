@@ -1,5 +1,6 @@
 const CACHE_NAME="dar-al-tawhid-kids-v1239";
 const KIDS_BUILD_ID="kids-shell-v142-home-profile-left1239";
+const DUA_AUDIO_RUNTIME="1241";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
@@ -245,10 +246,13 @@ self.addEventListener("activate",function(event){
         try{
           var u=new URL(client.url);
           if(u.origin!==self.location.origin||u.pathname.indexOf("/kids/")!==0)return Promise.resolve();
-          if(u.searchParams.get("kv")===KIDS_BUILD_ID)return Promise.resolve();
+          var buildCurrent=u.searchParams.get("kv")===KIDS_BUILD_ID;
+          var duaAudioCurrent=u.searchParams.get("ar")===DUA_AUDIO_RUNTIME;
+          if(buildCurrent&&duaAudioCurrent)return Promise.resolve();
           u.pathname="/kids/start";
           u.search="";
           u.searchParams.set("kv",KIDS_BUILD_ID);
+          u.searchParams.set("ar",DUA_AUDIO_RUNTIME);
           if(typeof client.navigate==="function")return client.navigate(u.toString()).catch(function(){});
         }catch(e){}
         return Promise.resolve();
