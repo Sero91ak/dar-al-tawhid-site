@@ -1,5 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1236";
-const KIDS_BUILD_ID="kids-shell-v139-home-stability1236";
+const CACHE_NAME="dar-al-tawhid-kids-v1237";
+const KIDS_BUILD_ID="kids-shell-v140-content-flow1237";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
@@ -82,7 +82,7 @@ const CORE_PRECACHE=[
   "/kids/story-hub.js?v=25",
   "/kids/global-story-glow-v1216.css?v=1217",
   "/kids/global-story-glow-v1216.js?v=1235",
-  "/kids/dua-hub-v1219.css?v=1233",
+  "/kids/dua-hub-v1219.css?v=1237",
   "/kids/dua-hub-v1219.js?v=1235",
   "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
@@ -119,7 +119,7 @@ const CORE_PRECACHE=[
   "/kids/assets/dua-3d/home.svg?v=1221",
   "/kids/assets/dua-3d/mosque.svg?v=1221",
   "/kids/assets/dua-3d/shield.svg?v=1221",
-  "/kids/navigation-v1182.js?v=1236",
+  "/kids/navigation-v1182.js?v=1237",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
   "/kids/kids-touch-rail.css?v=12",
@@ -175,7 +175,7 @@ const PRECACHE=CORE_PRECACHE.concat([
   "/kids/data/quiz-audio.json",
   "/kids/data/dua-audio.json",
   "/kids/data/owner-voice-audio.json",
-  "/kids/quiz-library.css?v=9",
+  "/kids/quiz-library.css?v=1237",
   "/kids/quiz-library.js?v=9",
   "/kids/assets/sahaba-mubashshirun/abu-bakr.jpg",
   "/kids/assets/sahaba-mubashshirun/umar.jpg",
