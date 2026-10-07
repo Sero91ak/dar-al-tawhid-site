@@ -1,8 +1,8 @@
 {
-  "buildId": "kids-shell-v125-dua-compact1221",
-  "label": "KIDS · V1.08.46",
-  "releasedAt": "2026-10-07T09:45:00.000Z",
-  "note": "V1221 ersetzt den übergroßen Duʿāʾ-Baukasten durch die kompakte Kids-App-Struktur: begrenzte Kopfkarte, drei vertikale Aktionskapseln, kompakte Weiterlernen-/Zuletzt-gehört-Kapseln, einspaltige Duʿāʾ-Bibliothek, lokale 3D-Vektorassets und ein strikt einreihiger Fünf-Tab-Dock.",
+  "buildId": "kids-shell-v126-home-brand1222",
+  "label": "KIDS · V1.08.47",
+  "releasedAt": "2026-10-07T11:58:00+02:00",
+  "note": "V1222 behebt die fehlende DĀR AL TAWḤĪD-Wortmarke auf der Kids-Startseite. Die freigegebene gold-orange Ballon-Wortmarke aus Bild 1 wird jetzt als saubere transparente Same-Origin-SVG-Grafik oberhalb von Kids geladen; keine Serif-/CSS-Nachbildung und kein Himmelsstreifen mehr. Kids behält den alten zeitversetzten Ballon-Hüpfeffekt. Die V1221-Duʿāʾ-Kompaktstruktur bleibt erhalten.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -27,7 +27,7 @@
     "nonOverlappingBackControl": true,
     "robustArtworkFallback": true,
     "structuredProphetSubpage": true,
-    "serviceWorkerCache": "v1221-dua-compact",
+    "serviceWorkerCache": "v1222",
     "liveExperimentation": false,
     "releaseConsistencyGuard": true,
     "releaseConsistencyGuardMode": "dynamic-current-build-assets",
@@ -1002,10 +1002,10 @@
     "duaSmartHeroImage": false,
     "duaTransliterationLarge": true,
     "duaWordTapEnabled": true,
-    "homeBrand": "exact-approved-reference-external-png-v1219",
+    "homeBrand": "approved-transparent-reference-v1222",
     "homeBrandWordSpacing": "explicit-three-word-spacing",
     "homeBrandMotion": "subtle-whole-wordmark-wobble-v1218",
-    "homeKidsBalloon": "strong-staggered-2.18s-v1218",
+    "homeKidsBalloon": "staggered-2.18s-v1222",
     "homeBackgroundMotion": false,
     "kidsQuizOwnerVoiceGeneration": "manual-after-900-content-freeze",
     "kidsQuizTargetPerAge": 300,
@@ -1034,11 +1034,11 @@
       "Story-Modus-Buttons"
     ],
     "globalNewStoryAreaGlowInheritance": true,
-    "homeBrandSource": "user approved Bild 1",
+    "homeBrandSource": "approved Bild 1",
     "homeBrandRasterUpscale": "Runway 2x",
     "homeBrandCssApproximation": false,
     "globalCapsuleGlow": "v1217-preserved",
-    "homeBrandAsset": "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1220",
+    "homeBrandAsset": "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1222",
     "homeBrandDelivery": "same-origin-static-png",
     "homeBrandDataUri": false,
     "homeBrandEscapedNewlineBug": false,
@@ -1054,7 +1054,8 @@
     "duaLibraryLayout": "single-column-capsules",
     "duaHeader": "compact-contained",
     "duaAssets": "local-3d-svg-v1221",
-    "bottomNav": "five-tabs-one-row-original-form"
+    "bottomNav": "five-tabs-one-row-original-form",
+    "homeBrandTransparent": true
   },
   "updatedAt": "2026-10-07",
   "deployTrigger": "2026-10-07T10:06:00+02:00"
