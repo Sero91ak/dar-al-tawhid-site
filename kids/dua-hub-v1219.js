@@ -4,7 +4,7 @@
 (() => {
   "use strict";
 
-  const VERSION = 1235;
+  const VERSION = 1238;
   const DATA_URL = "/kids/data/dua-kids.json?v=1235";
   const PROFILE_KEY = "kids.profiles.v1";
   const ACTIVE_PROFILE_KEY = "kids.activeProfile";
@@ -738,8 +738,19 @@
     const gender = activeGender();
     const p = activeProfile();
     dot.classList.add("profile-dot-avatar");
-    dot.setAttribute("aria-label", p ? "Aktives Profil: " + (p.name || "Kind") : "Kinderprofil");
+    dot.setAttribute("aria-label", p ? "Aktives Profil: " + (p.name || "Kind") + " – Profil öffnen" : "Kinderprofil öffnen");
+    dot.setAttribute("title", p ? (p.name || "Kind") + " · Profil" : "Kinderprofil");
     dot.innerHTML = avatarSvg(gender, "header-profile-avatar");
+
+    if (!dot.dataset.homeProfileBound) {
+      dot.dataset.homeProfileBound = "1";
+      dot.addEventListener("click", e => {
+        e.preventDefault();
+        e.stopPropagation();
+        const parents = q('.bottom-nav .nav-btn[data-target="parents"]');
+        if (parents) parents.click();
+      });
+    }
   }
 
   function observeProfiles() {
