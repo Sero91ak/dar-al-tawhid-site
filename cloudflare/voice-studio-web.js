@@ -196,7 +196,9 @@ async function alignStoryAudio(env, file, text) {
     timings,
     loss: Number.isFinite(Number(payload?.loss)) ? Number(payload.loss) : null,
     words: Array.isArray(payload?.words) ? payload.words.length : 0,
-    characters: Array.isArray(payload?.characters) ? payload.characters.length : 0
+    characters: Array.isArray(payload?.characters) ? payload.characters.length : 0,
+    wordAlignment: Array.isArray(payload?.words) ? payload.words : [],
+    characterAlignment: Array.isArray(payload?.characters) ? payload.characters : []
   };
 }
 
@@ -294,6 +296,7 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
       const form = await request.formData();
       const file = form.get("file");
       const text = String(form.get("text") || "").trim();
+      const detail = String(form.get("detail") || "").trim();
       const result = await alignStoryAudio(env, file, text);
       return json({
         ok: true,
@@ -301,6 +304,8 @@ export async function handleVoiceStudioWebRequest(request, env, cors) {
         alignmentLoss: result.loss,
         alignedWords: result.words,
         alignedCharacters: result.characters,
+        characters: detail === "characters" ? result.characterAlignment : undefined,
+        words: detail === "characters" ? result.wordAlignment : undefined,
         syncMode: "elevenlabs-forced-alignment-v1"
       }, cors, 200);
     } catch (error) {
